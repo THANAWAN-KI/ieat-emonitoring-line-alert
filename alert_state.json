@@ -1,4 +1,57 @@
 {
-  "initialized": false,
-  "active_alerts": {}
+  "active_alerts": {
+    "248:PM25": {
+      "display_text": "50.00 (STD 37.5) ug./m3",
+      "industry_zone": "สมุทรสาคร",
+      "last_update": "1 ก.ย. 2568, 03:01",
+      "location_link": "https://www.google.com/maps/search/?api=1&query=13.62091,100.829078",
+      "parameter": "PM25",
+      "standard": 37.5,
+      "station_code": "248",
+      "station_name": "สถานีตรวจวัดคุณภาพ AQMs 1",
+      "station_type": "AIR QUALITY",
+      "status": "OFFLINE (313 วัน)",
+      "value": 50.0
+    },
+    "262:PM25": {
+      "display_text": "40.70 (STD 37.5) ug./m3",
+      "industry_zone": "ไม่ระบุนิคมอุตสาหกรรม",
+      "last_update": "26 ก.พ. 2569, 15:00",
+      "location_link": "https://www.google.com/maps/search/?api=1&query=13.813578,100.73208",
+      "parameter": "PM25",
+      "standard": 37.5,
+      "station_code": "262",
+      "station_name": "สวนเฉลิมพระเกียรติ ร.9 ริมถนนสีหบุรานุกิจ เขตมีนบุรี, กรุงเทพฯ",
+      "station_type": "AIR QUALITY",
+      "status": "OFFLINE (134 วัน)",
+      "value": 40.7
+    },
+    "329:Stack1_Dust": {
+      "display_text": "23.62 (STD 20) mg/m3",
+      "industry_zone": "อีสเทิร์นซีบอร์ด(ระยอง)",
+      "last_update": "10 ก.ค. 2569, 15:34",
+      "location_link": "https://www.google.com/maps/search/?api=1&query=0.0,0.0",
+      "parameter": "Stack1_Dust",
+      "standard": 20.0,
+      "station_code": "329",
+      "station_name": "บริษัท ฮาล อะลูมินัม (ประเทศไทย) จำกัด",
+      "station_type": "CEMs",
+      "status": "ONLINE",
+      "value": 23.62
+    },
+    "82:CO": {
+      "display_text": "44.48 (STD 30) ppm",
+      "industry_zone": "มาบตาพุด",
+      "last_update": "10 ก.ค. 2569, 15:00",
+      "location_link": "https://www.google.com/maps/search/?api=1&query=12.756908,101.178715",
+      "parameter": "CO",
+      "standard": 30.0,
+      "station_code": "82",
+      "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณชุมชนเนินพะยอม",
+      "station_type": "AIR QUALITY",
+      "status": "ONLINE",
+      "value": 44.48
+    }
+  },
+  "initialized": true
 }
