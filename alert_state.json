@@ -1,56 +1,581 @@
 {
   "active_alerts": {
-    "248:PM25": {
-      "display_text": "50.00 (STD 37.5) ug./m3",
-      "industry_zone": "สมุทรสาคร",
-      "last_update": "1 ก.ย. 2568, 03:01",
-      "location_link": "https://www.google.com/maps/search/?api=1&query=13.62091,100.829078",
-      "parameter": "PM25",
-      "standard": 37.5,
-      "station_code": "248",
-      "station_name": "สถานีตรวจวัดคุณภาพ AQMs 1",
-      "station_type": "AIR QUALITY",
-      "status": "OFFLINE (313 วัน)",
-      "value": 50.0
-    },
-    "262:PM25": {
-      "display_text": "40.70 (STD 37.5) ug./m3",
-      "industry_zone": "ไม่ระบุนิคมอุตสาหกรรม",
-      "last_update": "26 ก.พ. 2569, 15:00",
-      "location_link": "https://www.google.com/maps/search/?api=1&query=13.813578,100.73208",
-      "parameter": "PM25",
-      "standard": 37.5,
-      "station_code": "262",
-      "station_name": "สวนเฉลิมพระเกียรติ ร.9 ริมถนนสีหบุรานุกิจ เขตมีนบุรี, กรุงเทพฯ",
-      "station_type": "AIR QUALITY",
-      "status": "OFFLINE (134 วัน)",
-      "value": 40.7
-    },
-    "329:Stack1_Dust": {
-      "display_text": "23.62 (STD 20) mg/m3",
-      "industry_zone": "อีสเทิร์นซีบอร์ด(ระยอง)",
-      "last_update": "10 ก.ค. 2569, 15:34",
-      "location_link": "https://www.google.com/maps/search/?api=1&query=0.0,0.0",
-      "parameter": "Stack1_Dust",
-      "standard": 20.0,
-      "station_code": "329",
-      "station_name": "บริษัท ฮาล อะลูมินัม (ประเทศไทย) จำกัด",
+    "111": {
+      "code": "111",
+      "industry_zone": "มาบตาพุด",
+      "last_update": "10 ก.ค. 2569, 10:00",
+      "latitude": 12.702934,
+      "longitude": 101.140351,
+      "parameter_alarm_raw": "26-07-10 09:00 (H3701-Nox@7% 249 (Cail) ppm)  , 26-07-10 08:00 (H3701-Nox@7% 188.92 (Cail) ppm)",
+      "parameters": [
+        {
+          "display_name": "NOx",
+          "display_text": "",
+          "parameter": "NOx",
+          "ratio": null,
+          "standard": null,
+          "unit": "",
+          "value": null
+        }
+      ],
+      "severity": {
+        "code": "WATCH",
+        "icon": "🟡",
+        "name": "ระดับเฝ้าระวัง"
+      },
+      "station_name": "บมจ.พีทีที โกลบอล เคมิคอล",
+      "station_status": "ONLINE",
       "station_type": "CEMs",
-      "status": "ONLINE",
-      "value": 23.62
+      "support": {
+        "community_count": 0,
+        "fire_station": null,
+        "hospital": null,
+        "weather": null
+      },
+      "weather_station_name": "บมจ.พีทีที โกลบอล เคมิคอล",
+      "wind_direction": null,
+      "wind_source": "สถานีตรวจวัด e-Monitoring",
+      "wind_speed": null,
+      "zone": "สายปฏิบัติการ 3"
     },
-    "82:CO": {
-      "display_text": "44.48 (STD 30) ppm",
+    "150": {
+      "code": "150",
+      "industry_zone": "เอเชีย",
+      "last_update": "10 ก.ค. 2569, 15:00",
+      "latitude": 12.69404,
+      "longitude": 101.101223,
+      "parameter_alarm_raw": "26-07-09 21:00 (O3 178.71 (Cail) ppb)  , 26-07-09 20:00 (SO2 167.29 (Cail) ppb)",
+      "parameters": [
+        {
+          "display_name": "SO₂",
+          "display_text": "3.15 (STD 100) ppb",
+          "parameter": "SO2",
+          "ratio": 0.0315,
+          "standard": 100.0,
+          "unit": "ppb",
+          "value": 3.15
+        },
+        {
+          "display_name": "O₃",
+          "display_text": "11.06 (STD 100) ppb",
+          "parameter": "O3",
+          "ratio": 0.1106,
+          "standard": 100.0,
+          "unit": "ppb",
+          "value": 11.06
+        }
+      ],
+      "severity": {
+        "code": "WATCH",
+        "icon": "🟡",
+        "name": "ระดับเฝ้าระวัง"
+      },
+      "station_name": "สถานีตรวจวัดคุณภาพอากาศ นิคมฯ เอเชีย",
+      "station_status": "ONLINE",
+      "station_type": "AIR QUALITY",
+      "support": {
+        "community_count": 0,
+        "fire_station": null,
+        "hospital": null,
+        "weather": null
+      },
+      "weather_station_name": "สถานีตรวจวัดคุณภาพอากาศ นิคมฯ เอเชีย",
+      "wind_direction": 1.0,
+      "wind_source": "สถานีตรวจวัด e-Monitoring",
+      "wind_speed": 90.67,
+      "zone": "สายปฏิบัติการ 3"
+    },
+    "168": {
+      "code": "168",
       "industry_zone": "มาบตาพุด",
       "last_update": "10 ก.ค. 2569, 15:00",
-      "location_link": "https://www.google.com/maps/search/?api=1&query=12.756908,101.178715",
-      "parameter": "CO",
-      "standard": 30.0,
-      "station_code": "82",
-      "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณชุมชนเนินพะยอม",
+      "latitude": 12.7165282,
+      "longitude": 101.1587598,
+      "parameter_alarm_raw": "26-07-09 22:00 (O3 171.76 (Cail) ppb)  , 26-07-09 21:00 (SO2 143.39 (Cail) ppb)",
+      "parameters": [
+        {
+          "display_name": "SO₂",
+          "display_text": "3.39 (STD 100) ppb",
+          "parameter": "SO2",
+          "ratio": 0.0339,
+          "standard": 100.0,
+          "unit": "ppb",
+          "value": 3.39
+        },
+        {
+          "display_name": "O₃",
+          "display_text": "27.53 (STD 100) ppb",
+          "parameter": "O3",
+          "ratio": 0.2753,
+          "standard": 100.0,
+          "unit": "ppb",
+          "value": 27.53
+        }
+      ],
+      "severity": {
+        "code": "WATCH",
+        "icon": "🟡",
+        "name": "ระดับเฝ้าระวัง"
+      },
+      "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณหนองเสือเกือก",
+      "station_status": "ONLINE",
       "station_type": "AIR QUALITY",
-      "status": "ONLINE",
-      "value": 44.48
+      "support": {
+        "community_count": 0,
+        "fire_station": null,
+        "hospital": null,
+        "weather": null
+      },
+      "weather_station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณหนองเสือเกือก",
+      "wind_direction": 202.97,
+      "wind_source": "สถานีตรวจวัด e-Monitoring",
+      "wind_speed": 2.77,
+      "zone": "สายปฏิบัติการ 3"
+    },
+    "218": {
+      "code": "218",
+      "industry_zone": "อีสเทิร์นซีบอร์ด(ระยอง)",
+      "last_update": "10 ก.ค. 2569, 15:00",
+      "latitude": 13.017426,
+      "longitude": 101.194836,
+      "parameter_alarm_raw": "26-07-10 09:00 (HRSG1_SO2 6.56  ppm)",
+      "parameters": [
+        {
+          "display_name": "SO₂",
+          "display_text": "",
+          "parameter": "SO2",
+          "ratio": null,
+          "standard": null,
+          "unit": "",
+          "value": null
+        }
+      ],
+      "severity": {
+        "code": "WATCH",
+        "icon": "🟡",
+        "name": "ระดับเฝ้าระวัง"
+      },
+      "station_name": "โรงไฟฟ้าตาสิทธิ์ 2",
+      "station_status": "ONLINE",
+      "station_type": "CEMs",
+      "support": {
+        "community_count": 0,
+        "fire_station": null,
+        "hospital": null,
+        "weather": null
+      },
+      "weather_station_name": "โรงไฟฟ้าตาสิทธิ์ 2",
+      "wind_direction": null,
+      "wind_source": "สถานีตรวจวัด e-Monitoring",
+      "wind_speed": null,
+      "zone": "สายปฏิบัติการ 2"
+    },
+    "220": {
+      "code": "220",
+      "industry_zone": "ดับบลิวเอชเอ อีสเทิร์นซีบอร์ด",
+      "last_update": "10 ก.ค. 2569, 15:00",
+      "latitude": 13.066,
+      "longitude": 101.18642,
+      "parameter_alarm_raw": "26-07-10 09:00 (HRSG1_SO2 49.33 (Defective) ppm)",
+      "parameters": [
+        {
+          "display_name": "SO₂",
+          "display_text": "",
+          "parameter": "SO2",
+          "ratio": null,
+          "standard": null,
+          "unit": "",
+          "value": null
+        }
+      ],
+      "severity": {
+        "code": "WATCH",
+        "icon": "🟡",
+        "name": "ระดับเฝ้าระวัง"
+      },
+      "station_name": "บจก.กัลฟ์ ทีเอส 4",
+      "station_status": "ONLINE",
+      "station_type": "CEMs",
+      "support": {
+        "community_count": 0,
+        "fire_station": null,
+        "hospital": null,
+        "weather": null
+      },
+      "weather_station_name": "บจก.กัลฟ์ ทีเอส 4",
+      "wind_direction": null,
+      "wind_source": "สถานีตรวจวัด e-Monitoring",
+      "wind_speed": null,
+      "zone": "สายปฏิบัติการ 2"
+    },
+    "23": {
+      "code": "23",
+      "industry_zone": "มาบตาพุด",
+      "last_update": "10 ก.ค. 2569, 10:00",
+      "latitude": 12.695901,
+      "longitude": 101.14769,
+      "parameter_alarm_raw": "26-07-09 17:00 (F1020-NOx@7% 36.03 (Cail) ppm)",
+      "parameters": [
+        {
+          "display_name": "NOx",
+          "display_text": "",
+          "parameter": "NOx",
+          "ratio": null,
+          "standard": null,
+          "unit": "",
+          "value": null
+        }
+      ],
+      "severity": {
+        "code": "WATCH",
+        "icon": "🟡",
+        "name": "ระดับเฝ้าระวัง"
+      },
+      "station_name": "บมจ.พีทีที โกลบอล เคมิคอล",
+      "station_status": "ONLINE",
+      "station_type": "CEMs",
+      "support": {
+        "community_count": 0,
+        "fire_station": null,
+        "hospital": null,
+        "weather": null
+      },
+      "weather_station_name": "บมจ.พีทีที โกลบอล เคมิคอล",
+      "wind_direction": null,
+      "wind_source": "สถานีตรวจวัด e-Monitoring",
+      "wind_speed": null,
+      "zone": "สายปฏิบัติการ 3"
+    },
+    "281": {
+      "code": "281",
+      "industry_zone": "มาบตาพุด",
+      "last_update": "10 ก.ค. 2569, 15:00",
+      "latitude": 12.725179,
+      "longitude": 101.12726,
+      "parameter_alarm_raw": "26-07-10 15:00 (PM10 999.67 (Cail) ug./m3)  , 26-07-10 14:00 (PM10 999.76 (Cail) ug./m3)  , 26-07-10 13:00 (PM10 999.79 (Cail) ug./m3)  , 26-07-10 12:00 (PM10 999.72 (Cail) ug./m3)  , 26-07-10 11:00 (PM10 999.69 (Cail) ug./m3)  , 26-07-10 10:00 (PM10 999.73 (Cail) ug./m3)  , 26-07-10 09:00 (PM10 999.79 (Cail) ug./m3)  , 26-07-10 08:00 (PM10 999.8 (Cail) ug./m3)  , 26-07-10 07:00 (PM10 999.82 (Cail) ug./m3)  , 26-07-10 06:00 (PM10 967.33 (Cail) ug./m3)  , 26-07-10 03:00 (O3 173.2 (Cail) ppb)  , 26-07-10 02:00 (SO2 147.36 (Cail) ppbNO2 144.44 (Cail) ppb)",
+      "parameters": [
+        {
+          "display_name": "PM10",
+          "display_text": "- ug./m3",
+          "parameter": "PM10",
+          "ratio": null,
+          "standard": null,
+          "unit": "",
+          "value": null
+        },
+        {
+          "display_name": "SO₂",
+          "display_text": "1.95 (STD 100) ppb",
+          "parameter": "SO2",
+          "ratio": 0.0195,
+          "standard": 100.0,
+          "unit": "ppb",
+          "value": 1.95
+        },
+        {
+          "display_name": "O₃",
+          "display_text": "15.61 (STD 100) ppb",
+          "parameter": "O3",
+          "ratio": 0.1561,
+          "standard": 100.0,
+          "unit": "ppb",
+          "value": 15.61
+        }
+      ],
+      "severity": {
+        "code": "EMERGENCY",
+        "icon": "🟣",
+        "name": "ระดับฉุกเฉิน"
+      },
+      "station_name": "เทศบาลเมืองมาบตาพุด",
+      "station_status": "ONLINE",
+      "station_type": "AIR QUALITY",
+      "support": {
+        "community_count": 0,
+        "fire_station": null,
+        "hospital": null,
+        "weather": null
+      },
+      "weather_station_name": "เทศบาลเมืองมาบตาพุด",
+      "wind_direction": 155.08,
+      "wind_source": "สถานีตรวจวัด e-Monitoring",
+      "wind_speed": 2.45,
+      "zone": "สายปฏิบัติการ 3"
+    },
+    "33": {
+      "code": "33",
+      "industry_zone": "มาบตาพุด",
+      "last_update": "10 ก.ค. 2569, 15:00",
+      "latitude": 12.680425,
+      "longitude": 101.168528,
+      "parameter_alarm_raw": "26-07-10 15:00 (SO2 115.67 (Cail) ppb)  , 26-07-10 14:00 (SO2 148.64 (Cail) ppb)",
+      "parameters": [
+        {
+          "display_name": "SO₂",
+          "display_text": "- ppb",
+          "parameter": "SO2",
+          "ratio": null,
+          "standard": null,
+          "unit": "- ppb",
+          "value": null
+        }
+      ],
+      "severity": {
+        "code": "WATCH",
+        "icon": "🟡",
+        "name": "ระดับเฝ้าระวัง"
+      },
+      "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณอนามัยตากวน",
+      "station_status": "ONLINE",
+      "station_type": "AIR QUALITY",
+      "support": {
+        "community_count": 0,
+        "fire_station": null,
+        "hospital": null,
+        "weather": null
+      },
+      "weather_station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณอนามัยตากวน",
+      "wind_direction": 32.16,
+      "wind_source": "สถานีตรวจวัด e-Monitoring",
+      "wind_speed": 244.98,
+      "zone": "สายปฏิบัติการ 3"
+    },
+    "40": {
+      "code": "40",
+      "industry_zone": "มาบตาพุด",
+      "last_update": "10 ก.ค. 2569, 15:00",
+      "latitude": 12.769857,
+      "longitude": 101.169013,
+      "parameter_alarm_raw": "26-07-09 23:00 (PM10 109.37 (Cail) ug./m3)",
+      "parameters": [
+        {
+          "display_name": "PM10",
+          "display_text": "7.00 (STD 100) ug./m3",
+          "parameter": "PM10",
+          "ratio": 0.07,
+          "standard": 100.0,
+          "unit": "µg/m³",
+          "value": 7.0
+        }
+      ],
+      "severity": {
+        "code": "WATCH",
+        "icon": "🟡",
+        "name": "ระดับเฝ้าระวัง"
+      },
+      "station_name": "สถานีตรวจวัดคุณภาพอากาศบ้านพัก ปตท.",
+      "station_status": "ONLINE",
+      "station_type": "AIR QUALITY",
+      "support": {
+        "community_count": 0,
+        "fire_station": null,
+        "hospital": null,
+        "weather": null
+      },
+      "weather_station_name": "สถานีตรวจวัดคุณภาพอากาศบ้านพัก ปตท.",
+      "wind_direction": 354.68,
+      "wind_source": "สถานีตรวจวัด e-Monitoring",
+      "wind_speed": 3.07,
+      "zone": "สายปฏิบัติการ 3"
+    },
+    "41": {
+      "code": "41",
+      "industry_zone": "มาบตาพุด",
+      "last_update": "10 ก.ค. 2569, 15:00",
+      "latitude": 12.722455,
+      "longitude": 101.127466,
+      "parameter_alarm_raw": "26-07-09 21:00 (PM10 101.72 (Cail) ug./m3)",
+      "parameters": [
+        {
+          "display_name": "PM10",
+          "display_text": "18.01 (STD 100) ug./m3",
+          "parameter": "PM10",
+          "ratio": 0.1801,
+          "standard": 100.0,
+          "unit": "µg/m³",
+          "value": 18.01
+        }
+      ],
+      "severity": {
+        "code": "WATCH",
+        "icon": "🟡",
+        "name": "ระดับเฝ้าระวัง"
+      },
+      "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริวเณวัดมาบชลูด",
+      "station_status": "ONLINE",
+      "station_type": "AIR QUALITY",
+      "support": {
+        "community_count": 0,
+        "fire_station": null,
+        "hospital": null,
+        "weather": null
+      },
+      "weather_station_name": "สถานีตรวจวัดคุณภาพอากาศ บริวเณวัดมาบชลูด",
+      "wind_direction": 192.4,
+      "wind_source": "สถานีตรวจวัด e-Monitoring",
+      "wind_speed": 1.69,
+      "zone": "สายปฏิบัติการ 3"
+    },
+    "49": {
+      "code": "49",
+      "industry_zone": "มาบตาพุด",
+      "last_update": "10 ก.ค. 2569, 15:00",
+      "latitude": 12.695623,
+      "longitude": 101.152872,
+      "parameter_alarm_raw": "26-07-10 15:00 (NOx_SPE II 32.16 (Cail) ppm)  , 26-07-10 11:00 (NOx@7%O2_LTX 117.17 (Cail) ppm)  , 26-07-10 05:00 (NOx_SPE II 400.07 (Cail) ppm)  , 26-07-10 03:00 (NOx_SPE II 46.07 (Cail) ppm)  , 26-07-09 19:00 (NOx_SPE II 310.66 (Cail) ppm)  , 26-07-09 18:00 (NOx_SPE II 96.1 (Cail) ppm)  , 26-07-09 17:00 (NOx_SPE II 141.17 (Cail) ppm)  , 26-07-09 16:00 (NOx_SPE II 213.61 (Cail) ppm)",
+      "parameters": [
+        {
+          "display_name": "NOx",
+          "display_text": "",
+          "parameter": "NOx",
+          "ratio": null,
+          "standard": null,
+          "unit": "",
+          "value": null
+        }
+      ],
+      "severity": {
+        "code": "WATCH",
+        "icon": "🟡",
+        "name": "ระดับเฝ้าระวัง"
+      },
+      "station_name": "บจก.ดาวเคมิคอลประเทศไทย",
+      "station_status": "ONLINE",
+      "station_type": "CEMs",
+      "support": {
+        "community_count": 0,
+        "fire_station": null,
+        "hospital": null,
+        "weather": null
+      },
+      "weather_station_name": "บจก.ดาวเคมิคอลประเทศไทย",
+      "wind_direction": null,
+      "wind_source": "สถานีตรวจวัด e-Monitoring",
+      "wind_speed": null,
+      "zone": "สายปฏิบัติการ 3"
+    },
+    "74": {
+      "code": "74",
+      "industry_zone": "มาบตาพุด",
+      "last_update": "10 ก.ค. 2569, 15:00",
+      "latitude": 12.678777,
+      "longitude": 101.155994,
+      "parameter_alarm_raw": "26-07-10 15:00 (PTTGC4_432H1_SO2@7% 29.57 (Cail) ppm)  , 26-07-10 14:00 (PTTGC4_432H1_SO2@7% 29.05 (Cail) ppm)  , 26-07-10 13:00 (PTTGC4_432H1_SO2@7% 27.82 (Cail) ppm)  , 26-07-10 12:00 (PTTGC4_432H1_SO2@7% 27.09 (Cail) ppm)  , 26-07-10 11:00 (PTTGC4_432H1_SO2@7% 27.39 (Cail) ppm)  , 26-07-10 10:00 (PTTGC4_432H1_SO2@7% 26.91 (Cail) ppm)  , 26-07-10 09:00 (PTTGC4_432H1_SO2@7% 25.15 (Cail) ppm)",
+      "parameters": [
+        {
+          "display_name": "SO₂",
+          "display_text": "",
+          "parameter": "SO2",
+          "ratio": null,
+          "standard": null,
+          "unit": "",
+          "value": null
+        }
+      ],
+      "severity": {
+        "code": "WATCH",
+        "icon": "🟡",
+        "name": "ระดับเฝ้าระวัง"
+      },
+      "station_name": "บมจ.พีทีที โกลบอล เคมิคอล",
+      "station_status": "ONLINE",
+      "station_type": "CEMs",
+      "support": {
+        "community_count": 0,
+        "fire_station": null,
+        "hospital": null,
+        "weather": null
+      },
+      "weather_station_name": "บมจ.พีทีที โกลบอล เคมิคอล",
+      "wind_direction": null,
+      "wind_source": "สถานีตรวจวัด e-Monitoring",
+      "wind_speed": null,
+      "zone": "สายปฏิบัติการ 3"
+    },
+    "82": {
+      "code": "82",
+      "industry_zone": "มาบตาพุด",
+      "last_update": "10 ก.ค. 2569, 15:00",
+      "latitude": 12.756908,
+      "longitude": 101.178715,
+      "parameter_alarm_raw": "26-07-10 15:00 (CO 44.48  ppmO3 1003.62  ppb)  , 26-07-10 14:00 (CO 43.03  ppmO3 1004.32  ppb)  , 26-07-10 13:00 (CO 43.6  ppmO3 1004.89  ppb)  , 26-07-10 12:00 (CO 48.21  ppmO3 1005.37  ppb)  , 26-07-10 11:00 (CO 50.58  ppmO3 1005.86  ppb)  , 26-07-10 10:00 (CO 52.95  ppmO3 1006.17  ppb)  , 26-07-10 09:00 (CO 58.06  ppmO3 1006.01  ppb)  , 26-07-10 08:00 (CO 62.53  ppmO3 1005.79  ppb)  , 26-07-10 07:00 (CO 64.06  ppmO3 1005.4  ppb)  , 26-07-10 06:00 (CO 63.35  ppmO3 1004.94  ppb)  , 26-07-10 05:00 (CO 65.16  ppmO3 1004.84  ppb)  , 26-07-10 04:00 (CO 66.71  ppmO3 1004.6  ppb)  , 26-07-10 03:00 (CO 67.02  ppmO3 1004.82  ppb)  , 26-07-10 02:00 (CO 66.69  ppmO3 1005.43  ppb)  , 26-07-10 01:00 (CO 68.03  ppmO3 1005.97  ppb)  , 26-07-10 00:00 (CO 73.99  ppmO3 1006.63  ppb)  , 26-07-09 23:00 (CO 75.48  ppmO3 1006.68  ppb)  , 26-07-09 22:00 (CO 72.11  ppmO3 1006.2  ppb)  , 26-07-09 21:00 (CO 69.18  ppmO3 1005.72  ppb)  , 26-07-09 20:00 (CO 64.27  ppmO3 1004.95  ppb)  , 26-07-09 19:00 (CO 57.97  ppmO3 1004.53  ppb)  , 26-07-09 18:00 (CO 54.66  ppmO3 1004.11  ppb)  , 26-07-09 17:00 (CO 53.09  ppmO3 1004.17  ppb)  , 26-07-09 16:00 (CO 55.7  ppmO3 1004.36  ppb)",
+      "parameters": [
+        {
+          "display_name": "CO",
+          "display_text": "44.48 (STD 30) ppm",
+          "parameter": "CO",
+          "ratio": 1.4826666666666666,
+          "standard": 30.0,
+          "unit": "ppm",
+          "value": 44.48
+        }
+      ],
+      "severity": {
+        "code": "WATCH",
+        "icon": "🟡",
+        "name": "ระดับเฝ้าระวัง"
+      },
+      "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณชุมชนเนินพะยอม",
+      "station_status": "ONLINE",
+      "station_type": "AIR QUALITY",
+      "support": {
+        "community_count": 0,
+        "fire_station": null,
+        "hospital": null,
+        "weather": null
+      },
+      "weather_station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณชุมชนเนินพะยอม",
+      "wind_direction": 0.0,
+      "wind_source": "สถานีตรวจวัด e-Monitoring",
+      "wind_speed": 0.0,
+      "zone": "สายปฏิบัติการ 3"
+    },
+    "98": {
+      "code": "98",
+      "industry_zone": "มาบตาพุด",
+      "last_update": "10 ก.ค. 2569, 15:00",
+      "latitude": 12.678494,
+      "longitude": 101.066698,
+      "parameter_alarm_raw": "26-07-10 14:00 (SO2 118.68  ppbCO 102.89 (Cail) ppm)  , 26-07-10 12:00 (PM10 398.3  mg/m3)",
+      "parameters": [
+        {
+          "display_name": "PM10",
+          "display_text": "0.53 (STD 100) mg/m3",
+          "parameter": "PM10",
+          "ratio": 0.0053,
+          "standard": 100.0,
+          "unit": "mg/m3",
+          "value": 0.53
+        },
+        {
+          "display_name": "SO₂",
+          "display_text": "6.12 (STD 100) ppb",
+          "parameter": "SO2",
+          "ratio": 0.061200000000000004,
+          "standard": 100.0,
+          "unit": "ppb",
+          "value": 6.12
+        }
+      ],
+      "severity": {
+        "code": "WATCH",
+        "icon": "🟡",
+        "name": "ระดับเฝ้าระวัง"
+      },
+      "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณวัดพยูน",
+      "station_status": "ONLINE",
+      "station_type": "AIR QUALITY",
+      "support": {
+        "community_count": 0,
+        "fire_station": null,
+        "hospital": null,
+        "weather": null
+      },
+      "weather_station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณวัดพยูน",
+      "wind_direction": 0.0,
+      "wind_source": "สถานีตรวจวัด e-Monitoring",
+      "wind_speed": 0.0,
+      "zone": "สายปฏิบัติการ 3"
     }
   },
   "initialized": true
