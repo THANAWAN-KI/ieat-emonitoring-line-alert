@@ -1,12 +1,10 @@
 import json
-import math
 import os
 import re
 import sys
 import urllib.error
-import urllib.parse
 import urllib.request
-from pathlib import Path
+from datetime import datetime, timedelta, timezone
 from typing import Any
 
 
@@ -21,81 +19,45 @@ DATA_URL = (
 
 LINE_PUSH_URL = "https://api.line.me/v2/bot/message/push"
 
-STATE_FILE = Path("alert_state.json")
-
-# ลิงก์ระบบ ArcGIS Experience Builder ของหน่วยงาน
-ARCGIS_DASHBOARD_URL = os.getenv(
-    "ARCGIS_DASHBOARD_URL",
+ARCGIS_DASHBOARD_URL = (
     "https://experience.arcgis.com/experience/"
-    "dd1d5523f3bd425b939b51ad91e06171",
+    "dd1d5523f3bd425b939b51ad91e06171"
 )
 
-# URL Feature Layer สำหรับข้อมูลสนับสนุน
-# หากยังไม่ได้กำหนด ระบบจะข้ามส่วนนั้นโดยอัตโนมัติ
-HOSPITAL_LAYER_URL = os.getenv("HOSPITAL_LAYER_URL", "").rstrip("/")
-FIRE_STATION_LAYER_URL = os.getenv("FIRE_STATION_LAYER_URL", "").rstrip("/")
-COMMUNITY_LAYER_URL = os.getenv("COMMUNITY_LAYER_URL", "").rstrip("/")
-WEATHER_LAYER_URL = os.getenv("WEATHER_LAYER_URL", "").rstrip("/")
-
-# ชื่อฟิลด์ของแต่ละ Feature Layer
-HOSPITAL_NAME_FIELD = os.getenv(
-    "HOSPITAL_NAME_FIELD",
-    "name",
+# รูปภาพจาก GitHub Pages ของคุณ
+ASSET_BASE_URL = (
+    "https://THANAWAN-KI.github.io/"
+    "ieat-emonitoring-line-alert/assets"
 )
 
-HOSPITAL_PHONE_FIELD = os.getenv(
-    "HOSPITAL_PHONE_FIELD",
-    "phone",
-)
+IEAT_LOGO_URL = f"{ASSET_BASE_URL}/ieat_logo.png"
+ALERT_RED_ICON_URL = f"{ASSET_BASE_URL}/alert_red.png"
+NORMAL_GREEN_ICON_URL = f"{ASSET_BASE_URL}/normal_green.png"
+WATCH_YELLOW_ICON_URL = f"{ASSET_BASE_URL}/watch_yellow.png"
 
-FIRE_NAME_FIELD = os.getenv(
-    "FIRE_NAME_FIELD",
-    "name",
-)
 
-FIRE_PHONE_FIELD = os.getenv(
-    "FIRE_PHONE_FIELD",
-    "phone",
-)
+# ============================================================
+# สีของระบบ
+# ============================================================
 
-COMMUNITY_NAME_FIELD = os.getenv(
-    "COMMUNITY_NAME_FIELD",
-    "name",
-)
+COLOR_PRIMARY = "#4E1F6E"
+COLOR_SECONDARY = "#3E3E75"
+COLOR_TEAL = "#45A9A9"
+COLOR_LIGHT_TEAL = "#98E8DE"
 
-WEATHER_NAME_FIELD = os.getenv(
-    "WEATHER_NAME_FIELD",
-    "station_name",
-)
+COLOR_WHITE = "#FFFFFF"
+COLOR_BACKGROUND = "#F7F5FA"
+COLOR_TEXT = "#292929"
+COLOR_MUTED = "#666666"
+COLOR_BORDER = "#DDD6E5"
+COLOR_RED = "#C62828"
 
-WEATHER_WD_FIELD = os.getenv(
-    "WEATHER_WD_FIELD",
-    "wind_direction_deg",
-)
+THAILAND_TIMEZONE = timezone(timedelta(hours=7))
 
-WEATHER_WS_FIELD = os.getenv(
-    "WEATHER_WS_FIELD",
-    "wind_speed",
-)
 
-SEARCH_RADIUS_KM = 5.0
-
-MISSING_VALUES = {
-    "",
-    "-",
-    "9999",
-    9999,
-    None,
-}
-
-STD_PATTERN = re.compile(
-    r"\(\s*STD\s*([0-9,]+(?:\.[0-9]+)?)\s*\)",
-    re.IGNORECASE,
-)
-
-NUMBER_PATTERN = re.compile(
-    r"[-+]?\d[\d,]*(?:\.\d+)?"
-)
+# ============================================================
+# ชื่อพารามิเตอร์
+# ============================================================
 
 PARAMETER_ALIASES = {
     "PM2.5": "PM25",
@@ -108,7 +70,6 @@ PARAMETER_ALIASES = {
     "NO2": "NO2",
     "NO₂": "NO2",
     "NOX": "NOx",
-    "NOX ": "NOx",
     "NO": "NO",
     "CO": "CO",
     "O3": "O3",
@@ -117,7 +78,6 @@ PARAMETER_ALIASES = {
     "COD": "COD",
     "DO": "DO",
     "PH": "pH",
-    "PH ": "pH",
     "FLOW": "FLOW",
 }
 
@@ -138,81 +98,55 @@ PARAMETER_DISPLAY_NAMES = {
     "FLOW": "อัตราการไหล",
 }
 
+NUMBER_PATTERN = re.compile(r"[-+]?\d[\d,]*(?:\.\d+)?")
+
+STANDARD_PATTERN = re.compile(
+    r"\(\s*STD\s*([0-9,]+(?:\.[0-9]+)?)\s*\)",
+    re.IGNORECASE,
+)
+
 
 # ============================================================
-# ฟังก์ชันทั่วไป
+# ฟังก์ชันช่วยเหลือ
 # ============================================================
 
-def request_json(
-    url: str,
-    *,
-    timeout: int = 60,
-) -> dict[str, Any]:
-    request = urllib.request.Request(
-        url,
-        headers={
-            "User-Agent": "IEAT-eMonitoring-Line-Alert/2.0",
-            "Accept": "application/json",
-        },
-    )
+def clean_text(value: Any, default: str = "-") -> str:
+    if value is None:
+        return default
 
-    try:
-        with urllib.request.urlopen(
-            request,
-            timeout=timeout,
-        ) as response:
-            charset = (
-                response.headers.get_content_charset()
-                or "utf-8"
-            )
+    text = str(value).strip()
 
-            text = response.read().decode(
-                charset,
-                errors="replace",
-            )
+    if text.lower() in {
+        "",
+        "-",
+        "none",
+        "null",
+        "9999",
+    }:
+        return default
 
-            return json.loads(text)
-
-    except urllib.error.HTTPError as error:
-        body = error.read().decode(
-            "utf-8",
-            errors="replace",
-        )
-
-        raise RuntimeError(
-            f"HTTP {error.code}: {body}"
-        ) from error
-
-    except urllib.error.URLError as error:
-        raise RuntimeError(
-            f"เชื่อมต่อไม่สำเร็จ: {error.reason}"
-        ) from error
-
-    except json.JSONDecodeError as error:
-        raise RuntimeError(
-            "ข้อมูลที่ได้รับไม่ใช่ JSON ที่ถูกต้อง"
-        ) from error
+    return text
 
 
 def safe_float(value: Any) -> float | None:
-    if value in MISSING_VALUES:
+    if value is None:
         return None
 
     if isinstance(value, str):
-        cleaned = value.strip().replace(",", "")
+        text = value.strip()
 
-        if cleaned in {"", "-", "9999"}:
+        if text in {"", "-", "9999"}:
             return None
 
-        match = NUMBER_PATTERN.search(cleaned)
+        match = NUMBER_PATTERN.search(text)
 
         if not match:
             return None
 
-        cleaned = match.group(0).replace(",", "")
+        text = match.group(0).replace(",", "")
 
         try:
-            number = float(cleaned)
+            number = float(text)
         except ValueError:
             return None
 
@@ -226,21 +160,6 @@ def safe_float(value: Any) -> float | None:
         return None
 
     return number
-
-
-def clean_text(
-    value: Any,
-    default: str = "-",
-) -> str:
-    if value is None:
-        return default
-
-    text = str(value).strip()
-
-    if text in {"", "-", "None", "null"}:
-        return default
-
-    return text
 
 
 def format_number(value: float | None) -> str:
@@ -257,7 +176,7 @@ def extract_standard(text: Any) -> float | None:
     if not isinstance(text, str):
         return None
 
-    match = STD_PATTERN.search(text)
+    match = STANDARD_PATTERN.search(text)
 
     if not match:
         return None
@@ -269,179 +188,259 @@ def extract_unit(text: Any) -> str:
     if not isinstance(text, str):
         return ""
 
-    cleaned = STD_PATTERN.sub("", text).strip()
+    cleaned = STANDARD_PATTERN.sub("", text).strip()
 
-    match = NUMBER_PATTERN.search(cleaned)
+    number_match = NUMBER_PATTERN.search(cleaned)
 
-    if match:
-        cleaned = cleaned[match.end():].strip()
+    if number_match:
+        cleaned = cleaned[number_match.end():].strip()
 
-    cleaned = cleaned.replace("ug./m3", "µg/m³")
-    cleaned = cleaned.replace("ug/m3", "µg/m³")
-    cleaned = cleaned.replace("ug/m3L", "µg/m³")
-    cleaned = cleaned.replace("m/s", "เมตร/วินาที")
-    cleaned = cleaned.replace("DEG", "องศา")
+    replacements = {
+        "ug./m3": "µg/m³",
+        "ug/m3": "µg/m³",
+        "µg./m3": "µg/m³",
+        "µg/m3": "µg/m³",
+        "mg./m3": "mg/m³",
+        "mg/m3": "mg/m³",
+        "mg./l": "mg/L",
+        "mg/l": "mg/L",
+        "m/s": "เมตร/วินาที",
+        "DEG": "องศา",
+    }
 
-    return cleaned
+    for source, target in replacements.items():
+        cleaned = cleaned.replace(source, target)
 
-
-def haversine_km(
-    lat1: float,
-    lon1: float,
-    lat2: float,
-    lon2: float,
-) -> float:
-    radius = 6371.0088
-
-    phi1 = math.radians(lat1)
-    phi2 = math.radians(lat2)
-
-    delta_phi = math.radians(lat2 - lat1)
-    delta_lambda = math.radians(lon2 - lon1)
-
-    a = (
-        math.sin(delta_phi / 2) ** 2
-        + math.cos(phi1)
-        * math.cos(phi2)
-        * math.sin(delta_lambda / 2) ** 2
-    )
-
-    return radius * 2 * math.atan2(
-        math.sqrt(a),
-        math.sqrt(1 - a),
-    )
+    return cleaned.strip()
 
 
-def wind_direction_th(
-    degree: float | None,
-) -> str:
-    if degree is None:
-        return "-"
+def thai_report_time() -> str:
+    now = datetime.now(THAILAND_TIMEZONE)
 
-    directions = [
-        "ทิศเหนือ",
-        "ทิศตะวันออกเฉียงเหนือ",
-        "ทิศตะวันออก",
-        "ทิศตะวันออกเฉียงใต้",
-        "ทิศใต้",
-        "ทิศตะวันตกเฉียงใต้",
-        "ทิศตะวันตก",
-        "ทิศตะวันตกเฉียงเหนือ",
+    thai_months = [
+        "",
+        "มกราคม",
+        "กุมภาพันธ์",
+        "มีนาคม",
+        "เมษายน",
+        "พฤษภาคม",
+        "มิถุนายน",
+        "กรกฎาคม",
+        "สิงหาคม",
+        "กันยายน",
+        "ตุลาคม",
+        "พฤศจิกายน",
+        "ธันวาคม",
     ]
 
-    index = int(
-        ((degree + 22.5) % 360) / 45
+    buddhist_year = now.year + 543
+
+    return (
+        f"{now.day} "
+        f"{thai_months[now.month]} "
+        f"{buddhist_year} "
+        f"เวลา {now:%H:%M} น."
     )
 
-    return directions[index]
 
-
-def google_maps_link(
+def google_maps_url(
     latitude: float,
     longitude: float,
 ) -> str:
     return (
-        "https://www.google.com/maps/search/"
-        f"?api=1&query={latitude},{longitude}"
+        "https://www.google.com/maps/"
+        f"search/?api=1&query={latitude},{longitude}"
     )
 
 
-# ============================================================
-# ParameterAlram
-# ============================================================
-
-def normalize_parameter_name(
-    name: str,
-) -> str | None:
-    cleaned = (
-        name.strip()
-        .replace("_txt", "")
-        .replace("Alarm", "")
-        .replace("ALARM", "")
+def download_json(url: str) -> dict[str, Any]:
+    request = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": "IEAT-eMonitoring-LINE-Alert/1.0",
+            "Accept": "application/json",
+        },
     )
 
-    cleaned_upper = cleaned.upper()
+    try:
+        with urllib.request.urlopen(
+            request,
+            timeout=60,
+        ) as response:
+            raw_data = response.read()
 
-    if cleaned_upper in PARAMETER_ALIASES:
-        return PARAMETER_ALIASES[cleaned_upper]
+            try:
+                text = raw_data.decode("utf-8")
+            except UnicodeDecodeError:
+                text = raw_data.decode(
+                    "utf-8-sig",
+                    errors="replace",
+                )
 
-    # รองรับกรณี ParameterAlram มีข้อความประกอบ
-    for alias, field_name in PARAMETER_ALIASES.items():
-        if alias.upper() in cleaned_upper:
-            return field_name
+            return json.loads(text)
 
-    return None
+    except urllib.error.HTTPError as error:
+        body = error.read().decode(
+            "utf-8",
+            errors="replace",
+        )
+
+        raise RuntimeError(
+            f"ดาวน์โหลดข้อมูลไม่สำเร็จ "
+            f"HTTP {error.code}: {body}"
+        ) from error
+
+    except urllib.error.URLError as error:
+        raise RuntimeError(
+            f"เชื่อมต่อแหล่งข้อมูลไม่ได้: {error.reason}"
+        ) from error
+
+    except json.JSONDecodeError as error:
+        raise RuntimeError(
+            "ข้อมูลจาก e-Monitoring ไม่ใช่ JSON ที่ถูกต้อง"
+        ) from error
 
 
-def parse_parameter_alarm(
-    alarm_value: Any,
-) -> list[str]:
-    """
-    รองรับตัวอย่าง:
-    PM10
-    PM10,SO2
-    PM10 / SO2
-    PM10|SO2
-    PM10;SO2
-    PM10 SO2
-    """
+# ============================================================
+# อ่าน ParameterAlram
+# ============================================================
 
-    text = clean_text(alarm_value, "")
+def parse_parameter_alarm(value: Any) -> list[str]:
+    text = clean_text(value, "")
 
     if not text:
         return []
 
-    text = text.replace("\n", ",")
-    text = re.sub(
-        r"[|;/]+",
-        ",",
-        text,
+    normalized = (
+        text.upper()
+        .replace("_TXT", "")
+        .replace("-", " ")
+        .replace("/", " ")
+        .replace(",", " ")
+        .replace(";", " ")
     )
 
     detected: list[str] = []
 
-    # ค้นหาชื่อพารามิเตอร์จากรายการที่รู้จักก่อน
-    uppercase_text = text.upper()
+    sorted_aliases = sorted(
+        PARAMETER_ALIASES.items(),
+        key=lambda item: len(item[0]),
+        reverse=True,
+    )
 
-    for alias, field_name in PARAMETER_ALIASES.items():
+    for alias, field_name in sorted_aliases:
+        alias_upper = alias.upper()
+
         pattern = (
             r"(?<![A-Z0-9])"
-            + re.escape(alias.upper())
+            + re.escape(alias_upper)
             + r"(?![A-Z0-9])"
         )
 
-        if re.search(pattern, uppercase_text):
+        if re.search(pattern, normalized):
             if field_name not in detected:
-                detected.append(field_name)
-
-    # สำรองกรณีคั่นด้วย comma
-    if not detected:
-        for part in text.split(","):
-            field_name = normalize_parameter_name(part)
-
-            if field_name and field_name not in detected:
                 detected.append(field_name)
 
     return detected
 
 
-def get_parameter_result(
+def find_property_value(
+    properties: dict[str, Any],
+    field_name: str,
+) -> Any:
+    possible_names = [
+        field_name,
+        field_name.upper(),
+        field_name.lower(),
+    ]
+
+    if field_name == "PM25":
+        possible_names.extend([
+            "PM2.5",
+            "PM2_5",
+            "PM25",
+        ])
+
+    if field_name == "NOx":
+        possible_names.extend([
+            "NOX",
+            "Nox",
+            "NOx",
+        ])
+
+    if field_name == "pH":
+        possible_names.extend([
+            "PH",
+            "ph",
+            "pH",
+        ])
+
+    for name in possible_names:
+        if name in properties:
+            return properties.get(name)
+
+    return None
+
+
+def find_text_property(
+    properties: dict[str, Any],
+    field_name: str,
+) -> Any:
+    possible_names = [
+        f"{field_name}_txt",
+        f"{field_name.upper()}_txt",
+        f"{field_name.lower()}_txt",
+    ]
+
+    if field_name == "PM25":
+        possible_names.extend([
+            "PM25_txt",
+            "PM2.5_txt",
+            "PM2_5_txt",
+        ])
+
+    if field_name == "NOx":
+        possible_names.extend([
+            "NOx_txt",
+            "NOX_txt",
+            "Nox_txt",
+        ])
+
+    if field_name == "pH":
+        possible_names.extend([
+            "pH_txt",
+            "PH_txt",
+            "ph_txt",
+        ])
+
+    for name in possible_names:
+        if name in properties:
+            return properties.get(name)
+
+    return None
+
+
+def get_parameter_information(
     properties: dict[str, Any],
     parameter: str,
 ) -> dict[str, Any]:
-    value = safe_float(
-        properties.get(parameter)
+    raw_value = find_property_value(
+        properties,
+        parameter,
     )
 
-    display_text = clean_text(
-        properties.get(f"{parameter}_txt"),
-        "",
+    raw_text = find_text_property(
+        properties,
+        parameter,
     )
+
+    value = safe_float(raw_value)
+    display_text = clean_text(raw_text, "")
 
     standard = extract_standard(display_text)
     unit = extract_unit(display_text)
 
-    ratio: float | None = None
+    ratio = None
 
     if (
         value is not None
@@ -464,357 +463,41 @@ def get_parameter_result(
     }
 
 
-# ============================================================
-# ระดับสถานการณ์
-# ============================================================
-
 def calculate_severity(
     parameters: list[dict[str, Any]],
-) -> dict[str, str]:
-    """
-    ระดับ:
-    🟡 เฝ้าระวัง     = ParameterAlram มีรายการ แต่ค่าไม่เกิน 150%
-    🔴 แจ้งเตือน     = ค่าใดค่าหนึ่งตั้งแต่ 150% ขึ้นไป
-    🟣 ฉุกเฉิน       = มีตั้งแต่ 3 พารามิเตอร์ หรือค่าใดค่าหนึ่ง >= 200%
-    """
+) -> str:
+    ratios = [
+        parameter["ratio"]
+        for parameter in parameters
+        if parameter.get("ratio") is not None
+    ]
 
-    maximum_ratio = max(
-        (
-            item["ratio"]
-            for item in parameters
-            if item.get("ratio") is not None
-        ),
-        default=1.0,
-    )
+    maximum_ratio = max(ratios, default=1.0)
 
     if len(parameters) >= 3 or maximum_ratio >= 2:
-        return {
-            "code": "EMERGENCY",
-            "icon": "🟣",
-            "name": "ระดับฉุกเฉิน",
-        }
+        return "EMERGENCY"
 
     if maximum_ratio >= 1.5:
-        return {
-            "code": "ALERT",
-            "icon": "🔴",
-            "name": "ระดับแจ้งเตือน",
-        }
+        return "ALERT"
 
-    return {
-        "code": "WATCH",
-        "icon": "🟡",
-        "name": "ระดับเฝ้าระวัง",
-    }
+    return "WATCH"
 
 
 # ============================================================
-# ArcGIS Feature Layer
+# รวบรวมสถานีที่ต้องแจ้งเตือน
 # ============================================================
 
-def arcgis_query_features(
-    layer_url: str,
-    latitude: float,
-    longitude: float,
-    radius_km: float,
-    out_fields: str = "*",
-) -> list[dict[str, Any]]:
-    if not layer_url:
-        return []
-
-    params = {
-        "f": "json",
-        "where": "1=1",
-        "geometry": f"{longitude},{latitude}",
-        "geometryType": "esriGeometryPoint",
-        "inSR": "4326",
-        "spatialRel": "esriSpatialRelIntersects",
-        "distance": str(radius_km),
-        "units": "esriSRUnit_Kilometer",
-        "outFields": out_fields,
-        "returnGeometry": "true",
-        "outSR": "4326",
-    }
-
-    url = (
-        f"{layer_url}/query?"
-        + urllib.parse.urlencode(params)
-    )
-
-    try:
-        result = request_json(url)
-
-    except Exception as error:
-        print(
-            f"คำเตือน: อ่าน ArcGIS Layer ไม่สำเร็จ: {error}"
-        )
-        return []
-
-    if "error" in result:
-        print(
-            "คำเตือน: ArcGIS Query Error: "
-            f"{result['error']}"
-        )
-        return []
-
-    features = result.get("features", [])
-
-    if not isinstance(features, list):
-        return []
-
-    return features
-
-
-def feature_coordinates(
-    feature: dict[str, Any],
-) -> tuple[float, float] | None:
-    geometry = feature.get("geometry", {})
-
-    x = safe_float(geometry.get("x"))
-    y = safe_float(geometry.get("y"))
-
-    if x is not None and y is not None:
-        return y, x
-
-    # รองรับ Geometry แบบ Point GeoJSON
-    coordinates = geometry.get("coordinates")
-
-    if (
-        isinstance(coordinates, list)
-        and len(coordinates) >= 2
-    ):
-        longitude = safe_float(coordinates[0])
-        latitude = safe_float(coordinates[1])
-
-        if latitude is not None and longitude is not None:
-            return latitude, longitude
-
-    return None
-
-
-def find_nearest_feature(
-    features: list[dict[str, Any]],
-    latitude: float,
-    longitude: float,
-    name_field: str,
-    phone_field: str | None = None,
-) -> dict[str, Any] | None:
-    nearest: dict[str, Any] | None = None
-
-    for feature in features:
-        coordinates = feature_coordinates(feature)
-
-        if not coordinates:
-            continue
-
-        item_latitude, item_longitude = coordinates
-
-        distance = haversine_km(
-            latitude,
-            longitude,
-            item_latitude,
-            item_longitude,
-        )
-
-        attributes = feature.get("attributes", {})
-
-        candidate = {
-            "name": clean_text(
-                attributes.get(name_field),
-                "ไม่ระบุชื่อ",
-            ),
-            "phone": (
-                clean_text(
-                    attributes.get(phone_field),
-                    "-",
-                )
-                if phone_field
-                else "-"
-            ),
-            "distance_km": distance,
-            "latitude": item_latitude,
-            "longitude": item_longitude,
-        }
-
-        if (
-            nearest is None
-            or distance < nearest["distance_km"]
-        ):
-            nearest = candidate
-
-    return nearest
-
-
-def get_support_information(
-    latitude: float,
-    longitude: float,
-) -> dict[str, Any]:
-    hospital_features = arcgis_query_features(
-        HOSPITAL_LAYER_URL,
-        latitude,
-        longitude,
-        SEARCH_RADIUS_KM,
-    )
-
-    fire_features = arcgis_query_features(
-        FIRE_STATION_LAYER_URL,
-        latitude,
-        longitude,
-        SEARCH_RADIUS_KM,
-    )
-
-    community_features = arcgis_query_features(
-        COMMUNITY_LAYER_URL,
-        latitude,
-        longitude,
-        SEARCH_RADIUS_KM,
-    )
-
-    weather_features = arcgis_query_features(
-        WEATHER_LAYER_URL,
-        latitude,
-        longitude,
-        SEARCH_RADIUS_KM,
-    )
-
-    nearest_hospital = find_nearest_feature(
-        hospital_features,
-        latitude,
-        longitude,
-        HOSPITAL_NAME_FIELD,
-        HOSPITAL_PHONE_FIELD,
-    )
-
-    nearest_fire_station = find_nearest_feature(
-        fire_features,
-        latitude,
-        longitude,
-        FIRE_NAME_FIELD,
-        FIRE_PHONE_FIELD,
-    )
-
-    nearest_weather = find_nearest_feature(
-        weather_features,
-        latitude,
-        longitude,
-        WEATHER_NAME_FIELD,
-    )
-
-    weather_data = None
-
-    if nearest_weather:
-        nearest_weather_feature = min(
-            weather_features,
-            key=lambda feature: (
-                haversine_km(
-                    latitude,
-                    longitude,
-                    feature_coordinates(feature)[0],
-                    feature_coordinates(feature)[1],
-                )
-                if feature_coordinates(feature)
-                else float("inf")
-            ),
-        )
-
-        attributes = nearest_weather_feature.get(
-            "attributes",
-            {},
-        )
-
-        weather_data = {
-            **nearest_weather,
-            "wind_direction": safe_float(
-                attributes.get(WEATHER_WD_FIELD)
-            ),
-            "wind_speed": safe_float(
-                attributes.get(WEATHER_WS_FIELD)
-            ),
-        }
-
-    return {
-        "hospital": nearest_hospital,
-        "fire_station": nearest_fire_station,
-        "community_count": len(community_features),
-        "weather": weather_data,
-    }
-
-
-# ============================================================
-# State
-# ============================================================
-
-def load_state() -> dict[str, Any]:
-    if not STATE_FILE.exists():
-        return {
-            "initialized": False,
-            "active_alerts": {},
-        }
-
-    try:
-        with STATE_FILE.open(
-            "r",
-            encoding="utf-8",
-        ) as file:
-            data = json.load(file)
-
-        if not isinstance(data, dict):
-            raise ValueError
-
-        data.setdefault("initialized", False)
-        data.setdefault("active_alerts", {})
-
-        return data
-
-    except (
-        OSError,
-        ValueError,
-        json.JSONDecodeError,
-    ):
-        return {
-            "initialized": False,
-            "active_alerts": {},
-        }
-
-
-def save_state(
-    active_alerts: dict[str, Any],
-) -> None:
-    state = {
-        "initialized": True,
-        "active_alerts": active_alerts,
-    }
-
-    with STATE_FILE.open(
-        "w",
-        encoding="utf-8",
-    ) as file:
-        json.dump(
-            state,
-            file,
-            ensure_ascii=False,
-            indent=2,
-            sort_keys=True,
-        )
-
-        file.write("\n")
-
-
-# ============================================================
-# อ่านสถานีแจ้งเตือน
-# ============================================================
-
-def collect_alarm_stations(
+def collect_alert_stations(
     data: dict[str, Any],
-) -> dict[str, dict[str, Any]]:
-    active_alerts: dict[str, dict[str, Any]] = {}
-
+) -> list[dict[str, Any]]:
     features = data.get("features", [])
 
     if not isinstance(features, list):
         raise RuntimeError(
-            "ไม่พบ features ในข้อมูล e-Monitoring"
+            "ไม่พบรายการ features ในข้อมูล e-Monitoring"
         )
+
+    alerts: list[dict[str, Any]] = []
 
     for feature in features:
         if not isinstance(feature, dict):
@@ -831,6 +514,7 @@ def collect_alarm_stations(
             "",
         )
 
+        # Code 0 เป็นรายการที่ไม่ต้องนำมาแจ้งเตือน
         if code in {"", "0"}:
             continue
 
@@ -850,89 +534,50 @@ def collect_alarm_stations(
             parameter_alarm
         )
 
-        # ส่งเฉพาะสถานีที่ ParameterAlram มีรายการ
+        # ใช้ ParameterAlram เป็นตัว Trigger เท่านั้น
         if not alarm_parameters:
             continue
 
-        coordinates = geometry.get("coordinates")
-
-        if (
-            not isinstance(coordinates, list)
-            or len(coordinates) < 2
-        ):
-            continue
-
-        longitude = safe_float(coordinates[0])
-        latitude = safe_float(coordinates[1])
-
-        if latitude is None or longitude is None:
-            continue
-
-        parameter_results = [
-            get_parameter_result(
+        parameters = [
+            get_parameter_information(
                 properties,
                 parameter,
             )
             for parameter in alarm_parameters
         ]
 
-        severity = calculate_severity(
-            parameter_results
-        )
+        # แสดงเฉพาะพารามิเตอร์ที่ระบุใน ParameterAlram
+        # และมีค่าหรือมีข้อความประกอบ
+        parameters = [
+            parameter
+            for parameter in parameters
+            if (
+                parameter.get("value") is not None
+                or parameter.get("display_text")
+            )
+        ]
 
-        local_wind_direction = safe_float(
-            properties.get("WD")
-        )
+        if not parameters:
+            continue
 
-        local_wind_speed = safe_float(
-            properties.get("WS")
-        )
+        latitude = None
+        longitude = None
 
-        support = get_support_information(
-            latitude,
-            longitude,
-        )
-
-        # ใช้ลมจากสถานี e-Monitoring ก่อน
-        # หากไม่มี ให้ใช้สถานีอุตุนิยมวิทยาใกล้ที่สุด
-        wind_source = "สถานีตรวจวัด e-Monitoring"
-        wind_direction = local_wind_direction
-        wind_speed = local_wind_speed
-        weather_station_name = station_name
+        coordinates = geometry.get("coordinates")
 
         if (
-            wind_direction is None
-            or wind_speed is None
+            isinstance(coordinates, list)
+            and len(coordinates) >= 2
         ):
-            nearest_weather = support.get("weather")
+            longitude = safe_float(coordinates[0])
+            latitude = safe_float(coordinates[1])
 
-            if nearest_weather:
-                wind_direction = nearest_weather.get(
-                    "wind_direction"
-                )
-
-                wind_speed = nearest_weather.get(
-                    "wind_speed"
-                )
-
-                weather_station_name = nearest_weather.get(
-                    "name",
-                    "-",
-                )
-
-                wind_source = (
-                    "สถานีอุตุนิยมวิทยาใกล้ที่สุด"
-                )
-
-        alert = {
+        alerts.append({
             "code": code,
             "station_name": station_name,
             "industry_zone": clean_text(
                 properties.get("IndustryZone"),
                 "ไม่ระบุนิคมอุตสาหกรรม",
-            ),
-            "zone": clean_text(
-                properties.get("Zone")
             ),
             "station_type": clean_text(
                 properties.get("Type")
@@ -941,319 +586,732 @@ def collect_alarm_stations(
                 properties.get("LastUpdate-TH")
                 or properties.get("LastUpdate")
             ),
-            "station_status": clean_text(
+            "status": clean_text(
                 properties.get("Status")
             ),
-            "parameter_alarm_raw": clean_text(
+            "parameter_alarm": clean_text(
                 parameter_alarm
             ),
-            "parameters": parameter_results,
-            "severity": severity,
+            "parameters": parameters,
+            "severity": calculate_severity(parameters),
             "latitude": latitude,
             "longitude": longitude,
-            "wind_direction": wind_direction,
-            "wind_speed": wind_speed,
-            "wind_source": wind_source,
-            "weather_station_name": weather_station_name,
-            "support": support,
-        }
+        })
 
-        active_alerts[code] = alert
+    severity_order = {
+        "EMERGENCY": 0,
+        "ALERT": 1,
+        "WATCH": 2,
+    }
 
-    return active_alerts
+    alerts.sort(
+        key=lambda item: (
+            severity_order.get(
+                item["severity"],
+                9,
+            ),
+            item["industry_zone"],
+            item["station_name"],
+        )
+    )
+
+    return alerts
 
 
 # ============================================================
-# ข้อความ LINE แบบราชการ
+# ส่วนประกอบ LINE Flex Message
 # ============================================================
 
-def parameter_lines(
-    parameters: list[dict[str, Any]],
-) -> list[str]:
-    lines: list[str] = []
+def text_component(
+    text: str,
+    size: str = "sm",
+    color: str = COLOR_TEXT,
+    weight: str = "regular",
+    align: str | None = None,
+    margin: str | None = None,
+) -> dict[str, Any]:
+    component: dict[str, Any] = {
+        "type": "text",
+        "text": str(text),
+        "size": size,
+        "color": color,
+        "weight": weight,
+        "wrap": True,
+    }
 
-    for index, item in enumerate(
-        parameters,
-        start=1,
-    ):
-        display_name = item["display_name"]
-        value = format_number(item.get("value"))
-        standard = format_number(
-            item.get("standard")
-        )
+    if align:
+        component["align"] = align
 
-        unit = item.get("unit") or ""
+    if margin:
+        component["margin"] = margin
 
-        value_text = f"{value} {unit}".strip()
-
-        lines.append(
-            f"{index}. {display_name}"
-        )
-
-        lines.append(
-            f"   ค่าตรวจวัด : {value_text}"
-        )
-
-        if item.get("standard") is not None:
-            standard_text = (
-                f"{standard} {unit}"
-            ).strip()
-
-            lines.append(
-                f"   ค่ามาตรฐาน : {standard_text}"
-            )
-
-            ratio = item.get("ratio")
-
-            if ratio is not None:
-                excess_percent = (
-                    ratio - 1
-                ) * 100
-
-                lines.append(
-                    "   สูงกว่าค่ามาตรฐาน : "
-                    f"{max(excess_percent, 0):,.1f}%"
-                )
-
-        elif item.get("display_text"):
-            lines.append(
-                "   รายละเอียด : "
-                f"{item['display_text']}"
-            )
-
-        lines.append("")
-
-    return lines
+    return component
 
 
-def support_lines(
-    alert: dict[str, Any],
-) -> list[str]:
-    support = alert.get("support", {})
+def severity_style(
+    severity: str,
+) -> dict[str, str]:
+    styles = {
+        "EMERGENCY": {
+            "name": "ระดับเร่งด่วน",
+            "header": COLOR_PRIMARY,
+            "background": "#F8F3FB",
+            "icon": ALERT_RED_ICON_URL,
+        },
+        "ALERT": {
+            "name": "ระดับแจ้งเตือน",
+            "header": COLOR_SECONDARY,
+            "background": "#F8F7FC",
+            "icon": ALERT_RED_ICON_URL,
+        },
+        "WATCH": {
+            "name": "ระดับเฝ้าระวัง",
+            "header": COLOR_TEAL,
+            "background": "#F1FFFC",
+            "icon": WATCH_YELLOW_ICON_URL,
+        },
+    }
 
-    lines = [
-        "ข้อมูลสนับสนุนการเฝ้าระวังและระงับเหตุ",
+    return styles.get(
+        severity,
+        styles["WATCH"],
+    )
+
+
+def build_parameter_box(
+    parameter: dict[str, Any],
+) -> dict[str, Any]:
+    value = format_number(
+        parameter.get("value")
+    )
+
+    standard = format_number(
+        parameter.get("standard")
+    )
+
+    unit = parameter.get("unit") or ""
+
+    measured_text = f"{value} {unit}".strip()
+
+    if parameter.get("standard") is not None:
+        standard_text = (
+            f"ค่ามาตรฐาน {standard} {unit}"
+        ).strip()
+    elif parameter.get("display_text"):
+        standard_text = parameter["display_text"]
+    else:
+        standard_text = "ไม่พบข้อมูลค่ามาตรฐาน"
+
+    contents: list[dict[str, Any]] = [
+        text_component(
+            parameter["display_name"],
+            size="md",
+            color=COLOR_PRIMARY,
+            weight="bold",
+        ),
+        text_component(
+            measured_text,
+            size="xl",
+            color=COLOR_SECONDARY,
+            weight="bold",
+        ),
+        text_component(
+            standard_text,
+            size="xs",
+            color=COLOR_MUTED,
+        ),
     ]
 
-    hospital = support.get("hospital")
+    ratio = parameter.get("ratio")
 
-    if hospital:
-        lines.append(
-            "โรงพยาบาลใกล้ที่สุด : "
-            f"{hospital['name']}"
-        )
+    if ratio is not None and ratio > 1:
+        percent = (ratio - 1) * 100
 
-        lines.append(
-            "ระยะทางโดยประมาณ : "
-            f"{hospital['distance_km']:.2f} กิโลเมตร"
-        )
-
-        if hospital.get("phone") not in {
-            None,
-            "",
-            "-",
-        }:
-            lines.append(
-                f"หมายเลขโทรศัพท์ : {hospital['phone']}"
+        contents.append(
+            text_component(
+                f"สูงกว่าค่ามาตรฐาน {percent:,.1f}%",
+                size="xs",
+                color=COLOR_RED,
+                weight="bold",
             )
-
-    else:
-        lines.append(
-            "โรงพยาบาลใกล้ที่สุด : "
-            "ยังไม่ได้เชื่อมต่อข้อมูล ArcGIS"
         )
 
-    lines.append("")
+    return {
+        "type": "box",
+        "layout": "horizontal",
+        "margin": "md",
+        "paddingAll": "12px",
+        "backgroundColor": COLOR_WHITE,
+        "borderWidth": "1px",
+        "borderColor": COLOR_LIGHT_TEAL,
+        "cornerRadius": "10px",
+        "alignItems": "center",
+        "contents": [
+            {
+                "type": "image",
+                "url": ALERT_RED_ICON_URL,
+                "size": "xxs",
+                "aspectMode": "fit",
+                "flex": 0,
+            },
+            {
+                "type": "box",
+                "layout": "vertical",
+                "margin": "md",
+                "flex": 1,
+                "contents": contents,
+            },
+        ],
+    }
 
-    fire_station = support.get(
-        "fire_station"
+
+# ============================================================
+# การ์ดสรุป
+# ============================================================
+
+def build_summary_bubble(
+    alerts: list[dict[str, Any]],
+) -> dict[str, Any]:
+    station_count = len(alerts)
+
+    parameter_count = sum(
+        len(alert["parameters"])
+        for alert in alerts
     )
 
-    if fire_station:
-        lines.append(
-            "สถานีดับเพลิงใกล้ที่สุด : "
-            f"{fire_station['name']}"
-        )
+    estate_count = len({
+        alert["industry_zone"]
+        for alert in alerts
+    })
 
-        lines.append(
-            "ระยะทางโดยประมาณ : "
-            f"{fire_station['distance_km']:.2f} กิโลเมตร"
-        )
+    emergency_count = sum(
+        alert["severity"] == "EMERGENCY"
+        for alert in alerts
+    )
 
-        if fire_station.get("phone") not in {
-            None,
-            "",
-            "-",
-        }:
-            lines.append(
-                f"หมายเลขโทรศัพท์ : {fire_station['phone']}"
-            )
+    alert_count = sum(
+        alert["severity"] == "ALERT"
+        for alert in alerts
+    )
 
-    else:
-        lines.append(
-            "สถานีดับเพลิงใกล้ที่สุด : "
-            "ยังไม่ได้เชื่อมต่อข้อมูล ArcGIS"
-        )
+    watch_count = sum(
+        alert["severity"] == "WATCH"
+        for alert in alerts
+    )
 
-    lines.append("")
+    return {
+        "type": "bubble",
+        "size": "mega",
+        "header": {
+            "type": "box",
+            "layout": "vertical",
+            "backgroundColor": COLOR_PRIMARY,
+            "paddingAll": "18px",
+            "contents": [
+                {
+                    "type": "box",
+                    "layout": "horizontal",
+                    "alignItems": "center",
+                    "contents": [
+                        {
+                            "type": "image",
+                            "url": IEAT_LOGO_URL,
+                            "size": "sm",
+                            "aspectMode": "fit",
+                            "flex": 0,
+                        },
+                        {
+                            "type": "box",
+                            "layout": "vertical",
+                            "margin": "md",
+                            "flex": 1,
+                            "contents": [
+                                text_component(
+                                    "IEAT LINE ALERT",
+                                    size="xl",
+                                    color=COLOR_WHITE,
+                                    weight="bold",
+                                ),
+                                text_component(
+                                    "ระบบแจ้งเตือน e-Monitoring",
+                                    size="sm",
+                                    color=COLOR_LIGHT_TEAL,
+                                    weight="bold",
+                                ),
+                            ],
+                        },
+                        {
+                            "type": "image",
+                            "url": ALERT_RED_ICON_URL,
+                            "size": "xs",
+                            "aspectMode": "fit",
+                            "flex": 0,
+                        },
+                    ],
+                },
+            ],
+        },
+        "body": {
+            "type": "box",
+            "layout": "vertical",
+            "paddingAll": "18px",
+            "backgroundColor": COLOR_BACKGROUND,
+            "contents": [
+                text_component(
+                    "รายงานสถานการณ์คุณภาพสิ่งแวดล้อม",
+                    size="lg",
+                    color=COLOR_PRIMARY,
+                    weight="bold",
+                ),
+                text_component(
+                    "ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย กนอ.",
+                    size="sm",
+                    color=COLOR_SECONDARY,
+                    margin="sm",
+                ),
+                {
+                    "type": "separator",
+                    "margin": "lg",
+                    "color": COLOR_BORDER,
+                },
+                text_component(
+                    "ตรวจพบค่าพารามิเตอร์ที่ต้องแจ้งเตือน",
+                    size="md",
+                    color=COLOR_RED,
+                    weight="bold",
+                    margin="lg",
+                ),
+                {
+                    "type": "box",
+                    "layout": "horizontal",
+                    "margin": "lg",
+                    "spacing": "sm",
+                    "contents": [
+                        {
+                            "type": "box",
+                            "layout": "vertical",
+                            "flex": 1,
+                            "paddingAll": "10px",
+                            "cornerRadius": "10px",
+                            "backgroundColor": COLOR_SECONDARY,
+                            "contents": [
+                                text_component(
+                                    str(station_count),
+                                    size="xxl",
+                                    color=COLOR_WHITE,
+                                    weight="bold",
+                                    align="center",
+                                ),
+                                text_component(
+                                    "สถานี",
+                                    size="xs",
+                                    color=COLOR_LIGHT_TEAL,
+                                    weight="bold",
+                                    align="center",
+                                ),
+                            ],
+                        },
+                        {
+                            "type": "box",
+                            "layout": "vertical",
+                            "flex": 1,
+                            "paddingAll": "10px",
+                            "cornerRadius": "10px",
+                            "backgroundColor": COLOR_TEAL,
+                            "contents": [
+                                text_component(
+                                    str(parameter_count),
+                                    size="xxl",
+                                    color=COLOR_WHITE,
+                                    weight="bold",
+                                    align="center",
+                                ),
+                                text_component(
+                                    "พารามิเตอร์",
+                                    size="xs",
+                                    color=COLOR_WHITE,
+                                    weight="bold",
+                                    align="center",
+                                ),
+                            ],
+                        },
+                        {
+                            "type": "box",
+                            "layout": "vertical",
+                            "flex": 1,
+                            "paddingAll": "10px",
+                            "cornerRadius": "10px",
+                            "backgroundColor": COLOR_PRIMARY,
+                            "contents": [
+                                text_component(
+                                    str(estate_count),
+                                    size="xxl",
+                                    color=COLOR_WHITE,
+                                    weight="bold",
+                                    align="center",
+                                ),
+                                text_component(
+                                    "นิคมฯ",
+                                    size="xs",
+                                    color=COLOR_LIGHT_TEAL,
+                                    weight="bold",
+                                    align="center",
+                                ),
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "type": "box",
+                    "layout": "vertical",
+                    "margin": "lg",
+                    "paddingAll": "12px",
+                    "cornerRadius": "10px",
+                    "backgroundColor": COLOR_WHITE,
+                    "borderWidth": "1px",
+                    "borderColor": COLOR_BORDER,
+                    "contents": [
+                        text_component(
+                            f"ระดับเร่งด่วน {emergency_count} สถานี",
+                            color=COLOR_RED,
+                            weight="bold",
+                        ),
+                        text_component(
+                            f"ระดับแจ้งเตือน {alert_count} สถานี",
+                            color=COLOR_PRIMARY,
+                            weight="bold",
+                            margin="sm",
+                        ),
+                        text_component(
+                            f"ระดับเฝ้าระวัง {watch_count} สถานี",
+                            color=COLOR_TEAL,
+                            weight="bold",
+                            margin="sm",
+                        ),
+                    ],
+                },
+                text_component(
+                    f"ข้อมูล ณ {thai_report_time()}",
+                    size="xs",
+                    color=COLOR_MUTED,
+                    margin="lg",
+                ),
+                text_component(
+                    "โปรดตรวจสอบรายละเอียดสถานีในหน้าถัดไป",
+                    size="sm",
+                    color=COLOR_TEXT,
+                    weight="bold",
+                    margin="lg",
+                ),
+            ],
+        },
+        "footer": {
+            "type": "box",
+            "layout": "vertical",
+            "paddingAll": "12px",
+            "contents": [
+                {
+                    "type": "button",
+                    "style": "primary",
+                    "height": "sm",
+                    "color": COLOR_PRIMARY,
+                    "action": {
+                        "type": "uri",
+                        "label": "เปิดแผนที่สถานการณ์",
+                        "uri": ARCGIS_DASHBOARD_URL,
+                    },
+                },
+            ],
+        },
+    }
 
-    if COMMUNITY_LAYER_URL:
-        lines.append(
-            "จำนวนชุมชนในรัศมี 5 กิโลเมตร : "
-            f"{support.get('community_count', 0)} แห่ง"
-        )
 
-    else:
-        lines.append(
-            "จำนวนชุมชนในรัศมี 5 กิโลเมตร : "
-            "ยังไม่ได้เชื่อมต่อข้อมูล ArcGIS"
-        )
+# ============================================================
+# การ์ดรายละเอียดสถานี
+# ============================================================
 
-    return lines
-
-
-def build_alert_message(
+def build_station_bubble(
     alert: dict[str, Any],
-) -> str:
-    severity = alert["severity"]
+) -> dict[str, Any]:
+    style = severity_style(alert["severity"])
 
-    wind_direction = alert.get(
-        "wind_direction"
-    )
-
-    wind_speed = alert.get(
-        "wind_speed"
-    )
-
-    lines = [
-        f"{severity['icon']} แจ้งเตือนสถานการณ์คุณภาพสิ่งแวดล้อม",
-        f"สถานะ : {severity['name']}",
-        "",
-        "ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย",
-        "การนิคมอุตสาหกรรมแห่งประเทศไทย",
-        "",
-        "ตรวจพบค่าพารามิเตอร์คุณภาพสิ่งแวดล้อม",
-        "ที่ต้องดำเนินการแจ้งเตือนจากระบบ e-Monitoring",
-        "รายละเอียดดังนี้",
-        "",
-        f"นิคมอุตสาหกรรม : {alert['industry_zone']}",
-        f"สถานีตรวจวัด : {alert['station_name']}",
-        f"ประเภทสถานี : {alert['station_type']}",
-        f"วันและเวลาตรวจวัด : {alert['last_update']}",
-        f"สถานะสถานี : {alert['station_status']}",
-        "",
-        "รายการพารามิเตอร์ที่ต้องแจ้งเตือน",
-        "",
+    body_contents: list[dict[str, Any]] = [
+        text_component(
+            alert["industry_zone"],
+            size="lg",
+            color=COLOR_PRIMARY,
+            weight="bold",
+        ),
+        text_component(
+            alert["station_name"],
+            size="md",
+            color=COLOR_SECONDARY,
+            weight="bold",
+            margin="sm",
+        ),
+        text_component(
+            f"ข้อมูลล่าสุด: {alert['last_update']}",
+            size="xs",
+            color=COLOR_MUTED,
+            margin="sm",
+        ),
+        {
+            "type": "separator",
+            "margin": "lg",
+            "color": COLOR_BORDER,
+        },
+        text_component(
+            "พารามิเตอร์ที่ต้องแจ้งเตือน",
+            size="sm",
+            color=COLOR_PRIMARY,
+            weight="bold",
+            margin="lg",
+        ),
     ]
 
-    lines.extend(
-        parameter_lines(
-            alert["parameters"]
+    for parameter in alert["parameters"]:
+        body_contents.append(
+            build_parameter_box(parameter)
         )
-    )
 
-    lines.extend(
-        [
-            "ข้อมูลทิศทางลมบริเวณใกล้เคียง",
-            (
-                "ทิศทางลม : "
-                f"{wind_direction_th(wind_direction)}"
-                + (
-                    f" ({format_number(wind_direction)} องศา)"
-                    if wind_direction is not None
-                    else ""
-                )
-            ),
-            (
-                "ความเร็วลม : "
-                + (
-                    f"{format_number(wind_speed)} เมตร/วินาที"
-                    if wind_speed is not None
-                    else "-"
-                )
-            ),
-            f"แหล่งข้อมูลลม : {alert['wind_source']}",
-            f"สถานีข้อมูลลม : {alert['weather_station_name']}",
-            "",
-        ]
-    )
+    body_contents.extend([
+        {
+            "type": "separator",
+            "margin": "lg",
+            "color": COLOR_BORDER,
+        },
+        text_component(
+            f"ประเภทสถานี: {alert['station_type']}",
+            size="xs",
+            color=COLOR_MUTED,
+            margin="lg",
+        ),
+        text_component(
+            f"สถานะสถานี: {alert['status']}",
+            size="xs",
+            color=COLOR_MUTED,
+            margin="sm",
+        ),
+    ])
 
-    lines.extend(
-        support_lines(alert)
-    )
+    footer_contents: list[dict[str, Any]] = []
 
-    maps_url = google_maps_link(
-        alert["latitude"],
-        alert["longitude"],
-    )
+    latitude = alert.get("latitude")
+    longitude = alert.get("longitude")
 
-    lines.extend(
-        [
-            "",
-            "โปรดตรวจสอบข้อมูลและพิจารณาดำเนินการ",
-            "ตามแผนเฝ้าระวังและตอบโต้ภาวะฉุกเฉิน",
-            "",
-            f"แผนที่ระบบ GIS : {ARCGIS_DASHBOARD_URL}",
-            f"ตำแหน่งสถานี : {maps_url}",
-            "",
-            "ข้อความนี้จัดส่งโดยระบบแจ้งเตือนอัตโนมัติ",
-            "e-Monitoring กนอ.",
-        ]
-    )
+    if latitude is not None and longitude is not None:
+        footer_contents.append({
+            "type": "button",
+            "style": "primary",
+            "height": "sm",
+            "color": COLOR_PRIMARY,
+            "action": {
+                "type": "uri",
+                "label": "เปิดตำแหน่งสถานี",
+                "uri": google_maps_url(
+                    latitude,
+                    longitude,
+                ),
+            },
+        })
 
-    return "\n".join(lines)
+    footer_contents.append({
+        "type": "button",
+        "style": "secondary",
+        "height": "sm",
+        "action": {
+            "type": "uri",
+            "label": "เปิดระบบ GIS",
+            "uri": ARCGIS_DASHBOARD_URL,
+        },
+    })
 
-
-def build_recovery_message(
-    previous_alert: dict[str, Any],
-) -> str:
-    parameter_names = ", ".join(
-        item.get("display_name", "-")
-        for item in previous_alert.get(
-            "parameters",
-            [],
-        )
-    )
-
-    return "\n".join(
-        [
-            "🟢 แจ้งสถานการณ์กลับเข้าสู่ภาวะปกติ",
-            "",
-            "ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย",
-            "การนิคมอุตสาหกรรมแห่งประเทศไทย",
-            "",
-            "ระบบ e-Monitoring ไม่พบรายการ",
-            "ParameterAlram ของสถานีดังต่อไปนี้แล้ว",
-            "",
-            (
-                "นิคมอุตสาหกรรม : "
-                f"{previous_alert.get('industry_zone', '-')}"
-            ),
-            (
-                "สถานีตรวจวัด : "
-                f"{previous_alert.get('station_name', '-')}"
-            ),
-            (
-                "พารามิเตอร์เดิม : "
-                f"{parameter_names or '-'}"
-            ),
-            "",
-            "โปรดติดตามสถานการณ์อย่างต่อเนื่อง",
-            "",
-            "ข้อความนี้จัดส่งโดยระบบแจ้งเตือนอัตโนมัติ",
-            "e-Monitoring กนอ.",
-        ]
-    )
+    return {
+        "type": "bubble",
+        "size": "mega",
+        "header": {
+            "type": "box",
+            "layout": "horizontal",
+            "alignItems": "center",
+            "backgroundColor": style["header"],
+            "paddingAll": "16px",
+            "contents": [
+                {
+                    "type": "image",
+                    "url": style["icon"],
+                    "size": "xs",
+                    "aspectMode": "fit",
+                    "flex": 0,
+                },
+                {
+                    "type": "box",
+                    "layout": "vertical",
+                    "margin": "md",
+                    "flex": 1,
+                    "contents": [
+                        text_component(
+                            "IEAT LINE ALERT",
+                            size="lg",
+                            color=COLOR_WHITE,
+                            weight="bold",
+                        ),
+                        text_component(
+                            style["name"],
+                            size="sm",
+                            color=COLOR_LIGHT_TEAL,
+                            weight="bold",
+                        ),
+                    ],
+                },
+                {
+                    "type": "image",
+                    "url": IEAT_LOGO_URL,
+                    "size": "xs",
+                    "aspectMode": "fit",
+                    "flex": 0,
+                },
+            ],
+        },
+        "body": {
+            "type": "box",
+            "layout": "vertical",
+            "paddingAll": "16px",
+            "backgroundColor": style["background"],
+            "contents": body_contents,
+        },
+        "footer": {
+            "type": "box",
+            "layout": "vertical",
+            "spacing": "sm",
+            "paddingAll": "12px",
+            "contents": footer_contents,
+        },
+    }
 
 
 # ============================================================
-# LINE Messaging API
+# การ์ดสถานการณ์ปกติ
 # ============================================================
 
-def send_line_message(
-    message: str,
+def build_normal_bubble() -> dict[str, Any]:
+    return {
+        "type": "bubble",
+        "size": "mega",
+        "header": {
+            "type": "box",
+            "layout": "horizontal",
+            "alignItems": "center",
+            "backgroundColor": COLOR_TEAL,
+            "paddingAll": "18px",
+            "contents": [
+                {
+                    "type": "image",
+                    "url": IEAT_LOGO_URL,
+                    "size": "sm",
+                    "aspectMode": "fit",
+                    "flex": 0,
+                },
+                {
+                    "type": "box",
+                    "layout": "vertical",
+                    "margin": "md",
+                    "flex": 1,
+                    "contents": [
+                        text_component(
+                            "IEAT LINE ALERT",
+                            size="xl",
+                            color=COLOR_WHITE,
+                            weight="bold",
+                        ),
+                        text_component(
+                            "ระบบแจ้งเตือน e-Monitoring",
+                            size="sm",
+                            color=COLOR_WHITE,
+                            weight="bold",
+                        ),
+                    ],
+                },
+                {
+                    "type": "image",
+                    "url": NORMAL_GREEN_ICON_URL,
+                    "size": "xs",
+                    "aspectMode": "fit",
+                    "flex": 0,
+                },
+            ],
+        },
+        "body": {
+            "type": "box",
+            "layout": "vertical",
+            "paddingAll": "22px",
+            "backgroundColor": "#F1FFFC",
+            "contents": [
+                text_component(
+                    "สถานการณ์ปกติ",
+                    size="xl",
+                    color=COLOR_TEAL,
+                    weight="bold",
+                    align="center",
+                ),
+                text_component(
+                    "ไม่พบสถานีที่มี ParameterAlram "
+                    "จากระบบ e-Monitoring",
+                    size="md",
+                    color=COLOR_SECONDARY,
+                    weight="bold",
+                    align="center",
+                    margin="lg",
+                ),
+                {
+                    "type": "separator",
+                    "margin": "lg",
+                    "color": COLOR_LIGHT_TEAL,
+                },
+                text_component(
+                    f"ข้อมูล ณ {thai_report_time()}",
+                    size="xs",
+                    color=COLOR_MUTED,
+                    align="center",
+                    margin="lg",
+                ),
+                text_component(
+                    "ระบบจะตรวจสอบอีกครั้งในชั่วโมงถัดไป",
+                    size="sm",
+                    color=COLOR_TEXT,
+                    align="center",
+                    margin="lg",
+                ),
+            ],
+        },
+        "footer": {
+            "type": "box",
+            "layout": "vertical",
+            "paddingAll": "12px",
+            "contents": [
+                {
+                    "type": "button",
+                    "style": "primary",
+                    "height": "sm",
+                    "color": COLOR_TEAL,
+                    "action": {
+                        "type": "uri",
+                        "label": "เปิดระบบ GIS",
+                        "uri": ARCGIS_DASHBOARD_URL,
+                    },
+                },
+            ],
+        },
+    }
+
+
+# ============================================================
+# ส่งข้อความเข้า LINE
+# ============================================================
+
+def send_line_messages(
+    messages: list[dict[str, Any]],
 ) -> None:
-    token = os.getenv(
+    channel_access_token = os.getenv(
         "LINE_CHANNEL_ACCESS_TOKEN"
     )
 
@@ -1261,24 +1319,19 @@ def send_line_message(
         "LINE_TARGET_ID"
     )
 
-    if not token:
+    if not channel_access_token:
         raise RuntimeError(
-            "ไม่พบ LINE_CHANNEL_ACCESS_TOKEN"
+            "ไม่พบ GitHub Secret: LINE_CHANNEL_ACCESS_TOKEN"
         )
 
     if not target_id:
         raise RuntimeError(
-            "ไม่พบ LINE_TARGET_ID"
+            "ไม่พบ GitHub Secret: LINE_TARGET_ID"
         )
 
     payload = {
         "to": target_id,
-        "messages": [
-            {
-                "type": "text",
-                "text": message[:5000],
-            }
-        ],
+        "messages": messages,
     }
 
     request = urllib.request.Request(
@@ -1288,7 +1341,9 @@ def send_line_message(
             ensure_ascii=False,
         ).encode("utf-8"),
         headers={
-            "Authorization": f"Bearer {token}",
+            "Authorization": (
+                f"Bearer {channel_access_token}"
+            ),
             "Content-Type": "application/json",
         },
         method="POST",
@@ -1300,8 +1355,7 @@ def send_line_message(
             timeout=30,
         ) as response:
             print(
-                "ส่งข้อความ LINE สำเร็จ "
-                f"HTTP {response.status}"
+                f"ส่ง LINE สำเร็จ HTTP {response.status}"
             )
 
     except urllib.error.HTTPError as error:
@@ -1311,153 +1365,89 @@ def send_line_message(
         )
 
         raise RuntimeError(
-            "ส่ง LINE ไม่สำเร็จ "
+            f"ส่ง LINE ไม่สำเร็จ "
             f"HTTP {error.code}: {body}"
         ) from error
 
+    except urllib.error.URLError as error:
+        raise RuntimeError(
+            f"เชื่อมต่อ LINE API ไม่สำเร็จ: {error.reason}"
+        ) from error
 
-# ============================================================
-# ตรวจสอบว่าควรส่งซ้ำหรือไม่
-# ============================================================
 
-def alert_signature(
-    alert: dict[str, Any],
-) -> str:
-    signature_data = {
-        "last_update": alert.get(
-            "last_update"
-        ),
-        "severity": alert.get(
-            "severity",
-            {},
-        ).get("code"),
-        "parameters": [
+def send_hourly_report(
+    alerts: list[dict[str, Any]],
+) -> None:
+    if not alerts:
+        send_line_messages([
             {
-                "parameter": item.get(
-                    "parameter"
+                "type": "flex",
+                "altText": (
+                    "รายงาน e-Monitoring: สถานการณ์ปกติ"
                 ),
-                "value": item.get("value"),
-                "standard": item.get(
-                    "standard"
-                ),
+                "contents": build_normal_bubble(),
             }
-            for item in alert.get(
-                "parameters",
-                [],
-            )
-        ],
+        ])
+
+        return
+
+    # LINE Carousel แสดงได้สูงสุด 10 Bubble
+    # Bubble แรกเป็นสรุป และอีก 9 Bubble เป็นรายละเอียดสถานี
+    bubbles = [
+        build_summary_bubble(alerts)
+    ]
+
+    for alert in alerts[:9]:
+        bubbles.append(
+            build_station_bubble(alert)
+        )
+
+    message = {
+        "type": "flex",
+        "altText": (
+            "แจ้งเตือน e-Monitoring: "
+            f"พบ {len(alerts)} สถานีที่ต้องตรวจสอบ"
+        ),
+        "contents": {
+            "type": "carousel",
+            "contents": bubbles,
+        },
     }
 
-    return json.dumps(
-        signature_data,
-        ensure_ascii=False,
-        sort_keys=True,
-    )
+    send_line_messages([message])
 
 
 # ============================================================
-# Main
+# เริ่มทำงาน
 # ============================================================
 
 def main() -> None:
-    print(
-        "กำลังดาวน์โหลดข้อมูล e-Monitoring..."
-    )
+    print("กำลังดาวน์โหลดข้อมูล e-Monitoring...")
 
-    data = request_json(DATA_URL)
+    data = download_json(DATA_URL)
 
-    current_alerts = collect_alarm_stations(
-        data
-    )
-
-    previous_state = load_state()
-
-    previous_alerts = previous_state.get(
-        "active_alerts",
-        {},
-    )
-
-    initialized = bool(
-        previous_state.get("initialized")
-    )
+    alerts = collect_alert_stations(data)
 
     print(
         "จำนวนสถานีที่มี ParameterAlram: "
-        f"{len(current_alerts)}"
+        f"{len(alerts)}"
     )
 
-    sent_alert_count = 0
-    recovered_count = 0
-
-    for code, alert in current_alerts.items():
-        previous_alert = previous_alerts.get(
-            code
+    for alert in alerts:
+        parameter_names = ", ".join(
+            parameter["display_name"]
+            for parameter in alert["parameters"]
         )
 
-        should_send = (
-            previous_alert is None
-            or alert_signature(previous_alert)
-            != alert_signature(alert)
-        )
-
-        if should_send:
-            print(
-                "กำลังส่งแจ้งเตือน: "
-                f"{alert['station_name']}"
-            )
-
-            send_line_message(
-                build_alert_message(alert)
-            )
-
-            sent_alert_count += 1
-
-        else:
-            print(
-                "ไม่ส่งซ้ำ ข้อมูลยังไม่เปลี่ยน: "
-                f"{alert['station_name']}"
-            )
-
-    if initialized:
-        for code, previous_alert in (
-            previous_alerts.items()
-        ):
-            if code in current_alerts:
-                continue
-
-            print(
-                "กำลังส่งสถานะกลับเข้าสู่ภาวะปกติ: "
-                f"{previous_alert.get('station_name', code)}"
-            )
-
-            send_line_message(
-                build_recovery_message(
-                    previous_alert
-                )
-            )
-
-            recovered_count += 1
-
-    save_state(current_alerts)
-
-    print(
-        "ส่งข้อความแจ้งเตือน: "
-        f"{sent_alert_count} สถานี"
-    )
-
-    print(
-        "ส่งข้อความกลับเข้าสู่ภาวะปกติ: "
-        f"{recovered_count} สถานี"
-    )
-
-    if (
-        sent_alert_count == 0
-        and recovered_count == 0
-    ):
         print(
-            "ไม่มีข้อมูลเปลี่ยนแปลง "
-            "จึงไม่ส่งข้อความ LINE"
+            f"- {alert['industry_zone']} | "
+            f"{alert['station_name']} | "
+            f"{parameter_names}"
         )
+
+    send_hourly_report(alerts)
+
+    print("กระบวนการทำงานเสร็จสมบูรณ์")
 
 
 if __name__ == "__main__":
