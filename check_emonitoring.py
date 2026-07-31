@@ -1085,28 +1085,27 @@ def build_parameter_box(
     detail_contents: list[
         dict[str, Any]
     ] = [
-        {
-            "type": "box",
-            "layout": "horizontal",
-            "alignItems": "baseline",
-            "contents": [
-                text_component(
-                    parameter_name,
-                    size="sm",
-                    color=COLOR_PRIMARY,
-                    weight="bold",
-                    flex=2,
-                ),
-                text_component(
-                    measured_text,
-                    size="lg",
-                    color=COLOR_SECONDARY,
-                    weight="bold",
-                    align="end",
-                    flex=3,
-                ),
-            ],
-        },
+       {
+    "type": "box",
+    "layout": "horizontal",
+    "contents": [
+        text_component(
+            parameter_name,
+            size="sm",
+            color=COLOR_PRIMARY,
+            weight="bold",
+            flex=2,
+        ),
+        text_component(
+            measured_text,
+            size="lg",
+            color=COLOR_SECONDARY,
+            weight="bold",
+            align="end",
+            flex=3,
+        ),
+    ],
+},
         text_component(
             standard_text,
             size="xxs",
