@@ -41,56 +41,52 @@ WATCH_YELLOW_ICON_URL = f"{ASSET_BASE_URL}/watch_yellow.png"
 
 
 # ============================================================
-# 3. ธีม IEAT Modern Executive
+# 3. ธีมสี IEAT Corporate Modern
 # ============================================================
 
-COLOR_PRIMARY = "#4B2A86"
-COLOR_PRIMARY_DARK = "#32185F"
-COLOR_PRIMARY_MID = "#6F50A6"
-COLOR_PRIMARY_SOFT = "#F3EFF8"
+# สีหลักจากอัตลักษณ์องค์กร กนอ.
+COLOR_PRIMARY = "#68419A"          # IEAT Purple
+COLOR_PRIMARY_DARK = "#4E2A84"     # ม่วงเข้มสำหรับหัวข้อและปุ่ม
+COLOR_PRIMARY_SOFT = "#F3EEF8"     # พื้นหลังม่วงอ่อน
+COLOR_HIGHLIGHT = "#836EAA"        # ม่วงรอง
+COLOR_SECONDARY = "#342F2E"        # ตัวอักษรเข้ม
 
-COLOR_GOLD = "#E0B343"
-COLOR_GOLD_DARK = "#B98A1F"
-COLOR_GOLD_SOFT = "#FFF8E5"
+COLOR_GREEN = "#00A65A"            # สีเขียวจากตราสัญลักษณ์
+COLOR_GREEN_DARK = "#008A4A"
+COLOR_GREEN_SOFT = "#EDF9F3"
 
-COLOR_GREEN = "#3F9B4A"
-COLOR_GREEN_DARK = "#2E7737"
-COLOR_GREEN_SOFT = "#EFF8F0"
+COLOR_ORANGE = "#F47C20"           # สีส้มจากตราสัญลักษณ์
+COLOR_ORANGE_DARK = "#D96012"
+COLOR_ORANGE_SOFT = "#FFF4EB"
 
-COLOR_ORANGE = "#F59E0B"
-COLOR_ORANGE_DARK = "#C97700"
-COLOR_ORANGE_SOFT = "#FFF7E8"
+COLOR_DANGER = "#CD0A20"
+COLOR_DANGER_DARK = "#A80719"
+COLOR_DANGER_SOFT = "#FFF0F2"
+COLOR_WARNING = "#D98B00"
+COLOR_WARNING_SOFT = "#FFF8E7"
 
-COLOR_DANGER = "#D92D34"
-COLOR_DANGER_DARK = "#A91F25"
-COLOR_DANGER_SOFT = "#FFF0F1"
-
-COLOR_BACKGROUND = "#F4F2F8"
+COLOR_BACKGROUND = "#F7F5FA"
 COLOR_SURFACE = "#FFFFFF"
 COLOR_WHITE = "#FFFFFF"
-COLOR_TEXT = "#251B3D"
-COLOR_MUTED = "#6F687C"
-COLOR_BORDER = "#E4DFEC"
-COLOR_DIVIDER = "#EEEAF4"
+COLOR_TEXT = "#342F2E"
+COLOR_MUTED = "#716C6B"
+COLOR_DISABLED = "#BBB8B8"
+COLOR_BORDER = "#E4E0EE"
+COLOR_DIVIDER = "#EEEAF3"
 
 # รองรับชื่อตัวแปรเดิม
-COLOR_SECONDARY = COLOR_TEXT
-COLOR_HIGHLIGHT = COLOR_PRIMARY_MID
 COLOR_SUCCESS = COLOR_GREEN
-COLOR_ACCENT = COLOR_GOLD
+COLOR_ACCENT = COLOR_ORANGE
 COLOR_RED = COLOR_DANGER
 COLOR_RED_DARK = COLOR_DANGER_DARK
 COLOR_RED_BACKGROUND = COLOR_DANGER_SOFT
 COLOR_GREEN_BACKGROUND = COLOR_GREEN_SOFT
 COLOR_PURPLE_BACKGROUND = COLOR_PRIMARY_SOFT
-COLOR_PURPLE_LIGHT = "#E6DFF0"
-COLOR_YELLOW_BACKGROUND = COLOR_ORANGE_SOFT
+COLOR_PURPLE_LIGHT = "#E4E0EE"
+COLOR_YELLOW_BACKGROUND = COLOR_WARNING_SOFT
 COLOR_BLUE_BACKGROUND = COLOR_PRIMARY_SOFT
 COLOR_TEAL = COLOR_GREEN
 COLOR_LIGHT_TEAL = COLOR_GREEN_SOFT
-COLOR_WARNING = COLOR_ORANGE
-COLOR_WARNING_SOFT = COLOR_ORANGE_SOFT
-COLOR_DISABLED = "#B8B2C2"
 
 THAILAND_TIMEZONE = timezone(timedelta(hours=7))
 
@@ -514,23 +510,29 @@ def severity_style(severity: str) -> dict[str, str]:
         "EMERGENCY": {
             "name": "ระดับเร่งด่วน",
             "short_name": "เร่งด่วน",
+            "header": COLOR_PRIMARY_DARK,
+            "background": COLOR_DANGER_SOFT,
             "accent": COLOR_DANGER,
             "soft": COLOR_DANGER_SOFT,
             "icon": ALERT_RED_ICON_URL,
         },
         "ALERT": {
-            "name": "ระดับแจ้งเตือน",
-            "short_name": "แจ้งเตือน",
+            "name": "ระดับเฝ้าระวังสูง",
+            "short_name": "เฝ้าระวังสูง",
+            "header": COLOR_PRIMARY_DARK,
+            "background": COLOR_WARNING_SOFT,
             "accent": COLOR_ORANGE,
             "soft": COLOR_ORANGE_SOFT,
             "icon": WATCH_YELLOW_ICON_URL,
         },
         "WATCH": {
-            "name": "ระดับเฝ้าระวัง",
-            "short_name": "เฝ้าระวัง",
-            "accent": COLOR_GREEN,
-            "soft": COLOR_GREEN_SOFT,
-            "icon": NORMAL_GREEN_ICON_URL,
+            "name": "ระดับติดตามสถานการณ์",
+            "short_name": "ติดตาม",
+            "header": COLOR_PRIMARY_DARK,
+            "background": COLOR_PRIMARY_SOFT,
+            "accent": COLOR_HIGHLIGHT,
+            "soft": COLOR_PRIMARY_SOFT,
+            "icon": WATCH_YELLOW_ICON_URL,
         },
     }
 
@@ -686,224 +688,70 @@ def text_component(
     return component
 
 
-def metric_card(
-    icon_text: str,
+def summary_metric_box(
     value: int,
     label: str,
-    sublabel: str,
-    color: str,
-    soft_color: str,
+    background_color: str,
+    value_color: str = COLOR_PRIMARY_DARK,
+    label_color: str = COLOR_MUTED,
 ) -> dict[str, Any]:
     return {
         "type": "box",
         "layout": "vertical",
         "flex": 1,
-        "paddingAll": "9px",
-        "cornerRadius": "12px",
-        "backgroundColor": COLOR_SURFACE,
-        "borderWidth": "1px",
-        "borderColor": COLOR_BORDER,
+        "paddingAll": "10px",
+        "cornerRadius": "14px",
+        "backgroundColor": background_color,
         "contents": [
-            text_component(
-                icon_text,
-                size="md",
-                align="center",
-            ),
             text_component(
                 str(value),
                 size="xl",
-                color=color,
+                color=value_color,
                 weight="bold",
                 align="center",
-                margin="xs",
             ),
             text_component(
                 label,
                 size="xxs",
-                color=COLOR_TEXT,
+                color=label_color,
                 weight="bold",
                 align="center",
                 margin="xs",
-                max_lines=1,
-            ),
-            text_component(
-                sublabel,
-                size="xxs",
-                color=COLOR_MUTED,
-                align="center",
-                margin="xs",
-                max_lines=1,
             ),
         ],
     }
 
 
-def status_card(
+def severity_metric_box(
     value: int,
-    title: str,
-    icon_url: str,
+    label: str,
     color: str,
-    soft_color: str,
-) -> dict[str, Any]:
-    return {
-        "type": "box",
-        "layout": "horizontal",
-        "flex": 1,
-        "paddingAll": "9px",
-        "cornerRadius": "12px",
-        "backgroundColor": soft_color,
-        "borderWidth": "1px",
-        "borderColor": color,
-        "contents": [
-            {
-                "type": "image",
-                "url": icon_url,
-                "size": "xxs",
-                "aspectMode": "fit",
-                "flex": 0,
-            },
-            {
-                "type": "box",
-                "layout": "vertical",
-                "margin": "sm",
-                "flex": 1,
-                "contents": [
-                    text_component(
-                        title,
-                        size="xxs",
-                        color=color,
-                        weight="bold",
-                        max_lines=1,
-                    ),
-                    {
-                        "type": "box",
-                        "layout": "horizontal",
-                        "alignItems": "center",
-                        "margin": "xs",
-                        "contents": [
-                            text_component(
-                                str(value),
-                                size="lg",
-                                color=color,
-                                weight="bold",
-                                flex=0,
-                            ),
-                            text_component(
-                                "สถานี",
-                                size="xxs",
-                                color=COLOR_MUTED,
-                                margin="xs",
-                                flex=1,
-                            ),
-                        ],
-                    },
-                ],
-            },
-        ],
-    }
-
-
-def build_brand_header(
-    subtitle: str,
-    level_name: str,
-    level_color: str,
-    icon_url: str,
 ) -> dict[str, Any]:
     return {
         "type": "box",
         "layout": "vertical",
-        "backgroundColor": COLOR_PRIMARY_DARK,
-        "paddingAll": "14px",
+        "flex": 1,
         "contents": [
-            {
-                "type": "box",
-                "layout": "horizontal",
-                "alignItems": "center",
-                "contents": [
-                    {
-                        "type": "box",
-                        "layout": "vertical",
-                        "width": "64px",
-                        "height": "64px",
-                        "paddingAll": "6px",
-                        "backgroundColor": COLOR_WHITE,
-                        "cornerRadius": "10px",
-                        "flex": 0,
-                        "contents": [
-                            {
-                                "type": "image",
-                                "url": IEAT_LOGO_URL,
-                                "size": "full",
-                                "aspectMode": "fit",
-                            }
-                        ],
-                    },
-                    {
-                        "type": "box",
-                        "layout": "vertical",
-                        "margin": "md",
-                        "flex": 1,
-                        "contents": [
-                            text_component(
-                                "IEAT LINE ALERT",
-                                size="lg",
-                                color=COLOR_WHITE,
-                                weight="bold",
-                                max_lines=1,
-                            ),
-                            text_component(
-                                subtitle,
-                                size="xxs",
-                                color="#E9DFF7",
-                                margin="xs",
-                                max_lines=1,
-                            ),
-                            {
-                                "type": "box",
-                                "layout": "horizontal",
-                                "alignItems": "center",
-                                "margin": "sm",
-                                "paddingTop": "5px",
-                                "paddingBottom": "5px",
-                                "paddingStart": "8px",
-                                "paddingEnd": "8px",
-                                "cornerRadius": "10px",
-                                "backgroundColor": "#FFF4C9",
-                                "contents": [
-                                    {
-                                        "type": "image",
-                                        "url": icon_url,
-                                        "size": "xxs",
-                                        "aspectMode": "fit",
-                                        "flex": 0,
-                                    },
-                                    text_component(
-                                        level_name,
-                                        size="xxs",
-                                        color=level_color,
-                                        weight="bold",
-                                        margin="sm",
-                                        flex=1,
-                                        max_lines=1,
-                                    ),
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-            {
-                "type": "box",
-                "layout": "vertical",
-                "height": "3px",
-                "margin": "md",
-                "cornerRadius": "2px",
-                "backgroundColor": COLOR_GOLD,
-                "contents": [],
-            },
+            text_component(
+                str(value),
+                size="md",
+                color=color,
+                weight="bold",
+                align="center",
+            ),
+            text_component(
+                label,
+                size="xxs",
+                color=COLOR_MUTED,
+                align="center",
+            ),
         ],
     }
 
+
+# ============================================================
+# 11. กล่องพารามิเตอร์
+# ============================================================
 
 def build_parameter_box(
     parameter: dict[str, Any],
@@ -911,10 +759,11 @@ def build_parameter_box(
     value = format_number(parameter.get("value"))
     standard = format_number(parameter.get("standard"))
     unit = parameter.get("unit") or ""
+
     measured_text = f"{value} {unit}".strip()
 
     if parameter.get("standard") is not None:
-        standard_text = f"มาตรฐาน {standard} {unit}".strip()
+        standard_text = f"ค่ามาตรฐาน {standard} {unit}".strip()
     elif parameter.get("display_text"):
         standard_text = parameter["display_text"]
     else:
@@ -924,77 +773,85 @@ def build_parameter_box(
         "display_name",
         parameter.get("parameter", "-"),
     )
-    ratio = parameter.get("ratio")
-    accent_color = COLOR_DANGER if ratio is not None and ratio > 1 else COLOR_PRIMARY
 
-    contents: list[dict[str, Any]] = [
+    ratio = parameter.get("ratio")
+    accent_color = COLOR_DANGER if ratio is not None and ratio > 1 else COLOR_ORANGE
+
+    detail_contents: list[dict[str, Any]] = [
         {
             "type": "box",
             "layout": "horizontal",
-            "alignItems": "center",
             "contents": [
-                {
-                    "type": "image",
-                    "url": ALERT_RED_ICON_URL,
-                    "size": "xxs",
-                    "aspectMode": "fit",
-                    "flex": 0,
-                },
                 text_component(
                     parameter_name,
-                    size="md",
-                    color=COLOR_PRIMARY_DARK,
+                    size="sm",
+                    color=COLOR_SECONDARY,
                     weight="bold",
-                    margin="md",
                     flex=2,
-                    max_lines=1,
                 ),
                 text_component(
                     measured_text,
                     size="lg",
-                    color=COLOR_PRIMARY_DARK,
+                    color=accent_color,
                     weight="bold",
                     align="end",
                     flex=3,
-                    max_lines=1,
                 ),
             ],
         },
         text_component(
             standard_text,
-            size="xs",
+            size="xxs",
             color=COLOR_MUTED,
-            margin="sm",
-            align="center",
+            margin="xs",
             max_lines=2,
         ),
     ]
 
     if ratio is not None and ratio > 1:
-        contents.append(
+        excess_percent = (ratio - 1) * 100
+        detail_contents.append(
             text_component(
-                f"สูงกว่ามาตรฐาน {(ratio - 1) * 100:,.1f}%",
+                f"สูงกว่ามาตรฐาน {excess_percent:,.1f}%",
                 size="xxs",
                 color=COLOR_DANGER,
                 weight="bold",
                 margin="xs",
-                align="end",
-                max_lines=1,
             )
         )
 
     return {
         "type": "box",
-        "layout": "vertical",
+        "layout": "horizontal",
         "margin": "sm",
-        "paddingAll": "12px",
+        "paddingAll": "10px",
         "backgroundColor": COLOR_SURFACE,
         "borderWidth": "1px",
         "borderColor": COLOR_BORDER,
         "cornerRadius": "14px",
-        "contents": contents,
+        "contents": [
+            {
+                "type": "box",
+                "layout": "vertical",
+                "width": "4px",
+                "backgroundColor": accent_color,
+                "cornerRadius": "4px",
+                "contents": [],
+            },
+            {
+                "type": "box",
+                "layout": "vertical",
+                "margin": "md",
+                "flex": 1,
+                "contents": detail_contents,
+            },
+        ],
     }
 
+
+# ============================================================
+# 12. การ์ดสรุปแบบกระชับ
+# ============================================================
 
 def build_summary_bubble(
     alerts: list[dict[str, Any]],
@@ -1006,141 +863,115 @@ def build_summary_bubble(
     alert_count = sum(alert["severity"] == "ALERT" for alert in alerts)
     watch_count = sum(alert["severity"] == "WATCH" for alert in alerts)
 
-    overall = "ระดับเฝ้าระวัง"
-    overall_color = COLOR_GREEN
-    overall_icon = NORMAL_GREEN_ICON_URL
-
-    if emergency_count > 0:
-        overall = "ระดับเร่งด่วน"
-        overall_color = COLOR_DANGER
-        overall_icon = ALERT_RED_ICON_URL
-    elif alert_count > 0:
-        overall = "ระดับแจ้งเตือน"
-        overall_color = COLOR_ORANGE
-        overall_icon = WATCH_YELLOW_ICON_URL
-
     return {
         "type": "bubble",
         "size": "mega",
-        "header": build_brand_header(
-            "ระบบแจ้งเตือน e-Monitoring",
-            overall,
-            overall_color,
-            overall_icon,
-        ),
-        "body": {
+        "header": {
             "type": "box",
             "layout": "vertical",
-            "paddingAll": "12px",
-            "backgroundColor": COLOR_BACKGROUND,
+            "backgroundColor": COLOR_WHITE,
+            "paddingAll": "14px",
             "contents": [
                 {
                     "type": "box",
                     "layout": "horizontal",
-                    "alignItems": "center",
                     "contents": [
-                        text_component(
-                            "สรุปสถานการณ์ล่าสุด",
-                            size="md",
-                            color=COLOR_PRIMARY_DARK,
-                            weight="bold",
-                            flex=1,
-                            max_lines=1,
-                        ),
-                        text_component(
-                            thai_report_time(),
-                            size="xxs",
-                            color=COLOR_MUTED,
-                            align="end",
-                            flex=1,
-                            max_lines=1,
-                        ),
+                        {
+                            "type": "image",
+                            "url": IEAT_LOGO_URL,
+                            "size": "sm",
+                            "aspectMode": "fit",
+                            "flex": 0,
+                        },
+                        {
+                            "type": "box",
+                            "layout": "vertical",
+                            "margin": "md",
+                            "flex": 1,
+                            "contents": [
+                                text_component(
+                                    "IEAT e-Monitoring",
+                                    size="lg",
+                                    color=COLOR_PRIMARY_DARK,
+                                    weight="bold",
+                                ),
+                                text_component(
+                                    "ระบบแจ้งเตือนคุณภาพสิ่งแวดล้อม",
+                                    size="xxs",
+                                    color=COLOR_MUTED,
+                                    margin="xs",
+                                ),
+                            ],
+                        },
                     ],
                 },
+                {
+                    "type": "box",
+                    "layout": "horizontal",
+                    "height": "4px",
+                    "margin": "md",
+                    "cornerRadius": "4px",
+                    "contents": [
+                        {"type": "box", "layout": "vertical", "flex": 5, "backgroundColor": COLOR_PRIMARY, "contents": []},
+                        {"type": "box", "layout": "vertical", "flex": 1, "backgroundColor": COLOR_GREEN, "contents": []},
+                        {"type": "box", "layout": "vertical", "flex": 1, "backgroundColor": COLOR_ORANGE, "contents": []},
+                    ],
+                },
+            ],
+        },
+        "body": {
+            "type": "box",
+            "layout": "vertical",
+            "paddingAll": "14px",
+            "backgroundColor": COLOR_BACKGROUND,
+            "contents": [
+                text_component(
+                    "สรุปสถานการณ์ล่าสุด",
+                    size="md",
+                    color=COLOR_SECONDARY,
+                    weight="bold",
+                ),
+                text_component(
+                    "ตรวจพบค่าพารามิเตอร์ที่ต้องติดตาม",
+                    size="xs",
+                    color=COLOR_MUTED,
+                    margin="xs",
+                ),
                 {
                     "type": "box",
                     "layout": "horizontal",
                     "margin": "md",
                     "spacing": "sm",
                     "contents": [
-                        metric_card("📡", station_count, "สถานี", "แจ้งเตือน", COLOR_PRIMARY, COLOR_PRIMARY_SOFT),
-                        metric_card("🧪", parameter_count, "พารามิเตอร์", "ตรวจวัด", COLOR_GREEN_DARK, COLOR_GREEN_SOFT),
-                        metric_card("🏭", estate_count, "นิคมฯ", "ที่เกี่ยวข้อง", COLOR_ORANGE_DARK, COLOR_ORANGE_SOFT),
+                        summary_metric_box(station_count, "สถานี", COLOR_PRIMARY_SOFT),
+                        summary_metric_box(parameter_count, "พารามิเตอร์", COLOR_GREEN_SOFT, COLOR_GREEN_DARK),
+                        summary_metric_box(estate_count, "นิคมฯ", COLOR_ORANGE_SOFT, COLOR_ORANGE_DARK),
                     ],
                 },
                 {
                     "type": "box",
-                    "layout": "vertical",
-                    "margin": "md",
+                    "layout": "horizontal",
+                    "margin": "sm",
                     "paddingAll": "10px",
                     "cornerRadius": "14px",
                     "backgroundColor": COLOR_SURFACE,
                     "borderWidth": "1px",
                     "borderColor": COLOR_BORDER,
                     "contents": [
-                        text_component(
-                            "สรุประดับสถานการณ์",
-                            size="sm",
-                            color=COLOR_PRIMARY_DARK,
-                            weight="bold",
-                            max_lines=1,
-                        ),
-                        {
-                            "type": "box",
-                            "layout": "horizontal",
-                            "margin": "sm",
-                            "spacing": "sm",
-                            "contents": [
-                                status_card(
-                                    emergency_count,
-                                    "ระดับเร่งด่วน",
-                                    ALERT_RED_ICON_URL,
-                                    COLOR_DANGER,
-                                    COLOR_DANGER_SOFT,
-                                ),
-                                status_card(
-                                    alert_count,
-                                    "ระดับแจ้งเตือน",
-                                    WATCH_YELLOW_ICON_URL,
-                                    COLOR_ORANGE,
-                                    COLOR_ORANGE_SOFT,
-                                ),
-                            ],
-                        },
-                        {
-                            "type": "box",
-                            "layout": "horizontal",
-                            "margin": "sm",
-                            "contents": [
-                                status_card(
-                                    watch_count,
-                                    "ระดับเฝ้าระวัง",
-                                    NORMAL_GREEN_ICON_URL,
-                                    COLOR_GREEN,
-                                    COLOR_GREEN_SOFT,
-                                ),
-                            ],
-                        },
+                        severity_metric_box(emergency_count, "เร่งด่วน", COLOR_DANGER),
+                        {"type": "separator", "color": COLOR_DIVIDER},
+                        severity_metric_box(alert_count, "เฝ้าระวังสูง", COLOR_ORANGE),
+                        {"type": "separator", "color": COLOR_DIVIDER},
+                        severity_metric_box(watch_count, "ติดตาม", COLOR_HIGHLIGHT),
                     ],
                 },
-                {
-                    "type": "box",
-                    "layout": "vertical",
-                    "margin": "md",
-                    "paddingAll": "10px",
-                    "cornerRadius": "12px",
-                    "backgroundColor": COLOR_PRIMARY_SOFT,
-                    "contents": [
-                        text_component(
-                            f"พบสถานีที่ต้องติดตามทั้งหมด {station_count} สถานี",
-                            size="xs",
-                            color=COLOR_PRIMARY_DARK,
-                            weight="bold",
-                            align="center",
-                            max_lines=1,
-                        ),
-                    ],
-                },
+                text_component(
+                    f"อัปเดต {thai_report_time()}",
+                    size="xxs",
+                    color=COLOR_MUTED,
+                    margin="sm",
+                    align="end",
+                ),
             ],
         },
         "footer": {
@@ -1165,133 +996,164 @@ def build_summary_bubble(
     }
 
 
+# ============================================================
+# 13. การ์ดรายละเอียดสถานี
+# ============================================================
+
 def build_station_bubble(
     alert: dict[str, Any],
 ) -> dict[str, Any]:
     style = severity_style(alert["severity"])
 
     body_contents: list[dict[str, Any]] = [
-        text_component(
-            alert["industry_zone"],
-            size="lg",
-            color=COLOR_PRIMARY_DARK,
-            weight="bold",
-            max_lines=2,
-        ),
-        text_component(
-            alert["station_name"],
-            size="md",
-            color=COLOR_PRIMARY,
-            weight="bold",
-            margin="sm",
-            max_lines=2,
-        ),
+        {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+                {
+                    "type": "box",
+                    "layout": "vertical",
+                    "flex": 1,
+                    "contents": [
+                        text_component(
+                            alert["industry_zone"],
+                            size="md",
+                            color=COLOR_SECONDARY,
+                            weight="bold",
+                            max_lines=2,
+                        ),
+                        text_component(
+                            alert["station_name"],
+                            size="sm",
+                            color=COLOR_PRIMARY,
+                            weight="bold",
+                            margin="xs",
+                            max_lines=2,
+                        ),
+                    ],
+                },
+                {
+                    "type": "box",
+                    "layout": "vertical",
+                    "paddingAll": "6px",
+                    "cornerRadius": "10px",
+                    "backgroundColor": style["soft"],
+                    "contents": [
+                        text_component(
+                            style["short_name"],
+                            size="xxs",
+                            color=style["accent"],
+                            weight="bold",
+                            align="center",
+                        ),
+                    ],
+                },
+            ],
+        },
         text_component(
             f"ข้อมูลล่าสุด: {alert['last_update']}",
-            size="xs",
+            size="xxs",
             color=COLOR_MUTED,
             margin="sm",
-            max_lines=1,
         ),
-        {
-            "type": "separator",
-            "margin": "sm",
-            "color": COLOR_DIVIDER,
-        },
+        {"type": "separator", "margin": "sm", "color": COLOR_DIVIDER},
     ]
 
     for parameter in alert["parameters"]:
         body_contents.append(build_parameter_box(parameter))
 
-    body_contents.extend(
-        [
-            {
-                "type": "separator",
-                "margin": "md",
-                "color": COLOR_DIVIDER,
-            },
-            {
-                "type": "box",
-                "layout": "horizontal",
-                "margin": "sm",
-                "contents": [
-                    text_component("ประเภท", size="xs", color=COLOR_MUTED, flex=2),
-                    text_component(
-                        alert["station_type"],
-                        size="xs",
-                        color=COLOR_TEXT,
-                        align="end",
-                        flex=3,
-                        max_lines=1,
-                    ),
-                ],
-            },
-            {
-                "type": "box",
-                "layout": "horizontal",
-                "margin": "sm",
-                "contents": [
-                    text_component("สถานะ", size="xs", color=COLOR_MUTED, flex=2),
-                    text_component(
-                        alert["status"],
-                        size="xs",
-                        color=COLOR_GREEN,
-                        weight="bold",
-                        align="end",
-                        flex=3,
-                        max_lines=1,
-                    ),
-                ],
-            },
-        ]
-    )
+    body_contents.extend([
+        {"type": "separator", "margin": "md", "color": COLOR_DIVIDER},
+        {
+            "type": "box",
+            "layout": "horizontal",
+            "margin": "sm",
+            "contents": [
+                text_component("ประเภทสถานี", size="xxs", color=COLOR_MUTED, flex=2),
+                text_component(alert["station_type"], size="xxs", color=COLOR_TEXT, align="end", flex=4, max_lines=1),
+            ],
+        },
+        {
+            "type": "box",
+            "layout": "horizontal",
+            "margin": "xs",
+            "contents": [
+                text_component("สถานะข้อมูล", size="xxs", color=COLOR_MUTED, flex=2),
+                text_component(alert["status"], size="xxs", color=style["accent"], weight="bold", align="end", flex=4, max_lines=1),
+            ],
+        },
+    ])
 
     footer_contents: list[dict[str, Any]] = []
     latitude = alert.get("latitude")
     longitude = alert.get("longitude")
 
     if latitude is not None and longitude is not None:
-        footer_contents.append(
-            {
-                "type": "button",
-                "style": "primary",
-                "height": "sm",
-                "color": COLOR_PRIMARY_DARK,
-                "action": {
-                    "type": "uri",
-                    "label": "เปิดตำแหน่งสถานี",
-                    "uri": google_maps_url(latitude, longitude),
-                },
-            }
-        )
-
-    footer_contents.append(
-        {
+        footer_contents.append({
             "type": "button",
-            "style": "secondary",
+            "style": "primary",
             "height": "sm",
+            "color": COLOR_PRIMARY_DARK,
             "action": {
                 "type": "uri",
-                "label": "เปิดระบบ GIS",
-                "uri": ARCGIS_DASHBOARD_URL,
+                "label": "เปิดตำแหน่งสถานี",
+                "uri": google_maps_url(latitude, longitude),
             },
-        }
-    )
+        })
+
+    footer_contents.append({
+        "type": "button",
+        "style": "secondary",
+        "height": "sm",
+        "action": {
+            "type": "uri",
+            "label": "เปิดระบบ GIS",
+            "uri": ARCGIS_DASHBOARD_URL,
+        },
+    })
 
     return {
         "type": "bubble",
         "size": "mega",
-        "header": build_brand_header(
-            "ระบบแจ้งเตือน e-Monitoring",
-            style["name"],
-            style["accent"],
-            style["icon"],
-        ),
+        "header": {
+            "type": "box",
+            "layout": "vertical",
+            "backgroundColor": COLOR_WHITE,
+            "paddingAll": "12px",
+            "contents": [
+                {
+                    "type": "box",
+                    "layout": "horizontal",
+                    "contents": [
+                        {"type": "image", "url": IEAT_LOGO_URL, "size": "xs", "aspectMode": "fit", "flex": 0},
+                        {
+                            "type": "box",
+                            "layout": "vertical",
+                            "margin": "md",
+                            "flex": 1,
+                            "contents": [
+                                text_component("IEAT e-Monitoring Alert", size="md", color=COLOR_PRIMARY_DARK, weight="bold"),
+                                text_component(style["name"], size="xxs", color=style["accent"], weight="bold", margin="xs"),
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "type": "box",
+                    "layout": "vertical",
+                    "height": "4px",
+                    "margin": "md",
+                    "cornerRadius": "4px",
+                    "backgroundColor": style["accent"],
+                    "contents": [],
+                },
+            ],
+        },
         "body": {
             "type": "box",
             "layout": "vertical",
             "paddingAll": "14px",
-            "backgroundColor": "#F7FAF4",
+            "backgroundColor": COLOR_BACKGROUND,
             "contents": body_contents,
         },
         "footer": {
@@ -1305,20 +1167,55 @@ def build_station_bubble(
     }
 
 
+# ============================================================
+# 14. การ์ดสถานการณ์ปกติ
+# ============================================================
+
 def build_normal_bubble() -> dict[str, Any]:
     return {
         "type": "bubble",
         "size": "mega",
-        "header": build_brand_header(
-            "ระบบแจ้งเตือน e-Monitoring",
-            "ระดับปกติ",
-            COLOR_GREEN,
-            NORMAL_GREEN_ICON_URL,
-        ),
+        "header": {
+            "type": "box",
+            "layout": "vertical",
+            "backgroundColor": COLOR_WHITE,
+            "paddingAll": "14px",
+            "contents": [
+                {
+                    "type": "box",
+                    "layout": "horizontal",
+                    "contents": [
+                        {"type": "image", "url": IEAT_LOGO_URL, "size": "sm", "aspectMode": "fit", "flex": 0},
+                        {
+                            "type": "box",
+                            "layout": "vertical",
+                            "margin": "md",
+                            "flex": 1,
+                            "contents": [
+                                text_component("IEAT e-Monitoring", size="lg", color=COLOR_PRIMARY_DARK, weight="bold"),
+                                text_component("ระบบแจ้งเตือนคุณภาพสิ่งแวดล้อม", size="xxs", color=COLOR_MUTED, margin="xs"),
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "type": "box",
+                    "layout": "horizontal",
+                    "height": "4px",
+                    "margin": "md",
+                    "cornerRadius": "4px",
+                    "contents": [
+                        {"type": "box", "layout": "vertical", "flex": 5, "backgroundColor": COLOR_PRIMARY, "contents": []},
+                        {"type": "box", "layout": "vertical", "flex": 1, "backgroundColor": COLOR_GREEN, "contents": []},
+                        {"type": "box", "layout": "vertical", "flex": 1, "backgroundColor": COLOR_ORANGE, "contents": []},
+                    ],
+                },
+            ],
+        },
         "body": {
             "type": "box",
             "layout": "vertical",
-            "paddingAll": "22px",
+            "paddingAll": "20px",
             "backgroundColor": COLOR_GREEN_SOFT,
             "contents": [
                 {
@@ -1327,29 +1224,9 @@ def build_normal_bubble() -> dict[str, Any]:
                     "size": "sm",
                     "aspectMode": "fit",
                 },
-                text_component(
-                    "สถานการณ์ปกติ",
-                    size="xl",
-                    color=COLOR_GREEN_DARK,
-                    weight="bold",
-                    align="center",
-                    margin="md",
-                ),
-                text_component(
-                    "ไม่พบสถานีที่มีค่าพารามิเตอร์ต้องแจ้งเตือน",
-                    size="sm",
-                    color=COLOR_TEXT,
-                    align="center",
-                    margin="sm",
-                    max_lines=2,
-                ),
-                text_component(
-                    f"อัปเดต {thai_report_time()}",
-                    size="xxs",
-                    color=COLOR_MUTED,
-                    align="center",
-                    margin="md",
-                ),
+                text_component("สถานการณ์ปกติ", size="xl", color=COLOR_GREEN_DARK, weight="bold", align="center", margin="md"),
+                text_component("ไม่พบสถานีที่มีค่าพารามิเตอร์ต้องแจ้งเตือน", size="sm", color=COLOR_SECONDARY, align="center", margin="sm"),
+                text_component(f"อัปเดต {thai_report_time()}", size="xxs", color=COLOR_MUTED, align="center", margin="md"),
             ],
         },
         "footer": {
@@ -1363,11 +1240,7 @@ def build_normal_bubble() -> dict[str, Any]:
                     "style": "primary",
                     "height": "sm",
                     "color": COLOR_PRIMARY_DARK,
-                    "action": {
-                        "type": "uri",
-                        "label": "เปิดระบบ GIS",
-                        "uri": ARCGIS_DASHBOARD_URL,
-                    },
+                    "action": {"type": "uri", "label": "เปิดระบบ GIS", "uri": ARCGIS_DASHBOARD_URL},
                 },
             ],
         },
