@@ -1,0 +1,33 @@
+name: Create IEAT Rich Menu
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create-rich-menu:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Create and set Rich Menu
+        env:
+          LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
+
+          DASHBOARD_URL: https://experience.arcgis.com/experience/dd1d5523f3bd425b939b51ad91e06171
+          EMERGENCY_CONTACT_URL: https://experience.arcgis.com/experience/dd1d5523f3bd425b939b51ad91e06171
+          ALERT_AREA_URL: https://experience.arcgis.com/experience/dd1d5523f3bd425b939b51ad91e06171
+          RISK_MAP_URL: https://experience.arcgis.com/experience/dd1d5523f3bd425b939b51ad91e06171
+          NEARBY_HOSPITAL_URL: https://experience.arcgis.com/experience/dd1d5523f3bd425b939b51ad91e06171
+          SELF_CARE_URL: https://experience.arcgis.com/experience/dd1d5523f3bd425b939b51ad91e06171
+
+        run: python create_rich_menu.py
