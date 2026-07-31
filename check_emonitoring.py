@@ -39,6 +39,16 @@ ALERT_RED_ICON_URL = f"{ASSET_BASE_URL}/alert_red.png"
 NORMAL_GREEN_ICON_URL = f"{ASSET_BASE_URL}/normal_green.png"
 WATCH_YELLOW_ICON_URL = f"{ASSET_BASE_URL}/watch_yellow.png"
 
+SUMMARY_ICON_URL = f"{ASSET_BASE_URL}/icon_summary.png"
+STATION_ICON_URL = f"{ASSET_BASE_URL}/icon_station.png"
+PARAMETER_ICON_URL = f"{ASSET_BASE_URL}/icon_parameter.png"
+INDUSTRY_ICON_URL = f"{ASSET_BASE_URL}/icon_industry.png"
+LOCATION_ICON_URL = f"{ASSET_BASE_URL}/icon_location.png"
+GIS_ICON_URL = f"{ASSET_BASE_URL}/icon_gis.png"
+CLOCK_ICON_URL = f"{ASSET_BASE_URL}/icon_clock.png"
+INFO_ICON_URL = f"{ASSET_BASE_URL}/icon_info.png"
+AIR_ICON_URL = f"{ASSET_BASE_URL}/icon_air.png"
+
 
 # ============================================================
 # 3. ธีมสี IEAT Elegant Mobile
@@ -702,25 +712,32 @@ def text_component(
 def summary_metric_box(
     value: int,
     label: str,
+    icon_url: str,
     accent_color: str,
 ) -> dict[str, Any]:
-    """การ์ดตัวเลขขนาดเล็ก เหมาะกับความกว้างหน้าจอมือถือ"""
     return {
         "type": "box",
         "layout": "vertical",
         "flex": 1,
-        "paddingAll": "8px",
-        "cornerRadius": "10px",
+        "paddingAll": "9px",
+        "cornerRadius": "12px",
         "backgroundColor": COLOR_SURFACE,
         "borderWidth": "1px",
         "borderColor": COLOR_BORDER,
         "contents": [
+            {
+                "type": "image",
+                "url": icon_url,
+                "size": "xxs",
+                "aspectMode": "fit",
+            },
             text_component(
                 str(value),
                 size="lg",
                 color=accent_color,
                 weight="bold",
                 align="center",
+                margin="sm",
             ),
             text_component(
                 label,
@@ -834,17 +851,25 @@ def build_parameter_box(
         else COLOR_ORANGE
     )
 
-    contents: list[dict[str, Any]] = [
+    detail_contents: list[dict[str, Any]] = [
         {
             "type": "box",
             "layout": "horizontal",
             "alignItems": "center",
             "contents": [
+                {
+                    "type": "image",
+                    "url": AIR_ICON_URL,
+                    "size": "xxs",
+                    "aspectMode": "fit",
+                    "flex": 0,
+                },
                 text_component(
                     parameter_name,
                     size="sm",
                     color=COLOR_TEXT,
                     weight="bold",
+                    margin="sm",
                     flex=2,
                     max_lines=1,
                 ),
@@ -870,7 +895,7 @@ def build_parameter_box(
 
     if ratio is not None and ratio > 1:
         excess_percent = (ratio - 1) * 100
-        contents.append(
+        detail_contents.append(
             text_component(
                 f"สูงกว่ามาตรฐาน {excess_percent:,.1f}%",
                 size="xxs",
@@ -904,7 +929,7 @@ def build_parameter_box(
                 "layout": "vertical",
                 "margin": "sm",
                 "flex": 1,
-                "contents": contents,
+                "contents": detail_contents,
             },
         ],
     }
@@ -991,7 +1016,7 @@ def build_summary_bubble(
         overall_title = "ระดับเร่งด่วน"
         overall_message = (
             "พบสถานีที่ควรให้ความสำคัญเป็นพิเศษ "
-            "โปรดติดตามประกาศและตรวจสอบพื้นที่ใกล้เคียง"
+            "โปรดติดตามประกาศและตรวจสอบตำแหน่งพื้นที่ทันที"
         )
         overall_color = COLOR_DANGER
         overall_soft = COLOR_DANGER_SOFT
@@ -1000,7 +1025,7 @@ def build_summary_bubble(
         overall_title = "ระดับเฝ้าระวังสูง"
         overall_message = (
             "พบสถานีที่ควรเฝ้าระวังอย่างใกล้ชิด "
-            "กลุ่มเสี่ยงควรลดกิจกรรมกลางแจ้งในพื้นที่ใกล้เคียง"
+            "เด็ก ผู้สูงอายุ และผู้มีโรคประจำตัวควรลดกิจกรรมกลางแจ้ง"
         )
         overall_color = COLOR_ORANGE
         overall_soft = COLOR_ORANGE_SOFT
@@ -1041,7 +1066,7 @@ def build_summary_bubble(
                         {
                             "type": "image",
                             "url": overall_icon,
-                            "size": "xs",
+                            "size": "sm",
                             "aspectMode": "fit",
                             "flex": 0,
                         },
@@ -1053,7 +1078,7 @@ def build_summary_bubble(
                             "contents": [
                                 text_component(
                                     overall_title,
-                                    size="sm",
+                                    size="md",
                                     color=overall_color,
                                     weight="bold",
                                     max_lines=1,
@@ -1069,14 +1094,30 @@ def build_summary_bubble(
                         },
                     ],
                 },
-                text_component(
-                    "ภาพรวมสถานีที่ต้องติดตาม",
-                    size="sm",
-                    color=COLOR_TEXT,
-                    weight="bold",
-                    margin="md",
-                    max_lines=1,
-                ),
+                {
+                    "type": "box",
+                    "layout": "horizontal",
+                    "alignItems": "center",
+                    "margin": "md",
+                    "contents": [
+                        {
+                            "type": "image",
+                            "url": SUMMARY_ICON_URL,
+                            "size": "xxs",
+                            "aspectMode": "fit",
+                            "flex": 0,
+                        },
+                        text_component(
+                            "ภาพรวมสถานีที่ต้องติดตาม",
+                            size="sm",
+                            color=COLOR_TEXT,
+                            weight="bold",
+                            margin="sm",
+                            flex=1,
+                            max_lines=1,
+                        ),
+                    ],
+                },
                 {
                     "type": "box",
                     "layout": "horizontal",
@@ -1086,22 +1127,25 @@ def build_summary_bubble(
                         summary_metric_box(
                             station_count,
                             "สถานี",
+                            STATION_ICON_URL,
                             COLOR_PRIMARY,
                         ),
                         summary_metric_box(
                             parameter_count,
                             "พารามิเตอร์",
+                            PARAMETER_ICON_URL,
                             COLOR_GREEN_DARK,
                         ),
                         summary_metric_box(
                             estate_count,
                             "นิคมฯ",
+                            INDUSTRY_ICON_URL,
                             COLOR_ORANGE_DARK,
                         ),
                     ],
                 },
                 text_component(
-                    "ความหมายของระดับสถานการณ์",
+                    "ระดับสถานการณ์",
                     size="sm",
                     color=COLOR_TEXT,
                     weight="bold",
@@ -1117,7 +1161,7 @@ def build_summary_bubble(
                         severity_metric_box(
                             emergency_count,
                             "ระดับเร่งด่วน",
-                            "ควรติดตามประกาศและหลีกเลี่ยงพื้นที่เสี่ยง",
+                            "ติดตามประกาศและหลีกเลี่ยงพื้นที่เสี่ยง",
                             ALERT_RED_ICON_URL,
                             COLOR_DANGER,
                             COLOR_DANGER_SOFT,
@@ -1125,7 +1169,7 @@ def build_summary_bubble(
                         severity_metric_box(
                             alert_count,
                             "ระดับเฝ้าระวังสูง",
-                            "ควรติดตามข้อมูลใกล้ชิด โดยเฉพาะกลุ่มเสี่ยง",
+                            "ติดตามข้อมูลใกล้ชิด โดยเฉพาะกลุ่มเสี่ยง",
                             WATCH_YELLOW_ICON_URL,
                             COLOR_ORANGE,
                             COLOR_ORANGE_SOFT,
@@ -1142,47 +1186,79 @@ def build_summary_bubble(
                 },
                 {
                     "type": "box",
-                    "layout": "vertical",
+                    "layout": "horizontal",
+                    "alignItems": "flex-start",
                     "margin": "md",
-                    "paddingAll": "9px",
+                    "paddingAll": "10px",
                     "cornerRadius": "10px",
                     "backgroundColor": COLOR_SURFACE,
                     "borderWidth": "1px",
                     "borderColor": COLOR_BORDER,
                     "contents": [
+                        {
+                            "type": "image",
+                            "url": INFO_ICON_URL,
+                            "size": "xxs",
+                            "aspectMode": "fit",
+                            "flex": 0,
+                        },
+                        {
+                            "type": "box",
+                            "layout": "vertical",
+                            "margin": "sm",
+                            "flex": 1,
+                            "contents": [
+                                text_component(
+                                    "คำแนะนำสำหรับประชาชนในพื้นที่",
+                                    size="xs",
+                                    color=COLOR_PRIMARY_DARK,
+                                    weight="bold",
+                                    max_lines=1,
+                                ),
+                                text_component(
+                                    (
+                                        "ตรวจสอบชื่อพื้นที่และสถานีในหน้าถัดไป "
+                                        "หากอยู่ใกล้จุดแจ้งเตือน โปรดติดตามประกาศจากหน่วยงาน "
+                                        "และเปิดแผนที่เพื่อดูตำแหน่ง"
+                                    ),
+                                    size="xxs",
+                                    color=COLOR_MUTED,
+                                    margin="xs",
+                                    max_lines=4,
+                                ),
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "type": "box",
+                    "layout": "horizontal",
+                    "alignItems": "center",
+                    "margin": "sm",
+                    "contents": [
+                        {
+                            "type": "image",
+                            "url": CLOCK_ICON_URL,
+                            "size": "xxs",
+                            "aspectMode": "fit",
+                            "flex": 0,
+                        },
                         text_component(
-                            "คำแนะนำสำหรับประชาชนในพื้นที่",
-                            size="xs",
-                            color=COLOR_PRIMARY_DARK,
-                            weight="bold",
-                            max_lines=1,
-                        ),
-                        text_component(
-                            (
-                                "ตรวจสอบชื่อพื้นที่และสถานีในหน้าถัดไป "
-                                "หากอยู่ใกล้จุดแจ้งเตือน ควรติดตามประกาศจากหน่วยงาน "
-                                "และเปิดแผนที่เพื่อดูตำแหน่ง"
-                            ),
+                            f"อัปเดต {thai_report_time()}",
                             size="xxs",
                             color=COLOR_MUTED,
-                            margin="xs",
-                            max_lines=3,
+                            margin="sm",
+                            flex=1,
+                            max_lines=1,
                         ),
                     ],
                 },
-                text_component(
-                    f"อัปเดต {thai_report_time()}",
-                    size="xxs",
-                    color=COLOR_MUTED,
-                    margin="sm",
-                    align="end",
-                    max_lines=1,
-                ),
             ],
         },
         "footer": {
             "type": "box",
             "layout": "vertical",
+            "spacing": "sm",
             "paddingAll": "10px",
             "backgroundColor": COLOR_SURFACE,
             "contents": [
@@ -1335,6 +1411,37 @@ def build_station_bubble(
                         align="end",
                         flex=3,
                         max_lines=1,
+                    ),
+                ],
+            },
+        ]
+    )
+
+    body_contents.extend(
+        [
+            {
+                "type": "box",
+                "layout": "horizontal",
+                "alignItems": "flex-start",
+                "margin": "md",
+                "paddingAll": "9px",
+                "cornerRadius": "10px",
+                "backgroundColor": style["soft"],
+                "contents": [
+                    {
+                        "type": "image",
+                        "url": style["icon"],
+                        "size": "xxs",
+                        "aspectMode": "fit",
+                        "flex": 0,
+                    },
+                    text_component(
+                        style["description"],
+                        size="xxs",
+                        color=COLOR_TEXT,
+                        margin="sm",
+                        flex=1,
+                        max_lines=4,
                     ),
                 ],
             },
