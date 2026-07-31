@@ -44,28 +44,28 @@ WATCH_YELLOW_ICON_URL = f"{ASSET_BASE_URL}/watch_yellow.png"
 # 3. ธีมสี IEAT Purple Modern
 # ============================================================
 
-COLOR_PRIMARY = "#4E2A84"
-COLOR_HIGHLIGHT = "#836EAA"
-COLOR_SECONDARY = "#401F68"
-COLOR_PURPLE_LIGHT = "#B6ACD1"
-COLOR_BACKGROUND = "#E4E0EE"
+COLOR_PRIMARY = "#2F3A56"
+COLOR_HIGHLIGHT = "#4E5D78"
+COLOR_SECONDARY = "#233046"
+COLOR_PURPLE_LIGHT = "#D9E2EC"
+COLOR_BACKGROUND = "#F4F6F8"
 
-COLOR_TEXT = "#342F2E"
-COLOR_MUTED = "#716C6B"
-COLOR_DISABLED = "#BBB8B8"
-COLOR_BORDER = "#D8D6D6"
+COLOR_TEXT = "#1F2937"
+COLOR_MUTED = "#6B7280"
+COLOR_DISABLED = "#AAB2BD"
+COLOR_BORDER = "#D9E2EC"
 
-COLOR_SUCCESS = "#489E3B"
-COLOR_ACCENT = "#FABD42"
-COLOR_DANGER = "#CD0A20"
+COLOR_SUCCESS = "#2E7D32"
+COLOR_ACCENT = "#C8A951"
+COLOR_DANGER = "#C62828"
 
 COLOR_WHITE = "#FFFFFF"
 COLOR_SURFACE = "#FFFFFF"
 
-COLOR_RED_BACKGROUND = "#FFF3F4"
-COLOR_GREEN_BACKGROUND = "#F3F9F1"
-COLOR_PURPLE_BACKGROUND = "#F5F2F8"
-COLOR_YELLOW_BACKGROUND = "#FFF9E8"
+COLOR_RED_BACKGROUND = "#FFF7F7"
+COLOR_GREEN_BACKGROUND = "#F5FAF5"
+COLOR_PURPLE_BACKGROUND = "#F3F5F8"
+COLOR_YELLOW_BACKGROUND = "#FFF9E6"
 
 # รองรับตัวแปรสีเดิม
 COLOR_GREEN = COLOR_SUCCESS
@@ -503,19 +503,19 @@ def severity_style(severity: str) -> dict[str, str]:
             "icon": ALERT_RED_ICON_URL,
         },
         "ALERT": {
-            "name": "ระดับแจ้งเตือน",
-            "short_name": "แจ้งเตือน",
-            "header": COLOR_PRIMARY,
-            "background": COLOR_PURPLE_BACKGROUND,
-            "accent": COLOR_PRIMARY,
-            "icon": ALERT_RED_ICON_URL,
+            "name": "ระดับเฝ้าระวังสูง",
+            "short_name": "เฝ้าระวังสูง",
+            "header": "#B7791F",
+            "background": COLOR_YELLOW_BACKGROUND,
+            "accent": "#B7791F",
+            "icon": WATCH_YELLOW_ICON_URL,
         },
         "WATCH": {
-            "name": "ระดับเฝ้าระวัง",
-            "short_name": "เฝ้าระวัง",
-            "header": COLOR_SUCCESS,
-            "background": COLOR_GREEN_BACKGROUND,
-            "accent": COLOR_SUCCESS,
+            "name": "ระดับติดตามสถานการณ์",
+            "short_name": "ติดตาม",
+            "header": "#4E5D78",
+            "background": "#F4F6F8",
+            "accent": "#4E5D78",
             "icon": WATCH_YELLOW_ICON_URL,
         },
     }
@@ -895,7 +895,7 @@ def build_summary_bubble(
                             weight="bold",
                         ),
                         text_component(
-                            "ระบบแจ้งเตือน e-Monitoring",
+                            "ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย",
                             size="xxs",
                             color=COLOR_ACCENT,
                             weight="bold",
@@ -915,10 +915,10 @@ def build_summary_bubble(
             "type": "box",
             "layout": "vertical",
             "paddingAll": "12px",
-            "backgroundColor": COLOR_BACKGROUND,
+            "backgroundColor": "#F4F6F8",
             "contents": [
                 text_component(
-                    "ตรวจพบค่าที่ต้องแจ้งเตือน",
+                    "สรุปสถานการณ์คุณภาพสิ่งแวดล้อม",
                     size="md",
                     color=COLOR_SECONDARY,
                     weight="bold",
@@ -973,7 +973,7 @@ def build_summary_bubble(
                         },
                         severity_metric_box(
                             alert_count,
-                            "แจ้งเตือน",
+                            "เฝ้าระวังสูง",
                             COLOR_PRIMARY,
                         ),
                         {
@@ -982,7 +982,7 @@ def build_summary_bubble(
                         },
                         severity_metric_box(
                             watch_count,
-                            "เฝ้าระวัง",
+                            "ติดตาม",
                             COLOR_SUCCESS,
                         ),
                     ],
@@ -1008,7 +1008,7 @@ def build_summary_bubble(
                     "color": COLOR_PRIMARY,
                     "action": {
                         "type": "uri",
-                        "label": "ดูแผนที่สถานการณ์",
+                        "label": "เปิดแผนที่สถานการณ์",
                         "uri": ARCGIS_DASHBOARD_URL,
                     },
                 },
@@ -1194,7 +1194,7 @@ def build_station_bubble(
             "type": "box",
             "layout": "vertical",
             "paddingAll": "12px",
-            "backgroundColor": style["background"],
+            "backgroundColor": "#FFFFFF",
             "contents": body_contents,
         },
         "footer": {
@@ -1243,7 +1243,7 @@ def build_normal_bubble() -> dict[str, Any]:
                             weight="bold",
                         ),
                         text_component(
-                            "ระบบแจ้งเตือน e-Monitoring",
+                            "ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย",
                             size="xxs",
                             color=COLOR_ACCENT,
                             weight="bold",
