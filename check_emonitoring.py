@@ -42,6 +42,10 @@ REQUEST_TIMEOUT_SECONDS = 60
 # จำนวนการ์ดสูงสุดต่อ Carousel
 MAX_BUBBLES_PER_CAROUSEL = 10
 
+# LINE จำกัด JSON ของ Flex Carousel ไม่เกิน 50 KB
+# ใช้ 45 KB เพื่อเผื่อโครงสร้างข้อความและอักขระภาษาไทย
+MAX_CAROUSEL_JSON_BYTES = 45_000
+
 # จำนวนรายการ Alarm สูงสุดที่แสดงต่อสถานี
 MAX_ALARM_ENTRIES_PER_STATION = 6
 
@@ -2404,6 +2408,63 @@ def chunk_list(
     ]
 
 
+def carousel_json_size_bytes(
+    bubbles: list[dict[str, Any]],
+) -> int:
+    """คำนวณขนาด JSON จริงแบบ UTF-8 ของ Flex Carousel"""
+    carousel = {
+        "type": "carousel",
+        "contents": bubbles,
+    }
+
+    return len(
+        json.dumps(
+            carousel,
+            ensure_ascii=False,
+            separators=(",", ":"),
+        ).encode("utf-8")
+    )
+
+
+def build_carousel_batches(
+    alert_features: list[dict[str, Any]],
+) -> list[list[dict[str, Any]]]:
+    """แบ่ง Bubble ตามจำนวนและขนาด JSON เพื่อไม่ให้เกินข้อจำกัด LINE"""
+    batches: list[list[dict[str, Any]]] = []
+    current_batch: list[dict[str, Any]] = []
+
+    for feature in alert_features:
+        bubble = build_alert_detail_bubble(feature)
+        candidate_batch = current_batch + [bubble]
+
+        exceeds_count = (
+            len(candidate_batch)
+            > MAX_BUBBLES_PER_CAROUSEL
+        )
+        exceeds_size = (
+            carousel_json_size_bytes(candidate_batch)
+            > MAX_CAROUSEL_JSON_BYTES
+        )
+
+        if current_batch and (exceeds_count or exceeds_size):
+            batches.append(current_batch)
+            current_batch = [bubble]
+        else:
+            current_batch = candidate_batch
+
+        single_size = carousel_json_size_bytes([bubble])
+        if single_size > MAX_CAROUSEL_JSON_BYTES:
+            raise RuntimeError(
+                "การ์ดรายละเอียดของสถานีมีขนาดใหญ่เกินข้อจำกัด LINE: "
+                f"{single_size:,} bytes"
+            )
+
+    if current_batch:
+        batches.append(current_batch)
+
+    return batches
+
+
 # ============================================================
 # 21. ส่งรายละเอียดสถานีแบบ Carousel
 # ============================================================
@@ -2417,9 +2478,8 @@ def send_alert_detail_carousels(
         )
         return
 
-    batches = chunk_list(
-        alert_features,
-        MAX_BUBBLES_PER_CAROUSEL,
+    batches = build_carousel_batches(
+        alert_features
     )
 
     total_alerts = len(
@@ -2430,21 +2490,18 @@ def send_alert_detail_carousels(
         batches
     )
 
-    for batch_number, batch in enumerate(
+    for batch_number, bubbles in enumerate(
         batches,
         start=1,
     ):
-        bubbles = [
-            build_alert_detail_bubble(
-                feature
-            )
-            for feature in batch
-        ]
-
         carousel = {
             "type": "carousel",
             "contents": bubbles,
         }
+
+        carousel_size = carousel_json_size_bytes(
+            bubbles
+        )
 
         alt_text = (
             "รายละเอียดแจ้งเตือน "
@@ -2462,7 +2519,8 @@ def send_alert_detail_carousels(
             "กำลังส่งรายละเอียดสถานี "
             f"ชุดที่ {batch_number}/"
             f"{total_batches} "
-            f"จำนวน {len(batch)} สถานี"
+            f"จำนวน {len(bubbles)} สถานี "
+            f"ขนาด {carousel_size:,} bytes"
         )
 
         send_line_flex(
