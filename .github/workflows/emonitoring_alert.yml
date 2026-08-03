@@ -1,19 +1,26 @@
 name: e-Monitoring LINE Alert
 
 on:
-  # กด Run workflow เองได้จากหน้า Actions
+  # สามารถกด Run workflow เพื่อทดสอบเองได้
   workflow_dispatch:
 
-  # ตรวจข้อมูลอัตโนมัติทุก 15 นาที
   schedule:
     # GitHub Actions ใช้เวลา UTC
-    - cron: "*/15 * * * *"
+    #
+    # 01:30 UTC = 08:30 เวลาไทย
+    # 02:30 UTC = 09:30 เวลาไทย
+    # 03:30 UTC = 10:30 เวลาไทย
+    # 04:30 UTC = 11:30 เวลาไทย
+    # 05:30 UTC = 12:30 เวลาไทย
+    # 06:30 UTC = 13:30 เวลาไทย
+    # 07:30 UTC = 14:30 เวลาไทย
+    # 08:30 UTC = 15:30 เวลาไทย
+    # 09:30 UTC = 16:30 เวลาไทย
+    - cron: "30 1-9 * * *"
 
-# อนุญาตให้ Workflow บันทึก alert_state.json กลับเข้า Repository
 permissions:
-  contents: write
+  contents: read
 
-# ป้องกัน Workflow หลายรอบทำงานซ้อนกัน
 concurrency:
   group: emonitoring-line-alert
   cancel-in-progress: true
@@ -21,19 +28,15 @@ concurrency:
 jobs:
   check-emonitoring:
     runs-on: ubuntu-latest
-
-    # ถ้าทำงานเกิน 10 นาที ให้หยุด
     timeout-minutes: 10
 
     steps:
       # ======================================================
-      # 1. ดาวน์โหลดไฟล์ใน Repository
+      # 1. ดาวน์โหลด Repository
       # ======================================================
 
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       # ======================================================
       # 2. ติดตั้ง Python
@@ -45,24 +48,12 @@ jobs:
           python-version: "3.12"
 
       # ======================================================
-      # 3. ติดตั้งไลบรารี Python
+      # 3. ตรวจสอบไฟล์
       # ======================================================
 
-      - name: Install dependencies
+      - name: Check required file
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install requests
-
-      # ======================================================
-      # 4. ตรวจสอบไฟล์ที่จำเป็น
-      # ======================================================
-
-      - name: Check required files
-        run: |
-          echo "=================================================="
           echo "ตรวจสอบไฟล์ใน Repository"
-          echo "=================================================="
-
           ls -la
 
           if [ ! -f check_emonitoring.py ]; then
@@ -72,24 +63,17 @@ jobs:
 
           echo "พบไฟล์ check_emonitoring.py"
 
-          if [ ! -f alert_state.json ]; then
-            echo "{}" > alert_state.json
-            echo "สร้างไฟล์ alert_state.json ใหม่แล้ว"
-          else
-            echo "พบไฟล์ alert_state.json"
-          fi
-
       # ======================================================
-      # 5. ตรวจ Syntax ของ Python ก่อนรันจริง
+      # 4. ตรวจ Syntax
       # ======================================================
 
       - name: Validate Python syntax
         run: |
           python -m py_compile check_emonitoring.py
-          echo "ตรวจสอบ Syntax ของ check_emonitoring.py สำเร็จ"
+          echo "Python syntax ถูกต้อง"
 
       # ======================================================
-      # 6. ตรวจสอบว่า Secrets ถูกสร้างไว้แล้ว
+      # 5. ตรวจ Secrets
       # ======================================================
 
       - name: Check LINE secrets
@@ -111,10 +95,10 @@ jobs:
           echo "พบ LINE_TARGET_ID"
 
       # ======================================================
-      # 7. ดึงข้อมูล e-Monitoring และส่ง LINE
+      # 6. ตรวจข้อมูลและส่ง LINE
       # ======================================================
 
-      - name: Check e-Monitoring and send LINE alert
+      - name: Check e-Monitoring and send LINE Flex
         env:
           LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
           LINE_TARGET_ID: ${{ secrets.LINE_TARGET_ID }}
@@ -122,37 +106,3 @@ jobs:
           TZ: "Asia/Bangkok"
         run: |
           python check_emonitoring.py
-
-      # ======================================================
-      # 8. บันทึก alert_state.json กลับเข้า GitHub
-      # ======================================================
-
-      - name: Save alert state
-        if: always()
-        run: |
-          echo "=================================================="
-          echo "ตรวจสอบการเปลี่ยนแปลง alert_state.json"
-          echo "=================================================="
-
-          if [ ! -f alert_state.json ]; then
-            echo "{}" > alert_state.json
-          fi
-
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git add alert_state.json
-
-          if git diff --cached --quiet; then
-            echo "ไม่มีการเปลี่ยนแปลงใน alert_state.json"
-            exit 0
-          fi
-
-          git commit -m "Update e-Monitoring alert state"
-
-          # ดึงการเปลี่ยนแปลงล่าสุดก่อน push
-          git pull --rebase origin "${GITHUB_REF_NAME}"
-
-          git push origin "HEAD:${GITHUB_REF_NAME}"
-
-          echo "บันทึก alert_state.json สำเร็จ"
