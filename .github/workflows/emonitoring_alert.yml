@@ -38,7 +38,7 @@ jobs:
 
       - name: Check required files
         run: |
-          echo "ไฟล์ทั้งหมดใน Repository:"
+          echo "ตรวจสอบไฟล์ใน Repository"
           ls -la
 
           if [ ! -f check_emonitoring.py ]; then
@@ -57,6 +57,7 @@ jobs:
           python check_emonitoring.py
 
       - name: Save alert state
+        if: always()
         run: |
           if [ ! -f alert_state.json ]; then
             echo "{}" > alert_state.json
@@ -73,5 +74,7 @@ jobs:
           fi
 
           git commit -m "Update e-Monitoring alert state"
+
           git pull --rebase
+
           git push
