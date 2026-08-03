@@ -22,8 +22,8 @@
 
         body {
             margin: 0;
-            background: #eaf0f7;
-            color: #20242c;
+            background: #e9e3ec;
+            color: #25212a;
             font-family: "Segoe UI", Tahoma, Arial, sans-serif;
         }
 
@@ -32,10 +32,8 @@
             max-width: 720px;
             min-height: 100vh;
             margin: 0 auto;
-            background: #f7f8fa;
+            background: #f8f6f9;
         }
-
-        /* Header */
 
         .header {
             display: flex;
@@ -43,7 +41,7 @@
             gap: 14px;
             padding: 18px;
             background: #ffffff;
-            border-bottom: 4px solid #4e2a84;
+            border-bottom: 4px solid #6a2c91;
         }
 
         .logo {
@@ -55,19 +53,17 @@
 
         .header-title {
             margin: 0;
-            color: #35205a;
+            color: #552076;
             font-size: 24px;
             font-weight: 750;
         }
 
         .header-subtitle {
             margin: 6px 0 0;
-            color: #70757f;
+            color: #6f6874;
             font-size: 14px;
             line-height: 1.5;
         }
-
-        /* Content */
 
         .content {
             padding: 18px;
@@ -80,33 +76,31 @@
         }
 
         .error {
-            color: #b32632;
+            color: #a92c35;
         }
 
         .hidden {
             display: none !important;
         }
 
-        /* Status */
-
         .status-card {
             display: flex;
             align-items: center;
             gap: 16px;
             padding: 20px;
-            background: #f1f8f3;
-            border: 1px solid #2f7d4a;
+            background: #f3faeb;
+            border: 1px solid #5c9630;
             border-radius: 16px;
         }
 
         .status-card.alert {
-            background: #fff3f4;
-            border-color: #b32632;
+            background: #fdeeef;
+            border-color: #d64550;
         }
 
         .status-card.watch {
-            background: #fff9df;
-            border-color: #c99800;
+            background: #fff7da;
+            border-color: #d9a51d;
         }
 
         .status-icon {
@@ -117,33 +111,33 @@
             width: 62px;
             height: 62px;
             color: #ffffff;
-            background: #36ba69;
+            background: #7ecb4f;
             border-radius: 18px;
             font-size: 37px;
             font-weight: bold;
         }
 
         .status-card.alert .status-icon {
-            background: #d93945;
+            background: #d64550;
         }
 
         .status-card.watch .status-icon {
-            background: #d8a20c;
+            background: #d9a51d;
         }
 
         .status-title {
             margin: 0;
-            color: #23613a;
+            color: #477824;
             font-size: 21px;
             line-height: 1.45;
         }
 
         .status-card.alert .status-title {
-            color: #8e1e28;
+            color: #a92c35;
         }
 
         .status-card.watch .status-title {
-            color: #9b7600;
+            color: #9a7000;
         }
 
         .status-description {
@@ -152,15 +146,12 @@
             line-height: 1.6;
         }
 
-        /* Titles */
-
         .section-title {
             margin: 24px 0 12px;
+            color: #25212a;
             font-size: 20px;
             line-height: 1.4;
         }
-
-        /* Online station summary */
 
         .online-total {
             display: flex;
@@ -169,17 +160,17 @@
             gap: 12px;
             padding: 18px;
             background: #ffffff;
-            border: 1px solid #dfe3e8;
+            border: 1px solid #d8cdd9;
             border-radius: 14px;
         }
 
         .online-total-label {
-            color: #70757f;
+            color: #6f6874;
             font-size: 15px;
         }
 
         .online-total-value {
-            color: #4e2a84;
+            color: #6a2c91;
             font-size: 21px;
             font-weight: bold;
             text-align: right;
@@ -195,9 +186,21 @@
         .type-card {
             padding: 15px 8px;
             background: #ffffff;
-            border: 1px solid #dfe3e8;
+            border: 1px solid #d8cdd9;
             border-radius: 12px;
             text-align: center;
+        }
+
+        .type-card-aqms {
+            background: #f3faeb;
+        }
+
+        .type-card-wqms {
+            background: #e8d9ec;
+        }
+
+        .type-card-cems {
+            background: #e6f3fc;
         }
 
         .type-name {
@@ -207,7 +210,7 @@
         .type-number {
             display: block;
             margin: 6px 0 3px;
-            color: #20242c;
+            color: #25212a;
             font-size: 21px;
             font-weight: bold;
         }
@@ -217,18 +220,16 @@
         }
 
         .aqms {
-            color: #2f7d4a;
+            color: #5c9630;
         }
 
         .wqms {
-            color: #356ca5;
+            color: #6a2c91;
         }
 
         .cems {
-            color: #9b7600;
+            color: #0872b9;
         }
-
-        /* Alert summary */
 
         .summary-grid {
             display: grid;
@@ -239,14 +240,26 @@
         .summary-card {
             padding: 15px 8px;
             background: #ffffff;
-            border: 1px solid #dfe3e8;
+            border: 1px solid #d8cdd9;
             border-radius: 12px;
             text-align: center;
         }
 
+        .summary-card:nth-child(1) {
+            background: #e8d9ec;
+        }
+
+        .summary-card:nth-child(2) {
+            background: #f3faeb;
+        }
+
+        .summary-card:nth-child(3) {
+            background: #e6f3fc;
+        }
+
         .summary-number {
             display: block;
-            color: #4e2a84;
+            color: #6a2c91;
             font-size: 24px;
             font-weight: bold;
         }
@@ -254,31 +267,29 @@
         .summary-label {
             display: block;
             margin-top: 5px;
-            color: #70757f;
+            color: #6f6874;
             font-size: 12px;
         }
-
-        /* Station alert cards */
 
         .station-card {
             margin-top: 12px;
             padding: 16px;
             background: #ffffff;
-            border: 1px solid #e2e5ea;
-            border-left: 5px solid #b32632;
+            border: 1px solid #d8cdd9;
+            border-left: 5px solid #d64550;
             border-radius: 12px;
         }
 
         .station-estate {
             margin: 0;
-            color: #70757f;
+            color: #6f6874;
             font-size: 13px;
             line-height: 1.5;
         }
 
         .station-name {
             margin: 5px 0 12px;
-            color: #35205a;
+            color: #552076;
             font-size: 18px;
             line-height: 1.5;
         }
@@ -288,14 +299,14 @@
             justify-content: space-between;
             gap: 12px;
             padding: 8px 0;
-            border-bottom: 1px solid #eceef2;
+            border-bottom: 1px solid #e8e0ea;
             font-size: 14px;
             line-height: 1.5;
         }
 
         .detail-label {
             flex: 0 0 40%;
-            color: #70757f;
+            color: #6f6874;
         }
 
         .detail-value {
@@ -315,7 +326,7 @@
             display: block;
             padding: 12px 8px;
             color: #ffffff;
-            background: #4e2a84;
+            background: #6a2c91;
             border-radius: 9px;
             text-align: center;
             text-decoration: none;
@@ -324,15 +335,13 @@
         }
 
         .button.secondary {
-            color: #35205a;
-            background: #ede7f6;
+            color: #552076;
+            background: #e8d9ec;
         }
-
-        /* Footer */
 
         .updated {
             margin: 24px 0 12px;
-            color: #70757f;
+            color: #6f6874;
             text-align: center;
             font-size: 13px;
         }
@@ -341,7 +350,7 @@
             width: 100%;
             padding: 14px;
             color: #ffffff;
-            background: #35205a;
+            background: #552076;
             border: 0;
             border-radius: 10px;
             font-family: inherit;
@@ -440,7 +449,10 @@
                         -
                     </h2>
 
-                    <p id="statusDescription" class="status-description">
+                    <p
+                        id="statusDescription"
+                        class="status-description"
+                    >
                         -
                     </p>
                 </div>
@@ -465,22 +477,55 @@
 
             <section class="station-types">
 
-                <div class="type-card">
-                    <span class="type-name aqms">AQMs</span>
-                    <strong id="onlineAqms" class="type-number">0</strong>
-                    <span class="type-unit">สถานี</span>
+                <div class="type-card type-card-aqms">
+                    <span class="type-name aqms">
+                        AQMs
+                    </span>
+
+                    <strong
+                        id="onlineAqms"
+                        class="type-number"
+                    >
+                        0
+                    </strong>
+
+                    <span class="type-unit">
+                        สถานี
+                    </span>
                 </div>
 
-                <div class="type-card">
-                    <span class="type-name wqms">WQMs</span>
-                    <strong id="onlineWqms" class="type-number">0</strong>
-                    <span class="type-unit">สถานี</span>
+                <div class="type-card type-card-wqms">
+                    <span class="type-name wqms">
+                        WQMs
+                    </span>
+
+                    <strong
+                        id="onlineWqms"
+                        class="type-number"
+                    >
+                        0
+                    </strong>
+
+                    <span class="type-unit">
+                        สถานี
+                    </span>
                 </div>
 
-                <div class="type-card">
-                    <span class="type-name cems">CEMs</span>
-                    <strong id="onlineCems" class="type-number">0</strong>
-                    <span class="type-unit">สถานี</span>
+                <div class="type-card type-card-cems">
+                    <span class="type-name cems">
+                        CEMs
+                    </span>
+
+                    <strong
+                        id="onlineCems"
+                        class="type-number"
+                    >
+                        0
+                    </strong>
+
+                    <span class="type-unit">
+                        สถานี
+                    </span>
                 </div>
 
             </section>
@@ -574,23 +619,38 @@
         return String(value);
     }
 
-    function setText(elementId, value, fallback = "0") {
-        const element = document.getElementById(elementId);
+    function setText(
+        elementId,
+        value,
+        fallback = "0"
+    ) {
+        const element =
+            document.getElementById(elementId);
 
         if (element) {
-            element.textContent = safeText(value, fallback);
+            element.textContent =
+                safeText(value, fallback);
         }
     }
 
-    function createDetailRow(labelText, valueText) {
-        const row = document.createElement("div");
+    function createDetailRow(
+        labelText,
+        valueText
+    ) {
+        const row =
+            document.createElement("div");
+
         row.className = "detail-row";
 
-        const label = document.createElement("span");
+        const label =
+            document.createElement("span");
+
         label.className = "detail-label";
         label.textContent = labelText;
 
-        const value = document.createElement("strong");
+        const value =
+            document.createElement("strong");
+
         value.className = "detail-value";
         value.textContent = safeText(valueText);
 
@@ -601,18 +661,26 @@
     }
 
     function createStationCard(station) {
-        const card = document.createElement("article");
+        const card =
+            document.createElement("article");
+
         card.className = "station-card";
 
-        const estate = document.createElement("p");
+        const estate =
+            document.createElement("p");
+
         estate.className = "station-estate";
+
         estate.textContent = safeText(
             station.estate,
             "ไม่ระบุนิคมอุตสาหกรรม"
         );
 
-        const stationName = document.createElement("h3");
+        const stationName =
+            document.createElement("h3");
+
         stationName.className = "station-name";
+
         stationName.textContent = safeText(
             station.station_name,
             "ไม่ระบุชื่อสถานี"
@@ -656,20 +724,33 @@
             )
         );
 
-        const buttons = document.createElement("div");
+        const buttons =
+            document.createElement("div");
+
         buttons.className = "station-buttons";
 
-        const mapButton = document.createElement("a");
+        const mapButton =
+            document.createElement("a");
+
         mapButton.className = "button";
         mapButton.textContent = "ตำแหน่งสถานี";
-        mapButton.href = safeText(station.map_url, "#");
+        mapButton.href =
+            safeText(station.map_url, "#");
         mapButton.target = "_blank";
         mapButton.rel = "noopener noreferrer";
 
-        const gisButton = document.createElement("a");
-        gisButton.className = "button secondary";
-        gisButton.textContent = "เปิดระบบ GIS";
-        gisButton.href = safeText(station.gis_url, "#");
+        const gisButton =
+            document.createElement("a");
+
+        gisButton.className =
+            "button secondary";
+
+        gisButton.textContent =
+            "เปิดระบบ GIS";
+
+        gisButton.href =
+            safeText(station.gis_url, "#");
+
         gisButton.target = "_blank";
         gisButton.rel = "noopener noreferrer";
 
@@ -681,9 +762,14 @@
     }
 
     async function loadStatus() {
-        const loading = document.getElementById("loading");
-        const error = document.getElementById("error");
-        const dashboard = document.getElementById("dashboard");
+        const loading =
+            document.getElementById("loading");
+
+        const error =
+            document.getElementById("error");
+
+        const dashboard =
+            document.getElementById("dashboard");
 
         loading.classList.remove("hidden");
         error.classList.add("hidden");
@@ -708,32 +794,58 @@
             const data = await response.json();
 
             const statusCard =
-                document.getElementById("statusCard");
+                document.getElementById(
+                    "statusCard"
+                );
 
             const statusIcon =
-                document.getElementById("statusIcon");
+                document.getElementById(
+                    "statusIcon"
+                );
 
             const alertSection =
-                document.getElementById("alertSection");
+                document.getElementById(
+                    "alertSection"
+                );
 
             const stationList =
-                document.getElementById("stationList");
+                document.getElementById(
+                    "stationList"
+                );
 
-            statusCard.className = "status-card";
+            statusCard.className =
+                "status-card";
 
             if (data.status === "alert") {
-                statusCard.classList.add("alert");
-                statusIcon.textContent = "!";
-                alertSection.classList.remove("hidden");
+                statusCard.classList.add(
+                    "alert"
+                );
 
-            } else if (data.status === "watch") {
-                statusCard.classList.add("watch");
                 statusIcon.textContent = "!";
-                alertSection.classList.remove("hidden");
+
+                alertSection.classList.remove(
+                    "hidden"
+                );
+
+            } else if (
+                data.status === "watch"
+            ) {
+                statusCard.classList.add(
+                    "watch"
+                );
+
+                statusIcon.textContent = "!";
+
+                alertSection.classList.remove(
+                    "hidden"
+                );
 
             } else {
                 statusIcon.textContent = "✓";
-                alertSection.classList.add("hidden");
+
+                alertSection.classList.add(
+                    "hidden"
+                );
             }
 
             setText(
@@ -791,18 +903,23 @@
 
             stationList.innerHTML = "";
 
-            const stations = Array.isArray(data.stations)
-                ? data.stations
-                : [];
+            const stations =
+                Array.isArray(data.stations)
+                    ? data.stations
+                    : [];
 
-            stations.forEach(function (station) {
-                stationList.appendChild(
-                    createStationCard(station)
-                );
-            });
+            stations.forEach(
+                function (station) {
+                    stationList.appendChild(
+                        createStationCard(station)
+                    );
+                }
+            );
 
             loading.classList.add("hidden");
-            dashboard.classList.remove("hidden");
+            dashboard.classList.remove(
+                "hidden"
+            );
 
         } catch (loadError) {
             console.error(loadError);
