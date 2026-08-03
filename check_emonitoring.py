@@ -44,6 +44,16 @@ MAX_BUBBLES_PER_CAROUSEL = 10
 # จำนวนรายการ Alarm สูงสุดที่แสดงต่อสถานี
 MAX_ALARM_ENTRIES_PER_STATION = 6
 
+# ไฟล์จำสถานะ เพื่อไม่ส่งข้อความซ้ำทุก 15 นาที
+STATE_FILE = os.getenv("ALERT_STATE_FILE", "alert_state.json")
+
+# แจ้งเตือนซ้ำเมื่อค่ายังเกินต่อเนื่องครบ 60 นาที
+REPEAT_ALERT_MINUTES = 60
+
+# Alarm ต้องมีเวลาล่าสุดไม่เกิน 45 นาที จึงถือว่ายังเกิดอยู่
+# (Workflow ควรตรวจทุก 15 นาที)
+ACTIVE_ALARM_MAX_AGE_MINUTES = 45
+
 
 # ============================================================
 # 2. รูปภาพที่ใช้ใน LINE Flex Message
@@ -458,6 +468,25 @@ def get_today_alarm_entries(
         )
 
     return today_entries
+
+
+def get_active_alarm_entries(value: Any) -> list[str]:
+    """คืนเฉพาะ Alarm ล่าสุดที่ยังอยู่ในช่วงเฝ้าระวัง"""
+    current = now_thailand()
+    active_entries = []
+
+    for entry in get_today_alarm_entries(value):
+        alarm_datetime = get_alarm_datetime(entry)
+        if alarm_datetime is None:
+            continue
+
+        age = current - alarm_datetime
+        if timedelta(0) <= age <= timedelta(
+            minutes=ACTIVE_ALARM_MAX_AGE_MINUTES
+        ):
+            active_entries.append(entry)
+
+    return active_entries
 
 
 # ============================================================
@@ -1000,7 +1029,7 @@ def filter_alert_features(
             continue
 
         today_alarm_entries = (
-            get_today_alarm_entries(
+            get_active_alarm_entries(
                 parameter_alarm
             )
         )
@@ -2278,7 +2307,130 @@ def send_alert_detail_carousels(
 
 
 # ============================================================
-# 22. โปรแกรมหลัก
+# 22. ระบบจำสถานะและคัดเลือกข้อความที่ต้องส่ง
+# ============================================================
+
+def load_alert_state() -> dict[str, Any]:
+    try:
+        with open(STATE_FILE, "r", encoding="utf-8") as state_file:
+            state = json.load(state_file)
+    except FileNotFoundError:
+        return {"stations": {}}
+    except (OSError, json.JSONDecodeError) as error:
+        print(f"คำเตือน: อ่าน {STATE_FILE} ไม่สำเร็จ: {error}")
+        return {"stations": {}}
+
+    if not isinstance(state, dict):
+        return {"stations": {}}
+    if not isinstance(state.get("stations"), dict):
+        state["stations"] = {}
+    return state
+
+
+def save_alert_state(state: dict[str, Any]) -> None:
+    state["updated_at"] = now_thailand().isoformat()
+    temporary_file = f"{STATE_FILE}.tmp"
+    with open(temporary_file, "w", encoding="utf-8") as state_file:
+        json.dump(state, state_file, ensure_ascii=False, indent=2)
+        state_file.write("\n")
+    os.replace(temporary_file, STATE_FILE)
+    print(f"บันทึกสถานะลง {STATE_FILE} แล้ว")
+
+
+def parse_state_datetime(value: Any) -> datetime | None:
+    text = clean_text(value)
+    if not text:
+        return None
+    try:
+        parsed = datetime.fromisoformat(text.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=THAILAND_TIMEZONE)
+    return parsed.astimezone(THAILAND_TIMEZONE)
+
+
+def select_notifications(
+    alert_features: list[dict[str, Any]],
+    state: dict[str, Any],
+) -> tuple[list[dict[str, Any]], list[str], dict[str, Any]]:
+    previous = state.get("stations", {})
+    current_time = now_thailand()
+    current_by_key: dict[str, dict[str, Any]] = {}
+
+    for feature in alert_features:
+        properties = feature.get("properties", {})
+        current_by_key[station_unique_key(properties)] = feature
+
+    features_to_send = []
+    next_stations: dict[str, Any] = {}
+
+    for key, feature in current_by_key.items():
+        properties = feature.get("properties", {})
+        old = previous.get(key, {}) if isinstance(previous.get(key), dict) else {}
+        last_sent = parse_state_datetime(old.get("last_sent_at"))
+        first_seen = clean_text(old.get("first_seen_at"), current_time.isoformat())
+        is_due = (
+            last_sent is None
+            or current_time - last_sent >= timedelta(minutes=REPEAT_ALERT_MINUTES)
+        )
+
+        if is_due:
+            features_to_send.append(feature)
+            last_sent_text = current_time.isoformat()
+        else:
+            last_sent_text = clean_text(old.get("last_sent_at"))
+
+        next_stations[key] = {
+            "active": True,
+            "station_name": get_station_name(properties),
+            "first_seen_at": first_seen,
+            "last_seen_at": current_time.isoformat(),
+            "last_sent_at": last_sent_text,
+        }
+
+    recovered_names = []
+    for key, old in previous.items():
+        if key in current_by_key or not isinstance(old, dict):
+            continue
+        if old.get("active"):
+            recovered_names.append(clean_text(old.get("station_name"), key))
+
+    return features_to_send, recovered_names, {"stations": next_stations}
+
+
+def send_line_text(text: str) -> None:
+    if not LINE_CHANNEL_ACCESS_TOKEN:
+        raise RuntimeError("ไม่พบ LINE_CHANNEL_ACCESS_TOKEN")
+
+    payload = {"messages": [{"type": "text", "text": text[:5000]}]}
+    request = urllib.request.Request(
+        LINE_BROADCAST_URL,
+        data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
+        method="POST",
+        headers={
+            "Authorization": f"Bearer {LINE_CHANNEL_ACCESS_TOKEN}",
+            "Content-Type": "application/json",
+        },
+    )
+    try:
+        with urllib.request.urlopen(
+            request, timeout=REQUEST_TIMEOUT_SECONDS
+        ) as response:
+            print(f"ส่ง LINE Broadcast สำเร็จ HTTP {response.status}")
+    except urllib.error.HTTPError as error:
+        body = error.read().decode("utf-8", errors="replace")
+        raise RuntimeError(
+            f"LINE Broadcast API HTTP {error.code}: {body}"
+        ) from error
+    except urllib.error.URLError as error:
+        raise RuntimeError(
+            f"ไม่สามารถเชื่อมต่อ LINE Broadcast API ได้: {error.reason}"
+        ) from error
+
+
+# ============================================================
+# 23. โปรแกรมหลัก
 # ============================================================
 
 def main() -> None:
@@ -2398,15 +2550,23 @@ def main() -> None:
 
     print("=" * 80)
 
-    # กรณีพบ Alarm
-    if alert_features:
+    state = load_alert_state()
+    features_to_send, recovered_names, next_state = select_notifications(
+        alert_features, state
+    )
+
+    print("สถานีที่ต้องแจ้งรอบนี้:", len(features_to_send))
+    print("สถานีที่กลับสู่ปกติ:", len(recovered_names))
+
+    # ส่งเฉพาะสถานีที่เริ่มเกิน หรือครบกำหนดแจ้งซ้ำ 1 ชั่วโมง
+    if features_to_send:
         print(
             "ส่งการ์ดสรุปสถานการณ์"
         )
 
         summary_bubble = (
             build_alert_summary_bubble(
-                alert_features,
+                features_to_send,
                 online_type_counts,
             )
         )
@@ -2415,7 +2575,7 @@ def main() -> None:
             (
                 "สรุปสถานการณ์ e-Monitoring "
                 f"พบค่าพารามิเตอร์เกินเกณฑ์ "
-                f"{len(alert_features)} สถานี"
+                f"{len(features_to_send)} สถานี"
             ),
             summary_bubble,
         )
@@ -2427,31 +2587,32 @@ def main() -> None:
         )
 
         send_alert_detail_carousels(
-            alert_features
+            features_to_send
         )
 
-        return
-
-    # กรณีไม่พบ Alarm
-    print(
-        "ไม่พบค่าพารามิเตอร์"
-        "เกินเกณฑ์มาตรฐาน"
-    )
-
-    normal_summary_bubble = (
-        build_normal_summary_bubble(
-            online_type_counts
+    # แจ้งเมื่อสถานีที่เคยเกินกลับสู่ภาวะปกติ
+    if recovered_names:
+        visible_names = recovered_names[:20]
+        recovery_text = (
+            "✅ e-Monitoring: สถานการณ์กลับสู่ภาวะปกติ\n"
+            f"ตรวจสอบเมื่อ {report_time_text()}\n\n"
+            + "\n".join(f"• {name}" for name in visible_names)
         )
-    )
+        if len(recovered_names) > len(visible_names):
+            recovery_text += (
+                f"\n• และอีก {len(recovered_names) - len(visible_names)} สถานี"
+            )
+        recovery_text += f"\n\nเปิดระบบ GIS: {ARCGIS_DASHBOARD_URL}"
+        send_line_text(recovery_text)
 
-    send_line_flex(
-        (
-            "สรุปสถานการณ์ e-Monitoring "
-            "ขณะนี้ไม่พบค่าพารามิเตอร์"
-            "เกินเกณฑ์มาตรฐาน"
-        ),
-        normal_summary_bubble,
-    )
+    if not features_to_send and not recovered_names:
+        if alert_features:
+            print("ค่ายังเกิน แต่ยังไม่ครบ 1 ชั่วโมง จึงไม่ส่งซ้ำ")
+        else:
+            print("ไม่พบค่าพารามิเตอร์เกินเกณฑ์ จึงไม่ส่ง LINE")
+
+    # บันทึกหลังส่งสำเร็จเท่านั้น หาก LINE ล้มเหลว งานจะจบก่อนถึงบรรทัดนี้
+    save_alert_state(next_state)
 
 
 if __name__ == "__main__":
