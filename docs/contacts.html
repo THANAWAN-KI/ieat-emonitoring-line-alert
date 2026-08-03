@@ -22,8 +22,8 @@
 
         body {
             margin: 0;
-            background: #d9e7f7;
-            color: #20242c;
+            background: #e9e3ec;
+            color: #25212a;
             font-family: "Segoe UI", Tahoma, Arial, sans-serif;
         }
 
@@ -32,7 +32,7 @@
             max-width: 720px;
             min-height: 100vh;
             margin: 0 auto;
-            background: #f7f8fa;
+            background: #f8f6f9;
         }
 
         .header {
@@ -41,7 +41,7 @@
             gap: 14px;
             padding: 18px;
             background: #ffffff;
-            border-bottom: 4px solid #4e2a84;
+            border-bottom: 4px solid #6a2c91;
         }
 
         .logo {
@@ -53,14 +53,14 @@
 
         .header-title {
             margin: 0;
-            color: #35205a;
+            color: #552076;
             font-size: 23px;
             font-weight: 750;
         }
 
         .header-subtitle {
             margin: 5px 0 0;
-            color: #70757f;
+            color: #6f6874;
             font-size: 14px;
             line-height: 1.5;
         }
@@ -71,8 +71,8 @@
 
         .notice {
             padding: 14px;
-            background: #f1edf8;
-            border-left: 4px solid #4e2a84;
+            background: #e8d9ec;
+            border-left: 4px solid #6a2c91;
             border-radius: 10px;
             font-size: 14px;
             line-height: 1.65;
@@ -83,22 +83,22 @@
             margin: 16px 0 10px;
             padding: 14px;
             background: #ffffff;
-            border: 1px solid #cfd5dd;
+            border: 1px solid #d8cdd9;
             border-radius: 12px;
-            color: #20242c;
+            color: #25212a;
             font-family: inherit;
             font-size: 16px;
             outline: none;
         }
 
         .search:focus {
-            border-color: #4e2a84;
-            box-shadow: 0 0 0 3px rgba(78, 42, 132, 0.12);
+            border-color: #6a2c91;
+            box-shadow: 0 0 0 3px rgba(106, 44, 145, 0.14);
         }
 
         .result-count {
             margin: 0 2px 12px;
-            color: #70757f;
+            color: #6f6874;
             font-size: 13px;
         }
 
@@ -106,14 +106,15 @@
             margin-bottom: 12px;
             padding: 16px;
             background: #ffffff;
-            border: 1px solid #dfe3e8;
+            border: 1px solid #d8cdd9;
+            border-left: 4px solid #6a2c91;
             border-radius: 14px;
-            box-shadow: 0 2px 8px rgba(53, 32, 90, 0.05);
+            box-shadow: 0 2px 8px rgba(85, 32, 118, 0.08);
         }
 
         .office-name {
             margin: 0;
-            color: #35205a;
+            color: #552076;
             font-size: 18px;
             line-height: 1.45;
         }
@@ -122,8 +123,8 @@
             display: inline-block;
             margin-top: 7px;
             padding: 4px 9px;
-            color: #356ca5;
-            background: #edf5fd;
+            color: #075b91;
+            background: #e6f3fc;
             border-radius: 20px;
             font-size: 12px;
             font-weight: bold;
@@ -136,7 +137,7 @@
 
         .information-label {
             display: block;
-            color: #70757f;
+            color: #6f6874;
             font-size: 12px;
         }
 
@@ -147,7 +148,7 @@
         }
 
         .phone-number {
-            color: #2f7d4a;
+            color: #477824;
             font-size: 17px;
             font-weight: bold;
         }
@@ -171,25 +172,25 @@
 
         .call-button {
             color: #ffffff;
-            background: #2f7d4a;
+            background: #5c9630;
         }
 
         .map-button {
-            color: #35205a;
-            background: #ede7f6;
+            color: #552076;
+            background: #e8d9ec;
         }
 
         .source-link {
             display: block;
             margin-top: 11px;
-            color: #70757f;
+            color: #6f6874;
             text-align: center;
             font-size: 12px;
         }
 
         .empty {
             padding: 35px 10px;
-            color: #70757f;
+            color: #6f6874;
             text-align: center;
         }
 
@@ -197,15 +198,15 @@
             position: sticky;
             bottom: 0;
             padding: 12px 16px;
-            background: rgba(247, 248, 250, 0.97);
-            border-top: 1px solid #dfe3e8;
+            background: rgba(248, 246, 249, 0.97);
+            border-top: 1px solid #d8cdd9;
         }
 
         .call-center-button {
             display: block;
             padding: 14px;
             color: #ffffff;
-            background: #35205a;
+            background: #552076;
             border-radius: 10px;
             text-align: center;
             text-decoration: none;
@@ -214,7 +215,7 @@
 
         .footer {
             padding: 8px 16px 22px;
-            color: #70757f;
+            color: #6f6874;
             text-align: center;
             font-size: 12px;
         }
@@ -516,8 +517,13 @@
     const resultCount =
         document.getElementById("resultCount");
 
-    function createElement(tagName, className, text) {
-        const element = document.createElement(tagName);
+    function createElement(
+        tagName,
+        className,
+        text
+    ) {
+        const element =
+            document.createElement(tagName);
 
         if (className) {
             element.className = className;
@@ -548,7 +554,8 @@
 
         const value = createElement(
             "span",
-            "information-value " + additionalClass,
+            "information-value " +
+            additionalClass,
             valueText || "-"
         );
 
@@ -612,7 +619,8 @@
             "โทรสำนักงาน"
         );
 
-        callButton.href = "tel:" + office.tel;
+        callButton.href =
+            "tel:" + office.tel;
 
         const mapButton = createElement(
             "a",
@@ -657,8 +665,8 @@
                     office.phone,
                     office.address
                 ]
-                .join(" ")
-                .toLocaleLowerCase("th");
+                    .join(" ")
+                    .toLocaleLowerCase("th");
 
                 return combinedText.includes(keyword);
             }
@@ -667,7 +675,9 @@
         officeList.innerHTML = "";
 
         resultCount.textContent =
-            "พบ " + filteredOffices.length + " รายการ";
+            "พบ " +
+            filteredOffices.length +
+            " รายการ";
 
         if (filteredOffices.length === 0) {
             const empty = createElement(
@@ -680,11 +690,13 @@
             return;
         }
 
-        filteredOffices.forEach(function (office) {
-            officeList.appendChild(
-                createOfficeCard(office)
-            );
-        });
+        filteredOffices.forEach(
+            function (office) {
+                officeList.appendChild(
+                    createOfficeCard(office)
+                );
+            }
+        );
     }
 
     searchInput.addEventListener(
