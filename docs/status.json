@@ -1,0 +1,17 @@
+{
+  "status": "normal",
+  "status_text": "ไม่พบค่าเกินเกณฑ์มาตรฐาน",
+  "description": "ขณะนี้ไม่พบค่าพารามิเตอร์เกินเกณฑ์มาตรฐาน",
+  "updated_at": "รอการอัปเดตข้อมูลจากระบบ",
+  "online_total": 0,
+  "online_aqms": 0,
+  "online_wqms": 0,
+  "online_cems": 0,
+  "alert_station_count": 0,
+  "parameter_count": 0,
+  "estate_count": 0,
+  "urgent_count": 0,
+  "watch_count": 0,
+  "follow_count": 0,
+  "stations": []
+}
