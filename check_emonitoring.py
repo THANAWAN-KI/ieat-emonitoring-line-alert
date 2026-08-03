@@ -6,6 +6,7 @@ import time
 import urllib.error
 import urllib.request
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 from typing import Any
 
 
@@ -2424,7 +2425,111 @@ def send_alert_detail_carousels(
 
 
 # ============================================================
-# 22. โปรแกรมหลัก
+# 22. สร้างข้อมูลสำหรับหน้า "สถานการณ์ล่าสุด"
+# ============================================================
+
+def write_status_json(
+    alert_features: list[dict[str, Any]],
+    online_type_counts: dict[str, int],
+) -> None:
+    """เขียนข้อมูลล่าสุดให้หน้า GitHub Pages อ่านจาก docs/status.json"""
+    station_items: list[dict[str, Any]] = []
+    parameter_names: set[str] = set()
+    estate_names: set[str] = set()
+
+    urgent_count = 0
+    watch_count = 0
+    follow_count = 0
+
+    severity_texts = {
+        "urgent": "ระดับเร่งด่วน",
+        "watch": "ระดับเฝ้าระวัง",
+        "follow": "ระดับติดตามสถานการณ์",
+    }
+
+    for feature in alert_features:
+        properties = feature.get("properties", {})
+        if not isinstance(properties, dict):
+            continue
+
+        entries = properties.get("_today_alarm_entries", [])
+        names = properties.get("_parameter_names", [])
+        severity = get_severity_level(feature)
+        estate = get_industry_zone(properties)
+
+        if severity == "urgent":
+            urgent_count += 1
+        elif severity == "watch":
+            watch_count += 1
+        else:
+            follow_count += 1
+
+        estate_names.add(estate)
+        parameter_names.update(str(name) for name in names)
+
+        detected_times = [
+            alarm_time_text(entry)
+            for entry in entries
+            if alarm_time_text(entry)
+        ]
+
+        station_items.append({
+            "estate": estate,
+            "station_name": get_station_name(properties),
+            "station_type": normalize_station_type(properties),
+            "parameter": ", ".join(names) if names else "พารามิเตอร์แจ้งเตือน",
+            "value": " | ".join(
+                remove_alarm_datetime(entry) for entry in entries
+            ),
+            "detected_at": ", ".join(detected_times) or "-",
+            "severity": severity_texts.get(
+                severity,
+                "ระดับติดตามสถานการณ์",
+            ),
+            "map_url": station_map_url(feature),
+            "gis_url": ARCGIS_DASHBOARD_URL,
+        })
+
+    has_alert = bool(station_items)
+
+    status_data = {
+        "status": "alert" if has_alert else "normal",
+        "status_text": (
+            "พบค่าพารามิเตอร์เกินเกณฑ์มาตรฐาน"
+            if has_alert
+            else "ไม่พบค่าเกินเกณฑ์มาตรฐาน"
+        ),
+        "description": (
+            "โปรดตรวจสอบรายละเอียดของสถานีและติดตามสถานการณ์"
+            if has_alert
+            else "ขณะนี้ไม่พบค่าพารามิเตอร์เกินเกณฑ์มาตรฐาน"
+        ),
+        "updated_at": report_time_text(),
+        "online_total": online_type_counts.get("total", 0),
+        "online_aqms": online_type_counts.get("AQMs", 0),
+        "online_wqms": online_type_counts.get("WQMs", 0),
+        "online_cems": online_type_counts.get("CEMs", 0),
+        "alert_station_count": len(station_items),
+        "parameter_count": len(parameter_names),
+        "estate_count": len(estate_names),
+        "urgent_count": urgent_count,
+        "watch_count": watch_count,
+        "follow_count": follow_count,
+        "stations": station_items,
+    }
+
+    output_path = Path("docs/status.json")
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(
+        json.dumps(status_data, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+
+    print(f"อัปเดตข้อมูลหน้าเว็บแล้ว: {output_path}")
+
+
+# ============================================================
+# 23. โปรแกรมหลัก
 # ============================================================
 
 def main() -> None:
@@ -2479,6 +2584,12 @@ def main() -> None:
         filter_alert_features(
             current_features
         )
+    )
+
+    # อัปเดตข้อมูลหน้า "สถานการณ์ล่าสุด" ทุกครั้งที่ Workflow ทำงาน
+    write_status_json(
+        alert_features,
+        online_type_counts,
     )
 
     latest_online_update = get_latest_online_update(features)
