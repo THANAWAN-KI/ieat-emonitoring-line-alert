@@ -1,18 +1,14 @@
 name: e-Monitoring Hourly LINE Report
 
 on:
-  # กดทดสอบด้วยตนเองจากหน้า Actions
   workflow_dispatch:
-
-  # ทำงานทุก 1 ชั่วโมง ที่นาที 17
   schedule:
+    # GitHub Actions ใช้เวลา UTC: นาทีที่ 17 ของทุกชั่วโมง
     - cron: "17 * * * *"
 
-# Workflow อ่านไฟล์ใน Repository เท่านั้น
 permissions:
   contents: read
 
-# ป้องกันงานหลายรอบทำงานซ้อนกัน
 concurrency:
   group: emonitoring-hourly-line-report
   cancel-in-progress: false
@@ -24,23 +20,14 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      # ======================================================
-      # 1. ดาวน์โหลดไฟล์จาก Repository
-      # ======================================================
       - name: Checkout repository
         uses: actions/checkout@v5
 
-      # ======================================================
-      # 2. ติดตั้ง Python
-      # ======================================================
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
-      # ======================================================
-      # 3. แสดงข้อมูลรอบการทำงาน
-      # ======================================================
       - name: Show workflow information
         env:
           TZ: Asia/Bangkok
@@ -48,55 +35,34 @@ jobs:
           echo "========================================"
           echo "IEAT e-Monitoring Hourly LINE Report"
           echo "========================================"
-          echo "เหตุการณ์ที่เรียก Workflow: ${{ github.event_name }}"
+          echo "Trigger: ${{ github.event_name }}"
           echo "Branch: ${{ github.ref_name }}"
-          echo "เวลาประเทศไทย:"
+          echo "Thailand time:"
           date
           echo "========================================"
 
-      # ======================================================
-      # 4. ตรวจสอบไฟล์ Python
-      # ======================================================
-      - name: Check required file
+      - name: Validate Python file
         run: |
           if [ ! -f "check_emonitoring.py" ]; then
             echo "ERROR: ไม่พบไฟล์ check_emonitoring.py"
             exit 1
           fi
-
-          echo "พบไฟล์ check_emonitoring.py แล้ว"
-
-      # ======================================================
-      # 5. ตรวจสอบ Syntax
-      # ======================================================
-      - name: Validate Python syntax
-        run: |
           python -m py_compile check_emonitoring.py
-          echo "check_emonitoring.py ไม่มี Syntax Error"
+          echo "check_emonitoring.py ผ่านการตรวจ Syntax"
 
-      # ======================================================
-      # 6. ตรวจสอบ LINE Channel Access Token
-      # ======================================================
       - name: Check LINE secret
         env:
           LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
         run: |
           if [ -z "$LINE_CHANNEL_ACCESS_TOKEN" ]; then
-            echo "ERROR: ไม่พบ GitHub Secret ชื่อ LINE_CHANNEL_ACCESS_TOKEN"
+            echo "ERROR: ไม่พบ Secret ชื่อ LINE_CHANNEL_ACCESS_TOKEN"
             exit 1
           fi
-
           echo "พบ LINE_CHANNEL_ACCESS_TOKEN แล้ว"
 
-      # ======================================================
-      # 7. ตรวจข้อมูลและส่งรายงาน LINE ทุกครั้ง
-      # ======================================================
-      - name: Check e-Monitoring and send hourly LINE report
+      - name: Send hourly e-Monitoring report
         env:
           LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
           PYTHONUNBUFFERED: "1"
           TZ: Asia/Bangkok
-        run: |
-          echo "เริ่มตรวจสอบข้อมูล e-Monitoring"
-          python check_emonitoring.py
-          echo "ตรวจสอบและส่งรายงาน LINE เสร็จเรียบร้อย"
+        run: python check_emonitoring.py
