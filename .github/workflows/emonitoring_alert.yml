@@ -1,13 +1,13 @@
 name: e-Monitoring LINE Alert
 
 on:
-  # สามารถกด Run workflow เพื่อทดสอบด้วยตนเองได้
+  # ใช้สำหรับกดทดสอบเองจากหน้า Actions
   workflow_dispatch:
 
   schedule:
     # GitHub Actions ใช้เวลา UTC
     #
-    # เวลาไทยที่ส่ง:
+    # เวลาไทยที่ต้องการ:
     # 08:30 น.
     # 09:30 น.
     # 10:30 น.
@@ -18,8 +18,8 @@ on:
     # 15:30 น.
     # 16:30 น.
     #
-    # 01:30-09:30 UTC
-    # เท่ากับ 08:30-16:30 เวลาไทย
+    # ประเทศไทย UTC+7
+    # 01:30-09:30 UTC = 08:30-16:30 เวลาไทย
     - cron: "30 1-9 * * *"
 
 permissions:
@@ -68,7 +68,7 @@ jobs:
           echo "พบไฟล์ check_emonitoring.py"
 
       # ======================================================
-      # 4. ตรวจสอบ Syntax
+      # 4. ตรวจสอบ Syntax ของ Python
       # ======================================================
 
       - name: Validate Python syntax
@@ -77,35 +77,27 @@ jobs:
           echo "Python syntax ถูกต้อง"
 
       # ======================================================
-      # 5. ตรวจสอบ GitHub Secrets
+      # 5. ตรวจสอบ LINE Channel Access Token
       # ======================================================
 
-      - name: Check LINE secrets
+      - name: Check LINE secret
         env:
           LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
-          LINE_TARGET_ID: ${{ secrets.LINE_TARGET_ID }}
         run: |
           if [ -z "$LINE_CHANNEL_ACCESS_TOKEN" ]; then
             echo "ERROR: ไม่พบ Secret ชื่อ LINE_CHANNEL_ACCESS_TOKEN"
             exit 1
           fi
 
-          if [ -z "$LINE_TARGET_ID" ]; then
-            echo "ERROR: ไม่พบ Secret ชื่อ LINE_TARGET_ID"
-            exit 1
-          fi
-
           echo "พบ LINE_CHANNEL_ACCESS_TOKEN"
-          echo "พบ LINE_TARGET_ID"
 
       # ======================================================
-      # 6. ตรวจข้อมูลและส่ง LINE Flex Message
+      # 6. ตรวจข้อมูลและส่ง LINE Broadcast
       # ======================================================
 
-      - name: Check e-Monitoring and send LINE Flex
+      - name: Check e-Monitoring and send LINE Broadcast
         env:
           LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
-          LINE_TARGET_ID: ${{ secrets.LINE_TARGET_ID }}
           PYTHONUNBUFFERED: "1"
           TZ: "Asia/Bangkok"
         run: |
