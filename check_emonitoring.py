@@ -473,8 +473,39 @@ def get_today_alarm_entries(
 
 
 def get_active_alarm_entries(value: Any) -> list[str]:
-    """คืน Alarm ของวันนี้ทั้งหมด ไม่ตัดทิ้งเพราะเกิน 120 นาที"""
-    return get_today_alarm_entries(value)
+    """คืน Alarm ของวันที่ล่าสุดที่มีอยู่จริงใน ParameterAlram
+
+    ห้ามเทียบกับวันที่ของเครื่องโดยตรง เพราะบางครั้งระบบต้นทาง
+    อัปเดตช้ากว่าวันที่ Workflow ทำงาน ทำให้ Alarm ที่มีอยู่จริง
+    ถูกตัดทิ้งทั้งหมดและระบบรายงานว่า "ปกติ" อย่างไม่ถูกต้อง
+    """
+    parsed_entries: list[tuple[datetime, str]] = []
+
+    for entry in split_parameter_alarm(value):
+        alarm_datetime = get_alarm_datetime(entry)
+
+        if alarm_datetime is None:
+            print(
+                "ข้าม Alarm เนื่องจากอ่านวันที่ไม่ได้:",
+                entry,
+            )
+            continue
+
+        parsed_entries.append((alarm_datetime, entry))
+
+    if not parsed_entries:
+        return []
+
+    latest_alarm_date = max(
+        alarm_datetime.date()
+        for alarm_datetime, _ in parsed_entries
+    )
+
+    return [
+        entry
+        for alarm_datetime, entry in parsed_entries
+        if alarm_datetime.date() == latest_alarm_date
+    ]
 
 
 # ============================================================
@@ -970,13 +1001,12 @@ def filter_current_online_features(
             unique_key
         )
 
-        if not is_today(
-            properties.get("LastUpdate")
-        ):
+        # เก็บจำนวนสถานีข้อมูลล่าช้าไว้รายงาน แต่ห้ามตัดสถานีออก
+        # ก่อนตรวจ ParameterAlram เพราะจะทำให้ Alarm จริงหายไป
+        if not is_today(properties.get("LastUpdate")):
             stale_station_keys.add(
                 unique_key
             )
-            continue
 
         if unique_key in current_station_keys:
             continue
@@ -1039,8 +1069,20 @@ def filter_alert_features(
             {},
         )
 
-        parameter_alarm = properties.get(
-            "ParameterAlram"
+        # รองรับทั้งชื่อเดิมที่ API สะกดว่า ParameterAlram
+        # และชื่อที่สะกดถูก/รูปแบบตัวพิมพ์อื่น เผื่อ API เปลี่ยน schema
+        parameter_alarm = next(
+            (
+                properties.get(field)
+                for field in (
+                    "ParameterAlram",
+                    "ParameterAlarm",
+                    "parameterAlram",
+                    "parameterAlarm",
+                )
+                if has_parameter_alarm(properties.get(field))
+            ),
+            "",
         )
 
         if not has_parameter_alarm(
@@ -2653,13 +2695,13 @@ def main() -> None:
     )
 
     print(
-        "ONLINE และข้อมูลเป็นวันนี้:",
+        "สถานี ONLINE ที่นำมาตรวจ Alarm:",
         len(current_features),
     )
 
     print(
         "สถานีที่มี ParameterAlram "
-        "ของวันนี้:",
+        "ของวันที่ล่าสุดใน feed:",
         len(alert_features),
     )
 
