@@ -32,7 +32,6 @@ LINE_CHANNEL_ACCESS_TOKEN = os.getenv(
     "",
 ).strip()
 
-
 THAILAND_TIMEZONE = timezone(
     timedelta(hours=7)
 )
@@ -106,10 +105,6 @@ COLOR_WHITE = "#FFFFFF"
 # ============================================================
 
 def now_thailand() -> datetime:
-    """
-    คืนค่าเวลาปัจจุบันตามเวลาประเทศไทย
-    """
-
     return datetime.now(
         THAILAND_TIMEZONE
     )
@@ -119,21 +114,6 @@ def clean_text(
     value: Any,
     default: str = "",
 ) -> str:
-    """
-    ทำความสะอาดข้อความ
-
-    ค่าเหล่านี้ถือว่าไม่มีข้อมูล:
-    None
-    ""
-    ช่องว่าง
-    "-"
-    null
-    none
-    nan
-    undefined
-    9999
-    """
-
     if value is None:
         return default
 
@@ -159,10 +139,6 @@ def clean_text(
 
 
 def is_online(value: Any) -> bool:
-    """
-    ตรวจว่า Status เท่ากับ ONLINE หรือไม่
-    """
-
     return (
         clean_text(value).upper()
         == "ONLINE"
@@ -172,10 +148,6 @@ def is_online(value: Any) -> bool:
 def has_parameter_alarm(
     value: Any,
 ) -> bool:
-    """
-    ตรวจว่า ParameterAlram มีข้อมูลจริงหรือไม่
-    """
-
     return bool(
         clean_text(value)
     )
@@ -204,17 +176,6 @@ THAI_MONTHS_SHORT = {
 def parse_datetime(
     value: Any,
 ) -> datetime | None:
-    """
-    รองรับรูปแบบวันที่ เช่น:
-
-    2026-08-03 09:00
-    2026-08-03 09:00:00
-    2026-08-03T09:00
-    2026-08-03T09:00:00
-    26-08-03 09:00
-    26-08-03 09:00:00
-    """
-
     text = clean_text(value)
 
     if not text:
@@ -247,11 +208,6 @@ def parse_datetime(
 
 
 def is_today(value: Any) -> bool:
-    """
-    ตรวจว่าค่าวันที่เป็นวันที่วันนี้
-    ตามเวลาประเทศไทยหรือไม่
-    """
-
     parsed = parse_datetime(value)
 
     if parsed is None:
@@ -266,12 +222,6 @@ def is_today(value: Any) -> bool:
 def format_datetime_thai(
     value: Any,
 ) -> str:
-    """
-    ตัวอย่าง:
-
-    3 ส.ค. 2569 เวลา 10:25 น.
-    """
-
     parsed = parse_datetime(value)
 
     if parsed is None:
@@ -296,10 +246,6 @@ def format_datetime_thai(
 
 
 def report_time_text() -> str:
-    """
-    วันและเวลาที่ระบบดำเนินการตรวจสอบ
-    """
-
     current = now_thailand()
 
     thai_year = current.year + 543
@@ -322,13 +268,6 @@ def report_time_text() -> str:
 # ============================================================
 
 def download_data() -> Any:
-    """
-    ดาวน์โหลด JSON ใหม่ทุกครั้ง
-
-    เพิ่ม timestamp และ no-cache
-    เพื่อลดปัญหาการอ่านข้อมูลเก่าจาก cache
-    """
-
     timestamp = int(
         time.time()
     )
@@ -348,7 +287,7 @@ def download_data() -> Any:
         request_url,
         headers={
             "User-Agent": (
-                "IEAT-eMonitoring-LINE-Alert/9.0"
+                "IEAT-eMonitoring-LINE-Alert/10.0"
             ),
             "Accept": "application/json",
             "Cache-Control": (
@@ -404,10 +343,6 @@ def download_data() -> Any:
 def get_features(
     data: Any,
 ) -> list[dict[str, Any]]:
-    """
-    อ่านรายการ features จาก GeoJSON
-    """
-
     if not isinstance(data, dict):
         return []
 
@@ -436,15 +371,6 @@ def get_features(
 def split_parameter_alarm(
     value: Any,
 ) -> list[str]:
-    """
-    แยก ParameterAlram เป็นรายเหตุการณ์
-
-    ตัวอย่าง:
-
-    26-08-03 09:00 (...) ,
-    26-08-03 08:00 (...)
-    """
-
     text = clean_text(value)
 
     if not text:
@@ -484,10 +410,6 @@ def split_parameter_alarm(
 def get_alarm_datetime(
     alarm_entry: str,
 ) -> datetime | None:
-    """
-    อ่านวันเวลาจากต้นข้อความ ParameterAlram
-    """
-
     match = re.search(
         (
             r"(?<!\d)"
@@ -509,11 +431,6 @@ def get_alarm_datetime(
 def get_today_alarm_entries(
     value: Any,
 ) -> list[str]:
-    """
-    เลือกเฉพาะรายการ ParameterAlram
-    ที่เป็นวันที่วันนี้
-    """
-
     today = now_thailand().date()
 
     today_entries = []
@@ -550,16 +467,6 @@ def get_today_alarm_entries(
 def remove_alarm_datetime(
     alarm_entry: str,
 ) -> str:
-    """
-    ลบวันเวลาออกจากข้อความ Alarm
-
-    จาก:
-    26-08-03 09:00 (SO2 120 ppb)
-
-    เป็น:
-    SO2 120 ppb
-    """
-
     cleaned = re.sub(
         (
             r"^\s*"
@@ -641,13 +548,6 @@ def parameter_display_name(
 def extract_parameter_names(
     alarm_entries: list[str],
 ) -> list[str]:
-    """
-    อ่านชื่อพารามิเตอร์ทั้งหมดจาก Alarm
-
-    ใช้สำหรับนับจำนวนชนิดพารามิเตอร์
-    ในการ์ดสรุป
-    """
-
     found = []
 
     combined_text = " ".join(
@@ -682,11 +582,6 @@ def extract_parameter_names(
 def extract_primary_parameter_name(
     alarm_entry: str,
 ) -> str:
-    """
-    อ่านชื่อ Parameter ตัวแรก
-    สำหรับแสดงหัวข้อกล่องรายละเอียด
-    """
-
     content = remove_alarm_datetime(
         alarm_entry
     )
@@ -769,10 +664,6 @@ def get_industry_zone(
 def get_raw_station_type(
     properties: dict[str, Any],
 ) -> str:
-    """
-    อ่านประเภทสถานีจากฟิลด์ที่เป็นไปได้
-    """
-
     fields = [
         "Type",
         "StationType",
@@ -795,14 +686,6 @@ def get_raw_station_type(
 def normalize_station_type(
     properties: dict[str, Any],
 ) -> str:
-    """
-    จัดประเภทสถานีให้เป็นมาตรฐาน:
-
-    AQMs
-    WQMs
-    CEMs
-    """
-
     raw_type = get_raw_station_type(
         properties
     )
@@ -924,13 +807,6 @@ def station_map_url(
 def is_valid_station(
     properties: dict[str, Any],
 ) -> bool:
-    """
-    ตรวจว่าเป็นข้อมูลสถานีจริง
-
-    - Code ต้องไม่ใช่ 0
-    - ต้องมีชื่อสถานี
-    """
-
     code = clean_text(
         properties.get("Code")
     )
@@ -951,10 +827,6 @@ def is_valid_station(
 def station_unique_key(
     properties: dict[str, Any],
 ) -> str:
-    """
-    สร้าง Key สำหรับป้องกันการนับสถานีซ้ำ
-    """
-
     code = clean_text(
         properties.get("Code")
     )
@@ -972,17 +844,6 @@ def station_unique_key(
 def count_online_station_types(
     features: list[dict[str, Any]],
 ) -> dict[str, int]:
-    """
-    นับจำนวนสถานีที่ Status = ONLINE ทั้งหมด
-    ณ รอบที่ระบบตรวจสอบ
-
-    แยกเป็น:
-    AQMs
-    WQMs
-    CEMs
-    Other
-    """
-
     counts = {
         "AQMs": 0,
         "WQMs": 0,
@@ -1056,19 +917,6 @@ def filter_current_online_features(
     int,
     int,
 ]:
-    """
-    เลือกเฉพาะสถานีที่:
-
-    1. เป็นสถานีจริง
-    2. Status = ONLINE
-    3. LastUpdate เป็นวันที่วันนี้
-
-    คืนค่า:
-    - current_features
-    - จำนวนสถานี ONLINE ทั้งหมด
-    - จำนวนสถานี ONLINE แต่ข้อมูลไม่ใช่วันนี้
-    """
-
     current_features = []
 
     online_station_keys = set()
@@ -1134,15 +982,6 @@ def filter_current_online_features(
 def filter_alert_features(
     current_features: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
-    """
-    เลือกเฉพาะสถานีที่:
-
-    1. Status = ONLINE
-    2. LastUpdate เป็นวันนี้
-    3. ParameterAlram มีข้อมูลจริง
-    4. รายการ ParameterAlram เป็นของวันนี้
-    """
-
     alert_features = []
 
     for feature in current_features:
@@ -1211,14 +1050,6 @@ def filter_alert_features(
 def get_severity_level(
     feature: dict[str, Any],
 ) -> str:
-    """
-    แบ่งระดับจากจำนวนรายการ Alarm ของวันนี้
-
-    3 รายการขึ้นไป = urgent
-    2 รายการ = watch
-    1 รายการ = follow
-    """
-
     properties = feature.get(
         "properties",
         {},
@@ -1246,18 +1077,9 @@ def summarize_alerts(
     alert_features: list[dict[str, Any]],
     online_type_counts: dict[str, int],
 ) -> dict[str, Any]:
-    """
-    สรุปสถานการณ์สำหรับการ์ดภาพรวม
-    """
-
     station_keys = set()
     parameter_names = set()
     industry_zones = set()
-
-    alert_aqms = set()
-    alert_wqms = set()
-    alert_cems = set()
-    alert_other = set()
 
     urgent_count = 0
     watch_count = 0
@@ -1291,30 +1113,6 @@ def summarize_alerts(
                 parameter
             )
 
-        station_type = normalize_station_type(
-            properties
-        )
-
-        if station_type == "AQMs":
-            alert_aqms.add(
-                station_key
-            )
-
-        elif station_type == "WQMs":
-            alert_wqms.add(
-                station_key
-            )
-
-        elif station_type == "CEMs":
-            alert_cems.add(
-                station_key
-            )
-
-        else:
-            alert_other.add(
-                station_key
-            )
-
         severity = get_severity_level(
             feature
         )
@@ -1338,11 +1136,9 @@ def summarize_alerts(
         "industry_zone_count": len(
             industry_zones
         ),
-
         "urgent_count": urgent_count,
         "watch_count": watch_count,
         "follow_count": follow_count,
-
         "online_total": online_type_counts.get(
             "total",
             0,
@@ -1358,23 +1154,6 @@ def summarize_alerts(
         "online_cems": online_type_counts.get(
             "CEMs",
             0,
-        ),
-        "online_other": online_type_counts.get(
-            "Other",
-            0,
-        ),
-
-        "alert_aqms": len(
-            alert_aqms
-        ),
-        "alert_wqms": len(
-            alert_wqms
-        ),
-        "alert_cems": len(
-            alert_cems
-        ),
-        "alert_other": len(
-            alert_other
         ),
     }
 
@@ -1447,7 +1226,6 @@ def flex_button(
     if primary:
         button["style"] = "primary"
         button["color"] = COLOR_PRIMARY_DARK
-
     else:
         button["style"] = "secondary"
 
@@ -1578,10 +1356,6 @@ def summary_number_box(
     }
 
 
-# ============================================================
-# 15. กล่องจำนวนสถานีแยกตามประเภท
-# ============================================================
-
 def station_type_count_box(
     station_type: str,
     count: int,
@@ -1619,11 +1393,6 @@ def station_type_count_box(
 def online_station_summary_box(
     online_type_counts: dict[str, int],
 ) -> dict[str, Any]:
-    """
-    กล่องแสดงจำนวนสถานี ONLINE
-    แยกตามประเภท
-    """
-
     contents = [
         info_row(
             "สถานี ONLINE ทั้งหมด",
@@ -1693,10 +1462,6 @@ def online_station_summary_box(
     }
 
 
-# ============================================================
-# 16. กล่องระดับสถานการณ์
-# ============================================================
-
 def severity_box(
     title: str,
     description: str,
@@ -1757,7 +1522,7 @@ def severity_box(
 
 
 # ============================================================
-# 17. การ์ดสรุปเมื่อพบ Alarm
+# 15. การ์ดสรุปเมื่อพบ Alarm
 # ============================================================
 
 def build_alert_summary_bubble(
@@ -1933,7 +1698,7 @@ def build_alert_summary_bubble(
 
 
 # ============================================================
-# 18. การ์ดสรุปเมื่อไม่พบ Alarm
+# 16. การ์ดสรุปเมื่อไม่พบ Alarm
 # ============================================================
 
 def build_normal_summary_bubble(
@@ -2048,7 +1813,7 @@ def build_normal_summary_bubble(
 
 
 # ============================================================
-# 19. กล่องรายละเอียด Alarm
+# 17. กล่องรายละเอียด Alarm
 # ============================================================
 
 def alarm_entry_box(
@@ -2110,7 +1875,7 @@ def alarm_entry_box(
 
 
 # ============================================================
-# 20. การ์ดรายละเอียดแต่ละสถานี
+# 18. การ์ดรายละเอียดแต่ละสถานี
 # ============================================================
 
 def build_alert_detail_bubble(
@@ -2345,21 +2110,13 @@ def build_alert_detail_bubble(
 
 
 # ============================================================
-# 21. ส่ง LINE Flex Message
+# 19. ส่ง LINE Broadcast
 # ============================================================
 
 def send_line_flex(
     alt_text: str,
     contents: dict[str, Any],
 ) -> None:
-    """
-    ส่ง LINE Flex Message แบบ Broadcast
-
-    ส่งให้ผู้ใช้ทุกคนที่เพิ่ม
-    LINE Official Account เป็นเพื่อน
-    และไม่ได้บล็อกบัญชี
-    """
-
     if not LINE_CHANNEL_ACCESS_TOKEN:
         raise RuntimeError(
             "ไม่พบ LINE_CHANNEL_ACCESS_TOKEN"
@@ -2428,6 +2185,99 @@ def send_line_flex(
 
 
 # ============================================================
+# 20. แบ่งรายการเป็นชุด
+# ============================================================
+
+def chunk_list(
+    items: list[Any],
+    chunk_size: int,
+) -> list[list[Any]]:
+    if chunk_size <= 0:
+        raise ValueError(
+            "chunk_size ต้องมากกว่า 0"
+        )
+
+    return [
+        items[index:index + chunk_size]
+        for index in range(
+            0,
+            len(items),
+            chunk_size,
+        )
+    ]
+
+
+# ============================================================
+# 21. ส่งรายละเอียดสถานีแบบ Carousel
+# ============================================================
+
+def send_alert_detail_carousels(
+    alert_features: list[dict[str, Any]],
+) -> None:
+    if not alert_features:
+        print(
+            "ไม่มีรายละเอียดสถานีที่ต้องส่ง"
+        )
+        return
+
+    batches = chunk_list(
+        alert_features,
+        MAX_BUBBLES_PER_CAROUSEL,
+    )
+
+    total_alerts = len(
+        alert_features
+    )
+
+    total_batches = len(
+        batches
+    )
+
+    for batch_number, batch in enumerate(
+        batches,
+        start=1,
+    ):
+        bubbles = [
+            build_alert_detail_bubble(
+                feature
+            )
+            for feature in batch
+        ]
+
+        carousel = {
+            "type": "carousel",
+            "contents": bubbles,
+        }
+
+        alt_text = (
+            "รายละเอียดแจ้งเตือน "
+            "e-Monitoring "
+            f"{total_alerts} สถานี"
+        )
+
+        if total_batches > 1:
+            alt_text += (
+                f" ชุดที่ {batch_number}/"
+                f"{total_batches}"
+            )
+
+        print(
+            "กำลังส่งรายละเอียดสถานี "
+            f"ชุดที่ {batch_number}/"
+            f"{total_batches} "
+            f"จำนวน {len(batch)} สถานี"
+        )
+
+        send_line_flex(
+            alt_text,
+            carousel,
+        )
+
+        if batch_number < total_batches:
+            time.sleep(1)
+
+
+# ============================================================
 # 22. โปรแกรมหลัก
 # ============================================================
 
@@ -2465,19 +2315,11 @@ def main() -> None:
             "e-Monitoring"
         )
 
-    # --------------------------------------------------------
-    # นับสถานี ONLINE ทั้งหมดแยกตามประเภท
-    # --------------------------------------------------------
-
     online_type_counts = (
         count_online_station_types(
             features
         )
     )
-
-    # --------------------------------------------------------
-    # เลือกสถานี ONLINE ที่มีข้อมูลของวันนี้
-    # --------------------------------------------------------
 
     (
         current_features,
@@ -2486,10 +2328,6 @@ def main() -> None:
     ) = filter_current_online_features(
         features
     )
-
-    # --------------------------------------------------------
-    # เลือกสถานีที่มี Alarm ของวันนี้
-    # --------------------------------------------------------
 
     alert_features = (
         filter_alert_features(
@@ -2560,13 +2398,7 @@ def main() -> None:
 
     print("=" * 80)
 
-    # ========================================================
-    # กรณีพบ Parameter Alarm
-    #
-    # 1. ส่งการ์ดสรุปสถานการณ์ก่อน
-    # 2. ส่งรายละเอียดสถานีต่อท้าย
-    # ========================================================
-
+    # กรณีพบ Alarm
     if alert_features:
         print(
             "ส่งการ์ดสรุปสถานการณ์"
@@ -2600,12 +2432,7 @@ def main() -> None:
 
         return
 
-    # ========================================================
-    # กรณีไม่พบ Parameter Alarm
-    #
-    # ส่งเฉพาะการ์ดสรุปสถานการณ์
-    # ========================================================
-
+    # กรณีไม่พบ Alarm
     print(
         "ไม่พบค่าพารามิเตอร์"
         "เกินเกณฑ์มาตรฐาน"
