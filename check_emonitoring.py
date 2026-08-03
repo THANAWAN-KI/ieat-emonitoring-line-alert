@@ -18,7 +18,9 @@ DATA_URL = (
     "call_feed/geog/GeoData/station_all.json"
 )
 
-LINE_PUSH_URL = "https://api.line.me/v2/bot/message/push"
+LINE_BROADCAST_URL = (
+    "https://api.line.me/v2/bot/message/broadcast"
+)
 
 ARCGIS_DASHBOARD_URL = (
     "https://www.arcgis.com/apps/dashboards/"
@@ -30,10 +32,6 @@ LINE_CHANNEL_ACCESS_TOKEN = os.getenv(
     "",
 ).strip()
 
-LINE_TARGET_ID = os.getenv(
-    "LINE_TARGET_ID",
-    "",
-).strip()
 
 THAILAND_TIMEZONE = timezone(
     timedelta(hours=7)
@@ -2355,7 +2353,11 @@ def send_line_flex(
     contents: dict[str, Any],
 ) -> None:
     """
-    ส่ง Flex Message เข้า LINE
+    ส่ง LINE Flex Message แบบ Broadcast
+
+    ส่งให้ผู้ใช้ทุกคนที่เพิ่ม
+    LINE Official Account เป็นเพื่อน
+    และไม่ได้บล็อกบัญชี
     """
 
     if not LINE_CHANNEL_ACCESS_TOKEN:
@@ -2363,13 +2365,7 @@ def send_line_flex(
             "ไม่พบ LINE_CHANNEL_ACCESS_TOKEN"
         )
 
-    if not LINE_TARGET_ID:
-        raise RuntimeError(
-            "ไม่พบ LINE_TARGET_ID"
-        )
-
     payload = {
-        "to": LINE_TARGET_ID,
         "messages": [
             {
                 "type": "flex",
@@ -2385,7 +2381,7 @@ def send_line_flex(
     ).encode("utf-8")
 
     request = urllib.request.Request(
-        LINE_PUSH_URL,
+        LINE_BROADCAST_URL,
         data=request_body,
         method="POST",
         headers={
@@ -2404,7 +2400,7 @@ def send_line_flex(
         ) as response:
 
             print(
-                "ส่ง LINE สำเร็จ "
+                "ส่ง LINE Broadcast สำเร็จ "
                 f"HTTP {response.status}"
             )
 
@@ -2418,84 +2414,17 @@ def send_line_flex(
         )
 
         raise RuntimeError(
-            f"LINE API HTTP {error.code}: "
+            f"LINE Broadcast API "
+            f"HTTP {error.code}: "
             f"{error_body}"
         ) from error
 
     except urllib.error.URLError as error:
         raise RuntimeError(
-            "ไม่สามารถเชื่อมต่อ LINE API ได้: "
+            "ไม่สามารถเชื่อมต่อ "
+            "LINE Broadcast API ได้: "
             f"{error.reason}"
         ) from error
-
-
-def chunk_list(
-    items: list[Any],
-    chunk_size: int,
-) -> list[list[Any]]:
-    return [
-        items[index:index + chunk_size]
-        for index in range(
-            0,
-            len(items),
-            chunk_size,
-        )
-    ]
-
-
-def send_alert_detail_carousels(
-    alert_features: list[dict[str, Any]],
-) -> None:
-    """
-    ส่งรายละเอียดสถานีเป็น Carousel
-    หลังจากส่งการ์ดสรุปแล้ว
-    """
-
-    batches = chunk_list(
-        alert_features,
-        MAX_BUBBLES_PER_CAROUSEL,
-    )
-
-    total_alerts = len(
-        alert_features
-    )
-
-    for batch_number, batch in enumerate(
-        batches,
-        start=1,
-    ):
-        bubbles = [
-            build_alert_detail_bubble(
-                feature
-            )
-            for feature in batch
-        ]
-
-        carousel = {
-            "type": "carousel",
-            "contents": bubbles,
-        }
-
-        alt_text = (
-            "รายละเอียดแจ้งเตือน e-Monitoring "
-            f"{total_alerts} สถานี"
-        )
-
-        if len(batches) > 1:
-            alt_text += (
-                f" ส่วนที่ {batch_number}/"
-                f"{len(batches)}"
-            )
-
-        send_line_flex(
-            alt_text,
-            carousel,
-        )
-
-        if batch_number < len(
-            batches
-        ):
-            time.sleep(1)
 
 
 # ============================================================
