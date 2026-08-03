@@ -48,10 +48,6 @@ MAX_ALARM_ENTRIES_PER_STATION = 6
 # แทนการสรุปว่าสถานการณ์ปกติจากข้อมูลเก่า
 FRESH_DATA_MAX_AGE_MINUTES = 120
 
-# Alarm ต้องมีเวลาล่าสุดไม่เกินค่านี้ จึงถือว่ายังเกิดอยู่
-ACTIVE_ALARM_MAX_AGE_MINUTES = 120
-
-
 # ============================================================
 # 2. รูปภาพที่ใช้ใน LINE Flex Message
 # ============================================================
@@ -468,22 +464,8 @@ def get_today_alarm_entries(
 
 
 def get_active_alarm_entries(value: Any) -> list[str]:
-    """คืนเฉพาะ Alarm ล่าสุดที่ยังอยู่ในช่วงเฝ้าระวัง"""
-    current = now_thailand()
-    active_entries = []
-
-    for entry in get_today_alarm_entries(value):
-        alarm_datetime = get_alarm_datetime(entry)
-        if alarm_datetime is None:
-            continue
-
-        age = current - alarm_datetime
-        if timedelta(0) <= age <= timedelta(
-            minutes=ACTIVE_ALARM_MAX_AGE_MINUTES
-        ):
-            active_entries.append(entry)
-
-    return active_entries
+    """คืน Alarm ของวันนี้ทั้งหมด ไม่ตัดทิ้งเพราะเกิน 120 นาที"""
+    return get_today_alarm_entries(value)
 
 
 # ============================================================
@@ -2500,7 +2482,6 @@ def main() -> None:
     )
 
     latest_online_update = get_latest_online_update(features)
-    data_is_fresh = is_data_fresh(latest_online_update)
 
     print()
     print("=" * 80)
@@ -2570,22 +2551,11 @@ def main() -> None:
         else "ไม่พบ",
     )
 
-    print("ข้อมูลยังสด:", "ใช่" if data_is_fresh else "ไม่ใช่")
-
     print("=" * 80)
 
-    # ส่งรายงานเข้า LINE ทุกครั้งที่ Workflow รัน
-    if not data_is_fresh:
-        print("ส่งการ์ดแจ้งว่าข้อมูล e-Monitoring ล่าช้า")
-        send_line_flex(
-            "e-Monitoring: ข้อมูลล่าช้า โปรดตรวจสอบระบบต้นทาง",
-            build_stale_data_summary_bubble(
-                online_type_counts,
-                latest_online_update,
-            ),
-        )
-
-    elif alert_features:
+    # ส่งรายงานเข้า LINE ทุกครั้งที่ Workflow รัน โดยมีเพียง 2 กรณี:
+    # 1) พบค่าเกินมาตรฐาน  2) ไม่พบค่าเกินมาตรฐาน
+    if alert_features:
         print(
             "ส่งการ์ดสรุปสถานการณ์"
         )
