@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
   schedule:
     # GitHub Actions ใช้เวลา UTC: นาทีที่ 17 ของทุกชั่วโมง
+    # เท่ากับนาทีที่ 17 ของทุกชั่วโมงในประเทศไทยเช่นกัน
     - cron: "17 * * * *"
 
 permissions:
