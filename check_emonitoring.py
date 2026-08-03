@@ -1,38 +1,52 @@
 import json
 import os
+import re
 import sys
 from datetime import datetime
+from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import requests
 
 
 # ============================================================
-# CONFIG
+# การตั้งค่าระบบ
 # ============================================================
 
-# ข้อมูล e-Monitoring ต้นทาง
 DATA_URL = (
     "https://emonitor.ieat.go.th/"
     "call_feed/geog/GeoData/station_all.json"
 )
 
-# LINE Messaging API
 LINE_API_URL = "https://api.line.me/v2/bot/message/push"
 
-# GitHub Secrets
-LINE_CHANNEL_ACCESS_TOKEN = os.getenv("LINE_CHANNEL_ACCESS_TOKEN", "")
-LINE_TARGET_ID = os.getenv("LINE_TARGET_ID", "")
+LINE_CHANNEL_ACCESS_TOKEN = os.getenv(
+    "LINE_CHANNEL_ACCESS_TOKEN",
+    "",
+).strip()
 
-# ไฟล์สำหรับจำว่าเคยส่ง Alert อะไรไปแล้ว
-STATE_FILE = "alert_state.json"
+LINE_TARGET_ID = os.getenv(
+    "LINE_TARGET_ID",
+    "",
+).strip()
 
-# Timeout สำหรับการโหลดข้อมูล
-REQUEST_TIMEOUT = 60
+STATE_FILE = Path("alert_state.json")
+
+REQUEST_TIMEOUT_SECONDS = 60
+
+THAILAND_TIMEZONE = ZoneInfo("Asia/Bangkok")
 
 
 # ============================================================
-# UTILITY
+# ฟังก์ชันพื้นฐาน
 # ============================================================
+
+def thailand_now():
+    """
+    คืนค่าเวลาปัจจุบันตามเขตเวลาไทย
+    """
+    return datetime.now(THAILAND_TIMEZONE)
+
 
 def clean_text(value):
     """
@@ -41,11 +55,13 @@ def clean_text(value):
     ค่าเหล่านี้ถือว่าไม่มีข้อมูล:
     None
     ""
+    ช่องว่าง
     "-"
-    "null"
-    "none"
-    "n/a"
-    "na"
+    null
+    none
+    n/a
+    na
+    undefined
     """
 
     if value is None:
@@ -53,14 +69,17 @@ def clean_text(value):
 
     text = str(value).strip()
 
-    if text.lower() in {
+    invalid_values = {
         "",
         "-",
         "null",
         "none",
         "n/a",
         "na",
-    }:
+        "undefined",
+    }
+
+    if text.lower() in invalid_values:
         return ""
 
     return text
@@ -68,7 +87,7 @@ def clean_text(value):
 
 def is_online(value):
     """
-    ตรวจว่า Status เป็น ONLINE หรือไม่
+    ตรวจสอบว่า Status เท่ากับ ONLINE หรือไม่
 
     รองรับ:
     ONLINE
@@ -83,245 +102,730 @@ def is_online(value):
 
 def has_parameter_alarm(value):
     """
-    ตรวจว่า ParameterAlram มีข้อมูลจริงหรือไม่
+    ตรวจสอบว่า ParameterAlram มีข้อมูลจริงหรือไม่
     """
 
     return bool(clean_text(value))
 
 
 # ============================================================
-# DOWNLOAD e-MONITORING
+# การตรวจวันที่ LastUpdate
 # ============================================================
 
-def download_emonitoring():
+def parse_last_update(value):
     """
-    ดาวน์โหลดข้อมูล e-Monitoring สดทุกครั้งที่ Workflow ทำงาน
+    แปลงค่า LastUpdate เป็น datetime
+
+    รองรับรูปแบบ:
+    2026-08-03 09:00
+    2026-08-03 09:00:00
+    2026-08-03T09:00
+    2026-08-03T09:00:00
     """
 
-    print("=" * 70)
+    text = clean_text(value)
+
+    if not text:
+        return None
+
+    formats = [
+        "%Y-%m-%d %H:%M:%S",
+        "%Y-%m-%d %H:%M",
+        "%Y-%m-%dT%H:%M:%S",
+        "%Y-%m-%dT%H:%M",
+    ]
+
+    for date_format in formats:
+        try:
+            parsed = datetime.strptime(
+                text,
+                date_format,
+            )
+
+            return parsed.replace(
+                tzinfo=THAILAND_TIMEZONE,
+            )
+
+        except ValueError:
+            continue
+
+    return None
+
+
+def is_updated_today(properties):
+    """
+    ตรวจสอบว่า LastUpdate เป็นวันที่วันนี้ตามเวลาไทยหรือไม่
+    """
+
+    last_update = parse_last_update(
+        properties.get("LastUpdate")
+    )
+
+    if last_update is None:
+        return False
+
+    today_thailand = thailand_now().date()
+
+    return last_update.date() == today_thailand
+
+
+# ============================================================
+# การกรอง ParameterAlram เฉพาะของวันนี้
+# ============================================================
+
+def parse_alarm_date(date_text):
+    """
+    แปลงวันที่ใน ParameterAlram
+
+    ตัวอย่างรูปแบบจากข้อมูล:
+    26-07-10 15:00
+
+    หมายถึง:
+    ปี 2026 เดือน 07 วันที่ 10 เวลา 15:00
+    """
+
+    text = clean_text(date_text)
+
+    if not text:
+        return None
+
+    formats = [
+        "%y-%m-%d %H:%M",
+        "%Y-%m-%d %H:%M",
+        "%y-%m-%d %H:%M:%S",
+        "%Y-%m-%d %H:%M:%S",
+    ]
+
+    for date_format in formats:
+        try:
+            parsed = datetime.strptime(
+                text,
+                date_format,
+            )
+
+            return parsed.replace(
+                tzinfo=THAILAND_TIMEZONE,
+            )
+
+        except ValueError:
+            continue
+
+    return None
+
+
+def split_parameter_alarm(parameter_alarm):
+    """
+    แยกรายการ ParameterAlram ออกจากกัน
+
+    รองรับตัวคั่น:
+    " , "
+    ","
+    ขึ้นบรรทัดใหม่
+
+    จะพยายามไม่แยก comma ที่อยู่ในตัวเลข เช่น 1,003.62
+    """
+
+    text = clean_text(parameter_alarm)
+
+    if not text:
+        return []
+
+    text = text.replace("\r\n", "\n")
+    text = text.replace("\r", "\n")
+
+    parts = re.split(
+        r"\s+,\s+(?=\d{2,4}-\d{2}-\d{2}\s+\d{2}:\d{2})|\n+",
+        text,
+    )
+
+    results = []
+
+    for part in parts:
+        cleaned = part.strip(" ,")
+
+        if cleaned:
+            results.append(cleaned)
+
+    return results
+
+
+def extract_alarm_datetime(alarm_text):
+    """
+    อ่านวันและเวลาจากต้นรายการ ParameterAlram
+
+    ตัวอย่าง:
+    26-08-03 09:00 (SO2 115.67 ppb)
+    """
+
+    text = clean_text(alarm_text)
+
+    if not text:
+        return None
+
+    match = re.search(
+        r"(?<!\d)"
+        r"(\d{2,4}-\d{2}-\d{2}\s+\d{2}:\d{2}(?::\d{2})?)",
+        text,
+    )
+
+    if not match:
+        return None
+
+    return parse_alarm_date(
+        match.group(1)
+    )
+
+
+def get_today_alarm_entries(parameter_alarm):
+    """
+    คืนค่าเฉพาะรายการ ParameterAlram ที่เป็นวันที่วันนี้
+
+    ถ้าอ่านวันที่ใน ParameterAlram ไม่ได้ทั้งหมด
+    จะไม่ส่งรายการนั้น เพื่อป้องกันข้อมูลเก่า
+    """
+
+    today_thailand = thailand_now().date()
+
+    alarm_entries = split_parameter_alarm(
+        parameter_alarm
+    )
+
+    today_entries = []
+
+    for alarm_entry in alarm_entries:
+        alarm_datetime = extract_alarm_datetime(
+            alarm_entry
+        )
+
+        if alarm_datetime is None:
+            print(
+                "ข้าม Alarm ที่อ่านวันที่ไม่ได้:",
+                alarm_entry,
+            )
+            continue
+
+        if alarm_datetime.date() != today_thailand:
+            continue
+
+        today_entries.append(
+            alarm_entry
+        )
+
+    return today_entries
+
+
+# ============================================================
+# ดาวน์โหลดข้อมูล e-Monitoring
+# ============================================================
+
+def download_emonitoring_data():
+    """
+    ดาวน์โหลดข้อมูล e-Monitoring สด
+
+    เพิ่ม timestamp เพื่อป้องกัน cache
+    """
+
+    print("=" * 78)
     print("กำลังดาวน์โหลดข้อมูล e-Monitoring")
-    print("=" * 70)
+    print("URL:", DATA_URL)
+    print("=" * 78)
+
+    request_time = int(
+        thailand_now().timestamp()
+    )
+
+    headers = {
+        "User-Agent": (
+            "IEAT-eMonitoring-LINE-Alert/2.0"
+        ),
+        "Accept": "application/json",
+        "Cache-Control": "no-cache",
+        "Pragma": "no-cache",
+    }
 
     try:
         response = requests.get(
             DATA_URL,
-            timeout=REQUEST_TIMEOUT,
-            headers={
-                "User-Agent": "IEAT-eMonitoring-LINE-Alert/1.0",
-                "Cache-Control": "no-cache",
-                "Pragma": "no-cache",
-            },
+            headers=headers,
             params={
-                "_t": int(datetime.now().timestamp())
+                "_t": request_time,
             },
+            timeout=REQUEST_TIMEOUT_SECONDS,
         )
 
         response.raise_for_status()
 
-    except requests.RequestException as exc:
-        print("ERROR: ไม่สามารถดาวน์โหลดข้อมูล e-Monitoring")
-        print(exc)
+    except requests.RequestException as error:
+        print(
+            "ERROR: ดาวน์โหลดข้อมูล e-Monitoring ไม่สำเร็จ"
+        )
+        print(error)
         sys.exit(1)
 
     try:
         data = response.json()
 
     except ValueError:
-        print("ERROR: ข้อมูลที่ได้รับไม่ใช่ JSON")
-        print("HTTP Status:", response.status_code)
-        print("Content-Type:", response.headers.get("Content-Type"))
+        print(
+            "ERROR: ข้อมูลที่ได้รับไม่ใช่ JSON"
+        )
+        print(
+            "HTTP Status:",
+            response.status_code,
+        )
+        print(
+            "Content-Type:",
+            response.headers.get(
+                "Content-Type",
+                "",
+            ),
+        )
+        print(
+            "Response ตัวอย่าง:",
+            response.text[:500],
+        )
         sys.exit(1)
 
-    print("ดาวน์โหลดข้อมูลสำเร็จ")
-    print("HTTP Status:", response.status_code)
+    if not isinstance(data, dict):
+        print(
+            "ERROR: โครงสร้าง JSON ไม่ถูกต้อง"
+        )
+        sys.exit(1)
+
+    print(
+        "ดาวน์โหลดข้อมูลสำเร็จ"
+    )
+    print(
+        "HTTP Status:",
+        response.status_code,
+    )
 
     return data
 
 
-# ============================================================
-# GET FEATURES
-# ============================================================
-
 def get_features(data):
     """
-    รองรับข้อมูล GeoJSON ที่มีโครงสร้าง:
-
-    {
-        "type": "FeatureCollection",
-        "features": [...]
-    }
+    อ่านรายการ Feature จาก GeoJSON
     """
 
-    if not isinstance(data, dict):
-        print("ERROR: รูปแบบข้อมูลไม่ถูกต้อง")
-        return []
-
-    features = data.get("features", [])
+    features = data.get(
+        "features",
+        [],
+    )
 
     if not isinstance(features, list):
-        print("ERROR: ไม่พบ features ในข้อมูล")
+        print(
+            "ERROR: features ไม่ใช่รายการ"
+        )
         return []
 
     return features
 
 
 # ============================================================
-# FILTER
+# กรองข้อมูลตามเงื่อนไข
 # ============================================================
 
 def filter_alert_features(features):
     """
-    เงื่อนไขหลักของระบบ
-
-    ส่ง LINE เฉพาะ:
+    เลือกเฉพาะข้อมูลที่ผ่านทุกเงื่อนไข:
 
     1. Status = ONLINE
     2. ParameterAlram มีข้อมูลจริง
-
-    ไม่ส่ง:
-    OFFLINE
-    null
-    None
-    ""
-    "-"
+    3. LastUpdate เป็นวันที่วันนี้
+    4. ParameterAlram มีรายการของวันนี้
+    5. Code ต้องไม่เท่ากับ 0
+    6. StationTH ต้องมีชื่อจริง
     """
 
-    result = []
+    filtered_features = []
 
     online_count = 0
     alarm_count = 0
+    today_last_update_count = 0
+    today_alarm_count = 0
+
+    skipped_code_zero = 0
+    skipped_old_last_update = 0
+    skipped_old_alarm = 0
+
+    today_text = thailand_now().strftime(
+        "%Y-%m-%d"
+    )
+
+    print()
+    print("=" * 78)
+    print(
+        "วันที่ปัจจุบันตามเวลาไทย:",
+        today_text,
+    )
+    print("=" * 78)
 
     for feature in features:
-
         if not isinstance(feature, dict):
             continue
 
-        properties = feature.get("properties", {})
+        properties = feature.get(
+            "properties",
+            {},
+        )
 
         if not isinstance(properties, dict):
             continue
 
-        status = properties.get("Status")
-        parameter_alarm = properties.get("ParameterAlram")
+        code = clean_text(
+            properties.get("Code")
+        )
 
-        # ----------------------------
-        # ตรวจ ONLINE
-        # ----------------------------
+        station_name = clean_text(
+            properties.get("StationTH")
+        )
 
+        status = properties.get(
+            "Status"
+        )
+
+        parameter_alarm = properties.get(
+            "ParameterAlram"
+        )
+
+        # ข้ามรายการ Code = 0
+        if code == "0":
+            skipped_code_zero += 1
+            continue
+
+        # ข้ามรายการไม่มีชื่อสถานีจริง
+        if not station_name:
+            continue
+
+        # เงื่อนไขที่ 1: ONLINE
         if not is_online(status):
             continue
 
         online_count += 1
 
-        # ----------------------------
-        # ตรวจ ParameterAlram
-        # ----------------------------
-
-        if not has_parameter_alarm(parameter_alarm):
+        # เงื่อนไขที่ 2: ParameterAlram มีข้อมูล
+        if not has_parameter_alarm(
+            parameter_alarm
+        ):
             continue
 
         alarm_count += 1
 
-        result.append(feature)
+        # เงื่อนไขที่ 3: LastUpdate เป็นวันนี้
+        if not is_updated_today(
+            properties
+        ):
+            skipped_old_last_update += 1
+
+            print(
+                "ข้ามข้อมูล LastUpdate เก่า:",
+                station_name,
+                "| LastUpdate:",
+                clean_text(
+                    properties.get("LastUpdate")
+                )
+                or "-",
+            )
+
+            continue
+
+        today_last_update_count += 1
+
+        # เงื่อนไขที่ 4:
+        # ParameterAlram ต้องมีรายการของวันนี้
+        today_alarm_entries = (
+            get_today_alarm_entries(
+                parameter_alarm
+            )
+        )
+
+        if not today_alarm_entries:
+            skipped_old_alarm += 1
+
+            print(
+                "ข้าม Alarm เก่า:",
+                station_name,
+                "| ParameterAlram ไม่มีรายการของวันนี้",
+            )
+
+            continue
+
+        today_alarm_count += 1
+
+        # เพิ่มค่าใหม่เข้า properties
+        # เพื่อใช้สร้างข้อความ LINE
+        copied_feature = dict(feature)
+
+        copied_properties = dict(
+            properties
+        )
+
+        copied_properties[
+            "_today_alarm_entries"
+        ] = today_alarm_entries
+
+        copied_feature[
+            "properties"
+        ] = copied_properties
+
+        filtered_features.append(
+            copied_feature
+        )
 
     print()
-    print("ผลการกรองข้อมูล")
-    print("-" * 70)
+    print("=" * 78)
+    print("สรุปการกรองข้อมูล")
+    print("=" * 78)
+    print(
+        f"Feature ทั้งหมด                       : "
+        f"{len(features)}"
+    )
+    print(
+        f"ข้ามรายการ Code = 0                  : "
+        f"{skipped_code_zero}"
+    )
+    print(
+        f"สถานะ ONLINE                         : "
+        f"{online_count}"
+    )
+    print(
+        f"ONLINE และ ParameterAlram มีข้อมูล   : "
+        f"{alarm_count}"
+    )
+    print(
+        f"LastUpdate เป็นวันนี้                 : "
+        f"{today_last_update_count}"
+    )
+    print(
+        f"ParameterAlram มีรายการของวันนี้      : "
+        f"{today_alarm_count}"
+    )
+    print(
+        f"ข้ามเพราะ LastUpdate เก่า             : "
+        f"{skipped_old_last_update}"
+    )
+    print(
+        f"ข้ามเพราะ Alarm ไม่ใช่ของวันนี้        : "
+        f"{skipped_old_alarm}"
+    )
+    print(
+        f"ข้อมูลที่เตรียมส่ง LINE                : "
+        f"{len(filtered_features)}"
+    )
+    print("=" * 78)
 
-    print(f"สถานะ ONLINE               : {online_count}")
-    print(f"ONLINE + ParameterAlram    : {alarm_count}")
-    print(f"เตรียมตรวจเพื่อส่ง LINE     : {len(result)}")
-
-    return result
+    return filtered_features
 
 
 # ============================================================
-# ALERT KEY
+# จัดรูปแบบวันที่
 # ============================================================
 
-def create_alert_key(properties):
+THAI_MONTHS_SHORT = {
+    1: "ม.ค.",
+    2: "ก.พ.",
+    3: "มี.ค.",
+    4: "เม.ย.",
+    5: "พ.ค.",
+    6: "มิ.ย.",
+    7: "ก.ค.",
+    8: "ส.ค.",
+    9: "ก.ย.",
+    10: "ต.ค.",
+    11: "พ.ย.",
+    12: "ธ.ค.",
+}
+
+
+def format_last_update_thai(properties):
     """
-    สร้าง Key สำหรับตรวจว่า Alert นี้เคยส่งหรือยัง
+    จัดรูปแบบวันที่เป็นภาษาไทยจาก LastUpdate จริง
 
-    ใช้:
-    Code
-    StationTH
-    ParameterAlram
-
-    ถ้า ParameterAlram เปลี่ยน
-    จะถือว่าเป็น Alert ใหม่
+    ตัวอย่าง:
+    3 ส.ค. 2569, 09:00
     """
 
-    code = clean_text(
-        properties.get("Code")
+    last_update = parse_last_update(
+        properties.get("LastUpdate")
     )
 
-    station = clean_text(
+    if last_update is None:
+        return ""
+
+    thai_year = last_update.year + 543
+
+    thai_month = THAI_MONTHS_SHORT.get(
+        last_update.month,
+        "",
+    )
+
+    return (
+        f"{last_update.day} "
+        f"{thai_month} "
+        f"{thai_year}, "
+        f"{last_update.strftime('%H:%M')}"
+    )
+
+
+# ============================================================
+# สร้างข้อความ LINE
+# ============================================================
+
+def build_alert_message(properties):
+    """
+    สร้างข้อความ LINE
+
+    แสดงเฉพาะข้อมูลที่มีจริง
+    """
+
+    station_name = clean_text(
         properties.get("StationTH")
     )
 
-    parameter_alarm = clean_text(
-        properties.get("ParameterAlram")
+    station_code = clean_text(
+        properties.get("Code")
     )
 
-    return f"{code}|{station}|{parameter_alarm}"
+    industry_zone = clean_text(
+        properties.get("IndustryZone")
+    )
+
+    operation_zone = clean_text(
+        properties.get("Zone")
+    )
+
+    station_type = clean_text(
+        properties.get("Type")
+    )
+
+    comment = clean_text(
+        properties.get("Comment")
+    )
+
+    last_update_thai = (
+        format_last_update_thai(
+            properties
+        )
+    )
+
+    today_alarm_entries = properties.get(
+        "_today_alarm_entries",
+        [],
+    )
+
+    lines = [
+        "🚨 แจ้งเตือน e-Monitoring",
+        "",
+    ]
+
+    if station_name:
+        lines.append(
+            f"สถานี: {station_name}"
+        )
+
+    if station_code and station_code != "0":
+        lines.append(
+            f"รหัสสถานี: {station_code}"
+        )
+
+    if industry_zone:
+        lines.append(
+            f"นิคมอุตสาหกรรม: {industry_zone}"
+        )
+
+    if operation_zone:
+        lines.append(
+            f"พื้นที่รับผิดชอบ: {operation_zone}"
+        )
+
+    if station_type:
+        lines.append(
+            f"ประเภทสถานี: {station_type}"
+        )
+
+    lines.append(
+        "สถานะ: ONLINE"
+    )
+
+    if last_update_thai:
+        lines.append(
+            f"ข้อมูลล่าสุด: {last_update_thai}"
+        )
+
+    if comment:
+        lines.append(
+            f"หมายเหตุ: {comment}"
+        )
+
+    lines.append("")
+    lines.append(
+        "⚠️ พารามิเตอร์ที่เกินค่ามาตรฐาน"
+    )
+
+    for index, alarm_entry in enumerate(
+        today_alarm_entries,
+        start=1,
+    ):
+        lines.append(
+            f"{index}. {alarm_entry}"
+        )
+
+    return "\n".join(lines)
 
 
 # ============================================================
-# STATE
+# State ป้องกันการส่งซ้ำ
 # ============================================================
 
 def load_state():
     """
-    โหลดรายการ Alert ที่เคยส่งแล้ว
+    โหลดข้อมูลรายการที่เคยส่งแล้ว
     """
 
-    if not os.path.exists(STATE_FILE):
-        print("ยังไม่มี alert_state.json")
+    if not STATE_FILE.exists():
+        print(
+            "ยังไม่มี alert_state.json"
+        )
         return {}
 
     try:
-
-        with open(
-            STATE_FILE,
+        with STATE_FILE.open(
             "r",
             encoding="utf-8",
         ) as file:
-
             state = json.load(file)
 
         if not isinstance(state, dict):
             return {}
 
         print(
-            f"โหลด Alert เดิมแล้ว: "
+            f"โหลด Alert เดิมแล้ว "
             f"{len(state)} รายการ"
         )
 
         return state
 
-    except Exception as exc:
-
+    except (
+        OSError,
+        json.JSONDecodeError,
+    ) as error:
         print(
             "WARNING: อ่าน alert_state.json ไม่สำเร็จ"
         )
-
-        print(exc)
-
+        print(error)
         return {}
 
 
 def save_state(state):
     """
-    บันทึกรายการ Alert ล่าสุด
+    บันทึก State ปัจจุบัน
     """
 
-    with open(
-        STATE_FILE,
+    with STATE_FILE.open(
         "w",
         encoding="utf-8",
     ) as file:
-
         json.dump(
             state,
             file,
@@ -329,155 +833,94 @@ def save_state(state):
             indent=2,
         )
 
-    print()
-    print("บันทึก alert_state.json แล้ว")
+    print(
+        "บันทึก alert_state.json แล้ว"
+    )
 
 
-# ============================================================
-# BUILD LINE MESSAGE
-# ============================================================
-
-def build_alert_message(properties):
+def create_alert_key(properties):
     """
-    สร้างข้อความ LINE
+    สร้าง Key สำหรับป้องกันการส่งข้อมูลเดิมซ้ำ
 
-    แสดงเฉพาะ field ที่มีข้อมูล
+    ใช้:
+    Code
+    LastUpdate
+    รายการ Alarm ของวันนี้
     """
 
-    station = clean_text(
-        properties.get("StationTH")
-    )
-
-    industry_zone = clean_text(
-        properties.get("IndustryZone")
-    )
-
-    zone = clean_text(
-        properties.get("Zone")
-    )
-
-    code = clean_text(
+    station_code = clean_text(
         properties.get("Code")
     )
 
     last_update = clean_text(
-        properties.get("LastUpdate-TH")
+        properties.get("LastUpdate")
     )
 
-    if not last_update:
-        last_update = clean_text(
-            properties.get("LastUpdate")
-        )
-
-    parameter_alarm = clean_text(
-        properties.get("ParameterAlram")
+    today_alarm_entries = properties.get(
+        "_today_alarm_entries",
+        [],
     )
 
-    lines = []
-
-    lines.append("⚠️ แจ้งเตือน e-Monitoring")
-    lines.append("")
-
-    # -------------------------
-    # ชื่อสถานี
-    # -------------------------
-
-    if station:
-        lines.append(
-            f"สถานี: {station}"
-        )
-
-    # -------------------------
-    # Code
-    # -------------------------
-
-    if code and code != "0":
-        lines.append(
-            f"รหัสสถานี: {code}"
-        )
-
-    # -------------------------
-    # นิคม
-    # -------------------------
-
-    if industry_zone:
-        lines.append(
-            f"นิคมอุตสาหกรรม: {industry_zone}"
-        )
-
-    # -------------------------
-    # Zone
-    # -------------------------
-
-    if zone:
-        lines.append(
-            f"พื้นที่รับผิดชอบ: {zone}"
-        )
-
-    # -------------------------
-    # Status
-    # -------------------------
-
-    lines.append(
-        "สถานะ: ONLINE"
+    alarm_text = "|".join(
+        today_alarm_entries
     )
 
-    # -------------------------
-    # Last Update
-    # -------------------------
-
-    if last_update:
-
-        lines.append(
-            f"ข้อมูลล่าสุด: {last_update}"
-        )
-
-    # -------------------------
-    # Parameter Alarm
-    # -------------------------
-
-    lines.append("")
-    lines.append(
-        "🚨 พารามิเตอร์ที่แจ้งเตือน"
+    return (
+        f"{station_code}|"
+        f"{last_update}|"
+        f"{alarm_text}"
     )
-
-    lines.append(
-        parameter_alarm
-    )
-
-    return "\n".join(lines)
 
 
 # ============================================================
-# SEND LINE
+# ส่ง LINE Messaging API
 # ============================================================
 
-def send_line_message(message):
+def validate_environment():
     """
-    ส่งข้อความด้วย LINE Messaging API
+    ตรวจสอบ GitHub Secrets
     """
+
+    missing_values = []
 
     if not LINE_CHANNEL_ACCESS_TOKEN:
-        raise RuntimeError(
-            "ไม่พบ LINE_CHANNEL_ACCESS_TOKEN"
+        missing_values.append(
+            "LINE_CHANNEL_ACCESS_TOKEN"
         )
 
     if not LINE_TARGET_ID:
-        raise RuntimeError(
-            "ไม่พบ LINE_TARGET_ID"
+        missing_values.append(
+            "LINE_TARGET_ID"
         )
 
-    headers = {
-        "Authorization":
-            f"Bearer {LINE_CHANNEL_ACCESS_TOKEN}",
+    if missing_values:
+        print(
+            "ERROR: ไม่พบ GitHub Secrets:"
+        )
 
-        "Content-Type":
-            "application/json",
+        for item in missing_values:
+            print(
+                f"- {item}"
+            )
+
+        sys.exit(1)
+
+
+def send_line_message(message):
+    """
+    ส่งข้อความ Push ผ่าน LINE Messaging API
+    """
+
+    headers = {
+        "Authorization": (
+            f"Bearer "
+            f"{LINE_CHANNEL_ACCESS_TOKEN}"
+        ),
+        "Content-Type": "application/json",
     }
 
     payload = {
         "to": LINE_TARGET_ID,
-
         "messages": [
             {
                 "type": "text",
@@ -490,206 +933,151 @@ def send_line_message(message):
         LINE_API_URL,
         headers=headers,
         json=payload,
-        timeout=REQUEST_TIMEOUT,
+        timeout=REQUEST_TIMEOUT_SECONDS,
     )
 
     if not response.ok:
-
-        print()
-        print("LINE API ERROR")
-        print("Status:", response.status_code)
-        print("Response:", response.text)
+        print(
+            "ERROR: LINE API ส่งข้อความไม่สำเร็จ"
+        )
+        print(
+            "HTTP Status:",
+            response.status_code,
+        )
+        print(
+            "Response:",
+            response.text,
+        )
 
         response.raise_for_status()
 
-    return True
-
 
 # ============================================================
-# MAIN
+# โปรแกรมหลัก
 # ============================================================
 
 def main():
-
     print()
-    print("=" * 70)
+    print("=" * 78)
     print("IEAT e-Monitoring LINE Alert")
-    print("=" * 70)
-
+    print("=" * 78)
     print(
-        "เงื่อนไข: Status = ONLINE "
-        "และ ParameterAlram มีข้อมูล"
-    )
-
-    print(
-        "เวลาเริ่ม:",
-        datetime.now().strftime(
+        "เวลาเริ่มทำงาน:",
+        thailand_now().strftime(
             "%Y-%m-%d %H:%M:%S"
         ),
     )
-
-    # ========================================================
-    # 1. DOWNLOAD
-    # ========================================================
-
-    data = download_emonitoring()
-
-    # ========================================================
-    # 2. GET FEATURES
-    # ========================================================
-
-    features = get_features(data)
-
     print()
+    print("เงื่อนไขการแจ้งเตือน:")
+    print("1. Status = ONLINE")
+    print("2. ParameterAlram มีข้อมูลจริง")
+    print("3. LastUpdate เป็นวันที่วันนี้")
     print(
-        f"จำนวน Feature ทั้งหมด: "
-        f"{len(features)}"
+        "4. ParameterAlram มีรายการของวันนี้"
+    )
+    print("=" * 78)
+
+    validate_environment()
+
+    data = download_emonitoring_data()
+
+    features = get_features(
+        data
     )
 
     if not features:
-
         print(
-            "ไม่พบข้อมูลสถานี"
+            "ERROR: ไม่พบ Feature ในข้อมูลต้นทาง"
         )
-
-        return
-
-    # ========================================================
-    # 3. FILTER
-    # ========================================================
+        sys.exit(1)
 
     alert_features = filter_alert_features(
         features
     )
 
-    # ========================================================
-    # 4. LOAD OLD STATE
-    # ========================================================
-
     old_state = load_state()
-
-    # State รอบใหม่
-    #
-    # เก็บเฉพาะ Alert ที่ยังอยู่ในข้อมูลปัจจุบัน
-    # เพื่อให้ถ้า Alarm หายไป แล้วเกิดใหม่ในอนาคต
-    # สามารถแจ้งเตือนได้อีกครั้ง
 
     current_state = {}
 
-    # ========================================================
-    # 5. NO ALERT
-    # ========================================================
-
     if not alert_features:
-
         print()
-        print("=" * 70)
-
+        print("=" * 78)
         print(
-            "ไม่พบสถานี ONLINE "
-            "ที่มี ParameterAlram"
+            "ไม่พบข้อมูลที่เข้าเงื่อนไขของวันนี้"
+        )
+        print(
+            "ระบบจะไม่ส่งข้อมูลเก่าเข้า LINE"
+        )
+        print("=" * 78)
+
+        save_state(
+            current_state
         )
 
-        print("=" * 70)
-
-        # ล้าง state เมื่อไม่มี Alarm เหลืออยู่
-        save_state(current_state)
-
         return
-
-    # ========================================================
-    # 6. CHECK EACH ALERT
-    # ========================================================
 
     sent_count = 0
     duplicate_count = 0
     error_count = 0
 
-    print()
-    print("=" * 70)
-    print("ตรวจสอบ Alert")
-    print("=" * 70)
-
     for feature in alert_features:
-
         properties = feature.get(
             "properties",
             {},
         )
 
-        station = clean_text(
+        station_name = clean_text(
             properties.get("StationTH")
-        )
-
-        parameter_alarm = clean_text(
-            properties.get("ParameterAlram")
         )
 
         alert_key = create_alert_key(
             properties
         )
 
-        # บันทึกว่า Alarm นี้ยัง active อยู่
         current_state[alert_key] = {
-            "station": station,
-            "parameter_alarm": parameter_alarm,
-            "last_seen": datetime.now().isoformat(
+            "station": station_name,
+            "last_update": clean_text(
+                properties.get("LastUpdate")
+            ),
+            "alarm_entries": properties.get(
+                "_today_alarm_entries",
+                [],
+            ),
+            "last_seen": thailand_now().isoformat(
                 timespec="seconds"
             ),
         }
 
-        # ====================================================
-        # เคยส่งแล้ว
-        # ====================================================
-
         if alert_key in old_state:
-
             duplicate_count += 1
 
             print()
             print(
-                f"SKIP: {station or 'ไม่ระบุสถานี'}"
-            )
-
-            print(
-                "เหตุผล: Alert นี้เคยส่งแล้ว"
-            )
-
-            print(
-                f"ParameterAlram: "
-                f"{parameter_alarm}"
+                "ข้ามข้อมูลเดิม:",
+                station_name
+                or "ไม่ระบุชื่อสถานี",
             )
 
             continue
-
-        # ====================================================
-        # Alert ใหม่
-        # ====================================================
 
         message = build_alert_message(
             properties
         )
 
         print()
-        print("-" * 70)
-
+        print("-" * 78)
         print(
-            f"NEW ALERT: "
-            f"{station or 'ไม่ระบุสถานี'}"
+            "กำลังส่ง Alert ใหม่:",
+            station_name
+            or "ไม่ระบุชื่อสถานี",
         )
-
-        print(
-            f"ParameterAlram: "
-            f"{parameter_alarm}"
-        )
-
-        # ====================================================
-        # SEND
-        # ====================================================
+        print("-" * 78)
+        print(message)
 
         try:
-
-            send_line_message(message)
+            send_line_message(
+                message
+            )
 
             sent_count += 1
 
@@ -697,86 +1085,52 @@ def main():
                 "ส่ง LINE สำเร็จ"
             )
 
-        except Exception as exc:
-
+        except requests.RequestException as error:
             error_count += 1
-
-            print(
-                "ERROR: ส่ง LINE ไม่สำเร็จ"
-            )
-
-            print(exc)
-
-            # ถ้าส่งไม่สำเร็จ
-            # ต้องเอาออกจาก state
-            # เพื่อให้รอบหน้าได้ลองส่งใหม่
 
             current_state.pop(
                 alert_key,
                 None,
             )
 
-    # ========================================================
-    # 7. SAVE STATE
-    # ========================================================
+            print(
+                "ERROR: ส่ง LINE ไม่สำเร็จ"
+            )
+            print(error)
 
-    save_state(current_state)
-
-    # ========================================================
-    # 8. SUMMARY
-    # ========================================================
+    save_state(
+        current_state
+    )
 
     print()
-    print("=" * 70)
-    print("สรุปผล")
-    print("=" * 70)
-
+    print("=" * 78)
+    print("สรุปผลการทำงาน")
+    print("=" * 78)
     print(
-        f"Feature ทั้งหมด       : "
-        f"{len(features)}"
-    )
-
-    print(
-        f"เข้าเงื่อนไข Alert     : "
+        f"ข้อมูลเข้าเงื่อนไข : "
         f"{len(alert_features)}"
     )
-
     print(
-        f"ส่ง LINE ใหม่          : "
+        f"ส่ง LINE ใหม่      : "
         f"{sent_count}"
     )
-
     print(
-        f"ข้อมูลเดิมไม่ส่งซ้ำ     : "
+        f"ข้อมูลเดิมไม่ส่งซ้ำ : "
         f"{duplicate_count}"
     )
-
     print(
-        f"ส่งไม่สำเร็จ           : "
+        f"ส่งไม่สำเร็จ       : "
         f"{error_count}"
     )
-
-    print("=" * 70)
-
-    # ถ้าส่ง LINE ไม่สำเร็จ
-    # ให้ GitHub Actions ขึ้น Failed
+    print("=" * 78)
 
     if error_count > 0:
-
-        print(
-            "ERROR: มี Alert ที่ส่ง LINE ไม่สำเร็จ"
-        )
-
         sys.exit(1)
 
     print(
         "ทำงานเสร็จสมบูรณ์"
     )
 
-
-# ============================================================
-# RUN
-# ============================================================
 
 if __name__ == "__main__":
     main()
