@@ -1,21 +1,20 @@
-name: e-Monitoring LINE Alert
+name: e-Monitoring Hourly LINE Report
 
 on:
-  # สำหรับกดทดสอบจากหน้า GitHub Actions
+  # กดทดสอบด้วยตนเองจากหน้า Actions
   workflow_dispatch:
 
-  # ตรวจข้อมูลอัตโนมัติทุก 15 นาที
-  # GitHub Actions ใช้เวลาตาม UTC แต่ทุก 15 นาทีเหมือนกันทุกเขตเวลา
+  # ทำงานทุก 1 ชั่วโมง ที่นาที 17
   schedule:
-    - cron: "7,22,37,52 * * * *"
+    - cron: "17 * * * *"
 
-# อนุญาตให้ Workflow บันทึก alert_state.json กลับเข้า Repository
+# Workflow อ่านไฟล์ใน Repository เท่านั้น
 permissions:
-  contents: write
+  contents: read
 
-# ป้องกัน Workflow สองรอบทำงานพร้อมกัน
+# ป้องกันงานหลายรอบทำงานซ้อนกัน
 concurrency:
-  group: emonitoring-line-alert
+  group: emonitoring-hourly-line-report
   cancel-in-progress: false
 
 jobs:
@@ -26,20 +25,16 @@ jobs:
 
     steps:
       # ======================================================
-      # 1. ดาวน์โหลดไฟล์จาก Default branch
+      # 1. ดาวน์โหลดไฟล์จาก Repository
       # ======================================================
       - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.repository.default_branch }}
-          fetch-depth: 0
-          persist-credentials: true
+        uses: actions/checkout@v5
 
       # ======================================================
       # 2. ติดตั้ง Python
       # ======================================================
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -51,42 +46,28 @@ jobs:
           TZ: Asia/Bangkok
         run: |
           echo "========================================"
-          echo "e-Monitoring LINE Alert"
+          echo "IEAT e-Monitoring Hourly LINE Report"
           echo "========================================"
           echo "เหตุการณ์ที่เรียก Workflow: ${{ github.event_name }}"
-          echo "Default branch: ${{ github.event.repository.default_branch }}"
-          echo "เวลาไทย:"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "เวลาประเทศไทย:"
           date
           echo "========================================"
 
       # ======================================================
-      # 4. ตรวจสอบไฟล์ที่จำเป็น
+      # 4. ตรวจสอบไฟล์ Python
       # ======================================================
-      - name: Check required files
+      - name: Check required file
         run: |
           if [ ! -f "check_emonitoring.py" ]; then
             echo "ERROR: ไม่พบไฟล์ check_emonitoring.py"
             exit 1
           fi
 
-          if [ ! -f "alert_state.json" ]; then
-            echo "{}" > alert_state.json
-            echo "สร้าง alert_state.json เริ่มต้นแล้ว"
-          fi
-
-          echo "พบไฟล์ check_emonitoring.py"
-          echo "พบไฟล์ alert_state.json"
+          echo "พบไฟล์ check_emonitoring.py แล้ว"
 
       # ======================================================
-      # 5. ตรวจสอบรูปแบบ alert_state.json
-      # ======================================================
-      - name: Validate alert state
-        run: |
-          python -m json.tool alert_state.json > /dev/null
-          echo "alert_state.json เป็น JSON ที่ถูกต้อง"
-
-      # ======================================================
-      # 6. ตรวจสอบ Syntax ของ Python
+      # 5. ตรวจสอบ Syntax
       # ======================================================
       - name: Validate Python syntax
         run: |
@@ -94,7 +75,7 @@ jobs:
           echo "check_emonitoring.py ไม่มี Syntax Error"
 
       # ======================================================
-      # 7. ตรวจสอบ LINE Channel Access Token
+      # 6. ตรวจสอบ LINE Channel Access Token
       # ======================================================
       - name: Check LINE secret
         env:
@@ -108,46 +89,14 @@ jobs:
           echo "พบ LINE_CHANNEL_ACCESS_TOKEN แล้ว"
 
       # ======================================================
-      # 8. ตรวจข้อมูล e-Monitoring และส่ง LINE
+      # 7. ตรวจข้อมูลและส่งรายงาน LINE ทุกครั้ง
       # ======================================================
-      - name: Check e-Monitoring and send LINE Broadcast
+      - name: Check e-Monitoring and send hourly LINE report
         env:
           LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
-          ALERT_STATE_FILE: alert_state.json
           PYTHONUNBUFFERED: "1"
           TZ: Asia/Bangkok
         run: |
           echo "เริ่มตรวจสอบข้อมูล e-Monitoring"
           python check_emonitoring.py
-          echo "ตรวจสอบข้อมูลเสร็จเรียบร้อย"
-
-      # ======================================================
-      # 9. ตรวจสอบไฟล์สถานะหลังประมวลผล
-      # ======================================================
-      - name: Validate updated alert state
-        run: |
-          python -m json.tool alert_state.json > /dev/null
-          echo "alert_state.json หลังประมวลผลถูกต้อง"
-
-      # ======================================================
-      # 10. บันทึก alert_state.json กลับเข้า Repository
-      # ======================================================
-      - name: Save alert state to repository
-        env:
-          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
-        run: |
-          if [ -z "$(git status --porcelain -- alert_state.json)" ]; then
-            echo "สถานะไม่มีการเปลี่ยนแปลง ไม่ต้อง Commit"
-            exit 0
-          fi
-
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git add alert_state.json
-          git commit -m "Update e-Monitoring alert state [skip ci]"
-
-          git pull --rebase origin "$DEFAULT_BRANCH"
-          git push origin "HEAD:$DEFAULT_BRANCH"
-
-          echo "บันทึก alert_state.json กลับเข้า Repository สำเร็จ"
+          echo "ตรวจสอบและส่งรายงาน LINE เสร็จเรียบร้อย"
