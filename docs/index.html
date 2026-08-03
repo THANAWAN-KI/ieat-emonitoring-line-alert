@@ -1,17 +1,602 @@
-{
-  "status": "normal",
-  "status_text": "ไม่พบค่าเกินเกณฑ์มาตรฐาน",
-  "description": "ขณะนี้ไม่พบค่าพารามิเตอร์เกินเกณฑ์มาตรฐาน",
-  "updated_at": "รอการอัปเดตข้อมูลจากระบบ",
-  "online_total": 0,
-  "online_aqms": 0,
-  "online_wqms": 0,
-  "online_cems": 0,
-  "alert_station_count": 0,
-  "parameter_count": 0,
-  "estate_count": 0,
-  "urgent_count": 0,
-  "watch_count": 0,
-  "follow_count": 0,
-  "stations": []
-}
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>สถานการณ์ล่าสุด | IEAT e-Monitoring</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #edf2f8;
+            color: #20242c;
+            font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 720px;
+            min-height: 100vh;
+            margin: 0 auto;
+            background: #f7f8fa;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 20px;
+            background: #ffffff;
+            border-bottom: 4px solid #4e2a84;
+        }
+
+        .logo {
+            width: 68px;
+            height: 68px;
+            object-fit: contain;
+        }
+
+        .header-title {
+            margin: 0;
+            color: #35205a;
+            font-size: 24px;
+            font-weight: 750;
+        }
+
+        .header-subtitle {
+            margin: 5px 0 0;
+            color: #70757f;
+            font-size: 15px;
+        }
+
+        .content {
+            padding: 18px;
+        }
+
+        .status-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px;
+            background: #f1f8f3;
+            border: 1px solid #2f7d4a;
+            border-radius: 16px;
+        }
+
+        .status-card.alert {
+            background: #fff3f4;
+            border-color: #b32632;
+        }
+
+        .status-card.watch {
+            background: #fff9df;
+            border-color: #c99800;
+        }
+
+        .status-icon {
+            display: flex;
+            flex: 0 0 62px;
+            align-items: center;
+            justify-content: center;
+            width: 62px;
+            height: 62px;
+            color: #ffffff;
+            background: #38b765;
+            border-radius: 18px;
+            font-size: 34px;
+            font-weight: bold;
+        }
+
+        .alert .status-icon {
+            background: #d93945;
+        }
+
+        .watch .status-icon {
+            background: #d8a20c;
+        }
+
+        .status-title {
+            margin: 0;
+            color: #23613a;
+            font-size: 22px;
+            line-height: 1.45;
+        }
+
+        .alert .status-title {
+            color: #8e1e28;
+        }
+
+        .watch .status-title {
+            color: #9b7600;
+        }
+
+        .status-description {
+            margin: 7px 0 0;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .section-title {
+            margin: 24px 0 12px;
+            font-size: 20px;
+        }
+
+        .online-total {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px;
+            background: #ffffff;
+            border: 1px solid #dfe3e8;
+            border-radius: 14px;
+        }
+
+        .online-total span {
+            color: #70757f;
+        }
+
+        .online-total strong {
+            color: #4e2a84;
+            font-size: 22px;
+        }
+
+        .station-types {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .type-card {
+            padding: 15px 8px;
+            background: #ffffff;
+            border: 1px solid #dfe3e8;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .type-card strong {
+            display: block;
+            margin-top: 5px;
+            color: #20242c;
+            font-size: 20px;
+        }
+
+        .aqms {
+            color: #2f7d4a;
+            font-weight: bold;
+        }
+
+        .wqms {
+            color: #356ca5;
+            font-weight: bold;
+        }
+
+        .cems {
+            color: #9b7600;
+            font-weight: bold;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .summary-card {
+            padding: 15px 8px;
+            background: #ffffff;
+            border: 1px solid #dfe3e8;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .summary-card strong {
+            display: block;
+            color: #4e2a84;
+            font-size: 24px;
+        }
+
+        .summary-card span {
+            display: block;
+            margin-top: 6px;
+            color: #70757f;
+            font-size: 13px;
+        }
+
+        .station-card {
+            margin-top: 12px;
+            padding: 16px;
+            background: #ffffff;
+            border: 1px solid #e2e5ea;
+            border-left: 5px solid #b32632;
+            border-radius: 12px;
+        }
+
+        .station-estate {
+            margin: 0;
+            color: #70757f;
+            font-size: 14px;
+        }
+
+        .station-name {
+            margin: 5px 0 12px;
+            color: #35205a;
+            font-size: 18px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 7px 0;
+            border-bottom: 1px solid #eceef2;
+            font-size: 14px;
+        }
+
+        .detail-row span {
+            color: #70757f;
+        }
+
+        .detail-row strong {
+            text-align: right;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .button {
+            display: block;
+            padding: 11px 8px;
+            color: #ffffff;
+            background: #4e2a84;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .button.secondary {
+            color: #35205a;
+            background: #ede7f6;
+        }
+
+        .updated {
+            margin: 22px 0 10px;
+            color: #70757f;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .refresh-button {
+            width: 100%;
+            padding: 14px;
+            color: #ffffff;
+            background: #35205a;
+            border: 0;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .loading,
+        .error {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .error {
+            color: #b32632;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .header-title {
+                font-size: 20px;
+            }
+
+            .status-title {
+                font-size: 19px;
+            }
+
+            .content {
+                padding: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <header class="header">
+
+        <img
+            class="logo"
+            src="https://THANAWAN-KI.github.io/ieat-emonitoring-line-alert/assets/ieat_logo.png"
+            alt="โลโก้ กนอ."
+        >
+
+        <div>
+            <h1 class="header-title">IEAT e-Monitoring</h1>
+            <p class="header-subtitle">สถานการณ์คุณภาพสิ่งแวดล้อมล่าสุด</p>
+        </div>
+
+    </header>
+
+    <main class="content">
+
+        <div id="loading" class="loading">
+            กำลังโหลดข้อมูลสถานการณ์ล่าสุด...
+        </div>
+
+        <div id="error" class="error hidden">
+            ไม่สามารถโหลดข้อมูลได้ กรุณากดรีเฟรชอีกครั้ง
+        </div>
+
+        <div id="dashboard" class="hidden">
+
+            <section id="statusCard" class="status-card">
+
+                <div id="statusIcon" class="status-icon">✓</div>
+
+                <div>
+                    <h2 id="statusText" class="status-title">-</h2>
+                    <p id="statusDescription" class="status-description">-</p>
+                </div>
+
+            </section>
+
+            <h2 class="section-title">จำนวนสถานี ONLINE ณ เวลานี้</h2>
+
+            <section class="online-total">
+                <span>สถานี ONLINE ทั้งหมด</span>
+                <strong>
+                    <span id="onlineTotal">0</span> สถานี
+                </strong>
+            </section>
+
+            <section class="station-types">
+
+                <div class="type-card">
+                    <span class="aqms">AQMs</span>
+                    <strong id="onlineAqms">0</strong>
+                    <small>สถานี</small>
+                </div>
+
+                <div class="type-card">
+                    <span class="wqms">WQMs</span>
+                    <strong id="onlineWqms">0</strong>
+                    <small>สถานี</small>
+                </div>
+
+                <div class="type-card">
+                    <span class="cems">CEMs</span>
+                    <strong id="onlineCems">0</strong>
+                    <small>สถานี</small>
+                </div>
+
+            </section>
+
+            <div id="alertSection" class="hidden">
+
+                <h2 class="section-title">ภาพรวมรายการแจ้งเตือน</h2>
+
+                <section class="summary-grid">
+
+                    <div class="summary-card">
+                        <strong id="alertStationCount">0</strong>
+                        <span>สถานีแจ้งเตือน</span>
+                    </div>
+
+                    <div class="summary-card">
+                        <strong id="parameterCount">0</strong>
+                        <span>พารามิเตอร์</span>
+                    </div>
+
+                    <div class="summary-card">
+                        <strong id="estateCount">0</strong>
+                        <span>นิคมฯ</span>
+                    </div>
+
+                </section>
+
+                <h2 class="section-title">รายละเอียดสถานีแจ้งเตือน</h2>
+
+                <div id="stationList"></div>
+
+            </div>
+
+            <p class="updated">
+                ข้อมูล ณ <span id="updatedAt">-</span>
+            </p>
+
+            <button class="refresh-button" onclick="loadStatus()">
+                รีเฟรชข้อมูลล่าสุด
+            </button>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script>
+    function safeText(value, fallback = "-") {
+        if (value === null || value === undefined || value === "") {
+            return fallback;
+        }
+
+        return String(value);
+    }
+
+    function setText(id, value) {
+        const element = document.getElementById(id);
+
+        if (element) {
+            element.textContent = safeText(value, "0");
+        }
+    }
+
+    function createStationCard(station) {
+        const card = document.createElement("article");
+        card.className = "station-card";
+
+        const estate = document.createElement("p");
+        estate.className = "station-estate";
+        estate.textContent = safeText(station.estate, "ไม่ระบุนิคมฯ");
+
+        const stationName = document.createElement("h3");
+        stationName.className = "station-name";
+        stationName.textContent = safeText(
+            station.station_name,
+            "ไม่ระบุชื่อสถานี"
+        );
+
+        card.appendChild(estate);
+        card.appendChild(stationName);
+
+        const details = [
+            ["ประเภทสถานี", station.station_type],
+            ["พารามิเตอร์", station.parameter],
+            ["ค่าที่ตรวจวัด", station.value],
+            ["เวลาที่ตรวจพบ", station.detected_at],
+            ["ระดับสถานการณ์", station.severity]
+        ];
+
+        details.forEach(function (detail) {
+            const row = document.createElement("div");
+            row.className = "detail-row";
+
+            const label = document.createElement("span");
+            label.textContent = detail[0];
+
+            const value = document.createElement("strong");
+            value.textContent = safeText(detail[1]);
+
+            row.appendChild(label);
+            row.appendChild(value);
+            card.appendChild(row);
+        });
+
+        const buttons = document.createElement("div");
+        buttons.className = "buttons";
+
+        const mapButton = document.createElement("a");
+        mapButton.className = "button";
+        mapButton.textContent = "ตำแหน่งสถานี";
+        mapButton.href = safeText(station.map_url, "#");
+        mapButton.target = "_blank";
+        mapButton.rel = "noopener noreferrer";
+
+        const gisButton = document.createElement("a");
+        gisButton.className = "button secondary";
+        gisButton.textContent = "เปิดระบบ GIS";
+        gisButton.href = safeText(station.gis_url, "#");
+        gisButton.target = "_blank";
+        gisButton.rel = "noopener noreferrer";
+
+        buttons.appendChild(mapButton);
+        buttons.appendChild(gisButton);
+        card.appendChild(buttons);
+
+        return card;
+    }
+
+    async function loadStatus() {
+        const loading = document.getElementById("loading");
+        const error = document.getElementById("error");
+        const dashboard = document.getElementById("dashboard");
+
+        loading.classList.remove("hidden");
+        error.classList.add("hidden");
+        dashboard.classList.add("hidden");
+
+        try {
+            const response = await fetch(
+                "status.json?t=" + new Date().getTime(),
+                {
+                    cache: "no-store"
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error("HTTP " + response.status);
+            }
+
+            const data = await response.json();
+
+            const statusCard = document.getElementById("statusCard");
+            const statusIcon = document.getElementById("statusIcon");
+            const alertSection = document.getElementById("alertSection");
+            const stationList = document.getElementById("stationList");
+
+            statusCard.className = "status-card";
+
+            if (data.status === "alert") {
+                statusCard.classList.add("alert");
+                statusIcon.textContent = "!";
+                alertSection.classList.remove("hidden");
+            } else if (data.status === "watch") {
+                statusCard.classList.add("watch");
+                statusIcon.textContent = "!";
+                alertSection.classList.remove("hidden");
+            } else {
+                statusIcon.textContent = "✓";
+                alertSection.classList.add("hidden");
+            }
+
+            setText("statusText", data.status_text);
+            setText("statusDescription", data.description);
+            setText("onlineTotal", data.online_total);
+            setText("onlineAqms", data.online_aqms);
+            setText("onlineWqms", data.online_wqms);
+            setText("onlineCems", data.online_cems);
+            setText("alertStationCount", data.alert_station_count);
+            setText("parameterCount", data.parameter_count);
+            setText("estateCount", data.estate_count);
+            setText("updatedAt", data.updated_at);
+
+            stationList.innerHTML = "";
+
+            const stations = Array.isArray(data.stations)
+                ? data.stations
+                : [];
+
+            stations.forEach(function (station) {
+                stationList.appendChild(
+                    createStationCard(station)
+                );
+            });
+
+            loading.classList.add("hidden");
+            dashboard.classList.remove("hidden");
+
+        } catch (loadError) {
+            console.error(loadError);
+
+            loading.classList.add("hidden");
+            error.classList.remove("hidden");
+        }
+    }
+
+    loadStatus();
+</script>
+
+</body>
+</html>
