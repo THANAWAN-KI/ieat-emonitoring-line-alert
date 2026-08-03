@@ -76,31 +76,39 @@ WATCH_YELLOW_ICON_URL = (
 
 
 # ============================================================
-# 3. ธีมสี LINE x กนอ.
+# 3. ธีมสี Dashboard e-Monitoring กนอ.
 # ============================================================
 
-COLOR_PRIMARY = "#06C755"
-COLOR_PRIMARY_DARK = "#087A3E"
+# สีม่วงหลักจากหัวตารางและหัวข้อใน Dashboard
+COLOR_PRIMARY = "#6A2C91"
+COLOR_PRIMARY_DARK = "#552076"
+COLOR_PRIMARY_SOFT = "#E8D9EC"
 
-COLOR_RED = "#E5484D"
-COLOR_RED_DARK = "#B4232A"
-COLOR_RED_SOFT = "#FFF1F2"
+# สีแจ้งเตือนระดับเร่งด่วน
+COLOR_RED = "#D64550"
+COLOR_RED_DARK = "#A92C35"
+COLOR_RED_SOFT = "#FDEEEF"
 
-COLOR_YELLOW = "#F2B705"
-COLOR_YELLOW_DARK = "#8A6700"
-COLOR_YELLOW_SOFT = "#FFF8DB"
+# สีแจ้งเตือนระดับเฝ้าระวัง
+COLOR_YELLOW = "#D9A51D"
+COLOR_YELLOW_DARK = "#9A7000"
+COLOR_YELLOW_SOFT = "#FFF7DA"
 
-COLOR_GREEN = "#06C755"
-COLOR_GREEN_DARK = "#087A3E"
-COLOR_GREEN_SOFT = "#EAFBF1"
+# สีเขียว AQMs / ONLINE ตาม Dashboard
+COLOR_GREEN = "#5C9630"
+COLOR_GREEN_DARK = "#477824"
+COLOR_GREEN_SOFT = "#F3FAEB"
 
-COLOR_BLUE = "#3B82C4"
+# สีฟ้า CEMs ตาม Dashboard
+COLOR_BLUE = "#0872B9"
+COLOR_BLUE_DARK = "#075B91"
+COLOR_BLUE_SOFT = "#E6F3FC"
 
-COLOR_TEXT = "#1F2D27"
-COLOR_MUTED = "#66756E"
-COLOR_BORDER = "#D7E5DD"
-COLOR_DIVIDER = "#E5EEE9"
-COLOR_BACKGROUND = "#F1F6F3"
+COLOR_TEXT = "#25212A"
+COLOR_MUTED = "#6F6874"
+COLOR_BORDER = "#D8CDD9"
+COLOR_DIVIDER = "#E8E0EA"
+COLOR_BACKGROUND = "#F8F6F9"
 COLOR_WHITE = "#FFFFFF"
 
 
@@ -1463,7 +1471,7 @@ def online_station_summary_box(
                 "WQMs",
                 0,
             ),
-            COLOR_BLUE,
+            COLOR_PRIMARY,
         ),
 
         station_type_count_box(
@@ -1472,7 +1480,7 @@ def online_station_summary_box(
                 "CEMs",
                 0,
             ),
-            COLOR_YELLOW_DARK,
+            COLOR_BLUE,
         ),
     ]
 
