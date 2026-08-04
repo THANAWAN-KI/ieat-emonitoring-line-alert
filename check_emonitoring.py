@@ -95,15 +95,15 @@ ICON_OTHER = "●"
 ICON_ASSET_URLS = {
     ICON_ALERT: os.getenv(
         "LINE_ICON_ALERT_URL",
-        f"{ICON_ASSET_BASE_URL}/alert_red.png",
+        f"{ICON_ASSET_BASE_URL}/4.png",
     ),
     ICON_NORMAL: os.getenv(
         "LINE_ICON_NORMAL_URL",
-        f"{ICON_ASSET_BASE_URL}/normal.png",
+        f"{ICON_ASSET_BASE_URL}/1.png",
     ),
     ICON_WATCH: os.getenv(
         "LINE_ICON_WATCH_URL",
-        f"{ICON_ASSET_BASE_URL}/watch.png",
+        f"{ICON_ASSET_BASE_URL}/3.png",
     ),
     ICON_STATION: os.getenv(
         "LINE_ICON_STATION_URL",
