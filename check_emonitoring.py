@@ -1833,6 +1833,7 @@ def online_station_summary_box(
                 "type": "box",
                 "layout": "horizontal",
                 "alignItems": "center",
+                "justifyContent": "center",
                 "contents": [
                     icon_badge(
                         ICON_STATION,
