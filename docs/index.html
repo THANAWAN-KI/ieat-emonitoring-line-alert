@@ -157,6 +157,13 @@
             line-height: 1.4;
         }
 
+        .overview-title {
+            margin-top: 0;
+            padding-bottom: 10px;
+            color: #52057f;
+            border-bottom: 2px solid #dccbe8;
+        }
+
         .online-total {
             display: flex;
             align-items: center;
@@ -273,6 +280,59 @@
             margin-top: 5px;
             color: #766f7c;
             font-size: 12px;
+        }
+
+        .severity-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .severity-card {
+            padding: 13px 7px;
+            border: 1px solid;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .severity-card.urgent {
+            color: #be062a;
+            background: #fff0f3;
+            border-color: #f00a36;
+        }
+
+        .severity-card.watch {
+            color: #ff6908;
+            background: #fff9dd;
+            border-color: #ffc719;
+        }
+
+        .severity-card.follow {
+            color: #426a0f;
+            background: #f1f7e8;
+            border-color: #598c14;
+        }
+
+        .severity-number {
+            display: block;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .severity-label {
+            display: block;
+            margin-top: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            line-height: 1.35;
+        }
+
+        .detail-intro {
+            margin: -3px 0 12px;
+            color: #766f7c;
+            font-size: 13px;
+            line-height: 1.5;
         }
 
         .station-card {
@@ -442,6 +502,10 @@
 
         <div id="dashboard" class="hidden">
 
+            <h2 class="section-title overview-title">
+                สรุปสถานการณ์ภาพรวม
+            </h2>
+
             <section id="statusCard" class="status-card">
 
                 <div id="statusIcon" class="status-icon">
@@ -464,7 +528,7 @@
             </section>
 
             <h2 class="section-title">
-                จำนวนสถานี ONLINE ณ เวลานี้
+                สถานีตรวจวัด ONLINE ณ เวลานี้
             </h2>
 
             <section class="online-total">
@@ -537,7 +601,7 @@
             <section id="alertSection" class="hidden">
 
                 <h2 class="section-title">
-                    ภาพรวมรายการแจ้งเตือน
+                    สรุปพารามิเตอร์ที่เกินมาตรฐาน
                 </h2>
 
                 <div class="summary-grid">
@@ -583,9 +647,30 @@
 
                 </div>
 
+                <div class="severity-grid">
+                    <div class="severity-card urgent">
+                        <strong id="urgentCount" class="severity-number">0</strong>
+                        <span class="severity-label">เกินค่ามาตรฐาน</span>
+                    </div>
+
+                    <div class="severity-card watch">
+                        <strong id="watchCount" class="severity-number">0</strong>
+                        <span class="severity-label">เฝ้าระวัง</span>
+                    </div>
+
+                    <div class="severity-card follow">
+                        <strong id="followCount" class="severity-number">0</strong>
+                        <span class="severity-label">ติดตามสถานการณ์</span>
+                    </div>
+                </div>
+
                 <h2 class="section-title">
-                    รายละเอียดสถานีแจ้งเตือน
+                    รายละเอียดพารามิเตอร์ล่าสุด
                 </h2>
+
+                <p class="detail-intro">
+                    แสดงพารามิเตอร์ ค่า และเวลาล่าสุดเพียงรายการเดียวของแต่ละสถานี
+                </p>
 
                 <div id="stationList"></div>
 
@@ -913,6 +998,21 @@
             setText(
                 "estateCount",
                 data.estate_count
+            );
+
+            setText(
+                "urgentCount",
+                data.urgent_count
+            );
+
+            setText(
+                "watchCount",
+                data.watch_count
+            );
+
+            setText(
+                "followCount",
+                data.follow_count
             );
 
             setText(
