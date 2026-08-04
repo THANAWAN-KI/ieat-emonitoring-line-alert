@@ -136,44 +136,44 @@ ICON_ASSET_URLS = {
 # 3. ธีมสี Dashboard e-Monitoring กนอ.
 # ============================================================
 
-# ธีมตามสีองค์กรที่กำหนด: ม่วง #52057F และเขียว #598C14
-# สีระดับพารามิเตอร์: เกินค่ามาตรฐาน / เฝ้าระวัง / ติดตามสถานการณ์
-COLOR_PRIMARY = "#52057F"
-COLOR_PRIMARY_DARK = "#3F0661"
-COLOR_PRIMARY_SOFT = "#F3EDF7"
-COLOR_PRIMARY_PALE = "#FBF8FC"
-COLOR_PRIMARY_BORDER = "#DCCBE8"
+# ธีมองค์กร กนอ.: ม่วงจากโลโก้เป็นสีหลัก และเขียว–ส้มเป็นสีเน้น
+# สีระดับพารามิเตอร์: แดง (เร่งด่วน) / ส้ม (เฝ้าระวัง) / เขียว (ปกติ)
+COLOR_PRIMARY = "#6B3F91"
+COLOR_PRIMARY_DARK = "#4D286F"
+COLOR_PRIMARY_SOFT = "#F2EDF7"
+COLOR_PRIMARY_PALE = "#FAF8FC"
+COLOR_PRIMARY_BORDER = "#D9C9E7"
 
 # สีแจ้งเตือนระดับเร่งด่วน
-COLOR_RED = "#F00A36"
-COLOR_RED_DARK = "#BE062A"
-COLOR_RED_SOFT = "#FFF0F3"
+COLOR_RED = "#D92D3F"
+COLOR_RED_DARK = "#A61B2B"
+COLOR_RED_SOFT = "#FFF1F3"
 
 # สีแจ้งเตือนระดับเฝ้าระวัง
-COLOR_YELLOW = "#FFC719"
-COLOR_YELLOW_DARK = "#FF6908"
-COLOR_YELLOW_SOFT = "#FFF9DD"
+COLOR_YELLOW = "#F2A52B"
+COLOR_YELLOW_DARK = "#B86B09"
+COLOR_YELLOW_SOFT = "#FFF7E8"
 
 # สีเขียว AQMs / ONLINE ตาม Dashboard
-COLOR_GREEN = "#598C14"
-COLOR_GREEN_DARK = "#426A0F"
-COLOR_GREEN_SOFT = "#F1F7E8"
-COLOR_GREEN_BORDER = "#C9DFA7"
+COLOR_GREEN = "#159B6B"
+COLOR_GREEN_DARK = "#087651"
+COLOR_GREEN_SOFT = "#ECF8F2"
+COLOR_GREEN_BORDER = "#BDE7D4"
 
 # สีฟ้า CEMs ตาม Dashboard
-COLOR_BLUE = "#4A8594"
-COLOR_BLUE_DARK = "#336775"
-COLOR_BLUE_SOFT = "#EEF7F8"
-COLOR_BLUE_BORDER = "#C3DDE2"
+COLOR_BLUE = "#5A6FAE"
+COLOR_BLUE_DARK = "#40558C"
+COLOR_BLUE_SOFT = "#F0F3FB"
+COLOR_BLUE_BORDER = "#CBD5F0"
 
-COLOR_TEXT = "#2D2933"
-COLOR_MUTED = "#766F7C"
-COLOR_BORDER = "#E5E0E9"
-COLOR_DIVIDER = "#EEEAF1"
-COLOR_BACKGROUND = "#FAF9FB"
+COLOR_TEXT = "#30283A"
+COLOR_MUTED = "#746B7B"
+COLOR_BORDER = "#E8E1EC"
+COLOR_DIVIDER = "#EEE9F1"
+COLOR_BACKGROUND = "#F8F7FA"
 COLOR_SURFACE = "#FFFFFF"
-COLOR_DEPTH = "#F5F2F7"
-COLOR_DEPTH_DARK = "#EAE5EE"
+COLOR_DEPTH = "#F1EDF4"
+COLOR_DEPTH_DARK = "#E5DDEA"
 COLOR_WHITE = "#FFFFFF"
 
 
@@ -1763,7 +1763,7 @@ def online_station_summary_box(
         "AQMs": COLOR_GREEN_SOFT,
         "WQMs": COLOR_PRIMARY_SOFT,
         "CEMs": COLOR_BLUE_SOFT,
-        "Other": "#F1EEF2",
+                        "Other": "#F4F1F5",
     }
     type_borders = {
         "AQMs": COLOR_GREEN_BORDER,
@@ -1883,7 +1883,7 @@ def online_station_summary_box(
                         "OFFLINE",
                         COLOR_RED_DARK,
                         COLOR_RED_SOFT,
-                        "#EAB3B8",
+                        "#F0BBC2",
                     ),
                 ],
             },
@@ -2031,7 +2031,7 @@ def build_alert_summary_bubble(
                     COLOR_RED_DARK,
                     COLOR_RED_SOFT,
                     COLOR_RED,
-                    "#E6A5AD",
+                    "#F1B8C0",
                     "กรุณาตรวจสอบรายละเอียดสถานีและติดตามสถานการณ์",
                 ),
 
@@ -2061,7 +2061,7 @@ def build_alert_summary_bubble(
                             "นิคมฯ",
                             COLOR_YELLOW_DARK,
                             COLOR_YELLOW_SOFT,
-                            "#E5C96F",
+                            "#E9C77E",
                         ),
                     ],
                 },
@@ -2236,7 +2236,7 @@ def build_no_current_data_summary_bubble(
                     COLOR_YELLOW_DARK,
                     COLOR_YELLOW_SOFT,
                     COLOR_YELLOW,
-                    "#E5C96F",
+                    "#E9C77E",
                     "ระบบยังไม่มีข้อมูลสถานี ONLINE สำหรับตรวจสอบ Alarm",
                 ),
                 online_station_summary_box(online_type_counts),
@@ -2312,8 +2312,8 @@ def alarm_entry_box(
             ),
         ],
         background_color=COLOR_SURFACE,
-        border_color="#EAB3B8",
-        shadow_color="#E4C4C8",
+        border_color="#F0BBC2",
+        shadow_color="#F3DCE0",
         padding="10px",
         corner_radius="14px",
         spacing="xs",
@@ -2559,7 +2559,7 @@ def build_alert_detail_bubble(
         ],
         background_color=COLOR_YELLOW_SOFT,
         border_color=COLOR_YELLOW,
-        shadow_color="#E5C96F",
+        shadow_color="#E9C77E",
         padding="11px",
         corner_radius="12px",
         spacing="xs",
