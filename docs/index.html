@@ -427,6 +427,117 @@
             opacity: 0.85;
         }
 
+        /* รูปแบบ Dashboard: อ่านภาพรวมก่อน แล้วค่อยดูรายละเอียด */
+        body {
+            background: linear-gradient(180deg, #ece5f4 0, #f6f8f2 38%, #edf1e8 100%);
+        }
+
+        .page {
+            background: rgba(255, 255, 255, 0.84);
+            box-shadow: 0 0 32px rgba(82, 5, 127, 0.10);
+        }
+
+        .header {
+            padding: 22px 20px;
+            background: linear-gradient(135deg, #52057f 0%, #73369a 100%);
+            border-bottom-color: #598c14;
+        }
+
+        .logo {
+            padding: 5px;
+            background: #ffffff;
+            border-radius: 16px;
+        }
+
+        .header-title {
+            color: #ffffff;
+            font-size: 26px;
+        }
+
+        .header-subtitle {
+            color: #f0eafa;
+        }
+
+        .content {
+            padding: 22px 18px 26px;
+        }
+
+        .status-card,
+        .online-total,
+        .type-card,
+        .summary-card,
+        .severity-card,
+        .station-card {
+            box-shadow: 0 5px 14px rgba(45, 41, 51, 0.06);
+        }
+
+        .status-card.alert {
+            box-shadow: 0 8px 18px rgba(240, 10, 54, 0.10);
+        }
+
+        .status-card.watch {
+            box-shadow: 0 8px 18px rgba(255, 105, 8, 0.10);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 19px;
+            font-weight: 750;
+        }
+
+        .section-title::before {
+            width: 5px;
+            height: 22px;
+            background: #598c14;
+            border-radius: 5px;
+            content: "";
+        }
+
+        .overview-title {
+            padding-bottom: 0;
+            border-bottom: 0;
+            font-size: 22px;
+        }
+
+        .overview-title::before {
+            background: #52057f;
+        }
+
+        .online-total {
+            border-left: 5px solid #52057f;
+        }
+
+        .station-card.watch {
+            border-left-color: #ffc719;
+        }
+
+        .station-card.follow {
+            border-left-color: #598c14;
+        }
+
+        .station-level {
+            display: inline-block;
+            margin: -3px 0 10px;
+            padding: 4px 9px;
+            color: #be062a;
+            background: #fff0f3;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .station-card.watch .station-level {
+            color: #ff6908;
+            background: #fff9dd;
+        }
+
+        .station-card.follow .station-level {
+            color: #426a0f;
+            background: #f1f7e8;
+        }
+
         @media (max-width: 480px) {
             .header {
                 padding: 14px;
@@ -780,6 +891,13 @@
         // status.json เป็นข้อมูลรอบล่าสุดอยู่แล้ว และแต่ละการ์ดแสดง
         // เฉพาะรายการพารามิเตอร์ล่าสุด 1 รายการ เพื่อไม่ให้ข้อมูลเก่าปะปน
         const latest = latestStationData(station);
+        const severityText = safeText(station.severity, "เกินค่ามาตรฐาน");
+
+        if (severityText.includes("เฝ้าระวัง")) {
+            card.classList.add("watch");
+        } else if (severityText.includes("ติดตาม")) {
+            card.classList.add("follow");
+        }
 
         const estate =
             document.createElement("p");
@@ -803,6 +921,11 @@
 
         card.appendChild(estate);
         card.appendChild(stationName);
+
+        const level = document.createElement("span");
+        level.className = "station-level";
+        level.textContent = severityText;
+        card.appendChild(level);
 
         card.appendChild(
             createDetailRow(
@@ -829,13 +952,6 @@
             createDetailRow(
                 "เวลาที่ตรวจพบ",
                 latest.detectedAt
-            )
-        );
-
-        card.appendChild(
-            createDetailRow(
-                "ระดับสถานการณ์",
-                station.severity
             )
         );
 
