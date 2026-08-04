@@ -132,44 +132,44 @@ ICON_ASSET_URLS = {
 # 3. ธีมสี Dashboard e-Monitoring กนอ.
 # ============================================================
 
-# โทน Government Dashboard / Emergency Command Center ของ กนอ.
-# ม่วงเข้มเป็นสีหลักของรายงาน, สีแดง/เหลืองใช้เฉพาะระดับสถานการณ์
-COLOR_PRIMARY = "#4E2A84"
-COLOR_PRIMARY_DARK = "#35205A"
-COLOR_PRIMARY_SOFT = "#EEE8F5"
-COLOR_PRIMARY_PALE = "#F8F6FB"
-COLOR_PRIMARY_BORDER = "#CBBFE0"
+# ธีมเรียบหรู: ม่วงเข้มแบบองค์กร + พื้นขาวอมเทา
+# ใช้สีสถานการณ์เฉพาะจุดสำคัญ เพื่อให้อ่านง่ายบน LINE
+COLOR_PRIMARY = "#5B3B8C"
+COLOR_PRIMARY_DARK = "#35214F"
+COLOR_PRIMARY_SOFT = "#F0ECF7"
+COLOR_PRIMARY_PALE = "#FAF9FC"
+COLOR_PRIMARY_BORDER = "#D8CEE8"
 
 # สีแจ้งเตือนระดับเร่งด่วน
-COLOR_RED = "#B4232D"
-COLOR_RED_DARK = "#8F1C25"
-COLOR_RED_SOFT = "#FBECEE"
+COLOR_RED = "#C43D4B"
+COLOR_RED_DARK = "#962A35"
+COLOR_RED_SOFT = "#FDF0F1"
 
 # สีแจ้งเตือนระดับเฝ้าระวัง
-COLOR_YELLOW = "#A86F00"
-COLOR_YELLOW_DARK = "#795000"
-COLOR_YELLOW_SOFT = "#FFF6DF"
+COLOR_YELLOW = "#B7791F"
+COLOR_YELLOW_DARK = "#80510D"
+COLOR_YELLOW_SOFT = "#FFF8E8"
 
 # สีเขียว AQMs / ONLINE ตาม Dashboard
-COLOR_GREEN = "#007A5A"
-COLOR_GREEN_DARK = "#005C44"
-COLOR_GREEN_SOFT = "#E8F5F0"
-COLOR_GREEN_BORDER = "#A9D7C8"
+COLOR_GREEN = "#23806A"
+COLOR_GREEN_DARK = "#146651"
+COLOR_GREEN_SOFT = "#EDF8F4"
+COLOR_GREEN_BORDER = "#BDE3D6"
 
 # สีฟ้า CEMs ตาม Dashboard
-COLOR_BLUE = "#176B9F"
-COLOR_BLUE_DARK = "#10527B"
-COLOR_BLUE_SOFT = "#E9F3F9"
-COLOR_BLUE_BORDER = "#B2D3E6"
+COLOR_BLUE = "#3577A8"
+COLOR_BLUE_DARK = "#245D88"
+COLOR_BLUE_SOFT = "#EEF6FB"
+COLOR_BLUE_BORDER = "#C7DFEF"
 
-COLOR_TEXT = "#25212B"
-COLOR_MUTED = "#6B6473"
-COLOR_BORDER = "#DDD7E4"
-COLOR_DIVIDER = "#EAE5EF"
-COLOR_BACKGROUND = "#F6F4F8"
+COLOR_TEXT = "#2D2933"
+COLOR_MUTED = "#766F7C"
+COLOR_BORDER = "#E5E0E9"
+COLOR_DIVIDER = "#EEEAF1"
+COLOR_BACKGROUND = "#FAF9FB"
 COLOR_SURFACE = "#FFFFFF"
-COLOR_DEPTH = "#ECE8F0"
-COLOR_DEPTH_DARK = "#DCD5E5"
+COLOR_DEPTH = "#F5F2F7"
+COLOR_DEPTH_DARK = "#EAE5EE"
 COLOR_WHITE = "#FFFFFF"
 
 
@@ -1420,10 +1420,10 @@ def icon_badge(
         "layout": "vertical",
         "width": "40px",
         "height": "40px",
-        "backgroundColor": COLOR_WHITE,
+        "backgroundColor": background_color,
         "borderColor": border_color,
         "borderWidth": "1px",
-        "cornerRadius": "4px",
+        "cornerRadius": "10px",
         "paddingAll": "8px",
         "justifyContent": "center",
         "alignItems": "center",
@@ -1444,7 +1444,7 @@ def depth_panel(
     margin: str | None = None,
     align_items: str | None = None,
 ) -> dict[str, Any]:
-    """กรอบข้อมูลแบบเอกสารทางการ มีชั้นฐานบาง ๆ เพื่อแยกข้อมูลชัดเจน"""
+    """กรอบข้อมูลสะอาดตาแบบองค์กร โดยไม่ใช้เงาซ้อนหลายชั้น"""
     inner: dict[str, Any] = {
         "type": "box",
         "layout": layout,
@@ -1462,14 +1462,9 @@ def depth_panel(
     if align_items:
         inner["alignItems"] = align_items
 
-    panel: dict[str, Any] = {
-        "type": "box",
-        "layout": "vertical",
-        "paddingBottom": "1px",
-        "backgroundColor": shadow_color,
-        "cornerRadius": corner_radius,
-        "contents": [inner],
-    }
+    # Flex Message ไม่มี shadow จริง การใช้ชั้นสีซ้อนทำให้การ์ดดูหนาเกินไป
+    # จึงใช้กรอบเส้นบางเพียงชั้นเดียว ให้ภาพรวมเรียบหรูและอ่านง่าย
+    panel = inner
 
     if flex is not None:
         panel["flex"] = flex
@@ -1618,7 +1613,7 @@ def card_header(
             {
                 "type": "box",
                 "layout": "vertical",
-        "height": "5px",
+                "height": "4px",
                 "backgroundColor": COLOR_PRIMARY_DARK,
                 "contents": [
                     {
@@ -1630,8 +1625,8 @@ def card_header(
                 "type": "box",
                 "layout": "horizontal",
                 "alignItems": "center",
-                "paddingTop": "12px",
-                "paddingBottom": "11px",
+                "paddingTop": "13px",
+                "paddingBottom": "12px",
                 "paddingStart": "16px",
                 "paddingEnd": "16px",
                 "contents": [
@@ -1668,7 +1663,7 @@ def card_header(
             {
                 "type": "box",
                 "layout": "vertical",
-                "height": "3px",
+                "height": "2px",
                 "backgroundColor": line_color,
                 "contents": [
                     {
