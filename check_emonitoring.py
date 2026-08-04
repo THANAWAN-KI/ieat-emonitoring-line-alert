@@ -754,6 +754,30 @@ def normalize_station_type(
     )
 
 
+def get_station_comment(
+    properties: dict[str, Any],
+) -> str:
+    """อ่านข้อความสาเหตุ/การติดตามผลจากฟิลด์ Comment ของ API"""
+    fields = [
+        "Comment",
+        "comment",
+        "COMMENT",
+        "Remark",
+        "Remarks",
+        "remark",
+    ]
+
+    for field in fields:
+        value = clean_text(
+            properties.get(field)
+        )
+
+        if value:
+            return value
+
+    return "ยังไม่มีข้อมูลสาเหตุ / การติดตามผล"
+
+
 def get_coordinates(
     feature: dict[str, Any],
 ) -> tuple[float, float] | None:
@@ -855,18 +879,25 @@ def station_unique_key(
 
 def count_online_station_types(
     features: list[dict[str, Any]],
-) -> dict[str, int]:
+) -> dict[str, Any]:
     counts = {
         "AQMs": 0,
         "WQMs": 0,
         "CEMs": 0,
         "Other": 0,
         "total": 0,
+        "offline": 0,
+        "all_total": 0,
+        "type_breakdown": {
+            "AQMs": {"total": 0, "online": 0, "offline": 0},
+            "WQMs": {"total": 0, "online": 0, "offline": 0},
+            "CEMs": {"total": 0, "online": 0, "offline": 0},
+            "Other": {"total": 0, "online": 0, "offline": 0},
+        },
     }
 
-    seen_stations = set()
-    online_station_keys = set()
-    offline_station_keys = set()
+    # หาก API มีสถานีซ้ำ ให้ใช้รายการที่ LastUpdate ล่าสุดของสถานีนั้น
+    latest_station_features: dict[str, dict[str, Any]] = {}
 
     for feature in features:
         properties = feature.get(
@@ -885,45 +916,38 @@ def count_online_station_types(
         ):
             continue
 
-        unique_key = station_unique_key(
-            properties
-        )
+        unique_key = station_unique_key(properties)
+        existing = latest_station_features.get(unique_key)
 
-        if unique_key in seen_stations:
+        if existing is None:
+            latest_station_features[unique_key] = feature
             continue
 
-        seen_stations.add(
-            unique_key
-        )
+        existing_properties = existing.get("properties", {})
+        existing_time = parse_datetime(existing_properties.get("LastUpdate"))
+        candidate_time = parse_datetime(properties.get("LastUpdate"))
 
-        if is_online(properties.get("Status")):
-            online_station_keys.add(unique_key)
+        if candidate_time is not None and (
+            existing_time is None or candidate_time > existing_time
+        ):
+            latest_station_features[unique_key] = feature
+
+    for feature in latest_station_features.values():
+        properties = feature.get("properties", {})
+        station_type = normalize_station_type(properties)
+        type_key = station_type if station_type in {"AQMs", "WQMs", "CEMs"} else "Other"
+        online = is_online(properties.get("Status"))
+
+        counts["all_total"] += 1
+        counts["type_breakdown"][type_key]["total"] += 1
+
+        if online:
+            counts["total"] += 1
+            counts[type_key] += 1
+            counts["type_breakdown"][type_key]["online"] += 1
         else:
-            offline_station_keys.add(unique_key)
-
-        # จำนวนแยกประเภทด้านล่างนับเฉพาะสถานี ONLINE
-        if not is_online(properties.get("Status")):
-            continue
-
-        station_type = normalize_station_type(
-            properties
-        )
-
-        if station_type == "AQMs":
-            counts["AQMs"] += 1
-
-        elif station_type == "WQMs":
-            counts["WQMs"] += 1
-
-        elif station_type == "CEMs":
-            counts["CEMs"] += 1
-
-        else:
-            counts["Other"] += 1
-
-    counts["total"] = len(online_station_keys)
-    counts["offline"] = len(offline_station_keys)
-    counts["all_total"] = len(seen_stations)
+            counts["offline"] += 1
+            counts["type_breakdown"][type_key]["offline"] += 1
 
     return counts
 
@@ -935,11 +959,8 @@ def filter_current_online_features(
     int,
     int,
 ]:
-    current_features = []
-
     online_station_keys = set()
-    stale_station_keys = set()
-    current_station_keys = set()
+    current_by_station: dict[str, dict[str, Any]] = {}
 
     for feature in features:
         properties = feature.get(
@@ -973,21 +994,21 @@ def filter_current_online_features(
 
         # Alarm และค่าพารามิเตอร์ต้องใช้เฉพาะข้อมูลของวันนี้เท่านั้น
         if not is_today(properties.get("LastUpdate")):
-            stale_station_keys.add(
-                unique_key
-            )
             continue
 
-        if unique_key in current_station_keys:
-            continue
+        existing = current_by_station.get(unique_key)
+        existing_properties = existing.get("properties", {}) if existing else {}
+        existing_time = parse_datetime(existing_properties.get("LastUpdate"))
+        candidate_time = parse_datetime(properties.get("LastUpdate"))
 
-        current_station_keys.add(
-            unique_key
-        )
+        if existing is None or (
+            candidate_time is not None
+            and (existing_time is None or candidate_time > existing_time)
+        ):
+            current_by_station[unique_key] = feature
 
-        current_features.append(
-            feature
-        )
+    current_features = list(current_by_station.values())
+    stale_station_keys = online_station_keys - set(current_by_station)
 
     return (
         current_features,
@@ -1184,6 +1205,9 @@ def summarize_alerts(
         "parameter_count": len(
             parameter_names
         ),
+        "parameter_names": sorted(
+            parameter_names
+        ),
         "industry_zone_count": len(
             industry_zones
         ),
@@ -1192,6 +1216,14 @@ def summarize_alerts(
         "follow_count": follow_count,
         "online_total": online_type_counts.get(
             "total",
+            0,
+        ),
+        "offline_total": online_type_counts.get(
+            "offline",
+            0,
+        ),
+        "station_total": online_type_counts.get(
+            "all_total",
             0,
         ),
         "online_aqms": online_type_counts.get(
@@ -1322,10 +1354,11 @@ def card_header(
     return {
         "type": "box",
         "layout": "vertical",
-        "paddingTop": "10px",
-        "paddingBottom": "8px",
-        "paddingStart": "12px",
-        "paddingEnd": "12px",
+        "paddingTop": "12px",
+        "paddingBottom": "9px",
+        "paddingStart": "16px",
+        "paddingEnd": "16px",
+        "backgroundColor": COLOR_WHITE,
         "contents": [
             {
                 "type": "box",
@@ -1347,7 +1380,7 @@ def card_header(
                         "contents": [
                             flex_text(
                                 "IEAT e-Monitoring",
-                                size="lg",
+                                size="xl",
                                 weight="bold",
                                 color=COLOR_PRIMARY_DARK,
                                 max_lines=1,
@@ -1383,15 +1416,15 @@ def summary_number_box(
         "type": "box",
         "layout": "vertical",
         "flex": 1,
-        "paddingAll": "9px",
+        "paddingAll": "10px",
         "backgroundColor": COLOR_WHITE,
         "borderColor": COLOR_BORDER,
         "borderWidth": "1px",
-        "cornerRadius": "10px",
+        "cornerRadius": "12px",
         "contents": [
             flex_text(
                 str(number),
-                size="xl",
+                size="xxl",
                 color=number_color,
                 weight="bold",
                 align="center",
@@ -1442,36 +1475,145 @@ def station_type_count_box(
 
 
 def online_station_summary_box(
-    online_type_counts: dict[str, int],
+    online_type_counts: dict[str, Any],
 ) -> dict[str, Any]:
+    type_breakdown = online_type_counts.get(
+        "type_breakdown",
+        {},
+    )
+
+    type_rows = []
+    type_colors = {
+        "AQMs": COLOR_GREEN,
+        "WQMs": COLOR_PRIMARY,
+        "CEMs": COLOR_BLUE,
+        "Other": COLOR_MUTED,
+    }
+
+    for type_key, type_label in (
+        ("AQMs", "AQMs"),
+        ("WQMs", "WQMs"),
+        ("CEMs", "CEMs"),
+        ("Other", "ประเภทอื่น"),
+    ):
+        values = type_breakdown.get(type_key, {})
+        type_rows.append({
+            "type": "box",
+            "layout": "horizontal",
+            "paddingTop": "6px",
+            "paddingBottom": "6px",
+            "contents": [
+                flex_text(
+                    type_label,
+                    size="sm",
+                    weight="bold",
+                    color=type_colors[type_key],
+                    flex=4,
+                ),
+                flex_text(
+                    str(values.get("total", 0)),
+                    size="sm",
+                    weight="bold",
+                    align="center",
+                    flex=2,
+                ),
+                flex_text(
+                    str(values.get("online", 0)),
+                    size="sm",
+                    weight="bold",
+                    color=COLOR_GREEN_DARK,
+                    align="center",
+                    flex=2,
+                ),
+                flex_text(
+                    str(values.get("offline", 0)),
+                    size="sm",
+                    weight="bold",
+                    color=COLOR_RED_DARK,
+                    align="center",
+                    flex=2,
+                ),
+            ],
+        })
+
     return {
         "type": "box",
         "layout": "vertical",
-        "paddingAll": "9px",
+        "paddingAll": "12px",
         "backgroundColor": COLOR_WHITE,
         "borderColor": COLOR_BORDER,
         "borderWidth": "1px",
-        "cornerRadius": "8px",
-        "spacing": "xs",
+        "cornerRadius": "12px",
+        "spacing": "sm",
         "contents": [
-            info_row(
-                "สถานีทั้งหมด / ONLINE / OFFLINE",
-                (
-                    f"{online_type_counts.get('all_total', 0)} / "
-                    f"{online_type_counts.get('total', 0)} / "
-                    f"{online_type_counts.get('offline', 0)}"
-                ),
-                COLOR_PRIMARY,
+            flex_text(
+                "สถานีตรวจวัด",
+                size="md",
+                weight="bold",
+                color=COLOR_PRIMARY_DARK,
             ),
-            info_row(
-                "ONLINE: AQMs / WQMs / CEMs",
-                (
-                    f"{online_type_counts.get('AQMs', 0)} / "
-                    f"{online_type_counts.get('WQMs', 0)} / "
-                    f"{online_type_counts.get('CEMs', 0)}"
-                ),
-                COLOR_TEXT,
-            ),
+            {
+                "type": "box",
+                "layout": "horizontal",
+                "spacing": "sm",
+                "contents": [
+                    summary_number_box(
+                        online_type_counts.get("all_total", 0),
+                        "ทั้งหมด",
+                        COLOR_PRIMARY,
+                    ),
+                    summary_number_box(
+                        online_type_counts.get("total", 0),
+                        "ONLINE",
+                        COLOR_GREEN_DARK,
+                    ),
+                    summary_number_box(
+                        online_type_counts.get("offline", 0),
+                        "OFFLINE",
+                        COLOR_RED_DARK,
+                    ),
+                ],
+            },
+            flex_separator(),
+            {
+                "type": "box",
+                "layout": "horizontal",
+                "paddingBottom": "3px",
+                "contents": [
+                    flex_text(
+                        "ประเภท (Type)",
+                        size="xs",
+                        weight="bold",
+                        color=COLOR_MUTED,
+                        flex=4,
+                    ),
+                    flex_text(
+                        "ทั้งหมด",
+                        size="xs",
+                        weight="bold",
+                        color=COLOR_MUTED,
+                        align="center",
+                        flex=2,
+                    ),
+                    flex_text(
+                        "ONLINE",
+                        size="xs",
+                        weight="bold",
+                        color=COLOR_GREEN_DARK,
+                        align="center",
+                        flex=2,
+                    ),
+                    flex_text(
+                        "OFFLINE",
+                        size="xs",
+                        weight="bold",
+                        color=COLOR_RED_DARK,
+                        align="center",
+                        flex=2,
+                    ),
+                ],
+            },
+            *type_rows,
         ],
     }
 
@@ -1550,7 +1692,7 @@ def build_alert_summary_bubble(
 
     return {
         "type": "bubble",
-        "size": "kilo",
+        "size": "giga",
 
         "header": card_header(
             "สรุปสถานการณ์ e-Monitoring",
@@ -1560,14 +1702,14 @@ def build_alert_summary_bubble(
         "body": {
             "type": "box",
             "layout": "vertical",
-            "paddingAll": "10px",
+            "paddingAll": "14px",
             "backgroundColor": COLOR_BACKGROUND,
             "spacing": "sm",
             "contents": [
                 {
                     "type": "box",
                     "layout": "horizontal",
-                    "paddingAll": "9px",
+                    "paddingAll": "11px",
                     "backgroundColor": COLOR_RED_SOFT,
                     "borderColor": COLOR_RED,
                     "borderWidth": "1px",
@@ -1588,8 +1730,8 @@ def build_alert_summary_bubble(
                             "margin": "md",
                             "contents": [
                                 flex_text(
-                                    "พบค่าพารามิเตอร์เกินมาตรฐาน",
-                                    size="md",
+                                    "พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน",
+                                    size="lg",
                                     weight="bold",
                                     color=COLOR_RED_DARK,
                                 ),
@@ -1623,17 +1765,36 @@ def build_alert_summary_bubble(
                     ],
                 },
 
+                {
+                    "type": "box",
+                    "layout": "vertical",
+                    "paddingAll": "11px",
+                    "backgroundColor": COLOR_WHITE,
+                    "borderColor": COLOR_RED,
+                    "borderWidth": "1px",
+                    "cornerRadius": "12px",
+                    "spacing": "xs",
+                    "contents": [
+                        flex_text(
+                            "พารามิเตอร์ที่เกินค่ามาตรฐาน (ParameterAlram)",
+                            size="xs",
+                            weight="bold",
+                            color=COLOR_MUTED,
+                        ),
+                        flex_text(
+                            ", ".join(summary["parameter_names"])
+                            if summary["parameter_names"]
+                            else "พารามิเตอร์แจ้งเตือน",
+                            size="md",
+                            weight="bold",
+                            color=COLOR_RED_DARK,
+                            max_lines=3,
+                        ),
+                    ],
+                },
+
                 online_station_summary_box(
                     online_type_counts
-                ),
-                info_row(
-                    "เร่งด่วน / เฝ้าระวัง / ติดตาม",
-                    (
-                        f"{summary['urgent_count']} / "
-                        f"{summary['watch_count']} / "
-                        f"{summary['follow_count']}"
-                    ),
-                    COLOR_RED_DARK,
                 ),
 
                 flex_text(
@@ -1669,7 +1830,7 @@ def build_normal_summary_bubble(
 ) -> dict[str, Any]:
     return {
         "type": "bubble",
-        "size": "kilo",
+        "size": "giga",
 
         "header": card_header(
             "สรุปสถานการณ์ e-Monitoring",
@@ -1679,14 +1840,14 @@ def build_normal_summary_bubble(
         "body": {
             "type": "box",
             "layout": "vertical",
-            "paddingAll": "10px",
+            "paddingAll": "14px",
             "backgroundColor": COLOR_BACKGROUND,
             "spacing": "sm",
             "contents": [
                 {
                     "type": "box",
                     "layout": "horizontal",
-                    "paddingAll": "9px",
+                    "paddingAll": "11px",
                     "backgroundColor": COLOR_GREEN_SOFT,
                     "borderColor": COLOR_GREEN,
                     "borderWidth": "1px",
@@ -1707,10 +1868,11 @@ def build_normal_summary_bubble(
                             "margin": "md",
                             "contents": [
                                 flex_text(
-                                    "ไม่พบค่าพารามิเตอร์เกินมาตรฐาน",
-                                    size="md",
+                                    "ไม่พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน",
+                                    size="lg",
                                     weight="bold",
                                     color=COLOR_GREEN_DARK,
+                                    max_lines=2,
                                 ),
                             ],
                         },
@@ -1750,7 +1912,7 @@ def build_no_current_data_summary_bubble(
 ) -> dict[str, Any]:
     return {
         "type": "bubble",
-        "size": "kilo",
+        "size": "giga",
         "header": card_header(
             "สรุปสถานการณ์ e-Monitoring",
             COLOR_YELLOW,
@@ -1758,14 +1920,14 @@ def build_no_current_data_summary_bubble(
         "body": {
             "type": "box",
             "layout": "vertical",
-            "paddingAll": "10px",
+            "paddingAll": "14px",
             "backgroundColor": COLOR_BACKGROUND,
             "spacing": "sm",
             "contents": [
                 {
                     "type": "box",
                     "layout": "horizontal",
-                    "paddingAll": "9px",
+                    "paddingAll": "11px",
                     "backgroundColor": COLOR_YELLOW_SOFT,
                     "borderColor": COLOR_YELLOW,
                     "borderWidth": "1px",
@@ -1786,10 +1948,16 @@ def build_no_current_data_summary_bubble(
                             "margin": "md",
                             "contents": [
                                 flex_text(
-                                    "ไม่พบข้อมูลตรวจวัดที่อัปเดตในวันนี้",
-                                    size="md",
+                                    "ไม่พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน",
+                                    size="lg",
                                     weight="bold",
                                     color=COLOR_YELLOW_DARK,
+                                    max_lines=2,
+                                ),
+                                flex_text(
+                                    "ยังไม่มีสถานี ONLINE ที่อัปเดตข้อมูลในวันนี้ จึงยังยืนยันสถานการณ์ไม่ได้",
+                                    size="xs",
+                                    color=COLOR_MUTED,
                                     max_lines=2,
                                 ),
                             ],
@@ -1845,11 +2013,11 @@ def alarm_entry_box(
         "type": "box",
         "layout": "vertical",
         "margin": "sm",
-        "paddingAll": "8px",
+        "paddingAll": "10px",
         "backgroundColor": COLOR_WHITE,
-        "borderColor": COLOR_BORDER,
+        "borderColor": COLOR_RED_SOFT,
         "borderWidth": "1px",
-        "cornerRadius": "10px",
+        "cornerRadius": "12px",
         "spacing": "xs",
         "contents": [
             {
@@ -1903,6 +2071,10 @@ def build_alert_detail_bubble(
     )
 
     station_type = normalize_station_type(
+        properties
+    )
+
+    station_comment = get_station_comment(
         properties
     )
 
@@ -1989,10 +2161,10 @@ def build_alert_detail_bubble(
                         ),
                         flex_text(
                             station_name,
-                            size="md",
+                            size="lg",
                             weight="bold",
                             color=COLOR_PRIMARY,
-                            max_lines=3,
+                            max_lines=2,
                         ),
                     ],
                 },
@@ -2005,7 +2177,73 @@ def build_alert_detail_bubble(
             color=COLOR_MUTED,
         ),
 
-        flex_separator(),
+        {
+            "type": "box",
+            "layout": "horizontal",
+            "spacing": "sm",
+            "contents": [
+                {
+                    "type": "box",
+                    "layout": "vertical",
+                    "flex": 1,
+                    "paddingAll": "9px",
+                    "backgroundColor": COLOR_GREEN_SOFT,
+                    "cornerRadius": "10px",
+                    "contents": [
+                        flex_text(
+                            "สถานะสถานี",
+                            size="xs",
+                            color=COLOR_MUTED,
+                        ),
+                        flex_text(
+                            "ONLINE",
+                            size="sm",
+                            weight="bold",
+                            color=COLOR_GREEN_DARK,
+                        ),
+                    ],
+                },
+                {
+                    "type": "box",
+                    "layout": "vertical",
+                    "flex": 1,
+                    "paddingAll": "9px",
+                    "backgroundColor": COLOR_PRIMARY_SOFT,
+                    "cornerRadius": "10px",
+                    "contents": [
+                        flex_text(
+                            "ประเภทการตรวจวัด (Type)",
+                            size="xs",
+                            color=COLOR_MUTED,
+                        ),
+                        flex_text(
+                            station_type,
+                            size="sm",
+                            weight="bold",
+                            color=COLOR_PRIMARY_DARK,
+                        ),
+                    ],
+                },
+            ],
+        },
+
+        {
+            "type": "box",
+            "layout": "vertical",
+            "paddingAll": "9px",
+            "backgroundColor": severity_background,
+            "borderColor": severity_color,
+            "borderWidth": "1px",
+            "cornerRadius": "10px",
+            "contents": [
+                flex_text(
+                    "ค่าพารามิเตอร์ที่เกินค่ามาตรฐาน (ParameterAlram)",
+                    size="sm",
+                    weight="bold",
+                    color=COLOR_RED_DARK,
+                ),
+            ],
+        },
     ]
 
     for alarm_entry in visible_entries:
@@ -2036,11 +2274,34 @@ def build_alert_detail_bubble(
             )
         )
 
-    body_contents.append(flex_separator())
+    body_contents.append({
+        "type": "box",
+        "layout": "vertical",
+        "paddingAll": "11px",
+        "backgroundColor": COLOR_YELLOW_SOFT,
+        "borderColor": COLOR_YELLOW,
+        "borderWidth": "1px",
+        "cornerRadius": "12px",
+        "spacing": "xs",
+        "contents": [
+            flex_text(
+                "สาเหตุ / การติดตามผล (Comment)",
+                size="sm",
+                weight="bold",
+                color=COLOR_YELLOW_DARK,
+            ),
+            flex_text(
+                station_comment,
+                size="sm",
+                color=COLOR_TEXT,
+                max_lines=6,
+            ),
+        ],
+    })
 
     return {
         "type": "bubble",
-        "size": "kilo",
+        "size": "giga",
 
         "header": card_header(
             severity_text,
@@ -2050,7 +2311,7 @@ def build_alert_detail_bubble(
         "body": {
             "type": "box",
             "layout": "vertical",
-            "paddingAll": "10px",
+            "paddingAll": "14px",
             "backgroundColor": COLOR_BACKGROUND,
             "spacing": "sm",
             "contents": body_contents,
@@ -2304,7 +2565,8 @@ def send_alert_detail_carousels(
 
 def write_status_json(
     alert_features: list[dict[str, Any]],
-    online_type_counts: dict[str, int],
+    online_type_counts: dict[str, Any],
+    has_current_data: bool,
 ) -> None:
     """เขียนข้อมูลล่าสุดให้หน้า GitHub Pages อ่านจาก docs/status.json"""
     station_items: list[dict[str, Any]] = []
@@ -2351,10 +2613,13 @@ def write_status_json(
             "estate": estate,
             "station_name": get_station_name(properties),
             "station_type": normalize_station_type(properties),
+            "status": clean_text(properties.get("Status"), "-").upper(),
             "parameter": ", ".join(names) if names else "พารามิเตอร์แจ้งเตือน",
+            "parameter_alarm": entries,
             "value": " | ".join(
                 remove_alarm_datetime(entry) for entry in entries
             ),
+            "comment": get_station_comment(properties),
             "detected_at": ", ".join(detected_times) or "-",
             "severity": severity_texts.get(
                 severity,
@@ -2366,17 +2631,27 @@ def write_status_json(
 
     has_alert = bool(station_items)
 
+    status = (
+        "alert"
+        if has_alert
+        else "normal"
+        if has_current_data
+        else "watch"
+    )
+
     status_data = {
-        "status": "alert" if has_alert else "normal",
+        "status": status,
         "status_text": (
-            "พบค่าพารามิเตอร์เกินมาตรฐาน"
+            "พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน"
             if has_alert
-            else "ไม่พบค่าพารามิเตอร์เกินมาตรฐาน"
+            else "ไม่พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน"
         ),
         "description": (
             "โปรดตรวจสอบรายละเอียดของสถานีและติดตามสถานการณ์"
             if has_alert
-            else "ขณะนี้ไม่พบค่าพารามิเตอร์เกินมาตรฐาน"
+            else "ตรวจสอบข้อมูลของวันปัจจุบันแล้ว"
+            if has_current_data
+            else "ยังไม่มีสถานี ONLINE ที่อัปเดตข้อมูลในวันนี้ จึงยังยืนยันสถานการณ์ไม่ได้"
         ),
         "updated_at": report_time_text(),
         "online_total": online_type_counts.get("total", 0),
@@ -2385,6 +2660,7 @@ def write_status_json(
         "online_aqms": online_type_counts.get("AQMs", 0),
         "online_wqms": online_type_counts.get("WQMs", 0),
         "online_cems": online_type_counts.get("CEMs", 0),
+        "station_types": online_type_counts.get("type_breakdown", {}),
         "alert_station_count": len(station_items),
         "parameter_count": len(parameter_names),
         "estate_count": len(estate_names),
@@ -2466,6 +2742,7 @@ def main() -> None:
     write_status_json(
         alert_features,
         online_type_counts,
+        has_current_data=bool(current_features),
     )
 
     latest_online_update = get_latest_online_update(features)
@@ -2565,7 +2842,7 @@ def main() -> None:
         send_line_flex(
             (
                 "สรุปสถานการณ์ e-Monitoring "
-                f"พบค่าพารามิเตอร์เกินมาตรฐาน "
+                f"พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน "
                 f"{len(alert_features)} สถานี"
             ),
             summary_bubble,
@@ -2582,16 +2859,16 @@ def main() -> None:
         )
 
     elif current_features:
-        print("ไม่พบค่าพารามิเตอร์เกินมาตรฐาน ส่งการ์ดสถานการณ์ปกติ")
+        print("ไม่พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน ส่งการ์ดสรุปสถานการณ์")
         send_line_flex(
-            "e-Monitoring: ไม่พบค่าพารามิเตอร์เกินมาตรฐาน",
+            "e-Monitoring: ไม่พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน",
             build_normal_summary_bubble(online_type_counts),
         )
 
     else:
-        print("ไม่พบข้อมูลตรวจวัดที่อัปเดตในวันนี้ ส่งการ์ดแจ้งเตือน")
+        print("ยังไม่มีสถานี ONLINE ที่อัปเดตข้อมูลในวันนี้ ส่งการ์ดสรุปสถานการณ์")
         send_line_flex(
-            "e-Monitoring: ไม่พบข้อมูลตรวจวัดที่อัปเดตในวันนี้",
+            "e-Monitoring: ไม่พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน",
             build_no_current_data_summary_bubble(online_type_counts),
         )
 
