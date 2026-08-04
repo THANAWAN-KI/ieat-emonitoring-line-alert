@@ -91,7 +91,7 @@ ICON_OTHER = "●"
 ICON_ASSET_URLS = {
     ICON_ALERT: os.getenv(
         "LINE_ICON_ALERT_URL",
-        f"{ICON_ASSET_BASE_URL}/alert.png",
+        f"{ICON_ASSET_BASE_URL}/alert_red.png",
     ),
     ICON_NORMAL: os.getenv(
         "LINE_ICON_NORMAL_URL",
@@ -103,7 +103,7 @@ ICON_ASSET_URLS = {
     ),
     ICON_STATION: os.getenv(
         "LINE_ICON_STATION_URL",
-        f"{ICON_ASSET_BASE_URL}/station.png",
+        f"{ICON_ASSET_BASE_URL}/icon_industry.png",
     ),
     ICON_DASHBOARD: os.getenv(
         "LINE_ICON_DASHBOARD_URL",
@@ -1829,12 +1829,31 @@ def online_station_summary_box(
 
     return depth_panel(
         [
-            flex_text(
-                "สรุปสถานะสถานีตรวจวัด",
-                size="md",
-                weight="bold",
-                color=COLOR_PRIMARY_DARK,
-            ),
+            {
+                "type": "box",
+                "layout": "horizontal",
+                "alignItems": "center",
+                "contents": [
+                    icon_badge(
+                        ICON_STATION,
+                        COLOR_WHITE,
+                        COLOR_PRIMARY_BORDER,
+                    ),
+                    {
+                        "type": "box",
+                        "layout": "vertical",
+                        "margin": "md",
+                        "contents": [
+                            flex_text(
+                                "สรุปสถานะสถานีตรวจวัด",
+                                size="md",
+                                weight="bold",
+                                color=COLOR_PRIMARY_DARK,
+                            ),
+                        ],
+                    },
+                ],
+            },
             {
                 "type": "box",
                 "layout": "horizontal",
