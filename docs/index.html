@@ -22,8 +22,8 @@
 
         body {
             margin: 0;
-            background: #e9e3ec;
-            color: #25212a;
+            background: #edf1e8;
+            color: #2d2933;
             font-family: "Segoe UI", Tahoma, Arial, sans-serif;
         }
 
@@ -32,7 +32,7 @@
             max-width: 720px;
             min-height: 100vh;
             margin: 0 auto;
-            background: #f8f6f9;
+            background: #fbfcf9;
         }
 
         .header {
@@ -41,7 +41,7 @@
             gap: 14px;
             padding: 18px;
             background: #ffffff;
-            border-bottom: 4px solid #6a2c91;
+            border-bottom: 4px solid #52057f;
         }
 
         .logo {
@@ -53,14 +53,14 @@
 
         .header-title {
             margin: 0;
-            color: #552076;
+            color: #52057f;
             font-size: 24px;
             font-weight: 750;
         }
 
         .header-subtitle {
             margin: 6px 0 0;
-            color: #6f6874;
+            color: #766f7c;
             font-size: 14px;
             line-height: 1.5;
         }
@@ -76,7 +76,7 @@
         }
 
         .error {
-            color: #a92c35;
+            color: #be062a;
         }
 
         .hidden {
@@ -88,19 +88,19 @@
             align-items: center;
             gap: 16px;
             padding: 20px;
-            background: #f3faeb;
-            border: 1px solid #5c9630;
+            background: #f1f7e8;
+            border: 1px solid #598c14;
             border-radius: 16px;
         }
 
         .status-card.alert {
-            background: #fdeeef;
-            border-color: #d64550;
+            background: #fff0f3;
+            border-color: #f00a36;
         }
 
         .status-card.watch {
-            background: #fff7da;
-            border-color: #d9a51d;
+            background: #fff9dd;
+            border-color: #ffc719;
         }
 
         .status-icon {
@@ -110,34 +110,38 @@
             justify-content: center;
             width: 62px;
             height: 62px;
-            color: #ffffff;
-            background: #7ecb4f;
-            border-radius: 18px;
-            font-size: 37px;
-            font-weight: bold;
+            background: transparent;
+            border-radius: 0;
+        }
+
+        .status-icon img {
+            display: block;
+            width: 58px;
+            height: 58px;
+            object-fit: contain;
         }
 
         .status-card.alert .status-icon {
-            background: #d64550;
+            background: transparent;
         }
 
         .status-card.watch .status-icon {
-            background: #d9a51d;
+            background: transparent;
         }
 
         .status-title {
             margin: 0;
-            color: #477824;
+            color: #426a0f;
             font-size: 21px;
             line-height: 1.45;
         }
 
         .status-card.alert .status-title {
-            color: #a92c35;
+            color: #be062a;
         }
 
         .status-card.watch .status-title {
-            color: #9a7000;
+            color: #ff6908;
         }
 
         .status-description {
@@ -148,7 +152,7 @@
 
         .section-title {
             margin: 24px 0 12px;
-            color: #25212a;
+            color: #2d2933;
             font-size: 20px;
             line-height: 1.4;
         }
@@ -160,17 +164,17 @@
             gap: 12px;
             padding: 18px;
             background: #ffffff;
-            border: 1px solid #d8cdd9;
+            border: 1px solid #dccbe8;
             border-radius: 14px;
         }
 
         .online-total-label {
-            color: #6f6874;
+            color: #766f7c;
             font-size: 15px;
         }
 
         .online-total-value {
-            color: #6a2c91;
+            color: #52057f;
             font-size: 21px;
             font-weight: bold;
             text-align: right;
@@ -186,21 +190,21 @@
         .type-card {
             padding: 15px 8px;
             background: #ffffff;
-            border: 1px solid #d8cdd9;
+            border: 1px solid #dccbe8;
             border-radius: 12px;
             text-align: center;
         }
 
         .type-card-aqms {
-            background: #f3faeb;
+            background: #f1f7e8;
         }
 
         .type-card-wqms {
-            background: #e8d9ec;
+            background: #f3edf7;
         }
 
         .type-card-cems {
-            background: #e6f3fc;
+            background: #eef7f8;
         }
 
         .type-name {
@@ -210,7 +214,7 @@
         .type-number {
             display: block;
             margin: 6px 0 3px;
-            color: #25212a;
+            color: #2d2933;
             font-size: 21px;
             font-weight: bold;
         }
@@ -220,15 +224,15 @@
         }
 
         .aqms {
-            color: #5c9630;
+            color: #598c14;
         }
 
         .wqms {
-            color: #6a2c91;
+            color: #52057f;
         }
 
         .cems {
-            color: #0872b9;
+            color: #4a8594;
         }
 
         .summary-grid {
@@ -240,26 +244,26 @@
         .summary-card {
             padding: 15px 8px;
             background: #ffffff;
-            border: 1px solid #d8cdd9;
+            border: 1px solid #dccbe8;
             border-radius: 12px;
             text-align: center;
         }
 
         .summary-card:nth-child(1) {
-            background: #e8d9ec;
+            background: #f3edf7;
         }
 
         .summary-card:nth-child(2) {
-            background: #f3faeb;
+            background: #f1f7e8;
         }
 
         .summary-card:nth-child(3) {
-            background: #e6f3fc;
+            background: #fff9dd;
         }
 
         .summary-number {
             display: block;
-            color: #6a2c91;
+            color: #52057f;
             font-size: 24px;
             font-weight: bold;
         }
@@ -267,7 +271,7 @@
         .summary-label {
             display: block;
             margin-top: 5px;
-            color: #6f6874;
+            color: #766f7c;
             font-size: 12px;
         }
 
@@ -275,21 +279,21 @@
             margin-top: 12px;
             padding: 16px;
             background: #ffffff;
-            border: 1px solid #d8cdd9;
-            border-left: 5px solid #d64550;
+            border: 1px solid #dccbe8;
+            border-left: 5px solid #f00a36;
             border-radius: 12px;
         }
 
         .station-estate {
             margin: 0;
-            color: #6f6874;
+            color: #766f7c;
             font-size: 13px;
             line-height: 1.5;
         }
 
         .station-name {
             margin: 5px 0 12px;
-            color: #552076;
+            color: #52057f;
             font-size: 18px;
             line-height: 1.5;
         }
@@ -299,14 +303,14 @@
             justify-content: space-between;
             gap: 12px;
             padding: 8px 0;
-            border-bottom: 1px solid #e8e0ea;
+            border-bottom: 1px solid #eeeaf1;
             font-size: 14px;
             line-height: 1.5;
         }
 
         .detail-label {
             flex: 0 0 40%;
-            color: #6f6874;
+            color: #766f7c;
         }
 
         .detail-value {
@@ -317,7 +321,7 @@
 
         .station-buttons {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             gap: 8px;
             margin-top: 14px;
         }
@@ -326,7 +330,7 @@
             display: block;
             padding: 12px 8px;
             color: #ffffff;
-            background: #6a2c91;
+            background: #52057f;
             border-radius: 9px;
             text-align: center;
             text-decoration: none;
@@ -335,13 +339,13 @@
         }
 
         .button.secondary {
-            color: #552076;
-            background: #e8d9ec;
+            color: #52057f;
+            background: #f3edf7;
         }
 
         .updated {
             margin: 24px 0 12px;
-            color: #6f6874;
+            color: #766f7c;
             text-align: center;
             font-size: 13px;
         }
@@ -350,7 +354,7 @@
             width: 100%;
             padding: 14px;
             color: #ffffff;
-            background: #552076;
+            background: #52057f;
             border: 0;
             border-radius: 10px;
             font-family: inherit;
@@ -607,6 +611,12 @@
 </div>
 
 <script>
+    const STATUS_ICON_URLS = {
+        alert: "https://raw.githubusercontent.com/THANAWAN-KI/ieat-emonitoring-line-alert/main/assets/4.png",
+        watch: "https://raw.githubusercontent.com/THANAWAN-KI/ieat-emonitoring-line-alert/main/assets/3.png",
+        normal: "https://raw.githubusercontent.com/THANAWAN-KI/ieat-emonitoring-line-alert/main/assets/1.png"
+    };
+
     function safeText(value, fallback = "-") {
         if (
             value === null ||
@@ -660,11 +670,31 @@
         return row;
     }
 
+    function firstItem(value, separator = " | ") {
+        if (Array.isArray(value)) {
+            return safeText(value[0]);
+        }
+
+        return safeText(value).split(separator)[0].trim();
+    }
+
+    function latestStationData(station) {
+        return {
+            parameter: firstItem(station.parameter, ","),
+            value: firstItem(station.value),
+            detectedAt: firstItem(station.detected_at, ",")
+        };
+    }
+
     function createStationCard(station) {
         const card =
             document.createElement("article");
 
         card.className = "station-card";
+
+        // status.json เป็นข้อมูลรอบล่าสุดอยู่แล้ว และแต่ละการ์ดแสดง
+        // เฉพาะรายการพารามิเตอร์ล่าสุด 1 รายการ เพื่อไม่ให้ข้อมูลเก่าปะปน
+        const latest = latestStationData(station);
 
         const estate =
             document.createElement("p");
@@ -699,21 +729,21 @@
         card.appendChild(
             createDetailRow(
                 "พารามิเตอร์",
-                station.parameter
+                latest.parameter
             )
         );
 
         card.appendChild(
             createDetailRow(
                 "ค่าที่ตรวจวัด",
-                station.value
+                latest.value
             )
         );
 
         card.appendChild(
             createDetailRow(
                 "เวลาที่ตรวจพบ",
-                station.detected_at
+                latest.detectedAt
             )
         );
 
@@ -739,23 +769,7 @@
         mapButton.target = "_blank";
         mapButton.rel = "noopener noreferrer";
 
-        const gisButton =
-            document.createElement("a");
-
-        gisButton.className =
-            "button secondary";
-
-        gisButton.textContent =
-            "เปิดระบบ GIS";
-
-        gisButton.href =
-            safeText(station.gis_url, "#");
-
-        gisButton.target = "_blank";
-        gisButton.rel = "noopener noreferrer";
-
         buttons.appendChild(mapButton);
-        buttons.appendChild(gisButton);
         card.appendChild(buttons);
 
         return card;
@@ -816,12 +830,14 @@
             statusCard.className =
                 "status-card";
 
+            let statusIconUrl = STATUS_ICON_URLS.normal;
+
             if (data.status === "alert") {
                 statusCard.classList.add(
                     "alert"
                 );
 
-                statusIcon.textContent = "!";
+                statusIconUrl = STATUS_ICON_URLS.alert;
 
                 alertSection.classList.remove(
                     "hidden"
@@ -834,19 +850,23 @@
                     "watch"
                 );
 
-                statusIcon.textContent = "!";
+                statusIconUrl = STATUS_ICON_URLS.watch;
 
                 alertSection.classList.remove(
                     "hidden"
                 );
 
             } else {
-                statusIcon.textContent = "✓";
-
                 alertSection.classList.add(
                     "hidden"
                 );
             }
+
+            statusIcon.innerHTML = "";
+            const statusIconImage = document.createElement("img");
+            statusIconImage.src = statusIconUrl;
+            statusIconImage.alt = "ไอคอนสถานการณ์";
+            statusIcon.appendChild(statusIconImage);
 
             setText(
                 "statusText",
