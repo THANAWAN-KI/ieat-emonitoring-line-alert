@@ -11,7 +11,7 @@ from typing import Any
 
 
 # ============================================================
-# 1. à¸à¸²à¸£à¸•à¸±à¹‰à¸‡à¸„à¹ˆà¸²à¸£à¸°à¸šà¸š
+# 1. การตั้งค่าระบบ
 # ============================================================
 
 DATA_URL = (
@@ -39,22 +39,18 @@ THAILAND_TIMEZONE = timezone(
 
 REQUEST_TIMEOUT_SECONDS = 60
 
-# à¸ˆà¸³à¸™à¸§à¸™à¸à¸²à¸£à¹Œà¸”à¸ªà¸¹à¸‡à¸ªà¸¸à¸”à¸•à¹ˆà¸­ Carousel
+# จำนวนการ์ดสูงสุดต่อ Carousel
 MAX_BUBBLES_PER_CAROUSEL = 10
 
-# LINE à¸ˆà¸³à¸à¸±à¸” JSON à¸‚à¸­à¸‡ Flex Carousel à¹„à¸¡à¹ˆà¹€à¸à¸´à¸™ 50 KB
-# à¹ƒà¸Šà¹‰ 45 KB à¹€à¸žà¸·à¹ˆà¸­à¹€à¸œà¸·à¹ˆà¸­à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡à¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡à¹à¸¥à¸°à¸­à¸±à¸à¸‚à¸£à¸°à¸ à¸²à¸©à¸²à¹„à¸—à¸¢
+# LINE จำกัด JSON ของ Flex Carousel ไม่เกิน 50 KB
+# ใช้ 45 KB เพื่อเผื่อโครงสร้างข้อความและอักขระภาษาไทย
 MAX_CAROUSEL_JSON_BYTES = 45_000
 
-# à¸ˆà¸³à¸™à¸§à¸™à¸£à¸²à¸¢à¸à¸²à¸£ Alarm à¸ªà¸¹à¸‡à¸ªà¸¸à¸”à¸—à¸µà¹ˆà¹à¸ªà¸”à¸‡à¸•à¹ˆà¸­à¸ªà¸–à¸²à¸™à¸µ
+# จำนวนรายการ Alarm สูงสุดที่แสดงต่อสถานี
 MAX_ALARM_ENTRIES_PER_STATION = 3
 
-# à¸–à¹‰à¸²à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸¥à¹ˆà¸²à¸Šà¹‰à¸²à¹€à¸à¸´à¸™à¸„à¹ˆà¸²à¸™à¸µà¹‰ à¸ˆà¸°à¸£à¸²à¸¢à¸‡à¸²à¸™à¸§à¹ˆà¸² "à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸¥à¹ˆà¸²à¸Šà¹‰à¸²"
-# à¹à¸—à¸™à¸à¸²à¸£à¸ªà¸£à¸¸à¸›à¸§à¹ˆà¸²à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œà¸›à¸à¸•à¸´à¸ˆà¸²à¸à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¹€à¸à¹ˆà¸²
-FRESH_DATA_MAX_AGE_MINUTES = 120
-
 # ============================================================
-# 2. à¸£à¸¹à¸›à¸ à¸²à¸žà¸—à¸µà¹ˆà¹ƒà¸Šà¹‰à¹ƒà¸™ LINE Flex Message
+# 2. รูปภาพที่ใช้ใน LINE Flex Message
 # ============================================================
 
 ASSET_BASE_URL = (
@@ -80,30 +76,30 @@ WATCH_YELLOW_ICON_URL = (
 
 
 # ============================================================
-# 3. à¸˜à¸µà¸¡à¸ªà¸µ Dashboard e-Monitoring à¸à¸™à¸­.
+# 3. ธีมสี Dashboard e-Monitoring กนอ.
 # ============================================================
 
-# à¸ªà¸µà¸¡à¹ˆà¸§à¸‡à¸«à¸¥à¸±à¸à¸ˆà¸²à¸à¸«à¸±à¸§à¸•à¸²à¸£à¸²à¸‡à¹à¸¥à¸°à¸«à¸±à¸§à¸‚à¹‰à¸­à¹ƒà¸™ Dashboard
+# สีม่วงหลักจากหัวตารางและหัวข้อใน Dashboard
 COLOR_PRIMARY = "#6A2C91"
 COLOR_PRIMARY_DARK = "#552076"
 COLOR_PRIMARY_SOFT = "#E8D9EC"
 
-# à¸ªà¸µà¹à¸ˆà¹‰à¸‡à¹€à¸•à¸·à¸­à¸™à¸£à¸°à¸”à¸±à¸šà¹€à¸£à¹ˆà¸‡à¸”à¹ˆà¸§à¸™
+# สีแจ้งเตือนระดับเร่งด่วน
 COLOR_RED = "#D64550"
 COLOR_RED_DARK = "#A92C35"
 COLOR_RED_SOFT = "#FDEEEF"
 
-# à¸ªà¸µà¹à¸ˆà¹‰à¸‡à¹€à¸•à¸·à¸­à¸™à¸£à¸°à¸”à¸±à¸šà¹€à¸à¹‰à¸²à¸£à¸°à¸§à¸±à¸‡
+# สีแจ้งเตือนระดับเฝ้าระวัง
 COLOR_YELLOW = "#D9A51D"
 COLOR_YELLOW_DARK = "#9A7000"
 COLOR_YELLOW_SOFT = "#FFF7DA"
 
-# à¸ªà¸µà¹€à¸‚à¸µà¸¢à¸§ AQMs / ONLINE à¸•à¸²à¸¡ Dashboard
+# สีเขียว AQMs / ONLINE ตาม Dashboard
 COLOR_GREEN = "#5C9630"
 COLOR_GREEN_DARK = "#477824"
 COLOR_GREEN_SOFT = "#F3FAEB"
 
-# à¸ªà¸µà¸Ÿà¹‰à¸² CEMs à¸•à¸²à¸¡ Dashboard
+# สีฟ้า CEMs ตาม Dashboard
 COLOR_BLUE = "#0872B9"
 COLOR_BLUE_DARK = "#075B91"
 COLOR_BLUE_SOFT = "#E6F3FC"
@@ -117,7 +113,7 @@ COLOR_WHITE = "#FFFFFF"
 
 
 # ============================================================
-# 4. à¸Ÿà¸±à¸‡à¸à¹Œà¸Šà¸±à¸™à¸žà¸·à¹‰à¸™à¸à¸²à¸™
+# 4. ฟังก์ชันพื้นฐาน
 # ============================================================
 
 def now_thailand() -> datetime:
@@ -170,22 +166,22 @@ def has_parameter_alarm(
 
 
 # ============================================================
-# 5. à¸§à¸±à¸™à¸—à¸µà¹ˆà¹à¸¥à¸°à¹€à¸§à¸¥à¸²
+# 5. วันที่และเวลา
 # ============================================================
 
 THAI_MONTHS_SHORT = {
-    1: "à¸¡.à¸„.",
-    2: "à¸.à¸ž.",
-    3: "à¸¡à¸µ.à¸„.",
-    4: "à¹€à¸¡.à¸¢.",
-    5: "à¸ž.à¸„.",
-    6: "à¸¡à¸´.à¸¢.",
-    7: "à¸.à¸„.",
-    8: "à¸ª.à¸„.",
-    9: "à¸.à¸¢.",
-    10: "à¸•.à¸„.",
-    11: "à¸ž.à¸¢.",
-    12: "à¸˜.à¸„.",
+    1: "ม.ค.",
+    2: "ก.พ.",
+    3: "มี.ค.",
+    4: "เม.ย.",
+    5: "พ.ค.",
+    6: "มิ.ย.",
+    7: "ก.ค.",
+    8: "ส.ค.",
+    9: "ก.ย.",
+    10: "ต.ค.",
+    11: "พ.ย.",
+    12: "ธ.ค.",
 }
 
 
@@ -257,7 +253,7 @@ def format_datetime_thai(
         f"{parsed.day} "
         f"{thai_month} "
         f"{thai_year} "
-        f"à¹€à¸§à¸¥à¸² {parsed:%H:%M} à¸™."
+        f"เวลา {parsed:%H:%M} น."
     )
 
 
@@ -275,12 +271,12 @@ def report_time_text() -> str:
         f"{current.day} "
         f"{thai_month} "
         f"{thai_year} "
-        f"à¹€à¸§à¸¥à¸² {current:%H:%M} à¸™."
+        f"เวลา {current:%H:%M} น."
     )
 
 
 # ============================================================
-# 6. à¸”à¸²à¸§à¸™à¹Œà¹‚à¸«à¸¥à¸”à¸‚à¹‰à¸­à¸¡à¸¹à¸¥ e-Monitoring
+# 6. ดาวน์โหลดข้อมูล e-Monitoring
 # ============================================================
 
 def download_data() -> Any:
@@ -338,21 +334,21 @@ def download_data() -> Any:
         )
 
         raise RuntimeError(
-            "à¸”à¸²à¸§à¸™à¹Œà¹‚à¸«à¸¥à¸”à¸‚à¹‰à¸­à¸¡à¸¹à¸¥ e-Monitoring "
-            f"à¹„à¸¡à¹ˆà¸ªà¸³à¹€à¸£à¹‡à¸ˆ HTTP {error.code}: "
+            "ดาวน์โหลดข้อมูล e-Monitoring "
+            f"ไม่สำเร็จ HTTP {error.code}: "
             f"{error_body}"
         ) from error
 
     except urllib.error.URLError as error:
         raise RuntimeError(
-            "à¹„à¸¡à¹ˆà¸ªà¸²à¸¡à¸²à¸£à¸–à¹€à¸Šà¸·à¹ˆà¸­à¸¡à¸•à¹ˆà¸­à¸‚à¹‰à¸­à¸¡à¸¹à¸¥ "
-            f"e-Monitoring à¹„à¸”à¹‰: {error.reason}"
+            "ไม่สามารถเชื่อมต่อข้อมูล "
+            f"e-Monitoring ได้: {error.reason}"
         ) from error
 
     except json.JSONDecodeError as error:
         raise RuntimeError(
-            "à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸—à¸µà¹ˆà¹„à¸”à¹‰à¸£à¸±à¸šà¸ˆà¸²à¸ e-Monitoring "
-            "à¹„à¸¡à¹ˆà¹ƒà¸Šà¹ˆ JSON à¸—à¸µà¹ˆà¸–à¸¹à¸à¸•à¹‰à¸­à¸‡"
+            "ข้อมูลที่ได้รับจาก e-Monitoring "
+            "ไม่ใช่ JSON ที่ถูกต้อง"
         ) from error
 
 
@@ -381,7 +377,7 @@ def get_features(
 
 
 # ============================================================
-# 7. à¸­à¹ˆà¸²à¸™ ParameterAlram
+# 7. อ่าน ParameterAlram
 # ============================================================
 
 def split_parameter_alarm(
@@ -460,8 +456,8 @@ def get_today_alarm_entries(
 
         if alarm_datetime is None:
             print(
-                "à¸‚à¹‰à¸²à¸¡ Alarm à¹€à¸™à¸·à¹ˆà¸­à¸‡à¸ˆà¸²à¸ "
-                "à¸­à¹ˆà¸²à¸™à¸§à¸±à¸™à¸—à¸µà¹ˆà¹„à¸¡à¹ˆà¹„à¸”à¹‰:",
+                "ข้าม Alarm เนื่องจาก "
+                "อ่านวันที่ไม่ได้:",
                 entry,
             )
             continue
@@ -476,44 +472,8 @@ def get_today_alarm_entries(
     return today_entries
 
 
-def get_active_alarm_entries(value: Any) -> list[str]:
-    """à¸„à¸·à¸™ Alarm à¸‚à¸­à¸‡à¸§à¸±à¸™à¸—à¸µà¹ˆà¸¥à¹ˆà¸²à¸ªà¸¸à¸”à¸—à¸µà¹ˆà¸¡à¸µà¸­à¸¢à¸¹à¹ˆà¸ˆà¸£à¸´à¸‡à¹ƒà¸™ ParameterAlram
-
-    à¸«à¹‰à¸²à¸¡à¹€à¸—à¸µà¸¢à¸šà¸à¸±à¸šà¸§à¸±à¸™à¸—à¸µà¹ˆà¸‚à¸­à¸‡à¹€à¸„à¸£à¸·à¹ˆà¸­à¸‡à¹‚à¸”à¸¢à¸•à¸£à¸‡ à¹€à¸žà¸£à¸²à¸°à¸šà¸²à¸‡à¸„à¸£à¸±à¹‰à¸‡à¸£à¸°à¸šà¸šà¸•à¹‰à¸™à¸—à¸²à¸‡
-    à¸­à¸±à¸›à¹€à¸”à¸•à¸Šà¹‰à¸²à¸à¸§à¹ˆà¸²à¸§à¸±à¸™à¸—à¸µà¹ˆ Workflow à¸—à¸³à¸‡à¸²à¸™ à¸—à¸³à¹ƒà¸«à¹‰ Alarm à¸—à¸µà¹ˆà¸¡à¸µà¸­à¸¢à¸¹à¹ˆà¸ˆà¸£à¸´à¸‡
-    à¸–à¸¹à¸à¸•à¸±à¸”à¸—à¸´à¹‰à¸‡à¸—à¸±à¹‰à¸‡à¸«à¸¡à¸”à¹à¸¥à¸°à¸£à¸°à¸šà¸šà¸£à¸²à¸¢à¸‡à¸²à¸™à¸§à¹ˆà¸² "à¸›à¸à¸•à¸´" à¸­à¸¢à¹ˆà¸²à¸‡à¹„à¸¡à¹ˆà¸–à¸¹à¸à¸•à¹‰à¸­à¸‡
-    """
-    parsed_entries: list[tuple[datetime, str]] = []
-
-    for entry in split_parameter_alarm(value):
-        alarm_datetime = get_alarm_datetime(entry)
-
-        if alarm_datetime is None:
-            print(
-                "à¸‚à¹‰à¸²à¸¡ Alarm à¹€à¸™à¸·à¹ˆà¸­à¸‡à¸ˆà¸²à¸à¸­à¹ˆà¸²à¸™à¸§à¸±à¸™à¸—à¸µà¹ˆà¹„à¸¡à¹ˆà¹„à¸”à¹‰:",
-                entry,
-            )
-            continue
-
-        parsed_entries.append((alarm_datetime, entry))
-
-    if not parsed_entries:
-        return []
-
-    latest_alarm_date = max(
-        alarm_datetime.date()
-        for alarm_datetime, _ in parsed_entries
-    )
-
-    return [
-        entry
-        for alarm_datetime, entry in parsed_entries
-        if alarm_datetime.date() == latest_alarm_date
-    ]
-
-
 # ============================================================
-# 8. à¸ˆà¸±à¸”à¸£à¸¹à¸›à¹à¸šà¸šà¸£à¸²à¸¢à¸¥à¸°à¹€à¸­à¸µà¸¢à¸” Alarm
+# 8. จัดรูปแบบรายละเอียด Alarm
 # ============================================================
 
 def remove_alarm_datetime(
@@ -546,7 +506,7 @@ def alarm_time_text(
     if parsed is None:
         return ""
 
-    return f"{parsed:%H:%M} à¸™."
+    return f"{parsed:%H:%M} น."
 
 
 KNOWN_PARAMETERS = [
@@ -576,12 +536,12 @@ KNOWN_PARAMETERS = [
 
 PARAMETER_DISPLAY_NAMES = {
     "PM25": "PM2.5",
-    "SO2": "SOâ‚‚",
-    "NO2": "NOâ‚‚",
+    "SO2": "SO₂",
+    "NO2": "NO₂",
     "NOX": "NOx",
-    "O3": "Oâ‚ƒ",
-    "H2S": "Hâ‚‚S",
-    "CH4": "CHâ‚„",
+    "O3": "O₃",
+    "H2S": "H₂S",
+    "CH4": "CH₄",
     "PH": "pH",
     "OPACITY": "Opacity",
     "HCL": "HCl",
@@ -663,11 +623,11 @@ def extract_primary_parameter_name(
     if first_word:
         return first_word.group(1)
 
-    return "à¸žà¸²à¸£à¸²à¸¡à¸´à¹€à¸•à¸­à¸£à¹Œà¹à¸ˆà¹‰à¸‡à¹€à¸•à¸·à¸­à¸™"
+    return "พารามิเตอร์แจ้งเตือน"
 
 
 # ============================================================
-# 9. à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸ªà¸–à¸²à¸™à¸µ
+# 9. ข้อมูลสถานี
 # ============================================================
 
 def get_station_name(
@@ -688,7 +648,7 @@ def get_station_name(
         if value:
             return value
 
-    return "à¹„à¸¡à¹ˆà¸£à¸°à¸šà¸¸à¸Šà¸·à¹ˆà¸­à¸ªà¸–à¸²à¸™à¸µ"
+    return "ไม่ระบุชื่อสถานี"
 
 
 def get_industry_zone(
@@ -710,7 +670,7 @@ def get_industry_zone(
         if value:
             return value
 
-    return "à¸£à¸°à¸šà¸š e-Monitoring"
+    return "ระบบ e-Monitoring"
 
 
 def get_raw_station_type(
@@ -790,7 +750,7 @@ def normalize_station_type(
     return (
         raw_type
         if raw_type
-        else "à¹„à¸¡à¹ˆà¸£à¸°à¸šà¸¸à¸›à¸£à¸°à¹€à¸ à¸—"
+        else "ไม่ระบุประเภท"
     )
 
 
@@ -853,7 +813,7 @@ def station_map_url(
 
 
 # ============================================================
-# 10. à¸à¸£à¸­à¸‡à¹à¸¥à¸°à¸™à¸±à¸šà¸ªà¸–à¸²à¸™à¸µ ONLINE
+# 10. กรองและนับสถานี ONLINE
 # ============================================================
 
 def is_valid_station(
@@ -941,7 +901,7 @@ def count_online_station_types(
         else:
             offline_station_keys.add(unique_key)
 
-        # à¸ˆà¸³à¸™à¸§à¸™à¹à¸¢à¸à¸›à¸£à¸°à¹€à¸ à¸—à¸”à¹‰à¸²à¸™à¸¥à¹ˆà¸²à¸‡à¸™à¸±à¸šà¹€à¸‰à¸žà¸²à¸°à¸ªà¸–à¸²à¸™à¸µ ONLINE
+        # จำนวนแยกประเภทด้านล่างนับเฉพาะสถานี ONLINE
         if not is_online(properties.get("Status")):
             continue
 
@@ -1011,7 +971,7 @@ def filter_current_online_features(
             unique_key
         )
 
-        # Alarm à¹à¸¥à¸°à¸„à¹ˆà¸²à¸žà¸²à¸£à¸²à¸¡à¸´à¹€à¸•à¸­à¸£à¹Œà¸•à¹‰à¸­à¸‡à¹ƒà¸Šà¹‰à¹€à¸‰à¸žà¸²à¸°à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸‚à¸­à¸‡à¸§à¸±à¸™à¸™à¸µà¹‰à¹€à¸—à¹ˆà¸²à¸™à¸±à¹‰à¸™
+        # Alarm และค่าพารามิเตอร์ต้องใช้เฉพาะข้อมูลของวันนี้เท่านั้น
         if not is_today(properties.get("LastUpdate")):
             stale_station_keys.add(
                 unique_key
@@ -1039,7 +999,7 @@ def filter_current_online_features(
 def get_latest_online_update(
     features: list[dict[str, Any]],
 ) -> datetime | None:
-    """à¸„à¸·à¸™à¸§à¸±à¸™à¹€à¸§à¸¥à¸² LastUpdate à¸—à¸µà¹ˆà¸¥à¹ˆà¸²à¸ªà¸¸à¸”à¸‚à¸­à¸‡à¸ªà¸–à¸²à¸™à¸µ ONLINE"""
+    """คืนวันเวลา LastUpdate ที่ล่าสุดของสถานี ONLINE"""
     latest: datetime | None = None
 
     for feature in features:
@@ -1058,16 +1018,6 @@ def get_latest_online_update(
     return latest
 
 
-def is_data_fresh(latest_update: datetime | None) -> bool:
-    if latest_update is None:
-        return False
-
-    age = now_thailand() - latest_update
-    return timedelta(0) <= age <= timedelta(
-        minutes=FRESH_DATA_MAX_AGE_MINUTES
-    )
-
-
 def filter_alert_features(
     current_features: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
@@ -1079,8 +1029,8 @@ def filter_alert_features(
             {},
         )
 
-        # à¸£à¸­à¸‡à¸£à¸±à¸šà¸—à¸±à¹‰à¸‡à¸Šà¸·à¹ˆà¸­à¹€à¸”à¸´à¸¡à¸—à¸µà¹ˆ API à¸ªà¸°à¸à¸”à¸§à¹ˆà¸² ParameterAlram
-        # à¹à¸¥à¸°à¸Šà¸·à¹ˆà¸­à¸—à¸µà¹ˆà¸ªà¸°à¸à¸”à¸–à¸¹à¸/à¸£à¸¹à¸›à¹à¸šà¸šà¸•à¸±à¸§à¸žà¸´à¸¡à¸žà¹Œà¸­à¸·à¹ˆà¸™ à¹€à¸œà¸·à¹ˆà¸­ API à¹€à¸›à¸¥à¸µà¹ˆà¸¢à¸™ schema
+        # รองรับทั้งชื่อเดิมที่ API สะกดว่า ParameterAlram
+        # และชื่อที่สะกดถูก/รูปแบบตัวพิมพ์อื่น เผื่อ API เปลี่ยน schema
         parameter_alarm = next(
             (
                 properties.get(field)
@@ -1101,7 +1051,7 @@ def filter_alert_features(
             continue
 
         today_alarm_entries = (
-            get_active_alarm_entries(
+            get_today_alarm_entries(
                 parameter_alarm
             )
         )
@@ -1145,7 +1095,7 @@ def filter_alert_features(
 
 
 # ============================================================
-# 11. à¹à¸šà¹ˆà¸‡à¸£à¸°à¸”à¸±à¸šà¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œ
+# 11. แบ่งระดับสถานการณ์
 # ============================================================
 
 def get_severity_level(
@@ -1260,7 +1210,7 @@ def summarize_alerts(
 
 
 # ============================================================
-# 12. à¸ªà¹ˆà¸§à¸™à¸›à¸£à¸°à¸à¸­à¸š Flex Message
+# 12. ส่วนประกอบ Flex Message
 # ============================================================
 
 def flex_text(
@@ -1362,7 +1312,7 @@ def info_row(
 
 
 # ============================================================
-# 13. Header à¸‚à¸­à¸‡à¸à¸²à¸£à¹Œà¸”
+# 13. Header ของการ์ด
 # ============================================================
 
 def card_header(
@@ -1421,7 +1371,7 @@ def card_header(
 
 
 # ============================================================
-# 14. à¸à¸¥à¹ˆà¸­à¸‡à¸•à¸±à¸§à¹€à¸¥à¸‚à¸ à¸²à¸žà¸£à¸§à¸¡
+# 14. กล่องตัวเลขภาพรวม
 # ============================================================
 
 def summary_number_box(
@@ -1480,7 +1430,7 @@ def station_type_count_box(
                 flex=6,
             ),
             flex_text(
-                f"{count} à¸ªà¸–à¸²à¸™à¸µ",
+                f"{count} สถานี",
                 size="sm",
                 weight="bold",
                 color=COLOR_TEXT,
@@ -1505,7 +1455,7 @@ def online_station_summary_box(
         "spacing": "xs",
         "contents": [
             info_row(
-                "à¸—à¸±à¹‰à¸‡à¸«à¸¡à¸” / ONLINE / OFFLINE",
+                "สถานีทั้งหมด / ONLINE / OFFLINE",
                 (
                     f"{online_type_counts.get('all_total', 0)} / "
                     f"{online_type_counts.get('total', 0)} / "
@@ -1514,7 +1464,7 @@ def online_station_summary_box(
                 COLOR_PRIMARY,
             ),
             info_row(
-                "AQMs / WQMs / CEMs",
+                "ONLINE: AQMs / WQMs / CEMs",
                 (
                     f"{online_type_counts.get('AQMs', 0)} / "
                     f"{online_type_counts.get('WQMs', 0)} / "
@@ -1574,7 +1524,7 @@ def severity_box(
                 ],
             },
             flex_text(
-                f"{count} à¸ªà¸–à¸²à¸™à¸µ",
+                f"{count} สถานี",
                 size="sm",
                 color=title_color,
                 weight="bold",
@@ -1586,7 +1536,7 @@ def severity_box(
 
 
 # ============================================================
-# 15. à¸à¸²à¸£à¹Œà¸”à¸ªà¸£à¸¸à¸›à¹€à¸¡à¸·à¹ˆà¸­à¸žà¸š Alarm
+# 15. การ์ดสรุปเมื่อพบ Alarm
 # ============================================================
 
 def build_alert_summary_bubble(
@@ -1603,7 +1553,7 @@ def build_alert_summary_bubble(
         "size": "kilo",
 
         "header": card_header(
-            "à¸ªà¸£à¸¸à¸›à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œà¸„à¸¸à¸“à¸ à¸²à¸žà¸ªà¸´à¹ˆà¸‡à¹à¸§à¸”à¸¥à¹‰à¸­à¸¡",
+            "สรุปสถานการณ์ e-Monitoring",
             COLOR_RED,
         ),
 
@@ -1638,7 +1588,7 @@ def build_alert_summary_bubble(
                             "margin": "md",
                             "contents": [
                                 flex_text(
-                                    "à¸žà¸šà¸„à¹ˆà¸²à¸žà¸²à¸£à¸²à¸¡à¸´à¹€à¸•à¸­à¸£à¹Œà¹€à¸à¸´à¸™à¹€à¸à¸“à¸‘à¹Œ",
+                                    "พบค่าพารามิเตอร์เกินมาตรฐาน",
                                     size="md",
                                     weight="bold",
                                     color=COLOR_RED_DARK,
@@ -1655,19 +1605,19 @@ def build_alert_summary_bubble(
                     "contents": [
                         summary_number_box(
                             summary["station_count"],
-                            "à¸ªà¸–à¸²à¸™à¸µà¹à¸ˆà¹‰à¸‡à¹€à¸•à¸·à¸­à¸™",
+                            "สถานีแจ้งเตือน",
                             COLOR_PRIMARY,
                         ),
                         summary_number_box(
                             summary["parameter_count"],
-                            "à¸žà¸²à¸£à¸²à¸¡à¸´à¹€à¸•à¸­à¸£à¹Œ",
+                            "พารามิเตอร์",
                             COLOR_GREEN,
                         ),
                         summary_number_box(
                             summary[
                                 "industry_zone_count"
                             ],
-                            "à¸™à¸´à¸„à¸¡à¸¯",
+                            "นิคมฯ",
                             COLOR_YELLOW_DARK,
                         ),
                     ],
@@ -1677,7 +1627,7 @@ def build_alert_summary_bubble(
                     online_type_counts
                 ),
                 info_row(
-                    "à¹€à¸£à¹ˆà¸‡à¸”à¹ˆà¸§à¸™ / à¹€à¸à¹‰à¸²à¸£à¸°à¸§à¸±à¸‡ / à¸•à¸´à¸”à¸•à¸²à¸¡",
+                    "เร่งด่วน / เฝ้าระวัง / ติดตาม",
                     (
                         f"{summary['urgent_count']} / "
                         f"{summary['watch_count']} / "
@@ -1687,7 +1637,7 @@ def build_alert_summary_bubble(
                 ),
 
                 flex_text(
-                    f"à¸‚à¹‰à¸­à¸¡à¸¹à¸¥ à¸“ {report_time_text()}",
+                    f"ข้อมูล ณ {report_time_text()}",
                     size="xs",
                     color=COLOR_MUTED,
                     align="center",
@@ -1701,7 +1651,7 @@ def build_alert_summary_bubble(
             "paddingAll": "10px",
             "contents": [
                 flex_button(
-                    "à¹€à¸›à¸´à¸”à¸£à¸°à¸šà¸š GIS",
+                    "เปิดระบบ GIS",
                     ARCGIS_DASHBOARD_URL,
                     primary=True,
                 ),
@@ -1711,7 +1661,7 @@ def build_alert_summary_bubble(
 
 
 # ============================================================
-# 16. à¸à¸²à¸£à¹Œà¸”à¸ªà¸£à¸¸à¸›à¹€à¸¡à¸·à¹ˆà¸­à¹„à¸¡à¹ˆà¸žà¸š Alarm
+# 16. การ์ดสรุปเมื่อไม่พบ Alarm
 # ============================================================
 
 def build_normal_summary_bubble(
@@ -1722,7 +1672,7 @@ def build_normal_summary_bubble(
         "size": "kilo",
 
         "header": card_header(
-            "à¸ªà¸£à¸¸à¸›à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œà¸„à¸¸à¸“à¸ à¸²à¸žà¸ªà¸´à¹ˆà¸‡à¹à¸§à¸”à¸¥à¹‰à¸­à¸¡",
+            "สรุปสถานการณ์ e-Monitoring",
             COLOR_GREEN,
         ),
 
@@ -1757,7 +1707,7 @@ def build_normal_summary_bubble(
                             "margin": "md",
                             "contents": [
                                 flex_text(
-                                    "à¹„à¸¡à¹ˆà¸žà¸šà¸„à¹ˆà¸²à¹€à¸à¸´à¸™à¹€à¸à¸“à¸‘à¹Œà¸¡à¸²à¸•à¸£à¸à¸²à¸™",
+                                    "ไม่พบค่าพารามิเตอร์เกินมาตรฐาน",
                                     size="md",
                                     weight="bold",
                                     color=COLOR_GREEN_DARK,
@@ -1772,7 +1722,7 @@ def build_normal_summary_bubble(
                 ),
 
                 flex_text(
-                    f"à¸‚à¹‰à¸­à¸¡à¸¹à¸¥ à¸“ {report_time_text()}",
+                    f"ข้อมูล ณ {report_time_text()}",
                     size="xs",
                     color=COLOR_MUTED,
                     align="center",
@@ -1786,7 +1736,7 @@ def build_normal_summary_bubble(
             "paddingAll": "10px",
             "contents": [
                 flex_button(
-                    "à¹€à¸›à¸´à¸”à¸£à¸°à¸šà¸š GIS",
+                    "เปิดระบบ GIS",
                     ARCGIS_DASHBOARD_URL,
                     primary=True,
                 ),
@@ -1795,21 +1745,14 @@ def build_normal_summary_bubble(
     }
 
 
-def build_stale_data_summary_bubble(
+def build_no_current_data_summary_bubble(
     online_type_counts: dict[str, int],
-    latest_update: datetime | None,
 ) -> dict[str, Any]:
-    latest_text = (
-        format_datetime_thai(latest_update.strftime("%Y-%m-%d %H:%M:%S"))
-        if latest_update is not None
-        else "à¹„à¸¡à¹ˆà¸žà¸šà¸§à¸±à¸™à¹€à¸§à¸¥à¸²à¸¥à¹ˆà¸²à¸ªà¸¸à¸”"
-    )
-
     return {
         "type": "bubble",
         "size": "kilo",
         "header": card_header(
-            "à¸ªà¸£à¸¸à¸›à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œà¸„à¸¸à¸“à¸ à¸²à¸žà¸ªà¸´à¹ˆà¸‡à¹à¸§à¸”à¸¥à¹‰à¸­à¸¡",
+            "สรุปสถานการณ์ e-Monitoring",
             COLOR_YELLOW,
         ),
         "body": {
@@ -1843,38 +1786,19 @@ def build_stale_data_summary_bubble(
                             "margin": "md",
                             "contents": [
                                 flex_text(
-                                    "à¸‚à¹‰à¸­à¸¡à¸¹à¸¥ e-Monitoring à¸¥à¹ˆà¸²à¸Šà¹‰à¸²",
+                                    "ไม่พบข้อมูลตรวจวัดที่อัปเดตในวันนี้",
                                     size="md",
                                     weight="bold",
                                     color=COLOR_YELLOW_DARK,
-                                ),
-                                flex_text(
-                                    "à¹„à¸¡à¹ˆà¸žà¸šà¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸•à¸£à¸§à¸ˆà¸§à¸±à¸”à¸‚à¸­à¸‡à¸§à¸±à¸™à¸›à¸±à¸ˆà¸ˆà¸¸à¸šà¸±à¸™",
-                                    size="xs",
-                                    color=COLOR_TEXT,
-                                    max_lines=4,
+                                    max_lines=2,
                                 ),
                             ],
                         },
                     ],
                 },
                 online_station_summary_box(online_type_counts),
-                {
-                    "type": "box",
-                    "layout": "vertical",
-                    "paddingAll": "8px",
-                    "backgroundColor": COLOR_YELLOW_SOFT,
-                    "cornerRadius": "10px",
-                    "contents": [
-                        info_row(
-                            "à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸¥à¹ˆà¸²à¸ªà¸¸à¸”",
-                            latest_text,
-                            COLOR_YELLOW_DARK,
-                        ),
-                    ],
-                },
                 flex_text(
-                    f"à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸šà¹€à¸¡à¸·à¹ˆà¸­ {report_time_text()}",
+                    f"ตรวจสอบเมื่อ {report_time_text()}",
                     size="xs",
                     color=COLOR_MUTED,
                     align="center",
@@ -1887,7 +1811,7 @@ def build_stale_data_summary_bubble(
             "paddingAll": "10px",
             "contents": [
                 flex_button(
-                    "à¹€à¸›à¸´à¸”à¸£à¸°à¸šà¸š GIS",
+                    "เปิดระบบ GIS",
                     ARCGIS_DASHBOARD_URL,
                     primary=True,
                 ),
@@ -1897,7 +1821,7 @@ def build_stale_data_summary_bubble(
 
 
 # ============================================================
-# 17. à¸à¸¥à¹ˆà¸­à¸‡à¸£à¸²à¸¢à¸¥à¸°à¹€à¸­à¸µà¸¢à¸” Alarm
+# 17. กล่องรายละเอียด Alarm
 # ============================================================
 
 def alarm_entry_box(
@@ -1959,7 +1883,7 @@ def alarm_entry_box(
 
 
 # ============================================================
-# 18. à¸à¸²à¸£à¹Œà¸”à¸£à¸²à¸¢à¸¥à¸°à¹€à¸­à¸µà¸¢à¸”à¹à¸•à¹ˆà¸¥à¸°à¸ªà¸–à¸²à¸™à¸µ
+# 18. การ์ดรายละเอียดแต่ละสถานี
 # ============================================================
 
 def build_alert_detail_bubble(
@@ -2000,12 +1924,12 @@ def build_alert_detail_bubble(
     )
 
     severity_text = {
-        "urgent": "à¸£à¸°à¸”à¸±à¸šà¹€à¸£à¹ˆà¸‡à¸”à¹ˆà¸§à¸™",
-        "watch": "à¸£à¸°à¸”à¸±à¸šà¹€à¸à¹‰à¸²à¸£à¸°à¸§à¸±à¸‡",
-        "follow": "à¸£à¸°à¸”à¸±à¸šà¸•à¸´à¸”à¸•à¸²à¸¡à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œ",
+        "urgent": "ระดับเร่งด่วน",
+        "watch": "ระดับเฝ้าระวัง",
+        "follow": "ระดับติดตามสถานการณ์",
     }.get(
         severity,
-        "à¸£à¸°à¸”à¸±à¸šà¸•à¸´à¸”à¸•à¸²à¸¡à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œ",
+        "ระดับติดตามสถานการณ์",
     )
 
     severity_color = {
@@ -2076,7 +2000,7 @@ def build_alert_detail_bubble(
         },
 
         flex_text(
-            f"à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸¥à¹ˆà¸²à¸ªà¸¸à¸” à¸“ {last_update}",
+            f"ข้อมูลล่าสุด ณ {last_update}",
             size="xs",
             color=COLOR_MUTED,
         ),
@@ -2102,9 +2026,9 @@ def build_alert_detail_bubble(
         body_contents.append(
             flex_text(
                 (
-                    "à¸¡à¸µà¸£à¸²à¸¢à¸à¸²à¸£à¹à¸ˆà¹‰à¸‡à¹€à¸•à¸·à¸­à¸™à¹€à¸žà¸´à¹ˆà¸¡à¹€à¸•à¸´à¸¡ "
-                    f"{remaining_count} à¸£à¸²à¸¢à¸à¸²à¸£ "
-                    "à¹‚à¸›à¸£à¸”à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸šà¹ƒà¸™à¸£à¸°à¸šà¸š GIS"
+                    "มีรายการแจ้งเตือนเพิ่มเติม "
+                    f"{remaining_count} รายการ "
+                    "โปรดตรวจสอบในระบบ GIS"
                 ),
                 size="xs",
                 color=COLOR_MUTED,
@@ -2139,12 +2063,12 @@ def build_alert_detail_bubble(
             "paddingAll": "8px",
             "contents": [
                 flex_button(
-                    "à¸•à¸³à¹à¸«à¸™à¹ˆà¸‡à¸ªà¸–à¸²à¸™à¸µ",
+                    "ตำแหน่งสถานี",
                     station_map_url(feature),
                     primary=True,
                 ),
                 flex_button(
-                    "à¹€à¸›à¸´à¸”à¸£à¸°à¸šà¸š GIS",
+                    "เปิดระบบ GIS",
                     ARCGIS_DASHBOARD_URL,
                 ),
             ],
@@ -2153,7 +2077,7 @@ def build_alert_detail_bubble(
 
 
 # ============================================================
-# 19. à¸ªà¹ˆà¸‡ LINE Broadcast
+# 19. ส่ง LINE Broadcast
 # ============================================================
 
 def send_line_flex(
@@ -2162,7 +2086,7 @@ def send_line_flex(
 ) -> None:
     if not LINE_CHANNEL_ACCESS_TOKEN:
         raise RuntimeError(
-            "à¹„à¸¡à¹ˆà¸žà¸š LINE_CHANNEL_ACCESS_TOKEN"
+            "ไม่พบ LINE_CHANNEL_ACCESS_TOKEN"
         )
 
     payload = {
@@ -2200,7 +2124,7 @@ def send_line_flex(
         ) as response:
 
             print(
-                "à¸ªà¹ˆà¸‡ LINE Broadcast à¸ªà¸³à¹€à¸£à¹‡à¸ˆ "
+                "ส่ง LINE Broadcast สำเร็จ "
                 f"HTTP {response.status}"
             )
 
@@ -2221,14 +2145,14 @@ def send_line_flex(
 
     except urllib.error.URLError as error:
         raise RuntimeError(
-            "à¹„à¸¡à¹ˆà¸ªà¸²à¸¡à¸²à¸£à¸–à¹€à¸Šà¸·à¹ˆà¸­à¸¡à¸•à¹ˆà¸­ "
-            "LINE Broadcast API à¹„à¸”à¹‰: "
+            "ไม่สามารถเชื่อมต่อ "
+            "LINE Broadcast API ได้: "
             f"{error.reason}"
         ) from error
 
 
 # ============================================================
-# 20. à¹à¸šà¹ˆà¸‡à¸£à¸²à¸¢à¸à¸²à¸£à¹€à¸›à¹‡à¸™à¸Šà¸¸à¸”
+# 20. แบ่งรายการเป็นชุด
 # ============================================================
 
 def chunk_list(
@@ -2237,7 +2161,7 @@ def chunk_list(
 ) -> list[list[Any]]:
     if chunk_size <= 0:
         raise ValueError(
-            "chunk_size à¸•à¹‰à¸­à¸‡à¸¡à¸²à¸à¸à¸§à¹ˆà¸² 0"
+            "chunk_size ต้องมากกว่า 0"
         )
 
     return [
@@ -2253,7 +2177,7 @@ def chunk_list(
 def carousel_json_size_bytes(
     bubbles: list[dict[str, Any]],
 ) -> int:
-    """à¸„à¸³à¸™à¸§à¸“à¸‚à¸™à¸²à¸” JSON à¸ˆà¸£à¸´à¸‡à¹à¸šà¸š UTF-8 à¸‚à¸­à¸‡ Flex Carousel"""
+    """คำนวณขนาด JSON จริงแบบ UTF-8 ของ Flex Carousel"""
     carousel = {
         "type": "carousel",
         "contents": bubbles,
@@ -2271,7 +2195,7 @@ def carousel_json_size_bytes(
 def build_carousel_batches(
     alert_features: list[dict[str, Any]],
 ) -> list[list[dict[str, Any]]]:
-    """à¹à¸šà¹ˆà¸‡ Bubble à¸•à¸²à¸¡à¸ˆà¸³à¸™à¸§à¸™à¹à¸¥à¸°à¸‚à¸™à¸²à¸” JSON à¹€à¸žà¸·à¹ˆà¸­à¹„à¸¡à¹ˆà¹ƒà¸«à¹‰à¹€à¸à¸´à¸™à¸‚à¹‰à¸­à¸ˆà¸³à¸à¸±à¸” LINE"""
+    """แบ่ง Bubble ตามจำนวนและขนาด JSON เพื่อไม่ให้เกินข้อจำกัด LINE"""
     batches: list[list[dict[str, Any]]] = []
     current_batch: list[dict[str, Any]] = []
 
@@ -2297,7 +2221,7 @@ def build_carousel_batches(
         single_size = carousel_json_size_bytes([bubble])
         if single_size > MAX_CAROUSEL_JSON_BYTES:
             raise RuntimeError(
-                "à¸à¸²à¸£à¹Œà¸”à¸£à¸²à¸¢à¸¥à¸°à¹€à¸­à¸µà¸¢à¸”à¸‚à¸­à¸‡à¸ªà¸–à¸²à¸™à¸µà¸¡à¸µà¸‚à¸™à¸²à¸”à¹ƒà¸«à¸à¹ˆà¹€à¸à¸´à¸™à¸‚à¹‰à¸­à¸ˆà¸³à¸à¸±à¸” LINE: "
+                "การ์ดรายละเอียดของสถานีมีขนาดใหญ่เกินข้อจำกัด LINE: "
                 f"{single_size:,} bytes"
             )
 
@@ -2308,7 +2232,7 @@ def build_carousel_batches(
 
 
 # ============================================================
-# 21. à¸ªà¹ˆà¸‡à¸£à¸²à¸¢à¸¥à¸°à¹€à¸­à¸µà¸¢à¸”à¸ªà¸–à¸²à¸™à¸µà¹à¸šà¸š Carousel
+# 21. ส่งรายละเอียดสถานีแบบ Carousel
 # ============================================================
 
 def send_alert_detail_carousels(
@@ -2316,7 +2240,7 @@ def send_alert_detail_carousels(
 ) -> None:
     if not alert_features:
         print(
-            "à¹„à¸¡à¹ˆà¸¡à¸µà¸£à¸²à¸¢à¸¥à¸°à¹€à¸­à¸µà¸¢à¸”à¸ªà¸–à¸²à¸™à¸µà¸—à¸µà¹ˆà¸•à¹‰à¸­à¸‡à¸ªà¹ˆà¸‡"
+            "ไม่มีรายละเอียดสถานีที่ต้องส่ง"
         )
         return
 
@@ -2346,23 +2270,23 @@ def send_alert_detail_carousels(
         )
 
         alt_text = (
-            "à¸£à¸²à¸¢à¸¥à¸°à¹€à¸­à¸µà¸¢à¸”à¹à¸ˆà¹‰à¸‡à¹€à¸•à¸·à¸­à¸™ "
+            "รายละเอียดแจ้งเตือน "
             "e-Monitoring "
-            f"{total_alerts} à¸ªà¸–à¸²à¸™à¸µ"
+            f"{total_alerts} สถานี"
         )
 
         if total_batches > 1:
             alt_text += (
-                f" à¸Šà¸¸à¸”à¸—à¸µà¹ˆ {batch_number}/"
+                f" ชุดที่ {batch_number}/"
                 f"{total_batches}"
             )
 
         print(
-            "à¸à¸³à¸¥à¸±à¸‡à¸ªà¹ˆà¸‡à¸£à¸²à¸¢à¸¥à¸°à¹€à¸­à¸µà¸¢à¸”à¸ªà¸–à¸²à¸™à¸µ "
-            f"à¸Šà¸¸à¸”à¸—à¸µà¹ˆ {batch_number}/"
+            "กำลังส่งรายละเอียดสถานี "
+            f"ชุดที่ {batch_number}/"
             f"{total_batches} "
-            f"à¸ˆà¸³à¸™à¸§à¸™ {len(bubbles)} à¸ªà¸–à¸²à¸™à¸µ "
-            f"à¸‚à¸™à¸²à¸” {carousel_size:,} bytes"
+            f"จำนวน {len(bubbles)} สถานี "
+            f"ขนาด {carousel_size:,} bytes"
         )
 
         send_line_flex(
@@ -2375,14 +2299,14 @@ def send_alert_detail_carousels(
 
 
 # ============================================================
-# 22. à¸ªà¸£à¹‰à¸²à¸‡à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸ªà¸³à¸«à¸£à¸±à¸šà¸«à¸™à¹‰à¸² "à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œà¸¥à¹ˆà¸²à¸ªà¸¸à¸”"
+# 22. สร้างข้อมูลสำหรับหน้า "สถานการณ์ล่าสุด"
 # ============================================================
 
 def write_status_json(
     alert_features: list[dict[str, Any]],
     online_type_counts: dict[str, int],
 ) -> None:
-    """à¹€à¸‚à¸µà¸¢à¸™à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸¥à¹ˆà¸²à¸ªà¸¸à¸”à¹ƒà¸«à¹‰à¸«à¸™à¹‰à¸² GitHub Pages à¸­à¹ˆà¸²à¸™à¸ˆà¸²à¸ docs/status.json"""
+    """เขียนข้อมูลล่าสุดให้หน้า GitHub Pages อ่านจาก docs/status.json"""
     station_items: list[dict[str, Any]] = []
     parameter_names: set[str] = set()
     estate_names: set[str] = set()
@@ -2392,9 +2316,9 @@ def write_status_json(
     follow_count = 0
 
     severity_texts = {
-        "urgent": "à¸£à¸°à¸”à¸±à¸šà¹€à¸£à¹ˆà¸‡à¸”à¹ˆà¸§à¸™",
-        "watch": "à¸£à¸°à¸”à¸±à¸šà¹€à¸à¹‰à¸²à¸£à¸°à¸§à¸±à¸‡",
-        "follow": "à¸£à¸°à¸”à¸±à¸šà¸•à¸´à¸”à¸•à¸²à¸¡à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œ",
+        "urgent": "ระดับเร่งด่วน",
+        "watch": "ระดับเฝ้าระวัง",
+        "follow": "ระดับติดตามสถานการณ์",
     }
 
     for feature in alert_features:
@@ -2427,14 +2351,14 @@ def write_status_json(
             "estate": estate,
             "station_name": get_station_name(properties),
             "station_type": normalize_station_type(properties),
-            "parameter": ", ".join(names) if names else "à¸žà¸²à¸£à¸²à¸¡à¸´à¹€à¸•à¸­à¸£à¹Œà¹à¸ˆà¹‰à¸‡à¹€à¸•à¸·à¸­à¸™",
+            "parameter": ", ".join(names) if names else "พารามิเตอร์แจ้งเตือน",
             "value": " | ".join(
                 remove_alarm_datetime(entry) for entry in entries
             ),
             "detected_at": ", ".join(detected_times) or "-",
             "severity": severity_texts.get(
                 severity,
-                "à¸£à¸°à¸”à¸±à¸šà¸•à¸´à¸”à¸•à¸²à¸¡à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œ",
+                "ระดับติดตามสถานการณ์",
             ),
             "map_url": station_map_url(feature),
             "gis_url": ARCGIS_DASHBOARD_URL,
@@ -2445,14 +2369,14 @@ def write_status_json(
     status_data = {
         "status": "alert" if has_alert else "normal",
         "status_text": (
-            "à¸žà¸šà¸„à¹ˆà¸²à¸žà¸²à¸£à¸²à¸¡à¸´à¹€à¸•à¸­à¸£à¹Œà¹€à¸à¸´à¸™à¹€à¸à¸“à¸‘à¹Œà¸¡à¸²à¸•à¸£à¸à¸²à¸™"
+            "พบค่าพารามิเตอร์เกินมาตรฐาน"
             if has_alert
-            else "à¹„à¸¡à¹ˆà¸žà¸šà¸„à¹ˆà¸²à¹€à¸à¸´à¸™à¹€à¸à¸“à¸‘à¹Œà¸¡à¸²à¸•à¸£à¸à¸²à¸™"
+            else "ไม่พบค่าพารามิเตอร์เกินมาตรฐาน"
         ),
         "description": (
-            "à¹‚à¸›à¸£à¸”à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸šà¸£à¸²à¸¢à¸¥à¸°à¹€à¸­à¸µà¸¢à¸”à¸‚à¸­à¸‡à¸ªà¸–à¸²à¸™à¸µà¹à¸¥à¸°à¸•à¸´à¸”à¸•à¸²à¸¡à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œ"
+            "โปรดตรวจสอบรายละเอียดของสถานีและติดตามสถานการณ์"
             if has_alert
-            else "à¸‚à¸“à¸°à¸™à¸µà¹‰à¹„à¸¡à¹ˆà¸žà¸šà¸„à¹ˆà¸²à¸žà¸²à¸£à¸²à¸¡à¸´à¹€à¸•à¸­à¸£à¹Œà¹€à¸à¸´à¸™à¹€à¸à¸“à¸‘à¹Œà¸¡à¸²à¸•à¸£à¸à¸²à¸™"
+            else "ขณะนี้ไม่พบค่าพารามิเตอร์เกินมาตรฐาน"
         ),
         "updated_at": report_time_text(),
         "online_total": online_type_counts.get("total", 0),
@@ -2477,11 +2401,11 @@ def write_status_json(
         encoding="utf-8",
     )
 
-    print(f"à¸­à¸±à¸›à¹€à¸”à¸•à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸«à¸™à¹‰à¸²à¹€à¸§à¹‡à¸šà¹à¸¥à¹‰à¸§: {output_path}")
+    print(f"อัปเดตข้อมูลหน้าเว็บแล้ว: {output_path}")
 
 
 # ============================================================
-# 23. à¹‚à¸›à¸£à¹à¸à¸£à¸¡à¸«à¸¥à¸±à¸
+# 23. โปรแกรมหลัก
 # ============================================================
 
 def main() -> None:
@@ -2490,14 +2414,14 @@ def main() -> None:
     print("=" * 80)
 
     print(
-        "à¹€à¸§à¸¥à¸²à¸›à¸£à¸°à¹€à¸—à¸¨à¹„à¸—à¸¢:",
+        "เวลาประเทศไทย:",
         now_thailand().strftime(
             "%Y-%m-%d %H:%M:%S"
         ),
     )
 
     print(
-        "à¸à¸³à¸¥à¸±à¸‡à¸”à¸²à¸§à¸™à¹Œà¹‚à¸«à¸¥à¸”à¸‚à¹‰à¸­à¸¡à¸¹à¸¥ "
+        "กำลังดาวน์โหลดข้อมูล "
         "e-Monitoring..."
     )
 
@@ -2508,13 +2432,13 @@ def main() -> None:
     )
 
     print(
-        "Feature à¸—à¸±à¹‰à¸‡à¸«à¸¡à¸”:",
+        "Feature ทั้งหมด:",
         len(features),
     )
 
     if not features:
         raise RuntimeError(
-            "à¹„à¸¡à¹ˆà¸žà¸š Feature à¸ˆà¸²à¸à¸‚à¹‰à¸­à¸¡à¸¹à¸¥ "
+            "ไม่พบ Feature จากข้อมูล "
             "e-Monitoring"
         )
 
@@ -2538,7 +2462,7 @@ def main() -> None:
         )
     )
 
-    # à¸­à¸±à¸›à¹€à¸”à¸•à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸«à¸™à¹‰à¸² "à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œà¸¥à¹ˆà¸²à¸ªà¸¸à¸”" à¸—à¸¸à¸à¸„à¸£à¸±à¹‰à¸‡à¸—à¸µà¹ˆ Workflow à¸—à¸³à¸‡à¸²à¸™
+    # อัปเดตข้อมูลหน้า "สถานการณ์ล่าสุด" ทุกครั้งที่ Workflow ทำงาน
     write_status_json(
         alert_features,
         online_type_counts,
@@ -2548,11 +2472,11 @@ def main() -> None:
 
     print()
     print("=" * 80)
-    print("à¸ªà¸£à¸¸à¸›à¸œà¸¥à¸à¸²à¸£à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸š")
+    print("สรุปผลการตรวจสอบ")
     print("=" * 80)
 
     print(
-        "à¸ªà¸–à¸²à¸™à¸µ ONLINE à¸—à¸±à¹‰à¸‡à¸«à¸¡à¸”:",
+        "สถานี ONLINE ทั้งหมด:",
         online_type_counts.get(
             "total",
             0,
@@ -2560,12 +2484,12 @@ def main() -> None:
     )
 
     print(
-        "à¸ªà¸–à¸²à¸™à¸µ OFFLINE à¸—à¸±à¹‰à¸‡à¸«à¸¡à¸”:",
+        "สถานี OFFLINE ทั้งหมด:",
         online_type_counts.get("offline", 0),
     )
 
     print(
-        "à¸ªà¸–à¸²à¸™à¸µà¸—à¸±à¹‰à¸‡à¸«à¸¡à¸”:",
+        "สถานีทั้งหมด:",
         online_type_counts.get("all_total", 0),
     )
 
@@ -2594,7 +2518,7 @@ def main() -> None:
     )
 
     print(
-        "à¸›à¸£à¸°à¹€à¸ à¸—à¸­à¸·à¹ˆà¸™ ONLINE:",
+        "ประเภทอื่น ONLINE:",
         online_type_counts.get(
             "Other",
             0,
@@ -2602,34 +2526,33 @@ def main() -> None:
     )
 
     print(
-        "ONLINE à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¹„à¸¡à¹ˆà¹ƒà¸Šà¹ˆà¸§à¸±à¸™à¸™à¸µà¹‰:",
+        "ONLINE แต่ข้อมูลไม่ใช่วันนี้:",
         stale_online_count,
     )
 
     print(
-        "à¸ªà¸–à¸²à¸™à¸µ ONLINE à¸—à¸µà¹ˆà¸™à¸³à¸¡à¸²à¸•à¸£à¸§à¸ˆ Alarm:",
+        "สถานี ONLINE ที่นำมาตรวจ Alarm:",
         len(current_features),
     )
 
     print(
-        "à¸ªà¸–à¸²à¸™à¸µà¸—à¸µà¹ˆà¸¡à¸µ ParameterAlram "
-        "à¸‚à¸­à¸‡à¸§à¸±à¸™à¸—à¸µà¹ˆà¸¥à¹ˆà¸²à¸ªà¸¸à¸”à¹ƒà¸™ feed:",
+        "สถานีที่มีค่าพารามิเตอร์เกินมาตรฐานของวันนี้:",
         len(alert_features),
     )
 
     print(
-        "LastUpdate à¸¥à¹ˆà¸²à¸ªà¸¸à¸”:",
+        "LastUpdate ล่าสุด:",
         latest_online_update.isoformat()
         if latest_online_update is not None
-        else "à¹„à¸¡à¹ˆà¸žà¸š",
+        else "ไม่พบ",
     )
 
     print("=" * 80)
 
-    # à¸ªà¹ˆà¸‡à¸£à¸²à¸¢à¸‡à¸²à¸™à¸—à¸¸à¸à¸„à¸£à¸±à¹‰à¸‡ à¹‚à¸”à¸¢ Alarm à¹ƒà¸Šà¹‰à¹€à¸‰à¸žà¸²à¸°à¸ªà¸–à¸²à¸™à¸µ ONLINE à¸—à¸µà¹ˆà¸¡à¸µ LastUpdate à¸§à¸±à¸™à¸™à¸µà¹‰
+    # ส่งรายงานทุกครั้ง โดย Alarm ใช้เฉพาะสถานี ONLINE ที่มี LastUpdate วันนี้
     if alert_features:
         print(
-            "à¸ªà¹ˆà¸‡à¸à¸²à¸£à¹Œà¸”à¸ªà¸£à¸¸à¸›à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œ"
+            "ส่งการ์ดสรุปสถานการณ์"
         )
 
         summary_bubble = (
@@ -2641,9 +2564,9 @@ def main() -> None:
 
         send_line_flex(
             (
-                "à¸ªà¸£à¸¸à¸›à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œ e-Monitoring "
-                f"à¸žà¸šà¸„à¹ˆà¸²à¸žà¸²à¸£à¸²à¸¡à¸´à¹€à¸•à¸­à¸£à¹Œà¹€à¸à¸´à¸™à¹€à¸à¸“à¸‘à¹Œ "
-                f"{len(alert_features)} à¸ªà¸–à¸²à¸™à¸µ"
+                "สรุปสถานการณ์ e-Monitoring "
+                f"พบค่าพารามิเตอร์เกินมาตรฐาน "
+                f"{len(alert_features)} สถานี"
             ),
             summary_bubble,
         )
@@ -2651,7 +2574,7 @@ def main() -> None:
         time.sleep(1)
 
         print(
-            "à¸ªà¹ˆà¸‡à¸à¸²à¸£à¹Œà¸”à¸£à¸²à¸¢à¸¥à¸°à¹€à¸­à¸µà¸¢à¸”à¸ªà¸–à¸²à¸™à¸µ"
+            "ส่งการ์ดรายละเอียดสถานี"
         )
 
         send_alert_detail_carousels(
@@ -2659,23 +2582,20 @@ def main() -> None:
         )
 
     elif current_features:
-        print("à¹„à¸¡à¹ˆà¸žà¸šà¸„à¹ˆà¸²à¹€à¸à¸´à¸™à¹€à¸à¸“à¸‘à¹Œ à¸ªà¹ˆà¸‡à¸à¸²à¸£à¹Œà¸”à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œà¸›à¸à¸•à¸´")
+        print("ไม่พบค่าพารามิเตอร์เกินมาตรฐาน ส่งการ์ดสถานการณ์ปกติ")
         send_line_flex(
-            "e-Monitoring: à¹„à¸¡à¹ˆà¸žà¸šà¸„à¹ˆà¸²à¸žà¸²à¸£à¸²à¸¡à¸´à¹€à¸•à¸­à¸£à¹Œà¹€à¸à¸´à¸™à¹€à¸à¸“à¸‘à¹Œà¸¡à¸²à¸•à¸£à¸à¸²à¸™",
+            "e-Monitoring: ไม่พบค่าพารามิเตอร์เกินมาตรฐาน",
             build_normal_summary_bubble(online_type_counts),
         )
 
     else:
-        print("à¹„à¸¡à¹ˆà¸žà¸šà¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸•à¸£à¸§à¸ˆà¸§à¸±à¸”à¸‚à¸­à¸‡à¸§à¸±à¸™à¸›à¸±à¸ˆà¸ˆà¸¸à¸šà¸±à¸™ à¸ªà¹ˆà¸‡à¸à¸²à¸£à¹Œà¸”à¹à¸ˆà¹‰à¸‡à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸¥à¹ˆà¸²à¸Šà¹‰à¸²")
+        print("ไม่พบข้อมูลตรวจวัดที่อัปเดตในวันนี้ ส่งการ์ดแจ้งเตือน")
         send_line_flex(
-            "e-Monitoring: à¹„à¸¡à¹ˆà¸žà¸šà¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸•à¸£à¸§à¸ˆà¸§à¸±à¸”à¸—à¸µà¹ˆà¸­à¸±à¸›à¹€à¸”à¸•à¹ƒà¸™à¸§à¸±à¸™à¸™à¸µà¹‰",
-            build_stale_data_summary_bubble(
-                online_type_counts,
-                latest_online_update,
-            ),
+            "e-Monitoring: ไม่พบข้อมูลตรวจวัดที่อัปเดตในวันนี้",
+            build_no_current_data_summary_bubble(online_type_counts),
         )
 
-    print("à¸ªà¹ˆà¸‡à¸£à¸²à¸¢à¸‡à¸²à¸™à¸›à¸£à¸°à¸ˆà¸³à¸£à¸­à¸šà¹€à¸‚à¹‰à¸² LINE à¹€à¸£à¸µà¸¢à¸šà¸£à¹‰à¸­à¸¢")
+    print("ส่งรายงานประจำรอบเข้า LINE เรียบร้อย")
 
 
 if __name__ == "__main__":
