@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <title>อัปเดตภัยพิบัติ | IEAT e-Monitoring</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; background: #e9e3ec; color: #25212a; font-family: "Segoe UI", Tahoma, Arial, sans-serif; }
+        .page { width: 100%; max-width: 720px; min-height: 100vh; margin: 0 auto; background: #f8f6f9; }
+        .header { display: flex; align-items: center; gap: 14px; padding: 18px; background: #fff; border-bottom: 4px solid #6a2c91; }
+        .logo { flex-shrink: 0; width: 72px; height: 72px; object-fit: contain; }
+        .header-title { margin: 0; color: #552076; font-size: 23px; font-weight: 750; }
+        .header-subtitle { margin: 5px 0 0; color: #6f6874; font-size: 14px; line-height: 1.5; }
+        .content { padding: 16px; }
+        .notice { padding: 14px; background: #e8d9ec; border-left: 4px solid #6a2c91; border-radius: 10px; font-size: 14px; line-height: 1.65; }
+        .section-title { margin: 24px 0 12px; color: #25212a; font-size: 20px; line-height: 1.4; }
+        .map-panel { overflow: hidden; background: #fff; border: 1px solid #d8cdd9; border-radius: 14px; box-shadow: 0 2px 8px rgba(85, 32, 118, .08); }
+        #map { width: 100%; height: 330px; background: #efeaf1; }
+        .map-caption { padding: 11px 14px; color: #6f6874; font-size: 12px; line-height: 1.5; }
+        .map-caption strong { color: #552076; }
+        .summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .summary-card { padding: 15px 8px; background: #fff; border: 1px solid #d8cdd9; border-radius: 14px; box-shadow: 0 2px 8px rgba(85, 32, 118, .08); text-align: center; }
+        .summary-number { display: block; color: #552076; font-size: 25px; font-weight: 800; }
+        .summary-label { display: block; margin-top: 5px; color: #6f6874; font-size: 12px; line-height: 1.35; }
+        .source-card { margin-bottom: 12px; padding: 16px; background: #fff; border: 1px solid #d8cdd9; border-left: 4px solid #6a2c91; border-radius: 14px; box-shadow: 0 2px 8px rgba(85, 32, 118, .08); }
+        .source-card.flood { border-left-color: #2176ae; }
+        .source-card.weather { border-left-color: #ff9f1c; }
+        .source-card.fire { border-left-color: #d04727; }
+        .source-card.alert { border-left-color: #be062a; }
+        .source-card.earthquake { border-left-color: #7950a1; }
+        .source-card.drought { border-left-color: #8b6b37; }
+        .source-title { margin: 0; color: #552076; font-size: 18px; line-height: 1.45; }
+        .source-description { margin: 7px 0 0; color: #514b55; font-size: 14px; line-height: 1.6; }
+        .buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
+        .button { display: block; padding: 11px 8px; border-radius: 9px; text-align: center; text-decoration: none; font-size: 14px; font-weight: bold; }
+        .button-primary { color: #fff; background: #552076; }
+        .button-secondary { color: #552076; background: #e8d9ec; }
+        .live-status { margin: 6px 0 0; color: #6f6874; text-align: right; font-size: 12px; }
+        .updated { margin: 20px 0 4px; color: #6f6874; text-align: center; font-size: 12px; }
+        @media (max-width: 480px) { .header { padding: 14px; } .logo { width: 60px; height: 60px; } .header-title { font-size: 20px; } .content { padding: 12px; } #map { height: 300px; } }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <header class="header">
+            <img class="logo" src="./ieat_logo.png.PNG" alt="โลโก้ กนอ.">
+            <div>
+                <h1 class="header-title">อัปเดตภัยพิบัติ</h1>
+                <p class="header-subtitle">แผนที่และข้อมูลเฝ้าระวังจากหน่วยงานภาครัฐ</p>
+            </div>
+        </header>
+        <main class="content">
+            <div class="notice">ติดตามเหตุการณ์สำคัญในประเทศไทยจากแหล่งข้อมูลทางการ เลือกประเภทภัยเพื่อเปิดแผนที่หรือรายงานล่าสุดของหน่วยงานนั้นได้ทันที</div>
+
+            <h2 class="section-title">แผนที่เหตุการณ์ล่าสุด</h2>
+            <section class="map-panel">
+                <div id="map" aria-label="แผนที่ประเทศไทยและเหตุแผ่นดินไหวล่าสุด"></div>
+                <div class="map-caption"><strong>จุดวงกลมสีม่วง</strong> คือแผ่นดินไหวล่าสุด 24 ชั่วโมงจาก USGS; ข้อมูลภัยในประเทศไทยดูผ่านปุ่มแผนที่ของแต่ละหน่วยงานด้านล่าง</div>
+            </section>
+            <p id="liveStatus" class="live-status">กำลังโหลดเหตุแผ่นดินไหวล่าสุด...</p>
+
+            <h2 class="section-title">สรุปแผ่นดินไหว 24 ชั่วโมง</h2>
+            <section class="summary-grid">
+                <div class="summary-card"><strong id="earthquakeCount" class="summary-number">-</strong><span class="summary-label">เหตุการณ์ทั่วโลก</span></div>
+                <div class="summary-card"><strong id="nearThailandCount" class="summary-number">-</strong><span class="summary-label">ใกล้ประเทศไทย</span></div>
+                <div class="summary-card"><strong id="maxMagnitude" class="summary-number">-</strong><span class="summary-label">ขนาดสูงสุด</span></div>
+            </section>
+
+            <h2 class="section-title">ข้อมูลสดและแผนที่ตามประเภทภัย</h2>
+
+            <article class="source-card flood">
+                <h3 class="source-title">น้ำท่วม / น้ำป่าไหลหลาก</h3>
+                <p class="source-description">ติดตามแผนที่น้ำท่วมจากภาพดาวเทียม และระบบคาดการณ์พื้นที่เสี่ยงน้ำท่วมฉับพลัน</p>
+                <div class="buttons"><a class="button button-primary" href="https://disaster.gistda.or.th/flood" target="_blank" rel="noopener">แผนที่น้ำท่วม GISTDA</a><a class="button button-secondary" href="https://www.thaiwater.net/FlashFlood" target="_blank" rel="noopener">คาดการณ์น้ำป่า</a></div>
+            </article>
+
+            <article class="source-card weather">
+                <h3 class="source-title">ฝนหนัก / พายุ / คลื่นลม</h3>
+                <p class="source-description">ติดตามประกาศเตือนภัย พยากรณ์อากาศ เรดาร์ และเส้นทางพายุจากกรมอุตุนิยมวิทยา</p>
+                <div class="buttons"><a class="button button-primary" href="https://www.tmd.go.th/" target="_blank" rel="noopener">กรมอุตุนิยมวิทยา</a><a class="button button-secondary" href="https://www.tmd.go.th/service/serviceData" target="_blank" rel="noopener">เรดาร์และแผนที่</a></div>
+            </article>
+
+            <article class="source-card earthquake">
+                <h3 class="source-title">แผ่นดินไหว / สึนามิ</h3>
+                <p class="source-description">แผนที่นี้แสดงเหตุแผ่นดินไหวล่าสุดอัตโนมัติ พร้อมรายงานและประกาศเตือนจากกรมอุตุนิยมวิทยาและ ปภ.</p>
+                <div class="buttons"><a class="button button-primary" href="https://earthquake.tmd.go.th/" target="_blank" rel="noopener">รายงานแผ่นดินไหว</a><a class="button button-secondary" href="https://ndwc.disaster.go.th/" target="_blank" rel="noopener">ศูนย์เตือนภัย ปภ.</a></div>
+            </article>
+
+            <article class="source-card fire">
+                <h3 class="source-title">ไฟป่า / จุดความร้อน / หมอกควัน</h3>
+                <p class="source-description">ดูจุดความร้อนและพื้นที่เฝ้าระวังไฟป่าจากข้อมูลดาวเทียมของ GISTDA</p>
+                <div class="buttons"><a class="button button-primary" href="https://disaster.gistda.or.th/fire" target="_blank" rel="noopener">แผนที่ไฟป่า GISTDA</a><a class="button button-secondary" href="https://disaster.gistda.or.th/landing/news" target="_blank" rel="noopener">รายงานจุดความร้อน</a></div>
+            </article>
+
+            <article class="source-card drought">
+                <h3 class="source-title">ภัยแล้ง / สถานการณ์น้ำ</h3>
+                <p class="source-description">ติดตามสถานการณ์น้ำ รายงานน้ำท่วม–น้ำแล้ง และข้อมูลภัยแล้งจากแพลตฟอร์มข้อมูลภาครัฐ</p>
+                <div class="buttons"><a class="button button-primary" href="https://disaster.gistda.or.th/dashboard" target="_blank" rel="noopener">Dashboard GISTDA</a><a class="button button-secondary" href="https://www.thaiwater.net/report" target="_blank" rel="noopener">รายงาน Thaiwater</a></div>
+            </article>
+
+            <article class="source-card alert">
+                <h3 class="source-title">ประกาศเตือนภัยและเหตุฉุกเฉิน</h3>
+                <p class="source-description">ตรวจสอบประกาศแจ้งเตือนภัยและสถานการณ์ประจำวันจากศูนย์เตือนภัยพิบัติแห่งชาติ</p>
+                <div class="buttons"><a class="button button-primary" href="https://ndwc.disaster.go.th/" target="_blank" rel="noopener">ประกาศเตือนภัย ปภ.</a><a class="button button-secondary" href="https://ndwc.disaster.go.th/ndwc/cms?id=7085" target="_blank" rel="noopener">สถานการณ์ประจำวัน</a></div>
+            </article>
+            <p class="updated">หน้าเว็บอ้างอิงข้อมูลจาก GISTDA, Thaiwater, กรมอุตุนิยมวิทยา และ ปภ.</p>
+        </main>
+    </div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        const map = L.map("map", { scrollWheelZoom: false }).setView([15.5, 101], 5);
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 18, attribution: "© OpenStreetMap contributors" }).addTo(map);
+        const thailandBounds = L.latLngBounds([5.4, 97.2], [20.7, 105.8]);
+        L.rectangle(thailandBounds, { color: "#6a2c91", weight: 1, fillOpacity: .03 }).addTo(map).bindTooltip("ประเทศไทย");
+        function formatNumber(value) { return Number(value || 0).toLocaleString("th-TH"); }
+        async function loadEarthquakes() {
+            const status = document.getElementById("liveStatus");
+            try {
+                const response = await fetch("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson", { cache: "no-store" });
+                if (!response.ok) throw new Error("USGS HTTP " + response.status);
+                const data = await response.json();
+                const features = Array.isArray(data.features) ? data.features : [];
+                let nearThailand = 0, maxMagnitude = 0;
+                features.forEach(feature => {
+                    const coords = feature.geometry && feature.geometry.coordinates;
+                    const properties = feature.properties || {};
+                    if (!coords || coords.length < 2) return;
+                    const longitude = coords[0], latitude = coords[1], magnitude = Number(properties.mag) || 0;
+                    maxMagnitude = Math.max(maxMagnitude, magnitude);
+                    if (latitude >= 0 && latitude <= 30 && longitude >= 85 && longitude <= 115) nearThailand += 1;
+                    const radius = Math.max(4, Math.min(16, magnitude * 3));
+                    L.circleMarker([latitude, longitude], { radius, color: "#552076", weight: 1, fillColor: "#9a5bc3", fillOpacity: .68 })
+                        .addTo(map)
+                        .bindPopup(`<strong>แผ่นดินไหว M${magnitude.toFixed(1)}</strong><br>${properties.place || "ไม่ระบุพื้นที่"}<br>${new Date(properties.time).toLocaleString("th-TH")}`);
+                });
+                document.getElementById("earthquakeCount").textContent = formatNumber(features.length);
+                document.getElementById("nearThailandCount").textContent = formatNumber(nearThailand);
+                document.getElementById("maxMagnitude").textContent = maxMagnitude ? maxMagnitude.toFixed(1) : "-";
+                status.textContent = "อัปเดตแผ่นดินไหวล่าสุด: " + new Date().toLocaleString("th-TH");
+            } catch (error) {
+                console.error(error);
+                document.getElementById("earthquakeCount").textContent = "-";
+                document.getElementById("nearThailandCount").textContent = "-";
+                document.getElementById("maxMagnitude").textContent = "-";
+                status.textContent = "ไม่สามารถโหลดแผ่นดินไหวล่าสุดได้ กรุณาลองใหม่อีกครั้ง";
+            }
+        }
+        loadEarthquakes();
+    </script>
+</body>
+</html>
