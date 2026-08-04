@@ -1,14 +1,36 @@
 {
-  "status": "normal",
-  "status_text": "ไม่พบค่าพารามิเตอร์เกินมาตรฐาน",
-  "description": "ขณะนี้ไม่พบค่าพารามิเตอร์เกินมาตรฐาน",
-  "updated_at": "4 ส.ค. 2569 เวลา 09:04 น.",
+  "status": "watch",
+  "status_text": "ไม่พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน",
+  "description": "ยังไม่มีสถานี ONLINE ที่อัปเดตข้อมูลในวันนี้ จึงยังยืนยันสถานการณ์ไม่ได้",
+  "updated_at": "4 ส.ค. 2569 เวลา 09:21 น.",
   "online_total": 104,
   "offline_total": 69,
   "station_total": 173,
   "online_aqms": 14,
   "online_wqms": 13,
   "online_cems": 77,
+  "station_types": {
+    "AQMs": {
+      "total": 60,
+      "online": 14,
+      "offline": 46
+    },
+    "WQMs": {
+      "total": 17,
+      "online": 13,
+      "offline": 4
+    },
+    "CEMs": {
+      "total": 96,
+      "online": 77,
+      "offline": 19
+    },
+    "Other": {
+      "total": 0,
+      "online": 0,
+      "offline": 0
+    }
+  },
   "alert_station_count": 0,
   "parameter_count": 0,
   "estate_count": 0,
