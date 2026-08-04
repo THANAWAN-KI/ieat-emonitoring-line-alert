@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <title>สถานีออนไลน์ | IEAT e-Monitoring</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; background: #e9e3ec; color: #25212a; font-family: "Segoe UI", Tahoma, Arial, sans-serif; }
+        .page { width: 100%; max-width: 720px; min-height: 100vh; margin: 0 auto; background: #f8f6f9; }
+        .header { display: flex; align-items: center; gap: 14px; padding: 18px; background: #fff; border-bottom: 4px solid #6a2c91; }
+        .logo { flex-shrink: 0; width: 72px; height: 72px; object-fit: contain; }
+        .header-title { margin: 0; color: #552076; font-size: 23px; font-weight: 750; }
+        .header-subtitle { margin: 5px 0 0; color: #6f6874; font-size: 14px; line-height: 1.5; }
+        .content { padding: 16px; }
+        .loading, .error, .empty { padding: 36px 15px; color: #6f6874; text-align: center; }
+        .error { color: #be062a; }
+        .hidden { display: none !important; }
+        .notice { padding: 14px; background: #e8d9ec; border-left: 4px solid #6a2c91; border-radius: 10px; font-size: 14px; line-height: 1.65; }
+        .section-title { margin: 24px 0 12px; color: #25212a; font-size: 20px; line-height: 1.4; }
+        .total-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .total-card { padding: 16px 8px; background: #fff; border: 1px solid #d8cdd9; border-radius: 14px; box-shadow: 0 2px 8px rgba(85, 32, 118, .08); text-align: center; }
+        .total-card.online { background: #eff7e8; border-color: #bed6a6; }
+        .total-card.offline { background: #fff0f3; border-color: #efbac5; }
+        .total-number { display: block; color: #552076; font-size: 27px; font-weight: 800; }
+        .total-card.online .total-number { color: #477824; }
+        .total-card.offline .total-number { color: #be062a; }
+        .total-label { display: block; margin-top: 5px; color: #6f6874; font-size: 12px; }
+        .station-card { margin-bottom: 12px; padding: 16px; background: #fff; border: 1px solid #d8cdd9; border-left: 4px solid #6a2c91; border-radius: 14px; box-shadow: 0 2px 8px rgba(85, 32, 118, .08); }
+        .station-card.aqms { border-left-color: #598c14; }
+        .station-card.wqms { border-left-color: #6a2c91; }
+        .station-card.cems { border-left-color: #4a8594; }
+        .station-type { margin: 0; color: #552076; font-size: 19px; line-height: 1.4; }
+        .station-card.aqms .station-type { color: #477824; }
+        .station-card.cems .station-type { color: #286a7c; }
+        .station-counts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 13px; }
+        .count-item { padding: 11px 6px; background: #f8f6f9; border-radius: 10px; text-align: center; }
+        .count-value { display: block; color: #25212a; font-size: 21px; font-weight: 800; }
+        .count-item.online .count-value { color: #477824; }
+        .count-item.offline .count-value { color: #be062a; }
+        .count-label { display: block; margin-top: 3px; color: #6f6874; font-size: 12px; }
+        .updated { margin: 22px 0 12px; color: #6f6874; text-align: center; font-size: 13px; }
+        .refresh-button { width: 100%; padding: 14px; color: #fff; background: #552076; border: 0; border-radius: 10px; font: inherit; font-size: 16px; font-weight: bold; cursor: pointer; }
+        .refresh-button:active { opacity: .85; }
+        @media (max-width: 480px) { .header { padding: 14px; } .logo { width: 60px; height: 60px; } .header-title { font-size: 20px; } .content { padding: 12px; } }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <header class="header">
+            <img class="logo" src="./ieat_logo.png.PNG" alt="โลโก้ กนอ.">
+            <div>
+                <h1 class="header-title">สถานีออนไลน์</h1>
+                <p class="header-subtitle">สรุปสถานะการเชื่อมต่อสถานีตรวจวัด</p>
+            </div>
+        </header>
+        <main class="content">
+            <div id="loading" class="loading">กำลังโหลดข้อมูลสถานี...</div>
+            <div id="error" class="error hidden">ไม่สามารถโหลดข้อมูลได้ กรุณากดรีเฟรชอีกครั้ง</div>
+            <div id="dashboard" class="hidden">
+                <div class="notice">แสดงสถานะจากข้อมูลล่าสุดของแต่ละสถานี แยกตามประเภท AQMs, WQMs และ CEMs</div>
+                <h2 class="section-title">ภาพรวมสถานีตรวจวัด</h2>
+                <section class="total-grid">
+                    <div class="total-card"><strong id="stationTotal" class="total-number">0</strong><span class="total-label">สถานีทั้งหมด</span></div>
+                    <div class="total-card online"><strong id="onlineTotal" class="total-number">0</strong><span class="total-label">ONLINE</span></div>
+                    <div class="total-card offline"><strong id="offlineTotal" class="total-number">0</strong><span class="total-label">OFFLINE</span></div>
+                </section>
+                <h2 class="section-title">แยกตามประเภทสถานี</h2>
+                <div id="stationTypeList"></div>
+                <p class="updated">ข้อมูล ณ <span id="updatedAt">-</span></p>
+                <button type="button" class="refresh-button" onclick="loadStations()">รีเฟรชข้อมูลล่าสุด</button>
+            </div>
+        </main>
+    </div>
+    <script>
+        const TYPES = [
+            { key: "AQMs", css: "aqms" },
+            { key: "WQMs", css: "wqms" },
+            { key: "CEMs", css: "cems" }
+        ];
+
+        function number(value) { return Number.isFinite(Number(value)) ? Number(value) : 0; }
+        function setText(id, value) { document.getElementById(id).textContent = number(value).toLocaleString("th-TH"); }
+
+        function createTypeCard(type, data) {
+            const card = document.createElement("article");
+            card.className = "station-card " + type.css;
+            card.innerHTML = `
+                <h3 class="station-type">${type.key}</h3>
+                <div class="station-counts">
+                    <div class="count-item"><strong class="count-value">${number(data.total).toLocaleString("th-TH")}</strong><span class="count-label">ทั้งหมด</span></div>
+                    <div class="count-item online"><strong class="count-value">${number(data.online).toLocaleString("th-TH")}</strong><span class="count-label">ONLINE</span></div>
+                    <div class="count-item offline"><strong class="count-value">${number(data.offline).toLocaleString("th-TH")}</strong><span class="count-label">OFFLINE</span></div>
+                </div>`;
+            return card;
+        }
+
+        async function loadStations() {
+            const loading = document.getElementById("loading");
+            const error = document.getElementById("error");
+            const dashboard = document.getElementById("dashboard");
+            loading.classList.remove("hidden"); error.classList.add("hidden"); dashboard.classList.add("hidden");
+            try {
+                const response = await fetch("./status.json?t=" + Date.now(), { cache: "no-store" });
+                if (!response.ok) throw new Error("HTTP " + response.status);
+                const data = await response.json();
+                setText("stationTotal", data.station_total);
+                setText("onlineTotal", data.online_total);
+                setText("offlineTotal", data.offline_total);
+                document.getElementById("updatedAt").textContent = data.updated_at || "-";
+                const list = document.getElementById("stationTypeList");
+                list.innerHTML = "";
+                const types = data.station_types || {};
+                TYPES.forEach(type => list.appendChild(createTypeCard(type, types[type.key] || {})));
+                loading.classList.add("hidden"); dashboard.classList.remove("hidden");
+            } catch (errorData) {
+                console.error(errorData); loading.classList.add("hidden"); error.classList.remove("hidden");
+            }
+        }
+        loadStations();
+    </script>
+</body>
+</html>
