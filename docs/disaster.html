@@ -8,38 +8,38 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <style>
         * { box-sizing: border-box; }
-        body { margin: 0; background: #e9e3ec; color: #25212a; font-family: "Segoe UI", Tahoma, Arial, sans-serif; }
-        .page { width: 100%; max-width: 720px; min-height: 100vh; margin: 0 auto; background: #f8f6f9; }
-        .header { display: flex; align-items: center; gap: 14px; padding: 18px; background: #fff; border-bottom: 4px solid #6a2c91; }
+        body { margin: 0; background: #F1EDF4; color: #30283A; font-family: "Segoe UI", Tahoma, Arial, sans-serif; }
+        .page { width: 100%; max-width: 720px; min-height: 100vh; margin: 0 auto; background: #FAF8FC; }
+        .header { display: flex; align-items: center; gap: 14px; padding: 18px; background: #fff; border-bottom: 4px solid #6B3F91; }
         .logo { flex-shrink: 0; width: 72px; height: 72px; object-fit: contain; }
-        .header-title { margin: 0; color: #552076; font-size: 23px; font-weight: 750; }
-        .header-subtitle { margin: 5px 0 0; color: #6f6874; font-size: 14px; line-height: 1.5; }
+        .header-title { margin: 0; color: #4D286F; font-size: 23px; font-weight: 750; }
+        .header-subtitle { margin: 5px 0 0; color: #746B7B; font-size: 14px; line-height: 1.5; }
         .content { padding: 16px; }
-        .notice { padding: 14px; background: #e8d9ec; border-left: 4px solid #6a2c91; border-radius: 10px; font-size: 14px; line-height: 1.65; }
-        .section-title { margin: 24px 0 12px; color: #25212a; font-size: 20px; line-height: 1.4; }
-        .map-panel { overflow: hidden; background: #fff; border: 1px solid #d8cdd9; border-radius: 14px; box-shadow: 0 2px 8px rgba(85, 32, 118, .08); }
-        #map { width: 100%; height: 330px; background: #efeaf1; }
-        .map-caption { padding: 11px 14px; color: #6f6874; font-size: 12px; line-height: 1.5; }
-        .map-caption strong { color: #552076; }
+        .notice { padding: 14px; background: #F2EDF7; border-left: 4px solid #6B3F91; border-radius: 10px; font-size: 14px; line-height: 1.65; }
+        .section-title { margin: 24px 0 12px; color: #30283A; font-size: 20px; line-height: 1.4; }
+        .map-panel { overflow: hidden; background: #fff; border: 1px solid #D9C9E7; border-radius: 14px; box-shadow: 0 2px 8px rgba(77, 40, 111, .08); }
+        #map { width: 100%; height: 330px; background: #F2EDF7; }
+        .map-caption { padding: 11px 14px; color: #746B7B; font-size: 12px; line-height: 1.5; }
+        .map-caption strong { color: #4D286F; }
         .summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-        .summary-card { padding: 15px 8px; background: #fff; border: 1px solid #d8cdd9; border-radius: 14px; box-shadow: 0 2px 8px rgba(85, 32, 118, .08); text-align: center; }
-        .summary-number { display: block; color: #552076; font-size: 25px; font-weight: 800; }
-        .summary-label { display: block; margin-top: 5px; color: #6f6874; font-size: 12px; line-height: 1.35; }
-        .source-card { margin-bottom: 12px; padding: 16px; background: #fff; border: 1px solid #d8cdd9; border-left: 4px solid #6a2c91; border-radius: 14px; box-shadow: 0 2px 8px rgba(85, 32, 118, .08); }
+        .summary-card { padding: 15px 8px; background: #fff; border: 1px solid #D9C9E7; border-radius: 14px; box-shadow: 0 2px 8px rgba(77, 40, 111, .08); text-align: center; }
+        .summary-number { display: block; color: #4D286F; font-size: 25px; font-weight: 800; }
+        .summary-label { display: block; margin-top: 5px; color: #746B7B; font-size: 12px; line-height: 1.35; }
+        .source-card { margin-bottom: 12px; padding: 16px; background: #fff; border: 1px solid #D9C9E7; border-left: 4px solid #6B3F91; border-radius: 14px; box-shadow: 0 2px 8px rgba(77, 40, 111, .08); }
         .source-card.flood { border-left-color: #2176ae; }
         .source-card.weather { border-left-color: #ff9f1c; }
         .source-card.fire { border-left-color: #d04727; }
         .source-card.alert { border-left-color: #be062a; }
         .source-card.earthquake { border-left-color: #7950a1; }
         .source-card.drought { border-left-color: #8b6b37; }
-        .source-title { margin: 0; color: #552076; font-size: 18px; line-height: 1.45; }
-        .source-description { margin: 7px 0 0; color: #514b55; font-size: 14px; line-height: 1.6; }
+        .source-title { margin: 0; color: #4D286F; font-size: 18px; line-height: 1.45; }
+        .source-description { margin: 7px 0 0; color: #514657; font-size: 14px; line-height: 1.6; }
         .buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
         .button { display: block; padding: 11px 8px; border-radius: 9px; text-align: center; text-decoration: none; font-size: 14px; font-weight: bold; }
-        .button-primary { color: #fff; background: #552076; }
-        .button-secondary { color: #552076; background: #e8d9ec; }
-        .live-status { margin: 6px 0 0; color: #6f6874; text-align: right; font-size: 12px; }
-        .updated { margin: 20px 0 4px; color: #6f6874; text-align: center; font-size: 12px; }
+        .button-primary { color: #fff; background: #4D286F; }
+        .button-secondary { color: #4D286F; background: #F2EDF7; }
+        .live-status { margin: 6px 0 0; color: #746B7B; text-align: right; font-size: 12px; }
+        .updated { margin: 20px 0 4px; color: #746B7B; text-align: center; font-size: 12px; }
         @media (max-width: 480px) { .header { padding: 14px; } .logo { width: 60px; height: 60px; } .header-title { font-size: 20px; } .content { padding: 12px; } #map { height: 300px; } }
     </style>
 </head>
@@ -114,7 +114,7 @@
         const map = L.map("map", { scrollWheelZoom: false }).setView([15.5, 101], 5);
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 18, attribution: "© OpenStreetMap contributors" }).addTo(map);
         const thailandBounds = L.latLngBounds([5.4, 97.2], [20.7, 105.8]);
-        L.rectangle(thailandBounds, { color: "#6a2c91", weight: 1, fillOpacity: .03 }).addTo(map).bindTooltip("ประเทศไทย");
+        L.rectangle(thailandBounds, { color: "#6B3F91", weight: 1, fillOpacity: .03 }).addTo(map).bindTooltip("ประเทศไทย");
         function formatNumber(value) { return Number(value || 0).toLocaleString("th-TH"); }
         async function loadEarthquakes() {
             const status = document.getElementById("liveStatus");
@@ -132,7 +132,7 @@
                     maxMagnitude = Math.max(maxMagnitude, magnitude);
                     if (latitude >= 0 && latitude <= 30 && longitude >= 85 && longitude <= 115) nearThailand += 1;
                     const radius = Math.max(4, Math.min(16, magnitude * 3));
-                    L.circleMarker([latitude, longitude], { radius, color: "#552076", weight: 1, fillColor: "#9a5bc3", fillOpacity: .68 })
+                    L.circleMarker([latitude, longitude], { radius, color: "#4D286F", weight: 1, fillColor: "#6B3F91", fillOpacity: .68 })
                         .addTo(map)
                         .bindPopup(`<strong>แผ่นดินไหว M${magnitude.toFixed(1)}</strong><br>${properties.place || "ไม่ระบุพื้นที่"}<br>${new Date(properties.time).toLocaleString("th-TH")}`);
                 });
