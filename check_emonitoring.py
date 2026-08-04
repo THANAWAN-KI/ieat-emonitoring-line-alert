@@ -61,12 +61,16 @@ ASSET_BASE_URL = (
     "ieat-emonitoring-line-alert"
 )
 
-# เก็บไอคอนทั้งหมดไว้ในโฟลเดอร์ assets ของ GitHub Pages
+# ดึงไอคอนจากไฟล์ใน GitHub โดยตรง เพื่อให้ LINE โหลดได้แม้ GitHub Pages
+# ตั้งค่าให้เผยแพร่เฉพาะโฟลเดอร์ docs/ (จึงอาจมองไม่เห็น assets ที่ root)
 # หากชื่อไฟล์จริงต่างจากนี้ ให้แก้เฉพาะค่าด้านล่าง หรือกำหนดค่า
 # LINE_ICON_<ชื่อ>_URL ใน GitHub Secrets ได้ทันที
 ICON_ASSET_BASE_URL = os.getenv(
     "LINE_ICON_ASSET_BASE_URL",
-    f"{ASSET_BASE_URL}/assets",
+    (
+        "https://raw.githubusercontent.com/"
+        "THANAWAN-KI/ieat-emonitoring-line-alert/main/assets"
+    ),
 ).rstrip("/")
 
 # ชื่อไฟล์บน GitHub Pages ต้องตรงตัวพิมพ์เล็ก-ใหญ่ทุกตัว
