@@ -1,80 +1,62 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>คู่มือความปลอดภัย | IEAT e-Monitoring</title>
-    <style>
-        * { box-sizing: border-box; }
-        body { margin: 0; background: #e9e3ec; color: #25212a; font-family: "Segoe UI", Tahoma, Arial, sans-serif; }
-        .page { width: 100%; max-width: 720px; min-height: 100vh; margin: 0 auto; background: #f8f6f9; }
-        .header { display: flex; align-items: center; gap: 14px; padding: 18px; background: #fff; border-bottom: 4px solid #6a2c91; }
-        .logo { flex-shrink: 0; width: 72px; height: 72px; object-fit: contain; }
-        .header-title { margin: 0; color: #552076; font-size: 23px; font-weight: 750; }
-        .header-subtitle { margin: 5px 0 0; color: #6f6874; font-size: 14px; line-height: 1.5; }
-        .content { padding: 16px; }
-        .notice { padding: 14px; background: #e8d9ec; border-left: 4px solid #6a2c91; border-radius: 10px; font-size: 14px; line-height: 1.65; }
-        .section-title { margin: 24px 0 12px; color: #25212a; font-size: 20px; line-height: 1.4; }
-        .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-        .step { padding: 14px 9px; background: #fff; border: 1px solid #d8cdd9; border-radius: 14px; box-shadow: 0 2px 8px rgba(85,32,118,.08); text-align: center; }
-        .step-number { display: flex; width: 30px; height: 30px; margin: 0 auto 8px; align-items: center; justify-content: center; color: #fff; background: #552076; border-radius: 50%; font-weight: bold; }
-        .step strong { display: block; color: #552076; font-size: 15px; }
-        .step span { display: block; margin-top: 4px; color: #6f6874; font-size: 12px; line-height: 1.4; }
-        .guide { margin-bottom: 12px; overflow: hidden; background: #fff; border: 1px solid #d8cdd9; border-left: 4px solid #6a2c91; border-radius: 14px; box-shadow: 0 2px 8px rgba(85,32,118,.08); }
-        .guide.fire { border-left-color: #d04727; } .guide.chemical { border-left-color: #2176ae; } .guide.evacuation { border-left-color: #598c14; } .guide.health { border-left-color: #be062a; }
-        summary { padding: 16px; color: #552076; cursor: pointer; font-size: 18px; font-weight: 750; list-style: none; }
-        summary::-webkit-details-marker { display: none; }
-        summary::after { float: right; color: #6f6874; content: "＋"; }
-        details[open] summary::after { content: "−"; }
-        .guide-body { padding: 0 16px 16px; border-top: 1px solid #eee8ef; font-size: 14px; line-height: 1.65; }
-        .guide-body ol, .guide-body ul { margin: 10px 0 0; padding-left: 22px; }
-        .guide-body li + li { margin-top: 5px; }
-        .warning { margin-top: 10px; padding: 10px 12px; color: #8a0c27; background: #fff0f3; border-radius: 8px; }
-        .emergency-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .emergency-card { display: block; padding: 15px; color: #25212a; background: #fff; border: 1px solid #d8cdd9; border-radius: 14px; box-shadow: 0 2px 8px rgba(85,32,118,.08); text-decoration: none; }
-        .emergency-card strong { display: block; color: #552076; font-size: 22px; } .emergency-card span { display: block; margin-top: 4px; color: #6f6874; font-size: 13px; line-height: 1.4; }
-        .emergency-card.medical strong { color: #be062a; } .emergency-card.fire strong { color: #d04727; } .emergency-card.disaster strong { color: #2176ae; }
-        .checklist { padding: 16px; background: #fff; border: 1px solid #d8cdd9; border-radius: 14px; box-shadow: 0 2px 8px rgba(85,32,118,.08); font-size: 14px; line-height: 1.65; }
-        .checklist ul { margin: 0; padding-left: 22px; } .checklist li + li { margin-top: 6px; }
-        .footer { padding: 20px 16px 28px; color: #6f6874; text-align: center; font-size: 12px; line-height: 1.55; }
-        @media (max-width: 480px) { .header { padding: 14px; } .logo { width: 60px; height: 60px; } .header-title { font-size: 20px; } .content { padding: 12px; } }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>คู่มือความปลอดภัย | IEAT e-Monitoring</title>
+  <style>
+    :root { --primary:#6B3F91; --primary-dark:#4D286F; --primary-soft:#F2EDF7; --border:#D9C9E7; --page:#FAF8FC; --canvas:#F1EDF4; --text:#30283A; --muted:#746B7B; --green:#159B6B; --green-dark:#087651; --green-soft:#ECF8F2; --amber:#F2A52B; --amber-dark:#B86B09; --amber-soft:#FFF7E8; --red:#D92D3F; --red-dark:#A61B2B; --red-soft:#FFF1F3; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--canvas); color:var(--text); font-family:"Segoe UI",Tahoma,Arial,sans-serif; }
+    .page { width:100%; max-width:720px; min-height:100vh; margin:0 auto; background:var(--page); }
+    .header { display:flex; align-items:center; gap:14px; padding:18px; background:#fff; border-bottom:4px solid var(--primary); }
+    .logo { flex-shrink:0; width:72px; height:72px; object-fit:contain; }
+    .header-title { margin:0; color:var(--primary-dark); font-size:23px; font-weight:750; }
+    .header-subtitle { margin:5px 0 0; color:var(--muted); font-size:14px; line-height:1.5; }
+    .content { padding:16px; }
+    .notice { padding:14px; background:var(--primary-soft); border-left:4px solid var(--primary); border-radius:10px; font-size:14px; line-height:1.65; }
+    .section-title { margin:24px 0 12px; color:var(--text); font-size:20px; line-height:1.4; }
+    .section-title::before { display:inline-block; width:4px; height:22px; margin-right:9px; background:var(--primary); border-radius:4px; vertical-align:-3px; content:""; }
+    .steps { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+    .step { padding:14px 9px; background:#fff; border:1px solid var(--border); border-radius:14px; box-shadow:0 2px 8px rgba(77,40,111,.08); text-align:center; }
+    .step-number { display:flex; width:30px; height:30px; margin:0 auto 8px; align-items:center; justify-content:center; color:#fff; background:var(--primary-dark); border-radius:50%; font-weight:bold; }
+    .step strong { display:block; color:var(--primary-dark); font-size:15px; }
+    .step span { display:block; margin-top:4px; color:var(--muted); font-size:12px; line-height:1.4; }
+    .guide { margin-bottom:12px; overflow:hidden; background:#fff; border:1px solid var(--border); border-left:4px solid var(--primary); border-radius:14px; box-shadow:0 2px 8px rgba(77,40,111,.08); }
+    .guide.fire { border-left-color:#D04727; } .guide.chemical { border-left-color:#5A6FAE; } .guide.evacuation { border-left-color:var(--green); } .guide.health { border-left-color:var(--red); }
+    summary { padding:16px; color:var(--primary-dark); cursor:pointer; font-size:18px; font-weight:750; list-style:none; }
+    summary::-webkit-details-marker { display:none; } summary::after { float:right; color:var(--muted); content:"＋"; } details[open] summary::after { content:"−"; }
+    .guide-body { padding:0 16px 16px; border-top:1px solid #EEE9F1; font-size:14px; line-height:1.65; }
+    .guide-body ol,.guide-body ul { margin:10px 0 0; padding-left:22px; } .guide-body li+li { margin-top:5px; }
+    .warning { margin-top:10px; padding:10px 12px; color:var(--red-dark); background:var(--red-soft); border-radius:8px; }
+    .emergency-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .emergency-card { display:block; padding:15px; color:var(--text); background:#fff; border:1px solid var(--border); border-radius:14px; box-shadow:0 2px 8px rgba(77,40,111,.08); text-decoration:none; }
+    .emergency-card strong { display:block; color:var(--primary-dark); font-size:22px; } .emergency-card span { display:block; margin-top:4px; color:var(--muted); font-size:13px; line-height:1.4; }
+    .emergency-card.medical strong { color:var(--red-dark); } .emergency-card.fire strong { color:#D04727; } .emergency-card.disaster strong { color:#40558C; }
+    .checklist { padding:16px; background:#fff; border:1px solid var(--border); border-radius:14px; box-shadow:0 2px 8px rgba(77,40,111,.08); font-size:14px; line-height:1.65; }
+    .checklist ul { margin:0; padding-left:22px; } .checklist li+li { margin-top:6px; }
+    .footer { padding:20px 16px 28px; color:var(--muted); text-align:center; font-size:12px; line-height:1.55; }
+    @media (max-width:480px) { .header { padding:14px; } .logo { width:60px; height:60px; } .header-title { font-size:20px; } .content { padding:12px; } }
+  </style>
 </head>
 <body>
-    <div class="page">
-        <header class="header">
-            <img class="logo" src="./ieat_logo.png.PNG" alt="โลโก้ กนอ.">
-            <div><h1 class="header-title">คู่มือความปลอดภัย</h1><p class="header-subtitle">สำหรับผู้ประกอบการและพนักงานในนิคมอุตสาหกรรม</p></div>
-        </header>
-        <main class="content">
-            <div class="notice">ใช้เป็นแนวทางเบื้องต้นเมื่อเกิดเหตุ ให้ปฏิบัติตามแผนฉุกเฉินของสถานประกอบการและคำสั่งของผู้ควบคุมเหตุเป็นอันดับแรก</div>
-            <h2 class="section-title">เมื่อพบเหตุผิดปกติ ให้ทำ 3 ขั้นตอนนี้</h2>
-            <section class="steps">
-                <div class="step"><div class="step-number">1</div><strong>หยุด</strong><span>หยุดงานและออกจากพื้นที่เสี่ยงอย่างปลอดภัย</span></div>
-                <div class="step"><div class="step-number">2</div><strong>แจ้ง</strong><span>แจ้งหัวหน้างาน ห้องควบคุม หรือทีมฉุกเฉินทันที</span></div>
-                <div class="step"><div class="step-number">3</div><strong>อพยพ</strong><span>ไปยังจุดรวมพลตามเส้นทางที่กำหนด</span></div>
-            </section>
-
-            <h2 class="section-title">คู่มือปฏิบัติเมื่อเกิดเหตุ</h2>
-            <details class="guide fire"><summary>ไฟไหม้ / ควัน / กลิ่นไหม้</summary><div class="guide-body"><ol><li>กดสัญญาณแจ้งเหตุหรือแจ้งผู้ควบคุมพื้นที่ทันที</li><li>หากเป็นไฟขนาดเล็กและผ่านการอบรมแล้ว จึงใช้ถังดับเพลิงชนิดที่เหมาะสม</li><li>ห้ามเสี่ยงเข้าควบคุมไฟ หากควันหนา ไฟลุกลาม หรือไม่แน่ใจ</li><li>อพยพตามป้ายทางหนีไฟ ห้ามใช้ลิฟต์ และไปยังจุดรวมพล</li></ol><div class="warning">ห้ามกลับเข้าอาคารจนกว่าจะได้รับอนุญาตจากผู้ควบคุมเหตุ</div></div></details>
-            <details class="guide chemical"><summary>สารเคมีรั่วไหล / กลิ่นผิดปกติ</summary><div class="guide-body"><ol><li>หยุดงานและแจ้งผู้บังคับบัญชา ทีม ERT หรือห้องควบคุม</li><li>อย่าสัมผัส สูดดม หรือเดินผ่านบริเวณที่มีสารรั่วไหล</li><li>ออกจากพื้นที่โดยอยู่เหนือลมหรือทิศทางที่ปลอดภัย</li><li>หากสัมผัสสาร ให้ใช้ฝักบัวนิรภัยหรือที่ล้างตาตาม SDS ของสาร และพบแพทย์</li></ol><div class="warning">ห้ามใช้น้ำหรือวัสดุดูดซับเอง หากไม่ทราบชนิดสารหรือไม่ได้รับมอบหมาย</div></div></details>
-            <details class="guide evacuation"><summary>การอพยพและจุดรวมพล</summary><div class="guide-body"><ul><li>ฟังประกาศจากระบบเสียงตามสาย ผู้ประสานงาน หรือหัวหน้างาน</li><li>เดินเร็วแต่ไม่วิ่ง ไม่ผลักกัน และช่วยผู้ที่ต้องการความช่วยเหลือ</li><li>ไปยังจุดรวมพลที่กำหนด แล้วรายงานตัวกับหัวหน้างาน</li><li>ห้ามแยกตัวออกจากกลุ่ม หรือกลับไปเก็บของส่วนตัว</li></ul></div></details>
-            <details class="guide health"><summary>ผู้บาดเจ็บหรือเจ็บป่วยฉุกเฉิน</summary><div class="guide-body"><ol><li>แจ้งทีมปฐมพยาบาลหรือโทร 1669</li><li>อย่าเคลื่อนย้ายผู้บาดเจ็บ เว้นแต่พื้นที่นั้นยังไม่ปลอดภัย</li><li>บอกตำแหน่งเกิดเหตุ อาการ จำนวนผู้บาดเจ็บ และจุดนัดพบรถพยาบาลให้ชัดเจน</li><li>ให้เฉพาะผู้ผ่านการฝึกอบรมทำ CPR หรือปฐมพยาบาล</li></ol></div></details>
-
-            <h2 class="section-title">เบอร์ฉุกเฉิน</h2>
-            <section class="emergency-grid">
-                <a class="emergency-card medical" href="tel:1669"><strong>1669</strong><span>การแพทย์ฉุกเฉิน</span></a>
-                <a class="emergency-card fire" href="tel:199"><strong>199</strong><span>แจ้งเหตุเพลิงไหม้</span></a>
-                <a class="emergency-card" href="tel:191"><strong>191</strong><span>เหตุด่วนเหตุร้าย</span></a>
-                <a class="emergency-card disaster" href="tel:1784"><strong>1784</strong><span>สายด่วนสาธารณภัย</span></a>
-                <a class="emergency-card" href="tel:022072700"><strong>02-207-2700</strong><span>Call Center กนอ.</span></a>
-                <a class="emergency-card" href="./contacts.html"><strong>สำนักงานนิคมฯ</strong><span>ค้นหาเบอร์ติดต่อพื้นที่</span></a>
-            </section>
-
-            <h2 class="section-title">ตรวจสอบก่อนเริ่มงาน</h2>
-            <section class="checklist"><ul><li>สวม PPE ให้เหมาะกับงานและอยู่ในสภาพพร้อมใช้</li><li>รู้ตำแหน่งทางหนีไฟ จุดรวมพล ถังดับเพลิง ที่ล้างตา และฝักบัวนิรภัย</li><li>อ่าน SDS และขั้นตอนปฏิบัติงานก่อนใช้สารเคมีหรือเครื่องจักร</li><li>แจ้งหัวหน้างานทันทีเมื่อพบการรั่วไหล เครื่องจักรผิดปกติ หรือสภาพไม่ปลอดภัย</li><li>ไม่ทำงานนอกเหนือจากหน้าที่หรือขั้นตอนที่ได้รับอนุญาต</li></ul></section>
-        </main>
-        <footer class="footer">คู่มือนี้เป็นข้อมูลเบื้องต้น ไม่ทดแทนแผนฉุกเฉินของสถานประกอบการ การฝึกอบรม หรือคำสั่งของเจ้าหน้าที่ในพื้นที่</footer>
-    </div>
+  <div class="page">
+    <header class="header"><img class="logo" src="./ieat_logo.png.PNG" alt="โลโก้ กนอ."><div><h1 class="header-title">คู่มือความปลอดภัย</h1><p class="header-subtitle">สำหรับผู้ประกอบการและพนักงานในนิคมอุตสาหกรรม</p></div></header>
+    <main class="content">
+      <div class="notice">ใช้เป็นแนวทางเบื้องต้นเมื่อเกิดเหตุ ให้ปฏิบัติตามแผนฉุกเฉินของสถานประกอบการและคำสั่งของผู้ควบคุมเหตุเป็นอันดับแรก</div>
+      <h2 class="section-title">เมื่อพบเหตุผิดปกติ ให้ทำ 3 ขั้นตอนนี้</h2>
+      <section class="steps"><div class="step"><div class="step-number">1</div><strong>หยุด</strong><span>หยุดงานและออกจากพื้นที่เสี่ยงอย่างปลอดภัย</span></div><div class="step"><div class="step-number">2</div><strong>แจ้ง</strong><span>แจ้งหัวหน้างาน ห้องควบคุม หรือทีมฉุกเฉินทันที</span></div><div class="step"><div class="step-number">3</div><strong>อพยพ</strong><span>ไปยังจุดรวมพลตามเส้นทางที่กำหนด</span></div></section>
+      <h2 class="section-title">คู่มือปฏิบัติเมื่อเกิดเหตุ</h2>
+      <details class="guide fire"><summary>ไฟไหม้ / ควัน / กลิ่นไหม้</summary><div class="guide-body"><ol><li>กดสัญญาณแจ้งเหตุหรือแจ้งผู้ควบคุมพื้นที่ทันที</li><li>หากเป็นไฟขนาดเล็กและผ่านการอบรมแล้ว จึงใช้ถังดับเพลิงชนิดที่เหมาะสม</li><li>ห้ามเสี่ยงเข้าควบคุมไฟ หากควันหนา ไฟลุกลาม หรือไม่แน่ใจ</li><li>อพยพตามป้ายทางหนีไฟ ห้ามใช้ลิฟต์ และไปยังจุดรวมพล</li></ol><div class="warning">ห้ามกลับเข้าอาคารจนกว่าจะได้รับอนุญาตจากผู้ควบคุมเหตุ</div></div></details>
+      <details class="guide chemical"><summary>สารเคมีรั่วไหล / กลิ่นผิดปกติ</summary><div class="guide-body"><ol><li>หยุดงานและแจ้งผู้บังคับบัญชา ทีม ERT หรือห้องควบคุม</li><li>อย่าสัมผัส สูดดม หรือเดินผ่านบริเวณที่มีสารรั่วไหล</li><li>ออกจากพื้นที่โดยอยู่เหนือลมหรือทิศทางที่ปลอดภัย</li><li>หากสัมผัสสาร ให้ใช้ฝักบัวนิรภัยหรือที่ล้างตาตาม SDS ของสาร และพบแพทย์</li></ol><div class="warning">ห้ามใช้น้ำหรือวัสดุดูดซับเอง หากไม่ทราบชนิดสารหรือไม่ได้รับมอบหมาย</div></div></details>
+      <details class="guide evacuation"><summary>การอพยพและจุดรวมพล</summary><div class="guide-body"><ul><li>ฟังประกาศจากระบบเสียงตามสาย ผู้ประสานงาน หรือหัวหน้างาน</li><li>เดินเร็วแต่ไม่วิ่ง ไม่ผลักกัน และช่วยผู้ที่ต้องการความช่วยเหลือ</li><li>ไปยังจุดรวมพลที่กำหนด แล้วรายงานตัวกับหัวหน้างาน</li><li>ห้ามแยกตัวออกจากกลุ่ม หรือกลับไปเก็บของส่วนตัว</li></ul></div></details>
+      <details class="guide health"><summary>ผู้บาดเจ็บหรือเจ็บป่วยฉุกเฉิน</summary><div class="guide-body"><ol><li>แจ้งทีมปฐมพยาบาลหรือโทร 1669</li><li>อย่าเคลื่อนย้ายผู้บาดเจ็บ เว้นแต่พื้นที่นั้นยังไม่ปลอดภัย</li><li>บอกตำแหน่งเกิดเหตุ อาการ จำนวนผู้บาดเจ็บ และจุดนัดพบรถพยาบาลให้ชัดเจน</li><li>ให้เฉพาะผู้ผ่านการฝึกอบรมทำ CPR หรือปฐมพยาบาล</li></ol></div></details>
+      <h2 class="section-title">เบอร์ฉุกเฉิน</h2>
+      <section class="emergency-grid"><a class="emergency-card medical" href="tel:1669"><strong>1669</strong><span>การแพทย์ฉุกเฉิน</span></a><a class="emergency-card fire" href="tel:199"><strong>199</strong><span>แจ้งเหตุเพลิงไหม้</span></a><a class="emergency-card" href="tel:191"><strong>191</strong><span>เหตุด่วนเหตุร้าย</span></a><a class="emergency-card disaster" href="tel:1784"><strong>1784</strong><span>สายด่วนสาธารณภัย</span></a><a class="emergency-card" href="tel:022072700"><strong>02-207-2700</strong><span>Call Center กนอ.</span></a><a class="emergency-card" href="./contacts.html"><strong>สำนักงานนิคมฯ</strong><span>ค้นหาเบอร์ติดต่อพื้นที่</span></a></section>
+      <h2 class="section-title">ตรวจสอบก่อนเริ่มงาน</h2>
+      <section class="checklist"><ul><li>สวม PPE ให้เหมาะกับงานและอยู่ในสภาพพร้อมใช้</li><li>รู้ตำแหน่งทางหนีไฟ จุดรวมพล ถังดับเพลิง ที่ล้างตา และฝักบัวนิรภัย</li><li>อ่าน SDS และขั้นตอนปฏิบัติงานก่อนใช้สารเคมีหรือเครื่องจักร</li><li>แจ้งหัวหน้างานทันทีเมื่อพบการรั่วไหล เครื่องจักรผิดปกติ หรือสภาพไม่ปลอดภัย</li><li>ไม่ทำงานนอกเหนือจากหน้าที่หรือขั้นตอนที่ได้รับอนุญาต</li></ul></section>
+    </main>
+    <footer class="footer">คู่มือนี้เป็นข้อมูลเบื้องต้น ไม่ทดแทนแผนฉุกเฉินของสถานประกอบการ การฝึกอบรม หรือคำสั่งของเจ้าหน้าที่ในพื้นที่</footer>
+  </div>
 </body>
 </html>
