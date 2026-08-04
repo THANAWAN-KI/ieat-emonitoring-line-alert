@@ -2,7 +2,7 @@
   "status": "alert",
   "status_text": "พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน",
   "description": "โปรดตรวจสอบรายละเอียดของสถานีและติดตามสถานการณ์",
-  "updated_at": "4 ส.ค. 2569 เวลา 11:08 น.",
+  "updated_at": "4 ส.ค. 2569 เวลา 11:21 น.",
   "data_last_update": "2026-07-10T15:50:00+07:00",
   "data_is_today": false,
   "stale_online_total": 104,
@@ -54,7 +54,7 @@
       "value": "SO2 115.67 (Cail) ppb | SO2 148.64 (Cail) ppb",
       "comment": "SO2 เกินค่ามาตรฐาน จำนวน 2 วัน",
       "detected_at": "15:00 น., 14:00 น.",
-      "severity": "ระดับเฝ้าระวัง",
+      "severity": "เฝ้าระวัง",
       "map_url": "https://www.google.com/maps/search/?api=1&query=12.680425,101.168528",
       "gis_url": "https://www.arcgis.com/apps/dashboards/576c71d01cc5403cad90ee330fd67b6e"
     },
@@ -85,7 +85,7 @@
       "value": "CO 44.48  ppmO3 1003.62  ppb | CO 43.03  ppmO3 1004.32  ppb | CO 43.6  ppmO3 1004.89  ppb | CO 48.21  ppmO3 1005.37  ppb | CO 50.58  ppmO3 1005.86  ppb | CO 52.95  ppmO3 1006.17  ppb | CO 58.06  ppmO3 1006.01  ppb | CO 62.53  ppmO3 1005.79  ppb | CO 64.06  ppmO3 1005.4  ppb | CO 63.35  ppmO3 1004.94  ppb | CO 65.16  ppmO3 1004.84  ppb | CO 66.71  ppmO3 1004.6  ppb | CO 67.02  ppmO3 1004.82  ppb | CO 66.69  ppmO3 1005.43  ppb | CO 68.03  ppmO3 1005.97  ppb | CO 73.99  ppmO3 1006.63  ppb",
       "comment": "CO และ O3 เกินค่ามาตรฐาน จำนวน 29 วัน",
       "detected_at": "15:00 น., 14:00 น., 13:00 น., 12:00 น., 11:00 น., 10:00 น., 09:00 น., 08:00 น., 07:00 น., 06:00 น., 05:00 น., 04:00 น., 03:00 น., 02:00 น., 01:00 น., 00:00 น.",
-      "severity": "ระดับเร่งด่วน",
+      "severity": "เกินค่ามาตรฐาน",
       "map_url": "https://www.google.com/maps/search/?api=1&query=12.756908,101.178715",
       "gis_url": "https://www.arcgis.com/apps/dashboards/576c71d01cc5403cad90ee330fd67b6e"
     },
@@ -102,7 +102,7 @@
       "value": "SO2 118.68  ppbCO 102.89 (Cail) ppm | PM10 398.3  mg/m3",
       "comment": "PM10 เกินค่ามาตรฐาน จำนวน 1 วัน",
       "detected_at": "14:00 น., 12:00 น.",
-      "severity": "ระดับเฝ้าระวัง",
+      "severity": "เฝ้าระวัง",
       "map_url": "https://www.google.com/maps/search/?api=1&query=12.678494,101.066698",
       "gis_url": "https://www.arcgis.com/apps/dashboards/576c71d01cc5403cad90ee330fd67b6e"
     },
@@ -129,7 +129,7 @@
       "value": "PM10 999.67 (Cail) ug./m3 | PM10 999.76 (Cail) ug./m3 | PM10 999.79 (Cail) ug./m3 | PM10 999.72 (Cail) ug./m3 | PM10 999.69 (Cail) ug./m3 | PM10 999.73 (Cail) ug./m3 | PM10 999.79 (Cail) ug./m3 | PM10 999.8 (Cail) ug./m3 | PM10 999.82 (Cail) ug./m3 | PM10 967.33 (Cail) ug./m3 | O3 173.2 (Cail) ppb | SO2 147.36 (Cail) ppbNO2 144.44 (Cail) ppb",
       "comment": "SO2 และ O3 เกินค่ามาตรฐาน จำนวน 4 วัน, NO2 เกินค่ามาตรฐาน จำนวน 3 วัน, PM10 เกินค่ามาตรฐาน จำนวน 1 วัน",
       "detected_at": "15:00 น., 14:00 น., 13:00 น., 12:00 น., 11:00 น., 10:00 น., 09:00 น., 08:00 น., 07:00 น., 06:00 น., 03:00 น., 02:00 น.",
-      "severity": "ระดับเร่งด่วน",
+      "severity": "เกินค่ามาตรฐาน",
       "map_url": "https://www.google.com/maps/search/?api=1&query=12.725179,101.12726",
       "gis_url": "https://www.arcgis.com/apps/dashboards/576c71d01cc5403cad90ee330fd67b6e"
     },
@@ -193,7 +193,7 @@
       "value": "Opacity 10.01  % | Opacity 12.35  % | Opacity 10.92  % | Opacity 14.97  % | Opacity 10.82  % | Opacity 13.12  % | HCL 46.76  mg/m3 | HCL 62.6  mg/m3 | HCL 63.1  mg/m3 | HCL 46.79  mg/m3 | Opacity 10.04  % | HCL 40.91  mg/m3 | HCL 44.51  mg/m3 | HCL 45.68  mg/m3 | HCL 44.82  mg/m3 | HCL 44.22  mg/m3 | Opacity 12.32  % | HCL 111.39  mg/m3 | HCL 66.7  mg/m3 | HCL 43.04  mg/m3 | HCL 47.72  mg/m3 | Opacity 10.08  % | HCL 55.18  mg/m3 | HCL 56.37  mg/m3 | HCL 50.37  mg/m3 | HCL 71.8  mg/m3 | HCL 48.88  mg/m3 | HCL 45.41  mg/m3 | HCL 59.12  mg/m3 | HCL 49.18  mg/m3 | HCL 41.77  mg/m3 | HCL 48.04  mg/m3 | HCL 51.67  mg/m3 | HCL 47.59  mg/m3 | HCL 51.15  mg/m3 | HCL 42.82  mg/m3 | HCL 94.11  mg/m3 | HCL 54.49  mg/m3 | HCL 62.2  mg/m3 | HCL 46.56  mg/m3 | Opacity 10.47  % | HCL 44.56  mg/m3 | HCL 46.29  mg/m3 | HCL 52.4  mg/m3 | HCL 85.49  mg/m3 | HCL 86.82  mg/m3 | HCL 40.2  mg/m3 | HCL 51.5  mg/m3 | HCL 50.74  mg/m3",
       "comment": "Opacity เกินค่ามาตรฐาน จำนวน 16 วัน, HCL เกินค่ามาตรฐาน จำนวน 4 วัน",
       "detected_at": "14:45 น., 14:41 น., 14:24 น., 14:08 น., 14:06 น., 13:55 น., 13:39 น., 13:35 น., 13:34 น., 13:18 น., 13:02 น., 12:44 น., 12:28 น., 10:52 น., 10:47 น., 10:01 น., 09:41 น., 08:01 น., 08:00 น., 07:49 น., 06:42 น., 06:20 น., 05:47 น., 04:23 น., 04:08 น., 03:51 น., 03:50 น., 03:35 น., 03:34 น., 03:17 น., 03:02 น., 03:01 น., 02:49 น., 02:45 น., 02:44 น., 02:33 น., 02:29 น., 02:27 น., 02:15 น., 01:59 น., 01:26 น., 01:09 น., 01:05 น., 01:03 น., 00:48 น., 00:47 น., 00:30 น., 00:15 น., 00:14 น.",
-      "severity": "ระดับเร่งด่วน",
+      "severity": "เกินค่ามาตรฐาน",
       "map_url": "https://www.google.com/maps/search/?api=1&query=13.538084845535455,100.6559003509614",
       "gis_url": "https://www.arcgis.com/apps/dashboards/576c71d01cc5403cad90ee330fd67b6e"
     },
@@ -209,7 +209,7 @@
       "value": "HRSG1_SO2 6.56  ppm",
       "comment": "HRSG1_SO2 เกินค่ามาตรฐาน จำนวน 1 วัน",
       "detected_at": "09:00 น.",
-      "severity": "ระดับติดตามสถานการณ์",
+      "severity": "ติดตามสถานการณ์",
       "map_url": "https://www.google.com/maps/search/?api=1&query=13.017426,101.194836",
       "gis_url": "https://www.arcgis.com/apps/dashboards/576c71d01cc5403cad90ee330fd67b6e"
     },
@@ -225,7 +225,7 @@
       "value": "HRSG1_SO2 49.33 (Defective) ppm",
       "comment": "HRSG1_SO2 เกินค่ามาตรฐาน จำนวน 1 วัน",
       "detected_at": "09:00 น.",
-      "severity": "ระดับติดตามสถานการณ์",
+      "severity": "ติดตามสถานการณ์",
       "map_url": "https://www.google.com/maps/search/?api=1&query=13.066,101.18642",
       "gis_url": "https://www.arcgis.com/apps/dashboards/576c71d01cc5403cad90ee330fd67b6e"
     },
@@ -242,7 +242,7 @@
       "value": "H3701-Nox@7% 249 (Cail) ppm | H3701-Nox@7% 188.92 (Cail) ppm",
       "comment": "H3701-Nox@7% เกินค่ามาตรฐาน จำนวน 1 วัน",
       "detected_at": "09:00 น., 08:00 น.",
-      "severity": "ระดับเฝ้าระวัง",
+      "severity": "เฝ้าระวัง",
       "map_url": "https://www.google.com/maps/search/?api=1&query=12.702934,101.140351",
       "gis_url": "https://www.arcgis.com/apps/dashboards/576c71d01cc5403cad90ee330fd67b6e"
     },
@@ -264,7 +264,7 @@
       "value": "PTTGC4_432H1_SO2@7% 29.57 (Cail) ppm | PTTGC4_432H1_SO2@7% 29.05 (Cail) ppm | PTTGC4_432H1_SO2@7% 27.82 (Cail) ppm | PTTGC4_432H1_SO2@7% 27.09 (Cail) ppm | PTTGC4_432H1_SO2@7% 27.39 (Cail) ppm | PTTGC4_432H1_SO2@7% 26.91 (Cail) ppm | PTTGC4_432H1_SO2@7% 25.15 (Cail) ppm",
       "comment": "PTTGC4_200H1_SO2@7% และ PTTGC4_432H1_SO2@7% เกินค่ามาตรฐาน จำนวน 1 วัน",
       "detected_at": "15:00 น., 14:00 น., 13:00 น., 12:00 น., 11:00 น., 10:00 น., 09:00 น.",
-      "severity": "ระดับเร่งด่วน",
+      "severity": "เกินค่ามาตรฐาน",
       "map_url": "https://www.google.com/maps/search/?api=1&query=12.678777,101.155994",
       "gis_url": "https://www.arcgis.com/apps/dashboards/576c71d01cc5403cad90ee330fd67b6e"
     },
@@ -283,7 +283,7 @@
       "value": "NOx_SPE II 32.16 (Cail) ppm | NOx@7%O2_LTX 117.17 (Cail) ppm | NOx_SPE II 400.07 (Cail) ppm | NOx_SPE II 46.07 (Cail) ppm",
       "comment": "NOx@7%O2_LTX เกินค่ามาตรฐาน จำนวน 1 วัน และ NOx_SPE II เกินค่ามาตรฐาน จำนวน 2 วัน",
       "detected_at": "15:00 น., 11:00 น., 05:00 น., 03:00 น.",
-      "severity": "ระดับเร่งด่วน",
+      "severity": "เกินค่ามาตรฐาน",
       "map_url": "https://www.google.com/maps/search/?api=1&query=12.695623,101.152872",
       "gis_url": "https://www.arcgis.com/apps/dashboards/576c71d01cc5403cad90ee330fd67b6e"
     }
