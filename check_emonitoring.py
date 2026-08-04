@@ -1394,40 +1394,34 @@ def icon_badge(
     border_color: str,
     size: str = "md",
 ) -> dict[str, Any]:
-    """ตราสัญลักษณ์จาก assets ในรูปแบบทางการและเรียบง่าย"""
+    """แสดงไอคอนจากโฟลเดอร์ assets โดยไม่มีกรอบสี่เหลี่ยม"""
     icon_url = ICON_ASSET_URLS.get(icon, "")
 
-    icon_component: dict[str, Any]
     if icon_url:
-        icon_component = {
+        return {
             "type": "image",
             "url": icon_url,
-            "size": "26px",
+            "size": "38px",
             "aspectMode": "fit",
             "aspectRatio": "1:1",
         }
-    else:
-        # สำรองไว้เฉพาะกรณีเพิ่มสัญลักษณ์ใหม่ที่ยังไม่มีไฟล์ใน assets
-        icon_component = flex_text(
-            icon,
-            size=size,
-            align="center",
-            flex=0,
-        )
 
+    # สำรองไว้เฉพาะกรณีเพิ่มสัญลักษณ์ใหม่ที่ยังไม่มีไฟล์ใน assets
     return {
         "type": "box",
         "layout": "vertical",
-        "width": "40px",
-        "height": "40px",
-        "backgroundColor": background_color,
-        "borderColor": border_color,
-        "borderWidth": "1px",
-        "cornerRadius": "10px",
-        "paddingAll": "8px",
+        "width": "38px",
+        "height": "38px",
         "justifyContent": "center",
         "alignItems": "center",
-        "contents": [icon_component],
+        "contents": [
+            flex_text(
+                icon,
+                size=size,
+                align="center",
+                flex=0,
+            ),
+        ],
     }
 
 
@@ -1932,10 +1926,10 @@ def severity_box(
         "type": "box",
         "layout": "horizontal",
         "margin": "md",
-        "paddingAll": "11px",
+        "paddingAll": "12px",
         "backgroundColor": background_color,
         "borderColor": border_color,
-        "borderWidth": "1px",
+        "borderWidth": "2px",
         "cornerRadius": "10px",
         "alignItems": "center",
         "contents": [
@@ -1953,13 +1947,13 @@ def severity_box(
                 "contents": [
                     flex_text(
                         title,
-                        size="sm",
+                        size="lg",
                         color=title_color,
                         weight="bold",
                     ),
                     flex_text(
                         description,
-                        size="xs",
+                        size="sm",
                         color=COLOR_MUTED,
                         max_lines=3,
                     ),
@@ -1967,7 +1961,7 @@ def severity_box(
             },
             flex_text(
                 f"{count} สถานี",
-                size="sm",
+                size="md",
                 color=title_color,
                 weight="bold",
                 flex=4,
