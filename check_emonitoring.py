@@ -11,7 +11,7 @@ from typing import Any
 
 
 # ============================================================
-# 1. การตั้งค่าระบบ
+# 1. à¸à¸²à¸£à¸•à¸±à¹‰à¸‡à¸„à¹ˆà¸²à¸£à¸°à¸šà¸š
 # ============================================================
 
 DATA_URL = (
@@ -39,18 +39,18 @@ THAILAND_TIMEZONE = timezone(
 
 REQUEST_TIMEOUT_SECONDS = 60
 
-# จำนวนการ์ดสูงสุดต่อ Carousel
+# à¸ˆà¸³à¸™à¸§à¸™à¸à¸²à¸£à¹Œà¸”à¸ªà¸¹à¸‡à¸ªà¸¸à¸”à¸•à¹ˆà¸­ Carousel
 MAX_BUBBLES_PER_CAROUSEL = 10
 
-# LINE จำกัด JSON ของ Flex Carousel ไม่เกิน 50 KB
-# ใช้ 45 KB เพื่อเผื่อโครงสร้างข้อความและอักขระภาษาไทย
+# LINE à¸ˆà¸³à¸à¸±à¸” JSON à¸‚à¸­à¸‡ Flex Carousel à¹„à¸¡à¹ˆà¹€à¸à¸´à¸™ 50 KB
+# à¹ƒà¸Šà¹‰ 45 KB à¹€à¸žà¸·à¹ˆà¸­à¹€à¸œà¸·à¹ˆà¸­à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡à¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡à¹à¸¥à¸°à¸­à¸±à¸à¸‚à¸£à¸°à¸ à¸²à¸©à¸²à¹„à¸—à¸¢
 MAX_CAROUSEL_JSON_BYTES = 45_000
 
-# จำนวนรายการ Alarm สูงสุดที่แสดงต่อสถานี
+# à¸ˆà¸³à¸™à¸§à¸™à¸£à¸²à¸¢à¸à¸²à¸£ Alarm à¸ªà¸¹à¸‡à¸ªà¸¸à¸”à¸—à¸µà¹ˆà¹à¸ªà¸”à¸‡à¸•à¹ˆà¸­à¸ªà¸–à¸²à¸™à¸µ
 MAX_ALARM_ENTRIES_PER_STATION = 3
 
 # ============================================================
-# 2. รูปภาพที่ใช้ใน LINE Flex Message
+# 2. à¸£à¸¹à¸›à¸ à¸²à¸žà¸—à¸µà¹ˆà¹ƒà¸Šà¹‰à¹ƒà¸™ LINE Flex Message
 # ============================================================
 
 ASSET_BASE_URL = (
@@ -76,44 +76,50 @@ WATCH_YELLOW_ICON_URL = (
 
 
 # ============================================================
-# 3. ธีมสี Dashboard e-Monitoring กนอ.
+# 3. à¸˜à¸µà¸¡à¸ªà¸µ Dashboard e-Monitoring à¸à¸™à¸­.
 # ============================================================
 
-# สีม่วงหลักจากหัวตารางและหัวข้อใน Dashboard
-COLOR_PRIMARY = "#6A2C91"
-COLOR_PRIMARY_DARK = "#552076"
-COLOR_PRIMARY_SOFT = "#E8D9EC"
+# à¸ªà¸µà¸¡à¹ˆà¸§à¸‡à¸«à¸¥à¸±à¸à¸ˆà¸²à¸à¸«à¸±à¸§à¸•à¸²à¸£à¸²à¸‡à¹à¸¥à¸°à¸«à¸±à¸§à¸‚à¹‰à¸­à¹ƒà¸™ Dashboard
+COLOR_PRIMARY = "#652780"
+COLOR_PRIMARY_DARK = "#4F176B"
+COLOR_PRIMARY_SOFT = "#E7D8EB"
+COLOR_PRIMARY_PALE = "#F5EFF7"
+COLOR_PRIMARY_BORDER = "#C8B2D2"
 
-# สีแจ้งเตือนระดับเร่งด่วน
-COLOR_RED = "#D64550"
-COLOR_RED_DARK = "#A92C35"
-COLOR_RED_SOFT = "#FDEEEF"
+# à¸ªà¸µà¹à¸ˆà¹‰à¸‡à¹€à¸•à¸·à¸­à¸™à¸£à¸°à¸”à¸±à¸šà¹€à¸£à¹ˆà¸‡à¸”à¹ˆà¸§à¸™
+COLOR_RED = "#D84B58"
+COLOR_RED_DARK = "#A92F39"
+COLOR_RED_SOFT = "#FDEFF1"
 
-# สีแจ้งเตือนระดับเฝ้าระวัง
-COLOR_YELLOW = "#D9A51D"
-COLOR_YELLOW_DARK = "#9A7000"
-COLOR_YELLOW_SOFT = "#FFF7DA"
+# à¸ªà¸µà¹à¸ˆà¹‰à¸‡à¹€à¸•à¸·à¸­à¸™à¸£à¸°à¸”à¸±à¸šà¹€à¸à¹‰à¸²à¸£à¸°à¸§à¸±à¸‡
+COLOR_YELLOW = "#D7A51F"
+COLOR_YELLOW_DARK = "#936D08"
+COLOR_YELLOW_SOFT = "#FFF7DF"
 
-# สีเขียว AQMs / ONLINE ตาม Dashboard
-COLOR_GREEN = "#5C9630"
-COLOR_GREEN_DARK = "#477824"
-COLOR_GREEN_SOFT = "#F3FAEB"
+# à¸ªà¸µà¹€à¸‚à¸µà¸¢à¸§ AQMs / ONLINE à¸•à¸²à¸¡ Dashboard
+COLOR_GREEN = "#79C943"
+COLOR_GREEN_DARK = "#4F8E2B"
+COLOR_GREEN_SOFT = "#EFF8E8"
+COLOR_GREEN_BORDER = "#A9D78D"
 
-# สีฟ้า CEMs ตาม Dashboard
-COLOR_BLUE = "#0872B9"
-COLOR_BLUE_DARK = "#075B91"
-COLOR_BLUE_SOFT = "#E6F3FC"
+# à¸ªà¸µà¸Ÿà¹‰à¸² CEMs à¸•à¸²à¸¡ Dashboard
+COLOR_BLUE = "#2589C9"
+COLOR_BLUE_DARK = "#12689F"
+COLOR_BLUE_SOFT = "#E8F4FB"
+COLOR_BLUE_BORDER = "#9BC9E5"
 
-COLOR_TEXT = "#25212A"
-COLOR_MUTED = "#6F6874"
-COLOR_BORDER = "#D8CDD9"
+COLOR_TEXT = "#33263A"
+COLOR_MUTED = "#736879"
+COLOR_BORDER = "#D9CFDD"
 COLOR_DIVIDER = "#E8E0EA"
-COLOR_BACKGROUND = "#F8F6F9"
+COLOR_BACKGROUND = "#F3F0F5"
+COLOR_SURFACE = "#FCFAFD"
+COLOR_DEPTH = "#DDD3E1"
 COLOR_WHITE = "#FFFFFF"
 
 
 # ============================================================
-# 4. ฟังก์ชันพื้นฐาน
+# 4. à¸Ÿà¸±à¸‡à¸à¹Œà¸Šà¸±à¸™à¸žà¸·à¹‰à¸™à¸à¸²à¸™
 # ============================================================
 
 def now_thailand() -> datetime:
@@ -166,22 +172,22 @@ def has_parameter_alarm(
 
 
 # ============================================================
-# 5. วันที่และเวลา
+# 5. à¸§à¸±à¸™à¸—à¸µà¹ˆà¹à¸¥à¸°à¹€à¸§à¸¥à¸²
 # ============================================================
 
 THAI_MONTHS_SHORT = {
-    1: "ม.ค.",
-    2: "ก.พ.",
-    3: "มี.ค.",
-    4: "เม.ย.",
-    5: "พ.ค.",
-    6: "มิ.ย.",
-    7: "ก.ค.",
-    8: "ส.ค.",
-    9: "ก.ย.",
-    10: "ต.ค.",
-    11: "พ.ย.",
-    12: "ธ.ค.",
+    1: "à¸¡.à¸„.",
+    2: "à¸.à¸ž.",
+    3: "à¸¡à¸µ.à¸„.",
+    4: "à¹€à¸¡.à¸¢.",
+    5: "à¸ž.à¸„.",
+    6: "à¸¡à¸´.à¸¢.",
+    7: "à¸.à¸„.",
+    8: "à¸ª.à¸„.",
+    9: "à¸.à¸¢.",
+    10: "à¸•.à¸„.",
+    11: "à¸ž.à¸¢.",
+    12: "à¸˜.à¸„.",
 }
 
 
@@ -253,7 +259,7 @@ def format_datetime_thai(
         f"{parsed.day} "
         f"{thai_month} "
         f"{thai_year} "
-        f"เวลา {parsed:%H:%M} น."
+        f"à¹€à¸§à¸¥à¸² {parsed:%H:%M} à¸™."
     )
 
 
@@ -271,12 +277,12 @@ def report_time_text() -> str:
         f"{current.day} "
         f"{thai_month} "
         f"{thai_year} "
-        f"เวลา {current:%H:%M} น."
+        f"à¹€à¸§à¸¥à¸² {current:%H:%M} à¸™."
     )
 
 
 # ============================================================
-# 6. ดาวน์โหลดข้อมูล e-Monitoring
+# 6. à¸”à¸²à¸§à¸™à¹Œà¹‚à¸«à¸¥à¸”à¸‚à¹‰à¸­à¸¡à¸¹à¸¥ e-Monitoring
 # ============================================================
 
 def download_data() -> Any:
@@ -334,21 +340,21 @@ def download_data() -> Any:
         )
 
         raise RuntimeError(
-            "ดาวน์โหลดข้อมูล e-Monitoring "
-            f"ไม่สำเร็จ HTTP {error.code}: "
+            "à¸”à¸²à¸§à¸™à¹Œà¹‚à¸«à¸¥à¸”à¸‚à¹‰à¸­à¸¡à¸¹à¸¥ e-Monitoring "
+            f"à¹„à¸¡à¹ˆà¸ªà¸³à¹€à¸£à¹‡à¸ˆ HTTP {error.code}: "
             f"{error_body}"
         ) from error
 
     except urllib.error.URLError as error:
         raise RuntimeError(
-            "ไม่สามารถเชื่อมต่อข้อมูล "
-            f"e-Monitoring ได้: {error.reason}"
+            "à¹„à¸¡à¹ˆà¸ªà¸²à¸¡à¸²à¸£à¸–à¹€à¸Šà¸·à¹ˆà¸­à¸¡à¸•à¹ˆà¸­à¸‚à¹‰à¸­à¸¡à¸¹à¸¥ "
+            f"e-Monitoring à¹„à¸”à¹‰: {error.reason}"
         ) from error
 
     except json.JSONDecodeError as error:
         raise RuntimeError(
-            "ข้อมูลที่ได้รับจาก e-Monitoring "
-            "ไม่ใช่ JSON ที่ถูกต้อง"
+            "à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸—à¸µà¹ˆà¹„à¸”à¹‰à¸£à¸±à¸šà¸ˆà¸²à¸ e-Monitoring "
+            "à¹„à¸¡à¹ˆà¹ƒà¸Šà¹ˆ JSON à¸—à¸µà¹ˆà¸–à¸¹à¸à¸•à¹‰à¸­à¸‡"
         ) from error
 
 
@@ -377,7 +383,7 @@ def get_features(
 
 
 # ============================================================
-# 7. อ่าน ParameterAlram
+# 7. à¸­à¹ˆà¸²à¸™ ParameterAlram
 # ============================================================
 
 def split_parameter_alarm(
@@ -456,8 +462,8 @@ def get_today_alarm_entries(
 
         if alarm_datetime is None:
             print(
-                "ข้าม Alarm เนื่องจาก "
-                "อ่านวันที่ไม่ได้:",
+                "à¸‚à¹‰à¸²à¸¡ Alarm à¹€à¸™à¸·à¹ˆà¸­à¸‡à¸ˆà¸²à¸ "
+                "à¸­à¹ˆà¸²à¸™à¸§à¸±à¸™à¸—à¸µà¹ˆà¹„à¸¡à¹ˆà¹„à¸”à¹‰:",
                 entry,
             )
             continue
@@ -473,7 +479,7 @@ def get_today_alarm_entries(
 
 
 # ============================================================
-# 8. จัดรูปแบบรายละเอียด Alarm
+# 8. à¸ˆà¸±à¸”à¸£à¸¹à¸›à¹à¸šà¸šà¸£à¸²à¸¢à¸¥à¸°à¹€à¸­à¸µà¸¢à¸” Alarm
 # ============================================================
 
 def remove_alarm_datetime(
@@ -506,7 +512,7 @@ def alarm_time_text(
     if parsed is None:
         return ""
 
-    return f"{parsed:%H:%M} น."
+    return f"{parsed:%H:%M} à¸™."
 
 
 KNOWN_PARAMETERS = [
@@ -536,12 +542,12 @@ KNOWN_PARAMETERS = [
 
 PARAMETER_DISPLAY_NAMES = {
     "PM25": "PM2.5",
-    "SO2": "SO₂",
-    "NO2": "NO₂",
+    "SO2": "SOâ‚‚",
+    "NO2": "NOâ‚‚",
     "NOX": "NOx",
-    "O3": "O₃",
-    "H2S": "H₂S",
-    "CH4": "CH₄",
+    "O3": "Oâ‚ƒ",
+    "H2S": "Hâ‚‚S",
+    "CH4": "CHâ‚„",
     "PH": "pH",
     "OPACITY": "Opacity",
     "HCL": "HCl",
@@ -623,11 +629,11 @@ def extract_primary_parameter_name(
     if first_word:
         return first_word.group(1)
 
-    return "พารามิเตอร์แจ้งเตือน"
+    return "à¸žà¸²à¸£à¸²à¸¡à¸´à¹€à¸•à¸­à¸£à¹Œà¹à¸ˆà¹‰à¸‡à¹€à¸•à¸·à¸­à¸™"
 
 
 # ============================================================
-# 9. ข้อมูลสถานี
+# 9. à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸ªà¸–à¸²à¸™à¸µ
 # ============================================================
 
 def get_station_name(
@@ -648,7 +654,7 @@ def get_station_name(
         if value:
             return value
 
-    return "ไม่ระบุชื่อสถานี"
+    return "à¹„à¸¡à¹ˆà¸£à¸°à¸šà¸¸à¸Šà¸·à¹ˆà¸­à¸ªà¸–à¸²à¸™à¸µ"
 
 
 def get_industry_zone(
@@ -670,7 +676,7 @@ def get_industry_zone(
         if value:
             return value
 
-    return "ระบบ e-Monitoring"
+    return "à¸£à¸°à¸šà¸š e-Monitoring"
 
 
 def get_raw_station_type(
@@ -750,14 +756,14 @@ def normalize_station_type(
     return (
         raw_type
         if raw_type
-        else "ไม่ระบุประเภท"
+        else "à¹„à¸¡à¹ˆà¸£à¸°à¸šà¸¸à¸›à¸£à¸°à¹€à¸ à¸—"
     )
 
 
 def get_station_comment(
     properties: dict[str, Any],
 ) -> str:
-    """อ่านข้อความสาเหตุ/การติดตามผลจากฟิลด์ Comment ของ API"""
+    """à¸­à¹ˆà¸²à¸™à¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡à¸ªà¸²à¹€à¸«à¸•à¸¸/à¸à¸²à¸£à¸•à¸´à¸”à¸•à¸²à¸¡à¸œà¸¥à¸ˆà¸²à¸à¸Ÿà¸´à¸¥à¸”à¹Œ Comment à¸‚à¸­à¸‡ API"""
     fields = [
         "Comment",
         "comment",
@@ -775,7 +781,7 @@ def get_station_comment(
         if value:
             return value
 
-    return "ยังไม่มีข้อมูลสาเหตุ / การติดตามผล"
+    return "à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¸¡à¸µà¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸ªà¸²à¹€à¸«à¸•à¸¸ / à¸à¸²à¸£à¸•à¸´à¸”à¸•à¸²à¸¡à¸œà¸¥"
 
 
 def get_coordinates(
@@ -837,7 +843,7 @@ def station_map_url(
 
 
 # ============================================================
-# 10. กรองและนับสถานี ONLINE
+# 10. à¸à¸£à¸­à¸‡à¹à¸¥à¸°à¸™à¸±à¸šà¸ªà¸–à¸²à¸™à¸µ ONLINE
 # ============================================================
 
 def is_valid_station(
@@ -896,7 +902,7 @@ def count_online_station_types(
         },
     }
 
-    # หาก API มีสถานีซ้ำ ให้ใช้รายการที่ LastUpdate ล่าสุดของสถานีนั้น
+    # à¸«à¸²à¸ API à¸¡à¸µà¸ªà¸–à¸²à¸™à¸µà¸‹à¹‰à¸³ à¹ƒà¸«à¹‰à¹ƒà¸Šà¹‰à¸£à¸²à¸¢à¸à¸²à¸£à¸—à¸µà¹ˆ LastUpdate à¸¥à¹ˆà¸²à¸ªà¸¸à¸”à¸‚à¸­à¸‡à¸ªà¸–à¸²à¸™à¸µà¸™à¸±à¹‰à¸™
     latest_station_features: dict[str, dict[str, Any]] = {}
 
     for feature in features:
@@ -992,7 +998,7 @@ def filter_current_online_features(
             unique_key
         )
 
-        # Alarm และค่าพารามิเตอร์ต้องใช้เฉพาะข้อมูลของวันนี้เท่านั้น
+        # Alarm à¹à¸¥à¸°à¸„à¹ˆà¸²à¸žà¸²à¸£à¸²à¸¡à¸´à¹€à¸•à¸­à¸£à¹Œà¸•à¹‰à¸­à¸‡à¹ƒà¸Šà¹‰à¹€à¸‰à¸žà¸²à¸°à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸‚à¸­à¸‡à¸§à¸±à¸™à¸™à¸µà¹‰à¹€à¸—à¹ˆà¸²à¸™à¸±à¹‰à¸™
         if not is_today(properties.get("LastUpdate")):
             continue
 
@@ -1020,7 +1026,7 @@ def filter_current_online_features(
 def get_latest_online_update(
     features: list[dict[str, Any]],
 ) -> datetime | None:
-    """คืนวันเวลา LastUpdate ที่ล่าสุดของสถานี ONLINE"""
+    """à¸„à¸·à¸™à¸§à¸±à¸™à¹€à¸§à¸¥à¸² LastUpdate à¸—à¸µà¹ˆà¸¥à¹ˆà¸²à¸ªà¸¸à¸”à¸‚à¸­à¸‡à¸ªà¸–à¸²à¸™à¸µ ONLINE"""
     latest: datetime | None = None
 
     for feature in features:
@@ -1050,8 +1056,8 @@ def filter_alert_features(
             {},
         )
 
-        # รองรับทั้งชื่อเดิมที่ API สะกดว่า ParameterAlram
-        # และชื่อที่สะกดถูก/รูปแบบตัวพิมพ์อื่น เผื่อ API เปลี่ยน schema
+        # à¸£à¸­à¸‡à¸£à¸±à¸šà¸—à¸±à¹‰à¸‡à¸Šà¸·à¹ˆà¸­à¹€à¸”à¸´à¸¡à¸—à¸µà¹ˆ API à¸ªà¸°à¸à¸”à¸§à¹ˆà¸² ParameterAlram
+        # à¹à¸¥à¸°à¸Šà¸·à¹ˆà¸­à¸—à¸µà¹ˆà¸ªà¸°à¸à¸”à¸–à¸¹à¸/à¸£à¸¹à¸›à¹à¸šà¸šà¸•à¸±à¸§à¸žà¸´à¸¡à¸žà¹Œà¸­à¸·à¹ˆà¸™ à¹€à¸œà¸·à¹ˆà¸­ API à¹€à¸›à¸¥à¸µà¹ˆà¸¢à¸™ schema
         parameter_alarm = next(
             (
                 properties.get(field)
@@ -1116,7 +1122,7 @@ def filter_alert_features(
 
 
 # ============================================================
-# 11. แบ่งระดับสถานการณ์
+# 11. à¹à¸šà¹ˆà¸‡à¸£à¸°à¸”à¸±à¸šà¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œ
 # ============================================================
 
 def get_severity_level(
@@ -1242,7 +1248,7 @@ def summarize_alerts(
 
 
 # ============================================================
-# 12. ส่วนประกอบ Flex Message
+# 12. à¸ªà¹ˆà¸§à¸™à¸›à¸£à¸°à¸à¸­à¸š Flex Message
 # ============================================================
 
 def flex_text(
@@ -1344,7 +1350,7 @@ def info_row(
 
 
 # ============================================================
-# 13. Header ของการ์ด
+# 13. Header à¸‚à¸­à¸‡à¸à¸²à¸£à¹Œà¸”
 # ============================================================
 
 def card_header(
@@ -1354,16 +1360,28 @@ def card_header(
     return {
         "type": "box",
         "layout": "vertical",
-        "paddingTop": "12px",
-        "paddingBottom": "9px",
-        "paddingStart": "16px",
-        "paddingEnd": "16px",
-        "backgroundColor": COLOR_WHITE,
+        "paddingAll": "0px",
+        "backgroundColor": COLOR_SURFACE,
         "contents": [
+            {
+                "type": "box",
+                "layout": "vertical",
+                "height": "7px",
+                "backgroundColor": COLOR_PRIMARY_DARK,
+                "contents": [
+                    {
+                        "type": "filler",
+                    },
+                ],
+            },
             {
                 "type": "box",
                 "layout": "horizontal",
                 "alignItems": "center",
+                "paddingTop": "12px",
+                "paddingBottom": "11px",
+                "paddingStart": "16px",
+                "paddingEnd": "16px",
                 "contents": [
                     {
                         "type": "image",
@@ -1395,30 +1413,39 @@ def card_header(
                     },
                 ],
             },
-            flex_separator(
-                color=line_color,
-                margin="md",
-            ),
+            {
+                "type": "box",
+                "layout": "vertical",
+                "height": "3px",
+                "backgroundColor": line_color,
+                "contents": [
+                    {
+                        "type": "filler",
+                    },
+                ],
+            },
         ],
     }
 
 
 # ============================================================
-# 14. กล่องตัวเลขภาพรวม
+# 14. à¸à¸¥à¹ˆà¸­à¸‡à¸•à¸±à¸§à¹€à¸¥à¸‚à¸ à¸²à¸žà¸£à¸§à¸¡
 # ============================================================
 
 def summary_number_box(
     number: int,
     label: str,
     number_color: str,
+    background_color: str = COLOR_WHITE,
+    border_color: str = COLOR_BORDER,
 ) -> dict[str, Any]:
     return {
         "type": "box",
         "layout": "vertical",
         "flex": 1,
         "paddingAll": "10px",
-        "backgroundColor": COLOR_WHITE,
-        "borderColor": COLOR_BORDER,
+        "backgroundColor": background_color,
+        "borderColor": border_color,
         "borderWidth": "1px",
         "cornerRadius": "12px",
         "contents": [
@@ -1463,7 +1490,7 @@ def station_type_count_box(
                 flex=6,
             ),
             flex_text(
-                f"{count} สถานี",
+                f"{count} à¸ªà¸–à¸²à¸™à¸µ",
                 size="sm",
                 weight="bold",
                 color=COLOR_TEXT,
@@ -1489,19 +1516,38 @@ def online_station_summary_box(
         "CEMs": COLOR_BLUE,
         "Other": COLOR_MUTED,
     }
+    type_backgrounds = {
+        "AQMs": COLOR_GREEN_SOFT,
+        "WQMs": COLOR_PRIMARY_SOFT,
+        "CEMs": COLOR_BLUE_SOFT,
+        "Other": "#F1EEF2",
+    }
+    type_borders = {
+        "AQMs": COLOR_GREEN_BORDER,
+        "WQMs": COLOR_PRIMARY_BORDER,
+        "CEMs": COLOR_BLUE_BORDER,
+        "Other": COLOR_BORDER,
+    }
 
     for type_key, type_label in (
         ("AQMs", "AQMs"),
         ("WQMs", "WQMs"),
         ("CEMs", "CEMs"),
-        ("Other", "ประเภทอื่น"),
+        ("Other", "à¸›à¸£à¸°à¹€à¸ à¸—à¸­à¸·à¹ˆà¸™"),
     ):
         values = type_breakdown.get(type_key, {})
         type_rows.append({
             "type": "box",
             "layout": "horizontal",
+            "margin": "xs",
             "paddingTop": "6px",
             "paddingBottom": "6px",
+            "paddingStart": "8px",
+            "paddingEnd": "8px",
+            "backgroundColor": type_backgrounds[type_key],
+            "borderColor": type_borders[type_key],
+            "borderWidth": "1px",
+            "cornerRadius": "8px",
             "contents": [
                 flex_text(
                     type_label,
@@ -1540,14 +1586,14 @@ def online_station_summary_box(
         "type": "box",
         "layout": "vertical",
         "paddingAll": "12px",
-        "backgroundColor": COLOR_WHITE,
-        "borderColor": COLOR_BORDER,
+        "backgroundColor": COLOR_SURFACE,
+        "borderColor": COLOR_PRIMARY_BORDER,
         "borderWidth": "1px",
-        "cornerRadius": "12px",
+        "cornerRadius": "14px",
         "spacing": "sm",
         "contents": [
             flex_text(
-                "สถานีตรวจวัด",
+                "à¸ªà¸–à¸²à¸™à¸µà¸•à¸£à¸§à¸ˆà¸§à¸±à¸”",
                 size="md",
                 weight="bold",
                 color=COLOR_PRIMARY_DARK,
@@ -1559,18 +1605,24 @@ def online_station_summary_box(
                 "contents": [
                     summary_number_box(
                         online_type_counts.get("all_total", 0),
-                        "ทั้งหมด",
+                        "à¸—à¸±à¹‰à¸‡à¸«à¸¡à¸”",
                         COLOR_PRIMARY,
+                        COLOR_PRIMARY_SOFT,
+                        COLOR_PRIMARY_BORDER,
                     ),
                     summary_number_box(
                         online_type_counts.get("total", 0),
                         "ONLINE",
                         COLOR_GREEN_DARK,
+                        COLOR_GREEN_SOFT,
+                        COLOR_GREEN_BORDER,
                     ),
                     summary_number_box(
                         online_type_counts.get("offline", 0),
                         "OFFLINE",
                         COLOR_RED_DARK,
+                        COLOR_RED_SOFT,
+                        "#EAB3B8",
                     ),
                 ],
             },
@@ -1581,14 +1633,14 @@ def online_station_summary_box(
                 "paddingBottom": "3px",
                 "contents": [
                     flex_text(
-                        "ประเภท (Type)",
+                        "à¸›à¸£à¸°à¹€à¸ à¸— (Type)",
                         size="xs",
                         weight="bold",
                         color=COLOR_MUTED,
                         flex=4,
                     ),
                     flex_text(
-                        "ทั้งหมด",
+                        "à¸—à¸±à¹‰à¸‡à¸«à¸¡à¸”",
                         size="xs",
                         weight="bold",
                         color=COLOR_MUTED,
@@ -1666,7 +1718,7 @@ def severity_box(
                 ],
             },
             flex_text(
-                f"{count} สถานี",
+                f"{count} à¸ªà¸–à¸²à¸™à¸µ",
                 size="sm",
                 color=title_color,
                 weight="bold",
@@ -1678,7 +1730,7 @@ def severity_box(
 
 
 # ============================================================
-# 15. การ์ดสรุปเมื่อพบ Alarm
+# 15. à¸à¸²à¸£à¹Œà¸”à¸ªà¸£à¸¸à¸›à¹€à¸¡à¸·à¹ˆà¸­à¸žà¸š Alarm
 # ============================================================
 
 def build_alert_summary_bubble(
@@ -1695,7 +1747,7 @@ def build_alert_summary_bubble(
         "size": "giga",
 
         "header": card_header(
-            "สรุปสถานการณ์ e-Monitoring",
+            "à¸ªà¸£à¸¸à¸›à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œ e-Monitoring",
             COLOR_RED,
         ),
 
@@ -1712,8 +1764,8 @@ def build_alert_summary_bubble(
                     "paddingAll": "11px",
                     "backgroundColor": COLOR_RED_SOFT,
                     "borderColor": COLOR_RED,
-                    "borderWidth": "1px",
-                    "cornerRadius": "10px",
+                    "borderWidth": "2px",
+                    "cornerRadius": "14px",
                     "alignItems": "center",
                     "contents": [
                         {
@@ -1730,7 +1782,7 @@ def build_alert_summary_bubble(
                             "margin": "md",
                             "contents": [
                                 flex_text(
-                                    "พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน",
+                                    "à¸žà¸šà¸„à¹ˆà¸²à¸žà¸²à¸£à¸²à¸¡à¸´à¹€à¸•à¸­à¸£à¹Œà¸—à¸µà¹ˆà¹€à¸à¸´à¸™à¸„à¹ˆà¸²à¸¡à¸²à¸•à¸£à¸à¸²à¸™",
                                     size="lg",
                                     weight="bold",
                                     color=COLOR_RED_DARK,
@@ -1747,20 +1799,26 @@ def build_alert_summary_bubble(
                     "contents": [
                         summary_number_box(
                             summary["station_count"],
-                            "สถานีแจ้งเตือน",
+                            "à¸ªà¸–à¸²à¸™à¸µà¹à¸ˆà¹‰à¸‡à¹€à¸•à¸·à¸­à¸™",
                             COLOR_PRIMARY,
+                            COLOR_PRIMARY_SOFT,
+                            COLOR_PRIMARY_BORDER,
                         ),
                         summary_number_box(
                             summary["parameter_count"],
-                            "พารามิเตอร์",
+                            "à¸žà¸²à¸£à¸²à¸¡à¸´à¹€à¸•à¸­à¸£à¹Œ",
                             COLOR_GREEN,
+                            COLOR_GREEN_SOFT,
+                            COLOR_GREEN_BORDER,
                         ),
                         summary_number_box(
                             summary[
                                 "industry_zone_count"
                             ],
-                            "นิคมฯ",
+                            "à¸™à¸´à¸„à¸¡à¸¯",
                             COLOR_YELLOW_DARK,
+                            COLOR_YELLOW_SOFT,
+                            "#E5C96F",
                         ),
                     ],
                 },
@@ -1769,14 +1827,14 @@ def build_alert_summary_bubble(
                     "type": "box",
                     "layout": "vertical",
                     "paddingAll": "11px",
-                    "backgroundColor": COLOR_WHITE,
-                    "borderColor": COLOR_RED,
+                    "backgroundColor": COLOR_PRIMARY_PALE,
+                    "borderColor": COLOR_PRIMARY_BORDER,
                     "borderWidth": "1px",
-                    "cornerRadius": "12px",
+                    "cornerRadius": "14px",
                     "spacing": "xs",
                     "contents": [
                         flex_text(
-                            "พารามิเตอร์ที่เกินค่ามาตรฐาน (ParameterAlram)",
+                            "à¸žà¸²à¸£à¸²à¸¡à¸´à¹€à¸•à¸­à¸£à¹Œà¸—à¸µà¹ˆà¹€à¸à¸´à¸™à¸„à¹ˆà¸²à¸¡à¸²à¸•à¸£à¸à¸²à¸™ (ParameterAlram)",
                             size="xs",
                             weight="bold",
                             color=COLOR_MUTED,
@@ -1784,7 +1842,7 @@ def build_alert_summary_bubble(
                         flex_text(
                             ", ".join(summary["parameter_names"])
                             if summary["parameter_names"]
-                            else "พารามิเตอร์แจ้งเตือน",
+                            else "à¸žà¸²à¸£à¸²à¸¡à¸´à¹€à¸•à¸­à¸£à¹Œà¹à¸ˆà¹‰à¸‡à¹€à¸•à¸·à¸­à¸™",
                             size="md",
                             weight="bold",
                             color=COLOR_RED_DARK,
@@ -1798,7 +1856,7 @@ def build_alert_summary_bubble(
                 ),
 
                 flex_text(
-                    f"ข้อมูล ณ {report_time_text()}",
+                    f"à¸‚à¹‰à¸­à¸¡à¸¹à¸¥ à¸“ {report_time_text()}",
                     size="xs",
                     color=COLOR_MUTED,
                     align="center",
@@ -1810,9 +1868,12 @@ def build_alert_summary_bubble(
             "type": "box",
             "layout": "vertical",
             "paddingAll": "10px",
+            "backgroundColor": COLOR_PRIMARY_PALE,
+            "borderColor": COLOR_PRIMARY_BORDER,
+            "borderWidth": "1px",
             "contents": [
                 flex_button(
-                    "เปิดระบบ GIS",
+                    "à¹€à¸›à¸´à¸”à¸£à¸°à¸šà¸š GIS",
                     ARCGIS_DASHBOARD_URL,
                     primary=True,
                 ),
@@ -1822,7 +1883,7 @@ def build_alert_summary_bubble(
 
 
 # ============================================================
-# 16. การ์ดสรุปเมื่อไม่พบ Alarm
+# 16. à¸à¸²à¸£à¹Œà¸”à¸ªà¸£à¸¸à¸›à¹€à¸¡à¸·à¹ˆà¸­à¹„à¸¡à¹ˆà¸žà¸š Alarm
 # ============================================================
 
 def build_normal_summary_bubble(
@@ -1833,7 +1894,7 @@ def build_normal_summary_bubble(
         "size": "giga",
 
         "header": card_header(
-            "สรุปสถานการณ์ e-Monitoring",
+            "à¸ªà¸£à¸¸à¸›à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œ e-Monitoring",
             COLOR_GREEN,
         ),
 
@@ -1850,8 +1911,8 @@ def build_normal_summary_bubble(
                     "paddingAll": "11px",
                     "backgroundColor": COLOR_GREEN_SOFT,
                     "borderColor": COLOR_GREEN,
-                    "borderWidth": "1px",
-                    "cornerRadius": "10px",
+                    "borderWidth": "2px",
+                    "cornerRadius": "14px",
                     "alignItems": "center",
                     "contents": [
                         {
@@ -1868,7 +1929,7 @@ def build_normal_summary_bubble(
                             "margin": "md",
                             "contents": [
                                 flex_text(
-                                    "ไม่พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน",
+                                    "à¹„à¸¡à¹ˆà¸žà¸šà¸„à¹ˆà¸²à¸žà¸²à¸£à¸²à¸¡à¸´à¹€à¸•à¸­à¸£à¹Œà¸—à¸µà¹ˆà¹€à¸à¸´à¸™à¸„à¹ˆà¸²à¸¡à¸²à¸•à¸£à¸à¸²à¸™",
                                     size="lg",
                                     weight="bold",
                                     color=COLOR_GREEN_DARK,
@@ -1884,7 +1945,7 @@ def build_normal_summary_bubble(
                 ),
 
                 flex_text(
-                    f"ข้อมูล ณ {report_time_text()}",
+                    f"à¸‚à¹‰à¸­à¸¡à¸¹à¸¥ à¸“ {report_time_text()}",
                     size="xs",
                     color=COLOR_MUTED,
                     align="center",
@@ -1896,9 +1957,12 @@ def build_normal_summary_bubble(
             "type": "box",
             "layout": "vertical",
             "paddingAll": "10px",
+            "backgroundColor": COLOR_PRIMARY_PALE,
+            "borderColor": COLOR_PRIMARY_BORDER,
+            "borderWidth": "1px",
             "contents": [
                 flex_button(
-                    "เปิดระบบ GIS",
+                    "à¹€à¸›à¸´à¸”à¸£à¸°à¸šà¸š GIS",
                     ARCGIS_DASHBOARD_URL,
                     primary=True,
                 ),
@@ -1914,7 +1978,7 @@ def build_no_current_data_summary_bubble(
         "type": "bubble",
         "size": "giga",
         "header": card_header(
-            "สรุปสถานการณ์ e-Monitoring",
+            "à¸ªà¸£à¸¸à¸›à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œ e-Monitoring",
             COLOR_YELLOW,
         ),
         "body": {
@@ -1930,8 +1994,8 @@ def build_no_current_data_summary_bubble(
                     "paddingAll": "11px",
                     "backgroundColor": COLOR_YELLOW_SOFT,
                     "borderColor": COLOR_YELLOW,
-                    "borderWidth": "1px",
-                    "cornerRadius": "10px",
+                    "borderWidth": "2px",
+                    "cornerRadius": "14px",
                     "alignItems": "center",
                     "contents": [
                         {
@@ -1948,14 +2012,14 @@ def build_no_current_data_summary_bubble(
                             "margin": "md",
                             "contents": [
                                 flex_text(
-                                    "ไม่พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน",
+                                    "à¹„à¸¡à¹ˆà¸žà¸šà¸„à¹ˆà¸²à¸žà¸²à¸£à¸²à¸¡à¸´à¹€à¸•à¸­à¸£à¹Œà¸—à¸µà¹ˆà¹€à¸à¸´à¸™à¸„à¹ˆà¸²à¸¡à¸²à¸•à¸£à¸à¸²à¸™",
                                     size="lg",
                                     weight="bold",
                                     color=COLOR_YELLOW_DARK,
                                     max_lines=2,
                                 ),
                                 flex_text(
-                                    "ยังไม่มีสถานี ONLINE ที่อัปเดตข้อมูลในวันนี้ จึงยังยืนยันสถานการณ์ไม่ได้",
+                                    "à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¸¡à¸µà¸ªà¸–à¸²à¸™à¸µ ONLINE à¸—à¸µà¹ˆà¸­à¸±à¸›à¹€à¸”à¸•à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¹ƒà¸™à¸§à¸±à¸™à¸™à¸µà¹‰ à¸ˆà¸¶à¸‡à¸¢à¸±à¸‡à¸¢à¸·à¸™à¸¢à¸±à¸™à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œà¹„à¸¡à¹ˆà¹„à¸”à¹‰",
                                     size="xs",
                                     color=COLOR_MUTED,
                                     max_lines=2,
@@ -1966,7 +2030,7 @@ def build_no_current_data_summary_bubble(
                 },
                 online_station_summary_box(online_type_counts),
                 flex_text(
-                    f"ตรวจสอบเมื่อ {report_time_text()}",
+                    f"à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸šà¹€à¸¡à¸·à¹ˆà¸­ {report_time_text()}",
                     size="xs",
                     color=COLOR_MUTED,
                     align="center",
@@ -1977,9 +2041,12 @@ def build_no_current_data_summary_bubble(
             "type": "box",
             "layout": "vertical",
             "paddingAll": "10px",
+            "backgroundColor": COLOR_PRIMARY_PALE,
+            "borderColor": COLOR_PRIMARY_BORDER,
+            "borderWidth": "1px",
             "contents": [
                 flex_button(
-                    "เปิดระบบ GIS",
+                    "à¹€à¸›à¸´à¸”à¸£à¸°à¸šà¸š GIS",
                     ARCGIS_DASHBOARD_URL,
                     primary=True,
                 ),
@@ -1989,7 +2056,7 @@ def build_no_current_data_summary_bubble(
 
 
 # ============================================================
-# 17. กล่องรายละเอียด Alarm
+# 17. à¸à¸¥à¹ˆà¸­à¸‡à¸£à¸²à¸¢à¸¥à¸°à¹€à¸­à¸µà¸¢à¸” Alarm
 # ============================================================
 
 def alarm_entry_box(
@@ -2014,10 +2081,10 @@ def alarm_entry_box(
         "layout": "vertical",
         "margin": "sm",
         "paddingAll": "10px",
-        "backgroundColor": COLOR_WHITE,
-        "borderColor": COLOR_RED_SOFT,
+        "backgroundColor": COLOR_SURFACE,
+        "borderColor": "#EAB3B8",
         "borderWidth": "1px",
-        "cornerRadius": "12px",
+        "cornerRadius": "14px",
         "spacing": "xs",
         "contents": [
             {
@@ -2051,7 +2118,7 @@ def alarm_entry_box(
 
 
 # ============================================================
-# 18. การ์ดรายละเอียดแต่ละสถานี
+# 18. à¸à¸²à¸£à¹Œà¸”à¸£à¸²à¸¢à¸¥à¸°à¹€à¸­à¸µà¸¢à¸”à¹à¸•à¹ˆà¸¥à¸°à¸ªà¸–à¸²à¸™à¸µ
 # ============================================================
 
 def build_alert_detail_bubble(
@@ -2096,12 +2163,12 @@ def build_alert_detail_bubble(
     )
 
     severity_text = {
-        "urgent": "ระดับเร่งด่วน",
-        "watch": "ระดับเฝ้าระวัง",
-        "follow": "ระดับติดตามสถานการณ์",
+        "urgent": "à¸£à¸°à¸”à¸±à¸šà¹€à¸£à¹ˆà¸‡à¸”à¹ˆà¸§à¸™",
+        "watch": "à¸£à¸°à¸”à¸±à¸šà¹€à¸à¹‰à¸²à¸£à¸°à¸§à¸±à¸‡",
+        "follow": "à¸£à¸°à¸”à¸±à¸šà¸•à¸´à¸”à¸•à¸²à¸¡à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œ",
     }.get(
         severity,
-        "ระดับติดตามสถานการณ์",
+        "à¸£à¸°à¸”à¸±à¸šà¸•à¸´à¸”à¸•à¸²à¸¡à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œ",
     )
 
     severity_color = {
@@ -2172,7 +2239,7 @@ def build_alert_detail_bubble(
         },
 
         flex_text(
-            f"ข้อมูลล่าสุด ณ {last_update}",
+            f"à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸¥à¹ˆà¸²à¸ªà¸¸à¸” à¸“ {last_update}",
             size="xs",
             color=COLOR_MUTED,
         ),
@@ -2188,10 +2255,12 @@ def build_alert_detail_bubble(
                     "flex": 1,
                     "paddingAll": "9px",
                     "backgroundColor": COLOR_GREEN_SOFT,
+                    "borderColor": COLOR_GREEN_BORDER,
+                    "borderWidth": "1px",
                     "cornerRadius": "10px",
                     "contents": [
                         flex_text(
-                            "สถานะสถานี",
+                            "à¸ªà¸–à¸²à¸™à¸°à¸ªà¸–à¸²à¸™à¸µ",
                             size="xs",
                             color=COLOR_MUTED,
                         ),
@@ -2209,10 +2278,12 @@ def build_alert_detail_bubble(
                     "flex": 1,
                     "paddingAll": "9px",
                     "backgroundColor": COLOR_PRIMARY_SOFT,
+                    "borderColor": COLOR_PRIMARY_BORDER,
+                    "borderWidth": "1px",
                     "cornerRadius": "10px",
                     "contents": [
                         flex_text(
-                            "ประเภทการตรวจวัด (Type)",
+                            "à¸›à¸£à¸°à¹€à¸ à¸—à¸à¸²à¸£à¸•à¸£à¸§à¸ˆà¸§à¸±à¸” (Type)",
                             size="xs",
                             color=COLOR_MUTED,
                         ),
@@ -2233,11 +2304,11 @@ def build_alert_detail_bubble(
             "paddingAll": "9px",
             "backgroundColor": severity_background,
             "borderColor": severity_color,
-            "borderWidth": "1px",
-            "cornerRadius": "10px",
+            "borderWidth": "2px",
+            "cornerRadius": "12px",
             "contents": [
                 flex_text(
-                    "ค่าพารามิเตอร์ที่เกินค่ามาตรฐาน (ParameterAlram)",
+                    "à¸„à¹ˆà¸²à¸žà¸²à¸£à¸²à¸¡à¸´à¹€à¸•à¸­à¸£à¹Œà¸—à¸µà¹ˆà¹€à¸à¸´à¸™à¸„à¹ˆà¸²à¸¡à¸²à¸•à¸£à¸à¸²à¸™ (ParameterAlram)",
                     size="sm",
                     weight="bold",
                     color=COLOR_RED_DARK,
@@ -2264,9 +2335,9 @@ def build_alert_detail_bubble(
         body_contents.append(
             flex_text(
                 (
-                    "มีรายการแจ้งเตือนเพิ่มเติม "
-                    f"{remaining_count} รายการ "
-                    "โปรดตรวจสอบในระบบ GIS"
+                    "à¸¡à¸µà¸£à¸²à¸¢à¸à¸²à¸£à¹à¸ˆà¹‰à¸‡à¹€à¸•à¸·à¸­à¸™à¹€à¸žà¸´à¹ˆà¸¡à¹€à¸•à¸´à¸¡ "
+                    f"{remaining_count} à¸£à¸²à¸¢à¸à¸²à¸£ "
+                    "à¹‚à¸›à¸£à¸”à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸šà¹ƒà¸™à¸£à¸°à¸šà¸š GIS"
                 ),
                 size="xs",
                 color=COLOR_MUTED,
@@ -2285,7 +2356,7 @@ def build_alert_detail_bubble(
         "spacing": "xs",
         "contents": [
             flex_text(
-                "สาเหตุ / การติดตามผล (Comment)",
+                "à¸ªà¸²à¹€à¸«à¸•à¸¸ / à¸à¸²à¸£à¸•à¸´à¸”à¸•à¸²à¸¡à¸œà¸¥ (Comment)",
                 size="sm",
                 weight="bold",
                 color=COLOR_YELLOW_DARK,
@@ -2322,14 +2393,17 @@ def build_alert_detail_bubble(
             "layout": "horizontal",
             "spacing": "xs",
             "paddingAll": "8px",
+            "backgroundColor": COLOR_PRIMARY_PALE,
+            "borderColor": COLOR_PRIMARY_BORDER,
+            "borderWidth": "1px",
             "contents": [
                 flex_button(
-                    "ตำแหน่งสถานี",
+                    "à¸•à¸³à¹à¸«à¸™à¹ˆà¸‡à¸ªà¸–à¸²à¸™à¸µ",
                     station_map_url(feature),
                     primary=True,
                 ),
                 flex_button(
-                    "เปิดระบบ GIS",
+                    "à¹€à¸›à¸´à¸”à¸£à¸°à¸šà¸š GIS",
                     ARCGIS_DASHBOARD_URL,
                 ),
             ],
@@ -2338,7 +2412,7 @@ def build_alert_detail_bubble(
 
 
 # ============================================================
-# 19. ส่ง LINE Broadcast
+# 19. à¸ªà¹ˆà¸‡ LINE Broadcast
 # ============================================================
 
 def send_line_flex(
@@ -2347,7 +2421,7 @@ def send_line_flex(
 ) -> None:
     if not LINE_CHANNEL_ACCESS_TOKEN:
         raise RuntimeError(
-            "ไม่พบ LINE_CHANNEL_ACCESS_TOKEN"
+            "à¹„à¸¡à¹ˆà¸žà¸š LINE_CHANNEL_ACCESS_TOKEN"
         )
 
     payload = {
@@ -2385,7 +2459,7 @@ def send_line_flex(
         ) as response:
 
             print(
-                "ส่ง LINE Broadcast สำเร็จ "
+                "à¸ªà¹ˆà¸‡ LINE Broadcast à¸ªà¸³à¹€à¸£à¹‡à¸ˆ "
                 f"HTTP {response.status}"
             )
 
@@ -2406,14 +2480,14 @@ def send_line_flex(
 
     except urllib.error.URLError as error:
         raise RuntimeError(
-            "ไม่สามารถเชื่อมต่อ "
-            "LINE Broadcast API ได้: "
+            "à¹„à¸¡à¹ˆà¸ªà¸²à¸¡à¸²à¸£à¸–à¹€à¸Šà¸·à¹ˆà¸­à¸¡à¸•à¹ˆà¸­ "
+            "LINE Broadcast API à¹„à¸”à¹‰: "
             f"{error.reason}"
         ) from error
 
 
 # ============================================================
-# 20. แบ่งรายการเป็นชุด
+# 20. à¹à¸šà¹ˆà¸‡à¸£à¸²à¸¢à¸à¸²à¸£à¹€à¸›à¹‡à¸™à¸Šà¸¸à¸”
 # ============================================================
 
 def chunk_list(
@@ -2422,7 +2496,7 @@ def chunk_list(
 ) -> list[list[Any]]:
     if chunk_size <= 0:
         raise ValueError(
-            "chunk_size ต้องมากกว่า 0"
+            "chunk_size à¸•à¹‰à¸­à¸‡à¸¡à¸²à¸à¸à¸§à¹ˆà¸² 0"
         )
 
     return [
@@ -2438,7 +2512,7 @@ def chunk_list(
 def carousel_json_size_bytes(
     bubbles: list[dict[str, Any]],
 ) -> int:
-    """คำนวณขนาด JSON จริงแบบ UTF-8 ของ Flex Carousel"""
+    """à¸„à¸³à¸™à¸§à¸“à¸‚à¸™à¸²à¸” JSON à¸ˆà¸£à¸´à¸‡à¹à¸šà¸š UTF-8 à¸‚à¸­à¸‡ Flex Carousel"""
     carousel = {
         "type": "carousel",
         "contents": bubbles,
@@ -2456,7 +2530,7 @@ def carousel_json_size_bytes(
 def build_carousel_batches(
     alert_features: list[dict[str, Any]],
 ) -> list[list[dict[str, Any]]]:
-    """แบ่ง Bubble ตามจำนวนและขนาด JSON เพื่อไม่ให้เกินข้อจำกัด LINE"""
+    """à¹à¸šà¹ˆà¸‡ Bubble à¸•à¸²à¸¡à¸ˆà¸³à¸™à¸§à¸™à¹à¸¥à¸°à¸‚à¸™à¸²à¸” JSON à¹€à¸žà¸·à¹ˆà¸­à¹„à¸¡à¹ˆà¹ƒà¸«à¹‰à¹€à¸à¸´à¸™à¸‚à¹‰à¸­à¸ˆà¸³à¸à¸±à¸” LINE"""
     batches: list[list[dict[str, Any]]] = []
     current_batch: list[dict[str, Any]] = []
 
@@ -2482,7 +2556,7 @@ def build_carousel_batches(
         single_size = carousel_json_size_bytes([bubble])
         if single_size > MAX_CAROUSEL_JSON_BYTES:
             raise RuntimeError(
-                "การ์ดรายละเอียดของสถานีมีขนาดใหญ่เกินข้อจำกัด LINE: "
+                "à¸à¸²à¸£à¹Œà¸”à¸£à¸²à¸¢à¸¥à¸°à¹€à¸­à¸µà¸¢à¸”à¸‚à¸­à¸‡à¸ªà¸–à¸²à¸™à¸µà¸¡à¸µà¸‚à¸™à¸²à¸”à¹ƒà¸«à¸à¹ˆà¹€à¸à¸´à¸™à¸‚à¹‰à¸­à¸ˆà¸³à¸à¸±à¸” LINE: "
                 f"{single_size:,} bytes"
             )
 
@@ -2493,7 +2567,7 @@ def build_carousel_batches(
 
 
 # ============================================================
-# 21. ส่งรายละเอียดสถานีแบบ Carousel
+# 21. à¸ªà¹ˆà¸‡à¸£à¸²à¸¢à¸¥à¸°à¹€à¸­à¸µà¸¢à¸”à¸ªà¸–à¸²à¸™à¸µà¹à¸šà¸š Carousel
 # ============================================================
 
 def send_alert_detail_carousels(
@@ -2501,7 +2575,7 @@ def send_alert_detail_carousels(
 ) -> None:
     if not alert_features:
         print(
-            "ไม่มีรายละเอียดสถานีที่ต้องส่ง"
+            "à¹„à¸¡à¹ˆà¸¡à¸µà¸£à¸²à¸¢à¸¥à¸°à¹€à¸­à¸µà¸¢à¸”à¸ªà¸–à¸²à¸™à¸µà¸—à¸µà¹ˆà¸•à¹‰à¸­à¸‡à¸ªà¹ˆà¸‡"
         )
         return
 
@@ -2531,23 +2605,23 @@ def send_alert_detail_carousels(
         )
 
         alt_text = (
-            "รายละเอียดแจ้งเตือน "
+            "à¸£à¸²à¸¢à¸¥à¸°à¹€à¸­à¸µà¸¢à¸”à¹à¸ˆà¹‰à¸‡à¹€à¸•à¸·à¸­à¸™ "
             "e-Monitoring "
-            f"{total_alerts} สถานี"
+            f"{total_alerts} à¸ªà¸–à¸²à¸™à¸µ"
         )
 
         if total_batches > 1:
             alt_text += (
-                f" ชุดที่ {batch_number}/"
+                f" à¸Šà¸¸à¸”à¸—à¸µà¹ˆ {batch_number}/"
                 f"{total_batches}"
             )
 
         print(
-            "กำลังส่งรายละเอียดสถานี "
-            f"ชุดที่ {batch_number}/"
+            "à¸à¸³à¸¥à¸±à¸‡à¸ªà¹ˆà¸‡à¸£à¸²à¸¢à¸¥à¸°à¹€à¸­à¸µà¸¢à¸”à¸ªà¸–à¸²à¸™à¸µ "
+            f"à¸Šà¸¸à¸”à¸—à¸µà¹ˆ {batch_number}/"
             f"{total_batches} "
-            f"จำนวน {len(bubbles)} สถานี "
-            f"ขนาด {carousel_size:,} bytes"
+            f"à¸ˆà¸³à¸™à¸§à¸™ {len(bubbles)} à¸ªà¸–à¸²à¸™à¸µ "
+            f"à¸‚à¸™à¸²à¸” {carousel_size:,} bytes"
         )
 
         send_line_flex(
@@ -2560,7 +2634,7 @@ def send_alert_detail_carousels(
 
 
 # ============================================================
-# 22. สร้างข้อมูลสำหรับหน้า "สถานการณ์ล่าสุด"
+# 22. à¸ªà¸£à¹‰à¸²à¸‡à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸ªà¸³à¸«à¸£à¸±à¸šà¸«à¸™à¹‰à¸² "à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œà¸¥à¹ˆà¸²à¸ªà¸¸à¸”"
 # ============================================================
 
 def write_status_json(
@@ -2568,7 +2642,7 @@ def write_status_json(
     online_type_counts: dict[str, Any],
     has_current_data: bool,
 ) -> None:
-    """เขียนข้อมูลล่าสุดให้หน้า GitHub Pages อ่านจาก docs/status.json"""
+    """à¹€à¸‚à¸µà¸¢à¸™à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸¥à¹ˆà¸²à¸ªà¸¸à¸”à¹ƒà¸«à¹‰à¸«à¸™à¹‰à¸² GitHub Pages à¸­à¹ˆà¸²à¸™à¸ˆà¸²à¸ docs/status.json"""
     station_items: list[dict[str, Any]] = []
     parameter_names: set[str] = set()
     estate_names: set[str] = set()
@@ -2578,9 +2652,9 @@ def write_status_json(
     follow_count = 0
 
     severity_texts = {
-        "urgent": "ระดับเร่งด่วน",
-        "watch": "ระดับเฝ้าระวัง",
-        "follow": "ระดับติดตามสถานการณ์",
+        "urgent": "à¸£à¸°à¸”à¸±à¸šà¹€à¸£à¹ˆà¸‡à¸”à¹ˆà¸§à¸™",
+        "watch": "à¸£à¸°à¸”à¸±à¸šà¹€à¸à¹‰à¸²à¸£à¸°à¸§à¸±à¸‡",
+        "follow": "à¸£à¸°à¸”à¸±à¸šà¸•à¸´à¸”à¸•à¸²à¸¡à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œ",
     }
 
     for feature in alert_features:
@@ -2614,7 +2688,7 @@ def write_status_json(
             "station_name": get_station_name(properties),
             "station_type": normalize_station_type(properties),
             "status": clean_text(properties.get("Status"), "-").upper(),
-            "parameter": ", ".join(names) if names else "พารามิเตอร์แจ้งเตือน",
+            "parameter": ", ".join(names) if names else "à¸žà¸²à¸£à¸²à¸¡à¸´à¹€à¸•à¸­à¸£à¹Œà¹à¸ˆà¹‰à¸‡à¹€à¸•à¸·à¸­à¸™",
             "parameter_alarm": entries,
             "value": " | ".join(
                 remove_alarm_datetime(entry) for entry in entries
@@ -2623,7 +2697,7 @@ def write_status_json(
             "detected_at": ", ".join(detected_times) or "-",
             "severity": severity_texts.get(
                 severity,
-                "ระดับติดตามสถานการณ์",
+                "à¸£à¸°à¸”à¸±à¸šà¸•à¸´à¸”à¸•à¸²à¸¡à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œ",
             ),
             "map_url": station_map_url(feature),
             "gis_url": ARCGIS_DASHBOARD_URL,
@@ -2642,16 +2716,16 @@ def write_status_json(
     status_data = {
         "status": status,
         "status_text": (
-            "พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน"
+            "à¸žà¸šà¸„à¹ˆà¸²à¸žà¸²à¸£à¸²à¸¡à¸´à¹€à¸•à¸­à¸£à¹Œà¸—à¸µà¹ˆà¹€à¸à¸´à¸™à¸„à¹ˆà¸²à¸¡à¸²à¸•à¸£à¸à¸²à¸™"
             if has_alert
-            else "ไม่พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน"
+            else "à¹„à¸¡à¹ˆà¸žà¸šà¸„à¹ˆà¸²à¸žà¸²à¸£à¸²à¸¡à¸´à¹€à¸•à¸­à¸£à¹Œà¸—à¸µà¹ˆà¹€à¸à¸´à¸™à¸„à¹ˆà¸²à¸¡à¸²à¸•à¸£à¸à¸²à¸™"
         ),
         "description": (
-            "โปรดตรวจสอบรายละเอียดของสถานีและติดตามสถานการณ์"
+            "à¹‚à¸›à¸£à¸”à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸šà¸£à¸²à¸¢à¸¥à¸°à¹€à¸­à¸µà¸¢à¸”à¸‚à¸­à¸‡à¸ªà¸–à¸²à¸™à¸µà¹à¸¥à¸°à¸•à¸´à¸”à¸•à¸²à¸¡à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œ"
             if has_alert
-            else "ตรวจสอบข้อมูลของวันปัจจุบันแล้ว"
+            else "à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸šà¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸‚à¸­à¸‡à¸§à¸±à¸™à¸›à¸±à¸ˆà¸ˆà¸¸à¸šà¸±à¸™à¹à¸¥à¹‰à¸§"
             if has_current_data
-            else "ยังไม่มีสถานี ONLINE ที่อัปเดตข้อมูลในวันนี้ จึงยังยืนยันสถานการณ์ไม่ได้"
+            else "à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¸¡à¸µà¸ªà¸–à¸²à¸™à¸µ ONLINE à¸—à¸µà¹ˆà¸­à¸±à¸›à¹€à¸”à¸•à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¹ƒà¸™à¸§à¸±à¸™à¸™à¸µà¹‰ à¸ˆà¸¶à¸‡à¸¢à¸±à¸‡à¸¢à¸·à¸™à¸¢à¸±à¸™à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œà¹„à¸¡à¹ˆà¹„à¸”à¹‰"
         ),
         "updated_at": report_time_text(),
         "online_total": online_type_counts.get("total", 0),
@@ -2677,11 +2751,11 @@ def write_status_json(
         encoding="utf-8",
     )
 
-    print(f"อัปเดตข้อมูลหน้าเว็บแล้ว: {output_path}")
+    print(f"à¸­à¸±à¸›à¹€à¸”à¸•à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸«à¸™à¹‰à¸²à¹€à¸§à¹‡à¸šà¹à¸¥à¹‰à¸§: {output_path}")
 
 
 # ============================================================
-# 23. โปรแกรมหลัก
+# 23. à¹‚à¸›à¸£à¹à¸à¸£à¸¡à¸«à¸¥à¸±à¸
 # ============================================================
 
 def main() -> None:
@@ -2690,14 +2764,14 @@ def main() -> None:
     print("=" * 80)
 
     print(
-        "เวลาประเทศไทย:",
+        "à¹€à¸§à¸¥à¸²à¸›à¸£à¸°à¹€à¸—à¸¨à¹„à¸—à¸¢:",
         now_thailand().strftime(
             "%Y-%m-%d %H:%M:%S"
         ),
     )
 
     print(
-        "กำลังดาวน์โหลดข้อมูล "
+        "à¸à¸³à¸¥à¸±à¸‡à¸”à¸²à¸§à¸™à¹Œà¹‚à¸«à¸¥à¸”à¸‚à¹‰à¸­à¸¡à¸¹à¸¥ "
         "e-Monitoring..."
     )
 
@@ -2708,13 +2782,13 @@ def main() -> None:
     )
 
     print(
-        "Feature ทั้งหมด:",
+        "Feature à¸—à¸±à¹‰à¸‡à¸«à¸¡à¸”:",
         len(features),
     )
 
     if not features:
         raise RuntimeError(
-            "ไม่พบ Feature จากข้อมูล "
+            "à¹„à¸¡à¹ˆà¸žà¸š Feature à¸ˆà¸²à¸à¸‚à¹‰à¸­à¸¡à¸¹à¸¥ "
             "e-Monitoring"
         )
 
@@ -2738,7 +2812,7 @@ def main() -> None:
         )
     )
 
-    # อัปเดตข้อมูลหน้า "สถานการณ์ล่าสุด" ทุกครั้งที่ Workflow ทำงาน
+    # à¸­à¸±à¸›à¹€à¸”à¸•à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸«à¸™à¹‰à¸² "à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œà¸¥à¹ˆà¸²à¸ªà¸¸à¸”" à¸—à¸¸à¸à¸„à¸£à¸±à¹‰à¸‡à¸—à¸µà¹ˆ Workflow à¸—à¸³à¸‡à¸²à¸™
     write_status_json(
         alert_features,
         online_type_counts,
@@ -2749,11 +2823,11 @@ def main() -> None:
 
     print()
     print("=" * 80)
-    print("สรุปผลการตรวจสอบ")
+    print("à¸ªà¸£à¸¸à¸›à¸œà¸¥à¸à¸²à¸£à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸š")
     print("=" * 80)
 
     print(
-        "สถานี ONLINE ทั้งหมด:",
+        "à¸ªà¸–à¸²à¸™à¸µ ONLINE à¸—à¸±à¹‰à¸‡à¸«à¸¡à¸”:",
         online_type_counts.get(
             "total",
             0,
@@ -2761,12 +2835,12 @@ def main() -> None:
     )
 
     print(
-        "สถานี OFFLINE ทั้งหมด:",
+        "à¸ªà¸–à¸²à¸™à¸µ OFFLINE à¸—à¸±à¹‰à¸‡à¸«à¸¡à¸”:",
         online_type_counts.get("offline", 0),
     )
 
     print(
-        "สถานีทั้งหมด:",
+        "à¸ªà¸–à¸²à¸™à¸µà¸—à¸±à¹‰à¸‡à¸«à¸¡à¸”:",
         online_type_counts.get("all_total", 0),
     )
 
@@ -2795,7 +2869,7 @@ def main() -> None:
     )
 
     print(
-        "ประเภทอื่น ONLINE:",
+        "à¸›à¸£à¸°à¹€à¸ à¸—à¸­à¸·à¹ˆà¸™ ONLINE:",
         online_type_counts.get(
             "Other",
             0,
@@ -2803,33 +2877,33 @@ def main() -> None:
     )
 
     print(
-        "ONLINE แต่ข้อมูลไม่ใช่วันนี้:",
+        "ONLINE à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¹„à¸¡à¹ˆà¹ƒà¸Šà¹ˆà¸§à¸±à¸™à¸™à¸µà¹‰:",
         stale_online_count,
     )
 
     print(
-        "สถานี ONLINE ที่นำมาตรวจ Alarm:",
+        "à¸ªà¸–à¸²à¸™à¸µ ONLINE à¸—à¸µà¹ˆà¸™à¸³à¸¡à¸²à¸•à¸£à¸§à¸ˆ Alarm:",
         len(current_features),
     )
 
     print(
-        "สถานีที่มีค่าพารามิเตอร์เกินมาตรฐานของวันนี้:",
+        "à¸ªà¸–à¸²à¸™à¸µà¸—à¸µà¹ˆà¸¡à¸µà¸„à¹ˆà¸²à¸žà¸²à¸£à¸²à¸¡à¸´à¹€à¸•à¸­à¸£à¹Œà¹€à¸à¸´à¸™à¸¡à¸²à¸•à¸£à¸à¸²à¸™à¸‚à¸­à¸‡à¸§à¸±à¸™à¸™à¸µà¹‰:",
         len(alert_features),
     )
 
     print(
-        "LastUpdate ล่าสุด:",
+        "LastUpdate à¸¥à¹ˆà¸²à¸ªà¸¸à¸”:",
         latest_online_update.isoformat()
         if latest_online_update is not None
-        else "ไม่พบ",
+        else "à¹„à¸¡à¹ˆà¸žà¸š",
     )
 
     print("=" * 80)
 
-    # ส่งรายงานทุกครั้ง โดย Alarm ใช้เฉพาะสถานี ONLINE ที่มี LastUpdate วันนี้
+    # à¸ªà¹ˆà¸‡à¸£à¸²à¸¢à¸‡à¸²à¸™à¸—à¸¸à¸à¸„à¸£à¸±à¹‰à¸‡ à¹‚à¸”à¸¢ Alarm à¹ƒà¸Šà¹‰à¹€à¸‰à¸žà¸²à¸°à¸ªà¸–à¸²à¸™à¸µ ONLINE à¸—à¸µà¹ˆà¸¡à¸µ LastUpdate à¸§à¸±à¸™à¸™à¸µà¹‰
     if alert_features:
         print(
-            "ส่งการ์ดสรุปสถานการณ์"
+            "à¸ªà¹ˆà¸‡à¸à¸²à¸£à¹Œà¸”à¸ªà¸£à¸¸à¸›à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œ"
         )
 
         summary_bubble = (
@@ -2841,9 +2915,9 @@ def main() -> None:
 
         send_line_flex(
             (
-                "สรุปสถานการณ์ e-Monitoring "
-                f"พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน "
-                f"{len(alert_features)} สถานี"
+                "à¸ªà¸£à¸¸à¸›à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œ e-Monitoring "
+                f"à¸žà¸šà¸„à¹ˆà¸²à¸žà¸²à¸£à¸²à¸¡à¸´à¹€à¸•à¸­à¸£à¹Œà¸—à¸µà¹ˆà¹€à¸à¸´à¸™à¸„à¹ˆà¸²à¸¡à¸²à¸•à¸£à¸à¸²à¸™ "
+                f"{len(alert_features)} à¸ªà¸–à¸²à¸™à¸µ"
             ),
             summary_bubble,
         )
@@ -2851,7 +2925,7 @@ def main() -> None:
         time.sleep(1)
 
         print(
-            "ส่งการ์ดรายละเอียดสถานี"
+            "à¸ªà¹ˆà¸‡à¸à¸²à¸£à¹Œà¸”à¸£à¸²à¸¢à¸¥à¸°à¹€à¸­à¸µà¸¢à¸”à¸ªà¸–à¸²à¸™à¸µ"
         )
 
         send_alert_detail_carousels(
@@ -2859,20 +2933,20 @@ def main() -> None:
         )
 
     elif current_features:
-        print("ไม่พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน ส่งการ์ดสรุปสถานการณ์")
+        print("à¹„à¸¡à¹ˆà¸žà¸šà¸„à¹ˆà¸²à¸žà¸²à¸£à¸²à¸¡à¸´à¹€à¸•à¸­à¸£à¹Œà¸—à¸µà¹ˆà¹€à¸à¸´à¸™à¸„à¹ˆà¸²à¸¡à¸²à¸•à¸£à¸à¸²à¸™ à¸ªà¹ˆà¸‡à¸à¸²à¸£à¹Œà¸”à¸ªà¸£à¸¸à¸›à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œ")
         send_line_flex(
-            "e-Monitoring: ไม่พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน",
+            "e-Monitoring: à¹„à¸¡à¹ˆà¸žà¸šà¸„à¹ˆà¸²à¸žà¸²à¸£à¸²à¸¡à¸´à¹€à¸•à¸­à¸£à¹Œà¸—à¸µà¹ˆà¹€à¸à¸´à¸™à¸„à¹ˆà¸²à¸¡à¸²à¸•à¸£à¸à¸²à¸™",
             build_normal_summary_bubble(online_type_counts),
         )
 
     else:
-        print("ยังไม่มีสถานี ONLINE ที่อัปเดตข้อมูลในวันนี้ ส่งการ์ดสรุปสถานการณ์")
+        print("à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¸¡à¸µà¸ªà¸–à¸²à¸™à¸µ ONLINE à¸—à¸µà¹ˆà¸­à¸±à¸›à¹€à¸”à¸•à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¹ƒà¸™à¸§à¸±à¸™à¸™à¸µà¹‰ à¸ªà¹ˆà¸‡à¸à¸²à¸£à¹Œà¸”à¸ªà¸£à¸¸à¸›à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œ")
         send_line_flex(
-            "e-Monitoring: ไม่พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน",
+            "e-Monitoring: à¹„à¸¡à¹ˆà¸žà¸šà¸„à¹ˆà¸²à¸žà¸²à¸£à¸²à¸¡à¸´à¹€à¸•à¸­à¸£à¹Œà¸—à¸µà¹ˆà¹€à¸à¸´à¸™à¸„à¹ˆà¸²à¸¡à¸²à¸•à¸£à¸à¸²à¸™",
             build_no_current_data_summary_bubble(online_type_counts),
         )
 
-    print("ส่งรายงานประจำรอบเข้า LINE เรียบร้อย")
+    print("à¸ªà¹ˆà¸‡à¸£à¸²à¸¢à¸‡à¸²à¸™à¸›à¸£à¸°à¸ˆà¸³à¸£à¸­à¸šà¹€à¸‚à¹‰à¸² LINE à¹€à¸£à¸µà¸¢à¸šà¸£à¹‰à¸­à¸¢")
 
 
 if __name__ == "__main__":
