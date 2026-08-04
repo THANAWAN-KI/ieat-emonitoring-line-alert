@@ -61,13 +61,22 @@ ASSET_BASE_URL = (
     "ieat-emonitoring-line-alert"
 )
 
+# เก็บไอคอนทั้งหมดไว้ในโฟลเดอร์ assets ของ GitHub Pages
+# หากชื่อไฟล์จริงต่างจากนี้ ให้แก้เฉพาะค่าด้านล่าง หรือกำหนดค่า
+# LINE_ICON_<ชื่อ>_URL ใน GitHub Secrets ได้ทันที
+ICON_ASSET_BASE_URL = os.getenv(
+    "LINE_ICON_ASSET_BASE_URL",
+    f"{ASSET_BASE_URL}/assets",
+).rstrip("/")
+
 # ชื่อไฟล์บน GitHub Pages ต้องตรงตัวพิมพ์เล็ก-ใหญ่ทุกตัว
 IEAT_LOGO_URL = os.getenv(
     "IEAT_LOGO_URL",
     f"{ASSET_BASE_URL}/ieat_logo.png.PNG",
 ).strip()
 
-# ใช้ Unicode icon เพื่อให้แสดงได้เสมอ แม้ไฟล์รูปภายนอกมีปัญหา
+# ใช้ Unicode ในข้อความสั้น ๆ และใช้รูปไอคอนจาก assets สำหรับ Badge
+# บนการ์ด เพื่อให้ภาพรวมเรียบหรูและดูเป็นระบบเดียวกัน
 ICON_ALERT = "⚠️"
 ICON_NORMAL = "✅"
 ICON_WATCH = "⏳"
@@ -79,48 +88,88 @@ ICON_WATER = "💧"
 ICON_CEMS = "🏭"
 ICON_OTHER = "●"
 
+ICON_ASSET_URLS = {
+    ICON_ALERT: os.getenv(
+        "LINE_ICON_ALERT_URL",
+        f"{ICON_ASSET_BASE_URL}/alert.png",
+    ),
+    ICON_NORMAL: os.getenv(
+        "LINE_ICON_NORMAL_URL",
+        f"{ICON_ASSET_BASE_URL}/normal.png",
+    ),
+    ICON_WATCH: os.getenv(
+        "LINE_ICON_WATCH_URL",
+        f"{ICON_ASSET_BASE_URL}/watch.png",
+    ),
+    ICON_STATION: os.getenv(
+        "LINE_ICON_STATION_URL",
+        f"{ICON_ASSET_BASE_URL}/station.png",
+    ),
+    ICON_DASHBOARD: os.getenv(
+        "LINE_ICON_DASHBOARD_URL",
+        f"{ICON_ASSET_BASE_URL}/dashboard.png",
+    ),
+    ICON_LOCATION: os.getenv(
+        "LINE_ICON_LOCATION_URL",
+        f"{ICON_ASSET_BASE_URL}/location.png",
+    ),
+    ICON_AIR: os.getenv(
+        "LINE_ICON_AIR_URL",
+        f"{ICON_ASSET_BASE_URL}/air.png",
+    ),
+    ICON_WATER: os.getenv(
+        "LINE_ICON_WATER_URL",
+        f"{ICON_ASSET_BASE_URL}/water.png",
+    ),
+    ICON_CEMS: os.getenv(
+        "LINE_ICON_CEMS_URL",
+        f"{ICON_ASSET_BASE_URL}/cems.png",
+    ),
+}
+
 
 # ============================================================
 # 3. ธีมสี Dashboard e-Monitoring กนอ.
 # ============================================================
 
-# สีม่วงหลักจากหัวตารางและหัวข้อใน Dashboard
-COLOR_PRIMARY = "#652780"
-COLOR_PRIMARY_DARK = "#4F176B"
-COLOR_PRIMARY_SOFT = "#E7D8EB"
-COLOR_PRIMARY_PALE = "#F5EFF7"
-COLOR_PRIMARY_BORDER = "#C8B2D2"
+# โทน Government Dashboard / Emergency Command Center ของ กนอ.
+# ม่วงเข้มเป็นสีหลักของรายงาน, สีแดง/เหลืองใช้เฉพาะระดับสถานการณ์
+COLOR_PRIMARY = "#4E2A84"
+COLOR_PRIMARY_DARK = "#35205A"
+COLOR_PRIMARY_SOFT = "#EEE8F5"
+COLOR_PRIMARY_PALE = "#F8F6FB"
+COLOR_PRIMARY_BORDER = "#CBBFE0"
 
 # สีแจ้งเตือนระดับเร่งด่วน
-COLOR_RED = "#D84B58"
-COLOR_RED_DARK = "#A92F39"
-COLOR_RED_SOFT = "#FDEFF1"
+COLOR_RED = "#B4232D"
+COLOR_RED_DARK = "#8F1C25"
+COLOR_RED_SOFT = "#FBECEE"
 
 # สีแจ้งเตือนระดับเฝ้าระวัง
-COLOR_YELLOW = "#D7A51F"
-COLOR_YELLOW_DARK = "#936D08"
-COLOR_YELLOW_SOFT = "#FFF7DF"
+COLOR_YELLOW = "#A86F00"
+COLOR_YELLOW_DARK = "#795000"
+COLOR_YELLOW_SOFT = "#FFF6DF"
 
 # สีเขียว AQMs / ONLINE ตาม Dashboard
-COLOR_GREEN = "#79C943"
-COLOR_GREEN_DARK = "#4F8E2B"
-COLOR_GREEN_SOFT = "#EFF8E8"
-COLOR_GREEN_BORDER = "#A9D78D"
+COLOR_GREEN = "#007A5A"
+COLOR_GREEN_DARK = "#005C44"
+COLOR_GREEN_SOFT = "#E8F5F0"
+COLOR_GREEN_BORDER = "#A9D7C8"
 
 # สีฟ้า CEMs ตาม Dashboard
-COLOR_BLUE = "#2589C9"
-COLOR_BLUE_DARK = "#12689F"
-COLOR_BLUE_SOFT = "#E8F4FB"
-COLOR_BLUE_BORDER = "#9BC9E5"
+COLOR_BLUE = "#176B9F"
+COLOR_BLUE_DARK = "#10527B"
+COLOR_BLUE_SOFT = "#E9F3F9"
+COLOR_BLUE_BORDER = "#B2D3E6"
 
-COLOR_TEXT = "#33263A"
-COLOR_MUTED = "#736879"
-COLOR_BORDER = "#D9CFDD"
-COLOR_DIVIDER = "#E8E0EA"
-COLOR_BACKGROUND = "#F3F0F5"
-COLOR_SURFACE = "#FCFAFD"
-COLOR_DEPTH = "#DDD3E1"
-COLOR_DEPTH_DARK = "#C8B9CF"
+COLOR_TEXT = "#25212B"
+COLOR_MUTED = "#6B6473"
+COLOR_BORDER = "#DDD7E4"
+COLOR_DIVIDER = "#EAE5EF"
+COLOR_BACKGROUND = "#F6F4F8"
+COLOR_SURFACE = "#FFFFFF"
+COLOR_DEPTH = "#ECE8F0"
+COLOR_DEPTH_DARK = "#DCD5E5"
 COLOR_WHITE = "#FFFFFF"
 
 
@@ -1345,26 +1394,40 @@ def icon_badge(
     border_color: str,
     size: str = "md",
 ) -> dict[str, Any]:
-    """ไอคอนทรงสี่เหลี่ยมมน ไม่ต้องพึ่งไฟล์รูปภายนอก"""
+    """ตราสัญลักษณ์จาก assets ในรูปแบบทางการและเรียบง่าย"""
+    icon_url = ICON_ASSET_URLS.get(icon, "")
+
+    icon_component: dict[str, Any]
+    if icon_url:
+        icon_component = {
+            "type": "image",
+            "url": icon_url,
+            "size": "26px",
+            "aspectMode": "fit",
+            "aspectRatio": "1:1",
+        }
+    else:
+        # สำรองไว้เฉพาะกรณีเพิ่มสัญลักษณ์ใหม่ที่ยังไม่มีไฟล์ใน assets
+        icon_component = flex_text(
+            icon,
+            size=size,
+            align="center",
+            flex=0,
+        )
+
     return {
         "type": "box",
         "layout": "vertical",
-        "width": "42px",
-        "height": "42px",
-        "backgroundColor": background_color,
+        "width": "40px",
+        "height": "40px",
+        "backgroundColor": COLOR_WHITE,
         "borderColor": border_color,
         "borderWidth": "1px",
-        "cornerRadius": "12px",
+        "cornerRadius": "4px",
+        "paddingAll": "8px",
         "justifyContent": "center",
         "alignItems": "center",
-        "contents": [
-            flex_text(
-                icon,
-                size=size,
-                align="center",
-                flex=0,
-            ),
-        ],
+        "contents": [icon_component],
     }
 
 
@@ -1374,14 +1437,14 @@ def depth_panel(
     border_color: str = COLOR_BORDER,
     shadow_color: str = COLOR_DEPTH,
     padding: str = "11px",
-    corner_radius: str = "14px",
+    corner_radius: str = "6px",
     layout: str = "vertical",
     spacing: str | None = None,
     flex: int | None = None,
     margin: str | None = None,
     align_items: str | None = None,
 ) -> dict[str, Any]:
-    """สร้างกรอบซ้อนด้านล่างเล็กน้อย เพื่อให้การ์ดดูมีมิติใน LINE"""
+    """กรอบข้อมูลแบบเอกสารทางการ มีชั้นฐานบาง ๆ เพื่อแยกข้อมูลชัดเจน"""
     inner: dict[str, Any] = {
         "type": "box",
         "layout": layout,
@@ -1402,7 +1465,7 @@ def depth_panel(
     panel: dict[str, Any] = {
         "type": "box",
         "layout": "vertical",
-        "paddingBottom": "4px",
+        "paddingBottom": "1px",
         "backgroundColor": shadow_color,
         "cornerRadius": corner_radius,
         "contents": [inner],
@@ -1466,7 +1529,7 @@ def status_banner(
         background_color=background_color,
         border_color=border_color,
         shadow_color=shadow_color,
-        padding="11px",
+        padding="12px",
         layout="horizontal",
         align_items="center",
     )
@@ -1484,7 +1547,7 @@ def data_timestamp_box(
     return depth_panel(
         [
             flex_text(
-                "🕒 ข้อมูลล่าสุดจาก e-Monitoring",
+                "ข้อมูลล่าสุดจาก e-Monitoring",
                 size="xs",
                 color=COLOR_MUTED,
                 weight="bold",
@@ -1496,7 +1559,7 @@ def data_timestamp_box(
                 weight="bold",
             ),
             flex_text(
-                f"ส่งรายงานเมื่อ {report_time_text()}",
+                f"จัดทำรายงานเมื่อ {report_time_text()}",
                 size="xxs",
                 color=COLOR_MUTED,
             ),
@@ -1505,7 +1568,7 @@ def data_timestamp_box(
         border_color=COLOR_PRIMARY_BORDER,
         shadow_color=COLOR_DEPTH,
         padding="9px",
-        corner_radius="10px",
+        corner_radius="5px",
         spacing="xs",
     )
 
@@ -1555,7 +1618,7 @@ def card_header(
             {
                 "type": "box",
                 "layout": "vertical",
-                "height": "7px",
+        "height": "5px",
                 "backgroundColor": COLOR_PRIMARY_DARK,
                 "contents": [
                     {
@@ -1649,7 +1712,7 @@ def summary_number_box(
         border_color=border_color,
         shadow_color=COLOR_DEPTH,
         padding="10px",
-        corner_radius="12px",
+        corner_radius="6px",
         flex=1,
     )
 
@@ -1667,7 +1730,7 @@ def station_type_count_box(
         "backgroundColor": COLOR_WHITE,
         "borderColor": COLOR_BORDER,
         "borderWidth": "1px",
-        "cornerRadius": "8px",
+        "cornerRadius": "5px",
         "contents": [
             flex_text(
                 station_type,
@@ -1743,7 +1806,7 @@ def online_station_summary_box(
             "cornerRadius": "8px",
             "contents": [
                 flex_text(
-                    f"{type_icons[type_key]} {type_label}",
+                type_label,
                     size="sm",
                     weight="bold",
                     color=type_colors[type_key],
@@ -1778,7 +1841,7 @@ def online_station_summary_box(
     return depth_panel(
         [
             flex_text(
-                f"{ICON_STATION} สถานีตรวจวัด",
+                "สรุปสถานะสถานีตรวจวัด",
                 size="md",
                 weight="bold",
                 color=COLOR_PRIMARY_DARK,
@@ -1993,7 +2056,7 @@ def build_alert_summary_bubble(
                 depth_panel(
                     [
                         flex_text(
-                            "⚠️ พารามิเตอร์ที่เกินค่ามาตรฐาน",
+                            "พารามิเตอร์ที่เกินค่ามาตรฐาน",
                             size="xs",
                             weight="bold",
                             color=COLOR_MUTED,
@@ -2033,7 +2096,7 @@ def build_alert_summary_bubble(
             "borderWidth": "1px",
             "contents": [
                 flex_button(
-                    f"{ICON_DASHBOARD} เปิดระบบ GIS",
+                    "เปิดระบบ GIS",
                     ARCGIS_DASHBOARD_URL,
                     primary=True,
                 ),
@@ -2093,7 +2156,7 @@ def build_normal_summary_bubble(
             "borderWidth": "1px",
             "contents": [
                 flex_button(
-                    f"{ICON_DASHBOARD} เปิดระบบ GIS",
+                    "เปิดระบบ GIS",
                     ARCGIS_DASHBOARD_URL,
                     primary=True,
                 ),
@@ -2142,7 +2205,7 @@ def build_no_current_data_summary_bubble(
             "borderWidth": "1px",
             "contents": [
                 flex_button(
-                    f"{ICON_DASHBOARD} เปิดระบบ GIS",
+                    "เปิดระบบ GIS",
                     ARCGIS_DASHBOARD_URL,
                     primary=True,
                 ),
@@ -2179,7 +2242,7 @@ def alarm_entry_box(
                 "layout": "horizontal",
                 "contents": [
                     flex_text(
-                        f"⚠️ {parameter_name}",
+                        parameter_name,
                         size="md",
                         weight="bold",
                         color=COLOR_RED_DARK,
@@ -2345,7 +2408,7 @@ def build_alert_detail_bubble(
                 depth_panel(
                     [
                         flex_text(
-                            "📶 สถานะสถานี",
+                            "สถานะสถานี",
                             size="xs",
                             color=COLOR_MUTED,
                         ),
@@ -2366,7 +2429,7 @@ def build_alert_detail_bubble(
                 depth_panel(
                     [
                         flex_text(
-                            "🔎 ประเภทการตรวจวัด",
+                            "ประเภทการตรวจวัด",
                             size="xs",
                             color=COLOR_MUTED,
                         ),
@@ -2390,7 +2453,7 @@ def build_alert_detail_bubble(
         depth_panel(
             [
                 flex_text(
-                    "⚠️ ค่าพารามิเตอร์ที่เกินค่ามาตรฐาน",
+                    "ค่าพารามิเตอร์ที่เกินค่ามาตรฐาน",
                     size="sm",
                     weight="bold",
                     color=COLOR_RED_DARK,
@@ -2435,7 +2498,7 @@ def build_alert_detail_bubble(
     body_contents.append(depth_panel(
         [
             flex_text(
-                "📝 สาเหตุ / การติดตามผล",
+                "สาเหตุ / การติดตามผล",
                 size="sm",
                 weight="bold",
                 color=COLOR_YELLOW_DARK,
@@ -2483,12 +2546,12 @@ def build_alert_detail_bubble(
             "borderWidth": "1px",
             "contents": [
                 flex_button(
-                    f"{ICON_LOCATION} ตำแหน่งสถานี",
+                    "ตำแหน่งสถานี",
                     station_map_url(feature),
                     primary=True,
                 ),
                 flex_button(
-                    f"{ICON_DASHBOARD} ระบบ GIS",
+                    "ระบบ GIS",
                     ARCGIS_DASHBOARD_URL,
                 ),
             ],
