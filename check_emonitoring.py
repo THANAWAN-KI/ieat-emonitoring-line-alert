@@ -132,35 +132,35 @@ ICON_ASSET_URLS = {
 # 3. ธีมสี Dashboard e-Monitoring กนอ.
 # ============================================================
 
-# ธีมเรียบหรู: ม่วงเข้มแบบองค์กร + พื้นขาวอมเทา
-# ใช้สีสถานการณ์เฉพาะจุดสำคัญ เพื่อให้อ่านง่ายบน LINE
-COLOR_PRIMARY = "#5B3B8C"
-COLOR_PRIMARY_DARK = "#35214F"
-COLOR_PRIMARY_SOFT = "#F0ECF7"
-COLOR_PRIMARY_PALE = "#FAF9FC"
-COLOR_PRIMARY_BORDER = "#D8CEE8"
+# ธีมตามสีองค์กรที่กำหนด: ม่วง #52057F และเขียว #598C14
+# สีระดับพารามิเตอร์: เกินค่ามาตรฐาน / เฝ้าระวัง / ติดตามสถานการณ์
+COLOR_PRIMARY = "#52057F"
+COLOR_PRIMARY_DARK = "#3F0661"
+COLOR_PRIMARY_SOFT = "#F3EDF7"
+COLOR_PRIMARY_PALE = "#FBF8FC"
+COLOR_PRIMARY_BORDER = "#DCCBE8"
 
 # สีแจ้งเตือนระดับเร่งด่วน
-COLOR_RED = "#C43D4B"
-COLOR_RED_DARK = "#962A35"
-COLOR_RED_SOFT = "#FDF0F1"
+COLOR_RED = "#F00A36"
+COLOR_RED_DARK = "#BE062A"
+COLOR_RED_SOFT = "#FFF0F3"
 
 # สีแจ้งเตือนระดับเฝ้าระวัง
-COLOR_YELLOW = "#B7791F"
-COLOR_YELLOW_DARK = "#80510D"
-COLOR_YELLOW_SOFT = "#FFF8E8"
+COLOR_YELLOW = "#FFC719"
+COLOR_YELLOW_DARK = "#FF6908"
+COLOR_YELLOW_SOFT = "#FFF9DD"
 
 # สีเขียว AQMs / ONLINE ตาม Dashboard
-COLOR_GREEN = "#23806A"
-COLOR_GREEN_DARK = "#146651"
-COLOR_GREEN_SOFT = "#EDF8F4"
-COLOR_GREEN_BORDER = "#BDE3D6"
+COLOR_GREEN = "#598C14"
+COLOR_GREEN_DARK = "#426A0F"
+COLOR_GREEN_SOFT = "#F1F7E8"
+COLOR_GREEN_BORDER = "#C9DFA7"
 
 # สีฟ้า CEMs ตาม Dashboard
-COLOR_BLUE = "#3577A8"
-COLOR_BLUE_DARK = "#245D88"
-COLOR_BLUE_SOFT = "#EEF6FB"
-COLOR_BLUE_BORDER = "#C7DFEF"
+COLOR_BLUE = "#4A8594"
+COLOR_BLUE_DARK = "#336775"
+COLOR_BLUE_SOFT = "#EEF7F8"
+COLOR_BLUE_BORDER = "#C3DDE2"
 
 COLOR_TEXT = "#2D2933"
 COLOR_MUTED = "#766F7C"
@@ -2078,6 +2078,40 @@ def build_alert_summary_bubble(
                     online_type_counts
                 ),
 
+                flex_text(
+                    "ระดับสถานการณ์",
+                    size="md",
+                    weight="bold",
+                    color=COLOR_TEXT,
+                ),
+                severity_box(
+                    "เกินค่ามาตรฐาน",
+                    "มีรายการแจ้งเตือนตั้งแต่ 3 รายการขึ้นไป",
+                    summary["urgent_count"],
+                    ICON_ALERT,
+                    COLOR_RED,
+                    COLOR_RED_SOFT,
+                    COLOR_RED_DARK,
+                ),
+                severity_box(
+                    "เฝ้าระวัง",
+                    "มีรายการแจ้งเตือน 2 รายการ",
+                    summary["watch_count"],
+                    ICON_WATCH,
+                    COLOR_YELLOW,
+                    COLOR_YELLOW_SOFT,
+                    COLOR_YELLOW_DARK,
+                ),
+                severity_box(
+                    "ติดตามสถานการณ์",
+                    "มีรายการแจ้งเตือน 1 รายการ",
+                    summary["follow_count"],
+                    ICON_NORMAL,
+                    COLOR_GREEN,
+                    COLOR_GREEN_SOFT,
+                    COLOR_GREEN_DARK,
+                ),
+
                 data_timestamp_box(latest_update),
             ],
         },
@@ -2315,12 +2349,12 @@ def build_alert_detail_bubble(
     )
 
     severity_text = {
-        "urgent": "ระดับเร่งด่วน",
-        "watch": "ระดับเฝ้าระวัง",
-        "follow": "ระดับติดตามสถานการณ์",
+        "urgent": "เกินค่ามาตรฐาน",
+        "watch": "เฝ้าระวัง",
+        "follow": "ติดตามสถานการณ์",
     }.get(
         severity,
-        "ระดับติดตามสถานการณ์",
+        "ติดตามสถานการณ์",
     )
 
     severity_color = {
@@ -2518,7 +2552,7 @@ def build_alert_detail_bubble(
         "size": "giga",
 
         "header": card_header(
-            severity_text,
+            f"{station_type} · {severity_text}",
             severity_color,
         ),
 
@@ -2533,8 +2567,7 @@ def build_alert_detail_bubble(
 
         "footer": {
             "type": "box",
-            "layout": "horizontal",
-            "spacing": "xs",
+            "layout": "vertical",
             "paddingAll": "8px",
             "backgroundColor": COLOR_PRIMARY_PALE,
             "borderColor": COLOR_PRIMARY_BORDER,
@@ -2544,10 +2577,6 @@ def build_alert_detail_bubble(
                     "ตำแหน่งสถานี",
                     station_map_url(feature),
                     primary=True,
-                ),
-                flex_button(
-                    "ระบบ GIS",
-                    ARCGIS_DASHBOARD_URL,
                 ),
             ],
         },
@@ -2716,64 +2745,64 @@ def build_carousel_batches(
 def send_alert_detail_carousels(
     alert_features: list[dict[str, Any]],
 ) -> None:
+    """ส่งรายละเอียดแยกตามประเภท AQMs, WQMs, CEMs ไม่ปะปนกันใน Carousel เดียว"""
     if not alert_features:
         print(
             "ไม่มีรายละเอียดสถานีที่ต้องส่ง"
         )
         return
 
-    batches = build_carousel_batches(
-        alert_features
-    )
+    features_by_type: dict[str, list[dict[str, Any]]] = {
+        "AQMs": [],
+        "WQMs": [],
+        "CEMs": [],
+        "อื่น ๆ": [],
+    }
 
-    total_alerts = len(
-        alert_features
-    )
-
-    total_batches = len(
-        batches
-    )
-
-    for batch_number, bubbles in enumerate(
-        batches,
-        start=1,
-    ):
-        carousel = {
-            "type": "carousel",
-            "contents": bubbles,
-        }
-
-        carousel_size = carousel_json_size_bytes(
-            bubbles
+    for feature in alert_features:
+        station_type = normalize_station_type(
+            feature.get("properties", {})
         )
-
-        alt_text = (
-            "รายละเอียดแจ้งเตือน "
-            "e-Monitoring "
-            f"{total_alerts} สถานี"
+        group_name = (
+            station_type
+            if station_type in {"AQMs", "WQMs", "CEMs"}
+            else "อื่น ๆ"
         )
+        features_by_type[group_name].append(feature)
 
-        if total_batches > 1:
-            alt_text += (
-                f" ชุดที่ {batch_number}/"
-                f"{total_batches}"
+    # 1 ประเภท = 1 ชุด Carousel (หากเกินข้อจำกัด LINE จะแบ่งเป็นชุดย่อย)
+    for group_name in ("AQMs", "WQMs", "CEMs", "อื่น ๆ"):
+        group_features = features_by_type[group_name]
+        if not group_features:
+            continue
+
+        batches = build_carousel_batches(group_features)
+        total_batches = len(batches)
+
+        for batch_number, bubbles in enumerate(batches, start=1):
+            carousel = {
+                "type": "carousel",
+                "contents": bubbles,
+            }
+            carousel_size = carousel_json_size_bytes(bubbles)
+
+            alt_text = (
+                f"รายละเอียดแจ้งเตือน {group_name} "
+                f"{len(group_features)} สถานี"
             )
+            if total_batches > 1:
+                alt_text += f" ชุดที่ {batch_number}/{total_batches}"
 
-        print(
-            "กำลังส่งรายละเอียดสถานี "
-            f"ชุดที่ {batch_number}/"
-            f"{total_batches} "
-            f"จำนวน {len(bubbles)} สถานี "
-            f"ขนาด {carousel_size:,} bytes"
-        )
+            print(
+                f"กำลังส่งรายละเอียด {group_name} "
+                f"ชุดที่ {batch_number}/{total_batches} "
+                f"จำนวน {len(bubbles)} สถานี "
+                f"ขนาด {carousel_size:,} bytes"
+            )
+            send_line_flex(alt_text, carousel)
 
-        send_line_flex(
-            alt_text,
-            carousel,
-        )
-
-        if batch_number < total_batches:
-            time.sleep(1)
+            if batch_number < total_batches:
+                time.sleep(1)
 
 
 # ============================================================
@@ -2797,9 +2826,9 @@ def write_status_json(
     follow_count = 0
 
     severity_texts = {
-        "urgent": "ระดับเร่งด่วน",
-        "watch": "ระดับเฝ้าระวัง",
-        "follow": "ระดับติดตามสถานการณ์",
+        "urgent": "เกินค่ามาตรฐาน",
+        "watch": "เฝ้าระวัง",
+        "follow": "ติดตามสถานการณ์",
     }
 
     for feature in alert_features:
@@ -2842,7 +2871,7 @@ def write_status_json(
             "detected_at": ", ".join(detected_times) or "-",
             "severity": severity_texts.get(
                 severity,
-                "ระดับติดตามสถานการณ์",
+                "ติดตามสถานการณ์",
             ),
             "map_url": station_map_url(feature),
             "gis_url": ARCGIS_DASHBOARD_URL,
