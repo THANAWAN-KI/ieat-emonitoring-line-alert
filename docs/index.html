@@ -427,47 +427,46 @@
             opacity: 0.85;
         }
 
-        /* รูปแบบ Dashboard: อ่านภาพรวมก่อน แล้วค่อยดูรายละเอียด */
+        /* ธีมเดียวกับหน้าติดต่อเจ้าหน้าที่ */
         body {
-            background: linear-gradient(180deg, #ece5f4 0, #f6f8f2 38%, #edf1e8 100%);
+            background: #e9e3ec;
         }
 
         .page {
-            background: rgba(255, 255, 255, 0.84);
-            box-shadow: 0 0 32px rgba(82, 5, 127, 0.10);
+            background: #f8f6f9;
+            box-shadow: none;
         }
 
         .header {
-            margin: 12px 12px 0;
-            padding: 11px 14px;
+            margin: 0;
+            padding: 18px;
             background: #ffffff;
-            border-bottom-color: #598c14;
-            border: 1px solid #e4e0e8;
-            border-bottom: 4px solid #598c14;
-            border-radius: 14px;
+            border: 0;
+            border-bottom: 4px solid #6a2c91;
+            border-radius: 0;
         }
 
         .logo {
-            width: 54px;
-            height: 54px;
-            padding: 4px;
-            background: #ffffff;
-            border-radius: 16px;
+            width: 72px;
+            height: 72px;
+            padding: 0;
+            background: transparent;
+            border-radius: 0;
         }
 
         .header-title {
-            color: #52057f;
-            font-size: 22px;
+            color: #552076;
+            font-size: 23px;
         }
 
         .header-subtitle {
-            color: #52057f;
-            margin-top: 2px;
-            font-size: 13px;
+            color: #6f6874;
+            margin-top: 5px;
+            font-size: 14px;
         }
 
         .content {
-            padding: 22px 18px 26px;
+            padding: 16px;
         }
 
         .status-card,
@@ -476,7 +475,7 @@
         .summary-card,
         .severity-card,
         .station-card {
-            box-shadow: 0 5px 14px rgba(45, 41, 51, 0.06);
+            box-shadow: 0 2px 8px rgba(85, 32, 118, 0.08);
         }
 
         .status-card.alert {
@@ -491,31 +490,32 @@
             display: flex;
             align-items: center;
             gap: 9px;
-            font-size: 19px;
+            font-size: 20px;
             font-weight: 750;
         }
 
         .section-title::before {
-            width: 5px;
-            height: 22px;
-            background: #598c14;
-            border-radius: 5px;
+            width: 4px;
+            height: 24px;
+            background: #6a2c91;
+            border-radius: 4px;
             content: "";
         }
 
         .overview-title {
-            padding-bottom: 0;
-            border-bottom: 0;
-            font-size: 22px;
-            color: #2d2933;
+            padding-bottom: 10px;
+            color: #552076;
+            border-bottom: 2px solid #d8cdd9;
+            font-size: 20px;
         }
 
         .overview-title::before {
-            background: #598c14;
+            display: none;
         }
 
         .online-total {
-            border-left: 5px solid #52057f;
+            border-color: #d8cdd9;
+            border-left: 4px solid #6a2c91;
         }
 
         .station-card.watch {
@@ -547,14 +547,56 @@
             background: #f1f7e8;
         }
 
+        .status-card,
+        .online-total,
+        .type-card,
+        .summary-card,
+        .severity-card,
+        .station-card {
+            border-color: #d8cdd9;
+        }
+
+        .station-card {
+            border-left-color: #6a2c91;
+        }
+
+        .station-card.watch {
+            border-left-color: #ffc719;
+        }
+
+        .station-card.follow {
+            border-left-color: #598c14;
+        }
+
+        .station-name,
+        .online-total-value,
+        .summary-number {
+            color: #552076;
+        }
+
+        .section-title,
+        .overview-title {
+            color: #25212a;
+        }
+
+        .button,
+        .refresh-button {
+            background: #552076;
+        }
+
+        .button.secondary {
+            color: #552076;
+            background: #e8d9ec;
+        }
+
         @media (max-width: 480px) {
             .header {
                 padding: 14px;
             }
 
             .logo {
-                width: 62px;
-                height: 62px;
+                width: 60px;
+                height: 60px;
             }
 
             .header-title {
