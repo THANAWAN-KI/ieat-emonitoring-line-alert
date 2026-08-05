@@ -9,51 +9,41 @@
 <style>
 
 /* =========================================================
-   DESIGN SYSTEM
+   ENVIRONMENTAL INFOGRAPHIC DASHBOARD
 ========================================================= */
 
 :root{
+  --sky:#79C9F1;
+  --sky-light:#EAF8FF;
+  --blue:#218BC5;
+  --blue-dark:#07558D;
+  --blue-deep:#073D72;
 
-  --brand:#5B2D82;
-  --brand-dark:#43205F;
-  --brand-soft:#F5F0F8;
-  --brand-light:#EEE6F3;
+  --green:#1F9A67;
+  --green-dark:#08704C;
+  --green-light:#E9F7ED;
 
-  --green:#238B57;
-  --green-soft:#EEF8F2;
+  --lime:#79B94B;
+  --yellow:#F5BE32;
+  --orange:#F29A28;
+  --red:#D94B4B;
 
-  --red:#C9344A;
-  --red-soft:#FFF1F3;
-
-  --orange:#C97916;
-  --orange-soft:#FFF7EA;
-
-  --yellow:#A9790B;
-  --yellow-soft:#FFF9E9;
-
-  --blue:#317EA5;
-  --blue-soft:#EFF7FA;
-
-  --ink:#211C26;
-  --text:#39333F;
-  --muted:#817A86;
-  --soft:#AAA3AE;
-
-  --line:#EAE5ED;
+  --ink:#073C70;
+  --text:#21455D;
+  --muted:#71828E;
 
   --white:#FFFFFF;
-  --page:#F7F6F8;
+  --bg:#F3F8F4;
 
-  --radius-lg:22px;
-  --radius-md:16px;
-  --radius-sm:11px;
+  --border:#D9E8E8;
 
   --shadow:
-    0 10px 30px rgba(45,30,55,.055);
+    0 7px 20px rgba(35,83,93,.10);
 
-  --shadow-hover:
-    0 16px 38px rgba(45,30,55,.10);
+  --shadow-lg:
+    0 12px 30px rgba(35,83,93,.14);
 
+  --radius:22px;
 }
 
 
@@ -76,49 +66,25 @@ body{
 body{
 
   background:
-    radial-gradient(
-      circle at 90% 0%,
-      rgba(91,45,130,.045),
-      transparent 32%
-    ),
-    var(--page);
+    linear-gradient(
+      180deg,
+      #DDF4FF 0%,
+      #F5FBF7 25%,
+      #F3F8F4 100%
+    );
 
-  color:var(--ink);
+  color:var(--text);
 
   font-family:
     "Noto Sans Thai",
     "Prompt",
     "Sarabun",
     "Avenir Next",
-    "Helvetica Neue",
     Arial,
     sans-serif;
 
   -webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
-}
 
-button,
-a{
-  font:inherit;
-}
-
-button{
-  border:0;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-
-/* =========================================================
-   UTILITIES
-========================================================= */
-
-.hidden{
-  display:none !important;
 }
 
 
@@ -127,36 +93,175 @@ a{
 ========================================================= */
 
 .app{
-
   width:100%;
-  max-width:1240px;
+  max-width:1180px;
+  margin:auto;
+  padding:0 20px 30px;
+}
 
-  margin:0 auto;
+
+/* =========================================================
+   HERO SKY
+========================================================= */
+
+.hero{
+
+  position:relative;
+
+  min-height:360px;
+
+  margin:
+    0 -20px
+    20px;
 
   padding:
-    24px
-    30px
-    36px;
+    25px 45px
+    42px;
+
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      180deg,
+      #65BDEB 0%,
+      #A9E1F7 68%,
+      #D8F3F1 100%
+    );
+
+  border-radius:
+    0 0 38px 38px;
+
+}
+
+
+/* SUN */
+
+.sun{
+
+  position:absolute;
+
+  width:82px;
+  height:82px;
+
+  right:65px;
+  top:28px;
+
+  border-radius:50%;
+
+  background:#FFD447;
+
+  box-shadow:
+    0 0 0 13px rgba(255,212,71,.15),
+    0 0 40px rgba(255,220,90,.45);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:40px;
+
+}
+
+
+/* CLOUD */
+
+.cloud{
+  position:absolute;
+
+  width:110px;
+  height:30px;
+
+  background:white;
+
+  border-radius:40px;
+
+  opacity:.92;
+
+  box-shadow:
+    28px -15px 0 -4px white,
+    55px -8px 0 -3px white;
+}
+
+.cloud.one{
+  top:75px;
+  left:30px;
+}
+
+.cloud.two{
+  top:130px;
+  right:250px;
+  transform:scale(.75);
+}
+
+.cloud.three{
+  bottom:135px;
+  left:40%;
+  transform:scale(.55);
+}
+
+
+/* LANDSCAPE */
+
+.landscape{
+
+  position:absolute;
+
+  left:0;
+  right:0;
+  bottom:-5px;
+
+  height:145px;
+
+  background:
+
+    radial-gradient(
+      ellipse at 15% 85%,
+      #71B86A 0 17%,
+      transparent 18%
+    ),
+
+    radial-gradient(
+      ellipse at 35% 95%,
+      #4FAF68 0 25%,
+      transparent 26%
+    ),
+
+    radial-gradient(
+      ellipse at 65% 90%,
+      #65B866 0 27%,
+      transparent 28%
+    ),
+
+    radial-gradient(
+      ellipse at 88% 95%,
+      #4A9D5B 0 23%,
+      transparent 24%
+    ),
+
+    linear-gradient(
+      180deg,
+      #BFE8C2,
+      #73B967
+    );
+
+  border-radius:50% 50% 0 0 / 35% 35% 0 0;
 
 }
 
 
 /* =========================================================
-   TOP HEADER
+   TOP IDENTITY
 ========================================================= */
 
 .topbar{
+
+  position:relative;
+  z-index:5;
 
   display:flex;
 
   align-items:center;
   justify-content:space-between;
-
-  min-height:60px;
-
-  padding-bottom:18px;
-
-  border-bottom:1px solid rgba(91,45,130,.10);
 
 }
 
@@ -164,245 +269,158 @@ a{
 .identity{
 
   display:flex;
-
   align-items:center;
-
-  gap:14px;
-
-  min-width:0;
+  gap:13px;
 
 }
 
 
 .logo{
 
-  width:auto;
-  height:44px;
+  width:70px;
+  height:70px;
 
   object-fit:contain;
 
-}
+  background:#fff;
 
+  border-radius:50%;
 
-.identity-text{
-  min-width:0;
+  padding:5px;
+
+  box-shadow:
+    0 4px 15px rgba(0,0,0,.10);
+
 }
 
 
 .identity-title{
 
-  color:var(--brand);
+  color:#073D72;
 
-  font-size:15px;
-
-  line-height:1.2;
+  font-size:21px;
 
   font-weight:900;
 
-  letter-spacing:-.2px;
+  line-height:1.2;
 
 }
 
 
 .identity-subtitle{
 
-  margin-top:4px;
+  margin-top:3px;
 
-  color:var(--muted);
+  color:#1D5D7B;
 
-  font-size:9px;
+  font-size:11px;
 
-  line-height:1.4;
+  font-weight:700;
 
 }
 
 
 .refresh{
 
-  width:40px;
-  height:40px;
+  width:42px;
+  height:42px;
 
-  display:grid;
-  place-items:center;
+  border-radius:50%;
 
-  background:var(--white);
+  background:rgba(255,255,255,.88);
 
-  color:var(--brand);
+  color:var(--blue-dark);
 
-  border:1px solid var(--line);
+  box-shadow:0 4px 12px rgba(0,0,0,.10);
 
-  border-radius:12px;
-
-  box-shadow:
-    0 3px 10px rgba(40,25,50,.035);
+  font-size:22px;
 
   cursor:pointer;
 
-  font-size:20px;
-
-  transition:
-    .2s ease;
+  transition:.2s;
 
 }
-
 
 .refresh:hover{
-
-  background:var(--brand-soft);
-
-  border-color:#DCCDE6;
-
-  transform:rotate(25deg);
-
-}
-
-
-.refresh:active{
-
-  transform:scale(.94);
-
+  transform:rotate(180deg);
 }
 
 
 /* =========================================================
-   HERO
+   HERO TITLE
 ========================================================= */
 
-.hero{
+.hero-center{
 
   position:relative;
+  z-index:3;
 
-  display:flex;
+  text-align:center;
 
-  align-items:flex-end;
+  margin-top:30px;
 
-  justify-content:space-between;
-
-  gap:30px;
-
-  padding:
-    38px
-    4px
-    30px;
-
-}
-
-
-.hero-left{
-  position:relative;
-  z-index:1;
 }
 
 
 .eyebrow{
 
-  display:flex;
+  display:inline-block;
 
-  align-items:center;
+  padding:6px 18px;
 
-  gap:9px;
+  background:rgba(255,255,255,.78);
 
-  color:var(--brand);
+  border-radius:30px;
 
-  font-size:9px;
+  color:#176E8F;
+
+  font-size:11px;
 
   font-weight:900;
 
-  letter-spacing:.65px;
-
-  text-transform:uppercase;
-
-}
-
-
-.eyebrow:before{
-
-  content:"";
-
-  width:25px;
-  height:2px;
-
-  border-radius:5px;
-
-  background:var(--brand);
+  letter-spacing:.5px;
 
 }
 
 
 .hero-title{
 
-  margin:8px 0 0;
+  margin:9px 0 0;
 
-  color:var(--ink);
+  color:#073C70;
 
-  font-size:32px;
+  font-size:42px;
 
-  line-height:1.18;
+  line-height:1.15;
+
+  font-weight:950;
+
+  letter-spacing:-1.5px;
+
+  text-shadow:
+    0 2px 0 rgba(255,255,255,.5);
+
+}
+
+
+.hero-subtitle{
+
+  margin:8px auto 0;
+
+  max-width:720px;
+
+  color:#167344;
+
+  font-size:22px;
+
+  line-height:1.35;
 
   font-weight:900;
 
-  letter-spacing:-1px;
-
 }
 
 
-.hero-description{
-
-  max-width:620px;
-
-  margin:9px 0 0;
-
-  color:var(--muted);
-
-  font-size:11px;
-
-  line-height:1.7;
-
-}
-
-
-.hero-right{
-
-  position:relative;
-
-  z-index:1;
-
-  flex:none;
-
-  min-width:185px;
-
-  text-align:right;
-
-}
-
-
-.updated-label{
-
-  color:var(--soft);
-
-  font-size:8px;
-
-  font-weight:600;
-
-}
-
-
-.updated-value{
-
-  margin-top:4px;
-
-  color:var(--text);
-
-  font-size:11px;
-
-  font-weight:800;
-
-  white-space:nowrap;
-
-}
-
-
-.live-status{
+.year-pill{
 
   display:inline-flex;
 
@@ -410,274 +428,436 @@ a{
 
   gap:8px;
 
-  margin-top:10px;
+  margin-top:12px;
 
-  padding:6px 10px;
+  padding:7px 20px;
+
+  color:#fff;
+
+  background:#126BB0;
+
+  border:3px solid rgba(255,255,255,.85);
 
   border-radius:30px;
 
-  background:var(--green-soft);
+  font-size:18px;
 
-}
-
-
-.live-dot{
-
-  width:6px;
-  height:6px;
-
-  border-radius:50%;
-
-  background:var(--green);
+  font-weight:900;
 
   box-shadow:
-    0 0 0 4px rgba(35,139,87,.10);
+    0 5px 15px rgba(0,73,120,.18);
 
 }
 
 
-.live-dot.alert{
+/* =========================================================
+   STATUS BAR
+========================================================= */
 
-  background:var(--red);
+.status-bar{
 
-  box-shadow:
-    0 0 0 4px rgba(201,52,74,.10);
+  position:relative;
+  z-index:10;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  gap:0;
+
+  width:min(620px,calc(100% - 40px));
+
+  margin:-37px auto 22px;
+
+  background:#fff;
+
+  border-radius:20px;
+
+  box-shadow:var(--shadow-lg);
+
+  overflow:hidden;
 
 }
 
 
-.live-text{
+.status-box{
 
-  color:var(--green);
+  flex:1;
 
-  font-size:8px;
+  min-height:65px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  gap:9px;
+
+  padding:10px 18px;
+
+}
+
+
+.status-box + .status-box{
+
+  border-left:1px solid #E1E7E7;
+
+}
+
+
+.status-icon{
+  font-size:23px;
+}
+
+
+.status-label{
+
+  color:#71808A;
+
+  font-size:9px;
+
+  font-weight:700;
+
+}
+
+
+.status-value{
+
+  margin-top:2px;
+
+  color:#17435B;
+
+  font-size:12px;
 
   font-weight:900;
 
 }
 
 
-.live-text.alert{
-  color:var(--red);
+.status-live{
+
+  width:13px;
+  height:13px;
+
+  border-radius:50%;
+
+  background:#2EB66F;
+
+  box-shadow:
+    0 0 0 5px #E4F6EB;
+
 }
 
 
 /* =========================================================
-   KPI
+   SECTION TITLE
 ========================================================= */
 
-.metrics{
+.section{
+  margin-top:22px;
+}
 
-  display:grid;
 
-  grid-template-columns:
-    1.35fr
-    1fr
-    1fr;
+.section-title{
 
-  gap:12px;
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  margin-bottom:12px;
+
+  color:var(--ink);
+
+  font-size:20px;
+
+  font-weight:950;
 
 }
 
 
-.metric{
+.section-title:before{
+
+  content:"";
+
+  width:7px;
+  height:27px;
+
+  background:#2D9DD0;
+
+  border-radius:10px;
+
+}
+
+
+/* =========================================================
+   KPI GRID
+========================================================= */
+
+.kpi-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:14px;
+
+}
+
+
+.kpi{
 
   position:relative;
 
-  min-height:142px;
+  min-height:190px;
 
-  padding:22px 24px;
+  padding:20px 16px 18px;
 
-  background:var(--white);
+  text-align:center;
 
-  border:1px solid rgba(234,229,237,.90);
+  background:#fff;
 
-  border-radius:var(--radius-lg);
+  border:1px solid #DFE8E8;
+
+  border-radius:var(--radius);
 
   box-shadow:var(--shadow);
 
   overflow:hidden;
 
-  transition:
-    transform .2s ease,
-    box-shadow .2s ease;
+  transition:.2s;
 
 }
 
 
-.metric:hover{
+.kpi:hover{
 
-  transform:translateY(-2px);
+  transform:translateY(-3px);
 
-  box-shadow:var(--shadow-hover);
+  box-shadow:var(--shadow-lg);
 
 }
 
 
-.metric:after{
+.kpi:after{
 
   content:"";
 
   position:absolute;
 
-  right:-28px;
-  bottom:-42px;
+  right:-35px;
+  bottom:-45px;
 
   width:115px;
   height:115px;
 
   border-radius:50%;
 
-  background:var(--brand-soft);
+  opacity:.55;
 
 }
 
 
-.metric.online:after{
-  background:var(--green-soft);
+.kpi.green:after{
+  background:#E0F3E5;
+}
+
+.kpi.blue:after{
+  background:#E2F2FA;
+}
+
+.kpi.orange:after{
+  background:#FFF0D4;
+}
+
+.kpi.purple:after{
+  background:#E9F3E5;
 }
 
 
-.metric.offline:after{
-  background:var(--red-soft);
-}
-
-
-.metric-label{
+.kpi-icon{
 
   position:relative;
-  z-index:1;
+  z-index:2;
+
+  width:65px;
+  height:65px;
+
+  margin:0 auto 8px;
 
   display:flex;
 
   align-items:center;
-
-  gap:8px;
-
-  color:var(--muted);
-
-  font-size:9px;
-
-  font-weight:800;
-
-}
-
-
-.metric-line{
-
-  width:7px;
-  height:7px;
+  justify-content:center;
 
   border-radius:50%;
 
-  background:var(--brand);
-
-}
-
-
-.metric.online .metric-line{
-  background:var(--green);
-}
-
-
-.metric.offline .metric-line{
-  background:var(--red);
-}
-
-
-.metric-value{
-
-  position:relative;
-  z-index:1;
-
-  margin-top:13px;
-
   font-size:38px;
 
-  line-height:1;
+}
+
+
+.kpi.green .kpi-icon{
+  background:#E4F5E8;
+}
+
+.kpi.blue .kpi-icon{
+  background:#E2F4FC;
+}
+
+.kpi.orange .kpi-icon{
+  background:#FFF1D6;
+}
+
+.kpi.purple .kpi-icon{
+  background:#EAF6E8;
+}
+
+
+.kpi-label{
+
+  position:relative;
+  z-index:2;
+
+  color:#19466A;
+
+  font-size:12px;
+
+  line-height:1.4;
 
   font-weight:900;
 
-  letter-spacing:-1.5px;
-
 }
 
 
-.metric.total .metric-value{
-  color:var(--brand);
-}
-
-
-.metric.online .metric-value{
-  color:var(--green);
-}
-
-
-.metric.offline .metric-value{
-  color:var(--red);
-}
-
-
-.metric-note{
+.kpi-value{
 
   position:relative;
-  z-index:1;
+  z-index:2;
 
-  margin-top:8px;
+  margin-top:7px;
 
-  color:var(--soft);
+  font-size:34px;
 
-  font-size:8px;
+  line-height:1;
+
+  font-weight:950;
+
+}
+
+
+.kpi.green .kpi-value{
+  color:#08734D;
+}
+
+.kpi.blue .kpi-value{
+  color:#0876A8;
+}
+
+.kpi.orange .kpi-value{
+  color:#A96A10;
+}
+
+.kpi.purple .kpi-value{
+  color:#237A56;
+}
+
+
+.kpi-note{
+
+  position:relative;
+  z-index:2;
+
+  margin-top:5px;
+
+  color:#71818A;
+
+  font-size:9px;
+
+  font-weight:700;
 
 }
 
 
 /* =========================================================
-   SECTION HEADER
+   TWO COLUMN
 ========================================================= */
 
-.section{
-  margin-top:32px;
+.two-column{
+
+  display:grid;
+
+  grid-template-columns:
+    1.05fr
+    .95fr;
+
+  gap:15px;
+
 }
 
 
-.section-heading{
+/* =========================================================
+   CARD
+========================================================= */
+
+.card{
+
+  background:#fff;
+
+  border:1px solid var(--border);
+
+  border-radius:var(--radius);
+
+  box-shadow:var(--shadow);
+
+  overflow:hidden;
+
+}
+
+
+.card-head{
 
   display:flex;
 
-  align-items:flex-end;
-  justify-content:space-between;
+  align-items:center;
 
-  margin-bottom:12px;
+  gap:9px;
 
-  padding:0 2px;
+  padding:13px 18px;
+
+  color:#fff;
+
+  background:
+    linear-gradient(
+      90deg,
+      #2B95CB,
+      #4BA7D3
+    );
+
+  font-size:15px;
+
+  font-weight:950;
 
 }
 
 
-.section-name{
+.card-head.green{
 
-  color:var(--ink);
-
-  font-size:13px;
-
-  font-weight:900;
-
-  letter-spacing:-.1px;
+  background:
+    linear-gradient(
+      90deg,
+      #359A6D,
+      #5EB17B
+    );
 
 }
 
 
-.section-caption{
-
-  color:var(--soft);
-
-  font-size:8px;
-
-  font-weight:700;
-
-  letter-spacing:.3px;
-
+.card-body{
+  padding:16px;
 }
 
 
@@ -691,133 +871,66 @@ a{
 
   flex-direction:column;
 
-  gap:8px;
+  gap:9px;
 
 }
 
 
 .type-row{
 
-  position:relative;
-
   display:grid;
 
   grid-template-columns:
-    48px
-    minmax(190px,1fr)
-    100px
-    105px
-    105px;
+    45px
+    minmax(0,1fr)
+    72px
+    72px
+    72px;
 
   align-items:center;
 
-  min-height:76px;
+  gap:8px;
 
-  padding:10px 18px;
+  min-height:65px;
 
-  background:var(--white);
+  padding:8px 10px;
 
-  border:1px solid var(--line);
+  border-radius:15px;
 
-  border-radius:var(--radius-md);
+  background:#F8FBFA;
 
-  box-shadow:
-    0 5px 18px rgba(45,30,55,.035);
+  border:1px solid #E1ECE8;
 
-  overflow:hidden;
-
-  transition:
-    .2s ease;
-
-}
-
-
-.type-row:hover{
-
-  border-color:#DCD2E3;
-
-  box-shadow:
-    0 10px 25px rgba(45,30,55,.065);
-
-  transform:translateY(-1px);
-
-}
-
-
-.type-row:before{
-
-  content:"";
-
-  position:absolute;
-
-  left:0;
-  top:17px;
-  bottom:17px;
-
-  width:3px;
-
-  border-radius:
-    0
-    5px
-    5px
-    0;
-
-  background:var(--brand);
-
-}
-
-
-.type-row.wqm:before{
-  background:var(--blue);
-}
-
-
-.type-row.cem:before{
-  background:#C89218;
 }
 
 
 .type-code{
 
-  width:34px;
-  height:34px;
+  width:38px;
+  height:38px;
 
   display:grid;
   place-items:center;
 
-  border-radius:10px;
+  border-radius:11px;
 
-  background:var(--brand-soft);
+  color:#fff;
 
-  color:var(--brand);
+  background:#269AC7;
 
-  font-size:8px;
+  font-size:10px;
 
-  font-weight:900;
+  font-weight:950;
 
 }
 
 
 .type-row.wqm .type-code{
-
-  background:var(--blue-soft);
-
-  color:var(--blue);
-
+  background:#36A99D;
 }
-
 
 .type-row.cem .type-code{
-
-  background:var(--yellow-soft);
-
-  color:var(--yellow);
-
-}
-
-
-.type-name{
-  min-width:0;
+  background:#E7A52B;
 }
 
 
@@ -825,11 +938,11 @@ a{
 
   display:block;
 
-  color:var(--text);
+  color:#194C68;
 
   font-size:11px;
 
-  font-weight:900;
+  font-weight:950;
 
 }
 
@@ -838,9 +951,9 @@ a{
 
   display:block;
 
-  margin-top:3px;
+  margin-top:2px;
 
-  color:var(--muted);
+  color:#81919A;
 
   font-size:8px;
 
@@ -849,13 +962,13 @@ a{
 
 .type-total{
 
-  color:var(--brand);
+  color:#167A59;
 
-  font-size:22px;
+  font-size:21px;
 
-  font-weight:900;
+  font-weight:950;
 
-  text-align:right;
+  text-align:center;
 
 }
 
@@ -871,11 +984,11 @@ a{
 
   display:block;
 
-  font-size:17px;
+  font-size:16px;
 
   line-height:1;
 
-  font-weight:900;
+  font-weight:950;
 
 }
 
@@ -884,26 +997,29 @@ a{
 
   display:block;
 
-  margin-top:4px;
-
-  color:var(--soft);
+  margin-top:3px;
 
   font-size:7px;
 
-  font-weight:800;
-
-  letter-spacing:.2px;
+  font-weight:900;
 
 }
 
 
 .type-status.online .type-status-number{
-  color:var(--green);
+  color:#15945F;
 }
 
+.type-status.online .type-status-label{
+  color:#15945F;
+}
 
 .type-status.offline .type-status-number{
-  color:var(--red);
+  color:#D64D4D;
+}
+
+.type-status.offline .type-status-label{
+  color:#D64D4D;
 }
 
 
@@ -911,183 +1027,209 @@ a{
    SITUATION
 ========================================================= */
 
-.situation{
+.situation-grid{
 
   display:grid;
 
   grid-template-columns:
     repeat(3,1fr);
 
-  gap:12px;
+  gap:9px;
 
 }
 
 
-.situation-item{
+.situation{
 
-  position:relative;
+  padding:14px 8px;
 
-  min-height:116px;
+  text-align:center;
 
-  display:flex;
+  border-radius:17px;
 
-  align-items:center;
-
-  gap:15px;
-
-  padding:19px;
-
-  background:var(--white);
-
-  border:1px solid var(--line);
-
-  border-radius:var(--radius-md);
-
-  box-shadow:
-    0 5px 18px rgba(45,30,55,.035);
-
-  overflow:hidden;
-
-}
-
-
-.situation-item:after{
-
-  content:"";
-
-  position:absolute;
-
-  right:-30px;
-  bottom:-42px;
-
-  width:100px;
-  height:100px;
-
-  border-radius:50%;
-
-  opacity:.55;
-
-}
-
-
-.situation-item.high:after{
-  background:var(--red-soft);
-}
-
-
-.situation-item.watch:after{
-  background:var(--orange-soft);
-}
-
-
-.situation-item.follow:after{
-  background:var(--yellow-soft);
 }
 
 
 .situation-icon{
 
-  position:relative;
-
-  z-index:1;
-
-  width:44px;
-  height:44px;
-
-  flex:none;
-
-  display:grid;
-
-  place-items:center;
-
-  border-radius:13px;
-
-}
-
-
-.situation-icon img{
-
-  width:28px;
-  height:28px;
-
-  object-fit:contain;
-
-}
-
-
-.situation-item.high .situation-icon{
-  background:var(--red-soft);
-}
-
-
-.situation-item.watch .situation-icon{
-  background:var(--orange-soft);
-}
-
-
-.situation-item.follow .situation-icon{
-  background:var(--yellow-soft);
-}
-
-
-.situation-copy{
-
-  position:relative;
-
-  z-index:1;
-
-  min-width:0;
+  font-size:32px;
 
 }
 
 
 .situation-number{
 
-  font-size:30px;
+  margin-top:5px;
+
+  font-size:27px;
 
   line-height:1;
 
-  font-weight:900;
-
-  letter-spacing:-1px;
+  font-weight:950;
 
 }
 
 
 .situation-label{
 
-  margin-top:6px;
+  margin-top:4px;
 
   font-size:9px;
 
-  font-weight:800;
+  font-weight:900;
 
 }
 
 
-.situation-item.high .situation-number,
-.situation-item.high .situation-label{
-  color:var(--red);
+.situation.high{
+  background:#FFF0F0;
+  color:#D24949;
 }
 
-
-.situation-item.watch .situation-number,
-.situation-item.watch .situation-label{
-  color:var(--orange);
+.situation.watch{
+  background:#FFF7E7;
+  color:#D28A1C;
 }
 
-
-.situation-item.follow .situation-number,
-.situation-item.follow .situation-label{
-  color:var(--yellow);
+.situation.follow{
+  background:#EDF8EE;
+  color:#2A8D58;
 }
 
 
 /* =========================================================
-   ALERT SUMMARY
+   STATION STATUS
 ========================================================= */
 
-.alert-summary{
+.station-summary{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:8px;
+
+  margin-bottom:12px;
+
+}
+
+
+.station-stat{
+
+  padding:12px 8px;
+
+  text-align:center;
+
+  border-radius:14px;
+
+}
+
+
+.station-stat.online{
+  background:#ECF8EF;
+}
+
+.station-stat.offline{
+  background:#FFF0F0;
+}
+
+.station-stat.total{
+  background:#EDF7FB;
+}
+
+
+.station-stat-label{
+
+  font-size:8px;
+
+  font-weight:900;
+
+}
+
+
+.station-stat-number{
+
+  margin-top:3px;
+
+  font-size:24px;
+
+  font-weight:950;
+
+}
+
+
+.station-stat.online .station-stat-number{
+  color:#148853;
+}
+
+.station-stat.offline .station-stat-number{
+  color:#D54D4D;
+}
+
+.station-stat.total .station-stat-number{
+  color:#1B80AF;
+}
+
+
+/* =========================================================
+   MINI BAR
+========================================================= */
+
+.progress{
+
+  height:10px;
+
+  margin:8px 0 14px;
+
+  background:#EDF0EF;
+
+  border-radius:30px;
+
+  overflow:hidden;
+
+}
+
+
+.progress-online{
+
+  height:100%;
+
+  width:0%;
+
+  background:
+    linear-gradient(
+      90deg,
+      #31A76B,
+      #69C287
+    );
+
+  border-radius:30px;
+
+  transition:
+    width .5s ease;
+
+}
+
+
+/* =========================================================
+   ALERT
+========================================================= */
+
+.alert-box{
+
+  background:#FFF8F1;
+
+  border:1px solid #F1DFCA;
+
+  border-radius:17px;
+
+  padding:12px;
+
+}
+
+
+.alert-title{
 
   display:flex;
 
@@ -1095,71 +1237,40 @@ a{
 
   justify-content:space-between;
 
-  gap:20px;
+  gap:10px;
 
-  margin-bottom:10px;
+  color:#A65E1B;
 
-  padding:11px 14px;
+  font-size:10px;
 
-  background:rgba(255,255,255,.72);
-
-  border:1px solid var(--line);
-
-  border-radius:12px;
+  font-weight:950;
 
 }
 
 
-.alert-summary-left{
+.alert-count{
 
-  display:flex;
+  min-width:32px;
 
-  align-items:center;
+  padding:4px 9px;
 
-  gap:8px;
+  text-align:center;
 
-}
+  background:#F39A31;
 
+  color:#fff;
 
-.alert-summary-dot{
+  border-radius:20px;
 
-  width:7px;
-  height:7px;
+  font-size:10px;
 
-  border-radius:50%;
-
-  background:var(--red);
-
-  box-shadow:
-    0 0 0 4px var(--red-soft);
-
-}
-
-
-.alert-summary-text{
-
-  color:var(--text);
-
-  font-size:8px;
-
-  font-weight:700;
-
-}
-
-
-.alert-summary-count{
-
-  color:var(--red);
-
-  font-size:11px;
-
-  font-weight:900;
+  font-weight:950;
 
 }
 
 
 /* =========================================================
-   STATION LIST
+   STATIONS
 ========================================================= */
 
 .station-list{
@@ -1168,7 +1279,9 @@ a{
 
   flex-direction:column;
 
-  gap:7px;
+  gap:6px;
+
+  margin-top:10px;
 
 }
 
@@ -1178,49 +1291,31 @@ a{
   display:grid;
 
   grid-template-columns:
-    34px
-    minmax(180px,1fr)
-    110px
-    minmax(150px,180px)
-    125px;
+    28px
+    minmax(0,1fr)
+    72px;
 
   align-items:center;
 
-  gap:12px;
+  gap:8px;
 
-  min-height:67px;
+  min-height:55px;
 
-  padding:9px 14px;
+  padding:7px 9px;
 
-  background:var(--white);
+  background:#fff;
 
-  border:1px solid var(--line);
+  border:1px solid #E6ECEB;
 
-  border-radius:13px;
-
-  box-shadow:
-    0 3px 12px rgba(45,30,55,.025);
-
-  transition:
-    .18s ease;
-
-}
-
-
-.station:hover{
-
-  border-color:#DCD2E3;
-
-  box-shadow:
-    0 8px 20px rgba(45,30,55,.055);
+  border-radius:12px;
 
 }
 
 
 .station-index{
 
-  width:27px;
-  height:27px;
+  width:25px;
+  height:25px;
 
   display:grid;
 
@@ -1228,13 +1323,13 @@ a{
 
   border-radius:8px;
 
-  background:var(--red-soft);
+  background:#FFF0E7;
 
-  color:var(--red);
+  color:#D77720;
 
   font-size:8px;
 
-  font-weight:900;
+  font-weight:950;
 
 }
 
@@ -1248,11 +1343,11 @@ a{
 
   display:block;
 
-  color:var(--text);
+  color:#234D64;
 
   font-size:9px;
 
-  font-weight:900;
+  font-weight:950;
 
   white-space:nowrap;
 
@@ -1267,9 +1362,9 @@ a{
 
   display:block;
 
-  margin-top:3px;
+  margin-top:2px;
 
-  color:var(--muted);
+  color:#89959B;
 
   font-size:7px;
 
@@ -1282,33 +1377,9 @@ a{
 }
 
 
-.station-type{
-
-  color:var(--muted);
-
-  font-size:8px;
-
-  font-weight:700;
-
-}
-
-
+.station-type,
 .station-alarm{
-
-  min-width:0;
-
-  color:#765E65;
-
-  font-size:7px;
-
-  line-height:1.45;
-
-  white-space:nowrap;
-
-  overflow:hidden;
-
-  text-overflow:ellipsis;
-
+  display:none;
 }
 
 
@@ -1316,21 +1387,20 @@ a{
 
   display:inline-flex;
 
+  justify-content:center;
   align-items:center;
 
-  justify-content:center;
+  gap:4px;
 
-  gap:6px;
+  width:100%;
 
-  min-width:66px;
-
-  padding:5px 8px;
+  padding:5px 5px;
 
   border-radius:20px;
 
   font-size:7px;
 
-  font-weight:900;
+  font-weight:950;
 
 }
 
@@ -1349,68 +1419,34 @@ a{
 
 .station-status.online{
 
-  background:var(--green-soft);
+  color:#138453;
 
-  color:var(--green);
+  background:#EAF7EF;
 
 }
 
 
 .station-status.online:before{
-  background:var(--green);
+  background:#1D9C63;
 }
 
 
 .station-status.offline{
 
-  background:var(--red-soft);
+  color:#D44949;
 
-  color:var(--red);
+  background:#FFF0F0;
 
 }
 
 
 .station-status.offline:before{
-  background:var(--red);
+  background:#D44949;
 }
 
 
 .map-link{
-
-  display:inline-flex;
-
-  align-items:center;
-  justify-content:center;
-
-  margin-left:4px;
-
-  padding:5px 9px;
-
-  background:var(--brand-soft);
-
-  border:1px solid #E0D5E8;
-
-  border-radius:8px;
-
-  color:var(--brand);
-
-  font-size:7px;
-
-  font-weight:900;
-
-  transition:.18s ease;
-
-}
-
-
-.map-link:hover{
-
-  background:var(--brand);
-
-  border-color:var(--brand);
-
-  color:white;
-
+  display:none;
 }
 
 
@@ -1420,21 +1456,19 @@ a{
 
 .empty{
 
-  padding:35px 20px;
+  padding:25px 15px;
 
   text-align:center;
 
-  background:var(--green-soft);
-
-  border:1px solid #DCEEE2;
+  background:#EDF8EF;
 
   border-radius:15px;
 
-  color:var(--green);
+  color:#238653;
 
-  font-size:11px;
+  font-size:10px;
 
-  font-weight:800;
+  font-weight:900;
 
 }
 
@@ -1445,61 +1479,97 @@ a{
 
 .footer{
 
-  display:flex;
+  position:relative;
 
-  align-items:center;
+  margin-top:28px;
 
-  justify-content:space-between;
+  padding:
+    25px
+    25px
+    18px;
 
-  gap:20px;
+  text-align:center;
 
-  margin-top:32px;
+  color:#fff;
 
-  padding-top:16px;
+  background:
+    linear-gradient(
+      135deg,
+      #1D7C58,
+      #309B6B
+    );
 
-  border-top:1px solid var(--line);
+  border-radius:
+    25px 25px 0 0;
 
-  color:var(--soft);
+  overflow:hidden;
 
-  font-size:7px;
+}
 
-  line-height:1.5;
+
+.footer:before{
+
+  content:"🌱  🌳  💧  ♻️  🌱";
+
+  position:absolute;
+
+  left:0;
+  right:0;
+  top:5px;
+
+  opacity:.18;
+
+  font-size:30px;
+
+}
+
+
+.footer-title{
+
+  position:relative;
+  z-index:1;
+
+  font-size:12px;
+
+  font-weight:950;
+
+}
+
+
+.footer-text{
+
+  position:relative;
+  z-index:1;
+
+  margin-top:5px;
+
+  font-size:8px;
+
+  opacity:.9;
 
 }
 
 
 .dashboard-link{
 
+  position:relative;
+  z-index:1;
+
   display:inline-flex;
 
-  align-items:center;
+  margin-top:12px;
 
-  gap:5px;
+  padding:8px 17px;
 
-  padding:7px 11px;
+  color:#176446;
 
-  background:var(--brand-soft);
+  background:#fff;
 
-  border:1px solid #E1D6E8;
+  border-radius:30px;
 
-  border-radius:9px;
+  font-size:9px;
 
-  color:var(--brand);
-
-  font-size:8px;
-
-  font-weight:900;
-
-  transition:.18s ease;
-
-}
-
-
-.dashboard-link:hover{
-
-  background:var(--brand);
-
-  color:#fff;
+  font-weight:950;
 
 }
 
@@ -1510,170 +1580,253 @@ a{
 
 .loading{
 
-  padding:55px 20px;
+  padding:70px 20px;
 
   text-align:center;
 
-  color:var(--muted);
+  color:#4F7787;
 
-  font-size:10px;
+  font-size:12px;
+
+  font-weight:800;
 
 }
 
 
+.hidden{
+  display:none !important;
+}
+
+
 /* =========================================================
-   RESPONSIVE 900
+   RESPONSIVE
 ========================================================= */
 
 @media(max-width:900px){
 
-  .app{
-    padding:20px;
+  .hero{
+    min-height:340px;
+    padding-left:25px;
+    padding-right:25px;
   }
 
-  .type-row{
+  .hero-title{
+    font-size:34px;
+  }
 
+  .hero-subtitle{
+    font-size:18px;
+  }
+
+  .kpi-grid{
     grid-template-columns:
-      44px
-      minmax(140px,1fr)
-      80px
-      80px
-      80px;
-
+      repeat(2,1fr);
   }
 
-  .station{
-
-    grid-template-columns:
-      32px
-      minmax(150px,1fr)
-      85px
-      100px;
-
-  }
-
-  .station-alarm{
-    display:none;
+  .two-column{
+    grid-template-columns:1fr;
   }
 
 }
 
 
-/* =========================================================
-   RESPONSIVE 680
-========================================================= */
-
-@media(max-width:680px){
+@media(max-width:620px){
 
   .app{
-    padding:14px;
+    padding:0 10px 20px;
   }
 
-  .topbar{
-    padding-bottom:13px;
+  .hero{
+
+    margin:
+      0 -10px
+      15px;
+
+    padding:
+      18px 17px
+      38px;
+
+    min-height:310px;
+
+    border-radius:
+      0 0 28px 28px;
+
   }
 
   .logo{
-    height:36px;
+    width:52px;
+    height:52px;
   }
 
   .identity-title{
-    font-size:13px;
+    font-size:14px;
   }
 
   .identity-subtitle{
-    font-size:7px;
+    font-size:8px;
   }
 
   .refresh{
     width:36px;
     height:36px;
+    font-size:18px;
   }
 
+  .sun{
+    width:55px;
+    height:55px;
+    right:20px;
+    top:70px;
+    font-size:26px;
+  }
 
-  /* HERO */
+  .cloud.one{
+    left:-25px;
+    top:80px;
+    transform:scale(.7);
+  }
 
-  .hero{
+  .hero-center{
+    margin-top:27px;
+  }
 
-    display:block;
-
-    padding:
-      26px
-      2px
-      20px;
-
+  .eyebrow{
+    font-size:8px;
+    padding:5px 12px;
   }
 
   .hero-title{
-    font-size:24px;
-    letter-spacing:-.7px;
+    font-size:28px;
+    letter-spacing:-.8px;
   }
 
-  .hero-description{
+  .hero-subtitle{
+    font-size:15px;
+  }
+
+  .year-pill{
+    font-size:14px;
+    padding:6px 14px;
+  }
+
+  .status-bar{
+
+    width:calc(100% - 20px);
+
+    margin-top:-25px;
+
+    border-radius:16px;
+
+  }
+
+  .status-box{
+    min-height:58px;
+    padding:7px 8px;
+  }
+
+  .status-icon{
+    font-size:18px;
+  }
+
+  .status-label{
+    font-size:7px;
+  }
+
+  .status-value{
     font-size:9px;
   }
 
-  .hero-right{
-
-    margin-top:17px;
-
-    text-align:left;
-
+  .status-live{
+    width:10px;
+    height:10px;
   }
 
 
-  /* KPI */
+  .section{
+    margin-top:17px;
+  }
 
-  .metrics{
+  .section-title{
+    font-size:15px;
+  }
 
-    grid-template-columns:1fr;
+  .section-title:before{
+    width:5px;
+    height:21px;
+  }
+
+
+  .kpi-grid{
+    grid-template-columns:
+      repeat(2,1fr);
 
     gap:8px;
-
   }
 
-  .metric{
-
-    min-height:94px;
-
-    padding:16px 18px;
-
+  .kpi{
+    min-height:150px;
+    padding:13px 8px;
+    border-radius:17px;
   }
 
-  .metric-value{
-    margin-top:9px;
-    font-size:30px;
+  .kpi-icon{
+    width:48px;
+    height:48px;
+    font-size:28px;
+  }
+
+  .kpi-label{
+    font-size:9px;
+  }
+
+  .kpi-value{
+    font-size:27px;
+  }
+
+  .kpi-note{
+    font-size:7px;
   }
 
 
-  /* TYPE */
+  .card{
+    border-radius:18px;
+  }
+
+  .card-head{
+    padding:11px 13px;
+    font-size:12px;
+  }
+
+  .card-body{
+    padding:10px;
+  }
+
 
   .type-row{
 
     grid-template-columns:
-      38px
+      35px
       minmax(0,1fr)
-      55px
-      58px
-      58px;
+      48px
+      48px
+      48px;
 
-    min-height:68px;
+    gap:4px;
 
-    padding:8px 10px;
+    min-height:59px;
 
-    gap:7px;
+    padding:6px;
 
   }
 
   .type-code{
-
-    width:31px;
-    height:31px;
-
+    width:30px;
+    height:30px;
+    font-size:8px;
   }
 
   .type-name strong{
-    font-size:9px;
+    font-size:8px;
   }
 
   .type-name span{
@@ -1681,60 +1834,54 @@ a{
   }
 
   .type-total{
-    font-size:16px;
+    font-size:15px;
   }
 
   .type-status-number{
-    font-size:13px;
+    font-size:12px;
   }
 
   .type-status-label{
+    font-size:5px;
+  }
+
+
+  .situation-grid{
+    gap:5px;
+  }
+
+  .situation{
+    padding:10px 4px;
+    border-radius:12px;
+  }
+
+  .situation-icon{
+    font-size:24px;
+  }
+
+  .situation-number{
+    font-size:20px;
+  }
+
+  .situation-label{
     font-size:6px;
   }
 
 
-  /* SITUATION */
-
-  .situation{
-
-    grid-template-columns:1fr;
-
-    gap:8px;
-
+  .station-summary{
+    gap:5px;
   }
 
-  .situation-item{
-
-    min-height:78px;
-
-    padding:14px 16px;
-
+  .station-stat{
+    padding:8px 4px;
   }
 
-  .situation-number{
-    font-size:26px;
+  .station-stat-label{
+    font-size:6px;
   }
 
-
-  /* STATION */
-
-  .station{
-
-    grid-template-columns:
-      29px
-      minmax(0,1fr)
-      72px;
-
-    min-height:61px;
-
-    padding:8px 10px;
-
-    gap:8px;
-
-  }
-
-  .station-type{
-    display:none;
+  .station-stat-number{
+    font-size:19px;
   }
 
   .station-name strong{
@@ -1746,61 +1893,38 @@ a{
   }
 
   .station-status{
-    min-width:57px;
-    padding:5px 6px;
     font-size:6px;
   }
 
-  .map-link{
-    padding:5px 6px;
-    font-size:6px;
-  }
-
-
-  /* FOOTER */
 
   .footer{
-
-    display:block;
-
-    text-align:center;
-
-  }
-
-  .dashboard-link{
-
-    display:inline-flex;
-
-    margin-top:8px;
-
+    border-radius:20px 20px 0 0;
   }
 
 }
 
 
-/* =========================================================
-   VERY SMALL
-========================================================= */
+@media(max-width:390px){
 
-@media(max-width:430px){
+  .hero-title{
+    font-size:24px;
+  }
+
+  .hero-subtitle{
+    font-size:13px;
+  }
+
+  .kpi-value{
+    font-size:24px;
+  }
 
   .type-row{
-
     grid-template-columns:
-      34px
+      31px
       minmax(0,1fr)
-      47px
-      52px
-      52px;
-
-  }
-
-  .type-total{
-    font-size:15px;
-  }
-
-  .type-status-number{
-    font-size:12px;
+      43px
+      43px
+      43px;
   }
 
 }
@@ -1815,28 +1939,104 @@ a{
 
 
 <!-- =====================================================
-     HEADER
+     HERO
 ===================================================== -->
 
-<header class="topbar">
+<header class="hero">
 
-  <div class="identity">
+  <div class="sun">☀️</div>
 
-    <img
-      class="logo"
-      src="../assets/ieat_logo.png"
-      alt="กนอ."
-      onerror="this.onerror=null;this.src='./assets/ieat_logo.png';"
-    >
+  <div class="cloud one"></div>
+  <div class="cloud two"></div>
+  <div class="cloud three"></div>
 
-    <div class="identity-text">
+  <div class="landscape"></div>
 
-      <div class="identity-title">
-        IEAT e-Monitoring
+
+  <div class="topbar">
+
+    <div class="identity">
+
+      <img
+        class="logo"
+        src="../assets/ieat_logo.png"
+        alt="กนอ."
+        onerror="this.onerror=null;this.src='./assets/ieat_logo.png';"
+      >
+
+      <div>
+
+        <div class="identity-title">
+          IEAT e-Monitoring
+        </div>
+
+        <div class="identity-subtitle">
+          ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย
+        </div>
+
       </div>
 
-      <div class="identity-subtitle">
-        ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย
+    </div>
+
+
+    <button
+      class="refresh"
+      onclick="loadStatus()"
+      title="รีเฟรชข้อมูล"
+    >
+      ↻
+    </button>
+
+  </div>
+
+
+  <div class="hero-center">
+
+    <div class="eyebrow">
+      ENVIRONMENTAL MONITORING
+    </div>
+
+    <h1 class="hero-title">
+      รายงานสถานการณ์
+    </h1>
+
+    <div class="hero-subtitle">
+      ระบบติดตามสถานการณ์สิ่งแวดล้อม
+      บริเวณนิคมอุตสาหกรรม
+    </div>
+
+    <div class="year-pill">
+      ปี 2569 🌎
+    </div>
+
+  </div>
+
+</header>
+
+
+<!-- =====================================================
+     STATUS
+===================================================== -->
+
+<div class="status-bar">
+
+  <div class="status-box">
+
+    <div class="status-icon">
+      📅
+    </div>
+
+    <div>
+
+      <div class="status-label">
+        ข้อมูลล่าสุด
+      </div>
+
+      <div
+        id="updatedAt"
+        class="status-value"
+      >
+        -
       </div>
 
     </div>
@@ -1844,16 +2044,31 @@ a{
   </div>
 
 
-  <button
-    class="refresh"
-    onclick="loadStatus()"
-    aria-label="รีเฟรชข้อมูล"
-    title="ตรวจสอบข้อมูลล่าสุด"
-  >
-    ↻
-  </button>
+  <div class="status-box">
 
-</header>
+    <span
+      id="statusDot"
+      class="status-live"
+    ></span>
+
+    <div>
+
+      <div class="status-label">
+        สถานะระบบ
+      </div>
+
+      <div
+        id="statusTitle"
+        class="status-value"
+      >
+        กำลังประมวลผล…
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
 
 
 <!-- =====================================================
@@ -1864,18 +2079,20 @@ a{
   id="loading"
   class="loading"
 >
-  กำลังโหลดข้อมูลสถานการณ์ล่าสุด…
+  🌱 กำลังโหลดข้อมูลสถานการณ์ล่าสุด…
 </div>
 
 
 <div
   id="error"
   class="loading hidden"
-  style="color:var(--red);"
+  style="color:#D44949;"
 >
   ไม่สามารถโหลดข้อมูลล่าสุดได้
   <br>
-  <small>กรุณากดปุ่มรีเฟรชเพื่อลองใหม่</small>
+  <small>
+    กรุณากดปุ่มรีเฟรชเพื่อลองใหม่
+  </small>
 </div>
 
 
@@ -1883,328 +2100,396 @@ a{
      CONTENT
 ===================================================== -->
 
-<main id="content" class="hidden">
-
-
-<!-- =====================================================
-     HERO
-===================================================== -->
-
-<section class="hero">
-
-  <div class="hero-left">
-
-    <div class="eyebrow">
-      Environmental Monitoring
-    </div>
-
-    <h1 class="hero-title">
-      สรุปสถานการณ์ล่าสุด
-    </h1>
-
-    <p class="hero-description">
-      ภาพรวมสถานีตรวจวัดและสถานการณ์สิ่งแวดล้อมจากระบบ e-Monitoring
-    </p>
-
-  </div>
-
-
-  <div class="hero-right">
-
-    <div class="updated-label">
-      ข้อมูลล่าสุด
-    </div>
-
-    <div
-      id="updatedAt"
-      class="updated-value"
-    >
-      -
-    </div>
-
-    <div class="live-status">
-
-      <span
-        id="statusDot"
-        class="live-dot"
-      ></span>
-
-      <span
-        id="statusTitle"
-        class="live-text"
-      >
-        กำลังประมวลผล…
-      </span>
-
-    </div>
-
-  </div>
-
-</section>
+<main
+  id="content"
+  class="hidden"
+>
 
 
 <!-- =====================================================
      KPI
 ===================================================== -->
 
-<section class="metrics">
-
-
-  <article class="metric total">
-
-    <div class="metric-label">
-      <span class="metric-line"></span>
-      สถานีตรวจวัดทั้งหมด
-    </div>
-
-    <div
-      id="total"
-      class="metric-value"
-    >
-      0
-    </div>
-
-    <div class="metric-note">
-      Monitoring Stations
-    </div>
-
-  </article>
-
-
-  <article class="metric online">
-
-    <div class="metric-label">
-      <span class="metric-line"></span>
-      ONLINE
-    </div>
-
-    <div
-      id="online"
-      class="metric-value"
-    >
-      0
-    </div>
-
-    <div class="metric-note">
-      สถานีที่พร้อมให้บริการ
-    </div>
-
-  </article>
-
-
-  <article class="metric offline">
-
-    <div class="metric-label">
-      <span class="metric-line"></span>
-      OFFLINE
-    </div>
-
-    <div
-      id="offline"
-      class="metric-value"
-    >
-      0
-    </div>
-
-    <div class="metric-note">
-      สถานีที่ควรตรวจสอบ
-    </div>
-
-  </article>
-
-
-</section>
-
-
-<!-- =====================================================
-     MONITORING NETWORK
-===================================================== -->
-
 <section class="section">
 
-  <div class="section-heading">
-
-    <div class="section-name">
-      สถานีตรวจวัดจำแนกตามประเภท
-    </div>
-
-    <div class="section-caption">
-      MONITORING NETWORK
-    </div>
-
+  <div class="section-title">
+    ภาพรวมสถานีตรวจวัด
   </div>
 
 
-  <div
-    id="types"
-    class="type-list"
-  ></div>
-
-</section>
+  <div class="kpi-grid">
 
 
-<!-- =====================================================
-     SITUATION
-===================================================== -->
+    <article class="kpi green">
 
-<section class="section">
-
-  <div class="section-heading">
-
-    <div class="section-name">
-      ระดับสถานการณ์
-    </div>
-
-    <div class="section-caption">
-      CURRENT SITUATION
-    </div>
-
-  </div>
-
-
-  <div class="situation">
-
-
-    <article class="situation-item high">
-
-      <div class="situation-icon">
-
-        <img
-          src="../assets/4.png"
-          alt=""
-        >
-
+      <div class="kpi-icon">
+        📡
       </div>
 
-      <div class="situation-copy">
-
-        <div
-          id="urgent"
-          class="situation-number"
-        >
-          0
-        </div>
-
-        <div class="situation-label">
-          เกินค่ามาตรฐาน
-        </div>
-
+      <div class="kpi-label">
+        สถานีตรวจวัดทั้งหมด
       </div>
 
-    </article>
-
-
-    <article class="situation-item watch">
-
-      <div class="situation-icon">
-
-        <img
-          src="../assets/3.png"
-          alt=""
-        >
-
-      </div>
-
-      <div class="situation-copy">
-
-        <div
-          id="watch"
-          class="situation-number"
-        >
-          0
-        </div>
-
-        <div class="situation-label">
-          เฝ้าระวัง
-        </div>
-
-      </div>
-
-    </article>
-
-
-    <article class="situation-item follow">
-
-      <div class="situation-icon">
-
-        <img
-          src="../assets/1.png"
-          alt=""
-        >
-
-      </div>
-
-      <div class="situation-copy">
-
-        <div
-          id="follow"
-          class="situation-number"
-        >
-          0
-        </div>
-
-        <div class="situation-label">
-          ติดตามสถานการณ์
-        </div>
-
-      </div>
-
-    </article>
-
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     ALERT
-===================================================== -->
-
-<section class="section">
-
-  <div class="section-heading">
-
-    <div class="section-name">
-      สถานีที่ต้องติดตาม
-    </div>
-
-    <div class="section-caption">
-      ATTENTION REQUIRED
-    </div>
-
-  </div>
-
-
-  <div class="alert-summary">
-
-    <div class="alert-summary-left">
-
-      <span class="alert-summary-dot"></span>
-
-      <span
-        id="alertNote"
-        class="alert-summary-text"
+      <div
+        id="total"
+        class="kpi-value"
       >
-        กำลังตรวจสอบข้อมูล…
-      </span>
+        0
+      </div>
 
-    </div>
+      <div class="kpi-note">
+        Monitoring Stations
+      </div>
 
-    <span
-      id="alertCount"
-      class="alert-summary-count"
-    >
-      0
-    </span>
+    </article>
+
+
+    <article class="kpi blue">
+
+      <div class="kpi-icon">
+        🟢
+      </div>
+
+      <div class="kpi-label">
+        สถานีออนไลน์
+      </div>
+
+      <div
+        id="online"
+        class="kpi-value"
+      >
+        0
+      </div>
+
+      <div class="kpi-note">
+        พร้อมให้บริการ
+      </div>
+
+    </article>
+
+
+    <article class="kpi orange">
+
+      <div class="kpi-icon">
+        🟠
+      </div>
+
+      <div class="kpi-label">
+        สถานีออฟไลน์
+      </div>
+
+      <div
+        id="offline"
+        class="kpi-value"
+      >
+        0
+      </div>
+
+      <div class="kpi-note">
+        ควรตรวจสอบ
+      </div>
+
+    </article>
+
+
+    <article class="kpi purple">
+
+      <div class="kpi-icon">
+        🌱
+      </div>
+
+      <div class="kpi-label">
+        สถานีที่ต้องติดตาม
+      </div>
+
+      <div
+        id="alertKpi"
+        class="kpi-value"
+      >
+        0
+      </div>
+
+      <div class="kpi-note">
+        Attention Required
+      </div>
+
+    </article>
+
 
   </div>
 
+</section>
 
-  <div
-    id="stations"
-    class="station-list"
-  ></div>
+
+<!-- =====================================================
+     TWO COLUMN
+===================================================== -->
+
+<section class="section">
+
+  <div class="two-column">
+
+
+    <!-- MONITORING NETWORK -->
+
+    <div class="card">
+
+      <div class="card-head">
+        📊 สถานีตรวจวัดจำแนกตามประเภท
+      </div>
+
+      <div class="card-body">
+
+        <div
+          id="types"
+          class="type-list"
+        ></div>
+
+      </div>
+
+    </div>
+
+
+    <!-- SITUATION -->
+
+    <div class="card">
+
+      <div class="card-head green">
+        🌿 ระดับสถานการณ์สิ่งแวดล้อม
+      </div>
+
+      <div class="card-body">
+
+        <div class="situation-grid">
+
+
+          <div class="situation high">
+
+            <div class="situation-icon">
+              🚨
+            </div>
+
+            <div
+              id="urgent"
+              class="situation-number"
+            >
+              0
+            </div>
+
+            <div class="situation-label">
+              เกินค่ามาตรฐาน
+            </div>
+
+          </div>
+
+
+          <div class="situation watch">
+
+            <div class="situation-icon">
+              ⚠️
+            </div>
+
+            <div
+              id="watch"
+              class="situation-number"
+            >
+              0
+            </div>
+
+            <div class="situation-label">
+              เฝ้าระวัง
+            </div>
+
+          </div>
+
+
+          <div class="situation follow">
+
+            <div class="situation-icon">
+              👁️
+            </div>
+
+            <div
+              id="follow"
+              class="situation-number"
+            >
+              0
+            </div>
+
+            <div class="situation-label">
+              ติดตามสถานการณ์
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     STATION STATUS + ALERT
+===================================================== -->
+
+<section class="section">
+
+  <div class="two-column">
+
+
+    <!-- STATUS -->
+
+    <div class="card">
+
+      <div class="card-head">
+        📡 สถานะการตรวจวัด
+      </div>
+
+      <div class="card-body">
+
+
+        <div class="station-summary">
+
+
+          <div class="station-stat online">
+
+            <div class="station-stat-label">
+              🟢 ONLINE
+            </div>
+
+            <div
+              id="online2"
+              class="station-stat-number"
+            >
+              0
+            </div>
+
+          </div>
+
+
+          <div class="station-stat offline">
+
+            <div class="station-stat-label">
+              🔴 OFFLINE
+            </div>
+
+            <div
+              id="offline2"
+              class="station-stat-number"
+            >
+              0
+            </div>
+
+          </div>
+
+
+          <div class="station-stat total">
+
+            <div class="station-stat-label">
+              📡 ทั้งหมด
+            </div>
+
+            <div
+              id="total2"
+              class="station-stat-number"
+            >
+              0
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+        <div class="progress">
+
+          <div
+            id="onlineProgress"
+            class="progress-online"
+          ></div>
+
+        </div>
+
+
+        <div style="
+          text-align:center;
+          color:#75858C;
+          font-size:8px;
+          font-weight:700;
+        ">
+          สัดส่วนสถานีที่พร้อมให้บริการ
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+    <!-- ALERT -->
+
+    <div class="card">
+
+      <div class="card-head">
+        🚨 การแจ้งเตือนล่าสุด
+      </div>
+
+      <div class="card-body">
+
+
+        <div class="alert-box">
+
+          <div class="alert-title">
+
+            <span>
+              สถานีที่ต้องติดตาม
+            </span>
+
+            <span
+              id="alertCount"
+              class="alert-count"
+            >
+              0
+            </span>
+
+          </div>
+
+
+          <div
+            id="alertNote"
+            style="
+              margin-top:6px;
+              color:#806F63;
+              font-size:8px;
+              line-height:1.5;
+            "
+          >
+            กำลังตรวจสอบข้อมูล…
+          </div>
+
+
+        </div>
+
+
+        <div
+          id="stations"
+          class="station-list"
+        ></div>
+
+
+      </div>
+
+    </div>
+
+
+  </div>
 
 </section>
 
@@ -2215,9 +2500,14 @@ a{
 
 <footer class="footer">
 
-  <span>
-    IEAT e-Monitoring • ข้อมูลจากระบบ e-Monitoring
-  </span>
+  <div class="footer-title">
+    🌏 IEAT e-Monitoring
+  </div>
+
+  <div class="footer-text">
+    ระบบติดตามสถานการณ์สิ่งแวดล้อมและความปลอดภัย
+    บริเวณนิคมอุตสาหกรรม
+  </div>
 
   <a
     id="dashboardBtn"
@@ -2225,7 +2515,7 @@ a{
     target="_blank"
     rel="noopener"
   >
-    เปิด Dashboard GIS →
+    🗺️ เปิด Dashboard GIS →
   </a>
 
 </footer>
@@ -2330,7 +2620,7 @@ function getTypeData(data,key){
 
 
 /* =========================================================
-   RENDER TYPE
+   RENDER TYPES
 ========================================================= */
 
 function renderTypes(data){
@@ -2359,6 +2649,7 @@ function renderTypes(data){
           ${info.code}
         </div>
 
+
         <div class="type-name">
 
           <strong>
@@ -2371,9 +2662,11 @@ function renderTypes(data){
 
         </div>
 
+
         <div class="type-total">
           ${fmt(t.total)}
         </div>
+
 
         <div class="type-status online">
 
@@ -2386,6 +2679,7 @@ function renderTypes(data){
           </span>
 
         </div>
+
 
         <div class="type-status offline">
 
@@ -2426,6 +2720,10 @@ function renderStations(data){
     fmt(stations.length);
 
 
+  $("alertKpi").textContent =
+    fmt(stations.length);
+
+
   $("alertNote").textContent =
 
     stations.length
@@ -2451,7 +2749,7 @@ function renderStations(data){
 
         <span style="
           font-weight:400;
-          font-size:9px;
+          font-size:8px;
           opacity:.8;
         ">
           สถานการณ์อยู่ในภาวะปกติตามข้อมูลล่าสุด
@@ -2497,39 +2795,12 @@ function renderStations(data){
   $("stations").innerHTML =
 
     sorted
-      .slice(0,12)
+      .slice(0,8)
       .map((s,index)=>{
-
 
         const status =
           String(s.status || "")
             .toUpperCase();
-
-
-        const type =
-          esc(s.station_type || "-");
-
-
-        const alarm =
-          esc(s.parameter_alarm || "-");
-
-
-        const lat =
-          s.latitude;
-
-
-        const lon =
-          s.longitude;
-
-
-        const map =
-
-          lat != null &&
-          lon != null
-
-            ? `https://www.google.com/maps?q=${encodeURIComponent(lat+","+lon)}`
-
-            : "";
 
 
         return `
@@ -2554,19 +2825,6 @@ function renderStations(data){
           </div>
 
 
-          <div class="station-type">
-            ${type}
-          </div>
-
-
-          <div
-            class="station-alarm"
-            title="${alarm}"
-          >
-            ${alarm}
-          </div>
-
-
           <div>
 
             <span
@@ -2580,27 +2838,6 @@ function renderStations(data){
               ${esc(status || "-")}
             </span>
 
-
-            ${
-              map
-
-              ? `
-
-                <a
-                  class="map-link"
-                  href="${map}"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  MAP
-                </a>
-
-              `
-
-              : ""
-
-            }
-
           </div>
 
         </div>
@@ -2609,37 +2846,6 @@ function renderStations(data){
 
       })
       .join("");
-
-
-  if(sorted.length > 12){
-
-    $("stations").insertAdjacentHTML(
-
-      "beforeend",
-
-      `
-
-      <div class="alert-summary">
-
-        <div class="alert-summary-left">
-
-          <span class="alert-summary-text">
-            แสดง 12 สถานีแรกที่ควรติดตาม
-          </span>
-
-        </div>
-
-        <span class="alert-summary-count">
-          +${fmt(sorted.length-12)}
-        </span>
-
-      </div>
-
-      `
-
-    );
-
-  }
 
 }
 
@@ -2689,7 +2895,9 @@ async function loadStatus(){
       await response.json();
 
 
-    /* KPI */
+    /* =====================================================
+       KPI
+    ===================================================== */
 
     const total =
       data.station_count
@@ -2714,16 +2922,45 @@ async function loadStatus(){
     $("total").textContent =
       fmt(total);
 
-
     $("online").textContent =
       fmt(online);
-
 
     $("offline").textContent =
       fmt(offline);
 
 
-    /* SITUATION */
+    $("total2").textContent =
+      fmt(total);
+
+    $("online2").textContent =
+      fmt(online);
+
+    $("offline2").textContent =
+      fmt(offline);
+
+
+    /* =====================================================
+       ONLINE %
+    ===================================================== */
+
+    const onlinePercent =
+      total > 0
+        ? Math.min(
+            100,
+            Math.round(
+              online / total * 100
+            )
+          )
+        : 0;
+
+
+    $("onlineProgress").style.width =
+      onlinePercent + "%";
+
+
+    /* =====================================================
+       SITUATION
+    ===================================================== */
 
     $("urgent").textContent =
       fmt(data.urgent_count);
@@ -2737,7 +2974,9 @@ async function loadStatus(){
       fmt(data.follow_count);
 
 
-    /* UPDATE */
+    /* =====================================================
+       UPDATE
+    ===================================================== */
 
     $("updatedAt").textContent =
 
@@ -2748,7 +2987,9 @@ async function loadStatus(){
       "-";
 
 
-    /* STATUS */
+    /* =====================================================
+       STATUS
+    ===================================================== */
 
     const alert =
 
@@ -2760,16 +3001,10 @@ async function loadStatus(){
       num(data.alert_station_count) > 0;
 
 
-    $("statusDot").className =
-
-      "live-dot" +
-      (alert ? " alert" : "");
-
-
-    $("statusTitle").className =
-
-      "live-text" +
-      (alert ? " alert" : "");
+    $("statusDot").style.background =
+      alert
+        ? "#D94B4B"
+        : "#2EB66F";
 
 
     $("statusTitle").textContent =
@@ -2781,20 +3016,26 @@ async function loadStatus(){
         : "สถานการณ์ปกติ";
 
 
-    /* DASHBOARD */
+    /* =====================================================
+       DASHBOARD
+    ===================================================== */
 
     $("dashboardBtn").href =
       DASHBOARD_URL;
 
 
-    /* RENDER */
+    /* =====================================================
+       RENDER
+    ===================================================== */
 
     renderTypes(data);
 
     renderStations(data);
 
 
-    /* SHOW */
+    /* =====================================================
+       SHOW
+    ===================================================== */
 
     $("loading")
       .classList
