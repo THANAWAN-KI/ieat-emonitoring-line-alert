@@ -1,11 +1,14 @@
-name: e-Monitoring Hourly LINE Report
+name: e-Monitoring Hourly Update and LINE Alert
 
 on:
   workflow_dispatch:
   schedule:
-    # GitHub Actions ใช้เวลา UTC: นาทีที่ 17 ของทุกชั่วโมง
-    # เท่ากับนาทีที่ 17 ของทุกชั่วโมงในประเทศไทยเช่นกัน
+    # อัปเดตข้อมูลหน้าเว็บทุกชั่วโมง (นาทีที่ 17)
     - cron: "17 * * * *"
+
+    # ส่งสรุปกรณีปกติวันละครั้ง เวลา 08:30 น. ประเทศไทย
+    # GitHub Actions เป็น UTC จึงเท่ากับ 01:30 UTC
+    - cron: "30 1 * * *"
 
 permissions:
   contents: write
@@ -34,10 +37,10 @@ jobs:
           TZ: Asia/Bangkok
         run: |
           echo "========================================"
-          echo "IEAT e-Monitoring Hourly LINE Report"
+          echo "IEAT e-Monitoring"
           echo "========================================"
           echo "Trigger: ${{ github.event_name }}"
-          echo "Branch: ${{ github.ref_name }}"
+          echo "Schedule: ${{ github.event.schedule }}"
           echo "Thailand time:"
           date
           echo "========================================"
@@ -51,21 +54,15 @@ jobs:
           python -m py_compile check_emonitoring.py
           echo "check_emonitoring.py ผ่านการตรวจ Syntax"
 
-      - name: Check LINE secret
-        env:
-          LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
-        run: |
-          if [ -z "$LINE_CHANNEL_ACCESS_TOKEN" ]; then
-            echo "ERROR: ไม่พบ Secret ชื่อ LINE_CHANNEL_ACCESS_TOKEN"
-            exit 1
-          fi
-          echo "พบ LINE_CHANNEL_ACCESS_TOKEN แล้ว"
-
-      - name: Send hourly e-Monitoring report
+      - name: Run e-Monitoring check
         env:
           LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
           PYTHONUNBUFFERED: "1"
           TZ: Asia/Bangkok
+
+          # จะเป็น true เฉพาะรอบ 08:30 น. ประเทศไทย
+          SEND_NORMAL_REPORT: ${{ github.event.schedule == '30 1 * * *' }}
+
         run: python check_emonitoring.py
 
       - name: Publish latest status data
