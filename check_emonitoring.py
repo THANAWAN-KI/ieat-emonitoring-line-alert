@@ -33,6 +33,13 @@ LINE_CHANNEL_ACCESS_TOKEN = os.getenv(
     "",
 ).strip()
 
+# ส่งรายงานสถานะปกติเฉพาะรอบที่ Workflow กำหนด (08:30 น. ประเทศไทย)
+# รอบอื่นจะส่ง LINE เฉพาะเมื่อพบ Alarm จากข้อมูลของ "วันนี้" เท่านั้น
+SEND_NORMAL_REPORT = os.getenv(
+    "SEND_NORMAL_REPORT",
+    "false",
+).strip().lower() in {"1", "true", "yes", "on"}
+
 THAILAND_TIMEZONE = timezone(
     timedelta(hours=7)
 )
@@ -1061,8 +1068,8 @@ def filter_current_online_features(
     int,
     int,
 ]:
-    # ใช้ record ล่าสุดของทุกสถานี โดยไม่บังคับว่าต้องเป็นวันที่รัน Workflow
-    # เพราะ feed จริงอาจมี LastUpdate เก่ากว่าวันปัจจุบัน
+    # การแจ้งเตือนต้องตรวจเฉพาะข้อมูลของ "วันนี้" ตามเวลาประเทศไทย
+    # หาก feed ยังเป็นข้อมูลเก่า จะอัปเดตหน้าเว็บได้ตามปกติ แต่ไม่ส่ง Alarm ซ้ำ
     online_features = []
     stale_count = 0
 
@@ -1072,10 +1079,11 @@ def filter_current_online_features(
         if not is_online(properties.get("Status")):
             continue
 
-        online_features.append(feature)
-
         if not is_today(properties.get("LastUpdate")):
             stale_count += 1
+            continue
+
+        online_features.append(feature)
 
     return (
         online_features,
@@ -2608,7 +2616,7 @@ def build_alert_detail_bubble(
 def send_line_flex(
     alt_text: str,
     contents: dict[str, Any],
-) -> None:
+) -> bool:
     if not LINE_CHANNEL_ACCESS_TOKEN:
         raise RuntimeError(
             "ไม่พบ LINE_CHANNEL_ACCESS_TOKEN"
@@ -2652,6 +2660,7 @@ def send_line_flex(
                 "ส่ง LINE Broadcast สำเร็จ "
                 f"HTTP {response.status}"
             )
+            return True
 
     except urllib.error.HTTPError as error:
         error_body = (
@@ -2661,6 +2670,13 @@ def send_line_flex(
                 errors="replace",
             )
         )
+
+        if error.code == 429:
+            print(
+                "LINE ส่งข้อความไม่ได้: โควตารายเดือนหมด "
+                "ระบบจะอัปเดตหน้าเว็บต่อไป"
+            )
+            return False
 
         raise RuntimeError(
             f"LINE Broadcast API "
@@ -2762,13 +2778,13 @@ def build_carousel_batches(
 
 def send_alert_detail_carousels(
     alert_features: list[dict[str, Any]],
-) -> None:
+) -> bool:
     """ส่งรายละเอียดแยกตามประเภท AQMs, WQMs, CEMs ไม่ปะปนกันใน Carousel เดียว"""
     if not alert_features:
         print(
             "ไม่มีรายละเอียดสถานีที่ต้องส่ง"
         )
-        return
+        return True
 
     features_by_type: dict[str, list[dict[str, Any]]] = {
         "AQMs": [],
@@ -2817,10 +2833,14 @@ def send_alert_detail_carousels(
                 f"จำนวน {len(bubbles)} สถานี "
                 f"ขนาด {carousel_size:,} bytes"
             )
-            send_line_flex(alt_text, carousel)
+            if not send_line_flex(alt_text, carousel):
+                print("หยุดส่งรายละเอียดเพิ่มเติม เนื่องจากโควตา LINE หมด")
+                return False
 
             if batch_number < total_batches:
                 time.sleep(1)
+
+    return True
 
 
 # ============================================================
@@ -3114,7 +3134,8 @@ def main() -> None:
 
     print("=" * 80)
 
-    # ส่งรายงานทุกครั้ง โดยตรวจ Alarm จากวันที่ล่าสุดที่มีอยู่จริงใน feed
+    # ทุกชั่วโมงจะอัปเดต docs/status.json แล้วด้านบน
+    # LINE ส่งทันทีเมื่อพบ Alarm ของข้อมูลวันนี้ หรือส่งสรุปปกติเฉพาะรอบ 08:30 น.
     if alert_features:
         print(
             "ส่งการ์ดสรุปสถานการณ์"
@@ -3128,7 +3149,7 @@ def main() -> None:
             )
         )
 
-        send_line_flex(
+        summary_sent = send_line_flex(
             (
                 "สรุปสถานการณ์ e-Monitoring "
                 f"พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน "
@@ -3137,37 +3158,34 @@ def main() -> None:
             summary_bubble,
         )
 
-        time.sleep(1)
+        if summary_sent:
+            time.sleep(1)
+            print("ส่งการ์ดรายละเอียดสถานี")
+            send_alert_detail_carousels(alert_features)
 
-        print(
-            "ส่งการ์ดรายละเอียดสถานี"
-        )
-
-        send_alert_detail_carousels(
-            alert_features
-        )
-
-    elif online_features:
-        print("ไม่พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน ส่งการ์ดสรุปสถานการณ์")
-        send_line_flex(
-            "e-Monitoring: ไม่พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน",
-            build_normal_summary_bubble(
-                online_type_counts,
-                latest_online_update,
-            ),
-        )
-
+    elif SEND_NORMAL_REPORT:
+        if online_features:
+            print("รอบรายงานปกติ: ส่งการ์ดสรุปสถานการณ์")
+            send_line_flex(
+                "e-Monitoring: ไม่พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน",
+                build_normal_summary_bubble(
+                    online_type_counts,
+                    latest_online_update,
+                ),
+            )
+        else:
+            print("รอบรายงานปกติ: ยังไม่มีข้อมูล ONLINE ของวันนี้")
+            send_line_flex(
+                "e-Monitoring: ยังไม่มีข้อมูล ONLINE ของวันนี้",
+                build_no_current_data_summary_bubble(
+                    online_type_counts,
+                    latest_online_update,
+                ),
+            )
     else:
-        print("ยังไม่มีสถานี ONLINE ส่งการ์ดสรุปสถานการณ์")
-        send_line_flex(
-            "e-Monitoring: ยังไม่มีสถานี ONLINE",
-            build_no_current_data_summary_bubble(
-                online_type_counts,
-                latest_online_update,
-            ),
-        )
+        print("ไม่ส่ง LINE ในรอบนี้: ไม่พบ Alarm ของข้อมูลวันนี้")
 
-    print("ส่งรายงานประจำรอบเข้า LINE เรียบร้อย")
+    print("ประมวลผลรายงานประจำรอบเรียบร้อย")
 
 
 if __name__ == "__main__":
