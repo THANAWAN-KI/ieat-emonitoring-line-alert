@@ -1,20 +1,18 @@
-name: e-Monitoring Hourly Update and LINE Alert
+name: e-Monitoring Hourly LINE Alert
 
 on:
   workflow_dispatch:
-  schedule:
-    # อัปเดตข้อมูลหน้าเว็บทุกชั่วโมง (นาทีที่ 17)
-    - cron: "17 * * * *"
 
-    # ส่งสรุปกรณีปกติวันละครั้ง เวลา 08:30 น. ประเทศไทย
-    # GitHub Actions เป็น UTC จึงเท่ากับ 01:30 UTC
-    - cron: "30 1 * * *"
+  schedule:
+    # รันทุก 1 ชั่วโมง ที่นาที 17
+    # GitHub Actions ใช้ UTC แต่ “นาที” จะตรงกันทั่วโลก
+    - cron: "17 * * * *"
 
 permissions:
   contents: write
 
 concurrency:
-  group: emonitoring-hourly-line-report
+  group: emonitoring-hourly-line-alert
   cancel-in-progress: false
 
 jobs:
@@ -36,14 +34,13 @@ jobs:
         env:
           TZ: Asia/Bangkok
         run: |
-          echo "========================================"
-          echo "IEAT e-Monitoring"
-          echo "========================================"
+          echo "================================================"
+          echo "IEAT e-Monitoring Hourly LINE Alert"
+          echo "================================================"
           echo "Trigger: ${{ github.event_name }}"
-          echo "Schedule: ${{ github.event.schedule }}"
           echo "Thailand time:"
           date
-          echo "========================================"
+          echo "================================================"
 
       - name: Validate Python file
         run: |
@@ -51,22 +48,24 @@ jobs:
             echo "ERROR: ไม่พบไฟล์ check_emonitoring.py"
             exit 1
           fi
+
           python -m py_compile check_emonitoring.py
           echo "check_emonitoring.py ผ่านการตรวจ Syntax"
 
-      - name: Run e-Monitoring check
+      - name: Run e-Monitoring check and send LINE
         env:
           LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
           PYTHONUNBUFFERED: "1"
           TZ: Asia/Bangkok
-
-          # จะเป็น true เฉพาะรอบ 08:30 น. ประเทศไทย
-          SEND_NORMAL_REPORT: ${{ github.event.schedule == '30 1 * * *' }}
-
         run: python check_emonitoring.py
 
       - name: Publish latest status data
         run: |
+          if [ ! -f "docs/status.json" ]; then
+            echo "ERROR: ไม่พบไฟล์ docs/status.json"
+            exit 1
+          fi
+
           if git diff --quiet -- docs/status.json; then
             echo "ข้อมูลสถานการณ์ไม่มีการเปลี่ยนแปลง"
             exit 0
@@ -74,6 +73,7 @@ jobs:
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git add docs/status.json
           git commit -m "Update latest e-Monitoring status [skip ci]"
           git push
