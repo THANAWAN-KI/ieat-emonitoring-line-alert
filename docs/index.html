@@ -1,37 +1,2844 @@
-<!DOCTYPE html>
+from pathlib import Path
+
+html = r'''<!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <title>สถานการณ์ล่าสุด | IEAT e-Monitoring</title>
-  <style>
-    :root{--purple:#6430a2;--deep:#4b177e;--ink:#29242d;--muted:#69636e;--green:#0d9251;--green-pale:#eaf8f0;--amber:#efa613;--amber-pale:#fff7e8;--red:#e42c42;--red-pale:#fff1f3;--line:#e5e2e8}
-    *{box-sizing:border-box}body{margin:0;min-width:320px;color:var(--ink);font-family:"Noto Sans Thai","Leelawadee UI","Segoe UI",Tahoma,Arial,sans-serif;background:radial-gradient(circle at 8% 8%,#fff 0,transparent 25%),radial-gradient(circle at 92% 70%,#fff 0,transparent 25%),linear-gradient(135deg,#eee3ff,#fbfaff 50%,#e9ddff)}.canvas{width:min(100%,943px);margin:auto;padding:27px 47px}.page{min-height:100dvh;overflow:hidden;border-radius:33px;background:rgba(255,255,255,.96);box-shadow:0 14px 36px rgba(77,36,123,.18)}
-    header{display:flex;align-items:center;justify-content:space-between;padding:25px 31px 17px}.brand img{display:block;width:294px;max-width:75vw;height:auto}.hamburger{width:39px;display:grid;gap:6px}.hamburger i{height:4px;border-radius:99px;background:var(--deep)}main{padding:14px 32px 30px}.hidden{display:none!important}.loading,.error{padding:70px 15px;color:var(--muted);text-align:center;font-size:18px}.error{color:var(--red)}
-    .hero{display:flex;align-items:center;gap:25px;margin-bottom:25px}.hero-icon{display:grid;place-items:center;width:128px;height:128px;flex:0 0 128px;border-radius:50%;background:radial-gradient(circle at 35% 25%,#fff,#ede2ff 62%,#e3d3ff);color:var(--purple);box-shadow:inset 0 0 18px #fff}.hero-icon svg{width:79px;height:79px;fill:none;stroke:currentColor;stroke-width:4;stroke-linejoin:round}.hero h1{margin:0;color:var(--purple);font-size:46px;line-height:1.1;letter-spacing:-1.8px}.hero p{margin:8px 0 0;color:#37313a;font-size:27px;font-weight:800;letter-spacing:-1px}
-    .status-card{display:flex;align-items:center;gap:20px;padding:18px 17px;border:1.5px solid #bce3d0;border-radius:17px;background:linear-gradient(100deg,#f8fffb,#effaf4)}.status-card.watch{border-color:#f3cc68;background:linear-gradient(100deg,#fffdf7,#fff7e6)}.status-card.alert{border-color:#efb6c0;background:linear-gradient(100deg,#fffafa,#fff0f3)}.status-icon{display:grid;place-items:center;width:70px;height:70px;flex:0 0 70px;border-radius:50%;background:var(--green);color:#fff}.status-card.watch .status-icon{background:var(--amber)}.status-card.alert .status-icon{background:var(--red)}.status-icon img{width:47px;height:47px;object-fit:contain}.status-title{margin:0;color:var(--green);font-size:23px;line-height:1.25}.status-card.watch .status-title{color:#b87500}.status-card.alert .status-title{color:#b51f32}.status-description{margin:5px 0 0;font-size:16px;line-height:1.5}
-    h2{margin:26px 0 13px;color:var(--purple);font-size:28px;line-height:1.15;letter-spacing:-.7px}.summary-grid,.station-types,.severity-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.summary-card,.type-card,.severity-card{min-height:145px;padding:15px 8px;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:0 5px 11px rgba(0,0,0,.09);text-align:center}.summary-card:nth-child(1),.type-card-wqms{background:#f5efff}.summary-card:nth-child(2),.type-card-aqms{background:var(--green-pale)}.summary-card:nth-child(3),.type-card-cems{background:#edf3ff}.summary-number,.type-number{display:block;color:var(--purple);font-size:35px;font-weight:900;line-height:1}.type-card-aqms .type-number{color:var(--green)}.type-card-cems .type-number{color:#3560aa}.summary-label,.type-name,.type-unit{display:block;margin-top:9px;color:var(--muted);font-size:14px;font-weight:700}.type-name{margin-top:0;color:var(--purple);font-size:18px}.type-card-aqms .type-name{color:var(--green)}.type-card-cems .type-name{color:#3560aa}.type-unit{margin-top:4px;font-size:12px;font-weight:400}.online-total{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:17px 19px;border:1px solid #d9c8f8;border-radius:16px;background:linear-gradient(100deg,#fdfaff,#faf7ff)}.online-total-label{font-size:18px;font-weight:800}.online-total-value{color:var(--purple);font-size:28px}.online-total-value span{font-size:35px}.station-types{margin-top:11px}.severity-grid{margin-top:11px}.severity-card{min-height:111px;padding:14px 7px}.severity-card.urgent{border-color:#efb6c0;background:var(--red-pale);color:#b51f32}.severity-card.watch{border-color:#f3cc68;background:var(--amber-pale);color:#b87500}.severity-card.follow{border-color:#bce3d0;background:var(--green-pale);color:var(--green)}.severity-number{display:block;font-size:31px;font-weight:900;line-height:1}.severity-label{display:block;margin-top:7px;font-size:13px;font-weight:800}
-    .detail-intro{margin:-2px 0 11px;color:var(--muted);font-size:14px}.station-card{margin-top:8px;padding:15px 18px;border:1px solid var(--line);border-left:5px solid var(--red);border-radius:16px;background:#fff;box-shadow:0 4px 9px rgba(0,0,0,.055)}.station-card.watch{border-left-color:var(--amber)}.station-card.follow{border-left-color:var(--green)}.station-estate{margin:0;color:var(--muted);font-size:14px}.station-name{margin:4px 0 9px;color:var(--purple);font-size:23px}.station-level{display:inline-block;margin-bottom:8px;padding:4px 9px;border-radius:99px;background:var(--red-pale);color:#b51f32;font-size:12px;font-weight:800}.station-card.watch .station-level{background:var(--amber-pale);color:#b87500}.station-card.follow .station-level{background:var(--green-pale);color:var(--green)}.detail-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid #eee9f1;font-size:14px}.detail-label{color:var(--muted)}.detail-value{text-align:right}.station-buttons{margin-top:13px}.button,.refresh-button{display:block;width:100%;padding:14px;border:0;border-radius:13px;background:linear-gradient(90deg,#4e177e,#6d37aa);color:#fff;font:inherit;font-size:17px;font-weight:800;text-align:center;text-decoration:none;cursor:pointer}.updated{margin:22px 0 12px;color:var(--muted);text-align:center;font-size:14px}
-    @media(max-width:680px){.canvas{padding:12px}.page{border-radius:25px}header{padding:20px 20px 9px}.brand img{width:215px}.hamburger{width:32px}.hamburger i{height:3px}main{padding:13px 18px 22px}.hero{gap:13px;margin-bottom:19px}.hero-icon{width:79px;height:79px;flex-basis:79px}.hero-icon svg{width:49px;height:49px}.hero h1{font-size:29px;letter-spacing:-1px}.hero p{font-size:17px}.status-card{gap:12px;padding:13px}.status-icon{width:48px;height:48px;flex-basis:48px}.status-icon img{width:32px;height:32px}.status-title{font-size:17px}.status-description{font-size:12px}h2{margin:21px 0 10px;font-size:23px}.summary-grid,.station-types,.severity-grid{gap:7px}.summary-card,.type-card{min-height:106px;padding:10px 4px;border-radius:13px}.summary-number,.type-number{font-size:25px}.summary-label,.type-name{margin-top:5px;font-size:11px}.type-name{font-size:14px}.type-unit{font-size:10px}.online-total{padding:12px}.online-total-label{font-size:14px}.online-total-value{font-size:18px}.online-total-value span{font-size:25px}.severity-card{min-height:86px;padding:10px 4px;border-radius:12px}.severity-number{font-size:24px}.severity-label{font-size:10px}.detail-intro{font-size:12px}.station-card{padding:12px;border-radius:13px}.station-estate{font-size:12px}.station-name{font-size:18px}.detail-row{font-size:12px}.button,.refresh-button{padding:13px;font-size:16px}.updated{font-size:12px}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#4E2A84">
+
+<title>IEAT e-Monitoring | สรุปสถานการณ์ล่าสุด</title>
+
+<!-- PNG Export -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<style>
+
+:root{
+  --purple:#4E2A84;
+  --purple2:#6A4C93;
+  --purple3:#8851A1;
+  --purple-soft:#F5F0F6;
+
+  --green:#2B8A3E;
+  --green-soft:#EEF8F1;
+
+  --red:#C51F35;
+  --red-soft:#FFF1F3;
+
+  --orange:#E67700;
+  --orange-soft:#FFF7E8;
+
+  --yellow:#B7791F;
+  --yellow-soft:#FFF9E8;
+
+  --blue:#1982C4;
+  --blue-soft:#EEF7FC;
+
+  --ink:#26212B;
+  --muted:#716C76;
+
+  --line:#E4DFE8;
+  --bg:#F5F3F6;
+  --white:#FFFFFF;
+
+  --shadow:0 5px 18px rgba(53,35,70,.07);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html,
+body{
+  margin:0;
+  padding:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:
+    "Noto Sans Thai",
+    "Prompt",
+    "Sarabun",
+    "Avenir Next",
+    Arial,
+    sans-serif;
+}
+
+body{
+  min-height:100vh;
+}
+
+button,
+a{
+  font:inherit;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+.page{
+  width:min(100%,560px);
+  margin:auto;
+  padding-bottom:35px;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+  position:sticky;
+  top:0;
+  z-index:50;
+
+  background:rgba(255,255,255,.97);
+  backdrop-filter:blur(12px);
+
+  border-bottom:1px solid var(--line);
+
+  padding:
+    calc(9px + env(safe-area-inset-top))
+    14px
+    9px;
+}
+
+.header-row{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
+.logo{
+  width:auto;
+  height:42px;
+  object-fit:contain;
+}
+
+.brand{
+  flex:1;
+  min-width:0;
+}
+
+.brand strong{
+  display:block;
+  color:var(--purple);
+  font-size:14px;
+  line-height:1.25;
+  font-weight:900;
+}
+
+.brand span{
+  display:block;
+  color:var(--muted);
+  font-size:9px;
+  margin-top:3px;
+  line-height:1.3;
+}
+
+.header-actions{
+  display:flex;
+  gap:5px;
+}
+
+.icon-btn{
+  width:35px;
+  height:35px;
+
+  display:grid;
+  place-items:center;
+
+  border:1px solid #DCD4E2;
+  border-radius:10px;
+
+  background:#fff;
+  color:var(--purple);
+
+  cursor:pointer;
+  font-size:16px;
+}
+
+.icon-btn:active{
+  transform:scale(.96);
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+main{
+  padding:11px;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+  position:relative;
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--purple),
+      var(--purple2)
+    );
+
+  border-radius:20px;
+
+  padding:18px;
+
+  color:#fff;
+
+  box-shadow:
+    0 9px 25px rgba(78,42,132,.20);
+}
+
+.hero::after{
+  content:"";
+
+  position:absolute;
+
+  width:150px;
+  height:150px;
+
+  right:-65px;
+  top:-75px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.08);
+}
+
+.hero-top{
+  position:relative;
+  z-index:2;
+
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.hero-icon{
+  width:48px;
+  height:48px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:14px;
+
+  background:rgba(255,255,255,.13);
+
+  font-size:24px;
+}
+
+.hero h1{
+  margin:0;
+
+  font-size:20px;
+  line-height:1.25;
+
+  font-weight:900;
+}
+
+.hero p{
+  margin:4px 0 0;
+
+  color:#EEE8F4;
+
+  font-size:10px;
+}
+
+.hero-time{
+  position:relative;
+  z-index:2;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  gap:8px;
+
+  margin-top:15px;
+  padding-top:11px;
+
+  border-top:1px solid rgba(255,255,255,.18);
+
+  color:#EDE7F3;
+
+  font-size:9px;
+}
+
+.hero-time strong{
+  color:#fff;
+  font-size:10px;
+}
+
+/* =========================================================
+   CURRENT STATUS
+========================================================= */
+
+.status{
+  margin-top:9px;
+
+  background:#fff;
+
+  border:1px solid var(--line);
+
+  border-radius:15px;
+
+  padding:12px;
+
+  box-shadow:var(--shadow);
+}
+
+.status-main{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
+.status-dot{
+  width:12px;
+  height:12px;
+
+  flex:none;
+
+  border-radius:50%;
+
+  background:var(--green);
+
+  box-shadow:
+    0 0 0 5px var(--green-soft);
+}
+
+.status-dot.alert{
+  background:var(--red);
+
+  box-shadow:
+    0 0 0 5px var(--red-soft);
+}
+
+.status-title{
+  font-size:13px;
+  font-weight:900;
+}
+
+.status-sub{
+  margin-top:3px;
+
+  color:var(--muted);
+
+  font-size:9px;
+  line-height:1.4;
+}
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.section{
+  margin-top:16px;
+}
+
+.section-title{
+  margin:0 3px 8px;
+
+  font-size:13px;
+  font-weight:900;
+
+  color:#3A3041;
+}
+
+.section-title-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+
+  margin-bottom:8px;
+}
+
+.section-title-row .section-title{
+  margin-bottom:0;
+}
+
+/* =========================================================
+   KPI
+========================================================= */
+
+.kpis{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+
+  gap:7px;
+}
+
+.kpi{
+  background:#fff;
+
+  border:1px solid var(--line);
+
+  border-radius:14px;
+
+  padding:12px 6px;
+
+  text-align:center;
+
+  box-shadow:var(--shadow);
+}
+
+.kpi .num{
+  font-size:23px;
+  line-height:1;
+  font-weight:900;
+}
+
+.kpi .label{
+  margin-top:5px;
+
+  color:var(--muted);
+
+  font-size:8px;
+  font-weight:700;
+}
+
+.kpi.total .num{
+  color:var(--purple);
+}
+
+.kpi.online .num{
+  color:var(--green);
+}
+
+.kpi.offline .num{
+  color:var(--red);
+}
+
+/* =========================================================
+   ONLINE PROGRESS
+========================================================= */
+
+.progress-card{
+  margin-top:8px;
+
+  background:#fff;
+
+  border:1px solid var(--line);
+
+  border-radius:14px;
+
+  padding:11px 12px;
+
+  box-shadow:var(--shadow);
+}
+
+.progress-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  font-size:9px;
+  font-weight:800;
+}
+
+.progress-head span:last-child{
+  color:var(--green);
+}
+
+.progress-track{
+  width:100%;
+  height:7px;
+
+  margin-top:7px;
+
+  background:#ECE9EE;
+
+  border-radius:10px;
+
+  overflow:hidden;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      #2B8A3E,
+      #58B96A
+    );
+
+  border-radius:10px;
+
+  transition:width .6s ease;
+}
+
+/* =========================================================
+   TYPE CARDS
+========================================================= */
+
+.types{
+  display:grid;
+  gap:8px;
+}
+
+.type-card{
+  background:#fff;
+
+  border:1px solid var(--line);
+
+  border-radius:15px;
+
+  padding:12px;
+
+  box-shadow:var(--shadow);
+}
+
+.type-head{
+  display:flex;
+  align-items:center;
+
+  gap:10px;
+}
+
+.type-icon{
+  width:40px;
+  height:40px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:11px;
+
+  background:var(--purple-soft);
+
+  color:var(--purple);
+
+  font-size:11px;
+  font-weight:900;
+}
+
+.type-copy{
+  flex:1;
+  min-width:0;
+}
+
+.type-copy strong{
+  display:block;
+
+  font-size:13px;
+  font-weight:900;
+}
+
+.type-copy span{
+  display:block;
+
+  margin-top:2px;
+
+  color:var(--muted);
+
+  font-size:8px;
+}
+
+.type-total{
+  color:var(--purple);
+
+  font-size:19px;
+  font-weight:900;
+}
+
+.type-counts{
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:6px;
+
+  margin-top:9px;
+}
+
+.mini{
+  padding:7px;
+
+  border-radius:9px;
+
+  text-align:center;
+
+  font-size:8px;
+  font-weight:800;
+}
+
+.mini b{
+  display:block;
+
+  margin-bottom:2px;
+
+  font-size:14px;
+}
+
+.mini.on{
+  color:var(--green);
+  background:var(--green-soft);
+}
+
+.mini.off{
+  color:var(--red);
+  background:var(--red-soft);
+}
+
+/* =========================================================
+   SEVERITY
+========================================================= */
+
+.severity{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+
+  gap:7px;
+}
+
+.sev{
+  border-radius:14px;
+
+  padding:10px 5px;
+
+  text-align:center;
+
+  border:1px solid;
+}
+
+.sev img{
+  width:29px;
+  height:29px;
+
+  object-fit:contain;
+
+  display:block;
+
+  margin:0 auto 5px;
+}
+
+.sev b{
+  display:block;
+
+  font-size:20px;
+  line-height:1;
+
+  font-weight:900;
+}
+
+.sev span{
+  display:block;
+
+  margin-top:5px;
+
+  font-size:8px;
+  line-height:1.25;
+
+  font-weight:700;
+}
+
+.sev.high{
+  background:var(--red-soft);
+  border-color:#F0C7CD;
+  color:var(--red);
+}
+
+.sev.watch{
+  background:var(--orange-soft);
+  border-color:#F0D3A5;
+  color:var(--orange);
+}
+
+.sev.follow{
+  background:var(--yellow-soft);
+  border-color:#E9D9A7;
+  color:var(--yellow);
+}
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+.filter-wrap{
+  display:flex;
+
+  gap:5px;
+
+  overflow-x:auto;
+
+  padding-bottom:2px;
+
+  scrollbar-width:none;
+}
+
+.filter-wrap::-webkit-scrollbar{
+  display:none;
+}
+
+.filter-btn{
+  flex:none;
+
+  padding:7px 11px;
+
+  border-radius:20px;
+
+  border:1px solid #DCD4E2;
+
+  background:#fff;
+
+  color:#5E5664;
+
+  font-size:9px;
+  font-weight:800;
+
+  cursor:pointer;
+}
+
+.filter-btn.active{
+  color:#fff;
+
+  background:var(--purple);
+
+  border-color:var(--purple);
+}
+
+/* =========================================================
+   ALERT BOX
+========================================================= */
+
+.alert-box{
+  background:#fff;
+
+  border:1px solid var(--line);
+
+  border-radius:16px;
+
+  padding:11px;
+
+  box-shadow:var(--shadow);
+}
+
+.alert-note{
+  background:#F8F6FA;
+
+  border-radius:10px;
+
+  padding:9px;
+
+  margin-bottom:8px;
+
+  color:var(--muted);
+
+  font-size:8px;
+
+  line-height:1.5;
+}
+
+/* =========================================================
+   STATION CARD
+========================================================= */
+
+.station{
+  position:relative;
+
+  margin-top:8px;
+
+  padding:11px;
+
+  background:#fff;
+
+  border:1px solid #E9E4EC;
+
+  border-radius:13px;
+
+  box-shadow:0 2px 8px rgba(53,35,70,.035);
+}
+
+.station.alert-high{
+  border-left:4px solid var(--red);
+}
+
+.station.alert-watch{
+  border-left:4px solid var(--orange);
+}
+
+.station.alert-follow{
+  border-left:4px solid var(--yellow);
+}
+
+.station-top{
+  display:flex;
+
+  align-items:flex-start;
+
+  gap:8px;
+}
+
+.station-icon{
+  width:34px;
+  height:34px;
+
+  flex:none;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:9px;
+
+  background:var(--red-soft);
+
+  color:var(--red);
+
+  font-size:15px;
+}
+
+.station-info{
+  flex:1;
+  min-width:0;
+}
+
+.station-name{
+  font-size:11px;
+
+  line-height:1.4;
+
+  font-weight:900;
+}
+
+.station-meta{
+  margin-top:3px;
+
+  color:var(--muted);
+
+  font-size:8px;
+
+  line-height:1.45;
+}
+
+.badge{
+  flex:none;
+
+  border-radius:20px;
+
+  padding:4px 7px;
+
+  font-size:7px;
+  font-weight:900;
+
+  white-space:nowrap;
+}
+
+.badge.online{
+  color:var(--green);
+  background:var(--green-soft);
+}
+
+.badge.offline{
+  color:var(--red);
+  background:var(--red-soft);
+}
+
+/* =========================================================
+   PARAMETER
+========================================================= */
+
+.param{
+  margin-top:8px;
+
+  padding:8px;
+
+  border-radius:8px;
+
+  background:#FFF7F8;
+
+  border-left:3px solid var(--red);
+
+  color:#5C343B;
+
+  font-size:8px;
+
+  line-height:1.5;
+}
+
+.param-title{
+  display:block;
+
+  margin-bottom:2px;
+
+  color:var(--red);
+
+  font-size:8px;
+
+  font-weight:900;
+}
+
+.comment{
+  margin-top:7px;
+
+  padding:7px 8px;
+
+  border-radius:8px;
+
+  background:#F8F7F9;
+
+  color:var(--muted);
+
+  font-size:8px;
+
+  line-height:1.5;
+}
+
+.comment strong{
+  color:#514956;
+}
+
+/* =========================================================
+   STATION BUTTONS
+========================================================= */
+
+.station-buttons{
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:6px;
+
+  margin-top:8px;
+}
+
+.action{
+  display:block;
+
+  width:100%;
+
+  padding:7px 6px;
+
+  border-radius:8px;
+
+  text-align:center;
+
+  font-size:8px;
+
+  font-weight:900;
+
+  border:1px solid #DCD4E2;
+
+  background:#fff;
+
+  color:var(--purple);
+
+  cursor:pointer;
+}
+
+.action.primary{
+  color:#fff;
+
+  background:var(--purple);
+
+  border-color:var(--purple);
+}
+
+.action.map{
+  color:#176B9D;
+
+  background:var(--blue-soft);
+
+  border-color:#C9E3F2;
+}
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty{
+  padding:18px 12px;
+
+  border-radius:13px;
+
+  text-align:center;
+
+  color:var(--green);
+
+  background:var(--green-soft);
+
+  border:1px solid #CDE8D3;
+
+  font-size:10px;
+
+  line-height:1.6;
+
+  font-weight:800;
+}
+
+/* =========================================================
+   EXPORT
+========================================================= */
+
+.export-panel{
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:7px;
+
+  margin-top:10px;
+}
+
+.export-btn{
+  border:0;
+
+  border-radius:11px;
+
+  padding:10px 8px;
+
+  cursor:pointer;
+
+  font-size:9px;
+
+  font-weight:900;
+}
+
+.export-pdf{
+  color:#fff;
+  background:var(--purple);
+}
+
+.export-png{
+  color:#fff;
+  background:#1982C4;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+  margin-top:17px;
+
+  text-align:center;
+
+  color:#8A838E;
+
+  font-size:8px;
+
+  line-height:1.65;
+}
+
+/* =========================================================
+   LOADING / ERROR
+========================================================= */
+
+.loading,
+.error{
+  margin-top:10px;
+
+  padding:23px;
+
+  background:#fff;
+
+  border:1px solid var(--line);
+
+  border-radius:15px;
+
+  text-align:center;
+
+  font-size:10px;
+}
+
+.error{
+  color:var(--red);
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+@media(min-width:700px){
+
+  .page{
+    width:760px;
+  }
+
+  main{
+    padding:18px;
+  }
+
+  .types{
+    grid-template-columns:
+      repeat(3,1fr);
+  }
+
+  .station-list{
+    display:grid;
+
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+
+    gap:8px;
+  }
+
+  .station{
+    margin-top:0;
+  }
+
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media(max-width:370px){
+
+  main{
+    padding:9px;
+  }
+
+  .hero{
+    padding:15px;
+  }
+
+  .hero h1{
+    font-size:18px;
+  }
+
+  .kpi .num{
+    font-size:20px;
+  }
+
+  .severity{
+    gap:5px;
+  }
+
+  .sev{
+    padding:8px 3px;
+  }
+
+  .sev b{
+    font-size:18px;
+  }
+
+}
+
+</style>
 </head>
-<body><div class="canvas"><div class="page">
-  <header><div class="brand"><img src="./ieat_logo.png.PNG" alt="IEAT การนิคมอุตสาหกรรมแห่งประเทศไทย"></div><div class="hamburger" aria-label="เมนู"><i></i><i></i><i></i></div></header>
-  <main><div id="loading" class="loading">กำลังโหลดข้อมูลสถานการณ์ล่าสุด...</div><div id="error" class="error hidden">ไม่สามารถโหลดข้อมูลได้ กรุณากดรีเฟรชอีกครั้ง</div>
-    <div id="dashboard" class="hidden">
-      <section class="hero"><div class="hero-icon"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 8 82 22v23c0 22-13 38-32 47C31 83 18 67 18 45V22z"/><path d="m33 49 11 11 24-27"/></svg></div><div><h1>สถานการณ์ล่าสุด</h1><p>สรุปสถานการณ์คุณภาพสิ่งแวดล้อม</p></div></section>
-      <section id="statusCard" class="status-card"><div id="statusIcon" class="status-icon">✓</div><div><h2 id="statusText" class="status-title">-</h2><p id="statusDescription" class="status-description">-</p></div></section>
-      <h2>สถานีตรวจวัด ONLINE ณ เวลานี้</h2><section class="online-total"><span class="online-total-label">สถานี ONLINE ทั้งหมด</span><strong class="online-total-value"><span id="onlineTotal">0</span> สถานี</strong></section>
-      <section class="station-types"><div class="type-card type-card-aqms"><span class="type-name">AQMs</span><strong id="onlineAqms" class="type-number">0</strong><span class="type-unit">สถานี</span></div><div class="type-card type-card-wqms"><span class="type-name">WQMs</span><strong id="onlineWqms" class="type-number">0</strong><span class="type-unit">สถานี</span></div><div class="type-card type-card-cems"><span class="type-name">CEMs</span><strong id="onlineCems" class="type-number">0</strong><span class="type-unit">สถานี</span></div></section>
-      <section id="alertSection" class="hidden"><h2>สรุปพารามิเตอร์ที่เกินมาตรฐาน</h2><div class="summary-grid"><div class="summary-card"><strong id="alertStationCount" class="summary-number">0</strong><span class="summary-label">สถานีแจ้งเตือน</span></div><div class="summary-card"><strong id="parameterCount" class="summary-number">0</strong><span class="summary-label">พารามิเตอร์</span></div><div class="summary-card"><strong id="estateCount" class="summary-number">0</strong><span class="summary-label">นิคมฯ</span></div></div><div class="severity-grid"><div class="severity-card urgent"><strong id="urgentCount" class="severity-number">0</strong><span class="severity-label">เกินค่ามาตรฐาน</span></div><div class="severity-card watch"><strong id="watchCount" class="severity-number">0</strong><span class="severity-label">เฝ้าระวัง</span></div><div class="severity-card follow"><strong id="followCount" class="severity-number">0</strong><span class="severity-label">ติดตามสถานการณ์</span></div></div><h2>รายละเอียดพารามิเตอร์ล่าสุด</h2><p class="detail-intro">แสดงพารามิเตอร์ ค่า และเวลาล่าสุดเพียงรายการเดียวของแต่ละสถานี</p><div id="stationList"></div></section>
-      <p class="updated">ข้อมูล ณ <span id="updatedAt">-</span></p><button type="button" class="refresh-button" onclick="loadStatus()">รีเฟรชข้อมูลล่าสุด</button>
+
+<body>
+
+<div class="page">
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+  <div class="header-row">
+
+    <img
+      class="logo"
+      src="../assets/ieat_logo.png"
+      alt="กนอ."
+      onerror="this.onerror=null;this.src='./assets/ieat_logo.png';"
+    >
+
+    <div class="brand">
+
+      <strong>
+        IEAT e-Monitoring
+      </strong>
+
+      <span>
+        ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย
+      </span>
+
     </div>
-  </main>
-</div></div>
+
+    <div class="header-actions">
+
+      <button
+        class="icon-btn"
+        onclick="loadStatus()"
+        aria-label="รีเฟรช"
+        title="รีเฟรชข้อมูล"
+      >
+        ↻
+      </button>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<main>
+
+<!-- =====================================================
+     LOADING
+===================================================== -->
+
+<div
+  id="loading"
+  class="loading"
+>
+  กำลังโหลดข้อมูลสถานการณ์ล่าสุด…
+</div>
+
+
+<!-- =====================================================
+     ERROR
+===================================================== -->
+
+<div
+  id="error"
+  class="error hidden"
+>
+
+  ไม่สามารถโหลดข้อมูลล่าสุดได้
+
+  <br>
+
+  <small>
+    กรุณากดปุ่ม ↻ เพื่อโหลดใหม่
+  </small>
+
+</div>
+
+
+<!-- =====================================================
+     CONTENT
+===================================================== -->
+
+<div
+  id="content"
+  class="hidden"
+>
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+  <div class="hero-top">
+
+    <div class="hero-icon">
+      📊
+    </div>
+
+    <div>
+
+      <h1>
+        สรุปสถานการณ์ล่าสุด
+      </h1>
+
+      <p>
+        รายงานภาพรวมการเฝ้าระวัง e-Monitoring
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="hero-time">
+
+    <span>
+      ข้อมูล ณ
+    </span>
+
+    <strong id="updatedAt">
+      -
+    </strong>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     CURRENT STATUS
+===================================================== -->
+
+<section class="status">
+
+  <div class="status-main">
+
+    <div
+      id="statusDot"
+      class="status-dot"
+    ></div>
+
+    <div>
+
+      <div
+        id="statusTitle"
+        class="status-title"
+      >
+        กำลังประมวลผล…
+      </div>
+
+      <div
+        id="statusSub"
+        class="status-sub"
+      >
+        -
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     OVERVIEW
+===================================================== -->
+
+<section class="section">
+
+  <div class="section-title">
+    ภาพรวมสถานีตรวจวัด
+  </div>
+
+
+  <div class="kpis">
+
+    <article class="kpi total">
+
+      <div
+        id="total"
+        class="num"
+      >
+        0
+      </div>
+
+      <div class="label">
+        สถานีทั้งหมด
+      </div>
+
+    </article>
+
+
+    <article class="kpi online">
+
+      <div
+        id="online"
+        class="num"
+      >
+        0
+      </div>
+
+      <div class="label">
+        ONLINE
+      </div>
+
+    </article>
+
+
+    <article class="kpi offline">
+
+      <div
+        id="offline"
+        class="num"
+      >
+        0
+      </div>
+
+      <div class="label">
+        OFFLINE
+      </div>
+
+    </article>
+
+  </div>
+
+
+  <div class="progress-card">
+
+    <div class="progress-head">
+
+      <span>
+        สัดส่วนสถานี ONLINE
+      </span>
+
+      <span id="onlinePercent">
+        0%
+      </span>
+
+    </div>
+
+    <div class="progress-track">
+
+      <div
+        id="onlineBar"
+        class="progress-bar"
+      ></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     TYPE
+===================================================== -->
+
+<section class="section">
+
+  <div class="section-title">
+    สถานีตรวจวัดแยกตามประเภท
+  </div>
+
+  <div
+    id="types"
+    class="types"
+  ></div>
+
+</section>
+
+
+<!-- =====================================================
+     SEVERITY
+===================================================== -->
+
+<section class="section">
+
+  <div class="section-title">
+    ระดับการเฝ้าระวัง
+  </div>
+
+
+  <div class="severity">
+
+    <article class="sev high">
+
+      <img
+        src="../assets/4.png"
+        alt="เกินค่ามาตรฐาน"
+      >
+
+      <b id="urgent">
+        0
+      </b>
+
+      <span>
+        เกินค่ามาตรฐาน
+      </span>
+
+    </article>
+
+
+    <article class="sev watch">
+
+      <img
+        src="../assets/3.png"
+        alt="เฝ้าระวัง"
+      >
+
+      <b id="watch">
+        0
+      </b>
+
+      <span>
+        เฝ้าระวัง
+      </span>
+
+    </article>
+
+
+    <article class="sev follow">
+
+      <img
+        src="../assets/1.png"
+        alt="ติดตามสถานการณ์"
+      >
+
+      <b id="follow">
+        0
+      </b>
+
+      <span>
+        ติดตามสถานการณ์
+      </span>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     STATIONS
+===================================================== -->
+
+<section class="section">
+
+  <div class="section-title-row">
+
+    <div class="section-title">
+      รายการสถานีที่ต้องติดตาม
+    </div>
+
+  </div>
+
+
+  <!-- FILTER -->
+
+  <div class="filter-wrap">
+
+    <button
+      class="filter-btn active"
+      data-filter="ALL"
+      onclick="setFilter('ALL',this)"
+    >
+      ทั้งหมด
+    </button>
+
+    <button
+      class="filter-btn"
+      data-filter="AQMs"
+      onclick="setFilter('AQMs',this)"
+    >
+      AQMs
+    </button>
+
+    <button
+      class="filter-btn"
+      data-filter="WQMs"
+      onclick="setFilter('WQMs',this)"
+    >
+      WQMs
+    </button>
+
+    <button
+      class="filter-btn"
+      data-filter="CEMs"
+      onclick="setFilter('CEMs',this)"
+    >
+      CEMs
+    </button>
+
+  </div>
+
+
+  <div
+    class="alert-box"
+    style="margin-top:8px"
+  >
+
+    <div
+      id="alertNote"
+      class="alert-note"
+    ></div>
+
+
+    <div
+      id="stations"
+      class="station-list"
+    ></div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     EXPORT
+===================================================== -->
+
+<section
+  id="exportArea"
+  class="section"
+>
+
+  <div class="section-title">
+    รายงานและการส่งออก
+  </div>
+
+
+  <div class="export-panel">
+
+    <button
+      class="export-btn export-pdf"
+      onclick="exportPDF()"
+    >
+      📄 Export PDF
+    </button>
+
+
+    <button
+      class="export-btn export-png"
+      onclick="exportPNG()"
+    >
+      🖼 Export PNG
+    </button>
+
+  </div>
+
+
+  <div
+    class="export-panel"
+    style="margin-top:7px"
+  >
+
+    <a
+      id="dashboardBtn"
+      class="action primary"
+      target="_blank"
+      rel="noopener"
+    >
+      📊 เปิด Dashboard GIS
+    </a>
+
+
+    <button
+      class="action"
+      onclick="loadStatus()"
+    >
+      ↻ ตรวจสอบข้อมูลล่าสุด
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<div class="footer">
+
+  IEAT e-Monitoring
+
+  • ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย
+
+  <br>
+
+  ข้อมูลจากระบบ e-Monitoring
+
+  <br>
+
+  อัปเดตล่าสุด:
+  <span id="footerUpdated">
+    -
+  </span>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+
 <script>
-const STATUS_ICON_URLS={alert:"https://raw.githubusercontent.com/THANAWAN-KI/ieat-emonitoring-line-alert/main/assets/4.png",watch:"https://raw.githubusercontent.com/THANAWAN-KI/ieat-emonitoring-line-alert/main/assets/3.png",normal:"https://raw.githubusercontent.com/THANAWAN-KI/ieat-emonitoring-line-alert/main/assets/1.png"};
-function safeText(value,fallback="-"){return value===null||value===undefined||value===""?fallback:String(value)}function setText(id,value,fallback="0"){const el=document.getElementById(id);if(el)el.textContent=safeText(value,fallback)}function firstItem(value,separator=" | "){return Array.isArray(value)?safeText(value[0]):safeText(value).split(separator)[0].trim()}function latestStationData(station){return{parameter:firstItem(station.parameter,","),value:firstItem(station.value),detectedAt:firstItem(station.detected_at,",")}}
-function createDetailRow(labelText,valueText){const row=document.createElement("div");row.className="detail-row";const label=document.createElement("span");label.className="detail-label";label.textContent=labelText;const value=document.createElement("strong");value.className="detail-value";value.textContent=safeText(valueText);row.append(label,value);return row}
-function createStationCard(station){const card=document.createElement("article"),latest=latestStationData(station),severityText=safeText(station.severity,"เกินค่ามาตรฐาน");card.className="station-card";if(severityText.includes("เฝ้าระวัง"))card.classList.add("watch");else if(severityText.includes("ติดตาม"))card.classList.add("follow");const estate=document.createElement("p");estate.className="station-estate";estate.textContent=safeText(station.estate,"ไม่ระบุนิคมอุตสาหกรรม");const name=document.createElement("h3");name.className="station-name";name.textContent=safeText(station.station_name,"ไม่ระบุชื่อสถานี");const level=document.createElement("span");level.className="station-level";level.textContent=severityText;card.append(estate,name,level,createDetailRow("ประเภทสถานี",station.station_type),createDetailRow("พารามิเตอร์",latest.parameter),createDetailRow("ค่าที่ตรวจวัด",latest.value),createDetailRow("เวลาที่ตรวจพบ",latest.detectedAt));const buttons=document.createElement("div");buttons.className="station-buttons";const map=document.createElement("a");map.className="button";map.textContent="ตำแหน่งสถานี";map.href=safeText(station.map_url,"#");map.target="_blank";map.rel="noopener noreferrer";buttons.appendChild(map);card.appendChild(buttons);return card}
-async function loadStatus(){const loading=document.getElementById("loading"),error=document.getElementById("error"),dashboard=document.getElementById("dashboard");loading.classList.remove("hidden");error.classList.add("hidden");dashboard.classList.add("hidden");try{const response=await fetch("./status.json?t="+Date.now(),{method:"GET",cache:"no-store"});if(!response.ok)throw new Error("HTTP "+response.status);const data=await response.json(),statusCard=document.getElementById("statusCard"),statusIcon=document.getElementById("statusIcon"),alertSection=document.getElementById("alertSection"),stationList=document.getElementById("stationList");statusCard.className="status-card";let icon=STATUS_ICON_URLS.normal;if(data.status==="alert"){statusCard.classList.add("alert");icon=STATUS_ICON_URLS.alert;alertSection.classList.remove("hidden")}else if(data.status==="watch"){statusCard.classList.add("watch");icon=STATUS_ICON_URLS.watch;alertSection.classList.remove("hidden")}else alertSection.classList.add("hidden");statusIcon.innerHTML="";const image=document.createElement("img");image.src=icon;image.alt="ไอคอนสถานการณ์";statusIcon.appendChild(image);setText("statusText",data.status_text,"ไม่พบข้อมูลสถานการณ์");setText("statusDescription",data.description,"-");setText("onlineTotal",data.online_total);setText("onlineAqms",data.online_aqms);setText("onlineWqms",data.online_wqms);setText("onlineCems",data.online_cems);setText("alertStationCount",data.alert_station_count);setText("parameterCount",data.parameter_count);setText("estateCount",data.estate_count);setText("urgentCount",data.urgent_count);setText("watchCount",data.watch_count);setText("followCount",data.follow_count);setText("updatedAt",data.updated_at,"-");stationList.innerHTML="";(Array.isArray(data.stations)?data.stations:[]).forEach(station=>stationList.appendChild(createStationCard(station)));loading.classList.add("hidden");dashboard.classList.remove("hidden")}catch(loadError){console.error(loadError);loading.classList.add("hidden");error.classList.remove("hidden")}}
+
+/* =========================================================
+   CONFIG
+========================================================= */
+
+const DASHBOARD_URL =
+  "https://www.arcgis.com/apps/dashboards/576c71d01cc5403cad90ee330fd67b6e";
+
+
+const TYPE_INFO = {
+
+  AQMs:{
+    label:"สถานีตรวจวัดคุณภาพอากาศ",
+    icon:"AQ"
+  },
+
+  WQMs:{
+    label:"สถานีตรวจวัดคุณภาพน้ำ",
+    icon:"WQ"
+  },
+
+  CEMs:{
+    label:"สถานีตรวจวัดการระบายมลพิษ",
+    icon:"CE"
+  }
+
+};
+
+
+let CURRENT_DATA = null;
+
+let CURRENT_FILTER = "ALL";
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+const $ =
+  id =>
+    document.getElementById(id);
+
+
+const num =
+  value =>
+    Number.isFinite(Number(value))
+      ? Number(value)
+      : 0;
+
+
+const fmt =
+  value =>
+    num(value).toLocaleString("th-TH");
+
+
+const esc =
+  value =>
+    String(value ?? "-")
+      .replace(
+        /[&<>"']/g,
+        m =>
+          ({
+            "&":"&amp;",
+            "<":"&lt;",
+            ">":"&gt;",
+            '"':"&quot;",
+            "'":"&#039;"
+          }[m])
+      );
+
+
+/* =========================================================
+   TYPE DATA
+========================================================= */
+
+function typeData(data,key){
+
+  const t =
+    (data.type_stats || {})[key] || {};
+
+  return {
+
+    total:num(t.total),
+
+    online:num(t.online),
+
+    offline:num(t.offline)
+
+  };
+
+}
+
+
+/* =========================================================
+   RENDER TYPE
+========================================================= */
+
+function renderTypes(data){
+
+  $("types").innerHTML = "";
+
+
+  [
+    "AQMs",
+    "WQMs",
+    "CEMs"
+  ].forEach(key => {
+
+    const t =
+      typeData(data,key);
+
+    const info =
+      TYPE_INFO[key];
+
+
+    $("types").insertAdjacentHTML(
+      "beforeend",
+
+      `
+      <article class="type-card">
+
+        <div class="type-head">
+
+          <div class="type-icon">
+            ${info.icon}
+          </div>
+
+
+          <div class="type-copy">
+
+            <strong>
+              ${key}
+            </strong>
+
+            <span>
+              ${info.label}
+            </span>
+
+          </div>
+
+
+          <div class="type-total">
+            ${fmt(t.total)}
+          </div>
+
+        </div>
+
+
+        <div class="type-counts">
+
+          <div class="mini on">
+
+            <b>
+              ${fmt(t.online)}
+            </b>
+
+            ONLINE
+
+          </div>
+
+
+          <div class="mini off">
+
+            <b>
+              ${fmt(t.offline)}
+            </b>
+
+            OFFLINE
+
+          </div>
+
+        </div>
+
+      </article>
+      `
+    );
+
+  });
+
+}
+
+
+/* =========================================================
+   SEVERITY SCORE
+========================================================= */
+
+function severityScore(station){
+
+  const p =
+    String(
+      station.parameter_alarm || ""
+    ).toLowerCase();
+
+
+  if(
+    p.includes("เกิน") ||
+    p.includes("alarm") ||
+    p.includes("exceed")
+  ){
+
+    return 3;
+
+  }
+
+
+  if(
+    p.includes("เฝ้าระวัง") ||
+    p.includes("watch")
+  ){
+
+    return 2;
+
+  }
+
+
+  return 1;
+
+}
+
+
+/* =========================================================
+   RENDER STATIONS
+========================================================= */
+
+function renderStations(data){
+
+  const allStations =
+    Array.isArray(data.stations)
+      ? data.stations
+      : [];
+
+
+  let stations =
+    allStations.filter(
+      station => {
+
+        if(
+          CURRENT_FILTER === "ALL"
+        ){
+
+          return true;
+
+        }
+
+
+        return String(
+          station.station_type || ""
+        ).toUpperCase()
+        ===
+        CURRENT_FILTER;
+
+      }
+    );
+
+
+  stations.sort(
+    (a,b) =>
+      severityScore(b)
+      -
+      severityScore(a)
+  );
+
+
+  $("alertNote").textContent =
+
+    allStations.length
+
+      ?
+
+      `พบ ${fmt(allStations.length)} สถานีที่มีรายการต้องติดตาม • กรองดูตามประเภท AQMs / WQMs / CEMs ได้`
+
+      :
+
+      "ขณะนี้ไม่พบสถานีที่มี ParameterAlram ในข้อมูลล่าสุด";
+
+
+  if(!stations.length){
+
+    $("stations").innerHTML = `
+
+      <div class="empty">
+
+        ✓ ไม่พบสถานีที่ต้องติดตาม
+
+        <br>
+
+        <span
+          style="
+            font-weight:400;
+            font-size:8px;
+          "
+        >
+          สถานการณ์อยู่ในภาวะปกติตามข้อมูลล่าสุด
+        </span>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  $("stations").innerHTML =
+
+    stations
+      .map(
+        (s,index) => {
+
+          const type =
+            String(
+              s.station_type || "-"
+            );
+
+
+          const status =
+            String(
+              s.status || "-"
+            ).toUpperCase();
+
+
+          const alarm =
+            s.parameter_alarm
+            ||
+            s.ParameterAlram
+            ||
+            "-";
+
+
+          const comment =
+            s.comment
+            ||
+            s.Comment
+            ||
+            "";
+
+
+          const stationName =
+            s.station_name
+            ||
+            s.StationTH
+            ||
+            "-";
+
+
+          const industry =
+            s.estate_name
+            ||
+            s.IndustryZone
+            ||
+            "-";
+
+
+          const lat =
+            s.latitude
+            ??
+            s.Latitude;
+
+
+          const lon =
+            s.longitude
+            ??
+            s.Longitude;
+
+
+          const map =
+            lat != null &&
+            lon != null
+
+              ?
+
+              `https://www.google.com/maps?q=${encodeURIComponent(
+                lat + "," + lon
+              )}`
+
+              :
+
+              "";
+
+
+          const score =
+            severityScore(s);
+
+
+          const cardClass =
+            score === 3
+              ? "alert-high"
+              : score === 2
+                ? "alert-watch"
+                : "alert-follow";
+
+
+          const icon =
+            score === 3
+              ? "⚠"
+              : score === 2
+                ? "!"
+                : "•";
+
+
+          return `
+
+          <article
+            class="station ${cardClass}"
+            data-type="${esc(type)}"
+          >
+
+            <div class="station-top">
+
+              <div class="station-icon">
+
+                ${icon}
+
+              </div>
+
+
+              <div class="station-info">
+
+                <div class="station-name">
+
+                  ${esc(stationName)}
+
+                </div>
+
+
+                <div class="station-meta">
+
+                  <b>
+                    ${esc(type)}
+                  </b>
+
+                  •
+                  ${esc(industry)}
+
+                </div>
+
+              </div>
+
+
+              <span
+                class="
+                  badge
+                  ${status === "ONLINE"
+                    ? "online"
+                    : "offline"}
+                "
+              >
+
+                ${esc(status)}
+
+              </span>
+
+            </div>
+
+
+            <div class="param">
+
+              <span class="param-title">
+                ⚠ ParameterAlram
+              </span>
+
+              ${esc(alarm)}
+
+            </div>
+
+
+            ${
+              comment
+                ?
+
+                `
+
+                <div class="comment">
+
+                  <strong>
+                    การติดตามผล / สาเหตุ:
+                  </strong>
+
+                  ${esc(comment)}
+
+                </div>
+
+                `
+
+                :
+
+                ""
+            }
+
+
+            ${
+              map
+
+                ?
+
+                `
+
+                <div class="station-buttons">
+
+                  <a
+                    class="action map"
+                    href="${map}"
+                    target="_blank"
+                    rel="noopener"
+                  >
+
+                    📍 เปิดตำแหน่งสถานี
+
+                  </a>
+
+
+                  <a
+                    class="action primary"
+                    href="${DASHBOARD_URL}"
+                    target="_blank"
+                    rel="noopener"
+                  >
+
+                    📊 ดูใน Dashboard
+
+                  </a>
+
+                </div>
+
+                `
+
+                :
+
+                `
+
+                <div
+                  class="station-buttons"
+                  style="grid-template-columns:1fr"
+                >
+
+                  <a
+                    class="action primary"
+                    href="${DASHBOARD_URL}"
+                    target="_blank"
+                    rel="noopener"
+                  >
+
+                    📊 ดูใน Dashboard
+
+                  </a>
+
+                </div>
+
+                `
+
+            }
+
+          </article>
+
+          `;
+
+        }
+      )
+      .join("");
+
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+function setFilter(
+  filter,
+  button
+){
+
+  CURRENT_FILTER =
+    filter;
+
+
+  document
+    .querySelectorAll(
+      ".filter-btn"
+    )
+    .forEach(
+      btn =>
+        btn.classList.remove(
+          "active"
+        )
+    );
+
+
+  if(button){
+
+    button.classList.add(
+      "active"
+    );
+
+  }
+
+
+  if(CURRENT_DATA){
+
+    renderStations(
+      CURRENT_DATA
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   LOAD STATUS
+========================================================= */
+
+async function loadStatus(){
+
+  $("loading")
+    .classList
+    .remove("hidden");
+
+
+  $("error")
+    .classList
+    .add("hidden");
+
+
+  $("content")
+    .classList
+    .add("hidden");
+
+
+  try{
+
+    const response =
+      await fetch(
+        "./status.json?t="
+        +
+        Date.now(),
+        {
+          cache:"no-store"
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "HTTP "
+        +
+        response.status
+      );
+
+    }
+
+
+    const data =
+      await response.json();
+
+
+    CURRENT_DATA =
+      data;
+
+
+    /* =====================================================
+       OVERVIEW
+    ===================================================== */
+
+    const total =
+      data.station_count
+      ??
+      data.station_total
+      ??
+      0;
+
+
+    const online =
+      data.online_total
+      ??
+      0;
+
+
+    const offline =
+      data.offline_total
+      ??
+      0;
+
+
+    $("total").textContent =
+      fmt(total);
+
+
+    $("online").textContent =
+      fmt(online);
+
+
+    $("offline").textContent =
+      fmt(offline);
+
+
+    /* =====================================================
+       ONLINE %
+    ===================================================== */
+
+    const percent =
+      total > 0
+
+        ?
+
+        Math.round(
+          (
+            online
+            /
+            total
+          )
+          *
+          100
+        )
+
+        :
+
+        0;
+
+
+    $("onlinePercent").textContent =
+      percent
+      +
+      "%";
+
+
+    $("onlineBar").style.width =
+      percent
+      +
+      "%";
+
+
+    /* =====================================================
+       SEVERITY
+    ===================================================== */
+
+    $("urgent").textContent =
+      fmt(
+        data.urgent_count
+        ??
+        0
+      );
+
+
+    $("watch").textContent =
+      fmt(
+        data.watch_count
+        ??
+        0
+      );
+
+
+    $("follow").textContent =
+      fmt(
+        data.follow_count
+        ??
+        0
+      );
+
+
+    /* =====================================================
+       TIME
+    ===================================================== */
+
+    const updated =
+      data.updated_at_text
+      ||
+      data.updated_at
+      ||
+      "-";
+
+
+    $("updatedAt").textContent =
+      updated;
+
+
+    $("footerUpdated").textContent =
+      updated;
+
+
+    /* =====================================================
+       CURRENT STATUS
+    ===================================================== */
+
+    const alert =
+      String(
+        data.status || ""
+      ).toLowerCase()
+      ===
+      "alert"
+
+      ||
+
+      num(
+        data.alert_station_count
+      )
+      >
+      0;
+
+
+    $("statusDot")
+      .className =
+      "status-dot"
+      +
+      (
+        alert
+          ? " alert"
+          : ""
+      );
+
+
+    $("statusTitle").textContent =
+
+      alert
+
+        ?
+
+        `พบสถานีที่ต้องติดตาม ${fmt(
+          data.alert_station_count
+        )} สถานี`
+
+        :
+
+        "สถานการณ์โดยรวมอยู่ในภาวะปกติ";
+
+
+    $("statusSub").textContent =
+
+      alert
+
+        ?
+
+        "กรุณาตรวจสอบรายละเอียดสถานีและพารามิเตอร์ด้านล่าง"
+
+        :
+
+        "ระบบ e-Monitoring ไม่พบรายการที่เข้าเกณฑ์แจ้งเตือนในข้อมูลล่าสุด";
+
+
+    /* =====================================================
+       DASHBOARD
+    ===================================================== */
+
+    $("dashboardBtn").href =
+      DASHBOARD_URL;
+
+
+    /* =====================================================
+       RENDER
+    ===================================================== */
+
+    renderTypes(
+      data
+    );
+
+
+    renderStations(
+      data
+    );
+
+
+    $("loading")
+      .classList
+      .add("hidden");
+
+
+    $("content")
+      .classList
+      .remove("hidden");
+
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+
+    $("loading")
+      .classList
+      .add("hidden");
+
+
+    $("error")
+      .classList
+      .remove("hidden");
+
+  }
+
+}
+
+
+/* =========================================================
+   EXPORT PDF
+========================================================= */
+
+function exportPDF(){
+
+  const oldTitle =
+    document.title;
+
+
+  document.title =
+    "IEAT e-Monitoring - รายงานสรุปสถานการณ์ล่าสุด";
+
+
+  window.print();
+
+
+  setTimeout(
+    () => {
+
+      document.title =
+        oldTitle;
+
+    },
+    1000
+  );
+
+}
+
+
+/* =========================================================
+   EXPORT PNG
+========================================================= */
+
+async function exportPNG(){
+
+  if(
+    typeof html2canvas ===
+    "undefined"
+  ){
+
+    alert(
+      "ไม่สามารถโหลดระบบ Export PNG ได้ กรุณาลองใหม่อีกครั้ง"
+    );
+
+    return;
+
+  }
+
+
+  const content =
+    document.getElementById(
+      "content"
+    );
+
+
+  if(!content){
+
+    return;
+
+  }
+
+
+  const oldWidth =
+    content.style.width;
+
+
+  try{
+
+    content.style.width =
+      "100%";
+
+
+    const canvas =
+      await html2canvas(
+        content,
+        {
+          scale:2,
+
+          useCORS:true,
+
+          backgroundColor:
+            "#F5F3F6",
+
+          logging:false
+        }
+      );
+
+
+    const link =
+      document.createElement(
+        "a"
+      );
+
+
+    const date =
+      new Date()
+        .toISOString()
+        .slice(
+          0,
+          10
+        );
+
+
+    link.download =
+      `IEAT_e-Monitoring_${date}.png`;
+
+
+    link.href =
+      canvas.toDataURL(
+        "image/png"
+      );
+
+
+    link.click();
+
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+
+    alert(
+      "เกิดข้อผิดพลาดในการ Export PNG"
+    );
+
+
+  }finally{
+
+    content.style.width =
+      oldWidth;
+
+  }
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
 loadStatus();
-</script></body></html>
+
+</script>
+
+
+<!-- =======================================================
+     PRINT STYLE
+======================================================= -->
+
+<style>
+
+@media print{
+
+  @page{
+
+    size:A4;
+
+    margin:10mm;
+
+  }
+
+
+  html,
+  body{
+
+    background:#fff!important;
+
+  }
+
+
+  body{
+
+    -webkit-print-color-adjust:exact!important;
+
+    print-color-adjust:exact!important;
+
+  }
+
+
+  .page{
+
+    width:100%!important;
+
+    max-width:none!important;
+
+    padding:0!important;
+
+  }
+
+
+  .header{
+
+    position:static!important;
+
+    padding:0 0 8px!important;
+
+    background:#fff!important;
+
+    box-shadow:none!important;
+
+  }
+
+
+  .header-actions,
+  .filter-wrap,
+  .export-panel,
+  .action,
+  .station-buttons,
+  #loading,
+  #error{
+
+    display:none!important;
+
+  }
+
+
+  main{
+
+    padding:0!important;
+
+  }
+
+
+  .hero{
+
+    box-shadow:none!important;
+
+    border-radius:10px!important;
+
+  }
+
+
+  .status,
+  .kpi,
+  .progress-card,
+  .type-card,
+  .alert-box,
+  .station{
+
+    box-shadow:none!important;
+
+  }
+
+
+  .station-list{
+
+    display:grid!important;
+
+    grid-template-columns:
+      1fr 1fr;
+
+    gap:7px;
+
+  }
+
+
+  .station{
+
+    break-inside:avoid;
+
+    page-break-inside:avoid;
+
+  }
+
+
+  .section{
+
+    break-inside:auto;
+
+  }
+
+
+  .footer{
+
+    margin-top:10px;
+
+  }
+
+}
+
+</style>
+
+</body>
+</html>
+'''
+
+out = Path("/mnt/data/summary_latest.html")
+out.write_text(html, encoding="utf-8")
+print(f"สร้างไฟล์เรียบร้อย: {out}")
+print(f"ขนาดไฟล์: {out.stat().st_size/1024:.1f} KB")
