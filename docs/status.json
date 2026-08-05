@@ -1,22 +1,45 @@
 {
   "status": "alert",
-  "status_text": "พบค่าพารามิเตอร์เกินมาตรฐาน",
-  "description": "ระบบตรวจพบสถานีออนไลน์ที่มีข้อมูล ParameterAlram",
-  "updated_at": "2026-08-05T10:16:38.505168+07:00",
-  "updated_at_text": "5 ส.ค. 2569 เวลา 10:16 น.",
-  "data_source_url": "https://emonitor.ieat.go.th/call_feed/geog/GeoData/station_all.json",
+  "status_text": "พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน",
+  "description": "กรุณาตรวจสอบรายละเอียดสถานีและติดตามสถานการณ์",
+  "updated_at": "2026-08-05T10:36:33.504892+07:00",
+  "updated_at_text": "5 ส.ค. 2569 เวลา 10:36 น.",
+  "latest_data_time": "4 ก.ค. 2569, 15:00",
   "station_count": 173,
   "online_total": 104,
+  "offline_total": 69,
   "online_aqms": 0,
   "online_wqms": 13,
   "online_cems": 77,
   "online_other": 14,
   "alert_station_count": 15,
-  "parameter_count": 15,
+  "parameter_text": "..., 0..., 00, 06, 08, 18, 24, 26-07-09, 26-07-10, 34, 35, 39, 41, 45, 55",
   "estate_count": 5,
-  "urgent_count": 0,
-  "watch_count": 15,
-  "follow_count": 0,
+  "urgent_count": 5,
+  "watch_count": 5,
+  "follow_count": 5,
+  "type_stats": {
+    "AQMs": {
+      "total": 0,
+      "online": 0,
+      "offline": 0
+    },
+    "WQMs": {
+      "total": 17,
+      "online": 13,
+      "offline": 4
+    },
+    "CEMs": {
+      "total": 96,
+      "online": 77,
+      "offline": 19
+    },
+    "ประเภทอื่น": {
+      "total": 60,
+      "online": 14,
+      "offline": 46
+    }
+  },
   "stations": [
     {
       "code": "33",
