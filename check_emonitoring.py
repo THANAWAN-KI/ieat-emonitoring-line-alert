@@ -313,7 +313,6 @@ def write_status_file(
     estate_count = len({st["estate_name"] for st in alert_stations if st["estate_name"] != "-"})
     param_list_str = extract_unique_parameters(alert_stations)
     
-    # ดึงเวลา LastUpdate ของสถานีล่าสุดมาแสดงเป็นข้อมูลอัปเดต
     latest_data_time = report_time_text()
     if all_stations:
         valid_updates = [st["last_update"] for st in all_stations if st["last_update"] != "-"]
@@ -356,8 +355,6 @@ def write_status_file(
     with STATUS_FILE.open("w", encoding="utf-8") as file:
         json.dump(status_data, file, ensure_ascii=False, indent=2)
 
-    print(f"อัปเดตไฟล์เว็บไซต์แล้ว: {STATUS_FILE}")
-
 
 # ============================================================
 # LINE Flex Message Builder
@@ -371,6 +368,7 @@ def text_component(
     wrap: bool = True,
     align: str = "start",
     margin: str | None = None,
+    flex: int | None = None,
 ) -> dict[str, Any]:
     comp: dict[str, Any] = {
         "type": "text",
@@ -384,6 +382,8 @@ def text_component(
         comp["weight"] = weight
     if margin:
         comp["margin"] = margin
+    if flex is not None:
+        comp["flex"] = flex
     return comp
 
 
@@ -518,7 +518,7 @@ def build_summary_bubble(
         }
     ])
 
-    # แถวข้อมูลในตาราง (AQMs, WQMs, CEMs, ประเภทอื่น)
+    # แถวข้อมูลในตาราง
     for g_name in ["AQMs", "WQMs", "CEMs", "ประเภทอื่น"]:
         g_data = type_stats.get(g_name, {"total": 0, "online": 0, "offline": 0})
         body_contents.append({
