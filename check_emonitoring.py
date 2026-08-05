@@ -7,6 +7,7 @@ import urllib.request
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlencode
 from zoneinfo import ZoneInfo
 
 
@@ -19,7 +20,9 @@ DATA_URL = (
     "call_feed/geog/GeoData/station_all.json"
 )
 
-LINE_BROADCAST_URL = "https://api.line.me/v2/bot/message/broadcast"
+LINE_BROADCAST_URL = (
+    "https://api.line.me/v2/bot/message/broadcast"
+)
 
 DASHBOARD_URL = (
     "https://www.arcgis.com/apps/dashboards/"
@@ -27,53 +30,151 @@ DASHBOARD_URL = (
 )
 
 THAI_TZ = ZoneInfo("Asia/Bangkok")
-STATUS_FILE = Path("docs/status.json")
 
-MAX_STATIONS_PER_CAROUSEL = 4
-MAX_ALARM_TEXT_CHARS = 350
+STATUS_FILE = Path(
+    "docs/status.json"
+)
+
+# LINE Flex Carousel สูงสุด 12 Bubble
+MAX_CAROUSEL_BUBBLES = 12
 
 
 # ============================================================
-# ฟังก์ชันวันและเวลา
+# Assets
+# ============================================================
+#
+# โครงสร้างใน GitHub:
+#
+# assets/
+# ├── ieat_logo.png
+# ├── 4.png
+# ├── 3.png
+# └── 1.png
+#
+# ถ้ารันบน GitHub Actions จะสร้าง URL ให้เอง
+#
+# ถ้า Repository เป็น Private
+# ให้ตั้งค่า ASSET_BASE_URL เป็น URL สาธารณะ
+# เช่น GitHub Pages
+#
+# ============================================================
+
+GITHUB_REPOSITORY = os.getenv(
+    "GITHUB_REPOSITORY",
+    ""
+).strip()
+
+GITHUB_BRANCH = os.getenv(
+    "GITHUB_REF_NAME",
+    "main"
+).strip()
+
+ASSET_BASE_URL = os.getenv(
+    "ASSET_BASE_URL",
+    ""
+).strip()
+
+
+if (
+    not ASSET_BASE_URL
+    and GITHUB_REPOSITORY
+):
+
+    ASSET_BASE_URL = (
+        "https://raw.githubusercontent.com/"
+        f"{GITHUB_REPOSITORY}/"
+        f"{GITHUB_BRANCH}/assets"
+    )
+
+
+IEAT_LOGO_URL = (
+    f"{ASSET_BASE_URL}/ieat_logo.png"
+)
+
+SEVERITY_HIGH_ICON_URL = (
+    f"{ASSET_BASE_URL}/4.png"
+)
+
+SEVERITY_WATCH_ICON_URL = (
+    f"{ASSET_BASE_URL}/3.png"
+)
+
+SEVERITY_FOLLOW_ICON_URL = (
+    f"{ASSET_BASE_URL}/1.png"
+)
+
+
+# ============================================================
+# วันและเวลา
 # ============================================================
 
 def now_thailand() -> datetime:
-    return datetime.now(THAI_TZ)
+
+    return datetime.now(
+        THAI_TZ
+    )
 
 
-def thai_datetime_text(value: datetime) -> str:
+def thai_datetime_text(
+    value: datetime
+) -> str:
+
     thai_months = [
-        "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.",
-        "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.",
+
+        "ม.ค.",
+        "ก.พ.",
+        "มี.ค.",
+        "เม.ย.",
+        "พ.ค.",
+        "มิ.ย.",
+        "ก.ค.",
+        "ส.ค.",
+        "ก.ย.",
+        "ต.ค.",
+        "พ.ย.",
+        "ธ.ค.",
     ]
 
     return (
-        f"{value.day} {thai_months[value.month - 1]} "
-        f"{value.year + 543} เวลา {value:%H:%M} น."
+        f"{value.day} "
+        f"{thai_months[value.month - 1]} "
+        f"{value.year + 543} "
+        f"เวลา {value:%H:%M} น."
     )
 
 
 def report_time_text() -> str:
-    return thai_datetime_text(now_thailand())
+
+    return thai_datetime_text(
+        now_thailand()
+    )
 
 
 def next_report_time_text() -> str:
-    current_time = now_thailand()
+
+    current_time = (
+        now_thailand()
+    )
 
     next_time = current_time.replace(
         minute=17,
         second=0,
-        microsecond=0
+        microsecond=0,
     )
 
     if current_time >= next_time:
-        next_time += timedelta(hours=1)
 
-    return thai_datetime_text(next_time)
+        next_time += timedelta(
+            hours=1
+        )
+
+    return thai_datetime_text(
+        next_time
+    )
 
 
 # ============================================================
-# ฟังก์ชันจัดการข้อมูล
+# จัดการข้อความ
 # ============================================================
 
 def safe_text(
@@ -92,31 +193,94 @@ def safe_text(
         "none",
         "null",
         "nan",
-        "n/a"
+        "n/a",
     }:
+
         return default
 
     return text
 
 
-def compact_text(
+def full_text(
     value: Any,
-    limit: int = MAX_ALARM_TEXT_CHARS
+    default: str = "-"
 ) -> str:
+    """
+    เก็บข้อมูลทั้งหมด
+    ไม่ตัดความยาว
+    """
 
-    text = safe_text(value, "")
+    if value is None:
+        return default
 
-    text = re.sub(
-        r"\s+",
-        " ",
-        text
-    ).strip()
+    text = str(value).strip()
 
-    if len(text) > limit:
-        return text[:limit - 3] + "..."
+    if text.lower() in {
+        "",
+        "-",
+        "none",
+        "null",
+        "nan",
+        "n/a",
+    }:
+
+        return default
 
     return text
 
+
+# ============================================================
+# แยก ParameterAlram
+# ============================================================
+
+def normalize_alarm_parts(
+    value: Any
+) -> list[str]:
+
+    text = full_text(
+        value,
+        ""
+    )
+
+    if not text:
+        return []
+
+    parts = re.split(
+        r"[,;:\n|]+",
+        text
+    )
+
+    result = []
+
+    for part in parts:
+
+        clean = part.strip()
+
+        if clean:
+            result.append(
+                clean
+            )
+
+    return result
+
+
+def alarm_count(
+    station: dict[str, Any]
+) -> int:
+
+    return len(
+        normalize_alarm_parts(
+            station.get(
+                "parameter_alarm",
+                ""
+            )
+        )
+    )
+
+
+# ============================================================
+# ตรวจสอบสถานะ
+# ============================================================
 
 def is_online(
     properties: dict[str, Any]
@@ -124,7 +288,9 @@ def is_online(
 
     return (
         safe_text(
-            properties.get("Status"),
+            properties.get(
+                "Status"
+            ),
             ""
         ).upper()
         == "ONLINE"
@@ -136,7 +302,9 @@ def has_alarm(
 ) -> bool:
 
     alarm = safe_text(
-        properties.get("ParameterAlram"),
+        properties.get(
+            "ParameterAlram"
+        ),
         ""
     )
 
@@ -146,7 +314,7 @@ def has_alarm(
         "none",
         "null",
         "nan",
-        "n/a"
+        "n/a",
     }
 
 
@@ -155,42 +323,68 @@ def valid_station(
 ) -> bool:
 
     station_name = safe_text(
-        properties.get("StationTH"),
+        properties.get(
+            "StationTH"
+        ),
         ""
     )
 
     code = safe_text(
-        properties.get("Code"),
+        properties.get(
+            "Code"
+        ),
         ""
     )
 
-    if station_name in {"", "-"}:
+    if station_name in {
+        "",
+        "-"
+    }:
+
         return False
 
-    if code in {"0", "9999"}:
+    if code in {
+        "0",
+        "9999"
+    }:
+
         return False
 
     return True
 
 
+# ============================================================
+# GeoJSON
+# ============================================================
+
 def get_features(
     payload: Any
 ) -> list[dict[str, Any]]:
 
-    if isinstance(payload, dict):
+    if isinstance(
+        payload,
+        dict
+    ):
 
         features = payload.get(
             "features",
             []
         )
 
-        return (
-            features
-            if isinstance(features, list)
-            else []
-        )
+        if isinstance(
+            features,
+            list
+        ):
 
-    if isinstance(payload, list):
+            return features
+
+        return []
+
+    if isinstance(
+        payload,
+        list
+    ):
+
         return payload
 
     return []
@@ -205,16 +399,22 @@ def get_properties(
         {}
     )
 
-    return (
-        properties
-        if isinstance(properties, dict)
-        else {}
-    )
+    if isinstance(
+        properties,
+        dict
+    ):
+
+        return properties
+
+    return {}
 
 
 def get_coordinates(
     feature: dict[str, Any]
-) -> tuple[float | None, float | None]:
+) -> tuple[
+    float | None,
+    float | None
+]:
 
     geometry = feature.get(
         "geometry",
@@ -225,7 +425,11 @@ def get_coordinates(
         geometry,
         dict
     ):
-        return None, None
+
+        return (
+            None,
+            None
+        )
 
     coordinates = geometry.get(
         "coordinates",
@@ -233,16 +437,27 @@ def get_coordinates(
     )
 
     if (
-        not isinstance(coordinates, list)
+        not isinstance(
+            coordinates,
+            list
+        )
         or len(coordinates) < 2
     ):
-        return None, None
+
+        return (
+            None,
+            None
+        )
 
     try:
 
         return (
-            float(coordinates[0]),
-            float(coordinates[1])
+            float(
+                coordinates[0]
+            ),
+            float(
+                coordinates[1]
+            )
         )
 
     except (
@@ -250,7 +465,10 @@ def get_coordinates(
         ValueError
     ):
 
-        return None, None
+        return (
+            None,
+            None
+        )
 
 
 # ============================================================
@@ -264,8 +482,9 @@ def download_station_data() -> Any:
         DATA_URL,
 
         headers={
+
             "User-Agent":
-                "IEAT-eMonitoring-LINE-Alert/2.0",
+                "IEAT-eMonitoring-LINE-Alert/3.0",
 
             "Accept":
                 "application/json",
@@ -277,7 +496,7 @@ def download_station_data() -> Any:
                 "no-cache",
         },
 
-        method="GET"
+        method="GET",
     )
 
     try:
@@ -290,7 +509,9 @@ def download_station_data() -> Any:
             raw_data = (
                 response
                 .read()
-                .decode("utf-8-sig")
+                .decode(
+                    "utf-8-sig"
+                )
             )
 
             return json.loads(
@@ -300,46 +521,59 @@ def download_station_data() -> Any:
     except urllib.error.HTTPError as error:
 
         raise RuntimeError(
-            f"ดาวน์โหลดข้อมูลไม่สำเร็จ "
-            f"HTTP {error.code}: {error.reason}"
+            "ดาวน์โหลดข้อมูลไม่สำเร็จ "
+            f"HTTP {error.code}: "
+            f"{error.reason}"
         ) from error
 
     except urllib.error.URLError as error:
 
         raise RuntimeError(
-            "ไม่สามารถเชื่อมต่อแหล่งข้อมูล "
-            f"e-Monitoring: {error.reason}"
+            "ไม่สามารถเชื่อมต่อ "
+            "e-Monitoring: "
+            f"{error.reason}"
         ) from error
 
     except json.JSONDecodeError as error:
 
         raise RuntimeError(
             "ข้อมูลจาก e-Monitoring "
-            f"ไม่ใช่ JSON ที่ถูกต้อง: {error}"
+            "ไม่ใช่ JSON ที่ถูกต้อง: "
+            f"{error}"
         ) from error
 
 
 # ============================================================
-# เตรียมข้อมูลสถานี
+# จัดประเภทสถานี
 # ============================================================
 
 def station_type_group(
     station_type: str
 ) -> str:
 
-    normalized = station_type.upper()
+    normalized = safe_text(
+        station_type,
+        ""
+    ).upper()
 
     if "AQM" in normalized:
+
         return "AQMs"
 
     if "WQM" in normalized:
+
         return "WQMs"
 
     if "CEM" in normalized:
+
         return "CEMs"
 
     return "ประเภทอื่น"
 
+
+# ============================================================
+# สร้างข้อมูลสถานี
+# ============================================================
 
 def create_station_record(
     feature: dict[str, Any]
@@ -349,52 +583,128 @@ def create_station_record(
         feature
     )
 
-    longitude, latitude = get_coordinates(
-        feature
+    longitude, latitude = (
+        get_coordinates(
+            feature
+        )
     )
 
     return {
 
-        "code": safe_text(
-            properties.get("Code")
-        ),
+        "code":
+            safe_text(
+                properties.get(
+                    "Code"
+                )
+            ),
 
-        "station_name": safe_text(
-            properties.get("StationTH")
-        ),
+        "station_name":
+            safe_text(
+                properties.get(
+                    "StationTH"
+                )
+            ),
 
-        "estate_name": safe_text(
+        "estate_name":
+            safe_text(
 
-            properties.get("IndustryZone")
-            or properties.get("EstateTH")
-            or properties.get("IndustrialEstate")
-            or properties.get("IndustrialEstateTH")
-        ),
+                properties.get(
+                    "IndustryZone"
+                )
 
-        "station_type": safe_text(
-            properties.get("Type")
-        ),
+                or
 
-        "status": safe_text(
-            properties.get("Status")
-        ),
+                properties.get(
+                    "EstateTH"
+                )
 
-        "last_update": safe_text(
+                or
 
-            properties.get("LastUpdate-TH")
-            or properties.get("LastUpdateTH")
-            or properties.get("LastUpdate")
-        ),
+                properties.get(
+                    "IndustrialEstate"
+                )
 
-        "parameter_alarm": compact_text(
-            properties.get("ParameterAlram")
-        ),
+                or
 
-        "longitude": longitude,
+                properties.get(
+                    "IndustrialEstateTH"
+                )
+            ),
 
-        "latitude": latitude,
+        "station_type":
+            safe_text(
+                properties.get(
+                    "Type"
+                )
+            ),
+
+        "status":
+            safe_text(
+                properties.get(
+                    "Status"
+                )
+            ),
+
+        "last_update":
+            safe_text(
+
+                properties.get(
+                    "LastUpdate-TH"
+                )
+
+                or
+
+                properties.get(
+                    "LastUpdateTH"
+                )
+
+                or
+
+                properties.get(
+                    "LastUpdate"
+                )
+            ),
+
+        # ไม่ตัดข้อมูล
+        "parameter_alarm":
+            full_text(
+                properties.get(
+                    "ParameterAlram"
+                )
+            ),
+
+        # ดึง Comment
+        "comment":
+            full_text(
+
+                properties.get(
+                    "Comment"
+                )
+
+                or
+
+                properties.get(
+                    "COMMENT"
+                )
+
+                or
+
+                properties.get(
+                    "comment"
+                )
+            ),
+
+        "longitude":
+            longitude,
+
+        "latitude":
+            latitude,
     }
 
+
+# ============================================================
+# เตรียมสถานีทั้งหมด
+# ============================================================
 
 def prepare_stations(
     features: list[dict[str, Any]]
@@ -408,6 +718,7 @@ def prepare_stations(
             feature,
             dict
         ):
+
             continue
 
         properties = get_properties(
@@ -427,6 +738,10 @@ def prepare_stations(
     return stations
 
 
+# ============================================================
+# ค้นหาสถานีที่มี ParameterAlram
+# ============================================================
+
 def filter_alert_features(
     features: list[dict[str, Any]]
 ) -> list[dict[str, Any]]:
@@ -439,6 +754,7 @@ def filter_alert_features(
             feature,
             dict
         ):
+
             continue
 
         properties = get_properties(
@@ -448,16 +764,18 @@ def filter_alert_features(
         if not valid_station(
             properties
         ):
+
             continue
 
-        if not is_online(
-            properties
-        ):
-            continue
+        # สำคัญ:
+        # ไม่กรอง ONLINE แล้ว
+        # เพื่อให้ OFFLINE ที่มี Alarm
+        # แสดงรายละเอียดได้ด้วย
 
         if not has_alarm(
             properties
         ):
+
             continue
 
         alert_stations.append(
@@ -469,6 +787,10 @@ def filter_alert_features(
     return alert_stations
 
 
+# ============================================================
+# สถิติประเภทสถานี
+# ============================================================
+
 def calculate_type_stats(
     all_stations: list[dict[str, Any]]
 ) -> dict[str, dict[str, int]]:
@@ -478,99 +800,101 @@ def calculate_type_stats(
         "AQMs": {
             "total": 0,
             "online": 0,
-            "offline": 0
+            "offline": 0,
         },
 
         "WQMs": {
             "total": 0,
             "online": 0,
-            "offline": 0
+            "offline": 0,
         },
 
         "CEMs": {
             "total": 0,
             "online": 0,
-            "offline": 0
+            "offline": 0,
         },
 
         "ประเภทอื่น": {
             "total": 0,
             "online": 0,
-            "offline": 0
+            "offline": 0,
         },
     }
 
-    for st in all_stations:
+    for station in all_stations:
 
         group = station_type_group(
-            st["station_type"]
+            station[
+                "station_type"
+            ]
         )
 
         if group not in stats:
+
             group = "ประเภทอื่น"
 
-        stats[group]["total"] += 1
+        stats[group][
+            "total"
+        ] += 1
 
         if (
-            st["status"].upper()
+            station[
+                "status"
+            ].upper()
             == "ONLINE"
         ):
 
-            stats[group]["online"] += 1
+            stats[group][
+                "online"
+            ] += 1
 
         else:
 
-            stats[group]["offline"] += 1
+            stats[group][
+                "offline"
+            ] += 1
 
     return stats
 
 
+# ============================================================
+# รายชื่อ Parameter ที่ไม่ซ้ำ
+# ============================================================
+
 def extract_unique_parameters(
     alert_stations: list[dict[str, Any]]
-) -> str:
+) -> list[str]:
 
     params = set()
 
-    for st in alert_stations:
+    for station in alert_stations:
 
-        alarm_str = st[
-            "parameter_alarm"
-        ]
-
-        if (
-            not alarm_str
-            or alarm_str == "-"
-        ):
-            continue
-
-        parts = re.split(
-            r"[,:]",
-            alarm_str
+        parts = normalize_alarm_parts(
+            station.get(
+                "parameter_alarm",
+                ""
+            )
         )
 
-        for p in parts:
+        for part in parts:
 
-            clean_p = p.strip()
+            clean = part.strip()
 
-            if clean_p:
+            if clean:
 
-                sub_words = (
-                    clean_p.split()
+                params.add(
+                    clean
                 )
 
-                if sub_words:
-
-                    params.add(
-                        sub_words[0].upper()
-                    )
-
-    if not params:
-        return "-"
-
-    return ", ".join(
-        sorted(params)
+    return sorted(
+        params
     )
 
+
+# ============================================================
+# ระดับการเฝ้าระวัง
+# ============================================================
 
 def calculate_severity_levels(
     alert_stations: list[dict[str, Any]]
@@ -580,42 +904,135 @@ def calculate_severity_levels(
     watch = 0
     follow = 0
 
-    for st in alert_stations:
+    for station in alert_stations:
 
-        alarm_str = st[
-            "parameter_alarm"
-        ]
-
-        if (
-            not alarm_str
-            or alarm_str == "-"
-        ):
-            continue
-
-        count = len([
-            x
-            for x in alarm_str.split(",")
-            if x.strip()
-        ])
+        count = alarm_count(
+            station
+        )
 
         if count >= 3:
+
             urgent += 1
 
         elif count == 2:
+
             watch += 1
 
         elif count == 1:
+
             follow += 1
 
     return (
         urgent,
         watch,
-        follow
+        follow,
+    )
+
+
+def get_station_severity(
+    station: dict[str, Any]
+) -> dict[str, str]:
+
+    count = alarm_count(
+        station
+    )
+
+    if count >= 3:
+
+        return {
+
+            "title":
+                "เกินค่ามาตรฐาน",
+
+            "color":
+                "#C51F35",
+
+            "background":
+                "#FFF1F3",
+
+            "border":
+                "#E9B6BE",
+
+            "icon_url":
+                SEVERITY_HIGH_ICON_URL,
+        }
+
+    if count == 2:
+
+        return {
+
+            "title":
+                "เฝ้าระวัง",
+
+            "color":
+                "#E67700",
+
+            "background":
+                "#FFF8E8",
+
+            "border":
+                "#E9D49B",
+
+            "icon_url":
+                SEVERITY_WATCH_ICON_URL,
+        }
+
+    return {
+
+        "title":
+            "ติดตามสถานการณ์",
+
+        "color":
+            "#2B8A3E",
+
+        "background":
+            "#F1F8F3",
+
+        "border":
+            "#BBD8C4",
+
+        "icon_url":
+            SEVERITY_FOLLOW_ICON_URL,
+    }
+
+
+# ============================================================
+# Google Maps
+# ============================================================
+
+def google_maps_url(
+    latitude: float | None,
+    longitude: float | None,
+) -> str:
+
+    if (
+        latitude is None
+        or longitude is None
+    ):
+
+        return (
+            "https://www.google.com/maps"
+        )
+
+    query = urlencode({
+
+        "api":
+            "1",
+
+        "query":
+            f"{latitude:.7f},"
+            f"{longitude:.7f}",
+    })
+
+    return (
+        "https://www.google.com/maps/"
+        "search/?"
+        f"{query}"
     )
 
 
 # ============================================================
-# สร้างไฟล์สถานะสำหรับหน้าเว็บไซต์
+# เขียน status.json
 # ============================================================
 
 def write_status_file(
@@ -624,20 +1041,26 @@ def write_status_file(
     type_stats: dict[str, dict[str, int]],
 ) -> None:
 
-    current_time = now_thailand()
+    current_time = (
+        now_thailand()
+    )
 
     total_count = len(
         all_stations
     )
 
     online_total = sum(
-        v["online"]
-        for v in type_stats.values()
+        value[
+            "online"
+        ]
+        for value in type_stats.values()
     )
 
     offline_total = sum(
-        v["offline"]
-        for v in type_stats.values()
+        value[
+            "offline"
+        ]
+        for value in type_stats.values()
     )
 
     urgent_count, watch_count, follow_count = (
@@ -648,14 +1071,19 @@ def write_status_file(
 
     estate_count = len({
 
-        st["estate_name"]
+        station[
+            "estate_name"
+        ]
 
-        for st in alert_stations
+        for station
+        in alert_stations
 
-        if st["estate_name"] != "-"
+        if station[
+            "estate_name"
+        ] != "-"
     })
 
-    param_list_str = (
+    unique_parameters = (
         extract_unique_parameters(
             alert_stations
         )
@@ -669,11 +1097,16 @@ def write_status_file(
 
         valid_updates = [
 
-            st["last_update"]
+            station[
+                "last_update"
+            ]
 
-            for st in all_stations
+            for station
+            in all_stations
 
-            if st["last_update"] != "-"
+            if station[
+                "last_update"
+            ] != "-"
         ]
 
         if valid_updates:
@@ -695,7 +1128,9 @@ def write_status_file(
 
             if alert_stations
 
-            else "ไม่พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน"
+            else
+
+            "ไม่พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน"
         ),
 
         "description": (
@@ -704,7 +1139,9 @@ def write_status_file(
 
             if alert_stations
 
-            else "สถานีและติดตามสถานการณ์"
+            else
+
+            "สถานีและติดตามสถานการณ์"
         ),
 
         "updated_at":
@@ -726,22 +1163,36 @@ def write_status_file(
             offline_total,
 
         "online_aqms":
-            type_stats["AQMs"]["online"],
+            type_stats[
+                "AQMs"
+            ]["online"],
 
         "online_wqms":
-            type_stats["WQMs"]["online"],
+            type_stats[
+                "WQMs"
+            ]["online"],
 
         "online_cems":
-            type_stats["CEMs"]["online"],
+            type_stats[
+                "CEMs"
+            ]["online"],
 
         "online_other":
-            type_stats["ประเภทอื่น"]["online"],
+            type_stats[
+                "ประเภทอื่น"
+            ]["online"],
 
         "alert_station_count":
-            len(alert_stations),
+            len(
+                alert_stations
+            ),
 
         "parameter_text":
-            param_list_str,
+            ", ".join(
+                unique_parameters
+            )
+            if unique_parameters
+            else "-",
 
         "estate_count":
             estate_count,
@@ -773,15 +1224,19 @@ def write_status_file(
     ) as file:
 
         json.dump(
+
             status_data,
+
             file,
+
             ensure_ascii=False,
+
             indent=2
         )
 
 
 # ============================================================
-# LINE Flex Message
+# LINE Flex Helper
 # ============================================================
 
 def text_component(
@@ -795,13 +1250,13 @@ def text_component(
     flex: int | None = None,
 ) -> dict[str, Any]:
 
-    comp: dict[str, Any] = {
+    component = {
 
         "type":
             "text",
 
         "text":
-            text,
+            str(text),
 
         "size":
             size,
@@ -817,19 +1272,199 @@ def text_component(
     }
 
     if weight:
-        comp["weight"] = weight
+
+        component[
+            "weight"
+        ] = weight
 
     if margin:
-        comp["margin"] = margin
+
+        component[
+            "margin"
+        ] = margin
 
     if flex is not None:
-        comp["flex"] = flex
 
-    return comp
+        component[
+            "flex"
+        ] = flex
+
+    return component
+
+
+def image_component(
+    url: str,
+    size: str = "xs",
+) -> dict[str, Any]:
+
+    return {
+
+        "type":
+            "image",
+
+        "url":
+            url,
+
+        "size":
+            size,
+
+        "aspectMode":
+            "fit",
+
+        "aspectRatio":
+            "1:1",
+
+        "flex":
+            0,
+    }
+
+
+def detail_row(
+    label: str,
+    value: str,
+    value_color: str = "#30283A",
+) -> dict[str, Any]:
+
+    return {
+
+        "type":
+            "box",
+
+        "layout":
+            "horizontal",
+
+        "paddingTop":
+            "3px",
+
+        "paddingBottom":
+            "3px",
+
+        "contents": [
+
+            text_component(
+                label,
+                size="xxs",
+                color="#777777",
+                weight="bold",
+                flex=2
+            ),
+
+            text_component(
+                value,
+                size="xxs",
+                color=value_color,
+                weight="bold",
+                wrap=True,
+                flex=4
+            ),
+        ],
+    }
 
 
 # ============================================================
-# สร้าง LINE Flex Card
+# Header
+# ============================================================
+
+def build_header(
+    subtitle: str
+) -> dict[str, Any]:
+
+    return {
+
+        "type":
+            "box",
+
+        "layout":
+            "vertical",
+
+        "paddingTop":
+            "7px",
+
+        "paddingBottom":
+            "6px",
+
+        "paddingStart":
+            "12px",
+
+        "paddingEnd":
+            "12px",
+
+        "contents": [
+
+            {
+                "type":
+                    "box",
+
+                "layout":
+                    "vertical",
+
+                "height":
+                    "3px",
+
+                "backgroundColor":
+                    "#4E1478",
+
+                "contents": [],
+            },
+
+            {
+                "type":
+                    "box",
+
+                "layout":
+                    "horizontal",
+
+                "margin":
+                    "sm",
+
+                "alignItems":
+                    "center",
+
+                "contents": [
+
+                    image_component(
+                        IEAT_LOGO_URL,
+                        size="xs"
+                    ),
+
+                    {
+                        "type":
+                            "box",
+
+                        "layout":
+                            "vertical",
+
+                        "margin":
+                            "sm",
+
+                        "flex":
+                            1,
+
+                        "contents": [
+
+                            text_component(
+                                "IEAT e-Monitoring",
+                                size="md",
+                                color="#32105B",
+                                weight="bold"
+                            ),
+
+                            text_component(
+                                subtitle,
+                                size="xxs",
+                                color="#777777",
+                                margin="xs"
+                            ),
+                        ],
+                    },
+                ],
+            },
+        ],
+    }
+
+
+# ============================================================
+# หน้า Summary
 # ============================================================
 
 def build_summary_bubble(
@@ -840,21 +1475,23 @@ def build_summary_bubble(
     alert_stations: list[dict[str, Any]],
 ) -> dict[str, Any]:
 
-    # ========================================================
-    # ตรวจสอบสถานะ
-    # ========================================================
-
-    has_alert = (
-        len(alert_stations) > 0
+    has_alert = bool(
+        alert_stations
     )
 
     if has_alert:
 
-        status_color = "#C51F35"
-        status_bg = "#FFF4F5"
-        status_border = "#E9A6AF"
+        status_color = (
+            "#C51F35"
+        )
 
-        status_icon = "!"
+        status_background = (
+            "#FFF2F3"
+        )
+
+        status_border = (
+            "#F5C2C7"
+        )
 
         status_title = (
             "พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน"
@@ -866,11 +1503,17 @@ def build_summary_bubble(
 
     else:
 
-        status_color = "#18794E"
-        status_bg = "#F1F8F3"
-        status_border = "#78B88E"
+        status_color = (
+            "#18794E"
+        )
 
-        status_icon = "✓"
+        status_background = (
+            "#EAF7EF"
+        )
+
+        status_border = (
+            "#C3E6CB"
+        )
 
         status_title = (
             "ไม่พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน"
@@ -880,51 +1523,239 @@ def build_summary_bubble(
             "สถานีและติดตามสถานการณ์"
         )
 
-    # ========================================================
-    # ข้อมูล Alert
-    # ========================================================
+    body_contents = []
+
+    # --------------------------------------------------------
+    # Banner
+    # --------------------------------------------------------
+
+    banner_contents = [
+
+        text_component(
+            status_title,
+            size="sm",
+            color=status_color,
+            weight="bold",
+            align="center"
+        ),
+
+        text_component(
+            status_subtitle,
+            size="xxs",
+            color="#716C6B",
+            margin="xs",
+            align="center"
+        ),
+    ]
 
     if has_alert:
 
-        param_str = (
+        parameters = (
             extract_unique_parameters(
                 alert_stations
             )
         )
 
-        parameter_count = (
-
-            len(
-                set(
-                    param_str.split(", ")
-                )
-            )
-
-            if param_str != "-"
-
-            else 0
-        )
-
-        urgent_c, watch_c, follow_c = (
+        urgent_count, watch_count, follow_count = (
             calculate_severity_levels(
                 alert_stations
             )
         )
 
-        estate_c = len({
+        estate_count = len({
 
-            st["estate_name"]
+            station[
+                "estate_name"
+            ]
 
-            for st in alert_stations
+            for station
+            in alert_stations
 
-            if st["estate_name"] != "-"
+            if station[
+                "estate_name"
+            ] != "-"
         })
 
-    # ========================================================
-    # HEADER
-    # ========================================================
+        # ตัวเลข 3 ช่อง
+        banner_contents.append({
 
-    header = {
+            "type":
+                "box",
+
+            "layout":
+                "horizontal",
+
+            "margin":
+                "md",
+
+            "spacing":
+                "sm",
+
+            "contents": [
+
+                {
+                    "type":
+                        "box",
+
+                    "layout":
+                        "vertical",
+
+                    "flex":
+                        1,
+
+                    "backgroundColor":
+                        "#FFFFFF",
+
+                    "cornerRadius":
+                        "7px",
+
+                    "paddingAll":
+                        "6px",
+
+                    "contents": [
+
+                        text_component(
+                            str(
+                                len(
+                                    alert_stations
+                                )
+                            ),
+                            size="lg",
+                            color="#30283A",
+                            weight="bold",
+                            align="center"
+                        ),
+
+                        text_component(
+                            "สถานีแจ้งเตือน",
+                            size="xxs",
+                            color="#716C6B",
+                            align="center",
+                            margin="xs"
+                        ),
+                    ],
+                },
+
+                {
+                    "type":
+                        "box",
+
+                    "layout":
+                        "vertical",
+
+                    "flex":
+                        1,
+
+                    "backgroundColor":
+                        "#FFFFFF",
+
+                    "cornerRadius":
+                        "7px",
+
+                    "paddingAll":
+                        "6px",
+
+                    "contents": [
+
+                        text_component(
+                            str(
+                                len(
+                                    parameters
+                                )
+                            ),
+                            size="lg",
+                            color="#30283A",
+                            weight="bold",
+                            align="center"
+                        ),
+
+                        text_component(
+                            "พารามิเตอร์",
+                            size="xxs",
+                            color="#716C6B",
+                            align="center",
+                            margin="xs"
+                        ),
+                    ],
+                },
+
+                {
+                    "type":
+                        "box",
+
+                    "layout":
+                        "vertical",
+
+                    "flex":
+                        1,
+
+                    "backgroundColor":
+                        "#FFFFFF",
+
+                    "cornerRadius":
+                        "7px",
+
+                    "paddingAll":
+                        "6px",
+
+                    "contents": [
+
+                        text_component(
+                            str(
+                                estate_count
+                            ),
+                            size="lg",
+                            color="#30283A",
+                            weight="bold",
+                            align="center"
+                        ),
+
+                        text_component(
+                            "นิคมฯ",
+                            size="xxs",
+                            color="#716C6B",
+                            align="center",
+                            margin="xs"
+                        ),
+                    ],
+                },
+            ],
+        })
+
+        # รายชื่อ parameter
+        banner_contents.append({
+
+            "type":
+                "box",
+
+            "layout":
+                "vertical",
+
+            "margin":
+                "sm",
+
+            "contents": [
+
+                text_component(
+                    "พารามิเตอร์ที่แจ้งเตือน",
+                    size="xxs",
+                    color="#716C6B",
+                    weight="bold"
+                ),
+
+                text_component(
+                    ", ".join(
+                        parameters
+                    ),
+                    size="xxs",
+                    color="#C51F35",
+                    weight="bold",
+                    margin="xs"
+                ),
+            ],
+        })
+
+    body_contents.append({
 
         "type":
             "box",
@@ -932,179 +1763,8 @@ def build_summary_bubble(
         "layout":
             "vertical",
 
-        "paddingAll":
-            "0px",
-
-        "contents": [
-
-            # เส้นม่วงด้านบน
-            {
-
-                "type":
-                    "box",
-
-                "layout":
-                    "vertical",
-
-                "height":
-                    "4px",
-
-                "backgroundColor":
-                    "#4E1478",
-
-                "contents":
-                    []
-            },
-
-            {
-
-                "type":
-                    "box",
-
-                "layout":
-                    "horizontal",
-
-                "paddingTop":
-                    "9px",
-
-                "paddingBottom":
-                    "7px",
-
-                "paddingStart":
-                    "14px",
-
-                "paddingEnd":
-                    "14px",
-
-                "alignItems":
-                    "center",
-
-                "contents": [
-
-                    # สัญลักษณ์ กนอ.
-                    {
-
-                        "type":
-                            "box",
-
-                        "layout":
-                            "vertical",
-
-                        "width":
-                            "32px",
-
-                        "height":
-                            "32px",
-
-                        "cornerRadius":
-                            "16px",
-
-                        "backgroundColor":
-                            "#F2EAF7",
-
-                        "justifyContent":
-                            "center",
-
-                        "alignItems":
-                            "center",
-
-                        "contents": [
-
-                            {
-
-                                "type":
-                                    "text",
-
-                                "text":
-                                    "กนอ.",
-
-                                "size":
-                                    "xxs",
-
-                                "weight":
-                                    "bold",
-
-                                "color":
-                                    "#5B168A",
-
-                                "align":
-                                    "center"
-                            }
-                        ]
-                    },
-
-                    {
-
-                        "type":
-                            "box",
-
-                        "layout":
-                            "vertical",
-
-                        "margin":
-                            "md",
-
-                        "flex":
-                            1,
-
-                        "contents": [
-
-                            {
-
-                                "type":
-                                    "text",
-
-                                "text":
-                                    "IEAT e-Monitoring",
-
-                                "size":
-                                    "lg",
-
-                                "weight":
-                                    "bold",
-
-                                "color":
-                                    "#32105B"
-                            },
-
-                            {
-
-                                "type":
-                                    "text",
-
-                                "text":
-                                    "สรุปสถานการณ์ e-Monitoring",
-
-                                "size":
-                                    "xs",
-
-                                "color":
-                                    "#777777",
-
-                                "margin":
-                                    "xs"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    }
-
-    # ========================================================
-    # STATUS BANNER
-    # ========================================================
-
-    status_banner = {
-
-        "type":
-            "box",
-
-        "layout":
-            "horizontal",
-
         "backgroundColor":
-            status_bg,
+            status_background,
 
         "borderColor":
             status_border,
@@ -1116,585 +1776,17 @@ def build_summary_bubble(
             "9px",
 
         "paddingAll":
-            "10px",
+            "9px",
 
-        "alignItems":
-            "center",
+        "contents":
+            banner_contents,
+    })
 
-        "contents": [
+    # --------------------------------------------------------
+    # จำนวนสถานี
+    # --------------------------------------------------------
 
-            {
-
-                "type":
-                    "box",
-
-                "layout":
-                    "vertical",
-
-                "width":
-                    "34px",
-
-                "height":
-                    "34px",
-
-                "cornerRadius":
-                    "17px",
-
-                "backgroundColor":
-                    status_color,
-
-                "justifyContent":
-                    "center",
-
-                "alignItems":
-                    "center",
-
-                "contents": [
-
-                    {
-
-                        "type":
-                            "text",
-
-                        "text":
-                            status_icon,
-
-                        "size":
-                            "xl",
-
-                        "weight":
-                            "bold",
-
-                        "color":
-                            "#FFFFFF",
-
-                        "align":
-                            "center"
-                    }
-                ]
-            },
-
-            {
-
-                "type":
-                    "box",
-
-                "layout":
-                    "vertical",
-
-                "margin":
-                    "sm",
-
-                "flex":
-                    1,
-
-                "contents": [
-
-                    {
-
-                        "type":
-                            "text",
-
-                        "text":
-                            status_title,
-
-                        "size":
-                            "sm",
-
-                        "weight":
-                            "bold",
-
-                        "color":
-                            status_color,
-
-                        "wrap":
-                            True
-                    },
-
-                    {
-
-                        "type":
-                            "text",
-
-                        "text":
-                            status_subtitle,
-
-                        "size":
-                            "xxs",
-
-                        "color":
-                            "#777777",
-
-                        "margin":
-                            "xs",
-
-                        "wrap":
-                            True
-                    }
-                ]
-            }
-        ]
-    }
-
-    # ========================================================
-    # การ์ดตัวเลข 3 ช่อง
-    # ========================================================
-
-    if has_alert:
-
-        stat_cards = [
-
-            {
-
-                "type":
-                    "box",
-
-                "layout":
-                    "vertical",
-
-                "flex":
-                    1,
-
-                "backgroundColor":
-                    "#F5F0FA",
-
-                "borderColor":
-                    "#D7C6E7",
-
-                "borderWidth":
-                    "1px",
-
-                "cornerRadius":
-                    "7px",
-
-                "paddingAll":
-                    "7px",
-
-                "contents": [
-
-                    {
-
-                        "type":
-                            "text",
-
-                        "text":
-                            str(
-                                len(alert_stations)
-                            ),
-
-                        "size":
-                            "xl",
-
-                        "weight":
-                            "bold",
-
-                        "color":
-                            "#4E1478",
-
-                        "align":
-                            "center"
-                    },
-
-                    {
-
-                        "type":
-                            "text",
-
-                        "text":
-                            "สถานีแจ้งเตือน",
-
-                        "size":
-                            "xxs",
-
-                        "color":
-                            "#777777",
-
-                        "align":
-                            "center",
-
-                        "margin":
-                            "xs"
-                    }
-                ]
-            },
-
-            {
-
-                "type":
-                    "box",
-
-                "layout":
-                    "vertical",
-
-                "flex":
-                    1,
-
-                "backgroundColor":
-                    "#F2F8F0",
-
-                "borderColor":
-                    "#C9DEBE",
-
-                "borderWidth":
-                    "1px",
-
-                "cornerRadius":
-                    "7px",
-
-                "paddingAll":
-                    "7px",
-
-                "contents": [
-
-                    {
-
-                        "type":
-                            "text",
-
-                        "text":
-                            str(
-                                parameter_count
-                            ),
-
-                        "size":
-                            "xl",
-
-                        "weight":
-                            "bold",
-
-                        "color":
-                            "#3C761E",
-
-                        "align":
-                            "center"
-                    },
-
-                    {
-
-                        "type":
-                            "text",
-
-                        "text":
-                            "พารามิเตอร์",
-
-                        "size":
-                            "xxs",
-
-                        "color":
-                            "#777777",
-
-                        "align":
-                            "center",
-
-                        "margin":
-                            "xs"
-                    }
-                ]
-            },
-
-            {
-
-                "type":
-                    "box",
-
-                "layout":
-                    "vertical",
-
-                "flex":
-                    1,
-
-                "backgroundColor":
-                    "#FFF8E8",
-
-                "borderColor":
-                    "#E9D49B",
-
-                "borderWidth":
-                    "1px",
-
-                "cornerRadius":
-                    "7px",
-
-                "paddingAll":
-                    "7px",
-
-                "contents": [
-
-                    {
-
-                        "type":
-                            "text",
-
-                        "text":
-                            str(
-                                estate_c
-                            ),
-
-                        "size":
-                            "xl",
-
-                        "weight":
-                            "bold",
-
-                        "color":
-                            "#E36C00",
-
-                        "align":
-                            "center"
-                    },
-
-                    {
-
-                        "type":
-                            "text",
-
-                        "text":
-                            "นิคมฯ",
-
-                        "size":
-                            "xxs",
-
-                        "color":
-                            "#777777",
-
-                        "align":
-                            "center",
-
-                        "margin":
-                            "xs"
-                    }
-                ]
-            }
-        ]
-
-    else:
-
-        stat_cards = [
-
-            {
-
-                "type":
-                    "box",
-
-                "layout":
-                    "vertical",
-
-                "flex":
-                    1,
-
-                "backgroundColor":
-                    "#F5F0FA",
-
-                "borderColor":
-                    "#D7C6E7",
-
-                "borderWidth":
-                    "1px",
-
-                "cornerRadius":
-                    "7px",
-
-                "paddingAll":
-                    "8px",
-
-                "contents": [
-
-                    {
-
-                        "type":
-                            "text",
-
-                        "text":
-                            str(total_count),
-
-                        "size":
-                            "xl",
-
-                        "weight":
-                            "bold",
-
-                        "color":
-                            "#4E1478",
-
-                        "align":
-                            "center"
-                    },
-
-                    {
-
-                        "type":
-                            "text",
-
-                        "text":
-                            "ทั้งหมด",
-
-                        "size":
-                            "xxs",
-
-                        "color":
-                            "#777777",
-
-                        "align":
-                            "center",
-
-                        "margin":
-                            "xs"
-                    }
-                ]
-            },
-
-            {
-
-                "type":
-                    "box",
-
-                "layout":
-                    "vertical",
-
-                "flex":
-                    1,
-
-                "backgroundColor":
-                    "#F2F8F0",
-
-                "borderColor":
-                    "#C9DEBE",
-
-                "borderWidth":
-                    "1px",
-
-                "cornerRadius":
-                    "7px",
-
-                "paddingAll":
-                    "8px",
-
-                "contents": [
-
-                    {
-
-                        "type":
-                            "text",
-
-                        "text":
-                            str(online_total),
-
-                        "size":
-                            "xl",
-
-                        "weight":
-                            "bold",
-
-                        "color":
-                            "#3C761E",
-
-                        "align":
-                            "center"
-                    },
-
-                    {
-
-                        "type":
-                            "text",
-
-                        "text":
-                            "ONLINE",
-
-                        "size":
-                            "xxs",
-
-                        "weight":
-                            "bold",
-
-                        "color":
-                            "#3C761E",
-
-                        "align":
-                            "center",
-
-                        "margin":
-                            "xs"
-                    }
-                ]
-            },
-
-            {
-
-                "type":
-                    "box",
-
-                "layout":
-                    "vertical",
-
-                "flex":
-                    1,
-
-                "backgroundColor":
-                    "#FFF1F3",
-
-                "borderColor":
-                    "#E9B6BE",
-
-                "borderWidth":
-                    "1px",
-
-                "cornerRadius":
-                    "7px",
-
-                "paddingAll":
-                    "8px",
-
-                "contents": [
-
-                    {
-
-                        "type":
-                            "text",
-
-                        "text":
-                            str(offline_total),
-
-                        "size":
-                            "xl",
-
-                        "weight":
-                            "bold",
-
-                        "color":
-                            "#C51F35",
-
-                        "align":
-                            "center"
-                    },
-
-                    {
-
-                        "type":
-                            "text",
-
-                        "text":
-                            "OFFLINE",
-
-                        "size":
-                            "xxs",
-
-                        "weight":
-                            "bold",
-
-                        "color":
-                            "#C51F35",
-
-                        "align":
-                            "center",
-
-                        "margin":
-                            "xs"
-                    }
-                ]
-            }
-        ]
-
-    stats_row = {
+    body_contents.append({
 
         "type":
             "box",
@@ -1702,845 +1794,447 @@ def build_summary_bubble(
         "layout":
             "horizontal",
 
-        "spacing":
-            "sm",
-
         "margin":
             "sm",
 
-        "contents":
-            stat_cards
-    }
+        "spacing":
+            "sm",
 
-    # ========================================================
-    # กล่องพารามิเตอร์ที่เกินมาตรฐาน
-    # ========================================================
-
-    parameter_box = None
-
-    if has_alert:
-
-        parameter_box = {
-
-            "type":
-                "box",
-
-            "layout":
-                "vertical",
-
-            "margin":
-                "sm",
-
-            "paddingAll":
-                "8px",
-
-            "backgroundColor":
-                "#FAF8FC",
-
-            "borderColor":
-                "#DDD5E5",
-
-            "borderWidth":
-                "1px",
-
-            "cornerRadius":
-                "7px",
-
-            "contents": [
-
-                {
-
-                    "type":
-                        "text",
-
-                    "text":
-                        "พารามิเตอร์ที่เกินค่ามาตรฐาน",
-
-                    "size":
-                        "xxs",
-
-                    "weight":
-                        "bold",
-
-                    "color":
-                        "#666666"
-                },
-
-                {
-
-                    "type":
-                        "text",
-
-                    "text":
-                        param_str,
-
-                    "size":
-                        "xs",
-
-                    "weight":
-                        "bold",
-
-                    "color":
-                        "#C51F35",
-
-                    "margin":
-                        "xs",
-
-                    "wrap":
-                        True
-                }
-            ]
-        }
-
-    # ========================================================
-    # ตารางสรุปสถานี
-    # ========================================================
-
-    table_contents = [
-
-        {
-
-            "type":
-                "box",
-
-            "layout":
-                "horizontal",
-
-            "alignItems":
-                "center",
-
-            "margin":
-                "sm",
-
-            "contents": [
-
-                {
-
-                    "type":
-                        "text",
-
-                    "text":
-                        "🏭",
-
-                    "size":
-                        "sm",
-
-                    "flex":
-                        0
-                },
-
-                {
-
-                    "type":
-                        "text",
-
-                    "text":
-                        "สรุปสถานะสถานีตรวจวัด",
-
-                    "size":
-                        "sm",
-
-                    "weight":
-                        "bold",
-
-                    "color":
-                        "#35105D",
-
-                    "margin":
-                        "sm",
-
-                    "flex":
-                        1
-                }
-            ]
-        },
-
-        # Header ตาราง
-        {
-
-            "type":
-                "box",
-
-            "layout":
-                "horizontal",
-
-            "paddingAll":
-                "6px",
-
-            "backgroundColor":
-                "#F2F2F4",
-
-            "cornerRadius":
-                "6px",
-
-            "contents": [
-
-                {
-
-                    "type":
-                        "text",
-
-                    "text":
-                        "ประเภท (Type)",
-
-                    "size":
-                        "xxs",
-
-                    "weight":
-                        "bold",
-
-                    "color":
-                        "#555555",
-
-                    "flex":
-                        3
-                },
-
-                {
-
-                    "type":
-                        "text",
-
-                    "text":
-                        "ทั้งหมด",
-
-                    "size":
-                        "xxs",
-
-                    "weight":
-                        "bold",
-
-                    "color":
-                        "#555555",
-
-                    "align":
-                        "center",
-
-                    "flex":
-                        1
-                },
-
-                {
-
-                    "type":
-                        "text",
-
-                    "text":
-                        "ONLINE",
-
-                    "size":
-                        "xxs",
-
-                    "weight":
-                        "bold",
-
-                    "color":
-                        "#3C761E",
-
-                    "align":
-                        "center",
-
-                    "flex":
-                        1
-                },
-
-                {
-
-                    "type":
-                        "text",
-
-                    "text":
-                        "OFFLINE",
-
-                    "size":
-                        "xxs",
-
-                    "weight":
-                        "bold",
-
-                    "color":
-                        "#C51F35",
-
-                    "align":
-                        "center",
-
-                    "flex":
-                        1
-                }
-            ]
-        }
-    ]
-
-    # ========================================================
-    # สีของแต่ละประเภท
-    # ========================================================
-
-    row_backgrounds = {
-
-        "AQMs":
-            "#F1F7EC",
-
-        "WQMs":
-            "#F3EEF8",
-
-        "CEMs":
-            "#EEF7FA",
-
-        "ประเภทอื่น":
-            "#F1F1F3"
-    }
-
-    row_colors = {
-
-        "AQMs":
-            "#477A27",
-
-        "WQMs":
-            "#4E2A84",
-
-        "CEMs":
-            "#32839A",
-
-        "ประเภทอื่น":
-            "#666666"
-    }
-
-    # ========================================================
-    # สร้างแถวตาราง
-    # ========================================================
-
-    for g_name in [
-        "AQMs",
-        "WQMs",
-        "CEMs",
-        "ประเภทอื่น"
-    ]:
-
-        g_data = type_stats.get(
-
-            g_name,
+        "contents": [
 
             {
-                "total": 0,
-                "online": 0,
-                "offline": 0
-            }
+                "type":
+                    "box",
+
+                "layout":
+                    "vertical",
+
+                "flex":
+                    1,
+
+                "backgroundColor":
+                    "#F8F9FA",
+
+                "cornerRadius":
+                    "8px",
+
+                "paddingAll":
+                    "7px",
+
+                "contents": [
+
+                    text_component(
+                        str(
+                            total_count
+                        ),
+                        size="lg",
+                        color="#4E2A84",
+                        weight="bold",
+                        align="center"
+                    ),
+
+                    text_component(
+                        "ทั้งหมด",
+                        size="xxs",
+                        color="#716C6B",
+                        align="center",
+                        margin="xs"
+                    ),
+                ],
+            },
+
+            {
+                "type":
+                    "box",
+
+                "layout":
+                    "vertical",
+
+                "flex":
+                    1,
+
+                "backgroundColor":
+                    "#EAF7EF",
+
+                "cornerRadius":
+                    "8px",
+
+                "paddingAll":
+                    "7px",
+
+                "contents": [
+
+                    text_component(
+                        str(
+                            online_total
+                        ),
+                        size="lg",
+                        color="#18794E",
+                        weight="bold",
+                        align="center"
+                    ),
+
+                    text_component(
+                        "ONLINE",
+                        size="xxs",
+                        color="#18794E",
+                        weight="bold",
+                        align="center",
+                        margin="xs"
+                    ),
+                ],
+            },
+
+            {
+                "type":
+                    "box",
+
+                "layout":
+                    "vertical",
+
+                "flex":
+                    1,
+
+                "backgroundColor":
+                    "#FFF5F5",
+
+                "cornerRadius":
+                    "8px",
+
+                "paddingAll":
+                    "7px",
+
+                "contents": [
+
+                    text_component(
+                        str(
+                            offline_total
+                        ),
+                        size="lg",
+                        color="#C51F35",
+                        weight="bold",
+                        align="center"
+                    ),
+
+                    text_component(
+                        "OFFLINE",
+                        size="xxs",
+                        color="#C51F35",
+                        weight="bold",
+                        align="center",
+                        margin="xs"
+                    ),
+                ],
+            },
+        ],
+    })
+
+    # --------------------------------------------------------
+    # ตารางประเภทสถานี
+    # --------------------------------------------------------
+
+    body_contents.append(
+
+        text_component(
+            "สรุปสถานะสถานีตรวจวัด",
+            size="sm",
+            color="#30283A",
+            weight="bold",
+            margin="sm"
         )
+    )
 
-        table_contents.append({
-
-            "type":
-                "box",
-
-            "layout":
-                "horizontal",
-
-            "paddingAll":
-                "6px",
-
-            "margin":
-                "xs",
-
-            "backgroundColor":
-                row_backgrounds[g_name],
-
-            "cornerRadius":
-                "6px",
-
-            "contents": [
-
-                {
-
-                    "type":
-                        "text",
-
-                    "text":
-                        g_name,
-
-                    "size":
-                        "xxs",
-
-                    "weight":
-                        "bold",
-
-                    "color":
-                        row_colors[g_name],
-
-                    "flex":
-                        3
-                },
-
-                {
-
-                    "type":
-                        "text",
-
-                    "text":
-                        str(g_data["total"]),
-
-                    "size":
-                        "xxs",
-
-                    "weight":
-                        "bold",
-
-                    "color":
-                        "#444444",
-
-                    "align":
-                        "center",
-
-                    "flex":
-                        1
-                },
-
-                {
-
-                    "type":
-                        "text",
-
-                    "text":
-                        str(g_data["online"]),
-
-                    "size":
-                        "xxs",
-
-                    "weight":
-                        "bold",
-
-                    "color":
-                        "#3C761E",
-
-                    "align":
-                        "center",
-
-                    "flex":
-                        1
-                },
-
-                {
-
-                    "type":
-                        "text",
-
-                    "text":
-                        str(g_data["offline"]),
-
-                    "size":
-                        "xxs",
-
-                    "weight":
-                        "bold",
-
-                    "color":
-                        "#C51F35",
-
-                    "align":
-                        "center",
-
-                    "flex":
-                        1
-                }
-            ]
-        })
-
-    station_table = {
+    body_contents.append({
 
         "type":
             "box",
 
         "layout":
-            "vertical",
+            "horizontal",
 
-        "flex":
-            3,
+        "margin":
+            "xs",
 
-        "contents":
-            table_contents
-    }
+        "paddingAll":
+            "6px",
 
-    # ========================================================
-    # ระดับสถานการณ์
-    # ========================================================
+        "backgroundColor":
+            "#F1F3F5",
 
-    severity_box = None
+        "cornerRadius":
+            "6px",
 
-    if has_alert:
+        "contents": [
 
-        severity_box = {
+            text_component(
+                "ประเภท",
+                size="xxs",
+                color="#495057",
+                weight="bold",
+                flex=3
+            ),
+
+            text_component(
+                "ทั้งหมด",
+                size="xxs",
+                color="#495057",
+                weight="bold",
+                align="center",
+                flex=1
+            ),
+
+            text_component(
+                "ONLINE",
+                size="xxs",
+                color="#18794E",
+                weight="bold",
+                align="center",
+                flex=1
+            ),
+
+            text_component(
+                "OFFLINE",
+                size="xxs",
+                color="#C51F35",
+                weight="bold",
+                align="center",
+                flex=1
+            ),
+        ],
+    })
+
+    for group_name in [
+        "AQMs",
+        "WQMs",
+        "CEMs",
+        "ประเภทอื่น",
+    ]:
+
+        data = type_stats.get(
+            group_name,
+            {
+                "total": 0,
+                "online": 0,
+                "offline": 0,
+            }
+        )
+
+        body_contents.append({
 
             "type":
                 "box",
 
             "layout":
-                "vertical",
-
-            "flex":
-                2,
+                "horizontal",
 
             "margin":
-                "sm",
+                "xs",
+
+            "paddingAll":
+                "5px",
 
             "contents": [
 
-                {
-
-                    "type":
-                        "text",
-
-                    "text":
-                        "ระดับสถานการณ์",
-
-                    "size":
-                        "xs",
-
-                    "weight":
-                        "bold",
-
-                    "color":
-                        "#35105D"
-                },
-
-                # ------------------------------------------------
-                # เกินค่ามาตรฐาน
-                # ------------------------------------------------
-
-                {
-
-                    "type":
-                        "box",
-
-                    "layout":
-                        "horizontal",
-
-                    "margin":
-                        "xs",
-
-                    "paddingAll":
-                        "6px",
-
-                    "backgroundColor":
-                        "#FFF1F3",
-
-                    "borderColor":
-                        "#E9B6BE",
-
-                    "borderWidth":
-                        "1px",
-
-                    "cornerRadius":
-                        "6px",
-
-                    "contents": [
-
-                        {
-
-                            "type":
-                                "box",
-
-                            "layout":
-                                "vertical",
-
-                            "flex":
-                                1,
-
-                            "contents": [
-
-                                {
-
-                                    "type":
-                                        "text",
-
-                                    "text":
-                                        "⚠ เกินค่ามาตรฐาน",
-
-                                    "size":
-                                        "xxs",
-
-                                    "weight":
-                                        "bold",
-
-                                    "color":
-                                        "#C51F35",
-
-                                    "wrap":
-                                        True
-                                },
-
-                                {
-
-                                    "type":
-                                        "text",
-
-                                    "text":
-                                        "≥ 3 รายการ",
-
-                                    "size":
-                                        "xxs",
-
-                                    "color":
-                                        "#777777",
-
-                                    "margin":
-                                        "xs"
-                                }
-                            ]
-                        },
-
-                        {
-
-                            "type":
-                                "text",
-
-                            "text":
-                                f"{urgent_c} สถานี",
-
-                            "size":
-                                "xxs",
-
-                            "weight":
-                                "bold",
-
-                            "color":
-                                "#C51F35",
-
-                            "align":
-                                "end",
-
-                            "flex":
-                                0
-                        }
-                    ]
-                },
-
-                # ------------------------------------------------
-                # เฝ้าระวัง
-                # ------------------------------------------------
-
-                {
-
-                    "type":
-                        "box",
-
-                    "layout":
-                        "horizontal",
-
-                    "margin":
-                        "xs",
-
-                    "paddingAll":
-                        "6px",
-
-                    "backgroundColor":
-                        "#FFF8E8",
-
-                    "borderColor":
-                        "#E9D49B",
-
-                    "borderWidth":
-                        "1px",
-
-                    "cornerRadius":
-                        "6px",
-
-                    "contents": [
-
-                        {
-
-                            "type":
-                                "box",
-
-                            "layout":
-                                "vertical",
-
-                            "flex":
-                                1,
-
-                            "contents": [
-
-                                {
-
-                                    "type":
-                                        "text",
-
-                                    "text":
-                                        "⚠ เฝ้าระวัง",
-
-                                    "size":
-                                        "xxs",
-
-                                    "weight":
-                                        "bold",
-
-                                    "color":
-                                        "#E67700"
-                                },
-
-                                {
-
-                                    "type":
-                                        "text",
-
-                                    "text":
-                                        "2 รายการ",
-
-                                    "size":
-                                        "xxs",
-
-                                    "color":
-                                        "#777777",
-
-                                    "margin":
-                                        "xs"
-                                }
-                            ]
-                        },
-
-                        {
-
-                            "type":
-                                "text",
-
-                            "text":
-                                f"{watch_c} สถานี",
-
-                            "size":
-                                "xxs",
-
-                            "weight":
-                                "bold",
-
-                            "color":
-                                "#E67700",
-
-                            "align":
-                                "end",
-
-                            "flex":
-                                0
-                        }
-                    ]
-                },
-
-                # ------------------------------------------------
-                # ติดตามสถานการณ์
-                # ------------------------------------------------
-
-                {
-
-                    "type":
-                        "box",
-
-                    "layout":
-                        "horizontal",
-
-                    "margin":
-                        "xs",
-
-                    "paddingAll":
-                        "6px",
-
-                    "backgroundColor":
-                        "#F1F8F3",
-
-                    "borderColor":
-                        "#BBD8C4",
-
-                    "borderWidth":
-                        "1px",
-
-                    "cornerRadius":
-                        "6px",
-
-                    "contents": [
-
-                        {
-
-                            "type":
-                                "box",
-
-                            "layout":
-                                "vertical",
-
-                            "flex":
-                                1,
-
-                            "contents": [
-
-                                {
-
-                                    "type":
-                                        "text",
-
-                                    "text":
-                                        "▲ ติดตามสถานการณ์",
-
-                                    "size":
-                                        "xxs",
-
-                                    "weight":
-                                        "bold",
-
-                                    "color":
-                                        "#2B8A3E",
-
-                                    "wrap":
-                                        True
-                                },
-
-                                {
-
-                                    "type":
-                                        "text",
-
-                                    "text":
-                                        "1 รายการ",
-
-                                    "size":
-                                        "xxs",
-
-                                    "color":
-                                        "#777777",
-
-                                    "margin":
-                                        "xs"
-                                }
-                            ]
-                        },
-
-                        {
-
-                            "type":
-                                "text",
-
-                            "text":
-                                f"{follow_c} สถานี",
-
-                            "size":
-                                "xxs",
-
-                            "weight":
-                                "bold",
-
-                            "color":
-                                "#2B8A3E",
-
-                            "align":
-                                "end",
-
-                            "flex":
-                                0
-                        }
-                    ]
-                }
-            ]
-        }
-
-    # ========================================================
-    # ข้อมูลล่าสุด
-    # ========================================================
-
-    latest_box = {
+                text_component(
+                    group_name,
+                    size="xxs",
+                    color="#30283A",
+                    flex=3
+                ),
+
+                text_component(
+                    str(
+                        data["total"]
+                    ),
+                    size="xxs",
+                    color="#30283A",
+                    align="center",
+                    flex=1
+                ),
+
+                text_component(
+                    str(
+                        data["online"]
+                    ),
+                    size="xxs",
+                    color="#18794E",
+                    weight="bold",
+                    align="center",
+                    flex=1
+                ),
+
+                text_component(
+                    str(
+                        data["offline"]
+                    ),
+                    size="xxs",
+                    color="#C51F35",
+                    weight="bold",
+                    align="center",
+                    flex=1
+                ),
+            ],
+        })
+
+    # --------------------------------------------------------
+    # ระดับการเฝ้าระวัง
+    # --------------------------------------------------------
+
+    if has_alert:
+
+        urgent_count, watch_count, follow_count = (
+            calculate_severity_levels(
+                alert_stations
+            )
+        )
+
+        body_contents.append({
+
+            "type":
+                "separator",
+
+            "margin":
+                "sm",
+        })
+
+        body_contents.append(
+
+            text_component(
+                "ระดับการเฝ้าระวัง",
+                size="sm",
+                color="#30283A",
+                weight="bold",
+                margin="sm"
+            )
+        )
+
+        severity_rows = [
+
+            (
+                "เกินค่ามาตรฐาน",
+                "ตั้งแต่ 3 รายการขึ้นไป",
+                urgent_count,
+                "#C51F35",
+                "#FFF1F3",
+                "#E9B6BE",
+                SEVERITY_HIGH_ICON_URL
+            ),
+
+            (
+                "เฝ้าระวัง",
+                "2 รายการ",
+                watch_count,
+                "#E67700",
+                "#FFF8E8",
+                "#E9D49B",
+                SEVERITY_WATCH_ICON_URL
+            ),
+
+            (
+                "ติดตามสถานการณ์",
+                "1 รายการ",
+                follow_count,
+                "#2B8A3E",
+                "#F1F8F3",
+                "#BBD8C4",
+                SEVERITY_FOLLOW_ICON_URL
+            ),
+        ]
+
+        for row in severity_rows:
+
+            (
+                title,
+                description,
+                count,
+                color,
+                background,
+                border,
+                icon_url,
+            ) = row
+
+            body_contents.append({
+
+                "type":
+                    "box",
+
+                "layout":
+                    "horizontal",
+
+                "margin":
+                    "xs",
+
+                "paddingAll":
+                    "6px",
+
+                "backgroundColor":
+                    background,
+
+                "borderColor":
+                    border,
+
+                "borderWidth":
+                    "1px",
+
+                "cornerRadius":
+                    "7px",
+
+                "alignItems":
+                    "center",
+
+                "contents": [
+
+                    image_component(
+                        icon_url,
+                        size="xxs"
+                    ),
+
+                    {
+                        "type":
+                            "box",
+
+                        "layout":
+                            "vertical",
+
+                        "margin":
+                            "xs",
+
+                        "flex":
+                            1,
+
+                        "contents": [
+
+                            text_component(
+                                title,
+                                size="xxs",
+                                color=color,
+                                weight="bold"
+                            ),
+
+                            text_component(
+                                description,
+                                size="xxs",
+                                color="#6C757D",
+                                margin="xs"
+                            ),
+                        ],
+                    },
+
+                    text_component(
+                        f"{count} สถานี",
+                        size="xxs",
+                        color=color,
+                        weight="bold",
+                        align="end"
+                    ),
+                ],
+            })
+
+    # --------------------------------------------------------
+    # เวลา
+    # --------------------------------------------------------
+
+    body_contents.append({
 
         "type":
             "box",
@@ -2552,144 +2246,31 @@ def build_summary_bubble(
             "sm",
 
         "paddingAll":
-            "8px",
+            "7px",
 
         "backgroundColor":
-            "#FAFAFA",
-
-        "borderColor":
-            "#E0E0E0",
-
-        "borderWidth":
-            "1px",
+            "#F8F9FA",
 
         "cornerRadius":
             "7px",
 
         "contents": [
 
-            {
+            text_component(
+                "ข้อมูลล่าสุดจาก e-Monitoring",
+                size="xxs",
+                color="#6C757D"
+            ),
 
-                "type":
-                    "text",
-
-                "text":
-                    "ข้อมูลล่าสุดจาก e-Monitoring",
-
-                "size":
-                    "xxs",
-
-                "color":
-                    "#777777"
-            },
-
-            {
-
-                "type":
-                    "text",
-
-                "text":
-                    report_time_text(),
-
-                "size":
-                    "xs",
-
-                "weight":
-                    "bold",
-
-                "color":
-                    "#35105D",
-
-                "margin":
-                    "xs"
-            },
-
-            {
-
-                "type":
-                    "text",
-
-                "text":
-                    "จัดทำรายงานเพื่อใช้ในการติดตามสถานการณ์",
-
-                "size":
-                    "xxs",
-
-                "color":
-                    "#999999",
-
-                "margin":
-                    "xs",
-
-                "wrap":
-                    True
-            }
-        ]
-    }
-
-    # ========================================================
-    # BODY
-    # ========================================================
-
-    body_contents = [
-
-        status_banner,
-
-        stats_row
-    ]
-
-    # ถ้ามี Alert
-    if parameter_box:
-
-        body_contents.append(
-            parameter_box
-        )
-
-    # ========================================================
-    # ตาราง + ระดับสถานการณ์
-    # ========================================================
-
-    if has_alert:
-
-        body_contents.append({
-
-            "type":
-                "box",
-
-            "layout":
-                "horizontal",
-
-            "margin":
-                "sm",
-
-            "spacing":
-                "sm",
-
-            "contents": [
-
-                station_table,
-
-                severity_box
-            ]
-        })
-
-    else:
-
-        body_contents.append(
-            station_table
-        )
-
-    # ========================================================
-    # เพิ่มข้อมูลล่าสุด
-    # ========================================================
-
-    body_contents.append(
-        latest_box
-    )
-
-    # ========================================================
-    # สร้าง Bubble
-    # ========================================================
+            text_component(
+                report_time_text(),
+                size="xxs",
+                color="#30283A",
+                weight="bold",
+                margin="xs"
+            ),
+        ],
+    })
 
     return {
 
@@ -2701,24 +2282,27 @@ def build_summary_bubble(
 
         "styles": {
 
-            "body": {
+            "header": {
+                "backgroundColor":
+                    "#FFFFFF"
+            },
 
+            "body": {
                 "backgroundColor":
                     "#FFFFFF"
             },
 
             "footer": {
-
                 "backgroundColor":
                     "#FFFFFF"
-            }
+            },
         },
 
-        # Header
         "header":
-            header,
+            build_header(
+                "สรุปสถานการณ์ e-Monitoring"
+            ),
 
-        # Body
         "body": {
 
             "type":
@@ -2728,22 +2312,21 @@ def build_summary_bubble(
                 "vertical",
 
             "paddingTop":
-                "6px",
+                "3px",
 
             "paddingBottom":
-                "8px",
+                "7px",
 
             "paddingStart":
-                "14px",
+                "12px",
 
             "paddingEnd":
-                "14px",
+                "12px",
 
             "contents":
-                body_contents
+                body_contents,
         },
 
-        # Footer
         "footer": {
 
             "type":
@@ -2753,21 +2336,20 @@ def build_summary_bubble(
                 "vertical",
 
             "paddingTop":
-                "4px",
+                "3px",
 
             "paddingBottom":
-                "12px",
+                "8px",
 
             "paddingStart":
-                "14px",
+                "12px",
 
             "paddingEnd":
-                "14px",
+                "12px",
 
             "contents": [
 
                 {
-
                     "type":
                         "button",
 
@@ -2789,16 +2371,661 @@ def build_summary_bubble(
                             "เปิดระบบ GIS",
 
                         "uri":
-                            DASHBOARD_URL
-                    }
-                }
-            ]
-        }
+                            DASHBOARD_URL,
+                    },
+                },
+            ],
+        },
     }
 
 
 # ============================================================
-# ส่งข้อความ LINE
+# หน้า Detail ของแต่ละสถานี
+# ============================================================
+
+def build_station_detail_bubble(
+    station: dict[str, Any]
+) -> dict[str, Any]:
+
+    severity = get_station_severity(
+        station
+    )
+
+    station_type = safe_text(
+        station.get(
+            "station_type"
+        )
+    )
+
+    group_name = station_type_group(
+        station_type
+    )
+
+    station_name = safe_text(
+        station.get(
+            "station_name"
+        )
+    )
+
+    estate_name = safe_text(
+        station.get(
+            "estate_name"
+        )
+    )
+
+    status = safe_text(
+        station.get(
+            "status"
+        )
+    )
+
+    parameter_alarm = full_text(
+        station.get(
+            "parameter_alarm"
+        )
+    )
+
+    comment = full_text(
+        station.get(
+            "comment"
+        )
+    )
+
+    latitude = station.get(
+        "latitude"
+    )
+
+    longitude = station.get(
+        "longitude"
+    )
+
+    status_upper = (
+        status.upper()
+    )
+
+    if status_upper == "ONLINE":
+
+        status_color = (
+            "#2B8A3E"
+        )
+
+        status_background = (
+            "#EAF7EF"
+        )
+
+    elif status_upper == "OFFLINE":
+
+        status_color = (
+            "#C51F35"
+        )
+
+        status_background = (
+            "#FFF1F3"
+        )
+
+    else:
+
+        status_color = (
+            "#777777"
+        )
+
+        status_background = (
+            "#F3F3F3"
+        )
+
+    parameter_parts = (
+        normalize_alarm_parts(
+            parameter_alarm
+        )
+    )
+
+    parameter_contents = []
+
+    if parameter_parts:
+
+        for parameter in parameter_parts:
+
+            parameter_contents.append({
+
+                "type":
+                    "box",
+
+                "layout":
+                    "horizontal",
+
+                "margin":
+                    "xs",
+
+                "contents": [
+
+                    text_component(
+                        "•",
+                        size="xxs",
+                        color=severity[
+                            "color"
+                        ],
+                        weight="bold"
+                    ),
+
+                    text_component(
+                        parameter,
+                        size="xxs",
+                        color=severity[
+                            "color"
+                        ],
+                        weight="bold",
+                        wrap=True,
+                        margin="xs",
+                        flex=1
+                    ),
+                ],
+            })
+
+    else:
+
+        parameter_contents.append(
+
+            text_component(
+                parameter_alarm,
+                size="xxs",
+                color=severity[
+                    "color"
+                ],
+                weight="bold"
+            )
+        )
+
+    # ========================================================
+    # Bubble
+    # ========================================================
+
+    return {
+
+        "type":
+            "bubble",
+
+        "size":
+            "mega",
+
+        "styles": {
+
+            "header": {
+                "backgroundColor":
+                    "#FFFFFF"
+            },
+
+            "body": {
+                "backgroundColor":
+                    "#FFFFFF"
+            },
+
+            "footer": {
+                "backgroundColor":
+                    "#FFFFFF"
+            },
+        },
+
+        "header":
+            build_header(
+                f"รายละเอียดสถานี {group_name}"
+            ),
+
+        "body": {
+
+            "type":
+                "box",
+
+            "layout":
+                "vertical",
+
+            "paddingTop":
+                "3px",
+
+            "paddingBottom":
+                "7px",
+
+            "paddingStart":
+                "12px",
+
+            "paddingEnd":
+                "12px",
+
+            "contents": [
+
+                # ------------------------------------------------
+                # ระดับสถานการณ์
+                # ------------------------------------------------
+
+                {
+                    "type":
+                        "box",
+
+                    "layout":
+                        "horizontal",
+
+                    "paddingAll":
+                        "7px",
+
+                    "backgroundColor":
+                        severity[
+                            "background"
+                        ],
+
+                    "borderColor":
+                        severity[
+                            "border"
+                        ],
+
+                    "borderWidth":
+                        "1px",
+
+                    "cornerRadius":
+                        "8px",
+
+                    "alignItems":
+                        "center",
+
+                    "contents": [
+
+                        image_component(
+                            severity[
+                                "icon_url"
+                            ],
+                            size="xxs"
+                        ),
+
+                        text_component(
+                            severity[
+                                "title"
+                            ],
+                            size="sm",
+                            color=severity[
+                                "color"
+                            ],
+                            weight="bold",
+                            margin="sm",
+                            flex=1
+                        ),
+
+                        text_component(
+                            (
+                                f"{alarm_count(station)} "
+                                "รายการ"
+                            ),
+                            size="xxs",
+                            color=severity[
+                                "color"
+                            ],
+                            weight="bold",
+                            align="end"
+                        ),
+                    ],
+                },
+
+                # ------------------------------------------------
+                # รายละเอียดสถานี
+                # ------------------------------------------------
+
+                text_component(
+                    "รายละเอียดสถานี",
+                    size="sm",
+                    color="#35105D",
+                    weight="bold",
+                    margin="sm"
+                ),
+
+                {
+                    "type":
+                        "box",
+
+                    "layout":
+                        "vertical",
+
+                    "margin":
+                        "xs",
+
+                    "backgroundColor":
+                        "#F8F8FA",
+
+                    "cornerRadius":
+                        "8px",
+
+                    "paddingAll":
+                        "8px",
+
+                    "contents": [
+
+                        detail_row(
+                            "ชื่อสถานี",
+                            station_name
+                        ),
+
+                        detail_row(
+                            "นิคมอุตสาหกรรม",
+                            estate_name
+                        ),
+
+                        detail_row(
+                            "สถานะ",
+                            status,
+                            status_color
+                        ),
+
+                        detail_row(
+                            "ประเภท",
+                            station_type,
+                            "#4E1478"
+                        ),
+                    ],
+                },
+
+                # ------------------------------------------------
+                # ParameterAlram
+                # ------------------------------------------------
+
+                text_component(
+                    "ค่าพารามิเตอร์ที่แจ้งเตือน",
+                    size="sm",
+                    color="#35105D",
+                    weight="bold",
+                    margin="sm"
+                ),
+
+                {
+                    "type":
+                        "box",
+
+                    "layout":
+                        "vertical",
+
+                    "margin":
+                        "xs",
+
+                    "paddingAll":
+                        "8px",
+
+                    "backgroundColor":
+                        severity[
+                            "background"
+                        ],
+
+                    "borderColor":
+                        severity[
+                            "border"
+                        ],
+
+                    "borderWidth":
+                        "1px",
+
+                    "cornerRadius":
+                        "8px",
+
+                    "contents":
+                        parameter_contents,
+                },
+
+                # ------------------------------------------------
+                # Comment
+                # ------------------------------------------------
+
+                text_component(
+                    "สาเหตุ / การติดตามผล",
+                    size="sm",
+                    color="#35105D",
+                    weight="bold",
+                    margin="sm"
+                ),
+
+                {
+                    "type":
+                        "box",
+
+                    "layout":
+                        "vertical",
+
+                    "margin":
+                        "xs",
+
+                    "paddingAll":
+                        "8px",
+
+                    "backgroundColor":
+                        "#F8F9FA",
+
+                    "borderColor":
+                        "#E1E3E5",
+
+                    "borderWidth":
+                        "1px",
+
+                    "cornerRadius":
+                        "8px",
+
+                    "contents": [
+
+                        text_component(
+                            comment,
+                            size="xxs",
+                            color="#555555",
+                            wrap=True
+                        ),
+                    ],
+                },
+
+                # ------------------------------------------------
+                # ตำแหน่ง
+                # ------------------------------------------------
+
+                text_component(
+                    "ตำแหน่งสถานี",
+                    size="sm",
+                    color="#35105D",
+                    weight="bold",
+                    margin="sm"
+                ),
+
+                text_component(
+
+                    (
+                        f"{latitude:.6f}, "
+                        f"{longitude:.6f}"
+                    )
+
+                    if (
+                        latitude is not None
+                        and longitude is not None
+                    )
+
+                    else
+
+                    "ไม่พบพิกัดสถานี",
+
+                    size="xxs",
+                    color="#777777",
+                    margin="xs"
+                ),
+            ],
+        },
+
+        # --------------------------------------------------------
+        # Footer: มีเฉพาะ Google Maps
+        # --------------------------------------------------------
+
+        "footer": {
+
+            "type":
+                "box",
+
+            "layout":
+                "vertical",
+
+            "paddingTop":
+                "3px",
+
+            "paddingBottom":
+                "9px",
+
+            "paddingStart":
+                "12px",
+
+            "paddingEnd":
+                "12px",
+
+            "contents": [
+
+                {
+                    "type":
+                        "button",
+
+                    "style":
+                        "primary",
+
+                    "height":
+                        "sm",
+
+                    "color":
+                        "#4E1478",
+
+                    "action": {
+
+                        "type":
+                            "uri",
+
+                        "label":
+                            "เปิดตำแหน่งสถานี",
+
+                        "uri":
+                            google_maps_url(
+                                latitude,
+                                longitude
+                            ),
+                    },
+                },
+            ],
+        },
+    }
+
+
+# ============================================================
+# สร้างหน้ารายละเอียดแยก AQMs / WQMs / CEMs
+# ============================================================
+
+def build_detail_bubbles(
+    alert_stations: list[
+        dict[str, Any]
+    ]
+) -> list[
+    dict[str, Any]
+]:
+
+    bubbles = []
+
+    # -----------------------------------------------
+    # AQMs
+    # -----------------------------------------------
+
+    aqms = [
+
+        station
+
+        for station
+        in alert_stations
+
+        if station_type_group(
+            station.get(
+                "station_type",
+                ""
+            )
+        )
+        == "AQMs"
+    ]
+
+    # -----------------------------------------------
+    # WQMs
+    # -----------------------------------------------
+
+    wqms = [
+
+        station
+
+        for station
+        in alert_stations
+
+        if station_type_group(
+            station.get(
+                "station_type",
+                ""
+            )
+        )
+        == "WQMs"
+    ]
+
+    # -----------------------------------------------
+    # CEMs
+    # -----------------------------------------------
+
+    cems = [
+
+        station
+
+        for station
+        in alert_stations
+
+        if station_type_group(
+            station.get(
+                "station_type",
+                ""
+            )
+        )
+        == "CEMs"
+    ]
+
+    # ------------------------------------------------
+    # เรียงเป็น AQMs → WQMs → CEMs
+    # ------------------------------------------------
+
+    grouped = [
+
+        (
+            "AQMs",
+            aqms
+        ),
+
+        (
+            "WQMs",
+            wqms
+        ),
+
+        (
+            "CEMs",
+            cems
+        ),
+    ]
+
+    # ------------------------------------------------
+    # แต่ละสถานี = 1 หน้า
+    # ------------------------------------------------
+
+    for group_name, stations in grouped:
+
+        if not stations:
+
+            continue
+
+        for station in stations:
+
+            bubbles.append(
+
+                build_station_detail_bubble(
+                    station
+                )
+            )
+
+    return bubbles
+
+
+# ============================================================
+# ส่ง LINE
 # ============================================================
 
 def send_line_message(
@@ -2814,18 +3041,21 @@ def send_line_message(
 
         print(
             "WARNING: ไม่พบ "
-            "LINE_CHANNEL_ACCESS_TOKEN "
-            "จึงอัปเดตหน้าเว็บไซต์โดยไม่ส่ง LINE"
+            "LINE_CHANNEL_ACCESS_TOKEN"
         )
 
         return False
 
     payload = json.dumps(
         {
-            "messages": [message]
+            "messages": [
+                message
+            ]
         },
         ensure_ascii=False
-    ).encode("utf-8")
+    ).encode(
+        "utf-8"
+    )
 
     request = urllib.request.Request(
 
@@ -2889,65 +3119,135 @@ def send_line_message(
 
 
 # ============================================================
-# ส่ง Summary
+# สร้าง Carousel
 # ============================================================
 
 def send_summary(
     total_count: int,
     online_total: int,
     offline_total: int,
-    type_stats: dict[str, dict[str, int]],
-    alert_stations: list[dict[str, Any]],
+    type_stats: dict[
+        str,
+        dict[str, int]
+    ],
+    alert_stations: list[
+        dict[str, Any]
+    ],
 ) -> None:
+
+    # --------------------------------------------------------
+    # หน้าแรก
+    # --------------------------------------------------------
+
+    bubbles = [
+
+        build_summary_bubble(
+
+            total_count=
+                total_count,
+
+            online_total=
+                online_total,
+
+            offline_total=
+                offline_total,
+
+            type_stats=
+                type_stats,
+
+            alert_stations=
+                alert_stations,
+        )
+    ]
+
+    # --------------------------------------------------------
+    # ถ้ามี Alert → เพิ่มหน้า Detail
+    # --------------------------------------------------------
+
+    if alert_stations:
+
+        detail_bubbles = (
+            build_detail_bubbles(
+                alert_stations
+            )
+        )
+
+        bubbles.extend(
+            detail_bubbles
+        )
+
+    # --------------------------------------------------------
+    # จำกัดจำนวนหน้า
+    # --------------------------------------------------------
+
+    if len(bubbles) > MAX_CAROUSEL_BUBBLES:
+
+        print(
+            "WARNING: จำนวนหน้าเกิน "
+            f"{MAX_CAROUSEL_BUBBLES} หน้า"
+        )
+
+        print(
+            "LINE Carousel รองรับสูงสุด "
+            "12 หน้า จึงแสดงเฉพาะ "
+            "12 หน้าแรก"
+        )
+
+        bubbles = bubbles[
+            :MAX_CAROUSEL_BUBBLES
+        ]
+
+    # --------------------------------------------------------
+    # altText
+    # --------------------------------------------------------
+
+    if alert_stations:
+
+        alt_text = (
+
+            "รายงานสถานการณ์ "
+            "e-Monitoring: "
+
+            f"พบสถานีที่มี "
+            f"ParameterAlram "
+            f"{len(alert_stations)} สถานี "
+            "เลื่อนเพื่อดูรายละเอียด"
+        )
+
+    else:
+
+        alt_text = (
+
+            "รายงานสถานการณ์ "
+            "e-Monitoring: "
+            "ไม่พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน"
+        )
+
+    # --------------------------------------------------------
+    # Message
+    # --------------------------------------------------------
 
     message = {
 
         "type":
             "flex",
 
-        "altText": (
+        "altText":
+            alt_text,
 
-            "รายงานสถานการณ์ e-Monitoring: "
+        "contents": {
 
-            +
+            "type":
+                "carousel",
 
-            (
-
-                "พบสถานีเข้าเกณฑ์แจ้งเตือน "
-                + str(len(alert_stations))
-                + " สถานี"
-
-                if alert_stations
-
-                else
-
-                "ไม่พบค่าเกินมาตรฐาน"
-            )
-        ),
-
-        "contents":
-
-            build_summary_bubble(
-
-                total_count=
-                    total_count,
-
-                online_total=
-                    online_total,
-
-                offline_total=
-                    offline_total,
-
-                type_stats=
-                    type_stats,
-
-                alert_stations=
-                    alert_stations,
-            )
+            "contents":
+                bubbles,
+        },
     }
 
     print(
-        "กำลังส่งการ์ดสรุปสถานการณ์"
+        "กำลังส่ง LINE Carousel "
+        f"{len(bubbles)} หน้า"
     )
 
     send_line_message(
@@ -2956,7 +3256,7 @@ def send_summary(
 
 
 # ============================================================
-# MAIN
+# Main
 # ============================================================
 
 def main() -> int:
@@ -2970,7 +3270,7 @@ def main() -> int:
     print("=" * 72)
 
     print(
-        f"เวลาประเทศไทย: "
+        "เวลาประเทศไทย: "
         f"{report_time_text()}"
     )
 
@@ -2978,6 +3278,32 @@ def main() -> int:
         "กำลังดาวน์โหลดข้อมูล "
         "e-Monitoring..."
     )
+
+    # --------------------------------------------------------
+    # ตรวจสอบ Assets
+    # --------------------------------------------------------
+
+    if not ASSET_BASE_URL:
+
+        print(
+            "WARNING: ไม่พบ "
+            "ASSET_BASE_URL"
+        )
+
+        print(
+            "และไม่พบ GITHUB_REPOSITORY"
+        )
+
+        print(
+            "รูปใน assets อาจไม่แสดงใน LINE"
+        )
+
+    else:
+
+        print(
+            "Asset URL:"
+            f" {ASSET_BASE_URL}"
+        )
 
     # --------------------------------------------------------
     # ดาวน์โหลดข้อมูล
@@ -3024,7 +3350,7 @@ def main() -> int:
     )
 
     # --------------------------------------------------------
-    # คำนวณจำนวน
+    # สรุปจำนวน
     # --------------------------------------------------------
 
     total_count = len(
@@ -3032,22 +3358,22 @@ def main() -> int:
     )
 
     online_total = sum(
+        value[
+            "online"
+        ]
 
-        v["online"]
-
-        for v in type_stats.values()
+        for value
+        in type_stats.values()
     )
 
     offline_total = sum(
+        value[
+            "offline"
+        ]
 
-        v["offline"]
-
-        for v in type_stats.values()
+        for value
+        in type_stats.values()
     )
-
-    # --------------------------------------------------------
-    # แสดงผล Console
-    # --------------------------------------------------------
 
     print(
         f"จำนวนสถานีทั้งหมด: "
@@ -3070,6 +3396,97 @@ def main() -> int:
     )
 
     # --------------------------------------------------------
+    # ระดับสถานการณ์
+    # --------------------------------------------------------
+
+    urgent_count, watch_count, follow_count = (
+        calculate_severity_levels(
+            alert_stations
+        )
+    )
+
+    print(
+        "เกินค่ามาตรฐาน: "
+        f"{urgent_count} สถานี"
+    )
+
+    print(
+        "เฝ้าระวัง: "
+        f"{watch_count} สถานี"
+    )
+
+    print(
+        "ติดตามสถานการณ์: "
+        f"{follow_count} สถานี"
+    )
+
+    # --------------------------------------------------------
+    # Debug รายละเอียด
+    # --------------------------------------------------------
+
+    for station in alert_stations:
+
+        print(
+            "-" * 60
+        )
+
+        print(
+            "สถานี:",
+            station[
+                "station_name"
+            ]
+        )
+
+        print(
+            "ประเภท:",
+            station[
+                "station_type"
+            ]
+        )
+
+        print(
+            "นิคมฯ:",
+            station[
+                "estate_name"
+            ]
+        )
+
+        print(
+            "สถานะ:",
+            station[
+                "status"
+            ]
+        )
+
+        print(
+            "ParameterAlram:",
+            station[
+                "parameter_alarm"
+            ]
+        )
+
+        print(
+            "Comment:",
+            station[
+                "comment"
+            ]
+        )
+
+        print(
+            "Latitude:",
+            station[
+                "latitude"
+            ]
+        )
+
+        print(
+            "Longitude:",
+            station[
+                "longitude"
+            ]
+        )
+
+    # --------------------------------------------------------
     # เขียน status.json
     # --------------------------------------------------------
 
@@ -3082,7 +3499,7 @@ def main() -> int:
             alert_stations,
 
         type_stats=
-            type_stats,
+            type_stats
     )
 
     # --------------------------------------------------------
@@ -3104,7 +3521,7 @@ def main() -> int:
             type_stats,
 
         alert_stations=
-            alert_stations,
+            alert_stations
     )
 
     print("=" * 72)
@@ -3119,7 +3536,7 @@ def main() -> int:
 
 
 # ============================================================
-# RUN
+# Run
 # ============================================================
 
 if __name__ == "__main__":
