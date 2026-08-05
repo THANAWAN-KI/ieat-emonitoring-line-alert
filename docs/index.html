@@ -16,26 +16,26 @@
 
 :root{
 
-  --purple:#522D80;
-  --purple-2:#6561AC;
-  --purple-soft:#F2EFF8;
+  --purple:#C41E13;
+  --purple-2:#EE3124;
+  --purple-soft:#FDECEA;
 
-  --blue:#0091CD;
-  --blue-dark:#006E9D;
-  --blue-soft:#EAF6FC;
+  --blue:#FFC425;
+  --blue-dark:#C98A00;
+  --blue-soft:#FFF7E0;
 
-  --green:#537B35;
-  --green-2:#8EC06C;
-  --green-soft:#EFF7E9;
+  --green:#00A160;
+  --green-2:#17C27D;
+  --green-soft:#E6F7EF;
 
-  --sky:#C4DFF6;
+  --sky:#FFE9A8;
 
-  --red:#C51F48;
-  --red-dark:#A91539;
-  --red-soft:#FFF0F3;
+  --red:#EE3124;
+  --red-dark:#B8180F;
+  --red-soft:#FDECEA;
 
-  --orange:#D88916;
-  --orange-soft:#FFF7E7;
+  --orange:#E0A800;
+  --orange-soft:#FFF7E0;
 
   --ink:#252238;
   --text:#3D3A49;
@@ -94,7 +94,7 @@ body{
     Arial,
     sans-serif;
 
-  font-size:18px;
+  font-size:15px;
 
   line-height:1.55;
 
@@ -163,20 +163,19 @@ body{
   top:0;
 
   width:100%;
-  height:6px;
+  height:7px;
 
   background:
     linear-gradient(
       90deg,
       var(--blue) 0%,
-      var(--blue) 24%,
-      var(--green-2) 24%,
-      var(--green-2) 48%,
-      var(--purple-2) 48%,
-      var(--purple-2) 74%,
-      var(--purple) 74%,
+      var(--green-2) 33%,
+      var(--purple-2) 66%,
       var(--purple) 100%
     );
+
+  box-shadow:
+    0 2px 10px rgba(238,49,36,.35);
 
 }
 
@@ -207,9 +206,20 @@ body{
 
 .brand-name{
 
+  background:
+    linear-gradient(
+      100deg,
+      var(--purple) 0%,
+      var(--purple-2) 55%,
+      var(--blue-dark) 100%
+    );
+
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
   color:var(--purple);
 
-  font-size:30px;
+  font-size:20px;
 
   line-height:1.15;
 
@@ -226,7 +236,7 @@ body{
 
   color:#65636E;
 
-  font-size:17px;
+  font-size:13px;
 
   font-weight:600;
 
@@ -239,7 +249,7 @@ body{
 
   color:var(--ink);
 
-  font-size:36px;
+  font-size:24px;
 
   line-height:1.2;
 
@@ -254,7 +264,7 @@ body{
 
   color:var(--purple-2);
 
-  font-size:20px;
+  font-size:15px;
 
   font-weight:700;
 
@@ -274,12 +284,12 @@ body{
   background:
     linear-gradient(
       145deg,
-      #F5F2FA,
+      #FFF4F2,
       #FFFFFF
     );
 
   border:
-    1px solid #DDD8EA;
+    1px solid #F3C9C2;
 
   border-radius:16px;
 
@@ -292,7 +302,7 @@ body{
 
   color:var(--muted);
 
-  font-size:14px;
+  font-size:12px;
 
   font-weight:700;
 
@@ -305,7 +315,7 @@ body{
 
   color:var(--purple);
 
-  font-size:19px;
+  font-size:15px;
 
   font-weight:950;
 
@@ -368,7 +378,7 @@ body{
   background:var(--green-2);
 
   box-shadow:
-    0 0 0 6px #EDF6E8;
+    0 0 0 6px #DFF6EC;
 
 }
 
@@ -377,7 +387,7 @@ body{
 
   color:var(--muted);
 
-  font-size:14px;
+  font-size:12px;
 
   font-weight:700;
 
@@ -390,7 +400,7 @@ body{
 
   color:var(--green);
 
-  font-size:20px;
+  font-size:16px;
 
   font-weight:950;
 
@@ -401,7 +411,7 @@ body{
 
   color:#777582;
 
-  font-size:15px;
+  font-size:12px;
 
   font-weight:600;
 
@@ -453,7 +463,7 @@ body{
 
   color:var(--purple);
 
-  font-size:26px;
+  font-size:19px;
 
   line-height:1.25;
 
@@ -472,7 +482,7 @@ body{
 
   color:#74727D;
 
-  font-size:16px;
+  font-size:13px;
 
   font-weight:600;
 
@@ -540,39 +550,75 @@ body{
 }
 
 
+.overview-card:before{
+
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  top:0;
+
+  width:100%;
+  height:100%;
+
+  background:
+    linear-gradient(
+      120deg,
+      rgba(255,255,255,.55) 0%,
+      rgba(255,255,255,0) 30%
+    );
+
+  pointer-events:none;
+
+}
+
+
 .overview-card.total{
   border-top:5px solid var(--blue);
+  box-shadow:
+    0 12px 26px rgba(255,196,37,.16),
+    0 3px 7px rgba(52,43,80,.06);
 }
 
 .overview-card.total:after{
-  background:#E4F4FB;
+  background:#FFEFC2;
 }
 
 
 .overview-card.online{
   border-top:5px solid var(--green);
+  box-shadow:
+    0 12px 26px rgba(0,161,96,.16),
+    0 3px 7px rgba(52,43,80,.06);
 }
 
 .overview-card.online:after{
-  background:#EAF5E3;
+  background:#DCF5E9;
 }
 
 
 .overview-card.offline{
   border-top:5px solid var(--red);
+  box-shadow:
+    0 12px 26px rgba(238,49,36,.18),
+    0 3px 7px rgba(52,43,80,.06);
 }
 
 .overview-card.offline:after{
-  background:#FFF0F3;
+  background:#FDECEA;
 }
 
 
 .overview-card.alert{
   border-top:5px solid var(--purple);
+  box-shadow:
+    0 12px 26px rgba(196,30,19,.16),
+    0 3px 7px rgba(52,43,80,.06);
 }
 
 .overview-card.alert:after{
-  background:#F0EDF8;
+  background:#FBDCD8;
 }
 
 
@@ -583,7 +629,7 @@ body{
 
   color:#6E6C77;
 
-  font-size:16px;
+  font-size:12px;
 
   font-weight:800;
 
@@ -599,7 +645,7 @@ body{
 
   color:var(--ink);
 
-  font-size:42px;
+  font-size:28px;
 
   line-height:1;
 
@@ -634,7 +680,7 @@ body{
 
   color:#898791;
 
-  font-size:13px;
+  font-size:11px;
 
   font-weight:600;
 
@@ -728,7 +774,7 @@ body{
 
 .panel-title{
 
-  font-size:19px;
+  font-size:15px;
 
   font-weight:950;
 
@@ -737,7 +783,7 @@ body{
 
 .panel-subtitle{
 
-  font-size:13px;
+  font-size:11px;
 
   opacity:.88;
 
@@ -779,7 +825,7 @@ body{
 
   text-align:left;
 
-  font-size:14px;
+  font-size:12px;
 
   font-weight:800;
 
@@ -800,7 +846,7 @@ body{
   border-bottom:
     1px solid #ECECF0;
 
-  font-size:17px;
+  font-size:14px;
 
 }
 
@@ -831,7 +877,7 @@ body{
 
   color:var(--purple);
 
-  font-size:18px;
+  font-size:14px;
 
   font-weight:950;
 
@@ -846,7 +892,7 @@ body{
 
   color:#777582;
 
-  font-size:13px;
+  font-size:11px;
 
   font-weight:600;
 
@@ -857,7 +903,7 @@ body{
 
   color:var(--blue);
 
-  font-size:23px;
+  font-size:17px;
 
   font-weight:950;
 
@@ -920,7 +966,7 @@ body{
 
 .situation-name{
 
-  font-size:18px;
+  font-size:14px;
 
   font-weight:900;
 
@@ -931,7 +977,7 @@ body{
 
   text-align:right;
 
-  font-size:31px;
+  font-size:22px;
 
   line-height:1;
 
@@ -947,7 +993,7 @@ body{
   background:var(--red-soft);
 
   border:
-    1px solid #F0BBC9;
+    1px solid #F6B3AC;
 
 }
 
@@ -959,7 +1005,7 @@ body{
   background:var(--orange-soft);
 
   border:
-    1px solid #F0D7A4;
+    1px solid #FFE9A8;
 
 }
 
@@ -971,7 +1017,7 @@ body{
   background:var(--green-soft);
 
   border:
-    1px solid #CDE1BE;
+    1px solid #A9E6C9;
 
 }
 
@@ -1009,7 +1055,7 @@ body{
 
   color:#70707A;
 
-  font-size:14px;
+  font-size:11px;
 
   font-weight:800;
 
@@ -1020,7 +1066,7 @@ body{
 
   margin-top:4px;
 
-  font-size:30px;
+  font-size:21px;
 
   line-height:1;
 
@@ -1076,7 +1122,7 @@ body{
 
   color:#6F6D77;
 
-  font-size:15px;
+  font-size:12px;
 
   font-weight:700;
 
@@ -1143,7 +1189,7 @@ body{
   background:var(--red-soft);
 
   border:
-    1px solid #E8B6C3;
+    1px solid #F6B3AC;
 
   border-left:
     7px solid var(--red);
@@ -1157,7 +1203,7 @@ body{
 
   color:var(--red);
 
-  font-size:20px;
+  font-size:15px;
 
   font-weight:950;
 
@@ -1168,9 +1214,9 @@ body{
 
   margin-top:3px;
 
-  color:#7E4C59;
+  color:#8A3A32;
 
-  font-size:15px;
+  font-size:12px;
 
   font-weight:600;
 
@@ -1181,7 +1227,7 @@ body{
 
   color:var(--red);
 
-  font-size:38px;
+  font-size:26px;
 
   line-height:1;
 
@@ -1221,7 +1267,7 @@ body{
   border-radius:22px;
 
   box-shadow:
-    0 12px 28px rgba(44,39,67,.09),
+    0 14px 30px rgba(196,30,19,.08),
     0 2px 5px rgba(44,39,67,.05);
 
   overflow:hidden;
@@ -1241,13 +1287,34 @@ body{
 
   width:7px;
 
-  background:var(--purple);
+  background:
+    linear-gradient(
+      180deg,
+      var(--purple-2),
+      var(--purple)
+    );
+
+  z-index:2;
+
+}
+
+
+.station-card.alert-red{
+
+  box-shadow:
+    0 14px 30px rgba(238,49,36,.18),
+    0 2px 5px rgba(44,39,67,.06);
 
 }
 
 
 .station-card.alert-red:before{
-  background:var(--red);
+  background:
+    linear-gradient(
+      180deg,
+      var(--red),
+      var(--red-dark)
+    );
 }
 
 
@@ -1284,7 +1351,7 @@ body{
 
   color:var(--purple);
 
-  font-size:24px;
+  font-size:17px;
 
   line-height:1.35;
 
@@ -1299,7 +1366,7 @@ body{
 
   color:#74727D;
 
-  font-size:17px;
+  font-size:13px;
 
   font-weight:650;
 
@@ -1316,7 +1383,7 @@ body{
 
   border-radius:30px;
 
-  font-size:16px;
+  font-size:12px;
 
   font-weight:950;
 
@@ -1325,12 +1392,12 @@ body{
 
 .station-status-badge.online{
 
-  color:#2F7138;
+  color:#00844F;
 
-  background:#EAF5E6;
+  background:#DCF5E9;
 
   border:
-    1px solid #C9DFBD;
+    1px solid #9FE3C1;
 
 }
 
@@ -1342,7 +1409,7 @@ body{
   background:var(--red-soft);
 
   border:
-    1px solid #E8BBC8;
+    1px solid #F6B3AC;
 
 }
 
@@ -1412,7 +1479,7 @@ body{
 
   color:#777580;
 
-  font-size:16px;
+  font-size:12px;
 
   font-weight:750;
 
@@ -1423,7 +1490,7 @@ body{
 
   color:#3E3B48;
 
-  font-size:17px;
+  font-size:13px;
 
   font-weight:850;
 
@@ -1433,7 +1500,7 @@ body{
 
 
 .detail-value.status-online{
-  color:#368047;
+  color:#00844F;
 }
 
 
@@ -1468,7 +1535,7 @@ body{
 
   color:var(--purple);
 
-  font-size:22px;
+  font-size:16px;
 
   font-weight:950;
 
@@ -1484,12 +1551,12 @@ body{
   background:
     linear-gradient(
       135deg,
-      #FFF2F5,
-      #FFF8F9
+      #FFEBE8,
+      #FFF5F4
     );
 
   border:
-    2px solid #E6B8C5;
+    2px solid #F3B4AC;
 
   border-radius:16px;
 
@@ -1512,9 +1579,9 @@ body{
     8px
     0;
 
-  color:#B91F43;
+  color:#C41E13;
 
-  font-size:18px;
+  font-size:14px;
 
   line-height:1.45;
 
@@ -1528,16 +1595,16 @@ body{
 .parameter-item + .parameter-item{
 
   border-top:
-    1px dashed #E5C4CC;
+    1px dashed #F3C7C1;
 
 }
 
 
 .parameter-bullet{
 
-  color:#C21D46;
+  color:#C41E13;
 
-  font-size:18px;
+  font-size:14px;
 
 }
 
@@ -1585,7 +1652,7 @@ body{
 
   text-align:left;
 
-  font-size:16px;
+  font-size:13px;
 
   font-weight:900;
 
@@ -1605,7 +1672,7 @@ body{
   border-bottom:
     1px solid #E7E7EB;
 
-  font-size:17px;
+  font-size:13px;
 
   font-weight:700;
 
@@ -1632,7 +1699,7 @@ body{
 
   color:var(--red);
 
-  font-size:19px;
+  font-size:14px;
 
   font-weight:950;
 
@@ -1660,7 +1727,7 @@ body{
 
   color:var(--purple);
 
-  font-size:21px;
+  font-size:15px;
 
   font-weight:950;
 
@@ -1684,7 +1751,7 @@ body{
 
   color:#55525E;
 
-  font-size:17px;
+  font-size:13px;
 
   font-weight:650;
 
@@ -1710,11 +1777,11 @@ body{
   background:var(--green-soft);
 
   border:
-    1px solid #CDE0BF;
+    1px solid #A9E6C9;
 
   border-radius:16px;
 
-  font-size:19px;
+  font-size:14px;
 
   font-weight:900;
 
@@ -1735,7 +1802,7 @@ body{
 
   color:var(--purple);
 
-  font-size:19px;
+  font-size:14px;
 
   font-weight:800;
 
@@ -1775,9 +1842,13 @@ body{
       var(--purple-2)
     );
 
+  border-top:4px solid var(--blue);
+
   border-radius:20px;
 
-  box-shadow:var(--shadow-3d);
+  box-shadow:
+    0 14px 30px rgba(196,30,19,.22),
+    0 3px 7px rgba(52,43,80,.06);
 
 }
 
@@ -1786,7 +1857,7 @@ body{
 
   color:#FFFFFF;
 
-  font-size:20px;
+  font-size:15px;
 
   font-weight:950;
 
@@ -1799,7 +1870,7 @@ body{
 
   color:rgba(255,255,255,.86);
 
-  font-size:15px;
+  font-size:12px;
 
   font-weight:600;
 
@@ -1822,11 +1893,13 @@ body{
 
   background:#FFFFFF;
 
+  border:2px solid var(--blue);
+
   border-radius:30px;
 
   text-decoration:none;
 
-  font-size:16px;
+  font-size:13px;
 
   font-weight:950;
 
@@ -1880,7 +1953,7 @@ body{
 
   body{
 
-    font-size:17px;
+    font-size:15px;
 
   }
 
@@ -1911,14 +1984,14 @@ body{
 
   .brand-name{
 
-    font-size:25px;
+    font-size:22px;
 
   }
 
 
   .brand-sub{
 
-    font-size:16px;
+    font-size:14px;
 
   }
 
@@ -1927,14 +2000,14 @@ body{
 
     margin-top:22px;
 
-    font-size:31px;
+    font-size:27px;
 
   }
 
 
   .report-subtitle{
 
-    font-size:18px;
+    font-size:15px;
 
   }
 
@@ -1963,14 +2036,14 @@ body{
 
   .status-value{
 
-    font-size:18px;
+    font-size:15px;
 
   }
 
 
   .status-time{
 
-    font-size:14px;
+    font-size:12px;
 
   }
 
@@ -1998,21 +2071,21 @@ body{
 
   .overview-label{
 
-    font-size:14px;
+    font-size:12px;
 
   }
 
 
   .overview-number{
 
-    font-size:34px;
+    font-size:29px;
 
   }
 
 
   .overview-note{
 
-    font-size:12px;
+    font-size:10px;
 
   }
 
@@ -2026,14 +2099,14 @@ body{
 
   .section-heading h2{
 
-    font-size:23px;
+    font-size:20px;
 
   }
 
 
   .section-description{
 
-    font-size:15px;
+    font-size:13px;
 
   }
 
@@ -2049,7 +2122,7 @@ body{
 
   .panel-title{
 
-    font-size:18px;
+    font-size:15px;
 
   }
 
@@ -2086,14 +2159,14 @@ body{
 
   .status-summary-card .label{
 
-    font-size:12px;
+    font-size:10px;
 
   }
 
 
   .status-summary-card .number{
 
-    font-size:27px;
+    font-size:23px;
 
   }
 
@@ -2108,14 +2181,14 @@ body{
 
   .alert-summary-title{
 
-    font-size:18px;
+    font-size:15px;
 
   }
 
 
   .alert-summary-number{
 
-    font-size:32px;
+    font-size:28px;
 
   }
 
@@ -2137,14 +2210,14 @@ body{
 
   .station-name-large{
 
-    font-size:23px;
+    font-size:20px;
 
   }
 
 
   .station-estate{
 
-    font-size:16px;
+    font-size:14px;
 
   }
 
@@ -2186,14 +2259,14 @@ body{
 
   .detail-label{
 
-    font-size:15px;
+    font-size:13px;
 
   }
 
 
   .detail-value{
 
-    font-size:17px;
+    font-size:15px;
 
   }
 
@@ -2211,7 +2284,7 @@ body{
 
   .parameter-title{
 
-    font-size:21px;
+    font-size:18px;
 
   }
 
@@ -2226,7 +2299,7 @@ body{
 
   .parameter-item{
 
-    font-size:18px;
+    font-size:15px;
 
   }
 
@@ -2249,14 +2322,14 @@ body{
 
   .parameter-table th{
 
-    font-size:15px;
+    font-size:13px;
 
   }
 
 
   .parameter-table td{
 
-    font-size:16px;
+    font-size:14px;
 
   }
 
@@ -2274,14 +2347,14 @@ body{
 
   .followup-title{
 
-    font-size:20px;
+    font-size:17px;
 
   }
 
 
   .followup-box{
 
-    font-size:16px;
+    font-size:14px;
 
   }
 
@@ -2318,14 +2391,14 @@ body{
 
   .report-title{
 
-    font-size:28px;
+    font-size:24px;
 
   }
 
 
   .station-name-large{
 
-    font-size:21px;
+    font-size:18px;
 
   }
 
@@ -3395,7 +3468,7 @@ function renderStations(data){
         <br>
 
         <span style="
-          font-size:16px;
+          font-size:14px;
           font-weight:600;
         ">
           สถานการณ์อยู่ในภาวะปกติตามข้อมูลล่าสุด
@@ -3889,16 +3962,16 @@ async function loadStatus(){
       .style
       .background=
         alert
-          ? "#C51F48"
-          : "#8EC06C";
+          ? "#EE3124"
+          : "#17C27D";
 
 
     $("statusTitle")
       .style
       .color=
         alert
-          ? "#C51F48"
-          : "#537B35";
+          ? "#EE3124"
+          : "#00A160";
 
 
     $("statusTitle")
