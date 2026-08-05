@@ -1,35 +1,406 @@
-<!DOCTYPE html>
+from pathlib import Path
+
+html = r'''<!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <title>สถานีออนไลน์ | IEAT e-Monitoring</title>
-  <style>
-    :root{--purple:#6430a2;--deep:#4b177e;--ink:#29242d;--muted:#69636e;--green:#0d9251;--green-pale:#eaf8f0;--red:#e42c42;--red-pale:#fff1f3;--line:#e5e2e8}
-    *{box-sizing:border-box}body{margin:0;min-width:320px;color:var(--ink);font-family:"Noto Sans Thai","Leelawadee UI","Segoe UI",Tahoma,Arial,sans-serif;background:radial-gradient(circle at 8% 8%,#fff 0,transparent 25%),radial-gradient(circle at 92% 70%,#fff 0,transparent 25%),linear-gradient(135deg,#eee3ff,#fbfaff 50%,#e9ddff)}.canvas{width:min(100%,943px);margin:auto;padding:27px 47px}.page{min-height:100dvh;overflow:hidden;border-radius:33px;background:rgba(255,255,255,.96);box-shadow:0 14px 36px rgba(77,36,123,.18)}
-    header{display:flex;align-items:center;justify-content:space-between;padding:25px 31px 17px}.brand img{display:block;width:294px;max-width:75vw;height:auto}.hamburger{width:39px;display:grid;gap:6px}.hamburger i{height:4px;border-radius:99px;background:var(--deep)}main{padding:14px 32px 30px}.hidden{display:none!important}.loading,.error{padding:70px 15px;color:var(--muted);text-align:center;font-size:18px}.error{color:var(--red)}
-    .hero{display:flex;align-items:center;gap:25px;margin-bottom:25px}.hero-icon{display:grid;place-items:center;width:128px;height:128px;flex:0 0 128px;border-radius:50%;background:radial-gradient(circle at 35% 25%,#fff,#ede2ff 62%,#e3d3ff);color:var(--purple);box-shadow:inset 0 0 18px #fff}.hero-icon svg{width:79px;height:79px;fill:none;stroke:currentColor;stroke-width:4;stroke-linejoin:round}.hero h1{margin:0;color:var(--purple);font-size:46px;line-height:1.1;letter-spacing:-1.8px}.hero p{margin:8px 0 0;color:#37313a;font-size:27px;font-weight:800;letter-spacing:-1px}
-    .notice{display:flex;align-items:center;gap:20px;padding:18px 17px;border:1.5px solid #dac8ff;border-radius:17px;background:linear-gradient(100deg,#fdfaff,#faf7ff)}.notice-icon{display:grid;place-items:center;width:70px;height:70px;flex:0 0 70px;border-radius:50%;background:linear-gradient(135deg,#8e54d0,#5e259e);color:#fff}.notice-icon svg{width:37px;height:37px;fill:none;stroke:currentColor;stroke-width:4}.notice strong{display:block;color:var(--purple);font-size:23px}.notice span{display:block;margin-top:5px;font-size:16px;line-height:1.5}
-    h2{margin:26px 0 13px;color:var(--purple);font-size:28px;line-height:1.15;letter-spacing:-.7px}.summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.summary{min-height:169px;padding:18px 10px;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:0 5px 11px rgba(0,0,0,.09);text-align:center}.summary-icon{display:grid;place-items:center;width:52px;height:52px;margin:0 auto 8px;border-radius:50%;background:#f0e8ff;color:var(--purple)}.summary-icon svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:3}.summary.online .summary-icon{background:var(--green-pale);color:var(--green)}.summary.offline .summary-icon{background:var(--red-pale);color:var(--red)}.summary strong{display:block;color:var(--purple);font-size:35px;line-height:1}.summary.online strong{color:var(--green)}.summary.offline strong{color:var(--red)}.summary span{display:block;margin-top:9px;color:var(--muted);font-size:15px;font-weight:700}
-    .station-card{display:flex;align-items:center;gap:18px;min-height:130px;margin-bottom:8px;padding:15px 18px;border:1px solid var(--line);border-radius:16px;background:#fff;box-shadow:0 4px 9px rgba(0,0,0,.055)}.station-icon{display:grid;place-items:center;width:68px;height:68px;flex:0 0 68px;border-radius:13px;background:#f3edff;color:var(--purple)}.station-icon svg{width:44px;height:44px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.station-card.aqms .station-icon{background:var(--green-pale);color:var(--green)}.station-card.cems .station-icon{background:#eaf3ff;color:#3560aa}.station-copy{min-width:95px;flex:1}.station-copy h3{margin:0;color:var(--purple);font-size:25px}.station-card.aqms h3{color:var(--green)}.station-card.cems h3{color:#3560aa}.station-copy p{margin:4px 0 0;color:var(--muted);font-size:14px}.counts{display:grid;grid-template-columns:repeat(3,84px);gap:8px}.count{padding:10px 3px;border-radius:11px;background:#faf9fc;text-align:center}.count b{display:block;font-size:23px;line-height:1}.count small{display:block;margin-top:4px;color:var(--muted);font-size:11px}.count.online b{color:var(--green)}.count.offline b{color:var(--red)}.updated{margin:20px 0 12px;color:var(--muted);font-size:14px;text-align:center}.refresh{width:100%;padding:15px;border:0;border-radius:13px;background:linear-gradient(90deg,#4e177e,#6d37aa);color:#fff;font:inherit;font-size:18px;font-weight:800;cursor:pointer;box-shadow:0 4px 10px rgba(80,22,132,.22)}.refresh:active{transform:translateY(1px);opacity:.9}
-    @media(max-width:680px){.canvas{padding:12px}.page{border-radius:25px}header{padding:20px 20px 9px}.brand img{width:215px}.hamburger{width:32px}.hamburger i{height:3px}main{padding:13px 18px 22px}.hero{gap:13px;margin-bottom:19px}.hero-icon{width:79px;height:79px;flex-basis:79px}.hero-icon svg{width:49px;height:49px}.hero h1{font-size:29px;letter-spacing:-1px}.hero p{font-size:17px}.notice{gap:12px;padding:13px}.notice-icon{width:48px;height:48px;flex-basis:48px}.notice-icon svg{width:25px;height:25px}.notice strong{font-size:17px}.notice span{font-size:12px}h2{margin:21px 0 10px;font-size:23px}.summary-grid{gap:7px}.summary{min-height:116px;padding:10px 4px;border-radius:13px}.summary-icon{width:35px;height:35px;margin-bottom:5px}.summary-icon svg{width:21px;height:21px}.summary strong{font-size:25px}.summary span{margin-top:5px;font-size:11px}.station-card{gap:10px;min-height:88px;padding:9px 11px}.station-icon{width:49px;height:49px;flex-basis:49px;border-radius:10px}.station-icon svg{width:30px;height:30px}.station-copy{min-width:55px}.station-copy h3{font-size:18px}.station-copy p{font-size:11px}.counts{grid-template-columns:repeat(3,48px);gap:4px}.count{padding:7px 1px;border-radius:8px}.count b{font-size:16px}.count small{margin-top:3px;font-size:9px}.updated{font-size:12px}.refresh{padding:13px;font-size:16px}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#4E2A84">
+<title>IEAT e-Monitoring | สรุปสถานการณ์ล่าสุด</title>
+<style>
+:root{
+  --purple:#4E2A84;
+  --purple2:#6A4C93;
+  --purple-soft:#F5F0F6;
+  --green:#2B8A3E;
+  --green-soft:#EEF8F1;
+  --red:#C51F35;
+  --red-soft:#FFF1F3;
+  --orange:#E67700;
+  --orange-soft:#FFF7E8;
+  --yellow:#B7791F;
+  --yellow-soft:#FFF9E8;
+  --ink:#26212B;
+  --muted:#716C76;
+  --line:#E6E0E9;
+  --white:#FFFFFF;
+  --shadow:0 8px 26px rgba(53,35,70,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#F6F4F7;color:var(--ink);font-family:"Noto Sans Thai","Prompt","Sarabun","Avenir Next",Arial,sans-serif}
+body{min-height:100vh}
+button,a{font:inherit}
+a{text-decoration:none;color:inherit}
+.page{width:min(100%,560px);margin:auto;padding-bottom:28px}
+.header{
+  position:sticky;top:0;z-index:20;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+  padding:10px 16px;
+}
+.header-row{display:flex;align-items:center;gap:12px}
+.logo{height:42px;width:auto;object-fit:contain}
+.brand{min-width:0;flex:1}
+.brand strong{display:block;font-size:15px;line-height:1.25;color:var(--purple)}
+.brand span{display:block;font-size:10px;color:var(--muted);margin-top:2px}
+.refresh-btn{
+  border:1px solid #D9D0E1;background:#fff;color:var(--purple);
+  width:38px;height:38px;border-radius:11px;cursor:pointer;
+  display:grid;place-items:center;font-size:19px;
+}
+main{padding:12px}
+.hero{
+  background:linear-gradient(135deg,#4E2A84,#6A4C93);
+  border-radius:18px;padding:18px;color:#fff;box-shadow:var(--shadow);
+}
+.hero-top{display:flex;align-items:center;gap:12px}
+.hero-icon{
+  width:46px;height:46px;border-radius:13px;
+  background:rgba(255,255,255,.14);
+  display:grid;place-items:center;font-size:24px;
+}
+.hero h1{font-size:20px;margin:0;font-weight:800}
+.hero p{font-size:11px;margin:4px 0 0;color:#EDE7F3}
+.hero-time{
+  margin-top:14px;padding-top:11px;border-top:1px solid rgba(255,255,255,.18);
+  font-size:10px;color:#EDE7F3;display:flex;justify-content:space-between;gap:8px
+}
+.status{
+  margin-top:10px;background:#fff;border:1px solid var(--line);border-radius:16px;
+  padding:13px;box-shadow:var(--shadow)
+}
+.status-main{display:flex;align-items:center;gap:10px}
+.status-dot{width:11px;height:11px;border-radius:50%;flex:none;background:var(--green);box-shadow:0 0 0 5px var(--green-soft)}
+.status-dot.alert{background:var(--red);box-shadow:0 0 0 5px var(--red-soft)}
+.status-title{font-weight:800;font-size:14px}
+.status-sub{font-size:10px;color:var(--muted);margin-top:3px}
+.section-title{font-size:14px;font-weight:800;margin:18px 3px 8px;color:#3A3041}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.kpi{
+  background:#fff;border:1px solid var(--line);border-radius:14px;
+  padding:12px 7px;text-align:center;box-shadow:0 4px 14px rgba(53,35,70,.05)
+}
+.kpi .num{font-size:23px;font-weight:900;line-height:1.05}
+.kpi .label{font-size:9px;color:var(--muted);margin-top:5px}
+.kpi.online .num{color:var(--green)}
+.kpi.offline .num{color:var(--red)}
+.kpi.total .num{color:var(--purple)}
+.types{display:grid;gap:8px}
+.type-card{
+  background:#fff;border:1px solid var(--line);border-radius:15px;padding:12px;
+  box-shadow:0 4px 14px rgba(53,35,70,.05)
+}
+.type-head{display:flex;align-items:center;gap:10px}
+.type-icon{
+  width:40px;height:40px;border-radius:11px;background:var(--purple-soft);
+  display:grid;place-items:center;color:var(--purple);font-weight:900;font-size:12px
+}
+.type-copy{flex:1;min-width:0}
+.type-copy strong{font-size:14px;display:block}
+.type-copy span{font-size:9px;color:var(--muted)}
+.type-total{font-size:19px;font-weight:900;color:var(--purple)}
+.type-counts{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px}
+.mini{
+  padding:7px;border-radius:9px;text-align:center;font-size:9px;font-weight:700
+}
+.mini b{font-size:15px;display:block;margin-bottom:1px}
+.mini.on{background:var(--green-soft);color:var(--green)}
+.mini.off{background:var(--red-soft);color:var(--red)}
+.severity{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.sev{
+  border-radius:13px;padding:10px 5px;text-align:center;border:1px solid
+}
+.sev img{width:27px;height:27px;object-fit:contain;margin:auto auto 4px;display:block}
+.sev b{font-size:18px;display:block;line-height:1}
+.sev span{font-size:8px;display:block;margin-top:4px;line-height:1.25}
+.sev.high{background:var(--red-soft);border-color:#F2C7CD;color:var(--red)}
+.sev.watch{background:var(--orange-soft);border-color:#F3D5A6;color:var(--orange)}
+.sev.follow{background:var(--yellow-soft);border-color:#EAD9A9;color:var(--yellow)}
+.alert-box{
+  background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px;
+  box-shadow:0 4px 14px rgba(53,35,70,.05)
+}
+.alert-note{
+  background:#F8F6FA;border-radius:10px;padding:9px;font-size:9px;color:var(--muted);
+  line-height:1.5;margin-bottom:8px
+}
+.station{
+  border:1px solid #ECE8EF;border-radius:12px;padding:10px;margin-top:7px;
+  background:#fff
+}
+.station-top{display:flex;gap:8px;align-items:flex-start}
+.station-icon{
+  width:34px;height:34px;border-radius:9px;background:var(--red-soft);
+  color:var(--red);display:grid;place-items:center;font-size:15px;flex:none
+}
+.station-info{flex:1;min-width:0}
+.station-name{font-weight:800;font-size:11px;line-height:1.35}
+.station-meta{font-size:8px;color:var(--muted);margin-top:3px;line-height:1.4}
+.badge{
+  font-size:8px;font-weight:800;border-radius:20px;padding:4px 7px;white-space:nowrap
+}
+.badge.online{background:var(--green-soft);color:var(--green)}
+.badge.offline{background:var(--red-soft);color:var(--red)}
+.param{
+  margin-top:8px;padding:7px 8px;background:#FFF8F8;border-left:3px solid var(--red);
+  border-radius:6px;font-size:8px;line-height:1.45;color:#5C343B
+}
+.comment{
+  margin-top:6px;font-size:8px;line-height:1.45;color:var(--muted)
+}
+.station-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+.action{
+  display:block;text-align:center;border-radius:8px;padding:7px;font-size:9px;font-weight:800;
+  border:1px solid #DCD4E2;background:#fff;color:var(--purple)
+}
+.action.primary{background:var(--purple);color:#fff;border-color:var(--purple)}
+.empty{
+  background:var(--green-soft);border:1px solid #CDE8D3;color:var(--green);
+  padding:14px;border-radius:13px;text-align:center;font-size:11px;font-weight:700
+}
+.footer{
+  margin-top:15px;text-align:center;color:#8A838E;font-size:8px;line-height:1.6
+}
+.loading,.error{
+  background:#fff;border:1px solid var(--line);border-radius:15px;padding:22px;text-align:center;
+  margin-top:10px;font-size:11px
+}
+.error{color:var(--red)}
+.hidden{display:none!important}
+@media(max-width:370px){
+  main{padding:9px}.hero{padding:15px}.kpi .num{font-size:20px}
+  .type-total{font-size:17px}.severity{gap:5px}.sev{padding:8px 3px}
+}
+</style>
 </head>
-<body><div class="canvas"><div class="page">
-  <header><div class="brand"><img src="./ieat_logo.png.PNG" alt="IEAT การนิคมอุตสาหกรรมแห่งประเทศไทย"></div><div class="hamburger" aria-label="เมนู"><i></i><i></i><i></i></div></header>
-  <main><div id="loading" class="loading">กำลังโหลดข้อมูลสถานี...</div><div id="error" class="error hidden">ไม่สามารถโหลดข้อมูลได้ กรุณากดรีเฟรชอีกครั้ง</div>
-    <div id="dashboard" class="hidden">
-      <section class="hero"><div class="hero-icon"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 12 28 84h44zM40 62h20M35 75h30M50 12v72M20 84h60M65 18c13 8 21 22 21 37M35 18C22 26 14 40 14 55M73 9c18 11 29 30 29 51M27 9C9 20-2 39-2 60"/></svg></div><div><h1>สถานีออนไลน์</h1><p>สรุปสถานะการเชื่อมต่อสถานีตรวจวัด</p></div></section>
-      <section class="notice"><div class="notice-icon"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M13 32h38M32 13v38M20 20l24 24M44 20 20 44"/></svg></div><div><strong>ติดตามสถานะสถานีตรวจวัดแบบเรียลไทม์</strong><span>แสดงข้อมูลล่าสุดของสถานีตรวจวัด แยกตามประเภท AQMs, WQMs และ CEMs</span></div></section>
-      <h2>ภาพรวมสถานีตรวจวัด</h2><section class="summary-grid"><article class="summary"><div class="summary-icon"><svg viewBox="0 0 64 64"><path d="M10 52V28h44v24M17 28V16h30v12M25 52V39h14v13"/></svg></div><strong id="stationTotal">0</strong><span>สถานีทั้งหมด</span></article><article class="summary online"><div class="summary-icon"><svg viewBox="0 0 64 64"><path d="m13 34 12 12 26-28"/></svg></div><strong id="onlineTotal">0</strong><span>ONLINE</span></article><article class="summary offline"><div class="summary-icon"><svg viewBox="0 0 64 64"><path d="m19 19 26 26M45 19 19 45"/></svg></div><strong id="offlineTotal">0</strong><span>OFFLINE</span></article></section>
-      <h2>แยกตามประเภทสถานี</h2><div id="stationTypeList"></div><p class="updated">ข้อมูล ณ <span id="updatedAt">-</span></p><button type="button" class="refresh" onclick="loadStations()">รีเฟรชข้อมูลล่าสุด</button>
+<body>
+<div class="page">
+<header class="header">
+  <div class="header-row">
+    <img id="logo" class="logo" src="../assets/ieat_logo.png" alt="กนอ."
+         onerror="this.onerror=null;this.src='./assets/ieat_logo.png';">
+    <div class="brand">
+      <strong>IEAT e-Monitoring</strong>
+      <span>ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย</span>
     </div>
-  </main>
-</div></div>
+    <button class="refresh-btn" onclick="loadStatus()" aria-label="รีเฟรช">↻</button>
+  </div>
+</header>
+
+<main>
+  <div id="loading" class="loading">กำลังโหลดข้อมูลสถานการณ์ล่าสุด…</div>
+  <div id="error" class="error hidden">
+    ไม่สามารถโหลดข้อมูลล่าสุดได้<br>
+    <small>กรุณากดปุ่ม ↻ เพื่อโหลดใหม่</small>
+  </div>
+
+  <div id="content" class="hidden">
+    <section class="hero">
+      <div class="hero-top">
+        <div class="hero-icon">📊</div>
+        <div>
+          <h1>สรุปสถานการณ์ล่าสุด</h1>
+          <p>ภาพรวมการเฝ้าระวัง e-Monitoring</p>
+        </div>
+      </div>
+      <div class="hero-time">
+        <span>ข้อมูล ณ</span>
+        <strong id="updatedAt">-</strong>
+      </div>
+    </section>
+
+    <section class="status">
+      <div class="status-main">
+        <div id="statusDot" class="status-dot"></div>
+        <div>
+          <div id="statusTitle" class="status-title">กำลังประมวลผล…</div>
+          <div id="statusSub" class="status-sub">-</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-title">ภาพรวมสถานีตรวจวัด</div>
+    <section class="kpis">
+      <article class="kpi total"><div id="total" class="num">0</div><div class="label">สถานีทั้งหมด</div></article>
+      <article class="kpi online"><div id="online" class="num">0</div><div class="label">ONLINE</div></article>
+      <article class="kpi offline"><div id="offline" class="num">0</div><div class="label">OFFLINE</div></article>
+    </section>
+
+    <div class="section-title">แยกตามประเภทสถานี</div>
+    <section id="types" class="types"></section>
+
+    <div class="section-title">ระดับสถานการณ์</div>
+    <section class="severity">
+      <article class="sev high">
+        <img src="../assets/4.png" alt="">
+        <b id="urgent">0</b><span>เกินค่ามาตรฐาน</span>
+      </article>
+      <article class="sev watch">
+        <img src="../assets/3.png" alt="">
+        <b id="watch">0</b><span>เฝ้าระวัง</span>
+      </article>
+      <article class="sev follow">
+        <img src="../assets/1.png" alt="">
+        <b id="follow">0</b><span>ติดตามสถานการณ์</span>
+      </article>
+    </section>
+
+    <div class="section-title">สถานีที่ต้องติดตาม</div>
+    <section class="alert-box">
+      <div id="alertNote" class="alert-note"></div>
+      <div id="stations"></div>
+    </section>
+
+    <div class="section-title">การเข้าถึงระบบ</div>
+    <section class="station-actions">
+      <a id="dashboardBtn" class="action primary" target="_blank" rel="noopener">เปิด Dashboard GIS</a>
+      <button class="action" onclick="loadStatus()">ตรวจสอบข้อมูลล่าสุด</button>
+    </section>
+
+    <div class="footer">
+      IEAT e-Monitoring • ข้อมูลจากระบบ e-Monitoring<br>
+      ระบบจะแสดงข้อมูลล่าสุดที่ GitHub Actions อัปเดตไว้
+    </div>
+  </div>
+</main>
+</div>
+
 <script>
-const TYPES=[{key:"AQMs",css:"aqms",label:"สถานีตรวจวัดคุณภาพอากาศ"},{key:"WQMs",css:"wqms",label:"สถานีตรวจวัดคุณภาพน้ำ"},{key:"CEMs",css:"cems",label:"สถานีตรวจวัดการระบายอากาศ"}];
-function number(value){return Number.isFinite(Number(value))?Number(value):0}function format(value){return number(value).toLocaleString("th-TH")}function setText(id,value){document.getElementById(id).textContent=format(value)}
-function icon(){return '<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 8 14 54h36zM24 39h16M21 47h22M32 8v46"/></svg>'}
-function createTypeCard(type,data){const card=document.createElement("article");card.className="station-card "+type.css;card.innerHTML=`<div class="station-icon">${icon()}</div><div class="station-copy"><h3>${type.key}</h3><p>${type.label}</p></div><div class="counts"><div class="count"><b>${format(data.total)}</b><small>ทั้งหมด</small></div><div class="count online"><b>${format(data.online)}</b><small>ONLINE</small></div><div class="count offline"><b>${format(data.offline)}</b><small>OFFLINE</small></div></div>`;return card}
-async function loadStations(){const loading=document.getElementById("loading"),error=document.getElementById("error"),dashboard=document.getElementById("dashboard");loading.classList.remove("hidden");error.classList.add("hidden");dashboard.classList.add("hidden");try{const response=await fetch("./status.json?t="+Date.now(),{cache:"no-store"});if(!response.ok)throw new Error("HTTP "+response.status);const data=await response.json();setText("stationTotal",data.station_total);setText("onlineTotal",data.online_total);setText("offlineTotal",data.offline_total);document.getElementById("updatedAt").textContent=data.updated_at||"-";const list=document.getElementById("stationTypeList");list.innerHTML="";const types=data.station_types||{};TYPES.forEach(type=>list.appendChild(createTypeCard(type,types[type.key]||{})));loading.classList.add("hidden");dashboard.classList.remove("hidden")}catch(errorData){console.error(errorData);loading.classList.add("hidden");error.classList.remove("hidden")}}
-loadStations();
-</script></body></html>
+const DASHBOARD_URL="https://www.arcgis.com/apps/dashboards/576c71d01cc5403cad90ee330fd67b6e";
+const TYPE_INFO={
+  AQMs:{label:"สถานีตรวจวัดคุณภาพอากาศ",icon:"AQ"},
+  WQMs:{label:"สถานีตรวจวัดคุณภาพน้ำ",icon:"WQ"},
+  CEMs:{label:"สถานีตรวจวัดการระบายมลพิษ",icon:"CE"}
+};
+
+const $=id=>document.getElementById(id);
+const num=v=>Number.isFinite(Number(v))?Number(v):0;
+const fmt=v=>num(v).toLocaleString("th-TH");
+const esc=v=>String(v??"-").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+
+function typeData(data,key){
+  const t=(data.type_stats||{})[key]||{};
+  return {total:num(t.total),online:num(t.online),offline:num(t.offline)};
+}
+
+function renderTypes(data){
+  $("types").innerHTML="";
+  ["AQMs","WQMs","CEMs"].forEach(key=>{
+    const t=typeData(data,key), info=TYPE_INFO[key];
+    $("types").insertAdjacentHTML("beforeend",`
+      <article class="type-card">
+        <div class="type-head">
+          <div class="type-icon">${info.icon}</div>
+          <div class="type-copy"><strong>${key}</strong><span>${info.label}</span></div>
+          <div class="type-total">${fmt(t.total)}</div>
+        </div>
+        <div class="type-counts">
+          <div class="mini on"><b>${fmt(t.online)}</b>ONLINE</div>
+          <div class="mini off"><b>${fmt(t.offline)}</b>OFFLINE</div>
+        </div>
+      </article>`);
+  });
+}
+
+function renderStations(data){
+  const stations=Array.isArray(data.stations)?data.stations:[];
+  $("alertNote").textContent=stations.length
+    ? `พบ ${fmt(stations.length)} สถานีที่มีรายการแจ้งเตือนในข้อมูลล่าสุด แสดงรายการเพื่อช่วยติดตามสถานการณ์`
+    : "ขณะนี้ไม่พบสถานีที่มี ParameterAlram ในข้อมูลล่าสุด";
+
+  if(!stations.length){
+    $("stations").innerHTML=`<div class="empty">✓ ไม่พบค่าพารามิเตอร์ที่ต้องแจ้งเตือน<br><span style="font-weight:400;font-size:9px">สถานการณ์อยู่ในภาวะปกติตามข้อมูลล่าสุด</span></div>`;
+    return;
+  }
+
+  // แสดงรายการสำคัญก่อน: เกินมาตรฐาน → เฝ้าระวัง → ติดตาม
+  const sorted=[...stations].sort((a,b)=>{
+    const score=s=>{const p=String(s.parameter_alarm||"");const c=p.split(",").filter(x=>x.trim()).length;return c>=3?3:c===2?2:c===1?1:0};
+    return score(b)-score(a);
+  });
+
+  $("stations").innerHTML=sorted.slice(0,12).map((s,i)=>{
+    const type=esc(s.station_type||"-");
+    const status=String(s.status||"").toUpperCase();
+    const alarm=esc(s.parameter_alarm||"-");
+    const comment=esc(s.comment||"");
+    const lat=s.latitude,lon=s.longitude;
+    const map=(lat!=null&&lon!=null)?`https://www.google.com/maps?q=${encodeURIComponent(lat+","+lon)}`:"";
+    return `
+      <article class="station">
+        <div class="station-top">
+          <div class="station-icon">${i<3?"⚠":"•"}</div>
+          <div class="station-info">
+            <div class="station-name">${esc(s.station_name)}</div>
+            <div class="station-meta">${type} • ${esc(s.estate_name||"-")}</div>
+          </div>
+          <span class="badge ${status==="ONLINE"?"online":"offline"}">${esc(status||"-")}</span>
+        </div>
+        <div class="param"><b>ParameterAlram:</b> ${alarm}</div>
+        ${comment?`<div class="comment"><b>ติดตามผล:</b> ${comment}</div>`:""}
+        ${map?`<a class="action" style="margin-top:8px;display:block" href="${map}" target="_blank" rel="noopener">📍 เปิดตำแหน่งสถานี</a>`:""}
+      </article>`;
+  }).join("");
+
+  if(sorted.length>12){
+    $("stations").insertAdjacentHTML("beforeend",`
+      <div class="alert-note" style="margin-top:8px;margin-bottom:0;text-align:center">
+        แสดง 12 สถานีแรกที่ควรติดตาม • รายละเอียดทั้งหมดอยู่ใน Dashboard GIS
+      </div>`);
+  }
+}
+
+async function loadStatus(){
+  $("loading").classList.remove("hidden");
+  $("error").classList.add("hidden");
+  $("content").classList.add("hidden");
+
+  try{
+    const r=await fetch("./status.json?t="+Date.now(),{cache:"no-store"});
+    if(!r.ok)throw new Error("HTTP "+r.status);
+    const data=await r.json();
+
+    const total=data.station_count ?? data.station_total ?? 0;
+    const online=data.online_total ?? 0;
+    const offline=data.offline_total ?? 0;
+
+    $("total").textContent=fmt(total);
+    $("online").textContent=fmt(online);
+    $("offline").textContent=fmt(offline);
+    $("urgent").textContent=fmt(data.urgent_count);
+    $("watch").textContent=fmt(data.watch_count);
+    $("follow").textContent=fmt(data.follow_count);
+    $("updatedAt").textContent=data.updated_at_text || data.updated_at || "-";
+
+    const alert=String(data.status||"").toLowerCase()==="alert" || num(data.alert_station_count)>0;
+    $("statusDot").className="status-dot"+(alert?" alert":"");
+    $("statusTitle").textContent=alert
+      ? `พบสถานีที่ต้องติดตาม ${fmt(data.alert_station_count)} สถานี`
+      : "ไม่พบสถานีที่เข้าเกณฑ์แจ้งเตือน";
+    $("statusSub").textContent=alert
+      ? "กรุณาตรวจสอบระดับสถานการณ์และรายละเอียดสถานีด้านล่าง"
+      : "ระบบ e-Monitoring ไม่พบ ParameterAlram ในข้อมูลล่าสุด";
+
+    $("dashboardBtn").href=DASHBOARD_URL;
+    renderTypes(data);
+    renderStations(data);
+
+    $("loading").classList.add("hidden");
+    $("content").classList.remove("hidden");
+  }catch(err){
+    console.error(err);
+    $("loading").classList.add("hidden");
+    $("error").classList.remove("hidden");
+  }
+}
+loadStatus();
+</script>
+</body>
+</html>
+'''
+
+out = Path("/mnt/data/summary_latest.html")
+out.write_text(html, encoding="utf-8")
+print(f"สร้างไฟล์เรียบร้อย: {out}")
+print(f"ขนาดไฟล์: {out.stat().st_size/1024:.1f} KB")
