@@ -2,16 +2,16 @@ import json
 import os
 import re
 import sys
-import time
 import urllib.error
 import urllib.request
-from datetime import datetime, timedelta, timezone
+from datetime import datetime
 from pathlib import Path
 from typing import Any
+from zoneinfo import ZoneInfo
 
 
 # ============================================================
-# 1. การตั้งค่าระบบ
+# การตั้งค่าระบบ
 # ============================================================
 
 DATA_URL = (
@@ -19,835 +19,191 @@ DATA_URL = (
     "call_feed/geog/GeoData/station_all.json"
 )
 
-LINE_BROADCAST_URL = (
-    "https://api.line.me/v2/bot/message/broadcast"
-)
+LINE_BROADCAST_URL = "https://api.line.me/v2/bot/message/broadcast"
 
-ARCGIS_DASHBOARD_URL = (
+THAI_TZ = ZoneInfo("Asia/Bangkok")
+STATUS_FILE = Path("docs/status.json")
+
+DASHBOARD_URL = (
     "https://www.arcgis.com/apps/dashboards/"
     "576c71d01cc5403cad90ee330fd67b6e"
 )
 
-LINE_CHANNEL_ACCESS_TOKEN = os.getenv(
-    "LINE_CHANNEL_ACCESS_TOKEN",
-    "",
-).strip()
-
-# ส่งรายงานสถานะปกติเฉพาะรอบที่ Workflow กำหนด (08:30 น. ประเทศไทย)
-# รอบอื่นจะส่ง LINE เฉพาะเมื่อพบ Alarm จากข้อมูลของ "วันนี้" เท่านั้น
-SEND_NORMAL_REPORT = os.getenv(
-    "SEND_NORMAL_REPORT",
-    "false",
-).strip().lower() in {"1", "true", "yes", "on"}
-
-THAILAND_TIMEZONE = timezone(
-    timedelta(hours=7)
-)
-
-REQUEST_TIMEOUT_SECONDS = 60
-
-# จำนวนการ์ดสูงสุดต่อ Carousel
-MAX_BUBBLES_PER_CAROUSEL = 10
-
-# LINE จำกัด JSON ของ Flex Carousel ไม่เกิน 50 KB
-# ใช้ 40 KB เพื่อเผื่อ payload และอักขระภาษาไทยอย่างปลอดภัย
-MAX_CAROUSEL_JSON_BYTES = 40_000
-
-# จำนวนรายการ Alarm สูงสุดที่แสดงต่อสถานี
-MAX_ALARM_ENTRIES_PER_STATION = 3
-
-# จำกัดข้อความในแต่ละ Flex component เพื่อป้องกัน Bubble ใหญ่ผิดปกติ
-MAX_FLEX_TEXT_CHARS = 1_000
-
-# ============================================================
-# 2. รูปภาพและไอคอนที่ใช้ใน LINE Flex Message
-# ============================================================
-
-ASSET_BASE_URL = (
-    "https://THANAWAN-KI.github.io/"
-    "ieat-emonitoring-line-alert"
-)
-
-# ดึงไอคอนจากไฟล์ใน GitHub โดยตรง เพื่อให้ LINE โหลดได้แม้ GitHub Pages
-# ตั้งค่าให้เผยแพร่เฉพาะโฟลเดอร์ docs/ (จึงอาจมองไม่เห็น assets ที่ root)
-# หากชื่อไฟล์จริงต่างจากนี้ ให้แก้เฉพาะค่าด้านล่าง หรือกำหนดค่า
-# LINE_ICON_<ชื่อ>_URL ใน GitHub Secrets ได้ทันที
-ICON_ASSET_BASE_URL = os.getenv(
-    "LINE_ICON_ASSET_BASE_URL",
-    (
-        "https://raw.githubusercontent.com/"
-        "THANAWAN-KI/ieat-emonitoring-line-alert/main/assets"
-    ),
-).rstrip("/")
-
-# ชื่อไฟล์บน GitHub Pages ต้องตรงตัวพิมพ์เล็ก-ใหญ่ทุกตัว
-IEAT_LOGO_URL = os.getenv(
-    "IEAT_LOGO_URL",
-    f"{ASSET_BASE_URL}/ieat_logo.png.PNG",
-).strip()
-
-# ใช้ Unicode ในข้อความสั้น ๆ และใช้รูปไอคอนจาก assets สำหรับ Badge
-# บนการ์ด เพื่อให้ภาพรวมเรียบหรูและดูเป็นระบบเดียวกัน
-ICON_ALERT = "⚠️"
-ICON_NORMAL = "✅"
-ICON_WATCH = "⏳"
-ICON_STATION = "📡"
-ICON_DASHBOARD = "📊"
-ICON_LOCATION = "📍"
-ICON_AIR = "🌿"
-ICON_WATER = "💧"
-ICON_CEMS = "🏭"
-ICON_OTHER = "●"
-
-ICON_ASSET_URLS = {
-    ICON_ALERT: os.getenv(
-        "LINE_ICON_ALERT_URL",
-        f"{ICON_ASSET_BASE_URL}/4.png",
-    ),
-    ICON_NORMAL: os.getenv(
-        "LINE_ICON_NORMAL_URL",
-        f"{ICON_ASSET_BASE_URL}/1.png",
-    ),
-    ICON_WATCH: os.getenv(
-        "LINE_ICON_WATCH_URL",
-        f"{ICON_ASSET_BASE_URL}/3.png",
-    ),
-    ICON_STATION: os.getenv(
-        "LINE_ICON_STATION_URL",
-        f"{ICON_ASSET_BASE_URL}/icon_industry.png",
-    ),
-    ICON_DASHBOARD: os.getenv(
-        "LINE_ICON_DASHBOARD_URL",
-        f"{ICON_ASSET_BASE_URL}/dashboard.png",
-    ),
-    ICON_LOCATION: os.getenv(
-        "LINE_ICON_LOCATION_URL",
-        f"{ICON_ASSET_BASE_URL}/location.png",
-    ),
-    ICON_AIR: os.getenv(
-        "LINE_ICON_AIR_URL",
-        f"{ICON_ASSET_BASE_URL}/air.png",
-    ),
-    ICON_WATER: os.getenv(
-        "LINE_ICON_WATER_URL",
-        f"{ICON_ASSET_BASE_URL}/water.png",
-    ),
-    ICON_CEMS: os.getenv(
-        "LINE_ICON_CEMS_URL",
-        f"{ICON_ASSET_BASE_URL}/cems.png",
-    ),
-}
+# จำกัดจำนวนสถานีใน Flex Carousel เพื่อไม่ให้เกินขนาด LINE กำหนด
+MAX_STATIONS_PER_CAROUSEL = 8
+MAX_ALARM_TEXT_CHARS = 600
 
 
 # ============================================================
-# 3. ธีมสี Dashboard e-Monitoring กนอ.
-# ============================================================
-
-# ธีมองค์กร กนอ.: ม่วงจากโลโก้เป็นสีหลัก และเขียว–ส้มเป็นสีเน้น
-# สีระดับพารามิเตอร์: แดง (เร่งด่วน) / ส้ม (เฝ้าระวัง) / เขียว (ปกติ)
-COLOR_PRIMARY = "#6B3F91"
-COLOR_PRIMARY_DARK = "#4D286F"
-COLOR_PRIMARY_SOFT = "#F2EDF7"
-COLOR_PRIMARY_PALE = "#FAF8FC"
-COLOR_PRIMARY_BORDER = "#D9C9E7"
-
-# สีแจ้งเตือนระดับเร่งด่วน
-COLOR_RED = "#D92D3F"
-COLOR_RED_DARK = "#A61B2B"
-COLOR_RED_SOFT = "#FFF1F3"
-
-# สีแจ้งเตือนระดับเฝ้าระวัง
-COLOR_YELLOW = "#F2A52B"
-COLOR_YELLOW_DARK = "#B86B09"
-COLOR_YELLOW_SOFT = "#FFF7E8"
-
-# สีเขียว AQMs / ONLINE ตาม Dashboard
-COLOR_GREEN = "#159B6B"
-COLOR_GREEN_DARK = "#087651"
-COLOR_GREEN_SOFT = "#ECF8F2"
-COLOR_GREEN_BORDER = "#BDE7D4"
-
-# สีฟ้า CEMs ตาม Dashboard
-COLOR_BLUE = "#5A6FAE"
-COLOR_BLUE_DARK = "#40558C"
-COLOR_BLUE_SOFT = "#F0F3FB"
-COLOR_BLUE_BORDER = "#CBD5F0"
-
-COLOR_TEXT = "#30283A"
-COLOR_MUTED = "#746B7B"
-COLOR_BORDER = "#E8E1EC"
-COLOR_DIVIDER = "#EEE9F1"
-COLOR_BACKGROUND = "#F8F7FA"
-COLOR_SURFACE = "#FFFFFF"
-COLOR_DEPTH = "#F1EDF4"
-COLOR_DEPTH_DARK = "#E5DDEA"
-COLOR_WHITE = "#FFFFFF"
-
-
-# ============================================================
-# 4. ฟังก์ชันพื้นฐาน
+# ฟังก์ชันพื้นฐาน
 # ============================================================
 
 def now_thailand() -> datetime:
-    return datetime.now(
-        THAILAND_TIMEZONE
+    return datetime.now(THAI_TZ)
+
+
+def report_time_text() -> str:
+    thai_months = [
+        "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.",
+        "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.",
+    ]
+
+    current_time = now_thailand()
+    buddhist_year = current_time.year + 543
+
+    return (
+        f"{current_time.day} {thai_months[current_time.month - 1]} "
+        f"{buddhist_year} เวลา {current_time:%H:%M} น."
     )
 
 
-def clean_text(
-    value: Any,
-    default: str = "",
-) -> str:
+def next_report_time_text() -> str:
+    current_time = now_thailand()
+    next_hour = current_time.replace(minute=17, second=0, microsecond=0)
+
+    if current_time >= next_hour:
+        from datetime import timedelta
+        next_hour += timedelta(hours=1)
+
+    thai_months = [
+        "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.",
+        "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.",
+    ]
+
+    buddhist_year = next_hour.year + 543
+
+    return (
+        f"{next_hour.day} {thai_months[next_hour.month - 1]} "
+        f"{buddhist_year} เวลา {next_hour:%H:%M} น."
+    )
+
+
+def safe_text(value: Any, default: str = "-") -> str:
     if value is None:
         return default
 
     text = str(value).strip()
 
-    invalid_values = {
-        "",
-        "-",
-        "none",
-        "null",
-        "nan",
-        "undefined",
-        "n/a",
-        "na",
-        "9999",
-        "9999.0",
-    }
-
-    if text.lower() in invalid_values:
+    if text.lower() in {"", "-", "none", "null", "nan", "n/a"}:
         return default
 
     return text
 
 
-def is_online(value: Any) -> bool:
-    return (
-        clean_text(value).upper()
-        == "ONLINE"
-    )
+def compact_text(value: Any, limit: int = MAX_ALARM_TEXT_CHARS) -> str:
+    text = safe_text(value, "")
+    text = re.sub(r"\s+", " ", text).strip()
+
+    if len(text) > limit:
+        return text[: limit - 3] + "..."
+
+    return text
 
 
-def has_parameter_alarm(
-    value: Any,
-) -> bool:
-    return bool(
-        clean_text(value)
-    )
+def is_online(properties: dict[str, Any]) -> bool:
+    return safe_text(properties.get("Status"), "").upper() == "ONLINE"
 
 
-# ============================================================
-# 5. วันที่และเวลา
-# ============================================================
-
-THAI_MONTHS_SHORT = {
-    1: "ม.ค.",
-    2: "ก.พ.",
-    3: "มี.ค.",
-    4: "เม.ย.",
-    5: "พ.ค.",
-    6: "มิ.ย.",
-    7: "ก.ค.",
-    8: "ส.ค.",
-    9: "ก.ย.",
-    10: "ต.ค.",
-    11: "พ.ย.",
-    12: "ธ.ค.",
-}
+def has_alarm(properties: dict[str, Any]) -> bool:
+    alarm = safe_text(properties.get("ParameterAlram"), "")
+    return alarm.lower() not in {"", "-", "none", "null", "nan", "n/a"}
 
 
-def parse_datetime(
-    value: Any,
-) -> datetime | None:
-    text = clean_text(value)
+def valid_station(properties: dict[str, Any]) -> bool:
+    code = safe_text(properties.get("Code"), "")
+    station_name = safe_text(properties.get("StationTH"), "")
 
-    if not text:
-        return None
-
-    # รองรับ ISO 8601 ที่มี timezone, milliseconds และตัวอักษร Z
-    iso_text = text.replace("Z", "+00:00")
-
-    try:
-        parsed_iso = datetime.fromisoformat(iso_text)
-
-        if parsed_iso.tzinfo is None:
-            return parsed_iso.replace(tzinfo=THAILAND_TIMEZONE)
-
-        return parsed_iso.astimezone(THAILAND_TIMEZONE)
-
-    except ValueError:
-        pass
-
-    date_formats = [
-        "%Y-%m-%d %H:%M:%S",
-        "%Y-%m-%d %H:%M",
-        "%Y-%m-%dT%H:%M:%S",
-        "%Y-%m-%dT%H:%M",
-        "%Y/%m/%d %H:%M:%S",
-        "%Y/%m/%d %H:%M",
-        "%d/%m/%Y %H:%M:%S",
-        "%d/%m/%Y %H:%M",
-        "%y-%m-%d %H:%M:%S",
-        "%y-%m-%d %H:%M",
-    ]
-
-    for date_format in date_formats:
-        try:
-            parsed = datetime.strptime(
-                text,
-                date_format,
-            )
-
-            return parsed.replace(
-                tzinfo=THAILAND_TIMEZONE
-            )
-
-        except ValueError:
-            continue
-
-    return None
-
-
-def is_today(value: Any) -> bool:
-    parsed = parse_datetime(value)
-
-    if parsed is None:
+    if code in {"", "0", "9999"}:
         return False
 
-    return (
-        parsed.date()
-        == now_thailand().date()
-    )
+    if station_name in {"", "-"}:
+        return False
+
+    return True
 
 
-def format_datetime_thai(
-    value: Any,
-) -> str:
-    parsed = parse_datetime(value)
+def get_features(payload: Any) -> list[dict[str, Any]]:
+    if isinstance(payload, dict):
+        features = payload.get("features", [])
+        return features if isinstance(features, list) else []
 
-    if parsed is None:
-        return clean_text(
-            value,
-            "-",
-        )
+    if isinstance(payload, list):
+        return payload
 
-    thai_year = parsed.year + 543
-
-    thai_month = THAI_MONTHS_SHORT.get(
-        parsed.month,
-        "",
-    )
-
-    return (
-        f"{parsed.day} "
-        f"{thai_month} "
-        f"{thai_year} "
-        f"เวลา {parsed:%H:%M} น."
-    )
+    return []
 
 
-def report_time_text() -> str:
-    current = now_thailand()
+def get_properties(feature: dict[str, Any]) -> dict[str, Any]:
+    properties = feature.get("properties", {})
 
-    thai_year = current.year + 543
+    if isinstance(properties, dict):
+        return properties
 
-    thai_month = THAI_MONTHS_SHORT.get(
-        current.month,
-        "",
-    )
+    return {}
 
-    return (
-        f"{current.day} "
-        f"{thai_month} "
-        f"{thai_year} "
-        f"เวลา {current:%H:%M} น."
-    )
+
+def get_coordinates(feature: dict[str, Any]) -> tuple[float | None, float | None]:
+    geometry = feature.get("geometry", {})
+
+    if not isinstance(geometry, dict):
+        return None, None
+
+    coordinates = geometry.get("coordinates", [])
+
+    if not isinstance(coordinates, list) or len(coordinates) < 2:
+        return None, None
+
+    try:
+        longitude = float(coordinates[0])
+        latitude = float(coordinates[1])
+        return longitude, latitude
+    except (TypeError, ValueError):
+        return None, None
 
 
 # ============================================================
-# 6. ดาวน์โหลดข้อมูล e-Monitoring
+# ดาวน์โหลดข้อมูล e-Monitoring
 # ============================================================
 
-def download_data() -> Any:
-    timestamp = int(
-        time.time()
-    )
-
-    separator = (
-        "&"
-        if "?" in DATA_URL
-        else "?"
-    )
-
-    request_url = (
-        f"{DATA_URL}"
-        f"{separator}_t={timestamp}"
-    )
-
+def download_station_data() -> Any:
     request = urllib.request.Request(
-        request_url,
+        DATA_URL,
         headers={
-            "User-Agent": (
-                "IEAT-eMonitoring-LINE-Alert/10.0"
-            ),
+            "User-Agent": "IEAT-eMonitoring-LINE-Alert/1.0",
             "Accept": "application/json",
-            "Cache-Control": (
-                "no-cache, no-store, max-age=0"
-            ),
+            "Cache-Control": "no-cache",
             "Pragma": "no-cache",
         },
+        method="GET",
     )
 
     try:
-        with urllib.request.urlopen(
-            request,
-            timeout=REQUEST_TIMEOUT_SECONDS,
-        ) as response:
-
-            raw_data = response.read()
-
-            text = raw_data.decode(
-                "utf-8-sig",
-                errors="replace",
-            )
-
-            return json.loads(text)
+        with urllib.request.urlopen(request, timeout=60) as response:
+            raw_data = response.read().decode("utf-8-sig")
+            return json.loads(raw_data)
 
     except urllib.error.HTTPError as error:
-        error_body = (
-            error.read()
-            .decode(
-                "utf-8",
-                errors="replace",
-            )
-        )
-
         raise RuntimeError(
-            "ดาวน์โหลดข้อมูล e-Monitoring "
-            f"ไม่สำเร็จ HTTP {error.code}: "
-            f"{error_body}"
+            f"ดาวน์โหลดข้อมูลไม่สำเร็จ HTTP {error.code}: {error.reason}"
         ) from error
 
     except urllib.error.URLError as error:
         raise RuntimeError(
-            "ไม่สามารถเชื่อมต่อข้อมูล "
-            f"e-Monitoring ได้: {error.reason}"
+            f"ไม่สามารถเชื่อมต่อแหล่งข้อมูล e-Monitoring: {error.reason}"
         ) from error
 
     except json.JSONDecodeError as error:
         raise RuntimeError(
-            "ข้อมูลที่ได้รับจาก e-Monitoring "
-            "ไม่ใช่ JSON ที่ถูกต้อง"
+            f"ข้อมูลจาก e-Monitoring ไม่ใช่ JSON ที่ถูกต้อง: {error}"
         ) from error
 
 
-def get_features(
-    data: Any,
-) -> list[dict[str, Any]]:
-    if not isinstance(data, dict):
-        return []
-
-    features = data.get(
-        "features",
-        [],
-    )
-
-    if not isinstance(
-        features,
-        list,
-    ):
-        return []
-
-    return [
-        feature
-        for feature in features
-        if isinstance(feature, dict)
-    ]
-
-
 # ============================================================
-# 7. อ่าน ParameterAlram
+# จัดเตรียมข้อมูลสถานี
 # ============================================================
 
-def split_parameter_alarm(
-    value: Any,
-) -> list[str]:
-    text = clean_text(value)
-
-    if not text:
-        return []
-
-    text = (
-        text
-        .replace("\r\n", "\n")
-        .replace("\r", "\n")
-    )
-
-    parts = re.split(
-        (
-            r"\s*,\s*"
-            r"(?=\d{2,4}[-/]\d{2}[-/]\d{2}"
-            r"\s+\d{2}:\d{2})"
-            r"|\n+"
-        ),
-        text,
-    )
-
-    results = []
-
-    for part in parts:
-        cleaned = part.strip(
-            " ,\n\t"
-        )
-
-        if cleaned:
-            results.append(
-                cleaned
-            )
-
-    return results
-
-
-def get_alarm_datetime(
-    alarm_entry: str,
-) -> datetime | None:
-    match = re.search(
-        (
-            r"(?<!\d)"
-            r"(\d{2,4}[-/]\d{2}[-/]\d{2}"
-            r"\s+\d{2}:\d{2}"
-            r"(?::\d{2})?)"
-        ),
-        alarm_entry,
-    )
-
-    if not match:
-        return None
-
-    return parse_datetime(
-        match.group(1)
-    )
-
-
-def get_latest_alarm_entries(
-    value: Any,
-    reference_date: Any = None,
-) -> list[str]:
-    """คืน Alarm ของวันที่ข้อมูลล่าสุด ไม่ผูกกับวันที่รัน Workflow
-
-    e-Monitoring อาจอัปเดต feed ช้ากว่าวันปัจจุบัน การบังคับใช้เฉพาะ
-    Alarm ของ "วันนี้" จะทำให้ระบบรายงานผิดว่าไม่พบค่าเกินมาตรฐาน
-    ทั้งที่ feed ล่าสุดยังมี ParameterAlram อยู่
-    """
-    entries = split_parameter_alarm(value)
-
-    if not entries:
-        return []
-
-    dated_entries: list[tuple[str, datetime]] = []
-    undated_entries: list[str] = []
-
-    for entry in entries:
-        parsed = get_alarm_datetime(entry)
-
-        if parsed is None:
-            undated_entries.append(entry)
-        else:
-            dated_entries.append((entry, parsed))
-
-    target_date = None
-
-    if isinstance(reference_date, datetime):
-        target_date = reference_date.date()
-    elif reference_date is not None:
-        target_date = reference_date
-    elif dated_entries:
-        target_date = max(parsed.date() for _, parsed in dated_entries)
-
-    if target_date is not None:
-        matched = [
-            entry
-            for entry, parsed in dated_entries
-            if parsed.date() == target_date
-        ]
-
-        if matched:
-            return matched
-
-        # ถ้า Alarm มีวันที่ แต่ไม่ตรงกับวันที่ล่าสุดของ feed ถือเป็นข้อมูลเก่า
-        if dated_entries:
-            return []
-
-    # กรณี API ส่งข้อความ Alarm โดยไม่มีวันที่ ให้ถือว่าฟิลด์ปัจจุบันยัง Alarm
-    return undated_entries or entries
-
-
-# ============================================================
-# 8. จัดรูปแบบรายละเอียด Alarm
-# ============================================================
-
-def remove_alarm_datetime(
-    alarm_entry: str,
-) -> str:
-    cleaned = re.sub(
-        (
-            r"^\s*"
-            r"\d{2,4}[-/]\d{2}[-/]\d{2}"
-            r"\s+\d{2}:\d{2}"
-            r"(?::\d{2})?"
-            r"\s*"
-        ),
-        "",
-        alarm_entry,
-    )
-
-    return cleaned.strip(
-        " ()"
-    )
-
-
-def alarm_time_text(
-    alarm_entry: str,
-) -> str:
-    parsed = get_alarm_datetime(
-        alarm_entry
-    )
-
-    if parsed is None:
-        return ""
-
-    return f"{parsed:%H:%M} น."
-
-
-KNOWN_PARAMETERS = [
-    "PM2.5",
-    "PM25",
-    "PM10",
-    "TSP",
-    "SO2",
-    "NO2",
-    "NOX",
-    "NO",
-    "CO",
-    "O3",
-    "H2S",
-    "CH4",
-    "NMHC",
-    "THC",
-    "BOD",
-    "COD",
-    "DO",
-    "PH",
-    "FLOW",
-    "OPACITY",
-    "HCL",
-]
-
-
-PARAMETER_DISPLAY_NAMES = {
-    "PM25": "PM2.5",
-    "SO2": "SO₂",
-    "NO2": "NO₂",
-    "NOX": "NOx",
-    "O3": "O₃",
-    "H2S": "H₂S",
-    "CH4": "CH₄",
-    "PH": "pH",
-    "OPACITY": "Opacity",
-    "HCL": "HCl",
-}
-
-
-def parameter_display_name(
-    parameter: str,
-) -> str:
-    return PARAMETER_DISPLAY_NAMES.get(
-        parameter,
-        parameter,
-    )
-
-
-def extract_parameter_names(
-    alarm_entries: list[str],
-) -> list[str]:
-    found = []
-
-    combined_text = " ".join(
-        alarm_entries
-    ).upper()
-
-    for parameter in KNOWN_PARAMETERS:
-        pattern = (
-            r"(?<![A-Z0-9])"
-            + re.escape(parameter)
-            + r"(?![A-Z0-9])"
-        )
-
-        if re.search(
-            pattern,
-            combined_text,
-        ):
-            display_name = (
-                parameter_display_name(
-                    parameter
-                )
-            )
-
-            if display_name not in found:
-                found.append(
-                    display_name
-                )
-
-    return found
-
-
-def extract_primary_parameter_name(
-    alarm_entry: str,
-) -> str:
-    content = remove_alarm_datetime(
-        alarm_entry
-    )
-
-    upper_content = content.upper()
-
-    for parameter in KNOWN_PARAMETERS:
-        pattern = (
-            r"(?<![A-Z0-9])"
-            + re.escape(parameter)
-            + r"(?![A-Z0-9])"
-        )
-
-        if re.search(
-            pattern,
-            upper_content,
-        ):
-            return parameter_display_name(
-                parameter
-            )
-
-    first_word = re.search(
-        r"([A-Za-z][A-Za-z0-9_.@%-]*)",
-        content,
-    )
-
-    if first_word:
-        return first_word.group(1)
-
-    return "พารามิเตอร์แจ้งเตือน"
-
-
-# ============================================================
-# 9. ข้อมูลสถานี
-# ============================================================
-
-def get_station_name(
-    properties: dict[str, Any],
-) -> str:
-    fields = [
-        "StationTH",
-        "StationName",
-        "station_name",
-        "Name",
-    ]
-
-    for field in fields:
-        value = clean_text(
-            properties.get(field)
-        )
-
-        if value:
-            return value
-
-    return "ไม่ระบุชื่อสถานี"
-
-
-def get_industry_zone(
-    properties: dict[str, Any],
-) -> str:
-    fields = [
-        "IndustryZone",
-        "IndustrialEstate",
-        "EstateTH",
-        "Estate",
-        "Zone",
-    ]
-
-    for field in fields:
-        value = clean_text(
-            properties.get(field)
-        )
-
-        if value:
-            return value
-
-    return "ระบบ e-Monitoring"
-
-
-def get_raw_station_type(
-    properties: dict[str, Any],
-) -> str:
-    fields = [
-        "Type",
-        "StationType",
-        "type",
-        "TYPE",
-        "station_type",
-    ]
-
-    for field in fields:
-        value = clean_text(
-            properties.get(field)
-        )
-
-        if value:
-            return value
-
-    return ""
-
-
-def normalize_station_type(
-    properties: dict[str, Any],
-) -> str:
-    raw_type = get_raw_station_type(
-        properties
-    )
-
-    normalized = (
-        clean_text(raw_type)
-        .upper()
-        .replace(" ", "")
-        .replace("-", "")
-        .replace("_", "")
-        .replace(".", "")
-    )
-
-    if normalized in {
-        "AQM",
-        "AQMS",
-        "AIRQUALITY",
-        "AIRQUALITYMONITORING",
-        "AIRQUALITYMONITORINGSTATION",
-    }:
-        return "AQMs"
-
-    if normalized in {
-        "WQM",
-        "WQMS",
-        "WATERQUALITY",
-        "WATERQUALITYMONITORING",
-        "WATERQUALITYMONITORINGSTATION",
-    }:
-        return "WQMs"
-
-    if normalized in {
-        "CEM",
-        "CEMS",
-        "CONTINUOUSEMISSIONMONITORING",
-        "CONTINUOUSEMISSIONMONITORINGSYSTEM",
-        "EMISSIONMONITORING",
-    }:
-        return "CEMs"
+def station_type_group(station_type: str) -> str:
+    normalized = station_type.upper()
 
     if "AQM" in normalized:
         return "AQMs"
@@ -858,517 +214,204 @@ def normalize_station_type(
     if "CEM" in normalized:
         return "CEMs"
 
-    return (
-        raw_type
-        if raw_type
-        else "ไม่ระบุประเภท"
-    )
+    return "อื่น ๆ"
 
 
-def get_station_comment(
-    properties: dict[str, Any],
-) -> str:
-    """อ่านข้อความสาเหตุ/การติดตามผลจากฟิลด์ Comment ของ API"""
-    fields = [
-        "Comment",
-        "comment",
-        "COMMENT",
-        "Remark",
-        "Remarks",
-        "remark",
-    ]
+def create_station_record(feature: dict[str, Any]) -> dict[str, Any]:
+    properties = get_properties(feature)
+    longitude, latitude = get_coordinates(feature)
 
-    for field in fields:
-        value = clean_text(
-            properties.get(field)
-        )
-
-        if value:
-            return value
-
-    return "ยังไม่มีข้อมูลสาเหตุ / การติดตามผล"
-
-
-def get_coordinates(
-    feature: dict[str, Any],
-) -> tuple[float, float] | None:
-    geometry = feature.get(
-        "geometry",
-        {},
-    )
-
-    if not isinstance(
-        geometry,
-        dict,
-    ):
-        return None
-
-    coordinates = geometry.get(
-        "coordinates"
-    )
-
-    if (
-        not isinstance(coordinates, list)
-        or len(coordinates) < 2
-    ):
-        return None
-
-    try:
-        longitude = float(
-            coordinates[0]
-        )
-
-        latitude = float(
-            coordinates[1]
-        )
-
-    except (TypeError, ValueError):
-        return None
-
-    return latitude, longitude
+    return {
+        "code": safe_text(properties.get("Code")),
+        "station_name": safe_text(properties.get("StationTH")),
+        "estate_name": safe_text(
+            properties.get("IndustryZone")
+            or properties.get("EstateTH")
+            or properties.get("IndustrialEstate")
+        ),
+        "station_type": safe_text(properties.get("Type")),
+        "status": safe_text(properties.get("Status")),
+        "last_update": safe_text(
+            properties.get("LastUpdate-TH")
+            or properties.get("LastUpdateTH")
+            or properties.get("LastUpdate")
+        ),
+        "parameter_alarm": compact_text(properties.get("ParameterAlram")),
+        "longitude": longitude,
+        "latitude": latitude,
+    }
 
 
-def station_map_url(
-    feature: dict[str, Any],
-) -> str:
-    coordinates = get_coordinates(
-        feature
-    )
-
-    if coordinates is None:
-        return ARCGIS_DASHBOARD_URL
-
-    latitude, longitude = coordinates
-
-    return (
-        "https://www.google.com/maps/"
-        "search/?api=1&query="
-        f"{latitude},{longitude}"
-    )
-
-
-# ============================================================
-# 10. กรองและนับสถานี ONLINE
-# ============================================================
-
-def is_valid_station(
-    properties: dict[str, Any],
-) -> bool:
-    code = clean_text(
-        properties.get("Code")
-    )
-
-    name = clean_text(
-        properties.get("StationTH")
-    )
-
-    if code == "0":
-        return False
-
-    if not name:
-        return False
-
-    return True
-
-
-def station_unique_key(
-    properties: dict[str, Any],
-) -> str:
-    code = clean_text(
-        properties.get("Code")
-    )
-
-    name = get_station_name(
-        properties
-    )
-
-    if code and code != "0":
-        return f"CODE:{code}"
-
-    return f"NAME:{name}"
-
-
-def get_latest_station_features(
-    features: list[dict[str, Any]],
-) -> list[dict[str, Any]]:
-    """ตัดสถานีซ้ำและเก็บ record ที่ LastUpdate ล่าสุดของแต่ละสถานี"""
-    latest_by_station: dict[str, dict[str, Any]] = {}
+def prepare_stations(features: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    stations: list[dict[str, Any]] = []
 
     for feature in features:
-        properties = feature.get("properties", {})
-
-        if not isinstance(properties, dict):
+        if not isinstance(feature, dict):
             continue
 
-        if not is_valid_station(properties):
+        properties = get_properties(feature)
+
+        if not valid_station(properties):
             continue
 
-        unique_key = station_unique_key(properties)
-        existing = latest_by_station.get(unique_key)
+        stations.append(create_station_record(feature))
 
-        if existing is None:
-            latest_by_station[unique_key] = feature
-            continue
-
-        existing_properties = existing.get("properties", {})
-        existing_time = parse_datetime(existing_properties.get("LastUpdate"))
-        candidate_time = parse_datetime(properties.get("LastUpdate"))
-
-        if candidate_time is not None and (
-            existing_time is None or candidate_time > existing_time
-        ):
-            latest_by_station[unique_key] = feature
-
-    return list(latest_by_station.values())
+    return stations
 
 
-def count_online_station_types(
+def get_online_stations(
     features: list[dict[str, Any]],
-) -> dict[str, Any]:
+) -> list[dict[str, Any]]:
+    online_stations: list[dict[str, Any]] = []
+
+    for feature in features:
+        if not isinstance(feature, dict):
+            continue
+
+        properties = get_properties(feature)
+
+        if not valid_station(properties):
+            continue
+
+        if not is_online(properties):
+            continue
+
+        online_stations.append(create_station_record(feature))
+
+    return online_stations
+
+
+def get_alert_stations(
+    features: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """
+    ตรวจข้อมูลทั้งหมดที่มี Status = ONLINE และ ParameterAlram มีค่า
+    ไม่มีการกรองตามวันหรือเวลาของข้อมูลใน feed
+    """
+    alerts: list[dict[str, Any]] = []
+
+    for feature in features:
+        if not isinstance(feature, dict):
+            continue
+
+        properties = get_properties(feature)
+
+        if not valid_station(properties):
+            continue
+
+        if not is_online(properties):
+            continue
+
+        if not has_alarm(properties):
+            continue
+
+        alerts.append(create_station_record(feature))
+
+    return alerts
+
+
+def count_online_types(
+    online_stations: list[dict[str, Any]],
+) -> dict[str, int]:
     counts = {
         "AQMs": 0,
         "WQMs": 0,
         "CEMs": 0,
-        "Other": 0,
-        "total": 0,
-        "offline": 0,
-        "all_total": 0,
-        "type_breakdown": {
-            "AQMs": {"total": 0, "online": 0, "offline": 0},
-            "WQMs": {"total": 0, "online": 0, "offline": 0},
-            "CEMs": {"total": 0, "online": 0, "offline": 0},
-            "Other": {"total": 0, "online": 0, "offline": 0},
-        },
+        "อื่น ๆ": 0,
     }
 
-    for feature in get_latest_station_features(features):
-        properties = feature.get("properties", {})
-        station_type = normalize_station_type(properties)
-        type_key = station_type if station_type in {"AQMs", "WQMs", "CEMs"} else "Other"
-        online = is_online(properties.get("Status"))
-
-        counts["all_total"] += 1
-        counts["type_breakdown"][type_key]["total"] += 1
-
-        if online:
-            counts["total"] += 1
-            counts[type_key] += 1
-            counts["type_breakdown"][type_key]["online"] += 1
-        else:
-            counts["offline"] += 1
-            counts["type_breakdown"][type_key]["offline"] += 1
+    for station in online_stations:
+        group = station_type_group(station["station_type"])
+        counts[group] += 1
 
     return counts
 
 
-def filter_current_online_features(
-    features: list[dict[str, Any]],
-) -> tuple[
-    list[dict[str, Any]],
-    int,
-    int,
-]:
-    # การแจ้งเตือนต้องตรวจเฉพาะข้อมูลของ "วันนี้" ตามเวลาประเทศไทย
-    # หาก feed ยังเป็นข้อมูลเก่า จะอัปเดตหน้าเว็บได้ตามปกติ แต่ไม่ส่ง Alarm ซ้ำ
-    online_features = []
-    stale_count = 0
-
-    for feature in get_latest_station_features(features):
-        properties = feature.get("properties", {})
-
-        if not is_online(properties.get("Status")):
-            continue
-
-        if not is_today(properties.get("LastUpdate")):
-            stale_count += 1
-            continue
-
-        online_features.append(feature)
-
-    return (
-        online_features,
-        len(online_features),
-        stale_count,
-    )
-
-
-def get_latest_online_update(
-    features: list[dict[str, Any]],
-) -> datetime | None:
-    """คืนวันเวลา LastUpdate ที่ล่าสุดของสถานี ONLINE"""
-    latest: datetime | None = None
-
-    for feature in features:
-        properties = feature.get("properties", {})
-        if not isinstance(properties, dict):
-            continue
-        if not is_valid_station(properties):
-            continue
-        if not is_online(properties.get("Status")):
-            continue
-
-        parsed = parse_datetime(properties.get("LastUpdate"))
-        if parsed is not None and (latest is None or parsed > latest):
-            latest = parsed
-
-    return latest
-
-
-def filter_alert_features(
-    current_features: list[dict[str, Any]],
-    alarm_reference_date: Any = None,
-) -> list[dict[str, Any]]:
-    alert_features = []
-
-    for feature in current_features:
-        properties = feature.get(
-            "properties",
-            {},
-        )
-
-        # รองรับทั้งชื่อเดิมที่ API สะกดว่า ParameterAlram
-        # และชื่อที่สะกดถูก/รูปแบบตัวพิมพ์อื่น เผื่อ API เปลี่ยน schema
-        parameter_alarm = next(
-            (
-                properties.get(field)
-                for field in (
-                    "ParameterAlram",
-                    "ParameterAlarm",
-                    "parameterAlram",
-                    "parameterAlarm",
-                )
-                if has_parameter_alarm(properties.get(field))
-            ),
-            "",
-        )
-
-        if not has_parameter_alarm(
-            parameter_alarm
-        ):
-            continue
-
-        latest_alarm_entries = (
-            get_latest_alarm_entries(
-                parameter_alarm,
-                alarm_reference_date,
-            )
-        )
-
-        if not latest_alarm_entries:
-            continue
-
-        copied_feature = dict(
-            feature
-        )
-
-        copied_properties = dict(
-            properties
-        )
-
-        copied_properties[
-            "_alarm_entries"
-        ] = latest_alarm_entries
-
-        copied_properties[
-            "_parameter_names"
-        ] = extract_parameter_names(
-            latest_alarm_entries
-        )
-
-        copied_properties[
-            "_normalized_station_type"
-        ] = normalize_station_type(
-            copied_properties
-        )
-
-        copied_feature[
-            "properties"
-        ] = copied_properties
-
-        alert_features.append(
-            copied_feature
-        )
-
-    return alert_features
-
-
 # ============================================================
-# 11. แบ่งระดับสถานการณ์
+# สร้างไฟล์สถานะหน้าเว็บไซต์
 # ============================================================
 
-def get_severity_level(
-    feature: dict[str, Any],
-) -> str:
-    properties = feature.get(
-        "properties",
-        {},
-    )
+def write_status_file(
+    all_stations: list[dict[str, Any]],
+    online_stations: list[dict[str, Any]],
+    alert_stations: list[dict[str, Any]],
+    type_counts: dict[str, int],
+) -> None:
+    current_time = now_thailand()
 
-    alarm_entries = properties.get(
-        "_alarm_entries",
-        [],
-    )
-
-    alarm_count = len(
-        alarm_entries
-    )
-
-    if alarm_count >= 3:
-        return "urgent"
-
-    if alarm_count == 2:
-        return "watch"
-
-    return "follow"
-
-
-def summarize_alerts(
-    alert_features: list[dict[str, Any]],
-    online_type_counts: dict[str, int],
-) -> dict[str, Any]:
-    station_keys = set()
-    parameter_names = set()
-    industry_zones = set()
-
-    urgent_count = 0
-    watch_count = 0
-    follow_count = 0
-
-    for feature in alert_features:
-        properties = feature.get(
-            "properties",
-            {},
-        )
-
-        station_key = station_unique_key(
-            properties
-        )
-
-        station_keys.add(
-            station_key
-        )
-
-        industry_zones.add(
-            get_industry_zone(
-                properties
-            )
-        )
-
-        for parameter in properties.get(
-            "_parameter_names",
-            [],
-        ):
-            parameter_names.add(
-                parameter
-            )
-
-        severity = get_severity_level(
-            feature
-        )
-
-        if severity == "urgent":
-            urgent_count += 1
-
-        elif severity == "watch":
-            watch_count += 1
-
-        else:
-            follow_count += 1
-
-    return {
-        "station_count": len(
-            station_keys
+    status_data = {
+        "status": "alert" if alert_stations else "normal",
+        "status_text": (
+            "พบค่าพารามิเตอร์ที่เข้าเงื่อนไขแจ้งเตือน"
+            if alert_stations
+            else "ไม่พบค่าพารามิเตอร์เกินมาตรฐาน"
         ),
-        "parameter_count": len(
-            parameter_names
+        "description": (
+            "ระบบตรวจพบสถานี ONLINE ที่มี ParameterAlram "
+            "จากข้อมูลล่าสุดในแหล่งข้อมูล e-Monitoring"
+            if alert_stations
+            else "ระบบไม่พบสถานี ONLINE ที่มี ParameterAlram "
+            "จากข้อมูลล่าสุดในแหล่งข้อมูล e-Monitoring"
         ),
-        "parameter_names": sorted(
-            parameter_names
+        "updated_at": current_time.isoformat(),
+        "updated_at_text": report_time_text(),
+        "data_source_url": DATA_URL,
+        "online_total": len(online_stations),
+        "online_aqms": type_counts["AQMs"],
+        "online_wqms": type_counts["WQMs"],
+        "online_cems": type_counts["CEMs"],
+        "online_other": type_counts["อื่น ๆ"],
+        "station_count": len(all_stations),
+        "alert_station_count": len(alert_stations),
+        "parameter_count": len(alert_stations),
+        "estate_count": len(
+            {
+                station["estate_name"]
+                for station in alert_stations
+                if station["estate_name"] != "-"
+            }
         ),
-        "industry_zone_count": len(
-            industry_zones
-        ),
-        "urgent_count": urgent_count,
-        "watch_count": watch_count,
-        "follow_count": follow_count,
-        "online_total": online_type_counts.get(
-            "total",
-            0,
-        ),
-        "offline_total": online_type_counts.get(
-            "offline",
-            0,
-        ),
-        "station_total": online_type_counts.get(
-            "all_total",
-            0,
-        ),
-        "online_aqms": online_type_counts.get(
-            "AQMs",
-            0,
-        ),
-        "online_wqms": online_type_counts.get(
-            "WQMs",
-            0,
-        ),
-        "online_cems": online_type_counts.get(
-            "CEMs",
-            0,
-        ),
+        "urgent_count": 0,
+        "watch_count": len(alert_stations),
+        "follow_count": 0,
+        "stations": alert_stations,
     }
 
+    STATUS_FILE.parent.mkdir(parents=True, exist_ok=True)
+
+    with STATUS_FILE.open("w", encoding="utf-8") as file:
+        json.dump(
+            status_data,
+            file,
+            ensure_ascii=False,
+            indent=2,
+        )
+
+    print(f"อัปเดตไฟล์เว็บไซต์แล้ว: {STATUS_FILE}")
+
 
 # ============================================================
-# 12. ส่วนประกอบ Flex Message
+# LINE Flex Message
 # ============================================================
 
-def flex_text(
-    text: Any,
+def text_component(
+    text: str,
     size: str = "sm",
-    color: str = COLOR_TEXT,
-    weight: str = "regular",
+    color: str = "#30283A",
+    weight: str | None = None,
     wrap: bool = True,
-    flex: int | None = None,
-    align: str | None = None,
-    max_lines: int | None = None,
-) -> dict[str, Any]:
-    display_text = str(text)
-
-    if len(display_text) > MAX_FLEX_TEXT_CHARS:
-        display_text = (
-            display_text[:MAX_FLEX_TEXT_CHARS - 1].rstrip()
-            + "…"
-        )
-
-    component: dict[str, Any] = {
-        "type": "text",
-        "text": display_text,
-        "size": size,
-        "color": color,
-        "weight": weight,
-        "wrap": wrap,
-    }
-
-    if flex is not None:
-        component["flex"] = flex
-
-    if align is not None:
-        component["align"] = align
-
-    if max_lines is not None:
-        component["maxLines"] = max_lines
-
-    return component
-
-
-def flex_separator(
-    color: str = COLOR_DIVIDER,
     margin: str | None = None,
 ) -> dict[str, Any]:
     component: dict[str, Any] = {
-        "type": "separator",
+        "type": "text",
+        "text": text,
+        "size": size,
         "color": color,
+        "wrap": wrap,
     }
+
+    if weight:
+        component["weight"] = weight
 
     if margin:
         component["margin"] = margin
@@ -1376,1826 +419,434 @@ def flex_separator(
     return component
 
 
-def flex_button(
-    label: str,
-    uri: str,
-    primary: bool = False,
+def build_summary_bubble(
+    online_total: int,
+    type_counts: dict[str, int],
+    alert_count: int,
 ) -> dict[str, Any]:
-    button: dict[str, Any] = {
-        "type": "button",
-        "height": "sm",
-        "action": {
-            "type": "uri",
-            "label": label,
-            "uri": uri,
-        },
-    }
+    has_alert = alert_count > 0
 
-    if primary:
-        button["style"] = "primary"
-        button["color"] = COLOR_PRIMARY_DARK
-    else:
-        button["style"] = "secondary"
-
-    return button
-
-
-def icon_badge(
-    icon: str,
-    background_color: str,
-    border_color: str,
-    size: str = "md",
-) -> dict[str, Any]:
-    """แสดงไอคอนจากโฟลเดอร์ assets โดยไม่มีกรอบสี่เหลี่ยม"""
-    icon_url = ICON_ASSET_URLS.get(icon, "")
-
-    if icon_url:
-        return {
-            "type": "image",
-            "url": icon_url,
-            "size": "38px",
-            "aspectMode": "fit",
-            "aspectRatio": "1:1",
-        }
-
-    # สำรองไว้เฉพาะกรณีเพิ่มสัญลักษณ์ใหม่ที่ยังไม่มีไฟล์ใน assets
-    return {
-        "type": "box",
-        "layout": "vertical",
-        "width": "38px",
-        "height": "38px",
-        "justifyContent": "center",
-        "alignItems": "center",
-        "contents": [
-            flex_text(
-                icon,
-                size=size,
-                align="center",
-                flex=0,
-            ),
-        ],
-    }
-
-
-def depth_panel(
-    contents: list[dict[str, Any]],
-    background_color: str = COLOR_WHITE,
-    border_color: str = COLOR_BORDER,
-    shadow_color: str = COLOR_DEPTH,
-    padding: str = "11px",
-    corner_radius: str = "6px",
-    layout: str = "vertical",
-    spacing: str | None = None,
-    flex: int | None = None,
-    margin: str | None = None,
-    align_items: str | None = None,
-) -> dict[str, Any]:
-    """กรอบข้อมูลสะอาดตาแบบองค์กร โดยไม่ใช้เงาซ้อนหลายชั้น"""
-    inner: dict[str, Any] = {
-        "type": "box",
-        "layout": layout,
-        "paddingAll": padding,
-        "backgroundColor": background_color,
-        "borderColor": border_color,
-        "borderWidth": "1px",
-        "cornerRadius": corner_radius,
-        "contents": contents,
-    }
-
-    if spacing:
-        inner["spacing"] = spacing
-
-    if align_items:
-        inner["alignItems"] = align_items
-
-    # Flex Message ไม่มี shadow จริง การใช้ชั้นสีซ้อนทำให้การ์ดดูหนาเกินไป
-    # จึงใช้กรอบเส้นบางเพียงชั้นเดียว ให้ภาพรวมเรียบหรูและอ่านง่าย
-    panel = inner
-
-    if flex is not None:
-        panel["flex"] = flex
-
-    if margin:
-        panel["margin"] = margin
-
-    return panel
-
-
-def status_banner(
-    title: str,
-    icon: str,
-    title_color: str,
-    background_color: str,
-    border_color: str,
-    shadow_color: str,
-    description: str = "",
-) -> dict[str, Any]:
-    text_contents = [
-        flex_text(
-            title,
-            size="lg",
-            weight="bold",
-            color=title_color,
-            max_lines=3,
-        ),
-    ]
-
-    if description:
-        text_contents.append(
-            flex_text(
-                description,
-                size="xs",
-                color=COLOR_MUTED,
-                max_lines=3,
-            )
-        )
-
-    return depth_panel(
-        [
-            icon_badge(
-                icon,
-                COLOR_WHITE,
-                border_color,
-                size="lg",
-            ),
-            {
-                "type": "box",
-                "layout": "vertical",
-                "flex": 1,
-                "margin": "md",
-                "spacing": "xs",
-                "contents": text_contents,
-            },
-        ],
-        background_color=background_color,
-        border_color=border_color,
-        shadow_color=shadow_color,
-        padding="12px",
-        layout="horizontal",
-        align_items="center",
-    )
-
-
-def data_timestamp_box(
-    latest_update: datetime | None,
-) -> dict[str, Any]:
-    latest_text = (
-        format_datetime_thai(latest_update)
-        if latest_update is not None
-        else "ไม่พบเวลาอัปเดต"
-    )
-
-    return depth_panel(
-        [
-            flex_text(
-                "ข้อมูลล่าสุดจาก e-Monitoring",
-                size="xs",
-                color=COLOR_MUTED,
-                weight="bold",
-            ),
-            flex_text(
-                latest_text,
-                size="sm",
-                color=COLOR_PRIMARY_DARK,
-                weight="bold",
-            ),
-            flex_text(
-                f"จัดทำรายงานเมื่อ {report_time_text()}",
-                size="xxs",
-                color=COLOR_MUTED,
-            ),
-        ],
-        background_color=COLOR_PRIMARY_PALE,
-        border_color=COLOR_PRIMARY_BORDER,
-        shadow_color=COLOR_DEPTH,
-        padding="9px",
-        corner_radius="5px",
-        spacing="xs",
-    )
-
-
-def info_row(
-    label: str,
-    value: str,
-    value_color: str = COLOR_TEXT,
-) -> dict[str, Any]:
-    return {
-        "type": "box",
-        "layout": "horizontal",
-        "margin": "sm",
-        "contents": [
-            flex_text(
-                label,
-                size="sm",
-                color=COLOR_MUTED,
-                flex=5,
-            ),
-            flex_text(
-                value,
-                size="sm",
-                color=value_color,
-                weight="bold",
-                flex=7,
-                align="end",
-            ),
-        ],
-    }
-
-
-# ============================================================
-# 13. Header ของการ์ด
-# ============================================================
-
-def card_header(
-    subtitle: str,
-    line_color: str,
-) -> dict[str, Any]:
-    return {
-        "type": "box",
-        "layout": "vertical",
-        "paddingAll": "0px",
-        "backgroundColor": COLOR_SURFACE,
-        "contents": [
-            {
-                "type": "box",
-                "layout": "vertical",
-                "height": "4px",
-                "backgroundColor": COLOR_PRIMARY_DARK,
-                "contents": [
-                    {
-                        "type": "filler",
-                    },
-                ],
-            },
-            {
-                "type": "box",
-                "layout": "horizontal",
-                "alignItems": "center",
-                "paddingTop": "13px",
-                "paddingBottom": "12px",
-                "paddingStart": "16px",
-                "paddingEnd": "16px",
-                "contents": [
-                    {
-                        "type": "image",
-                        "url": IEAT_LOGO_URL,
-                        "size": "xs",
-                        "aspectMode": "fit",
-                        "flex": 2,
-                    },
-                    {
-                        "type": "box",
-                        "layout": "vertical",
-                        "flex": 8,
-                        "margin": "md",
-                        "contents": [
-                            flex_text(
-                                "IEAT e-Monitoring",
-                                size="xl",
-                                weight="bold",
-                                color=COLOR_PRIMARY_DARK,
-                                max_lines=1,
-                            ),
-                            flex_text(
-                                subtitle,
-                                size="xs",
-                                color=COLOR_MUTED,
-                                max_lines=2,
-                            ),
-                        ],
-                    },
-                ],
-            },
-            {
-                "type": "box",
-                "layout": "vertical",
-                "height": "2px",
-                "backgroundColor": line_color,
-                "contents": [
-                    {
-                        "type": "filler",
-                    },
-                ],
-            },
-        ],
-    }
-
-
-# ============================================================
-# 14. กล่องตัวเลขภาพรวม
-# ============================================================
-
-def summary_number_box(
-    number: int,
-    label: str,
-    number_color: str,
-    background_color: str = COLOR_WHITE,
-    border_color: str = COLOR_BORDER,
-) -> dict[str, Any]:
-    return depth_panel(
-        [
-            flex_text(
-                str(number),
-                size="xxl",
-                color=number_color,
-                weight="bold",
-                align="center",
-            ),
-            flex_text(
-                label,
-                size="xs",
-                color=COLOR_MUTED,
-                align="center",
-                max_lines=2,
-            ),
-        ],
-        background_color=background_color,
-        border_color=border_color,
-        shadow_color=COLOR_DEPTH,
-        padding="10px",
-        corner_radius="6px",
-        flex=1,
-    )
-
-
-def station_type_count_box(
-    station_type: str,
-    count: int,
-    color: str,
-) -> dict[str, Any]:
-    return {
-        "type": "box",
-        "layout": "horizontal",
-        "margin": "sm",
-        "paddingAll": "9px",
-        "backgroundColor": COLOR_WHITE,
-        "borderColor": COLOR_BORDER,
-        "borderWidth": "1px",
-        "cornerRadius": "5px",
-        "contents": [
-            flex_text(
-                station_type,
-                size="sm",
-                weight="bold",
-                color=color,
-                flex=6,
-            ),
-            flex_text(
-                f"{count} สถานี",
-                size="sm",
-                weight="bold",
-                color=COLOR_TEXT,
-                flex=4,
-                align="end",
-            ),
-        ],
-    }
-
-
-def online_station_summary_box(
-    online_type_counts: dict[str, Any],
-) -> dict[str, Any]:
-    type_breakdown = online_type_counts.get(
-        "type_breakdown",
-        {},
-    )
-
-    type_rows = []
-    type_colors = {
-        "AQMs": COLOR_GREEN,
-        "WQMs": COLOR_PRIMARY,
-        "CEMs": COLOR_BLUE,
-        "Other": COLOR_MUTED,
-    }
-    type_backgrounds = {
-        "AQMs": COLOR_GREEN_SOFT,
-        "WQMs": COLOR_PRIMARY_SOFT,
-        "CEMs": COLOR_BLUE_SOFT,
-                        "Other": "#F4F1F5",
-    }
-    type_borders = {
-        "AQMs": COLOR_GREEN_BORDER,
-        "WQMs": COLOR_PRIMARY_BORDER,
-        "CEMs": COLOR_BLUE_BORDER,
-        "Other": COLOR_BORDER,
-    }
-    type_icons = {
-        "AQMs": ICON_AIR,
-        "WQMs": ICON_WATER,
-        "CEMs": ICON_CEMS,
-        "Other": ICON_OTHER,
-    }
-
-    for type_key, type_label in (
-        ("AQMs", "AQMs"),
-        ("WQMs", "WQMs"),
-        ("CEMs", "CEMs"),
-        ("Other", "ประเภทอื่น"),
-    ):
-        values = type_breakdown.get(type_key, {})
-        type_rows.append({
-            "type": "box",
-            "layout": "horizontal",
-            "margin": "xs",
-            "paddingTop": "6px",
-            "paddingBottom": "6px",
-            "paddingStart": "8px",
-            "paddingEnd": "8px",
-            "backgroundColor": type_backgrounds[type_key],
-            "borderColor": type_borders[type_key],
-            "borderWidth": "1px",
-            "cornerRadius": "8px",
-            "contents": [
-                flex_text(
-                type_label,
-                    size="sm",
-                    weight="bold",
-                    color=type_colors[type_key],
-                    flex=4,
-                ),
-                flex_text(
-                    str(values.get("total", 0)),
-                    size="sm",
-                    weight="bold",
-                    align="center",
-                    flex=2,
-                ),
-                flex_text(
-                    str(values.get("online", 0)),
-                    size="sm",
-                    weight="bold",
-                    color=COLOR_GREEN_DARK,
-                    align="center",
-                    flex=2,
-                ),
-                flex_text(
-                    str(values.get("offline", 0)),
-                    size="sm",
-                    weight="bold",
-                    color=COLOR_RED_DARK,
-                    align="center",
-                    flex=2,
-                ),
-            ],
-        })
-
-    return depth_panel(
-        [
-            {
-                "type": "box",
-                "layout": "horizontal",
-                "alignItems": "center",
-                "justifyContent": "center",
-                "contents": [
-                    icon_badge(
-                        ICON_STATION,
-                        COLOR_WHITE,
-                        COLOR_PRIMARY_BORDER,
-                    ),
-                    {
-                        "type": "box",
-                        "layout": "vertical",
-                        "margin": "md",
-                        "contents": [
-                            flex_text(
-                                "สรุปสถานะสถานีตรวจวัด",
-                                size="md",
-                                weight="bold",
-                                color=COLOR_PRIMARY_DARK,
-                            ),
-                        ],
-                    },
-                ],
-            },
-            {
-                "type": "box",
-                "layout": "horizontal",
-                "spacing": "sm",
-                "contents": [
-                    summary_number_box(
-                        online_type_counts.get("all_total", 0),
-                        "ทั้งหมด",
-                        COLOR_PRIMARY,
-                        COLOR_PRIMARY_SOFT,
-                        COLOR_PRIMARY_BORDER,
-                    ),
-                    summary_number_box(
-                        online_type_counts.get("total", 0),
-                        "ONLINE",
-                        COLOR_GREEN_DARK,
-                        COLOR_GREEN_SOFT,
-                        COLOR_GREEN_BORDER,
-                    ),
-                    summary_number_box(
-                        online_type_counts.get("offline", 0),
-                        "OFFLINE",
-                        COLOR_RED_DARK,
-                        COLOR_RED_SOFT,
-                        "#F0BBC2",
-                    ),
-                ],
-            },
-            flex_separator(),
-            {
-                "type": "box",
-                "layout": "horizontal",
-                "paddingBottom": "3px",
-                "contents": [
-                    flex_text(
-                        "ประเภท (Type)",
-                        size="xs",
-                        weight="bold",
-                        color=COLOR_MUTED,
-                        flex=4,
-                    ),
-                    flex_text(
-                        "ทั้งหมด",
-                        size="xs",
-                        weight="bold",
-                        color=COLOR_MUTED,
-                        align="center",
-                        flex=2,
-                    ),
-                    flex_text(
-                        "ONLINE",
-                        size="xs",
-                        weight="bold",
-                        color=COLOR_GREEN_DARK,
-                        align="center",
-                        flex=2,
-                    ),
-                    flex_text(
-                        "OFFLINE",
-                        size="xs",
-                        weight="bold",
-                        color=COLOR_RED_DARK,
-                        align="center",
-                        flex=2,
-                    ),
-                ],
-            },
-            *type_rows,
-        ],
-        background_color=COLOR_SURFACE,
-        border_color=COLOR_PRIMARY_BORDER,
-        shadow_color=COLOR_DEPTH_DARK,
-        padding="12px",
-        corner_radius="14px",
-        spacing="sm",
-    )
-
-
-def severity_box(
-    title: str,
-    description: str,
-    count: int,
-    icon: str,
-    border_color: str,
-    background_color: str,
-    title_color: str,
-) -> dict[str, Any]:
-    return {
-        "type": "box",
-        "layout": "horizontal",
-        "margin": "md",
-        "paddingAll": "12px",
-        "backgroundColor": background_color,
-        "borderColor": border_color,
-        "borderWidth": "2px",
-        "cornerRadius": "10px",
-        "alignItems": "center",
-        "contents": [
-            icon_badge(
-                icon,
-                COLOR_WHITE,
-                border_color,
-                size="md",
-            ),
-            {
-                "type": "box",
-                "layout": "vertical",
-                "flex": 7,
-                "margin": "md",
-                "contents": [
-                    flex_text(
-                        title,
-                        size="lg",
-                        color=title_color,
-                        weight="bold",
-                    ),
-                    flex_text(
-                        description,
-                        size="sm",
-                        color=COLOR_MUTED,
-                        max_lines=3,
-                    ),
-                ],
-            },
-            flex_text(
-                f"{count} สถานี",
-                size="md",
-                color=title_color,
-                weight="bold",
-                flex=4,
-                align="end",
-            ),
-        ],
-    }
-
-
-# ============================================================
-# 15. การ์ดสรุปเมื่อพบ Alarm
-# ============================================================
-
-def build_alert_summary_bubble(
-    alert_features: list[dict[str, Any]],
-    online_type_counts: dict[str, int],
-    latest_update: datetime | None = None,
-) -> dict[str, Any]:
-    summary = summarize_alerts(
-        alert_features,
-        online_type_counts,
+    header_color = "#D92D3F" if has_alert else "#489E3B"
+    status_text = (
+        f"พบสถานีเข้าเงื่อนไขแจ้งเตือน {alert_count} สถานี"
+        if has_alert
+        else "ไม่พบค่าพารามิเตอร์เกินมาตรฐาน"
     )
 
     return {
         "type": "bubble",
-        "size": "giga",
-
-        "header": card_header(
-            "สรุปสถานการณ์ e-Monitoring",
-            COLOR_RED,
-        ),
-
-        "body": {
+        "size": "mega",
+        "header": {
             "type": "box",
             "layout": "vertical",
-            "paddingAll": "14px",
-            "backgroundColor": COLOR_BACKGROUND,
-            "spacing": "sm",
+            "backgroundColor": "#4E2A84",
+            "paddingAll": "18px",
             "contents": [
-                status_banner(
-                    "พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน",
-                    ICON_ALERT,
-                    COLOR_RED_DARK,
-                    COLOR_RED_SOFT,
-                    COLOR_RED,
-                    "#F1B8C0",
-                    "กรุณาตรวจสอบรายละเอียดสถานีและติดตามสถานการณ์",
-                ),
-
-                {
-                    "type": "box",
-                    "layout": "horizontal",
-                    "spacing": "sm",
-                    "contents": [
-                        summary_number_box(
-                            summary["station_count"],
-                            "สถานีแจ้งเตือน",
-                            COLOR_PRIMARY,
-                            COLOR_PRIMARY_SOFT,
-                            COLOR_PRIMARY_BORDER,
-                        ),
-                        summary_number_box(
-                            summary["parameter_count"],
-                            "พารามิเตอร์",
-                            COLOR_GREEN,
-                            COLOR_GREEN_SOFT,
-                            COLOR_GREEN_BORDER,
-                        ),
-                        summary_number_box(
-                            summary[
-                                "industry_zone_count"
-                            ],
-                            "นิคมฯ",
-                            COLOR_YELLOW_DARK,
-                            COLOR_YELLOW_SOFT,
-                            "#E9C77E",
-                        ),
-                    ],
-                },
-
-                depth_panel(
-                    [
-                        flex_text(
-                            "พารามิเตอร์ที่เกินค่ามาตรฐาน",
-                            size="xs",
-                            weight="bold",
-                            color=COLOR_MUTED,
-                        ),
-                        flex_text(
-                            ", ".join(summary["parameter_names"])
-                            if summary["parameter_names"]
-                            else "พารามิเตอร์แจ้งเตือน",
-                            size="md",
-                            weight="bold",
-                            color=COLOR_RED_DARK,
-                            max_lines=3,
-                        ),
-                    ],
-                    background_color=COLOR_PRIMARY_PALE,
-                    border_color=COLOR_PRIMARY_BORDER,
-                    shadow_color=COLOR_DEPTH,
-                    padding="11px",
-                    corner_radius="14px",
-                    spacing="xs",
-                ),
-
-                online_station_summary_box(
-                    online_type_counts
-                ),
-
-                flex_text(
-                    "ระดับสถานการณ์",
-                    size="md",
-                    weight="bold",
-                    color=COLOR_TEXT,
-                ),
-                severity_box(
-                    "เกินค่ามาตรฐาน",
-                    "มีรายการแจ้งเตือนตั้งแต่ 3 รายการขึ้นไป",
-                    summary["urgent_count"],
-                    ICON_ALERT,
-                    COLOR_RED,
-                    COLOR_RED_SOFT,
-                    COLOR_RED_DARK,
-                ),
-                severity_box(
-                    "เฝ้าระวัง",
-                    "มีรายการแจ้งเตือน 2 รายการ",
-                    summary["watch_count"],
-                    ICON_WATCH,
-                    COLOR_YELLOW,
-                    COLOR_YELLOW_SOFT,
-                    COLOR_YELLOW_DARK,
-                ),
-                severity_box(
-                    "ติดตามสถานการณ์",
-                    "มีรายการแจ้งเตือน 1 รายการ",
-                    summary["follow_count"],
-                    ICON_NORMAL,
-                    COLOR_GREEN,
-                    COLOR_GREEN_SOFT,
-                    COLOR_GREEN_DARK,
-                ),
-
-                data_timestamp_box(latest_update),
-            ],
-        },
-
-        "footer": {
-            "type": "box",
-            "layout": "vertical",
-            "paddingAll": "10px",
-            "backgroundColor": COLOR_PRIMARY_PALE,
-            "borderColor": COLOR_PRIMARY_BORDER,
-            "borderWidth": "1px",
-            "contents": [
-                flex_button(
-                    "เปิดระบบ GIS",
-                    ARCGIS_DASHBOARD_URL,
-                    primary=True,
-                ),
-            ],
-        },
-    }
-
-
-# ============================================================
-# 16. การ์ดสรุปเมื่อไม่พบ Alarm
-# ============================================================
-
-def build_normal_summary_bubble(
-    online_type_counts: dict[str, int],
-    latest_update: datetime | None = None,
-) -> dict[str, Any]:
-    return {
-        "type": "bubble",
-        "size": "giga",
-
-        "header": card_header(
-            "สรุปสถานการณ์ e-Monitoring",
-            COLOR_GREEN,
-        ),
-
-        "body": {
-            "type": "box",
-            "layout": "vertical",
-            "paddingAll": "14px",
-            "backgroundColor": COLOR_BACKGROUND,
-            "spacing": "sm",
-            "contents": [
-                status_banner(
-                    "ไม่พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน",
-                    ICON_NORMAL,
-                    COLOR_GREEN_DARK,
-                    COLOR_GREEN_SOFT,
-                    COLOR_GREEN,
-                    COLOR_GREEN_BORDER,
-                    "ระบบตรวจสอบข้อมูลจากสถานี ONLINE เรียบร้อยแล้ว",
-                ),
-
-                online_station_summary_box(
-                    online_type_counts
-                ),
-
-                data_timestamp_box(latest_update),
-            ],
-        },
-
-        "footer": {
-            "type": "box",
-            "layout": "vertical",
-            "paddingAll": "10px",
-            "backgroundColor": COLOR_PRIMARY_PALE,
-            "borderColor": COLOR_PRIMARY_BORDER,
-            "borderWidth": "1px",
-            "contents": [
-                flex_button(
-                    "เปิดระบบ GIS",
-                    ARCGIS_DASHBOARD_URL,
-                    primary=True,
-                ),
-            ],
-        },
-    }
-
-
-def build_no_current_data_summary_bubble(
-    online_type_counts: dict[str, int],
-    latest_update: datetime | None = None,
-) -> dict[str, Any]:
-    return {
-        "type": "bubble",
-        "size": "giga",
-        "header": card_header(
-            "สรุปสถานการณ์ e-Monitoring",
-            COLOR_YELLOW,
-        ),
-        "body": {
-            "type": "box",
-            "layout": "vertical",
-            "paddingAll": "14px",
-            "backgroundColor": COLOR_BACKGROUND,
-            "spacing": "sm",
-            "contents": [
-                status_banner(
-                    "ยังไม่มีสถานี ONLINE",
-                    ICON_WATCH,
-                    COLOR_YELLOW_DARK,
-                    COLOR_YELLOW_SOFT,
-                    COLOR_YELLOW,
-                    "#E9C77E",
-                    "ระบบยังไม่มีข้อมูลสถานี ONLINE สำหรับตรวจสอบ Alarm",
-                ),
-                online_station_summary_box(online_type_counts),
-                data_timestamp_box(latest_update),
-            ],
-        },
-        "footer": {
-            "type": "box",
-            "layout": "vertical",
-            "paddingAll": "10px",
-            "backgroundColor": COLOR_PRIMARY_PALE,
-            "borderColor": COLOR_PRIMARY_BORDER,
-            "borderWidth": "1px",
-            "contents": [
-                flex_button(
-                    "เปิดระบบ GIS",
-                    ARCGIS_DASHBOARD_URL,
-                    primary=True,
-                ),
-            ],
-        },
-    }
-
-
-# ============================================================
-# 17. กล่องรายละเอียด Alarm
-# ============================================================
-
-def alarm_entry_box(
-    alarm_entry: str,
-) -> dict[str, Any]:
-    parameter_name = (
-        extract_primary_parameter_name(
-            alarm_entry
-        )
-    )
-
-    detail_text = remove_alarm_datetime(
-        alarm_entry
-    )
-
-    time_text = alarm_time_text(
-        alarm_entry
-    )
-
-    return depth_panel(
-        [
-            {
-                "type": "box",
-                "layout": "horizontal",
-                "contents": [
-                    flex_text(
-                        parameter_name,
-                        size="md",
-                        weight="bold",
-                        color=COLOR_RED_DARK,
-                        flex=7,
-                    ),
-                    flex_text(
-                        time_text,
-                        size="xs",
-                        color=COLOR_MUTED,
-                        flex=4,
-                        align="end",
-                    ),
-                ],
-            },
-            flex_text(
-                detail_text,
-                size="sm",
-                color=COLOR_TEXT,
-                max_lines=5,
-            ),
-        ],
-        background_color=COLOR_SURFACE,
-        border_color="#F0BBC2",
-        shadow_color="#F3DCE0",
-        padding="10px",
-        corner_radius="14px",
-        spacing="xs",
-        margin="sm",
-    )
-
-
-# ============================================================
-# 18. การ์ดรายละเอียดแต่ละสถานี
-# ============================================================
-
-def build_alert_detail_bubble(
-    feature: dict[str, Any],
-) -> dict[str, Any]:
-    properties = feature.get(
-        "properties",
-        {},
-    )
-
-    station_name = get_station_name(
-        properties
-    )
-
-    industry_zone = get_industry_zone(
-        properties
-    )
-
-    station_type = normalize_station_type(
-        properties
-    )
-
-    station_comment = get_station_comment(
-        properties
-    )
-
-    last_update = format_datetime_thai(
-        properties.get("LastUpdate")
-    )
-
-    alarm_entries = properties.get(
-        "_alarm_entries",
-        [],
-    )
-
-    visible_entries = alarm_entries[
-        :MAX_ALARM_ENTRIES_PER_STATION
-    ]
-
-    severity = get_severity_level(
-        feature
-    )
-
-    severity_text = {
-        "urgent": "เกินค่ามาตรฐาน",
-        "watch": "เฝ้าระวัง",
-        "follow": "ติดตามสถานการณ์",
-    }.get(
-        severity,
-        "ติดตามสถานการณ์",
-    )
-
-    severity_color = {
-        "urgent": COLOR_RED,
-        "watch": COLOR_YELLOW,
-        "follow": COLOR_GREEN,
-    }.get(
-        severity,
-        COLOR_RED,
-    )
-
-    severity_icon = {
-        "urgent": ICON_ALERT,
-        "watch": ICON_WATCH,
-        "follow": ICON_NORMAL,
-    }.get(
-        severity,
-        ICON_ALERT,
-    )
-
-    severity_background = {
-        "urgent": COLOR_RED_SOFT,
-        "watch": COLOR_YELLOW_SOFT,
-        "follow": COLOR_GREEN_SOFT,
-    }.get(
-        severity,
-        COLOR_RED_SOFT,
-    )
-
-    body_contents: list[
-        dict[str, Any]
-    ] = [
-        {
-            "type": "box",
-            "layout": "horizontal",
-            "alignItems": "center",
-            "contents": [
-                icon_badge(
-                    severity_icon,
-                    severity_background,
-                    severity_color,
+                text_component(
+                    "IEAT e-Monitoring",
                     size="lg",
+                    color="#FFFFFF",
+                    weight="bold",
                 ),
+                text_component(
+                    "สรุปสถานการณ์ล่าสุด",
+                    size="sm",
+                    color="#E4E0EE",
+                    margin="sm",
+                ),
+            ],
+        },
+        "body": {
+            "type": "box",
+            "layout": "vertical",
+            "paddingAll": "18px",
+            "contents": [
                 {
                     "type": "box",
                     "layout": "vertical",
-                    "flex": 8,
-                    "margin": "md",
+                    "backgroundColor": "#F8F5FB",
+                    "cornerRadius": "12px",
+                    "paddingAll": "12px",
                     "contents": [
-                        flex_text(
-                            industry_zone,
-                            size="sm",
+                        text_component(
+                            status_text,
+                            size="md",
+                            color=header_color,
                             weight="bold",
-                            color=COLOR_TEXT,
-                            max_lines=2,
                         ),
-                        flex_text(
-                            station_name,
-                            size="lg",
-                            weight="bold",
-                            color=COLOR_PRIMARY,
-                            max_lines=2,
+                        text_component(
+                            f"เวลาที่แจ้งเตือน: {report_time_text()}",
+                            size="xs",
+                            color="#716C6B",
+                            margin="sm",
                         ),
                     ],
                 },
-            ],
-        },
-
-        flex_text(
-            f"ข้อมูลล่าสุด ณ {last_update}",
-            size="xs",
-            color=COLOR_MUTED,
-        ),
-
-        {
-            "type": "box",
-            "layout": "horizontal",
-            "spacing": "sm",
-            "contents": [
-                depth_panel(
-                    [
-                        flex_text(
-                            "สถานะสถานี",
-                            size="xs",
-                            color=COLOR_MUTED,
-                        ),
-                        flex_text(
-                            "ONLINE",
-                            size="sm",
-                            weight="bold",
-                            color=COLOR_GREEN_DARK,
-                        ),
-                    ],
-                    background_color=COLOR_GREEN_SOFT,
-                    border_color=COLOR_GREEN_BORDER,
-                    shadow_color=COLOR_GREEN_BORDER,
-                    padding="9px",
-                    corner_radius="10px",
-                    flex=1,
-                ),
-                depth_panel(
-                    [
-                        flex_text(
-                            "ประเภทการตรวจวัด",
-                            size="xs",
-                            color=COLOR_MUTED,
-                        ),
-                        flex_text(
-                            station_type,
-                            size="sm",
-                            weight="bold",
-                            color=COLOR_PRIMARY_DARK,
-                        ),
-                    ],
-                    background_color=COLOR_PRIMARY_SOFT,
-                    border_color=COLOR_PRIMARY_BORDER,
-                    shadow_color=COLOR_PRIMARY_BORDER,
-                    padding="9px",
-                    corner_radius="10px",
-                    flex=1,
-                ),
-            ],
-        },
-
-        depth_panel(
-            [
-                flex_text(
-                    "ค่าพารามิเตอร์ที่เกินค่ามาตรฐาน",
-                    size="sm",
+                text_component(
+                    "สถานี Online ทั้งหมด",
+                    size="md",
+                    color="#4E2A84",
                     weight="bold",
-                    color=COLOR_RED_DARK,
+                    margin="lg",
+                ),
+                text_component(
+                    f"{online_total} สถานี",
+                    size="xxl",
+                    color="#30283A",
+                    weight="bold",
+                    margin="sm",
+                ),
+                {
+                    "type": "separator",
+                    "margin": "lg",
+                    "color": "#E4E0EE",
+                },
+                {
+                    "type": "box",
+                    "layout": "vertical",
+                    "margin": "lg",
+                    "spacing": "sm",
+                    "contents": [
+                        text_component(
+                            f"AQMs: {type_counts['AQMs']} สถานี",
+                            size="sm",
+                        ),
+                        text_component(
+                            f"WQMs: {type_counts['WQMs']} สถานี",
+                            size="sm",
+                        ),
+                        text_component(
+                            f"CEMs: {type_counts['CEMs']} สถานี",
+                            size="sm",
+                        ),
+                        text_component(
+                            f"ประเภทอื่น: {type_counts['อื่น ๆ']} สถานี",
+                            size="sm",
+                        ),
+                    ],
+                },
+                text_component(
+                    f"รอบแจ้งเตือนถัดไป: {next_report_time_text()}",
+                    size="xs",
+                    color="#716C6B",
+                    margin="lg",
                 ),
             ],
-            background_color=severity_background,
-            border_color=severity_color,
-            shadow_color=COLOR_DEPTH_DARK,
-            padding="9px",
-            corner_radius="12px",
-        ),
-    ]
-
-    for alarm_entry in visible_entries:
-        body_contents.append(
-            alarm_entry_box(
-                alarm_entry
-            )
-        )
-
-    if len(alarm_entries) > len(
-        visible_entries
-    ):
-        remaining_count = (
-            len(alarm_entries)
-            - len(visible_entries)
-        )
-
-        body_contents.append(
-            flex_text(
-                (
-                    "มีรายการแจ้งเตือนเพิ่มเติม "
-                    f"{remaining_count} รายการ "
-                    "โปรดตรวจสอบในระบบ GIS"
-                ),
-                size="xs",
-                color=COLOR_MUTED,
-                align="center",
-            )
-        )
-
-    body_contents.append(depth_panel(
-        [
-            flex_text(
-                "สาเหตุ / การติดตามผล",
-                size="sm",
-                weight="bold",
-                color=COLOR_YELLOW_DARK,
-            ),
-            flex_text(
-                station_comment,
-                size="sm",
-                color=COLOR_TEXT,
-                max_lines=6,
-            ),
-        ],
-        background_color=COLOR_YELLOW_SOFT,
-        border_color=COLOR_YELLOW,
-        shadow_color="#E9C77E",
-        padding="11px",
-        corner_radius="12px",
-        spacing="xs",
-    ))
-
-    return {
-        "type": "bubble",
-        "size": "giga",
-
-        "header": card_header(
-            f"{station_type} · {severity_text}",
-            severity_color,
-        ),
-
-        "body": {
-            "type": "box",
-            "layout": "vertical",
-            "paddingAll": "14px",
-            "backgroundColor": COLOR_BACKGROUND,
-            "spacing": "sm",
-            "contents": body_contents,
         },
-
         "footer": {
             "type": "box",
             "layout": "vertical",
-            "paddingAll": "8px",
-            "backgroundColor": COLOR_PRIMARY_PALE,
-            "borderColor": COLOR_PRIMARY_BORDER,
-            "borderWidth": "1px",
+            "paddingAll": "14px",
             "contents": [
-                flex_button(
-                    "ตำแหน่งสถานี",
-                    station_map_url(feature),
-                    primary=True,
-                ),
+                {
+                    "type": "button",
+                    "style": "primary",
+                    "color": "#4E2A84",
+                    "action": {
+                        "type": "uri",
+                        "label": "เปิด Dashboard",
+                        "uri": DASHBOARD_URL,
+                    },
+                }
             ],
         },
     }
 
 
-# ============================================================
-# 19. ส่ง LINE Broadcast
-# ============================================================
+def build_alert_detail_bubble(
+    station: dict[str, Any],
+) -> dict[str, Any]:
+    station_name = station["station_name"]
+    estate_name = station["estate_name"]
+    station_type = station["station_type"]
+    alarm_text = station["parameter_alarm"]
+    last_update = station["last_update"]
 
-def send_line_flex(
-    alt_text: str,
-    contents: dict[str, Any],
-) -> bool:
-    if not LINE_CHANNEL_ACCESS_TOKEN:
-        raise RuntimeError(
-            "ไม่พบ LINE_CHANNEL_ACCESS_TOKEN"
-        )
+    contents: list[dict[str, Any]] = [
+        text_component(
+            "รายละเอียดสถานีที่เข้าเงื่อนไข",
+            size="sm",
+            color="#FFFFFF",
+            weight="bold",
+        ),
+        text_component(
+            station_name,
+            size="lg",
+            color="#FFFFFF",
+            weight="bold",
+            margin="sm",
+        ),
+    ]
 
-    payload = {
-        "messages": [
-            {
-                "type": "flex",
-                "altText": alt_text[:400],
-                "contents": contents,
-            }
-        ],
+    body_contents: list[dict[str, Any]] = [
+        text_component(
+            "นิคมอุตสาหกรรม",
+            size="xs",
+            color="#716C6B",
+        ),
+        text_component(
+            estate_name,
+            size="sm",
+            color="#30283A",
+            weight="bold",
+            margin="sm",
+        ),
+        text_component(
+            f"ประเภทสถานี: {station_type}",
+            size="sm",
+            color="#30283A",
+            margin="md",
+        ),
+        {
+            "type": "separator",
+            "margin": "lg",
+            "color": "#E4E0EE",
+        },
+        text_component(
+            "พารามิเตอร์ที่เข้าเงื่อนไข",
+            size="sm",
+            color="#D92D3F",
+            weight="bold",
+            margin="lg",
+        ),
+        text_component(
+            alarm_text,
+            size="sm",
+            color="#30283A",
+            margin="sm",
+        ),
+        text_component(
+            f"ข้อมูลในแหล่งข้อมูล: {last_update}",
+            size="xs",
+            color="#716C6B",
+            margin="lg",
+        ),
+        text_component(
+            f"เวลาที่แจ้งเตือน: {report_time_text()}",
+            size="xs",
+            color="#716C6B",
+            margin="sm",
+        ),
+    ]
+
+    bubble: dict[str, Any] = {
+        "type": "bubble",
+        "size": "mega",
+        "header": {
+            "type": "box",
+            "layout": "vertical",
+            "backgroundColor": "#D92D3F",
+            "paddingAll": "16px",
+            "contents": contents,
+        },
+        "body": {
+            "type": "box",
+            "layout": "vertical",
+            "paddingAll": "16px",
+            "contents": body_contents,
+        },
+        "footer": {
+            "type": "box",
+            "layout": "vertical",
+            "paddingAll": "14px",
+            "contents": [
+                {
+                    "type": "button",
+                    "style": "primary",
+                    "color": "#4E2A84",
+                    "action": {
+                        "type": "uri",
+                        "label": "เปิด Dashboard",
+                        "uri": DASHBOARD_URL,
+                    },
+                }
+            ],
+        },
     }
 
-    request_body = json.dumps(
-        payload,
+    return bubble
+
+
+# ============================================================
+# ส่งข้อความ LINE
+# ============================================================
+
+def send_line_message(message: dict[str, Any]) -> bool:
+    token = os.getenv("LINE_CHANNEL_ACCESS_TOKEN", "").strip()
+
+    if not token:
+        print(
+            "WARNING: ไม่พบ LINE_CHANNEL_ACCESS_TOKEN "
+            "จึงอัปเดตหน้าเว็บโดยไม่ส่ง LINE"
+        )
+        return False
+
+    payload = json.dumps(
+        {"messages": [message]},
         ensure_ascii=False,
     ).encode("utf-8")
 
     request = urllib.request.Request(
         LINE_BROADCAST_URL,
-        data=request_body,
-        method="POST",
+        data=payload,
         headers={
-            "Authorization": (
-                f"Bearer "
-                f"{LINE_CHANNEL_ACCESS_TOKEN}"
-            ),
+            "Authorization": f"Bearer {token}",
             "Content-Type": "application/json",
         },
+        method="POST",
     )
 
     try:
-        with urllib.request.urlopen(
-            request,
-            timeout=REQUEST_TIMEOUT_SECONDS,
-        ) as response:
-
-            print(
-                "ส่ง LINE Broadcast สำเร็จ "
-                f"HTTP {response.status}"
-            )
+        with urllib.request.urlopen(request, timeout=60) as response:
+            print(f"ส่ง LINE Broadcast สำเร็จ HTTP {response.status}")
             return True
 
     except urllib.error.HTTPError as error:
-        error_body = (
-            error.read()
-            .decode(
-                "utf-8",
-                errors="replace",
-            )
+        response_text = error.read().decode("utf-8", errors="replace")
+
+        print(
+            f"WARNING: ส่ง LINE ไม่สำเร็จ HTTP {error.code}: "
+            f"{response_text}"
         )
 
-        if error.code == 429:
-            print(
-                "LINE ส่งข้อความไม่ได้: โควตารายเดือนหมด "
-                "ระบบจะอัปเดตหน้าเว็บต่อไป"
-            )
-            return False
-
-        raise RuntimeError(
-            f"LINE Broadcast API "
-            f"HTTP {error.code}: "
-            f"{error_body}"
-        ) from error
+        # ไม่ให้ workflow ล้มเหลว เพื่อให้ docs/status.json ยังถูกอัปเดต
+        return False
 
     except urllib.error.URLError as error:
-        raise RuntimeError(
-            "ไม่สามารถเชื่อมต่อ "
-            "LINE Broadcast API ได้: "
-            f"{error.reason}"
-        ) from error
+        print(f"WARNING: เชื่อมต่อ LINE ไม่สำเร็จ: {error.reason}")
+        return False
 
 
-# ============================================================
-# 20. แบ่งรายการเป็นชุด
-# ============================================================
+def send_summary(
+    online_stations: list[dict[str, Any]],
+    type_counts: dict[str, int],
+    alert_stations: list[dict[str, Any]],
+) -> None:
+    summary_bubble = build_summary_bubble(
+        online_total=len(online_stations),
+        type_counts=type_counts,
+        alert_count=len(alert_stations),
+    )
 
-def chunk_list(
-    items: list[Any],
-    chunk_size: int,
-) -> list[list[Any]]:
-    if chunk_size <= 0:
-        raise ValueError(
-            "chunk_size ต้องมากกว่า 0"
-        )
+    message = {
+        "type": "flex",
+        "altText": (
+            "แจ้งเตือน e-Monitoring: "
+            f"{'พบสถานีเข้าเงื่อนไข ' + str(len(alert_stations)) + ' สถานี' if alert_stations else 'ไม่พบค่าเกินมาตรฐาน'}"
+        ),
+        "contents": summary_bubble,
+    }
 
+    print("กำลังส่งการ์ดสรุปสถานการณ์...")
+    send_line_message(message)
+
+
+def split_batches(
+    items: list[dict[str, Any]],
+    batch_size: int,
+) -> list[list[dict[str, Any]]]:
     return [
-        items[index:index + chunk_size]
-        for index in range(
-            0,
-            len(items),
-            chunk_size,
-        )
+        items[index:index + batch_size]
+        for index in range(0, len(items), batch_size)
     ]
 
 
-def carousel_json_size_bytes(
-    bubbles: list[dict[str, Any]],
-) -> int:
-    """คำนวณขนาด JSON จริงแบบ UTF-8 ของ Flex Carousel"""
-    carousel = {
-        "type": "carousel",
-        "contents": bubbles,
-    }
+def send_alert_details(alert_stations: list[dict[str, Any]]) -> None:
+    if not alert_stations:
+        return
 
-    return len(
-        json.dumps(
-            carousel,
-            ensure_ascii=False,
-            separators=(",", ":"),
-        ).encode("utf-8")
-    )
+    batches = split_batches(alert_stations, MAX_STATIONS_PER_CAROUSEL)
+    total_batches = len(batches)
+    total_alerts = len(alert_stations)
 
+    for batch_number, batch in enumerate(batches, start=1):
+        carousel = {
+            "type": "carousel",
+            "contents": [
+                build_alert_detail_bubble(station)
+                for station in batch
+            ],
+        }
 
-def build_carousel_batches(
-    alert_features: list[dict[str, Any]],
-) -> list[list[dict[str, Any]]]:
-    """แบ่ง Bubble ตามจำนวนและขนาด JSON เพื่อไม่ให้เกินข้อจำกัด LINE"""
-    batches: list[list[dict[str, Any]]] = []
-    current_batch: list[dict[str, Any]] = []
-
-    for feature in alert_features:
-        bubble = build_alert_detail_bubble(feature)
-        candidate_batch = current_batch + [bubble]
-
-        exceeds_count = (
-            len(candidate_batch)
-            > MAX_BUBBLES_PER_CAROUSEL
-        )
-        exceeds_size = (
-            carousel_json_size_bytes(candidate_batch)
-            > MAX_CAROUSEL_JSON_BYTES
+        suffix = (
+            f" ชุดที่ {batch_number}/{total_batches}"
+            if total_batches > 1
+            else ""
         )
 
-        if current_batch and (exceeds_count or exceeds_size):
-            batches.append(current_batch)
-            current_batch = [bubble]
-        else:
-            current_batch = candidate_batch
+        message = {
+            "type": "flex",
+            "altText": (
+                f"รายละเอียดแจ้งเตือน e-Monitoring "
+                f"{total_alerts} สถานี{suffix}"
+            ),
+            "contents": carousel,
+        }
 
-        single_size = carousel_json_size_bytes([bubble])
-        if single_size > MAX_CAROUSEL_JSON_BYTES:
-            raise RuntimeError(
-                "การ์ดรายละเอียดของสถานีมีขนาดใหญ่เกินข้อจำกัด LINE: "
-                f"{single_size:,} bytes"
-            )
-
-    if current_batch:
-        batches.append(current_batch)
-
-    return batches
-
-
-# ============================================================
-# 21. ส่งรายละเอียดสถานีแบบ Carousel
-# ============================================================
-
-def send_alert_detail_carousels(
-    alert_features: list[dict[str, Any]],
-) -> bool:
-    """ส่งรายละเอียดแยกตามประเภท AQMs, WQMs, CEMs ไม่ปะปนกันใน Carousel เดียว"""
-    if not alert_features:
         print(
-            "ไม่มีรายละเอียดสถานีที่ต้องส่ง"
+            f"กำลังส่งรายละเอียดสถานี "
+            f"ชุดที่ {batch_number}/{total_batches} "
+            f"จำนวน {len(batch)} สถานี"
         )
-        return True
 
-    features_by_type: dict[str, list[dict[str, Any]]] = {
-        "AQMs": [],
-        "WQMs": [],
-        "CEMs": [],
-        "อื่น ๆ": [],
-    }
-
-    for feature in alert_features:
-        station_type = normalize_station_type(
-            feature.get("properties", {})
-        )
-        group_name = (
-            station_type
-            if station_type in {"AQMs", "WQMs", "CEMs"}
-            else "อื่น ๆ"
-        )
-        features_by_type[group_name].append(feature)
-
-    # 1 ประเภท = 1 ชุด Carousel (หากเกินข้อจำกัด LINE จะแบ่งเป็นชุดย่อย)
-    for group_name in ("AQMs", "WQMs", "CEMs", "อื่น ๆ"):
-        group_features = features_by_type[group_name]
-        if not group_features:
-            continue
-
-        batches = build_carousel_batches(group_features)
-        total_batches = len(batches)
-
-        for batch_number, bubbles in enumerate(batches, start=1):
-            carousel = {
-                "type": "carousel",
-                "contents": bubbles,
-            }
-            carousel_size = carousel_json_size_bytes(bubbles)
-
-            alt_text = (
-                f"รายละเอียดแจ้งเตือน {group_name} "
-                f"{len(group_features)} สถานี"
-            )
-            if total_batches > 1:
-                alt_text += f" ชุดที่ {batch_number}/{total_batches}"
-
-            print(
-                f"กำลังส่งรายละเอียด {group_name} "
-                f"ชุดที่ {batch_number}/{total_batches} "
-                f"จำนวน {len(bubbles)} สถานี "
-                f"ขนาด {carousel_size:,} bytes"
-            )
-            if not send_line_flex(alt_text, carousel):
-                print("หยุดส่งรายละเอียดเพิ่มเติม เนื่องจากโควตา LINE หมด")
-                return False
-
-            if batch_number < total_batches:
-                time.sleep(1)
-
-    return True
+        send_line_message(message)
 
 
 # ============================================================
-# 22. สร้างข้อมูลสำหรับหน้า "สถานการณ์ล่าสุด"
+# เริ่มการทำงาน
 # ============================================================
 
-def write_status_json(
-    alert_features: list[dict[str, Any]],
-    online_type_counts: dict[str, Any],
-    has_current_data: bool,
-    latest_online_update: datetime | None = None,
-    stale_online_count: int = 0,
-) -> None:
-    """เขียนข้อมูลล่าสุดให้หน้า GitHub Pages อ่านจาก docs/status.json"""
-    station_items: list[dict[str, Any]] = []
-    parameter_names: set[str] = set()
-    estate_names: set[str] = set()
-
-    urgent_count = 0
-    watch_count = 0
-    follow_count = 0
-
-    severity_texts = {
-        "urgent": "เกินค่ามาตรฐาน",
-        "watch": "เฝ้าระวัง",
-        "follow": "ติดตามสถานการณ์",
-    }
-
-    for feature in alert_features:
-        properties = feature.get("properties", {})
-        if not isinstance(properties, dict):
-            continue
-
-        entries = properties.get("_alarm_entries", [])
-        names = properties.get("_parameter_names", [])
-        severity = get_severity_level(feature)
-        estate = get_industry_zone(properties)
-
-        if severity == "urgent":
-            urgent_count += 1
-        elif severity == "watch":
-            watch_count += 1
-        else:
-            follow_count += 1
-
-        estate_names.add(estate)
-        parameter_names.update(str(name) for name in names)
-
-        detected_times = [
-            alarm_time_text(entry)
-            for entry in entries
-            if alarm_time_text(entry)
-        ]
-
-        station_items.append({
-            "estate": estate,
-            "station_name": get_station_name(properties),
-            "station_type": normalize_station_type(properties),
-            "status": clean_text(properties.get("Status"), "-").upper(),
-            "parameter": ", ".join(names) if names else "พารามิเตอร์แจ้งเตือน",
-            "parameter_alarm": entries,
-            "value": " | ".join(
-                remove_alarm_datetime(entry) for entry in entries
-            ),
-            "comment": get_station_comment(properties),
-            "detected_at": ", ".join(detected_times) or "-",
-            "severity": severity_texts.get(
-                severity,
-                "ติดตามสถานการณ์",
-            ),
-            "map_url": station_map_url(feature),
-            "gis_url": ARCGIS_DASHBOARD_URL,
-        })
-
-    has_alert = bool(station_items)
-
-    status = (
-        "alert"
-        if has_alert
-        else "normal"
-        if has_current_data
-        else "watch"
-    )
-
-    status_data = {
-        "status": status,
-        "status_text": (
-            "พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน"
-            if has_alert
-            else "ไม่พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน"
-        ),
-        "description": (
-            "โปรดตรวจสอบรายละเอียดของสถานีและติดตามสถานการณ์"
-            if has_alert
-            else "ตรวจสอบข้อมูลของ feed ล่าสุดแล้ว"
-            if has_current_data
-            else "ยังไม่มีสถานี ONLINE สำหรับตรวจสอบสถานการณ์"
-        ),
-        "updated_at": report_time_text(),
-        "data_last_update": (
-            latest_online_update.isoformat()
-            if latest_online_update is not None
-            else None
-        ),
-        "data_is_today": (
-            latest_online_update.date() == now_thailand().date()
-            if latest_online_update is not None
-            else False
-        ),
-        "stale_online_total": stale_online_count,
-        "online_total": online_type_counts.get("total", 0),
-        "offline_total": online_type_counts.get("offline", 0),
-        "station_total": online_type_counts.get("all_total", 0),
-        "online_aqms": online_type_counts.get("AQMs", 0),
-        "online_wqms": online_type_counts.get("WQMs", 0),
-        "online_cems": online_type_counts.get("CEMs", 0),
-        "station_types": online_type_counts.get("type_breakdown", {}),
-        "alert_station_count": len(station_items),
-        "parameter_count": len(parameter_names),
-        "estate_count": len(estate_names),
-        "urgent_count": urgent_count,
-        "watch_count": watch_count,
-        "follow_count": follow_count,
-        "stations": station_items,
-    }
-
-    output_path = Path("docs/status.json")
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(
-        json.dumps(status_data, ensure_ascii=False, indent=2),
-        encoding="utf-8",
-    )
-
-    print(f"อัปเดตข้อมูลหน้าเว็บแล้ว: {output_path}")
-
-
-# ============================================================
-# 23. โปรแกรมหลัก
-# ============================================================
-
-def main() -> None:
-    print("=" * 80)
+def main() -> int:
+    print("=" * 72)
     print("IEAT e-Monitoring LINE Alert")
-    print("=" * 80)
+    print("=" * 72)
+    print(f"เวลาประเทศไทย: {report_time_text()}")
+    print("กำลังดาวน์โหลดข้อมูล e-Monitoring...")
 
-    print(
-        "เวลาประเทศไทย:",
-        now_thailand().strftime(
-            "%Y-%m-%d %H:%M:%S"
-        ),
+    try:
+        payload = download_station_data()
+    except RuntimeError as error:
+        print(f"ERROR: {error}")
+        return 1
+
+    features = get_features(payload)
+    all_stations = prepare_stations(features)
+    online_stations = get_online_stations(features)
+    alert_stations = get_alert_stations(features)
+    type_counts = count_online_types(online_stations)
+
+    print(f"จำนวนสถานีทั้งหมดที่ตรวจสอบได้: {len(all_stations)}")
+    print(f"สถานี ONLINE ทั้งหมด: {len(online_stations)}")
+    print(f"AQMs ONLINE: {type_counts['AQMs']}")
+    print(f"WQMs ONLINE: {type_counts['WQMs']}")
+    print(f"CEMs ONLINE: {type_counts['CEMs']}")
+    print(f"ประเภทอื่น ONLINE: {type_counts['อื่น ๆ']}")
+    print(f"สถานีที่มี ParameterAlram: {len(alert_stations)}")
+
+    # อัปเดตหน้าเว็บทุกครั้ง แม้ส่ง LINE ไม่สำเร็จ
+    write_status_file(
+        all_stations=all_stations,
+        online_stations=online_stations,
+        alert_stations=alert_stations,
+        type_counts=type_counts,
     )
 
-    print(
-        "กำลังดาวน์โหลดข้อมูล "
-        "e-Monitoring..."
+    # ส่งสรุปทุกครั้งที่ workflow รัน: ทุก 1 ชั่วโมง และเมื่อกด Run เอง
+    send_summary(
+        online_stations=online_stations,
+        type_counts=type_counts,
+        alert_stations=alert_stations,
     )
 
-    data = download_data()
+    # หากมีสถานีที่ ParameterAlram มีค่า ให้ส่งรายละเอียดเพิ่มเติม
+    send_alert_details(alert_stations)
 
-    features = get_features(
-        data
-    )
+    print("=" * 72)
+    print("ดำเนินการเสร็จสิ้น")
+    print("=" * 72)
 
-    print(
-        "Feature ทั้งหมด:",
-        len(features),
-    )
-
-    if not features:
-        raise RuntimeError(
-            "ไม่พบ Feature จากข้อมูล "
-            "e-Monitoring"
-        )
-
-    online_type_counts = (
-        count_online_station_types(
-            features
-        )
-    )
-
-    (
-        online_features,
-        online_count,
-        stale_online_count,
-    ) = filter_current_online_features(
-        features
-    )
-
-    latest_online_update = get_latest_online_update(
-        online_features
-    )
-
-    alarm_reference_date = (
-        latest_online_update.date()
-        if latest_online_update is not None
-        else None
-    )
-
-    alert_features = (
-        filter_alert_features(
-            online_features,
-            alarm_reference_date,
-        )
-    )
-
-    # อัปเดตข้อมูลหน้า "สถานการณ์ล่าสุด" ทุกครั้งที่ Workflow ทำงาน
-    write_status_json(
-        alert_features,
-        online_type_counts,
-        has_current_data=bool(online_features),
-        latest_online_update=latest_online_update,
-        stale_online_count=stale_online_count,
-    )
-
-    print()
-    print("=" * 80)
-    print("สรุปผลการตรวจสอบ")
-    print("=" * 80)
-
-    print(
-        "สถานี ONLINE ทั้งหมด:",
-        online_type_counts.get(
-            "total",
-            0,
-        ),
-    )
-
-    print(
-        "สถานี OFFLINE ทั้งหมด:",
-        online_type_counts.get("offline", 0),
-    )
-
-    print(
-        "สถานีทั้งหมด:",
-        online_type_counts.get("all_total", 0),
-    )
-
-    print(
-        "AQMs ONLINE:",
-        online_type_counts.get(
-            "AQMs",
-            0,
-        ),
-    )
-
-    print(
-        "WQMs ONLINE:",
-        online_type_counts.get(
-            "WQMs",
-            0,
-        ),
-    )
-
-    print(
-        "CEMs ONLINE:",
-        online_type_counts.get(
-            "CEMs",
-            0,
-        ),
-    )
-
-    print(
-        "ประเภทอื่น ONLINE:",
-        online_type_counts.get(
-            "Other",
-            0,
-        ),
-    )
-
-    print(
-        "ONLINE แต่ข้อมูลไม่ใช่วันนี้:",
-        stale_online_count,
-    )
-
-    print(
-        "สถานี ONLINE ที่นำมาตรวจ Alarm:",
-        online_count,
-    )
-
-    print(
-        "สถานีที่มี ParameterAlram ของวันที่ล่าสุดใน feed:",
-        len(alert_features),
-    )
-
-    print(
-        "LastUpdate ล่าสุด:",
-        latest_online_update.isoformat()
-        if latest_online_update is not None
-        else "ไม่พบ",
-    )
-
-    print("=" * 80)
-
-    # ทุกชั่วโมงจะอัปเดต docs/status.json แล้วด้านบน
-    # LINE ส่งทันทีเมื่อพบ Alarm ของข้อมูลวันนี้ หรือส่งสรุปปกติเฉพาะรอบ 08:30 น.
-    if alert_features:
-        print(
-            "ส่งการ์ดสรุปสถานการณ์"
-        )
-
-        summary_bubble = (
-            build_alert_summary_bubble(
-                alert_features,
-                online_type_counts,
-                latest_online_update,
-            )
-        )
-
-        summary_sent = send_line_flex(
-            (
-                "สรุปสถานการณ์ e-Monitoring "
-                f"พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน "
-                f"{len(alert_features)} สถานี"
-            ),
-            summary_bubble,
-        )
-
-        if summary_sent:
-            time.sleep(1)
-            print("ส่งการ์ดรายละเอียดสถานี")
-            send_alert_detail_carousels(alert_features)
-
-    elif SEND_NORMAL_REPORT:
-        if online_features:
-            print("รอบรายงานปกติ: ส่งการ์ดสรุปสถานการณ์")
-            send_line_flex(
-                "e-Monitoring: ไม่พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน",
-                build_normal_summary_bubble(
-                    online_type_counts,
-                    latest_online_update,
-                ),
-            )
-        else:
-            print("รอบรายงานปกติ: ยังไม่มีข้อมูล ONLINE ของวันนี้")
-            send_line_flex(
-                "e-Monitoring: ยังไม่มีข้อมูล ONLINE ของวันนี้",
-                build_no_current_data_summary_bubble(
-                    online_type_counts,
-                    latest_online_update,
-                ),
-            )
-    else:
-        print("ไม่ส่ง LINE ในรอบนี้: ไม่พบ Alarm ของข้อมูลวันนี้")
-
-    print("ประมวลผลรายงานประจำรอบเรียบร้อย")
+    return 0
 
 
 if __name__ == "__main__":
-    try:
-        main()
-
-    except Exception as error:
-        print(
-            "ERROR:",
-            str(error),
-        )
-
-        sys.exit(1)
+    sys.exit(main())
