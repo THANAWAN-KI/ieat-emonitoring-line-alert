@@ -6,396 +6,2834 @@ html = r'''<!DOCTYPE html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#4E2A84">
+
 <title>IEAT e-Monitoring | สรุปสถานการณ์ล่าสุด</title>
+
+<!-- PNG Export -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 <style>
+
 :root{
   --purple:#4E2A84;
   --purple2:#6A4C93;
+  --purple3:#8851A1;
   --purple-soft:#F5F0F6;
+
   --green:#2B8A3E;
   --green-soft:#EEF8F1;
+
   --red:#C51F35;
   --red-soft:#FFF1F3;
+
   --orange:#E67700;
   --orange-soft:#FFF7E8;
+
   --yellow:#B7791F;
   --yellow-soft:#FFF9E8;
+
+  --blue:#1982C4;
+  --blue-soft:#EEF7FC;
+
   --ink:#26212B;
   --muted:#716C76;
-  --line:#E6E0E9;
+
+  --line:#E4DFE8;
+  --bg:#F5F3F6;
   --white:#FFFFFF;
-  --shadow:0 8px 26px rgba(53,35,70,.08);
+
+  --shadow:0 5px 18px rgba(53,35,70,.07);
 }
-*{box-sizing:border-box}
-html,body{margin:0;padding:0;background:#F6F4F7;color:var(--ink);font-family:"Noto Sans Thai","Prompt","Sarabun","Avenir Next",Arial,sans-serif}
-body{min-height:100vh}
-button,a{font:inherit}
-a{text-decoration:none;color:inherit}
-.page{width:min(100%,560px);margin:auto;padding-bottom:28px}
+
+*{
+  box-sizing:border-box;
+}
+
+html,
+body{
+  margin:0;
+  padding:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:
+    "Noto Sans Thai",
+    "Prompt",
+    "Sarabun",
+    "Avenir Next",
+    Arial,
+    sans-serif;
+}
+
+body{
+  min-height:100vh;
+}
+
+button,
+a{
+  font:inherit;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+.page{
+  width:min(100%,560px);
+  margin:auto;
+  padding-bottom:35px;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
 .header{
-  position:sticky;top:0;z-index:20;
-  background:rgba(255,255,255,.96);
+  position:sticky;
+  top:0;
+  z-index:50;
+
+  background:rgba(255,255,255,.97);
   backdrop-filter:blur(12px);
+
   border-bottom:1px solid var(--line);
-  padding:10px 16px;
+
+  padding:
+    calc(9px + env(safe-area-inset-top))
+    14px
+    9px;
 }
-.header-row{display:flex;align-items:center;gap:12px}
-.logo{height:42px;width:auto;object-fit:contain}
-.brand{min-width:0;flex:1}
-.brand strong{display:block;font-size:15px;line-height:1.25;color:var(--purple)}
-.brand span{display:block;font-size:10px;color:var(--muted);margin-top:2px}
-.refresh-btn{
-  border:1px solid #D9D0E1;background:#fff;color:var(--purple);
-  width:38px;height:38px;border-radius:11px;cursor:pointer;
-  display:grid;place-items:center;font-size:19px;
+
+.header-row{
+  display:flex;
+  align-items:center;
+  gap:11px;
 }
-main{padding:12px}
+
+.logo{
+  width:auto;
+  height:42px;
+  object-fit:contain;
+}
+
+.brand{
+  flex:1;
+  min-width:0;
+}
+
+.brand strong{
+  display:block;
+  color:var(--purple);
+  font-size:14px;
+  line-height:1.25;
+  font-weight:900;
+}
+
+.brand span{
+  display:block;
+  color:var(--muted);
+  font-size:9px;
+  margin-top:3px;
+  line-height:1.3;
+}
+
+.header-actions{
+  display:flex;
+  gap:5px;
+}
+
+.icon-btn{
+  width:35px;
+  height:35px;
+
+  display:grid;
+  place-items:center;
+
+  border:1px solid #DCD4E2;
+  border-radius:10px;
+
+  background:#fff;
+  color:var(--purple);
+
+  cursor:pointer;
+  font-size:16px;
+}
+
+.icon-btn:active{
+  transform:scale(.96);
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+main{
+  padding:11px;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
 .hero{
-  background:linear-gradient(135deg,#4E2A84,#6A4C93);
-  border-radius:18px;padding:18px;color:#fff;box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--purple),
+      var(--purple2)
+    );
+
+  border-radius:20px;
+
+  padding:18px;
+
+  color:#fff;
+
+  box-shadow:
+    0 9px 25px rgba(78,42,132,.20);
 }
-.hero-top{display:flex;align-items:center;gap:12px}
+
+.hero::after{
+  content:"";
+
+  position:absolute;
+
+  width:150px;
+  height:150px;
+
+  right:-65px;
+  top:-75px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.08);
+}
+
+.hero-top{
+  position:relative;
+  z-index:2;
+
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
 .hero-icon{
-  width:46px;height:46px;border-radius:13px;
-  background:rgba(255,255,255,.14);
-  display:grid;place-items:center;font-size:24px;
+  width:48px;
+  height:48px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:14px;
+
+  background:rgba(255,255,255,.13);
+
+  font-size:24px;
 }
-.hero h1{font-size:20px;margin:0;font-weight:800}
-.hero p{font-size:11px;margin:4px 0 0;color:#EDE7F3}
+
+.hero h1{
+  margin:0;
+
+  font-size:20px;
+  line-height:1.25;
+
+  font-weight:900;
+}
+
+.hero p{
+  margin:4px 0 0;
+
+  color:#EEE8F4;
+
+  font-size:10px;
+}
+
 .hero-time{
-  margin-top:14px;padding-top:11px;border-top:1px solid rgba(255,255,255,.18);
-  font-size:10px;color:#EDE7F3;display:flex;justify-content:space-between;gap:8px
+  position:relative;
+  z-index:2;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  gap:8px;
+
+  margin-top:15px;
+  padding-top:11px;
+
+  border-top:1px solid rgba(255,255,255,.18);
+
+  color:#EDE7F3;
+
+  font-size:9px;
 }
+
+.hero-time strong{
+  color:#fff;
+  font-size:10px;
+}
+
+/* =========================================================
+   CURRENT STATUS
+========================================================= */
+
 .status{
-  margin-top:10px;background:#fff;border:1px solid var(--line);border-radius:16px;
-  padding:13px;box-shadow:var(--shadow)
+  margin-top:9px;
+
+  background:#fff;
+
+  border:1px solid var(--line);
+
+  border-radius:15px;
+
+  padding:12px;
+
+  box-shadow:var(--shadow);
 }
-.status-main{display:flex;align-items:center;gap:10px}
-.status-dot{width:11px;height:11px;border-radius:50%;flex:none;background:var(--green);box-shadow:0 0 0 5px var(--green-soft)}
-.status-dot.alert{background:var(--red);box-shadow:0 0 0 5px var(--red-soft)}
-.status-title{font-weight:800;font-size:14px}
-.status-sub{font-size:10px;color:var(--muted);margin-top:3px}
-.section-title{font-size:14px;font-weight:800;margin:18px 3px 8px;color:#3A3041}
-.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+
+.status-main{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
+.status-dot{
+  width:12px;
+  height:12px;
+
+  flex:none;
+
+  border-radius:50%;
+
+  background:var(--green);
+
+  box-shadow:
+    0 0 0 5px var(--green-soft);
+}
+
+.status-dot.alert{
+  background:var(--red);
+
+  box-shadow:
+    0 0 0 5px var(--red-soft);
+}
+
+.status-title{
+  font-size:13px;
+  font-weight:900;
+}
+
+.status-sub{
+  margin-top:3px;
+
+  color:var(--muted);
+
+  font-size:9px;
+  line-height:1.4;
+}
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.section{
+  margin-top:16px;
+}
+
+.section-title{
+  margin:0 3px 8px;
+
+  font-size:13px;
+  font-weight:900;
+
+  color:#3A3041;
+}
+
+.section-title-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+
+  margin-bottom:8px;
+}
+
+.section-title-row .section-title{
+  margin-bottom:0;
+}
+
+/* =========================================================
+   KPI
+========================================================= */
+
+.kpis{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+
+  gap:7px;
+}
+
 .kpi{
-  background:#fff;border:1px solid var(--line);border-radius:14px;
-  padding:12px 7px;text-align:center;box-shadow:0 4px 14px rgba(53,35,70,.05)
+  background:#fff;
+
+  border:1px solid var(--line);
+
+  border-radius:14px;
+
+  padding:12px 6px;
+
+  text-align:center;
+
+  box-shadow:var(--shadow);
 }
-.kpi .num{font-size:23px;font-weight:900;line-height:1.05}
-.kpi .label{font-size:9px;color:var(--muted);margin-top:5px}
-.kpi.online .num{color:var(--green)}
-.kpi.offline .num{color:var(--red)}
-.kpi.total .num{color:var(--purple)}
-.types{display:grid;gap:8px}
+
+.kpi .num{
+  font-size:23px;
+  line-height:1;
+  font-weight:900;
+}
+
+.kpi .label{
+  margin-top:5px;
+
+  color:var(--muted);
+
+  font-size:8px;
+  font-weight:700;
+}
+
+.kpi.total .num{
+  color:var(--purple);
+}
+
+.kpi.online .num{
+  color:var(--green);
+}
+
+.kpi.offline .num{
+  color:var(--red);
+}
+
+/* =========================================================
+   ONLINE PROGRESS
+========================================================= */
+
+.progress-card{
+  margin-top:8px;
+
+  background:#fff;
+
+  border:1px solid var(--line);
+
+  border-radius:14px;
+
+  padding:11px 12px;
+
+  box-shadow:var(--shadow);
+}
+
+.progress-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  font-size:9px;
+  font-weight:800;
+}
+
+.progress-head span:last-child{
+  color:var(--green);
+}
+
+.progress-track{
+  width:100%;
+  height:7px;
+
+  margin-top:7px;
+
+  background:#ECE9EE;
+
+  border-radius:10px;
+
+  overflow:hidden;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      #2B8A3E,
+      #58B96A
+    );
+
+  border-radius:10px;
+
+  transition:width .6s ease;
+}
+
+/* =========================================================
+   TYPE CARDS
+========================================================= */
+
+.types{
+  display:grid;
+  gap:8px;
+}
+
 .type-card{
-  background:#fff;border:1px solid var(--line);border-radius:15px;padding:12px;
-  box-shadow:0 4px 14px rgba(53,35,70,.05)
+  background:#fff;
+
+  border:1px solid var(--line);
+
+  border-radius:15px;
+
+  padding:12px;
+
+  box-shadow:var(--shadow);
 }
-.type-head{display:flex;align-items:center;gap:10px}
+
+.type-head{
+  display:flex;
+  align-items:center;
+
+  gap:10px;
+}
+
 .type-icon{
-  width:40px;height:40px;border-radius:11px;background:var(--purple-soft);
-  display:grid;place-items:center;color:var(--purple);font-weight:900;font-size:12px
+  width:40px;
+  height:40px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:11px;
+
+  background:var(--purple-soft);
+
+  color:var(--purple);
+
+  font-size:11px;
+  font-weight:900;
 }
-.type-copy{flex:1;min-width:0}
-.type-copy strong{font-size:14px;display:block}
-.type-copy span{font-size:9px;color:var(--muted)}
-.type-total{font-size:19px;font-weight:900;color:var(--purple)}
-.type-counts{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px}
+
+.type-copy{
+  flex:1;
+  min-width:0;
+}
+
+.type-copy strong{
+  display:block;
+
+  font-size:13px;
+  font-weight:900;
+}
+
+.type-copy span{
+  display:block;
+
+  margin-top:2px;
+
+  color:var(--muted);
+
+  font-size:8px;
+}
+
+.type-total{
+  color:var(--purple);
+
+  font-size:19px;
+  font-weight:900;
+}
+
+.type-counts{
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:6px;
+
+  margin-top:9px;
+}
+
 .mini{
-  padding:7px;border-radius:9px;text-align:center;font-size:9px;font-weight:700
+  padding:7px;
+
+  border-radius:9px;
+
+  text-align:center;
+
+  font-size:8px;
+  font-weight:800;
 }
-.mini b{font-size:15px;display:block;margin-bottom:1px}
-.mini.on{background:var(--green-soft);color:var(--green)}
-.mini.off{background:var(--red-soft);color:var(--red)}
-.severity{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+
+.mini b{
+  display:block;
+
+  margin-bottom:2px;
+
+  font-size:14px;
+}
+
+.mini.on{
+  color:var(--green);
+  background:var(--green-soft);
+}
+
+.mini.off{
+  color:var(--red);
+  background:var(--red-soft);
+}
+
+/* =========================================================
+   SEVERITY
+========================================================= */
+
+.severity{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+
+  gap:7px;
+}
+
 .sev{
-  border-radius:13px;padding:10px 5px;text-align:center;border:1px solid
+  border-radius:14px;
+
+  padding:10px 5px;
+
+  text-align:center;
+
+  border:1px solid;
 }
-.sev img{width:27px;height:27px;object-fit:contain;margin:auto auto 4px;display:block}
-.sev b{font-size:18px;display:block;line-height:1}
-.sev span{font-size:8px;display:block;margin-top:4px;line-height:1.25}
-.sev.high{background:var(--red-soft);border-color:#F2C7CD;color:var(--red)}
-.sev.watch{background:var(--orange-soft);border-color:#F3D5A6;color:var(--orange)}
-.sev.follow{background:var(--yellow-soft);border-color:#EAD9A9;color:var(--yellow)}
+
+.sev img{
+  width:29px;
+  height:29px;
+
+  object-fit:contain;
+
+  display:block;
+
+  margin:0 auto 5px;
+}
+
+.sev b{
+  display:block;
+
+  font-size:20px;
+  line-height:1;
+
+  font-weight:900;
+}
+
+.sev span{
+  display:block;
+
+  margin-top:5px;
+
+  font-size:8px;
+  line-height:1.25;
+
+  font-weight:700;
+}
+
+.sev.high{
+  background:var(--red-soft);
+  border-color:#F0C7CD;
+  color:var(--red);
+}
+
+.sev.watch{
+  background:var(--orange-soft);
+  border-color:#F0D3A5;
+  color:var(--orange);
+}
+
+.sev.follow{
+  background:var(--yellow-soft);
+  border-color:#E9D9A7;
+  color:var(--yellow);
+}
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+.filter-wrap{
+  display:flex;
+
+  gap:5px;
+
+  overflow-x:auto;
+
+  padding-bottom:2px;
+
+  scrollbar-width:none;
+}
+
+.filter-wrap::-webkit-scrollbar{
+  display:none;
+}
+
+.filter-btn{
+  flex:none;
+
+  padding:7px 11px;
+
+  border-radius:20px;
+
+  border:1px solid #DCD4E2;
+
+  background:#fff;
+
+  color:#5E5664;
+
+  font-size:9px;
+  font-weight:800;
+
+  cursor:pointer;
+}
+
+.filter-btn.active{
+  color:#fff;
+
+  background:var(--purple);
+
+  border-color:var(--purple);
+}
+
+/* =========================================================
+   ALERT BOX
+========================================================= */
+
 .alert-box{
-  background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px;
-  box-shadow:0 4px 14px rgba(53,35,70,.05)
+  background:#fff;
+
+  border:1px solid var(--line);
+
+  border-radius:16px;
+
+  padding:11px;
+
+  box-shadow:var(--shadow);
 }
+
 .alert-note{
-  background:#F8F6FA;border-radius:10px;padding:9px;font-size:9px;color:var(--muted);
-  line-height:1.5;margin-bottom:8px
+  background:#F8F6FA;
+
+  border-radius:10px;
+
+  padding:9px;
+
+  margin-bottom:8px;
+
+  color:var(--muted);
+
+  font-size:8px;
+
+  line-height:1.5;
 }
+
+/* =========================================================
+   STATION CARD
+========================================================= */
+
 .station{
-  border:1px solid #ECE8EF;border-radius:12px;padding:10px;margin-top:7px;
-  background:#fff
+  position:relative;
+
+  margin-top:8px;
+
+  padding:11px;
+
+  background:#fff;
+
+  border:1px solid #E9E4EC;
+
+  border-radius:13px;
+
+  box-shadow:0 2px 8px rgba(53,35,70,.035);
 }
-.station-top{display:flex;gap:8px;align-items:flex-start}
+
+.station.alert-high{
+  border-left:4px solid var(--red);
+}
+
+.station.alert-watch{
+  border-left:4px solid var(--orange);
+}
+
+.station.alert-follow{
+  border-left:4px solid var(--yellow);
+}
+
+.station-top{
+  display:flex;
+
+  align-items:flex-start;
+
+  gap:8px;
+}
+
 .station-icon{
-  width:34px;height:34px;border-radius:9px;background:var(--red-soft);
-  color:var(--red);display:grid;place-items:center;font-size:15px;flex:none
+  width:34px;
+  height:34px;
+
+  flex:none;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:9px;
+
+  background:var(--red-soft);
+
+  color:var(--red);
+
+  font-size:15px;
 }
-.station-info{flex:1;min-width:0}
-.station-name{font-weight:800;font-size:11px;line-height:1.35}
-.station-meta{font-size:8px;color:var(--muted);margin-top:3px;line-height:1.4}
+
+.station-info{
+  flex:1;
+  min-width:0;
+}
+
+.station-name{
+  font-size:11px;
+
+  line-height:1.4;
+
+  font-weight:900;
+}
+
+.station-meta{
+  margin-top:3px;
+
+  color:var(--muted);
+
+  font-size:8px;
+
+  line-height:1.45;
+}
+
 .badge{
-  font-size:8px;font-weight:800;border-radius:20px;padding:4px 7px;white-space:nowrap
+  flex:none;
+
+  border-radius:20px;
+
+  padding:4px 7px;
+
+  font-size:7px;
+  font-weight:900;
+
+  white-space:nowrap;
 }
-.badge.online{background:var(--green-soft);color:var(--green)}
-.badge.offline{background:var(--red-soft);color:var(--red)}
+
+.badge.online{
+  color:var(--green);
+  background:var(--green-soft);
+}
+
+.badge.offline{
+  color:var(--red);
+  background:var(--red-soft);
+}
+
+/* =========================================================
+   PARAMETER
+========================================================= */
+
 .param{
-  margin-top:8px;padding:7px 8px;background:#FFF8F8;border-left:3px solid var(--red);
-  border-radius:6px;font-size:8px;line-height:1.45;color:#5C343B
+  margin-top:8px;
+
+  padding:8px;
+
+  border-radius:8px;
+
+  background:#FFF7F8;
+
+  border-left:3px solid var(--red);
+
+  color:#5C343B;
+
+  font-size:8px;
+
+  line-height:1.5;
 }
+
+.param-title{
+  display:block;
+
+  margin-bottom:2px;
+
+  color:var(--red);
+
+  font-size:8px;
+
+  font-weight:900;
+}
+
 .comment{
-  margin-top:6px;font-size:8px;line-height:1.45;color:var(--muted)
+  margin-top:7px;
+
+  padding:7px 8px;
+
+  border-radius:8px;
+
+  background:#F8F7F9;
+
+  color:var(--muted);
+
+  font-size:8px;
+
+  line-height:1.5;
 }
-.station-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+
+.comment strong{
+  color:#514956;
+}
+
+/* =========================================================
+   STATION BUTTONS
+========================================================= */
+
+.station-buttons{
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:6px;
+
+  margin-top:8px;
+}
+
 .action{
-  display:block;text-align:center;border-radius:8px;padding:7px;font-size:9px;font-weight:800;
-  border:1px solid #DCD4E2;background:#fff;color:var(--purple)
+  display:block;
+
+  width:100%;
+
+  padding:7px 6px;
+
+  border-radius:8px;
+
+  text-align:center;
+
+  font-size:8px;
+
+  font-weight:900;
+
+  border:1px solid #DCD4E2;
+
+  background:#fff;
+
+  color:var(--purple);
+
+  cursor:pointer;
 }
-.action.primary{background:var(--purple);color:#fff;border-color:var(--purple)}
+
+.action.primary{
+  color:#fff;
+
+  background:var(--purple);
+
+  border-color:var(--purple);
+}
+
+.action.map{
+  color:#176B9D;
+
+  background:var(--blue-soft);
+
+  border-color:#C9E3F2;
+}
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
 .empty{
-  background:var(--green-soft);border:1px solid #CDE8D3;color:var(--green);
-  padding:14px;border-radius:13px;text-align:center;font-size:11px;font-weight:700
+  padding:18px 12px;
+
+  border-radius:13px;
+
+  text-align:center;
+
+  color:var(--green);
+
+  background:var(--green-soft);
+
+  border:1px solid #CDE8D3;
+
+  font-size:10px;
+
+  line-height:1.6;
+
+  font-weight:800;
 }
+
+/* =========================================================
+   EXPORT
+========================================================= */
+
+.export-panel{
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:7px;
+
+  margin-top:10px;
+}
+
+.export-btn{
+  border:0;
+
+  border-radius:11px;
+
+  padding:10px 8px;
+
+  cursor:pointer;
+
+  font-size:9px;
+
+  font-weight:900;
+}
+
+.export-pdf{
+  color:#fff;
+  background:var(--purple);
+}
+
+.export-png{
+  color:#fff;
+  background:#1982C4;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
 .footer{
-  margin-top:15px;text-align:center;color:#8A838E;font-size:8px;line-height:1.6
+  margin-top:17px;
+
+  text-align:center;
+
+  color:#8A838E;
+
+  font-size:8px;
+
+  line-height:1.65;
 }
-.loading,.error{
-  background:#fff;border:1px solid var(--line);border-radius:15px;padding:22px;text-align:center;
-  margin-top:10px;font-size:11px
+
+/* =========================================================
+   LOADING / ERROR
+========================================================= */
+
+.loading,
+.error{
+  margin-top:10px;
+
+  padding:23px;
+
+  background:#fff;
+
+  border:1px solid var(--line);
+
+  border-radius:15px;
+
+  text-align:center;
+
+  font-size:10px;
 }
-.error{color:var(--red)}
-.hidden{display:none!important}
+
+.error{
+  color:var(--red);
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+@media(min-width:700px){
+
+  .page{
+    width:760px;
+  }
+
+  main{
+    padding:18px;
+  }
+
+  .types{
+    grid-template-columns:
+      repeat(3,1fr);
+  }
+
+  .station-list{
+    display:grid;
+
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+
+    gap:8px;
+  }
+
+  .station{
+    margin-top:0;
+  }
+
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
 @media(max-width:370px){
-  main{padding:9px}.hero{padding:15px}.kpi .num{font-size:20px}
-  .type-total{font-size:17px}.severity{gap:5px}.sev{padding:8px 3px}
+
+  main{
+    padding:9px;
+  }
+
+  .hero{
+    padding:15px;
+  }
+
+  .hero h1{
+    font-size:18px;
+  }
+
+  .kpi .num{
+    font-size:20px;
+  }
+
+  .severity{
+    gap:5px;
+  }
+
+  .sev{
+    padding:8px 3px;
+  }
+
+  .sev b{
+    font-size:18px;
+  }
+
 }
+
 </style>
 </head>
+
 <body>
+
 <div class="page">
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
 <header class="header">
+
   <div class="header-row">
-    <img id="logo" class="logo" src="../assets/ieat_logo.png" alt="กนอ."
-         onerror="this.onerror=null;this.src='./assets/ieat_logo.png';">
+
+    <img
+      class="logo"
+      src="../assets/ieat_logo.png"
+      alt="กนอ."
+      onerror="this.onerror=null;this.src='./assets/ieat_logo.png';"
+    >
+
     <div class="brand">
-      <strong>IEAT e-Monitoring</strong>
-      <span>ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย</span>
+
+      <strong>
+        IEAT e-Monitoring
+      </strong>
+
+      <span>
+        ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย
+      </span>
+
     </div>
-    <button class="refresh-btn" onclick="loadStatus()" aria-label="รีเฟรช">↻</button>
+
+    <div class="header-actions">
+
+      <button
+        class="icon-btn"
+        onclick="loadStatus()"
+        aria-label="รีเฟรช"
+        title="รีเฟรชข้อมูล"
+      >
+        ↻
+      </button>
+
+    </div>
+
   </div>
+
 </header>
 
+
 <main>
-  <div id="loading" class="loading">กำลังโหลดข้อมูลสถานการณ์ล่าสุด…</div>
-  <div id="error" class="error hidden">
-    ไม่สามารถโหลดข้อมูลล่าสุดได้<br>
-    <small>กรุณากดปุ่ม ↻ เพื่อโหลดใหม่</small>
-  </div>
 
-  <div id="content" class="hidden">
-    <section class="hero">
-      <div class="hero-top">
-        <div class="hero-icon">📊</div>
-        <div>
-          <h1>สรุปสถานการณ์ล่าสุด</h1>
-          <p>ภาพรวมการเฝ้าระวัง e-Monitoring</p>
-        </div>
-      </div>
-      <div class="hero-time">
-        <span>ข้อมูล ณ</span>
-        <strong id="updatedAt">-</strong>
-      </div>
-    </section>
+<!-- =====================================================
+     LOADING
+===================================================== -->
 
-    <section class="status">
-      <div class="status-main">
-        <div id="statusDot" class="status-dot"></div>
-        <div>
-          <div id="statusTitle" class="status-title">กำลังประมวลผล…</div>
-          <div id="statusSub" class="status-sub">-</div>
-        </div>
-      </div>
-    </section>
-
-    <div class="section-title">ภาพรวมสถานีตรวจวัด</div>
-    <section class="kpis">
-      <article class="kpi total"><div id="total" class="num">0</div><div class="label">สถานีทั้งหมด</div></article>
-      <article class="kpi online"><div id="online" class="num">0</div><div class="label">ONLINE</div></article>
-      <article class="kpi offline"><div id="offline" class="num">0</div><div class="label">OFFLINE</div></article>
-    </section>
-
-    <div class="section-title">แยกตามประเภทสถานี</div>
-    <section id="types" class="types"></section>
-
-    <div class="section-title">ระดับสถานการณ์</div>
-    <section class="severity">
-      <article class="sev high">
-        <img src="../assets/4.png" alt="">
-        <b id="urgent">0</b><span>เกินค่ามาตรฐาน</span>
-      </article>
-      <article class="sev watch">
-        <img src="../assets/3.png" alt="">
-        <b id="watch">0</b><span>เฝ้าระวัง</span>
-      </article>
-      <article class="sev follow">
-        <img src="../assets/1.png" alt="">
-        <b id="follow">0</b><span>ติดตามสถานการณ์</span>
-      </article>
-    </section>
-
-    <div class="section-title">สถานีที่ต้องติดตาม</div>
-    <section class="alert-box">
-      <div id="alertNote" class="alert-note"></div>
-      <div id="stations"></div>
-    </section>
-
-    <div class="section-title">การเข้าถึงระบบ</div>
-    <section class="station-actions">
-      <a id="dashboardBtn" class="action primary" target="_blank" rel="noopener">เปิด Dashboard GIS</a>
-      <button class="action" onclick="loadStatus()">ตรวจสอบข้อมูลล่าสุด</button>
-    </section>
-
-    <div class="footer">
-      IEAT e-Monitoring • ข้อมูลจากระบบ e-Monitoring<br>
-      ระบบจะแสดงข้อมูลล่าสุดที่ GitHub Actions อัปเดตไว้
-    </div>
-  </div>
-</main>
+<div
+  id="loading"
+  class="loading"
+>
+  กำลังโหลดข้อมูลสถานการณ์ล่าสุด…
 </div>
 
+
+<!-- =====================================================
+     ERROR
+===================================================== -->
+
+<div
+  id="error"
+  class="error hidden"
+>
+
+  ไม่สามารถโหลดข้อมูลล่าสุดได้
+
+  <br>
+
+  <small>
+    กรุณากดปุ่ม ↻ เพื่อโหลดใหม่
+  </small>
+
+</div>
+
+
+<!-- =====================================================
+     CONTENT
+===================================================== -->
+
+<div
+  id="content"
+  class="hidden"
+>
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+  <div class="hero-top">
+
+    <div class="hero-icon">
+      📊
+    </div>
+
+    <div>
+
+      <h1>
+        สรุปสถานการณ์ล่าสุด
+      </h1>
+
+      <p>
+        รายงานภาพรวมการเฝ้าระวัง e-Monitoring
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="hero-time">
+
+    <span>
+      ข้อมูล ณ
+    </span>
+
+    <strong id="updatedAt">
+      -
+    </strong>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     CURRENT STATUS
+===================================================== -->
+
+<section class="status">
+
+  <div class="status-main">
+
+    <div
+      id="statusDot"
+      class="status-dot"
+    ></div>
+
+    <div>
+
+      <div
+        id="statusTitle"
+        class="status-title"
+      >
+        กำลังประมวลผล…
+      </div>
+
+      <div
+        id="statusSub"
+        class="status-sub"
+      >
+        -
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     OVERVIEW
+===================================================== -->
+
+<section class="section">
+
+  <div class="section-title">
+    ภาพรวมสถานีตรวจวัด
+  </div>
+
+
+  <div class="kpis">
+
+    <article class="kpi total">
+
+      <div
+        id="total"
+        class="num"
+      >
+        0
+      </div>
+
+      <div class="label">
+        สถานีทั้งหมด
+      </div>
+
+    </article>
+
+
+    <article class="kpi online">
+
+      <div
+        id="online"
+        class="num"
+      >
+        0
+      </div>
+
+      <div class="label">
+        ONLINE
+      </div>
+
+    </article>
+
+
+    <article class="kpi offline">
+
+      <div
+        id="offline"
+        class="num"
+      >
+        0
+      </div>
+
+      <div class="label">
+        OFFLINE
+      </div>
+
+    </article>
+
+  </div>
+
+
+  <div class="progress-card">
+
+    <div class="progress-head">
+
+      <span>
+        สัดส่วนสถานี ONLINE
+      </span>
+
+      <span id="onlinePercent">
+        0%
+      </span>
+
+    </div>
+
+    <div class="progress-track">
+
+      <div
+        id="onlineBar"
+        class="progress-bar"
+      ></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     TYPE
+===================================================== -->
+
+<section class="section">
+
+  <div class="section-title">
+    สถานีตรวจวัดแยกตามประเภท
+  </div>
+
+  <div
+    id="types"
+    class="types"
+  ></div>
+
+</section>
+
+
+<!-- =====================================================
+     SEVERITY
+===================================================== -->
+
+<section class="section">
+
+  <div class="section-title">
+    ระดับการเฝ้าระวัง
+  </div>
+
+
+  <div class="severity">
+
+    <article class="sev high">
+
+      <img
+        src="../assets/4.png"
+        alt="เกินค่ามาตรฐาน"
+      >
+
+      <b id="urgent">
+        0
+      </b>
+
+      <span>
+        เกินค่ามาตรฐาน
+      </span>
+
+    </article>
+
+
+    <article class="sev watch">
+
+      <img
+        src="../assets/3.png"
+        alt="เฝ้าระวัง"
+      >
+
+      <b id="watch">
+        0
+      </b>
+
+      <span>
+        เฝ้าระวัง
+      </span>
+
+    </article>
+
+
+    <article class="sev follow">
+
+      <img
+        src="../assets/1.png"
+        alt="ติดตามสถานการณ์"
+      >
+
+      <b id="follow">
+        0
+      </b>
+
+      <span>
+        ติดตามสถานการณ์
+      </span>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     STATIONS
+===================================================== -->
+
+<section class="section">
+
+  <div class="section-title-row">
+
+    <div class="section-title">
+      รายการสถานีที่ต้องติดตาม
+    </div>
+
+  </div>
+
+
+  <!-- FILTER -->
+
+  <div class="filter-wrap">
+
+    <button
+      class="filter-btn active"
+      data-filter="ALL"
+      onclick="setFilter('ALL',this)"
+    >
+      ทั้งหมด
+    </button>
+
+    <button
+      class="filter-btn"
+      data-filter="AQMs"
+      onclick="setFilter('AQMs',this)"
+    >
+      AQMs
+    </button>
+
+    <button
+      class="filter-btn"
+      data-filter="WQMs"
+      onclick="setFilter('WQMs',this)"
+    >
+      WQMs
+    </button>
+
+    <button
+      class="filter-btn"
+      data-filter="CEMs"
+      onclick="setFilter('CEMs',this)"
+    >
+      CEMs
+    </button>
+
+  </div>
+
+
+  <div
+    class="alert-box"
+    style="margin-top:8px"
+  >
+
+    <div
+      id="alertNote"
+      class="alert-note"
+    ></div>
+
+
+    <div
+      id="stations"
+      class="station-list"
+    ></div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     EXPORT
+===================================================== -->
+
+<section
+  id="exportArea"
+  class="section"
+>
+
+  <div class="section-title">
+    รายงานและการส่งออก
+  </div>
+
+
+  <div class="export-panel">
+
+    <button
+      class="export-btn export-pdf"
+      onclick="exportPDF()"
+    >
+      📄 Export PDF
+    </button>
+
+
+    <button
+      class="export-btn export-png"
+      onclick="exportPNG()"
+    >
+      🖼 Export PNG
+    </button>
+
+  </div>
+
+
+  <div
+    class="export-panel"
+    style="margin-top:7px"
+  >
+
+    <a
+      id="dashboardBtn"
+      class="action primary"
+      target="_blank"
+      rel="noopener"
+    >
+      📊 เปิด Dashboard GIS
+    </a>
+
+
+    <button
+      class="action"
+      onclick="loadStatus()"
+    >
+      ↻ ตรวจสอบข้อมูลล่าสุด
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<div class="footer">
+
+  IEAT e-Monitoring
+
+  • ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย
+
+  <br>
+
+  ข้อมูลจากระบบ e-Monitoring
+
+  <br>
+
+  อัปเดตล่าสุด:
+  <span id="footerUpdated">
+    -
+  </span>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+
 <script>
-const DASHBOARD_URL="https://www.arcgis.com/apps/dashboards/576c71d01cc5403cad90ee330fd67b6e";
-const TYPE_INFO={
-  AQMs:{label:"สถานีตรวจวัดคุณภาพอากาศ",icon:"AQ"},
-  WQMs:{label:"สถานีตรวจวัดคุณภาพน้ำ",icon:"WQ"},
-  CEMs:{label:"สถานีตรวจวัดการระบายมลพิษ",icon:"CE"}
+
+/* =========================================================
+   CONFIG
+========================================================= */
+
+const DASHBOARD_URL =
+  "https://www.arcgis.com/apps/dashboards/576c71d01cc5403cad90ee330fd67b6e";
+
+
+const TYPE_INFO = {
+
+  AQMs:{
+    label:"สถานีตรวจวัดคุณภาพอากาศ",
+    icon:"AQ"
+  },
+
+  WQMs:{
+    label:"สถานีตรวจวัดคุณภาพน้ำ",
+    icon:"WQ"
+  },
+
+  CEMs:{
+    label:"สถานีตรวจวัดการระบายมลพิษ",
+    icon:"CE"
+  }
+
 };
 
-const $=id=>document.getElementById(id);
-const num=v=>Number.isFinite(Number(v))?Number(v):0;
-const fmt=v=>num(v).toLocaleString("th-TH");
-const esc=v=>String(v??"-").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+
+let CURRENT_DATA = null;
+
+let CURRENT_FILTER = "ALL";
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+const $ =
+  id =>
+    document.getElementById(id);
+
+
+const num =
+  value =>
+    Number.isFinite(Number(value))
+      ? Number(value)
+      : 0;
+
+
+const fmt =
+  value =>
+    num(value).toLocaleString("th-TH");
+
+
+const esc =
+  value =>
+    String(value ?? "-")
+      .replace(
+        /[&<>"']/g,
+        m =>
+          ({
+            "&":"&amp;",
+            "<":"&lt;",
+            ">":"&gt;",
+            '"':"&quot;",
+            "'":"&#039;"
+          }[m])
+      );
+
+
+/* =========================================================
+   TYPE DATA
+========================================================= */
 
 function typeData(data,key){
-  const t=(data.type_stats||{})[key]||{};
-  return {total:num(t.total),online:num(t.online),offline:num(t.offline)};
+
+  const t =
+    (data.type_stats || {})[key] || {};
+
+  return {
+
+    total:num(t.total),
+
+    online:num(t.online),
+
+    offline:num(t.offline)
+
+  };
+
 }
+
+
+/* =========================================================
+   RENDER TYPE
+========================================================= */
 
 function renderTypes(data){
-  $("types").innerHTML="";
-  ["AQMs","WQMs","CEMs"].forEach(key=>{
-    const t=typeData(data,key), info=TYPE_INFO[key];
-    $("types").insertAdjacentHTML("beforeend",`
+
+  $("types").innerHTML = "";
+
+
+  [
+    "AQMs",
+    "WQMs",
+    "CEMs"
+  ].forEach(key => {
+
+    const t =
+      typeData(data,key);
+
+    const info =
+      TYPE_INFO[key];
+
+
+    $("types").insertAdjacentHTML(
+      "beforeend",
+
+      `
       <article class="type-card">
+
         <div class="type-head">
-          <div class="type-icon">${info.icon}</div>
-          <div class="type-copy"><strong>${key}</strong><span>${info.label}</span></div>
-          <div class="type-total">${fmt(t.total)}</div>
+
+          <div class="type-icon">
+            ${info.icon}
+          </div>
+
+
+          <div class="type-copy">
+
+            <strong>
+              ${key}
+            </strong>
+
+            <span>
+              ${info.label}
+            </span>
+
+          </div>
+
+
+          <div class="type-total">
+            ${fmt(t.total)}
+          </div>
+
         </div>
+
+
         <div class="type-counts">
-          <div class="mini on"><b>${fmt(t.online)}</b>ONLINE</div>
-          <div class="mini off"><b>${fmt(t.offline)}</b>OFFLINE</div>
+
+          <div class="mini on">
+
+            <b>
+              ${fmt(t.online)}
+            </b>
+
+            ONLINE
+
+          </div>
+
+
+          <div class="mini off">
+
+            <b>
+              ${fmt(t.offline)}
+            </b>
+
+            OFFLINE
+
+          </div>
+
         </div>
-      </article>`);
+
+      </article>
+      `
+    );
+
   });
+
 }
+
+
+/* =========================================================
+   SEVERITY SCORE
+========================================================= */
+
+function severityScore(station){
+
+  const p =
+    String(
+      station.parameter_alarm || ""
+    ).toLowerCase();
+
+
+  if(
+    p.includes("เกิน") ||
+    p.includes("alarm") ||
+    p.includes("exceed")
+  ){
+
+    return 3;
+
+  }
+
+
+  if(
+    p.includes("เฝ้าระวัง") ||
+    p.includes("watch")
+  ){
+
+    return 2;
+
+  }
+
+
+  return 1;
+
+}
+
+
+/* =========================================================
+   RENDER STATIONS
+========================================================= */
 
 function renderStations(data){
-  const stations=Array.isArray(data.stations)?data.stations:[];
-  $("alertNote").textContent=stations.length
-    ? `พบ ${fmt(stations.length)} สถานีที่มีรายการแจ้งเตือนในข้อมูลล่าสุด แสดงรายการเพื่อช่วยติดตามสถานการณ์`
-    : "ขณะนี้ไม่พบสถานีที่มี ParameterAlram ในข้อมูลล่าสุด";
+
+  const allStations =
+    Array.isArray(data.stations)
+      ? data.stations
+      : [];
+
+
+  let stations =
+    allStations.filter(
+      station => {
+
+        if(
+          CURRENT_FILTER === "ALL"
+        ){
+
+          return true;
+
+        }
+
+
+        return String(
+          station.station_type || ""
+        ).toUpperCase()
+        ===
+        CURRENT_FILTER;
+
+      }
+    );
+
+
+  stations.sort(
+    (a,b) =>
+      severityScore(b)
+      -
+      severityScore(a)
+  );
+
+
+  $("alertNote").textContent =
+
+    allStations.length
+
+      ?
+
+      `พบ ${fmt(allStations.length)} สถานีที่มีรายการต้องติดตาม • กรองดูตามประเภท AQMs / WQMs / CEMs ได้`
+
+      :
+
+      "ขณะนี้ไม่พบสถานีที่มี ParameterAlram ในข้อมูลล่าสุด";
+
 
   if(!stations.length){
-    $("stations").innerHTML=`<div class="empty">✓ ไม่พบค่าพารามิเตอร์ที่ต้องแจ้งเตือน<br><span style="font-weight:400;font-size:9px">สถานการณ์อยู่ในภาวะปกติตามข้อมูลล่าสุด</span></div>`;
+
+    $("stations").innerHTML = `
+
+      <div class="empty">
+
+        ✓ ไม่พบสถานีที่ต้องติดตาม
+
+        <br>
+
+        <span
+          style="
+            font-weight:400;
+            font-size:8px;
+          "
+        >
+          สถานการณ์อยู่ในภาวะปกติตามข้อมูลล่าสุด
+        </span>
+
+      </div>
+
+    `;
+
     return;
+
   }
 
-  // แสดงรายการสำคัญก่อน: เกินมาตรฐาน → เฝ้าระวัง → ติดตาม
-  const sorted=[...stations].sort((a,b)=>{
-    const score=s=>{const p=String(s.parameter_alarm||"");const c=p.split(",").filter(x=>x.trim()).length;return c>=3?3:c===2?2:c===1?1:0};
-    return score(b)-score(a);
-  });
 
-  $("stations").innerHTML=sorted.slice(0,12).map((s,i)=>{
-    const type=esc(s.station_type||"-");
-    const status=String(s.status||"").toUpperCase();
-    const alarm=esc(s.parameter_alarm||"-");
-    const comment=esc(s.comment||"");
-    const lat=s.latitude,lon=s.longitude;
-    const map=(lat!=null&&lon!=null)?`https://www.google.com/maps?q=${encodeURIComponent(lat+","+lon)}`:"";
-    return `
-      <article class="station">
-        <div class="station-top">
-          <div class="station-icon">${i<3?"⚠":"•"}</div>
-          <div class="station-info">
-            <div class="station-name">${esc(s.station_name)}</div>
-            <div class="station-meta">${type} • ${esc(s.estate_name||"-")}</div>
-          </div>
-          <span class="badge ${status==="ONLINE"?"online":"offline"}">${esc(status||"-")}</span>
-        </div>
-        <div class="param"><b>ParameterAlram:</b> ${alarm}</div>
-        ${comment?`<div class="comment"><b>ติดตามผล:</b> ${comment}</div>`:""}
-        ${map?`<a class="action" style="margin-top:8px;display:block" href="${map}" target="_blank" rel="noopener">📍 เปิดตำแหน่งสถานี</a>`:""}
-      </article>`;
-  }).join("");
+  $("stations").innerHTML =
 
-  if(sorted.length>12){
-    $("stations").insertAdjacentHTML("beforeend",`
-      <div class="alert-note" style="margin-top:8px;margin-bottom:0;text-align:center">
-        แสดง 12 สถานีแรกที่ควรติดตาม • รายละเอียดทั้งหมดอยู่ใน Dashboard GIS
-      </div>`);
-  }
+    stations
+      .map(
+        (s,index) => {
+
+          const type =
+            String(
+              s.station_type || "-"
+            );
+
+
+          const status =
+            String(
+              s.status || "-"
+            ).toUpperCase();
+
+
+          const alarm =
+            s.parameter_alarm
+            ||
+            s.ParameterAlram
+            ||
+            "-";
+
+
+          const comment =
+            s.comment
+            ||
+            s.Comment
+            ||
+            "";
+
+
+          const stationName =
+            s.station_name
+            ||
+            s.StationTH
+            ||
+            "-";
+
+
+          const industry =
+            s.estate_name
+            ||
+            s.IndustryZone
+            ||
+            "-";
+
+
+          const lat =
+            s.latitude
+            ??
+            s.Latitude;
+
+
+          const lon =
+            s.longitude
+            ??
+            s.Longitude;
+
+
+          const map =
+            lat != null &&
+            lon != null
+
+              ?
+
+              `https://www.google.com/maps?q=${encodeURIComponent(
+                lat + "," + lon
+              )}`
+
+              :
+
+              "";
+
+
+          const score =
+            severityScore(s);
+
+
+          const cardClass =
+            score === 3
+              ? "alert-high"
+              : score === 2
+                ? "alert-watch"
+                : "alert-follow";
+
+
+          const icon =
+            score === 3
+              ? "⚠"
+              : score === 2
+                ? "!"
+                : "•";
+
+
+          return `
+
+          <article
+            class="station ${cardClass}"
+            data-type="${esc(type)}"
+          >
+
+            <div class="station-top">
+
+              <div class="station-icon">
+
+                ${icon}
+
+              </div>
+
+
+              <div class="station-info">
+
+                <div class="station-name">
+
+                  ${esc(stationName)}
+
+                </div>
+
+
+                <div class="station-meta">
+
+                  <b>
+                    ${esc(type)}
+                  </b>
+
+                  •
+                  ${esc(industry)}
+
+                </div>
+
+              </div>
+
+
+              <span
+                class="
+                  badge
+                  ${status === "ONLINE"
+                    ? "online"
+                    : "offline"}
+                "
+              >
+
+                ${esc(status)}
+
+              </span>
+
+            </div>
+
+
+            <div class="param">
+
+              <span class="param-title">
+                ⚠ ParameterAlram
+              </span>
+
+              ${esc(alarm)}
+
+            </div>
+
+
+            ${
+              comment
+                ?
+
+                `
+
+                <div class="comment">
+
+                  <strong>
+                    การติดตามผล / สาเหตุ:
+                  </strong>
+
+                  ${esc(comment)}
+
+                </div>
+
+                `
+
+                :
+
+                ""
+            }
+
+
+            ${
+              map
+
+                ?
+
+                `
+
+                <div class="station-buttons">
+
+                  <a
+                    class="action map"
+                    href="${map}"
+                    target="_blank"
+                    rel="noopener"
+                  >
+
+                    📍 เปิดตำแหน่งสถานี
+
+                  </a>
+
+
+                  <a
+                    class="action primary"
+                    href="${DASHBOARD_URL}"
+                    target="_blank"
+                    rel="noopener"
+                  >
+
+                    📊 ดูใน Dashboard
+
+                  </a>
+
+                </div>
+
+                `
+
+                :
+
+                `
+
+                <div
+                  class="station-buttons"
+                  style="grid-template-columns:1fr"
+                >
+
+                  <a
+                    class="action primary"
+                    href="${DASHBOARD_URL}"
+                    target="_blank"
+                    rel="noopener"
+                  >
+
+                    📊 ดูใน Dashboard
+
+                  </a>
+
+                </div>
+
+                `
+
+            }
+
+          </article>
+
+          `;
+
+        }
+      )
+      .join("");
+
 }
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+function setFilter(
+  filter,
+  button
+){
+
+  CURRENT_FILTER =
+    filter;
+
+
+  document
+    .querySelectorAll(
+      ".filter-btn"
+    )
+    .forEach(
+      btn =>
+        btn.classList.remove(
+          "active"
+        )
+    );
+
+
+  if(button){
+
+    button.classList.add(
+      "active"
+    );
+
+  }
+
+
+  if(CURRENT_DATA){
+
+    renderStations(
+      CURRENT_DATA
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   LOAD STATUS
+========================================================= */
 
 async function loadStatus(){
-  $("loading").classList.remove("hidden");
-  $("error").classList.add("hidden");
-  $("content").classList.add("hidden");
+
+  $("loading")
+    .classList
+    .remove("hidden");
+
+
+  $("error")
+    .classList
+    .add("hidden");
+
+
+  $("content")
+    .classList
+    .add("hidden");
+
 
   try{
-    const r=await fetch("./status.json?t="+Date.now(),{cache:"no-store"});
-    if(!r.ok)throw new Error("HTTP "+r.status);
-    const data=await r.json();
 
-    const total=data.station_count ?? data.station_total ?? 0;
-    const online=data.online_total ?? 0;
-    const offline=data.offline_total ?? 0;
+    const response =
+      await fetch(
+        "./status.json?t="
+        +
+        Date.now(),
+        {
+          cache:"no-store"
+        }
+      );
 
-    $("total").textContent=fmt(total);
-    $("online").textContent=fmt(online);
-    $("offline").textContent=fmt(offline);
-    $("urgent").textContent=fmt(data.urgent_count);
-    $("watch").textContent=fmt(data.watch_count);
-    $("follow").textContent=fmt(data.follow_count);
-    $("updatedAt").textContent=data.updated_at_text || data.updated_at || "-";
 
-    const alert=String(data.status||"").toLowerCase()==="alert" || num(data.alert_station_count)>0;
-    $("statusDot").className="status-dot"+(alert?" alert":"");
-    $("statusTitle").textContent=alert
-      ? `พบสถานีที่ต้องติดตาม ${fmt(data.alert_station_count)} สถานี`
-      : "ไม่พบสถานีที่เข้าเกณฑ์แจ้งเตือน";
-    $("statusSub").textContent=alert
-      ? "กรุณาตรวจสอบระดับสถานการณ์และรายละเอียดสถานีด้านล่าง"
-      : "ระบบ e-Monitoring ไม่พบ ParameterAlram ในข้อมูลล่าสุด";
+    if(!response.ok){
 
-    $("dashboardBtn").href=DASHBOARD_URL;
-    renderTypes(data);
-    renderStations(data);
+      throw new Error(
+        "HTTP "
+        +
+        response.status
+      );
 
-    $("loading").classList.add("hidden");
-    $("content").classList.remove("hidden");
-  }catch(err){
-    console.error(err);
-    $("loading").classList.add("hidden");
-    $("error").classList.remove("hidden");
+    }
+
+
+    const data =
+      await response.json();
+
+
+    CURRENT_DATA =
+      data;
+
+
+    /* =====================================================
+       OVERVIEW
+    ===================================================== */
+
+    const total =
+      data.station_count
+      ??
+      data.station_total
+      ??
+      0;
+
+
+    const online =
+      data.online_total
+      ??
+      0;
+
+
+    const offline =
+      data.offline_total
+      ??
+      0;
+
+
+    $("total").textContent =
+      fmt(total);
+
+
+    $("online").textContent =
+      fmt(online);
+
+
+    $("offline").textContent =
+      fmt(offline);
+
+
+    /* =====================================================
+       ONLINE %
+    ===================================================== */
+
+    const percent =
+      total > 0
+
+        ?
+
+        Math.round(
+          (
+            online
+            /
+            total
+          )
+          *
+          100
+        )
+
+        :
+
+        0;
+
+
+    $("onlinePercent").textContent =
+      percent
+      +
+      "%";
+
+
+    $("onlineBar").style.width =
+      percent
+      +
+      "%";
+
+
+    /* =====================================================
+       SEVERITY
+    ===================================================== */
+
+    $("urgent").textContent =
+      fmt(
+        data.urgent_count
+        ??
+        0
+      );
+
+
+    $("watch").textContent =
+      fmt(
+        data.watch_count
+        ??
+        0
+      );
+
+
+    $("follow").textContent =
+      fmt(
+        data.follow_count
+        ??
+        0
+      );
+
+
+    /* =====================================================
+       TIME
+    ===================================================== */
+
+    const updated =
+      data.updated_at_text
+      ||
+      data.updated_at
+      ||
+      "-";
+
+
+    $("updatedAt").textContent =
+      updated;
+
+
+    $("footerUpdated").textContent =
+      updated;
+
+
+    /* =====================================================
+       CURRENT STATUS
+    ===================================================== */
+
+    const alert =
+      String(
+        data.status || ""
+      ).toLowerCase()
+      ===
+      "alert"
+
+      ||
+
+      num(
+        data.alert_station_count
+      )
+      >
+      0;
+
+
+    $("statusDot")
+      .className =
+      "status-dot"
+      +
+      (
+        alert
+          ? " alert"
+          : ""
+      );
+
+
+    $("statusTitle").textContent =
+
+      alert
+
+        ?
+
+        `พบสถานีที่ต้องติดตาม ${fmt(
+          data.alert_station_count
+        )} สถานี`
+
+        :
+
+        "สถานการณ์โดยรวมอยู่ในภาวะปกติ";
+
+
+    $("statusSub").textContent =
+
+      alert
+
+        ?
+
+        "กรุณาตรวจสอบรายละเอียดสถานีและพารามิเตอร์ด้านล่าง"
+
+        :
+
+        "ระบบ e-Monitoring ไม่พบรายการที่เข้าเกณฑ์แจ้งเตือนในข้อมูลล่าสุด";
+
+
+    /* =====================================================
+       DASHBOARD
+    ===================================================== */
+
+    $("dashboardBtn").href =
+      DASHBOARD_URL;
+
+
+    /* =====================================================
+       RENDER
+    ===================================================== */
+
+    renderTypes(
+      data
+    );
+
+
+    renderStations(
+      data
+    );
+
+
+    $("loading")
+      .classList
+      .add("hidden");
+
+
+    $("content")
+      .classList
+      .remove("hidden");
+
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+
+    $("loading")
+      .classList
+      .add("hidden");
+
+
+    $("error")
+      .classList
+      .remove("hidden");
+
   }
+
 }
+
+
+/* =========================================================
+   EXPORT PDF
+========================================================= */
+
+function exportPDF(){
+
+  const oldTitle =
+    document.title;
+
+
+  document.title =
+    "IEAT e-Monitoring - รายงานสรุปสถานการณ์ล่าสุด";
+
+
+  window.print();
+
+
+  setTimeout(
+    () => {
+
+      document.title =
+        oldTitle;
+
+    },
+    1000
+  );
+
+}
+
+
+/* =========================================================
+   EXPORT PNG
+========================================================= */
+
+async function exportPNG(){
+
+  if(
+    typeof html2canvas ===
+    "undefined"
+  ){
+
+    alert(
+      "ไม่สามารถโหลดระบบ Export PNG ได้ กรุณาลองใหม่อีกครั้ง"
+    );
+
+    return;
+
+  }
+
+
+  const content =
+    document.getElementById(
+      "content"
+    );
+
+
+  if(!content){
+
+    return;
+
+  }
+
+
+  const oldWidth =
+    content.style.width;
+
+
+  try{
+
+    content.style.width =
+      "100%";
+
+
+    const canvas =
+      await html2canvas(
+        content,
+        {
+          scale:2,
+
+          useCORS:true,
+
+          backgroundColor:
+            "#F5F3F6",
+
+          logging:false
+        }
+      );
+
+
+    const link =
+      document.createElement(
+        "a"
+      );
+
+
+    const date =
+      new Date()
+        .toISOString()
+        .slice(
+          0,
+          10
+        );
+
+
+    link.download =
+      `IEAT_e-Monitoring_${date}.png`;
+
+
+    link.href =
+      canvas.toDataURL(
+        "image/png"
+      );
+
+
+    link.click();
+
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+
+    alert(
+      "เกิดข้อผิดพลาดในการ Export PNG"
+    );
+
+
+  }finally{
+
+    content.style.width =
+      oldWidth;
+
+  }
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
 loadStatus();
+
 </script>
+
+
+<!-- =======================================================
+     PRINT STYLE
+======================================================= -->
+
+<style>
+
+@media print{
+
+  @page{
+
+    size:A4;
+
+    margin:10mm;
+
+  }
+
+
+  html,
+  body{
+
+    background:#fff!important;
+
+  }
+
+
+  body{
+
+    -webkit-print-color-adjust:exact!important;
+
+    print-color-adjust:exact!important;
+
+  }
+
+
+  .page{
+
+    width:100%!important;
+
+    max-width:none!important;
+
+    padding:0!important;
+
+  }
+
+
+  .header{
+
+    position:static!important;
+
+    padding:0 0 8px!important;
+
+    background:#fff!important;
+
+    box-shadow:none!important;
+
+  }
+
+
+  .header-actions,
+  .filter-wrap,
+  .export-panel,
+  .action,
+  .station-buttons,
+  #loading,
+  #error{
+
+    display:none!important;
+
+  }
+
+
+  main{
+
+    padding:0!important;
+
+  }
+
+
+  .hero{
+
+    box-shadow:none!important;
+
+    border-radius:10px!important;
+
+  }
+
+
+  .status,
+  .kpi,
+  .progress-card,
+  .type-card,
+  .alert-box,
+  .station{
+
+    box-shadow:none!important;
+
+  }
+
+
+  .station-list{
+
+    display:grid!important;
+
+    grid-template-columns:
+      1fr 1fr;
+
+    gap:7px;
+
+  }
+
+
+  .station{
+
+    break-inside:avoid;
+
+    page-break-inside:avoid;
+
+  }
+
+
+  .section{
+
+    break-inside:auto;
+
+  }
+
+
+  .footer{
+
+    margin-top:10px;
+
+  }
+
+}
+
+</style>
+
 </body>
 </html>
 '''
