@@ -1,44 +1,187 @@
 {
-  "status": "watch",
-  "status_text": "ไม่พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน",
-  "description": "ยังไม่มีสถานี ONLINE สำหรับตรวจสอบสถานการณ์",
-  "updated_at": "5 ส.ค. 2569 เวลา 09:48 น.",
-  "data_last_update": null,
-  "data_is_today": false,
-  "stale_online_total": 104,
+  "status": "alert",
+  "status_text": "พบค่าพารามิเตอร์ที่เข้าเงื่อนไขแจ้งเตือน",
+  "description": "ระบบตรวจพบสถานี ONLINE ที่มี ParameterAlram จากข้อมูลล่าสุดในแหล่งข้อมูล e-Monitoring",
+  "updated_at": "2026-08-05T09:58:44.682539+07:00",
+  "updated_at_text": "5 ส.ค. 2569 เวลา 09:58 น.",
+  "data_source_url": "https://emonitor.ieat.go.th/call_feed/geog/GeoData/station_all.json",
   "online_total": 104,
-  "offline_total": 69,
-  "station_total": 173,
-  "online_aqms": 14,
+  "online_aqms": 0,
   "online_wqms": 13,
   "online_cems": 77,
-  "station_types": {
-    "AQMs": {
-      "total": 60,
-      "online": 14,
-      "offline": 46
-    },
-    "WQMs": {
-      "total": 17,
-      "online": 13,
-      "offline": 4
-    },
-    "CEMs": {
-      "total": 96,
-      "online": 77,
-      "offline": 19
-    },
-    "Other": {
-      "total": 0,
-      "online": 0,
-      "offline": 0
-    }
-  },
-  "alert_station_count": 0,
-  "parameter_count": 0,
-  "estate_count": 0,
+  "online_other": 14,
+  "station_count": 173,
+  "alert_station_count": 15,
+  "parameter_count": 15,
+  "estate_count": 5,
   "urgent_count": 0,
-  "watch_count": 0,
+  "watch_count": 15,
   "follow_count": 0,
-  "stations": []
+  "stations": [
+    {
+      "code": "33",
+      "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณอนามัยตากวน",
+      "estate_name": "มาบตาพุด",
+      "station_type": "AIR QUALITY",
+      "status": "ONLINE",
+      "last_update": "10 ก.ค. 2569, 15:00",
+      "parameter_alarm": "26-07-10 15:00 (SO2 115.67 (Cail) ppb) , 26-07-10 14:00 (SO2 148.64 (Cail) ppb)",
+      "longitude": 101.168528,
+      "latitude": 12.680425
+    },
+    {
+      "code": "40",
+      "station_name": "สถานีตรวจวัดคุณภาพอากาศบ้านพัก ปตท.",
+      "estate_name": "มาบตาพุด",
+      "station_type": "AIR QUALITY",
+      "status": "ONLINE",
+      "last_update": "10 ก.ค. 2569, 15:00",
+      "parameter_alarm": "26-07-09 23:00 (PM10 109.37 (Cail) ug./m3)",
+      "longitude": 101.169013,
+      "latitude": 12.769857
+    },
+    {
+      "code": "41",
+      "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริวเณวัดมาบชลูด",
+      "estate_name": "มาบตาพุด",
+      "station_type": "AIR QUALITY",
+      "status": "ONLINE",
+      "last_update": "10 ก.ค. 2569, 15:00",
+      "parameter_alarm": "26-07-09 21:00 (PM10 101.72 (Cail) ug./m3)",
+      "longitude": 101.127466,
+      "latitude": 12.722455
+    },
+    {
+      "code": "82",
+      "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณชุมชนเนินพะยอม",
+      "estate_name": "มาบตาพุด",
+      "station_type": "AIR QUALITY",
+      "status": "ONLINE",
+      "last_update": "10 ก.ค. 2569, 15:00",
+      "parameter_alarm": "26-07-10 15:00 (CO 44.48 ppmO3 1003.62 ppb) , 26-07-10 14:00 (CO 43.03 ppmO3 1004.32 ppb) , 26-07-10 13:00 (CO 43.6 ppmO3 1004.89 ppb) , 26-07-10 12:00 (CO 48.21 ppmO3 1005.37 ppb) , 26-07-10 11:00 (CO 50.58 ppmO3 1005.86 ppb) , 26-07-10 10:00 (CO 52.95 ppmO3 1006.17 ppb) , 26-07-10 09:00 (CO 58.06 ppmO3 1006.01 ppb) , 26-07-10 08:00 (CO 62.53 ppmO3 1005.79 ppb) , 26-07-10 07:00 (CO 64.06 ppmO3 1005.4 ppb) , 26-07-10 06:00 (CO 63.35 ppmO3 1004.94 ppb) , 26-07-10 05:00 (CO 65.16 ppmO3 1004.84 ppb) , 26-07-10 04:00 (CO 66.71 ppmO3 1004.6 ppb) , 26-07-10 03:00 (CO 67.02 ppmO3 1004.82 ppb) , 26...",
+      "longitude": 101.178715,
+      "latitude": 12.756908
+    },
+    {
+      "code": "150",
+      "station_name": "สถานีตรวจวัดคุณภาพอากาศ นิคมฯ เอเชีย",
+      "estate_name": "เอเชีย",
+      "station_type": "AIR QUALITY",
+      "status": "ONLINE",
+      "last_update": "10 ก.ค. 2569, 15:00",
+      "parameter_alarm": "26-07-09 21:00 (O3 178.71 (Cail) ppb) , 26-07-09 20:00 (SO2 167.29 (Cail) ppb)",
+      "longitude": 101.101223,
+      "latitude": 12.69404
+    },
+    {
+      "code": "168",
+      "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณหนองเสือเกือก",
+      "estate_name": "มาบตาพุด",
+      "station_type": "AIR QUALITY",
+      "status": "ONLINE",
+      "last_update": "10 ก.ค. 2569, 15:00",
+      "parameter_alarm": "26-07-09 22:00 (O3 171.76 (Cail) ppb) , 26-07-09 21:00 (SO2 143.39 (Cail) ppb)",
+      "longitude": 101.1587598,
+      "latitude": 12.7165282
+    },
+    {
+      "code": "98",
+      "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณวัดพยูน",
+      "estate_name": "มาบตาพุด",
+      "station_type": "AIR QUALITY",
+      "status": "ONLINE",
+      "last_update": "10 ก.ค. 2569, 15:00",
+      "parameter_alarm": "26-07-10 14:00 (SO2 118.68 ppbCO 102.89 (Cail) ppm) , 26-07-10 12:00 (PM10 398.3 mg/m3)",
+      "longitude": 101.066698,
+      "latitude": 12.678494
+    },
+    {
+      "code": "281",
+      "station_name": "เทศบาลเมืองมาบตาพุด",
+      "estate_name": "มาบตาพุด",
+      "station_type": "AIR QUALITY",
+      "status": "ONLINE",
+      "last_update": "10 ก.ค. 2569, 15:00",
+      "parameter_alarm": "26-07-10 15:00 (PM10 999.67 (Cail) ug./m3) , 26-07-10 14:00 (PM10 999.76 (Cail) ug./m3) , 26-07-10 13:00 (PM10 999.79 (Cail) ug./m3) , 26-07-10 12:00 (PM10 999.72 (Cail) ug./m3) , 26-07-10 11:00 (PM10 999.69 (Cail) ug./m3) , 26-07-10 10:00 (PM10 999.73 (Cail) ug./m3) , 26-07-10 09:00 (PM10 999.79 (Cail) ug./m3) , 26-07-10 08:00 (PM10 999.8 (Cail) ug./m3) , 26-07-10 07:00 (PM10 999.82 (Cail) ug./m3) , 26-07-10 06:00 (PM10 967.33 (Cail) ug./m3) , 26-07-10 03:00 (O3 173.2 (Cail) ppb) , 26-07-10 02:00 (SO2 147.36 (Cail) ppbNO2 144.44 (Cail) ppb)",
+      "longitude": 101.12726,
+      "latitude": 12.725179
+    },
+    {
+      "code": "327",
+      "station_name": "บางปู เอ็นไวรอนเมนทอล คอมเพล็กส์",
+      "estate_name": "บางปู",
+      "station_type": "CEMs",
+      "status": "ONLINE",
+      "last_update": "10 ก.ค. 2569, 15:34",
+      "parameter_alarm": "26-07-10 14:45 (Opacity 10.01 %) , 26-07-10 14:41 (Opacity 12.35 %) , 26-07-10 14:24 (Opacity 10.92 %) , 26-07-10 14:08 (Opacity 14.97 %) , 26-07-10 14:06 (Opacity 10.82 %) , 26-07-10 13:55 (Opacity 13.12 %) , 26-07-10 13:39 (HCL 46.76 mg/m3) , 26-07-10 13:35 (HCL 62.6 mg/m3) , 26-07-10 13:34 (HCL 63.1 mg/m3) , 26-07-10 13:18 (HCL 46.79 mg/m3) , 26-07-10 13:02 (Opacity 10.04 %) , 26-07-10 12:44 (HCL 40.91 mg/m3) , 26-07-10 12:28 (HCL 44.51 mg/m3) , 26-07-10 10:52 (HCL 45.68 mg/m3) , 26-07-10 10:47 (HCL 44.82 mg/m3) , 26-07-10 10:01 (HCL 44.22 mg/m3) , 26-07-10 09:41 (Opacity 12.32 %) , 26-0...",
+      "longitude": 100.6559003509614,
+      "latitude": 13.538084845535455
+    },
+    {
+      "code": "218",
+      "station_name": "โรงไฟฟ้าตาสิทธิ์ 2",
+      "estate_name": "อีสเทิร์นซีบอร์ด(ระยอง)",
+      "station_type": "CEMs",
+      "status": "ONLINE",
+      "last_update": "10 ก.ค. 2569, 15:00",
+      "parameter_alarm": "26-07-10 09:00 (HRSG1_SO2 6.56 ppm)",
+      "longitude": 101.194836,
+      "latitude": 13.017426
+    },
+    {
+      "code": "220",
+      "station_name": "บจก.กัลฟ์ ทีเอส 4",
+      "estate_name": "ดับบลิวเอชเอ อีสเทิร์นซีบอร์ด",
+      "station_type": "CEMs",
+      "status": "ONLINE",
+      "last_update": "10 ก.ค. 2569, 15:00",
+      "parameter_alarm": "26-07-10 09:00 (HRSG1_SO2 49.33 (Defective) ppm)",
+      "longitude": 101.18642,
+      "latitude": 13.066
+    },
+    {
+      "code": "111",
+      "station_name": "บมจ.พีทีที โกลบอล เคมิคอล",
+      "estate_name": "มาบตาพุด",
+      "station_type": "CEMs",
+      "status": "ONLINE",
+      "last_update": "10 ก.ค. 2569, 10:00",
+      "parameter_alarm": "26-07-10 09:00 (H3701-Nox@7% 249 (Cail) ppm) , 26-07-10 08:00 (H3701-Nox@7% 188.92 (Cail) ppm)",
+      "longitude": 101.140351,
+      "latitude": 12.702934
+    },
+    {
+      "code": "74",
+      "station_name": "บมจ.พีทีที โกลบอล เคมิคอล",
+      "estate_name": "มาบตาพุด",
+      "station_type": "CEMs",
+      "status": "ONLINE",
+      "last_update": "10 ก.ค. 2569, 15:00",
+      "parameter_alarm": "26-07-10 15:00 (PTTGC4_432H1_SO2@7% 29.57 (Cail) ppm) , 26-07-10 14:00 (PTTGC4_432H1_SO2@7% 29.05 (Cail) ppm) , 26-07-10 13:00 (PTTGC4_432H1_SO2@7% 27.82 (Cail) ppm) , 26-07-10 12:00 (PTTGC4_432H1_SO2@7% 27.09 (Cail) ppm) , 26-07-10 11:00 (PTTGC4_432H1_SO2@7% 27.39 (Cail) ppm) , 26-07-10 10:00 (PTTGC4_432H1_SO2@7% 26.91 (Cail) ppm) , 26-07-10 09:00 (PTTGC4_432H1_SO2@7% 25.15 (Cail) ppm)",
+      "longitude": 101.155994,
+      "latitude": 12.678777
+    },
+    {
+      "code": "49",
+      "station_name": "บจก.ดาวเคมิคอลประเทศไทย",
+      "estate_name": "มาบตาพุด",
+      "station_type": "CEMs",
+      "status": "ONLINE",
+      "last_update": "10 ก.ค. 2569, 15:00",
+      "parameter_alarm": "26-07-10 15:00 (NOx_SPE II 32.16 (Cail) ppm) , 26-07-10 11:00 (NOx@7%O2_LTX 117.17 (Cail) ppm) , 26-07-10 05:00 (NOx_SPE II 400.07 (Cail) ppm) , 26-07-10 03:00 (NOx_SPE II 46.07 (Cail) ppm) , 26-07-09 19:00 (NOx_SPE II 310.66 (Cail) ppm) , 26-07-09 18:00 (NOx_SPE II 96.1 (Cail) ppm) , 26-07-09 17:00 (NOx_SPE II 141.17 (Cail) ppm) , 26-07-09 16:00 (NOx_SPE II 213.61 (Cail) ppm)",
+      "longitude": 101.152872,
+      "latitude": 12.695623
+    },
+    {
+      "code": "23",
+      "station_name": "บมจ.พีทีที โกลบอล เคมิคอล",
+      "estate_name": "มาบตาพุด",
+      "station_type": "CEMs",
+      "status": "ONLINE",
+      "last_update": "10 ก.ค. 2569, 10:00",
+      "parameter_alarm": "26-07-09 17:00 (F1020-NOx@7% 36.03 (Cail) ppm)",
+      "longitude": 101.14769,
+      "latitude": 12.695901
+    }
+  ]
 }
