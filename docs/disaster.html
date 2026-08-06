@@ -69,6 +69,31 @@
         }
         @media (max-width: 859px) { .map-panel { margin-bottom: 2px; } }
         @media (max-width: 480px) { .header { padding: 14px; } .logo { width: 60px; height: 60px; } .header-title { font-size: 20px; } .content { padding: 12px; } #map { height: 390px; } .summary-grid { gap: 7px; } .summary-number { font-size: 21px; } .summary-label { font-size: 10px; } .buttons { grid-template-columns: 1fr; } }
+        /* Preferred color theme — colors only */
+        body { background: #F1EDF4; color: #30283A; }
+        .page { background: #FAF8FC; }
+        .header {
+            color: #FFFFFF;
+            background: linear-gradient(135deg, #59267C 0%, #6B3F91 48%, #0769AD 100%);
+            border-bottom-color: #4D286F;
+        }
+        .header-title { color: #FFFFFF; }
+        .header-subtitle { color: rgba(255,255,255,.84); }
+        .notice { color: #30283A; background: #F2EDF7; border-left-color: #6B3F91; }
+        .section-title, .source-title, .map-caption strong { color: #4D286F; }
+        .map-panel, .summary-card, .source-card { border-color: #D9C9E7; }
+        #map { background: #E8F5FF; }
+        .summary-card:nth-child(1) .summary-number { color: #59267C; }
+        .summary-card:nth-child(2) .summary-number { color: #0769AD; }
+        .summary-card:nth-child(3) .summary-number { color: #159B6B; }
+        .source-card.flood, .source-card.weather { border-left-color: #0769AD; }
+        .source-card.earthquake, .source-card.fire, .source-card.alert { border-left-color: #59267C; }
+        .source-card.drought { border-left-color: #159B6B; }
+        .button-primary { color: #FFFFFF; background: #59267C; }
+        .button-secondary { color: #0769AD; background: #E8F5FF; }
+        .disaster-tabs { border-bottom-color: #D9C9E7; }
+        .tab.active { color: #FFFFFF; background: linear-gradient(135deg, #59267C, #0769AD); }
+        .map-caption, .summary-label, .source-description, .live-status, .updated, .tab { color: #746B7B; }
     </style>
 </head>
 <body>
