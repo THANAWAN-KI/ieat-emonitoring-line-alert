@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#59267C">
 
-<title>IEAT e-Monitoring | สรุปสถานการณ์ล่าสุด</title>
+<title>รายงานสถานะสถานีตรวจวัด | ระบบติดตามตรวจสอบสิ่งแวดล้อม</title>
 
 <style>
 
@@ -1242,6 +1242,47 @@ body{background:#F1EDF4!important;color:#30283A!important}
 .action.primary,.export-pdf{background:#59267C!important}.action.map{color:#0769AD!important;background:#E8F5FF!important;border-color:#B9D9EF!important}
 .export-png{color:#FFFFFF!important;background:#159B6B!important;border-color:#159B6B!important}
 .footer{color:#FFFFFF!important;background:#4D286F!important}
+
+/* ธีมเดียวกับข้อความแจ้งเตือนในไลน์ */
+:root{
+  --purple:#4E1478;
+  --purple2:#6F3B91;
+  --purple3:#6F3B91;
+  --purple-soft:#F8F4FB;
+  --green:#2B8A3E;
+  --green-soft:#F1F8F3;
+  --red:#C51F35;
+  --red-soft:#FFF1F3;
+  --orange:#E67700;
+  --orange-soft:#FFF8E8;
+  --blue:#4E1478;
+  --blue-soft:#F8F4FB;
+  --ink:#30283A;
+  --muted:#716C6B;
+  --line:#DCCBEA;
+  --bg:#F4F1F6;
+}
+body{background:#F4F1F6!important}
+.page{background:#FFFFFF!important}
+.header{background:#FFFFFF!important;border-bottom:5px solid #4E1478!important}
+.brand strong{color:#4E1478!important}.brand span{color:#716C6B!important}
+.hero{background:linear-gradient(135deg,#35105D 0%,#4E1478 58%,#6F3B91 100%)!important;border-left:0!important}
+.status{border-left-color:#4E1478!important}
+.kpi.total .num{color:#4E1478!important}
+.kpi.online .num{color:#2B8A3E!important}
+.kpi.offline .num{color:#C51F35!important}
+.progress-bar{background:#2B8A3E!important}
+.mini.on{color:#2B8A3E!important;background:#F1F8F3!important}
+.mini.off{color:#C51F35!important;background:#FFF1F3!important}
+.badge.online{color:#2B8A3E!important;background:#F1F8F3!important}
+.badge.offline{color:#C51F35!important;background:#FFF1F3!important}
+.status-dot.alert{background:#E67700!important;box-shadow:0 0 0 5px #FFF8E8!important}
+.decision-item{border-left-color:#4E1478!important}
+.decision-item.green{border-left-color:#2B8A3E!important}
+.decision-item strong{color:#4E1478!important}.decision-item.green strong{color:#2B8A3E!important}
+.status-filter-btn.active{background:#4E1478!important;border-color:#4E1478!important}
+.filter-btn.active{background:#4E1478!important;border-color:#4E1478!important}
+.footer{background:#35105D!important}
 </style>
 </head>
 
@@ -1259,7 +1300,7 @@ body{background:#F1EDF4!important;color:#30283A!important}
 
     <img
       class="logo"
-      src="./factory-svgrepo-com.png"
+      src="./assets/factory-svgrepo-com.png"
       alt="กนอ."
       onerror="this.style.display='none';"
     >
@@ -1267,7 +1308,7 @@ body{background:#F1EDF4!important;color:#30283A!important}
     <div class="brand">
 
       <strong>
-        IEAT e-Monitoring
+        ระบบติดตามตรวจสอบสิ่งแวดล้อม
       </strong>
 
       <span>
@@ -1335,11 +1376,11 @@ body{background:#F1EDF4!important;color:#30283A!important}
     <div>
 
       <h1>
-        สรุปสถานการณ์ล่าสุด
+        รายงานสถานะสถานีตรวจวัด
       </h1>
 
       <p>
-        รายงานภาพรวมการเฝ้าระวัง e-Monitoring
+        สรุปความพร้อมของข้อมูลออนไลน์และออฟไลน์ พร้อมรายละเอียดรายสถานี
       </p>
 
     </div>
@@ -1357,6 +1398,11 @@ body{background:#F1EDF4!important;color:#30283A!important}
       -
     </strong>
 
+  </div>
+
+  <div class="hero-time">
+    <span>ข้อมูลสถานีล่าสุด</span>
+    <strong id="latestDataTime">-</strong>
   </div>
 
 </section>
@@ -1437,7 +1483,7 @@ body{background:#F1EDF4!important;color:#30283A!important}
       </div>
 
       <div class="label">
-        ONLINE
+        ออนไลน์
       </div>
 
     </article>
@@ -1453,7 +1499,7 @@ body{background:#F1EDF4!important;color:#30283A!important}
       </div>
 
       <div class="label">
-        OFFLINE
+        ออฟไลน์
       </div>
 
     </article>
@@ -1466,7 +1512,7 @@ body{background:#F1EDF4!important;color:#30283A!important}
     <div class="progress-head">
 
       <span>
-        สัดส่วนสถานี ONLINE
+        สัดส่วนสถานีที่ออนไลน์
       </span>
 
       <span id="onlinePercent">
@@ -1583,7 +1629,7 @@ body{background:#F1EDF4!important;color:#30283A!important}
   <div class="section-title-row">
 
     <div class="section-title">
-      รายการสถานีที่ต้องติดตาม
+      รายละเอียดสถานีตรวจวัด
     </div>
 
   </div>
@@ -1631,8 +1677,8 @@ body{background:#F1EDF4!important;color:#30283A!important}
     <input id="stationSearch" class="station-search" type="search" placeholder="ค้นหาชื่อสถานี นิคมฯ หรือพารามิเตอร์" oninput="setStationSearch(this.value)">
     <div class="status-filter" aria-label="กรองตามสถานะ">
       <button class="status-filter-btn active" onclick="setStatusFilter('ALL',this)">ทุกสถานะ</button>
-      <button class="status-filter-btn" onclick="setStatusFilter('ONLINE',this)">ONLINE</button>
-      <button class="status-filter-btn" onclick="setStatusFilter('OFFLINE',this)">OFFLINE</button>
+      <button class="status-filter-btn" onclick="setStatusFilter('ONLINE',this)">ออนไลน์</button>
+      <button class="status-filter-btn" onclick="setStatusFilter('OFFLINE',this)">ออฟไลน์</button>
     </div>
   </div>
 
@@ -1664,13 +1710,13 @@ body{background:#F1EDF4!important;color:#30283A!important}
 
 <div class="footer">
 
-  IEAT e-Monitoring
+  ระบบติดตามตรวจสอบสิ่งแวดล้อม
 
   • ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย
 
   <br>
 
-  ข้อมูลจากระบบ e-Monitoring
+  ข้อมูลจากระบบติดตามตรวจสอบสิ่งแวดล้อม
 
   <br>
 
@@ -1836,7 +1882,7 @@ function renderTypes(data){
               ${fmt(t.online)}
             </b>
 
-            ONLINE
+            ออนไลน์
 
           </div>
 
@@ -1847,7 +1893,7 @@ function renderTypes(data){
               ${fmt(t.offline)}
             </b>
 
-            OFFLINE
+            ออฟไลน์
 
           </div>
 
@@ -1907,9 +1953,16 @@ function severityScore(station){
 function renderStations(data){
 
   const allStations =
-    Array.isArray(data.stations)
-      ? data.stations
-      : [];
+    Array.isArray(data.all_stations)
+      ? data.all_stations
+      : Array.isArray(data.station_details)
+        ? data.station_details
+        : Array.isArray(data.stations)
+          ? data.stations
+          : [];
+
+  const hasCompleteDetails =
+    allStations.length >= num(data.station_count ?? data.station_total);
 
 
   let stations =
@@ -1949,11 +2002,13 @@ function renderStations(data){
 
       ?
 
-      `แสดง ${fmt(stations.length)} จาก ${fmt(allStations.length)} สถานีที่ต้องติดตาม • เรียงรายการเร่งด่วนก่อน`
+      hasCompleteDetails
+        ? `แสดง ${fmt(stations.length)} จาก ${fmt(allStations.length)} สถานี • เลือกกรองตามประเภทหรือสถานะได้`
+        : `แสดงรายละเอียด ${fmt(stations.length)} สถานีที่มีอยู่ในไฟล์ข้อมูล • ภาพรวมออนไลน์และออฟไลน์แสดงจากสถานีทั้งหมด`
 
       :
 
-      "ขณะนี้ไม่พบสถานีที่มี ParameterAlram ในข้อมูลล่าสุด";
+      "ไม่พบสถานีที่ตรงกับตัวกรองในข้อมูลล่าสุด";
 
 
   if(!stations.length){
@@ -1962,7 +2017,7 @@ function renderStations(data){
 
       <div class="empty">
 
-        ✓ ไม่พบสถานีที่ต้องติดตาม
+        ไม่พบข้อมูลสถานีที่ตรงกับเงื่อนไข
 
         <br>
 
@@ -1972,7 +2027,7 @@ function renderStations(data){
             font-size:8px;
           "
         >
-          สถานการณ์อยู่ในภาวะปกติตามข้อมูลล่าสุด
+          กรุณาเปลี่ยนตัวกรองหรือตรวจสอบข้อมูลต้นทาง
         </span>
 
       </div>
@@ -2030,6 +2085,15 @@ function renderStations(data){
             s.estate_name
             ||
             s.IndustryZone
+            ||
+            "-";
+
+          const lastUpdate =
+            s.last_update
+            ||
+            s.LastUpdate
+            ||
+            s.datetime
             ||
             "-";
 
@@ -2100,6 +2164,9 @@ function renderStations(data){
                   •
                   ${esc(industry)}
 
+                  <br>
+                  ข้อมูลล่าสุด: ${esc(lastUpdate)}
+
                 </div>
 
               </div>
@@ -2114,7 +2181,7 @@ function renderStations(data){
                 "
               >
 
-                ${esc(status)}
+                ${status === "ONLINE" ? "ออนไลน์" : status === "OFFLINE" ? "ออฟไลน์" : esc(status)}
 
               </span>
 
@@ -2124,7 +2191,7 @@ function renderStations(data){
             <div class="param">
 
               <span class="param-title">
-                Parameter Alarm
+                พารามิเตอร์ที่แจ้งเตือน
               </span>
 
               ${esc(alarm)}
@@ -2357,7 +2424,7 @@ async function loadStatus(){
 
     $("priorityText").textContent =
       offline > 0
-        ? `ตรวจสอบ OFFLINE ${fmt(offline)} สถานี`
+        ? `ตรวจสอบสถานีออฟไลน์ ${fmt(offline)} สถานี`
         : num(data.urgent_count) > 0
           ? `ตรวจสอบค่าที่เกิน ${fmt(data.urgent_count)} รายการ`
           : "ไม่มีงานเร่งด่วน";
@@ -2405,6 +2472,9 @@ async function loadStatus(){
 
     $("updatedAt").textContent =
       updated;
+
+    $("latestDataTime").textContent =
+      data.latest_data_time || updated;
 
 
     $("footerUpdated").textContent =
@@ -2467,7 +2537,7 @@ async function loadStatus(){
 
         :
 
-        "ระบบ e-Monitoring ไม่พบรายการที่เข้าเกณฑ์แจ้งเตือนในข้อมูลล่าสุด";
+        "ระบบไม่พบรายการที่เข้าเกณฑ์แจ้งเตือนในข้อมูลล่าสุด";
 
 
     /* =====================================================
