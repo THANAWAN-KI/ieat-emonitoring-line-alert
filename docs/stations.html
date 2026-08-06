@@ -1134,6 +1134,65 @@ main{
 }
 
 </style>
+
+<style>
+/* รูปแบบเดียวกับหน้า contacts.html */
+body{background:#F1EDF4;color:#30283A;font-family:"Segoe UI",Tahoma,Arial,sans-serif}
+.page{width:100%;max-width:720px;min-height:100vh;margin:0 auto;padding-bottom:0;background:#FAF8FC}
+.header{position:static;padding:18px;background:#fff;border-bottom:4px solid #6B3F91;backdrop-filter:none}
+.header-row{gap:14px}.logo{width:72px;height:72px}.brand strong{color:#4D286F;font-size:23px;font-weight:750}
+.brand span{margin-top:5px;color:#746B7B;font-size:14px;line-height:1.5}.icon-btn{width:42px;height:42px;border-color:#D9C9E7;border-radius:10px;font-size:20px}
+main{padding:16px}.hero{padding:16px;background:#F2EDF7;color:#30283A;border:0;border-left:4px solid #6B3F91;border-radius:10px;box-shadow:none}
+.hero::after{display:none}.hero-icon{background:#fff;color:#4D286F}.hero h1{color:#4D286F;font-size:20px}.hero p,.hero-time{color:#746B7B;font-size:13px}
+.hero-time{border-top-color:#D9C9E7}.hero-time strong{color:#4D286F;font-size:13px}
+.status,.kpi,.progress-card,.type-card,.alert-box,.station{border-color:#D9C9E7;box-shadow:0 2px 8px rgba(77,40,111,.08)}
+.status{padding:16px;border-left:4px solid #6B3F91}.status-title,.section-title{color:#4D286F;font-size:16px}.status-sub{font-size:13px}
+.section{margin-top:18px}.kpis{gap:8px}.kpi{padding:16px 8px;border-radius:14px}.kpi .num{font-size:28px}.kpi .label{font-size:11px}
+.progress-card{padding:14px}.progress-head{font-size:12px}.progress-track{height:9px}
+.type-card{padding:16px;border-left:4px solid #6B3F91}.type-icon{width:44px;height:44px;background:#F2EDF7;color:#4D286F}
+.type-copy strong{color:#4D286F;font-size:17px}.type-copy span{font-size:11px}.type-total{color:#4D286F;font-size:24px}.mini{padding:10px;font-size:10px}.mini b{font-size:18px}
+.sev{padding:14px 6px}.sev b{font-size:24px}.sev span{font-size:11px}.filter-btn{padding:9px 14px;border-color:#D9C9E7;font-size:12px}.filter-btn.active{background:#6B3F91;border-color:#6B3F91}
+.alert-box{padding:12px;background:transparent;border:0;box-shadow:none}.alert-note{padding:14px;background:#F2EDF7;border-left:4px solid #6B3F91;font-size:12px}
+.station{margin-top:12px;padding:16px;border-width:1px 1px 1px 4px;border-color:#D9C9E7 #D9C9E7 #D9C9E7 #6B3F91;border-radius:14px}
+.station-name{color:#4D286F;font-size:17px}.station-meta{font-size:12px}.badge{padding:5px 9px;font-size:10px}.param,.comment{padding:10px;font-size:12px}.param-title{font-size:11px}
+.action,.export-btn{padding:12px 8px;border-radius:9px;font-size:13px}.action.primary,.export-pdf{background:#4D286F}.action.map,.export-png{color:#4D286F;background:#F2EDF7;border-color:#D9C9E7}
+.footer{padding:8px 16px 22px;font-size:12px}.loading,.error{font-size:14px}
+@media(max-width:480px){.header{padding:14px}.logo{width:60px;height:60px}.brand strong{font-size:20px}.brand span{font-size:11px}main{padding:12px}.kpi .num{font-size:24px}}
+
+/* ใช้เพียงสีม่วงและสีเขียวตามหน้า contacts.html */
+:root{
+  --purple:#4D286F;
+  --purple2:#6B3F91;
+  --purple3:#6B3F91;
+  --purple-soft:#F2EDF7;
+  --green:#159B6B;
+  --green-soft:#ECF8F2;
+  --red:#4D286F;
+  --red-soft:#F2EDF7;
+  --orange:#4D286F;
+  --orange-soft:#F2EDF7;
+  --yellow:#159B6B;
+  --yellow-soft:#ECF8F2;
+  --blue:#4D286F;
+  --blue-soft:#F2EDF7;
+}
+.hero{background:#F2EDF7!important;color:#30283A!important}
+.status-dot.alert{background:#4D286F;box-shadow:0 0 0 5px #F2EDF7}
+.kpi.offline .num{color:#4D286F}
+.progress-bar{background:#159B6B}
+.mini.off{color:#4D286F;background:#F2EDF7}
+.severity .sev{border-color:#D9C9E7}
+.sev.high,.sev.watch{color:#4D286F;background:#F2EDF7}
+.sev.follow{color:#159B6B;background:#ECF8F2;border-color:#CBE9DC}
+.station.alert-high,.station.alert-watch{border-left-color:#4D286F}
+.station.alert-follow{border-left-color:#159B6B}
+.station-icon{color:#4D286F;background:#F2EDF7}
+.badge.offline{color:#4D286F;background:#F2EDF7}
+.param{color:#4D286F;background:#F2EDF7;border-left-color:#6B3F91}
+.param-title{color:#4D286F}
+.export-png{color:#fff;background:#159B6B;border-color:#159B6B}
+.action.map{color:#4D286F;background:#F2EDF7;border-color:#D9C9E7}
+</style>
 </head>
 
 <body>
