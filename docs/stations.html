@@ -7,9 +7,6 @@
 
 <title>IEAT e-Monitoring | สรุปสถานการณ์ล่าสุด</title>
 
-<!-- PNG Export -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
 <style>
 
 :root{
@@ -1219,9 +1216,9 @@ main{padding:16px}.hero{padding:16px;background:#F2EDF7;color:#30283A;border:0;b
 
     <img
       class="logo"
-      src="./assets/ieat_logo.png"
+      src="./ieat_logo.png.PNG"
       alt="กนอ."
-      onerror="this.onerror=null;this.src='./assets/ieat_logo.png';"
+      onerror="this.style.display='none';"
     >
 
     <div class="brand">
@@ -1233,19 +1230,6 @@ main{padding:16px}.hero{padding:16px;background:#F2EDF7;color:#30283A;border:0;b
       <span>
         ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย
       </span>
-
-    </div>
-
-    <div class="header-actions">
-
-      <button
-        class="icon-btn"
-        onclick="loadStatus()"
-        aria-label="รีเฟรช"
-        title="รีเฟรชข้อมูล"
-      >
-        ↻
-      </button>
 
     </div>
 
@@ -1282,7 +1266,7 @@ main{padding:16px}.hero{padding:16px;background:#F2EDF7;color:#30283A;border:0;b
   <br>
 
   <small>
-    กรุณากดปุ่ม ↻ เพื่อโหลดใหม่
+    กรุณาโหลดหน้าเว็บใหม่อีกครั้ง
   </small>
 
 </div>
@@ -1304,10 +1288,6 @@ main{padding:16px}.hero{padding:16px;background:#F2EDF7;color:#30283A;border:0;b
 <section class="hero">
 
   <div class="hero-top">
-
-    <div class="hero-icon">
-      📊
-    </div>
 
     <div>
 
@@ -1510,11 +1490,6 @@ main{padding:16px}.hero{padding:16px;background:#F2EDF7;color:#30283A;border:0;b
 
     <article class="sev high">
 
-      <img
-        src="./assets/4.png"
-        alt="เกินค่ามาตรฐาน"
-      >
-
       <b id="urgent">
         0
       </b>
@@ -1528,11 +1503,6 @@ main{padding:16px}.hero{padding:16px;background:#F2EDF7;color:#30283A;border:0;b
 
     <article class="sev watch">
 
-      <img
-        src="./assets/3.png"
-        alt="เฝ้าระวัง"
-      >
-
       <b id="watch">
         0
       </b>
@@ -1545,11 +1515,6 @@ main{padding:16px}.hero{padding:16px;background:#F2EDF7;color:#30283A;border:0;b
 
 
     <article class="sev follow">
-
-      <img
-        src="./assets/1.png"
-        alt="ติดตามสถานการณ์"
-      >
 
       <b id="follow">
         0
@@ -1651,67 +1616,6 @@ main{padding:16px}.hero{padding:16px;background:#F2EDF7;color:#30283A;border:0;b
 
 
 <!-- =====================================================
-     EXPORT
-===================================================== -->
-
-<section
-  id="exportArea"
-  class="section"
->
-
-  <div class="section-title">
-    รายงานและการส่งออก
-  </div>
-
-
-  <div class="export-panel">
-
-    <button
-      class="export-btn export-pdf"
-      onclick="exportPDF()"
-    >
-      📄 Export PDF
-    </button>
-
-
-    <button
-      class="export-btn export-png"
-      onclick="exportPNG()"
-    >
-      🖼 Export PNG
-    </button>
-
-  </div>
-
-
-  <div
-    class="export-panel"
-    style="margin-top:7px"
-  >
-
-    <a
-      id="dashboardBtn"
-      class="action primary"
-      target="_blank"
-      rel="noopener"
-    >
-      📊 เปิด Dashboard GIS
-    </a>
-
-
-    <button
-      class="action"
-      onclick="loadStatus()"
-    >
-      ↻ ตรวจสอบข้อมูลล่าสุด
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
      FOOTER
 ===================================================== -->
 
@@ -1742,14 +1646,6 @@ main{padding:16px}.hero{padding:16px;background:#F2EDF7;color:#30283A;border:0;b
 
 
 <script>
-
-/* =========================================================
-   CONFIG
-========================================================= */
-
-const DASHBOARD_URL =
-  "https://www.arcgis.com/apps/dashboards/576c71d01cc5403cad90ee330fd67b6e";
-
 
 const TYPE_INFO = {
 
@@ -1868,11 +1764,6 @@ function renderTypes(data){
       <article class="type-card">
 
         <div class="type-head">
-
-          <div class="type-icon">
-            ${info.icon}
-          </div>
-
 
           <div class="type-copy">
 
@@ -2139,14 +2030,6 @@ function renderStations(data){
                 : "alert-follow";
 
 
-          const icon =
-            score === 3
-              ? "⚠"
-              : score === 2
-                ? "!"
-                : "•";
-
-
           return `
 
           <article
@@ -2155,13 +2038,6 @@ function renderStations(data){
           >
 
             <div class="station-top">
-
-              <div class="station-icon">
-
-                ${icon}
-
-              </div>
-
 
               <div class="station-info">
 
@@ -2205,7 +2081,7 @@ function renderStations(data){
             <div class="param">
 
               <span class="param-title">
-                ⚠ ParameterAlram
+                Parameter Alarm
               </span>
 
               ${esc(alarm)}
@@ -2237,67 +2113,7 @@ function renderStations(data){
             }
 
 
-            ${
-              map
-
-                ?
-
-                `
-
-                <div class="station-buttons">
-
-                  <a
-                    class="action map"
-                    href="${map}"
-                    target="_blank"
-                    rel="noopener"
-                  >
-
-                    📍 เปิดตำแหน่งสถานี
-
-                  </a>
-
-
-                  <a
-                    class="action primary"
-                    href="${DASHBOARD_URL}"
-                    target="_blank"
-                    rel="noopener"
-                  >
-
-                    📊 ดูใน Dashboard
-
-                  </a>
-
-                </div>
-
-                `
-
-                :
-
-                `
-
-                <div
-                  class="station-buttons"
-                  style="grid-template-columns:1fr"
-                >
-
-                  <a
-                    class="action primary"
-                    href="${DASHBOARD_URL}"
-                    target="_blank"
-                    rel="noopener"
-                  >
-
-                    📊 ดูใน Dashboard
-
-                  </a>
-
-                </div>
-
-                `
-
-            }
+            ${map ? `<div class="station-buttons" style="grid-template-columns:1fr"><a class="action map" href="${map}" target="_blank" rel="noopener">เปิดตำแหน่งสถานี</a></div>` : ""}
 
           </article>
 
@@ -2612,14 +2428,6 @@ async function loadStatus(){
 
 
     /* =====================================================
-       DASHBOARD
-    ===================================================== */
-
-    $("dashboardBtn").href =
-      DASHBOARD_URL;
-
-
-    /* =====================================================
        RENDER
     ===================================================== */
 
@@ -2658,145 +2466,6 @@ async function loadStatus(){
     $("error")
       .classList
       .remove("hidden");
-
-  }
-
-}
-
-
-/* =========================================================
-   EXPORT PDF
-========================================================= */
-
-function exportPDF(){
-
-  const oldTitle =
-    document.title;
-
-
-  document.title =
-    "IEAT e-Monitoring - รายงานสรุปสถานการณ์ล่าสุด";
-
-
-  window.print();
-
-
-  setTimeout(
-    () => {
-
-      document.title =
-        oldTitle;
-
-    },
-    1000
-  );
-
-}
-
-
-/* =========================================================
-   EXPORT PNG
-========================================================= */
-
-async function exportPNG(){
-
-  if(
-    typeof html2canvas ===
-    "undefined"
-  ){
-
-    alert(
-      "ไม่สามารถโหลดระบบ Export PNG ได้ กรุณาลองใหม่อีกครั้ง"
-    );
-
-    return;
-
-  }
-
-
-  const content =
-    document.getElementById(
-      "content"
-    );
-
-
-  if(!content){
-
-    return;
-
-  }
-
-
-  const oldWidth =
-    content.style.width;
-
-
-  try{
-
-    content.style.width =
-      "100%";
-
-
-    const canvas =
-      await html2canvas(
-        content,
-        {
-          scale:2,
-
-          useCORS:true,
-
-          backgroundColor:
-            "#F5F3F6",
-
-          logging:false
-        }
-      );
-
-
-    const link =
-      document.createElement(
-        "a"
-      );
-
-
-    const date =
-      new Date()
-        .toISOString()
-        .slice(
-          0,
-          10
-        );
-
-
-    link.download =
-      `IEAT_e-Monitoring_${date}.png`;
-
-
-    link.href =
-      canvas.toDataURL(
-        "image/png"
-      );
-
-
-    link.click();
-
-
-  }catch(error){
-
-    console.error(
-      error
-    );
-
-
-    alert(
-      "เกิดข้อผิดพลาดในการ Export PNG"
-    );
-
-
-  }finally{
-
-    content.style.width =
-      oldWidth;
 
   }
 
