@@ -413,6 +413,106 @@
       .hero { padding:21px 16px; }
       main { padding-left:10px; padding-right:10px; }
     }
+
+    /* Preferred IEAT theme: purple-blue gradient header and contact-style cards */
+    :root {
+      --purple:#59267C; --purple-2:#6B3F91; --purple-dark:#4D286F;
+      --purple-soft:#F2EDF7; --ink:#30283A; --muted:#746B7B;
+      --line:#D9C9E7; --green:#159B6B; --green-soft:#ECF8F2;
+      --blue:#0769AD; --blue-soft:#E8F5FF;
+      --shadow:0 2px 8px rgba(77,40,111,.08);
+    }
+    body{background:#F1EDF4;color:var(--ink)}
+    .shell{background:#FAF8FC;box-shadow:none}
+    .topbar{height:5px;background:linear-gradient(90deg,#59267C,#6B3F91,#0769AD)}
+    .page-header{padding:18px;color:#FFFFFF;background:linear-gradient(135deg,#59267C 0%,#6B3F91 48%,#0769AD 100%);border-bottom:4px solid #4D286F}
+    .brand-title{color:#FFFFFF}
+    .brand-subtitle{color:rgba(255,255,255,.86)}
+    .header-icon{padding:6px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);border-radius:16px}
+    .hero{background:linear-gradient(135deg,#59267C 0%,#6B3F91 48%,#0769AD 100%);box-shadow:0 4px 14px rgba(77,40,111,.16)}
+    .notice,.tip{background:var(--purple-soft);border-color:var(--line);border-left:4px solid var(--purple)}
+    .notice strong,.tip strong,.section-heading h2,.step h3,.detail-card h3{color:var(--purple-dark)}
+    .section-heading::before{background:linear-gradient(180deg,#59267C,#0769AD)}
+    .step,.guide,.detail-card,.emergency-card{background:#FFFFFF;border-color:var(--line);border-radius:14px;box-shadow:var(--shadow)}
+    .step{border-left:4px solid var(--purple);border-top:1px solid var(--line)}
+    .step.alert-card,.step.announce-card{border-left-color:var(--blue);border-top:1px solid var(--line)}
+    .step.evac-card{border-left-color:var(--green);border-top:1px solid var(--line)}
+    .step-number,.notice-mark,.tip-badge{background:var(--purple-dark)}
+    .guide{border-left:4px solid var(--purple)}
+    .guide-icon,.step-icon{background:var(--purple-soft)}
+    .detail-card.report{border-left-color:var(--blue)}
+    .detail-card.safe{border-left-color:var(--green)}
+    .rule-card.do{color:#087651;background:var(--green-soft);border-color:#BFDCCF}
+    .rule-card.dont{color:var(--purple-dark);background:var(--purple-soft);border-color:var(--line)}
+    .emergency-card{border-top:1px solid var(--line);border-left:4px solid var(--card-color);background:#FFFFFF}
+    .war-room,.fire{--card-color:var(--purple-dark);--card-bg:var(--purple-soft)}
+    .hospital{--card-color:#087651;--card-bg:var(--green-soft)}
+    .police{--card-color:var(--blue);--card-bg:var(--blue-soft)}
+    .phone{color:var(--card-color)}
+    @media (max-width:620px){
+      .page-header{padding:14px}
+      .brand-title{color:#FFFFFF;font-size:18px}
+      .brand-subtitle{color:rgba(255,255,255,.84)}
+    }
+
+    /* Operational safety manual layout */
+    .page-header{position:relative;overflow:hidden}
+    .page-header::after{position:absolute;right:-55px;top:-85px;width:210px;height:210px;border:28px solid rgba(255,255,255,.07);border-radius:50%;content:""}
+    .page-header>*{position:relative;z-index:1}
+    main{padding-top:14px}
+    .hero{padding:24px 22px;border-radius:12px}
+    .hero h1{font-size:32px}
+    .hero p{max-width:580px}
+    .audience-tag{display:inline-flex;margin-top:14px;padding:7px 11px;border-radius:7px;color:#4D286F;background:#FFFFFF;font-size:12px;font-weight:800}
+    .quick-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:12px 0 0}
+    .quick-nav a{display:flex;align-items:center;justify-content:center;min-height:45px;padding:8px;color:#4D286F;background:#FFFFFF;border:1px solid #D9C9E7;border-radius:9px;text-align:center;text-decoration:none;font-size:12px;font-weight:800;box-shadow:0 2px 6px rgba(77,40,111,.06)}
+    .quick-nav a:hover{color:#FFFFFF;background:#4D286F}
+    .notice{border-radius:10px;box-shadow:none}
+    .section-heading{margin-top:30px;padding-left:14px}
+    .section-heading::before{height:100%;top:0}
+    .section-heading h2{font-size:21px}
+    .steps{position:relative;display:grid;grid-template-columns:1fr;gap:10px}
+    .step{display:grid;grid-template-columns:64px 78px minmax(0,1fr);align-items:center;gap:14px;min-height:0;padding:14px 16px;border-left:4px solid var(--purple-dark);border-radius:11px}
+    .step-number{position:static;width:48px;height:48px;font-size:20px}
+    .step-icon{width:68px;height:68px;margin:0;border-radius:14px}
+    .step-icon img{width:50px;height:50px}
+    .step h3{margin:0 0 4px;font-size:19px}
+    .step p{font-size:13px;line-height:1.55}
+    .step::after{display:none}
+    .guides{gap:9px}
+    .guide{min-height:80px;padding:12px 14px;border-radius:10px;box-shadow:none}
+    .guide-icon{width:52px;height:52px;flex-basis:52px;border-radius:11px}
+    .guide-icon img{width:39px;height:39px}
+    .detail-card{border-radius:10px;box-shadow:none}
+    .detail-card h3{display:flex;align-items:center;padding-bottom:9px;border-bottom:1px solid #EEE8F1}
+    .detail-card li{color:#514A57}
+    .rule-card{border-radius:10px}
+    .rule-card strong{font-size:18px}
+    .emergency{gap:9px}
+    .emergency-card{display:grid;grid-template-columns:50px minmax(0,1fr) auto;grid-template-rows:auto auto;align-items:center;gap:3px 12px;min-height:0;padding:14px;border-radius:10px;box-shadow:none}
+    .emergency-icon{grid-row:1/3;width:50px;height:50px;margin:0;border-radius:11px}
+    .emergency-icon img{width:37px;height:37px}
+    .emergency-card h3{grid-column:2;margin:0;font-size:15px}
+    .emergency-card p{grid-column:2;margin:0}
+    .phone{grid-column:3;grid-row:1/3;margin:0;padding:9px 12px;border-radius:8px;background:var(--card-bg);font-size:21px;text-align:right;white-space:nowrap}
+    .phone small{display:block;font-size:10px;white-space:normal}
+    .tip{margin-bottom:4px;border-radius:10px}
+    @media(max-width:620px){
+      .quick-nav{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .step{grid-template-columns:42px 58px minmax(0,1fr);gap:9px;padding:12px 10px}
+      .step-number{width:38px;height:38px;font-size:16px}
+      .step-icon{width:54px;height:54px}.step-icon img{width:40px;height:40px}
+      .step h3{font-size:17px}.step p{font-size:12px}
+      .emergency{grid-template-columns:1fr}
+      .emergency-card{grid-template-columns:46px minmax(0,1fr) auto}
+      .phone{font-size:19px}
+    }
+    @media(max-width:390px){
+      .step{grid-template-columns:38px minmax(0,1fr)}
+      .step-icon{display:none}
+      .emergency-card{grid-template-columns:42px minmax(0,1fr)}
+      .phone{grid-column:1/3;grid-row:3;margin-top:7px;text-align:center}
+    }
   </style>
 </head>
 <body>
@@ -420,7 +520,7 @@
     <div class="topbar"></div>
 
     <header class="page-header">
-      <img class="header-icon" src="./assets/building.png?v=20260806" alt="อาคารนิคมอุตสาหกรรม">
+      <img class="header-icon" src="./assets/factory-svgrepo-com.png" alt="อาคารนิคมอุตสาหกรรม">
       <div>
         <div class="brand-title">ระบบติดตามตรวจสอบสิ่งแวดล้อม</div>
         <div class="brand-subtitle">ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย</div>
@@ -432,7 +532,15 @@
         <span class="hero-label">แนวทางปฏิบัติเมื่อเกิดเหตุฉุกเฉิน</span>
         <h1>คู่มือความปลอดภัย</h1>
         <p>แนวทางปฏิบัติสำหรับผู้ประกอบการและพนักงานในนิคมอุตสาหกรรม เมื่อพบเหตุผิดปกติหรือสถานการณ์ฉุกเฉิน</p>
+        <span class="audience-tag">สำหรับผู้ประกอบการ เจ้าหน้าที่ และผู้ปฏิบัติงานในนิคมอุตสาหกรรม</span>
       </section>
+
+      <nav class="quick-nav" aria-label="เมนูคู่มือฉบับย่อ">
+        <a href="#emergency-steps">ขั้นตอนฉุกเฉิน</a>
+        <a href="#incident-guides">แนวทางรับมือ</a>
+        <a href="#report-information">ข้อมูลที่ต้องแจ้ง</a>
+        <a href="#emergency-contacts">เบอร์ฉุกเฉิน</a>
+      </nav>
 
       <section class="notice">
         <div class="notice-mark">!</div>
@@ -442,7 +550,7 @@
         </div>
       </section>
 
-      <div class="section-heading">
+      <div class="section-heading" id="emergency-steps">
         <h2>เมื่อพบเหตุผิดปกติ ให้ปฏิบัติ 4 ขั้นตอน</h2>
         <p>ดำเนินการตามลำดับโดยคำนึงถึงความปลอดภัยของตนเองและผู้อื่นเป็นสำคัญ</p>
       </div>
@@ -477,7 +585,7 @@
         </article>
       </section>
 
-      <div class="section-heading">
+      <div class="section-heading" id="incident-guides">
         <h2>คู่มือการรับมือเหตุการณ์</h2>
         <p>เลือกแนวทางให้เหมาะสมกับสถานการณ์ที่พบ</p>
       </div>
@@ -501,7 +609,7 @@
         </div>
       </section>
 
-      <div class="section-heading">
+      <div class="section-heading" id="report-information">
         <h2>ข้อมูลสำคัญที่ต้องแจ้งเจ้าหน้าที่</h2>
         <p>เตรียมข้อมูลให้ครบก่อนโทร เพื่อให้เจ้าหน้าที่ประเมินเหตุและส่งความช่วยเหลือได้รวดเร็ว</p>
       </div>
@@ -539,7 +647,7 @@
         </div>
       </section>
 
-      <div class="section-heading">
+      <div class="section-heading" id="emergency-contacts">
         <h2>หมายเลขติดต่อฉุกเฉิน</h2>
         <p>ให้ข้อมูลสถานที่เกิดเหตุ ลักษณะเหตุ จำนวนผู้ได้รับผลกระทบ และหมายเลขติดต่อกลับ</p>
       </div>
