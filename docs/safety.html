@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>คู่มือความปลอดภัย | ระบบติดตามตรวจสอบสิ่งแวดล้อม</title>
+  <title>à¸„à¸¹à¹ˆà¸¡à¸·à¸­à¸„à¸§à¸²à¸¡à¸›à¸¥à¸­à¸”à¸ à¸±à¸¢ | à¸£à¸°à¸šà¸šà¸•à¸´à¸”à¸•à¸²à¸¡à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸šà¸ªà¸´à¹ˆà¸‡à¹à¸§à¸”à¸¥à¹‰à¸­à¸¡</title>
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap");
 
     :root {
-      --purple: #43166d;
-      --purple-2: #6f3aa2;
-      --purple-soft: #f7f2fb;
-      --ink: #29232e;
-      --muted: #706a75;
-      --line: #e8dfef;
+      --purple: #123f5a;
+      --purple-2: #16788a;
+      --purple-soft: #eef7f8;
+      --ink: #20313d;
+      --muted: #657681;
+      --line: #dce8eb;
       --white: #ffffff;
       --red: #e43643;
       --red-soft: #fff0f2;
@@ -23,7 +23,7 @@
       --green-soft: #edf8f2;
       --blue: #2860b8;
       --blue-soft: #eef4ff;
-      --shadow: 0 12px 34px rgba(67, 22, 109, .10);
+      --shadow: 0 16px 42px rgba(18, 63, 90, .13);
     }
 
     * { box-sizing: border-box; }
@@ -36,15 +36,15 @@
       color: var(--ink);
       font-family: "Sarabun", "Noto Sans Thai", Tahoma, sans-serif;
       background:
-        radial-gradient(circle at 4% 3%, rgba(111, 58, 162, .13), transparent 24rem),
-        linear-gradient(180deg, #fbf9fd 0%, #f4eff8 100%);
+        radial-gradient(circle at 4% 3%, rgba(22, 120, 138, .14), transparent 24rem),
+        linear-gradient(180deg, #f7fbfc 0%, #eaf2f4 100%);
     }
 
     .shell {
       width: min(1180px, calc(100% - 32px));
       margin: 28px auto;
       overflow: hidden;
-      border: 1px solid rgba(67, 22, 109, .10);
+      border: 1px solid rgba(18, 63, 90, .10);
       border-radius: 30px;
       background: var(--white);
       box-shadow: var(--shadow);
@@ -52,7 +52,7 @@
 
     .topbar {
       height: 8px;
-      background: linear-gradient(90deg, var(--purple), var(--purple-2), var(--amber));
+      background: linear-gradient(90deg, var(--red), var(--amber), var(--green), var(--purple-2));
     }
 
     .page-header {
@@ -79,7 +79,7 @@
 
     .header-badge {
       padding: 9px 14px;
-      border: 1px solid #d9c6e8;
+      border: 1px solid #bdd9de;
       border-radius: 999px;
       color: var(--purple);
       background: var(--purple-soft);
@@ -96,7 +96,7 @@
       padding: 38px 42px;
       border-radius: 24px;
       color: var(--white);
-      background: linear-gradient(135deg, #341052 0%, var(--purple) 55%, #7040a0 100%);
+      background: linear-gradient(135deg, #0c3045 0%, var(--purple) 52%, var(--purple-2) 100%);
     }
 
     .hero::after {
@@ -146,7 +146,7 @@
       gap: 16px;
       margin-top: 18px;
       padding: 17px 20px;
-      border: 1px solid #e6d5f1;
+      border: 1px solid #cbe2e6;
       border-radius: 18px;
       background: var(--purple-soft);
     }
@@ -211,7 +211,7 @@
       background: var(--purple-soft);
     }
 
-    .step-icon img { width: 58px; height: 58px; object-fit: contain; }
+    .step-icon svg { width: 58px; height: 58px; fill: none; stroke: currentColor; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
     .step h3 { margin: 0 0 7px; color: var(--purple); font-size: 23px; }
     .step p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.62; }
 
@@ -240,7 +240,8 @@
       background: #fff;
     }
 
-    .guide img { width: 52px; height: 52px; object-fit: contain; }
+    .guide-icon { display:grid; place-items:center; width:56px; height:56px; flex:0 0 56px; border-radius:15px; color:var(--purple); background:var(--purple-soft); }
+    .guide-icon svg { width:34px; height:34px; fill:none; stroke:currentColor; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
     .guide strong { display: block; font-size: 17px; }
     .guide span { display: block; margin-top: 3px; color: var(--muted); font-size: 13px; line-height: 1.45; }
 
@@ -272,7 +273,8 @@
       background: var(--card-bg);
     }
 
-    .emergency-icon img { width: 43px; height: 43px; object-fit: contain; }
+    .emergency-icon { color: var(--card-color); }
+    .emergency-icon svg { width:42px; height:42px; fill:none; stroke:currentColor; stroke-width:2.3; stroke-linecap:round; stroke-linejoin:round; }
     .emergency-card h3 { margin: 0; font-size: 18px; line-height: 1.35; }
     .emergency-card p { margin: 7px 0 0; color: var(--muted); font-size: 13px; }
 
@@ -319,6 +321,40 @@
     .tip strong { display: block; color: var(--purple); }
     .tip span { display: block; margin-top: 2px; color: var(--muted); font-size: 13px; }
 
+    /* Modern safety layout */
+    .brand-title { display:flex; align-items:center; gap:11px; }
+    .brand-title::before {
+      display:grid;
+      place-items:center;
+      width:34px;
+      height:34px;
+      border-radius:11px;
+      color:#fff;
+      background:linear-gradient(135deg,var(--purple),var(--purple-2));
+      content:"âœ“";
+      font-size:20px;
+      box-shadow:0 5px 12px rgba(18,63,90,.18);
+    }
+    .section-heading { position:relative; padding-left:16px; }
+    .section-heading::before {
+      position:absolute;
+      left:0;
+      top:2px;
+      width:5px;
+      height:34px;
+      border-radius:99px;
+      background:linear-gradient(180deg,var(--purple-2),var(--green));
+      content:"";
+    }
+    .step,.guide,.emergency-card { transition:transform .2s ease,box-shadow .2s ease; }
+    .step:hover,.guide:hover,.emergency-card:hover { transform:translateY(-3px); box-shadow:0 13px 28px rgba(18,63,90,.11); }
+    .step { overflow:hidden; }
+    .step::after { position:absolute; right:-28px; bottom:-32px; width:90px; height:90px; border:16px solid currentColor; border-radius:50%; opacity:.035; content:""; }
+    .guide { border-left:4px solid var(--purple-2); }
+    .emergency-card { border-top-width:4px; }
+    .phone small { font-size:13px; color:var(--muted); font-weight:700; }
+    .tip { border-color:#cbe2e6; }
+
     @media (max-width: 900px) {
       .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .emergency { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -344,124 +380,124 @@
 
     <header class="page-header">
       <div>
-        <div class="brand-title">ระบบติดตามตรวจสอบสิ่งแวดล้อม</div>
-        <div class="brand-subtitle">ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย</div>
+        <div class="brand-title">à¸£à¸°à¸šà¸šà¸•à¸´à¸”à¸•à¸²à¸¡à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸šà¸ªà¸´à¹ˆà¸‡à¹à¸§à¸”à¸¥à¹‰à¸­à¸¡</div>
+        <div class="brand-subtitle">à¸¨à¸¹à¸™à¸¢à¹Œà¹€à¸à¹‰à¸²à¸£à¸°à¸§à¸±à¸‡à¸ªà¸´à¹ˆà¸‡à¹à¸§à¸”à¸¥à¹‰à¸­à¸¡à¹à¸¥à¸°à¸„à¸§à¸²à¸¡à¸›à¸¥à¸­à¸”à¸ à¸±à¸¢</div>
       </div>
-      <div class="header-badge">คู่มือสำหรับเหตุฉุกเฉิน</div>
+      <div class="header-badge">à¸„à¸¹à¹ˆà¸¡à¸·à¸­à¸ªà¸³à¸«à¸£à¸±à¸šà¹€à¸«à¸•à¸¸à¸‰à¸¸à¸à¹€à¸‰à¸´à¸™</div>
     </header>
 
     <main>
       <section class="hero">
-        <span class="hero-label">แนวทางปฏิบัติเมื่อเกิดเหตุฉุกเฉิน</span>
-        <h1>คู่มือความปลอดภัย</h1>
-        <p>แนวทางปฏิบัติสำหรับผู้ประกอบการและพนักงานในนิคมอุตสาหกรรม เมื่อพบเหตุผิดปกติหรือสถานการณ์ฉุกเฉิน</p>
+        <span class="hero-label">à¹à¸™à¸§à¸—à¸²à¸‡à¸›à¸à¸´à¸šà¸±à¸•à¸´à¹€à¸¡à¸·à¹ˆà¸­à¹€à¸à¸´à¸”à¹€à¸«à¸•à¸¸à¸‰à¸¸à¸à¹€à¸‰à¸´à¸™</span>
+        <h1>à¸„à¸¹à¹ˆà¸¡à¸·à¸­à¸„à¸§à¸²à¸¡à¸›à¸¥à¸­à¸”à¸ à¸±à¸¢</h1>
+        <p>à¹à¸™à¸§à¸—à¸²à¸‡à¸›à¸à¸´à¸šà¸±à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸œà¸¹à¹‰à¸›à¸£à¸°à¸à¸­à¸šà¸à¸²à¸£à¹à¸¥à¸°à¸žà¸™à¸±à¸à¸‡à¸²à¸™à¹ƒà¸™à¸™à¸´à¸„à¸¡à¸­à¸¸à¸•à¸ªà¸²à¸«à¸à¸£à¸£à¸¡ à¹€à¸¡à¸·à¹ˆà¸­à¸žà¸šà¹€à¸«à¸•à¸¸à¸œà¸´à¸”à¸›à¸à¸•à¸´à¸«à¸£à¸·à¸­à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œà¸‰à¸¸à¸à¹€à¸‰à¸´à¸™</p>
       </section>
 
       <section class="notice">
         <div class="notice-mark">!</div>
         <div>
-          <strong>ความปลอดภัย คือ ความรับผิดชอบของทุกคน</strong>
-          <span>ตั้งสติ ปฏิบัติตามขั้นตอน และแจ้งเจ้าหน้าที่ทันที เพื่อลดความเสี่ยงต่อชีวิต ทรัพย์สิน และชุมชนโดยรอบ</span>
+          <strong>à¸„à¸§à¸²à¸¡à¸›à¸¥à¸­à¸”à¸ à¸±à¸¢ à¸„à¸·à¸­ à¸„à¸§à¸²à¸¡à¸£à¸±à¸šà¸œà¸´à¸”à¸Šà¸­à¸šà¸‚à¸­à¸‡à¸—à¸¸à¸à¸„à¸™</strong>
+          <span>à¸•à¸±à¹‰à¸‡à¸ªà¸•à¸´ à¸›à¸à¸´à¸šà¸±à¸•à¸´à¸•à¸²à¸¡à¸‚à¸±à¹‰à¸™à¸•à¸­à¸™ à¹à¸¥à¸°à¹à¸ˆà¹‰à¸‡à¹€à¸ˆà¹‰à¸²à¸«à¸™à¹‰à¸²à¸—à¸µà¹ˆà¸—à¸±à¸™à¸—à¸µ à¹€à¸žà¸·à¹ˆà¸­à¸¥à¸”à¸„à¸§à¸²à¸¡à¹€à¸ªà¸µà¹ˆà¸¢à¸‡à¸•à¹ˆà¸­à¸Šà¸µà¸§à¸´à¸• à¸—à¸£à¸±à¸žà¸¢à¹Œà¸ªà¸´à¸™ à¹à¸¥à¸°à¸Šà¸¸à¸¡à¸Šà¸™à¹‚à¸”à¸¢à¸£à¸­à¸š</span>
         </div>
       </section>
 
       <div class="section-heading">
-        <h2>เมื่อพบเหตุผิดปกติ ให้ปฏิบัติ 4 ขั้นตอน</h2>
-        <p>ดำเนินการตามลำดับโดยคำนึงถึงความปลอดภัยของตนเองและผู้อื่นเป็นสำคัญ</p>
+        <h2>à¹€à¸¡à¸·à¹ˆà¸­à¸žà¸šà¹€à¸«à¸•à¸¸à¸œà¸´à¸”à¸›à¸à¸•à¸´ à¹ƒà¸«à¹‰à¸›à¸à¸´à¸šà¸±à¸•à¸´ 4 à¸‚à¸±à¹‰à¸™à¸•à¸­à¸™</h2>
+        <p>à¸”à¸³à¹€à¸™à¸´à¸™à¸à¸²à¸£à¸•à¸²à¸¡à¸¥à¸³à¸”à¸±à¸šà¹‚à¸”à¸¢à¸„à¸³à¸™à¸¶à¸‡à¸–à¸¶à¸‡à¸„à¸§à¸²à¸¡à¸›à¸¥à¸­à¸”à¸ à¸±à¸¢à¸‚à¸­à¸‡à¸•à¸™à¹€à¸­à¸‡à¹à¸¥à¸°à¸œà¸¹à¹‰à¸­à¸·à¹ˆà¸™à¹€à¸›à¹‡à¸™à¸ªà¸³à¸„à¸±à¸</p>
       </div>
 
       <section class="steps">
         <article class="step stop-card">
           <div class="step-number">1</div>
-          <div class="step-icon"><img src="assets/stop.png" alt="ไอคอนหยุด"></div>
-          <h3>หยุด</h3>
-          <p>หยุดการทำงานทันทีเมื่อพบสิ่งผิดปกติ และถอยออกจากจุดเสี่ยงโดยไม่สัมผัสวัตถุหรือสารที่ไม่ทราบชนิด</p>
+          <div class="step-icon" aria-label="à¹„à¸­à¸„à¸­à¸™à¸«à¸¢à¸¸à¸”"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M22 5h20l17 17v20L42 59H22L5 42V22Z"/><path d="M24 39V22a4 4 0 0 1 8 0v12-16a4 4 0 0 1 8 0v16-11a4 4 0 0 1 8 0v17c0 11-7 18-18 18h-1c-7 0-12-3-16-9l-6-9a4 4 0 0 1 6-5l11 8"/></svg></div>
+          <h3>à¸«à¸¢à¸¸à¸”</h3>
+          <p>à¸«à¸¢à¸¸à¸”à¸à¸²à¸£à¸—à¸³à¸‡à¸²à¸™à¸—à¸±à¸™à¸—à¸µà¹€à¸¡à¸·à¹ˆà¸­à¸žà¸šà¸ªà¸´à¹ˆà¸‡à¸œà¸´à¸”à¸›à¸à¸•à¸´ à¹à¸¥à¸°à¸–à¸­à¸¢à¸­à¸­à¸à¸ˆà¸²à¸à¸ˆà¸¸à¸”à¹€à¸ªà¸µà¹ˆà¸¢à¸‡à¹‚à¸”à¸¢à¹„à¸¡à¹ˆà¸ªà¸±à¸¡à¸œà¸±à¸ªà¸§à¸±à¸•à¸–à¸¸à¸«à¸£à¸·à¸­à¸ªà¸²à¸£à¸—à¸µà¹ˆà¹„à¸¡à¹ˆà¸—à¸£à¸²à¸šà¸Šà¸™à¸´à¸”</p>
         </article>
 
         <article class="step alert-card">
           <div class="step-number">2</div>
-          <div class="step-icon"><img src="assets/alert.png" alt="ไอคอนแจ้งเตือน"></div>
-          <h3>แจ้งเตือน</h3>
-          <p>แจ้งหัวหน้างาน เจ้าหน้าที่ความปลอดภัย หรือศูนย์ควบคุม พร้อมระบุสถานที่และลักษณะของเหตุให้ชัดเจน</p>
+          <div class="step-icon" aria-label="à¹„à¸­à¸„à¸­à¸™à¹à¸ˆà¹‰à¸‡à¹€à¸•à¸·à¸­à¸™"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 7 59 54H5Z"/><path d="M32 23v15M32 47h.01"/></svg></div>
+          <h3>à¹à¸ˆà¹‰à¸‡à¹€à¸•à¸·à¸­à¸™</h3>
+          <p>à¹à¸ˆà¹‰à¸‡à¸«à¸±à¸§à¸«à¸™à¹‰à¸²à¸‡à¸²à¸™ à¹€à¸ˆà¹‰à¸²à¸«à¸™à¹‰à¸²à¸—à¸µà¹ˆà¸„à¸§à¸²à¸¡à¸›à¸¥à¸­à¸”à¸ à¸±à¸¢ à¸«à¸£à¸·à¸­à¸¨à¸¹à¸™à¸¢à¹Œà¸„à¸§à¸šà¸„à¸¸à¸¡ à¸žà¸£à¹‰à¸­à¸¡à¸£à¸°à¸šà¸¸à¸ªà¸–à¸²à¸™à¸—à¸µà¹ˆà¹à¸¥à¸°à¸¥à¸±à¸à¸©à¸“à¸°à¸‚à¸­à¸‡à¹€à¸«à¸•à¸¸à¹ƒà¸«à¹‰à¸Šà¸±à¸”à¹€à¸ˆà¸™</p>
         </article>
 
         <article class="step evac-card">
           <div class="step-number">3</div>
-          <div class="step-icon"><img src="assets/evacuate.png" alt="ไอคอนอพยพ"></div>
-          <h3>อพยพ</h3>
-          <p>ออกจากพื้นที่ตามเส้นทางหนีภัย ไปยังจุดรวมพลที่กำหนดอย่างเป็นระเบียบ และไม่ย้อนกลับเข้าไปในพื้นที่</p>
+          <div class="step-icon" aria-label="à¹„à¸­à¸„à¸­à¸™à¸­à¸žà¸¢à¸ž"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M38 7h17v50H38M46 32h.01M8 52l10-12 8 7 10-10M18 15a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm-4 14 8 9-6 15m15-17-11 12M35 48h18M46 41l7 7-7 7"/></svg></div>
+          <h3>à¸­à¸žà¸¢à¸ž</h3>
+          <p>à¸­à¸­à¸à¸ˆà¸²à¸à¸žà¸·à¹‰à¸™à¸—à¸µà¹ˆà¸•à¸²à¸¡à¹€à¸ªà¹‰à¸™à¸—à¸²à¸‡à¸«à¸™à¸µà¸ à¸±à¸¢ à¹„à¸›à¸¢à¸±à¸‡à¸ˆà¸¸à¸”à¸£à¸§à¸¡à¸žà¸¥à¸—à¸µà¹ˆà¸à¸³à¸«à¸™à¸”à¸­à¸¢à¹ˆà¸²à¸‡à¹€à¸›à¹‡à¸™à¸£à¸°à¹€à¸šà¸µà¸¢à¸š à¹à¸¥à¸°à¹„à¸¡à¹ˆà¸¢à¹‰à¸­à¸™à¸à¸¥à¸±à¸šà¹€à¸‚à¹‰à¸²à¹„à¸›à¹ƒà¸™à¸žà¸·à¹‰à¸™à¸—à¸µà¹ˆ</p>
         </article>
 
         <article class="step announce-card">
           <div class="step-number">4</div>
-          <div class="step-icon"><img src="assets/announcement.png" alt="ไอคอนประกาศ"></div>
-          <h3>ติดตามประกาศ</h3>
-          <p>รับฟังคำสั่งจากเจ้าหน้าที่หรือระบบประกาศ และรอการยืนยันว่าพื้นที่ปลอดภัยก่อนกลับเข้าปฏิบัติงาน</p>
+          <div class="step-icon" aria-label="à¹„à¸­à¸„à¸­à¸™à¸›à¸£à¸°à¸à¸²à¸¨"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 27h14L48 10v44L22 37H8Z"/><path d="m17 37 5 16h10l-6-14M53 22c5 5 5 15 0 20M58 16c9 9 9 23 0 32"/></svg></div>
+          <h3>à¸•à¸´à¸”à¸•à¸²à¸¡à¸›à¸£à¸°à¸à¸²à¸¨</h3>
+          <p>à¸£à¸±à¸šà¸Ÿà¸±à¸‡à¸„à¸³à¸ªà¸±à¹ˆà¸‡à¸ˆà¸²à¸à¹€à¸ˆà¹‰à¸²à¸«à¸™à¹‰à¸²à¸—à¸µà¹ˆà¸«à¸£à¸·à¸­à¸£à¸°à¸šà¸šà¸›à¸£à¸°à¸à¸²à¸¨ à¹à¸¥à¸°à¸£à¸­à¸à¸²à¸£à¸¢à¸·à¸™à¸¢à¸±à¸™à¸§à¹ˆà¸²à¸žà¸·à¹‰à¸™à¸—à¸µà¹ˆà¸›à¸¥à¸­à¸”à¸ à¸±à¸¢à¸à¹ˆà¸­à¸™à¸à¸¥à¸±à¸šà¹€à¸‚à¹‰à¸²à¸›à¸à¸´à¸šà¸±à¸•à¸´à¸‡à¸²à¸™</p>
         </article>
       </section>
 
       <div class="section-heading">
-        <h2>คู่มือการรับมือเหตุการณ์</h2>
-        <p>เลือกแนวทางให้เหมาะสมกับสถานการณ์ที่พบ</p>
+        <h2>à¸„à¸¹à¹ˆà¸¡à¸·à¸­à¸à¸²à¸£à¸£à¸±à¸šà¸¡à¸·à¸­à¹€à¸«à¸•à¸¸à¸à¸²à¸£à¸“à¹Œ</h2>
+        <p>à¹€à¸¥à¸·à¸­à¸à¹à¸™à¸§à¸—à¸²à¸‡à¹ƒà¸«à¹‰à¹€à¸«à¸¡à¸²à¸°à¸ªà¸¡à¸à¸±à¸šà¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œà¸—à¸µà¹ˆà¸žà¸š</p>
       </div>
 
       <section class="guides">
         <div class="guide">
-          <img src="assets/stop.png" alt="หยุดเมื่อพบเหตุผิดปกติ">
-          <div><strong>ไฟไหม้ ควัน หรือกลิ่นไหม้</strong><span>หยุดกิจกรรม ตัดแหล่งกำเนิดเมื่อทำได้อย่างปลอดภัย และแจ้งเหตุทันที</span></div>
+          <div class="guide-icon"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M22 5h20l17 17v20L42 59H22L5 42V22Z"/><path d="M21 21h22v22H21Z"/></svg></div>
+          <div><strong>à¹„à¸Ÿà¹„à¸«à¸¡à¹‰ à¸„à¸§à¸±à¸™ à¸«à¸£à¸·à¸­à¸à¸¥à¸´à¹ˆà¸™à¹„à¸«à¸¡à¹‰</strong><span>à¸«à¸¢à¸¸à¸”à¸à¸´à¸ˆà¸à¸£à¸£à¸¡ à¸•à¸±à¸”à¹à¸«à¸¥à¹ˆà¸‡à¸à¸³à¹€à¸™à¸´à¸”à¹€à¸¡à¸·à¹ˆà¸­à¸—à¸³à¹„à¸”à¹‰à¸­à¸¢à¹ˆà¸²à¸‡à¸›à¸¥à¸­à¸”à¸ à¸±à¸¢ à¹à¸¥à¸°à¹à¸ˆà¹‰à¸‡à¹€à¸«à¸•à¸¸à¸—à¸±à¸™à¸—à¸µ</span></div>
         </div>
         <div class="guide">
-          <img src="assets/alert.png" alt="แจ้งเตือนเหตุสารเคมี">
-          <div><strong>สารเคมีรั่วไหลหรือกลิ่นผิดปกติ</strong><span>หลีกเลี่ยงการสัมผัส อยู่เหนือลม และแจ้งรายละเอียดแก่ผู้รับผิดชอบ</span></div>
+          <div class="guide-icon"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 7 59 54H5Z"/><path d="M32 23v15M32 47h.01"/></svg></div>
+          <div><strong>à¸ªà¸²à¸£à¹€à¸„à¸¡à¸µà¸£à¸±à¹ˆà¸§à¹„à¸«à¸¥à¸«à¸£à¸·à¸­à¸à¸¥à¸´à¹ˆà¸™à¸œà¸´à¸”à¸›à¸à¸•à¸´</strong><span>à¸«à¸¥à¸µà¸à¹€à¸¥à¸µà¹ˆà¸¢à¸‡à¸à¸²à¸£à¸ªà¸±à¸¡à¸œà¸±à¸ª à¸­à¸¢à¸¹à¹ˆà¹€à¸«à¸™à¸·à¸­à¸¥à¸¡ à¹à¸¥à¸°à¹à¸ˆà¹‰à¸‡à¸£à¸²à¸¢à¸¥à¸°à¹€à¸­à¸µà¸¢à¸”à¹à¸à¹ˆà¸œà¸¹à¹‰à¸£à¸±à¸šà¸œà¸´à¸”à¸Šà¸­à¸š</span></div>
         </div>
         <div class="guide">
-          <img src="assets/evacuate.png" alt="อพยพไปยังจุดรวมพล">
-          <div><strong>การอพยพและจุดรวมพล</strong><span>ใช้เส้นทางหนีภัยที่กำหนด ไม่ใช้ลิฟต์ และตรวจนับจำนวนคน ณ จุดรวมพล</span></div>
+          <div class="guide-icon"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M39 8h16v48H39M8 52l11-13 8 8 10-10M18 15a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm-4 14 8 9-6 15m15-17-11 12M38 48h16M47 41l7 7-7 7"/></svg></div>
+          <div><strong>à¸à¸²à¸£à¸­à¸žà¸¢à¸žà¹à¸¥à¸°à¸ˆà¸¸à¸”à¸£à¸§à¸¡à¸žà¸¥</strong><span>à¹ƒà¸Šà¹‰à¹€à¸ªà¹‰à¸™à¸—à¸²à¸‡à¸«à¸™à¸µà¸ à¸±à¸¢à¸—à¸µà¹ˆà¸à¸³à¸«à¸™à¸” à¹„à¸¡à¹ˆà¹ƒà¸Šà¹‰à¸¥à¸´à¸Ÿà¸•à¹Œ à¹à¸¥à¸°à¸•à¸£à¸§à¸ˆà¸™à¸±à¸šà¸ˆà¸³à¸™à¸§à¸™à¸„à¸™ à¸“ à¸ˆà¸¸à¸”à¸£à¸§à¸¡à¸žà¸¥</span></div>
         </div>
         <div class="guide">
-          <img src="assets/announcement.png" alt="ติดตามประกาศฉุกเฉิน">
-          <div><strong>ประกาศและคำสั่งฉุกเฉิน</strong><span>ติดตามข้อมูลจากช่องทางทางการ และปฏิบัติตามคำสั่งของเจ้าหน้าที่อย่างเคร่งครัด</span></div>
+          <div class="guide-icon"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 27h14L48 10v44L22 37H8Z"/><path d="m17 37 5 16h10l-6-14M53 22c5 5 5 15 0 20"/></svg></div>
+          <div><strong>à¸›à¸£à¸°à¸à¸²à¸¨à¹à¸¥à¸°à¸„à¸³à¸ªà¸±à¹ˆà¸‡à¸‰à¸¸à¸à¹€à¸‰à¸´à¸™</strong><span>à¸•à¸´à¸”à¸•à¸²à¸¡à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸ˆà¸²à¸à¸Šà¹ˆà¸­à¸‡à¸—à¸²à¸‡à¸—à¸²à¸‡à¸à¸²à¸£ à¹à¸¥à¸°à¸›à¸à¸´à¸šà¸±à¸•à¸´à¸•à¸²à¸¡à¸„à¸³à¸ªà¸±à¹ˆà¸‡à¸‚à¸­à¸‡à¹€à¸ˆà¹‰à¸²à¸«à¸™à¹‰à¸²à¸—à¸µà¹ˆà¸­à¸¢à¹ˆà¸²à¸‡à¹€à¸„à¸£à¹ˆà¸‡à¸„à¸£à¸±à¸”</span></div>
         </div>
       </section>
 
       <div class="section-heading">
-        <h2>หมายเลขติดต่อฉุกเฉิน</h2>
-        <p>ให้ข้อมูลสถานที่เกิดเหตุ ลักษณะเหตุ จำนวนผู้ได้รับผลกระทบ และหมายเลขติดต่อกลับ</p>
+        <h2>à¸«à¸¡à¸²à¸¢à¹€à¸¥à¸‚à¸•à¸´à¸”à¸•à¹ˆà¸­à¸‰à¸¸à¸à¹€à¸‰à¸´à¸™</h2>
+        <p>à¹ƒà¸«à¹‰à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸ªà¸–à¸²à¸™à¸—à¸µà¹ˆà¹€à¸à¸´à¸”à¹€à¸«à¸•à¸¸ à¸¥à¸±à¸à¸©à¸“à¸°à¹€à¸«à¸•à¸¸ à¸ˆà¸³à¸™à¸§à¸™à¸œà¸¹à¹‰à¹„à¸”à¹‰à¸£à¸±à¸šà¸œà¸¥à¸à¸£à¸°à¸—à¸š à¹à¸¥à¸°à¸«à¸¡à¸²à¸¢à¹€à¸¥à¸‚à¸•à¸´à¸”à¸•à¹ˆà¸­à¸à¸¥à¸±à¸š</p>
       </div>
 
       <section class="emergency">
         <article class="emergency-card war-room">
-          <div class="emergency-icon"><img src="assets/ieat_logo.png" alt="ศูนย์เฝ้าระวังสิ่งแวดล้อม"></div>
-          <h3>ศูนย์เฝ้าระวังสิ่งแวดล้อมฯ (War Room)</h3>
-          <p>ตลอด 24 ชั่วโมง</p>
-          <a class="phone" href="tel:022072700">02-207-2700<br><small>ต่อ 10401, 10402, 10403</small></a>
+          <div class="emergency-icon" aria-label="à¸¨à¸¹à¸™à¸¢à¹Œà¹€à¸à¹‰à¸²à¸£à¸°à¸§à¸±à¸‡à¸ªà¸´à¹ˆà¸‡à¹à¸§à¸”à¸¥à¹‰à¸­à¸¡"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M11 35a21 21 0 0 1 42 0v13H41V34h12M23 48H11V35M23 48c0 6 4 9 10 9h9"/><path d="M26 22h12M32 16v12"/></svg></div>
+          <h3>à¸¨à¸¹à¸™à¸¢à¹Œà¹€à¸à¹‰à¸²à¸£à¸°à¸§à¸±à¸‡à¸ªà¸´à¹ˆà¸‡à¹à¸§à¸”à¸¥à¹‰à¸­à¸¡à¸¯ (War Room)</h3>
+          <p>à¸•à¸¥à¸­à¸” 24 à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡</p>
+          <a class="phone" href="tel:022072700">02-207-2700<br><small>à¸•à¹ˆà¸­ 10401, 10402, 10403</small></a>
         </article>
 
         <article class="emergency-card fire">
-          <div class="emergency-icon"><img src="assets/fire.png" alt="เหตุเพลิงไหม้"></div>
-          <h3>เหตุเพลิงไหม้</h3>
-          <p>ตลอด 24 ชั่วโมง</p>
+          <div class="emergency-icon" aria-label="à¹€à¸«à¸•à¸¸à¹€à¸žà¸¥à¸´à¸‡à¹„à¸«à¸¡à¹‰"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M34 5c4 15-7 17 0 28 2-6 7-9 10-15 9 10 13 20 9 30-4 10-13 14-22 14-13 0-22-9-20-22 2-11 10-18 17-26-1 10 1 16 6 19 1-12 4-19 0-28Z"/></svg></div>
+          <h3>à¹€à¸«à¸•à¸¸à¹€à¸žà¸¥à¸´à¸‡à¹„à¸«à¸¡à¹‰</h3>
+          <p>à¸•à¸¥à¸­à¸” 24 à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡</p>
           <a class="phone" href="tel:199">199</a>
         </article>
 
         <article class="emergency-card hospital">
-          <div class="emergency-icon"><img src="assets/hospital.png" alt="เจ็บป่วยฉุกเฉิน"></div>
-          <h3>เจ็บป่วยฉุกเฉิน</h3>
-          <p>ตลอด 24 ชั่วโมง</p>
+          <div class="emergency-icon" aria-label="à¹€à¸ˆà¹‡à¸šà¸›à¹ˆà¸§à¸¢à¸‰à¸¸à¸à¹€à¸‰à¸´à¸™"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M9 23h46v33H9ZM16 23l5-12h22l5 12"/><path d="M26 38h12M32 32v12M47 31h2"/></svg></div>
+          <h3>à¹€à¸ˆà¹‡à¸šà¸›à¹ˆà¸§à¸¢à¸‰à¸¸à¸à¹€à¸‰à¸´à¸™</h3>
+          <p>à¸•à¸¥à¸­à¸” 24 à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡</p>
           <a class="phone" href="tel:1669">1669</a>
         </article>
 
         <article class="emergency-card police">
-          <div class="emergency-icon"><img src="assets/police.png" alt="เหตุด่วนเหตุร้าย"></div>
-          <h3>เหตุด่วนเหตุร้าย</h3>
-          <p>ตลอด 24 ชั่วโมง</p>
+          <div class="emergency-icon" aria-label="à¹€à¸«à¸•à¸¸à¸”à¹ˆà¸§à¸™à¹€à¸«à¸•à¸¸à¸£à¹‰à¸²à¸¢"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6 54 15v16c0 15-9 24-22 28C19 55 10 46 10 31V15Z"/><path d="m32 18 4 9 10 1-8 7 3 10-9-5-9 5 3-10-8-7 10-1Z"/></svg></div>
+          <h3>à¹€à¸«à¸•à¸¸à¸”à¹ˆà¸§à¸™à¹€à¸«à¸•à¸¸à¸£à¹‰à¸²à¸¢</h3>
+          <p>à¸•à¸¥à¸­à¸” 24 à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡</p>
           <a class="phone" href="tel:191">191</a>
         </article>
       </section>
 
       <section class="tip">
         <div class="tip-badge">i</div>
-        <div><strong>บันทึกหมายเลขฉุกเฉินไว้ในโทรศัพท์</strong><span>การแจ้งเหตุอย่างรวดเร็วและให้ข้อมูลครบถ้วน ช่วยลดความสูญเสียและเพิ่มประสิทธิภาพในการช่วยเหลือ</span></div>
+        <div><strong>à¸šà¸±à¸™à¸—à¸¶à¸à¸«à¸¡à¸²à¸¢à¹€à¸¥à¸‚à¸‰à¸¸à¸à¹€à¸‰à¸´à¸™à¹„à¸§à¹‰à¹ƒà¸™à¹‚à¸—à¸£à¸¨à¸±à¸žà¸—à¹Œ</strong><span>à¸à¸²à¸£à¹à¸ˆà¹‰à¸‡à¹€à¸«à¸•à¸¸à¸­à¸¢à¹ˆà¸²à¸‡à¸£à¸§à¸”à¹€à¸£à¹‡à¸§à¹à¸¥à¸°à¹ƒà¸«à¹‰à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸„à¸£à¸šà¸–à¹‰à¸§à¸™ à¸Šà¹ˆà¸§à¸¢à¸¥à¸”à¸„à¸§à¸²à¸¡à¸ªà¸¹à¸à¹€à¸ªà¸µà¸¢à¹à¸¥à¸°à¹€à¸žà¸´à¹ˆà¸¡à¸›à¸£à¸°à¸ªà¸´à¸—à¸˜à¸´à¸ à¸²à¸žà¹ƒà¸™à¸à¸²à¸£à¸Šà¹ˆà¸§à¸¢à¹€à¸«à¸¥à¸·à¸­</span></div>
       </section>
     </main>
   </div>
