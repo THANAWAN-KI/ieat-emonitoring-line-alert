@@ -8,22 +8,22 @@
     @import url("https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap");
 
     :root {
-      --purple: #4D286F;
-      --purple-2: #6B3F91;
-      --purple-soft: #F2EDF7;
+      --purple: #59267c;
+      --purple-2: #59267c;
+      --purple-soft: #e2d4e7;
       --ink: #30283A;
       --muted: #746B7B;
-      --line: #D9C9E7;
+      --line: #e2d4e7;
       --white: #ffffff;
-      --red: #e43643;
-      --red-soft: #fff0f2;
-      --amber: #ee8a00;
-      --amber-soft: #fff7e8;
-      --green: #198754;
-      --green-soft: #edf8f2;
-      --blue: #2860b8;
-      --blue-soft: #eef4ff;
-      --shadow: 0 3px 12px rgba(77, 40, 111, .10);
+      --red: #59267c;
+      --red-soft: #e2d4e7;
+      --amber: #0769ad;
+      --amber-soft: #e8f5ff;
+      --green: #669c34;
+      --green-soft: #f8fff2;
+      --blue: #0769ad;
+      --blue-soft: #e8f5ff;
+      --shadow: 0 3px 12px rgba(89, 38, 124, .10);
     }
 
     * { box-sizing: border-box; }
@@ -35,7 +35,7 @@
       min-width: 320px;
       color: var(--ink);
       font-family: "Sarabun", "Noto Sans Thai", Tahoma, sans-serif;
-      background:#F1EDF4;
+      background:#e2d4e7;
     }
 
     .shell {
@@ -46,7 +46,7 @@
       overflow: hidden;
       border:0;
       border-radius:0;
-      background:#FAF8FC;
+      background:#f8fff2;
       box-shadow: var(--shadow);
     }
 
@@ -59,7 +59,7 @@
       display: flex;
       align-items: center;
       justify-content:flex-start;
-      gap: 24px;
+      gap: 14px;
       padding:18px;
       border-bottom: 1px solid var(--line);
       background: rgba(255, 255, 255, .92);
@@ -96,7 +96,7 @@
       padding:27px 24px;
       border-radius:14px;
       color: var(--white);
-      background:linear-gradient(135deg,#4D286F 0%,#6B3F91 100%);
+      background:linear-gradient(135deg,#59267c 0%,#0769ad 100%);
     }
 
     .hero::after {
@@ -215,7 +215,7 @@
     .step h3 { margin: 0 0 7px; color: var(--purple); font-size: 23px; }
     .step p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.62; }
 
-    .step.stop-card { border-top: 4px solid var(--red); }
+    .step.stop-card { border-top: 4px solid var(--purple); }
     .step.stop-card .step-icon { background: var(--red-soft); }
     .step.alert-card { border-top: 4px solid var(--amber); }
     .step.alert-card .step-icon { background: var(--amber-soft); }
@@ -321,6 +321,39 @@
     .tip strong { display: block; color: var(--purple); }
     .tip span { display: block; margin-top: 2px; color: var(--muted); font-size: 13px; }
 
+    .detail-grid {
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+    }
+
+    .detail-card {
+      padding:18px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:#fff;
+      box-shadow:0 2px 8px rgba(89,38,124,.08);
+    }
+
+    .detail-card.report { border-left:4px solid var(--blue); }
+    .detail-card.safe { border-left:4px solid var(--green); }
+    .detail-card h3 { margin:0 0 10px; color:var(--purple); font-size:18px; }
+    .detail-card ul { margin:0; padding-left:21px; }
+    .detail-card li { margin:7px 0; color:var(--muted); font-size:14px; line-height:1.55; }
+
+    .do-dont {
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+
+    .rule-card { padding:16px 18px; border-radius:14px; }
+    .rule-card strong { display:block; margin-bottom:7px; font-size:17px; }
+    .rule-card p { margin:0; font-size:14px; line-height:1.6; }
+    .rule-card.do { color:#3f681b; background:var(--green-soft); border:1px solid #cde3ba; }
+    .rule-card.dont { color:#4c205f; background:var(--purple-soft); border:1px solid #cfbad8; }
+
     /* Modern safety layout */
     .header-icon{width:72px;height:72px;flex:0 0 72px;object-fit:contain}
     .brand-title { display:flex; align-items:center; gap:11px; }
@@ -351,16 +384,34 @@
 
     @media (max-width: 620px) {
       .shell { width: 100%; margin: 0; border: 0; border-radius: 0; }
-      .page-header { padding:14px; }
+      .page-header { padding:14px 12px; }
       .header-icon{width:60px;height:60px;flex-basis:60px}
+      .brand-title { font-size:18px; line-height:1.35; }
+      .brand-subtitle { font-size:12px; line-height:1.45; }
       .header-badge { display: none; }
       main { padding:12px 12px 26px; }
       .hero { padding:24px 18px; border-radius:12px; }
       .hero p { font-size: 15px; }
       .notice { align-items: flex-start; }
-      .steps, .guides, .emergency { grid-template-columns: 1fr; }
+      .steps, .guides, .emergency, .detail-grid, .do-dont { grid-template-columns: 1fr; }
       .step { min-height: 0; }
-      .emergency-card { min-height: 205px; }
+      .emergency-card { min-height: 180px; }
+      .section-heading h2 { font-size:20px; line-height:1.35; }
+      .step h3 { font-size:20px; }
+      .notice { gap:11px; padding:14px; }
+      .notice-mark { width:40px; height:40px; flex-basis:40px; }
+      .guide { align-items:flex-start; padding:14px; }
+      .guide-icon { width:50px; height:50px; flex-basis:50px; }
+      .phone { font-size:23px; }
+    }
+
+    @media (max-width: 380px) {
+      .header-icon { width:50px; height:50px; flex-basis:50px; }
+      .brand-title { font-size:16px; }
+      .hero h1 { font-size:27px; }
+      .hero-label { font-size:11px; }
+      .hero { padding:21px 16px; }
+      main { padding-left:10px; padding-right:10px; }
     }
   </style>
 </head>
@@ -447,6 +498,44 @@
         <div class="guide">
           <div class="guide-icon"><img src="./assets/alert.png" alt="ติดตามประกาศฉุกเฉิน"></div>
           <div><strong>ประกาศและคำสั่งฉุกเฉิน</strong><span>ติดตามข้อมูลจากช่องทางทางการ และปฏิบัติตามคำสั่งของเจ้าหน้าที่อย่างเคร่งครัด</span></div>
+        </div>
+      </section>
+
+      <div class="section-heading">
+        <h2>ข้อมูลสำคัญที่ต้องแจ้งเจ้าหน้าที่</h2>
+        <p>เตรียมข้อมูลให้ครบก่อนโทร เพื่อให้เจ้าหน้าที่ประเมินเหตุและส่งความช่วยเหลือได้รวดเร็ว</p>
+      </div>
+
+      <section class="detail-grid">
+        <article class="detail-card report">
+          <h3>รายละเอียดของเหตุการณ์</h3>
+          <ul>
+            <li>ชื่อผู้แจ้งและหมายเลขโทรศัพท์ที่ติดต่อกลับได้</li>
+            <li>ชื่อสถานประกอบการ อาคาร ชั้น และจุดเกิดเหตุที่ชัดเจน</li>
+            <li>ประเภทเหตุ เช่น ไฟไหม้ สารเคมีรั่วไหล กลิ่น หรือเสียงผิดปกติ</li>
+            <li>เวลาเริ่มเกิดเหตุและสถานการณ์ล่าสุดขณะแจ้ง</li>
+          </ul>
+        </article>
+
+        <article class="detail-card safe">
+          <h3>ข้อมูลด้านความปลอดภัย</h3>
+          <ul>
+            <li>จำนวนผู้บาดเจ็บ สูญหาย หรือติดอยู่ในพื้นที่</li>
+            <li>ชื่อสารเคมีหรือวัตถุอันตราย หากทราบข้อมูล</li>
+            <li>ทิศทางลม การกระจายของควัน และพื้นที่ที่ได้รับผลกระทบ</li>
+            <li>มาตรการที่ดำเนินการแล้ว เช่น ตัดไฟ ปิดวาล์ว หรืออพยพ</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="do-dont" aria-label="ข้อควรปฏิบัติและข้อห้าม">
+        <div class="rule-card do">
+          <strong>ควรปฏิบัติ</strong>
+          <p>ตั้งสติ ใช้อุปกรณ์ป้องกันส่วนบุคคล ออกจากพื้นที่ตามเส้นทางหนีภัย และช่วยเหลือผู้อื่นเมื่อทำได้อย่างปลอดภัย</p>
+        </div>
+        <div class="rule-card dont">
+          <strong>ห้ามปฏิบัติ</strong>
+          <p>ห้ามย้อนกลับเข้าไปเก็บทรัพย์สิน ห้ามเผยแพร่ข้อมูลที่ยังไม่ยืนยัน และห้ามเข้าใกล้จุดเกิดเหตุโดยไม่ได้รับอนุญาต</p>
         </div>
       </section>
 
