@@ -8,12 +8,12 @@
     @import url("https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap");
 
     :root {
-      --purple: #123f5a;
-      --purple-2: #16788a;
-      --purple-soft: #eef7f8;
-      --ink: #20313d;
-      --muted: #657681;
-      --line: #dce8eb;
+      --purple: #4D286F;
+      --purple-2: #6B3F91;
+      --purple-soft: #F2EDF7;
+      --ink: #30283A;
+      --muted: #746B7B;
+      --line: #D9C9E7;
       --white: #ffffff;
       --red: #e43643;
       --red-soft: #fff0f2;
@@ -23,7 +23,7 @@
       --green-soft: #edf8f2;
       --blue: #2860b8;
       --blue-soft: #eef4ff;
-      --shadow: 0 16px 42px rgba(18, 63, 90, .13);
+      --shadow: 0 3px 12px rgba(77, 40, 111, .10);
     }
 
     * { box-sizing: border-box; }
@@ -35,32 +35,32 @@
       min-width: 320px;
       color: var(--ink);
       font-family: "Sarabun", "Noto Sans Thai", Tahoma, sans-serif;
-      background:
-        radial-gradient(circle at 4% 3%, rgba(22, 120, 138, .14), transparent 24rem),
-        linear-gradient(180deg, #f7fbfc 0%, #eaf2f4 100%);
+      background:#F1EDF4;
     }
 
     .shell {
-      width: min(1180px, calc(100% - 32px));
-      margin: 28px auto;
+      width:100%;
+      max-width:720px;
+      min-height:100vh;
+      margin:0 auto;
       overflow: hidden;
-      border: 1px solid rgba(18, 63, 90, .10);
-      border-radius: 30px;
-      background: var(--white);
+      border:0;
+      border-radius:0;
+      background:#FAF8FC;
       box-shadow: var(--shadow);
     }
 
     .topbar {
-      height: 8px;
-      background: linear-gradient(90deg, var(--red), var(--amber), var(--green), var(--purple-2));
+      height:4px;
+      background:var(--purple-2);
     }
 
     .page-header {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content:flex-start;
       gap: 24px;
-      padding: 27px 38px;
+      padding:18px;
       border-bottom: 1px solid var(--line);
       background: rgba(255, 255, 255, .92);
     }
@@ -79,7 +79,7 @@
 
     .header-badge {
       padding: 9px 14px;
-      border: 1px solid #bdd9de;
+      border:1px solid var(--line);
       border-radius: 999px;
       color: var(--purple);
       background: var(--purple-soft);
@@ -88,15 +88,15 @@
       white-space: nowrap;
     }
 
-    main { padding: 34px 38px 42px; }
+    main { padding:16px 16px 28px; }
 
     .hero {
       position: relative;
       overflow: hidden;
-      padding: 38px 42px;
-      border-radius: 24px;
+      padding:27px 24px;
+      border-radius:14px;
       color: var(--white);
-      background: linear-gradient(135deg, #0c3045 0%, var(--purple) 52%, var(--purple-2) 100%);
+      background:linear-gradient(135deg,#4D286F 0%,#6B3F91 100%);
     }
 
     .hero::after {
@@ -126,7 +126,7 @@
       position: relative;
       z-index: 1;
       margin: 16px 0 6px;
-      font-size: clamp(34px, 5vw, 54px);
+      font-size:clamp(30px,6vw,40px);
       line-height: 1.08;
     }
 
@@ -136,7 +136,7 @@
       max-width: 720px;
       margin: 0;
       color: rgba(255, 255, 255, .84);
-      font-size: 18px;
+      font-size:15px;
       line-height: 1.65;
     }
 
@@ -146,7 +146,7 @@
       gap: 16px;
       margin-top: 18px;
       padding: 17px 20px;
-      border: 1px solid #cbe2e6;
+      border:1px solid var(--line);
       border-radius: 18px;
       background: var(--purple-soft);
     }
@@ -167,22 +167,22 @@
     .notice strong { display: block; color: var(--purple); font-size: 17px; }
     .notice span { display: block; margin-top: 3px; color: var(--muted); font-size: 14px; }
 
-    .section-heading { margin: 36px 0 16px; }
-    .section-heading h2 { margin: 0; color: var(--purple); font-size: 27px; }
+    .section-heading { margin:27px 0 13px; }
+    .section-heading h2 { margin:0;color:var(--purple);font-size:23px; }
     .section-heading p { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
 
     .steps {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
     }
 
     .step {
       position: relative;
-      min-height: 270px;
-      padding: 20px;
+      min-height:245px;
+      padding:17px;
       border: 1px solid var(--line);
-      border-radius: 19px;
+      border-radius:14px;
       background: var(--white);
       box-shadow: 0 7px 18px rgba(41, 35, 46, .06);
     }
@@ -211,7 +211,7 @@
       background: var(--purple-soft);
     }
 
-    .step-icon svg { width: 58px; height: 58px; fill: none; stroke: currentColor; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+    .step-icon img { width:62px;height:62px;object-fit:contain; }
     .step h3 { margin: 0 0 7px; color: var(--purple); font-size: 23px; }
     .step p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.62; }
 
@@ -225,7 +225,7 @@
 
     .guides {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns:1fr;
       gap: 12px;
     }
 
@@ -241,21 +241,21 @@
     }
 
     .guide-icon { display:grid; place-items:center; width:56px; height:56px; flex:0 0 56px; border-radius:15px; color:var(--purple); background:var(--purple-soft); }
-    .guide-icon svg { width:34px; height:34px; fill:none; stroke:currentColor; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
+    .guide-icon img { width:42px;height:42px;object-fit:contain; }
     .guide strong { display: block; font-size: 17px; }
     .guide span { display: block; margin-top: 3px; color: var(--muted); font-size: 13px; line-height: 1.45; }
 
     .emergency {
       display: grid;
-      grid-template-columns: 1.45fr repeat(3, 1fr);
-      gap: 14px;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
     }
 
     .emergency-card {
       display: flex;
       flex-direction: column;
-      min-height: 224px;
-      padding: 22px;
+      min-height:205px;
+      padding:18px;
       border: 1px solid var(--line);
       border-top: 5px solid var(--card-color);
       border-radius: 20px;
@@ -274,7 +274,7 @@
     }
 
     .emergency-icon { color: var(--card-color); }
-    .emergency-icon svg { width:42px; height:42px; fill:none; stroke:currentColor; stroke-width:2.3; stroke-linecap:round; stroke-linejoin:round; }
+    .emergency-icon img { width:44px;height:44px;object-fit:contain; }
     .emergency-card h3 { margin: 0; font-size: 18px; line-height: 1.35; }
     .emergency-card p { margin: 7px 0 0; color: var(--muted); font-size: 13px; }
 
@@ -322,19 +322,8 @@
     .tip span { display: block; margin-top: 2px; color: var(--muted); font-size: 13px; }
 
     /* Modern safety layout */
+    .header-icon{width:72px;height:72px;flex:0 0 72px;object-fit:contain}
     .brand-title { display:flex; align-items:center; gap:11px; }
-    .brand-title::before {
-      display:grid;
-      place-items:center;
-      width:34px;
-      height:34px;
-      border-radius:11px;
-      color:#fff;
-      background:linear-gradient(135deg,var(--purple),var(--purple-2));
-      content:"✓";
-      font-size:20px;
-      box-shadow:0 5px 12px rgba(18,63,90,.18);
-    }
     .section-heading { position:relative; padding-left:16px; }
     .section-heading::before {
       position:absolute;
@@ -347,13 +336,13 @@
       content:"";
     }
     .step,.guide,.emergency-card { transition:transform .2s ease,box-shadow .2s ease; }
-    .step:hover,.guide:hover,.emergency-card:hover { transform:translateY(-3px); box-shadow:0 13px 28px rgba(18,63,90,.11); }
+    .step:hover,.guide:hover,.emergency-card:hover { transform:translateY(-2px); box-shadow:0 8px 18px rgba(77,40,111,.11); }
     .step { overflow:hidden; }
     .step::after { position:absolute; right:-28px; bottom:-32px; width:90px; height:90px; border:16px solid currentColor; border-radius:50%; opacity:.035; content:""; }
     .guide { border-left:4px solid var(--purple-2); }
     .emergency-card { border-top-width:4px; }
     .phone small { font-size:13px; color:var(--muted); font-weight:700; }
-    .tip { border-color:#cbe2e6; }
+    .tip { border-color:var(--line); }
 
     @media (max-width: 900px) {
       .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -362,10 +351,11 @@
 
     @media (max-width: 620px) {
       .shell { width: 100%; margin: 0; border: 0; border-radius: 0; }
-      .page-header { padding: 20px; }
+      .page-header { padding:14px; }
+      .header-icon{width:60px;height:60px;flex-basis:60px}
       .header-badge { display: none; }
-      main { padding: 22px 16px 30px; }
-      .hero { padding: 29px 23px; border-radius: 20px; }
+      main { padding:12px 12px 26px; }
+      .hero { padding:24px 18px; border-radius:12px; }
       .hero p { font-size: 15px; }
       .notice { align-items: flex-start; }
       .steps, .guides, .emergency { grid-template-columns: 1fr; }
@@ -379,11 +369,11 @@
     <div class="topbar"></div>
 
     <header class="page-header">
+      <img class="header-icon" src="./assets/building.png" alt="อาคารนิคมอุตสาหกรรม">
       <div>
         <div class="brand-title">ระบบติดตามตรวจสอบสิ่งแวดล้อม</div>
         <div class="brand-subtitle">ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย</div>
       </div>
-      <div class="header-badge">คู่มือสำหรับเหตุฉุกเฉิน</div>
     </header>
 
     <main>
@@ -409,28 +399,28 @@
       <section class="steps">
         <article class="step stop-card">
           <div class="step-number">1</div>
-          <div class="step-icon" aria-label="ไอคอนหยุด"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M22 5h20l17 17v20L42 59H22L5 42V22Z"/><path d="M24 39V22a4 4 0 0 1 8 0v12-16a4 4 0 0 1 8 0v16-11a4 4 0 0 1 8 0v17c0 11-7 18-18 18h-1c-7 0-12-3-16-9l-6-9a4 4 0 0 1 6-5l11 8"/></svg></div>
+          <div class="step-icon"><img src="./assets/error.png" alt="ไอคอนหยุด"></div>
           <h3>หยุด</h3>
           <p>หยุดการทำงานทันทีเมื่อพบสิ่งผิดปกติ และถอยออกจากจุดเสี่ยงโดยไม่สัมผัสวัตถุหรือสารที่ไม่ทราบชนิด</p>
         </article>
 
         <article class="step alert-card">
           <div class="step-number">2</div>
-          <div class="step-icon" aria-label="ไอคอนแจ้งเตือน"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 7 59 54H5Z"/><path d="M32 23v15M32 47h.01"/></svg></div>
+          <div class="step-icon"><img src="./assets/warning.png" alt="ไอคอนแจ้งเตือน"></div>
           <h3>แจ้งเตือน</h3>
           <p>แจ้งหัวหน้างาน เจ้าหน้าที่ความปลอดภัย หรือศูนย์ควบคุม พร้อมระบุสถานที่และลักษณะของเหตุให้ชัดเจน</p>
         </article>
 
         <article class="step evac-card">
           <div class="step-number">3</div>
-          <div class="step-icon" aria-label="ไอคอนอพยพ"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M38 7h17v50H38M46 32h.01M8 52l10-12 8 7 10-10M18 15a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm-4 14 8 9-6 15m15-17-11 12M35 48h18M46 41l7 7-7 7"/></svg></div>
+          <div class="step-icon"><img src="./assets/people.png" alt="ไอคอนอพยพ"></div>
           <h3>อพยพ</h3>
           <p>ออกจากพื้นที่ตามเส้นทางหนีภัย ไปยังจุดรวมพลที่กำหนดอย่างเป็นระเบียบ และไม่ย้อนกลับเข้าไปในพื้นที่</p>
         </article>
 
         <article class="step announce-card">
           <div class="step-number">4</div>
-          <div class="step-icon" aria-label="ไอคอนประกาศ"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 27h14L48 10v44L22 37H8Z"/><path d="m17 37 5 16h10l-6-14M53 22c5 5 5 15 0 20M58 16c9 9 9 23 0 32"/></svg></div>
+          <div class="step-icon"><img src="./assets/alert.png" alt="ไอคอนประกาศ"></div>
           <h3>ติดตามประกาศ</h3>
           <p>รับฟังคำสั่งจากเจ้าหน้าที่หรือระบบประกาศ และรอการยืนยันว่าพื้นที่ปลอดภัยก่อนกลับเข้าปฏิบัติงาน</p>
         </article>
@@ -443,19 +433,19 @@
 
       <section class="guides">
         <div class="guide">
-          <div class="guide-icon"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M22 5h20l17 17v20L42 59H22L5 42V22Z"/><path d="M21 21h22v22H21Z"/></svg></div>
+          <div class="guide-icon"><img src="./assets/building.png" alt="อาคารหรือพื้นที่เกิดเหตุ"></div>
           <div><strong>ไฟไหม้ ควัน หรือกลิ่นไหม้</strong><span>หยุดกิจกรรม ตัดแหล่งกำเนิดเมื่อทำได้อย่างปลอดภัย และแจ้งเหตุทันที</span></div>
         </div>
         <div class="guide">
-          <div class="guide-icon"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 7 59 54H5Z"/><path d="M32 23v15M32 47h.01"/></svg></div>
+          <div class="guide-icon"><img src="./assets/warning.png" alt="แจ้งเตือนเหตุฉุกเฉิน"></div>
           <div><strong>สารเคมีรั่วไหลหรือกลิ่นผิดปกติ</strong><span>หลีกเลี่ยงการสัมผัส อยู่เหนือลม และแจ้งรายละเอียดแก่ผู้รับผิดชอบ</span></div>
         </div>
         <div class="guide">
-          <div class="guide-icon"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M39 8h16v48H39M8 52l11-13 8 8 10-10M18 15a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm-4 14 8 9-6 15m15-17-11 12M38 48h16M47 41l7 7-7 7"/></svg></div>
+          <div class="guide-icon"><img src="./assets/buildings.png" alt="อพยพไปยังจุดรวมพล"></div>
           <div><strong>การอพยพและจุดรวมพล</strong><span>ใช้เส้นทางหนีภัยที่กำหนด ไม่ใช้ลิฟต์ และตรวจนับจำนวนคน ณ จุดรวมพล</span></div>
         </div>
         <div class="guide">
-          <div class="guide-icon"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 27h14L48 10v44L22 37H8Z"/><path d="m17 37 5 16h10l-6-14M53 22c5 5 5 15 0 20"/></svg></div>
+          <div class="guide-icon"><img src="./assets/alert.png" alt="ติดตามประกาศฉุกเฉิน"></div>
           <div><strong>ประกาศและคำสั่งฉุกเฉิน</strong><span>ติดตามข้อมูลจากช่องทางทางการ และปฏิบัติตามคำสั่งของเจ้าหน้าที่อย่างเคร่งครัด</span></div>
         </div>
       </section>
@@ -467,28 +457,28 @@
 
       <section class="emergency">
         <article class="emergency-card war-room">
-          <div class="emergency-icon" aria-label="ศูนย์เฝ้าระวังสิ่งแวดล้อม"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M11 35a21 21 0 0 1 42 0v13H41V34h12M23 48H11V35M23 48c0 6 4 9 10 9h9"/><path d="M26 22h12M32 16v12"/></svg></div>
+          <div class="emergency-icon"><img src="./assets/people.png" alt="ศูนย์เฝ้าระวังสิ่งแวดล้อม"></div>
           <h3>ศูนย์เฝ้าระวังสิ่งแวดล้อมฯ (War Room)</h3>
           <p>ตลอด 24 ชั่วโมง</p>
           <a class="phone" href="tel:022072700">02-207-2700<br><small>ต่อ 10401, 10402, 10403</small></a>
         </article>
 
         <article class="emergency-card fire">
-          <div class="emergency-icon" aria-label="เหตุเพลิงไหม้"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M34 5c4 15-7 17 0 28 2-6 7-9 10-15 9 10 13 20 9 30-4 10-13 14-22 14-13 0-22-9-20-22 2-11 10-18 17-26-1 10 1 16 6 19 1-12 4-19 0-28Z"/></svg></div>
+          <div class="emergency-icon"><img src="./assets/error.png" alt="เหตุเพลิงไหม้"></div>
           <h3>เหตุเพลิงไหม้</h3>
           <p>ตลอด 24 ชั่วโมง</p>
           <a class="phone" href="tel:199">199</a>
         </article>
 
         <article class="emergency-card hospital">
-          <div class="emergency-icon" aria-label="เจ็บป่วยฉุกเฉิน"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M9 23h46v33H9ZM16 23l5-12h22l5 12"/><path d="M26 38h12M32 32v12M47 31h2"/></svg></div>
+          <div class="emergency-icon"><img src="./assets/buildings-alt.png" alt="เจ็บป่วยฉุกเฉิน"></div>
           <h3>เจ็บป่วยฉุกเฉิน</h3>
           <p>ตลอด 24 ชั่วโมง</p>
           <a class="phone" href="tel:1669">1669</a>
         </article>
 
         <article class="emergency-card police">
-          <div class="emergency-icon" aria-label="เหตุด่วนเหตุร้าย"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6 54 15v16c0 15-9 24-22 28C19 55 10 46 10 31V15Z"/><path d="m32 18 4 9 10 1-8 7 3 10-9-5-9 5 3-10-8-7 10-1Z"/></svg></div>
+          <div class="emergency-icon"><img src="./assets/alert.png" alt="เหตุด่วนเหตุร้าย"></div>
           <h3>เหตุด่วนเหตุร้าย</h3>
           <p>ตลอด 24 ชั่วโมง</p>
           <a class="phone" href="tel:191">191</a>
