@@ -1,6 +1,4 @@
-from pathlib import Path
-
-html = r'''<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
 <meta charset="UTF-8">
@@ -23,8 +21,8 @@ html = r'''<!DOCTYPE html>
   --green:#2B8A3E;
   --green-soft:#EEF8F1;
 
-  --red:#C51F35;
-  --red-soft:#FFF1F3;
+  --red:#E57A2B;
+  --red-soft:#FFF4EA;
 
   --orange:#E67700;
   --orange-soft:#FFF7E8;
@@ -32,14 +30,14 @@ html = r'''<!DOCTYPE html>
   --yellow:#B7791F;
   --yellow-soft:#FFF9E8;
 
-  --blue:#1982C4;
-  --blue-soft:#EEF7FC;
+  --blue:#6A3FA0;
+  --blue-soft:#F3EEFA;
 
   --ink:#26212B;
   --muted:#716C76;
 
   --line:#E4DFE8;
-  --bg:#F5F3F6;
+  --bg:#F8F6FB;
   --white:#FFFFFF;
 
   --shadow:0 5px 18px rgba(53,35,70,.07);
@@ -1152,7 +1150,7 @@ main{
 
     <img
       class="logo"
-      src="../assets/ieat_logo.png"
+      src="./assets/ieat_logo.png"
       alt="กนอ."
       onerror="this.onerror=null;this.src='./assets/ieat_logo.png';"
     >
@@ -1433,7 +1431,7 @@ main{
     <article class="sev high">
 
       <img
-        src="../assets/4.png"
+        src="./assets/4.png"
         alt="เกินค่ามาตรฐาน"
       >
 
@@ -1451,7 +1449,7 @@ main{
     <article class="sev watch">
 
       <img
-        src="../assets/3.png"
+        src="./assets/3.png"
         alt="เฝ้าระวัง"
       >
 
@@ -1469,7 +1467,7 @@ main{
     <article class="sev follow">
 
       <img
-        src="../assets/1.png"
+        src="./assets/1.png"
         alt="ติดตามสถานการณ์"
       >
 
@@ -2836,9 +2834,3 @@ loadStatus();
 
 </body>
 </html>
-'''
-
-out = Path("/mnt/data/summary_latest.html")
-out.write_text(html, encoding="utf-8")
-print(f"สร้างไฟล์เรียบร้อย: {out}")
-print(f"ขนาดไฟล์: {out.stat().st_size/1024:.1f} KB")
