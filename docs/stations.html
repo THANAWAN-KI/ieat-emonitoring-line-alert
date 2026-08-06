@@ -21,17 +21,17 @@
   --green:#2B8A3E;
   --green-soft:#EEF8F1;
 
-  --red:#E57A2B;
-  --red-soft:#FFF4EA;
+  --red:#4D286F;
+  --red-soft:#F2EDF7;
 
-  --orange:#E67700;
-  --orange-soft:#FFF7E8;
+  --orange:#4D286F;
+  --orange-soft:#F2EDF7;
 
-  --yellow:#B7791F;
-  --yellow-soft:#FFF9E8;
+  --yellow:#159B6B;
+  --yellow-soft:#ECF8F2;
 
-  --blue:#6A3FA0;
-  --blue-soft:#F3EEFA;
+  --blue:#4D286F;
+  --blue-soft:#F2EDF7;
 
   --ink:#26212B;
   --muted:#716C76;
@@ -1192,6 +1192,16 @@ main{padding:16px}.hero{padding:16px;background:#F2EDF7;color:#30283A;border:0;b
 .param-title{color:#4D286F}
 .export-png{color:#fff;background:#159B6B;border-color:#159B6B}
 .action.map{color:#4D286F;background:#F2EDF7;border-color:#D9C9E7}
+.decision-card{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}
+.decision-item{padding:12px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--purple);border-radius:12px;box-shadow:var(--shadow)}
+.decision-item.green{border-left-color:var(--green)}
+.decision-item span{display:block;color:var(--muted);font-size:9px}.decision-item strong{display:block;margin-top:4px;color:var(--purple);font-size:14px}.decision-item.green strong{color:var(--green)}
+.station-tools{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px;margin:8px 0}
+.station-search{width:100%;padding:10px 12px;border:1px solid #D9C9E7;border-radius:10px;background:#fff;color:var(--ink);font:inherit;font-size:11px;outline:none}
+.station-search:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(107,63,145,.12)}
+.status-filter{display:flex;gap:5px}.status-filter-btn{padding:8px 10px;border:1px solid #D9C9E7;border-radius:10px;background:#fff;color:var(--muted);font-size:9px;font-weight:800;cursor:pointer}
+.status-filter-btn.active{background:var(--green);border-color:var(--green);color:#fff}
+@media(max-width:480px){.station-tools{grid-template-columns:1fr}.status-filter{display:grid;grid-template-columns:repeat(3,1fr)}}
 </style>
 </head>
 
@@ -1453,6 +1463,17 @@ main{padding:16px}.hero{padding:16px;background:#F2EDF7;color:#30283A;border:0;b
 
   </div>
 
+  <div class="decision-card">
+    <div class="decision-item green">
+      <span>ความพร้อมใช้งานของระบบ</span>
+      <strong id="availabilityText">กำลังประเมิน…</strong>
+    </div>
+    <div class="decision-item">
+      <span>สิ่งที่ควรดำเนินการก่อน</span>
+      <strong id="priorityText">กำลังประมวลผล…</strong>
+    </div>
+  </div>
+
 </section>
 
 
@@ -1596,6 +1617,15 @@ main{padding:16px}.hero{padding:16px;background:#F2EDF7;color:#30283A;border:0;b
       CEMs
     </button>
 
+  </div>
+
+  <div class="station-tools">
+    <input id="stationSearch" class="station-search" type="search" placeholder="ค้นหาชื่อสถานี นิคมฯ หรือพารามิเตอร์" oninput="setStationSearch(this.value)">
+    <div class="status-filter" aria-label="กรองตามสถานะ">
+      <button class="status-filter-btn active" onclick="setStatusFilter('ALL',this)">ทุกสถานะ</button>
+      <button class="status-filter-btn" onclick="setStatusFilter('ONLINE',this)">ONLINE</button>
+      <button class="status-filter-btn" onclick="setStatusFilter('OFFLINE',this)">OFFLINE</button>
+    </div>
   </div>
 
 
@@ -1744,6 +1774,10 @@ const TYPE_INFO = {
 let CURRENT_DATA = null;
 
 let CURRENT_FILTER = "ALL";
+
+let CURRENT_STATUS_FILTER = "ALL";
+
+let CURRENT_SEARCH = "";
 
 
 /* =========================================================
@@ -1948,20 +1982,20 @@ function renderStations(data){
     allStations.filter(
       station => {
 
-        if(
-          CURRENT_FILTER === "ALL"
-        ){
+        const type = String(station.station_type || "").toUpperCase();
+        const status = String(station.status || station.Status || "").toUpperCase();
+        const haystack = [
+          station.station_name, station.StationTH,
+          station.estate_name, station.IndustryZone,
+          station.parameter_alarm, station.ParameterAlram,
+          station.comment, station.Comment
+        ].join(" ").toLowerCase();
 
-          return true;
+        const typeMatch = CURRENT_FILTER === "ALL" || type === CURRENT_FILTER;
+        const statusMatch = CURRENT_STATUS_FILTER === "ALL" || status === CURRENT_STATUS_FILTER;
+        const searchMatch = !CURRENT_SEARCH || haystack.includes(CURRENT_SEARCH);
 
-        }
-
-
-        return String(
-          station.station_type || ""
-        ).toUpperCase()
-        ===
-        CURRENT_FILTER;
+        return typeMatch && statusMatch && searchMatch;
 
       }
     );
@@ -1981,7 +2015,7 @@ function renderStations(data){
 
       ?
 
-      `พบ ${fmt(allStations.length)} สถานีที่มีรายการต้องติดตาม • กรองดูตามประเภท AQMs / WQMs / CEMs ได้`
+      `แสดง ${fmt(stations.length)} จาก ${fmt(allStations.length)} สถานีที่ต้องติดตาม • เรียงรายการเร่งด่วนก่อน`
 
       :
 
@@ -2320,6 +2354,18 @@ function setFilter(
 
 }
 
+function setStatusFilter(filter,button){
+  CURRENT_STATUS_FILTER = filter;
+  document.querySelectorAll(".status-filter-btn").forEach(btn => btn.classList.remove("active"));
+  if(button) button.classList.add("active");
+  if(CURRENT_DATA) renderStations(CURRENT_DATA);
+}
+
+function setStationSearch(value){
+  CURRENT_SEARCH = String(value || "").trim().toLowerCase();
+  if(CURRENT_DATA) renderStations(CURRENT_DATA);
+}
+
 
 /* =========================================================
    LOAD STATUS
@@ -2444,6 +2490,18 @@ async function loadStatus(){
       percent
       +
       "%";
+
+    $("availabilityText").textContent =
+      percent >= 95 ? `พร้อมใช้งานดีมาก ${percent}%`
+      : percent >= 85 ? `พร้อมใช้งาน ${percent}%`
+      : `ควรเร่งตรวจสอบ ${percent}%`;
+
+    $("priorityText").textContent =
+      offline > 0
+        ? `ตรวจสอบ OFFLINE ${fmt(offline)} สถานี`
+        : num(data.urgent_count) > 0
+          ? `ตรวจสอบค่าที่เกิน ${fmt(data.urgent_count)} รายการ`
+          : "ไม่มีงานเร่งด่วน";
 
 
     /* =====================================================
