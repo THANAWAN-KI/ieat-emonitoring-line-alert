@@ -3148,7 +3148,7 @@ body{font-size:14px!important;line-height:1.55!important}
 .header{
   margin:0 -16px 16px!important;
   padding:18px!important;
-  background:#FFFFFF!important;
+  background:linear-gradient(135deg,#59267C 0%,#6B3F91 48%,#0769AD 100%)!important;
   border:0!important;
   border-bottom:4px solid var(--contact-purple)!important;
   box-shadow:none!important;
@@ -3235,6 +3235,43 @@ body{font-size:14px!important;line-height:1.55!important}
   .footer{margin-left:-12px!important;margin-right:-12px!important;margin-bottom:-24px!important}
 }
 
+/* Local icons: this HTML file must be inside docs/ beside docs/assets/ */
+.ui-icon{display:block;width:34px;height:34px;object-fit:contain;flex:0 0 auto}
+.brand-icon{width:64px;height:64px}
+.brand-row{gap:12px!important}
+.status-icon{width:34px;height:34px;margin-right:10px}
+.overview-icon{width:42px;height:42px;margin-bottom:9px}
+.guide-title{display:flex;align-items:center;gap:10px}
+.guide-icon{width:32px;height:32px}
+.panel-title-row{display:flex;align-items:center;gap:10px}
+.panel-icon{width:34px;height:34px;padding:5px;background:#FFFFFF;border-radius:8px}
+.station-brand-icon{width:45px;height:45px}
+.alert-image{width:28px;height:28px;object-fit:contain}
+/* Readable text on every white/light surface. */
+.loading{
+  color:var(--contact-purple-dark)!important;
+  background:var(--contact-purple-soft)!important;
+  border:1px solid var(--contact-line)!important;
+}
+.loading.error{color:#A12B3A!important;background:#FFF1F3!important;border-color:#E9B6BE!important}
+.header .brand-name,.header .report-title{
+  color:#FFFFFF!important;
+  -webkit-text-fill-color:#FFFFFF!important;
+}
+.header .brand-sub,.header .report-subtitle{color:rgba(255,255,255,.88)!important;-webkit-text-fill-color:rgba(255,255,255,.88)!important}
+.header .update-box{background:rgba(255,255,255,.14)!important;border-color:rgba(255,255,255,.35)!important}
+.header .update-label{color:rgba(255,255,255,.78)!important;-webkit-text-fill-color:rgba(255,255,255,.78)!important}
+.header .update-value{color:#FFFFFF!important;-webkit-text-fill-color:#FFFFFF!important}
+.overview-card,.status-summary-card,.station-card,.station-details,
+.parameter-box,.followup-box,.report-guide-card,.system-status{
+  color:var(--contact-ink)!important;
+}
+.panel-header .panel-title{color:#FFFFFF!important}
+.panel-header .panel-subtitle{color:#F2EDF7!important}
+.footer,.footer .footer-title,.footer .footer-text{color:#FFFFFF!important}
+.export-pdf-btn,.export-pdf-btn *{color:#FFFFFF!important}
+@media(max-width:480px){.brand-icon{width:54px;height:54px}.overview-icon{width:38px;height:38px}}
+
 </style>
 
 </head>
@@ -3256,6 +3293,8 @@ body{font-size:14px!important;line-height:1.55!important}
     <div class="brand">
 
       <div class="brand-row">
+
+        <img class="ui-icon brand-icon" src="./assets/building.png" alt="ไอคอนอาคาร กนอ.">
 
         <div class="brand-name">
           IEAT e-Monitoring
@@ -3314,6 +3353,8 @@ body{font-size:14px!important;line-height:1.55!important}
 <div class="system-status">
 
   <div class="system-status-left">
+
+    <img class="ui-icon status-icon" src="./assets/automatic-svgrepo-com.png" alt="ไอคอนสถานะระบบ">
 
     <span
       id="statusDot"
@@ -3379,11 +3420,11 @@ body{font-size:14px!important;line-height:1.55!important}
 
 <section class="report-guide" aria-label="คำอธิบายการใช้รายงาน">
   <div class="report-guide-card">
-    <strong>วัตถุประสงค์ของรายงาน</strong>
+    <div class="guide-title"><img class="ui-icon guide-icon" src="./assets/info-svgrepo-com.png" alt="ไอคอนข้อมูล"><strong>วัตถุประสงค์ของรายงาน</strong></div>
     <p>สรุปจำนวนและสถานะของสถานีตรวจวัด พร้อมแสดงพารามิเตอร์ที่ต้องเฝ้าระวัง เพื่อสนับสนุนการติดตามสถานการณ์และการตัดสินใจของเจ้าหน้าที่</p>
   </div>
   <div class="report-guide-card">
-    <strong>แนวทางการอ่านข้อมูล</strong>
+    <div class="guide-title"><img class="ui-icon guide-icon" src="./assets/reading-svgrepo-com.png" alt="ไอคอนคู่มือ"><strong>แนวทางการอ่านข้อมูล</strong></div>
     <p>ตรวจสอบวัน–เวลาที่อัปเดต สถานะออนไลน์ของสถานี และรายการพารามิเตอร์ผิดปกติ หากพบข้อมูลเฝ้าระวังควรตรวจสอบกับสถานีต้นทางและติดตามผลทันที</p>
   </div>
 </section>
@@ -3414,6 +3455,8 @@ body{font-size:14px!important;line-height:1.55!important}
 
     <div class="overview-card total">
 
+      <img class="ui-icon overview-icon" src="./assets/buildings.png" alt="ไอคอนสถานีทั้งหมด">
+
       <div class="overview-label">
         สถานีตรวจวัดทั้งหมด
       </div>
@@ -3433,6 +3476,8 @@ body{font-size:14px!important;line-height:1.55!important}
 
 
     <div class="overview-card online">
+
+      <img class="ui-icon overview-icon" src="./assets/ok-svgrepo-com.png" alt="ไอคอนสถานีออนไลน์">
 
       <div class="overview-label">
         สถานีออนไลน์
@@ -3454,6 +3499,8 @@ body{font-size:14px!important;line-height:1.55!important}
 
     <div class="overview-card offline">
 
+      <img class="ui-icon overview-icon" src="./assets/error.png" alt="ไอคอนสถานีออฟไลน์">
+
       <div class="overview-label">
         สถานีออฟไลน์
       </div>
@@ -3473,6 +3520,8 @@ body{font-size:14px!important;line-height:1.55!important}
 
 
     <div class="overview-card alert">
+
+      <img class="ui-icon overview-icon" src="./assets/warning.png" alt="ไอคอนสถานีที่ต้องติดตาม">
 
       <div class="overview-label">
         สถานีที่ต้องติดตาม
@@ -3513,7 +3562,8 @@ body{font-size:14px!important;line-height:1.55!important}
 
         <div>
 
-          <div class="panel-title">
+          <div class="panel-title panel-title-row">
+            <img class="ui-icon panel-icon" src="./assets/factory-svgrepo-com.png" alt="ไอคอนประเภทสถานี">
             สถานีตรวจวัดจำแนกตามประเภท
           </div>
 
@@ -3575,7 +3625,8 @@ body{font-size:14px!important;line-height:1.55!important}
 
         <div>
 
-          <div class="panel-title">
+          <div class="panel-title panel-title-row">
+            <img class="ui-icon panel-icon" src="./assets/planet-earth-global-svgrepo-com.png" alt="ไอคอนสถานการณ์สิ่งแวดล้อม">
             ระดับสถานการณ์สิ่งแวดล้อม
           </div>
 
@@ -3664,7 +3715,8 @@ body{font-size:14px!important;line-height:1.55!important}
 
       <div>
 
-        <div class="panel-title">
+        <div class="panel-title panel-title-row">
+          <img class="ui-icon panel-icon" src="./assets/automatic-svgrepo-com.png" alt="ไอคอนสถานะการตรวจวัด">
           สถานะการตรวจวัด
         </div>
 
@@ -4433,6 +4485,7 @@ function renderStations(data){
         >
 
           <div class="station-flex-brand">
+            <img class="ui-icon station-brand-icon" src="./assets/factory-svgrepo-com.png" alt="ไอคอนสถานีตรวจวัด">
             <div>
               <div class="station-flex-title">IEAT e-Monitoring</div>
               <div class="station-flex-subtitle">รายละเอียดสถานี AQMs</div>
@@ -4440,7 +4493,7 @@ function renderStations(data){
           </div>
 
           <div class="station-alert-banner">
-            <div class="station-alert-main"><span class="station-alert-icon">⚠</span><span>เฝ้าระวัง</span></div>
+            <div class="station-alert-main"><img class="alert-image" src="./assets/warning.png" alt="ไอคอนเฝ้าระวัง"><span>เฝ้าระวัง</span></div>
             <div class="station-alert-count">${fmt(parameterCount)} รายการ</div>
           </div>
 
