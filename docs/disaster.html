@@ -16,31 +16,59 @@
         .header-subtitle { margin: 5px 0 0; color: #746B7B; font-size: 14px; line-height: 1.5; }
         .content { padding: 16px; }
         .notice { padding: 14px; background: #F2EDF7; border-left: 4px solid #6B3F91; border-radius: 10px; font-size: 14px; line-height: 1.65; }
-        .section-title { margin: 24px 0 12px; color: #30283A; font-size: 20px; line-height: 1.4; }
+        .section-title { margin: 24px 0 12px; color: #4D286F; font-size: 20px; line-height: 1.4; }
         .map-panel { overflow: hidden; background: #fff; border: 1px solid #D9C9E7; border-radius: 14px; box-shadow: 0 2px 8px rgba(77, 40, 111, .08); }
         #map { width: 100%; height: 330px; background: #F2EDF7; }
         .map-caption { padding: 11px 14px; color: #746B7B; font-size: 12px; line-height: 1.5; }
         .map-caption strong { color: #4D286F; }
         .summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
         .summary-card { padding: 15px 8px; background: #fff; border: 1px solid #D9C9E7; border-radius: 14px; box-shadow: 0 2px 8px rgba(77, 40, 111, .08); text-align: center; }
-        .summary-number { display: block; color: #4D286F; font-size: 25px; font-weight: 800; }
+        .summary-number { display: block; color: #087651; font-size: 25px; font-weight: 800; }
         .summary-label { display: block; margin-top: 5px; color: #746B7B; font-size: 12px; line-height: 1.35; }
         .source-card { margin-bottom: 12px; padding: 16px; background: #fff; border: 1px solid #D9C9E7; border-left: 4px solid #6B3F91; border-radius: 14px; box-shadow: 0 2px 8px rgba(77, 40, 111, .08); }
-        .source-card.flood { border-left-color: #2176ae; }
-        .source-card.weather { border-left-color: #ff9f1c; }
-        .source-card.fire { border-left-color: #d04727; }
-        .source-card.alert { border-left-color: #be062a; }
-        .source-card.earthquake { border-left-color: #7950a1; }
-        .source-card.drought { border-left-color: #8b6b37; }
+        .source-card.flood,
+        .source-card.weather,
+        .source-card.fire,
+        .source-card.alert,
+        .source-card.earthquake,
+        .source-card.drought { border-left-color: #6B3F91; }
         .source-title { margin: 0; color: #4D286F; font-size: 18px; line-height: 1.45; }
         .source-description { margin: 7px 0 0; color: #514657; font-size: 14px; line-height: 1.6; }
         .buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
-        .button { display: block; padding: 11px 8px; border-radius: 9px; text-align: center; text-decoration: none; font-size: 14px; font-weight: bold; }
-        .button-primary { color: #fff; background: #4D286F; }
+        .button { display: block; padding: 12px 8px; border-radius: 9px; text-align: center; text-decoration: none; font-size: 14px; font-weight: bold; }
+        .button-primary { color: #fff; background: #159B6B; }
         .button-secondary { color: #4D286F; background: #F2EDF7; }
         .live-status { margin: 6px 0 0; color: #746B7B; text-align: right; font-size: 12px; }
         .updated { margin: 20px 0 4px; color: #746B7B; text-align: center; font-size: 12px; }
-        @media (max-width: 480px) { .header { padding: 14px; } .logo { width: 60px; height: 60px; } .header-title { font-size: 20px; } .content { padding: 12px; } #map { height: 300px; } }
+        .disaster-tabs { grid-column: 1 / -1; display: flex; gap: 7px; overflow-x: auto; padding: 3px 0 12px; border-bottom: 1px solid #D9C9E7; scrollbar-width: none; }
+        .disaster-tabs::-webkit-scrollbar { display: none; }
+        .tab { flex: none; padding: 9px 15px; border: 0; border-radius: 22px; background: transparent; color: #746B7B; font: inherit; font-size: 14px; cursor: pointer; }
+        .tab.active { color: #fff; background: #4D286F; }
+        .source-card.hidden { display: none; }
+
+        @media (min-width: 860px) {
+            .page { max-width: 1440px; }
+            .content { display: grid; grid-template-columns: minmax(500px, .95fr) minmax(480px, 1.05fr); column-gap: 18px; align-items: start; }
+            .notice, .disaster-tabs, .updated { grid-column: 1 / -1; }
+            .notice { margin-bottom: 12px; }
+            .map-heading { grid-column: 2; grid-row: 3; }
+            .map-panel { grid-column: 2; grid-row: 4 / span 12; position: sticky; top: 16px; }
+            #map { height: 690px; }
+            .live-status { grid-column: 2; grid-row: 16; }
+            .summary-heading { grid-column: 1; grid-row: 3; }
+            .summary-grid { grid-column: 1; grid-row: 4; }
+            .source-heading { grid-column: 1; grid-row: 5; }
+            .source-card { grid-column: 1; margin-bottom: 0; margin-top: 12px; }
+            .source-card.flood { grid-row: 6; }
+            .source-card.weather { grid-row: 7; }
+            .source-card.earthquake { grid-row: 8; }
+            .source-card.fire { grid-row: 9; }
+            .source-card.drought { grid-row: 10; }
+            .source-card.alert { grid-row: 11; }
+            .updated { grid-row: 17; }
+        }
+        @media (max-width: 859px) { .map-panel { margin-bottom: 2px; } }
+        @media (max-width: 480px) { .header { padding: 14px; } .logo { width: 60px; height: 60px; } .header-title { font-size: 20px; } .content { padding: 12px; } #map { height: 390px; } .summary-grid { gap: 7px; } .summary-number { font-size: 21px; } .summary-label { font-size: 10px; } .buttons { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -48,28 +76,37 @@
         <header class="header">
             <img class="logo" src="./ieat_logo.png.PNG" alt="โลโก้ กนอ.">
             <div>
-                <h1 class="header-title">อัปเดตภัยพิบัติ</h1>
-                <p class="header-subtitle">แผนที่และข้อมูลเฝ้าระวังจากหน่วยงานภาครัฐ</p>
+                <h1 class="header-title">ศูนย์เฝ้าระวังภัยพิบัติ</h1>
+                <p class="header-subtitle">พื้นที่นิคมอุตสาหกรรมทั่วประเทศไทย</p>
             </div>
         </header>
         <main class="content">
-            <div class="notice">ติดตามเหตุการณ์สำคัญในประเทศไทยจากแหล่งข้อมูลทางการ เลือกประเภทภัยเพื่อเปิดแผนที่หรือรายงานล่าสุดของหน่วยงานนั้นได้ทันที</div>
+            <div class="notice"><strong>ภาพรวมพื้นที่นิคมอุตสาหกรรมทั่วประเทศ</strong><br>ติดตามน้ำท่วม พายุ แผ่นดินไหว ไฟป่า และภัยแล้งจากแหล่งข้อมูลภาครัฐ เพื่อประเมินสถานการณ์ที่อาจส่งผลกระทบต่อพื้นที่นิคมอุตสาหกรรม</div>
 
-            <h2 class="section-title">แผนที่เหตุการณ์ล่าสุด</h2>
+            <nav class="disaster-tabs" aria-label="เลือกประเภทภัย">
+                <button class="tab active" data-filter="all">ภาพรวม</button>
+                <button class="tab" data-filter="flood">น้ำท่วม</button>
+                <button class="tab" data-filter="weather">พายุ</button>
+                <button class="tab" data-filter="fire">ไฟป่า</button>
+                <button class="tab" data-filter="earthquake">แผ่นดินไหว</button>
+                <button class="tab" data-filter="drought">ภัยแล้ง</button>
+            </nav>
+
+            <h2 class="section-title map-heading">แผนที่เฝ้าระวังทั่วประเทศไทย</h2>
             <section class="map-panel">
                 <div id="map" aria-label="แผนที่ประเทศไทยและเหตุแผ่นดินไหวล่าสุด"></div>
                 <div class="map-caption"><strong>จุดวงกลมสีม่วง</strong> คือแผ่นดินไหวล่าสุด 24 ชั่วโมงจาก USGS; ข้อมูลภัยในประเทศไทยดูผ่านปุ่มแผนที่ของแต่ละหน่วยงานด้านล่าง</div>
             </section>
             <p id="liveStatus" class="live-status">กำลังโหลดเหตุแผ่นดินไหวล่าสุด...</p>
 
-            <h2 class="section-title">สรุปแผ่นดินไหว 24 ชั่วโมง</h2>
+            <h2 class="section-title summary-heading">สรุปแผ่นดินไหว 24 ชั่วโมง</h2>
             <section class="summary-grid">
                 <div class="summary-card"><strong id="earthquakeCount" class="summary-number">-</strong><span class="summary-label">เหตุการณ์ทั่วโลก</span></div>
                 <div class="summary-card"><strong id="nearThailandCount" class="summary-number">-</strong><span class="summary-label">ใกล้ประเทศไทย</span></div>
                 <div class="summary-card"><strong id="maxMagnitude" class="summary-number">-</strong><span class="summary-label">ขนาดสูงสุด</span></div>
             </section>
 
-            <h2 class="section-title">ข้อมูลสดและแผนที่ตามประเภทภัย</h2>
+            <h2 class="section-title source-heading">ข้อมูลสำหรับพื้นที่นิคมอุตสาหกรรม</h2>
 
             <article class="source-card flood">
                 <h3 class="source-title">น้ำท่วม / น้ำป่าไหลหลาก</h3>
@@ -116,6 +153,18 @@
         const thailandBounds = L.latLngBounds([5.4, 97.2], [20.7, 105.8]);
         L.rectangle(thailandBounds, { color: "#6B3F91", weight: 1, fillOpacity: .03 }).addTo(map).bindTooltip("ประเทศไทย");
         function formatNumber(value) { return Number(value || 0).toLocaleString("th-TH"); }
+        document.querySelectorAll(".tab").forEach(button => {
+            button.addEventListener("click", () => {
+                document.querySelectorAll(".tab").forEach(item => item.classList.remove("active"));
+                button.classList.add("active");
+                const filter = button.dataset.filter;
+                document.querySelectorAll(".source-card").forEach(card => {
+                    const visible = filter === "all" || card.classList.contains(filter) || (filter === "weather" && card.classList.contains("alert"));
+                    card.classList.toggle("hidden", !visible);
+                });
+                document.querySelector(".source-heading").textContent = filter === "all" ? "ข้อมูลสำหรับพื้นที่นิคมอุตสาหกรรม" : "ข้อมูลและแผนที่ประเภทภัยที่เลือก";
+            });
+        });
         async function loadEarthquakes() {
             const status = document.getElementById("liveStatus");
             try {
