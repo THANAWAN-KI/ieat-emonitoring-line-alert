@@ -2435,6 +2435,216 @@ body{
 
 }
 
+/* =========================================================
+   REFINED THREE-COLOR THEME
+   Navy · Gold · Ivory
+========================================================= */
+
+:root{
+  --navy:#18243A;
+  --gold:#B8954B;
+  --ivory:#F7F4EC;
+
+  /* Keep legacy component names mapped to the same palette. */
+  --purple:var(--navy);
+  --purple-2:var(--navy);
+  --purple-soft:var(--ivory);
+  --blue:var(--gold);
+  --blue-dark:var(--gold);
+  --blue-soft:var(--ivory);
+  --green:var(--navy);
+  --green-2:var(--gold);
+  --green-soft:var(--ivory);
+  --sky:var(--ivory);
+  --red:var(--gold);
+  --red-dark:var(--gold);
+  --red-soft:var(--ivory);
+  --orange:var(--gold);
+  --orange-soft:var(--ivory);
+  --ink:var(--navy);
+  --text:var(--navy);
+  --muted:var(--navy);
+  --white:var(--ivory);
+  --bg:var(--ivory);
+  --border:var(--gold);
+  --shadow:0 8px 24px rgba(24,36,58,.08);
+  --shadow-3d:0 12px 34px rgba(24,36,58,.10);
+  --radius:16px;
+}
+
+body{
+  background:var(--ivory);
+  color:var(--navy);
+}
+
+.header{
+  background:var(--ivory);
+  border-bottom-color:var(--navy);
+  box-shadow:0 10px 30px rgba(24,36,58,.08);
+}
+
+.header:before,
+.panel-header,
+.panel-header.green,
+.panel-header.blue,
+.progress-online,
+.station-card:before,
+.station-card.alert-red:before,
+.footer{
+  background:var(--navy);
+}
+
+.panel-header,
+.parameter-table th,
+.footer,
+.footer-title{
+  color:var(--ivory);
+}
+
+.brand-name{
+  background:none;
+  -webkit-text-fill-color:var(--navy);
+  color:var(--navy);
+}
+
+.brand-sub,
+.report-title,
+.report-subtitle,
+.update-label,
+.update-value,
+.status-label,
+.status-value,
+.status-time,
+.section-heading h2,
+.section-description,
+.overview-label,
+.overview-number,
+.overview-card.total .overview-number,
+.overview-card.online .overview-number,
+.overview-card.offline .overview-number,
+.overview-card.alert .overview-number,
+.overview-note,
+.type-table th,
+.type-name,
+.type-detail,
+.type-number,
+.online-number,
+.offline-number,
+.situation-high,
+.situation-watch,
+.situation-follow,
+.status-summary-card .label,
+.status-summary-card.total .number,
+.status-summary-card.online .number,
+.status-summary-card.offline .number,
+.progress-label,
+.alert-summary-title,
+.alert-summary-text,
+.alert-summary-number,
+.station-name-large,
+.station-estate,
+.station-status-badge.online,
+.station-status-badge.offline,
+.detail-label,
+.detail-value,
+.detail-value.status-online,
+.detail-value.status-offline,
+.detail-value.type,
+.parameter-title,
+.parameter-item,
+.parameter-bullet,
+.parameter-table td,
+.parameter-value,
+.followup-title,
+.followup-box,
+.empty,
+.loading,
+.error,
+.dashboard-link{
+  color:var(--navy);
+}
+
+.overview-card,
+.panel,
+.station-card,
+.parameter-table{
+  background:var(--ivory);
+  border-color:var(--gold);
+}
+
+.update-box,
+.type-table td,
+.status-summary-card.total,
+.status-summary-card.online,
+.status-summary-card.offline,
+.situation-high,
+.situation-watch,
+.situation-follow,
+.alert-summary,
+.station-card-header,
+.station-details,
+.parameter-box,
+.parameter-table tr:nth-child(even) td,
+.followup-box,
+.empty{
+  background:var(--ivory);
+  border-color:var(--gold);
+}
+
+.system-status{
+  background:var(--ivory);
+  border-color:var(--gold);
+  border-left-color:var(--navy);
+}
+
+.status-dot{
+  background:var(--gold);
+  box-shadow:0 0 0 6px rgba(184,149,75,.18);
+}
+
+.section-heading:before,
+.parameter-table th{
+  background:var(--navy);
+}
+
+.overview-card.total,
+.overview-card.online,
+.overview-card.offline,
+.overview-card.alert{
+  border-top-color:var(--gold);
+}
+
+.overview-card.total:after,
+.overview-card.online:after,
+.overview-card.offline:after,
+.overview-card.alert:after{
+  background:var(--gold);
+  opacity:.10;
+}
+
+.alert-summary{
+  border-left-color:var(--gold);
+}
+
+.station-status-badge.online,
+.station-status-badge.offline{
+  border-color:var(--gold);
+}
+
+.parameter-box{
+  background:var(--ivory);
+}
+
+.dashboard-link{
+  background:var(--ivory);
+  border-color:var(--gold);
+}
+
+.dashboard-link:hover{
+  background:var(--navy);
+  color:var(--ivory);
+}
+
 </style>
 
 </head>
@@ -4063,16 +4273,16 @@ async function loadStatus(){
       .style
       .background=
         alert
-          ? "#C08188"
-          : "#9CC4AE";
+          ? "#B8954B"
+          : "#18243A";
 
 
     $("statusTitle")
       .style
       .color=
         alert
-          ? "#C08188"
-          : "#7CA893";
+          ? "#B8954B"
+          : "#18243A";
 
 
     $("statusTitle")
