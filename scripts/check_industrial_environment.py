@@ -43,7 +43,7 @@ def number(value) -> float | None:
 
 def pm_events() -> list[dict]:
     payload = json.loads(request_text(AIR4THAI_URL))
-    stations = payload.get("stations") or payload.get("data") or payload if isinstance(payload, list) else []
+    stations = payload if isinstance(payload, list) else (payload.get("stations") or payload.get("data") or [])
     provinces = wanted_provinces()
     events = []
     for station in stations:
