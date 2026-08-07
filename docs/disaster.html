@@ -97,11 +97,11 @@
 
         /* Refined IEAT disaster monitoring theme */
         :root {
-            --ieat-purple: #176EA6;
-            --ieat-purple-dark: #0F527D;
-            --ieat-purple-soft: #EDF7FD;
-            --ieat-blue: #4E1478;
-            --ieat-blue-soft: #F8F4FB;
+            --ieat-purple: #4E1478;
+            --ieat-purple-dark: #35105D;
+            --ieat-purple-soft: #F8F4FB;
+            --ieat-blue: #176EA6;
+            --ieat-blue-soft: #EDF7FD;
             --ieat-green: #2B8A3E;
             --ieat-green-soft: #F1F8F3;
             --ieat-red: #C51F35;
@@ -113,13 +113,13 @@
             --ieat-muted: #716C76;
         }
         body { background: linear-gradient(180deg, #F8F6FA 0%, #F1EDF5 100%); color: var(--ieat-ink); }
-        .page { background: #FCFBFD; box-shadow: 0 0 40px rgba(23, 110, 166, .10); }
+        .page { background: #FCFBFD; box-shadow: 0 0 40px rgba(53, 16, 93, .10); }
         .header {
             position: sticky; top: 0; z-index: 1000;
             padding: 16px 20px;
-            background: linear-gradient(135deg, var(--ieat-purple-dark) 0%, var(--ieat-purple) 62%, #4A91B6 100%);
+            background: linear-gradient(135deg, var(--ieat-purple-dark) 0%, var(--ieat-purple) 62%, #76509A 100%);
             border-bottom: 5px solid var(--ieat-orange);
-            box-shadow: 0 8px 24px rgba(23, 110, 166, .18);
+            box-shadow: 0 8px 24px rgba(53, 16, 93, .18);
         }
         .logo { width: 58px; height: 58px; padding: 6px; background: rgba(255,255,255,.96); border-radius: 14px; }
         .header-title { font-size: 22px; font-weight: 800; }
@@ -130,12 +130,12 @@
             border: 1px solid var(--ieat-line);
             border-left: 5px solid var(--ieat-purple);
             border-radius: 14px;
-            box-shadow: 0 7px 20px rgba(23,110,166,.07);
+            box-shadow: 0 7px 20px rgba(53,16,93,.07);
         }
         .notice strong { color: var(--ieat-purple-dark); font-size: 16px; }
         .section-title { display: flex; align-items: center; gap: 8px; color: var(--ieat-purple-dark); font-weight: 800; }
         .section-title::before { content: ""; width: 5px; height: 22px; flex: 0 0 auto; background: var(--ieat-purple); border-radius: 99px; }
-        .map-panel, .summary-card, .source-card { border-color: var(--ieat-line); box-shadow: 0 8px 22px rgba(23,110,166,.08); }
+        .map-panel, .summary-card, .source-card { border-color: var(--ieat-line); box-shadow: 0 8px 22px rgba(53,16,93,.08); }
         .map-panel { border-radius: 16px; }
         #map { background: var(--ieat-blue-soft); }
         .map-caption { padding: 13px 15px; background: #FFFFFF; }
@@ -149,7 +149,7 @@
         .summary-card:nth-child(3) .summary-number { color: var(--ieat-orange); }
         .source-card { padding: 17px; border-left-width: 5px; background: #FFFFFF; }
         .source-card.flood { border-left-color: var(--ieat-blue); }
-        .source-card.weather { border-left-color: #2F7FA8; }
+        .source-card.weather { border-left-color: #6F3B91; }
         .source-card.earthquake { border-left-color: var(--ieat-orange); }
         .source-card.fire { border-left-color: var(--ieat-red); }
         .source-card.drought { border-left-color: var(--ieat-green); }
@@ -158,11 +158,11 @@
         .buttons { gap: 9px; }
         .button { padding: 12px 10px; border-radius: 10px; transition: transform .18s ease, box-shadow .18s ease; }
         .button:hover { transform: translateY(-1px); }
-        .button-primary { color: #FFFFFF; background: var(--ieat-purple); box-shadow: 0 5px 12px rgba(23,110,166,.18); }
-        .button-secondary { color: var(--ieat-purple); background: var(--ieat-purple-soft); border: 1px solid #CBE4F0; }
+        .button-primary { color: #FFFFFF; background: var(--ieat-purple); box-shadow: 0 5px 12px rgba(78,20,120,.18); }
+        .button-secondary { color: var(--ieat-purple); background: var(--ieat-purple-soft); border: 1px solid #DCCBEA; }
         .disaster-tabs { gap: 8px; padding: 5px 0 13px; border-bottom-color: var(--ieat-line); }
         .tab { padding: 9px 16px; background: #FFFFFF; border: 1px solid var(--ieat-line); }
-        .tab.active { color: #FFFFFF; background: var(--ieat-purple); border-color: var(--ieat-purple); box-shadow: 0 5px 12px rgba(23,110,166,.18); }
+        .tab.active { color: #FFFFFF; background: var(--ieat-purple); border-color: var(--ieat-purple); box-shadow: 0 5px 12px rgba(78,20,120,.18); }
         .live-status { padding: 7px 10px; color: var(--ieat-muted); background: var(--ieat-purple-soft); border-radius: 8px; }
         .updated { padding-top: 14px; border-top: 1px solid var(--ieat-line); }
         @media (max-width: 480px) {
@@ -174,16 +174,201 @@
             .notice { padding: 14px; }
             .section-title { font-size: 18px; }
         }
+
+        /* Layout inspired by the supplied reference: clean white report header */
+        body { background: #F6F7FA; }
+        .page { max-width: 1440px; background: #F8F9FC; box-shadow: none; }
+        .header {
+            position: sticky; top: 0; z-index: 1000;
+            display: flex; align-items: center; gap: 18px;
+            min-height: 86px; padding: 14px 28px;
+            color: var(--ieat-ink); background: rgba(255,255,255,.98);
+            border: 0; border-bottom: 1px solid #E4E6EB;
+            box-shadow: 0 3px 12px rgba(43,45,55,.07);
+        }
+        .logo { width: 58px; height: 58px; padding: 0; background: transparent; border-radius: 0; }
+        .header-copy { min-width: 0; }
+        .header-title { color: #2F3037; font-size: 21px; font-weight: 800; }
+        .header-subtitle { margin-top: 3px; color: #7A7D86; font-size: 12px; }
+        .header-meta { margin-left: auto; color: #666A73; font-size: 12px; text-align: right; white-space: nowrap; }
+        .header-meta strong { display: block; color: var(--ieat-purple); font-size: 13px; }
+        .content { padding: 0 24px 32px; }
+        .notice { margin-top: 18px; background: #FFFFFF; }
+        .disaster-tabs {
+            position: sticky; top: 86px; z-index: 900;
+            gap: 8px; margin: 0 -24px; padding: 0 24px;
+            background: rgba(255,255,255,.98); border-bottom: 1px solid #DDE0E6;
+        }
+        .tab {
+            padding: 15px 16px 13px; color: #737680; background: transparent;
+            border: 0; border-bottom: 3px solid transparent; border-radius: 0;
+        }
+        .tab.active { color: var(--ieat-purple); background: transparent; border-color: var(--ieat-purple); box-shadow: none; }
+        .latest-panel {
+            grid-column: 1 / -1; margin-top: 20px; padding: 20px;
+            background: #FFFFFF; border: 1px solid var(--ieat-line); border-radius: 18px;
+            box-shadow: 0 8px 24px rgba(43,45,55,.07);
+        }
+        .latest-panel .section-title { margin: 0 0 5px; }
+        .latest-subtitle { margin: 0 0 14px; color: var(--ieat-muted); font-size: 13px; }
+        .latest-status {
+            display: flex; align-items: center; gap: 12px; margin-bottom: 14px; padding: 13px 15px;
+            color: #6F4300; background: var(--ieat-orange-soft); border: 1px solid #ECD6A6; border-radius: 12px;
+        }
+        .latest-status-dot { width: 11px; height: 11px; flex: 0 0 auto; background: var(--ieat-orange); border-radius: 50%; box-shadow: 0 0 0 5px rgba(230,119,0,.12); }
+        .latest-status strong { display: block; font-size: 14px; }
+        .latest-status span { display: block; margin-top: 2px; color: #80613C; font-size: 11px; }
+        .summary-grid { gap: 14px; }
+        .summary-card { min-height: 112px; display: flex; flex-direction: column; justify-content: center; border-radius: 16px; }
+        .summary-number { font-size: 30px; }
+        .operator-guide { grid-column: 1 / -1; margin-top: 20px; }
+        .guide-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .guide-card { padding: 18px; background: #FFFFFF; border: 1px solid var(--ieat-line); border-radius: 16px; box-shadow: 0 7px 20px rgba(43,45,55,.06); }
+        .guide-card.operator { border-top: 4px solid var(--ieat-blue); }
+        .guide-card.officer { border-top: 4px solid var(--ieat-purple); }
+        .guide-card h3 { margin: 0 0 9px; color: #353740; font-size: 16px; }
+        .guide-card ol { margin: 0; padding-left: 20px; color: #5D606A; font-size: 13px; line-height: 1.7; }
+        .official-note { margin: 14px 0 0; padding: 12px 14px; color: #5F5365; background: var(--ieat-purple-soft); border-left: 4px solid var(--ieat-purple); border-radius: 10px; font-size: 12px; line-height: 1.6; }
+        @media (min-width: 860px) {
+            .content { grid-template-columns: minmax(480px,.92fr) minmax(520px,1.08fr); }
+            .latest-panel { grid-row: 3; }
+            .summary-heading,.content > .summary-grid { display: none; }
+            .map-heading { grid-column: 2; grid-row: 4; }
+            .map-panel { grid-column: 2; grid-row: 5 / span 12; }
+            .live-status { grid-column: 2; grid-row: 17; }
+            .source-heading { grid-column: 1; grid-row: 4; }
+            .source-card.flood { grid-row: 5; }.source-card.weather { grid-row: 6; }.source-card.earthquake { grid-row: 7; }
+            .source-card.fire { grid-row: 8; }.source-card.drought { grid-row: 9; }.source-card.alert { grid-row: 10; }
+            .operator-guide { grid-row: 18; }
+            .updated { grid-row: 19; }
+        }
+        @media (max-width: 859px) {
+            .summary-heading,.content > .summary-grid { display: none; }
+        }
+        @media (max-width: 620px) {
+            .header { min-height: 74px; padding: 11px 14px; gap: 11px; }
+            .logo { width: 46px; height: 46px; }
+            .header-title { font-size: 16px; }
+            .header-subtitle { font-size: 10px; }
+            .header-meta { display: none; }
+            .content { padding: 0 12px 24px; }
+            .disaster-tabs { top: 74px; margin: 0 -12px; padding: 0 12px; }
+            .tab { padding: 13px 12px 11px; font-size: 12px; }
+            .latest-panel { padding: 15px; border-radius: 15px; }
+            .summary-grid { grid-template-columns: 1fr; gap: 9px; }
+            .summary-card { min-height: 88px; }
+            .guide-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Final color balance â€” white first, blue data, restrained IEAT purple */
+        :root {
+            --ui-blue: #65408A;
+            --ui-blue-dark: #4E2F70;
+            --ui-blue-soft: #F7F3FA;
+            --ui-purple: #2F6FED;
+            --ui-purple-soft: #F1F6FF;
+            --ui-gray: #F7F8FA;
+            --ui-line: #E7E9EE;
+            --ui-text: #34363D;
+            --ui-muted: #7A7D86;
+        }
+        body { background: #F5F6F8; color: var(--ui-text); }
+        .page { background: #FAFBFC; }
+        .header { background: rgba(255,255,255,.98); border-bottom-color: var(--ui-line); box-shadow: 0 3px 12px rgba(43,45,55,.06); }
+        .header-title { color: #33353B; }
+        .header-subtitle,.header-meta { color: var(--ui-muted); }
+        .header-meta strong { color: var(--ui-purple); }
+        .disaster-tabs { border-bottom-color: var(--ui-line); }
+        .tab { color: #777A83; }
+        .tab:hover { color: var(--ui-blue); background: var(--ui-blue-soft); }
+        .tab.active { color: var(--ui-blue); border-color: var(--ui-blue); }
+        .notice,.latest-panel,.map-panel,.summary-card,.source-card,.guide-card { border-color: var(--ui-line); box-shadow: 0 7px 22px rgba(43,45,55,.055); }
+        .notice { color: #575A62; background: #FFFFFF; border-left-color: var(--ui-purple); }
+        .notice strong { color: #3A3C43; }
+        .section-title { color: #34363D; }
+        .section-title::before { background: var(--ui-blue); }
+        .latest-panel { background: #FFFFFF; }
+        .latest-status { color: #4F5870; background: #F7F9FD; border-color: #E3E7F0; }
+        .latest-status-dot { background: var(--ui-blue); box-shadow: 0 0 0 5px rgba(101,64,138,.10); }
+        .latest-status span { color: #7A8190; }
+        .summary-card { background: #FFFFFF!important; border-top-color: var(--ui-blue)!important; }
+        .summary-card:nth-child(1) .summary-number { color: var(--ui-blue); }
+        .summary-card:nth-child(2) .summary-number { color: var(--ui-purple); }
+        .summary-card:nth-child(3) .summary-number { color: #E57A2A; }
+        .map-caption { background: #FFFFFF; }
+        .map-caption strong { color: var(--ui-blue); }
+        .source-card { background: #FFFFFF; }
+        .source-card.flood { border-left-color: #7555C7; }
+        .source-card.weather { border-left-color: #2F80ED; }
+        .source-card.earthquake { border-left-color: #F08A3E; }
+        .source-card.fire { border-left-color: #E34B4B; }
+        .source-card.drought { border-left-color: #35A56A; }
+        .source-card.alert { border-left-color: #D8A518; }
+        .source-card.flood .source-title { color: #6543B3; }
+        .source-card.weather .source-title { color: #2569C9; }
+        .source-card.earthquake .source-title { color: #D96F22; }
+        .source-card.fire .source-title { color: #C93B3B; }
+        .source-card.drought .source-title { color: #278753; }
+        .source-card.alert .source-title { color: #9D7410; }
+        .source-description { color: #656872; }
+        .button-primary { color: #FFFFFF; background: var(--ui-blue); box-shadow: 0 4px 10px rgba(101,64,138,.16); }
+        .button-primary:hover { background: var(--ui-blue-dark); }
+        .button-secondary { color: #545965; background: #F4F5F7; border-color: #E1E3E8; }
+        .button-secondary:hover { color: var(--ui-blue); background: var(--ui-blue-soft); border-color: #DCCFE7; }
+        .live-status { color: #6E7380; background: #F1F4F9; }
+        .guide-card.operator { border-top-color: var(--ui-blue); }
+        .guide-card.officer { border-top-color: var(--ui-purple); }
+        .guide-card.operator h3 { color: var(--ui-blue-dark); }
+        .guide-card.officer h3 { color: var(--ui-purple); }
+        .official-note { color: #5D5962; background: var(--ui-purple-soft); border-left-color: var(--ui-purple); }
+
+        /* Exact visual hierarchy from the supplied dashboard reference */
+        .notice { display: none; }
+        .header { min-height: 76px; padding-top: 10px; padding-bottom: 10px; }
+        .logo { width: 54px; height: 54px; }
+        .header-title { font-size: 20px; line-height: 1.25; }
+        .header-subtitle { margin-top: 2px; }
+        .header-meta { display: flex; align-items: center; gap: 14px; text-align: left; }
+        .header-meta-primary { color: #555861; font-size: 12px; }
+        .header-meta-primary strong { display: inline; margin-right: 5px; color: #3B3D44; font-size: 12px; }
+        .header-meta-time { padding-left: 14px; color: #7A7D86; border-left: 1px solid #E3E5EA; }
+        .disaster-tabs { top: 76px; }
+        .latest-panel { margin-top: 24px; padding: 22px; border-radius: 17px; }
+        .latest-panel .section-title::before { background: var(--ui-blue); }
+        .latest-status { margin: 12px 0 16px; background: #F8FAFE; }
+        .latest-status.is-alert { color: #765019; background: #FFF9EF; border-color: #F0DFC1; }
+        .latest-status.is-alert .latest-status-dot { background: #E29A35; box-shadow: 0 0 0 5px rgba(226,154,53,.11); }
+        .summary-card { position: relative; align-items: flex-start; min-height: 116px; padding: 18px 18px 16px 74px; text-align: left; border-top: 0!important; }
+        .summary-icon {
+            position: absolute; left: 18px; top: 20px;
+            width: 42px; height: 42px; display: grid; place-items: center;
+            color: var(--ui-blue); background: var(--ui-blue-soft); border-radius: 50%;
+            font-size: 12px; font-weight: 900; letter-spacing: -.2px;
+        }
+        .summary-number { color: var(--ui-blue)!important; font-size: 29px; line-height: 1; }
+        .summary-label { margin-top: 7px; color: #626670; font-size: 12px; }
+        .latest-panel .summary-card:nth-child(2) .summary-icon { color: var(--ui-purple); background: var(--ui-purple-soft); }
+        .latest-panel .summary-card:nth-child(3) .summary-icon { color: #D8752C; background: #FFF5EC; }
+        .source-card { transition: transform .18s ease, box-shadow .18s ease; }
+        .source-card:hover { transform: translateY(-1px); box-shadow: 0 10px 25px rgba(43,45,55,.075); }
+        @media(max-width:620px){
+            .header { min-height: 70px; }
+            .disaster-tabs { top: 70px; }
+            .header-meta { display: none; }
+            .summary-card { min-height: 92px; padding: 15px 14px 14px 66px; }
+            .summary-icon { left: 14px; top: 16px; width: 38px; height: 38px; }
+        }
     </style>
 </head>
 <body>
     <div class="page">
         <header class="header">
-            <img class="logo" src="./ieat_logo.png.PNG" alt="à¹‚à¸¥à¹‚à¸à¹‰ à¸à¸™à¸­.">
-            <div>
+            <img class="logo" src="./assets/TH-Vertical.png" alt="à¸•à¸£à¸²à¸ªà¸±à¸à¸¥à¸±à¸à¸©à¸“à¹Œà¸à¸²à¸£à¸™à¸´à¸„à¸¡à¸­à¸¸à¸•à¸ªà¸²à¸«à¸à¸£à¸£à¸¡à¹à¸«à¹ˆà¸‡à¸›à¸£à¸°à¹€à¸—à¸¨à¹„à¸—à¸¢">
+            <div class="header-copy">
                 <h1 class="header-title">à¸¨à¸¹à¸™à¸¢à¹Œà¹€à¸à¹‰à¸²à¸£à¸°à¸§à¸±à¸‡à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œà¸ à¸±à¸¢à¸žà¸´à¸šà¸±à¸•à¸´</h1>
                 <p class="header-subtitle">à¸ªà¸³à¸«à¸£à¸±à¸šà¸žà¸·à¹‰à¸™à¸—à¸µà¹ˆà¸™à¸´à¸„à¸¡à¸­à¸¸à¸•à¸ªà¸²à¸«à¸à¸£à¸£à¸¡à¸—à¸±à¹ˆà¸§à¸›à¸£à¸°à¹€à¸—à¸¨</p>
             </div>
+            <div class="header-meta"><div class="header-meta-primary"><strong>IEAT e-Monitoring</strong>à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œà¸¢à¹‰à¸­à¸™à¸«à¸¥à¸±à¸‡ 24 à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡</div><div id="headerUpdated" class="header-meta-time">à¸à¸³à¸¥à¸±à¸‡à¸­à¸±à¸›à¹€à¸”à¸•à¸‚à¹‰à¸­à¸¡à¸¹à¸¥â€¦</div></div>
         </header>
         <main class="content">
             <div class="notice"><strong>à¸ à¸²à¸žà¸£à¸§à¸¡à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œà¹ƒà¸™à¸žà¸·à¹‰à¸™à¸—à¸µà¹ˆà¸™à¸´à¸„à¸¡à¸­à¸¸à¸•à¸ªà¸²à¸«à¸à¸£à¸£à¸¡à¸—à¸±à¹ˆà¸§à¸›à¸£à¸°à¹€à¸—à¸¨</strong><br>à¸•à¸´à¸”à¸•à¸²à¸¡à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œà¸™à¹‰à¸³à¸—à¹ˆà¸§à¸¡ à¸žà¸²à¸¢à¸¸ à¹à¸œà¹ˆà¸™à¸”à¸´à¸™à¹„à¸«à¸§ à¹„à¸Ÿà¸›à¹ˆà¸² à¹à¸¥à¸°à¸ à¸±à¸¢à¹à¸¥à¹‰à¸‡à¸ˆà¸²à¸à¹à¸«à¸¥à¹ˆà¸‡à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸ à¸²à¸„à¸£à¸±à¸ à¹€à¸žà¸·à¹ˆà¸­à¸›à¸£à¸°à¹€à¸¡à¸´à¸™à¸œà¸¥à¸à¸£à¸°à¸—à¸šà¸—à¸µà¹ˆà¸­à¸²à¸ˆà¹€à¸à¸´à¸”à¸‚à¸¶à¹‰à¸™à¹ƒà¸™à¸žà¸·à¹‰à¸™à¸—à¸µà¹ˆà¸™à¸´à¸„à¸¡à¸­à¸¸à¸•à¸ªà¸²à¸«à¸à¸£à¸£à¸¡</div>
@@ -196,6 +381,20 @@
                 <button class="tab" data-filter="earthquake">à¹à¸œà¹ˆà¸™à¸”à¸´à¸™à¹„à¸«à¸§</button>
                 <button class="tab" data-filter="drought">à¸ à¸±à¸¢à¹à¸¥à¹‰à¸‡</button>
             </nav>
+
+            <section class="latest-panel" aria-labelledby="latest-title">
+                <h2 id="latest-title" class="section-title">à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œà¸¥à¹ˆà¸²à¸ªà¸¸à¸”</h2>
+                <p class="latest-subtitle">à¸ªà¸£à¸¸à¸›à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¹à¸œà¹ˆà¸™à¸”à¸´à¸™à¹„à¸«à¸§à¸ˆà¸²à¸ USGS à¹ƒà¸™à¸Šà¹ˆà¸§à¸‡ 24 à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡à¸¥à¹ˆà¸²à¸ªà¸¸à¸” à¹€à¸žà¸·à¹ˆà¸­à¸›à¸£à¸°à¸à¸­à¸šà¸à¸²à¸£à¹€à¸à¹‰à¸²à¸£à¸°à¸§à¸±à¸‡à¸žà¸·à¹‰à¸™à¸—à¸µà¹ˆà¸™à¸´à¸„à¸¡à¸­à¸¸à¸•à¸ªà¸²à¸«à¸à¸£à¸£à¸¡</p>
+                <div class="latest-status">
+                    <div class="latest-status-dot" aria-hidden="true"></div>
+                    <div><strong id="situationHeadline">à¸à¸³à¸¥à¸±à¸‡à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸šà¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œà¸¥à¹ˆà¸²à¸ªà¸¸à¸”</strong><span id="situationDetail">à¸£à¸°à¸šà¸šà¸à¸³à¸¥à¸±à¸‡à¹€à¸Šà¸·à¹ˆà¸­à¸¡à¸•à¹ˆà¸­à¹à¸«à¸¥à¹ˆà¸‡à¸‚à¹‰à¸­à¸¡à¸¹à¸¥</span></div>
+                </div>
+                <div class="summary-grid">
+                    <div class="summary-card"><span class="summary-icon" aria-hidden="true">24H</span><strong id="latestEarthquakeCount" class="summary-number">-</strong><span class="summary-label">à¸ˆà¸³à¸™à¸§à¸™à¹€à¸«à¸•à¸¸à¸à¸²à¸£à¸“à¹Œà¸—à¸±à¹ˆà¸§à¹‚à¸¥à¸</span></div>
+                    <div class="summary-card"><span class="summary-icon" aria-hidden="true">TH</span><strong id="latestNearThailandCount" class="summary-number">-</strong><span class="summary-label">à¹€à¸«à¸•à¸¸à¸à¸²à¸£à¸“à¹Œà¹ƒà¸à¸¥à¹‰à¸›à¸£à¸°à¹€à¸—à¸¨à¹„à¸—à¸¢</span></div>
+                    <div class="summary-card"><span class="summary-icon" aria-hidden="true">M</span><strong id="latestMaxMagnitude" class="summary-number">-</strong><span class="summary-label">à¸‚à¸™à¸²à¸”à¸ªà¸¹à¸‡à¸ªà¸¸à¸”</span></div>
+                </div>
+            </section>
 
             <h2 class="section-title map-heading">à¹à¸œà¸™à¸—à¸µà¹ˆà¹€à¸à¹‰à¸²à¸£à¸°à¸§à¸±à¸‡à¸ à¸±à¸¢à¸žà¸´à¸šà¸±à¸•à¸´à¸—à¸±à¹ˆà¸§à¸›à¸£à¸°à¹€à¸—à¸¨</h2>
             <section class="map-panel">
@@ -248,15 +447,28 @@
                 <p class="source-description">à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸šà¸›à¸£à¸°à¸à¸²à¸¨à¹à¸ˆà¹‰à¸‡à¹€à¸•à¸·à¸­à¸™à¸ à¸±à¸¢à¹à¸¥à¸°à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œà¸›à¸£à¸°à¸ˆà¸³à¸§à¸±à¸™à¸ˆà¸²à¸à¸¨à¸¹à¸™à¸¢à¹Œà¹€à¸•à¸·à¸­à¸™à¸ à¸±à¸¢à¸žà¸´à¸šà¸±à¸•à¸´à¹à¸«à¹ˆà¸‡à¸Šà¸²à¸•à¸´</p>
                 <div class="buttons"><a class="button button-primary" href="https://ndwc.disaster.go.th/" target="_blank" rel="noopener">à¸›à¸£à¸°à¸à¸²à¸¨à¹€à¸•à¸·à¸­à¸™à¸ à¸±à¸¢ à¸›à¸ .</a><a class="button button-secondary" href="https://ndwc.disaster.go.th/ndwc/cms?id=7085" target="_blank" rel="noopener">à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œà¸›à¸£à¸°à¸ˆà¸³à¸§à¸±à¸™</a></div>
             </article>
+
+            <section class="operator-guide" aria-labelledby="guide-title">
+                <h2 id="guide-title" class="section-title">à¹à¸™à¸§à¸—à¸²à¸‡à¸à¸²à¸£à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸šà¹à¸¥à¸°à¸à¸²à¸£à¸›à¸à¸´à¸šà¸±à¸•à¸´à¹€à¸šà¸·à¹‰à¸­à¸‡à¸•à¹‰à¸™</h2>
+                <div class="guide-grid">
+                    <article class="guide-card operator"><h3>à¸ªà¸³à¸«à¸£à¸±à¸šà¸œà¸¹à¹‰à¸›à¸£à¸°à¸à¸­à¸šà¸à¸²à¸£</h3><ol><li>à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸šà¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œà¸¥à¹ˆà¸²à¸ªà¸¸à¸”à¹à¸¥à¸°à¸›à¸£à¸°à¸à¸²à¸¨à¸ˆà¸²à¸à¸«à¸™à¹ˆà¸§à¸¢à¸‡à¸²à¸™à¸ à¸²à¸„à¸£à¸±à¸</li><li>à¸›à¸£à¸°à¹€à¸¡à¸´à¸™à¸„à¸§à¸²à¸¡à¹€à¸ªà¸µà¹ˆà¸¢à¸‡à¸•à¹ˆà¸­à¸žà¸™à¸±à¸à¸‡à¸²à¸™ à¸­à¸²à¸„à¸²à¸£ à¸£à¸°à¸šà¸šà¸ªà¸²à¸˜à¸²à¸£à¸“à¸¹à¸›à¹‚à¸ à¸„ à¹à¸¥à¸°à¸à¸£à¸°à¸šà¸§à¸™à¸à¸²à¸£à¸œà¸¥à¸´à¸•</li><li>à¸—à¸šà¸—à¸§à¸™à¹à¸œà¸™à¸‰à¸¸à¸à¹€à¸‰à¸´à¸™ à¹€à¸ªà¹‰à¸™à¸—à¸²à¸‡à¸­à¸žà¸¢à¸ž à¹à¸¥à¸°à¸Šà¹ˆà¸­à¸‡à¸—à¸²à¸‡à¸•à¸´à¸”à¸•à¹ˆà¸­à¸ à¸²à¸¢à¹ƒà¸™à¸­à¸‡à¸„à¹Œà¸à¸£</li><li>à¹à¸ˆà¹‰à¸‡à¹€à¸ˆà¹‰à¸²à¸«à¸™à¹‰à¸²à¸—à¸µà¹ˆà¸™à¸´à¸„à¸¡à¸­à¸¸à¸•à¸ªà¸²à¸«à¸à¸£à¸£à¸¡à¹€à¸¡à¸·à¹ˆà¸­à¸žà¸šà¹€à¸«à¸•à¸¸à¸œà¸´à¸”à¸›à¸à¸•à¸´à¸«à¸£à¸·à¸­à¹„à¸”à¹‰à¸£à¸±à¸šà¸œà¸¥à¸à¸£à¸°à¸—à¸š</li></ol></article>
+                    <article class="guide-card officer"><h3>à¸ªà¸³à¸«à¸£à¸±à¸šà¹€à¸ˆà¹‰à¸²à¸«à¸™à¹‰à¸²à¸—à¸µà¹ˆ</h3><ol><li>à¸¢à¸·à¸™à¸¢à¸±à¸™à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸à¸±à¸šà¸«à¸™à¹ˆà¸§à¸¢à¸‡à¸²à¸™à¸•à¹‰à¸™à¸—à¸²à¸‡à¹à¸¥à¸°à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸šà¸žà¸·à¹‰à¸™à¸—à¸µà¹ˆà¸—à¸µà¹ˆà¸­à¸²à¸ˆà¹„à¸”à¹‰à¸£à¸±à¸šà¸œà¸¥à¸à¸£à¸°à¸—à¸š</li><li>à¸›à¸£à¸°à¸ªà¸²à¸™à¸œà¸¹à¹‰à¸›à¸£à¸°à¸à¸­à¸šà¸à¸²à¸£à¹à¸¥à¸°à¸«à¸™à¹ˆà¸§à¸¢à¸‡à¸²à¸™à¸—à¸µà¹ˆà¹€à¸à¸µà¹ˆà¸¢à¸§à¸‚à¹‰à¸­à¸‡à¸•à¸²à¸¡à¸£à¸°à¸”à¸±à¸šà¸„à¸§à¸²à¸¡à¸£à¸¸à¸™à¹à¸£à¸‡</li><li>à¸•à¸´à¸”à¸•à¸²à¸¡à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œà¸­à¸¢à¹ˆà¸²à¸‡à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡à¹à¸¥à¸°à¸šà¸±à¸™à¸—à¸¶à¸à¸¥à¸³à¸”à¸±à¸šà¹€à¸«à¸•à¸¸à¸à¸²à¸£à¸“à¹Œ</li><li>à¹€à¸œà¸¢à¹à¸žà¸£à¹ˆà¸„à¸³à¹à¸™à¸°à¸™à¸³à¸«à¸£à¸·à¸­à¸›à¸£à¸°à¸à¸²à¸¨à¸­à¸¢à¹ˆà¸²à¸‡à¹€à¸›à¹‡à¸™à¸—à¸²à¸‡à¸à¸²à¸£à¸œà¹ˆà¸²à¸™à¸Šà¹ˆà¸­à¸‡à¸—à¸²à¸‡à¸—à¸µà¹ˆà¸à¸³à¸«à¸™à¸”</li></ol></article>
+                </div>
+                <p class="official-note">à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¹ƒà¸™à¸«à¸™à¹‰à¸²à¸™à¸µà¹‰à¹ƒà¸Šà¹‰à¹€à¸žà¸·à¹ˆà¸­à¸ªà¸™à¸±à¸šà¸ªà¸™à¸¸à¸™à¸à¸²à¸£à¹€à¸à¹‰à¸²à¸£à¸°à¸§à¸±à¸‡à¹€à¸šà¸·à¹‰à¸­à¸‡à¸•à¹‰à¸™ à¸„à¸§à¸£à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸šà¸›à¸£à¸°à¸à¸²à¸¨à¸­à¸¢à¹ˆà¸²à¸‡à¹€à¸›à¹‡à¸™à¸—à¸²à¸‡à¸à¸²à¸£à¸ˆà¸²à¸à¸«à¸™à¹ˆà¸§à¸¢à¸‡à¸²à¸™à¸—à¸µà¹ˆà¸£à¸±à¸šà¸œà¸´à¸”à¸Šà¸­à¸šà¸à¹ˆà¸­à¸™à¸•à¸±à¸”à¸ªà¸´à¸™à¹ƒà¸ˆà¸”à¸³à¹€à¸™à¸´à¸™à¸à¸²à¸£à¸—à¸¸à¸à¸„à¸£à¸±à¹‰à¸‡</p>
+            </section>
             <p class="updated">à¹à¸«à¸¥à¹ˆà¸‡à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸­à¹‰à¸²à¸‡à¸­à¸´à¸‡: GISTDA, ThaiWater, à¸à¸£à¸¡à¸­à¸¸à¸•à¸¸à¸™à¸´à¸¢à¸¡à¸§à¸´à¸—à¸¢à¸² à¹à¸¥à¸°à¸à¸£à¸¡à¸›à¹‰à¸­à¸‡à¸à¸±à¸™à¹à¸¥à¸°à¸šà¸£à¸£à¹€à¸—à¸²à¸ªà¸²à¸˜à¸²à¸£à¸“à¸ à¸±à¸¢ (à¸›à¸ .)</p>
         </main>
     </div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
         const map = L.map("map", { scrollWheelZoom: false }).setView([15.5, 101], 5);
-        L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", { subdomains: "abcd", maxZoom: 20, attribution: "&copy; OpenStreetMap contributors &copy; CARTO" }).addTo(map);
+        L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+            subdomains: "abcd",
+            maxZoom: 20,
+            attribution: "&copy; OpenStreetMap contributors &copy; CARTO"
+        }).addTo(map);
         const thailandBounds = L.latLngBounds([5.4, 97.2], [20.7, 105.8]);
-        L.rectangle(thailandBounds, { color: "#176EA6", weight: 1, fillOpacity: .03 }).addTo(map).bindTooltip("à¸›à¸£à¸°à¹€à¸—à¸¨à¹„à¸—à¸¢");
+        L.rectangle(thailandBounds, { color: "#2F6FED", weight: 1, fillOpacity: .03 }).addTo(map).bindTooltip("à¸›à¸£à¸°à¹€à¸—à¸¨à¹„à¸—à¸¢");
         function formatNumber(value) { return Number(value || 0).toLocaleString("th-TH"); }
         document.querySelectorAll(".tab").forEach(button => {
             button.addEventListener("click", () => {
@@ -293,12 +505,30 @@
                 document.getElementById("earthquakeCount").textContent = formatNumber(features.length);
                 document.getElementById("nearThailandCount").textContent = formatNumber(nearThailand);
                 document.getElementById("maxMagnitude").textContent = maxMagnitude ? maxMagnitude.toFixed(1) : "-";
+                document.getElementById("latestEarthquakeCount").textContent = formatNumber(features.length);
+                document.getElementById("latestNearThailandCount").textContent = formatNumber(nearThailand);
+                document.getElementById("latestMaxMagnitude").textContent = maxMagnitude ? maxMagnitude.toFixed(1) : "-";
+                document.getElementById("situationHeadline").textContent = nearThailand > 0
+                    ? `à¸žà¸šà¹€à¸«à¸•à¸¸à¸à¸²à¸£à¸“à¹Œà¹ƒà¸à¸¥à¹‰à¸›à¸£à¸°à¹€à¸—à¸¨à¹„à¸—à¸¢ ${formatNumber(nearThailand)} à¹€à¸«à¸•à¸¸à¸à¸²à¸£à¸“à¹Œ`
+                    : "à¹„à¸¡à¹ˆà¸žà¸šà¹€à¸«à¸•à¸¸à¸à¸²à¸£à¸“à¹Œà¹ƒà¸à¸¥à¹‰à¸›à¸£à¸°à¹€à¸—à¸¨à¹„à¸—à¸¢à¹ƒà¸™à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸¥à¹ˆà¸²à¸ªà¸¸à¸”";
+                document.getElementById("situationDetail").textContent = maxMagnitude
+                    ? `à¹€à¸«à¸•à¸¸à¸à¸²à¸£à¸“à¹Œà¸—à¸µà¹ˆà¸¡à¸µà¸‚à¸™à¸²à¸”à¸ªà¸¹à¸‡à¸ªà¸¸à¸”à¸—à¸±à¹ˆà¸§à¹‚à¸¥à¸à¸­à¸¢à¸¹à¹ˆà¸—à¸µà¹ˆ ${maxMagnitude.toFixed(1)}`
+                    : "à¹„à¸¡à¹ˆà¸žà¸šà¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸‚à¸™à¸²à¸”à¹à¸œà¹ˆà¸™à¸”à¸´à¸™à¹„à¸«à¸§";
+                document.querySelector(".latest-status").classList.toggle("is-alert", nearThailand > 0);
+                document.getElementById("headerUpdated").textContent = "à¸­à¸±à¸›à¹€à¸”à¸•à¸¥à¹ˆà¸²à¸ªà¸¸à¸” " + new Date().toLocaleString("th-TH", { dateStyle: "medium", timeStyle: "short" });
                 status.textContent = "à¸­à¸±à¸›à¹€à¸”à¸•à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¹à¸œà¹ˆà¸™à¸”à¸´à¸™à¹„à¸«à¸§à¸¥à¹ˆà¸²à¸ªà¸¸à¸”: " + new Date().toLocaleString("th-TH");
             } catch (error) {
                 console.error(error);
                 document.getElementById("earthquakeCount").textContent = "-";
                 document.getElementById("nearThailandCount").textContent = "-";
                 document.getElementById("maxMagnitude").textContent = "-";
+                document.getElementById("latestEarthquakeCount").textContent = "-";
+                document.getElementById("latestNearThailandCount").textContent = "-";
+                document.getElementById("latestMaxMagnitude").textContent = "-";
+                document.getElementById("situationHeadline").textContent = "à¹„à¸¡à¹ˆà¸ªà¸²à¸¡à¸²à¸£à¸–à¹€à¸Šà¸·à¹ˆà¸­à¸¡à¸•à¹ˆà¸­à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸ªà¸–à¸²à¸™à¸à¸²à¸£à¸“à¹Œà¸¥à¹ˆà¸²à¸ªà¸¸à¸”à¹„à¸”à¹‰";
+                document.getElementById("situationDetail").textContent = "à¸à¸£à¸¸à¸“à¸²à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸šà¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸ˆà¸²à¸à¸«à¸™à¹ˆà¸§à¸¢à¸‡à¸²à¸™à¸—à¸µà¹ˆà¹€à¸à¸µà¹ˆà¸¢à¸§à¸‚à¹‰à¸­à¸‡à¹‚à¸”à¸¢à¸•à¸£à¸‡";
+                document.querySelector(".latest-status").classList.add("is-alert");
+                document.getElementById("headerUpdated").textContent = "à¹„à¸¡à¹ˆà¸ªà¸²à¸¡à¸²à¸£à¸–à¸­à¸±à¸›à¹€à¸”à¸•à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¹„à¸”à¹‰";
                 status.textContent = "à¹„à¸¡à¹ˆà¸ªà¸²à¸¡à¸²à¸£à¸–à¹‚à¸«à¸¥à¸”à¹à¸œà¹ˆà¸™à¸”à¸´à¸™à¹„à¸«à¸§à¸¥à¹ˆà¸²à¸ªà¸¸à¸”à¹„à¸”à¹‰ à¸à¸£à¸¸à¸“à¸²à¸¥à¸­à¸‡à¹ƒà¸«à¸¡à¹ˆà¸­à¸µà¸à¸„à¸£à¸±à¹‰à¸‡";
             }
         }
