@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
 
   schedule:
-    # รันทุก 1 ชั่วโมง ที่นาที 17
-    # GitHub Actions ใช้ UTC แต่ “นาที” จะตรงกันทั่วโลก
-    - cron: "17 * * * *"
+    # ตรวจและส่ง LINE ทุก 1 ชั่วโมง เฉพาะเวลา 08:30–16:30 น. ตามเวลาประเทศไทย
+    # GitHub Actions ใช้เวลา UTC: 01:30–09:30 UTC = 08:30–16:30 น. (Asia/Bangkok)
+    - cron: "30 1-9 * * *"
 
 permissions:
   contents: write
@@ -36,6 +36,7 @@ jobs:
         run: |
           echo "================================================"
           echo "IEAT e-Monitoring Hourly LINE Alert"
+          echo "Active schedule: 08:30-16:30 Asia/Bangkok"
           echo "================================================"
           echo "Trigger: ${{ github.event_name }}"
           echo "Thailand time:"
