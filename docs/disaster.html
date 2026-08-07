@@ -174,21 +174,6 @@
             .notice { padding: 14px; }
             .section-title { font-size: 18px; }
         }
-    
-        /* Swap blue and purple roles — requested */
-        .header{background:linear-gradient(135deg,#2056C8 0%,#2F6FED 62%,#5888EE 100%)!important;border-bottom-color:#65408A!important}
-        .notice{border-left-color:#2F6FED!important}.notice strong{color:#2056C8!important}
-        .section-title,.source-title{color:#2056C8!important}.section-title::before{background:#2F6FED!important}
-        .tab.active{color:#fff!important;background:#2F6FED!important;border-color:#2F6FED!important}
-        .summary-card:nth-child(1){background:#F1F6FF!important;border-top-color:#2F6FED!important}.summary-card:nth-child(1) .summary-number{color:#2F6FED!important}
-        .summary-card:nth-child(2){background:#F7F3FA!important;border-top-color:#65408A!important}.summary-card:nth-child(2) .summary-number{color:#65408A!important}
-        .source-card.flood,.source-card.weather{border-left-color:#7555C7!important}
-        .source-card.earthquake,.source-card.fire,.source-card.alert{border-left-color:#2F6FED!important}
-        .source-card.drought{border-left-color:#2B8A3E!important}
-        .button-primary{color:#fff!important;background:#2F6FED!important;box-shadow:0 4px 10px rgba(47,111,237,.16)!important}
-        .button-secondary{color:#65408A!important;background:#F7F3FA!important;border-color:#DCCFE7!important}
-        .map-caption strong{color:#65408A!important}
-        .live-status{color:#65408A!important;background:#F7F3FA!important}
     </style>
 </head>
 <body>
@@ -269,9 +254,9 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
         const map = L.map("map", { scrollWheelZoom: false }).setView([15.5, 101], 5);
-        L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", { subdomains: "abcd", maxZoom: 20, attribution: "&copy; OpenStreetMap contributors &copy; CARTO" }).addTo(map);
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 18, attribution: "© OpenStreetMap contributors" }).addTo(map);
         const thailandBounds = L.latLngBounds([5.4, 97.2], [20.7, 105.8]);
-        L.rectangle(thailandBounds, { color: "#2F6FED", weight: 1, fillOpacity: .03 }).addTo(map).bindTooltip("ประเทศไทย");
+        L.rectangle(thailandBounds, { color: "#6B3F91", weight: 1, fillOpacity: .03 }).addTo(map).bindTooltip("ประเทศไทย");
         function formatNumber(value) { return Number(value || 0).toLocaleString("th-TH"); }
         document.querySelectorAll(".tab").forEach(button => {
             button.addEventListener("click", () => {
