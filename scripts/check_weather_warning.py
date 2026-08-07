@@ -22,7 +22,7 @@ STATE_PATH = Path(os.getenv("WEATHER_WARNING_STATE_PATH", "data/weather-warning-
 LINE_API = "https://api.line.me/v2/bot/message/push"
 THAI_TZ = ZoneInfo("Asia/Bangkok")
 TARGET_ID_RE = re.compile(r"^[UCR][0-9a-fA-F]{32}$")
-KEYWORDS = ("ฝนตกหนัก", "ฝนตกหนักมาก", "พายุ", "มรสุม", "คลื่นลมแรง", "พายุฝนฟ้าคะนอง", "ลมแรง", "น้ำท่วมฉับพลัน", "น้ำป่าไหลหลาก", "น้ำล้นตลิ่ง", "ดินถล่ม", "ดินโคลนถล่ม")
+KEYWORDS = ("ฝนตกหนัก", "ฝนตกหนักมาก", "พายุ", "มรสุม", "คลื่นลมแรง", "พายุฝนฟ้าคะนอง", "ลมแรง", "น้ำท่วมฉับพลัน", "น้ำป่าไหลหลาก", "น้ำล้นตลิ่ง", "ดินถล่ม", "ดินโคลนถล่ม", "อากาศร้อน", "ดัชนีความร้อน", "คลื่นความร้อน", "ภัยแล้ง", "สึนามิ", "คลื่นสึนามิ")
 
 
 def clean(value: str) -> str:
@@ -70,7 +70,7 @@ def fetch_warnings() -> list[dict]:
 
 
 def severity(title: str) -> tuple[str, str, str]:
-    if any(word in title for word in ("พายุไต้ฝุ่น", "พายุโซนร้อน", "พายุไซโคลน", "หนักมาก")):
+    if any(word in title for word in ("พายุไต้ฝุ่น", "พายุโซนร้อน", "พายุไซโคลน", "หนักมาก", "สึนามิ", "คลื่นสึนามิ")):
         return "อันตราย • ดำเนินการเร่งด่วน", "#BF033B", "#FCE7ED"
     if any(word in title for word in ("ฝนตกหนัก", "คลื่นลมแรง", "พายุ", "ลมแรง")):
         return "เตรียมพร้อม • ตรวจสอบพื้นที่", "#FF6908", "#FFF0E8"
