@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""ตรวจประกาศฝนตกหนักและพายุจากกรมอุตุนิยมวิทยา แล้วส่ง LINE Flex Message."""
+"""ตรวจประกาศอากาศรุนแรงและภัยต่อเนื่องที่กระทบนิคม แล้วส่ง LINE Flex Message."""
 
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ STATE_PATH = Path(os.getenv("WEATHER_WARNING_STATE_PATH", "data/weather-warning-
 LINE_API = "https://api.line.me/v2/bot/message/push"
 THAI_TZ = ZoneInfo("Asia/Bangkok")
 TARGET_ID_RE = re.compile(r"^[UCR][0-9a-fA-F]{32}$")
-KEYWORDS = ("ฝนตกหนัก", "ฝนตกหนักมาก", "พายุ", "มรสุม", "คลื่นลมแรง", "พายุฝนฟ้าคะนอง", "ลมแรง", "น้ำท่วมฉับพลัน", "น้ำป่าไหลหลาก")
+KEYWORDS = ("ฝนตกหนัก", "ฝนตกหนักมาก", "พายุ", "มรสุม", "คลื่นลมแรง", "พายุฝนฟ้าคะนอง", "ลมแรง", "น้ำท่วมฉับพลัน", "น้ำป่าไหลหลาก", "น้ำล้นตลิ่ง", "ดินถล่ม", "ดินโคลนถล่ม")
 
 
 def clean(value: str) -> str:
@@ -77,6 +77,27 @@ def severity(title: str) -> tuple[str, str, str]:
     return "เฝ้าระวัง • ติดตามประกาศ", "#598C14", "#EEF5E6"
 
 
+def related_hazards(title: str) -> str:
+    hazards: list[str] = []
+    def add(label: str) -> None:
+        if label not in hazards:
+            hazards.append(label)
+
+    if any(word in title for word in ("ฝนตกหนัก", "ฝนตกหนักมาก", "มรสุม", "พายุ")):
+        add("ฝนตกหนัก")
+        add("น้ำท่วมฉับพลัน")
+        add("น้ำป่า/ดินถล่ม")
+    if any(word in title for word in ("พายุ", "ลมแรง", "พายุฝนฟ้าคะนอง")):
+        add("ลมแรง/พายุ")
+    if "คลื่นลมแรง" in title:
+        add("คลื่นลมแรง")
+    if any(word in title for word in ("น้ำท่วม", "น้ำล้นตลิ่ง")):
+        add("น้ำท่วม")
+    if any(word in title for word in ("น้ำป่า", "ดินถล่ม", "ดินโคลนถล่ม")):
+        add("น้ำป่า/ดินถล่ม")
+    return " • ".join(hazards or ["สภาพอากาศเสี่ยงภัย"])
+
+
 def industrial_guidance(level: str) -> str:
     if level.startswith("อันตราย"):
         return "เปิดใช้แผนฉุกเฉิน • ตรวจระบบระบายน้ำและพื้นที่เสี่ยงน้ำท่วม • ยึดตรึงป้าย หลังคา เครน และวัสดุ • ป้องกันระบบไฟฟ้า สารเคมี และคลังสินค้า • พิจารณาหยุดงานกลางแจ้งและกระบวนการเสี่ยง"
@@ -89,21 +110,24 @@ def flex_message(item: dict, test: bool = False) -> dict:
     level, color, background = severity(item["title"])
     now = datetime.now(THAI_TZ).strftime("%d/%m/%Y เวลา %H:%M น.")
     title = item["title"]
+    hazards = related_hazards(title)
     return {
         "type": "flex",
-        "altText": ("[ทดสอบ] " if test else "") + f"แจ้งเตือนฝนตกหนักและพายุ — {level}",
+        "altText": ("[ทดสอบ] " if test else "") + f"แจ้งเตือนภัยสำหรับนิคม — {hazards}",
         "contents": {
             "type": "bubble", "size": "mega",
             "header": {"type": "box", "layout": "vertical", "backgroundColor": "#17233C", "paddingAll": "20px", "contents": [
-                {"type": "text", "text": "HEAVY RAIN & STORM ALERT", "size": "xxs", "weight": "bold", "color": "#B9A6C9"},
-                {"type": "text", "text": "แจ้งเตือนฝนตกหนักและพายุ", "size": "xl", "weight": "bold", "color": "#FFFFFF", "wrap": True, "margin": "xs"},
+                {"type": "text", "text": "INDUSTRIAL DISASTER ALERT", "size": "xxs", "weight": "bold", "color": "#B9A6C9"},
+                {"type": "text", "text": "แจ้งเตือนภัยสำหรับนิคมอุตสาหกรรม", "size": "xl", "weight": "bold", "color": "#FFFFFF", "wrap": True, "margin": "xs"},
                 *([{"type": "text", "text": "ตัวอย่างทดสอบ • ไม่ใช่เหตุการณ์จริง", "size": "xs", "weight": "bold", "color": "#FFD166", "margin": "md"}] if test else [])
             ]},
             "body": {"type": "box", "layout": "vertical", "paddingAll": "20px", "contents": [
                 {"type": "box", "layout": "vertical", "backgroundColor": background, "cornerRadius": "lg", "paddingAll": "13px", "contents": [
                     {"type": "text", "text": level, "size": "sm", "weight": "bold", "color": color, "align": "center"}
                 ]},
-                {"type": "text", "text": "ประกาศกรมอุตุนิยมวิทยา", "size": "xxs", "weight": "bold", "color": color, "margin": "xl"},
+                {"type": "text", "text": "ภัยที่เกี่ยวข้อง", "size": "xxs", "weight": "bold", "color": color, "margin": "xl"},
+                {"type": "text", "text": hazards, "size": "md", "weight": "bold", "color": "#252B3A", "wrap": True, "margin": "sm"},
+                {"type": "text", "text": "ประกาศกรมอุตุนิยมวิทยา", "size": "xxs", "weight": "bold", "color": color, "margin": "lg"},
                 {"type": "text", "text": title, "size": "md", "weight": "bold", "color": "#252B3A", "wrap": True, "margin": "sm"},
                 {"type": "box", "layout": "vertical", "backgroundColor": "#F7F8FA", "cornerRadius": "lg", "paddingAll": "12px", "margin": "lg", "contents": [
                     {"type": "text", "text": "เวลาที่ระบบตรวจพบ", "size": "xxs", "weight": "bold", "color": "#7B8190"},
