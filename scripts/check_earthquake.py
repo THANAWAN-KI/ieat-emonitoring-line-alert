@@ -23,6 +23,7 @@ THAI_TZ = ZoneInfo("Asia/Bangkok")
 MAG_RE = re.compile(r"(?:ขนาด|Magnitude|Mag\.?)[^0-9]{0,12}([0-9]+(?:\.[0-9]+)?)", re.I)
 DEPTH_RE = re.compile(r"(?:ความลึก|Depth)[^0-9]{0,12}([0-9]+(?:\.[0-9]+)?)", re.I)
 COORD_RE = re.compile(r"(-?\d{1,2}\.\d+)\s*[,/]\s*(-?\d{1,3}\.\d+)")
+TARGET_ID_RE = re.compile(r"^[UCR][0-9a-fA-F]{32}$")
 THAILAND_WORDS = ("ประเทศไทย", "Thailand", "จ.", "อ.", "เชียงราย", "เชียงใหม่", "แม่ฮ่องสอน", "ตาก", "กาญจนบุรี", "ภูเก็ต", "พังงา", "กระบี่")
 NEARBY_WORDS = ("เมียนมา", "พม่า", "Myanmar", "ลาว", "Laos", "กัมพูชา", "Cambodia", "เวียดนาม", "Vietnam", "มาเลเซีย", "Malaysia", "ทะเลอันดามัน", "Andaman")
 
@@ -204,12 +205,53 @@ def flex_message(event: dict, test: bool = False) -> dict:
     }
 
 def push_line(token: str, target: str, line_message: dict) -> None:
-    body = json.dumps({"to": target, "messages": [line_message]}, ensure_ascii=False).encode()
-    request = urllib.request.Request(LINE_API, data=body, headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"}, method="POST")
-    with urllib.request.urlopen(request, timeout=30) as response:
-        if response.status >= 300:
-            raise RuntimeError(f"LINE API returned HTTP {response.status}")
+    if not TARGET_ID_RE.fullmatch(target):
+        raise ValueError(
+            "LINE_TARGET_ID มีรูปแบบไม่ถูกต้อง: ต้องเป็น User ID ที่ขึ้นต้นด้วย U "
+            "(หรือ Group/Room ID ที่ขึ้นต้นด้วย C/R) ตามด้วยเลขฐานสิบหก 32 ตัว "
+            "และต้องไม่ใช่ LINE ID สำหรับเพิ่มเพื่อน"
+        )
 
+    body = json.dumps({"to": target, "messages": [line_message]}, ensure_ascii=False).encode()
+    request = urllib.request.Request(
+        LINE_API,
+        data=body,
+        headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=30) as response:
+            if response.status >= 300:
+                raise RuntimeError(f"LINE API returned HTTP {response.status}")
+    except urllib.error.HTTPError as error:
+        response_body = error.read().decode("utf-8", errors="replace")
+        try:
+            details = json.loads(response_body)
+            line_message_text = details.get("message", response_body)
+            detail_items = details.get("details") or []
+            detail_text = "; ".join(
+                f"{item.get('property', 'ข้อมูล')}: {item.get('message', 'ไม่ถูกต้อง')}"
+                for item in detail_items
+            )
+            reason = f"{line_message_text}" + (f" ({detail_text})" if detail_text else "")
+        except json.JSONDecodeError:
+            reason = response_body or error.reason
+        hint = ""
+        if error.code == 400:
+            hint = (
+                " ตรวจว่า LINE_TARGET_ID เป็น ID จาก Messaging API channel เดียวกับ Token, "
+                "ผู้รับเพิ่ม LINE OA เป็นเพื่อนแล้ว และทดลองข้อความธรรมดาเพื่อแยกปัญหาการ์ด"
+            )
+        elif error.code == 401:
+            hint = " ตรวจหรือออก LINE_CHANNEL_ACCESS_TOKEN ใหม่"
+        raise RuntimeError(f"LINE API HTTP {error.code}: {reason}.{hint}") from error
+
+
+def text_test_message() -> dict:
+    return {
+        "type": "text",
+        "text": "✅ ทดสอบระบบแจ้งเตือนแผ่นดินไหว\nข้อความนี้เป็นการทดสอบ ไม่ใช่เหตุการณ์จริง",
+    }
 
 def load_state() -> dict:
     try:
