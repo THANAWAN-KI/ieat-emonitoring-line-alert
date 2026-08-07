@@ -4423,10 +4423,14 @@ async function exportReportImage(){
   const alertCount=num(data.alert_station_count??stations.length);
   const onlinePercent=total?Math.round((online/total)*100):0;
   const updated=esc(data.updated_at_text||data.updated_at||"-");
+  const healthTone=alertCount>0?"ต้องเฝ้าระวัง":"สถานการณ์ปกติ";
+  const healthMessage=alertCount>0?`พบ ${fmt(alertCount)} สถานีที่ควรติดตามจากข้อมูลล่าสุด`:"ไม่พบสถานีที่ต้องติดตามจากข้อมูลล่าสุด";
+  const offlinePercent=total?Math.round((offline/total)*100):0;
   const fileDate=new Date().toLocaleDateString("th-TH",{year:"numeric",month:"2-digit",day:"2-digit"}).replaceAll("/","-");
   const typeKeys=["AQMs","WQMs","CEMs"];
   const typeData=typeKeys.map(key=>({key,label:TYPE_INFO[key].label,...getTypeData(data,key)}));
   const maxType=Math.max(1,...typeData.map(item=>item.total));
+  const leadingType=[...typeData].sort((a,b)=>b.total-a.total)[0]||{key:"-",total:0,label:"ไม่พบข้อมูล"};
   const rows=stations.slice(0,14).map((station,index)=>{
     const status=String(station.status||"-").toUpperCase();
     const statusText=status==="ONLINE"?"ออนไลน์":status==="OFFLINE"?"ออฟไลน์":status;
@@ -4491,6 +4495,24 @@ async function exportReportImage(){
     .er-table tbody tr:nth-child(even){background:#F8F9FB}.er-table tbody tr:last-child td{border-bottom:0}.er-table small{display:block;margin-top:2px;color:#7A7D86}
     .er-status{display:inline-block;padding:4px 8px;border-radius:999px;font-size:10px;font-weight:800}.is-online{color:#278753;background:#EDF8F2}.is-offline{color:#C93B3B;background:#FFF0F0}
     .er-empty{text-align:center;padding:20px;color:#7A7D86}.er-foot{display:flex;justify-content:space-between;margin-top:14px;color:#7A7D86;font-size:10px}
+    .er-shell{border:0;box-shadow:0 18px 46px rgba(45,39,62,.13)}
+    .er-head{position:relative;padding:25px 28px;color:#FFF;background:linear-gradient(120deg,#4E2F70 0%,#65408A 58%,#2F6FED 145%);border-bottom:5px solid #E57A2A}
+    .er-head:after{content:"";position:absolute;right:-42px;top:-70px;width:260px;height:260px;border:1px solid rgba(255,255,255,.12);border-radius:50%}
+    .er-logo{padding:7px;border-radius:13px;background:#FFF;box-shadow:0 5px 14px rgba(0,0,0,.16)}
+    .er-kicker,.er-title,.er-date strong{color:#FFF}.er-sub,.er-date{color:rgba(255,255,255,.8)}
+    .er-content{padding:18px 22px 24px;background:linear-gradient(180deg,#FBFAFC 0,#F6F8FB 100%)}
+    .er-situation{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:14px;padding:13px 16px;border:1px solid #E6DCF0;border-left:5px solid #65408A;border-radius:14px;background:#FFF}
+    .er-situation-main{display:flex;align-items:center;gap:11px}.er-pulse{width:13px;height:13px;border:4px solid #D8CBE4;border-radius:50%;background:#65408A}
+    .er-situation strong{display:block;font-size:14px}.er-situation p{margin:2px 0 0;color:#7A7D86;font-size:11px}
+    .er-situation-badge{padding:7px 12px;border-radius:999px;color:#D96F22;background:#FFF3E9;font-size:11px;font-weight:800}
+    .er-kpi{position:relative;overflow:hidden;min-height:104px;background:linear-gradient(145deg,#FFF,#FAFAFC)}
+    .er-kpi:after{content:"";position:absolute;right:-22px;bottom:-28px;width:72px;height:72px;border-radius:50%;background:rgba(101,64,138,.055)}
+    .er-kpi-icon{box-shadow:inset 0 0 0 1px rgba(0,0,0,.04)}
+    .er-insights{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:12px;margin-top:14px}
+    .er-insight{display:flex;align-items:center;gap:12px;padding:14px 16px;border:1px solid #E7E9EE;border-radius:14px;background:#FFF}
+    .er-insight-icon{display:grid;place-items:center;width:36px;height:36px;flex:0 0 36px;border-radius:11px;color:#65408A;background:#F3EDF7;font-weight:900}
+    .er-insight strong{display:block;font-size:13px}.er-insight span{display:block;margin-top:2px;color:#7A7D86;font-size:10px}
+    .er-table-card{box-shadow:0 7px 18px rgba(38,42,54,.045)}
   </style>
   <div class="er-report"><div class="er-shell">
     <header class="er-head">
@@ -4498,6 +4520,10 @@ async function exportReportImage(){
       <div class="er-date">ข้อมูลล่าสุด<strong>${updated}</strong></div>
     </header>
     <div class="er-content">
+      <div class="er-situation">
+        <div class="er-situation-main"><span class="er-pulse"></span><div><strong>ภาพรวมสถานการณ์ระบบตรวจวัด</strong><p>${healthMessage}</p></div></div>
+        <span class="er-situation-badge">${healthTone}</span>
+      </div>
       <div class="er-kpis">
         <div class="er-kpi er-purple"><div class="er-kpi-top"><div class="er-kpi-icon">Σ</div><strong>${fmt(total)}</strong></div><span>สถานีตรวจวัดทั้งหมด</span></div>
         <div class="er-kpi er-green"><div class="er-kpi-top"><div class="er-kpi-icon">●</div><strong>${fmt(online)}</strong></div><span>สถานีออนไลน์</span></div>
@@ -4507,6 +4533,11 @@ async function exportReportImage(){
       <div class="er-grid">
         <section class="er-card"><h2>จำนวนสถานีจำแนกตามประเภท</h2><p>เปรียบเทียบจำนวนสถานีจากข้อมูลล่าสุด</p>${bars}</section>
         <section class="er-card"><h2>ความพร้อมให้บริการ</h2><p>สัดส่วนสถานีออนไลน์ต่อสถานีทั้งหมด</p><div class="er-donut-wrap"><div class="er-donut"></div><div class="er-donut-value">${onlinePercent}%<small>ออนไลน์</small></div></div><div class="er-legend"><span><i class="er-dot" style="background:#35A56A"></i>ออนไลน์ ${fmt(online)}</span><span><i class="er-dot" style="background:#E34B4B"></i>ออฟไลน์ ${fmt(offline)}</span></div></section>
+      </div>
+      <div class="er-insights">
+        <div class="er-insight"><div class="er-insight-icon">✓</div><div><strong>ความพร้อมใช้งาน ${onlinePercent}%</strong><span>สถานีออนไลน์ ${fmt(online)} จากทั้งหมด ${fmt(total)} สถานี</span></div></div>
+        <div class="er-insight"><div class="er-insight-icon" style="color:#C93B3B;background:#FFF0F0">!</div><div><strong>สถานีออฟไลน์ ${offlinePercent}%</strong><span>ควรตรวจสอบการเชื่อมต่อ ${fmt(offline)} สถานี</span></div></div>
+        <div class="er-insight"><div class="er-insight-icon" style="color:#2F6FED;background:#F1F6FF">★</div><div><strong>${leadingType.key} มีจำนวนมากที่สุด</strong><span>${esc(leadingType.label)} ${fmt(leadingType.total)} สถานี</span></div></div>
       </div>
       <section class="er-table-card"><div class="er-table-head"><h2>สถานีที่ต้องติดตาม</h2><span>แสดงสูงสุด 14 รายการจากทั้งหมด ${fmt(stations.length)} รายการ</span></div>
         <table class="er-table"><thead><tr><th style="width:5%">ลำดับ</th><th style="width:20%">สถานี</th><th style="width:22%">นิคมอุตสาหกรรม</th><th style="width:10%">สถานะ</th><th style="width:10%">ประเภท</th><th style="width:10%">รายการ</th><th style="width:23%">ข้อมูลล่าสุด</th></tr></thead><tbody>${rows||'<tr><td colspan="7" class="er-empty">ไม่พบสถานีที่ต้องติดตาม</td></tr>'}</tbody></table>
