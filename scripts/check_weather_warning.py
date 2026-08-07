@@ -39,7 +39,7 @@ class WarningParser(HTMLParser):
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         if tag == "a":
             href = dict(attrs).get("href") or ""
-            if "/warning-and-events/" in href and "warning-storm" not in href:
+            if "/warning-and-events/warning-storm/" in href:
                 self.href, self.parts = href, []
 
     def handle_data(self, data: str) -> None:
