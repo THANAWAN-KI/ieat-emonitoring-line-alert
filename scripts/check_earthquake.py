@@ -80,14 +80,31 @@ def qualifies(event: dict) -> bool:
 
 def severity(magnitude: float | None) -> tuple[str, str, str]:
     if magnitude is None:
-        return "เฝ้าระวัง", "#6F4A8E", "#F4EFF8"
-    if magnitude >= 6:
-        return "รุนแรงมาก", "#C83E4D", "#FDEDEF"
+        return "เฝ้าระวัง", "#FF6908", "#FFF0E8"
     if magnitude >= 5:
-        return "ระดับรุนแรง", "#E45B5B", "#FFF0F0"
+        return "ระดับรุนแรง • เร่งด่วน", "#BF033B", "#FCE7ED"
     if magnitude >= 3.5:
-        return "ควรเฝ้าระวัง", "#E09A2D", "#FFF7E6"
-    return "ตรวจพบเหตุการณ์", "#2F8F6B", "#EAF7F2"
+        return "ระดับเตือนภัย • ตรวจสอบพื้นที่", "#FF6908", "#FFF0E8"
+    return "ระดับเฝ้าระวัง", "#598C14", "#EEF5E6"
+
+
+def industrial_guidance(magnitude: float | None) -> str:
+    if magnitude is None:
+        return "ติดตามประกาศ • แจ้งผู้รับผิดชอบความปลอดภัย • เตรียมตรวจพื้นที่และระบบสำคัญ"
+    if magnitude >= 5:
+        return (
+            "ตรวจอาคาร เครื่องจักร ระบบไฟฟ้า ก๊าซ ท่อ และสารเคมีทันที • "
+            "หยุดกระบวนการผลิตที่มีความเสี่ยง • อพยพตามแผนฉุกเฉินเมื่อพบความเสียหาย"
+        )
+    if magnitude >= 3.5:
+        return (
+            "สำรวจอาคารและเครื่องจักร • ตรวจระบบไฟฟ้า ก๊าซ ท่อ และสารเคมี • "
+            "เตรียมทีมฉุกเฉินและรายงานความผิดปกติแก่ผู้รับผิดชอบนิคม"
+        )
+    return (
+        "ติดตามประกาศ • ตรวจสอบเบื้องต้นบริเวณอาคาร เครื่องจักร และสาธารณูปโภค • "
+        "แจ้งผู้รับผิดชอบหากพบแรงสั่นสะเทือนหรือความผิดปกติ"
+    )
 
 
 def info_card(label: str, value: str, accent: str = "#6F4A8E") -> dict:
@@ -106,11 +123,12 @@ def flex_message(event: dict, test: bool = False) -> dict:
     published = event.get("published") or "รอข้อมูลจากกรมอุตุนิยมวิทยา"
     depth = f"{event['depth']} กม." if event.get("depth") else "ไม่ระบุ"
     coordinates = event.get("coordinates") or "ไม่ระบุ"
+    estate_guidance = industrial_guidance(event.get("magnitude"))
 
     header_contents = [
         {"type": "box", "layout": "horizontal", "alignItems": "center", "contents": [
             {"type": "box", "layout": "vertical", "width": "36px", "height": "36px",
-             "backgroundColor": "#6F4A8E", "cornerRadius": "18px", "justifyContent": "center",
+             "backgroundColor": status_color, "cornerRadius": "18px", "justifyContent": "center",
              "contents": [{"type": "text", "text": "!", "size": "lg", "weight": "bold",
                            "color": "#FFFFFF", "align": "center"}]},
             {"type": "box", "layout": "vertical", "margin": "md", "flex": 1, "contents": [
@@ -157,9 +175,9 @@ def flex_message(event: dict, test: bool = False) -> dict:
                     ]},
                 ]},
                 {"type": "box", "layout": "vertical", "margin": "xl", "paddingAll": "14px",
-                 "backgroundColor": "#F4EFF8", "cornerRadius": "lg", "contents": [
+                 "backgroundColor": status_bg, "cornerRadius": "lg", "contents": [
                     {"type": "text", "text": "พื้นที่เกิดเหตุ", "size": "xxs", "weight": "bold",
-                     "color": "#6F4A8E"},
+                     "color": status_color},
                     {"type": "text", "text": location, "size": "md", "weight": "bold",
                      "color": "#252B3A", "wrap": True, "margin": "sm"},
                 ]},
@@ -174,9 +192,16 @@ def flex_message(event: dict, test: bool = False) -> dict:
                     {"type": "text", "text": published, "size": "sm", "weight": "bold",
                      "color": "#252B3A", "wrap": True, "margin": "sm"},
                 ]},
+                {"type": "box", "layout": "vertical", "margin": "xl", "paddingAll": "14px",
+                 "backgroundColor": status_bg, "cornerRadius": "lg", "contents": [
+                    {"type": "text", "text": "แนวทางสำหรับนิคมอุตสาหกรรม", "size": "sm",
+                     "weight": "bold", "color": status_color},
+                    {"type": "text", "text": estate_guidance, "size": "sm", "color": "#3A3F4B",
+                     "wrap": True, "margin": "sm"},
+                ]},
                 {"type": "separator", "margin": "xl", "color": "#ECEEF2"},
                 {"type": "box", "layout": "vertical", "margin": "lg", "contents": [
-                    {"type": "text", "text": "คำแนะนำเพื่อความปลอดภัย", "size": "sm",
+                    {"type": "text", "text": "คำแนะนำเพื่อความปลอดภัยส่วนบุคคล", "size": "sm",
                      "weight": "bold", "color": "#17233C"},
                     {"type": "text", "text": "ตั้งสติ • อยู่ห่างจากกระจกและสิ่งของที่อาจหล่น • ติดตามประกาศจากหน่วยงานราชการ",
                      "size": "sm", "color": "#565D6D", "wrap": True, "margin": "sm"},
@@ -184,13 +209,13 @@ def flex_message(event: dict, test: bool = False) -> dict:
                 {"type": "box", "layout": "horizontal", "margin": "xl", "alignItems": "center",
                  "contents": [
                     {"type": "box", "layout": "vertical", "width": "6px", "height": "6px",
-                     "backgroundColor": "#2F8F6B", "cornerRadius": "3px", "contents": []},
+                     "backgroundColor": status_color, "cornerRadius": "3px", "contents": []},
                     {"type": "text", "text": "ข้อมูลจากกรมอุตุนิยมวิทยา", "size": "xs",
                      "color": "#7B8190", "margin": "sm"},
                 ]},
             ]},
             "footer": {"type": "box", "layout": "vertical", "paddingAll": "16px", "contents": [
-                {"type": "button", "style": "primary", "height": "sm", "color": "#6F4A8E",
+                {"type": "button", "style": "primary", "height": "sm", "color": status_color,
                  "action": {"type": "uri", "label": "ดูรายละเอียดเหตุการณ์",
                             "uri": event.get("link") or "https://earthquake.tmd.go.th/"}},
                 {"type": "box", "layout": "horizontal", "justifyContent": "center", "margin": "md",
@@ -198,7 +223,7 @@ def flex_message(event: dict, test: bool = False) -> dict:
                     {"type": "text", "text": "สายด่วนกรมอุตุนิยมวิทยา", "size": "xxs",
                      "color": "#8B90A0", "flex": 0},
                     {"type": "text", "text": "1182", "size": "xxs", "weight": "bold",
-                     "color": "#6F4A8E", "margin": "sm", "flex": 0},
+                     "color": status_color, "margin": "sm", "flex": 0},
                  ]},
             ]},
         },
