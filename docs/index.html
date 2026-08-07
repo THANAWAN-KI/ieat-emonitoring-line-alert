@@ -4431,16 +4431,17 @@ async function exportReportImage(){
   const typeData=typeKeys.map(key=>({key,label:TYPE_INFO[key].label,...getTypeData(data,key)}));
   const maxType=Math.max(1,...typeData.map(item=>item.total));
   const leadingType=[...typeData].sort((a,b)=>b.total-a.total)[0]||{key:"-",total:0,label:"ไม่พบข้อมูล"};
-  const rows=stations.slice(0,14).map((station,index)=>{
+  const rows=stations.slice(0,12).map((station,index)=>{
     const status=String(station.status||"-").toUpperCase();
     const statusText=status==="ONLINE"?"ออนไลน์":status==="OFFLINE"?"ออฟไลน์":status;
+    const stationType=station.type||station.station_type||"-";
+    const stationCode=station.station_id||station.id||station.code||"-";
     return `<tr>
       <td>${fmt(index+1)}</td>
-      <td><strong>${esc(station.station_name||station.name||"-")}</strong><small>${esc(station.station_id||station.id||station.code||"-")}</small></td>
+      <td><strong>${esc(station.station_name||station.name||"-")}</strong><small>รหัส ${esc(stationCode)} · ${esc(stationType)}</small></td>
       <td>${esc(station.estate_name||station.industrial_estate||"-")}</td>
       <td><span class="er-status ${status==="ONLINE"?"is-online":"is-offline"}">${esc(statusText)}</span></td>
-      <td>${esc(station.type||station.station_type||"-")}</td>
-      <td>${fmt(getParameters(station).length)}</td>
+      <td><strong>${fmt(getParameters(station).length)}</strong> รายการ</td>
       <td>${esc(station.last_update||station.updated_at||station.timestamp||"-")}</td>
     </tr>`;
   }).join("");
@@ -4513,6 +4514,10 @@ async function exportReportImage(){
     .er-insight-icon{display:grid;place-items:center;width:36px;height:36px;flex:0 0 36px;border-radius:11px;color:#65408A;background:#F3EDF7;font-weight:900}
     .er-insight strong{display:block;font-size:13px}.er-insight span{display:block;margin-top:2px;color:#7A7D86;font-size:10px}
     .er-table-card{box-shadow:0 7px 18px rgba(38,42,54,.045)}
+    .er-table-head p{margin:3px 0 0;color:#7A7D86;font-size:10px}
+    .er-card h2,.er-table-head h2{color:#4E2F70;font-size:16px}
+    .er-table td:nth-child(1),.er-table th:nth-child(1){text-align:center}
+    .er-table td{font-size:11px;line-height:1.35}
   </style>
   <div class="er-report"><div class="er-shell">
     <header class="er-head">
@@ -4531,16 +4536,11 @@ async function exportReportImage(){
         <div class="er-kpi er-orange"><div class="er-kpi-top"><div class="er-kpi-icon">!</div><strong>${fmt(alertCount)}</strong></div><span>สถานีที่ต้องติดตาม</span></div>
       </div>
       <div class="er-grid">
-        <section class="er-card"><h2>จำนวนสถานีจำแนกตามประเภท</h2><p>เปรียบเทียบจำนวนสถานีจากข้อมูลล่าสุด</p>${bars}</section>
-        <section class="er-card"><h2>ความพร้อมให้บริการ</h2><p>สัดส่วนสถานีออนไลน์ต่อสถานีทั้งหมด</p><div class="er-donut-wrap"><div class="er-donut"></div><div class="er-donut-value">${onlinePercent}%<small>ออนไลน์</small></div></div><div class="er-legend"><span><i class="er-dot" style="background:#35A56A"></i>ออนไลน์ ${fmt(online)}</span><span><i class="er-dot" style="background:#E34B4B"></i>ออฟไลน์ ${fmt(offline)}</span></div></section>
+        <section class="er-card"><h2>1. จำนวนสถานีแยกตามประเภท</h2><p>ดูได้ทันทีว่าระบบมีสถานีประเภทใดมากที่สุด</p>${bars}</section>
+        <section class="er-card"><h2>2. ความพร้อมของระบบ</h2><p>สัดส่วนสถานีที่ส่งข้อมูลได้ตามปกติ</p><div class="er-donut-wrap"><div class="er-donut"></div><div class="er-donut-value">${onlinePercent}%<small>ออนไลน์</small></div></div><div class="er-legend"><span><i class="er-dot" style="background:#35A56A"></i>ออนไลน์ ${fmt(online)}</span><span><i class="er-dot" style="background:#E34B4B"></i>ออฟไลน์ ${fmt(offline)}</span></div></section>
       </div>
-      <div class="er-insights">
-        <div class="er-insight"><div class="er-insight-icon">✓</div><div><strong>ความพร้อมใช้งาน ${onlinePercent}%</strong><span>สถานีออนไลน์ ${fmt(online)} จากทั้งหมด ${fmt(total)} สถานี</span></div></div>
-        <div class="er-insight"><div class="er-insight-icon" style="color:#C93B3B;background:#FFF0F0">!</div><div><strong>สถานีออฟไลน์ ${offlinePercent}%</strong><span>ควรตรวจสอบการเชื่อมต่อ ${fmt(offline)} สถานี</span></div></div>
-        <div class="er-insight"><div class="er-insight-icon" style="color:#2F6FED;background:#F1F6FF">★</div><div><strong>${leadingType.key} มีจำนวนมากที่สุด</strong><span>${esc(leadingType.label)} ${fmt(leadingType.total)} สถานี</span></div></div>
-      </div>
-      <section class="er-table-card"><div class="er-table-head"><h2>สถานีที่ต้องติดตาม</h2><span>แสดงสูงสุด 14 รายการจากทั้งหมด ${fmt(stations.length)} รายการ</span></div>
-        <table class="er-table"><thead><tr><th style="width:5%">ลำดับ</th><th style="width:20%">สถานี</th><th style="width:22%">นิคมอุตสาหกรรม</th><th style="width:10%">สถานะ</th><th style="width:10%">ประเภท</th><th style="width:10%">รายการ</th><th style="width:23%">ข้อมูลล่าสุด</th></tr></thead><tbody>${rows||'<tr><td colspan="7" class="er-empty">ไม่พบสถานีที่ต้องติดตาม</td></tr>'}</tbody></table>
+      <section class="er-table-card"><div class="er-table-head"><div><h2>3. รายการที่ต้องตรวจสอบ</h2><p>เรียงข้อมูลสำคัญให้อ่านและนำไปติดตามต่อได้ง่าย</p></div><span>แสดง 12 รายการแรก จากทั้งหมด ${fmt(stations.length)} รายการ</span></div>
+        <table class="er-table"><thead><tr><th style="width:5%">ลำดับ</th><th style="width:25%">ชื่อสถานี</th><th style="width:25%">นิคมอุตสาหกรรม</th><th style="width:11%">สถานะ</th><th style="width:12%">จุดที่พบ</th><th style="width:22%">ข้อมูลล่าสุด</th></tr></thead><tbody>${rows||'<tr><td colspan="6" class="er-empty">ไม่พบสถานีที่ต้องติดตาม</td></tr>'}</tbody></table>
       </section>
       <div class="er-foot"><span>ระบบติดตามสถานการณ์สิ่งแวดล้อมและความปลอดภัย</span><span>การนิคมอุตสาหกรรมแห่งประเทศไทย</span></div>
     </div>
