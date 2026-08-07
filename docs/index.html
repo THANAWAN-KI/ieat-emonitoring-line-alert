@@ -3671,7 +3671,27 @@ html,body{
   color:#747782!important;
   -webkit-text-fill-color:#747782!important;
 }
+
+
+/* COMPACT EXECUTIVE HEADER */
+.header{min-height:0!important;padding:10px 24px!important;margin-bottom:14px!important}
+.header-content{align-items:center!important;gap:18px!important}
+.header .brand{display:flex!important;align-items:center!important;gap:12px!important;min-width:0!important}
+.header .brand-copy{min-width:0!important}
+.header .brand-icon{width:50px!important;height:50px!important;flex:0 0 50px!important}
+.header .brand-name{font-size:12px!important;line-height:1.1!important;margin:0!important}
+.header .brand-sub{font-size:11px!important;line-height:1.25!important;margin:1px 0 0!important}
+.header .report-title{font-size:19px!important;line-height:1.18!important;margin:4px 0 0!important}
+.header .report-subtitle{font-size:11px!important;line-height:1.25!important;margin:2px 0 0!important}
+.header .header-actions{flex:0 0 auto!important;align-items:center!important}
+.header .update-box{padding:8px 12px!important;min-width:190px!important}
+.header .export-pdf-btn{min-width:165px!important;padding:10px 15px!important}
+@media(max-width:650px){.header{padding:9px 12px!important}.header-content{display:block!important}.header .brand{align-items:flex-start!important}.header .brand-icon{width:44px!important;height:44px!important;flex-basis:44px!important}.header .report-title{font-size:17px!important}.header .header-actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;margin-top:9px!important}.header .update-box,.header .export-pdf-btn{width:100%!important;min-width:0!important;margin:0!important}}
+@media(max-width:430px){.header .header-actions{grid-template-columns:1fr!important}}
 </style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 
 
@@ -3689,31 +3709,14 @@ html,body{
   <div class="header-content">
 
     <div class="brand">
-
-      <div class="brand-row">
-
-        <img class="ui-icon brand-icon" src="./assets/TH-Vertical.png" alt="ตราสัญลักษณ์การนิคมอุตสาหกรรมแห่งประเทศไทย">
-
-        <div class="brand-name">
-          IEAT e-Monitoring
-        </div>
-
+      <img class="ui-icon brand-icon" src="./assets/TH-Vertical.png" alt="ตราสัญลักษณ์การนิคมอุตสาหกรรมแห่งประเทศไทย">
+      <div class="brand-copy">
+        <div class="brand-name">IEAT e-Monitoring</div>
+        <div class="brand-sub">ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย</div>
+        <div class="report-title">สรุปสถานการณ์ล่าสุด</div>
+        <div class="report-subtitle">ภาพรวมแหล่งข้อมูล สถานีตรวจวัด และประเด็นที่ต้องติดตาม</div>
       </div>
-
-      <div class="brand-sub">
-        ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย
-      </div>
-
-      <div class="report-title">
-        สรุปสถานการณ์ล่าสุด
-      </div>
-
-      <div class="report-subtitle">
-        ภาพรวมแหล่งข้อมูล สถานีตรวจวัด และประเด็นที่ต้องติดตาม
-      </div>
-
     </div>
-
 
     <div class="header-actions">
 
@@ -4413,9 +4416,51 @@ function exportPDF(){
   pdfWindow.document.open();
   pdfWindow.document.write(`<!DOCTYPE html><html lang="th"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>รายงานสถานการณ์สิ่งแวดล้อม_${fileDate}</title><style>
   @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap');
-  @page{size:A4 landscape;margin:12mm}*{box-sizing:border-box}body{margin:0;color:#30283A;font-family:"Sarabun","TH Sarabun PSK",Arial,sans-serif;font-size:10px;line-height:1.45}header{border-bottom:4px solid #4E1478;margin-bottom:14px;padding:0 0 10px}h1{color:#4E1478;font-size:21px;margin:0 0 3px}h2{color:#4E1478;font-size:14px;margin:15px 0 6px}h3{font-size:11px;margin:9px 0 5px}.meta{display:flex;justify-content:space-between;color:#666}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}.kpi{border:1px solid #DED8E4;border-radius:6px;padding:8px;text-align:center}.kpi strong{display:block;color:#4E1478;font-size:20px}.kpi span{color:#666}table{border-collapse:collapse;width:100%;margin:0 0 9px;table-layout:fixed}th,td{border:1px solid #D8D3DD;padding:5px 6px;vertical-align:top;overflow-wrap:anywhere}thead th{background:#4E1478;color:#FFF;text-align:left}tbody th{background:#F2EEF5;color:#4E1478;text-align:left;width:16%}tbody tr:nth-child(even) td{background:#FAF9FB}.online{color:#2B8A3E;font-weight:700}.offline{color:#C51F35;font-weight:700}.muted{color:#777;font-size:9px}.empty{text-align:center;color:#777;padding:12px}.station-detail{break-inside:avoid;page-break-inside:avoid;margin-top:14px}.station-detail+ .station-detail{break-before:auto}.footer-note{margin-top:10px;color:#777;text-align:right}@media print{.no-print{display:none!important}body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
-  </style></head><body><header><h1>รายงานสรุปสถานการณ์ IEAT e-Monitoring</h1><div class="meta"><span>ข้อมูลล่าสุด: ${text(updated)}</span><span>จัดทำรายงาน: ${text(printedAt)}</span></div></header><div class="kpis"><div class="kpi"><strong>${fmt(total)}</strong><span>สถานีทั้งหมด</span></div><div class="kpi"><strong>${fmt(online)}</strong><span>ออนไลน์</span></div><div class="kpi"><strong>${fmt(offline)}</strong><span>ออฟไลน์</span></div><div class="kpi"><strong>${fmt(alertCount)}</strong><span>สถานีที่ต้องติดตาม</span></div></div><h2>สรุปสถานีจำแนกตามประเภท</h2><table><thead><tr><th>ประเภทสถานี</th><th>ทั้งหมด</th><th>ออนไลน์</th><th>ออฟไลน์</th></tr></thead><tbody>${typeRows}</tbody></table><h2>ตารางสรุปรายละเอียดสถานี</h2><table><thead><tr><th style="width:4%">ลำดับ</th><th style="width:18%">ชื่อสถานี</th><th style="width:18%">นิคมอุตสาหกรรม</th><th style="width:11%">รหัส</th><th style="width:9%">สถานะ</th><th style="width:9%">ประเภท</th><th style="width:9%">จำนวนรายการ</th><th style="width:15%">ข้อมูลล่าสุด</th></tr></thead><tbody>${stationRows}</tbody></table>${detailSections}<div class="footer-note">IEAT e-Monitoring — ระบบติดตามสถานการณ์สิ่งแวดล้อมและความปลอดภัย</div><script>window.addEventListener("load",async()=>{try{await document.fonts.ready}catch(e){}setTimeout(()=>window.print(),300)});window.addEventListener("afterprint",()=>window.close());<\/script></body></html>`);
+  @page{size:A4 landscape;margin:10mm}*{box-sizing:border-box}body{width:1120px;margin:0;padding:34px 38px 30px;color:#30323A;background:#FFF;font-family:"Sarabun",Tahoma,Arial,sans-serif;font-size:12px;line-height:1.45}header{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:3px solid #65408A;margin-bottom:18px;padding:0 0 12px}h1{color:#34363D;font-size:25px;line-height:1.2;margin:0 0 4px}h2{color:#34363D;font-size:16px;line-height:1.25;margin:20px 0 8px;padding-left:9px;border-left:4px solid #65408A}h3{color:#34363D;font-size:13px;margin:12px 0 6px}.meta{display:flex;gap:22px;color:#747782;font-size:11px}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0 20px}.kpi{border:1px solid #E2E4EA;border-left:4px solid #65408A;border-radius:10px;padding:10px 12px;text-align:left;background:#FAFAFC}.kpi:nth-child(2){border-left-color:#35A56A}.kpi:nth-child(3){border-left-color:#E34B4B}.kpi:nth-child(4){border-left-color:#E57A2A}.kpi strong{display:block;color:#34363D;font-size:23px;line-height:1.1}.kpi span{display:block;margin-top:3px;color:#747782;font-size:11px}table{border-collapse:separate;border-spacing:0;width:100%;margin:0 0 12px;table-layout:fixed;border:1px solid #DFE2E8;border-radius:8px;overflow:hidden}th,td{border:0;border-right:1px solid #E3E5EA;border-bottom:1px solid #E3E5EA;padding:7px 8px;vertical-align:middle;overflow-wrap:anywhere}tr>*:last-child{border-right:0}tbody tr:last-child>*{border-bottom:0}thead th{background:#65408A;color:#FFF;text-align:left;font-size:11px;font-weight:700}tbody th{background:#F4F0F7;color:#4E2F70;text-align:left;width:16%}tbody tr:nth-child(even) td{background:#F8F9FB}.online{color:#278753;font-weight:700}.offline{color:#C93B3B;font-weight:700}.muted{display:block;color:#747782;font-size:10px;margin-top:2px}.empty{text-align:center;color:#747782;padding:14px}.station-detail{margin-top:18px;padding-top:2px}.footer-note{margin-top:14px;padding-top:8px;border-top:1px solid #E3E5EA;color:#747782;text-align:right;font-size:10px}
+  </style></head><body><header><h1>รายงานสรุปสถานการณ์ IEAT e-Monitoring</h1><div class="meta"><span>ข้อมูลล่าสุด: ${text(updated)}</span><span>จัดทำรายงาน: ${text(printedAt)}</span></div></header><div class="kpis"><div class="kpi"><strong>${fmt(total)}</strong><span>สถานีทั้งหมด</span></div><div class="kpi"><strong>${fmt(online)}</strong><span>ออนไลน์</span></div><div class="kpi"><strong>${fmt(offline)}</strong><span>ออฟไลน์</span></div><div class="kpi"><strong>${fmt(alertCount)}</strong><span>สถานีที่ต้องติดตาม</span></div></div><h2>สรุปสถานีจำแนกตามประเภท</h2><table><thead><tr><th>ประเภทสถานี</th><th>ทั้งหมด</th><th>ออนไลน์</th><th>ออฟไลน์</th></tr></thead><tbody>${typeRows}</tbody></table><h2>ตารางสรุปรายละเอียดสถานี</h2><table><thead><tr><th style="width:4%">ลำดับ</th><th style="width:18%">ชื่อสถานี</th><th style="width:18%">นิคมอุตสาหกรรม</th><th style="width:11%">รหัส</th><th style="width:9%">สถานะ</th><th style="width:9%">ประเภท</th><th style="width:9%">จำนวนรายการ</th><th style="width:15%">ข้อมูลล่าสุด</th></tr></thead><tbody>${stationRows}</tbody></table>${detailSections}<div class="footer-note">IEAT e-Monitoring — ระบบติดตามสถานการณ์สิ่งแวดล้อมและความปลอดภัย</div><script>window.addEventListener("load",async()=>{try{await document.fonts.ready}catch(e){}setTimeout(()=>window.opener.downloadReportWindow(window,"${fileDate}"),400)});<\/script>/body></html>`);
   pdfWindow.document.close();
+}
+
+
+async function downloadReportWindow(reportWindow,fileDate){
+  const button=document.querySelector(".export-pdf-btn");
+  const originalLabel=button?button.innerHTML:"";
+  try{
+    if(button){button.disabled=true;button.textContent="กำลังจัดทำ PDF…";}
+    if(!window.html2canvas||!window.jspdf) throw new Error("PDF libraries unavailable");
+    const canvas=await window.html2canvas(reportWindow.document.body,{scale:1.55,useCORS:true,backgroundColor:"#FFFFFF",logging:false,windowWidth:1120});
+    const {jsPDF}=window.jspdf;
+    const pdf=new jsPDF({orientation:"landscape",unit:"mm",format:"a4",compress:true});
+    const pageWidth=pdf.internal.pageSize.getWidth();
+    const pageHeight=pdf.internal.pageSize.getHeight();
+    const margin=7;
+    const usableWidth=pageWidth-(margin*2);
+    const usableHeight=pageHeight-(margin*2);
+    const pxPerMm=canvas.width/usableWidth;
+    const sliceHeight=Math.floor(usableHeight*pxPerMm);
+    let offset=0,page=0;
+    while(offset<canvas.height){
+      const height=Math.min(sliceHeight,canvas.height-offset);
+      const pageCanvas=document.createElement("canvas");
+      pageCanvas.width=canvas.width;
+      pageCanvas.height=height;
+      const ctx=pageCanvas.getContext("2d");
+      ctx.fillStyle="#FFFFFF";
+      ctx.fillRect(0,0,pageCanvas.width,pageCanvas.height);
+      ctx.drawImage(canvas,0,offset,canvas.width,height,0,0,canvas.width,height);
+      if(page>0) pdf.addPage();
+      pdf.addImage(pageCanvas.toDataURL("image/jpeg",0.93),"JPEG",margin,margin,usableWidth,height/pxPerMm,undefined,"FAST");
+      offset+=height;
+      page++;
+    }
+    pdf.save("IEAT_Executive_Report_"+fileDate+".pdf");
+  }catch(error){
+    console.error(error);
+    alert("ไม่สามารถดาวน์โหลด PDF ได้ กรุณาลองใหม่อีกครั้ง");
+  }finally{
+    if(button){button.disabled=false;button.innerHTML=originalLabel;}
+    if(reportWindow&&!reportWindow.closed) reportWindow.close();
+  }
 }
 
 
