@@ -105,7 +105,9 @@ def flex_message(event: dict, test: bool = False) -> dict:
     ]
     header_contents = []
     if test:
-        header_contents.append({"type": "text", "text": "ทดสอบระบบ • ไม่ใช่เหตุการณ์จริง", "size": "xs", "weight": "bold", "color": "#2E1F54", "align": "center", "margin": "none"})
+        header_contents.append({"type": "box", "layout": "vertical", "backgroundColor": "#FFC719", "paddingAll": "8px", "cornerRadius": "md", "contents": [
+            {"type": "text", "text": "ทดสอบระบบ • ไม่ใช่เหตุการณ์จริง", "size": "xs", "weight": "bold", "color": "#2E1F54", "align": "center"}
+        ]})
     header_contents += [
         {"type": "box", "layout": "horizontal", "contents": [
             {"type": "text", "text": "IEAT e-MONITORING", "size": "xs", "weight": "bold", "color": "#FFFFFF", "flex": 4},
@@ -126,7 +128,9 @@ def flex_message(event: dict, test: bool = False) -> dict:
                         {"type": "text", "text": mag, "size": "3xl", "weight": "bold", "color": "#52057F", "margin": "sm"},
                     ]},
                     {"type": "box", "layout": "vertical", "flex": 4, "justifyContent": "center", "contents": [
-                        {"type": "text", "text": level, "size": "sm", "weight": "bold", "color": "#FFFFFF" if badge_color == "#598C14" else "#2E1F54", "align": "center", "backgroundColor": badge_color, "paddingAll": "10px"}
+                        {"type": "box", "layout": "vertical", "backgroundColor": badge_color, "paddingAll": "10px", "cornerRadius": "md", "contents": [
+                            {"type": "text", "text": level, "size": "sm", "weight": "bold", "color": "#FFFFFF" if badge_color == "#598C14" else "#2E1F54", "align": "center"}
+                        ]}
                     ]},
                 ]},
                 {"type": "separator", "margin": "xl", "color": "#E7E1EC"},
