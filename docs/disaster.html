@@ -462,7 +462,11 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
         const map = L.map("map", { scrollWheelZoom: false }).setView([15.5, 101], 5);
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 18, attribution: "© OpenStreetMap contributors" }).addTo(map);
+        L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+            subdomains: "abcd",
+            maxZoom: 20,
+            attribution: "&copy; OpenStreetMap contributors &copy; CARTO"
+        }).addTo(map);
         const thailandBounds = L.latLngBounds([5.4, 97.2], [20.7, 105.8]);
         L.rectangle(thailandBounds, { color: "#6B3F91", weight: 1, fillOpacity: .03 }).addTo(map).bindTooltip("ประเทศไทย");
         function formatNumber(value) { return Number(value || 0).toLocaleString("th-TH"); }
