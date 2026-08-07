@@ -1,0 +1,50 @@
+name: แจ้งเตือนสิ่งแวดล้อมและภัยสำหรับนิคมผ่าน LINE
+
+on:
+  schedule:
+    - cron: "7,37 * * * *"
+  workflow_dispatch:
+    inputs:
+      send_test_alert:
+        description: "ส่งข้อความทดสอบเข้า LINE"
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: industrial-environment-line-alert
+  cancel-in-progress: false
+
+jobs:
+  check-industrial-environment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: ดาวน์โหลดโค้ด
+        uses: actions/checkout@v4
+      - name: ตั้งค่า Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: ตรวจข้อมูลและส่ง LINE
+        env:
+          LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
+          LINE_TARGET_ID: ${{ secrets.LINE_TARGET_ID }}
+          TARGET_PROVINCES: ${{ vars.TARGET_PROVINCES }}
+          SEND_TEST_ALERT: ${{ inputs.send_test_alert == true && 'true' || 'false' }}
+        run: python scripts/check_industrial_environment.py
+      - name: บันทึกสถานะเพื่อป้องกันการส่งซ้ำ
+        if: ${{ inputs.send_test_alert != true }}
+        run: |
+          if git diff --quiet -- data/industrial-environment-state.json; then
+            echo "ไม่มีสถานะใหม่ที่ต้องบันทึก"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/industrial-environment-state.json
+          git commit -m "Update industrial environment alert state"
+          git push
