@@ -1257,25 +1257,25 @@ def event_title(
 
     titles = {
         "NEW_ALARM":
-            "🔴 พบการแจ้งเตือนใหม่",
+            "พบการแจ้งเตือนใหม่",
 
         "SEVERITY_UP":
-            "🔴 ระดับการแจ้งเตือนสูงขึ้น",
+            "ระดับการแจ้งเตือนสูงขึ้น",
 
         "ALARM_CHANGED":
-            "🟠 รายการแจ้งเตือนเปลี่ยนแปลง",
+            "รายการแจ้งเตือนเปลี่ยนแปลง",
 
         "SEVERITY_DOWN":
-            "🟠 ระดับการแจ้งเตือนลดลง",
+            "ระดับการแจ้งเตือนลดลง",
 
         "OFFLINE":
-            "🟠 สถานี OFFLINE",
+            "สถานี OFFLINE",
 
         "ONLINE":
-            "🟢 สถานีกลับมา ONLINE",
+            "สถานีกลับมา ONLINE",
 
         "RECOVERED":
-            "🟢 สถานการณ์กลับสู่ปกติ",
+            "สถานการณ์กลับสู่ปกติ",
     }
 
     return titles.get(
@@ -1926,7 +1926,7 @@ def build_summary_bubble(
             "spacing": "xs",
             "contents": [
                 text_component(
-                    f"🔴 {urgent_count}",
+                    f"{urgent_count}",
                     size="xxs",
                     color="#C51F35",
                     weight="bold",
@@ -1934,7 +1934,7 @@ def build_summary_bubble(
                     flex=1,
                 ),
                 text_component(
-                    f"🟠 {watch_count}",
+                    f"{watch_count}",
                     size="xxs",
                     color="#E67700",
                     weight="bold",
@@ -1942,7 +1942,7 @@ def build_summary_bubble(
                     flex=1,
                 ),
                 text_component(
-                    f"🟢 {follow_count}",
+                    f"{follow_count}",
                     size="xxs",
                     color="#2B8A3E",
                     weight="bold",
