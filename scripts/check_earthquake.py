@@ -234,8 +234,10 @@ def main() -> int:
         if not token or not target:
             print("LINE secrets are required for a test alert.", file=sys.stderr)
             return 1
-        push_line(token, target, flex_message(test_event(), test=True))
-        print("Test Flex Message sent to LINE.")
+        test_message_type = os.getenv("TEST_MESSAGE_TYPE", "flex").strip().lower()
+        message = text_test_message() if test_message_type == "text" else flex_message(test_event(), test=True)
+        push_line(token, target, message)
+        print(f"Test {test_message_type} message sent to LINE.")
         return 0
 
     request = urllib.request.Request(RSS_URL, headers={"User-Agent": "IEAT-eMonitoring/2.0"})
