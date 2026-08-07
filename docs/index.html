@@ -3769,9 +3769,9 @@ html,body{
 
     </div>
 
-    <button class="export-pdf-btn" type="button" onclick="exportPDF()" aria-label="ส่งออกรายงานเป็นไฟล์ PDF">
+    <button class="export-pdf-btn" type="button" onclick="exportReportImage()" aria-label="ดาวน์โหลดรายงานสรุปเป็นรูปภาพ">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 5-5m-5 5-5-5M5 20h14"/></svg>
-      ดาวน์โหลดเป็น PDF
+      ดาวน์โหลดเป็นรูปภาพ
     </button>
 
     </div>
@@ -4401,99 +4401,142 @@ const DASHBOARD_URL =
 ========================================================= */
 let currentReportData=null;
 
-function exportPDF(){
+async function exportReportImage(){
   if(!currentReportData){
     alert("ข้อมูลรายงานยังโหลดไม่เสร็จ กรุณารอสักครู่แล้วลองใหม่");
     return;
   }
-
-  /* สร้างหน้ารายงานสำหรับ PDF แยกจากหน้าเว็บไซต์ */
-  const pdfWindow=window.open("","_blank");
-  if(!pdfWindow){
-    alert("ไม่สามารถเปิดหน้าดาวน์โหลดได้ กรุณาอนุญาต Pop-up สำหรับเว็บไซต์นี้");
+  if(!window.html2canvas){
+    alert("ไม่สามารถโหลดเครื่องมือสร้างรูปภาพได้ กรุณาลองใหม่อีกครั้ง");
     return;
   }
 
-  const data=currentReportData;
-  const stations=Array.isArray(data.stations)?data.stations:[];
-  const total=data.station_count??data.station_total??stations.length;
-  const online=data.online_total??stations.filter(s=>String(s.status||"").toUpperCase()==="ONLINE").length;
-  const offline=data.offline_total??stations.filter(s=>String(s.status||"").toUpperCase()==="OFFLINE").length;
-  const alertCount=data.alert_station_count??stations.length;
-  const updated=data.updated_at_text||data.updated_at||"-";
-  const printedAt=new Date().toLocaleString("th-TH");
-  const fileDate=new Date().toLocaleDateString("th-TH",{year:"numeric",month:"2-digit",day:"2-digit"}).replaceAll("/","-");
-  const text=value=>esc(value??"-");
-  const typeRows=["AQMs","WQMs","CEMs"].map(key=>{
-    const item=getTypeData(data,key);
-    return `<tr><td><strong>${key}</strong><br><span class="muted">${text(TYPE_INFO[key].label)}</span></td><td>${fmt(item.total)}</td><td class="online">${fmt(item.online)}</td><td class="offline">${fmt(item.offline)}</td></tr>`;
-  }).join("");
-
-  const stationRows=stations.length?stations.map((s,index)=>{
-    const status=String(s.status||"-").toUpperCase();
-    const statusText=status==="ONLINE"?"ออนไลน์":status==="OFFLINE"?"ออฟไลน์":status;
-    const params=getParameters(s);
-    return `<tr><td>${fmt(index+1)}</td><td>${text(s.station_name||s.name)}</td><td>${text(s.estate_name||s.industrial_estate)}</td><td>${text(s.station_id||s.id||s.code)}</td><td class="${status==="ONLINE"?"online":"offline"}">${text(statusText)}</td><td>${text(s.type||s.station_type)}</td><td>${fmt(params.length)}</td><td>${text(s.last_update||s.updated_at||s.timestamp)}</td></tr>`;
-  }).join(""):`<tr><td colspan="8" class="empty">ไม่พบรายการสถานีที่ต้องติดตาม</td></tr>`;
-
-  const detailSections=stations.map((s,index)=>{
-    const params=getParameters(s);
-    const stationStatus=String(s.status||"-").toUpperCase();
-    const stationStatusText=stationStatus==="ONLINE"?"ออนไลน์":stationStatus==="OFFLINE"?"ออฟไลน์":stationStatus;
-    const parameterRows=params.length?params.map(p=>{
-      if(typeof p!=="object") return `<tr><td colspan="5">${text(p)}</td></tr>`;
-      return `<tr><td>${text(p.time||p.timestamp||p.datetime||p.date)}</td><td>${text(p.parameter||p.name||p.code)}</td><td>${text(p.value??p.result??p.measurement)}</td><td>${text(p.unit)}</td><td>${text(p.level||p.status||p.condition)}</td></tr>`;
-    }).join(""):`<tr><td colspan="5" class="empty">ไม่พบรายละเอียดค่าพารามิเตอร์จากข้อมูลล่าสุด</td></tr>`;
-    return `<section class="station-detail"><h2>${fmt(index+1)}. ${text(s.station_name||s.name||"ไม่ระบุชื่อสถานี")}</h2><table><tbody><tr><th>นิคมอุตสาหกรรม</th><td>${text(s.estate_name||s.industrial_estate)}</td><th>รหัสสถานี</th><td>${text(s.station_id||s.id||s.code)}</td></tr><tr><th>สถานะ</th><td>${text(stationStatusText)}</td><th>ประเภท</th><td>${text(s.type||s.station_type)}</td></tr><tr><th>ตำแหน่ง</th><td colspan="3">${text(s.latitude??s.lat??s.station_latitude)}, ${text(s.longitude??s.lng??s.lon??s.station_longitude)}</td></tr><tr><th>สาเหตุ / การติดตามผล</th><td colspan="3">${text(getFollowUp(s))}</td></tr></tbody></table><h3>ค่าพารามิเตอร์ที่แจ้งเตือน</h3><table><thead><tr><th>วันที่ - เวลา</th><th>พารามิเตอร์</th><th>ค่าที่ตรวจวัดได้</th><th>หน่วย</th><th>ระดับ / สถานะ</th></tr></thead><tbody>${parameterRows}</tbody></table></section>`;
-  }).join("");
-
-  pdfWindow.document.open();
-  pdfWindow.document.write(`<!DOCTYPE html><html lang="th"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>รายงานสถานการณ์สิ่งแวดล้อม_${fileDate}</title><style>
-  @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap');
-  @page{size:A4 landscape;margin:10mm}*{box-sizing:border-box}body{width:1120px;margin:0;padding:34px 38px 30px;color:#30323A;background:#FFF;font-family:"Sarabun",Tahoma,Arial,sans-serif;font-size:12px;line-height:1.45}header{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:3px solid #65408A;margin-bottom:18px;padding:0 0 12px}h1{color:#34363D;font-size:25px;line-height:1.2;margin:0 0 4px}h2{color:#34363D;font-size:16px;line-height:1.25;margin:20px 0 8px;padding-left:9px;border-left:4px solid #65408A}h3{color:#34363D;font-size:13px;margin:12px 0 6px}.meta{display:flex;gap:22px;color:#747782;font-size:11px}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0 20px}.kpi{border:1px solid #E2E4EA;border-left:4px solid #65408A;border-radius:10px;padding:10px 12px;text-align:left;background:#FAFAFC}.kpi:nth-child(2){border-left-color:#35A56A}.kpi:nth-child(3){border-left-color:#E34B4B}.kpi:nth-child(4){border-left-color:#E57A2A}.kpi strong{display:block;color:#34363D;font-size:23px;line-height:1.1}.kpi span{display:block;margin-top:3px;color:#747782;font-size:11px}table{border-collapse:separate;border-spacing:0;width:100%;margin:0 0 12px;table-layout:fixed;border:1px solid #DFE2E8;border-radius:8px;overflow:hidden}th,td{border:0;border-right:1px solid #E3E5EA;border-bottom:1px solid #E3E5EA;padding:7px 8px;vertical-align:middle;overflow-wrap:anywhere}tr>*:last-child{border-right:0}tbody tr:last-child>*{border-bottom:0}thead th{background:#65408A;color:#FFF;text-align:left;font-size:11px;font-weight:700}tbody th{background:#F4F0F7;color:#4E2F70;text-align:left;width:16%}tbody tr:nth-child(even) td{background:#F8F9FB}.online{color:#278753;font-weight:700}.offline{color:#C93B3B;font-weight:700}.muted{display:block;color:#747782;font-size:10px;margin-top:2px}.empty{text-align:center;color:#747782;padding:14px}.station-detail{margin-top:18px;padding-top:2px}.footer-note{margin-top:14px;padding-top:8px;border-top:1px solid #E3E5EA;color:#747782;text-align:right;font-size:10px}
-  </style></head><body><header><h1>รายงานสรุปสถานการณ์ IEAT e-Monitoring</h1><div class="meta"><span>ข้อมูลล่าสุด: ${text(updated)}</span><span>จัดทำรายงาน: ${text(printedAt)}</span></div></header><div class="kpis"><div class="kpi"><strong>${fmt(total)}</strong><span>สถานีทั้งหมด</span></div><div class="kpi"><strong>${fmt(online)}</strong><span>ออนไลน์</span></div><div class="kpi"><strong>${fmt(offline)}</strong><span>ออฟไลน์</span></div><div class="kpi"><strong>${fmt(alertCount)}</strong><span>สถานีที่ต้องติดตาม</span></div></div><h2>สรุปสถานีจำแนกตามประเภท</h2><table><thead><tr><th>ประเภทสถานี</th><th>ทั้งหมด</th><th>ออนไลน์</th><th>ออฟไลน์</th></tr></thead><tbody>${typeRows}</tbody></table><h2>ตารางสรุปรายละเอียดสถานี</h2><table><thead><tr><th style="width:4%">ลำดับ</th><th style="width:18%">ชื่อสถานี</th><th style="width:18%">นิคมอุตสาหกรรม</th><th style="width:11%">รหัส</th><th style="width:9%">สถานะ</th><th style="width:9%">ประเภท</th><th style="width:9%">จำนวนรายการ</th><th style="width:15%">ข้อมูลล่าสุด</th></tr></thead><tbody>${stationRows}</tbody></table>${detailSections}<div class="footer-note">IEAT e-Monitoring — ระบบติดตามสถานการณ์สิ่งแวดล้อมและความปลอดภัย</div><script>window.addEventListener("load",async()=>{try{await document.fonts.ready}catch(e){}setTimeout(()=>window.opener.downloadReportWindow(window,"${fileDate}"),400)});<\/script>/body></html>`);
-  pdfWindow.document.close();
-}
-
-
-async function downloadReportWindow(reportWindow,fileDate){
   const button=document.querySelector(".export-pdf-btn");
   const originalLabel=button?button.innerHTML:"";
+  if(button){button.disabled=true;button.textContent="กำลังสร้างรูปภาพ…";}
+
+  const data=currentReportData;
+  const stations=Array.isArray(data.stations)?data.stations:[];
+  const total=num(data.station_count??data.station_total??stations.length);
+  const online=num(data.online_total??stations.filter(s=>String(s.status||"").toUpperCase()==="ONLINE").length);
+  const offline=num(data.offline_total??stations.filter(s=>String(s.status||"").toUpperCase()==="OFFLINE").length);
+  const alertCount=num(data.alert_station_count??stations.length);
+  const onlinePercent=total?Math.round((online/total)*100):0;
+  const updated=esc(data.updated_at_text||data.updated_at||"-");
+  const fileDate=new Date().toLocaleDateString("th-TH",{year:"numeric",month:"2-digit",day:"2-digit"}).replaceAll("/","-");
+  const typeKeys=["AQMs","WQMs","CEMs"];
+  const typeData=typeKeys.map(key=>({key,label:TYPE_INFO[key].label,...getTypeData(data,key)}));
+  const maxType=Math.max(1,...typeData.map(item=>item.total));
+  const rows=stations.slice(0,14).map((station,index)=>{
+    const status=String(station.status||"-").toUpperCase();
+    const statusText=status==="ONLINE"?"ออนไลน์":status==="OFFLINE"?"ออฟไลน์":status;
+    return `<tr>
+      <td>${fmt(index+1)}</td>
+      <td><strong>${esc(station.station_name||station.name||"-")}</strong><small>${esc(station.station_id||station.id||station.code||"-")}</small></td>
+      <td>${esc(station.estate_name||station.industrial_estate||"-")}</td>
+      <td><span class="er-status ${status==="ONLINE"?"is-online":"is-offline"}">${esc(statusText)}</span></td>
+      <td>${esc(station.type||station.station_type||"-")}</td>
+      <td>${fmt(getParameters(station).length)}</td>
+      <td>${esc(station.last_update||station.updated_at||station.timestamp||"-")}</td>
+    </tr>`;
+  }).join("");
+
+  const bars=typeData.map((item,index)=>{
+    const colors=["#65408A","#2F6FED","#35A56A"];
+    const width=Math.max(item.total?8:0,Math.round((item.total/maxType)*100));
+    return `<div class="er-bar-row">
+      <div class="er-bar-label"><strong>${item.key}</strong><span>${esc(item.label)}</span></div>
+      <div class="er-bar-track"><div class="er-bar-fill" style="width:${width}%;background:${colors[index]}"></div></div>
+      <div class="er-bar-value">${fmt(item.total)} สถานี</div>
+    </div>`;
+  }).join("");
+
+  const report=document.createElement("section");
+  report.setAttribute("aria-hidden","true");
+  report.style.cssText="position:fixed;left:-20000px;top:0;width:1200px;background:#F5F7FA;z-index:-1";
+  report.innerHTML=`
+  <style>
+    .er-report,.er-report *{box-sizing:border-box}
+    .er-report{width:1200px;padding:34px;background:#F5F7FA;color:#34363D;font-family:"Sarabun","Segoe UI",Tahoma,Arial,sans-serif}
+    .er-shell{background:#FFF;border:1px solid #E7E9EE;border-radius:22px;overflow:hidden;box-shadow:0 14px 34px rgba(38,42,54,.08)}
+    .er-head{display:flex;align-items:center;justify-content:space-between;padding:22px 26px;border-bottom:1px solid #E7E9EE}
+    .er-brand{display:flex;align-items:center;gap:14px}.er-logo{width:54px;height:54px;object-fit:contain}
+    .er-kicker{font-size:12px;font-weight:800;color:#65408A}.er-title{margin:2px 0 0;font-size:24px;line-height:1.2}.er-sub{margin-top:4px;font-size:12px;color:#7A7D86}
+    .er-date{text-align:right;font-size:11px;color:#7A7D86}.er-date strong{display:block;margin-top:3px;color:#34363D;font-size:13px}
+    .er-content{padding:22px 24px 26px}
+    .er-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .er-kpi{min-height:112px;padding:18px;border:1px solid #E7E9EE;border-radius:17px;background:#FFF;box-shadow:0 7px 18px rgba(38,42,54,.05)}
+    .er-kpi-top{display:flex;align-items:center;gap:10px}.er-kpi-icon{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;font-size:17px;font-weight:900}
+    .er-kpi strong{display:block;font-size:28px;line-height:1}.er-kpi span{display:block;margin-top:8px;color:#7A7D86;font-size:12px}
+    .er-purple .er-kpi-icon{color:#65408A;background:#F3EDF7}.er-purple strong{color:#65408A}
+    .er-green .er-kpi-icon{color:#278753;background:#EDF8F2}.er-green strong{color:#278753}
+    .er-red .er-kpi-icon{color:#C93B3B;background:#FFF0F0}.er-red strong{color:#C93B3B}
+    .er-orange .er-kpi-icon{color:#D96F22;background:#FFF3E9}.er-orange strong{color:#D96F22}
+    .er-grid{display:grid;grid-template-columns:1.65fr .85fr;gap:14px;margin-top:14px}
+    .er-card{padding:20px;border:1px solid #E7E9EE;border-radius:17px;background:#FFF;box-shadow:0 7px 18px rgba(38,42,54,.045)}
+    .er-card h2{margin:0;font-size:16px}.er-card p{margin:4px 0 18px;color:#7A7D86;font-size:11px}
+    .er-bar-row{display:grid;grid-template-columns:210px 1fr 82px;align-items:center;gap:12px;margin:17px 0}
+    .er-bar-label strong{display:block;font-size:13px}.er-bar-label span{display:block;color:#7A7D86;font-size:10px}
+    .er-bar-track{height:18px;overflow:hidden;border-radius:9px;background:#F0F2F5}.er-bar-fill{height:100%;border-radius:9px}
+    .er-bar-value{text-align:right;font-weight:800;font-size:12px}
+    .er-donut-wrap{position:relative;display:grid;place-items:center;padding:6px 0 12px}
+    .er-donut{display:grid;place-items:center;width:168px;height:168px;border-radius:50%;background:conic-gradient(#35A56A 0 ${onlinePercent}%,#E34B4B ${onlinePercent}% 100%)}
+    .er-donut:after{content:"";width:106px;height:106px;border-radius:50%;background:#FFF}
+    .er-donut-value{position:absolute;text-align:center;font-size:27px;font-weight:900;color:#34363D}.er-donut-value small{display:block;font-size:11px;font-weight:600;color:#7A7D86}
+    .er-legend{display:flex;justify-content:center;gap:18px;font-size:11px}.er-dot{display:inline-block;width:9px;height:9px;margin-right:6px;border-radius:50%}
+    .er-table-card{margin-top:14px;padding:20px;border:1px solid #E7E9EE;border-radius:17px;background:#FFF}
+    .er-table-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:11px}.er-table-head h2{margin:0;font-size:16px}.er-table-head span{color:#7A7D86;font-size:10px}
+    .er-table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border:1px solid #E2E5EA;border-radius:11px;font-size:11px}
+    .er-table th{padding:10px 9px;color:#FFF;background:#65408A;text-align:left}.er-table td{padding:9px;border-bottom:1px solid #E7E9EE;vertical-align:middle}
+    .er-table tbody tr:nth-child(even){background:#F8F9FB}.er-table tbody tr:last-child td{border-bottom:0}.er-table small{display:block;margin-top:2px;color:#7A7D86}
+    .er-status{display:inline-block;padding:4px 8px;border-radius:999px;font-size:10px;font-weight:800}.is-online{color:#278753;background:#EDF8F2}.is-offline{color:#C93B3B;background:#FFF0F0}
+    .er-empty{text-align:center;padding:20px;color:#7A7D86}.er-foot{display:flex;justify-content:space-between;margin-top:14px;color:#7A7D86;font-size:10px}
+  </style>
+  <div class="er-report"><div class="er-shell">
+    <header class="er-head">
+      <div class="er-brand"><img class="er-logo" src="./assets/TH-Vertical.png" alt=""><div><div class="er-kicker">IEAT e-Monitoring</div><h1 class="er-title">รายงานสรุปสถานการณ์ล่าสุด</h1><div class="er-sub">ภาพรวมสถานีตรวจวัดและประเด็นที่ต้องติดตามสำหรับผู้บริหาร</div></div></div>
+      <div class="er-date">ข้อมูลล่าสุด<strong>${updated}</strong></div>
+    </header>
+    <div class="er-content">
+      <div class="er-kpis">
+        <div class="er-kpi er-purple"><div class="er-kpi-top"><div class="er-kpi-icon">Σ</div><strong>${fmt(total)}</strong></div><span>สถานีตรวจวัดทั้งหมด</span></div>
+        <div class="er-kpi er-green"><div class="er-kpi-top"><div class="er-kpi-icon">●</div><strong>${fmt(online)}</strong></div><span>สถานีออนไลน์</span></div>
+        <div class="er-kpi er-red"><div class="er-kpi-top"><div class="er-kpi-icon">●</div><strong>${fmt(offline)}</strong></div><span>สถานีออฟไลน์</span></div>
+        <div class="er-kpi er-orange"><div class="er-kpi-top"><div class="er-kpi-icon">!</div><strong>${fmt(alertCount)}</strong></div><span>สถานีที่ต้องติดตาม</span></div>
+      </div>
+      <div class="er-grid">
+        <section class="er-card"><h2>จำนวนสถานีจำแนกตามประเภท</h2><p>เปรียบเทียบจำนวนสถานีจากข้อมูลล่าสุด</p>${bars}</section>
+        <section class="er-card"><h2>ความพร้อมให้บริการ</h2><p>สัดส่วนสถานีออนไลน์ต่อสถานีทั้งหมด</p><div class="er-donut-wrap"><div class="er-donut"></div><div class="er-donut-value">${onlinePercent}%<small>ออนไลน์</small></div></div><div class="er-legend"><span><i class="er-dot" style="background:#35A56A"></i>ออนไลน์ ${fmt(online)}</span><span><i class="er-dot" style="background:#E34B4B"></i>ออฟไลน์ ${fmt(offline)}</span></div></section>
+      </div>
+      <section class="er-table-card"><div class="er-table-head"><h2>สถานีที่ต้องติดตาม</h2><span>แสดงสูงสุด 14 รายการจากทั้งหมด ${fmt(stations.length)} รายการ</span></div>
+        <table class="er-table"><thead><tr><th style="width:5%">ลำดับ</th><th style="width:20%">สถานี</th><th style="width:22%">นิคมอุตสาหกรรม</th><th style="width:10%">สถานะ</th><th style="width:10%">ประเภท</th><th style="width:10%">รายการ</th><th style="width:23%">ข้อมูลล่าสุด</th></tr></thead><tbody>${rows||'<tr><td colspan="7" class="er-empty">ไม่พบสถานีที่ต้องติดตาม</td></tr>'}</tbody></table>
+      </section>
+      <div class="er-foot"><span>ระบบติดตามสถานการณ์สิ่งแวดล้อมและความปลอดภัย</span><span>การนิคมอุตสาหกรรมแห่งประเทศไทย</span></div>
+    </div>
+  </div></div>`;
+  document.body.appendChild(report);
+
   try{
-    if(button){button.disabled=true;button.textContent="กำลังจัดทำ PDF…";}
-    if(!window.html2canvas||!window.jspdf) throw new Error("PDF libraries unavailable");
-    const canvas=await window.html2canvas(reportWindow.document.body,{scale:1.55,useCORS:true,backgroundColor:"#FFFFFF",logging:false,windowWidth:1120});
-    const {jsPDF}=window.jspdf;
-    const pdf=new jsPDF({orientation:"landscape",unit:"mm",format:"a4",compress:true});
-    const pageWidth=pdf.internal.pageSize.getWidth();
-    const pageHeight=pdf.internal.pageSize.getHeight();
-    const margin=7;
-    const usableWidth=pageWidth-(margin*2);
-    const usableHeight=pageHeight-(margin*2);
-    const pxPerMm=canvas.width/usableWidth;
-    const sliceHeight=Math.floor(usableHeight*pxPerMm);
-    let offset=0,page=0;
-    while(offset<canvas.height){
-      const height=Math.min(sliceHeight,canvas.height-offset);
-      const pageCanvas=document.createElement("canvas");
-      pageCanvas.width=canvas.width;
-      pageCanvas.height=height;
-      const ctx=pageCanvas.getContext("2d");
-      ctx.fillStyle="#FFFFFF";
-      ctx.fillRect(0,0,pageCanvas.width,pageCanvas.height);
-      ctx.drawImage(canvas,0,offset,canvas.width,height,0,0,canvas.width,height);
-      if(page>0) pdf.addPage();
-      pdf.addImage(pageCanvas.toDataURL("image/jpeg",0.93),"JPEG",margin,margin,usableWidth,height/pxPerMm,undefined,"FAST");
-      offset+=height;
-      page++;
-    }
-    pdf.save("IEAT_Executive_Report_"+fileDate+".pdf");
+    try{await document.fonts.ready}catch(error){}
+    const images=[...report.querySelectorAll("img")];
+    await Promise.all(images.map(img=>img.complete?Promise.resolve():new Promise(resolve=>{img.onload=resolve;img.onerror=resolve;})));
+    const target=report.querySelector(".er-report");
+    const canvas=await html2canvas(target,{scale:2,useCORS:true,backgroundColor:"#F5F7FA",logging:false,width:1200,windowWidth:1200});
+    const blob=await new Promise(resolve=>canvas.toBlob(resolve,"image/png"));
+    if(!blob) throw new Error("ไม่สามารถสร้างไฟล์ภาพได้");
+    const link=document.createElement("a");
+    link.download="IEAT_Executive_Summary_"+fileDate+".png";
+    link.href=URL.createObjectURL(blob);
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(()=>URL.revokeObjectURL(link.href),1500);
   }catch(error){
     console.error(error);
-    alert("ไม่สามารถดาวน์โหลด PDF ได้ กรุณาลองใหม่อีกครั้ง");
+    alert("ไม่สามารถดาวน์โหลดรูปภาพรายงานได้ กรุณาลองใหม่อีกครั้ง");
   }finally{
+    report.remove();
     if(button){button.disabled=false;button.innerHTML=originalLabel;}
-    if(reportWindow&&!reportWindow.closed) reportWindow.close();
   }
 }
 
