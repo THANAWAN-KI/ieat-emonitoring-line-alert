@@ -3472,7 +3472,7 @@ html,body{background:linear-gradient(180deg,#FFFFFF 0%,#F8F9FB 50%,#F4F6F8 100%)
 
       <div class="brand-row">
 
-        <img class="ui-icon brand-icon" src="./assets/factory-svgrepo-com.png" alt="ไอคอนอาคาร กนอ.">
+        <img class="ui-icon brand-icon" src="./assets/TH-vertical(white)(1).png" alt="ไอคอนอาคาร กนอ.">
 
         <div class="brand-name">
           IEAT e-Monitoring
@@ -4142,16 +4142,57 @@ const DASHBOARD_URL =
 /* =========================================================
    EXPORT PDF
 ========================================================= */
+let currentReportData=null;
+
 function exportPDF(){
-  const oldTitle=document.title;
-  const date=new Date().toLocaleDateString("th-TH",{
-    year:"numeric",month:"2-digit",day:"2-digit"
-  }).replaceAll("/","-");
-  document.title=`รายงานสถานการณ์สิ่งแวดล้อม_${date}`;
-  const restoreTitle=()=>{document.title=oldTitle};
-  window.addEventListener("afterprint",restoreTitle,{once:true});
-  window.print();
-  setTimeout(restoreTitle,60000);
+  if(!currentReportData){
+    alert("ข้อมูลรายงานยังโหลดไม่เสร็จ กรุณารอสักครู่แล้วลองใหม่");
+    return;
+  }
+
+  /* สร้างหน้ารายงานสำหรับ PDF แยกจากหน้าเว็บไซต์ */
+  const pdfWindow=window.open("","_blank");
+  if(!pdfWindow){
+    alert("ไม่สามารถเปิดหน้าดาวน์โหลดได้ กรุณาอนุญาต Pop-up สำหรับเว็บไซต์นี้");
+    return;
+  }
+
+  const data=currentReportData;
+  const stations=Array.isArray(data.stations)?data.stations:[];
+  const total=data.station_count??data.station_total??stations.length;
+  const online=data.online_total??stations.filter(s=>String(s.status||"").toUpperCase()==="ONLINE").length;
+  const offline=data.offline_total??stations.filter(s=>String(s.status||"").toUpperCase()==="OFFLINE").length;
+  const alertCount=data.alert_station_count??stations.length;
+  const updated=data.updated_at_text||data.updated_at||"-";
+  const printedAt=new Date().toLocaleString("th-TH");
+  const fileDate=new Date().toLocaleDateString("th-TH",{year:"numeric",month:"2-digit",day:"2-digit"}).replaceAll("/","-");
+  const text=value=>esc(value??"-");
+  const typeRows=["AQMs","WQMs","CEMs"].map(key=>{
+    const item=getTypeData(data,key);
+    return `<tr><td><strong>${key}</strong><br><span class="muted">${text(TYPE_INFO[key].label)}</span></td><td>${fmt(item.total)}</td><td class="online">${fmt(item.online)}</td><td class="offline">${fmt(item.offline)}</td></tr>`;
+  }).join("");
+
+  const stationRows=stations.length?stations.map((s,index)=>{
+    const status=String(s.status||"-").toUpperCase();
+    const params=getParameters(s);
+    return `<tr><td>${fmt(index+1)}</td><td>${text(s.station_name||s.name)}</td><td>${text(s.estate_name||s.industrial_estate)}</td><td>${text(s.station_id||s.id||s.code)}</td><td class="${status==="ONLINE"?"online":"offline"}">${text(status)}</td><td>${text(s.type||s.station_type)}</td><td>${fmt(params.length)}</td><td>${text(s.last_update||s.updated_at||s.timestamp)}</td></tr>`;
+  }).join(""):`<tr><td colspan="8" class="empty">ไม่พบรายการสถานีที่ต้องติดตาม</td></tr>`;
+
+  const detailSections=stations.map((s,index)=>{
+    const params=getParameters(s);
+    const parameterRows=params.length?params.map(p=>{
+      if(typeof p!=="object") return `<tr><td colspan="5">${text(p)}</td></tr>`;
+      return `<tr><td>${text(p.time||p.timestamp||p.datetime||p.date)}</td><td>${text(p.parameter||p.name||p.code)}</td><td>${text(p.value??p.result??p.measurement)}</td><td>${text(p.unit)}</td><td>${text(p.level||p.status||p.condition)}</td></tr>`;
+    }).join(""):`<tr><td colspan="5" class="empty">ไม่พบรายละเอียดค่าพารามิเตอร์จากข้อมูลล่าสุด</td></tr>`;
+    return `<section class="station-detail"><h2>${fmt(index+1)}. ${text(s.station_name||s.name||"ไม่ระบุชื่อสถานี")}</h2><table><tbody><tr><th>นิคมอุตสาหกรรม</th><td>${text(s.estate_name||s.industrial_estate)}</td><th>รหัสสถานี</th><td>${text(s.station_id||s.id||s.code)}</td></tr><tr><th>สถานะ</th><td>${text(String(s.status||"-").toUpperCase())}</td><th>ประเภท</th><td>${text(s.type||s.station_type)}</td></tr><tr><th>ตำแหน่ง</th><td colspan="3">${text(s.latitude??s.lat??s.station_latitude)}, ${text(s.longitude??s.lng??s.lon??s.station_longitude)}</td></tr><tr><th>สาเหตุ / การติดตามผล</th><td colspan="3">${text(getFollowUp(s))}</td></tr></tbody></table><h3>ค่าพารามิเตอร์ที่แจ้งเตือน</h3><table><thead><tr><th>วันที่ - เวลา</th><th>พารามิเตอร์</th><th>ค่าที่ตรวจวัดได้</th><th>หน่วย</th><th>ระดับ / สถานะ</th></tr></thead><tbody>${parameterRows}</tbody></table></section>`;
+  }).join("");
+
+  pdfWindow.document.open();
+  pdfWindow.document.write(`<!DOCTYPE html><html lang="th"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>รายงานสถานการณ์สิ่งแวดล้อม_${fileDate}</title><style>
+  @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap');
+  @page{size:A4 landscape;margin:12mm}*{box-sizing:border-box}body{margin:0;color:#30283A;font-family:"Sarabun","TH Sarabun PSK",Arial,sans-serif;font-size:10px;line-height:1.45}header{border-bottom:4px solid #4E1478;margin-bottom:14px;padding:0 0 10px}h1{color:#4E1478;font-size:21px;margin:0 0 3px}h2{color:#4E1478;font-size:14px;margin:15px 0 6px}h3{font-size:11px;margin:9px 0 5px}.meta{display:flex;justify-content:space-between;color:#666}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}.kpi{border:1px solid #DED8E4;border-radius:6px;padding:8px;text-align:center}.kpi strong{display:block;color:#4E1478;font-size:20px}.kpi span{color:#666}table{border-collapse:collapse;width:100%;margin:0 0 9px;table-layout:fixed}th,td{border:1px solid #D8D3DD;padding:5px 6px;vertical-align:top;overflow-wrap:anywhere}thead th{background:#4E1478;color:#FFF;text-align:left}tbody th{background:#F2EEF5;color:#4E1478;text-align:left;width:16%}tbody tr:nth-child(even) td{background:#FAF9FB}.online{color:#2B8A3E;font-weight:700}.offline{color:#C51F35;font-weight:700}.muted{color:#777;font-size:9px}.empty{text-align:center;color:#777;padding:12px}.station-detail{break-inside:avoid;page-break-inside:avoid;margin-top:14px}.station-detail+ .station-detail{break-before:auto}.footer-note{margin-top:10px;color:#777;text-align:right}@media print{.no-print{display:none!important}body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+  </style></head><body><header><h1>รายงานสรุปสถานการณ์ IEAT e-Monitoring</h1><div class="meta"><span>ข้อมูลล่าสุด: ${text(updated)}</span><span>จัดทำรายงาน: ${text(printedAt)}</span></div></header><div class="kpis"><div class="kpi"><strong>${fmt(total)}</strong><span>สถานีทั้งหมด</span></div><div class="kpi"><strong>${fmt(online)}</strong><span>ONLINE</span></div><div class="kpi"><strong>${fmt(offline)}</strong><span>OFFLINE</span></div><div class="kpi"><strong>${fmt(alertCount)}</strong><span>สถานีที่ต้องติดตาม</span></div></div><h2>สรุปสถานีจำแนกตามประเภท</h2><table><thead><tr><th>ประเภทสถานี</th><th>ทั้งหมด</th><th>ONLINE</th><th>OFFLINE</th></tr></thead><tbody>${typeRows}</tbody></table><h2>ตารางสรุปรายละเอียดสถานี</h2><table><thead><tr><th style="width:4%">ลำดับ</th><th style="width:18%">ชื่อสถานี</th><th style="width:18%">นิคมอุตสาหกรรม</th><th style="width:11%">รหัส</th><th style="width:9%">สถานะ</th><th style="width:9%">ประเภท</th><th style="width:9%">จำนวนรายการ</th><th style="width:15%">ข้อมูลล่าสุด</th></tr></thead><tbody>${stationRows}</tbody></table>${detailSections}<div class="footer-note">IEAT e-Monitoring — ระบบติดตามสถานการณ์สิ่งแวดล้อมและความปลอดภัย</div><script>window.addEventListener("load",async()=>{try{await document.fonts.ready}catch(e){}setTimeout(()=>window.print(),300)});window.addEventListener("afterprint",()=>window.close());<\/script></body></html>`);
+  pdfWindow.document.close();
 }
 
 
@@ -5067,6 +5108,9 @@ async function loadStatus(){
 
     const data=
       await response.json();
+
+    /* เก็บข้อมูลต้นฉบับไว้สร้างรายงาน PDF โดยไม่แก้ส่วนแสดงผลหน้าเว็บ */
+    currentReportData=data;
 
 
     /* =====================================================
