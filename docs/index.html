@@ -4456,103 +4456,75 @@ async function exportReportImage(){
     </div>`;
   }).join("");
 
+  const rankColors=["#65408A","#2F6FED","#35A56A"];
+  const rankingCards=typeData.map((item,typeIndex)=>{
+    const grouped={};
+    stations
+      .filter(station=>String(station.type||station.station_type||"").toUpperCase()===item.key.toUpperCase())
+      .forEach(station=>{
+        const estate=String(station.estate_name||station.industrial_estate||"ไม่ระบุนิคมอุตสาหกรรม");
+        grouped[estate]=(grouped[estate]||0)+1;
+      });
+    const ranked=Object.entries(grouped).sort((a,b)=>b[1]-a[1]).slice(0,5);
+    const list=ranked.length?ranked.map(([estate,count],index)=>`<li><span><b>${index+1}.</b> ${esc(estate)}</span><strong style="background:${rankColors[typeIndex]}">${fmt(count)}</strong></li>`).join(""):`<li class="gr-empty">ไม่พบข้อมูลรายนิคมอุตสาหกรรม</li>`;
+    return `<section class="gr-rank"><div class="gr-rank-head"><span class="gr-rank-icon" style="color:${rankColors[typeIndex]};background:${rankColors[typeIndex]}15">⌁</span><div><small>${item.key}</small><h2>${esc(item.label)}</h2></div></div><ol>${list}</ol></section>`;
+  }).join("");
+
+  const comparisonBars=typeData.map((item,index)=>{
+    const onlineHeight=Math.max(item.online?8:0,Math.round((item.online/maxType)*100));
+    const offlineHeight=Math.max(item.offline?8:0,Math.round((item.offline/maxType)*100));
+    return `<div class="gr-group"><div class="gr-bars"><span class="gr-vbar online" style="height:${onlineHeight}%"><i>${fmt(item.online)}</i></span><span class="gr-vbar offline" style="height:${offlineHeight}%"><i>${fmt(item.offline)}</i></span></div><strong>${item.key}</strong><small>${esc(item.label)}</small></div>`;
+  }).join("");
+
   const report=document.createElement("section");
   report.setAttribute("aria-hidden","true");
-  report.style.cssText="position:fixed;left:-20000px;top:0;width:1200px;background:#F5F7FA;z-index:-1";
+  report.style.cssText="position:fixed;left:-20000px;top:0;width:1280px;background:#F6F7F9;z-index:-1";
   report.innerHTML=`
   <style>
-    .er-report,.er-report *{box-sizing:border-box}
-    .er-report{width:1200px;padding:34px;background:#F5F7FA;color:#34363D;font-family:"Sarabun","Segoe UI",Tahoma,Arial,sans-serif}
-    .er-shell{background:#FFF;border:1px solid #E7E9EE;border-radius:22px;overflow:hidden;box-shadow:0 14px 34px rgba(38,42,54,.08)}
-    .er-head{display:flex;align-items:center;justify-content:space-between;padding:22px 26px;border-bottom:1px solid #E7E9EE}
-    .er-brand{display:flex;align-items:center;gap:14px}.er-logo{width:54px;height:54px;object-fit:contain}
-    .er-kicker{font-size:12px;font-weight:800;color:#65408A}.er-title{margin:2px 0 0;font-size:24px;line-height:1.2}.er-sub{margin-top:4px;font-size:12px;color:#7A7D86}
-    .er-date{text-align:right;font-size:11px;color:#7A7D86}.er-date strong{display:block;margin-top:3px;color:#34363D;font-size:13px}
-    .er-content{padding:22px 24px 26px}
-    .er-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-    .er-kpi{min-height:112px;padding:18px;border:1px solid #E7E9EE;border-radius:17px;background:#FFF;box-shadow:0 7px 18px rgba(38,42,54,.05)}
-    .er-kpi-top{display:flex;align-items:center;gap:10px}.er-kpi-icon{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;font-size:17px;font-weight:900}
-    .er-kpi strong{display:block;font-size:28px;line-height:1}.er-kpi span{display:block;margin-top:8px;color:#7A7D86;font-size:12px}
-    .er-purple .er-kpi-icon{color:#65408A;background:#F3EDF7}.er-purple strong{color:#65408A}
-    .er-green .er-kpi-icon{color:#278753;background:#EDF8F2}.er-green strong{color:#278753}
-    .er-red .er-kpi-icon{color:#C93B3B;background:#FFF0F0}.er-red strong{color:#C93B3B}
-    .er-orange .er-kpi-icon{color:#D96F22;background:#FFF3E9}.er-orange strong{color:#D96F22}
-    .er-grid{display:grid;grid-template-columns:1.65fr .85fr;gap:14px;margin-top:14px}
-    .er-card{padding:20px;border:1px solid #E7E9EE;border-radius:17px;background:#FFF;box-shadow:0 7px 18px rgba(38,42,54,.045)}
-    .er-card h2{margin:0;font-size:16px}.er-card p{margin:4px 0 18px;color:#7A7D86;font-size:11px}
-    .er-bar-row{display:grid;grid-template-columns:210px 1fr 82px;align-items:center;gap:12px;margin:17px 0}
-    .er-bar-label strong{display:block;font-size:13px}.er-bar-label span{display:block;color:#7A7D86;font-size:10px}
-    .er-bar-track{height:18px;overflow:hidden;border-radius:9px;background:#F0F2F5}.er-bar-fill{height:100%;border-radius:9px}
-    .er-bar-value{text-align:right;font-weight:800;font-size:12px}
-    .er-donut-wrap{position:relative;display:grid;place-items:center;padding:6px 0 12px}
-    .er-donut{display:grid;place-items:center;width:168px;height:168px;border-radius:50%;background:conic-gradient(#35A56A 0 ${onlinePercent}%,#E34B4B ${onlinePercent}% 100%)}
-    .er-donut:after{content:"";width:106px;height:106px;border-radius:50%;background:#FFF}
-    .er-donut-value{position:absolute;text-align:center;font-size:27px;font-weight:900;color:#34363D}.er-donut-value small{display:block;font-size:11px;font-weight:600;color:#7A7D86}
-    .er-legend{display:flex;justify-content:center;gap:18px;font-size:11px}.er-dot{display:inline-block;width:9px;height:9px;margin-right:6px;border-radius:50%}
-    .er-table-card{margin-top:14px;padding:20px;border:1px solid #E7E9EE;border-radius:17px;background:#FFF}
-    .er-table-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:11px}.er-table-head h2{margin:0;font-size:16px}.er-table-head span{color:#7A7D86;font-size:10px}
-    .er-table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border:1px solid #E2E5EA;border-radius:11px;font-size:11px}
-    .er-table th{padding:10px 9px;color:#FFF;background:#65408A;text-align:left}.er-table td{padding:9px;border-bottom:1px solid #E7E9EE;vertical-align:middle}
-    .er-table tbody tr:nth-child(even){background:#F8F9FB}.er-table tbody tr:last-child td{border-bottom:0}.er-table small{display:block;margin-top:2px;color:#7A7D86}
-    .er-status{display:inline-block;padding:4px 8px;border-radius:999px;font-size:10px;font-weight:800}.is-online{color:#278753;background:#EDF8F2}.is-offline{color:#C93B3B;background:#FFF0F0}
-    .er-empty{text-align:center;padding:20px;color:#7A7D86}.er-foot{display:flex;justify-content:space-between;margin-top:14px;color:#7A7D86;font-size:10px}
-    .er-shell{border:0;box-shadow:0 18px 46px rgba(45,39,62,.13)}
-    .er-head{position:relative;padding:25px 28px;color:#FFF;background:linear-gradient(120deg,#4E2F70 0%,#65408A 58%,#2F6FED 145%);border-bottom:5px solid #E57A2A}
-    .er-head:after{content:"";position:absolute;right:-42px;top:-70px;width:260px;height:260px;border:1px solid rgba(255,255,255,.12);border-radius:50%}
-    .er-logo{padding:7px;border-radius:13px;background:#FFF;box-shadow:0 5px 14px rgba(0,0,0,.16)}
-    .er-kicker,.er-title,.er-date strong{color:#FFF}.er-sub,.er-date{color:rgba(255,255,255,.8)}
-    .er-content{padding:18px 22px 24px;background:linear-gradient(180deg,#FBFAFC 0,#F6F8FB 100%)}
-    .er-situation{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:14px;padding:13px 16px;border:1px solid #E6DCF0;border-left:5px solid #65408A;border-radius:14px;background:#FFF}
-    .er-situation-main{display:flex;align-items:center;gap:11px}.er-pulse{width:13px;height:13px;border:4px solid #D8CBE4;border-radius:50%;background:#65408A}
-    .er-situation strong{display:block;font-size:14px}.er-situation p{margin:2px 0 0;color:#7A7D86;font-size:11px}
-    .er-situation-badge{padding:7px 12px;border-radius:999px;color:#D96F22;background:#FFF3E9;font-size:11px;font-weight:800}
-    .er-kpi{position:relative;overflow:hidden;min-height:104px;background:linear-gradient(145deg,#FFF,#FAFAFC)}
-    .er-kpi:after{content:"";position:absolute;right:-22px;bottom:-28px;width:72px;height:72px;border-radius:50%;background:rgba(101,64,138,.055)}
-    .er-kpi-icon{box-shadow:inset 0 0 0 1px rgba(0,0,0,.04)}
-    .er-insights{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:12px;margin-top:14px}
-    .er-insight{display:flex;align-items:center;gap:12px;padding:14px 16px;border:1px solid #E7E9EE;border-radius:14px;background:#FFF}
-    .er-insight-icon{display:grid;place-items:center;width:36px;height:36px;flex:0 0 36px;border-radius:11px;color:#65408A;background:#F3EDF7;font-weight:900}
-    .er-insight strong{display:block;font-size:13px}.er-insight span{display:block;margin-top:2px;color:#7A7D86;font-size:10px}
-    .er-table-card{box-shadow:0 7px 18px rgba(38,42,54,.045)}
-    .er-table-head p{margin:3px 0 0;color:#7A7D86;font-size:10px}
-    .er-card h2,.er-table-head h2{color:#4E2F70;font-size:16px}
-    .er-table td:nth-child(1),.er-table th:nth-child(1){text-align:center}
-    .er-table td{font-size:11px;line-height:1.35}
+    .gr-report,.gr-report *{box-sizing:border-box}
+    .gr-report{width:1280px;padding:24px;background:#F6F7F9;color:#3C3D42;font-family:"Sarabun","Segoe UI",Tahoma,Arial,sans-serif}
+    .gr-head{display:flex;align-items:center;justify-content:space-between;gap:24px;height:76px;padding:12px 24px;background:#FFF;border-bottom:1px solid #E3E5E9;box-shadow:0 4px 13px rgba(42,45,55,.06)}
+    .gr-brand{display:flex;align-items:center;gap:15px;min-width:0}.gr-logo{width:62px;height:48px;object-fit:contain}.gr-title-wrap{display:flex;align-items:baseline;gap:12px;min-width:0}.gr-title{margin:0;font-size:21px;white-space:nowrap}.gr-subtitle{font-size:11px;color:#85878E;white-space:nowrap}
+    .gr-head-right{display:flex;align-items:center;gap:18px;color:#6E7077;font-size:11px}.gr-head-right strong{display:block;color:#34363D;font-size:12px}.gr-scope{padding:8px 13px;border-radius:999px;background:#F4F4F6;color:#606269;font-weight:700}
+    .gr-body{padding:20px 6px 8px}.gr-top{display:grid;grid-template-columns:repeat(3,1fr) 1.22fr;gap:14px}
+    .gr-kpi,.gr-donut-card,.gr-rank,.gr-chart,.gr-table-card{background:#FFF;border:1px solid #ECEEF2;border-radius:18px;box-shadow:0 7px 19px rgba(42,45,55,.055)}
+    .gr-kpi{display:flex;align-items:flex-start;gap:14px;min-height:122px;padding:20px}.gr-icon{display:grid;place-items:center;width:44px;height:44px;flex:0 0 44px;border-radius:50%;font-size:18px;font-weight:900}.gr-kpi-value{font-size:28px;line-height:1.05;font-weight:900}.gr-kpi-label{margin-top:7px;font-size:12px;line-height:1.4}.gr-kpi-note{margin-top:2px;color:#92949A;font-size:10px}
+    .purple{color:#65408A}.purple-bg{background:#F3EDF7}.green{color:#2E9B61}.green-bg{background:#EDF8F2}.red{color:#D64B4B}.red-bg{background:#FFF0F0}
+    .gr-donut-card{grid-row:span 2;padding:20px}.gr-card-title{margin:0;font-size:15px}.gr-card-note{margin:3px 0 0;color:#909299;font-size:10px}
+    .gr-donut-wrap{position:relative;display:grid;place-items:center;height:190px}.gr-donut{width:150px;height:150px;border-radius:50%;background:conic-gradient(#35A56A 0 ${onlinePercent}%,#E34B4B ${onlinePercent}% 100%)}.gr-donut:after{content:"";display:block;width:92px;height:92px;margin:29px;border-radius:50%;background:#FFF}.gr-donut-text{position:absolute;text-align:center;color:#65408A;font-size:25px;font-weight:900}.gr-donut-text small{display:block;color:#85878E;font-size:10px;font-weight:600}
+    .gr-legend{display:grid;gap:8px;font-size:11px}.gr-legend div{display:flex;justify-content:space-between}.gr-legend span:before{content:"";display:inline-block;width:9px;height:9px;margin-right:7px;border-radius:50%;background:var(--dot)}
+    .gr-ranks{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}.gr-rank{padding:18px}.gr-rank-head{display:flex;align-items:center;gap:11px}.gr-rank-icon{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;font-size:19px}.gr-rank-head small{color:#8B8D94;font-size:9px}.gr-rank h2{margin:1px 0 0;font-size:13px}.gr-rank ol{display:grid;gap:7px;margin:14px 0 0;padding:0;list-style:none}.gr-rank li{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:35px;padding:6px 7px 6px 10px;border-radius:9px;background:#F6F7FA;color:#666970;font-size:10px}.gr-rank li span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.gr-rank li b{color:#999BA1}.gr-rank li strong{min-width:42px;padding:5px 8px;border-radius:8px;color:#FFF;text-align:center;font-size:11px}.gr-empty{justify-content:center!important;color:#999!important}
+    .gr-chart{margin-top:14px;padding:19px 22px}.gr-chart-head{display:flex;align-items:center;justify-content:space-between}.gr-chart-legend{display:flex;gap:17px;color:#777A81;font-size:10px}.gr-chart-legend span:before{content:"";display:inline-block;width:9px;height:9px;margin-right:6px;border-radius:50%;background:var(--dot)}.gr-chart-area{display:flex;align-items:flex-end;justify-content:space-around;height:250px;margin-top:15px;padding:18px 70px 0;border-bottom:1px solid #E6E8ED;background:repeating-linear-gradient(to bottom,#FFF 0,#FFF 49px,#EEF0F4 50px)}.gr-group{display:flex;flex-direction:column;align-items:center;width:190px;height:100%}.gr-bars{display:flex;align-items:flex-end;justify-content:center;gap:12px;width:100%;height:190px}.gr-vbar{position:relative;width:38px;min-height:2px;border-radius:10px 10px 0 0}.gr-vbar.online{background:#2F6FED}.gr-vbar.offline{background:#E57A2A}.gr-vbar i{position:absolute;top:-19px;left:50%;transform:translateX(-50%);font-style:normal;font-size:10px;font-weight:800}.gr-group>strong{margin-top:8px;font-size:12px}.gr-group>small{margin-top:2px;color:#92949A;font-size:9px}
+    .gr-table-card{margin-top:14px;padding:18px 20px}.gr-table-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:10px}.gr-table-head h2{margin:0;font-size:15px}.gr-table-head p{margin:2px 0 0;color:#909299;font-size:10px}.gr-table-head>span{color:#909299;font-size:9px}.gr-table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border:1px solid #E3E5EA;border-radius:10px;font-size:10px}.gr-table th{padding:9px;background:#65408A;color:#FFF;text-align:left}.gr-table td{padding:8px 9px;border-bottom:1px solid #E7E9EE;vertical-align:middle}.gr-table tbody tr:nth-child(even){background:#F8F9FB}.gr-table tbody tr:last-child td{border-bottom:0}.gr-table small{display:block;margin-top:2px;color:#8C8E95}.gr-status{display:inline-block;padding:4px 8px;border-radius:999px;font-size:9px;font-weight:800}.is-online{color:#278753;background:#EDF8F2}.is-offline{color:#C93B3B;background:#FFF0F0}.gr-empty-table{text-align:center;padding:18px!important;color:#8C8E95}.gr-foot{display:flex;justify-content:space-between;padding:13px 3px 0;color:#92949A;font-size:9px}
   </style>
-  <div class="er-report"><div class="er-shell">
-    <header class="er-head">
-      <div class="er-brand"><img class="er-logo" src="./assets/TH-Vertical.png" alt=""><div><div class="er-kicker">IEAT e-Monitoring</div><h1 class="er-title">รายงานสรุปสถานการณ์ล่าสุด</h1><div class="er-sub">ภาพรวมสถานีตรวจวัดและประเด็นที่ต้องติดตามสำหรับผู้บริหาร</div></div></div>
-      <div class="er-date">ข้อมูลล่าสุด<strong>${updated}</strong></div>
+  <div class="gr-report">
+    <header class="gr-head">
+      <div class="gr-brand"><img class="gr-logo" src="./assets/TH-Vertical.png" alt=""><div class="gr-title-wrap"><h1 class="gr-title">สรุปสถานการณ์ IEAT e-Monitoring</h1><span class="gr-subtitle">ภาพรวมสถานีตรวจวัดและสถานะที่ต้องติดตาม</span></div></div>
+      <div class="gr-head-right"><div>ข้อมูลล่าสุด<strong>${updated}</strong></div><span class="gr-scope">พื้นที่นิคมอุตสาหกรรมทั่วประเทศ</span></div>
     </header>
-    <div class="er-content">
-      <div class="er-situation">
-        <div class="er-situation-main"><span class="er-pulse"></span><div><strong>ภาพรวมสถานการณ์ระบบตรวจวัด</strong><p>${healthMessage}</p></div></div>
-        <span class="er-situation-badge">${healthTone}</span>
+    <main class="gr-body">
+      <div class="gr-top">
+        <section class="gr-kpi"><span class="gr-icon purple purple-bg">Σ</span><div><div class="gr-kpi-value purple">${fmt(total)}</div><div class="gr-kpi-label">สถานีตรวจวัดทั้งหมด</div><div class="gr-kpi-note">ทุกประเภทสถานีในระบบ</div></div></section>
+        <section class="gr-kpi"><span class="gr-icon green green-bg">●</span><div><div class="gr-kpi-value green">${fmt(online)}</div><div class="gr-kpi-label">สถานีออนไลน์</div><div class="gr-kpi-note">กำลังส่งข้อมูลตามปกติ</div></div></section>
+        <section class="gr-kpi"><span class="gr-icon red red-bg">!</span><div><div class="gr-kpi-value red">${fmt(alertCount)}</div><div class="gr-kpi-label">สถานีที่ต้องติดตาม</div><div class="gr-kpi-note">พบรายการแจ้งเตือนจากข้อมูลล่าสุด</div></div></section>
+        <aside class="gr-donut-card"><h2 class="gr-card-title">สัดส่วนสถานะของสถานี</h2><p class="gr-card-note">ออนไลน์และออฟไลน์จากสถานีทั้งหมด</p><div class="gr-donut-wrap"><div class="gr-donut"></div><div class="gr-donut-text">${onlinePercent}%<small>พร้อมให้บริการ</small></div></div><div class="gr-legend"><div><span style="--dot:#35A56A">ออนไลน์</span><strong>${fmt(online)}</strong></div><div><span style="--dot:#E34B4B">ออฟไลน์</span><strong>${fmt(offline)}</strong></div></div></aside>
+        <div class="gr-ranks" style="grid-column:1/4">${rankingCards}</div>
       </div>
-      <div class="er-kpis">
-        <div class="er-kpi er-purple"><div class="er-kpi-top"><div class="er-kpi-icon">Σ</div><strong>${fmt(total)}</strong></div><span>สถานีตรวจวัดทั้งหมด</span></div>
-        <div class="er-kpi er-green"><div class="er-kpi-top"><div class="er-kpi-icon">●</div><strong>${fmt(online)}</strong></div><span>สถานีออนไลน์</span></div>
-        <div class="er-kpi er-red"><div class="er-kpi-top"><div class="er-kpi-icon">●</div><strong>${fmt(offline)}</strong></div><span>สถานีออฟไลน์</span></div>
-        <div class="er-kpi er-orange"><div class="er-kpi-top"><div class="er-kpi-icon">!</div><strong>${fmt(alertCount)}</strong></div><span>สถานีที่ต้องติดตาม</span></div>
-      </div>
-      <div class="er-grid">
-        <section class="er-card"><h2>1. จำนวนสถานีแยกตามประเภท</h2><p>ดูได้ทันทีว่าระบบมีสถานีประเภทใดมากที่สุด</p>${bars}</section>
-        <section class="er-card"><h2>2. ความพร้อมของระบบ</h2><p>สัดส่วนสถานีที่ส่งข้อมูลได้ตามปกติ</p><div class="er-donut-wrap"><div class="er-donut"></div><div class="er-donut-value">${onlinePercent}%<small>ออนไลน์</small></div></div><div class="er-legend"><span><i class="er-dot" style="background:#35A56A"></i>ออนไลน์ ${fmt(online)}</span><span><i class="er-dot" style="background:#E34B4B"></i>ออฟไลน์ ${fmt(offline)}</span></div></section>
-      </div>
-      <section class="er-table-card"><div class="er-table-head"><div><h2>3. รายการที่ต้องตรวจสอบ</h2><p>เรียงข้อมูลสำคัญให้อ่านและนำไปติดตามต่อได้ง่าย</p></div><span>แสดง 12 รายการแรก จากทั้งหมด ${fmt(stations.length)} รายการ</span></div>
-        <table class="er-table"><thead><tr><th style="width:5%">ลำดับ</th><th style="width:25%">ชื่อสถานี</th><th style="width:25%">นิคมอุตสาหกรรม</th><th style="width:11%">สถานะ</th><th style="width:12%">จุดที่พบ</th><th style="width:22%">ข้อมูลล่าสุด</th></tr></thead><tbody>${rows||'<tr><td colspan="6" class="er-empty">ไม่พบสถานีที่ต้องติดตาม</td></tr>'}</tbody></table>
+      <section class="gr-chart"><div class="gr-chart-head"><div><h2 class="gr-card-title">เปรียบเทียบสถานีตามประเภท</h2><p class="gr-card-note">จำนวนสถานีออนไลน์และออฟไลน์จากข้อมูลล่าสุด</p></div><div class="gr-chart-legend"><span style="--dot:#2F6FED">ออนไลน์</span><span style="--dot:#E57A2A">ออฟไลน์</span></div></div><div class="gr-chart-area">${comparisonBars}</div></section>
+      <section class="gr-table-card"><div class="gr-table-head"><div><h2>รายการสถานีที่ต้องติดตาม</h2><p>ข้อมูลสำคัญสำหรับเจ้าหน้าที่ตรวจสอบและดำเนินการต่อ</p></div><span>แสดง 12 รายการแรก จากทั้งหมด ${fmt(stations.length)} รายการ</span></div>
+        <table class="gr-table"><thead><tr><th style="width:5%">ลำดับ</th><th style="width:25%">ชื่อสถานี</th><th style="width:25%">นิคมอุตสาหกรรม</th><th style="width:11%">สถานะ</th><th style="width:12%">จุดที่พบ</th><th style="width:22%">ข้อมูลล่าสุด</th></tr></thead><tbody>${rows.replaceAll("er-status","gr-status")||'<tr><td colspan="6" class="gr-empty-table">ไม่พบสถานีที่ต้องติดตาม</td></tr>'}</tbody></table>
       </section>
-      <div class="er-foot"><span>ระบบติดตามสถานการณ์สิ่งแวดล้อมและความปลอดภัย</span><span>การนิคมอุตสาหกรรมแห่งประเทศไทย</span></div>
-    </div>
-  </div></div>`;
+      <footer class="gr-foot"><span>ระบบติดตามสถานการณ์สิ่งแวดล้อมและความปลอดภัย</span><span>การนิคมอุตสาหกรรมแห่งประเทศไทย</span></footer>
+    </main>
+  </div>`;
   document.body.appendChild(report);
 
   try{
     try{await document.fonts.ready}catch(error){}
     const images=[...report.querySelectorAll("img")];
     await Promise.all(images.map(img=>img.complete?Promise.resolve():new Promise(resolve=>{img.onload=resolve;img.onerror=resolve;})));
-    const target=report.querySelector(".er-report");
-    const canvas=await html2canvas(target,{scale:2,useCORS:true,backgroundColor:"#F5F7FA",logging:false,width:1200,windowWidth:1200});
+    const target=report.querySelector(".gr-report");
+    const canvas=await html2canvas(target,{scale:2,useCORS:true,backgroundColor:"#F6F7F9",logging:false,width:1280,windowWidth:1280});
     const blob=await new Promise(resolve=>canvas.toBlob(resolve,"image/png"));
     if(!blob) throw new Error("ไม่สามารถสร้างไฟล์ภาพได้");
     const link=document.createElement("a");
