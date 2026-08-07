@@ -3688,6 +3688,40 @@ html,body{
 .header .export-pdf-btn{min-width:165px!important;padding:10px 15px!important}
 @media(max-width:650px){.header{padding:9px 12px!important}.header-content{display:block!important}.header .brand{align-items:flex-start!important}.header .brand-icon{width:44px!important;height:44px!important;flex-basis:44px!important}.header .report-title{font-size:17px!important}.header .header-actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;margin-top:9px!important}.header .update-box,.header .export-pdf-btn{width:100%!important;min-width:0!important;margin:0!important}}
 @media(max-width:430px){.header .header-actions{grid-template-columns:1fr!important}}
+
+
+/* MOBILE HEADER SPACE FIX */
+@media(max-width:650px){
+  .header{
+    position:relative!important;
+    min-height:0!important;
+    padding:7px 10px 8px!important;
+    margin-bottom:10px!important;
+  }
+  .header-content{display:block!important}
+  .header .brand{gap:8px!important;align-items:center!important}
+  .header .brand-icon{width:38px!important;height:38px!important;flex:0 0 38px!important}
+  .header .brand-name,.header .brand-sub{display:none!important}
+  .header .report-title{margin:0!important;font-size:16px!important;line-height:1.15!important}
+  .header .report-subtitle{
+    margin:2px 0 0!important;
+    font-size:10px!important;
+    line-height:1.25!important;
+    white-space:normal!important;
+  }
+  .header .header-actions{display:block!important;margin-top:6px!important}
+  .header .update-box{display:none!important}
+  .header .export-pdf-btn{
+    width:100%!important;
+    min-height:34px!important;
+    min-width:0!important;
+    margin:0!important;
+    padding:7px 12px!important;
+    border-radius:9px!important;
+    font-size:13px!important;
+  }
+  .header .export-pdf-btn svg{width:17px!important;height:17px!important}
+}
 </style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
