@@ -552,6 +552,212 @@
       .step p{font-size:11px!important;line-height:1.35!important}
     }
 
+    /* รูปแบบเดียวกับหน้าศูนย์เฝ้าระวังสถานการณ์ภัยพิบัติเวอร์ชันล่าสุด */
+    :root {
+      --purple: #65408A;
+      --purple-2: #2F6FED;
+      --purple-dark: #4E2F70;
+      --purple-soft: #F7F3FA;
+      --blue: #2F6FED;
+      --blue-soft: #F1F6FF;
+      --ink: #34363D;
+      --muted: #7A7D86;
+      --line: #E7E9EE;
+      --green: #35A56A;
+      --green-soft: #F0F8F4;
+      --shadow: 0 7px 22px rgba(43, 45, 55, .055);
+    }
+
+    body {
+      color: var(--ink);
+      background: #F5F6F8;
+    }
+
+    .shell {
+      background: #FAFBFC;
+    }
+
+    .topbar {
+      display: none;
+    }
+
+    .page-header {
+      min-height: 76px;
+      padding: 10px 18px;
+      color: var(--ink);
+      background: rgba(255, 255, 255, .98);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 3px 12px rgba(43, 45, 55, .06);
+    }
+
+    .page-header::after {
+      display: none;
+    }
+
+    .header-icon {
+      width: 54px;
+      height: 54px;
+      flex-basis: 54px;
+      padding: 0;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+    }
+
+    .brand-title {
+      color: #33353B;
+      font-size: 20px;
+      line-height: 1.25;
+    }
+
+    .brand-subtitle {
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .hero {
+      padding: 22px;
+      color: var(--ink);
+      background: #FFFFFF;
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--purple);
+      border-radius: 17px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero::after {
+      display: none;
+    }
+
+    .hero-label {
+      color: var(--purple-dark);
+      background: var(--purple-soft);
+      border-color: #E6DCEE;
+    }
+
+    .hero h1 {
+      margin-top: 12px;
+      color: #34363D;
+      font-size: 30px;
+    }
+
+    .hero p {
+      color: #656872;
+    }
+
+    .audience-tag {
+      color: #2569C9;
+      background: var(--blue-soft);
+      border: 1px solid #DCE7FC;
+    }
+
+    .quick-nav a {
+      color: #555A65;
+      background: #FFFFFF;
+      border-color: var(--line);
+      box-shadow: 0 3px 10px rgba(43, 45, 55, .04);
+    }
+
+    .quick-nav a:hover {
+      color: #FFFFFF;
+      background: var(--purple);
+    }
+
+    .notice,
+    .tip {
+      color: #575A62;
+      background: #FFFFFF;
+      border-color: var(--line);
+      border-left-color: var(--blue);
+      box-shadow: var(--shadow);
+    }
+
+    .notice-mark {
+      background: var(--blue);
+    }
+
+    .notice strong,
+    .tip strong,
+    .section-heading h2,
+    .step h3,
+    .detail-card h3 {
+      color: #34363D;
+    }
+
+    .section-heading::before {
+      background: var(--purple);
+    }
+
+    .step,
+    .guide,
+    .detail-card,
+    .emergency-card {
+      background: #FFFFFF;
+      border-color: var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .step.stop-card { border-left-color: #E34B4B; }
+    .step.alert-card { border-left-color: #F08A3E; }
+    .step.evac-card { border-left-color: #35A56A; }
+    .step.announce-card { border-left-color: var(--blue); }
+
+    .step-number {
+      background: var(--purple);
+    }
+
+    .guide {
+      border-left-color: var(--purple);
+    }
+
+    .guide:nth-child(even) {
+      border-left-color: var(--blue);
+    }
+
+    .guide-icon {
+      background: var(--purple-soft);
+    }
+
+    .detail-card.report { border-left-color: var(--blue); }
+    .detail-card.safe { border-left-color: var(--green); }
+    .rule-card.dont { color: var(--purple-dark); background: var(--purple-soft); border-color: #E6DCEE; }
+
+    .war-room { --card-color: var(--purple); --card-bg: var(--purple-soft); }
+    .fire { --card-color: #C93B3B; --card-bg: #FFF2F2; }
+    .hospital { --card-color: #278753; --card-bg: var(--green-soft); }
+    .police { --card-color: #2569C9; --card-bg: var(--blue-soft); }
+
+    .tip-badge {
+      background: var(--purple);
+    }
+
+    @media(max-width:620px) {
+      .page-header {
+        min-height: 70px;
+        padding: 9px 14px;
+      }
+
+      .header-icon {
+        width: 50px;
+        height: 50px;
+        flex-basis: 50px;
+      }
+
+      .brand-title {
+        color: #33353B;
+        font-size: 18px;
+      }
+
+      .brand-subtitle {
+        color: var(--muted);
+      }
+
+      .hero h1 {
+        font-size: 26px;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -559,16 +765,16 @@
     <div class="topbar"></div>
 
     <header class="page-header">
-      <img class="header-icon" src="./assets/factory-svgrepo-com.png" alt="อาคารนิคมอุตสาหกรรม">
+      <img class="header-icon" src="./assets/TH-Vertical.png" alt="ตราสัญลักษณ์การนิคมอุตสาหกรรมแห่งประเทศไทย">
       <div>
-        <div class="brand-title">ระบบติดตามตรวจสอบสิ่งแวดล้อม</div>
-        <div class="brand-subtitle">ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย</div>
+        <div class="brand-title">คู่มือความปลอดภัยและภัยพิบัติ</div>
+        <div class="brand-subtitle">แนวทางปฏิบัติสำหรับผู้ประกอบการ เจ้าหน้าที่ และผู้ปฏิบัติงาน</div>
       </div>
     </header>
 
     <main>
       <section class="hero">
-        <span class="hero-label">Emergency &amp; Disaster Safety Guide</span>
+        <span class="hero-label">คู่มือการรับมือเหตุฉุกเฉินและภัยพิบัติ</span>
         <h1>คู่มือความปลอดภัยและภัยพิบัติ</h1>
         <p>แนวทางปฏิบัติสำหรับผู้ประกอบการ เจ้าหน้าที่ และผู้ปฏิบัติงาน เมื่อพบเหตุผิดปกติ เหตุฉุกเฉิน หรือภัยพิบัติในพื้นที่นิคมอุตสาหกรรม</p>
         <span class="audience-tag">สำหรับผู้ประกอบการ เจ้าหน้าที่ และผู้ปฏิบัติงานในนิคมอุตสาหกรรม</span>
@@ -714,7 +920,7 @@
       <section class="emergency">
         <article class="emergency-card war-room">
           <div class="emergency-icon"><img src="./assets/TH-Vertical.png" alt="ศูนย์เฝ้าระวังสิ่งแวดล้อม"></div>
-          <h3>ศูนย์เฝ้าระวังสิ่งแวดล้อมฯ (War Room)</h3>
+          <h3>ศูนย์เฝ้าระวังสิ่งแวดล้อมฯ</h3>
           <p>ตลอด 24 ชั่วโมง</p>
           <a class="phone" href="tel:022072700">02-207-2700<br><small>ต่อ 10401, 10402, 10403</small></a>
         </article>
