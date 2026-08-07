@@ -174,201 +174,16 @@
             .notice { padding: 14px; }
             .section-title { font-size: 18px; }
         }
-
-        /* Layout inspired by the supplied reference: clean white report header */
-        body { background: #F6F7FA; }
-        .page { max-width: 1440px; background: #F8F9FC; box-shadow: none; }
-        .header {
-            position: sticky; top: 0; z-index: 1000;
-            display: flex; align-items: center; gap: 18px;
-            min-height: 86px; padding: 14px 28px;
-            color: var(--ieat-ink); background: rgba(255,255,255,.98);
-            border: 0; border-bottom: 1px solid #E4E6EB;
-            box-shadow: 0 3px 12px rgba(43,45,55,.07);
-        }
-        .logo { width: 58px; height: 58px; padding: 0; background: transparent; border-radius: 0; }
-        .header-copy { min-width: 0; }
-        .header-title { color: #2F3037; font-size: 21px; font-weight: 800; }
-        .header-subtitle { margin-top: 3px; color: #7A7D86; font-size: 12px; }
-        .header-meta { margin-left: auto; color: #666A73; font-size: 12px; text-align: right; white-space: nowrap; }
-        .header-meta strong { display: block; color: var(--ieat-purple); font-size: 13px; }
-        .content { padding: 0 24px 32px; }
-        .notice { margin-top: 18px; background: #FFFFFF; }
-        .disaster-tabs {
-            position: sticky; top: 86px; z-index: 900;
-            gap: 8px; margin: 0 -24px; padding: 0 24px;
-            background: rgba(255,255,255,.98); border-bottom: 1px solid #DDE0E6;
-        }
-        .tab {
-            padding: 15px 16px 13px; color: #737680; background: transparent;
-            border: 0; border-bottom: 3px solid transparent; border-radius: 0;
-        }
-        .tab.active { color: var(--ieat-purple); background: transparent; border-color: var(--ieat-purple); box-shadow: none; }
-        .latest-panel {
-            grid-column: 1 / -1; margin-top: 20px; padding: 20px;
-            background: #FFFFFF; border: 1px solid var(--ieat-line); border-radius: 18px;
-            box-shadow: 0 8px 24px rgba(43,45,55,.07);
-        }
-        .latest-panel .section-title { margin: 0 0 5px; }
-        .latest-subtitle { margin: 0 0 14px; color: var(--ieat-muted); font-size: 13px; }
-        .latest-status {
-            display: flex; align-items: center; gap: 12px; margin-bottom: 14px; padding: 13px 15px;
-            color: #6F4300; background: var(--ieat-orange-soft); border: 1px solid #ECD6A6; border-radius: 12px;
-        }
-        .latest-status-dot { width: 11px; height: 11px; flex: 0 0 auto; background: var(--ieat-orange); border-radius: 50%; box-shadow: 0 0 0 5px rgba(230,119,0,.12); }
-        .latest-status strong { display: block; font-size: 14px; }
-        .latest-status span { display: block; margin-top: 2px; color: #80613C; font-size: 11px; }
-        .summary-grid { gap: 14px; }
-        .summary-card { min-height: 112px; display: flex; flex-direction: column; justify-content: center; border-radius: 16px; }
-        .summary-number { font-size: 30px; }
-        .operator-guide { grid-column: 1 / -1; margin-top: 20px; }
-        .guide-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-        .guide-card { padding: 18px; background: #FFFFFF; border: 1px solid var(--ieat-line); border-radius: 16px; box-shadow: 0 7px 20px rgba(43,45,55,.06); }
-        .guide-card.operator { border-top: 4px solid var(--ieat-blue); }
-        .guide-card.officer { border-top: 4px solid var(--ieat-purple); }
-        .guide-card h3 { margin: 0 0 9px; color: #353740; font-size: 16px; }
-        .guide-card ol { margin: 0; padding-left: 20px; color: #5D606A; font-size: 13px; line-height: 1.7; }
-        .official-note { margin: 14px 0 0; padding: 12px 14px; color: #5F5365; background: var(--ieat-purple-soft); border-left: 4px solid var(--ieat-purple); border-radius: 10px; font-size: 12px; line-height: 1.6; }
-        @media (min-width: 860px) {
-            .content { grid-template-columns: minmax(480px,.92fr) minmax(520px,1.08fr); }
-            .latest-panel { grid-row: 3; }
-            .summary-heading,.content > .summary-grid { display: none; }
-            .map-heading { grid-column: 2; grid-row: 4; }
-            .map-panel { grid-column: 2; grid-row: 5 / span 12; }
-            .live-status { grid-column: 2; grid-row: 17; }
-            .source-heading { grid-column: 1; grid-row: 4; }
-            .source-card.flood { grid-row: 5; }.source-card.weather { grid-row: 6; }.source-card.earthquake { grid-row: 7; }
-            .source-card.fire { grid-row: 8; }.source-card.drought { grid-row: 9; }.source-card.alert { grid-row: 10; }
-            .operator-guide { grid-row: 18; }
-            .updated { grid-row: 19; }
-        }
-        @media (max-width: 859px) {
-            .summary-heading,.content > .summary-grid { display: none; }
-        }
-        @media (max-width: 620px) {
-            .header { min-height: 74px; padding: 11px 14px; gap: 11px; }
-            .logo { width: 46px; height: 46px; }
-            .header-title { font-size: 16px; }
-            .header-subtitle { font-size: 10px; }
-            .header-meta { display: none; }
-            .content { padding: 0 12px 24px; }
-            .disaster-tabs { top: 74px; margin: 0 -12px; padding: 0 12px; }
-            .tab { padding: 13px 12px 11px; font-size: 12px; }
-            .latest-panel { padding: 15px; border-radius: 15px; }
-            .summary-grid { grid-template-columns: 1fr; gap: 9px; }
-            .summary-card { min-height: 88px; }
-            .guide-grid { grid-template-columns: 1fr; }
-        }
-
-        /* Final color balance — white first, blue data, restrained IEAT purple */
-        :root {
-            --ui-blue: #2F6FED;
-            --ui-blue-dark: #2056C8;
-            --ui-blue-soft: #F1F6FF;
-            --ui-purple: #65408A;
-            --ui-purple-soft: #F7F3FA;
-            --ui-gray: #F7F8FA;
-            --ui-line: #E7E9EE;
-            --ui-text: #34363D;
-            --ui-muted: #7A7D86;
-        }
-        body { background: #F5F6F8; color: var(--ui-text); }
-        .page { background: #FAFBFC; }
-        .header { background: rgba(255,255,255,.98); border-bottom-color: var(--ui-line); box-shadow: 0 3px 12px rgba(43,45,55,.06); }
-        .header-title { color: #33353B; }
-        .header-subtitle,.header-meta { color: var(--ui-muted); }
-        .header-meta strong { color: var(--ui-purple); }
-        .disaster-tabs { border-bottom-color: var(--ui-line); }
-        .tab { color: #777A83; }
-        .tab:hover { color: var(--ui-blue); background: var(--ui-blue-soft); }
-        .tab.active { color: var(--ui-blue); border-color: var(--ui-blue); }
-        .notice,.latest-panel,.map-panel,.summary-card,.source-card,.guide-card { border-color: var(--ui-line); box-shadow: 0 7px 22px rgba(43,45,55,.055); }
-        .notice { color: #575A62; background: #FFFFFF; border-left-color: var(--ui-purple); }
-        .notice strong { color: #3A3C43; }
-        .section-title { color: #34363D; }
-        .section-title::before { background: var(--ui-blue); }
-        .latest-panel { background: #FFFFFF; }
-        .latest-status { color: #4F5870; background: #F7F9FD; border-color: #E3E7F0; }
-        .latest-status-dot { background: var(--ui-blue); box-shadow: 0 0 0 5px rgba(47,111,237,.10); }
-        .latest-status span { color: #7A8190; }
-        .summary-card { background: #FFFFFF!important; border-top-color: var(--ui-blue)!important; }
-        .summary-card:nth-child(1) .summary-number { color: var(--ui-blue); }
-        .summary-card:nth-child(2) .summary-number { color: var(--ui-purple); }
-        .summary-card:nth-child(3) .summary-number { color: #E57A2A; }
-        .map-caption { background: #FFFFFF; }
-        .map-caption strong { color: var(--ui-blue); }
-        .source-card { background: #FFFFFF; }
-        .source-card.flood { border-left-color: #2F80ED; }
-        .source-card.weather { border-left-color: #7555C7; }
-        .source-card.earthquake { border-left-color: #F08A3E; }
-        .source-card.fire { border-left-color: #E34B4B; }
-        .source-card.drought { border-left-color: #35A56A; }
-        .source-card.alert { border-left-color: #D8A518; }
-        .source-card.flood .source-title { color: #2569C9; }
-        .source-card.weather .source-title { color: #6543B3; }
-        .source-card.earthquake .source-title { color: #D96F22; }
-        .source-card.fire .source-title { color: #C93B3B; }
-        .source-card.drought .source-title { color: #278753; }
-        .source-card.alert .source-title { color: #9D7410; }
-        .source-description { color: #656872; }
-        .button-primary { color: #FFFFFF; background: var(--ui-blue); box-shadow: 0 4px 10px rgba(47,111,237,.16); }
-        .button-primary:hover { background: var(--ui-blue-dark); }
-        .button-secondary { color: #545965; background: #F4F5F7; border-color: #E1E3E8; }
-        .button-secondary:hover { color: var(--ui-blue); background: var(--ui-blue-soft); border-color: #CBD9F5; }
-        .live-status { color: #6E7380; background: #F1F4F9; }
-        .guide-card.operator { border-top-color: var(--ui-blue); }
-        .guide-card.officer { border-top-color: var(--ui-purple); }
-        .guide-card.operator h3 { color: var(--ui-blue-dark); }
-        .guide-card.officer h3 { color: var(--ui-purple); }
-        .official-note { color: #5D5962; background: var(--ui-purple-soft); border-left-color: var(--ui-purple); }
-
-        /* Exact visual hierarchy from the supplied dashboard reference */
-        .notice { display: none; }
-        .header { min-height: 76px; padding-top: 10px; padding-bottom: 10px; }
-        .logo { width: 54px; height: 54px; }
-        .header-title { font-size: 20px; line-height: 1.25; }
-        .header-subtitle { margin-top: 2px; }
-        .header-meta { display: flex; align-items: center; gap: 14px; text-align: left; }
-        .header-meta-primary { color: #555861; font-size: 12px; }
-        .header-meta-primary strong { display: inline; margin-right: 5px; color: #3B3D44; font-size: 12px; }
-        .header-meta-time { padding-left: 14px; color: #7A7D86; border-left: 1px solid #E3E5EA; }
-        .disaster-tabs { top: 76px; }
-        .latest-panel { margin-top: 24px; padding: 22px; border-radius: 17px; }
-        .latest-panel .section-title::before { background: var(--ui-blue); }
-        .latest-status { margin: 12px 0 16px; background: #F8FAFE; }
-        .latest-status.is-alert { color: #765019; background: #FFF9EF; border-color: #F0DFC1; }
-        .latest-status.is-alert .latest-status-dot { background: #E29A35; box-shadow: 0 0 0 5px rgba(226,154,53,.11); }
-        .summary-card { position: relative; align-items: flex-start; min-height: 116px; padding: 18px 18px 16px 74px; text-align: left; border-top: 0!important; }
-        .summary-icon {
-            position: absolute; left: 18px; top: 20px;
-            width: 42px; height: 42px; display: grid; place-items: center;
-            color: var(--ui-blue); background: var(--ui-blue-soft); border-radius: 50%;
-            font-size: 12px; font-weight: 900; letter-spacing: -.2px;
-        }
-        .summary-number { color: var(--ui-blue)!important; font-size: 29px; line-height: 1; }
-        .summary-label { margin-top: 7px; color: #626670; font-size: 12px; }
-        .latest-panel .summary-card:nth-child(2) .summary-icon { color: var(--ui-purple); background: var(--ui-purple-soft); }
-        .latest-panel .summary-card:nth-child(3) .summary-icon { color: #D8752C; background: #FFF5EC; }
-        .source-card { transition: transform .18s ease, box-shadow .18s ease; }
-        .source-card:hover { transform: translateY(-1px); box-shadow: 0 10px 25px rgba(43,45,55,.075); }
-        @media(max-width:620px){
-            .header { min-height: 70px; }
-            .disaster-tabs { top: 70px; }
-            .header-meta { display: none; }
-            .summary-card { min-height: 92px; padding: 15px 14px 14px 66px; }
-            .summary-icon { left: 14px; top: 16px; width: 38px; height: 38px; }
-        }
     </style>
 </head>
 <body>
     <div class="page">
         <header class="header">
-            <img class="logo" src="./assets/TH-Vertical.png" alt="ตราสัญลักษณ์การนิคมอุตสาหกรรมแห่งประเทศไทย">
-            <div class="header-copy">
+            <img class="logo" src="./ieat_logo.png.PNG" alt="โลโก้ กนอ.">
+            <div>
                 <h1 class="header-title">ศูนย์เฝ้าระวังสถานการณ์ภัยพิบัติ</h1>
                 <p class="header-subtitle">สำหรับพื้นที่นิคมอุตสาหกรรมทั่วประเทศ</p>
             </div>
-            <div class="header-meta"><div class="header-meta-primary"><strong>IEAT e-Monitoring</strong>ข้อมูลสถานการณ์ย้อนหลัง 24 ชั่วโมง</div><div id="headerUpdated" class="header-meta-time">กำลังอัปเดตข้อมูล…</div></div>
         </header>
         <main class="content">
             <div class="notice"><strong>ภาพรวมสถานการณ์ในพื้นที่นิคมอุตสาหกรรมทั่วประเทศ</strong><br>ติดตามสถานการณ์น้ำท่วม พายุ แผ่นดินไหว ไฟป่า และภัยแล้งจากแหล่งข้อมูลภาครัฐ เพื่อประเมินผลกระทบที่อาจเกิดขึ้นในพื้นที่นิคมอุตสาหกรรม</div>
@@ -381,20 +196,6 @@
                 <button class="tab" data-filter="earthquake">แผ่นดินไหว</button>
                 <button class="tab" data-filter="drought">ภัยแล้ง</button>
             </nav>
-
-            <section class="latest-panel" aria-labelledby="latest-title">
-                <h2 id="latest-title" class="section-title">สถานการณ์ล่าสุด</h2>
-                <p class="latest-subtitle">สรุปข้อมูลแผ่นดินไหวจาก USGS ในช่วง 24 ชั่วโมงล่าสุด เพื่อประกอบการเฝ้าระวังพื้นที่นิคมอุตสาหกรรม</p>
-                <div class="latest-status">
-                    <div class="latest-status-dot" aria-hidden="true"></div>
-                    <div><strong id="situationHeadline">กำลังตรวจสอบสถานการณ์ล่าสุด</strong><span id="situationDetail">ระบบกำลังเชื่อมต่อแหล่งข้อมูล</span></div>
-                </div>
-                <div class="summary-grid">
-                    <div class="summary-card"><span class="summary-icon" aria-hidden="true">24H</span><strong id="latestEarthquakeCount" class="summary-number">-</strong><span class="summary-label">จำนวนเหตุการณ์ทั่วโลก</span></div>
-                    <div class="summary-card"><span class="summary-icon" aria-hidden="true">TH</span><strong id="latestNearThailandCount" class="summary-number">-</strong><span class="summary-label">เหตุการณ์ใกล้ประเทศไทย</span></div>
-                    <div class="summary-card"><span class="summary-icon" aria-hidden="true">M</span><strong id="latestMaxMagnitude" class="summary-number">-</strong><span class="summary-label">ขนาดสูงสุด</span></div>
-                </div>
-            </section>
 
             <h2 class="section-title map-heading">แผนที่เฝ้าระวังภัยพิบัติทั่วประเทศ</h2>
             <section class="map-panel">
@@ -447,26 +248,13 @@
                 <p class="source-description">ตรวจสอบประกาศแจ้งเตือนภัยและสถานการณ์ประจำวันจากศูนย์เตือนภัยพิบัติแห่งชาติ</p>
                 <div class="buttons"><a class="button button-primary" href="https://ndwc.disaster.go.th/" target="_blank" rel="noopener">ประกาศเตือนภัย ปภ.</a><a class="button button-secondary" href="https://ndwc.disaster.go.th/ndwc/cms?id=7085" target="_blank" rel="noopener">สถานการณ์ประจำวัน</a></div>
             </article>
-
-            <section class="operator-guide" aria-labelledby="guide-title">
-                <h2 id="guide-title" class="section-title">แนวทางการตรวจสอบและการปฏิบัติเบื้องต้น</h2>
-                <div class="guide-grid">
-                    <article class="guide-card operator"><h3>สำหรับผู้ประกอบการ</h3><ol><li>ตรวจสอบสถานการณ์ล่าสุดและประกาศจากหน่วยงานภาครัฐ</li><li>ประเมินความเสี่ยงต่อพนักงาน อาคาร ระบบสาธารณูปโภค และกระบวนการผลิต</li><li>ทบทวนแผนฉุกเฉิน เส้นทางอพยพ และช่องทางติดต่อภายในองค์กร</li><li>แจ้งเจ้าหน้าที่นิคมอุตสาหกรรมเมื่อพบเหตุผิดปกติหรือได้รับผลกระทบ</li></ol></article>
-                    <article class="guide-card officer"><h3>สำหรับเจ้าหน้าที่</h3><ol><li>ยืนยันข้อมูลกับหน่วยงานต้นทางและตรวจสอบพื้นที่ที่อาจได้รับผลกระทบ</li><li>ประสานผู้ประกอบการและหน่วยงานที่เกี่ยวข้องตามระดับความรุนแรง</li><li>ติดตามสถานการณ์อย่างต่อเนื่องและบันทึกลำดับเหตุการณ์</li><li>เผยแพร่คำแนะนำหรือประกาศอย่างเป็นทางการผ่านช่องทางที่กำหนด</li></ol></article>
-                </div>
-                <p class="official-note">ข้อมูลในหน้านี้ใช้เพื่อสนับสนุนการเฝ้าระวังเบื้องต้น ควรตรวจสอบประกาศอย่างเป็นทางการจากหน่วยงานที่รับผิดชอบก่อนตัดสินใจดำเนินการทุกครั้ง</p>
-            </section>
             <p class="updated">แหล่งข้อมูลอ้างอิง: GISTDA, ThaiWater, กรมอุตุนิยมวิทยา และกรมป้องกันและบรรเทาสาธารณภัย (ปภ.)</p>
         </main>
     </div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
         const map = L.map("map", { scrollWheelZoom: false }).setView([15.5, 101], 5);
-        L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
-            subdomains: "abcd",
-            maxZoom: 20,
-            attribution: "&copy; OpenStreetMap contributors &copy; CARTO"
-        }).addTo(map);
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 18, attribution: "© OpenStreetMap contributors" }).addTo(map);
         const thailandBounds = L.latLngBounds([5.4, 97.2], [20.7, 105.8]);
         L.rectangle(thailandBounds, { color: "#6B3F91", weight: 1, fillOpacity: .03 }).addTo(map).bindTooltip("ประเทศไทย");
         function formatNumber(value) { return Number(value || 0).toLocaleString("th-TH"); }
@@ -505,30 +293,12 @@
                 document.getElementById("earthquakeCount").textContent = formatNumber(features.length);
                 document.getElementById("nearThailandCount").textContent = formatNumber(nearThailand);
                 document.getElementById("maxMagnitude").textContent = maxMagnitude ? maxMagnitude.toFixed(1) : "-";
-                document.getElementById("latestEarthquakeCount").textContent = formatNumber(features.length);
-                document.getElementById("latestNearThailandCount").textContent = formatNumber(nearThailand);
-                document.getElementById("latestMaxMagnitude").textContent = maxMagnitude ? maxMagnitude.toFixed(1) : "-";
-                document.getElementById("situationHeadline").textContent = nearThailand > 0
-                    ? `พบเหตุการณ์ใกล้ประเทศไทย ${formatNumber(nearThailand)} เหตุการณ์`
-                    : "ไม่พบเหตุการณ์ใกล้ประเทศไทยในข้อมูลล่าสุด";
-                document.getElementById("situationDetail").textContent = maxMagnitude
-                    ? `เหตุการณ์ที่มีขนาดสูงสุดทั่วโลกอยู่ที่ ${maxMagnitude.toFixed(1)}`
-                    : "ไม่พบข้อมูลขนาดแผ่นดินไหว";
-                document.querySelector(".latest-status").classList.toggle("is-alert", nearThailand > 0);
-                document.getElementById("headerUpdated").textContent = "อัปเดตล่าสุด " + new Date().toLocaleString("th-TH", { dateStyle: "medium", timeStyle: "short" });
                 status.textContent = "อัปเดตข้อมูลแผ่นดินไหวล่าสุด: " + new Date().toLocaleString("th-TH");
             } catch (error) {
                 console.error(error);
                 document.getElementById("earthquakeCount").textContent = "-";
                 document.getElementById("nearThailandCount").textContent = "-";
                 document.getElementById("maxMagnitude").textContent = "-";
-                document.getElementById("latestEarthquakeCount").textContent = "-";
-                document.getElementById("latestNearThailandCount").textContent = "-";
-                document.getElementById("latestMaxMagnitude").textContent = "-";
-                document.getElementById("situationHeadline").textContent = "ไม่สามารถเชื่อมต่อข้อมูลสถานการณ์ล่าสุดได้";
-                document.getElementById("situationDetail").textContent = "กรุณาตรวจสอบข้อมูลจากหน่วยงานที่เกี่ยวข้องโดยตรง";
-                document.querySelector(".latest-status").classList.add("is-alert");
-                document.getElementById("headerUpdated").textContent = "ไม่สามารถอัปเดตข้อมูลได้";
                 status.textContent = "ไม่สามารถโหลดแผ่นดินไหวล่าสุดได้ กรุณาลองใหม่อีกครั้ง";
             }
         }
