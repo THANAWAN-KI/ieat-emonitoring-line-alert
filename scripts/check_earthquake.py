@@ -19,6 +19,7 @@ from zoneinfo import ZoneInfo
 RSS_URL = os.getenv("TMD_EARTHQUAKE_RSS_URL", "https://earthquake.tmd.go.th/feed/rss_tmd.xml")
 STATE_PATH = Path(os.getenv("EARTHQUAKE_STATE_PATH", "data/earthquake-state.json"))
 LINE_API = "https://api.line.me/v2/bot/message/push"
+GIS_DASHBOARD_URL = "https://www.arcgis.com/apps/dashboards/4bdeaa7907734b32b5ddc64705c86f7d"
 THAI_TZ = ZoneInfo("Asia/Bangkok")
 MAG_RE = re.compile(r"(?:ขนาด|Magnitude|Mag\.?)[^0-9]{0,12}([0-9]+(?:\.[0-9]+)?)", re.I)
 DEPTH_RE = re.compile(r"(?:ความลึก|Depth)[^0-9]{0,12}([0-9]+(?:\.[0-9]+)?)", re.I)
@@ -124,6 +125,11 @@ def flex_message(event: dict, test: bool = False) -> dict:
     depth = f"{event['depth']} กม." if event.get("depth") else "ไม่ระบุ"
     coordinates = event.get("coordinates") or "ไม่ระบุ"
     estate_guidance = industrial_guidance(event.get("magnitude"))
+    map_url = (
+        f"https://www.google.com/maps/search/?api=1&query={coordinates.replace(' ', '')}"
+        if event.get("coordinates")
+        else (event.get("link") or "https://earthquake.tmd.go.th/")
+    )
 
     header_contents = [
         {"type": "box", "layout": "horizontal", "alignItems": "center", "contents": [
@@ -216,8 +222,12 @@ def flex_message(event: dict, test: bool = False) -> dict:
             ]},
             "footer": {"type": "box", "layout": "vertical", "paddingAll": "16px", "contents": [
                 {"type": "button", "style": "primary", "height": "sm", "color": status_color,
-                 "action": {"type": "uri", "label": "ดูรายละเอียดเหตุการณ์",
-                            "uri": event.get("link") or "https://earthquake.tmd.go.th/"}},
+                 "action": {"type": "uri", "label": "📍 เปิดดูตำแหน่งแผ่นดินไหว",
+                            "uri": map_url}},
+                {"type": "button", "style": "secondary", "height": "sm", "margin": "sm",
+                 "color": status_color,
+                 "action": {"type": "uri", "label": "🗺️ ดู Dashboard แผ่นดินไหว (GIS)",
+                            "uri": GIS_DASHBOARD_URL}},
                 {"type": "box", "layout": "horizontal", "justifyContent": "center", "margin": "md",
                  "contents": [
                     {"type": "text", "text": "สายด่วนกรมอุตุนิยมวิทยา", "size": "xxs",
