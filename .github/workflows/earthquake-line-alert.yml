@@ -33,7 +33,7 @@ jobs:
 
       - name: บันทึกเหตุการณ์ล่าสุดเพื่อป้องกันการแจ้งซ้ำ
         run: |
-          if git diff --quiet -- data/earthquake-state.json; then
+          if [ -z "$(git status --porcelain -- data/earthquake-state.json)" ]; then
             echo "ไม่มีสถานะที่ต้องบันทึก"
             exit 0
           fi
