@@ -3042,6 +3042,27 @@ def send_event_report(
 
 def main() -> int:
 
+    # ป้องกัน GitHub Actions เริ่มงานล่าช้าจนส่ง LINE นอกเวลาที่กำหนด
+    # อนุญาตเฉพาะ 08:30-16:30 น. ตามเวลาประเทศไทย
+    current_time = now_thailand()
+    current_minutes = current_time.hour * 60 + current_time.minute
+    start_minutes = 8 * 60 + 30
+    end_minutes = 16 * 60 + 30
+
+    if not start_minutes <= current_minutes <= end_minutes:
+        print("=" * 72)
+        print(
+            "ยกเลิกการทำงาน: อยู่นอกช่วงเวลา "
+            "08:30-16:30 น. ตามเวลาประเทศไทย"
+        )
+        print(
+            "เวลาประเทศไทยปัจจุบัน: "
+            f"{thai_datetime_text(current_time)}"
+        )
+        print("ไม่มีการดาวน์โหลดข้อมูล ไม่มีการส่ง LINE และไม่บันทึก state")
+        print("=" * 72)
+        return 0
+
     print("=" * 72)
     print(
         "IEAT e-Monitoring LINE Alert "
