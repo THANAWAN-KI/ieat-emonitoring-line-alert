@@ -1754,6 +1754,20 @@ body{font-size:17px}
 .download-card span{display:block;margin-top:5px;color:var(--muted);font-size:13px;line-height:1.55}
 .summary-download-btn{flex:none;padding:12px 16px;border:0;border-radius:9px;background:var(--purple);color:#fff;font:800 14px "Sarabun","Noto Sans Thai",Tahoma,sans-serif;cursor:pointer}
 .summary-download-btn:disabled{opacity:.6;cursor:wait}
+.operations-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.operation-card{padding:16px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+.operation-card .operation-label{display:block;color:var(--muted);font-size:12px;line-height:1.45}
+.operation-card strong{display:block;margin-top:5px;color:var(--purple);font-size:24px;line-height:1.2}
+.operation-card small{display:block;margin-top:5px;color:var(--muted);font-size:11px;line-height:1.5}
+.operation-card.alert strong{color:var(--red)}.operation-card.good strong{color:var(--green)}
+.insight-card{margin-top:10px;padding:16px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+.insight-row{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #ECE8EF}
+.insight-row:first-child{padding-top:0}.insight-row:last-child{padding-bottom:0;border-bottom:0}
+.insight-row span{color:var(--muted);font-size:12px}.insight-row strong{color:var(--ink);font-size:13px;text-align:right}
+.parameter-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
+.parameter-chip{padding:7px 10px;border-radius:999px;color:var(--purple);background:var(--purple-soft);border:1px solid var(--line);font-size:11px;font-weight:700}
+.live-meta{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:11px}
+.live-pulse{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px var(--green-soft)}
 @media(max-width:620px){
  body{font-size:17px}.brand-title{font-size:18px}.brand-subtitle{font-size:12px}
  .hero h1{font-size:27px}.hero p{font-size:15px}
@@ -1763,6 +1777,8 @@ body{font-size:17px}
  .param,.comment,.param-title{font-size:13px}.action{font-size:13px}
  .download-card{display:block;padding:16px}.download-card strong{font-size:16px}.download-card span{font-size:13px}
  .summary-download-btn{width:100%;margin-top:13px;font-size:14px}
+ .operations-grid{grid-template-columns:1fr 1fr}.operation-card{padding:13px}.operation-card strong{font-size:21px}
+ .insight-row{display:block}.insight-row strong{display:block;margin-top:4px;text-align:left}
 }
 @media print{.download-section{display:none!important}}
 </style>
@@ -1872,6 +1888,7 @@ body{font-size:17px}
 
 <nav class="quick-nav" aria-label="เมนูรายงานสถานี">
   <a href="#station-overview">ภาพรวมสถานี</a>
+  <a href="#operational-overview">ข้อมูลสำคัญ</a>
   <a href="#station-types">ประเภทสถานี</a>
   <a href="#watch-level">ระดับเฝ้าระวัง</a>
   <a href="#station-details">รายละเอียดสถานี</a>
@@ -2012,6 +2029,47 @@ body{font-size:17px}
     </div>
   </div>
 
+</section>
+
+<section id="operational-overview" class="section">
+  <div class="section-title">ข้อมูลสำคัญเพื่อการติดตาม</div>
+  <div class="operations-grid">
+    <article class="operation-card alert">
+      <span class="operation-label">สถานีที่มีการแจ้งเตือน</span>
+      <strong id="alertStationCount">0</strong>
+      <small>สถานีที่พบค่าพารามิเตอร์ต้องติดตาม</small>
+    </article>
+    <article class="operation-card">
+      <span class="operation-label">นิคมอุตสาหกรรมที่เกี่ยวข้อง</span>
+      <strong id="affectedEstateCount">0</strong>
+      <small>พื้นที่ที่มีสถานีแจ้งเตือนในข้อมูลล่าสุด</small>
+    </article>
+    <article class="operation-card good">
+      <span class="operation-label">สถานีที่มีพิกัด</span>
+      <strong id="coordinateCoverage">0%</strong>
+      <small>พร้อมเปิดตำแหน่งเพื่อสนับสนุนการตรวจสอบ</small>
+    </article>
+    <article class="operation-card good">
+      <span class="operation-label">ความครบถ้วนของข้อมูล</span>
+      <strong id="dataCoverage">0%</strong>
+      <small>เทียบรายละเอียดสถานีกับจำนวนสถานีทั้งหมด</small>
+    </article>
+  </div>
+  <div class="insight-card">
+    <div class="insight-row">
+      <span>สถานะข้อมูลล่าสุด</span>
+      <strong id="freshnessText">กำลังตรวจสอบ…</strong>
+    </div>
+    <div class="insight-row">
+      <span>ประเภทที่ควรติดตามมากที่สุด</span>
+      <strong id="priorityTypeText">-</strong>
+    </div>
+    <div class="insight-row">
+      <span>การอัปเดตหน้า Dashboard</span>
+      <strong class="live-meta"><i class="live-pulse"></i><span id="autoRefreshText">อัตโนมัติทุก 5 นาที</span></strong>
+    </div>
+    <div id="parameterChips" class="parameter-chips"></div>
+  </div>
 </section>
 
 
@@ -2281,6 +2339,25 @@ const esc =
           }[m])
       );
 
+function stationGroup(value){
+  const type=String(value||"").trim().toUpperCase();
+  if(type.includes("AQM")||type.includes("AIR QUALITY")||type.includes("AIR_QUALITY")) return "AQMs";
+  if(type.includes("WQM")||type.includes("WATER QUALITY")||type.includes("WATER_QUALITY")) return "WQMs";
+  if(type.includes("CEM")) return "CEMs";
+  return "ประเภทอื่น";
+}
+
+function stationAlarm(station){
+  return String(station.parameter_alarm||station.ParameterAlram||"").trim();
+}
+
+function hasCoordinate(station){
+  const lat=station.latitude??station.Latitude;
+  const lon=station.longitude??station.Longitude;
+  return lat!==null&&lat!==undefined&&lon!==null&&lon!==undefined&&
+    Number.isFinite(Number(lat))&&Number.isFinite(Number(lon));
+}
+
 
 /* =========================================================
    TYPE DATA
@@ -2449,7 +2526,7 @@ function renderStations(data){
     allStations.filter(
       station => {
 
-        const type = String(station.station_type || "").toUpperCase();
+        const type = stationGroup(station.station_type || station.Type);
         const status = String(station.status || station.Status || "").toUpperCase();
         const haystack = [
           station.station_name, station.StationTH,
@@ -2525,10 +2602,7 @@ function renderStations(data){
       .map(
         (s,index) => {
 
-          const type =
-            String(
-              s.station_type || "-"
-            );
+          const type = stationGroup(s.station_type || s.Type);
 
 
           const status =
@@ -2909,6 +2983,50 @@ async function loadStatus(){
           ? `ตรวจสอบค่าที่เกิน ${fmt(data.urgent_count)} รายการ`
           : "ไม่มีงานเร่งด่วน";
 
+    const allStations = Array.isArray(data.all_stations) ? data.all_stations
+      : Array.isArray(data.station_details) ? data.station_details
+      : Array.isArray(data.stations) ? data.stations : [];
+    const alertStations = allStations.filter(s => {
+      const alarm=stationAlarm(s).toLowerCase();
+      return alarm && !["-","none","null","nan","n/a"].includes(alarm);
+    });
+    const alertCount = num(data.alert_station_count) || alertStations.length;
+    const affectedEstates = new Set(
+      alertStations.map(s=>String(s.estate_name||s.IndustryZone||"").trim())
+        .filter(v=>v&&v!=="-")
+    );
+    const coordinateCount = allStations.filter(hasCoordinate).length;
+    const coordinatePercent = allStations.length ? Math.round(coordinateCount/allStations.length*100) : 0;
+    const detailCoverage = total ? Math.min(100,Math.round(allStations.length/total*100)) : 0;
+    $("alertStationCount").textContent=fmt(alertCount);
+    $("affectedEstateCount").textContent=fmt(num(data.estate_count)||affectedEstates.size);
+    $("coordinateCoverage").textContent=coordinatePercent+"%";
+    $("dataCoverage").textContent=detailCoverage+"%";
+
+    const alertByType={AQMs:0,WQMs:0,CEMs:0};
+    alertStations.forEach(s=>{const key=stationGroup(s.station_type||s.Type);if(key in alertByType)alertByType[key]++;});
+    const priorityType=Object.entries(alertByType).sort((a,b)=>b[1]-a[1])[0];
+    $("priorityTypeText").textContent=priorityType&&priorityType[1]>0
+      ? `${priorityType[0]} • ${fmt(priorityType[1])} สถานี`
+      : "ไม่พบประเภทที่ต้องเร่งติดตาม";
+
+    const parameters = String(data.parameter_text||"").split(",")
+      .map(v=>v.trim()).filter(v=>v&&v!=="-").slice(0,8);
+    $("parameterChips").innerHTML = parameters.length
+      ? parameters.map(v=>`<span class="parameter-chip">${esc(v)}</span>`).join("")
+      : '<span class="parameter-chip">ไม่พบพารามิเตอร์แจ้งเตือน</span>';
+
+    const parsedUpdated=Date.parse(data.updated_at||"");
+    if(Number.isFinite(parsedUpdated)){
+      const ageMinutes=Math.max(0,Math.round((Date.now()-parsedUpdated)/60000));
+      $("freshnessText").textContent=ageMinutes<=15
+        ? `เป็นปัจจุบัน • ${fmt(ageMinutes)} นาทีที่ผ่านมา`
+        : ageMinutes<=60 ? `ควรติดตาม • ${fmt(ageMinutes)} นาทีที่ผ่านมา`
+        : `ข้อมูลล่าช้า • ${fmt(Math.round(ageMinutes/60))} ชั่วโมงที่ผ่านมา`;
+    }else{
+      $("freshnessText").textContent=data.latest_data_time||updated;
+    }
+
 
     /* =====================================================
        SEVERITY
@@ -3226,6 +3344,7 @@ async function downloadSummaryImage(){
 ========================================================= */
 
 loadStatus();
+setInterval(loadStatus,5*60*1000);
 
 </script>
 
