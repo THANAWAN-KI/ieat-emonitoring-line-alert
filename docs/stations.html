@@ -3287,6 +3287,310 @@ body.report-ready .report-view{
       .station-buttons { grid-template-columns:1fr; }
     }
 
+
+
+    /* Executive dashboard polish */
+    .dss-sidebar {
+      background:linear-gradient(180deg,#FFFFFF 0%,#FFFFFF 72%,#FCFAFD 100%);
+    }
+
+    .dss-brand {
+      margin:0 -1px;
+      padding-left:17px;
+      padding-right:17px;
+    }
+
+    .dss-brand-mark {
+      width:34px;
+      height:34px;
+      background:var(--dss-purple-soft);
+      border-radius:10px;
+    }
+
+    .dss-nav a {
+      position:relative;
+      transition:background .18s ease,color .18s ease,transform .18s ease;
+    }
+
+    .dss-nav a:hover { transform:translateX(2px); }
+
+    .dss-nav a.active::after {
+      position:absolute;
+      right:10px;
+      width:5px;
+      height:5px;
+      background:rgba(255,255,255,.78);
+      border-radius:50%;
+      content:"";
+    }
+
+    .page-header {
+      justify-content:space-between;
+    }
+
+    .header-live {
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      color:#62656D;
+      background:#FFFFFF;
+      border:1px solid var(--dss-line);
+      border-radius:9px;
+      box-shadow:0 3px 10px rgba(43,45,55,.035);
+      font-size:11px;
+      font-weight:700;
+    }
+
+    .header-live::before {
+      width:8px;
+      height:8px;
+      background:#8CC63F;
+      border-radius:50%;
+      box-shadow:0 0 0 3px #F0F8E7;
+      content:"";
+    }
+
+    #content {
+      animation:dssFadeIn .28s ease both;
+    }
+
+    @keyframes dssFadeIn {
+      from { opacity:0; transform:translateY(3px); }
+      to { opacity:1; transform:none; }
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at 90% 10%,rgba(107,63,145,.055),transparent 28%),
+        #FFFFFF;
+    }
+
+    .hero h1 {
+      letter-spacing:-.4px;
+    }
+
+    .status {
+      background:
+        radial-gradient(circle at 100% 0,rgba(47,111,237,.045),transparent 34%),
+        #FFFFFF;
+    }
+
+    .status-dot.alert {
+      background:var(--dss-red);
+      box-shadow:0 0 0 5px #FFF2F2;
+    }
+
+    .section-title {
+      display:flex;
+      align-items:center;
+      gap:9px;
+    }
+
+    .section-title::after {
+      width:34px;
+      height:2px;
+      background:var(--dss-purple);
+      border-radius:99px;
+      opacity:.45;
+      content:"";
+    }
+
+    .kpi,
+    .type,
+    .sev,
+    .station {
+      transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+    }
+
+    .kpi:hover,
+    .type:hover,
+    .sev:hover,
+    .station:hover {
+      transform:translateY(-2px);
+      border-color:#DED6E5;
+      box-shadow:0 11px 26px rgba(43,45,55,.08);
+    }
+
+    .kpi::after {
+      position:absolute;
+      inset:auto 15px 0 15px;
+      height:3px;
+      background:var(--dss-purple);
+      border-radius:99px 99px 0 0;
+      opacity:.14;
+      content:"";
+    }
+
+    .kpi.online::after { background:var(--dss-green); }
+    .kpi.offline::after { background:var(--dss-red); }
+
+    .progress-card {
+      display:grid;
+      grid-template-columns:190px minmax(0,1fr) 52px;
+      align-items:center;
+      gap:14px;
+    }
+
+    .progress-head {
+      display:contents;
+    }
+
+    .progress-head span:first-child {
+      color:#595C64;
+      font-weight:600;
+    }
+
+    .progress-head span:last-child {
+      grid-column:3;
+      grid-row:1;
+      text-align:right;
+      font-size:15px;
+    }
+
+    .progress-track {
+      grid-column:2;
+      grid-row:1;
+      width:100%;
+      margin:0;
+    }
+
+    .decision-card {
+      min-height:82px;
+      padding:0 16px;
+      align-items:stretch;
+    }
+
+    .decision-item {
+      display:grid;
+      grid-template-columns:minmax(150px,.7fr) minmax(180px,1fr);
+      align-items:center;
+      gap:12px;
+      padding:14px;
+    }
+
+    .decision-item strong,
+    .decision-item.green strong {
+      font-size:13px;
+      line-height:1.4;
+    }
+
+    .type {
+      position:relative;
+      overflow:hidden;
+    }
+
+    .type::after {
+      position:absolute;
+      right:-24px;
+      bottom:-28px;
+      width:78px;
+      height:78px;
+      border:15px solid var(--dss-purple);
+      border-radius:50%;
+      opacity:.025;
+      content:"";
+    }
+
+    .mini {
+      border:1px solid rgba(107,63,145,.055);
+    }
+
+    .severity .sev:nth-child(1) {
+      border-left-color:var(--dss-red);
+      background:linear-gradient(135deg,#FFFFFF,#FFF7F7);
+    }
+
+    .severity .sev:nth-child(1) b { color:var(--dss-red); }
+
+    .severity .sev:nth-child(2) {
+      border-left-color:var(--dss-orange);
+      background:linear-gradient(135deg,#FFFFFF,#FFF9F3);
+    }
+
+    .severity .sev:nth-child(2) b { color:var(--dss-orange); }
+
+    .severity .sev:nth-child(3) {
+      border-left-color:var(--dss-purple);
+      background:linear-gradient(135deg,#FFFFFF,#FAF7FC);
+    }
+
+    .export-panel {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:15px 17px;
+    }
+
+    .export-panel::before {
+      color:var(--dss-muted);
+      font-size:12px;
+      content:"สร้างภาพสรุปรายงานสำหรับนำเสนอหรือส่งผ่าน LINE";
+    }
+
+    .filter-wrap {
+      padding:3px;
+      background:#FFFFFF;
+      border:1px solid var(--dss-line);
+      border-radius:10px;
+      width:max-content;
+      max-width:100%;
+    }
+
+    .filter-btn {
+      border:0;
+    }
+
+    .station-search {
+      min-height:42px;
+    }
+
+    .alert-box {
+      background:rgba(255,255,255,.72);
+    }
+
+    .station {
+      position:relative;
+      overflow:hidden;
+      background:#FFFFFF;
+    }
+
+    .station::after {
+      position:absolute;
+      right:0;
+      top:0;
+      width:44px;
+      height:3px;
+      background:var(--dss-purple);
+      border-radius:0 0 0 99px;
+      opacity:.65;
+      content:"";
+    }
+
+    .badge {
+      border:1px solid rgba(107,63,145,.09);
+    }
+
+    @media(max-width:900px) {
+      .header-live { display:none; }
+      .progress-card {
+        grid-template-columns:1fr 48px;
+      }
+      .progress-head span:first-child { grid-column:1/3; }
+      .progress-track { grid-column:1; grid-row:2; }
+      .progress-head span:last-child { grid-column:2; grid-row:2; }
+      .decision-item { grid-template-columns:1fr; gap:5px; }
+    }
+
+    @media(max-width:620px) {
+      .section-title::after { width:24px; }
+      .progress-card { padding:14px; }
+      .export-panel { display:block; }
+      .export-panel::before { display:block; margin-bottom:10px; line-height:1.5; }
+      .filter-wrap { width:100%; }
+    }
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
@@ -3323,6 +3627,7 @@ body.report-ready .report-view{
     <div class="brand-title">รายงานสถานะสถานีตรวจวัด</div>
     <div class="brand-subtitle">สรุปสถานการณ์ ความพร้อมใช้งาน และผลการตรวจวัดครบทุกสถานี</div>
   </div>
+  <div class="header-live">ข้อมูลระบบพร้อมใช้งาน</div>
 </header>
 
 
