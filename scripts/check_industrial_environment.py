@@ -180,7 +180,7 @@ def flex(event: dict, test: bool = False) -> dict:
                                    "color": "#FFFFFF", "align": "center",
                                    "wrap": True}]}
                 ]},
-                {"type": "text", "text": event["kind"], "size": "lg",
+                {"type": "text", "text": event["kind"], "size": "md",
                  "weight": "bold", "color": "#FF4B0A", "margin": "xl"},
                 {"type": "text", "text": event["value"], "size": "3xl",
                  "weight": "bold", "color": "#FF4B0A", "margin": "sm"},
