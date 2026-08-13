@@ -1502,42 +1502,29 @@ def build_event_summary_bubble(
 
         body_contents.append({
             "type": "box",
-            "layout": "horizontal",
+            "layout": "vertical",
             "margin": "xs",
-            "paddingAll": "6px",
+            "paddingAll": "4px",
             "backgroundColor": "#F8F9FA",
             "cornerRadius": "7px",
-            "alignItems": "center",
             "contents": [
-                image_component(
-                    event_icon_url(event),
+                text_component(
+                    title,
                     size="xs",
+                    color=color,
+                    weight="bold",
                 ),
-                {
-                    "type": "box",
-                    "layout": "vertical",
-                    "margin": "xs",
-                    "flex": 1,
-                    "contents": [
-                        text_component(
-                            title,
-                            size="xs",
-                            color=color,
-                            weight="bold",
-                        ),
-                        text_component(
-                            safe_text(
-                                event.get(
-                                    "station_name"
-                                )
-                            ),
-                            size="xs",
-                            color="#30283A",
-                            margin="xs",
-                            wrap=True,
-                        ),
-                    ],
-                },
+                text_component(
+                    safe_text(
+                        event.get(
+                            "station_name"
+                        )
+                    ),
+                    size="xs",
+                    color="#30283A",
+                    margin="none",
+                    wrap=True,
+                ),
             ],
         })
 
