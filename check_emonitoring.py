@@ -1386,7 +1386,7 @@ def build_event_summary_bubble(
                         f"{len(events)} เหตุการณ์ "
                         "จากรอบตรวจสอบล่าสุด"
                     ),
-                    size="xxs",
+                    size="xs",
                     color="#777777",
                     margin="xs",
                     align="center",
@@ -1420,7 +1420,7 @@ def build_event_summary_bubble(
                         ),
                         text_component(
                             "Alarm ใหม่/รุนแรงขึ้น",
-                            size="xxs",
+                            size="xs",
                             color="#777777",
                             align="center",
                             margin="xs",
@@ -1447,7 +1447,7 @@ def build_event_summary_bubble(
                         ),
                         text_component(
                             "เฝ้าติดตาม",
-                            size="xxs",
+                            size="xs",
                             color="#777777",
                             align="center",
                             margin="xs",
@@ -1474,7 +1474,7 @@ def build_event_summary_bubble(
                         ),
                         text_component(
                             "กลับปกติ",
-                            size="xxs",
+                            size="xs",
                             color="#777777",
                             align="center",
                             margin="xs",
@@ -1511,7 +1511,7 @@ def build_event_summary_bubble(
             "contents": [
                 image_component(
                     event_icon_url(event),
-                    size="xxs",
+                    size="xs",
                 ),
                 {
                     "type": "box",
@@ -1521,7 +1521,7 @@ def build_event_summary_bubble(
                     "contents": [
                         text_component(
                             title,
-                            size="xxs",
+                            size="xs",
                             color=color,
                             weight="bold",
                         ),
@@ -1531,7 +1531,7 @@ def build_event_summary_bubble(
                                     "station_name"
                                 )
                             ),
-                            size="xxs",
+                            size="xs",
                             color="#30283A",
                             margin="xs",
                             wrap=True,
@@ -1549,7 +1549,7 @@ def build_event_summary_bubble(
                     f"{len(sorted_events) - 12} "
                     "เหตุการณ์ ดูรายละเอียดใน Dashboard"
                 ),
-                size="xxs",
+                size="xs",
                 color="#777777",
                 margin="xs",
                 align="center",
@@ -1566,12 +1566,12 @@ def build_event_summary_bubble(
         "contents": [
             text_component(
                 "ตรวจสอบล่าสุด",
-                size="xxs",
+                size="xs",
                 color="#6C757D",
             ),
             text_component(
                 report_time_text(),
-                size="xxs",
+                size="xs",
                 color="#30283A",
                 weight="bold",
                 margin="xs",
@@ -1581,7 +1581,7 @@ def build_event_summary_bubble(
 
     return {
         "type": "bubble",
-        "size": "mega",
+        "size": "giga",
         "styles": {
             "header": {
                 "backgroundColor": "#FFFFFF"
@@ -1694,14 +1694,14 @@ def detail_row(
         "contents": [
             text_component(
                 label,
-                size="xxs",
+                size="xs",
                 color="#777777",
                 weight="bold",
                 flex=2,
             ),
             text_component(
                 value,
-                size="xxs",
+                size="xs",
                 color=value_color,
                 weight="bold",
                 wrap=True,
@@ -1754,7 +1754,7 @@ def build_header(
                             ),
                             text_component(
                                 subtitle,
-                                size="xxs",
+                                size="xs",
                                 color="#777777",
                                 margin="xs",
                             ),
@@ -1813,7 +1813,7 @@ def build_summary_bubble(
         ),
         text_component(
             status_subtitle,
-            size="xxs",
+            size="xs",
             color="#716C6B",
             margin="xs",
             align="center",
@@ -1860,7 +1860,7 @@ def build_summary_bubble(
                         ),
                         text_component(
                             "สถานีแจ้งเตือน",
-                            size="xxs",
+                            size="xs",
                             color="#716C6B",
                             align="center",
                             margin="xs",
@@ -1884,7 +1884,7 @@ def build_summary_bubble(
                         ),
                         text_component(
                             "รายการ",
-                            size="xxs",
+                            size="xs",
                             color="#716C6B",
                             align="center",
                             margin="xs",
@@ -1908,7 +1908,7 @@ def build_summary_bubble(
                         ),
                         text_component(
                             "นิคมฯ",
-                            size="xxs",
+                            size="xs",
                             color="#716C6B",
                             align="center",
                             margin="xs",
@@ -1927,7 +1927,7 @@ def build_summary_bubble(
             "contents": [
                 text_component(
                     f"{urgent_count}",
-                    size="xxs",
+                    size="xs",
                     color="#C51F35",
                     weight="bold",
                     align="center",
@@ -1935,7 +1935,7 @@ def build_summary_bubble(
                 ),
                 text_component(
                     f"{watch_count}",
-                    size="xxs",
+                    size="xs",
                     color="#E67700",
                     weight="bold",
                     align="center",
@@ -1943,7 +1943,7 @@ def build_summary_bubble(
                 ),
                 text_component(
                     f"{follow_count}",
-                    size="xxs",
+                    size="xs",
                     color="#2B8A3E",
                     weight="bold",
                     align="center",
@@ -1987,7 +1987,7 @@ def build_summary_bubble(
                     ),
                     text_component(
                         "ทั้งหมด",
-                        size="xxs",
+                        size="xs",
                         color="#716C6B",
                         align="center",
                         margin="xs",
@@ -2011,7 +2011,7 @@ def build_summary_bubble(
                     ),
                     text_component(
                         "ONLINE",
-                        size="xxs",
+                        size="xs",
                         color="#18794E",
                         weight="bold",
                         align="center",
@@ -2036,7 +2036,7 @@ def build_summary_bubble(
                     ),
                     text_component(
                         "OFFLINE",
-                        size="xxs",
+                        size="xs",
                         color="#C51F35",
                         weight="bold",
                         align="center",
@@ -2068,14 +2068,14 @@ def build_summary_bubble(
         "contents": [
             text_component(
                 "ประเภท",
-                size="xxs",
+                size="xs",
                 color="#495057",
                 weight="bold",
                 flex=3,
             ),
             text_component(
                 "ทั้งหมด",
-                size="xxs",
+                size="xs",
                 color="#495057",
                 weight="bold",
                 align="center",
@@ -2083,7 +2083,7 @@ def build_summary_bubble(
             ),
             text_component(
                 "ONLINE",
-                size="xxs",
+                size="xs",
                 color="#18794E",
                 weight="bold",
                 align="center",
@@ -2091,7 +2091,7 @@ def build_summary_bubble(
             ),
             text_component(
                 "OFFLINE",
-                size="xxs",
+                size="xs",
                 color="#C51F35",
                 weight="bold",
                 align="center",
@@ -2123,20 +2123,20 @@ def build_summary_bubble(
             "contents": [
                 text_component(
                     group_name,
-                    size="xxs",
+                    size="xs",
                     color="#30283A",
                     flex=3,
                 ),
                 text_component(
                     str(data["total"]),
-                    size="xxs",
+                    size="xs",
                     color="#30283A",
                     align="center",
                     flex=1,
                 ),
                 text_component(
                     str(data["online"]),
-                    size="xxs",
+                    size="xs",
                     color="#18794E",
                     weight="bold",
                     align="center",
@@ -2144,7 +2144,7 @@ def build_summary_bubble(
                 ),
                 text_component(
                     str(data["offline"]),
-                    size="xxs",
+                    size="xs",
                     color="#C51F35",
                     weight="bold",
                     align="center",
@@ -2227,7 +2227,7 @@ def build_summary_bubble(
                 "contents": [
                     image_component(
                         icon_url,
-                        size="xxs",
+                        size="xs",
                     ),
                     {
                         "type": "box",
@@ -2237,13 +2237,13 @@ def build_summary_bubble(
                         "contents": [
                             text_component(
                                 title,
-                                size="xxs",
+                                size="xs",
                                 color=color,
                                 weight="bold",
                             ),
                             text_component(
                                 description,
-                                size="xxs",
+                                size="xs",
                                 color="#6C757D",
                                 margin="xs",
                             ),
@@ -2251,7 +2251,7 @@ def build_summary_bubble(
                     },
                     text_component(
                         f"{count} สถานี",
-                        size="xxs",
+                        size="xs",
                         color=color,
                         weight="bold",
                         align="end",
@@ -2269,12 +2269,12 @@ def build_summary_bubble(
         "contents": [
             text_component(
                 "ข้อมูลล่าสุดจาก e-Monitoring",
-                size="xxs",
+                size="xs",
                 color="#6C757D",
             ),
             text_component(
                 report_time_text(),
-                size="xxs",
+                size="xs",
                 color="#30283A",
                 weight="bold",
                 margin="xs",
@@ -2284,7 +2284,7 @@ def build_summary_bubble(
 
     return {
         "type": "bubble",
-        "size": "mega",
+        "size": "giga",
         "styles": {
             "header": {
                 "backgroundColor": "#FFFFFF"
@@ -2400,13 +2400,13 @@ def build_station_detail_bubble(
             "contents": [
                 text_component(
                     "•",
-                    size="xxs",
+                    size="xs",
                     color=severity["color"],
                     weight="bold",
                 ),
                 text_component(
                     parameter,
-                    size="xxs",
+                    size="xs",
                     color=severity["color"],
                     weight="bold",
                     wrap=True,
@@ -2420,7 +2420,7 @@ def build_station_detail_bubble(
         parameter_contents.append(
             text_component(
                 parameter_alarm,
-                size="xxs",
+                size="xs",
                 color=severity["color"],
                 weight="bold",
             )
@@ -2428,7 +2428,7 @@ def build_station_detail_bubble(
 
     return {
         "type": "bubble",
-        "size": "mega",
+        "size": "giga",
         "styles": {
             "header": {
                 "backgroundColor": "#FFFFFF"
@@ -2467,7 +2467,7 @@ def build_station_detail_bubble(
                     "contents": [
                         image_component(
                             severity["icon_url"],
-                            size="xxs",
+                            size="xs",
                         ),
                         text_component(
                             severity["title"],
@@ -2479,7 +2479,7 @@ def build_station_detail_bubble(
                         ),
                         text_component(
                             f"{alarm_count(station)} รายการ",
-                            size="xxs",
+                            size="xs",
                             color=severity["color"],
                             weight="bold",
                             align="end",
@@ -2564,7 +2564,7 @@ def build_station_detail_bubble(
                     "contents": [
                         text_component(
                             comment,
-                            size="xxs",
+                            size="xs",
                             color="#555555",
                             wrap=True,
                         ),
@@ -2589,7 +2589,7 @@ def build_station_detail_bubble(
                         and longitude is not None
                     )
                     else "ไม่พบพิกัดสถานี",
-                    size="xxs",
+                    size="xs",
                     color="#777777",
                     margin="xs",
                 ),
