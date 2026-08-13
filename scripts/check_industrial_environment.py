@@ -197,12 +197,10 @@ def flex(event: dict, test: bool = False) -> dict:
                      "color": "#333333", "wrap": True, "margin": "lg"},
                     {"type": "text", "text": f"• {tips[1]}", "size": "xs",
                      "color": "#333333", "wrap": True, "margin": "md"},
-                    {"type": "text", "text": f"• {tips[2]}", "size": "xs",
-                     "color": "#333333", "wrap": True, "margin": "md"},
                 ]},
             ]},
-            "footer": {"type": "box", "layout": "vertical", "paddingAll": "16px",
-                       "spacing": "md", "contents": [
+            "footer": {"type": "box", "layout": "vertical", "paddingAll": "13px",
+                       "spacing": "sm", "contents": [
                 {"type": "button", "style": "primary", "height": "sm",
                  "color": "#52057F",
                  "action": {"type": "uri", "label": "ดูข้อมูลจากหน่วยงาน",
@@ -210,7 +208,7 @@ def flex(event: dict, test: bool = False) -> dict:
                 {"type": "separator", "margin": "md", "color": "#598C14"},
                 {"type": "text",
                  "text": "ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย กนอ.",
-                 "size": "xs", "weight": "bold", "color": "#52057F",
+                 "size": "xxs", "weight": "bold", "color": "#52057F",
                  "align": "center", "wrap": True},
             ]},
         },
