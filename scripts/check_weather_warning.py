@@ -182,9 +182,9 @@ def flex_message(item: dict, test: bool = False) -> dict:
                                    "weight": "bold", "color": "#FFFFFF",
                                    "align": "center", "wrap": True}]}
                 ]},
-                {"type": "text", "text": "ประเภทภัย", "size": "sm",
+                {"type": "text", "text": "ประเภทภัย", "size": "md",
                  "weight": "bold", "color": "#FF4B0A", "margin": "xl"},
-                {"type": "text", "text": hazards, "size": "xxl",
+                {"type": "text", "text": hazards, "size": "3xl",
                  "weight": "bold", "color": "#FF4B0A", "wrap": True,
                  "margin": "sm"},
                 weather_info_row("!", "ประกาศกรมอุตุนิยมวิทยา", title),
