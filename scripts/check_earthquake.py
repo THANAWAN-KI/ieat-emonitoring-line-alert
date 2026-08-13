@@ -140,71 +140,22 @@ def alert_info_row(icon: str, label: str, value: str) -> dict:
 def flex_message(event: dict, test: bool = False) -> dict:
     magnitude = event.get("magnitude")
     mag = f"{magnitude:.1f}" if magnitude is not None else "–"
-    level, status_color, status_bg = severity(magnitude)
+    level, status_color, _ = severity(magnitude)
     location = clean(event.get("title") or event.get("description") or "ไม่ระบุพื้นที่")[:300]
-    published = event.get("published") or "รอข้อมูลจากกรมอุตุนิยมวิทยา"
+    published = event.get("published") or "ไม่ระบุวันและเวลา"
     depth = f"{event['depth']} กิโลเมตร" if event.get("depth") else "ไม่ระบุ"
-    coordinates = event.get("coordinates")
     detail_url = event.get("link") or "https://earthquake.tmd.go.th/"
-    map_url = (
-        f"https://www.google.com/maps/search/?api=1&query={coordinates.replace(' ', '')}"
-        if coordinates else detail_url
-    )
 
-    body_contents = [
-        {"type": "box", "layout": "horizontal", "contents": [
-            {"type": "box", "layout": "vertical", "paddingAll": "10px",
-             "backgroundColor": status_color, "cornerRadius": "10px",
-             "contents": [{"type": "text", "text": level, "size": "md",
-                           "weight": "bold", "color": "#FFFFFF", "align": "center"}]}
-        ]},
-        {"type": "box", "layout": "horizontal", "alignItems": "baseline", "margin": "xl",
-         "contents": [
-             {"type": "text", "text": "ขนาด", "size": "xl", "weight": "bold",
-              "color": "#FF4B0A", "flex": 0},
-             {"type": "text", "text": mag, "size": "5xl", "weight": "bold",
-              "color": "#FF4B0A", "margin": "md", "flex": 0},
-             {"type": "text", "text": "แมกนิจูด", "size": "sm",
-              "color": "#777777", "margin": "sm"},
-         ]},
-        alert_info_row("●", "พื้นที่เกิดเหตุ", location),
-        alert_info_row("▣", "วันและเวลา", published),
-        alert_info_row("↧", "จุดศูนย์กลางลึก", depth),
-    ]
-    if coordinates:
-        body_contents.append(alert_info_row("◎", "พิกัด", coordinates))
-
-    body_contents.extend([
-        {"type": "separator", "margin": "xl", "color": "#E8E8E8"},
-        {"type": "box", "layout": "vertical", "margin": "xl", "paddingAll": "16px",
-         "backgroundColor": "#F4F9EE", "cornerRadius": "16px", "contents": [
-             {"type": "text", "text": "✓  คำแนะนำเพื่อความปลอดภัย", "size": "lg",
-              "weight": "bold", "color": "#3B8B16", "wrap": True},
-             {"type": "text", "text": "• อยู่ห่างจากกระจกและสิ่งของที่อาจหล่น",
-              "size": "sm", "color": "#333333", "wrap": True, "margin": "lg"},
-             {"type": "text", "text": "• หากอยู่ในอาคาร ให้หมอบ–กำบัง–ยึดเกาะ",
-              "size": "sm", "color": "#333333", "wrap": True, "margin": "md"},
-             {"type": "text", "text": "• ติดตามประกาศจากหน่วยงานอย่างใกล้ชิด",
-              "size": "sm", "color": "#333333", "wrap": True, "margin": "md"},
-         ]},
-    ])
-
-    header_contents = [
+    header = [
         {"type": "text", "text": "⚠  แจ้งเตือนภัยพิบัติ", "color": "#FFFFFF",
-         "weight": "bold", "size": "lg", "align": "center"},
+         "weight": "bold", "size": "md", "align": "center"},
         {"type": "text", "text": "แผ่นดินไหว", "color": "#FFFFFF",
          "weight": "bold", "size": "3xl", "align": "center", "margin": "sm"},
-        {"type": "text", "text": "EARTHQUAKE ALERT", "color": "#FFD9E1",
-         "size": "xs", "align": "center", "margin": "sm"},
     ]
     if test:
-        header_contents.append(
-            {"type": "box", "layout": "vertical", "margin": "lg", "paddingAll": "8px",
-             "backgroundColor": "#FFF3CD", "cornerRadius": "8px",
-             "contents": [{"type": "text", "text": "ตัวอย่างทดสอบ • ไม่ใช่เหตุการณ์จริง",
-                           "size": "xs", "weight": "bold", "color": "#765A00",
-                           "align": "center"}]}
-        )
+        header.append({"type": "text", "text": "ตัวอย่างทดสอบ • ไม่ใช่เหตุการณ์จริง",
+                       "size": "xs", "weight": "bold", "color": "#FFF2A8",
+                       "align": "center", "margin": "md"})
 
     return {
         "type": "flex",
@@ -213,25 +164,61 @@ def flex_message(event: dict, test: bool = False) -> dict:
         "contents": {
             "type": "bubble", "size": "mega",
             "header": {"type": "box", "layout": "vertical",
-                       "backgroundColor": "#F00A36", "paddingAll": "22px",
-                       "contents": header_contents},
+                       "backgroundColor": "#F00A36", "paddingAll": "20px",
+                       "contents": header},
             "body": {"type": "box", "layout": "vertical", "paddingAll": "20px",
-                     "backgroundColor": "#FFFFFF", "contents": body_contents},
+                     "backgroundColor": "#FFFFFF", "contents": [
+                {"type": "box", "layout": "horizontal", "contents": [
+                    {"type": "box", "layout": "vertical", "paddingAll": "9px",
+                     "backgroundColor": status_color, "cornerRadius": "9px",
+                     "contents": [{"type": "text", "text": level, "size": "sm",
+                                   "weight": "bold", "color": "#FFFFFF",
+                                   "align": "center"}]}
+                ]},
+                {"type": "box", "layout": "horizontal", "alignItems": "baseline",
+                 "margin": "xl", "contents": [
+                    {"type": "text", "text": "ขนาด", "size": "lg", "weight": "bold",
+                     "color": "#FF4B0A", "flex": 0},
+                    {"type": "text", "text": mag, "size": "5xl", "weight": "bold",
+                     "color": "#FF4B0A", "margin": "md", "flex": 0},
+                    {"type": "text", "text": "แมกนิจูด", "size": "sm",
+                     "color": "#666666", "margin": "sm"},
+                ]},
+                alert_info_row("●", "พื้นที่เกิดเหตุ", location),
+                alert_info_row("▣", "วันและเวลา", published),
+                alert_info_row("↧", "จุดศูนย์กลางลึก", depth),
+                {"type": "separator", "margin": "xl", "color": "#E7E7E7"},
+                {"type": "box", "layout": "vertical", "margin": "xl",
+                 "paddingAll": "15px", "backgroundColor": "#F4F9EE",
+                 "cornerRadius": "14px", "contents": [
+                    {"type": "text", "text": "✓  คำแนะนำเพื่อความปลอดภัย",
+                     "size": "lg", "weight": "bold", "color": "#598C14",
+                     "wrap": True},
+                    {"type": "text",
+                     "text": "• อยู่ห่างจากกระจกและสิ่งของที่อาจหล่น",
+                     "size": "sm", "color": "#333333", "wrap": True,
+                     "margin": "lg"},
+                    {"type": "text",
+                     "text": "• หากอยู่ในอาคาร ให้หมอบ–กำบัง–ยึดเกาะ",
+                     "size": "sm", "color": "#333333", "wrap": True,
+                     "margin": "md"},
+                    {"type": "text",
+                     "text": "• ติดตามประกาศจากหน่วยงานอย่างใกล้ชิด",
+                     "size": "sm", "color": "#333333", "wrap": True,
+                     "margin": "md"},
+                ]},
+            ]},
             "footer": {"type": "box", "layout": "vertical", "paddingAll": "16px",
                        "spacing": "md", "contents": [
-                {"type": "button", "style": "primary", "height": "sm", "color": "#52057F",
+                {"type": "button", "style": "primary", "height": "sm",
+                 "color": "#52057F",
                  "action": {"type": "uri", "label": "ดูรายละเอียดเพิ่มเติม",
                             "uri": detail_url}},
-                {"type": "button", "style": "secondary", "height": "sm",
-                 "action": {"type": "uri", "label": "ดูตำแหน่งบนแผนที่",
-                            "uri": map_url}},
                 {"type": "separator", "margin": "md", "color": "#598C14"},
                 {"type": "text",
                  "text": "ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย กนอ.",
                  "size": "xs", "weight": "bold", "color": "#52057F",
                  "align": "center", "wrap": True},
-                {"type": "text", "text": "แหล่งข้อมูล: กรมอุตุนิยมวิทยา",
-                 "size": "xxs", "color": "#888888", "align": "center"},
             ]},
         },
     }
