@@ -182,9 +182,9 @@ def flex_message(event: dict, test: bool = False) -> dict:
                 ]},
                 {"type": "box", "layout": "horizontal", "alignItems": "baseline",
                  "margin": "xl", "contents": [
-                    {"type": "text", "text": "ขนาด", "size": "lg", "weight": "bold",
+                    {"type": "text", "text": "ขนาด", "size": "md", "weight": "bold",
                      "color": "#FF4B0A", "flex": 0},
-                    {"type": "text", "text": mag, "size": "5xl", "weight": "bold",
+                    {"type": "text", "text": mag, "size": "3xl", "weight": "bold",
                      "color": "#FF4B0A", "margin": "md", "flex": 0},
                     {"type": "text", "text": "แมกนิจูด", "size": "sm",
                      "color": "#666666", "margin": "sm"},
