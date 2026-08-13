@@ -116,36 +116,301 @@ def should_alert(event: dict[str, Any]) -> tuple[bool, str]:
 
 
 def format_message(event: dict[str, Any], reason: str) -> str:
+    """ข้อความสำรองสำหรับ altText และการตรวจสอบใน log."""
+    magnitude = event.get("magnitude")
+    location = event.get("location") or event.get("title") or "ไม่ระบุพื้นที่"
+    magnitude_text = f"{magnitude:.1f}" if magnitude is not None else "ไม่ระบุ"
+    return f"แจ้งเตือนแผ่นดินไหว ขนาด {magnitude_text} พื้นที่ {location}"[:400]
+
+
+def alert_style(magnitude: float | None) -> tuple[str, str, str]:
+    """คืนชื่อระดับ สีหลัก และสีพื้นหลังตามขนาดแผ่นดินไหว."""
+    if magnitude is None:
+        return "ระดับติดตาม", "#4A8594", "#EEF6F7"
+    if magnitude >= 6.0:
+        return "ระดับฉุกเฉิน", "#F00A36", "#FFF0F3"
+    if magnitude >= 5.0:
+        return "ระดับเฝ้าระวังสูง", "#FF6908", "#FFF2E9"
+    if magnitude >= 3.5:
+        return "ระดับเฝ้าระวัง", "#FF6908", "#FFF2E9"
+    return "ระดับติดตาม", "#4A8594", "#EEF6F7"
+
+
+def info_row(icon: str, label: str, value: str) -> dict[str, Any]:
+    return {
+        "type": "box",
+        "layout": "horizontal",
+        "spacing": "md",
+        "margin": "lg",
+        "contents": [
+            {
+                "type": "box",
+                "layout": "vertical",
+                "width": "44px",
+                "height": "44px",
+                "backgroundColor": "#F2EAF8",
+                "cornerRadius": "12px",
+                "justifyContent": "center",
+                "alignItems": "center",
+                "contents": [
+                    {"type": "text", "text": icon, "size": "xl", "align": "center"}
+                ],
+            },
+            {
+                "type": "box",
+                "layout": "vertical",
+                "flex": 1,
+                "justifyContent": "center",
+                "contents": [
+                    {
+                        "type": "text",
+                        "text": label,
+                        "size": "sm",
+                        "weight": "bold",
+                        "color": "#52057F",
+                    },
+                    {
+                        "type": "text",
+                        "text": value,
+                        "size": "md",
+                        "weight": "bold",
+                        "color": "#222222",
+                        "wrap": True,
+                        "margin": "xs",
+                    },
+                ],
+            },
+        ],
+    }
+
+
+def build_flex_message(event: dict[str, Any], reason: str) -> dict[str, Any]:
     magnitude = event.get("magnitude")
     depth = event.get("depth_km")
     lat = event.get("latitude")
     lon = event.get("longitude")
-    lines = [
-        "🚨 แจ้งเตือนแผ่นดินไหว",
-        "",
-        f"วันและเวลา: {event.get('published') or 'ไม่ระบุ'}",
-        f"ขนาด: {magnitude if magnitude is not None else 'ไม่ระบุ'}",
-        f"ความลึก: {f'{depth:g} กิโลเมตร' if depth is not None else 'ไม่ระบุ'}",
-        f"พื้นที่เกิดเหตุ: {event.get('location') or event.get('title') or 'ไม่ระบุ'}",
+    level, level_color, level_soft = alert_style(magnitude)
+    magnitude_text = f"{magnitude:.1f}" if magnitude is not None else "–"
+    location = event.get("location") or event.get("title") or "ไม่ระบุพื้นที่"
+    published = event.get("published") or "ไม่ระบุวันและเวลา"
+    depth_text = f"{depth:g} กิโลเมตร" if depth is not None else "ไม่ระบุ"
+    detail_url = event.get("link") or "https://earthquake.tmd.go.th/"
+
+    body_contents: list[dict[str, Any]] = [
+        {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+                {
+                    "type": "box",
+                    "layout": "vertical",
+                    "backgroundColor": level_color,
+                    "cornerRadius": "10px",
+                    "paddingAll": "10px",
+                    "contents": [
+                        {
+                            "type": "text",
+                            "text": level,
+                            "color": "#FFFFFF",
+                            "weight": "bold",
+                            "size": "md",
+                            "align": "center",
+                        }
+                    ],
+                }
+            ],
+        },
+        {
+            "type": "box",
+            "layout": "horizontal",
+            "alignItems": "baseline",
+            "margin": "xl",
+            "contents": [
+                {
+                    "type": "text",
+                    "text": "ขนาด",
+                    "size": "xl",
+                    "weight": "bold",
+                    "color": "#FF4B0A",
+                    "flex": 0,
+                },
+                {
+                    "type": "text",
+                    "text": magnitude_text,
+                    "size": "5xl",
+                    "weight": "bold",
+                    "color": "#FF4B0A",
+                    "margin": "md",
+                    "flex": 0,
+                },
+                {
+                    "type": "text",
+                    "text": "แมกนิจูด",
+                    "size": "sm",
+                    "color": "#777777",
+                    "margin": "sm",
+                },
+            ],
+        },
+        info_row("●", "พื้นที่เกิดเหตุ", location),
+        info_row("▣", "วันและเวลา", published),
+        info_row("↧", "จุดศูนย์กลางลึก", depth_text),
     ]
+
     if lat is not None and lon is not None:
-        lines.append(f"พิกัด: {lat:g}, {lon:g}")
-    lines.extend([
-        f"เกณฑ์การแจ้ง: {reason}",
-        "แหล่งข้อมูล: กรมอุตุนิยมวิทยา",
-    ])
-    if event.get("link"):
-        lines.append(f"รายละเอียด: {event['link']}")
-    lines.extend(["", "กรุณาติดตามประกาศจากหน่วยงานราชการ และปฏิบัติตามคู่มือความปลอดภัย"])
-    return "\n".join(lines)[:5000]
+        body_contents.append(info_row("◎", "พิกัด", f"{lat:g}, {lon:g}"))
+
+    body_contents.extend(
+        [
+            {"type": "separator", "margin": "xl", "color": "#E8E8E8"},
+            {
+                "type": "box",
+                "layout": "vertical",
+                "margin": "xl",
+                "paddingAll": "16px",
+                "backgroundColor": "#F4F9EE",
+                "cornerRadius": "16px",
+                "contents": [
+                    {
+                        "type": "text",
+                        "text": "✓  คำแนะนำเพื่อความปลอดภัย",
+                        "size": "lg",
+                        "weight": "bold",
+                        "color": "#3B8B16",
+                        "wrap": True,
+                    },
+                    {
+                        "type": "text",
+                        "text": "• อยู่ห่างจากกระจกและสิ่งของที่อาจหล่น",
+                        "size": "sm",
+                        "color": "#333333",
+                        "wrap": True,
+                        "margin": "lg",
+                    },
+                    {
+                        "type": "text",
+                        "text": "• หากอยู่ในอาคาร ให้หมอบ–กำบัง–ยึดเกาะ",
+                        "size": "sm",
+                        "color": "#333333",
+                        "wrap": True,
+                        "margin": "md",
+                    },
+                    {
+                        "type": "text",
+                        "text": "• ติดตามประกาศจากหน่วยงานอย่างใกล้ชิด",
+                        "size": "sm",
+                        "color": "#333333",
+                        "wrap": True,
+                        "margin": "md",
+                    },
+                ],
+            },
+            {
+                "type": "text",
+                "text": f"เกณฑ์การแจ้ง: {reason}",
+                "size": "xxs",
+                "color": "#888888",
+                "wrap": True,
+                "margin": "lg",
+            },
+        ]
+    )
+
+    return {
+        "type": "flex",
+        "altText": format_message(event, reason),
+        "contents": {
+            "type": "bubble",
+            "size": "mega",
+            "header": {
+                "type": "box",
+                "layout": "vertical",
+                "paddingAll": "22px",
+                "backgroundColor": "#F00A36",
+                "contents": [
+                    {
+                        "type": "text",
+                        "text": "⚠  แจ้งเตือนภัยพิบัติ",
+                        "color": "#FFFFFF",
+                        "weight": "bold",
+                        "size": "lg",
+                        "align": "center",
+                    },
+                    {
+                        "type": "text",
+                        "text": "แผ่นดินไหว",
+                        "color": "#FFFFFF",
+                        "weight": "bold",
+                        "size": "3xl",
+                        "align": "center",
+                        "margin": "sm",
+                    },
+                    {
+                        "type": "text",
+                        "text": "EARTHQUAKE ALERT",
+                        "color": "#FFD9E1",
+                        "size": "xs",
+                        "align": "center",
+                        "margin": "sm",
+                    },
+                ],
+            },
+            "body": {
+                "type": "box",
+                "layout": "vertical",
+                "paddingAll": "20px",
+                "backgroundColor": "#FFFFFF",
+                "contents": body_contents,
+            },
+            "footer": {
+                "type": "box",
+                "layout": "vertical",
+                "paddingAll": "16px",
+                "spacing": "md",
+                "contents": [
+                    {
+                        "type": "button",
+                        "style": "primary",
+                        "height": "sm",
+                        "color": "#52057F",
+                        "action": {
+                            "type": "uri",
+                            "label": "ดูรายละเอียดเพิ่มเติม",
+                            "uri": detail_url,
+                        },
+                    },
+                    {"type": "separator", "margin": "md", "color": "#598C14"},
+                    {
+                        "type": "text",
+                        "text": "ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย กนอ.",
+                        "size": "xs",
+                        "weight": "bold",
+                        "color": "#52057F",
+                        "align": "center",
+                        "wrap": True,
+                    },
+                    {
+                        "type": "text",
+                        "text": "แหล่งข้อมูล: กรมอุตุนิยมวิทยา",
+                        "size": "xxs",
+                        "color": "#888888",
+                        "align": "center",
+                    },
+                ],
+            },
+        },
+    }
 
 
-def push_line(message: str) -> None:
+def push_line(event: dict[str, Any], reason: str) -> None:
     token = os.getenv("LINE_CHANNEL_ACCESS_TOKEN", "").strip()
     recipient = os.getenv("LINE_TO", "").strip()
     if not token or not recipient:
         raise RuntimeError("ยังไม่ได้ตั้งค่า LINE_CHANNEL_ACCESS_TOKEN และ LINE_TO ใน GitHub Secrets")
-    payload = json.dumps({"to": recipient, "messages": [{"type": "text", "text": message}]}, ensure_ascii=False).encode("utf-8")
+    payload = json.dumps(
+        {"to": recipient, "messages": [build_flex_message(event, reason)]},
+        ensure_ascii=False,
+    ).encode("utf-8")
     request = urllib.request.Request(
         LINE_ENDPOINT,
         data=payload,
@@ -198,7 +463,7 @@ def main() -> int:
         alert, reason = should_alert(event)
         if alert:
             try:
-                push_line(format_message(event, reason))
+                push_line(event, reason)
                 print(f"ส่ง LINE แล้ว: {event['title']}")
             except Exception as exc:
                 print(f"ส่ง LINE ไม่สำเร็จ ({event['title']}): {exc}", file=sys.stderr)
