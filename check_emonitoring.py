@@ -2390,6 +2390,7 @@ def build_station_detail_bubble(
                     size="xs",
                     color=severity["color"],
                     weight="bold",
+                    flex=0,
                 ),
                 text_component(
                     parameter,
