@@ -1132,6 +1132,15 @@ main{
 
 
 
+.export-panel{
+  grid-template-columns:1fr;
+}
+
+.export-btn:disabled{
+  cursor:wait;
+  opacity:.7;
+}
+
 /* =========================================================
    EXECUTIVE DASHBOARD
 ========================================================= */
@@ -1857,6 +1866,8 @@ main{padding:16px!important}
   .hero h1{font-size:20px!important}
 }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
 </head>
 
 <body>
@@ -2190,6 +2201,28 @@ main{padding:16px!important}
 
   </div>
 
+</section>
+
+
+<!-- =====================================================
+     DOWNLOAD REPORT
+===================================================== -->
+
+<section class="section">
+  <div class="section-title">
+    ดาวน์โหลดรายงาน
+  </div>
+
+  <div class="export-panel">
+    <button
+      id="downloadPngButton"
+      class="export-btn export-png"
+      type="button"
+      onclick="downloadDashboardPng(this)"
+    >
+      ดาวน์โหลดรายงานเป็นรูปภาพ
+    </button>
+  </div>
 </section>
 
 
@@ -3152,6 +3185,67 @@ async function loadStatus(){
     $("error")
       .classList
       .remove("hidden");
+
+  }
+
+}
+
+
+/* =========================================================
+   DOWNLOAD PNG
+========================================================= */
+
+async function downloadDashboardPng(button){
+
+  if(typeof html2canvas !== "function"){
+    alert("ยังไม่สามารถเตรียมรูปภาพได้ กรุณาลองใหม่อีกครั้ง");
+    return;
+  }
+
+  const originalText = button.textContent;
+  button.disabled = true;
+  button.textContent = "กำลังสร้างรูปภาพ…";
+
+  try{
+
+    const target = $("content");
+
+    const canvas = await html2canvas(
+      target,
+      {
+        scale:2,
+        useCORS:true,
+        allowTaint:false,
+        logging:false,
+        scrollX:0,
+        scrollY:-window.scrollY,
+        windowWidth:document.documentElement.scrollWidth,
+        windowHeight:target.scrollHeight
+      }
+    );
+
+    const link = document.createElement("a");
+    const stamp = new Date()
+      .toISOString()
+      .slice(0,10);
+
+    link.download =
+      "IEAT-Executive-Dashboard-"
+      + stamp
+      + ".png";
+
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+
+  }catch(error){
+
+    console.error(error);
+    alert("ไม่สามารถดาวน์โหลดรูปภาพได้ กรุณาลองใหม่อีกครั้ง");
+
+  }finally{
+
+    button.disabled = false;
+    button.textContent = originalText;
 
   }
 
