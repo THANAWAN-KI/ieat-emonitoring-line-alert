@@ -1130,6 +1130,266 @@ main{
 
 }
 
+
+
+/* =========================================================
+   EXECUTIVE DASHBOARD
+========================================================= */
+
+@media(min-width:1000px){
+
+  .page{
+    width:min(100%,1440px);
+    padding-bottom:48px;
+  }
+
+  .header{
+    padding-left:28px;
+    padding-right:28px;
+  }
+
+  .brand strong{
+    font-size:18px;
+  }
+
+  .brand span{
+    font-size:11px;
+  }
+
+  main{
+    padding:24px 28px 40px;
+  }
+
+  #content:not(.hidden){
+    display:grid;
+    grid-template-columns:repeat(12,minmax(0,1fr));
+    gap:18px;
+    align-items:start;
+  }
+
+  #content > .hero{
+    grid-column:span 8;
+    height:100%;
+    margin:0;
+    padding:24px;
+  }
+
+  #content > .status{
+    grid-column:span 4;
+    height:100%;
+    min-height:138px;
+    margin:0;
+    padding:22px;
+    display:flex;
+    align-items:center;
+  }
+
+  #content > section:nth-of-type(3){
+    grid-column:span 12;
+  }
+
+  #content > section:nth-of-type(4){
+    grid-column:span 8;
+  }
+
+  #content > section:nth-of-type(5){
+    grid-column:span 4;
+  }
+
+  #content > section:nth-of-type(6){
+    grid-column:span 12;
+  }
+
+  #content > .section{
+    margin-top:0;
+  }
+
+  .hero h1{
+    font-size:28px;
+  }
+
+  .hero p{
+    font-size:13px;
+  }
+
+  .hero-time{
+    font-size:11px;
+  }
+
+  .hero-time strong{
+    font-size:12px;
+  }
+
+  .status-title{
+    font-size:18px;
+  }
+
+  .status-sub{
+    font-size:11px;
+  }
+
+  .section-title{
+    margin-bottom:12px;
+    font-size:18px;
+  }
+
+  .kpis{
+    gap:12px;
+  }
+
+  .kpi{
+    min-height:118px;
+    padding:22px 12px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+
+  .kpi .num{
+    font-size:38px;
+  }
+
+  .kpi .label{
+    font-size:11px;
+  }
+
+  .progress-card{
+    margin-top:12px;
+    padding:16px;
+  }
+
+  .progress-head{
+    font-size:12px;
+  }
+
+  .progress-track{
+    height:10px;
+  }
+
+  .decision-card{
+    gap:12px;
+  }
+
+  .decision-item{
+    min-height:84px;
+    padding:16px;
+  }
+
+  .decision-item span{
+    font-size:10px;
+  }
+
+  .decision-item strong{
+    font-size:14px;
+  }
+
+  .types{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:12px;
+  }
+
+  .type-card{
+    padding:16px;
+  }
+
+  .type-copy strong{
+    font-size:16px;
+  }
+
+  .type-copy span{
+    font-size:10px;
+  }
+
+  .type-total{
+    font-size:28px;
+  }
+
+  .mini{
+    padding:10px;
+    font-size:10px;
+  }
+
+  .mini b{
+    font-size:20px;
+  }
+
+  .severity{
+    gap:10px;
+  }
+
+  .sev{
+    min-height:126px;
+    padding:20px 8px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+
+  .sev b{
+    font-size:30px;
+  }
+
+  .sev span{
+    font-size:10px;
+  }
+
+  .filter-wrap{
+    flex-wrap:wrap;
+    overflow:visible;
+  }
+
+  .filter-btn,
+  .status-filter-btn{
+    font-size:11px;
+  }
+
+  .station-tools{
+    grid-template-columns:minmax(320px,1fr) auto;
+    align-items:center;
+  }
+
+  .station-search{
+    min-height:42px;
+    font-size:12px;
+  }
+
+  .alert-note{
+    font-size:11px;
+  }
+
+  .station-list{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:12px;
+  }
+
+  .station{
+    margin-top:0;
+    padding:15px;
+  }
+
+  .station-name{
+    font-size:14px;
+  }
+
+  .station-meta,
+  .param,
+  .param-title,
+  .comment,
+  .action{
+    font-size:10px;
+  }
+
+  .badge{
+    font-size:9px;
+  }
+
+  .footer{
+    grid-column:1/-1;
+    font-size:10px;
+  }
+
+}
+
 </style>
 
 <style>
@@ -1689,11 +1949,11 @@ main{padding:16px!important}
     <div>
 
       <h1>
-        รายงานสถานะสถานีตรวจวัด
+        Dashboard สถานีตรวจวัดสำหรับผู้บริหาร
       </h1>
 
       <p>
-        สรุปความพร้อมของข้อมูลออนไลน์และออฟไลน์ พร้อมรายละเอียดรายสถานี
+        สรุปสถานการณ์ ความพร้อมใช้งาน และผลการตรวจวัดครบทุกสถานี
       </p>
 
     </div>
