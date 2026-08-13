@@ -2,108 +2,158 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#4E2A84">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>IEAT e-Monitoring Dashboard</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="theme-color" content="#4E1478">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
+<title>สถานการณ์ล่าสุด | IEAT e-Monitoring</title>
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap");
 :root{
-  --purple:#4E2A84;--purple2:#68449A;--purple3:#8B6BAF;--purple-soft:#F4EFF8;
-  --green:#2B8A3E;--green2:#69B578;--green-soft:#EDF8F0;
-  --orange:#E58A21;--orange-soft:#FFF5E8;
-  --red:#D64545;--red-soft:#FFF0F0;
-  --blue:#1982C4;--blue-soft:#EEF7FC;
-  --ink:#28242E;--text:#5F5A66;--muted:#8D8794;--line:#E8E4EC;
-  --bg:#F5F6F8;--white:#fff;--shadow:0 10px 30px rgba(55,42,74,.08);--shadow2:0 18px 45px rgba(55,42,74,.11);
+  --purple:#4E1478;--purple-2:#6F3B91;--purple-soft:#F8F4FB;
+  --ink:#30283A;--muted:#746B7B;--line:#DCCBEA;--white:#FFFFFF;
+  --red:#C51F35;--red-soft:#FFF1F3;--amber:#E67700;--amber-soft:#FFF8E8;
+  --green:#2B8A3E;--green-soft:#F1F8F3;--shadow:0 3px 12px rgba(89,38,124,.10)
 }
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(180deg,#fff 0,#f6f7f9 28%,#f3f4f7 100%);color:var(--text);font-family:'Noto Sans Thai',sans-serif;-webkit-font-smoothing:antialiased}.app{max-width:1480px;margin:auto;padding:24px 28px 50px}
-.header{position:relative;overflow:hidden;background:linear-gradient(135deg,#fff 0%,#faf8fc 58%,#f1edf6 100%);border:1px solid var(--line);border-radius:26px;padding:30px 34px;box-shadow:var(--shadow);margin-bottom:18px}.header:after{content:'';position:absolute;width:260px;height:260px;right:-90px;top:-110px;border-radius:50%;background:radial-gradient(circle,#8B6BAF22 0,#8B6BAF00 68%)}.header-grid{display:flex;justify-content:space-between;align-items:center;gap:28px;position:relative;z-index:1}.eyebrow{font-size:13px;font-weight:800;color:var(--purple2);letter-spacing:.6px}.title{margin:5px 0 3px;color:var(--ink);font-size:clamp(25px,3vw,38px);font-weight:900;letter-spacing:-.8px}.subtitle{font-size:14px;color:var(--muted);font-weight:600}.datetime{min-width:245px;background:#fff;border:1px solid #e2dce8;border-radius:18px;padding:15px 18px;box-shadow:0 7px 20px #4e2a8410}.datetime-label{font-size:12px;color:var(--muted);font-weight:700}.datetime-value{margin-top:3px;color:var(--purple);font-size:14px;font-weight:900}.statusbar{display:flex;align-items:center;justify-content:space-between;gap:16px;background:#fff;border:1px solid var(--line);border-left:5px solid var(--green);border-radius:18px;padding:13px 18px;margin-bottom:22px;box-shadow:var(--shadow)}.live{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:800}.dot{width:10px;height:10px;border-radius:50%;background:#48B35A;box-shadow:0 0 0 5px #48B35A18}.status-time{font-size:12px;color:var(--muted);font-weight:600}
-.section-title{display:flex;align-items:end;justify-content:space-between;margin:25px 2px 12px}.section-title h2{margin:0;color:var(--ink);font-size:18px;font-weight:900}.section-title span{font-size:12px;color:var(--muted);font-weight:600}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.card{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);transition:.2s}.card:hover{transform:translateY(-2px);box-shadow:var(--shadow2)}.kpi{position:relative;overflow:hidden;padding:20px 21px;min-height:135px}.kpi:after{content:'';position:absolute;right:-34px;bottom:-48px;width:125px;height:125px;border-radius:50%;background:#f2eef7}.kpi.total{border-top:4px solid var(--purple)}.kpi.online{border-top:4px solid var(--green)}.kpi.offline{border-top:4px solid var(--red)}.kpi.alert{border-top:4px solid var(--orange)}.kpi-label,.kpi-number,.kpi-note{position:relative;z-index:1}.kpi-label{font-size:13px;color:var(--muted);font-weight:700}.kpi-number{font-size:35px;line-height:1;margin-top:10px;color:var(--ink);font-weight:900}.total .kpi-number{color:var(--purple)}.online .kpi-number{color:var(--green)}.offline .kpi-number{color:var(--red)}.alert .kpi-number{color:var(--orange)}.kpi-note{font-size:11px;color:#AAA5B0;margin-top:8px;font-weight:600}
-.main-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:18px}.panel{overflow:hidden}.panel-head{padding:16px 19px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}.panel-head h3{margin:0;font-size:15px;color:var(--ink);font-weight:900}.panel-head span{font-size:11px;color:var(--muted);font-weight:600}.panel-body{padding:18px}.types{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.type{border-radius:17px;padding:17px;background:linear-gradient(145deg,#fff,#faf9fb);border:1px solid var(--line);position:relative;overflow:hidden}.type:before{content:'';position:absolute;left:0;top:0;width:4px;height:100%;background:var(--purple)}.type.aqm:before{background:var(--blue)}.type.wqm:before{background:var(--green)}.type.cem:before{background:var(--orange)}.type-code{font-size:11px;font-weight:900;color:var(--muted)}.type-name{margin-top:5px;color:var(--ink);font-size:13px;font-weight:800}.type-number{margin-top:11px;font-size:28px;line-height:1;color:var(--purple);font-weight:900}.aqm .type-number{color:var(--blue)}.wqm .type-number{color:var(--green)}.cem .type-number{color:var(--orange)}.type-status{margin-top:8px;font-size:11px;color:var(--muted);font-weight:600}.severity{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.sev{padding:18px;border-radius:17px;border:1px solid var(--line);background:#fff}.sev-top{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:800;color:var(--ink)}.sev-dot{width:10px;height:10px;border-radius:50%}.sev.urgent .sev-dot{background:var(--red)}.sev.watch .sev-dot{background:var(--orange)}.sev.follow .sev-dot{background:var(--green)}.sev-number{font-size:30px;line-height:1;margin-top:11px;font-weight:900}.urgent .sev-number{color:var(--red)}.watch .sev-number{color:var(--orange)}.follow .sev-number{color:var(--green)}
-.bottom-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:18px}.station-list{display:grid;gap:9px}.station{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 14px;background:#F8F8FA;border:1px solid #ECEAF0;border-radius:13px}.station-main{min-width:0}.station-name{color:var(--ink);font-size:12px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.station-meta{font-size:10px;color:var(--muted);margin-top:2px}.badge{padding:5px 9px;border-radius:999px;font-size:10px;font-weight:800;white-space:nowrap}.badge.online{background:var(--green-soft);color:var(--green)}.badge.offline{background:var(--red-soft);color:var(--red)}.empty{padding:25px;text-align:center;color:var(--muted);font-size:12px}.quick{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.quick a{text-decoration:none;padding:15px;border-radius:15px;background:linear-gradient(145deg,#fff,#f7f4fa);border:1px solid var(--line);color:var(--purple);font-size:12px;font-weight:800;transition:.2s}.quick a:hover{background:var(--purple-soft);transform:translateY(-1px)}.footer{text-align:center;margin-top:26px;color:#AAA5B0;font-size:10px;font-weight:600}
-@media(max-width:980px){.kpis{grid-template-columns:repeat(2,1fr)}.main-grid,.bottom-grid{grid-template-columns:1fr}.header-grid{align-items:flex-start}.datetime{min-width:210px}}@media(max-width:650px){.app{padding:12px 12px 35px}.header{padding:22px 19px;border-radius:20px}.header-grid{display:block}.datetime{margin-top:15px;min-width:0}.title{font-size:25px}.statusbar{align-items:flex-start;flex-direction:column}.kpis{grid-template-columns:1fr 1fr;gap:10px}.kpi{min-height:120px;padding:16px}.kpi-number{font-size:29px}.types,.severity{grid-template-columns:1fr}.panel-body{padding:13px}.section-title{margin-top:20px}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-width:320px;color:var(--ink);font-family:"Sarabun","Noto Sans Thai",Tahoma,sans-serif;background:#F4F1F6}
+.shell{width:100%;max-width:720px;min-height:100vh;margin:0 auto;background:var(--white);box-shadow:var(--shadow)}
+.topbar{height:4px;background:var(--purple-2)}
+.page-header{display:flex;align-items:center;gap:14px;padding:15px 18px;border-bottom:4px solid var(--purple);background:var(--white)}
+.logo{width:52px;height:52px;object-fit:contain;flex:none}
+.brand{min-width:0}
+.brand-title{color:var(--purple);font-size:21px;font-weight:800;line-height:1.25}
+.brand-subtitle{margin-top:3px;color:var(--muted);font-size:13px}
+main{padding:16px 16px 28px}
+.hero{position:relative;overflow:hidden;padding:24px;border-radius:14px;color:var(--white);background:linear-gradient(135deg,#35105D 0%,#4E1478 55%,#6F3B91 100%)}
+.hero:after{position:absolute;right:-55px;top:-105px;width:300px;height:300px;border:45px solid rgba(255,255,255,.07);border-radius:50%;content:""}
+.hero-label{position:relative;z-index:1;display:inline-flex;padding:5px 10px;border:1px solid rgba(255,255,255,.25);border-radius:999px;background:rgba(255,255,255,.10);font-size:12px;font-weight:700}
+.hero h1{position:relative;z-index:1;margin:14px 0 5px;font-size:clamp(28px,6vw,38px);line-height:1.12}
+.hero p{position:relative;z-index:1;margin:0;color:rgba(255,255,255,.84);font-size:14px;line-height:1.6}
+.hero-time{position:relative;z-index:1;display:flex;justify-content:space-between;gap:12px;margin-top:18px;padding-top:12px;border-top:1px solid rgba(255,255,255,.20);font-size:12px}
+.hero-time strong{text-align:right}
+.notice{display:flex;align-items:center;gap:14px;margin-top:14px;padding:15px 17px;border:1px solid var(--line);border-radius:16px;background:var(--purple-soft)}
+.notice.alert{border-color:#E9B6BE;background:var(--red-soft)}
+.notice-mark{display:grid;place-items:center;width:42px;height:42px;flex:0 0 42px;border-radius:12px;color:var(--white);background:var(--green);font-size:20px;font-weight:800}
+.notice.alert .notice-mark{background:var(--red)}
+.notice strong{display:block;color:var(--purple);font-size:16px}
+.notice.alert strong{color:var(--red)}
+.notice span{display:block;margin-top:3px;color:var(--muted);font-size:13px;line-height:1.45}
+.section-heading{margin:24px 0 11px}
+.section-heading h2{margin:0;color:var(--purple);font-size:21px}
+.section-heading p{margin:4px 0 0;color:var(--muted);font-size:13px}
+.kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.card{border:1px solid var(--line);border-radius:14px;background:var(--white);box-shadow:var(--shadow)}
+.kpi{padding:15px;min-height:112px}
+.kpi-label{color:var(--muted);font-size:12px;font-weight:700}
+.kpi-number{margin-top:7px;color:var(--purple);font-size:31px;font-weight:800;line-height:1}
+.kpi-note{margin-top:7px;color:var(--muted);font-size:10px}
+.kpi.online .kpi-number{color:var(--green)}.kpi.offline .kpi-number{color:var(--red)}.kpi.alerts .kpi-number{color:var(--amber)}
+.types,.severity{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.type,.sev{padding:14px 10px;text-align:center;border:1px solid var(--line);border-radius:13px;background:var(--white)}
+.type-code,.sev-label{color:var(--muted);font-size:11px;font-weight:700}
+.type-number,.sev-number{margin-top:8px;color:var(--purple);font-size:26px;font-weight:800;line-height:1}
+.type-name{margin-top:6px;color:var(--ink);font-size:11px;line-height:1.35}
+.sev.urgent{background:var(--red-soft)}.sev.watch{background:var(--amber-soft)}.sev.follow{background:var(--green-soft)}
+.sev.urgent .sev-number{color:var(--red)}.sev.watch .sev-number{color:var(--amber)}.sev.follow .sev-number{color:var(--green)}
+.panel{overflow:hidden}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 15px;border-bottom:1px solid var(--line)}
+.panel-head h3{margin:0;color:var(--purple);font-size:16px}.panel-head span{color:var(--muted);font-size:11px}
+.panel-body{padding:12px}.station-list{display:grid;gap:8px}
+.station{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 12px;border-radius:10px;background:var(--purple-soft)}
+.station-main{min-width:0}.station-name{color:var(--ink);font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.station-meta{margin-top:2px;color:var(--muted);font-size:10px}
+.badge{flex:none;padding:4px 8px;border-radius:999px;font-size:10px;font-weight:700}.badge.online{color:var(--green);background:var(--green-soft)}.badge.offline{color:var(--red);background:var(--red-soft)}
+.empty{padding:18px;text-align:center;color:var(--muted);font-size:12px}
+.quick{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:14px}
+.quick a{display:block;padding:12px;text-align:center;text-decoration:none;border:1px solid var(--line);border-radius:11px;color:var(--purple);background:var(--purple-soft);font-size:12px;font-weight:700}
+.footer{margin-top:22px;padding:16px;text-align:center;border-top:1px solid var(--line);color:var(--muted);font-size:10px;line-height:1.6}
+.loading{padding:25px;text-align:center;color:var(--muted)}
+.hidden{display:none!important}
+@media(max-width:480px){
+  .page-header{padding:13px 14px}.logo{width:46px;height:46px}.brand-title{font-size:18px}.brand-subtitle{font-size:11px}
+  main{padding:12px}.hero{padding:21px 18px}.hero h1{font-size:28px}.hero-time{display:block}.hero-time strong{display:block;margin-top:4px;text-align:left}
+  .types,.severity{grid-template-columns:1fr}.type,.sev{display:flex;align-items:center;justify-content:space-between;text-align:left}.type-number,.sev-number{margin-top:0}
+}
 </style>
 </head>
 <body>
-<div class="app">
-  <header class="header">
-    <div class="header-grid">
-      <div>
-        <div class="eyebrow">IEAT • EMCC • ENVIRONMENTAL MONITORING</div>
-        <div class="title">แดชบอร์ดรายงานสถานการณ์ประจำวัน</div>
-        <div class="subtitle">ติดตามสถานการณ์สิ่งแวดล้อมฯ บริเวณนิคมอุตสาหกรรม</div>
-      </div>
-      <div class="datetime">
-        <div class="datetime-label">ข้อมูลล่าสุด</div>
-        <div class="datetime-value" id="updatedAt">กำลังโหลด...</div>
-      </div>
-    </div>
-  </header>
-
-  <div class="statusbar">
-    <div class="live"><span class="dot"></span><span>ระบบ e-Monitoring พร้อมใช้งาน</span></div>
-    <div class="status-time" id="systemStatus">กำลังตรวจสอบสถานะ...</div>
-  </div>
-
-  <div class="section-title"><h2>ภาพรวมสถานีตรวจวัด</h2><span>Monitoring Overview</span></div>
-  <section class="kpis">
-    <div class="card kpi total"><div class="kpi-label">สถานีตรวจวัดทั้งหมด</div><div class="kpi-number" id="total">—</div><div class="kpi-note">All monitoring stations</div></div>
-    <div class="card kpi online"><div class="kpi-label">ออนไลน์</div><div class="kpi-number" id="online">—</div><div class="kpi-note">Stations operating normally</div></div>
-    <div class="card kpi offline"><div class="kpi-label">ออฟไลน์</div><div class="kpi-number" id="offline">—</div><div class="kpi-note">Stations requiring attention</div></div>
-    <div class="card kpi alert"><div class="kpi-label">สถานีที่ต้องติดตาม</div><div class="kpi-number" id="alerts">—</div><div class="kpi-note">Alert &amp; monitoring cases</div></div>
-  </section>
-
-  <div class="section-title"><h2>ประเภทสถานี</h2><span>Station Categories</span></div>
-  <section class="card panel">
-    <div class="panel-body">
-      <div class="types">
-        <div class="type aqm"><div class="type-code">AQM</div><div class="type-name">คุณภาพอากาศ</div><div class="type-number" id="aqm">—</div><div class="type-status">Air Quality Monitoring</div></div>
-        <div class="type wqm"><div class="type-code">WQM</div><div class="type-name">คุณภาพน้ำ</div><div class="type-number" id="wqm">—</div><div class="type-status">Water Quality Monitoring</div></div>
-        <div class="type cem"><div class="type-code">CEM</div><div class="type-name">การระบายมลพิษ</div><div class="type-number" id="cem">—</div><div class="type-status">Continuous Emission Monitoring</div></div>
-      </div>
-    </div>
-  </section>
-
-  <div class="section-title"><h2>ระดับสถานการณ์</h2><span>Situation Severity</span></div>
-  <section class="card panel">
-    <div class="panel-body">
-      <div class="severity">
-        <div class="sev urgent"><div class="sev-top"><span class="sev-dot"></span>เกินค่ามาตรฐาน</div><div class="sev-number" id="urgent">—</div></div>
-        <div class="sev watch"><div class="sev-top"><span class="sev-dot"></span>เฝ้าระวัง</div><div class="sev-number" id="watch">—</div></div>
-        <div class="sev follow"><div class="sev-top"><span class="sev-dot"></span>ติดตามสถานการณ์</div><div class="sev-number" id="follow">—</div></div>
-      </div>
-    </div>
-  </section>
-
-  <div class="section-title"><h2>สถานีที่ต้องติดตาม</h2><span>Station Status</span></div>
-  <section class="bottom-grid">
-    <div class="card panel"><div class="panel-head"><h3>รายการสถานี</h3><span id="stationCount">0 รายการ</span></div><div class="panel-body"><div class="station-list" id="stationList"><div class="empty">กำลังโหลดข้อมูลสถานี...</div></div></div></div>
-    <div class="card panel"><div class="panel-head"><h3>เมนูด่วน</h3><span>Quick Access</span></div><div class="panel-body"><div class="quick"><a href="#overview">สถานการณ์ล่าสุด</a><a href="#stations">สถานีตรวจวัด</a><a href="https://www.arcgis.com/" target="_blank" rel="noopener">แผนที่ GIS</a><a href="#severity">ภัยพิบัติ</a></div></div></div>
-  </section>
-
-  <div class="footer">IEAT e-Monitoring • Environmental Monitoring &amp; Safety Center • Dashboard</div>
+<div class="shell">
+<div class="topbar"></div>
+<header class="page-header">
+  <img class="logo" src="./assets/ieat_logo.png.PNG" alt="กนอ.">
+  <div class="brand"><div class="brand-title">IEAT e-Monitoring</div><div class="brand-subtitle">ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย กนอ.</div></div>
+</header>
+<main>
+<section class="hero">
+  <span class="hero-label">สถานการณ์ล่าสุด</span>
+  <h1>รายงานสถานการณ์<br>e‑Monitoring</h1>
+  <p>สรุปผลการติดตามสถานีตรวจวัดสิ่งแวดล้อมในพื้นที่นิคมอุตสาหกรรม</p>
+  <div class="hero-time"><span>อัปเดตล่าสุด</span><strong id="updatedAt">กำลังโหลดข้อมูล…</strong></div>
+</section>
+<section id="notice" class="notice">
+  <div id="noticeMark" class="notice-mark">✓</div>
+  <div><strong id="statusTitle">กำลังตรวจสอบสถานการณ์</strong><span id="statusText">โปรดรอสักครู่</span></div>
+</section>
+<div class="section-heading"><h2>ภาพรวมสถานีตรวจวัด</h2><p>ข้อมูลสถานีทั้งหมดจากระบบล่าสุด</p></div>
+<section class="kpis">
+  <article class="card kpi"><div class="kpi-label">สถานีทั้งหมด</div><div id="total" class="kpi-number">—</div><div class="kpi-note">ทุกประเภทสถานี</div></article>
+  <article class="card kpi online"><div class="kpi-label">สถานีออนไลน์</div><div id="online" class="kpi-number">—</div><div class="kpi-note">กำลังส่งข้อมูล</div></article>
+  <article class="card kpi offline"><div class="kpi-label">สถานีออฟไลน์</div><div id="offline" class="kpi-number">—</div><div class="kpi-note">ควรตรวจสอบ</div></article>
+  <article class="card kpi alerts"><div class="kpi-label">สถานีที่ต้องติดตาม</div><div id="alerts" class="kpi-number">—</div><div class="kpi-note">พบรายการแจ้งเตือน</div></article>
+</section>
+<div class="section-heading"><h2>ประเภทสถานี</h2><p>แยกตามระบบตรวจวัดสิ่งแวดล้อม</p></div>
+<section class="types">
+  <article class="type"><div><div class="type-code">AQMs</div><div class="type-name">คุณภาพอากาศ</div></div><div id="aqm" class="type-number">—</div></article>
+  <article class="type"><div><div class="type-code">WQMs</div><div class="type-name">คุณภาพน้ำ</div></div><div id="wqm" class="type-number">—</div></article>
+  <article class="type"><div><div class="type-code">CEMs</div><div class="type-name">การระบายมลพิษ</div></div><div id="cem" class="type-number">—</div></article>
+</section>
+<div class="section-heading"><h2>ระดับสถานการณ์</h2><p>จำนวนสถานีแยกตามระดับการติดตาม</p></div>
+<section class="severity">
+  <article class="sev urgent"><div class="sev-label">เกินค่ามาตรฐาน</div><div id="urgent" class="sev-number">—</div></article>
+  <article class="sev watch"><div class="sev-label">เฝ้าระวัง</div><div id="watch" class="sev-number">—</div></article>
+  <article class="sev follow"><div class="sev-label">ติดตามสถานการณ์</div><div id="follow" class="sev-number">—</div></article>
+</section>
+<div class="section-heading"><h2>สถานีที่ต้องติดตาม</h2><p>แสดงรายการล่าสุดไม่เกิน 8 สถานี</p></div>
+<section class="card panel">
+  <div class="panel-head"><h3>รายการสถานี</h3><span id="stationCount">0 รายการ</span></div>
+  <div class="panel-body"><div id="stationList" class="station-list"><div class="loading">กำลังโหลดข้อมูล…</div></div></div>
+</section>
+<nav class="quick">
+  <a href="./stations.html">รายงานสถานีทั้งหมด</a>
+  <a href="./safety.html">คู่มือความปลอดภัย</a>
+  <a href="./contacts.html">ติดต่อเจ้าหน้าที่</a>
+  <a href="https://www.arcgis.com/apps/dashboards/576c71d01cc5403cad90ee330fd67b6e" target="_blank" rel="noopener">เปิดแผนที่ GIS</a>
+</nav>
+</main>
+<footer class="footer">ระบบติดตามตรวจสอบสิ่งแวดล้อม<br>ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย กนอ.</footer>
 </div>
 <script>
 const $=id=>document.getElementById(id);
-function set(id,v){$(id).textContent=(v===undefined||v===null||v==='')?'0':v}
+const num=v=>Number.isFinite(Number(v))?Number(v):0;
+const fmt=v=>num(v).toLocaleString("th-TH");
+const esc=v=>String(v??"-").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+function typeValue(data,key,field="total"){const t=(data.type_stats||{})[key]||{};return num(t[field])}
 function render(data){
-  const d=data||{};
-  set('total',d.total ?? d.total_stations);
-  set('online',d.online);
-  set('offline',d.offline);
-  set('alerts',d.alerts ?? d.urgent_count+d.watch_count+d.follow_count);
-  const types=d.types||{}; set('aqm',d.aqm??types.AQM??types.aqm); set('wqm',d.wqm??types.WQM??types.wqm); set('cem',d.cem??types.CEM??types.cem);
-  set('urgent',d.urgent_count??d.urgent); set('watch',d.watch_count??d.watch); set('follow',d.follow_count??d.follow);
-  $('updatedAt').textContent=d.updated_at_text||d.updated_at||new Date().toLocaleString('th-TH',{dateStyle:'medium',timeStyle:'short'});
-  $('systemStatus').textContent=d.system_status||'อัปเดตข้อมูลอัตโนมัติ';
-  const stations=d.stations||d.station_list||[]; $('stationCount').textContent=stations.length+' รายการ';
-  $('stationList').innerHTML=stations.length?stations.slice(0,12).map(s=>`<div class="station"><div class="station-main"><div class="station-name">${esc(s.name||s.station_name||'สถานีตรวจวัด')}</div><div class="station-meta">${esc(s.type||s.station_type||'Monitoring Station')}</div></div><span class="badge ${(s.status||'online').toLowerCase().includes('off')?'offline':'online'}">${esc(s.status||'ONLINE')}</span></div>`).join(''):'<div class="empty">ไม่มีรายการสถานีที่ต้องแสดง</div>';
+  const total=num(data.station_count??data.station_total);
+  const online=num(data.online_total??data.online);
+  const offline=num(data.offline_total??data.offline);
+  const alerts=num(data.alert_station_count??data.alerts);
+  $("total").textContent=fmt(total);$("online").textContent=fmt(online);$("offline").textContent=fmt(offline);$("alerts").textContent=fmt(alerts);
+  $("aqm").textContent=fmt(typeValue(data,"AQMs"));$("wqm").textContent=fmt(typeValue(data,"WQMs"));$("cem").textContent=fmt(typeValue(data,"CEMs"));
+  $("urgent").textContent=fmt(data.urgent_count);$("watch").textContent=fmt(data.watch_count);$("follow").textContent=fmt(data.follow_count);
+  $("updatedAt").textContent=data.updated_at_text||data.updated_at||"-";
+  const alert=String(data.status||"").toLowerCase()==="alert"||alerts>0;
+  $("notice").className="notice"+(alert?" alert":"");$("noticeMark").textContent=alert?"!":"✓";
+  $("statusTitle").textContent=alert?("พบสถานีที่ต้องติดตาม "+fmt(alerts)+" สถานี"):"สถานการณ์โดยรวมอยู่ในภาวะปกติ";
+  $("statusText").textContent=alert?"กรุณาตรวจสอบรายละเอียดและติดตามการเปลี่ยนแปลง":"ไม่พบค่าพารามิเตอร์ที่เกินค่ามาตรฐานในข้อมูลล่าสุด";
+  const stations=Array.isArray(data.stations)?data.stations:[];
+  $("stationCount").textContent=fmt(stations.length)+" รายการ";
+  $("stationList").innerHTML=stations.length?stations.slice(0,8).map(s=>{
+    const status=String(s.status||"-").toUpperCase();
+    return '<div class="station"><div class="station-main"><div class="station-name">'+esc(s.station_name)+'</div><div class="station-meta">'+esc(s.station_type)+' • '+esc(s.estate_name)+'</div></div><span class="badge '+(status==="ONLINE"?"online":"offline")+'">'+(status==="ONLINE"?"ออนไลน์":status==="OFFLINE"?"ออฟไลน์":esc(status))+'</span></div>'
+  }).join(""):'<div class="empty">ไม่พบสถานีที่ต้องติดตามในข้อมูลล่าสุด</div>';
 }
-function esc(v){return String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-async function load(){try{const r=await fetch('./status.json?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error('status');render(await r.json())}catch(e){render({total:131,online:131,offline:0,alerts:0,aqm:27,wqm:12,cem:92,urgent_count:0,watch_count:0,follow_count:0,system_status:'ใช้ข้อมูลสำรอง — รอ status.json',updated_at_text:new Date().toLocaleString('th-TH',{dateStyle:'medium',timeStyle:'short'})})}}
+async function load(){try{const r=await fetch("./status.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error("HTTP "+r.status);render(await r.json())}catch(error){$("updatedAt").textContent="ไม่สามารถโหลดข้อมูลล่าสุด";$("statusTitle").textContent="เกิดข้อผิดพลาดในการโหลดข้อมูล";$("statusText").textContent="กรุณาลองใหม่อีกครั้ง";$("stationList").innerHTML='<div class="empty">ไม่สามารถโหลด status.json ได้</div>'}}
 load();setInterval(load,60000);
 </script>
 </body>
