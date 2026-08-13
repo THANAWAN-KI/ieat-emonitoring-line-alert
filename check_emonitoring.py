@@ -1497,18 +1497,42 @@ def build_event_summary_bubble(
         ),
     ]
 
-    # แสดงรายการเหตุการณ์แบบสั้น
-    # เพื่อไม่ให้ Summary ใหญ่เกินไป
-    for event in sorted_events[:12]:
+    # แสดงชื่อเหตุการณ์เพียงครั้งเดียว แล้วตามด้วยรายชื่อสถานี
+    # เช่น "พบการแจ้งเตือนใหม่" 1 ครั้ง ไม่ซ้ำในทุกสถานี
+    visible_events = sorted_events[:12]
+    event_groups: list[tuple[str, str, list[dict[str, Any]]]] = []
 
+    for event in visible_events:
         title = event_title(event)
         color = event_color(event)
+
+        for index, (group_title, group_color, group_events) in enumerate(
+            event_groups
+        ):
+            if group_title == title:
+                group_events.append(event)
+                event_groups[index] = (
+                    group_title,
+                    group_color,
+                    group_events,
+                )
+                break
+        else:
+            event_groups.append((title, color, [event]))
+
+    for title, color, group_events in event_groups:
+        station_names = []
+
+        for event in group_events:
+            station_name = safe_text(event.get("station_name"))
+            if station_name not in station_names:
+                station_names.append(station_name)
 
         body_contents.append({
             "type": "box",
             "layout": "vertical",
             "margin": "xs",
-            "paddingAll": "4px",
+            "paddingAll": "6px",
             "backgroundColor": "#F8F9FA",
             "cornerRadius": "7px",
             "contents": [
@@ -1518,17 +1542,16 @@ def build_event_summary_bubble(
                     color=color,
                     weight="bold",
                 ),
-                text_component(
-                    safe_text(
-                        event.get(
-                            "station_name"
-                        )
-                    ),
-                    size="xs",
-                    color="#30283A",
-                    margin="none",
-                    wrap=True,
-                ),
+                *[
+                    text_component(
+                        station_name,
+                        size="xs",
+                        color="#30283A",
+                        margin="xs",
+                        wrap=True,
+                    )
+                    for station_name in station_names
+                ],
             ],
         })
 
@@ -2663,13 +2686,128 @@ def json_size_bytes(
 # Split carousel by actual JSON size
 # ============================================================
 
+def build_type_detail_bubble(
+    group_name: str,
+    stations: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """สร้างรายละเอียดรวม 1 หน้า ต่อ 1 ประเภทสถานี"""
+
+    contents: list[dict[str, Any]] = [
+        {
+            "type": "box",
+            "layout": "vertical",
+            "paddingAll": "8px",
+            "backgroundColor": "#F8F4FB",
+            "borderColor": "#DCCBEA",
+            "borderWidth": "1px",
+            "cornerRadius": "9px",
+            "contents": [
+                text_component(
+                    f"การแจ้งเตือนประเภท {group_name}",
+                    size="sm",
+                    color="#4E1478",
+                    weight="bold",
+                    align="center",
+                ),
+                text_component(
+                    f"พบ {len(stations)} สถานีที่มีการเปลี่ยนแปลง",
+                    size="xs",
+                    color="#777777",
+                    margin="xs",
+                    align="center",
+                ),
+            ],
+        }
+    ]
+
+    for station in stations:
+        severity = get_station_severity(station)
+        station_name = safe_text(station.get("station_name"))
+        estate_name = safe_text(station.get("estate_name"))
+        parameters = split_alarm_items(
+            station.get("parameter_alarm")
+            or station.get("previous_snapshot", {}).get("parameter_alarm")
+        )
+        parameter_text = ", ".join(parameters) if parameters else "-"
+
+        contents.append({
+            "type": "box",
+            "layout": "vertical",
+            "margin": "sm",
+            "paddingAll": "7px",
+            "backgroundColor": severity["background"],
+            "borderColor": severity["border"],
+            "borderWidth": "1px",
+            "cornerRadius": "8px",
+            "contents": [
+                text_component(
+                    station_name,
+                    size="xs",
+                    color="#30283A",
+                    weight="bold",
+                ),
+                text_component(
+                    estate_name,
+                    size="xs",
+                    color="#6C757D",
+                    margin="xs",
+                ),
+                text_component(
+                    parameter_text,
+                    size="xs",
+                    color=severity["color"],
+                    weight="bold",
+                    margin="xs",
+                ),
+            ],
+        })
+
+    return {
+        "type": "bubble",
+        "size": "giga",
+        "styles": {
+            "header": {"backgroundColor": "#FFFFFF"},
+            "body": {"backgroundColor": "#FFFFFF"},
+            "footer": {"backgroundColor": "#FFFFFF"},
+        },
+        "header": build_header(f"รายละเอียดการแจ้งเตือน {group_name}"),
+        "body": {
+            "type": "box",
+            "layout": "vertical",
+            "paddingTop": "3px",
+            "paddingBottom": "7px",
+            "paddingStart": "12px",
+            "paddingEnd": "12px",
+            "contents": contents,
+        },
+        "footer": {
+            "type": "box",
+            "layout": "vertical",
+            "paddingTop": "3px",
+            "paddingBottom": "9px",
+            "paddingStart": "12px",
+            "paddingEnd": "12px",
+            "contents": [
+                {
+                    "type": "button",
+                    "style": "primary",
+                    "height": "sm",
+                    "color": "#4E1478",
+                    "action": {
+                        "type": "uri",
+                        "label": "เปิด Dashboard",
+                        "uri": DASHBOARD_URL,
+                    },
+                }
+            ],
+        },
+    }
+
+
 def build_detail_carousels(
     alert_stations: list[dict[str, Any]]
 ) -> list[dict[str, Any]]:
-    """
-    ส่งรายละเอียดแต่ละสถานีเป็น Flex bubble เดี่ยว
-    เพื่อให้มีความกว้างเท่ากับการ์ดสรุปหน้าแรก
-    """
+    """ส่งรายละเอียดเป็น 1 หน้า ต่อ 1 ประเภท: AQMs, CEMs, WQMs"""
 
     groups = [
         (
@@ -2682,15 +2820,6 @@ def build_detail_carousels(
             ],
         ),
         (
-            "WQMs",
-            [
-                s for s in alert_stations
-                if station_type_group(
-                    s["station_type"]
-                ) == "WQMs"
-            ],
-        ),
-        (
             "CEMs",
             [
                 s for s in alert_stations
@@ -2700,12 +2829,12 @@ def build_detail_carousels(
             ],
         ),
         (
-            "ประเภทอื่น",
+            "WQMs",
             [
                 s for s in alert_stations
                 if station_type_group(
                     s["station_type"]
-                ) == "ประเภทอื่น"
+                ) == "WQMs"
             ],
         ),
     ]
@@ -2713,40 +2842,37 @@ def build_detail_carousels(
     messages: list[dict[str, Any]] = []
 
     for group_name, stations in groups:
-        for station in stations:
-            bubble = build_station_detail_bubble(
-                station
+        if not stations:
+            continue
+
+        bubble = build_type_detail_bubble(
+            group_name,
+            stations,
+        )
+
+        message = make_flex_message(
+            bubble,
+            f"การแจ้งเตือนประเภท {group_name} {len(stations)} สถานี",
+        )
+
+        message_size = json_size_bytes(
+            message
+        )
+
+        if message_size > MAX_FLEX_BYTES:
+            raise RuntimeError(
+                f"หน้ารวม {group_name} มีขนาดเกิน "
+                f"{MAX_FLEX_BYTES / 1024:.0f} KB "
+                f"({message_size / 1024:.1f} KB)"
             )
 
-            message = make_flex_message(
-                bubble,
-                (
-                    f"รายละเอียดสถานี {group_name}: "
-                    f"{station['station_name']}"
-                ),
-            )
+        messages.append(message)
 
-            message_size = json_size_bytes(
-                message
-            )
-
-            if message_size > MAX_FLEX_BYTES:
-                raise RuntimeError(
-                    "รายละเอียดสถานีเดี่ยวมีขนาดเกิน "
-                    f"{MAX_FLEX_BYTES / 1024:.0f} KB: "
-                    f"{station['station_name']} "
-                    f"({message_size / 1024:.1f} KB)"
-                )
-
-            messages.append(
-                message
-            )
-
-            print(
-                f"สร้างการ์ดเดี่ยว {group_name}: "
-                f"{station['station_name']} / "
-                f"{message_size / 1024:.1f} KB"
-            )
+        print(
+            f"สร้างหน้ารวม {group_name}: "
+            f"{len(stations)} สถานี / "
+            f"{message_size / 1024:.1f} KB"
+        )
 
     return messages
 
