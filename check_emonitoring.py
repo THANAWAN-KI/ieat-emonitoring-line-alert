@@ -740,7 +740,11 @@ def write_status_file(
         "type_stats":
             type_stats,
 
-        # ข้อมูลเต็ม
+        # ข้อมูลสถานีทั้งหมดสำหรับ Executive Dashboard
+        "all_stations":
+            all_stations,
+
+        # รายการสถานีที่มีการแจ้งเตือน
         "stations":
             alert_stations,
     }
