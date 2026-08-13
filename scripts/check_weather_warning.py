@@ -110,16 +110,16 @@ def weather_info_row(icon: str, label: str, value: str) -> dict:
     return {
         "type": "box", "layout": "horizontal", "spacing": "md", "margin": "lg",
         "contents": [
-            {"type": "box", "layout": "vertical", "width": "42px", "height": "42px",
+            {"type": "box", "layout": "vertical", "width": "36px", "height": "36px",
              "backgroundColor": "#F2EAF8", "cornerRadius": "10px",
              "justifyContent": "center", "alignItems": "center",
-             "contents": [{"type": "text", "text": icon, "size": "xl",
+             "contents": [{"type": "text", "text": icon, "size": "lg",
                            "weight": "bold", "color": "#52057F", "align": "center"}]},
             {"type": "box", "layout": "vertical", "flex": 1, "justifyContent": "center",
              "contents": [
-                 {"type": "text", "text": label, "size": "sm", "weight": "bold",
+                 {"type": "text", "text": label, "size": "xs", "weight": "bold",
                   "color": "#52057F"},
-                 {"type": "text", "text": value, "size": "md", "weight": "bold",
+                 {"type": "text", "text": value, "size": "sm", "weight": "bold",
                   "color": "#222222", "wrap": True, "margin": "xs"},
              ]},
         ],
@@ -157,7 +157,7 @@ def flex_message(item: dict, test: bool = False) -> dict:
         {"type": "text", "text": "⚠  แจ้งเตือนภัยพิบัติ", "color": "#FFFFFF",
          "weight": "bold", "size": "md", "align": "center"},
         {"type": "text", "text": "สภาพอากาศ", "color": "#FFFFFF",
-         "weight": "bold", "size": "3xl", "align": "center", "margin": "sm"},
+         "weight": "bold", "size": "xxl", "align": "center", "margin": "sm"},
     ]
     if test:
         header.append({"type": "text", "text": "ตัวอย่างทดสอบ • ไม่ใช่เหตุการณ์จริง",
@@ -169,11 +169,11 @@ def flex_message(item: dict, test: bool = False) -> dict:
         "altText": ("[ทดสอบ] " if test else "") +
                    f"แจ้งเตือนสภาพอากาศ — {hazards}"[:350],
         "contents": {
-            "type": "bubble", "size": "mega",
+            "type": "bubble", "size": "kilo",
             "header": {"type": "box", "layout": "vertical",
-                       "backgroundColor": "#FF6908", "paddingAll": "20px",
+                       "backgroundColor": "#FF6908", "paddingAll": "16px",
                        "contents": header},
-            "body": {"type": "box", "layout": "vertical", "paddingAll": "20px",
+            "body": {"type": "box", "layout": "vertical", "paddingAll": "16px",
                      "backgroundColor": "#FFFFFF", "contents": [
                 {"type": "box", "layout": "horizontal", "contents": [
                     {"type": "box", "layout": "vertical", "paddingAll": "9px",
@@ -191,21 +191,19 @@ def flex_message(item: dict, test: bool = False) -> dict:
                 weather_info_row("▣", "เวลาที่ระบบตรวจพบ", now),
                 {"type": "separator", "margin": "xl", "color": "#E7E7E7"},
                 {"type": "box", "layout": "vertical", "margin": "xl",
-                 "paddingAll": "15px", "backgroundColor": "#F4F9EE",
+                 "paddingAll": "13px", "backgroundColor": "#F4F9EE",
                  "cornerRadius": "14px", "contents": [
                     {"type": "text", "text": "✓  คำแนะนำเพื่อความปลอดภัย",
-                     "size": "lg", "weight": "bold", "color": "#598C14",
+                     "size": "md", "weight": "bold", "color": "#598C14",
                      "wrap": True},
-                    {"type": "text", "text": f"• {tips[0]}", "size": "sm",
+                    {"type": "text", "text": f"• {tips[0]}", "size": "xs",
                      "color": "#333333", "wrap": True, "margin": "lg"},
-                    {"type": "text", "text": f"• {tips[1]}", "size": "sm",
-                     "color": "#333333", "wrap": True, "margin": "md"},
-                    {"type": "text", "text": f"• {tips[2]}", "size": "sm",
+                    {"type": "text", "text": f"• {tips[1]}", "size": "xs",
                      "color": "#333333", "wrap": True, "margin": "md"},
                 ]},
             ]},
-            "footer": {"type": "box", "layout": "vertical", "paddingAll": "16px",
-                       "spacing": "md", "contents": [
+            "footer": {"type": "box", "layout": "vertical", "paddingAll": "13px",
+                       "spacing": "sm", "contents": [
                 {"type": "button", "style": "primary", "height": "sm",
                  "color": "#52057F",
                  "action": {"type": "uri", "label": "อ่านประกาศฉบับเต็ม",
@@ -213,7 +211,7 @@ def flex_message(item: dict, test: bool = False) -> dict:
                 {"type": "separator", "margin": "md", "color": "#598C14"},
                 {"type": "text",
                  "text": "ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย กนอ.",
-                 "size": "xs", "weight": "bold", "color": "#52057F",
+                 "size": "xxs", "weight": "bold", "color": "#52057F",
                  "align": "center", "wrap": True},
             ]},
         },
