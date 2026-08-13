@@ -1182,7 +1182,11 @@ body.report-ready .report-view{
 }
 
 .report-sheet.capturing{
-  width:1400px;
+  width:1240px;
+  height:1754px;
+  min-height:1754px;
+  overflow:hidden;
+  box-sizing:border-box;
 }
 
 .report-head{
@@ -3951,8 +3955,8 @@ async function downloadDashboardPng(button){
         logging:false,
         scrollX:0,
         scrollY:-window.scrollY,
-        windowWidth:1440,
-        windowHeight:target.scrollHeight
+        windowWidth:1240,
+        windowHeight:1754
       }
     );
 
@@ -3962,7 +3966,7 @@ async function downloadDashboardPng(button){
       .slice(0,10);
 
     link.download =
-      "IEAT-Executive-Dashboard-"
+      "IEAT-Situation-Report-A4-"
       + stamp
       + ".png";
 
