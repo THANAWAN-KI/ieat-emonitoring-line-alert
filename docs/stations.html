@@ -1736,6 +1736,36 @@ main{width:100%;padding:14px 16px 28px}.loading,.error{padding:22px;background:#
   .footer{font-size:11px;line-height:1.7}
 }
 </style>
+<style id="summary-download-style">
+/* Larger readable text and summary-image download */
+body{font-size:17px}
+.brand-title{font-size:19px}.brand-subtitle{font-size:12px}
+.status-title{font-size:17px}.status-sub{font-size:14px}
+.section-title,.section-title-row .section-title{font-size:22px}
+.kpi .label{font-size:13px}.progress-head{font-size:13px}
+.decision-item span{font-size:12px!important}.decision-item strong{font-size:14px!important}
+.type-copy strong{font-size:17px}.type-copy span{font-size:13px}
+.mini{font-size:12px}.sev span{font-size:13px}
+.filter-btn,.status-filter-btn{font-size:13px}.station-search{font-size:14px!important}
+.alert-note{font-size:13px}.station-name{font-size:16px}.station-meta{font-size:13px}
+.badge{font-size:11px}.param,.comment,.param-title{font-size:12px}.action{font-size:13px}
+.download-card{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--purple);border-radius:10px;box-shadow:var(--shadow)}
+.download-card strong{display:block;color:var(--ink);font-size:16px}
+.download-card span{display:block;margin-top:5px;color:var(--muted);font-size:13px;line-height:1.55}
+.summary-download-btn{flex:none;padding:12px 16px;border:0;border-radius:9px;background:var(--purple);color:#fff;font:800 14px "Sarabun","Noto Sans Thai",Tahoma,sans-serif;cursor:pointer}
+.summary-download-btn:disabled{opacity:.6;cursor:wait}
+@media(max-width:620px){
+ body{font-size:17px}.brand-title{font-size:18px}.brand-subtitle{font-size:12px}
+ .hero h1{font-size:27px}.hero p{font-size:15px}
+ .quick-nav a{font-size:13px}.status-title{font-size:17px}.status-sub{font-size:14px}
+ .section-title,.section-title-row .section-title{font-size:22px}
+ .station-name{font-size:16px}.station-meta{font-size:13px}
+ .param,.comment,.param-title{font-size:13px}.action{font-size:13px}
+ .download-card{display:block;padding:16px}.download-card strong{font-size:16px}.download-card span{font-size:13px}
+ .summary-download-btn{width:100%;margin-top:13px;font-size:14px}
+}
+@media print{.download-section{display:none!important}}
+</style>
 </head>
 
 <body>
@@ -2062,6 +2092,17 @@ main{width:100%;padding:14px 16px 28px}.loading,.error{padding:22px;background:#
 <!-- =====================================================
      STATIONS
 ===================================================== -->
+
+<section id="download-report" class="section download-section">
+  <div class="section-title">ดาวน์โหลดรายงานสรุป</div>
+  <div class="download-card">
+    <div>
+      <strong>ภาพสรุปสถานการณ์สถานีตรวจวัด</strong>
+      <span>จัดทำเป็นภาพรายงานแนวตั้งสำหรับเปิดบนมือถือหรือส่งต่อใน LINE</span>
+    </div>
+    <button class="summary-download-btn" type="button" onclick="downloadSummaryImage()">ดาวน์โหลดรูปภาพสรุป</button>
+  </div>
+</section>
 
 <section id="station-details" class="section">
 
@@ -3021,6 +3062,162 @@ async function loadStatus(){
 
   }
 
+}
+
+
+
+function summaryStations(data){
+  const all = Array.isArray(data.all_stations) ? data.all_stations
+    : Array.isArray(data.station_details) ? data.station_details
+    : Array.isArray(data.stations) ? data.stations : [];
+  return [...all].sort((a,b) => severityScore(b)-severityScore(a));
+}
+
+function canvasRoundRect(ctx,x,y,w,h,r,fill,stroke){
+  ctx.beginPath();
+  ctx.roundRect(x,y,w,h,r);
+  if(fill){ctx.fillStyle=fill;ctx.fill();}
+  if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=2;ctx.stroke();}
+}
+
+function canvasText(ctx,text,x,y,maxWidth,lineHeight,maxLines){
+  const words=String(text??"-").split(/\s+/);
+  let line="",lines=[];
+  for(const word of words){
+    const test=line?line+" "+word:word;
+    if(ctx.measureText(test).width>maxWidth && line){lines.push(line);line=word;}
+    else line=test;
+  }
+  if(line)lines.push(line);
+  if(maxLines && lines.length>maxLines){
+    lines=lines.slice(0,maxLines);
+    let last=lines[maxLines-1];
+    while(ctx.measureText(last+"…").width>maxWidth && last.length>1)last=last.slice(0,-1);
+    lines[maxLines-1]=last+"…";
+  }
+  lines.forEach((l,i)=>ctx.fillText(l,x,y+i*lineHeight));
+  return lines.length*lineHeight;
+}
+
+async function downloadSummaryImage(){
+  if(!CURRENT_DATA){alert("กรุณารอให้ระบบโหลดข้อมูลให้เสร็จก่อน");return;}
+  const button=document.querySelector(".summary-download-btn");
+  if(button){button.disabled=true;button.textContent="กำลังสร้างรูปภาพ…";}
+  try{
+    await document.fonts.ready;
+    const data=CURRENT_DATA;
+    const total=num(data.station_count??data.station_total);
+    const online=num(data.online_total);
+    const offline=num(data.offline_total);
+    const percent=total?Math.round(online/total*100):0;
+    const updated=data.updated_at_text||data.updated_at||"-";
+    const ranked=summaryStations(data).filter(s=>{
+      const status=String(s.status||s.Status||"").toUpperCase();
+      return status==="OFFLINE" || severityScore(s)>1 ||
+        String(s.parameter_alarm||s.ParameterAlram||"").trim().length>1;
+    }).slice(0,6);
+    const canvas=document.createElement("canvas");
+    canvas.width=1080;
+    canvas.height=ranked.length?1540:1240;
+    const ctx=canvas.getContext("2d");
+    ctx.fillStyle="#F5F6F8";ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.textBaseline="top";
+    ctx.fillStyle="#65408A";ctx.fillRect(38,36,14,112);
+    ctx.fillStyle="#16171B";ctx.font='700 45px "Sarabun","Noto Sans Thai",Tahoma,sans-serif';
+    ctx.fillText("รายงานสถานะสถานีตรวจวัด",78,42);
+    ctx.fillStyle="#65408A";ctx.font='800 23px "Sarabun","Noto Sans Thai",Tahoma,sans-serif';
+    ctx.fillText("IEAT e-MONITORING SYSTEM",78,108);
+    ctx.textAlign="right";ctx.fillStyle="#626773";ctx.font='400 19px "Sarabun","Noto Sans Thai",Tahoma,sans-serif';
+    ctx.fillText(updated,1036,50);ctx.textAlign="left";
+
+    canvasRoundRect(ctx,30,178,1020,210,20,"#FFFFFF","#DCE0E6");
+    ctx.fillStyle="#65408A";ctx.font='800 24px "Sarabun","Noto Sans Thai",Tahoma,sans-serif';
+    ctx.fillText("ภาพรวมสถานการณ์",66,214);
+    ctx.fillStyle="#292B31";ctx.font='800 40px "Sarabun","Noto Sans Thai",Tahoma,sans-serif';
+    ctx.fillText(total.toLocaleString("th-TH")+" สถานี",66,260);
+    ctx.fillStyle="#68707C";ctx.font='400 20px "Sarabun","Noto Sans Thai",Tahoma,sans-serif';
+    ctx.fillText("ข้อมูลสถานีตรวจวัดคุณภาพสิ่งแวดล้อมทั้งหมด",66,320);
+    ctx.fillStyle="#65408A";ctx.fillRect(610,218,2,126);
+    ctx.fillStyle=percent>=85?"#2D915D":"#C94B4B";ctx.font='800 38px "Sarabun","Noto Sans Thai",Tahoma,sans-serif';
+    ctx.fillText(percent+"%",654,244);
+    ctx.fillStyle="#68707C";ctx.font='500 19px "Sarabun","Noto Sans Thai",Tahoma,sans-serif';
+    ctx.fillText("ความพร้อมใช้งานของระบบ",654,298);
+
+    ctx.fillStyle="#292B31";ctx.font='800 25px "Sarabun","Noto Sans Thai",Tahoma,sans-serif';
+    ctx.fillText("สรุปสถานะข้อมูล",38,420);
+    const stats=[
+      {label:"สถานีทั้งหมด",value:total,color:"#65408A",bg:"#F7F3FA"},
+      {label:"ออนไลน์",value:online,color:"#2D915D",bg:"#EDF8F2"},
+      {label:"ออฟไลน์",value:offline,color:"#C94B4B",bg:"#FFF0F0"}
+    ];
+    stats.forEach((s,i)=>{
+      const x=30+i*350;
+      canvasRoundRect(ctx,x,462,330,150,16,s.bg,s.color+"55");
+      ctx.fillStyle=s.color;ctx.font='800 42px "Sarabun","Noto Sans Thai",Tahoma,sans-serif';
+      ctx.fillText(s.value.toLocaleString("th-TH"),x+28,490);
+      ctx.fillStyle="#4F5560";ctx.font='600 19px "Sarabun","Noto Sans Thai",Tahoma,sans-serif';
+      ctx.fillText(s.label,x+28,552);
+    });
+
+    ctx.fillStyle="#292B31";ctx.font='800 25px "Sarabun","Noto Sans Thai",Tahoma,sans-serif';
+    ctx.fillText("สถานีตรวจวัดแยกตามประเภท",38,652);
+    ["AQMs","WQMs","CEMs"].forEach((key,i)=>{
+      const t=typeData(data,key),x=30+i*350;
+      canvasRoundRect(ctx,x,696,330,154,16,"#FFFFFF","#DCE0E6");
+      ctx.fillStyle="#65408A";ctx.font='800 27px "Sarabun","Noto Sans Thai",Tahoma,sans-serif';
+      ctx.fillText(key,x+24,720);
+      ctx.fillStyle="#30333A";ctx.font='800 32px "Sarabun","Noto Sans Thai",Tahoma,sans-serif';
+      ctx.fillText(t.total.toLocaleString("th-TH")+" สถานี",x+24,760);
+      ctx.fillStyle="#2D915D";ctx.font='600 17px "Sarabun","Noto Sans Thai",Tahoma,sans-serif';
+      ctx.fillText("ออนไลน์ "+t.online.toLocaleString("th-TH"),x+24,812);
+      ctx.fillStyle="#C94B4B";ctx.fillText("ออฟไลน์ "+t.offline.toLocaleString("th-TH"),x+166,812);
+    });
+
+    let y=896;
+    ctx.fillStyle="#292B31";ctx.font='800 25px "Sarabun","Noto Sans Thai",Tahoma,sans-serif';
+    ctx.fillText("สถานีที่ควรติดตาม",38,y);y+=44;
+    if(ranked.length){
+      ranked.forEach((s,i)=>{
+        const name=s.station_name||s.StationTH||"-";
+        const estate=s.estate_name||s.IndustryZone||"-";
+        const status=String(s.status||s.Status||"-").toUpperCase();
+        const alarm=s.parameter_alarm||s.ParameterAlram||"";
+        canvasRoundRect(ctx,30,y,1020,82,13,"#FFFFFF","#DCE0E6");
+        ctx.fillStyle=status==="ONLINE"?"#2D915D":"#C94B4B";
+        ctx.fillRect(30,y,7,82);
+        ctx.fillStyle="#30333A";ctx.font='700 19px "Sarabun","Noto Sans Thai",Tahoma,sans-serif';
+        canvasText(ctx,(i+1)+". "+name,56,y+14,690,24,1);
+        ctx.fillStyle="#707681";ctx.font='400 15px "Sarabun","Noto Sans Thai",Tahoma,sans-serif';
+        canvasText(ctx,estate+(alarm&&alarm!=="-"?" • "+alarm:""),56,y+48,760,19,1);
+        ctx.textAlign="right";ctx.fillStyle=status==="ONLINE"?"#2D915D":"#C94B4B";
+        ctx.font='800 16px "Sarabun","Noto Sans Thai",Tahoma,sans-serif';
+        ctx.fillText(status==="ONLINE"?"ออนไลน์":status==="OFFLINE"?"ออฟไลน์":status,1018,y+29);
+        ctx.textAlign="left";y+=94;
+      });
+    }else{
+      canvasRoundRect(ctx,30,y,1020,90,13,"#EDF8F2","#CDE7D8");
+      ctx.fillStyle="#2D915D";ctx.font='700 20px "Sarabun","Noto Sans Thai",Tahoma,sans-serif';
+      ctx.fillText("ไม่พบสถานีที่ต้องเร่งติดตามในข้อมูลล่าสุด",58,y+31);y+=104;
+    }
+
+    const noteY=canvas.height-135;
+    canvasRoundRect(ctx,30,noteY,1020,95,14,"#FAF7FC","#D9C9E7");
+    ctx.fillStyle="#65408A";ctx.font='800 17px "Sarabun","Noto Sans Thai",Tahoma,sans-serif';
+    ctx.fillText("หมายเหตุ",58,noteY+20);
+    ctx.fillStyle="#68616E";ctx.font='400 15px "Sarabun","Noto Sans Thai",Tahoma,sans-serif';
+    ctx.fillText("ข้อมูลจากระบบติดตามตรวจสอบสิ่งแวดล้อม กนอ. โปรดตรวจสอบข้อมูลล่าสุดก่อนปฏิบัติงาน",58,noteY+53);
+
+    const blob=await new Promise(resolve=>canvas.toBlob(resolve,"image/png",1));
+    if(!blob)throw new Error("สร้างรูปภาพไม่สำเร็จ");
+    const url=URL.createObjectURL(blob),a=document.createElement("a");
+    const stamp=new Date().toISOString().slice(0,10);
+    a.href=url;a.download="IEAT-Station-Summary-"+stamp+".png";
+    document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  }catch(error){
+    console.error(error);alert("ไม่สามารถสร้างรูปภาพได้ กรุณาลองใหม่อีกครั้ง");
+  }finally{
+    if(button){button.disabled=false;button.textContent="ดาวน์โหลดรูปภาพสรุป";}
+  }
 }
 
 
