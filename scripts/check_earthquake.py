@@ -21,6 +21,21 @@ STATE_PATH = Path(os.getenv("EARTHQUAKE_STATE_PATH", "data/earthquake-state.json
 LINE_API = "https://api.line.me/v2/bot/message/push"
 GIS_DASHBOARD_URL = "https://www.arcgis.com/apps/dashboards/4bdeaa7907734b32b5ddc64705c86f7d"
 THAI_TZ = ZoneInfo("Asia/Bangkok")
+
+ASSET_BASE_URL = (
+    "https://raw.githubusercontent.com/"
+    "THANAWAN-KI/ieat-emonitoring-line-alert/main/docs/assets"
+)
+ASSET_URLS = {
+    "alert": f"{ASSET_BASE_URL}/advertising-svgrepo-com.png",
+    "danger": f"{ASSET_BASE_URL}/4.png",
+    "normal": f"{ASSET_BASE_URL}/1.png",
+    "air": f"{ASSET_BASE_URL}/co2-svgrepo-com.png",
+    "flood": f"{ASSET_BASE_URL}/dam-svgrepo-com.png",
+    "world": f"{ASSET_BASE_URL}/globe-svgrepo-com.png",
+    "nature": f"{ASSET_BASE_URL}/tree-svgrepo-com.png",
+    "factory": f"{ASSET_BASE_URL}/factory-svgrepo-com.png",
+}
 MAG_RE = re.compile(r"(?:ขนาด|Magnitude|Mag\.?)[^0-9]{0,12}([0-9]+(?:\.[0-9]+)?)", re.I)
 DEPTH_RE = re.compile(r"(?:ความลึก|Depth)[^0-9]{0,12}([0-9]+(?:\.[0-9]+)?)", re.I)
 COORD_RE = re.compile(r"(-?\d{1,2}\.\d+)\s*[,/]\s*(-?\d{1,3}\.\d+)")
@@ -117,15 +132,23 @@ def info_card(label: str, value: str, accent: str = "#6F4A8E") -> dict:
         ]}
 
 
-def alert_info_row(icon: str, label: str, value: str) -> dict:
+def icon_image(url: str, size: str = "24px") -> dict:
+    return {
+        "type": "image",
+        "url": url,
+        "size": size,
+        "aspectMode": "fit",
+    }
+
+
+def alert_info_row(icon_url: str, label: str, value: str) -> dict:
     return {
         "type": "box", "layout": "horizontal", "spacing": "md", "margin": "lg",
         "contents": [
             {"type": "box", "layout": "vertical", "width": "36px", "height": "36px",
              "backgroundColor": "#F2EAF8", "cornerRadius": "10px",
              "justifyContent": "center", "alignItems": "center",
-             "contents": [{"type": "text", "text": icon, "size": "lg",
-                           "weight": "bold", "color": "#52057F", "align": "center"}]},
+             "contents": [icon_image(icon_url)]},
             {"type": "box", "layout": "vertical", "flex": 1, "justifyContent": "center",
              "contents": [
                  {"type": "text", "text": label, "size": "xs", "weight": "bold",
@@ -152,8 +175,12 @@ def flex_message(event: dict, test: bool = False) -> dict:
     )
 
     header = [
-        {"type": "text", "text": "⚠  แจ้งเตือนภัยพิบัติ", "color": "#FFFFFF",
-         "weight": "bold", "size": "md", "align": "center"},
+        {"type": "box", "layout": "horizontal", "justifyContent": "center",
+         "alignItems": "center", "spacing": "sm", "contents": [
+            icon_image(ASSET_URLS["alert"], "28px"),
+            {"type": "text", "text": "แจ้งเตือนภัยพิบัติ", "color": "#FFFFFF",
+             "weight": "bold", "size": "md", "flex": 0},
+         ]},
         {"type": "text", "text": "แผ่นดินไหว", "color": "#FFFFFF",
          "weight": "bold", "size": "xxl", "align": "center", "margin": "sm"},
     ]
@@ -173,9 +200,15 @@ def flex_message(event: dict, test: bool = False) -> dict:
                        "contents": header},
             "body": {"type": "box", "layout": "vertical", "paddingAll": "16px",
                      "backgroundColor": "#FFFFFF", "contents": [
-                {"type": "box", "layout": "horizontal", "contents": [
+                {"type": "box", "layout": "horizontal", "alignItems": "center",
+                 "spacing": "sm", "contents": [
+                    icon_image(
+                        ASSET_URLS["danger"] if magnitude is not None and magnitude >= 5
+                        else ASSET_URLS["normal"],
+                        "32px",
+                    ),
                     {"type": "box", "layout": "vertical", "paddingAll": "9px",
-                     "backgroundColor": status_color, "cornerRadius": "9px",
+                     "backgroundColor": status_color, "cornerRadius": "9px", "flex": 0,
                      "contents": [{"type": "text", "text": level, "size": "sm",
                                    "weight": "bold", "color": "#FFFFFF",
                                    "align": "center"}]}
@@ -189,16 +222,26 @@ def flex_message(event: dict, test: bool = False) -> dict:
                     {"type": "text", "text": "แมกนิจูด", "size": "sm",
                      "color": "#666666", "margin": "sm"},
                 ]},
-                alert_info_row("●", "พื้นที่เกิดเหตุ", location),
-                alert_info_row("▣", "วันและเวลา", published),
-                alert_info_row("↧", "จุดศูนย์กลางลึก", depth),
+                alert_info_row(
+                    ASSET_URLS["factory"], "พื้นที่เกิดเหตุ", location
+                ),
+                alert_info_row(
+                    ASSET_URLS["world"], "วันและเวลา", published
+                ),
+                alert_info_row(
+                    ASSET_URLS["flood"], "จุดศูนย์กลางลึก", depth
+                ),
                 {"type": "separator", "margin": "xl", "color": "#E7E7E7"},
                 {"type": "box", "layout": "vertical", "margin": "xl",
                  "paddingAll": "13px", "backgroundColor": "#F4F9EE",
                  "cornerRadius": "14px", "contents": [
-                    {"type": "text", "text": "✓  คำแนะนำเพื่อความปลอดภัย",
-                     "size": "md", "weight": "bold", "color": "#598C14",
-                     "wrap": True},
+                    {"type": "box", "layout": "horizontal", "alignItems": "center",
+                     "spacing": "sm", "contents": [
+                        icon_image(ASSET_URLS["nature"], "24px"),
+                        {"type": "text", "text": "คำแนะนำเพื่อความปลอดภัย",
+                         "size": "md", "weight": "bold", "color": "#598C14",
+                         "wrap": True, "flex": 1},
+                     ]},
                     {"type": "text",
                      "text": "• อยู่ห่างจากกระจกและสิ่งของที่อาจหล่น",
                      "size": "xs", "color": "#333333", "wrap": True,
