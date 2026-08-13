@@ -358,6 +358,347 @@
             .summary-card { min-height: 92px; padding: 15px 14px 14px 66px; }
             .summary-icon { left: 14px; top: 16px; width: 38px; height: 38px; }
         }
+    
+        /* Match docs/contacts.html — shared page style */
+        :root {
+            --ui-purple: #65408A;
+            --ui-purple-dark: #4E2F70;
+            --ui-purple-soft: #F7F3FA;
+            --ui-blue: #2F6FED;
+            --ui-blue-soft: #F1F6FF;
+            --ui-line: #E7E9EE;
+            --ui-text: #34363D;
+            --ui-muted: #7A7D86;
+        }
+
+        body {
+            margin: 0;
+            background: #F5F6F8;
+            color: var(--ui-text);
+            font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 720px;
+            min-height: 100vh;
+            margin: 0 auto;
+            background: #FAFBFC;
+            box-shadow: none;
+        }
+
+        .header {
+            position: static;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-height: 76px;
+            padding: 10px 18px;
+            color: var(--ui-text);
+            background: rgba(255, 255, 255, 0.98);
+            border: 0;
+            border-bottom: 1px solid var(--ui-line);
+            box-shadow: 0 3px 12px rgba(43, 45, 55, 0.06);
+        }
+
+        .logo {
+            flex-shrink: 0;
+            width: 54px;
+            height: 54px;
+            padding: 0;
+            object-fit: contain;
+            background: transparent;
+            border-radius: 0;
+        }
+
+        .header-copy { min-width: 0; }
+
+        .header-title {
+            margin: 0;
+            color: #33353B;
+            font-size: 20px;
+            font-weight: 800;
+            line-height: 1.25;
+        }
+
+        .header-subtitle {
+            margin: 2px 0 0;
+            color: var(--ui-muted);
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .header-meta { display: none; }
+
+        .content {
+            display: block;
+            padding: 16px;
+        }
+
+        .notice {
+            margin: 0;
+            padding: 14px;
+            color: #575A62;
+            background: #FFFFFF;
+            border: 1px solid var(--ui-line);
+            border-left: 4px solid var(--ui-blue);
+            border-radius: 14px;
+            box-shadow: 0 7px 22px rgba(43, 45, 55, 0.055);
+            font-size: 14px;
+            line-height: 1.65;
+        }
+
+        .disaster-tabs {
+            position: static;
+            display: flex;
+            gap: 7px;
+            overflow-x: auto;
+            margin: 16px 0 0;
+            padding: 3px 0 12px;
+            background: transparent;
+            border-bottom: 1px solid var(--ui-line);
+            scrollbar-width: none;
+        }
+
+        .tab {
+            flex: none;
+            padding: 9px 15px;
+            color: var(--ui-muted);
+            background: transparent;
+            border: 0;
+            border-radius: 22px;
+            font: inherit;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .tab.active {
+            color: #FFFFFF;
+            background: var(--ui-purple);
+            border: 0;
+            box-shadow: none;
+        }
+
+        .section-title {
+            display: block;
+            margin: 24px 0 12px;
+            color: var(--ui-purple-dark);
+            font-size: 20px;
+            font-weight: 800;
+            line-height: 1.4;
+        }
+
+        .section-title::before { display: none; }
+
+        .map-panel,
+        .summary-card,
+        .source-card,
+        .latest-panel {
+            background: #FFFFFF;
+            border: 1px solid var(--ui-line);
+            border-radius: 14px;
+            box-shadow: 0 7px 22px rgba(43, 45, 55, 0.055);
+        }
+
+        .map-panel {
+            position: static;
+            overflow: hidden;
+        }
+
+        #map {
+            width: 100%;
+            height: 390px;
+            background: var(--ui-blue-soft);
+        }
+
+        .map-caption {
+            padding: 11px 14px;
+            color: var(--ui-muted);
+            background: #FFFFFF;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .map-caption strong { color: var(--ui-purple-dark); }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .summary-card {
+            padding: 15px 8px;
+            text-align: center;
+            border-top: 1px solid var(--ui-line);
+        }
+
+        .summary-number {
+            display: block;
+            color: var(--ui-purple);
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .summary-label {
+            display: block;
+            margin-top: 5px;
+            color: var(--ui-muted);
+            font-size: 12px;
+            line-height: 1.35;
+        }
+
+        .latest-panel {
+            margin-top: 20px;
+            padding: 16px;
+        }
+
+        .source-card {
+            margin: 0 0 12px;
+            padding: 16px;
+            border-left: 4px solid var(--ui-purple);
+        }
+
+        .source-card.flood,
+        .source-card.weather,
+        .source-card.fire,
+        .source-card.alert,
+        .source-card.earthquake,
+        .source-card.drought {
+            border-left-color: var(--ui-purple);
+        }
+
+        .source-title {
+            margin: 0;
+            color: var(--ui-purple-dark);
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.45;
+        }
+
+        .source-description {
+            margin: 7px 0 0;
+            color: #575A62;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .button {
+            display: block;
+            padding: 12px 8px;
+            border-radius: 9px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            transform: none;
+        }
+
+        .button-primary {
+            color: #FFFFFF;
+            background: var(--ui-purple);
+            box-shadow: 0 4px 10px rgba(101, 64, 138, 0.16);
+        }
+
+        .button-secondary {
+            color: #2569C9;
+            background: var(--ui-blue-soft);
+            border: 1px solid #DCE7FC;
+        }
+
+        .live-status,
+        .updated,
+        .latest-subtitle {
+            color: var(--ui-muted);
+            font-size: 12px;
+        }
+
+        .live-status {
+            margin: 6px 0 0;
+            padding: 0;
+            background: transparent;
+            text-align: right;
+        }
+
+        .updated {
+            margin: 20px 0 4px;
+            padding: 0;
+            border: 0;
+            text-align: center;
+        }
+
+        @media (min-width: 860px) {
+            .page { max-width: 720px; }
+            .content { display: block; padding: 16px; }
+            .notice, .disaster-tabs, .updated,
+            .map-heading, .map-panel, .live-status,
+            .summary-heading, .summary-grid,
+            .source-heading, .source-card, .latest-panel {
+                grid-column: auto;
+                grid-row: auto;
+            }
+            #map { height: 390px; }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                min-height: 70px;
+                padding: 9px 14px;
+            }
+
+            .logo {
+                width: 50px;
+                height: 50px;
+            }
+
+            .header-title {
+                font-size: 18px;
+            }
+
+            .header-subtitle {
+                font-size: 13px;
+            }
+
+            .content {
+                padding: 12px;
+            }
+
+            .notice {
+                padding: 14px;
+            }
+
+            .section-title {
+                font-size: 18px;
+            }
+
+            #map {
+                height: 390px;
+            }
+
+            .summary-grid {
+                gap: 7px;
+            }
+
+            .summary-number {
+                font-size: 21px;
+            }
+
+            .summary-label {
+                font-size: 10px;
+            }
+
+            .buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+
     </style>
 </head>
 <body>
