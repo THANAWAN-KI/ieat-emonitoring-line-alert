@@ -2769,6 +2769,524 @@ body.report-ready .report-view{
       .station-buttons { grid-template-columns: 1fr; }
     }
 
+
+
+    /* IEAT DSS Library layout */
+    :root {
+      --dss-purple:#6B3F91;
+      --dss-purple-dark:#4D286F;
+      --dss-purple-soft:#F7F3FA;
+      --dss-green:#35A56A;
+      --dss-orange:#E57A2A;
+      --dss-blue:#2F6FED;
+      --dss-red:#E34B4B;
+      --dss-ink:#34363D;
+      --dss-muted:#7A7D86;
+      --dss-line:#E7E9EE;
+      --dss-bg:#F5F6F8;
+      --dss-card:#FFFFFF;
+      --dss-shadow:0 7px 22px rgba(43,45,55,.055);
+      --dss-sidebar:238px;
+      --dss-header:74px;
+    }
+
+    body {
+      min-width:320px;
+      color:var(--dss-ink);
+      background:var(--dss-bg);
+      font-family:"Sarabun","Noto Sans Thai",Tahoma,sans-serif;
+    }
+
+    .shell {
+      width:100%;
+      max-width:none;
+      min-height:100vh;
+      margin:0;
+      padding:var(--dss-header) 15px 30px calc(var(--dss-sidebar) + 15px);
+      overflow:visible;
+      background:var(--dss-bg);
+      box-shadow:none;
+    }
+
+    .topbar { display:none; }
+
+    .dss-sidebar {
+      position:fixed;
+      inset:0 auto 0 0;
+      z-index:1200;
+      display:flex;
+      flex-direction:column;
+      width:var(--dss-sidebar);
+      padding:18px 15px;
+      background:rgba(255,255,255,.98);
+      border-right:1px solid var(--dss-line);
+      box-shadow:3px 0 12px rgba(43,45,55,.035);
+    }
+
+    .dss-brand {
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-height:51px;
+      padding:3px 22px 18px;
+      border-bottom:1px solid var(--dss-line);
+    }
+
+    .dss-brand-mark {
+      display:grid;
+      place-items:center;
+      width:30px;
+      height:30px;
+      color:var(--dss-purple);
+    }
+
+    .dss-brand-mark svg {
+      width:25px;
+      height:25px;
+      fill:none;
+      stroke:currentColor;
+      stroke-width:1.8;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+
+    .dss-brand strong {
+      display:block;
+      color:#33353B;
+      font-size:16px;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+
+    .dss-brand small {
+      display:block;
+      margin-top:1px;
+      color:var(--dss-muted);
+      font-size:10px;
+    }
+
+    .dss-nav {
+      display:grid;
+      gap:7px;
+      margin-top:17px;
+    }
+
+    .dss-nav a {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-height:43px;
+      padding:10px 13px;
+      color:#646770;
+      border:1px solid transparent;
+      border-radius:9px;
+      font-size:12px;
+      font-weight:700;
+      text-decoration:none;
+    }
+
+    .dss-nav a::before {
+      display:grid;
+      place-items:center;
+      width:20px;
+      flex:0 0 20px;
+      color:currentColor;
+      font-size:15px;
+      content:attr(data-icon);
+    }
+
+    .dss-nav a:hover {
+      color:var(--dss-purple);
+      background:var(--dss-purple-soft);
+    }
+
+    .dss-nav a.active {
+      color:#FFFFFF;
+      background:var(--dss-purple);
+      box-shadow:0 5px 12px rgba(107,63,145,.16);
+    }
+
+    .dss-connection {
+      display:flex;
+      align-items:center;
+      gap:8px;
+      margin-top:auto;
+      padding:16px 7px 2px;
+      color:var(--dss-muted);
+      border-top:1px solid var(--dss-line);
+      font-size:10px;
+    }
+
+    .dss-connection::before {
+      width:9px;
+      height:9px;
+      background:#8CC63F;
+      border-radius:50%;
+      box-shadow:0 0 0 3px #F0F8E7;
+      content:"";
+    }
+
+    .page-header {
+      position:fixed;
+      inset:0 0 auto var(--dss-sidebar);
+      z-index:1100;
+      display:flex;
+      align-items:center;
+      min-height:var(--dss-header);
+      padding:12px 27px;
+      background:rgba(255,255,255,.98);
+      border:0;
+      border-bottom:1px solid var(--dss-line);
+      box-shadow:0 3px 12px rgba(43,45,55,.035);
+    }
+
+    .page-header .header-icon { display:none; }
+
+    .page-header .brand-title {
+      color:#33353B;
+      font-size:20px;
+      font-weight:500;
+      line-height:1.25;
+    }
+
+    .page-header .brand-subtitle {
+      margin-top:2px;
+      color:var(--dss-muted);
+      font-size:12px;
+      line-height:1.4;
+    }
+
+    main {
+      width:100%;
+      max-width:none;
+      padding:16px 0 0;
+    }
+
+    .hero {
+      min-height:148px;
+      padding:24px 26px;
+      color:var(--dss-ink);
+      background:#FFFFFF;
+      border:1px solid var(--dss-line);
+      border-left:4px solid var(--dss-purple);
+      border-radius:16px;
+      box-shadow:var(--dss-shadow);
+    }
+
+    .hero::after { display:none; }
+
+    .hero-top { display:flex; align-items:flex-start; justify-content:space-between; gap:18px; }
+    .hero h1 {
+      margin:10px 0 4px;
+      color:#33353B;
+      font-size:29px;
+      font-weight:500;
+      line-height:1.2;
+    }
+
+    .hero h1::before {
+      display:block;
+      width:max-content;
+      margin-bottom:13px;
+      padding:5px 10px;
+      color:var(--dss-purple);
+      background:var(--dss-purple-soft);
+      border:1px solid #EADFF1;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:800;
+      content:"IEAT ENVIRONMENTAL MONITORING SYSTEM";
+    }
+
+    .hero p {
+      color:var(--dss-muted);
+      font-size:13px;
+      line-height:1.55;
+    }
+
+    .hero-time {
+      justify-content:flex-start;
+      gap:9px;
+      margin-top:9px;
+      padding-top:0;
+      color:var(--dss-muted);
+      border:0;
+      font-size:11px;
+    }
+
+    .hero-time + .hero-time { margin-top:4px; }
+    .hero-time strong { color:var(--dss-purple); font-size:11px; }
+
+    .status {
+      margin-top:14px;
+      padding:14px 17px;
+      background:#FFFFFF;
+      border:1px solid var(--dss-line);
+      border-left:4px solid var(--dss-blue);
+      border-radius:14px;
+      box-shadow:var(--dss-shadow);
+    }
+
+    .status-title { color:var(--dss-ink); font-size:14px; }
+    .status-sub { color:var(--dss-muted); font-size:11px; }
+    .status-dot, .status-dot.alert {
+      background:#8CC63F;
+      box-shadow:0 0 0 5px #F0F8E7;
+    }
+
+    .section { margin-top:18px; }
+
+    .section-title {
+      margin:0 0 10px;
+      padding:0;
+      color:#45474E;
+      font-size:17px;
+      font-weight:700;
+    }
+
+    .section-title::before { display:none; }
+
+    .kpis {
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:13px;
+    }
+
+    .kpi,
+    .progress-card,
+    .decision-card,
+    .type,
+    .sev,
+    .export-panel,
+    .alert-box,
+    .station {
+      background:var(--dss-card);
+      border:1px solid var(--dss-line);
+      border-radius:14px;
+      box-shadow:var(--dss-shadow);
+    }
+
+    .kpi {
+      position:relative;
+      min-height:100px;
+      padding:17px 17px 16px 72px;
+      border-top:1px solid var(--dss-line);
+      text-align:left;
+    }
+
+    .kpi::before {
+      position:absolute;
+      left:17px;
+      top:25px;
+      display:grid;
+      place-items:center;
+      width:40px;
+      height:40px;
+      color:var(--dss-purple);
+      background:var(--dss-purple-soft);
+      border-radius:11px;
+      font-size:18px;
+      font-weight:800;
+      content:"Σ";
+    }
+
+    .kpi.online::before {
+      color:var(--dss-green);
+      background:#EEF9F3;
+      content:"●";
+    }
+
+    .kpi.offline::before {
+      color:var(--dss-red);
+      background:#FFF2F2;
+      content:"!";
+    }
+
+    .kpi .label { margin:0; color:var(--dss-muted); font-size:11px; font-weight:500; }
+    .kpi .num,
+    .kpi.total .num,
+    .kpi.online .num,
+    .kpi.offline .num {
+      margin-top:3px;
+      color:var(--dss-purple);
+      font-size:28px;
+      font-weight:800;
+    }
+    .kpi.online .num { color:var(--dss-green); }
+    .kpi.offline .num { color:var(--dss-red); }
+
+    .progress-card, .decision-card { padding:17px; }
+    .progress-card { margin-top:13px; }
+    .progress-head { color:var(--dss-muted); }
+    .progress-head span:last-child { color:var(--dss-purple); }
+    .progress-track { background:#EFF0F3; }
+    .progress-bar { background:var(--dss-purple); }
+
+    .decision-card {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:0;
+      margin-top:13px;
+    }
+
+    .decision-item {
+      padding:6px 14px;
+      border:0;
+      border-right:1px solid var(--dss-line);
+    }
+
+    .decision-item:last-child { border-right:0; }
+    .decision-item strong, .decision-item.green strong { color:var(--dss-purple); }
+
+    .types {
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:13px;
+    }
+
+    .type {
+      min-height:140px;
+      padding:17px;
+      border-left:1px solid var(--dss-line);
+    }
+
+    .type-copy strong { color:#45474E; font-size:15px; }
+    .type-total { color:var(--dss-purple); font-size:27px; }
+    .type-counts { margin-top:13px; }
+    .mini, .mini.on, .mini.off {
+      color:var(--dss-purple);
+      background:var(--dss-purple-soft);
+    }
+
+    .severity {
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:13px;
+    }
+
+    .sev,
+    .sev.high,
+    .sev.watch,
+    .sev.follow {
+      min-height:98px;
+      padding:17px;
+      border:1px solid var(--dss-line);
+      border-left:4px solid var(--dss-purple);
+      text-align:left;
+    }
+
+    .sev b { color:var(--dss-purple); font-size:28px; }
+    .sev span { color:var(--dss-muted); font-size:11px; }
+
+    .export-panel { padding:13px; }
+    .export-btn, .export-btn.export-png {
+      width:auto;
+      min-width:225px;
+      padding:12px 18px;
+      color:#FFFFFF;
+      background:var(--dss-purple);
+      border-radius:9px;
+      box-shadow:0 5px 12px rgba(107,63,145,.16);
+    }
+
+    .section-title-row { margin-bottom:10px; }
+
+    .filter-wrap, .status-filter {
+      gap:7px;
+      overflow-x:auto;
+    }
+
+    .filter-btn, .status-filter-btn {
+      padding:9px 14px;
+      color:#646770;
+      background:#FFFFFF;
+      border:1px solid var(--dss-line);
+      border-radius:8px;
+      font-size:11px;
+    }
+
+    .filter-btn.active, .status-filter-btn.active {
+      color:#FFFFFF;
+      background:var(--dss-purple);
+      border-color:var(--dss-purple);
+    }
+
+    .station-tools {
+      display:grid;
+      grid-template-columns:minmax(260px,1fr) auto;
+      gap:10px;
+      align-items:start;
+      margin-top:10px;
+    }
+
+    .station-search {
+      padding:12px 14px;
+      border-color:var(--dss-line);
+      border-radius:9px;
+      box-shadow:0 2px 8px rgba(43,45,55,.025);
+    }
+
+    .status-filter { margin:0; }
+
+    .alert-box { padding:16px; }
+    .station-list {
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+    }
+
+    .station {
+      padding:14px;
+      border-left:4px solid var(--dss-purple);
+      box-shadow:none;
+    }
+
+    .station-name { color:#45474E; font-size:13px; }
+    .station-meta, .param, .param-title, .comment { color:var(--dss-muted); font-size:11px; }
+    .badge { color:var(--dss-purple); background:var(--dss-purple-soft); }
+    .action { color:var(--dss-purple); background:var(--dss-purple-soft); border-color:#EADFF1; }
+    .action.primary { color:#FFFFFF; background:var(--dss-purple); border-color:var(--dss-purple); }
+
+    .footer {
+      margin-top:20px;
+      padding:14px 3px;
+      color:var(--dss-muted);
+      border:0;
+      text-align:left;
+      font-size:10px;
+    }
+
+    @media (min-width:1500px) {
+      .station-list { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    }
+
+    @media (max-width:900px) {
+      .shell {
+        padding:var(--dss-header) 12px 25px;
+      }
+
+      .dss-sidebar { display:none; }
+      .page-header { left:0; padding:12px 18px; }
+      .kpis, .types, .severity { grid-template-columns:1fr 1fr; }
+      .station-list { grid-template-columns:1fr; }
+    }
+
+    @media (max-width:620px) {
+      :root { --dss-header:70px; }
+      .page-header { padding:10px 14px; }
+      .page-header .brand-title { font-size:17px; }
+      .page-header .brand-subtitle { font-size:10px; }
+      .shell { padding:var(--dss-header) 10px 22px; }
+      main { padding-top:10px; }
+      .hero { min-height:0; padding:19px 17px; border-radius:13px; }
+      .hero h1 { font-size:23px; }
+      .hero h1::before { font-size:9px; }
+      .kpis, .types, .severity { grid-template-columns:1fr; }
+      .decision-card { grid-template-columns:1fr; }
+      .decision-item { padding:9px 2px; border-right:0; border-bottom:1px solid var(--dss-line); }
+      .decision-item:last-child { border-bottom:0; }
+      .station-tools { grid-template-columns:1fr; }
+      .export-btn, .export-btn.export-png { width:100%; min-width:0; }
+      .station-buttons { grid-template-columns:1fr; }
+    }
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
@@ -2777,6 +3295,22 @@ body.report-ready .report-view{
 <body>
 
 <div class="shell">
+<aside class="dss-sidebar">
+  <div class="dss-brand">
+    <span class="dss-brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="7" ry="3"></ellipse><path d="M5 5v7c0 1.7 3.1 3 7 3s7-1.3 7-3V5M5 12v7c0 1.7 3.1 3 7 3s7-1.3 7-3v-7"></path></svg>
+    </span>
+    <div><strong>IEAT EMS</strong><small>MONITORING CENTER</small></div>
+  </div>
+  <nav class="dss-nav" aria-label="เมนูรายงานสถานี">
+    <a class="active" data-icon="⌂" href="#overview">ภาพรวม Dashboard</a>
+    <a data-icon="Σ" href="#station-types">ประเภทสถานีตรวจวัด</a>
+    <a data-icon="!" href="#watch-level">ระดับการเฝ้าระวัง</a>
+    <a data-icon="↓" href="#download-report">ดาวน์โหลดรายงาน</a>
+    <a data-icon="☷" href="#station-details">รายละเอียดสถานี</a>
+  </nav>
+  <div class="dss-connection">เชื่อมต่อฐานข้อมูล e-Monitoring</div>
+</aside>
 <div class="topbar"></div>
 
 <!-- =====================================================
@@ -2839,7 +3373,7 @@ body.report-ready .report-view{
      HERO
 ===================================================== -->
 
-<section class="hero">
+<section id="overview" class="hero">
 
   <div class="hero-top">
 
@@ -3020,8 +3554,7 @@ body.report-ready .report-view{
      TYPE
 ===================================================== -->
 
-<section class="section">
-
+<section id="station-types" class="section">
   <div class="section-title">
     สถานีตรวจวัดแยกตามประเภท
   </div>
@@ -3038,8 +3571,7 @@ body.report-ready .report-view{
      SEVERITY
 ===================================================== -->
 
-<section class="section">
-
+<section id="watch-level" class="section">
   <div class="section-title">
     ระดับการเฝ้าระวัง
   </div>
@@ -3094,7 +3626,7 @@ body.report-ready .report-view{
      DOWNLOAD REPORT
 ===================================================== -->
 
-<section class="section">
+<section id="download-report" class="section">
   <div class="section-title">
     ดาวน์โหลดรายงาน
   </div>
@@ -3116,8 +3648,7 @@ body.report-ready .report-view{
      STATIONS
 ===================================================== -->
 
-<section class="section">
-
+<section id="station-details" class="section">
   <div class="section-title-row">
 
     <div class="section-title">
