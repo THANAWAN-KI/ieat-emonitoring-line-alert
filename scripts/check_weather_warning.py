@@ -189,16 +189,16 @@ def flex_message(item: dict, test: bool = False) -> dict:
     header = [
         {"type": "box", "layout": "horizontal", "justifyContent": "center",
          "alignItems": "center", "spacing": "sm", "contents": [
-            icon_image(ASSET_URLS["alert"], "28px"),
+            icon_image(ASSET_URLS["alert"], "24px"),
             {"type": "text", "text": "แจ้งเตือนภัยพิบัติ", "color": "#FFFFFF",
-             "weight": "bold", "size": "md", "flex": 0},
+             "weight": "bold", "size": "sm", "flex": 0},
          ]},
         {"type": "text", "text": "สภาพอากาศ", "color": "#FFFFFF",
-         "weight": "bold", "size": "xxl", "align": "center", "margin": "sm"},
+         "weight": "bold", "size": "xl", "align": "center", "margin": "sm"},
     ]
     if test:
         header.append({"type": "text", "text": "ตัวอย่างทดสอบ • ไม่ใช่เหตุการณ์จริง",
-                       "size": "xs", "weight": "bold", "color": "#FFF2A8",
+                       "size": "xxs", "weight": "bold", "color": "#FFF2A8",
                        "align": "center", "margin": "md"})
 
     return {
@@ -206,32 +206,32 @@ def flex_message(item: dict, test: bool = False) -> dict:
         "altText": ("[ทดสอบ] " if test else "") +
                    f"แจ้งเตือนสภาพอากาศ — {hazards}"[:350],
         "contents": {
-            "type": "bubble", "size": "kilo",
+            "type": "bubble", "size": "mega",
             "header": {"type": "box", "layout": "vertical",
-                       "backgroundColor": "#FF6908", "paddingAll": "16px",
+                       "backgroundColor": "#FF6908", "paddingAll": "14px",
                        "contents": header},
-            "body": {"type": "box", "layout": "vertical", "paddingAll": "16px",
+            "body": {"type": "box", "layout": "vertical", "paddingAll": "14px",
                      "backgroundColor": "#FFFFFF", "contents": [
                 {"type": "box", "layout": "horizontal", "alignItems": "center",
                  "spacing": "sm", "contents": [
                     icon_image(
                         ASSET_URLS["danger"] if level.startswith("อันตราย")
                         else ASSET_URLS["normal"],
-                        "32px",
+                        "28px",
                     ),
-                    {"type": "box", "layout": "vertical", "paddingAll": "9px",
+                    {"type": "box", "layout": "vertical", "paddingAll": "8px",
                      "backgroundColor": color, "cornerRadius": "9px", "flex": 0,
-                     "contents": [{"type": "text", "text": level, "size": "sm",
+                     "contents": [{"type": "text", "text": level, "size": "xs",
                                    "weight": "bold", "color": "#FFFFFF",
                                    "align": "center", "wrap": True}]}
                 ]},
                 {"type": "box", "layout": "horizontal", "alignItems": "center",
-                 "spacing": "sm", "margin": "xl", "contents": [
-                    icon_image(weather_icon(title), "30px"),
+                 "spacing": "sm", "margin": "lg", "contents": [
+                    icon_image(weather_icon(title), "26px"),
                     {"type": "text", "text": "ประเภทภัย", "size": "md",
                      "weight": "bold", "color": "#FF4B0A", "flex": 1},
                 ]},
-                {"type": "text", "text": hazards, "size": "3xl",
+                {"type": "text", "text": hazards, "size": "2xl",
                  "weight": "bold", "color": "#FF4B0A", "wrap": True,
                  "margin": "sm"},
                 weather_info_row(
@@ -240,15 +240,15 @@ def flex_message(item: dict, test: bool = False) -> dict:
                 weather_info_row(
                     ASSET_URLS["world"], "เวลาที่ระบบตรวจพบ", now
                 ),
-                {"type": "separator", "margin": "xl", "color": "#E7E7E7"},
-                {"type": "box", "layout": "vertical", "margin": "xl",
-                 "paddingAll": "13px", "backgroundColor": "#F4F9EE",
+                {"type": "separator", "margin": "lg", "color": "#E7E7E7"},
+                {"type": "box", "layout": "vertical", "margin": "lg",
+                 "paddingAll": "12px", "backgroundColor": "#F4F9EE",
                  "cornerRadius": "14px", "contents": [
                     {"type": "box", "layout": "horizontal", "alignItems": "center",
                      "spacing": "sm", "contents": [
                         icon_image(ASSET_URLS["factory"], "24px"),
                         {"type": "text", "text": "คำแนะนำเพื่อความปลอดภัย",
-                         "size": "md", "weight": "bold", "color": "#598C14",
+                         "size": "sm", "weight": "bold", "color": "#598C14",
                          "wrap": True, "flex": 1},
                      ]},
                     {"type": "text", "text": f"• {tips[0]}", "size": "xs",
@@ -257,7 +257,7 @@ def flex_message(item: dict, test: bool = False) -> dict:
                      "color": "#333333", "wrap": True, "margin": "md"},
                 ]},
             ]},
-            "footer": {"type": "box", "layout": "vertical", "paddingAll": "13px",
+            "footer": {"type": "box", "layout": "vertical", "paddingAll": "12px",
                        "spacing": "sm", "contents": [
                 {"type": "button", "style": "primary", "height": "sm",
                  "color": "#52057F",
