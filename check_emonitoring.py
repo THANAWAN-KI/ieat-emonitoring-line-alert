@@ -2396,7 +2396,7 @@ def build_station_detail_bubble(
         parameter_contents.append({
             "type": "box",
             "layout": "horizontal",
-            "margin": "xs",
+            "margin": "none",
             "contents": [
                 text_component(
                     "•",
@@ -2529,14 +2529,14 @@ def build_station_detail_bubble(
                     size="sm",
                     color="#35105D",
                     weight="bold",
-                    margin="sm",
+                    margin="xs",
                 ),
 
                 {
                     "type": "box",
                     "layout": "vertical",
-                    "margin": "xs",
-                    "paddingAll": "8px",
+                    "margin": "none",
+                    "paddingAll": "6px",
                     "backgroundColor": severity["background"],
                     "borderColor": severity["border"],
                     "borderWidth": "1px",
