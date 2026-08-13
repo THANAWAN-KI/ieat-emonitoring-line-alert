@@ -154,7 +154,7 @@ def flex(event: dict, test: bool = False) -> dict:
         {"type": "text", "text": "⚠  แจ้งเตือนภัยพิบัติ", "color": "#FFFFFF",
          "weight": "bold", "size": "md", "align": "center"},
         {"type": "text", "text": "สิ่งแวดล้อม", "color": "#FFFFFF",
-         "weight": "bold", "size": "3xl", "align": "center", "margin": "sm"},
+         "weight": "bold", "size": "xxl", "align": "center", "margin": "sm"},
     ]
     if test:
         header.append({"type": "text", "text": "ตัวอย่างทดสอบ • ไม่ใช่เหตุการณ์จริง",
@@ -170,7 +170,7 @@ def flex(event: dict, test: bool = False) -> dict:
             "header": {"type": "box", "layout": "vertical",
                        "backgroundColor": "#FF6908", "paddingAll": "16px",
                        "contents": header},
-            "body": {"type": "box", "layout": "vertical", "paddingAll": "20px",
+            "body": {"type": "box", "layout": "vertical", "paddingAll": "16px",
                      "backgroundColor": "#FFFFFF", "contents": [
                 {"type": "box", "layout": "horizontal", "contents": [
                     {"type": "box", "layout": "vertical", "paddingAll": "9px",
@@ -191,7 +191,7 @@ def flex(event: dict, test: bool = False) -> dict:
                  "paddingAll": "13px", "backgroundColor": "#F4F9EE",
                  "cornerRadius": "14px", "contents": [
                     {"type": "text", "text": "✓  คำแนะนำเพื่อความปลอดภัย",
-                     "size": "lg", "weight": "bold", "color": "#598C14",
+                     "size": "md", "weight": "bold", "color": "#598C14",
                      "wrap": True},
                     {"type": "text", "text": f"• {tips[0]}", "size": "xs",
                      "color": "#333333", "wrap": True, "margin": "lg"},
