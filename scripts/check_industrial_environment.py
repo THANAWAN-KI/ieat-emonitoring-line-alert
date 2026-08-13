@@ -99,9 +99,122 @@ def guidance(kind: str) -> str:
     return "ติดตามแหล่งน้ำดิบและแผนจัดสรรน้ำ • ตรวจปริมาณสำรอง • เตรียมลดการใช้น้ำในกระบวนการที่ไม่จำเป็น"
 
 
+def environment_info_row(icon: str, label: str, value: str) -> dict:
+    return {
+        "type": "box", "layout": "horizontal", "spacing": "md", "margin": "lg",
+        "contents": [
+            {"type": "box", "layout": "vertical", "width": "42px", "height": "42px",
+             "backgroundColor": "#F2EAF8", "cornerRadius": "10px",
+             "justifyContent": "center", "alignItems": "center",
+             "contents": [{"type": "text", "text": icon, "size": "xl",
+                           "weight": "bold", "color": "#52057F", "align": "center"}]},
+            {"type": "box", "layout": "vertical", "flex": 1, "justifyContent": "center",
+             "contents": [
+                 {"type": "text", "text": label, "size": "sm", "weight": "bold",
+                  "color": "#52057F"},
+                 {"type": "text", "text": value, "size": "md", "weight": "bold",
+                  "color": "#222222", "wrap": True, "margin": "xs"},
+             ]},
+        ],
+    }
+
+
+def simple_guidance(kind: str) -> list[str]:
+    if kind == "PM2.5":
+        return [
+            "ลดกิจกรรมและงานกลางแจ้งในช่วงค่าฝุ่นสูง",
+            "จัดเตรียมหน้ากากและดูแลพนักงานกลุ่มเสี่ยง",
+            "ติดตามค่าฝุ่นจากสถานีตรวจวัดอย่างใกล้ชิด",
+        ]
+    if "จุดความร้อน" in kind:
+        return [
+            "ตรวจพื้นที่รอบโรงงานและคลังสารไวไฟ",
+            "เตรียมทีมดับเพลิง แหล่งน้ำ และอุปกรณ์ฉุกเฉิน",
+            "งดกิจกรรมที่ก่อประกายไฟในพื้นที่เสี่ยง",
+        ]
+    if kind == "น้ำท่วม":
+        return [
+            "ตรวจระบบระบายน้ำและเครื่องสูบน้ำ",
+            "ป้องกันระบบไฟฟ้า สารเคมี และคลังสินค้า",
+            "เตรียมเส้นทางสำรองและทีมฉุกเฉิน",
+        ]
+    return [
+        "ติดตามสถานการณ์น้ำดิบและปริมาณน้ำสำรอง",
+        "วางแผนลดการใช้น้ำในส่วนที่ไม่จำเป็น",
+        "ติดตามข้อมูลจากหน่วยงานอย่างใกล้ชิด",
+    ]
+
+
 def flex(event: dict, test: bool = False) -> dict:
     color = event["color"]
-    return {"type": "flex", "altText": ("[ทดสอบ] " if test else "") + f"{event['kind']} — {event['value']}", "contents": {"type": "bubble", "size": "mega", "header": {"type": "box", "layout": "vertical", "backgroundColor": "#17233C", "paddingAll": "20px", "contents": [{"type": "text", "text": "INDUSTRIAL ENVIRONMENT ALERT", "size": "xxs", "weight": "bold", "color": "#B9A6C9"}, {"type": "text", "text": f"แจ้งเตือน{event['kind']}", "size": "xl", "weight": "bold", "color": "#FFFFFF", "wrap": True, "margin": "xs"}] + ([{"type": "text", "text": "ตัวอย่างทดสอบ • ไม่ใช่เหตุการณ์จริง", "size": "xs", "weight": "bold", "color": "#FFD166", "margin": "md"}] if test else [])}, "body": {"type": "box", "layout": "vertical", "paddingAll": "20px", "contents": [{"type": "text", "text": event["level"], "size": "sm", "weight": "bold", "color": color}, {"type": "text", "text": event["value"], "size": "3xl", "weight": "bold", "color": "#17233C", "margin": "md"}, {"type": "text", "text": event["title"], "size": "md", "weight": "bold", "color": "#252B3A", "wrap": True, "margin": "md"}, {"type": "box", "layout": "vertical", "backgroundColor": "#F7F8FA", "cornerRadius": "lg", "paddingAll": "14px", "margin": "xl", "contents": [{"type": "text", "text": "แนวทางสำหรับนิคมอุตสาหกรรม", "size": "sm", "weight": "bold", "color": color}, {"type": "text", "text": guidance(event["kind"]), "size": "sm", "color": "#3A3F4B", "wrap": True, "margin": "sm"}]}, {"type": "text", "text": datetime.now(THAI_TZ).strftime("ตรวจพบ %d/%m/%Y เวลา %H:%M น."), "size": "xs", "color": "#7B8190", "margin": "xl"}]}, "footer": {"type": "box", "layout": "vertical", "paddingAll": "16px", "contents": [{"type": "button", "style": "primary", "height": "sm", "color": color, "action": {"type": "uri", "label": "เปิดดูข้อมูลจากหน่วยงาน", "uri": event["url"]}}]}}}
+    tips = simple_guidance(event["kind"])
+    detected = datetime.now(THAI_TZ).strftime("%d/%m/%Y เวลา %H:%M น.")
+
+    header = [
+        {"type": "text", "text": "⚠  แจ้งเตือนภัยพิบัติ", "color": "#FFFFFF",
+         "weight": "bold", "size": "md", "align": "center"},
+        {"type": "text", "text": "สิ่งแวดล้อม", "color": "#FFFFFF",
+         "weight": "bold", "size": "3xl", "align": "center", "margin": "sm"},
+    ]
+    if test:
+        header.append({"type": "text", "text": "ตัวอย่างทดสอบ • ไม่ใช่เหตุการณ์จริง",
+                       "size": "xs", "weight": "bold", "color": "#FFF2A8",
+                       "align": "center", "margin": "md"})
+
+    return {
+        "type": "flex",
+        "altText": ("[ทดสอบ] " if test else "") +
+                   f"แจ้งเตือน{event['kind']} — {event['value']}",
+        "contents": {
+            "type": "bubble", "size": "mega",
+            "header": {"type": "box", "layout": "vertical",
+                       "backgroundColor": "#FF6908", "paddingAll": "20px",
+                       "contents": header},
+            "body": {"type": "box", "layout": "vertical", "paddingAll": "20px",
+                     "backgroundColor": "#FFFFFF", "contents": [
+                {"type": "box", "layout": "horizontal", "contents": [
+                    {"type": "box", "layout": "vertical", "paddingAll": "9px",
+                     "backgroundColor": color, "cornerRadius": "9px",
+                     "contents": [{"type": "text", "text": event["level"],
+                                   "size": "sm", "weight": "bold",
+                                   "color": "#FFFFFF", "align": "center",
+                                   "wrap": True}]}
+                ]},
+                {"type": "text", "text": event["kind"], "size": "lg",
+                 "weight": "bold", "color": "#FF4B0A", "margin": "xl"},
+                {"type": "text", "text": event["value"], "size": "4xl",
+                 "weight": "bold", "color": "#FF4B0A", "margin": "sm"},
+                environment_info_row("●", "พื้นที่/สถานี", event["title"]),
+                environment_info_row("▣", "เวลาที่ระบบตรวจพบ", detected),
+                {"type": "separator", "margin": "xl", "color": "#E7E7E7"},
+                {"type": "box", "layout": "vertical", "margin": "xl",
+                 "paddingAll": "15px", "backgroundColor": "#F4F9EE",
+                 "cornerRadius": "14px", "contents": [
+                    {"type": "text", "text": "✓  คำแนะนำเพื่อความปลอดภัย",
+                     "size": "lg", "weight": "bold", "color": "#598C14",
+                     "wrap": True},
+                    {"type": "text", "text": f"• {tips[0]}", "size": "sm",
+                     "color": "#333333", "wrap": True, "margin": "lg"},
+                    {"type": "text", "text": f"• {tips[1]}", "size": "sm",
+                     "color": "#333333", "wrap": True, "margin": "md"},
+                    {"type": "text", "text": f"• {tips[2]}", "size": "sm",
+                     "color": "#333333", "wrap": True, "margin": "md"},
+                ]},
+            ]},
+            "footer": {"type": "box", "layout": "vertical", "paddingAll": "16px",
+                       "spacing": "md", "contents": [
+                {"type": "button", "style": "primary", "height": "sm",
+                 "color": "#52057F",
+                 "action": {"type": "uri", "label": "ดูข้อมูลจากหน่วยงาน",
+                            "uri": event["url"]}},
+                {"type": "separator", "margin": "md", "color": "#598C14"},
+                {"type": "text",
+                 "text": "ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย กนอ.",
+                 "size": "xs", "weight": "bold", "color": "#52057F",
+                 "align": "center", "wrap": True},
+            ]},
+        },
+    }
 
 
 def push(token: str, target: str, message: dict) -> None:
