@@ -144,7 +144,12 @@ def flex_message(event: dict, test: bool = False) -> dict:
     location = clean(event.get("title") or event.get("description") or "ไม่ระบุพื้นที่")[:300]
     published = event.get("published") or "ไม่ระบุวันและเวลา"
     depth = f"{event['depth']} กิโลเมตร" if event.get("depth") else "ไม่ระบุ"
-    detail_url = event.get("link") or "https://earthquake.tmd.go.th/"
+    coordinates = event.get("coordinates")
+    map_url = (
+        f"https://www.google.com/maps/search/?api=1&query={coordinates.replace(' ', '')}"
+        if coordinates
+        else (event.get("link") or "https://earthquake.tmd.go.th/")
+    )
 
     header = [
         {"type": "text", "text": "⚠  แจ้งเตือนภัยพิบัติ", "color": "#FFFFFF",
@@ -212,8 +217,8 @@ def flex_message(event: dict, test: bool = False) -> dict:
                        "spacing": "md", "contents": [
                 {"type": "button", "style": "primary", "height": "sm",
                  "color": "#52057F",
-                 "action": {"type": "uri", "label": "ดูรายละเอียดเพิ่มเติม",
-                            "uri": detail_url}},
+                 "action": {"type": "uri", "label": "ดูตำแหน่งบน Google Maps",
+                            "uri": map_url}},
                 {"type": "separator", "margin": "md", "color": "#598C14"},
                 {"type": "text",
                  "text": "ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย กนอ.",
