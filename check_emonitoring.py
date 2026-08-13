@@ -2662,8 +2662,11 @@ def json_size_bytes(
 def build_detail_carousels(
     alert_stations: list[dict[str, Any]]
 ) -> list[dict[str, Any]]:
+    """
+    ส่งรายละเอียดแต่ละสถานีเป็น Flex bubble เดี่ยว
+    เพื่อให้มีความกว้างเท่ากับการ์ดสรุปหน้าแรก
+    """
 
-    # แยกประเภทก่อน
     groups = [
         (
             "AQMs",
@@ -2706,102 +2709,39 @@ def build_detail_carousels(
     messages: list[dict[str, Any]] = []
 
     for group_name, stations in groups:
-
-        if not stations:
-            continue
-
-        current_bubbles: list[dict[str, Any]] = []
-
         for station in stations:
-
             bubble = build_station_detail_bubble(
                 station
             )
 
-            # ทดสอบ bubble เดี่ยว
-            single_message = make_carousel_message(
-                [bubble],
-                f"รายละเอียดสถานี {group_name}",
+            message = make_flex_message(
+                bubble,
+                (
+                    f"รายละเอียดสถานี {group_name}: "
+                    f"{station['station_name']}"
+                ),
             )
 
-            single_size = json_size_bytes(
-                single_message
+            message_size = json_size_bytes(
+                message
             )
 
-            if single_size > MAX_FLEX_BYTES:
+            if message_size > MAX_FLEX_BYTES:
                 raise RuntimeError(
                     "รายละเอียดสถานีเดี่ยวมีขนาดเกิน "
                     f"{MAX_FLEX_BYTES / 1024:.0f} KB: "
                     f"{station['station_name']} "
-                    f"({single_size / 1024:.1f} KB)"
+                    f"({message_size / 1024:.1f} KB)"
                 )
 
-            candidate = current_bubbles + [
-                bubble
-            ]
-
-            candidate_message = make_carousel_message(
-                candidate,
-                f"รายละเอียดสถานี {group_name}",
-            )
-
-            candidate_size = json_size_bytes(
-                candidate_message
-            )
-
-            # ถ้าเกิน หรือถึง 12 bubbles
-            if (
-                candidate_size > MAX_FLEX_BYTES
-                or len(candidate)
-                > MAX_BUBBLES_PER_CAROUSEL
-            ):
-
-                if current_bubbles:
-                    final_message = make_carousel_message(
-                        current_bubbles,
-                        f"รายละเอียดสถานี {group_name}",
-                    )
-
-                    final_size = json_size_bytes(
-                        final_message
-                    )
-
-                    messages.append(
-                        final_message
-                    )
-
-                    print(
-                        f"สร้าง Carousel {group_name}: "
-                        f"{len(current_bubbles)} หน้า / "
-                        f"{final_size / 1024:.1f} KB"
-                    )
-
-                current_bubbles = [
-                    bubble
-                ]
-
-            else:
-                current_bubbles = candidate
-
-        if current_bubbles:
-
-            final_message = make_carousel_message(
-                current_bubbles,
-                f"รายละเอียดสถานี {group_name}",
-            )
-
-            final_size = json_size_bytes(
-                final_message
-            )
-
             messages.append(
-                final_message
+                message
             )
 
             print(
-                f"สร้าง Carousel {group_name}: "
-                f"{len(current_bubbles)} หน้า / "
-                f"{final_size / 1024:.1f} KB"
+                f"สร้างการ์ดเดี่ยว {group_name}: "
+                f"{station['station_name']} / "
+                f"{message_size / 1024:.1f} KB"
             )
 
     return messages
