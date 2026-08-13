@@ -147,63 +147,22 @@ def weather_safety_tips(title: str) -> list[str]:
 
 
 def flex_message(item: dict, test: bool = False) -> dict:
-    level, color, background = severity(item["title"])
+    level, color, _ = severity(item["title"])
     now = datetime.now(THAI_TZ).strftime("%d/%m/%Y เวลา %H:%M น.")
     title = item["title"]
     hazards = related_hazards(title)
     tips = weather_safety_tips(title)
 
-    header_contents = [
+    header = [
         {"type": "text", "text": "⚠  แจ้งเตือนภัยพิบัติ", "color": "#FFFFFF",
-         "weight": "bold", "size": "lg", "align": "center"},
+         "weight": "bold", "size": "md", "align": "center"},
         {"type": "text", "text": "สภาพอากาศ", "color": "#FFFFFF",
          "weight": "bold", "size": "3xl", "align": "center", "margin": "sm"},
-        {"type": "text", "text": "WEATHER WARNING", "color": "#FFF0D9",
-         "size": "xs", "align": "center", "margin": "sm"},
     ]
     if test:
-        header_contents.append(
-            {"type": "box", "layout": "vertical", "margin": "lg", "paddingAll": "8px",
-             "backgroundColor": "#FFF3CD", "cornerRadius": "8px",
-             "contents": [{"type": "text", "text": "ตัวอย่างทดสอบ • ไม่ใช่เหตุการณ์จริง",
-                           "size": "xs", "weight": "bold", "color": "#765A00",
-                           "align": "center"}]}
-        )
-
-    body_contents = [
-        {"type": "box", "layout": "horizontal", "contents": [
-            {"type": "box", "layout": "vertical", "paddingAll": "10px",
-             "backgroundColor": color, "cornerRadius": "10px",
-             "contents": [{"type": "text", "text": level, "size": "md",
-                           "weight": "bold", "color": "#FFFFFF", "align": "center",
-                           "wrap": True}]}
-        ]},
-        {"type": "text", "text": "ประเภทภัย", "size": "sm", "weight": "bold",
-         "color": "#FF4B0A", "margin": "xl"},
-        {"type": "text", "text": hazards, "size": "xxl", "weight": "bold",
-         "color": "#FF4B0A", "wrap": True, "margin": "sm"},
-        weather_info_row("!", "ประกาศกรมอุตุนิยมวิทยา", title),
-        weather_info_row("▣", "เวลาที่ระบบตรวจพบ", now),
-        {"type": "separator", "margin": "xl", "color": "#E8E8E8"},
-        {"type": "box", "layout": "vertical", "margin": "xl", "paddingAll": "16px",
-         "backgroundColor": "#F4F9EE", "cornerRadius": "16px", "contents": [
-             {"type": "text", "text": "✓  คำแนะนำเพื่อความปลอดภัย", "size": "lg",
-              "weight": "bold", "color": "#3B8B16", "wrap": True},
-             {"type": "text", "text": f"• {tips[0]}", "size": "sm",
-              "color": "#333333", "wrap": True, "margin": "lg"},
-             {"type": "text", "text": f"• {tips[1]}", "size": "sm",
-              "color": "#333333", "wrap": True, "margin": "md"},
-             {"type": "text", "text": f"• {tips[2]}", "size": "sm",
-              "color": "#333333", "wrap": True, "margin": "md"},
-         ]},
-        {"type": "box", "layout": "vertical", "margin": "lg", "paddingAll": "13px",
-         "backgroundColor": background, "cornerRadius": "12px", "contents": [
-             {"type": "text", "text": "แนวทางสำหรับนิคมอุตสาหกรรม",
-              "size": "sm", "weight": "bold", "color": color},
-             {"type": "text", "text": industrial_guidance(level), "size": "sm",
-              "color": "#3A3F4B", "wrap": True, "margin": "sm"}
-         ]},
-    ]
+        header.append({"type": "text", "text": "ตัวอย่างทดสอบ • ไม่ใช่เหตุการณ์จริง",
+                       "size": "xs", "weight": "bold", "color": "#FFF2A8",
+                       "align": "center", "margin": "md"})
 
     return {
         "type": "flex",
@@ -212,28 +171,50 @@ def flex_message(item: dict, test: bool = False) -> dict:
         "contents": {
             "type": "bubble", "size": "mega",
             "header": {"type": "box", "layout": "vertical",
-                       "backgroundColor": "#FF6908", "paddingAll": "22px",
-                       "contents": header_contents},
+                       "backgroundColor": "#FF6908", "paddingAll": "20px",
+                       "contents": header},
             "body": {"type": "box", "layout": "vertical", "paddingAll": "20px",
-                     "backgroundColor": "#FFFFFF", "contents": body_contents},
+                     "backgroundColor": "#FFFFFF", "contents": [
+                {"type": "box", "layout": "horizontal", "contents": [
+                    {"type": "box", "layout": "vertical", "paddingAll": "9px",
+                     "backgroundColor": color, "cornerRadius": "9px",
+                     "contents": [{"type": "text", "text": level, "size": "sm",
+                                   "weight": "bold", "color": "#FFFFFF",
+                                   "align": "center", "wrap": True}]}
+                ]},
+                {"type": "text", "text": "ประเภทภัย", "size": "sm",
+                 "weight": "bold", "color": "#FF4B0A", "margin": "xl"},
+                {"type": "text", "text": hazards, "size": "xxl",
+                 "weight": "bold", "color": "#FF4B0A", "wrap": True,
+                 "margin": "sm"},
+                weather_info_row("!", "ประกาศกรมอุตุนิยมวิทยา", title),
+                weather_info_row("▣", "เวลาที่ระบบตรวจพบ", now),
+                {"type": "separator", "margin": "xl", "color": "#E7E7E7"},
+                {"type": "box", "layout": "vertical", "margin": "xl",
+                 "paddingAll": "15px", "backgroundColor": "#F4F9EE",
+                 "cornerRadius": "14px", "contents": [
+                    {"type": "text", "text": "✓  คำแนะนำเพื่อความปลอดภัย",
+                     "size": "lg", "weight": "bold", "color": "#598C14",
+                     "wrap": True},
+                    {"type": "text", "text": f"• {tips[0]}", "size": "sm",
+                     "color": "#333333", "wrap": True, "margin": "lg"},
+                    {"type": "text", "text": f"• {tips[1]}", "size": "sm",
+                     "color": "#333333", "wrap": True, "margin": "md"},
+                    {"type": "text", "text": f"• {tips[2]}", "size": "sm",
+                     "color": "#333333", "wrap": True, "margin": "md"},
+                ]},
+            ]},
             "footer": {"type": "box", "layout": "vertical", "paddingAll": "16px",
                        "spacing": "md", "contents": [
                 {"type": "button", "style": "primary", "height": "sm",
                  "color": "#52057F",
                  "action": {"type": "uri", "label": "อ่านประกาศฉบับเต็ม",
                             "uri": item["url"]}},
-                {"type": "button", "style": "secondary", "height": "sm",
-                 "action": {"type": "uri", "label": "ดูเรดาร์ตรวจอากาศ",
-                            "uri": "https://weather.tmd.go.th/"}},
                 {"type": "separator", "margin": "md", "color": "#598C14"},
                 {"type": "text",
                  "text": "ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย กนอ.",
                  "size": "xs", "weight": "bold", "color": "#52057F",
                  "align": "center", "wrap": True},
-                {"type": "text",
-                 "text": "แหล่งข้อมูล: กรมอุตุนิยมวิทยา • สายด่วน 1182",
-                 "size": "xxs", "color": "#888888", "align": "center",
-                 "wrap": True},
             ]},
         },
     }
