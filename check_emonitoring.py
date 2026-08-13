@@ -2396,7 +2396,6 @@ def build_station_detail_bubble(
                     parameter,
                     size="xs",
                     color=severity["color"],
-                    weight="bold",
                     wrap=True,
                     margin="xs",
                     flex=1,
