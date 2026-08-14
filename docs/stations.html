@@ -8,6 +8,8 @@
 <title>รายงานสถานะสถานีตรวจวัด | ระบบติดตามตรวจสอบสิ่งแวดล้อม</title>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap");
+
 
 :root{
   --purple:#4E2A84;
@@ -50,13 +52,7 @@ body{
   padding:0;
   background:var(--bg);
   color:var(--ink);
-  font-family:
-    "Noto Sans Thai",
-    "Prompt",
-    "Sarabun",
-    "Avenir Next",
-    Arial,
-    sans-serif;
+  font-family: "Sarabun", "Noto Sans Thai", Tahoma, sans-serif;
 }
 
 body{
@@ -1134,7 +1130,7 @@ main{
 
 <style>
 /* รูปแบบเดียวกับหน้า contacts.html */
-body{background:#F1EDF4;color:#30283A;font-family:"Segoe UI",Tahoma,Arial,sans-serif}
+body{background:#F1EDF4;color:#30283A;font-family:"Sarabun","Noto Sans Thai",Tahoma,sans-serif}
 .page{width:100%;max-width:720px;min-height:100vh;margin:0 auto;padding-bottom:0;background:#FAF8FC}
 .header{position:static;padding:18px;background:#fff;border-bottom:4px solid #6B3F91;backdrop-filter:none}
 .header-row{gap:14px}.logo{width:72px;height:72px}.brand strong{color:#4D286F;font-size:23px;font-weight:750}
@@ -1445,7 +1441,7 @@ main{padding:18px!important}
 html,body{
   color:var(--ui-text)!important;
   background:#F5F6F8!important;
-  font-family:"Segoe UI",Tahoma,Arial,sans-serif!important;
+  font-family:"Sarabun","Noto Sans Thai",Tahoma,sans-serif!important;
 }
 
 .page{
@@ -3436,9 +3432,9 @@ async function downloadSummaryImage(){
     canvasRoundRect(c,30,382,760,330,18,"#FFFFFF","#DDE2E9");canvasRoundRect(c,812,382,398,330,18,"#FFFFFF","#DDE2E9");
     c.fillStyle="#30333A";c.font=`800 20px ${font}`;c.fillText("จำนวนสถานีแยกตามประเภท",58,413);c.fillText("ความพร้อมใช้งาน",842,413);
     const types=[["AQMs",typeData(d,"AQMs").total,"#2F6FED"],["WQMs",typeData(d,"WQMs").total,"#18A7A0"],["CEMs",typeData(d,"CEMs").total,"#65408A"]];
-    const tm=Math.max(1,...types.map(r=>r[1]));types.forEach((r,i)=>{const y=476+i*70;c.fillStyle="#707681";c.font="700 17px sans-serif";c.fillText(r[0],58,y);c.fillStyle="#E9EDF2";c.fillRect(140,y,520,20);c.fillStyle=r[2];c.fillRect(140,y,Math.round(r[1]/tm*520),20);c.fillStyle="#30333A";c.fillText(fmt(r[1]),687,y)});
+    const tm=Math.max(1,...types.map(r=>r[1]));types.forEach((r,i)=>{const y=476+i*70;c.fillStyle="#707681";c.font=`700 17px ${font}`;c.fillText(r[0],58,y);c.fillStyle="#E9EDF2";c.fillRect(140,y,520,20);c.fillStyle=r[2];c.fillRect(140,y,Math.round(r[1]/tm*520),20);c.fillStyle="#30333A";c.fillText(fmt(r[1]),687,y)});
     c.strokeStyle="#E7E9EE";c.lineWidth=30;c.beginPath();c.arc(1010,550,82,0,Math.PI*2);c.stroke();c.strokeStyle="#35A56A";c.beginPath();c.arc(1010,550,82,-Math.PI/2,-Math.PI/2+Math.PI*2*percent/100);c.stroke();
-    c.textAlign="center";c.fillStyle="#2F6FED";c.font="900 36px sans-serif";c.fillText(percent+"%",1010,527);c.fillStyle="#707681";c.font=`500 16px ${font}`;c.fillText("สถานีออนไลน์",1010,578);c.textAlign="left";
+    c.textAlign="center";c.fillStyle="#2F6FED";c.font=`900 36px ${font}`;c.fillText(percent+"%",1010,527);c.fillStyle="#707681";c.font=`500 16px ${font}`;c.fillText("สถานีออนไลน์",1010,578);c.textAlign="left";
     c.fillStyle="#292B31";c.font=`900 25px ${font}`;c.fillText("สถานการณ์และพื้นที่ที่เกี่ยวข้อง",34,756);
     canvasRoundRect(c,30,798,575,330,18,"#FFFFFF","#DDE2E9");canvasRoundRect(c,625,798,585,330,18,"#FFFFFF","#DDE2E9");
     c.fillStyle="#30333A";c.font=`800 20px ${font}`;c.fillText("ระดับการติดตาม",58,829);c.fillText("นิคมฯ ที่มีสถานีมากที่สุด",653,829);
@@ -3446,7 +3442,7 @@ async function downloadSummaryImage(){
     const sm=Math.max(1,...sev.map(r=>r[1]));sev.forEach((r,i)=>{const y=886+i*70;c.fillStyle="#707681";c.font=`600 16px ${font}`;c.fillText(r[0],58,y);c.fillStyle="#E9EDF2";c.fillRect(210,y,285,18);c.fillStyle=r[2];c.fillRect(210,y,Math.round(r[1]/sm*285),18);c.fillStyle="#30333A";c.fillText(fmt(r[1]),520,y)});
     const em=Math.max(1,...estates.map(r=>r[1]));estates.forEach((r,i)=>{const y=875+i*48;c.fillStyle="#626773";c.font=`500 15px ${font}`;canvasText(c,r[0],653,y,220,18,1);c.fillStyle="#E9EDF2";c.fillRect(885,y,240,15);c.fillStyle="#2F6FED";c.fillRect(885,y,Math.round(r[1]/em*240),15);c.fillStyle="#30333A";c.fillText(fmt(r[1]),1145,y-2)});
     c.fillStyle="#292B31";c.font=`900 25px ${font}`;c.fillText("สถานีที่ต้องติดตามล่าสุด",34,1174);
-    ranked.forEach((s,i)=>{const y=1218+i*70,name=s.station_name||s.StationTH||"-",estate=s.estate_name||s.IndustryZone||"-",alarm=s.parameter_alarm||s.ParameterAlram||"-",type=stationGroup(s.station_type||s.Type);canvasRoundRect(c,30,y,1180,58,10,"#FFFFFF","#DDE2E9");c.fillStyle="#65408A";c.fillRect(30,y,6,58);c.fillStyle="#30333A";c.font=`800 16px ${font}`;canvasText(c,(i+1)+". "+name,54,y+9,660,20,1);c.fillStyle="#707681";c.font=`400 13px ${font}`;canvasText(c,estate+" • "+alarm,54,y+34,930,17,1);c.textAlign="right";c.fillStyle="#65408A";c.font="800 14px sans-serif";c.fillText(type,1180,y+20);c.textAlign="left"});
+    ranked.forEach((s,i)=>{const y=1218+i*70,name=s.station_name||s.StationTH||"-",estate=s.estate_name||s.IndustryZone||"-",alarm=s.parameter_alarm||s.ParameterAlram||"-",type=stationGroup(s.station_type||s.Type);canvasRoundRect(c,30,y,1180,58,10,"#FFFFFF","#DDE2E9");c.fillStyle="#65408A";c.fillRect(30,y,6,58);c.fillStyle="#30333A";c.font=`800 16px ${font}`;canvasText(c,(i+1)+". "+name,54,y+9,660,20,1);c.fillStyle="#707681";c.font=`400 13px ${font}`;canvasText(c,estate+" • "+alarm,54,y+34,930,17,1);c.textAlign="right";c.fillStyle="#65408A";c.font=`800 14px ${font}`;c.fillText(type,1180,y+20);c.textAlign="left"});
     if(!ranked.length){canvasRoundRect(c,30,1218,1180,70,10,"#EDF8F2","#CDE7D8");c.fillStyle="#159B6B";c.font=`700 18px ${font}`;c.fillText("ไม่พบสถานีที่ต้องติดตามในข้อมูลล่าสุด",58,1243)}
     c.fillStyle="#747985";c.font=`400 15px ${font}`;c.fillText("ข้อมูลจากระบบติดตามตรวจสอบสิ่งแวดล้อม กนอ. • โปรดตรวจสอบข้อมูลล่าสุดก่อนปฏิบัติงาน",34,1700);
     const blob=await new Promise(resolve=>canvas.toBlob(resolve,"image/png",1));if(!blob)throw new Error("สร้าง PNG ไม่สำเร็จ");
