@@ -360,6 +360,140 @@
             .summary-card { min-height: 92px; padding: 15px 14px 14px 66px; }
             .summary-icon { left: 14px; top: 16px; width: 38px; height: 38px; }
         }
+
+        /* Focused situation cards and prominent map */
+        .latest-panel {
+            position: relative;
+            overflow: hidden;
+            border-left: 5px solid var(--ui-blue);
+            background: linear-gradient(120deg, #FFFFFF 0%, #FBF9FD 100%);
+        }
+        .latest-panel::after {
+            content: "";
+            position: absolute;
+            right: -55px;
+            top: -70px;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: rgba(101,64,138,.055);
+            pointer-events: none;
+        }
+        .latest-eyebrow {
+            position: relative;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            margin-bottom: 8px;
+            padding: 5px 10px;
+            color: var(--ui-blue-dark);
+            background: var(--ui-blue-soft);
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .latest-eyebrow::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            background: #35A56A;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(53,165,106,.11);
+        }
+        .latest-panel .section-title,
+        .latest-panel .latest-subtitle,
+        .latest-panel .latest-status,
+        .latest-panel .summary-grid { position: relative; z-index: 1; }
+        .latest-panel .latest-subtitle { max-width: 780px; font-size: 14px; line-height: 1.55; }
+        .latest-status { min-height: 64px; padding: 14px 16px; }
+        .latest-status strong { font-size: 16px; }
+        .latest-status span { margin-top: 4px; font-size: 13px; }
+        .latest-panel .summary-card {
+            min-height: 108px;
+            padding-top: 17px;
+            padding-bottom: 15px;
+            border: 1px solid #E5E7ED;
+        }
+        .latest-panel .summary-card:hover { border-color: #D7CBE2; box-shadow: 0 8px 18px rgba(43,45,55,.07); }
+
+        .map-heading { margin-bottom: 10px; }
+        .map-panel {
+            border: 2px solid #D9CFE4;
+            border-radius: 18px;
+            box-shadow: 0 12px 30px rgba(62,45,79,.12);
+        }
+        .map-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            padding: 14px 16px;
+            color: #34363D;
+            background: #FFFFFF;
+            border-bottom: 1px solid var(--ui-line);
+        }
+        .map-toolbar strong { display: block; color: var(--ui-blue-dark); font-size: 16px; }
+        .map-toolbar span { display: block; margin-top: 2px; color: var(--ui-muted); font-size: 12px; }
+        .map-live-badge {
+            flex: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 7px 10px;
+            color: #287D52;
+            background: #EDF8F2;
+            border: 1px solid #D1EBDD;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .map-live-badge::before { content: ""; width: 7px; height: 7px; background: #35A56A; border-radius: 50%; }
+        #map { height: 430px; }
+        .map-caption {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            padding: 13px 16px;
+            line-height: 1.55;
+        }
+        .map-caption::before {
+            content: "";
+            width: 10px;
+            height: 10px;
+            flex: 0 0 auto;
+            margin-top: 4px;
+            background: #E67700;
+            border: 2px solid #B85F00;
+            border-radius: 50%;
+        }
+        .live-status { margin-top: 8px; text-align: left; }
+
+        .source-heading { margin-bottom: 10px; }
+        .source-card { padding: 14px 15px; border-radius: 12px; }
+        .source-title { font-size: 16px; line-height: 1.35; }
+        .source-description { margin-top: 4px; font-size: 13px; line-height: 1.5; }
+        .source-card .buttons { margin-top: 10px; }
+        .source-card .button { padding: 10px 8px; font-size: 13px; }
+
+        @media (min-width: 860px) {
+            #map { height: 620px; }
+            .latest-panel .summary-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+        }
+        @media (max-width: 620px) {
+            .latest-panel { border-left-width: 4px; }
+            .latest-panel .latest-subtitle { font-size: 13px; }
+            .latest-panel .summary-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+            .latest-panel .summary-card { min-height: 106px; padding: 13px 8px 12px; text-align: center; align-items: center; }
+            .latest-panel .summary-icon { position: static; width: 34px; height: 34px; margin-bottom: 7px; }
+            .latest-panel .summary-number { font-size: 25px; }
+            .latest-panel .summary-label { font-size: 11px; }
+            .map-toolbar { align-items: flex-start; padding: 12px 13px; }
+            .map-toolbar strong { font-size: 15px; }
+            .map-live-badge { padding: 6px 8px; font-size: 11px; }
+            #map { height: 440px; }
+            .map-caption { padding: 12px 13px; font-size: 12px; }
+        }
     </style>
 </head>
 <body>
@@ -386,7 +520,7 @@
 
             <section class="latest-panel" aria-labelledby="latest-title">
                 <h2 id="latest-title" class="section-title">สถานการณ์ล่าสุด</h2>
-                <p class="latest-subtitle">สรุปข้อมูลแผ่นดินไหวจาก USGS ในช่วง 24 ชั่วโมงล่าสุด เพื่อประกอบการเฝ้าระวังพื้นที่นิคมอุตสาหกรรม</p>
+                <p class="latest-subtitle">สรุปเหตุการณ์แผ่นดินไหวในรอบ 24 ชั่วโมง เพื่อประเมินสถานการณ์ที่อาจเกี่ยวข้องกับประเทศไทยและพื้นที่นิคมอุตสาหกรรม</p>
                 <div class="latest-status">
                     <div class="latest-status-dot" aria-hidden="true"></div>
                     <div><strong id="situationHeadline">กำลังตรวจสอบสถานการณ์ล่าสุด</strong><span id="situationDetail">ระบบกำลังเชื่อมต่อแหล่งข้อมูล</span></div>
@@ -401,7 +535,7 @@
             <h2 class="section-title map-heading">แผนที่เฝ้าระวังภัยพิบัติทั่วประเทศ</h2>
             <section class="map-panel">
                 <div id="map" aria-label="แผนที่ประเทศไทยและเหตุแผ่นดินไหวล่าสุด"></div>
-                <div class="map-caption"><strong>จุดวงกลมสีส้ม</strong> แสดงเหตุการณ์แผ่นดินไหวที่เกิดขึ้นในช่วง 24 ชั่วโมงล่าสุดจาก USGS ส่วนข้อมูลภัยพิบัติในประเทศไทยสามารถตรวจสอบได้จากแผนที่ของหน่วยงานที่เกี่ยวข้องด้านล่าง</div>
+                <div class="map-caption"><span><strong>จุดสีส้ม</strong> คือเหตุการณ์แผ่นดินไหวล่าสุดจาก USGS แตะจุดบนแผนที่เพื่อดูขนาด พื้นที่ และเวลาเกิดเหตุ</span></div>
             </section>
             <p id="liveStatus" class="live-status">กำลังโหลดเหตุแผ่นดินไหวล่าสุด...</p>
 
@@ -416,37 +550,37 @@
 
             <article class="source-card flood">
                 <h3 class="source-title">น้ำท่วมและน้ำป่าไหลหลาก</h3>
-                <p class="source-description">ติดตามแผนที่น้ำท่วมจากภาพถ่ายดาวเทียม และระบบคาดการณ์พื้นที่เสี่ยงน้ำท่วมฉับพลัน</p>
+                <p class="source-description">ตรวจสอบพื้นที่น้ำท่วมจากดาวเทียมและพื้นที่เสี่ยงน้ำป่าไหลหลาก</p>
                 <div class="buttons"><a class="button button-primary" href="https://disaster.gistda.or.th/flood" target="_blank" rel="noopener">แผนที่น้ำท่วม GISTDA</a><a class="button button-secondary" href="https://www.thaiwater.net/FlashFlood" target="_blank" rel="noopener">คาดการณ์น้ำป่า</a></div>
             </article>
 
             <article class="source-card weather">
                 <h3 class="source-title">ฝนตกหนัก พายุ และคลื่นลมแรง</h3>
-                <p class="source-description">ติดตามประกาศเตือนภัย พยากรณ์อากาศ ภาพเรดาร์ และเส้นทางพายุจากกรมอุตุนิยมวิทยา</p>
+                <p class="source-description">ตรวจสอบประกาศเตือนภัย ภาพเรดาร์ และเส้นทางพายุล่าสุด</p>
                 <div class="buttons"><a class="button button-primary" href="https://www.tmd.go.th/" target="_blank" rel="noopener">กรมอุตุนิยมวิทยา</a><a class="button button-secondary" href="https://www.tmd.go.th/service/serviceData" target="_blank" rel="noopener">เรดาร์และแผนที่</a></div>
             </article>
 
             <article class="source-card earthquake">
                 <h3 class="source-title">แผ่นดินไหวและสึนามิ</h3>
-                <p class="source-description">แผนที่นี้แสดงเหตุการณ์แผ่นดินไหวล่าสุดโดยอัตโนมัติ พร้อมรายงานและประกาศเตือนจากกรมอุตุนิยมวิทยาและกรมป้องกันและบรรเทาสาธารณภัย</p>
+                <p class="source-description">ตรวจสอบรายงานแผ่นดินไหว สึนามิ และประกาศเตือนภัยอย่างเป็นทางการ</p>
                 <div class="buttons"><a class="button button-primary" href="https://earthquake.tmd.go.th/" target="_blank" rel="noopener">รายงานแผ่นดินไหว</a><a class="button button-secondary" href="https://ndwc.disaster.go.th/" target="_blank" rel="noopener">ศูนย์เตือนภัย ปภ.</a></div>
             </article>
 
             <article class="source-card fire">
                 <h3 class="source-title">ไฟป่า จุดความร้อน และหมอกควัน</h3>
-                <p class="source-description">ดูจุดความร้อนและพื้นที่เฝ้าระวังไฟป่าจากข้อมูลดาวเทียมของ GISTDA</p>
+                <p class="source-description">ตรวจสอบจุดความร้อน ไฟป่า และพื้นที่หมอกควันจากข้อมูลดาวเทียม</p>
                 <div class="buttons"><a class="button button-primary" href="https://disaster.gistda.or.th/fire" target="_blank" rel="noopener">แผนที่ไฟป่า GISTDA</a><a class="button button-secondary" href="https://disaster.gistda.or.th/landing/news" target="_blank" rel="noopener">รายงานจุดความร้อน</a></div>
             </article>
 
             <article class="source-card drought">
                 <h3 class="source-title">ภัยแล้งและสถานการณ์น้ำ</h3>
-                <p class="source-description">ติดตามสถานการณ์น้ำ รายงานน้ำท่วม–น้ำแล้ง และข้อมูลภัยแล้งจากแพลตฟอร์มข้อมูลภาครัฐ</p>
+                <p class="source-description">ตรวจสอบสถานการณ์น้ำ พื้นที่เสี่ยงภัยแล้ง และรายงานล่าสุด</p>
                 <div class="buttons"><a class="button button-primary" href="https://disaster.gistda.or.th/dashboard" target="_blank" rel="noopener">แดชบอร์ด GISTDA</a><a class="button button-secondary" href="https://www.thaiwater.net/report" target="_blank" rel="noopener">รายงาน ThaiWater</a></div>
             </article>
 
             <article class="source-card alert">
                 <h3 class="source-title">ประกาศเตือนภัยและเหตุฉุกเฉิน</h3>
-                <p class="source-description">ตรวจสอบประกาศแจ้งเตือนภัยและรายงานสถานการณ์ประจำวันจากศูนย์เตือนภัยพิบัติแห่งชาติ</p>
+                <p class="source-description">ตรวจสอบประกาศเตือนภัยและรายงานสถานการณ์ประจำวันจาก ปภ.</p>
                 <div class="buttons"><a class="button button-primary" href="https://ndwc.disaster.go.th/" target="_blank" rel="noopener">ประกาศเตือนภัย ปภ.</a><a class="button button-secondary" href="https://ndwc.disaster.go.th/ndwc/cms?id=7085" target="_blank" rel="noopener">สถานการณ์ประจำวัน</a></div>
             </article>
 
