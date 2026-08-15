@@ -36,6 +36,7 @@ jobs:
         run: |
           echo "================================================"
           echo "IEAT e-Monitoring Hourly LINE Alert"
+          echo "Quota Saver: one summary message per changed run"
           echo "Active schedule: 08:30-16:30 Asia/Bangkok"
           echo "================================================"
           echo "Trigger: ${{ github.event_name }}"
@@ -43,22 +44,20 @@ jobs:
           date
           echo "================================================"
 
-      - name: Validate Python file
+      - name: Validate Python files
         run: |
-          if [ ! -f "check_emonitoring.py" ]; then
-            echo "ERROR: ไม่พบไฟล์ check_emonitoring.py"
-            exit 1
-          fi
-
+          test -f "check_emonitoring.py"
+          test -f "check_emonitoring_batch.py"
           python -m py_compile check_emonitoring.py
-          echo "check_emonitoring.py ผ่านการตรวจ Syntax"
+          python -m py_compile check_emonitoring_batch.py
+          echo "Python files ผ่านการตรวจ Syntax"
 
       - name: Run e-Monitoring check and send LINE
         env:
           LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
           PYTHONUNBUFFERED: "1"
           TZ: Asia/Bangkok
-        run: python check_emonitoring.py
+        run: python check_emonitoring_batch.py
 
       - name: Publish latest status data
         run: |
