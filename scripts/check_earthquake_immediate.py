@@ -3,11 +3,9 @@
 
 from __future__ import annotations
 
-import json
 import os
 import urllib.error
 import urllib.request
-from pathlib import Path
 
 import check_earthquake as base
 
@@ -18,6 +16,16 @@ def main() -> int:
     if not token or not target:
         raise RuntimeError("LINE_CHANNEL_ACCESS_TOKEN และ LINE_TARGET_ID ต้องถูกตั้งค่าใน GitHub Secrets")
 
+    # Manual test: send immediately without touching the earthquake state.
+    if os.getenv("SEND_TEST_ALERT", "").lower() == "true":
+        message_type = os.getenv("TEST_MESSAGE_TYPE", "text").strip().lower()
+        message = base.text_test_message() if message_type == "text" else base.flex_message(base.test_event(), test=True)
+        base.push_line(token, target, message)
+        print(f"ส่งข้อความทดสอบ {message_type} เข้า LINE สำเร็จ")
+        return 0
+
+    # Fetch source data first. As soon as the RSS is parsed successfully,
+    # a new qualifying event is pushed to LINE in the same job.
     request = urllib.request.Request(
         base.RSS_URL,
         headers={"User-Agent": "IEAT-eMonitoring/2.0"},
@@ -37,7 +45,7 @@ def main() -> int:
     previous_id = state.get("last_seen_id")
     latest_id = events[0]["id"]
 
-    # ครั้งแรก: ส่งเหตุการณ์ล่าสุดทันที เพื่อไม่ให้เหตุการณ์ปัจจุบันถูกข้าม
+    # First run: send the current latest event immediately instead of silently skipping it.
     if not previous_id:
         new_events = [events[0]]
     else:
@@ -57,7 +65,7 @@ def main() -> int:
 
     for event in new_events:
         if base.qualifies(event):
-            # ส่งทันทีหลังจากอ่านข้อมูลจาก TMD ได้แล้ว
+            # IMPORTANT: LINE is called immediately after the source data is available.
             base.push_line(token, target, base.flex_message(event))
             sent += 1
             print(f"ส่ง LINE สำเร็จทันที: {event.get('title', '')}")
@@ -65,7 +73,7 @@ def main() -> int:
             print(f"พบเหตุการณ์ใหม่แต่ไม่เข้าเกณฑ์แจ้งเตือน: {event.get('title', '')}")
         processed_latest_id = event["id"]
 
-    # บันทึก state เฉพาะหลังจากการประมวลผลสำเร็จ
+    # Save state only after all processing/sends in this run succeed.
     base.save_state(processed_latest_id or latest_id)
     print(f"ดึงข้อมูลสำเร็จ {len(events)} รายการ | ใหม่ {len(new_events)} | ส่ง LINE {sent} รายการ")
     return 0
