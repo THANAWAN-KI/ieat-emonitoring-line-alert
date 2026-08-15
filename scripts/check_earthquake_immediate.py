@@ -10,6 +10,20 @@ import urllib.request
 import check_earthquake as base
 
 
+def push_line_safe(token: str, target: str, message: dict) -> str:
+    """Send LINE message without failing GitHub Actions when monthly quota is exhausted."""
+    try:
+        base.push_line(token, target, message)
+        return "sent"
+    except RuntimeError as error:
+        text = str(error)
+        if "HTTP 429" in text or "monthly limit" in text.lower() or "monthly quota" in text.lower():
+            print("⚠️ LINE API HTTP 429: monthly message limit has been reached.")
+            print("ℹ️ LINE notification skipped. GitHub Actions will continue successfully.")
+            return "quota"
+        raise
+
+
 def main() -> int:
     token = os.getenv("LINE_CHANNEL_ACCESS_TOKEN", "").strip()
     target = os.getenv("LINE_TARGET_ID", "").strip()
@@ -20,7 +34,10 @@ def main() -> int:
     if os.getenv("SEND_TEST_ALERT", "").lower() == "true":
         message_type = os.getenv("TEST_MESSAGE_TYPE", "text").strip().lower()
         message = base.text_test_message() if message_type == "text" else base.flex_message(base.test_event(), test=True)
-        base.push_line(token, target, message)
+        result = push_line_safe(token, target, message)
+        if result == "quota":
+            print("✅ Test skipped because the LINE monthly quota is exhausted. Workflow will not fail.")
+            return 0
         print(f"ส่งข้อความทดสอบ {message_type} เข้า LINE สำเร็จ")
         return 0
 
@@ -62,19 +79,32 @@ def main() -> int:
 
     sent = 0
     processed_latest_id = previous_id
+    quota_exhausted = False
 
     for event in new_events:
         if base.qualifies(event):
             # IMPORTANT: LINE is called immediately after the source data is available.
-            base.push_line(token, target, base.flex_message(event))
+            result = push_line_safe(token, target, base.flex_message(event))
+            if result == "quota":
+                quota_exhausted = True
+                processed_latest_id = event["id"]
+                print("⚠️ LINE quota exhausted. Remaining new earthquake events will be skipped.")
+                break
             sent += 1
             print(f"ส่ง LINE สำเร็จทันที: {event.get('title', '')}")
         else:
             print(f"พบเหตุการณ์ใหม่แต่ไม่เข้าเกณฑ์แจ้งเตือน: {event.get('title', '')}")
         processed_latest_id = event["id"]
 
-    # Save state only after all processing/sends in this run succeed.
+    # Save state after processing. If LINE quota is exhausted, mark the event as
+    # processed so every scheduled run does not repeatedly hit the same 429.
     base.save_state(processed_latest_id or latest_id)
+
+    if quota_exhausted:
+        print(f"ดึงข้อมูลสำเร็จ {len(events)} รายการ | ใหม่ {len(new_events)} | ส่ง LINE {sent} รายการ | LINE quota เต็ม")
+        print("✅ Workflow completed successfully despite the LINE quota limit.")
+        return 0
+
     print(f"ดึงข้อมูลสำเร็จ {len(events)} รายการ | ใหม่ {len(new_events)} | ส่ง LINE {sent} รายการ")
     return 0
 
