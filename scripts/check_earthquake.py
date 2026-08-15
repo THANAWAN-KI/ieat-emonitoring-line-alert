@@ -213,7 +213,7 @@ def flex_message(event: dict, test: bool = False) -> dict:
                                    "weight": "bold", "color": "#FFFFFF",
                                    "align": "center"}]}
                 ]},
-                {"type": "box", "layout": "horizontal", "alignItems": "baseline",
+                {"type": "box", "layout": "horizontal", "alignItems": "center",
                  "margin": "lg", "contents": [
                     {"type": "text", "text": "ขนาด", "size": "md", "weight": "bold",
                      "color": "#FF4B0A", "flex": 0},
@@ -316,6 +316,7 @@ def text_test_message() -> dict:
         "type": "text",
         "text": "✅ ทดสอบระบบแจ้งเตือนแผ่นดินไหว\nข้อความนี้เป็นการทดสอบ ไม่ใช่เหตุการณ์จริง",
     }
+
 
 def load_state() -> dict:
     try:
