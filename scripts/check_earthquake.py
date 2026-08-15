@@ -123,22 +123,8 @@ def industrial_guidance(magnitude: float | None) -> str:
     )
 
 
-def info_card(label: str, value: str, accent: str = "#6F4A8E") -> dict:
-    return {"type": "box", "layout": "vertical", "flex": 1, "paddingAll": "12px",
-        "backgroundColor": "#F7F8FA", "cornerRadius": "lg", "contents": [
-            {"type": "text", "text": label, "size": "xxs", "weight": "bold", "color": "#7B8190"},
-            {"type": "text", "text": value, "size": "sm", "weight": "bold", "color": accent,
-             "wrap": True, "margin": "sm"},
-        ]}
-
-
 def icon_image(url: str, size: str = "24px") -> dict:
-    return {
-        "type": "image",
-        "url": url,
-        "size": size,
-        "aspectMode": "fit",
-    }
+    return {"type": "image", "url": url, "size": size, "aspectMode": "fit"}
 
 
 def alert_info_row(icon_url: str, label: str, value: str) -> dict:
@@ -151,10 +137,8 @@ def alert_info_row(icon_url: str, label: str, value: str) -> dict:
              "contents": [icon_image(icon_url)]},
             {"type": "box", "layout": "vertical", "flex": 1, "justifyContent": "center",
              "contents": [
-                 {"type": "text", "text": label, "size": "xs", "weight": "bold",
-                  "color": "#52057F"},
-                 {"type": "text", "text": value, "size": "sm", "weight": "bold",
-                  "color": "#222222", "wrap": True, "margin": "xs"},
+                 {"type": "text", "text": label, "size": "xs", "weight": "bold", "color": "#52057F"},
+                 {"type": "text", "text": value, "size": "sm", "weight": "bold", "color": "#222222", "wrap": True, "margin": "xs"},
              ]},
         ],
     }
@@ -170,99 +154,54 @@ def flex_message(event: dict, test: bool = False) -> dict:
     coordinates = event.get("coordinates")
     map_url = (
         f"https://www.google.com/maps/search/?api=1&query={coordinates.replace(' ', '')}"
-        if coordinates
-        else (event.get("link") or "https://earthquake.tmd.go.th/")
+        if coordinates else (event.get("link") or "https://earthquake.tmd.go.th/")
     )
 
     header = [
-        {"type": "box", "layout": "horizontal", "justifyContent": "center",
-         "alignItems": "center", "spacing": "sm", "contents": [
+        {"type": "box", "layout": "horizontal", "justifyContent": "center", "alignItems": "center", "spacing": "sm", "contents": [
             icon_image(ASSET_URLS["alert"], "24px"),
-            {"type": "text", "text": "แจ้งเตือนภัยพิบัติ", "color": "#FFFFFF",
-             "weight": "bold", "size": "sm", "flex": 0},
-         ]},
-        {"type": "text", "text": "แผ่นดินไหว", "color": "#FFFFFF",
-         "weight": "bold", "size": "xl", "align": "center", "margin": "sm"},
+            {"type": "text", "text": "แจ้งเตือนภัยพิบัติ", "color": "#FFFFFF", "weight": "bold", "size": "sm", "flex": 0},
+        ]},
+        {"type": "text", "text": "แผ่นดินไหว", "color": "#FFFFFF", "weight": "bold", "size": "xl", "align": "center", "margin": "sm"},
     ]
     if test:
-        header.append({"type": "text", "text": "ตัวอย่างทดสอบ • ไม่ใช่เหตุการณ์จริง",
-                       "size": "xxs", "weight": "bold", "color": "#FFF2A8",
-                       "align": "center", "margin": "md"})
+        header.append({"type": "text", "text": "ตัวอย่างทดสอบ • ไม่ใช่เหตุการณ์จริง", "size": "xxs", "weight": "bold", "color": "#FFF2A8", "align": "center", "margin": "md"})
 
     return {
         "type": "flex",
-        "altText": ("[ทดสอบ] " if test else "") +
-                   f"แจ้งเตือนแผ่นดินไหว ขนาด {mag} — {location}"[:350],
+        "altText": (("[ทดสอบ] " if test else "") + f"แจ้งเตือนแผ่นดินไหว ขนาด {mag} — {location}")[:350],
         "contents": {
             "type": "bubble", "size": "mega",
-            "header": {"type": "box", "layout": "vertical",
-                       "backgroundColor": "#F00A36", "paddingAll": "14px",
-                       "contents": header},
-            "body": {"type": "box", "layout": "vertical", "paddingAll": "14px",
-                     "backgroundColor": "#FFFFFF", "contents": [
-                {"type": "box", "layout": "horizontal", "alignItems": "center",
-                 "spacing": "sm", "contents": [
-                    icon_image(
-                        ASSET_URLS["danger"] if magnitude is not None and magnitude >= 5
-                        else ASSET_URLS["normal"],
-                        "28px",
-                    ),
-                    {"type": "box", "layout": "vertical", "paddingAll": "8px",
-                     "backgroundColor": status_color, "cornerRadius": "9px", "flex": 0,
-                     "contents": [{"type": "text", "text": level, "size": "xs",
-                                   "weight": "bold", "color": "#FFFFFF",
-                                   "align": "center"}]}
+            "header": {"type": "box", "layout": "vertical", "backgroundColor": "#F00A36", "paddingAll": "14px", "contents": header},
+            "body": {"type": "box", "layout": "vertical", "paddingAll": "14px", "backgroundColor": "#FFFFFF", "contents": [
+                {"type": "box", "layout": "horizontal", "alignItems": "center", "spacing": "sm", "contents": [
+                    icon_image(ASSET_URLS["danger"] if magnitude is not None and magnitude >= 5 else ASSET_URLS["normal"], "28px"),
+                    {"type": "box", "layout": "vertical", "paddingAll": "8px", "backgroundColor": status_color, "cornerRadius": "9px", "flex": 0,
+                     "contents": [{"type": "text", "text": level, "size": "xs", "weight": "bold", "color": "#FFFFFF", "align": "center"}]}
                 ]},
-                {"type": "box", "layout": "horizontal", "alignItems": "center",
-                 "margin": "lg", "contents": [
-                    {"type": "text", "text": "ขนาด", "size": "md", "weight": "bold",
-                     "color": "#FF4B0A", "flex": 0},
-                    {"type": "text", "text": mag, "size": "2xl", "weight": "bold",
-                     "color": "#FF4B0A", "margin": "md", "flex": 0},
-                    {"type": "text", "text": "แมกนิจูด", "size": "sm",
-                     "color": "#666666", "margin": "sm"},
+                {"type": "box", "layout": "horizontal", "alignItems": "center", "margin": "lg", "contents": [
+                    {"type": "text", "text": "ขนาด", "size": "md", "weight": "bold", "color": "#FF4B0A", "flex": 0},
+                    # LINE Flex text sizes are xxs, xs, sm, md, lg, xl, xxl, 3xl, 4xl, 5xl.
+                    {"type": "text", "text": mag, "size": "xxl", "weight": "bold", "color": "#FF4B0A", "margin": "md", "flex": 0},
+                    {"type": "text", "text": "แมกนิจูด", "size": "sm", "color": "#666666", "margin": "sm"},
                 ]},
-                alert_info_row(
-                    ASSET_URLS["factory"], "พื้นที่เกิดเหตุ", location
-                ),
-                alert_info_row(
-                    ASSET_URLS["world"], "วันและเวลา", published
-                ),
-                alert_info_row(
-                    ASSET_URLS["flood"], "จุดศูนย์กลางลึก", depth
-                ),
+                alert_info_row(ASSET_URLS["factory"], "พื้นที่เกิดเหตุ", location),
+                alert_info_row(ASSET_URLS["world"], "วันและเวลา", published),
+                alert_info_row(ASSET_URLS["flood"], "จุดศูนย์กลางลึก", depth),
                 {"type": "separator", "margin": "lg", "color": "#E7E7E7"},
-                {"type": "box", "layout": "vertical", "margin": "lg",
-                 "paddingAll": "12px", "backgroundColor": "#F4F9EE",
-                 "cornerRadius": "14px", "contents": [
-                    {"type": "box", "layout": "horizontal", "alignItems": "center",
-                     "spacing": "sm", "contents": [
+                {"type": "box", "layout": "vertical", "margin": "lg", "paddingAll": "12px", "backgroundColor": "#F4F9EE", "cornerRadius": "14px", "contents": [
+                    {"type": "box", "layout": "horizontal", "alignItems": "center", "spacing": "sm", "contents": [
                         icon_image(ASSET_URLS["nature"], "24px"),
-                        {"type": "text", "text": "คำแนะนำเพื่อความปลอดภัย",
-                         "size": "sm", "weight": "bold", "color": "#598C14",
-                         "wrap": True, "flex": 1},
-                     ]},
-                    {"type": "text",
-                     "text": "• อยู่ห่างจากกระจกและสิ่งของที่อาจหล่น",
-                     "size": "xs", "color": "#333333", "wrap": True,
-                     "margin": "lg"},
-                    {"type": "text",
-                     "text": "• หากอยู่ในอาคาร ให้หมอบ–กำบัง–ยึดเกาะ",
-                     "size": "xs", "color": "#333333", "wrap": True,
-                     "margin": "md"},
+                        {"type": "text", "text": "คำแนะนำเพื่อความปลอดภัย", "size": "sm", "weight": "bold", "color": "#598C14", "wrap": True, "flex": 1},
+                    ]},
+                    {"type": "text", "text": "• อยู่ห่างจากกระจกและสิ่งของที่อาจหล่น", "size": "xs", "color": "#333333", "wrap": True, "margin": "lg"},
+                    {"type": "text", "text": "• หากอยู่ในอาคาร ให้หมอบ–กำบัง–ยึดเกาะ", "size": "xs", "color": "#333333", "wrap": True, "margin": "md"},
                 ]},
             ]},
-            "footer": {"type": "box", "layout": "vertical", "paddingAll": "12px",
-                       "spacing": "sm", "contents": [
-                {"type": "button", "style": "primary", "height": "sm",
-                 "color": "#52057F",
-                 "action": {"type": "uri", "label": "ดูตำแหน่งบน Google Maps",
-                            "uri": map_url}},
+            "footer": {"type": "box", "layout": "vertical", "paddingAll": "12px", "spacing": "sm", "contents": [
+                {"type": "button", "style": "primary", "height": "sm", "color": "#52057F", "action": {"type": "uri", "label": "ดูตำแหน่งบน Google Maps", "uri": map_url}},
                 {"type": "separator", "margin": "md", "color": "#598C14"},
-                {"type": "text",
-                 "text": "ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย กนอ.",
-                 "size": "xxs", "weight": "bold", "color": "#52057F",
-                 "align": "center", "wrap": True},
+                {"type": "text", "text": "ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย กนอ.", "size": "xxs", "weight": "bold", "color": "#52057F", "align": "center", "wrap": True},
             ]},
         },
     }
@@ -270,19 +209,10 @@ def flex_message(event: dict, test: bool = False) -> dict:
 
 def push_line(token: str, target: str, line_message: dict) -> None:
     if not TARGET_ID_RE.fullmatch(target):
-        raise ValueError(
-            "LINE_TARGET_ID มีรูปแบบไม่ถูกต้อง: ต้องเป็น User ID ที่ขึ้นต้นด้วย U "
-            "(หรือ Group/Room ID ที่ขึ้นต้นด้วย C/R) ตามด้วยเลขฐานสิบหก 32 ตัว "
-            "และต้องไม่ใช่ LINE ID สำหรับเพิ่มเพื่อน"
-        )
+        raise ValueError("LINE_TARGET_ID มีรูปแบบไม่ถูกต้อง: ต้องเป็น User ID ที่ขึ้นต้นด้วย U หรือ Group/Room ID ที่ขึ้นต้นด้วย C/R และตามด้วยเลขฐานสิบหก 32 ตัว")
 
     body = json.dumps({"to": target, "messages": [line_message]}, ensure_ascii=False).encode()
-    request = urllib.request.Request(
-        LINE_API,
-        data=body,
-        headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
-        method="POST",
-    )
+    request = urllib.request.Request(LINE_API, data=body, headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"}, method="POST")
     try:
         with urllib.request.urlopen(request, timeout=30) as response:
             if response.status >= 300:
@@ -293,29 +223,20 @@ def push_line(token: str, target: str, line_message: dict) -> None:
             details = json.loads(response_body)
             line_message_text = details.get("message", response_body)
             detail_items = details.get("details") or []
-            detail_text = "; ".join(
-                f"{item.get('property', 'ข้อมูล')}: {item.get('message', 'ไม่ถูกต้อง')}"
-                for item in detail_items
-            )
+            detail_text = "; ".join(f"{item.get('property', 'ข้อมูล')}: {item.get('message', 'ไม่ถูกต้อง')}" for item in detail_items)
             reason = f"{line_message_text}" + (f" ({detail_text})" if detail_text else "")
         except json.JSONDecodeError:
             reason = response_body or error.reason
         hint = ""
         if error.code == 400:
-            hint = (
-                " ตรวจว่า LINE_TARGET_ID เป็น ID จาก Messaging API channel เดียวกับ Token, "
-                "ผู้รับเพิ่ม LINE OA เป็นเพื่อนแล้ว และทดลองข้อความธรรมดาเพื่อแยกปัญหาการ์ด"
-            )
+            hint = " ตรวจสอบรูปแบบ Flex Message และ LINE_TARGET_ID"
         elif error.code == 401:
             hint = " ตรวจหรือออก LINE_CHANNEL_ACCESS_TOKEN ใหม่"
         raise RuntimeError(f"LINE API HTTP {error.code}: {reason}.{hint}") from error
 
 
 def text_test_message() -> dict:
-    return {
-        "type": "text",
-        "text": "✅ ทดสอบระบบแจ้งเตือนแผ่นดินไหว\nข้อความนี้เป็นการทดสอบ ไม่ใช่เหตุการณ์จริง",
-    }
+    return {"type": "text", "text": "✅ ทดสอบระบบแจ้งเตือนแผ่นดินไหว\nข้อความนี้เป็นการทดสอบ ไม่ใช่เหตุการณ์จริง"}
 
 
 def load_state() -> dict:
