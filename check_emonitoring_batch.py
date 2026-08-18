@@ -9,81 +9,9 @@ carousels. The existing station detail remains available in the Dashboard.
 from __future__ import annotations
 
 import json
-import os
 import sys
-import urllib.error
-import urllib.request
 
 import check_emonitoring as base
-
-
-LINE_PUSH_URL = "https://api.line.me/v2/bot/message/push"
-
-
-def send_line_target_messages(messages: list[dict]) -> bool:
-    """ส่งข้อความไปยังผู้รับที่กำหนดเพียงรายเดียวเพื่อประหยัดโควตา."""
-
-    token = os.getenv("LINE_CHANNEL_ACCESS_TOKEN", "").strip()
-    target_id = os.getenv("LINE_TARGET_ID", "").strip()
-
-    if not token:
-        print("ERROR: ไม่พบ LINE_CHANNEL_ACCESS_TOKEN")
-        return False
-
-    if not target_id:
-        print("ERROR: ไม่พบ LINE_TARGET_ID")
-        print("กรุณาเพิ่ม GitHub Actions Secret ชื่อ LINE_TARGET_ID")
-        return False
-
-    if not messages:
-        print("ERROR: ไม่มีข้อความสำหรับส่ง LINE")
-        return False
-
-    all_success = True
-
-    for start in range(0, len(messages), base.MAX_MESSAGES_PER_REQUEST):
-        batch = messages[start:start + base.MAX_MESSAGES_PER_REQUEST]
-        request_payload = {
-            "to": target_id,
-            "messages": batch,
-        }
-        payload = json.dumps(
-            request_payload,
-            ensure_ascii=False,
-            separators=(",", ":"),
-        ).encode("utf-8")
-
-        print(
-            f"กำลังส่ง LINE Push batch "
-            f"{start // base.MAX_MESSAGES_PER_REQUEST + 1}: "
-            f"{len(batch)} messages / {len(payload) / 1024:.1f} KB"
-        )
-
-        request = urllib.request.Request(
-            LINE_PUSH_URL,
-            data=payload,
-            headers={
-                "Authorization": f"Bearer {token}",
-                "Content-Type": "application/json",
-            },
-            method="POST",
-        )
-
-        try:
-            with urllib.request.urlopen(request, timeout=60) as response:
-                print(f"ส่ง LINE Push สำเร็จ HTTP {response.status}")
-        except urllib.error.HTTPError as error:
-            response_text = error.read().decode("utf-8", errors="replace")
-            print(
-                f"ERROR: LINE Push API HTTP {error.code}: "
-                f"{response_text}"
-            )
-            all_success = False
-        except urllib.error.URLError as error:
-            print(f"ERROR: เชื่อมต่อ LINE ไม่สำเร็จ: {error.reason}")
-            all_success = False
-
-    return all_success
 
 
 def main() -> int:
@@ -95,7 +23,7 @@ def main() -> int:
 
     print("=" * 72)
     print("IEAT e-Monitoring LINE Alert - Quota Saver")
-    print("ส่ง 1 Flex summary ไปยัง LINE_TARGET_ID ต่อรอบที่มีการเปลี่ยนแปลง")
+    print("ส่ง 1 Flex summary ต่อรอบที่มีการเปลี่ยนแปลง")
     print("=" * 72)
 
     try:
@@ -146,7 +74,7 @@ def main() -> int:
     print("LINE messages ที่จะส่ง: 1")
     print(f"Flex size: {size / 1024:.1f} KB")
 
-    success = send_line_target_messages([message])
+    success = base.send_line_messages([message])
     if not success:
         print("ERROR: ส่ง LINE ไม่สำเร็จ — ยังไม่บันทึก state เพื่อให้ retry")
         return 1
