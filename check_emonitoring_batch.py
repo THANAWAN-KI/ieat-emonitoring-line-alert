@@ -61,6 +61,8 @@ def main() -> int:
         success = base.send_station_status_report(
             all_stations,
             type_stats,
+            alert_stations,
+            events,
         )
     except RuntimeError as error:
         print(f"ERROR: {error}")

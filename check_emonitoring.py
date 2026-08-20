@@ -1380,11 +1380,23 @@ def station_type_summary_row(
 def build_station_status_summary_bubble(
     all_stations: list[dict[str, Any]],
     type_stats: dict[str, dict[str, int]],
+    alert_stations: list[dict[str, Any]],
+    events: list[dict[str, Any]],
 ) -> dict[str, Any]:
     total = len(all_stations)
     online = sum(item["online"] for item in type_stats.values())
     offline = sum(item["offline"] for item in type_stats.values())
     online_percent = round((online / total) * 100) if total else 0
+    alert_station_count = len(alert_stations)
+    parameter_alarm_count = sum(
+        alarm_count(station)
+        for station in alert_stations
+    )
+    recovered_station_count = len({
+        station_key(event)
+        for event in events
+        if event.get("event_type") == "RECOVERED"
+    })
 
     type_rows = [
         station_type_summary_row("AQMs", type_stats["AQMs"]),
@@ -1448,6 +1460,67 @@ def build_station_status_summary_bubble(
                     "type": "box", "layout": "horizontal",
                     "margin": "sm", "spacing": "xs",
                     "contents": stat_cards,
+                },
+                text_component(
+                    "สรุปสถานการณ์", size="sm",
+                    weight="bold", margin="md",
+                ),
+                {
+                    "type": "box", "layout": "horizontal",
+                    "margin": "sm", "spacing": "xs",
+                    "contents": [
+                        {
+                            "type": "box", "layout": "vertical", "flex": 1,
+                            "paddingAll": "7px",
+                            "backgroundColor": "#FFF1F3",
+                            "cornerRadius": "8px",
+                            "contents": [
+                                text_component(
+                                    str(parameter_alarm_count), size="xl",
+                                    color="#C51F35", weight="bold",
+                                    align="center",
+                                ),
+                                text_component(
+                                    "พารามิเตอร์\nเกินมาตรฐาน", size="xxs",
+                                    color="#C51F35", align="center",
+                                ),
+                            ],
+                        },
+                        {
+                            "type": "box", "layout": "vertical", "flex": 1,
+                            "paddingAll": "7px",
+                            "backgroundColor": "#FFF8E8",
+                            "cornerRadius": "8px",
+                            "contents": [
+                                text_component(
+                                    str(alert_station_count), size="xl",
+                                    color="#E67700", weight="bold",
+                                    align="center",
+                                ),
+                                text_component(
+                                    "สถานีที่ต้อง\nเฝ้าระวัง", size="xxs",
+                                    color="#E67700", align="center",
+                                ),
+                            ],
+                        },
+                        {
+                            "type": "box", "layout": "vertical", "flex": 1,
+                            "paddingAll": "7px",
+                            "backgroundColor": "#F1F8F3",
+                            "cornerRadius": "8px",
+                            "contents": [
+                                text_component(
+                                    str(recovered_station_count), size="xl",
+                                    color="#2B8A3E", weight="bold",
+                                    align="center",
+                                ),
+                                text_component(
+                                    "สถานีกลับสู่\nภาวะปกติ", size="xxs",
+                                    color="#2B8A3E", align="center",
+                                ),
+                            ],
+                        },
+                    ],
                 },
                 text_component(
                     "สถานะแยกตามประเภท", size="sm",
@@ -2739,10 +2812,17 @@ def send_line_messages(
 def send_station_status_report(
     all_stations: list[dict[str, Any]],
     type_stats: dict[str, dict[str, int]],
+    alert_stations: list[dict[str, Any]],
+    events: list[dict[str, Any]],
 ) -> bool:
     """ส่งเพียง 1 Flex Message; รายละเอียดคงอยู่ใน Dashboard"""
     message = make_flex_message(
-        build_station_status_summary_bubble(all_stations, type_stats),
+        build_station_status_summary_bubble(
+            all_stations,
+            type_stats,
+            alert_stations,
+            events,
+        ),
         "IEAT e-Monitoring: สรุปสถานะสถานีตรวจวัด",
     )
     message_size = json_size_bytes(message)
@@ -2994,6 +3074,8 @@ def main() -> int:
         success = send_station_status_report(
             all_stations,
             type_stats,
+            alert_stations,
+            events,
         )
 
     except RuntimeError as error:
