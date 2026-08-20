@@ -306,7 +306,7 @@ def flex(event: dict, test: bool = False) -> dict:
                                     {
                                         "type": "text",
                                         "text": event["value"],
-                                        "size": "2xl",
+                                        "size": "xxl",
                                         "weight": "bold",
                                         "color": "#450C3F",
                                         "margin": "xs",
