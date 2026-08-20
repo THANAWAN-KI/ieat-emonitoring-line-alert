@@ -180,95 +180,262 @@ def weather_safety_tips(title: str) -> list[str]:
 
 
 def flex_message(item: dict, test: bool = False) -> dict:
-    level, color, _ = severity(item["title"])
-    now = datetime.now(THAI_TZ).strftime("%d/%m/%Y เวลา %H:%M น.")
+    """Build one compact weather warning card using the green-plum palette."""
+    level, _, _ = severity(item["title"])
+    detected = datetime.now(THAI_TZ).strftime("%d/%m/%Y เวลา %H:%M น.")
     title = item["title"]
     hazards = related_hazards(title)
-    tips = weather_safety_tips(title)
+    advice = weather_safety_tips(title)[0]
 
-    header = [
-        {"type": "box", "layout": "horizontal", "justifyContent": "center",
-         "alignItems": "center", "spacing": "sm", "contents": [
-            icon_image(ASSET_URLS["alert"], "24px"),
-            {"type": "text", "text": "แจ้งเตือนภัยพิบัติ", "color": "#FFFFFF",
-             "weight": "bold", "size": "sm", "flex": 0},
-         ]},
-        {"type": "text", "text": "สภาพอากาศ", "color": "#FFFFFF",
-         "weight": "bold", "size": "xl", "align": "center", "margin": "sm"},
+    header_contents = [
+        {
+            "type": "box",
+            "layout": "horizontal",
+            "alignItems": "center",
+            "contents": [
+                {
+                    "type": "box",
+                    "layout": "vertical",
+                    "width": "30px",
+                    "contents": [
+                        icon_image(ASSET_URLS["alert"], "22px"),
+                    ],
+                },
+                {
+                    "type": "text",
+                    "text": "แจ้งเตือนสภาพอากาศ",
+                    "color": "#FFFFFF",
+                    "weight": "bold",
+                    "size": "lg",
+                    "align": "center",
+                    "flex": 1,
+                },
+                {
+                    "type": "box",
+                    "layout": "vertical",
+                    "width": "30px",
+                    "contents": [],
+                },
+            ],
+        },
     ]
     if test:
-        header.append({"type": "text", "text": "ตัวอย่างทดสอบ • ไม่ใช่เหตุการณ์จริง",
-                       "size": "xxs", "weight": "bold", "color": "#FFF2A8",
-                       "align": "center", "margin": "md"})
+        header_contents.append({
+            "type": "text",
+            "text": "ข้อความทดสอบ • ไม่ใช่เหตุการณ์จริง",
+            "size": "xxs",
+            "weight": "bold",
+            "color": "#D9EFBD",
+            "align": "center",
+            "margin": "sm",
+        })
+
+    detail_rows = [
+        ("ประกาศ", title),
+        ("ตรวจพบเมื่อ", detected),
+    ]
 
     return {
         "type": "flex",
-        "altText": ("[ทดสอบ] " if test else "") +
-                   f"แจ้งเตือนสภาพอากาศ — {hazards}"[:350],
+        "altText": (
+            ("[ทดสอบ] " if test else "")
+            + f"แจ้งเตือนสภาพอากาศ {hazards}"
+        )[:350],
         "contents": {
-            "type": "bubble", "size": "mega",
-            "header": {"type": "box", "layout": "vertical",
-                       "backgroundColor": "#FF6908", "paddingAll": "14px",
-                       "contents": header},
-            "body": {"type": "box", "layout": "vertical", "paddingAll": "14px",
-                     "backgroundColor": "#FFFFFF", "contents": [
-                {"type": "box", "layout": "horizontal", "alignItems": "center",
-                 "spacing": "sm", "contents": [
-                    icon_image(
-                        ASSET_URLS["danger"] if level.startswith("อันตราย")
-                        else ASSET_URLS["normal"],
-                        "28px",
-                    ),
-                    {"type": "box", "layout": "vertical", "paddingAll": "8px",
-                     "backgroundColor": color, "cornerRadius": "9px", "flex": 0,
-                     "contents": [{"type": "text", "text": level, "size": "xs",
-                                   "weight": "bold", "color": "#FFFFFF",
-                                   "align": "center", "wrap": True}]}
-                ]},
-                {"type": "box", "layout": "horizontal", "alignItems": "center",
-                 "spacing": "sm", "margin": "lg", "contents": [
-                    icon_image(weather_icon(title), "26px"),
-                    {"type": "text", "text": "ประเภทภัย", "size": "md",
-                     "weight": "bold", "color": "#FF4B0A", "flex": 1},
-                ]},
-                {"type": "text", "text": hazards, "size": "2xl",
-                 "weight": "bold", "color": "#FF4B0A", "wrap": True,
-                 "margin": "sm"},
-                weather_info_row(
-                    ASSET_URLS["alert"], "ประกาศกรมอุตุนิยมวิทยา", title
-                ),
-                weather_info_row(
-                    ASSET_URLS["world"], "เวลาที่ระบบตรวจพบ", now
-                ),
-                {"type": "separator", "margin": "lg", "color": "#E7E7E7"},
-                {"type": "box", "layout": "vertical", "margin": "lg",
-                 "paddingAll": "12px", "backgroundColor": "#F4F9EE",
-                 "cornerRadius": "14px", "contents": [
-                    {"type": "box", "layout": "horizontal", "alignItems": "center",
-                     "spacing": "sm", "contents": [
-                        icon_image(ASSET_URLS["factory"], "24px"),
-                        {"type": "text", "text": "คำแนะนำเพื่อความปลอดภัย",
-                         "size": "sm", "weight": "bold", "color": "#598C14",
-                         "wrap": True, "flex": 1},
-                     ]},
-                    {"type": "text", "text": f"• {tips[0]}", "size": "xs",
-                     "color": "#333333", "wrap": True, "margin": "lg"},
-                    {"type": "text", "text": f"• {tips[1]}", "size": "xs",
-                     "color": "#333333", "wrap": True, "margin": "md"},
-                ]},
-            ]},
-            "footer": {"type": "box", "layout": "vertical", "paddingAll": "12px",
-                       "spacing": "sm", "contents": [
-                {"type": "button", "style": "primary", "height": "sm",
-                 "color": "#52057F",
-                 "action": {"type": "uri", "label": "อ่านประกาศฉบับเต็ม",
-                            "uri": item["url"]}},
-                {"type": "separator", "margin": "md", "color": "#598C14"},
-                {"type": "text",
-                 "text": "ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย กนอ.",
-                 "size": "xxs", "weight": "bold", "color": "#52057F",
-                 "align": "center", "wrap": True},
-            ]},
+            "type": "bubble",
+            "size": "mega",
+            "styles": {
+                "header": {"backgroundColor": "#450C3F"},
+                "body": {"backgroundColor": "#FFFFFF"},
+                "footer": {"backgroundColor": "#FFFFFF"},
+            },
+            "header": {
+                "type": "box",
+                "layout": "vertical",
+                "paddingTop": "14px",
+                "paddingBottom": "14px",
+                "paddingStart": "16px",
+                "paddingEnd": "16px",
+                "contents": header_contents,
+            },
+            "body": {
+                "type": "box",
+                "layout": "vertical",
+                "paddingTop": "14px",
+                "paddingBottom": "12px",
+                "paddingStart": "14px",
+                "paddingEnd": "14px",
+                "contents": [
+                    {
+                        "type": "box",
+                        "layout": "horizontal",
+                        "alignItems": "center",
+                        "paddingAll": "12px",
+                        "backgroundColor": "#F5FBDA",
+                        "cornerRadius": "12px",
+                        "spacing": "md",
+                        "contents": [
+                            {
+                                "type": "box",
+                                "layout": "vertical",
+                                "width": "42px",
+                                "height": "42px",
+                                "backgroundColor": "#D9EFBD",
+                                "cornerRadius": "10px",
+                                "justifyContent": "center",
+                                "alignItems": "center",
+                                "contents": [
+                                    icon_image(weather_icon(title), "25px"),
+                                ],
+                            },
+                            {
+                                "type": "box",
+                                "layout": "vertical",
+                                "flex": 1,
+                                "contents": [
+                                    {
+                                        "type": "text",
+                                        "text": "ประเภทภัย",
+                                        "size": "xxs",
+                                        "color": "#450C3F",
+                                        "weight": "bold",
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": hazards,
+                                        "size": "lg",
+                                        "color": "#450C3F",
+                                        "weight": "bold",
+                                        "wrap": True,
+                                        "margin": "xs",
+                                    },
+                                ],
+                            },
+                            {
+                                "type": "box",
+                                "layout": "vertical",
+                                "paddingAll": "7px",
+                                "backgroundColor": "#B9D175",
+                                "cornerRadius": "8px",
+                                "flex": 0,
+                                "contents": [
+                                    {
+                                        "type": "text",
+                                        "text": level,
+                                        "size": "xxs",
+                                        "weight": "bold",
+                                        "color": "#450C3F",
+                                        "align": "center",
+                                        "wrap": True,
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        "type": "box",
+                        "layout": "vertical",
+                        "margin": "md",
+                        "paddingAll": "12px",
+                        "backgroundColor": "#FFFFFF",
+                        "borderColor": "#D9EFBD",
+                        "borderWidth": "1px",
+                        "cornerRadius": "12px",
+                        "contents": [
+                            *[
+                                {
+                                    "type": "box",
+                                    "layout": "horizontal",
+                                    "margin": "md" if index else "none",
+                                    "contents": [
+                                        {
+                                            "type": "text",
+                                            "text": label,
+                                            "size": "xs",
+                                            "color": "#450C3F",
+                                            "weight": "bold",
+                                            "flex": 2,
+                                        },
+                                        {
+                                            "type": "text",
+                                            "text": value,
+                                            "size": "xs",
+                                            "color": "#252525",
+                                            "weight": "bold",
+                                            "wrap": True,
+                                            "flex": 5,
+                                        },
+                                    ],
+                                }
+                                for index, (label, value) in enumerate(detail_rows)
+                            ],
+                        ],
+                    },
+                    {
+                        "type": "box",
+                        "layout": "horizontal",
+                        "alignItems": "center",
+                        "margin": "md",
+                        "paddingAll": "11px",
+                        "backgroundColor": "#D9EFBD",
+                        "cornerRadius": "12px",
+                        "spacing": "sm",
+                        "contents": [
+                            {
+                                "type": "box",
+                                "layout": "vertical",
+                                "width": "24px",
+                                "contents": [
+                                    icon_image(ASSET_URLS["factory"], "20px"),
+                                ],
+                            },
+                            {
+                                "type": "box",
+                                "layout": "vertical",
+                                "flex": 1,
+                                "contents": [
+                                    {
+                                        "type": "text",
+                                        "text": "คำแนะนำ",
+                                        "size": "xs",
+                                        "weight": "bold",
+                                        "color": "#450C3F",
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": advice,
+                                        "size": "xs",
+                                        "color": "#252525",
+                                        "wrap": True,
+                                        "margin": "xs",
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                ],
+            },
+            "footer": {
+                "type": "box",
+                "layout": "vertical",
+                "paddingTop": "4px",
+                "paddingBottom": "12px",
+                "paddingStart": "14px",
+                "paddingEnd": "14px",
+                "contents": [
+                    {
+                        "type": "button",
+                        "style": "primary",
+                        "height": "sm",
+                        "color": "#450C3F",
+                        "action": {
+                            "type": "uri",
+                            "label": "อ่านประกาศฉบับเต็ม",
+                            "uri": item["url"],
+                        },
+                    },
+                ],
+            },
         },
     }
 
