@@ -1313,332 +1313,179 @@ def event_color(
 
 
 # ============================================================
-# Event summary bubble
+# Station status summary bubble
 # ============================================================
 
-def build_event_summary_bubble(
-    events: list[dict[str, Any]]
-) -> dict[str, Any]:
+def status_progress_bar(online: int, offline: int) -> dict[str, Any]:
+    total = online + offline
+    online_flex = round((online / total) * 100) if total else 0
+    offline_flex = 100 - online_flex
+    contents: list[dict[str, Any]] = []
 
-    sorted_events = sorted(
-        events,
-        key=lambda event:
-            event_priority(
-                event.get(
-                    "event_type",
-                    ""
-                )
-            )
-    )
-
-    new_alarm_count = sum(
-        1 for e in events
-        if e.get("event_type")
-        == "NEW_ALARM"
-    )
-
-    severity_up_count = sum(
-        1 for e in events
-        if e.get("event_type")
-        == "SEVERITY_UP"
-    )
-
-    offline_count = sum(
-        1 for e in events
-        if e.get("event_type")
-        == "OFFLINE"
-    )
-
-    recovered_count = sum(
-        1 for e in events
-        if e.get("event_type")
-        == "RECOVERED"
-    )
-
-    online_count = sum(
-        1 for e in events
-        if e.get("event_type")
-        == "ONLINE"
-    )
-
-    changed_count = sum(
-        1 for e in events
-        if e.get("event_type")
-        == "ALARM_CHANGED"
-    )
-
-    body_contents: list[dict[str, Any]] = [
-
-        {
-            "type": "box",
-            "layout": "vertical",
-            "paddingAll": "9px",
-            "backgroundColor": "#F8F4FB",
-            "borderColor": "#DCCBEA",
-            "borderWidth": "1px",
-            "cornerRadius": "9px",
-            "contents": [
-                text_component(
-                    "มีการเปลี่ยนแปลงที่ต้องติดตาม",
-                    size="sm",
-                    color="#4E1478",
-                    weight="bold",
-                    align="center",
-                ),
-                text_component(
-                    (
-                        f"{len(events)} เหตุการณ์ "
-                        "จากรอบตรวจสอบล่าสุด"
-                    ),
-                    size="xs",
-                    color="#777777",
-                    margin="xs",
-                    align="center",
-                ),
-            ],
-        },
-
-        {
-            "type": "box",
-            "layout": "horizontal",
-            "margin": "sm",
-            "spacing": "xs",
-            "contents": [
-                {
-                    "type": "box",
-                    "layout": "vertical",
-                    "flex": 1,
-                    "backgroundColor": "#FFF1F3",
-                    "cornerRadius": "7px",
-                    "paddingAll": "6px",
-                    "contents": [
-                        text_component(
-                            str(
-                                new_alarm_count
-                                + severity_up_count
-                            ),
-                            size="lg",
-                            color="#C51F35",
-                            weight="bold",
-                            align="center",
-                        ),
-                        text_component(
-                            "Alarm ใหม่/รุนแรงขึ้น",
-                            size="xs",
-                            color="#777777",
-                            align="center",
-                            margin="xs",
-                        ),
-                    ],
-                },
-                {
-                    "type": "box",
-                    "layout": "vertical",
-                    "flex": 1,
-                    "backgroundColor": "#FFF8E8",
-                    "cornerRadius": "7px",
-                    "paddingAll": "6px",
-                    "contents": [
-                        text_component(
-                            str(
-                                offline_count
-                                + changed_count
-                            ),
-                            size="lg",
-                            color="#E67700",
-                            weight="bold",
-                            align="center",
-                        ),
-                        text_component(
-                            "เฝ้าติดตาม",
-                            size="xs",
-                            color="#777777",
-                            align="center",
-                            margin="xs",
-                        ),
-                    ],
-                },
-                {
-                    "type": "box",
-                    "layout": "vertical",
-                    "flex": 1,
-                    "backgroundColor": "#F1F8F3",
-                    "cornerRadius": "7px",
-                    "paddingAll": "6px",
-                    "contents": [
-                        text_component(
-                            str(
-                                recovered_count
-                                + online_count
-                            ),
-                            size="lg",
-                            color="#2B8A3E",
-                            weight="bold",
-                            align="center",
-                        ),
-                        text_component(
-                            "กลับปกติ",
-                            size="xs",
-                            color="#777777",
-                            align="center",
-                            margin="xs",
-                        ),
-                    ],
-                },
-            ],
-        },
-
-        text_component(
-            "เหตุการณ์",
-            size="sm",
-            color="#30283A",
-            weight="bold",
-            margin="sm",
-        ),
-    ]
-
-    # แสดงชื่อเหตุการณ์เพียงครั้งเดียว แล้วตามด้วยรายชื่อสถานี
-    # เช่น "พบการแจ้งเตือนใหม่" 1 ครั้ง ไม่ซ้ำในทุกสถานี
-    visible_events = sorted_events[:12]
-    event_groups: list[tuple[str, str, list[dict[str, Any]]]] = []
-
-    for event in visible_events:
-        title = event_title(event)
-        color = event_color(event)
-
-        for index, (group_title, group_color, group_events) in enumerate(
-            event_groups
-        ):
-            if group_title == title:
-                group_events.append(event)
-                event_groups[index] = (
-                    group_title,
-                    group_color,
-                    group_events,
-                )
-                break
-        else:
-            event_groups.append((title, color, [event]))
-
-    for title, color, group_events in event_groups:
-        station_names = []
-
-        for event in group_events:
-            station_name = safe_text(event.get("station_name"))
-            if station_name not in station_names:
-                station_names.append(station_name)
-
-        body_contents.append({
-            "type": "box",
-            "layout": "vertical",
-            "margin": "xs",
-            "paddingAll": "6px",
-            "backgroundColor": "#F8F9FA",
-            "cornerRadius": "7px",
-            "contents": [
-                text_component(
-                    title,
-                    size="xs",
-                    color=color,
-                    weight="bold",
-                ),
-                *[
-                    text_component(
-                        station_name,
-                        size="xs",
-                        color="#30283A",
-                        margin="xs",
-                        wrap=True,
-                    )
-                    for station_name in station_names
-                ],
-            ],
+    if online_flex:
+        contents.append({
+            "type": "box", "layout": "vertical", "flex": online_flex,
+            "height": "8px", "backgroundColor": "#2B8A3E", "contents": [],
+        })
+    if offline_flex:
+        contents.append({
+            "type": "box", "layout": "vertical", "flex": offline_flex,
+            "height": "8px", "backgroundColor": "#D9DEE3", "contents": [],
         })
 
-    if len(sorted_events) > 12:
-        body_contents.append(
-            text_component(
-                (
-                    f"และอีก "
-                    f"{len(sorted_events) - 12} "
-                    "เหตุการณ์ ดูรายละเอียดใน Dashboard"
-                ),
-                size="xs",
-                color="#777777",
-                margin="xs",
-                align="center",
-            )
-        )
+    return {
+        "type": "box", "layout": "horizontal", "margin": "xs",
+        "cornerRadius": "4px", "contents": contents,
+    }
 
-    body_contents.append({
+
+def station_type_summary_row(
+    label: str,
+    stats: dict[str, int],
+) -> dict[str, Any]:
+    total = stats["total"]
+    online = stats["online"]
+    offline = stats["offline"]
+    percent = round((online / total) * 100) if total else 0
+
+    return {
         "type": "box",
         "layout": "vertical",
         "margin": "sm",
-        "paddingAll": "7px",
-        "backgroundColor": "#F8F9FA",
-        "cornerRadius": "7px",
         "contents": [
+            {
+                "type": "box",
+                "layout": "horizontal",
+                "contents": [
+                    text_component(label, size="xs", weight="bold", flex=2),
+                    text_component(
+                        f"{online} Online", size="xs", color="#2B8A3E",
+                        weight="bold", align="end", flex=2,
+                    ),
+                    text_component(
+                        f"{offline} Offline", size="xs", color="#8A9299",
+                        align="end", flex=2,
+                    ),
+                ],
+            },
+            status_progress_bar(online, offline),
             text_component(
-                "ตรวจสอบล่าสุด",
-                size="xs",
-                color="#6C757D",
-            ),
-            text_component(
-                report_time_text(),
-                size="xs",
-                color="#30283A",
-                weight="bold",
-                margin="xs",
+                f"พร้อมใช้งาน {percent}% จากทั้งหมด {total} สถานี",
+                size="xxs", color="#777777", margin="xs", align="end",
             ),
         ],
-    })
+    }
+
+
+def build_station_status_summary_bubble(
+    all_stations: list[dict[str, Any]],
+    type_stats: dict[str, dict[str, int]],
+) -> dict[str, Any]:
+    total = len(all_stations)
+    online = sum(item["online"] for item in type_stats.values())
+    offline = sum(item["offline"] for item in type_stats.values())
+    online_percent = round((online / total) * 100) if total else 0
+
+    type_rows = [
+        station_type_summary_row("AQMs", type_stats["AQMs"]),
+        station_type_summary_row("WQMs", type_stats["WQMs"]),
+        station_type_summary_row("CEMs", type_stats["CEMs"]),
+    ]
+    if type_stats["ประเภทอื่น"]["total"]:
+        type_rows.append(
+            station_type_summary_row("ประเภทอื่น", type_stats["ประเภทอื่น"])
+        )
+
+    stat_cards = []
+    for value, label, background, color in [
+        (total, "ทั้งหมด", "#F4F5F6", "#30283A"),
+        (online, "ONLINE", "#F1F8F3", "#2B8A3E"),
+        (offline, "OFFLINE", "#F5F6F7", "#6C757D"),
+    ]:
+        stat_cards.append({
+            "type": "box", "layout": "vertical", "flex": 1,
+            "paddingAll": "7px", "backgroundColor": background,
+            "cornerRadius": "8px",
+            "contents": [
+                text_component(
+                    str(value), size="xl", color=color,
+                    weight="bold", align="center",
+                ),
+                text_component(
+                    label, size="xs", color=color, align="center",
+                ),
+            ],
+        })
 
     return {
         "type": "bubble",
         "size": "giga",
         "styles": {
-            "header": {
-                "backgroundColor": "#FFFFFF"
-            },
-            "body": {
-                "backgroundColor": "#FFFFFF"
-            },
-            "footer": {
-                "backgroundColor": "#FFFFFF"
-            },
+            "header": {"backgroundColor": "#FFFFFF"},
+            "body": {"backgroundColor": "#FFFFFF"},
+            "footer": {"backgroundColor": "#FFFFFF"},
         },
-        "header": build_header(
-            "แจ้งเตือนเฉพาะเหตุการณ์"
-        ),
+        "header": build_header("สรุปสถานะสถานีตรวจวัด"),
         "body": {
-            "type": "box",
-            "layout": "vertical",
-            "paddingTop": "3px",
-            "paddingBottom": "7px",
-            "paddingStart": "12px",
-            "paddingEnd": "12px",
-            "contents": body_contents,
-        },
-        "footer": {
-            "type": "box",
-            "layout": "vertical",
-            "paddingTop": "3px",
-            "paddingBottom": "9px",
-            "paddingStart": "12px",
-            "paddingEnd": "12px",
+            "type": "box", "layout": "vertical",
+            "paddingTop": "3px", "paddingBottom": "8px",
+            "paddingStart": "12px", "paddingEnd": "12px",
             "contents": [
                 {
-                    "type": "button",
-                    "style": "primary",
-                    "height": "sm",
-                    "color": "#4E1478",
-                    "action": {
-                        "type": "uri",
-                        "label": "เปิด Dashboard",
-                        "uri": DASHBOARD_URL,
-                    },
+                    "type": "box", "layout": "vertical",
+                    "paddingAll": "10px", "backgroundColor": "#F8F4FB",
+                    "cornerRadius": "10px",
+                    "contents": [
+                        text_component(
+                            f"สถานีพร้อมใช้งาน {online_percent}%",
+                            size="md", color="#4E1478",
+                            weight="bold", align="center",
+                        ),
+                        status_progress_bar(online, offline),
+                    ],
                 },
+                {
+                    "type": "box", "layout": "horizontal",
+                    "margin": "sm", "spacing": "xs",
+                    "contents": stat_cards,
+                },
+                text_component(
+                    "สถานะแยกตามประเภท", size="sm",
+                    weight="bold", margin="md",
+                ),
+                *type_rows,
+                {
+                    "type": "box", "layout": "horizontal", "margin": "md",
+                    "contents": [
+                        text_component(
+                            "● ONLINE", size="xxs",
+                            color="#2B8A3E", flex=1,
+                        ),
+                        text_component(
+                            "● OFFLINE", size="xxs",
+                            color="#8A9299", align="end", flex=1,
+                        ),
+                    ],
+                },
+                text_component(
+                    f"อัปเดต {report_time_text()}", size="xxs",
+                    color="#777777", margin="sm", align="center",
+                ),
             ],
+        },
+        "footer": {
+            "type": "box", "layout": "vertical",
+            "paddingTop": "3px", "paddingBottom": "9px",
+            "paddingStart": "12px", "paddingEnd": "12px",
+            "contents": [{
+                "type": "button", "style": "primary",
+                "height": "sm", "color": "#4E1478",
+                "action": {
+                    "type": "uri",
+                    "label": "ดูรายละเอียดใน Dashboard",
+                    "uri": DASHBOARD_URL,
+                },
+            }],
         },
     }
 
@@ -2886,107 +2733,29 @@ def send_line_messages(
 
 
 # ============================================================
-# Send report
+# Send compact station status report
 # ============================================================
 
-def send_event_report(
-    events: list[dict[str, Any]]
+def send_station_status_report(
+    all_stations: list[dict[str, Any]],
+    type_stats: dict[str, dict[str, int]],
 ) -> bool:
-    """
-    ส่ง LINE เฉพาะเมื่อมีเหตุการณ์เปลี่ยนแปลง
-    ไม่มีเหตุการณ์ = ไม่ส่ง LINE เลย
-    """
-
-    if not events:
-        print(
-            "ไม่พบการเปลี่ยนแปลงที่ต้องแจ้ง LINE"
-        )
-        print(
-            "ประหยัดโควตา: 0 ข้อความ"
-        )
-        return True
-
-    messages: list[dict[str, Any]] = []
-
-    # Summary 1 message
-    summary_bubble = (
-        build_event_summary_bubble(events)
+    """ส่งเพียง 1 Flex Message; รายละเอียดคงอยู่ใน Dashboard"""
+    message = make_flex_message(
+        build_station_status_summary_bubble(all_stations, type_stats),
+        "IEAT e-Monitoring: สรุปสถานะสถานีตรวจวัด",
     )
+    message_size = json_size_bytes(message)
 
-    summary_message = make_flex_message(
-        summary_bubble,
-        (
-            "IEAT e-Monitoring: "
-            f"พบการเปลี่ยนแปลง {len(events)} เหตุการณ์"
-        ),
-    )
-
-    summary_size = json_size_bytes(
-        summary_message
-    )
-
-    if summary_size > MAX_FLEX_BYTES:
+    if message_size > MAX_FLEX_BYTES:
         raise RuntimeError(
-            "Event Summary มีขนาดเกิน "
+            "Station Status Summary มีขนาดเกิน "
             f"{MAX_FLEX_BYTES / 1024:.0f} KB"
         )
 
-    messages.append(
-        summary_message
-    )
-
-    # Detail เฉพาะสถานีที่มีเหตุการณ์
-    # ไม่ส่งสถานี Alarm เดิมที่ไม่มีการเปลี่ยนแปลง
-    detail_stations = [
-        event
-        for event in events
-        if event.get(
-            "event_type"
-        ) != "RECOVERED"
-        or event.get(
-            "previous_snapshot"
-        )
-    ]
-
-    detail_messages = (
-        build_detail_carousels(
-            detail_stations
-        )
-        if detail_stations
-        else []
-    )
-
-    messages.extend(
-        detail_messages
-    )
-
-    print(
-        f"เหตุการณ์ที่ต้องแจ้ง: "
-        f"{len(events)}"
-    )
-
-    print(
-        f"LINE messages ที่จะส่ง: "
-        f"{len(messages)}"
-    )
-
-    success = send_line_messages(
-        messages
-    )
-
-    if success:
-        print(
-            "ส่ง LINE สำเร็จ "
-            "และสามารถบันทึกสถานะรอบนี้ได้"
-        )
-    else:
-        print(
-            "ส่ง LINE ไม่สำเร็จ "
-            "จะยังไม่บันทึก state ใหม่ "
-            "เพื่อให้รอบถัดไป retry"
-        )
-
-    return success
+    print("LINE messages ที่จะส่ง: 1")
+    print(f"ขนาดข้อความ: {message_size / 1024:.1f} KB")
+    return send_line_messages([message])
 
 
 # ============================================================
@@ -3019,7 +2788,7 @@ def main() -> int:
     print("=" * 72)
     print(
         "IEAT e-Monitoring LINE Alert "
-        "v5 - Event Based / Quota Saver"
+        "v6 - Compact Station Status / Quota Saver"
     )
     print("=" * 72)
 
@@ -3222,8 +2991,9 @@ def main() -> int:
 
     try:
 
-        success = send_event_report(
-            events
+        success = send_station_status_report(
+            all_stations,
+            type_stats,
         )
 
     except RuntimeError as error:
@@ -3260,7 +3030,7 @@ def main() -> int:
     print("=" * 72)
     print(
         "ทำงานสำเร็จ: "
-        "Dashboard update + Event notification"
+        "Dashboard update + Compact station status"
     )
     print("=" * 72)
 
@@ -3269,3 +3039,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+
