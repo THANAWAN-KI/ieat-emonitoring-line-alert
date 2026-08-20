@@ -207,10 +207,11 @@ def flex(event: dict, test: bool = False) -> dict:
                     "flex": 1,
                 },
                 {
-                    "type": "box",
-                    "layout": "vertical",
+                    "type": "text",
+                    "text": " ",
+                    "size": "xxs",
+                    "color": "#450C3F",
                     "width": "30px",
-                    "contents": [],
                 },
             ],
         },
@@ -333,15 +334,13 @@ def flex(event: dict, test: bool = False) -> dict:
                         "margin": "md",
                         "paddingAll": "12px",
                         "backgroundColor": "#FFFFFF",
-                        "borderColor": "#D9EFBD",
-                        "borderWidth": "1px",
                         "cornerRadius": "12px",
                         "contents": [
                             *[
                                 {
                                     "type": "box",
                                     "layout": "horizontal",
-                                    "margin": "md" if index else "none",
+                                    "margin": "md" if index else "xs",
                                     "contents": [
                                         {
                                             "type": "text",
@@ -440,9 +439,15 @@ def push(token: str, target: str, message: dict) -> None:
         raise ValueError("LINE_TARGET_ID มีรูปแบบไม่ถูกต้อง")
     body = json.dumps({"to": target, "messages": [message]}, ensure_ascii=False).encode()
     req = urllib.request.Request(LINE_API, data=body, headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"}, method="POST")
-    with urllib.request.urlopen(req, timeout=30) as response:
-        if response.status >= 300:
-            raise RuntimeError(f"LINE API HTTP {response.status}")
+    try:
+        with urllib.request.urlopen(req, timeout=30) as response:
+            if response.status >= 300:
+                raise RuntimeError(f"LINE API HTTP {response.status}")
+    except urllib.error.HTTPError as error:
+        details = error.read().decode("utf-8", errors="replace")
+        raise RuntimeError(
+            f"LINE API HTTP {error.code}: {details}"
+        ) from error
 
 
 def load_state() -> dict:
