@@ -8,7 +8,6 @@ carousels. The existing station detail remains available in the Dashboard.
 
 from __future__ import annotations
 
-import json
 import sys
 
 import check_emonitoring as base
@@ -56,25 +55,16 @@ def main() -> int:
         print("โควตารอบนี้: 0 ข้อความ")
         return 0
 
-    # ใช้ Bubble/Theme เดิมของระบบ ไม่สร้างดีไซน์ใหม่
-    bubble = base.build_event_summary_bubble(events)
-    message = base.make_flex_message(
-        bubble,
-        f"IEAT e-Monitoring: พบการเปลี่ยนแปลง {len(events)} เหตุการณ์",
-    )
-
-    size = base.json_size_bytes(message)
-    if size > base.MAX_FLEX_BYTES:
-        print(
-            f"ERROR: Summary Flex มีขนาด {size / 1024:.1f} KB "
-            f"เกิน {base.MAX_FLEX_BYTES / 1024:.0f} KB"
+    # ส่งการ์ดสรุปสถานะสถานีแบบใหม่เพียง 1 ข้อความ
+    # ฟังก์ชันนี้สร้าง Flex, ตรวจขนาด และส่ง LINE ให้ครบในจุดเดียว
+    try:
+        success = base.send_station_status_report(
+            all_stations,
+            type_stats,
         )
+    except RuntimeError as error:
+        print(f"ERROR: {error}")
         return 1
-
-    print("LINE messages ที่จะส่ง: 1")
-    print(f"Flex size: {size / 1024:.1f} KB")
-
-    success = base.send_line_messages([message])
     if not success:
         print("ERROR: ส่ง LINE ไม่สำเร็จ — ยังไม่บันทึก state เพื่อให้ retry")
         return 1
