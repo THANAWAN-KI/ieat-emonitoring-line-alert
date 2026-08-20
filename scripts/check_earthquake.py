@@ -198,7 +198,14 @@ def flex_message(event: dict, test: bool = False) -> dict:
                     "type": "box",
                     "layout": "vertical",
                     "width": "30px",
-                    "contents": [],
+                    "contents": [
+                        {
+                            "type": "text",
+                            "text": " ",
+                            "size": "xxs",
+                            "color": "#450C3F",
+                        },
+                    ],
                 },
             ],
         },
