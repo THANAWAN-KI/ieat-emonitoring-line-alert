@@ -185,7 +185,6 @@ def flex_message(item: dict, test: bool = False) -> dict:
     detected = datetime.now(THAI_TZ).strftime("%d/%m/%Y เวลา %H:%M น.")
     title = item["title"]
     hazards = related_hazards(title)
-    advice = weather_safety_tips(title)[0]
 
     header_contents = [
         {
@@ -204,7 +203,7 @@ def flex_message(item: dict, test: bool = False) -> dict:
                 {
                     "type": "text",
                     "text": "แจ้งเตือนสภาพอากาศ",
-                    "color": "#FFFFFF",
+                    "color": "#165823",
                     "weight": "bold",
                     "size": "lg",
                     "align": "center",
@@ -219,7 +218,7 @@ def flex_message(item: dict, test: bool = False) -> dict:
                             "type": "text",
                             "text": " ",
                             "size": "xxs",
-                            "color": "#450C3F",
+                            "color": "#165823",
                         },
                     ],
                 },
@@ -232,7 +231,7 @@ def flex_message(item: dict, test: bool = False) -> dict:
             "text": "ข้อความทดสอบ • ไม่ใช่เหตุการณ์จริง",
             "size": "xxs",
             "weight": "bold",
-            "color": "#D9EFBD",
+            "color": "#165823",
             "align": "center",
             "margin": "sm",
         })
@@ -252,7 +251,7 @@ def flex_message(item: dict, test: bool = False) -> dict:
             "type": "bubble",
             "size": "mega",
             "styles": {
-                "header": {"backgroundColor": "#450C3F"},
+                "header": {"backgroundColor": "#FFFFFF"},
                 "body": {"backgroundColor": "#FFFFFF"},
                 "footer": {"backgroundColor": "#FFFFFF"},
             },
@@ -278,7 +277,7 @@ def flex_message(item: dict, test: bool = False) -> dict:
                         "layout": "horizontal",
                         "alignItems": "center",
                         "paddingAll": "12px",
-                        "backgroundColor": "#F5FBDA",
+                        "backgroundColor": "#FFF2F2",
                         "cornerRadius": "12px",
                         "spacing": "md",
                         "contents": [
@@ -287,7 +286,7 @@ def flex_message(item: dict, test: bool = False) -> dict:
                                 "layout": "vertical",
                                 "width": "42px",
                                 "height": "42px",
-                                "backgroundColor": "#D9EFBD",
+                                "backgroundColor": "#FFDADA",
                                 "cornerRadius": "10px",
                                 "justifyContent": "center",
                                 "alignItems": "center",
@@ -304,14 +303,14 @@ def flex_message(item: dict, test: bool = False) -> dict:
                                         "type": "text",
                                         "text": "ประเภทภัย",
                                         "size": "xxs",
-                                        "color": "#450C3F",
+                                        "color": "#165823",
                                         "weight": "bold",
                                     },
                                     {
                                         "type": "text",
                                         "text": hazards,
                                         "size": "lg",
-                                        "color": "#450C3F",
+                                        "color": "#165823",
                                         "weight": "bold",
                                         "wrap": True,
                                         "margin": "xs",
@@ -322,7 +321,7 @@ def flex_message(item: dict, test: bool = False) -> dict:
                                 "type": "box",
                                 "layout": "vertical",
                                 "paddingAll": "7px",
-                                "backgroundColor": "#B9D175",
+                                "backgroundColor": "#FF788D",
                                 "cornerRadius": "8px",
                                 "flex": 0,
                                 "contents": [
@@ -331,7 +330,7 @@ def flex_message(item: dict, test: bool = False) -> dict:
                                         "text": level,
                                         "size": "xxs",
                                         "weight": "bold",
-                                        "color": "#450C3F",
+                                        "color": "#165823",
                                         "align": "center",
                                         "wrap": True,
                                     },
@@ -357,7 +356,7 @@ def flex_message(item: dict, test: bool = False) -> dict:
                                             "type": "text",
                                             "text": label,
                                             "size": "xs",
-                                            "color": "#450C3F",
+                                            "color": "#165823",
                                             "weight": "bold",
                                             "flex": 2,
                                         },
@@ -376,48 +375,6 @@ def flex_message(item: dict, test: bool = False) -> dict:
                             ],
                         ],
                     },
-                    {
-                        "type": "box",
-                        "layout": "horizontal",
-                        "alignItems": "center",
-                        "margin": "md",
-                        "paddingAll": "11px",
-                        "backgroundColor": "#D9EFBD",
-                        "cornerRadius": "12px",
-                        "spacing": "sm",
-                        "contents": [
-                            {
-                                "type": "box",
-                                "layout": "vertical",
-                                "width": "24px",
-                                "contents": [
-                                    icon_image(ASSET_URLS["factory"], "20px"),
-                                ],
-                            },
-                            {
-                                "type": "box",
-                                "layout": "vertical",
-                                "flex": 1,
-                                "contents": [
-                                    {
-                                        "type": "text",
-                                        "text": "คำแนะนำ",
-                                        "size": "xs",
-                                        "weight": "bold",
-                                        "color": "#450C3F",
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": advice,
-                                        "size": "xs",
-                                        "color": "#252525",
-                                        "wrap": True,
-                                        "margin": "xs",
-                                    },
-                                ],
-                            },
-                        ],
-                    },
                 ],
             },
             "footer": {
@@ -432,7 +389,7 @@ def flex_message(item: dict, test: bool = False) -> dict:
                         "type": "button",
                         "style": "primary",
                         "height": "sm",
-                        "color": "#450C3F",
+                        "color": "#165823",
                         "action": {
                             "type": "uri",
                             "label": "อ่านประกาศฉบับเต็ม",
