@@ -181,7 +181,6 @@ def simple_guidance(kind: str) -> list[str]:
 def flex(event: dict, test: bool = False) -> dict:
     """Build one compact environmental alert using the green-plum palette."""
     detected = datetime.now(THAI_TZ).strftime("%d/%m/%Y เวลา %H:%M น.")
-    advice = simple_guidance(event["kind"])[0]
 
     header_contents = [
         {
@@ -200,7 +199,7 @@ def flex(event: dict, test: bool = False) -> dict:
                 {
                     "type": "text",
                     "text": "แจ้งเตือนสิ่งแวดล้อม",
-                    "color": "#FFFFFF",
+                    "color": "#165823",
                     "weight": "bold",
                     "size": "lg",
                     "align": "center",
@@ -215,7 +214,7 @@ def flex(event: dict, test: bool = False) -> dict:
                             "type": "text",
                             "text": " ",
                             "size": "xxs",
-                            "color": "#450C3F",
+                            "color": "#165823",
                         },
                     ],
                 },
@@ -228,7 +227,7 @@ def flex(event: dict, test: bool = False) -> dict:
             "text": "ข้อความทดสอบ • ไม่ใช่เหตุการณ์จริง",
             "size": "xxs",
             "weight": "bold",
-            "color": "#D9EFBD",
+            "color": "#165823",
             "align": "center",
             "margin": "sm",
         })
@@ -248,7 +247,7 @@ def flex(event: dict, test: bool = False) -> dict:
             "type": "bubble",
             "size": "mega",
             "styles": {
-                "header": {"backgroundColor": "#450C3F"},
+                "header": {"backgroundColor": "#FFFFFF"},
                 "body": {"backgroundColor": "#FFFFFF"},
                 "footer": {"backgroundColor": "#FFFFFF"},
             },
@@ -274,7 +273,7 @@ def flex(event: dict, test: bool = False) -> dict:
                         "layout": "horizontal",
                         "alignItems": "center",
                         "paddingAll": "12px",
-                        "backgroundColor": "#F5FBDA",
+                        "backgroundColor": "#FFF2F2",
                         "cornerRadius": "12px",
                         "spacing": "md",
                         "contents": [
@@ -283,7 +282,7 @@ def flex(event: dict, test: bool = False) -> dict:
                                 "layout": "vertical",
                                 "width": "42px",
                                 "height": "42px",
-                                "backgroundColor": "#D9EFBD",
+                                "backgroundColor": "#FFDADA",
                                 "cornerRadius": "10px",
                                 "justifyContent": "center",
                                 "alignItems": "center",
@@ -301,14 +300,14 @@ def flex(event: dict, test: bool = False) -> dict:
                                         "text": event["kind"],
                                         "size": "sm",
                                         "weight": "bold",
-                                        "color": "#450C3F",
+                                        "color": "#165823",
                                     },
                                     {
                                         "type": "text",
                                         "text": event["value"],
                                         "size": "xxl",
                                         "weight": "bold",
-                                        "color": "#450C3F",
+                                        "color": "#165823",
                                         "margin": "xs",
                                     },
                                 ],
@@ -317,7 +316,7 @@ def flex(event: dict, test: bool = False) -> dict:
                                 "type": "box",
                                 "layout": "vertical",
                                 "paddingAll": "7px",
-                                "backgroundColor": "#B9D175",
+                                "backgroundColor": "#FFDADA",
                                 "cornerRadius": "8px",
                                 "flex": 0,
                                 "contents": [
@@ -326,7 +325,7 @@ def flex(event: dict, test: bool = False) -> dict:
                                         "text": event["level"],
                                         "size": "xxs",
                                         "weight": "bold",
-                                        "color": "#450C3F",
+                                        "color": "#165823",
                                         "align": "center",
                                         "wrap": True,
                                     },
@@ -352,7 +351,7 @@ def flex(event: dict, test: bool = False) -> dict:
                                             "type": "text",
                                             "text": label,
                                             "size": "xs",
-                                            "color": "#450C3F",
+                                            "color": "#165823",
                                             "weight": "bold",
                                             "flex": 2,
                                         },
@@ -371,48 +370,6 @@ def flex(event: dict, test: bool = False) -> dict:
                             ],
                         ],
                     },
-                    {
-                        "type": "box",
-                        "layout": "horizontal",
-                        "alignItems": "center",
-                        "margin": "md",
-                        "paddingAll": "11px",
-                        "backgroundColor": "#D9EFBD",
-                        "cornerRadius": "12px",
-                        "spacing": "sm",
-                        "contents": [
-                            {
-                                "type": "box",
-                                "layout": "vertical",
-                                "width": "24px",
-                                "contents": [
-                                    icon_image(ASSET_URLS["nature"], "20px"),
-                                ],
-                            },
-                            {
-                                "type": "box",
-                                "layout": "vertical",
-                                "flex": 1,
-                                "contents": [
-                                    {
-                                        "type": "text",
-                                        "text": "คำแนะนำ",
-                                        "size": "xs",
-                                        "weight": "bold",
-                                        "color": "#450C3F",
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": advice,
-                                        "size": "xs",
-                                        "color": "#252525",
-                                        "wrap": True,
-                                        "margin": "xs",
-                                    },
-                                ],
-                            },
-                        ],
-                    },
                 ],
             },
             "footer": {
@@ -427,7 +384,7 @@ def flex(event: dict, test: bool = False) -> dict:
                         "type": "button",
                         "style": "primary",
                         "height": "sm",
-                        "color": "#450C3F",
+                        "color": "#165823",
                         "action": {
                             "type": "uri",
                             "label": "ดูข้อมูลจากหน่วยงาน",
