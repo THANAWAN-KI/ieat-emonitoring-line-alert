@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>จัดทำแผนที่รายงานสถานการณ์น้ำท่วม</title>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.32/esri/themes/light/main.css">
+  <script src="https://js.arcgis.com/4.32/"></script>
+  <style>
+    :root{--green:#165823;--pink:#FF788D;--soft:#FFF2F2;--line:#FFDADA;--ink:#252a25;--muted:#687068}
+    *{box-sizing:border-box}html,body{margin:0;height:100%;font-family:system-ui,"Noto Sans Thai",sans-serif;color:var(--ink);background:#f5f7f4}
+    .shell{height:100%;display:grid;grid-template-columns:340px 1fr;gap:14px;padding:14px}.panel,.map-card{background:#fff;border-radius:20px;box-shadow:0 10px 30px #193b2114;overflow:hidden}
+    .panel{padding:20px;overflow:auto;border-top:7px solid var(--pink)}h1{font-size:23px;line-height:1.35;color:var(--green);margin:0 0 6px}.lead{font-size:13px;color:var(--muted);margin:0 0 18px}
+    label{display:block;font-size:13px;font-weight:700;color:var(--green);margin:13px 0 6px}input,textarea{width:100%;border:1px solid var(--line);border-radius:11px;padding:10px 11px;font:inherit;background:#fff}textarea{min-height:76px;resize:vertical}
+    .buttons{display:grid;gap:9px;margin-top:16px}button{border:0;border-radius:12px;padding:11px 13px;font:inherit;font-weight:750;cursor:pointer;background:var(--green);color:#fff}button.secondary{background:var(--soft);color:var(--green);border:1px solid var(--line)}button:disabled{opacity:.5;cursor:wait}
+    .legend{margin-top:18px;padding:13px;background:#fafafa;border-radius:13px;font-size:12px}.legend div{display:flex;align-items:center;gap:8px;margin:7px 0}.swatch{width:28px;border-top:3px dashed}.red{border-color:#d92d3f}.orange{border-color:#e88100}.green{border-color:#4d8b31}
+    .status{font-size:12px;margin-top:12px;padding:9px;border-radius:9px;background:#edf7ee;color:var(--green)}.status.error{background:#fff0f1;color:#a51d2d}
+    .map-card{position:relative}.map-title{position:absolute;z-index:2;left:16px;right:16px;top:16px;pointer-events:none;display:flex;justify-content:center}.map-title span{background:#ffffffee;color:var(--green);border:1px solid var(--line);padding:9px 16px;border-radius:12px;font-weight:800;box-shadow:0 5px 18px #0001}#viewDiv{height:100%;min-height:650px}
+    @media(max-width:820px){.shell{height:auto;grid-template-columns:1fr;padding:8px}.panel{max-height:none}.map-card,#viewDiv{height:70vh;min-height:520px}.map-title{top:10px}}
+  </style>
+</head>
+<body>
+<main class="shell">
+  <aside class="panel">
+    <h1>แผนที่รายงานสถานการณ์น้ำท่วม</h1>
+    <p class="lead">คลิกตำแหน่งน้ำท่วมบนแผนที่ ระบบจะแสดงพื้นที่เฝ้าระวังรอบนิคมฯ และส่งออกเป็น PNG</p>
+    <label for="place">พื้นที่/นิคมอุตสาหกรรม</label><input id="place" placeholder="เช่น นิคมอุตสาหกรรมบางปู">
+    <label for="date">วันที่และเวลารายงาน</label><input id="date" type="datetime-local">
+    <label for="level">ระดับสถานการณ์</label><input id="level" value="เฝ้าระวังสถานการณ์น้ำท่วม">
+    <label for="note">สรุปสถานการณ์</label><textarea id="note" placeholder="ระดับน้ำ เส้นทางที่ได้รับผลกระทบ หรือข้อมูลสำคัญ"></textarea>
+    <div class="buttons">
+      <button id="locateBtn" class="secondary">เลือกจุดน้ำท่วมบนแผนที่</button>
+      <button id="exportBtn" disabled>ดาวน์โหลดภาพ PNG</button>
+      <button id="clearBtn" class="secondary">ล้างจุดและวงเฝ้าระวัง</button>
+    </div>
+    <div class="legend"><b>วงเฝ้าระวัง</b><div><i class="swatch red"></i>1 กม. พื้นที่ใกล้จุดเกิดเหตุ</div><div><i class="swatch orange"></i>3 กม. พื้นที่เฝ้าระวัง</div><div><i class="swatch green"></i>5 กม. พื้นที่เตรียมพร้อม</div></div>
+    <div id="status" class="status">กำลังโหลด Web Map ของ กนอ.…</div>
+  </aside>
+  <section class="map-card"><div class="map-title"><span>ขอบเขตนิคมอุตสาหกรรมและพื้นที่เฝ้าระวังน้ำท่วม</span></div><div id="viewDiv"></div></section>
+</main>
+<script>
+require(["esri/WebMap","esri/views/MapView","esri/Graphic","esri/layers/GraphicsLayer","esri/geometry/geometryEngine"],function(WebMap,MapView,Graphic,GraphicsLayer,geometryEngine){
+  const webmap=new WebMap({portalItem:{id:"590841b3f03147f38703740281ff87a6",portal:{url:"https://ieat.maps.arcgis.com"}}});
+  const marks=new GraphicsLayer({title:"พื้นที่เฝ้าระวังน้ำท่วม",listMode:"show"});webmap.add(marks);
+  const view=new MapView({container:"viewDiv",map:webmap,center:[100.8,13.7],zoom:6,popup:{dockEnabled:true,dockOptions:{buttonEnabled:false,position:"bottom-right"}}});
+  const status=document.querySelector('#status'),exportBtn=document.querySelector('#exportBtn'),locateBtn=document.querySelector('#locateBtn');let selecting=false,point=null;
+  document.querySelector('#date').value=new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,16);
+  view.when(()=>{status.textContent="พร้อมใช้งาน • กดเลือกจุด แล้วคลิกบนแผนที่";exportBtn.disabled=false}).catch(e=>{status.className="status error";status.textContent="เปิด Web Map ไม่สำเร็จ: "+e.message});
+  locateBtn.onclick=()=>{selecting=true;view.container.style.cursor="crosshair";status.textContent="คลิกตำแหน่งน้ำท่วมบนแผนที่"};
+  view.on("click",e=>{if(!selecting)return;selecting=false;view.container.style.cursor="default";point=e.mapPoint;draw(point);status.textContent=`เลือกตำแหน่งแล้ว ${point.latitude.toFixed(5)}, ${point.longitude.toFixed(5)}`});
+  function draw(p){marks.removeAll();[
+    [5,"#4D8B31","rgba(77,139,49,.06)"],[3,"#E88100","rgba(232,129,0,.07)"],[1,"#D92D3F","rgba(217,45,63,.10)"]
+  ].forEach(([km,line,fill])=>{const g=geometryEngine.geodesicBuffer(p,km,"kilometers");marks.add(new Graphic({geometry:g,symbol:{type:"simple-fill",color:fill,outline:{color:line,width:2,style:"dash"}}}))});marks.add(new Graphic({geometry:p,symbol:{type:"simple-marker",style:"circle",size:15,color:"#D92D3F",outline:{color:"#FFFFFF",width:3}},popupTemplate:{title:"จุดน้ำท่วม",content:"ตำแหน่งที่ผู้จัดทำรายงานเลือก"}}));view.goTo({target:marks.graphics.toArray(),padding:70},{duration:700})}
+  document.querySelector('#clearBtn').onclick=()=>{marks.removeAll();point=null;status.textContent="ล้างข้อมูลแล้ว • เลือกจุดใหม่ได้"};
+  exportBtn.onclick=async()=>{exportBtn.disabled=true;status.textContent="กำลังสร้างภาพ PNG…";try{const shot=await view.takeScreenshot({format:"png",quality:100});await compose(shot)}catch(e){status.className="status error";status.textContent="สร้างภาพไม่สำเร็จ: "+e.message}finally{exportBtn.disabled=false}};
+  async function compose(shot){const W=1400,H=980,canvas=document.createElement('canvas'),ctx=canvas.getContext('2d');canvas.width=W;canvas.height=H;ctx.fillStyle="#FFFFFF";ctx.fillRect(0,0,W,H);ctx.fillStyle="#FF788D";ctx.fillRect(0,0,W,12);ctx.fillStyle="#165823";ctx.font="700 36px sans-serif";ctx.fillText("รายงานสถานการณ์น้ำท่วม",48,65);ctx.font="21px sans-serif";ctx.fillStyle="#475047";ctx.fillText(value('place','ไม่ระบุพื้นที่'),48,102);ctx.fillText(formatDate(),48,134);const img=new Image();img.onload=()=>{ctx.drawImage(img,48,165,1304,650);ctx.strokeStyle="#FFDADA";ctx.lineWidth=2;ctx.strokeRect(48,165,1304,650);ctx.fillStyle="#FFF2F2";round(ctx,48,838,1304,105,16);ctx.fillStyle="#165823";ctx.font="700 21px sans-serif";ctx.fillText(value('level','เฝ้าระวัง'),70,874);ctx.font="18px sans-serif";ctx.fillStyle="#343934";wrap(ctx,value('note','โปรดตรวจสอบสถานการณ์และยืนยันผลกระทบในพื้นที่'),70,906,1245,25,2);ctx.fillStyle="#687068";ctx.font="14px sans-serif";ctx.fillText("แผนที่ฐานและขอบเขตนิคมฯ: ArcGIS Online กนอ. • จุดน้ำท่วม: ผู้จัดทำรายงานระบุ",48,970);const a=document.createElement('a');a.download='flood-report-'+new Date().toISOString().slice(0,10)+'.png';a.href=canvas.toDataURL('image/png');a.click();status.className="status";status.textContent="ดาวน์โหลดภาพ PNG เรียบร้อย"};img.src=shot.dataUrl}
+  function value(id,fallback){return document.querySelector('#'+id).value.trim()||fallback}function formatDate(){const d=document.querySelector('#date').value;return d?'ข้อมูล ณ '+new Date(d).toLocaleString('th-TH',{dateStyle:'long',timeStyle:'short'}):'ไม่ระบุวันและเวลา'}
+  function round(c,x,y,w,h,r){c.beginPath();c.roundRect(x,y,w,h,r);c.fill()}function wrap(c,t,x,y,w,h,max){let line='',n=0;for(const ch of [...t]){if(c.measureText(line+ch).width>w){c.fillText(line,x,y+n*h);line=ch;if(++n>=max)return}else line+=ch}c.fillText(line,x,y+n*h)}
+});
+</script>
+</body></html>
