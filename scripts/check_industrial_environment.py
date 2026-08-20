@@ -199,7 +199,7 @@ def flex(event: dict, test: bool = False) -> dict:
                 {
                     "type": "text",
                     "text": "แจ้งเตือนสิ่งแวดล้อม",
-                    "color": "#FFFFFF",
+                    "color": "#165823",
                     "weight": "bold",
                     "size": "lg",
                     "align": "center",
@@ -227,7 +227,7 @@ def flex(event: dict, test: bool = False) -> dict:
             "text": "ข้อความทดสอบ • ไม่ใช่เหตุการณ์จริง",
             "size": "xxs",
             "weight": "bold",
-            "color": "#FFDADA",
+            "color": "#165823",
             "align": "center",
             "margin": "sm",
         })
@@ -247,7 +247,7 @@ def flex(event: dict, test: bool = False) -> dict:
             "type": "bubble",
             "size": "mega",
             "styles": {
-                "header": {"backgroundColor": "#FF788D"},
+                "header": {"backgroundColor": "#FFFFFF"},
                 "body": {"backgroundColor": "#FFFFFF"},
                 "footer": {"backgroundColor": "#FFFFFF"},
             },
