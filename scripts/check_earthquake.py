@@ -164,13 +164,6 @@ def flex_message(event: dict, test: bool = False) -> dict:
         else event.get("link") or "https://earthquake.tmd.go.th/"
     )
 
-    if magnitude is not None and magnitude >= 5:
-        guidance = "หลบในจุดปลอดภัย และตรวจอาคารกับระบบสำคัญทันที"
-    elif magnitude is not None and magnitude >= 3.5:
-        guidance = "เตรียมพร้อม และตรวจสอบอาคารกับระบบสำคัญ"
-    else:
-        guidance = "ติดตามประกาศ และตรวจสอบความผิดปกติในพื้นที่"
-
     header_contents = [
         {
             "type": "box",
@@ -188,7 +181,7 @@ def flex_message(event: dict, test: bool = False) -> dict:
                 {
                     "type": "text",
                     "text": "แจ้งเตือนแผ่นดินไหว",
-                    "color": "#FFFFFF",
+                    "color": "#165823",
                     "weight": "bold",
                     "size": "lg",
                     "align": "center",
@@ -203,7 +196,7 @@ def flex_message(event: dict, test: bool = False) -> dict:
                             "type": "text",
                             "text": " ",
                             "size": "xxs",
-                            "color": "#450C3F",
+                            "color": "#165823",
                         },
                     ],
                 },
@@ -215,7 +208,7 @@ def flex_message(event: dict, test: bool = False) -> dict:
             "type": "text",
             "text": "ข้อความทดสอบ • ไม่ใช่เหตุการณ์จริง",
             "size": "xxs",
-            "color": "#D9EFBD",
+            "color": "#165823",
             "weight": "bold",
             "align": "center",
             "margin": "sm",
@@ -237,7 +230,7 @@ def flex_message(event: dict, test: bool = False) -> dict:
             "type": "bubble",
             "size": "mega",
             "styles": {
-                "header": {"backgroundColor": "#450C3F"},
+                "header": {"backgroundColor": "#FFFFFF"},
                 "body": {"backgroundColor": "#FFFFFF"},
                 "footer": {"backgroundColor": "#FFFFFF"},
             },
@@ -263,7 +256,7 @@ def flex_message(event: dict, test: bool = False) -> dict:
                         "layout": "horizontal",
                         "alignItems": "center",
                         "paddingAll": "12px",
-                        "backgroundColor": "#F5FBDA",
+                        "backgroundColor": "#FFF2F2",
                         "cornerRadius": "12px",
                         "contents": [
                             {
@@ -276,14 +269,14 @@ def flex_message(event: dict, test: bool = False) -> dict:
                                         "text": mag,
                                         "size": "3xl",
                                         "weight": "bold",
-                                        "color": "#450C3F",
+                                        "color": "#165823",
                                         "align": "center",
                                     },
                                     {
                                         "type": "text",
                                         "text": "MAGNITUDE",
                                         "size": "xxs",
-                                        "color": "#450C3F",
+                                        "color": "#165823",
                                         "align": "center",
                                     },
                                 ],
@@ -293,7 +286,7 @@ def flex_message(event: dict, test: bool = False) -> dict:
                                 "layout": "vertical",
                                 "width": "2px",
                                 "height": "58px",
-                                "backgroundColor": "#B9D175",
+                                "backgroundColor": "#FF788D",
                                 "contents": [],
                             },
                             {
@@ -307,7 +300,7 @@ def flex_message(event: dict, test: bool = False) -> dict:
                                         "text": level,
                                         "size": "sm",
                                         "weight": "bold",
-                                        "color": "#450C3F",
+                                        "color": "#165823",
                                         "align": "center",
                                         "wrap": True,
                                     },
@@ -330,7 +323,7 @@ def flex_message(event: dict, test: bool = False) -> dict:
                         "margin": "md",
                         "paddingAll": "12px",
                         "backgroundColor": "#FFFFFF",
-                        "borderColor": "#D9EFBD",
+                        "borderColor": "#FFDADA",
                         "borderWidth": "1px",
                         "cornerRadius": "12px",
                         "contents": [
@@ -344,7 +337,7 @@ def flex_message(event: dict, test: bool = False) -> dict:
                                             "type": "text",
                                             "text": label,
                                             "size": "xs",
-                                            "color": "#450C3F",
+                                            "color": "#165823",
                                             "weight": "bold",
                                             "flex": 2,
                                         },
@@ -363,48 +356,6 @@ def flex_message(event: dict, test: bool = False) -> dict:
                             ],
                         ],
                     },
-                    {
-                        "type": "box",
-                        "layout": "horizontal",
-                        "alignItems": "center",
-                        "margin": "md",
-                        "paddingAll": "11px",
-                        "backgroundColor": "#D9EFBD",
-                        "cornerRadius": "12px",
-                        "spacing": "sm",
-                        "contents": [
-                            {
-                                "type": "box",
-                                "layout": "vertical",
-                                "width": "24px",
-                                "contents": [
-                                    icon_image(ASSET_URLS["nature"], "20px"),
-                                ],
-                            },
-                            {
-                                "type": "box",
-                                "layout": "vertical",
-                                "flex": 1,
-                                "contents": [
-                                    {
-                                        "type": "text",
-                                        "text": "คำแนะนำ",
-                                        "size": "xs",
-                                        "weight": "bold",
-                                        "color": "#450C3F",
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": guidance,
-                                        "size": "xs",
-                                        "color": "#252525",
-                                        "wrap": True,
-                                        "margin": "xs",
-                                    },
-                                ],
-                            },
-                        ],
-                    },
                 ],
             },
             "footer": {
@@ -419,7 +370,7 @@ def flex_message(event: dict, test: bool = False) -> dict:
                         "type": "button",
                         "style": "primary",
                         "height": "sm",
-                        "color": "#450C3F",
+                        "color": "#165823",
                         "action": {
                             "type": "uri",
                             "label": "ดูตำแหน่งบนแผนที่",
