@@ -1,0 +1,44 @@
+name: Internal Disaster Daily Report
+
+on:
+  workflow_dispatch:
+    inputs:
+      send_line:
+        description: "ส่งสรุปเข้า LINE ส่วนตัว"
+        type: boolean
+        default: true
+      test_message:
+        description: "แสดงว่าเป็นข้อความทดสอบ"
+        type: boolean
+        default: true
+  schedule:
+    # 01:00 UTC = 08:00 Asia/Bangkok
+    - cron: "0 1 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: internal-disaster-daily-report
+  cancel-in-progress: false
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Validate report script
+        run: python -m py_compile scripts/internal_disaster_report.py
+      - name: Build report and optionally send private LINE
+        env:
+          INTERNAL_LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.INTERNAL_LINE_CHANNEL_ACCESS_TOKEN }}
+          INTERNAL_LINE_TARGET_ID: ${{ secrets.INTERNAL_LINE_TARGET_ID }}
+          SEND_LINE: ${{ github.event_name == 'schedule' || inputs.send_line }}
+          TEST_MESSAGE: ${{ github.event_name == 'workflow_dispatch' && inputs.test_message }}
+          DISASTER_REPORT_PATH: /tmp/internal-disaster-report.json
+          TZ: Asia/Bangkok
+        run: python scripts/internal_disaster_report.py
