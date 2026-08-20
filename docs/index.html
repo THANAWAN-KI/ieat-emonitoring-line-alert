@@ -780,6 +780,28 @@ html,body{margin:0;background:#F5F6F8!important;color:var(--summary-ink)!importa
  .section-heading h2{font-size:19px!important}.chart-title{font-size:15px!important}
 }
 </style>
+
+<style id="latest-detail-enhancements">
+  .data-context{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+  .context-item{padding:12px;background:#fff;border:1px solid var(--ui-line);border-radius:12px}
+  .context-label{color:var(--ui-muted);font-size:11px}
+  .context-value{margin-top:4px;color:var(--ui-purple-dark);font-size:14px;line-height:1.45}
+  .alert-estates{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+  .estate-chip{padding:7px 10px;color:#A33642;background:#FFF2F2;border-radius:999px;font-size:12px}
+  .detail-tools{display:flex;gap:8px;padding:12px;border-bottom:1px solid var(--ui-line)}
+  .detail-search{width:100%;padding:10px 12px;color:var(--ui-text);background:#fff;border:1px solid var(--ui-line);border-radius:9px;font:inherit;font-size:13px;outline:none}
+  .detail-search:focus{border-color:var(--ui-purple);box-shadow:0 0 0 3px rgba(101,64,138,.1)}
+  .station{align-items:flex-start}
+  .station-name{font-size:13px}
+  .station-meta,.station-detail{font-size:11px}
+  .station-alarm details{width:100%}
+  .station-alarm summary{cursor:pointer;color:#A33642}
+  .station-alarm-text{margin-top:6px;white-space:pre-wrap;overflow-wrap:anywhere}
+  .station-actions{display:flex;gap:6px;margin-top:7px}
+  .station-link{padding:5px 8px;color:#2569C9;background:#F1F6FF;border-radius:7px;text-decoration:none;font-size:10px}
+  .panel-note{padding:0 12px 12px;color:var(--ui-muted);font-size:10px}
+  @media(max-width:480px){.data-context{grid-template-columns:1fr}.detail-tools{padding:10px}.context-value{font-size:13px}}
+</style>
 </head>
 <body>
 <div class="page">
@@ -802,6 +824,11 @@ html,body{margin:0;background:#F5F6F8!important;color:var(--summary-ink)!importa
 <section id="notice" class="notice">
   <div id="noticeMark" class="notice-mark">✓</div>
   <div><strong id="statusTitle">กำลังตรวจสอบสถานการณ์</strong><span id="statusText">โปรดรอสักครู่</span></div>
+</section>
+<section class="data-context">
+  <article class="context-item"><div class="context-label">เวลาข้อมูลล่าสุดจากสถานี</div><div id="latestDataTime" class="context-value">—</div></article>
+  <article class="context-item"><div class="context-label">รายการพารามิเตอร์แจ้งเตือน</div><div id="parameterCount" class="context-value">—</div></article>
+  <article class="context-item"><div class="context-label">นิคมฯ ที่พบค่าเกินมาตรฐาน</div><div id="alertEstateCount" class="context-value">—</div></article>
 </section>
 <div class="section-heading"><h2>ภาพรวมสถานีตรวจวัด</h2><p>ข้อมูลสถานีทั้งหมดจากระบบล่าสุด</p></div>
 <section class="kpis">
@@ -833,26 +860,36 @@ html,body{margin:0;background:#F5F6F8!important;color:var(--summary-ink)!importa
     <div id="parameterList" class="parameter-list"></div>
   </article>
 </section>
+<div class="section-heading"><h2>นิคมอุตสาหกรรมที่พบค่าเกินมาตรฐาน</h2><p>รวบรวมจากสถานีที่มี ParameterAlram ในข้อมูลล่าสุด</p></div>
+<section class="chart-card"><div id="alertEstateList" class="alert-estates"><span class="loading">กำลังโหลดข้อมูล…</span></div></section>
 <div class="section-heading"><h2>การกระจายสถานีตามพื้นที่</h2><p>5 นิคมอุตสาหกรรมที่มีจำนวนสถานีมากที่สุด</p></div>
 <section class="chart-card"><div id="estateList" class="estate-list"></div></section>
-<div class="section-heading summary-only-remove"><h2>ประเภทสถานี</h2><p>แยกตามระบบตรวจวัดสิ่งแวดล้อม</p></div>
-<section class="types summary-only-remove">
+<div class="section-heading"><h2>ประเภทสถานี</h2><p>แยกตามระบบตรวจวัดสิ่งแวดล้อม</p></div>
+<section class="types">
   <article class="type"><div><div class="type-code">AQMs</div><div class="type-name">คุณภาพอากาศ</div></div><div id="aqm" class="type-number">—</div></article>
   <article class="type"><div><div class="type-code">WQMs</div><div class="type-name">คุณภาพน้ำ</div></div><div id="wqm" class="type-number">—</div></article>
   <article class="type"><div><div class="type-code">CEMs</div><div class="type-name">การระบายมลพิษ</div></div><div id="cem" class="type-number">—</div></article>
 </section>
-<div class="section-heading summary-only-remove"><h2>ระดับสถานการณ์</h2><p>จำนวนสถานีแยกตามระดับการติดตาม</p></div>
-<section class="severity summary-only-remove">
+<div class="section-heading"><h2>ระดับสถานการณ์</h2><p>จำนวนสถานีแยกตามระดับการติดตาม</p></div>
+<section class="severity">
   <article class="sev urgent"><div class="sev-label">เกินค่ามาตรฐาน</div><div id="urgent" class="sev-number">—</div></article>
   <article class="sev watch"><div class="sev-label">เฝ้าระวัง</div><div id="watch" class="sev-number">—</div></article>
   <article class="sev follow"><div class="sev-label">ติดตามสถานการณ์</div><div id="follow" class="sev-number">—</div></article>
 </section>
-<div class="section-heading summary-only-remove"><h2>สถานีที่ต้องติดตาม</h2><p>แสดงรายการล่าสุดไม่เกิน 8 สถานี</p></div>
-<section class="card panel summary-only-remove">
+<div class="section-heading"><h2>สถานีที่ต้องติดตาม</h2><p>แสดงรายการล่าสุดไม่เกิน 8 สถานี</p></div>
+<section class="card panel">
   <div class="panel-head"><h3>รายการสถานี</h3><span id="stationCount">0 รายการ</span></div>
+  <div class="detail-tools"><input id="stationSearch" class="detail-search" type="search" placeholder="ค้นหาสถานี นิคมฯ ประเภท หรือพารามิเตอร์" oninput="renderAlertStations(this.value)"></div>
   <div class="panel-body"><div id="stationList" class="station-list"><div class="loading">กำลังโหลดข้อมูล…</div></div></div>
+  <div class="panel-note">แสดงข้อมูลสถานีที่มีรายการแจ้งเตือนทั้งหมดจาก status.json</div>
 </section>
-<nav class="quick summary-only-remove">
+<div class="section-heading"><h2>สถานีออฟไลน์</h2><p>ตรวจสอบสถานีที่ไม่อยู่ในสถานะ ONLINE</p></div>
+<section class="card panel">
+  <div class="panel-head"><h3>รายการสถานีออฟไลน์</h3><span id="offlineStationCount">0 รายการ</span></div>
+  <div class="detail-tools"><input id="offlineSearch" class="detail-search" type="search" placeholder="ค้นหาสถานีออฟไลน์หรือนิคมฯ" oninput="renderOfflineStations(this.value)"></div>
+  <div class="panel-body"><div id="offlineStationList" class="station-list"><div class="loading">กำลังโหลดข้อมูล…</div></div></div>
+</section>
+<nav class="quick">
   <a href="./stations.html">รายงานสถานีทั้งหมด</a>
   <a href="./safety.html">คู่มือความปลอดภัย</a>
   <a href="./contacts.html">ติดต่อเจ้าหน้าที่</a>
@@ -873,49 +910,85 @@ function renderBars(target,items){
   const max=Math.max(1,...items.map(item=>num(item.value)));
   $(target).innerHTML=items.map(item=>'<div class="bar-row"><span class="bar-label">'+esc(item.label)+'</span><div class="bar-track"><div class="bar-fill" style="width:'+Math.round(num(item.value)/max*100)+'%"></div></div><span class="bar-value">'+fmt(item.value)+'</span></div>').join("");
 }
+const KNOWN_PARAMETERS=["PM2.5","PM25","PM10","SO2","NO2","NOX","NOx","O3","CO","TSP","DUST","Dust","OPACITY","Opacity","pH","COD","BOD","DO","TDS","SS","TEMP"];
+let CURRENT_ALERTS=[];
+let CURRENT_OFFLINE=[];
+function isOnline(status){return String(status||"").trim().toUpperCase()==="ONLINE"}
+function parameterNames(value){
+  const text=String(value||"");
+  const found=[];
+  KNOWN_PARAMETERS.forEach(name=>{
+    const re=new RegExp("(^|[^A-Za-z0-9])"+name.replace(".","\\.")+"(?=[^A-Za-z0-9]|$)","i");
+    if(re.test(text)){const normalized=name.toUpperCase()==="PM25"?"PM2.5":name.toUpperCase();if(!found.includes(normalized))found.push(normalized)}
+  });
+  return found;
+}
+function stationCard(s,showAlarm=true){
+  const status=String(s.status||"-");
+  const online=isOnline(status);
+  const alarm=s.parameter_alarm||s.ParameterAlram||"-";
+  const updated=s.last_update||s.LastUpdate||"-";
+  const estate=s.estate_name||s.IndustryZone||"-";
+  const lat=Number(s.latitude),lon=Number(s.longitude);
+  const map=(Number.isFinite(lat)&&Number.isFinite(lon))?'https://www.google.com/maps/search/?api=1&query='+lat+','+lon:"";
+  return '<div class="station"><div class="station-main"><div class="station-name">'+esc(s.station_name||"-")+'</div><div class="station-meta">'+esc(s.station_type||"-")+' • '+esc(estate)+'</div><div class="station-detail">ข้อมูลล่าสุด: '+esc(updated)+'</div>'+(showAlarm&&alarm&&alarm!=="-"?'<div class="station-alarm"><details><summary>ดูพารามิเตอร์ที่ต้องติดตาม</summary><div class="station-alarm-text">'+esc(alarm)+'</div></details></div>':'')+(map?'<div class="station-actions"><a class="station-link" href="'+map+'" target="_blank" rel="noopener">ดูตำแหน่ง</a></div>':'')+'</div><span class="badge '+(online?"online":"offline")+'">'+(online?"ออนไลน์":esc(status))+'</span></div>'
+}
+function renderAlertStations(query=""){
+  const q=String(query||"").trim().toLowerCase();
+  const rows=CURRENT_ALERTS.filter(s=>!q||[s.station_name,s.estate_name,s.station_type,s.parameter_alarm].join(" ").toLowerCase().includes(q));
+  $("stationCount").textContent=fmt(rows.length)+" จาก "+fmt(CURRENT_ALERTS.length)+" รายการ";
+  $("stationList").innerHTML=rows.length?rows.map(s=>stationCard(s,true)).join(""):'<div class="empty">ไม่พบสถานีตามคำค้น</div>';
+}
+function renderOfflineStations(query=""){
+  const q=String(query||"").trim().toLowerCase();
+  const rows=CURRENT_OFFLINE.filter(s=>!q||[s.station_name,s.estate_name,s.station_type,s.status].join(" ").toLowerCase().includes(q));
+  $("offlineStationCount").textContent=fmt(rows.length)+" จาก "+fmt(CURRENT_OFFLINE.length)+" รายการ";
+  $("offlineStationList").innerHTML=rows.length?rows.map(s=>stationCard(s,false)).join(""):'<div class="empty">ไม่พบสถานีออฟไลน์ตามคำค้น</div>';
+}
 function render(data){
   CURRENT_DATA=data;
   const total=num(data.station_count??data.station_total);
   const online=num(data.online_total??data.online);
   const offline=num(data.offline_total??data.offline);
   const alerts=num(data.alert_station_count??data.alerts);
+  const allStations=Array.isArray(data.all_stations)?data.all_stations:[];
+  const stations=Array.isArray(data.stations)?data.stations:[];
+  CURRENT_ALERTS=stations;
+  CURRENT_OFFLINE=allStations.filter(s=>!isOnline(s.status));
+  const alarmEntries=stations.flatMap(s=>alarmItems(s.parameter_alarm||s.ParameterAlram));
+  const parameterCounts={};
+  stations.forEach(s=>parameterNames(s.parameter_alarm||s.ParameterAlram).forEach(p=>parameterCounts[p]=(parameterCounts[p]||0)+1));
+  const alertEstateNames=[...new Set(stations.map(s=>String(s.estate_name||s.IndustryZone||"").trim()).filter(n=>n&&n!=="-"))].sort((a,b)=>a.localeCompare(b,"th"));
+
   $("total").textContent=fmt(total);$("online").textContent=fmt(online);$("offline").textContent=fmt(offline);$("alerts").textContent=fmt(alerts);
   $("aqm").textContent=fmt(typeValue(data,"AQMs"));$("wqm").textContent=fmt(typeValue(data,"WQMs"));$("cem").textContent=fmt(typeValue(data,"CEMs"));
   $("urgent").textContent=fmt(data.urgent_count);$("watch").textContent=fmt(data.watch_count);$("follow").textContent=fmt(data.follow_count);
   $("updatedAt").textContent=data.updated_at_text||data.updated_at||"-";
+  $("latestDataTime").textContent=data.latest_data_time||"-";
+  $("parameterCount").textContent=fmt(alarmEntries.length)+" รายการ";
+  $("alertEstateCount").textContent=fmt(alertEstateNames.length)+" นิคมฯ";
   const alert=String(data.status||"").toLowerCase()==="alert"||alerts>0;
   $("notice").className="notice"+(alert?" alert":"");$("noticeMark").textContent=alert?"!":"✓";
   $("statusTitle").textContent=alert?("พบสถานีที่ต้องติดตาม "+fmt(alerts)+" สถานี"):"สถานการณ์โดยรวมอยู่ในภาวะปกติ";
-  $("statusText").textContent=alert?"กรุณาตรวจสอบรายละเอียดและติดตามการเปลี่ยนแปลง":"ไม่พบค่าพารามิเตอร์ที่เกินค่ามาตรฐานในข้อมูลล่าสุด";
-  const allStations=Array.isArray(data.all_stations)?data.all_stations:[];
-  const stations=Array.isArray(data.stations)?data.stations:[];
+  $("statusText").textContent=alert?("พบ "+fmt(alarmEntries.length)+" รายการพารามิเตอร์ ใน "+fmt(alertEstateNames.length)+" นิคมอุตสาหกรรม"):"ไม่พบค่าพารามิเตอร์ที่เกินค่ามาตรฐานในข้อมูลล่าสุด";
   const percent=total?Math.round(online/total*100):0;
-  $("onlinePercent").textContent=percent+"%";
-  $("onlineDonut").style.setProperty("--percent",percent);
+  $("onlinePercent").textContent=percent+"%";$("onlineDonut").style.setProperty("--percent",percent);
   renderBars("typeBars",[
-    {label:"AQMs",value:typeValue(data,"AQMs")},
-    {label:"WQMs",value:typeValue(data,"WQMs")},
-    {label:"CEMs",value:typeValue(data,"CEMs")}
+    {label:"AQMs",value:typeValue(data,"AQMs")},{label:"WQMs",value:typeValue(data,"WQMs")},{label:"CEMs",value:typeValue(data,"CEMs")}
   ]);
   renderBars("severityBars",[
-    {label:"เกินค่า",value:num(data.urgent_count)},
-    {label:"เฝ้าระวัง",value:num(data.watch_count)},
-    {label:"ติดตาม",value:num(data.follow_count)}
+    {label:"เกินค่า",value:num(data.urgent_count)},{label:"เฝ้าระวัง",value:num(data.watch_count)},{label:"ติดตาม",value:num(data.follow_count)}
   ]);
-  const params=[...new Set(stations.flatMap(s=>alarmItems(s.parameter_alarm||s.ParameterAlram)))].slice(0,10);
-  $("parameterList").innerHTML=params.length?params.map(p=>'<span class="parameter-chip">'+esc(p)+'</span>').join(""):'<span class="parameter-chip">ไม่พบพารามิเตอร์แจ้งเตือน</span>';
+  const params=Object.entries(parameterCounts).sort((a,b)=>b[1]-a[1]);
+  $("parameterList").innerHTML=params.length?params.map(([p,count])=>'<span class="parameter-chip">'+esc(p)+' • '+fmt(count)+' สถานี</span>').join(""):'<span class="parameter-chip">ไม่พบชื่อพารามิเตอร์แจ้งเตือน</span>';
+  $("alertEstateList").innerHTML=alertEstateNames.length?alertEstateNames.map(name=>'<span class="estate-chip">'+esc(name)+'</span>').join(""):'<span class="parameter-chip">ไม่พบนิคมฯ ที่มีค่าเกินมาตรฐาน</span>';
   const estateCounts={};
   allStations.forEach(s=>{const name=String(s.estate_name||s.IndustryZone||"").trim();if(name&&name!=="-")estateCounts[name]=(estateCounts[name]||0)+1});
-  const estates=Object.entries(estateCounts).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  const estates=Object.entries(estateCounts).sort((a,b)=>b[1]-a[1]).slice(0,8);
   const estateMax=Math.max(1,...estates.map(v=>v[1]));
   $("estateList").innerHTML=estates.length?estates.map(([name,value])=>'<div class="estate-row"><span class="estate-name" title="'+esc(name)+'">'+esc(name)+'</span><div class="estate-track"><div class="estate-fill" style="width:'+Math.round(value/estateMax*100)+'%"></div></div><strong>'+fmt(value)+'</strong></div>').join(""):'<div class="empty">ไม่พบข้อมูลนิคมอุตสาหกรรม</div>';
-  $("stationCount").textContent=fmt(stations.length)+" รายการ";
-  $("stationList").innerHTML=stations.length?stations.slice(0,8).map(s=>{
-    const status=String(s.status||"-").toUpperCase();
-    const alarm=s.parameter_alarm||s.ParameterAlram||"-";
-    const updated=s.last_update||s.LastUpdate||"-";
-    return '<div class="station"><div class="station-main"><div class="station-name">'+esc(s.station_name)+'</div><div class="station-meta">'+esc(s.station_type)+' • '+esc(s.estate_name)+'</div><div class="station-detail">ข้อมูลล่าสุด: '+esc(updated)+'</div><div class="station-alarm">'+esc(alarm)+'</div></div><span class="badge '+(status==="ONLINE"?"online":"offline")+'">'+(status==="ONLINE"?"ออนไลน์":status==="OFFLINE"?"ออฟไลน์":esc(status))+'</span></div>'
-  }).join(""):'<div class="empty">ไม่พบสถานีที่ต้องติดตามในข้อมูลล่าสุด</div>';
+  renderAlertStations($("stationSearch")?.value||"");
+  renderOfflineStations($("offlineSearch")?.value||"");
 }
 async function load(){try{const r=await fetch("./status.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error("HTTP "+r.status);render(await r.json())}catch(error){$("updatedAt").textContent="ไม่สามารถโหลดข้อมูลล่าสุด";$("statusTitle").textContent="เกิดข้อผิดพลาดในการโหลดข้อมูล";$("statusText").textContent="กรุณาลองใหม่อีกครั้ง";$("stationList").innerHTML='<div class="empty">ไม่สามารถโหลด status.json ได้</div>'}}
 
@@ -934,7 +1007,7 @@ async function downloadDashboardPng(){
     const percent=total?Math.round(online/total*100):0,updated=d.updated_at_text||d.updated_at||"-";
     const stations=Array.isArray(d.stations)?d.stations:[];
     const all=Array.isArray(d.all_stations)?d.all_stations:[];
-    const estateCounts={};all.forEach(s=>{const n=String(s.estate_name||s.IndustryZone||"").trim();if(n&&n!=="-")estateCounts[n]=(estateCounts[n]||0)+1});
+    const estateCounts={};stations.forEach(s=>{const n=String(s.estate_name||s.IndustryZone||"").trim();if(n&&n!=="-")estateCounts[n]=(estateCounts[n]||0)+1});
     const estates=Object.entries(estateCounts).sort((a,b)=>b[1]-a[1]).slice(0,5);
     const canvas=document.createElement("canvas");canvas.width=1240;canvas.height=1754;
     const c=canvas.getContext("2d");c.fillStyle="#F5F6F8";c.fillRect(0,0,canvas.width,canvas.height);c.textBaseline="top";
@@ -957,7 +1030,7 @@ async function downloadDashboardPng(){
     c.fillStyle="#2F6FED";c.font='800 36px "Sarabun","Noto Sans Thai",Tahoma,sans-serif';c.textAlign="center";c.fillText(percent+"%",1010,526);c.fillStyle="#707681";c.font='500 16px "Sarabun","Noto Sans Thai",Tahoma,sans-serif';c.fillText("สถานีออนไลน์",1010,575);c.textAlign="left";
     c.fillStyle="#292B31";c.font='800 25px "Sarabun","Noto Sans Thai",Tahoma,sans-serif';c.fillText("สถานการณ์และพื้นที่ที่เกี่ยวข้อง",34,756);
     roundRect(c,30,798,575,330,18,"#FFFFFF","#E1E5EB");roundRect(c,625,798,585,330,18,"#FFFFFF","#E1E5EB");
-    c.fillStyle="#30333A";c.font='700 20px "Sarabun","Noto Sans Thai",Tahoma,sans-serif';c.fillText("ระดับการติดตาม",58,828);c.fillText("นิคมฯ ที่มีสถานีมากที่สุด",653,828);
+    c.fillStyle="#30333A";c.font='700 20px "Sarabun","Noto Sans Thai",Tahoma,sans-serif';c.fillText("ระดับการติดตาม",58,828);c.fillText("นิคมฯ ที่พบค่าเกินมาตรฐาน",653,828);
     const sev=[["เกินค่ามาตรฐาน",num(d.urgent_count),"#E34B4B"],["เฝ้าระวัง",num(d.watch_count),"#E57A2A"],["ติดตามสถานการณ์",num(d.follow_count),"#35A56A"]];
     const sevMax=Math.max(1,...sev.map(r=>r[1]));sev.forEach((r,i)=>{const y=884+i*70;c.fillStyle="#707681";c.font='600 16px "Sarabun","Noto Sans Thai",Tahoma,sans-serif';c.fillText(r[0],58,y);c.fillStyle="#EEF1F5";c.fillRect(210,y,285,18);c.fillStyle=r[2];c.fillRect(210,y,Math.round(r[1]/sevMax*285),18);c.fillStyle="#30333A";c.fillText(fmt(r[1]),520,y)});
     const em=Math.max(1,...estates.map(r=>r[1]));estates.forEach((r,i)=>{const y=875+i*48;c.fillStyle="#626773";c.font='500 15px "Sarabun","Noto Sans Thai",Tahoma,sans-serif';fitText(c,r[0],653,y,220);c.fillStyle="#EEF1F5";c.fillRect(885,y,240,15);c.fillStyle="#2F6FED";c.fillRect(885,y,Math.round(r[1]/em*240),15);c.fillStyle="#30333A";c.fillText(fmt(r[1]),1145,y-2)});
