@@ -20,10 +20,7 @@ THAI_TZ = ZoneInfo("Asia/Bangkok")
 STATUS_PATH = Path(os.getenv("EMONITORING_STATUS_PATH", "docs/status.json"))
 OUTPUT_PATH = Path(os.getenv("DISASTER_REPORT_PATH", "docs/internal-disaster-report.json"))
 LINE_API = "https://api.line.me/v2/bot/message/push"
-DASHBOARD_URL = os.getenv(
-    "DISASTER_DASHBOARD_URL",
-    "https://thanawan-ki.github.io/ieat-emonitoring-line-alert/disaster-workspace.html",
-)
+GISTDA_DASHBOARD_URL = "https://disaster.gistda.or.th/dashboard"
 
 
 def source(name: str, url: str, loader) -> dict:
@@ -124,7 +121,7 @@ def build_flex(report: dict, test: bool = False) -> dict:
         ]},
         "body": {"type": "box", "layout": "vertical", "backgroundColor": "#FFFFFF", "paddingAll": "14px", "contents": contents},
         "footer": {"type": "box", "layout": "vertical", "backgroundColor": "#FFFFFF", "paddingAll": "14px", "contents": [
-            {"type": "button", "style": "primary", "height": "sm", "color": "#165823", "action": {"type": "uri", "label": "เปิดรายงานและดาวน์โหลด PNG", "uri": DASHBOARD_URL}}
+            {"type": "button", "style": "primary", "height": "sm", "color": "#165823", "action": {"type": "uri", "label": "เปิดแผนที่ภัยพิบัติ GISTDA", "uri": GISTDA_DASHBOARD_URL}}
         ]},
     }}
 
