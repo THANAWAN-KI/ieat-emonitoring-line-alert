@@ -1397,6 +1397,16 @@ def build_station_status_summary_bubble(
         for event in events
         if event.get("event_type") == "RECOVERED"
     })
+    alert_estate_names = sorted({
+        safe_text(station.get("estate_name"), "")
+        for station in alert_stations
+        if safe_text(station.get("estate_name"), "") not in {"", "-"}
+    })
+    alert_estate_text = (
+        " • ".join(alert_estate_names)
+        if alert_estate_names
+        else "ไม่พบข้อมูลชื่อนิคมอุตสาหกรรม"
+    )
 
     type_rows = [
         station_type_summary_row("AQMs", type_stats["AQMs"]),
@@ -1522,6 +1532,14 @@ def build_station_status_summary_bubble(
                         },
                     ],
                 },
+                text_component(
+                    "นิคมฯ ที่พบค่าเกินมาตรฐาน", size="xs",
+                    color="#30283A", weight="bold", margin="md",
+                ),
+                text_component(
+                    alert_estate_text, size="xs",
+                    color="#555555", margin="xs", wrap=True,
+                ),
                 text_component(
                     "สถานะแยกตามประเภท", size="sm",
                     weight="bold", margin="md",
