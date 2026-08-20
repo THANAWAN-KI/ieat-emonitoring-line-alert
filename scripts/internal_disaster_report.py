@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build one private daily disaster brief from IEAT and official public sources."""
+"""Build one private daily disaster brief from official public sources."""
 
 from __future__ import annotations
 
@@ -17,7 +17,6 @@ import check_industrial_environment as environment
 import check_weather_warning as weather
 
 THAI_TZ = ZoneInfo("Asia/Bangkok")
-STATUS_PATH = Path(os.getenv("EMONITORING_STATUS_PATH", "docs/status.json"))
 OUTPUT_PATH = Path(os.getenv("DISASTER_REPORT_PATH", "docs/internal-disaster-report.json"))
 LINE_API = "https://api.line.me/v2/bot/message/push"
 GISTDA_DASHBOARD_URL = "https://disaster.gistda.or.th/dashboard"
@@ -29,25 +28,6 @@ def source(name: str, url: str, loader) -> dict:
         return {"name": name, "url": url, "available": True, "items": items, "error": ""}
     except Exception as exc:  # one unavailable provider must not stop the whole brief
         return {"name": name, "url": url, "available": False, "items": [], "error": str(exc)[:180]}
-
-
-def load_emonitoring() -> dict:
-    data = json.loads(STATUS_PATH.read_text(encoding="utf-8"))
-    stations = data.get("stations") or []
-    alarms = [s for s in stations if str(s.get("parameter_alarm") or "").strip() not in ("", "-")]
-    estates = sorted({str(s.get("estate_name") or "ไม่ระบุนิคม").strip() for s in alarms})
-    return {
-        "updated_at": data.get("updated_at_text") or data.get("updated_at") or "ไม่ระบุ",
-        "total": int(data.get("station_count") or len(stations)),
-        "online": int(data.get("online_total") or 0),
-        "offline": int(data.get("offline_total") or 0),
-        "alarm_stations": int(data.get("alert_station_count") or len(alarms)),
-        "alarm_estates": estates,
-        "alarm_details": [
-            {"estate": s.get("estate_name") or "ไม่ระบุนิคม", "station": s.get("station_name") or s.get("code") or "ไม่ระบุ", "parameter": s.get("parameter_alarm") or "-"}
-            for s in alarms[:30]
-        ],
-    }
 
 
 def load_earthquakes() -> list[dict]:
@@ -66,24 +46,29 @@ def load_weather() -> list[dict]:
 
 def build_report() -> dict:
     now = datetime.now(THAI_TZ)
-    em = source("กนอ. e-Monitoring", "./stations.html", load_emonitoring)
     eq = source("กรมอุตุนิยมวิทยา: แผ่นดินไหว", earthquake.RSS_URL, load_earthquakes)
     wt = source("กรมอุตุนิยมวิทยา: ประกาศเตือน", weather.WARNING_URL, load_weather)
     pm = source("กรมควบคุมมลพิษ: Air4Thai", environment.AIR4THAI_URL, environment.pm_events)
     gs = source("GISTDA Disaster", environment.GISTDA_URL, environment.gistda_events)
-    monitoring = em["items"] if em["available"] else {"total": 0, "online": 0, "offline": 0, "alarm_stations": 0, "alarm_estates": [], "alarm_details": []}
-    external_count = sum(len(x["items"]) for x in (eq, wt, pm, gs))
+    sources = [wt, eq, pm, gs]
+    counts = {
+        "weather": len(wt["items"]),
+        "earthquake": len(eq["items"]),
+        "air_quality": len(pm["items"]),
+        "gis_disasters": len(gs["items"]),
+    }
+    total = sum(counts.values())
     return {
         "generated_at": now.isoformat(),
         "generated_at_text": now.strftime("%d/%m/%Y เวลา %H:%M น."),
         "scope_note": "เหตุการณ์ภายนอกเป็นข้อมูลเพื่อเฝ้าระวัง ยังไม่ถือว่านิคมได้รับผลกระทบจนกว่าจะมีการตรวจสอบยืนยัน",
         "summary": {
-            "external_events": external_count,
-            "sources_available": sum(1 for x in (em, eq, wt, pm, gs) if x["available"]),
-            "sources_total": 5,
-            "monitoring": monitoring,
+            "total_events": total,
+            "counts": counts,
+            "sources_available": sum(1 for x in sources if x["available"]),
+            "sources_total": len(sources),
         },
-        "sources": [em, wt, eq, pm, gs],
+        "sources": sources,
     }
 
 
@@ -96,24 +81,28 @@ def metric(label: str, value: str, color: str) -> dict:
 
 def build_flex(report: dict, test: bool = False) -> dict:
     sm = report["summary"]
-    em = sm["monitoring"]
-    estates = em.get("alarm_estates") or []
-    estate_text = " • ".join(estates[:6]) + ((f" และอีก {len(estates)-6} นิคม") if len(estates) > 6 else "")
+    counts = sm["counts"]
     unavailable = [x["name"] for x in report["sources"] if not x["available"]]
+    highlights = []
+    for provider in report["sources"]:
+        for item in provider["items"][:2]:
+            title = item.get("title") or item.get("kind") or "รายการเฝ้าระวัง"
+            value = item.get("value") or (f"M{item['magnitude']}" if item.get("magnitude") is not None else "")
+            highlights.append(f"• {title}{(' · ' + value) if value else ''}")
     contents = [
         {"type": "box", "layout": "horizontal", "spacing": "sm", "contents": [
-            metric("เหตุ/ประกาศเฝ้าระวัง", str(sm["external_events"]), "#FFF2F2"),
-            metric("สถานีเกินมาตรฐาน", str(em.get("alarm_stations", 0)), "#FFDADA"),
-            metric("สถานี Offline", str(em.get("offline", 0)), "#FFF2F2"),
+            metric("อากาศรุนแรง", str(counts["weather"]), "#FFF2F2"),
+            metric("แผ่นดินไหว", str(counts["earthquake"]), "#FFDADA"),
+            metric("สิ่งแวดล้อม/ภัยพื้นที่", str(counts["air_quality"] + counts["gis_disasters"]), "#FFF2F2"),
         ]},
-        {"type": "text", "text": f"นิคมที่พบค่าเกินมาตรฐาน {len(estates)} แห่ง", "size": "sm", "weight": "bold", "color": "#165823", "margin": "lg"},
-        {"type": "text", "text": estate_text or "ไม่พบ", "size": "xs", "color": "#333333", "wrap": True, "margin": "sm"},
+        {"type": "text", "text": f"รวม {sm['total_events']} รายการที่ต้องตรวจสอบ", "size": "sm", "weight": "bold", "color": "#165823", "margin": "lg"},
+        {"type": "text", "text": "\n".join(highlights[:5]) if highlights else "ไม่พบรายการตามเกณฑ์เฝ้าระวัง", "size": "xs", "color": "#333333", "wrap": True, "margin": "sm"},
         {"type": "separator", "margin": "lg", "color": "#FFDADA"},
         {"type": "text", "text": report["scope_note"], "size": "xxs", "color": "#666666", "wrap": True, "margin": "lg"},
     ]
     if unavailable:
         contents.append({"type": "text", "text": "ดึงข้อมูลไม่ได้: " + " • ".join(unavailable), "size": "xxs", "color": "#B42318", "wrap": True, "margin": "md"})
-    return {"type": "flex", "altText": ("[ทดสอบ] " if test else "") + "สรุปสถานการณ์ภัยพิบัติและ e-Monitoring", "contents": {
+    return {"type": "flex", "altText": ("[ทดสอบ] " if test else "") + "สรุปสถานการณ์ภัยพิบัติ", "contents": {
         "type": "bubble", "size": "mega",
         "header": {"type": "box", "layout": "vertical", "backgroundColor": "#FFFFFF", "paddingAll": "16px", "contents": [
             {"type": "text", "text": "สรุปสถานการณ์ภัยพิบัติ", "size": "lg", "weight": "bold", "color": "#165823"},
