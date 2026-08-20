@@ -180,7 +180,7 @@ def weather_safety_tips(title: str) -> list[str]:
 
 
 def flex_message(item: dict, test: bool = False) -> dict:
-    """Build one compact weather warning card using the green-plum palette."""
+    """Build a readable weather warning card for mobile LINE users."""
     level, _, _ = severity(item["title"])
     detected = datetime.now(THAI_TZ).strftime("%d/%m/%Y เวลา %H:%M น.")
     title = item["title"]
@@ -204,8 +204,7 @@ def flex_message(item: dict, test: bool = False) -> dict:
                     "type": "text",
                     "text": "แจ้งเตือนสภาพอากาศ",
                     "color": "#165823",
-                    "weight": "bold",
-                    "size": "lg",
+                    "size": "md",
                     "align": "center",
                     "flex": 1,
                 },
@@ -218,7 +217,7 @@ def flex_message(item: dict, test: bool = False) -> dict:
                             "type": "text",
                             "text": " ",
                             "size": "xxs",
-                            "color": "#165823",
+                            "color": "#FFFFFF",
                         },
                     ],
                 },
@@ -229,17 +228,11 @@ def flex_message(item: dict, test: bool = False) -> dict:
         header_contents.append({
             "type": "text",
             "text": "ข้อความทดสอบ • ไม่ใช่เหตุการณ์จริง",
-            "size": "xxs",
-            "weight": "bold",
+            "size": "xs",
             "color": "#165823",
             "align": "center",
             "margin": "sm",
         })
-
-    detail_rows = [
-        ("ประกาศ", title),
-        ("ตรวจพบเมื่อ", detected),
-    ]
 
     return {
         "type": "flex",
@@ -259,7 +252,7 @@ def flex_message(item: dict, test: bool = False) -> dict:
                 "type": "box",
                 "layout": "vertical",
                 "paddingTop": "14px",
-                "paddingBottom": "14px",
+                "paddingBottom": "12px",
                 "paddingStart": "16px",
                 "paddingEnd": "16px",
                 "contents": header_contents,
@@ -267,70 +260,73 @@ def flex_message(item: dict, test: bool = False) -> dict:
             "body": {
                 "type": "box",
                 "layout": "vertical",
-                "paddingTop": "14px",
+                "paddingTop": "8px",
                 "paddingBottom": "12px",
                 "paddingStart": "14px",
                 "paddingEnd": "14px",
                 "contents": [
                     {
                         "type": "box",
-                        "layout": "horizontal",
-                        "alignItems": "center",
+                        "layout": "vertical",
                         "paddingAll": "12px",
                         "backgroundColor": "#FFF2F2",
                         "cornerRadius": "12px",
-                        "spacing": "md",
                         "contents": [
                             {
                                 "type": "box",
-                                "layout": "vertical",
-                                "width": "42px",
-                                "height": "42px",
-                                "backgroundColor": "#FFDADA",
-                                "cornerRadius": "10px",
-                                "justifyContent": "center",
+                                "layout": "horizontal",
                                 "alignItems": "center",
+                                "spacing": "sm",
                                 "contents": [
-                                    icon_image(weather_icon(title), "25px"),
+                                    {
+                                        "type": "box",
+                                        "layout": "vertical",
+                                        "width": "38px",
+                                        "height": "38px",
+                                        "backgroundColor": "#FFDADA",
+                                        "cornerRadius": "9px",
+                                        "justifyContent": "center",
+                                        "alignItems": "center",
+                                        "contents": [
+                                            icon_image(weather_icon(title), "23px"),
+                                        ],
+                                    },
+                                    {
+                                        "type": "box",
+                                        "layout": "vertical",
+                                        "flex": 1,
+                                        "contents": [
+                                            {
+                                                "type": "text",
+                                                "text": "ประเภทภัย",
+                                                "size": "xs",
+                                                "color": "#165823",
+                                            },
+                                            {
+                                                "type": "text",
+                                                "text": hazards,
+                                                "size": "sm",
+                                                "color": "#165823",
+                                                "wrap": True,
+                                                "margin": "xs",
+                                            },
+                                        ],
+                                    },
                                 ],
                             },
                             {
                                 "type": "box",
                                 "layout": "vertical",
-                                "flex": 1,
-                                "contents": [
-                                    {
-                                        "type": "text",
-                                        "text": "ประเภทภัย",
-                                        "size": "xxs",
-                                        "color": "#165823",
-                                        "weight": "bold",
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": hazards,
-                                        "size": "lg",
-                                        "color": "#165823",
-                                        "weight": "bold",
-                                        "wrap": True,
-                                        "margin": "xs",
-                                    },
-                                ],
-                            },
-                            {
-                                "type": "box",
-                                "layout": "vertical",
-                                "paddingAll": "7px",
+                                "margin": "md",
+                                "paddingAll": "8px",
                                 "backgroundColor": "#FF788D",
                                 "cornerRadius": "8px",
-                                "flex": 0,
                                 "contents": [
                                     {
                                         "type": "text",
                                         "text": level,
-                                        "size": "xxs",
-                                        "weight": "bold",
-                                        "color": "#165823",
+                                        "size": "xs",
+                                        "color": "#FFFFFF",
                                         "align": "center",
                                         "wrap": True,
                                     },
@@ -344,35 +340,51 @@ def flex_message(item: dict, test: bool = False) -> dict:
                         "margin": "md",
                         "paddingAll": "12px",
                         "backgroundColor": "#FFFFFF",
-                        "cornerRadius": "12px",
+                        "cornerRadius": "10px",
                         "contents": [
-                            *[
-                                {
-                                    "type": "box",
-                                    "layout": "horizontal",
-                                    "margin": "md" if index else "xs",
-                                    "contents": [
-                                        {
-                                            "type": "text",
-                                            "text": label,
-                                            "size": "xs",
-                                            "color": "#165823",
-                                            "weight": "bold",
-                                            "flex": 2,
-                                        },
-                                        {
-                                            "type": "text",
-                                            "text": value,
-                                            "size": "xs",
-                                            "color": "#252525",
-                                            "weight": "bold",
-                                            "wrap": True,
-                                            "flex": 5,
-                                        },
-                                    ],
-                                }
-                                for index, (label, value) in enumerate(detail_rows)
-                            ],
+                            {
+                                "type": "box",
+                                "layout": "horizontal",
+                                "contents": [
+                                    {
+                                        "type": "text",
+                                        "text": "ประกาศ",
+                                        "size": "xs",
+                                        "color": "#165823",
+                                        "flex": 2,
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": title,
+                                        "size": "xs",
+                                        "color": "#333333",
+                                        "wrap": True,
+                                        "flex": 5,
+                                    },
+                                ],
+                            },
+                            {
+                                "type": "box",
+                                "layout": "horizontal",
+                                "margin": "md",
+                                "contents": [
+                                    {
+                                        "type": "text",
+                                        "text": "ตรวจพบเมื่อ",
+                                        "size": "xs",
+                                        "color": "#165823",
+                                        "flex": 2,
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": detected,
+                                        "size": "xs",
+                                        "color": "#333333",
+                                        "wrap": True,
+                                        "flex": 5,
+                                    },
+                                ],
+                            },
                         ],
                     },
                 ],
