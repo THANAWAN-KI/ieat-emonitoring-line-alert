@@ -211,11 +211,17 @@ def flex_message(item: dict, test: bool = False) -> dict:
                     "flex": 1,
                 },
                 {
-                    "type": "text",
-                    "text": " ",
-                    "size": "xxs",
-                    "color": "#450C3F",
+                    "type": "box",
+                    "layout": "vertical",
                     "width": "30px",
+                    "contents": [
+                        {
+                            "type": "text",
+                            "text": " ",
+                            "size": "xxs",
+                            "color": "#450C3F",
+                        },
+                    ],
                 },
             ],
         },
