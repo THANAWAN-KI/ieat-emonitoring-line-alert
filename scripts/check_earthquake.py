@@ -145,30 +145,23 @@ def alert_info_row(icon_url: str, label: str, value: str) -> dict:
 
 
 def flex_message(event: dict, test: bool = False) -> dict:
-    """Build one compact earthquake card for mobile LINE users."""
+    """Build a compact earthquake card with the IEAT green-plum palette."""
     magnitude = event.get("magnitude")
     mag = f"{magnitude:.1f}" if magnitude is not None else "–"
-    level, status_color, status_background = severity(magnitude)
+    level, _, _ = severity(magnitude)
     location = clean(
         event.get("title")
         or event.get("description")
         or "ไม่ระบุพื้นที่"
     )[:180]
     published = clean(event.get("published")) or "ไม่ระบุวันและเวลา"
-    depth = (
-        f"{event['depth']} กม."
-        if event.get("depth")
-        else "ไม่ระบุ"
-    )
+    depth = f"{event['depth']} กม." if event.get("depth") else "ไม่ระบุ"
     coordinates = event.get("coordinates")
     map_url = (
         "https://www.google.com/maps/search/?api=1&query="
         f"{coordinates.replace(' ', '')}"
         if coordinates
-        else (
-            event.get("link")
-            or "https://earthquake.tmd.go.th/"
-        )
+        else event.get("link") or "https://earthquake.tmd.go.th/"
     )
 
     if magnitude is not None and magnitude >= 5:
@@ -183,16 +176,29 @@ def flex_message(event: dict, test: bool = False) -> dict:
             "type": "box",
             "layout": "horizontal",
             "alignItems": "center",
-            "spacing": "sm",
             "contents": [
-                icon_image(ASSET_URLS["alert"], "22px"),
+                {
+                    "type": "box",
+                    "layout": "vertical",
+                    "width": "30px",
+                    "contents": [
+                        icon_image(ASSET_URLS["alert"], "22px"),
+                    ],
+                },
                 {
                     "type": "text",
                     "text": "แจ้งเตือนแผ่นดินไหว",
                     "color": "#FFFFFF",
                     "weight": "bold",
                     "size": "lg",
+                    "align": "center",
                     "flex": 1,
+                },
+                {
+                    "type": "box",
+                    "layout": "vertical",
+                    "width": "30px",
+                    "contents": [],
                 },
             ],
         },
@@ -202,8 +208,9 @@ def flex_message(event: dict, test: bool = False) -> dict:
             "type": "text",
             "text": "ข้อความทดสอบ • ไม่ใช่เหตุการณ์จริง",
             "size": "xxs",
-            "color": "#FFF2A8",
+            "color": "#D9EFBD",
             "weight": "bold",
+            "align": "center",
             "margin": "sm",
         })
 
@@ -222,48 +229,149 @@ def flex_message(event: dict, test: bool = False) -> dict:
         "contents": {
             "type": "bubble",
             "size": "mega",
+            "styles": {
+                "header": {"backgroundColor": "#450C3F"},
+                "body": {"backgroundColor": "#FFFFFF"},
+                "footer": {"backgroundColor": "#FFFFFF"},
+            },
             "header": {
                 "type": "box",
                 "layout": "vertical",
-                "backgroundColor": "#52057F",
-                "paddingAll": "14px",
+                "paddingTop": "14px",
+                "paddingBottom": "14px",
+                "paddingStart": "16px",
+                "paddingEnd": "16px",
                 "contents": header_contents,
             },
             "body": {
                 "type": "box",
                 "layout": "vertical",
-                "paddingAll": "14px",
-                "backgroundColor": "#FFFFFF",
+                "paddingTop": "14px",
+                "paddingBottom": "12px",
+                "paddingStart": "14px",
+                "paddingEnd": "14px",
                 "contents": [
                     {
                         "type": "box",
                         "layout": "horizontal",
                         "alignItems": "center",
-                        "spacing": "md",
+                        "paddingAll": "12px",
+                        "backgroundColor": "#F5FBDA",
+                        "cornerRadius": "12px",
                         "contents": [
                             {
                                 "type": "box",
                                 "layout": "vertical",
-                                "width": "82px",
-                                "paddingAll": "10px",
-                                "backgroundColor": status_background,
-                                "cornerRadius": "12px",
+                                "width": "78px",
                                 "contents": [
                                     {
                                         "type": "text",
                                         "text": mag,
                                         "size": "3xl",
                                         "weight": "bold",
-                                        "color": status_color,
+                                        "color": "#450C3F",
                                         "align": "center",
                                     },
                                     {
                                         "type": "text",
                                         "text": "MAGNITUDE",
                                         "size": "xxs",
-                                        "color": status_color,
+                                        "color": "#450C3F",
                                         "align": "center",
                                     },
+                                ],
+                            },
+                            {
+                                "type": "box",
+                                "layout": "vertical",
+                                "width": "2px",
+                                "height": "58px",
+                                "backgroundColor": "#B9D175",
+                                "contents": [],
+                            },
+                            {
+                                "type": "box",
+                                "layout": "vertical",
+                                "flex": 1,
+                                "paddingStart": "12px",
+                                "contents": [
+                                    {
+                                        "type": "text",
+                                        "text": level,
+                                        "size": "sm",
+                                        "weight": "bold",
+                                        "color": "#450C3F",
+                                        "align": "center",
+                                        "wrap": True,
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "ข้อมูลล่าสุดจากกรมอุตุนิยมวิทยา",
+                                        "size": "xxs",
+                                        "color": "#6F6F6F",
+                                        "align": "center",
+                                        "margin": "sm",
+                                        "wrap": True,
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        "type": "box",
+                        "layout": "vertical",
+                        "margin": "md",
+                        "paddingAll": "12px",
+                        "backgroundColor": "#FFFFFF",
+                        "borderColor": "#D9EFBD",
+                        "borderWidth": "1px",
+                        "cornerRadius": "12px",
+                        "contents": [
+                            *[
+                                {
+                                    "type": "box",
+                                    "layout": "horizontal",
+                                    "margin": "md" if index else "none",
+                                    "contents": [
+                                        {
+                                            "type": "text",
+                                            "text": label,
+                                            "size": "xs",
+                                            "color": "#450C3F",
+                                            "weight": "bold",
+                                            "flex": 2,
+                                        },
+                                        {
+                                            "type": "text",
+                                            "text": value,
+                                            "size": "xs",
+                                            "color": "#252525",
+                                            "weight": "bold",
+                                            "wrap": True,
+                                            "flex": 5,
+                                        },
+                                    ],
+                                }
+                                for index, (label, value) in enumerate(detail_rows)
+                            ],
+                        ],
+                    },
+                    {
+                        "type": "box",
+                        "layout": "horizontal",
+                        "alignItems": "center",
+                        "margin": "md",
+                        "paddingAll": "11px",
+                        "backgroundColor": "#D9EFBD",
+                        "cornerRadius": "12px",
+                        "spacing": "sm",
+                        "contents": [
+                            {
+                                "type": "box",
+                                "layout": "vertical",
+                                "width": "24px",
+                                "contents": [
+                                    icon_image(ASSET_URLS["nature"], "20px"),
                                 ],
                             },
                             {
@@ -273,78 +381,20 @@ def flex_message(event: dict, test: bool = False) -> dict:
                                 "contents": [
                                     {
                                         "type": "text",
-                                        "text": level,
-                                        "size": "sm",
+                                        "text": "คำแนะนำ",
+                                        "size": "xs",
                                         "weight": "bold",
-                                        "color": status_color,
-                                        "wrap": True,
+                                        "color": "#450C3F",
                                     },
                                     {
                                         "type": "text",
-                                        "text": "ข้อมูลล่าสุดจากกรมอุตุนิยมวิทยา",
-                                        "size": "xxs",
-                                        "color": "#777777",
-                                        "margin": "sm",
+                                        "text": guidance,
+                                        "size": "xs",
+                                        "color": "#252525",
                                         "wrap": True,
+                                        "margin": "xs",
                                     },
                                 ],
-                            },
-                        ],
-                    },
-                    {
-                        "type": "separator",
-                        "margin": "lg",
-                        "color": "#E7E7E7",
-                    },
-                    *[
-                        {
-                            "type": "box",
-                            "layout": "horizontal",
-                            "margin": "md",
-                            "contents": [
-                                {
-                                    "type": "text",
-                                    "text": label,
-                                    "size": "xs",
-                                    "color": "#777777",
-                                    "weight": "bold",
-                                    "flex": 2,
-                                },
-                                {
-                                    "type": "text",
-                                    "text": value,
-                                    "size": "xs",
-                                    "color": "#222222",
-                                    "weight": "bold",
-                                    "wrap": True,
-                                    "flex": 5,
-                                },
-                            ],
-                        }
-                        for label, value in detail_rows
-                    ],
-                    {
-                        "type": "box",
-                        "layout": "vertical",
-                        "margin": "lg",
-                        "paddingAll": "10px",
-                        "backgroundColor": "#F1F8F3",
-                        "cornerRadius": "10px",
-                        "contents": [
-                            {
-                                "type": "text",
-                                "text": "คำแนะนำ",
-                                "size": "xs",
-                                "weight": "bold",
-                                "color": "#598C14",
-                            },
-                            {
-                                "type": "text",
-                                "text": guidance,
-                                "size": "xs",
-                                "color": "#333333",
-                                "wrap": True,
-                                "margin": "sm",
                             },
                         ],
                     },
@@ -362,7 +412,7 @@ def flex_message(event: dict, test: bool = False) -> dict:
                         "type": "button",
                         "style": "primary",
                         "height": "sm",
-                        "color": "#52057F",
+                        "color": "#450C3F",
                         "action": {
                             "type": "uri",
                             "label": "ดูตำแหน่งบนแผนที่",
