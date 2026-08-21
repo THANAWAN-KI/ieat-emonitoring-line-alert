@@ -1,6 +1,11 @@
 name: Update ThaiWater Open Data
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/fetch_thaiwater_open_data.py"
+      - ".github/workflows/update-thaiwater-open-data.yml"
   workflow_dispatch:
   schedule:
     - cron: "17 * * * *"
