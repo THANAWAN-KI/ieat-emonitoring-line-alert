@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="ฝนตกหนัก">
+  <path fill="#CCD1D9" d="M352 11c-46 0-88 19-117 50a85 85 0 0 0-150 58A107 107 0 0 0 107 331h245a160 160 0 0 0 0-320z"/>
+  <path fill="#AAB2BC" d="M454 47a159 159 0 0 1-123 262H85c-24 0-46-8-64-21a107 107 0 0 0 86 43h245a160 160 0 0 0 102-284z"/>
+  <path fill="none" stroke="#5D9CEC" stroke-linecap="round" stroke-width="22" d="M149 363L85 491m128-128-64 128m128-128-64 128m128-128-64 128"/>
+</svg>
