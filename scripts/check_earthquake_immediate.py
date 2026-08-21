@@ -24,6 +24,17 @@ def push_line_safe(token: str, target: str, message: dict) -> str:
         raise
 
 
+def should_alert(event: dict) -> bool:
+    """TMD RSS is already an earthquake feed, so do not discard valid TMD events.
+
+    The previous implementation applied a second country/magnitude filter. That
+    could silently suppress a real TMD report when the RSS wording did not match
+    the hard-coded location keywords. For IEAT emergency monitoring, every new
+    event published by the TMD earthquake RSS should be passed to LINE.
+    """
+    return True
+
+
 def main() -> int:
     token = os.getenv("LINE_CHANNEL_ACCESS_TOKEN", "").strip()
     target = os.getenv("LINE_TARGET_ID", "").strip()
@@ -41,8 +52,6 @@ def main() -> int:
         print(f"ส่งข้อความทดสอบ {message_type} เข้า LINE สำเร็จ")
         return 0
 
-    # Fetch source data first. As soon as the RSS is parsed successfully,
-    # a new qualifying event is pushed to LINE in the same job.
     request = urllib.request.Request(
         base.RSS_URL,
         headers={"User-Agent": "IEAT-eMonitoring/2.0"},
@@ -82,8 +91,11 @@ def main() -> int:
     quota_exhausted = False
 
     for event in new_events:
-        if base.qualifies(event):
-            # IMPORTANT: LINE is called immediately after the source data is available.
+        if should_alert(event):
+            print(
+                f"พบเหตุการณ์ TMD ใหม่: id={event.get('id')} | "
+                f"magnitude={event.get('magnitude')} | title={event.get('title', '')}"
+            )
             result = push_line_safe(token, target, base.flex_message(event))
             if result == "quota":
                 quota_exhausted = True
@@ -92,12 +104,8 @@ def main() -> int:
                 break
             sent += 1
             print(f"ส่ง LINE สำเร็จทันที: {event.get('title', '')}")
-        else:
-            print(f"พบเหตุการณ์ใหม่แต่ไม่เข้าเกณฑ์แจ้งเตือน: {event.get('title', '')}")
         processed_latest_id = event["id"]
 
-    # Save state after processing. If LINE quota is exhausted, mark the event as
-    # processed so every scheduled run does not repeatedly hit the same 429.
     base.save_state(processed_latest_id or latest_id)
 
     if quota_exhausted:
