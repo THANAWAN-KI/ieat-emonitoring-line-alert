@@ -2,7 +2,7 @@
   "use strict";
   const $=id=>document.getElementById(id);
   const fmt=(value,digits=1)=>value==null?"–":Number(value).toLocaleString("th-TH",{maximumFractionDigits:digits});
-  const set=(id,value)=>{const el=$(id);if(el)el.value=value};
+  const set=(id,value)=>{const el=$(id);if(!el)return;if(el.matches("input, select, textarea"))el.value=value;else el.textContent=value};
   const date=value=>value?new Date(value).toLocaleString("th-TH"):"ไม่ระบุเวลา";
   const CACHE_KEY="ieat-thaiwater-latest-v2";
   function banner(){
