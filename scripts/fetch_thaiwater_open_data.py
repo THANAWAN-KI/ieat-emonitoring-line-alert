@@ -22,6 +22,8 @@ SCRIPT_OUTPUT = Path("docs/data/thaiwater_latest.js")
 USER_AGENT = "IEAT-Flood-Intelligence/2.0 (+https://www.ieat.go.th/)"
 WATCH_RADIUS_KM = 30.0
 DISPLAY_RADIUS_KM = 50.0
+RAIN_IMAGE_URL = "https://fews2.hii.or.th/model-output/data_portal/radar/latest/png/rain24hrs.png"
+RAIN_IMAGE_OUTPUT = Path("docs/data/rain24hrs.png")
 
 
 def get_json(url: str, params: dict[str, str] | None = None) -> dict[str, Any]:
@@ -80,6 +82,27 @@ def water_status(level: int | None, text: str) -> tuple[str, int]:
     if level == 3:
         return "เฝ้าระวัง", 2
     return "ปกติ", 0
+
+
+def fetch_storms() -> list[dict[str, str]]:
+    try:
+        payload = get_json("https://api-v3.thaiwater.net/api/v1/thaiwater30/public/storm_data")
+        candidates = payload.get("data") or payload.get("storm") or payload.get("storms") or []
+        if isinstance(candidates, dict):
+            candidates = candidates.get("data") or candidates.get("items") or []
+        storms = []
+        for item in candidates if isinstance(candidates, list) else []:
+            if not isinstance(item, dict):
+                continue
+            name = item.get("name") or item.get("storm_name") or item.get("typhoon_name")
+            if isinstance(name, dict):
+                name = name.get("th") or name.get("en")
+            if name:
+                storms.append({"name": str(name), "type": str(item.get("type") or item.get("storm_type") or "")})
+        return storms
+    except Exception as exc:
+        print(f"Storm refresh skipped: {type(exc).__name__}: {exc}")
+        return []
 
 
 def fetch_estates() -> list[dict[str, Any]]:
@@ -226,6 +249,27 @@ def build_estate_watch(estates: list[dict[str, Any]], stations: list[dict[str, A
     return watch
 
 
+
+def fetch_latest_rain_image() -> bool:
+    """Refresh the official 24-hour radar composite without deleting a valid prior image."""
+    try:
+        request = urllib.request.Request(
+            RAIN_IMAGE_URL,
+            headers={"User-Agent": USER_AGENT, "Accept": "image/png,image/*"},
+        )
+        with urllib.request.urlopen(request, timeout=60) as response:
+            image = response.read()
+        if len(image) < 10_000 or not image.startswith(b"\x89PNG\r\n\x1a\n"):
+            raise RuntimeError("HII radar response is not a valid PNG")
+        RAIN_IMAGE_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+        temporary = RAIN_IMAGE_OUTPUT.with_suffix(".tmp")
+        temporary.write_bytes(image)
+        temporary.replace(RAIN_IMAGE_OUTPUT)
+        return True
+    except Exception as exc:
+        print(f"Rain image refresh skipped: {type(exc).__name__}: {exc}")
+        return False
+
 def main() -> int:
     now = datetime.now(timezone.utc).astimezone(ZoneInfo("Asia/Bangkok")).isoformat(timespec="seconds")
     previous = None
@@ -256,6 +300,7 @@ def main() -> int:
     }
     try:
         estates = fetch_estates()
+        storms = fetch_storms()
         rain = fetch_rain(estates)
         water = fetch_water(estates)
         stations = rain + water
@@ -314,6 +359,8 @@ def main() -> int:
                     ),
                     "max_rainfall_mm": max_rain,
                     "risk_level": risk_level,
+                    "storm_count": len(storms),
+                    "storm_names": [storm["name"] for storm in storms],
                 },
             }
         )
@@ -341,6 +388,7 @@ def main() -> int:
     SCRIPT_OUTPUT.write_text(
         "window.IEAT_THAIWATER_DATA = " + json_text + ";\n", encoding="utf-8"
     )
+    fetch_latest_rain_image()
     print(
         f"ThaiWater feed status={result['status']} "
         f"estates={result.get('summary', {}).get('estate_count', 0)} "
