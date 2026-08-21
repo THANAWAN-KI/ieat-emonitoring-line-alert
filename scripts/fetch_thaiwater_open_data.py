@@ -214,6 +214,8 @@ def build_estate_watch(estates: list[dict[str, Any]], stations: list[dict[str, A
                 "status": alerts[0]["status"],
                 "severity_score": alerts[0]["severity_score"],
                 "alert_station_count": len(alerts),
+                "rain_alert_count": sum(row["kind"] == "rainfall" for row in alerts),
+                "water_alert_count": sum(row["kind"] == "waterlevel" for row in alerts),
                 "max_rainfall_mm": max(rain_values, default=None),
                 "nearest_alert_km": min(row["distance_km"] for row in alerts),
                 "latest_observed_at": max((row["observed_at"] for row in alerts), default=""),
@@ -267,7 +269,12 @@ def main() -> int:
             if row["severity_score"] >= 2 and row["distance_km"] <= WATCH_RADIUS_KM
         ]
         max_rain = max(
-            (row["rainfall_mm"] for row in rain if row.get("rainfall_mm") is not None),
+            (
+                row["rainfall_mm"]
+                for row in rain
+                if row.get("rainfall_mm") is not None
+                and row["distance_km"] <= WATCH_RADIUS_KM
+            ),
             default=None,
         )
         risk_level = watch[0]["status"] if watch else "ปกติ"
@@ -282,6 +289,21 @@ def main() -> int:
                     "estate_count": len(watch),
                     "station_count": len(stations),
                     "alert_station_count": len(related_alerts),
+                    "heavy_rain_estate_count": len(
+                        {
+                            row["nearest_estate"]
+                            for row in related_alerts
+                            if row["kind"] == "rainfall"
+                            and (row.get("rainfall_mm") or 0) > 70
+                        }
+                    ),
+                    "water_alert_estate_count": len(
+                        {
+                            row["nearest_estate"]
+                            for row in related_alerts
+                            if row["kind"] == "waterlevel"
+                        }
+                    ),
                     "critical_count": sum(row["severity_score"] >= 3 for row in related_alerts),
                     "rain_station_count": len(rain),
                     "waterlevel_station_count": len(water),
