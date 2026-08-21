@@ -22,7 +22,7 @@ SCRIPT_OUTPUT = Path("docs/data/thaiwater_latest.js")
 USER_AGENT = "IEAT-Flood-Intelligence/2.0 (+https://www.ieat.go.th/)"
 WATCH_RADIUS_KM = 30.0
 DISPLAY_RADIUS_KM = 50.0
-RAIN_IMAGE_URL = "https://fews2.hii.or.th/model-output/data_portal/radar/latest/png/rain24hrs.png"
+RAIN_IMAGE_URL = "https://satda.tmd.go.th/wp-content/uploads/data/radar_composite/max/composite_th.png"
 RAIN_IMAGE_OUTPUT = Path("docs/data/rain24hrs.png")
 
 
@@ -251,7 +251,7 @@ def build_estate_watch(estates: list[dict[str, Any]], stations: list[dict[str, A
 
 
 def fetch_latest_rain_image() -> bool:
-    """Refresh the official 24-hour radar composite without deleting a valid prior image."""
+    """Refresh the official TMD radar composite without deleting a valid prior image."""
     try:
         request = urllib.request.Request(
             RAIN_IMAGE_URL,
