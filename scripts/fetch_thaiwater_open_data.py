@@ -22,6 +22,8 @@ SCRIPT_OUTPUT = Path("docs/data/thaiwater_latest.js")
 USER_AGENT = "IEAT-Flood-Intelligence/2.0 (+https://www.ieat.go.th/)"
 WATCH_RADIUS_KM = 30.0
 DISPLAY_RADIUS_KM = 50.0
+RAIN_IMAGE_URL = "https://fews2.hii.or.th/model-output/data_portal/radar/latest/png/rain24hrs.png"
+RAIN_IMAGE_OUTPUT = Path("docs/data/rain24hrs.png")
 
 
 def get_json(url: str, params: dict[str, str] | None = None) -> dict[str, Any]:
@@ -226,6 +228,27 @@ def build_estate_watch(estates: list[dict[str, Any]], stations: list[dict[str, A
     return watch
 
 
+
+def fetch_latest_rain_image() -> bool:
+    """Refresh the official 24-hour radar composite without deleting a valid prior image."""
+    try:
+        request = urllib.request.Request(
+            RAIN_IMAGE_URL,
+            headers={"User-Agent": USER_AGENT, "Accept": "image/png,image/*"},
+        )
+        with urllib.request.urlopen(request, timeout=60) as response:
+            image = response.read()
+        if len(image) < 10_000 or not image.startswith(b"\x89PNG\r\n\x1a\n"):
+            raise RuntimeError("HII radar response is not a valid PNG")
+        RAIN_IMAGE_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+        temporary = RAIN_IMAGE_OUTPUT.with_suffix(".tmp")
+        temporary.write_bytes(image)
+        temporary.replace(RAIN_IMAGE_OUTPUT)
+        return True
+    except Exception as exc:
+        print(f"Rain image refresh skipped: {type(exc).__name__}: {exc}")
+        return False
+
 def main() -> int:
     now = datetime.now(timezone.utc).astimezone(ZoneInfo("Asia/Bangkok")).isoformat(timespec="seconds")
     previous = None
@@ -341,6 +364,7 @@ def main() -> int:
     SCRIPT_OUTPUT.write_text(
         "window.IEAT_THAIWATER_DATA = " + json_text + ";\n", encoding="utf-8"
     )
+    fetch_latest_rain_image()
     print(
         f"ThaiWater feed status={result['status']} "
         f"estates={result.get('summary', {}).get('estate_count', 0)} "
