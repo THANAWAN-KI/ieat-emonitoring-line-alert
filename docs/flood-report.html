@@ -7,8 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Kanit:wght@300;400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://js.arcgis.com/4.32/esri/themes/light/main.css">
-  <script src="https://js.arcgis.com/4.32/"></script>
+  <script type="module" src="https://js.arcgis.com/5.1/embeddable-components/"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
   <script src="data/thaiwater_latest.js?v=20260821-3"></script>
   <script src="flood-live-data.js?v=20260821-4" defer></script>
@@ -85,8 +84,8 @@
     <section class="view" id="map">
       <div class="hero"><div><div class="eyebrow">แผนที่สถานการณ์</div><h1>ระดับน้ำและฝนสะสม 24 ชั่วโมง</h1><p>แสดง Web Map กนอ. แยกตามชนิดข้อมูล เพื่อให้ติดตามสถานการณ์ได้ชัดเจน</p></div><div class="updated"><strong class="outEstate"></strong><span>Web Map กนอ.</span></div></div>
       <div class="grid map-layout">
-        <article class="card map-card"><div class="map-title">แผนที่ระดับน้ำ<small>เปิดเฉพาะชั้นข้อมูลระดับน้ำและข้อมูลพื้นฐานที่เกี่ยวข้อง</small></div><div id="waterViewDiv" class="map-view" aria-label="แผนที่ระดับน้ำ"></div></article>
-        <article class="card map-card"><div class="map-title">แผนที่ฝนสะสม 24 ชั่วโมง<small>เปิดเฉพาะชั้นข้อมูลฝนสะสม 24 ชั่วโมงและข้อมูลพื้นฐานที่เกี่ยวข้อง</small></div><div id="rainViewDiv" class="map-view" aria-label="แผนที่ฝนสะสม 24 ชั่วโมง"></div></article>
+        <article class="card map-card"><div class="map-title">แผนที่ระดับน้ำ<small>เปิดเฉพาะชั้นข้อมูลระดับน้ำและข้อมูลพื้นฐานที่เกี่ยวข้อง</small></div><arcgis-embedded-map id="waterMapEmbed" class="map-view" item-id="3d24287ac6ea49cd823625ddad496e01" theme="light" bookmarks-enabled legend-enabled information-enabled share-enabled basemap-gallery-enabled time-zone-label-enabled center="102.05350939847203,13.89589285736592" scale="9244648.868618" portal-url="https://ieat.maps.arcgis.com" aria-label="แผนที่ระดับน้ำ"></arcgis-embedded-map></article>
+        <article class="card map-card"><div class="map-title">แผนที่ฝนสะสม 24 ชั่วโมง<small>เปิดเฉพาะชั้นข้อมูลฝนสะสม 24 ชั่วโมงและข้อมูลพื้นฐานที่เกี่ยวข้อง</small></div><arcgis-embedded-map id="rainMapEmbed" class="map-view" item-id="3d24287ac6ea49cd823625ddad496e01" theme="light" bookmarks-enabled legend-enabled information-enabled share-enabled basemap-gallery-enabled time-zone-label-enabled center="102.05350939847203,13.89589285736592" scale="9244648.868618" portal-url="https://ieat.maps.arcgis.com" aria-label="แผนที่ฝนสะสม 24 ชั่วโมง"></arcgis-embedded-map></article>
       </div>
     </section>
 
@@ -125,26 +124,26 @@
     $("applyData").onclick=()=>{sync();$("editor").classList.remove("open")};
     const sclass=t=>t.includes("วิกฤต")||t.includes("ล้น")?"critical":t.includes("ปกติ")?"normal":"";
     function addStation(d={n:"ระบุชื่อสถานี",v:"–",s:"เฝ้าระวัง",trend:"ทรงตัว",t:"–",agency:"ThaiWater"}){const r=document.createElement("tr");r.innerHTML=`<td contenteditable>${d.n}</td><td contenteditable>${d.v}</td><td contenteditable><span class="badge ${sclass(d.s)}">${d.s}</span></td><td contenteditable>${d.trend}</td><td contenteditable>${d.t}</td><td>${d.agency}</td>`;$("stations").appendChild(r)}window.addStation=addStation;
-    require(["esri/WebMap","esri/views/MapView"],(WebMap,MapView)=>{
-      const portal={url:"https://ieat.maps.arcgis.com"},itemId="3d24287ac6ea49cd823625ddad496e01";
-      const waterMap=new WebMap({portalItem:{id:itemId,portal}}),rainMap=new WebMap({portalItem:{id:itemId,portal}});
-      const sharedView={center:[102.05350939847203,13.89589285736592],scale:9244648.868618,ui:{components:["zoom","compass"]}};
-      const waterView=new MapView({...sharedView,container:"waterViewDiv",map:waterMap});
-      const rainView=new MapView({...sharedView,container:"rainViewDiv",map:rainMap});
-      view=waterView;window.view=waterView;window.waterView=waterView;window.rainView=rainView;
-      const rainWords=/(ฝนสะสม|ปริมาณฝน|น้ำฝน|rainfall|precipitation|qpf|rain)/i;
-      const waterWords=/(ระดับน้ำ|สถานีวัดน้ำ|water level|waterlevel|stream|river|telemetry)/i;
-      const configure=(webmap,mode)=>webmap.when(()=>{
-        webmap.allLayers.forEach(layer=>{
+    const rainWords=/(ฝนสะสม|ปริมาณฝน|น้ำฝน|rainfall|precipitation|qpf|rain)/i;
+    const waterWords=/(ระดับน้ำ|สถานีวัดน้ำ|water level|waterlevel|stream|river|telemetry)/i;
+    function configureEmbeddedMap(element,mode){
+      if(!element)return;
+      element.addEventListener("arcgisViewReadyChange",()=>{
+        const embeddedView=element.view;
+        if(!embeddedView?.map)return;
+        if(mode==="water"){view=embeddedView;window.view=embeddedView;window.waterView=embeddedView}else window.rainView=embeddedView;
+        embeddedView.map.allLayers.forEach(layer=>{
           const title=layer.title||"";
           if(mode==="water"&&rainWords.test(title))layer.visible=false;
           if(mode==="rain"&&waterWords.test(title))layer.visible=false;
           if(mode==="water"&&waterWords.test(title))layer.visible=true;
           if(mode==="rain"&&rainWords.test(title))layer.visible=true;
         });
-      });
-      configure(waterMap,"water");configure(rainMap,"rain");
-    });
+        embeddedView.resize();
+      },{once:true});
+    }
+    configureEmbeddedMap($("waterMapEmbed"),"water");
+    configureEmbeddedMap($("rainMapEmbed"),"rain");
     async function updateMapShot(){if(!view)return;try{const shot=await view.takeScreenshot({format:"png",quality:100});$("infographicMap").src=shot.dataUrl;$("infographicMap").hidden=false;$("mapPlaceholder").hidden=true}catch(e){console.warn("Map screenshot unavailable",e)}}window.updateMapShot=updateMapShot;
     function upload(input,box){input.onchange=()=>{const f=input.files[0];if(!f)return;const reader=new FileReader();reader.onload=()=>box.innerHTML=`<img src="${reader.result}" alt="ภาพพยากรณ์">`;reader.readAsDataURL(f)}}upload($("day1File"),$("day1Box"));upload($("day5File"),$("day5Box"));
     const now=new Date(),end=new Date(now.getTime()+86400000),local=d=>new Date(d-d.getTimezoneOffset()*60000).toISOString().slice(0,16);$("startIn").value=local(now);$("endIn").value=local(end);sync();
