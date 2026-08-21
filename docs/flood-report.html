@@ -10,7 +10,7 @@
   <script type="module" src="https://js.arcgis.com/5.1/embeddable-components/"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
   <script src="data/thaiwater_latest.js?v=20260821-3"></script>
-  <script src="flood-live-data.js?v=20260821-5" defer></script>
+  <script src="flood-live-data.js?v=20260821-6" defer></script>
   <script src="flood-export.js?v=20260821-1" defer></script>
   <style>
     :root{--purple:#6B4B7D;--blue:#1769C2;--cyan:#81D4FA;--teal:#66BB6A;--ink:#283142;--muted:#697386;--bg:#F6F6F4;--line:#E5E2E8;--soft:#F5F1F7;--white:#FFFFFF;--red:#B0005A;--orange:#F6BB42;--green:#58B957}
@@ -144,7 +144,7 @@
             <section><h3>สถานีที่ต้องติดตามใกล้นิคมฯ</h3><div id="reportStationList" class="station-brief">กำลังโหลดข้อมูล…</div></section>
             <section><h3>ข้อเสนอแนะในการดำเนินการ</h3><p id="infoAction">ติดตามประกาศทางการและตรวจสอบความพร้อมของระบบระบายน้ำ</p></section>
           </div>
-          <footer class="report-footer"><span>แหล่งข้อมูล: ThaiWater (สสน.) • กรมอุตุนิยมวิทยา • Web Map กนอ.</span><span id="generatedAt"></span></footer>
+          <footer class="report-footer"><span>แหล่งข้อมูล: ThaiWater (สสน.) • HII Flood Alert • Rain_24H • กรมอุตุนิยมวิทยา • Web Map กนอ.</span><span id="generatedAt"></span></footer>
         </article>
       </div>
     </section>
@@ -183,44 +183,67 @@
     }
     async function addFlashFloodLayers(embeddedView,withControls=true){
       try{
-        const response=await fetch(new URL("./data/thaiwater_latest.json",document.baseURI),{cache:"no-store"});
-        const data=await response.json(),warning=data.flash_flood||{};
-        const periods=[["24h","#ef101f",true],["48h","#f07b20",false]];
+        const localUrl=new URL("./data/thaiwater_latest.json",document.baseURI);
+        const flood48Url="https://nawakonnakhonchai-wq.github.io/hii-flood-alert/flashflood.geojson";
+        const rain24Url="https://nawakonnakhonchai-wq.github.io/Rain_24H/rainfall_24h.geojson";
+        const [localResult,flood48Result]=await Promise.allSettled([
+          fetch(localUrl,{cache:"no-store"}).then(response=>response.json()),
+          fetch(flood48Url,{cache:"no-store"}).then(response=>{if(!response.ok)throw new Error("48h GeoJSON "+response.status);return response.json()})
+        ]);
+        const data=localResult.status==="fulfilled"?localResult.value:{flash_flood:{}},warning=data.flash_flood||{};
+        if(flood48Result.status==="fulfilled"){
+          const features=flood48Result.value.features||[];
+          warning["48h"]={
+            ...(warning["48h"]||{}),period:"48h",source_url:flood48Url,
+            areas:features.map(feature=>{const p=feature.properties||{},c=feature.geometry?.coordinates||[];return {station:p.station_name,station_code:p.station_code,tambon:p.tambon,amphoe:p.amphoe,province:p.province,sum_rainfall_mm:p.sum_rainfall_48h,observed_at:p.latest_rainfall_datetime,agency:p.agency,longitude:c[0],latitude:c[1]}})
+          };
+        }
+        window.mapWarningData=data;
         const FeatureLayer=await $arcgis.import("@arcgis/core/layers/FeatureLayer.js");
-        const added={};
-        for(const periodInfo of periods){
-          const period=periodInfo[0],color=periodInfo[1],visible=periodInfo[2];
+        const GeoJSONLayer=await $arcgis.import("@arcgis/core/layers/GeoJSONLayer.js");
+        const added={},clean=value=>String(value||"").replace(/^(จ\\.|อ\\.|ต\\.)/,"").trim(),sql=value=>clean(value).replace(/'/g,"''");
+        for(const [period,color,visible] of [["24h","#ef101f",true],["48h","#f07b20",false]]){
           const item=warning[period]||{},areas=item.areas||[];
           const codes=[...new Set(areas.map(row=>String(row.geocode||"").padStart(6,"0")).filter(code=>/^\\d{6}$/.test(code)))];
-          const id=period==="24h"?"flashFlood24Count":"flashFlood48Count";
-          const updated=period==="24h"?"flashFlood24Updated":"flashFlood48Updated";
-          $(id).textContent=codes.length.toLocaleString("th-TH");
-          $(updated).textContent=item.date?"ข้อมูลวันที่ "+item.date+" เวลา "+(item.time||"–")+" น. • ThaiWater / สสน.":"ข้อมูลจาก ThaiWater / สสน.";
-          const where=codes.length?"tambon_idn IN ("+codes.map(code=>"'"+code+"'").join(",")+")":"1=0";
-          const warningByCode=new Map(areas.map(row=>[String(row.geocode||"").padStart(6,"0"),row]));
+          const nameRows=areas.filter(row=>!row.geocode&&row.province&&row.amphoe&&row.tambon);
+          const clauses=nameRows.map(row=>"(prov_nam_t='"+sql(row.province)+"' AND amphoe_t='"+sql(row.amphoe)+"' AND tam_nam_t='"+sql(row.tambon)+"')");
+          const where=[codes.length?"tambon_idn IN ("+codes.map(code=>"'"+code+"'").join(",")+")":"",...clauses].filter(Boolean).join(" OR ")||"1=0";
+          const id=period==="24h"?"flashFlood24Count":"flashFlood48Count",updated=period==="24h"?"flashFlood24Updated":"flashFlood48Updated";
+          $(id).textContent=areas.length.toLocaleString("th-TH");
+          $(updated).textContent=item.date?"ข้อมูลวันที่ "+item.date+" เวลา "+(item.time||"–")+" น. • ThaiWater / สสน.":"ข้อมูลจุดเฝ้าระวัง "+areas.length.toLocaleString("th-TH")+" จุด";
+          const warningByCode=new Map(areas.filter(row=>row.geocode).map(row=>[String(row.geocode).padStart(6,"0"),row]));
+          const warningByName=new Map(areas.map(row=>[[clean(row.province),clean(row.amphoe),clean(row.tambon)].join("|"),row]));
           const layer=new FeatureLayer({
             url:"https://gisportal.dmr.go.th/arcgis/rest/services/Hosted/TAMBON/FeatureServer/0",
             title:"พื้นที่เสี่ยงน้ำท่วมฉับพลัน "+(period==="24h"?"24":"48")+" ชั่วโมง",
-            definitionExpression:where,visible:visible,
+            definitionExpression:where,visible,
             outFields:["tambon_idn","tam_nam_t","amphoe_t","prov_nam_t"],
             renderer:{type:"simple",symbol:{type:"simple-fill",color:period==="24h"?[239,16,31,85]:[239,68,47,65],outline:{color:"#ff0000",width:2.5}}},
             popupTemplate:{title:"พื้นที่เสี่ยงน้ำท่วมฉับพลัน "+(period==="24h"?"24":"48")+" ชั่วโมง",content:event=>{
-              const attrs=event.graphic.attributes||{},row=warningByCode.get(String(attrs.tambon_idn||"").padStart(6,"0"))||{};
-              const wrap=document.createElement("div");
-              const lines=[["จังหวัด",row.province||attrs.prov_nam_t||"–"],["อำเภอ",row.amphoe||attrs.amphoe_t||"–"],["ตำบล",row.tambon||attrs.tam_nam_t||"–"],["ฝนสะสม",row.sum_rainfall_mm==null?"–":row.sum_rainfall_mm+" มม."],["ช่วงคาดการณ์",(period==="24h"?"24":"48")+" ชั่วโมงข้างหน้า"],["ข้อมูลล่าสุด",row.observed_at?new Date(row.observed_at).toLocaleString("th-TH"):"–"],["สถานีอ้างอิง",row.station||"ThaiWater / สสน."]];
-              lines.forEach(line=>{const p=document.createElement("p");p.style.margin="5px 0";const b=document.createElement("b");b.textContent=line[0]+": ";p.append(b,document.createTextNode(line[1]));wrap.appendChild(p)});
-              return wrap;
+              const attrs=event.graphic.attributes||{},key=[clean(attrs.prov_nam_t),clean(attrs.amphoe_t),clean(attrs.tam_nam_t)].join("|"),row=warningByCode.get(String(attrs.tambon_idn||"").padStart(6,"0"))||warningByName.get(key)||{};
+              const wrap=document.createElement("div"),lines=[["จังหวัด",row.province||attrs.prov_nam_t||"–"],["อำเภอ",row.amphoe||attrs.amphoe_t||"–"],["ตำบล",row.tambon||attrs.tam_nam_t||"–"],["ฝนสะสม",row.sum_rainfall_mm==null?"–":Number(row.sum_rainfall_mm).toLocaleString("th-TH",{maximumFractionDigits:1})+" มม."],["ช่วงคาดการณ์",(period==="24h"?"24":"48")+" ชั่วโมงข้างหน้า"],["ข้อมูลล่าสุด",row.observed_at?new Date(row.observed_at).toLocaleString("th-TH"):"–"],["สถานีอ้างอิง",row.station||"ThaiWater / สสน."]];
+              lines.forEach(([label,value])=>{const p=document.createElement("p");p.style.margin="5px 0";const b=document.createElement("b");b.textContent=label+": ";p.append(b,document.createTextNode(value));wrap.appendChild(p)});return wrap;
             }}
           });
           embeddedView.map.add(layer);added[period]=layer;
         }
+        const rainLayer=new GeoJSONLayer({
+          url:rain24Url,title:"สถานีฝนสะสม 24 ชั่วโมง",visible:false,definitionExpression:"rain_24h >= 20",
+          renderer:{type:"class-breaks",field:"rain_24h",classBreakInfos:[
+            {minValue:20,maxValue:35,label:"20–35 มม.",symbol:{type:"simple-marker",size:6,color:"#6ebd45",outline:{color:"#fff",width:.5}}},
+            {minValue:35,maxValue:50,label:"35–50 มม.",symbol:{type:"simple-marker",size:7,color:"#f2cf35",outline:{color:"#fff",width:.5}}},
+            {minValue:50,maxValue:70,label:"50–70 มม.",symbol:{type:"simple-marker",size:8,color:"#f28a2e",outline:{color:"#fff",width:.5}}},
+            {minValue:70,maxValue:90,label:"70–90 มม.",symbol:{type:"simple-marker",size:9,color:"#ef4b3f",outline:{color:"#fff",width:.5}}},
+            {minValue:90,maxValue:1000,label:"มากกว่า 90 มม.",symbol:{type:"simple-marker",size:11,color:"#c90028",outline:{color:"#fff",width:1}}}
+          ]},
+          popupTemplate:{title:"{station_name}",content:[{type:"fields",fieldInfos:[{fieldName:"province",label:"จังหวัด"},{fieldName:"rain_24h",label:"ฝนสะสม 24 ชม. (มม.)",format:{places:1,digitSeparator:true}},{fieldName:"datetime",label:"ข้อมูลล่าสุด"}]}]}
+        });
+        embeddedView.map.add(rainLayer);added.rain24=rainLayer;
         if(withControls)renderMapLayerControls(embeddedView.map);
         return added;
       }catch(error){
-        console.error("โหลดพื้นที่เสี่ยงน้ำท่วมฉับพลันไม่สำเร็จ",error);
-        $("flashFlood24Updated").textContent="ไม่สามารถโหลดข้อมูลล่าสุดได้";
-        $("flashFlood48Updated").textContent="ไม่สามารถโหลดข้อมูลล่าสุดได้";
-        return {};
+        console.error("โหลดข้อมูลพื้นที่เสี่ยงและฝนสะสมไม่สำเร็จ",error);
+        $("flashFlood24Updated").textContent="ไม่สามารถโหลดข้อมูลล่าสุดได้";$("flashFlood48Updated").textContent="ไม่สามารถโหลดข้อมูลล่าสุดได้";return {};
       }
     }
     function setupLayerControls(element){
@@ -239,8 +262,8 @@
       element.addEventListener("arcgisViewReadyChange",async()=>{
         warningView=element.view;window.warningView=warningView;if(!warningView?.map)return;
         const layers=await addFlashFloodLayers(warningView,false);
-        let data={};
-        try{data=await (await fetch(new URL("./data/thaiwater_latest.json",document.baseURI),{cache:"no-store"})).json()}catch(error){console.error(error)}
+        let data=window.mapWarningData||{};
+        if(!data.flash_flood){try{data=await (await fetch(new URL("./data/thaiwater_latest.json",document.baseURI),{cache:"no-store"})).json()}catch(error){console.error(error)}}
         window.warningLayers=layers;window.warningData=data;
         const buttons=[...document.querySelectorAll(".warning-periods button")],list=$("warningAreaList"),updated=$("warningAreaUpdated");
         const show=async period=>{
@@ -251,7 +274,7 @@
           const groups={};
           areas.forEach(row=>{
             const province=row.province||"ไม่ระบุจังหวัด",group=groups[province]||(groups[province]={rows:[],tambons:new Set(),maxRain:null,latest:""});
-            group.rows.push(row);group.tambons.add(row.geocode);
+            group.rows.push(row);group.tambons.add(row.geocode||row.tambon);
             if(row.sum_rainfall_mm!=null)group.maxRain=Math.max(group.maxRain==null?-Infinity:group.maxRain,Number(row.sum_rainfall_mm));
             if(row.observed_at&&row.observed_at>group.latest)group.latest=row.observed_at;
           });
@@ -261,7 +284,7 @@
           list.innerHTML=ranking.length?ranking.map((row,index)=>'<button type="button" class="warning-rank-row" data-province-index="'+index+'"><i>'+(index+1)+'</i><div><b>'+row.province.replace(/^จ\\./,"")+'</b><small>'+row.tambons.size+' ตำบล'+(row.latest?" • "+new Date(row.latest).toLocaleString("th-TH"):"")+'</small></div><strong>'+(row.maxRain==null?"–":row.maxRain.toLocaleString("th-TH",{maximumFractionDigits:1}))+'</strong></button>').join(""):'<div style="padding:20px 0;color:var(--muted)">ไม่พบจังหวัดเข้าเกณฑ์ในช่วงเวลานี้</div>';
           list.querySelectorAll(".warning-rank-row").forEach(button=>button.onclick=async()=>{
             const row=ranking[Number(button.dataset.provinceIndex)],activeLayer=layers[period];if(!row||!activeLayer)return;
-            const provinceCodes=[...row.tambons],whereProvince="tambon_idn IN ("+provinceCodes.map(code=>"'"+code+"'").join(",")+")";
+            const provinceCodes=[...row.tambons].filter(code=>/^\\d{6}$/.test(String(code||""))),provinceName=row.province.replace(/^จ\\./,"").replace(/'/g,"''"),whereProvince=provinceCodes.length?"tambon_idn IN ("+provinceCodes.map(code=>"'"+code+"'").join(",")+")":"prov_nam_t='"+provinceName+"'";
             try{const result=await activeLayer.queryExtent({where:whereProvince});if(result.extent)await warningView.goTo(result.extent.expand(1.35),{duration:700})}catch(error){console.warn("ซูมจังหวัดไม่สำเร็จ",error)}
           });
           window.warningPeriod=period;renderExecutiveReport(period);
