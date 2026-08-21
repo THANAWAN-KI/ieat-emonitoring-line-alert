@@ -26,7 +26,10 @@ WATCH_RADIUS_KM = 30.0
 DISPLAY_RADIUS_KM = 50.0
 RAIN_IMAGE_URL = "https://satda.tmd.go.th/wp-content/uploads/data/radar_composite/max/qpf_202608210600.gif"
 RAIN_IMAGE_OUTPUT = Path("docs/data/radar_latest.gif")
-FLASH_FLOOD_URL = "https://api.hii.or.th/v2/4UQaYnf0Bx4fXPYyCdDRbqHyXH9Ixvd2nVUjaN1cLBY=/warning/flashflood-24h"
+FLASH_FLOOD_URLS = {
+    "24h": "https://api.hii.or.th/v2/4UQaYnf0Bx4fXPYyCdDRbqHyXH9Ixvd2nVUjaN1cLBY=/warning/flashflood-24h",
+    "48h": "https://api.hii.or.th/v2/4UQaYnf0Bx4fXPYyCdDRbqHyXH9Ixvd2nVUjaN1cLBY=/warning/flashflood-48h",
+}
 TMD_WARNING_URL = "https://tmd.go.th/warning-and-events/warning-storm"
 
 
@@ -110,21 +113,43 @@ def fetch_storms() -> list[dict[str, str]]:
 
 
 
-def fetch_flash_flood_warning() -> list[str]:
+def fetch_flash_flood_warning(period: str) -> dict[str, Any]:
+    """Fetch HII warning areas; map geometry is joined by six-digit tambon geocode."""
+    url = FLASH_FLOOD_URLS[period]
     try:
-        payload = get_json(FLASH_FLOOD_URL)
-        areas = payload.get("area") or payload.get("data", {}).get("area") or []
-        provinces = set()
-        for item in areas if isinstance(areas, list) else []:
-            province = item.get("province") if isinstance(item, dict) else None
-            if isinstance(province, dict):
-                province = province.get("th") or province.get("name")
-            if province:
-                provinces.add(str(province).replace("จังหวัด", "").strip())
-        return sorted(provinces)
+        payload = get_json(url)
+        def clean(items: Any) -> list[dict[str, Any]]:
+            rows = []
+            for item in items if isinstance(items, list) else []:
+                if not isinstance(item, dict) or not item.get("geocode"):
+                    continue
+                rows.append({
+                    "geocode": str(item.get("geocode")).zfill(6),
+                    "tambon": str(item.get("tambon") or ""),
+                    "amphoe": str(item.get("amphoe") or ""),
+                    "province": str(item.get("province") or ""),
+                    "region_id": str(item.get("region_id") or ""),
+                    "region_name": str(item.get("region_name") or ""),
+                    "station": str(item.get("name") or ""),
+                    "latitude": number(item.get("latitude")),
+                    "longitude": number(item.get("longitude")),
+                    "sum_rainfall_mm": number(item.get(f"sum_rainfall_{period}")),
+                    "observed_at": str(item.get("latest_rainfall_datetime") or ""),
+                })
+            return rows
+        return {
+            "period": period,
+            "date": str(payload.get("date") or ""),
+            "time": str(payload.get("time") or ""),
+            "type": str(payload.get("type") or ""),
+            "areas": clean(payload.get("area")),
+            "area_nearby": clean(payload.get("area_nearby")),
+            "risk_map": str(payload.get("riskMap") or ""),
+            "source_url": url,
+        }
     except Exception as exc:
-        print(f"Flash-flood warning refresh skipped: {type(exc).__name__}: {exc}")
-        return []
+        print(f"Flash-flood {period} refresh skipped: {type(exc).__name__}: {exc}")
+        return {"period": period, "areas": [], "area_nearby": [], "source_url": url}
 
 
 def fetch_tmd_warning() -> dict[str, str]:
@@ -340,6 +365,8 @@ def main() -> int:
             {"name": "ThaiWater ฝนสะสม 24 ชั่วโมง", "url": RAIN_URL},
             {"name": "ThaiWater ระดับน้ำ", "url": WATER_URL},
             {"name": "ตำแหน่งนิคมอุตสาหกรรม กนอ.", "url": ESTATE_URL},
+            {"name": "พื้นที่เสี่ยงน้ำท่วมฉับพลัน 24 ชั่วโมง", "url": FLASH_FLOOD_URLS["24h"]},
+            {"name": "พื้นที่เสี่ยงน้ำท่วมฉับพลัน 48 ชั่วโมง", "url": FLASH_FLOOD_URLS["48h"]},
         ],
         "estates": [],
         "estate_watch": [],
@@ -350,7 +377,11 @@ def main() -> int:
     try:
         estates = fetch_estates()
         storms = fetch_storms()
-        flood_watch_provinces = fetch_flash_flood_warning()
+        flash_flood_24h = fetch_flash_flood_warning("24h")
+        flash_flood_48h = fetch_flash_flood_warning("48h")
+        flood_watch_provinces = sorted(
+            {row["province"].replace("จังหวัด", "").strip() for row in flash_flood_24h["areas"] if row.get("province")}
+        )
         tmd_warning = fetch_tmd_warning()
         rain = fetch_rain(estates)
         water = fetch_water(estates)
@@ -381,6 +412,7 @@ def main() -> int:
                 "estates": estates,
                 "estate_watch": watch,
                 "stations": stations[:100],
+                "flash_flood": {"24h": flash_flood_24h, "48h": flash_flood_48h},
                 "summary": {
                     "estate_total": len(estates),
                     "estate_count": len(watch),
@@ -414,6 +446,8 @@ def main() -> int:
                     "storm_names": [storm["name"] for storm in storms],
                     "flood_watch_provinces": flood_watch_provinces,
                     "flood_watch_province_count": len(flood_watch_provinces),
+                    "flash_flood_24h_area_count": len(flash_flood_24h["areas"]),
+                    "flash_flood_48h_area_count": len(flash_flood_48h["areas"]),
                     "warning_title": tmd_warning.get("title", ""),
                     "warning_summary": tmd_warning.get("summary", ""),
                     "warning_url": tmd_warning.get("url", TMD_WARNING_URL),
@@ -433,6 +467,7 @@ def main() -> int:
                     "estates": previous.get("estates", []),
                     "estate_watch": previous.get("estate_watch", []),
                     "stations": previous.get("stations", []),
+                    "flash_flood": previous.get("flash_flood", {}),
                     "summary": previous.get("summary", {}),
                 }
             )
