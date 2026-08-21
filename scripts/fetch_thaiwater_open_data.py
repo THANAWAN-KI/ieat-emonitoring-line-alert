@@ -22,8 +22,8 @@ SCRIPT_OUTPUT = Path("docs/data/thaiwater_latest.js")
 USER_AGENT = "IEAT-Flood-Intelligence/2.0 (+https://www.ieat.go.th/)"
 WATCH_RADIUS_KM = 30.0
 DISPLAY_RADIUS_KM = 50.0
-RAIN_IMAGE_URL = "https://satda.tmd.go.th/wp-content/uploads/data/radar_composite/max/composite_th.png"
-RAIN_IMAGE_OUTPUT = Path("docs/data/rain24hrs.png")
+RAIN_IMAGE_URL = "https://satda.tmd.go.th/wp-content/uploads/data/radar_composite/max/qpf_202608210600.gif"
+RAIN_IMAGE_OUTPUT = Path("docs/data/radar_latest.gif")
 
 
 def get_json(url: str, params: dict[str, str] | None = None) -> dict[str, Any]:
@@ -255,12 +255,12 @@ def fetch_latest_rain_image() -> bool:
     try:
         request = urllib.request.Request(
             RAIN_IMAGE_URL,
-            headers={"User-Agent": USER_AGENT, "Accept": "image/png,image/*"},
+            headers={"User-Agent": USER_AGENT, "Accept": "image/gif,image/*"},
         )
         with urllib.request.urlopen(request, timeout=60) as response:
             image = response.read()
-        if len(image) < 10_000 or not image.startswith(b"\x89PNG\r\n\x1a\n"):
-            raise RuntimeError("HII radar response is not a valid PNG")
+        if len(image) < 10_000 or not image.startswith((b"GIF87a", b"GIF89a")):
+            raise RuntimeError("TMD radar response is not a valid GIF")
         RAIN_IMAGE_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
         temporary = RAIN_IMAGE_OUTPUT.with_suffix(".tmp")
         temporary.write_bytes(image)
