@@ -50,7 +50,23 @@
     }else{
       set("summaryIn",`ไม่พบนิคมอุตสาหกรรมเข้าเกณฑ์เฝ้าระวังอัตโนมัติจากข้อมูลล่าสุด ทั้งนี้ยังต้องติดตามประกาศทางการและยืนยันสถานการณ์ในพื้นที่`);
     }
-    renderEstateRanks(watch);renderStations(data.stations||[]);window.sync?.();
+    const stations=data.stations||[];
+    const provinceNames=items=>[...new Set(items.map(row=>row.province).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"th"));
+    const waterProvinces=provinceNames(stations.filter(row=>row.kind==="waterlevel"&&Number(row.severity_score)>=2));
+    const heavyRainProvinces=provinceNames(stations.filter(row=>row.kind==="rainfall"&&Number(row.rainfall_mm)>70));
+    const floodProvinces=provinceNames(stations.filter(row=>Number(row.severity_score)>=3));
+    const watchProvinces=[...new Set([...waterProvinces,...heavyRainProvinces,...floodProvinces])].sort((a,b)=>a.localeCompare(b,"th"));
+    set("nationalStormCount",fmt(s.storm_count||0,0));
+    set("nationalStormLabel",s.storm_names?.length?s.storm_names.join(", "):"ไม่พบพายุที่ต้องติดตาม");
+    set("nationalWaterProvinceCount",fmt(waterProvinces.length,0));
+    set("nationalHeavyRainCount",fmt(heavyRainProvinces.length,0));
+    set("nationalFloodCount",fmt(floodProvinces.length,0));
+    set("radarUpdated",`อัปเดตพร้อมข้อมูลเวลา ${date(data.generated_at)}`);
+    const list=document.getElementById("nationalProvinceList");
+    if(list)list.innerHTML=watchProvinces.length?watchProvinces.map(name=>`<span>${name}</span>`).join(""):'<span class="empty">ไม่พบจังหวัดเข้าเกณฑ์เฝ้าระวังจากข้อมูลล่าสุด</span>';
+    const alert=document.getElementById("nationalAlertText");
+    if(alert)alert.textContent=watchProvinces.length?`พบพื้นที่เข้าเกณฑ์เฝ้าระวัง ${watchProvinces.length} จังหวัด ได้แก่ ${watchProvinces.slice(0,8).join(", ")}${watchProvinces.length>8?" และพื้นที่อื่น ๆ":""} ควรติดตามประกาศทางการและยืนยันสถานการณ์กับพื้นที่`:"ไม่พบพื้นที่เข้าเกณฑ์เฝ้าระวังอัตโนมัติจากข้อมูลล่าสุด กรุณาติดตามประกาศทางการอย่างต่อเนื่อง";
+    renderEstateRanks(watch);renderStations(stations);window.sync?.();
   }
   async function load(){
     const url=new URL("./data/thaiwater_latest.json",document.baseURI);url.searchParams.set("v",Date.now());
