@@ -18,6 +18,7 @@ ESTATE_URL = (
     "e_PP_2025/FeatureServer/1/query"
 )
 OUTPUT = Path("docs/data/thaiwater_latest.json")
+SCRIPT_OUTPUT = Path("docs/data/thaiwater_latest.js")
 USER_AGENT = "IEAT-Flood-Intelligence/2.0 (+https://www.ieat.go.th/)"
 WATCH_RADIUS_KM = 30.0
 DISPLAY_RADIUS_KM = 50.0
@@ -319,12 +320,27 @@ def main() -> int:
     except Exception as exc:
         result["errors"].append(f"{type(exc).__name__}: {exc}")
         if previous and previous.get("status") == "ok":
-            result["last_success"] = {
-                key: previous.get(key)
-                for key in ("generated_at", "estates", "estate_watch", "stations", "summary")
-            }
+            # Keep the last verified figures at the top level. A temporary API
+            # failure must not turn every dashboard KPI into "pending".
+            result.update(
+                {
+                    "status": "stale",
+                    "generated_at": previous.get("generated_at", now),
+                    "last_attempt_at": now,
+                    "estates": previous.get("estates", []),
+                    "estate_watch": previous.get("estate_watch", []),
+                    "stations": previous.get("stations", []),
+                    "summary": previous.get("summary", {}),
+                }
+            )
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    json_text = json.dumps(result, ensure_ascii=False, indent=2)
+    OUTPUT.write_text(json_text + "\n", encoding="utf-8")
+    # Script fallback works in LINE in-app browsers that occasionally block
+    # fetch(), while JSON remains the canonical machine-readable endpoint.
+    SCRIPT_OUTPUT.write_text(
+        "window.IEAT_THAIWATER_DATA = " + json_text + ";\n", encoding="utf-8"
+    )
     print(
         f"ThaiWater feed status={result['status']} "
         f"estates={result.get('summary', {}).get('estate_count', 0)} "
