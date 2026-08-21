@@ -63,8 +63,12 @@
     }catch(error){
       console.error("โหลดข้อมูล ThaiWater ไม่สำเร็จ",error);
       try{const cached=JSON.parse(localStorage.getItem(CACHE_KEY)||"null");if(cached?.summary){cached.status="stale";apply(cached);return}}catch(_error){}
-      apply({status:"unavailable"});
+      if(!window.IEAT_THAIWATER_DATA?.summary)apply({status:"unavailable"});
     }
   }
-  window.addEventListener("DOMContentLoaded",()=>{banner();load()});
+  window.addEventListener("DOMContentLoaded",()=>{
+    banner();
+    if(window.IEAT_THAIWATER_DATA?.summary)apply(window.IEAT_THAIWATER_DATA);
+    load();
+  });
 })();
