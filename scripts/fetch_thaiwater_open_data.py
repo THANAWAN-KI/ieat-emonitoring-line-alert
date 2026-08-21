@@ -84,6 +84,27 @@ def water_status(level: int | None, text: str) -> tuple[str, int]:
     return "ปกติ", 0
 
 
+def fetch_storms() -> list[dict[str, str]]:
+    try:
+        payload = get_json("https://api-v3.thaiwater.net/api/v1/thaiwater30/public/storm_data")
+        candidates = payload.get("data") or payload.get("storm") or payload.get("storms") or []
+        if isinstance(candidates, dict):
+            candidates = candidates.get("data") or candidates.get("items") or []
+        storms = []
+        for item in candidates if isinstance(candidates, list) else []:
+            if not isinstance(item, dict):
+                continue
+            name = item.get("name") or item.get("storm_name") or item.get("typhoon_name")
+            if isinstance(name, dict):
+                name = name.get("th") or name.get("en")
+            if name:
+                storms.append({"name": str(name), "type": str(item.get("type") or item.get("storm_type") or "")})
+        return storms
+    except Exception as exc:
+        print(f"Storm refresh skipped: {type(exc).__name__}: {exc}")
+        return []
+
+
 def fetch_estates() -> list[dict[str, Any]]:
     payload = get_json(
         ESTATE_URL,
@@ -279,6 +300,7 @@ def main() -> int:
     }
     try:
         estates = fetch_estates()
+        storms = fetch_storms()
         rain = fetch_rain(estates)
         water = fetch_water(estates)
         stations = rain + water
@@ -337,6 +359,8 @@ def main() -> int:
                     ),
                     "max_rainfall_mm": max_rain,
                     "risk_level": risk_level,
+                    "storm_count": len(storms),
+                    "storm_names": [storm["name"] for storm in storms],
                 },
             }
         )
