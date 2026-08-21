@@ -2,8 +2,10 @@
 """Build the IEAT flood dashboard feed from official ThaiWater and IEAT GIS data."""
 from __future__ import annotations
 
+import html
 import json
 import math
+import re
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
@@ -24,6 +26,8 @@ WATCH_RADIUS_KM = 30.0
 DISPLAY_RADIUS_KM = 50.0
 RAIN_IMAGE_URL = "https://satda.tmd.go.th/wp-content/uploads/data/radar_composite/max/qpf_202608210600.gif"
 RAIN_IMAGE_OUTPUT = Path("docs/data/radar_latest.gif")
+FLASH_FLOOD_URL = "https://api.hii.or.th/v2/4UQaYnf0Bx4fXPYyCdDRbqHyXH9Ixvd2nVUjaN1cLBY=/warning/flashflood-24h"
+TMD_WARNING_URL = "https://tmd.go.th/warning-and-events/warning-storm"
 
 
 def get_json(url: str, params: dict[str, str] | None = None) -> dict[str, Any]:
@@ -104,6 +108,51 @@ def fetch_storms() -> list[dict[str, str]]:
         print(f"Storm refresh skipped: {type(exc).__name__}: {exc}")
         return []
 
+
+
+def fetch_flash_flood_warning() -> list[str]:
+    try:
+        payload = get_json(FLASH_FLOOD_URL)
+        areas = payload.get("area") or payload.get("data", {}).get("area") or []
+        provinces = set()
+        for item in areas if isinstance(areas, list) else []:
+            province = item.get("province") if isinstance(item, dict) else None
+            if isinstance(province, dict):
+                province = province.get("th") or province.get("name")
+            if province:
+                provinces.add(str(province).replace("จังหวัด", "").strip())
+        return sorted(provinces)
+    except Exception as exc:
+        print(f"Flash-flood warning refresh skipped: {type(exc).__name__}: {exc}")
+        return []
+
+
+def fetch_tmd_warning() -> dict[str, str]:
+    try:
+        request = urllib.request.Request(TMD_WARNING_URL, headers={"User-Agent": USER_AGENT})
+        with urllib.request.urlopen(request, timeout=60) as response:
+            page = response.read().decode("utf-8", "replace")
+        def meta_value(key: str) -> str:
+            patterns = [
+                rf'<meta[^>]+property=["\']{re.escape(key)}["\'][^>]+content=["\']([^"\']+)',
+                rf'<meta[^>]+content=["\']([^"\']+)["\'][^>]+property=["\']{re.escape(key)}["\']',
+                rf'<meta[^>]+name=["\']{re.escape(key)}["\'][^>]+content=["\']([^"\']+)',
+            ]
+            for pattern in patterns:
+                match = re.search(pattern, page, re.I)
+                if match:
+                    return html.unescape(re.sub(r"\s+", " ", match.group(1))).strip()
+            return ""
+        title = meta_value("og:title")
+        summary = meta_value("og:description") or meta_value("description")
+        if not title or "ประกาศเตือนภัย" in title:
+            match = re.search(r'(ฝนตกหนัก[^<]{10,180}|พายุ[^<]{10,180})', page)
+            if match:
+                title = html.unescape(re.sub(r"\s+", " ", match.group(1))).strip()
+        return {"title": title[:240], "summary": summary[:500], "url": TMD_WARNING_URL}
+    except Exception as exc:
+        print(f"TMD warning refresh skipped: {type(exc).__name__}: {exc}")
+        return {"title": "", "summary": "", "url": TMD_WARNING_URL}
 
 def fetch_estates() -> list[dict[str, Any]]:
     payload = get_json(
@@ -301,6 +350,8 @@ def main() -> int:
     try:
         estates = fetch_estates()
         storms = fetch_storms()
+        flood_watch_provinces = fetch_flash_flood_warning()
+        tmd_warning = fetch_tmd_warning()
         rain = fetch_rain(estates)
         water = fetch_water(estates)
         stations = rain + water
@@ -361,6 +412,11 @@ def main() -> int:
                     "risk_level": risk_level,
                     "storm_count": len(storms),
                     "storm_names": [storm["name"] for storm in storms],
+                    "flood_watch_provinces": flood_watch_provinces,
+                    "flood_watch_province_count": len(flood_watch_provinces),
+                    "warning_title": tmd_warning.get("title", ""),
+                    "warning_summary": tmd_warning.get("summary", ""),
+                    "warning_url": tmd_warning.get("url", TMD_WARNING_URL),
                 },
             }
         )
