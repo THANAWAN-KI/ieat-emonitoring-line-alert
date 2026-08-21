@@ -10,7 +10,7 @@
   <script type="module" src="https://js.arcgis.com/5.1/embeddable-components/"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
   <script src="data/thaiwater_latest.js?v=20260821-3"></script>
-  <script src="flood-live-data.js?v=20260821-7" defer></script>
+  <script src="flood-live-data.js?v=20260821-8" defer></script>
   <script src="flood-export.js?v=20260821-1" defer></script>
   <style>
     :root{--purple:#6B4B7D;--blue:#1769C2;--cyan:#81D4FA;--teal:#66BB6A;--ink:#283142;--muted:#697386;--bg:#F6F6F4;--line:#E5E2E8;--soft:#F5F1F7;--white:#FFFFFF;--red:#B0005A;--orange:#F6BB42;--green:#58B957}
@@ -47,9 +47,8 @@
     <div class="brand"><b>IEAT Flood Intelligence</b><span>ข้อมูลสนับสนุนผู้ประกอบการและการตัดสินใจเชิงพื้นที่</span></div>
     <nav class="nav" aria-label="เมนูหลัก">
       <button class="active" data-view="overview">ภาพรวม</button>
-      <button data-view="map">แผนที่สถานการณ์</button>
       <button data-view="warning">พื้นที่เฝ้าระวัง</button>
-      <button data-view="infographic">อินโฟกราฟิก</button>
+      <button data-view="infographic">ส่งออกข้อมูล</button>
     </nav>
     <button class="edit-btn" id="openEditor">แก้ไขข้อมูลรายงาน</button>
   </div></header>
@@ -81,22 +80,6 @@
       <div class="grid overview-grid">
         <article class="card"><div class="card-head"><div><h2>สถานการณ์และแนวทางดำเนินการ</h2><span>แยกข้อมูลคาดการณ์ออกจากผลกระทบที่ยืนยันแล้ว</span></div><span class="pill" id="outLevel"></span></div><div class="status-card"><div class="alert"><div class="alert-line"><b>สถานการณ์ล่าสุด</b><b id="outTrend"></b></div><h3 class="outEstate"></h3><div class="text" id="outSummary"></div></div><div class="action"><b>สิ่งที่ผู้ประกอบการควรดำเนินการ</b><div class="text" id="outAction"></div></div></div></article>
         <article class="card"><div class="card-head"><div><h2>ตัวชี้วัดเฝ้าระวังทั่วประเทศ</h2><span>เฉพาะสถานีที่สัมพันธ์กับพื้นที่นิคมฯ</span></div></div><div class="bars"><div class="barrow"><span>ฝนสูงสุด 24 ชม.</span><div class="track"><div class="bar" id="rainBar"></div></div><b id="outRain"></b></div><div class="barrow"><span>นิคมฯ ใกล้ระดับน้ำผิดปกติ</span><div class="track"><div class="bar teal" id="criticalBar"></div></div><b id="outCritical2"></b></div><div class="barrow"><span>สถานีที่ต้องติดตาม</span><div class="track"><div class="bar" id="routeBar"></div></div><b id="outRoute2"></b></div><div class="source-note"><b>สถานะข้อมูล:</b> <span id="outVerify1"></span><br><b>รายงานครั้งถัดไป:</b> <span id="outNext"></span></div></div></article>
-      </div>
-    </section>
-
-    <section class="view" id="map">
-      <div class="hero"><div><div class="eyebrow">แผนที่สถานการณ์</div><h1>Web Map ระดับน้ำและฝนสะสม 24 ชั่วโมง</h1><p>กดปุ่ม “ชั้นข้อมูล Layer” บนแผนที่เพื่อเลือกเปิด–ปิดข้อมูล</p></div><div class="updated"><strong class="outEstate"></strong><span>Web Map กนอ.</span></div></div>
-      <div class="grid flash-flood-kpis">
-        <article class="card flash-flood-kpi"><div><h2>พื้นที่เสี่ยงน้ำท่วมฉับพลันใน 24 ชั่วโมงข้างหน้า</h2><p id="flashFlood24Updated">ข้อมูลจาก ThaiWater / สสน.</p></div><strong><span id="flashFlood24Count">–</span> ตำบล</strong></article>
-        <article class="card flash-flood-kpi"><div><h2>พื้นที่เสี่ยงน้ำท่วมฉับพลันใน 48 ชั่วโมงข้างหน้า</h2><p id="flashFlood48Updated">ข้อมูลจาก ThaiWater / สสน.</p></div><strong><span id="flashFlood48Count">–</span> ตำบล</strong></article>
-      </div>
-      <div class="grid map-layout">
-        <article class="card map-card">
-          <div class="map-title">Web Map<small>ข้อมูลระดับน้ำ ฝนสะสม 24 ชั่วโมง และนิคมอุตสาหกรรม</small></div>
-          <button class="layer-toggle" id="toggleLayerPanel" type="button" aria-expanded="false" aria-controls="mapLayerPanel">ชั้นข้อมูล Layer</button>
-          <div class="layer-panel" id="mapLayerPanel"><div class="layer-panel-head"><h2>ชั้นข้อมูล</h2><button class="layer-panel-close" id="closeLayerPanel" type="button" aria-label="ปิดรายการชั้นข้อมูล">×</button></div><p style="margin:0 0 10px;color:var(--muted);font-size:14px">เลือกเครื่องหมายถูกเพื่อเปิดหรือปิดข้อมูลบนแผนที่</p><div id="mapLayerControls"><div style="padding:18px 0;color:var(--muted)">กำลังโหลดรายการชั้นข้อมูล…</div></div></div>
-          <arcgis-embedded-map id="situationMapEmbed" class="map-view" item-id="3d24287ac6ea49cd823625ddad496e01" theme="light" bookmarks-enabled legend-enabled information-enabled share-enabled basemap-gallery-enabled time-zone-label-enabled center="102.05350939847203,13.89589285736592" scale="9244648.868618" portal-url="https://ieat.maps.arcgis.com" aria-label="แผนที่สถานการณ์ระดับน้ำและฝนสะสม 24 ชั่วโมง"></arcgis-embedded-map>
-        </article>
       </div>
     </section>
 
@@ -155,13 +138,13 @@
     <div class="form-group"><h3>ตัวเลขสำคัญ</h3><div class="two"><div><label>นิคมฯ เฝ้าระวัง</label><input id="estateCountIn" value="กำลังโหลด"></div><div><label>นิคมฯ ใกล้ฝนหนัก</label><input id="factoryIn" value="กำลังโหลด"></div><div><label>นิคมฯ ใกล้ระดับน้ำผิดปกติ</label><input id="criticalIn" value="กำลังโหลด"></div><div><label>สถานีที่ต้องติดตาม</label><input id="routeCountIn" value="กำลังโหลด"></div><div><label>ฝนสูงสุด 24 ชม.</label><input id="rainIn" value="กำลังโหลด"></div><div><label>แนวโน้ม</label><select id="trendIn"><option>เพิ่มขึ้น</option><option>ทรงตัว</option><option>ลดลง</option></select></div></div></div>
     <div class="form-group"><h3>สถานการณ์และผลกระทบ</h3><label>สรุปสถานการณ์</label><textarea id="summaryIn">ฝนตกหนักต่อเนื่องทำให้พื้นที่ลุ่มต่ำ แนวระบายน้ำ และบริเวณโดยรอบนิคมฯ มีความเสี่ยงน้ำท่วมฉับพลัน ขณะนี้อยู่ระหว่างตรวจสอบผลกระทบจริงในพื้นที่</textarea><label>สิ่งที่ผู้ประกอบการควรดำเนินการ</label><textarea id="actionIn">ตรวจเครื่องสูบน้ำและทางระบายน้ำ ย้ายวัสดุหรือสารเคมีขึ้นที่สูง ป้องกันระบบไฟฟ้า และเตรียมเส้นทางขนส่งสำรอง</textarea><label>ข้อสังเกตเชิงพื้นที่</label><textarea id="obsIn">ติดตามสถานีด้านเหนือน้ำ จุดลุ่มต่ำ ทางเข้า–ออก และจุดตัดแนวระบายน้ำเป็นพิเศษ</textarea><label>เส้นทางเข้า–ออก</label><input id="roadIn" value="ใช้งานได้ • เฝ้าระวังบางช่วง"><label>ระบบระบายน้ำ</label><input id="drainIn" value="เฝ้าระวัง"><label>สาธารณูปโภค</label><input id="utilityIn" value="ให้บริการตามปกติ"><label>สถานะการยืนยัน</label><select id="verifyIn"><option>ข้อมูลคาดการณ์ • รอตรวจสอบพื้นที่</option><option>ยืนยันจากสำนักงานนิคมฯ</option><option>ยืนยันจากหน่วยงานทางการ</option></select></div>
     <div class="form-group"><h3>ภาพพยากรณ์ประกอบ</h3><div class="two"><label class="upload">ภาพ 24 ชั่วโมง<input class="hide" id="day1File" type="file" accept="image/*"></label><label class="upload">ภาพ 5 วัน<input class="hide" id="day5File" type="file" accept="image/*"></label></div><div id="day1Box" hidden></div><div id="day5Box" hidden></div></div>
-    <div class="drawer-actions"><button class="primary" id="applyData">อัปเดตข้อมูลทุกหน้า</button><button class="secondary" data-go="infographic">ไปหน้าอินโฟกราฟิก</button></div>
+    <div class="drawer-actions"><button class="primary" id="applyData">อัปเดตข้อมูลทุกหน้า</button><button class="secondary" data-go="infographic">ไปหน้าส่งออกข้อมูล</button></div>
   </aside></div>
 
   <script>
     const $=id=>document.getElementById(id), value=id=>$(id)?.value?.trim()||"–"; let view,warningView,selecting=false;
     const thaiDate=v=>v?new Date(v).toLocaleString("th-TH",{dateStyle:"medium",timeStyle:"short"}):"ไม่ระบุ";
-    function go(id){document.querySelectorAll(".nav button,.view").forEach(e=>e.classList.remove("active"));document.querySelector(`.nav button[data-view="${id}"]`)?.classList.add("active");$(id)?.classList.add("active");if(id==="map"&&view)setTimeout(()=>view.resize(),100);if(id==="warning"&&warningView)setTimeout(()=>warningView.resize(),100);if(id==="infographic")prepareReportExport();window.scrollTo({top:0,behavior:"smooth"})}
+    function go(id){document.querySelectorAll(".nav button,.view").forEach(e=>e.classList.remove("active"));document.querySelector(`.nav button[data-view="${id}"]`)?.classList.add("active");$(id)?.classList.add("active");if(id==="warning"&&warningView)setTimeout(()=>warningView.resize(),100);if(id==="infographic")prepareReportExport();window.scrollTo({top:0,behavior:"smooth"})}
     document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>go(b.dataset.view));document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{go(b.dataset.go);$("editor").classList.remove("open")});
     $("openEditor").onclick=()=>$("editor").classList.add("open");$("closeEditor").onclick=()=>$("editor").classList.remove("open");$("editor").onclick=e=>{if(e.target===$("editor"))$("editor").classList.remove("open")};
     function sync(){const period=`ช่วงข้อมูล ${thaiDate(value("startIn"))} ถึง ${thaiDate(value("endIn"))}`;document.querySelectorAll(".outEstate").forEach(e=>e.textContent=value("estateIn"));document.querySelectorAll(".outPeriod").forEach(e=>e.textContent=period);const map={outEstateCount:"estateCountIn",outFactory:"factoryIn",outCritical:"criticalIn",outCritical2:"criticalIn",outRouteCount:"routeCountIn",outRoute2:"routeCountIn",outRain:"rainIn",outRainWarning:"rainIn",outRoadWarning:"roadIn",outTrend:"trendIn",outNext:"nextIn",outVerify1:"verifyIn",outSummary:"summaryIn",outAction:"actionIn",infoEstate:"estateCountIn",infoFactory:"factoryIn",infoCritical:"criticalIn",infoRoute:"routeCountIn",infoLevel:"levelIn",infoSummary:"summaryIn",infoRain:"rainIn",infoTrend:"trendIn",infoRoad:"roadIn",infoAction:"actionIn",infoVerify:"verifyIn"};Object.entries(map).forEach(([o,i])=>{if($(o))$(o).textContent=value(i)});$("outLevel").textContent=value("levelIn");const num=id=>parseFloat((value(id).match(/[\d.]+/)||[0])[0]);$("rainBar").style.width=Math.min(100,num("rainIn")/2)+"%";$("criticalBar").style.width=Math.min(100,num("criticalIn")*16)+"%";$("routeBar").style.width=Math.min(100,num("routeCountIn")*18)+"%";$("generatedAt").textContent="จัดทำ "+new Date().toLocaleString("th-TH")}
@@ -295,10 +278,6 @@
       },{once:true});
     }
     setupWarningMap($("warningMapEmbed"));
-    const layerPanel=$("mapLayerPanel"),layerToggle=$("toggleLayerPanel");
-    const setLayerPanel=open=>{layerPanel.classList.toggle("open",open);layerToggle.setAttribute("aria-expanded",String(open))};
-    layerToggle.onclick=()=>setLayerPanel(!layerPanel.classList.contains("open"));
-    $("closeLayerPanel").onclick=()=>setLayerPanel(false);
     const cleanProvince=name=>(name||"ไม่ระบุจังหวัด").replace(/^จ\\./,"");
     function reportGroups(areas=[]){const groups={};areas.forEach(row=>{const province=cleanProvince(row.province),g=groups[province]||(groups[province]={rows:[],tambons:new Set(),maxRain:null});g.rows.push(row);g.tambons.add(row.geocode||row.tambon);if(row.sum_rainfall_mm!=null)g.maxRain=Math.max(g.maxRain??-Infinity,Number(row.sum_rainfall_mm))});return Object.entries(groups).map(([province,g])=>({province,...g})).sort((a,b)=>(b.maxRain??-1)-(a.maxRain??-1))}
     function renderExecutiveReport(period=window.reportPeriod||"24h"){
