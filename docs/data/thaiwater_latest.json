@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "status": "unavailable",
+  "generated_at": null,
+  "source": {
+    "name": "คลังข้อมูลน้ำแห่งชาติ (ThaiWater) / สสน.",
+    "catalog": "https://datagov.hii.or.th/",
+    "license": "Creative Commons Non-Commercial (Any)"
+  },
+  "estates": [],
+  "stations": [],
+  "summary": {},
+  "errors": ["รอการประมวลผลครั้งแรกจาก GitHub Actions"]
+}

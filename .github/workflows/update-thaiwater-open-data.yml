@@ -1,0 +1,36 @@
+name: Update ThaiWater Open Data
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-thaiwater-open-data
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Fetch ThaiWater public data
+        run: python scripts/fetch_thaiwater_open_data.py
+      - name: Commit refreshed feed
+        run: |
+          if git diff --quiet -- docs/data/thaiwater_latest.json; then
+            echo "No ThaiWater feed changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- docs/data/thaiwater_latest.json
+          git commit -m "Update ThaiWater open data [skip ci]"
+          git push
