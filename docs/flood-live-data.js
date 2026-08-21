@@ -26,6 +26,8 @@
     box.innerHTML=estates.slice(0,8).map((e,i)=>`<div class="rank"><i>${i+1}</i><div><b>${e.name}</b><small>สถานีผิดปกติ ${fmt(e.alert_station_count,0)} แห่ง • ใกล้สุด ${fmt(e.nearest_alert_km)} กม.</small></div><strong>${e.max_rainfall_mm==null?e.status:fmt(e.max_rainfall_mm)+" มม."}</strong></div>`).join("");
   }
   function apply(data){
+    window.IEAT_LIVE_DATA=data;
+    window.dispatchEvent(new CustomEvent("ieat:data-ready",{detail:data}));
     const state=$("liveState"),method=$("liveMethod");
     if(!["ok","stale","partial"].includes(data.status)||!data.summary){
       if(state)state.innerHTML='<b style="color:#d12f47">ข้อมูลอัตโนมัติไม่พร้อมใช้งาน</b><br>ช่องที่ไม่มีข้อมูลจะแสดง “รอตรวจสอบ” และไม่ใช้ตัวเลขตัวอย่าง';

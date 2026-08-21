@@ -12,15 +12,19 @@
     try{
       if(button){button.disabled=true;button.textContent="กำลังสร้างภาพ…"}
       if(typeof window.sync==="function")window.sync();
-      if(typeof window.updateMapShot==="function")await window.updateMapShot();
+      if(typeof window.prepareReportExport==="function")await window.prepareReportExport();
+      else if(typeof window.updateMapShot==="function")await window.updateMapShot();
       if(document.fonts?.ready)await document.fonts.ready;
       const report=document.getElementById("reportCanvas");
       if(!report||typeof html2canvas!=="function")throw new Error("Export library unavailable");
-      const canvas=await html2canvas(report,{scale:2,backgroundColor:"#ffffff",useCORS:true,logging:false});
-      const name=`ieat-flood-infographic-${new Date().toISOString().slice(0,10)}.png`;
+      report.classList.add("report-exporting");
+      const canvas=await html2canvas(report,{scale:2,backgroundColor:"#ffffff",useCORS:true,logging:false,windowWidth:Math.max(document.documentElement.clientWidth,report.scrollWidth)});
+      report.classList.remove("report-exporting");
+      const period=window.reportPeriod==="48h"?"48h":"24h";
+      const name=`ieat-flood-executive-report-${period}-${new Date().toISOString().slice(0,10)}.png`;
       canvas.toBlob(blob=>{if(!blob){alert("ไม่สามารถสร้างไฟล์ PNG ได้");return}const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=name;a.style.display="none";document.body.appendChild(a);a.click();a.remove();preview(url,name)},"image/png",1);
     }catch(error){console.error(error);alert("ไม่สามารถสร้างภาพ PNG ได้ กรุณาเปิดด้วย Chrome หรือ Safari แล้วลองอีกครั้ง")}
-    finally{if(button){button.disabled=false;button.textContent=old}}
+    finally{document.getElementById("reportCanvas")?.classList.remove("report-exporting");if(button){button.disabled=false;button.textContent=old}}
   }
   window.addEventListener("DOMContentLoaded",()=>document.getElementById("downloadPng")?.addEventListener("click",exportPng));
   window.downloadPage=exportPng;
