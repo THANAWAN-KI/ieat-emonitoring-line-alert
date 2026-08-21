@@ -4,6 +4,7 @@
   const fmt=(value,digits=1)=>value==null?"–":Number(value).toLocaleString("th-TH",{maximumFractionDigits:digits});
   const set=(id,value)=>{const el=$(id);if(el)el.value=value};
   const date=value=>value?new Date(value).toLocaleString("th-TH"):"ไม่ระบุเวลา";
+  const CACHE_KEY="ieat-thaiwater-latest-v2";
   function banner(){
     const box=document.createElement("section");box.id="liveDataStatus";box.className="form-group";
     box.innerHTML='<h2>สถานะข้อมูลอัตโนมัติ</h2><div id="liveState" style="font-size:16px;line-height:1.6">กำลังตรวจสอบข้อมูล…</div><div id="liveMethod" style="margin-top:8px;color:#68717d;font-size:14px;line-height:1.55"></div><a href="https://www.thaiwater.net/new4all" target="_blank" rel="noopener" style="display:block;margin-top:8px;color:#3478f6">เปิดข้อมูล ThaiWater</a>';
@@ -26,12 +27,13 @@
   }
   function apply(data){
     const state=$("liveState"),method=$("liveMethod");
-    if(data.status!=="ok"){
+    if(!["ok","stale","partial"].includes(data.status)||!data.summary){
       if(state)state.innerHTML='<b style="color:#d12f47">ข้อมูลอัตโนมัติไม่พร้อมใช้งาน</b><br>ช่องที่ไม่มีข้อมูลจะแสดง “รอตรวจสอบ” และไม่ใช้ตัวเลขตัวอย่าง';
       set("estateCountIn","รอตรวจสอบ");set("criticalIn","รอตรวจสอบ");set("rainIn","รอตรวจสอบ");set("factoryIn","รอตรวจสอบ");set("routeCountIn","รอตรวจสอบ");window.sync?.();return;
     }
     const s=data.summary||{},watch=data.estate_watch||[],top=watch[0];
-    if(state)state.innerHTML=`<b style="color:#14845d">เชื่อมต่อข้อมูลทางการสำเร็จ</b><br>อัปเดต ${date(data.generated_at)} • ตำแหน่งนิคมฯ ${fmt(s.estate_total,0)} แห่ง • สถานีใกล้นิคมฯ ${fmt(s.station_count,0)} แห่ง`;
+    const stale=data.status!=="ok";
+    if(state)state.innerHTML=`<b style="color:${stale?'#b66a04':'#14845d'}">${stale?'ใช้ข้อมูลสำเร็จล่าสุด':'เชื่อมต่อข้อมูลทางการสำเร็จ'}</b><br>อัปเดต ${date(data.generated_at)} • ตำแหน่งนิคมฯ ${fmt(s.estate_total,0)} แห่ง • สถานีใกล้นิคมฯ ${fmt(s.station_count,0)} แห่ง`;
     if(method){const m=data.methodology||{};method.textContent=m.note||`ประเมินสถานีในรัศมี ${m.watch_radius_km||30} กม. จากนิคมฯ`}
     set("estateCountIn",`${fmt(s.estate_count,0)} แห่ง`);
     set("factoryIn",`${fmt(s.heavy_rain_estate_count,0)} แห่ง`);
@@ -50,5 +52,19 @@
     }
     renderEstateRanks(watch);renderStations(data.stations||[]);window.sync?.();
   }
-  window.addEventListener("DOMContentLoaded",async()=>{banner();try{const response=await fetch(`data/thaiwater_latest.json?v=${Date.now()}`,{cache:"no-store"});if(!response.ok)throw new Error(`HTTP ${response.status}`);apply(await response.json())}catch(error){console.error(error);apply({status:"unavailable"})}});
+  async function load(){
+    const url=new URL("./data/thaiwater_latest.json",document.baseURI);url.searchParams.set("v",Date.now());
+    try{
+      const response=await fetch(url,{cache:"no-store"});if(!response.ok)throw new Error(`HTTP ${response.status}`);
+      const data=await response.json();
+      if(!data.summary)throw new Error("ข้อมูลสรุปไม่ครบ");
+      try{localStorage.setItem(CACHE_KEY,JSON.stringify(data))}catch(_error){}
+      apply(data);
+    }catch(error){
+      console.error("โหลดข้อมูล ThaiWater ไม่สำเร็จ",error);
+      try{const cached=JSON.parse(localStorage.getItem(CACHE_KEY)||"null");if(cached?.summary){cached.status="stale";apply(cached);return}}catch(_error){}
+      apply({status:"unavailable"});
+    }
+  }
+  window.addEventListener("DOMContentLoaded",()=>{banner();load()});
 })();
