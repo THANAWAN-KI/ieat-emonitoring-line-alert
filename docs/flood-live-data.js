@@ -34,18 +34,18 @@
     if(state)state.innerHTML=`<b style="color:#14845d">เชื่อมต่อข้อมูลทางการสำเร็จ</b><br>อัปเดต ${date(data.generated_at)} • ตำแหน่งนิคมฯ ${fmt(s.estate_total,0)} แห่ง • สถานีใกล้นิคมฯ ${fmt(s.station_count,0)} แห่ง`;
     if(method){const m=data.methodology||{};method.textContent=m.note||`ประเมินสถานีในรัศมี ${m.watch_radius_km||30} กม. จากนิคมฯ`}
     set("estateCountIn",`${fmt(s.estate_count,0)} แห่ง`);
-    set("criticalIn",`${fmt(s.critical_count,0)} แห่ง`);
+    set("factoryIn",`${fmt(s.heavy_rain_estate_count,0)} แห่ง`);
+    set("criticalIn",`${fmt(s.water_alert_estate_count,0)} แห่ง`);
+    set("routeCountIn",`${fmt(s.alert_station_count,0)} แห่ง`);
     set("rainIn",s.max_rainfall_mm==null?"ไม่มีข้อมูล":`${fmt(s.max_rainfall_mm)} มม.`);
     set("levelIn",s.risk_level||"ปกติ");
-    set("factoryIn","รอตรวจสอบจากสำนักงานนิคมฯ");
-    set("routeCountIn","รอตรวจสอบ");
     set("roadIn","รอตรวจสอบผลกระทบจริง");
     set("verifyIn","ข้อมูลอัตโนมัติจาก ThaiWater • ผลกระทบรอยืนยันจากพื้นที่");
+    set("estateIn","นิคมอุตสาหกรรมทั่วประเทศไทย");
     if(top){
-      set("estateIn",top.name);
-      set("summaryIn",`พบนิคมอุตสาหกรรมเข้าเกณฑ์เฝ้าระวัง ${fmt(s.estate_count,0)} แห่ง จาก ${fmt(s.estate_total,0)} แห่ง โดย ${top.name} มีสถานีผิดปกติใกล้เคียง ${fmt(top.alert_station_count,0)} แห่ง จุดแจ้งเตือนใกล้ที่สุดประมาณ ${fmt(top.nearest_alert_km)} กม. สถานะสูงสุด ${top.status} ข้อมูลนี้เป็นการคัดกรองอัตโนมัติและต้องยืนยันผลกระทบจริงกับสำนักงานนิคมฯ`);
+      const names=watch.slice(0,3).map(e=>e.name).join(", ");
+      set("summaryIn",`พบนิคมอุตสาหกรรมเข้าเกณฑ์เฝ้าระวัง ${fmt(s.estate_count,0)} แห่ง จาก ${fmt(s.estate_total,0)} แห่ง พื้นที่ที่ต้องติดตามลำดับต้น ได้แก่ ${names} โดยจุดแจ้งเตือนที่ใกล้นิคมฯ มากที่สุดประมาณ ${fmt(Math.min(...watch.map(e=>e.nearest_alert_km)))} กม. ข้อมูลนี้เป็นการคัดกรองอัตโนมัติและต้องยืนยันผลกระทบจริงกับสำนักงานนิคมฯ`);
     }else{
-      set("estateIn","ภาพรวมทุกนิคมอุตสาหกรรม");
       set("summaryIn",`ไม่พบนิคมอุตสาหกรรมเข้าเกณฑ์เฝ้าระวังอัตโนมัติจากข้อมูลล่าสุด ทั้งนี้ยังต้องติดตามประกาศทางการและยืนยันสถานการณ์ในพื้นที่`);
     }
     renderEstateRanks(watch);renderStations(data.stations||[]);window.sync?.();
