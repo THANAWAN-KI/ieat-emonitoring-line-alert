@@ -12,18 +12,17 @@
   }
   function renderStations(stations){
     const body=$("stations");if(!body)return;body.innerHTML="";
-    const selected=stations.filter(s=>s.distance_km<=30&&s.severity_score>=2).slice(0,12);
-    if(!selected.length){body.innerHTML='<tr><td colspan="6" style="text-align:center;color:#7b8390;padding:28px">ไม่พบสถานีผิดปกติภายในรัศมี 30 กม. จากนิคมฯ</td></tr>';return}
+    const selected=stations.filter(s=>s.distance_km<=30&&s.severity_score>=2).slice(0,20);
+    if(!selected.length){body.innerHTML='<tr><td colspan="8" style="text-align:center;color:#7b8390;padding:28px">ไม่พบสถานีผิดปกติภายในรัศมี 30 กม. จากนิคมฯ</td></tr>';return}
     selected.forEach(s=>window.addStation?.({
-      n:`${s.station} • ${s.nearest_estate}`,
-      v:s.value_text||"–",s:s.status||"ไม่มีข้อมูล",trend:s.kind==="rainfall"?"ฝน 24 ชม.":"ระดับน้ำ",
-      t:s.observed_at||"–",agency:s.agency||"ThaiWater"
+      kind:s.kind,n:s.station,province:s.province||"–",district:s.district||"–",estate:s.nearest_estate||"–",
+      v:s.value_text||"–",s:s.status||"ไม่มีข้อมูล",distance:s.distance_km,t:s.observed_at||"–",agency:s.agency||"ThaiWater"
     }));
   }
   function renderEstateRanks(estates){
-    const box=$("estateRanks");if(!box)return;
+    const box=$("estateRanks"),count=$("warningEstateCount");if(count)count.textContent=fmt(estates.length,0)+" แห่ง";if(!box)return;
     if(!estates.length){box.innerHTML='<div style="padding:22px;text-align:center;color:#7b8390">ไม่พบนิคมฯ เข้าเกณฑ์เฝ้าระวัง</div>';return}
-    box.innerHTML=estates.slice(0,8).map((e,i)=>`<div class="rank"><i>${i+1}</i><div><b>${e.name}</b><small>สถานีผิดปกติ ${fmt(e.alert_station_count,0)} แห่ง • ใกล้สุด ${fmt(e.nearest_alert_km)} กม.</small></div><strong>${e.max_rainfall_mm==null?e.status:fmt(e.max_rainfall_mm)+" มม."}</strong></div>`).join("");
+    box.innerHTML=estates.slice(0,6).map((e,i)=>`<div class="rank"><i>${i+1}</i><div><b>${e.name}</b><small>สถานีผิดปกติ ${fmt(e.alert_station_count,0)} แห่ง • ใกล้สุด ${fmt(e.nearest_alert_km)} กม.</small></div><strong>${e.max_rainfall_mm==null?e.status:fmt(e.max_rainfall_mm)+" มม."}</strong></div>`).join("");
   }
   function apply(data){
     window.IEAT_LIVE_DATA=data;
