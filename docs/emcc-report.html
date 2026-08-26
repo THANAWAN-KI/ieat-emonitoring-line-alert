@@ -34,7 +34,7 @@
 <div class="field"><label for="reporter">ผู้จัดทำรายงาน</label><input id="reporter" class="control" placeholder="ชื่อเจ้าหน้าที่"></div>
 <div class="field"><label for="status">สถานะ</label><select id="status" class="control"><option>เฝ้าระวัง</option><option>กำลังตรวจสอบ</option><option>กำลังดำเนินการ</option><option>ควบคุมเหตุได้แล้ว</option><option>ปิดเหตุ</option></select></div>
 </div>
-<div class="actions"><button class="button secondary" type="button" onclick="updatePreview()">อัปเดตตัวอย่าง</button><button id="exportButton" class="button primary" type="button" onclick="exportPng()">ส่งออกรายงาน PNG</button></div>
+<div class="actions"><button class="button secondary" type="button" onclick="updatePreview()">อัปเดตตัวอย่าง</button><button class="button secondary" type="button" onclick="openSituationMap()">จัดทำแผนที่สถานการณ์</button><button id="exportButton" class="button primary" type="button" onclick="exportPng()">ส่งออกรายงาน PNG</button></div>
 <p class="hint">ไฟล์ PNG จะถูกสร้างในเครื่องของผู้ใช้ ไม่มีการอัปโหลดข้อมูลรายงานไปยังเซิร์ฟเวอร์</p>
 </section>
 <section class="preview"><h3>ตัวอย่างข้อมูลรายงาน</h3><div id="previewGrid" class="preview-grid"></div></section>
@@ -48,7 +48,7 @@ const $=id=>document.getElementById(id);
 const params=new URLSearchParams(location.search);
 ids.forEach(id=>{if(params.has(id))$(id).value=params.get(id)});
 if(!params.has("time"))$("time").value=new Date().toLocaleString("th-TH",{timeZone:"Asia/Bangkok"});
-function values(){return Object.fromEntries(ids.map(id=>[id,$(id).value.trim()]))}
+function values(){return Object.fromEntries(ids.map(id=>[id,$(id).value.trim()]))}\nfunction openSituationMap(){const v=values();sessionStorage.setItem("emccSituationDraft",JSON.stringify({title:"แผนที่สถานการณ์ "+(v.type||"ภัยพิบัติและเหตุฉุกเฉิน"),location:v.location||[v.company,v.estate].filter(Boolean).join(" • "),situation:v.details,operation:v.actions,source:v.source}));location.href="situation-map.html"}
 function updatePreview(){const v=values();$("previewGrid").innerHTML=Object.entries(labels).map(([key,label])=>'<div class="preview-item"><span>'+escapeHtml(label)+'</span><strong>'+escapeHtml(v[key]||"-")+'</strong></div>').join("")}
 function escapeHtml(v){return String(v||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
 function wrap(ctx,text,x,y,maxWidth,lineHeight,maxLines=8){const words=String(text||"-").split(/\s+/);let line="",lines=[];for(const word of words){const test=line?line+" "+word:word;if(ctx.measureText(test).width>maxWidth&&line){lines.push(line);line=word}else line=test}if(line)lines.push(line);lines.slice(0,maxLines).forEach((l,i)=>ctx.fillText(i===maxLines-1&&lines.length>maxLines?l+"…":l,x,y+i*lineHeight));return Math.min(lines.length,maxLines)*lineHeight}
