@@ -758,6 +758,12 @@
       }
     }
 
+    .urgent-calls{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin-top:10px}
+    .urgent-call{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:58px;padding:8px 5px;color:#4D286F;background:#fff;border:1px solid var(--line);border-radius:9px;text-align:center;text-decoration:none;font-size:11px;font-weight:700}
+    .urgent-call strong{display:block;margin-top:2px;color:#34363D;font-size:16px}.urgent-call.danger{color:#A92F3D;background:#FFF5F6;border-color:#F0CCD1}.urgent-call.medical{color:#24784B;background:#F1F8F3;border-color:#CFE5D7}
+    .officer-checklist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.officer-item{padding:14px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--purple);border-radius:10px}.officer-item strong{display:block;color:#34363D;font-size:15px}.officer-item span{display:block;margin-top:4px;color:var(--muted);font-size:12px;line-height:1.6}
+    .report-template{margin-top:12px;padding:16px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:10px}.report-template-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.report-template h3{margin:0;color:#34363D;font-size:17px}.copy-report{padding:9px 11px;color:#fff;background:var(--purple);border:0;border-radius:8px;font:700 12px inherit;cursor:pointer}.copy-report.copied{background:var(--green)}.report-fields{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;margin-top:12px;padding:12px;background:#F7F8FA;border-radius:8px;color:#555A65;font-size:12px;line-height:1.55}
+    @media(max-width:620px){.urgent-calls{grid-template-columns:repeat(2,minmax(0,1fr))}.urgent-call:first-child{grid-column:1/-1}.officer-checklist,.report-fields{grid-template-columns:1fr}.report-template-head{align-items:flex-start;flex-direction:column}.copy-report{width:100%}}
   </style>
 </head>
 <body>
@@ -794,6 +800,13 @@
           <span>ตั้งสติ ออกจากพื้นที่เสี่ยง แจ้งศูนย์ควบคุมของสถานประกอบการ และติดต่อหน่วยฉุกเฉินตามประเภทเหตุ</span>
         </div>
       </section>
+      <nav class="urgent-calls" aria-label="หมายเลขโทรด่วน">
+        <a class="urgent-call" href="tel:022072700">ศูนย์เฝ้าระวังฯ<strong>02-207-2700</strong></a>
+        <a class="urgent-call danger" href="tel:199">เพลิงไหม้<strong>199</strong></a>
+        <a class="urgent-call medical" href="tel:1669">การแพทย์ฉุกเฉิน<strong>1669</strong></a>
+        <a class="urgent-call danger" href="tel:191">เหตุด่วนเหตุร้าย<strong>191</strong></a>
+        <a class="urgent-call" href="tel:1784">สายด่วน ปภ.<strong>1784</strong></a>
+      </nav>
 
       <div class="section-heading" id="emergency-steps">
         <h2>เมื่อพบเหตุผิดปกติ ให้ปฏิบัติ 4 ขั้นตอน</h2>
@@ -836,6 +849,17 @@
             <p>รับฟังคำสั่งจากเจ้าหน้าที่หรือระบบประกาศ และรอการยืนยันว่าพื้นที่ปลอดภัยก่อนกลับเข้าปฏิบัติงาน</p>
           </div>
         </article>
+      </section>
+
+      <div class="section-heading" id="officer-checklist">
+        <h2>เช็กลิสต์สำหรับเจ้าหน้าที่เมื่อรับแจ้งเหตุ</h2>
+        <p>ใช้ตรวจสอบข้อมูลและประสานงานตามลำดับ โดยยึดแผนฉุกเฉินและคำสั่งของผู้บัญชาการเหตุการณ์เป็นหลัก</p>
+      </div>
+      <section class="officer-checklist">
+        <article class="officer-item"><strong>1. ยืนยันข้อมูลต้นทาง</strong><span>ตรวจสอบผู้แจ้ง จุดเกิดเหตุ เวลา ประเภทเหตุ และช่องทางติดต่อกลับ หลีกเลี่ยงการเผยแพร่ข้อมูลที่ยังไม่ยืนยัน</span></article>
+        <article class="officer-item"><strong>2. ประเมินผลกระทบ</strong><span>ตรวจผู้บาดเจ็บ สารเคมี ทิศทางลม พื้นที่เสี่ยง ระบบสาธารณูปโภค และนิคมอุตสาหกรรมที่เกี่ยวข้อง</span></article>
+        <article class="officer-item"><strong>3. ประสานหน่วยงาน</strong><span>แจ้งศูนย์ควบคุม ผู้บริหารเหตุ ผู้ประกอบการ และหน่วยฉุกเฉินตามระดับความรุนแรง พร้อมยืนยันผู้รับเรื่อง</span></article>
+        <article class="officer-item"><strong>4. บันทึกและติดตาม</strong><span>บันทึกเวลารับแจ้ง การตัดสินใจ ผู้ประสานงาน และการเปลี่ยนแปลงของสถานการณ์จนกว่าจะปิดเหตุ</span></article>
       </section>
 
       <div class="section-heading" id="incident-guides">
@@ -900,6 +924,15 @@
           </ul>
         </article>
       </section>
+      <section class="report-template" aria-labelledby="report-template-title">
+        <div class="report-template-head"><h3 id="report-template-title">แบบข้อความสำหรับรายงานเหตุ</h3><button id="copyReport" class="copy-report" type="button" onclick="copyIncidentTemplate()">คัดลอกแบบฟอร์ม</button></div>
+        <div class="report-fields">
+          <span>• ผู้แจ้งและเบอร์ติดต่อกลับ</span><span>• วันและเวลาที่เกิดเหตุ</span>
+          <span>• สถานประกอบการ/อาคาร/จุดเกิดเหตุ</span><span>• ประเภทและสถานการณ์ล่าสุด</span>
+          <span>• ผู้บาดเจ็บ สูญหาย หรือติดค้าง</span><span>• สารเคมีหรือวัตถุอันตราย</span>
+          <span>• ทิศทางลมและพื้นที่ได้รับผลกระทบ</span><span>• การดำเนินการและหน่วยงานที่ประสานแล้ว</span>
+        </div>
+      </section>
 
       <section class="do-dont" aria-label="ข้อควรปฏิบัติและข้อห้าม">
         <div class="rule-card do">
@@ -960,5 +993,32 @@
       </section>
     </main>
   </div>
+  <script>
+    async function copyIncidentTemplate(){
+      const template = [
+        "รายงานเหตุฉุกเฉิน/ภัยพิบัติ",
+        "ผู้แจ้ง: ",
+        "เบอร์ติดต่อกลับ: ",
+        "วันและเวลาเกิดเหตุ: ",
+        "สถานประกอบการ/อาคาร/จุดเกิดเหตุ: ",
+        "ประเภทเหตุ: ",
+        "สถานการณ์ล่าสุด: ",
+        "ผู้บาดเจ็บ/สูญหาย/ติดค้าง: ",
+        "สารเคมีหรือวัตถุอันตราย: ",
+        "ทิศทางลม/พื้นที่ได้รับผลกระทบ: ",
+        "การดำเนินการแล้ว: ",
+        "หน่วยงานที่ประสานแล้ว: "
+      ].join("\n");
+      const button=document.getElementById("copyReport");
+      try{
+        await navigator.clipboard.writeText(template);
+        button.textContent="คัดลอกแล้ว";
+        button.classList.add("copied");
+        setTimeout(()=>{button.textContent="คัดลอกแบบฟอร์ม";button.classList.remove("copied")},1800);
+      }catch(error){
+        window.prompt("คัดลอกข้อความรายงานเหตุ",template);
+      }
+    }
+  </script>
 </body>
 </html>
