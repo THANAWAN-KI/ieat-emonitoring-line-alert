@@ -172,14 +172,14 @@ def qualifies(event: dict) -> bool:
 
 def severity(magnitude: float | None) -> tuple[str, str, str]:
     if magnitude is None:
-        return "เฝ้าระวัง", "#5A008F", "#F2EAF8"
+        return "เฝ้าระวัง", "#5A008F", "#F5EDF9"
     if magnitude >= 6:
-        return "ระดับวิกฤต • เร่งด่วน", "#FF0004", "#FFE5E5"
+        return "ระดับวิกฤต • เร่งด่วน", "#D90429", "#FDECEF"
     if magnitude >= 5:
-        return "ระดับรุนแรง • ตรวจสอบทันที", "#E64C00", "#FFF0E8"
+        return "ระดับรุนแรง • ตรวจสอบทันที", "#E85D04", "#FFF1E8"
     if magnitude >= 3.5:
-        return "ระดับเตือนภัย • ตรวจสอบพื้นที่", "#F2FF00", "#FBFFD9"
-    return "ระดับเฝ้าระวัง", "#25E004", "#E9FCE6"
+        return "ระดับเตือนภัย • ตรวจสอบพื้นที่", "#C58A00", "#FFF8DB"
+    return "ระดับเฝ้าระวัง", "#2E9E45", "#EAF7ED"
 
 
 def industrial_guidance(magnitude: float | None) -> str:
@@ -310,7 +310,7 @@ def flex_message(event: dict, test: bool = False) -> dict:
             "type": "bubble",
             "size": "mega",
             "styles": {
-                "header": {"backgroundColor": "#FFFFFF"},
+                "header": {"backgroundColor": "#FBF8FD"},
                 "body": {"backgroundColor": "#FFFFFF"},
                 "footer": {"backgroundColor": "#FFFFFF"},
             },
@@ -380,7 +380,7 @@ def flex_message(event: dict, test: bool = False) -> dict:
                                         "text": level,
                                         "size": "sm",
                                         "weight": "bold",
-                                        "color": "#5A008F" if severity_color == "#F2FF00" else severity_color,
+                                        "color": severity_color,
                                         "align": "center",
                                         "wrap": True,
                                     },
@@ -403,7 +403,7 @@ def flex_message(event: dict, test: bool = False) -> dict:
                         "margin": "md",
                         "paddingAll": "12px",
                         "backgroundColor": "#FFFFFF",
-                        "borderColor": severity_color,
+                        "borderColor": "#E5D8EC",
                         "borderWidth": "1px",
                         "cornerRadius": "12px",
                         "contents": [
@@ -518,3 +518,43 @@ def main() -> int:
         if not token or not target:
             print("LINE secrets are required for a test alert.", file=sys.stderr)
             return 1
+        test_message_type = os.getenv("TEST_MESSAGE_TYPE", "flex").strip().lower()
+        message = text_test_message() if test_message_type == "text" else flex_message(test_event(), test=True)
+        push_line(token, target, message)
+        print(f"Test {test_message_type} message sent to LINE.")
+        return 0
+
+    request = urllib.request.Request(RSS_URL, headers={"User-Agent": "IEAT-eMonitoring/2.0"})
+    try:
+        with urllib.request.urlopen(request, timeout=30) as response:
+            events = parse_feed(response.read())
+    except (urllib.error.URLError, ET.ParseError) as error:
+        print(f"Unable to read TMD RSS: {error}", file=sys.stderr)
+        return 1
+    if not events:
+        print("TMD RSS contained no events.")
+        return 0
+
+    state, latest_id = load_state(), events[0]["id"]
+    previous_id = state.get("last_seen_id")
+    if not previous_id:
+        save_state(latest_id)
+        print("Initialized state from the latest event; no historical alert was sent.")
+        return 0
+    new_events = []
+    for event in events:
+        if event["id"] == previous_id:
+            break
+        new_events.append(event)
+    sent = 0
+    if token and target:
+        for event in reversed(new_events):
+            if qualifies(event):
+                push_line(token, target, flex_message(event))
+                sent += 1
+    elif new_events:
+        print("LINE secrets are missing; new events were recorded without sending.", file=sys.stderr)
+    save_state(latest_id)
+    print(f"Checked {len(events)} events; found {len(new_events)} new; sent {sent}.")
+    return 0
+
