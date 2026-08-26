@@ -6,6 +6,7 @@ from __future__ import annotations
 import hashlib
 import html
 import json
+import math
 import os
 import re
 import sys
@@ -13,6 +14,7 @@ import urllib.error
 import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime
+from email.utils import parsedate_to_datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -43,6 +45,22 @@ TARGET_ID_RE = re.compile(r"^[UCR][0-9a-fA-F]{32}$")
 THAILAND_WORDS = ("ประเทศไทย", "Thailand", "จ.", "อ.", "เชียงราย", "เชียงใหม่", "แม่ฮ่องสอน", "ตาก", "กาญจนบุรี", "ภูเก็ต", "พังงา", "กระบี่")
 NEARBY_WORDS = ("เมียนมา", "พม่า", "Myanmar", "ลาว", "Laos", "กัมพูชา", "Cambodia", "เวียดนาม", "Vietnam", "มาเลเซีย", "Malaysia", "ทะเลอันดามัน", "Andaman")
 
+# Simplified Thailand boundary, used only for an approximate nearest-distance
+# calculation. Points are ordered clockwise and deliberately avoid external GIS
+# dependencies so the existing GitHub Action can keep using stock Python.
+THAILAND_BOUNDARY = (
+    (20.47, 99.96), (20.10, 100.55), (19.55, 101.15), (18.35, 101.18),
+    (17.65, 102.10), (17.95, 103.10), (18.35, 103.95), (17.15, 104.75),
+    (16.10, 105.05), (15.10, 105.65), (14.35, 105.25), (13.55, 105.15),
+    (12.65, 102.75), (11.75, 102.90), (10.70, 101.75), (9.55, 101.15),
+    (8.45, 100.25), (7.20, 100.55), (6.35, 101.10), (5.62, 101.15),
+    (5.62, 100.10), (6.45, 99.70), (7.00, 99.60), (7.75, 98.35),
+    (8.60, 98.25), (9.75, 98.45), (10.75, 98.75), (11.65, 99.45),
+    (12.15, 99.95), (13.15, 100.05), (13.55, 99.50), (14.25, 98.25),
+    (15.10, 98.60), (16.05, 98.85), (17.10, 97.95), (18.20, 97.75),
+    (19.20, 98.20), (19.85, 98.75),
+)
+
 
 def clean(value: str | None) -> str:
     return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", value or ""))).strip()
@@ -58,6 +76,64 @@ def first_text(node: ET.Element, names: tuple[str, ...]) -> str:
 def event_id(item: ET.Element, title: str, description: str) -> str:
     stable = first_text(item, ("guid", "id", "link"))
     return stable or hashlib.sha256(f"{title}|{description}".encode()).hexdigest()[:24]
+
+
+def format_publish_time(value: str | None) -> str:
+    """Convert an RSS Publish Time to Thailand time."""
+    raw = clean(value)
+    if not raw:
+        return "ไม่ระบุวันและเวลา"
+    parsed = None
+    try:
+        parsed = parsedate_to_datetime(raw)
+    except (TypeError, ValueError):
+        try:
+            parsed = datetime.fromisoformat(raw.replace("Z", "+00:00"))
+        except ValueError:
+            return f"{raw} (เวลาประเทศไทย)"
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=THAI_TZ)
+    return parsed.astimezone(THAI_TZ).strftime("%d/%m/%Y เวลา %H:%M น. (ประเทศไทย)")
+
+
+def _point_in_polygon(lat: float, lon: float) -> bool:
+    inside = False
+    previous_lat, previous_lon = THAILAND_BOUNDARY[-1]
+    for current_lat, current_lon in THAILAND_BOUNDARY:
+        crosses = (current_lat > lat) != (previous_lat > lat)
+        if crosses:
+            edge_lon = (previous_lon - current_lon) * (lat - current_lat) / (previous_lat - current_lat) + current_lon
+            if lon < edge_lon:
+                inside = not inside
+        previous_lat, previous_lon = current_lat, current_lon
+    return inside
+
+
+def distance_from_thailand(coordinates: str | None) -> str:
+    """Return approximate shortest distance from an epicentre to Thailand."""
+    if not coordinates:
+        return "ไม่สามารถคำนวณได้ (ไม่มีพิกัด)"
+    try:
+        lat, lon = (float(part.strip()) for part in coordinates.split(",", 1))
+    except (TypeError, ValueError):
+        return "ไม่สามารถคำนวณได้"
+    if _point_in_polygon(lat, lon):
+        return "อยู่ภายในประเทศไทย (ประมาณ 0 กม.)"
+
+    # Equirectangular projection is sufficiently accurate for this regional,
+    # user-facing estimate; find the nearest point on every boundary segment.
+    reference_lat = math.radians(lat)
+    scale_x = 111.32 * math.cos(reference_lat)
+    scale_y = 110.57
+    px, py = lon * scale_x, lat * scale_y
+    nearest = float("inf")
+    points = list(THAILAND_BOUNDARY) + [THAILAND_BOUNDARY[0]]
+    for (lat1, lon1), (lat2, lon2) in zip(points, points[1:]):
+        x1, y1, x2, y2 = lon1 * scale_x, lat1 * scale_y, lon2 * scale_x, lat2 * scale_y
+        dx, dy = x2 - x1, y2 - y1
+        t = 0.0 if dx == dy == 0 else max(0.0, min(1.0, ((px - x1) * dx + (py - y1) * dy) / (dx * dx + dy * dy)))
+        nearest = min(nearest, math.hypot(px - (x1 + t * dx), py - (y1 + t * dy)))
+    return f"ประมาณ {nearest:.0f} กม. จากประเทศไทย"
 
 
 def parse_feed(raw: bytes) -> list[dict]:
@@ -96,12 +172,14 @@ def qualifies(event: dict) -> bool:
 
 def severity(magnitude: float | None) -> tuple[str, str, str]:
     if magnitude is None:
-        return "เฝ้าระวัง", "#FF6908", "#FFF0E8"
+        return "เฝ้าระวัง", "#5A008F", "#F2EAF8"
+    if magnitude >= 6:
+        return "ระดับวิกฤต • เร่งด่วน", "#FF0004", "#FFE5E5"
     if magnitude >= 5:
-        return "ระดับรุนแรง • เร่งด่วน", "#BF033B", "#FCE7ED"
+        return "ระดับรุนแรง • ตรวจสอบทันที", "#E64C00", "#FFF0E8"
     if magnitude >= 3.5:
-        return "ระดับเตือนภัย • ตรวจสอบพื้นที่", "#FF6908", "#FFF0E8"
-    return "ระดับเฝ้าระวัง", "#598C14", "#EEF5E6"
+        return "ระดับเตือนภัย • ตรวจสอบพื้นที่", "#F2FF00", "#FBFFD9"
+    return "ระดับเฝ้าระวัง", "#25E004", "#E9FCE6"
 
 
 def industrial_guidance(magnitude: float | None) -> str:
@@ -148,15 +226,16 @@ def flex_message(event: dict, test: bool = False) -> dict:
     """Build a compact earthquake card with the IEAT green-plum palette."""
     magnitude = event.get("magnitude")
     mag = f"{magnitude:.1f}" if magnitude is not None else "–"
-    level, _, _ = severity(magnitude)
+    level, severity_color, severity_background = severity(magnitude)
     location = clean(
         event.get("title")
         or event.get("description")
         or "ไม่ระบุพื้นที่"
     )[:180]
-    published = clean(event.get("published")) or "ไม่ระบุวันและเวลา"
+    published = format_publish_time(event.get("published"))
     depth = f"{event['depth']} กม." if event.get("depth") else "ไม่ระบุ"
     coordinates = event.get("coordinates")
+    thailand_distance = distance_from_thailand(coordinates)
     map_url = (
         "https://www.google.com/maps/search/?api=1&query="
         f"{coordinates.replace(' ', '')}"
@@ -181,7 +260,7 @@ def flex_message(event: dict, test: bool = False) -> dict:
                 {
                     "type": "text",
                     "text": "แจ้งเตือนแผ่นดินไหว",
-                    "color": "#165823",
+                    "color": "#5A008F",
                     "weight": "bold",
                     "size": "lg",
                     "align": "center",
@@ -196,7 +275,7 @@ def flex_message(event: dict, test: bool = False) -> dict:
                             "type": "text",
                             "text": " ",
                             "size": "xxs",
-                            "color": "#165823",
+                            "color": "#5A008F",
                         },
                     ],
                 },
@@ -208,7 +287,7 @@ def flex_message(event: dict, test: bool = False) -> dict:
             "type": "text",
             "text": "ข้อความทดสอบ • ไม่ใช่เหตุการณ์จริง",
             "size": "xxs",
-            "color": "#165823",
+            "color": "#5A008F",
             "weight": "bold",
             "align": "center",
             "margin": "sm",
@@ -216,7 +295,8 @@ def flex_message(event: dict, test: bool = False) -> dict:
 
     detail_rows = [
         ("พื้นที่", location),
-        ("วัน–เวลา", published),
+        ("ทิศทาง / ระยะห่าง", thailand_distance),
+        ("Publish Time", published),
         ("ความลึก", depth),
     ]
 
@@ -256,7 +336,7 @@ def flex_message(event: dict, test: bool = False) -> dict:
                         "layout": "horizontal",
                         "alignItems": "center",
                         "paddingAll": "12px",
-                        "backgroundColor": "#FFF2F2",
+                        "backgroundColor": severity_background,
                         "cornerRadius": "12px",
                         "contents": [
                             {
@@ -269,14 +349,14 @@ def flex_message(event: dict, test: bool = False) -> dict:
                                         "text": mag,
                                         "size": "3xl",
                                         "weight": "bold",
-                                        "color": "#165823",
+                                        "color": severity_color,
                                         "align": "center",
                                     },
                                     {
                                         "type": "text",
                                         "text": "MAGNITUDE",
                                         "size": "xxs",
-                                        "color": "#165823",
+                                        "color": "#5A008F",
                                         "align": "center",
                                     },
                                 ],
@@ -286,7 +366,7 @@ def flex_message(event: dict, test: bool = False) -> dict:
                                 "layout": "vertical",
                                 "width": "2px",
                                 "height": "58px",
-                                "backgroundColor": "#FF788D",
+                                "backgroundColor": severity_color,
                                 "contents": [],
                             },
                             {
@@ -300,7 +380,7 @@ def flex_message(event: dict, test: bool = False) -> dict:
                                         "text": level,
                                         "size": "sm",
                                         "weight": "bold",
-                                        "color": "#165823",
+                                        "color": "#5A008F" if severity_color == "#F2FF00" else severity_color,
                                         "align": "center",
                                         "wrap": True,
                                     },
@@ -323,7 +403,7 @@ def flex_message(event: dict, test: bool = False) -> dict:
                         "margin": "md",
                         "paddingAll": "12px",
                         "backgroundColor": "#FFFFFF",
-                        "borderColor": "#FFDADA",
+                        "borderColor": severity_color,
                         "borderWidth": "1px",
                         "cornerRadius": "12px",
                         "contents": [
@@ -337,7 +417,7 @@ def flex_message(event: dict, test: bool = False) -> dict:
                                             "type": "text",
                                             "text": label,
                                             "size": "xs",
-                                            "color": "#165823",
+                                            "color": "#5A008F",
                                             "weight": "bold",
                                             "flex": 2,
                                         },
@@ -370,7 +450,7 @@ def flex_message(event: dict, test: bool = False) -> dict:
                         "type": "button",
                         "style": "primary",
                         "height": "sm",
-                        "color": "#165823",
+                        "color": "#5A008F",
                         "action": {
                             "type": "uri",
                             "label": "ดูตำแหน่งบนแผนที่",
@@ -438,46 +518,3 @@ def main() -> int:
         if not token or not target:
             print("LINE secrets are required for a test alert.", file=sys.stderr)
             return 1
-        test_message_type = os.getenv("TEST_MESSAGE_TYPE", "flex").strip().lower()
-        message = text_test_message() if test_message_type == "text" else flex_message(test_event(), test=True)
-        push_line(token, target, message)
-        print(f"Test {test_message_type} message sent to LINE.")
-        return 0
-
-    request = urllib.request.Request(RSS_URL, headers={"User-Agent": "IEAT-eMonitoring/2.0"})
-    try:
-        with urllib.request.urlopen(request, timeout=30) as response:
-            events = parse_feed(response.read())
-    except (urllib.error.URLError, ET.ParseError) as error:
-        print(f"Unable to read TMD RSS: {error}", file=sys.stderr)
-        return 1
-    if not events:
-        print("TMD RSS contained no events.")
-        return 0
-
-    state, latest_id = load_state(), events[0]["id"]
-    previous_id = state.get("last_seen_id")
-    if not previous_id:
-        save_state(latest_id)
-        print("Initialized state from the latest event; no historical alert was sent.")
-        return 0
-    new_events = []
-    for event in events:
-        if event["id"] == previous_id:
-            break
-        new_events.append(event)
-    sent = 0
-    if token and target:
-        for event in reversed(new_events):
-            if qualifies(event):
-                push_line(token, target, flex_message(event))
-                sent += 1
-    elif new_events:
-        print("LINE secrets are missing; new events were recorded without sending.", file=sys.stderr)
-    save_state(latest_id)
-    print(f"Checked {len(events)} events; found {len(new_events)} new; sent {sent}.")
-    return 0
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())
