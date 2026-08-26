@@ -2,6 +2,11 @@ name: Update ThaiWater map snapshot
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/capture-thaiwater-map.mjs"
+      - ".github/workflows/update_thaiwater_map.yml"
   schedule:
     - cron: "17 */3 * * *"
 
