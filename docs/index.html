@@ -800,7 +800,18 @@ html,body{margin:0;background:#F5F6F8!important;color:var(--summary-ink)!importa
   .station-actions{display:flex;gap:6px;margin-top:7px}
   .station-link{padding:5px 8px;color:#2569C9;background:#F1F6FF;border-radius:7px;text-decoration:none;font-size:10px}
   .panel-note{padding:0 12px 12px;color:var(--ui-muted);font-size:10px}
-  @media(max-width:480px){.data-context{grid-template-columns:1fr}.detail-tools{padding:10px}.context-value{font-size:13px}}
+  .action-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+  .action-link{display:flex;align-items:center;justify-content:center;min-height:46px;padding:10px 8px;color:var(--ui-purple-dark);background:#fff;border:1px solid #E5D8EC;border-radius:10px;text-align:center;text-decoration:none;font-size:12px;font-weight:800}
+  .action-link.primary{color:#fff;background:var(--ui-purple);border-color:var(--ui-purple)}
+  .action-link.danger{color:#A33642;background:#FFF2F2;border-color:#F4D2D6}
+  .kpi.online{border-left-color:#159B6B}.kpi.online .kpi-number{color:#087651}
+  .kpi.offline{border-left-color:#E85D04}.kpi.offline .kpi-number{color:#C94F05}
+  .kpi.alerts{border-left-color:#D90429}.kpi.alerts .kpi-number{color:#B60727}
+  .station-main{flex:1;overflow-wrap:anywhere}.station-name{font-size:14px;line-height:1.5}
+  .station-meta,.station-detail{font-size:12px;line-height:1.6}
+  .station-alarm{font-size:12px;line-height:1.65}
+  .station-alarm-title{display:block;margin-bottom:4px;color:#8E2633;font-weight:800}
+  @media(max-width:480px){.data-context{grid-template-columns:1fr}.detail-tools{padding:10px}.context-value{font-size:13px}.action-strip{grid-template-columns:1fr}.action-link{font-size:13px}.station{flex-direction:column}.badge{align-self:flex-start}}
 </style>
 </head>
 <body>
@@ -825,6 +836,11 @@ html,body{margin:0;background:#F5F6F8!important;color:var(--summary-ink)!importa
   <div id="noticeMark" class="notice-mark">✓</div>
   <div><strong id="statusTitle">กำลังตรวจสอบสถานการณ์</strong><span id="statusText">โปรดรอสักครู่</span></div>
 </section>
+<nav class="action-strip" aria-label="ทางลัดสำหรับเจ้าหน้าที่">
+  <a class="action-link primary" href="#alert-stations">ดูสถานีที่ต้องติดตาม</a>
+  <a class="action-link danger" href="#offline-stations">ตรวจสอบสถานีออฟไลน์</a>
+  <a class="action-link" href="./stations.html">เปิดรายงานสถานีทั้งหมด</a>
+</nav>
 <section class="data-context">
   <article class="context-item"><div class="context-label">เวลาข้อมูลล่าสุดจากสถานี</div><div id="latestDataTime" class="context-value">—</div></article>
   <article class="context-item"><div class="context-label">รายการพารามิเตอร์แจ้งเตือน</div><div id="parameterCount" class="context-value">—</div></article>
@@ -862,28 +878,28 @@ html,body{margin:0;background:#F5F6F8!important;color:var(--summary-ink)!importa
 </section>
 <div class="section-heading"><h2>นิคมอุตสาหกรรมที่พบค่าเกินมาตรฐาน</h2><p>รวบรวมจากสถานีที่มี ParameterAlram ในข้อมูลล่าสุด</p></div>
 <section class="chart-card"><div id="alertEstateList" class="alert-estates"><span class="loading">กำลังโหลดข้อมูล…</span></div></section>
-<div class="section-heading"><h2>การกระจายสถานีตามพื้นที่</h2><p>5 นิคมอุตสาหกรรมที่มีจำนวนสถานีมากที่สุด</p></div>
-<section class="chart-card"><div id="estateList" class="estate-list"></div></section>
-<div class="section-heading"><h2>ประเภทสถานี</h2><p>แยกตามระบบตรวจวัดสิ่งแวดล้อม</p></div>
-<section class="types">
+<div class="section-heading summary-only-remove"><h2>การกระจายสถานีตามพื้นที่</h2><p>5 นิคมอุตสาหกรรมที่มีจำนวนสถานีมากที่สุด</p></div>
+<section class="chart-card summary-only-remove"><div id="estateList" class="estate-list"></div></section>
+<div class="section-heading summary-only-remove"><h2>ประเภทสถานี</h2><p>แยกตามระบบตรวจวัดสิ่งแวดล้อม</p></div>
+<section class="types summary-only-remove">
   <article class="type"><div><div class="type-code">AQMs</div><div class="type-name">คุณภาพอากาศ</div></div><div id="aqm" class="type-number">—</div></article>
   <article class="type"><div><div class="type-code">WQMs</div><div class="type-name">คุณภาพน้ำ</div></div><div id="wqm" class="type-number">—</div></article>
   <article class="type"><div><div class="type-code">CEMs</div><div class="type-name">การระบายมลพิษ</div></div><div id="cem" class="type-number">—</div></article>
 </section>
-<div class="section-heading"><h2>ระดับสถานการณ์</h2><p>จำนวนสถานีแยกตามระดับการติดตาม</p></div>
-<section class="severity">
+<div class="section-heading summary-only-remove"><h2>ระดับสถานการณ์</h2><p>จำนวนสถานีแยกตามระดับการติดตาม</p></div>
+<section class="severity summary-only-remove">
   <article class="sev urgent"><div class="sev-label">เกินค่ามาตรฐาน</div><div id="urgent" class="sev-number">—</div></article>
   <article class="sev watch"><div class="sev-label">เฝ้าระวัง</div><div id="watch" class="sev-number">—</div></article>
   <article class="sev follow"><div class="sev-label">ติดตามสถานการณ์</div><div id="follow" class="sev-number">—</div></article>
 </section>
-<div class="section-heading"><h2>สถานีที่ต้องติดตาม</h2><p>แสดงรายการล่าสุดไม่เกิน 8 สถานี</p></div>
+<div id="alert-stations" class="section-heading"><h2>สถานีที่ต้องติดตาม</h2><p>รายการแจ้งเตือนทั้งหมด เรียงสำหรับตรวจสอบและดำเนินการต่อ</p></div>
 <section class="card panel">
   <div class="panel-head"><h3>รายการสถานี</h3><span id="stationCount">0 รายการ</span></div>
   <div class="detail-tools"><input id="stationSearch" class="detail-search" type="search" placeholder="ค้นหาสถานี นิคมฯ ประเภท หรือพารามิเตอร์" oninput="renderAlertStations(this.value)"></div>
   <div class="panel-body"><div id="stationList" class="station-list"><div class="loading">กำลังโหลดข้อมูล…</div></div></div>
   <div class="panel-note">แสดงข้อมูลสถานีที่มีรายการแจ้งเตือนทั้งหมดจาก status.json</div>
 </section>
-<div class="section-heading"><h2>สถานีออฟไลน์</h2><p>ตรวจสอบสถานีที่ไม่อยู่ในสถานะ ONLINE</p></div>
+<div id="offline-stations" class="section-heading"><h2>สถานีออฟไลน์</h2><p>ตรวจสอบสถานีที่หยุดส่งข้อมูลหรือไม่อยู่ในสถานะ ONLINE</p></div>
 <section class="card panel">
   <div class="panel-head"><h3>รายการสถานีออฟไลน์</h3><span id="offlineStationCount">0 รายการ</span></div>
   <div class="detail-tools"><input id="offlineSearch" class="detail-search" type="search" placeholder="ค้นหาสถานีออฟไลน์หรือนิคมฯ" oninput="renderOfflineStations(this.value)"></div>
@@ -931,7 +947,7 @@ function stationCard(s,showAlarm=true){
   const estate=s.estate_name||s.IndustryZone||"-";
   const lat=Number(s.latitude),lon=Number(s.longitude);
   const map=(Number.isFinite(lat)&&Number.isFinite(lon))?'https://www.google.com/maps/search/?api=1&query='+lat+','+lon:"";
-  return '<div class="station"><div class="station-main"><div class="station-name">'+esc(s.station_name||"-")+'</div><div class="station-meta">'+esc(s.station_type||"-")+' • '+esc(estate)+'</div><div class="station-detail">ข้อมูลล่าสุด: '+esc(updated)+'</div>'+(showAlarm&&alarm&&alarm!=="-"?'<div class="station-alarm"><details><summary>ดูพารามิเตอร์ที่ต้องติดตาม</summary><div class="station-alarm-text">'+esc(alarm)+'</div></details></div>':'')+(map?'<div class="station-actions"><a class="station-link" href="'+map+'" target="_blank" rel="noopener">ดูตำแหน่ง</a></div>':'')+'</div><span class="badge '+(online?"online":"offline")+'">'+(online?"ออนไลน์":esc(status))+'</span></div>'
+  return '<div class="station"><div class="station-main"><div class="station-name">'+esc(s.station_name||"-")+'</div><div class="station-meta">'+esc(s.station_type||"-")+' • '+esc(estate)+'</div><div class="station-detail">ข้อมูลล่าสุด: '+esc(updated)+'</div>'+(showAlarm&&alarm&&alarm!=="-"?'<div class="station-alarm"><span class="station-alarm-title">พารามิเตอร์ที่ต้องติดตาม</span><div class="station-alarm-text">'+esc(alarm)+'</div></div>':'')+(map?'<div class="station-actions"><a class="station-link" href="'+map+'" target="_blank" rel="noopener">ดูตำแหน่ง</a></div>':'')+'</div><span class="badge '+(online?"online":"offline")+'">'+(online?"ออนไลน์":esc(status))+'</span></div>'
 }
 function renderAlertStations(query=""){
   const q=String(query||"").trim().toLowerCase();
