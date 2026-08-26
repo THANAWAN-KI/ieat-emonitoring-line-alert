@@ -11,7 +11,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
   <script src="data/thaiwater_latest.js?v=20260821-3"></script>
   <script src="flood-live-data.js?v=20260821-8" defer></script>
-  <script src="flood-export.js?v=20260821-1" defer></script>
+  <script src="data/thaiwater-map-meta.js" defer></script>\n  <script src="flood-export.js?v=20260821-1" defer></script>
   <style>
     :root{--purple:#6B4B7D;--blue:#1769C2;--cyan:#81D4FA;--teal:#66BB6A;--ink:#283142;--muted:#697386;--bg:#F6F6F4;--line:#E5E2E8;--soft:#F5F1F7;--white:#FFFFFF;--red:#B0005A;--orange:#F6BB42;--green:#58B957}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Kanit","IBM Plex Sans Thai",sans-serif;font-size:16px;font-weight:400}button,input,select,textarea{font:inherit}
@@ -139,7 +139,7 @@
           <div class="executive-main">
             <section class="executive-map-card">
               <div class="report-section-head"><div><b id="reportMapTitle">แผนที่พื้นที่เสี่ยงน้ำท่วมฉับพลัน 24 ชั่วโมง</b><small>คลิกเลือกช่วง 24/48 ชั่วโมงก่อนดาวน์โหลด</small></div><span class="risk-key"><i></i>พื้นที่เฝ้าระวัง</span></div>
-              <div class="info-map"><img id="infographicMap" alt="แผนที่พื้นที่เสี่ยงน้ำท่วมฉับพลัน" hidden><div class="map-placeholder" id="mapPlaceholder">กำลังจัดทำภาพแผนที่พื้นที่เสี่ยง…</div></div>
+              <div class="info-map"><img id="infographicMap" src="assets/thaiwater-overall-latest.png" alt="แผนที่พื้นฐานติดตามสถานการณ์น้ำประเทศไทยจาก ThaiWater"><div class="map-placeholder" id="mapPlaceholder" hidden>กำลังโหลดภาพแผนที่ ThaiWater ล่าสุด…</div><div class="thaiwater-map-credit">แหล่งข้อมูล: ThaiWater / สถาบันสารสนเทศทรัพยากรน้ำ (สสน.) • ชั้นข้อมูลฝนและพายุ</div></div>
             </section>
             <aside class="executive-side">
               <section class="report-list-card"><h3>จังหวัดที่ต้องเฝ้าระวัง</h3><div id="reportProvinceRanking" class="report-ranking"><p>กำลังโหลดข้อมูล…</p></div></section>
@@ -319,10 +319,13 @@
       $("generatedAt").textContent="จัดทำ "+new Date().toLocaleString("th-TH");
     }
     async function updateMapShot(){
-      const reportView=warningView||view;if(!reportView)return;
-      const period=window.reportPeriod||"24h",layers=window.warningLayers||{};
-      if(layers["24h"])layers["24h"].visible=period==="24h";if(layers["48h"])layers["48h"].visible=period==="48h";
-      try{const active=layers[period];if(active){await active.load();const extent=await active.queryExtent();if(extent.extent)await reportView.goTo(extent.extent.expand(1.2),{animate:false})}reportView.resize();await new Promise(resolve=>setTimeout(resolve,500));const shot=await reportView.takeScreenshot({format:"png",quality:100});$("infographicMap").src=shot.dataUrl;$("infographicMap").hidden=false;$("mapPlaceholder").hidden=true}catch(e){console.warn("Map screenshot unavailable",e)}
+      const image=$("infographicMap"),placeholder=$("mapPlaceholder");
+      const stamp=window.THAIWATER_MAP_META?.updatedAt||new Date().toISOString();
+      image.src="assets/thaiwater-overall-latest.png?v="+encodeURIComponent(stamp);
+      image.alt="แผนที่พื้นฐานติดตามสถานการณ์น้ำประเทศไทยจาก ThaiWater";
+      image.hidden=false;placeholder.hidden=true;
+      image.onerror=()=>{image.hidden=true;placeholder.hidden=false;placeholder.textContent="ยังไม่มีภาพแผนที่ ThaiWater ล่าสุด กรุณารอระบบอัปเดตภาพอัตโนมัติ"};
+      image.onload=()=>{image.hidden=false;placeholder.hidden=true};
     }
     async function prepareReportExport(){renderExecutiveReport(window.reportPeriod||"24h");await updateMapShot()}window.updateMapShot=updateMapShot;window.prepareReportExport=prepareReportExport;
     document.querySelectorAll("[data-report-period]").forEach(button=>button.onclick=async()=>{window.reportPeriod=button.dataset.reportPeriod;renderExecutiveReport(window.reportPeriod);await updateMapShot()});
