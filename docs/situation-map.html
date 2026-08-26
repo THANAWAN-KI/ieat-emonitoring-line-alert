@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#5A008F">
+<title>แผนที่สถานการณ์ | EMCC Disaster</title>
+<link rel="preconnect" href="https://unpkg.com">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap");
+:root{--purple:#5a008f;--purple-dark:#3d0061;--purple-soft:#f5edf9;--red:#e11d48;--orange:#e64c00;--yellow:#e8b900;--green:#25a244;--ink:#24262d;--muted:#6b7280;--line:#dfe3e8;--bg:#eef1f4}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Sarabun",Tahoma,sans-serif}.app{max-width:1500px;margin:auto}.top{display:flex;align-items:center;gap:13px;padding:12px 18px;background:#fff;border-bottom:1px solid var(--line)}.logo{width:54px;height:54px;object-fit:contain}.top h1{margin:0;font-size:21px}.top p{margin:2px 0 0;color:var(--muted);font-size:12px}.workspace{display:grid;grid-template-columns:340px 1fr;gap:14px;padding:14px}.panel,.sheet{background:#fff;border:1px solid var(--line);border-radius:15px;box-shadow:0 8px 22px #2c26340d}.panel{padding:15px;height:max-content;position:sticky;top:10px}.panel h2{margin:0 0 12px;color:var(--purple-dark);font-size:17px}.field{margin-bottom:10px}.field label{display:block;margin-bottom:4px;color:#555b65;font-size:12px;font-weight:700}.control{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-size:13px}.control:focus{outline:0;border-color:var(--purple);box-shadow:0 0 0 3px #5a008f18}.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}.actions{display:grid;gap:8px;margin-top:13px}.btn{padding:11px;border:0;border-radius:9px;font:700 13px inherit;cursor:pointer}.primary{background:var(--purple);color:#fff}.secondary{background:var(--purple-soft);color:var(--purple);border:1px solid #dac6e5}.note{margin:10px 0 0;color:var(--muted);font-size:10px;line-height:1.45}.sheet{padding:18px}.report-title{text-align:center;border:2px solid #24262d;border-bottom:0;padding:12px 10px}.report-title h2{margin:0;font-size:23px}.report-title p{margin:3px 0 0;color:var(--muted);font-size:13px}.map-wrap{position:relative;border:2px solid #24262d;height:690px;background:#e8edf1}.map{height:100%;width:100%}.badge{position:absolute;z-index:500;top:12px;left:50%;transform:translateX(-50%);padding:7px 12px;border-radius:8px;background:#ffffffee;box-shadow:0 2px 9px #0002;font-weight:700;font-size:12px;white-space:nowrap}.legend{position:absolute;z-index:500;left:12px;bottom:14px;padding:10px 12px;background:#fffffff2;border:1px solid #444;border-radius:5px;font-size:11px;line-height:1.7}.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:7px}.summary{display:grid;grid-template-columns:1fr 1fr;border:2px solid #24262d;border-top:0}.summary section{padding:13px 16px;min-height:165px}.summary section+section{border-left:1px solid var(--line)}.summary h3{margin:0 0 7px;color:var(--purple-dark);font-size:15px}.summary p{margin:3px 0;font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere}.foot{display:flex;justify-content:space-between;gap:20px;padding:10px 3px;color:var(--muted);font-size:10px}.leaflet-control-attribution{font-size:9px}.incident-pin{filter:drop-shadow(0 2px 2px #0006)}
+@media(max-width:850px){.workspace{grid-template-columns:1fr}.panel{position:static}.map-wrap{height:560px}.summary{grid-template-columns:1fr}.summary section+section{border-left:0;border-top:1px solid var(--line)}}
+@media print{body{background:#fff}.top,.panel{display:none}.workspace{display:block;padding:0}.sheet{border:0;box-shadow:none;padding:0}.map-wrap{height:720px}.leaflet-control-container{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top"><img class="logo" src="./assets/TH-Vertical.png" alt="กนอ."><div><h1>แผนที่สถานการณ์ภัยพิบัติและเหตุฉุกเฉิน</h1><p>เครื่องมือสนับสนุนการปฏิบัติงาน EMCC • กำหนดจุดเหตุและส่งออกแผนที่ PNG</p></div></header>
+<main class="workspace">
+<aside class="panel">
+<h2>ข้อมูลสำหรับแผนที่</h2>
+<div class="field"><label for="title">ชื่อเหตุการณ์</label><input id="title" class="control" value="แผนที่สถานการณ์ภัยพิบัติและเหตุฉุกเฉิน"></div>
+<div class="field"><label for="type">ประเภทเหตุ</label><select id="type" class="control"><option value="fire">เหตุโรงงาน ไฟไหม้ และสารเคมี</option><option value="flood">ฝนหนัก น้ำท่วม และน้ำป่า</option><option value="quake">แผ่นดินไหวและสึนามิ</option><option value="storm">พายุและอากาศรุนแรง</option><option value="hotspot">ไฟป่า จุดความร้อน และหมอกควัน</option><option value="drought">ภัยแล้งและสถานการณ์น้ำ</option><option value="other">เหตุฉุกเฉินอื่น</option></select></div>
+<div class="row"><div class="field"><label for="lat">ละติจูด</label><input id="lat" class="control" type="number" step="any" value="13.7563"></div><div class="field"><label for="lng">ลองจิจูด</label><input id="lng" class="control" type="number" step="any" value="100.5018"></div></div>
+<div class="field"><label for="radius">รัศมีเฝ้าระวัง (กม.)</label><input id="radius" class="control" type="number" min="0" max="500" step="0.5" value="5"></div>
+<div class="field"><label for="locationText">สถานที่/บริษัท/นิคม</label><input id="locationText" class="control" placeholder="ระบุสถานที่เกิดเหตุ"></div>
+<div class="field"><label for="situation">สถานการณ์ล่าสุด</label><textarea id="situation" class="control" rows="4" placeholder="รายละเอียดเหตุ ผลกระทบ และแนวโน้ม"></textarea></div>
+<div class="field"><label for="operation">การดำเนินการ/ข้อเสนอแนะ</label><textarea id="operation" class="control" rows="4" placeholder="การควบคุมเหตุ หน่วยงานที่ประสาน และข้อเสนอแนะ"></textarea></div>
+<div class="field"><label for="source">แหล่งข้อมูล</label><input id="source" class="control" value="ข้อมูลที่เจ้าหน้าที่ตรวจสอบแล้ว"></div>
+<div class="actions"><button class="btn secondary" id="locate" type="button">ใช้ตำแหน่งปัจจุบัน</button><button class="btn secondary" id="report" type="button">กลับไปจัดทำรายงาน</button><button class="btn primary" id="export" type="button">ส่งออกแผนที่ PNG</button></div>
+<p class="note">คลิกบนแผนที่เพื่อย้ายจุดเกิดเหตุ ก่อนนำไปใช้ควรตรวจสอบพิกัด เวลา และข้อมูลกับหน่วยงานต้นทางทุกครั้ง</p>
+</aside>
+<article class="sheet" id="capture">
+<div class="report-title"><h2 id="outTitle">แผนที่สถานการณ์ภัยพิบัติและเหตุฉุกเฉิน</h2><p id="outDate"></p></div>
+<div class="map-wrap"><div id="map" class="map"></div><div class="badge" id="badge">จุดเกิดเหตุ • รัศมีเฝ้าระวัง 5 กม.</div><div class="legend"><b>สัญลักษณ์</b><br><span class="dot" id="legendDot"></span>จุดเกิดเหตุ<br><span class="dot" style="background:#5a008f55;border:2px solid #5a008f"></span>พื้นที่เฝ้าระวัง</div></div>
+<div class="summary"><section><h3>สรุปสถานการณ์</h3><p id="outType"></p><p id="outLocation"></p><p id="outSituation">ยังไม่มีรายละเอียด</p></section><section><h3>การดำเนินการและข้อเสนอแนะ</h3><p id="outOperation">อยู่ระหว่างตรวจสอบข้อมูล</p><p><b>พิกัด:</b> <span id="outCoords"></span></p><p><b>แหล่งข้อมูล:</b> <span id="outSource"></span></p></section></div>
+<div class="foot"><span>EMCC • การนิคมอุตสาหกรรมแห่งประเทศไทย</span><span>แผนที่เพื่อสนับสนุนการปฏิบัติงาน โปรดตรวจสอบข้อมูลก่อนตัดสินใจ</span></div>
+</article>
+</main></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+const $=id=>document.getElementById(id),params=new URLSearchParams(location.search);
+const typeLabels={fire:"เหตุโรงงาน ไฟไหม้ และสารเคมี",flood:"ฝนหนัก น้ำท่วม และน้ำป่า",quake:"แผ่นดินไหวและสึนามิ",storm:"พายุและอากาศรุนแรง",hotspot:"ไฟป่า จุดความร้อน และหมอกควัน",drought:"ภัยแล้งและสถานการณ์น้ำ",other:"เหตุฉุกเฉินอื่น"};
+const colors={fire:"#e11d48",flood:"#1677c8",quake:"#e64c00",storm:"#5a008f",hotspot:"#ff5a00",drought:"#b7791f",other:"#4b5563"};
+for(const id of ["title","type","lat","lng","radius","locationText","situation","operation","source"]){if(params.has(id))$(id).value=params.get(id)}
+if(params.has("location"))$("locationText").value=params.get("location");if(params.has("details"))$("situation").value=params.get("details");if(params.has("actions"))$("operation").value=params.get("actions");
+const map=L.map("map",{preferCanvas:true}).setView([+$('lat').value,+$('lng').value],6);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,crossOrigin:true,attribution:"© OpenStreetMap contributors"}).addTo(map);
+let marker=L.circleMarker([+$('lat').value,+$('lng').value],{radius:9,color:"#fff",weight:3,fillOpacity:1,className:"incident-pin"}).addTo(map),zone=L.circle(marker.getLatLng(),{weight:2,fillOpacity:.14}).addTo(map);
+function thaiDate(){return new Date().toLocaleString("th-TH",{timeZone:"Asia/Bangkok",dateStyle:"long",timeStyle:"short"})+" น."}
+function update(){let lat=parseFloat($('lat').value),lng=parseFloat($('lng').value),r=Math.max(0,parseFloat($('radius').value)||0),color=colors[$('type').value];if(!Number.isFinite(lat)||!Number.isFinite(lng))return;marker.setLatLng([lat,lng]).setStyle({fillColor:color});zone.setLatLng([lat,lng]).setRadius(r*1000).setStyle({color:"#5a008f",fillColor:"#5a008f"});$('legendDot').style.background=color;$('outTitle').textContent=$('title').value||"แผนที่สถานการณ์";$('outDate').textContent="จัดทำ ณ "+thaiDate();$('badge').textContent="จุดเกิดเหตุ • รัศมีเฝ้าระวัง "+r.toLocaleString("th-TH")+" กม.";$('outType').innerHTML="<b>ประเภทเหตุ:</b> "+typeLabels[$('type').value];$('outLocation').innerHTML="<b>สถานที่:</b> "+($('locationText').value||"อยู่ระหว่างตรวจสอบ");$('outSituation').textContent=$('situation').value||"ยังไม่มีรายละเอียด";$('outOperation').textContent=$('operation').value||"อยู่ระหว่างตรวจสอบข้อมูล";$('outCoords').textContent=lat.toFixed(5)+", "+lng.toFixed(5);$('outSource').textContent=$('source').value||"-";marker.bindPopup("<b>"+typeLabels[$('type').value]+"</b><br>"+($('locationText').value||"จุดเกิดเหตุ"))}
+document.querySelectorAll(".control").forEach(el=>el.addEventListener("input",update));map.on("click",e=>{$('lat').value=e.latlng.lat.toFixed(6);$('lng').value=e.latlng.lng.toFixed(6);update()});
+$('locate').onclick=()=>{if(!navigator.geolocation)return alert("อุปกรณ์นี้ไม่รองรับตำแหน่งปัจจุบัน");navigator.geolocation.getCurrentPosition(p=>{$('lat').value=p.coords.latitude.toFixed(6);$('lng').value=p.coords.longitude.toFixed(6);update();map.setView([p.coords.latitude,p.coords.longitude],13)},()=>alert("ไม่สามารถอ่านตำแหน่งได้ กรุณาอนุญาตการเข้าถึงตำแหน่ง"))};
+$('report').onclick=()=>{const q=new URLSearchParams({type:typeLabels[$('type').value],location:$('locationText').value,details:$('situation').value,actions:$('operation').value,source:$('source').value});location.href="emcc-report.html?"+q};
+$('export').onclick=async()=>{const b=$('export');b.disabled=true;b.textContent="กำลังสร้าง PNG…";try{update();map.invalidateSize();await new Promise(r=>setTimeout(r,700));await document.fonts.ready;const canvas=await html2canvas($('capture'),{useCORS:true,allowTaint:false,backgroundColor:"#ffffff",scale:2,logging:false});const a=document.createElement("a");a.download="EMCC-Situation-Map-"+new Date().toISOString().slice(0,10)+".png";a.href=canvas.toDataURL("image/png",1);a.click()}catch(e){console.error(e);alert("สร้าง PNG ไม่สำเร็จ อาจเกิดจากการเชื่อมต่อแผนที่ กรุณาลองใหม่")}finally{b.disabled=false;b.textContent="ส่งออกแผนที่ PNG"}};
+update();setTimeout(()=>map.invalidateSize(),200);
+</script>
+</body>
+</html>
