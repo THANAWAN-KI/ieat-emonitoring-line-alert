@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#5A008F">
+<title>จัดทำรายงานเหตุ | EMCC Disaster</title>
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap");
+:root{--purple:#5A008F;--purple-dark:#410066;--purple-soft:#F5EDF9;--red:#D90429;--orange:#E85D04;--green:#2E9E45;--ink:#292B31;--muted:#707681;--line:#E3E5EA;--bg:#F5F6F8}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Sarabun",Tahoma,sans-serif;line-height:1.55}.page{max-width:920px;min-height:100vh;margin:auto;background:#FAFBFC}.header{display:flex;align-items:center;gap:13px;padding:14px 20px;background:#fff;border-bottom:1px solid var(--line)}.logo{width:58px;height:58px;object-fit:contain}.header h1{margin:0;font-size:22px}.header p{margin:3px 0 0;color:var(--muted);font-size:12px}.content{padding:18px}.hero{padding:18px;color:#fff;background:linear-gradient(135deg,var(--purple-dark),var(--purple));border-radius:14px}.hero h2{margin:0;font-size:24px}.hero p{margin:5px 0 0;color:#ffffffd6;font-size:13px}.form-card{margin-top:12px;padding:17px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 6px 18px rgba(43,45,55,.05)}.section-title{margin:20px 0 9px;color:var(--purple-dark);font-size:17px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field.full{grid-column:1/-1}.field label{display:block;margin-bottom:5px;color:#555A65;font-size:12px;font-weight:700}.control{width:100%;padding:11px 12px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:9px;font:inherit;font-size:14px;outline:none}.control:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(90,0,143,.1)}textarea.control{min-height:92px;resize:vertical}.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px}.button{padding:13px;border:0;border-radius:9px;font:800 14px inherit;cursor:pointer}.primary{color:#fff;background:var(--purple)}.secondary{color:var(--purple);background:var(--purple-soft);border:1px solid #DDCBE8}.hint{margin-top:10px;color:var(--muted);font-size:11px}.preview{margin-top:14px;padding:17px;background:#fff;border:1px solid var(--line);border-left:5px solid var(--purple);border-radius:12px}.preview h3{margin:0;color:var(--purple-dark)}.preview-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;margin-top:12px}.preview-item span{display:block;color:var(--muted);font-size:10px}.preview-item strong{display:block;margin-top:2px;font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere}.footer{padding:18px;color:var(--muted);text-align:center;font-size:11px}
+@media(max-width:620px){.content{padding:12px}.header{padding:10px 12px}.logo{width:48px;height:48px}.header h1{font-size:18px}.grid,.actions,.preview-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.hero h2{font-size:21px}}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="header"><img class="logo" src="./assets/TH-Vertical.png" alt="กนอ."><div><h1>ระบบจัดทำรายงานเหตุ EMCC</h1><p>ตรวจสอบ แก้ไข และส่งออกรายงานตามประเภทเหตุเป็น PNG</p></div></header>
+<main class="content">
+<section class="hero"><h2>รายงานสถานการณ์ภัยพิบัติและเหตุฉุกเฉิน</h2><p>ข้อมูลจาก LINE จะถูกกรอกให้อัตโนมัติ กรุณาตรวจสอบกับแหล่งข้อมูลทางการก่อนส่งออกรายงาน</p></section>
+<section class="form-card">
+<h2 class="section-title">ข้อมูลเหตุการณ์</h2>
+<div class="grid">
+<div class="field"><label for="type">ประเภทเหตุ</label><select id="type" class="control"><option>แผ่นดินไหวและสึนามิ</option><option>พายุและอากาศรุนแรง</option><option>ฝนหนัก น้ำท่วม และน้ำป่า</option><option>ไฟป่า จุดความร้อน และหมอกควัน</option><option>เหตุโรงงาน ไฟไหม้ และสารเคมี</option><option>ภัยแล้งและสถานการณ์น้ำ</option><option>เหตุฉุกเฉินอื่น</option></select></div>
+<div class="field"><label for="time">วันและเวลา</label><input id="time" class="control"></div>
+<div class="field"><label for="company">บริษัท/สถานประกอบการ</label><input id="company" class="control" placeholder="ชื่อบริษัท"></div>
+<div class="field"><label for="estate">นิคมอุตสาหกรรม</label><input id="estate" class="control" placeholder="ชื่อนิคมอุตสาหกรรม"></div>
+<div class="field full"><label for="location">สถานที่เกิดเหตุ</label><input id="location" class="control" placeholder="อาคาร จุดเกิดเหตุ จังหวัด หรือพิกัด"></div>
+<div class="field full"><label for="details">รายละเอียดและสถานการณ์ล่าสุด</label><textarea id="details" class="control"></textarea></div>
+<div class="field full"><label for="impact">ผลกระทบที่พบ/คาดการณ์</label><textarea id="impact" class="control" placeholder="ผู้บาดเจ็บ พื้นที่ได้รับผลกระทบ ระบบสาธารณูปโภค ทิศทางลม"></textarea></div>
+<div class="field full"><label for="actions">การดำเนินการและหน่วยงานที่ประสานแล้ว</label><textarea id="actions" class="control" placeholder="การอพยพ ตัดไฟ ปิดวาล์ว หน่วยงานที่รับเรื่อง"></textarea></div>
+<div class="field full"><label for="analysis">การวิเคราะห์และข้อเสนอแนะสนับสนุน</label><textarea id="analysis" class="control"></textarea></div>
+<div class="field"><label for="source">แหล่งข้อมูล</label><input id="source" class="control"></div>
+<div class="field"><label for="sourceUrl">ลิงก์ข้อมูลต้นทาง</label><input id="sourceUrl" class="control" type="url"></div>
+<div class="field"><label for="reporter">ผู้จัดทำรายงาน</label><input id="reporter" class="control" placeholder="ชื่อเจ้าหน้าที่"></div>
+<div class="field"><label for="status">สถานะ</label><select id="status" class="control"><option>เฝ้าระวัง</option><option>กำลังตรวจสอบ</option><option>กำลังดำเนินการ</option><option>ควบคุมเหตุได้แล้ว</option><option>ปิดเหตุ</option></select></div>
+</div>
+<div class="actions"><button class="button secondary" type="button" onclick="updatePreview()">อัปเดตตัวอย่าง</button><button id="exportButton" class="button primary" type="button" onclick="exportPng()">ส่งออกรายงาน PNG</button></div>
+<p class="hint">ไฟล์ PNG จะถูกสร้างในเครื่องของผู้ใช้ ไม่มีการอัปโหลดข้อมูลรายงานไปยังเซิร์ฟเวอร์</p>
+</section>
+<section class="preview"><h3>ตัวอย่างข้อมูลรายงาน</h3><div id="previewGrid" class="preview-grid"></div></section>
+</main>
+<footer class="footer">ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย กนอ. • ข้อมูลเพื่อสนับสนุนการปฏิบัติงาน</footer>
+</div>
+<script>
+const ids=["type","time","company","estate","location","details","impact","actions","analysis","source","sourceUrl","reporter","status"];
+const labels={type:"ประเภทเหตุ",time:"วันและเวลา",company:"บริษัท/สถานประกอบการ",estate:"นิคมอุตสาหกรรม",location:"สถานที่เกิดเหตุ",details:"สถานการณ์ล่าสุด",impact:"ผลกระทบ",actions:"การดำเนินการ",analysis:"วิเคราะห์และข้อเสนอแนะ",source:"แหล่งข้อมูล",reporter:"ผู้จัดทำ",status:"สถานะ"};
+const $=id=>document.getElementById(id);
+const params=new URLSearchParams(location.search);
+ids.forEach(id=>{if(params.has(id))$(id).value=params.get(id)});
+if(!params.has("time"))$("time").value=new Date().toLocaleString("th-TH",{timeZone:"Asia/Bangkok"});
+function values(){return Object.fromEntries(ids.map(id=>[id,$(id).value.trim()]))}
+function updatePreview(){const v=values();$("previewGrid").innerHTML=Object.entries(labels).map(([key,label])=>'<div class="preview-item"><span>'+escapeHtml(label)+'</span><strong>'+escapeHtml(v[key]||"-")+'</strong></div>').join("")}
+function escapeHtml(v){return String(v||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
+function wrap(ctx,text,x,y,maxWidth,lineHeight,maxLines=8){const words=String(text||"-").split(/\s+/);let line="",lines=[];for(const word of words){const test=line?line+" "+word:word;if(ctx.measureText(test).width>maxWidth&&line){lines.push(line);line=word}else line=test}if(line)lines.push(line);lines.slice(0,maxLines).forEach((l,i)=>ctx.fillText(i===maxLines-1&&lines.length>maxLines?l+"…":l,x,y+i*lineHeight));return Math.min(lines.length,maxLines)*lineHeight}
+function round(ctx,x,y,w,h,r,fill,stroke){ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=2;ctx.stroke()}}
+async function exportPng(){
+ const b=$("exportButton");b.disabled=true;b.textContent="กำลังสร้าง PNG…";
+ try{await document.fonts.ready;const v=values(),canvas=document.createElement("canvas");canvas.width=1240;canvas.height=1754;const c=canvas.getContext("2d");c.fillStyle="#F5F6F8";c.fillRect(0,0,1240,1754);
+ c.fillStyle="#5A008F";c.fillRect(0,0,1240,150);c.fillStyle="#fff";c.font='800 36px "Sarabun",Tahoma';c.fillText("รายงานสถานการณ์ภัยพิบัติและเหตุฉุกเฉิน",48,38);c.font='500 20px "Sarabun",Tahoma';c.fillText("EMCC • การนิคมอุตสาหกรรมแห่งประเทศไทย",48,94);
+ round(c,35,180,1170,180,18,"#FFFFFF","#E3E5EA");c.fillStyle="#5A008F";c.font='800 28px "Sarabun",Tahoma';wrap(c,v.type,62,210,760,38,2);c.fillStyle="#34363D";c.font='600 18px "Sarabun",Tahoma';c.fillText("สถานะ: "+(v.status||"-"),62,300);c.textAlign="right";c.fillStyle="#707681";c.fillText(v.time||"-",1170,220);c.textAlign="left";
+ const sections=[["บริษัท/พื้นที่",[v.company,v.estate,v.location].filter(Boolean).join(" • ")],["สถานการณ์ล่าสุด",v.details],["ผลกระทบ",v.impact],["การดำเนินการ",v.actions],["การวิเคราะห์และข้อเสนอแนะ",v.analysis]];
+ let y=390;for(const [title,text] of sections){const h=title==="บริษัท/พื้นที่"?125:220;round(c,35,y,1170,h,15,"#FFFFFF","#E3E5EA");c.fillStyle="#5A008F";c.fillRect(35,y,7,h);c.fillStyle="#5A008F";c.font='800 21px "Sarabun",Tahoma';c.fillText(title,62,y+24);c.fillStyle="#34363D";c.font='500 17px "Sarabun",Tahoma';wrap(c,text,62,y+62,1095,29,h===125?2:5);y+=h+18}
+ c.fillStyle="#707681";c.font='500 14px "Sarabun",Tahoma';c.fillText("แหล่งข้อมูล: "+(v.source||"-"),42,1682);c.textAlign="right";c.fillText("ผู้จัดทำ: "+(v.reporter||"-"),1190,1682);c.textAlign="left";c.fillText("โปรดตรวจสอบข้อมูลกับหน่วยงานต้นทางก่อนนำไปใช้ในการตัดสินใจ",42,1715);
+ const blob=await new Promise(r=>canvas.toBlob(r,"image/png",1));if(!blob)throw new Error("PNG");const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="EMCC-"+(v.type||"incident").replace(/\s+/g,"-")+"-"+new Date().toISOString().slice(0,10)+".png";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)
+ }catch(e){console.error(e);alert("ไม่สามารถสร้าง PNG ได้ กรุณาลองใหม่")}finally{b.disabled=false;b.textContent="ส่งออกรายงาน PNG"}
+}
+ids.forEach(id=>$(id).addEventListener("input",updatePreview));updatePreview();
+</script>
+</body>
+</html>
