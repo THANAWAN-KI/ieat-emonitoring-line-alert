@@ -231,7 +231,7 @@ def flex_message(event: dict, test: bool = False) -> dict:
         event.get("title")
         or event.get("description")
         or "ไม่ระบุพื้นที่"
-    )[:180]
+    )
     published = format_publish_time(event.get("published"))
     depth = f"{event['depth']} กม." if event.get("depth") else "ไม่ระบุ"
     coordinates = event.get("coordinates")
@@ -410,8 +410,9 @@ def flex_message(event: dict, test: bool = False) -> dict:
                             *[
                                 {
                                     "type": "box",
-                                    "layout": "horizontal",
+                                    "layout": "vertical",
                                     "margin": "md" if index else "none",
+                                    "spacing": "xs",
                                     "contents": [
                                         {
                                             "type": "text",
@@ -419,16 +420,14 @@ def flex_message(event: dict, test: bool = False) -> dict:
                                             "size": "xs",
                                             "color": "#5A008F",
                                             "weight": "bold",
-                                            "flex": 2,
+                                            "wrap": True,
                                         },
                                         {
                                             "type": "text",
                                             "text": value,
-                                            "size": "xs",
+                                            "size": "sm",
                                             "color": "#252525",
-                                            "weight": "bold",
                                             "wrap": True,
-                                            "flex": 5,
                                         },
                                     ],
                                 }
@@ -557,4 +556,5 @@ def main() -> int:
     save_state(latest_id)
     print(f"Checked {len(events)} events; found {len(new_events)} new; sent {sent}.")
     return 0
+
 
