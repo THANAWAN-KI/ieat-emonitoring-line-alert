@@ -37,6 +37,13 @@
     if($("forecastRainImage")&&forecast.image_url){$("forecastRainImage").src=forecast.image_url;$("forecastRainImage").hidden=false}
     if($("overviewWatchList"))$("overviewWatchList").innerHTML=(data.estate_watch||[]).length?(data.estate_watch||[]).slice(0,8).map(e=>`<li><b>${e.name}</b> — ${e.status} • จุดแจ้งเตือนใกล้สุด ${fmt(e.nearest_alert_km)} กม.</li>`).join(""):'<li>ไม่พบนิคมฯ เข้าเกณฑ์เฝ้าระวังจากข้อมูลล่าสุด</li>';
     if($("warningUpdated"))$("warningUpdated").textContent=`ล่าสุด ${date(data.generated_at)}`;
+    const areaCount=(flood.areas||[]).length,provinceText=(flood.provinces||[]).slice(0,8).join(", ");
+    if($("status24In"))$("status24In").value=areaCount?`TWA/ThaiWater รายงานพื้นที่เข้าเกณฑ์เฝ้าระวัง 24 ชั่วโมง ${areaCount} พื้นที่${provinceText?` ในจังหวัด ${provinceText}`:""} โปรดตรวจสอบตำบลที่อยู่ใกล้นิคมฯ ก่อนเผยแพร่`:`ไม่พบพื้นที่เข้าเกณฑ์เฝ้าระวัง 24 ชั่วโมงจากข้อมูลล่าสุด`;
+    if($("status48In"))$("status48In").value=`ติดตามชั้นพื้นที่เฝ้าระวังน้ำท่วม 24/48 ชั่วโมงของ TWA และแผนที่ความเสี่ยงจากฝนสะสมล่วงหน้า 3 วัน เพื่อประเมินแนวโน้มการขยายตัวของพื้นที่เสี่ยง`;
+    const waterAlerts=Number(data.summary?.waterlevel_alert_count||0);
+    if($("currentFloodIn"))$("currentFloodIn").value=waterAlerts?`พบสถานีระดับน้ำเข้าเกณฑ์เฝ้าระวังใกล้นิคมฯ ${waterAlerts} สถานี ให้ตรวจสอบร่วมกับชั้นพื้นที่น้ำท่วมปัจจุบันของ TWA และยืนยันผลกระทบกับสำนักงานนิคมฯ`:`ยังไม่พบสถานีระดับน้ำผิดปกติใกล้นิคมฯ จากข้อมูลล่าสุด ทั้งนี้ควรตรวจสอบชั้นพื้นที่น้ำท่วมปัจจุบันของ TWA ประกอบ`;
+    if($("day1TextIn")&&forecast.valid_at)$("day1TextIn").value=`ข้อมูลพยากรณ์ฝนล่าสุด ณ ${date(forecast.valid_at)} ใช้ร่วมกับฝนสะสม 24 ชั่วโมงและพื้นที่เฝ้าระวังรายตำบลของ TWA`;
+    window.sync?.();
   }
   function apply(data){
     const state=$("liveState"),method=$("liveMethod");
