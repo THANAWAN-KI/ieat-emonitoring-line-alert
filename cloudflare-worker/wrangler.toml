@@ -1,0 +1,16 @@
+name = "emcc-disaster-webhook"
+main = "src/index.js"
+compatibility_date = "2026-08-26"
+workers_dev = true
+
+[vars]
+REPORT_BASE_URL = "https://thanawan-ki.github.io/ieat-emonitoring-line-alert/emcc-report.html"
+HAZARDOUS_DATA_URL = "https://emonitor.ieat.go.th/envisys/gis/file/hazardous8H8j51DukSmv9Opd4Z6dCVbuB5saueSIz2ErixyZp7lOdfcZX1t44oIdouDxWESk.json"
+
+# Optional deduplication for POST /events:
+# 1) npx wrangler kv namespace create EVENTS_KV
+# 2) Uncomment and put the returned id below.
+#
+# [[kv_namespaces]]
+# binding = "EVENTS_KV"
+# id = "PUT_KV_NAMESPACE_ID_HERE"
