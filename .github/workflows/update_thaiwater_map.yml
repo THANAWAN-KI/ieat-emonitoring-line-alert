@@ -1,0 +1,36 @@
+name: Update ThaiWater map snapshot
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 */3 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: thaiwater-map-snapshot
+  cancel-in-progress: true
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install browser
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+      - name: Capture ThaiWater overall map
+        run: node scripts/capture-thaiwater-map.mjs
+      - name: Save latest map image
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/assets/thaiwater-overall-latest.png docs/data/thaiwater-map-meta.js
+          git diff --cached --quiet || git commit -m "Update ThaiWater map snapshot"
+          git push
