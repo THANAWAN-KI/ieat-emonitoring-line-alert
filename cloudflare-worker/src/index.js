@@ -1,6 +1,7 @@
 const LINE_REPLY_API = "https://api.line.me/v2/bot/message/reply";
 const LINE_PUSH_API = "https://api.line.me/v2/bot/message/push";
 const DEFAULT_REPORT_URL = "https://thanawan-ki.github.io/ieat-emonitoring-line-alert/emcc-report.html";
+const DEFAULT_MAP_URL = "https://experience.arcgis.com/experience/dd1d5523f3bd425b939b51ad91e06171/page/%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%AA%E0%B8%99%E0%B8%B1%E0%B8%9A%E0%B8%AA%E0%B8%99%E0%B8%B8%E0%B8%99%E0%B8%82%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%B9%E0%B8%A5";
 const DEFAULT_HAZARDOUS_URL = "https://emonitor.ieat.go.th/envisys/gis/file/hazardous8H8j51DukSmv9Opd4Z6dCVbuB5saueSIz2ErixyZp7lOdfcZX1t44oIdouDxWESk.json";
 const TYPE_RULES = [
   ["แผ่นดินไหวและสึนามิ", /แผ่นดินไหว|สึนามิ|earthquake|tsunami/i],
@@ -62,7 +63,8 @@ async function replyToOfficer(replyToken, text, env) {
     source: "LINE emcc_disaster",
     time: new Date().toLocaleString("th-TH", { timeZone: "Asia/Bangkok" }),
   });
-  const messages = [buildIncidentFlex(incidentType, normalized, company, analysis, reportUrl)];
+  const mapUrl = env.MAP_BASE_URL || DEFAULT_MAP_URL;
+  const messages = [buildIncidentFlex(incidentType, normalized, company, analysis, reportUrl, mapUrl)];
   if (!companyQuery) messages.push({ type: "text", text: "คำแนะนำ: ระบุคำว่า “บริษัท” ตามด้วยชื่อบริษัท เพื่อให้ระบบค้นข้อมูลสถานประกอบการและพื้นที่นิคมฯ ได้แม่นยำขึ้น" });
   return lineReply(replyToken, messages, env);
 }
@@ -86,7 +88,8 @@ async function handleExternalEvent(request, env) {
     location: event.location || "", details, source: event.source || "External Webhook",
     source_url: event.source_url || "", time: event.time || new Date().toISOString(),
   });
-  await linePush([buildExternalFlex(incidentType, title, details, event, reportUrl)], env);
+  const mapUrl = env.MAP_BASE_URL || DEFAULT_MAP_URL;
+  await linePush([buildExternalFlex(incidentType, title, details, event, reportUrl, mapUrl)], env);
   return json({ ok: true, id });
 }
 
@@ -155,15 +158,15 @@ function buildAnalysis(type, details, company) {
   return parts.join("\n• ");
 }
 
-function buildIncidentFlex(type, text, company, analysis, reportUrl) {
+function buildIncidentFlex(type, text, company, analysis, reportUrl, mapUrl) {
   return flex("รับแจ้งเหตุจากเจ้าหน้าที่", type, [
     row("บริษัท/พื้นที่", company ? [company.name, company.estate].filter(Boolean).join(" • ") : "รอยืนยันข้อมูล"),
     row("รายละเอียด", text),
     row("วิเคราะห์เบื้องต้น", "• " + analysis),
-  ], reportUrl, "#5A008F");
+  ], reportUrl, mapUrl, "#5A008F");
 }
 
-function buildExternalFlex(type, title, details, event, reportUrl) {
+function buildExternalFlex(type, title, details, event, reportUrl, mapUrl) {
   const severity = String(event.severity || "เฝ้าระวัง");
   const color = /วิกฤต|รุนแรง|critical|high/i.test(severity) ? "#D90429" : /เตือน|warning|medium/i.test(severity) ? "#E85D04" : "#5A008F";
   return flex(title, type, [
@@ -171,7 +174,7 @@ function buildExternalFlex(type, title, details, event, reportUrl) {
     row("พื้นที่", event.location || event.province || "ไม่ระบุ"),
     row("รายละเอียด", details),
     row("แหล่งข้อมูล", event.source || "ระบบภายนอก"),
-  ], reportUrl, color);
+  ], reportUrl, mapUrl, color);
 }
 
 function row(label, value) {
@@ -180,7 +183,7 @@ function row(label, value) {
     { type: "text", text: String(value || "-").slice(0, 1200), size: "sm", color: "#252525", wrap: true },
   ]};
 }
-function flex(title, type, rows, reportUrl, color) {
+function flex(title, type, rows, reportUrl, mapUrl, color) {
   return { type: "flex", altText: `${title}: ${type}`.slice(0, 400), contents: {
     type: "bubble", size: "mega",
     header: { type: "box", layout: "vertical", paddingAll: "16px", backgroundColor: color, contents: [
@@ -188,8 +191,9 @@ function flex(title, type, rows, reportUrl, color) {
       { type: "text", text: type, color: "#FFFFFFCC", size: "sm", margin: "sm", wrap: true },
     ]},
     body: { type: "box", layout: "vertical", paddingAll: "15px", contents: rows },
-    footer: { type: "box", layout: "vertical", paddingAll: "14px", contents: [
+    footer: { type: "box", layout: "vertical", spacing: "sm", paddingAll: "14px", contents: [
       { type: "button", style: "primary", color: "#5A008F", action: { type: "uri", label: "จัดทำรายงานและส่งออก PNG", uri: reportUrl } },
+      { type: "button", style: "secondary", action: { type: "uri", label: "เปิดแผนที่วิเคราะห์", uri: mapUrl } },
     ]},
   }};
 }
