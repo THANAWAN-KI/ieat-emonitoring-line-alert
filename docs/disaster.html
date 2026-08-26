@@ -494,6 +494,20 @@
             #map { height: 440px; }
             .map-caption { padding: 12px 13px; font-size: 12px; }
         }
+        .officer-actions{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:12px}
+        .officer-action{display:flex;align-items:center;justify-content:center;min-height:46px;padding:10px;color:var(--ui-blue-dark);background:#fff;border:1px solid #DDD4E5;border-radius:10px;text-align:center;text-decoration:none;font-size:12px;font-weight:800}
+        .officer-action.primary{color:#fff;background:var(--ui-blue);border-color:var(--ui-blue)}
+        .officer-action.emergency{color:#A72D3B;background:#FFF1F3;border-color:#F0CBD1}
+        .latest-events{position:relative;z-index:1;margin-top:14px;padding-top:14px;border-top:1px solid var(--ui-line)}
+        .latest-events-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px}
+        .latest-events-head h3{margin:0;color:#34363D;font-size:15px}
+        .refresh-data{padding:7px 10px;color:var(--ui-blue);background:var(--ui-blue-soft);border:1px solid #D9CDE3;border-radius:8px;font:700 11px inherit;cursor:pointer}
+        .refresh-data:disabled{opacity:.6;cursor:wait}.event-list{display:grid;gap:7px}
+        .event-item{display:grid;grid-template-columns:54px minmax(0,1fr);gap:10px;padding:10px;background:#F7F8FA;border-radius:10px;text-decoration:none}
+        .event-mag{display:grid;place-items:center;min-height:50px;color:#9C4100;background:#FFF0E5;border-radius:8px;font-size:17px;font-weight:800}
+        .event-place{color:#363840;font-size:12px;font-weight:700;line-height:1.5}.event-meta{display:block;margin-top:3px;color:var(--ui-muted);font-size:10px;line-height:1.5}
+        .event-empty{padding:13px;color:var(--ui-muted);background:#F7F8FA;border-radius:10px;text-align:center;font-size:12px}
+        @media(max-width:620px){.officer-actions{grid-template-columns:1fr 1fr}.officer-action{font-size:12px}.latest-events-head{align-items:flex-start}.event-item{grid-template-columns:48px minmax(0,1fr)}}
     </style>
 </head>
 <body>
@@ -508,6 +522,12 @@
         </header>
         <main class="content">
             <div class="notice"><strong>ภาพรวมสถานการณ์ในพื้นที่นิคมอุตสาหกรรมทั่วประเทศ</strong><br>ติดตามสถานการณ์น้ำท่วม พายุ แผ่นดินไหว ไฟป่า และภัยแล้งจากแหล่งข้อมูลภาครัฐ เพื่อประเมินผลกระทบที่อาจเกิดขึ้นในพื้นที่นิคมอุตสาหกรรม</div>
+            <nav class="officer-actions" aria-label="ทางลัดสำหรับเจ้าหน้าที่">
+                <a class="officer-action primary" href="https://www.arcgis.com/apps/dashboards/576c71d01cc5403cad90ee330fd67b6e" target="_blank" rel="noopener">เปิดแผนที่ GIS</a>
+                <a class="officer-action" href="./contacts.html">ติดต่อเจ้าหน้าที่</a>
+                <a class="officer-action emergency" href="tel:199">แจ้งเหตุเพลิงไหม้ 199</a>
+                <a class="officer-action emergency" href="tel:191">เหตุด่วนเหตุร้าย 191</a>
+            </nav>
 
             <nav class="disaster-tabs" aria-label="เลือกประเภทภัย">
                 <button class="tab active" data-filter="all">ภาพรวม</button>
@@ -528,14 +548,18 @@
                 </div>
                 <div class="summary-grid">
                     <div class="summary-card"><span class="summary-icon" aria-hidden="true">24H</span><strong id="latestEarthquakeCount" class="summary-number">-</strong><span class="summary-label">จำนวนเหตุการณ์ทั่วโลก</span></div>
-                    <div class="summary-card"><span class="summary-icon" aria-hidden="true">TH</span><strong id="latestNearThailandCount" class="summary-number">-</strong><span class="summary-label">เหตุการณ์ในพื้นที่ใกล้ประเทศไทย</span></div>
+                    <div class="summary-card"><span class="summary-icon" aria-hidden="true">TH</span><strong id="latestNearThailandCount" class="summary-number">-</strong><span class="summary-label">ภายใน 1,000 กม. จากประเทศไทย</span></div>
                     <div class="summary-card"><span class="summary-icon" aria-hidden="true">M</span><strong id="latestMaxMagnitude" class="summary-number">-</strong><span class="summary-label">ขนาดแผ่นดินไหวสูงสุด</span></div>
                 </div>
+                <section class="latest-events" aria-labelledby="event-list-title">
+                    <div class="latest-events-head"><h3 id="event-list-title">เหตุการณ์ใกล้ประเทศไทยล่าสุด</h3><button id="refreshEarthquakes" class="refresh-data" type="button" onclick="loadEarthquakes()">รีเฟรชข้อมูล</button></div>
+                    <div id="nearEventList" class="event-list"><div class="event-empty">กำลังโหลดข้อมูล…</div></div>
+                </section>
             </section>
 
             <h2 class="section-title map-heading">แผนที่เฝ้าระวังภัยพิบัติทั่วประเทศ</h2>
             <section class="map-panel">
-                <div class="map-toolbar"><div><strong>แผนที่สถานการณ์ล่าสุด</strong><span>ประเทศไทยและเหตุการณ์แผ่นดินไหวในรอบ 24 ชั่วโมง</span></div><div class="map-live-badge">ข้อมูลสด</div></div>
+                <div class="map-toolbar"><div><strong>แผนที่สถานการณ์ล่าสุด</strong><span>ประเทศไทยและเหตุการณ์แผ่นดินไหวในรอบ 24 ชั่วโมง</span></div><div class="map-live-badge">USGS • 24 ชม.</div></div>
                 <div id="map" aria-label="แผนที่ประเทศไทยและเหตุแผ่นดินไหวล่าสุด"></div>
                 <div class="map-caption"><span><strong>จุดสีส้ม</strong> คือเหตุการณ์แผ่นดินไหวล่าสุดจาก USGS แตะจุดบนแผนที่เพื่อดูขนาด พื้นที่ และเวลาเกิดเหตุ</span></div>
             </section>
@@ -606,8 +630,12 @@
             attribution: "&copy; OpenStreetMap contributors &copy; CARTO"
         }).addTo(map);
         const thailandBounds = L.latLngBounds([5.4, 97.2], [20.7, 105.8]);
-        L.rectangle(thailandBounds, { color: "#2F6FED", weight: 1, fillOpacity: .03 }).addTo(map).bindTooltip("ประเทศไทย");
+        L.rectangle(thailandBounds, { color: "#2F6FED", weight: 1, fillOpacity: .03 }).addTo(map).bindTooltip("ขอบเขตอ้างอิงประเทศไทย");
+        const earthquakeLayer = L.layerGroup().addTo(map);
         function formatNumber(value) { return Number(value || 0).toLocaleString("th-TH"); }
+        function escapeHtml(value){return String(value??"-").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[ch]));}
+        function haversine(lat1,lon1,lat2,lon2){const r=6371,toRad=v=>v*Math.PI/180,dLat=toRad(lat2-lat1),dLon=toRad(lon2-lon1),a=Math.sin(dLat/2)**2+Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*Math.sin(dLon/2)**2;return 2*r*Math.asin(Math.sqrt(a));}
+        function distanceFromThailand(latitude,longitude){const nearLat=Math.max(5.4,Math.min(20.7,latitude)),nearLon=Math.max(97.2,Math.min(105.8,longitude));return haversine(latitude,longitude,nearLat,nearLon);}
         document.querySelectorAll(".tab").forEach(button => {
             button.addEventListener("click", () => {
                 document.querySelectorAll(".tab").forEach(item => item.classList.remove("active"));
@@ -622,24 +650,36 @@
         });
         async function loadEarthquakes() {
             const status = document.getElementById("liveStatus");
+            const refresh = document.getElementById("refreshEarthquakes");
+            refresh.disabled=true;refresh.textContent="กำลังโหลด…";
             try {
                 const response = await fetch("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson", { cache: "no-store" });
                 if (!response.ok) throw new Error("USGS HTTP " + response.status);
                 const data = await response.json();
                 const features = Array.isArray(data.features) ? data.features : [];
                 let nearThailand = 0, maxMagnitude = 0;
+                const nearFeatures = [];
+                earthquakeLayer.clearLayers();
                 features.forEach(feature => {
                     const coords = feature.geometry && feature.geometry.coordinates;
                     const properties = feature.properties || {};
                     if (!coords || coords.length < 2) return;
                     const longitude = coords[0], latitude = coords[1], magnitude = Number(properties.mag) || 0;
                     maxMagnitude = Math.max(maxMagnitude, magnitude);
-                    if (latitude >= 0 && latitude <= 30 && longitude >= 85 && longitude <= 115) nearThailand += 1;
+                    const distanceKm = distanceFromThailand(latitude, longitude);
+                    if (distanceKm <= 1000) { nearThailand += 1; nearFeatures.push({properties,latitude,longitude,magnitude,distanceKm}); }
                     const radius = Math.max(4, Math.min(16, magnitude * 3));
                     L.circleMarker([latitude, longitude], { radius, color: "#B85F00", weight: 1, fillColor: "#E67700", fillOpacity: .72 })
-                        .addTo(map)
+                        .addTo(earthquakeLayer)
                         .bindPopup(`<strong>แผ่นดินไหวขนาด ${magnitude.toFixed(1)}</strong><br>${properties.place || "ไม่ระบุพื้นที่"}<br>${new Date(properties.time).toLocaleString("th-TH")}`);
                 });
+                nearFeatures.sort((a,b)=>(b.properties.time||0)-(a.properties.time||0));
+                document.getElementById("nearEventList").innerHTML = nearFeatures.length ? nearFeatures.slice(0,5).map(item => {
+                    const url=String(item.properties.url||"https://earthquake.usgs.gov/");
+                    const place=escapeHtml(item.properties.place||"ไม่ระบุพื้นที่");
+                    const time=new Date(item.properties.time).toLocaleString("th-TH",{dateStyle:"medium",timeStyle:"short"});
+                    return '<a class="event-item" href="'+escapeHtml(url)+'" target="_blank" rel="noopener"><span class="event-mag">M '+item.magnitude.toFixed(1)+'</span><span><span class="event-place">'+place+'</span><span class="event-meta">'+Math.round(item.distanceKm).toLocaleString("th-TH")+' กม. จากประเทศไทย • '+time+' น.</span></span></a>';
+                }).join("") : '<div class="event-empty">ไม่พบเหตุการณ์ภายใน 1,000 กม. จากประเทศไทยในรอบ 24 ชั่วโมง</div>';
                 document.getElementById("earthquakeCount").textContent = formatNumber(features.length);
                 document.getElementById("nearThailandCount").textContent = formatNumber(nearThailand);
                 document.getElementById("maxMagnitude").textContent = maxMagnitude ? maxMagnitude.toFixed(1) : "-";
@@ -647,14 +687,14 @@
                 document.getElementById("latestNearThailandCount").textContent = formatNumber(nearThailand);
                 document.getElementById("latestMaxMagnitude").textContent = maxMagnitude ? maxMagnitude.toFixed(1) : "-";
                 document.getElementById("situationHeadline").textContent = nearThailand > 0
-                    ? `ตรวจพบเหตุการณ์แผ่นดินไหวใกล้ประเทศไทย ${formatNumber(nearThailand)} เหตุการณ์`
+                    ? `ตรวจพบแผ่นดินไหวภายใน 1,000 กม. จากประเทศไทย ${formatNumber(nearThailand)} เหตุการณ์`
                     : "ไม่พบเหตุการณ์แผ่นดินไหวใกล้ประเทศไทยจากข้อมูลล่าสุด";
                 document.getElementById("situationDetail").textContent = maxMagnitude
                     ? `เหตุการณ์แผ่นดินไหวทั่วโลกมีขนาดสูงสุด ${maxMagnitude.toFixed(1)}`
                     : "ไม่พบข้อมูลขนาดแผ่นดินไหว";
                 document.querySelector(".latest-status").classList.toggle("is-alert", nearThailand > 0);
                 document.getElementById("headerUpdated").textContent = "อัปเดตล่าสุด " + new Date().toLocaleString("th-TH", { dateStyle: "medium", timeStyle: "short" });
-                status.textContent = "อัปเดตข้อมูลแผ่นดินไหวล่าสุดเมื่อ " + new Date().toLocaleString("th-TH");
+                status.textContent = "อัปเดตข้อมูล USGS ล่าสุดเมื่อ " + new Date().toLocaleString("th-TH") + " • อัปเดตอัตโนมัติทุก 5 นาที";
             } catch (error) {
                 console.error(error);
                 document.getElementById("earthquakeCount").textContent = "-";
@@ -663,14 +703,18 @@
                 document.getElementById("latestEarthquakeCount").textContent = "-";
                 document.getElementById("latestNearThailandCount").textContent = "-";
                 document.getElementById("latestMaxMagnitude").textContent = "-";
+                document.getElementById("nearEventList").innerHTML = '<div class="event-empty">ไม่สามารถโหลดรายการเหตุการณ์ได้ กรุณาเปิดรายงานจากกรมอุตุนิยมวิทยา</div>';
                 document.getElementById("situationHeadline").textContent = "ไม่สามารถเชื่อมต่อข้อมูลสถานการณ์ล่าสุดได้";
                 document.getElementById("situationDetail").textContent = "กรุณาตรวจสอบข้อมูลจากหน่วยงานที่เกี่ยวข้องโดยตรง";
                 document.querySelector(".latest-status").classList.add("is-alert");
                 document.getElementById("headerUpdated").textContent = "ไม่สามารถอัปเดตข้อมูลได้";
                 status.textContent = "ไม่สามารถโหลดข้อมูลแผ่นดินไหวล่าสุดได้ กรุณาลองใหม่อีกครั้ง";
+            } finally {
+                refresh.disabled=false;refresh.textContent="รีเฟรชข้อมูล";
             }
         }
         loadEarthquakes();
+        setInterval(loadEarthquakes, 300000);
     </script>
 </body>
 </html>
