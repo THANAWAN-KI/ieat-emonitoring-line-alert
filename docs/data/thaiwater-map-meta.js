@@ -1,1 +1,1 @@
-window.THAIWATER_MAP_META={updatedAt:"2026-08-26T20:04:47.202Z",sourceUrl:"https://twa.thaiwater.net/th/map/basic/overall/overall/0?ds=rr%2Csc&p=hide&c=104.14958%2C12.63781%2C3.114z"};
+window.THAIWATER_MAP_META={updatedAt:"2026-08-27T00:49:04.126Z",sourceUrl:"https://twa.thaiwater.net/th/map/basic/overall/overall/0?ds=rr%2Csc&p=hide&c=104.14958%2C12.63781%2C3.114z"};
