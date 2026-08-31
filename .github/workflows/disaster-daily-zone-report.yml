@@ -1,0 +1,69 @@
+name: รายงานภัยพิบัติรายวันแยกตามสายปฏิบัติการ
+
+on:
+  schedule:
+    # 01:30 UTC = 08:30 Asia/Bangkok (ทุกวัน รวมเสาร์-อาทิตย์)
+    - cron: "30 1 * * *"
+  workflow_dispatch:
+    inputs:
+      preview_mode:
+        description: "ส่งข้อมูลตัวอย่าง (ไม่ใช่เหตุการณ์จริง)"
+        required: true
+        type: boolean
+        default: true
+      preview_zone:
+        description: "เลือกกลุ่มสำหรับดูตัวอย่าง"
+        required: true
+        type: choice
+        options:
+          - "สายปฏิบัติการ 1"
+          - "สายปฏิบัติการ 2"
+          - "สายปฏิบัติการ 3"
+        default: "สายปฏิบัติการ 3"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: disaster-daily-zone-report
+  cancel-in-progress: false
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: ดาวน์โหลดโค้ด
+        uses: actions/checkout@v4
+
+      - name: ตั้งค่า Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: ตรวจสอบโค้ด
+        run: python -m py_compile disaster_daily_zone_report.py
+
+      - name: สร้างและส่งรายงาน
+        env:
+          LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
+          LINE_GROUP_ID_DEMO_01: ${{ secrets.LINE_GROUP_ID_DEMO_01 }}
+          LINE_GROUP_ID_DEMO_02: ${{ secrets.LINE_GROUP_ID_DEMO_02 }}
+          LINE_GROUP_ID_DEMO_03: ${{ secrets.LINE_GROUP_ID_DEMO_03 }}
+          DISASTER_PREVIEW_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.preview_mode || false }}
+          DISASTER_PREVIEW_ZONE: ${{ inputs.preview_zone || 'สายปฏิบัติการ 3' }}
+          TZ: Asia/Bangkok
+        run: python disaster_daily_zone_report.py
+
+      - name: บันทึกสถานะเพื่อป้องกันการส่งซ้ำ
+        if: ${{ github.event_name == 'schedule' }}
+        run: |
+          if git diff --quiet -- data/disaster-daily-zone-state.json; then
+            echo "ไม่มีสถานะใหม่ที่ต้องบันทึก"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/disaster-daily-zone-state.json
+          git commit -m "Update disaster daily report state [skip ci]"
+          git push
