@@ -2971,9 +2971,6 @@ def build_zone_event_texts(
             "layout": "vertical",
             "paddingAll": "12px",
             "backgroundColor": "#FFFFFF",
-            "borderColor": "#D7C4DF",
-            "borderWidth": "1px",
-            "cornerRadius": "10px",
             "contents": [
                 {
                     "type": "text",
