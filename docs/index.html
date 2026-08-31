@@ -28,7 +28,7 @@ button,select{font:inherit}
 .subtitle{margin-top:3px;color:var(--muted);font-size:11px;line-height:1.5}
 .live{display:flex;align-items:center;gap:5px;padding-top:2px;color:var(--green);font-size:10px;font-weight:700;white-space:nowrap}
 .live-dot{width:13px;height:13px;border:1.5px solid var(--green);border-radius:50%;display:grid;place-items:center;font-size:8px}
-.filters{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px;background:#fff;border-bottom:1px solid var(--line)}
+.filters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding:10px;background:#fff;border-bottom:1px solid var(--line)}.filters>div{min-width:0}
 .filter{width:100%;min-height:42px;padding:8px 9px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:8px;font-size:11px;outline:none}
 .filter:focus{border-color:var(--purple);box-shadow:0 0 0 2px rgba(93,42,122,.1)}
 .kpis{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 10px 10px;background:#fff}
@@ -62,6 +62,7 @@ button,select{font:inherit}
 .more{display:block;padding:10px;color:var(--purple);border-top:1px solid var(--line);font-size:10px;text-align:center;text-decoration:none;font-weight:600}
 .footer{padding:16px 10px 20px;color:var(--muted);font-size:9px;line-height:1.6;text-align:center}
 .loading{padding:22px;color:var(--muted);font-size:11px;text-align:center}
+@media(max-width:699px){.filters{grid-template-columns:1fr 1fr}}
 @media(min-width:700px){
   .dashboard{max-width:760px;padding:16px}.title{font-size:22px}.map-frame{height:500px}
   .kpi{min-height:82px}.kpi strong{font-size:25px}.section-head h2{font-size:14px}
@@ -79,18 +80,29 @@ button,select{font:inherit}
     <div class="live"><span class="live-dot">✓</span><span>ข้อมูลล่าสุด</span></div>
   </header>
 
-  <section class="filters" aria-label="ตัวกรองข้อมูล">
+  <section class="filters" aria-label="ค้นหาและกรองข้อมูล">
+    <div>
+      <input id="estateFilter" class="filter" type="search" list="estateOptions" placeholder="ค้นหานิคมอุตสาหกรรม" aria-label="ค้นหานิคมอุตสาหกรรม" oninput="applyFilters()">
+      <datalist id="estateOptions"></datalist>
+    </div>
     <select id="systemFilter" class="filter" onchange="applyFilters()" aria-label="เลือกประเภทระบบ">
-      <option value="">ระบบ: ทั้งหมด</option>
-      <option value="AQMS">ระบบ: AQMs</option>
-      <option value="WQMS">ระบบ: WQMs</option>
-      <option value="CEMS">ระบบ: CEMs</option>
+      <option value="">ประเภท: ทั้งหมด</option>
+      <option value="AQMS">ประเภท: AQMs</option>
+      <option value="WQMS">ประเภท: WQMs</option>
+      <option value="CEMS">ประเภท: CEMs</option>
     </select>
     <select id="statusFilter" class="filter" onchange="applyFilters()" aria-label="เลือกสถานะ">
       <option value="">สถานะ: ทั้งหมด</option>
       <option value="ALERT">สถานะ: แจ้งเตือน</option>
       <option value="ONLINE">สถานะ: Online</option>
       <option value="OFFLINE">สถานะ: Offline</option>
+    </select>
+    <select id="timeFilter" class="filter" onchange="applyFilters()" aria-label="เลือกช่วงเวลา">
+      <option value="">ช่วงเวลา: ทั้งหมด</option>
+      <option value="TODAY">ช่วงเวลา: วันนี้</option>
+      <option value="24H">ช่วงเวลา: 24 ชั่วโมง</option>
+      <option value="7D">ช่วงเวลา: 7 วัน</option>
+      <option value="30D">ช่วงเวลา: 30 วัน</option>
     </select>
   </section>
 
@@ -109,7 +121,7 @@ button,select{font:inherit}
   <section class="section">
     <div class="section-head"><h2>ตำแหน่งสถานี</h2><span>แตะสถานีเพื่อดูข้อมูล</span></div>
     <div class="map-wrap">
-      <iframe class="map-frame" width="700" height="600" allow="local-network-access; geolocation" loading="lazy" title="emcc geo hub" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&amp;webmap=590841b3f03147f38703740281ff87a6&amp;theme=light&amp;bookmarks=true&amp;legend=true&amp;information=true&amp;share=true&amp;scroll=false&amp;basemaps=true&amp;center=103.64927288807529,13.120087367299625&amp;scale=9244648.868618"></iframe>
+      <iframe class="map-frame" width="700" height="600" allow="local-network-access; geolocation" allowfullscreen loading="lazy" title="emcc geo hub" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&amp;webmap=590841b3f03147f38703740281ff87a6&amp;theme=light&amp;bookmarks=true&amp;legend=true&amp;information=true&amp;share=true&amp;scroll=true&amp;basemaps=true&amp;zoom=true&amp;center=103.64927288807529,13.120087367299625&amp;scale=9244648.868618"></iframe>
       <div class="map-note">แผนที่ EMCC Geo Hub • ใช้เครื่องมือในแผนที่เพื่อค้นหาและตรวจสอบสถานี</div>
     </div>
   </section>
@@ -140,20 +152,56 @@ const requestedEstate=new URLSearchParams(location.search).get("estate")||"";
 
 function isOnline(value){return String(value||"").trim().toUpperCase()==="ONLINE"}
 function estateOf(s){return String(s.estate_name||s.IndustryZone||"-").trim()}
-function typeOf(s){return String(s.station_type||s.StationType||"-").trim().toUpperCase()}
+function typeOf(s){
+  const raw=String(s.station_type||s.StationType||"-").trim().toUpperCase();
+  if(raw.includes("AIR")||raw.includes("AQM"))return "AQMS";
+  if(raw.includes("WATER")||raw.includes("WQM"))return "WQMS";
+  if(raw.includes("STACK")||raw.includes("CEM"))return "CEMS";
+  return raw;
+}
 function alarmOf(s){return String(s.parameter_alarm||s.ParameterAlram||"-").trim()}
 function hasAlarm(s){const value=alarmOf(s);return value&&value!=="-"}
 function stateOf(s){if(hasAlarm(s))return "ALERT";return isOnline(s.status)?"ONLINE":"OFFLINE"}
 function parameterNames(value){
   return String(value||"").split(/[,;|]/).map(item=>item.trim()).filter(item=>item&&item!=="-");
 }
+const THAI_MONTHS={"ม.ค.":0,"ก.พ.":1,"มี.ค.":2,"เม.ย.":3,"พ.ค.":4,"มิ.ย.":5,"ก.ค.":6,"ส.ค.":7,"ก.ย.":8,"ต.ค.":9,"พ.ย.":10,"ธ.ค.":11};
+function parseStationTime(value){
+  const text=String(value||"").trim();
+  const iso=new Date(text);
+  if(!Number.isNaN(iso.getTime()))return iso;
+  const match=text.match(/(\d{1,2})\s+([^\s]+)\s+(\d{4}),?\s+(\d{1,2}):(\d{2})/);
+  if(!match||THAI_MONTHS[match[2]]===undefined)return null;
+  let year=Number(match[3]);if(year>2400)year-=543;
+  return new Date(year,THAI_MONTHS[match[2]],Number(match[1]),Number(match[4]),Number(match[5]));
+}
+function referenceTime(){
+  const parsed=new Date(DATA?.updated_at||"");
+  return Number.isNaN(parsed.getTime())?new Date():parsed;
+}
+function inTimeRange(s,range){
+  if(!range)return true;
+  const observed=parseStationTime(s.last_update||s.LastUpdate);if(!observed)return false;
+  const end=referenceTime(),diff=end-observed;if(diff<0)return false;
+  if(range==="TODAY")return observed.getFullYear()===end.getFullYear()&&observed.getMonth()===end.getMonth()&&observed.getDate()===end.getDate();
+  const limit=range==="24H"?1:range==="7D"?7:30;
+  return diff<=limit*24*60*60*1000;
+}
+function populateEstateOptions(){
+  const list=byId("estateOptions");if(!list||list.dataset.ready)return;
+  const names=[...new Set((DATA?.all_stations||[]).map(estateOf).filter(v=>v&&v!=="-"))].sort((a,b)=>a.localeCompare(b,"th"));
+  list.innerHTML=names.map(name=>'<option value="'+esc(name)+'"></option>').join("");
+  if(requestedEstate)byId("estateFilter").value=requestedEstate;
+  list.dataset.ready="1";
+}
 function baseStations(){
   const rows=Array.isArray(DATA?.all_stations)?DATA.all_stations:[];
   return requestedEstate?rows.filter(s=>estateOf(s)===requestedEstate):rows;
 }
 function filteredStations(){
-  const system=byId("systemFilter").value,status=byId("statusFilter").value;
-  return baseStations().filter(s=>(!system||typeOf(s)===system)&&(!status||stateOf(s)===status));
+  const estate=byId("estateFilter").value.trim().toLowerCase();
+  const system=byId("systemFilter").value,status=byId("statusFilter").value,time=byId("timeFilter").value;
+  return baseStations().filter(s=>(!estate||estateOf(s).toLowerCase().includes(estate))&&(!system||typeOf(s)===system)&&(!status||stateOf(s)===status)&&inTimeRange(s,time));
 }
 function mapLink(s){
   const lat=Number(s.latitude),lon=Number(s.longitude);
@@ -185,6 +233,7 @@ async function load(){
     DATA=await response.json();
     byId("updatedAt").textContent=DATA.updated_at_text||DATA.updated_at||"-";
     byId("scopeText").textContent=requestedEstate||"ภาพรวมสถานีตรวจวัด";
+    populateEstateOptions();
     applyFilters();
   }catch(error){
     console.error(error);
