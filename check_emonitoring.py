@@ -18,10 +18,6 @@ DATA_URL = (
     "call_feed/geog/GeoData/station_all.json"
 )
 
-LINE_BROADCAST_URL = (
-    "https://api.line.me/v2/bot/message/broadcast"
-)
-
 DASHBOARD_URL = (
     "https://www.arcgis.com/apps/dashboards/"
     "576c71d01cc5403cad90ee330fd67b6e"
@@ -2803,118 +2799,6 @@ def build_detail_carousels(
 
 
 # ============================================================
-# LINE Broadcast
-# ============================================================
-
-def send_line_messages(
-    messages: list[dict[str, Any]]
-) -> bool:
-
-    token = os.getenv(
-        "LINE_CHANNEL_ACCESS_TOKEN",
-        ""
-    ).strip()
-
-    if not token:
-        print(
-            "ERROR: ไม่พบ "
-            "LINE_CHANNEL_ACCESS_TOKEN"
-        )
-        return False
-
-    if not messages:
-        print(
-            "ไม่มีข้อความสำหรับส่ง LINE"
-        )
-        return False
-
-    all_success = True
-
-    # Broadcast API ส่งได้สูงสุด 5 messages/request
-    for start in range(
-        0,
-        len(messages),
-        MAX_MESSAGES_PER_REQUEST
-    ):
-
-        batch = messages[
-            start:
-            start + MAX_MESSAGES_PER_REQUEST
-        ]
-
-        request_payload = {
-            "messages": batch
-        }
-
-        payload = json.dumps(
-            request_payload,
-            ensure_ascii=False,
-            separators=(",", ":"),
-        ).encode("utf-8")
-
-        payload_size = len(payload)
-
-        print(
-            f"กำลังส่ง LINE batch "
-            f"{start // MAX_MESSAGES_PER_REQUEST + 1}: "
-            f"{len(batch)} messages / "
-            f"{payload_size / 1024:.1f} KB"
-        )
-
-        request = urllib.request.Request(
-            LINE_BROADCAST_URL,
-            data=payload,
-            headers={
-                "Authorization":
-                    f"Bearer {token}",
-                "Content-Type":
-                    "application/json",
-            },
-            method="POST",
-        )
-
-        try:
-            with urllib.request.urlopen(
-                request,
-                timeout=60
-            ) as response:
-
-                print(
-                    "ส่ง LINE Broadcast สำเร็จ "
-                    f"HTTP {response.status}"
-                )
-
-        except urllib.error.HTTPError as error:
-
-            response_text = (
-                error.read()
-                .decode(
-                    "utf-8",
-                    errors="replace"
-                )
-            )
-
-            print(
-                "ERROR: LINE Broadcast API "
-                f"HTTP {error.code}: "
-                f"{response_text}"
-            )
-
-            all_success = False
-
-        except urllib.error.URLError as error:
-
-            print(
-                "ERROR: เชื่อมต่อ LINE ไม่สำเร็จ: "
-                f"{error.reason}"
-            )
-
-            all_success = False
-
-    return all_success
-
-
-# ============================================================
 # Zone-based LINE routing
 # ============================================================
 
@@ -2959,33 +2843,84 @@ def build_zone_event_texts(
     zone: str,
     events: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
-    """สร้าง Flex Card สรุปเพียง 1 ข้อความต่อ Zone"""
-    max_visible = 6
-    visible_events = events[:max_visible]
-    remaining = max(0, len(events) - len(visible_events))
+    """Flex 1 ใบต่อ Zone; สี Dashboard + โครงสร้างสรุปผู้บริหาร"""
+    visible = events[:5]
+    remaining = max(0, len(events) - len(visible))
+    online = sum(
+        1 for item in events
+        if safe_text(item.get("status"), "").upper() == "ONLINE"
+    )
+    offline = len(events) - online
+    ready = round((online / len(events)) * 100) if events else 0
+    parameters = sum(alarm_count(item) for item in events)
+    recovered = sum(
+        1 for item in events
+        if item.get("event_type") in {"RECOVERED", "ONLINE"}
+    )
+    watch = max(0, len(events) - recovered)
 
-    event_contents: list[dict[str, Any]] = []
-
-    for event in visible_events:
-        parameter = full_text(
-            event.get("parameter_alarm"),
-            "กลับสู่ภาวะปกติ",
-        )
-        color = event_color(event)
-
-        event_contents.append({
+    def metric(value: int, label: str, bg: str, color: str) -> dict[str, Any]:
+        return {
             "type": "box",
             "layout": "vertical",
-            "margin": "sm",
-            "paddingAll": "9px",
-            "backgroundColor": "#F8F9FA",
+            "flex": 1,
+            "paddingAll": "7px",
+            "backgroundColor": bg,
             "cornerRadius": "9px",
             "contents": [
                 {
                     "type": "text",
-                    "text": safe_text(
-                        event.get("station_name")
-                    ),
+                    "text": str(value),
+                    "size": "xl",
+                    "weight": "bold",
+                    "color": color,
+                    "align": "center",
+                },
+                {
+                    "type": "text",
+                    "text": label,
+                    "size": "xxs",
+                    "color": color,
+                    "align": "center",
+                    "wrap": True,
+                    "margin": "xs",
+                },
+            ],
+        }
+
+    progress: list[dict[str, Any]] = []
+    if ready:
+        progress.append({
+            "type": "box",
+            "layout": "vertical",
+            "flex": ready,
+            "height": "8px",
+            "backgroundColor": "#2F8F46",
+            "contents": [],
+        })
+    if ready < 100:
+        progress.append({
+            "type": "box",
+            "layout": "vertical",
+            "flex": 100 - ready,
+            "height": "8px",
+            "backgroundColor": "#DDE2E6",
+            "contents": [],
+        })
+
+    rows: list[dict[str, Any]] = []
+    for event in visible:
+        rows.append({
+            "type": "box",
+            "layout": "vertical",
+            "margin": "sm",
+            "paddingAll": "8px",
+            "backgroundColor": "#F8F9FA",
+            "cornerRadius": "8px",
+            "contents": [
+                {
+                    "type": "text",
+                    "text": safe_text(event.get("station_name")),
                     "size": "sm",
                     "weight": "bold",
                     "color": "#30283A",
@@ -2993,21 +2928,21 @@ def build_zone_event_texts(
                 },
                 {
                     "type": "text",
-                    "text": (
-                        f"{event_title(event)} • "
-                        f"{parameter}"
+                    "text": full_text(
+                        event.get("parameter_alarm"),
+                        "กลับสู่ภาวะปกติ",
                     ),
                     "size": "xs",
-                    "color": color,
                     "weight": "bold",
+                    "color": event_color(event),
                     "wrap": True,
                     "margin": "xs",
                 },
                 {
                     "type": "text",
                     "text": (
-                        "อัปเดต "
-                        f"{safe_text(event.get('last_update'))}"
+                        f"{event_title(event)} • "
+                        f"อัปเดต {safe_text(event.get('last_update'))}"
                     ),
                     "size": "xxs",
                     "color": "#777777",
@@ -3018,14 +2953,11 @@ def build_zone_event_texts(
         })
 
     if remaining:
-        event_contents.append({
+        rows.append({
             "type": "text",
-            "text": (
-                f"และอีก {remaining} เหตุการณ์ "
-                "ดูรายละเอียดเพิ่มเติมใน Dashboard"
-            ),
+            "text": f"และอีก {remaining} สถานี • ดูต่อใน Dashboard",
             "size": "xs",
-            "color": "#6B5A76",
+            "color": "#5D2A7A",
             "align": "center",
             "wrap": True,
             "margin": "md",
@@ -3033,36 +2965,34 @@ def build_zone_event_texts(
 
     bubble = {
         "type": "bubble",
-        "size": "mega",
-        "styles": {
-            "header": {
-                "backgroundColor": "#4E1478",
-            },
-            "body": {
-                "backgroundColor": "#FFFFFF",
-            },
-            "footer": {
-                "backgroundColor": "#FFFFFF",
-            },
-        },
+        "size": "giga",
         "header": {
             "type": "box",
             "layout": "vertical",
-            "paddingAll": "14px",
+            "paddingAll": "12px",
+            "backgroundColor": "#E6D8EB",
             "contents": [
                 {
                     "type": "text",
                     "text": "e-Monitoring Alert",
                     "size": "lg",
                     "weight": "bold",
-                    "color": "#FFFFFF",
+                    "color": "#5D2A7A",
                 },
                 {
                     "type": "text",
                     "text": zone,
                     "size": "sm",
-                    "color": "#EADFF2",
+                    "weight": "bold",
+                    "color": "#5D2A7A",
                     "wrap": True,
+                    "margin": "xs",
+                },
+                {
+                    "type": "text",
+                    "text": "[DEMO] ไม่ใช่เหตุการณ์จริง",
+                    "size": "xxs",
+                    "color": "#8A5A9E",
                     "margin": "xs",
                 },
             ],
@@ -3070,78 +3000,122 @@ def build_zone_event_texts(
         "body": {
             "type": "box",
             "layout": "vertical",
-            "paddingAll": "12px",
+            "paddingAll": "10px",
             "contents": [
                 {
                     "type": "box",
-                    "layout": "horizontal",
-                    "paddingAll": "9px",
-                    "backgroundColor": "#FFF3DF",
-                    "cornerRadius": "9px",
+                    "layout": "vertical",
+                    "paddingAll": "10px",
+                    "backgroundColor": "#F6F1F8",
+                    "cornerRadius": "12px",
                     "contents": [
                         {
                             "type": "text",
-                            "text": (
-                                "[DEMO] พบ "
-                                f"{len(events)} เหตุการณ์"
-                            ),
-                            "size": "sm",
+                            "text": f"สถานีในเหตุการณ์พร้อมใช้งาน {ready}%",
+                            "size": "md",
                             "weight": "bold",
-                            "color": "#9A4D00",
-                            "wrap": True,
+                            "color": "#5D2A7A",
+                            "align": "center",
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "margin": "sm",
+                            "cornerRadius": "4px",
+                            "contents": progress,
                         },
                     ],
                 },
-                *event_contents,
+                {
+                    "type": "box",
+                    "layout": "horizontal",
+                    "spacing": "xs",
+                    "margin": "sm",
+                    "contents": [
+                        metric(len(events), "ทั้งหมด", "#F3F4F5", "#30283A"),
+                        metric(online, "ONLINE", "#EEF7F0", "#2F8F46"),
+                        metric(offline, "OFFLINE", "#E5F2FB", "#0871B9"),
+                    ],
+                },
+                {
+                    "type": "text",
+                    "text": "สรุปสถานการณ์",
+                    "size": "sm",
+                    "weight": "bold",
+                    "color": "#30283A",
+                    "margin": "md",
+                },
+                {
+                    "type": "box",
+                    "layout": "horizontal",
+                    "spacing": "xs",
+                    "margin": "sm",
+                    "contents": [
+                        metric(
+                            parameters,
+                            "พารามิเตอร์แจ้งเตือน",
+                            "#FDECEF",
+                            "#C51F35",
+                        ),
+                        metric(
+                            watch,
+                            "สถานีเฝ้าระวัง",
+                            "#FFF6E5",
+                            "#E67700",
+                        ),
+                        metric(
+                            recovered,
+                            "กลับสู่ปกติ",
+                            "#EEF7F0",
+                            "#2F8F46",
+                        ),
+                    ],
+                },
+                {
+                    "type": "text",
+                    "text": "สถานีที่ต้องติดตาม",
+                    "size": "sm",
+                    "weight": "bold",
+                    "color": "#30283A",
+                    "margin": "md",
+                },
+                *rows,
             ],
         },
         "footer": {
             "type": "box",
             "layout": "vertical",
-            "paddingTop": "4px",
+            "paddingTop": "3px",
             "paddingBottom": "12px",
-            "paddingStart": "12px",
-            "paddingEnd": "12px",
+            "paddingStart": "10px",
+            "paddingEnd": "10px",
             "contents": [
                 {
                     "type": "button",
                     "style": "primary",
                     "height": "sm",
-                    "color": "#4E1478",
+                    "color": "#5D2A7A",
                     "action": {
                         "type": "uri",
                         "label": "เปิดดูรายละเอียด",
                         "uri": DASHBOARD_URL,
                     },
                 },
-                {
-                    "type": "text",
-                    "text": (
-                        "ข้อความทดสอบ • "
-                        "ไม่ใช่เหตุการณ์จริง"
-                    ),
-                    "size": "xxs",
-                    "color": "#999999",
-                    "align": "center",
-                    "margin": "sm",
-                },
             ],
+        },
+        "styles": {
+            "header": {"backgroundColor": "#E6D8EB"},
+            "body": {"backgroundColor": "#FFFFFF"},
+            "footer": {"backgroundColor": "#FFFFFF"},
         },
     }
 
     message = make_flex_message(
         bubble,
-        (
-            f"[DEMO] {zone}: "
-            f"พบ {len(events)} เหตุการณ์"
-        ),
+        f"[DEMO] {zone}: พบ {len(events)} เหตุการณ์",
     )
-
     if json_size_bytes(message) > MAX_FLEX_BYTES:
-        raise RuntimeError(
-            f"Flex Card ของ {zone} มีขนาดเกินกำหนด"
-        )
-
+        raise RuntimeError(f"Flex Card ของ {zone} มีขนาดเกินกำหนด")
     return [message]
 
 def push_line_messages(
@@ -3265,333 +3239,3 @@ def send_zone_event_reports(
         all_success = all_success and success
 
     return all_success
-
-
-# ============================================================
-# Send compact station status report
-# ============================================================
-
-def send_station_status_report(
-    all_stations: list[dict[str, Any]],
-    type_stats: dict[str, dict[str, int]],
-    alert_stations: list[dict[str, Any]],
-    events: list[dict[str, Any]],
-) -> bool:
-    """ส่งเพียง 1 Flex Message; รายละเอียดคงอยู่ใน Dashboard"""
-    message = make_flex_message(
-        build_station_status_summary_bubble(
-            all_stations,
-            type_stats,
-            alert_stations,
-            events,
-        ),
-        "IEAT e-Monitoring: สรุปสถานะสถานีตรวจวัด",
-    )
-    message_size = json_size_bytes(message)
-
-    if message_size > MAX_FLEX_BYTES:
-        raise RuntimeError(
-            "Station Status Summary มีขนาดเกิน "
-            f"{MAX_FLEX_BYTES / 1024:.0f} KB"
-        )
-
-    print("LINE messages ที่จะส่ง: 1")
-    print(f"ขนาดข้อความ: {message_size / 1024:.1f} KB")
-    return send_line_messages([message])
-
-
-# ============================================================
-# Main
-# ============================================================
-
-def main() -> int:
-
-    # ป้องกัน GitHub Actions เริ่มงานล่าช้าจนส่ง LINE นอกเวลาที่กำหนด
-    # อนุญาตเฉพาะ 08:30-16:30 น. ตามเวลาประเทศไทย
-    current_time = now_thailand()
-
-    # วันจันทร์=0 ... วันเสาร์=5 วันอาทิตย์=6
-    if current_time.weekday() >= 5:
-        print("=" * 72)
-        print(
-            "ยกเลิกการทำงาน: วันเสาร์–อาทิตย์ "
-            "ไม่ดาวน์โหลดข้อมูล ไม่ส่ง LINE และไม่บันทึก state"
-        )
-        print("=" * 72)
-        return 0
-
-    current_minutes = current_time.hour * 60 + current_time.minute
-    start_minutes = 8 * 60 + 30
-    end_minutes = 16 * 60 + 30
-
-    if not start_minutes <= current_minutes <= end_minutes:
-        print("=" * 72)
-        print(
-            "ยกเลิกการทำงาน: อยู่นอกช่วงเวลา "
-            "08:30-16:30 น. ตามเวลาประเทศไทย"
-        )
-        print(
-            "เวลาประเทศไทยปัจจุบัน: "
-            f"{thai_datetime_text(current_time)}"
-        )
-        print("ไม่มีการดาวน์โหลดข้อมูล ไม่มีการส่ง LINE และไม่บันทึก state")
-        print("=" * 72)
-        return 0
-
-    print("=" * 72)
-    print(
-        "IEAT e-Monitoring LINE Alert "
-        "v6 - Compact Station Status / Quota Saver"
-    )
-    print("=" * 72)
-
-    print(
-        "เวลาประเทศไทย: "
-        f"{report_time_text()}"
-    )
-
-    print(
-        "กำลังดาวน์โหลดข้อมูล e-Monitoring..."
-    )
-
-    if ASSET_BASE_URL:
-        print(
-            "Asset URL: "
-            f"{ASSET_BASE_URL}"
-        )
-    else:
-        print(
-            "WARNING: ไม่พบ Asset URL"
-        )
-
-    try:
-        payload = download_station_data()
-    except RuntimeError as error:
-        print(
-            f"ERROR: {error}"
-        )
-        return 1
-
-    features = get_features(payload)
-
-    all_stations = prepare_stations(
-        features
-    )
-
-    alert_stations = filter_alert_features(
-        features
-    )
-
-    type_stats = calculate_type_stats(
-        all_stations
-    )
-
-    total_count = len(
-        all_stations
-    )
-
-    online_total = sum(
-        v["online"]
-        for v in type_stats.values()
-    )
-
-    offline_total = sum(
-        v["offline"]
-        for v in type_stats.values()
-    )
-
-    print(
-        f"จำนวนสถานีทั้งหมด: "
-        f"{total_count}"
-    )
-
-    print(
-        f"ONLINE ทั้งหมด: "
-        f"{online_total}"
-    )
-
-    print(
-        f"OFFLINE ทั้งหมด: "
-        f"{offline_total}"
-    )
-
-    print(
-        "สถานีที่มี ParameterAlram: "
-        f"{len(alert_stations)}"
-    )
-
-    # --------------------------------------------------------
-    # State comparison
-    # --------------------------------------------------------
-
-    previous_state = load_alert_state()
-
-    print(
-        "State เดิมมีสถานี: "
-        f"{len(previous_state.get('stations', {}))}"
-    )
-
-    events = detect_notification_events(
-        previous_state,
-        all_stations,
-    )
-
-    # --------------------------------------------------------
-    # Debug events
-    # --------------------------------------------------------
-
-    if events:
-
-        print(
-            f"พบเหตุการณ์ที่ต้องแจ้ง: "
-            f"{len(events)}"
-        )
-
-        for event in sorted(
-            events,
-            key=lambda item:
-                event_priority(
-                    item.get(
-                        "event_type",
-                        ""
-                    )
-                )
-        ):
-
-            print("-" * 60)
-
-            print(
-                "Event:",
-                event.get(
-                    "event_type"
-                )
-            )
-
-            print(
-                "สถานี:",
-                event.get(
-                    "station_name"
-                )
-            )
-
-            print(
-                "เหตุผล:",
-                event.get(
-                    "event_reason"
-                )
-            )
-
-            print(
-                "ParameterAlram:",
-                event.get(
-                    "parameter_alarm"
-                )
-            )
-
-            print(
-                "Comment:",
-                event.get(
-                    "comment"
-                )
-            )
-
-    else:
-
-        print(
-            "ไม่พบเหตุการณ์ใหม่หรือการเปลี่ยนแปลง"
-        )
-
-    # --------------------------------------------------------
-    # Dashboard status:
-    # อัปเดตทุกวัน ไม่กินโควตา LINE
-    # --------------------------------------------------------
-
-    write_status_file(
-        all_stations=all_stations,
-        alert_stations=alert_stations,
-        type_stats=type_stats,
-    )
-
-    # --------------------------------------------------------
-    # LINE:
-    # ส่งเฉพาะเมื่อมี event
-    # --------------------------------------------------------
-
-    if not events:
-
-        # เมื่อไม่มี event เราสามารถบันทึก state ได้ทันที
-        # เพื่อให้วันต่อไปเปรียบเทียบกับข้อมูลล่าสุด
-        save_alert_state(
-            all_stations
-        )
-
-        print(
-            "Dashboard อัปเดตแล้ว"
-        )
-
-        print(
-            "LINE: ไม่ส่ง "
-            "(ไม่มีการเปลี่ยนแปลง)"
-        )
-
-        print(
-            "โควตารอบนี้: 0 ข้อความ"
-        )
-
-        print("=" * 72)
-
-        return 0
-
-    try:
-
-        success = send_station_status_report(
-            all_stations,
-            type_stats,
-            alert_stations,
-            events,
-        )
-
-    except RuntimeError as error:
-
-        print(
-            f"ERROR: {error}"
-        )
-
-        return 1
-
-    if not success:
-
-        print(
-            "ERROR: ส่ง LINE ไม่สำเร็จ"
-        )
-
-        # ไม่ save state เพื่อให้ retry รอบถัดไป
-        return 1
-
-    # สำคัญ:
-    # save state หลัง LINE สำเร็จเท่านั้น
-    save_alert_state(
-        all_stations
-    )
-
-    print(
-        "บันทึก alert_state.json แล้ว"
-    )
-
-    print(
-        "Dashboard อัปเดตแล้ว"
-    )
-
-    print("=" * 72)
-    print(
-        "ทำงานสำเร็จ: "
-        "Dashboard update + Compact station status"
-    )
-    print("=" * 72)
-
-    return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())
-
