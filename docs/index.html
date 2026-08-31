@@ -133,7 +133,7 @@ button,select{font:inherit}
     </div>
   </section>
 
-  <section class="section">
+  <section id="offline-stations" class="section">
     <div class="section-head"><h2>รายละเอียดสถานี</h2><span>ค่าล่าสุด</span></div>
     <div id="stationList" class="station-list"><div class="loading">กำลังโหลดข้อมูล…</div></div>
     <a class="more" href="./stations.html">เปิดรายงานสถานีทั้งหมด</a>
@@ -234,6 +234,7 @@ async function load(){
     byId("updatedAt").textContent=DATA.updated_at_text||DATA.updated_at||"-";
     byId("scopeText").textContent=requestedEstate||"ภาพรวมสถานีตรวจวัด";
     populateEstateOptions();
+    if(location.hash==="#offline-stations")byId("statusFilter").value="OFFLINE";
     applyFilters();
   }catch(error){
     console.error(error);
