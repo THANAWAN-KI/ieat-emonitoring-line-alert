@@ -2959,79 +2959,190 @@ def build_zone_event_texts(
     zone: str,
     events: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
-    """รวมทุกเหตุการณ์เป็นข้อความเดียว เพื่อประหยัดโควตา LINE"""
-    header = (
-        "[DEMO — ไม่ใช่เหตุการณ์จริง]\n"
-        f"e-Monitoring • {zone}\n"
-        f"พบ {len(events)} เหตุการณ์ใหม่/เปลี่ยนแปลง"
-    )
+    """สร้าง Flex Card สรุปเพียง 1 ข้อความต่อ Zone"""
+    max_visible = 6
+    visible_events = events[:max_visible]
+    remaining = max(0, len(events) - len(visible_events))
 
-    event_blocks: list[str] = []
-    for index, event in enumerate(events, start=1):
+    event_contents: list[dict[str, Any]] = []
+
+    for event in visible_events:
         parameter = full_text(
             event.get("parameter_alarm"),
             "กลับสู่ภาวะปกติ",
         )
-        event_blocks.append(
-            "\n".join([
-                (
-                    f"{index}. "
-                    f"{safe_text(event.get('station_name'))}"
-                ),
-                (
-                    f"{event_title(event)} • "
-                    f"{parameter}"
-                ),
-                (
-                    "อัปเดต "
-                    f"{safe_text(event.get('last_update'))}"
-                ),
-            ])
+        color = event_color(event)
+
+        event_contents.append({
+            "type": "box",
+            "layout": "vertical",
+            "margin": "sm",
+            "paddingAll": "9px",
+            "backgroundColor": "#F8F9FA",
+            "cornerRadius": "9px",
+            "contents": [
+                {
+                    "type": "text",
+                    "text": safe_text(
+                        event.get("station_name")
+                    ),
+                    "size": "sm",
+                    "weight": "bold",
+                    "color": "#30283A",
+                    "wrap": True,
+                },
+                {
+                    "type": "text",
+                    "text": (
+                        f"{event_title(event)} • "
+                        f"{parameter}"
+                    ),
+                    "size": "xs",
+                    "color": color,
+                    "weight": "bold",
+                    "wrap": True,
+                    "margin": "xs",
+                },
+                {
+                    "type": "text",
+                    "text": (
+                        "อัปเดต "
+                        f"{safe_text(event.get('last_update'))}"
+                    ),
+                    "size": "xxs",
+                    "color": "#777777",
+                    "wrap": True,
+                    "margin": "xs",
+                },
+            ],
+        })
+
+    if remaining:
+        event_contents.append({
+            "type": "text",
+            "text": (
+                f"และอีก {remaining} เหตุการณ์ "
+                "ดูรายละเอียดเพิ่มเติมใน Dashboard"
+            ),
+            "size": "xs",
+            "color": "#6B5A76",
+            "align": "center",
+            "wrap": True,
+            "margin": "md",
+        })
+
+    bubble = {
+        "type": "bubble",
+        "size": "mega",
+        "styles": {
+            "header": {
+                "backgroundColor": "#4E1478",
+            },
+            "body": {
+                "backgroundColor": "#FFFFFF",
+            },
+            "footer": {
+                "backgroundColor": "#FFFFFF",
+            },
+        },
+        "header": {
+            "type": "box",
+            "layout": "vertical",
+            "paddingAll": "14px",
+            "contents": [
+                {
+                    "type": "text",
+                    "text": "e-Monitoring Alert",
+                    "size": "lg",
+                    "weight": "bold",
+                    "color": "#FFFFFF",
+                },
+                {
+                    "type": "text",
+                    "text": zone,
+                    "size": "sm",
+                    "color": "#EADFF2",
+                    "wrap": True,
+                    "margin": "xs",
+                },
+            ],
+        },
+        "body": {
+            "type": "box",
+            "layout": "vertical",
+            "paddingAll": "12px",
+            "contents": [
+                {
+                    "type": "box",
+                    "layout": "horizontal",
+                    "paddingAll": "9px",
+                    "backgroundColor": "#FFF3DF",
+                    "cornerRadius": "9px",
+                    "contents": [
+                        {
+                            "type": "text",
+                            "text": (
+                                "[DEMO] พบ "
+                                f"{len(events)} เหตุการณ์"
+                            ),
+                            "size": "sm",
+                            "weight": "bold",
+                            "color": "#9A4D00",
+                            "wrap": True,
+                        },
+                    ],
+                },
+                *event_contents,
+            ],
+        },
+        "footer": {
+            "type": "box",
+            "layout": "vertical",
+            "paddingTop": "4px",
+            "paddingBottom": "12px",
+            "paddingStart": "12px",
+            "paddingEnd": "12px",
+            "contents": [
+                {
+                    "type": "button",
+                    "style": "primary",
+                    "height": "sm",
+                    "color": "#4E1478",
+                    "action": {
+                        "type": "uri",
+                        "label": "เปิดดูรายละเอียด",
+                        "uri": DASHBOARD_URL,
+                    },
+                },
+                {
+                    "type": "text",
+                    "text": (
+                        "ข้อความทดสอบ • "
+                        "ไม่ใช่เหตุการณ์จริง"
+                    ),
+                    "size": "xxs",
+                    "color": "#999999",
+                    "align": "center",
+                    "margin": "sm",
+                },
+            ],
+        },
+    }
+
+    message = make_flex_message(
+        bubble,
+        (
+            f"[DEMO] {zone}: "
+            f"พบ {len(events)} เหตุการณ์"
+        ),
+    )
+
+    if json_size_bytes(message) > MAX_FLEX_BYTES:
+        raise RuntimeError(
+            f"Flex Card ของ {zone} มีขนาดเกินกำหนด"
         )
 
-    # LINE text จำกัด 5,000 ตัวอักษร ใช้ 4,500 เป็น safety margin
-    max_length = 4500
-    included_blocks: list[str] = []
-    omitted_count = 0
-
-    for index, block in enumerate(event_blocks):
-        remaining = len(event_blocks) - index - 1
-        footer = (
-            f"\n\nและอีก {remaining} เหตุการณ์"
-            if remaining > 0
-            else ""
-        )
-        candidate = (
-            header
-            + "\n\n"
-            + "\n\n".join([*included_blocks, block])
-            + footer
-            + f"\n\nดูรายละเอียด: {DASHBOARD_URL}"
-        )
-
-        if len(candidate) > max_length:
-            omitted_count = len(event_blocks) - len(included_blocks)
-            break
-
-        included_blocks.append(block)
-
-    if not included_blocks and event_blocks:
-        included_blocks.append(
-            event_blocks[0][:2500]
-        )
-        omitted_count = len(event_blocks) - 1
-
-    text = header
-    if included_blocks:
-        text += "\n\n" + "\n\n".join(included_blocks)
-    if omitted_count > 0:
-        text += f"\n\nและอีก {omitted_count} เหตุการณ์"
-    text += f"\n\nดูรายละเอียด: {DASHBOARD_URL}"
-
-    return [{
-        "type": "text",
-        "text": text[:4900],
-    }]
+    return [message]
 
 def push_line_messages(
     group_id: str,
