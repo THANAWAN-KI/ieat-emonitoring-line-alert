@@ -2959,53 +2959,79 @@ def build_zone_event_texts(
     zone: str,
     events: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
-    """สร้างข้อความเฉพาะเหตุการณ์ของ Zone นั้น ไม่ส่งข้อมูลสถานีปกติ"""
+    """รวมทุกเหตุการณ์เป็นข้อความเดียว เพื่อประหยัดโควตา LINE"""
     header = (
         "[DEMO — ไม่ใช่เหตุการณ์จริง]\n"
-        "IEAT e-Monitoring Alert\n"
-        f"{zone}\n"
-        f"พบเหตุการณ์ใหม่/เปลี่ยนแปลง {len(events)} รายการ"
+        f"e-Monitoring • {zone}\n"
+        f"พบ {len(events)} เหตุการณ์ใหม่/เปลี่ยนแปลง"
     )
 
     event_blocks: list[str] = []
     for index, event in enumerate(events, start=1):
+        parameter = full_text(
+            event.get("parameter_alarm"),
+            "กลับสู่ภาวะปกติ",
+        )
         event_blocks.append(
             "\n".join([
-                f"{index}. {safe_text(event.get('station_name'))}",
-                f"นิคมฯ: {safe_text(event.get('estate_name'))}",
-                f"เหตุการณ์: {event_title(event)}",
-                f"รายละเอียด: {safe_text(event.get('event_reason'))}",
                 (
-                    "พารามิเตอร์: "
-                    f"{full_text(event.get('parameter_alarm'), 'กลับสู่ภาวะปกติ')}"
+                    f"{index}. "
+                    f"{safe_text(event.get('station_name'))}"
                 ),
-                f"สถานะสถานี: {safe_text(event.get('status'))}",
-                f"ข้อมูลล่าสุด: {safe_text(event.get('last_update'))}",
+                (
+                    f"{event_title(event)} • "
+                    f"{parameter}"
+                ),
+                (
+                    "อัปเดต "
+                    f"{safe_text(event.get('last_update'))}"
+                ),
             ])
         )
 
-    messages: list[dict[str, Any]] = []
-    current = header
+    # LINE text จำกัด 5,000 ตัวอักษร ใช้ 4,500 เป็น safety margin
+    max_length = 4500
+    included_blocks: list[str] = []
+    omitted_count = 0
 
-    for block in event_blocks:
-        candidate = f"{current}\n\n{block}"
-        if len(candidate) > 4500 and current != header:
-            messages.append({
-                "type": "text",
-                "text": current,
-            })
-            current = f"{header}\n\n{block}"
-        else:
-            current = candidate
+    for index, block in enumerate(event_blocks):
+        remaining = len(event_blocks) - index - 1
+        footer = (
+            f"\n\nและอีก {remaining} เหตุการณ์"
+            if remaining > 0
+            else ""
+        )
+        candidate = (
+            header
+            + "\n\n"
+            + "\n\n".join([*included_blocks, block])
+            + footer
+            + f"\n\nดูรายละเอียด: {DASHBOARD_URL}"
+        )
 
-    if current:
-        messages.append({
-            "type": "text",
-            "text": current,
-        })
+        if len(candidate) > max_length:
+            omitted_count = len(event_blocks) - len(included_blocks)
+            break
 
-    return messages
+        included_blocks.append(block)
 
+    if not included_blocks and event_blocks:
+        included_blocks.append(
+            event_blocks[0][:2500]
+        )
+        omitted_count = len(event_blocks) - 1
+
+    text = header
+    if included_blocks:
+        text += "\n\n" + "\n\n".join(included_blocks)
+    if omitted_count > 0:
+        text += f"\n\nและอีก {omitted_count} เหตุการณ์"
+    text += f"\n\nดูรายละเอียด: {DASHBOARD_URL}"
+
+    return [{
+        "type": "text",
+        "text": text[:4900],
+    }]
 
 def push_line_messages(
     group_id: str,
