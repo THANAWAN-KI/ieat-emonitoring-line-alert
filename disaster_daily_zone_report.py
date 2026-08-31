@@ -153,7 +153,7 @@ def build_flex(zone: str, risks: list[dict], now: datetime, test: bool) -> dict:
     issue_time = now.strftime("%H:%M น.")
 
     return {"type": "flex", "altText": (("[ทดสอบ] " if test else "") + f"รายงานภัยพิบัติรายวัน {zone}")[:400], "contents": {
-        "type": "bubble", "size": "mega",
+        "type": "bubble", "size": "giga",
         "styles": {"header": {"backgroundColor": "#E63946"}, "body": {"backgroundColor": "#FFFFFF"}, "footer": {"backgroundColor": "#FFFFFF"}},
         "header": {"type": "box", "layout": "horizontal", "paddingTop": "15px", "paddingBottom": "15px", "paddingStart": "15px", "paddingEnd": "15px", "contents": [
             {"type": "box", "layout": "vertical", "flex": 1, "contents": [
