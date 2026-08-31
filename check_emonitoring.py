@@ -875,6 +875,39 @@ def station_key(station: dict[str, Any]) -> str:
     )
 
 
+def offline_threshold_minutes() -> int:
+    """เวลาที่สถานีต้อง OFFLINE ต่อเนื่องก่อนแจ้งเตือน"""
+    try:
+        return max(
+            1,
+            int(os.getenv("OFFLINE_ALERT_MINUTES", "60")),
+        )
+    except ValueError:
+        return 60
+
+
+def offline_minutes(station: dict[str, Any]) -> int | None:
+    update_time = parse_station_update_date(
+        station.get("last_update")
+    )
+    if update_time is None:
+        return None
+    return max(
+        0,
+        int((now_thailand() - update_time).total_seconds() // 60),
+    )
+
+
+def offline_notification_due(station: dict[str, Any]) -> bool:
+    if safe_text(station.get("status"), "").upper() != "OFFLINE":
+        return False
+    minutes = offline_minutes(station)
+    return (
+        minutes is not None
+        and minutes >= offline_threshold_minutes()
+    )
+
+
 def station_snapshot(
     station: dict[str, Any]
 ) -> dict[str, Any]:
@@ -892,6 +925,10 @@ def station_snapshot(
             safe_text(station.get("station_type")),
         "status":
             safe_text(station.get("status")).upper(),
+        "last_update":
+            safe_text(station.get("last_update"), ""),
+        "offline_notified":
+            offline_notification_due(station),
         "parameter_alarm":
             full_text(station.get("parameter_alarm"), ""),
         "comment":
@@ -1145,6 +1182,12 @@ def detect_notification_events(
                 ""
             )
         ).upper()
+        previous_offline_notified = bool(
+            previous.get("offline_notified", False)
+        )
+        current_offline_notified = bool(
+            current.get("offline_notified", False)
+        )
 
         previous_level = alarm_level_from_snapshot(
             previous
@@ -1260,15 +1303,25 @@ def detect_notification_events(
         # ----------------------------------------------------
 
         if (
-            previous_status == "ONLINE"
-            and current_status == "OFFLINE"
+            current_status == "OFFLINE"
+            and current_offline_notified
+            and not previous_offline_notified
         ):
-
+            minutes = offline_minutes(station)
+            duration_text = (
+                f"{minutes} นาที"
+                if minutes is not None
+                else "ตามเวลาที่กำหนด"
+            )
             events.append(
                 build_event_station(
                     station,
                     "OFFLINE",
-                    "สถานีเปลี่ยนสถานะจาก ONLINE เป็น OFFLINE",
+                    (
+                        "สถานี OFFLINE ต่อเนื่อง "
+                        f"{duration_text} (เกณฑ์ "
+                        f"{offline_threshold_minutes()} นาที)"
+                    ),
                     previous,
                 )
             )
@@ -1280,6 +1333,7 @@ def detect_notification_events(
         elif (
             previous_status == "OFFLINE"
             and current_status == "ONLINE"
+            and previous_offline_notified
         ):
 
             events.append(
@@ -2910,10 +2964,31 @@ def build_zone_event_texts(
     rows: list[dict[str, Any]] = []
 
     for event in visible:
+        event_type = safe_text(event.get("event_type"), "")
+        previous_snapshot = event.get("previous_snapshot", {})
+        previous_alarm_text = full_text(
+            previous_snapshot.get("parameter_alarm")
+            if isinstance(previous_snapshot, dict)
+            else "",
+            "",
+        )
         parameter_text = full_text(
             event.get("parameter_alarm"),
-            "ค่ากลับสู่ภาวะปกติ",
+            (
+                f"ค่ากลับสู่เกณฑ์ (เดิม: {previous_alarm_text})"
+                if event_type == "RECOVERED" and previous_alarm_text
+                else event_title(event)
+            ),
         )
+        urgency = {
+            "SEVERITY_UP": "เร่งตรวจสอบ",
+            "NEW_ALARM": "เร่งตรวจสอบ",
+            "OFFLINE": "เฝ้าระวัง",
+            "ALARM_CHANGED": "ติดตามการเปลี่ยนแปลง",
+            "SEVERITY_DOWN": "ติดตามสถานการณ์",
+            "ONLINE": "กลับสู่การให้บริการ",
+            "RECOVERED": "กลับสู่ภาวะปกติ",
+        }.get(event_type, "ติดตามสถานการณ์")
         station_group = station_type_group(
             safe_text(event.get("station_type"), "")
         )
@@ -2947,7 +3022,16 @@ def build_zone_event_texts(
             },
             {
                 "type": "text",
-                "text": f"ค่าที่แจ้งเตือน: {parameter_text}",
+                "text": f"ระดับ: {urgency}",
+                "size": "xs",
+                "weight": "bold",
+                "color": event_color(event),
+                "wrap": True,
+                "margin": "xs",
+            },
+            {
+                "type": "text",
+                "text": f"รายละเอียด: {parameter_text}",
                 "size": "xs",
                 "weight": "bold",
                 "color": event_color(event),
