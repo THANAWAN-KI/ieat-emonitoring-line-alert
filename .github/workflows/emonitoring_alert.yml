@@ -2,6 +2,12 @@ name: e-Monitoring Hourly LINE Alert
 
 on:
   workflow_dispatch:
+    inputs:
+      preview_mode:
+        description: "ส่ง Flex Card ตัวอย่างสมมติไปยังกลุ่ม Demo ทั้ง 3 กลุ่ม"
+        required: false
+        type: boolean
+        default: false
 
   schedule:
     # ตรวจและส่ง LINE ทุก 1 ชั่วโมง เฉพาะเวลา 08:30–16:30 น. ตามเวลาประเทศไทย
@@ -59,6 +65,7 @@ jobs:
           LINE_GROUP_ID_DEMO_01: ${{ secrets.LINE_GROUP_ID_DEMO_01 }}
           LINE_GROUP_ID_DEMO_02: ${{ secrets.LINE_GROUP_ID_DEMO_02 }}
           LINE_GROUP_ID_DEMO_03: ${{ secrets.LINE_GROUP_ID_DEMO_03 }}
+          LINE_PREVIEW_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.preview_mode || false }}
           PYTHONUNBUFFERED: "1"
           TZ: Asia/Bangkok
         run: python check_emonitoring_batch.py
