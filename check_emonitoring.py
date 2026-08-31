@@ -2970,7 +2970,7 @@ def build_zone_event_texts(
             "type": "box",
             "layout": "vertical",
             "paddingAll": "12px",
-            "backgroundColor": "#E6D8EB",
+            "backgroundColor": "#FFFFFF",
             "contents": [
                 {
                     "type": "text",
@@ -3104,7 +3104,7 @@ def build_zone_event_texts(
             ],
         },
         "styles": {
-            "header": {"backgroundColor": "#E6D8EB"},
+            "header": {"backgroundColor": "#FFFFFF"},
             "body": {"backgroundColor": "#FFFFFF"},
             "footer": {"backgroundColor": "#FFFFFF"},
         },
