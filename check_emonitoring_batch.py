@@ -174,13 +174,11 @@ def main() -> int:
             print("LINE routing: แยกส่งตามสายปฏิบัติการ")
             success = base.send_zone_event_reports(events)
         else:
-            print("LINE routing: ใช้ Broadcast เดิม")
-            success = base.send_station_status_report(
-                notification_stations,
-                notification_type_stats,
-                notification_alert_stations,
-                events,
+            print(
+                "ERROR: LINE Zone routing ยังไม่เปิดใช้งาน "
+                "และ Broadcast ถูกปิดเพื่อป้องกันการส่งข้าม Zone"
             )
+            success = False
     except RuntimeError as error:
         print(f"ERROR: {error}")
         return 1
