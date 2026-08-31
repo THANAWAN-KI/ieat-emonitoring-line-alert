@@ -146,10 +146,20 @@ def main() -> int:
     )
 
     previous_state = base.load_alert_state()
-    events = base.detect_notification_events(
+    detected_events = base.detect_notification_events(
         previous_state,
-        notification_stations,
+        all_stations,
     )
+    # Alarm ต้องเป็นข้อมูลวันปัจจุบันเท่านั้น
+    # แต่สถานี OFFLINE จำเป็นต้องใช้เวลาข้อมูลล่าสุดที่ค้างอยู่
+    events = [
+        event
+        for event in detected_events
+        if (
+            event.get("event_type") in {"OFFLINE", "ONLINE"}
+            or base.station_updated_today(event)
+        )
+    ]
 
     print(f"สถานีทั้งหมด: {len(all_stations)}")
     print(f"สถานีข้อมูลวันที่ปัจจุบัน: {len(notification_stations)}")
@@ -162,9 +172,13 @@ def main() -> int:
         f"{len(alert_stations) - len(notification_alert_stations)}"
     )
     print(f"เหตุการณ์ใหม่/เปลี่ยนแปลง: {len(events)}")
+    print(
+        "เกณฑ์แจ้งสถานี OFFLINE ต่อเนื่อง: "
+        f"{base.offline_threshold_minutes()} นาที"
+    )
 
     if not events:
-        base.save_alert_state(notification_stations)
+        base.save_alert_state(all_stations)
         print("LINE: ไม่ส่ง — ไม่มีการเปลี่ยนแปลงจากข้อมูลวันที่ปัจจุบัน")
         print("โควตารอบนี้: 0 ข้อความ")
         return 0
@@ -186,7 +200,7 @@ def main() -> int:
         print("ERROR: ส่ง LINE ไม่สำเร็จ — ยังไม่บันทึก state เพื่อให้ retry")
         return 1
 
-    base.save_alert_state(notification_stations)
+    base.save_alert_state(all_stations)
     print("ส่ง LINE สำเร็จตามข้อมูลวันที่ปัจจุบัน")
     print("บันทึก alert_state.json แล้ว")
     print("Dashboard อัปเดตแล้ว")
