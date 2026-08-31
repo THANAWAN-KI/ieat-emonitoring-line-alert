@@ -1152,15 +1152,37 @@ def detect_notification_events(
 
         if previous is None:
 
-            # รอบแรก: แจ้งเฉพาะสถานีที่มี Alarm
+            # รอบแรก: แจ้งเฉพาะ Alarm หรือ OFFLINE ที่ครบเกณฑ์
             # ไม่แจ้งทุกสถานีเป็นจำนวนมหาศาล
             if current_alarm:
-
                 events.append(
                     build_event_station(
                         station,
                         "NEW_ALARM",
                         "พบค่าพารามิเตอร์แจ้งเตือนใหม่",
+                        None,
+                    )
+                )
+
+            if (
+                current_status == "OFFLINE"
+                and current.get("offline_notified", False)
+            ):
+                minutes = offline_minutes(station)
+                duration_text = (
+                    f"{minutes} นาที"
+                    if minutes is not None
+                    else "ตามเวลาที่กำหนด"
+                )
+                events.append(
+                    build_event_station(
+                        station,
+                        "OFFLINE",
+                        (
+                            "สถานี OFFLINE ต่อเนื่อง "
+                            f"{duration_text} (เกณฑ์ "
+                            f"{offline_threshold_minutes()} นาที)"
+                        ),
                         None,
                     )
                 )
