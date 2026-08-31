@@ -3085,7 +3085,7 @@ def build_zone_event_texts(
                             ),
                             "size": "md",
                             "weight": "bold",
-                            "color": "#C51F35",
+                            "color": "#E63946",
                             "align": "center",
                             "wrap": True,
                         },
@@ -3118,7 +3118,7 @@ def build_zone_event_texts(
                             parameter_count,
                             "พารามิเตอร์แจ้งเตือน",
                             "#FDECEF",
-                            "#C51F35",
+                            "#E63946",
                         ),
                         metric(
                             recovered_count,
