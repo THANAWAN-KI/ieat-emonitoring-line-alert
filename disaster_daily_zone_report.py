@@ -156,7 +156,7 @@ def build_flex(zone: str, risks: list[dict], now: datetime, test: bool) -> dict:
     return {"type": "flex", "altText": (("[ทดสอบ] " if test else "") + f"รายงานภัยพิบัติรายวัน {zone}")[:400], "contents": {
         "type": "bubble", "size": "mega",
         "styles": {"header": {"backgroundColor": "#E63946"}, "body": {"backgroundColor": "#FFFFFF"}, "footer": {"backgroundColor": "#FFFFFF"}},
-        "header": {"type": "box", "layout": "horizontal", "paddingTop": "15px", "paddingBottom": "15px", "paddingStart": "15px", "paddingEnd": "12px", "spacing": "sm", "alignItems": "stretch", "contents": [
+        "header": {"type": "box", "layout": "horizontal", "paddingTop": "15px", "paddingBottom": "15px", "paddingStart": "15px", "paddingEnd": "12px", "spacing": "sm", "contents": [
             {"type": "box", "layout": "vertical", "flex": 4, "contents": [
                 {"type": "text", "text": "IEAT LINE ALERT", "size": "md", "weight": "bold", "color": "#FFFFFF"},
                 {"type": "text", "text": "รายงานสถานการณ์ภัยพิบัติรายวัน", "size": "sm", "weight": "bold", "color": "#FFFFFF", "wrap": True, "margin": "lg"},
