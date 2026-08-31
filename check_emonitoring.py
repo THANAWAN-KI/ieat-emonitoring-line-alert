@@ -1855,8 +1855,7 @@ def build_header(
                 "type": "box",
                 "layout": "horizontal",
                 "margin": "sm",
-                "alignItems": "center",
-                "contents": [
+                    "contents": [
                     image_component(
                         IEAT_LOGO_URL,
                         size="xs"
@@ -2344,8 +2343,7 @@ def build_summary_bubble(
                 "borderColor": border,
                 "borderWidth": "1px",
                 "cornerRadius": "7px",
-                "alignItems": "center",
-                "contents": [
+                    "contents": [
                     image_component(
                         icon_url,
                         size="xs",
@@ -2584,8 +2582,7 @@ def build_station_detail_bubble(
                     "borderColor": severity["border"],
                     "borderWidth": "1px",
                     "cornerRadius": "8px",
-                    "alignItems": "center",
-                    "contents": [
+                            "contents": [
                         image_component(
                             severity["icon_url"],
                             size="xs",
@@ -3124,7 +3121,6 @@ def build_zone_event_texts(
             "paddingAll": "12px",
             "backgroundColor": "#FFFFFF",
             "spacing": "md",
-            "alignItems": "center",
             "contents": [
                 {
                     "type": "image",
