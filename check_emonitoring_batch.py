@@ -55,15 +55,18 @@ def main() -> int:
         print("โควตารอบนี้: 0 ข้อความ")
         return 0
 
-    # ส่งการ์ดสรุปสถานะสถานีแบบใหม่เพียง 1 ข้อความ
-    # ฟังก์ชันนี้สร้าง Flex, ตรวจขนาด และส่ง LINE ให้ครบในจุดเดียว
     try:
-        success = base.send_station_status_report(
-            all_stations,
-            type_stats,
-            alert_stations,
-            events,
-        )
+        if base.zone_routing_enabled():
+            print("LINE routing: แยกส่งตามสายปฏิบัติการ")
+            success = base.send_zone_event_reports(events)
+        else:
+            print("LINE routing: ใช้ Broadcast เดิม")
+            success = base.send_station_status_report(
+                all_stations,
+                type_stats,
+                alert_stations,
+                events,
+            )
     except RuntimeError as error:
         print(f"ERROR: {error}")
         return 1
