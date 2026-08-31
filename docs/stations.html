@@ -1,147 +1,156 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#4D286F">
+<meta name="theme-color" content="#ffffff">
 <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
-<title>สถานะสถานีตรวจวัด | IEAT e-Monitoring</title>
+<title>รายงานสถานีตรวจวัด | IEAT e-Monitoring</title>
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap");
-:root{--purple:#4D286F;--purple2:#6B3F91;--purple-soft:#F4EFF8;--green:#159B6B;--green-soft:#ECF8F2;--red:#D94A58;--red-soft:#FFF1F3;--amber:#C87516;--amber-soft:#FFF7E8;--blue:#3478C9;--blue-soft:#EEF5FE;--ink:#30323A;--muted:#727781;--line:#E5E7EC;--bg:#F5F6F8;--white:#fff;--shadow:0 7px 22px rgba(43,45,55,.055)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Sarabun","Noto Sans Thai",Tahoma,sans-serif;line-height:1.5}.page{width:100%;max-width:900px;min-height:100vh;margin:auto;background:#FAFBFC}.header{display:flex;align-items:center;gap:14px;padding:15px 24px;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 2px 9px rgba(30,32,38,.04)}.logo{width:60px;height:60px;object-fit:contain}.brand{min-width:0}.brand h1{margin:0;color:#25262B;font-size:23px;line-height:1.25}.brand p{margin:4px 0 0;color:var(--muted);font-size:14px}.content{padding:18px}.hero{padding:18px;background:#fff;border:1px solid var(--line);border-left:5px solid var(--purple);border-radius:15px;box-shadow:var(--shadow)}.hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}.eyebrow{display:inline-block;padding:4px 9px;color:var(--blue);background:var(--blue-soft);border-radius:999px;font-size:12px;font-weight:700}.hero h2{margin:9px 0 4px;color:var(--purple);font-size:25px}.hero p{margin:0;color:var(--muted);font-size:14px}.refresh{padding:9px 12px;color:var(--purple);background:var(--purple-soft);border:0;border-radius:9px;font:700 13px inherit;cursor:pointer}.refresh:disabled{opacity:.6;cursor:wait}.time-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}.time-item span{display:block;color:var(--muted);font-size:11px}.time-item strong{display:block;margin-top:3px;color:var(--ink);font-size:13px}.notice{display:flex;align-items:center;gap:11px;margin-top:11px;padding:13px 15px;background:#fff;border:1px solid var(--line);border-left:5px solid var(--green);border-radius:13px}.notice.alert{border-left-color:var(--red)}.notice-dot{width:11px;height:11px;flex:0 0 auto;background:var(--green);border-radius:50%;box-shadow:0 0 0 5px var(--green-soft)}.notice.alert .notice-dot{background:var(--red);box-shadow:0 0 0 5px var(--red-soft)}.notice strong{font-size:15px}.notice span{display:block;margin-top:2px;color:var(--muted);font-size:12px}.heading{margin:22px 2px 10px}.heading h2{margin:0;color:var(--purple);font-size:20px}.heading p{margin:3px 0 0;color:var(--muted);font-size:12px}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.card{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}.kpi{padding:15px;border-left:4px solid var(--purple)}.kpi.online{border-left-color:var(--green)}.kpi.offline{border-left-color:var(--red)}.kpi.rate{border-left-color:var(--blue)}.kpi-label{color:var(--muted);font-size:12px}.kpi-value{margin-top:6px;color:var(--purple);font-size:29px;font-weight:800;line-height:1}.kpi.online .kpi-value{color:var(--green)}.kpi.offline .kpi-value{color:var(--red)}.kpi.rate .kpi-value{color:var(--blue)}.kpi-note{margin-top:7px;color:var(--muted);font-size:11px}.types{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.type-card{padding:15px}.type-head{display:flex;justify-content:space-between;gap:10px}.type-code{color:var(--purple);font-size:18px;font-weight:800}.type-name{margin-top:2px;color:var(--muted);font-size:11px}.type-total{color:var(--purple);font-size:23px;font-weight:800}.type-counts{display:flex;justify-content:space-between;margin-top:12px;font-size:12px}.on{color:var(--green)}.off{color:var(--red)}.track{height:8px;margin-top:8px;overflow:hidden;background:#ECEEF2;border-radius:99px}.fill{height:100%;background:var(--green);border-radius:99px}.insights{display:grid;grid-template-columns:1fr 1fr;gap:9px}.insight{padding:15px}.insight h3{margin:0;color:var(--ink);font-size:15px}.insight p{margin:3px 0 12px;color:var(--muted);font-size:11px}.age-grid,.quality-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}.mini{padding:10px;background:#F7F8FA;border-radius:9px}.mini span{display:block;color:var(--muted);font-size:11px}.mini strong{display:block;margin-top:3px;color:var(--purple);font-size:18px}.estate-table{overflow:hidden}.estate-row{display:grid;grid-template-columns:minmax(120px,1.5fr) repeat(3,minmax(58px,.6fr)) 90px;align-items:center;gap:8px;padding:11px 13px;border-top:1px solid var(--line);font-size:12px}.estate-row:first-child{border-top:0}.estate-row.head{color:var(--muted);background:#F7F8FA;font-size:11px}.estate-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rate-pill{padding:4px 7px;color:var(--green);background:var(--green-soft);border-radius:99px;text-align:center}.filter-card{padding:13px}.filters{display:grid;grid-template-columns:2fr repeat(3,1fr);gap:8px}.control{width:100%;padding:10px 11px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:9px;font:inherit;font-size:13px;outline:none}.control:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(77,40,111,.1)}.result-bar{display:flex;justify-content:space-between;gap:10px;margin-top:10px;color:var(--muted);font-size:11px}.station-list{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:9px}.station{padding:14px;border-left:4px solid var(--green)}.station.offline{border-left-color:var(--red)}.station-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}.station-name{font-size:14px;font-weight:700;line-height:1.45}.badge{flex:0 0 auto;padding:4px 7px;color:var(--green);background:var(--green-soft);border-radius:99px;font-size:10px}.badge.offline{color:var(--red);background:var(--red-soft)}.station-meta{margin-top:5px;color:var(--muted);font-size:11px}.station-details{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px}.detail{padding:8px;background:#F7F8FA;border-radius:8px}.detail span{display:block;color:var(--muted);font-size:10px}.detail strong{display:block;margin-top:2px;color:var(--ink);font-size:11px;font-weight:600;overflow-wrap:anywhere}.comment{margin-top:8px;padding:8px;color:#6B526E;background:var(--purple-soft);border-radius:8px;font-size:11px;line-height:1.5}.map-link{display:inline-block;margin-top:9px;padding:6px 9px;color:var(--blue);background:var(--blue-soft);border-radius:7px;text-decoration:none;font-size:11px}.empty,.loading,.error{padding:24px;color:var(--muted);background:#fff;border:1px solid var(--line);border-radius:13px;text-align:center;font-size:13px}.error{color:var(--red)}.footer{padding:24px 16px;color:var(--muted);text-align:center;font-size:12px}.hidden{display:none!important}
-.action-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:11px}.action-button{min-height:44px;padding:9px 8px;color:var(--purple);background:#fff;border:1px solid #DCCFE6;border-radius:9px;font:700 12px inherit;cursor:pointer}.action-button.primary{color:#fff;background:var(--purple);border-color:var(--purple)}.action-button.warning{color:#A34608;background:var(--amber-soft);border-color:#F0D7B8}.action-button.danger{color:#A92F3D;background:var(--red-soft);border-color:#F0CCD1}.station.offline.recent{border-left-color:#D5A000}.station.offline.warning{border-left-color:var(--amber)}.station.offline.critical{border-left-color:var(--red);box-shadow:0 7px 22px rgba(217,74,88,.10)}.priority{display:inline-block;margin-top:7px;padding:4px 7px;border-radius:99px;font-size:10px;font-weight:700}.priority.recent{color:#806000;background:#FFF8D9}.priority.warning{color:#A34608;background:var(--amber-soft)}.priority.critical{color:#A92F3D;background:var(--red-soft)}.station-section{scroll-margin-top:12px}.active-filter{margin-top:10px;padding:9px 11px;color:var(--purple);background:var(--purple-soft);border-radius:9px;font-size:12px}.active-filter.hidden{display:none}.station-name{font-size:15px}.station-meta{font-size:12px}.detail strong{font-size:12px}
-@media(max-width:700px){.header{padding:12px 14px}.logo{width:50px;height:50px}.brand h1{font-size:19px}.brand p{font-size:12px}.content{padding:12px}.hero h2{font-size:22px}.hero p{font-size:13px}.kpis{grid-template-columns:1fr 1fr}.types,.insights{grid-template-columns:1fr}.filters{grid-template-columns:1fr 1fr}.filters .search{grid-column:1/-1}.station-list{grid-template-columns:1fr}.estate-row{grid-template-columns:minmax(100px,1.5fr) 48px 48px 62px}.estate-row>*:nth-child(4){display:none}.time-grid{grid-template-columns:1fr}.refresh{font-size:12px}.action-strip{grid-template-columns:1fr 1fr}.action-button{font-size:12px}}
+@import url("https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap");
+:root{--purple:#5d2a7a;--purple-soft:#f4eff8;--green:#2f8f46;--green-soft:#eef7f0;--red:#e63946;--red-soft:#fdecef;--orange:#e67700;--orange-soft:#fff5df;--blue:#0871b9;--blue-soft:#e5f2fb;--ink:#202124;--muted:#667078;--line:#e2e5e7;--page:#f3f5f6;--white:#fff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font-family:"Sarabun",Tahoma,sans-serif}
+.page{width:100%;max-width:1180px;min-height:100vh;margin:0 auto;padding:14px}
+.header{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#fff;border-bottom:1px solid var(--line);border-radius:12px 12px 0 0}
+.logo{width:48px;height:48px;object-fit:contain}.header-main{min-width:0}.header h1{margin:0;font-size:20px;line-height:1.35}.header p{margin:3px 0 0;color:var(--muted);font-size:11px}
+.header-status{margin-left:auto;color:var(--green);font-size:11px;font-weight:600;white-space:nowrap}
+.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:10px;background:#fff}
+.summary-card{min-height:78px;padding:12px;border-radius:9px}.summary-card strong{display:block;font-size:24px;line-height:1;font-weight:600}.summary-card span{display:block;margin-top:8px;font-size:11px}
+.summary-card.all{color:var(--purple);background:var(--purple-soft)}.summary-card.online{color:var(--green);background:var(--green-soft)}.summary-card.offline{color:var(--orange);background:var(--orange-soft)}.summary-card.alert{color:var(--red);background:var(--red-soft)}
+.tools{display:grid;grid-template-columns:minmax(220px,2fr) repeat(3,minmax(130px,1fr));gap:8px;padding:10px;background:#fff;border-top:1px solid var(--line)}
+.control{width:100%;min-height:42px;padding:9px 10px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:12px;outline:none}
+.control:focus{border-color:var(--purple);box-shadow:0 0 0 2px rgba(93,42,122,.1)}
+.report-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;background:#fff;border-top:1px solid var(--line)}
+.result{color:var(--muted);font-size:11px}.actions{display:flex;gap:7px}
+.button{min-height:36px;padding:7px 10px;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--purple);font:600 11px inherit;cursor:pointer}.button.primary{color:#fff;background:var(--purple);border-color:var(--purple)}
+.table-card{overflow:hidden;background:#fff;border-top:1px solid var(--line);border-radius:0 0 12px 12px}
+.table-scroll{width:100%;overflow-x:auto}
+table{width:100%;min-width:1120px;border-collapse:collapse;table-layout:fixed}
+thead th{position:sticky;top:0;z-index:1;padding:10px 9px;color:#fff;background:var(--purple);font-size:11px;font-weight:600;text-align:left;white-space:nowrap}
+tbody td{padding:10px 9px;border-bottom:1px solid var(--line);font-size:11px;line-height:1.5;vertical-align:top;overflow-wrap:anywhere}
+tbody tr:hover{background:#faf8fc}
+.col-no{width:45px;text-align:center}.col-station{width:220px}.col-estate{width:180px}.col-type{width:85px}.col-status{width:120px}.col-update{width:135px}.col-alarm{width:160px}.col-comment{width:190px}.col-map{width:75px;text-align:center}
+.station-name{font-weight:600}.station-code{margin-top:2px;color:var(--muted);font-size:9px}
+.badge{display:inline-block;padding:4px 7px;border-radius:99px;font-size:9px;font-weight:600;white-space:nowrap}.badge.online{color:var(--green);background:var(--green-soft)}.badge.offline{color:var(--orange);background:var(--orange-soft)}.badge.alert{color:var(--red);background:var(--red-soft)}
+.alarm{color:var(--red);font-weight:600}.muted{color:var(--muted)}.map-link{display:inline-block;padding:5px 7px;color:var(--blue);background:var(--blue-soft);border-radius:6px;text-decoration:none;font-size:9px;white-space:nowrap}
+.empty,.loading{padding:34px 12px;color:var(--muted);font-size:12px;text-align:center}
+.footer{padding:18px;color:var(--muted);font-size:10px;line-height:1.6;text-align:center}
+@media(max-width:760px){
+ .page{padding:8px}.header{padding:11px}.logo{width:42px;height:42px}.header h1{font-size:17px}.header p{font-size:10px}.header-status{font-size:9px}
+ .summary{grid-template-columns:1fr 1fr}.summary-card{min-height:68px;padding:10px}.summary-card strong{font-size:21px}.summary-card span{font-size:10px}
+ .tools{grid-template-columns:1fr 1fr}.tools .search-wrap{grid-column:1/-1}
+ .report-bar{align-items:flex-start;flex-direction:column}.actions{width:100%}.button{flex:1}
+ .table-scroll{border-top:1px solid var(--line)}
+}
+@media print{
+ body,.page{background:#fff}.page{max-width:none;padding:0}.tools,.actions,.footer{display:none}.header,.summary,.report-bar,.table-card{border-radius:0}
+ .table-scroll{overflow:visible}table{min-width:0;font-size:8px}thead th,tbody td{padding:5px 4px;font-size:8px}.col-map{display:none}
+}
 </style>
 </head>
 <body>
 <div class="page">
 <header class="header">
-  <img class="logo" src="./assets/TH-Vertical.png" alt="กนอ.">
-  <div class="brand"><h1>สถานะสถานีตรวจวัด</h1><p>IEAT e‑Monitoring • Online / Offline</p></div>
+ <img class="logo" src="./assets/TH-Vertical.png" alt="กนอ.">
+ <div class="header-main"><h1>รายงานสถานีตรวจวัด e-Monitoring</h1><p>ข้อมูลสถานีทั้งหมดในรูปแบบตาราง • อัปเดต <span id="updatedAt">กำลังโหลด…</span></p></div>
+ <div class="header-status">● ข้อมูลล่าสุด</div>
 </header>
-<main class="content">
-<section class="hero">
-  <div class="hero-top"><div><span class="eyebrow">สถานะระบบล่าสุด</span><h2>ความพร้อมใช้งานของสถานี</h2><p>ติดตามการเชื่อมต่อและความครบถ้วนของข้อมูลสถานีตรวจวัดสิ่งแวดล้อม</p></div><button id="refreshButton" class="refresh" type="button" onclick="loadStatus()">รีเฟรชข้อมูล</button></div>
-  <div class="time-grid"><div class="time-item"><span>หน้าเว็บอัปเดตล่าสุด</span><strong id="updatedAt">กำลังโหลด…</strong></div><div class="time-item"><span>ข้อมูลล่าสุดจากสถานี</span><strong id="latestDataTime">—</strong></div></div>
-</section>
-<section id="notice" class="notice"><i class="notice-dot"></i><div><strong id="noticeTitle">กำลังตรวจสอบสถานี</strong><span id="noticeText">โปรดรอสักครู่</span></div></section>
-<nav class="action-strip" aria-label="ตัวกรองด่วนสำหรับเจ้าหน้าที่">
-  <button class="action-button primary" type="button" onclick="applyPreset('OFFLINE',null)">สถานี Offline</button>
-  <button class="action-button danger" type="button" onclick="applyPreset('OFFLINE',30)">Offline เกิน 30 วัน</button>
-  <button class="action-button warning" type="button" onclick="applyPreset('OFFLINE',7)">Offline เกิน 7 วัน</button>
-  <button class="action-button" type="button" onclick="applyPreset('ALL',null)">สถานีทั้งหมด</button>
-</nav>
-<div id="loading" class="loading">กำลังโหลดข้อมูลสถานีจาก status.json…</div>
-<div id="error" class="error hidden">ไม่สามารถโหลดข้อมูลสถานีได้ กรุณาลองใหม่อีกครั้ง</div>
-<div id="dashboard" class="hidden">
-<div class="heading"><h2>ภาพรวมสถานี</h2><p>สถานะการเชื่อมต่อจากข้อมูลล่าสุด</p></div>
-<section class="kpis">
-  <article class="card kpi"><div class="kpi-label">สถานีทั้งหมด</div><div id="total" class="kpi-value">0</div><div class="kpi-note">ทุกประเภทสถานี</div></article>
-  <article class="card kpi online"><div class="kpi-label">Online</div><div id="online" class="kpi-value">0</div><div class="kpi-note">ส่งข้อมูลตามปกติ</div></article>
-  <article class="card kpi offline"><div class="kpi-label">Offline</div><div id="offline" class="kpi-value">0</div><div class="kpi-note">ควรตรวจสอบ</div></article>
-  <article class="card kpi rate"><div class="kpi-label">ความพร้อมใช้งาน</div><div id="onlineRate" class="kpi-value">0%</div><div class="kpi-note">Online ÷ ทั้งหมด</div></article>
-</section>
-<div id="station-section" class="heading station-section"><h2>รายการสถานีสำหรับตรวจสอบ</h2><p>เรียงสถานี Offline ที่มีระยะเวลานานที่สุดก่อน สามารถค้นหาและกรองเพิ่มเติมได้</p></div>
-<section class="card filter-card">
-  <div class="filters">
-    <input id="search" class="control search" type="search" placeholder="ค้นหาชื่อสถานี รหัส หรือนิคมฯ">
-    <select id="statusFilter" class="control"><option value="ALL">ทุกสถานะ</option><option value="ONLINE">Online</option><option value="OFFLINE">Offline</option></select>
-    <select id="typeFilter" class="control"><option value="ALL">ทุกประเภท</option><option value="AQMs">AQMs</option><option value="WQMs">WQMs</option><option value="CEMs">CEMs</option><option value="ประเภทอื่น">ประเภทอื่น</option></select>
-    <select id="estateFilter" class="control"><option value="ALL">ทุกนิคมฯ</option></select>
-  </div>
-  <div id="activeFilter" class="active-filter hidden"></div>
-  <div class="result-bar"><span id="resultCount">0 รายการ</span><span>อัปเดตอัตโนมัติทุก 1 นาที</span></div>
-</section>
-<section id="stationList" class="station-list"></section>
-<div class="heading"><h2>สถานะแยกตามประเภท</h2><p>AQMs, WQMs และ CEMs</p></div>
-<section id="typeCards" class="types"></section>
-<div class="heading"><h2>ข้อมูลเพื่อการติดตาม</h2><p>อายุการ Offline และความครบถ้วนของข้อมูล</p></div>
-<section class="insights">
-  <article class="card insight"><h3>อายุการ Offline</h3><p>ประเมินจากข้อความสถานะ เช่น OFFLINE (82 วัน)</p><div id="ageGrid" class="age-grid"></div></article>
-  <article class="card insight"><h3>คุณภาพข้อมูลสถานี</h3><p>รายการข้อมูลสำคัญที่ควรมีในระบบ</p><div id="qualityGrid" class="quality-grid"></div></article>
-</section>
-<div class="heading"><h2>ความพร้อมใช้งานแยกตามนิคมฯ</h2><p>เรียงจากจำนวนนิคมฯ ที่มีสถานีมากที่สุด</p></div>
-<section class="card estate-table"><div class="estate-row head"><span>นิคมอุตสาหกรรม</span><span>ทั้งหมด</span><span>Online</span><span>Offline</span><span>พร้อมใช้</span></div><div id="estateRows"></div></section>
 
+<section class="summary" aria-label="สรุปจำนวนสถานี">
+ <article class="summary-card all"><strong id="totalCount">—</strong><span>สถานีทั้งหมด</span></article>
+ <article class="summary-card online"><strong id="onlineCount">—</strong><span>สถานี Online</span></article>
+ <article class="summary-card offline"><strong id="offlineCount">—</strong><span>สถานี Offline</span></article>
+ <article class="summary-card alert"><strong id="alertCount">—</strong><span>สถานีที่ต้องติดตาม</span></article>
+</section>
+
+<section class="tools" aria-label="ค้นหาและกรองรายงาน">
+ <div class="search-wrap"><input id="searchInput" class="control" type="search" placeholder="ค้นหาชื่อสถานี นิคมฯ รหัส หรือพารามิเตอร์" oninput="renderTable()"></div>
+ <select id="estateFilter" class="control" onchange="renderTable()" aria-label="เลือกนิคมอุตสาหกรรม"><option value="">ทุกนิคมอุตสาหกรรม</option></select>
+ <select id="typeFilter" class="control" onchange="renderTable()" aria-label="เลือกประเภทสถานี"><option value="">ทุกประเภท</option><option value="AQMs">AQMs</option><option value="WQMs">WQMs</option><option value="CEMs">CEMs</option></select>
+ <select id="statusFilter" class="control" onchange="renderTable()" aria-label="เลือกสถานะ"><option value="">ทุกสถานะ</option><option value="ALERT">ต้องติดตาม</option><option value="ONLINE">Online</option><option value="OFFLINE">Offline</option></select>
+</section>
+
+<div class="report-bar">
+ <div id="resultCount" class="result">กำลังโหลดข้อมูล…</div>
+ <div class="actions"><button class="button" type="button" onclick="window.print()">พิมพ์รายงาน</button><button class="button primary" type="button" onclick="downloadCsv()">ดาวน์โหลด CSV</button></div>
 </div>
-</main>
-<footer class="footer">ระบบติดตามตรวจสอบสิ่งแวดล้อม กนอ.<br>ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย</footer>
+
+<section class="table-card">
+ <div class="table-scroll">
+  <table aria-label="ตารางรายงานสถานีตรวจวัด">
+   <thead><tr><th class="col-no">ลำดับ</th><th class="col-station">สถานีตรวจวัด</th><th class="col-estate">นิคมอุตสาหกรรม</th><th class="col-type">ประเภท</th><th class="col-status">สถานะ</th><th class="col-update">อัปเดตล่าสุด</th><th class="col-alarm">พารามิเตอร์แจ้งเตือน</th><th class="col-comment">หมายเหตุ</th><th class="col-map">ตำแหน่ง</th></tr></thead>
+   <tbody id="reportRows"><tr><td colspan="9" class="loading">กำลังโหลดข้อมูล…</td></tr></tbody>
+  </table>
+ </div>
+</section>
+
+<footer class="footer">ระบบติดตามตรวจสอบสิ่งแวดล้อม<br>ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย กนอ.</footer>
 </div>
+
 <script>
-const $=id=>document.getElementById(id);
-const esc=value=>String(value??"-").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[ch]));
-const num=value=>Number.isFinite(Number(value))?Number(value):0;
-const fmt=value=>num(value).toLocaleString("th-TH");
-let STATIONS=[];
-let OFFLINE_AGE_MIN=null;
-function online(status){return String(status||"").trim().toUpperCase()==="ONLINE"}
-function group(type){const t=String(type||"").toUpperCase();if(t.includes("AQM")||t.includes("AIR QUALITY"))return"AQMs";if(t.includes("WQM")||t.includes("WATER QUALITY"))return"WQMs";if(t.includes("CEM"))return"CEMs";return"ประเภทอื่น"}
-function offlineDays(status){const match=String(status||"").match(/(\d+)\s*วัน/);return match?Number(match[1]):null}
-function stationHtml(s){
-  const isOn=online(s.status),estate=s.estate_name||"-",updated=s.last_update||"-",days=offlineDays(s.status);
-  const lat=Number(s.latitude),lon=Number(s.longitude),map=Number.isFinite(lat)&&Number.isFinite(lon)?"https://www.google.com/maps/search/?api=1&query="+lat+","+lon:"";
-  const comment=String(s.comment||"").trim();
-  const priority=!isOn&&days!==null?(days>30?"critical":days>7?"warning":"recent"):"";
-  const priorityText=priority==="critical"?"เร่งด่วน • Offline มากกว่า 30 วัน":priority==="warning"?"ควรตรวจสอบ • Offline 8–30 วัน":priority==="recent"?"ติดตาม • Offline ไม่เกิน 7 วัน":"";
-  return '<article class="card station '+(isOn?"":"offline "+priority)+'"><div class="station-top"><div><div class="station-name">'+esc(s.station_name||"-")+'</div><div class="station-meta">'+esc(group(s.station_type))+' • '+esc(estate)+' • รหัส '+esc(s.code||"-")+'</div></div><span class="badge '+(isOn?"":"offline")+'">'+(isOn?"ONLINE":esc(s.status||"OFFLINE"))+'</span></div>'+(priorityText?'<span class="priority '+priority+'">'+priorityText+'</span>':'')+'<div class="station-details"><div class="detail"><span>ข้อมูลล่าสุด</span><strong>'+esc(updated)+'</strong></div><div class="detail"><span>ระยะเวลา Offline</span><strong>'+(isOn?"—":days!==null?fmt(days)+" วัน":"ไม่ระบุ")+'</strong></div></div>'+(!isOn&&comment&&comment!=="-"?'<div class="comment">'+esc(comment)+'</div>':'')+(map?'<a class="map-link" href="'+map+'" target="_blank" rel="noopener">ดูตำแหน่งบนแผนที่</a>':'')+'</article>'
+const byId=id=>document.getElementById(id);
+const esc=value=>String(value??"-").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[char]));
+const fmt=value=>Number(value||0).toLocaleString("th-TH");
+let STATIONS=[],VISIBLE=[];
+
+function isOnline(s){return String(s.status||"").trim().toUpperCase()==="ONLINE"}
+function alarmOf(s){return String(s.parameter_alarm||s.ParameterAlram||"-").trim()}
+function hasAlarm(s){const value=alarmOf(s);return value&&value!=="-"}
+function estateOf(s){return String(s.estate_name||s.IndustryZone||"-").trim()}
+function typeOf(s){
+ const value=String(s.station_type||s.StationType||"-").toUpperCase();
+ if(value.includes("AIR")||value.includes("AQM"))return "AQMs";
+ if(value.includes("WATER")||value.includes("WQM"))return "WQMs";
+ if(value.includes("STACK")||value.includes("CEM"))return "CEMs";
+ return "อื่น ๆ";
 }
-function renderStations(){
-  const q=$("search").value.trim().toLowerCase(),status=$("statusFilter").value,type=$("typeFilter").value,estate=$("estateFilter").value;
-  const rows=STATIONS.filter(s=>{const isOn=online(s.status),days=offlineDays(s.status);return(!q||[s.station_name,s.estate_name,s.code,s.station_type,s.status].join(" ").toLowerCase().includes(q))&&(status==="ALL"||(status==="ONLINE"&&isOn)||(status==="OFFLINE"&&!isOn))&&(OFFLINE_AGE_MIN===null||(!isOn&&days!==null&&days>OFFLINE_AGE_MIN))&&(type==="ALL"||group(s.station_type)===type)&&(estate==="ALL"||String(s.estate_name||"-")===estate)}).sort((a,b)=>{const aOn=online(a.status),bOn=online(b.status);if(aOn!==bOn)return aOn?1:-1;return (offlineDays(b.status)??-1)-(offlineDays(a.status)??-1)||String(a.station_name||"").localeCompare(String(b.station_name||""),"th")});
-  $("resultCount").textContent=fmt(rows.length)+" จาก "+fmt(STATIONS.length)+" สถานี";
-  $("stationList").innerHTML=rows.length?rows.map(stationHtml).join(""):'<div class="empty">ไม่พบสถานีตามเงื่อนไขที่เลือก</div>';
+function stateOf(s){if(hasAlarm(s))return "ALERT";return isOnline(s)?"ONLINE":"OFFLINE"}
+function statusBadge(s){
+ const state=stateOf(s);
+ if(state==="ALERT")return '<span class="badge alert">ต้องติดตาม</span><br><span class="muted">'+esc(s.status||"-")+'</span>';
+ if(state==="ONLINE")return '<span class="badge online">ONLINE</span>';
+ return '<span class="badge offline">'+esc(s.status||"OFFLINE")+'</span>';
 }
-function applyPreset(status,ageMin){
-  OFFLINE_AGE_MIN=ageMin;
-  $("statusFilter").value=status;
-  $("search").value="";
-  $("typeFilter").value="ALL";
-  $("estateFilter").value="ALL";
-  const label=ageMin===30?"กำลังแสดง: สถานี Offline มากกว่า 30 วัน":ageMin===7?"กำลังแสดง: สถานี Offline มากกว่า 7 วัน":status==="OFFLINE"?"กำลังแสดง: สถานี Offline ทั้งหมด":"";
-  $("activeFilter").textContent=label;
-  $("activeFilter").classList.toggle("hidden",!label);
-  renderStations();
-  $("station-section").scrollIntoView({behavior:"smooth",block:"start"});
+function mapUrl(s){
+ const lat=Number(s.latitude),lon=Number(s.longitude);
+ return Number.isFinite(lat)&&Number.isFinite(lon)?"https://www.google.com/maps/search/?api=1&query="+lat+","+lon:"";
 }
-function renderTypes(data){
-  const names={AQMs:"คุณภาพอากาศ",WQMs:"คุณภาพน้ำ",CEMs:"การระบายมลพิษ"};
-  $("typeCards").innerHTML=["AQMs","WQMs","CEMs"].map(key=>{const t=(data.type_stats||{})[key]||{},total=num(t.total),on=num(t.online),off=num(t.offline),rate=total?Math.round(on/total*100):0;return '<article class="card type-card"><div class="type-head"><div><div class="type-code">'+key+'</div><div class="type-name">'+names[key]+'</div></div><div class="type-total">'+fmt(total)+'</div></div><div class="type-counts"><span class="on">Online '+fmt(on)+'</span><span class="off">Offline '+fmt(off)+'</span></div><div class="track"><div class="fill" style="width:'+rate+'%"></div></div></article>'}).join("");
+function rowHtml(s,index){
+ const map=mapUrl(s),alarm=alarmOf(s),comment=String(s.comment||"-").trim()||"-";
+ return '<tr><td class="col-no">'+fmt(index+1)+'</td><td class="col-station"><div class="station-name">'+esc(s.station_name||"-")+'</div><div class="station-code">รหัส '+esc(s.code||"-")+'</div></td><td>'+esc(estateOf(s))+'</td><td>'+esc(typeOf(s))+'</td><td>'+statusBadge(s)+'</td><td>'+esc(s.last_update||s.LastUpdate||"-")+'</td><td>'+(hasAlarm(s)?'<span class="alarm">'+esc(alarm)+'</span>':'<span class="muted">-</span>')+'</td><td>'+esc(comment)+'</td><td class="col-map">'+(map?'<a class="map-link" target="_blank" rel="noopener" href="'+map+'">เปิดแผนที่</a>':'<span class="muted">-</span>')+'</td></tr>';
 }
-function renderInsights(){
-  const off=STATIONS.filter(s=>!online(s.status)),ages=off.map(s=>offlineDays(s.status));
-  const age=[["ไม่เกิน 7 วัน",ages.filter(v=>v!==null&&v<=7).length],["8–30 วัน",ages.filter(v=>v!==null&&v>7&&v<=30).length],["มากกว่า 30 วัน",ages.filter(v=>v!==null&&v>30).length],["ไม่ระบุระยะเวลา",ages.filter(v=>v===null).length]];
-  $("ageGrid").innerHTML=age.map(([label,value])=>'<div class="mini"><span>'+label+'</span><strong>'+fmt(value)+'</strong></div>').join("");
-  const quality=[["ไม่มีชื่อนิคมฯ",STATIONS.filter(s=>!s.estate_name||s.estate_name==="-").length],["ไม่มีพิกัด",STATIONS.filter(s=>!Number.isFinite(Number(s.latitude))||!Number.isFinite(Number(s.longitude))).length],["ไม่มีเวลาอัปเดต",STATIONS.filter(s=>!s.last_update||s.last_update==="-").length],["มีหมายเหตุ",STATIONS.filter(s=>s.comment&&s.comment!=="-").length]];
-  $("qualityGrid").innerHTML=quality.map(([label,value])=>'<div class="mini"><span>'+label+'</span><strong>'+fmt(value)+'</strong></div>').join("");
+function populateEstates(){
+ const select=byId("estateFilter");
+ const names=[...new Set(STATIONS.map(estateOf).filter(v=>v&&v!=="-"))].sort((a,b)=>a.localeCompare(b,"th"));
+ select.innerHTML='<option value="">ทุกนิคมอุตสาหกรรม</option>'+names.map(name=>'<option value="'+esc(name)+'">'+esc(name)+'</option>').join("");
+ const requested=new URLSearchParams(location.search).get("estate");if(requested&&names.includes(requested))select.value=requested;
 }
-function renderEstates(){
-  const map={};STATIONS.forEach(s=>{const name=String(s.estate_name||"-");if(name==="-")return;if(!map[name])map[name]={total:0,on:0};map[name].total++;if(online(s.status))map[name].on++});
-  const rows=Object.entries(map).sort((a,b)=>b[1].total-a[1].total);
-  $("estateRows").innerHTML=rows.length?rows.map(([name,v])=>{const off=v.total-v.on,rate=Math.round(v.on/v.total*100);return '<div class="estate-row"><span class="estate-name" title="'+esc(name)+'">'+esc(name)+'</span><span>'+fmt(v.total)+'</span><span class="on">'+fmt(v.on)+'</span><span class="off">'+fmt(off)+'</span><span class="rate-pill">'+rate+'%</span></div>'}).join(""):'<div class="empty">ไม่พบข้อมูลนิคมอุตสาหกรรม</div>';
+function renderTable(){
+ const query=byId("searchInput").value.trim().toLowerCase(),estate=byId("estateFilter").value,type=byId("typeFilter").value,status=byId("statusFilter").value;
+ VISIBLE=STATIONS.filter(s=>(!query||[s.station_name,s.code,estateOf(s),typeOf(s),s.status,alarmOf(s),s.comment].join(" ").toLowerCase().includes(query))&&(!estate||estateOf(s)===estate)&&(!type||typeOf(s)===type)&&(!status||stateOf(s)===status))
+ .sort((a,b)=>{const rank={ALERT:0,OFFLINE:1,ONLINE:2};return rank[stateOf(a)]-rank[stateOf(b)]||estateOf(a).localeCompare(estateOf(b),"th")||String(a.station_name||"").localeCompare(String(b.station_name||""),"th")});
+ byId("resultCount").textContent="แสดง "+fmt(VISIBLE.length)+" จาก "+fmt(STATIONS.length)+" สถานี";
+ byId("reportRows").innerHTML=VISIBLE.length?VISIBLE.map(rowHtml).join(""):'<tr><td colspan="9" class="empty">ไม่พบสถานีตามเงื่อนไขที่เลือก</td></tr>';
 }
-function fillEstateFilter(){
-  const names=[...new Set(STATIONS.map(s=>String(s.estate_name||"-")).filter(v=>v!=="-"))].sort((a,b)=>a.localeCompare(b,"th"));
-  $("estateFilter").innerHTML='<option value="ALL">ทุกนิคมฯ</option>'+names.map(n=>'<option value="'+esc(n)+'">'+esc(n)+'</option>').join("");
+function csvCell(value){const text=String(value??"").replace(/"/g,'""');return '"'+text+'"'}
+function downloadCsv(){
+ const header=["ลำดับ","รหัส","สถานีตรวจวัด","นิคมอุตสาหกรรม","ประเภท","สถานะ","อัปเดตล่าสุด","พารามิเตอร์แจ้งเตือน","หมายเหตุ","ละติจูด","ลองจิจูด"];
+ const rows=VISIBLE.map((s,index)=>[index+1,s.code||"",s.station_name||"",estateOf(s),typeOf(s),s.status||"",s.last_update||"",alarmOf(s),s.comment||"",s.latitude??"",s.longitude??""]);
+ const csv="\uFEFF"+[header,...rows].map(row=>row.map(csvCell).join(",")).join("\r\n");
+ const blob=new Blob([csv],{type:"text/csv;charset=utf-8"}),url=URL.createObjectURL(blob),link=document.createElement("a");
+ link.href=url;link.download="IEAT-eMonitoring-Stations-"+new Date().toISOString().slice(0,10)+".csv";document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
-function render(data){
-  STATIONS=Array.isArray(data.all_stations)?data.all_stations:[];
-  const total=num(data.station_count||STATIONS.length),on=num(data.online_total||STATIONS.filter(s=>online(s.status)).length),off=num(data.offline_total||total-on),rate=total?Math.round(on/total*100):0;
-  $("total").textContent=fmt(total);$("online").textContent=fmt(on);$("offline").textContent=fmt(off);$("onlineRate").textContent=rate+"%";
-  $("updatedAt").textContent=data.updated_at_text||data.updated_at||"-";$("latestDataTime").textContent=data.latest_data_time||"-";
-  $("notice").className="notice"+(off?" alert":"");$("noticeTitle").textContent=off?"พบสถานี Offline "+fmt(off)+" สถานี":"สถานีทั้งหมด Online";
-  $("noticeText").textContent=off?"ความพร้อมใช้งาน "+rate+"% • กรุณาตรวจสอบรายการสถานีด้านล่าง":"ระบบรับข้อมูลจากทุกสถานีตามปกติ";
-  renderTypes(data);renderInsights();renderEstates();fillEstateFilter();renderStations();
-  $("loading").classList.add("hidden");$("error").classList.add("hidden");$("dashboard").classList.remove("hidden");
+async function load(){
+ try{
+  const response=await fetch("./status.json?t="+Date.now(),{cache:"no-store"});if(!response.ok)throw new Error("HTTP "+response.status);
+  const data=await response.json();STATIONS=Array.isArray(data.all_stations)?data.all_stations:[];
+  const online=STATIONS.filter(isOnline).length,offline=STATIONS.length-online,alerts=STATIONS.filter(hasAlarm).length;
+  byId("totalCount").textContent=fmt(STATIONS.length);byId("onlineCount").textContent=fmt(online);byId("offlineCount").textContent=fmt(offline);byId("alertCount").textContent=fmt(alerts);
+  byId("updatedAt").textContent=data.updated_at_text||data.updated_at||"-";populateEstates();renderTable();
+ }catch(error){console.error(error);byId("updatedAt").textContent="ไม่สามารถโหลดข้อมูล";byId("reportRows").innerHTML='<tr><td colspan="9" class="empty">ไม่สามารถโหลดข้อมูลจาก status.json ได้</td></tr>';byId("resultCount").textContent="เกิดข้อผิดพลาดในการโหลดข้อมูล"}
 }
-async function loadStatus(){
-  const button=$("refreshButton");button.disabled=true;button.textContent="กำลังโหลด…";
-  try{const response=await fetch("./status.json?t="+Date.now(),{cache:"no-store"});if(!response.ok)throw new Error("HTTP "+response.status);render(await response.json())}
-  catch(error){console.error(error);$("loading").classList.add("hidden");$("error").classList.remove("hidden")}
-  finally{button.disabled=false;button.textContent="รีเฟรชข้อมูล"}
-}
-["search","statusFilter","typeFilter","estateFilter"].forEach(id=>$(id).addEventListener(id==="search"?"input":"change",()=>{OFFLINE_AGE_MIN=null;$("activeFilter").classList.add("hidden");renderStations()}));
-loadStatus();setInterval(loadStatus,60000);
+load();setInterval(load,60000);
 </script>
 </body>
 </html>
