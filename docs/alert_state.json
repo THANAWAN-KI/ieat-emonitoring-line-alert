@@ -1,2621 +1,1964 @@
 {
-  "status": "alert",
-  "status_text": "พบค่าพารามิเตอร์ที่เกินค่ามาตรฐาน",
-  "description": "กรุณาตรวจสอบรายละเอียดสถานีและติดตามสถานการณ์",
-  "updated_at": "2026-08-31T11:44:24.734422+07:00",
-  "updated_at_text": "31 ส.ค. 2569 เวลา 11:44 น.",
-  "latest_data_time": "4 ก.ค. 2569, 15:00",
-  "station_count": 178,
-  "online_total": 99,
-  "offline_total": 79,
-  "online_aqms": 15,
-  "online_wqms": 14,
-  "online_cems": 70,
-  "online_other": 0,
-  "alert_station_count": 20,
-  "parameter_text": "26-08-20 20:00 (SO2 133.54 (Cail) ppb), 26-08-20 15:00 (O3 251.51 (Cail) ppb), 26-08-20 23:00 (O3 157.64 (Cail) ppb), 26-08-20 22:00 (SO2 139.93 (Cail) ppb), 26-08-21 02:00 (PM10 109.65 (Cail) ug./m3), 26-08-20 20:00 (PM10 107.1 (Cail) ug./m3), 26-08-20 19:00 (PM10 143.4 (Cail) ug./m3), 26-08-21 14:00 (CO 61.37  ppmO3 1004.75  ppb), 26-08-21 13:00 (CO 62.73  ppmO3 1005.29  ppb), 26-08-21 12:00 (CO 63.51  ppmO3 1005.94  ppb), 26-08-21 11:00 (CO 66.23  ppmO3 1006.26  ppb), 26-08-21 10:00 (CO 65.71  ppmO3 1006.16  ppb), 26-08-21 09:00 (CO 65.14  ppmO3 1005.81  ppb), 26-08-21 08:00 (CO 67.11  ppmO3 1005.52  ppb), 26-08-21 07:00 (CO 68.76  ppmO3 1004.99  ppb), 26-08-21 06:00 (CO 69.07  ppmO3 1004.7  ppb), 26-08-21 05:00 (CO 70.54  ppmO3 1004.46  ppb), 26-08-21 04:00 (CO 68.2  ppmO3 1004.42  ppb), 26-08-21 03:00 (CO 67.95  ppmO3 1004.41  ppb), 26-08-21 02:00 (CO 69.18  ppmO3 1005.2  ppb), 26-08-21 01:00 (CO 67.98  ppmO3 1005.54  ppb), 26-08-21 00:00 (CO 67.4  ppmO3 1005.93  ppb), 26-08-20 23:00 (CO 69.49  ppmO3 1005.74  ppb), 26-08-20 22:00 (CO 69.35  ppmO3 1005.6  ppb), 26-08-20 21:00 (CO 70.11  ppmO3 1004.73  ppb), 26-08-20 20:00 (CO 70.47  ppmO3 1003.83  ppb), 26-08-20 19:00 (CO 67.49  ppmO3 1003.59  ppb), 26-08-20 18:00 (CO 64.62  ppmO3 1003.56  ppb), 26-08-20 17:00 (CO 63.94  ppmO3 1003.15  ppb), 26-08-20 16:00 (CO 62.58  ppmO3 1003.06  ppb), 26-08-20 15:00 (CO 60.95  ppmO3 1003.51  ppb), 26-08-21 06:00 (SO2 117.84  ppbCO 101.99 (Cail) ppm), 26-08-21 01:00 (O3 168.81 (Cail) ppb), 26-08-21 00:00 (SO2 166.35 (Cail) ppb), 26-08-21 11:00 (NOx 279.46  ppm), 26-08-21 02:00 (O3 166.05 (Cail) ppb), 26-08-21 01:00 (SO2 121.47 (Cail) ppb), 26-08-21 01:00 (SO2 118.08  ppb), 26-08-21 07:00 (O3 169.43 (Cail) ppb), 26-08-21 06:00 (SO2 150.58 (Cail) ppbNO2 157.81 (Cail) ppb), 26-08-20 16:00 (PM10 9999999 (Cail) ug./m3), 26-08-20 15:00 (PM10 9999999 (Cail) ug./m3), 26-08-20 21:00 (SO2 121.72 (Calib) ppb), 26-08-21 13:39 (Opacity 10.59  %), 26-08-21 13:10 (Opacity 10.34  %), 26-08-21 13:05 (Opacity 10.37  %), 26-08-21 12:49 (Opacity 11.23  %), 26-08-21 12:16 (Opacity 10.05  %), 26-08-21 11:59 (Opacity 10.27  %), 26-08-21 09:44 (Opacity 10.19  %), 26-08-21 09:33 (Opacity 10.22  %), 26-08-21 05:52 (Opacity 10.48  %), 26-08-21 08:00 (NOx 7.6  ppm), 26-08-20 18:00 (TSP 1.9  mg/m3), 26-08-20 15:00 (NOx 7.6  ppm), 26-08-21 09:00 (HRSG31_NOx@7% 84.96  ppm), 26-08-21 03:00 (H81105_NOx@7% 81.96 (Cail) ppm), 26-08-21 02:00 (H81105_NOx@7% 76.91 (Cail) ppm), 26-08-21 01:00 (H81105_NOx@7% 65.21 (Cail) ppm), 26-08-21 00:00 (H81105_NOx@7% 63.66 (Cail) ppm), 26-08-20 21:00 (OPACITY#1 11.11  %), 26-08-21 09:00 (HRSG2_SO2 55.28  ppm), 26-08-21 08:00 (HRSG2_SO2 246.46 (Defective) ppmHRSG2_TSP 35.33 (Defective) mg/NM3), 26-08-21 00:00 (HRSG2_SO2 13.68  ppm), 26-08-21 02:00 (PTTGC4_200H1_NOx@7% 918.53 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 141.23 (Cail) ppmPTTGC4_432H3_SO2@7% 87.75 (Cail) ppm), 26-08-21 01:00 (PTTGC4_200H1_NOx@7% 888.01 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 140.33 (Cail) ppmPTTGC4_432H3_SO2@7% 87.39 (Cail) ppm), 26-08-21 00:00 (PTTGC4_200H1_NOx@7% 852.82 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 140.21 (Cail) ppmPTTGC4_432H3_SO2@7% 88.37 (Cail) ppm), 26-08-20 23:00 (PTTGC4_200H1_NOx@7% 833.11 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 126.15 (Cail) ppmPTTGC4_432H3_SO2@7% 75.53 (Cail) ppm), 26-08-20 22:00 (PTTGC4_200H1_NOx@7% 812.94 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 107.67 (Cail) ppmPTTGC4_432H3_SO2@7% 66.1 (Cail) ppm), 26-08-20 21:00 (PTTGC4_200H1_NOx@7% 813.39 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 107.19 (Cail) ppmPTTGC4_432H3_SO2@7% 69.6 (Cail) ppm), 26-08-20 20:00 (PTTGC4_200H1_NOx@7% 828.28 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 108 (Cail) ppmPTTGC4_432H3_SO2@7% 69.44 (Cail) ppm), 26-08-20 19:00 (PTTGC4_200H1_NOx@7% 838 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 106.89 (Cail) ppmPTTGC4_432H3_SO2@7% 68.97 (Cail) ppm), 26-08-20 18:00 (PTTGC4_200H1_NOx@7% 889.01 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 107.37 (Cail) ppmPTTGC4_432H3_SO2@7% 68.99 (Cail) ppm), 26-08-20 17:00 (PTTGC4_200H1_NOx@7% 911.29 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 108.86 (Cail) ppmPTTGC4_432H3_SO2@7% 69.53 (Cail) ppm), 26-08-20 16:00 (PTTGC4_200H1_NOx@7% 880.13 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 108.73 (Cail) ppmPTTGC4_432H3_SO2@7% 70.39 (Cail) ppm), 26-08-20 15:00 (PTTGC4_200H1_NOx@7% 856.86 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 109.27 (Cail) ppmPTTGC4_432H3_SO2@7% 70.63 (Cail) ppm), 26-08-20 20:00 (NOx_SPE II 24851.56 (Cail) ppm), 26-08-20 19:00 (NOx_SPE II 15810.23 (Cail) ppm), 26-08-20 18:00 (NOx_SPE II 36013.95 (Cail) ppm), 26-08-20 17:00 (NOx_SPE II 5283.21 (Cail) ppm), 26-08-20 16:00 (NOx_SPE II 5875.08 (Cail) ppm), 26-08-20 15:00 (NOx_SPE II 28347.08 (Cail) ppm), 26-08-21 12:00 (INCIN2A_NOx@7% 31.11  ppm), 26-08-21 11:00 (INCIN2A_NOx@7% 30.8  ppm), 26-08-21 10:00 (INCIN2A_NOx@7% 32.26  ppm)",
-  "estate_count": 8,
-  "urgent_count": 11,
-  "watch_count": 2,
-  "follow_count": 7,
-  "type_stats": {
-    "AQMs": {
-      "total": 61,
-      "online": 15,
-      "offline": 46
-    },
-    "WQMs": {
-      "total": 18,
-      "online": 14,
-      "offline": 4
-    },
-    "CEMs": {
-      "total": 99,
-      "online": 70,
-      "offline": 29
-    },
-    "ประเภทอื่น": {
-      "total": 0,
-      "online": 0,
-      "offline": 0
-    }
-  },
-  "all_stations": [
-    {
-      "code": "2",
+  "version": 1,
+  "updated_at": "2026-08-31T11:44:26.438604+07:00",
+  "stations": {
+    "2": {
       "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณโรงเรียนพานทอง (อมตะนคร)",
       "estate_name": "อมตะซิตี้ ชลบุรี",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (48 วัน)",
-      "last_update": "4 ก.ค. 2569, 15:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "มีปัญหาการเชื่อมข้อมูล ไม่มีการอัปเดตตั้งแต่วันที่ 30/5/2569",
-      "longitude": 101.090831,
-      "latitude": 13.46262
+      "latitude": 13.46262,
+      "longitude": 101.090831
     },
-    {
-      "code": "3",
+    "3": {
       "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณวัดอ้อมแก้ว (อมตะนคร)",
       "estate_name": "อมตะซิตี้ ชลบุรี",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (83 วัน)",
-      "last_update": "30 พ.ค. 2569, 10:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "มีปัญหาการเชื่อมข้อมูล ไม่มีการอัปเดตตั้งแต่วันที่ 30/5/2569",
-      "longitude": 101.114346,
-      "latitude": 13.453382
+      "latitude": 13.453382,
+      "longitude": 101.114346
     },
-    {
-      "code": "6",
+    "6": {
       "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณวัดมาบสามเกลียว",
       "estate_name": "อมตะซิตี้ ชลบุรี",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (83 วัน)",
-      "last_update": "30 พ.ค. 2569, 10:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "มีปัญหาการเชื่อมข้อมูล ไม่มีการอัปเดตตั้งแต่วันที่ 30/5/2569",
-      "longitude": 101.037942,
-      "latitude": 13.440382
+      "latitude": 13.440382,
+      "longitude": 101.037942
     },
-    {
-      "code": "7",
+    "7": {
       "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณวัดอู่ตะเภา",
       "estate_name": "อมตะซิตี้ ชลบุรี",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (83 วัน)",
-      "last_update": "30 พ.ค. 2569, 10:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "มีปัญหาการเชื่อมข้อมูล ไม่มีการอัปเดตตั้งแต่วันที่ 30/5/2569",
-      "longitude": 101.016393,
-      "latitude": 13.410576
+      "latitude": 13.410576,
+      "longitude": 101.016393
     },
-    {
-      "code": "8",
+    "8": {
       "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณ ร.พ.เสริมสุขภาพตําบลมาบยางพร",
       "estate_name": "อมตะซิตี้ ระยอง",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (83 วัน)",
-      "last_update": "30 พ.ค. 2569, 10:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "มีปัญหาการเชื่อมข้อมูล ไม่มีการอัปเดตตั้งแต่วันที่ 30/5/2569",
-      "longitude": 101.132856,
-      "latitude": 12.990026
+      "latitude": 12.990026,
+      "longitude": 101.132856
     },
-    {
-      "code": "9",
+    "9": {
       "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณบางปะอิน (บางปะอิน)",
       "estate_name": "บางปะอิน",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (416 วัน)",
-      "last_update": "1 ก.ค. 2568, 15:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "อยู่ระหว่างตรวจสอบหาสาเหตุ ไม่มีการอัปเดตตั้งแต่วันที่ 2/7/2568",
-      "longitude": 100.58201092199721,
-      "latitude": 14.212023893086414
+      "latitude": 14.212023893086414,
+      "longitude": 100.58201092199721
     },
-    {
-      "code": "14",
+    "14": {
       "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณวัดพนานิคม (อมตะซิตี้)",
       "estate_name": "อมตะซิตี้ ระยอง",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (776 วัน)",
-      "last_update": "6 ก.ค. 2567, 13:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "เครื่องตรวจวัดชำรุด\nอยู่ระหว่างรองบประมาณซ่อมบำรุง\nไม่มีการอัปเดตตั้งแต่วันที่ 6/7/2567",
-      "longitude": 101.107161,
-      "latitude": 12.918349
+      "latitude": 12.918349,
+      "longitude": 101.107161
     },
-    {
-      "code": "15",
+    "15": {
       "station_name": "โรงเรียนอยุธยาวิทยาลัย",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (172 วัน)",
-      "last_update": "2 มี.ค. 2569, 09:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.56892,
-      "latitude": 14.352696
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 14.352696,
+      "longitude": 100.56892
     },
-    {
-      "code": "32",
+    "32": {
       "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณโรงเรียนวัดกรอกยายชา",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "AIR QUALITY",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.202469,
-      "latitude": 12.683416
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.683416,
+      "longitude": 101.202469
     },
-    {
-      "code": "33",
+    "33": {
       "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณอนามัยตากวน",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "AIR QUALITY",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
       "parameter_alarm": "26-08-20 20:00 (SO2 133.54 (Cail) ppb)",
-      "comment": "-",
-      "longitude": 101.168528,
-      "latitude": 12.680425
+      "comment": "",
+      "latitude": 12.680425,
+      "longitude": 101.168528
     },
-    {
-      "code": "38",
+    "38": {
       "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณวัดตากวน",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "AIR QUALITY",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.173989,
-      "latitude": 12.674339
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.674339,
+      "longitude": 101.173989
     },
-    {
-      "code": "39",
+    "39": {
       "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณชุมชนอิสลาม",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "AIR QUALITY",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.164824,
-      "latitude": 12.718879
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.718879,
+      "longitude": 101.164824
     },
-    {
-      "code": "40",
+    "40": {
       "station_name": "สถานีตรวจวัดคุณภาพอากาศบ้านพัก ปตท.",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "AIR QUALITY",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.169013,
-      "latitude": 12.769857
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.769857,
+      "longitude": 101.169013
     },
-    {
-      "code": "41",
+    "41": {
       "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริวเณวัดมาบชลูด",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "AIR QUALITY",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
       "parameter_alarm": "26-08-20 15:00 (O3 251.51 (Cail) ppb)",
-      "comment": "-",
-      "longitude": 101.127466,
-      "latitude": 12.722455
+      "comment": "",
+      "latitude": 12.722455,
+      "longitude": 101.127466
     },
-    {
-      "code": "46",
+    "46": {
       "station_name": "ต.หน้าพระลาน อ.เฉลิมพระเกียรติ จ.สระบุรี",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (172 วัน)",
-      "last_update": "2 มี.ค. 2569, 09:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.871824,
-      "latitude": 14.688046
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 14.688046,
+      "longitude": 100.871824
     },
-    {
-      "code": "47",
+    "47": {
       "station_name": "สถานีดับเพลิงพระลักษณ์",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (172 วัน)",
-      "last_update": "2 มี.ค. 2569, 09:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.920057,
-      "latitude": 14.530146
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 14.530146,
+      "longitude": 100.920057
     },
-    {
-      "code": "59",
+    "59": {
       "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณวัดหนองแฟบ",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "AIR QUALITY",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 10:00",
       "parameter_alarm": "26-08-20 23:00 (O3 157.64 (Cail) ppb)  , 26-08-20 22:00 (SO2 139.93 (Cail) ppb)",
-      "comment": "-",
-      "longitude": 101.115388,
-      "latitude": 12.685342
+      "comment": "",
+      "latitude": 12.685342,
+      "longitude": 101.115388
     },
-    {
-      "code": "77",
+    "77": {
       "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณชุมชนวัดประชุมมิตรบำรุง",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "AIR QUALITY",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
       "parameter_alarm": "26-08-21 02:00 (PM10 109.65 (Cail) ug./m3)  , 26-08-20 20:00 (PM10 107.1 (Cail) ug./m3)  , 26-08-20 19:00 (PM10 143.4 (Cail) ug./m3)",
-      "comment": "-",
-      "longitude": 101.08402,
-      "latitude": 12.72183
+      "comment": "",
+      "latitude": 12.72183,
+      "longitude": 101.08402
     },
-    {
-      "code": "82",
+    "82": {
       "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณชุมชนเนินพะยอม",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "AIR QUALITY",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
       "parameter_alarm": "26-08-21 14:00 (CO 61.37  ppmO3 1004.75  ppb)  , 26-08-21 13:00 (CO 62.73  ppmO3 1005.29  ppb)  , 26-08-21 12:00 (CO 63.51  ppmO3 1005.94  ppb)  , 26-08-21 11:00 (CO 66.23  ppmO3 1006.26  ppb)  , 26-08-21 10:00 (CO 65.71  ppmO3 1006.16  ppb)  , 26-08-21 09:00 (CO 65.14  ppmO3 1005.81  ppb)  , 26-08-21 08:00 (CO 67.11  ppmO3 1005.52  ppb)  , 26-08-21 07:00 (CO 68.76  ppmO3 1004.99  ppb)  , 26-08-21 06:00 (CO 69.07  ppmO3 1004.7  ppb)  , 26-08-21 05:00 (CO 70.54  ppmO3 1004.46  ppb)  , 26-08-21 04:00 (CO 68.2  ppmO3 1004.42  ppb)  , 26-08-21 03:00 (CO 67.95  ppmO3 1004.41  ppb)  , 26-08-21 02:00 (CO 69.18  ppmO3 1005.2  ppb)  , 26-08-21 01:00 (CO 67.98  ppmO3 1005.54  ppb)  , 26-08-21 00:00 (CO 67.4  ppmO3 1005.93  ppb)  , 26-08-20 23:00 (CO 69.49  ppmO3 1005.74  ppb)  , 26-08-20 22:00 (CO 69.35  ppmO3 1005.6  ppb)  , 26-08-20 21:00 (CO 70.11  ppmO3 1004.73  ppb)  , 26-08-20 20:00 (CO 70.47  ppmO3 1003.83  ppb)  , 26-08-20 19:00 (CO 67.49  ppmO3 1003.59  ppb)  , 26-08-20 18:00 (CO 64.62  ppmO3 1003.56  ppb)  , 26-08-20 17:00 (CO 63.94  ppmO3 1003.15  ppb)  , 26-08-20 16:00 (CO 62.58  ppmO3 1003.06  ppb)  , 26-08-20 15:00 (CO 60.95  ppmO3 1003.51  ppb)",
       "comment": "CO และ O3 เกินค่ามาตรฐาน จำนวน 54 วัน",
-      "longitude": 101.178715,
-      "latitude": 12.756908
+      "latitude": 12.756908,
+      "longitude": 101.178715
     },
-    {
-      "code": "83",
+    "83": {
       "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณชุมชนมาบยา",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (380 วัน)",
-      "last_update": "6 ส.ค. 2568, 16:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "อยู่ระหว่างหาสาเหตุ ไม่มีการอัปเดตข้อมูลตั้งแต่วันที่ 6/8/2568",
-      "longitude": 101.162895,
-      "latitude": 12.733454
+      "latitude": 12.733454,
+      "longitude": 101.162895
     },
-    {
-      "code": "98",
+    "98": {
       "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณวัดพยูน",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "AIR QUALITY",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
       "parameter_alarm": "26-08-21 06:00 (SO2 117.84  ppbCO 101.99 (Cail) ppm)",
       "comment": "SO2 เกินค่ามาตรฐาน จำนวน 5 วัน",
-      "longitude": 101.066698,
-      "latitude": 12.678494
+      "latitude": 12.678494,
+      "longitude": 101.066698
     },
-    {
-      "code": "101",
+    "101": {
       "station_name": "MOBILE IEAT",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (176 วัน)",
-      "last_update": "26 ก.พ. 2569, 15:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "อยู่ระหว่างหาสาเหตุ ไม่มีการอัปเดตข้อมูลตั้งแต่วันที่ 26/2/2569",
-      "longitude": 101.15101518091686,
-      "latitude": 12.69154007276489
+      "latitude": 12.69154007276489,
+      "longitude": 101.15101518091686
     },
-    {
-      "code": "134",
+    "134": {
       "station_name": "แขวงบางนา เขตบางนา กรุงเทพ",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (173 วัน)",
-      "last_update": "1 มี.ค. 2569, 10:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.605667,
-      "latitude": 13.66799
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.66799,
+      "longitude": 100.605667
     },
-    {
-      "code": "135",
+    "135": {
       "station_name": "แขวงคลองจั่น เขตบางกะปิ กรุงเทพ",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (1044 วัน)",
-      "last_update": "12 ต.ค. 2566, 09:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.636683,
-      "latitude": 13.778014
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.778014,
+      "longitude": 100.636683
     },
-    {
-      "code": "136",
+    "136": {
       "station_name": "แขวงช่องนนทรี เขตยานนาวา กรุงเทพ",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (172 วัน)",
-      "last_update": "2 มี.ค. 2569, 09:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.547714,
-      "latitude": 13.707426
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.707426,
+      "longitude": 100.547714
     },
-    {
-      "code": "137",
+    "137": {
       "station_name": "ต.ทรงคนอง อ.พระประแดง จ.สมุทรปราการ",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (172 วัน)",
-      "last_update": "2 มี.ค. 2569, 09:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.538304,
-      "latitude": 13.66242
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.66242,
+      "longitude": 100.538304
     },
-    {
-      "code": "138",
+    "138": {
       "station_name": "แขวงการทางสมุทรสาคร",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (172 วัน)",
-      "last_update": "2 มี.ค. 2569, 09:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.306601,
-      "latitude": 13.6997
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.6997,
+      "longitude": 100.306601
     },
-    {
-      "code": "139",
+    "139": {
       "station_name": "MOBILE IEAT",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (176 วัน)",
-      "last_update": "26 ก.พ. 2569, 15:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "อยู่ระหว่างหาสาเหตุ ไม่มีการอัปเดตข้อมูลตั้งแต่วันที่ 26/2/2569",
-      "longitude": 101.13868013199858,
-      "latitude": 12.691842939825772
+      "latitude": 12.691842939825772,
+      "longitude": 101.13868013199858
     },
-    {
-      "code": "150",
+    "150": {
       "station_name": "สถานีตรวจวัดคุณภาพอากาศ นิคมฯ เอเชีย",
       "estate_name": "เอเชีย",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "AIR QUALITY",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
       "parameter_alarm": "26-08-21 01:00 (O3 168.81 (Cail) ppb)  , 26-08-21 00:00 (SO2 166.35 (Cail) ppb)",
-      "comment": "-",
-      "longitude": 101.101223,
-      "latitude": 12.69404
+      "comment": "",
+      "latitude": 12.69404,
+      "longitude": 101.101223
     },
-    {
-      "code": "158",
+    "158": {
       "station_name": "ต.บางโปรง อ.เมือง จ.สมุทรปราการ",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (173 วัน)",
-      "last_update": "1 มี.ค. 2569, 13:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.562123,
-      "latitude": 13.624478
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.624478,
+      "longitude": 100.562123
     },
-    {
-      "code": "168",
+    "168": {
       "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณหนองเสือเกือก",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "AIR QUALITY",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
       "parameter_alarm": "26-08-21 11:00 (NOx 279.46  ppm)  , 26-08-21 02:00 (O3 166.05 (Cail) ppb)  , 26-08-21 01:00 (SO2 121.47 (Cail) ppb)",
       "comment": "NOx เกินค่ามาตรฐาน จำนวน 1 วัน",
-      "longitude": 101.1587598,
-      "latitude": 12.7165282
+      "latitude": 12.7165282,
+      "longitude": 101.1587598
     },
-    {
-      "code": "191",
+    "191": {
       "station_name": "ต.ตลาด อ.พระประแดง จ.สมุทรปราการ",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (172 วัน)",
-      "last_update": "2 มี.ค. 2569, 09:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.531168,
-      "latitude": 13.658062
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.658062,
+      "longitude": 100.531168
     },
-    {
-      "code": "192",
+    "192": {
       "station_name": "ศาลากลางจังหวัดสมุทรปราการ",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (172 วัน)",
-      "last_update": "2 มี.ค. 2569, 09:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.594206,
-      "latitude": 13.579601
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.579601,
+      "longitude": 100.594206
     },
-    {
-      "code": "193",
+    "193": {
       "station_name": "สนามกีฬาเทศบาลแหลมฉบัง",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (172 วัน)",
-      "last_update": "2 มี.ค. 2569, 09:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.906079,
-      "latitude": 13.09967
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.09967,
+      "longitude": 100.906079
     },
-    {
-      "code": "194",
+    "194": {
       "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณบ่อวิน จ.ชลบุรี",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (172 วัน)",
-      "last_update": "2 มี.ค. 2569, 09:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.098505,
-      "latitude": 13.054813
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.054813,
+      "longitude": 101.098505
     },
-    {
-      "code": "196",
+    "196": {
       "station_name": "สำนักงานสิ่งแวดล้อมภาคที่8",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (172 วัน)",
-      "last_update": "2 มี.ค. 2569, 09:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 99.812005,
-      "latitude": 13.539065
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.539065,
+      "longitude": 99.812005
     },
-    {
-      "code": "197",
+    "197": {
       "station_name": "ต.มหาชัย อ.เมือง จ.สมุทรสาคร",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (172 วัน)",
-      "last_update": "2 มี.ค. 2569, 09:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.277659,
-      "latitude": 13.552002
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.552002,
+      "longitude": 100.277659
     },
-    {
-      "code": "200",
+    "200": {
       "station_name": "เทศบาลนครหาดใหญ่",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (172 วัน)",
-      "last_update": "2 มี.ค. 2569, 09:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.476321,
-      "latitude": 7.007726
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 7.007726,
+      "longitude": 100.476321
     },
-    {
-      "code": "201",
+    "201": {
       "station_name": "ริมถนนพระรามสี่, เขตปทุมวัน, กรุงเทพ",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (172 วัน)",
-      "last_update": "2 มี.ค. 2569, 09:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.534322,
-      "latitude": 13.73064
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.73064,
+      "longitude": 100.534322
     },
-    {
-      "code": "202",
+    "202": {
       "station_name": "ริมถนนอินทรพิทักษ์ เขตธนบุรี กรุงเทพ",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (172 วัน)",
-      "last_update": "2 มี.ค. 2569, 09:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.489261,
-      "latitude": 13.727894
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.727894,
+      "longitude": 100.489261
     },
-    {
-      "code": "203",
+    "203": {
       "station_name": "ริมถนนลาดพร้าว เขตวังทองหลาง กรุงเทพ",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (172 วัน)",
-      "last_update": "2 มี.ค. 2569, 09:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.60532,
-      "latitude": 13.788615
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.788615,
+      "longitude": 100.60532
     },
-    {
-      "code": "204",
+    "204": {
       "station_name": "ริมถนนดินแดง เขตดินแดง กรุงเทพ",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (172 วัน)",
-      "last_update": "2 มี.ค. 2569, 09:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.559248,
-      "latitude": 13.764663
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.764663,
+      "longitude": 100.559248
     },
-    {
-      "code": "205",
+    "205": {
       "station_name": "แขวงสามเสนใน เขตพญาไท กรุงเทพ",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (172 วัน)",
-      "last_update": "2 มี.ค. 2569, 09:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.54391,
-      "latitude": 13.78792
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.78792,
+      "longitude": 100.54391
     },
-    {
-      "code": "206",
+    "206": {
       "station_name": "สำนักงานเทศบาลตำบลทุ่งสะเดา",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (172 วัน)",
-      "last_update": "2 มี.ค. 2569, 09:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.296609,
-      "latitude": 13.55748
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.55748,
+      "longitude": 101.296609
     },
-    {
-      "code": "207",
+    "207": {
       "station_name": "แขวงพลับพลา เขตวังทองหลาง กรุงเทพ",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (172 วัน)",
-      "last_update": "2 มี.ค. 2569, 09:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.613723,
-      "latitude": 13.770701
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.770701,
+      "longitude": 100.613723
     },
-    {
-      "code": "208",
+    "208": {
       "station_name": "อุตุนิยมวิทยาลำพูน",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (172 วัน)",
-      "last_update": "2 มี.ค. 2569, 09:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 99.00677,
-      "latitude": 18.571144
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 18.571144,
+      "longitude": 99.00677
     },
-    {
-      "code": "209",
+    "209": {
       "station_name": "สวนกาญจนาภิเษก ร.9 (ฝั่งสวนหิน)",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (172 วัน)",
-      "last_update": "2 มี.ค. 2569, 09:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 102.535053,
-      "latitude": 13.673817
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.673817,
+      "longitude": 102.535053
     },
-    {
-      "code": "210",
+    "210": {
       "station_name": "ต.เนินพระ อ.เมือง จ.ระยอง",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (172 วัน)",
-      "last_update": "2 มี.ค. 2569, 09:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.204508,
-      "latitude": 12.681387
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.681387,
+      "longitude": 101.204508
     },
-    {
-      "code": "231",
+    "231": {
       "station_name": "สถานีตรวจวัดคุณภาพอากาศ SSUT",
       "estate_name": "บางปู",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "AIR QUALITY",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 13:00",
       "parameter_alarm": "26-08-21 01:00 (SO2 118.08  ppb)",
       "comment": "SO2 เกินค่ามาตรฐาน จำนวน 3 วัน",
-      "longitude": 100.667972,
-      "latitude": 13.551726
+      "latitude": 13.551726,
+      "longitude": 100.667972
     },
-    {
-      "code": "248",
+    "248": {
       "station_name": "สถานีตรวจวัดคุณภาพ AQMs 1",
       "estate_name": "สมุทรสาคร",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (21 วัน)",
-      "last_update": "31 ก.ค. 2569, 13:16",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "เครื่องตรวจวัดชำรุด อยู่ระหว่างรองบประมาณซ่อมบำรุง ไม่มีการอัปเดตตั้งแต่วันที่ 30/7/2569",
-      "longitude": 100.829078,
-      "latitude": 13.62091
+      "latitude": 13.62091,
+      "longitude": 100.829078
     },
-    {
-      "code": "258",
+    "258": {
       "station_name": "การเคหะชุมชนเมืองใหม่บางพลี ต.บางเสาธง อ.บางเสาธง, สมุทรปราการ",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (172 วัน)",
-      "last_update": "2 มี.ค. 2569, 08:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.7862867,
-      "latitude": 13.5705
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.5705,
+      "longitude": 100.7862867
     },
-    {
-      "code": "259",
+    "259": {
       "station_name": "โรงพยาบาลส่งเสริมสุขภาพตำบลมาบตาพุด",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (173 วัน)",
-      "last_update": "1 มี.ค. 2569, 17:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.1659833,
-      "latitude": 12.70865
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.70865,
+      "longitude": 101.1659833
     },
-    {
-      "code": "260",
+    "260": {
       "station_name": "สนามกีฬาจังหวัดพิจิตร",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (172 วัน)",
-      "last_update": "2 มี.ค. 2569, 09:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.322756,
-      "latitude": 16.442554
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 16.442554,
+      "longitude": 100.322756
     },
-    {
-      "code": "261",
+    "261": {
       "station_name": "โรงพยาบาลลาดกระบัง",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (172 วัน)",
-      "last_update": "2 มี.ค. 2569, 09:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.784069,
-      "latitude": 13.72205
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.72205,
+      "longitude": 100.784069
     },
-    {
-      "code": "262",
+    "262": {
       "station_name": "สวนเฉลิมพระเกียรติ ร.9 ริมถนนสีหบุรานุกิจ เขตมีนบุรี, กรุงเทพฯ",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (176 วัน)",
-      "last_update": "26 ก.พ. 2569, 15:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.73208,
-      "latitude": 13.813578
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.813578,
+      "longitude": 100.73208
     },
-    {
-      "code": "263",
+    "263": {
       "station_name": "ค่ายสุรสิงหนาท ต.ตะพง อ.เมือง, ระยอง",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (173 วัน)",
-      "last_update": "1 มี.ค. 2569, 20:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.32245,
-      "latitude": 12.648576
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.648576,
+      "longitude": 101.32245
     },
-    {
-      "code": "212",
+    "212": {
       "station_name": "สถานีศูนย์วิจัยพืชไร่ระยอง อ.เมือง จ.ระยอง",
       "estate_name": "-",
       "zone": "กรมควบคุมมลพิษ",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (172 วัน)",
-      "last_update": "2 มี.ค. 2569, 09:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.434129,
-      "latitude": 12.831021
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.831021,
+      "longitude": 101.434129
     },
-    {
-      "code": "272",
+    "272": {
       "station_name": "ไทร เบคก้า เอ็นเตอร์พร์ส",
       "estate_name": "หลักชัยเมืองยาง",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (449 วัน)",
-      "last_update": "29 พ.ค. 2568, 04:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "อยู่ระหว่างตรวจสอบหาสาเหตุ ไม่มีการอัปเดตตั้งแต่วันที่ 29/5/2568",
-      "longitude": 101.32245,
-      "latitude": 12.648576
+      "latitude": 12.648576,
+      "longitude": 101.32245
     },
-    {
-      "code": "273",
+    "273": {
       "station_name": "สถานีตรวจวัดคุณภาพ AQMs 2",
       "estate_name": "สมุทรสาคร",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "AIR QUALITY",
       "status": "OFFLINE (1136 วัน)",
-      "last_update": "12 ก.ค. 2566, 05:05",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "เครื่องตรวจวัดชำรุด อยู่ระหว่างรองบประมาณซ่อมบำรุง ไม่มีการอัปเดตตั้งแต่วันที่ 12/7/2566",
-      "longitude": 100.667972,
-      "latitude": 13.551726
+      "latitude": 13.551726,
+      "longitude": 100.667972
     },
-    {
-      "code": "281",
+    "281": {
       "station_name": "เทศบาลเมืองมาบตาพุด",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "AIR QUALITY",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
       "parameter_alarm": "26-08-21 07:00 (O3 169.43 (Cail) ppb)  , 26-08-21 06:00 (SO2 150.58 (Cail) ppbNO2 157.81 (Cail) ppb)  , 26-08-20 16:00 (PM10 9999999 (Cail) ug./m3)  , 26-08-20 15:00 (PM10 9999999 (Cail) ug./m3)",
-      "comment": "-",
-      "longitude": 101.12726,
-      "latitude": 12.725179
+      "comment": "",
+      "latitude": 12.725179,
+      "longitude": 101.12726
     },
-    {
-      "code": "331",
+    "331": {
       "station_name": "บริษัท ซีจี คอร์เปอเรชั่น จํากัด",
       "estate_name": "ซีพีจีซี",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "AIR QUALITY",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 13:00",
       "parameter_alarm": "26-08-20 21:00 (SO2 121.72 (Calib) ppb)",
-      "comment": "-",
-      "longitude": 101.216007,
-      "latitude": 12.796304
+      "comment": "",
+      "latitude": 12.796304,
+      "longitude": 101.216007
     },
-    {
-      "code": "332",
+    "332": {
       "station_name": "บริษัท ไทยฮอนด้า จำกัด",
       "estate_name": "ลาดกระบัง",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 13:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.80017783373287,
-      "latitude": 13.770377886513435
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.770377886513435,
+      "longitude": 100.80017783373287
     },
-    {
-      "code": "325",
+    "325": {
       "station_name": "บริษัท  เอสเอสยูที จำกัด",
       "estate_name": "บางปู",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 13:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.65218254931054,
-      "latitude": 13.533352244368984
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.533352244368984,
+      "longitude": 100.65218254931054
     },
-    {
-      "code": "326",
+    "326": {
       "station_name": "บริษัท อัคคีปราการ จำกัด",
       "estate_name": "บางปู",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:14",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.6445516355763,
-      "latitude": 13.533393533197591
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.533393533197591,
+      "longitude": 100.6445516355763
     },
-    {
-      "code": "327",
+    "327": {
       "station_name": "บางปู เอ็นไวรอนเมนทอล คอมเพล็กส์",
       "estate_name": "บางปู",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:12",
       "parameter_alarm": "26-08-21 13:39 (Opacity 10.59  %)  , 26-08-21 13:10 (Opacity 10.34  %)  , 26-08-21 13:05 (Opacity 10.37  %)  , 26-08-21 12:49 (Opacity 11.23  %)  , 26-08-21 12:16 (Opacity 10.05  %)  , 26-08-21 11:59 (Opacity 10.27  %)  , 26-08-21 09:44 (Opacity 10.19  %)  , 26-08-21 09:33 (Opacity 10.22  %)  , 26-08-21 05:52 (Opacity 10.48  %)",
       "comment": "Opacity เกินค่ามาตรฐาน จำนวน 11 วัน",
-      "longitude": 100.6559003509614,
-      "latitude": 13.538084845535455
+      "latitude": 13.538084845535455,
+      "longitude": 100.6559003509614
     },
-    {
-      "code": "328",
+    "328": {
       "station_name": "บริษัท ไทยฮอนด้า จำกัด",
       "estate_name": "ลาดกระบัง",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
       "parameter_alarm": "26-08-21 08:00 (NOx 7.6  ppm)  , 26-08-20 18:00 (TSP 1.9  mg/m3)  , 26-08-20 15:00 (NOx 7.6  ppm)",
       "comment": "NOx และ TSP เกินค่ามาตรฐาน จำนวน 4 วัน",
-      "longitude": 100.80017783373287,
-      "latitude": 13.770377886513435
+      "latitude": 13.770377886513435,
+      "longitude": 100.80017783373287
     },
-    {
-      "code": "329",
+    "329": {
       "station_name": "บริษัท ฮาล อะลูมินัม (ประเทศไทย) จำกัด",
       "estate_name": "อีสเทิร์นซีบอร์ด(ระยอง)",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "อยู่ระหว่างเชื่อมโยงข้อมูล",
-      "longitude": 0.0,
-      "latitude": 0.0
+      "latitude": 0.0,
+      "longitude": 0.0
     },
-    {
-      "code": "274",
+    "274": {
       "station_name": "บริษัท จุน จี่ แมททีเรียล เทคโนโลยี จำกัด",
       "estate_name": "ปิ่นทอง",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "CEMs",
       "status": "OFFLINE (202 วัน)",
-      "last_update": "31 ม.ค. 2569, 10:11",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "อยู่ระหว่างรอเชื่อมโยงข้อมูลใหม่ เนื่องจาก บริษัทฯถูกสั่งหยุดประกอบกิจการบางส่วนชั่วคราว ไม่มีการอัปเดต ตั้งแต่วันที่ 31/1/2569",
-      "longitude": 101.15777948835209,
-      "latitude": 13.094438292436932
+      "latitude": 13.094438292436932,
+      "longitude": 101.15777948835209
     },
-    {
-      "code": "275",
+    "275": {
       "station_name": "บริษัท อมตะ บี.กริม เพาเวอร์ (อ่างทอง) 2 จำกัด",
       "estate_name": "เอส อ่างทอง",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.46618786290189,
-      "latitude": 14.699031715113943
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 14.699031715113943,
+      "longitude": 100.46618786290189
     },
-    {
-      "code": "277",
+    "277": {
       "station_name": "บริษัท บี.กริม เพาเวอร์ (แหลมฉบัง) 2 จำกัด",
       "estate_name": "แหลมฉบัง",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.89479533068423,
-      "latitude": 13.092468497353183
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.092468497353183,
+      "longitude": 100.89479533068423
     },
-    {
-      "code": "278",
+    "278": {
       "station_name": "บริษัท อมตะ บี.กริม เพาเวอร์ (อ่างทอง) 3 จำกัด",
       "estate_name": "เอส อ่างทอง",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
       "parameter_alarm": "26-08-21 09:00 (HRSG31_NOx@7% 84.96  ppm)",
       "comment": "HRSG31_NOx@7% เกินค่ามาตรฐาน จำนวน 5 วัน",
-      "longitude": 100.46618786290189,
-      "latitude": 14.699031715113943
+      "latitude": 14.699031715113943,
+      "longitude": 100.46618786290189
     },
-    {
-      "code": "268",
+    "268": {
       "station_name": "บริษัท บางกอกโคเจนเนอเรชั่น จำกัด 2",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "OFFLINE (430 วัน)",
-      "last_update": "17 มิ.ย. 2568, 11:03",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "บริษัทฯ ยกเลิกเชื่อมข้อมูลมาที่ EMCC MTP และย้ายไปเชื่อมข้อมูลกับ pomp box ไม่มีการอัปเดต ตั้งแต่วันที่ 17/6/2568",
-      "longitude": 101.140316,
-      "latitude": 12.714813
+      "latitude": 12.714813,
+      "longitude": 101.140316
     },
-    {
-      "code": "270",
+    "270": {
       "station_name": "บจก.โกลว์ พลังงาน",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.145558,
-      "latitude": 12.695081
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.695081,
+      "longitude": 101.145558
     },
-    {
-      "code": "264",
+    "264": {
       "station_name": "บริษัท กัลฟ์ เอสอาร์ซี จำกัด SRC2",
       "estate_name": "ดับบลิวเอชเอ อีสเทิร์นซีบอร์ด",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.16235863948245,
-      "latitude": 13.004917300234803
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.004917300234803,
+      "longitude": 101.16235863948245
     },
-    {
-      "code": "265",
+    "265": {
       "station_name": "บริษัท กัลฟ์ เอสอาร์ซี จำกัด SRC3",
       "estate_name": "ดับบลิวเอชเอ อีสเทิร์นซีบอร์ด",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.16235863948245,
-      "latitude": 13.004917300234803
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.004917300234803,
+      "longitude": 101.16235863948245
     },
-    {
-      "code": "266",
+    "266": {
       "station_name": "บริษัท กัลฟ์ เอสอาร์ซี จำกัด SRC4",
       "estate_name": "ดับบลิวเอชเอ อีสเทิร์นซีบอร์ด",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.16235863948245,
-      "latitude": 13.004917300234803
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.004917300234803,
+      "longitude": 101.16235863948245
     },
-    {
-      "code": "249",
+    "249": {
       "station_name": "บริษัท อมตะ บี.กริม เพาเวอร์ 2 จำกัด",
       "estate_name": "อมตะซิตี้ ชลบุรี",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.02755403491228,
-      "latitude": 13.421529391833669
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.421529391833669,
+      "longitude": 101.02755403491228
     },
-    {
-      "code": "250",
+    "250": {
       "station_name": "บมจ.พีทีที โกลบอล เคมิคอล",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 03:00",
       "parameter_alarm": "26-08-21 03:00 (H81105_NOx@7% 81.96 (Cail) ppm)  , 26-08-21 02:00 (H81105_NOx@7% 76.91 (Cail) ppm)  , 26-08-21 01:00 (H81105_NOx@7% 65.21 (Cail) ppm)  , 26-08-21 00:00 (H81105_NOx@7% 63.66 (Cail) ppm)",
-      "comment": "-",
-      "longitude": 101.14004,
-      "latitude": 12.700539
+      "comment": "",
+      "latitude": 12.700539,
+      "longitude": 101.14004
     },
-    {
-      "code": "253",
+    "253": {
       "station_name": "บจก. โคลเวอร์ พิจิตร",
       "estate_name": "พิจิตร",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 09:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.15458618650659,
-      "latitude": 16.572614030461743
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 16.572614030461743,
+      "longitude": 100.15458618650659
     },
-    {
-      "code": "254",
+    "254": {
       "station_name": "บจก.บี.กริม เพาเวอร์ (เอไออี-เอ็มทีพี)",
       "estate_name": "เอเชีย",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "OFFLINE (1 วัน)",
-      "last_update": "20 ส.ค. 2569, 13:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "ข้อมูลทางฝั่ง emcc mtp ไม่อัปเดต  ไม่มีการอัปเดต ตั้งแต่วันที่ 20/8/2569",
-      "longitude": 101.08629610026374,
-      "latitude": 12.702056666846659
+      "latitude": 12.702056666846659,
+      "longitude": 101.08629610026374
     },
-    {
-      "code": "255",
+    "255": {
       "station_name": "บริษัท บี.กริม เพาเวอร์ (แหลมฉบัง) 1 จำกัด",
       "estate_name": "แหลมฉบัง",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.89479533068423,
-      "latitude": 13.092468497353183
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.092468497353183,
+      "longitude": 100.89479533068423
     },
-    {
-      "code": "256",
+    "256": {
       "station_name": "บมจ.พีทีที โกลบอล เคมิคอล",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.16094302845002,
-      "latitude": 12.655376839604644
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.655376839604644,
+      "longitude": 101.16094302845002
     },
-    {
-      "code": "257",
+    "257": {
       "station_name": "บมจ.พีทีที โกลบอล เคมิคอล",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "OFFLINE (1 วัน)",
-      "last_update": "21 ส.ค. 2569, 02:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "ข้อมูลทางฝั่ง emcc mtp ไม่อัปเดต  ไม่มีการอัปเดต ตั้งแต่วันที่ 20/8/2569",
-      "longitude": 101.1269667,
-      "latitude": 12.7036536
+      "latitude": 12.7036536,
+      "longitude": 101.1269667
     },
-    {
-      "code": "233",
+    "233": {
       "station_name": "บจก.เอวา แกรนด์ เอ็นเนอร์ยี่",
       "estate_name": "พิจิตร",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "OFFLINE (1 วัน)",
-      "last_update": "20 ส.ค. 2569, 16:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "อยู่ระหว่างตรวจสอบหาสาเหตุ ไม่มีการอัปเดต ตั้งแต่วันที่ 20/8/2569",
-      "longitude": 100.1545883,
-      "latitude": 16.5737107
+      "latitude": 16.5737107,
+      "longitude": 100.1545883
     },
-    {
-      "code": "234",
+    "234": {
       "station_name": "บจก.รีคัฟเวอรี่ เฮ้าส์",
       "estate_name": "นครหลวง",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "OFFLINE (1 วัน)",
-      "last_update": "20 ส.ค. 2569, 16:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "อยู่ระหว่างตรวจสอบหาสาเหตุ ไม่มีการอัปเดต ตั้งแต่วันที่ 17/8/2569",
-      "longitude": 100.5912946,
-      "latitude": 14.501382
+      "latitude": 14.501382,
+      "longitude": 100.5912946
     },
-    {
-      "code": "235",
+    "235": {
       "station_name": "บจก.ซุปเปอร์ เอิร์ธ เอนเนอร์ยี 6",
       "estate_name": "พิจิตร",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 11:00",
       "parameter_alarm": "26-08-20 21:00 (OPACITY#1 11.11  %)",
       "comment": "OPACITY#1 เกินค่ามาตรฐาน จำนวน 4 วัน",
-      "longitude": 100.1526222,
-      "latitude": 16.5739708
+      "latitude": 16.5739708,
+      "longitude": 100.1526222
     },
-    {
-      "code": "236",
+    "236": {
       "station_name": "บมจ.พีทีที โกลบอล เคมิคอล",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 03:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.140351,
-      "latitude": 12.702934
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.702934,
+      "longitude": 101.140351
     },
-    {
-      "code": "237",
+    "237": {
       "station_name": "บจก.เอ็นเอส-โอจี เอนเนอร์จี โซลูชั่นส์  (ไทยแลนด์ ) :",
       "estate_name": "อมตะซิตี้ ระยอง",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.13108337428783,
-      "latitude": 12.976999659148762
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.976999659148762,
+      "longitude": 101.13108337428783
     },
-    {
-      "code": "240",
+    "240": {
       "station_name": "บริษัท เอ็นเนซอล จำกัด",
       "estate_name": "หนองแค",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 13:58",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.90012672962584,
-      "latitude": 14.390099647259792
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 14.390099647259792,
+      "longitude": 100.90012672962584
     },
-    {
-      "code": "241",
+    "241": {
       "station_name": "บริษัท อมตะ บี.กริม เพาเวอร์ (ระยอง) 4 จำกัด",
       "estate_name": "อมตะซิตี้ ระยอง",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.098198,
-      "latitude": 12.935165
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.935165,
+      "longitude": 101.098198
     },
-    {
-      "code": "242",
+    "242": {
       "station_name": "บริษัท กัลฟ์ เอสอาร์ซี จำกัด SRC1",
       "estate_name": "ดับบลิวเอชเอ อีสเทิร์นซีบอร์ด",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.191973,
-      "latitude": 13.049172
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.049172,
+      "longitude": 101.191973
     },
-    {
-      "code": "243",
+    "243": {
       "station_name": "คันไซ เอนเนอร์จี โซลูชั่นส์ (ประเทศไทย) จำกัด",
       "estate_name": "บางปะอิน",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 13:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.588263,
-      "latitude": 14.202473
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 14.202473,
+      "longitude": 100.588263
     },
-    {
-      "code": "244",
+    "244": {
       "station_name": "บริษัท  เอสเอสยูที จำกัด",
       "estate_name": "บางปู",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 13:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.65218254931054,
-      "latitude": 13.533352244368984
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.533352244368984,
+      "longitude": 100.65218254931054
     },
-    {
-      "code": "245",
+    "245": {
       "station_name": "บริษัท  เอสเอสยูที จำกัด",
       "estate_name": "บางปู",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 13:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.65218254931054,
-      "latitude": 13.533352244368984
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.533352244368984,
+      "longitude": 100.65218254931054
     },
-    {
-      "code": "246",
+    "246": {
       "station_name": "บริษัท  เอสเอสยูที จำกัด",
       "estate_name": "บางปู",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 13:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.65218254931054,
-      "latitude": 13.533352244368984
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.533352244368984,
+      "longitude": 100.65218254931054
     },
-    {
-      "code": "247",
+    "247": {
       "station_name": "บริษัท  เอสเอสยูที จำกัด",
       "estate_name": "บางปู",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 13:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.65218254931054,
-      "latitude": 13.533352244368984
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.533352244368984,
+      "longitude": 100.65218254931054
     },
-    {
-      "code": "216",
+    "216": {
       "station_name": "บจก.เอ็นเอส-โอจี เอนเนอร์จี โซลูชั่นส์ (ประเทศไทย)",
       "estate_name": "ลาดกระบัง",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.790609,
-      "latitude": 13.770557
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.770557,
+      "longitude": 100.790609
     },
-    {
-      "code": "217",
+    "217": {
       "station_name": "โรงไฟฟ้าตาสิทธิ์ 1",
       "estate_name": "อีสเทิร์นซีบอร์ด(ระยอง)",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.194836,
-      "latitude": 13.017426
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.017426,
+      "longitude": 101.194836
     },
-    {
-      "code": "218",
+    "218": {
       "station_name": "โรงไฟฟ้าตาสิทธิ์ 2",
       "estate_name": "อีสเทิร์นซีบอร์ด(ระยอง)",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.194836,
-      "latitude": 13.017426
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.017426,
+      "longitude": 101.194836
     },
-    {
-      "code": "219",
+    "219": {
       "station_name": "บจก.กัลฟ์ ทีเอส 3",
       "estate_name": "ดับบลิวเอชเอ อีสเทิร์นซีบอร์ด",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
       "parameter_alarm": "26-08-21 09:00 (HRSG2_SO2 55.28  ppm)  , 26-08-21 08:00 (HRSG2_SO2 246.46 (Defective) ppmHRSG2_TSP 35.33 (Defective) mg/NM3)  , 26-08-21 00:00 (HRSG2_SO2 13.68  ppm)",
       "comment": "HRSG2_SO2 เกินค่ามาตรฐาน จำนวน 2 วัน",
-      "longitude": 101.18642,
-      "latitude": 13.066
+      "latitude": 13.066,
+      "longitude": 101.18642
     },
-    {
-      "code": "220",
+    "220": {
       "station_name": "บจก.กัลฟ์ ทีเอส 4",
       "estate_name": "ดับบลิวเอชเอ อีสเทิร์นซีบอร์ด",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.18642,
-      "latitude": 13.066
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.066,
+      "longitude": 101.18642
     },
-    {
-      "code": "221",
+    "221": {
       "station_name": "บจก.สยาม เด็นโซ่ แมนูแฟคเจอริ่ง",
       "estate_name": "อมตะซิตี้ ชลบุรี",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 04:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.05108,
-      "latitude": 13.45128
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.45128,
+      "longitude": 101.05108
     },
-    {
-      "code": "222",
+    "222": {
       "station_name": "บจก.กัลฟ์ บีแอล",
       "estate_name": "บ้านหว้า",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.587759,
-      "latitude": 14.2525
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 14.2525,
+      "longitude": 100.587759
     },
-    {
-      "code": "223",
+    "223": {
       "station_name": "บริษัท อมตะ บี.กริม เพาเวอร์ 3 จำกัด",
       "estate_name": "อมตะซิตี้ ชลบุรี",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.05619818706082,
-      "latitude": 13.450797278608714
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.450797278608714,
+      "longitude": 101.05619818706082
     },
-    {
-      "code": "224",
+    "224": {
       "station_name": "บริษัท อมตะ บี.กริม เพาเวอร์ 4,5 จำกัด",
       "estate_name": "อมตะซิตี้ ชลบุรี",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.05679276615581,
-      "latitude": 13.436019171427585
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.436019171427585,
+      "longitude": 101.05679276615581
     },
-    {
-      "code": "225",
+    "225": {
       "station_name": "บจก.กัลฟ์ บีพี",
       "estate_name": "บ้านหว้า",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.603344,
-      "latitude": 14.253723
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 14.253723,
+      "longitude": 100.603344
     },
-    {
-      "code": "226",
+    "226": {
       "station_name": "บจก.พีพีทีซี",
       "estate_name": "ลาดกระบัง",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 12:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.7884501,
-      "latitude": 13.7593718
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.7593718,
+      "longitude": 100.7884501
     },
-    {
-      "code": "227",
+    "227": {
       "station_name": "บจก.เอิร์ธ เท็ค เอนไวรอนเมนท์",
       "estate_name": "แก่งคอย",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "OFFLINE (18 วัน)",
-      "last_update": "3 ส.ค. 2569, 11:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "อยู่ระหว่างตรวจสอบหาสาเหตุ  ไม่มีการอัปเดต ตั้งแต่วันที่ 3/8/2569",
-      "longitude": 100.99765,
-      "latitude": 14.624856
+      "latitude": 14.624856,
+      "longitude": 100.99765
     },
-    {
-      "code": "228",
+    "228": {
       "station_name": "บริษัท อมตะ บี.กริม เพาเวอร์ (ระยอง) 5 จำกัด",
       "estate_name": "อมตะซิตี้ ระยอง",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.106679,
-      "latitude": 12.98221
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.98221,
+      "longitude": 101.106679
     },
-    {
-      "code": "229",
+    "229": {
       "station_name": "บจก.ชลบุรี คลีนเอ็นเนอร์ยี",
       "estate_name": "ดับบลิวเอชเอ ชลบุรี",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "CEMs",
       "status": "OFFLINE (1 วัน)",
-      "last_update": "21 ส.ค. 2569, 00:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "อยู่ระหว่างตรวจสอบหาสาเหตุ ไม่มีการอัปเดต ตั้งแต่วันที่ 21/8/2569",
-      "longitude": 101.0864296,
-      "latitude": 13.0826685
+      "latitude": 13.0826685,
+      "longitude": 101.0864296
     },
-    {
-      "code": "230",
+    "230": {
       "station_name": "บริษัท อมตะ บี.กริม เพาเวอร์ (ระยอง) 3 จำกัด",
       "estate_name": "อมตะซิตี้ ระยอง",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.098198,
-      "latitude": 12.935165
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.935165,
+      "longitude": 101.098198
     },
-    {
-      "code": "211",
+    "211": {
       "station_name": "บจก.กัลฟ์ วีทีพี",
       "estate_name": "อีสเทิร์นซีบอร์ด(ระยอง)",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.1724903,
-      "latitude": 13.0040262
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.0040262,
+      "longitude": 101.1724903
     },
-    {
-      "code": "172",
+    "172": {
       "station_name": "บริษัท อมตะ บี.กริม เพาเวอร์ (ระยอง) 1,2 จำกัด",
       "estate_name": "อมตะซิตี้ ระยอง",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.118436,
-      "latitude": 12.968072
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.968072,
+      "longitude": 101.118436
     },
-    {
-      "code": "173",
+    "173": {
       "station_name": "บจก.ราชบุรีเวอลด์ โคเจนเนอเรชั่น",
       "estate_name": "ราชบุรี",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 99.84687,
-      "latitude": 13.65136
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.65136,
+      "longitude": 99.84687
     },
-    {
-      "code": "174",
+    "174": {
       "station_name": "บจก.ราชบุรีเวอลด์ โคเจนเนอเรชั่น",
       "estate_name": "ราชบุรี",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 99.84644,
-      "latitude": 13.65049
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.65049,
+      "longitude": 99.84644
     },
-    {
-      "code": "186",
+    "186": {
       "station_name": "บจก.มาบตาพุดโอเลฟินส์",
       "estate_name": "อาร์ ไอ แอล",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "OFFLINE (148 วัน)",
-      "last_update": "26 มี.ค. 2569, 10:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "อยู่ระหว่าง Update IP Address ไม่มีการอัปเดต ตั้งแต่วันที่ 20/3/2569",
-      "longitude": 101.16693816725493,
-      "latitude": 12.748808440892208
+      "latitude": 12.748808440892208,
+      "longitude": 101.16693816725493
     },
-    {
-      "code": "189",
+    "189": {
       "station_name": "บจก.โกลว์ พลังงาน",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "OFFLINE (122 วัน)",
-      "last_update": "21 เม.ย. 2569, 16:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "ข้อมูลทางฝั่ง emcc mtp ไม่อัปเดต  ไม่มีการอัปเดต ตั้งแต่วันที่ 8/5/2569",
-      "longitude": 101.145233,
-      "latitude": 12.694168
+      "latitude": 12.694168,
+      "longitude": 101.145233
     },
-    {
-      "code": "190",
+    "190": {
       "station_name": "บจก.เจเอสอาร์ บีเอสที อิลาสโตเมอร์ 2",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "OFFLINE (284 วัน)",
-      "last_update": "10 พ.ย. 2568, 15:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "ข้อมูลทางฝั่ง emcc mtp ไม่อัปเดต  ไม่มีการอัปเดต ตั้งแต่วันที่ 10/11/2568",
-      "longitude": 101.140316,
-      "latitude": 12.714813
+      "latitude": 12.714813,
+      "longitude": 101.140316
     },
-    {
-      "code": "162",
+    "162": {
       "station_name": "บจก.เอ็มทีพี เอชพี เจวี",
       "estate_name": "เอเชีย",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "OFFLINE (364 วัน)",
-      "last_update": "22 ส.ค. 2568, 13:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "ข้อมูลทางฝั่ง emcc mtp ไม่อัปเดต ไม่มีการอัปเดต ตั้งแต่วันที่ 22/8/2568",
-      "longitude": 101.09169769957025,
-      "latitude": 12.704896447139623
+      "latitude": 12.704896447139623,
+      "longitude": 101.09169769957025
     },
-    {
-      "code": "163",
+    "163": {
       "station_name": "บจก.เจเอสอาร์ บีเอสที อิลาสโตเมอร์",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "OFFLINE (284 วัน)",
-      "last_update": "10 พ.ย. 2568, 15:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "ข้อมูลทางฝั่ง emcc mtp ไม่อัปเดต ไม่มีการอัปเดต ตั้งแต่วันที่ 14/11/2568",
-      "longitude": 101.140328,
-      "latitude": 12.689105
+      "latitude": 12.689105,
+      "longitude": 101.140328
     },
-    {
-      "code": "165",
+    "165": {
       "station_name": "บจก. เอสซีจี ซิเมนต์",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "OFFLINE (186 วัน)",
-      "last_update": "16 ก.พ. 2569, 20:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "ข้อมูลทางฝั่ง emcc mtp ไม่อัปเดต  ไม่มีการอัปเดต ตั้งแต่วันที่ 16/2/2569",
-      "longitude": 101.1342542069325,
-      "latitude": 12.66975001635494
+      "latitude": 12.66975001635494,
+      "longitude": 101.1342542069325
     },
-    {
-      "code": "166",
+    "166": {
       "station_name": "บริษัท อมตะ บี.กริม เพาเวอร์ 1 จำกัด",
       "estate_name": "อมตะซิตี้ ชลบุรี",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.02755403491228,
-      "latitude": 13.421529391833669
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.421529391833669,
+      "longitude": 101.02755403491228
     },
-    {
-      "code": "152",
+    "152": {
       "station_name": "โรงไฟฟ้าบางปะอิน 1",
       "estate_name": "บางปะอิน",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.58745,
-      "latitude": 14.19744
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 14.19744,
+      "longitude": 100.58745
     },
-    {
-      "code": "153",
+    "153": {
       "station_name": "โรงไฟฟ้าบางปะอิน 1",
       "estate_name": "บางปะอิน",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.58745,
-      "latitude": 14.19744
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 14.19744,
+      "longitude": 100.58745
     },
-    {
-      "code": "154",
+    "154": {
       "station_name": "บจก.กัลฟ์ เจพี KP1",
       "estate_name": "หนองแค",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.908283,
-      "latitude": 14.387109
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 14.387109,
+      "longitude": 100.908283
     },
-    {
-      "code": "155",
+    "155": {
       "station_name": "บจก.กัลฟ์ เจพี KP2",
       "estate_name": "หนองแค",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.909399,
-      "latitude": 14.384656
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 14.384656,
+      "longitude": 100.909399
     },
-    {
-      "code": "111",
+    "111": {
       "station_name": "บมจ.พีทีที โกลบอล เคมิคอล",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "OFFLINE (1 วัน)",
-      "last_update": "20 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "ข้อมูลทางฝั่ง emcc mtp ไม่อัปเดต ไม่มีการอัปเดต ตั้งแต่วันที่ 20/8/2569",
-      "longitude": 101.140351,
-      "latitude": 12.702934
+      "latitude": 12.702934,
+      "longitude": 101.140351
     },
-    {
-      "code": "117",
+    "117": {
       "station_name": "บมจ.โกลบอล เพาเวอร์ ซินเนอร์ยี่",
       "estate_name": "ดับบลิวเอชเอ ตะวันออก",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.12620329208936,
-      "latitude": 12.702571986075535
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.702571986075535,
+      "longitude": 101.12620329208936
     },
-    {
-      "code": "118",
+    "118": {
       "station_name": "บจก.เก็คโค่-วัน",
       "estate_name": "-",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.13581,
-      "latitude": 12.676631
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.676631,
+      "longitude": 101.13581
     },
-    {
-      "code": "120",
+    "120": {
       "station_name": "บจก.ดาว เคมิคอล ประเทศไทย",
       "estate_name": "เอเชีย",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.091239,
-      "latitude": 12.698475
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.698475,
+      "longitude": 101.091239
     },
-    {
-      "code": "122",
+    "122": {
       "station_name": "โรงไฟฟ้าบางปะอิน 2",
       "estate_name": "บางปะอิน",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 10:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.58745,
-      "latitude": 14.19744
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 14.19744,
+      "longitude": 100.58745
     },
-    {
-      "code": "100",
+    "100": {
       "station_name": "บจก.พีทีที โพลีเอทิลีน",
       "estate_name": "ผาแดง",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "OFFLINE (1 วัน)",
-      "last_update": "21 ส.ค. 2569, 02:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "ข้อมูลทางฝั่ง emcc mtp ไม่อัปเดต  ไม่มีการอัปเดต ตั้งแต่วันที่ 20/8/2569",
-      "longitude": 101.12252,
-      "latitude": 12.686962
+      "latitude": 12.686962,
+      "longitude": 101.12252
     },
-    {
-      "code": "81",
+    "81": {
       "station_name": "บมจ.โกลบอล เพาเวอร์ ซินเนอร์ยี่",
       "estate_name": "ดับบลิวเอชเอ ตะวันออก",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.12620329208936,
-      "latitude": 12.702571986075535
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.702571986075535,
+      "longitude": 101.12620329208936
     },
-    {
-      "code": "44",
+    "44": {
       "station_name": "บจก.อินโดรามาปิโตรเคมี",
       "estate_name": "เอเชีย",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "OFFLINE (32 วัน)",
-      "last_update": "20 ก.ค. 2569, 19:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "อยู่ระหว่างตรวจสอบหาสาเหตุ ไม่มีการอัปเดต ตั้งแต่วันที่ 22/7/2569",
-      "longitude": 101.09489468828347,
-      "latitude": 12.707465162096154
+      "latitude": 12.707465162096154,
+      "longitude": 101.09489468828347
     },
-    {
-      "code": "58",
+    "58": {
       "station_name": "บจก.ทีพีทียูทีลิตี้",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "OFFLINE (332 วัน)",
-      "last_update": "23 ก.ย. 2568, 23:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "ข้อมูลทางฝั่ง emcc mtp ไม่อัปเดต ไม่มีการอัปเดต ตั้งแต่วันที่ 23/9/2568",
-      "longitude": 101.156659,
-      "latitude": 12.680253
+      "latitude": 12.680253,
+      "longitude": 101.156659
     },
-    {
-      "code": "60",
+    "60": {
       "station_name": "บมจ.โกลบอล เพาเวอร์ ซินเนอร์ยี่",
       "estate_name": "ดับบลิวเอชเอ ตะวันออก",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.12620329208936,
-      "latitude": 12.702571986075535
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.702571986075535,
+      "longitude": 101.12620329208936
     },
-    {
-      "code": "61",
+    "61": {
       "station_name": "บริษัท บี.กริม เพาเวอร์ (ดับบลิวเอชเอ) 1 จำกัด",
       "estate_name": "ดับบลิวเอชเอ ชลบุรี",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.0906789,
-      "latitude": 13.0654223
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.0654223,
+      "longitude": 101.0906789
     },
-    {
-      "code": "62",
+    "62": {
       "station_name": "บจก.โกลว์ พลังงาน",
       "estate_name": "-",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "OFFLINE (122 วัน)",
-      "last_update": "21 เม.ย. 2569, 16:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "อยู่ระหว่างตรวจสอบหาสาเหตุ (EMCC มาบตาพุด online) ไม่มีการอัปเดต ตั้งแต่วันที่ 21/4/2569",
-      "longitude": 101.134279,
-      "latitude": 12.676621
+      "latitude": 12.676621,
+      "longitude": 101.134279
     },
-    {
-      "code": "63",
+    "63": {
       "station_name": "บจก.ทีโอซีไกลคอล",
       "estate_name": "ดับบลิวเอชเอ ตะวันออก",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "OFFLINE (1 วัน)",
-      "last_update": "20 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "ข้อมูลทางฝั่ง emcc mtp ไม่อัปเดต  ไม่มีการอัปเดต ตั้งแต่วันที่ 20/8/2569",
-      "longitude": 101.127284,
-      "latitude": 12.700631
+      "latitude": 12.700631,
+      "longitude": 101.127284
     },
-    {
-      "code": "71",
+    "71": {
       "station_name": "โรงไฟฟ้าบางปะอิน 2",
       "estate_name": "บางปะอิน",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 10:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.5844922,
-      "latitude": 14.2016038
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 14.2016038,
+      "longitude": 100.5844922
     },
-    {
-      "code": "74",
+    "74": {
       "station_name": "บมจ.พีทีที โกลบอล เคมิคอล",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "OFFLINE (1 วัน)",
-      "last_update": "21 ส.ค. 2569, 02:00",
       "parameter_alarm": "26-08-21 02:00 (PTTGC4_200H1_NOx@7% 918.53 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 141.23 (Cail) ppmPTTGC4_432H3_SO2@7% 87.75 (Cail) ppm)  , 26-08-21 01:00 (PTTGC4_200H1_NOx@7% 888.01 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 140.33 (Cail) ppmPTTGC4_432H3_SO2@7% 87.39 (Cail) ppm)  , 26-08-21 00:00 (PTTGC4_200H1_NOx@7% 852.82 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 140.21 (Cail) ppmPTTGC4_432H3_SO2@7% 88.37 (Cail) ppm)  , 26-08-20 23:00 (PTTGC4_200H1_NOx@7% 833.11 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 126.15 (Cail) ppmPTTGC4_432H3_SO2@7% 75.53 (Cail) ppm)  , 26-08-20 22:00 (PTTGC4_200H1_NOx@7% 812.94 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 107.67 (Cail) ppmPTTGC4_432H3_SO2@7% 66.1 (Cail) ppm)  , 26-08-20 21:00 (PTTGC4_200H1_NOx@7% 813.39 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 107.19 (Cail) ppmPTTGC4_432H3_SO2@7% 69.6 (Cail) ppm)  , 26-08-20 20:00 (PTTGC4_200H1_NOx@7% 828.28 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 108 (Cail) ppmPTTGC4_432H3_SO2@7% 69.44 (Cail) ppm)  , 26-08-20 19:00 (PTTGC4_200H1_NOx@7% 838 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 106.89 (Cail) ppmPTTGC4_432H3_SO2@7% 68.97 (Cail) ppm)  , 26-08-20 18:00 (PTTGC4_200H1_NOx@7% 889.01 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 107.37 (Cail) ppmPTTGC4_432H3_SO2@7% 68.99 (Cail) ppm)  , 26-08-20 17:00 (PTTGC4_200H1_NOx@7% 911.29 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 108.86 (Cail) ppmPTTGC4_432H3_SO2@7% 69.53 (Cail) ppm)  , 26-08-20 16:00 (PTTGC4_200H1_NOx@7% 880.13 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 108.73 (Cail) ppmPTTGC4_432H3_SO2@7% 70.39 (Cail) ppm)  , 26-08-20 15:00 (PTTGC4_200H1_NOx@7% 856.86 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 109.27 (Cail) ppmPTTGC4_432H3_SO2@7% 70.63 (Cail) ppm)",
       "comment": "ข้อมูลทางฝั่ง emcc mtp ไม่อัปเดต ไม่มีการอัปเดต ตั้งแต่วันที่ 20/8/2569",
-      "longitude": 101.155994,
-      "latitude": 12.678777
+      "latitude": 12.678777,
+      "longitude": 101.155994
     },
-    {
-      "code": "48",
+    "48": {
       "station_name": "บจก.เอเซียซิลิโคนส์ โมโนเมอร์",
       "estate_name": "เอเชีย",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "OFFLINE (519 วัน)",
-      "last_update": "20 มี.ค. 2568, 10:13",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "ข้อมูลทางฝั่ง emcc mtp ไม่อัปเดต ไม่มีการอัปเดต ตั้งแต่วันที่ 20/3/2568",
-      "longitude": 101.097178,
-      "latitude": 12.706953
+      "latitude": 12.706953,
+      "longitude": 101.097178
     },
-    {
-      "code": "49",
+    "49": {
       "station_name": "บจก.ดาวเคมิคอลประเทศไทย",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
       "parameter_alarm": "26-08-20 20:00 (NOx_SPE II 24851.56 (Cail) ppm)  , 26-08-20 19:00 (NOx_SPE II 15810.23 (Cail) ppm)  , 26-08-20 18:00 (NOx_SPE II 36013.95 (Cail) ppm)  , 26-08-20 17:00 (NOx_SPE II 5283.21 (Cail) ppm)  , 26-08-20 16:00 (NOx_SPE II 5875.08 (Cail) ppm)  , 26-08-20 15:00 (NOx_SPE II 28347.08 (Cail) ppm)",
-      "comment": "-",
-      "longitude": 101.152872,
-      "latitude": 12.695623
+      "comment": "",
+      "latitude": 12.695623,
+      "longitude": 101.152872
     },
-    {
-      "code": "50",
+    "50": {
       "station_name": "บจก.ไทยชินกงอินดัสตรี คอร์ปอเรชั่น",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "OFFLINE (265 วัน)",
-      "last_update": "29 พ.ย. 2568, 11:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "ข้อมูลทางฝั่ง emcc mtp ไม่อัปเดต ไม่มีการอัปเดต ตั้งแต่วันที่ 29/11/2568",
-      "longitude": 101.15829,
-      "latitude": 12.680787
+      "latitude": 12.680787,
+      "longitude": 101.15829
     },
-    {
-      "code": "52",
+    "52": {
       "station_name": "บมจ.โกลบอล เพาเวอร์ ซินเนอร์ยี่",
       "estate_name": "-",
       "zone": "นอกเขตนิคมฯ",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.163579,
-      "latitude": 12.753672
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.753672,
+      "longitude": 101.163579
     },
-    {
-      "code": "53",
+    "53": {
       "station_name": "บมจ.โกลบอล เพาเวอร์ ซินเนอร์ยี่",
       "estate_name": "-",
       "zone": "นอกเขตนิคมฯ",
       "station_type": "CEMs",
       "status": "OFFLINE (122 วัน)",
-      "last_update": "21 เม.ย. 2569, 06:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "อยู่ระหว่างตรวจสอบหาสาเหตุ (EMCC มาบตาพุด online) ไม่มีการอัปเดต ตั้งแต่วันที่ 21/4/2569",
-      "longitude": 101.163579,
-      "latitude": 12.753672
+      "latitude": 12.753672,
+      "longitude": 101.163579
     },
-    {
-      "code": "54",
+    "54": {
       "station_name": "บมจ.โกลบอล เพาเวอร์ ซินเนอร์ยี่",
       "estate_name": "-",
       "zone": "นอกเขตนิคมฯ",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.163579,
-      "latitude": 12.753672
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.753672,
+      "longitude": 101.163579
     },
-    {
-      "code": "55",
+    "55": {
       "station_name": "บจก.ไทยพลาสติกและเคมีภัณฑ์",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
       "parameter_alarm": "26-08-21 12:00 (INCIN2A_NOx@7% 31.11  ppm)  , 26-08-21 11:00 (INCIN2A_NOx@7% 30.8  ppm)  , 26-08-21 10:00 (INCIN2A_NOx@7% 32.26  ppm)",
       "comment": "INCIN2A_NOx@7% เกินค่ามาตรฐาน จำนวน 1 วัน",
-      "longitude": 101.140695,
-      "latitude": 12.696529
+      "latitude": 12.696529,
+      "longitude": 101.140695
     },
-    {
-      "code": "56",
+    "56": {
       "station_name": "บจก.เอ็ชเอ็มซีโปลีเมอร์",
       "estate_name": "ดับบลิวเอชเอ ตะวันออก",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "OFFLINE (406 วัน)",
-      "last_update": "11 ก.ค. 2568, 14:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "ข้อมูลทางฝั่ง emcc mtp ไม่อัปเดต  ไม่มีการอัปเดต ตั้งแต่วันที่ 11/7/2568",
-      "longitude": 101.125953,
-      "latitude": 12.697052
+      "latitude": 12.697052,
+      "longitude": 101.125953
     },
-    {
-      "code": "42",
+    "42": {
       "station_name": "บจก.เหล็กสยามยามาโตะ",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "OFFLINE (11 วัน)",
-      "last_update": "10 ส.ค. 2569, 16:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "ข้อมูลทางฝั่ง emcc mtp ไม่อัปเดต ไม่มีการอัปเดต ตั้งแต่วันที่ 10/8/2569",
-      "longitude": 101.148913,
-      "latitude": 12.675323
+      "latitude": 12.675323,
+      "longitude": 101.148913
     },
-    {
-      "code": "34",
+    "34": {
       "station_name": "บจก.บีแอลซีพีเพาเวอร์",
       "estate_name": "-",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.160436,
-      "latitude": 12.644107
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.644107,
+      "longitude": 101.160436
     },
-    {
-      "code": "35",
+    "35": {
       "station_name": "บจก.ไทยอาซาฮีเคมีภัณฑ์",
       "estate_name": "ดับบลิวเอชเอ ตะวันออก",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 13:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.13019150489563,
-      "latitude": 12.695382631401356
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.695382631401356,
+      "longitude": 101.13019150489563
     },
-    {
-      "code": "37",
+    "37": {
       "station_name": "บจก.เหล็กก่อสร้างสยาม",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.148977,
-      "latitude": 12.678253
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.678253,
+      "longitude": 101.148977
     },
-    {
-      "code": "17",
+    "17": {
       "station_name": "บจก.ไทยโพลีอะซีทัล",
       "estate_name": "ผาแดง",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.132112,
-      "latitude": 12.688427
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.688427,
+      "longitude": 101.132112
     },
-    {
-      "code": "18",
+    "18": {
       "station_name": "บจก.ไทยเอ็มเอ็มเอ",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.149557,
-      "latitude": 12.715535
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.715535,
+      "longitude": 101.149557
     },
-    {
-      "code": "23",
+    "23": {
       "station_name": "บมจ.พีทีที โกลบอล เคมิคอล",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "OFFLINE (1 วัน)",
-      "last_update": "20 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "ข้อมูลทางฝั่ง emcc mtp ไม่อัปเดต ไม่มีการอัปเดต ตั้งแต่วันที่ 20/8/2569",
-      "longitude": 101.14769,
-      "latitude": 12.695901
+      "latitude": 12.695901,
+      "longitude": 101.14769
     },
-    {
-      "code": "24",
+    "24": {
       "station_name": "บจก.ไทยเพ็ทเรซิน",
       "estate_name": "ดับบลิวเอชเอ ตะวันออก",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "OFFLINE (300 วัน)",
-      "last_update": "25 ต.ค. 2568, 07:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "ข้อมูลทางฝั่ง emcc mtp ไม่อัปเดต ไม่มีการอัปเดต ตั้งแต่วันที่ 25/10/2568",
-      "longitude": 101.112542,
-      "latitude": 12.702955
+      "latitude": 12.702955,
+      "longitude": 101.112542
     },
-    {
-      "code": "26",
+    "26": {
       "station_name": "บจก.สตาร์ปิโตรเลียมรีไฟน์นิ่ง",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.158547,
-      "latitude": 12.701846
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.701846,
+      "longitude": 101.158547
     },
-    {
-      "code": "4",
+    "4": {
       "station_name": "บจก.ระยอง โอเลฟินส์",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.15181,
-      "latitude": 12.715996
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.715996,
+      "longitude": 101.15181
     },
-    {
-      "code": "5",
+    "5": {
       "station_name": "บจก.บี.กริม เพาเวอร์ (เอไออี-เอ็มทีพี)",
       "estate_name": "เอเชีย",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "CEMs",
       "status": "OFFLINE (1 วัน)",
-      "last_update": "20 ส.ค. 2569, 13:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "ข้อมูลทางฝั่ง emcc mtp ไม่อัปเดต  ไม่มีการอัปเดต ตั้งแต่วันที่ 20/8/2569",
-      "longitude": 101.08629610026374,
-      "latitude": 12.702056666846659
+      "latitude": 12.702056666846659,
+      "longitude": 101.08629610026374
     },
-    {
-      "code": "10",
+    "10": {
       "station_name": "สถานีตรวจวัดคุณภาพน้ำ AS1",
       "estate_name": "บางปู",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "WQMS",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 13:59",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "pH ไม่อยู่ในเกณฑ์มาตรฐาน จำนวน 82 วัน",
-      "longitude": 100.643271291,
-      "latitude": 13.5414771856
+      "latitude": 13.5414771856,
+      "longitude": 100.643271291
     },
-    {
-      "code": "11",
+    "11": {
       "station_name": "สถานีตรวจวัดคุณภาพน้ำ AS2",
       "estate_name": "บางปู",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "WQMS",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 13:59",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "pH ไม่อยู่ในเกณฑ์มาตรฐาน จำนวน 82 วัน",
-      "longitude": 100.667972,
-      "latitude": 13.551726
+      "latitude": 13.551726,
+      "longitude": 100.667972
     },
-    {
-      "code": "12",
+    "12": {
       "station_name": "สถานีตรวจวัดคุณภาพน้ำ RBC",
       "estate_name": "บางปู",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "WQMS",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 13:59",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "pH ไม่อยู่ในเกณฑ์มาตรฐาน จำนวน 82 วัน",
-      "longitude": 100.661062045,
-      "latitude": 13.5594354537
+      "latitude": 13.5594354537,
+      "longitude": 100.661062045
     },
-    {
-      "code": "27",
+    "27": {
       "station_name": "สถานีตรวจวัดคุณภาพน้ำ บริเวณนิคมฯปิ่นทอง 1",
       "estate_name": "ปิ่นทองโครงการ (1)",
       "zone": "-",
       "station_type": "WQMS",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 13:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.98968894,
-      "latitude": 13.1152913047
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.1152913047,
+      "longitude": 100.98968894
     },
-    {
-      "code": "30",
+    "30": {
       "station_name": "สถานีตรวจวัดคุณภาพน้ำ บริเวณนิคมฯปิ่นทอง 2",
       "estate_name": "ปิ่นทองโครงการ (2)",
       "zone": "-",
       "station_type": "WQMS",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 13:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.031061743,
-      "latitude": 13.1093241389
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.1093241389,
+      "longitude": 101.031061743
     },
-    {
-      "code": "43",
+    "43": {
       "station_name": "สถานีตรวจวัดคุณภาพน้ำ บริเวณนิคมฯปิ่นทอง 5",
       "estate_name": "ปิ่นทองโครงการ (5)",
       "zone": "-",
       "station_type": "WQMS",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 13:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.15834207645602,
-      "latitude": 13.092382850339096
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.092382850339096,
+      "longitude": 101.15834207645602
     },
-    {
-      "code": "57",
+    "57": {
       "station_name": "สถานีน้ำต้นคลองชากหมาก",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "WQMS",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.143921,
-      "latitude": 12.707042
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.707042,
+      "longitude": 101.143921
     },
-    {
-      "code": "95",
+    "95": {
       "station_name": "สถานีน้ำปลายคลองชากหมาก",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "WQMS",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.157603,
-      "latitude": 12.679146
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.679146,
+      "longitude": 101.157603
     },
-    {
-      "code": "267",
+    "267": {
       "station_name": "สถานีน้ำภาคใต้ WS2",
       "estate_name": "ภาคใต้",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "WQMS",
       "status": "OFFLINE (337 วัน)",
-      "last_update": "18 ก.ย. 2568, 03:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "เครื่องตรวจวัดชำรุด อยู่ระหว่างรองบประมาณซ่อมบำรุง ไม่มีการอัปเดตตั้งแต่วันที่ 22/2/2568",
-      "longitude": 100.36146,
-      "latitude": 7.001016
+      "latitude": 7.001016,
+      "longitude": 100.36146
     },
-    {
-      "code": "213",
+    "213": {
       "station_name": "สถานีน้ำนิคมฯ ภาคใต้",
       "estate_name": "ภาคใต้",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "WQMS",
       "status": "OFFLINE (545 วัน)",
-      "last_update": "23 ก.พ. 2568, 00:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "เครื่องตรวจวัดชำรุด อยู่ระหว่างรองบประมาณซ่อมบำรุง ไม่มีการอัปเดตตั้งแต่วันที่ 22/2/2568",
-      "longitude": 100.36146,
-      "latitude": 7.001016
+      "latitude": 7.001016,
+      "longitude": 100.36146
     },
-    {
-      "code": "301",
+    "301": {
       "station_name": "บางพลี นํ้าทิ้งออกจากระบบ",
       "estate_name": "บางพลี",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "WQMS",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:10",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.796919564016,
-      "latitude": 13.577009124059915
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.577009124059915,
+      "longitude": 100.796919564016
     },
-    {
-      "code": "303",
+    "303": {
       "station_name": "พิจิตร นํ้าทิ้งออกจากระบบ",
       "estate_name": "พิจิตร",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "WQMS",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:10",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.14865642613317,
-      "latitude": 16.57614457749813
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 16.57614457749813,
+      "longitude": 100.14865642613317
     },
-    {
-      "code": "307",
+    "307": {
       "station_name": "ภาคเหนือ นํ้าทิ้งออกจากระบบ",
       "estate_name": "ภาคเหนือ",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "WQMS",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:10",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 99.04450428516228,
-      "latitude": 18.59172594348903
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 18.59172594348903,
+      "longitude": 99.04450428516228
     },
-    {
-      "code": "309",
+    "309": {
       "station_name": "มาบตาพุต นํ้าทิ้งออกจากระบบ",
       "estate_name": "มาบตาพุด",
       "zone": "สายปฏิบัติการ 3",
       "station_type": "WQMS",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:10",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 101.13176313550127,
-      "latitude": 12.678500631295726
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 12.678500631295726,
+      "longitude": 101.13176313550127
     },
-    {
-      "code": "315",
+    "315": {
       "station_name": "สงขลา นํ้าทิ้งออกจากระบบ",
       "estate_name": "สงขลา",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "WQMS",
       "status": "OFFLINE (11 วัน)",
-      "last_update": "10 ส.ค. 2569, 14:20",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "อยู่ระหว่างตรวจสอบหาสาเหตุ ไม่มีการอัปเดต ตั้งแต่วันที่ 10/8/2569",
-      "longitude": 100.35981003762544,
-      "latitude": 7.00832396914746
+      "latitude": 7.00832396914746,
+      "longitude": 100.35981003762544
     },
-    {
-      "code": "318",
+    "318": {
       "station_name": "สมุทรสาคร นํ้าทิ้งออกจากระบบ",
       "estate_name": "สมุทรสาคร",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "WQMS",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:10",
-      "parameter_alarm": "-",
-      "comment": "-",
-      "longitude": 100.2329980123358,
-      "latitude": 13.54419567088704
+      "parameter_alarm": "",
+      "comment": "",
+      "latitude": 13.54419567088704,
+      "longitude": 100.2329980123358
     },
-    {
-      "code": "320",
+    "320": {
       "station_name": "สระแก้ว นํ้าทิ้งออกจากระบบ",
       "estate_name": "สระแก้ว",
       "zone": "สายปฏิบัติการ 2",
       "station_type": "WQMS",
       "status": "OFFLINE (11 วัน)",
-      "last_update": "10 ส.ค. 2569, 14:20",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "อยู่ระหว่างตรวจสอบหาสาเหตุ ไม่มีการอัปเดต ตั้งแต่วันที่ 10/8/2569",
-      "longitude": 102.55486612607392,
-      "latitude": 13.724430304384054
+      "latitude": 13.724430304384054,
+      "longitude": 102.55486612607392
     },
-    {
-      "code": "323",
+    "323": {
       "station_name": "บจก. ทีดิก เซาท์",
       "estate_name": "ภาคใต้",
       "zone": "สายปฏิบัติการ 1",
       "station_type": "WQMS",
       "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "-",
+      "parameter_alarm": "",
       "comment": "pH_1 และ pH_2 เกินค่ามาตรฐาน จำนวน 4 วัน",
-      "longitude": 100.36738537791183,
-      "latitude": 7.019892216666753
+      "latitude": 7.019892216666753,
+      "longitude": 100.36738537791183
     }
-  ],
-  "stations": [
-    {
-      "code": "33",
-      "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณอนามัยตากวน",
-      "estate_name": "มาบตาพุด",
-      "zone": "สายปฏิบัติการ 3",
-      "station_type": "AIR QUALITY",
-      "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "26-08-20 20:00 (SO2 133.54 (Cail) ppb)",
-      "comment": "-",
-      "longitude": 101.168528,
-      "latitude": 12.680425
-    },
-    {
-      "code": "41",
-      "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริวเณวัดมาบชลูด",
-      "estate_name": "มาบตาพุด",
-      "zone": "สายปฏิบัติการ 3",
-      "station_type": "AIR QUALITY",
-      "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "26-08-20 15:00 (O3 251.51 (Cail) ppb)",
-      "comment": "-",
-      "longitude": 101.127466,
-      "latitude": 12.722455
-    },
-    {
-      "code": "59",
-      "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณวัดหนองแฟบ",
-      "estate_name": "มาบตาพุด",
-      "zone": "สายปฏิบัติการ 3",
-      "station_type": "AIR QUALITY",
-      "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 10:00",
-      "parameter_alarm": "26-08-20 23:00 (O3 157.64 (Cail) ppb)  , 26-08-20 22:00 (SO2 139.93 (Cail) ppb)",
-      "comment": "-",
-      "longitude": 101.115388,
-      "latitude": 12.685342
-    },
-    {
-      "code": "77",
-      "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณชุมชนวัดประชุมมิตรบำรุง",
-      "estate_name": "มาบตาพุด",
-      "zone": "สายปฏิบัติการ 3",
-      "station_type": "AIR QUALITY",
-      "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "26-08-21 02:00 (PM10 109.65 (Cail) ug./m3)  , 26-08-20 20:00 (PM10 107.1 (Cail) ug./m3)  , 26-08-20 19:00 (PM10 143.4 (Cail) ug./m3)",
-      "comment": "-",
-      "longitude": 101.08402,
-      "latitude": 12.72183
-    },
-    {
-      "code": "82",
-      "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณชุมชนเนินพะยอม",
-      "estate_name": "มาบตาพุด",
-      "zone": "สายปฏิบัติการ 3",
-      "station_type": "AIR QUALITY",
-      "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "26-08-21 14:00 (CO 61.37  ppmO3 1004.75  ppb)  , 26-08-21 13:00 (CO 62.73  ppmO3 1005.29  ppb)  , 26-08-21 12:00 (CO 63.51  ppmO3 1005.94  ppb)  , 26-08-21 11:00 (CO 66.23  ppmO3 1006.26  ppb)  , 26-08-21 10:00 (CO 65.71  ppmO3 1006.16  ppb)  , 26-08-21 09:00 (CO 65.14  ppmO3 1005.81  ppb)  , 26-08-21 08:00 (CO 67.11  ppmO3 1005.52  ppb)  , 26-08-21 07:00 (CO 68.76  ppmO3 1004.99  ppb)  , 26-08-21 06:00 (CO 69.07  ppmO3 1004.7  ppb)  , 26-08-21 05:00 (CO 70.54  ppmO3 1004.46  ppb)  , 26-08-21 04:00 (CO 68.2  ppmO3 1004.42  ppb)  , 26-08-21 03:00 (CO 67.95  ppmO3 1004.41  ppb)  , 26-08-21 02:00 (CO 69.18  ppmO3 1005.2  ppb)  , 26-08-21 01:00 (CO 67.98  ppmO3 1005.54  ppb)  , 26-08-21 00:00 (CO 67.4  ppmO3 1005.93  ppb)  , 26-08-20 23:00 (CO 69.49  ppmO3 1005.74  ppb)  , 26-08-20 22:00 (CO 69.35  ppmO3 1005.6  ppb)  , 26-08-20 21:00 (CO 70.11  ppmO3 1004.73  ppb)  , 26-08-20 20:00 (CO 70.47  ppmO3 1003.83  ppb)  , 26-08-20 19:00 (CO 67.49  ppmO3 1003.59  ppb)  , 26-08-20 18:00 (CO 64.62  ppmO3 1003.56  ppb)  , 26-08-20 17:00 (CO 63.94  ppmO3 1003.15  ppb)  , 26-08-20 16:00 (CO 62.58  ppmO3 1003.06  ppb)  , 26-08-20 15:00 (CO 60.95  ppmO3 1003.51  ppb)",
-      "comment": "CO และ O3 เกินค่ามาตรฐาน จำนวน 54 วัน",
-      "longitude": 101.178715,
-      "latitude": 12.756908
-    },
-    {
-      "code": "98",
-      "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณวัดพยูน",
-      "estate_name": "มาบตาพุด",
-      "zone": "สายปฏิบัติการ 3",
-      "station_type": "AIR QUALITY",
-      "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "26-08-21 06:00 (SO2 117.84  ppbCO 101.99 (Cail) ppm)",
-      "comment": "SO2 เกินค่ามาตรฐาน จำนวน 5 วัน",
-      "longitude": 101.066698,
-      "latitude": 12.678494
-    },
-    {
-      "code": "150",
-      "station_name": "สถานีตรวจวัดคุณภาพอากาศ นิคมฯ เอเชีย",
-      "estate_name": "เอเชีย",
-      "zone": "สายปฏิบัติการ 3",
-      "station_type": "AIR QUALITY",
-      "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "26-08-21 01:00 (O3 168.81 (Cail) ppb)  , 26-08-21 00:00 (SO2 166.35 (Cail) ppb)",
-      "comment": "-",
-      "longitude": 101.101223,
-      "latitude": 12.69404
-    },
-    {
-      "code": "168",
-      "station_name": "สถานีตรวจวัดคุณภาพอากาศ บริเวณหนองเสือเกือก",
-      "estate_name": "มาบตาพุด",
-      "zone": "สายปฏิบัติการ 3",
-      "station_type": "AIR QUALITY",
-      "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "26-08-21 11:00 (NOx 279.46  ppm)  , 26-08-21 02:00 (O3 166.05 (Cail) ppb)  , 26-08-21 01:00 (SO2 121.47 (Cail) ppb)",
-      "comment": "NOx เกินค่ามาตรฐาน จำนวน 1 วัน",
-      "longitude": 101.1587598,
-      "latitude": 12.7165282
-    },
-    {
-      "code": "231",
-      "station_name": "สถานีตรวจวัดคุณภาพอากาศ SSUT",
-      "estate_name": "บางปู",
-      "zone": "สายปฏิบัติการ 1",
-      "station_type": "AIR QUALITY",
-      "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 13:00",
-      "parameter_alarm": "26-08-21 01:00 (SO2 118.08  ppb)",
-      "comment": "SO2 เกินค่ามาตรฐาน จำนวน 3 วัน",
-      "longitude": 100.667972,
-      "latitude": 13.551726
-    },
-    {
-      "code": "281",
-      "station_name": "เทศบาลเมืองมาบตาพุด",
-      "estate_name": "มาบตาพุด",
-      "zone": "สายปฏิบัติการ 3",
-      "station_type": "AIR QUALITY",
-      "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "26-08-21 07:00 (O3 169.43 (Cail) ppb)  , 26-08-21 06:00 (SO2 150.58 (Cail) ppbNO2 157.81 (Cail) ppb)  , 26-08-20 16:00 (PM10 9999999 (Cail) ug./m3)  , 26-08-20 15:00 (PM10 9999999 (Cail) ug./m3)",
-      "comment": "-",
-      "longitude": 101.12726,
-      "latitude": 12.725179
-    },
-    {
-      "code": "331",
-      "station_name": "บริษัท ซีจี คอร์เปอเรชั่น จํากัด",
-      "estate_name": "ซีพีจีซี",
-      "zone": "สายปฏิบัติการ 3",
-      "station_type": "AIR QUALITY",
-      "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 13:00",
-      "parameter_alarm": "26-08-20 21:00 (SO2 121.72 (Calib) ppb)",
-      "comment": "-",
-      "longitude": 101.216007,
-      "latitude": 12.796304
-    },
-    {
-      "code": "327",
-      "station_name": "บางปู เอ็นไวรอนเมนทอล คอมเพล็กส์",
-      "estate_name": "บางปู",
-      "zone": "สายปฏิบัติการ 1",
-      "station_type": "CEMs",
-      "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:12",
-      "parameter_alarm": "26-08-21 13:39 (Opacity 10.59  %)  , 26-08-21 13:10 (Opacity 10.34  %)  , 26-08-21 13:05 (Opacity 10.37  %)  , 26-08-21 12:49 (Opacity 11.23  %)  , 26-08-21 12:16 (Opacity 10.05  %)  , 26-08-21 11:59 (Opacity 10.27  %)  , 26-08-21 09:44 (Opacity 10.19  %)  , 26-08-21 09:33 (Opacity 10.22  %)  , 26-08-21 05:52 (Opacity 10.48  %)",
-      "comment": "Opacity เกินค่ามาตรฐาน จำนวน 11 วัน",
-      "longitude": 100.6559003509614,
-      "latitude": 13.538084845535455
-    },
-    {
-      "code": "328",
-      "station_name": "บริษัท ไทยฮอนด้า จำกัด",
-      "estate_name": "ลาดกระบัง",
-      "zone": "สายปฏิบัติการ 1",
-      "station_type": "CEMs",
-      "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "26-08-21 08:00 (NOx 7.6  ppm)  , 26-08-20 18:00 (TSP 1.9  mg/m3)  , 26-08-20 15:00 (NOx 7.6  ppm)",
-      "comment": "NOx และ TSP เกินค่ามาตรฐาน จำนวน 4 วัน",
-      "longitude": 100.80017783373287,
-      "latitude": 13.770377886513435
-    },
-    {
-      "code": "278",
-      "station_name": "บริษัท อมตะ บี.กริม เพาเวอร์ (อ่างทอง) 3 จำกัด",
-      "estate_name": "เอส อ่างทอง",
-      "zone": "สายปฏิบัติการ 1",
-      "station_type": "CEMs",
-      "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "26-08-21 09:00 (HRSG31_NOx@7% 84.96  ppm)",
-      "comment": "HRSG31_NOx@7% เกินค่ามาตรฐาน จำนวน 5 วัน",
-      "longitude": 100.46618786290189,
-      "latitude": 14.699031715113943
-    },
-    {
-      "code": "250",
-      "station_name": "บมจ.พีทีที โกลบอล เคมิคอล",
-      "estate_name": "มาบตาพุด",
-      "zone": "สายปฏิบัติการ 3",
-      "station_type": "CEMs",
-      "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 03:00",
-      "parameter_alarm": "26-08-21 03:00 (H81105_NOx@7% 81.96 (Cail) ppm)  , 26-08-21 02:00 (H81105_NOx@7% 76.91 (Cail) ppm)  , 26-08-21 01:00 (H81105_NOx@7% 65.21 (Cail) ppm)  , 26-08-21 00:00 (H81105_NOx@7% 63.66 (Cail) ppm)",
-      "comment": "-",
-      "longitude": 101.14004,
-      "latitude": 12.700539
-    },
-    {
-      "code": "235",
-      "station_name": "บจก.ซุปเปอร์ เอิร์ธ เอนเนอร์ยี 6",
-      "estate_name": "พิจิตร",
-      "zone": "สายปฏิบัติการ 1",
-      "station_type": "CEMs",
-      "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 11:00",
-      "parameter_alarm": "26-08-20 21:00 (OPACITY#1 11.11  %)",
-      "comment": "OPACITY#1 เกินค่ามาตรฐาน จำนวน 4 วัน",
-      "longitude": 100.1526222,
-      "latitude": 16.5739708
-    },
-    {
-      "code": "219",
-      "station_name": "บจก.กัลฟ์ ทีเอส 3",
-      "estate_name": "ดับบลิวเอชเอ อีสเทิร์นซีบอร์ด",
-      "zone": "สายปฏิบัติการ 2",
-      "station_type": "CEMs",
-      "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "26-08-21 09:00 (HRSG2_SO2 55.28  ppm)  , 26-08-21 08:00 (HRSG2_SO2 246.46 (Defective) ppmHRSG2_TSP 35.33 (Defective) mg/NM3)  , 26-08-21 00:00 (HRSG2_SO2 13.68  ppm)",
-      "comment": "HRSG2_SO2 เกินค่ามาตรฐาน จำนวน 2 วัน",
-      "longitude": 101.18642,
-      "latitude": 13.066
-    },
-    {
-      "code": "74",
-      "station_name": "บมจ.พีทีที โกลบอล เคมิคอล",
-      "estate_name": "มาบตาพุด",
-      "zone": "สายปฏิบัติการ 3",
-      "station_type": "CEMs",
-      "status": "OFFLINE (1 วัน)",
-      "last_update": "21 ส.ค. 2569, 02:00",
-      "parameter_alarm": "26-08-21 02:00 (PTTGC4_200H1_NOx@7% 918.53 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 141.23 (Cail) ppmPTTGC4_432H3_SO2@7% 87.75 (Cail) ppm)  , 26-08-21 01:00 (PTTGC4_200H1_NOx@7% 888.01 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 140.33 (Cail) ppmPTTGC4_432H3_SO2@7% 87.39 (Cail) ppm)  , 26-08-21 00:00 (PTTGC4_200H1_NOx@7% 852.82 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 140.21 (Cail) ppmPTTGC4_432H3_SO2@7% 88.37 (Cail) ppm)  , 26-08-20 23:00 (PTTGC4_200H1_NOx@7% 833.11 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 126.15 (Cail) ppmPTTGC4_432H3_SO2@7% 75.53 (Cail) ppm)  , 26-08-20 22:00 (PTTGC4_200H1_NOx@7% 812.94 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 107.67 (Cail) ppmPTTGC4_432H3_SO2@7% 66.1 (Cail) ppm)  , 26-08-20 21:00 (PTTGC4_200H1_NOx@7% 813.39 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 107.19 (Cail) ppmPTTGC4_432H3_SO2@7% 69.6 (Cail) ppm)  , 26-08-20 20:00 (PTTGC4_200H1_NOx@7% 828.28 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 108 (Cail) ppmPTTGC4_432H3_SO2@7% 69.44 (Cail) ppm)  , 26-08-20 19:00 (PTTGC4_200H1_NOx@7% 838 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 106.89 (Cail) ppmPTTGC4_432H3_SO2@7% 68.97 (Cail) ppm)  , 26-08-20 18:00 (PTTGC4_200H1_NOx@7% 889.01 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 107.37 (Cail) ppmPTTGC4_432H3_SO2@7% 68.99 (Cail) ppm)  , 26-08-20 17:00 (PTTGC4_200H1_NOx@7% 911.29 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 108.86 (Cail) ppmPTTGC4_432H3_SO2@7% 69.53 (Cail) ppm)  , 26-08-20 16:00 (PTTGC4_200H1_NOx@7% 880.13 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 108.73 (Cail) ppmPTTGC4_432H3_SO2@7% 70.39 (Cail) ppm)  , 26-08-20 15:00 (PTTGC4_200H1_NOx@7% 856.86 (Cail) ppmPTTGC4_200H1_SO2@7% 307 (Cail) ppmPTTGC4_432H3_NOx@7% 109.27 (Cail) ppmPTTGC4_432H3_SO2@7% 70.63 (Cail) ppm)",
-      "comment": "ข้อมูลทางฝั่ง emcc mtp ไม่อัปเดต ไม่มีการอัปเดต ตั้งแต่วันที่ 20/8/2569",
-      "longitude": 101.155994,
-      "latitude": 12.678777
-    },
-    {
-      "code": "49",
-      "station_name": "บจก.ดาวเคมิคอลประเทศไทย",
-      "estate_name": "มาบตาพุด",
-      "zone": "สายปฏิบัติการ 3",
-      "station_type": "CEMs",
-      "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "26-08-20 20:00 (NOx_SPE II 24851.56 (Cail) ppm)  , 26-08-20 19:00 (NOx_SPE II 15810.23 (Cail) ppm)  , 26-08-20 18:00 (NOx_SPE II 36013.95 (Cail) ppm)  , 26-08-20 17:00 (NOx_SPE II 5283.21 (Cail) ppm)  , 26-08-20 16:00 (NOx_SPE II 5875.08 (Cail) ppm)  , 26-08-20 15:00 (NOx_SPE II 28347.08 (Cail) ppm)",
-      "comment": "-",
-      "longitude": 101.152872,
-      "latitude": 12.695623
-    },
-    {
-      "code": "55",
-      "station_name": "บจก.ไทยพลาสติกและเคมีภัณฑ์",
-      "estate_name": "มาบตาพุด",
-      "zone": "สายปฏิบัติการ 3",
-      "station_type": "CEMs",
-      "status": "ONLINE",
-      "last_update": "21 ส.ค. 2569, 14:00",
-      "parameter_alarm": "26-08-21 12:00 (INCIN2A_NOx@7% 31.11  ppm)  , 26-08-21 11:00 (INCIN2A_NOx@7% 30.8  ppm)  , 26-08-21 10:00 (INCIN2A_NOx@7% 32.26  ppm)",
-      "comment": "INCIN2A_NOx@7% เกินค่ามาตรฐาน จำนวน 1 วัน",
-      "longitude": 101.140695,
-      "latitude": 12.696529
-    }
-  ]
+  }
 }
