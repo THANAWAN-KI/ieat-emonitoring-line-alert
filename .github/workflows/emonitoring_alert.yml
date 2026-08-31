@@ -55,6 +55,10 @@ jobs:
       - name: Run e-Monitoring check and send LINE
         env:
           LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
+          LINE_ZONE_ROUTING_ENABLED: ${{ secrets.LINE_ZONE_ROUTING_ENABLED }}
+          LINE_GROUP_ID_DEMO_01: ${{ secrets.LINE_GROUP_ID_DEMO_01 }}
+          LINE_GROUP_ID_DEMO_02: ${{ secrets.LINE_GROUP_ID_DEMO_02 }}
+          LINE_GROUP_ID_DEMO_03: ${{ secrets.LINE_GROUP_ID_DEMO_03 }}
           PYTHONUNBUFFERED: "1"
           TZ: Asia/Bangkok
         run: python check_emonitoring_batch.py
