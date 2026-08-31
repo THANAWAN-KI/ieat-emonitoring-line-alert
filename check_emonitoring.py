@@ -2910,6 +2910,81 @@ def build_zone_event_texts(
     rows: list[dict[str, Any]] = []
 
     for event in visible:
+        parameter_text = full_text(
+            event.get("parameter_alarm"),
+            "ค่ากลับสู่ภาวะปกติ",
+        )
+        station_group = station_type_group(
+            safe_text(event.get("station_type"), "")
+        )
+        comment_text = full_text(
+            event.get("comment"),
+            "",
+        )
+
+        detail_contents: list[dict[str, Any]] = [
+            {
+                "type": "text",
+                "text": safe_text(
+                    event.get("estate_name"),
+                    "ไม่พบชื่อนิคมอุตสาหกรรม",
+                ),
+                "size": "xxs",
+                "weight": "bold",
+                "color": "#5D2A7A",
+                "wrap": True,
+            },
+            {
+                "type": "text",
+                "text": safe_text(
+                    event.get("station_name")
+                ),
+                "size": "sm",
+                "weight": "bold",
+                "color": "#000000",
+                "wrap": True,
+                "margin": "xs",
+            },
+            {
+                "type": "text",
+                "text": f"ค่าที่แจ้งเตือน: {parameter_text}",
+                "size": "xs",
+                "weight": "bold",
+                "color": event_color(event),
+                "wrap": True,
+                "margin": "xs",
+            },
+            {
+                "type": "text",
+                "text": f"ประเภทระบบ: {station_group}",
+                "size": "xxs",
+                "color": "#0871B9",
+                "wrap": True,
+                "margin": "xs",
+            },
+            {
+                "type": "text",
+                "text": (
+                    f"{event_title(event)} • "
+                    f"{safe_text(event.get('last_update'))}"
+                ),
+                "size": "xxs",
+                "color": "#6F7880",
+                "wrap": True,
+                "margin": "xs",
+            },
+        ]
+
+        if comment_text:
+            detail_contents.append({
+                "type": "text",
+                "text": f"หมายเหตุ: {comment_text}",
+                "size": "xxs",
+                "color": "#555555",
+                "wrap": True,
+                "margin": "xs",
+            })
+
         rows.append({
             "type": "box",
             "layout": "vertical",
@@ -2917,53 +2992,7 @@ def build_zone_event_texts(
             "paddingAll": "9px",
             "backgroundColor": "#F8F9FA",
             "cornerRadius": "8px",
-            "contents": [
-                {
-                    "type": "text",
-                    "text": safe_text(
-                        event.get("estate_name"),
-                        "ไม่พบชื่อนิคมอุตสาหกรรม",
-                    ),
-                    "size": "xxs",
-                    "weight": "bold",
-                    "color": "#5D2A7A",
-                    "wrap": True,
-                },
-                {
-                    "type": "text",
-                    "text": safe_text(
-                        event.get("station_name")
-                    ),
-                    "size": "sm",
-                    "weight": "bold",
-                    "color": "#000000",
-                    "wrap": True,
-                    "margin": "xs",
-                },
-                {
-                    "type": "text",
-                    "text": full_text(
-                        event.get("parameter_alarm"),
-                        "ค่ากลับสู่ภาวะปกติ",
-                    ),
-                    "size": "xs",
-                    "weight": "bold",
-                    "color": event_color(event),
-                    "wrap": True,
-                    "margin": "xs",
-                },
-                {
-                    "type": "text",
-                    "text": (
-                        f"{event_title(event)} • "
-                        f"{safe_text(event.get('last_update'))}"
-                    ),
-                    "size": "xxs",
-                    "color": "#6F7880",
-                    "wrap": True,
-                    "margin": "xs",
-                },
-            ],
+            "contents": detail_contents,
         })
 
     if remaining:
