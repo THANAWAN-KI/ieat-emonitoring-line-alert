@@ -19,6 +19,7 @@ STATE_PATH = Path(os.getenv("DISASTER_DAILY_STATE_PATH", "data/disaster-daily-zo
 LINE_API = "https://api.line.me/v2/bot/message/push"
 THAIWATER_URL = "https://www.thaiwater.net/"
 LOGO_URL = "https://raw.githubusercontent.com/THANAWAN-KI/ieat-emonitoring-line-alert/main/docs/assets/TH-Vertical.png"
+ALERT_ICON_URL = "https://raw.githubusercontent.com/THANAWAN-KI/ieat-emonitoring-line-alert/main/docs/assets/advertising-svgrepo-com.png"
 TARGET_RE = re.compile(r"^[UCR][0-9a-fA-F]{32}$")
 ZONE_TARGETS = {
     "สายปฏิบัติการ 1": "LINE_GROUP_ID_DEMO_01",
@@ -126,55 +127,75 @@ def risk_color(score: int) -> tuple[str, str]:
 
 def build_flex(zone: str, risks: list[dict], now: datetime, test: bool) -> dict:
     highest = max(x["severity"] for x in risks)
-    accent, pale = risk_color(highest)
     max_rain = max((x["max_rain"] for x in risks if x["max_rain"] is not None), default=None)
     water_count = sum(x["water_alerts"] for x in risks)
-    rows = []
-    for item in risks[:4]:
+    provinces = sorted({x["province"] for x in risks if x.get("province")})
+    estate_lines = []
+    for index, item in enumerate(risks[:5], 1):
         details = []
         if item["max_rain"] is not None:
-            details.append(f"ฝน 24 ชม. {item['max_rain']:g} มม.")
+            details.append(f"ฝนสะสม 24 ชม. {item['max_rain']:g} มม.")
         if item["water_alerts"]:
             details.append(f"ระดับน้ำเฝ้าระวัง {item['water_alerts']} จุด")
-        rows.append({"type": "box", "layout": "vertical", "margin": "md", "paddingAll": "10px",
-            "backgroundColor": "#F7F8FA", "cornerRadius": "10px", "contents": [
-                {"type": "text", "text": item["estate"], "size": "sm", "weight": "bold", "color": "#111111", "wrap": True},
-                {"type": "text", "text": f"จ.{item['province']} • {item['status']}", "size": "xs", "color": accent, "weight": "bold", "margin": "xs", "wrap": True},
-                {"type": "text", "text": " • ".join(details) or "พบค่าถึงเกณฑ์เฝ้าระวัง", "size": "xs", "color": "#555555", "margin": "xs", "wrap": True},
-            ]})
-    if len(risks) > 4:
-        rows.append({"type": "text", "text": f"และอีก {len(risks) - 4} นิคมฯ", "size": "xs", "color": "#666666", "align": "center", "margin": "md"})
-
-    metrics = [
-        (str(len(risks)), "นิคมฯ เฝ้าระวัง"),
-        ("-" if max_rain is None else f"{max_rain:g}", "ฝนสูงสุด (มม.)"),
-        (str(water_count), "จุดระดับน้ำ"),
-    ]
-    metric_boxes = [{"type": "box", "layout": "vertical", "flex": 1, "backgroundColor": pale,
-        "cornerRadius": "10px", "paddingAll": "9px", "contents": [
-            {"type": "text", "text": value, "size": "xl", "weight": "bold", "color": accent, "align": "center"},
-            {"type": "text", "text": label, "size": "xxs", "color": "#333333", "align": "center", "wrap": True},
-        ]} for value, label in metrics]
+        estate_lines.append(
+            f"{index}. {item['estate']} จ.{item['province']} — {item['status']}"
+            + (f" ({' • '.join(details)})" if details else "")
+        )
+    if len(risks) > 5:
+        estate_lines.append(f"และอีก {len(risks) - 5} นิคมอุตสาหกรรม")
+    area_text = " จังหวัด".join(provinces[:5]) if provinces else "พื้นที่รับผิดชอบ"
+    finding_parts = [f"พบนิคมอุตสาหกรรมที่ต้องเฝ้าระวัง {len(risks)} แห่ง"]
+    if max_rain is not None:
+        finding_parts.append(f"ปริมาณฝนสะสมสูงสุด {max_rain:g} มม.")
+    if water_count:
+        finding_parts.append(f"สถานีระดับน้ำถึงเกณฑ์เฝ้าระวัง {water_count} จุด")
+    finding_text = " และ".join(finding_parts)
+    issue_date = now.strftime("%d/%m/%Y")
+    issue_time = now.strftime("%H:%M น.")
 
     return {"type": "flex", "altText": (("[ทดสอบ] " if test else "") + f"รายงานภัยพิบัติรายวัน {zone}")[:400], "contents": {
-        "type": "bubble", "size": "mega", "styles": {"header": {"backgroundColor": "#FFFFFF"}, "body": {"backgroundColor": "#FFFFFF"}, "footer": {"backgroundColor": "#FFFFFF"}},
-        "hero": {"type": "image", "url": LOGO_URL, "size": "full", "aspectRatio": "20:7", "aspectMode": "fit", "backgroundColor": "#FFFFFF"},
-        "header": {"type": "box", "layout": "vertical", "paddingAll": "14px", "contents": [
-            {"type": "text", "text": "รายงานสถานการณ์ภัยพิบัติรายวัน", "size": "lg", "weight": "bold", "color": "#111111", "align": "center", "wrap": True},
-            {"type": "text", "text": zone, "size": "sm", "weight": "bold", "color": "#165823", "align": "center", "margin": "sm"},
-            {"type": "text", "text": ("ตัวอย่าง • ไม่ใช่เหตุการณ์จริง • " if test else "") + now.strftime("%d/%m/%Y เวลา %H:%M น."), "size": "xxs", "color": "#666666", "align": "center", "margin": "sm", "wrap": True},
+        "type": "bubble", "size": "mega",
+        "styles": {"header": {"backgroundColor": "#D9003B"}, "body": {"backgroundColor": "#FFFFFF"}, "footer": {"backgroundColor": "#FFFFFF"}},
+        "header": {"type": "box", "layout": "horizontal", "paddingAll": "16px", "spacing": "md", "contents": [
+            {"type": "box", "layout": "vertical", "flex": 4, "contents": [
+                {"type": "text", "text": "IEAT LINE ALERT", "size": "lg", "weight": "bold", "color": "#FFFFFF"},
+                {"type": "text", "text": "รายงานสถานการณ์ภัยพิบัติรายวัน", "size": "md", "weight": "bold", "color": "#FFFFFF", "wrap": True, "margin": "xl"},
+                {"type": "text", "text": zone, "size": "sm", "weight": "bold", "color": "#FFFFFF", "wrap": True, "margin": "sm"},
+            ]},
+            {"type": "box", "layout": "vertical", "flex": 2, "backgroundColor": "#FFFFFF", "cornerRadius": "12px", "paddingAll": "9px", "justifyContent": "center", "alignItems": "center", "contents": [
+                {"type": "image", "url": ALERT_ICON_URL, "size": "38px", "aspectMode": "fit"},
+                {"type": "text", "text": "เฝ้าระวัง", "size": "xs", "weight": "bold", "color": "#D9003B", "align": "center", "margin": "sm"},
+                {"type": "box", "layout": "vertical", "backgroundColor": "#3466C8", "cornerRadius": "8px", "paddingAll": "4px", "width": "75px", "contents": [
+                    {"type": "text", "text": "DAILY", "size": "xxs", "weight": "bold", "color": "#FFFFFF", "align": "center"}
+                ]},
+            ]},
         ]},
-        "body": {"type": "box", "layout": "vertical", "paddingAll": "14px", "contents": [
-            {"type": "box", "layout": "horizontal", "spacing": "sm", "contents": metric_boxes},
+        "body": {"type": "box", "layout": "vertical", "paddingAll": "16px", "contents": [
+            *([{"type": "box", "layout": "vertical", "backgroundColor": "#FFF1F4", "cornerRadius": "8px", "paddingAll": "8px", "contents": [
+                {"type": "text", "text": "ข้อความตัวอย่าง • ไม่ใช่เหตุการณ์จริง", "size": "xs", "weight": "bold", "color": "#D9003B", "align": "center"}
+            ]}] if test else []),
+            {"type": "text", "text": f"ประจำวันที่ {issue_date} เวลา {issue_time}", "size": "sm", "weight": "bold", "color": "#111111", "wrap": True, "margin": "md" if test else "none"},
+            {"type": "text", "text": "เรื่อง  แจ้งเฝ้าระวังฝนตกหนักและระดับน้ำบริเวณใกล้นิคมอุตสาหกรรม", "size": "sm", "weight": "bold", "color": "#111111", "wrap": True, "margin": "sm"},
+            {"type": "separator", "margin": "lg", "color": "#D9D9D9"},
+            {"type": "text", "text": f"จากการตรวจสอบข้อมูลของหน่วยงานทางการในพื้นที่ {area_text} ซึ่งอยู่ในความรับผิดชอบของ{zone} {finding_text}", "size": "sm", "color": "#333333", "wrap": True, "margin": "lg"},
             {"type": "text", "text": "พื้นที่ที่ต้องเฝ้าระวัง", "size": "sm", "weight": "bold", "color": "#111111", "margin": "lg"},
-            *rows,
-            {"type": "text", "text": "ข้อแนะนำ", "size": "sm", "weight": "bold", "color": "#111111", "margin": "lg"},
-            {"type": "text", "text": "ตรวจระบบระบายน้ำและเครื่องสูบน้ำ • ป้องกันระบบไฟฟ้าและสารเคมี • ติดตามประกาศของหน่วยงานรัฐก่อนเดินทาง", "size": "xs", "color": "#333333", "wrap": True, "margin": "sm"},
-            {"type": "text", "text": "ข้อมูลเส้นทางยังไม่รวมในรายงานนี้ โปรดตรวจสอบประกาศจากหน่วยงานทางการก่อนเดินทาง", "size": "xxs", "color": "#777777", "wrap": True, "margin": "md"},
+            {"type": "box", "layout": "vertical", "borderWidth": "1px", "borderColor": "#E2E2E2", "cornerRadius": "8px", "paddingAll": "11px", "margin": "sm", "contents": [
+                {"type": "text", "text": "\n".join(estate_lines), "size": "xs", "color": "#333333", "wrap": True}
+            ]},
+            {"type": "text", "text": "ข้อควรปฏิบัติ", "size": "sm", "weight": "bold", "color": "#111111", "margin": "lg"},
+            {"type": "text", "text": "ขอให้เจ้าหน้าที่ติดตามสถานการณ์อย่างใกล้ชิด ตรวจสอบระบบระบายน้ำและเครื่องสูบน้ำ ป้องกันระบบไฟฟ้า สารเคมี และคลังสินค้า พร้อมทั้งติดตามประกาศจากหน่วยงานราชการก่อนการเดินทาง", "size": "xs", "color": "#333333", "wrap": True, "margin": "sm"},
+            {"type": "text", "text": "หมายเหตุ: รายงานนี้ยังไม่รวมข้อมูลประกาศปิดเส้นทาง", "size": "xxs", "color": "#777777", "wrap": True, "margin": "md"},
         ]},
-        "footer": {"type": "box", "layout": "vertical", "paddingAll": "14px", "contents": [
-            {"type": "button", "style": "primary", "height": "sm", "color": "#165823", "action": {"type": "uri", "label": "ตรวจสอบข้อมูล ThaiWater", "uri": THAIWATER_URL}},
-            {"type": "text", "text": "แหล่งข้อมูล: ThaiWater (สสน.) และตำแหน่งนิคมฯ กนอ.", "size": "xxs", "color": "#777777", "align": "center", "wrap": True, "margin": "md"},
+        "footer": {"type": "box", "layout": "vertical", "paddingAll": "16px", "contents": [
+            {"type": "separator", "color": "#E2E2E2"},
+            {"type": "box", "layout": "horizontal", "alignItems": "center", "margin": "md", "contents": [
+                {"type": "image", "url": LOGO_URL, "size": "38px", "aspectMode": "fit", "flex": 0},
+                {"type": "box", "layout": "vertical", "flex": 1, "margin": "md", "contents": [
+                    {"type": "text", "text": "ศูนย์เฝ้าระวังสิ่งแวดล้อมและควบคุมมลพิษ", "size": "xxs", "weight": "bold", "color": "#333333", "wrap": True},
+                    {"type": "text", "text": "แหล่งข้อมูล: ThaiWater (สสน.) และข้อมูลนิคมฯ กนอ.", "size": "xxs", "color": "#777777", "wrap": True, "margin": "xs"},
+                ]},
+            ]},
+            {"type": "button", "style": "primary", "height": "sm", "color": "#D9003B", "action": {"type": "uri", "label": "ตรวจสอบข้อมูลต้นทาง", "uri": THAIWATER_URL}},
         ]},
     }}
 
