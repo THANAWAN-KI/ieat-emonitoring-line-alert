@@ -2843,29 +2843,42 @@ def build_zone_event_texts(
     zone: str,
     events: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
-    """Flex 1 ใบต่อ Zone; สี Dashboard + โครงสร้างสรุปผู้บริหาร"""
+    """Flex แจ้งเตือนแบบกระชับสำหรับเจ้าหน้าที่ประจำนิคมฯ"""
     visible = events[:5]
     remaining = max(0, len(events) - len(visible))
-    online = sum(
-        1 for item in events
-        if safe_text(item.get("status"), "").upper() == "ONLINE"
+    station_count = len({
+        station_key(event)
+        for event in events
+    })
+    parameter_count = sum(
+        alarm_count(event)
+        for event in events
     )
-    offline = len(events) - online
-    ready = round((online / len(events)) * 100) if events else 0
-    parameters = sum(alarm_count(item) for item in events)
-    recovered = sum(
-        1 for item in events
-        if item.get("event_type") in {"RECOVERED", "ONLINE"}
+    recovered_count = sum(
+        1
+        for event in events
+        if event.get("event_type") in {
+            "RECOVERED",
+            "ONLINE",
+        }
     )
-    watch = max(0, len(events) - recovered)
+    active_count = max(
+        0,
+        station_count - recovered_count,
+    )
 
-    def metric(value: int, label: str, bg: str, color: str) -> dict[str, Any]:
+    def metric(
+        value: int,
+        label: str,
+        background: str,
+        color: str,
+    ) -> dict[str, Any]:
         return {
             "type": "box",
             "layout": "vertical",
             "flex": 1,
-            "paddingAll": "7px",
-            "backgroundColor": bg,
+            "paddingAll": "8px",
+            "backgroundColor": background,
             "cornerRadius": "9px",
             "contents": [
                 {
@@ -2888,49 +2901,44 @@ def build_zone_event_texts(
             ],
         }
 
-    progress: list[dict[str, Any]] = []
-    if ready:
-        progress.append({
-            "type": "box",
-            "layout": "vertical",
-            "flex": ready,
-            "height": "8px",
-            "backgroundColor": "#2F8F46",
-            "contents": [],
-        })
-    if ready < 100:
-        progress.append({
-            "type": "box",
-            "layout": "vertical",
-            "flex": 100 - ready,
-            "height": "8px",
-            "backgroundColor": "#DDE2E6",
-            "contents": [],
-        })
-
     rows: list[dict[str, Any]] = []
+
     for event in visible:
         rows.append({
             "type": "box",
             "layout": "vertical",
             "margin": "sm",
-            "paddingAll": "8px",
+            "paddingAll": "9px",
             "backgroundColor": "#F8F9FA",
             "cornerRadius": "8px",
             "contents": [
                 {
                     "type": "text",
-                    "text": safe_text(event.get("station_name")),
+                    "text": safe_text(
+                        event.get("estate_name"),
+                        "ไม่พบชื่อนิคมอุตสาหกรรม",
+                    ),
+                    "size": "xxs",
+                    "weight": "bold",
+                    "color": "#5D2A7A",
+                    "wrap": True,
+                },
+                {
+                    "type": "text",
+                    "text": safe_text(
+                        event.get("station_name")
+                    ),
                     "size": "sm",
                     "weight": "bold",
-                    "color": "#30283A",
+                    "color": "#000000",
                     "wrap": True,
+                    "margin": "xs",
                 },
                 {
                     "type": "text",
                     "text": full_text(
                         event.get("parameter_alarm"),
-                        "กลับสู่ภาวะปกติ",
+                        "ค่ากลับสู่ภาวะปกติ",
                     ),
                     "size": "xs",
                     "weight": "bold",
@@ -2942,10 +2950,10 @@ def build_zone_event_texts(
                     "type": "text",
                     "text": (
                         f"{event_title(event)} • "
-                        f"อัปเดต {safe_text(event.get('last_update'))}"
+                        f"{safe_text(event.get('last_update'))}"
                     ),
                     "size": "xxs",
-                    "color": "#777777",
+                    "color": "#6F7880",
                     "wrap": True,
                     "margin": "xs",
                 },
@@ -2955,7 +2963,10 @@ def build_zone_event_texts(
     if remaining:
         rows.append({
             "type": "text",
-            "text": f"และอีก {remaining} สถานี • ดูต่อใน Dashboard",
+            "text": (
+                f"ยังมีอีก {remaining} สถานี "
+                "กรุณาเปิด Dashboard เพื่อตรวจสอบ"
+            ),
             "size": "xs",
             "color": "#5D2A7A",
             "align": "center",
@@ -2974,7 +2985,7 @@ def build_zone_event_texts(
             "contents": [
                 {
                     "type": "text",
-                    "text": "e-Monitoring Alert",
+                    "text": "แจ้งเตือน e-Monitoring",
                     "size": "lg",
                     "weight": "bold",
                     "color": "#000000",
@@ -2990,9 +3001,10 @@ def build_zone_event_texts(
                 },
                 {
                     "type": "text",
-                    "text": "[DEMO] ไม่ใช่เหตุการณ์จริง",
+                    "text": "[DEMO] ข้อมูลตัวอย่าง • ไม่ใช่เหตุการณ์จริง",
                     "size": "xxs",
-                    "color": "#8A5A9E",
+                    "color": "#777777",
+                    "wrap": True,
                     "margin": "xs",
                 },
             ],
@@ -3006,44 +3018,33 @@ def build_zone_event_texts(
                     "type": "box",
                     "layout": "vertical",
                     "paddingAll": "10px",
-                    "backgroundColor": "#F6F1F8",
-                    "cornerRadius": "12px",
+                    "backgroundColor": "#FDECEF",
+                    "cornerRadius": "10px",
                     "contents": [
                         {
                             "type": "text",
-                            "text": f"สถานีในเหตุการณ์พร้อมใช้งาน {ready}%",
+                            "text": (
+                                f"พบเหตุการณ์ที่ต้องตรวจสอบ "
+                                f"{len(events)} รายการ"
+                            ),
                             "size": "md",
                             "weight": "bold",
-                            "color": "#000000",
+                            "color": "#C51F35",
                             "align": "center",
+                            "wrap": True,
                         },
                         {
-                            "type": "box",
-                            "layout": "horizontal",
-                            "margin": "sm",
-                            "cornerRadius": "4px",
-                            "contents": progress,
+                            "type": "text",
+                            "text": (
+                                "แจ้งเฉพาะสถานีในพื้นที่รับผิดชอบ"
+                            ),
+                            "size": "xxs",
+                            "color": "#8D3C49",
+                            "align": "center",
+                            "wrap": True,
+                            "margin": "xs",
                         },
                     ],
-                },
-                {
-                    "type": "box",
-                    "layout": "horizontal",
-                    "spacing": "xs",
-                    "margin": "sm",
-                    "contents": [
-                        metric(len(events), "ทั้งหมด", "#F3F4F5", "#30283A"),
-                        metric(online, "ONLINE", "#EEF7F0", "#2F8F46"),
-                        metric(offline, "OFFLINE", "#E5F2FB", "#0871B9"),
-                    ],
-                },
-                {
-                    "type": "text",
-                    "text": "สรุปสถานการณ์",
-                    "size": "sm",
-                    "weight": "bold",
-                    "color": "#30283A",
-                    "margin": "md",
                 },
                 {
                     "type": "box",
@@ -3052,20 +3053,20 @@ def build_zone_event_texts(
                     "margin": "sm",
                     "contents": [
                         metric(
-                            parameters,
+                            active_count,
+                            "สถานีที่ต้องตรวจสอบ",
+                            "#FFF6E5",
+                            "#E67700",
+                        ),
+                        metric(
+                            parameter_count,
                             "พารามิเตอร์แจ้งเตือน",
                             "#FDECEF",
                             "#C51F35",
                         ),
                         metric(
-                            watch,
-                            "สถานีเฝ้าระวัง",
-                            "#FFF6E5",
-                            "#E67700",
-                        ),
-                        metric(
-                            recovered,
-                            "กลับสู่ปกติ",
+                            recovered_count,
+                            "กลับสู่ภาวะปกติ",
                             "#EEF7F0",
                             "#2F8F46",
                         ),
@@ -3073,13 +3074,41 @@ def build_zone_event_texts(
                 },
                 {
                     "type": "text",
-                    "text": "สถานีที่ต้องติดตาม",
+                    "text": "รายละเอียดสถานี",
                     "size": "sm",
                     "weight": "bold",
-                    "color": "#30283A",
+                    "color": "#000000",
                     "margin": "md",
                 },
                 *rows,
+                {
+                    "type": "box",
+                    "layout": "vertical",
+                    "margin": "md",
+                    "paddingAll": "9px",
+                    "backgroundColor": "#E5F2FB",
+                    "cornerRadius": "8px",
+                    "contents": [
+                        {
+                            "type": "text",
+                            "text": "การดำเนินการ",
+                            "size": "xs",
+                            "weight": "bold",
+                            "color": "#0871B9",
+                        },
+                        {
+                            "type": "text",
+                            "text": (
+                                "โปรดตรวจสอบข้อมูลล่าสุด และประสานสถานี "
+                                "หรือผู้ประกอบการที่เกี่ยวข้อง"
+                            ),
+                            "size": "xxs",
+                            "color": "#355B73",
+                            "wrap": True,
+                            "margin": "xs",
+                        },
+                    ],
+                },
             ],
         },
         "footer": {
@@ -3097,25 +3126,36 @@ def build_zone_event_texts(
                     "color": "#5D2A7A",
                     "action": {
                         "type": "uri",
-                        "label": "เปิดดูรายละเอียด",
+                        "label": "เปิด Dashboard เพื่อตรวจสอบ",
                         "uri": DASHBOARD_URL,
                     },
                 },
             ],
         },
         "styles": {
-            "header": {"backgroundColor": "#FFFFFF"},
-            "body": {"backgroundColor": "#FFFFFF"},
-            "footer": {"backgroundColor": "#FFFFFF"},
+            "header": {
+                "backgroundColor": "#FFFFFF",
+            },
+            "body": {
+                "backgroundColor": "#FFFFFF",
+            },
+            "footer": {
+                "backgroundColor": "#FFFFFF",
+            },
         },
     }
 
     message = make_flex_message(
         bubble,
-        f"[DEMO] {zone}: พบ {len(events)} เหตุการณ์",
+        (
+            f"{zone}: พบ {len(events)} "
+            "เหตุการณ์ที่ต้องตรวจสอบ"
+        ),
     )
     if json_size_bytes(message) > MAX_FLEX_BYTES:
-        raise RuntimeError(f"Flex Card ของ {zone} มีขนาดเกินกำหนด")
+        raise RuntimeError(
+            f"Flex Card ของ {zone} มีขนาดเกินกำหนด"
+        )
     return [message]
 
 def push_line_messages(
