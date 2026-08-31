@@ -19,8 +19,8 @@ DATA_URL = (
 )
 
 DASHBOARD_URL = (
-    "https://www.arcgis.com/apps/dashboards/"
-    "576c71d01cc5403cad90ee330fd67b6e"
+    "https://thanawan-ki.github.io/"
+    "ieat-emonitoring-line-alert/index.html"
 )
 
 THAI_TZ = ZoneInfo("Asia/Bangkok")
