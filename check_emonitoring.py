@@ -20,7 +20,7 @@ DATA_URL = (
 
 DASHBOARD_URL = (
     "https://thanawan-ki.github.io/"
-    "ieat-emonitoring-line-alert/index.html"
+    "ieat-emonitoring-line-alert/index.html#offline-stations"
 )
 
 THAI_TZ = ZoneInfo("Asia/Bangkok")
