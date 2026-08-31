@@ -109,6 +109,89 @@ def next_report_time_text() -> str:
     return thai_datetime_text(next_time)
 
 
+THAI_MONTH_NUMBERS = {
+    "ม.ค.": 1,
+    "ก.พ.": 2,
+    "มี.ค.": 3,
+    "เม.ย.": 4,
+    "พ.ค.": 5,
+    "มิ.ย.": 6,
+    "ก.ค.": 7,
+    "ส.ค.": 8,
+    "ก.ย.": 9,
+    "ต.ค.": 10,
+    "พ.ย.": 11,
+    "ธ.ค.": 12,
+}
+
+
+def parse_station_update_date(
+    value: Any,
+) -> datetime | None:
+    """อ่านวันที่รูปแบบไทย เช่น 31 ส.ค. 2569, 11:44"""
+    text = safe_text(value, "")
+    if not text:
+        return None
+
+    parts = text.replace(",", " ").split()
+    if len(parts) >= 3 and parts[1] in THAI_MONTH_NUMBERS:
+        try:
+            day = int(parts[0])
+            month = THAI_MONTH_NUMBERS[parts[1]]
+            year = int(parts[2])
+            if year >= 2400:
+                year -= 543
+
+            hour = 0
+            minute = 0
+            if len(parts) >= 4 and ":" in parts[3]:
+                hour_text, minute_text = parts[3].split(":", 1)
+                hour = int(hour_text)
+                minute = int(minute_text)
+
+            return datetime(
+                year,
+                month,
+                day,
+                hour,
+                minute,
+                tzinfo=THAI_TZ,
+            )
+        except (TypeError, ValueError):
+            return None
+
+    try:
+        parsed = datetime.fromisoformat(
+            text.replace("Z", "+00:00")
+        )
+        if parsed.tzinfo is None:
+            parsed = parsed.replace(tzinfo=THAI_TZ)
+        return parsed.astimezone(THAI_TZ)
+    except ValueError:
+        return None
+
+
+def station_updated_today(
+    station: dict[str, Any],
+) -> bool:
+    update_time = parse_station_update_date(
+        station.get("last_update")
+    )
+    if update_time is None:
+        return False
+    return update_time.date() == now_thailand().date()
+
+
+def filter_stations_updated_today(
+    stations: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    return [
+        station
+        for station in stations
+        if station_updated_today(station)
+    ]
+
+
 # ============================================================
 # Text helpers
 # ============================================================
