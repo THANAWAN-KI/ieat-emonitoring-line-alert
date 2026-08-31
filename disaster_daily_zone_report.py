@@ -19,7 +19,7 @@ STATE_PATH = Path(os.getenv("DISASTER_DAILY_STATE_PATH", "data/disaster-daily-zo
 LINE_API = "https://api.line.me/v2/bot/message/push"
 THAIWATER_URL = "https://www.thaiwater.net/"
 LOGO_URL = "https://raw.githubusercontent.com/THANAWAN-KI/ieat-emonitoring-line-alert/main/docs/assets/TH-Vertical.png"
-ALERT_ICON_URL = "https://raw.githubusercontent.com/THANAWAN-KI/ieat-emonitoring-line-alert/main/docs/assets/advertising-svgrepo-com.png"
+ALERT_ICON_URL = "https://raw.githubusercontent.com/THANAWAN-KI/ieat-emonitoring-line-alert/main/docs/assets/code-yellow-fill.png"
 TARGET_RE = re.compile(r"^[UCR][0-9a-fA-F]{32}$")
 ZONE_TARGETS = {
     "สายปฏิบัติการ 1": "LINE_GROUP_ID_DEMO_01",
@@ -155,34 +155,34 @@ def build_flex(zone: str, risks: list[dict], now: datetime, test: bool) -> dict:
 
     return {"type": "flex", "altText": (("[ทดสอบ] " if test else "") + f"รายงานภัยพิบัติรายวัน {zone}")[:400], "contents": {
         "type": "bubble", "size": "mega",
-        "styles": {"header": {"backgroundColor": "#D9003B"}, "body": {"backgroundColor": "#FFFFFF"}, "footer": {"backgroundColor": "#FFFFFF"}},
-        "header": {"type": "box", "layout": "horizontal", "paddingAll": "16px", "spacing": "md", "contents": [
+        "styles": {"header": {"backgroundColor": "#E63946"}, "body": {"backgroundColor": "#FFFFFF"}, "footer": {"backgroundColor": "#FFFFFF"}},
+        "header": {"type": "box", "layout": "horizontal", "paddingTop": "15px", "paddingBottom": "15px", "paddingStart": "15px", "paddingEnd": "12px", "spacing": "sm", "alignItems": "stretch", "contents": [
             {"type": "box", "layout": "vertical", "flex": 4, "contents": [
-                {"type": "text", "text": "IEAT LINE ALERT", "size": "lg", "weight": "bold", "color": "#FFFFFF"},
-                {"type": "text", "text": "รายงานสถานการณ์ภัยพิบัติรายวัน", "size": "md", "weight": "bold", "color": "#FFFFFF", "wrap": True, "margin": "xl"},
-                {"type": "text", "text": zone, "size": "sm", "weight": "bold", "color": "#FFFFFF", "wrap": True, "margin": "sm"},
+                {"type": "text", "text": "IEAT LINE ALERT", "size": "md", "weight": "bold", "color": "#FFFFFF"},
+                {"type": "text", "text": "รายงานสถานการณ์ภัยพิบัติรายวัน", "size": "sm", "weight": "bold", "color": "#FFFFFF", "wrap": True, "margin": "lg"},
+                {"type": "text", "text": zone, "size": "xs", "weight": "bold", "color": "#FFFFFF", "wrap": True, "margin": "sm"},
             ]},
-            {"type": "box", "layout": "vertical", "flex": 2, "backgroundColor": "#FFFFFF", "cornerRadius": "12px", "paddingAll": "9px", "justifyContent": "center", "alignItems": "center", "contents": [
-                {"type": "image", "url": ALERT_ICON_URL, "size": "38px", "aspectMode": "fit"},
-                {"type": "text", "text": "เฝ้าระวัง", "size": "xs", "weight": "bold", "color": "#D9003B", "align": "center", "margin": "sm"},
-                {"type": "box", "layout": "vertical", "backgroundColor": "#3466C8", "cornerRadius": "8px", "paddingAll": "4px", "width": "75px", "contents": [
+            {"type": "box", "layout": "vertical", "flex": 2, "backgroundColor": "#FFFFFF", "cornerRadius": "10px", "paddingAll": "8px", "justifyContent": "center", "alignItems": "center", "contents": [
+                {"type": "image", "url": ALERT_ICON_URL, "size": "34px", "aspectMode": "fit"},
+                {"type": "text", "text": "เฝ้าระวัง", "size": "xxs", "weight": "bold", "color": "#E63946", "align": "center", "margin": "sm"},
+                {"type": "box", "layout": "vertical", "backgroundColor": "#457B9D", "cornerRadius": "8px", "paddingAll": "4px", "width": "70px", "contents": [
                     {"type": "text", "text": "DAILY", "size": "xxs", "weight": "bold", "color": "#FFFFFF", "align": "center"}
                 ]},
             ]},
         ]},
-        "body": {"type": "box", "layout": "vertical", "paddingAll": "16px", "contents": [
+        "body": {"type": "box", "layout": "vertical", "paddingTop": "15px", "paddingBottom": "14px", "paddingStart": "15px", "paddingEnd": "15px", "contents": [
             *([{"type": "box", "layout": "vertical", "backgroundColor": "#FFF1F4", "cornerRadius": "8px", "paddingAll": "8px", "contents": [
-                {"type": "text", "text": "ข้อความตัวอย่าง • ไม่ใช่เหตุการณ์จริง", "size": "xs", "weight": "bold", "color": "#D9003B", "align": "center"}
+                {"type": "text", "text": "ข้อความตัวอย่าง • ไม่ใช่เหตุการณ์จริง", "size": "xxs", "weight": "bold", "color": "#E63946", "align": "center"}
             ]}] if test else []),
-            {"type": "text", "text": f"ประจำวันที่ {issue_date} เวลา {issue_time}", "size": "sm", "weight": "bold", "color": "#111111", "wrap": True, "margin": "md" if test else "none"},
-            {"type": "text", "text": "เรื่อง  แจ้งเฝ้าระวังฝนตกหนักและระดับน้ำบริเวณใกล้นิคมอุตสาหกรรม", "size": "sm", "weight": "bold", "color": "#111111", "wrap": True, "margin": "sm"},
+            {"type": "text", "text": f"ประจำวันที่ {issue_date} เวลา {issue_time}", "size": "xs", "weight": "bold", "color": "#111111", "wrap": True, "margin": "md" if test else "none"},
+            {"type": "text", "text": "เรื่อง แจ้งเฝ้าระวังฝนตกหนักและระดับน้ำบริเวณใกล้นิคมอุตสาหกรรม", "size": "xs", "weight": "bold", "color": "#111111", "wrap": True, "margin": "sm"},
             {"type": "separator", "margin": "lg", "color": "#D9D9D9"},
-            {"type": "text", "text": f"จากการตรวจสอบข้อมูลของหน่วยงานทางการในพื้นที่ {area_text} ซึ่งอยู่ในความรับผิดชอบของ{zone} {finding_text}", "size": "sm", "color": "#333333", "wrap": True, "margin": "lg"},
-            {"type": "text", "text": "พื้นที่ที่ต้องเฝ้าระวัง", "size": "sm", "weight": "bold", "color": "#111111", "margin": "lg"},
+            {"type": "text", "text": f"จากการตรวจสอบข้อมูลของหน่วยงานทางการในพื้นที่ {area_text} ซึ่งอยู่ในความรับผิดชอบของ{zone} {finding_text}", "size": "xs", "color": "#333333", "wrap": True, "margin": "lg"},
+            {"type": "text", "text": "พื้นที่ที่ต้องเฝ้าระวัง", "size": "xs", "weight": "bold", "color": "#111111", "margin": "lg"},
             {"type": "box", "layout": "vertical", "borderWidth": "1px", "borderColor": "#E2E2E2", "cornerRadius": "8px", "paddingAll": "11px", "margin": "sm", "contents": [
                 {"type": "text", "text": "\n".join(estate_lines), "size": "xs", "color": "#333333", "wrap": True}
             ]},
-            {"type": "text", "text": "ข้อควรปฏิบัติ", "size": "sm", "weight": "bold", "color": "#111111", "margin": "lg"},
+            {"type": "text", "text": "ข้อควรปฏิบัติ", "size": "xs", "weight": "bold", "color": "#111111", "margin": "lg"},
             {"type": "text", "text": "ขอให้เจ้าหน้าที่ติดตามสถานการณ์อย่างใกล้ชิด ตรวจสอบระบบระบายน้ำและเครื่องสูบน้ำ ป้องกันระบบไฟฟ้า สารเคมี และคลังสินค้า พร้อมทั้งติดตามประกาศจากหน่วยงานราชการก่อนการเดินทาง", "size": "xs", "color": "#333333", "wrap": True, "margin": "sm"},
             {"type": "text", "text": "หมายเหตุ: รายงานนี้ยังไม่รวมข้อมูลประกาศปิดเส้นทาง", "size": "xxs", "color": "#777777", "wrap": True, "margin": "md"},
         ]},
@@ -191,11 +191,11 @@ def build_flex(zone: str, risks: list[dict], now: datetime, test: bool) -> dict:
             {"type": "box", "layout": "horizontal", "alignItems": "center", "margin": "md", "contents": [
                 {"type": "image", "url": LOGO_URL, "size": "38px", "aspectMode": "fit", "flex": 0},
                 {"type": "box", "layout": "vertical", "flex": 1, "margin": "md", "contents": [
-                    {"type": "text", "text": "ศูนย์เฝ้าระวังสิ่งแวดล้อมและควบคุมมลพิษ", "size": "xxs", "weight": "bold", "color": "#333333", "wrap": True},
+                    {"type": "text", "text": "ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย", "size": "xxs", "weight": "bold", "color": "#333333", "wrap": True},
                     {"type": "text", "text": "แหล่งข้อมูล: ThaiWater (สสน.) และข้อมูลนิคมฯ กนอ.", "size": "xxs", "color": "#777777", "wrap": True, "margin": "xs"},
                 ]},
             ]},
-            {"type": "button", "style": "primary", "height": "sm", "color": "#D9003B", "action": {"type": "uri", "label": "ตรวจสอบข้อมูลต้นทาง", "uri": THAIWATER_URL}},
+            {"type": "button", "style": "primary", "height": "sm", "color": "#E63946", "action": {"type": "uri", "label": "ตรวจสอบข้อมูลต้นทาง", "uri": THAIWATER_URL}},
         ]},
     }}
 
