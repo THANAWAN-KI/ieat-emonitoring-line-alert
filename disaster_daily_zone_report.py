@@ -19,7 +19,6 @@ STATE_PATH = Path(os.getenv("DISASTER_DAILY_STATE_PATH", "data/disaster-daily-zo
 LINE_API = "https://api.line.me/v2/bot/message/push"
 THAIWATER_URL = "https://www.thaiwater.net/"
 LOGO_URL = "https://raw.githubusercontent.com/THANAWAN-KI/ieat-emonitoring-line-alert/main/docs/assets/TH-Vertical.png"
-ALERT_ICON_URL = "https://raw.githubusercontent.com/THANAWAN-KI/ieat-emonitoring-line-alert/main/docs/assets/code-yellow-fill.png"
 TARGET_RE = re.compile(r"^[UCR][0-9a-fA-F]{32}$")
 ZONE_TARGETS = {
     "สายปฏิบัติการ 1": "LINE_GROUP_ID_DEMO_01",
@@ -156,18 +155,11 @@ def build_flex(zone: str, risks: list[dict], now: datetime, test: bool) -> dict:
     return {"type": "flex", "altText": (("[ทดสอบ] " if test else "") + f"รายงานภัยพิบัติรายวัน {zone}")[:400], "contents": {
         "type": "bubble", "size": "mega",
         "styles": {"header": {"backgroundColor": "#E63946"}, "body": {"backgroundColor": "#FFFFFF"}, "footer": {"backgroundColor": "#FFFFFF"}},
-        "header": {"type": "box", "layout": "horizontal", "paddingTop": "15px", "paddingBottom": "15px", "paddingStart": "15px", "paddingEnd": "12px", "spacing": "sm", "contents": [
-            {"type": "box", "layout": "vertical", "flex": 4, "contents": [
+        "header": {"type": "box", "layout": "horizontal", "paddingTop": "15px", "paddingBottom": "15px", "paddingStart": "15px", "paddingEnd": "15px", "contents": [
+            {"type": "box", "layout": "vertical", "flex": 1, "contents": [
                 {"type": "text", "text": "IEAT LINE ALERT", "size": "md", "weight": "bold", "color": "#FFFFFF"},
                 {"type": "text", "text": "รายงานสถานการณ์ภัยพิบัติรายวัน", "size": "sm", "weight": "bold", "color": "#FFFFFF", "wrap": True, "margin": "lg"},
                 {"type": "text", "text": zone, "size": "xs", "weight": "bold", "color": "#FFFFFF", "wrap": True, "margin": "sm"},
-            ]},
-            {"type": "box", "layout": "vertical", "flex": 2, "backgroundColor": "#FFFFFF", "cornerRadius": "10px", "paddingAll": "8px", "justifyContent": "center", "alignItems": "center", "contents": [
-                {"type": "image", "url": ALERT_ICON_URL, "size": "34px", "aspectMode": "fit"},
-                {"type": "text", "text": "เฝ้าระวัง", "size": "xxs", "weight": "bold", "color": "#E63946", "align": "center", "margin": "sm"},
-                {"type": "box", "layout": "vertical", "backgroundColor": "#457B9D", "cornerRadius": "8px", "paddingAll": "4px", "width": "70px", "contents": [
-                    {"type": "text", "text": "DAILY", "size": "xxs", "weight": "bold", "color": "#FFFFFF", "align": "center"}
-                ]},
             ]},
         ]},
         "body": {"type": "box", "layout": "vertical", "paddingTop": "15px", "paddingBottom": "14px", "paddingStart": "15px", "paddingEnd": "15px", "contents": [
