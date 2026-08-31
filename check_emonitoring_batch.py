@@ -36,6 +36,23 @@ def main() -> int:
     alert_stations = base.filter_alert_features(features)
     type_stats = base.calculate_type_stats(all_stations)
 
+    # ใช้เฉพาะข้อมูลที่ LastUpdate เป็นวันปัจจุบันสำหรับ LINE
+    # Dashboard ยังคงแสดงข้อมูลทั้งหมดเพื่อให้ตรวจสอบข้อมูลล่าช้าได้
+    notification_stations = base.filter_stations_updated_today(
+        all_stations
+    )
+    notification_alert_stations = [
+        station
+        for station in notification_stations
+        if base.full_text(
+            station.get("parameter_alarm"),
+            "",
+        ).strip()
+    ]
+    notification_type_stats = base.calculate_type_stats(
+        notification_stations
+    )
+
     base.write_status_file(
         all_stations=all_stations,
         alert_stations=alert_stations,
@@ -43,15 +60,26 @@ def main() -> int:
     )
 
     previous_state = base.load_alert_state()
-    events = base.detect_notification_events(previous_state, all_stations)
+    events = base.detect_notification_events(
+        previous_state,
+        notification_stations,
+    )
 
     print(f"สถานีทั้งหมด: {len(all_stations)}")
-    print(f"สถานีที่มี Alarm: {len(alert_stations)}")
+    print(f"สถานีข้อมูลวันที่ปัจจุบัน: {len(notification_stations)}")
+    print(
+        "สถานีข้อมูลวันที่ปัจจุบันที่มี Alarm: "
+        f"{len(notification_alert_stations)}"
+    )
+    print(
+        "สถานี Alarm ที่ถูกตัดออกเพราะข้อมูลไม่ใช่วันนี้: "
+        f"{len(alert_stations) - len(notification_alert_stations)}"
+    )
     print(f"เหตุการณ์ใหม่/เปลี่ยนแปลง: {len(events)}")
 
     if not events:
-        base.save_alert_state(all_stations)
-        print("LINE: ไม่ส่ง — ไม่มีการเปลี่ยนแปลง")
+        base.save_alert_state(notification_stations)
+        print("LINE: ไม่ส่ง — ไม่มีการเปลี่ยนแปลงจากข้อมูลวันที่ปัจจุบัน")
         print("โควตารอบนี้: 0 ข้อความ")
         return 0
 
@@ -62,9 +90,9 @@ def main() -> int:
         else:
             print("LINE routing: ใช้ Broadcast เดิม")
             success = base.send_station_status_report(
-                all_stations,
-                type_stats,
-                alert_stations,
+                notification_stations,
+                notification_type_stats,
+                notification_alert_stations,
                 events,
             )
     except RuntimeError as error:
@@ -74,8 +102,8 @@ def main() -> int:
         print("ERROR: ส่ง LINE ไม่สำเร็จ — ยังไม่บันทึก state เพื่อให้ retry")
         return 1
 
-    base.save_alert_state(all_stations)
-    print("ส่ง LINE สำเร็จ: 1 ข้อความ")
+    base.save_alert_state(notification_stations)
+    print("ส่ง LINE สำเร็จตามข้อมูลวันที่ปัจจุบัน")
     print("บันทึก alert_state.json แล้ว")
     print("Dashboard อัปเดตแล้ว")
     return 0
