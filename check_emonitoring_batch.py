@@ -8,13 +8,90 @@ carousels. The existing station detail remains available in the Dashboard.
 
 from __future__ import annotations
 
+import os
 import sys
 
 import check_emonitoring as base
 
 
+def build_preview_events() -> list[dict]:
+    """ข้อมูลสมมติสำหรับดูรูปแบบ Flex Card เท่านั้น"""
+    update_text = base.report_time_text()
+    samples = [
+        (
+            "สายปฏิบัติการ 1",
+            "สถานีทดสอบ A",
+            "นิคมอุตสาหกรรมตัวอย่าง 1",
+            "PM2.5 = 45 µg/m³ (ค่าตัวอย่าง)",
+        ),
+        (
+            "สายปฏิบัติการ 2",
+            "สถานีทดสอบ B",
+            "นิคมอุตสาหกรรมตัวอย่าง 2",
+            "COD = 135 mg/L (ค่าตัวอย่าง)",
+        ),
+        (
+            "สายปฏิบัติการ 3",
+            "สถานีทดสอบ C",
+            "นิคมอุตสาหกรรมตัวอย่าง 3",
+            "NOx = 210 ppm (ค่าตัวอย่าง)",
+        ),
+    ]
+
+    return [
+        {
+            "code": f"DEMO-{index:02d}",
+            "station_name": station_name,
+            "estate_name": estate_name,
+            "zone": zone,
+            "station_type": "DEMO",
+            "status": "ONLINE",
+            "last_update": update_text,
+            "parameter_alarm": parameter,
+            "comment": "ข้อมูลสมมติสำหรับทดสอบรูปแบบเท่านั้น",
+            "longitude": None,
+            "latitude": None,
+            "event_type": "NEW_ALARM",
+            "event_reason": "ตัวอย่างรูปแบบการแจ้งเตือน",
+            "previous_snapshot": {},
+        }
+        for index, (
+            zone,
+            station_name,
+            estate_name,
+            parameter,
+        ) in enumerate(samples, start=1)
+    ]
+
+
 def main() -> int:
     current_time = base.now_thailand()
+    preview_mode = os.getenv(
+        "LINE_PREVIEW_MODE",
+        "",
+    ).strip().lower() in {
+        "1",
+        "true",
+        "yes",
+        "on",
+    }
+
+    if preview_mode:
+        print(
+            "PREVIEW MODE: ส่งข้อมูลสมมติ 3 Zone "
+            "โดยไม่ดาวน์โหลดข้อมูลจริงและไม่บันทึก state"
+        )
+        success = base.send_zone_event_reports(
+            build_preview_events()
+        )
+        if not success:
+            print("ERROR: ส่ง Flex Preview ไม่สำเร็จ")
+            return 1
+        print(
+            "ส่ง Flex Preview สำเร็จ — "
+            "ไม่กระทบระบบอัตโนมัติ"
+        )
+        return 0
 
     # วันจันทร์=0 ... วันเสาร์=5 วันอาทิตย์=6
     if current_time.weekday() >= 5:
