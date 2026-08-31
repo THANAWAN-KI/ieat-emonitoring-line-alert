@@ -3309,6 +3309,17 @@ def main() -> int:
     # ป้องกัน GitHub Actions เริ่มงานล่าช้าจนส่ง LINE นอกเวลาที่กำหนด
     # อนุญาตเฉพาะ 08:30-16:30 น. ตามเวลาประเทศไทย
     current_time = now_thailand()
+
+    # วันจันทร์=0 ... วันเสาร์=5 วันอาทิตย์=6
+    if current_time.weekday() >= 5:
+        print("=" * 72)
+        print(
+            "ยกเลิกการทำงาน: วันเสาร์–อาทิตย์ "
+            "ไม่ดาวน์โหลดข้อมูล ไม่ส่ง LINE และไม่บันทึก state"
+        )
+        print("=" * 72)
+        return 0
+
     current_minutes = current_time.hour * 60 + current_time.minute
     start_minutes = 8 * 60 + 30
     end_minutes = 16 * 60 + 30
