@@ -390,6 +390,12 @@ def create_station_record(
             or properties.get("IndustrialEstateTH")
         ),
 
+        "zone": safe_text(
+            properties.get("Zone")
+            or properties.get("ZONE")
+            or properties.get("zone")
+        ),
+
         "station_type": safe_text(
             properties.get("Type")
         ),
@@ -795,6 +801,8 @@ def station_snapshot(
             safe_text(station.get("station_name")),
         "estate_name":
             safe_text(station.get("estate_name")),
+        "zone":
+            safe_text(station.get("zone")),
         "station_type":
             safe_text(station.get("station_type")),
         "status":
@@ -2819,6 +2827,222 @@ def send_line_messages(
             )
 
             all_success = False
+
+    return all_success
+
+
+# ============================================================
+# Zone-based LINE routing
+# ============================================================
+
+LINE_PUSH_URL = "https://api.line.me/v2/bot/message/push"
+
+ZONE_GROUP_ENV = {
+    "สายปฏิบัติการ 1": "LINE_GROUP_ID_DEMO_01",
+    "สายปฏิบัติการ 2": "LINE_GROUP_ID_DEMO_02",
+    "สายปฏิบัติการ 3": "LINE_GROUP_ID_DEMO_03",
+}
+
+
+def normalize_operation_zone(value: Any) -> str:
+    text = " ".join(safe_text(value, "").split())
+    aliases = {
+        "สายปฏิบัติการ1": "สายปฏิบัติการ 1",
+        "สายปฏิบัติการ2": "สายปฏิบัติการ 2",
+        "สายปฏิบัติการ3": "สายปฏิบัติการ 3",
+    }
+    return aliases.get(text, text)
+
+
+def zone_routing_enabled() -> bool:
+    return os.getenv(
+        "LINE_ZONE_ROUTING_ENABLED",
+        "",
+    ).strip().lower() in {
+        "1",
+        "true",
+        "yes",
+        "on",
+    }
+
+
+def event_zone(event: dict[str, Any]) -> str:
+    return normalize_operation_zone(
+        event.get("zone")
+    )
+
+
+def build_zone_event_texts(
+    zone: str,
+    events: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """สร้างข้อความเฉพาะเหตุการณ์ของ Zone นั้น ไม่ส่งข้อมูลสถานีปกติ"""
+    header = (
+        "[DEMO — ไม่ใช่เหตุการณ์จริง]\n"
+        "IEAT e-Monitoring Alert\n"
+        f"{zone}\n"
+        f"พบเหตุการณ์ใหม่/เปลี่ยนแปลง {len(events)} รายการ"
+    )
+
+    event_blocks: list[str] = []
+    for index, event in enumerate(events, start=1):
+        event_blocks.append(
+            "\n".join([
+                f"{index}. {safe_text(event.get('station_name'))}",
+                f"นิคมฯ: {safe_text(event.get('estate_name'))}",
+                f"เหตุการณ์: {event_title(event)}",
+                f"รายละเอียด: {safe_text(event.get('event_reason'))}",
+                (
+                    "พารามิเตอร์: "
+                    f"{full_text(event.get('parameter_alarm'), 'กลับสู่ภาวะปกติ')}"
+                ),
+                f"สถานะสถานี: {safe_text(event.get('status'))}",
+                f"ข้อมูลล่าสุด: {safe_text(event.get('last_update'))}",
+            ])
+        )
+
+    messages: list[dict[str, Any]] = []
+    current = header
+
+    for block in event_blocks:
+        candidate = f"{current}\n\n{block}"
+        if len(candidate) > 4500 and current != header:
+            messages.append({
+                "type": "text",
+                "text": current,
+            })
+            current = f"{header}\n\n{block}"
+        else:
+            current = candidate
+
+    if current:
+        messages.append({
+            "type": "text",
+            "text": current,
+        })
+
+    return messages
+
+
+def push_line_messages(
+    group_id: str,
+    messages: list[dict[str, Any]],
+) -> bool:
+    token = os.getenv(
+        "LINE_CHANNEL_ACCESS_TOKEN",
+        "",
+    ).strip()
+
+    if not token:
+        print("ERROR: ไม่พบ LINE_CHANNEL_ACCESS_TOKEN")
+        return False
+
+    all_success = True
+
+    for start in range(
+        0,
+        len(messages),
+        MAX_MESSAGES_PER_REQUEST,
+    ):
+        batch = messages[
+            start:start + MAX_MESSAGES_PER_REQUEST
+        ]
+
+        payload = json.dumps(
+            {
+                "to": group_id,
+                "messages": batch,
+            },
+            ensure_ascii=False,
+            separators=(",", ":"),
+        ).encode("utf-8")
+
+        request = urllib.request.Request(
+            LINE_PUSH_URL,
+            data=payload,
+            headers={
+                "Authorization": f"Bearer {token}",
+                "Content-Type": "application/json",
+            },
+            method="POST",
+        )
+
+        try:
+            with urllib.request.urlopen(
+                request,
+                timeout=60,
+            ) as response:
+                print(
+                    "ส่ง LINE Push สำเร็จ "
+                    f"HTTP {response.status}"
+                )
+        except urllib.error.HTTPError as error:
+            response_text = (
+                error.read()
+                .decode("utf-8", errors="replace")
+            )
+            print(
+                "ERROR: LINE Push API "
+                f"HTTP {error.code}: {response_text}"
+            )
+            all_success = False
+        except urllib.error.URLError as error:
+            print(
+                "ERROR: เชื่อมต่อ LINE ไม่สำเร็จ: "
+                f"{error.reason}"
+            )
+            all_success = False
+
+    return all_success
+
+
+def send_zone_event_reports(
+    events: list[dict[str, Any]],
+) -> bool:
+    """แยกเหตุการณ์ตาม Zone และ Push เฉพาะกลุ่มที่เกี่ยวข้อง"""
+    grouped: dict[str, list[dict[str, Any]]] = {}
+
+    for event in events:
+        zone = event_zone(event)
+
+        if zone not in ZONE_GROUP_ENV:
+            print(
+                "ERROR: ไม่สามารถจับคู่ Zone ได้ — "
+                f"สถานี={safe_text(event.get('station_name'))}, "
+                f"Zone={zone or '-'}"
+            )
+            return False
+
+        grouped.setdefault(zone, []).append(event)
+
+    all_success = True
+
+    for zone, zone_events in grouped.items():
+        env_name = ZONE_GROUP_ENV[zone]
+        group_id = os.getenv(env_name, "").strip()
+
+        if not group_id:
+            print(
+                f"ERROR: ไม่พบ GitHub Secret {env_name}"
+            )
+            all_success = False
+            continue
+
+        print(
+            f"{zone}: ส่ง {len(zone_events)} เหตุการณ์ "
+            f"ไปยัง {env_name}"
+        )
+
+        messages = build_zone_event_texts(
+            zone,
+            zone_events,
+        )
+
+        success = push_line_messages(
+            group_id,
+            messages,
+        )
+        all_success = all_success and success
 
     return all_success
 
