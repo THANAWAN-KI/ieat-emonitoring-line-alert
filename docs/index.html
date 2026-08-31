@@ -6,6 +6,7 @@
 <meta name="theme-color" content="#4E1478">
 <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
 <title>สถานการณ์ล่าสุด | IEAT e-Monitoring</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <style>
         @import url("https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap");
 
@@ -813,21 +814,26 @@ html,body{margin:0;background:#F5F6F8!important;color:var(--summary-ink)!importa
   .station-alarm-title{display:block;margin-bottom:4px;color:#8E2633;font-weight:800}
   @media(max-width:480px){.data-context{grid-template-columns:1fr}.detail-tools{padding:10px}.context-value{font-size:13px}.action-strip{grid-template-columns:1fr}.action-link{font-size:13px}.station{flex-direction:column}.badge{align-self:flex-start}}
 </style>
+<style id="line-dashboard-mobile-refresh">
+:root{--line-purple:#5D2A7A;--line-red:#E63946;--line-orange:#E67700;--line-green:#2F8F46;--line-blue:#0871B9;--line-bg:#F3F5F6;--line-text:#202124;--line-muted:#667078;--line-border:#E2E5E7}
+body{background:var(--line-bg)!important;color:var(--line-text)!important}.page{max-width:980px!important;background:var(--line-bg)!important}
+.header{min-height:76px!important;padding:12px 16px!important;background:#fff!important;border-bottom:1px solid var(--line-border)!important;box-shadow:none!important}.header .logo{width:46px!important;height:46px!important}.header-title{font-size:20px!important;color:var(--line-text)!important}.header-subtitle{font-size:11px!important;color:var(--line-muted)!important}.header-live{margin-left:auto;color:var(--line-green);font-size:11px;font-weight:700;white-space:nowrap}
+.content{padding:12px 14px 18px!important}.dashboard-actions{margin-top:0!important;border:0!important;border-radius:0!important;background:transparent!important;padding:0 0 10px!important}.notice{margin-top:0!important;border:0!important;border-left:4px solid var(--line-green)!important;border-radius:9px!important;box-shadow:none!important}.notice.alert{border-left-color:var(--line-red)!important;background:#FDECEF!important}
+.action-strip{grid-template-columns:repeat(3,1fr)!important}.action-link{min-height:42px!important;border-radius:8px!important}.data-context{grid-template-columns:repeat(3,1fr)!important}.context-item,.card,.chart-card,.panel{border-radius:9px!important;box-shadow:none!important}.kpis{grid-template-columns:repeat(4,1fr)!important}.kpi{min-height:102px!important;border-left:0!important;border-radius:9px!important}.kpi:first-child{background:#F7F3FA!important}.kpi.online{background:#EEF7F0!important}.kpi.offline{background:#FFF6E5!important}.kpi.alerts{background:#FDECEF!important}.kpi:first-child .kpi-number{color:var(--line-purple)!important}.kpi.online .kpi-number{color:var(--line-green)!important}.kpi.offline .kpi-number{color:var(--line-orange)!important}.kpi.alerts .kpi-number{color:var(--line-red)!important}
+.section-heading{margin-top:18px!important}.section-heading h2{font-size:17px!important;color:var(--line-text)!important}.station{border-left:4px solid var(--line-red);background:#F8F9FA!important}
+.map-filter-panel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:10px;background:#fff;border-bottom:1px solid var(--line-border)}.map-filter{width:100%;min-height:40px;padding:8px 10px;color:var(--line-text);background:#fff;border:1px solid var(--line-border);border-radius:8px;font-family:inherit;font-size:12px}#stationMap{height:390px;background:#E5F2FB}.map-legend{display:flex;flex-wrap:wrap;gap:12px;padding:9px 11px;color:var(--line-muted);background:#fff;border-top:1px solid var(--line-border);font-size:11px}.map-legend span{display:inline-flex;align-items:center;gap:5px}.legend-dot{width:9px;height:9px;border-radius:50%}.legend-alert{background:var(--line-red)}.legend-offline{background:var(--line-orange)}.legend-online{background:var(--line-green)}.leaflet-popup-content{font-family:"Sarabun",Tahoma,sans-serif;font-size:12px;line-height:1.55}.popup-title{font-size:13px;font-weight:800}.popup-alert{color:var(--line-red);font-weight:700}
+@media(max-width:600px){.header{padding:10px 12px!important}.header .logo{width:42px!important;height:42px!important}.header-title{font-size:17px!important}.header-subtitle{font-size:10px!important}.header-live{font-size:10px}.content{padding:9px!important}.dashboard-actions{align-items:stretch!important;flex-direction:column!important}.download-png{width:100%}.action-strip{grid-template-columns:1fr!important}.data-context{grid-template-columns:1fr!important}.kpis{grid-template-columns:1fr 1fr!important}.kpi{min-height:92px!important;padding:12px!important}.kpi-number{font-size:27px!important}.analytics-grid{grid-template-columns:1fr!important}.map-filter-panel{grid-template-columns:1fr 1fr}.map-filter-panel .map-filter:first-child{grid-column:1/-1}#stationMap{height:300px}.quick{grid-template-columns:1fr 1fr!important}}
+</style>
 </head>
 <body>
 <div class="page">
 <div class="topbar"></div>
 <header class="header">
   <img class="logo" src="./assets/TH-Vertical.png" alt="กนอ.">
-  <div class="brand"><div class="header-title">สถานการณ์ล่าสุด e‑Monitoring</div><div class="header-subtitle">สรุปข้อมูลการตรวจวัดสิ่งแวดล้อมและการแจ้งเตือนแบบเรียลไทม์</div></div>
+  <div class="brand"><div class="header-title">สถานการณ์ e‑Monitoring</div><div class="header-subtitle">อัปเดตล่าสุด <strong id="updatedAt">กำลังโหลดข้อมูล…</strong></div></div>
+  <div class="header-live">● ข้อมูลล่าสุด</div>
 </header>
 <main class="content">
-<section class="hero">
-  <span class="hero-label">สถานการณ์ล่าสุด</span>
-  <h1>รายงานสถานการณ์<br>e‑Monitoring</h1>
-  <p>สรุปผลการติดตามสถานีตรวจวัดสิ่งแวดล้อมในพื้นที่นิคมอุตสาหกรรม</p>
-  <div class="hero-time"><span>อัปเดตล่าสุด</span><strong id="updatedAt">กำลังโหลดข้อมูล…</strong></div>
-</section>
 <div class="dashboard-actions">
   <div class="live-status"><i class="live-dot"></i><span>ข้อมูลเรียลไทม์ • อัปเดตอัตโนมัติทุก 1 นาที</span></div>
   <button id="downloadPng" class="download-png" type="button" onclick="downloadDashboardPng()">ดาวน์โหลดรายงาน PNG</button>
@@ -899,6 +905,16 @@ html,body{margin:0;background:#F5F6F8!important;color:var(--summary-ink)!importa
   <div class="panel-body"><div id="stationList" class="station-list"><div class="loading">กำลังโหลดข้อมูล…</div></div></div>
   <div class="panel-note">แสดงข้อมูลสถานีที่มีรายการแจ้งเตือนทั้งหมดจาก status.json</div>
 </section>
+<div class="section-heading"><h2>แผนที่สถานี e‑Monitoring</h2><p>แสดงตำแหน่งสถานีตามสถานะล่าสุด กดจุดบนแผนที่เพื่อดูรายละเอียด</p></div>
+<section class="card panel map-panel">
+  <div class="map-filter-panel">
+    <select id="estateMapFilter" class="map-filter" aria-label="เลือกนิคมอุตสาหกรรม" onchange="applyMapFilters()"><option value="">ทุกนิคมอุตสาหกรรม</option></select>
+    <select id="typeMapFilter" class="map-filter" aria-label="เลือกประเภทสถานี" onchange="applyMapFilters()"><option value="">ทุกประเภทสถานี</option><option value="AQMS">AQMs</option><option value="WQMS">WQMs</option><option value="CEMS">CEMs</option></select>
+    <select id="statusMapFilter" class="map-filter" aria-label="เลือกสถานะสถานี" onchange="applyMapFilters()"><option value="">ทุกสถานะ</option><option value="ALERT">แจ้งเตือน</option><option value="ONLINE">ออนไลน์</option><option value="OFFLINE">ออฟไลน์</option></select>
+  </div>
+  <div id="stationMap" role="region" aria-label="แผนที่ตำแหน่งสถานี e-Monitoring"></div>
+  <div class="map-legend"><span><i class="legend-dot legend-alert"></i>แจ้งเตือน</span><span><i class="legend-dot legend-offline"></i>ออฟไลน์</span><span><i class="legend-dot legend-online"></i>ออนไลน์</span></div>
+</section>
 <div id="offline-stations" class="section-heading"><h2>สถานีออฟไลน์</h2><p>ตรวจสอบสถานีที่หยุดส่งข้อมูลหรือไม่อยู่ในสถานะ ONLINE</p></div>
 <section class="card panel">
   <div class="panel-head"><h3>รายการสถานีออฟไลน์</h3><span id="offlineStationCount">0 รายการ</span></div>
@@ -914,6 +930,7 @@ html,body{margin:0;background:#F5F6F8!important;color:var(--summary-ink)!importa
 </main>
 <footer class="footer">ระบบติดตามตรวจสอบสิ่งแวดล้อม<br>ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย กนอ.</footer>
 </div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 <script>
 const $=id=>document.getElementById(id);
 const num=v=>Number.isFinite(Number(v))?Number(v):0;
@@ -929,6 +946,36 @@ function renderBars(target,items){
 const KNOWN_PARAMETERS=["PM2.5","PM25","PM10","SO2","NO2","NOX","NOx","O3","CO","TSP","DUST","Dust","OPACITY","Opacity","pH","COD","BOD","DO","TDS","SS","TEMP"];
 let CURRENT_ALERTS=[];
 let CURRENT_OFFLINE=[];
+let STATION_MAP=null,STATION_MARKER_LAYER=null,MAP_STATIONS=[];
+function stationEstate(s){return String(s.estate_name||s.IndustryZone||"-").trim()}
+function stationType(s){return String(s.station_type||s.StationType||"-").trim().toUpperCase()}
+function stationHasAlarm(s){const v=String(s.parameter_alarm||s.ParameterAlram||"").trim();return v&&v!=="-"}
+function mapStatus(s){if(stationHasAlarm(s))return "ALERT";return isOnline(s.status)?"ONLINE":"OFFLINE"}
+function ensureStationMap(){
+ if(STATION_MAP||!window.L||!$("stationMap"))return;
+ STATION_MAP=L.map("stationMap",{zoomControl:true,scrollWheelZoom:false}).setView([13.2,101.2],5);
+ L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",{maxZoom:19,attribution:"&copy; OpenStreetMap &copy; CARTO"}).addTo(STATION_MAP);
+ STATION_MARKER_LAYER=L.layerGroup().addTo(STATION_MAP);
+}
+function populateMapFilters(stations){
+ const select=$("estateMapFilter");if(!select||select.dataset.ready)return;
+ const names=[...new Set(stations.map(stationEstate).filter(v=>v&&v!=="-"))].sort((a,b)=>a.localeCompare(b,"th"));
+ names.forEach(name=>{const option=document.createElement("option");option.value=name;option.textContent=name;select.appendChild(option)});
+ const requested=new URLSearchParams(location.search).get("estate");if(requested&&names.includes(requested))select.value=requested;select.dataset.ready="1";
+}
+function renderStationMap(stations){
+ ensureStationMap();if(!STATION_MAP||!STATION_MARKER_LAYER)return;STATION_MARKER_LAYER.clearLayers();const bounds=[];
+ stations.forEach(s=>{const lat=Number(s.latitude),lon=Number(s.longitude);if(!Number.isFinite(lat)||!Number.isFinite(lon))return;
+  const state=mapStatus(s),color=state==="ALERT"?"#E63946":state==="OFFLINE"?"#E67700":"#2F8F46",alarm=s.parameter_alarm||s.ParameterAlram||"-";
+  const popup='<div class="popup-title">'+esc(s.station_name||"-")+'</div><div>'+esc(stationEstate(s))+' • '+esc(s.station_type||"-")+'</div><div>สถานะ: <strong>'+esc(s.status||"-")+'</strong></div>'+(stationHasAlarm(s)?'<div class="popup-alert">พารามิเตอร์: '+esc(alarm)+'</div>':'')+'<div>อัปเดต: '+esc(s.last_update||s.LastUpdate||"-")+'</div>';
+  L.circleMarker([lat,lon],{radius:state==="ALERT"?8:6,color:"#FFFFFF",weight:2,fillColor:color,fillOpacity:.95}).bindPopup(popup).addTo(STATION_MARKER_LAYER);bounds.push([lat,lon]);
+ });
+ if(bounds.length)STATION_MAP.fitBounds(bounds,{padding:[22,22],maxZoom:13});else STATION_MAP.setView([13.2,101.2],5);setTimeout(()=>STATION_MAP.invalidateSize(),50);
+}
+function applyMapFilters(){
+ const estate=$("estateMapFilter")?.value||"",type=$("typeMapFilter")?.value||"",status=$("statusMapFilter")?.value||"";
+ renderStationMap(MAP_STATIONS.filter(s=>(!estate||stationEstate(s)===estate)&&(!type||stationType(s)===type)&&(!status||mapStatus(s)===status)));
+}
 function isOnline(status){return String(status||"").trim().toUpperCase()==="ONLINE"}
 function parameterNames(value){
   const text=String(value||"");
@@ -971,6 +1018,9 @@ function render(data){
   const stations=Array.isArray(data.stations)?data.stations:[];
   CURRENT_ALERTS=stations;
   CURRENT_OFFLINE=allStations.filter(s=>!isOnline(s.status));
+  MAP_STATIONS=allStations;
+  populateMapFilters(allStations);
+  applyMapFilters();
   const alarmEntries=stations.flatMap(s=>alarmItems(s.parameter_alarm||s.ParameterAlram));
   const parameterCounts={};
   stations.forEach(s=>parameterNames(s.parameter_alarm||s.ParameterAlram).forEach(p=>parameterCounts[p]=(parameterCounts[p]||0)+1));
