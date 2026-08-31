@@ -170,7 +170,7 @@ def build_flex(zone: str, risks: list[dict], now: datetime, test: bool) -> dict:
             *rows,
             {"type": "text", "text": "ข้อแนะนำ", "size": "sm", "weight": "bold", "color": "#111111", "margin": "lg"},
             {"type": "text", "text": "ตรวจระบบระบายน้ำและเครื่องสูบน้ำ • ป้องกันระบบไฟฟ้าและสารเคมี • ติดตามประกาศของหน่วยงานรัฐก่อนเดินทาง", "size": "xs", "color": "#333333", "wrap": True, "margin": "sm"},
-            {"type": "text", "text": "เส้นทางจะระบุเฉพาะเมื่อมีประกาศปิดหรือหลีกเลี่ยงจากหน่วยงานทางการ", "size": "xxs", "color": "#777777", "wrap": True, "margin": "md"},
+            {"type": "text", "text": "ข้อมูลเส้นทางยังไม่รวมในรายงานนี้ โปรดตรวจสอบประกาศจากหน่วยงานทางการก่อนเดินทาง", "size": "xxs", "color": "#777777", "wrap": True, "margin": "md"},
         ]},
         "footer": {"type": "box", "layout": "vertical", "paddingAll": "14px", "contents": [
             {"type": "button", "style": "primary", "height": "sm", "color": "#165823", "action": {"type": "uri", "label": "ตรวจสอบข้อมูล ThaiWater", "uri": THAIWATER_URL}},
