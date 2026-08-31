@@ -69,6 +69,12 @@ HIGH_ICON_URL = f"{ASSET_BASE_URL}/4.png"
 WATCH_ICON_URL = f"{ASSET_BASE_URL}/3.png"
 FOLLOW_ICON_URL = f"{ASSET_BASE_URL}/1.png"
 
+TH_VERTICAL_LOGO_URL = (
+    "https://raw.githubusercontent.com/"
+    f"{GITHUB_REPOSITORY or 'THANAWAN-KI/ieat-emonitoring-line-alert'}/"
+    f"{GITHUB_BRANCH}/docs/assets/TH-Vertical.png"
+)
+
 
 # ============================================================
 # Date / Time
@@ -2979,33 +2985,54 @@ def build_zone_event_texts(
         "size": "giga",
         "header": {
             "type": "box",
-            "layout": "vertical",
+            "layout": "horizontal",
             "paddingAll": "12px",
             "backgroundColor": "#FFFFFF",
+            "spacing": "md",
+            "alignItems": "center",
             "contents": [
                 {
-                    "type": "text",
-                    "text": "แจ้งเตือน e-Monitoring",
-                    "size": "lg",
-                    "weight": "bold",
-                    "color": "#000000",
-                },
-                {
-                    "type": "text",
-                    "text": zone,
+                    "type": "image",
+                    "url": TH_VERTICAL_LOGO_URL,
                     "size": "sm",
-                    "weight": "bold",
-                    "color": "#000000",
-                    "wrap": True,
-                    "margin": "xs",
+                    "aspectMode": "fit",
+                    "aspectRatio": "4:5",
+                    "flex": 0,
                 },
                 {
-                    "type": "text",
-                    "text": "[DEMO] ข้อมูลตัวอย่าง • ไม่ใช่เหตุการณ์จริง",
-                    "size": "xxs",
-                    "color": "#777777",
-                    "wrap": True,
-                    "margin": "xs",
+                    "type": "box",
+                    "layout": "vertical",
+                    "flex": 1,
+                    "contents": [
+                        {
+                            "type": "text",
+                            "text": "แจ้งเตือน e-Monitoring",
+                            "size": "lg",
+                            "weight": "bold",
+                            "color": "#000000",
+                            "wrap": True,
+                        },
+                        {
+                            "type": "text",
+                            "text": zone,
+                            "size": "sm",
+                            "weight": "bold",
+                            "color": "#000000",
+                            "wrap": True,
+                            "margin": "xs",
+                        },
+                        {
+                            "type": "text",
+                            "text": (
+                                "[DEMO] ข้อมูลตัวอย่าง • "
+                                "ไม่ใช่เหตุการณ์จริง"
+                            ),
+                            "size": "xxs",
+                            "color": "#777777",
+                            "wrap": True,
+                            "margin": "xs",
+                        },
+                    ],
                 },
             ],
         },
