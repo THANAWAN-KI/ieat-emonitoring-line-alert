@@ -211,6 +211,16 @@
       .news-item p { font-size: 13px; color: #606d7e; margin: 0; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
       .news-item a { display: inline-block; margin-top: 10px; color: #631a9d; font-weight: 700; text-decoration: none; }
       .keyword { display: inline-block; margin: 8px 4px 0 0; padding: 2px 6px; border-radius: 5px; background: #fff1e8; color: #a74608; font-size: 11px; }
+      .site-footer { border-top: 1px solid #e4e4e4; background: #fff; color: #555; padding: 38px 24px 28px; }
+      .footer-inner { width: min(1440px, 100%); margin: auto; }
+      .footer-brand { display: flex; align-items: center; gap: 14px; margin-bottom: 34px; color: #222; text-decoration: none; font-size: 21px; }
+      .footer-brand img { width: 90px; height: 50px; object-fit: contain; }
+      .footer-grid { display: grid; grid-template-columns: 1.35fr 1fr .8fr; gap: 56px; }
+      .footer-col h3 { margin: 0 0 12px; color: #222; font-size: 17px; }
+      .footer-col p { margin: 5px 0; line-height: 1.6; }
+      .footer-col a { color: #555; text-decoration: none; }
+      .footer-col a:hover { color: #631a9d; text-decoration: underline; }
+      .footer-bottom { margin-top: 38px; padding-top: 18px; border-top: 1px solid #f0f0f0; color: #666; font-size: 13px; }
       @media (max-width: 900px) {
         .kpis {
           grid-template-columns: 1fr 1fr;
@@ -249,6 +259,11 @@
         .map {
           height: 420px;
         }
+        .site-footer { padding: 30px 20px 24px; }
+        .footer-brand { align-items: flex-start; margin-bottom: 26px; font-size: 18px; }
+        .footer-brand img { width: 72px; height: 42px; }
+        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+        .footer-bottom { margin-top: 28px; }
       }
     </style>
   </head>
@@ -272,102 +287,42 @@
           <h3>ข่าวสารและกิจกรรม</h3>
           <div class="news-grid" id="news"><div class="muted">กำลังรวบรวมข่าวล่าสุด…</div></div>
         </section>
-        <div class="report-head">
-          <div>
-            <h2>ภาพรวมสถานการณ์และแผนที่เฝ้าระวัง</h2>
-            <div class="muted">
-              ประจำวันที่ <span id="reportDate">กำลังโหลด…</span>
-            </div>
-          </div>
-          <div class="muted">
-            จัดทำอัตโนมัติ <span id="generatedAt">—</span>
-          </div>
-        </div>
-        <div class="kpis">
-          <div class="kpi red">
-            <b id="alert">—</b><span>สถานีมีการแจ้งเตือน</span>
-          </div>
-          <div class="kpi orange">
-            <b id="offline">—</b><span>สถานี Offline</span>
-          </div>
-          <div class="kpi green">
-            <b id="online">—</b><span>สถานี Online</span>
-          </div>
-          <div class="kpi blue">
-            <b id="total">—</b><span>สถานีทั้งหมด</span>
-          </div>
-        </div>
-        <div class="layout">
-          <iframe
-            class="map"
-            title="แผนที่วิเคราะห์สถานการณ์"
-            src="https://experience.arcgis.com/experience/a6b0cc340ae343379c4f66951610f535"
-            loading="lazy"
-            allowfullscreen
-          ></iframe>
-          <aside class="side">
-            <div class="card">
-              <h3>ข้อมูลที่ควรตรวจสอบวันนี้</h3>
-              <div class="links">
-                <a href="./flood-report.html" target="_blank"
-                  ><span>สถานการณ์น้ำและฝน</span><b>เปิด →</b></a
-                ><a
-                  href="https://www.tmd.go.th/warning-and-events"
-                  target="_blank"
-                  ><span>ประกาศเตือนภัย</span><b>เปิด →</b></a
-                ><a href="https://earthquake.tmd.go.th/" target="_blank"
-                  ><span>แผ่นดินไหวล่าสุด</span><b>เปิด →</b></a
-                ><a href="./index.html" target="_blank"
-                  ><span>สถานการณ์ e‑Monitoring</span><b>เปิด →</b></a
-                >
-              </div>
-            </div>
-            <div class="card">
-              <h3>สถานะแหล่งข้อมูล</h3>
-              <div id="sources"><span class="muted">กำลังตรวจสอบ…</span></div>
-            </div>
-          </aside>
-        </div>
-        <div class="foot" id="notice">
-          ข้อมูลเพื่อสนับสนุนการติดตามและประสานงานเบื้องต้น
-        </div>
       </section>
     </main>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <a class="footer-brand" href="https://oc.ieat.go.th/th" target="_blank" rel="noopener">
+          <img src="https://oc.ieat.go.th/assets/app/images/logo-th.png" alt="โลโก้การนิคมอุตสาหกรรมแห่งประเทศไทย">
+          <span>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย</span>
+        </a>
+        <div class="footer-grid">
+          <section class="footer-col">
+            <h3>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย</h3>
+            <p>5,6 ซอยร่วมศิริมิตร ถนนวิภาวดีรังสิต แขวงจอมพล<br>เขตจตุจักร กรุงเทพฯ 10900</p>
+          </section>
+          <section class="footer-col">
+            <h3>ติดต่อเรา</h3>
+            <p><strong>โทรศัพท์</strong>&nbsp; <a href="tel:022072700">0 2207 2700 ต่อ 10401, 10402, 10403</a></p>
+            <p><strong>อีเมล</strong>&nbsp; <a href="mailto:warroom1@ieat.mail.go.th">warroom1@ieat.mail.go.th</a></p>
+          </section>
+          <section class="footer-col">
+            <h3>เว็บไซต์</h3>
+            <p><a href="https://oc.ieat.go.th/th" target="_blank" rel="noopener">oc.ieat.go.th</a></p>
+          </section>
+        </div>
+        <div class="footer-bottom">ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย กนอ. · Environmental Monitoring and Control Center: EMCC</div>
+      </div>
+    </footer>
     <script>
       const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" })[c]);
-      const thDate = (s) =>
-        new Date(s + "T00:00:00+07:00").toLocaleDateString("th-TH", {
-          weekday: "long",
-          day: "numeric",
-          month: "long",
-          year: "numeric",
-        });
       fetch("./daily-report.json?t=" + Date.now(), { cache: "no-store" })
         .then((r) => r.json())
         .then((d) => {
-          document.querySelector("#reportDate").textContent = thDate(
-            d.report_date,
-          );
-          document.querySelector("#generatedAt").textContent =
-            d.generated_at_th;
-          const s = d.station_summary || {};
-          for (const k of ["alert", "offline", "online", "total"])
-            document.querySelector("#" + k).textContent = (
-              s[k] ?? 0
-            ).toLocaleString("th-TH");
-          document.querySelector("#notice").textContent = d.notice;
           const cards = (d.news || []).flatMap((n) => (n.images || []).length ? n.images.map((img) => ({...n, title:img.title, image:img.url, images:[]})) : [n]);
           document.querySelector("#news").innerHTML = cards.map((n) => `<article class="news-item">${n.image ? `<a href="${esc(n.image)}" target="_blank" rel="noopener"><img class="news-cover" src="${esc(n.image)}" alt="ภาพข่าวจาก ${esc(n.source)}" loading="lazy"></a>` : n.hide_image ? "" : `<div class="news-cover news-fallback">${esc(n.source)}</div>`}<span class="news-source">${esc(n.source)}</span><h4>${esc(n.title)}</h4><p>${esc(n.summary)}</p><div>${(n.matched_keywords || []).map((k) => `<span class="keyword">${esc(k)}</span>`).join("")}</div><a href="${esc(n.url)}" target="_blank" rel="noopener">อ่านจากแหล่งข่าว →</a></article>`).join("") || '<div class="muted">ยังไม่มีข่าวที่ผ่านการคัดกรองในรอบนี้</div>';
-          document.querySelector("#sources").innerHTML = (d.sources || [])
-            .map(
-              (x) =>
-                `<div class="source"><span class="dot ${x.ok ? "ok" : ""}"></span><div><b>${x.name}</b><div class="muted">${x.ok ? "เชื่อมต่อได้" : "ควรตรวจสอบแหล่งข้อมูล"}</div></div></div>`,
-            )
-            .join("");
         })
         .catch(() => {
-          document.querySelector("#reportDate").textContent =
-            "ไม่สามารถโหลดข้อมูลรายวัน";
+          document.querySelector("#news").innerHTML = '<div class="muted">ไม่สามารถโหลดข่าวสารได้ในขณะนี้</div>';
         });
     </script>
   </body>
