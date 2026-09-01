@@ -19,9 +19,17 @@ SOURCES = [
 ]
 
 NEWS_SOURCES = [
-    ("GISTDA", "https://disaster.gistda.or.th/landing/news"),
+    ("GISTDA", "https://disaster.gistda.or.th/landing/news/%e0%b8%9e%e0%b8%b7%e0%b9%89%e0%b8%99%e0%b8%97%e0%b8%b5%e0%b9%88%e0%b8%99%e0%b9%89%e0%b8%b3%e0%b8%97%e0%b9%88%e0%b8%a7%e0%b8%a1%e0%b8%9a%e0%b8%a3%e0%b8%b4%e0%b9%80%e0%b8%a7%e0%b8%93%e0%b8%9b%e0%b8%a3-2"),
     ("กรมอุตุนิยมวิทยา", "https://www.tmd.go.th/forecast/daily"),
     ("ปภ. / ศูนย์เตือนภัยพิบัติแห่งชาติ", "https://ndwc.disaster.go.th/ndwc/cms/7085?id=163329"),
+]
+NDWC_IMAGES = [
+    ("รายงานสถานการณ์ประจำวัน", "https://ndwc.disaster.go.th/upload/userfiles/ndwc/situation-report-2026-09-01.png"),
+    ("พื้นที่เสี่ยงน้ำท่วมฉับพลัน น้ำป่าไหลหลาก และน้ำท่วมขัง", "https://ndwc.disaster.go.th/upload/userfiles/ndwc/%E0%B9%81%E0%B8%9C%E0%B8%99%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%97%E0%B9%88%E0%B8%A7%E0%B8%A1%E0%B8%89%E0%B8%B1%E0%B8%9A%E0%B8%9E%E0%B8%A5%E0%B8%B1%E0%B8%99%20%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%9B%E0%B9%88%E0%B8%B2%E0%B9%84%E0%B8%AB%E0%B8%A5%E0%B8%AB%E0%B8%A5%E0%B8%B2%E0%B8%81%20%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%97%E0%B9%88%E0%B8%A7%E0%B8%A1%E0%B8%82%E0%B8%B1%E0%B8%87%E0%B9%83%E0%B8%99%E0%B8%A3%E0%B8%B0%E0%B8%A2%E0%B8%B0%E0%B8%AA%E0%B8%B1%E0%B9%89%E0%B8%99-2026-09-01.jpg"),
+    ("พื้นที่เสี่ยงน้ำล้นตลิ่งและน้ำท่วมขัง", "https://ndwc.disaster.go.th/upload/userfiles/ndwc/2.%20%E0%B9%81%E0%B8%9C%E0%B8%99%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%A5%E0%B9%89%E0%B8%99%E0%B8%95%E0%B8%A5%E0%B8%B4%E0%B9%88%E0%B8%87%20%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%97%E0%B9%88%E0%B8%A7%E0%B8%A1%E0%B8%82%E0%B8%B1%E0%B8%87-2026-09-01.jpg"),
+    ("พื้นที่เฝ้าระวังดินถล่ม", "https://ndwc.disaster.go.th/upload/userfiles/ndwc/3.%20%E0%B9%81%E0%B8%9C%E0%B8%99%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%94%E0%B8%B4%E0%B8%99%E0%B8%96%E0%B8%A5%E0%B9%88%E0%B8%A1-2026-09-01.jpg"),
+    ("พื้นที่เฝ้าระวังระดับแม่น้ำโขงเพิ่มสูงขึ้น", "https://ndwc.disaster.go.th/upload/userfiles/ndwc/4.%20%E0%B9%81%E0%B8%9C%E0%B8%99%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A3%E0%B8%B0%E0%B8%94%E0%B8%B1%E0%B8%9A%E0%B9%81%E0%B8%A1%E0%B9%88%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B9%82%E0%B8%82%E0%B8%87%E0%B9%80%E0%B8%9E%E0%B8%B4%E0%B9%88%E0%B8%A1%E0%B8%AA%E0%B8%B9%E0%B8%87%E0%B8%82%E0%B8%B6%E0%B9%89%E0%B8%99-2026-09-01.jpg"),
+    ("พื้นที่เฝ้าระวังคลื่นลมแรง", "https://ndwc.disaster.go.th/upload/userfiles/ndwc/5.%20%E0%B9%81%E0%B8%9C%E0%B8%99%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%84%E0%B8%A5%E0%B8%B7%E0%B9%88%E0%B8%99%E0%B8%A5%E0%B8%A1%E0%B9%81%E0%B8%A3%E0%B8%87-2026-09-01.jpg"),
 ]
 KEYWORDS = ("ฝนหนัก", "ฝนตกหนัก", "น้ำท่วม", "น้ำป่า", "พายุ", "ลมแรง", "คลื่นสูง", "แผ่นดินไหว", "ไฟป่า", "จุดความร้อน", "ดินถล่ม", "ภัยพิบัติ", "สารเคมี", "โรงงาน", "นิคมอุตสาหกรรม")
 
@@ -92,13 +100,17 @@ def load_station_summary():
 
 def main():
     now = datetime.now(TZ)
+    news = [fetch_news(source, url) for source, url in NEWS_SOURCES]
+    for item in news:
+        if item["source"] == "กรมอุตุนิยมวิทยา": item["image"] = ""; item["hide_image"] = True
+        if item["source"].startswith("ปภ."): item["images"] = [{"title": title, "url": image} for title, image in NDWC_IMAGES]; item["image"] = ""
     payload = {
         "report_date": now.strftime("%Y-%m-%d"),
         "generated_at": now.isoformat(timespec="seconds"),
         "generated_at_th": now.strftime("%d/%m/%Y %H:%M น."),
         "station_summary": load_station_summary(),
         "sources": [source_status(name, url) for name, url in SOURCES],
-        "news": [fetch_news(source, url) for source, url in NEWS_SOURCES],
+        "news": news,
         "experience_id": "a6b0cc340ae343379c4f66951610f535",
         "notice": "ข้อมูลเพื่อสนับสนุนการติดตามและประสานงานเบื้องต้น โปรดตรวจสอบกับหน่วยงานเจ้าของข้อมูลก่อนนำไปใช้อ้างอิง"
     }
