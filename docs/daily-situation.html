@@ -8,7 +8,6 @@
       href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
       :root {
         --p: #631a9d;
@@ -46,6 +45,10 @@
         align-items: center;
         gap: 15px;
       }
+      .brand-link { display:flex; align-items:center; gap:12px; color:inherit; text-decoration:none; }
+      .brand-logo { width:58px; height:58px; object-fit:contain; }
+      .brand-copy strong { display:block; color:#631a9d; font-size:17px; line-height:1.3; }
+      .brand-copy span { display:block; color:#666; font-size:12px; line-height:1.35; }
       .bar h1 {
         font-size: 17px;
         color: #333;
@@ -239,15 +242,13 @@
   <body>
     <header class="bar">
       <div class="bar-in">
-        <div>
-          <h1>รายงานสถานการณ์ประจำวัน</h1>
-          <p>ข้อมูลสนับสนุนนิคมอุตสาหกรรมและการรับมือเหตุฉุกเฉิน</p>
-        </div>
+        <a class="brand-link" href="https://oc.ieat.go.th/th" target="_blank" rel="noopener">
+          <img class="brand-logo" src="https://oc.ieat.go.th/assets/app/images/logo-th.png" alt="โลโก้การนิคมอุตสาหกรรมแห่งประเทศไทย">
+          <span class="brand-copy"><strong>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย</strong><span>Environmental Monitoring and Control Center: EMCC</span></span>
+        </a>
         <div class="actions">
           <button class="btn" onclick="location.href='./hub.html'">
-            กลับ Hub</button
-          ><button class="btn primary" onclick="downloadPNG()">
-            ดาวน์โหลด PNG
+            กลับ Hub
           </button>
         </div>
       </div>
@@ -354,23 +355,6 @@
           document.querySelector("#reportDate").textContent =
             "ไม่สามารถโหลดข้อมูลรายวัน";
         });
-      async function downloadPNG() {
-        const b = document.querySelector(".btn.primary");
-        b.textContent = "กำลังสร้างภาพ…";
-        const canvas = await html2canvas(document.querySelector("#capture"), {
-          scale: 2,
-          useCORS: true,
-          backgroundColor: "#ffffff",
-        });
-        const a = document.createElement("a");
-        a.download =
-          "IEAT_Daily_Situation_" +
-          new Date().toISOString().slice(0, 10) +
-          ".png";
-        a.href = canvas.toDataURL("image/png");
-        a.click();
-        b.textContent = "ดาวน์โหลด PNG";
-      }
     </script>
   </body>
 </html>
