@@ -11,12 +11,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
       :root {
-        --p: #59267c;
-        --n: #17324d;
+        --p: #631a9d;
+        --n: #631a9d;
         --r: #bf033b;
         --o: #ff6908;
         --g: #598c14;
-        --b: #0769ad;
+        --b: #631a9d;
         --bg: #f3f6f8;
         --line: #dde4ea;
       }
@@ -124,7 +124,7 @@
         color: var(--g);
       }
       .blue {
-        background: #e5f2fb;
+        background: #f1e7f7;
         color: var(--b);
       }
       .layout {
@@ -191,12 +191,16 @@
       }
       .news-wrap { margin: 16px 0; }
       .news-wrap h3 { margin: 0 0 10px; font-size: 20px; }
-      .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-      .news-item { border: 1px solid var(--line); border-radius: 12px; padding: 14px; background: #fff; }
-      .news-source { display: inline-block; padding: 3px 8px; border-radius: 999px; background: #f0e7f5; color: var(--p); font-size: 12px; font-weight: 700; }
-      .news-item h4 { font-size: 16px; margin: 9px 0 6px; }
+      .news-wrap { padding: 18px 0 8px; }
+      .news-wrap h3 { color: #631a9d; font-size: 22px; }
+      .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+      .news-item { border: 0; border-radius: 0; padding: 0; background: #fff; overflow: hidden; }
+      .news-cover { width: 100%; height: 210px; object-fit: cover; border: 1px solid #d5d9de; border-radius: 8px; background: linear-gradient(135deg,#f2e9f8,#fff); }
+      .news-fallback { display: grid; place-items: center; color: #631a9d; font-size: 22px; font-weight: 700; }
+      .news-source { display: inline-block; margin-top: 10px; padding: 3px 9px; border-radius: 999px; background: #f1e7f7; color: #631a9d; font-size: 12px; font-weight: 700; }
+      .news-item h4 { font-size: 17px; margin: 8px 0 6px; }
       .news-item p { font-size: 13px; color: #606d7e; margin: 0; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
-      .news-item a { display: inline-block; margin-top: 10px; color: var(--p); font-weight: 700; text-decoration: none; }
+      .news-item a { display: inline-block; margin-top: 10px; color: #631a9d; font-weight: 700; text-decoration: none; }
       .keyword { display: inline-block; margin: 8px 4px 0 0; padding: 2px 6px; border-radius: 5px; background: #fff1e8; color: #a74608; font-size: 11px; }
       @media (max-width: 900px) {
         .kpis {
@@ -336,7 +340,7 @@
               s[k] ?? 0
             ).toLocaleString("th-TH");
           document.querySelector("#notice").textContent = d.notice;
-          document.querySelector("#news").innerHTML = (d.news || []).map((n) => `<article class="news-item"><span class="news-source">${esc(n.source)}</span><h4>${esc(n.title)}</h4><p>${esc(n.summary)}</p><div>${(n.matched_keywords || []).map((k) => `<span class="keyword">${esc(k)}</span>`).join("")}</div><a href="${esc(n.url)}" target="_blank" rel="noopener">อ่านจากแหล่งข่าว →</a></article>`).join("") || '<div class="muted">ยังไม่มีข่าวที่ผ่านการคัดกรองในรอบนี้</div>';
+          document.querySelector("#news").innerHTML = (d.news || []).map((n) => `<article class="news-item">${n.image ? `<img class="news-cover" src="${esc(n.image)}" alt="ภาพข่าวจาก ${esc(n.source)}" loading="lazy">` : `<div class="news-cover news-fallback">${esc(n.source)}</div>`}<span class="news-source">${esc(n.source)}</span><h4>${esc(n.title)}</h4><p>${esc(n.summary)}</p><div>${(n.matched_keywords || []).map((k) => `<span class="keyword">${esc(k)}</span>`).join("")}</div><a href="${esc(n.url)}" target="_blank" rel="noopener">อ่านจากแหล่งข่าว →</a></article>`).join("") || '<div class="muted">ยังไม่มีข่าวที่ผ่านการคัดกรองในรอบนี้</div>';
           document.querySelector("#sources").innerHTML = (d.sources || [])
             .map(
               (x) =>
