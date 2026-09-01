@@ -38,4 +38,7 @@ const mapNode=document.getElementById('map');mapNode.classList.add('png-map');co
 function syncArcGIS(){const lat=Number(state.lat),lng=Number(state.lng);if(Number.isFinite(lat)&&Number.isFinite(lng))arcgisMap.src=`${arcgisBase}&center=${lng},${lat}&scale=9027.977411`}
 syncArcGIS();document.getElementById('mapBtn').onclick=()=>{updateMap();syncArcGIS()};
 pngBtn.onclick=async()=>{loading.classList.add('show');updateMap();arcgisMap.style.display='none';mapNode.classList.remove('png-map');map.invalidateSize();await new Promise(r=>setTimeout(r,900));try{const canvas=await html2canvas(report,{scale:2,useCORS:true,allowTaint:false,backgroundColor:'#fff',logging:false});const a=document.createElement('a');a.download=`IEAT-DSS-${state.reportNo||Date.now()}.png`;a.href=canvas.toDataURL('image/png');a.click()}catch(e){alert('ไม่สามารถสร้าง PNG ได้ กรุณาลองใหม่อีกครั้ง')}finally{mapNode.classList.add('png-map');arcgisMap.style.display='block';loading.classList.remove('show')}};
-</script></body></html>
+</script>
+<style>.report-header{display:flex;align-items:center;gap:22px}.report-logo{width:155px;height:86px;object-fit:contain;flex:0 0 155px}.report-header>div{min-width:0}.report-header>div h1{margin:0}.report-header>div p{margin:5px 0 0}@media(max-width:700px){.report-logo{width:125px;height:70px;flex-basis:125px}}</style>
+<script>const reportHeader=document.querySelector('#report .report-header');if(reportHeader&&!reportHeader.querySelector('.report-logo')){const reportLogo=document.createElement('img');reportLogo.className='report-logo';reportLogo.src='https://oc.ieat.go.th/assets/app/images/logo-th.png';reportLogo.crossOrigin='anonymous';reportLogo.alt='โลโก้การนิคมอุตสาหกรรมแห่งประเทศไทย';reportHeader.prepend(reportLogo)}</script>
+</body></html>
