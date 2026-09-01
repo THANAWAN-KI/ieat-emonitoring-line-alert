@@ -35,6 +35,7 @@ def fetch_news(source, url):
         with urlopen(req, timeout=25) as response:
             html = response.read(1_500_000).decode("utf-8", errors="ignore")
         title_match = re.search(r"<title[^>]*>(.*?)</title>", html, re.I | re.S)
+        image_match = re.search(r'<meta[^>]+(?:property|name)=["\'](?:og:image|twitter:image)["\'][^>]+content=["\'](.*?)["\']', html, re.I | re.S)
         text = clean_html(html)
         snippets = []
         for keyword in KEYWORDS:
@@ -45,7 +46,7 @@ def fetch_news(source, url):
                     snippets.append(snippet)
             if len(snippets) >= 2:
                 break
-        return {"source": source, "url": url, "title": clean_html(title_match.group(1)) if title_match else f"ข่าวจาก{source}", "summary": " • ".join(snippets)[:650] or "เปิดตรวจสอบข่าวและประกาศล่าสุดจากแหล่งข้อมูลต้นทาง", "matched_keywords": [k for k in KEYWORDS if k in text][:8], "available": True}
+        return {"source": source, "url": url, "title": clean_html(title_match.group(1)) if title_match else f"ข่าวจาก{source}", "summary": " • ".join(snippets)[:650] or "เปิดตรวจสอบข่าวและประกาศล่าสุดจากแหล่งข้อมูลต้นทาง", "image": unescape(image_match.group(1)).strip() if image_match else "", "matched_keywords": [k for k in KEYWORDS if k in text][:8], "available": True}
     except Exception as exc:
         return {"source": source, "url": url, "title": f"ข่าวและประกาศจาก{source}", "summary": "ไม่สามารถดึงรายละเอียดอัตโนมัติได้ในรอบนี้ กรุณาเปิดตรวจสอบจากแหล่งข้อมูลต้นทาง", "matched_keywords": [], "available": False, "error": str(exc)[:160]}
 
