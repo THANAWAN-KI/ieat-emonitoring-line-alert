@@ -22,6 +22,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/daily-report.json docs/daily-reports/
+          git add docs/daily-report.json docs/daily-reports/ docs/news-images/
           git diff --cached --quiet || git commit -m "Update daily situation report"
           git push
