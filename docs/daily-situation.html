@@ -199,17 +199,23 @@
       .news-wrap { margin: 0 0 40px; padding: 0; }
       .news-wrap h3 { margin: 0 0 26px; font-size: 20px; }
       .news-wrap h3 { color: #631a9d; font-size: 22px; }
-      .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px 24px; }
-      .news-item { border: 0; border-radius: 0; padding: 0; background: #fff; overflow: hidden; }
-      .news-cover { width: 100%; height: 230px; object-fit: cover; border: 1px solid #d5d9de; border-radius: 8px; background: linear-gradient(135deg,#f2e9f8,#fff); }
+      .news-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; gap: 26px 24px; }
+      .news-item { min-width: 0; height: 100%; display: flex; flex-direction: column; border: 1px solid #d5d9de; border-radius: 9px; background: #fff; overflow: hidden; box-shadow: 0 2px 7px rgba(31,41,55,.08); }
+      .news-media { position: relative; width: 100%; height: 230px; flex: 0 0 230px; overflow: hidden; background: linear-gradient(135deg,#f2e9f8,#fff); }
+      .news-cover { display: block; width: 100%; height: 100%; object-fit: cover; border: 0; border-radius: 0; }
+      .news-content { display: flex; flex-direction: column; flex: 1; padding: 14px 15px 16px; }
       @media (max-width: 1100px) {
         .news-grid { grid-template-columns: repeat(2, 1fr); }
       }
-      .news-fallback { display: grid; place-items: center; color: #631a9d; font-size: 22px; font-weight: 700; }
-      .news-source { display: inline-block; margin-top: 10px; padding: 3px 9px; border-radius: 999px; background: #f1e7f7; color: #631a9d; font-size: 12px; font-weight: 700; }
+      .news-fallback { display: grid; width: 100%; height: 100%; place-items: center; padding: 24px; color: #631a9d; text-align: center; font-size: 22px; font-weight: 700; }
+      .news-source { align-self: flex-start; display: inline-block; margin: 0 0 9px; padding: 3px 9px; border-radius: 999px; background: #f1e7f7; color: #631a9d; font-size: 12px; font-weight: 700; }
       .news-item h4 { font-size: 17px; margin: 8px 0 6px; }
       .news-item p { font-size: 13px; color: #606d7e; margin: 0; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
-      .news-item a { display: inline-block; margin-top: 10px; color: #631a9d; font-weight: 700; text-decoration: none; }
+      .news-item a { color: #631a9d; font-weight: 700; text-decoration: none; }
+      .news-link { display: inline-block; margin-top: auto; padding-top: 13px; }
+      .gallery-controls { position: absolute; right: 10px; bottom: 10px; left: 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+      .gallery-controls button { width: 34px; height: 34px; border: 0; border-radius: 50%; background: rgba(255,255,255,.94); color: #631a9d; font-size: 20px; font-weight: 700; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,.2); }
+      .gallery-count { padding: 5px 9px; border-radius: 999px; background: rgba(34,34,34,.78); color: #fff; font-size: 12px; }
       .keyword { display: inline-block; margin: 8px 4px 0 0; padding: 2px 6px; border-radius: 5px; background: #fff1e8; color: #a74608; font-size: 11px; }
       .site-footer { border-top: 1px solid #e4e4e4; background: #fff; color: #555; padding: 38px 24px 28px; }
       .footer-inner { width: min(1440px, 100%); margin: auto; }
@@ -242,7 +248,7 @@
         .actions { margin-left: auto; }
         .btn { padding: 8px 10px; font-size: 13px; }
         .news-grid { grid-template-columns: 1fr; gap: 24px; }
-        .news-cover { height: auto; aspect-ratio: 16 / 10; }
+        .news-media { height: auto; flex-basis: auto; aspect-ratio: 16 / 10; }
         .report-head {
           display: block;
         }
@@ -315,11 +321,33 @@
     </footer>
     <script>
       const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" })[c]);
+      const galleries = {};
+      function moveGallery(id, direction) {
+        const gallery = galleries[id];
+        if (!gallery) return;
+        gallery.index = (gallery.index + direction + gallery.images.length) % gallery.images.length;
+        const current = gallery.images[gallery.index];
+        const image = document.querySelector(`#${id} .news-cover`);
+        const link = document.querySelector(`#${id} .news-image-link`);
+        document.querySelector(`#${id} .gallery-count`).textContent = `${gallery.index + 1} / ${gallery.images.length}`;
+        image.src = current.url;
+        image.alt = current.title;
+        link.href = current.url;
+      }
       fetch("./daily-report.json?t=" + Date.now(), { cache: "no-store" })
         .then((r) => r.json())
         .then((d) => {
-          const cards = (d.news || []).flatMap((n) => (n.images || []).length ? n.images.map((img) => ({...n, title:img.title, image:img.url, images:[]})) : [n]);
-          document.querySelector("#news").innerHTML = cards.map((n) => `<article class="news-item">${n.image ? `<a href="${esc(n.image)}" target="_blank" rel="noopener"><img class="news-cover" src="${esc(n.image)}" alt="ภาพข่าวจาก ${esc(n.source)}" loading="lazy"></a>` : n.hide_image ? "" : `<div class="news-cover news-fallback">${esc(n.source)}</div>`}<span class="news-source">${esc(n.source)}</span><h4>${esc(n.title)}</h4><p>${esc(n.summary)}</p><div>${(n.matched_keywords || []).map((k) => `<span class="keyword">${esc(k)}</span>`).join("")}</div><a href="${esc(n.url)}" target="_blank" rel="noopener">อ่านจากแหล่งข่าว →</a></article>`).join("") || '<div class="muted">ยังไม่มีข่าวที่ผ่านการคัดกรองในรอบนี้</div>';
+          const cards = d.news || [];
+          document.querySelector("#news").innerHTML = cards.map((n, index) => {
+            const images = n.images || [];
+            const galleryId = `gallery-${index}`;
+            if (images.length) galleries[galleryId] = { images, index: 0 };
+            const firstImage = images.length ? images[0].url : n.image;
+            const media = firstImage
+              ? `<div class="news-media" id="${galleryId}"><a class="news-image-link" href="${esc(firstImage)}" target="_blank" rel="noopener"><img class="news-cover" src="${esc(firstImage)}" alt="ภาพข่าวจาก ${esc(n.source)}" loading="lazy"></a>${images.length > 1 ? `<div class="gallery-controls"><button type="button" aria-label="ภาพก่อนหน้า" onclick="moveGallery('${galleryId}',-1)">‹</button><span class="gallery-count">1 / ${images.length}</span><button type="button" aria-label="ภาพถัดไป" onclick="moveGallery('${galleryId}',1)">›</button></div>` : ""}</div>`
+              : `<div class="news-media"><div class="news-fallback">${esc(n.source)}</div></div>`;
+            return `<article class="news-item">${media}<div class="news-content"><span class="news-source">${esc(n.source)}</span><h4>${esc(n.title)}</h4><p>${esc(n.summary)}</p><div>${(n.matched_keywords || []).map((k) => `<span class="keyword">${esc(k)}</span>`).join("")}</div><a class="news-link" href="${esc(n.url)}" target="_blank" rel="noopener">อ่านจากแหล่งข่าว →</a></div></article>`;
+          }).join("") || '<div class="muted">ยังไม่มีข่าวที่ผ่านการคัดกรองในรอบนี้</div>';
         })
         .catch(() => {
           document.querySelector("#news").innerHTML = '<div class="muted">ไม่สามารถโหลดข่าวสารได้ในขณะนี้</div>';
