@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>IEAT EMCC Work Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#17324d;--purple:#59267c;--purple2:#e9dff0;--green:#598c14;--orange:#ff6908;--red:#bf033b;--ink:#253247;--muted:#6b778c;--line:#dfe5ec;--bg:#f4f7fa;--white:#fff}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--bg);color:var(--ink);font-family:"Sarabun",sans-serif;font-size:17px;line-height:1.55}
+    a{color:inherit;text-decoration:none} button,input,textarea{font:inherit}
+    header{position:sticky;top:0;z-index:20;background:linear-gradient(120deg,#102c48,#173e63);color:#fff;box-shadow:0 4px 18px #102c4829}
+    .head{max-width:1500px;margin:auto;height:76px;padding:0 24px;display:flex;align-items:center;gap:18px}.brand-mark{width:46px;height:46px;border:2px solid #fff;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:13px}.brand h1{margin:0;font-size:23px;line-height:1.2}.brand small{opacity:.82}.clock{margin-left:auto;text-align:right}.clock b{display:block;font-size:18px}.clock span{font-size:13px;opacity:.8}
+    nav{background:#fff;border-bottom:1px solid var(--line)}.nav{max-width:1500px;margin:auto;padding:0 24px;display:flex;gap:6px;overflow:auto}.nav a{padding:13px 16px;font-weight:600;color:#42526a;white-space:nowrap;border-bottom:3px solid transparent}.nav a:hover{color:var(--purple);border-color:var(--purple)}
+    main{max-width:1500px;margin:auto;padding:24px}.hero{display:grid;grid-template-columns:1.5fr 1fr;gap:18px;margin-bottom:20px}.welcome,.focus{border-radius:18px;padding:25px;color:#fff;min-height:170px}.welcome{background:linear-gradient(135deg,var(--purple),#74419a)}.welcome h2{font-size:29px;margin:0 0 8px}.welcome p{margin:0;max-width:760px;opacity:.9}.focus{background:linear-gradient(135deg,#315d20,var(--green))}.focus h3{margin:0 0 10px;font-size:21px}.focus ul{margin:0;padding-left:20px}
+    .section{margin:25px 0}.title-row{display:flex;align-items:end;justify-content:space-between;gap:15px;margin-bottom:13px}.title-row h2{font-size:23px;margin:0}.title-row p{margin:0;color:var(--muted);font-size:15px}
+    .tools{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:19px;box-shadow:0 4px 14px #17324d0a;transition:.2s}.card:hover{transform:translateY(-2px);box-shadow:0 10px 28px #17324d18;border-color:#c7b4d4}.icon{width:45px;height:45px;border-radius:13px;display:grid;place-items:center;font-size:22px;margin-bottom:13px}.card h3{font-size:18px;margin:0 0 7px}.card p{font-size:14px;color:var(--muted);margin:0 0 16px;min-height:44px}.tag{font-size:12px;border-radius:999px;padding:4px 9px;background:#eef2f6;color:#546174}.open{display:flex;align-items:center;justify-content:space-between;font-weight:700;color:var(--purple)}
+    .purple .icon{background:#f0e7f5;color:var(--purple)}.blue .icon{background:#e5f2fc;color:#0769ad}.green .icon{background:#eaf3df;color:var(--green)}.red .icon{background:#fae5e8;color:var(--red)}.orange .icon{background:#fff0e5;color:var(--orange)}
+    .grid2{display:grid;grid-template-columns:1.3fr .7fr;gap:18px}.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:19px}.panel h3{margin:0 0 14px;font-size:20px}.quick{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.quick a{display:flex;gap:12px;align-items:center;padding:13px;border:1px solid var(--line);border-radius:12px;font-weight:600}.quick a:hover{border-color:var(--purple);background:#faf7fc}.qicon{width:35px;height:35px;border-radius:10px;background:var(--purple2);display:grid;place-items:center;color:var(--purple)}
+    .task-form{display:flex;gap:8px;margin-bottom:12px}.task-form input{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px}.task-form button{border:0;border-radius:10px;background:var(--purple);color:#fff;padding:0 17px;font-weight:700;cursor:pointer}.tasks{padding:0;margin:0;list-style:none}.tasks li{display:flex;align-items:center;gap:10px;border-top:1px solid #edf0f4;padding:11px 2px}.tasks li.done span{text-decoration:line-through;color:#94a0b1}.tasks input{accent-color:var(--green)}.remove{margin-left:auto;border:0;background:transparent;color:#9b3d52;cursor:pointer}
+    .contacts{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.contact{background:#fff;border:1px solid var(--line);border-radius:14px;padding:17px}.contact b{display:block}.contact a{font-size:22px;color:var(--purple);font-weight:700}.contact small{color:var(--muted)}
+    footer{margin-top:34px;background:#e9eef3;color:#536176;padding:22px;text-align:center;font-size:14px}
+    @media(max-width:1050px){.tools{grid-template-columns:repeat(2,1fr)}.hero,.grid2{grid-template-columns:1fr}.contacts{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:620px){body{font-size:16px}.head{height:68px;padding:0 15px}.brand h1{font-size:18px}.brand small,.clock span{display:none}.clock b{font-size:14px}.nav,main{padding-left:14px;padding-right:14px}.hero{gap:12px}.welcome,.focus{padding:20px}.welcome h2{font-size:23px}.tools{grid-template-columns:1fr}.quick{grid-template-columns:1fr}.contacts{grid-template-columns:1fr}.title-row{display:block}.title-row p{margin-top:3px}}
+  </style>
+</head>
+<body>
+  <header><div class="head"><div class="brand-mark">IEAT</div><div class="brand"><h1>IEAT EMCC Work Hub</h1><small>ศูนย์รวมข้อมูลและเครื่องมือสนับสนุนงาน GIS</small></div><div class="clock"><b id="time">--:--</b><span id="date">กำลังโหลดวันที่</span></div></div></header>
+  <nav><div class="nav"><a href="#home">หน้าหลัก</a><a href="#tools">เครื่องมือ</a><a href="#today">งานวันนี้</a><a href="#emergency">ติดต่อฉุกเฉิน</a></div></nav>
+  <main id="home">
+    <section class="hero"><div class="welcome"><h2>สวัสดีค่ะ พร้อมเริ่มงานวันนี้</h2><p>รวมระบบ DSS สถานการณ์น้ำ e‑Monitoring เครื่องมือ GIS และข้อมูลสนับสนุนเหตุฉุกเฉินไว้ในจุดเดียว เพื่อให้ค้นข้อมูล วิเคราะห์ และส่งต่อได้เร็วขึ้น</p></div><div class="focus"><h3>แนวทางเมื่อได้รับแจ้งเหตุ</h3><ul><li>ตรวจสอบบริษัทหรือพื้นที่เกิดเหตุ</li><li>เปิดเครื่องมือ GIS เพื่อวิเคราะห์พื้นที่</li><li>ตรวจสอบสถานการณ์และข้อมูลสาธารณะ</li><li>ส่งออกรายงานสำหรับสนับสนุนเจ้าหน้าที่</li></ul></div></section>
+    <section class="section" id="tools"><div class="title-row"><div><h2>เครื่องมือใช้งานประจำ</h2><p>เลือกเปิดระบบตามงานที่ต้องดำเนินการ</p></div></div><div class="tools">
+      <a class="card purple" href="https://ieat-dss-library.thanawankaiyaso321.chatgpt.site/" target="_blank" rel="noopener"><div class="icon">⌕</div><h3>คลังข้อมูล DSS กนอ.</h3><p>ค้นหาบริษัท เลขทะเบียนโรงงาน ข้อมูลกิจการและสารเคมี</p><div class="open"><span class="tag">ค้นหาข้อมูล</span><span>เปิดระบบ →</span></div></a>
+      <a class="card blue" href="https://thanawan-ki.github.io/ieat-emonitoring-line-alert/flood-report.html" target="_blank" rel="noopener"><div class="icon">≋</div><h3>สถานการณ์น้ำ</h3><p>ติดตามฝน ระดับน้ำ และพื้นที่เสี่ยงน้ำท่วม 24/48 ชั่วโมง</p><div class="open"><span class="tag">ข้อมูลสถานการณ์</span><span>เปิดระบบ →</span></div></a>
+      <a class="card red" href="https://experience.arcgis.com/experience/a6b0cc340ae343379c4f66951610f535" target="_blank" rel="noopener"><div class="icon">◎</div><h3>วิเคราะห์พื้นที่เกิดเหตุ</h3><p>ค้นหาตำแหน่ง สร้าง Buffer และจัดทำแผนที่สนับสนุน</p><div class="open"><span class="tag">เครื่องมือ GIS</span><span>เปิดระบบ →</span></div></a>
+      <a class="card green" href="https://thanawan-ki.github.io/ieat-emonitoring-line-alert/" target="_blank" rel="noopener"><div class="icon">◉</div><h3>สถานการณ์ e‑Monitoring</h3><p>ดูภาพรวมค่าตรวจวัด การแจ้งเตือน และสถานีที่ต้องติดตาม</p><div class="open"><span class="tag">เฝ้าระวัง</span><span>เปิดระบบ →</span></div></a>
+      <a class="card orange" href="https://thanawan-ki.github.io/ieat-emonitoring-line-alert/disaster.html" target="_blank" rel="noopener"><div class="icon">△</div><h3>สถานการณ์ภัยพิบัติ</h3><p>ตรวจสอบภัยพิบัติ ข่าวเตือน และข้อมูลสนับสนุนล่าสุด</p><div class="open"><span class="tag">ภัยพิบัติ</span><span>เปิดระบบ →</span></div></a>
+      <a class="card purple" href="https://thanawan-ki.github.io/ieat-emonitoring-line-alert/stations.html" target="_blank" rel="noopener"><div class="icon">⌁</div><h3>สถานีตรวจวัด</h3><p>ตรวจสอบสถานะ Online/Offline และรายละเอียดสถานีทั่วประเทศ</p><div class="open"><span class="tag">สถานี</span><span>เปิดระบบ →</span></div></a>
+      <a class="card green" href="https://thanawan-ki.github.io/ieat-emonitoring-line-alert/safety.html" target="_blank" rel="noopener"><div class="icon">✓</div><h3>คู่มือความปลอดภัย</h3><p>ขั้นตอนปฏิบัติเมื่อเกิดเหตุฉุกเฉินและช่องทางประสานงาน</p><div class="open"><span class="tag">คู่มือ</span><span>เปิดระบบ →</span></div></a>
+      <a class="card blue" href="https://thanawan-ki.github.io/ieat-emonitoring-line-alert/contacts.html" target="_blank" rel="noopener"><div class="icon">☎</div><h3>ช่องทางติดต่อ</h3><p>รายชื่อและหมายเลขโทรศัพท์สำหรับประสานงานเหตุฉุกเฉิน</p><div class="open"><span class="tag">ติดต่อ</span><span>เปิดระบบ →</span></div></a>
+    </div></section>
+    <section class="section grid2" id="today"><div class="panel"><h3>ทางลัดเมื่อเกิดเหตุ</h3><div class="quick">
+      <a href="https://ieat-dss-library.thanawankaiyaso321.chatgpt.site/" target="_blank"><span class="qicon">1</span><span>ค้นหาบริษัทและเลขทะเบียน</span></a>
+      <a href="https://experience.arcgis.com/experience/a6b0cc340ae343379c4f66951610f535" target="_blank"><span class="qicon">2</span><span>วิเคราะห์ Buffer พื้นที่เกิดเหตุ</span></a>
+      <a href="https://thanawan-ki.github.io/ieat-emonitoring-line-alert/flood-report.html" target="_blank"><span class="qicon">3</span><span>ตรวจสอบสถานการณ์น้ำ</span></a>
+      <a href="https://thanawan-ki.github.io/ieat-emonitoring-line-alert/" target="_blank"><span class="qicon">4</span><span>ตรวจสอบค่า e‑Monitoring</span></a>
+    </div></div><div class="panel"><h3>งานที่ต้องติดตาม</h3><form class="task-form" id="taskForm"><input id="taskInput" placeholder="เพิ่มงานหรือเหตุการณ์ที่ต้องติดตาม" autocomplete="off"><button>เพิ่ม</button></form><ul class="tasks" id="tasks"></ul></div></section>
+    <section class="section" id="emergency"><div class="title-row"><div><h2>ติดต่อฉุกเฉิน</h2><p>กดหมายเลขเพื่อโทรออกบนโทรศัพท์</p></div></div><div class="contacts">
+      <div class="contact"><b>War Room กนอ. 24 ชั่วโมง</b><a href="tel:022072700">02-207-2700</a><small>ต่อ 10401, 10402, 10403</small></div>
+      <div class="contact"><b>เหตุเพลิงไหม้</b><a href="tel:199">199</a><small>ให้บริการ 24 ชั่วโมง</small></div>
+      <div class="contact"><b>เจ็บป่วยฉุกเฉิน</b><a href="tel:1669">1669</a><small>การแพทย์ฉุกเฉิน</small></div>
+      <div class="contact"><b>เหตุด่วนเหตุร้าย</b><a href="tel:191">191</a><small>สำนักงานตำรวจแห่งชาติ</small></div>
+    </div></section>
+  </main>
+  <footer>IEAT EMCC Work Hub · ศูนย์รวมข้อมูลเพื่อสนับสนุนการติดตามและประสานงานเบื้องต้น</footer>
+  <script>
+    function tick(){const n=new Date();document.getElementById('time').textContent=n.toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'});document.getElementById('date').textContent=n.toLocaleDateString('th-TH',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}tick();setInterval(tick,30000);
+    const key='ieat-hub-tasks';const list=document.getElementById('tasks');let tasks=JSON.parse(localStorage.getItem(key)||'[]');
+    function save(){localStorage.setItem(key,JSON.stringify(tasks))}function render(){list.innerHTML='';tasks.forEach((t,i)=>{const li=document.createElement('li');if(t.done)li.className='done';li.innerHTML=`<input type="checkbox" ${t.done?'checked':''}><span></span><button class="remove" aria-label="ลบงาน">ลบ</button>`;li.querySelector('span').textContent=t.text;li.querySelector('input').onchange=e=>{tasks[i].done=e.target.checked;save();render()};li.querySelector('button').onclick=()=>{tasks.splice(i,1);save();render()};list.appendChild(li)});if(!tasks.length)list.innerHTML='<li><span style="color:#7c889a">ยังไม่มีงานที่บันทึกไว้</span></li>'}render();
+    document.getElementById('taskForm').onsubmit=e=>{e.preventDefault();const input=document.getElementById('taskInput');const text=input.value.trim();if(!text)return;tasks.unshift({text,done:false});input.value='';save();render()};
+  </script>
+</body>
+</html>
