@@ -1,0 +1,37 @@
+{
+  "report_date": "2026-09-01",
+  "generated_at": "2026-09-01T07:30:00+07:00",
+  "generated_at_th": "01/09/2026 07:30 น.",
+  "station_summary": {
+    "available": true,
+    "total": 178,
+    "online": 99,
+    "offline": 79,
+    "alert": 20,
+    "updated_at": "31 ส.ค. 2569 เวลา 14:25 น."
+  },
+  "sources": [
+    {
+      "name": "กรมอุตุนิยมวิทยา",
+      "url": "https://www.tmd.go.th/",
+      "ok": true
+    },
+    {
+      "name": "ประกาศเตือนภัย กรมอุตุนิยมวิทยา",
+      "url": "https://www.tmd.go.th/warning-and-events",
+      "ok": true
+    },
+    {
+      "name": "แผ่นดินไหว กรมอุตุนิยมวิทยา",
+      "url": "https://earthquake.tmd.go.th/",
+      "ok": true
+    },
+    {
+      "name": "ศูนย์ข้อมูลสถานการณ์น้ำ",
+      "url": "https://thanawan-ki.github.io/ieat-emonitoring-line-alert/flood-report.html",
+      "ok": true
+    }
+  ],
+  "experience_id": "a6b0cc340ae343379c4f66951610f535",
+  "notice": "ข้อมูลเพื่อสนับสนุนการติดตามและประสานงานเบื้องต้น โปรดตรวจสอบกับหน่วยงานเจ้าของข้อมูลก่อนนำไปใช้อ้างอิง"
+}
