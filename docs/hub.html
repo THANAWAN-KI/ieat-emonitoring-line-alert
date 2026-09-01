@@ -13,6 +13,10 @@
   .panel-head h2,.flood-main-head h2{font-size:18px}
   .dir-head b{font-size:15px}
 }
+
+/* Header title size aligned with the daily situation action */
+.brand b{font-size:18px;line-height:1.3}
+@media(max-width:560px){.brand b{font-size:16px}}
 </style></head><body><div class="loading" id="loading">กำลังจัดทำภาพ PNG…</div><header class="header"><a class="brand" href="https://oc.ieat.go.th/th" target="_blank"><img src="https://oc.ieat.go.th/assets/app/images/logo-th.png" alt="กนอ."><span><b>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย</b><small>Environmental Monitoring and Control Center: EMCC</small></span></a><div class="actions"><a href="./daily-situation.html">ข่าวสถานการณ์รายวัน</a><button id="exportBtn">ส่งออก PNG</button></div></header>
 <main class="page" id="captureArea"><nav class="tabs"><button class="tab active" data-type="fire"><img src="./assets/fire-svgrepo-com.png" alt="ไฟไหม้">ไฟไหม้</button><button class="tab" data-type="flood"><img src="./assets/flood-svgrepo-com.png" alt="น้ำท่วม">น้ำท่วม</button><button class="tab" data-type="drought">☀ ภัยแล้ง</button><button class="tab" data-type="pm25">◌ ฝุ่น PM2.5</button></nav>
 <section id="fireView"><div class="kpis" id="kpis"></div><div class="toolbar"><select id="estateFilter"><option value="">ทุกนิคมอุตสาหกรรม</option></select><input id="searchInput" placeholder="ค้นหาชื่อจุดหรือข้อมูลสนับสนุน"><span id="filterSummary">กำลังเชื่อมต่อข้อมูล…</span></div>
