@@ -3,6 +3,7 @@ import json
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from urllib.request import Request, urlopen
+from urllib.parse import urljoin
 from html import unescape
 import re
 
@@ -36,6 +37,8 @@ def fetch_news(source, url):
             html = response.read(1_500_000).decode("utf-8", errors="ignore")
         title_match = re.search(r"<title[^>]*>(.*?)</title>", html, re.I | re.S)
         image_match = re.search(r'<meta[^>]+(?:property|name)=["\'](?:og:image|twitter:image)["\'][^>]+content=["\'](.*?)["\']', html, re.I | re.S)
+        if not image_match:
+            image_match = re.search(r'<img[^>]+src=["\']([^"\']+\.(?:jpg|jpeg|png|webp)(?:\?[^"\']*)?)["\']', html, re.I)
         text = clean_html(html)
         snippets = []
         for keyword in KEYWORDS:
@@ -46,7 +49,23 @@ def fetch_news(source, url):
                     snippets.append(snippet)
             if len(snippets) >= 2:
                 break
-        return {"source": source, "url": url, "title": clean_html(title_match.group(1)) if title_match else f"ข่าวจาก{source}", "summary": " • ".join(snippets)[:650] or "เปิดตรวจสอบข่าวและประกาศล่าสุดจากแหล่งข้อมูลต้นทาง", "image": unescape(image_match.group(1)).strip() if image_match else "", "matched_keywords": [k for k in KEYWORDS if k in text][:8], "available": True}
+        image_path = ""
+        if image_match:
+            try:
+                image_url = urljoin(url, unescape(image_match.group(1)).strip())
+                image_req = Request(image_url, headers={"User-Agent": "Mozilla/5.0"})
+                with urlopen(image_req, timeout=25) as image_response:
+                    image_bytes = image_response.read(8_000_000)
+                    content_type = image_response.headers.get("Content-Type", "")
+                ext = ".png" if "png" in content_type else ".webp" if "webp" in content_type else ".jpg"
+                slug = re.sub(r"[^a-z0-9]+", "-", source.lower()).strip("-") or "news"
+                image_dir = DOCS / "news-images"
+                image_dir.mkdir(exist_ok=True)
+                (image_dir / f"{slug}{ext}").write_bytes(image_bytes)
+                image_path = f"./news-images/{slug}{ext}"
+            except Exception:
+                image_path = ""
+        return {"source": source, "url": url, "title": clean_html(title_match.group(1)) if title_match else f"ข่าวจาก{source}", "summary": " • ".join(snippets)[:650] or "เปิดตรวจสอบข่าวและประกาศล่าสุดจากแหล่งข้อมูลต้นทาง", "image": image_path, "matched_keywords": [k for k in KEYWORDS if k in text][:8], "available": True}
     except Exception as exc:
         return {"source": source, "url": url, "title": f"ข่าวและประกาศจาก{source}", "summary": "ไม่สามารถดึงรายละเอียดอัตโนมัติได้ในรอบนี้ กรุณาเปิดตรวจสอบจากแหล่งข้อมูลต้นทาง", "matched_keywords": [], "available": False, "error": str(exc)[:160]}
 
