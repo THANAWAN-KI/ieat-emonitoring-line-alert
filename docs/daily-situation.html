@@ -1,5 +1,370 @@
-<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>รายงานสถานการณ์ประจำวัน | IEAT EMCC</title><link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet"><script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script><style>
-:root{--p:#59267c;--n:#17324d;--r:#bf033b;--o:#ff6908;--g:#598c14;--b:#0769ad;--bg:#f3f6f8;--line:#dde4ea}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#253247;font-family:Sarabun,sans-serif;font-size:16px}.bar{background:var(--n);color:#fff;padding:16px 22px}.bar-in{max-width:1500px;margin:auto;display:flex;align-items:center;gap:15px}.bar h1{font-size:22px;margin:0}.bar p{margin:2px 0 0;opacity:.8;font-size:13px}.actions{margin-left:auto;display:flex;gap:8px}.btn{border:0;border-radius:9px;padding:10px 13px;background:#fff;color:var(--n);font-weight:700;cursor:pointer}.btn.primary{background:var(--p);color:#fff}.wrap{max-width:1500px;margin:auto;padding:18px}.report{background:#fff;border-radius:16px;padding:18px;box-shadow:0 5px 22px #17324d12}.report-head{display:flex;justify-content:space-between;gap:15px;border-bottom:1px solid var(--line);padding-bottom:12px}.report-head h2{margin:0;font-size:22px}.muted{color:#6c7888}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:15px 0}.kpi{padding:14px;border-radius:12px}.kpi b{display:block;font-size:26px}.kpi span{font-size:13px}.red{background:#fdecef;color:var(--r)}.orange{background:#fff2e8;color:var(--o)}.green{background:#edf5e4;color:var(--g)}.blue{background:#e5f2fb;color:var(--b)}.layout{display:grid;grid-template-columns:1.55fr .75fr;gap:14px}.map{height:600px;width:100%;border:1px solid var(--line);border-radius:12px}.side{display:grid;gap:12px}.card{border:1px solid var(--line);border-radius:12px;padding:15px}.card h3{margin:0 0 10px;font-size:17px}.links{display:grid;gap:8px}.links a{display:flex;justify-content:space-between;padding:10px;background:#f5f7f9;border-radius:8px;color:var(--n);text-decoration:none}.source{display:flex;gap:8px;align-items:flex-start;padding:8px 0;border-bottom:1px solid #edf0f3}.dot{width:10px;height:10px;border-radius:50%;margin-top:6px;background:#99a3af}.dot.ok{background:var(--g)}.foot{margin-top:14px;padding:12px;background:#f5f1f8;border-radius:10px;font-size:13px;color:#5b4670}@media(max-width:900px){.kpis{grid-template-columns:1fr 1fr}.layout{grid-template-columns:1fr}.map{height:480px}}@media(max-width:560px){.bar-in,.report-head{display:block}.actions{margin-top:10px}.wrap{padding:9px}.report{padding:12px}.map{height:420px}}
-</style></head><body><header class="bar"><div class="bar-in"><div><h1>รายงานสถานการณ์ประจำวัน</h1><p>ข้อมูลสนับสนุนนิคมอุตสาหกรรมและการรับมือเหตุฉุกเฉิน</p></div><div class="actions"><button class="btn" onclick="location.href='./hub.html'">กลับ Hub</button><button class="btn primary" onclick="downloadPNG()">ดาวน์โหลด PNG</button></div></div></header><main class="wrap"><section class="report" id="capture"><div class="report-head"><div><h2>ภาพรวมสถานการณ์และแผนที่เฝ้าระวัง</h2><div class="muted">ประจำวันที่ <span id="reportDate">กำลังโหลด…</span></div></div><div class="muted">จัดทำอัตโนมัติ <span id="generatedAt">—</span></div></div><div class="kpis"><div class="kpi red"><b id="alert">—</b><span>สถานีมีการแจ้งเตือน</span></div><div class="kpi orange"><b id="offline">—</b><span>สถานี Offline</span></div><div class="kpi green"><b id="online">—</b><span>สถานี Online</span></div><div class="kpi blue"><b id="total">—</b><span>สถานีทั้งหมด</span></div></div><div class="layout"><iframe class="map" title="แผนที่วิเคราะห์สถานการณ์" src="https://experience.arcgis.com/experience/a6b0cc340ae343379c4f66951610f535" loading="lazy" allowfullscreen></iframe><aside class="side"><div class="card"><h3>ข้อมูลที่ควรตรวจสอบวันนี้</h3><div class="links"><a href="./flood-report.html" target="_blank"><span>สถานการณ์น้ำและฝน</span><b>เปิด →</b></a><a href="https://www.tmd.go.th/warning-and-events" target="_blank"><span>ประกาศเตือนภัย</span><b>เปิด →</b></a><a href="https://earthquake.tmd.go.th/" target="_blank"><span>แผ่นดินไหวล่าสุด</span><b>เปิด →</b></a><a href="./index.html" target="_blank"><span>สถานการณ์ e‑Monitoring</span><b>เปิด →</b></a></div></div><div class="card"><h3>สถานะแหล่งข้อมูล</h3><div id="sources"><span class="muted">กำลังตรวจสอบ…</span></div></div></aside></div><div class="foot" id="notice">ข้อมูลเพื่อสนับสนุนการติดตามและประสานงานเบื้องต้น</div></section></main><script>
-const thDate=s=>new Date(s+'T00:00:00+07:00').toLocaleDateString('th-TH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});fetch('./daily-report.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(d=>{document.querySelector('#reportDate').textContent=thDate(d.report_date);document.querySelector('#generatedAt').textContent=d.generated_at_th;const s=d.station_summary||{};for(const k of ['alert','offline','online','total'])document.querySelector('#'+k).textContent=(s[k]??0).toLocaleString('th-TH');document.querySelector('#notice').textContent=d.notice;document.querySelector('#sources').innerHTML=(d.sources||[]).map(x=>`<div class="source"><span class="dot ${x.ok?'ok':''}"></span><div><b>${x.name}</b><div class="muted">${x.ok?'เชื่อมต่อได้':'ควรตรวจสอบแหล่งข้อมูล'}</div></div></div>`).join('')}).catch(()=>{document.querySelector('#reportDate').textContent='ไม่สามารถโหลดข้อมูลรายวัน'});async function downloadPNG(){const b=document.querySelector('.btn.primary');b.textContent='กำลังสร้างภาพ…';const canvas=await html2canvas(document.querySelector('#capture'),{scale:2,useCORS:true,backgroundColor:'#ffffff'});const a=document.createElement('a');a.download='IEAT_Daily_Situation_'+new Date().toISOString().slice(0,10)+'.png';a.href=canvas.toDataURL('image/png');a.click();b.textContent='ดาวน์โหลด PNG'}
-</script></body></html>
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>รายงานสถานการณ์ประจำวัน | IEAT EMCC</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+      :root {
+        --p: #59267c;
+        --n: #17324d;
+        --r: #bf033b;
+        --o: #ff6908;
+        --g: #598c14;
+        --b: #0769ad;
+        --bg: #f3f6f8;
+        --line: #dde4ea;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: #253247;
+        font-family: Sarabun, sans-serif;
+        font-size: 16px;
+      }
+      .bar {
+        background: var(--n);
+        color: #fff;
+        padding: 16px 22px;
+      }
+      .bar-in {
+        max-width: 1500px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+      .bar h1 {
+        font-size: 22px;
+        margin: 0;
+      }
+      .bar p {
+        margin: 2px 0 0;
+        opacity: 0.8;
+        font-size: 13px;
+      }
+      .actions {
+        margin-left: auto;
+        display: flex;
+        gap: 8px;
+      }
+      .btn {
+        border: 0;
+        border-radius: 9px;
+        padding: 10px 13px;
+        background: #fff;
+        color: var(--n);
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .btn.primary {
+        background: var(--p);
+        color: #fff;
+      }
+      .wrap {
+        max-width: 1500px;
+        margin: auto;
+        padding: 18px;
+      }
+      .report {
+        background: #fff;
+        border-radius: 16px;
+        padding: 18px;
+        box-shadow: 0 5px 22px #17324d12;
+      }
+      .report-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 12px;
+      }
+      .report-head h2 {
+        margin: 0;
+        font-size: 22px;
+      }
+      .muted {
+        color: #6c7888;
+      }
+      .kpis {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin: 15px 0;
+      }
+      .kpi {
+        padding: 14px;
+        border-radius: 12px;
+      }
+      .kpi b {
+        display: block;
+        font-size: 26px;
+      }
+      .kpi span {
+        font-size: 13px;
+      }
+      .red {
+        background: #fdecef;
+        color: var(--r);
+      }
+      .orange {
+        background: #fff2e8;
+        color: var(--o);
+      }
+      .green {
+        background: #edf5e4;
+        color: var(--g);
+      }
+      .blue {
+        background: #e5f2fb;
+        color: var(--b);
+      }
+      .layout {
+        display: grid;
+        grid-template-columns: 1.55fr 0.75fr;
+        gap: 14px;
+      }
+      .map {
+        height: 600px;
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+      }
+      .side {
+        display: grid;
+        gap: 12px;
+      }
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 15px;
+      }
+      .card h3 {
+        margin: 0 0 10px;
+        font-size: 17px;
+      }
+      .links {
+        display: grid;
+        gap: 8px;
+      }
+      .links a {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        background: #f5f7f9;
+        border-radius: 8px;
+        color: var(--n);
+        text-decoration: none;
+      }
+      .source {
+        display: flex;
+        gap: 8px;
+        align-items: flex-start;
+        padding: 8px 0;
+        border-bottom: 1px solid #edf0f3;
+      }
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-top: 6px;
+        background: #99a3af;
+      }
+      .dot.ok {
+        background: var(--g);
+      }
+      .foot {
+        margin-top: 14px;
+        padding: 12px;
+        background: #f5f1f8;
+        border-radius: 10px;
+        font-size: 13px;
+        color: #5b4670;
+      }
+      .news-wrap { margin: 16px 0; }
+      .news-wrap h3 { margin: 0 0 10px; font-size: 20px; }
+      .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+      .news-item { border: 1px solid var(--line); border-radius: 12px; padding: 14px; background: #fff; }
+      .news-source { display: inline-block; padding: 3px 8px; border-radius: 999px; background: #f0e7f5; color: var(--p); font-size: 12px; font-weight: 700; }
+      .news-item h4 { font-size: 16px; margin: 9px 0 6px; }
+      .news-item p { font-size: 13px; color: #606d7e; margin: 0; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
+      .news-item a { display: inline-block; margin-top: 10px; color: var(--p); font-weight: 700; text-decoration: none; }
+      .keyword { display: inline-block; margin: 8px 4px 0 0; padding: 2px 6px; border-radius: 5px; background: #fff1e8; color: #a74608; font-size: 11px; }
+      @media (max-width: 900px) {
+        .kpis {
+          grid-template-columns: 1fr 1fr;
+        }
+        .layout {
+          grid-template-columns: 1fr;
+        }
+        .map {
+          height: 480px;
+        }
+        .news-grid { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 560px) {
+        .bar-in,
+        .report-head {
+          display: block;
+        }
+        .actions {
+          margin-top: 10px;
+        }
+        .wrap {
+          padding: 9px;
+        }
+        .report {
+          padding: 12px;
+        }
+        .map {
+          height: 420px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="bar">
+      <div class="bar-in">
+        <div>
+          <h1>รายงานสถานการณ์ประจำวัน</h1>
+          <p>ข้อมูลสนับสนุนนิคมอุตสาหกรรมและการรับมือเหตุฉุกเฉิน</p>
+        </div>
+        <div class="actions">
+          <button class="btn" onclick="location.href='./hub.html'">
+            กลับ Hub</button
+          ><button class="btn primary" onclick="downloadPNG()">
+            ดาวน์โหลด PNG
+          </button>
+        </div>
+      </div>
+    </header>
+    <main class="wrap">
+      <section class="report" id="capture">
+        <div class="report-head">
+          <div>
+            <h2>ภาพรวมสถานการณ์และแผนที่เฝ้าระวัง</h2>
+            <div class="muted">
+              ประจำวันที่ <span id="reportDate">กำลังโหลด…</span>
+            </div>
+          </div>
+          <div class="muted">
+            จัดทำอัตโนมัติ <span id="generatedAt">—</span>
+          </div>
+        </div>
+        <div class="kpis">
+          <div class="kpi red">
+            <b id="alert">—</b><span>สถานีมีการแจ้งเตือน</span>
+          </div>
+          <div class="kpi orange">
+            <b id="offline">—</b><span>สถานี Offline</span>
+          </div>
+          <div class="kpi green">
+            <b id="online">—</b><span>สถานี Online</span>
+          </div>
+          <div class="kpi blue">
+            <b id="total">—</b><span>สถานีทั้งหมด</span>
+          </div>
+        </div>
+        <section class="news-wrap">
+          <h3>ข่าวสถานการณ์ที่เกี่ยวข้องกับนิคมอุตสาหกรรม</h3>
+          <div class="news-grid" id="news"><div class="muted">กำลังรวบรวมข่าวล่าสุด…</div></div>
+        </section>
+        <div class="layout">
+          <iframe
+            class="map"
+            title="แผนที่วิเคราะห์สถานการณ์"
+            src="https://experience.arcgis.com/experience/a6b0cc340ae343379c4f66951610f535"
+            loading="lazy"
+            allowfullscreen
+          ></iframe>
+          <aside class="side">
+            <div class="card">
+              <h3>ข้อมูลที่ควรตรวจสอบวันนี้</h3>
+              <div class="links">
+                <a href="./flood-report.html" target="_blank"
+                  ><span>สถานการณ์น้ำและฝน</span><b>เปิด →</b></a
+                ><a
+                  href="https://www.tmd.go.th/warning-and-events"
+                  target="_blank"
+                  ><span>ประกาศเตือนภัย</span><b>เปิด →</b></a
+                ><a href="https://earthquake.tmd.go.th/" target="_blank"
+                  ><span>แผ่นดินไหวล่าสุด</span><b>เปิด →</b></a
+                ><a href="./index.html" target="_blank"
+                  ><span>สถานการณ์ e‑Monitoring</span><b>เปิด →</b></a
+                >
+              </div>
+            </div>
+            <div class="card">
+              <h3>สถานะแหล่งข้อมูล</h3>
+              <div id="sources"><span class="muted">กำลังตรวจสอบ…</span></div>
+            </div>
+          </aside>
+        </div>
+        <div class="foot" id="notice">
+          ข้อมูลเพื่อสนับสนุนการติดตามและประสานงานเบื้องต้น
+        </div>
+      </section>
+    </main>
+    <script>
+      const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" })[c]);
+      const thDate = (s) =>
+        new Date(s + "T00:00:00+07:00").toLocaleDateString("th-TH", {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        });
+      fetch("./daily-report.json?t=" + Date.now(), { cache: "no-store" })
+        .then((r) => r.json())
+        .then((d) => {
+          document.querySelector("#reportDate").textContent = thDate(
+            d.report_date,
+          );
+          document.querySelector("#generatedAt").textContent =
+            d.generated_at_th;
+          const s = d.station_summary || {};
+          for (const k of ["alert", "offline", "online", "total"])
+            document.querySelector("#" + k).textContent = (
+              s[k] ?? 0
+            ).toLocaleString("th-TH");
+          document.querySelector("#notice").textContent = d.notice;
+          document.querySelector("#news").innerHTML = (d.news || []).map((n) => `<article class="news-item"><span class="news-source">${esc(n.source)}</span><h4>${esc(n.title)}</h4><p>${esc(n.summary)}</p><div>${(n.matched_keywords || []).map((k) => `<span class="keyword">${esc(k)}</span>`).join("")}</div><a href="${esc(n.url)}" target="_blank" rel="noopener">อ่านจากแหล่งข่าว →</a></article>`).join("") || '<div class="muted">ยังไม่มีข่าวที่ผ่านการคัดกรองในรอบนี้</div>';
+          document.querySelector("#sources").innerHTML = (d.sources || [])
+            .map(
+              (x) =>
+                `<div class="source"><span class="dot ${x.ok ? "ok" : ""}"></span><div><b>${x.name}</b><div class="muted">${x.ok ? "เชื่อมต่อได้" : "ควรตรวจสอบแหล่งข้อมูล"}</div></div></div>`,
+            )
+            .join("");
+        })
+        .catch(() => {
+          document.querySelector("#reportDate").textContent =
+            "ไม่สามารถโหลดข้อมูลรายวัน";
+        });
+      async function downloadPNG() {
+        const b = document.querySelector(".btn.primary");
+        b.textContent = "กำลังสร้างภาพ…";
+        const canvas = await html2canvas(document.querySelector("#capture"), {
+          scale: 2,
+          useCORS: true,
+          backgroundColor: "#ffffff",
+        });
+        const a = document.createElement("a");
+        a.download =
+          "IEAT_Daily_Situation_" +
+          new Date().toISOString().slice(0, 10) +
+          ".png";
+        a.href = canvas.toDataURL("image/png");
+        a.click();
+        b.textContent = "ดาวน์โหลด PNG";
+      }
+    </script>
+  </body>
+</html>
