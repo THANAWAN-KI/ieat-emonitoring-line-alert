@@ -82,7 +82,7 @@ button,select{font:inherit}
 
   <section class="filters" aria-label="ค้นหาและกรองข้อมูล">
     <div>
-      <input id="estateFilter" class="filter" type="search" list="estateOptions" placeholder="ค้นหานิคมอุตสาหกรรม" aria-label="ค้นหานิคมอุตสาหกรรม" oninput="applyFilters()">
+      <input id="estateFilter" class="filter" type="search" list="estateOptions" placeholder="ค้นหานิคมอุตสาหกรรม" aria-label="ค้นหานิคมอุตสาหกรรม" oninput="applyFilters();scheduleEstateMapFocus()" onchange="focusEstateOnMap()">
       <datalist id="estateOptions"></datalist>
     </div>
     <select id="systemFilter" class="filter" onchange="applyFilters()" aria-label="เลือกประเภทระบบ">
@@ -118,10 +118,10 @@ button,select{font:inherit}
     <div id="eventList" class="events"><div class="loading">กำลังโหลดข้อมูล…</div></div>
   </section>
 
-  <section class="section">
+  <section id="stationMapSection" class="section">
     <div class="section-head"><h2>ตำแหน่งสถานี</h2><span>แตะสถานีเพื่อดูข้อมูล</span></div>
     <div class="map-wrap">
-      <iframe class="map-frame" width="700" height="600" allow="local-network-access; geolocation" allowfullscreen loading="lazy" title="emcc geo hub" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&amp;webmap=590841b3f03147f38703740281ff87a6&amp;theme=light&amp;bookmarks=true&amp;legend=true&amp;information=true&amp;share=true&amp;scroll=true&amp;basemaps=true&amp;zoom=true&amp;center=103.64927288807529,13.120087367299625&amp;scale=9244648.868618"></iframe>
+      <iframe id="stationMapFrame" class="map-frame" width="700" height="600" allow="local-network-access; geolocation" allowfullscreen loading="lazy" title="emcc geo hub" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&amp;webmap=590841b3f03147f38703740281ff87a6&amp;theme=light&amp;bookmarks=true&amp;legend=true&amp;information=true&amp;share=true&amp;scroll=true&amp;basemaps=true&amp;zoom=true&amp;center=103.64927288807529,13.120087367299625&amp;scale=9244648.868618"></iframe>
       <div class="map-note">แผนที่ EMCC Geo Hub • ใช้เครื่องมือในแผนที่เพื่อค้นหาและตรวจสอบสถานี</div>
     </div>
   </section>
@@ -214,6 +214,45 @@ function eventHtml(s){
 function stationHtml(s){
   const alarm=alarmOf(s),link=mapLink(s),state=stateOf(s);
   return '<article class="station"><div class="station-name">'+esc(s.station_name||"-")+'</div><div class="station-data">'+esc(typeOf(s))+' • '+esc(estateOf(s))+'<br>'+(state==="ALERT"?'<span class="station-alert">'+esc(alarm)+'</span>':'<span class="station-normal">'+esc(s.status||"-")+'</span>')+' • '+esc(s.last_update||s.LastUpdate||"-")+'</div>'+(link?'<div class="station-actions"><a class="station-link" target="_blank" rel="noopener" href="'+link+'">ดูตำแหน่ง</a></div>':'')+'</article>';
+}
+
+let estateMapTimer=null;
+function stationCoordinates(station){
+  const lat=Number(station.latitude??station.lat??station.Latitude);
+  const lon=Number(station.longitude??station.lon??station.lng??station.Longitude);
+  return Number.isFinite(lat)&&Number.isFinite(lon)?{lat,lon}:null;
+}
+function scheduleEstateMapFocus(){
+  clearTimeout(estateMapTimer);
+  estateMapTimer=setTimeout(()=>{
+    const value=byId("estateFilter").value.trim();
+    const exact=(DATA?.all_stations||[]).some(station=>estateOf(station)===value);
+    if(exact)focusEstateOnMap();
+  },450);
+}
+function focusEstateOnMap(){
+  if(!DATA)return;
+  const estate=byId("estateFilter").value.trim();
+  if(!estate)return;
+  const points=(DATA.all_stations||[])
+    .filter(station=>estateOf(station)===estate)
+    .map(stationCoordinates).filter(Boolean);
+  const mapSection=byId("stationMapSection"),frame=byId("stationMapFrame");
+  if(!points.length){
+    mapSection?.scrollIntoView({behavior:"smooth",block:"start"});
+    return;
+  }
+  const lat=points.reduce((sum,p)=>sum+p.lat,0)/points.length;
+  const lon=points.reduce((sum,p)=>sum+p.lon,0)/points.length;
+  const latSpan=Math.max(...points.map(p=>p.lat))-Math.min(...points.map(p=>p.lat));
+  const lonSpan=Math.max(...points.map(p=>p.lon))-Math.min(...points.map(p=>p.lon));
+  const span=Math.max(latSpan,lonSpan);
+  const scale=span>.5?500000:span>.2?250000:span>.08?120000:span>.03?70000:35000;
+  const url=new URL(frame.src);
+  url.searchParams.set("center",lon.toFixed(6)+","+lat.toFixed(6));
+  url.searchParams.set("scale",String(scale));
+  frame.src=url.toString();
+  mapSection.scrollIntoView({behavior:"smooth",block:"start"});
 }
 function applyFilters(){
   if(!DATA)return;
