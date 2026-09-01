@@ -23,7 +23,7 @@
     .grid{display:grid;gap:20px}
     .national-dashboard{display:grid;grid-template-columns:minmax(300px,.72fr) minmax(500px,1.25fr) minmax(500px,1.05fr);gap:18px;margin-bottom:20px;align-items:stretch}
     .national-column{display:grid;gap:16px}.national-alert{padding:20px;background:#fff1ec;border:1px solid #ffd4c5;border-radius:20px}.national-alert b{display:block;color:#b53b13;font-size:19px;font-weight:500;margin-bottom:8px}.national-alert p{margin:0;color:#6d5047;line-height:1.6}
-    .radar-card{padding:0;display:flex;flex-direction:column;background:transparent;border:0;box-shadow:none}.radar-card h2{font-size:19px;font-weight:500;margin:0}.radar-card small{color:var(--muted)}.radar-card img{width:100%;height:330px;object-fit:contain;margin:12px 0;background:transparent;border:0;border-radius:0}.radar-actions{display:flex;gap:8px}.radar-actions a{flex:1;text-align:center;text-decoration:none;border-radius:11px;padding:10px;font-weight:500}.radar-actions .download{background:var(--purple);color:#fff}.radar-actions .open{background:#f2edf4;color:var(--purple)}
+    .radar-card{padding:0;display:flex;flex-direction:column;background:transparent;border:0;box-shadow:none}.radar-card h2{font-size:19px;font-weight:500;margin:0}.radar-card small{color:var(--muted)}.radar-card img{width:100%;height:330px;object-fit:contain;margin:12px 0;background:transparent;border:0;border-radius:0}.radar-actions{display:flex;gap:8px}.radar-actions a,.radar-actions button{flex:1;border:0;text-align:center;text-decoration:none;border-radius:11px;padding:10px;font:inherit;font-weight:500;cursor:pointer}.radar-actions .download{background:var(--purple);color:#fff}.radar-actions .open{background:#f2edf4;color:var(--purple)}
     .national-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;font-family:"Noto Sans Thai",sans-serif}.national-kpi{padding:20px 22px;min-height:155px;position:relative}.national-kpi .n-icon{width:52px;height:52px;display:grid;place-items:center;background:transparent;border:0}.national-kpi .n-icon img{display:block;width:52px;height:52px;object-fit:contain}.national-kpi h2{font-size:18px;line-height:1.45;font-weight:600;margin:10px 0 0;color:#111827}.national-kpi strong{display:block;color:#ef101f;font-size:56px;line-height:1.05;font-weight:700;margin-top:8px}.national-kpi span{color:#4b5563;font-size:16px;line-height:1.5}.source-link{display:inline-block;margin-top:8px;color:var(--blue);font-size:13px;text-decoration:none}.source-link:hover{text-decoration:underline}.warning-source{display:inline-block;margin-top:12px;color:#9b3212;font-weight:500;text-decoration:none}
     .province-watch{grid-column:1/-1;padding:18px}.province-watch h2{font-size:18px;font-weight:500;margin:0 0 10px}.province-list{display:flex;flex-wrap:wrap;gap:8px}.province-list span,.province-list a{display:inline-block;padding:7px 11px;border-radius:999px;background:#f4eff6;color:var(--purple);font-size:14px;text-decoration:none;cursor:pointer}.province-list a:hover{background:var(--purple);color:#fff;transform:translateY(-1px)}.province-list .empty{color:var(--muted);background:#f4f5f7}
     .overview-map-card{grid-column:auto;overflow:hidden;min-height:640px;position:relative}.overview-map-card iframe{display:block;border:0;width:100%;height:100%;min-height:640px}.overview-map-label{position:absolute;z-index:2;top:14px;left:14px;background:#fffffff0;padding:10px 13px;border-radius:11px;box-shadow:0 4px 14px #26354c22;font-weight:500}
@@ -86,7 +86,7 @@
 </head>
 <body>
   <header class="topbar"><div class="top-inner">
-    <div class="brand"><b>IEAT Flood Intelligence</b><span>ข้อมูลสนับสนุนผู้ประกอบการและการตัดสินใจเชิงพื้นที่</span></div>
+    <div class="brand"><b>สถานการณ์น้ำของนิคมอุตสาหกรรมทั่วประเทศไทย</b><span>สรุปข้อมูลจากสถานีฝนและระดับน้ำที่อยู่ใกล้พื้นที่นิคมอุตสาหกรรมเท่านั้น</span></div>
     <nav class="nav" aria-label="เมนูหลัก">
       <button class="active" data-view="overview">ภาพรวม</button>
       <button data-view="warning">พื้นที่เฝ้าระวัง</button>
@@ -97,11 +97,11 @@
 
   <main class="container">
     <section class="view active" id="overview">
-      <div class="hero"><div><div class="eyebrow">ภาพรวมสถานการณ์ล่าสุด</div><h1>สถานการณ์น้ำของนิคมอุตสาหกรรมทั่วประเทศไทย</h1><p>สรุปข้อมูลจากสถานีฝนและระดับน้ำที่อยู่ใกล้พื้นที่นิคมอุตสาหกรรมเท่านั้น</p></div><div class="updated"><strong class="outEstate"></strong><span class="outPeriod"></span></div></div>
+      <div class="hero"><div><div class="eyebrow">ภาพรวมสถานการณ์ล่าสุด</div><h1>ภาพรวมสถานการณ์น้ำใกล้พื้นที่นิคมอุตสาหกรรม</h1><p>ติดตามข้อมูลสำคัญสำหรับพื้นที่นิคมอุตสาหกรรมทั่วประเทศ</p></div><div class="updated"><strong class="outEstate"></strong><span class="outPeriod"></span></div></div>
       <section class="national-dashboard" aria-label="ภาพรวมการเตือนภัยระดับประเทศ">
         <div class="national-column">
           <article class="national-alert"><b>ประกาศสำคัญและข้อมูลที่ต้องเฝ้าระวัง</b><p id="nationalAlertText">กำลังตรวจสอบประกาศล่าสุดจากกรมอุตุนิยมวิทยา</p><a class="warning-source" id="nationalWarningLink" href="https://tmd.go.th/warning-and-events/warning-storm" target="_blank" rel="noopener">อ่านประกาศกรมอุตุนิยมวิทยา</a></article>
-          <article class="radar-card"><h2>เรดาร์ฝนคอมโพสิตล่าสุด</h2><small id="radarUpdated">ภาพเรดาร์คอมโพสิตล่าสุดจากกรมอุตุนิยมวิทยา</small><a href="data/radar_latest.gif" target="_blank" rel="noopener"><img src="data/radar_latest.gif" alt="ภาพเรดาร์คอมโพสิตล่าสุดทั่วประเทศไทย" onerror="this.src='https://satda.tmd.go.th/wp-content/uploads/data/radar_composite/max/qpf_202608210600.gif'"></a><div class="radar-actions"><a class="open" href="data/radar_latest.gif" target="_blank" rel="noopener">เปิดภาพเต็ม</a><a class="download" href="data/radar_latest.gif" download="IEAT_เรดาร์ฝนล่าสุด.gif">ดาวน์โหลด GIF</a></div></article>
+          <article class="radar-card"><h2>เรดาร์ฝนคอมโพสิตล่าสุด</h2><small id="radarUpdated">ภาพเรดาร์คอมโพสิตล่าสุดจากกรมอุตุนิยมวิทยา</small><a href="data/radar_latest.gif" target="_blank" rel="noopener"><img id="radarImage" src="data/radar_latest.gif" alt="ภาพเรดาร์คอมโพสิตล่าสุดทั่วประเทศไทย" onerror="this.src='https://satda.tmd.go.th/wp-content/uploads/data/radar_composite/max/qpf_202608210600.gif'"></a><div class="radar-actions"><a class="open" href="data/radar_latest.gif" target="_blank" rel="noopener">เปิดภาพเต็ม</a><button class="download" id="downloadRadarPng" type="button">ดาวน์โหลด PNG</button></div></article>
         </div>
         <div class="national-cards">
           <article class="card national-kpi"><div class="n-icon"><img src="https://api.iconify.design/meteocons/hurricane-fill.svg" alt=""></div><h2>พายุเข้าใกล้ประเทศไทย</h2><strong id="nationalStormCount">–</strong><span id="nationalStormLabel">กำลังตรวจสอบ</span><a class="source-link" href="https://www.thaiwater.net/" target="_blank" rel="noopener">ข้อมูลพายุ ThaiWater</a></article>
@@ -120,7 +120,7 @@
         <div class="card kpi"><span class="icon"><img src="assets/industrial-estate.svg" alt=""></span><div><strong id="outRouteCount">–</strong><span>สถานีที่ต้องติดตามใกล้นิคมฯ</span></div></div>
       </div>
       <div class="grid overview-grid">
-        <article class="card"><div class="card-head"><div><h2>สถานการณ์และแนวทางดำเนินการ</h2><span>แยกข้อมูลคาดการณ์ออกจากผลกระทบที่ยืนยันแล้ว</span></div><span class="pill" id="outLevel"></span></div><div class="status-card"><div class="alert"><div class="alert-line"><b>สถานการณ์ล่าสุด</b><b id="outTrend"></b></div><h3 class="outEstate"></h3><div class="text" id="outSummary"></div></div><div class="action"><b>สิ่งที่ผู้ประกอบการควรดำเนินการ</b><div class="text" id="outAction"></div></div></div></article>
+        <article class="card"><div class="card-head"><div><h2>สถานการณ์ล่าสุด</h2><span>แยกข้อมูลคาดการณ์ออกจากผลกระทบที่ยืนยันแล้ว</span></div><span class="pill" id="outLevel"></span></div><div class="status-card"><div class="alert"><div class="alert-line"><b>สรุปสถานการณ์</b><b id="outTrend"></b></div><h3 class="outEstate"></h3><div class="text" id="outSummary"></div></div></div></article>
         <article class="card"><div class="card-head"><div><h2>ตัวชี้วัดเฝ้าระวังทั่วประเทศ</h2><span>เฉพาะสถานีที่สัมพันธ์กับพื้นที่นิคมฯ</span></div></div><div class="bars"><div class="barrow"><span>ฝนสูงสุด 24 ชม.</span><div class="track"><div class="bar" id="rainBar"></div></div><b id="outRain"></b></div><div class="barrow"><span>นิคมฯ ใกล้ระดับน้ำผิดปกติ</span><div class="track"><div class="bar teal" id="criticalBar"></div></div><b id="outCritical2"></b></div><div class="barrow"><span>สถานีที่ต้องติดตาม</span><div class="track"><div class="bar" id="routeBar"></div></div><b id="outRoute2"></b></div><div class="source-note"><b>สถานะข้อมูล:</b> <span id="outVerify1"></span><br><b>รายงานครั้งถัดไป:</b> <span id="outNext"></span></div></div></article>
       </div>
     </section>
@@ -380,6 +380,31 @@
     window.addEventListener("ieat:data-ready",event=>{window.IEAT_LIVE_DATA=event.detail;renderExecutiveReport(window.reportPeriod||"24h")});
     function upload(input,box){input.onchange=()=>{const f=input.files[0];if(!f)return;const reader=new FileReader();reader.onload=()=>box.innerHTML=`<img src="${reader.result}" alt="ภาพพยากรณ์">`;reader.readAsDataURL(f)}}upload($("day1File"),$("day1Box"));upload($("day5File"),$("day5Box"));
     const now=new Date(),end=new Date(now.getTime()+86400000),local=d=>new Date(d-d.getTimezoneOffset()*60000).toISOString().slice(0,16);$("startIn").value=local(now);$("endIn").value=local(end);sync();
-  </script>
+  
+    // Export the currently displayed radar frame as a real PNG file.
+    const radarDownloadButton=$("downloadRadarPng");
+    if(radarDownloadButton) radarDownloadButton.addEventListener("click",()=>{
+      const image=$("radarImage");
+      if(!image||!image.complete){alert("ภาพเรดาร์ยังโหลดไม่เสร็จ กรุณาลองอีกครั้ง");return}
+      try{
+        const canvas=document.createElement("canvas");
+        canvas.width=image.naturalWidth||image.width;
+        canvas.height=image.naturalHeight||image.height;
+        const context=canvas.getContext("2d");
+        context.drawImage(image,0,0,canvas.width,canvas.height);
+        canvas.toBlob(blob=>{
+          if(!blob){alert("ไม่สามารถสร้างไฟล์ PNG ได้");return}
+          const link=document.createElement("a");
+          const url=URL.createObjectURL(blob);
+          link.href=url;
+          link.download="IEAT_เรดาร์ฝนล่าสุด.png";
+          link.click();
+          setTimeout(()=>URL.revokeObjectURL(url),1000);
+        },"image/png");
+      }catch(error){
+        alert("ไม่สามารถดาวน์โหลด PNG ได้ กรุณาเปิดภาพเต็มแล้วบันทึกภาพ");
+      }
+    });
+</script>
 </body>
 </html>
