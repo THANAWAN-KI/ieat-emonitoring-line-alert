@@ -81,7 +81,8 @@
     if(host)host.style.zoom="1";
     sheet.classList.add("report-exporting");
     try{
-      const canvas=await html2canvas(sheet,{scale:2,backgroundColor:"#ffffff",useCORS:true,logging:false,width:794,height:1123,windowWidth:1200});
+      const landscape=sheet.classList.contains("landscape-sheet"),width=landscape?1123:794,height=landscape?794:1123;
+      const canvas=await html2canvas(sheet,{scale:2,backgroundColor:"#ffffff",useCORS:true,logging:false,width,height,windowWidth:landscape?1280:1200,scrollX:0,scrollY:0});
       return await new Promise((resolve,reject)=>canvas.toBlob(blob=>blob?resolve(blob):reject(new Error("PNG blob unavailable")),"image/png",1));
     }finally{
       sheet.classList.remove("report-exporting");
