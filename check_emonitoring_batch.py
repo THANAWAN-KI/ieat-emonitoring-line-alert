@@ -64,8 +64,27 @@ def build_preview_events() -> list[dict]:
     ]
 
 
+def build_hourly_alarm_events(
+    alert_stations: list[dict],
+) -> list[dict]:
+    """สร้างเหตุการณ์จากค่าที่มี Alarm ทั้งหมด เพื่อแจ้งซ้ำทุกชั่วโมง"""
+    return [
+        {
+            **station,
+            "event_type": "CURRENT_ALARM",
+            "event_reason": "ค่าพารามิเตอร์ที่ต้องติดตามประจำชั่วโมง",
+            "previous_snapshot": {},
+        }
+        for station in alert_stations
+    ]
+
+
 def main() -> int:
     current_time = base.now_thailand()
+    run_mode = os.getenv(
+        "EMONITORING_RUN_MODE",
+        "",
+    ).strip().lower()
     preview_mode = os.getenv(
         "LINE_PREVIEW_MODE",
         "",
@@ -102,12 +121,23 @@ def main() -> int:
         return 0
 
     current_minutes = current_time.hour * 60 + current_time.minute
-    if not 8 * 60 + 30 <= current_minutes <= 16 * 60 + 59:
-        print("อยู่นอกช่วงเวลา 08:30-16:59 น. — ไม่ส่ง LINE")
-        return 0
 
-    # รอบเวลา 16:30 (เผื่อ GitHub Actions เริ่มช้า) เป็นรายงานประจำวัน
-    daily_summary_mode = current_time.hour == 16
+    # GitHub Workflow ระบุโหมดจากรอบ cron โดยตรง จึงไม่คลาดเคลื่อน
+    # แม้ GitHub Actions จะเริ่มทำงานช้ากว่าเวลาที่กำหนด
+    daily_summary_mode = (
+        run_mode == "daily_summary"
+        or (
+            not run_mode
+            and current_minutes >= 16 * 60 + 30
+        )
+    )
+
+    if (
+        not daily_summary_mode
+        and not 8 * 60 + 30 <= current_minutes <= 16 * 60 + 30
+    ):
+        print("อยู่นอกช่วงเวลาแจ้งเตือน 08:30-16:30 น. — ไม่ส่ง LINE")
+        return 0
 
     print("=" * 72)
     print("IEAT e-Monitoring LINE Alert - Quota Saver")
@@ -125,22 +155,10 @@ def main() -> int:
     alert_stations = base.filter_alert_features(features)
     type_stats = base.calculate_type_stats(all_stations)
 
-    # ใช้เฉพาะข้อมูลที่ LastUpdate เป็นวันปัจจุบันสำหรับ LINE
-    # Dashboard ยังคงแสดงข้อมูลทั้งหมดเพื่อให้ตรวจสอบข้อมูลล่าช้าได้
-    notification_stations = base.filter_stations_updated_today(
-        all_stations
-    )
-    notification_alert_stations = [
-        station
-        for station in notification_stations
-        if base.full_text(
-            station.get("parameter_alarm"),
-            "",
-        ).strip()
-    ]
-    notification_type_stats = base.calculate_type_stats(
-        notification_stations
-    )
+    # ใช้ข้อมูลทั้งหมดในการแจ้งเตือน แม้ LastUpdate ยังไม่ใช่วันปัจจุบัน
+    # เนื่องจากแหล่งข้อมูลต้นทางอาจยังไม่ได้รับการอัปเดต
+    notification_stations = all_stations
+    notification_alert_stations = alert_stations
 
     base.write_status_file(
         all_stations=all_stations,
@@ -148,33 +166,20 @@ def main() -> int:
         type_stats=type_stats,
     )
 
-    previous_state = base.load_alert_state()
-    detected_events = base.detect_notification_events(
-        previous_state,
-        all_stations,
+    # แจ้งค่าที่มี Alarm ทั้งหมดซ้ำทุก 1 ชั่วโมง
+    # ไม่รอให้ค่าเปลี่ยน และไม่กรองทิ้งเมื่อข้อมูลต้นทางล่าช้า
+    events = build_hourly_alarm_events(
+        notification_alert_stations
     )
-    # Alarm ต้องเป็นข้อมูลวันปัจจุบันเท่านั้น
-    # แต่สถานี OFFLINE จำเป็นต้องใช้เวลาข้อมูลล่าสุดที่ค้างอยู่
-    events = [
-        event
-        for event in detected_events
-        if (
-            event.get("event_type") in {"OFFLINE", "ONLINE"}
-            or base.station_updated_today(event)
-        )
-    ]
 
     print(f"สถานีทั้งหมด: {len(all_stations)}")
-    print(f"สถานีข้อมูลวันที่ปัจจุบัน: {len(notification_stations)}")
+    print(f"สถานีที่ใช้แจ้งเตือนทั้งหมด: {len(notification_stations)}")
     print(
-        "สถานีข้อมูลวันที่ปัจจุบันที่มี Alarm: "
+        "สถานีที่มี Alarm สำหรับแจ้งเตือนรอบนี้: "
         f"{len(notification_alert_stations)}"
     )
-    print(
-        "สถานี Alarm ที่ถูกตัดออกเพราะข้อมูลไม่ใช่วันนี้: "
-        f"{len(alert_stations) - len(notification_alert_stations)}"
-    )
-    print(f"เหตุการณ์ใหม่/เปลี่ยนแปลง: {len(events)}")
+    print("ใช้ข้อมูลทั้งหมด แม้วันที่ข้อมูลต้นทางยังไม่เป็นปัจจุบัน")
+    print(f"รายการแจ้งเตือนประจำชั่วโมง: {len(events)}")
     print(
         "เกณฑ์แจ้งสถานี OFFLINE ต่อเนื่อง: "
         f"{base.offline_threshold_minutes()} นาที"
@@ -222,7 +227,7 @@ def main() -> int:
 
     if not events:
         base.save_alert_state(all_stations)
-        print("LINE: ไม่ส่ง — ไม่มีการเปลี่ยนแปลงจากข้อมูลวันที่ปัจจุบัน")
+        print("LINE: ไม่ส่ง — ไม่พบสถานีที่มีค่าพารามิเตอร์ Alarm")
         print("โควตารอบนี้: 0 ข้อความ")
         return 0
 
@@ -244,7 +249,7 @@ def main() -> int:
         return 1
 
     base.save_alert_state(all_stations)
-    print("ส่ง LINE สำเร็จตามข้อมูลวันที่ปัจจุบัน")
+    print("ส่ง LINE แจ้งค่าพารามิเตอร์ประจำชั่วโมงสำเร็จ")
     print("บันทึก alert_state.json แล้ว")
     print("Dashboard อัปเดตแล้ว")
     return 0
