@@ -171,6 +171,14 @@
     .tables-overview-grid .forecast-period{color:#000!important;background:#eee;border:1px solid #aaa;border-radius:3px}
     @media(max-width:1180px){.top-overview-grid{grid-template-columns:1fr}.top-overview-grid>.operations-radar{min-height:0}.top-overview-grid>.operations-radar img{height:300px}.tables-overview-grid{grid-template-columns:1fr}.tables-overview-grid .nearby-watch-table{grid-column:auto}}
     @media(max-width:680px){.top-overview-metrics .national-cards-dashboard{grid-template-columns:repeat(2,minmax(0,1fr))}.tables-overview-grid{gap:12px}.tables-overview-grid .table-section-head{padding:10px}.tables-overview-grid .table{font-size:12px}}
+    /* Clean full-width summary after removing the radar */
+    .top-overview-grid{display:block;margin-bottom:20px}.top-overview-metrics{width:100%}
+    .kpis>.kpi:nth-child(2) .icon,.kpis>.kpi:nth-child(3) .icon{background:#fff;border-color:transparent;box-shadow:none}
+    .top-overview-metrics .kpis{gap:16px}.top-overview-metrics .kpi{min-height:112px;background:#fff;border:1px solid #d7e1e7;border-radius:14px;box-shadow:0 5px 16px rgba(0,75,121,.06)}
+    .top-overview-metrics .national-cards-dashboard{gap:16px}.top-overview-metrics .national-kpi{min-height:150px;background:#fff;border:1px solid #d7e1e7;border-radius:14px;box-shadow:0 5px 16px rgba(0,75,121,.06)}
+    .top-overview-metrics .kpi:hover,.top-overview-metrics .national-kpi:hover{transform:translateY(-1px);border-color:#9db9c8;box-shadow:0 8px 20px rgba(0,75,121,.09)}
+    .top-overview-metrics .kpi strong{font-weight:600}.top-overview-metrics .kpi span{color:#405967}.top-overview-metrics .national-kpi h2{color:#000}.top-overview-metrics .national-kpi span{color:#405967}
+    @media(max-width:680px){.top-overview-metrics .kpis{gap:10px}.top-overview-metrics .national-cards-dashboard{gap:10px}.top-overview-metrics .kpi,.top-overview-metrics .national-kpi{min-height:124px}}
   </style>
 
   <style id="portrait-map-report-theme">
@@ -219,7 +227,7 @@
         </div>
       </section>
         </div>
-        <article class="radar-card operations-radar"><h2>เรดาร์ฝนคอมโพสิตล่าสุด</h2><small id="radarUpdated">ภาพเรดาร์คอมโพสิตล่าสุดจากกรมอุตุนิยมวิทยา</small><a href="data/radar_latest.gif" target="_blank" rel="noopener"><img id="radarImage" src="data/radar_latest.gif" alt="ภาพเรดาร์คอมโพสิตล่าสุดทั่วประเทศไทย" onerror="this.src='https://satda.tmd.go.th/wp-content/uploads/data/radar_composite/max/qpf_202608210600.gif'"></a><div class="radar-actions"><a class="open" href="data/radar_latest.gif" target="_blank" rel="noopener">เปิดภาพเต็ม</a><button class="download" id="downloadRadarPng" type="button">ดาวน์โหลด PNG</button></div></article>
+        
       </div>
 
       <section class="operations-dashboard" aria-label="แผนที่และข้อมูลติดตามสถานการณ์">
