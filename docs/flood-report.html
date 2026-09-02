@@ -94,6 +94,23 @@
 
     @media(max-width:980px){.top-inner{flex-wrap:wrap}.brand{min-width:0;flex:1}.nav{order:3;width:100%;overflow-x:auto;margin:0}.nav button{flex:1}.edit-btn{margin-left:auto}.container{padding-top:64px}.view.active{padding:22px}.hero{margin-top:-94px}.hero h1{font-size:34px}.national-dashboard{grid-template-columns:1fr}.overview-map-card{grid-column:auto;grid-row:auto}.kpis{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:680px){body{font-size:15px}.top-inner{padding:8px 14px}.brand span{display:none}.nav button{padding:8px 12px}.container{padding:55px 10px 45px}.view.active{padding:14px;border-radius:14px}.hero{margin:-78px 4px 34px;display:block}.hero h1{font-size:29px}.hero p{display:none}.updated{text-align:left;margin-top:4px}.national-cards,.kpis,.flash-flood-kpis,.overview-grid,.warning-top,.warning-map-layout{grid-template-columns:1fr}.national-kpi{min-height:145px}.overview-map-card,.overview-map-card iframe{min-height:470px}.warning-map-card{height:500px}.card-head{padding:17px 17px 10px}.status-card,.bars{padding-left:17px;padding-right:17px}.rain-image-wrap{grid-template-columns:1fr;padding:0 16px 16px}.report{padding:15px;aspect-ratio:auto}.executive-report{min-width:980px}.info-wrap{overflow-x:auto}}
+    /* Responsive operational dashboard */
+    .top-inner,.container{max-width:1480px}
+    .container{padding-left:clamp(16px,2.5vw,38px);padding-right:clamp(16px,2.5vw,38px)}
+    #warning.view.active{padding:clamp(20px,2.4vw,38px)}
+    .estate-section-title h2{font-size:clamp(23px,2vw,30px)}
+    .card,.national-alert,.radar-card{border-radius:18px;box-shadow:0 8px 24px rgba(31,68,99,.09);border:1px solid #dde6ed}
+    .card:hover{box-shadow:0 12px 28px rgba(31,68,99,.13)}
+    .kpi{background:linear-gradient(145deg,#fff,#f8fbfe);min-height:132px}.national-kpi{background:linear-gradient(145deg,#fff,#f5f9fd)}
+    .operations-dashboard{grid-template-columns:minmax(360px,.56fr) minmax(0,1.44fr);gap:22px}
+    .operations-side{grid-column:1}.operations-map{grid-column:2;min-height:1120px}
+    .operations-map iframe{min-height:1120px;background:#eef3f7}
+    .google-flood-map{position:relative}.open-flood-hub{position:absolute;z-index:4;right:14px;top:14px;background:#1769c2;color:#fff;text-decoration:none;border-radius:10px;padding:10px 14px;font-size:14px;font-weight:600;box-shadow:0 5px 16px #173b6033}.map-embed-note{position:absolute;z-index:3;left:14px;right:14px;bottom:14px;padding:9px 12px;border-radius:9px;background:#fffffff0;color:#586672;font-size:12px;text-align:center;box-shadow:0 3px 12px #0002}
+    .operations-radar{min-height:420px}.operations-radar img{height:330px;object-fit:contain}
+    .estate-table-layout{display:block;margin-top:28px}.warning-table{padding:0;overflow:hidden;margin-top:20px}.table-section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;padding:21px 24px 14px}.table-section-head h2{font-size:21px;margin:0}.table-section-head p{margin:4px 0 0;color:var(--muted);font-size:14px}.table-section-head>span{color:#1769c2;background:#edf6ff;padding:7px 11px;border-radius:999px;font-size:13px;white-space:nowrap}.table-scroll{overflow-x:auto}.table th{background:#edf4fa;color:#405261;font-weight:600}.table tbody tr:hover{background:#f7fbff}.table-empty{text-align:center!important;color:#7b8390;padding:28px!important}
+    @media(max-width:1100px){.operations-dashboard{grid-template-columns:minmax(310px,.7fr) minmax(0,1.3fr)}.operations-map,.operations-map iframe{min-height:1020px}}
+    @media(max-width:850px){.operations-dashboard{grid-template-columns:1fr}.operations-side,.operations-map{grid-column:1}.operations-map,.operations-map iframe{min-height:620px}.national-cards-dashboard{grid-template-columns:repeat(2,minmax(0,1fr))}.table-section-head{align-items:flex-start;flex-direction:column}}
+    @media(max-width:560px){#warning.view.active{padding:14px}.national-cards-dashboard,.kpis{grid-template-columns:1fr}.operations-map,.operations-map iframe{min-height:520px}.open-flood-hub{font-size:12px;padding:8px 10px}.map-embed-note{font-size:11px}.table-section-head{padding:17px}.operations-radar img{height:280px}}
   </style>
 
   <style id="portrait-map-report-theme">
@@ -120,7 +137,6 @@
 
   <main class="container">
     <section class="view active" id="warning">
-      <div class="hero"><div><div class="eyebrow">พื้นที่เฝ้าระวัง 24/48 ชั่วโมง</div><h1>จัดลำดับพื้นที่เสี่ยงและสถานีที่ต้องติดตาม</h1><p>ใช้คัดกรองพื้นที่เพื่อประสานงานและเตรียมความพร้อม โดยต้องตรวจสอบกับประกาศทางการและข้อมูลภาคสนามอีกครั้ง</p></div><div class="updated"><strong class="outEstate"></strong><span class="outPeriod"></span></div></div>
       <section class="watch-dashboard-block" aria-labelledby="estateRiskTitle">
         <div class="estate-section-title"><h2 id="estateRiskTitle">ความเสี่ยงที่อาจสัมพันธ์กับนิคมอุตสาหกรรม</h2><p>วิเคราะห์สถานีฝนและระดับน้ำใกล้นิคมฯ เพื่อช่วยจัดลำดับพื้นที่ที่ควรติดตาม</p></div>
         <div class="grid kpis">
@@ -142,22 +158,27 @@
       </section>
 
       <section class="operations-dashboard" aria-label="แผนที่และข้อมูลติดตามสถานการณ์">
-        <article class="card operations-map"><div class="overview-map-label">Web Map สถานการณ์น้ำ</div><iframe name="floodMap" allow="local-network-access; geolocation" title="แผนที่สถานการณ์น้ำ" loading="lazy" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=3d24287ac6ea49cd823625ddad496e01&theme=light&scroll=false&center=99.68961690284046,17.632609262747895&scale=4622324.434309"></iframe></article>
         <div class="operations-side">
           <article class="national-alert"><b>ประกาศสำคัญและข้อมูลที่ต้องเฝ้าระวัง</b><p id="nationalAlertText">กำลังตรวจสอบประกาศล่าสุดจากกรมอุตุนิยมวิทยา</p><a class="warning-source" id="nationalWarningLink" href="https://tmd.go.th/warning-and-events/warning-storm" target="_blank" rel="noopener">อ่านประกาศกรมอุตุนิยมวิทยา</a></article>
           <article class="card nationwide-indicators"><div class="card-head"><div><h2>ตัวชี้วัดเฝ้าระวังทั่วประเทศ</h2><span>เฉพาะสถานีที่สัมพันธ์กับพื้นที่นิคมฯ</span></div></div><div class="bars"><div class="barrow"><span>ฝนสูงสุด 24 ชม.</span><div class="track"><div class="bar" id="rainBar"></div></div><b id="outRain"></b></div><div class="barrow"><span>นิคมฯ ใกล้ระดับน้ำผิดปกติ</span><div class="track"><div class="bar teal" id="criticalBar"></div></div><b id="outCritical2"></b></div><div class="barrow"><span>สถานีที่ต้องติดตาม</span><div class="track"><div class="bar" id="routeBar"></div></div><b id="outRoute2"></b></div><div class="source-note"><b>สถานะข้อมูล:</b> <span id="outVerify1"></span><br><b>รายงานครั้งถัดไป:</b> <span id="outNext"></span></div></div></article>
           <article class="radar-card operations-radar"><h2>เรดาร์ฝนคอมโพสิตล่าสุด</h2><small id="radarUpdated">ภาพเรดาร์คอมโพสิตล่าสุดจากกรมอุตุนิยมวิทยา</small><a href="data/radar_latest.gif" target="_blank" rel="noopener"><img id="radarImage" src="data/radar_latest.gif" alt="ภาพเรดาร์คอมโพสิตล่าสุดทั่วประเทศไทย" onerror="this.src='https://satda.tmd.go.th/wp-content/uploads/data/radar_composite/max/qpf_202608210600.gif'"></a><div class="radar-actions"><a class="open" href="data/radar_latest.gif" target="_blank" rel="noopener">เปิดภาพเต็ม</a><button class="download" id="downloadRadarPng" type="button">ดาวน์โหลด PNG</button></div></article>
         </div>
+        <article class="card operations-map google-flood-map">
+          <div class="overview-map-label">Google Flood Hub</div>
+          <a class="open-flood-hub" href="https://sites.research.google/floods/l/12.379867436903867/101.53101732880519/4.814091037167003" target="_blank" rel="noopener">เปิดแผนที่เต็มหน้าจอ</a>
+          <iframe allow="geolocation; fullscreen" referrerpolicy="strict-origin-when-cross-origin" title="Google Flood Hub แผนที่คาดการณ์น้ำท่วม" loading="lazy" src="https://sites.research.google/floods/l/12.379867436903867/101.53101732880519/4.814091037167003"></iframe>
+          <div class="map-embed-note">หากแผนที่ไม่แสดงเนื่องจากข้อจำกัดของ Google ให้กด “เปิดแผนที่เต็มหน้าจอ”</div>
+        </article>
       </section>
 
       <div hidden aria-hidden="true"><span id="nationalProvinceList"></span><span id="outLevel"></span><span id="outTrend"></span><span class="outEstate"></span><span id="outSummary"></span></div>
-      <div class="forecast-note"><b>ข้อควรทราบ:</b> ขอบเขตสีบนแผนที่เป็นพื้นที่เข้าเกณฑ์จากแบบจำลองคาดการณ์ ไม่ได้หมายความว่าทุกพื้นที่จะเกิดน้ำท่วม คลิกจังหวัดในรายการเพื่อซูมและตรวจรายละเอียดตำบล</div>
-      <div class="grid warning-map-layout">
-        <article class="card warning-map-card"><arcgis-embedded-map id="warningMapEmbed" item-id="3d24287ac6ea49cd823625ddad496e01" theme="light" legend-enabled information-enabled basemap-gallery-enabled center="102.05350939847203,13.89589285736592" scale="9244648.868618" portal-url="https://ieat.maps.arcgis.com" aria-label="แผนที่พื้นที่เสี่ยงน้ำท่วมฉับพลัน"></arcgis-embedded-map></article>
-        <aside class="card warning-area-panel"><h2 id="warningPanelTitle">พื้นที่เสี่ยงน้ำท่วมจากฝนสะสมใน 24 ชม. ข้างหน้า</h2><div class="warning-periods"><button class="active" type="button" data-period="24h">24 ชั่วโมง</button><button type="button" data-period="48h">48 ชั่วโมง</button></div><div id="warningAreaUpdated" style="color:var(--muted);font-size:14px;margin-bottom:8px">กำลังโหลดข้อมูล ThaiWater…</div><div class="warning-rank-head"><span>อันดับ (จังหวัด)</span><span style="text-align:right">ฝนสะสม (มม.)</span></div><div id="warningAreaList"></div><a class="source-link" href="https://www.thaiwater.net/new4all/warning" target="_blank" rel="noopener">เปิดข้อมูลต้นทาง ThaiWater</a></aside>
+      <div class="grid warning-top estate-table-layout">
+        <article class="card warning-table estate-watch-table">
+          <div class="table-section-head"><div><h2>นิคมอุตสาหกรรมที่เข้าเกณฑ์เฝ้าระวัง</h2><p>จัดลำดับจากสถานีฝนและระดับน้ำผิดปกติภายในรัศมี 30 กิโลเมตร</p></div><span>ข้อมูลล่าสุดจากระบบ</span></div>
+          <div class="table-scroll"><table class="table"><thead><tr><th>ลำดับ</th><th>นิคมอุตสาหกรรม</th><th>สถานีผิดปกติ</th><th>ระยะใกล้ที่สุด</th><th>ฝนสูงสุด</th><th>สถานะ</th></tr></thead><tbody id="estateRanks"><tr><td colspan="6" class="table-empty">กำลังประมวลผลข้อมูล…</td></tr></tbody></table></div>
+        </article>
       </div>
-      <div class="grid warning-top"><article class="card warning-summary"><h2>นิคมอุตสาหกรรมที่เข้าเกณฑ์เฝ้าระวัง</h2><span style="color:var(--muted)">คำนวณจากสถานีฝนและระดับน้ำภายในรัศมี 30 กม.</span><div class="switches"><button class="active">ข้อมูลล่าสุด</button><button disabled>อัปเดตทุกชั่วโมง</button></div><div id="estateRanks"><div style="padding:22px;text-align:center;color:#7b8390">กำลังประมวลผลข้อมูล…</div></div></article><article class="card warning-summary"><h2>การสนับสนุนผู้ประกอบการ</h2><span style="color:var(--muted)">ข้อมูลที่ควรแจ้งให้ผู้เกี่ยวข้องทราบ</span><div class="action"><b>ความปลอดภัยบุคลากร</b><div class="text">ตรวจเส้นทางเดินทาง จุดรวมพล และพื้นที่ห้ามเข้า</div></div><div class="action"><b>การผลิตและคลังสินค้า</b><div class="text">เตรียมป้องกันเครื่องจักร วัตถุดิบ สินค้า และสารเคมี</div></div><div class="action"><b>โลจิสติกส์และสาธารณูปโภค</b><div class="text">ยืนยันเส้นทางสำรอง ไฟฟ้า ประปา และระบบสื่อสาร</div></div></article></div>
-      <article class="card warning-table"><h2>สถานีตรวจวัดที่ต้องติดตาม</h2><table class="table"><thead><tr><th>สถานี / จุดตรวจวัด</th><th>ค่าล่าสุด</th><th>สถานะ</th><th>แนวโน้ม</th><th>เวลา</th><th>แหล่งข้อมูล</th></tr></thead><tbody id="stations"></tbody></table></article>
+      <article class="card warning-table station-watch-table"><div class="table-section-head"><div><h2>สถานีตรวจวัดที่ต้องติดตาม</h2><p>แสดงเฉพาะสถานีผิดปกติที่อยู่ใกล้นิคมอุตสาหกรรมภายในรัศมี 30 กิโลเมตร</p></div><span>เรียงตามระดับความสำคัญ</span></div><div class="table-scroll"><table class="table"><thead><tr><th>สถานี / นิคมฯ ใกล้เคียง</th><th>ค่าล่าสุด</th><th>สถานะ</th><th>ประเภทข้อมูล</th><th>เวลาตรวจวัด</th><th>แหล่งข้อมูล</th></tr></thead><tbody id="stations"></tbody></table></div></article>
     </section>
 
     <section class="view" id="infographic">
