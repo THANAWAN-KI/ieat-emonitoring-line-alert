@@ -143,6 +143,14 @@
     .station-name{display:block;color:#004b79;font-weight:700}.station-estate{display:block;margin-top:3px;color:#637783;font-size:12px;font-weight:400}
     .nearby-watch-table{margin-top:20px}.forecast-period{display:inline-block;min-width:82px;padding:6px 10px;border-radius:7px;background:#dcecf4;color:#004b79;font-weight:700;text-align:center}
     @media(max-width:850px){.embedded-water-map .thaiwater-risk-map{height:520px;min-height:520px}}
+    /* Compact overview map and tables */
+    .embedded-water-map{min-height:600px}.embedded-water-map .thaiwater-risk-map{height:600px;min-height:600px}
+    .focus-data-table,.focus-data-table .table-section-head h2,.focus-data-table .table-section-head p,.focus-data-table .table-section-head>span,.focus-data-table .table th,.focus-data-table .table td,.focus-data-table .table td:first-child,.focus-data-table .table td:nth-child(2),.focus-data-table .station-name,.focus-data-table .station-estate{color:#000!important}
+    .focus-data-table{margin-top:14px;border-radius:12px}.focus-data-table .table-section-head{padding:13px 16px 10px}.focus-data-table .table-section-head h2{font-size:17px;line-height:1.35}.focus-data-table .table-section-head p{font-size:12px;margin-top:2px}.focus-data-table .table-section-head>span{font-size:11px;padding:5px 8px;background:#e7eef2}
+    .focus-data-table .table{font-size:13px;min-width:680px}.focus-data-table .table th{padding:9px 10px;background:#d9e8f0!important;border-color:#9db0ba;font-size:12px}.focus-data-table .table td{padding:9px 10px;line-height:1.35}.focus-data-table .table-empty{padding:18px!important}
+    .water-status-cell{padding:9px 8px;font-size:12px}.water-status-cell.critical,.water-status-cell.warning,.water-status-cell.normal{color:#fff!important}.station-name{font-size:13px}.station-estate{font-size:11px}.forecast-period{min-width:70px;padding:4px 7px;font-size:11px;color:#000}
+    .station-watch-table,.nearby-watch-table{margin-top:14px}
+    @media(max-width:850px){.embedded-water-map,.embedded-water-map .thaiwater-risk-map{height:460px;min-height:460px}.focus-data-table .table-section-head{padding:11px 12px}.focus-data-table .table-section-head h2{font-size:15px}}
   </style>
 
   <style id="portrait-map-report-theme">
@@ -196,8 +204,8 @@
           <article class="radar-card operations-radar"><h2>เรดาร์ฝนคอมโพสิตล่าสุด</h2><small id="radarUpdated">ภาพเรดาร์คอมโพสิตล่าสุดจากกรมอุตุนิยมวิทยา</small><a href="data/radar_latest.gif" target="_blank" rel="noopener"><img id="radarImage" src="data/radar_latest.gif" alt="ภาพเรดาร์คอมโพสิตล่าสุดทั่วประเทศไทย" onerror="this.src='https://satda.tmd.go.th/wp-content/uploads/data/radar_composite/max/qpf_202608210600.gif'"></a><div class="radar-actions"><a class="open" href="data/radar_latest.gif" target="_blank" rel="noopener">เปิดภาพเต็ม</a><button class="download" id="downloadRadarPng" type="button">ดาวน์โหลด PNG</button></div></article>
         </div>
         <article class="card operations-map embedded-water-map">
-          <div class="overview-map-label"><b>แผนที่ความเสี่ยงฝน</b><small>ข้อมูลจาก ThaiWater</small></div>
-          <iframe class="thaiwater-risk-map" title="แผนที่ความเสี่ยงฝน ThaiWater" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.thaiwater.net/risk-rainfall"></iframe>
+          <div class="overview-map-label"><b>แผนที่ความเสี่ยงฝน</b><small>เลื่อนแผนที่หรือซูมเข้า–ออกเพื่อดูรายละเอียด</small></div>
+          <iframe class="thaiwater-risk-map" width="700" height="600" allow="local-network-access; geolocation" title="flood" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&amp;webmap=3d24287ac6ea49cd823625ddad496e01&amp;theme=light&amp;scroll=false&amp;center=102.273235960972,13.646914809792989&amp;scale=9244648.868618"></iframe>
         </article>
       </section>
 
