@@ -69,6 +69,21 @@
     .warning-periods button.active{background:#1769c2}.warning-periods button[data-period="48h"].active{background:#1769c2}
     .warning-rank-row strong{background:#1769c2}.flash-flood-kpi strong,.flash-flood-kpi:nth-child(2) strong{color:#1769c2}
     .report{box-shadow:none;border:1px solid #dfe4e8;border-radius:13px}.executive-report{border-radius:13px}
+    /* Overview dashboard: IEAT risk first, national indicators second, full-width map */
+    #overview .estate-section-title:first-of-type{margin-top:8px}
+    #overview .kpis{margin-bottom:34px}
+    .national-section-title{margin-top:8px!important}
+    .national-dashboard{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:stretch;gap:18px}
+    .national-cards{grid-column:1/-1;grid-row:1;grid-template-columns:repeat(4,minmax(0,1fr))}
+    .national-cards .province-watch{grid-column:1/-1}
+    .national-column{grid-column:1/-1;grid-row:2;grid-template-columns:minmax(280px,.7fr) minmax(420px,1.3fr);align-items:stretch}
+    .national-column .national-alert{height:100%}
+    .national-column .radar-card img{height:360px}
+    .overview-map-card{grid-column:1/-1;grid-row:3;min-height:680px}
+    .overview-map-card iframe{height:680px;min-height:680px}
+    #overview .overview-grid{grid-template-columns:1fr}
+    #overview .overview-grid>.card{width:100%}
+
     @media(max-width:980px){.top-inner{flex-wrap:wrap}.brand{min-width:0;flex:1}.nav{order:3;width:100%;overflow-x:auto;margin:0}.nav button{flex:1}.edit-btn{margin-left:auto}.container{padding-top:64px}.view.active{padding:22px}.hero{margin-top:-94px}.hero h1{font-size:34px}.national-dashboard{grid-template-columns:1fr}.overview-map-card{grid-column:auto;grid-row:auto}.kpis{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:680px){body{font-size:15px}.top-inner{padding:8px 14px}.brand span{display:none}.nav button{padding:8px 12px}.container{padding:55px 10px 45px}.view.active{padding:14px;border-radius:14px}.hero{margin:-78px 4px 34px;display:block}.hero h1{font-size:29px}.hero p{display:none}.updated{text-align:left;margin-top:4px}.national-cards,.kpis,.flash-flood-kpis,.overview-grid,.warning-top,.warning-map-layout{grid-template-columns:1fr}.national-kpi{min-height:145px}.overview-map-card,.overview-map-card iframe{min-height:470px}.warning-map-card{height:500px}.card-head{padding:17px 17px 10px}.status-card,.bars{padding-left:17px;padding-right:17px}.rain-image-wrap{grid-template-columns:1fr;padding:0 16px 16px}.report{padding:15px;aspect-ratio:auto}.executive-report{min-width:980px}.info-wrap{overflow-x:auto}}
   </style>
@@ -105,6 +120,14 @@
         <div><b>ข้อมูลคาดการณ์</b><span>พื้นที่เสี่ยง 24/48 ชั่วโมงยังไม่ใช่พื้นที่เกิดน้ำท่วมยืนยัน</span></div>
         <div><b>แหล่งข้อมูล</b><span><a href="https://www.thaiwater.net/" target="_blank" rel="noopener">ThaiWater / สสน.</a> และ <a href="https://tmd.go.th/warning-and-events/warning-storm" target="_blank" rel="noopener">กรมอุตุนิยมวิทยา</a></span></div>
       </div>
+      <div class="estate-section-title"><h2>ความเสี่ยงที่อาจสัมพันธ์กับนิคมอุตสาหกรรม</h2><p>วิเคราะห์เชิงพื้นที่จากสถานีฝนและระดับน้ำใกล้นิคมฯ เพื่อช่วยจัดลำดับการติดตาม ไม่ใช่การยืนยันว่าเกิดผลกระทบแล้ว</p></div>
+      <div class="grid kpis">
+        <div class="card kpi"><span class="icon"><img src="assets/flood-estate.svg" alt=""></span><div><strong id="outEstateCount">–</strong><span>นิคมอุตสาหกรรมเฝ้าระวัง</span></div></div>
+        <div class="card kpi"><span class="icon"><img src="assets/heavy-rain.svg" alt=""></span><div><strong id="outFactory">–</strong><span>นิคมฯ ใกล้สถานีฝนหนัก</span></div></div>
+        <div class="card kpi"><span class="icon"><img src="assets/water-estate.svg" alt=""></span><div><strong id="outCritical">–</strong><span>นิคมฯ ใกล้ระดับน้ำผิดปกติ</span></div></div>
+        <div class="card kpi"><span class="icon"><img src="assets/industrial-estate.svg" alt=""></span><div><strong id="outRouteCount">–</strong><span>สถานีที่ต้องติดตามใกล้นิคมฯ</span></div></div>
+      </div>
+      <div class="estate-section-title national-section-title"><h2>Dashboard สถานการณ์น้ำระดับประเทศ</h2><p>สรุปพายุ ระดับน้ำ ฝนตกหนัก และพื้นที่เสี่ยงน้ำท่วมฉับพลันจากข้อมูลล่าสุด</p></div>
       <section class="national-dashboard" aria-label="ภาพรวมการเตือนภัยระดับประเทศ">
         <div class="national-column">
           <article class="national-alert"><b>ประกาศสำคัญและข้อมูลที่ต้องเฝ้าระวัง</b><p id="nationalAlertText">กำลังตรวจสอบประกาศล่าสุดจากกรมอุตุนิยมวิทยา</p><a class="warning-source" id="nationalWarningLink" href="https://tmd.go.th/warning-and-events/warning-storm" target="_blank" rel="noopener">อ่านประกาศกรมอุตุนิยมวิทยา</a></article>
@@ -119,15 +142,8 @@
         </div>
         <article class="card overview-map-card"><div class="overview-map-label">Web Map</div><iframe name="floodMap" width="700" height="600" allow="local-network-access; geolocation" title="flood" loading="lazy" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=3d24287ac6ea49cd823625ddad496e01&theme=light&scroll=false&center=99.68961690284046,17.632609262747895&scale=4622324.434309"></iframe></article>
       </section>
-      <div class="estate-section-title"><h2>ความเสี่ยงที่อาจสัมพันธ์กับนิคมอุตสาหกรรม</h2><p>วิเคราะห์เชิงพื้นที่จากสถานีฝนและระดับน้ำใกล้นิคมฯ เพื่อช่วยจัดลำดับการติดตาม ไม่ใช่การยืนยันว่าเกิดผลกระทบแล้ว</p></div>
-      <div class="grid kpis">
-        <div class="card kpi"><span class="icon"><img src="assets/flood-estate.svg" alt=""></span><div><strong id="outEstateCount">–</strong><span>นิคมอุตสาหกรรมเฝ้าระวัง</span></div></div>
-        <div class="card kpi"><span class="icon"><img src="assets/heavy-rain.svg" alt=""></span><div><strong id="outFactory">–</strong><span>นิคมฯ ใกล้สถานีฝนหนัก</span></div></div>
-        <div class="card kpi"><span class="icon"><img src="assets/water-estate.svg" alt=""></span><div><strong id="outCritical">–</strong><span>นิคมฯ ใกล้ระดับน้ำผิดปกติ</span></div></div>
-        <div class="card kpi"><span class="icon"><img src="assets/industrial-estate.svg" alt=""></span><div><strong id="outRouteCount">–</strong><span>สถานีที่ต้องติดตามใกล้นิคมฯ</span></div></div>
-      </div>
       <div class="grid overview-grid">
-        <article class="card"><div class="card-head"><div><h2>สรุปความเสี่ยงต่อการดำเนินงาน</h2><span>แยกข้อมูลตรวจวัด ข้อมูลคาดการณ์ และผลกระทบที่ยืนยันแล้วอย่างชัดเจน</span></div><span class="pill" id="outLevel"></span></div><div class="status-card"><div class="alert"><div class="alert-line"><b>สรุปสถานการณ์</b><b id="outTrend"></b></div><h3 class="outEstate"></h3><div class="text" id="outSummary"></div></div></div></article>
+        <div hidden aria-hidden="true"><span id="outLevel"></span><span id="outTrend"></span><span class="outEstate"></span><span id="outSummary"></span></div>
         <article class="card"><div class="card-head"><div><h2>ตัวชี้วัดเฝ้าระวังทั่วประเทศ</h2><span>เฉพาะสถานีที่สัมพันธ์กับพื้นที่นิคมฯ</span></div></div><div class="bars"><div class="barrow"><span>ฝนสูงสุด 24 ชม.</span><div class="track"><div class="bar" id="rainBar"></div></div><b id="outRain"></b></div><div class="barrow"><span>นิคมฯ ใกล้ระดับน้ำผิดปกติ</span><div class="track"><div class="bar teal" id="criticalBar"></div></div><b id="outCritical2"></b></div><div class="barrow"><span>สถานีที่ต้องติดตาม</span><div class="track"><div class="bar" id="routeBar"></div></div><b id="outRoute2"></b></div><div class="source-note"><b>สถานะข้อมูล:</b> <span id="outVerify1"></span><br><b>รายงานครั้งถัดไป:</b> <span id="outNext"></span></div></div></article>
       </div>
     </section>
