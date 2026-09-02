@@ -71,8 +71,8 @@
   function preview(items){
     $("pngPreviewModal")?.remove();
     const modal=document.createElement("div");modal.id="pngPreviewModal";
-    modal.innerHTML='<div class="png-dialog"><div class="png-head"><strong>สร้างภาพ PNG สำเร็จ</strong><button type="button" aria-label="ปิด">×</button></div><p>เลือกดาวน์โหลดรายงานแต่ละหน้า หรือกดค้างที่ภาพเพื่อบันทึกผ่าน LINE</p><div class="png-preview-list">'+items.map(item=>'<section><h3>'+item.label+'</h3><img src="'+item.url+'" alt="'+item.label+'"><a href="'+item.url+'" download="'+item.name+'">ดาวน์โหลด '+item.label+'</a></section>').join("")+'</div></div>';
-    const style=document.createElement("style");style.textContent="#pngPreviewModal{position:fixed;inset:0;z-index:99999;background:rgba(20,31,48,.75);padding:20px;display:grid;place-items:center}.png-dialog{width:min(1100px,96vw);max-height:94vh;overflow:auto;background:#fff;border-radius:16px;padding:20px;font-family:Sarabun,sans-serif}.png-head{display:flex;justify-content:space-between;align-items:center;font-size:20px}.png-head button{border:0;background:#eee;border-radius:50%;width:38px;height:38px;font-size:24px}.png-dialog p{color:#68717d}.png-preview-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:15px}.png-preview-list section{border:1px solid #ccd3d9;padding:10px}.png-preview-list h3{margin:0 0 8px}.png-preview-list img{display:block;width:100%;height:auto;border:1px solid #ddd}.png-preview-list a{display:block;margin-top:9px;padding:10px;text-align:center;background:#004b79;color:#fff;text-decoration:none}";
+    modal.innerHTML='<div class="png-dialog"><div class="png-head"><strong>สร้างภาพ PNG สำเร็จ</strong><button type="button" aria-label="ปิด">×</button></div><p>คลิกขวาที่ภาพด้านล่าง แล้วเลือก Save image as… หรือ Copy image</p><div class="png-preview-list">'+items.map(item=>'<section><h3>'+item.label+'</h3><img src="'+item.url+'" alt="'+item.label+'" title="คลิกขวาเพื่อบันทึกหรือคัดลอกภาพ"></section>').join("")+'</div></div>';
+    const style=document.createElement("style");style.textContent="#pngPreviewModal{position:fixed;inset:0;z-index:99999;background:rgba(20,31,48,.75);padding:20px;display:grid;place-items:center}.png-dialog{width:min(1100px,96vw);max-height:94vh;overflow:auto;background:#fff;border-radius:16px;padding:20px;font-family:Sarabun,sans-serif}.png-head{display:flex;justify-content:space-between;align-items:center;font-size:20px}.png-head button{border:0;background:#eee;border-radius:50%;width:38px;height:38px;font-size:24px}.png-dialog p{color:#68717d}.png-preview-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:15px}.png-preview-list section{border:1px solid #ccd3d9;padding:10px}.png-preview-list h3{margin:0 0 8px}.png-preview-list img{display:block;width:100%;height:auto;border:1px solid #ddd}";
     modal.appendChild(style);document.body.appendChild(modal);modal.querySelector(".png-head button").onclick=()=>{items.forEach(x=>URL.revokeObjectURL(x.url));modal.remove()};
   }
   async function captureSheet(sheet){
@@ -131,8 +131,7 @@
   }
   window.addEventListener("ieat:data-ready",event=>renderExportData(event.detail));
   window.addEventListener("DOMContentLoaded",()=>{
-    $("downloadPng")?.addEventListener("click",()=>exportPages());
-    document.querySelectorAll("[data-export-page]").forEach(button=>button.addEventListener("click",()=>exportPages(button.dataset.exportPage)));
+    document.querySelectorAll("[data-report-page]").forEach(sheet=>sheet.addEventListener("contextmenu",event=>{event.preventDefault();exportPages(sheet.dataset.reportPage)}));
     $("reportPeriodTitle")?.addEventListener("input",syncEditableText);
     setupMapUpload();
     refreshLatest();
