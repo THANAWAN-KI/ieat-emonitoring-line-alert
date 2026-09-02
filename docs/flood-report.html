@@ -151,6 +151,26 @@
     .water-status-cell{padding:9px 8px;font-size:12px}.water-status-cell.critical,.water-status-cell.warning,.water-status-cell.normal{color:#fff!important}.station-name{font-size:13px}.station-estate{font-size:11px}.forecast-period{min-width:70px;padding:4px 7px;font-size:11px;color:#000}
     .station-watch-table,.nearby-watch-table{margin-top:14px}
     @media(max-width:850px){.embedded-water-map,.embedded-water-map .thaiwater-risk-map{height:460px;min-height:460px}.focus-data-table .table-section-head{padding:11px 12px}.focus-data-table .table-section-head h2{font-size:15px}}
+    /* Compact top overview with radar beside all indicators */
+    .top-overview-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,360px);gap:16px;align-items:stretch;margin-bottom:18px}
+    .top-overview-metrics{min-width:0}.top-overview-metrics .kpis{margin-bottom:12px}.top-overview-metrics .national-situation-block{margin-top:12px}
+    .top-overview-metrics .kpi{min-height:104px;padding:13px}.top-overview-metrics .national-cards-dashboard{gap:10px}.top-overview-metrics .national-kpi{min-height:142px;padding:13px}.top-overview-metrics .national-kpi h2{font-size:14px;margin-top:5px}.top-overview-metrics .national-kpi strong{font-size:34px;margin-top:4px}.top-overview-metrics .national-kpi span{font-size:13px}.top-overview-metrics .national-kpi .n-icon,.top-overview-metrics .national-kpi .n-icon img{width:38px;height:38px}.top-overview-metrics .source-link{font-size:11px}
+    .top-overview-grid>.operations-radar{margin:0;min-height:100%;padding:15px;display:flex;flex-direction:column}.top-overview-grid>.operations-radar h2{font-size:17px}.top-overview-grid>.operations-radar img{height:270px;flex:1;object-fit:contain}
+    /* Reference-style overview tables */
+    .tables-overview-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start;margin-top:18px}
+    .tables-overview-grid .focus-data-table{margin:0;min-width:0;border:1px solid #000;border-radius:0;box-shadow:none;overflow:hidden}
+    .tables-overview-grid .nearby-watch-table{grid-column:1/-1}
+    .tables-overview-grid .table-section-head{background:#fff;border-bottom:0;padding:12px 14px 8px}
+    .tables-overview-grid .table-section-head>span{background:#eee;border:1px solid #bbb;border-radius:3px}
+    .tables-overview-grid .table{border-collapse:collapse;width:100%;font-size:13px}
+    .tables-overview-grid .table th{background:#e8e8e8!important;color:#000!important;border:1px solid #000!important;padding:10px 9px;font-size:13px;text-align:center}
+    .tables-overview-grid .table td{background:#fff;color:#000!important;border:1px solid #000!important;padding:10px 9px;line-height:1.35}
+    .tables-overview-grid .table tbody tr:nth-child(even),.tables-overview-grid .table tbody tr:hover{background:#fff}
+    .tables-overview-grid .water-status-table td:nth-child(3),.tables-overview-grid .estate-watch-table td:last-child{padding:0!important;text-align:center}
+    .tables-overview-grid .water-status-cell{display:block;width:100%;min-height:42px;padding:11px 8px;color:#fff!important;border-radius:0}
+    .tables-overview-grid .forecast-period{color:#000!important;background:#eee;border:1px solid #aaa;border-radius:3px}
+    @media(max-width:1180px){.top-overview-grid{grid-template-columns:1fr}.top-overview-grid>.operations-radar{min-height:0}.top-overview-grid>.operations-radar img{height:300px}.tables-overview-grid{grid-template-columns:1fr}.tables-overview-grid .nearby-watch-table{grid-column:auto}}
+    @media(max-width:680px){.top-overview-metrics .national-cards-dashboard{grid-template-columns:repeat(2,minmax(0,1fr))}.tables-overview-grid{gap:12px}.tables-overview-grid .table-section-head{padding:10px}.tables-overview-grid .table{font-size:12px}}
   </style>
 
   <style id="portrait-map-report-theme">
@@ -177,6 +197,8 @@
 
   <main class="container">
     <section class="view active" id="warning">
+      <div class="top-overview-grid">
+        <div class="top-overview-metrics">
       <section class="watch-dashboard-block" aria-labelledby="estateRiskTitle">
         
         <div class="grid kpis">
@@ -196,12 +218,15 @@
           <article class="card national-kpi"><div class="n-icon"><img src="https://api.iconify.design/meteocons/raindrops-fill.svg" alt=""></div><h2>พื้นที่เสี่ยงน้ำท่วมฉับพลัน 24 ชั่วโมง</h2><strong id="nationalFloodCount">–</strong><span>จังหวัด</span><a class="source-link" href="https://www.thaiwater.net/new4all/warning" target="_blank" rel="noopener">ดูพื้นที่เตือนภัย</a></article>
         </div>
       </section>
+        </div>
+        <article class="radar-card operations-radar"><h2>เรดาร์ฝนคอมโพสิตล่าสุด</h2><small id="radarUpdated">ภาพเรดาร์คอมโพสิตล่าสุดจากกรมอุตุนิยมวิทยา</small><a href="data/radar_latest.gif" target="_blank" rel="noopener"><img id="radarImage" src="data/radar_latest.gif" alt="ภาพเรดาร์คอมโพสิตล่าสุดทั่วประเทศไทย" onerror="this.src='https://satda.tmd.go.th/wp-content/uploads/data/radar_composite/max/qpf_202608210600.gif'"></a><div class="radar-actions"><a class="open" href="data/radar_latest.gif" target="_blank" rel="noopener">เปิดภาพเต็ม</a><button class="download" id="downloadRadarPng" type="button">ดาวน์โหลด PNG</button></div></article>
+      </div>
 
       <section class="operations-dashboard" aria-label="แผนที่และข้อมูลติดตามสถานการณ์">
         <div class="operations-side">
           <article class="national-alert"><b>ประกาศสำคัญและข้อมูลที่ต้องเฝ้าระวัง</b><p id="nationalAlertText">กำลังตรวจสอบประกาศล่าสุดจากกรมอุตุนิยมวิทยา</p><a class="warning-source" id="nationalWarningLink" href="https://tmd.go.th/warning-and-events/warning-storm" target="_blank" rel="noopener">อ่านประกาศกรมอุตุนิยมวิทยา</a></article>
           <article class="card nationwide-indicators"><div class="card-head"><div><h2>ตัวชี้วัดเฝ้าระวังทั่วประเทศ</h2><span>เฉพาะสถานีที่สัมพันธ์กับพื้นที่นิคมฯ</span></div></div><div class="bars"><div class="barrow"><span>ฝนสูงสุด 24 ชม.</span><div class="track"><div class="bar" id="rainBar"></div></div><b id="outRain"></b></div><div class="barrow"><span>นิคมฯ ใกล้ระดับน้ำผิดปกติ</span><div class="track"><div class="bar teal" id="criticalBar"></div></div><b id="outCritical2"></b></div><div class="barrow"><span>สถานีที่ต้องติดตาม</span><div class="track"><div class="bar" id="routeBar"></div></div><b id="outRoute2"></b></div><div class="source-note"><b>สถานะข้อมูล:</b> <span id="outVerify1"></span><br><b>รายงานครั้งถัดไป:</b> <span id="outNext"></span></div></div></article>
-          <article class="radar-card operations-radar"><h2>เรดาร์ฝนคอมโพสิตล่าสุด</h2><small id="radarUpdated">ภาพเรดาร์คอมโพสิตล่าสุดจากกรมอุตุนิยมวิทยา</small><a href="data/radar_latest.gif" target="_blank" rel="noopener"><img id="radarImage" src="data/radar_latest.gif" alt="ภาพเรดาร์คอมโพสิตล่าสุดทั่วประเทศไทย" onerror="this.src='https://satda.tmd.go.th/wp-content/uploads/data/radar_composite/max/qpf_202608210600.gif'"></a><div class="radar-actions"><a class="open" href="data/radar_latest.gif" target="_blank" rel="noopener">เปิดภาพเต็ม</a><button class="download" id="downloadRadarPng" type="button">ดาวน์โหลด PNG</button></div></article>
+          
         </div>
         <article class="card operations-map embedded-water-map">
           <div class="overview-map-label"><b>แผนที่ความเสี่ยงฝน</b><small>เลื่อนแผนที่หรือซูมเข้า–ออกเพื่อดูรายละเอียด</small></div>
@@ -210,13 +235,13 @@
       </section>
 
       <div hidden aria-hidden="true"><span id="nationalProvinceList"></span><span id="outLevel"></span><span id="outTrend"></span><span class="outEstate"></span><span id="outSummary"></span><span id="outRouteCount"></span></div>
-      <div class="grid warning-top estate-table-layout">
+      <section class="tables-overview-grid">
         <article class="card warning-table focus-data-table estate-watch-table">
           <div class="table-section-head"><div><h2>นิคมอุตสาหกรรมที่เข้าเกณฑ์เฝ้าระวัง</h2><p>จัดลำดับจากสถานีฝนและระดับน้ำผิดปกติภายในรัศมี 30 กิโลเมตร</p></div><span>ข้อมูลล่าสุดจากระบบ</span></div>
           <div class="table-scroll"><table class="table"><thead><tr><th>ลำดับ</th><th>นิคมอุตสาหกรรม</th><th>สถานีผิดปกติ</th><th>ระยะใกล้ที่สุด</th><th>ฝนสูงสุด</th><th>สถานะ</th></tr></thead><tbody id="estateRanks"><tr><td colspan="6" class="table-empty">กำลังประมวลผลข้อมูล…</td></tr></tbody></table></div>
         </article>
-      </div>
       <article class="card warning-table focus-data-table station-watch-table"><div class="table-section-head"><div><h2>สถานการณ์น้ำในพื้นที่เฝ้าระวังใกล้นิคมอุตสาหกรรม</h2><p>แสดงสถานีระดับน้ำที่อยู่ใกล้พื้นที่นิคมอุตสาหกรรม เรียงตามระดับความสำคัญ</p></div><span>ข้อมูลล่าสุด</span></div><div class="table-scroll"><table class="table water-status-table"><thead><tr><th>สถานี</th><th>ระดับน้ำ</th><th>สถานการณ์น้ำ</th><th>เวลา</th></tr></thead><tbody id="stations"><tr><td colspan="4" class="table-empty">กำลังประมวลผลข้อมูล…</td></tr></tbody></table></div></article><article class="card warning-table focus-data-table nearby-watch-table"><div class="table-section-head"><div><h2>พื้นที่เฝ้าระวัง 24 ชั่วโมง / 48 ชั่วโมง ใกล้เคียงพื้นที่นิคมฯ</h2><p>พื้นที่คาดการณ์ที่อยู่ใกล้นิคมอุตสาหกรรมภายในรัศมี 30 กิโลเมตร</p></div><span>ข้อมูลคาดการณ์ล่าสุด</span></div><div class="table-scroll"><table class="table"><thead><tr><th>ช่วงเวลา</th><th>จังหวัด</th><th>อำเภอ</th><th>ตำบล</th><th>ฝนสะสม</th><th>นิคมฯ ใกล้ที่สุด</th></tr></thead><tbody id="nearbyWatchRows"><tr><td colspan="6" class="table-empty">กำลังประมวลผลข้อมูล…</td></tr></tbody></table></div></article>
+      </section>
     </section>
 
     <section class="view" id="infographic">
