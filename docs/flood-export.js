@@ -77,10 +77,16 @@
   }
   async function captureSheet(sheet){
     if(typeof html2canvas!=="function")throw new Error("Export library unavailable");
+    const host=sheet.parentElement,oldZoom=host?.style.zoom||"";
+    if(host)host.style.zoom="1";
     sheet.classList.add("report-exporting");
-    const canvas=await html2canvas(sheet,{scale:2,backgroundColor:"#ffffff",useCORS:true,logging:false,width:794,height:1123,windowWidth:1200});
-    sheet.classList.remove("report-exporting");
-    return new Promise((resolve,reject)=>canvas.toBlob(blob=>blob?resolve(blob):reject(new Error("PNG blob unavailable")),"image/png",1));
+    try{
+      const canvas=await html2canvas(sheet,{scale:2,backgroundColor:"#ffffff",useCORS:true,logging:false,width:794,height:1123,windowWidth:1200});
+      return await new Promise((resolve,reject)=>canvas.toBlob(blob=>blob?resolve(blob):reject(new Error("PNG blob unavailable")),"image/png",1));
+    }finally{
+      sheet.classList.remove("report-exporting");
+      if(host)host.style.zoom=oldZoom;
+    }
   }
   async function exportPages(pageNumber){
     const button=pageNumber?document.querySelector('[data-export-page="'+pageNumber+'"]'):$("downloadPng");
