@@ -222,7 +222,11 @@
     .report-pages .export-sheet{margin:0}
     @media(max-width:1680px) and (min-width:901px){.report-pages{grid-template-columns:repeat(2,794px);justify-content:center;gap:20px;zoom:.72}}
     @media(max-width:900px){.report-pages{display:grid;grid-template-columns:794px;justify-content:start;overflow-x:auto}}
-.dual-forecast-maps{display:grid;grid-template-columns:1fr 1fr;gap:12px;height:540px}.forecast-map-card{margin:0;min-width:0;display:flex;flex-direction:column;border:1px solid #000}.forecast-map-card figcaption{text-align:center;background:#e8e8e8;border-bottom:1px solid #000;padding:8px;font-size:13px;font-weight:700}.forecast-map-card .forecast-map-frame{flex:1;position:relative;min-height:0;overflow:hidden}.forecast-legend.horizontal{display:flex;justify-content:center;gap:24px;border:1px solid #000;padding:8px}.forecast-legend.horizontal p{margin:0;display:flex;align-items:center;gap:5px;font-size:11px}
+    .export-sheet.landscape-sheet{width:1123px;height:794px;padding:26px 30px 24px;gap:9px}
+    .landscape-sheet .sheet-header{padding-bottom:8px}.landscape-sheet .sheet-header h2{font-size:22px;line-height:1.25;white-space:nowrap}.landscape-sheet .sheet-header p{font-size:13px;margin-top:3px;line-height:1.35}
+    .landscape-sheet .dual-forecast-maps{height:390px;gap:12px}.landscape-sheet .forecast-map-card figcaption{font-size:12px;padding:6px}.landscape-sheet .forecast-legend.horizontal{padding:6px;min-height:30px}
+    .landscape-sheet .export-data-table{font-size:10px}.landscape-sheet .export-data-table th,.landscape-sheet .export-data-table td{padding:5px 4px}.landscape-sheet .sheet-footer{padding-top:5px}
+    .dual-forecast-maps{display:grid;grid-template-columns:1fr 1fr;gap:12px;height:540px}.forecast-map-card{margin:0;min-width:0;display:flex;flex-direction:column;border:1px solid #000}.forecast-map-card figcaption{text-align:center;background:#e8e8e8;border-bottom:1px solid #000;padding:8px;font-size:13px;font-weight:700}.forecast-map-card .forecast-map-frame{flex:1;position:relative;min-height:0;overflow:hidden}.forecast-legend.horizontal{display:flex;justify-content:center;gap:24px;border:1px solid #000;padding:8px}.forecast-legend.horizontal p{margin:0;display:flex;align-items:center;gap:5px;font-size:11px}
   </style>
 </head>
 <body>
@@ -327,7 +331,7 @@
             <button class="sheet-download" type="button" data-export-page="2">ดาวน์โหลดหน้า 2</button>
           </section>
 
-          <section class="export-sheet" id="reportPage3" data-report-page="3">
+          <section class="export-sheet landscape-sheet" id="reportPage3" data-report-page="3">
             <header class="sheet-header compact"><div class="sheet-page-label">รายงานหน้า 3</div><h2>พื้นที่เฝ้าระวัง 24 ชั่วโมง / 48 ชั่วโมง ใกล้เคียงพื้นที่นิคมฯ</h2><p class="shared-report-period" contenteditable="true">ข้อมูลตามช่วงเวลารายงาน</p></header>
             <div class="dual-forecast-maps">
               <figure class="forecast-map-card"><figcaption contenteditable="true">แผนที่คาดการณ์พื้นที่เฝ้าระวัง 24 ชั่วโมง</figcaption><div class="forecast-map-frame"><img id="forecastMap24" src="assets/thaiwater-overall-latest.png" alt="แผนที่คาดการณ์ 24 ชั่วโมง"><div id="forecastPinOverlay24" class="estate-pin-overlay"></div></div></figure>
