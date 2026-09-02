@@ -25,7 +25,7 @@
   }
   function renderPins(data){
     const estates=(data.estate_watch||[]).filter(e=>Number.isFinite(Number(e.lat))&&Number.isFinite(Number(e.lon)));
-    ["estatePinOverlay","forecastPinOverlay"].forEach(id=>{
+    ["estatePinOverlay","forecastPinOverlay24","forecastPinOverlay48"].forEach(id=>{
       const overlay=$(id);if(!overlay)return;overlay.innerHTML="";
       estates.forEach(estate=>{
         const left=(Number(estate.lon)-97.3)/(105.8-97.3)*100;
@@ -103,13 +103,24 @@
       if(button){button.disabled=false;button.textContent=old}
     }
   }
-  function setupMapUpload(){
-    $("reportMapUpload")?.addEventListener("change",event=>{
+  function bindImageUpload(inputId,imageIds){
+    $(inputId)?.addEventListener("change",event=>{
       const file=event.target.files?.[0];if(!file)return;
-      const reader=new FileReader();reader.onload=()=>{
-        ["infographicMap","forecastReportMap"].forEach(id=>{const img=$(id);if(img)img.src=reader.result});
-      };reader.readAsDataURL(file);
+      const reader=new FileReader();reader.onload=()=>imageIds.forEach(id=>{const img=$(id);if(img)img.src=reader.result});reader.readAsDataURL(file);
     });
+  }
+  function setupMapUpload(){
+    bindImageUpload("reportMapUpload",["infographicMap"]);
+    bindImageUpload("forecast24Upload",["forecastMap24"]);
+    bindImageUpload("forecast48Upload",["forecastMap48"]);
+  }
+  async function refreshLatest(){
+    try{
+      const response=await fetch(new URL("./data/thaiwater_latest.json?v="+Date.now(),document.baseURI),{cache:"no-store"});
+      if(response.ok)renderExportData(await response.json());
+    }catch(error){console.warn("ใช้ข้อมูลล่าสุดที่มีอยู่ในหน้า",error)}
+    const stamp=Date.now();
+    ["infographicMap","forecastMap24","forecastMap48"].forEach(id=>{const img=$(id);if(img&&img.src.includes("thaiwater-overall-latest.png"))img.src="assets/thaiwater-overall-latest.png?v="+stamp});
   }
   window.addEventListener("ieat:data-ready",event=>renderExportData(event.detail));
   window.addEventListener("DOMContentLoaded",()=>{
@@ -117,6 +128,7 @@
     document.querySelectorAll("[data-export-page]").forEach(button=>button.addEventListener("click",()=>exportPages(button.dataset.exportPage)));
     $("reportPeriodTitle")?.addEventListener("input",syncEditableText);
     setupMapUpload();
+    refreshLatest();
     if(window.IEAT_LIVE_DATA)renderExportData(window.IEAT_LIVE_DATA);
   });
   window.downloadPage=()=>exportPages();
