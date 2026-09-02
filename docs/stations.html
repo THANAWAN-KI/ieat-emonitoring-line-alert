@@ -43,8 +43,8 @@ tbody tr:hover{background:#faf8fc}
  .report-bar{align-items:flex-start;flex-direction:column}.actions{width:100%}.button{flex:1}
  .table-scroll{border-top:1px solid var(--line)}
 }
-#pdfReport{display:none;width:794px;padding:34px 38px;background:#fff;color:#111;font-family:"Sarabun",Tahoma,sans-serif}
-#pdfReport.pdf-active{display:block;position:relative;left:auto;top:auto;z-index:auto;opacity:1;visibility:visible}.pdf-render-stage{position:fixed;inset:0;z-index:10000;overflow:auto;background:#eef1f4;padding:0;display:block}.pdf-render-stage:before{content:"กำลังจัดเตรียมข้อมูลรายงาน PDF…";position:fixed;right:22px;bottom:20px;padding:10px 16px;border-radius:999px;background:#5d2a7a;color:#fff;font-size:13px;box-shadow:0 5px 18px #0002}.pdf-render-stage #pdfReport{width:794px;min-width:794px;max-width:794px;margin:0;box-shadow:none}.pdf-table th,.pdf-table td{overflow-wrap:anywhere;word-break:break-word}
+#pdfReport{display:none;width:794px;max-width:none;padding:30px 32px;background:#fff;color:#111;font-family:"Sarabun",Tahoma,sans-serif}
+#pdfReport.pdf-active{display:block;position:relative;left:auto;top:auto;z-index:auto;opacity:1;visibility:visible}.pdf-render-stage{position:fixed;left:0;top:0;width:794px;min-width:794px;height:100vh;z-index:10000;overflow:auto;background:#eef1f4;padding:0;display:block}.pdf-render-stage:before{content:"กำลังจัดเตรียมข้อมูลรายงาน PDF…";position:fixed;right:22px;bottom:20px;padding:10px 16px;border-radius:999px;background:#5d2a7a;color:#fff;font-size:13px;box-shadow:0 5px 18px #0002}.pdf-render-stage #pdfReport{position:absolute;left:0;top:0;width:794px;min-width:794px;max-width:794px;margin:0;box-shadow:none;transform:none}.pdf-table th,.pdf-table td{overflow-wrap:anywhere;word-break:break-word}
 .pdf-head{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;border-bottom:2px solid #5d2a7a;padding-bottom:12px}.pdf-brand{display:flex;align-items:center;gap:12px}.pdf-logo{width:62px;height:62px;object-fit:contain}.pdf-org{color:#335238;font-size:13px;font-weight:600;line-height:1.5}.pdf-date{font-size:11px;text-align:right;line-height:1.5}.pdf-title{margin:22px 0 6px;font-size:17px;text-align:center}.pdf-subtitle{margin:0 0 18px;color:#555;font-size:10px;text-align:center}.pdf-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:18px}.pdf-kpi{padding:9px;border:1px solid #ddd;text-align:center}.pdf-kpi strong{display:block;color:#5d2a7a;font-size:18px}.pdf-kpi span{display:block;margin-top:3px;font-size:9px}.pdf-section{margin-top:15px;page-break-inside:avoid}.pdf-section-title{padding:7px 9px;color:#fff;background:#5d2a7a;font-size:11px;font-weight:600}.pdf-table{width:100%;min-width:0;border-collapse:collapse;table-layout:fixed}.pdf-table th,.pdf-table td{padding:6px;border:1px solid #555;font-size:8.5px;line-height:1.4;vertical-align:top}.pdf-table th{position:static;color:#111;background:#eee;text-align:center}.pdf-table .p-estate{width:20%}.pdf-table .p-station{width:27%}.pdf-table .p-alarm{width:19%}.pdf-table .p-update{width:15%}.pdf-table .p-note{width:19%}.pdf-empty{padding:14px;border:1px solid #bbb;font-size:9px;text-align:center}.pdf-footer{margin-top:18px;padding-top:8px;border-top:1px solid #bbb;color:#555;font-size:8px;text-align:center}
 @media print{
  body,.page{background:#fff}.page{max-width:none;padding:0}.tools,.actions,.footer{display:none}.header,.summary,.report-bar,.table-card{border-radius:0}
@@ -169,10 +169,10 @@ async function downloadPdf(){
   await new Promise(resolve=>setTimeout(resolve,300));
   const date=new Date().toISOString().slice(0,10);
   const options={
-   margin:[8,8,8,8],
+   margin:[6,6,6,6],
    filename:"IEAT-eMonitoring-Daily-Report-"+date+".pdf",
    image:{type:"jpeg",quality:.98},
-   html2canvas:{scale:2,useCORS:true,allowTaint:true,backgroundColor:"#ffffff",scrollX:0,scrollY:0,windowWidth:794},
+   html2canvas:{scale:2,useCORS:true,allowTaint:true,backgroundColor:"#ffffff",scrollX:0,scrollY:0,width:794,windowWidth:794},
    jsPDF:{unit:"mm",format:"a4",orientation:"portrait"},
    pagebreak:{mode:["css","legacy"],avoid:["tr"]}
   };
