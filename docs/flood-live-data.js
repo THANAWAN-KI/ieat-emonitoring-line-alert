@@ -17,7 +17,7 @@
     selected.forEach(s=>window.addStation?.({
       n:`${s.station} • ${s.nearest_estate}`,
       v:s.value_text||"–",s:s.status||"ไม่มีข้อมูล",trend:s.kind==="rainfall"?"ฝน 24 ชม.":"ระดับน้ำ",
-      t:s.observed_at||"–",agency:s.agency||"ThaiWater"
+      t:s.observed_at||"–",agency:s.agency||"ThaiWater",lat:s.lat,lon:s.lon
     }));
   }
   function renderEstateRanks(estates){
@@ -27,7 +27,7 @@
       const rainfall=e.max_rainfall_mm==null?"–":fmt(e.max_rainfall_mm)+" มม.";
       const distance=e.nearest_alert_km==null?"–":fmt(e.nearest_alert_km)+" กม.";
       const status=e.status||"เฝ้าระวัง",level=Number(e.severity_score)>=4||status.includes("ล้น")?"critical":Number(e.severity_score)>=3||status.includes("มาก")?"warning":"normal";
-      return `<tr><td>${i+1}</td><td><b>${e.name}</b></td><td>${fmt(e.alert_station_count,0)} สถานี</td><td>${distance}</td><td>${rainfall}</td><td><span class="water-status-cell ${level}">${status}</span></td></tr>`;
+      return `<tr><td>${i+1}</td><td><b>${e.name}</b></td><td>${fmt(e.alert_station_count,0)} สถานี</td><td>${distance}</td><td>${rainfall}</td><td><button type="button" class="water-status-cell map-cell-zoom ${level}" data-map-lat="${e.lat}" data-map-lon="${e.lon}" data-map-label="${e.name}">${status}</button></td></tr>`;
     }).join("");
   }
   function apply(data){
