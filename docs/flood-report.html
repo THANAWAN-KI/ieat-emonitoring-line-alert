@@ -226,7 +226,8 @@
     .landscape-sheet .sheet-header{padding-bottom:8px}.landscape-sheet .sheet-header h2{font-size:22px;line-height:1.25;white-space:nowrap}.landscape-sheet .sheet-header p{font-size:13px;margin-top:3px;line-height:1.35}
     .landscape-sheet .dual-forecast-maps{height:390px;gap:12px}.landscape-sheet .forecast-map-card figcaption{font-size:12px;padding:6px}.landscape-sheet .forecast-legend.horizontal{padding:6px;min-height:30px}
     .landscape-sheet .export-data-table{font-size:10px}.landscape-sheet .export-data-table th,.landscape-sheet .export-data-table td{padding:5px 4px}.landscape-sheet .sheet-footer{padding-top:5px}
-    .dual-forecast-maps{display:grid;grid-template-columns:1fr 1fr;gap:12px;height:540px}.forecast-map-card{margin:0;min-width:0;display:flex;flex-direction:column;border:1px solid #000}.forecast-map-card figcaption{text-align:center;background:#e8e8e8;border-bottom:1px solid #000;padding:8px;font-size:13px;font-weight:700}.forecast-map-card .forecast-map-frame{flex:1;position:relative;min-height:0;overflow:hidden}.forecast-legend.horizontal{display:flex;justify-content:center;gap:24px;border:1px solid #000;padding:8px}.forecast-legend.horizontal p{margin:0;display:flex;align-items:center;gap:5px;font-size:11px}
+.export-sheet{cursor:context-menu}.export-sheet::after{content:"คลิกขวาเพื่อสร้างภาพ";position:absolute;right:12px;bottom:10px;padding:5px 8px;background:#fff;border:1px solid #8a99a3;border-radius:5px;color:#40515c;font-size:10px}.export-sheet.report-exporting::after{display:none}
+        .dual-forecast-maps{display:grid;grid-template-columns:1fr 1fr;gap:12px;height:540px}.forecast-map-card{margin:0;min-width:0;display:flex;flex-direction:column;border:1px solid #000}.forecast-map-card figcaption{text-align:center;background:#e8e8e8;border-bottom:1px solid #000;padding:8px;font-size:13px;font-weight:700}.forecast-map-card .forecast-map-frame{flex:1;position:relative;min-height:0;overflow:hidden}.forecast-legend.horizontal{display:flex;justify-content:center;gap:24px;border:1px solid #000;padding:8px}.forecast-legend.horizontal p{margin:0;display:flex;align-items:center;gap:5px;font-size:11px}
   </style>
 </head>
 <body>
@@ -291,8 +292,8 @@
     <section class="view" id="infographic">
       <div class="report-export-workspace">
         <div class="multi-report-toolbar">
-          <div><h1>รายงานการประเมินสถานการณ์และพื้นที่เสี่ยงน้ำท่วมฉับพลัน</h1><p>แก้ไขข้อความบนรายงานได้โดยคลิกที่ข้อความ และดาวน์โหลดเป็นภาพ PNG แยกแต่ละหน้า</p></div>
-          <div class="multi-report-actions"><label class="map-upload-button">ภาพหน้า 1<input id="reportMapUpload" type="file" accept="image/*" hidden></label><label class="map-upload-button">ภาพ 24 ชม.<input id="forecast24Upload" type="file" accept="image/*" hidden></label><label class="map-upload-button">ภาพ 48 ชม.<input id="forecast48Upload" type="file" accept="image/*" hidden></label><button class="primary" id="downloadPng" type="button">ดาวน์โหลดทั้ง 3 หน้า</button></div>
+          <div><h1>รายงานการประเมินสถานการณ์และพื้นที่เสี่ยงน้ำท่วมฉับพลัน</h1><p>แก้ไขข้อความได้โดยคลิกที่ข้อความ จากนั้นคลิกขวาบนหน้ารายงานเพื่อสร้างภาพสำหรับ Save image หรือ Copy image</p></div>
+          <div class="multi-report-actions"><label class="map-upload-button">ภาพหน้า 1<input id="reportMapUpload" type="file" accept="image/*" hidden></label><label class="map-upload-button">ภาพ 24 ชม.<input id="forecast24Upload" type="file" accept="image/*" hidden></label><label class="map-upload-button">ภาพ 48 ชม.<input id="forecast48Upload" type="file" accept="image/*" hidden></label></div>
         </div>
 
         <div class="report-pages">
@@ -314,7 +315,7 @@
               <p id="infoSummary" contenteditable="true">กำลังประมวลผลข้อมูลล่าสุด</p>
             </section>
             <footer class="sheet-footer"><span>ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย กนอ.</span><span>หน้า 1 / 3</span></footer>
-            <button class="sheet-download" type="button" data-export-page="1">ดาวน์โหลดหน้า 1</button>
+            
           </section>
 
           <section class="export-sheet" id="reportPage2" data-report-page="2">
@@ -328,7 +329,7 @@
               <table class="export-data-table"><thead><tr><th>สถานี</th><th>ระดับน้ำ</th><th>สถานการณ์น้ำ</th><th>เวลา</th></tr></thead><tbody id="exportWaterRows"><tr><td colspan="4">กำลังโหลดข้อมูล…</td></tr></tbody></table>
             </section>
             <footer class="sheet-footer"><span>ข้อมูลจากสถานีที่อยู่ภายในรัศมี 30 กิโลเมตรจากนิคมฯ</span><span>หน้า 2 / 3</span></footer>
-            <button class="sheet-download" type="button" data-export-page="2">ดาวน์โหลดหน้า 2</button>
+            
           </section>
 
           <section class="export-sheet landscape-sheet" id="reportPage3" data-report-page="3">
@@ -342,7 +343,7 @@
               <table class="export-data-table"><thead><tr><th>ช่วงเวลา</th><th>จังหวัด</th><th>อำเภอ</th><th>ตำบล</th><th>ฝนสะสม</th><th>นิคมฯ ใกล้ที่สุด</th></tr></thead><tbody id="exportForecastRows"><tr><td colspan="6">กำลังโหลดข้อมูล…</td></tr></tbody></table>
             </section>
             <footer class="sheet-footer"><span>พื้นที่คาดการณ์ควรตรวจสอบร่วมกับประกาศทางการและข้อมูลภาคสนาม</span><span>หน้า 3 / 3</span></footer>
-            <button class="sheet-download" type="button" data-export-page="3">ดาวน์โหลดหน้า 3</button>
+            
           </section>
         </div>
 
