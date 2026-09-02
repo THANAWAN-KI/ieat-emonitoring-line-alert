@@ -50,16 +50,16 @@
 </style>
 
   <style id="thaiwater-report-theme">
-    :root{--purple:#1769c2;--blue:#1769c2;--ink:#171a1f;--muted:#626a75;--bg:#dff0ff;--line:#e1e5ea;--soft:#f3f6f8}
-    body{font-family:"Sarabun","Noto Sans Thai",sans-serif;background:linear-gradient(180deg,#b9dcfb 0,#dcefff 360px,#f7fbff 780px);background-attachment:fixed;color:var(--ink)}
+    :root{--purple:#1769c2;--blue:#1769c2;--ink:#171a1f;--muted:#626a75;--bg:#fff;--line:#d6d6d6;--soft:#f7f7f7}
+    body{font-family:"Sarabun","Noto Sans Thai",sans-serif;background:#fff;color:var(--ink)}
     .topbar{position:sticky;background:rgba(255,255,255,.96);border:0;border-bottom:1px solid #e9edf1;box-shadow:none}
-    .top-inner{max-width:1160px;min-height:64px;margin:auto;padding:9px 20px;gap:22px}
+    .top-inner{max-width:none;min-height:64px;margin:0;padding:9px 32px;gap:22px}
     .brand{min-width:250px;border-left:0;padding-left:0}.brand b{font-size:18px;color:#111;font-weight:600}.brand span{font-size:12px}
     .nav{margin-left:auto;background:#f4f5f6;padding:4px;gap:2px}.nav button{padding:8px 14px;font-size:14px;color:#25292e}.nav button.active{background:#fff;color:#111;box-shadow:0 1px 7px #20252b18}
     .edit-btn{margin-left:0;background:#fff;color:#222;border-color:#dfe3e7;padding:8px 14px;font-size:14px}
-    .container{max-width:1160px;margin:auto;padding:70px 20px 80px}
-    .view.active{background:#fff;border:1px solid #edf0f3;border-radius:17px;padding:32px;box-shadow:0 12px 32px rgba(44,88,124,.13)}
-    .hero{margin:-106px 0 48px;padding:0 12px;min-height:58px;align-items:center}.hero .eyebrow{display:none}.hero h1{font-size:42px;font-weight:500;margin:0;color:#12161a}.hero p{font-size:15px;color:#526170;margin-top:7px}.updated{font-size:13px}.updated strong{font-size:15px}
+    .container{max-width:none;margin:0;padding:24px 32px 56px}
+    .view.active{background:#fff;border:0;border-radius:0;padding:0;box-shadow:none}
+    .hero{margin:0 0 24px;padding:0;min-height:0;align-items:center}.hero .eyebrow{display:none}.hero h1{font-size:42px;font-weight:500;margin:0;color:#12161a}.hero p{font-size:15px;color:#526170;margin-top:7px}.updated{font-size:13px}.updated strong{font-size:15px}
     .card{border:1px solid #dfe4e8;border-radius:13px;box-shadow:none;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}.card:hover{transform:translateY(-2px);border-color:#b9c8d5;box-shadow:0 8px 20px rgba(51,75,96,.09)}
     .national-dashboard{grid-template-columns:minmax(0,1.45fr) minmax(320px,.55fr);gap:18px}.national-column{grid-column:1}.overview-map-card{grid-column:2;grid-row:1 / span 2;min-height:560px}.overview-map-card iframe{min-height:560px}.national-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.national-kpi{min-height:180px;padding:18px}.national-kpi strong{font-size:44px}
     .radar-card{background:#fff;border:1px solid #dfe4e8;border-radius:13px;padding:18px}.radar-card img{height:280px}
@@ -95,9 +95,9 @@
     @media(max-width:980px){.top-inner{flex-wrap:wrap}.brand{min-width:0;flex:1}.nav{order:3;width:100%;overflow-x:auto;margin:0}.nav button{flex:1}.edit-btn{margin-left:auto}.container{padding-top:64px}.view.active{padding:22px}.hero{margin-top:-94px}.hero h1{font-size:34px}.national-dashboard{grid-template-columns:1fr}.overview-map-card{grid-column:auto;grid-row:auto}.kpis{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:680px){body{font-size:15px}.top-inner{padding:8px 14px}.brand span{display:none}.nav button{padding:8px 12px}.container{padding:55px 10px 45px}.view.active{padding:14px;border-radius:14px}.hero{margin:-78px 4px 34px;display:block}.hero h1{font-size:29px}.hero p{display:none}.updated{text-align:left;margin-top:4px}.national-cards,.kpis,.flash-flood-kpis,.overview-grid,.warning-top,.warning-map-layout{grid-template-columns:1fr}.national-kpi{min-height:145px}.overview-map-card,.overview-map-card iframe{min-height:470px}.warning-map-card{height:500px}.card-head{padding:17px 17px 10px}.status-card,.bars{padding-left:17px;padding-right:17px}.rain-image-wrap{grid-template-columns:1fr;padding:0 16px 16px}.report{padding:15px;aspect-ratio:auto}.executive-report{min-width:980px}.info-wrap{overflow-x:auto}}
     /* Responsive operational dashboard */
-    .top-inner,.container{max-width:1480px}
-    .container{padding-left:clamp(16px,2.5vw,38px);padding-right:clamp(16px,2.5vw,38px)}
-    #warning.view.active{padding:clamp(20px,2.4vw,38px)}
+    .top-inner,.container{max-width:none}
+    .container{padding-left:clamp(18px,2vw,36px);padding-right:clamp(18px,2vw,36px)}
+    #warning.view.active{padding:18px 0 36px}
     .estate-section-title h2{font-size:clamp(23px,2vw,30px)}
     .card,.national-alert,.radar-card{border-radius:18px;box-shadow:0 8px 24px rgba(31,68,99,.09);border:1px solid #dde6ed}
     .card:hover{box-shadow:0 12px 28px rgba(31,68,99,.13)}
@@ -111,6 +111,14 @@
     @media(max-width:1100px){.operations-dashboard{grid-template-columns:minmax(310px,.7fr) minmax(0,1.3fr)}.operations-map,.operations-map iframe{min-height:1020px}}
     @media(max-width:850px){.operations-dashboard{grid-template-columns:1fr}.operations-side,.operations-map{grid-column:1}.operations-map,.operations-map iframe{min-height:620px}.national-cards-dashboard{grid-template-columns:repeat(2,minmax(0,1fr))}.table-section-head{align-items:flex-start;flex-direction:column}}
     @media(max-width:560px){#warning.view.active{padding:14px}.national-cards-dashboard,.kpis{grid-template-columns:1fr}.operations-map,.operations-map iframe{min-height:520px}.open-flood-hub{font-size:12px;padding:8px 10px}.map-embed-note{font-size:11px}.table-section-head{padding:17px}.operations-radar img{height:280px}}
+    /* Match the fire dashboard scale and use a clean white canvas */
+    #warning .kpis{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .operations-map{min-height:720px;background:#f6f8fa}.operations-map iframe{min-height:720px}
+    .flood-hub-launch{min-height:720px;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px;padding:32px;text-align:center;text-decoration:none;color:#1b2630;background:linear-gradient(180deg,#f7fbff,#eef6fc);transition:background .2s ease}
+    .flood-hub-launch:hover{background:linear-gradient(180deg,#eef7ff,#e5f1fb)}
+    .flood-hub-mark{font-size:66px;line-height:1}.flood-hub-launch strong{font-size:30px}.flood-hub-launch>span:not(.flood-hub-mark){color:#5d6974;font-size:16px}.flood-hub-launch b{margin-top:5px;padding:11px 18px;border-radius:9px;background:#1769c2;color:#fff;font-size:15px}
+    .estate-watch-table .table{border-collapse:collapse;border:1px solid #111}.estate-watch-table .table th,.estate-watch-table .table td{border:1px solid #111;color:#111}.estate-watch-table .table th{background:#fff}
+    @media(max-width:850px){#warning .kpis{grid-template-columns:1fr}.operations-map,.flood-hub-launch{min-height:520px}}
   </style>
 
   <style id="portrait-map-report-theme">
@@ -143,7 +151,7 @@
           <div class="card kpi"><span class="icon"><img src="assets/flood-estate.svg" alt=""></span><div><strong id="outEstateCount">–</strong><span>นิคมอุตสาหกรรมเฝ้าระวัง</span></div></div>
           <div class="card kpi"><span class="icon"><img src="assets/heavy-rain.svg" alt=""></span><div><strong id="outFactory">–</strong><span>นิคมฯ ใกล้สถานีฝนหนัก</span></div></div>
           <div class="card kpi"><span class="icon"><img src="assets/water-estate.svg" alt=""></span><div><strong id="outCritical">–</strong><span>นิคมฯ ใกล้ระดับน้ำผิดปกติ</span></div></div>
-          <div class="card kpi"><span class="icon"><img src="assets/industrial-estate.svg" alt=""></span><div><strong id="outRouteCount">–</strong><span>สถานีที่ต้องติดตามใกล้นิคมฯ</span></div></div>
+          
         </div>
       </section>
 
@@ -166,12 +174,11 @@
         <article class="card operations-map google-flood-map">
           <div class="overview-map-label">Google Flood Hub</div>
           <a class="open-flood-hub" href="https://sites.research.google/floods/l/12.379867436903867/101.53101732880519/4.814091037167003" target="_blank" rel="noopener">เปิดแผนที่เต็มหน้าจอ</a>
-          <iframe allow="geolocation; fullscreen" referrerpolicy="strict-origin-when-cross-origin" title="Google Flood Hub แผนที่คาดการณ์น้ำท่วม" loading="lazy" src="https://sites.research.google/floods/l/12.379867436903867/101.53101732880519/4.814091037167003"></iframe>
-          <div class="map-embed-note">หากแผนที่ไม่แสดงเนื่องจากข้อจำกัดของ Google ให้กด “เปิดแผนที่เต็มหน้าจอ”</div>
+          <a class="flood-hub-launch" href="https://sites.research.google/floods/l/12.379867436903867/101.53101732880519/4.814091037167003" target="_blank" rel="noopener" aria-label="เปิด Google Flood Hub ในแท็บใหม่"><span class="flood-hub-mark">🌊</span><strong>Google Flood Hub</strong><span>เปิดแผนที่คาดการณ์น้ำท่วมแบบเต็มหน้าจอ</span><b>เปิดแผนที่ ↗</b></a>
         </article>
       </section>
 
-      <div hidden aria-hidden="true"><span id="nationalProvinceList"></span><span id="outLevel"></span><span id="outTrend"></span><span class="outEstate"></span><span id="outSummary"></span></div>
+      <div hidden aria-hidden="true"><span id="nationalProvinceList"></span><span id="outLevel"></span><span id="outTrend"></span><span class="outEstate"></span><span id="outSummary"></span><span id="outRouteCount"></span></div>
       <div class="grid warning-top estate-table-layout">
         <article class="card warning-table estate-watch-table">
           <div class="table-section-head"><div><h2>นิคมอุตสาหกรรมที่เข้าเกณฑ์เฝ้าระวัง</h2><p>จัดลำดับจากสถานีฝนและระดับน้ำผิดปกติภายในรัศมี 30 กิโลเมตร</p></div><span>ข้อมูลล่าสุดจากระบบ</span></div>
