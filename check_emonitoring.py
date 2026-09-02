@@ -3316,6 +3316,449 @@ def build_zone_event_texts(
         )
     return [message]
 
+def latest_station_update(
+    stations: list[dict[str, Any]],
+) -> tuple[datetime | None, str]:
+    latest_datetime: datetime | None = None
+    latest_text = "-"
+
+    for station in stations:
+        parsed = parse_station_update_date(
+            station.get("last_update")
+        )
+        if parsed is not None and (
+            latest_datetime is None
+            or parsed > latest_datetime
+        ):
+            latest_datetime = parsed
+            latest_text = safe_text(
+                station.get("last_update")
+            )
+
+    return latest_datetime, latest_text
+
+
+def build_zone_daily_summary_message(
+    zone: str,
+    stations: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """รายงานประจำวัน 1 Flex Message ต่อ Zone"""
+    today_stations = filter_stations_updated_today(stations)
+    alert_stations = [
+        station
+        for station in stations
+        if full_text(
+            station.get("parameter_alarm"),
+            "",
+        ).strip()
+    ]
+    offline_stations = [
+        station
+        for station in stations
+        if safe_text(
+            station.get("status"),
+            "",
+        ).upper() != "ONLINE"
+    ]
+    online_count = len(stations) - len(offline_stations)
+    latest_datetime, latest_text = latest_station_update(stations)
+    data_is_current = bool(
+        latest_datetime
+        and latest_datetime.date() == now_thailand().date()
+    )
+    freshness_title = (
+        "ข้อมูลปัจจุบัน"
+        if data_is_current
+        else "ข้อมูลล่าช้า"
+    )
+    freshness_color = (
+        "#2F8F46"
+        if data_is_current
+        else "#E67700"
+    )
+    freshness_background = (
+        "#EEF7F0"
+        if data_is_current
+        else "#FFF6E5"
+    )
+
+    def metric(
+        value: int,
+        label: str,
+        background: str,
+        color: str,
+    ) -> dict[str, Any]:
+        return {
+            "type": "box",
+            "layout": "vertical",
+            "flex": 1,
+            "paddingAll": "8px",
+            "backgroundColor": background,
+            "cornerRadius": "9px",
+            "contents": [
+                {
+                    "type": "text",
+                    "text": str(value),
+                    "size": "xl",
+                    "weight": "bold",
+                    "color": color,
+                    "align": "center",
+                },
+                {
+                    "type": "text",
+                    "text": label,
+                    "size": "xxs",
+                    "color": color,
+                    "align": "center",
+                    "wrap": True,
+                    "margin": "xs",
+                },
+            ],
+        }
+
+    follow_up = sorted(
+        [
+            *alert_stations,
+            *[
+                station
+                for station in offline_stations
+                if station not in alert_stations
+            ],
+        ],
+        key=lambda item: (
+            0
+            if full_text(
+                item.get("parameter_alarm"),
+                "",
+            ).strip()
+            else 1,
+            safe_text(item.get("station_name")),
+        ),
+    )
+    follow_rows: list[dict[str, Any]] = []
+
+    for station in follow_up[:4]:
+        alarm_text = full_text(
+            station.get("parameter_alarm"),
+            "",
+        )
+        detail = (
+            f"Alarm: {alarm_text}"
+            if alarm_text
+            else "สถานี Offline / ข้อมูลขาดการเชื่อมต่อ"
+        )
+        follow_rows.append({
+            "type": "box",
+            "layout": "vertical",
+            "margin": "sm",
+            "paddingAll": "8px",
+            "backgroundColor": "#F8F9FA",
+            "cornerRadius": "8px",
+            "contents": [
+                {
+                    "type": "text",
+                    "text": safe_text(
+                        station.get("station_name")
+                    ),
+                    "size": "xs",
+                    "weight": "bold",
+                    "color": "#000000",
+                    "wrap": True,
+                },
+                {
+                    "type": "text",
+                    "text": detail,
+                    "size": "xxs",
+                    "color": (
+                        "#E63946"
+                        if alarm_text
+                        else "#E67700"
+                    ),
+                    "wrap": True,
+                    "margin": "xs",
+                },
+            ],
+        })
+
+    if not follow_rows:
+        follow_rows.append({
+            "type": "text",
+            "text": "ไม่พบสถานีที่ต้องติดตามในข้อมูลล่าสุด",
+            "size": "xs",
+            "color": "#2F8F46",
+            "align": "center",
+            "wrap": True,
+            "margin": "sm",
+        })
+    elif len(follow_up) > 4:
+        follow_rows.append({
+            "type": "text",
+            "text": (
+                f"ยังมีอีก {len(follow_up) - 4} สถานี "
+                "กรุณาเปิด Dashboard เพื่อตรวจสอบ"
+            ),
+            "size": "xxs",
+            "color": "#5D2A7A",
+            "align": "center",
+            "wrap": True,
+            "margin": "sm",
+        })
+
+    bubble = {
+        "type": "bubble",
+        "size": "giga",
+        "header": {
+            "type": "box",
+            "layout": "horizontal",
+            "paddingAll": "12px",
+            "backgroundColor": "#FFFFFF",
+            "spacing": "md",
+            "contents": [
+                {
+                    "type": "image",
+                    "url": TH_VERTICAL_LOGO_URL,
+                    "size": "sm",
+                    "aspectMode": "fit",
+                    "aspectRatio": "4:5",
+                    "flex": 0,
+                },
+                {
+                    "type": "box",
+                    "layout": "vertical",
+                    "flex": 1,
+                    "contents": [
+                        {
+                            "type": "text",
+                            "text": "รายงานประจำวัน e-Monitoring",
+                            "size": "lg",
+                            "weight": "bold",
+                            "color": "#000000",
+                            "wrap": True,
+                        },
+                        {
+                            "type": "text",
+                            "text": zone,
+                            "size": "sm",
+                            "weight": "bold",
+                            "color": "#000000",
+                            "wrap": True,
+                            "margin": "xs",
+                        },
+                        {
+                            "type": "text",
+                            "text": report_time_text(),
+                            "size": "xxs",
+                            "color": "#777777",
+                            "wrap": True,
+                            "margin": "xs",
+                        },
+                    ],
+                },
+            ],
+        },
+        "body": {
+            "type": "box",
+            "layout": "vertical",
+            "paddingAll": "10px",
+            "contents": [
+                {
+                    "type": "box",
+                    "layout": "vertical",
+                    "paddingAll": "10px",
+                    "backgroundColor": freshness_background,
+                    "cornerRadius": "10px",
+                    "contents": [
+                        {
+                            "type": "text",
+                            "text": freshness_title,
+                            "size": "md",
+                            "weight": "bold",
+                            "color": freshness_color,
+                            "align": "center",
+                        },
+                        {
+                            "type": "text",
+                            "text": (
+                                f"ข้อมูลล่าสุด: {latest_text}"
+                                if latest_text != "-"
+                                else "ไม่พบเวลาข้อมูลล่าสุด"
+                            ),
+                            "size": "xxs",
+                            "color": "#555555",
+                            "align": "center",
+                            "wrap": True,
+                            "margin": "xs",
+                        },
+                    ],
+                },
+                {
+                    "type": "box",
+                    "layout": "horizontal",
+                    "spacing": "xs",
+                    "margin": "sm",
+                    "contents": [
+                        metric(
+                            len(stations),
+                            "สถานีทั้งหมด",
+                            "#F3EFF7",
+                            "#5D2A7A",
+                        ),
+                        metric(
+                            online_count,
+                            "Online",
+                            "#EEF7F0",
+                            "#2F8F46",
+                        ),
+                        metric(
+                            len(offline_stations),
+                            "Offline",
+                            "#EAF4FB",
+                            "#0871B9",
+                        ),
+                    ],
+                },
+                {
+                    "type": "box",
+                    "layout": "horizontal",
+                    "spacing": "xs",
+                    "margin": "xs",
+                    "contents": [
+                        metric(
+                            len(alert_stations),
+                            "สถานีมี Alarm",
+                            "#FDECEF",
+                            "#E63946",
+                        ),
+                        metric(
+                            len(today_stations),
+                            "อัปเดตวันนี้",
+                            "#EEF7F0",
+                            "#2F8F46",
+                        ),
+                    ],
+                },
+                {
+                    "type": "text",
+                    "text": "สถานีที่ต้องติดตาม",
+                    "size": "sm",
+                    "weight": "bold",
+                    "color": "#000000",
+                    "margin": "md",
+                },
+                *follow_rows,
+                {
+                    "type": "box",
+                    "layout": "vertical",
+                    "margin": "md",
+                    "paddingAll": "9px",
+                    "backgroundColor": "#E5F2FB",
+                    "cornerRadius": "8px",
+                    "contents": [
+                        {
+                            "type": "text",
+                            "text": (
+                                "ข้อมูลล่าช้าไม่ถือเป็นเหตุการณ์ใหม่ "
+                                "โปรดตรวจสอบสถานีหรือยืนยันกับผู้เกี่ยวข้อง"
+                                if not data_is_current
+                                else (
+                                    "รายงานนี้สรุปข้อมูลล่าสุดของพื้นที่ "
+                                    "ณ เวลาที่ระบบตรวจสอบ"
+                                )
+                            ),
+                            "size": "xxs",
+                            "color": "#355B73",
+                            "wrap": True,
+                        },
+                    ],
+                },
+            ],
+        },
+        "footer": {
+            "type": "box",
+            "layout": "vertical",
+            "paddingTop": "3px",
+            "paddingBottom": "12px",
+            "paddingStart": "10px",
+            "paddingEnd": "10px",
+            "contents": [
+                {
+                    "type": "button",
+                    "style": "primary",
+                    "height": "sm",
+                    "color": "#5D2A7A",
+                    "action": {
+                        "type": "uri",
+                        "label": "เปิด Dashboard เพื่อตรวจสอบ",
+                        "uri": DASHBOARD_URL.split("#", 1)[0],
+                    },
+                },
+            ],
+        },
+        "styles": {
+            "header": {"backgroundColor": "#FFFFFF"},
+            "body": {"backgroundColor": "#FFFFFF"},
+            "footer": {"backgroundColor": "#FFFFFF"},
+        },
+    }
+
+    message = make_flex_message(
+        bubble,
+        (
+            f"{zone}: รายงานประจำวัน e-Monitoring — "
+            f"{freshness_title}"
+        ),
+    )
+    if json_size_bytes(message) > MAX_FLEX_BYTES:
+        raise RuntimeError(
+            f"รายงานประจำวันของ {zone} มีขนาดเกินกำหนด"
+        )
+    return message
+
+
+def send_zone_daily_summaries(
+    all_stations: list[dict[str, Any]],
+) -> bool:
+    grouped: dict[str, list[dict[str, Any]]] = {
+        zone: []
+        for zone in ZONE_GROUP_ENV
+    }
+
+    for station in all_stations:
+        zone = normalize_operation_zone(
+            station.get("zone")
+        )
+        if zone in grouped:
+            grouped[zone].append(station)
+
+    all_success = True
+
+    for zone, stations in grouped.items():
+        env_name = ZONE_GROUP_ENV[zone]
+        group_id = os.getenv(env_name, "").strip()
+
+        if not group_id:
+            print(f"ERROR: ไม่พบ GitHub Secret {env_name}")
+            all_success = False
+            continue
+
+        print(
+            f"{zone}: ส่งรายงานประจำวัน "
+            f"{len(stations)} สถานี ไปยัง {env_name}"
+        )
+        success = push_line_messages(
+            group_id,
+            [
+                build_zone_daily_summary_message(
+                    zone,
+                    stations,
+                )
+            ],
+        )
+        all_success = all_success and success
+
+    return all_success
+
+
 def push_line_messages(
     group_id: str,
     messages: list[dict[str, Any]],
