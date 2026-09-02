@@ -134,6 +134,15 @@
     .focus-data-table .badge,.focus-data-table .report-mini-status{font-weight:700}
     .station-watch-table{margin-top:20px}
     @media(max-width:850px){.embedded-water-map,.embedded-water-map arcgis-embedded-map{min-height:520px;height:520px}}
+    /* White KPI icon and reference-table presentation */
+    .kpis>.kpi:first-child .icon{background:#fff;border-color:transparent;box-shadow:none}
+    .edit-btn{border:0!important;outline:0!important;box-shadow:none!important}.edit-btn:focus,.edit-btn:focus-visible{outline:0!important;box-shadow:none!important}
+    .embedded-water-map .thaiwater-risk-map{display:block;width:100%;height:720px;min-height:720px;border:0;background:#fff}
+    .water-status-table th,.water-status-table td{text-align:center}.water-status-table th:first-child,.water-status-table td:first-child{text-align:left}
+    .water-status-table td:nth-child(3){padding:0!important;font-weight:700}.water-status-cell{display:block;padding:15px 12px;color:#fff}.water-status-cell.critical{background:#d50000}.water-status-cell.warning{background:#ff6d00}.water-status-cell.normal{background:#078312}
+    .station-name{display:block;color:#004b79;font-weight:700}.station-estate{display:block;margin-top:3px;color:#637783;font-size:12px;font-weight:400}
+    .nearby-watch-table{margin-top:20px}.forecast-period{display:inline-block;min-width:82px;padding:6px 10px;border-radius:7px;background:#dcecf4;color:#004b79;font-weight:700;text-align:center}
+    @media(max-width:850px){.embedded-water-map .thaiwater-risk-map{height:520px;min-height:520px}}
   </style>
 
   <style id="portrait-map-report-theme">
@@ -187,8 +196,8 @@
           <article class="radar-card operations-radar"><h2>เรดาร์ฝนคอมโพสิตล่าสุด</h2><small id="radarUpdated">ภาพเรดาร์คอมโพสิตล่าสุดจากกรมอุตุนิยมวิทยา</small><a href="data/radar_latest.gif" target="_blank" rel="noopener"><img id="radarImage" src="data/radar_latest.gif" alt="ภาพเรดาร์คอมโพสิตล่าสุดทั่วประเทศไทย" onerror="this.src='https://satda.tmd.go.th/wp-content/uploads/data/radar_composite/max/qpf_202608210600.gif'"></a><div class="radar-actions"><a class="open" href="data/radar_latest.gif" target="_blank" rel="noopener">เปิดภาพเต็ม</a><button class="download" id="downloadRadarPng" type="button">ดาวน์โหลด PNG</button></div></article>
         </div>
         <article class="card operations-map embedded-water-map">
-          <div class="overview-map-label"><b>แผนที่สถานการณ์น้ำ</b><small>พื้นที่เสี่ยงน้ำท่วมฉับพลันและสถานีฝนสะสม</small></div>
-          <arcgis-embedded-map id="warningMapEmbed" item-id="9c25f3f77ba5481cb481b402177884c2" theme="light" heading-enabled legend-enabled></arcgis-embedded-map>
+          <div class="overview-map-label"><b>แผนที่ความเสี่ยงฝน</b><small>ข้อมูลจาก ThaiWater</small></div>
+          <iframe class="thaiwater-risk-map" title="แผนที่ความเสี่ยงฝน ThaiWater" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.thaiwater.net/risk-rainfall"></iframe>
         </article>
       </section>
 
@@ -199,7 +208,7 @@
           <div class="table-scroll"><table class="table"><thead><tr><th>ลำดับ</th><th>นิคมอุตสาหกรรม</th><th>สถานีผิดปกติ</th><th>ระยะใกล้ที่สุด</th><th>ฝนสูงสุด</th><th>สถานะ</th></tr></thead><tbody id="estateRanks"><tr><td colspan="6" class="table-empty">กำลังประมวลผลข้อมูล…</td></tr></tbody></table></div>
         </article>
       </div>
-      <article class="card warning-table focus-data-table station-watch-table"><div class="table-section-head"><div><h2>สถานีตรวจวัดที่ต้องติดตาม</h2><p>แสดงเฉพาะสถานีผิดปกติที่อยู่ใกล้นิคมอุตสาหกรรมภายในรัศมี 30 กิโลเมตร</p></div><span>เรียงตามระดับความสำคัญ</span></div><div class="table-scroll"><table class="table"><thead><tr><th>สถานี / นิคมฯ ใกล้เคียง</th><th>ค่าล่าสุด</th><th>สถานะ</th><th>ประเภทข้อมูล</th><th>เวลาตรวจวัด</th><th>แหล่งข้อมูล</th></tr></thead><tbody id="stations"></tbody></table></div></article>
+      <article class="card warning-table focus-data-table station-watch-table"><div class="table-section-head"><div><h2>สถานการณ์น้ำในพื้นที่เฝ้าระวังใกล้นิคมอุตสาหกรรม</h2><p>แสดงสถานีระดับน้ำที่อยู่ใกล้พื้นที่นิคมอุตสาหกรรม เรียงตามระดับความสำคัญ</p></div><span>ข้อมูลล่าสุด</span></div><div class="table-scroll"><table class="table water-status-table"><thead><tr><th>สถานี</th><th>ระดับน้ำ</th><th>สถานการณ์น้ำ</th><th>เวลา</th></tr></thead><tbody id="stations"><tr><td colspan="4" class="table-empty">กำลังประมวลผลข้อมูล…</td></tr></tbody></table></div></article><article class="card warning-table focus-data-table nearby-watch-table"><div class="table-section-head"><div><h2>พื้นที่เฝ้าระวัง 24 ชั่วโมง / 48 ชั่วโมง ใกล้เคียงพื้นที่นิคมฯ</h2><p>พื้นที่คาดการณ์ที่อยู่ใกล้นิคมอุตสาหกรรมภายในรัศมี 30 กิโลเมตร</p></div><span>ข้อมูลคาดการณ์ล่าสุด</span></div><div class="table-scroll"><table class="table"><thead><tr><th>ช่วงเวลา</th><th>จังหวัด</th><th>อำเภอ</th><th>ตำบล</th><th>ฝนสะสม</th><th>นิคมฯ ใกล้ที่สุด</th></tr></thead><tbody id="nearbyWatchRows"><tr><td colspan="6" class="table-empty">กำลังประมวลผลข้อมูล…</td></tr></tbody></table></div></article>
     </section>
 
     <section class="view" id="infographic">
@@ -293,7 +302,7 @@
     function sync(){const period=`ช่วงข้อมูล ${thaiDate(value("startIn"))} ถึง ${thaiDate(value("endIn"))}`;document.querySelectorAll(".outEstate").forEach(e=>e.textContent=value("estateIn"));document.querySelectorAll(".outPeriod").forEach(e=>e.textContent=period);const map={outEstateCount:"estateCountIn",outFactory:"factoryIn",outCritical:"criticalIn",outCritical2:"criticalIn",outRouteCount:"routeCountIn",outRoute2:"routeCountIn",outRain:"rainIn",outRainWarning:"rainIn",outRoadWarning:"roadIn",outTrend:"trendIn",outNext:"nextIn",outVerify1:"verifyIn",outSummary:"summaryIn",outAction:"actionIn",infoEstate:"estateCountIn",infoFactory:"factoryIn",infoCritical:"criticalIn",infoRoute:"routeCountIn",infoLevel:"levelIn",infoSummary:"summaryIn",infoRain:"rainIn",infoTrend:"trendIn",infoRoad:"roadIn",infoAction:"actionIn",infoVerify:"verifyIn"};Object.entries(map).forEach(([o,i])=>{if($(o))$(o).textContent=value(i)});$("outLevel").textContent=value("levelIn");const num=id=>parseFloat((value(id).match(/[\d.]+/)||[0])[0]);$("rainBar").style.width=Math.min(100,num("rainIn")/2)+"%";$("criticalBar").style.width=Math.min(100,num("criticalIn")*16)+"%";$("routeBar").style.width=Math.min(100,num("routeCountIn")*18)+"%";$("generatedAt").textContent="จัดทำ "+new Date().toLocaleString("th-TH")}
     $("applyData").onclick=()=>{sync();$("editor").classList.remove("open")};
     const sclass=t=>t.includes("วิกฤต")||t.includes("ล้น")?"critical":t.includes("ปกติ")?"normal":"";
-    function addStation(d={n:"ระบุชื่อสถานี",v:"–",s:"เฝ้าระวัง",trend:"ทรงตัว",t:"–",agency:"ThaiWater"}){const r=document.createElement("tr");r.innerHTML=`<td contenteditable>${d.n}</td><td contenteditable>${d.v}</td><td contenteditable><span class="badge ${sclass(d.s)}">${d.s}</span></td><td contenteditable>${d.trend}</td><td contenteditable>${d.t}</td><td>${d.agency}</td>`;$("stations").appendChild(r)}window.addStation=addStation;
+    function addStation(d={n:"ระบุชื่อสถานี",v:"–",s:"เฝ้าระวัง",trend:"ทรงตัว",t:"–",agency:"ThaiWater"}){const r=document.createElement("tr"),parts=String(d.n||"").split(" • "),level=sclass(d.s)==="critical"?"critical":sclass(d.s)==="normal"?"normal":"warning",estate=parts.length>1?'<small class="station-estate">ใกล้ '+parts.slice(1).join(" • ")+'</small>':"";r.innerHTML='<td contenteditable><span class="station-name">'+(parts[0]||"–")+'</span>'+estate+'</td><td contenteditable>'+d.v+'</td><td contenteditable><span class="water-status-cell '+level+'">'+d.s+'</span></td><td contenteditable>'+d.t+'</td>';$("stations").appendChild(r)}window.addStation=addStation;
     function renderMapLayerControls(map){
       const box=$("mapLayerControls");
       const layers=map.allLayers.toArray().filter(layer=>layer.title&&layer.listMode!=="hide");
@@ -423,6 +432,21 @@
     setupWarningMap($("warningMapEmbed"));
     const cleanProvince=name=>(name||"ไม่ระบุจังหวัด").replace(/^จ\\./,"");
     function reportGroups(areas=[]){const groups={};areas.forEach(row=>{const province=cleanProvince(row.province),g=groups[province]||(groups[province]={rows:[],tambons:new Set(),maxRain:null});g.rows.push(row);g.tambons.add(row.geocode||row.tambon);if(row.sum_rainfall_mm!=null)g.maxRain=Math.max(g.maxRain??-Infinity,Number(row.sum_rainfall_mm))});return Object.entries(groups).map(([province,g])=>({province,...g})).sort((a,b)=>(b.maxRain??-1)-(a.maxRain??-1))}
+    function renderNearbyWatchTable(data){
+      const body=$("nearbyWatchRows");if(!body)return;
+      const estates=(data.estate_watch||[]).filter(e=>Number.isFinite(Number(e.lat))&&Number.isFinite(Number(e.lon)));
+      const distanceKm=(a,b,c,d)=>{const R=6371,toRad=x=>x*Math.PI/180,dp=toRad(c-a),dl=toRad(d-b),q=Math.sin(dp/2)**2+Math.cos(toRad(a))*Math.cos(toRad(c))*Math.sin(dl/2)**2;return 2*R*Math.asin(Math.sqrt(q))};
+      const rows=[];
+      ["24h","48h"].forEach(period=>{
+        (data.flash_flood?.[period]?.areas||[]).forEach(area=>{
+          if(!Number.isFinite(Number(area.latitude))||!Number.isFinite(Number(area.longitude)))return;
+          let nearest=null,km=Infinity;
+          estates.forEach(estate=>{const d=distanceKm(Number(area.latitude),Number(area.longitude),Number(estate.lat),Number(estate.lon));if(d<km){km=d;nearest=estate}});
+          if(nearest&&km<=30)rows.push({period,area,nearest,km});
+        });
+      });
+      body.innerHTML=rows.length?rows.slice(0,20).map(row=>'<tr><td><span class="forecast-period">'+(row.period==="24h"?"24 ชั่วโมง":"48 ชั่วโมง")+'</span></td><td><b>'+cleanProvince(row.area.province)+'</b></td><td>'+(row.area.amphoe||"–")+'</td><td>'+(row.area.tambon||"–")+'</td><td>'+(row.area.sum_rainfall_mm==null?"–":Number(row.area.sum_rainfall_mm).toLocaleString("th-TH",{maximumFractionDigits:1})+" มม.")+'</td><td><b>'+row.nearest.name+'</b><small class="station-estate">'+row.km.toLocaleString("th-TH",{maximumFractionDigits:1})+' กม.</small></td></tr>').join(""):'<tr><td colspan="6" class="table-empty">ไม่พบพื้นที่คาดการณ์ 24/48 ชั่วโมงภายในรัศมี 30 กิโลเมตรจากนิคมฯ</td></tr>';
+    }
     function renderExecutiveReport(period=window.reportPeriod||"24h"){
       window.reportPeriod=period;const data=window.warningData||window.IEAT_LIVE_DATA||window.IEAT_THAIWATER_DATA||{},summary=data.summary||{},item=data.flash_flood?.[period]||{},areas=item.areas||[],ranking=reportGroups(areas),maxRain=areas.reduce((m,row)=>Math.max(m,Number(row.sum_rainfall_mm)||0),0),watch=data.estate_watch||[],stations=(data.stations||[]).filter(row=>(row.severity_score||0)>=2).slice(0,4),hours=period==="48h"?"48":"24";
       document.querySelectorAll("[data-report-period]").forEach(button=>button.classList.toggle("active",button.dataset.reportPeriod===period));
@@ -456,7 +480,7 @@
     }
     async function prepareReportExport(){renderExecutiveReport(window.reportPeriod||"24h");await updateMapShot()}window.updateMapShot=updateMapShot;window.prepareReportExport=prepareReportExport;
     document.querySelectorAll("[data-report-period]").forEach(button=>button.onclick=async()=>{window.reportPeriod=button.dataset.reportPeriod;renderExecutiveReport(window.reportPeriod);await updateMapShot()});
-    window.addEventListener("ieat:data-ready",event=>{window.IEAT_LIVE_DATA=event.detail;renderExecutiveReport(window.reportPeriod||"24h")});
+    window.addEventListener("ieat:data-ready",event=>{window.IEAT_LIVE_DATA=event.detail;renderExecutiveReport(window.reportPeriod||"24h");renderNearbyWatchTable(event.detail)});
     function upload(input,box){input.onchange=()=>{const f=input.files[0];if(!f)return;const reader=new FileReader();reader.onload=()=>box.innerHTML=`<img src="${reader.result}" alt="ภาพพยากรณ์">`;reader.readAsDataURL(f)}}upload($("day1File"),$("day1Box"));upload($("day5File"),$("day5Box"));
     const now=new Date(),end=new Date(now.getTime()+86400000),local=d=>new Date(d-d.getTimezoneOffset()*60000).toISOString().slice(0,16);$("startIn").value=local(now);$("endIn").value=local(end);sync();
   
