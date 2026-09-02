@@ -12,8 +12,8 @@
   }
   function renderStations(stations){
     const body=$("stations");if(!body)return;body.innerHTML="";
-    const selected=stations.filter(s=>s.distance_km<=30&&s.severity_score>=2).slice(0,12);
-    if(!selected.length){body.innerHTML='<tr><td colspan="6" style="text-align:center;color:#7b8390;padding:28px">ไม่พบสถานีผิดปกติภายในรัศมี 30 กม. จากนิคมฯ</td></tr>';return}
+    const selected=stations.filter(s=>s.kind==="waterlevel"&&s.distance_km<=30&&s.severity_score>=2).slice(0,12);
+    if(!selected.length){body.innerHTML='<tr><td colspan="4" style="text-align:center;color:#7b8390;padding:28px">ไม่พบสถานีระดับน้ำผิดปกติภายในรัศมี 30 กม. จากนิคมฯ</td></tr>';return}
     selected.forEach(s=>window.addStation?.({
       n:`${s.station} • ${s.nearest_estate}`,
       v:s.value_text||"–",s:s.status||"ไม่มีข้อมูล",trend:s.kind==="rainfall"?"ฝน 24 ชม.":"ระดับน้ำ",
