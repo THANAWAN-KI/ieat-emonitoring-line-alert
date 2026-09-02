@@ -506,7 +506,7 @@
     function renderExecutiveReport(period=window.reportPeriod||"24h"){
       window.reportPeriod=period;const data=window.warningData||window.IEAT_LIVE_DATA||window.IEAT_THAIWATER_DATA||{},summary=data.summary||{},item=data.flash_flood?.[period]||{},areas=item.areas||[],ranking=reportGroups(areas),maxRain=areas.reduce((m,row)=>Math.max(m,Number(row.sum_rainfall_mm)||0),0),watch=data.estate_watch||[],stations=(data.stations||[]).filter(row=>(row.severity_score||0)>=2).slice(0,4),hours=period==="48h"?"48":"24";
       document.querySelectorAll("[data-report-period]").forEach(button=>button.classList.toggle("active",button.dataset.reportPeriod===period));
-      $("reportPeriodTitle").textContent="พื้นที่เสี่ยงน้ำท่วมฉับพลันใน "+hours+" ชั่วโมงข้างหน้า";
+      document.querySelectorAll(".shared-report-period").forEach(el=>el.textContent=$("reportPeriodTitle")?.textContent||"ข้อมูลตามช่วงเวลารายงาน");
       $("reportMapTitle").textContent="แผนที่พื้นที่เสี่ยงน้ำท่วมฉับพลัน "+hours+" ชั่วโมง";
       $("reportProvinceCount").textContent=ranking.length.toLocaleString("th-TH");$("reportTambonCount").textContent=areas.length.toLocaleString("th-TH");$("reportMaxRain").textContent=maxRain?maxRain.toLocaleString("th-TH",{maximumFractionDigits:1}):"–";$("infoEstate").textContent=(summary.estate_count??"–").toLocaleString?.("th-TH")??summary.estate_count;$("infoRoute").textContent=(summary.alert_station_count??"–").toLocaleString?.("th-TH")??summary.alert_station_count;$("reportStatus").textContent=summary.risk_level||"เฝ้าระวัง";$("reportUpdated").textContent=item.date?"ข้อมูล "+item.date+" "+(item.time||"")+" น.":"กำลังตรวจสอบข้อมูล";
       $("reportProvinceRanking").innerHTML=ranking.length?ranking.slice(0,5).map((row,i)=>'<div class="report-rank-row"><i>'+(i+1)+'</i><div><b>'+row.province+'</b><small>'+row.tambons.size+' ตำบล</small></div><strong>'+(row.maxRain==null?"–":row.maxRain.toLocaleString("th-TH",{maximumFractionDigits:1})+" มม.")+'</strong></div>').join(""):'<p>ไม่พบจังหวัดเข้าเกณฑ์ในช่วงเวลานี้</p>';
@@ -534,7 +534,7 @@
       image.onerror=()=>{image.hidden=true;placeholder.hidden=false;placeholder.textContent="ยังไม่มีภาพแผนที่ ThaiWater ล่าสุด กรุณารอระบบอัปเดตภาพอัตโนมัติ"};
       image.onload=()=>{image.hidden=false;placeholder.hidden=true};
     }
-    async function prepareReportExport(){renderExecutiveReport(window.reportPeriod||"24h");await updateMapShot()}window.updateMapShot=updateMapShot;window.prepareReportExport=prepareReportExport;
+    async function prepareReportExport(){await updateMapShot()}window.updateMapShot=updateMapShot;window.prepareReportExport=prepareReportExport;
     document.querySelectorAll("[data-report-period]").forEach(button=>button.onclick=async()=>{window.reportPeriod=button.dataset.reportPeriod;renderExecutiveReport(window.reportPeriod);await updateMapShot()});
     window.addEventListener("ieat:data-ready",event=>{window.IEAT_LIVE_DATA=event.detail;renderExecutiveReport(window.reportPeriod||"24h");renderNearbyWatchTable(event.detail)});
     function upload(input,box){input.onchange=()=>{const f=input.files[0];if(!f)return;const reader=new FileReader();reader.onload=()=>box.innerHTML=`<img src="${reader.result}" alt="ภาพพยากรณ์">`;reader.readAsDataURL(f)}}upload($("day1File"),$("day1Box"));upload($("day5File"),$("day5Box"));
