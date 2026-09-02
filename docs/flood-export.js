@@ -60,7 +60,7 @@
       });
     });
     $("exportForecastRows").innerHTML=forecast.length?forecast.slice(0,14).map(row=>{
-      return '<tr><td><b>'+(row.period==="24h"?"24 ชั่วโมง":"48 ชั่วโมง")+'</b></td><td>'+cleanProvince(row.area.province)+'</td><td>'+(row.area.amphoe||"–")+'</td><td>'+(row.area.tambon||"–")+'</td><td>'+(row.area.sum_rainfall_mm==null?"–":fmt(row.area.sum_rainfall_mm)+" มม.")+'</td><td><b>'+row.nearest.name+'</b><small style="display:block">'+fmt(row.km)+" กม.</small></td></tr>';
+      return '<tr><td><b>'+(row.period==="24h"?"24 ชั่วโมง":"48 ชั่วโมง")+'</b></td><td>'+cleanProvince(row.area.province)+'</td><td>'+(row.area.amphoe||"–")+'</td><td>'+(row.area.tambon||"–")+'</td><td>'+(row.area.sum_rainfall_mm==null?"–":fmt(row.area.sum_rainfall_mm)+" มม.")+'</td><td><b>'+row.nearest.name+'</b><small style="display:block">'+fmt(row.km)+' กม.</small></td></tr>';
     }).join(""):'<tr><td colspan="6">ไม่พบพื้นที่คาดการณ์ 24/48 ชั่วโมงภายในรัศมี 30 กิโลเมตรจากนิคมฯ</td></tr>';
     renderPins(data);
   }
