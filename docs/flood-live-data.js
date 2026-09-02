@@ -21,9 +21,14 @@
     }));
   }
   function renderEstateRanks(estates){
-    const box=$("estateRanks");if(!box)return;
-    if(!estates.length){box.innerHTML='<div style="padding:22px;text-align:center;color:#7b8390">ไม่พบนิคมฯ เข้าเกณฑ์เฝ้าระวัง</div>';return}
-    box.innerHTML=estates.slice(0,8).map((e,i)=>`<div class="rank"><i>${i+1}</i><div><b>${e.name}</b><small>สถานีผิดปกติ ${fmt(e.alert_station_count,0)} แห่ง • ใกล้สุด ${fmt(e.nearest_alert_km)} กม.</small></div><strong>${e.max_rainfall_mm==null?e.status:fmt(e.max_rainfall_mm)+" มม."}</strong></div>`).join("");
+    const body=$("estateRanks");if(!body)return;
+    if(!estates.length){body.innerHTML='<tr><td colspan="6" class="table-empty">ไม่พบนิคมอุตสาหกรรมเข้าเกณฑ์เฝ้าระวังจากข้อมูลล่าสุด</td></tr>';return}
+    body.innerHTML=estates.slice(0,12).map((e,i)=>{
+      const rainfall=e.max_rainfall_mm==null?"–":fmt(e.max_rainfall_mm)+" มม.";
+      const distance=e.nearest_alert_km==null?"–":fmt(e.nearest_alert_km)+" กม.";
+      const status=e.status||"เฝ้าระวัง";
+      return `<tr><td>${i+1}</td><td><b>${e.name}</b></td><td>${fmt(e.alert_station_count,0)} สถานี</td><td>${distance}</td><td>${rainfall}</td><td><span class="badge">${status}</span></td></tr>`;
+    }).join("");
   }
   function apply(data){
     window.IEAT_LIVE_DATA=data;
