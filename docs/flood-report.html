@@ -179,6 +179,21 @@
     .top-overview-metrics .kpi:hover,.top-overview-metrics .national-kpi:hover{transform:translateY(-1px);border-color:#9db9c8;box-shadow:0 8px 20px rgba(0,75,121,.09)}
     .top-overview-metrics .kpi strong{font-weight:600}.top-overview-metrics .kpi span{color:#405967}.top-overview-metrics .national-kpi h2{color:#000}.top-overview-metrics .national-kpi span{color:#405967}
     @media(max-width:680px){.top-overview-metrics .kpis{gap:10px}.top-overview-metrics .national-cards-dashboard{gap:10px}.top-overview-metrics .kpi,.top-overview-metrics .national-kpi{min-height:124px}}
+    /* Table-like visual system for the overview */
+    .top-overview-metrics .kpis,.top-overview-metrics .national-cards-dashboard{gap:12px}
+    .top-overview-metrics .kpi,.top-overview-metrics .national-kpi,.national-alert,.nationwide-indicators{background:#fff!important;border:1px solid #000!important;border-radius:0!important;box-shadow:none!important}
+    .top-overview-metrics .kpi:hover,.top-overview-metrics .national-kpi:hover{transform:none!important;border-color:#000!important;box-shadow:none!important}
+    .top-overview-metrics .kpi{min-height:96px;padding:12px}
+    .top-overview-metrics .national-kpi{min-height:130px;padding:12px}
+    .top-overview-metrics .kpi span,.top-overview-metrics .national-kpi h2,.national-alert>b,.nationwide-indicators .card-head h2,.embedded-water-map .overview-map-label b{font-size:13px!important;line-height:1.4;font-weight:600;color:#000!important}
+    .top-overview-metrics .national-kpi span,.top-overview-metrics .source-link,.national-alert p,.national-alert .warning-source,.nationwide-indicators .card-head span,.nationwide-indicators .barrow,.nationwide-indicators .source-note{font-size:12px!important;line-height:1.45}
+    .top-overview-metrics .kpi strong{font-size:24px}.top-overview-metrics .national-kpi strong{font-size:28px}
+    .top-overview-metrics .icon{width:46px;height:46px;border-radius:0}.top-overview-metrics .icon svg{width:35px;height:35px}.top-overview-metrics .national-kpi .n-icon,.top-overview-metrics .national-kpi .n-icon img{width:34px;height:34px}
+    .national-alert{padding:14px}.nationwide-indicators .card-head{padding:13px 14px 6px}.nationwide-indicators .bars{padding:0 14px 14px}
+    .water-status-table td:nth-child(3){position:relative;height:44px;padding:0!important}
+    .water-status-table td:nth-child(3) .water-status-cell{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;width:100%;height:100%;padding:8px;color:#fff!important}
+    .embedded-water-map .thaiwater-risk-map{pointer-events:auto}
+    @media(max-width:680px){.top-overview-metrics .kpi,.top-overview-metrics .national-kpi{min-height:110px}.top-overview-metrics .kpi span,.top-overview-metrics .national-kpi h2{font-size:12px!important}}
   </style>
 
   <style id="portrait-map-report-theme">
@@ -200,7 +215,7 @@
       <button class="active" data-view="warning">พื้นที่เฝ้าระวัง</button>
       <button data-view="infographic">ส่งออกข้อมูล</button>
     </nav>
-    <button class="edit-btn" id="openEditor">แก้ไขข้อมูลรายงาน</button>
+    
   </div></header>
 
   <main class="container">
@@ -238,7 +253,7 @@
         </div>
         <article class="card operations-map embedded-water-map">
           <div class="overview-map-label"><b>แผนที่ความเสี่ยงฝน</b><small>เลื่อนแผนที่หรือซูมเข้า–ออกเพื่อดูรายละเอียด</small></div>
-          <iframe class="thaiwater-risk-map" width="700" height="600" allow="local-network-access; geolocation" title="flood" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&amp;webmap=3d24287ac6ea49cd823625ddad496e01&amp;theme=light&amp;scroll=false&amp;center=102.273235960972,13.646914809792989&amp;scale=9244648.868618"></iframe>
+          <iframe class="thaiwater-risk-map" width="700" height="600" allow="local-network-access; geolocation; fullscreen" title="flood" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&amp;webmap=3d24287ac6ea49cd823625ddad496e01&amp;theme=light&amp;scroll=true&amp;center=102.273235960972,13.646914809792989&amp;scale=9244648.868618"></iframe>
         </article>
       </section>
 
@@ -339,7 +354,7 @@
     const thaiDate=v=>v?new Date(v).toLocaleString("th-TH",{dateStyle:"medium",timeStyle:"short"}):"ไม่ระบุ";
     function go(id){document.querySelectorAll(".nav button,.view").forEach(e=>e.classList.remove("active"));document.querySelector(`.nav button[data-view="${id}"]`)?.classList.add("active");$(id)?.classList.add("active");if(id==="warning"&&warningView)setTimeout(()=>warningView.resize(),100);if(id==="infographic")prepareReportExport();window.scrollTo({top:0,behavior:"smooth"})}
     document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>go(b.dataset.view));document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{go(b.dataset.go);$("editor").classList.remove("open")});
-    $("openEditor").onclick=()=>$("editor").classList.add("open");$("closeEditor").onclick=()=>$("editor").classList.remove("open");$("editor").onclick=e=>{if(e.target===$("editor"))$("editor").classList.remove("open")};
+    $("openEditor")?.addEventListener("click",()=>$("editor").classList.add("open"));$("closeEditor").onclick=()=>$("editor").classList.remove("open");$("editor").onclick=e=>{if(e.target===$("editor"))$("editor").classList.remove("open")};
     function sync(){const period=`ช่วงข้อมูล ${thaiDate(value("startIn"))} ถึง ${thaiDate(value("endIn"))}`;document.querySelectorAll(".outEstate").forEach(e=>e.textContent=value("estateIn"));document.querySelectorAll(".outPeriod").forEach(e=>e.textContent=period);const map={outEstateCount:"estateCountIn",outFactory:"factoryIn",outCritical:"criticalIn",outCritical2:"criticalIn",outRouteCount:"routeCountIn",outRoute2:"routeCountIn",outRain:"rainIn",outRainWarning:"rainIn",outRoadWarning:"roadIn",outTrend:"trendIn",outNext:"nextIn",outVerify1:"verifyIn",outSummary:"summaryIn",outAction:"actionIn",infoEstate:"estateCountIn",infoFactory:"factoryIn",infoCritical:"criticalIn",infoRoute:"routeCountIn",infoLevel:"levelIn",infoSummary:"summaryIn",infoRain:"rainIn",infoTrend:"trendIn",infoRoad:"roadIn",infoAction:"actionIn",infoVerify:"verifyIn"};Object.entries(map).forEach(([o,i])=>{if($(o))$(o).textContent=value(i)});$("outLevel").textContent=value("levelIn");const num=id=>parseFloat((value(id).match(/[\d.]+/)||[0])[0]);$("rainBar").style.width=Math.min(100,num("rainIn")/2)+"%";$("criticalBar").style.width=Math.min(100,num("criticalIn")*16)+"%";$("routeBar").style.width=Math.min(100,num("routeCountIn")*18)+"%";$("generatedAt").textContent="จัดทำ "+new Date().toLocaleString("th-TH")}
     $("applyData").onclick=()=>{sync();$("editor").classList.remove("open")};
     const sclass=t=>t.includes("วิกฤต")||t.includes("ล้น")?"critical":t.includes("ปกติ")?"normal":"";
