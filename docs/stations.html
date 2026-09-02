@@ -43,8 +43,8 @@ tbody tr:hover{background:#faf8fc}
  .report-bar{align-items:flex-start;flex-direction:column}.actions{width:100%}.button{flex:1}
  .table-scroll{border-top:1px solid var(--line)}
 }
-#pdfReport{display:none;width:794px;max-width:none;padding:30px 32px;background:#fff;color:#111;font-family:"Sarabun",Tahoma,sans-serif}
-#pdfReport.pdf-active{display:block;position:relative;left:auto;top:auto;z-index:auto;opacity:1;visibility:visible}.pdf-render-stage{position:fixed;left:0;top:0;width:794px;min-width:794px;height:100vh;z-index:10000;overflow:auto;background:#eef1f4;padding:0;display:block}.pdf-render-stage:before{content:"กำลังจัดเตรียมข้อมูลรายงาน PDF…";position:fixed;right:22px;bottom:20px;padding:10px 16px;border-radius:999px;background:#5d2a7a;color:#fff;font-size:13px;box-shadow:0 5px 18px #0002}.pdf-render-stage #pdfReport{position:absolute;left:0;top:0;width:794px;min-width:794px;max-width:794px;margin:0;box-shadow:none;transform:none}.pdf-table th,.pdf-table td{overflow-wrap:anywhere;word-break:break-word}
+#pdfReport{display:none;width:1200px;max-width:none;padding:42px 46px;background:#fff;color:#111;font-family:"Sarabun",Tahoma,sans-serif}
+#pdfReport.pdf-active{display:block;position:relative;left:auto;top:auto;z-index:auto;opacity:1;visibility:visible}.pdf-render-stage{position:fixed;left:0;top:0;width:1200px;min-width:1200px;height:100vh;z-index:10000;overflow:auto;background:#eef1f4;padding:0;display:block}.pdf-render-stage:before{content:"กำลังจัดเตรียมภาพรายงาน PNG…";position:fixed;right:22px;bottom:20px;padding:10px 16px;border-radius:999px;background:#5d2a7a;color:#fff;font-size:13px;box-shadow:0 5px 18px #0002}.pdf-render-stage #pdfReport{position:absolute;left:0;top:0;width:1200px;min-width:1200px;max-width:1200px;margin:0;box-shadow:none;transform:none}.pdf-table th,.pdf-table td{overflow-wrap:anywhere;word-break:break-word}
 .pdf-head{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;border-bottom:2px solid #5d2a7a;padding-bottom:12px}.pdf-brand{display:flex;align-items:center;gap:12px}.pdf-logo{width:62px;height:62px;object-fit:contain}.pdf-org{color:#335238;font-size:13px;font-weight:600;line-height:1.5}.pdf-date{font-size:11px;text-align:right;line-height:1.5}.pdf-title{margin:22px 0 6px;font-size:17px;text-align:center}.pdf-subtitle{margin:0 0 18px;color:#555;font-size:10px;text-align:center}.pdf-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:18px}.pdf-kpi{padding:9px;border:1px solid #ddd;text-align:center}.pdf-kpi strong{display:block;color:#5d2a7a;font-size:18px}.pdf-kpi span{display:block;margin-top:3px;font-size:9px}.pdf-section{margin-top:15px;page-break-inside:avoid}.pdf-section-title{padding:7px 9px;color:#fff;background:#5d2a7a;font-size:11px;font-weight:600}.pdf-table{width:100%;min-width:0;border-collapse:collapse;table-layout:fixed}.pdf-table th,.pdf-table td{padding:6px;border:1px solid #555;font-size:8.5px;line-height:1.4;vertical-align:top}.pdf-table th{position:static;color:#111;background:#eee;text-align:center}.pdf-table .p-estate{width:20%}.pdf-table .p-station{width:27%}.pdf-table .p-alarm{width:19%}.pdf-table .p-update{width:15%}.pdf-table .p-note{width:19%}.pdf-empty{padding:14px;border:1px solid #bbb;font-size:9px;text-align:center}.pdf-footer{margin-top:18px;padding-top:8px;border-top:1px solid #bbb;color:#555;font-size:8px;text-align:center}
 @media print{
  body,.page{background:#fff}.page{max-width:none;padding:0}.tools,.actions,.footer{display:none}.header,.summary,.report-bar,.table-card{border-radius:0}
@@ -76,7 +76,7 @@ tbody tr:hover{background:#faf8fc}
 
 <div class="report-bar">
  <div id="resultCount" class="result">กำลังโหลดข้อมูล…</div>
- <div class="actions"><button id="pdfButton" class="button" type="button" onclick="downloadPdf()">ดาวน์โหลด PDF</button><button class="button primary" type="button" onclick="downloadCsv()">ดาวน์โหลด CSV</button></div>
+ <div class="actions"><button id="pngButton" class="button" type="button" onclick="downloadPng()">ดาวน์โหลด PNG</button><button class="button primary" type="button" onclick="downloadCsv()">ดาวน์โหลด CSV</button></div>
 </div>
 
 <section class="table-card">
@@ -92,7 +92,7 @@ tbody tr:hover{background:#faf8fc}
 </div>
 
 <section id="pdfReport" aria-hidden="true"></section>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
 const byId=id=>document.getElementById(id);
 const esc=value=>String(value??"-").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[char]));
@@ -149,10 +149,10 @@ function buildPdfReport(){
  const sections=[["AQMs","ระบบตรวจวัดคุณภาพอากาศในบรรยากาศ"],["WQMs","ระบบตรวจวัดคุณภาพน้ำ"],["CEMs","ระบบตรวจวัดการระบายมลพิษ"]].map(([type,label])=>'<section class="pdf-section"><div class="pdf-section-title">รายงานสถานีตรวจวัด '+label+' '+type+'</div>'+pdfRowsForType(type)+'</section>').join("");
  byId("pdfReport").innerHTML='<div class="pdf-head"><div class="pdf-brand"><img class="pdf-logo" src="./assets/TH-Vertical.png" alt="กนอ."><div class="pdf-org">การนิคมอุตสาหกรรมแห่งประเทศไทย<br>ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย</div></div><div class="pdf-date">วันที่ '+esc(dateText)+'<br>เวลา '+esc(timeText)+' น.</div></div><h1 class="pdf-title">รายงานการตรวจสอบสถานะการทำงานของระบบเฝ้าระวังสิ่งแวดล้อม (E-Monitoring)</h1><p class="pdf-subtitle">รายงานสรุปจากข้อมูลที่แสดงตามตัวกรอง ณ เวลาที่ดาวน์โหลด</p><div class="pdf-summary"><div class="pdf-kpi"><strong>'+fmt(VISIBLE.length)+'</strong><span>สถานีในรายงาน</span></div><div class="pdf-kpi"><strong>'+fmt(online)+'</strong><span>Online</span></div><div class="pdf-kpi"><strong>'+fmt(offline)+'</strong><span>Offline</span></div><div class="pdf-kpi"><strong>'+fmt(alerts.length)+'</strong><span>ต้องติดตาม</span></div></div>'+sections+'<div class="pdf-footer">ข้อมูลจากระบบ IEAT e-Monitoring • โปรดตรวจสอบข้อมูลล่าสุดก่อนดำเนินการ</div>';
 }
-async function downloadPdf(){
- if(!VISIBLE.length){alert("ไม่พบข้อมูลสำหรับสร้างรายงาน PDF");return}
- if(typeof html2pdf==="undefined"){alert("ไม่สามารถโหลดเครื่องมือสร้าง PDF ได้ กรุณาตรวจสอบอินเทอร์เน็ตแล้วลองใหม่");return}
- const button=byId("pdfButton");button.disabled=true;button.textContent="กำลังสร้าง PDF…";
+async function downloadPng(){
+ if(!VISIBLE.length){alert("ไม่พบข้อมูลสำหรับสร้างรายงาน PNG");return}
+ if(typeof html2canvas==="undefined"){alert("ไม่สามารถโหลดเครื่องมือสร้าง PNG ได้ กรุณาตรวจสอบอินเทอร์เน็ตแล้วลองใหม่");return}
+ const button=byId("pngButton");button.disabled=true;button.textContent="กำลังสร้าง PNG…";
  const report=byId("pdfReport");
  const originalParent=report.parentNode;
  const originalNext=report.nextSibling;
@@ -167,25 +167,21 @@ async function downloadPdf(){
   const images=[...report.querySelectorAll("img")];
   await Promise.all(images.map(image=>image.complete?Promise.resolve():new Promise(resolve=>{image.onload=resolve;image.onerror=resolve})));
   await new Promise(resolve=>setTimeout(resolve,300));
+  const canvas=await html2canvas(report,{scale:2,useCORS:true,allowTaint:true,backgroundColor:"#ffffff",scrollX:0,scrollY:0,width:1200,windowWidth:1200});
   const date=new Date().toISOString().slice(0,10);
-  const options={
-   margin:[6,6,6,6],
-   filename:"IEAT-eMonitoring-Daily-Report-"+date+".pdf",
-   image:{type:"jpeg",quality:.98},
-   html2canvas:{scale:2,useCORS:true,allowTaint:true,backgroundColor:"#ffffff",scrollX:0,scrollY:0,width:794,windowWidth:794},
-   jsPDF:{unit:"mm",format:"a4",orientation:"portrait"},
-   pagebreak:{mode:["css","legacy"],avoid:["tr"]}
-  };
-  await html2pdf().set(options).from(report).save();
+  const link=document.createElement("a");
+  link.download="IEAT-eMonitoring-Daily-Report-"+date+".png";
+  link.href=canvas.toDataURL("image/png",1);
+  document.body.appendChild(link);link.click();link.remove();
  }catch(error){
   console.error(error);
-  alert("ไม่สามารถสร้าง PDF ได้ กรุณาลองใหม่อีกครั้ง");
+  alert("ไม่สามารถสร้าง PNG ได้ กรุณาลองใหม่อีกครั้ง");
  }finally{
   report.classList.remove("pdf-active");
   if(originalNext)originalParent.insertBefore(report,originalNext);else originalParent.appendChild(report);
   stage.remove();
   button.disabled=false;
-  button.textContent="ดาวน์โหลด PDF";
+  button.textContent="ดาวน์โหลด PNG";
  }
 }
 function csvCell(value){const text=String(value??"").replace(/"/g,'""');return '"'+text+'"'}
