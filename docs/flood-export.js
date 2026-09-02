@@ -37,13 +37,13 @@
   }
   function renderExportData(data){
     latestData=data;
-    const estates=(data.estate_watch||[]).slice(0,10);
+    const estates=(data.estate_watch||[]).slice(0,8);
     $("exportEstateRows").innerHTML=estates.length?estates.map((e,i)=>{
       const level=statusLevel(e.status,e.severity_score);
       return '<tr><td>'+(i+1)+'</td><td><b>'+e.name+'</b></td><td>'+fmt(e.alert_station_count,0)+' สถานี</td><td>'+fmt(e.nearest_alert_km)+' กม.</td><td>'+(e.max_rainfall_mm==null?"–":fmt(e.max_rainfall_mm)+" มม.")+'</td><td><span class="export-status '+level+'">'+(e.status||"เฝ้าระวัง")+'</span></td></tr>';
     }).join(""):'<tr><td colspan="6">ไม่พบนิคมอุตสาหกรรมเข้าเกณฑ์เฝ้าระวัง</td></tr>';
 
-    const waters=(data.stations||[]).filter(s=>s.kind==="waterlevel"&&Number(s.distance_km)<=30&&Number(s.severity_score)>=2).slice(0,12);
+    const waters=(data.stations||[]).filter(s=>s.kind==="waterlevel"&&Number(s.distance_km)<=30&&Number(s.severity_score)>=2).slice(0,8);
     $("exportWaterRows").innerHTML=waters.length?waters.map(s=>{
       const level=statusLevel(s.status,s.severity_score);
       return '<tr><td><b>'+s.station+'</b><small style="display:block">'+s.nearest_estate+'</small></td><td>'+s.value_text+'</td><td><span class="export-status '+level+'">'+(s.status||"เฝ้าระวัง")+'</span></td><td>'+shortTime(s.observed_at)+'</td></tr>';
@@ -59,7 +59,7 @@
         if(nearest&&km<=30)forecast.push({period,area,nearest,km});
       });
     });
-    $("exportForecastRows").innerHTML=forecast.length?forecast.slice(0,14).map(row=>{
+    $("exportForecastRows").innerHTML=forecast.length?forecast.slice(0,6).map(row=>{
       return '<tr><td><b>'+(row.period==="24h"?"24 ชั่วโมง":"48 ชั่วโมง")+'</b></td><td>'+cleanProvince(row.area.province)+'</td><td>'+(row.area.amphoe||"–")+'</td><td>'+(row.area.tambon||"–")+'</td><td>'+(row.area.sum_rainfall_mm==null?"–":fmt(row.area.sum_rainfall_mm)+" มม.")+'</td><td><b>'+row.nearest.name+'</b><small style="display:block">'+fmt(row.km)+' กม.</small></td></tr>';
     }).join(""):'<tr><td colspan="6">ไม่พบพื้นที่คาดการณ์ 24/48 ชั่วโมงภายในรัศมี 30 กิโลเมตรจากนิคมฯ</td></tr>';
     renderPins(data);
