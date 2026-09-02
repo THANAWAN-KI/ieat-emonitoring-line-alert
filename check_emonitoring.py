@@ -965,6 +965,8 @@ def load_alert_state() -> dict[str, Any]:
         return {
             "version": data.get("version", 1),
             "updated_at": data.get("updated_at"),
+            "daily_summary_date":
+                data.get("daily_summary_date"),
             "stations": stations,
         }
 
@@ -997,10 +999,13 @@ def save_alert_state(
             station_key(station)
         ] = station_snapshot(station)
 
+    existing_state = load_alert_state()
     state = {
-        "version": 1,
+        "version": 2,
         "updated_at":
             now_thailand().isoformat(),
+        "daily_summary_date":
+            existing_state.get("daily_summary_date"),
         "stations":
             station_states,
     }
@@ -1028,6 +1033,43 @@ def save_alert_state(
     temp_file.replace(
         ALERT_STATE_FILE
     )
+
+
+def daily_summary_sent_today() -> bool:
+    state = load_alert_state()
+    return (
+        state.get("daily_summary_date")
+        == now_thailand().date().isoformat()
+    )
+
+
+def mark_daily_summary_sent() -> None:
+    state = load_alert_state()
+    state["version"] = max(
+        2,
+        int(state.get("version", 1)),
+    )
+    state["daily_summary_date"] = (
+        now_thailand().date().isoformat()
+    )
+    ALERT_STATE_FILE.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+    temp_file = ALERT_STATE_FILE.with_suffix(
+        ".json.tmp"
+    )
+    with temp_file.open(
+        "w",
+        encoding="utf-8",
+    ) as file:
+        json.dump(
+            state,
+            file,
+            ensure_ascii=False,
+            indent=2,
+        )
+    temp_file.replace(ALERT_STATE_FILE)
 
 
 def alarm_level_from_snapshot(
