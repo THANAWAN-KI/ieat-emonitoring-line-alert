@@ -26,8 +26,8 @@
     body.innerHTML=estates.slice(0,12).map((e,i)=>{
       const rainfall=e.max_rainfall_mm==null?"–":fmt(e.max_rainfall_mm)+" มม.";
       const distance=e.nearest_alert_km==null?"–":fmt(e.nearest_alert_km)+" กม.";
-      const status=e.status||"เฝ้าระวัง";
-      return `<tr><td>${i+1}</td><td><b>${e.name}</b></td><td>${fmt(e.alert_station_count,0)} สถานี</td><td>${distance}</td><td>${rainfall}</td><td><span class="badge">${status}</span></td></tr>`;
+      const status=e.status||"เฝ้าระวัง",level=Number(e.severity_score)>=4||status.includes("ล้น")?"critical":Number(e.severity_score)>=3||status.includes("มาก")?"warning":"normal";
+      return `<tr><td>${i+1}</td><td><b>${e.name}</b></td><td>${fmt(e.alert_station_count,0)} สถานี</td><td>${distance}</td><td>${rainfall}</td><td><span class="water-status-cell ${level}">${status}</span></td></tr>`;
     }).join("");
   }
   function apply(data){
