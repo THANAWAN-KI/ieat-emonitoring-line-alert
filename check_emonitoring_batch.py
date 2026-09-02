@@ -102,9 +102,12 @@ def main() -> int:
         return 0
 
     current_minutes = current_time.hour * 60 + current_time.minute
-    if not 8 * 60 + 30 <= current_minutes <= 16 * 60 + 30:
-        print("อยู่นอกช่วงเวลา 08:30-16:30 น. — ไม่ส่ง LINE")
+    if not 8 * 60 + 30 <= current_minutes <= 16 * 60 + 59:
+        print("อยู่นอกช่วงเวลา 08:30-16:59 น. — ไม่ส่ง LINE")
         return 0
+
+    # รอบเวลา 16:30 (เผื่อ GitHub Actions เริ่มช้า) เป็นรายงานประจำวัน
+    daily_summary_mode = current_time.hour == 16
 
     print("=" * 72)
     print("IEAT e-Monitoring LINE Alert - Quota Saver")
@@ -176,6 +179,46 @@ def main() -> int:
         "เกณฑ์แจ้งสถานี OFFLINE ต่อเนื่อง: "
         f"{base.offline_threshold_minutes()} นาที"
     )
+
+    if daily_summary_mode:
+        if base.daily_summary_sent_today():
+            base.save_alert_state(all_stations)
+            print("LINE: ไม่ส่ง — รายงานประจำวันนี้ถูกส่งแล้ว")
+            print("โควตารอบนี้: 0 ข้อความ")
+            return 0
+
+        if not base.zone_routing_enabled():
+            print(
+                "ERROR: LINE Zone routing ยังไม่เปิดใช้งาน "
+                "และ Broadcast ถูกปิด"
+            )
+            return 1
+
+        print(
+            "รอบรายงานประจำวัน: ส่ง 1 Flex Message ต่อ Zone "
+            "แม้ไม่มีข้อมูลใหม่"
+        )
+        try:
+            success = base.send_zone_daily_summaries(
+                all_stations
+            )
+        except RuntimeError as error:
+            print(f"ERROR: {error}")
+            return 1
+
+        if not success:
+            print(
+                "ERROR: ส่งรายงานประจำวันไม่สำเร็จ — "
+                "ยังไม่บันทึกสถานะเพื่อให้ retry"
+            )
+            return 1
+
+        base.save_alert_state(all_stations)
+        base.mark_daily_summary_sent()
+        print("ส่งรายงานประจำวันครบทุก Zone แล้ว")
+        print("บันทึกสถานะป้องกันการส่งรายงานซ้ำแล้ว")
+        print("Dashboard อัปเดตแล้ว")
+        return 0
 
     if not events:
         base.save_alert_state(all_stations)
