@@ -230,6 +230,76 @@
 .export-sheet{cursor:context-menu}.export-sheet::after{content:"คลิกขวาเพื่อสร้างภาพ";position:absolute;right:12px;bottom:10px;padding:5px 8px;background:#fff;border:1px solid #8a99a3;border-radius:5px;color:#40515c;font-size:10px}.export-sheet.report-exporting::after{display:none}
         .dual-forecast-maps{display:grid;grid-template-columns:1fr 1fr;gap:12px;height:540px}.forecast-map-card{margin:0;min-width:0;display:flex;flex-direction:column;border:1px solid #000}.forecast-map-card figcaption{text-align:center;background:#e8e8e8;border-bottom:1px solid #000;padding:8px;font-size:13px;font-weight:700}.forecast-map-card .forecast-map-frame{flex:1;position:relative;min-height:0;overflow:hidden}.forecast-legend.horizontal{display:flex;justify-content:center;gap:24px;border:1px solid #000;padding:8px}.forecast-legend.horizontal p{margin:0;display:flex;align-items:center;gap:5px;font-size:11px}
   </style>
+
+<style>
+/* Unified visual system with docs/drought.html */
+:root{
+ --dash-bg:#ffffff;--dash-card:#ffffff;--dash-line:#f1f3f5;
+ --dash-blue:#2878cf;--dash-teal:#009f98;--dash-orange:#e99a1b;
+ --dash-rust:#a84f32;--dash-ink:#111111;--dash-muted:#111111
+}
+html,body{background:var(--dash-bg)!important}
+body{font-family:"Sarabun",sans-serif!important;color:var(--dash-ink)!important;font-size:13px!important}
+button,input,select,textarea{font-family:"Sarabun",sans-serif!important}
+.topbar{
+ position:relative!important;top:auto!important;margin:12px 16px 0!important;
+ background:#fff!important;border:1px solid #fff!important;border-radius:12px!important;
+ box-shadow:0 8px 24px rgba(45,55,66,.10)!important;backdrop-filter:none!important
+}
+.top-inner{min-height:64px!important;padding:11px 16px!important;gap:18px!important}
+.brand{border-left:0!important;padding-left:0!important;min-width:0!important}
+.brand b{font-size:22px!important;line-height:1.25!important;font-weight:700!important;color:#111!important}
+.brand span{font-size:13px!important;color:#111!important;margin-top:3px!important;display:block}
+.nav{margin-left:auto!important;background:#f3f5f7!important;padding:4px!important;border-radius:20px!important}
+.nav button{font-size:12px!important;padding:8px 13px!important;border-radius:17px!important;color:#111!important;font-weight:600!important}
+.nav button.active{background:var(--dash-blue)!important;color:#fff!important;box-shadow:0 5px 13px rgba(40,120,207,.22)!important}
+.container{width:100%!important;max-width:1800px!important;margin:0 auto!important;padding:12px 16px 40px!important}
+.view.active{color:#111!important}
+.card,.national-alert,.watch-dashboard-block,.national-situation-block,
+.operations-side,.operations-map,.warning-table,.focus-data-table,
+.info-card,.panel,.table-panel{
+ background:#fff!important;border:1px solid var(--dash-line)!important;
+ border-radius:12px!important;box-shadow:0 3px 14px rgba(48,60,72,.08)!important
+}
+.grid.kpis{gap:10px!important}
+.card.kpi{min-height:104px!important;padding:11px 12px!important}
+.card.kpi .icon{width:31px!important;height:31px!important;border-radius:50%!important}
+.card.kpi strong{font-size:28px!important;font-weight:700!important;color:var(--dash-blue)!important}
+.card.kpi span{font-size:13px!important;color:#111!important;font-weight:600!important}
+.card.kpi:nth-child(2) strong{color:var(--dash-orange)!important}
+.card.kpi:nth-child(3) strong{color:var(--dash-teal)!important}
+.national-cards{gap:10px!important}
+.national-kpi{padding:12px!important;min-height:120px!important}
+.national-kpi h2{font-size:14px!important;color:#111!important;font-weight:700!important}
+.national-kpi strong{font-size:28px!important;color:var(--dash-blue)!important}
+.national-kpi span,.national-kpi .source-link{font-size:12px!important;color:#111!important}
+.card-head h2,.table-section-head h2,.operations-side h2,
+.warning-table h2,.focus-data-table h2{font-size:17px!important;color:#111!important;font-weight:700!important}
+.card-head span,.table-section-head p,.table-section-head span,
+.source-note,.overview-map-label small{font-size:12px!important;color:#111!important}
+.national-alert{padding:14px!important;color:#111!important}
+.national-alert b{font-size:15px!important}.national-alert p,.national-alert a{font-size:13px!important;color:#111!important}
+.barrow span,.barrow b{font-size:13px!important;color:#111!important}
+.overview-map-label{font-size:14px!important;color:#111!important}
+.table-section-head{background:#fff!important;padding:12px 14px!important}
+.table-scroll{max-width:100%!important;overflow-x:auto!important}
+.table{font-family:"Sarabun",sans-serif!important}
+.table th{font-size:12px!important;font-weight:700!important;color:#111!important}
+.table td{font-size:12px!important;color:#111!important;line-height:1.4!important}
+.warning-source,.source-link{color:var(--dash-blue)!important}
+.map-cell-zoom,.nearest-estate-zoom{font-size:12px!important}
+.report-toolbar,.multi-report-toolbar{font-family:"Sarabun",sans-serif!important}
+.report-toolbar h1,.multi-report-toolbar h1{font-size:22px!important;color:#111!important}
+.report-toolbar p,.multi-report-toolbar p{font-size:13px!important;color:#111!important}
+@media(max-width:760px){
+ .topbar{margin:8px 8px 0!important}.top-inner{align-items:flex-start!important;flex-wrap:wrap!important}
+ .brand b{font-size:19px!important}.brand span{font-size:12px!important}
+ .nav{width:100%!important}.nav button{flex:1!important}
+ .container{padding:8px 8px 28px!important}
+ .card.kpi strong,.national-kpi strong{font-size:24px!important}
+ .card.kpi span,.national-kpi h2{font-size:12px!important}
+}
+</style>
 </head>
 <body>
   <header class="topbar"><div class="top-inner">
