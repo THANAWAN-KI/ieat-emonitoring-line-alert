@@ -73,12 +73,77 @@ body{background:#fff;color:#2d2926}
 .map-title,.map-status{border-color:var(--softline);box-shadow:0 5px 15px rgba(91,67,51,.10)}
 @media(max-width:1000px){.charts-focus{grid-template-columns:1fr}}
 </style>
+
+<style>
+/* GISTDA-inspired dimensional dashboard */
+:root{
+ --dash-bg:#f5f6f8;--dash-card:#ffffff;--dash-line:#ebe6e1;
+ --dash-orange:#f5a623;--dash-rust:#93452f;--dash-teal:#08a7a5;
+ --dash-blue:#3478d4;--dash-ink:#34302d;--dash-muted:#82776f;
+}
+html,body{background:var(--dash-bg)}
+.wrap{max-width:1580px;padding:18px 22px 42px}
+.dashboard-head{
+ min-height:78px;background:var(--dash-card);border:1px solid var(--dash-line)!important;
+ border-radius:14px!important;box-shadow:0 5px 18px rgba(74,57,45,.10);
+ padding:17px 22px;margin-bottom:15px
+}
+.head-brand{width:100%}.head-brand h2{font-size:24px;color:var(--dash-ink);letter-spacing:-.2px}
+.head-brand h2 i{width:38px;height:38px;display:inline-grid;place-items:center;
+ border-radius:11px;background:#fff3dc;color:var(--dash-orange);margin-right:9px;
+ box-shadow:inset 0 0 0 1px #f3dfbb}
+.head-brand p{font-size:13px;color:var(--dash-muted);margin-left:50px}
+.dashboard-kpis{gap:12px}
+.dashboard-kpis .kpi{
+ border:1px solid var(--dash-line)!important;border-radius:13px!important;
+ box-shadow:0 5px 16px rgba(71,55,43,.09)!important;padding:14px 15px;
+ transition:transform .2s ease,box-shadow .2s ease
+}
+.dashboard-kpis .kpi:hover{transform:translateY(-2px);box-shadow:0 9px 24px rgba(71,55,43,.13)!important}
+.dashboard-kpis .kpi:before{display:none!important}
+.dashboard-kpis .kpi span{color:#665c55}.dashboard-kpis .kpi strong{color:#302c29}
+.dashboard-kpis .kpi-icon,.dashboard-kpis .kpi:nth-child(n) .kpi-icon{
+ border-radius:11px;background:#fff4df;color:var(--dash-orange);
+ box-shadow:inset 0 0 0 1px #f3dfbb
+}
+.dashboard-kpis .kpi:nth-child(4) .kpi-icon{background:#eaf5ff;color:var(--dash-blue);box-shadow:inset 0 0 0 1px #d3e8fb}
+.dashboard-kpis .kpi:nth-child(5) .kpi-icon{background:#e8f8f6;color:var(--dash-teal);box-shadow:inset 0 0 0 1px #cfeeea}
+.dashboard-kpis .kpi:nth-child(6) .kpi-icon{background:#f8ebe6;color:var(--dash-rust);box-shadow:inset 0 0 0 1px #ecd4ca}
+.panel,.section,.chart-panel{
+ background:var(--dash-card)!important;border:1px solid var(--dash-line)!important;
+ border-top:1px solid var(--dash-line)!important;border-radius:14px!important;
+ box-shadow:0 6px 20px rgba(73,57,46,.10)!important;overflow:hidden
+}
+.chart-panel{padding:17px!important}.chart-panel h3{color:var(--dash-ink)!important;
+ border-bottom:1px solid #f0ebe7;padding-bottom:11px}
+.chart-hint{color:var(--dash-muted)}
+.filters,.map-panel,.section{border-top:1px solid var(--dash-line)!important}
+.filters h3,.section-head h3,.sources h3,.actions h3{color:var(--dash-ink)}
+.field select,.field input{border:1px solid #e2dbd5;border-radius:9px!important;background:#fafafa}
+.field select:focus,.field input:focus{outline:2px solid #f7d89f;border-color:var(--dash-orange);background:#fff}
+.btn{border-radius:9px!important}.primary{background:var(--dash-rust)}.secondary{background:#f3efec;color:#53473f}
+.map-title,.map-status{border:1px solid var(--dash-line);border-radius:10px!important;
+ box-shadow:0 5px 16px rgba(73,57,46,.12)}
+.section-head{background:#fffaf4}
+.badge{border-radius:999px!important;background:#fff2d9;color:#7a4a12}
+.zoom{border-radius:8px!important;background:#fff1d7;color:#76410d;border-color:#ebc27c}
+.source,.check,.note{border:1px solid var(--dash-line);border-radius:11px!important;
+ box-shadow:0 3px 10px rgba(73,57,46,.06)}
+.source:hover{border-color:#efc578;box-shadow:0 6px 15px rgba(73,57,46,.10)}
+.note{background:#fffaf1;color:#6f6259}
+.table-wrap{background:#fff;border-radius:0!important}
+.footer{color:var(--dash-muted)}
+@media(max-width:600px){
+ .wrap{padding:10px 8px 28px}.dashboard-head{border-radius:11px!important;padding:14px}
+ .head-brand h2{font-size:19px}.head-brand h2 i{width:32px;height:32px;border-radius:9px}
+ .head-brand p{margin-left:0;margin-top:7px}.dashboard-kpis .kpi,.panel,.section,.chart-panel{border-radius:11px!important}
+}
+</style>
 </head>
 <body>
 <main class="wrap">
 <section class="dashboard-head">
 <div class="head-brand"><div><h2><i class="fa-solid fa-droplet"></i> ศูนย์ข้อมูลสถานการณ์ภัยแล้ง</h2><p>คัดกรองพื้นที่ ติดตามแนวโน้ม และสนับสนุนการเตรียมความพร้อมของนิคมอุตสาหกรรม</p></div></div>
-<div class="head-meta"><span id="reportDate">กำลังตรวจสอบวันที่…</span><a href="https://www.arcgis.com/apps/mapviewer/index.html?webmap=d6044d4f209345e6ac731afafe3c9d4a" target="_blank"><i class="fa-solid fa-map-location-dot"></i> เปิดแผนที่เต็มหน้า</a></div>
 </section>
 <section class="kpis dashboard-kpis">
 <div class="kpi kpi-purple"><span>นิคมอุตสาหกรรม / ท่าเรือฯ</span><div><i class="fa-solid fa-city kpi-icon"></i><strong id="estateCount">–</strong></div><small>แห่ง</small></div>
@@ -134,7 +199,7 @@ const WEBMAP_ID="d6044d4f209345e6ac731afafe3c9d4a";
 const WATER_URL="https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/Data_การใช้น้ำในพื้นที่นิคม/FeatureServer/0";
 const months=["มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"];
 const shortMonths=["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."];
-const now=new Date();document.getElementById("reportDate").textContent="ข้อมูล ณ วันที่ "+now.getDate()+" "+months[now.getMonth()]+" "+(now.getFullYear()+543);
+const now=new Date();
 let allRows=[],filteredRows=[],view,waterLayer,charts={};
 const yearSelect=document.getElementById("yearSelect"),monthSelect=document.getElementById("monthSelect"),operationSelect=document.getElementById("operationSelect"),estateSelect=document.getElementById("estateSelect"),searchInput=document.getElementById("searchInput"),estateRows=document.getElementById("estateRows"),showBtn=document.getElementById("showBtn"),resetBtn=document.getElementById("resetBtn"),mapStatus=document.getElementById("mapStatus");
 const esc=function(value){return String(value??"").replace(/[&<>"']/g,function(char){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char];});};
