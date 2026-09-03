@@ -47,6 +47,94 @@
     html,body{width:100%;min-height:100%;overflow-x:hidden}
     .top-inner,.container,.info-wrap{width:100%;max-width:none}
     .view.active{width:100%;min-height:calc(100vh - 110px)}
+
+/* drought-layout-parity-2026-09-03 */
+body{background:var(--bg);font-family:"Sarabun","Noto Sans Thai",sans-serif}
+.topbar{height:70px;position:sticky;top:0;z-index:50;background:#fff;border:0;border-bottom:1px solid var(--line);box-shadow:none;backdrop-filter:none}
+.top-inner{width:100%;max-width:1500px;min-height:70px;height:70px;margin:auto;padding:0 22px;gap:13px}
+.flood-head-icon{flex:0 0 52px;width:52px;height:45px;display:grid;place-items:center;color:var(--purple)}
+.flood-head-icon svg{width:42px;height:42px}
+.brand{min-width:0;max-width:780px;border-left:0;padding-left:0}
+.brand b{font-size:20px;line-height:1.25;color:var(--ink);font-weight:600}
+.brand span{font-size:12px;color:var(--muted);margin-top:3px}
+.nav{margin-left:auto;padding:0;gap:8px;background:transparent;border-radius:0}
+.nav button{padding:9px 12px;border:1px solid #d7cddd;border-radius:8px;background:var(--soft);color:var(--purple);font-size:13px;font-weight:600}
+.nav button.active{background:var(--purple);color:#fff;box-shadow:none}
+.container{max-width:1500px;margin:auto;padding:16px 22px 38px}
+.top-overview-grid,.top-overview-metrics{display:block}
+.watch-dashboard-block,.national-situation-block{margin:0}
+.card,.national-alert,.daily-water-report,.operations-map,.warning-table,.report-export-workspace,.drawer-panel{border-radius:0!important;box-shadow:none}
+.kpis{grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.kpi{min-height:136px;padding:12px 15px;display:grid;grid-template-columns:58px 1fr;gap:12px;text-align:left;border:1px solid #000}
+.kpi .icon{width:52px;height:52px;border:0;border-radius:0;background:transparent}
+.kpi .icon img,.kpi .icon svg{width:44px;height:44px}
+.kpi strong{font-size:30px;color:var(--purple);font-weight:600}
+.kpi span{font-size:14px;color:var(--ink);font-weight:600}
+.kpis>.kpi:nth-child(1){background:#ddd0e6}
+.kpis>.kpi:nth-child(2){background:#d9eef4}
+.kpis>.kpi:nth-child(3){background:#f4ddc1}
+.national-cards-dashboard{grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 14px}
+.national-kpi{min-height:176px;padding:14px 15px;text-align:center;border:1px solid #000}
+.national-kpi .n-icon{width:46px;height:46px;margin:auto}
+.national-kpi .n-icon img{width:46px;height:46px}
+.national-kpi h2{font-size:14px;min-height:40px;margin:7px 0 0;color:#111}
+.national-kpi strong{font-size:34px;color:var(--purple);margin-top:4px}
+.national-kpi span{font-size:13px;color:#333}
+.national-kpi .source-link{font-size:11px;margin-top:5px}
+.national-kpi:nth-child(1){background:#e7dcef}
+.national-kpi:nth-child(2){background:#dcebf8}
+.national-kpi:nth-child(3){background:#f6edb5}
+.national-kpi:nth-child(4){background:#cfe9ee}
+.operations-dashboard{display:grid;grid-template-columns:290px minmax(0,1fr);gap:12px;margin-bottom:14px;align-items:stretch}
+.operations-side{display:grid;gap:12px;align-content:start}
+.national-alert,.daily-water-report,.nationwide-indicators{background:#fff;border:1px solid var(--line);padding:17px}
+.national-alert b,.daily-water-head h2,.card-head h2{font-size:18px;color:var(--ink)}
+.daily-water-grid{grid-template-columns:1fr 1fr;gap:8px}
+.daily-water-item{border:1px solid var(--line);border-radius:0!important;padding:10px;background:#fff!important}
+.daily-water-item strong{font-size:20px}
+.daily-water-head{display:block}
+.daily-water-head>span{display:inline-block;margin-top:8px}
+.nationwide-indicators{padding:0}
+.card-head{padding:15px 17px;border-bottom:1px solid var(--line)}
+.bars{padding:8px 17px 15px}
+.barrow{grid-template-columns:1fr;margin:12px 0;gap:5px}
+.barrow b{text-align:left}
+.source-note{border-radius:0;background:var(--soft)}
+.operations-map{min-height:650px;border:1px solid var(--line);position:relative;overflow:hidden}
+.operations-map iframe{width:100%!important;height:650px!important;display:block;border:0}
+.overview-map-label{border-radius:0;border:1px solid var(--line);box-shadow:none}
+.tables-overview-grid{display:grid;grid-template-columns:1fr;gap:14px}
+.warning-table{border:1px solid var(--line);background:#fff;padding:0}
+.table-section-head{padding:15px 17px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.table-section-head h2{font-size:18px;margin:0}
+.table-section-head p,.table-section-head>span{font-size:12px;color:var(--muted)}
+.table-scroll{overflow:auto;padding:12px}
+.table{width:100%;border-collapse:collapse;border:1px solid #000}
+.table th,.table td{border:1px solid #000;padding:8px 6px;text-align:center;font-size:12px;line-height:1.4}
+.table th{background:#e4e4e4;color:#111;font-weight:700}
+.table tr:nth-child(even) td{background:#fafafa}
+.table tr:hover td{background:#eef4ff!important}
+.multi-report-toolbar{border:1px solid var(--line);border-radius:0;background:#fff;box-shadow:none}
+.report-pages{gap:14px}
+.export-sheet{box-shadow:none;border:1px solid #000;border-radius:0!important}
+.primary,.secondary,.map-upload-button,.drawer button,.drawer input,.drawer select,.drawer textarea{border-radius:0!important}
+@media(max-width:1000px){
+ .topbar{height:auto}.top-inner{height:auto;min-height:70px;flex-wrap:wrap;padding:10px 16px}
+ .nav{width:100%;margin-left:0}.nav button{flex:1}
+ .container{padding:12px}
+ .kpis{grid-template-columns:repeat(3,1fr)}
+ .national-cards-dashboard{grid-template-columns:repeat(2,1fr)}
+ .operations-dashboard{grid-template-columns:1fr}
+ .operations-map,.operations-map iframe{min-height:620px;height:620px!important}
+}
+@media(max-width:600px){
+ .top-inner{padding:9px 7px}.flood-head-icon{display:none}.brand b{font-size:18px}.brand span{font-size:11px}
+ .container{padding:9px 7px 24px}.kpis{grid-template-columns:1fr;gap:7px}.kpi{min-height:96px}
+ .national-cards-dashboard{grid-template-columns:repeat(2,1fr);gap:7px}.national-kpi{min-height:160px;padding:10px 7px}
+ .operations-dashboard{gap:8px}.operations-map,.operations-map iframe{min-height:530px;height:530px!important}
+ .daily-water-grid{grid-template-columns:1fr}.table-section-head{align-items:flex-start}
+}
+
 </style>
 
   <style id="thaiwater-report-theme">
