@@ -498,4 +498,119 @@ footer{padding:20px;font-size:14px}
   .hub-contact-link{padding:7px 8px;font-size:11px}
 }
 </style>
+
+<style>
+/* Final professional fire dashboard theme */
+#fireReportView{
+  --fire-deep:#761F2C;
+  --fire-red:#A93D4B;
+  --fire-rose:#D99AA2;
+  --fire-cream:#FFF4EE;
+  --fire-line:#E8CDD0;
+  --fire-ink:#34272A;
+  color:var(--fire-ink);
+}
+.tab[data-type="fire"].active{
+  color:#761F2C!important;border-bottom-color:#761F2C!important;
+  background:linear-gradient(180deg,#fff 0%,#FFF4EE 100%)!important
+}
+#fireReportView .fire-overview-head{
+  position:relative!important;overflow:hidden!important;
+  padding:18px 22px!important;
+  background:linear-gradient(110deg,#fff 0%,#FFF4EE 70%,#F5DDE0 100%)!important;
+  border:1px solid var(--fire-line)!important;
+  border-left:6px solid var(--fire-deep)!important;
+  border-radius:14px!important;
+  box-shadow:0 7px 22px rgba(118,31,44,.12)!important
+}
+#fireReportView .fire-overview-head:after{
+  content:"";position:absolute;right:-45px;top:-70px;width:180px;height:180px;
+  border-radius:50%;background:rgba(169,61,75,.08);pointer-events:none
+}
+#fireReportView .fire-overview-head h1{color:var(--fire-deep)!important;font-weight:700!important}
+#fireReportView .fire-overview-head p{color:#4E3A3E!important}
+#fireReportView .fire-support-board,
+#fireReportView .fire-analysis-panel,
+#fireReportView .fire-dss-panel{
+  background:#fff!important;border:1px solid var(--fire-line)!important;
+  border-radius:14px!important;box-shadow:0 8px 25px rgba(83,34,42,.11)!important
+}
+#fireReportView .fire-board-title,
+#fireReportView .fire-map-head,
+#fireReportView .fire-dss-head{
+  background:linear-gradient(90deg,#fff 0%,#FFF7F2 100%)!important;
+  border-bottom:1px solid var(--fire-line)!important
+}
+#fireReportView .fire-board-title h2,
+#fireReportView .fire-map-head h2,
+#fireReportView .fire-dss-head h2{color:var(--fire-deep)!important;font-weight:700!important}
+#fireReportView .fire-board-title p,
+#fireReportView .fire-map-head p,
+#fireReportView .fire-dss-head p{color:#4E3A3E!important}
+#fireReportView .fire-estate-search{
+  background:linear-gradient(145deg,#fff,#FFF4EE)!important;
+  border:1px solid var(--fire-line)!important;
+  box-shadow:0 5px 16px rgba(118,31,44,.08)!important
+}
+#fireReportView .fire-estate-search label{color:var(--fire-deep)!important}
+#fireReportView .fire-search-row input{
+  border-color:#D8B4B9!important;background:#fff!important;color:#2F2527!important
+}
+#fireReportView .fire-search-row input:focus{
+  border-color:var(--fire-red)!important;box-shadow:0 0 0 3px rgba(169,61,75,.13)!important
+}
+#fireReportView .fire-search-row button{
+  background:var(--fire-deep)!important;color:#fff!important;
+  box-shadow:0 4px 12px rgba(118,31,44,.22)!important
+}
+#fireReportView .fire-search-row button:hover{background:#5F1722!important}
+#fireReportView .fire-support-card{
+  background:linear-gradient(145deg,#fff 0%,#FFF9F5 100%)!important;
+  border:1px solid #EED9DB!important;border-top:4px solid var(--fire-deep)!important;
+  box-shadow:0 7px 20px rgba(83,34,42,.10)!important;
+  transition:transform .18s ease,box-shadow .18s ease
+}
+#fireReportView .fire-support-card:nth-child(even){border-top-color:var(--fire-red)!important}
+#fireReportView .fire-support-card:nth-child(3n){border-top-color:var(--fire-rose)!important}
+#fireReportView .fire-support-card:hover{
+  transform:translateY(-2px);box-shadow:0 11px 25px rgba(83,34,42,.15)!important
+}
+#fireReportView .fire-support-card small{color:#3E3033!important}
+#fireReportView .fire-support-card strong{color:var(--fire-deep)!important}
+#fireReportView .fire-support-card span{color:#4F3E42!important}
+#fireReportView .fire-value-row i{
+  background:#F7E3E5!important;color:var(--fire-deep)!important;
+  border:1px solid #ECCDD1!important
+}
+#fireReportView .fire-support-card:nth-child(even) .fire-value-row i{
+  background:#FFF0E8!important;color:var(--fire-red)!important
+}
+#fireReportView .fire-readiness{
+  background:#FFF9F5!important;border:1px solid var(--fire-line)!important;
+  box-shadow:0 6px 18px rgba(83,34,42,.08)!important
+}
+#fireReportView .fire-readiness-head h3,
+#fireReportView .fire-readiness-grid b{color:var(--fire-deep)!important}
+#fireReportView .fire-readiness-grid>div{background:#fff!important;border:1px solid #F0DFE1!important}
+#fireReportView .fire-readiness-grid span,
+#fireReportView .fire-readiness-head span,
+#fireReportView .fire-hotlines span{color:#4F3E42!important}
+#fireReportView .fire-hotlines{border-top-color:var(--fire-line)!important}
+#fireReportView .fire-hotlines a{
+  background:#F6E2E4!important;color:var(--fire-deep)!important;
+  border:1px solid #E8C8CC!important
+}
+#fireReportView .fire-map-head a{
+  background:#F6E2E4!important;color:var(--fire-deep)!important;
+  border:1px solid #E8C8CC!important
+}
+#fireReportView .fire-analysis-map{background:#F4ECE9!important}
+#fireReportView .success{color:#276749!important}
+#fireReportView .error{color:#9C1C2C!important}
+@media(max-width:700px){
+  #fireReportView .fire-overview-head{padding:14px 15px!important;border-left-width:5px!important}
+  #fireReportView .fire-support-card{border-top-width:3px!important}
+}
+</style>
+
 </body></html>
