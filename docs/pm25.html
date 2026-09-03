@@ -234,5 +234,46 @@
     .pm-report-note{margin-top:20px;padding:16px 18px;border:1px solid #f0dfb4;background:#fffaf0}.pm-report-note b{color:#8a5b00;font-size:15px}.pm-report-note p{margin:5px 0 0;font-size:12px;line-height:1.6}.pm-report-footer{margin-top:28px;padding-top:13px;border-top:1px solid #ccd5df;display:flex;justify-content:space-between;color:#555;font-size:11px}
     @media(max-width:700px){.head-links button{padding:8px 9px;font-size:10px}.head-links a:not(.primary){display:none}}
   </style>
+
+<style>
+/* PM2.5 palette override — colors only */
+:root{
+  --blue:#48A111;
+  --blue-dark:#25671E;
+  --blue-soft:#F2F8EE;
+  --teal:#F2B50B;
+  --green:#48A111;
+  --amber:#F2B50B;
+  --red:#F2B50B;
+}
+.head-brand img{background:#F2F8EE!important}
+.head-brand h1{color:#25671E!important}
+.head-links a{background:#F2F8EE!important;color:#25671E!important}
+.head-links a.primary,.head-links button,#exportPngBtn{background:#25671E!important;color:#fff!important}
+.kpi{box-shadow:0 5px 14px rgba(37,103,30,.07),0 14px 30px rgba(37,103,30,.09)!important}
+.kpi:hover{box-shadow:0 8px 18px rgba(37,103,30,.10),0 18px 36px rgba(37,103,30,.14)!important}
+.kpi>span,.kpi strong,.kpi-icon{color:#48A111!important}
+.kpi-icon{background:#F2F8EE!important}
+.kpi.alert strong,.kpi.alert .kpi-icon{color:#F2B50B!important}
+.kpi.offline strong,.kpi.offline .kpi-icon{color:#25671E!important}
+.panel,.section{border-color:#DDEAD8!important;box-shadow:0 3px 14px rgba(37,103,30,.09)!important}
+.panel-head,.section-head{border-bottom-color:#E1ECDDC!important}
+.panel-head h2:before,.section-head h2:before{background:#F2B50B!important}
+.badge{background:#F2F8EE!important;color:#25671E!important}
+.filters select,.filters input{border-color:#D8E7D3!important;background:#F8FBF6!important}
+.filters button{background:#25671E!important;color:#fff!important}
+.summary-item,.source,.check{border-color:#DDEAD8!important}
+.map-panel{background:#EEF5EA!important}
+.map-source{color:#25671E!important}
+.table tr:hover td{background:#F4F8E9!important}
+.status.online{background:#E8F5E3!important;color:#25671E!important}
+.status.offline{background:#F7EFCB!important;color:#725600!important}
+.pm-value{color:#F2B50B!important}
+.check i{color:#48A111!important}
+.pm-report-head,.pm-report-title,.pm-report .section-head{border-color:#DDEAD8!important}
+.pm-report-label,.pm-report-title h1,.pm-report-kpis strong{color:#25671E!important}
+.pm-report .kpi-icon,.pm-report .report-accent{background:#F2F8EE!important;color:#48A111!important}
+</style>
+
 </body>
 </html>
