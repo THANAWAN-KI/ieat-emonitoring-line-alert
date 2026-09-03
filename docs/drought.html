@@ -634,5 +634,22 @@ async function downloadDroughtReport(){
 }
 document.getElementById("downloadPngBtn").onclick=downloadDroughtReport;
 </script>
+<style>
+/* Align drought title and subtitle exactly like flood-report.html */
+.dashboard-head .head-brand > div{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+}
+.dashboard-head .head-brand h2{
+  margin:0!important;
+}
+.dashboard-head .head-brand p{
+  width:100%!important;
+  margin:3px 0 0!important;
+  padding:0!important;
+  text-align:left!important;
+}
+</style>
 </body>
 </html>
