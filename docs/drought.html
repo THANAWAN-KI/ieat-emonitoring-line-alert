@@ -22,7 +22,7 @@
 .map-panel{position:relative;min-height:650px}.map{height:650px;width:100%}.map-title{position:absolute;top:12px;left:55px;z-index:3;background:#fffffff2;border:1px solid var(--line);border-radius:8px;padding:9px 12px;font-size:13px;font-weight:600;box-shadow:0 3px 12px #2635191c}.map-status{position:absolute;right:12px;bottom:12px;z-index:3;background:#fffffff2;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:12px;color:var(--muted)}
 .note{margin-top:15px;background:var(--soft);border-radius:9px;padding:11px;font-size:12px;line-height:1.55;color:#536344}.note b{display:block;color:var(--dark);margin-bottom:3px}
 .section{background:#fff;border:1px solid var(--line);border-radius:12px;margin-top:14px;overflow:hidden}.section-head{padding:15px 17px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px}.section-head p{font-size:12px;color:var(--muted);margin:3px 0 0}.badge{font-size:12px;color:var(--dark);background:var(--soft);border-radius:999px;padding:6px 10px;white-space:nowrap}
-.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;min-width:850px}.table th,.table td{border-bottom:1px solid #e8ece4;padding:11px 13px;text-align:left;font-size:13px}.table th{background:#f7f9f5;color:#56604f;font-weight:600}.table tr:hover td{background:#fbfcfa}.zoom{border:1px solid #c5d3b4;background:var(--soft);color:var(--dark);border-radius:7px;padding:6px 9px;cursor:pointer}.watch{color:#a66608;font-weight:600}
+.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;min-width:1700px}.table th,.table td{border-bottom:1px solid #e8ece4;padding:11px 13px;text-align:left;font-size:13px}.table th{background:#f7f9f5;color:#56604f;font-weight:600}.table tr:hover td{background:#fbfcfa}.zoom{border:1px solid #c5d3b4;background:var(--soft);color:var(--dark);border-radius:7px;padding:6px 9px;cursor:pointer}.watch{color:#a66608;font-weight:600}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}.sources,.actions{padding:17px}.sources h3,.actions h3{font-size:18px;margin:0 0 12px}.source-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.source{border:1px solid var(--line);border-radius:9px;padding:10px;text-decoration:none;color:var(--ink);font-size:13px}.source b{display:block;color:var(--dark);margin-bottom:2px}.source span{font-size:11px;color:var(--muted)}
 .checklist{display:grid;grid-template-columns:1fr 1fr;gap:8px}.check{border:1px solid var(--line);border-radius:9px;padding:10px;font-size:13px;display:flex;gap:8px}.check i{font-style:normal;color:var(--green);font-weight:700}
 .footer{text-align:center;padding:22px 12px;color:var(--muted);font-size:12px}.esri-ui .esri-widget{font-family:Sarabun,sans-serif}
@@ -58,8 +58,8 @@
 <section class="panel map-panel"><div class="map-title">แผนที่ภัยแล้งและพื้นที่นิคมอุตสาหกรรม</div><div id="viewDiv" class="map"></div><div class="map-status" id="mapStatus">กำลังโหลดแผนที่…</div></section>
 </section>
 <section class="section">
-<div class="section-head"><div><h3>นิคมอุตสาหกรรมสำหรับติดตาม</h3><p>คลิกรายการเพื่อซูมไปยังตำแหน่ง และตรวจสอบร่วมกับชั้นข้อมูลภัยแล้ง</p></div><span class="badge" id="tableSummary">กำลังโหลดข้อมูล</span></div>
-<div class="table-wrap"><table class="table"><thead><tr><th>ลำดับ</th><th>นิคมอุตสาหกรรม</th><th>สายฯ</th><th>ปริมาณน้ำใช้</th><th>น้ำสำรอง</th><th>สำรอง/ใช้</th><th>สถานะข้อมูล</th><th>ตำแหน่ง</th></tr></thead><tbody id="estateRows"><tr><td colspan="8">กำลังโหลดข้อมูลการใช้น้ำ…</td></tr></tbody></table></div>
+<div class="section-head"><div><h3>ข้อมูลสถานภาพนิคมอุตสาหกรรมและท่าเรืออุตสาหกรรม</h3><p>ปริมาณการใช้น้ำรายเดือนของแต่ละนิคมฯ ตามปีที่เลือกจาก Hosted Feature Layer</p></div><span class="badge" id="tableSummary">กำลังโหลดข้อมูล</span></div>
+<div class="table-wrap"><table class="table"><thead><tr><th>ลำดับ</th><th>นิคมอุตสาหกรรม/ท่าเรืออุตสาหกรรม</th><th>สายฯ</th><th>ม.ค.</th><th>ก.พ.</th><th>มี.ค.</th><th>เม.ย.</th><th>พ.ค.</th><th>มิ.ย.</th><th>ก.ค.</th><th>ส.ค.</th><th>ก.ย.</th><th>ต.ค.</th><th>พ.ย.</th><th>ธ.ค.</th><th>รวมทั้งปี</th><th>ตำแหน่ง</th></tr></thead><tbody id="estateRows"><tr><td colspan="17">กำลังโหลดข้อมูลการใช้น้ำ…</td></tr></tbody></table></div>
 </section>
 <div class="two-col">
 <section class="panel sources"><h3>ประกาศและแหล่งข้อมูลทางการ</h3><div class="source-grid">
@@ -106,7 +106,7 @@ require(["esri/WebMap","esri/views/MapView","esri/layers/FeatureLayer","esri/wid
    for(let start=0;start<objectIds.length;start+=800){const result=await waterLayer.queryFeatures({objectIds:objectIds.slice(start,start+800),outFields:["*"],returnGeometry:true});features.push(...result.features);}
    allRows=features.map(function(feature){const a=feature.attributes;return {year:num(a["ปี"]),month:num(a["เดือน"]),name:String(a["นิคมอุตสาหกรรม"]||"").trim(),operation:String(a["สายปฏิบัติการ"]??"-"),use:num(a["ปริมาณน้ำใช้"]),reserve:a["ปริมาณน้ำสำรอง"]==null?null:num(a["ปริมาณน้ำสำรอง"]),operators:num(a["ผู้ประกอบการ"]),status:String(a["สถานะ"]||"-"),feature:feature};}).filter(function(row){return row.name&&row.year&&row.month;});
    setupPeriods();updateFilters();mapStatus.textContent="แผนที่และข้อมูลการใช้น้ำพร้อมใช้งาน";
-  }catch(error){mapStatus.textContent="ไม่สามารถโหลดข้อมูลการใช้น้ำ กรุณารีเฟรชอีกครั้ง";estateRows.innerHTML='<tr><td colspan="8">ไม่สามารถเข้าถึง Hosted Feature Layer ได้</td></tr>';}
+  }catch(error){mapStatus.textContent="ไม่สามารถโหลดข้อมูลการใช้น้ำ กรุณารีเฟรชอีกครั้ง";estateRows.innerHTML='<tr><td colspan="17">ไม่สามารถเข้าถึง Hosted Feature Layer ได้</td></tr>';}
  }).catch(function(){mapStatus.textContent="ไม่สามารถโหลดแผนที่ได้ กรุณารีเฟรชอีกครั้ง";});
 });
 function setupPeriods(){
@@ -138,10 +138,16 @@ function updateFilters(){
 }
 function renderData(){
  const totalUse=filteredRows.reduce(function(sum,row){return sum+row.use;},0),withReserve=filteredRows.filter(function(row){return row.reserve!==null;}),totalReserve=withReserve.reduce(function(sum,row){return sum+row.reserve;},0);
+ const selectedEstates=[...new Set(filteredRows.map(function(row){return row.name;}))];
  document.getElementById("waterUseTotal").textContent=fmt(totalUse,2);document.getElementById("waterReserveTotal").textContent=fmt(totalReserve,2);
- document.getElementById("estateCount").textContent=filteredRows.length.toLocaleString("th-TH");document.getElementById("reserveCoverage").textContent=filteredRows.length?fmt(withReserve.length*100/filteredRows.length,0):"0";
- document.getElementById("tableSummary").textContent=(shortMonths[Number(monthSelect.value)-1]||"")+" "+String(yearSelect.value).slice(-2)+" · "+filteredRows.length.toLocaleString("th-TH")+" แห่ง";
- estateRows.innerHTML=filteredRows.map(function(row,index){const sourceIndex=allRows.indexOf(row),ratio=row.reserve===null||!row.use?null:row.reserve*100/row.use;return '<tr><td>'+(index+1)+'</td><td><b>'+esc(row.name)+'</b></td><td>'+esc(row.operation)+'</td><td>'+fmt(row.use,2)+'</td><td>'+(row.reserve===null?"ไม่มีข้อมูล":fmt(row.reserve,2))+'</td><td>'+(ratio===null?"–":fmt(ratio,1)+"%")+'</td><td class="watch">'+esc(row.status)+'</td><td><button class="zoom" data-index="'+sourceIndex+'">ดูบนแผนที่</button></td></tr>';}).join("")||'<tr><td colspan="8">ไม่พบข้อมูลตามเงื่อนไข</td></tr>';
+ document.getElementById("estateCount").textContent=selectedEstates.length.toLocaleString("th-TH");document.getElementById("reserveCoverage").textContent=filteredRows.length?fmt(withReserve.length*100/filteredRows.length,0):"0";
+ const year=Number(yearSelect.value),op=operationSelect.value,q=searchInput.value.trim().toLowerCase();
+ const annualRows=allRows.filter(function(row){return row.year===year&&(!op||row.operation===op)&&(!q||row.name.toLowerCase().includes(q));});
+ const grouped=new Map();
+ annualRows.forEach(function(row){const key=row.name+"|"+row.operation;if(!grouped.has(key))grouped.set(key,{name:row.name,operation:row.operation,months:Array(12).fill(null),features:Array(12).fill(null)});const item=grouped.get(key);item.months[row.month-1]=row.use;item.features[row.month-1]=row.feature;});
+ const estates=[...grouped.values()].sort(function(a,b){return a.name.localeCompare(b.name,"th");});
+ document.getElementById("tableSummary").textContent="ปี "+year+" · "+estates.length.toLocaleString("th-TH")+" แห่ง";
+ estateRows.innerHTML=estates.map(function(item,index){const total=item.months.reduce(function(sum,value){return sum+(value===null?0:value);},0);const feature=item.features[Number(monthSelect.value)-1]||item.features.find(function(value){return value;});const featureRow=annualRows.find(function(row){return row.feature===feature;});const cells=item.months.map(function(value){return "<td>"+(value===null?"–":fmt(value,2))+"</td>";}).join("");return '<tr><td>'+(index+1)+'</td><td><b>'+esc(item.name)+'</b></td><td>'+esc(item.operation)+'</td>'+cells+'<td><b>'+fmt(total,2)+'</b></td><td>'+(featureRow?'<button class="zoom" data-index="'+allRows.indexOf(featureRow)+'">ดูบนแผนที่</button>':"–")+'</td></tr>';}).join("")||'<tr><td colspan="17">ไม่พบข้อมูลรายเดือนตามเงื่อนไข</td></tr>';
  estateRows.querySelectorAll(".zoom").forEach(function(button){button.onclick=function(){zoomTo(allRows[Number(button.dataset.index)]);};});
 }
 async function zoomTo(row){if(!row||!view)return;await view.goTo(row.feature.geometry,{zoom:12,duration:900});view.openPopup({features:[row.feature],location:row.feature.geometry});mapStatus.textContent=row.name;document.getElementById("viewDiv").scrollIntoView({behavior:"smooth",block:"center"});}
