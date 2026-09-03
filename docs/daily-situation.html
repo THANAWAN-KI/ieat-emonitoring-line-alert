@@ -272,18 +272,113 @@
         .footer-bottom { margin-top: 28px; }
       }
     </style>
+    <style>
+      /* GISTDA-inspired first-page header using the IEAT identity */
+      .bar{
+        position:sticky;
+        top:0;
+        z-index:1000;
+        width:100%;
+        min-height:62px;
+        padding:0 32px;
+        background:#fff;
+        border:0;
+        border-top:1px solid #e8e8e8;
+        border-bottom:1px solid #dfe3e7;
+        box-shadow:0 3px 8px rgba(31,41,55,.12);
+      }
+      .bar-in{
+        width:100%;
+        max-width:none;
+        min-height:62px;
+        margin:0;
+        gap:18px;
+      }
+      .brand-link{min-width:0;gap:13px}
+      .brand-logo{
+        width:82px;
+        height:48px;
+        flex:0 0 82px;
+        object-fit:contain;
+      }
+      .brand-copy{min-width:0}
+      .brand-copy strong{
+        color:#2f3338;
+        font-size:19px;
+        line-height:1.25;
+        font-weight:700;
+        white-space:nowrap;
+      }
+      .brand-copy span{
+        margin-top:2px;
+        color:#111;
+        font-size:11px;
+        line-height:1.25;
+        font-weight:500;
+        white-space:nowrap;
+      }
+      .header-status{
+        margin-left:auto;
+        padding-left:20px;
+        border-left:1px solid #eceff2;
+        display:flex;
+        align-items:center;
+        gap:9px;
+        color:#40454b;
+        white-space:nowrap;
+      }
+      .status-icon{color:#e7a51b;font-size:17px}
+      .header-status b{display:inline;font-size:13px;font-weight:500}
+      .header-status small{display:inline;margin-left:6px;color:#111;font-size:13px}
+      .actions{margin-left:0;flex:0 0 auto}
+      .actions .hub-btn{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        min-height:38px;
+        padding:9px 18px;
+        border-radius:20px;
+        background:#306bec;
+        color:#fff;
+        font-size:13px;
+        line-height:1;
+        text-decoration:none;
+        box-shadow:none;
+      }
+      .actions .hub-btn:hover{background:#1959df}
+      @media(max-width:900px){
+        .bar{padding:0 16px}
+        .bar-in{gap:12px}
+        .brand-logo{width:68px;flex-basis:68px}
+        .brand-copy strong{font-size:16px;white-space:normal}
+        .brand-copy span{font-size:10px;white-space:normal}
+        .header-status{padding-left:12px}
+        .header-status small{display:block;margin:2px 0 0}
+      }
+      @media(max-width:650px){
+        .bar{padding:6px 10px}
+        .bar-in{min-height:56px}
+        .brand-logo{width:54px;height:40px;flex-basis:54px}
+        .brand-copy strong{font-size:14px}
+        .brand-copy span{font-size:9px}
+        .header-status{display:none}
+        .actions .hub-btn{padding:8px 11px;font-size:11px;white-space:nowrap}
+      }
+    </style>
   </head>
   <body>
     <header class="bar">
       <div class="bar-in">
         <a class="brand-link" href="https://oc.ieat.go.th/th" target="_blank" rel="noopener">
-          <img class="brand-logo" src="https://oc.ieat.go.th/assets/app/images/logo-th.png" alt="โลโก้การนิคมอุตสาหกรรมแห่งประเทศไทย">
+          <img class="brand-logo" src="./ieat_logo.png.PNG" alt="โลโก้การนิคมอุตสาหกรรมแห่งประเทศไทย">
           <span class="brand-copy"><strong>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย</strong><span>Environmental Monitoring and Control Center: EMCC</span></span>
         </a>
+        <div class="header-status" aria-label="วันและเวลาปัจจุบัน">
+          <span class="status-icon">☀</span>
+          <span><b id="headerDate">กำลังตรวจสอบวันที่</b><small id="headerTime">เวลา --:-- น.</small></span>
+        </div>
         <div class="actions">
-          <button class="btn" onclick="location.href='./hub.html'">
-            กลับ Hub
-          </button>
+          <a class="btn primary hub-btn" href="./hub.html">เข้าสู่หน้า Hub</a>
         </div>
       </div>
     </header>
@@ -298,7 +393,7 @@
     <footer class="site-footer">
       <div class="footer-inner">
         <a class="footer-brand" href="https://oc.ieat.go.th/th" target="_blank" rel="noopener">
-          <img src="https://oc.ieat.go.th/assets/app/images/logo-th.png" alt="โลโก้การนิคมอุตสาหกรรมแห่งประเทศไทย">
+          <img src="./ieat_logo.png.PNG" alt="โลโก้การนิคมอุตสาหกรรมแห่งประเทศไทย">
           <span>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย</span>
         </a>
         <div class="footer-grid">
@@ -320,6 +415,13 @@
       </div>
     </footer>
     <script>
+      function updateHeaderClock() {
+        const now = new Date();
+        document.querySelector("#headerDate").textContent = "ข้อมูล ณ วันที่ " + new Intl.DateTimeFormat("th-TH", { timeZone: "Asia/Bangkok", day: "numeric", month: "short", year: "numeric" }).format(now);
+        document.querySelector("#headerTime").textContent = "เวลา " + new Intl.DateTimeFormat("th-TH", { timeZone: "Asia/Bangkok", hour: "2-digit", minute: "2-digit", hour12: false }).format(now) + " น.";
+      }
+      updateHeaderClock();
+      setInterval(updateHeaderClock, 60000);
       const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" })[c]);
       const galleries = {};
       function moveGallery(id, direction) {
