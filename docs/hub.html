@@ -246,4 +246,30 @@ footer{padding:20px;font-size:14px}
 .fire-overview-head h1{font-size:22px!important;line-height:1.3!important}
 @media(max-width:700px){.fire-overview-head h1{font-size:19px!important}}
 </style>
+<style>
+/* DSS iframe fallback height; JavaScript below fits the full editor automatically */
+.fire-dss-frame{height:2300px!important;min-height:2300px!important}
+@media(max-width:1050px){.fire-dss-frame{height:3050px!important;min-height:3050px!important}}
+@media(max-width:700px){.fire-dss-frame{height:3350px!important;min-height:3350px!important}}
+</style>
+<script>
+(function(){
+  function fitFireDssFrame(){
+    var frame=document.getElementById('fireDssFrame');
+    if(!frame)return;
+    try{
+      var doc=frame.contentDocument||frame.contentWindow.document;
+      if(!doc)return;
+      var height=Math.max(
+        doc.documentElement?doc.documentElement.scrollHeight:0,
+        doc.body?doc.body.scrollHeight:0
+      );
+      if(height>0)frame.style.setProperty('height',(height+24)+'px','important');
+    }catch(error){}
+  }
+  var frame=document.getElementById('fireDssFrame');
+  if(frame)frame.addEventListener('load',function(){fitFireDssFrame();setTimeout(fitFireDssFrame,500);setTimeout(fitFireDssFrame,1500)});
+  setInterval(fitFireDssFrame,1500);
+})();
+</script>
 </body></html>
