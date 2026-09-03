@@ -568,6 +568,49 @@ button,input,select,textarea{font-family:"Sarabun",sans-serif!important}
  #warning .table-scroll .table th,#warning .table-scroll .table td{font-size:11px!important;padding:7px 5px!important}
 }
 </style>
+
+<style>
+/* Export workspace refinement */
+.brand b{color:#2878cf!important}
+.report-toolbar-copy{min-width:0}
+.multi-report-toolbar h1,.report-toolbar-copy h1{
+ font-size:18px!important;line-height:1.35!important;font-weight:700!important;color:#111!important
+}
+.multi-report-toolbar p,.report-toolbar-copy>p{
+ font-size:11px!important;line-height:1.5!important;margin:3px 0 0!important;color:#111!important
+}
+.report-edit-links{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+.report-edit-links a{
+ display:inline-flex;align-items:center;min-height:30px;padding:6px 10px;
+ border:1px solid #d8e5ef;border-radius:16px;background:#f4f9fd;
+ color:#1769c2;text-decoration:none;font-size:10px;font-weight:600
+}
+.report-edit-links a:hover{background:#e8f3fb;border-color:#9fc7e5}
+.multi-report-toolbar{align-items:flex-start!important;gap:15px!important;margin-bottom:16px!important}
+.multi-report-actions{flex:0 0 auto!important;justify-content:flex-end!important;flex-wrap:wrap!important}
+.map-upload-button{font-size:11px!important;padding:8px 11px!important;border-radius:17px!important}
+.report-pages{
+ display:grid!important;grid-template-columns:794px 794px!important;
+ justify-content:center!important;align-items:start!important;gap:24px!important
+}
+#reportCanvas{grid-column:1!important;grid-row:1!important}
+#reportPage2{grid-column:2!important;grid-row:1!important}
+#reportPage3{
+ grid-column:1/-1!important;grid-row:2!important;justify-self:center!important;
+ margin:0 auto!important
+}
+.export-sheet{margin:0!important}
+@media(max-width:1680px) and (min-width:901px){
+ .report-pages{grid-template-columns:794px 794px!important;zoom:.70!important;gap:22px!important}
+}
+@media(max-width:900px){
+ .multi-report-toolbar{display:block!important}
+ .multi-report-actions{justify-content:flex-start!important;margin-top:10px!important}
+ .report-pages{display:grid!important;grid-template-columns:794px!important;justify-content:start!important;zoom:1!important;overflow-x:auto!important}
+ #reportCanvas,#reportPage2,#reportPage3{grid-column:1!important;grid-row:auto!important;justify-self:start!important}
+ .report-edit-links{display:grid;grid-template-columns:1fr}
+}
+</style>
 </head>
 <body>
   <header class="topbar"><div class="top-inner">
@@ -644,7 +687,7 @@ button,input,select,textarea{font-family:"Sarabun",sans-serif!important}
     <section class="view" id="infographic">
       <div class="report-export-workspace">
         <div class="multi-report-toolbar">
-          <div><h1>รายงานการประเมินสถานการณ์และพื้นที่เสี่ยงน้ำท่วมฉับพลัน</h1><p>แก้ไขข้อความได้โดยคลิกที่ข้อความ จากนั้นคลิกขวาบนหน้ารายงานเพื่อสร้างภาพสำหรับ Save image หรือ Copy image</p></div>
+          <div class="report-toolbar-copy"><h1>รายงานการประเมินสถานการณ์และพื้นที่เสี่ยงน้ำท่วมฉับพลัน</h1><p>แก้ไขข้อความได้โดยคลิกที่ข้อความ จากนั้นคลิกขวาบนหน้ารายงานเพื่อสร้างภาพสำหรับ Save image หรือ Copy image</p><div class="report-edit-links"><a href="https://twa.thaiwater.net/th/map/basic/overall/overall/0?ds=rr%2Csc&amp;p=hide&amp;c=104.14958%2C12.63781%2C3.114z" target="_blank" rel="noopener">เปิดแผนที่ ThaiWater สำหรับจัดทำภาพ</a><a href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=3d24287ac6ea49cd823625ddad496e01" target="_blank" rel="noopener">เปิดแผนที่ กนอ. สำหรับตรวจสอบตำแหน่ง</a></div></div>
           <div class="multi-report-actions"><label class="map-upload-button">ภาพหน้า 1<input id="reportMapUpload" type="file" accept="image/*" hidden></label><label class="map-upload-button">ภาพ 24 ชม.<input id="forecast24Upload" type="file" accept="image/*" hidden></label><label class="map-upload-button">ภาพ 48 ชม.<input id="forecast48Upload" type="file" accept="image/*" hidden></label></div>
         </div>
 
