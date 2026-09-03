@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
   <style>
     :root{--blue:#306bec;--blue-dark:#1655a6;--blue-soft:#f4f7fd;--teal:#08a7a5;--green:#21895a;--amber:#d88712;--red:#c93642;--ink:#111;--muted:#111;--line:#f1f3f5;--bg:#fff}
     *{box-sizing:border-box}html,body{margin:0;min-height:100%}body{font-family:Sarabun,sans-serif;background:var(--bg);color:var(--ink)}button,input,select{font:inherit}
@@ -28,7 +29,7 @@
 <main class="wrap">
   <section class="dashboard-head">
     <div class="head-brand"><img src="./assets/cloudy-cloud-svgrepo-com.png" alt="ฝุ่น PM2.5"><div><h1>สถานการณ์ฝุ่น PM2.5 ของนิคมอุตสาหกรรมทั่วประเทศไทย</h1><p>ติดตามสถานีคุณภาพอากาศ คัดกรองพื้นที่ และสนับสนุนการเตรียมความพร้อมของนิคมอุตสาหกรรม</p></div></div>
-    <div class="head-links"><a href="https://emonitor.ieat.go.th/emcc/pm25.php" target="_blank" rel="noopener">e-Monitoring กนอ.</a><a href="https://pm25.gistda.or.th/" target="_blank" rel="noopener">PM2.5 GISTDA</a><a class="primary" href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=c2b910f0bc5e42e7ae68a2bb7a048157" target="_blank" rel="noopener">เปิดแผนที่เต็มหน้า</a></div>
+    <div class="head-links"><a href="https://emonitor.ieat.go.th/emcc/pm25.php" target="_blank" rel="noopener">e-Monitoring กนอ.</a><a href="https://pm25.gistda.or.th/" target="_blank" rel="noopener">PM2.5 GISTDA</a><a class="primary" href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=c2b910f0bc5e42e7ae68a2bb7a048157" target="_blank" rel="noopener">เปิดแผนที่เต็มหน้า</a><button type="button" id="exportPngBtn">ส่งออกรายงาน PNG</button></div>
   </section>
 
   <section class="kpis" aria-label="ตัวชี้วัดสถานีคุณภาพอากาศ">
@@ -62,6 +63,26 @@
   </section>
   <footer class="footer">ข้อมูลใช้สำหรับสนับสนุนการเฝ้าระวังเบื้องต้น ต้องตรวจสอบกับแหล่งข้อมูลทางการและข้อมูลภาคสนามอีกครั้ง</footer>
 </main>
+<div class="export-stage" aria-hidden="true">
+  <section class="pm-report" id="pmReport">
+    <header class="pm-report-head">
+      <div class="pm-report-brand"><img src="./ieat_logo.png.PNG" alt=""><div><b>การนิคมอุตสาหกรรมแห่งประเทศไทย</b><span>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย (EMCC)</span></div></div>
+      <div class="pm-report-label">รายงานสถานการณ์คุณภาพอากาศ</div>
+    </header>
+    <section class="pm-report-title"><div><h1>รายงานค่าฝุ่นละออง PM2.5</h1><p>พื้นที่นิคมอุตสาหกรรมทั่วประเทศไทย</p></div><div><b id="reportDate">–</b><span id="reportDataTime">–</span></div></section>
+    <section class="pm-report-kpis">
+      <article><span>สถานีทั้งหมด</span><strong id="reportTotal">–</strong><small>สถานี</small></article>
+      <article><span>ออนไลน์</span><strong id="reportOnline">–</strong><small>สถานี</small></article>
+      <article class="offline"><span>ออฟไลน์</span><strong id="reportOffline">–</strong><small>สถานี</small></article>
+      <article class="alert"><span>พบข้อมูล PM2.5 ผิดปกติ</span><strong id="reportAlert">–</strong><small>สถานี</small></article>
+      <article><span>พื้นที่นิคมฯ</span><strong id="reportEstates">–</strong><small>แห่ง</small></article>
+    </section>
+    <section class="pm-report-summary"><h2>สรุปสถานการณ์</h2><p id="reportSummaryText">กำลังประมวลผลข้อมูลสถานีคุณภาพอากาศ</p></section>
+    <section class="pm-report-table-block"><div class="pm-report-section-head"><h2>สถานีที่ต้องติดตาม</h2><span>เรียงสถานีที่พบ PM2.5 และสถานีออฟไลน์ก่อน</span></div><table><thead><tr><th>ลำดับ</th><th>สถานีตรวจวัด</th><th>นิคมอุตสาหกรรม</th><th>สถานะ</th><th>ข้อมูลล่าสุด</th><th>ข้อมูล PM2.5 / หมายเหตุ</th></tr></thead><tbody id="reportStationRows"></tbody></table></section>
+    <section class="pm-report-note"><b>ข้อสังเกตสำคัญ</b><p>ข้อมูลใช้สำหรับสนับสนุนการเฝ้าระวังเบื้องต้น ควรตรวจสอบเวลาตรวจวัด สถานะการเชื่อมต่อ ประกาศทางการ และข้อมูลภาคสนามก่อนสื่อสารหรือดำเนินการ</p></section>
+    <footer class="pm-report-footer"><span>แหล่งข้อมูล: ระบบ e-Monitoring กนอ. / GISTDA PM2.5</span><span>จัดทำโดย EMCC กนอ.</span></footer>
+  </section>
+</div>
 <script>
   const state={stations:[],filtered:[]};
   const $=id=>document.getElementById(id);
@@ -90,6 +111,28 @@
     }catch(error){$("updatedAt").textContent="เชื่อมต่อข้อมูลไม่ได้";$("dataStatus").textContent="กรุณารีเฟรชหน้าเพื่อลองเชื่อมต่ออีกครั้ง";$("stationRows").innerHTML='<tr><td colspan="7" class="table-empty">ไม่สามารถโหลดข้อมูลสถานีได้</td></tr>';console.error(error)}
   }
   $("estateFilter").addEventListener("change",render);$("stationSearch").addEventListener("input",render);$("resetFilter").addEventListener("click",()=>{$("estateFilter").value="";$("stationSearch").value="";render()});load();
+  function buildPmReport(){
+    const rows=[...state.filtered].sort((a,b)=>Number(hasPmAlert(b))-Number(hasPmAlert(a))||Number(isOnline(a))-Number(isOnline(b))).slice(0,14);
+    const total=state.stations.length,online=state.stations.filter(isOnline).length,offline=total-online,alerts=state.stations.filter(hasPmAlert).length,estates=new Set(state.stations.map(row=>clean(row.estate_name)).filter(Boolean)).size;
+    const now=new Date();
+    $("reportDate").textContent="วันที่ "+new Intl.DateTimeFormat("th-TH",{timeZone:"Asia/Bangkok",day:"numeric",month:"long",year:"numeric"}).format(now);
+    $("reportDataTime").textContent=$("updatedAt").textContent;
+    $("reportTotal").textContent=total.toLocaleString("th-TH");$("reportOnline").textContent=online.toLocaleString("th-TH");$("reportOffline").textContent=offline.toLocaleString("th-TH");$("reportAlert").textContent=alerts.toLocaleString("th-TH");$("reportEstates").textContent=estates.toLocaleString("th-TH");
+    $("reportSummaryText").textContent=alerts?("พบสถานีที่มีข้อมูลเกี่ยวข้องกับ PM2.5 จำนวน "+alerts.toLocaleString("th-TH")+" สถานี จากสถานีคุณภาพอากาศทั้งหมด "+total.toLocaleString("th-TH")+" สถานี และมีสถานีออฟไลน์ "+offline.toLocaleString("th-TH")+" สถานี ควรตรวจสอบค่าล่าสุดและยืนยันกับพื้นที่ก่อนสื่อสาร"):("ยังไม่พบข้อความแจ้งเตือน PM2.5 ในชุดข้อมูลสถานีล่าสุด จากสถานีทั้งหมด "+total.toLocaleString("th-TH")+" สถานี โดยมีสถานีออฟไลน์ "+offline.toLocaleString("th-TH")+" สถานี");
+    $("reportStationRows").innerHTML=rows.length?rows.map((row,index)=>"<tr><td>"+(index+1)+"</td><td><b>"+clean(row.station_name)+"</b></td><td>"+clean(row.estate_name)+"</td><td>"+clean(row.status)+"</td><td>"+clean(row.last_update)+"</td><td>"+(pmText(row)!=="–"?pmText(row):(clean(row.comment)||"–"))+"</td></tr>").join(""):'<tr><td colspan="6">ไม่พบข้อมูลสถานี</td></tr>';
+  }
+  async function exportPmReport(){
+    const button=$("exportPngBtn"),label=button.textContent;button.disabled=true;button.textContent="กำลังสร้างรายงาน…";
+    try{
+      if(typeof html2canvas!=="function")throw new Error("ไม่พบเครื่องมือสร้างภาพ");
+      buildPmReport();if(document.fonts?.ready)await document.fonts.ready;
+      await new Promise(resolve=>setTimeout(resolve,300));
+      const canvas=await html2canvas($("pmReport"),{scale:1.25,useCORS:true,backgroundColor:"#ffffff",logging:false});
+      const link=document.createElement("a");link.download="IEAT_PM25_Report_"+new Date().toISOString().slice(0,10)+".png";link.href=canvas.toDataURL("image/png");link.click();
+    }catch(error){console.error(error);alert("ไม่สามารถสร้างรายงาน PNG ได้ กรุณาลองใหม่อีกครั้ง");}
+    finally{button.disabled=false;button.textContent=label;}
+  }
+  $("exportPngBtn").addEventListener("click",exportPmReport);
 </script>
   <style>
     /* Fit the PM2.5 map to the left dashboard stack, matching drought.html */
@@ -166,6 +209,30 @@
         max-height:430px!important;
       }
     }
+  </style>
+  <style>
+    /* PM2.5 PNG report */
+    .head-links button{
+      padding:8px 11px;
+      border:0;
+      border-radius:18px;
+      background:#631a9d;
+      color:#fff;
+      font-size:11px;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .head-links button:disabled{opacity:.65;cursor:wait}
+    .export-stage{position:fixed;left:-12000px;top:0;width:1123px;z-index:-1}
+    .pm-report{width:1123px;min-height:1587px;padding:48px 54px 42px;background:#fff;color:#111;font-family:Sarabun,sans-serif}
+    .pm-report-head{height:86px;display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:3px solid #306bec}
+    .pm-report-brand{display:flex;align-items:center;gap:14px}.pm-report-brand img{width:76px;height:62px;object-fit:contain}.pm-report-brand b{display:block;color:#631a9d;font-size:21px}.pm-report-brand span{display:block;margin-top:3px;color:#555;font-size:13px}.pm-report-label{padding:9px 14px;border-radius:20px;background:#eef4ff;color:#1655a6;font-size:13px;font-weight:700}
+    .pm-report-title{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;padding:28px 0 22px}.pm-report-title h1{margin:0;color:#1655a6;font-size:34px;line-height:1.2}.pm-report-title p{margin:5px 0 0;color:#333;font-size:16px}.pm-report-title>div:last-child{text-align:right}.pm-report-title>div:last-child b,.pm-report-title>div:last-child span{display:block}.pm-report-title>div:last-child b{font-size:15px}.pm-report-title>div:last-child span{margin-top:4px;color:#555;font-size:13px}
+    .pm-report-kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px}.pm-report-kpis article{min-height:126px;padding:16px;border:1px solid #e8edf4;border-radius:13px;background:#fff;box-shadow:0 7px 20px rgba(35,62,96,.08)}.pm-report-kpis span{display:block;min-height:39px;color:#333;font-size:13px;font-weight:700}.pm-report-kpis strong{display:block;color:#306bec;font-size:34px;line-height:1;margin-top:8px}.pm-report-kpis small{display:block;margin-top:5px;color:#555;font-size:11px}.pm-report-kpis .offline strong{color:#6f7780}.pm-report-kpis .alert strong{color:#c93642}
+    .pm-report-summary{padding:18px 20px;margin-bottom:20px;border-left:5px solid #306bec;background:#f5f8ff}.pm-report-summary h2{margin:0 0 7px;color:#1655a6;font-size:18px}.pm-report-summary p{margin:0;font-size:14px;line-height:1.65}
+    .pm-report-table-block{border:1px solid #dfe5ec}.pm-report-section-head{padding:13px 15px;display:flex;justify-content:space-between;align-items:center;gap:15px;background:#f7f9fb}.pm-report-section-head h2{margin:0;font-size:18px}.pm-report-section-head span{color:#555;font-size:12px}.pm-report table{width:100%;border-collapse:collapse;table-layout:fixed}.pm-report th,.pm-report td{border:1px solid #111;padding:9px 7px;font-size:11px;line-height:1.35;vertical-align:middle}.pm-report th{background:#e8edf2;text-align:center}.pm-report td:nth-child(1),.pm-report td:nth-child(4),.pm-report td:nth-child(5){text-align:center}.pm-report th:nth-child(1){width:46px}.pm-report th:nth-child(2){width:210px}.pm-report th:nth-child(3){width:170px}.pm-report th:nth-child(4){width:105px}.pm-report th:nth-child(5){width:130px}
+    .pm-report-note{margin-top:20px;padding:16px 18px;border:1px solid #f0dfb4;background:#fffaf0}.pm-report-note b{color:#8a5b00;font-size:15px}.pm-report-note p{margin:5px 0 0;font-size:12px;line-height:1.6}.pm-report-footer{margin-top:28px;padding-top:13px;border-top:1px solid #ccd5df;display:flex;justify-content:space-between;color:#555;font-size:11px}
+    @media(max-width:700px){.head-links button{padding:8px 9px;font-size:10px}.head-links a:not(.primary){display:none}}
   </style>
 </body>
 </html>
