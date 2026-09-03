@@ -91,5 +91,38 @@
   }
   $("estateFilter").addEventListener("change",render);$("stationSearch").addEventListener("input",render);$("resetFilter").addEventListener("click",()=>{$("estateFilter").value="";$("stationSearch").value="";render()});load();
 </script>
+  <style>
+    /* Fit the PM2.5 map to the left dashboard stack, matching drought.html */
+    @media(min-width:1101px){
+      .map-panel{
+        position:relative!important;
+        top:auto!important;
+        height:auto!important;
+        min-height:560px!important;
+        align-self:stretch!important;
+      }
+      .map-panel .pm-map{
+        width:100%!important;
+        height:100%!important;
+        min-height:560px!important;
+      }
+    }
+    @media(max-width:1100px){
+      .map-panel,
+      .map-panel .pm-map{
+        height:580px!important;
+        min-height:580px!important;
+      }
+    }
+    @media(max-width:700px){
+      .map-panel,
+      .map-panel .pm-map{
+        height:430px!important;
+        min-height:430px!important;
+      }
+      .map-head{top:8px!important;left:8px!important;right:8px!important}
+      .map-title,.map-source{padding:7px 9px!important;font-size:10px!important}
+    }
+  </style>
 </body>
 </html>
