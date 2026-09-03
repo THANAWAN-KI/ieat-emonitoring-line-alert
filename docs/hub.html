@@ -63,14 +63,19 @@ const fireHub=document.createElement('section');fireHub.id='fireReportView';fire
 </section>
 <section class="fire-dashboard-grid">
   <article class="fire-support-board">
-    <div class="fire-board-title"><h2>ข้อมูลสนับสนุนที่ใกล้เคียง</h2><p>ข้อมูลตำแหน่งสำหรับสนับสนุนการระงับเหตุใกล้จุดเกิดเหตุ</p></div>
+    <div class="fire-board-title"><h2>ข้อมูลสนับสนุนที่ใกล้เคียง</h2><p>ค้นหานิคมอุตสาหกรรม แล้วระบบจะคำนวณและเติมข้อมูลลงในรายงานให้อัตโนมัติ</p></div>
+    <section class="fire-estate-search">
+      <label for="fireEstateSearch">ค้นหานิคมอุตสาหกรรม / ท่าเรือฯ</label>
+      <div class="fire-search-row"><input id="fireEstateSearch" list="fireEstateOptions" placeholder="เช่น นิคมอุตสาหกรรมบางปู" autocomplete="off"><datalist id="fireEstateOptions"></datalist><button id="fireEstateApply" type="button">ค้นหาและเติมรายงาน</button></div>
+      <p id="fireEstateStatus">เลือกพื้นที่เกิดเหตุเพื่อดึงพิกัดและข้อมูลสนับสนุนที่ใกล้เคียง</p>
+    </section>
     <div class="fire-support-grid">
-      <div class="fire-support-card hospital"><small>โรงพยาบาลใกล้ที่สุด</small><div class="fire-value-row"><i>✚</i><strong data-fire-value="hospitalDistance">— กม.</strong></div><span>ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
-      <div class="fire-support-card fire-station"><small>สถานีดับเพลิงใกล้ที่สุด</small><div class="fire-value-row"><i>♨</i><strong data-fire-value="fireDistance">— กม.</strong></div><span>ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
-      <div class="fire-support-card police"><small>สถานีตำรวจใกล้ที่สุด</small><div class="fire-value-row"><i>★</i><strong data-fire-value="policeDistance">— กม.</strong></div><span>ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
-      <div class="fire-support-card hydrant"><small>หัวจ่ายน้ำดับเพลิง</small><div class="fire-value-row"><i>◆</i><strong data-fire-value="hydrantDistance">— เมตร</strong></div><span>ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
-      <div class="fire-support-card community"><small>ชุมชนในรัศมี 3 กม.</small><div class="fire-value-row"><i>⌂</i><strong data-fire-value="communityDistance">— แห่ง</strong></div><span>ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
-      <div class="fire-support-card cctv"><small>กล้อง CCTV ใกล้เคียง</small><div class="fire-value-row"><i>●</i><strong data-fire-value="cctvDistance">— จุด</strong></div><span>ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
+      <div class="fire-support-card hospital"><small>โรงพยาบาลใกล้ที่สุด</small><div class="fire-value-row"><i>✚</i><strong data-fire-value="hospitalDistance">— กม.</strong></div><span data-fire-name="hospitalName">ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
+      <div class="fire-support-card fire-station"><small>สถานีดับเพลิงใกล้ที่สุด</small><div class="fire-value-row"><i>♨</i><strong data-fire-value="fireDistance">— กม.</strong></div><span data-fire-name="fireName">ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
+      <div class="fire-support-card police"><small>สถานีตำรวจใกล้ที่สุด</small><div class="fire-value-row"><i>★</i><strong data-fire-value="policeDistance">— กม.</strong></div><span data-fire-name="policeName">ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
+      <div class="fire-support-card hydrant"><small>หัวจ่ายน้ำดับเพลิง</small><div class="fire-value-row"><i>◆</i><strong data-fire-value="hydrantDistance">— เมตร</strong></div><span data-fire-name="hydrantName">ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
+      <div class="fire-support-card community"><small>ชุมชนในรัศมี 3 กม.</small><div class="fire-value-row"><i>⌂</i><strong data-fire-value="communityDistance">— แห่ง</strong></div><span data-fire-name="communityName">ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
+      <div class="fire-support-card cctv"><small>กล้อง CCTV ใกล้เคียง</small><div class="fire-value-row"><i>●</i><strong data-fire-value="cctvDistance">— จุด</strong></div><span data-fire-name="cctvName">ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
     </div>
     <section class="fire-readiness">
       <div class="fire-readiness-head"><h3>ข้อมูลที่ต้องตรวจสอบก่อนเข้าระงับเหตุ</h3><span>ใช้ประกอบการประเมินสถานการณ์เบื้องต้น</span></div>
@@ -90,10 +95,52 @@ const fireHub=document.createElement('section');fireHub.id='fireReportView';fire
 </section>
 <section class="fire-dss-panel">
   <div class="fire-dss-head"><h2>IEAT DSS — จัดทำรายงานเหตุฉุกเฉิน</h2><p>แก้ไขข้อมูลและจัดทำรายงานตามรูปแบบมาตรฐาน</p></div>
-  <iframe class="fire-dss-frame" src="./dss.html" scrolling="no" title="IEAT DSS — จัดทำรายงานเหตุฉุกเฉิน" loading="eager" allowfullscreen></iframe>
+  <iframe id="fireDssFrame" class="fire-dss-frame" src="./dss.html" scrolling="no" title="IEAT DSS — จัดทำรายงานเหตุฉุกเฉิน" loading="eager" allowfullscreen></iframe>
 </section>`;fireView.parentNode.insertBefore(fireHub,fireView);fireView.style.display='none';
-function updateFireSupportDashboard(){let data={};try{data=JSON.parse(localStorage.getItem('dss-report')||'{}')||{}}catch(error){}document.querySelectorAll('[data-fire-value]').forEach(node=>{const value=data[node.dataset.fireValue];if(value&&String(value).trim())node.textContent=value})}
-updateFireSupportDashboard();window.addEventListener('storage',updateFireSupportDashboard);setInterval(updateFireSupportDashboard,1500);
+function updateFireSupportDashboard(){
+  let data={};try{data=JSON.parse(localStorage.getItem('dss-report')||'{}')||{}}catch(error){}
+  document.querySelectorAll('[data-fire-value]').forEach(function(node){var value=data[node.dataset.fireValue];if(value&&String(value).trim())node.textContent=value});
+  document.querySelectorAll('[data-fire-name]').forEach(function(node){var value=data[node.dataset.fireName];if(value&&String(value).trim())node.textContent=value});
+}
+function fireNormalize(value){return String(value||'').toLowerCase().replace(/นิคมอุตสาหกรรม|นิคมฯ|นิคม|ท่าเรืออุตสาหกรรม|ท่าเรือฯ/g,'').replace(/[^ก-๙a-z0-9]/g,'')}
+function firePoint(record){
+  var geometry=record&&record.feature&&record.feature.geometry;if(!geometry)return null;var point=geometry.type==='point'?geometry:(geometry.extent&&geometry.extent.center);if(!point)return null;
+  var x=Number(point.longitude!=null?point.longitude:point.x),y=Number(point.latitude!=null?point.latitude:point.y);if(!Number.isFinite(x)||!Number.isFinite(y))return null;
+  if(Math.abs(x)>180){var lon=x/20037508.34*180;var lat=y/20037508.34*180;lat=180/Math.PI*(2*Math.atan(Math.exp(lat*Math.PI/180))-Math.PI/2);return{lat:lat,lng:lon}}return{lat:y,lng:x};
+}
+function fireDistanceKm(a,b){var dLat=(b.lat-a.lat)*Math.PI/180,dLng=(b.lng-a.lng)*Math.PI/180;var s=Math.sin(dLat/2)**2+Math.cos(a.lat*Math.PI/180)*Math.cos(b.lat*Math.PI/180)*Math.sin(dLng/2)**2;return 6371*2*Math.atan2(Math.sqrt(s),Math.sqrt(1-s))}
+function fireEstateNames(){
+  var found=[];(records||[]).forEach(function(record){var values=[record.estate];var attrs=record.feature&&record.feature.attributes||{};Object.keys(attrs).forEach(function(key){var value=attrs[key];if(typeof value==='string'&&/(นิคม|ท่าเรือ)/.test(value))values.push(value)});values.forEach(function(value){value=String(value||'').trim();if(value&&value!=='—'&&!found.includes(value))found.push(value)})});
+  return found.sort(function(a,b){return a.localeCompare(b,'th')});
+}
+function syncFireEstateOptions(){var list=document.getElementById('fireEstateOptions');if(!list||!(records||[]).length)return;var names=fireEstateNames();list.innerHTML=names.map(function(name){return '<option value="'+name.replace(/"/g,'&quot;')+'"></option>'}).join('')}
+function fireNearest(type,origin){var candidates=(records||[]).filter(function(record){return record.config&&record.config.id===type&&firePoint(record)}).map(function(record){return{record:record,distance:fireDistanceKm(origin,firePoint(record))}}).sort(function(a,b){return a.distance-b.distance});return candidates[0]||null}
+function fireFormatKm(value){return (value<10?value.toFixed(2):value.toFixed(1))+' กม.'}
+function fireApplyEstate(){
+  var input=document.getElementById('fireEstateSearch'),status=document.getElementById('fireEstateStatus');var query=input.value.trim();if(!query){status.textContent='กรุณาพิมพ์หรือเลือกชื่อนิคมอุตสาหกรรม';status.className='error';return}
+  if(!(records||[]).length){status.textContent='กำลังโหลดข้อมูลตำแหน่ง กรุณาลองอีกครั้งในอีกสักครู่';status.className='loading';return}
+  var q=fireNormalize(query),names=fireEstateNames();var estate=names.find(function(name){return fireNormalize(name)===q})||names.find(function(name){var n=fireNormalize(name);return n.includes(q)||q.includes(n)});
+  if(!estate){status.textContent='ไม่พบนิคมอุตสาหกรรมนี้ในข้อมูลแผนที่ กรุณาเลือกชื่อจากรายการ';status.className='error';return}
+  input.value=estate;var matching=(records||[]).filter(function(record){return fireNormalize(record.estate)===fireNormalize(estate)&&firePoint(record)});
+  if(!matching.length)matching=(records||[]).filter(function(record){var attrs=record.feature&&record.feature.attributes||{};return Object.values(attrs).some(function(value){return typeof value==='string'&&fireNormalize(value)===fireNormalize(estate)})&&firePoint(record)});
+  if(!matching.length){status.textContent='พบชื่อพื้นที่ แต่ยังไม่พบพิกัดสำหรับคำนวณ';status.className='error';return}
+  var points=matching.map(firePoint);var origin={lat:points.reduce(function(sum,p){return sum+p.lat},0)/points.length,lng:points.reduce(function(sum,p){return sum+p.lng},0)/points.length};
+  var hospital=fireNearest('hospital',origin),fire=fireNearest('fire',origin),police=fireNearest('police',origin),hydrant=fireNearest('hydrant',origin);
+  var communities=(records||[]).filter(function(record){return record.config&&record.config.id==='community'&&firePoint(record)&&fireDistanceKm(origin,firePoint(record))<=3});
+  var cameras=(records||[]).filter(function(record){return record.config&&record.config.id==='cctv'&&firePoint(record)&&fireDistanceKm(origin,firePoint(record))<=3});
+  var previous={};try{previous=JSON.parse(localStorage.getItem('dss-report')||'{}')||{}}catch(error){}
+  var payload=Object.assign({},previous,{estate:estate,address:estate,lat:origin.lat.toFixed(6),lng:origin.lng.toFixed(6),event:'เหตุเพลิงไหม้',date:new Date().toLocaleString('th-TH'),source:'คลังข้อมูล DSS กนอ. และ ArcGIS Risk Map'});
+  if(hospital){payload.hospitalName=hospital.record.name||'โรงพยาบาลใกล้ที่สุด';payload.hospitalDistance=fireFormatKm(hospital.distance)}
+  if(fire){payload.fireName=fire.record.name||'สถานีดับเพลิงใกล้ที่สุด';payload.fireDistance=fireFormatKm(fire.distance)}
+  if(police){payload.policeName=police.record.name||'สถานีตำรวจใกล้ที่สุด';payload.policeDistance=fireFormatKm(police.distance)}
+  if(hydrant){payload.hydrantName=hydrant.record.name||'หัวจ่ายน้ำดับเพลิง';payload.hydrantDistance=Math.round(hydrant.distance*1000).toLocaleString('th-TH')+' เมตร'}
+  payload.communityName='ชุมชนในรัศมี 3 กม.';payload.communityDistance=communities.length.toLocaleString('th-TH')+' แห่ง';payload.cctvName='กล้อง CCTV ในรัศมี 3 กม.';payload.cctvDistance=cameras.length.toLocaleString('th-TH')+' จุด';
+  localStorage.setItem('dss-report',JSON.stringify(payload));updateFireSupportDashboard();
+  var frame=document.getElementById('fireDssFrame');if(frame&&frame.contentWindow)frame.contentWindow.postMessage({type:'dss-autofill',payload:payload},location.origin);
+  status.textContent='เติมข้อมูลของ '+estate+' ลงในแบบรายงาน DSS แล้ว สามารถแก้รายละเอียดเหตุและ Export PNG ได้ทันที';status.className='success';
+}
+document.getElementById('fireEstateApply').addEventListener('click',fireApplyEstate);document.getElementById('fireEstateSearch').addEventListener('keydown',function(event){if(event.key==='Enter'){event.preventDefault();fireApplyEstate()}});
+updateFireSupportDashboard();syncFireEstateOptions();window.addEventListener('storage',updateFireSupportDashboard);setInterval(function(){updateFireSupportDashboard();syncFireEstateOptions()},1500);
 const floodView=document.createElement('section');floodView.id='floodView';floodView.className='flood-hub';floodView.innerHTML=`<iframe class="flood-report-frame" src="./flood-report.html" title="ศูนย์ข้อมูลสถานการณ์น้ำและรายงานน้ำท่วม" loading="eager" allowfullscreen></iframe>`;otherView.parentNode.insertBefore(floodView,otherView);
 const droughtView=document.createElement('section');droughtView.id='droughtView';droughtView.className='drought-hub';droughtView.innerHTML=`<iframe class="drought-report-frame" src="./drought.html" title="ศูนย์ข้อมูลสถานการณ์ภัยแล้ง" loading="eager" allowfullscreen></iframe>`;otherView.parentNode.insertBefore(droughtView,otherView);
 document.querySelectorAll('.tab').forEach(tab=>tab.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===tab));const type=tab.dataset.type;fireView.style.display='none';fireHub.classList.toggle('show',type==='fire');floodView.classList.toggle('show',type==='flood');droughtView.classList.toggle('show',type==='drought');otherView.classList.toggle('show',type!=='fire'&&type!=='flood'&&type!=='drought');if(type!=='fire'&&type!=='flood'&&type!=='drought')otherTitle.textContent=labels[type]});
@@ -180,5 +227,16 @@ footer{padding:20px;font-size:14px}
 .fire-dss-frame{height:1660px!important;overflow:hidden!important}
 @media(max-width:1050px){.fire-dss-frame{height:2780px!important}}
 @media(max-width:700px){.fire-readiness-grid{grid-template-columns:1fr}.fire-readiness-head{display:block}.fire-readiness-head span{display:block;margin-top:2px}.fire-dss-frame{height:3050px!important}}
+</style>
+<style>
+/* Estate search and DSS automatic fill */
+.fire-estate-search{margin:10px 12px 0;padding:12px;border:1px solid #e4e7ea;border-radius:12px;background:linear-gradient(145deg,#fff,#f8f9fa);box-shadow:0 5px 15px rgba(48,55,62,.07)}
+.fire-estate-search label{display:block;margin-bottom:7px;color:#35393e;font-size:13px;font-weight:700}
+.fire-search-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+.fire-search-row input{width:100%;min-width:0;border:1px solid #ccd1d6;border-radius:9px;padding:10px 12px;font:14px Sarabun,sans-serif;outline:none}.fire-search-row input:focus{border-color:#9b2031;box-shadow:0 0 0 3px rgba(155,32,49,.1)}
+.fire-search-row button{border:0;border-radius:9px;padding:10px 14px;background:#972638;color:#fff;font:700 13px Sarabun,sans-serif;cursor:pointer;white-space:nowrap}
+#fireEstateStatus{margin:7px 0 0;color:#737981;font-size:10px;line-height:1.4}#fireEstateStatus.success{color:#18794e;font-weight:600}#fireEstateStatus.error{color:#b42318;font-weight:600}#fireEstateStatus.loading{color:#8a5a00}
+.fire-support-card [data-fire-name]{min-height:26px;text-align:left!important;line-height:1.3}
+@media(max-width:700px){.fire-search-row{grid-template-columns:1fr}.fire-search-row button{width:100%}}
 </style>
 </body></html>
