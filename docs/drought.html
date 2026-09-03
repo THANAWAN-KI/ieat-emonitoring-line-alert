@@ -281,6 +281,37 @@ body{background:#fff!important}
 @media(max-width:1000px){.two-col{grid-template-columns:1fr!important}.source-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:560px){.source-grid{grid-template-columns:1fr!important}}
 </style>
+
+<style>
+/* Prevent map overlap and fit detail sections inside dashboard */
+@media(min-width:1101px){
+ .map-panel{
+  position:relative!important;top:auto!important;
+  height:720px!important;min-height:720px!important;align-self:start!important
+ }
+ .map-panel .map{height:720px!important;min-height:720px!important}
+}
+.table-wrap{width:100%!important;max-width:100%!important;overflow:hidden!important;padding:8px!important}
+.table{width:100%!important;max-width:100%!important;min-width:0!important;table-layout:fixed!important}
+.table th,.table td{font-size:9px!important;padding:5px 3px!important;line-height:1.25!important}
+.table td:nth-child(2){font-size:9px!important}
+.table th:nth-child(1){width:3.5%!important}.table th:nth-child(2){width:17%!important}.table th:nth-child(3){width:4.5%!important}
+.table th:nth-child(n+4):nth-child(-n+15){width:5.25%!important}.table th:nth-child(16){width:7%!important}.table th:nth-child(17){width:5%!important}
+.zoom{font-size:8px!important;padding:4px 3px!important;width:100%;white-space:normal}
+.source-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+.source{min-height:62px!important;display:flex!important;flex-direction:column;justify-content:center}
+.two-col{align-items:start!important}
+@media(max-width:1100px){
+ .map-panel,.map-panel .map{height:560px!important;min-height:560px!important}
+ .table-wrap{overflow-x:auto!important}
+ .table{min-width:980px!important}
+}
+@media(max-width:560px){
+ .map-panel,.map-panel .map{height:430px!important;min-height:430px!important}
+ .source-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .source{padding:7px!important;min-height:58px!important}
+}
+</style>
 </head>
 <body>
 <main class="wrap">
