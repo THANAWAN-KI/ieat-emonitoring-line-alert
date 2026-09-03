@@ -8,12 +8,21 @@ on:
         required: false
         type: boolean
         default: false
+      run_mode:
+        description: "โหมดสำหรับกด Run workflow ทดสอบด้วยตนเอง"
+        required: false
+        type: choice
+        options:
+          - hourly_alert
+          - daily_summary
+        default: hourly_alert
 
   schedule:
-    # ตรวจทุก 5 นาที เวลาไทย 08:00–16:59 วันจันทร์–ศุกร์
-    # สคริปต์จะส่งเพียง 1 ครั้งต่อรอบ 08:30–15:30
-    # และส่งรายงานสรุปเพียง 1 ครั้งตั้งแต่ 16:30
-    - cron: "*/5 1-9 * * 1-5"
+    # GitHub Actions ใช้เวลา UTC: 01:30–08:30 UTC = 08:30–15:30 ไทย
+    # ส่งรายงานรายชั่วโมงให้ครบทั้ง 3 กลุ่ม ทุกวันจันทร์–ศุกร์
+    - cron: "30 1-8 * * 1-5"
+    # 09:30 UTC = 16:30 ไทย: ส่งรายงานสรุปประจำวัน
+    - cron: "30 9 * * 1-5"
 
 permissions:
   contents: write
@@ -43,8 +52,8 @@ jobs:
         run: |
           echo "================================================"
           echo "IEAT e-Monitoring Hourly LINE Alert"
-          echo "Quota Saver: one summary message per changed run"
-          echo "Active schedule: 08:30-16:30 Asia/Bangkok"
+          echo "Delivery policy: every hourly slot to all 3 operation groups"
+          echo "Active schedule: 08:30-16:30 Asia/Bangkok (Mon-Fri)"
           echo "================================================"
           echo "Trigger: ${{ github.event_name }}"
           echo "Thailand time:"
@@ -59,6 +68,25 @@ jobs:
           python -m py_compile check_emonitoring_batch.py
           echo "Python files ผ่านการตรวจ Syntax"
 
+      - name: Validate LINE delivery configuration
+        env:
+          LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
+          LINE_ZONE_ROUTING_ENABLED: ${{ secrets.LINE_ZONE_ROUTING_ENABLED }}
+          LINE_GROUP_ID_DEMO_01: ${{ secrets.LINE_GROUP_ID_DEMO_01 }}
+          LINE_GROUP_ID_DEMO_02: ${{ secrets.LINE_GROUP_ID_DEMO_02 }}
+          LINE_GROUP_ID_DEMO_03: ${{ secrets.LINE_GROUP_ID_DEMO_03 }}
+        run: |
+          set -euo pipefail
+          test -n "${LINE_CHANNEL_ACCESS_TOKEN}" || { echo "ERROR: LINE_CHANNEL_ACCESS_TOKEN ว่าง"; exit 1; }
+          test -n "${LINE_GROUP_ID_DEMO_01}" || { echo "ERROR: LINE_GROUP_ID_DEMO_01 ว่าง"; exit 1; }
+          test -n "${LINE_GROUP_ID_DEMO_02}" || { echo "ERROR: LINE_GROUP_ID_DEMO_02 ว่าง"; exit 1; }
+          test -n "${LINE_GROUP_ID_DEMO_03}" || { echo "ERROR: LINE_GROUP_ID_DEMO_03 ว่าง"; exit 1; }
+          case "${LINE_ZONE_ROUTING_ENABLED,,}" in
+            1|true|yes|on) ;;
+            *) echo "ERROR: LINE_ZONE_ROUTING_ENABLED ต้องเป็น true"; exit 1 ;;
+          esac
+          echo "ตรวจพบ Token, Group ID ทั้ง 3 กลุ่ม และเปิด Zone routing แล้ว"
+
       - name: Run e-Monitoring check and send LINE
         env:
           LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
@@ -67,8 +95,8 @@ jobs:
           LINE_GROUP_ID_DEMO_02: ${{ secrets.LINE_GROUP_ID_DEMO_02 }}
           LINE_GROUP_ID_DEMO_03: ${{ secrets.LINE_GROUP_ID_DEMO_03 }}
           LINE_PREVIEW_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.preview_mode || false }}
-          # schedule ให้สคริปต์ตัดสินโหมดจากเวลาไทย เพื่อรองรับรอบ retry ทุก 5 นาที
-          EMONITORING_RUN_MODE: ${{ github.event_name == 'workflow_dispatch' && 'hourly_alert' || '' }}
+          # กำหนดโหมดจาก cron โดยตรง จึงไม่ผิดรอบแม้ GitHub เริ่มงานล่าช้า
+          EMONITORING_RUN_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.run_mode || (github.event.schedule == '30 9 * * 1-5' && 'daily_summary' || 'hourly_alert') }}
           PYTHONUNBUFFERED: "1"
           TZ: Asia/Bangkok
         run: python check_emonitoring_batch.py
