@@ -3,83 +3,127 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>สถานการณ์ภัยแล้ง | IEAT EMCC</title>
+<title>สถานการณ์ภัยแล้งในนิคมอุตสาหกรรม | IEAT EMCC</title>
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css">
 <script src="https://js.arcgis.com/4.30/"></script>
 <style>
-:root{--green:#557a18;--green-dark:#36530d;--green-soft:#f1f6e8;--ink:#252822;--muted:#6d7466;--line:#dfe5d8;--bg:#f5f7f2}
-*{box-sizing:border-box}html,body{height:100%;margin:0}body{font-family:Sarabun,sans-serif;color:var(--ink);background:var(--bg)}
-button,select{font:inherit}.page{height:100%;display:flex;flex-direction:column}.top{height:68px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 22px;gap:14px;z-index:5}
-.logo{width:58px;height:43px;object-fit:contain}.title{min-width:0}.title h1{font-size:20px;line-height:1.25;margin:0;font-weight:700}.title p{font-size:12px;color:var(--muted);margin:3px 0 0}
-.open{margin-left:auto;color:var(--green-dark);background:var(--green-soft);border:1px solid #cbd8bb;border-radius:9px;padding:9px 13px;text-decoration:none;font-size:13px;font-weight:600}
-.layout{display:grid;grid-template-columns:310px minmax(0,1fr);flex:1;min-height:0;padding:14px;gap:14px}.side{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:auto;padding:18px}
-.section-label{font-size:13px;color:var(--muted);margin-bottom:4px}.side h2{font-size:21px;margin:0 0 4px}.date{font-size:13px;color:var(--green-dark);font-weight:600;margin-bottom:18px}
-.field{margin-bottom:13px}.field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}.field select{width:100%;border:1px solid #cfd6c7;border-radius:8px;padding:10px 11px;background:#fff;color:var(--ink)}
-.buttons{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}.btn{border:0;border-radius:8px;padding:10px;cursor:pointer;font-weight:600}.primary{background:var(--green);color:#fff}.secondary{background:#eef1eb;color:#4e5747}
-.info{margin-top:18px;border-top:1px solid var(--line);padding-top:16px}.info h3{font-size:15px;margin:0 0 10px}.metric{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:9px;padding:10px 11px;margin-bottom:8px;background:#fbfcfa}.metric span{font-size:12px;color:var(--muted)}.metric b{font-size:19px;color:var(--green-dark)}
-.legend{margin-top:16px;padding:12px;background:var(--green-soft);border-radius:9px;font-size:12px;line-height:1.55;color:#536044}.legend b{display:block;color:var(--green-dark);font-size:13px;margin-bottom:3px}
-.map-card{position:relative;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;min-height:0}.map-head{height:48px;position:absolute;left:14px;top:14px;z-index:2;background:#fffffff2;border:1px solid var(--line);border-radius:9px;padding:0 14px;display:flex;align-items:center;box-shadow:0 3px 12px #25371318}.map-head b{font-size:14px}.map{width:100%;height:100%;min-height:620px}.status{position:absolute;right:14px;bottom:14px;z-index:2;background:#fffffff2;border:1px solid var(--line);border-radius:8px;padding:8px 11px;font-size:12px;color:var(--muted);box-shadow:0 3px 12px #25371318}
-.esri-ui .esri-widget{font-family:Sarabun,sans-serif}
-@media(max-width:820px){.top{height:60px;padding:0 12px}.logo{width:48px;height:36px}.title h1{font-size:17px}.title p{display:none}.open{font-size:12px;padding:8px}.layout{grid-template-columns:1fr;display:flex;flex-direction:column;padding:8px;gap:8px;overflow:auto}.side{padding:14px;overflow:visible}.side h2{font-size:19px}.info{display:none}.map-card{height:620px;flex:none}.map{min-height:620px}.map-head{top:10px;left:10px}.status{right:10px;bottom:10px}}
-@media(max-width:480px){.top{gap:7px}.logo{width:42px}.title h1{font-size:15px}.open{padding:7px;font-size:11px}.buttons{grid-template-columns:1fr}.map-card,.map{height:540px;min-height:540px}}
+:root{--green:#567b1b;--dark:#34500e;--soft:#f1f6e8;--ink:#252822;--muted:#6b7263;--line:#dce3d5;--bg:#f5f7f2;--amber:#e28b12;--red:#c93b36;--blue:#1377a8}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%}body{font-family:Sarabun,sans-serif;color:var(--ink);background:var(--bg)}button,input,select{font:inherit}
+.header{height:70px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 24px;gap:13px;position:sticky;top:0;z-index:20}
+.logo{width:60px;height:45px;object-fit:contain}.brand h1{font-size:20px;line-height:1.25;margin:0}.brand p{font-size:12px;color:var(--muted);margin:3px 0 0}.header-actions{margin-left:auto;display:flex;gap:8px}
+.header-actions a{color:var(--dark);background:var(--soft);border:1px solid #c9d7b7;border-radius:8px;padding:9px 12px;text-decoration:none;font-size:13px;font-weight:600}
+.wrap{max-width:1500px;margin:auto;padding:18px 22px 38px}.intro{background:linear-gradient(120deg,#456b12,#759b36);color:#fff;border-radius:14px;padding:20px 22px;display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:14px}
+.intro h2{font-size:25px;margin:0 0 5px}.intro p{font-size:14px;margin:0;opacity:.94}.stamp{background:#ffffff1f;border:1px solid #ffffff4d;border-radius:10px;padding:10px 13px;white-space:nowrap;font-size:13px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}.kpi{background:#fff;border:1px solid var(--line);border-radius:11px;padding:14px 15px;min-height:96px}.kpi span{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}.kpi strong{font-size:27px;color:var(--dark)}.kpi small{font-size:11px;color:var(--muted);margin-left:5px}
+.main-grid{display:grid;grid-template-columns:290px minmax(0,1fr);gap:12px;margin-bottom:14px}.panel{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}.filters{padding:17px}.filters h3,.section-head h3{font-size:18px;margin:0}.sub{font-size:12px;color:var(--muted);margin:4px 0 15px}
+.field{margin-bottom:12px}.field label{display:block;font-size:13px;font-weight:600;margin-bottom:5px}.field select,.field input{width:100%;border:1px solid #cbd4c3;border-radius:8px;padding:9px 10px;background:#fff}
+.buttons{display:grid;grid-template-columns:1fr 1fr;gap:7px}.btn{border:0;border-radius:8px;padding:9px;cursor:pointer;font-weight:600}.primary{background:var(--green);color:#fff}.secondary{background:#edf1e9;color:#4d5746}
+.map-panel{position:relative;min-height:650px}.map{height:650px;width:100%}.map-title{position:absolute;top:12px;left:55px;z-index:3;background:#fffffff2;border:1px solid var(--line);border-radius:8px;padding:9px 12px;font-size:13px;font-weight:600;box-shadow:0 3px 12px #2635191c}.map-status{position:absolute;right:12px;bottom:12px;z-index:3;background:#fffffff2;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:12px;color:var(--muted)}
+.note{margin-top:15px;background:var(--soft);border-radius:9px;padding:11px;font-size:12px;line-height:1.55;color:#536344}.note b{display:block;color:var(--dark);margin-bottom:3px}
+.section{background:#fff;border:1px solid var(--line);border-radius:12px;margin-top:14px;overflow:hidden}.section-head{padding:15px 17px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px}.section-head p{font-size:12px;color:var(--muted);margin:3px 0 0}.badge{font-size:12px;color:var(--dark);background:var(--soft);border-radius:999px;padding:6px 10px;white-space:nowrap}
+.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;min-width:850px}.table th,.table td{border-bottom:1px solid #e8ece4;padding:11px 13px;text-align:left;font-size:13px}.table th{background:#f7f9f5;color:#56604f;font-weight:600}.table tr:hover td{background:#fbfcfa}.zoom{border:1px solid #c5d3b4;background:var(--soft);color:var(--dark);border-radius:7px;padding:6px 9px;cursor:pointer}.watch{color:#a66608;font-weight:600}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}.sources,.actions{padding:17px}.sources h3,.actions h3{font-size:18px;margin:0 0 12px}.source-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.source{border:1px solid var(--line);border-radius:9px;padding:10px;text-decoration:none;color:var(--ink);font-size:13px}.source b{display:block;color:var(--dark);margin-bottom:2px}.source span{font-size:11px;color:var(--muted)}
+.checklist{display:grid;grid-template-columns:1fr 1fr;gap:8px}.check{border:1px solid var(--line);border-radius:9px;padding:10px;font-size:13px;display:flex;gap:8px}.check i{font-style:normal;color:var(--green);font-weight:700}
+.footer{text-align:center;padding:22px 12px;color:var(--muted);font-size:12px}.esri-ui .esri-widget{font-family:Sarabun,sans-serif}
+@media(max-width:1000px){.kpis{grid-template-columns:repeat(2,1fr)}.main-grid{grid-template-columns:1fr}.map-panel,.map{height:620px;min-height:620px}.two-col{grid-template-columns:1fr}}
+@media(max-width:600px){.header{height:auto;min-height:62px;padding:7px 10px}.logo{width:48px;height:38px}.brand h1{font-size:15px}.brand p{display:none}.header-actions a:first-child{display:none}.header-actions a{padding:7px;font-size:11px}.wrap{padding:9px 7px 24px}.intro{padding:15px;display:block;border-radius:10px}.intro h2{font-size:20px}.intro p{font-size:12px}.stamp{display:inline-block;margin-top:10px}.kpis{gap:7px}.kpi{min-height:84px;padding:11px}.kpi strong{font-size:23px}.main-grid{gap:8px}.filters{padding:14px}.map-panel,.map{height:530px;min-height:530px}.map-title{left:48px;max-width:70%;font-size:11px}.section-head{align-items:flex-start}.source-grid,.checklist{grid-template-columns:1fr}.two-col{gap:9px;margin-top:9px}}
 </style>
 </head>
 <body>
-<div class="page">
-<header class="top">
+<header class="header">
 <img class="logo" src="https://oc.ieat.go.th/assets/app/images/logo-th.png" alt="กนอ.">
-<div class="title"><h1>ศูนย์ข้อมูลสถานการณ์ภัยแล้ง</h1><p>ข้อมูลสนับสนุนการเฝ้าระวังพื้นที่นิคมอุตสาหกรรม</p></div>
-<a class="open" href="https://www.arcgis.com/apps/mapviewer/index.html?webmap=d6044d4f209345e6ac731afafe3c9d4a" target="_blank">เปิดแผนที่เต็มหน้า ↗</a>
+<div class="brand"><h1>สถานการณ์ภัยแล้งในนิคมอุตสาหกรรม</h1><p>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย กนอ.</p></div>
+<div class="header-actions"><a href="./hub.html">กลับหน้าหลัก</a><a href="https://www.arcgis.com/apps/mapviewer/index.html?webmap=d6044d4f209345e6ac731afafe3c9d4a" target="_blank">เปิดแผนที่เต็มหน้า ↗</a></div>
 </header>
-<main class="layout">
-<aside class="side">
-<div class="section-label">พื้นที่เฝ้าระวัง</div>
-<h2>ภัยแล้ง</h2>
-<div class="date" id="reportDate">กำลังตรวจสอบวันที่…</div>
-<div class="field"><label for="estateSelect">นิคมอุตสาหกรรม</label><select id="estateSelect"><option value="">ทุกนิคมอุตสาหกรรม</option></select></div>
-<div class="buttons"><button class="btn secondary" id="resetBtn">รีเซ็ต</button><button class="btn primary" id="showBtn">แสดงข้อมูล</button></div>
-<div class="info">
-<h3>ข้อมูลแผนที่</h3>
-<div class="metric"><span>นิคมอุตสาหกรรมทั้งหมด</span><b id="estateCount">–</b></div>
-<div class="metric"><span>ชั้นข้อมูลที่เปิดใช้งาน</span><b id="layerCount">–</b></div>
-<div class="legend"><b>การใช้ข้อมูล</b>ใช้สำหรับคัดกรองและเฝ้าระวังเบื้องต้น ควรตรวจสอบกับประกาศทางการและข้อมูลภาคสนามอีกครั้ง</div>
-</div>
-</aside>
-<section class="map-card">
-<div class="map-head"><b>แผนที่สถานการณ์ภัยแล้งและพื้นที่นิคมฯ</b></div>
-<div id="viewDiv" class="map"></div>
-<div class="status" id="mapStatus">กำลังโหลดแผนที่…</div>
+<main class="wrap">
+<section class="intro"><div><h2>ศูนย์ข้อมูลสถานการณ์ภัยแล้ง</h2><p>คัดกรองพื้นที่ ติดตามแนวโน้ม และสนับสนุนการเตรียมความพร้อมของนิคมอุตสาหกรรม</p></div><div class="stamp" id="reportDate">กำลังตรวจสอบวันที่…</div></section>
+<section class="kpis">
+<div class="kpi"><span>นิคมอุตสาหกรรมในระบบ</span><strong id="estateCount">–</strong><small>แห่ง</small></div>
+<div class="kpi"><span>นิคมฯ ที่แสดงตามตัวกรอง</span><strong id="visibleCount">–</strong><small>แห่ง</small></div>
+<div class="kpi"><span>ชั้นข้อมูลภัยแล้งที่เปิด</span><strong id="layerCount">–</strong><small>ชั้นข้อมูล</small></div>
+<div class="kpi"><span>สถานะข้อมูลแผนที่</span><strong id="dataStatus" style="font-size:20px">กำลังโหลด</strong></div>
 </section>
-</main>
+<section class="main-grid">
+<aside class="panel filters">
+<h3>คัดกรองพื้นที่</h3><p class="sub">เลือกสายปฏิบัติการหรือนิคมฯ เพื่อซูมไปยังตำแหน่ง</p>
+<div class="field"><label for="operationSelect">สายปฏิบัติการ</label><select id="operationSelect"><option value="">ทุกสายปฏิบัติการ</option></select></div>
+<div class="field"><label for="estateSelect">นิคมอุตสาหกรรม</label><select id="estateSelect"><option value="">ทุกนิคมอุตสาหกรรม</option></select></div>
+<div class="field"><label for="searchInput">ค้นหาชื่อนิคมฯ</label><input id="searchInput" placeholder="พิมพ์ชื่อนิคมอุตสาหกรรม"></div>
+<div class="buttons"><button class="btn secondary" id="resetBtn">รีเซ็ต</button><button class="btn primary" id="showBtn">แสดงข้อมูล</button></div>
+<div class="note"><b>นิยามการแสดงผล</b>รายการในตารางเป็นพื้นที่สำหรับตรวจสอบกับชั้นข้อมูลภัยแล้งบนแผนที่ ยังไม่ถือเป็นประกาศสถานการณ์อย่างเป็นทางการ</div>
+</aside>
+<section class="panel map-panel"><div class="map-title">แผนที่ภัยแล้งและพื้นที่นิคมอุตสาหกรรม</div><div id="viewDiv" class="map"></div><div class="map-status" id="mapStatus">กำลังโหลดแผนที่…</div></section>
+</section>
+<section class="section">
+<div class="section-head"><div><h3>นิคมอุตสาหกรรมสำหรับติดตาม</h3><p>คลิกรายการเพื่อซูมไปยังตำแหน่ง และตรวจสอบร่วมกับชั้นข้อมูลภัยแล้ง</p></div><span class="badge" id="tableSummary">กำลังโหลดข้อมูล</span></div>
+<div class="table-wrap"><table class="table"><thead><tr><th>ลำดับ</th><th>นิคมอุตสาหกรรม</th><th>สายปฏิบัติการ</th><th>สถานะการตรวจสอบ</th><th>ข้อมูลแหล่งน้ำ</th><th>ตำแหน่ง</th></tr></thead><tbody id="estateRows"><tr><td colspan="6">กำลังโหลดข้อมูลนิคมอุตสาหกรรม…</td></tr></tbody></table></div>
+</section>
+<div class="two-col">
+<section class="panel sources"><h3>ประกาศและแหล่งข้อมูลทางการ</h3><div class="source-grid">
+<a class="source" href="https://www.tmd.go.th/" target="_blank"><b>กรมอุตุนิยมวิทยา</b><span>พยากรณ์อากาศและปริมาณฝน</span></a>
+<a class="source" href="https://water.rid.go.th/" target="_blank"><b>กรมชลประทาน</b><span>สถานการณ์น้ำและอ่างเก็บน้ำ</span></a>
+<a class="source" href="https://www.onwr.go.th/" target="_blank"><b>สำนักงานทรัพยากรน้ำแห่งชาติ</b><span>ประกาศและมาตรการบริหารจัดการน้ำ</span></a>
+<a class="source" href="https://disaster.gistda.or.th/drought" target="_blank"><b>GISTDA</b><span>ข้อมูลพื้นที่ภัยแล้งจากดาวเทียม</span></a>
+<a class="source" href="https://www.thaiwater.net/" target="_blank"><b>ThaiWater</b><span>ข้อมูลน้ำ ฝน และคลังข้อมูลน้ำแห่งชาติ</span></a>
+<a class="source" href="https://www.disaster.go.th/" target="_blank"><b>กรมป้องกันและบรรเทาสาธารณภัย</b><span>ประกาศพื้นที่และข่าวสถานการณ์ภัย</span></a>
+</div></section>
+<section class="panel actions"><h3>แนวทางเตรียมความพร้อม</h3><div class="checklist">
+<div class="check"><i>✓</i><span>ตรวจสอบปริมาณน้ำสำรองและจำนวนวันที่รองรับได้</span></div>
+<div class="check"><i>✓</i><span>ประสานผู้ให้บริการน้ำและหน่วยงานชลประทาน</span></div>
+<div class="check"><i>✓</i><span>ติดตามปริมาณการใช้น้ำของผู้ประกอบการ</span></div>
+<div class="check"><i>✓</i><span>เตรียมแหล่งน้ำสำรองและแผนจัดสรรน้ำ</span></div>
+<div class="check"><i>✓</i><span>ตรวจสอบระบบนำน้ำกลับมาใช้ใหม่</span></div>
+<div class="check"><i>✓</i><span>แจ้งผู้ประกอบการเมื่อระดับเฝ้าระวังเปลี่ยนแปลง</span></div>
+</div></section>
 </div>
+<div class="footer">ข้อมูลใช้สำหรับสนับสนุนการเฝ้าระวังเบื้องต้น ต้องตรวจสอบกับประกาศทางการและข้อมูลภาคสนามอีกครั้ง</div>
+</main>
 <script>
 const WEBMAP_ID="d6044d4f209345e6ac731afafe3c9d4a";
-const ESTATE_LAYER_URL="https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/e_PP_2025/FeatureServer/1";
-const thaiMonths=["มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"];
-const now=new Date();document.getElementById("reportDate").textContent=now.getDate()+" "+thaiMonths[now.getMonth()]+" "+(now.getFullYear()+543);
+const ESTATE_URL="https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/e_PP_2025/FeatureServer/1";
+const months=["มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"];
+const now=new Date();document.getElementById("reportDate").textContent="ข้อมูล ณ วันที่ "+now.getDate()+" "+months[now.getMonth()]+" "+(now.getFullYear()+543);
+let rows=[],filteredRows=[],view;
+const esc=function(value){return String(value||"").replace(/[&<>"']/g,function(char){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char];});};
 require(["esri/WebMap","esri/views/MapView","esri/layers/FeatureLayer","esri/widgets/Search","esri/widgets/Home","esri/widgets/LayerList","esri/widgets/Legend","esri/widgets/Expand"],function(WebMap,MapView,FeatureLayer,Search,Home,LayerList,Legend,Expand){
- const map=new WebMap({portalItem:{id:WEBMAP_ID}});
- const view=new MapView({container:"viewDiv",map:map,center:[101,13],zoom:5,constraints:{minZoom:4},popup:{dockEnabled:true,dockOptions:{buttonEnabled:false,position:"bottom-right"}}});
- const estateLayer=new FeatureLayer({url:ESTATE_LAYER_URL,outFields:["*"]});
- const select=document.getElementById("estateSelect"),status=document.getElementById("mapStatus");
+ const webmap=new WebMap({portalItem:{id:WEBMAP_ID}});
+ view=new MapView({container:"viewDiv",map:webmap,center:[101,13],zoom:5,constraints:{minZoom:4},popup:{dockEnabled:true,dockOptions:{buttonEnabled:false,position:"bottom-right"}}});
+ const estateLayer=new FeatureLayer({url:ESTATE_URL,outFields:["*"]});
  view.when(async function(){
-  view.ui.add(new Home({view:view}),"top-left");
-  view.ui.add(new Search({view:view,includeDefaultSources:true}),"top-right");
+  view.ui.add(new Home({view:view}),"top-left");view.ui.add(new Search({view:view}),"top-right");
   view.ui.add(new Expand({view:view,content:new LayerList({view:view}),group:"tools",expandTooltip:"ชั้นข้อมูล"}),"top-right");
   view.ui.add(new Expand({view:view,content:new Legend({view:view}),group:"tools",expandTooltip:"คำอธิบายสัญลักษณ์"}),"top-right");
-  document.getElementById("layerCount").textContent=map.allLayers.filter(function(layer){return layer.visible;}).length.toLocaleString("th-TH");
-  status.textContent="แผนที่พร้อมใช้งาน";
+  document.getElementById("layerCount").textContent=webmap.allLayers.filter(function(layer){return layer.visible;}).length.toLocaleString("th-TH");
+  document.getElementById("dataStatus").textContent="พร้อมใช้งาน";document.getElementById("mapStatus").textContent="แผนที่พร้อมใช้งาน";
   try{
    const result=await estateLayer.queryFeatures({where:"1=1",outFields:["สำนักงานนิคมฯ","Operations"],returnGeometry:true});
-   const rows=result.features.map(function(f){return {name:String(f.attributes["สำนักงานนิคมฯ"]||"").trim(),feature:f};}).filter(function(x){return x.name;}).sort(function(a,b){return a.name.localeCompare(b.name,"th");});
+   rows=result.features.map(function(feature){return {name:String(feature.attributes["สำนักงานนิคมฯ"]||"").trim(),operation:String(feature.attributes.Operations||"-").trim(),feature:feature};}).filter(function(row){return row.name;}).sort(function(a,b){return a.name.localeCompare(b.name,"th");});
    document.getElementById("estateCount").textContent=rows.length.toLocaleString("th-TH");
-   rows.forEach(function(row,index){const option=document.createElement("option");option.value=String(index);option.textContent=row.name;select.appendChild(option);});
-   document.getElementById("showBtn").onclick=async function(){if(select.value===""){await view.goTo({center:[101,13],zoom:5},{duration:700});status.textContent="แสดงพื้นที่ทั้งหมด";return;}const row=rows[Number(select.value)];await view.goTo(row.feature.geometry,{zoom:12,duration:900});view.openPopup({features:[row.feature],location:row.feature.geometry});status.textContent=row.name;};
-   document.getElementById("resetBtn").onclick=async function(){select.value="";await view.goTo({center:[101,13],zoom:5},{duration:700});view.closePopup();status.textContent="แสดงพื้นที่ทั้งหมด";};
-  }catch(error){status.textContent="แผนที่พร้อมใช้งาน · ไม่สามารถโหลดรายชื่อนิคมฯ ได้";}
- }).catch(function(){status.textContent="ไม่สามารถโหลดแผนที่ได้ กรุณารีเฟรชอีกครั้ง";});
+   const operations=[...new Set(rows.map(function(row){return row.operation;}).filter(function(value){return value&&value!=="-";}))].sort();
+   operations.forEach(function(value){const option=document.createElement("option");option.value=value;option.textContent=value;operationSelect.appendChild(option);});
+   updateFilters();
+  }catch(error){document.getElementById("dataStatus").textContent="ตรวจสอบใหม่";document.getElementById("mapStatus").textContent="โหลดแผนที่ได้ แต่ไม่สามารถโหลดรายชื่อนิคมฯ";estateRows.innerHTML='<tr><td colspan="6">ไม่สามารถเข้าถึงรายชื่อนิคมฯ กรุณารีเฟรชอีกครั้ง</td></tr>';}
+ }).catch(function(){document.getElementById("dataStatus").textContent="ขัดข้อง";document.getElementById("mapStatus").textContent="ไม่สามารถโหลดแผนที่ได้ กรุณารีเฟรชอีกครั้ง";});
 });
+function updateFilters(){
+ const op=operationSelect.value,q=searchInput.value.trim().toLowerCase();
+ filteredRows=rows.filter(function(row){return(!op||row.operation===op)&&(!q||row.name.toLowerCase().includes(q));});
+ const current=estateSelect.value;estateSelect.innerHTML='<option value="">ทุกนิคมอุตสาหกรรม</option>';
+ filteredRows.forEach(function(row){const option=document.createElement("option");option.value=row.name;option.textContent=row.name;estateSelect.appendChild(option);});
+ if(filteredRows.some(function(row){return row.name===current;}))estateSelect.value=current;
+ renderTable();
+}
+function renderTable(){
+ document.getElementById("visibleCount").textContent=filteredRows.length.toLocaleString("th-TH");
+ document.getElementById("tableSummary").textContent="แสดง "+filteredRows.length.toLocaleString("th-TH")+" แห่ง";
+ estateRows.innerHTML=filteredRows.map(function(row,index){const sourceIndex=rows.indexOf(row);return '<tr><td>'+(index+1)+'</td><td><b>'+esc(row.name)+'</b></td><td>'+esc(row.operation)+'</td><td class="watch">ตรวจสอบบนแผนที่</td><td>รอข้อมูลจากพื้นที่</td><td><button class="zoom" data-index="'+sourceIndex+'">ดูบนแผนที่</button></td></tr>';}).join("")||'<tr><td colspan="6">ไม่พบนิคมอุตสาหกรรมตามเงื่อนไข</td></tr>';
+ estateRows.querySelectorAll(".zoom").forEach(function(button){button.onclick=function(){zoomTo(rows[Number(button.dataset.index)]);};});
+}
+async function zoomTo(row){if(!row||!view)return;await view.goTo(row.feature.geometry,{zoom:12,duration:900});view.openPopup({features:[row.feature],location:row.feature.geometry});document.getElementById("mapStatus").textContent=row.name;document.getElementById("viewDiv").scrollIntoView({behavior:"smooth",block:"center"});}
+operationSelect.onchange=updateFilters;searchInput.oninput=updateFilters;
+showBtn.onclick=function(){const name=estateSelect.value;if(!name){view.goTo({center:[101,13],zoom:5},{duration:700});mapStatus.textContent="แสดงพื้นที่ทั้งหมด";return;}zoomTo(rows.find(function(row){return row.name===name;}));};
+resetBtn.onclick=function(){operationSelect.value="";estateSelect.value="";searchInput.value="";updateFilters();if(view){view.goTo({center:[101,13],zoom:5},{duration:700});view.closePopup();}mapStatus.textContent="แสดงพื้นที่ทั้งหมด";};
 </script>
 </body>
 </html>
