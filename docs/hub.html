@@ -65,13 +65,23 @@ const fireHub=document.createElement('section');fireHub.id='fireReportView';fire
   <article class="fire-support-board">
     <div class="fire-board-title"><h2>ข้อมูลสนับสนุนที่ใกล้เคียง</h2><p>ข้อมูลตำแหน่งสำหรับสนับสนุนการระงับเหตุใกล้จุดเกิดเหตุ</p></div>
     <div class="fire-support-grid">
-      <div class="fire-support-card hospital"><small>โรงพยาบาลใกล้ที่สุด</small><strong data-fire-value="hospitalDistance">— กม.</strong><span>ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
-      <div class="fire-support-card fire-station"><small>สถานีดับเพลิงใกล้ที่สุด</small><strong data-fire-value="fireDistance">— กม.</strong><span>ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
-      <div class="fire-support-card police"><small>สถานีตำรวจใกล้ที่สุด</small><strong data-fire-value="policeDistance">— กม.</strong><span>ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
-      <div class="fire-support-card hydrant"><small>หัวจ่ายน้ำดับเพลิง</small><strong data-fire-value="hydrantDistance">— เมตร</strong><span>ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
-      <div class="fire-support-card community"><small>ชุมชนในรัศมี 3 กม.</small><strong data-fire-value="communityDistance">— แห่ง</strong><span>ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
-      <div class="fire-support-card cctv"><small>กล้อง CCTV ใกล้เคียง</small><strong data-fire-value="cctvDistance">— จุด</strong><span>ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
+      <div class="fire-support-card hospital"><small>โรงพยาบาลใกล้ที่สุด</small><div class="fire-value-row"><i>✚</i><strong data-fire-value="hospitalDistance">— กม.</strong></div><span>ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
+      <div class="fire-support-card fire-station"><small>สถานีดับเพลิงใกล้ที่สุด</small><div class="fire-value-row"><i>♨</i><strong data-fire-value="fireDistance">— กม.</strong></div><span>ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
+      <div class="fire-support-card police"><small>สถานีตำรวจใกล้ที่สุด</small><div class="fire-value-row"><i>★</i><strong data-fire-value="policeDistance">— กม.</strong></div><span>ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
+      <div class="fire-support-card hydrant"><small>หัวจ่ายน้ำดับเพลิง</small><div class="fire-value-row"><i>◆</i><strong data-fire-value="hydrantDistance">— เมตร</strong></div><span>ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
+      <div class="fire-support-card community"><small>ชุมชนในรัศมี 3 กม.</small><div class="fire-value-row"><i>⌂</i><strong data-fire-value="communityDistance">— แห่ง</strong></div><span>ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
+      <div class="fire-support-card cctv"><small>กล้อง CCTV ใกล้เคียง</small><div class="fire-value-row"><i>●</i><strong data-fire-value="cctvDistance">— จุด</strong></div><span>ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
     </div>
+    <section class="fire-readiness">
+      <div class="fire-readiness-head"><h3>ข้อมูลที่ต้องตรวจสอบก่อนเข้าระงับเหตุ</h3><span>ใช้ประกอบการประเมินสถานการณ์เบื้องต้น</span></div>
+      <div class="fire-readiness-grid">
+        <div><b>1 / 3 / 5 กม.</b><span>ตรวจสอบพื้นที่อันตราย เฝ้าระวัง และเตรียมพร้อม</span></div>
+        <div><b>สารเคมีและ SDS</b><span>ยืนยันชนิดสาร อันตราย และวิธีระงับเหตุที่เหมาะสม</span></div>
+        <div><b>ทิศทางและความเร็วลม</b><span>ประเมินแนวควันและพื้นที่ที่อาจได้รับผลกระทบ</span></div>
+        <div><b>เส้นทางเข้าถึงจุดเกิดเหตุ</b><span>ตรวจสอบทางเข้า จุดกลับรถ และแหล่งน้ำใกล้เคียง</span></div>
+      </div>
+      <div class="fire-hotlines"><span>โทรฉุกเฉิน</span><a href="tel:199">เพลิงไหม้ 199</a><a href="tel:1669">การแพทย์ 1669</a><a href="tel:191">เหตุด่วน 191</a></div>
+    </section>
   </article>
   <article class="fire-analysis-panel">
     <div class="fire-map-head"><div><h2>แผนที่วิเคราะห์</h2><p>Risk Map และตำแหน่งข้อมูลสนับสนุนการระงับเหตุ</p></div><a href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=9c25f3f77ba5481cb481b402177884c2&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=false&basemaps=true&center=101.11399493277712,12.930016606311145&scale=18055.954822" target="_blank" rel="noopener">เปิดเต็มหน้า ↗</a></div>
@@ -80,7 +90,7 @@ const fireHub=document.createElement('section');fireHub.id='fireReportView';fire
 </section>
 <section class="fire-dss-panel">
   <div class="fire-dss-head"><h2>IEAT DSS — จัดทำรายงานเหตุฉุกเฉิน</h2><p>แก้ไขข้อมูลและจัดทำรายงานตามรูปแบบมาตรฐาน</p></div>
-  <iframe class="fire-dss-frame" src="./dss.html" title="IEAT DSS — จัดทำรายงานเหตุฉุกเฉิน" loading="eager" allowfullscreen></iframe>
+  <iframe class="fire-dss-frame" src="./dss.html" scrolling="no" title="IEAT DSS — จัดทำรายงานเหตุฉุกเฉิน" loading="eager" allowfullscreen></iframe>
 </section>`;fireView.parentNode.insertBefore(fireHub,fireView);fireView.style.display='none';
 function updateFireSupportDashboard(){let data={};try{data=JSON.parse(localStorage.getItem('dss-report')||'{}')||{}}catch(error){}document.querySelectorAll('[data-fire-value]').forEach(node=>{const value=data[node.dataset.fireValue];if(value&&String(value).trim())node.textContent=value})}
 updateFireSupportDashboard();window.addEventListener('storage',updateFireSupportDashboard);setInterval(updateFireSupportDashboard,1500);
@@ -151,5 +161,24 @@ footer{padding:20px;font-size:14px}
 @media(max-width:1280px){.fire-dashboard-grid{grid-template-columns:1fr}.fire-support-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.fire-analysis-map{height:600px}}
 @media(max-width:700px){.fire-overview-head{padding:13px 14px;border-radius:10px}.fire-overview-head h1{font-size:20px}.fire-overview-head p{font-size:12px}.fire-support-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:9px}.fire-support-card{min-height:120px;padding:12px}.fire-analysis-map{height:500px}.fire-dss-frame{height:680px}.fire-board-title,.fire-map-head,.fire-dss-head{padding:10px 12px}.fire-map-head h2,.fire-dss-head h2,.fire-board-title h2{font-size:16px}}
 @media(max-width:430px){.fire-support-grid{grid-template-columns:1fr}.fire-support-card{min-height:104px}.fire-analysis-map{height:430px}}
+</style>
+
+<style>
+/* Dimensional fire support cards and useful readiness block */
+.fire-support-card{border:1px solid #fff!important;background:linear-gradient(145deg,#fff 0%,#fbfcfd 100%)!important;box-shadow:0 8px 23px rgba(48,55,62,.12)!important}
+.fire-support-card:before{display:none!important}
+.fire-support-card small{min-height:36px!important;color:#30343a!important}
+.fire-value-row{display:flex;align-items:center;gap:9px;margin:7px 0 5px}
+.fire-value-row i{display:grid;width:36px;height:36px;place-items:center;flex:0 0 36px;border-radius:50%;background:#fdecef;color:#a82536;font-size:17px;font-style:normal}
+.fire-support-card:nth-child(2) .fire-value-row i{background:#fff0e8;color:#d85b28}.fire-support-card:nth-child(3) .fire-value-row i{background:#eef3fb;color:#476993}.fire-support-card:nth-child(4) .fire-value-row i{background:#e8f7f8;color:#087f8e}.fire-support-card:nth-child(5) .fire-value-row i{background:#edf8f1;color:#348258}.fire-support-card:nth-child(6) .fire-value-row i{background:#f2edf7;color:#65408a}
+.fire-support-card strong{margin:0!important;font-size:24px!important}.fire-support-card span{text-align:right}
+.fire-readiness{margin:0 12px 12px;padding:12px;border-radius:12px;background:#fff;border:1px solid #edf0f2;box-shadow:0 6px 18px rgba(48,55,62,.08)}
+.fire-readiness-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:9px}.fire-readiness-head h3{margin:0;font-size:14px;color:#30343a}.fire-readiness-head span{font-size:10px;color:#858b92}
+.fire-readiness-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.fire-readiness-grid>div{padding:8px 9px;border-radius:9px;background:#f8f9fa}
+.fire-readiness-grid b{display:block;font-size:11px;color:#8f1d2c}.fire-readiness-grid span{display:block;margin-top:2px;font-size:9px;line-height:1.35;color:#686f76}
+.fire-hotlines{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:9px;padding-top:9px;border-top:1px solid #edf0f2}.fire-hotlines span{font-size:10px;color:#777e85}.fire-hotlines a{padding:5px 8px;border-radius:14px;background:#fff1f2;color:#962537;text-decoration:none;font-size:10px;font-weight:700}
+.fire-dss-frame{height:1660px!important;overflow:hidden!important}
+@media(max-width:1050px){.fire-dss-frame{height:2780px!important}}
+@media(max-width:700px){.fire-readiness-grid{grid-template-columns:1fr}.fire-readiness-head{display:block}.fire-readiness-head span{display:block;margin-top:2px}.fire-dss-frame{height:3050px!important}}
 </style>
 </body></html>
