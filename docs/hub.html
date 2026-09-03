@@ -104,7 +104,9 @@ function updateFireSupportDashboard(){
 }
 function fireNormalize(value){return String(value||'').toLowerCase().replace(/นิคมอุตสาหกรรม|นิคมฯ|นิคม|ท่าเรืออุตสาหกรรม|ท่าเรือฯ/g,'').replace(/[^ก-๙a-z0-9]/g,'')}
 function firePoint(record){
-  var geometry=record&&record.feature&&record.feature.geometry;if(!geometry)return null;var point=geometry.type==='point'?geometry:(geometry.extent&&geometry.extent.center);if(!point)return null;
+  var geometry=record&&record.feature&&record.feature.geometry;if(!geometry)return null;var point=(geometry.type==='point'||(geometry.x!=null&&geometry.y!=null))?geometry:(geometry.extent&&geometry.extent.center);
+  if(!point&&(geometry.rings||geometry.paths)){var groups=geometry.rings||geometry.paths,coords=[];groups.forEach(function(group){group.forEach(function(pair){if(Array.isArray(pair)&&pair.length>=2)coords.push(pair)})});if(coords.length){point={x:coords.reduce(function(sum,p){return sum+Number(p[0])},0)/coords.length,y:coords.reduce(function(sum,p){return sum+Number(p[1])},0)/coords.length}}}
+  if(!point)return null;
   var x=Number(point.longitude!=null?point.longitude:point.x),y=Number(point.latitude!=null?point.latitude:point.y);if(!Number.isFinite(x)||!Number.isFinite(y))return null;
   if(Math.abs(x)>180){var lon=x/20037508.34*180;var lat=y/20037508.34*180;lat=180/Math.PI*(2*Math.atan(Math.exp(lat*Math.PI/180))-Math.PI/2);return{lat:lat,lng:lon}}return{lat:y,lng:x};
 }
@@ -114,6 +116,22 @@ function fireEstateNames(){
   return found.sort(function(a,b){return a.localeCompare(b,'th')});
 }
 function syncFireEstateOptions(){var list=document.getElementById('fireEstateOptions'),status=document.getElementById('fireEstateStatus');if(!list)return;if(!(records||[]).length){if(status&&!status.className)status.textContent='กำลังโหลดรายชื่อนิคมอุตสาหกรรมและข้อมูลตำแหน่ง…';return}var names=fireEstateNames();list.innerHTML=names.map(function(name){return '<option value="'+name.replace(/"/g,'&quot;')+'"></option>'}).join('');if(status&&!status.className)status.textContent=names.length?'พร้อมค้นหา '+names.length.toLocaleString('th-TH')+' พื้นที่ — พิมพ์ชื่อเต็มหรือชื่อย่อได้':'โหลดข้อมูลตำแหน่งแล้ว แต่ไม่พบฟิลด์ชื่อนิคมอุตสาหกรรม'}
+async function loadFireSupportRest(){
+  if((records||[]).length)return;
+  var status=document.getElementById('fireEstateStatus');if(status){status.textContent='กำลังเชื่อมต่อฐานข้อมูลตำแหน่ง กนอ.…';status.className='loading'}
+  var loaded=[];
+  await Promise.all(configs.map(async function(config){
+    try{
+      var url=config.url+'/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=json&resultRecordCount=2000';
+      var response=await fetch(url);if(!response.ok)throw new Error('HTTP '+response.status);var json=await response.json();if(json.error)throw new Error(json.error.message||'ArcGIS query error');
+      var features=json.features||[];config.features=features;config.count=features.length;
+      features.forEach(function(feature){loaded.push({config:config,feature:feature,name:val(feature.attributes||{},config.name),estate:val(feature.attributes||{},config.estate)})});
+    }catch(error){console.warn('REST fallback: '+config.label,error)}
+  }));
+  if(loaded.length){records.splice(0,records.length);Array.prototype.push.apply(records,loaded);buildUI();syncFireEstateOptions();if(status){var names=fireEstateNames();status.textContent='พร้อมค้นหา '+names.length.toLocaleString('th-TH')+' พื้นที่ — พิมพ์ชื่อเต็มหรือชื่อย่อได้';status.className=''}}
+  else if(status){status.textContent='ไม่สามารถเชื่อมต่อฐานข้อมูลตำแหน่งได้ กรุณารีเฟรชหน้าแล้วลองใหม่';status.className='error'}
+}
+setTimeout(loadFireSupportRest,1200);
 function fireNearest(type,origin){var candidates=(records||[]).filter(function(record){return record.config&&record.config.id===type&&firePoint(record)}).map(function(record){return{record:record,distance:fireDistanceKm(origin,firePoint(record))}}).sort(function(a,b){return a.distance-b.distance});return candidates[0]||null}
 function fireFormatKm(value){return (value<10?value.toFixed(2):value.toFixed(1))+' กม.'}
 function fireApplyEstate(){
