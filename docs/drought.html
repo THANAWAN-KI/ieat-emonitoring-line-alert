@@ -102,8 +102,9 @@ require(["esri/WebMap","esri/views/MapView","esri/layers/FeatureLayer","esri/wid
   view.ui.add(new Expand({view:view,content:new LayerList({view:view}),group:"tools",expandTooltip:"ชั้นข้อมูล"}),"top-right");
   view.ui.add(new Expand({view:view,content:new Legend({view:view}),group:"tools",expandTooltip:"คำอธิบายสัญลักษณ์"}),"top-right");
   try{
-   const result=await waterLayer.queryFeatures({where:"1=1",outFields:["*"],returnGeometry:true});
-   allRows=result.features.map(function(feature){const a=feature.attributes;return {year:num(a["ปี"]),month:num(a["เดือน"]),name:String(a["นิคมอุตสาหกรรม"]||"").trim(),operation:String(a["สายปฏิบัติการ"]??"-"),use:num(a["ปริมาณน้ำใช้"]),reserve:a["ปริมาณน้ำสำรอง"]==null?null:num(a["ปริมาณน้ำสำรอง"]),operators:num(a["ผู้ประกอบการ"]),status:String(a["สถานะ"]||"-"),feature:feature};}).filter(function(row){return row.name&&row.year&&row.month;});
+   const objectIds=await waterLayer.queryObjectIds({where:"1=1"});const features=[];
+   for(let start=0;start<objectIds.length;start+=800){const result=await waterLayer.queryFeatures({objectIds:objectIds.slice(start,start+800),outFields:["*"],returnGeometry:true});features.push(...result.features);}
+   allRows=features.map(function(feature){const a=feature.attributes;return {year:num(a["ปี"]),month:num(a["เดือน"]),name:String(a["นิคมอุตสาหกรรม"]||"").trim(),operation:String(a["สายปฏิบัติการ"]??"-"),use:num(a["ปริมาณน้ำใช้"]),reserve:a["ปริมาณน้ำสำรอง"]==null?null:num(a["ปริมาณน้ำสำรอง"]),operators:num(a["ผู้ประกอบการ"]),status:String(a["สถานะ"]||"-"),feature:feature};}).filter(function(row){return row.name&&row.year&&row.month;});
    setupPeriods();updateFilters();mapStatus.textContent="แผนที่และข้อมูลการใช้น้ำพร้อมใช้งาน";
   }catch(error){mapStatus.textContent="ไม่สามารถโหลดข้อมูลการใช้น้ำ กรุณารีเฟรชอีกครั้ง";estateRows.innerHTML='<tr><td colspan="8">ไม่สามารถเข้าถึง Hosted Feature Layer ได้</td></tr>';}
  }).catch(function(){mapStatus.textContent="ไม่สามารถโหลดแผนที่ได้ กรุณารีเฟรชอีกครั้ง";});
