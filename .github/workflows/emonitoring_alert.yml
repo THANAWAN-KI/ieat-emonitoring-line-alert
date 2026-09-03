@@ -11,10 +11,11 @@ on:
 
   schedule:
     # เวลาไทย (UTC+7) วันจันทร์–ศุกร์
-    # 01:30–08:30 UTC = 08:30–15:30 ไทย: แจ้งค่าทุก 1 ชั่วโมง
-    - cron: "30 1-8 * * 1-5"
-    # 09:30 UTC = 16:30 ไทย: ส่งรายงานสรุปข้อมูลทั้งหมด
-    - cron: "30 9 * * 1-5"
+    # รอบหลัก :30 และรอบสำรอง :40 ป้องกัน GitHub ข้าม/หน่วง schedule
+    # 01:30–08:40 UTC = 08:30–15:40 ไทย (สคริปต์กันการส่งซ้ำในแต่ละชั่วโมง)
+    - cron: "30,40 1-8 * * 1-5"
+    # 09:30 และ 09:40 UTC = 16:30/16:40 ไทย: สรุปรายวัน (มีตัวกันส่งซ้ำ)
+    - cron: "30,40 9 * * 1-5"
 
 permissions:
   contents: write
@@ -68,7 +69,7 @@ jobs:
           LINE_GROUP_ID_DEMO_02: ${{ secrets.LINE_GROUP_ID_DEMO_02 }}
           LINE_GROUP_ID_DEMO_03: ${{ secrets.LINE_GROUP_ID_DEMO_03 }}
           LINE_PREVIEW_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.preview_mode || false }}
-          EMONITORING_RUN_MODE: ${{ github.event_name == 'schedule' && github.event.schedule == '30 9 * * 1-5' && 'daily_summary' || 'hourly_alert' }}
+          EMONITORING_RUN_MODE: ${{ github.event_name == 'schedule' && contains(fromJSON('["30,40 9 * * 1-5"]'), github.event.schedule) && 'daily_summary' || 'hourly_alert' }}
           PYTHONUNBUFFERED: "1"
           TZ: Asia/Bangkok
         run: python check_emonitoring_batch.py
