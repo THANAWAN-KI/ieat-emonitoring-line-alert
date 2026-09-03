@@ -176,4 +176,42 @@ const mapNode=document.getElementById('map');mapNode.classList.add('png-map');co
 function syncArcGIS(){const lat=Number(state.lat),lng=Number(state.lng);if(Number.isFinite(lat)&&Number.isFinite(lng))arcgisMap.src=`${arcgisBase}&center=${lng},${lat}&scale=9027.977411`}
 syncArcGIS();document.getElementById('mapBtn').onclick=()=>{updateMap();syncArcGIS()};
 pngBtn.onclick=async()=>{loading.classList.add('show');updateMap();arcgisMap.style.display='none';mapNode.classList.remove('png-map');map.invalidateSize();await new Promise(r=>setTimeout(r,900));try{const canvas=await html2canvas(report,{scale:2,useCORS:true,allowTaint:false,backgroundColor:'#fff',logging:false});const a=document.createElement('a');a.download=`IEAT-DSS-${state.reportNo||Date.now()}.png`;a.href=canvas.toDataURL('image/png');a.click()}catch(e){alert('ไม่สามารถสร้าง PNG ได้ กรุณาลองใหม่อีกครั้ง')}finally{mapNode.classList.add('png-map');arcgisMap.style.display='block';loading.classList.remove('show')}};
-</script></body></html>
+</script>
+<script>
+const IEAT_STATION_URL='https://emonitor.ieat.go.th/call_feed/geog/GeoData/station_all.json';
+const AIR4THAI_URL='https://air4thai.pcd.go.th/services/getNewAQI_JSON.php';
+let liveStations={ieat:[],pcd:[]},liveStatus={ieat:'loading',pcd:'loading'};
+const stationEsc=value=>String(value??'—').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+const stationFirst=(obj,keys,fallback='—')=>{for(const key of keys){const value=obj?.[key];if(value!==undefined&&value!==null&&String(value).trim()!=='')return value}return fallback};
+const stationNumber=value=>{const n=Number(String(value??'').replace(/,/g,''));return Number.isFinite(n)?n:null};
+const stationSourceRows=payload=>Array.isArray(payload)?payload:(Array.isArray(payload?.features)?payload.features:(Array.isArray(payload?.stations)?payload.stations:(Array.isArray(payload?.data)?payload.data:[])));
+function normalizeIEATStations(payload){return stationSourceRows(payload).map(row=>{const a=row.attributes||row,g=row.geometry||{};return{source:'ieat',name:stationFirst(a,['StationTH','StationNameTH','StationName','station_name','Name'],'สถานี e-Monitoring'),area:stationFirst(a,['IEATName','EstateTH','IndustrialEstate','estate_name','Operations','ProvinceTH'],'นิคมอุตสาหกรรม'),lat:stationNumber(stationFirst(a,['Latitude','latitude','lat','LAT'],g.y)),lon:stationNumber(stationFirst(a,['Longitude','longitude','lon','lng','LONG'],g.x)),value:stationFirst(a,['ParameterAlram','PM25_txt','PM10_txt','AQI'],'ไม่พบค่าเกินมาตรฐาน'),updated:stationFirst(a,['record_tim','LastUpdate','last_update','updated_at'],'—')}}).filter(row=>row.lat!==null&&row.lon!==null)}
+function normalizePCDStations(payload){return stationSourceRows(payload).map(row=>{const a=row.attributes||row,last=a.AQILast||a.aqiLast||{},pm25=last.PM25||last.pm25||a.PM25||a.pm25||{};return{source:'pcd',name:stationFirst(a,['nameTH','stationNameTH','station_name','name','stationID'],'สถานี Air4Thai'),area:stationFirst(a,['areaTH','areaEN','province','address'],'กรมควบคุมมลพิษ'),lat:stationNumber(stationFirst(a,['lat','latitude','Latitude'])),lon:stationNumber(stationFirst(a,['long','lng','lon','longitude','Longitude'])),value:stationFirst(pm25,['value','Value'],stationFirst(last,['AQI','aqi'],'—')),updated:[stationFirst(last,['date','Date'],''),stationFirst(last,['time','Time'],'')].filter(Boolean).join(' ')||stationFirst(a,['updated_at','update_time'],'—')}}).filter(row=>row.lat!==null&&row.lon!==null)}
+function stationDistance(lat1,lon1,lat2,lon2){if([lat1,lon1,lat2,lon2].some(v=>!Number.isFinite(v)))return null;const rad=v=>v*Math.PI/180,R=6371,dLat=rad(lat2-lat1),dLon=rad(lon2-lon1),q=Math.sin(dLat/2)**2+Math.cos(rad(lat1))*Math.cos(rad(lat2))*Math.sin(dLon/2)**2;return 2*R*Math.asin(Math.sqrt(q))}
+function nearestStations(rows){const lat=Number(state.lat),lon=Number(state.lng);return rows.map(row=>({...row,distance:stationDistance(lat,lon,row.lat,row.lon)})).sort((a,b)=>(a.distance??Infinity)-(b.distance??Infinity)).slice(0,6)}
+function stationRowsHTML(rows){return rows.length?nearestStations(rows).map(row=>`<div class="station-row"><div><b>${stationEsc(row.name)}</b><small>${stationEsc(row.area)} • ${stationEsc(row.updated)}</small></div><strong>${row.distance==null?'—':row.distance.toLocaleString('th-TH',{maximumFractionDigits:1})+' กม.'}</strong></div>`).join(''):'<div class="station-empty">ไม่พบข้อมูลสถานีที่มีพิกัด</div>'}
+function renderLiveStations(){
+ const ieatCount=document.getElementById('ieatStationCount'),pcdCount=document.getElementById('pcdStationCount'),ieatList=document.getElementById('ieatStationList'),pcdList=document.getElementById('pcdStationList'),reportGrid=document.getElementById('reportStationGrid');
+ ieatCount.textContent=liveStatus.ieat==='error'?'เชื่อมต่อไม่ได้':liveStations.ieat.length.toLocaleString('th-TH')+' สถานี';
+ pcdCount.textContent=liveStatus.pcd==='error'?'เชื่อมต่อไม่ได้':liveStations.pcd.length.toLocaleString('th-TH')+' สถานี';
+ ieatList.innerHTML=liveStatus.ieat==='error'?'<div class="station-empty">ไม่สามารถเชื่อมต่อ e-Monitoring กนอ. ในขณะนี้</div>':stationRowsHTML(liveStations.ieat);
+ pcdList.innerHTML=liveStatus.pcd==='error'?'<div class="station-empty">ไม่สามารถเชื่อมต่อ Air4Thai ในขณะนี้</div>':stationRowsHTML(liveStations.pcd);
+ const ieat=nearestStations(liveStations.ieat)[0],pcd=nearestStations(liveStations.pcd)[0];
+ reportGrid.innerHTML=[['e‑Monitoring กนอ.',ieat,liveStatus.ieat],['Air4Thai กรมควบคุมมลพิษ',pcd,liveStatus.pcd]].map(([label,row,status])=>`<article class="report-station-card"><h3>${label}</h3>${row?`<p><b>${stationEsc(row.name)}</b></p><p>${stationEsc(row.area)} • ${row.distance==null?'—':row.distance.toLocaleString('th-TH',{maximumFractionDigits:1})+' กม.'}</p><p>ค่าล่าสุด: ${stationEsc(row.value)} • ${stationEsc(row.updated)}</p>`:`<p>${status==='error'?'ไม่สามารถเชื่อมต่อแหล่งข้อมูล':'ไม่พบสถานีที่มีพิกัด'}</p>`}</article>`).join('');
+}
+async function loadStationData(){
+ const button=document.getElementById('stationRefresh');button.disabled=true;button.textContent='กำลังอัปเดต…';liveStatus={ieat:'loading',pcd:'loading'};
+ const results=await Promise.allSettled([
+  fetch(IEAT_STATION_URL,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()}),
+  fetch(AIR4THAI_URL,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()})
+ ]);
+ if(results[0].status==='fulfilled'){liveStations.ieat=normalizeIEATStations(results[0].value);liveStatus.ieat='ok'}else{liveStations.ieat=[];liveStatus.ieat='error'}
+ if(results[1].status==='fulfilled'){liveStations.pcd=normalizePCDStations(results[1].value);liveStatus.pcd='ok'}else{liveStations.pcd=[];liveStatus.pcd='error'}
+ renderLiveStations();button.disabled=false;button.textContent='อัปเดตข้อมูล';
+}
+document.getElementById('stationRefresh').onclick=loadStationData;
+form.addEventListener('change',event=>{if(event.target.dataset.key==='lat'||event.target.dataset.key==='lng')renderLiveStations()});
+document.getElementById('mapBtn').addEventListener('click',renderLiveStations);
+loadStationData();
+</script>
+</body></html>
