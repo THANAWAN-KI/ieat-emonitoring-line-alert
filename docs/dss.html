@@ -32,7 +32,15 @@ body{background:#fff}
 .report-wrap{overflow:visible!important;padding-bottom:0!important}
 @media(max-width:1050px){.workspace{display:block!important;max-width:1050px!important;padding:0!important}.editor{margin-bottom:14px!important}.report-wrap{padding:0!important;overflow-x:auto!important}}
 
-</style></head>
+</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Unified website typography matching the supplied reference */
+    html,body,button,input,select,textarea,table{font-family:"Noto Sans Thai","Segoe UI",Tahoma,sans-serif!important}
+  </style>
+</head>
 <body><div class="loading" id="loading">กำลังจัดทำรายงาน PNG…</div>
 <header class="top"><div><h1>IEAT DSS — จัดทำรายงานเหตุฉุกเฉิน</h1><span>แก้ไขข้อมูลด้านซ้าย ผลลัพธ์ในรายงานจะเปลี่ยนทันที</span></div><div class="top-actions"><button class="secondary" id="resetBtn">ล้างข้อมูล</button><button class="primary" id="pngBtn">ดาวน์โหลด PNG</button></div></header>
 <main class="workspace"><aside class="editor"><h2>แก้ไขข้อมูลรายงาน</h2><div id="form"></div></aside><div class="report-wrap"><section class="report" id="report">
