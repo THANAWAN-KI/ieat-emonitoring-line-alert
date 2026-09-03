@@ -18,7 +18,14 @@
 .brand b{font-size:18px;line-height:1.3}
 @media(max-width:560px){.brand b{font-size:16px}}
 .dss-section{border:1px solid #000!important;border-radius:0!important;box-shadow:none!important}.dss-section .panel-head{border-bottom:1px solid #000!important;background:#fff}.dss-section .dss-frame{background:#fff;border:0}
-</style></head><body><div class="loading" id="loading">กำลังจัดทำภาพ PNG…</div>
+</style></head><body>
+<header class="hub-site-header">
+  <a class="hub-site-brand" href="https://oc.ieat.go.th/th" target="_blank" rel="noopener">
+    <img src="./ieat_logo.png.PNG" alt="โลโก้การนิคมอุตสาหกรรมแห่งประเทศไทย">
+    <span><strong>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย</strong><small>Environmental Monitoring and Control Center: EMCC</small></span>
+  </a>
+  <a class="hub-back-link" href="./daily-situation.html">กลับหน้ารายงานข่าว</a>
+</header><div class="loading" id="loading">กำลังจัดทำภาพ PNG…</div>
 <main class="page" id="captureArea"><nav class="tabs"><button class="tab active" data-type="fire"><img src="./assets/fire-svgrepo-com.png" alt="ไฟไหม้">ไฟไหม้</button><button class="tab" data-type="flood"><img src="./assets/flood-svgrepo-com.png" alt="น้ำท่วม">น้ำท่วม</button><button class="tab" data-type="drought"><img src="./assets/drought-svgrepo-com.png" alt="ภัยแล้ง">ภัยแล้ง</button><button class="tab" data-type="pm25"><img src="./assets/cloudy-cloud-svgrepo-com.png" alt="ฝุ่น PM2.5">ฝุ่น PM2.5</button></nav>
 <section id="fireView"><div class="kpis" id="kpis"></div><div class="toolbar"><select id="estateFilter"><option value="">ทุกนิคมอุตสาหกรรม</option></select><input id="searchInput" placeholder="ค้นหาชื่อจุดหรือข้อมูลสนับสนุน"><span id="filterSummary">กำลังเชื่อมต่อข้อมูล…</span></div>
 <div class="map-grid"><article class="panel"><div class="panel-head"><h2>Risk Map และข้อมูลสนับสนุน</h2><a href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=9c25f3f77ba5481cb481b402177884c2" target="_blank">เปิดเต็มหน้า ↗</a></div><div class="risk-layout"><div id="riskMap" class="risk-map"></div><aside class="directory"><div class="dir-head"><b id="listTitle">ข้อมูลสนับสนุนทั้งหมด</b><span>คลิกรายการเพื่อซูมไปยังตำแหน่งบนแผนที่</span></div><div class="list" id="featureList"><div class="empty">กำลังโหลดข้อมูล…</div></div></aside></div></article>
@@ -344,5 +351,76 @@ footer{padding:20px;font-size:14px}
 .pm25-hub.show{display:block}
 .pm25-report-frame{display:block;width:100%;height:calc(100vh - 130px);min-height:720px;border:0;background:#fff;border-radius:8px}
 @media(max-width:700px){.pm25-report-frame{height:calc(100vh - 112px);min-height:620px}}
+</style>
+<style>
+/* Shared IEAT EMCC header for the Hub */
+.hub-site-header{
+  position:sticky;
+  top:0;
+  z-index:2000;
+  width:100%;
+  min-height:58px;
+  padding:5px 56px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  background:#fff;
+  border-top:1px solid #dedede;
+  border-bottom:1px solid #d9dde1;
+  box-shadow:0 3px 8px rgba(31,41,55,.12);
+}
+.hub-site-brand{
+  min-width:0;
+  display:flex;
+  align-items:center;
+  gap:13px;
+  color:#111;
+  text-decoration:none;
+}
+.hub-site-brand img{
+  width:58px;
+  height:46px;
+  flex:0 0 58px;
+  object-fit:contain;
+}
+.hub-site-brand span{display:block;min-width:0}
+.hub-site-brand strong{
+  display:block;
+  margin:0;
+  color:#111;
+  font-size:20px;
+  line-height:1.2;
+  font-weight:700;
+}
+.hub-site-brand small{
+  display:block;
+  margin-top:2px;
+  color:#111;
+  font-size:11px;
+  line-height:1.2;
+}
+.hub-back-link{
+  flex:0 0 auto;
+  padding:8px 12px;
+  color:#631a9d;
+  font-size:14px;
+  font-weight:700;
+  text-decoration:none;
+  white-space:nowrap;
+}
+.hub-back-link:hover{text-decoration:underline}
+@media(max-width:700px){
+  .hub-site-header{min-height:58px;padding:6px 12px;gap:8px}
+  .hub-site-brand{gap:8px}
+  .hub-site-brand img{width:46px;height:40px;flex-basis:46px}
+  .hub-site-brand strong{font-size:15px}
+  .hub-site-brand small{font-size:9px}
+  .hub-back-link{padding:7px 5px;font-size:11px}
+}
+@media(max-width:420px){
+  .hub-site-brand strong{font-size:13px}
+  .hub-site-brand small{display:none}
+}
 </style>
 </body></html>
