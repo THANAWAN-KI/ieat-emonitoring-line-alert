@@ -1,8 +1,6 @@
 name: e-Monitoring Hourly LINE Alert
 
 on:
-  # เมื่อแก้ไฟล์ระบบแจ้งเตือน ให้ทดสอบส่งจริงทันทีบน main
-  # ช่วยยืนยัน Token/Group ID/LINE API โดยไม่ต้องรอ GitHub Scheduler
   push:
     branches:
       - main
@@ -28,15 +26,19 @@ on:
         default: hourly_alert
 
   schedule:
-    # GitHub Actions ใช้เวลา UTC: 01:30–08:30 UTC = 08:30–15:30 ไทย
-    # ส่งรายงานรายชั่วโมงให้ครบทั้ง 3 กลุ่ม ทุกวันจันทร์–ศุกร์
+    # เวลาไทย จันทร์-ศุกร์
+    # 08:30-15:30 = 01:30-08:30 UTC
+    # มี retry :40 และ :50 เพื่อป้องกัน GitHub Scheduler พลาดคิว
+    # alert_state จะกันไม่ให้ส่งซ้ำในชั่วโมงเดียวกัน
     - cron: "30 1-8 * * 1-5"
-    # รอบสำรอง 15 นาทีถัดมา; state ป้องกันการส่งซ้ำเมื่อรอบหลักสำเร็จ
-    - cron: "45 1-8 * * 1-5"
-    # 09:30 UTC = 16:30 ไทย: ส่งรายงานสรุปประจำวัน
+    - cron: "40 1-8 * * 1-5"
+    - cron: "50 1-8 * * 1-5"
+
+    # 16:30 ไทย = 09:30 UTC: รายงานสรุปประจำวัน
+    # มี retry 16:40 และ 16:50 และ daily_summary_sent_today() กันส่งซ้ำ
     - cron: "30 9 * * 1-5"
-    # รอบสำรองรายงานสรุป 16:45 น.
-    - cron: "45 9 * * 1-5"
+    - cron: "40 9 * * 1-5"
+    - cron: "50 9 * * 1-5"
 
 permissions:
   contents: write
@@ -68,8 +70,11 @@ jobs:
           echo "IEAT e-Monitoring Hourly LINE Alert"
           echo "Delivery policy: every hourly slot to all 3 operation groups"
           echo "Active schedule: 08:30-16:30 Asia/Bangkok (Mon-Fri)"
+          echo "Retry policy: :30, :40, :50; send only once per slot"
+          echo "16:30 slot: daily summary"
           echo "================================================"
           echo "Trigger: ${{ github.event_name }}"
+          echo "Schedule: ${{ github.event.schedule }}"
           echo "Thailand time:"
           date
           echo "================================================"
@@ -109,8 +114,7 @@ jobs:
           LINE_GROUP_ID_DEMO_02: ${{ secrets.LINE_GROUP_ID_DEMO_02 }}
           LINE_GROUP_ID_DEMO_03: ${{ secrets.LINE_GROUP_ID_DEMO_03 }}
           LINE_PREVIEW_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.preview_mode || false }}
-          # กำหนดโหมดจาก cron โดยตรง จึงไม่ผิดรอบแม้ GitHub เริ่มงานล่าช้า
-          EMONITORING_RUN_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.run_mode || ((github.event.schedule == '30 9 * * 1-5' || github.event.schedule == '45 9 * * 1-5') && 'daily_summary' || 'hourly_alert') }}
+          EMONITORING_RUN_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.run_mode || ((github.event.schedule == '30 9 * * 1-5' || github.event.schedule == '40 9 * * 1-5' || github.event.schedule == '50 9 * * 1-5') && 'daily_summary' || 'hourly_alert') }}
           PYTHONUNBUFFERED: "1"
           TZ: Asia/Bangkok
         run: python check_emonitoring_batch.py
@@ -135,7 +139,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # เก็บผลลัพธ์ของรอบนี้ไว้ แล้วนำไปวางบน main ล่าสุดทุกครั้งที่ retry
           cp docs/status.json /tmp/emonitoring-status.json
           cp docs/alert_state.json /tmp/emonitoring-alert-state.json
 
