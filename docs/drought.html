@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>สถานการณ์ภัยแล้ง | IEAT EMCC</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css">
+<script src="https://js.arcgis.com/4.30/"></script>
+<style>
+:root{--green:#557a18;--green-dark:#36530d;--green-soft:#f1f6e8;--ink:#252822;--muted:#6d7466;--line:#dfe5d8;--bg:#f5f7f2}
+*{box-sizing:border-box}html,body{height:100%;margin:0}body{font-family:Sarabun,sans-serif;color:var(--ink);background:var(--bg)}
+button,select{font:inherit}.page{height:100%;display:flex;flex-direction:column}.top{height:68px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 22px;gap:14px;z-index:5}
+.logo{width:58px;height:43px;object-fit:contain}.title{min-width:0}.title h1{font-size:20px;line-height:1.25;margin:0;font-weight:700}.title p{font-size:12px;color:var(--muted);margin:3px 0 0}
+.open{margin-left:auto;color:var(--green-dark);background:var(--green-soft);border:1px solid #cbd8bb;border-radius:9px;padding:9px 13px;text-decoration:none;font-size:13px;font-weight:600}
+.layout{display:grid;grid-template-columns:310px minmax(0,1fr);flex:1;min-height:0;padding:14px;gap:14px}.side{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:auto;padding:18px}
+.section-label{font-size:13px;color:var(--muted);margin-bottom:4px}.side h2{font-size:21px;margin:0 0 4px}.date{font-size:13px;color:var(--green-dark);font-weight:600;margin-bottom:18px}
+.field{margin-bottom:13px}.field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}.field select{width:100%;border:1px solid #cfd6c7;border-radius:8px;padding:10px 11px;background:#fff;color:var(--ink)}
+.buttons{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}.btn{border:0;border-radius:8px;padding:10px;cursor:pointer;font-weight:600}.primary{background:var(--green);color:#fff}.secondary{background:#eef1eb;color:#4e5747}
+.info{margin-top:18px;border-top:1px solid var(--line);padding-top:16px}.info h3{font-size:15px;margin:0 0 10px}.metric{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:9px;padding:10px 11px;margin-bottom:8px;background:#fbfcfa}.metric span{font-size:12px;color:var(--muted)}.metric b{font-size:19px;color:var(--green-dark)}
+.legend{margin-top:16px;padding:12px;background:var(--green-soft);border-radius:9px;font-size:12px;line-height:1.55;color:#536044}.legend b{display:block;color:var(--green-dark);font-size:13px;margin-bottom:3px}
+.map-card{position:relative;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;min-height:0}.map-head{height:48px;position:absolute;left:14px;top:14px;z-index:2;background:#fffffff2;border:1px solid var(--line);border-radius:9px;padding:0 14px;display:flex;align-items:center;box-shadow:0 3px 12px #25371318}.map-head b{font-size:14px}.map{width:100%;height:100%;min-height:620px}.status{position:absolute;right:14px;bottom:14px;z-index:2;background:#fffffff2;border:1px solid var(--line);border-radius:8px;padding:8px 11px;font-size:12px;color:var(--muted);box-shadow:0 3px 12px #25371318}
+.esri-ui .esri-widget{font-family:Sarabun,sans-serif}
+@media(max-width:820px){.top{height:60px;padding:0 12px}.logo{width:48px;height:36px}.title h1{font-size:17px}.title p{display:none}.open{font-size:12px;padding:8px}.layout{grid-template-columns:1fr;display:flex;flex-direction:column;padding:8px;gap:8px;overflow:auto}.side{padding:14px;overflow:visible}.side h2{font-size:19px}.info{display:none}.map-card{height:620px;flex:none}.map{min-height:620px}.map-head{top:10px;left:10px}.status{right:10px;bottom:10px}}
+@media(max-width:480px){.top{gap:7px}.logo{width:42px}.title h1{font-size:15px}.open{padding:7px;font-size:11px}.buttons{grid-template-columns:1fr}.map-card,.map{height:540px;min-height:540px}}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="top">
+<img class="logo" src="https://oc.ieat.go.th/assets/app/images/logo-th.png" alt="กนอ.">
+<div class="title"><h1>ศูนย์ข้อมูลสถานการณ์ภัยแล้ง</h1><p>ข้อมูลสนับสนุนการเฝ้าระวังพื้นที่นิคมอุตสาหกรรม</p></div>
+<a class="open" href="https://www.arcgis.com/apps/mapviewer/index.html?webmap=d6044d4f209345e6ac731afafe3c9d4a" target="_blank">เปิดแผนที่เต็มหน้า ↗</a>
+</header>
+<main class="layout">
+<aside class="side">
+<div class="section-label">พื้นที่เฝ้าระวัง</div>
+<h2>ภัยแล้ง</h2>
+<div class="date" id="reportDate">กำลังตรวจสอบวันที่…</div>
+<div class="field"><label for="estateSelect">นิคมอุตสาหกรรม</label><select id="estateSelect"><option value="">ทุกนิคมอุตสาหกรรม</option></select></div>
+<div class="buttons"><button class="btn secondary" id="resetBtn">รีเซ็ต</button><button class="btn primary" id="showBtn">แสดงข้อมูล</button></div>
+<div class="info">
+<h3>ข้อมูลแผนที่</h3>
+<div class="metric"><span>นิคมอุตสาหกรรมทั้งหมด</span><b id="estateCount">–</b></div>
+<div class="metric"><span>ชั้นข้อมูลที่เปิดใช้งาน</span><b id="layerCount">–</b></div>
+<div class="legend"><b>การใช้ข้อมูล</b>ใช้สำหรับคัดกรองและเฝ้าระวังเบื้องต้น ควรตรวจสอบกับประกาศทางการและข้อมูลภาคสนามอีกครั้ง</div>
+</div>
+</aside>
+<section class="map-card">
+<div class="map-head"><b>แผนที่สถานการณ์ภัยแล้งและพื้นที่นิคมฯ</b></div>
+<div id="viewDiv" class="map"></div>
+<div class="status" id="mapStatus">กำลังโหลดแผนที่…</div>
+</section>
+</main>
+</div>
+<script>
+const WEBMAP_ID="d6044d4f209345e6ac731afafe3c9d4a";
+const ESTATE_LAYER_URL="https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/e_PP_2025/FeatureServer/1";
+const thaiMonths=["มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"];
+const now=new Date();document.getElementById("reportDate").textContent=now.getDate()+" "+thaiMonths[now.getMonth()]+" "+(now.getFullYear()+543);
+require(["esri/WebMap","esri/views/MapView","esri/layers/FeatureLayer","esri/widgets/Search","esri/widgets/Home","esri/widgets/LayerList","esri/widgets/Legend","esri/widgets/Expand"],function(WebMap,MapView,FeatureLayer,Search,Home,LayerList,Legend,Expand){
+ const map=new WebMap({portalItem:{id:WEBMAP_ID}});
+ const view=new MapView({container:"viewDiv",map:map,center:[101,13],zoom:5,constraints:{minZoom:4},popup:{dockEnabled:true,dockOptions:{buttonEnabled:false,position:"bottom-right"}}});
+ const estateLayer=new FeatureLayer({url:ESTATE_LAYER_URL,outFields:["*"]});
+ const select=document.getElementById("estateSelect"),status=document.getElementById("mapStatus");
+ view.when(async function(){
+  view.ui.add(new Home({view:view}),"top-left");
+  view.ui.add(new Search({view:view,includeDefaultSources:true}),"top-right");
+  view.ui.add(new Expand({view:view,content:new LayerList({view:view}),group:"tools",expandTooltip:"ชั้นข้อมูล"}),"top-right");
+  view.ui.add(new Expand({view:view,content:new Legend({view:view}),group:"tools",expandTooltip:"คำอธิบายสัญลักษณ์"}),"top-right");
+  document.getElementById("layerCount").textContent=map.allLayers.filter(function(layer){return layer.visible;}).length.toLocaleString("th-TH");
+  status.textContent="แผนที่พร้อมใช้งาน";
+  try{
+   const result=await estateLayer.queryFeatures({where:"1=1",outFields:["สำนักงานนิคมฯ","Operations"],returnGeometry:true});
+   const rows=result.features.map(function(f){return {name:String(f.attributes["สำนักงานนิคมฯ"]||"").trim(),feature:f};}).filter(function(x){return x.name;}).sort(function(a,b){return a.name.localeCompare(b.name,"th");});
+   document.getElementById("estateCount").textContent=rows.length.toLocaleString("th-TH");
+   rows.forEach(function(row,index){const option=document.createElement("option");option.value=String(index);option.textContent=row.name;select.appendChild(option);});
+   document.getElementById("showBtn").onclick=async function(){if(select.value===""){await view.goTo({center:[101,13],zoom:5},{duration:700});status.textContent="แสดงพื้นที่ทั้งหมด";return;}const row=rows[Number(select.value)];await view.goTo(row.feature.geometry,{zoom:12,duration:900});view.openPopup({features:[row.feature],location:row.feature.geometry});status.textContent=row.name;};
+   document.getElementById("resetBtn").onclick=async function(){select.value="";await view.goTo({center:[101,13],zoom:5},{duration:700});view.closePopup();status.textContent="แสดงพื้นที่ทั้งหมด";};
+  }catch(error){status.textContent="แผนที่พร้อมใช้งาน · ไม่สามารถโหลดรายชื่อนิคมฯ ได้";}
+ }).catch(function(){status.textContent="ไม่สามารถโหลดแผนที่ได้ กรุณารีเฟรชอีกครั้ง";});
+});
+</script>
+</body>
+</html>
