@@ -1,44 +1,27 @@
 #!/usr/bin/env python3
-"""Quota-saving e-Monitoring runner.
+"""IEAT e-Monitoring scheduled LINE sender.
 
-Keeps the existing check_emonitoring.py data parsing and Flex theme, but sends
-ONE summary Flex message per detected run instead of summary + station-detail
-carousels. The existing station detail remains available in the Dashboard.
+Simple policy:
+- Mon-Fri 08:30-15:30: fetch latest source data and send to all 3 operation groups.
+- 16:30: fetch latest source data and send daily summary to all 3 operation groups.
+- No previous-slot/state suppression. A scheduled run means fetch and send.
 """
 
 from __future__ import annotations
 
 import os
 import sys
-from datetime import timedelta
 
 import check_emonitoring as base
 
 
 def build_preview_events() -> list[dict]:
-    """ข้อมูลสมมติสำหรับดูรูปแบบ Flex Card เท่านั้น"""
     update_text = base.report_time_text()
     samples = [
-        (
-            "สายปฏิบัติการ 1",
-            "สถานีทดสอบ A",
-            "นิคมอุตสาหกรรมตัวอย่าง 1",
-            "PM2.5 = 45 µg/m³ (ค่าตัวอย่าง)",
-        ),
-        (
-            "สายปฏิบัติการ 2",
-            "สถานีทดสอบ B",
-            "นิคมอุตสาหกรรมตัวอย่าง 2",
-            "COD = 135 mg/L (ค่าตัวอย่าง)",
-        ),
-        (
-            "สายปฏิบัติการ 3",
-            "สถานีทดสอบ C",
-            "นิคมอุตสาหกรรมตัวอย่าง 3",
-            "NOx = 210 ppm (ค่าตัวอย่าง)",
-        ),
+        ("สายปฏิบัติการ 1", "สถานีทดสอบ A", "นิคมอุตสาหกรรมตัวอย่าง 1", "PM2.5 = 45 µg/m³ (ค่าตัวอย่าง)"),
+        ("สายปฏิบัติการ 2", "สถานีทดสอบ B", "นิคมอุตสาหกรรมตัวอย่าง 2", "COD = 135 mg/L (ค่าตัวอย่าง)"),
+        ("สายปฏิบัติการ 3", "สถานีทดสอบ C", "นิคมอุตสาหกรรมตัวอย่าง 3", "NOx = 210 ppm (ค่าตัวอย่าง)"),
     ]
-
     return [
         {
             "code": f"DEMO-{index:02d}",
@@ -56,19 +39,11 @@ def build_preview_events() -> list[dict]:
             "event_reason": "ตัวอย่างรูปแบบการแจ้งเตือน",
             "previous_snapshot": {},
         }
-        for index, (
-            zone,
-            station_name,
-            estate_name,
-            parameter,
-        ) in enumerate(samples, start=1)
+        for index, (zone, station_name, estate_name, parameter) in enumerate(samples, start=1)
     ]
 
 
-def build_hourly_alarm_events(
-    alert_stations: list[dict],
-) -> list[dict]:
-    """สร้างเหตุการณ์จากค่าที่มี Alarm ทั้งหมด เพื่อแจ้งซ้ำทุกชั่วโมง"""
+def build_hourly_alarm_events(alert_stations: list[dict]) -> list[dict]:
     return [
         {
             **station,
@@ -80,100 +55,27 @@ def build_hourly_alarm_events(
     ]
 
 
-def hourly_slot_start(current_time):
-    """รอบรายชั่วโมงล่าสุด (08:30, 09:30, ... 15:30)"""
-    slot = current_time.replace(minute=30, second=0, microsecond=0)
-    if current_time.minute < 30:
-        slot -= timedelta(hours=1)
-    return slot
-
-
-def hourly_slot_already_sent(current_time) -> bool:
-    """กันการส่งซ้ำ เมื่อ cron สำรอง :40 ทำงานหลังรอบหลัก :30"""
-    updated_at = base.load_alert_state().get("updated_at")
-    if not updated_at:
-        return False
-    try:
-        last_sent = base.datetime.fromisoformat(updated_at)
-        if last_sent.tzinfo is None:
-            last_sent = last_sent.replace(tzinfo=base.THAI_TZ)
-        last_sent = last_sent.astimezone(base.THAI_TZ)
-    except (TypeError, ValueError):
-        return False
-
-    slot = hourly_slot_start(current_time)
-    return slot <= last_sent < slot + timedelta(hours=1)
-
-
 def main() -> int:
     current_time = base.now_thailand()
-    run_mode = os.getenv(
-        "EMONITORING_RUN_MODE",
-        "",
-    ).strip().lower()
-    preview_mode = os.getenv(
-        "LINE_PREVIEW_MODE",
-        "",
-    ).strip().lower() in {
-        "1",
-        "true",
-        "yes",
-        "on",
-    }
+    run_mode = os.getenv("EMONITORING_RUN_MODE", "").strip().lower()
+    preview_mode = os.getenv("LINE_PREVIEW_MODE", "").strip().lower() in {"1", "true", "yes", "on"}
 
     if preview_mode:
-        print(
-            "PREVIEW MODE: ส่งข้อมูลสมมติ 3 Zone "
-            "โดยไม่ดาวน์โหลดข้อมูลจริงและไม่บันทึก state"
-        )
-        success = base.send_zone_event_reports(
-            build_preview_events()
-        )
-        if not success:
-            print("ERROR: ส่ง Flex Preview ไม่สำเร็จ")
-            return 1
-        print(
-            "ส่ง Flex Preview สำเร็จ — "
-            "ไม่กระทบระบบอัตโนมัติ"
-        )
-        return 0
+        success = base.send_zone_event_reports(build_preview_events())
+        return 0 if success else 1
 
-    # วันจันทร์=0 ... วันเสาร์=5 วันอาทิตย์=6
     if current_time.weekday() >= 5:
-        print(
-            "วันเสาร์–อาทิตย์ — "
-            "ไม่ดาวน์โหลดข้อมูล ไม่ส่ง LINE และไม่บันทึก state"
-        )
+        print("วันเสาร์-อาทิตย์ — ไม่ส่ง LINE")
         return 0
 
-    current_minutes = current_time.hour * 60 + current_time.minute
+    daily_summary_mode = run_mode == "daily_summary"
 
-    # GitHub Workflow ระบุโหมดจากรอบ cron โดยตรง จึงไม่คลาดเคลื่อน
-    # แม้ GitHub Actions จะเริ่มทำงานช้ากว่าเวลาที่กำหนด
-    daily_summary_mode = (
-        run_mode == "daily_summary"
-        or (
-            not run_mode
-            and current_minutes >= 16 * 60 + 30
-        )
-    )
-
-    if (
-        not daily_summary_mode
-        and not 8 * 60 + 30 <= current_minutes <= 16 * 60 + 30
-    ):
-        print("อยู่นอกช่วงเวลาแจ้งเตือน 08:30-16:30 น. — ไม่ส่ง LINE")
-        return 0
-
-    print("=" * 72)
-    print("IEAT e-Monitoring LINE Alert - Quota Saver")
-    print("ส่งรายงานทุก 1 ชั่วโมงให้ครบทั้ง 3 Zone")
-    print("=" * 72)
-
+    # สำคัญ: เมื่อ workflow เรียกรอบที่กำหนด ให้ดึงข้อมูลใหม่ทุกครั้งแล้วส่งทันที
+    print("ถึงรอบแจ้งเตือน — กำลังเรียกข้อมูล e-Monitoring ล่าสุด")
     try:
         payload = base.download_station_data()
     except RuntimeError as error:
-        print(f"ERROR: {error}")
+        print(f"ERROR: เรียกข้อมูลไม่สำเร็จ: {error}")
         return 1
 
     features = base.get_features(payload)
@@ -181,112 +83,45 @@ def main() -> int:
     alert_stations = base.filter_alert_features(features)
     type_stats = base.calculate_type_stats(all_stations)
 
-    # ใช้ข้อมูลทั้งหมดในการแจ้งเตือน แม้ LastUpdate ยังไม่ใช่วันปัจจุบัน
-    # เนื่องจากแหล่งข้อมูลต้นทางอาจยังไม่ได้รับการอัปเดต
-    notification_stations = all_stations
-    notification_alert_stations = alert_stations
-
     base.write_status_file(
         all_stations=all_stations,
         alert_stations=alert_stations,
         type_stats=type_stats,
     )
 
-    # แจ้งค่าที่มี Alarm ทั้งหมดซ้ำทุก 1 ชั่วโมง
-    # ไม่รอให้ค่าเปลี่ยน และไม่กรองทิ้งเมื่อข้อมูลต้นทางล่าช้า
-    events = build_hourly_alarm_events(
-        notification_alert_stations
-    )
-
-    print(f"สถานีทั้งหมด: {len(all_stations)}")
-    print(f"สถานีที่ใช้แจ้งเตือนทั้งหมด: {len(notification_stations)}")
-    print(
-        "สถานีที่มี Alarm สำหรับแจ้งเตือนรอบนี้: "
-        f"{len(notification_alert_stations)}"
-    )
-    print("ใช้ข้อมูลทั้งหมด แม้วันที่ข้อมูลต้นทางยังไม่เป็นปัจจุบัน")
-    print(f"รายการแจ้งเตือนประจำชั่วโมง: {len(events)}")
-    print(
-        "เกณฑ์แจ้งสถานี OFFLINE ต่อเนื่อง: "
-        f"{base.offline_threshold_minutes()} นาที"
-    )
+    if not base.zone_routing_enabled():
+        print("ERROR: LINE Zone routing ยังไม่เปิดใช้งาน")
+        return 1
 
     if daily_summary_mode:
-        if base.daily_summary_sent_today():
-            base.save_alert_state(all_stations)
-            print("LINE: ไม่ส่ง — รายงานประจำวันนี้ถูกส่งแล้ว")
-            print("โควตารอบนี้: 0 ข้อความ")
-            return 0
-
-        if not base.zone_routing_enabled():
-            print(
-                "ERROR: LINE Zone routing ยังไม่เปิดใช้งาน "
-                "และ Broadcast ถูกปิด"
-            )
-            return 1
-
-        print(
-            "รอบรายงานประจำวัน: ส่ง 1 Flex Message ต่อ Zone "
-            "แม้ไม่มีข้อมูลใหม่"
-        )
+        print("16:30 — ส่งรายงานสรุปประจำวันให้ทั้ง 3 สายปฏิบัติการทันที")
         try:
-            success = base.send_zone_daily_summaries(
-                all_stations
-            )
+            success = base.send_zone_daily_summaries(all_stations)
         except RuntimeError as error:
             print(f"ERROR: {error}")
             return 1
-
         if not success:
-            print(
-                "ERROR: ส่งรายงานประจำวันไม่สำเร็จ — "
-                "ยังไม่บันทึกสถานะเพื่อให้ retry"
-            )
+            print("ERROR: ส่งรายงานสรุปไม่ครบทั้ง 3 กลุ่ม")
             return 1
-
         base.save_alert_state(all_stations)
-        base.mark_daily_summary_sent()
-        print("ส่งรายงานประจำวันครบทุก Zone แล้ว")
-        print("บันทึกสถานะป้องกันการส่งรายงานซ้ำแล้ว")
-        print("Dashboard อัปเดตแล้ว")
+        print("ส่งรายงานสรุปครบทั้ง 3 กลุ่มสำเร็จ")
         return 0
 
-    if hourly_slot_already_sent(current_time):
-        print("LINE: ไม่ส่งซ้ำ — รอบรายชั่วโมงนี้ส่งสำเร็จแล้ว")
-        print("โควตารอบนี้: 0 ข้อความ")
-        return 0
-
-    if not base.zone_routing_enabled():
-        print(
-            "ERROR: LINE Zone routing ยังไม่เปิดใช้งาน "
-            "และ Broadcast ถูกปิดเพื่อป้องกันการส่งข้าม Zone"
-        )
-        return 1
-
-    # ทุกชั่วโมงต้องส่งครบทั้ง 3 กลุ่ม:
-    # Zone ที่มี Alarm รับการ์ด Alarm ของตนเอง
-    # Zone ที่ไม่มี Alarm รับสรุป Online/Offline ของตนเอง
+    events = build_hourly_alarm_events(alert_stations)
+    print(f"ข้อมูลทั้งหมด {len(all_stations)} สถานี | Alarm {len(alert_stations)} สถานี")
+    print("ส่งรายงานประจำชั่วโมงให้ทั้ง 3 สายปฏิบัติการทันที")
     try:
-        print("LINE routing: ส่งรายงานให้ครบทั้ง 3 สายปฏิบัติการ")
-        success = base.send_all_zone_hourly_reports(
-            all_stations,
-            events,
-        )
+        success = base.send_all_zone_hourly_reports(all_stations, events)
     except RuntimeError as error:
         print(f"ERROR: {error}")
         return 1
 
     if not success:
-        print(
-            "ERROR: ส่งรายงานรายชั่วโมงไม่ครบทั้ง 3 Zone — "
-            "ยังไม่บันทึก state เพื่อให้รอบถัดไป retry"
-        )
+        print("ERROR: ส่งรายงานรายชั่วโมงไม่ครบทั้ง 3 กลุ่ม")
         return 1
 
     base.save_alert_state(all_stations)
-    print("ส่ง LINE รายงานประจำชั่วโมงครบทั้ง 3 Zone สำเร็จ")
-    print("บันทึก alert_state.json แล้ว")
-    print("Dashboard อัปเดตแล้ว")
+    print("ส่งรายงานประจำชั่วโมงครบทั้ง 3 กลุ่มสำเร็จ")
     return 0
 
 
