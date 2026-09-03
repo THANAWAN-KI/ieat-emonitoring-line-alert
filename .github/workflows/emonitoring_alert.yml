@@ -26,19 +26,11 @@ on:
         default: hourly_alert
 
   schedule:
-    # เวลาไทย จันทร์-ศุกร์
+    # จันทร์-ศุกร์ เวลาไทย
     # 08:30-15:30 = 01:30-08:30 UTC
-    # มี retry :40 และ :50 เพื่อป้องกัน GitHub Scheduler พลาดคิว
-    # alert_state จะกันไม่ให้ส่งซ้ำในชั่วโมงเดียวกัน
     - cron: "30 1-8 * * 1-5"
-    - cron: "40 1-8 * * 1-5"
-    - cron: "50 1-8 * * 1-5"
-
-    # 16:30 ไทย = 09:30 UTC: รายงานสรุปประจำวัน
-    # มี retry 16:40 และ 16:50 และ daily_summary_sent_today() กันส่งซ้ำ
+    # 16:30 = 09:30 UTC ส่งรายงานสรุปประจำวัน
     - cron: "30 9 * * 1-5"
-    - cron: "40 9 * * 1-5"
-    - cron: "50 9 * * 1-5"
 
 permissions:
   contents: write
@@ -67,17 +59,13 @@ jobs:
           TZ: Asia/Bangkok
         run: |
           echo "================================================"
-          echo "IEAT e-Monitoring Hourly LINE Alert"
-          echo "Delivery policy: every hourly slot to all 3 operation groups"
-          echo "Active schedule: 08:30-16:30 Asia/Bangkok (Mon-Fri)"
-          echo "Retry policy: :30, :40, :50; send only once per slot"
-          echo "16:30 slot: daily summary"
+          echo "IEAT e-Monitoring LINE Alert"
+          echo "08:30-15:30: เรียกข้อมูลและส่งรายชั่วโมง"
+          echo "16:30: เรียกข้อมูลและส่งสรุปประจำวัน"
           echo "================================================"
           echo "Trigger: ${{ github.event_name }}"
           echo "Schedule: ${{ github.event.schedule }}"
-          echo "Thailand time:"
           date
-          echo "================================================"
 
       - name: Validate Python files
         run: |
@@ -85,7 +73,6 @@ jobs:
           test -f "check_emonitoring_batch.py"
           python -m py_compile check_emonitoring.py
           python -m py_compile check_emonitoring_batch.py
-          echo "Python files ผ่านการตรวจ Syntax"
 
       - name: Validate LINE delivery configuration
         env:
@@ -104,7 +91,6 @@ jobs:
             1|true|yes|on) ;;
             *) echo "ERROR: LINE_ZONE_ROUTING_ENABLED ต้องเป็น true"; exit 1 ;;
           esac
-          echo "ตรวจพบ Token, Group ID ทั้ง 3 กลุ่ม และเปิด Zone routing แล้ว"
 
       - name: Run e-Monitoring check and send LINE
         env:
@@ -114,7 +100,7 @@ jobs:
           LINE_GROUP_ID_DEMO_02: ${{ secrets.LINE_GROUP_ID_DEMO_02 }}
           LINE_GROUP_ID_DEMO_03: ${{ secrets.LINE_GROUP_ID_DEMO_03 }}
           LINE_PREVIEW_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.preview_mode || false }}
-          EMONITORING_RUN_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.run_mode || ((github.event.schedule == '30 9 * * 1-5' || github.event.schedule == '40 9 * * 1-5' || github.event.schedule == '50 9 * * 1-5') && 'daily_summary' || 'hourly_alert') }}
+          EMONITORING_RUN_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.run_mode || (github.event.schedule == '30 9 * * 1-5' && 'daily_summary' || 'hourly_alert') }}
           PYTHONUNBUFFERED: "1"
           TZ: Asia/Bangkok
         run: python check_emonitoring_batch.py
@@ -143,7 +129,6 @@ jobs:
           cp docs/alert_state.json /tmp/emonitoring-alert-state.json
 
           for attempt in 1 2 3 4 5; do
-            echo "Push attempt ${attempt}/5"
             git fetch origin main
             git reset --hard origin/main
             cp /tmp/emonitoring-status.json docs/status.json
@@ -151,19 +136,15 @@ jobs:
             git add docs/status.json docs/alert_state.json
 
             if git diff --cached --quiet; then
-              echo "ข้อมูลล่าสุดถูกบันทึกไว้แล้ว"
               exit 0
             fi
 
             git commit -m "Update e-Monitoring status and alert state [skip ci]"
 
             if git push origin HEAD:main; then
-              echo "บันทึกข้อมูลสถานการณ์และ alert state สำเร็จ"
               exit 0
             fi
-
-            echo "main มีการเปลี่ยนแปลงระหว่าง push — กำลังลองใหม่"
           done
 
-          echo "ERROR: ไม่สามารถบันทึกสถานะหลังลอง 5 ครั้ง"
+          echo "ERROR: ไม่สามารถบันทึกสถานะ"
           exit 1
