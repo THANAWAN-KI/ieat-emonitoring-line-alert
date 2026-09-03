@@ -124,5 +124,48 @@
       .map-title,.map-source{padding:7px 9px!important;font-size:10px!important}
     }
   </style>
+  <style>
+    /* Prevent the PM2.5 map iframe from overflowing onto the station table */
+    @media(min-width:1101px){
+      .map-panel{
+        position:relative!important;
+        top:auto!important;
+        height:560px!important;
+        min-height:560px!important;
+        max-height:560px!important;
+        align-self:start!important;
+        overflow:hidden!important;
+      }
+      .map-panel .pm-map{
+        display:block!important;
+        width:100%!important;
+        height:560px!important;
+        min-height:560px!important;
+        max-height:560px!important;
+        border:0!important;
+      }
+    }
+    @media(max-width:1100px){
+      .map-panel{
+        position:relative!important;
+        top:auto!important;
+        overflow:hidden!important;
+      }
+      .map-panel,
+      .map-panel .pm-map{
+        height:580px!important;
+        min-height:580px!important;
+        max-height:580px!important;
+      }
+    }
+    @media(max-width:700px){
+      .map-panel,
+      .map-panel .pm-map{
+        height:430px!important;
+        min-height:430px!important;
+        max-height:430px!important;
+      }
+    }
+  </style>
 </body>
 </html>
