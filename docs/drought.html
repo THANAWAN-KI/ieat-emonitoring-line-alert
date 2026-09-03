@@ -139,11 +139,46 @@ html,body{background:var(--dash-bg)}
  .head-brand p{margin-left:0;margin-top:7px}.dashboard-kpis .kpi,.panel,.section,.chart-panel{border-radius:11px!important}
 }
 </style>
+
+<style>
+/* Refined neutral dashboard — remove yellow/orange outlines */
+.dashboard-head,.dashboard-kpis .kpi,.panel,.section,.chart-panel{
+ border-color:#fff!important;box-shadow:0 8px 24px rgba(45,55,66,.10)!important
+}
+.dashboard-head{background:#fff!important}
+.dashboard-kpis .kpi{background:#fff!important}
+.dashboard-kpis .kpi-icon,.dashboard-kpis .kpi:nth-child(n) .kpi-icon{
+ border:0!important;box-shadow:none!important
+}
+.chart-panel h3{border-bottom-color:#edf0f3!important}
+.map-title,.map-status,.source,.check,.note{
+ border-color:#fff!important;box-shadow:0 5px 16px rgba(45,55,66,.09)!important
+}
+.field select,.field input{border-color:#e6e9ed!important}
+.field select:focus,.field input:focus{outline:2px solid #d7e4ef!important;border-color:#b9cbd9!important}
+.badge{border:0!important;background:#f3f5f7!important;color:#59636d!important}
+.zoom{border-color:#dfe4e8!important;background:#f4f6f7!important;color:#48545e!important}
+.note{border-left:0!important;background:#f8f9fa!important}
+.report-actions{margin-left:auto;flex:0 0 auto}
+.report-actions button{border:0;border-radius:10px;background:#93452f;color:#fff;padding:11px 15px;
+ display:flex;align-items:center;gap:8px;font-weight:700;cursor:pointer;
+ box-shadow:0 6px 15px rgba(147,69,47,.22);transition:transform .18s ease,box-shadow .18s ease}
+.report-actions button:hover{transform:translateY(-1px);box-shadow:0 9px 20px rgba(147,69,47,.28)}
+.report-actions button:disabled{opacity:.6;cursor:wait;transform:none}
+.filters h3:before,.section-head h3:before,.sources h3:before,.actions h3:before{
+ content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#08a7a5;margin-right:8px
+}
+@media(max-width:700px){
+ .dashboard-head{align-items:flex-start;gap:12px}.report-actions button span{display:none}
+ .report-actions button{padding:10px 12px}.head-brand p{max-width:330px}
+}
+</style>
 </head>
 <body>
 <main class="wrap">
 <section class="dashboard-head">
 <div class="head-brand"><div><h2><i class="fa-solid fa-droplet"></i> ศูนย์ข้อมูลสถานการณ์ภัยแล้ง</h2><p>คัดกรองพื้นที่ ติดตามแนวโน้ม และสนับสนุนการเตรียมความพร้อมของนิคมอุตสาหกรรม</p></div></div>
+<div class="report-actions"><button type="button" id="downloadPngBtn"><i class="fa-solid fa-file-image"></i><span>ดาวน์โหลดรายงาน PNG</span></button></div>
 </section>
 <section class="kpis dashboard-kpis">
 <div class="kpi kpi-purple"><span>นิคมอุตสาหกรรม / ท่าเรือฯ</span><div><i class="fa-solid fa-city kpi-icon"></i><strong id="estateCount">–</strong></div><small>แห่ง</small></div>
@@ -295,6 +330,80 @@ async function zoomTo(row){if(!row||!view)return;await view.goTo(row.feature.geo
 yearSelect.onchange=function(){populateMonths();};monthSelect.onchange=rebuildOperations;operationSelect.onchange=updateFilters;searchInput.oninput=updateFilters;
 showBtn.onclick=function(){const name=estateSelect.value;if(!name){view.goTo(filteredRows.map(function(row){return row.feature;}),{duration:700}).catch(function(){});return;}zoomTo(filteredRows.find(function(row){return row.name===name;}));};
 resetBtn.onclick=function(){const currentYear=now.getFullYear()+543;if([...yearSelect.options].some(function(option){return Number(option.value)===currentYear;}))yearSelect.value=String(currentYear);populateMonths();searchInput.value="";view.goTo({center:[101,13],zoom:5},{duration:700});view.closePopup();mapStatus.textContent="แสดงพื้นที่ทั้งหมด";};
+
+function roundRect(ctx,x,y,w,h,r,fill,stroke){
+ ctx.beginPath();ctx.roundRect(x,y,w,h,r);if(fill){ctx.fillStyle=fill;ctx.fill();}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=1;ctx.stroke();}
+}
+function canvasText(ctx,text,x,y,maxWidth,lineHeight,maxLines){
+ const words=String(text||"").split(" ");let line="",lines=[];
+ words.forEach(function(word){const test=line?line+" "+word:word;if(ctx.measureText(test).width>maxWidth&&line){lines.push(line);line=word;}else line=test;});
+ if(line)lines.push(line);lines.slice(0,maxLines||lines.length).forEach(function(value,index){ctx.fillText(value,x,y+(index*lineHeight));});
+}
+async function downloadDroughtReport(){
+ const button=document.getElementById("downloadPngBtn");button.disabled=true;
+ const oldHtml=button.innerHTML;button.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i><span>กำลังจัดทำรายงาน</span>';
+ try{
+  if(document.fonts&&document.fonts.ready)await document.fonts.ready;
+  const canvas=document.createElement("canvas");canvas.width=1400;canvas.height=2000;
+  const ctx=canvas.getContext("2d");ctx.fillStyle="#f4f6f8";ctx.fillRect(0,0,canvas.width,canvas.height);
+  roundRect(ctx,45,40,1310,135,18,"#ffffff");
+  ctx.fillStyle="#93452f";ctx.beginPath();ctx.arc(95,96,27,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle="#fff";ctx.font="700 28px Sarabun";ctx.textAlign="center";ctx.fillText("น้ำ",95,106);
+  ctx.textAlign="left";ctx.fillStyle="#2e3338";ctx.font="700 36px Sarabun";ctx.fillText("รายงานสถานการณ์ภัยแล้งในนิคมอุตสาหกรรม",140,94);
+  ctx.fillStyle="#78828b";ctx.font="400 21px Sarabun";
+  const year=Number(yearSelect.value),month=Number(monthSelect.value);
+  const filterLabel=(months[month-1]||"-")+" "+(year||"-")+(operationSelect.value?" · สายปฏิบัติการ "+operationSelect.value:" · ทุกสายปฏิบัติการ");
+  ctx.fillText("ข้อมูลตามตัวกรอง: "+filterLabel,140,132);
+  ctx.textAlign="right";ctx.fillText("จัดทำเมื่อ "+new Date().toLocaleString("th-TH",{dateStyle:"medium",timeStyle:"short"}),1310,132);ctx.textAlign="left";
+
+  const metrics=[
+   ["นิคมอุตสาหกรรม / ท่าเรือฯ",document.getElementById("estateCount").textContent,"แห่ง","#fff3dc","#f5a623"],
+   ["จำนวนผู้ประกอบการ",document.getElementById("operatorTotal").textContent,"ราย","#fff3dc","#f5a623"],
+   ["พื้นที่ตามผังแม่นิคมฯ",document.getElementById("areaTotal").textContent,"ไร่","#f1eef9","#7656a8"],
+   ["ปริมาณน้ำใช้",document.getElementById("waterUseTotal").textContent,"ลบ.ม./เดือน","#eaf5ff","#3478d4"],
+   ["ปริมาณน้ำ 3R",document.getElementById("water3rTotal").textContent,"ลบ.ม./เดือน","#e8f8f6","#08a7a5"],
+   ["ปริมาณน้ำสำรอง",document.getElementById("waterReserveTotal").textContent,"ลบ.ม.","#f8ebe6","#93452f"]
+  ];
+  metrics.forEach(function(m,i){const col=i%3,row=Math.floor(i/3),x=45+col*445,y=195+row*160;
+   roundRect(ctx,x,y,420,140,16,"#fff");
+   roundRect(ctx,x+20,y+20,54,54,13,m[3]);ctx.fillStyle=m[4];ctx.font="700 25px Sarabun";ctx.textAlign="center";ctx.fillText(String(i+1),x+47,y+55);
+   ctx.textAlign="left";ctx.fillStyle="#6d747a";ctx.font="600 19px Sarabun";ctx.fillText(m[0],x+91,y+42);
+   ctx.fillStyle="#292e32";ctx.font="700 33px Sarabun";ctx.fillText(m[1],x+91,y+87);
+   ctx.fillStyle="#858c92";ctx.font="400 16px Sarabun";ctx.fillText(m[2],x+91,y+115);
+  });
+
+  function drawChartCard(title,sourceCanvas,y,color){
+   roundRect(ctx,45,y,1310,455,18,"#fff");
+   ctx.fillStyle=color;ctx.beginPath();ctx.arc(79,y+42,7,0,Math.PI*2);ctx.fill();
+   ctx.fillStyle="#34383c";ctx.font="700 25px Sarabun";ctx.fillText(title,98,y+50);
+   ctx.strokeStyle="#edf0f2";ctx.beginPath();ctx.moveTo(70,y+72);ctx.lineTo(1330,y+72);ctx.stroke();
+   if(sourceCanvas&&sourceCanvas.width)ctx.drawImage(sourceCanvas,80,y+92,1240,330);
+  }
+  drawChartCard("10 อันดับนิคมอุตสาหกรรม / ท่าเรือ ที่มีการใช้น้ำมากที่สุด",document.getElementById("waterUseChart"),535,"#93452f");
+  drawChartCard("แนวโน้มปริมาณน้ำสำรอง",document.getElementById("reserveChart"),1010,"#08a7a5");
+
+  roundRect(ctx,45,1485,1310,445,18,"#fff");
+  ctx.fillStyle="#34383c";ctx.font="700 25px Sarabun";ctx.fillText("ข้อมูลการใช้น้ำสูงสุดตามตัวกรอง",70,1530);
+  const top=filteredRows.slice().sort(function(a,b){return b.use-a.use;}).slice(0,8);
+  const headers=["ลำดับ","นิคมอุตสาหกรรม / ท่าเรือ","สายฯ","ปริมาณน้ำใช้ (ลบ.ม./เดือน)"];
+  const widths=[100,690,180,290],startX=70,headY=1560,rowH=40;
+  ctx.fillStyle="#f0f2f4";ctx.fillRect(startX,headY,1260,rowH);
+  let hx=startX;ctx.font="700 18px Sarabun";ctx.fillStyle="#41474c";
+  headers.forEach(function(v,i){ctx.fillText(v,hx+10,headY+26);hx+=widths[i];});
+  top.forEach(function(row,i){const y=headY+rowH*(i+1);ctx.fillStyle=i%2?"#fafbfc":"#fff";ctx.fillRect(startX,y,1260,rowH);
+   ctx.strokeStyle="#e7eaed";ctx.beginPath();ctx.moveTo(startX,y);ctx.lineTo(1330,y);ctx.stroke();
+   ctx.fillStyle="#43494e";ctx.font="400 17px Sarabun";ctx.fillText(String(i+1),startX+15,y+26);
+   canvasText(ctx,row.name,startX+110,y+26,650,18,1);ctx.fillText(row.operation,startX+805,y+26);
+   ctx.textAlign="right";ctx.font="600 17px Sarabun";ctx.fillText(fmt(row.use,2),1310,y+26);ctx.textAlign="left";
+  });
+  if(!top.length){ctx.fillStyle="#7d858b";ctx.font="400 19px Sarabun";ctx.fillText("ไม่พบข้อมูลตามเงื่อนไขที่เลือก",70,1615);}
+  ctx.fillStyle="#7d858b";ctx.font="400 16px Sarabun";ctx.fillText("แหล่งข้อมูล: Hosted Feature Layer การใช้น้ำในพื้นที่นิคมอุตสาหกรรม กนอ.",70,1965);
+  ctx.textAlign="right";ctx.fillText("ใช้เพื่อสนับสนุนการติดตามสถานการณ์และตรวจสอบข้อมูลเบื้องต้น",1330,1965);ctx.textAlign="left";
+  const link=document.createElement("a");link.download="IEAT-Drought-Report-"+year+"-"+String(month).padStart(2,"0")+".png";link.href=canvas.toDataURL("image/png",1);link.click();
+ }catch(error){alert("ไม่สามารถจัดทำรายงาน PNG ได้ กรุณารีเฟรชหน้าแล้วลองอีกครั้ง");console.error(error);}
+ finally{button.disabled=false;button.innerHTML=oldHtml;}
+}
+document.getElementById("downloadPngBtn").onclick=downloadDroughtReport;
 </script>
 </body>
 </html>
