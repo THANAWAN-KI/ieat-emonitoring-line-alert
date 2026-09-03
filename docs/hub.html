@@ -60,4 +60,48 @@ const labels={flood:'แผนที่วิเคราะห์สถาน�
 const floodView=document.createElement('section');floodView.id='floodView';floodView.className='flood-hub';floodView.innerHTML=`<iframe class="flood-report-frame" src="./flood-report.html" title="ศูนย์ข้อมูลสถานการณ์น้ำและรายงานน้ำท่วม" loading="eager" allowfullscreen></iframe>`;otherView.parentNode.insertBefore(floodView,otherView);
 document.querySelectorAll('.tab').forEach(tab=>tab.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===tab));const type=tab.dataset.type;fireView.style.display=type==='fire'?'block':'none';floodView.classList.toggle('show',type==='flood');otherView.classList.toggle('show',type!=='fire'&&type!=='flood');if(type!=='fire'&&type!=='flood')otherTitle.textContent=labels[type]});
 </script>
+<style>
+/* Final responsive sizing: balanced desktop and mobile layout */
+body{background:#fff}
+.header{height:72px;padding:0 24px}
+.brand{gap:12px}.brand img{width:64px;height:46px}.brand b{font-size:17px}.brand small{font-size:11px}
+.actions a{font-size:14px;padding:9px 14px}
+.page{width:100%;max-width:1500px;padding:18px 24px 36px}
+.tabs{margin-bottom:16px;border:1px solid var(--line);border-radius:12px;overflow-x:auto}
+.tab{min-width:132px;padding:13px 18px;font-size:16px}
+.panel{border-radius:12px}.panel-head{height:58px;padding:0 18px}.panel-head h2{font-size:19px}.panel-head a{font-size:13px}
+.map-grid{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:16px}
+.dashboard-risk-frame,.analysis-frame{height:720px}
+.dss-section{margin-top:16px}.dss-frame{height:680px}
+.other-frame{height:720px}
+.flood-report-frame{height:calc(100vh - 130px);min-height:720px}
+.notice{padding:10px 16px;font-size:13px}
+footer{padding:20px;font-size:14px}
+@media(max-width:1100px){
+  .page{max-width:960px}
+  .map-grid{grid-template-columns:1fr}
+  .dashboard-risk-frame,.analysis-frame,.other-frame{height:680px}
+  .dss-frame{height:640px}
+}
+@media(max-width:700px){
+  .header{height:auto;min-height:62px;padding:7px 12px}
+  .brand{gap:8px}.brand img{width:52px;height:40px}.brand b{font-size:15px}.brand small{display:none}
+  .actions a{display:none}
+  .page{padding:10px 8px 24px}
+  .tabs{margin-bottom:10px;border-radius:9px}
+  .tab{min-width:108px;padding:11px 12px;font-size:15px}
+  .tab img{width:22px;height:22px}
+  .panel{border-radius:9px}.panel-head{height:52px;padding:0 12px}.panel-head h2{font-size:17px}.panel-head a{font-size:12px}
+  .map-grid{gap:10px}
+  .dashboard-risk-frame,.analysis-frame,.other-frame{height:540px}
+  .dss-section{margin-top:10px}.dss-frame{height:580px}
+  .flood-report-frame{height:calc(100vh - 112px);min-height:620px;border-radius:8px}
+  footer{padding:17px 12px;font-size:12px}
+}
+@media(max-width:420px){
+  .brand b{font-size:14px}
+  .dashboard-risk-frame,.analysis-frame,.other-frame{height:500px}
+  .dss-frame{height:540px}
+}
+</style>
 </body></html>
