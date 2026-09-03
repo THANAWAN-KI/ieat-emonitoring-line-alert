@@ -27,10 +27,18 @@ on:
 
   schedule:
     # จันทร์-ศุกร์ เวลาไทย
-    # 08:30-15:30 = 01:30-08:30 UTC
+    # รอบจริง 08:30-15:30 = 01:30-08:30 UTC
+    # เรียกซ้ำที่ :40 และ :50 เพื่อกัน GitHub Scheduler พลาดคิว
+    # โค้ดจะบันทึก logical slot และไม่ส่งซ้ำถ้ารอบ :30 สำเร็จแล้ว
     - cron: "30 1-8 * * 1-5"
-    # 16:30 = 09:30 UTC ส่งรายงานสรุปประจำวัน
+    - cron: "40 1-8 * * 1-5"
+    - cron: "50 1-8 * * 1-5"
+
+    # 16:30 ไทย = 09:30 UTC รายงานสรุปประจำวัน
+    # retry 16:40 และ 16:50 เช่นเดียวกัน
     - cron: "30 9 * * 1-5"
+    - cron: "40 9 * * 1-5"
+    - cron: "50 9 * * 1-5"
 
 permissions:
   contents: write
@@ -62,6 +70,7 @@ jobs:
           echo "IEAT e-Monitoring LINE Alert"
           echo "08:30-15:30: เรียกข้อมูลและส่งรายชั่วโมง"
           echo "16:30: เรียกข้อมูลและส่งสรุปประจำวัน"
+          echo "Retry: :30, :40, :50 แต่ส่งจริงเพียงครั้งเดียวต่อ slot"
           echo "================================================"
           echo "Trigger: ${{ github.event_name }}"
           echo "Schedule: ${{ github.event.schedule }}"
@@ -100,12 +109,13 @@ jobs:
           LINE_GROUP_ID_DEMO_02: ${{ secrets.LINE_GROUP_ID_DEMO_02 }}
           LINE_GROUP_ID_DEMO_03: ${{ secrets.LINE_GROUP_ID_DEMO_03 }}
           LINE_PREVIEW_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.preview_mode || false }}
-          EMONITORING_RUN_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.run_mode || (github.event.schedule == '30 9 * * 1-5' && 'daily_summary' || 'hourly_alert') }}
+          EMONITORING_SCHEDULE: ${{ github.event.schedule }}
+          EMONITORING_RUN_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.run_mode || ((github.event.schedule == '30 9 * * 1-5' || github.event.schedule == '40 9 * * 1-5' || github.event.schedule == '50 9 * * 1-5') && 'daily_summary' || 'hourly_alert') }}
           PYTHONUNBUFFERED: "1"
           TZ: Asia/Bangkok
         run: python check_emonitoring_batch.py
 
-      - name: Publish latest status and alert state
+      - name: Publish latest status and scheduler state
         run: |
           if [ ! -f "docs/status.json" ]; then
             echo "ERROR: ไม่พบไฟล์ docs/status.json"
@@ -117,8 +127,11 @@ jobs:
             exit 1
           fi
 
-          if git diff --quiet -- docs/status.json docs/alert_state.json; then
-            echo "ข้อมูลสถานการณ์และ alert state ไม่มีการเปลี่ยนแปลง"
+          # schedule_state.json จะถูกสร้างหลัง scheduled slot ส่ง LINE สำเร็จ
+          touch docs/schedule_state.json
+
+          if git diff --quiet -- docs/status.json docs/alert_state.json docs/schedule_state.json; then
+            echo "ข้อมูลสถานการณ์และ scheduler state ไม่มีการเปลี่ยนแปลง"
             exit 0
           fi
 
@@ -127,21 +140,26 @@ jobs:
 
           cp docs/status.json /tmp/emonitoring-status.json
           cp docs/alert_state.json /tmp/emonitoring-alert-state.json
+          cp docs/schedule_state.json /tmp/emonitoring-schedule-state.json
 
           for attempt in 1 2 3 4 5; do
+            echo "Push attempt ${attempt}/5"
             git fetch origin main
             git reset --hard origin/main
             cp /tmp/emonitoring-status.json docs/status.json
             cp /tmp/emonitoring-alert-state.json docs/alert_state.json
-            git add docs/status.json docs/alert_state.json
+            cp /tmp/emonitoring-schedule-state.json docs/schedule_state.json
+            git add docs/status.json docs/alert_state.json docs/schedule_state.json
 
             if git diff --cached --quiet; then
+              echo "ข้อมูลล่าสุดถูกบันทึกไว้แล้ว"
               exit 0
             fi
 
-            git commit -m "Update e-Monitoring status and alert state [skip ci]"
+            git commit -m "Update e-Monitoring status and scheduler state [skip ci]"
 
             if git push origin HEAD:main; then
+              echo "บันทึก scheduler state สำเร็จ"
               exit 0
             fi
           done
