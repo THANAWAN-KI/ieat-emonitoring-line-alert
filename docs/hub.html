@@ -57,7 +57,33 @@ const labels={flood:'แผนที่วิเคราะห์สถาน�
 .fire-hub,.flood-hub,.drought-hub{display:none;width:100%}.fire-hub.show,.flood-hub.show,.drought-hub.show{display:block}.fire-report-frame,.flood-report-frame,.drought-report-frame{display:block;width:100%;height:calc(100vh - 82px);min-height:900px;border:0;background:#f6f6f4;border-radius:14px;box-shadow:0 3px 12px #26364a0a}@media(max-width:850px){.fire-report-frame,.flood-report-frame,.drought-report-frame{height:calc(100vh - 82px);min-height:760px;border-radius:10px}}@media(max-width:560px){.fire-report-frame,.flood-report-frame,.drought-report-frame{height:calc(100vh - 72px);min-height:680px;border-radius:8px}}
 </style>
 <script>
-const fireHub=document.createElement('section');fireHub.id='fireReportView';fireHub.className='fire-hub show';fireHub.innerHTML=`<iframe class="fire-report-frame" src="./dss.html" title="ข้อมูลสนับสนุนการรับมือเหตุไฟไหม้" loading="eager" allowfullscreen></iframe>`;fireView.parentNode.insertBefore(fireHub,fireView);fireView.style.display='none';
+const fireHub=document.createElement('section');fireHub.id='fireReportView';fireHub.className='fire-hub show';fireHub.innerHTML=`
+<section class="fire-overview-head">
+  <div><h1>ข้อมูลสนับสนุนกรณีเกิดเหตุไฟไหม้</h1><p>แก้ไขข้อมูลด้านซ้าย ผลลัพธ์ในรายงานจะเปลี่ยนทันที</p></div>
+</section>
+<section class="fire-dashboard-grid">
+  <article class="fire-support-board">
+    <div class="fire-board-title"><h2>ข้อมูลสนับสนุนที่ใกล้เคียง</h2><p>ข้อมูลตำแหน่งสำหรับสนับสนุนการระงับเหตุใกล้จุดเกิดเหตุ</p></div>
+    <div class="fire-support-grid">
+      <div class="fire-support-card hospital"><small>โรงพยาบาลใกล้ที่สุด</small><strong data-fire-value="hospitalDistance">— กม.</strong><span>ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
+      <div class="fire-support-card fire-station"><small>สถานีดับเพลิงใกล้ที่สุด</small><strong data-fire-value="fireDistance">— กม.</strong><span>ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
+      <div class="fire-support-card police"><small>สถานีตำรวจใกล้ที่สุด</small><strong data-fire-value="policeDistance">— กม.</strong><span>ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
+      <div class="fire-support-card hydrant"><small>หัวจ่ายน้ำดับเพลิง</small><strong data-fire-value="hydrantDistance">— เมตร</strong><span>ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
+      <div class="fire-support-card community"><small>ชุมชนในรัศมี 3 กม.</small><strong data-fire-value="communityDistance">— แห่ง</strong><span>ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
+      <div class="fire-support-card cctv"><small>กล้อง CCTV ใกล้เคียง</small><strong data-fire-value="cctvDistance">— จุด</strong><span>ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
+    </div>
+  </article>
+  <article class="fire-analysis-panel">
+    <div class="fire-map-head"><div><h2>แผนที่วิเคราะห์</h2><p>Risk Map และตำแหน่งข้อมูลสนับสนุนการระงับเหตุ</p></div><a href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=9c25f3f77ba5481cb481b402177884c2&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=false&basemaps=true&center=101.11399493277712,12.930016606311145&scale=18055.954822" target="_blank" rel="noopener">เปิดเต็มหน้า ↗</a></div>
+    <iframe class="fire-analysis-map" width="700" height="600" allow="local-network-access; geolocation" title="risk map" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=9c25f3f77ba5481cb481b402177884c2&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=false&basemaps=true&center=101.11399493277712,12.930016606311145&scale=18055.954822"></iframe>
+  </article>
+</section>
+<section class="fire-dss-panel">
+  <div class="fire-dss-head"><h2>IEAT DSS — จัดทำรายงานเหตุฉุกเฉิน</h2><p>แก้ไขข้อมูลและจัดทำรายงานตามรูปแบบมาตรฐาน</p></div>
+  <iframe class="fire-dss-frame" src="./dss.html" title="IEAT DSS — จัดทำรายงานเหตุฉุกเฉิน" loading="eager" allowfullscreen></iframe>
+</section>`;fireView.parentNode.insertBefore(fireHub,fireView);fireView.style.display='none';
+function updateFireSupportDashboard(){let data={};try{data=JSON.parse(localStorage.getItem('dss-report')||'{}')||{}}catch(error){}document.querySelectorAll('[data-fire-value]').forEach(node=>{const value=data[node.dataset.fireValue];if(value&&String(value).trim())node.textContent=value})}
+updateFireSupportDashboard();window.addEventListener('storage',updateFireSupportDashboard);setInterval(updateFireSupportDashboard,1500);
 const floodView=document.createElement('section');floodView.id='floodView';floodView.className='flood-hub';floodView.innerHTML=`<iframe class="flood-report-frame" src="./flood-report.html" title="ศูนย์ข้อมูลสถานการณ์น้ำและรายงานน้ำท่วม" loading="eager" allowfullscreen></iframe>`;otherView.parentNode.insertBefore(floodView,otherView);
 const droughtView=document.createElement('section');droughtView.id='droughtView';droughtView.className='drought-hub';droughtView.innerHTML=`<iframe class="drought-report-frame" src="./drought.html" title="ศูนย์ข้อมูลสถานการณ์ภัยแล้ง" loading="eager" allowfullscreen></iframe>`;otherView.parentNode.insertBefore(droughtView,otherView);
 document.querySelectorAll('.tab').forEach(tab=>tab.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===tab));const type=tab.dataset.type;fireView.style.display='none';fireHub.classList.toggle('show',type==='fire');floodView.classList.toggle('show',type==='flood');droughtView.classList.toggle('show',type==='drought');otherView.classList.toggle('show',type!=='fire'&&type!=='flood'&&type!=='drought');if(type!=='fire'&&type!=='flood'&&type!=='drought')otherTitle.textContent=labels[type]});
@@ -105,5 +131,25 @@ footer{padding:20px;font-size:14px}
   .dashboard-risk-frame,.analysis-frame,.other-frame{height:500px}
   .dss-frame{height:540px}
 }
+</style>
+<style>
+/* Fire emergency dashboard: support cards left, analysis map right, DSS below */
+.fire-overview-head{display:flex;align-items:center;justify-content:space-between;min-height:78px;padding:16px 20px;margin-bottom:12px;background:#fff;border:1px solid #ebe6e8;border-radius:14px;box-shadow:0 6px 20px rgba(64,47,54,.08)}
+.fire-overview-head h1{margin:0;color:#8f1d2c;font-size:25px;line-height:1.3}.fire-overview-head p{margin:4px 0 0;color:#7b7f86;font-size:13px}
+.fire-dashboard-grid{display:grid;grid-template-columns:minmax(600px,.95fr) minmax(620px,1.05fr);gap:12px;align-items:stretch}
+.fire-support-board,.fire-analysis-panel,.fire-dss-panel{min-width:0;background:#fff;border:1px solid #ebe6e8;border-radius:14px;box-shadow:0 7px 22px rgba(46,50,56,.09);overflow:hidden}
+.fire-board-title,.fire-map-head,.fire-dss-head{min-height:58px;padding:11px 15px;border-bottom:1px solid #edf0f2;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.fire-board-title{display:block}.fire-board-title h2,.fire-map-head h2,.fire-dss-head h2{font-size:18px;line-height:1.3;margin:0;color:#2f3338}
+.fire-board-title p,.fire-map-head p,.fire-dss-head p{font-size:11px;color:#7b8087;margin:3px 0 0}
+.fire-map-head a{flex:0 0 auto;color:#8f1d2c;background:#fff2f3;padding:7px 11px;border-radius:17px;text-decoration:none;font-size:11px;font-weight:700}
+.fire-support-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:12px}
+.fire-support-card{position:relative;min-width:0;min-height:132px;padding:14px;background:#fff;border:1px solid #edf0f2;border-radius:12px;box-shadow:0 5px 15px rgba(48,55,62,.07);overflow:hidden}
+.fire-support-card:before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:#be3344}.fire-support-card:nth-child(2):before{background:#e66a36}.fire-support-card:nth-child(3):before{background:#536f9f}.fire-support-card:nth-child(4):before{background:#168c9c}.fire-support-card:nth-child(5):before{background:#3d9664}.fire-support-card:nth-child(6):before{background:#76549b}
+.fire-support-card small{display:block;min-height:38px;color:#4f555c;font-size:13px;font-weight:700;line-height:1.4}
+.fire-support-card strong{display:block;margin:8px 0 5px;color:#9b2031;font-size:25px;line-height:1.15}.fire-support-card span{display:block;color:#8a8f95;font-size:10px}
+.fire-analysis-map{display:block;width:100%;height:600px;border:0;background:#eef2f5}.fire-dss-panel{margin-top:12px}.fire-dss-frame{display:block;width:100%;height:820px;border:0;background:#fff}
+@media(max-width:1280px){.fire-dashboard-grid{grid-template-columns:1fr}.fire-support-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.fire-analysis-map{height:600px}}
+@media(max-width:700px){.fire-overview-head{padding:13px 14px;border-radius:10px}.fire-overview-head h1{font-size:20px}.fire-overview-head p{font-size:12px}.fire-support-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:9px}.fire-support-card{min-height:120px;padding:12px}.fire-analysis-map{height:500px}.fire-dss-frame{height:680px}.fire-board-title,.fire-map-head,.fire-dss-head{padding:10px 12px}.fire-map-head h2,.fire-dss-head h2,.fire-board-title h2{font-size:16px}}
+@media(max-width:430px){.fire-support-grid{grid-template-columns:1fr}.fire-support-card{min-height:104px}.fire-analysis-map{height:430px}}
 </style>
 </body></html>
