@@ -1860,5 +1860,128 @@ button,input,select,textarea{font-family:"Sarabun",sans-serif!important}
       }
     }
   </style>
+
+<style>
+/* Final professional flood theme — preserve semantic table colors */
+:root{
+  --flood-navy:#355872;
+  --flood-blue:#7AAACE;
+  --flood-sky:#9CD5FF;
+  --flood-ivory:#F7F8F0;
+  --flood-line:#d4e0e8;
+  --purple:#355872;
+  --blue:#355872;
+  --cyan:#9CD5FF;
+  --teal:#7AAACE;
+  --bg:#F7F8F0;
+  --line:#d4e0e8;
+  --soft:#edf6fc;
+}
+body{background:var(--flood-ivory)!important;color:#243746!important}
+.topbar{
+  background:rgba(255,255,255,.96)!important;
+  border:0!important;border-bottom:1px solid var(--flood-line)!important;
+  box-shadow:0 5px 18px rgba(53,88,114,.12)!important;
+  backdrop-filter:blur(14px)
+}
+.top-inner{min-height:76px!important}
+.topbar .brand{border-left:5px solid var(--flood-navy)!important}
+.topbar .brand b{color:var(--flood-navy)!important;font-weight:700!important}
+.topbar .brand span{color:#40586a!important}
+.nav{background:#edf5fa!important;border:1px solid #dce9f1!important}
+.nav button{color:var(--flood-navy)!important;font-weight:600!important}
+.nav button:hover{background:#ddecf6!important}
+.nav button.active{
+  background:var(--flood-navy)!important;color:#fff!important;
+  box-shadow:0 4px 13px rgba(53,88,114,.25)!important
+}
+.container{background:linear-gradient(180deg,#f7f8f0 0%,#f3f7f9 42%,#f7f8f0 100%)!important}
+.hero .eyebrow,.hero h1,.estate-section-title h2{color:var(--flood-navy)!important}
+.card,
+#warning .card.kpi,#warning .national-kpi,#warning .daily-water-report,
+#warning .nationwide-indicators,#warning .operations-map,
+#warning .warning-table,#warning .focus-data-table,#warning .national-alert,
+.operations-side,.operations-map,.watch-dashboard-block,.national-situation-block{
+  background:#fff!important;border-color:var(--flood-line)!important;
+  box-shadow:0 7px 22px rgba(53,88,114,.10)!important
+}
+#warning .card.kpi:hover,#warning .national-kpi:hover{
+  border-color:var(--flood-blue)!important;
+  box-shadow:0 10px 26px rgba(53,88,114,.16)!important;
+  transform:translateY(-1px)
+}
+.icon,.national-kpi .n-icon{
+  background:#edf6fc!important;border-color:#cfe4f2!important
+}
+.kpi strong,.national-kpi strong{color:var(--flood-navy)!important}
+#warning .daily-water-head,#warning .card-head,#warning .table-section-head{
+  background:linear-gradient(90deg,#fff 0%,#f2f8fc 100%)!important;
+  border-bottom-color:var(--flood-line)!important
+}
+#warning .daily-water-head h2,#warning .card-head h2,
+#warning .table-section-head h2,#warning .overview-map-label b{
+  color:var(--flood-navy)!important
+}
+#warning .table-section-head h2:before{background:var(--flood-blue)!important}
+#warning .table-section-head>span{
+  background:#e7f2f9!important;color:var(--flood-navy)!important;
+  border:1px solid #cfe2ee!important
+}
+.national-alert{
+  background:linear-gradient(135deg,#f5fafd,#eaf5fc)!important;
+  border-left:5px solid var(--flood-blue)!important
+}
+.national-alert b{color:var(--flood-navy)!important;font-weight:700!important}
+.national-alert p{color:#314b5e!important}
+.warning-source,.source-link{color:var(--flood-navy)!important;font-weight:600}
+.daily-water-item{border-color:#dbe7ee!important;background:#f7fbfd!important}
+.daily-water-item small,.daily-water-item span{color:#40586a!important}
+.daily-water-item strong{color:var(--flood-navy)!important}
+.overview-map-label,.map-title,.map-legend,.layer-panel{
+  border:1px solid var(--flood-line)!important;
+  box-shadow:0 7px 22px rgba(53,88,114,.15)!important
+}
+.layer-toggle,.primary,.download-image,.radar-actions .download{
+  background:var(--flood-navy)!important;color:#fff!important
+}
+.secondary,.radar-actions .open,.layer-panel-close{
+  background:#e8f3fa!important;color:var(--flood-navy)!important
+}
+.primary:hover,.download-image:hover,.radar-actions .download:hover{background:#29465c!important}
+.track{background:#e2ebf0!important}.bar{background:linear-gradient(90deg,var(--flood-sky),var(--flood-navy))!important}
+.source-note,.forecast-note{background:#eef6fb!important;border:1px solid #d2e4ef!important;color:#314b5e!important}
+
+/* Keep the existing table palette; make status colors occupy the complete cell */
+#warning .table-scroll{background:#fff!important}
+#warning .table-scroll .table{background:#fff!important}
+#warning .water-status-table td:nth-child(3),
+#warning .estate-watch-table td:last-child:has(.water-status-cell){
+  position:relative!important;height:44px!important;padding:0!important;overflow:hidden!important
+}
+#warning .water-status-table td:nth-child(3) .water-status-cell,
+#warning .estate-watch-table td:last-child .water-status-cell{
+  position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+  min-height:44px!important;margin:0!important;padding:8px!important;border:0!important;
+  border-radius:0!important;display:flex!important;align-items:center!important;
+  justify-content:center!important;color:#fff!important
+}
+#warning .water-status-cell.critical{background:#d50000!important}
+#warning .water-status-cell.warning{background:#ff6d00!important}
+#warning .water-status-cell.normal{background:#078312!important}
+#warning .table tbody tr:hover .water-status-cell.critical{background:#d50000!important}
+#warning .table tbody tr:hover .water-status-cell.warning{background:#ff6d00!important}
+#warning .table tbody tr:hover .water-status-cell.normal{background:#078312!important}
+
+#infographic .multi-report-toolbar,#infographic .report-toolbar{
+  background:#fff!important;border-color:var(--flood-line)!important;
+  box-shadow:0 5px 18px rgba(53,88,114,.10)!important
+}
+#infographic .report-toolbar h1,#infographic .multi-report-toolbar h1{color:var(--flood-navy)!important}
+@media(max-width:850px){
+  .top-inner{min-height:68px!important}.topbar .brand b{font-size:18px!important}
+  .topbar .brand span{font-size:12px!important}.nav button{font-size:14px!important}
+}
+</style>
+
 </body>
 </html>
