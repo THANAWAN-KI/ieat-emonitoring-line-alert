@@ -312,6 +312,53 @@ body{background:#fff!important}
  .source{padding:7px!important;min-height:58px!important}
 }
 </style>
+
+<style>
+/* Larger readable typography and a map that fully fills its panel */
+:root{--muted:#171717!important}
+body,.wrap,.panel,.section,.chart-panel{color:#111!important}
+.head-brand h2{font-size:22px!important;color:#111!important}
+.head-brand p,.dashboard-kpis .kpi span,.dashboard-kpis .kpi small,
+.sub,.field label,.chart-hint,.section-head p,.source span,.footer,.map-status{
+ color:#111!important
+}
+.head-brand p{font-size:13px!important}
+.dashboard-kpis .kpi span{font-size:13px!important;font-weight:600!important}
+.dashboard-kpis .kpi strong{font-size:28px!important}
+.dashboard-kpis .kpi small{font-size:12px!important}
+.filters h3,.chart-panel h3{font-size:15px!important;font-weight:700!important;color:#111!important}
+.filters .field label{font-size:12px!important;font-weight:600!important}
+.filters .field select,.filters .field input{font-size:13px!important}
+.filters .btn{font-size:12px!important}
+.chart-hint{font-size:11px!important}
+.section-head h3{font-size:17px!important;color:#111!important}
+.section-head p{font-size:12px!important}
+.badge{font-size:12px!important;color:#111!important}
+.table th,.table td,.table td:nth-child(2){font-size:11px!important;line-height:1.35!important}
+.zoom{font-size:10px!important}
+.sources h3,.actions h3{font-size:16px!important}
+.source,.check{font-size:12px!important;color:#111!important}
+.source span{font-size:11px!important}.footer{font-size:12px!important}
+.map-title{font-size:12px!important;color:#111!important}
+.map-status{font-size:12px!important}
+@media(min-width:1101px){
+ .map-panel{height:960px!important;min-height:960px!important;overflow:hidden!important}
+ .map-panel .map,#viewDiv{height:100%!important;min-height:960px!important;width:100%!important}
+}
+#viewDiv>.esri-view-root,.esri-view-surface,.esri-view-surface--inset-outline:focus:after{
+ width:100%!important;height:100%!important
+}
+.esri-widget,.esri-widget button,.esri-menu,.esri-popup{font-size:12px!important;color:#111!important}
+@media(max-width:1100px){
+ .map-panel{height:650px!important;min-height:650px!important}
+ .map-panel .map,#viewDiv{height:100%!important;min-height:650px!important}
+}
+@media(max-width:560px){
+ .map-panel{height:500px!important;min-height:500px!important}
+ .map-panel .map,#viewDiv{height:100%!important;min-height:500px!important}
+ .head-brand h2{font-size:19px!important}.head-brand p{font-size:12px!important}
+}
+</style>
 </head>
 <body>
 <main class="wrap">
@@ -376,6 +423,7 @@ const shortMonths=["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.",
 const now=new Date();
 let allRows=[],filteredRows=[],view,waterLayer,charts={};
 const yearSelect=document.getElementById("yearSelect"),monthSelect=document.getElementById("monthSelect"),operationSelect=document.getElementById("operationSelect"),estateSelect=document.getElementById("estateSelect"),searchInput=document.getElementById("searchInput"),estateRows=document.getElementById("estateRows"),showBtn=document.getElementById("showBtn"),resetBtn=document.getElementById("resetBtn"),mapStatus=document.getElementById("mapStatus");
+Chart.defaults.color="#111";Chart.defaults.font.family="Sarabun";Chart.defaults.font.size=12;
 const esc=function(value){return String(value??"").replace(/[&<>"']/g,function(char){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char];});};
 const num=function(value){const n=Number(String(value??"").replace(/,/g,"").trim());return Number.isFinite(n)?n:0;};
 const fmt=function(value,digits=0){return Number(value||0).toLocaleString("th-TH",{maximumFractionDigits:digits});};
@@ -384,6 +432,9 @@ require(["esri/WebMap","esri/views/MapView","esri/layers/FeatureLayer","esri/Gra
  waterLayer=new FeatureLayer({url:WATER_URL,title:"ข้อมูลการใช้น้ำในพื้นที่นิคม",outFields:["*"],popupTemplate:{title:"{นิคมอุตสาหกรรม}",content:[{type:"fields",fieldInfos:[{fieldName:"ปี",label:"ปี"},{fieldName:"เดือน",label:"เดือน"},{fieldName:"สายปฏิบัติการ",label:"สายปฏิบัติการ"},{fieldName:"ปริมาณน้ำใช้",label:"ปริมาณน้ำใช้",format:{digitSeparator:true,places:2}},{fieldName:"ปริมาณน้ำสำรอง",label:"ปริมาณน้ำสำรอง",format:{digitSeparator:true,places:2}},{fieldName:"ผู้ประกอบการ",label:"ผู้ประกอบการ"}]}]}});
  webmap.add(waterLayer);
  view=new MapView({container:"viewDiv",map:webmap,center:[101,13],zoom:5,constraints:{minZoom:4},popup:{dockEnabled:true,dockOptions:{buttonEnabled:false,position:"bottom-right"}}});
+ const mapElement=document.getElementById("viewDiv");
+ if("ResizeObserver" in window){const mapResizeObserver=new ResizeObserver(function(){if(view)view.resize();});mapResizeObserver.observe(mapElement);}
+ window.addEventListener("resize",function(){if(view)view.resize();});
  view.when(async function(){
   view.ui.add(new Home({view:view}),"top-left");view.ui.add(new Search({view:view}),"top-right");
   view.ui.add(new Expand({view:view,content:new LayerList({view:view}),group:"tools",expandTooltip:"ชั้นข้อมูล"}),"top-right");
@@ -456,7 +507,7 @@ function chartNumber(value){return Number(value).toLocaleString("th-TH",{maximum
 function makeChart(id,config){if(charts[id])charts[id].destroy();const canvas=document.getElementById(id);if(canvas)charts[id]=new Chart(canvas,config);}
 function topTen(metric){return filteredRows.filter(function(row){return row[metric]>0;}).sort(function(a,b){return b[metric]-a[metric];}).slice(0,10);}
 function barConfig(rows,metric,color){
- return {type:"bar",data:{labels:rows.map(function(row){return row.name;}),datasets:[{data:rows.map(function(row){return row[metric];}),backgroundColor:color,borderColor:color,borderWidth:1}]},options:{indexAxis:"y",responsive:true,maintainAspectRatio:false,onClick:function(event,elements){if(elements.length)zoomTo(rows[elements[0].index]);},plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return chartNumber(ctx.raw);}}}},scales:{x:{beginAtZero:true,ticks:{callback:function(value){return new Intl.NumberFormat("th-TH",{notation:"compact"}).format(value);}}},y:{ticks:{font:{family:"Sarabun",size:10}}}}}};
+ return {type:"bar",data:{labels:rows.map(function(row){return row.name;}),datasets:[{data:rows.map(function(row){return row[metric];}),backgroundColor:color,borderColor:color,borderWidth:1}]},options:{indexAxis:"y",responsive:true,maintainAspectRatio:false,onClick:function(event,elements){if(elements.length)zoomTo(rows[elements[0].index]);},plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return chartNumber(ctx.raw);}}}},scales:{x:{beginAtZero:true,ticks:{callback:function(value){return new Intl.NumberFormat("th-TH",{notation:"compact"}).format(value);}}},y:{ticks:{font:{family:"Sarabun",size:12}}}}}};
 }
 function renderCharts(annualRows){
  makeChart("waterUseChart",barConfig(topTen("use"),"use","#b85c35"));
