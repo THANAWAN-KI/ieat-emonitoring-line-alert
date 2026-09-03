@@ -167,7 +167,7 @@ def main() -> int:
 
     print("=" * 72)
     print("IEAT e-Monitoring LINE Alert - Quota Saver")
-    print("ส่ง 1 Flex summary ต่อรอบที่มีการเปลี่ยนแปลง")
+    print("ส่งรายงานทุก 1 ชั่วโมงให้ครบทั้ง 3 Zone")
     print("=" * 72)
 
     try:
@@ -256,15 +256,27 @@ def main() -> int:
         print("โควตารอบนี้: 0 ข้อความ")
         return 0
 
-    if not events:
-        # แม้ไม่มี Alarm ก็ต้องส่งสรุป Online/Offline ทุกชั่วโมง
-        print("ไม่พบ Alarm — ส่งสรุปสถานะ Online/Offline ประจำชั่วโมง")
-        try:
-            success = base.send_zone_daily_summaries(all_stations)
-        except RuntimeError as error:
-            print(f"ERROR: {error}")
-            return 1
-        if not success:
+    if not base.zone_routing_enabled():
+        print(
+            "ERROR: LINE Zone routing ยังไม่เปิดใช้งาน "
+            "และ Broadcast ถูกปิดเพื่อป้องกันการส่งข้าม Zone"
+        )
+        return 1
+
+    # ทุกชั่วโมงต้องส่งครบทั้ง 3 กลุ่ม:
+    # Zone ที่มี Alarm รับการ์ด Alarm ของตนเอง
+    # Zone ที่ไม่มี Alarm รับสรุป Online/Offline ของตนเอง
+    try:
+        print("LINE routing: ส่งรายงานให้ครบทั้ง 3 สายปฏิบัติการ")
+        success = base.send_all_zone_hourly_reports(
+            all_stations,
+            events,
+        )
+    except RuntimeError as error:
+        print(f"ERROR: {error}")
+        return 1
+
+    if not success:
             print("ERROR: ส่งสรุปรายชั่วโมงไม่สำเร็จ")
             return 1
         base.save_alert_state(all_stations)
@@ -289,7 +301,7 @@ def main() -> int:
         return 1
 
     base.save_alert_state(all_stations)
-    print("ส่ง LINE แจ้งค่าพารามิเตอร์ประจำชั่วโมงสำเร็จ")
+    print("ส่ง LINE รายงานประจำชั่วโมงครบทั้ง 3 Zone สำเร็จ")
     print("บันทึก alert_state.json แล้ว")
     print("Dashboard อัปเดตแล้ว")
     return 0
