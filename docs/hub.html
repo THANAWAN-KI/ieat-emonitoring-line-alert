@@ -120,6 +120,11 @@ async function loadFireSupportRest(){
   if((records||[]).length)return;
   var status=document.getElementById('fireEstateStatus');if(status){status.textContent='กำลังเชื่อมต่อฐานข้อมูลตำแหน่ง กนอ.…';status.className='loading'}
   var loaded=[];
+  try{
+    var statusResponse=await fetch('./status.json?t='+Date.now());if(statusResponse.ok){var statusData=await statusResponse.json();var stations=statusData.all_stations||statusData.stations||[];
+      stations.forEach(function(station){var estate=String(station.estate_name||'').trim(),lat=Number(station.latitude),lng=Number(station.longitude);if(!estate||estate==='-'||!Number.isFinite(lat)||!Number.isFinite(lng))return;var fullName=/(นิคม|ท่าเรือ)/.test(estate)?estate:'นิคมอุตสาหกรรม'+estate;loaded.push({config:{id:'estate-origin',label:'นิคมอุตสาหกรรม'},feature:{attributes:station,geometry:{x:lng,y:lat}},name:station.station_name||fullName,estate:fullName})});
+    }
+  }catch(error){console.warn('ไม่สามารถโหลดรายชื่อนิคมฯ จาก e-Monitoring',error)}
   await Promise.all(configs.map(async function(config){
     try{
       var url=config.url+'/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=json&resultRecordCount=2000';
