@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import os
 import sys
+from datetime import timedelta
 
 import check_emonitoring as base
 
@@ -77,6 +78,31 @@ def build_hourly_alarm_events(
         }
         for station in alert_stations
     ]
+
+
+def hourly_slot_start(current_time):
+    """รอบรายชั่วโมงล่าสุด (08:30, 09:30, ... 15:30)"""
+    slot = current_time.replace(minute=30, second=0, microsecond=0)
+    if current_time.minute < 30:
+        slot -= timedelta(hours=1)
+    return slot
+
+
+def hourly_slot_already_sent(current_time) -> bool:
+    """กันการส่งซ้ำ เมื่อ cron สำรอง :40 ทำงานหลังรอบหลัก :30"""
+    updated_at = base.load_alert_state().get("updated_at")
+    if not updated_at:
+        return False
+    try:
+        last_sent = base.datetime.fromisoformat(updated_at)
+        if last_sent.tzinfo is None:
+            last_sent = last_sent.replace(tzinfo=base.THAI_TZ)
+        last_sent = last_sent.astimezone(base.THAI_TZ)
+    except (TypeError, ValueError):
+        return False
+
+    slot = hourly_slot_start(current_time)
+    return slot <= last_sent < slot + timedelta(hours=1)
 
 
 def main() -> int:
@@ -225,10 +251,24 @@ def main() -> int:
         print("Dashboard อัปเดตแล้ว")
         return 0
 
-    if not events:
-        base.save_alert_state(all_stations)
-        print("LINE: ไม่ส่ง — ไม่พบสถานีที่มีค่าพารามิเตอร์ Alarm")
+    if hourly_slot_already_sent(current_time):
+        print("LINE: ไม่ส่งซ้ำ — รอบรายชั่วโมงนี้ส่งสำเร็จแล้ว")
         print("โควตารอบนี้: 0 ข้อความ")
+        return 0
+
+    if not events:
+        # แม้ไม่มี Alarm ก็ต้องส่งสรุป Online/Offline ทุกชั่วโมง
+        print("ไม่พบ Alarm — ส่งสรุปสถานะ Online/Offline ประจำชั่วโมง")
+        try:
+            success = base.send_zone_daily_summaries(all_stations)
+        except RuntimeError as error:
+            print(f"ERROR: {error}")
+            return 1
+        if not success:
+            print("ERROR: ส่งสรุปรายชั่วโมงไม่สำเร็จ")
+            return 1
+        base.save_alert_state(all_stations)
+        print("ส่ง LINE สรุปสถานะประจำชั่วโมงสำเร็จ")
         return 0
 
     try:
