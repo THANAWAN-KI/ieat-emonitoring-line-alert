@@ -54,12 +54,13 @@ const labels={flood:'แผนที่วิเคราะห์สถาน�
 <style>.actions #exportBtn,.toolbar{display:none!important}.map-grid{grid-template-columns:minmax(780px,1.65fr) minmax(420px,.85fr)}.dashboard-risk-frame{height:900px}.analysis-frame{height:900px}@media(max-width:1250px){.map-grid{grid-template-columns:1fr}.dashboard-risk-frame,.analysis-frame{height:760px}}@media(max-width:700px){.dashboard-risk-frame,.analysis-frame{height:620px}}</style>
 <style>@media(min-width:1251px){.map-grid{grid-template-columns:minmax(680px,1.15fr) minmax(620px,1fr)}}</style>
 <style>
-.flood-hub,.drought-hub{display:none;width:100%}.flood-hub.show,.drought-hub.show{display:block}.flood-report-frame,.drought-report-frame{display:block;width:100%;height:calc(100vh - 82px);min-height:900px;border:0;background:#f6f6f4;border-radius:14px;box-shadow:0 3px 12px #26364a0a}@media(max-width:850px){.flood-report-frame,.drought-report-frame{height:calc(100vh - 82px);min-height:760px;border-radius:10px}}@media(max-width:560px){.flood-report-frame,.drought-report-frame{height:calc(100vh - 72px);min-height:680px;border-radius:8px}}
+.fire-hub,.flood-hub,.drought-hub{display:none;width:100%}.fire-hub.show,.flood-hub.show,.drought-hub.show{display:block}.fire-report-frame,.flood-report-frame,.drought-report-frame{display:block;width:100%;height:calc(100vh - 82px);min-height:900px;border:0;background:#f6f6f4;border-radius:14px;box-shadow:0 3px 12px #26364a0a}@media(max-width:850px){.fire-report-frame,.flood-report-frame,.drought-report-frame{height:calc(100vh - 82px);min-height:760px;border-radius:10px}}@media(max-width:560px){.fire-report-frame,.flood-report-frame,.drought-report-frame{height:calc(100vh - 72px);min-height:680px;border-radius:8px}}
 </style>
 <script>
+const fireHub=document.createElement('section');fireHub.id='fireReportView';fireHub.className='fire-hub show';fireHub.innerHTML=`<iframe class="fire-report-frame" src="./dss.html" title="ข้อมูลสนับสนุนการรับมือเหตุไฟไหม้" loading="eager" allowfullscreen></iframe>`;fireView.parentNode.insertBefore(fireHub,fireView);fireView.style.display='none';
 const floodView=document.createElement('section');floodView.id='floodView';floodView.className='flood-hub';floodView.innerHTML=`<iframe class="flood-report-frame" src="./flood-report.html" title="ศูนย์ข้อมูลสถานการณ์น้ำและรายงานน้ำท่วม" loading="eager" allowfullscreen></iframe>`;otherView.parentNode.insertBefore(floodView,otherView);
 const droughtView=document.createElement('section');droughtView.id='droughtView';droughtView.className='drought-hub';droughtView.innerHTML=`<iframe class="drought-report-frame" src="./drought.html" title="ศูนย์ข้อมูลสถานการณ์ภัยแล้ง" loading="eager" allowfullscreen></iframe>`;otherView.parentNode.insertBefore(droughtView,otherView);
-document.querySelectorAll('.tab').forEach(tab=>tab.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===tab));const type=tab.dataset.type;fireView.style.display=type==='fire'?'block':'none';floodView.classList.toggle('show',type==='flood');droughtView.classList.toggle('show',type==='drought');otherView.classList.toggle('show',type!=='fire'&&type!=='flood'&&type!=='drought');if(type!=='fire'&&type!=='flood'&&type!=='drought')otherTitle.textContent=labels[type]});
+document.querySelectorAll('.tab').forEach(tab=>tab.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===tab));const type=tab.dataset.type;fireView.style.display='none';fireHub.classList.toggle('show',type==='fire');floodView.classList.toggle('show',type==='flood');droughtView.classList.toggle('show',type==='drought');otherView.classList.toggle('show',type!=='fire'&&type!=='flood'&&type!=='drought');if(type!=='fire'&&type!=='flood'&&type!=='drought')otherTitle.textContent=labels[type]});
 </script>
 <style>
 /* Final responsive sizing: balanced desktop and mobile layout */
@@ -75,7 +76,7 @@ body{background:#fff}
 .dashboard-risk-frame,.analysis-frame{height:720px}
 .dss-section{margin-top:16px}.dss-frame{height:680px}
 .other-frame{height:720px}
-.flood-report-frame,.drought-report-frame{height:calc(100vh - 130px);min-height:720px}
+.fire-report-frame,.flood-report-frame,.drought-report-frame{height:calc(100vh - 130px);min-height:720px}
 .notice{padding:10px 16px;font-size:13px}
 footer{padding:20px;font-size:14px}
 @media(max-width:1100px){
@@ -96,7 +97,7 @@ footer{padding:20px;font-size:14px}
   .map-grid{gap:10px}
   .dashboard-risk-frame,.analysis-frame,.other-frame{height:540px}
   .dss-section{margin-top:10px}.dss-frame{height:580px}
-  .flood-report-frame,.drought-report-frame{height:calc(100vh - 112px);min-height:620px;border-radius:8px}
+  .fire-report-frame,.flood-report-frame,.drought-report-frame{height:calc(100vh - 112px);min-height:620px;border-radius:8px}
   footer{padding:17px 12px;font-size:12px}
 }
 @media(max-width:420px){
