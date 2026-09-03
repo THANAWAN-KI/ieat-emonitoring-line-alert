@@ -7,6 +7,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css">
 <script src="https://js.arcgis.com/4.30/"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <style>
 :root{--green:#567b1b;--dark:#34500e;--soft:#f1f6e8;--ink:#252822;--muted:#6b7263;--line:#dce3d5;--bg:#f5f7f2;--amber:#e28b12;--red:#c93b36;--blue:#1377a8}
 *{box-sizing:border-box}html,body{margin:0;min-height:100%}body{font-family:Sarabun,sans-serif;color:var(--ink);background:var(--bg)}button,input,select{font:inherit}
@@ -30,18 +32,32 @@
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}.sources,.actions{padding:17px}.sources h3,.actions h3{font-size:18px;margin:0 0 12px}.source-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.source{border:1px solid var(--line);border-radius:9px;padding:10px;text-decoration:none;color:var(--ink);font-size:13px}.source b{display:block;color:var(--dark);margin-bottom:2px}.source span{font-size:11px;color:var(--muted)}
 .checklist{display:grid;grid-template-columns:1fr 1fr;gap:8px}.check{border:1px solid var(--line);border-radius:9px;padding:10px;font-size:13px;display:flex;gap:8px}.check i{font-style:normal;color:var(--green);font-weight:700}
 .footer{text-align:center;padding:22px 12px;color:var(--muted);font-size:12px}.esri-ui .esri-widget{font-family:Sarabun,sans-serif}
-@media(max-width:1000px){.kpis{grid-template-columns:repeat(2,1fr)}.main-grid{grid-template-columns:1fr}.map-panel,.map{height:620px;min-height:620px}.two-col{grid-template-columns:1fr}}
-@media(max-width:600px){.wrap{padding:9px 7px 24px}.intro{padding:15px;display:block;border-radius:10px}.intro h2{font-size:20px}.intro p{font-size:12px}.stamp{display:inline-block;margin-top:10px}.kpis{gap:7px}.kpi{min-height:84px;padding:11px}.kpi strong{font-size:23px}.main-grid{gap:8px}.filters{padding:14px}.map-panel,.map{height:530px;min-height:530px}.map-title{left:48px;max-width:70%;font-size:11px}.section-head{align-items:flex-start}.source-grid,.checklist{grid-template-columns:1fr}.two-col{gap:9px;margin-top:9px}}
+.intro,.stamp,.kpi,.panel,.section,.note,.field select,.field input,.btn,.badge,.zoom,.source,.check,.map-title,.map-status,.table-wrap,.chart-panel{border-radius:0!important}
+.dashboard-kpis{grid-template-columns:repeat(6,1fr);gap:10px}.dashboard-kpis .kpi{border:1px solid #000;min-height:136px;text-align:center;padding:12px 8px}.dashboard-kpis .kpi span{font-size:14px;font-weight:700;color:#111;min-height:38px}.dashboard-kpis .kpi div{display:flex;align-items:center;justify-content:center;gap:10px}.dashboard-kpis .kpi strong{font-size:28px;color:#111}.dashboard-kpis .kpi small{display:block;font-size:12px;color:#333;margin:6px 0 0}.kpi-icon{font-size:32px;color:#111}.kpi-purple{background:#d9b8ea}.kpi-yellow{background:#f3ef78}.kpi-pink{background:#edb4b7}.kpi-blue{background:#a9dfe6}.kpi-green{background:#c5eaa9}.kpi-orange{background:#efd1aa}
+.charts-grid{display:grid;gap:12px;margin:14px 0}.charts-top{grid-template-columns:repeat(3,1fr)}.charts-bottom{grid-template-columns:1.7fr 1fr}.chart-panel{background:#fff;border:1px solid #000;padding:12px;min-width:0}.chart-panel h3{font-size:15px;line-height:1.3;text-align:center;margin:0 0 8px;min-height:40px}.chart-box{position:relative;height:300px}.charts-bottom .chart-box{height:320px}
+@media(max-width:1000px){.kpis{grid-template-columns:repeat(3,1fr)}.charts-top,.charts-bottom{grid-template-columns:1fr}.main-grid{grid-template-columns:1fr}.map-panel,.map{height:620px;min-height:620px}.two-col{grid-template-columns:1fr}}
+@media(max-width:600px){.wrap{padding:9px 7px 24px}.dashboard-kpis{grid-template-columns:repeat(2,1fr)}.dashboard-kpis .kpi{min-height:120px}.dashboard-kpis .kpi strong{font-size:22px}.kpi-icon{font-size:25px}.chart-box,.charts-bottom .chart-box{height:280px}.intro{padding:15px;display:block;border-radius:10px}.intro h2{font-size:20px}.intro p{font-size:12px}.stamp{display:inline-block;margin-top:10px}.kpis{gap:7px}.kpi{min-height:84px;padding:11px}.kpi strong{font-size:23px}.main-grid{gap:8px}.filters{padding:14px}.map-panel,.map{height:530px;min-height:530px}.map-title{left:48px;max-width:70%;font-size:11px}.section-head{align-items:flex-start}.source-grid,.checklist{grid-template-columns:1fr}.two-col{gap:9px;margin-top:9px}}
 </style>
 </head>
 <body>
 <main class="wrap">
 <section class="intro"><div><h2>ศูนย์ข้อมูลสถานการณ์ภัยแล้ง</h2><p>คัดกรองพื้นที่ ติดตามแนวโน้ม และสนับสนุนการเตรียมความพร้อมของนิคมอุตสาหกรรม</p></div><div class="stamp" id="reportDate">กำลังตรวจสอบวันที่…</div></section>
-<section class="kpis">
-<div class="kpi"><span>ปริมาณน้ำใช้ตามตัวกรอง</span><strong id="waterUseTotal">–</strong><small>ลบ.ม.</small></div>
-<div class="kpi"><span>ปริมาณน้ำสำรอง</span><strong id="waterReserveTotal">–</strong><small>ลบ.ม.</small></div>
-<div class="kpi"><span>นิคมอุตสาหกรรมที่มีข้อมูล</span><strong id="estateCount">–</strong><small>แห่ง</small></div>
-<div class="kpi"><span>ข้อมูลน้ำสำรองครบถ้วน</span><strong id="reserveCoverage">–</strong><small>%</small></div>
+<section class="kpis dashboard-kpis">
+<div class="kpi kpi-purple"><span>นิคมอุตสาหกรรม / ท่าเรือฯ</span><div><i class="fa-solid fa-city kpi-icon"></i><strong id="estateCount">–</strong></div><small>แห่ง</small></div>
+<div class="kpi kpi-yellow"><span>จำนวนผู้ประกอบการ</span><div><i class="fa-solid fa-people-group kpi-icon"></i><strong id="operatorTotal">–</strong></div><small>ราย</small></div>
+<div class="kpi kpi-pink"><span>พื้นที่ตามผังแม่นิคมฯ</span><div><i class="fa-solid fa-draw-polygon kpi-icon"></i><strong id="areaTotal">–</strong></div><small>ไร่</small></div>
+<div class="kpi kpi-blue"><span>ปริมาณน้ำใช้</span><div><i class="fa-solid fa-faucet-drip kpi-icon"></i><strong id="waterUseTotal">–</strong></div><small>ลบ.ม./เดือน</small></div>
+<div class="kpi kpi-green"><span>ปริมาณน้ำ 3R</span><div><i class="fa-solid fa-recycle kpi-icon"></i><strong id="water3rTotal">–</strong></div><small>ลบ.ม./เดือน</small></div>
+<div class="kpi kpi-orange"><span>ปริมาณน้ำสำรอง</span><div><i class="fa-solid fa-water kpi-icon"></i><strong id="waterReserveTotal">–</strong></div><small>ลบ.ม.</small></div>
+</section>
+<section class="charts-grid charts-top">
+<div class="chart-panel"><h3>10 อันดับนิคมอุตสาหกรรม / ท่าเรือ ที่มีการใช้น้ำมากที่สุด</h3><div class="chart-box"><canvas id="waterUseChart"></canvas></div></div>
+<div class="chart-panel"><h3>10 อันดับนิคมอุตสาหกรรม / ท่าเรือ ที่มีการใช้น้ำ 3R มากที่สุด</h3><div class="chart-box"><canvas id="water3rChart"></canvas></div></div>
+<div class="chart-panel"><h3>10 อันดับนิคมอุตสาหกรรม / ท่าเรือ ที่มีน้ำเสียผ่านระบบบำบัดมากที่สุด</h3><div class="chart-box"><canvas id="treatedChart"></canvas></div></div>
+</section>
+<section class="charts-grid charts-bottom">
+<div class="chart-panel chart-wide"><h3><i class="fa-solid fa-droplet"></i> แนวโน้มปริมาณการใช้น้ำและน้ำ 3R รายเดือน</h3><div class="chart-box"><canvas id="monthlyUseChart"></canvas></div></div>
+<div class="chart-panel"><h3><i class="fa-solid fa-water"></i> แนวโน้มปริมาณน้ำสำรอง</h3><div class="chart-box"><canvas id="reserveChart"></canvas></div></div>
 </section>
 <section class="main-grid">
 <aside class="panel filters">
@@ -89,7 +105,7 @@ const now=new Date();document.getElementById("reportDate").textContent="ข้�
 let allRows=[],filteredRows=[],view,waterLayer;
 const yearSelect=document.getElementById("yearSelect"),monthSelect=document.getElementById("monthSelect"),operationSelect=document.getElementById("operationSelect"),estateSelect=document.getElementById("estateSelect"),searchInput=document.getElementById("searchInput"),estateRows=document.getElementById("estateRows"),showBtn=document.getElementById("showBtn"),resetBtn=document.getElementById("resetBtn"),mapStatus=document.getElementById("mapStatus");
 const esc=function(value){return String(value??"").replace(/[&<>"']/g,function(char){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char];});};
-const num=function(value){const n=Number(value);return Number.isFinite(n)?n:0;};
+const num=function(value){const n=Number(String(value??"").replace(/,/g,"").trim());return Number.isFinite(n)?n:0;};
 const fmt=function(value,digits=0){return Number(value||0).toLocaleString("th-TH",{maximumFractionDigits:digits});};
 require(["esri/WebMap","esri/views/MapView","esri/layers/FeatureLayer","esri/widgets/Search","esri/widgets/Home","esri/widgets/LayerList","esri/widgets/Legend","esri/widgets/Expand"],function(WebMap,MapView,FeatureLayer,Search,Home,LayerList,Legend,Expand){
  const webmap=new WebMap({portalItem:{id:WEBMAP_ID}});
@@ -103,7 +119,7 @@ require(["esri/WebMap","esri/views/MapView","esri/layers/FeatureLayer","esri/wid
   try{
    const objectIds=await waterLayer.queryObjectIds({where:"1=1"});const features=[];
    for(let start=0;start<objectIds.length;start+=800){const result=await waterLayer.queryFeatures({objectIds:objectIds.slice(start,start+800),outFields:["*"],returnGeometry:true});features.push(...result.features);}
-   allRows=features.map(function(feature){const a=feature.attributes;return {year:num(a["ปี"]),month:num(a["เดือน"]),name:String(a["นิคมอุตสาหกรรม"]||"").trim(),operation:String(a["สายปฏิบัติการ"]??"-"),use:num(a["ปริมาณน้ำใช้"]),reserve:a["ปริมาณน้ำสำรอง"]==null?null:num(a["ปริมาณน้ำสำรอง"]),operators:num(a["ผู้ประกอบการ"]),status:String(a["สถานะ"]||"-"),feature:feature};}).filter(function(row){return row.name&&row.year&&row.month;});
+   allRows=features.map(function(feature){const a=feature.attributes;return {year:num(a["ปี"]),month:num(a["เดือน"]),name:String(a["นิคมอุตสาหกรรม"]||"").trim(),operation:String(a["สายปฏิบัติการ"]??"-"),use:num(a["ปริมาณน้ำใช้"]),reserve:a["ปริมาณน้ำสำรอง"]==null?null:num(a["ปริมาณน้ำสำรอง"]),operators:num(a["ผู้ประกอบการ"]),area:num(a["พื้นที่__ไร่_"]),water3r:num(a["น้ำ_3R"]),treatment:num(a["ระบบบำบัดน้ำเสีย"]),treated:num(a["น้ำเสียผ่านการบำบัด"]),wasteIn:num(a["น้ำเสียก่อนเข้าระบบบำบัด"]),status:String(a["สถานะ"]||"-"),feature:feature};}).filter(function(row){return row.name&&row.year&&row.month;});
    setupPeriods();updateFilters();mapStatus.textContent="แผนที่และข้อมูลการใช้น้ำพร้อมใช้งาน";
   }catch(error){mapStatus.textContent="ไม่สามารถโหลดข้อมูลการใช้น้ำ กรุณารีเฟรชอีกครั้ง";estateRows.innerHTML='<tr><td colspan="17">ไม่สามารถเข้าถึง Hosted Feature Layer ได้</td></tr>';}
  }).catch(function(){mapStatus.textContent="ไม่สามารถโหลดแผนที่ได้ กรุณารีเฟรชอีกครั้ง";});
