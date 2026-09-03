@@ -1,6 +1,16 @@
 name: e-Monitoring Hourly LINE Alert
 
 on:
+  # เมื่อแก้ไฟล์ระบบแจ้งเตือน ให้ทดสอบส่งจริงทันทีบน main
+  # ช่วยยืนยัน Token/Group ID/LINE API โดยไม่ต้องรอ GitHub Scheduler
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/emonitoring_alert.yml"
+      - "check_emonitoring.py"
+      - "check_emonitoring_batch.py"
+
   workflow_dispatch:
     inputs:
       preview_mode:
