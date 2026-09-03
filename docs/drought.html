@@ -52,11 +52,32 @@ body{background:#fff}
 .map-panel{border-top:4px solid #2475d0!important}.section{border-top:4px solid #3e7eab!important}.section-head{background:#f8fafc}.source,.check,.note{background:#fff;border-color:#dce3e8}.note{border-left:4px solid #e0a319;color:#5f6870}
 .table-wrap{background:#fff}
 @media(max-width:760px){.dashboard-head{align-items:flex-start;padding:10px}.head-brand img{width:44px}.head-brand h2{font-size:17px}.head-brand p{font-size:11px}.head-meta{display:block;text-align:right}.head-meta span{display:block;margin-bottom:7px}.head-meta a{display:inline-block}.dashboard-kpis .kpi{text-align:left}.head-brand{align-items:flex-start}}
-</style></head>
+</style>
+<style>
+:root{--cream:#fffaf2;--warm:#f2a640;--rust:#a84f32;--brown:#51362d;--softline:#eadfd4}
+body{background:#fff;color:#2d2926}
+.dashboard-head{border:1px solid var(--softline);border-left:1px solid var(--softline);background:linear-gradient(135deg,#fff 0%,#fffaf3 100%);box-shadow:0 8px 24px rgba(102,72,50,.12);padding:17px 20px}
+.head-brand h2{color:var(--brown);font-size:23px}.head-brand h2 i{color:var(--warm);margin-right:7px}.head-brand p{color:#806f65}
+.head-meta a{background:var(--rust);box-shadow:0 4px 12px rgba(168,79,50,.2)}
+.dashboard-kpis .kpi{border:1px solid var(--softline);box-shadow:0 7px 20px rgba(91,67,51,.10);background:#fff!important}
+.dashboard-kpis .kpi:before{display:none!important}
+.dashboard-kpis .kpi span{color:#69594f}.dashboard-kpis .kpi strong{color:#302824}
+.dashboard-kpis .kpi-icon,.dashboard-kpis .kpi:nth-child(n) .kpi-icon{background:#fff3db;color:#e49a28}
+.panel,.section,.chart-panel{border:1px solid var(--softline)!important;border-top:1px solid var(--softline)!important;background:#fff;box-shadow:0 8px 23px rgba(91,67,51,.11)}
+.filters,.map-panel,.section{border-top:1px solid var(--softline)!important}
+.charts-focus{grid-template-columns:1.15fr 1fr;margin:14px 0}.charts-focus .chart-panel{padding:16px}.charts-focus .chart-box{height:340px}.charts-focus .chart-panel h3{color:var(--brown);min-height:auto;text-align:left;border-bottom:1px solid #f0e6dc;padding-bottom:10px}
+.chart-hint{font-size:11px;color:#8a776b;text-align:right;margin:7px 0 0}
+.section-head{background:var(--cream)}.primary{background:var(--rust)}.secondary{background:#f6eee7;color:var(--brown)}
+.field select,.field input{border-color:#dfd1c5;background:#fff}.badge,.zoom{background:#fff3db;color:#7b4917;border-color:#ebc785}
+.note{background:#fffaf0;border-left:1px solid var(--softline);color:#725f53}
+.map-title,.map-status{border-color:var(--softline);box-shadow:0 5px 15px rgba(91,67,51,.10)}
+@media(max-width:1000px){.charts-focus{grid-template-columns:1fr}}
+</style>
+</head>
 <body>
 <main class="wrap">
 <section class="dashboard-head">
-<div class="head-brand"><img src="https://oc.ieat.go.th/assets/app/images/logo-th.png" alt="กนอ."><div><h2>ศูนย์ข้อมูลสถานการณ์ภัยแล้ง</h2><p>คัดกรองพื้นที่ ติดตามแนวโน้ม และสนับสนุนการเตรียมความพร้อมของนิคมอุตสาหกรรม</p></div></div>
+<div class="head-brand"><div><h2><i class="fa-solid fa-droplet"></i> ศูนย์ข้อมูลสถานการณ์ภัยแล้ง</h2><p>คัดกรองพื้นที่ ติดตามแนวโน้ม และสนับสนุนการเตรียมความพร้อมของนิคมอุตสาหกรรม</p></div></div>
 <div class="head-meta"><span id="reportDate">กำลังตรวจสอบวันที่…</span><a href="https://www.arcgis.com/apps/mapviewer/index.html?webmap=d6044d4f209345e6ac731afafe3c9d4a" target="_blank"><i class="fa-solid fa-map-location-dot"></i> เปิดแผนที่เต็มหน้า</a></div>
 </section>
 <section class="kpis dashboard-kpis">
@@ -67,14 +88,9 @@ body{background:#fff}
 <div class="kpi kpi-green"><span>ปริมาณน้ำ 3R</span><div><i class="fa-solid fa-recycle kpi-icon"></i><strong id="water3rTotal">–</strong></div><small>ลบ.ม./เดือน</small></div>
 <div class="kpi kpi-orange"><span>ปริมาณน้ำสำรอง</span><div><i class="fa-solid fa-water kpi-icon"></i><strong id="waterReserveTotal">–</strong></div><small>ลบ.ม.</small></div>
 </section>
-<section class="charts-grid charts-top">
-<div class="chart-panel"><h3>10 อันดับนิคมอุตสาหกรรม / ท่าเรือ ที่มีการใช้น้ำมากที่สุด</h3><div class="chart-box"><canvas id="waterUseChart"></canvas></div></div>
-<div class="chart-panel"><h3>10 อันดับนิคมอุตสาหกรรม / ท่าเรือ ที่มีการใช้น้ำ 3R มากที่สุด</h3><div class="chart-box"><canvas id="water3rChart"></canvas></div></div>
-<div class="chart-panel"><h3>10 อันดับนิคมอุตสาหกรรม / ท่าเรือ ที่มีน้ำเสียผ่านระบบบำบัดมากที่สุด</h3><div class="chart-box"><canvas id="treatedChart"></canvas></div></div>
-</section>
-<section class="charts-grid charts-bottom">
-<div class="chart-panel chart-wide"><h3><i class="fa-solid fa-droplet"></i> แนวโน้มปริมาณการใช้น้ำและน้ำ 3R รายเดือน</h3><div class="chart-box"><canvas id="monthlyUseChart"></canvas></div></div>
-<div class="chart-panel"><h3><i class="fa-solid fa-water"></i> แนวโน้มปริมาณน้ำสำรอง</h3><div class="chart-box"><canvas id="reserveChart"></canvas></div></div>
+<section class="charts-grid charts-focus">
+<div class="chart-panel"><h3>10 อันดับนิคมอุตสาหกรรม / ท่าเรือ ที่มีการใช้น้ำมากที่สุด</h3><div class="chart-box"><canvas id="waterUseChart"></canvas></div><p class="chart-hint">คลิกแท่งกราฟเพื่อซูมไปยังตำแหน่งบนแผนที่</p></div>
+<div class="chart-panel"><h3><i class="fa-solid fa-water"></i> แนวโน้มปริมาณน้ำสำรอง</h3><div class="chart-box"><canvas id="reserveChart"></canvas></div><p class="chart-hint">คลิกเดือนเพื่อกรองข้อมูลและแสดงตำแหน่งบนแผนที่</p></div>
 </section>
 <section class="main-grid">
 <aside class="panel filters">
@@ -124,7 +140,7 @@ const yearSelect=document.getElementById("yearSelect"),monthSelect=document.getE
 const esc=function(value){return String(value??"").replace(/[&<>"']/g,function(char){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char];});};
 const num=function(value){const n=Number(String(value??"").replace(/,/g,"").trim());return Number.isFinite(n)?n:0;};
 const fmt=function(value,digits=0){return Number(value||0).toLocaleString("th-TH",{maximumFractionDigits:digits});};
-require(["esri/WebMap","esri/views/MapView","esri/layers/FeatureLayer","esri/widgets/Search","esri/widgets/Home","esri/widgets/LayerList","esri/widgets/Legend","esri/widgets/Expand"],function(WebMap,MapView,FeatureLayer,Search,Home,LayerList,Legend,Expand){
+require(["esri/WebMap","esri/views/MapView","esri/layers/FeatureLayer","esri/Graphic","esri/widgets/Search","esri/widgets/Home","esri/widgets/LayerList","esri/widgets/Legend","esri/widgets/Expand"],function(WebMap,MapView,FeatureLayer,Graphic,Search,Home,LayerList,Legend,Expand){
  const webmap=new WebMap({portalItem:{id:WEBMAP_ID}});
  waterLayer=new FeatureLayer({url:WATER_URL,title:"ข้อมูลการใช้น้ำในพื้นที่นิคม",outFields:["*"],popupTemplate:{title:"{นิคมอุตสาหกรรม}",content:[{type:"fields",fieldInfos:[{fieldName:"ปี",label:"ปี"},{fieldName:"เดือน",label:"เดือน"},{fieldName:"สายปฏิบัติการ",label:"สายปฏิบัติการ"},{fieldName:"ปริมาณน้ำใช้",label:"ปริมาณน้ำใช้",format:{digitSeparator:true,places:2}},{fieldName:"ปริมาณน้ำสำรอง",label:"ปริมาณน้ำสำรอง",format:{digitSeparator:true,places:2}},{fieldName:"ผู้ประกอบการ",label:"ผู้ประกอบการ"}]}]}});
  webmap.add(waterLayer);
@@ -134,13 +150,28 @@ require(["esri/WebMap","esri/views/MapView","esri/layers/FeatureLayer","esri/wid
   view.ui.add(new Expand({view:view,content:new LayerList({view:view}),group:"tools",expandTooltip:"ชั้นข้อมูล"}),"top-right");
   view.ui.add(new Expand({view:view,content:new Legend({view:view}),group:"tools",expandTooltip:"คำอธิบายสัญลักษณ์"}),"top-right");
   try{
-   const objectIds=await waterLayer.queryObjectIds({where:"1=1"});const features=[];
-   for(let start=0;start<objectIds.length;start+=800){const result=await waterLayer.queryFeatures({objectIds:objectIds.slice(start,start+800),outFields:["*"],returnGeometry:true});features.push(...result.features);}
+   const records=await fetchWaterRecords();
+   const features=records.map(function(record){const geometry=record.geometry?{type:"point",longitude:record.geometry.x,latitude:record.geometry.y,spatialReference:{wkid:4326}}:null;return new Graphic({attributes:record.attributes,geometry:geometry,popupTemplate:waterLayer.popupTemplate});});
    allRows=features.map(function(feature){const a=feature.attributes;return {year:num(a["ปี"]),month:num(a["เดือน"]),name:String(a["นิคมอุตสาหกรรม"]||"").trim(),operation:String(a["สายปฏิบัติการ"]??"-"),use:num(a["ปริมาณน้ำใช้"]),reserve:a["ปริมาณน้ำสำรอง"]==null?null:num(a["ปริมาณน้ำสำรอง"]),operators:num(a["ผู้ประกอบการ"]),area:num(a["พื้นที่__ไร่_"]),water3r:num(a["น้ำ_3R"]),treatment:num(a["ระบบบำบัดน้ำเสีย"]),treated:num(a["น้ำเสียผ่านการบำบัด"]),wasteIn:num(a["น้ำเสียก่อนเข้าระบบบำบัด"]),status:String(a["สถานะ"]||"-"),feature:feature};}).filter(function(row){return row.name&&row.year&&row.month;});
    setupPeriods();updateFilters();mapStatus.textContent="แผนที่และข้อมูลการใช้น้ำพร้อมใช้งาน";
   }catch(error){mapStatus.textContent="ไม่สามารถโหลดข้อมูลการใช้น้ำ กรุณารีเฟรชอีกครั้ง";estateRows.innerHTML='<tr><td colspan="17">ไม่สามารถเข้าถึง Hosted Feature Layer ได้</td></tr>';}
  }).catch(function(){mapStatus.textContent="ไม่สามารถโหลดแผนที่ได้ กรุณารีเฟรชอีกครั้ง";});
 });
+async function fetchWaterRecords(){
+ const records=[];let offset=0;const pageSize=1000;
+ while(true){
+  const params=new URLSearchParams({where:"1=1",outFields:"*",returnGeometry:"true",outSR:"4326",f:"json",resultOffset:String(offset),resultRecordCount:String(pageSize)});
+  const response=await fetch(WATER_URL+"/query?"+params.toString(),{cache:"no-store"});
+  if(!response.ok)throw new Error("HTTP "+response.status);
+  const data=await response.json();
+  if(data.error)throw new Error(data.error.message||"ArcGIS query error");
+  const page=data.features||[];records.push(...page);
+  if(!data.exceededTransferLimit&&page.length<pageSize)break;
+  if(!page.length)break;
+  offset+=page.length;
+ }
+ return records;
+}
 function setupPeriods(){
  const years=[...new Set(allRows.map(function(row){return row.year;}))].sort(function(a,b){return b-a;});
  yearSelect.innerHTML=years.map(function(year){return '<option value="'+year+'">'+year+'</option>';}).join("");
@@ -189,11 +220,8 @@ function barConfig(rows,metric,color){
  return {type:"bar",data:{labels:rows.map(function(row){return row.name;}),datasets:[{data:rows.map(function(row){return row[metric];}),backgroundColor:color,borderColor:color,borderWidth:1}]},options:{indexAxis:"y",responsive:true,maintainAspectRatio:false,onClick:function(event,elements){if(elements.length)zoomTo(rows[elements[0].index]);},plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return chartNumber(ctx.raw);}}}},scales:{x:{beginAtZero:true,ticks:{callback:function(value){return new Intl.NumberFormat("th-TH",{notation:"compact"}).format(value);}}},y:{ticks:{font:{family:"Sarabun",size:10}}}}}};
 }
 function renderCharts(annualRows){
- makeChart("waterUseChart",barConfig(topTen("use"),"use","#2844df"));
- makeChart("water3rChart",barConfig(topTen("water3r"),"water3r","#45c20b"));
- makeChart("treatedChart",barConfig(topTen("treated"),"treated","#d38b08"));
+ makeChart("waterUseChart",barConfig(topTen("use"),"use","#b85c35"));
  const monthly=months.map(function(label,index){const rows=annualRows.filter(function(row){return row.month===index+1;});return {label:shortMonths[index],use:rows.reduce(function(sum,row){return sum+row.use;},0),water3r:rows.reduce(function(sum,row){return sum+row.water3r;},0),reserve:rows.reduce(function(sum,row){return sum+(row.reserve||0);},0)};});
- makeChart("monthlyUseChart",{type:"bar",data:{labels:monthly.map(function(row){return row.label;}),datasets:[{label:"ปริมาณน้ำใช้",data:monthly.map(function(row){return row.use;}),backgroundColor:"#3049ed"},{label:"ปริมาณน้ำ 3R",data:monthly.map(function(row){return row.water3r;}),backgroundColor:"#2fd6cf"}]},options:{responsive:true,maintainAspectRatio:false,onClick:function(event,elements){if(elements.length)selectChartMonth(elements[0].index+1);},plugins:{legend:{position:"bottom"}},scales:{y:{beginAtZero:true,ticks:{callback:function(value){return new Intl.NumberFormat("th-TH",{notation:"compact"}).format(value);}}}}}});
  makeChart("reserveChart",{type:"line",data:{labels:monthly.map(function(row){return row.label;}),datasets:[{label:"ปริมาณน้ำสำรอง",data:monthly.map(function(row){return row.reserve;}),borderColor:"#169dcc",backgroundColor:"#9cd8e8",fill:true,tension:.25,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,onClick:function(event,elements){if(elements.length)selectChartMonth(elements[0].index+1);},plugins:{legend:{position:"bottom"}},scales:{y:{beginAtZero:true,ticks:{callback:function(value){return new Intl.NumberFormat("th-TH",{notation:"compact"}).format(value);}}}}}});
 }
 async function selectChartMonth(month){if(![...monthSelect.options].some(function(option){return Number(option.value)===month;}))return;monthSelect.value=String(month);rebuildOperations();await new Promise(function(resolve){setTimeout(resolve,50);});if(view&&filteredRows.length)view.goTo(filteredRows.map(function(row){return row.feature;}),{duration:800}).catch(function(){});mapStatus.textContent="แสดงข้อมูลเดือน "+months[month-1];document.getElementById("viewDiv").scrollIntoView({behavior:"smooth",block:"center"});}
