@@ -413,9 +413,76 @@
             }
         }
     </style>
+    <style>
+        /* Shared IEAT EMCC header matching hub.html */
+        .contacts-site-header{
+            position:sticky;
+            top:0;
+            z-index:1000;
+            width:100%;
+            min-height:70px;
+            padding:6px 56px;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:18px;
+            background:#fff;
+            border-top:1px solid #dedede;
+            border-bottom:1px solid #d9dde1;
+            box-shadow:0 3px 8px rgba(31,41,55,.12);
+        }
+        .contacts-site-brand{
+            flex:0 1 650px;
+            min-width:560px;
+            display:flex;
+            align-items:center;
+            gap:15px;
+            color:#111;
+            text-decoration:none;
+        }
+        .contacts-site-brand img{width:58px;height:46px;flex:0 0 58px;object-fit:contain}
+        .contacts-site-brand span{display:block;min-width:520px}
+        .contacts-site-brand strong{display:block;color:#631a9d;font-size:22px;line-height:1.25;font-weight:700}
+        .contacts-site-brand small{display:block;margin-top:3px;color:#777;font-size:13px;line-height:1.3;font-weight:500}
+        .contacts-header-actions{margin-left:auto;display:flex;align-items:center;gap:8px}
+        .contacts-header-actions a{padding:8px 14px;border:1px solid #d9c8e5;border-radius:20px;background:#fff;color:#631a9d;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap}
+        .contacts-header-actions a.primary{border-color:#631a9d;background:#631a9d;color:#fff}
+        .contacts-header-actions a:hover{filter:brightness(.97)}
+        @media(max-width:1000px){
+            .contacts-site-header{padding:6px 18px}
+            .contacts-site-brand{flex:1 1 auto;min-width:0}
+            .contacts-site-brand span{min-width:0}
+            .contacts-site-brand strong{font-size:19px}
+            .contacts-site-brand small{font-size:11px}
+        }
+        @media(max-width:650px){
+            .contacts-site-header{min-height:60px;padding:6px 10px;gap:7px}
+            .contacts-site-brand{gap:8px}
+            .contacts-site-brand img{width:46px;height:40px;flex-basis:46px}
+            .contacts-site-brand strong{font-size:15px}
+            .contacts-site-brand small{font-size:9px}
+            .contacts-header-actions{gap:3px}
+            .contacts-header-actions a{padding:7px 8px;font-size:10px}
+        }
+        @media(max-width:440px){
+            .contacts-site-brand strong{font-size:13px}
+            .contacts-site-brand small,.contacts-header-actions a:first-child{display:none}
+        }
+    </style>
 </head>
 
 <body>
+
+<header class="contacts-site-header">
+  <a class="contacts-site-brand" href="https://oc.ieat.go.th/th" target="_blank" rel="noopener">
+    <img src="./ieat_logo.png.PNG" alt="โลโก้การนิคมอุตสาหกรรมแห่งประเทศไทย">
+    <span><strong>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย</strong><small>Environmental Monitoring and Control Center: EMCC</small></span>
+  </a>
+  <nav class="contacts-header-actions" aria-label="เมนูส่วนหัว">
+    <a href="./daily-situation.html">หน้ารายงานข่าว</a>
+    <a class="primary" href="./hub.html">เข้าสู่หน้า Hub</a>
+  </nav>
+</header>
 
 <div class="page">
 
