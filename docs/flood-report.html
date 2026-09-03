@@ -377,6 +377,31 @@ button,input,select,textarea{font-family:"Sarabun",sans-serif!important}
  .operations-map,.operations-map iframe,.thaiwater-risk-map{height:500px!important;min-height:500px!important}
 }
 </style>
+
+<style>
+/* Daily flood situation summary inspired by the reference report */
+.daily-water-report{
+ background:#fff;border:1px solid #f1f3f5;border-radius:12px;
+ box-shadow:0 3px 14px rgba(48,60,72,.08);padding:13px
+}
+.daily-water-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;border-bottom:1px solid #edf0f2;padding-bottom:9px;margin-bottom:10px}
+.daily-water-head h2{font-size:16px;margin:0;color:#111}.daily-water-head p{font-size:11px;margin:3px 0 0;color:#111}
+.daily-water-head>span{font-size:11px;background:#f3f5f7;color:#111;padding:5px 9px;border-radius:16px;white-space:nowrap}
+.daily-water-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.daily-water-item{position:relative;min-width:0;min-height:90px;padding:11px 12px;border:1px solid #f0f2f4;border-radius:10px;background:#fff;overflow:hidden}
+.daily-water-item:before{content:"";position:absolute;width:44px;height:44px;border-radius:50%;right:-12px;top:-12px;background:#eaf5ff}
+.daily-water-item small{display:block;font-size:11px;color:#111;font-weight:600}
+.daily-water-item strong{display:block;font-size:25px;line-height:1.2;margin:7px 0 2px;color:#2878cf}
+.daily-water-item span{display:block;font-size:10px;color:#111}
+.daily-water-item.rain strong{color:#e99a1b}.daily-water-item.rain:before{background:#fff3dc}
+.daily-water-item.level strong{color:#009f98}.daily-water-item.level:before{background:#e8f8f6}
+.daily-water-item.station strong{color:#2878cf}
+.daily-water-item.status strong{font-size:19px;color:#198754}.daily-water-item.status.watch strong{color:#e87917}.daily-water-item.status.critical strong{color:#d72638}
+.daily-water-item.status:before{background:#eaf7ef}
+.daily-water-foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:9px;padding:8px 10px;background:#f8f9fa;border-radius:8px;font-size:11px;color:#111}
+.daily-water-foot i{font-style:normal;color:#111}
+@media(max-width:560px){.daily-water-grid{grid-template-columns:1fr 1fr}.daily-water-head{display:block}.daily-water-head>span{display:inline-block;margin-top:7px}.daily-water-item strong{font-size:21px}}
+</style>
 </head>
 <body>
   <header class="topbar"><div class="top-inner">
@@ -418,6 +443,19 @@ button,input,select,textarea{font-family:"Sarabun",sans-serif!important}
       <section class="operations-dashboard" aria-label="แผนที่และข้อมูลติดตามสถานการณ์">
         <div class="operations-side">
           <article class="national-alert"><b>ประกาศสำคัญและข้อมูลที่ต้องเฝ้าระวัง</b><p id="nationalAlertText">กำลังตรวจสอบประกาศล่าสุดจากกรมอุตุนิยมวิทยา</p><a class="warning-source" id="nationalWarningLink" href="https://tmd.go.th/warning-and-events/warning-storm" target="_blank" rel="noopener">อ่านประกาศกรมอุตุนิยมวิทยา</a></article>
+          <section class="daily-water-report" aria-labelledby="dailyWaterTitle">
+            <div class="daily-water-head">
+              <div><h2 id="dailyWaterTitle">รายงานสถานการณ์น้ำประจำวัน</h2><p>สรุปข้อมูลที่สัมพันธ์กับพื้นที่นิคมอุตสาหกรรมจากแหล่งข้อมูลเดิมของระบบ</p></div>
+              <span id="dailyReportDate">กำลังตรวจสอบวันที่</span>
+            </div>
+            <div class="daily-water-grid">
+              <article class="daily-water-item rain"><small>ฝนสูงสุด 24 ชั่วโมง</small><strong id="dailyRain">–</strong><span>ข้อมูลสถานีใกล้นิคมฯ</span></article>
+              <article class="daily-water-item level"><small>นิคมฯ ใกล้ระดับน้ำผิดปกติ</small><strong id="dailyCritical">–</strong><span>พื้นที่ที่ต้องติดตาม</span></article>
+              <article class="daily-water-item station"><small>สถานีที่ต้องติดตาม</small><strong id="dailyStations">–</strong><span>สถานีตรวจวัดที่เกี่ยวข้อง</span></article>
+              <article class="daily-water-item status"><small>สถานการณ์ภาพรวม</small><strong id="dailyStatus">กำลังตรวจสอบ</strong><span id="dailyTrend">ประเมินจากข้อมูลล่าสุด</span></article>
+            </div>
+            <div class="daily-water-foot"><span><b>สถานะข้อมูล:</b> <i id="dailyVerified">กำลังตรวจสอบ</i></span><span><b>รายงานครั้งถัดไป:</b> <i id="dailyNext">–</i></span></div>
+          </section>
           <article class="card nationwide-indicators"><div class="card-head"><div><h2>ตัวชี้วัดเฝ้าระวังทั่วประเทศ</h2><span>เฉพาะสถานีที่สัมพันธ์กับพื้นที่นิคมฯ</span></div></div><div class="bars"><div class="barrow"><span>ฝนสูงสุด 24 ชม.</span><div class="track"><div class="bar" id="rainBar"></div></div><b id="outRain"></b></div><div class="barrow"><span>นิคมฯ ใกล้ระดับน้ำผิดปกติ</span><div class="track"><div class="bar teal" id="criticalBar"></div></div><b id="outCritical2"></b></div><div class="barrow"><span>สถานีที่ต้องติดตาม</span><div class="track"><div class="bar" id="routeBar"></div></div><b id="outRoute2"></b></div><div class="source-note"><b>สถานะข้อมูล:</b> <span id="outVerify1"></span><br><b>รายงานครั้งถัดไป:</b> <span id="outNext"></span></div></div></article>
           
         </div>
@@ -727,6 +765,34 @@ button,input,select,textarea{font-family:"Sarabun",sans-serif!important}
         alert("ไม่สามารถดาวน์โหลด PNG ได้ กรุณาเปิดภาพเต็มแล้วบันทึกภาพ");
       }
     });
+</script>
+
+<script>
+(function(){
+ function textOf(id){const node=document.getElementById(id);return node&&node.textContent.trim()?node.textContent.trim():"–";}
+ function numericValue(value){const match=String(value||"").replace(/,/g,"").match(/-?\d+(?:\.\d+)?/);return match?Number(match[0]):0;}
+ function syncDailyWaterReport(){
+  const rain=textOf("outRain"),critical=textOf("outCritical2"),stations=textOf("outRoute2"),trend=textOf("outTrend");
+  document.getElementById("dailyRain").textContent=rain;
+  document.getElementById("dailyCritical").textContent=critical;
+  document.getElementById("dailyStations").textContent=stations;
+  document.getElementById("dailyVerified").textContent=textOf("outVerify1");
+  document.getElementById("dailyNext").textContent=textOf("outNext");
+  if(trend!=="–")document.getElementById("dailyTrend").textContent=trend;
+  const statusCard=document.querySelector(".daily-water-item.status"),status=document.getElementById("dailyStatus");
+  statusCard.classList.remove("watch","critical");
+  if(numericValue(critical)>0){status.textContent="เฝ้าระวังระดับน้ำ";statusCard.classList.add("critical");}
+  else if(numericValue(rain)>=90){status.textContent="เฝ้าระวังฝนหนัก";statusCard.classList.add("watch");}
+  else if(rain==="–"&&critical==="–"){status.textContent="รอข้อมูลล่าสุด";}
+  else{status.textContent="สถานการณ์ปกติ";}
+ }
+ function initDailyWaterReport(){
+  const now=new Date();document.getElementById("dailyReportDate").textContent="ข้อมูลวันที่ "+now.toLocaleDateString("th-TH",{day:"numeric",month:"short",year:"numeric"});
+  ["outRain","outCritical2","outRoute2","outVerify1","outNext","outTrend"].forEach(function(id){const node=document.getElementById(id);if(node)new MutationObserver(syncDailyWaterReport).observe(node,{childList:true,subtree:true,characterData:true});});
+  syncDailyWaterReport();setTimeout(syncDailyWaterReport,1500);setTimeout(syncDailyWaterReport,5000);
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",initDailyWaterReport);else initDailyWaterReport();
+})();
 </script>
 </body>
 </html>
