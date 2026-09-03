@@ -117,7 +117,6 @@ function fireEstateNames(){
 }
 function syncFireEstateOptions(){var list=document.getElementById('fireEstateOptions'),status=document.getElementById('fireEstateStatus');if(!list)return;if(!(records||[]).length){if(status&&!status.className)status.textContent='กำลังโหลดรายชื่อนิคมอุตสาหกรรมและข้อมูลตำแหน่ง…';return}var names=fireEstateNames();list.innerHTML=names.map(function(name){return '<option value="'+name.replace(/"/g,'&quot;')+'"></option>'}).join('');if(status&&!status.className)status.textContent=names.length?'พร้อมค้นหา '+names.length.toLocaleString('th-TH')+' พื้นที่ — พิมพ์ชื่อเต็มหรือชื่อย่อได้':'โหลดข้อมูลตำแหน่งแล้ว แต่ไม่พบฟิลด์ชื่อนิคมอุตสาหกรรม'}
 async function loadFireSupportRest(){
-  if((records||[]).length)return;
   var status=document.getElementById('fireEstateStatus');if(status){status.textContent='กำลังเชื่อมต่อฐานข้อมูลตำแหน่ง กนอ.…';status.className='loading'}
   var loaded=[];
   try{
