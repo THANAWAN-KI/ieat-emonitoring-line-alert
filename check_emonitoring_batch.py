@@ -4,20 +4,15 @@
 Policy:
 - Mon-Fri 08:30-15:30: fetch latest source data and send to all 3 operation groups.
 - 16:30: fetch latest source data and send daily summary to all 3 operation groups.
-- GitHub cron has retry triggers at :30, :40 and :50.
-- A successful scheduled slot is recorded so retry triggers never send duplicates.
+- Scheduled jobs that start late/outside the allowed Thai-time window are discarded.
 """
 
 from __future__ import annotations
 
-import json
 import os
 import sys
-from pathlib import Path
 
 import check_emonitoring as base
-
-SCHEDULE_STATE_FILE = Path("docs/schedule_state.json")
 
 
 def build_preview_events() -> list[dict]:
@@ -60,44 +55,26 @@ def build_hourly_alarm_events(alert_stations: list[dict]) -> list[dict]:
     ]
 
 
-def load_schedule_state() -> dict:
-    if not SCHEDULE_STATE_FILE.exists():
-        return {}
-    try:
-        data = json.loads(SCHEDULE_STATE_FILE.read_text(encoding="utf-8"))
-        return data if isinstance(data, dict) else {}
-    except (OSError, json.JSONDecodeError):
-        return {}
+def scheduled_run_is_allowed(current_time) -> bool:
+    """Allow scheduled LINE delivery only near the intended Thai :30 slots.
 
-
-def save_schedule_state(slot_key: str) -> None:
-    state = load_schedule_state()
-    state["last_successful_slot"] = slot_key
-    state["updated_at"] = base.now_thailand().isoformat()
-    SCHEDULE_STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
-    SCHEDULE_STATE_FILE.write_text(
-        json.dumps(state, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
-
-
-def scheduled_slot_key(current_time) -> str:
-    """Return one logical Thai-time slot for all retry cron triggers."""
+    This is the final safety gate. If GitHub starts an old/queued cron hours late,
+    the job exits without sending LINE.
+    """
     schedule = os.getenv("EMONITORING_SCHEDULE", "").strip()
     if not schedule:
-        return ""  # manual dispatch / push test: do not suppress
+        return True  # manual workflow_dispatch remains available for explicit tests
 
-    # Retry schedules share the same UTC hour. Convert that hour to the intended Thai slot.
-    parts = schedule.split()
-    if len(parts) < 2:
-        return ""
-    try:
-        utc_hour = int(parts[1])
-    except ValueError:
-        return ""
+    if current_time.weekday() >= 5:
+        return False
 
-    thai_hour = (utc_hour + 7) % 24
-    return f"{current_time.date().isoformat()}T{thai_hour:02d}:30"
+    # Scheduled delivery is only 08:30 through 16:30 Thailand time.
+    if not (8 <= current_time.hour <= 16):
+        return False
+
+    # GitHub may start a scheduled run a few minutes late. Accept only the :30 slot
+    # and a small 15-minute grace period; never send stale afternoon alerts at night.
+    return 30 <= current_time.minute <= 45
 
 
 def main() -> int:
@@ -109,17 +86,16 @@ def main() -> int:
         success = base.send_zone_event_reports(build_preview_events())
         return 0 if success else 1
 
+    if not scheduled_run_is_allowed(current_time):
+        print(
+            f"BLOCKED: scheduled job เริ่มล่าช้าหรือนอกเวลาส่ง "
+            f"({current_time.strftime('%Y-%m-%d %H:%M:%S')} เวลาไทย) — ไม่ส่ง LINE"
+        )
+        return 0
+
     if current_time.weekday() >= 5:
         print("วันเสาร์-อาทิตย์ — ไม่ส่ง LINE")
         return 0
-
-    slot_key = scheduled_slot_key(current_time)
-    if slot_key:
-        state = load_schedule_state()
-        if state.get("last_successful_slot") == slot_key:
-            print(f"รอบ {slot_key} ส่งสำเร็จไปแล้ว — retry นี้ไม่ส่งซ้ำ")
-            return 0
-        print(f"Scheduled logical slot: {slot_key}")
 
     daily_summary_mode = run_mode == "daily_summary"
 
@@ -153,11 +129,9 @@ def main() -> int:
             print(f"ERROR: {error}")
             return 1
         if not success:
-            print("ERROR: ส่งรายงานสรุปไม่ครบทั้ง 3 กลุ่ม — retry รอบถัดไปจะลองใหม่")
+            print("ERROR: ส่งรายงานสรุปไม่ครบทั้ง 3 กลุ่ม")
             return 1
         base.save_alert_state(all_stations)
-        if slot_key:
-            save_schedule_state(slot_key)
         print("ส่งรายงานสรุปครบทั้ง 3 กลุ่มสำเร็จ")
         return 0
 
@@ -171,12 +145,10 @@ def main() -> int:
         return 1
 
     if not success:
-        print("ERROR: ส่งรายงานรายชั่วโมงไม่ครบทั้ง 3 กลุ่ม — retry รอบถัดไปจะลองใหม่")
+        print("ERROR: ส่งรายงานรายชั่วโมงไม่ครบทั้ง 3 กลุ่ม")
         return 1
 
     base.save_alert_state(all_stations)
-    if slot_key:
-        save_schedule_state(slot_key)
     print("ส่งรายงานประจำชั่วโมงครบทั้ง 3 กลุ่มสำเร็จ")
     return 0
 
