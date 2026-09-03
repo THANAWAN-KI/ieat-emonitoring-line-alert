@@ -25,6 +25,13 @@ body{background:#fff}
 .section-title{color:#000;border:1px solid #000;border-bottom:0;background:#e8e8e8;margin-bottom:0;padding:7px 10px;font-size:20px}
 .section-title+.company,.section-title+.map-weather,.section-title+.support-grid{margin-top:0}
 .note{background:#fff}
+
+/* Embedded fire-page fit: no inner editor or report scrollbars */
+.workspace{max-width:1440px!important;grid-template-columns:minmax(300px,340px) 1050px!important;gap:16px!important;padding:0 8px!important}
+.editor{position:static!important;top:auto!important;max-height:none!important;overflow:visible!important}
+.report-wrap{overflow:visible!important;padding-bottom:0!important}
+@media(max-width:1050px){.workspace{display:block!important;max-width:1050px!important;padding:0!important}.editor{margin-bottom:14px!important}.report-wrap{padding:0!important;overflow-x:auto!important}}
+
 </style></head>
 <body><div class="loading" id="loading">กำลังจัดทำรายงาน PNG…</div>
 <header class="top"><div><h1>IEAT DSS — จัดทำรายงานเหตุฉุกเฉิน</h1><span>แก้ไขข้อมูลด้านซ้าย ผลลัพธ์ในรายงานจะเปลี่ยนทันที</span></div><div class="top-actions"><button class="secondary" id="resetBtn">ล้างข้อมูล</button><button class="primary" id="pngBtn">ดาวน์โหลด PNG</button></div></header>
