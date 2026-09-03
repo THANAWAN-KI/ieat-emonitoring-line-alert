@@ -3873,6 +3873,72 @@ def push_line_messages(
     return all_success
 
 
+
+def send_all_zone_hourly_reports(
+    all_stations: list[dict[str, Any]],
+    events: list[dict[str, Any]],
+) -> bool:
+    """ส่งข้อความรายชั่วโมงให้ครบทั้ง 3 Zone ทุกครั้ง
+
+    Zone ที่มี Alarm จะได้รับการ์ดแจ้งเตือนของ Zone นั้น ส่วน Zone ที่ไม่มี
+    Alarm จะได้รับการ์ดสรุป Online/Offline เพื่อให้ทุกกลุ่มมีข้อความทุกชั่วโมง
+    """
+    stations_by_zone: dict[str, list[dict[str, Any]]] = {
+        zone: []
+        for zone in ZONE_GROUP_ENV
+    }
+    events_by_zone: dict[str, list[dict[str, Any]]] = {
+        zone: []
+        for zone in ZONE_GROUP_ENV
+    }
+
+    for station in all_stations:
+        zone = normalize_operation_zone(station.get("zone"))
+        if zone in stations_by_zone:
+            stations_by_zone[zone].append(station)
+
+    for event in events:
+        zone = event_zone(event)
+        if zone not in events_by_zone:
+            print(
+                "WARNING: ข้าม Alarm ที่ไม่สามารถจับคู่ Zone ได้ — "
+                f"สถานี={safe_text(event.get('station_name'))}, "
+                f"Zone={zone or '-'}"
+            )
+            continue
+        events_by_zone[zone].append(event)
+
+    all_success = True
+    for zone, env_name in ZONE_GROUP_ENV.items():
+        group_id = os.getenv(env_name, "").strip()
+        if not group_id:
+            print(f"ERROR: ไม่พบ GitHub Secret {env_name}")
+            all_success = False
+            continue
+
+        zone_events = events_by_zone[zone]
+        if zone_events:
+            messages = build_zone_event_texts(zone, zone_events)
+            report_type = f"แจ้งเตือน {len(zone_events)} เหตุการณ์"
+        else:
+            messages = [
+                build_zone_daily_summary_message(
+                    zone,
+                    stations_by_zone[zone],
+                )
+            ]
+            report_type = "สรุปสถานะ (ไม่พบ Alarm)"
+
+        print(
+            f"{zone}: ส่งรายงานรายชั่วโมง — {report_type} "
+            f"ไปยัง {env_name}"
+        )
+        success = push_line_messages(group_id, messages)
+        all_success = all_success and success
+
+    return all_success
+
+
 def send_zone_event_reports(
     events: list[dict[str, Any]],
 ) -> bool:
