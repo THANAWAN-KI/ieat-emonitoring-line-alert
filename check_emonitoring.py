@@ -3383,9 +3383,8 @@ def latest_station_update(
 def build_zone_daily_summary_message(
     zone: str,
     stations: list[dict[str, Any]],
-    report_title: str = "รายงานประจำวัน e-Monitoring",
 ) -> dict[str, Any]:
-    """สร้างรายงานสถานการณ์ 1 Flex Message ต่อ Zone"""
+    """รายงานประจำวัน 1 Flex Message ต่อ Zone"""
     today_stations = filter_stations_updated_today(stations)
     alert_stations = [
         station
@@ -3572,7 +3571,7 @@ def build_zone_daily_summary_message(
                     "contents": [
                         {
                             "type": "text",
-                            "text": report_title,
+                            "text": "รายงานประจำวัน e-Monitoring",
                             "size": "lg",
                             "weight": "bold",
                             "color": "#000000",
@@ -3747,7 +3746,7 @@ def build_zone_daily_summary_message(
     message = make_flex_message(
         bubble,
         (
-            f"{zone}: {report_title} — "
+            f"{zone}: รายงานประจำวัน e-Monitoring — "
             f"{freshness_title}"
         ),
     )
@@ -3794,52 +3793,6 @@ def send_zone_daily_summaries(
                 build_zone_daily_summary_message(
                     zone,
                     stations,
-                )
-            ],
-        )
-        all_success = all_success and success
-
-    return all_success
-
-
-def send_zone_hourly_summaries(
-    all_stations: list[dict[str, Any]],
-) -> bool:
-    """ส่งภาพรวมทุก Zone ในรอบ 08:30-15:30 แม้ไม่มี Alarm"""
-    grouped: dict[str, list[dict[str, Any]]] = {
-        zone: []
-        for zone in ZONE_GROUP_ENV
-    }
-
-    for station in all_stations:
-        zone = normalize_operation_zone(
-            station.get("zone")
-        )
-        if zone in grouped:
-            grouped[zone].append(station)
-
-    all_success = True
-
-    for zone, stations in grouped.items():
-        env_name = ZONE_GROUP_ENV[zone]
-        group_id = os.getenv(env_name, "").strip()
-
-        if not group_id:
-            print(f"ERROR: ไม่พบ GitHub Secret {env_name}")
-            all_success = False
-            continue
-
-        print(
-            f"{zone}: ส่งรายงานสถานการณ์ประจำชั่วโมง "
-            f"{len(stations)} สถานี ไปยัง {env_name}"
-        )
-        success = push_line_messages(
-            group_id,
-            [
-                build_zone_daily_summary_message(
-                    zone,
-                    stations,
-                    report_title="รายงานสถานการณ์ e-Monitoring",
                 )
             ],
         )
