@@ -10,12 +10,10 @@ on:
         default: false
 
   schedule:
-    # เวลาไทย (UTC+7) วันจันทร์–ศุกร์
-    # รอบหลัก :30 และรอบสำรอง :40 ป้องกัน GitHub ข้าม/หน่วง schedule
-    # 01:30–08:40 UTC = 08:30–15:40 ไทย (สคริปต์กันการส่งซ้ำในแต่ละชั่วโมง)
-    - cron: "30,40 1-8 * * 1-5"
-    # 09:30 และ 09:40 UTC = 16:30/16:40 ไทย: สรุปรายวัน (มีตัวกันส่งซ้ำ)
-    - cron: "30,40 9 * * 1-5"
+    # ตรวจทุก 5 นาที เวลาไทย 08:00–16:59 วันจันทร์–ศุกร์
+    # สคริปต์จะส่งเพียง 1 ครั้งต่อรอบ 08:30–15:30
+    # และส่งรายงานสรุปเพียง 1 ครั้งตั้งแต่ 16:30
+    - cron: "*/5 1-9 * * 1-5"
 
 permissions:
   contents: write
@@ -69,7 +67,8 @@ jobs:
           LINE_GROUP_ID_DEMO_02: ${{ secrets.LINE_GROUP_ID_DEMO_02 }}
           LINE_GROUP_ID_DEMO_03: ${{ secrets.LINE_GROUP_ID_DEMO_03 }}
           LINE_PREVIEW_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.preview_mode || false }}
-          EMONITORING_RUN_MODE: ${{ github.event_name == 'schedule' && contains(fromJSON('["30,40 9 * * 1-5"]'), github.event.schedule) && 'daily_summary' || 'hourly_alert' }}
+          # schedule ให้สคริปต์ตัดสินโหมดจากเวลาไทย เพื่อรองรับรอบ retry ทุก 5 นาที
+          EMONITORING_RUN_MODE: ${{ github.event_name == 'workflow_dispatch' && 'hourly_alert' || '' }}
           PYTHONUNBUFFERED: "1"
           TZ: Asia/Bangkok
         run: python check_emonitoring_batch.py
