@@ -1769,5 +1769,32 @@ button,input,select,textarea{font-family:"Sarabun",sans-serif!important}
       }
     }
   </style>
+  <style>
+    /* Reference-card blue sampled from the supplied design */
+    #warning{
+      --reference-card-blue:#306BEC;
+      --reference-icon-bg:#F7F9FF;
+    }
+    #warning .card.kpi > div > span,
+    #warning .card.kpi strong,
+    #warning .card.kpi .icon,
+    #warning .card.kpi .icon svg,
+    #warning .national-kpi h2,
+    #warning .national-kpi strong,
+    #warning .national-kpi > span{
+      color:var(--reference-card-blue)!important;
+    }
+    #warning .card.kpi .icon,
+    #warning .national-kpi .n-icon{
+      background:var(--reference-icon-bg)!important;
+      box-shadow:none!important;
+    }
+    #warning .national-kpi .n-icon img{
+      filter:brightness(0) saturate(100%) invert(39%) sepia(94%) saturate(2437%) hue-rotate(215deg) brightness(99%) contrast(88%)!important;
+    }
+    #warning .national-kpi .source-link{
+      color:var(--reference-card-blue)!important;
+    }
+  </style>
 </body>
 </html>
