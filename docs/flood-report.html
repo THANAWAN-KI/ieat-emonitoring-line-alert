@@ -635,10 +635,88 @@ button,input,select,textarea{font-family:"Sarabun",sans-serif!important}
 #warning .national-kpi .n-icon{display:grid!important;place-items:center!important}
 #warning .national-kpi .n-icon img{width:40px!important;height:40px!important}
 </style>
+
+<style>
+/* Exact drought-style top composition using the existing flood palette */
+.topbar{margin:14px 16px 0!important;border-radius:14px!important}
+.top-inner{min-height:86px!important;padding:15px 20px!important}
+.flood-head-icon{
+ flex:0 0 42px;width:42px;height:42px;border-radius:50%;
+ display:grid;place-items:center;background:#eef5fd;color:#1655a6;
+ box-shadow:inset 0 0 0 1px #dce9f7
+}
+.flood-head-icon svg{width:27px;height:27px}
+.brand b{font-size:24px!important;color:#1655a6!important}
+.brand span{font-size:13px!important;font-weight:500!important}
+#warning .top-overview-metrics{
+ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ gap:12px!important
+}
+#warning .watch-dashboard-block,#warning .national-situation-block,
+#warning .watch-dashboard-block .grid.kpis,#warning .national-cards-dashboard{
+ display:contents!important
+}
+#warning .card.kpi,#warning .national-kpi{
+ min-height:136px!important;padding:15px 16px!important;
+ border:1px solid #fff!important;border-radius:14px!important;background:#fff!important;
+ box-shadow:0 5px 14px rgba(27,54,84,.07),0 14px 30px rgba(27,54,84,.08)!important
+}
+#warning .card.kpi{
+ display:grid!important;grid-template-columns:44px minmax(0,1fr)!important;
+ grid-template-areas:"klabel klabel" "kicon kvalue"!important;
+ grid-template-rows:auto 1fr!important;gap:10px 8px!important;align-items:center!important
+}
+#warning .card.kpi>div{display:contents!important}
+#warning .card.kpi>div>span{grid-area:klabel!important;font-size:15px!important;font-weight:700!important;align-self:start!important}
+#warning .card.kpi .icon{
+ grid-area:kicon!important;width:38px!important;height:38px!important;border-radius:50%!important;
+ background:#eef5fd!important;box-shadow:none!important
+}
+#warning .card.kpi .icon svg,#warning .card.kpi .icon img{width:27px!important;height:27px!important}
+#warning .card.kpi strong{
+ grid-area:kvalue!important;font-size:34px!important;color:#1655a6!important;
+ margin:0!important;align-self:center!important
+}
+#warning .national-kpi{
+ display:grid!important;grid-template-columns:44px minmax(0,1fr)!important;
+ grid-template-areas:"ntitle ntitle" "nicon nvalue" "nicon nmeta"!important;
+ grid-template-rows:auto 1fr auto!important;gap:5px 8px!important;align-items:center!important
+}
+#warning .national-kpi h2{grid-area:ntitle!important;font-size:15px!important;font-weight:700!important}
+#warning .national-kpi .n-icon{
+ grid-area:nicon!important;width:38px!important;height:38px!important;border-radius:50%!important;
+ background:#eef5fd!important;box-shadow:none!important;align-self:center!important
+}
+#warning .national-kpi .n-icon img{width:30px!important;height:30px!important}
+#warning .national-kpi strong{
+ grid-area:nvalue!important;font-size:34px!important;color:#1655a6!important;margin:0!important
+}
+#warning .national-kpi>span{grid-area:nmeta!important;font-size:12px!important;color:#111!important}
+#warning .national-kpi .source-link{display:none!important}
+#warning .national-cards-dashboard .national-kpi:nth-child(3){display:none!important}
+#warning .card.kpi:after,#warning .national-kpi:after{display:none!important}
+#warning .card.kpi:hover,#warning .national-kpi:hover{
+ transform:translateY(-2px)!important;
+ box-shadow:0 8px 18px rgba(27,54,84,.09),0 18px 36px rgba(27,54,84,.12)!important
+}
+@media(max-width:900px){
+ #warning .top-overview-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:560px){
+ .top-inner{min-height:76px!important;padding:12px!important}
+ .flood-head-icon{width:36px;height:36px;flex-basis:36px}.flood-head-icon svg{width:23px;height:23px}
+ .brand b{font-size:19px!important}.brand span{font-size:11px!important}
+ #warning .top-overview-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+ #warning .card.kpi,#warning .national-kpi{min-height:120px!important;padding:12px!important}
+ #warning .card.kpi>div>span,#warning .national-kpi h2{font-size:12px!important}
+ #warning .card.kpi strong,#warning .national-kpi strong{font-size:27px!important}
+}
+</style>
 </head>
 <body>
   <header class="topbar"><div class="top-inner">
-    <div class="brand"><b>สถานการณ์น้ำของนิคมอุตสาหกรรมทั่วประเทศไทย</b><span>สรุปข้อมูลจากสถานีฝนและระดับน้ำที่อยู่ใกล้พื้นที่นิคมอุตสาหกรรมเท่านั้น</span></div>
+    <span class="flood-head-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M4 20c3.2 0 3.2 2.4 6.4 2.4S13.6 20 16.8 20s3.2 2.4 6.4 2.4S26.4 20 29.6 20M4 25c3.2 0 3.2 2.4 6.4 2.4s3.2-2.4 6.4-2.4 3.2 2.4 6.4 2.4 3.2-2.4 6.4-2.4M8 18V9l8-6 8 6v9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    <div class="brand"><b>สถานการณ์น้ำท่วมของนิคมอุตสาหกรรมทั่วประเทศไทย</b><span>คัดกรองพื้นที่ ติดตามแนวโน้ม และสนับสนุนการเตรียมความพร้อมของนิคมอุตสาหกรรม</span></div>
     <nav class="nav" aria-label="เมนูหลัก">
       <button class="active" data-view="warning">พื้นที่เฝ้าระวัง</button>
       <button data-view="infographic">ส่งออกข้อมูล</button>
