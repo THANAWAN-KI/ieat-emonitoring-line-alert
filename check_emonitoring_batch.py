@@ -277,9 +277,13 @@ def main() -> int:
         return 1
 
     if not success:
-            print("ERROR: ส่งสรุปรายชั่วโมงไม่สำเร็จ")
-            return 1
-        base.save_alert_state(all_stations)
+        print(
+            "ERROR: ส่งรายงานรายชั่วโมงไม่ครบทั้ง 3 Zone — "
+            "ยังไม่บันทึก state เพื่อให้รอบถัดไป retry"
+        )
+        return 1
+
+    base.save_alert_state(all_stations)
         print("ส่ง LINE สรุปสถานะประจำชั่วโมงสำเร็จ")
         return 0
 
