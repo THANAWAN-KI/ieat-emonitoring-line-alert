@@ -225,31 +225,31 @@ def main() -> int:
         print("Dashboard อัปเดตแล้ว")
         return 0
 
-    if not base.zone_routing_enabled():
-        print(
-            "ERROR: LINE Zone routing ยังไม่เปิดใช้งาน "
-            "และ Broadcast ถูกปิดเพื่อป้องกันการส่งข้าม Zone"
-        )
-        return 1
+    if not events:
+        base.save_alert_state(all_stations)
+        print("LINE: ไม่ส่ง — ไม่พบสถานีที่มีค่าพารามิเตอร์ Alarm")
+        print("โควตารอบนี้: 0 ข้อความ")
+        return 0
 
-    print(
-        "รอบรายชั่วโมง: ส่งภาพรวม Online, Offline และ Alarm "
-        "ครบทุก Zone แม้ข้อมูลไม่เปลี่ยนหรือไม่มี Alarm"
-    )
     try:
-        success = base.send_zone_hourly_summaries(
-            all_stations
-        )
+        if base.zone_routing_enabled():
+            print("LINE routing: แยกส่งตามสายปฏิบัติการ")
+            success = base.send_zone_event_reports(events)
+        else:
+            print(
+                "ERROR: LINE Zone routing ยังไม่เปิดใช้งาน "
+                "และ Broadcast ถูกปิดเพื่อป้องกันการส่งข้าม Zone"
+            )
+            success = False
     except RuntimeError as error:
         print(f"ERROR: {error}")
         return 1
-
     if not success:
         print("ERROR: ส่ง LINE ไม่สำเร็จ — ยังไม่บันทึก state เพื่อให้ retry")
         return 1
 
     base.save_alert_state(all_stations)
-    print("ส่งรายงานสถานการณ์ e-Monitoring ประจำชั่วโมงสำเร็จ")
+    print("ส่ง LINE แจ้งค่าพารามิเตอร์ประจำชั่วโมงสำเร็จ")
     print("บันทึก alert_state.json แล้ว")
     print("Dashboard อัปเดตแล้ว")
     return 0
