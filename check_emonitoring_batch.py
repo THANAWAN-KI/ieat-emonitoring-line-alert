@@ -284,27 +284,6 @@ def main() -> int:
         return 1
 
     base.save_alert_state(all_stations)
-        print("ส่ง LINE สรุปสถานะประจำชั่วโมงสำเร็จ")
-        return 0
-
-    try:
-        if base.zone_routing_enabled():
-            print("LINE routing: แยกส่งตามสายปฏิบัติการ")
-            success = base.send_zone_event_reports(events)
-        else:
-            print(
-                "ERROR: LINE Zone routing ยังไม่เปิดใช้งาน "
-                "และ Broadcast ถูกปิดเพื่อป้องกันการส่งข้าม Zone"
-            )
-            success = False
-    except RuntimeError as error:
-        print(f"ERROR: {error}")
-        return 1
-    if not success:
-        print("ERROR: ส่ง LINE ไม่สำเร็จ — ยังไม่บันทึก state เพื่อให้ retry")
-        return 1
-
-    base.save_alert_state(all_stations)
     print("ส่ง LINE รายงานประจำชั่วโมงครบทั้ง 3 Zone สำเร็จ")
     print("บันทึก alert_state.json แล้ว")
     print("Dashboard อัปเดตแล้ว")
