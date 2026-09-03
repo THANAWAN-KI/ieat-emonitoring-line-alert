@@ -135,6 +135,33 @@ body{background:var(--bg);font-family:"Sarabun","Noto Sans Thai",sans-serif}
  .daily-water-grid{grid-template-columns:1fr}.table-section-head{align-items:flex-start}
 }
 
+
+/* export-toolbar-center-2026-09-03 */
+.report-toolbar-copy{flex:1;text-align:center}
+.multi-report-toolbar h1,.report-toolbar-copy h1,
+.multi-report-toolbar p,.report-toolbar-copy>p{
+  font-size:14px!important;
+  line-height:1.55!important;
+}
+.multi-report-toolbar h1,.report-toolbar-copy h1{margin:0!important;font-weight:600!important}
+.multi-report-toolbar p,.report-toolbar-copy>p{margin:2px 0 0!important}
+.report-edit-links{
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+  flex-wrap:wrap!important;
+  gap:8px!important;
+  width:100%!important;
+  margin:10px auto 0!important;
+  text-align:center!important;
+}
+.report-edit-links a{font-size:14px!important}
+@media(max-width:900px){
+  .multi-report-toolbar{flex-direction:column!important;align-items:center!important}
+  .report-toolbar-copy{width:100%}
+  .multi-report-actions{width:100%!important;justify-content:center!important}
+}
+
 </style>
 
   <style id="thaiwater-report-theme">
@@ -803,7 +830,6 @@ button,input,select,textarea{font-family:"Sarabun",sans-serif!important}
 </head>
 <body>
   <header class="topbar"><div class="top-inner">
-    <span class="flood-head-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M4 20c3.2 0 3.2 2.4 6.4 2.4S13.6 20 16.8 20s3.2 2.4 6.4 2.4S26.4 20 29.6 20M4 25c3.2 0 3.2 2.4 6.4 2.4s3.2-2.4 6.4-2.4 3.2 2.4 6.4 2.4 3.2-2.4 6.4-2.4M8 18V9l8-6 8 6v9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
     <div class="brand"><b>สถานการณ์น้ำท่วมของนิคมอุตสาหกรรมทั่วประเทศไทย</b><span>คัดกรองพื้นที่ ติดตามแนวโน้ม และสนับสนุนการเตรียมความพร้อมของนิคมอุตสาหกรรม</span></div>
     <nav class="nav" aria-label="เมนูหลัก">
       <button class="active" data-view="warning">พื้นที่เฝ้าระวัง</button>
