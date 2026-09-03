@@ -402,6 +402,24 @@
         .brand-copy span{font-size:10px!important}
       }
     </style>
+    <style>
+      /* Contact navigation beside the Hub button */
+      .actions .contact-btn{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        min-height:38px;
+        padding:9px 16px;
+        border:1px solid #d9c8e5;
+        border-radius:20px;
+        background:#fff;
+        color:#631a9d;
+        font-size:13px;
+        line-height:1;
+        text-decoration:none;
+      }
+      @media(max-width:650px){.actions .contact-btn{padding:8px 10px;font-size:11px}}
+    </style>
   </head>
   <body>
     <header class="bar">
@@ -415,7 +433,7 @@
           <span><b id="headerDate">กำลังตรวจสอบวันที่</b><small id="headerTime">เวลา --:-- น.</small></span>
         </div>
         <div class="actions">
-          <a class="btn primary hub-btn" href="./hub.html">เข้าสู่หน้า Hub</a>
+          <a class="btn contact-btn" href="./contacts.html">ติดต่อ</a><a class="btn primary hub-btn" href="./hub.html">เข้าสู่หน้า Hub</a>
         </div>
       </div>
     </header>
