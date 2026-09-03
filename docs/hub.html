@@ -423,4 +423,47 @@ footer{padding:20px;font-size:14px}
   .hub-site-brand small{display:none}
 }
 </style>
+<style>
+/* Match Hub identity typography to daily-situation.html */
+.hub-site-header{
+  min-height:70px!important;
+}
+.hub-site-brand{
+  flex:0 1 650px!important;
+  min-width:560px!important;
+  gap:15px!important;
+}
+.hub-site-brand span{min-width:520px!important}
+.hub-site-brand strong{
+  color:#631a9d!important;
+  font-size:22px!important;
+  line-height:1.25!important;
+  font-weight:700!important;
+}
+.hub-site-brand small{
+  margin-top:3px!important;
+  color:#777!important;
+  font-size:13px!important;
+  line-height:1.3!important;
+  font-weight:500!important;
+}
+@media(max-width:1000px){
+  .hub-site-brand{
+    flex:1 1 auto!important;
+    min-width:0!important;
+  }
+  .hub-site-brand span{min-width:0!important}
+  .hub-site-brand strong{font-size:19px!important;white-space:normal!important}
+  .hub-site-brand small{font-size:11px!important;white-space:normal!important}
+}
+@media(max-width:700px){
+  .hub-site-header{min-height:60px!important}
+  .hub-site-brand strong{font-size:16px!important}
+  .hub-site-brand small{display:block!important;font-size:10px!important}
+}
+@media(max-width:420px){
+  .hub-site-brand strong{font-size:14px!important}
+  .hub-site-brand small{display:none!important}
+}
+</style>
 </body></html>
