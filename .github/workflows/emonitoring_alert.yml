@@ -9,20 +9,13 @@ on:
         type: boolean
         default: false
       run_mode:
-        description: "โหมดสำหรับกด Run workflow ทดสอบด้วยตนเอง"
+        description: "โหมดการส่งที่ Cloudflare หรือผู้ใช้เรียก"
         required: false
         type: choice
         options:
           - hourly_alert
           - daily_summary
         default: hourly_alert
-
-  schedule:
-    # จันทร์-ศุกร์ เวลาไทย
-    # 08:30-15:30 = 01:30-08:30 UTC
-    - cron: "30 1-8 * * 1-5"
-    # 16:30 = 09:30 UTC ส่งรายงานสรุปประจำวัน
-    - cron: "30 9 * * 1-5"
 
 permissions:
   contents: write
@@ -52,12 +45,9 @@ jobs:
         run: |
           echo "================================================"
           echo "IEAT e-Monitoring LINE Alert"
-          echo "08:30-15:30: เรียกข้อมูลและส่งรายชั่วโมง"
-          echo "16:30: เรียกข้อมูลและส่งสรุปประจำวัน"
-          echo "Trigger: schedule :30 only"
+          echo "Scheduler: Cloudflare Workers Cron Trigger"
+          echo "Run mode: ${{ inputs.run_mode }}"
           echo "================================================"
-          echo "Event: ${{ github.event_name }}"
-          echo "Schedule: ${{ github.event.schedule }}"
           date
 
       - name: Validate Python files
@@ -92,9 +82,9 @@ jobs:
           LINE_GROUP_ID_DEMO_01: ${{ secrets.LINE_GROUP_ID_DEMO_01 }}
           LINE_GROUP_ID_DEMO_02: ${{ secrets.LINE_GROUP_ID_DEMO_02 }}
           LINE_GROUP_ID_DEMO_03: ${{ secrets.LINE_GROUP_ID_DEMO_03 }}
-          LINE_PREVIEW_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.preview_mode || false }}
-          EMONITORING_SCHEDULE: ${{ github.event.schedule }}
-          EMONITORING_RUN_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.run_mode || (github.event.schedule == '30 9 * * 1-5' && 'daily_summary' || 'hourly_alert') }}
+          LINE_PREVIEW_MODE: ${{ inputs.preview_mode }}
+          EMONITORING_SCHEDULE: ""
+          EMONITORING_RUN_MODE: ${{ inputs.run_mode }}
           PYTHONUNBUFFERED: "1"
           TZ: Asia/Bangkok
         run: python check_emonitoring_batch.py
