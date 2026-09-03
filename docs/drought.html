@@ -85,6 +85,7 @@ const ESTATE_URL="https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/serv
 const months=["มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"];
 const now=new Date();document.getElementById("reportDate").textContent="ข้อมูล ณ วันที่ "+now.getDate()+" "+months[now.getMonth()]+" "+(now.getFullYear()+543);
 let rows=[],filteredRows=[],view;
+const operationSelect=document.getElementById("operationSelect"),estateSelect=document.getElementById("estateSelect"),searchInput=document.getElementById("searchInput"),estateRows=document.getElementById("estateRows"),showBtn=document.getElementById("showBtn"),resetBtn=document.getElementById("resetBtn"),mapStatus=document.getElementById("mapStatus");
 const esc=function(value){return String(value||"").replace(/[&<>"']/g,function(char){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char];});};
 require(["esri/WebMap","esri/views/MapView","esri/layers/FeatureLayer","esri/widgets/Search","esri/widgets/Home","esri/widgets/LayerList","esri/widgets/Legend","esri/widgets/Expand"],function(WebMap,MapView,FeatureLayer,Search,Home,LayerList,Legend,Expand){
  const webmap=new WebMap({portalItem:{id:WEBMAP_ID}});
