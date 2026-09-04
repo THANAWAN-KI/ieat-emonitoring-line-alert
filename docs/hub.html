@@ -116,38 +116,11 @@ body{font-weight:400}
  .tabs{margin-bottom:9px!important}
  .tab{min-width:98px!important;font-size:12px!important}
 }
-</style><style id="hub-reference-header-theme">
-/* Header aligned with information.html reference */
-:root{--muted:#111!important}
-html,body,button,input,select,textarea{color:#111!important;font-size:17px!important}
-.hub-site-header{min-height:78px!important;padding:0 42px!important;background:#fff!important;border:0!important;border-bottom:1px solid #dfe3e7!important;box-shadow:0 2px 8px rgba(31,41,55,.08)!important}
-.hub-site-brand{display:flex!important;align-items:center!important;gap:14px!important;min-width:0!important;flex:1 1 auto!important}
-.hub-site-brand img{width:58px!important;height:50px!important;flex:0 0 58px!important}
-.hub-site-brand span{display:flex!important;align-items:baseline!important;gap:14px!important;min-width:0!important}
-.hub-site-brand strong{color:#111!important;font-size:22px!important;line-height:1.3!important;font-weight:700!important;white-space:nowrap!important}
-.hub-site-brand small{display:block!important;margin:0!important;color:#111!important;font-size:13px!important;line-height:1.3!important;font-weight:400!important;white-space:nowrap!important}
-.hub-header-actions{gap:10px!important}
-.hub-header-actions a{padding:10px 16px!important;border:0!important;border-radius:22px!important;background:#f3f5f7!important;color:#111!important;font-size:15px!important;font-weight:600!important}
-.hub-header-actions .hub-back-link{background:#5b8f32!important;color:#fff!important}
-.page{padding-top:0!important}
-.tabs{height:64px!important;margin:0 -24px 18px!important;padding:0 28px!important;gap:14px!important;border:0!important;border-bottom:1px solid #dfe3e7!important;border-radius:0!important;background:#fff!important}
-.tab{height:64px!important;min-width:120px!important;padding:0 16px!important;color:#111!important;font-size:17px!important;font-weight:500!important}
-.tab.active{color:#3478d4!important;border-bottom:3px solid #3478d4!important}
-.tab img{width:25px!important;height:25px!important}
-.fire-overview-head h1,.panel-head h2,.fire-board-title h2,.fire-map-head h2,.fire-dss-head h2{font-size:22px!important;color:#111!important}
-.fire-overview-head p,.fire-board-title p,.fire-map-head p,.fire-dss-head p,.notice,.dir-head span,.item span,.empty{color:#111!important;font-size:14px!important}
-.fire-support-card small,.fire-support-card span,.fire-readiness span,.fire-readiness small{color:#111!important;font-size:14px!important}
-.fire-support-card strong,.fire-value-row strong{font-size:28px!important}
-.fire-search-panel label,.fire-search-panel input,.fire-search-panel button,.toolbar input,.toolbar select,.toolbar span{font-size:15px!important;color:#111!important}
-.panel-head a,.fire-map-head a,.fire-dss-head a{font-size:14px!important}
-footer{color:#111!important;font-size:15px!important}
-@media(max-width:900px){.hub-site-header{padding:7px 12px!important}.hub-site-brand span{display:block!important}.hub-site-brand strong{font-size:18px!important;white-space:normal!important}.hub-site-brand small{font-size:11px!important;margin-top:2px!important}.hub-header-actions a{padding:8px!important;font-size:12px!important}.tabs{margin:0 -9px 12px!important;padding:0 7px!important}.tab{min-width:108px!important;font-size:15px!important}}
-@media(max-width:520px){.hub-site-brand img{width:45px!important;height:40px!important;flex-basis:45px!important}.hub-site-brand strong{font-size:15px!important}.hub-site-brand small{display:none!important}.hub-header-actions a:not(.hub-back-link){display:none!important}}
 </style></head><body>
 <header class="hub-site-header">
   <a class="hub-site-brand" href="https://oc.ieat.go.th/th" target="_blank" rel="noopener">
     <img src="./assets/TH-Vertical.png" alt="โลโก้การนิคมอุตสาหกรรมแห่งประเทศไทย">
-    <span><strong>ระบบข้อมูลสนับสนุนการรับมือเหตุฉุกเฉิน</strong><small id="hubHeaderDate">ข้อมูล ณ วันที่ —</small></span>
+    <span><strong>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย</strong><small>Environmental Monitoring and Control Center: EMCC</small></span>
   </a>
   <nav class="hub-header-actions" aria-label="เมนูส่วนหัว"><a class="hub-back-link" href="./daily-situation.html">หน้ารายงานข่าว</a><a class="hub-contact-link" href="./information.html">ข้อมูล</a><a class="hub-contact-link" href="./contacts.html">ติดต่อ</a></nav>
 </header><div class="loading" id="loading">กำลังจัดทำภาพ PNG…</div>
@@ -295,9 +268,9 @@ function fireApplyEstate(){
 }
 document.getElementById('fireEstateApply').addEventListener('click',fireApplyEstate);document.getElementById('fireEstateSearch').addEventListener('keydown',function(event){if(event.key==='Enter'){event.preventDefault();fireApplyEstate()}});
 updateFireSupportDashboard();syncFireEstateOptions();window.addEventListener('storage',updateFireSupportDashboard);setInterval(function(){updateFireSupportDashboard();syncFireEstateOptions()},1500);
-const floodView=document.createElement('section');floodView.id='floodView';floodView.className='flood-hub';floodView.innerHTML=`<iframe class="flood-report-frame" src="./flood-report.html?theme=heading-reference-v2" title="ศูนย์ข้อมูลสถานการณ์น้ำและรายงานน้ำท่วม" loading="eager" allowfullscreen></iframe>`;otherView.parentNode.insertBefore(floodView,otherView);
-const droughtView=document.createElement('section');droughtView.id='droughtView';droughtView.className='drought-hub';droughtView.innerHTML=`<iframe class="drought-report-frame" src="./drought.html?theme=heading-reference-v2" title="ศูนย์ข้อมูลสถานการณ์ภัยแล้ง" loading="eager" allowfullscreen></iframe>`;otherView.parentNode.insertBefore(droughtView,otherView);
-const pm25View=document.createElement('section');pm25View.id='pm25View';pm25View.className='pm25-hub';pm25View.innerHTML=`<iframe class="pm25-report-frame" src="./pm25.html?theme=heading-reference-v2" title="ศูนย์ข้อมูลสถานการณ์ฝุ่น PM2.5" loading="eager" allowfullscreen></iframe>`;otherView.parentNode.insertBefore(pm25View,otherView);
+const floodView=document.createElement('section');floodView.id='floodView';floodView.className='flood-hub';floodView.innerHTML=`<iframe class="flood-report-frame" src="./flood-report.html?theme=fire-heading-20260904" title="ศูนย์ข้อมูลสถานการณ์น้ำและรายงานน้ำท่วม" loading="eager" allowfullscreen></iframe>`;otherView.parentNode.insertBefore(floodView,otherView);
+const droughtView=document.createElement('section');droughtView.id='droughtView';droughtView.className='drought-hub';droughtView.innerHTML=`<iframe class="drought-report-frame" src="./drought.html?theme=fire-heading-20260904" title="ศูนย์ข้อมูลสถานการณ์ภัยแล้ง" loading="eager" allowfullscreen></iframe>`;otherView.parentNode.insertBefore(droughtView,otherView);
+const pm25View=document.createElement('section');pm25View.id='pm25View';pm25View.className='pm25-hub';pm25View.innerHTML=`<iframe class="pm25-report-frame" src="./pm25.html?theme=fire-heading-20260904" title="ศูนย์ข้อมูลสถานการณ์ฝุ่น PM2.5" loading="eager" allowfullscreen></iframe>`;otherView.parentNode.insertBefore(pm25View,otherView);
 document.querySelectorAll('.tab').forEach(tab=>tab.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===tab));const type=tab.dataset.type;fireView.style.display='none';fireHub.classList.toggle('show',type==='fire');floodView.classList.toggle('show',type==='flood');droughtView.classList.toggle('show',type==='drought');pm25View.classList.toggle('show',type==='pm25');otherView.classList.toggle('show',!['fire','flood','drought','pm25'].includes(type));if(!['fire','flood','drought','pm25'].includes(type))otherTitle.textContent=labels[type]});
 </script>
 <style>
@@ -614,4 +587,4 @@ footer{padding:20px;font-size:14px}
 </style>
 
 
-<script>const hubHeaderDate=document.getElementById("hubHeaderDate");if(hubHeaderDate)hubHeaderDate.textContent="ข้อมูล ณ วันที่ "+new Date().toLocaleDateString("th-TH",{day:"numeric",month:"long",year:"numeric"});</script></body></html>
+</body></html>
