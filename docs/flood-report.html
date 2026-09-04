@@ -1081,6 +1081,44 @@ body,button,input,select,textarea{
       .kpi{border-top-width:3px!important}
     }
   </style>
+
+  <style id="requested-white-cards-red-table-heads">
+    /* การ์ดทั้งหมดใช้พื้นสีขาวตามรูปแบบที่กำหนด */
+    .card,
+    .kpi,
+    .national-alert,
+    .daily-water-report,
+    .daily-water-item,
+    .watch-dashboard-block,
+    .warning-area-panel,
+    .warning-map-card,
+    .flash-flood-kpi,
+    .warning-summary,
+    .warning-table,
+    .province-watch,
+    .radar-card,
+    .rain-image-card,
+    .layers,
+    .report,
+    .export-sheet,
+    .export-table-block{
+      background:#fff!important;
+    }
+    .kpi .icon,
+    .national-kpi .n-icon,
+    .daily-water-item,
+    .source-note,
+    .rain-image-info{
+      background:#fff!important;
+    }
+    /* หัวคอลัมน์สถานะและสถานการณ์น้ำ */
+    th.status-column-head,
+    th.water-situation-head{
+      background:#7f1720!important;
+      color:#fff!important;
+      border-bottom-color:#5f0e15!important;
+    }
+  </style>
 </head>
 <body>
   <header class="topbar"><div class="top-inner">
@@ -1162,9 +1200,9 @@ body,button,input,select,textarea{
       <section class="tables-overview-grid">
         <article class="card warning-table focus-data-table estate-watch-table">
           <div class="table-section-head"><div><h2>นิคมอุตสาหกรรมที่เข้าเกณฑ์เฝ้าระวัง</h2><p>จัดลำดับจากสถานีฝนและระดับน้ำผิดปกติภายในรัศมี 30 กิโลเมตร</p></div><span>ข้อมูลล่าสุดจากระบบ</span></div>
-          <div class="table-scroll"><table class="table"><thead><tr><th>ลำดับ</th><th>นิคมอุตสาหกรรม</th><th>สถานีผิดปกติ</th><th>ระยะใกล้ที่สุด</th><th>ฝนสูงสุด</th><th>สถานะ</th></tr></thead><tbody id="estateRanks"><tr><td colspan="6" class="table-empty">กำลังประมวลผลข้อมูล…</td></tr></tbody></table></div>
+          <div class="table-scroll"><table class="table"><thead><tr><th>ลำดับ</th><th>นิคมอุตสาหกรรม</th><th>สถานีผิดปกติ</th><th>ระยะใกล้ที่สุด</th><th>ฝนสูงสุด</th><th class="status-column-head">สถานะ</th></tr></thead><tbody id="estateRanks"><tr><td colspan="6" class="table-empty">กำลังประมวลผลข้อมูล…</td></tr></tbody></table></div>
         </article>
-      <article class="card warning-table focus-data-table station-watch-table"><div class="table-section-head"><div><h2>สถานการณ์น้ำในพื้นที่เฝ้าระวังใกล้นิคมอุตสาหกรรม</h2><p>แสดงสถานีระดับน้ำที่อยู่ใกล้พื้นที่นิคมอุตสาหกรรม เรียงตามระดับความสำคัญ</p></div><span>ข้อมูลล่าสุด</span></div><div class="status-color-legend" aria-label="คำอธิบายสีสถานะ"><span class="critical"><i></i>ต้องติดตามใกล้ชิด</span><span class="warning"><i></i>เฝ้าระวัง</span><span class="normal"><i></i>สถานการณ์ปกติ</span></div><div class="status-color-legend" aria-label="คำอธิบายสีสถานะ"><span class="critical"><i></i>ต้องติดตามใกล้ชิด</span><span class="warning"><i></i>เฝ้าระวัง</span><span class="normal"><i></i>สถานการณ์ปกติ</span></div><div class="table-scroll"><table class="table water-status-table"><thead><tr><th>สถานี</th><th>ระดับน้ำ</th><th>สถานการณ์น้ำ</th><th>เวลา</th></tr></thead><tbody id="stations"><tr><td colspan="4" class="table-empty">กำลังประมวลผลข้อมูล…</td></tr></tbody></table></div></article><article class="card warning-table focus-data-table nearby-watch-table"><div class="table-section-head"><div><h2 contenteditable="true">พื้นที่เฝ้าระวัง 24 ชั่วโมง / 48 ชั่วโมง ใกล้เคียงพื้นที่นิคมฯ</h2><p>พื้นที่คาดการณ์ที่อยู่ใกล้นิคมอุตสาหกรรมภายในรัศมี 30 กิโลเมตร</p></div><span>ข้อมูลคาดการณ์ล่าสุด</span></div><div class="table-scroll"><table class="table"><thead><tr><th>ช่วงเวลา</th><th>จังหวัด</th><th>อำเภอ</th><th>ตำบล</th><th>ฝนสะสม</th><th>นิคมฯ ใกล้ที่สุด</th></tr></thead><tbody id="nearbyWatchRows"><tr><td colspan="6" class="table-empty">กำลังประมวลผลข้อมูล…</td></tr></tbody></table></div></article>
+      <article class="card warning-table focus-data-table station-watch-table"><div class="table-section-head"><div><h2>สถานการณ์น้ำในพื้นที่เฝ้าระวังใกล้นิคมอุตสาหกรรม</h2><p>แสดงสถานีระดับน้ำที่อยู่ใกล้พื้นที่นิคมอุตสาหกรรม เรียงตามระดับความสำคัญ</p></div><span>ข้อมูลล่าสุด</span></div><div class="status-color-legend" aria-label="คำอธิบายสีสถานะ"><span class="critical"><i></i>ต้องติดตามใกล้ชิด</span><span class="warning"><i></i>เฝ้าระวัง</span><span class="normal"><i></i>สถานการณ์ปกติ</span></div><div class="status-color-legend" aria-label="คำอธิบายสีสถานะ"><span class="critical"><i></i>ต้องติดตามใกล้ชิด</span><span class="warning"><i></i>เฝ้าระวัง</span><span class="normal"><i></i>สถานการณ์ปกติ</span></div><div class="table-scroll"><table class="table water-status-table"><thead><tr><th>สถานี</th><th>ระดับน้ำ</th><th class="water-situation-head">สถานการณ์น้ำ</th><th>เวลา</th></tr></thead><tbody id="stations"><tr><td colspan="4" class="table-empty">กำลังประมวลผลข้อมูล…</td></tr></tbody></table></div></article><article class="card warning-table focus-data-table nearby-watch-table"><div class="table-section-head"><div><h2 contenteditable="true">พื้นที่เฝ้าระวัง 24 ชั่วโมง / 48 ชั่วโมง ใกล้เคียงพื้นที่นิคมฯ</h2><p>พื้นที่คาดการณ์ที่อยู่ใกล้นิคมอุตสาหกรรมภายในรัศมี 30 กิโลเมตร</p></div><span>ข้อมูลคาดการณ์ล่าสุด</span></div><div class="table-scroll"><table class="table"><thead><tr><th>ช่วงเวลา</th><th>จังหวัด</th><th>อำเภอ</th><th>ตำบล</th><th>ฝนสะสม</th><th>นิคมฯ ใกล้ที่สุด</th></tr></thead><tbody id="nearbyWatchRows"><tr><td colspan="6" class="table-empty">กำลังประมวลผลข้อมูล…</td></tr></tbody></table></div></article>
       </section>
     </section>
 
@@ -1201,11 +1239,11 @@ body,button,input,select,textarea{
             <header class="sheet-header compact"><div class="sheet-page-label">รายงานหน้า 2</div><h2 contenteditable="true">รายงานสถานการณ์น้ำในพื้นที่เฝ้าระวังใกล้พื้นที่นิคมฯ</h2><p class="shared-report-period" contenteditable="true">ข้อมูลตามช่วงเวลารายงาน</p></header>
             <section class="export-table-block">
               <h3>นิคมอุตสาหกรรมที่เข้าเกณฑ์เฝ้าระวัง</h3>
-              <table class="export-data-table"><thead><tr><th>ลำดับ</th><th>นิคมอุตสาหกรรม</th><th>สถานีผิดปกติ</th><th>ระยะใกล้ที่สุด</th><th>ฝนสูงสุด</th><th>สถานะ</th></tr></thead><tbody id="exportEstateRows"><tr><td colspan="6">กำลังโหลดข้อมูล…</td></tr></tbody></table>
+              <table class="export-data-table"><thead><tr><th>ลำดับ</th><th>นิคมอุตสาหกรรม</th><th>สถานีผิดปกติ</th><th>ระยะใกล้ที่สุด</th><th>ฝนสูงสุด</th><th class="status-column-head">สถานะ</th></tr></thead><tbody id="exportEstateRows"><tr><td colspan="6">กำลังโหลดข้อมูล…</td></tr></tbody></table>
             </section>
             <section class="export-table-block">
               <h3>สถานการณ์น้ำในพื้นที่เฝ้าระวังใกล้นิคมอุตสาหกรรม</h3>
-              <table class="export-data-table"><thead><tr><th>สถานี</th><th>ระดับน้ำ</th><th>สถานการณ์น้ำ</th><th>เวลา</th></tr></thead><tbody id="exportWaterRows"><tr><td colspan="4">กำลังโหลดข้อมูล…</td></tr></tbody></table>
+              <table class="export-data-table"><thead><tr><th>สถานี</th><th>ระดับน้ำ</th><th class="water-situation-head">สถานการณ์น้ำ</th><th>เวลา</th></tr></thead><tbody id="exportWaterRows"><tr><td colspan="4">กำลังโหลดข้อมูล…</td></tr></tbody></table>
             </section>
             <footer class="sheet-footer"><span>ข้อมูลจากสถานีที่อยู่ภายในรัศมี 30 กิโลเมตรจากนิคมฯ</span><span>หน้า 2 / 3</span></footer>
             
