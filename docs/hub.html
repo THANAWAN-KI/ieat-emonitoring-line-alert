@@ -267,8 +267,56 @@ function fireApplyEstate(){
   status.textContent='เติมข้อมูลของ '+estate+' ลงในแบบรายงาน DSS แล้ว สามารถแก้รายละเอียดเหตุและ Export PNG ได้ทันที';status.className='success';
 }
 document.getElementById('fireEstateApply').addEventListener('click',fireApplyEstate);document.getElementById('fireEstateSearch').addEventListener('keydown',function(event){if(event.key==='Enter'){event.preventDefault();fireApplyEstate()}});
+function floodApplyEstate(){
+  var source=document.getElementById('fireEstateSearch'),input=document.getElementById('floodEstateSearch'),status=document.getElementById('floodEstateStatus');
+  source.value=input.value;fireApplyEstate();
+  var fireStatus=document.getElementById('fireEstateStatus');status.textContent=fireStatus.textContent;status.className=fireStatus.className;
+  var data={};try{data=JSON.parse(localStorage.getItem('dss-report')||'{}')||{}}catch(error){}
+  data.event='เหตุน้ำท่วม';localStorage.setItem('dss-report',JSON.stringify(data));updateFireSupportDashboard();
+  var frame=document.getElementById('floodReportFrame');if(frame)frame.src='./flood-report.html?layout=fire-20260904&t='+Date.now();
+}
+document.getElementById('floodEstateApply').addEventListener('click',floodApplyEstate);document.getElementById('floodEstateSearch').addEventListener('keydown',function(event){if(event.key==='Enter'){event.preventDefault();floodApplyEstate()}});
 updateFireSupportDashboard();syncFireEstateOptions();window.addEventListener('storage',updateFireSupportDashboard);setInterval(function(){updateFireSupportDashboard();syncFireEstateOptions()},1500);
-const floodView=document.createElement('section');floodView.id='floodView';floodView.className='flood-hub';floodView.innerHTML=`<iframe class="flood-report-frame" src="./flood-report.html?theme=fire-heading-20260904" title="ศูนย์ข้อมูลสถานการณ์น้ำและรายงานน้ำท่วม" loading="eager" allowfullscreen></iframe>`;otherView.parentNode.insertBefore(floodView,otherView);
+const floodView=document.createElement('section');floodView.id='floodView';floodView.className='flood-hub';floodView.innerHTML=`
+<section class="fire-overview-head">
+  <div><h1>ข้อมูลสนับสนุนกรณีเกิดเหตุน้ำท่วม</h1><p>แก้ไขข้อมูลด้านซ้าย ผลลัพธ์ในรายงานจะเปลี่ยนทันที</p></div>
+</section>
+<section class="fire-dashboard-grid">
+  <article class="fire-support-board">
+    <div class="fire-board-title"><h2>ข้อมูลสนับสนุนที่ใกล้เคียง</h2><p>ค้นหานิคมอุตสาหกรรม แล้วระบบจะคำนวณและเติมข้อมูลลงในรายงานให้อัตโนมัติ</p></div>
+    <section class="fire-estate-search">
+      <label for="floodEstateSearch">ค้นหานิคมอุตสาหกรรม / ท่าเรือฯ</label>
+      <div class="fire-search-row"><input id="floodEstateSearch" list="fireEstateOptions" placeholder="เช่น นิคมอุตสาหกรรมบางปู" autocomplete="off"><button id="floodEstateApply" type="button">ค้นหาและเติมรายงาน</button></div>
+      <p id="floodEstateStatus">เลือกพื้นที่เกิดเหตุเพื่อดึงพิกัดและข้อมูลสนับสนุนที่ใกล้เคียง</p>
+    </section>
+    <div class="fire-support-grid">
+      <div class="fire-support-card hospital"><small>โรงพยาบาลใกล้ที่สุด</small><div class="fire-value-row"><i>✚</i><strong data-fire-value="hospitalDistance">— กม.</strong></div><span data-fire-name="hospitalName">ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
+      <div class="fire-support-card fire-station"><small>สถานีดับเพลิงใกล้ที่สุด</small><div class="fire-value-row"><i>♨</i><strong data-fire-value="fireDistance">— กม.</strong></div><span data-fire-name="fireName">ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
+      <div class="fire-support-card police"><small>สถานีตำรวจใกล้ที่สุด</small><div class="fire-value-row"><i>★</i><strong data-fire-value="policeDistance">— กม.</strong></div><span data-fire-name="policeName">ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
+      <div class="fire-support-card hydrant"><small>หัวจ่ายน้ำดับเพลิง</small><div class="fire-value-row"><i>◆</i><strong data-fire-value="hydrantDistance">— เมตร</strong></div><span data-fire-name="hydrantName">ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
+      <div class="fire-support-card community"><small>ชุมชนในรัศมี 3 กม.</small><div class="fire-value-row"><i>⌂</i><strong data-fire-value="communityDistance">— แห่ง</strong></div><span data-fire-name="communityName">ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
+      <div class="fire-support-card cctv"><small>กล้อง CCTV ใกล้เคียง</small><div class="fire-value-row"><i>●</i><strong data-fire-value="cctvDistance">— จุด</strong></div><span data-fire-name="cctvName">ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></div>
+    </div>
+    <section class="fire-readiness">
+      <div class="fire-readiness-head"><h3>ข้อมูลที่ต้องตรวจสอบก่อนเข้าพื้นที่</h3><span>ใช้ประกอบการประเมินสถานการณ์เบื้องต้น</span></div>
+      <div class="fire-readiness-grid">
+        <div><b>พื้นที่เสี่ยงน้ำท่วม</b><span>ตรวจสอบจุดลุ่มต่ำ ระดับน้ำ และแนวโน้มสถานการณ์</span></div>
+        <div><b>ระบบระบายน้ำ</b><span>ตรวจสอบคลอง ประตูระบายน้ำ และเครื่องสูบน้ำ</span></div>
+        <div><b>เส้นทางเข้า–ออก</b><span>ประเมินเส้นทางที่ใช้งานได้และเส้นทางสำรอง</span></div>
+        <div><b>ไฟฟ้าและสารเคมี</b><span>ตรวจสอบจุดตัดไฟ พื้นที่จัดเก็บ และอุปกรณ์สำรอง</span></div>
+      </div>
+      <div class="fire-hotlines"><span>โทรฉุกเฉิน</span><a href="tel:1784">ปภ. 1784</a><a href="tel:1669">การแพทย์ 1669</a><a href="tel:191">เหตุด่วน 191</a></div>
+    </section>
+  </article>
+  <article class="fire-analysis-panel">
+    <div class="fire-map-head"><div><h2>แผนที่วิเคราะห์</h2><p>สถานการณ์น้ำและพื้นที่เฝ้าระวังใกล้นิคมอุตสาหกรรม</p></div><a href="./flood-report.html" target="_blank" rel="noopener">เปิดเต็มหน้า ↗</a></div>
+    <iframe class="fire-analysis-map" title="แผนที่วิเคราะห์สถานการณ์น้ำท่วม" src="https://experience.arcgis.com/experience/a6b0cc340ae343379c4f66951610f535" loading="eager" allowfullscreen></iframe>
+  </article>
+</section>
+<section class="fire-dss-panel">
+  <div class="fire-dss-head"><h2>IEAT DSS — จัดทำรายงานเหตุฉุกเฉิน</h2><p>แก้ไขข้อมูลและจัดทำรายงานตามรูปแบบมาตรฐาน</p></div>
+  <iframe id="floodReportFrame" class="fire-dss-frame" src="./flood-report.html?layout=fire-20260904" title="IEAT DSS — จัดทำรายงานเหตุฉุกเฉิน" loading="eager" allowfullscreen></iframe>
+</section>`;otherView.parentNode.insertBefore(floodView,otherView);
 const droughtView=document.createElement('section');droughtView.id='droughtView';droughtView.className='drought-hub';droughtView.innerHTML=`<iframe class="drought-report-frame" src="./drought.html?theme=fire-heading-20260904" title="ศูนย์ข้อมูลสถานการณ์ภัยแล้ง" loading="eager" allowfullscreen></iframe>`;otherView.parentNode.insertBefore(droughtView,otherView);
 const pm25View=document.createElement('section');pm25View.id='pm25View';pm25View.className='pm25-hub';pm25View.innerHTML=`<iframe class="pm25-report-frame" src="./pm25.html?theme=fire-heading-20260904" title="ศูนย์ข้อมูลสถานการณ์ฝุ่น PM2.5" loading="eager" allowfullscreen></iframe>`;otherView.parentNode.insertBefore(pm25View,otherView);
 document.querySelectorAll('.tab').forEach(tab=>tab.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===tab));const type=tab.dataset.type;fireView.style.display='none';fireHub.classList.toggle('show',type==='fire');floodView.classList.toggle('show',type==='flood');droughtView.classList.toggle('show',type==='drought');pm25View.classList.toggle('show',type==='pm25');otherView.classList.toggle('show',!['fire','flood','drought','pm25'].includes(type));if(!['fire','flood','drought','pm25'].includes(type))otherTitle.textContent=labels[type]});
