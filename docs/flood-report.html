@@ -2345,5 +2345,117 @@ body .topbar .top-inner .nav button.active:after{display:none!important}
  body .topbar .top-inner .nav button{flex:0 0 auto!important;padding:7px 14px!important;font-size:16px!important}
 }
 </style>
+
+<style>
+/* aligned-map-table-blue-cards-thai-sarabun-v13 */
+html,body,button,input,select,textarea{
+  font-family:"Thai Sarabun New","TH Sarabun New","Sarabun",sans-serif!important
+}
+body,#warning,#infographic{
+  font-family:"Thai Sarabun New","TH Sarabun New","Sarabun",sans-serif!important;
+  font-size:12px!important;font-weight:300!important
+}
+body p,body span,body td,body th,body label,body small,body a{
+  font-family:"Thai Sarabun New","TH Sarabun New","Sarabun",sans-serif!important;
+  font-size:12px!important;font-weight:300!important
+}
+#warning .operations-map{
+  grid-column:2!important;grid-row:1 / span 2!important;position:relative!important;top:auto!important;
+  height:auto!important;min-height:0!important;align-self:stretch!important
+}
+#warning .operations-map iframe{height:100%!important;min-height:0!important}
+#warning .operations-dashboard>.nearby-watch-table{
+  grid-column:2!important;grid-row:3!important;align-self:start!important;margin:0!important
+}
+.dri-chart-section{grid-column:1!important;grid-row:3!important;align-self:start!important}
+#warning .grid.kpis .card.kpi,
+#warning .national-cards-dashboard .national-kpi{
+  background:#d7e4f9!important;border:0!important
+}
+#warning .grid.kpis .card.kpi strong,
+#warning .grid.kpis .card.kpi span:not(.icon),
+#warning .national-cards-dashboard .national-kpi h2,
+#warning .national-cards-dashboard .national-kpi strong,
+#warning .national-cards-dashboard .national-kpi span,
+#warning .national-cards-dashboard .national-kpi a{
+  color:#355ebe!important
+}
+#warning .grid.kpis .card.kpi .icon,
+#warning .national-cards-dashboard .national-kpi .n-icon{
+  color:#355ebe!important;background:transparent!important;border:0!important
+}
+#warning .grid.kpis .card.kpi .icon svg,
+#warning .national-cards-dashboard .national-kpi .n-icon svg{
+  width:28px!important;height:28px!important;fill:#355ebe!important;color:#355ebe!important
+}
+#warning .operations-dashboard>.nearby-watch-table{
+  border:1px solid #7f1d1d!important
+}
+#warning .operations-dashboard>.nearby-watch-table .table{
+  border:1px solid #7f1d1d!important
+}
+#warning .operations-dashboard>.nearby-watch-table .table th{
+  background:#7f1d1d!important;color:#fff!important;border-color:#7f1d1d!important
+}
+#warning .operations-dashboard>.nearby-watch-table .table td{
+  color:#4b1111!important;border-color:#b96a6a!important;background:#fffafa!important
+}
+#warning .national-alert b,
+#warning .daily-water-report h2,
+#warning .nationwide-indicators h2,
+#warning .live-viz-card h2,
+#warning .operations-dashboard>.nearby-watch-table h2,
+#warning .overview-map-label b{
+  font-family:"Thai Sarabun New P","Thai Sarabun New","TH Sarabun New","Sarabun",sans-serif!important;
+  font-size:14px!important;line-height:1.35!important;font-weight:700!important
+}
+#warning .national-alert p,#warning .national-alert a,
+#warning .daily-water-report p,#warning .daily-water-report span,#warning .daily-water-report small,
+#warning .nationwide-indicators span,#warning .live-viz-card p,
+#warning .estate-chart-name,#warning .station-rank-name,
+#warning .operations-dashboard>.nearby-watch-table p,
+#warning .operations-dashboard>.nearby-watch-table td,
+#warning .overview-map-label small{
+  font-family:"Thai Sarabun New","TH Sarabun New","Sarabun",sans-serif!important;
+  font-size:12px!important;font-weight:300!important
+}
+body .topbar .top-inner .nav button{
+  font-family:"Thai Sarabun New","TH Sarabun New","Sarabun",sans-serif!important;
+  font-size:14px!important;font-weight:300!important
+}
+@media(max-width:1250px){
+ #warning .operations-map{grid-column:1!important;grid-row:3!important;min-height:620px!important}
+ #warning .operations-map iframe{min-height:620px!important}
+ .dri-chart-section{grid-column:1!important;grid-row:4!important}
+ #warning .operations-dashboard>.nearby-watch-table{grid-column:1!important;grid-row:5!important}
+}
+</style>
+<script>
+(function(){
+ const icons={
+  estate:'<svg viewBox="0 0 379.709 379.709" aria-hidden="true"><path d="M57.625 312.362c14.944 0 22.979-5.771 29.436-10.408 5.905-4.241 10.57-7.592 20.686-7.592 10.117 0 14.781 3.351 20.687 7.592 6.456 4.637 14.492 10.408 29.436 10.408 14.945 0 22.981-5.771 29.438-10.408 5.906-4.241 10.57-7.592 20.688-7.592 10.117 0 14.781 3.351 20.687 7.592 6.457 4.637 14.492 10.408 29.437 10.408 14.947 0 22.983-5.771 29.44-10.408 5.906-4.241 10.572-7.592 20.69-7.592 10.119 0 14.784 3.351 20.69 7.592 6.457 4.637 14.494 10.408 29.44 10.408 4.142 0 7.5-3.357 7.5-7.5s-3.358-7.5-7.5-7.5c-10.119 0-14.784-3.351-20.691-7.592-6.457-4.638-14.493-10.408-29.439-10.408-.389 0-.772.005-1.149.014v-121.769h20.675c5.165 0 8.031-2.989 8.991-5.786.961-2.797.535-6.916-3.539-10.089L175.88 19.095c-4.427-3.446-11.102-3.446-15.528 0L6.048 139.24c-4.075 3.173-4.5 7.292-3.539 10.089.96 2.797 3.827 5.786 8.991 5.786h20.674v129.533c-6.033-3.058-13.237-5.286-24.674-5.286-4.142 0-7.5 3.357-7.5 7.5s3.358 7.5 7.5 7.5c10.117 0 14.782 3.351 20.688 7.592 6.456 4.637 14.492 10.408 29.437 10.408zM47.174 140.115L168.116 45.94l120.942 94.175v139.743c-3.925 1.981-7.141 4.289-10.249 6.521-5.906 4.241-10.572 7.592-20.69 7.592-10.117 0-14.781-3.351-20.687-7.592-6.106-4.385-13.624-9.785-27.065-10.358V250.9c.009-.741.088-18.304-11.857-30.397-7.179-7.269-16.9-10.954-28.893-10.954-11.48 0-20.766 3.586-27.6 10.659-11.737 12.147-11.258 30.86-11.099 39.608v29.949c-5.239-2.549-11.574-4.403-20.171-4.403-14.945 0-22.98 5.772-29.437 10.408-5.905 4.241-10.569 7.592-20.685 7.592-5.255 0-9.415-1.156-13.451-3.338V140.115z"/></svg>',
+  rain:'<svg viewBox="0 0 399.922 399.922" aria-hidden="true"><path d="M364.377 118.296c.813-4.526 1.361-9.051 1.361-13.567 0-37.899-30.833-68.732-68.732-68.732-29.176 0-54.735 18.035-64.589 45.214-4.687-.564-9.553-.452-14.972 1.701-.781-13.657-6.62-28.197-16.862-39.229-11.323-12.196-27.234-19.191-43.654-19.191-24.576 0-48.333 13.856-55.501 36.927-18.364 0-36.803 10.875-44.717 27.595-3.071-.372-6.5-.229-9.61-.229C21.129 88.785 0 109.914 0 135.886s21.129 47.101 47.1 47.101h71.646c7.315 20.874 27.203 35.889 50.543 35.889H346.37c29.528 0 53.551-24.023 53.551-53.551 0-21.882-13.538-39.698-35.544-47.029zM95.397 247.555l-22.104 4.736 17.371-30.66c2.234-3.488 1.217-8.127-2.271-10.36s-8.126-1.217-10.361 2.271l-27.593 43.094c-4.575 7.139.031 15.36 9.641 13.451l25.512-5.466-17.628 34.529c-1.884 3.689-.42 8.207 3.27 10.09 3.689 1.883 8.207.42 10.09-3.27l23.998-47.007c4.054-7.94-1.725-13.168-9.925-11.408zm118.98 33.838l-22.104 4.737 17.371-30.66c2.234-3.489 1.217-8.127-2.271-10.361-3.488-2.234-8.126-1.217-10.361 2.272l-27.593 43.094c-4.575 7.139.031 15.36 9.641 13.451l25.512-5.466-17.628 34.529c-1.884 3.689-.42 8.207 3.27 10.09 3.689 1.883 8.207.42 10.09-3.27l23.998-47.007c4.054-7.94-1.725-13.168-9.925-11.409zm118.979-33.838l-22.103 4.736 17.371-30.66c2.234-3.488 1.217-8.127-2.271-10.36-3.488-2.234-8.126-1.217-10.361 2.271l-27.593 43.094c-4.575 7.139.031 15.36 9.641 13.451l25.512-5.466-17.628 34.529c-1.884 3.689-.42 8.207 3.27 10.09 3.689 1.883 8.207.42 10.09-3.27l23.998-47.007c4.054-7.94-1.725-13.168-9.926-11.408z"/></svg>',
+  level:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M4.582 6.01c.69-1.015 2.133-.977 2.862-.101C8.426 7.092 9.81 8.25 12 8.25c2.228 0 3.591-.93 4.519-2.096.721-.907 2.259-1.053 3.015.023.618.88 1.294 1.581 2.628 1.877a.75.75 0 11-.324 1.464c-1.841-.408-2.799-1.436-3.532-2.479C16.988 8.565 15.212 9.75 12 9.75c-2.823 0-4.589-1.533-5.71-2.882C5.076 9.951 4.119 9.085 2.162 9.518a.75.75 0 11-.324-1.464C3.25 7.741 3.926 6.974 4.582 6.01zm0 5c.69-1.015 2.133-.977 2.862-.101C8.426 12.092 9.81 13.25 12 13.25c2.228 0 3.591-.93 4.519-2.096.721-.907 2.259-1.053 3.015.023.618.88 1.294 1.581 2.628 1.877a.75.75 0 11-.324 1.464c-1.841-.408-2.799-1.436-3.532-2.479C16.988 13.565 15.212 14.75 12 14.75c-2.823 0-4.589-1.533-5.71-2.882C5.076 14.951 4.119 14.085 2.162 14.518a.75.75 0 11-.324-1.464c1.412-.313 2.088-1.08 2.744-2.044zm0 5c.69-1.015 2.133-.977 2.862-.101C8.426 17.092 9.81 18.25 12 18.25c2.228 0 3.591-.93 4.519-2.096.721-.907 2.259-1.053 3.015.023.618.88 1.294 1.581 2.628 1.877a.75.75 0 11-.324 1.464c-1.841-.408-2.799-1.436-3.532-2.479C16.988 18.565 15.212 19.75 12 19.75c-2.823 0-4.589-1.533-5.71-2.882C5.076 19.951 4.119 19.085 2.162 19.518a.75.75 0 11-.324-1.464c1.412-.313 2.088-1.08 2.744-2.044z"/></svg>',
+  storm:'<svg viewBox="0 0 441.427 441.427" aria-hidden="true"><path d="M268.124 311.984c0-3.3-2.7-6-6-6h-43.627l78.101-95.225 54.357-24.328a6 6 0 10-4.903-10.953l-47.396 21.2 14.416-40.694 78.829-24.326a6 6 0 10-3.537-11.467l-70.621 21.783 25.924-70.864a6 6 0 10-11.269-4.123l-12.084 33.026-11.526-33.955a6 6 0 10-11.363 3.856l16.596 48.914-30.498 83.324-16.223-49.502 15.273-31.693a6 6 0 10-10.764-5.306l-10.571 21.446-9.906-17.399a6 6 0 10-10.428 5.938l15.202 26.701 12.557 39.916-79.046 93.272h-35.943a6 6 0 000 12h111.231c3.3 0 6-2.701 6-6zM104.523 191.266c30.568-6.916 50.995-35.649 47.515-66.838-3.764-33.729-34.135-58.285-67.714-54.529-27.545 3.071-47.53 28.101-44.683 55.896 2.102 20.077 20.201 34.931 40.041 32.405 15.963-1.778 27.666-16.203 25.385-31.759-1.48-13.262-13.479-22.854-26.733-21.367a6 6 0 101.33 11.926c6.682-.753 12.731 4.086 13.478 10.772.496 4.446-.769 8.819-3.563 12.314-2.793 3.495-6.78 5.692-11.227 6.188-12.062 1.322-22.242-7.569-23.313-19.809-2.613-23.43 14.705-44.288 38.545-46.64 25.108-2.801 48.238 13.637 53.792 38.184.837 4.105.898 8.737.898 8.737H6a6 6 0 000 12l87.27-.001c6.05-.079 11.186-1.166 11.253-1.181z"/></svg>',
+  heavy:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.316 21H5.212l.935-2h1.105zm2.065 2l1.871-4H9.147l-1.87 4zm3.468-1l1.403-3h-1.105l-1.403 3zm3.298-3l-2.339 5h1.105l2.339-5zm3 0l-.935 2h1.104l.936-2zm-11.28-1h-1.43a3.438 3.438 0 010-6.875h.012A3.369 3.369 0 019.4 9.24a5.494 5.494 0 0110.548-.521A4.807 4.807 0 0118.187 18zM3 14.562A2.44 2.44 0 005.438 17h12.75a3.807 3.807 0 001.394-7.351l-.429-.17-.15-.436a4.494 4.494 0 00-8.629.426l-.232.99-.986-.25a2.407 2.407 0 00-.594-.084 2.443 2.443 0 00-2.206 1.42l-.268.581h-.715A2.442 2.442 0 003 14.563z"/></svg>',
+  flood:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.58 8.9l-8-5.71a1 1 0 00-1.16 0l-8 5.71a1 1 0 101.16 1.62l.42-.3V16a1 1 0 001 1c1.52 0 1.84-.5 3-.5s1.48.5 3 .5 1.84-.5 3-.5 1.48.5 3 .5a1 1 0 001-1v-5.78l.42.3a1 1 0 001.16-1.62z"/><path d="M18 21c-1.52 0-1.84-.5-3-.5s-1.48.5-3 .5-1.84-.5-3-.5-1.48.5-3 .5-1.84-.5-3-.5a1 1 0 010-2c1.52 0 1.84.5 3 .5s1.48-.5 3-.5 1.84.5 3 .5 1.84-.5 3-.5 1.48.5 3 .5 1.84-.5 3-.5a1 1 0 010 2c-1.52 0-1.84.5-3 .5z"/></svg>'
+ };
+ function applyIcons(){
+  const k=[...document.querySelectorAll("#warning .grid.kpis .card.kpi .icon")];
+  if(k[0])k[0].innerHTML=icons.estate;if(k[1])k[1].innerHTML=icons.rain;if(k[2])k[2].innerHTML=icons.level;
+  const n=[...document.querySelectorAll("#warning .national-cards-dashboard .national-kpi .n-icon")];
+  if(n[0])n[0].innerHTML=icons.storm;if(n[1])n[1].innerHTML=icons.level;if(n[2])n[2].innerHTML=icons.heavy;if(n[3])n[3].innerHTML=icons.flood;
+ }
+ function removeDuplicateUnits(){
+  document.querySelectorAll("#warning strong,#warning span,#warning b").forEach(function(el){
+    for(const node of el.childNodes)if(node.nodeType===3)node.nodeValue=node.nodeValue.replace(/แห่ง\s*แห่ง/g,"แห่ง");
+  });
+ }
+ function refresh(){applyIcons();removeDuplicateUnits()}
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",refresh);else refresh();
+ window.addEventListener("ieat:data-ready",function(){setTimeout(refresh,0)});
+ setTimeout(refresh,1500);setTimeout(refresh,4500);
+})();
+</script>
 </body>
 </html>
