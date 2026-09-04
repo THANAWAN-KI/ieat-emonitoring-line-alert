@@ -956,7 +956,83 @@ footer,.footer{background:#fff!important;color:#858d97!important;border-color:#e
 .hero p{margin:3px 0 0!important;color:#858d97!important;font-size:11px!important;line-height:1.45!important}
 .hero .updated{margin-left:auto!important;text-align:right!important;font-size:10px!important}.hero .updated strong{font-size:12px!important}
 @media(max-width:700px){.hero{min-height:60px!important;padding:10px 12px!important;display:block!important}.hero h1{font-size:18px!important}.hero .updated{margin-top:8px!important;text-align:left!important}}
-</style></head>
+</style>
+<style>
+/* Flood dashboard visual refresh — 2026-09-04 */
+:root{
+  --purple:#2F6BFF;
+  --blue:#2F6BFF;
+  --cyan:#59C7F3;
+  --teal:#0AA6A6;
+  --ink:#3F4650;
+  --muted:#7B8491;
+  --bg:#FAFBFD;
+  --line:#EEF1F5;
+  --soft:#F4F7FF;
+}
+body{background:#FAFBFD;color:var(--ink)}
+h1,h2,h3,
+.brand b,
+.estate-section-title h2,
+.card-head h2,
+.table-section-head h2,
+.daily-water-head h2,
+.overview-map-label b,
+.national-alert b,
+.report-toolbar h1,
+.report-head h2,
+.executive-title h2,
+.report-section-head h3,
+.layers h2,
+.layer-panel-head h2,
+.warning-summary h2,
+.warning-table h2,
+.flash-flood-kpi h2,
+.province-watch h2,
+.radar-card h2{
+  font-weight:400!important;
+}
+.topbar{border-color:#F1F3F6;box-shadow:0 2px 12px rgba(30,75,150,.05)}
+.brand{border-left-color:#2F6BFF}
+.brand b,.eyebrow{color:#2F6BFF}
+.nav{background:#F2F5FA}
+.nav button.active{background:#2F6BFF;box-shadow:0 4px 12px rgba(47,107,255,.20)}
+.card{
+  border-color:#F0F2F6;
+  border-radius:20px;
+  box-shadow:0 6px 22px rgba(30,75,150,.055);
+}
+.kpi{min-height:112px}
+.kpi .icon,
+.kpis>.kpi:nth-child(2) .icon,
+.kpis>.kpi:nth-child(3) .icon,
+.kpis>.kpi:nth-child(4) .icon{
+  background:#F4F7FF;
+  border-color:#EDF2FF;
+}
+.kpi .icon svg,
+.kpis>.kpi:nth-child(3) .icon svg{color:#2F6BFF}
+.kpi strong,
+.kpis>.kpi:nth-child(2) strong,
+.kpis>.kpi:nth-child(3) strong,
+.kpis>.kpi:nth-child(4) strong,
+.national-kpi strong{
+  color:#2F6BFF;
+  font-weight:400;
+}
+.kpi span,.national-kpi span{color:#2F6BFF}
+.national-kpi h2{color:#3F4650;font-weight:400!important}
+.daily-water-item strong{font-weight:400}
+.table th{font-weight:400;background:#F7F9FC;color:#6F7885}
+.table-section-head>span,.daily-water-head>span{font-weight:400}
+.primary,.download-image,.radar-actions .download{background:#2F6BFF}
+.secondary,.radar-actions .open{background:#F2F6FF;color:#2F6BFF}
+.track{background:#EEF3F8}
+.bar{background:linear-gradient(90deg,#59C7F3,#2384DF)}
+.bar.teal{background:linear-gradient(90deg,#60D6D1,#0AA6A6)}
+.overview-map-label,.map-title,.map-legend{box-shadow:0 5px 18px rgba(30,75,150,.10)}
+</style>
+</head>
 <body>
   <header class="topbar"><div class="top-inner">
     <div class="brand"><b>สถานการณ์น้ำท่วมของนิคมอุตสาหกรรมทั่วประเทศไทย</b><span>คัดกรองพื้นที่ ติดตามแนวโน้ม และสนับสนุนการเตรียมความพร้อมของนิคมอุตสาหกรรม</span></div>
