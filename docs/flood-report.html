@@ -2050,5 +2050,30 @@ body{background:#f5f6f8!important}
   else renderDriChart();
 })();
 </script>
+
+<style>
+/* keep-nearby-watch-table-v7 */
+#warning>.tables-overview-grid{
+  grid-column:1!important;grid-row:4!important;display:block!important;
+  width:100%!important;margin:0!important
+}
+#warning>.tables-overview-grid>.estate-watch-table,
+#warning>.tables-overview-grid>.station-watch-table{display:none!important}
+#warning>.tables-overview-grid>.nearby-watch-table{
+  display:block!important;width:100%!important;max-height:none!important;
+  padding:16px!important;background:#fff!important;border:0!important;border-radius:16px!important;
+  box-shadow:0 5px 18px rgba(39,54,74,.06)!important;overflow:auto!important
+}
+#warning>.tables-overview-grid>.nearby-watch-table .table{width:100%!important;min-width:760px!important}
+#warning>.tables-overview-grid>.nearby-watch-table .table th{
+  background:#7f1d1d!important;color:#fff!important;font-weight:600!important
+}
+#warning>.tables-overview-grid>.nearby-watch-table .table th:first-child{border-radius:9px 0 0 9px}
+#warning>.tables-overview-grid>.nearby-watch-table .table th:last-child{border-radius:0 9px 9px 0}
+#warning>.tables-overview-grid>.nearby-watch-table .table td{font-size:11px!important}
+@media(max-width:1250px){
+ #warning>.tables-overview-grid{grid-row:5!important}
+}
+</style>
 </body>
 </html>
