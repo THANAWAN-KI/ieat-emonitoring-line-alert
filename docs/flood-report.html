@@ -1248,6 +1248,113 @@ body{font-family:"Sarabun","Noto Sans Thai",sans-serif}
   .national-cards{grid-template-columns:1fr}
 }
 </style>
+
+<style>
+/* dashboard-reference-layout-v2 — current page structure */
+html,body{background:#f2f5f8!important}
+body{color:#172033!important}
+.topbar{
+  min-height:50px!important;background:#fff!important;border:0!important;
+  border-bottom:1px solid #dce2e8!important;box-shadow:0 1px 8px rgba(34,48,67,.04)!important
+}
+.top-inner{min-height:50px!important;padding:0 22px!important;align-items:stretch!important}
+.topbar .brand{display:none!important}
+.topbar .nav{margin:0!important;gap:18px!important;align-items:stretch!important}
+.topbar .nav button{
+  position:relative!important;padding:0 17px!important;border:0!important;border-radius:0!important;
+  background:transparent!important;color:#5d6879!important;font-size:14px!important;font-weight:400!important;box-shadow:none!important
+}
+.topbar .nav button.active{color:#548d35!important;font-weight:600!important}
+.topbar .nav button.active:after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:#5b963d
+}
+.container{width:100%!important;max-width:none!important;margin:0!important;padding:14px 12px 20px!important}
+#warning.view.active{
+  display:grid!important;grid-template-columns:minmax(540px,1.22fr) minmax(230px,.35fr) minmax(570px,1.05fr)!important;
+  grid-template-rows:auto auto!important;gap:12px!important;align-items:stretch!important
+}
+#warning>.dashboard-intro{display:none!important}
+#warning>.top-overview-grid{grid-column:1!important;grid-row:1!important;display:block!important;margin:0!important}
+#warning .top-overview-metrics{display:grid!important;gap:12px!important}
+#warning .watch-dashboard-block,#warning .national-situation-block{
+  margin:0!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important
+}
+#warning .kpis{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:10px!important;margin:0!important}
+#warning .kpi{
+  min-height:94px!important;padding:13px 12px!important;display:grid!important;grid-template-columns:42px 1fr!important;
+  gap:10px!important;align-items:center!important;text-align:left!important;background:#fff!important;
+  border:0!important;border-radius:14px!important;box-shadow:0 4px 16px rgba(35,49,67,.055)!important
+}
+#warning .kpi .icon{width:36px!important;height:36px!important;border-radius:50%!important;background:#edf5ff!important;border:0!important}
+#warning .kpi .icon img,#warning .kpi .icon svg{width:24px!important;height:24px!important}
+#warning .kpi strong{font-size:24px!important;line-height:1!important;color:#2773ca!important}
+#warning .kpi span{font-size:11px!important;line-height:1.35!important;color:#5f6978!important;font-weight:400!important}
+#warning .national-cards-dashboard{
+  display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:10px!important;margin:0!important
+}
+#warning .national-kpi{
+  min-height:150px!important;padding:13px!important;text-align:center!important;background:#fff!important;
+  border:0!important;border-radius:14px!important;box-shadow:0 4px 16px rgba(35,49,67,.055)!important
+}
+#warning .national-kpi .n-icon{width:38px!important;height:38px!important;margin:auto!important}
+#warning .national-kpi .n-icon img{width:34px!important;height:34px!important}
+#warning .national-kpi h2{min-height:34px!important;margin:6px 0 0!important;font-size:12px!important;color:#1c2b43!important}
+#warning .national-kpi strong{margin-top:3px!important;font-size:28px!important;color:#2873ca!important}
+#warning .national-kpi span{font-size:10px!important;color:#697386!important}
+#warning .source-link{font-size:9px!important}
+#warning>.operations-section-title{display:none!important}
+#warning>.operations-dashboard{display:contents!important}
+#warning .operations-side{
+  grid-column:2!important;grid-row:1!important;display:grid!important;grid-template-columns:1fr!important;
+  gap:12px!important;margin:0!important
+}
+#warning .operations-side>*{
+  margin:0!important;background:#fff!important;border:0!important;border-radius:14px!important;
+  box-shadow:0 4px 16px rgba(35,49,67,.055)!important
+}
+#warning .national-alert{padding:14px!important;min-height:96px!important}
+#warning .national-alert b{font-size:13px!important;color:#1d3150!important}
+#warning .national-alert p{font-size:10px!important;color:#697386!important}
+#warning .daily-water-report{padding:13px!important}
+#warning .daily-water-report h2,#warning .nationwide-indicators h2{font-size:13px!important}
+#warning .daily-water-report *{font-size:10px}
+#warning .nationwide-indicators{padding:13px!important}
+#warning .operations-map{
+  grid-column:3!important;grid-row:1 / span 2!important;height:calc(100vh - 78px)!important;min-height:650px!important;
+  margin:0!important;overflow:hidden!important;background:#fff!important;border:0!important;border-radius:14px!important;
+  box-shadow:0 4px 16px rgba(35,49,67,.055)!important
+}
+#warning .operations-map iframe{width:100%!important;height:100%!important;min-height:650px!important;border:0!important}
+#warning .overview-map-label{font-size:11px!important;padding:8px 11px!important;border-radius:9px!important}
+#warning>.tables-overview-grid{
+  grid-column:1 / span 2!important;grid-row:2!important;display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;margin:0!important
+}
+#warning>.tables-overview-grid>.warning-table{
+  background:#fff!important;border:0!important;border-radius:14px!important;box-shadow:0 4px 16px rgba(35,49,67,.055)!important;
+  padding:14px!important;max-height:300px!important;overflow:auto!important
+}
+#warning>.tables-overview-grid>.nearby-watch-table{grid-column:1/-1!important}
+#warning .warning-table h2{font-size:13px!important}
+#warning .table{font-size:10px!important}
+#warning .table th{background:#f4f6f8!important;color:#5e6877!important}
+@media(max-width:1250px){
+ #warning.view.active{grid-template-columns:minmax(480px,1fr) 240px!important}
+ #warning .operations-map{grid-column:1/-1!important;grid-row:3!important;height:650px!important}
+ #warning>.tables-overview-grid{grid-row:2!important}
+}
+@media(max-width:820px){
+ .top-inner{overflow-x:auto!important;padding:0 8px!important}.topbar .nav{min-width:max-content!important}
+ .topbar .nav button{padding:0 12px!important;font-size:13px!important}
+ #warning.view.active{display:flex!important;flex-direction:column!important}
+ #warning .kpis{grid-template-columns:1fr!important}
+ #warning .national-cards-dashboard{grid-template-columns:repeat(2,1fr)!important}
+ #warning .operations-side{display:grid!important;grid-template-columns:1fr!important}
+ #warning>.tables-overview-grid{grid-template-columns:1fr!important}
+ #warning .operations-map{height:580px!important;min-height:580px!important}
+ #warning .operations-map iframe{min-height:580px!important}
+}
+</style>
 </head>
 <body>
   <header class="topbar"><div class="top-inner">
