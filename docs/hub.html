@@ -37,7 +37,86 @@ body{font-size:16px;line-height:1.55}
     /* Unified website typography matching the supplied reference */
     html,body,button,input,select,textarea,table{font-family:"Noto Sans Thai","Segoe UI",Tahoma,sans-serif!important}
   </style>
-</head><body>
+
+<style id="gistda-dashboard-theme">
+/* GISTDA Disaster Platform-inspired visual system; data and behavior unchanged */
+:root{--p:#3478d4;--ps:#f1f6fd;--ink:#34383f;--muted:#7f8791;--line:#edf0f4;--bg:#fbfbfc}
+html,body{background:#fbfbfc!important;color:#34383f!important}
+body{font-weight:400}
+.hub-site-header{
+ min-height:50px!important;padding:0 24px!important;background:#fff!important;
+ border:0!important;border-bottom:1px solid #eceff2!important;box-shadow:0 1px 7px rgba(44,62,80,.08)!important
+}
+.hub-site-brand{gap:10px!important;min-width:0!important;flex:0 1 auto!important}
+.hub-site-brand img{width:38px!important;height:34px!important;flex-basis:38px!important}
+.hub-site-brand span{min-width:0!important}
+.hub-site-brand strong{font-size:16px!important;font-weight:500!important;color:#363b43!important;white-space:nowrap}
+.hub-site-brand small{display:inline!important;margin:0 0 0 10px!important;font-size:10px!important;font-weight:400!important;color:#8a919b!important}
+.hub-header-actions{gap:4px!important}
+.hub-header-actions a{padding:7px 13px!important;border:0!important;border-radius:6px!important;background:transparent!important;color:#606873!important;font-size:12px!important;font-weight:500!important}
+.hub-header-actions a:hover{background:#f3f6f9!important;color:#3478d4!important}
+.page{max-width:none!important;padding:0 24px 34px!important}
+.tabs{height:46px;margin:0 0 14px!important;gap:2px!important;background:#fff!important;border:0!important;border-bottom:1px solid #e6e9ed!important;box-shadow:none!important}
+.tab{min-width:105px!important;height:46px!important;padding:0 12px!important;border:0!important;border-bottom:2px solid transparent!important;background:#fff!important;color:#68717c!important;font-size:13px!important;font-weight:400!important}
+.tab img{width:19px!important;height:19px!important}
+.tab:hover,.tab.active{color:#3478d4!important;background:#fff!important;border-bottom-color:#3478d4!important}
+.fire-overview-head{
+ min-height:64px!important;margin:0 0 12px!important;padding:12px 16px!important;
+ background:#fff!important;border:0!important;border-radius:12px!important;box-shadow:0 3px 15px rgba(42,58,75,.06)!important
+}
+.fire-overview-head h1{color:#3478d4!important;font-size:20px!important;font-weight:500!important}
+.fire-overview-head p{color:#858d97!important;font-size:11px!important}
+.fire-dashboard-grid{gap:12px!important}
+.fire-support-board,.fire-analysis-panel,.fire-dss-panel,.panel,.dss-section{
+ background:#fff!important;border:0!important;border-radius:14px!important;
+ box-shadow:0 3px 18px rgba(42,58,75,.07)!important
+}
+.fire-board-title,.fire-map-head,.fire-dss-head,.panel-head{
+ min-height:53px!important;padding:10px 15px!important;border-bottom:1px solid #eff1f4!important;background:#fff!important
+}
+.fire-board-title h2,.fire-map-head h2,.fire-dss-head h2,.panel-head h2{color:#3b4047!important;font-size:16px!important;font-weight:500!important}
+.fire-board-title p,.fire-map-head p,.fire-dss-head p{color:#89919a!important}
+.fire-map-head a,.fire-dss-head a,.panel-head a{
+ padding:7px 11px!important;border:0!important;border-radius:6px!important;
+ background:#f2f6fc!important;color:#3478d4!important;font-weight:500!important
+}
+.fire-search-panel,.toolbar{
+ background:#fafbfc!important;border:1px solid #edf0f3!important;border-radius:11px!important;box-shadow:none!important
+}
+.fire-search-panel input,.fire-search-panel select,.toolbar input,.toolbar select{
+ border:1px solid #dfe4e9!important;border-radius:7px!important;background:#fff!important;color:#40464e!important
+}
+.fire-search-panel button,.toolbar button{
+ border-radius:7px!important;background:#3478d4!important;color:#fff!important;box-shadow:none!important
+}
+.fire-support-grid{gap:10px!important}
+.fire-support-card,.kpi{
+ background:#fff!important;border:1px solid #eef1f4!important;border-radius:11px!important;
+ box-shadow:0 3px 12px rgba(45,60,76,.055)!important;transform:none!important
+}
+.fire-support-card:hover,.kpi:hover{border-color:#cfe0f6!important;box-shadow:0 6px 18px rgba(52,120,212,.11)!important}
+.fire-support-card:before{display:none!important}
+.fire-support-card h3,.fire-support-card b,.fire-support-card strong,.kpi strong{color:#3478d4!important}
+.fire-value-row i,.kpi .ico{background:#f0f6fd!important;color:#3478d4!important}
+.fire-value-row strong{color:#3478d4!important}
+.fire-readiness{background:#fbfcfe!important;border:1px solid #edf0f4!important;border-radius:11px!important;box-shadow:none!important}
+.fire-readiness h3,.fire-readiness strong{color:#3f454d!important}
+.fire-readiness b{color:#3478d4!important}
+.risk-map,.analysis-frame,.fire-analysis-map,.dss-frame,.fire-dss-frame,.other-frame{background:#eef3f8!important}
+.directory{border-color:#edf0f4!important}
+.item:hover{background:#f2f6fc!important}
+.loading{color:#3478d4!important}
+.notice,footer{background:#fff!important;color:#858d97!important;border-color:#edf0f4!important}
+@media(max-width:700px){
+ .hub-site-header{min-height:54px!important;padding:5px 10px!important}
+ .hub-site-brand strong{font-size:13px!important;white-space:normal}
+ .hub-site-brand small{display:none!important}
+ .hub-header-actions a{padding:6px 7px!important;font-size:10px!important}
+ .page{padding:0 9px 24px!important}
+ .tabs{margin-bottom:9px!important}
+ .tab{min-width:98px!important;font-size:12px!important}
+}
+</style></head><body>
 <header class="hub-site-header">
   <a class="hub-site-brand" href="https://oc.ieat.go.th/th" target="_blank" rel="noopener">
     <img src="./assets/TH-Vertical.png" alt="โลโก้การนิคมอุตสาหกรรมแห่งประเทศไทย">
