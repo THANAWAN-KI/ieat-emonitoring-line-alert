@@ -858,6 +858,95 @@ button,input,select,textarea{font:inherit!important}
 }
 </style>
 
+
+<style id="flood-card-table-refinement">
+/* Card and table refinement — 2026-09-04 */
+.topbar .brand b{color:#174f91!important}
+#warning .card.kpi,
+#warning .national-kpi{border-color:transparent!important}
+#warning .top-overview-metrics>.card:nth-of-type(1),
+#warning .grid.kpis>.card:nth-child(1){background:#eaf3ff!important}
+#warning .grid.kpis>.card:nth-child(2){background:#fff5d9!important}
+#warning .grid.kpis>.card:nth-child(3){background:#f2eafb!important}
+#warning .national-cards-dashboard>.national-kpi:nth-child(1){background:#e5f7f8!important}
+#warning .national-cards-dashboard>.national-kpi:nth-child(2){background:#eaf7ee!important}
+#warning .national-cards-dashboard>.national-kpi:nth-child(3){background:#fff0e6!important}
+#warning .national-cards-dashboard>.national-kpi:nth-child(4){background:#edf0ff!important}
+#warning .icon,
+#warning .national-kpi .n-icon,
+#warning .icon:nth-child(n),
+#warning .national-kpi .n-icon:nth-child(n){
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+#warning .icon svg,
+#warning .icon img,
+#warning .national-kpi .n-icon img{background:transparent!important}
+#warning .tables-overview-grid{
+  grid-template-columns:repeat(2,minmax(0px,1fr))!important;
+  align-items:stretch!important;
+}
+#warning .tables-overview-grid>.warning-table{height:100%!important}
+#warning .tables-overview-grid>.nearby-watch-table{grid-column:1/-1!important}
+#warning .table th,
+#warning .table td,
+#warning .table td:nth-child(2){
+  text-align:center!important;
+  vertical-align:middle!important;
+}
+#warning .status-color-legend{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  gap:8px 14px!important;
+  padding:10px 17px!important;
+  background:#f8fafc!important;
+  border-bottom:1px solid var(--flood-line)!important;
+  color:#4b5563!important;
+  font-size:11px!important;
+  line-height:1.35!important;
+}
+#warning .status-color-legend span{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:6px!important;
+}
+#warning .status-color-legend i{
+  display:inline-block!important;
+  width:12px!important;
+  height:12px!important;
+  border-radius:3px!important;
+}
+#warning .status-color-legend .critical i{background:#174f91!important}
+#warning .status-color-legend .warning i{background:#2475d0!important}
+#warning .status-color-legend .normal i{background:#08a7a5!important}
+#warning .water-status-table td:nth-child(3),
+#warning .estate-watch-table td:last-child:has(.water-status-cell){
+  padding:0!important;
+}
+#warning .water-status-cell{
+  width:100%!important;
+  min-height:38px!important;
+  padding:8px 6px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  border:0!important;
+  color:#fff!important;
+}
+#warning .water-status-cell.critical{background:#174f91!important}
+#warning .water-status-cell.warning{background:#2475d0!important}
+#warning .water-status-cell.normal{background:#08a7a5!important}
+#warning .water-status-cell:not(.critical):not(.warning):not(.normal){
+  background:#dcecff!important;
+  color:#174f91!important;
+}
+@media(max-width:1000px){
+  #warning .tables-overview-grid{grid-template-columns:1fr!important}
+  #warning .tables-overview-grid>.nearby-watch-table{grid-column:auto!important}
+}
+</style>
+
 </head>
 <body>
   <header class="topbar"><div class="top-inner">
@@ -927,7 +1016,7 @@ button,input,select,textarea{font:inherit!important}
           <div class="table-section-head"><div><h2>นิคมอุตสาหกรรมที่เข้าเกณฑ์เฝ้าระวัง</h2><p>จัดลำดับจากสถานีฝนและระดับน้ำผิดปกติภายในรัศมี 30 กิโลเมตร</p></div><span>ข้อมูลล่าสุดจากระบบ</span></div>
           <div class="table-scroll"><table class="table"><thead><tr><th>ลำดับ</th><th>นิคมอุตสาหกรรม</th><th>สถานีผิดปกติ</th><th>ระยะใกล้ที่สุด</th><th>ฝนสูงสุด</th><th>สถานะ</th></tr></thead><tbody id="estateRanks"><tr><td colspan="6" class="table-empty">กำลังประมวลผลข้อมูล…</td></tr></tbody></table></div>
         </article>
-      <article class="card warning-table focus-data-table station-watch-table"><div class="table-section-head"><div><h2>สถานการณ์น้ำในพื้นที่เฝ้าระวังใกล้นิคมอุตสาหกรรม</h2><p>แสดงสถานีระดับน้ำที่อยู่ใกล้พื้นที่นิคมอุตสาหกรรม เรียงตามระดับความสำคัญ</p></div><span>ข้อมูลล่าสุด</span></div><div class="table-scroll"><table class="table water-status-table"><thead><tr><th>สถานี</th><th>ระดับน้ำ</th><th>สถานการณ์น้ำ</th><th>เวลา</th></tr></thead><tbody id="stations"><tr><td colspan="4" class="table-empty">กำลังประมวลผลข้อมูล…</td></tr></tbody></table></div></article><article class="card warning-table focus-data-table nearby-watch-table"><div class="table-section-head"><div><h2 contenteditable="true">พื้นที่เฝ้าระวัง 24 ชั่วโมง / 48 ชั่วโมง ใกล้เคียงพื้นที่นิคมฯ</h2><p>พื้นที่คาดการณ์ที่อยู่ใกล้นิคมอุตสาหกรรมภายในรัศมี 30 กิโลเมตร</p></div><span>ข้อมูลคาดการณ์ล่าสุด</span></div><div class="table-scroll"><table class="table"><thead><tr><th>ช่วงเวลา</th><th>จังหวัด</th><th>อำเภอ</th><th>ตำบล</th><th>ฝนสะสม</th><th>นิคมฯ ใกล้ที่สุด</th></tr></thead><tbody id="nearbyWatchRows"><tr><td colspan="6" class="table-empty">กำลังประมวลผลข้อมูล…</td></tr></tbody></table></div></article>
+      <article class="card warning-table focus-data-table station-watch-table"><div class="table-section-head"><div><h2>สถานการณ์น้ำในพื้นที่เฝ้าระวังใกล้นิคมอุตสาหกรรม</h2><p>แสดงสถานีระดับน้ำที่อยู่ใกล้พื้นที่นิคมอุตสาหกรรม เรียงตามระดับความสำคัญ</p></div><span>ข้อมูลล่าสุด</span></div><div class="status-color-legend" aria-label="คำอธิบายสีสถานะ"><span class="critical"><i></i>ต้องติดตามใกล้ชิด</span><span class="warning"><i></i>เฝ้าระวัง</span><span class="normal"><i></i>สถานการณ์ปกติ</span></div><div class="status-color-legend" aria-label="คำอธิบายสีสถานะ"><span class="critical"><i></i>ต้องติดตามใกล้ชิด</span><span class="warning"><i></i>เฝ้าระวัง</span><span class="normal"><i></i>สถานการณ์ปกติ</span></div><div class="table-scroll"><table class="table water-status-table"><thead><tr><th>สถานี</th><th>ระดับน้ำ</th><th>สถานการณ์น้ำ</th><th>เวลา</th></tr></thead><tbody id="stations"><tr><td colspan="4" class="table-empty">กำลังประมวลผลข้อมูล…</td></tr></tbody></table></div></article><article class="card warning-table focus-data-table nearby-watch-table"><div class="table-section-head"><div><h2 contenteditable="true">พื้นที่เฝ้าระวัง 24 ชั่วโมง / 48 ชั่วโมง ใกล้เคียงพื้นที่นิคมฯ</h2><p>พื้นที่คาดการณ์ที่อยู่ใกล้นิคมอุตสาหกรรมภายในรัศมี 30 กิโลเมตร</p></div><span>ข้อมูลคาดการณ์ล่าสุด</span></div><div class="table-scroll"><table class="table"><thead><tr><th>ช่วงเวลา</th><th>จังหวัด</th><th>อำเภอ</th><th>ตำบล</th><th>ฝนสะสม</th><th>นิคมฯ ใกล้ที่สุด</th></tr></thead><tbody id="nearbyWatchRows"><tr><td colspan="6" class="table-empty">กำลังประมวลผลข้อมูล…</td></tr></tbody></table></div></article>
       </section>
     </section>
 
