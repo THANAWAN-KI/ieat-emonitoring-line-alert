@@ -159,7 +159,7 @@ const labels={flood:'แผนที่วิเคราะห์สถาน�
 <style>.actions #exportBtn,.toolbar{display:none!important}.map-grid{grid-template-columns:minmax(780px,1.65fr) minmax(420px,.85fr)}.dashboard-risk-frame{height:900px}.analysis-frame{height:900px}@media(max-width:1250px){.map-grid{grid-template-columns:1fr}.dashboard-risk-frame,.analysis-frame{height:760px}}@media(max-width:700px){.dashboard-risk-frame,.analysis-frame{height:620px}}</style>
 <style>@media(min-width:1251px){.map-grid{grid-template-columns:minmax(680px,1.15fr) minmax(620px,1fr)}}</style>
 <style>
-.fire-hub,.flood-hub,.drought-hub{display:none;width:100%}.fire-hub.show,.flood-hub.show,.drought-hub.show{display:block}.fire-report-frame,.flood-report-frame,.drought-report-frame{display:block;width:100%;height:calc(100vh - 82px);min-height:900px;border:0;background:#f6f6f4;border-radius:14px;box-shadow:0 3px 12px #26364a0a}@media(max-width:850px){.fire-report-frame,.flood-report-frame,.drought-report-frame{height:calc(100vh - 82px);min-height:760px;border-radius:10px}}@media(max-width:560px){.fire-report-frame,.flood-report-frame,.drought-report-frame{height:calc(100vh - 72px);min-height:680px;border-radius:8px}}
+.fire-hub,.flood-hub,.drought-hub{display:none;width:100%}.fire-hub.show,.flood-hub.show,.drought-hub.show{display:block}.fire-report-frame,.flood-report-frame,.drought-report-frame{display:block;width:100%;height:calc(100vh - 82px);min-height:900px;border:0;background:#f6f6f4;border-radius:14px;box-shadow:0 3px 12px #26364a0a}@media(max-width:850px){.fire-report-frame,.flood-report-frame,.drought-report-frame,.pm25-report-frame{height:calc(100vh - 82px);min-height:760px;border-radius:10px}}@media(max-width:560px){.fire-report-frame,.flood-report-frame,.drought-report-frame{height:calc(100vh - 72px);min-height:680px;border-radius:8px}}
 </style>
 <script>
 const fireHub=document.createElement('section');fireHub.id='fireReportView';fireHub.className='fire-hub show';fireHub.innerHTML=`
@@ -268,9 +268,9 @@ function fireApplyEstate(){
 }
 document.getElementById('fireEstateApply').addEventListener('click',fireApplyEstate);document.getElementById('fireEstateSearch').addEventListener('keydown',function(event){if(event.key==='Enter'){event.preventDefault();fireApplyEstate()}});
 updateFireSupportDashboard();syncFireEstateOptions();window.addEventListener('storage',updateFireSupportDashboard);setInterval(function(){updateFireSupportDashboard();syncFireEstateOptions()},1500);
-const floodView=document.createElement('section');floodView.id='floodView';floodView.className='flood-hub';floodView.innerHTML=`<iframe class="flood-report-frame" src="./flood-report.html" title="ศูนย์ข้อมูลสถานการณ์น้ำและรายงานน้ำท่วม" loading="eager" allowfullscreen></iframe>`;otherView.parentNode.insertBefore(floodView,otherView);
-const droughtView=document.createElement('section');droughtView.id='droughtView';droughtView.className='drought-hub';droughtView.innerHTML=`<iframe class="drought-report-frame" src="./drought.html" title="ศูนย์ข้อมูลสถานการณ์ภัยแล้ง" loading="eager" allowfullscreen></iframe>`;otherView.parentNode.insertBefore(droughtView,otherView);
-const pm25View=document.createElement('section');pm25View.id='pm25View';pm25View.className='pm25-hub';pm25View.innerHTML=`<iframe class="pm25-report-frame" src="./pm25.html" title="ศูนย์ข้อมูลสถานการณ์ฝุ่น PM2.5" loading="eager" allowfullscreen></iframe>`;otherView.parentNode.insertBefore(pm25View,otherView);
+const floodView=document.createElement('section');floodView.id='floodView';floodView.className='flood-hub';floodView.innerHTML=`<iframe class="flood-report-frame" src="./flood-report.html?theme=gistda-20260904" title="ศูนย์ข้อมูลสถานการณ์น้ำและรายงานน้ำท่วม" loading="eager" allowfullscreen></iframe>`;otherView.parentNode.insertBefore(floodView,otherView);
+const droughtView=document.createElement('section');droughtView.id='droughtView';droughtView.className='drought-hub';droughtView.innerHTML=`<iframe class="drought-report-frame" src="./drought.html?theme=gistda-20260904" title="ศูนย์ข้อมูลสถานการณ์ภัยแล้ง" loading="eager" allowfullscreen></iframe>`;otherView.parentNode.insertBefore(droughtView,otherView);
+const pm25View=document.createElement('section');pm25View.id='pm25View';pm25View.className='pm25-hub';pm25View.innerHTML=`<iframe class="pm25-report-frame" src="./pm25.html?theme=gistda-20260904" title="ศูนย์ข้อมูลสถานการณ์ฝุ่น PM2.5" loading="eager" allowfullscreen></iframe>`;otherView.parentNode.insertBefore(pm25View,otherView);
 document.querySelectorAll('.tab').forEach(tab=>tab.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===tab));const type=tab.dataset.type;fireView.style.display='none';fireHub.classList.toggle('show',type==='fire');floodView.classList.toggle('show',type==='flood');droughtView.classList.toggle('show',type==='drought');pm25View.classList.toggle('show',type==='pm25');otherView.classList.toggle('show',!['fire','flood','drought','pm25'].includes(type));if(!['fire','flood','drought','pm25'].includes(type))otherTitle.textContent=labels[type]});
 </script>
 <style>
@@ -308,7 +308,7 @@ footer{padding:20px;font-size:14px}
   .map-grid{gap:10px}
   .dashboard-risk-frame,.analysis-frame,.other-frame{height:540px}
   .dss-section{margin-top:10px}.dss-frame{height:580px}
-  .fire-report-frame,.flood-report-frame,.drought-report-frame{height:calc(100vh - 112px);min-height:620px;border-radius:8px}
+  .fire-report-frame,.flood-report-frame,.drought-report-frame,.pm25-report-frame{height:calc(100vh - 112px);min-height:620px;border-radius:8px}
   footer{padding:17px 12px;font-size:12px}
 }
 @media(max-width:420px){
