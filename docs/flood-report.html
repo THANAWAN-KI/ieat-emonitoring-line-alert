@@ -2473,5 +2473,61 @@ html body #warning.view.active .top-overview-grid .top-overview-metrics .nationa
   color:#355ebe!important
 }
 </style>
+
+<style>
+/* floating-map-navigation-v15 */
+.topbar{display:none!important}
+#warning .operations-map,#infographic .report-export-workspace{position:relative!important}
+.floating-map-nav{
+  position:absolute!important;z-index:20!important;top:14px!important;right:14px!important;
+  display:flex!important;align-items:center!important;gap:7px!important;
+  width:auto!important;margin:0!important;padding:5px!important;
+  border:1px solid rgba(255,255,255,.8)!important;border-radius:999px!important;
+  background:rgba(255,255,255,.95)!important;
+  box-shadow:0 5px 18px rgba(34,49,69,.16)!important;
+  backdrop-filter:blur(8px)!important
+}
+body .floating-map-nav button{
+  flex:0 0 auto!important;min-height:34px!important;padding:7px 15px!important;
+  border:0!important;border-radius:999px!important;background:#355ebe!important;color:#fff!important;
+  font-family:"Thai Sarabun New","TH Sarabun New","Sarabun",sans-serif!important;
+  font-size:14px!important;line-height:1.15!important;font-weight:300!important;
+  white-space:nowrap!important;box-shadow:none!important
+}
+body .floating-map-nav button:hover{background:#284ca4!important;color:#fff!important}
+body .floating-map-nav button.active{
+  background:#355ebe!important;color:#fff!important;font-weight:500!important;
+  box-shadow:0 3px 9px rgba(53,94,190,.28)!important
+}
+body .floating-map-nav button.active:after{display:none!important}
+#infographic .floating-map-nav{top:14px!important;right:14px!important}
+@media(max-width:700px){
+ .floating-map-nav{top:9px!important;right:9px!important;gap:4px!important;padding:4px!important}
+ body .floating-map-nav button{min-height:32px!important;padding:6px 11px!important;font-size:13px!important}
+}
+</style>
+<script>
+(function(){
+ function placeNavigation(){
+   const nav=document.querySelector(".nav");
+   const warning=document.getElementById("warning");
+   const infographic=document.getElementById("infographic");
+   if(!nav||!warning||!infographic)return;
+   nav.classList.add("floating-map-nav");
+   const warningActive=warning.classList.contains("active");
+   const target=warningActive?warning.querySelector(".operations-map"):infographic.querySelector(".report-export-workspace");
+   if(target&&nav.parentElement!==target)target.appendChild(nav);
+ }
+ function startFloatingNav(){
+   placeNavigation();
+   ["warning","infographic"].forEach(function(id){
+     const view=document.getElementById(id);
+     if(view)new MutationObserver(placeNavigation).observe(view,{attributes:true,attributeFilter:["class"]});
+   });
+   document.querySelectorAll(".nav button").forEach(function(button){button.addEventListener("click",function(){requestAnimationFrame(placeNavigation)})});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",startFloatingNav);else startFloatingNav();
+})();
+</script>
 </body>
 </html>
