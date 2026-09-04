@@ -1006,10 +1006,85 @@ body,button,input,select,textarea{
 }
 </style>
 
+
+  <style id="gistda-dashboard-redesign">
+    :root{
+      --purple:#075a9c;--blue:#0c75bc;--cyan:#31b7d6;--teal:#24a18f;
+      --ink:#1b2c3c;--muted:#667989;--bg:#eef2f5;--line:#dce4ea;
+      --soft:#f3f7fa;--white:#fff;--red:#df4c45;--orange:#f3a53b;--green:#35a66f;
+      --navy:#07314f;--navy-2:#0a456b;--sky:#dff3fa;
+    }
+    body{background:#eef2f5;color:var(--ink);font-family:"Noto Sans Thai","Sarabun",sans-serif}
+    .topbar{position:sticky;top:0;z-index:50;background:linear-gradient(100deg,#062f4c 0%,#074a72 68%,#075f88 100%);border:0;box-shadow:0 5px 18px rgba(1,31,50,.2);backdrop-filter:none}
+    .top-inner{min-height:74px;padding:10px clamp(18px,3vw,52px);gap:32px}
+    .brand{min-width:340px;border:0;padding:0;display:grid;grid-template-columns:48px 1fr;column-gap:13px;align-items:center}
+    .brand-mark{grid-row:1/3;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:#fff;color:#0875a8;font-weight:800;font-size:13px;letter-spacing:.3px;box-shadow:inset 0 0 0 4px rgba(8,117,168,.12)}
+    .brand b{font-size:20px;color:#fff;line-height:1.35;font-weight:600}
+    .brand span{font-size:13px;color:#c9e7f3;line-height:1.4}
+    .nav{margin-left:auto;padding:0;gap:4px;background:transparent;border-radius:0}
+    .nav button{color:#d9edf5;padding:12px 18px;border-radius:6px;font-size:15px}
+    .nav button:hover{background:rgba(255,255,255,.09);color:#fff}
+    .nav button.active{background:#fff;color:#075a8c;box-shadow:0 3px 12px rgba(0,23,38,.2)}
+    .container{padding:0 clamp(18px,3vw,52px) 52px}
+    .dashboard-intro{margin:0 calc(clamp(18px,3vw,52px)*-1) 22px;padding:25px clamp(18px,3vw,52px) 22px;background:linear-gradient(120deg,#06496f 0%,#0875a3 55%,#13a4bc 100%);color:#fff;position:relative;overflow:hidden}
+    .dashboard-intro:after{content:"";position:absolute;right:-90px;top:-130px;width:360px;height:360px;border:70px solid rgba(255,255,255,.07);border-radius:50%}
+    .dashboard-intro-inner{position:relative;z-index:1;display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+    .dashboard-kicker{display:flex;align-items:center;gap:9px;margin-bottom:6px;font-size:13px;color:#c9f3fb}
+    .dashboard-kicker:before{content:"";width:8px;height:8px;border-radius:50%;background:#58dfae;box-shadow:0 0 0 5px rgba(88,223,174,.15)}
+    .dashboard-intro h1{margin:0;font-size:clamp(24px,2.5vw,34px);line-height:1.28;font-weight:600}
+    .dashboard-intro p{margin:6px 0 0;color:#d9f1f7;font-size:15px}
+    .dashboard-intro-meta{text-align:right;min-width:235px;padding:10px 0}
+    .dashboard-intro-meta b{display:block;font-size:15px}
+    .dashboard-intro-meta span{font-size:13px;color:#c7e7f0}
+    .card,.daily-water-report,.watch-dashboard-block,.warning-area-panel,.warning-map-card{border:1px solid #dce5eb!important;border-radius:10px!important;box-shadow:0 3px 12px rgba(19,51,72,.06)!important;background:#fff}
+    .top-overview-grid{gap:18px!important;margin-top:0!important}
+    .kpis{gap:14px}
+    .kpi{min-height:118px;padding:18px;border-top:4px solid #0c75bc!important}
+    .kpis>.kpi:nth-child(2){border-top-color:#22a7bb!important}
+    .kpis>.kpi:nth-child(3){border-top-color:#f3a53b!important}
+    .kpis>.kpi:nth-child(4){border-top-color:#df4c45!important}
+    .kpi .icon{border:0;background:#eaf5fb;border-radius:8px;width:58px;height:58px}
+    .kpi strong{color:#075a9c;font-size:32px;font-weight:700}
+    .kpi span{color:#536b7c}
+    .card-head{padding:19px 21px 11px;border-bottom:1px solid #e7edf1}
+    .card-head h2,.warning-area-panel h2,.layers h2{color:#17384e;font-weight:600}
+    .flash-flood-kpi{border-left:5px solid #df4c45!important}
+    .flash-flood-kpi:nth-child(2){border-left-color:#f3a53b!important}
+    .warning-periods button,.switches button{border-radius:5px}
+    .warning-periods button.active{background:#df4c45}
+    .warning-periods button[data-period="48h"].active{background:#ed8b28}
+    .warning-map-layout{gap:18px}
+    .warning-map-card{overflow:hidden}
+    .warning-area-panel{padding:20px}
+    .warning-rank-head{background:#eaf1f5;border-radius:5px;color:#496474}
+    .warning-rank-row strong{background:#df4c45;border-radius:4px}
+    .warning-provinces span{border-radius:4px}
+    .table th{background:#e8f0f5;color:#344f61;border-bottom:2px solid #cad8e1;font-weight:600}
+    .table td{background:#fff}
+    .primary,.download-image,.radar-actions .download{background:#0875a8;border-radius:6px}
+    .secondary,.radar-actions .open{background:#e7f1f6;color:#075a8c;border-radius:6px}
+    .report{border-radius:10px}
+    @media(max-width:900px){
+      .top-inner{align-items:flex-start;flex-wrap:wrap;padding:11px 18px}
+      .brand{min-width:0;flex:1;grid-template-columns:40px 1fr}
+      .brand-mark{width:40px;height:40px;font-size:11px}
+      .brand b{font-size:17px}.brand span{display:none}
+      .nav{width:100%;order:3}.nav button{flex:1;padding:10px 8px}
+      .container{padding-left:14px;padding-right:14px}
+      .dashboard-intro{margin-left:-14px;margin-right:-14px;padding:20px 16px}
+      .dashboard-intro-inner{display:block}.dashboard-intro-meta{text-align:left;min-width:0;margin-top:12px;padding:0}
+      .dashboard-intro h1{font-size:24px}
+    }
+    @media(max-width:560px){
+      .top-inner{gap:8px}.brand-mark{display:none}.brand{display:block}
+      .dashboard-intro p{font-size:14px}
+      .kpi{border-top-width:3px!important}
+    }
+  </style>
 </head>
 <body>
   <header class="topbar"><div class="top-inner">
-    <div class="brand"><b>สถานการณ์น้ำท่วมของนิคมอุตสาหกรรม</b><span>คัดกรองพื้นที่ ติดตามแนวโน้ม และสนับสนุนการเตรียมความพร้อมของนิคมอุตสาหกรรม</span></div>
+    <div class="brand"><span class="brand-mark" aria-hidden="true">IEAT</span><b>ศูนย์ติดตามสถานการณ์น้ำ</b><span>การนิคมอุตสาหกรรมแห่งประเทศไทย</span></div>
     <nav class="nav" aria-label="เมนูหลัก">
       <button class="active" data-view="warning">พื้นที่เฝ้าระวัง</button>
       <button data-view="infographic">ส่งออกข้อมูล</button>
@@ -1019,6 +1094,19 @@ body,button,input,select,textarea{
 
   <main class="container">
     <section class="view active" id="warning">
+      <header class="dashboard-intro">
+        <div class="dashboard-intro-inner">
+          <div>
+            <div class="dashboard-kicker">ระบบติดตามและสนับสนุนการตัดสินใจ</div>
+            <h1>สถานการณ์น้ำท่วมของนิคมอุตสาหกรรม</h1>
+            <p>ติดตามพื้นที่เฝ้าระวัง ปริมาณฝน และสถานการณ์น้ำจากข้อมูลล่าสุด</p>
+          </div>
+          <div class="dashboard-intro-meta">
+            <b>ภาพรวมพื้นที่นิคมอุตสาหกรรมทั่วประเทศ</b>
+            <span>ข้อมูลจะปรับปรุงตามแหล่งข้อมูลที่เชื่อมต่อ</span>
+          </div>
+        </div>
+      </header>
       <div class="top-overview-grid">
         <div class="top-overview-metrics">
       <section class="watch-dashboard-block" aria-labelledby="estateRiskTitle">
