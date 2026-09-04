@@ -2075,5 +2075,65 @@ body{background:#f5f6f8!important}
  #warning>.tables-overview-grid{grid-row:5!important}
 }
 </style>
+
+<style>
+/* live-estate-chart-station-ranking-v8 */
+.dri-chart-section{display:grid!important;grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr)!important;gap:12px!important;background:transparent!important;padding:0!important;box-shadow:none!important}
+.live-viz-card{background:#fff;border-radius:16px;box-shadow:0 5px 18px rgba(39,54,74,.06);padding:17px 18px;min-width:0}
+.live-viz-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px}
+.live-viz-head h2{margin:0;font-size:15px;color:#303743;line-height:1.4}
+.live-viz-head p{margin:3px 0 0;font-size:10px;color:#7c8592}
+.live-viz-unit{padding:6px 9px;border-radius:999px;background:#eef6ff;color:#246bb9;font-size:10px;white-space:nowrap}
+.estate-chart-bars{display:grid;gap:11px}
+.estate-chart-row{display:grid;grid-template-columns:minmax(120px,170px) minmax(0,1fr) 58px;gap:9px;align-items:center}
+.estate-chart-name{font-size:11px;color:#4e5866;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.estate-chart-track{height:18px;background:#f0f3f7;border-radius:7px;overflow:hidden}
+.estate-chart-fill{height:100%;min-width:5px;border-radius:7px;background:linear-gradient(90deg,#3581d7,#59a7e9)}
+.estate-chart-value{justify-self:end;padding:4px 7px;min-width:54px;text-align:center;border-radius:7px;background:#eaf3ff;color:#1769c2;font-size:11px}
+.station-ranking{display:grid;gap:7px}
+.station-rank-row{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:9px;align-items:center;padding:8px 9px;border-radius:9px;background:#f6f8fb}
+.station-rank-no{width:25px;height:25px;display:grid;place-items:center;border-radius:50%;background:#1769c2;color:#fff;font-size:10px;font-weight:600}
+.station-rank-name{min-width:0;font-size:10px;color:#4e5866;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.station-rank-name b{display:block;font-size:11px;color:#303743;overflow:hidden;text-overflow:ellipsis}
+.station-rank-value{padding:5px 8px;border-radius:7px;background:#fff0f1;color:#b52336;font-size:11px;font-weight:600;white-space:nowrap}
+@media(max-width:820px){
+ .dri-chart-section{grid-template-columns:1fr!important}
+ .estate-chart-row{grid-template-columns:105px minmax(0,1fr) 52px}
+}
+</style>
+<script>
+(function(){
+  function numberOf(text){const m=String(text||"").replace(/,/g,"").match(/-?\d+(?:\.\d+)?/);return m?Number(m[0]):0}
+  function shortEstate(name){return String(name||"").replace(/^นิคมอุตสาหกรรม/,"นิคมฯ ")}
+  function renderLiveVisuals(){
+    const host=document.querySelector(".dri-chart-section");
+    const estateTable=document.querySelector(".estate-watch-table");
+    const stationTable=document.querySelector(".station-watch-table");
+    if(!host||!estateTable||!stationTable)return;
+    const estates=[...estateTable.querySelectorAll("tbody tr")].map(function(tr){
+      const td=tr.cells;return td.length>=3?{name:td[1].textContent.trim(),value:numberOf(td[2].textContent),status:td[5]?td[5].textContent.trim():""}:null
+    }).filter(Boolean).sort(function(a,b){return b.value-a.value}).slice(0,5);
+    const stations=[...stationTable.querySelectorAll("tbody tr")].map(function(tr){
+      const td=tr.cells;return td.length>=3?{name:td[0].textContent.trim(),value:numberOf(td[1].textContent),valueText:td[1].textContent.trim(),status:td[2].textContent.trim()}:null
+    }).filter(Boolean).sort(function(a,b){return b.value-a.value}).slice(0,5);
+    const maxEstate=Math.max(1,...estates.map(function(x){return x.value}));
+    host.innerHTML=
+      '<article class="live-viz-card"><div class="live-viz-head"><div><h2>5 นิคมอุตสาหกรรมที่เข้าเกณฑ์เฝ้าระวังสูงสุด</h2><p>จัดอันดับจากจำนวนสถานีผิดปกติที่สัมพันธ์กับนิคมฯ</p></div><span class="live-viz-unit">จำนวนสถานี</span></div><div class="estate-chart-bars">'+
+      (estates.length?estates.map(function(row){return '<div class="estate-chart-row"><span class="estate-chart-name" title="'+row.name+'">'+shortEstate(row.name)+'</span><div class="estate-chart-track"><div class="estate-chart-fill" style="width:'+Math.max(4,row.value/maxEstate*100)+'%"></div></div><strong class="estate-chart-value">'+row.value+' สถานี</strong></div>'}).join(""):'<p>ไม่พบข้อมูลนิคมฯ ที่เข้าเกณฑ์</p>')+
+      '</div></article>'+
+      '<article class="live-viz-card"><div class="live-viz-head"><div><h2>สถานการณ์น้ำในพื้นที่เฝ้าระวังใกล้นิคมอุตสาหกรรม</h2><p>5 อันดับสถานีที่มีค่าระดับน้ำสูงสุด</p></div><span class="live-viz-unit">อันดับล่าสุด</span></div><div class="station-ranking">'+
+      (stations.length?stations.map(function(row,i){return '<div class="station-rank-row"><i class="station-rank-no">'+(i+1)+'</i><span class="station-rank-name" title="'+row.name+'"><b>'+row.name+'</b>'+row.status+'</span><strong class="station-rank-value">'+row.valueText+'</strong></div>'}).join(""):'<p>ไม่พบข้อมูลสถานีเฝ้าระวัง</p>')+
+      '</div></article>';
+  }
+  function start(){
+    renderLiveVisuals();
+    const targets=[document.querySelector(".estate-watch-table tbody"),document.querySelector(".station-watch-table tbody")].filter(Boolean);
+    targets.forEach(function(target){new MutationObserver(renderLiveVisuals).observe(target,{childList:true,subtree:true,characterData:true})});
+    setTimeout(renderLiveVisuals,1200);setTimeout(renderLiveVisuals,4000);
+  }
+  window.addEventListener("ieat:data-ready",renderLiveVisuals);
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start);else start();
+})();
+</script>
 </body>
 </html>
