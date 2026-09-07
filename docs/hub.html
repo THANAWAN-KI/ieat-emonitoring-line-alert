@@ -208,7 +208,7 @@ const fireHub=document.createElement('section');fireHub.id='fireReportView';fire
 </section>
 <section class="fire-dss-panel">
   <div class="fire-dss-head"><p>แก้ไขข้อมูลและจัดทำรายงานตามรูปแบบมาตรฐาน</p></div>
-  <iframe id="fireDssFrame" class="fire-dss-frame" src="./dss.html?v=20260907-1455" scrolling="no" title="IEAT DSS — จัดทำรายงานเหตุฉุกเฉิน" loading="eager" allowfullscreen></iframe>
+  <iframe id="fireDssFrame" class="fire-dss-frame" src="./dss.html?v=20260907-1505" scrolling="no" title="IEAT DSS — จัดทำรายงานเหตุฉุกเฉิน" loading="eager" allowfullscreen></iframe>
 </section>`;fireView.parentNode.insertBefore(fireHub,fireView);fireView.style.display='none';
 function updateFireSupportDashboard(){
   let data={};try{data=JSON.parse(localStorage.getItem('dss-report')||'{}')||{}}catch(error){}
