@@ -1372,7 +1372,7 @@ body{color:#172033!important}
         <div class="dashboard-intro-inner">
           <div>
             <div class="dashboard-kicker">ระบบติดตามและสนับสนุนการตัดสินใจ</div>
-            <h1>สถานการณ์น้ำท่วมของนิคมอุตสาหกรรม</h1>
+            <h1>ข้อมูลสนับสนุนกรณีเกิดเหตุน้ำท่วม</h1>
             <p>ติดตามพื้นที่เฝ้าระวัง ปริมาณฝน และสถานการณ์น้ำจากข้อมูลล่าสุด</p>
           </div>
           <div class="dashboard-intro-meta">
@@ -1381,6 +1381,20 @@ body{color:#172033!important}
           </div>
         </div>
       </header>
+      <section class="flood-source-strip" aria-label="แหล่งข้อมูลสนับสนุนการเฝ้าระวังน้ำท่วม">
+        <div class="flood-source-strip-head">
+          <div><h2>ข้อมูลเฝ้าระวังที่เกี่ยวข้องกับพื้นที่นิคมอุตสาหกรรม</h2><p>ประเมินร่วมกับตำแหน่งนิคมอุตสาหกรรมและพื้นที่ต่อเนื่องในรัศมีเฝ้าระวัง</p></div>
+          <span>GISTDA · ThaiWater · IEAT Risk Map</span>
+        </div>
+        <div class="flood-source-links">
+          <a href="https://disaster.gistda.or.th/dashboard" target="_blank" rel="noopener"><b>ภาพรวมน้ำท่วมย้อนหลัง 7 วัน</b><span>พื้นที่และภูมิภาคที่ได้รับผลกระทบจาก GISTDA</span></a>
+          <a href="https://disaster.gistda.or.th/flood" target="_blank" rel="noopener"><b>พื้นที่น้ำท่วมจากดาวเทียม</b><span>ข้อมูลปัจจุบัน น้ำท่วมซ้ำซาก และพื้นที่คาดการณ์</span></a>
+          <a href="https://www.thaiwater.net/new4all" target="_blank" rel="noopener"><b>เตือนภัยน้ำท่วมล่วงหน้า 24 ชม.</b><span>จังหวัดและพื้นที่ที่ต้องเฝ้าระวังจาก ThaiWater</span></a>
+          <a href="https://www.thaiwater.net/water/wl" target="_blank" rel="noopener"><b>ระดับน้ำ</b><span>สถานีและระดับน้ำที่เกี่ยวข้องกับพื้นที่ใกล้นิคมฯ</span></a>
+          <a href="https://www.thaiwater.net/weather/rainfall" target="_blank" rel="noopener"><b>ฝนสะสมและเรดาร์</b><span>ฝนสะสม 24 ชม. ฝนวันนี้ และภาพเรดาร์</span></a>
+          <a href="https://www.thaiwater.net/" target="_blank" rel="noopener"><b>พายุและภาพรวมสถานการณ์น้ำ</b><span>ข้อมูลประกอบการติดตามแนวโน้มและการเตรียมพร้อม</span></a>
+        </div>
+      </section>
       <div class="top-overview-grid">
         <div class="top-overview-metrics">
       <section class="watch-dashboard-block" aria-labelledby="estateRiskTitle">
@@ -2711,6 +2725,87 @@ button,input,select,textarea,th,td{
   .brand b,.dashboard-intro h1,.dashboard-intro-meta b,
   .national-kpi h2,.daily-water-head h2,.table-section-head h2,
   .operations-section-title,.estate-section-title h2,.radar-card h2{font-size:18px!important}
+}
+</style>
+
+<style id="flood-source-strip-final">
+/* Requested flood heading */
+.dashboard-intro h1{
+  color:#005195!important;
+}
+
+/* Authoritative flood-data source panel */
+.flood-source-strip{
+  margin:12px 0!important;
+  padding:14px!important;
+  background:#ffffff!important;
+  border:1px solid #e2e8f0!important;
+  border-radius:10px!important;
+  box-shadow:0 3px 14px rgba(38,55,78,.06)!important;
+}
+.flood-source-strip-head{
+  display:flex!important;
+  align-items:flex-start!important;
+  justify-content:space-between!important;
+  gap:16px!important;
+  margin-bottom:10px!important;
+}
+.flood-source-strip-head h2{
+  margin:0!important;
+  color:#005195!important;
+  font-size:18px!important;
+  line-height:1.3!important;
+  font-weight:400!important;
+}
+.flood-source-strip-head p,
+.flood-source-strip-head > span{
+  margin:3px 0 0!important;
+  color:#667085!important;
+  font-size:16px!important;
+  line-height:1.4!important;
+  font-weight:300!important;
+}
+.flood-source-links{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:9px!important;
+}
+.flood-source-links a{
+  display:block!important;
+  min-height:78px!important;
+  padding:11px 13px!important;
+  background:#f7fafc!important;
+  border:1px solid #e2e8f0!important;
+  border-left:4px solid #005195!important;
+  border-radius:7px!important;
+  color:#111827!important;
+  text-decoration:none!important;
+}
+.flood-source-links a:hover{
+  background:#edf6fb!important;
+  border-color:#9bc4d8!important;
+}
+.flood-source-links b{
+  display:block!important;
+  color:#005195!important;
+  font-size:16px!important;
+  line-height:1.35!important;
+  font-weight:400!important;
+}
+.flood-source-links span{
+  display:block!important;
+  margin-top:3px!important;
+  color:#667085!important;
+  font-size:16px!important;
+  line-height:1.35!important;
+  font-weight:300!important;
+}
+@media(max-width:1050px){
+  .flood-source-links{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:650px){
+  .flood-source-strip-head{display:block!important}
+  .flood-source-links{grid-template-columns:1fr!important}
 }
 </style>
 
