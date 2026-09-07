@@ -2552,16 +2552,19 @@ body .floating-map-nav button.active:after{display:none!important}
  function placeNavigation(){
    const nav=document.querySelector(".nav");
    const warning=document.getElementById("warning");
+   const estateFocus=document.getElementById("estate-focus");
    const infographic=document.getElementById("infographic");
-   if(!nav||!warning||!infographic)return;
+   if(!nav||!warning||!estateFocus||!infographic)return;
    nav.classList.add("floating-map-nav");
-   const warningActive=warning.classList.contains("active");
-   const target=warningActive?warning.querySelector(".operations-map"):infographic.querySelector(".report-export-workspace");
+   let target=null;
+   if(estateFocus.classList.contains("active")) target=estateFocus.querySelector(".estate-focus-intro");
+   else if(warning.classList.contains("active")) target=warning.querySelector(".operations-map");
+   else target=infographic.querySelector(".report-export-workspace");
    if(target&&nav.parentElement!==target)target.appendChild(nav);
  }
  function startFloatingNav(){
    placeNavigation();
-   ["warning","infographic"].forEach(function(id){
+   ["warning","estate-focus","infographic"].forEach(function(id){
      const view=document.getElementById(id);
      if(view)new MutationObserver(placeNavigation).observe(view,{attributes:true,attributeFilter:["class"]});
    });
@@ -2873,6 +2876,18 @@ button,input,select,textarea,th,td{
   .estate-focus-intro,.estate-focus-panel-head{display:block!important}
   .estate-focus-intro>a,.estate-focus-panel-head a{display:inline-flex!important;margin-top:8px!important}
   .estate-focus-panel iframe,.estate-focus-map iframe{height:520px!important}
+}
+</style>
+
+<style id="flood-estate-nav-visible-final">
+/* Keep the three flood-page tabs visible at the top of the focused-estate view */
+#estate-focus .estate-focus-intro{position:relative!important;padding-top:68px!important}
+#estate-focus .floating-map-nav{
+  top:14px!important;left:18px!important;right:auto!important;
+  border-radius:8px!important;background:#ffffff!important;border:1px solid #dfe5ec!important
+}
+#estate-focus .floating-map-nav button{
+  font-size:16px!important;font-weight:300!important
 }
 </style>
 
