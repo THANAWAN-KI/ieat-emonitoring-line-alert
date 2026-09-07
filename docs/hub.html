@@ -117,30 +117,12 @@ body{font-weight:400}
  .tab{min-width:98px!important;font-size:12px!important}
 }
 </style></head><body>
-<header class="ieat-reference-header">
-  <div class="ieat-header-inner">
-    <a class="ieat-identity" href="https://www.ieat.go.th/" target="_blank" rel="noopener">
-      <img src="./assets/TH-Vertical.png" alt="โลโก้การนิคมอุตสาหกรรมแห่งประเทศไทย">
-      <span>
-        <strong>การนิคมอุตสาหกรรมแห่งประเทศไทย (กนอ.)</strong>
-        <small>Industrial Estate Authority of Thailand</small>
-      </span>
-    </a>
-    <div class="ieat-header-right">
-      <div class="ieat-utility">
-        <span>💬 Live Chat</span>
-        <a href="./contacts.html">▣ แจ้งเรื่องร้องเรียน/แจ้งเรื่องร้องเรียนการทุจริต</a>
-        <span>ภาษา</span><span class="ieat-flags">🇹🇭 🇬🇧</span>
-      </div>
-      <nav class="ieat-main-nav" aria-label="เมนูหลัก">
-        <a href="https://www.ieat.go.th/" target="_blank" rel="noopener">เกี่ยวกับ กนอ.</a>
-        <a href="./daily-situation.html">ข่าวสารจาก กนอ.</a>
-        <a href="./information.html">ข้อมูลสนับสนุน</a>
-        <a href="./contacts.html">ติดต่อ</a>
-        <span class="ieat-more">⋮</span><span class="ieat-search">⌕</span>
-      </nav>
-    </div>
-  </div>
+<header class="hub-site-header">
+  <a class="hub-site-brand" href="https://oc.ieat.go.th/th" target="_blank" rel="noopener">
+    <img src="./assets/TH-Vertical.png" alt="โลโก้การนิคมอุตสาหกรรมแห่งประเทศไทย">
+    <span><strong>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย</strong></span>
+  </a>
+  <nav class="hub-header-actions" aria-label="เมนูส่วนหัว"><a class="hub-back-link" href="./daily-situation.html">หน้ารายงานข่าว</a><a class="hub-contact-link" href="./information.html">ข้อมูล</a><a class="hub-contact-link" href="./contacts.html">ติดต่อ</a></nav>
 </header><div class="loading" id="loading">กำลังจัดทำภาพ PNG…</div>
 <main class="page" id="captureArea"><nav class="tabs"><button class="tab active" data-type="fire"><img src="./assets/fire-svgrepo-com.png" alt="ไฟไหม้">ไฟไหม้</button><button class="tab" data-type="flood"><img src="./assets/flood-svgrepo-com.png" alt="น้ำท่วม">น้ำท่วม</button><button class="tab" data-type="drought"><img src="./assets/drought-svgrepo-com.png" alt="ภัยแล้ง">ภัยแล้ง</button><button class="tab" data-type="pm25"><img src="./assets/cloudy-cloud-svgrepo-com.png" alt="ฝุ่น PM2.5">ฝุ่น PM2.5</button></nav>
 <section id="fireView"><div class="kpis" id="kpis"></div><div class="toolbar"><select id="estateFilter"><option value="">ทุกนิคมอุตสาหกรรม</option></select><input id="searchInput" placeholder="ค้นหาชื่อจุดหรือข้อมูลสนับสนุน"><span id="filterSummary">กำลังเชื่อมต่อข้อมูล…</span></div>
@@ -702,61 +684,6 @@ body{font-size:16px!important;line-height:1.5!important}
 @media(max-width:700px){
   .hub-site-brand strong{font-size:19px!important}
   #fireView .fire-overview-head h1{font-size:21px!important}
-}
-</style>
-
-<style id="ieat-reference-header-final">
-/* IEAT header and typography matched to the supplied reference image */
-html,body,button,input,select,textarea,table,
-a,p,span,small,b,strong,label,h1,h2,h3,h4,h5,h6,th,td,footer{
-  font-family:"TH Sarabun New","Sarabun",Tahoma,sans-serif!important;
-}
-body{font-size:18px!important;line-height:1.45!important;color:#222!important}
-.ieat-reference-header{width:100%;background:#fff;border-bottom:1px solid #fff;position:sticky;top:0;z-index:1000}
-.ieat-header-inner{min-height:102px;display:grid;grid-template-columns:minmax(490px,40%) 1fr;max-width:100%;margin:0 auto}
-.ieat-identity{display:flex;align-items:center;gap:12px;padding:8px max(24px,calc((100vw - 1320px)/2));padding-right:20px;background:#fff;color:#000;text-decoration:none;white-space:nowrap}
-.ieat-identity img{width:58px;height:82px;object-fit:contain;flex:0 0 58px}
-.ieat-identity span{display:flex;flex-direction:column;justify-content:center;min-width:0}
-.ieat-identity strong{font-size:24px!important;line-height:1.2!important;font-weight:700!important;color:#000!important}
-.ieat-identity small{margin-top:5px;font-size:18px!important;line-height:1.2!important;font-weight:400!important;color:#222!important}
-.ieat-header-right{display:grid;grid-template-rows:39px 63px;min-width:0}
-.ieat-utility{display:flex;align-items:center;justify-content:flex-end;gap:20px;padding:0 28px;background:#0f9685;color:#fff;white-space:nowrap}
-.ieat-utility,.ieat-utility a,.ieat-utility span{font-size:17px!important;font-weight:600!important;color:#fff!important;text-decoration:none}
-.ieat-main-nav{display:flex;align-items:center;justify-content:flex-end;gap:24px;padding:0 28px;background:#4b326e;white-space:nowrap}
-.ieat-main-nav a,.ieat-main-nav span{font-size:18px!important;font-weight:600!important;color:#fff!important;text-decoration:none}
-.ieat-main-nav a:hover{color:#6cdded!important}
-.ieat-more{font-size:29px!important;line-height:1!important}.ieat-search{font-size:31px!important;line-height:1!important;transform:rotate(-20deg)}
-/* Page type scale follows the reference while preserving readable contrast */
-#fireView p,#fireView span,#fireView small,#fireView label,
-#fireView input,#fireView select,#fireView button,#fireView a,
-#fireView b,#fireView td,#fireView th{font-size:18px!important}
-#fireView .panel-head h2,#fireView .fire-board-title h2,
-#fireView .fire-map-head h2,#fireView .fire-dss-head h2{
-  font-size:24px!important;font-weight:700!important;color:#4b326e!important
-}
-#fireView .fire-overview-head h1{
-  font-size:30px!important;line-height:1.2!important;font-weight:700!important;color:#4b326e!important
-}
-#fireView .fire-overview-head p{font-size:18px!important;color:#555!important}
-@media(max-width:1100px){
-  .ieat-header-inner{grid-template-columns:1fr}
-  .ieat-identity{padding:8px 18px}
-  .ieat-header-right{grid-template-rows:auto auto}
-  .ieat-utility{min-height:36px;padding:5px 18px;overflow-x:auto}
-  .ieat-main-nav{min-height:54px;padding:5px 18px;justify-content:flex-start;overflow-x:auto}
-}
-@media(max-width:700px){
-  body{font-size:16px!important}
-  .ieat-identity img{width:48px;height:65px;flex-basis:48px}
-  .ieat-identity strong{font-size:18px!important;white-space:normal}
-  .ieat-identity small{font-size:14px!important}
-  .ieat-utility{justify-content:flex-start;gap:13px}
-  .ieat-utility,.ieat-utility a,.ieat-utility span{font-size:14px!important}
-  .ieat-main-nav{gap:18px}
-  .ieat-main-nav a,.ieat-main-nav span{font-size:16px!important}
-  #fireView .fire-overview-head h1{font-size:24px!important}
-  #fireView .panel-head h2,#fireView .fire-board-title h2,
-  #fireView .fire-map-head h2,#fireView .fire-dss-head h2{font-size:21px!important}
 }
 </style>
 
