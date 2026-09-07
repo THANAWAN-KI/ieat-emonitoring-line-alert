@@ -1362,4 +1362,85 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 </script>
 
+<style id="hub-fire-visible-view-fix">
+:root{--fire-dark-red:#8B0000}
+
+/* Apply to the dynamically rendered, visible fire report */
+#fireReportView .fire-overview-head h1{color:var(--fire-dark-red)!important}
+
+#fireReportView .fire-overview-head p,
+#fireReportView .fire-board-title p,
+#fireReportView #fireEstateStatus,
+#fireReportView .fire-map-head p,
+#fireReportView .fire-support-card > span,
+#fireReportView .fire-map-head a,
+#fireReportView .fire-dss-head a{
+  font-size:16px!important;
+  line-height:1.35!important;
+  font-weight:200!important;
+}
+#fireReportView .fire-overview-head p,
+#fireReportView .fire-board-title p,
+#fireReportView #fireEstateStatus,
+#fireReportView .fire-map-head p,
+#fireReportView .fire-support-card > span{
+  color:#000000!important;
+}
+
+#fireReportView .fire-board-title,
+#fireReportView .fire-map-head,
+#fireReportView .fire-dss-head,
+#fireReportView .panel-head{
+  background:#ffffff!important;
+  border-bottom:1px solid #edf0f3!important;
+}
+#fireReportView .fire-board-title h2,
+#fireReportView .fire-map-head h2,
+#fireReportView .fire-dss-head h2,
+#fireReportView .panel-head h2,
+#fireReportView .fire-readiness-head h3{color:#000000!important}
+
+#fireReportView .fire-estate-search button,
+#fireReportView .fire-search-panel button{
+  background:var(--fire-dark-red)!important;
+  color:#ffffff!important;
+}
+#fireReportView .fire-estate-search button:hover,
+#fireReportView .fire-search-panel button:hover{background:#650000!important}
+
+#fireReportView .fire-value-row i{display:none!important}
+#fireReportView .fire-value-row{gap:0!important;min-height:38px!important}
+#fireReportView .fire-value-row strong{color:var(--fire-dark-red)!important}
+
+#fireReportView .fire-map-head a,
+#fireReportView .fire-dss-head a,
+#fireReportView .panel-head a{
+  color:var(--fire-dark-red)!important;
+  background:#fff5f5!important;
+}
+#fireReportView .fire-map-head a:hover,
+#fireReportView .fire-dss-head a:hover,
+#fireReportView .panel-head a:hover{
+  color:#ffffff!important;
+  background:var(--fire-dark-red)!important;
+}
+
+#fireReportView .fire-readiness-head > span{display:none!important}
+#fireReportView .fire-readiness-grid b{color:var(--fire-dark-red)!important}
+</style>
+<script id="remove-stray-backslash-n">
+(function(){
+  function clean(){
+    Array.from(document.body.childNodes).forEach(function(node){
+      if(node.nodeType===3){
+        var t=node.textContent.trim();
+        if(t==='n'||t==='\\n') node.remove();
+      }
+    });
+  }
+  clean();
+  document.addEventListener('DOMContentLoaded',clean);
+})();
+</script>
+
 </body></html>
