@@ -117,12 +117,22 @@ body{font-weight:400}
  .tab{min-width:98px!important;font-size:12px!important}
 }
 </style></head><body>
-<header class="hub-site-header">
-  <a class="hub-site-brand" href="https://oc.ieat.go.th/th" target="_blank" rel="noopener">
-    <img src="https://www.ieat.go.th/assets/app/images/logo-th.png" alt="โลโก้การนิคมอุตสาหกรรมแห่งประเทศไทย">
-    <span><strong>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย</strong></span>
-  </a>
-  <nav class="hub-header-actions" aria-label="เมนูส่วนหัว"><a class="hub-back-link" href="./daily-situation.html">หน้ารายงานข่าว</a><a class="hub-contact-link" href="./information.html">ข้อมูล</a><a class="hub-contact-link" href="./contacts.html">ติดต่อ</a></nav>
+<header class="hub-site-header hub-compact-header">
+  <div class="hub-header-left">
+    <a class="hub-site-brand" href="https://oc.ieat.go.th/th" target="_blank" rel="noopener">
+      <img src="https://www.ieat.go.th/assets/app/images/logo-th.png" alt="โลโก้การนิคมอุตสาหกรรมแห่งประเทศไทย">
+      <span><strong>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย</strong></span>
+    </a>
+    <small class="hub-update-date" id="hubUpdateDate">ข้อมูล ณ วันนี้</small>
+  </div>
+  <div class="hub-header-right">
+    <span class="hub-live-time" id="hubLiveTime"></span>
+    <nav class="hub-header-actions" aria-label="เมนูส่วนหัว">
+      <a class="hub-back-link" href="./daily-situation.html">หน้ารายงานข่าว</a>
+      <a class="hub-contact-link" href="./information.html">ข้อมูล</a>
+      <a class="hub-contact-link hub-contact-primary" href="./contacts.html">ติดต่อ</a>
+    </nav>
+  </div>
 </header><div class="loading" id="loading">กำลังจัดทำภาพ PNG…</div>
 <main class="page" id="captureArea"><nav class="tabs"><button class="tab active" data-type="fire"><img src="./assets/fire-svgrepo-com.png" alt="ไฟไหม้">ไฟไหม้</button><button class="tab" data-type="flood"><img src="./assets/flood-svgrepo-com.png" alt="น้ำท่วม">น้ำท่วม</button><button class="tab" data-type="drought"><img src="./assets/drought-svgrepo-com.png" alt="ภัยแล้ง">ภัยแล้ง</button><button class="tab" data-type="pm25"><img src="./assets/cloudy-cloud-svgrepo-com.png" alt="ฝุ่น PM2.5">ฝุ่น PM2.5</button></nav>
 <section id="fireView"><div class="kpis" id="kpis"></div><div class="toolbar"><select id="estateFilter"><option value="">ทุกนิคมอุตสาหกรรม</option></select><input id="searchInput" placeholder="ค้นหาชื่อจุดหรือข้อมูลสนับสนุน"><span id="filterSummary">กำลังเชื่อมต่อข้อมูล…</span></div>
@@ -1081,5 +1091,174 @@ a,p,span,small,b,strong,label,h1,h2,h3,h4,h5,h6,th,td,footer,
 }
 body{font-weight:400!important;line-height:1.5!important}
 </style>
+
+<style id="hub-compact-header-final">
+/* Compact two-level header based on the supplied reference */
+.hub-site-header.hub-compact-header{
+  position:sticky!important;
+  top:0!important;
+  z-index:1000!important;
+  width:100%!important;
+  min-height:58px!important;
+  height:58px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  padding:0 32px!important;
+  background:#ffffff!important;
+  border:0!important;
+  border-bottom:1px solid #e2e5e8!important;
+  box-shadow:0 3px 12px rgba(30,42,55,.08)!important;
+}
+.hub-header-left,.hub-header-right{
+  display:flex!important;
+  align-items:center!important;
+  min-width:0!important;
+}
+.hub-header-left{gap:18px!important}
+.hub-header-right{gap:18px!important;margin-left:auto!important}
+.hub-site-brand{
+  display:flex!important;
+  align-items:center!important;
+  gap:12px!important;
+  padding:0!important;
+  min-width:0!important;
+}
+.hub-site-brand img{
+  width:42px!important;
+  height:42px!important;
+  flex:0 0 42px!important;
+  object-fit:contain!important;
+}
+.hub-site-brand strong{
+  display:block!important;
+  color:#111827!important;
+  font-size:18px!important;
+  line-height:1.2!important;
+  font-weight:700!important;
+  white-space:nowrap!important;
+}
+.hub-update-date,.hub-live-time{
+  color:#8b929b!important;
+  font-size:11px!important;
+  line-height:1.2!important;
+  font-weight:400!important;
+  white-space:nowrap!important;
+}
+.hub-header-actions{
+  display:flex!important;
+  align-items:center!important;
+  gap:8px!important;
+}
+.hub-header-actions a,
+.hub-header-actions .hub-back-link,
+.hub-header-actions .hub-contact-link{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:34px!important;
+  padding:7px 16px!important;
+  border:0!important;
+  border-radius:18px!important;
+  background:#f2f3f5!important;
+  color:#68717c!important;
+  font-size:12px!important;
+  line-height:1!important;
+  font-weight:500!important;
+  text-decoration:none!important;
+  white-space:nowrap!important;
+}
+.hub-header-actions a:hover,
+.hub-header-actions a:focus{
+  background:#E2D4E7!important;
+  color:#59267C!important;
+}
+.hub-header-actions .hub-contact-primary{
+  padding-left:18px!important;
+  padding-right:18px!important;
+  background:#59267C!important;
+  color:#ffffff!important;
+  font-weight:700!important;
+}
+.hub-header-actions .hub-contact-primary:hover,
+.hub-header-actions .hub-contact-primary:focus{
+  background:#8F5DB7!important;
+  color:#ffffff!important;
+}
+
+/* The disaster tabs form the second header row */
+.page{padding-top:0!important}
+.tabs{
+  position:sticky!important;
+  top:58px!important;
+  z-index:999!important;
+  height:54px!important;
+  margin:0 -24px 14px!important;
+  padding:0 28px!important;
+  display:flex!important;
+  align-items:stretch!important;
+  gap:0!important;
+  background:#ffffff!important;
+  border-bottom:1px solid #dfe3e7!important;
+  box-shadow:none!important;
+}
+.tabs .tab{
+  min-width:auto!important;
+  height:54px!important;
+  padding:0 22px!important;
+  color:#626b77!important;
+  background:#ffffff!important;
+  border:0!important;
+  border-bottom:2px solid transparent!important;
+  font-size:13px!important;
+  line-height:1!important;
+  font-weight:400!important;
+}
+.tabs .tab:hover{
+  color:#59267C!important;
+  background:#ffffff!important;
+}
+.tabs .tab.active{
+  color:#59267C!important;
+  background:#ffffff!important;
+  border-bottom-color:#81CD50!important;
+  font-weight:600!important;
+}
+
+@media(max-width:900px){
+  .hub-site-header.hub-compact-header{
+    height:auto!important;
+    min-height:58px!important;
+    padding:7px 12px!important;
+    gap:8px!important;
+  }
+  .hub-update-date,.hub-live-time{display:none!important}
+  .hub-site-brand strong{font-size:15px!important;white-space:normal!important}
+  .hub-header-actions{gap:4px!important}
+  .hub-header-actions a,
+  .hub-header-actions .hub-back-link,
+  .hub-header-actions .hub-contact-link{padding:7px 9px!important;font-size:11px!important}
+  .tabs{position:sticky!important;top:58px!important;margin:0 -9px 9px!important;padding:0 8px!important;overflow-x:auto!important}
+  .tabs .tab{padding:0 14px!important;font-size:12px!important;white-space:nowrap!important}
+}
+@media(max-width:560px){
+  .hub-site-brand img{width:34px!important;height:34px!important;flex-basis:34px!important}
+  .hub-site-brand strong{font-size:13px!important}
+  .hub-header-actions .hub-back-link{display:none!important}
+}
+</style>
+<script id="hub-header-clock">
+(function(){
+  const dateEl=document.getElementById('hubUpdateDate');
+  const timeEl=document.getElementById('hubLiveTime');
+  function updateHeaderClock(){
+    const now=new Date();
+    if(dateEl) dateEl.textContent='ข้อมูล ณ วันที่ '+now.toLocaleDateString('th-TH',{day:'numeric',month:'long',year:'numeric'});
+    if(timeEl) timeEl.textContent=now.toLocaleDateString('th-TH',{weekday:'short',day:'2-digit',month:'2-digit',year:'2-digit'})+' '+now.toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'})+' น.';
+  }
+  updateHeaderClock();
+  setInterval(updateHeaderClock,30000);
+})();
+</script>
 
 </body></html>
