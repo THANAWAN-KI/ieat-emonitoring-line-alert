@@ -1361,6 +1361,7 @@ body{color:#172033!important}
     <div class="brand"><span class="brand-mark" aria-hidden="true">IEAT</span><b>ศูนย์ติดตามสถานการณ์น้ำ</b><span>การนิคมอุตสาหกรรมแห่งประเทศไทย</span></div>
     <nav class="nav" aria-label="เมนูหลัก">
       <button class="active" data-view="warning">พื้นที่เฝ้าระวัง</button>
+      <button data-view="estate-focus">เฝ้าระวังพื้นที่นิคมฯ</button>
       <button data-view="infographic">ส่งออกข้อมูล</button>
     </nav>
     
@@ -1454,6 +1455,32 @@ body{color:#172033!important}
         </article>
       <article class="card warning-table focus-data-table station-watch-table"><div class="table-section-head"><div><h2>สถานการณ์น้ำในพื้นที่เฝ้าระวังใกล้นิคมอุตสาหกรรม</h2><p>แสดงสถานีระดับน้ำที่อยู่ใกล้พื้นที่นิคมอุตสาหกรรม เรียงตามระดับความสำคัญ</p></div><span>ข้อมูลล่าสุด</span></div><div class="status-color-legend" aria-label="คำอธิบายสีสถานะ"><span class="critical"><i></i>ต้องติดตามใกล้ชิด</span><span class="warning"><i></i>เฝ้าระวัง</span><span class="normal"><i></i>สถานการณ์ปกติ</span></div><div class="status-color-legend" aria-label="คำอธิบายสีสถานะ"><span class="critical"><i></i>ต้องติดตามใกล้ชิด</span><span class="warning"><i></i>เฝ้าระวัง</span><span class="normal"><i></i>สถานการณ์ปกติ</span></div><div class="table-scroll"><table class="table water-status-table"><thead><tr><th>สถานี</th><th>ระดับน้ำ</th><th class="water-situation-head">สถานการณ์น้ำ</th><th>เวลา</th></tr></thead><tbody id="stations"><tr><td colspan="4" class="table-empty">กำลังประมวลผลข้อมูล…</td></tr></tbody></table></div></article><article class="card warning-table focus-data-table nearby-watch-table"><div class="table-section-head"><div><h2 contenteditable="true">พื้นที่เฝ้าระวัง 24 ชั่วโมง / 48 ชั่วโมง ใกล้เคียงพื้นที่นิคมฯ</h2><p>พื้นที่คาดการณ์ที่อยู่ใกล้นิคมอุตสาหกรรมภายในรัศมี 30 กิโลเมตร</p></div><span>ข้อมูลคาดการณ์ล่าสุด</span></div><div class="table-scroll"><table class="table"><thead><tr><th>ช่วงเวลา</th><th>จังหวัด</th><th>อำเภอ</th><th>ตำบล</th><th>ฝนสะสม</th><th>นิคมฯ ใกล้ที่สุด</th></tr></thead><tbody id="nearbyWatchRows"><tr><td colspan="6" class="table-empty">กำลังประมวลผลข้อมูล…</td></tr></tbody></table></div></article>
       </section>
+    </section>
+
+    <section class="view" id="estate-focus">
+      <header class="estate-focus-intro">
+        <div>
+          <span>IEAT FLOOD WATCH</span>
+          <h1>พื้นที่เฝ้าระวังน้ำท่วมที่โฟกัสพื้นที่นิคมอุตสาหกรรม</h1>
+          <p>ตรวจสอบการเตือนภัยล่วงหน้า เส้นทางการไหลของน้ำ และตำแหน่งนิคมอุตสาหกรรมประกอบกัน</p>
+        </div>
+        <a href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=3d24287ac6ea49cd823625ddad496e01" target="_blank" rel="noopener">เปิดแผนที่นิคมฯ เต็มหน้า ↗</a>
+      </header>
+      <div class="estate-focus-grid">
+        <article class="estate-focus-panel estate-focus-warning">
+          <div class="estate-focus-panel-head"><div><h2>ระบบเตือนภัยล่วงหน้า 24 ชั่วโมง</h2><p>พื้นที่เฝ้าระวังน้ำท่วมจาก National Early Warning for All</p></div><a href="https://www.thaiwater.net/new4all/warning" target="_blank" rel="noopener">เปิด ThaiWater ↗</a></div>
+          <iframe src="https://www.thaiwater.net/new4all/warning" title="ThaiWater พื้นที่เฝ้าระวังน้ำท่วม 24 ชั่วโมง" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </article>
+        <article class="estate-focus-panel estate-focus-flow">
+          <div class="estate-focus-panel-head"><div><h2>ผังการไหลของน้ำ</h2><p>ข้อมูลสถานีและทิศทางการไหลจากกรมชลประทาน</p></div><a href="https://hyd-app.rid.go.th/SVG/flow_diagram.html?svg=hydro5_636674419028767130" target="_blank" rel="noopener">เปิดกรมชลประทาน ↗</a></div>
+          <iframe src="https://hyd-app.rid.go.th/SVG/flow_diagram.html?svg=hydro5_636674419028767130" title="ผังการไหลของน้ำ กรมชลประทาน" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </article>
+        <article class="estate-focus-panel estate-focus-map">
+          <div class="estate-focus-panel-head"><div><h2>พื้นที่นิคมอุตสาหกรรมและจุดเฝ้าระวัง</h2><p>ใช้ขอบเขตนิคมฯ เป็นจุดตั้งต้นในการตรวจสอบพื้นที่ใกล้เคียง</p></div><a href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=3d24287ac6ea49cd823625ddad496e01" target="_blank" rel="noopener">เปิดเต็มหน้า ↗</a></div>
+          <iframe src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&amp;webmap=3d24287ac6ea49cd823625ddad496e01&amp;theme=light&amp;scroll=true" title="แผนที่พื้นที่นิคมอุตสาหกรรมและจุดเฝ้าระวังน้ำท่วม" loading="lazy" allowfullscreen></iframe>
+        </article>
+      </div>
+      <p class="estate-focus-note">หมายเหตุ: หากเว็บไซต์ต้นทางไม่อนุญาตให้แสดงภายในกรอบ ให้กด “เปิดเต็มหน้า” ที่มุมขวาของแต่ละรายการ</p>
     </section>
 
     <section class="view" id="infographic">
@@ -2806,6 +2833,46 @@ button,input,select,textarea,th,td{
 @media(max-width:650px){
   .flood-source-strip-head{display:block!important}
   .flood-source-links{grid-template-columns:1fr!important}
+}
+</style>
+
+<style id="flood-estate-focus-tab-final">
+#estate-focus.view.active{display:block!important}
+.estate-focus-intro{
+  display:flex!important;align-items:center!important;justify-content:space-between!important;gap:18px!important;
+  margin:0 0 12px!important;padding:16px 18px!important;background:#fff!important;
+  border-left:5px solid #005195!important;border-radius:10px!important;box-shadow:0 3px 14px rgba(38,55,78,.07)!important
+}
+.estate-focus-intro span{color:#005195!important;font-size:16px!important;font-weight:300!important}
+.estate-focus-intro h1{margin:3px 0!important;color:#005195!important;font-size:18px!important;font-weight:400!important;line-height:1.3!important}
+.estate-focus-intro p{margin:0!important;color:#667085!important;font-size:16px!important;font-weight:300!important}
+.estate-focus-intro>a,.estate-focus-panel-head a{
+  flex:0 0 auto!important;padding:8px 12px!important;background:#edf6fb!important;color:#005195!important;
+  border-radius:7px!important;text-decoration:none!important;font-size:16px!important;font-weight:300!important
+}
+.estate-focus-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:12px!important}
+.estate-focus-panel{
+  min-width:0!important;background:#fff!important;border:1px solid #e2e8f0!important;border-radius:10px!important;
+  overflow:hidden!important;box-shadow:0 3px 14px rgba(38,55,78,.06)!important
+}
+.estate-focus-map{grid-column:1/-1!important}
+.estate-focus-panel-head{
+  min-height:66px!important;padding:11px 14px!important;display:flex!important;align-items:center!important;
+  justify-content:space-between!important;gap:12px!important;border-bottom:1px solid #e2e8f0!important
+}
+.estate-focus-panel-head h2{margin:0!important;color:#111827!important;font-size:18px!important;font-weight:400!important}
+.estate-focus-panel-head p{margin:2px 0 0!important;color:#667085!important;font-size:16px!important;font-weight:300!important}
+.estate-focus-panel iframe{display:block!important;width:100%!important;height:620px!important;border:0!important;background:#eef2f6!important}
+.estate-focus-map iframe{height:680px!important}
+.estate-focus-note{margin:9px 2px 0!important;color:#667085!important;font-size:16px!important;font-weight:300!important}
+@media(max-width:1000px){
+  .estate-focus-grid{grid-template-columns:1fr!important}
+  .estate-focus-map{grid-column:auto!important}
+}
+@media(max-width:650px){
+  .estate-focus-intro,.estate-focus-panel-head{display:block!important}
+  .estate-focus-intro>a,.estate-focus-panel-head a{display:inline-flex!important;margin-top:8px!important}
+  .estate-focus-panel iframe,.estate-focus-map iframe{height:520px!important}
 }
 </style>
 
