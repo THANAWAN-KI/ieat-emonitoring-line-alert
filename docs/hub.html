@@ -687,4 +687,101 @@ body{font-size:16px!important;line-height:1.5!important}
 }
 </style>
 
+<style id="hub-requested-typography-final">
+/* Final requested IEAT typography and colors */
+html,body,button,input,select,textarea,table,
+a,p,span,small,b,strong,label,h1,h2,h3,h4,h5,h6,th,td,footer{
+  font-family:"DB Heavent","DB Helvethaica X","TH Sarabun New","Sarabun",Tahoma,sans-serif!important;
+  font-stretch:condensed;
+}
+body{font-size:18px!important;line-height:1.45!important}
+
+/* Site name */
+.hub-site-brand strong{
+  font-size:24px!important;
+  line-height:1.2!important;
+  font-weight:700!important;
+  color:#000000!important;
+}
+
+/* Header menu */
+.hub-header-actions a{
+  font-size:20px!important;
+  line-height:1.2!important;
+  font-weight:600!important;
+  color:#4B326E!important;
+}
+
+/* Fire tab */
+.tabs .tab[data-type="fire"]{
+  font-size:20px!important;
+  line-height:1.2!important;
+  font-weight:600!important;
+  color:#4B326E!important;
+}
+.tabs .tab[data-type="fire"].active{
+  color:#4B326E!important;
+  border-bottom:3px solid #0F9685!important;
+}
+
+/* Main fire title */
+#fireView .fire-overview-head h1{
+  font-size:30px!important;
+  line-height:1.2!important;
+  font-weight:700!important;
+  color:#4B326E!important;
+}
+
+/* Fire section headings */
+#fireView .fire-board-title h2,
+#fireView .fire-map-head h2,
+#fireView .fire-readiness-head h3,
+#fireView .panel-head h2{
+  font-size:30px!important;
+  line-height:1.2!important;
+  font-weight:700!important;
+  color:#0F9685!important;
+}
+
+/* Six nearby-support card titles */
+#fireView .fire-support-card > small{
+  display:block!important;
+  font-size:20px!important;
+  line-height:1.25!important;
+  font-weight:700!important;
+  color:#000000!important;
+}
+
+/* Supporting text */
+#fireView p,#fireView label,#fireView input,#fireView select,
+#fireView button,#fireView a,#fireView span{
+  font-size:18px!important;
+}
+
+/* Desktop fit */
+@media(min-width:701px) and (max-width:1280px){
+  .hub-site-brand strong{font-size:24px!important}
+  .hub-header-actions a,.tabs .tab[data-type="fire"]{font-size:18px!important}
+  #fireView .fire-overview-head h1,
+  #fireView .fire-board-title h2,
+  #fireView .fire-map-head h2,
+  #fireView .fire-readiness-head h3,
+  #fireView .panel-head h2{font-size:28px!important}
+  #fireView .fire-support-card > small{font-size:18px!important}
+}
+@media(max-width:700px){
+  body{font-size:16px!important}
+  .hub-site-brand strong{font-size:20px!important}
+  .hub-header-actions a,.tabs .tab[data-type="fire"]{font-size:17px!important}
+  #fireView .fire-overview-head h1{font-size:24px!important}
+  #fireView .fire-board-title h2,
+  #fireView .fire-map-head h2,
+  #fireView .fire-readiness-head h3,
+  #fireView .panel-head h2{font-size:23px!important}
+  #fireView .fire-support-card > small{font-size:18px!important}
+  #fireView p,#fireView label,#fireView input,#fireView select,
+  #fireView button,#fireView a,#fireView span{font-size:16px!important}
+}
+</style>
+
 </body></html>
