@@ -40,6 +40,48 @@ body{background:#fff}
     /* Unified website typography matching the supplied reference */
     html,body,button,input,select,textarea,table{font-family:"Noto Sans Thai","Segoe UI",Tahoma,sans-serif!important}
   </style>
+<style id="dss-visual-corrections-final">
+:root{--dss-dark-red:#8B0000;--dss-label-gray:#6B7280}
+
+/* DSS toolbar: left aligned and consistent type sizes */
+.top{
+  justify-content:flex-start!important;
+}
+.top > div:first-child{
+  text-align:left!important;
+  margin-left:0!important;
+}
+.top h1{
+  font-size:18px!important;
+  font-weight:300!important;
+}
+.top span,
+.top-actions button{
+  font-size:16px!important;
+  font-weight:300!important;
+}
+
+/* Report page uses TH Sarabun New */
+.report,
+.report *{
+  font-family:"TH Sarabun New","Thai Sarabun New","TH Sarabun PSK","Sarabun",sans-serif!important;
+}
+
+/* Black-marked text */
+.report-header h1,
+.support b,
+.weather .temp,
+.wind-arrow{
+  color:var(--dss-dark-red)!important;
+}
+
+/* Yellow-marked headings and row labels */
+.section-title,
+.company .row > b{
+  color:var(--dss-label-gray)!important;
+}
+</style>
+
 </head>
 <body><div class="loading" id="loading">กำลังจัดทำรายงาน PNG…</div>
 <header class="top"><div><h1>IEAT DSS — จัดทำรายงานเหตุฉุกเฉิน</h1><span>แก้ไขข้อมูลด้านซ้าย ผลลัพธ์ในรายงานจะเปลี่ยนทันที</span></div><div class="top-actions"><button class="secondary" id="resetBtn">ล้างข้อมูล</button><button class="primary" id="pngBtn">ดาวน์โหลด PNG</button></div></header>
