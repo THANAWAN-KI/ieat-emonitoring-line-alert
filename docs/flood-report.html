@@ -3270,5 +3270,31 @@ html body #warning .flood-final-cards>.national-kpi{
  setTimeout(moveHeadingFirst,100);setTimeout(moveHeadingFirst,1000);
 })();
 </script>
+<style id="remove-yellow-marked-icons-v1">
+/* Remove the marked icon before the title and the 1–4 circles */
+#warning .flood-support-heading>.flood-head-icon,
+#warning .flood-support-heading>.icon,
+#warning .flood-support-heading>svg,
+#warning .flood-support-heading>img{display:none!important}
+#warning .daily-water-item::before,
+#warning .daily-water-item::after{display:none!important;content:none!important}
+#warning .daily-water-item>.rank-number,
+#warning .daily-water-item>.number,
+#warning .daily-water-item>i:first-child,
+#warning .daily-water-item>.daily-index{display:none!important}
+</style>
+<script id="remove-yellow-marked-icons-v1-script">
+(function(){
+ function removeMarked(){
+  const heading=document.querySelector("#warning .flood-support-heading");
+  if(heading)[...heading.children].forEach(el=>{if(!el.matches(".flood-support-heading-copy,.flood-support-heading-date,.flood-support-heading-actions"))el.remove()});
+  document.querySelectorAll("#warning .daily-water-item").forEach(card=>{
+   [...card.children].forEach(el=>{if(/^[1-4]$/.test((el.textContent||"").trim())&&(el.tagName==="I"||el.tagName==="SPAN"||el.tagName==="B"))el.remove()});
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeMarked);else removeMarked();
+ setTimeout(removeMarked,100);setTimeout(removeMarked,1000);
+})();
+</script>
 </body>
 </html>
