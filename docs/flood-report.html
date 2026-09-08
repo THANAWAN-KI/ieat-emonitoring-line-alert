@@ -15,7 +15,7 @@
   <script src="data/thaiwater-map-meta.js" defer></script>
   <script src="flood-export.js?v=20260821-1" defer></script>
   <style>
-    :root{--purple:#6B4B7D;--blue:#1769C2;--cyan:#81D4FA;--teal:#66BB6A;--ink:#283142;--muted:#697386;--bg:#F6F6F4;--line:#E5E2E8;--soft:#F5F1F7;--white:#FFFFFF;--red:#B0005A;--orange:#F6BB42;--green:#58B957}
+    :root{--purple:#388ed1;--blue:#1769C2;--cyan:#81D4FA;--teal:#66BB6A;--ink:#283142;--muted:#697386;--bg:#F6F6F4;--line:#E5E2E8;--soft:#F5F1F7;--white:#FFFFFF;--red:#B0005A;--orange:#F6BB42;--green:#58B957}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Sarabun","Noto Sans Thai",sans-serif;font-size:16px;font-weight:400}button,input,select,textarea{font:inherit}
     .topbar{position:sticky;top:0;z-index:50;background:#ffffffee;backdrop-filter:blur(14px);border:1px solid #ebe8ed;box-shadow:0 2px 10px rgba(52,45,60,.06)}
     .top-inner{width:100%;max-width:none;margin:0;min-height:78px;padding:12px clamp(20px,2.2vw,44px);display:flex;align-items:center;gap:28px}.brand{min-width:280px;border-left:5px solid var(--purple);padding-left:14px}.brand b{display:block;font-size:21px;font-weight:600;color:var(--purple)}.brand span{color:var(--muted);font-size:14px}
@@ -3481,7 +3481,7 @@ html body #warning .flood-final-cards>.national-kpi{
  box-shadow:none!important
 }
 html body #warning .flood-final-cards>.kpi:hover,
-html body #warning .flood-final-cards>.national-kpi:hover{border-color:#8f5db7!important;box-shadow:0 6px 18px rgba(143,93,183,.18)!important}
+html body #warning .flood-final-cards>.national-kpi:hover{border-color:#388ed1!important;box-shadow:0 6px 18px rgba(143,93,183,.18)!important}
 html body #warning .flood-final-cards h2,
 html body #warning .flood-final-cards .kpi>div>span,
 html body #warning .flood-final-cards .national-kpi>h2{margin:0!important;font-size:18px!important;line-height:1.35!important;font-weight:500!important;color:#000!important}
@@ -3614,7 +3614,7 @@ html body #warning .flood-final-cards .source-link{display:none!important}
 #warning .flood-final-cards>.national-kpi:has(#nationalStormCount) span,
 #warning .flood-final-cards>.national-kpi:has(#nationalWaterProvinceCount) h2,
 #warning .flood-final-cards>.national-kpi:has(#nationalHeavyRainCount) h2,
-#warning .flood-final-cards>.national-kpi:has(#nationalFloodCount) h2{color:#52057f!important}
+#warning .flood-final-cards>.national-kpi:has(#nationalFloodCount) h2{color:#388ed1!important}
 
 /* Nationwide subtitle and requested daily labels */
 #warning .nationwide-indicators .card-head span,
@@ -4037,7 +4037,7 @@ html body #warning .flood-final-cards .source-link{display:none!important}
   border-radius:14px!important;box-shadow:0 3px 13px rgba(42,72,105,.08)!important;text-align:center!important;
 }
 #warning .flood-final-cards>.national-kpi:has(#nationalFloodCount) h2{
-  width:100%!important;margin:0!important;color:#52057f!important;font-size:16px!important;font-weight:400!important;text-align:center!important;
+  width:100%!important;margin:0!important;color:#388ed1!important;font-size:16px!important;font-weight:400!important;text-align:center!important;
 }
 #warning .flood-final-cards>.national-kpi:has(#nationalFloodCount) strong,
 #warning .flood-final-cards>.national-kpi:has(#nationalFloodCount) span{
@@ -4135,7 +4135,7 @@ html body #warning .flood-final-cards .source-link{display:none!important}
 #warning .national-watch-pair>.national-kpi:has(#nationalFloodCount) .n-icon,
 #warning .national-watch-pair>.national-kpi:has(#nationalFloodCount) .source-link{display:none!important}
 #warning .national-watch-pair>.national-kpi:has(#nationalFloodCount) h2{
-  margin:0 0 10px!important;font-size:16px!important;font-weight:400!important;color:#52057f!important;text-align:center!important
+  margin:0 0 10px!important;font-size:16px!important;font-weight:400!important;color:#388ed1!important;text-align:center!important
 }
 #warning .national-watch-pair>.national-kpi:has(#nationalFloodCount) strong,
 #warning .national-watch-pair>.national-kpi:has(#nationalFloodCount)>span{
@@ -4260,7 +4260,7 @@ html body #warning .flood-final-cards .source-link{display:none!important}
   font-size:14px!important;
   line-height:1.45!important;
   font-weight:300!important;
-  color:#52057f!important;
+  color:#388ed1!important;
   text-align:center!important;
   white-space:normal!important;
 }
@@ -4654,6 +4654,13 @@ html body #warning .flood-final-cards>.national-kpi>strong,
 html body #warning .flood-final-cards>.national-kpi>span{
   grid-column:1!important;
 }
+</style>
+<style id="flood-purple-to-blue-20260908-v7">
+/* เปลี่ยนสีม่วงทั้งหมดของหน้ารายงานเป็น #388ed1 */
+html body #warning{--purple:#388ed1!important}
+html body #warning [style*="#52057f" i],
+html body #warning [style*="#6b4b7d" i],
+html body #warning [style*="#8f5db7" i]{color:#388ed1!important}
 </style>
 </body>
 </html>
