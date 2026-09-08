@@ -3309,5 +3309,41 @@ html body #warning .flood-final-cards>.national-kpi{
 #warning .daily-water-item>*{margin-left:0!important;padding-left:0!important;transform:none!important}
 #warning .daily-water-item small,#warning .daily-water-item strong,#warning .daily-water-item span{width:auto!important;max-width:100%!important}
 </style>
+<style id="force-remove-title-icon-daily-ranks">
+/* Override the older high-specificity counter rules */
+html body #warning .daily-water-grid{counter-reset:none!important}
+html body #warning .daily-water-grid .daily-water-item,
+html body #warning .daily-water-grid .daily-water-item:nth-child(n+3){
+ counter-increment:none!important;display:flex!important;flex-direction:column!important;
+ grid-template-columns:none!important;grid-template-rows:none!important;
+ gap:2px!important;align-items:flex-start!important;justify-content:center!important;
+ padding:12px 14px!important
+}
+html body #warning .daily-water-grid .daily-water-item:before,
+html body #warning .daily-water-grid .daily-water-item::before,
+html body #warning .daily-water-grid .daily-water-item:after,
+html body #warning .daily-water-grid .daily-water-item::after{
+ content:none!important;display:none!important;width:0!important;height:0!important;
+ margin:0!important;padding:0!important;background:transparent!important
+}
+html body #warning .daily-water-grid .daily-water-item small,
+html body #warning .daily-water-grid .daily-water-item strong,
+html body #warning .daily-water-grid .daily-water-item span{
+ grid-column:auto!important;grid-row:auto!important;margin:0!important
+}
+/* Remove every possible title decoration */
+html body #warning .flood-support-heading-copy>svg,
+html body #warning .flood-support-heading-copy>img,
+html body #warning .flood-support-heading-copy>.icon,
+html body #warning .flood-support-heading-copy>.flood-head-icon{display:none!important}
+html body #warning .flood-support-heading-copy:before,
+html body #warning .flood-support-heading-copy::before,
+html body #warning .flood-support-heading-copy:after,
+html body #warning .flood-support-heading-copy::after,
+html body #warning .flood-support-heading-copy h1:before,
+html body #warning .flood-support-heading-copy h1::before,
+html body #warning .flood-support-heading-copy h1:after,
+html body #warning .flood-support-heading-copy h1::after{content:none!important;display:none!important}
+</style>
 </body>
 </html>
