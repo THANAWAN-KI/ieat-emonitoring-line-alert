@@ -3635,5 +3635,52 @@ html body #warning .flood-final-cards .source-link{display:none!important}
  setTimeout(removeDate,100);setTimeout(removeDate,1000);
 })();
 </script>
+<style id="flood-center-black-borderless-cards-v1">
+/* Remove purple card outlines */
+html body #warning .flood-final-cards>.kpi,
+html body #warning .flood-final-cards>.national-kpi,
+html body #warning .daily-water-grid .daily-water-item,
+html body #warning .daily-water-report,
+html body #warning .nationwide-indicators{
+ border:0!important;outline:0!important
+}
+
+/* Situation cards: centered, 16px / 300 */
+html body #warning .flood-final-cards>.kpi,
+html body #warning .flood-final-cards>.national-kpi{
+ align-items:center!important;justify-content:center!important;text-align:center!important
+}
+html body #warning .flood-final-cards>.kpi *,
+html body #warning .flood-final-cards>.national-kpi *,
+html body #warning .flood-final-cards h2,
+html body #warning .flood-final-cards strong,
+html body #warning .flood-final-cards span,
+html body #warning .flood-final-cards p{
+ font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;
+ line-height:1.45!important;font-weight:300!important;text-align:center!important;
+ color:#000!important;margin-left:auto!important;margin-right:auto!important
+}
+
+/* Nationwide indicators: every text element 16px / 300 */
+html body #warning .nationwide-indicators,
+html body #warning .nationwide-indicators *,
+html body #warning .nationwide-indicators h1,
+html body #warning .nationwide-indicators h2,
+html body #warning .nationwide-indicators h3,
+html body #warning .nationwide-indicators p,
+html body #warning .nationwide-indicators span,
+html body #warning .nationwide-indicators small,
+html body #warning .nationwide-indicators b,
+html body #warning .nationwide-indicators strong{
+ font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;
+ line-height:1.45!important;font-weight:300!important;color:#000!important
+}
+
+/* Replace remaining dark-blue card text with black */
+html body #warning .daily-water-item *,
+html body #warning .flood-final-cards *,
+html body #warning .nationwide-indicators *,
+html body #warning .barrow>b{color:#000!important}
+</style>
 </body>
 </html>
