@@ -4775,5 +4775,40 @@ html body #thaiwater-warning.active{display:block!important}
  [200,800,1800,3000].forEach(function(ms){setTimeout(fixFloodNav,ms)});
 })();
 </script>
+<style id="visible-thaiwater-warning-button-20260908-v2">
+#warning .flood-support-heading-actions button[data-target="thaiwater-warning"],
+.flood-support-heading-actions button[data-target="thaiwater-warning"]{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-width:150px!important;
+  background:#388ed1!important;
+  color:#fff!important;
+  border:0!important;
+}
+</style>
+<script id="visible-thaiwater-warning-button-20260908-v2-script">
+(function(){
+ function ensureVisibleWatchButton(){
+  const actions=document.querySelector(".flood-support-heading-actions");if(!actions)return;
+  let report=actions.querySelector('[data-target="warning"]');
+  let info=actions.querySelector('[data-target="infographic"]');
+  let watch=actions.querySelector('[data-target="thaiwater-warning"]');
+  if(!watch){
+   watch=document.createElement("button");
+   watch.type="button";watch.dataset.target="thaiwater-warning";
+   actions.insertBefore(watch,info||null);
+  }
+  if(report)report.textContent="หน้ารายงานข่าว";
+  watch.textContent="พื้นที่เฝ้าระวัง";
+  if(info)info.textContent="ข้อมูล";
+  actions.querySelectorAll("button[data-target]").forEach(function(button){
+   button.onclick=function(){go(button.dataset.target)};
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",ensureVisibleWatchButton);else ensureVisibleWatchButton();
+ [100,400,900,1600,2600,4500].forEach(function(ms){setTimeout(ensureVisibleWatchButton,ms)});
+})();
+</script>
 </body>
 </html>
