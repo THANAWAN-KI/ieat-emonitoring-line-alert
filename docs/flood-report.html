@@ -4032,5 +4032,145 @@ html body #warning .flood-final-cards .source-link{display:none!important}
   grid-auto-flow:row dense!important;
 }
 </style>
+
+<style id="flood-ranking-cards-like-reference-v1">
+/* ลบประกาศสำคัญตามคำสั่ง */
+#warning .national-alert{display:none!important}
+
+/* ซ่อนการ์ดสรุปแบบเดิม เพราะแทนด้วยรายการจัดอันดับ 5 อันดับ */
+#warning .national-cards-dashboard>.national-kpi:last-child{display:none!important}
+
+/* การ์ดรายการแบบภาพตัวอย่าง */
+#warning .operations-side{
+  align-content:start!important
+}
+#warning .nationwide-indicators,
+#warning .flash-flood-24-ranking{
+  display:block!important;
+  min-width:0!important;
+  padding:18px!important;
+  background:#fff!important;
+  border:0!important;
+  border-radius:20px!important;
+  box-shadow:0 5px 18px rgba(39,54,74,.08)!important
+}
+#warning .nationwide-indicators .card-head,
+#warning .flash-flood-24-ranking .ranking-card-head{
+  display:block!important;
+  padding:0 0 12px!important
+}
+#warning .nationwide-indicators .card-head h2,
+#warning .flash-flood-24-ranking h2{
+  margin:0!important;
+  color:#333!important;
+  font-family:"Noto Sans Thai",sans-serif!important;
+  font-size:18px!important;
+  line-height:1.45!important;
+  font-weight:500!important
+}
+#warning .nationwide-indicators .card-head span,
+#warning .flash-flood-24-ranking .ranking-card-head p{
+  display:block!important;
+  margin:3px 0 0!important;
+  color:#7b7f87!important;
+  font-family:"Noto Sans Thai",sans-serif!important;
+  font-size:16px!important;
+  line-height:1.4!important;
+  font-weight:300!important
+}
+#warning .nationwide-indicators .bars,
+#warning .flash-flood-ranking-list{
+  display:grid!important;
+  gap:8px!important;
+  padding:0!important
+}
+#warning .nationwide-indicators .barrow,
+#warning .flash-flood-ranking-row{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  gap:10px!important;
+  align-items:center!important;
+  min-height:39px!important;
+  margin:0!important;
+  padding:5px 8px!important;
+  background:#f3f6fb!important;
+  border:0!important;
+  border-radius:10px!important
+}
+#warning .nationwide-indicators .barrow>span,
+#warning .flash-flood-ranking-name{
+  color:#70757d!important;
+  font-family:"Noto Sans Thai",sans-serif!important;
+  font-size:16px!important;
+  line-height:1.35!important;
+  font-weight:300!important
+}
+#warning .nationwide-indicators .track{display:none!important}
+#warning .nationwide-indicators .barrow>b,
+#warning .flash-flood-ranking-value{
+  justify-self:end!important;
+  min-width:66px!important;
+  padding:5px 11px!important;
+  border-radius:10px!important;
+  background:#ffbf43!important;
+  color:#4f3a00!important;
+  text-align:center!important;
+  font-family:"Noto Sans Thai",sans-serif!important;
+  font-size:16px!important;
+  line-height:1.25!important;
+  font-weight:400!important
+}
+#warning .nationwide-indicators .barrow:nth-child(2)>b{background:#ff943d!important;color:#403000!important}
+#warning .nationwide-indicators .barrow:nth-child(3)>b{background:#008b8f!important;color:#fff!important}
+#warning .nationwide-indicators .source-note{display:none!important}
+#warning .flash-flood-24-ranking{margin-top:12px!important}
+#warning .flash-flood-ranking-row:nth-child(2) .flash-flood-ranking-value{background:#ffad3d!important}
+#warning .flash-flood-ranking-row:nth-child(3) .flash-flood-ranking-value,
+#warning .flash-flood-ranking-row:nth-child(4) .flash-flood-ranking-value,
+#warning .flash-flood-ranking-row:nth-child(5) .flash-flood-ranking-value{background:#008b8f!important;color:#fff!important}
+@media(max-width:700px){
+ #warning .nationwide-indicators,
+ #warning .flash-flood-24-ranking{padding:14px!important}
+}
+</style>
+<script id="flood-ranking-cards-like-reference-v1-builder">
+(function(){
+  function clean(value){return String(value||"ไม่ระบุจังหวัด").replace(/^จ\./,"").trim()}
+  function render(){
+    var host=document.querySelector("#warning .nationwide-indicators");
+    if(!host)return;
+    var card=document.querySelector("#warning .flash-flood-24-ranking");
+    if(!card){
+      card=document.createElement("article");
+      card.className="flash-flood-24-ranking";
+      card.innerHTML='<div class="ranking-card-head"><h2>พื้นที่เสี่ยงน้ำท่วมฉับพลันใน 24 ชั่วโมงข้างหน้า</h2><p>5 จังหวัดที่มีพื้นที่เข้าเกณฑ์เฝ้าระวังสูงสุด</p></div><div class="flash-flood-ranking-list"><div class="flash-flood-ranking-row"><span class="flash-flood-ranking-name">กำลังประมวลผลข้อมูลล่าสุด…</span><strong class="flash-flood-ranking-value">–</strong></div></div>';
+      host.insertAdjacentElement("afterend",card);
+    }
+    var data=window.IEAT_THAIWATER_DATA||window.THAIWATER_LATEST||{};
+    var areas=(data.flash_flood&&data.flash_flood["24h"]&&data.flash_flood["24h"].areas)||[];
+    if(!areas.length)return false;
+    var grouped={};
+    areas.forEach(function(row){
+      var province=clean(row.province);
+      if(!grouped[province])grouped[province]={province:province,tambons:new Set(),maxRain:0};
+      grouped[province].tambons.add(clean(row.tambon||row.amphoe||row.station));
+      grouped[province].maxRain=Math.max(grouped[province].maxRain,Number(row.sum_rainfall_mm)||0);
+    });
+    var rows=Object.values(grouped).sort(function(a,b){
+      return b.tambons.size-a.tambons.size||b.maxRain-a.maxRain;
+    }).slice(0,5);
+    card.querySelector(".flash-flood-ranking-list").innerHTML=rows.map(function(row,index){
+      return '<div class="flash-flood-ranking-row"><span class="flash-flood-ranking-name">'+(index+1)+'. '+row.province+'</span><strong class="flash-flood-ranking-value">'+row.tambons.size+' ตำบล</strong></div>';
+    }).join("");
+    return true;
+  }
+  function start(){
+    if(render())return;
+    var tries=0,timer=setInterval(function(){tries++;if(render()||tries>=15)clearInterval(timer)},700);
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start);else start();
+})();
+</script>
+
 </body>
 </html>
