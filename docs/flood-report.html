@@ -4972,5 +4972,48 @@ html body #thaiwater-warning.active{display:block!important}
 })();
 </script>
 
+<style id="persistent-three-page-tabs-20260908-v3">
+.topbar .ieat-main-tabs{display:flex!important;align-items:center!important;gap:10px!important;margin-left:auto!important}
+.topbar .ieat-main-tabs button{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:150px!important;min-height:44px!important;padding:10px 22px!important;border:0!important;border-radius:999px!important;background:#0a98ca!important;color:#fff!important;font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:400!important;line-height:1.2!important;cursor:pointer!important;box-shadow:none!important}
+.topbar .ieat-main-tabs button:hover{background:#087fad!important}
+.topbar .ieat-main-tabs button.active{background:#388ed1!important;box-shadow:0 4px 12px rgba(56,142,209,.30)!important}
+.flood-support-heading-actions{display:none!important}
+@media(max-width:980px){.topbar .top-inner{flex-wrap:wrap!important}.topbar .ieat-main-tabs{order:3;width:100%!important;margin-left:0!important}.topbar .ieat-main-tabs button{flex:1!important}}
+@media(max-width:620px){.topbar .ieat-main-tabs{flex-direction:column!important}.topbar .ieat-main-tabs button{width:100%!important}}
+</style>
+<script id="persistent-three-page-tabs-20260908-v3-script">
+(function(){
+ const tabs=[
+  {id:"warning",label:"ภาพรวม"},
+  {id:"thaiwater-warning",label:"พื้นที่เฝ้าระวัง"},
+  {id:"infographic",label:"ส่งออกข้อมูล"}
+ ];
+ function activate(id){
+  document.querySelectorAll("main .view").forEach(function(view){view.classList.toggle("active",view.id===id)});
+  document.querySelectorAll(".ieat-main-tabs button").forEach(function(button){
+   const active=button.dataset.page===id;
+   button.classList.toggle("active",active);
+   if(active)button.setAttribute("aria-current","page");else button.removeAttribute("aria-current");
+  });
+  if(id==="infographic"&&typeof window.prepareReportExport==="function")window.prepareReportExport();
+  window.scrollTo({top:0,behavior:"smooth"});
+ }
+ function mount(){
+  const inner=document.querySelector(".topbar .top-inner");if(!inner)return;
+  let nav=inner.querySelector(".ieat-main-tabs");
+  if(!nav){
+   nav=document.createElement("nav");nav.className="ieat-main-tabs";nav.setAttribute("aria-label","เมนูรายงานสถานการณ์น้ำ");
+   inner.appendChild(nav);
+  }
+  nav.innerHTML=tabs.map(function(tab){return '<button type="button" data-page="'+tab.id+'">'+tab.label+'</button>'}).join("");
+  nav.querySelectorAll("button").forEach(function(button){button.onclick=function(){activate(button.dataset.page)}});
+  const current=document.querySelector("main .view.active")?.id||"warning";
+  activate(current);
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
+ [100,700,1800,3500,6000].forEach(function(ms){setTimeout(mount,ms)});
+})();
+</script>
+
 </body>
 </html>
