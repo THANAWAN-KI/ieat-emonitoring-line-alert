@@ -4019,5 +4019,18 @@ html body #warning .flood-final-cards .source-link{display:none!important}
 @media(max-width:1200px){html body #warning .flood-final-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:560px){html body #warning .flood-final-cards{grid-template-columns:1fr!important}}
 </style>
+
+<style id="flood-remove-red-framed-cards-v1">
+/* ซ่อนเฉพาะ 3 การ์ดตามกรอบสีแดง โดยคง element ไว้ให้สคริปต์ข้อมูลทำงานได้ */
+#warning .grid.kpis > .kpi:nth-child(3),
+#warning .national-cards-dashboard > .national-kpi:nth-child(2),
+#warning .national-cards-dashboard > .national-kpi:nth-child(3){
+  display:none!important;
+}
+/* ให้การ์ดที่เหลือเรียงต่อกันโดยไม่เหลือช่องว่าง */
+#warning .top-overview-metrics{
+  grid-auto-flow:row dense!important;
+}
+</style>
 </body>
 </html>
