@@ -3161,5 +3161,29 @@ html body #warning .flood-final-cards>.national-kpi{
  setTimeout(orderSix,900);setTimeout(orderSix,1900);
 })();
 </script>
+<style id="flood-cards-below-daily-v1">
+/* Seven situation cards follow the four daily-summary cards */
+#warning .flood-final-cards{order:2!important;margin-top:0!important;grid-template-columns:repeat(4,minmax(0,1fr))!important}
+#warning .flood-final-left>.daily-water-report{order:1!important}
+#warning .flood-final-left>.nationwide-indicators{order:3!important}
+#warning .flood-final-left>.national-alert{order:4!important}
+#warning .flood-final-left>.live-viz-card{order:5!important}
+#warning .flood-final-cards>.national-kpi[data-excluded-card="true"]{display:flex!important}
+@media(max-width:1250px) and (min-width:901px){#warning .flood-final-cards{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media(max-width:650px){#warning .flood-final-cards{grid-template-columns:1fr!important}}
+</style>
+<script id="flood-cards-below-daily-v1-script">
+(function(){
+ function moveCards(){
+  const left=document.querySelector("#warning .flood-final-left"),grid=left&&left.querySelector(".flood-final-cards"),daily=left&&left.querySelector(".daily-water-report");
+  if(!left||!grid||!daily)return;
+  const ids=["outEstateCount","outFactory","outCritical","nationalStormCount","nationalWaterProvinceCount","nationalHeavyRainCount","nationalFloodCount"];
+  ids.forEach(id=>{const el=document.getElementById(id),card=el&&el.closest(".kpi,.national-kpi");if(card){card.removeAttribute("data-excluded-card");grid.appendChild(card)}});
+  daily.insertAdjacentElement("afterend",grid);
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(moveCards,100));else setTimeout(moveCards,100);
+ setTimeout(moveCards,800);setTimeout(moveCards,1800);
+})();
+</script>
 </body>
 </html>
