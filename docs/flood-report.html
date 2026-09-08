@@ -3977,6 +3977,92 @@ html body #warning .flood-final-cards .source-link{display:none!important}
 @media(max-width:850px){html body #warning .flood-final-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:560px){html body #warning .flood-final-cards{grid-template-columns:1fr!important}}
 </style>
+<style id="flood-request-20260908-final">
+/* Requested final adjustments — 2026-09-08 */
+:root{
+  --status-critical:#bf033b;
+  --status-warning:#ff6908;
+  --status-normal:#598c14;
+}
+
+/* Remove the unused bottom block and the important-announcement card. */
+#warning .nearby-watch-table,
+#warning .national-alert{display:none!important}
+
+/* Exact requested status colours, including legend and generated table cells. */
+#warning .water-status-cell.critical,
+#warning .badge.critical,
+#warning td.status-critical,
+#warning td[data-status="critical"]{background:var(--status-critical)!important;color:#fff!important}
+#warning .water-status-cell.warning,
+#warning .badge.warning,
+#warning td.status-warning,
+#warning td[data-status="warning"]{background:var(--status-warning)!important;color:#fff!important}
+#warning .water-status-cell.normal,
+#warning .badge.normal,
+#warning td.status-normal,
+#warning td[data-status="normal"]{background:var(--status-normal)!important;color:#fff!important}
+#warning .status-color-legend .critical i{background:var(--status-critical)!important}
+#warning .status-color-legend .warning i{background:var(--status-warning)!important}
+#warning .status-color-legend .normal i{background:var(--status-normal)!important}
+#warning .status-color-legend .critical{color:var(--status-critical)!important}
+#warning .status-color-legend .warning{color:var(--status-warning)!important}
+#warning .status-color-legend .normal{color:var(--status-normal)!important}
+
+/* Nationwide indicators: compact ranked-card treatment from the reference. */
+#warning .nationwide-indicators{
+  min-height:0!important;padding:14px 16px 16px!important;background:#fff!important;
+  border:0!important;border-radius:18px!important;box-shadow:0 4px 18px rgba(42,72,105,.09)!important;
+}
+#warning .nationwide-indicators .card-head{padding:0 0 9px!important;border:0!important;background:#fff!important}
+#warning .nationwide-indicators .card-head span{display:none!important}
+#warning .nationwide-indicators .bars{display:grid!important;gap:7px!important;padding:0!important}
+#warning .nationwide-indicators .barrow{
+  display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;align-items:center!important;
+  gap:10px!important;margin:0!important;padding:7px 8px!important;background:#f5f7fb!important;border:0!important;border-radius:10px!important;
+}
+#warning .nationwide-indicators .barrow:before,
+#warning .nationwide-indicators .track{display:none!important}
+#warning .nationwide-indicators .barrow>span{font-size:16px!important;color:#737373!important}
+#warning .nationwide-indicators .barrow>b{
+  min-width:66px!important;padding:5px 10px!important;border-radius:12px!important;
+  background:#ffc85f!important;color:#654600!important;text-align:center!important;font-size:16px!important;font-weight:400!important;
+}
+#warning .nationwide-indicators .source-note{display:none!important}
+
+/* Flash-flood 24-hour card: same clean summary-card language as the supplied image. */
+#warning .flood-final-cards>.national-kpi:has(#nationalFloodCount){
+  display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;
+  min-height:126px!important;padding:16px 14px!important;background:#fff!important;border:0!important;
+  border-radius:14px!important;box-shadow:0 3px 13px rgba(42,72,105,.08)!important;text-align:center!important;
+}
+#warning .flood-final-cards>.national-kpi:has(#nationalFloodCount) h2{
+  width:100%!important;margin:0!important;color:#52057f!important;font-size:16px!important;font-weight:400!important;text-align:center!important;
+}
+#warning .flood-final-cards>.national-kpi:has(#nationalFloodCount) strong,
+#warning .flood-final-cards>.national-kpi:has(#nationalFloodCount) span{
+  width:100%!important;margin:0!important;padding:4px 8px!important;background:#e7f1ff!important;
+  color:#000!important;border-radius:8px!important;font-size:16px!important;font-weight:300!important;text-align:center!important;
+}
+
+/* Only one status legend is needed. */
+#warning .station-watch-table .status-color-legend + .status-color-legend{display:none!important}
+</style>
+<script id="flood-request-20260908-final-script">
+(function(){
+  function applyRequestedChanges(){
+    const warning=document.getElementById("warning");if(!warning)return;
+    warning.querySelectorAll(".national-alert,.nearby-watch-table").forEach(el=>el.remove());
+    const title=warning.querySelector(".national-kpi:has(#nationalFloodCount) h2");
+    if(title)title.textContent="พื้นที่เสี่ยงน้ำท่วมฉับพลันใน 24 ชั่วโมงข้างหน้า";
+    const legends=warning.querySelectorAll(".station-watch-table .status-color-legend");
+    [...legends].slice(1).forEach(el=>el.remove());
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",applyRequestedChanges);
+  else applyRequestedChanges();
+  setTimeout(applyRequestedChanges,250);setTimeout(applyRequestedChanges,1200);
+})();
+</script>
 <style id="match-situation-cards-to-daily-v1">
 html body #warning .flood-final-cards{
  display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;
@@ -4032,145 +4118,47 @@ html body #warning .flood-final-cards .source-link{display:none!important}
   grid-auto-flow:row dense!important;
 }
 </style>
-
-<style id="flood-ranking-cards-like-reference-v1">
-/* ลบประกาศสำคัญตามคำสั่ง */
-#warning .national-alert{display:none!important}
-
-/* ซ่อนการ์ดสรุปแบบเดิม เพราะแทนด้วยรายการจัดอันดับ 5 อันดับ */
-#warning .national-cards-dashboard>.national-kpi:last-child{display:none!important}
-
-/* การ์ดรายการแบบภาพตัวอย่าง */
-#warning .operations-side{
-  align-content:start!important
+<style id="national-indicators-flash-flood-pair-v1">
+#warning .national-watch-pair{
+  order:3!important;display:grid!important;grid-template-columns:minmax(0,1.35fr) minmax(240px,.65fr)!important;
+  gap:12px!important;width:100%!important;align-items:stretch!important
 }
-#warning .nationwide-indicators,
-#warning .flash-flood-24-ranking{
-  display:block!important;
-  min-width:0!important;
-  padding:18px!important;
-  background:#fff!important;
-  border:0!important;
-  border-radius:20px!important;
-  box-shadow:0 5px 18px rgba(39,54,74,.08)!important
+#warning .national-watch-pair>.nationwide-indicators,
+#warning .national-watch-pair>.national-kpi:has(#nationalFloodCount){
+  display:flex!important;flex-direction:column!important;width:100%!important;height:100%!important;margin:0!important
 }
-#warning .nationwide-indicators .card-head,
-#warning .flash-flood-24-ranking .ranking-card-head{
-  display:block!important;
-  padding:0 0 12px!important
+#warning .national-watch-pair>.national-kpi:has(#nationalFloodCount){
+  align-items:center!important;justify-content:center!important;min-height:0!important;padding:16px!important;
+  background:#fff!important;border:0!important;border-radius:18px!important;
+  box-shadow:0 4px 18px rgba(42,72,105,.09)!important
 }
-#warning .nationwide-indicators .card-head h2,
-#warning .flash-flood-24-ranking h2{
-  margin:0!important;
-  color:#333!important;
-  font-family:"Noto Sans Thai",sans-serif!important;
-  font-size:18px!important;
-  line-height:1.45!important;
-  font-weight:500!important
+#warning .national-watch-pair>.national-kpi:has(#nationalFloodCount) .n-icon,
+#warning .national-watch-pair>.national-kpi:has(#nationalFloodCount) .source-link{display:none!important}
+#warning .national-watch-pair>.national-kpi:has(#nationalFloodCount) h2{
+  margin:0 0 10px!important;font-size:16px!important;font-weight:400!important;color:#52057f!important;text-align:center!important
 }
-#warning .nationwide-indicators .card-head span,
-#warning .flash-flood-24-ranking .ranking-card-head p{
-  display:block!important;
-  margin:3px 0 0!important;
-  color:#7b7f87!important;
-  font-family:"Noto Sans Thai",sans-serif!important;
-  font-size:16px!important;
-  line-height:1.4!important;
-  font-weight:300!important
+#warning .national-watch-pair>.national-kpi:has(#nationalFloodCount) strong,
+#warning .national-watch-pair>.national-kpi:has(#nationalFloodCount)>span{
+  display:block!important;width:100%!important;margin:0!important;padding:6px 10px!important;
+  background:#e7f1ff!important;border-radius:8px!important;color:#000!important;font-size:16px!important;font-weight:300!important;text-align:center!important
 }
-#warning .nationwide-indicators .bars,
-#warning .flash-flood-ranking-list{
-  display:grid!important;
-  gap:8px!important;
-  padding:0!important
-}
-#warning .nationwide-indicators .barrow,
-#warning .flash-flood-ranking-row{
-  display:grid!important;
-  grid-template-columns:minmax(0,1fr) auto!important;
-  gap:10px!important;
-  align-items:center!important;
-  min-height:39px!important;
-  margin:0!important;
-  padding:5px 8px!important;
-  background:#f3f6fb!important;
-  border:0!important;
-  border-radius:10px!important
-}
-#warning .nationwide-indicators .barrow>span,
-#warning .flash-flood-ranking-name{
-  color:#70757d!important;
-  font-family:"Noto Sans Thai",sans-serif!important;
-  font-size:16px!important;
-  line-height:1.35!important;
-  font-weight:300!important
-}
-#warning .nationwide-indicators .track{display:none!important}
-#warning .nationwide-indicators .barrow>b,
-#warning .flash-flood-ranking-value{
-  justify-self:end!important;
-  min-width:66px!important;
-  padding:5px 11px!important;
-  border-radius:10px!important;
-  background:#ffbf43!important;
-  color:#4f3a00!important;
-  text-align:center!important;
-  font-family:"Noto Sans Thai",sans-serif!important;
-  font-size:16px!important;
-  line-height:1.25!important;
-  font-weight:400!important
-}
-#warning .nationwide-indicators .barrow:nth-child(2)>b{background:#ff943d!important;color:#403000!important}
-#warning .nationwide-indicators .barrow:nth-child(3)>b{background:#008b8f!important;color:#fff!important}
-#warning .nationwide-indicators .source-note{display:none!important}
-#warning .flash-flood-24-ranking{margin-top:12px!important}
-#warning .flash-flood-ranking-row:nth-child(2) .flash-flood-ranking-value{background:#ffad3d!important}
-#warning .flash-flood-ranking-row:nth-child(3) .flash-flood-ranking-value,
-#warning .flash-flood-ranking-row:nth-child(4) .flash-flood-ranking-value,
-#warning .flash-flood-ranking-row:nth-child(5) .flash-flood-ranking-value{background:#008b8f!important;color:#fff!important}
-@media(max-width:700px){
- #warning .nationwide-indicators,
- #warning .flash-flood-24-ranking{padding:14px!important}
-}
+@media(max-width:700px){#warning .national-watch-pair{grid-template-columns:1fr!important}}
 </style>
-<script id="flood-ranking-cards-like-reference-v1-builder">
+<script id="national-indicators-flash-flood-pair-v1-script">
 (function(){
-  function clean(value){return String(value||"ไม่ระบุจังหวัด").replace(/^จ\./,"").trim()}
-  function render(){
-    var host=document.querySelector("#warning .nationwide-indicators");
-    if(!host)return;
-    var card=document.querySelector("#warning .flash-flood-24-ranking");
-    if(!card){
-      card=document.createElement("article");
-      card.className="flash-flood-24-ranking";
-      card.innerHTML='<div class="ranking-card-head"><h2>พื้นที่เสี่ยงน้ำท่วมฉับพลันใน 24 ชั่วโมงข้างหน้า</h2><p>5 จังหวัดที่มีพื้นที่เข้าเกณฑ์เฝ้าระวังสูงสุด</p></div><div class="flash-flood-ranking-list"><div class="flash-flood-ranking-row"><span class="flash-flood-ranking-name">กำลังประมวลผลข้อมูลล่าสุด…</span><strong class="flash-flood-ranking-value">–</strong></div></div>';
-      host.insertAdjacentElement("afterend",card);
-    }
-    var data=window.IEAT_THAIWATER_DATA||window.THAIWATER_LATEST||{};
-    var areas=(data.flash_flood&&data.flash_flood["24h"]&&data.flash_flood["24h"].areas)||[];
-    if(!areas.length)return false;
-    var grouped={};
-    areas.forEach(function(row){
-      var province=clean(row.province);
-      if(!grouped[province])grouped[province]={province:province,tambons:new Set(),maxRain:0};
-      grouped[province].tambons.add(clean(row.tambon||row.amphoe||row.station));
-      grouped[province].maxRain=Math.max(grouped[province].maxRain,Number(row.sum_rainfall_mm)||0);
-    });
-    var rows=Object.values(grouped).sort(function(a,b){
-      return b.tambons.size-a.tambons.size||b.maxRain-a.maxRain;
-    }).slice(0,5);
-    card.querySelector(".flash-flood-ranking-list").innerHTML=rows.map(function(row,index){
-      return '<div class="flash-flood-ranking-row"><span class="flash-flood-ranking-name">'+(index+1)+'. '+row.province+'</span><strong class="flash-flood-ranking-value">'+row.tambons.size+' ตำบล</strong></div>';
-    }).join("");
-    return true;
-  }
-  function start(){
-    if(render())return;
-    var tries=0,timer=setInterval(function(){tries++;if(render()||tries>=15)clearInterval(timer)},700);
-  }
-  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start);else start();
+ function pairCards(){
+  const left=document.querySelector("#warning .flood-final-left");
+  const indicators=document.querySelector("#warning .nationwide-indicators");
+  const count=document.getElementById("nationalFloodCount");
+  const flood=count&&count.closest(".national-kpi");
+  if(!left||!indicators||!flood)return;
+  let pair=left.querySelector(":scope>.national-watch-pair");
+  if(!pair){pair=document.createElement("section");pair.className="national-watch-pair";pair.setAttribute("aria-label","ตัวชี้วัดเฝ้าระวังทั่วประเทศและพื้นที่เสี่ยงน้ำท่วมฉับพลัน");left.appendChild(pair)}
+  pair.appendChild(indicators);pair.appendChild(flood);
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",pairCards);else pairCards();
+ [300,900,1900,2400].forEach(ms=>setTimeout(pairCards,ms));
 })();
 </script>
-
 </body>
 </html>
