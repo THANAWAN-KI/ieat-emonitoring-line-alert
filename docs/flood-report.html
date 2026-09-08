@@ -4581,5 +4581,59 @@ html body #warning .estate-watch-table #estateRanks>tr>td:last-child>.water-stat
   box-shadow:none!important;
 }
 </style>
+<style id="flood-nine-uniform-cards-20260908-v5">
+/* การ์ด 9 ช่อง: 3 ตัวชี้วัดบน + 3 นิคมฯ + 3 สถานการณ์ประเทศ */
+html body #warning .daily-water-grid>.daily-water-item:nth-child(-n+3),
+html body #warning .flood-final-cards>.kpi,
+html body #warning .flood-final-cards>.national-kpi{
+  width:100%!important;
+  min-width:0!important;
+  height:172px!important;
+  min-height:172px!important;
+  margin:0!important;
+  padding:17px 16px 15px!important;
+  overflow:hidden!important;
+  background:#fff!important;
+  border:1px solid #dedede!important;
+  border-radius:8px!important;
+  box-shadow:0 2px 5px rgba(0,0,0,.16)!important;
+}
+html body #warning .daily-water-grid>.daily-water-item:nth-child(-n+3){
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:5px!important;
+  text-align:center!important;
+}
+html body #warning .flood-final-cards>.kpi{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:7px!important;
+  text-align:center!important;
+}
+html body #warning .daily-water-grid>.daily-water-item:nth-child(-n+3) small,
+html body #warning .flood-final-cards>.kpi span{
+  font-family:"Noto Sans Thai",sans-serif!important;
+  font-size:14px!important;
+  font-weight:400!important;
+  line-height:1.4!important;
+  text-align:center!important;
+}
+/* เปลี่ยนตัวเลขสีแดงเป็นสีน้ำเงินตามคำขอ */
+html body #warning .flood-final-cards>.national-kpi>strong{
+  color:#388ed1!important;
+}
+@media(max-width:760px){
+  html body #warning .daily-water-grid>.daily-water-item:nth-child(-n+3),
+  html body #warning .flood-final-cards>.kpi,
+  html body #warning .flood-final-cards>.national-kpi{
+    height:160px!important;
+    min-height:160px!important;
+  }
+}
+</style>
 </body>
 </html>
