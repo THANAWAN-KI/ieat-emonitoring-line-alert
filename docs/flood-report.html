@@ -3250,5 +3250,25 @@ html body #warning .flood-final-cards>.national-kpi{
  setTimeout(forceDailyHeading,100);setTimeout(forceDailyHeading,800);setTimeout(forceDailyHeading,2000);
 })();
 </script>
+<style id="flood-heading-first-element">
+#warning.view.active{display:flex!important;flex-direction:column!important}
+#warning>.flood-support-heading{order:-9999!important;flex:0 0 auto!important;width:100%!important;margin-top:0!important}
+#warning>.flood-final-layout{order:0!important}
+</style>
+<script id="flood-heading-first-element-script">
+(function(){
+ function moveHeadingFirst(){
+  const warning=document.getElementById("warning"),heading=warning&&warning.querySelector(".flood-support-heading");if(!warning||!heading)return false;
+  if(warning.firstElementChild!==heading)warning.prepend(heading);
+  const title=heading.querySelector("h1"),desc=heading.querySelector("p");
+  if(title)title.textContent="รายงานสถานการณ์น้ำประจำวัน";
+  if(desc)desc.textContent="สรุปข้อมูลที่สัมพันธ์กับพื้นที่นิคมอุตสาหกรรมจากแหล่งข้อมูลเดิมของระบบ";
+  return true;
+ }
+ if(!moveHeadingFirst()){const observer=new MutationObserver(()=>{if(moveHeadingFirst())observer.disconnect()});observer.observe(document.documentElement,{childList:true,subtree:true})}
+ document.addEventListener("DOMContentLoaded",moveHeadingFirst);
+ setTimeout(moveHeadingFirst,100);setTimeout(moveHeadingFirst,1000);
+})();
+</script>
 </body>
 </html>
