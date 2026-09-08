@@ -1448,7 +1448,7 @@ document.addEventListener('DOMContentLoaded',function(){
 #floodView .flood-report-frame{display:block!important;width:100%!important;height:calc(100vh - 82px)!important;min-height:900px!important;border:0!important;border-radius:0!important;background:#f7f7f7!important}
 @media(max-width:850px){#floodView .flood-report-frame{height:calc(100vh - 72px)!important;min-height:760px!important}}
 </style>
-<style id="hub-direct-5a0d2476">
+<style id="hub-direct-typov2">
 #directPagePortal{display:none;width:100%;height:calc(100vh - 112px);min-height:720px;margin:0;padding:0;background:#fff;overflow:hidden}
 #directPagePortal.show{display:block!important}
 #directPagePortal iframe{display:block;width:100%;height:100%;min-height:720px;border:0;background:#fff}
@@ -1460,12 +1460,12 @@ body.direct-page-open #pm25View,
 body.direct-page-open #otherView{display:none!important}
 @media(max-width:700px){#directPagePortal,#directPagePortal iframe{height:calc(100vh - 96px);min-height:640px}}
 </style>
-<script id="hub-direct-5a0d2476">
+<script id="hub-direct-typov2">
 (function(){
  const pages={
-  flood:{src:"./flood-report.html?from=hub-direct-5a0d2476",title:"ข้อมูลสนับสนุนกรณีเกิดเหตุน้ำท่วม"},
-  drought:{src:"./drought.html?from=hub-direct-5a0d2476",title:"ข้อมูลสนับสนุนกรณีภัยแล้ง"},
-  pm25:{src:"./pm25.html?from=hub-direct-5a0d2476",title:"ข้อมูลสนับสนุนกรณีฝุ่น PM2.5"}
+  flood:{src:"./flood-report.html?from=hub-direct-typov2",title:"ข้อมูลสนับสนุนกรณีเกิดเหตุน้ำท่วม"},
+  drought:{src:"./drought.html?from=hub-direct-typov2",title:"ข้อมูลสนับสนุนกรณีภัยแล้ง"},
+  pm25:{src:"./pm25.html?from=hub-direct-typov2",title:"ข้อมูลสนับสนุนกรณีฝุ่น PM2.5"}
  };
  function portal(){
   let box=document.getElementById("directPagePortal");
@@ -1488,4 +1488,17 @@ body.direct-page-open #otherView{display:none!important}
  },true);
 })();
 </script>
+<style id="hub-flood-tab-spec-v2">
+/* 1: Flood tab */
+.tabs .tab[data-type="flood"]{
+ position:relative!important;font-family:"Noto Sans Thai",sans-serif!important;
+ font-size:16px!important;font-weight:300!important;color:#000!important
+}
+.tabs .tab[data-type="flood"]::after{
+ content:""!important;position:absolute!important;left:0!important;right:0!important;bottom:-1px!important;
+ height:3px!important;background:#0091cd!important;transform:scaleX(0)!important
+}
+.tabs .tab[data-type="flood"].active{font-size:16px!important;font-weight:300!important;color:#000!important}
+.tabs .tab[data-type="flood"].active::after{transform:scaleX(1)!important}
+</style>
 </body></html>
