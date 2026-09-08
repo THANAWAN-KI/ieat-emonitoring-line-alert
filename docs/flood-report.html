@@ -3532,5 +3532,33 @@ html body #warning>.flood-final-layout+ .flood-final-tables{margin-top:0!importa
 @media(max-width:1200px){html body #warning>.flood-final-layout{grid-template-columns:1fr!important}html body #warning .flood-final-cards{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
 @media(max-width:750px){html body #warning .flood-final-cards,html body #warning .daily-water-grid{grid-template-columns:1fr!important}}
 </style>
+<style id="remove-lower-implicit-grid-gap-final">
+/* Reset inherited row 4/5 placement that created the large blank area */
+html body #warning>.flood-final-tables{
+ display:grid!important;grid-template-columns:1fr 1fr!important;
+ grid-template-rows:auto!important;grid-auto-rows:auto!important;
+ align-items:start!important;align-content:start!important;
+ min-height:0!important;height:auto!important;max-height:none!important;
+ margin:0!important;padding:0!important
+}
+html body #warning>.flood-final-tables>*,
+html body #warning>.flood-final-tables>.warning-table,
+html body #warning>.flood-final-tables>.estate-watch-table,
+html body #warning>.flood-final-tables>.station-watch-table,
+html body #warning>.flood-final-tables>.nearby-watch-table{
+ position:static!important;inset:auto!important;
+ grid-row:auto!important;grid-row-start:auto!important;grid-row-end:auto!important;
+ align-self:start!important;min-height:0!important;height:auto!important;
+ margin-top:0!important;margin-bottom:0!important
+}
+html body #warning>.flood-final-tables>.estate-watch-table{grid-column:1!important}
+html body #warning>.flood-final-tables>.station-watch-table{grid-column:2!important}
+html body #warning>.flood-final-tables>.nearby-watch-table{grid-column:1/-1!important}
+html body #warning>.flood-final-layout+ .flood-final-tables{margin-top:0!important}
+@media(max-width:850px){
+ html body #warning>.flood-final-tables{grid-template-columns:1fr!important}
+ html body #warning>.flood-final-tables>*{grid-column:1!important}
+}
+</style>
 </body>
 </html>
