@@ -7,10 +7,9 @@
   <link rel="stylesheet" href="https://oc.ieat.go.th/assets/app/fonts/includes.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Kanit:wght@300;400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script type="module" src="https://js.arcgis.com/5.1/embeddable-components/"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
-  <script src="data/thaiwater_latest.js?v=20260821-3"></script>
+  <script src="data/thaiwater_latest.js?v=20260821-3" defer></script>
   <script src="flood-live-data.js?v=20260821-8" defer></script>
   <script src="data/thaiwater-map-meta.js" defer></script>
   <script src="flood-export.js?v=20260821-1" defer></script>
@@ -1443,7 +1442,7 @@ body{color:#172033!important}
         </div>
         <article class="card operations-map embedded-water-map">
           <div class="overview-map-label"><b>แผนที่ความเสี่ยงฝน</b><small>เลื่อนแผนที่หรือซูมเข้า–ออกเพื่อดูรายละเอียด</small></div>
-          <iframe class="thaiwater-risk-map" width="700" height="600" allow="local-network-access; geolocation; fullscreen" title="flood" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&amp;webmap=3d24287ac6ea49cd823625ddad496e01&amp;theme=light&amp;scroll=true&amp;center=102.273235960972,13.646914809792989&amp;scale=9244648.868618"></iframe>
+          <iframe class="thaiwater-risk-map" width="700" height="600" allow="local-network-access; geolocation; fullscreen" title="flood" loading="lazy" fetchpriority="low" referrerpolicy="strict-origin-when-cross-origin" data-src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&amp;webmap=3d24287ac6ea49cd823625ddad496e01&amp;theme=light&amp;scroll=true&amp;center=102.273235960972,13.646914809792989&amp;scale=9244648.868618"></iframe>
         </article>
       </section>
 
@@ -1564,7 +1563,7 @@ body{color:#172033!important}
     $("openEditor")?.addEventListener("click",()=>$("editor").classList.add("open"));$("closeEditor").onclick=()=>$("editor").classList.remove("open");$("editor").onclick=e=>{if(e.target===$("editor"))$("editor").classList.remove("open")};
     function sync(){const period=`ช่วงข้อมูล ${thaiDate(value("startIn"))} ถึง ${thaiDate(value("endIn"))}`;document.querySelectorAll(".outEstate").forEach(e=>e.textContent=value("estateIn"));document.querySelectorAll(".outPeriod").forEach(e=>e.textContent=period);const map={outEstateCount:"estateCountIn",outFactory:"factoryIn",outCritical:"criticalIn",outCritical2:"criticalIn",outRouteCount:"routeCountIn",outRoute2:"routeCountIn",outRain:"rainIn",outRainWarning:"rainIn",outRoadWarning:"roadIn",outTrend:"trendIn",outNext:"nextIn",outVerify1:"verifyIn",outSummary:"summaryIn",outAction:"actionIn",infoEstate:"estateCountIn",infoFactory:"factoryIn",infoCritical:"criticalIn",infoRoute:"routeCountIn",infoLevel:"levelIn",infoSummary:"summaryIn",infoRain:"rainIn",infoTrend:"trendIn",infoRoad:"roadIn",infoAction:"actionIn",infoVerify:"verifyIn"};Object.entries(map).forEach(([o,i])=>{if($(o))$(o).textContent=value(i)});$("outLevel").textContent=value("levelIn");const num=id=>parseFloat((value(id).match(/[\d.]+/)||[0])[0]);$("rainBar").style.width=Math.min(100,num("rainIn")/2)+"%";$("criticalBar").style.width=Math.min(100,num("criticalIn")*16)+"%";$("routeBar").style.width=Math.min(100,num("routeCountIn")*18)+"%";$("generatedAt").textContent="จัดทำ "+new Date().toLocaleString("th-TH")}
     $("applyData").onclick=()=>{sync();$("editor").classList.remove("open")};
-    window.zoomRiskMap=function(lat,lon,label){const frame=document.querySelector(".thaiwater-risk-map"),latitude=Number(lat),longitude=Number(lon);if(!frame||!Number.isFinite(latitude)||!Number.isFinite(longitude))return;const url=new URL(frame.src,document.baseURI);url.searchParams.set("center",longitude+","+latitude);url.searchParams.set("scale","75000");url.searchParams.set("_zoom",Date.now());frame.src=url.toString();frame.closest(".embedded-water-map")?.scrollIntoView({behavior:"smooth",block:"center"});const mapLabel=document.querySelector(".embedded-water-map .overview-map-label small");if(mapLabel&&label)mapLabel.textContent="กำลังแสดงตำแหน่ง: "+label};
+    window.zoomRiskMap=function(lat,lon,label){const frame=document.querySelector(".thaiwater-risk-map"),latitude=Number(lat),longitude=Number(lon);if(!frame||!Number.isFinite(latitude)||!Number.isFinite(longitude))return;const url=new URL(frame.src||frame.dataset.src,document.baseURI);url.searchParams.set("center",longitude+","+latitude);url.searchParams.set("scale","75000");url.searchParams.set("_zoom",Date.now());frame.src=url.toString();frame.closest(".embedded-water-map")?.scrollIntoView({behavior:"smooth",block:"center"});const mapLabel=document.querySelector(".embedded-water-map .overview-map-label small");if(mapLabel&&label)mapLabel.textContent="กำลังแสดงตำแหน่ง: "+label};
     document.addEventListener("click",event=>{const target=event.target.closest("[data-map-lat][data-map-lon]");if(target)window.zoomRiskMap(target.dataset.mapLat,target.dataset.mapLon,target.dataset.mapLabel||target.textContent.trim())});
     const sclass=t=>t.includes("วิกฤต")||t.includes("ล้น")?"critical":t.includes("ปกติ")?"normal":"";
     function addStation(d={n:"ระบุชื่อสถานี",v:"–",s:"เฝ้าระวัง",trend:"ทรงตัว",t:"–",agency:"ThaiWater",lat:null,lon:null}){const r=document.createElement("tr"),parts=String(d.n||"").split(" • "),level=sclass(d.s)==="critical"?"critical":sclass(d.s)==="normal"?"normal":"warning",estate=parts.length>1?'<small class="station-estate">ใกล้ '+parts.slice(1).join(" • ")+'</small>':"",attrs=Number.isFinite(Number(d.lat))&&Number.isFinite(Number(d.lon))?' data-map-lat="'+d.lat+'" data-map-lon="'+d.lon+'" data-map-label="'+(parts[0]||"สถานีตรวจวัด")+'"':"";r.innerHTML='<td contenteditable><span class="station-name">'+(parts[0]||"–")+'</span>'+estate+'</td><td contenteditable>'+d.v+'</td><td><button type="button" class="water-status-cell map-cell-zoom '+level+'"'+attrs+'>'+d.s+'</button></td><td contenteditable>'+d.t+'</td>';$("stations").appendChild(r)}window.addStation=addStation;
@@ -3123,5 +3122,24 @@ html,body{background:var(--flood-bg)!important;color:var(--flood-ink)!important}
 }
 </style>
 
+<script id="flood-performance-loader">
+(function(){
+  function loadMainMap(){
+    var frame=document.querySelector(".thaiwater-risk-map[data-src]");
+    if(!frame||frame.src)return;
+    frame.src=frame.dataset.src;
+  }
+  document.querySelectorAll("img:not([loading])").forEach(function(img){
+    img.loading="lazy";
+    img.decoding="async";
+  });
+  if("requestIdleCallback" in window){
+    requestIdleCallback(loadMainMap,{timeout:2500});
+  }else{
+    setTimeout(loadMainMap,1200);
+  }
+  document.querySelector(".embedded-water-map")?.addEventListener("pointerdown",loadMainMap,{once:true});
+})();
+</script>
 </body>
 </html>
