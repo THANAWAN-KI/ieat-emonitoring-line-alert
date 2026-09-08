@@ -2845,5 +2845,43 @@ body{min-height:100vh!important}
  .flood-dashboard-map{height:520px!important;min-height:520px!important}
 }
 </style>
+<style id="flood-heading-actions-20260908">
+/* Keep the only two page actions in the title strip */
+.topbar .nav{display:none!important}
+.flood-support-heading{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:20px!important}
+.flood-support-heading>div:first-child{min-width:0!important}
+.flood-support-heading-actions{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:10px!important;flex:0 0 auto!important;margin-left:auto!important}
+.flood-support-heading-actions button{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ min-height:42px!important;padding:9px 20px!important;
+ border:0!important;border-radius:999px!important;
+ background:#8ec06c!important;color:#537b35!important;
+ font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:500!important;
+ line-height:1.2!important;box-shadow:none!important;white-space:nowrap!important;cursor:pointer!important
+}
+.flood-support-heading-actions button:hover,
+.flood-support-heading-actions button.active{
+ background:#8ec06c!important;color:#537b35!important;
+ filter:brightness(.96)!important
+}
+@media(max-width:650px){
+ .flood-support-heading{display:block!important}
+ .flood-support-heading-actions{justify-content:flex-start!important;margin:12px 0 0!important}
+ .flood-support-heading-actions button{padding:8px 15px!important;font-size:14px!important}
+}
+</style>
+<script id="flood-heading-actions-20260908-labels">
+(function(){
+ function setFloodActions(){
+  var box=document.querySelector(".flood-support-heading-actions");if(!box)return;
+  var buttons=box.querySelectorAll("button");
+  if(buttons[0]){buttons[0].textContent="พื้นที่เฝ้าระวัง";buttons[0].dataset.target="warning"}
+  if(buttons[1]){buttons[1].textContent="ส่งออกข้อมูล";buttons[1].dataset.target="infographic"}
+  for(var i=buttons.length-1;i>1;i--)buttons[i].remove();
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",function(){setTimeout(setFloodActions,60)});else setTimeout(setFloodActions,60);
+ setTimeout(setFloodActions,1000);
+})();
+</script>
 </body>
 </html>
