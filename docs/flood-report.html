@@ -3950,5 +3950,32 @@ html body #warning .daily-water-grid .daily-water-item *,html body #warning .flo
 html body #warning .flood-final-cards .icon,html body #warning .flood-final-cards .n-icon{display:none!important}
 </style>
 <script id="flood-eleven-cards-centered-16-v1-script">(function(){function r(){const h=document.querySelector("#warning .flood-support-heading");if(h)h.querySelectorAll("svg,img,.icon,.flood-head-icon").forEach(e=>e.remove())}document.addEventListener("DOMContentLoaded",r);r();setTimeout(r,100);setTimeout(r,1000)})();</script>
+<style id="flood-card-inner-fit-v2">
+html body #warning .flood-final-cards{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important}
+html body #warning .flood-final-cards>.kpi,
+html body #warning .flood-final-cards>.national-kpi{
+ display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;
+ min-width:0!important;width:100%!important;height:auto!important;min-height:148px!important;
+ padding:16px!important;gap:5px!important;overflow:hidden!important;text-align:center!important
+}
+html body #warning .flood-final-cards>.kpi>div{
+ display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;
+ width:100%!important;min-width:0!important;gap:5px!important
+}
+html body #warning .flood-final-cards>.national-kpi>h2,
+html body #warning .flood-final-cards>.national-kpi>strong,
+html body #warning .flood-final-cards>.national-kpi>span,
+html body #warning .flood-final-cards>.kpi>div>strong,
+html body #warning .flood-final-cards>.kpi>div>span{
+ display:block!important;position:static!important;grid-column:auto!important;grid-row:auto!important;
+ width:100%!important;max-width:100%!important;margin:0!important;padding:0!important;
+ font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;line-height:1.4!important;
+ font-weight:300!important;text-align:center!important;white-space:normal!important;
+ word-break:normal!important;overflow-wrap:anywhere!important;text-overflow:clip!important
+}
+html body #warning .flood-final-cards .source-link{display:none!important}
+@media(max-width:850px){html body #warning .flood-final-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:560px){html body #warning .flood-final-cards{grid-template-columns:1fr!important}}
+</style>
 </body>
 </html>
