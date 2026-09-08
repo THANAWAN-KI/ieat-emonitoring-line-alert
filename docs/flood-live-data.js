@@ -26,7 +26,7 @@
     body.innerHTML=estates.slice(0,12).map((e,i)=>{
       const rainfall=e.max_rainfall_mm==null?"–":fmt(e.max_rainfall_mm)+" มม.";
       const distance=e.nearest_alert_km==null?"–":fmt(e.nearest_alert_km)+" กม.";
-      const status=e.status||"เฝ้าระวัง",level=Number(e.severity_score)>=4||status.includes("ล้น")?"critical":Number(e.severity_score)>=3||status.includes("มาก")?"warning":"normal";
+      const sourceStatus=e.status||"",level=Number(e.severity_score)>=4||sourceStatus.includes("ล้น")?"critical":"normal",status=level==="critical"?"ล้นตลิ่ง":"ปกติ";
       return `<tr><td>${i+1}</td><td><b>${e.name}</b></td><td>${fmt(e.alert_station_count,0)} สถานี</td><td>${distance}</td><td>${rainfall}</td><td><button type="button" class="water-status-cell map-cell-zoom ${level}" data-map-lat="${e.lat}" data-map-lon="${e.lon}" data-map-label="${e.name}">${status}</button></td></tr>`;
     }).join("");
   }
