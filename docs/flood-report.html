@@ -4662,5 +4662,38 @@ html body #warning [style*="#52057f" i],
 html body #warning [style*="#6b4b7d" i],
 html body #warning [style*="#8f5db7" i]{color:#388ed1!important}
 </style>
+<style id="flood-hard-remove-all-icons-20260908-v8">
+/* ลบไอคอนทั้งหมดในการ์ด และบังคับสีม่วงเดิมเป็น #388ed1 */
+html body #warning .kpi .icon,
+html body #warning .national-kpi .n-icon,
+html body #warning .daily-water-item .icon{
+  display:none!important;
+  width:0!important;
+  height:0!important;
+  margin:0!important;
+  padding:0!important;
+}
+html body #warning .flood-final-cards>.kpi,
+html body #warning .flood-final-cards>.national-kpi{
+  grid-template-columns:1fr!important;
+}
+html body #warning .flood-final-cards>.kpi span,
+html body #warning .flood-final-cards>.national-kpi h2,
+html body #warning .flood-final-cards>.national-kpi span{
+  color:#388ed1!important;
+}
+</style>
+<script id="flood-hard-remove-all-icons-20260908-v8-script">
+(function(){
+  function removeAllCardIcons(){
+    const warning=document.getElementById("warning");
+    if(!warning)return;
+    warning.querySelectorAll(".kpi .icon,.national-kpi .n-icon,.daily-water-item .icon").forEach(function(icon){icon.remove()});
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeAllCardIcons);
+  else removeAllCardIcons();
+  [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeAllCardIcons,ms)});
+})();
+</script>
 </body>
 </html>
