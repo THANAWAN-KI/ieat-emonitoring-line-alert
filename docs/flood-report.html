@@ -3452,5 +3452,85 @@ html body #warning .flood-final-cards>.national-kpi{
  setTimeout(removeGhostAndMoveTables,150);setTimeout(removeGhostAndMoveTables,1000);setTimeout(removeGhostAndMoveTables,2200);
 })();
 </script>
+<style id="flood-fire-page-visual-parity-final">
+/* One authoritative typography/layout layer matching the Fire page; flood data is unchanged */
+html body #warning,html body #warning button,html body #warning input,html body #warning select,
+html body #warning textarea,html body #warning table,html body #warning th,html body #warning td,
+html body #warning p,html body #warning span,html body #warning small,html body #warning a,
+html body #warning label{font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;line-height:1.45!important;font-weight:300!important;color:#000!important}
+
+/* Fire-page headline scale */
+html body #warning .flood-support-heading{min-height:94px!important;padding:16px 20px!important;background:#fff!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+html body #warning .flood-support-heading h1{margin:0!important;font-size:20px!important;line-height:1.3!important;font-weight:500!important;color:#1c79c0!important}
+html body #warning .flood-support-heading p,
+html body #warning .flood-support-heading-date{font-size:16px!important;line-height:1.4!important;font-weight:300!important;color:#000!important}
+html body #warning .flood-support-heading-actions button{min-width:150px!important;min-height:44px!important;padding:9px 18px!important}
+html body #warning .flood-support-heading-actions button:after{font-size:16px!important;font-weight:300!important;color:#fff!important}
+
+/* Same two-column proportion and spacing as Fire */
+html body #warning>.flood-final-layout{grid-template-columns:minmax(0,47%) minmax(0,53%)!important;gap:14px!important;align-items:stretch!important}
+html body #warning .flood-final-left{gap:12px!important;padding:0!important}
+html body #warning .flood-final-cards{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:10px!important}
+
+/* Fire support-card geometry */
+html body #warning .flood-final-cards>.kpi,
+html body #warning .flood-final-cards>.national-kpi{
+ display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:space-between!important;
+ min-height:142px!important;height:142px!important;padding:15px 16px!important;
+ background:#fff!important;border:1px solid #e2d4e7!important;border-radius:11px!important;
+ box-shadow:none!important
+}
+html body #warning .flood-final-cards>.kpi:hover,
+html body #warning .flood-final-cards>.national-kpi:hover{border-color:#8f5db7!important;box-shadow:0 6px 18px rgba(143,93,183,.18)!important}
+html body #warning .flood-final-cards h2,
+html body #warning .flood-final-cards .kpi>div>span,
+html body #warning .flood-final-cards .national-kpi>h2{margin:0!important;font-size:18px!important;line-height:1.35!important;font-weight:500!important;color:#000!important}
+html body #warning .flood-final-cards strong{font-size:25px!important;line-height:1.2!important;font-weight:700!important;color:#004b79!important}
+html body #warning .flood-final-cards span,
+html body #warning .flood-final-cards p{font-size:16px!important;line-height:1.4!important;font-weight:300!important;color:#000!important}
+html body #warning .flood-final-cards .icon,
+html body #warning .flood-final-cards .n-icon{display:none!important}
+
+/* Daily cards follow the same Fire card style */
+html body #warning .daily-water-report,
+html body #warning .nationwide-indicators,
+html body #warning .national-alert,
+html body #warning .live-viz-card,
+html body #warning>.flood-final-tables>.warning-table{background:#fff!important;border:1px solid #e2d4e7!important;border-radius:14px!important;box-shadow:none!important}
+html body #warning .daily-water-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:10px!important}
+html body #warning .daily-water-grid .daily-water-item,
+html body #warning .daily-water-grid .daily-water-item:nth-child(n+3){
+ min-height:106px!important;padding:13px 14px!important;background:#fff!important;border:1px solid #e2d4e7!important;border-radius:11px!important
+}
+html body #warning .daily-water-item small{font-size:18px!important;font-weight:500!important;color:#000!important}
+html body #warning .daily-water-item strong{font-size:25px!important;font-weight:700!important;color:#004b79!important}
+html body #warning .daily-water-item span{font-size:16px!important;font-weight:300!important;color:#000!important}
+
+/* Fire section-heading and general text scale */
+html body #warning .nationwide-indicators h2,
+html body #warning .national-alert b,
+html body #warning .live-viz-card h2,
+html body #warning .table-section-head h2{font-size:18px!important;line-height:1.35!important;font-weight:500!important}
+html body #warning .nationwide-indicators p,
+html body #warning .national-alert p,
+html body #warning .national-alert a,
+html body #warning .live-viz-card p,
+html body #warning .table-section-head p,
+html body #warning .table-section-head span,
+html body #warning .table th,
+html body #warning .table td{font-size:16px!important;line-height:1.45!important;font-weight:300!important}
+
+/* Map panel mirrors Fire */
+html body #warning .flood-final-map{border:1px solid #e2d4e7!important;border-radius:14px!important;background:#fff!important;box-shadow:none!important;overflow:hidden!important}
+html body #warning .overview-map-label{padding:13px 15px!important;background:#fff!important;border-radius:0 0 12px 0!important}
+html body #warning .overview-map-label b{font-size:18px!important;font-weight:500!important;color:#000!important}
+html body #warning .overview-map-label small{font-size:16px!important;font-weight:300!important;color:#000!important}
+
+/* Tables attach directly; no ghost space */
+html body #warning>.flood-final-tables{margin:0!important;padding:0!important;gap:14px!important}
+html body #warning>.flood-final-layout+ .flood-final-tables{margin-top:0!important}
+@media(max-width:1200px){html body #warning>.flood-final-layout{grid-template-columns:1fr!important}html body #warning .flood-final-cards{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media(max-width:750px){html body #warning .flood-final-cards,html body #warning .daily-water-grid{grid-template-columns:1fr!important}}
+</style>
 </body>
 </html>
