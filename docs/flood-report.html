@@ -3789,5 +3789,86 @@ html body #warning .daily-water-item:hover{
 @media(max-width:900px){html body #warning .flood-final-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:560px){html body #warning .flood-final-cards,html body #warning .daily-water-grid{grid-template-columns:1fr!important}}
 </style>
+<style id="flood-dashboard-reference-exact-v2">
+/* Reference-dashboard composition: dense analytics left, full-height map right */
+body{background:#fff!important}
+#warning>.flood-final-layout{
+ display:grid!important;grid-template-columns:minmax(0,58%) minmax(0,42%)!important;
+ gap:10px!important;height:calc(100vh - 154px)!important;min-height:720px!important;
+ overflow:hidden!important;background:#fff!important
+}
+#warning .flood-final-left{
+ display:flex!important;flex-direction:column!important;gap:10px!important;
+ height:100%!important;min-height:0!important;overflow-y:auto!important;overflow-x:hidden!important;
+ padding:6px 10px 8px 4px!important;border-right:1px solid #e4e8ed!important
+}
+#warning .flood-final-left::-webkit-scrollbar{width:10px!important}
+#warning .flood-final-left::-webkit-scrollbar-thumb{background:#858585!important;border-radius:8px!important}
+#warning .flood-final-map{
+ position:relative!important;height:100%!important;min-height:0!important;
+ border:0!important;border-radius:12px!important;background:#dcecff!important;overflow:hidden!important
+}
+#warning .flood-final-map>.operations-map,
+#warning .flood-final-map>.operations-map iframe{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:0!important;border:0!important;border-radius:12px!important}
+
+/* KPI strip across the top */
+#warning .daily-water-report{order:1!important;padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
+#warning .daily-water-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:10px!important}
+html body #warning .daily-water-grid .daily-water-item,
+html body #warning .daily-water-grid .daily-water-item:nth-child(n+3){
+ min-height:88px!important;height:88px!important;padding:11px 13px!important;
+ background:#fff!important;border:0!important;border-radius:12px!important;
+ box-shadow:0 3px 13px rgba(42,72,105,.08)!important
+}
+#warning .daily-water-item small{font-size:13px!important;line-height:1.3!important;font-weight:300!important;color:#555!important}
+#warning .daily-water-item strong{font-size:20px!important;line-height:1.2!important;font-weight:500!important;color:#388ed1!important}
+#warning .daily-water-item span{font-size:11px!important;line-height:1.25!important;font-weight:300!important;color:#777!important}
+
+/* Compact situation matrix directly below */
+#warning .flood-final-cards{
+ order:2!important;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ grid-auto-rows:auto!important;gap:10px!important
+}
+html body #warning .flood-final-cards>.kpi,
+html body #warning .flood-final-cards>.national-kpi{
+ display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;grid-template-rows:auto auto!important;
+ align-content:center!important;align-items:center!important;column-gap:9px!important;row-gap:4px!important;
+ min-height:108px!important;height:108px!important;padding:12px 14px!important;
+ background:#fff!important;border:0!important;border-radius:12px!important;
+ box-shadow:0 3px 13px rgba(42,72,105,.08)!important;text-align:left!important;overflow:hidden!important
+}
+#warning .flood-final-cards .icon,#warning .flood-final-cards .n-icon{display:none!important}
+#warning .flood-final-cards>.kpi>div{display:contents!important}
+#warning .flood-final-cards h2,
+#warning .flood-final-cards .kpi span,
+#warning .flood-final-cards .national-kpi h2{grid-column:1/-1!important;font-size:14px!important;line-height:1.35!important;font-weight:400!important;color:#333!important;text-align:left!important}
+#warning .flood-final-cards strong{grid-column:1!important;font-size:20px!important;line-height:1.2!important;font-weight:500!important;color:#388ed1!important;text-align:left!important}
+#warning .flood-final-cards .national-kpi>span{grid-column:2!important;font-size:12px!important;color:#777!important;text-align:right!important}
+
+/* Analysis cards below match the reference white-panel system */
+#warning .nationwide-indicators{order:3!important;min-height:260px!important;border:0!important;border-radius:12px!important;box-shadow:0 3px 13px rgba(42,72,105,.08)!important;overflow:hidden!important}
+#warning .nationwide-indicators .card-head{padding:14px 16px!important;background:#fff!important}
+#warning .nationwide-indicators h2{font-size:16px!important;font-weight:500!important}
+#warning .nationwide-indicators .card-head span{font-size:13px!important;font-weight:300!important;color:#777!important}
+#warning .nationwide-indicators .bars{padding:8px 16px 16px!important}
+#warning .nationwide-indicators .barrow{font-size:13px!important}
+#warning .national-alert{order:4!important;border:0!important;border-radius:12px!important;box-shadow:0 3px 13px rgba(42,72,105,.08)!important}
+#warning .live-viz-card{order:5!important;border:0!important;border-radius:12px!important;box-shadow:0 3px 13px rgba(42,72,105,.08)!important}
+
+/* Clean map: reference has map tools/legend, not the large white title plate */
+#warning .flood-final-map .overview-map-label{display:none!important}
+
+/* Tables are outside the viewport dashboard, directly next with no blank block */
+#warning>.flood-final-tables{margin:0!important;padding:10px 0 0!important}
+@media(max-width:1100px){
+ #warning>.flood-final-layout{grid-template-columns:1fr!important;height:auto!important;overflow:visible!important}
+ #warning .flood-final-left{height:auto!important;overflow:visible!important;border-right:0!important}
+ #warning .flood-final-map{height:650px!important;min-height:650px!important}
+}
+@media(max-width:720px){
+ #warning .daily-water-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ #warning .flood-final-cards{grid-template-columns:1fr!important}
+}
+</style>
 </body>
 </html>
