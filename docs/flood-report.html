@@ -3560,5 +3560,80 @@ html body #warning>.flood-final-layout+ .flood-final-tables{margin-top:0!importa
  html body #warning>.flood-final-tables>*{grid-column:1!important}
 }
 </style>
+<style id="flood-card-text-fit-purple-v1">
+/* Remove the black-framed date */
+#warning .flood-support-heading-date,#warning #dailyReportDate{display:none!important}
+
+/* Header now uses only title and actions */
+#warning .flood-support-heading{grid-template-columns:minmax(0,1fr) auto!important}
+
+/* Orange frame: every text item in four daily cards */
+html body #warning .daily-water-grid .daily-water-item,
+html body #warning .daily-water-grid .daily-water-item:nth-child(n+3){
+ display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;
+ min-width:0!important;min-height:124px!important;height:auto!important;padding:14px 16px!important;gap:5px!important;
+ overflow:visible!important
+}
+html body #warning .daily-water-grid .daily-water-item *,
+html body #warning .daily-water-item small,
+html body #warning .daily-water-item strong,
+html body #warning .daily-water-item span{
+ font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;line-height:1.4!important;font-weight:300!important;
+ white-space:normal!important;word-break:normal!important;overflow-wrap:anywhere!important;
+ width:auto!important;max-width:100%!important;margin:0!important;padding:0!important
+}
+
+/* Green frame: all situation cards, no clipped or oversized text */
+html body #warning .flood-final-cards{
+ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ grid-auto-rows:minmax(150px,auto)!important;gap:12px!important
+}
+html body #warning .flood-final-cards>.kpi,
+html body #warning .flood-final-cards>.national-kpi{
+ display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;
+ min-width:0!important;width:100%!important;min-height:150px!important;height:auto!important;
+ padding:16px 18px!important;gap:7px!important;overflow:visible!important
+}
+html body #warning .flood-final-cards>.kpi *,
+html body #warning .flood-final-cards>.national-kpi *,
+html body #warning .flood-final-cards h2,
+html body #warning .flood-final-cards strong,
+html body #warning .flood-final-cards span,
+html body #warning .flood-final-cards p{
+ font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;line-height:1.45!important;font-weight:300!important;
+ white-space:normal!important;word-break:normal!important;overflow-wrap:anywhere!important;
+ max-width:100%!important;margin:0!important
+}
+html body #warning .flood-final-cards .source-link{display:none!important}
+
+/* Requested purple labels */
+#warning .flood-final-cards>.kpi:has(#outEstateCount) span,
+#warning .flood-final-cards>.kpi:has(#outFactory) span,
+#warning .flood-final-cards>.kpi:has(#outCritical) span,
+#warning .flood-final-cards>.national-kpi:has(#nationalStormCount) h2,
+#warning .flood-final-cards>.national-kpi:has(#nationalStormCount) span,
+#warning .flood-final-cards>.national-kpi:has(#nationalWaterProvinceCount) h2,
+#warning .flood-final-cards>.national-kpi:has(#nationalHeavyRainCount) h2,
+#warning .flood-final-cards>.national-kpi:has(#nationalFloodCount) h2{color:#52057f!important}
+
+/* Nationwide subtitle and requested daily labels */
+#warning .nationwide-indicators .card-head span,
+#warning .daily-water-item:nth-child(1) small,
+#warning .daily-water-item:nth-child(2) small,
+#warning .daily-water-item:nth-child(3) small{
+ font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;line-height:1.4!important;font-weight:300!important
+}
+@media(max-width:1200px){html body #warning .flood-final-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:650px){html body #warning .flood-final-cards{grid-template-columns:1fr!important}}
+</style>
+<script id="flood-card-text-fit-purple-v1-script">
+(function(){
+ function removeDate(){
+  document.querySelectorAll("#warning .flood-support-heading-date").forEach(el=>el.remove());
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeDate);else removeDate();
+ setTimeout(removeDate,100);setTimeout(removeDate,1000);
+})();
+</script>
 </body>
 </html>
