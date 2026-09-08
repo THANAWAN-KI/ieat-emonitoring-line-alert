@@ -1448,4 +1448,44 @@ document.addEventListener('DOMContentLoaded',function(){
 #floodView .flood-report-frame{display:block!important;width:100%!important;height:calc(100vh - 82px)!important;min-height:900px!important;border:0!important;border-radius:0!important;background:#f7f7f7!important}
 @media(max-width:850px){#floodView .flood-report-frame{height:calc(100vh - 72px)!important;min-height:760px!important}}
 </style>
+<style id="hub-direct-page-router-20260908">
+#directPagePortal{display:none;width:100%;height:calc(100vh - 112px);min-height:720px;margin:0;padding:0;background:#fff;overflow:hidden}
+#directPagePortal.show{display:block!important}
+#directPagePortal iframe{display:block;width:100%;height:100%;min-height:720px;border:0;background:#fff}
+body.direct-page-open #fireView,
+body.direct-page-open .fire-hub,
+body.direct-page-open #floodView,
+body.direct-page-open #droughtView,
+body.direct-page-open #pm25View,
+body.direct-page-open #otherView{display:none!important}
+@media(max-width:700px){#directPagePortal,#directPagePortal iframe{height:calc(100vh - 96px);min-height:640px}}
+</style>
+<script id="hub-direct-page-router-20260908-script">
+(function(){
+ const pages={
+  flood:{src:"./flood-report.html?from=hub-direct-af6a08e5",title:"ข้อมูลสนับสนุนกรณีเกิดเหตุน้ำท่วม"},
+  drought:{src:"./drought.html?from=hub-direct-20260908",title:"ข้อมูลสนับสนุนกรณีภัยแล้ง"},
+  pm25:{src:"./pm25.html?from=hub-direct-20260908",title:"ข้อมูลสนับสนุนกรณีฝุ่น PM2.5"}
+ };
+ function portal(){
+  let box=document.getElementById("directPagePortal");
+  if(!box){box=document.createElement("section");box.id="directPagePortal";box.innerHTML='<iframe id="directPageFrame" loading="eager" allowfullscreen></iframe>';document.querySelector("main.page")?.appendChild(box)}
+  return box;
+ }
+ function openDirect(type,tab){
+  const page=pages[type],box=portal(),frame=box.querySelector("iframe");if(!page)return;
+  document.body.classList.add("direct-page-open");
+  document.querySelectorAll(".tabs .tab").forEach(x=>x.classList.toggle("active",x===tab));
+  if(frame.getAttribute("src")!==page.src)frame.setAttribute("src",page.src);
+  frame.title=page.title;box.classList.add("show");
+  window.scrollTo({top:0,behavior:"instant"});
+ }
+ document.addEventListener("click",function(event){
+  const tab=event.target.closest(".tabs .tab");if(!tab)return;
+  const type=tab.dataset.type;
+  if(!pages[type]){document.body.classList.remove("direct-page-open");portal().classList.remove("show");return}
+  event.preventDefault();event.stopPropagation();event.stopImmediatePropagation();openDirect(type,tab);
+ },true);
+})();
+</script>
 </body></html>
