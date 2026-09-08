@@ -3392,5 +3392,65 @@ html body #warning>.flood-final-layout+*{margin-top:0!important}
  html body #warning .flood-final-map>.operations-map iframe{position:relative!important;height:620px!important;min-height:620px!important}
 }
 </style>
+<style id="flood-fire-card-type-and-remove-ghost">
+/* Requested heading and body typography */
+#warning .flood-support-heading h1{font-family:"Noto Sans Thai",sans-serif!important;font-size:20px!important;font-weight:500!important;color:#1c79c0!important}
+#warning .flood-support-heading p,#warning .flood-support-heading-date,
+#warning .flood-support-heading-actions button::after{font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:300!important}
+#warning .flood-support-heading{width:100%!important;max-width:none!important}
+
+/* Fire-page card treatment */
+#warning .flood-final-cards{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important}
+html body #warning .flood-final-cards>.kpi,
+html body #warning .flood-final-cards>.national-kpi{
+ min-height:150px!important;height:auto!important;padding:16px!important;
+ background:#fff!important;border:1px solid #dfd2e5!important;border-radius:11px!important;
+ box-shadow:0 2px 8px rgba(60,42,74,.05)!important
+}
+#warning .flood-final-cards h2,#warning .flood-final-cards .kpi>div>span,
+#warning .flood-final-cards .national-kpi>h2{font-family:"Noto Sans Thai",sans-serif!important;font-size:18px!important;font-weight:500!important;color:#000!important}
+#warning .flood-final-cards span,#warning .flood-final-cards p,#warning .flood-final-cards a{font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:300!important;color:#000!important}
+#warning .flood-final-cards strong{font-family:"Noto Sans Thai",sans-serif!important;font-size:25px!important;font-weight:700!important;color:#7f181b!important}
+
+/* Nationwide indicators */
+#warning .nationwide-indicators h2,#warning .nationwide-indicators .card-head h2{font-family:"Noto Sans Thai",sans-serif!important;font-size:18px!important;font-weight:500!important;color:#000!important}
+#warning .nationwide-indicators p,#warning .nationwide-indicators span,#warning .nationwide-indicators b,
+#warning .daily-water-report p,#warning .daily-water-report span,#warning .daily-water-report small,
+#warning .national-alert p,#warning .national-alert a{font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:300!important}
+
+/* Real table container directly below dashboard */
+#warning>.flood-final-tables{
+ display:grid!important;grid-template-columns:1fr 1fr!important;gap:12px!important;
+ width:100%!important;margin:0!important;padding:0!important
+}
+#warning>.flood-final-tables>.nearby-watch-table{grid-column:1/-1!important}
+#warning>.flood-final-tables>.warning-table{display:block!important;margin:0!important;width:100%!important}
+#warning>.flood-final-layout{margin-bottom:0!important}
+#warning>.flood-final-tables{margin-top:0!important}
+
+/* Remove every abandoned wrapper that produced the large white block */
+#warning>.new4all-lower,#warning>.flood-gistda-lower,#warning>.tables-overview-grid,
+#warning>.operations-dashboard,#warning>.top-overview-grid{display:none!important;height:0!important;min-height:0!important;max-height:0!important;margin:0!important;padding:0!important;overflow:hidden!important}
+@media(max-width:850px){#warning>.flood-final-tables{grid-template-columns:1fr!important}#warning>.flood-final-tables>.nearby-watch-table{grid-column:auto!important}}
+</style>
+<script id="flood-fire-card-type-and-remove-ghost-script">
+(function(){
+ function removeGhostAndMoveTables(){
+  const warning=document.getElementById("warning"),layout=warning&&warning.querySelector(":scope>.flood-final-layout");if(!warning||!layout)return false;
+  let target=warning.querySelector(":scope>.flood-final-tables");
+  if(!target){target=document.createElement("section");target.className="flood-final-tables";layout.insertAdjacentElement("afterend",target)}
+  const tables=[...warning.querySelectorAll(".nearby-watch-table,.estate-watch-table,.station-watch-table")];
+  [...new Set(tables)].forEach(table=>target.appendChild(table));
+  [...warning.children].forEach(el=>{
+   if(el===layout||el===target||el.classList.contains("flood-support-heading")||el.id==="infographic")return;
+   if(el.matches(".new4all-lower,.flood-gistda-lower,.tables-overview-grid,.operations-dashboard,.top-overview-grid"))el.remove();
+  });
+  return true;
+ }
+ if(!removeGhostAndMoveTables()){const observer=new MutationObserver(()=>{if(removeGhostAndMoveTables())observer.disconnect()});observer.observe(document.documentElement,{childList:true,subtree:true})}
+ document.addEventListener("DOMContentLoaded",removeGhostAndMoveTables);
+ setTimeout(removeGhostAndMoveTables,150);setTimeout(removeGhostAndMoveTables,1000);setTimeout(removeGhostAndMoveTables,2200);
+})();
+</script>
 </body>
 </html>
