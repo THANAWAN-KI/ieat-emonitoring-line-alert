@@ -4810,5 +4810,84 @@ html body #thaiwater-warning.active{display:block!important}
  [100,400,900,1600,2600,4500].forEach(function(ms){setTimeout(ensureVisibleWatchButton,ms)});
 })();
 </script>
+
+<style id="estate-watch-dashboard-20260908-v1">
+#thaiwater-warning .watch-dashboard{padding:22px;background:#eef3f7;font-family:"Noto Sans Thai",sans-serif}
+#thaiwater-warning .watch-intro{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;margin-bottom:16px}
+#thaiwater-warning .watch-intro h2{margin:0;color:#263746;font-size:23px;font-weight:500}
+#thaiwater-warning .watch-intro p{margin:5px 0 0;color:#657480;line-height:1.6}
+#thaiwater-warning .watch-time{flex:0 0 auto;padding:9px 13px;border-radius:9px;background:#e7f2fb;color:#286d9f;font-size:14px}
+#thaiwater-warning .watch-grid{display:grid;grid-template-columns:1fr;gap:18px}
+#thaiwater-warning .watch-panel{background:#fff;border:1px solid #dce5ec;border-radius:14px;overflow:hidden;box-shadow:0 4px 14px rgba(30,66,100,.07)}
+#thaiwater-warning .watch-panel-head{display:flex;justify-content:space-between;gap:15px;align-items:center;padding:17px 18px;border-bottom:1px solid #e4ebf0}
+#thaiwater-warning .watch-panel-head h3{margin:0;font-size:19px;font-weight:500;color:#263746}
+#thaiwater-warning .watch-panel-head p{margin:3px 0 0;color:#71808b;font-size:14px}
+#thaiwater-warning .watch-tabs{display:flex;gap:6px}
+#thaiwater-warning .watch-tabs button{border:0;border-radius:999px;padding:8px 14px;background:#eef2f5;color:#536572;cursor:pointer}
+#thaiwater-warning .watch-tabs button.active{background:#388ed1;color:#fff}
+#thaiwater-warning .watch-tools{display:flex;gap:9px;padding:12px 18px;background:#f8fafb}
+#thaiwater-warning .watch-tools input{width:min(360px,100%);border:1px solid #ccd8e1;border-radius:8px;padding:9px 11px;background:#fff}
+#thaiwater-warning .watch-count{margin-left:auto;align-self:center;color:#687783;font-size:14px}
+#thaiwater-warning .watch-table-wrap{max-height:430px;overflow:auto}
+#thaiwater-warning .watch-table{width:100%;border-collapse:collapse;min-width:900px}
+#thaiwater-warning .watch-table th{position:sticky;top:0;z-index:1;padding:11px 12px;background:#eaf1f6;color:#435563;font-size:14px;font-weight:500;text-align:left}
+#thaiwater-warning .watch-table td{padding:11px 12px;border-bottom:1px solid #e6edf2;color:#344651;font-size:14px;vertical-align:middle}
+#thaiwater-warning .watch-table tr:hover td{background:#f7fbfe}
+#thaiwater-warning .risk-chip{display:inline-block;min-width:74px;padding:5px 9px;border-radius:999px;text-align:center;font-weight:500}
+#thaiwater-warning .risk-chip.danger{background:#ffe8ec;color:#b71431}
+#thaiwater-warning .risk-chip.watch{background:#fff1d5;color:#916000}
+#thaiwater-warning .risk-chip.normal{background:#e7f5e3;color:#3d741e}
+#thaiwater-warning .rain-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(330px,.75fr);gap:0}
+#thaiwater-warning .rain-map{height:520px;border:0;width:100%;display:block;background:#eaf0f4}
+#thaiwater-warning .rain-guide{padding:20px;border-left:1px solid #dce5ec}
+#thaiwater-warning .rain-guide h4{margin:0 0 9px;font-size:18px;font-weight:500}
+#thaiwater-warning .rain-guide p,#thaiwater-warning .rain-guide li{color:#5e6e79;line-height:1.65;font-size:14px}
+#thaiwater-warning .rain-guide ol{padding-left:22px}
+#thaiwater-warning .source-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
+#thaiwater-warning .source-row a{padding:8px 11px;border-radius:8px;background:#eaf3fa;color:#286d9f;text-decoration:none;font-size:14px}
+#thaiwater-warning .watch-empty{text-align:center!important;color:#7a8790!important;padding:28px!important}
+@media(max-width:800px){#thaiwater-warning .watch-intro,#thaiwater-warning .watch-panel-head{flex-direction:column}#thaiwater-warning .watch-time{align-self:stretch}#thaiwater-warning .rain-layout{grid-template-columns:1fr}#thaiwater-warning .rain-guide{border-left:0;border-top:1px solid #dce5ec}}
+</style>
+<script id="estate-watch-dashboard-20260908-v1-script">
+(function(){
+ "use strict";
+ const RADIUS=30;
+ const $=s=>document.querySelector(s);
+ const esc=v=>String(v??"–").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+ const num=v=>Number.isFinite(Number(v))?Number(v):null;
+ const fmt=(v,d=1)=>v==null?"–":Number(v).toLocaleString("th-TH",{maximumFractionDigits:d});
+ function km(a,b){const r=6371,p=Math.PI/180,d1=(b.latitude-a.lat)*p,d2=(b.longitude-a.lon)*p;const q=Math.sin(d1/2)**2+Math.cos(a.lat*p)*Math.cos(b.latitude*p)*Math.sin(d2/2)**2;return 2*r*Math.asin(Math.sqrt(q))}
+ function nearest(estate,items){let best=null;items.forEach(x=>{if(num(x.latitude)==null||num(x.longitude)==null)return;const d=km(estate,x);if(!best||d<best.distance)best={item:x,distance:d}});return best}
+ function shell(){
+  const host=document.querySelector("#thaiwater-warning .thaiwater-warning-shell");if(!host)return null;
+  host.innerHTML='<div class="watch-dashboard"><div class="watch-intro"><div><h2>พื้นที่เฝ้าระวังใกล้นิคมอุตสาหกรรมทั่วประเทศ</h2><p>คัดกรองพื้นที่เสี่ยงและสถานีตรวจวัดภายในรัศมี '+RADIUS+' กม. จากตำแหน่งนิคมอุตสาหกรรม</p></div><div class="watch-time" id="watchDataTime">กำลังโหลดข้อมูลล่าสุด…</div></div><div class="watch-grid">'+
+  '<section class="watch-panel"><div class="watch-panel-head"><div><h3>พื้นที่เสี่ยงน้ำท่วมฉับพลัน</h3><p>เปรียบเทียบทุกนิคมฯ กับพื้นที่เสี่ยงรายตำบลใน 24 และ 48 ชั่วโมงข้างหน้า</p></div><div class="watch-tabs"><button class="active" data-risk-period="24h">24 ชั่วโมง</button><button data-risk-period="48h">48 ชั่วโมง</button></div></div><div class="watch-tools"><input id="riskSearch" placeholder="ค้นหานิคม จังหวัด อำเภอ หรือตำบล"><span class="watch-count" id="riskCount"></span></div><div class="watch-table-wrap"><table class="watch-table"><thead><tr><th>นิคมอุตสาหกรรม</th><th>สายปฏิบัติการ</th><th>สถานะ</th><th>พื้นที่เสี่ยงใกล้สุด</th><th>ระยะทาง</th><th>ฝนสะสม</th><th>ข้อมูล ณ เวลา</th></tr></thead><tbody id="riskRows"></tbody></table></div></section>'+
+  '<section class="watch-panel"><div class="watch-panel-head"><div><h3>สถานการณ์น้ำในจุดเฝ้าระวังใกล้นิคมฯ</h3><p>สถานีระดับน้ำที่ใกล้แต่ละนิคมฯ มากที่สุด แสดงครบทุกนิคมอุตสาหกรรม</p></div></div><div class="watch-tools"><input id="waterSearch" placeholder="ค้นหานิคม สถานี จังหวัด หรือสถานะ"><span class="watch-count" id="waterCount"></span></div><div class="watch-table-wrap"><table class="watch-table"><thead><tr><th>นิคมอุตสาหกรรม</th><th>สถานีใกล้สุด</th><th>จังหวัด/อำเภอ</th><th>ระยะทาง</th><th>ระดับน้ำ</th><th>สถานะ</th><th>ตรวจวัดล่าสุด</th></tr></thead><tbody id="waterRows"></tbody></table></div></section>'+
+  '<section class="watch-panel"><div class="watch-panel-head"><div><h3>แนวโน้มฝนและทิศทางกลุ่มฝน</h3><p>เลื่อนแถบเวลาบนแผนที่เพื่อดูฝนล่วงหน้าและการเคลื่อนตัวของกลุ่มฝน</p></div></div><div class="rain-layout"><iframe class="rain-map" title="แผนที่พยากรณ์ฝน" loading="lazy" src="https://embed.windy.com/embed2.html?lat=13.8&lon=100.6&detailLat=13.8&detailLon=100.6&width=900&height=520&zoom=5&level=surface&overlay=rain&product=ecmwf&menu=&message=true&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1"></iframe><aside class="rain-guide"><h4>วิธีใช้เพื่อประกอบการพยากรณ์</h4><ol><li>กดเล่นหรือเลื่อนเวลา เพื่อดูว่าช่วงใดฝนเข้าพื้นที่นิคมฯ</li><li>สังเกตการเคลื่อนของแถบสีจากหลายช่วงเวลา เพื่อประเมินทิศทางกลุ่มฝน</li><li>เทียบกับตารางฝนสะสมและระดับน้ำด้านบนก่อนออกประกาศเฝ้าระวัง</li></ol><p><b>ข้อควรระวัง:</b> แผนที่เป็นผลพยากรณ์จากแบบจำลอง ไม่ใช่ประกาศเตือนภัยอย่างเป็นทางการ ควรยืนยันกับ TMD/ThaiWater ทุกครั้ง</p><div class="source-row"><a href="https://www.tmd.go.th/weather/radar" target="_blank" rel="noopener">เรดาร์ฝน TMD</a><a href="https://www.thaiwater.net/new4all" target="_blank" rel="noopener">ThaiWater</a><a href="https://www.tmd.go.th/weather/forecast/daily" target="_blank" rel="noopener">พยากรณ์อากาศ TMD</a></div></aside></div></section>'+
+  '</div></div>';
+  return host;
+ }
+ function chip(status,dist){const critical=/ล้น|วิกฤต|อันตราย/.test(status||"");const watch=/เฝ้า|เตือน|มาก/.test(status||"")||dist<=RADIUS;const cls=critical?"danger":watch?"watch":"normal";return '<span class="risk-chip '+cls+'">'+esc(status||((dist<=RADIUS)?"เฝ้าระวัง":"ปกติ"))+'</span>'}
+ function render(data){
+  if(!$("#riskRows"))return;
+  const estates=data.estates||[],ff=data.flash_flood||{},stations=(data.stations||[]).filter(x=>x.kind==="waterlevel");
+  $("#watchDataTime").textContent="อัปเดต "+new Date(data.generated_at).toLocaleString("th-TH");
+  let period="24h",riskRows=[],waterRows=[];
+  function buildRisk(){
+   const areas=(ff[period]&&ff[period].areas)||[];
+   riskRows=estates.map(e=>{const n=nearest(e,areas),x=n&&n.item,d=n&&n.distance;return {search:[e.name,e.operations,x&&x.province,x&&x.amphoe,x&&x.tambon].join(" ").toLowerCase(),html:'<tr><td><b>'+esc(e.name)+'</b></td><td>'+esc(e.operations||"–")+'</td><td>'+chip(d<=RADIUS?"เสี่ยง":"ไม่เข้าเกณฑ์",d)+'</td><td>'+(x?esc([x.tambon,x.amphoe,x.province].filter(Boolean).join(" ")):"ไม่พบพื้นที่เสี่ยง")+'</td><td>'+fmt(d)+' กม.</td><td>'+fmt(x&&x.sum_rainfall_mm)+' มม.</td><td>'+esc(x&&x.observed_at||"–")+'</td></tr>',hit:d!=null&&d<=RADIUS,d:d??99999}}).sort((a,b)=>Number(b.hit)-Number(a.hit)||a.d-b.d);
+   filterRisk();
+  }
+  function filterRisk(){const q=($("#riskSearch").value||"").trim().toLowerCase(),rows=riskRows.filter(r=>!q||r.search.includes(q));$("#riskRows").innerHTML=rows.length?rows.map(r=>r.html).join(""):'<tr><td colspan="7" class="watch-empty">ไม่พบข้อมูลที่ตรงกับคำค้น</td></tr>';$("#riskCount").textContent=rows.length+" / "+estates.length+" นิคมฯ"}
+  waterRows=estates.map(e=>{const n=nearest(e,stations),x=n&&n.item,d=n&&n.distance,inside=d!=null&&d<=RADIUS,status=inside?(x.status||"ไม่มีข้อมูล"):"ไม่มีสถานีในรัศมี";return {search:[e.name,x&&x.station,x&&x.province,x&&x.district,status].join(" ").toLowerCase(),html:'<tr><td><b>'+esc(e.name)+'</b></td><td>'+esc(x&&x.station||"–")+'</td><td>'+esc(x?[x.province,x.district].filter(Boolean).join(" / "):"–")+'</td><td>'+fmt(d)+' กม.</td><td>'+esc(x&&x.value_text||"–")+'</td><td>'+chip(status,inside?d:99999)+'</td><td>'+esc(x&&x.observed_at||"–")+'</td></tr>',inside,d:d??99999}}).sort((a,b)=>Number(b.inside)-Number(a.inside)||a.d-b.d);
+  function filterWater(){const q=($("#waterSearch").value||"").trim().toLowerCase(),rows=waterRows.filter(r=>!q||r.search.includes(q));$("#waterRows").innerHTML=rows.length?rows.map(r=>r.html).join(""):'<tr><td colspan="7" class="watch-empty">ไม่พบข้อมูลที่ตรงกับคำค้น</td></tr>';$("#waterCount").textContent=rows.length+" / "+estates.length+" นิคมฯ"}
+  document.querySelectorAll("[data-risk-period]").forEach(b=>b.onclick=()=>{period=b.dataset.riskPeriod;document.querySelectorAll("[data-risk-period]").forEach(x=>x.classList.toggle("active",x===b));buildRisk()});
+  $("#riskSearch").oninput=filterRisk;$("#waterSearch").oninput=filterWater;buildRisk();filterWater();
+ }
+ async function init(){if(!shell())return;try{const r=await fetch(new URL("./data/thaiwater_latest.json",document.baseURI),{cache:"no-store"});if(!r.ok)throw new Error("HTTP "+r.status);render(await r.json())}catch(e){const t=$("#watchDataTime");if(t)t.textContent="โหลดข้อมูลไม่สำเร็จ";console.error(e)}}
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
+})();
+</script>
+
 </body>
 </html>
