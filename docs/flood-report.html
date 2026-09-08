@@ -1360,9 +1360,9 @@ body{color:#172033!important}
   <header class="topbar"><div class="top-inner">
     <div class="brand"><span class="brand-mark" aria-hidden="true">IEAT</span><b>ศูนย์ติดตามสถานการณ์น้ำ</b><span>การนิคมอุตสาหกรรมแห่งประเทศไทย</span></div>
     <nav class="nav" aria-label="เมนูหลัก">
-      <button class="active" data-view="warning">หน้ารายงานข่าว</button>
+      <button class="active" data-view="warning">ภาพรวม</button>
       <button data-view="thaiwater-warning">พื้นที่เฝ้าระวัง</button>
-      <button data-view="infographic">ข้อมูล</button>
+      <button data-view="infographic">ส่งออกข้อมูล</button>
     </nav>
     
   </div></header>
@@ -4900,6 +4900,35 @@ html body #thaiwater-warning.active{display:block!important}
 #thaiwater-warning .watch-analysis-title:before{content:"";display:block;width:5px;height:24px;border-radius:99px;background:#388ed1}
 @media(max-width:800px){#thaiwater-warning .thaiwater-reference-bar{align-items:flex-start;flex-direction:column}#thaiwater-warning .thaiwater-reference-bar a{width:100%;text-align:center}#thaiwater-warning .thaiwater-reference-frame{height:720px}}
 </style>
+
+<style id="three-main-tabs-20260908-v1">
+.topbar .nav{display:grid!important;grid-template-columns:repeat(3,minmax(150px,1fr))!important;gap:10px!important;padding:0!important;background:transparent!important;border-radius:0!important}
+.topbar .nav button{min-width:150px!important;padding:11px 22px!important;border-radius:999px!important;background:#0a98ca!important;color:#fff!important;box-shadow:none!important;font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:400!important}
+.topbar .nav button:hover{background:#087fad!important}
+.topbar .nav button.active{background:#388ed1!important;color:#fff!important;box-shadow:0 5px 13px rgba(56,142,209,.28)!important}
+@media(max-width:850px){.topbar .nav{width:100%!important;grid-template-columns:1fr!important}.topbar .nav button{width:100%!important}.top-inner{flex-wrap:wrap!important}}
+</style>
+<script id="three-main-tabs-20260908-v1-script">
+(function(){
+ function syncMainTabs(){
+  const labels={warning:"ภาพรวม","thaiwater-warning":"พื้นที่เฝ้าระวัง",infographic:"ส่งออกข้อมูล"};
+  document.querySelectorAll(".topbar .nav button[data-view]").forEach(function(button){
+   const label=labels[button.dataset.view];
+   if(label)button.textContent=label;
+   button.setAttribute("aria-label",label||button.textContent);
+   if(button.classList.contains("active"))button.setAttribute("aria-current","page");
+   else button.removeAttribute("aria-current");
+  });
+  document.querySelectorAll(".flood-support-heading-actions button[data-target]").forEach(function(button){
+   const label=labels[button.dataset.target];
+   if(label)button.textContent=label;
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",syncMainTabs);else syncMainTabs();
+ document.addEventListener("click",function(event){if(event.target.closest(".nav button,.flood-support-heading-actions button"))setTimeout(syncMainTabs,0)});
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(syncMainTabs,ms)});
+})();
+</script>
 
 </body>
 </html>
