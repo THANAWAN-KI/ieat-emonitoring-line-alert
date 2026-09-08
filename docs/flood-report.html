@@ -3358,5 +3358,39 @@ html body #warning>.flood-final-layout + *,
 html body #warning .flood-final-map + *{margin-top:0!important}
 #warning .flood-final-map:after,#warning .flood-final-layout:after{display:none!important;content:none!important}
 </style>
+<style id="stretch-map-remove-real-gap-v2">
+/* The gap was the unused remainder of a fixed-height map column. Let both columns share one natural row height. */
+html body #warning.view.active>.flood-final-layout{
+ height:auto!important;min-height:650px!important;
+ align-items:stretch!important;overflow:visible!important;
+ margin-bottom:0!important;padding-bottom:0!important
+}
+html body #warning .flood-final-left{
+ height:auto!important;max-height:none!important;
+ min-height:650px!important;overflow:visible!important;
+ align-self:stretch!important
+}
+html body #warning .flood-final-map{
+ position:relative!important;height:auto!important;min-height:650px!important;
+ align-self:stretch!important;margin:0!important;padding:0!important
+}
+html body #warning .flood-final-map>.operations-map{
+ position:absolute!important;inset:0!important;
+ width:100%!important;height:100%!important;min-height:650px!important;
+ margin:0!important;padding:0!important
+}
+html body #warning .flood-final-map>.operations-map iframe{
+ position:absolute!important;inset:0!important;
+ width:100%!important;height:100%!important;min-height:650px!important;
+ margin:0!important;padding:0!important
+}
+html body #warning>.flood-final-layout+*{margin-top:0!important}
+@media(max-width:900px){
+ html body #warning .flood-final-left{min-height:0!important}
+ html body #warning .flood-final-map,
+ html body #warning .flood-final-map>.operations-map,
+ html body #warning .flood-final-map>.operations-map iframe{position:relative!important;height:620px!important;min-height:620px!important}
+}
+</style>
 </body>
 </html>
