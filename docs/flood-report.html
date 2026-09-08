@@ -2883,5 +2883,77 @@ body{min-height:100vh!important}
  setTimeout(setFloodActions,1000);
 })();
 </script>
+<style id="flood-parent-grid-reset-20260908">
+/* Critical reset: legacy rules made the title, cards and map three sibling columns */
+html body main.container #warning.view.active{
+ display:block!important;
+ grid-template-columns:none!important;grid-template-rows:none!important;
+ gap:0!important;width:100%!important;max-width:none!important;
+ height:auto!important;min-height:0!important;overflow:visible!important
+}
+html body #warning.view.active>.flood-support-heading{
+ display:flex!important;position:relative!important;
+ grid-column:auto!important;grid-row:auto!important;
+ width:100%!important;max-width:100%!important;
+ margin:0 0 10px!important
+}
+html body #warning.view.active>.new4all-water-shell{
+ display:grid!important;position:relative!important;
+ grid-column:auto!important;grid-row:auto!important;
+ grid-template-columns:minmax(0,56fr) minmax(0,44fr)!important;
+ width:100%!important;max-width:100%!important;
+ margin:0!important;gap:14px!important
+}
+html body #warning .flood-dashboard-left{
+ position:relative!important;left:auto!important;right:auto!important;top:auto!important;
+ display:flex!important;grid-column:1!important;grid-row:1!important;
+ width:100%!important;max-width:100%!important;min-width:0!important
+}
+html body #warning .flood-dashboard-map{
+ position:relative!important;left:auto!important;right:auto!important;top:auto!important;
+ display:block!important;grid-column:2!important;grid-row:1!important;
+ width:100%!important;max-width:100%!important;min-width:0!important
+}
+html body #warning .flood-dashboard-left .new4all-metrics{
+ display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;
+ width:100%!important;max-width:100%!important;min-width:0!important
+}
+html body #warning .flood-dashboard-left .new4all-metrics>*{
+ grid-column:auto!important;grid-row:auto!important;
+ width:100%!important;min-width:0!important;max-width:100%!important;
+ border-top:0!important
+}
+html body #warning .flood-support-heading-actions button{
+ background:#8ec06c!important;color:#537b35!important;
+ border:0!important;border-radius:999px!important
+}
+html body #warning .flood-support-heading-actions button:first-child::after{content:"พื้นที่เฝ้าระวัง";font-size:16px}
+html body #warning .flood-support-heading-actions button:nth-child(2)::after{content:"ส่งออกข้อมูล";font-size:16px}
+html body #warning .flood-support-heading-actions button{font-size:0!important}
+html body #warning .new4all-metrics>*,
+html body #warning .new4all-metrics>*::before,
+html body #warning .new4all-metrics>*::after{border-top-width:0!important;background-image:none!important}
+@media(max-width:900px){
+ html body #warning.view.active>.new4all-water-shell{display:flex!important;flex-direction:column!important}
+ html body #warning .flood-dashboard-left,html body #warning .flood-dashboard-map{width:100%!important}
+}
+@media(max-width:1250px) and (min-width:901px){
+ html body #warning .flood-dashboard-left .new4all-metrics{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
+</style>
+<script id="flood-parent-grid-reset-20260908-repair">
+(function(){
+ function repair(){
+  var warning=document.getElementById("warning"),heading=warning&&warning.querySelector(".flood-support-heading"),shell=warning&&warning.querySelector(".new4all-water-shell");if(!warning||!heading||!shell)return;
+  warning.insertBefore(heading,shell);
+  var buttons=heading.querySelectorAll(".flood-support-heading-actions button");
+  if(buttons[0]){buttons[0].textContent="พื้นที่เฝ้าระวัง";buttons[0].dataset.target="warning"}
+  if(buttons[1]){buttons[1].textContent="ส่งออกข้อมูล";buttons[1].dataset.target="infographic"}
+  for(var i=buttons.length-1;i>1;i--)buttons[i].remove();
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",repair);else repair();
+ setTimeout(repair,100);setTimeout(repair,1000);
+})();
+</script>
 </body>
 </html>
