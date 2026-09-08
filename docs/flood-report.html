@@ -2547,5 +2547,70 @@ body,#warning,#infographic{font-family:"Thai Sarabun New","TH Sarabun New","Sara
 #warning .operations-dashboard>.nearby-watch-table .table th,body .floating-map-nav button{font-size:14px!important}
 @media(max-width:820px){body,#warning,#infographic{font-size:13px!important}#warning p,#warning td,#warning label,#warning a{font-size:13px!important}#warning .national-alert b,#warning .daily-water-report h2,#warning .nationwide-indicators h2,#warning .live-viz-card h2,#warning .operations-dashboard>.nearby-watch-table h2,#warning .overview-map-label b{font-size:15px!important}#warning .kpi strong,#warning .national-kpi strong{font-size:18px!important}}
 </style>
+<style id="new4all-water-only-v1">
+:root{--n4-red:#f50b16;--n4-line:#dedede;--n4-bg:#f7f7f7}
+html,body{background:var(--n4-bg)!important;color:#111!important}
+.topbar{height:80px!important;background:#fff!important;border:0!important;border-bottom:1px solid #ddd!important;box-shadow:0 2px 5px rgba(0,0,0,.12)!important}
+.top-inner{height:80px!important;min-height:80px!important;padding:8px 32px!important;gap:24px!important}
+.brand{min-width:550px!important;border:0!important;padding:0!important}.brand-mark{background:linear-gradient(135deg,#ff7a21,#f9c51b)!important;color:#fff!important;border-radius:50%!important}
+.brand b{font-size:19px!important;color:#111!important}.brand span{font-size:12px!important}
+.nav{margin:0 auto!important;background:#f2f2f2!important;border-radius:30px!important;padding:5px!important;gap:2px!important}
+.nav button{border:0!important;border-radius:22px!important;padding:9px 18px!important;background:transparent!important;color:#444!important;font-family:"Noto Sans Thai",sans-serif!important;font-size:14px!important}
+.nav button.active{background:#fff!important;color:#111!important;box-shadow:0 2px 8px rgba(0,0,0,.13)!important}
+.container{max-width:none!important;padding:14px 20px 28px!important}
+#warning>.dashboard-intro,#warning>.operations-section-title,#warning>.dri-chart-section{display:none!important}
+.new4all-water-shell{display:grid!important;grid-template-columns:minmax(300px,21.5%) minmax(600px,44%) minmax(500px,34.5%)!important;gap:12px!important;align-items:stretch!important;min-height:calc(100vh - 108px)!important}
+.new4all-col{display:flex!important;flex-direction:column!important;gap:12px!important;min-width:0!important}
+.new4all-left .national-alert{min-height:170px!important;background:#ffd2c0!important;border:0!important}
+.new4all-left .operations-radar,.new4all-left .radar-card{flex:1 1 300px!important}
+.new4all-metrics{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important}
+.new4all-metrics>*{min-width:0!important}
+#warning .card,#warning .national-alert,#warning .daily-water-report,#warning .nationwide-indicators,#warning .live-viz-card,#warning .warning-table,#warning .nearby-watch-table{background:#fff!important;border:1px solid var(--n4-line)!important;border-radius:10px!important;box-shadow:0 2px 7px rgba(0,0,0,.10)!important}
+#warning .kpi,#warning .national-kpi{min-height:170px!important;padding:16px!important;border:1px solid var(--n4-line)!important;background:#fff!important}
+#warning .kpi strong,#warning .national-kpi strong{display:block!important;color:var(--n4-red)!important;font-size:48px!important;line-height:1.05!important;font-weight:700!important}
+#warning .kpi h2,#warning .national-kpi h2,#warning .kpi span,#warning .national-kpi span{color:#111!important}
+#warning .national-kpi h2{font-size:16px!important;font-weight:500!important}#warning .national-kpi span{font-size:14px!important}
+#warning .n-icon,#warning .icon{width:34px!important;height:34px!important;color:#fff!important;background:var(--n4-red)!important;border-radius:50%!important;padding:7px!important}
+#warning .n-icon svg,#warning .icon svg{width:20px!important;height:20px!important;fill:#fff!important;color:#fff!important}
+#warning .source-link{display:none!important}
+#warning .national-alert b{color:#e94117!important;font-size:15px!important}#warning .national-alert p,#warning .national-alert a{font-size:12px!important}
+.new4all-center .daily-water-report{padding:14px!important}.new4all-center .daily-water-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:12px!important}.new4all-center .daily-water-item{min-height:145px!important;background:#fff!important;border:1px solid #e5e5e5!important;border-radius:9px!important}.new4all-center .daily-water-item strong{color:var(--n4-red)!important;font-size:42px!important}
+.new4all-right .operations-map{display:block!important;position:relative!important;width:100%!important;height:calc(100vh - 108px)!important;min-height:735px!important;background:#fff!important;border:1px solid var(--n4-line)!important;overflow:hidden!important}
+.new4all-right .operations-map iframe{display:block!important;width:100%!important;height:100%!important;min-height:735px!important;border:0!important}
+#warning .overview-map-label,#warning .map-embed-note,#warning .open-flood-hub{display:none!important}
+.new4all-lower{display:grid!important;grid-template-columns:1fr 1fr!important;gap:12px!important;margin-top:12px!important}.new4all-lower .nearby-watch-table{grid-column:1/-1!important}
+#warning .table th{background:#f0f0f0!important;color:#111!important}#warning .table th,#warning .table td{font-size:13px!important;padding:9px!important}
+@media(max-width:1200px){.new4all-water-shell{grid-template-columns:1fr 1fr!important}.new4all-right{grid-column:1/-1!important}.new4all-right .operations-map,.new4all-right .operations-map iframe{height:680px!important;min-height:680px!important}}
+@media(max-width:760px){.topbar,.top-inner{height:auto!important}.top-inner{flex-wrap:wrap!important;padding:10px!important}.brand{min-width:0!important;width:100%!important}.nav{width:100%!important;overflow:auto!important}.new4all-water-shell{grid-template-columns:1fr!important}.new4all-right{grid-column:auto!important}.new4all-metrics,.new4all-lower{grid-template-columns:1fr!important}.new4all-lower .nearby-watch-table{grid-column:auto!important}.new4all-right .operations-map,.new4all-right .operations-map iframe{height:560px!important;min-height:560px!important}}
+</style>
+<script id="new4all-water-only-v1-builder">
+(function(){
+ function waterOnly(){
+  var warning=document.getElementById("warning");if(!warning)return;
+  warning.querySelectorAll(".dri-chart-section").forEach(function(el){el.remove()});
+  warning.querySelectorAll("article,section,div.card").forEach(function(el){
+   var t=(el.textContent||"").replace(/\s+/g," ");
+   if(/ภัยแล้ง|PM\s*2[.]?5|ฝุ่นละออง/i.test(t)&&!el.closest(".report-export-workspace"))el.remove();
+  });
+  if(warning.querySelector(".new4all-water-shell"))return;
+  var map=warning.querySelector(".operations-map"),alert=warning.querySelector(".national-alert");
+  var radar=warning.querySelector(".operations-radar,.radar-card");
+  var daily=warning.querySelector(".daily-water-report"),indicators=warning.querySelector(".nationwide-indicators");
+  var metrics=[].slice.call(warning.querySelectorAll(".grid.kpis>.kpi,.national-cards-dashboard>.national-kpi"));
+  var live=[].slice.call(warning.querySelectorAll(".live-viz-card"));
+  var tables=[].slice.call(warning.querySelectorAll(".tables-overview-grid>.warning-table,.operations-dashboard>.nearby-watch-table"));
+  if(!map)return;
+  var shell=document.createElement("div"),left=document.createElement("div"),center=document.createElement("div"),right=document.createElement("div"),metricBox=document.createElement("div"),lower=document.createElement("div");
+  shell.className="new4all-water-shell";left.className="new4all-col new4all-left";center.className="new4all-col new4all-center";right.className="new4all-col new4all-right";metricBox.className="new4all-metrics";lower.className="new4all-lower";
+  if(alert)left.appendChild(alert);if(radar)left.appendChild(radar);if(live[0])left.appendChild(live.shift());
+  metrics.forEach(function(el){metricBox.appendChild(el)});center.appendChild(metricBox);if(daily)center.appendChild(daily);if(indicators)center.appendChild(indicators);live.forEach(function(el){center.appendChild(el)});
+  right.appendChild(map);shell.append(left,center,right);
+  tables.forEach(function(el){lower.appendChild(el)});
+  warning.insertBefore(shell,warning.firstChild);warning.appendChild(lower);
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",waterOnly);else waterOnly();
+ setTimeout(waterOnly,800);
+})();
+</script>
 </body>
 </html>
