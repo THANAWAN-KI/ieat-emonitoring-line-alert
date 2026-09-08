@@ -2955,5 +2955,89 @@ html body #warning .new4all-metrics>*::after{border-top-width:0!important;backgr
  setTimeout(repair,100);setTimeout(repair,1000);
 })();
 </script>
+<style id="flood-final-two-column-rebuild">
+html body #warning.view.active{display:block!important;width:100%!important;max-width:none!important}
+#warning>.flood-final-layout{
+ display:grid!important;grid-template-columns:minmax(0,56%) minmax(0,44%)!important;
+ gap:14px!important;width:100%!important;height:calc(100vh - 166px)!important;
+ min-height:660px!important;overflow:hidden!important
+}
+.flood-final-left{
+ display:flex!important;flex-direction:column!important;gap:14px!important;
+ width:100%!important;min-width:0!important;height:100%!important;
+ overflow:auto!important;padding:2px 8px 6px 2px!important
+}
+.flood-final-cards{
+ display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;
+ grid-auto-flow:row!important;gap:14px!important;width:100%!important;min-width:0!important
+}
+html body #warning .flood-final-cards>.kpi,
+html body #warning .flood-final-cards>.national-kpi{
+ display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;
+ position:static!important;float:none!important;inset:auto!important;
+ grid-column:auto!important;grid-row:auto!important;
+ width:100%!important;min-width:0!important;max-width:none!important;
+ height:130px!important;min-height:130px!important;margin:0!important;padding:15px 16px!important;
+ overflow:hidden!important;background:#fff!important;background-image:none!important;
+ border:0!important;border-top:0!important;border-left:0!important;border-radius:14px!important;
+ box-shadow:0 3px 14px rgba(35,72,116,.09)!important
+}
+html body #warning .flood-final-cards>.kpi:before,
+html body #warning .flood-final-cards>.kpi:after,
+html body #warning .flood-final-cards>.national-kpi:before,
+html body #warning .flood-final-cards>.national-kpi:after{display:none!important;content:none!important}
+#warning .flood-final-cards .icon,#warning .flood-final-cards .n-icon{flex:0 0 32px!important;width:32px!important;height:32px!important;margin:0 0 6px!important}
+#warning .flood-final-cards h2,#warning .flood-final-cards span{white-space:normal!important;word-break:normal!important;overflow-wrap:anywhere!important}
+#warning .flood-final-cards h2{font-size:14px!important;line-height:1.3!important;margin:0!important}
+#warning .flood-final-cards strong{font-size:24px!important;line-height:1.15!important;margin:2px 0!important}
+#warning .flood-final-cards span{font-size:13px!important;line-height:1.3!important}
+.flood-final-left>.daily-water-report,.flood-final-left>.nationwide-indicators,.flood-final-left>.national-alert,.flood-final-left>.live-viz-card{
+ display:block!important;position:static!important;float:none!important;
+ grid-column:auto!important;grid-row:auto!important;width:100%!important;min-width:0!important;margin:0!important
+}
+.flood-final-map{
+ display:block!important;position:relative!important;grid-column:2!important;grid-row:1!important;
+ width:100%!important;min-width:0!important;height:100%!important;min-height:660px!important;
+ overflow:hidden!important;border-radius:16px!important;background:#eef4f8!important
+}
+.flood-final-map>.operations-map,.flood-final-map>.operations-map iframe{
+ display:block!important;position:absolute!important;inset:0!important;
+ width:100%!important;max-width:none!important;height:100%!important;min-height:0!important;
+ margin:0!important;border:0!important;border-radius:16px!important
+}
+/* Hide every superseded layout after its useful nodes have been moved */
+#warning>.new4all-water-shell,#warning>.top-overview-grid,#warning>.operations-dashboard,#warning>.tables-overview-grid,#warning>.operations-section-title,#warning>.dri-chart-section{display:none!important}
+@media(max-width:1200px){.flood-final-cards{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media(max-width:900px){
+ #warning>.flood-final-layout{display:flex!important;flex-direction:column!important;height:auto!important;overflow:visible!important}
+ .flood-final-left{height:auto!important;overflow:visible!important}
+ .flood-final-map{height:620px!important;min-height:620px!important}
+}
+@media(max-width:650px){.flood-final-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}.flood-final-map{height:520px!important;min-height:520px!important}}
+</style>
+<script id="flood-final-two-column-rebuild-script">
+(function(){
+ function rebuild(){
+  const warning=document.getElementById("warning"),heading=warning&&warning.querySelector(".flood-support-heading");if(!warning||!heading)return;
+  let layout=warning.querySelector(":scope>.flood-final-layout");
+  if(!layout){
+   layout=document.createElement("section");layout.className="flood-final-layout";
+   layout.innerHTML='<div class="flood-final-left"><div class="flood-final-cards"></div></div><div class="flood-final-map"></div>';
+   heading.insertAdjacentElement("afterend",layout);
+  }
+  const cardGrid=layout.querySelector(".flood-final-cards"),left=layout.querySelector(".flood-final-left"),mapBox=layout.querySelector(".flood-final-map");
+  const cards=[...warning.querySelectorAll(".grid.kpis>.kpi,.national-cards-dashboard>.national-kpi")];
+  cards.slice(0,7).forEach(card=>cardGrid.appendChild(card));
+  const extras=[warning.querySelector(".daily-water-report"),warning.querySelector(".nationwide-indicators"),warning.querySelector(".national-alert"),...warning.querySelectorAll(".live-viz-card")];
+  [...new Set(extras.filter(Boolean))].forEach(el=>left.appendChild(el));
+  const map=warning.querySelector(".operations-map");if(map)mapBox.appendChild(map);
+  const actions=heading.querySelectorAll(".flood-support-heading-actions button");
+  if(actions[0])actions[0].textContent="พื้นที่เฝ้าระวัง";
+  if(actions[1])actions[1].textContent="ส่งออกข้อมูล";
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(rebuild,80));else setTimeout(rebuild,80);
+ setTimeout(rebuild,700);setTimeout(rebuild,1800);
+})();
+</script>
 </body>
 </html>
