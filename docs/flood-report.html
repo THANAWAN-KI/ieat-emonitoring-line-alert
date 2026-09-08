@@ -4550,5 +4550,36 @@ html body #warning .flood-final-cards>.national-kpi>.source-link{display:none!im
   html body #warning .flood-final-cards>.national-kpi{height:160px!important;min-height:160px!important}
 }
 </style>
+<style id="estate-status-td-full-background-20260908-v3">
+/* ลงสีที่เซลล์สถานะโดยตรง เพื่อให้เต็มทั้งช่อง */
+html body #warning .estate-watch-table #estateRanks>tr>td:last-child{
+  padding:0!important;
+  height:52px!important;
+  overflow:hidden!important;
+  vertical-align:middle!important;
+  text-align:center!important;
+}
+html body #warning .estate-watch-table #estateRanks>tr>td:last-child:has(>.water-status-cell.critical){
+  background:#bf033b!important;
+}
+html body #warning .estate-watch-table #estateRanks>tr>td:last-child:has(>.water-status-cell.normal){
+  background:#598c14!important;
+}
+html body #warning .estate-watch-table #estateRanks>tr>td:last-child>.water-status-cell{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:100%!important;
+  height:100%!important;
+  min-height:52px!important;
+  margin:0!important;
+  padding:0 8px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:#fff!important;
+  box-shadow:none!important;
+}
+</style>
 </body>
 </html>
