@@ -4297,5 +4297,47 @@ html body #warning .flood-final-cards .source-link{display:none!important}
   #warning .top-overview-metrics .national-cards-dashboard{grid-template-columns:1fr!important}
 }
 </style>
+<style id="estate-status-full-cell-20260908-v1">
+/* เติมสีสถานะให้เต็มเซลล์ในตารางนิคมฯ ที่เข้าเกณฑ์เฝ้าระวัง */
+#warning .estate-watch-table .table tbody td:last-child{
+  padding:0!important;
+  text-align:center!important;
+  vertical-align:middle!important;
+}
+#warning .estate-watch-table .table tbody td:last-child:has(.badge.critical),
+#warning .estate-watch-table .table tbody td:last-child:has(.status-critical){
+  background:#bf033b!important;
+  color:#fff!important;
+}
+#warning .estate-watch-table .table tbody td:last-child:has(.badge.warning),
+#warning .estate-watch-table .table tbody td:last-child:has(.status-warning){
+  background:#ff6908!important;
+  color:#fff!important;
+}
+#warning .estate-watch-table .table tbody td:last-child:has(.badge.normal),
+#warning .estate-watch-table .table tbody td:last-child:has(.status-normal){
+  background:#598c14!important;
+  color:#fff!important;
+}
+#warning .estate-watch-table .table tbody td:last-child>.badge,
+#warning .estate-watch-table .table tbody td:last-child>[class*="status-"]{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:100%!important;
+  min-height:52px!important;
+  margin:0!important;
+  padding:10px 8px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:#fff!important;
+  font-family:"Noto Sans Thai",sans-serif!important;
+  font-size:14px!important;
+  font-weight:300!important;
+  line-height:1.35!important;
+  text-align:center!important;
+}
+</style>
 </body>
 </html>
