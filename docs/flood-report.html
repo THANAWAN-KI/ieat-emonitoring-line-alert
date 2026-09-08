@@ -4160,5 +4160,34 @@ html body #warning .flood-final-cards .source-link{display:none!important}
  [300,900,1900,2400].forEach(ms=>setTimeout(pairCards,ms));
 })();
 </script>
+<style id="flash-flood-ranking-card-v1">
+#warning .national-watch-pair>.national-kpi:has(#nationalFloodCount){display:block!important;padding:16px 18px 18px!important;min-height:0!important;border-radius:18px!important;background:#fff!important;overflow:hidden!important}
+#warning .national-watch-pair>.national-kpi:has(#nationalFloodCount)>h2{display:block!important;width:100%!important;margin:0 0 12px!important;font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;line-height:1.45!important;font-weight:500!important;color:#444!important;text-align:left!important}
+#warning .national-watch-pair>.national-kpi:has(#nationalFloodCount)>strong,#warning .national-watch-pair>.national-kpi:has(#nationalFloodCount)>span,#warning .national-watch-pair>.national-kpi:has(#nationalFloodCount)>.source-link,#warning .national-watch-pair>.national-kpi:has(#nationalFloodCount)>.n-icon{display:none!important}
+#warning .flash-flood-ranking{display:grid!important;gap:7px!important;width:100%!important}
+#warning .flash-flood-rank-row{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;align-items:center!important;gap:10px!important;width:100%!important;min-height:38px!important;padding:5px 7px!important;background:#f5f7fb!important;border-radius:10px!important}
+#warning .flash-flood-rank-name{min-width:0!important;font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;line-height:1.35!important;font-weight:300!important;color:#777!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+#warning .flash-flood-rank-value{display:block!important;min-width:66px!important;margin:0!important;padding:5px 10px!important;border-radius:10px!important;background:#ffc95f!important;color:#604100!important;font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;line-height:1.2!important;font-weight:400!important;text-align:center!important;white-space:nowrap!important}
+@media(max-width:560px){#warning .national-watch-pair>.national-kpi:has(#nationalFloodCount){padding:14px!important}#warning .flash-flood-rank-name,#warning .flash-flood-rank-value{font-size:14px!important}}
+</style>
+<script id="flash-flood-ranking-card-v1-script">
+(function(){
+ const clean=name=>String(name||"ไม่ระบุจังหวัด").replace(/^จ\\./,"").trim();
+ const escapeHtml=value=>String(value).replace(/[&<>\"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'\"':"&quot;"}[ch]));
+ function render(){
+  const count=document.getElementById("nationalFloodCount"),card=count&&count.closest(".national-kpi");if(!card)return;
+  const title=card.querySelector("h2");if(title)title.textContent="พื้นที่เสี่ยงน้ำท่วมฉับพลันใน 24 ชั่วโมงข้างหน้า";
+  let list=card.querySelector(".flash-flood-ranking");if(!list){list=document.createElement("div");list.className="flash-flood-ranking";card.appendChild(list)}
+  const source=window.warningData||window.IEAT_LIVE_DATA||window.IEAT_THAIWATER_DATA||window.mapWarningData||{};
+  const areas=(source.flash_flood&&source.flash_flood["24h"]&&source.flash_flood["24h"].areas)||[];
+  const grouped=new Map();
+  areas.forEach(row=>{const province=clean(row.province),rain=Number(row.sum_rainfall_mm),current=grouped.get(province)||{province,count:0,maxRain:null};current.count+=1;if(Number.isFinite(rain))current.maxRain=current.maxRain===null?rain:Math.max(current.maxRain,rain);grouped.set(province,current)});
+  const rows=[...grouped.values()].sort((a,b)=>(b.maxRain??-1)-(a.maxRain??-1)||b.count-a.count).slice(0,5);
+  list.innerHTML=rows.length?rows.map((row,index)=>'<div class="flash-flood-rank-row"><span class="flash-flood-rank-name">'+(index+1)+'. '+escapeHtml(row.province)+'</span><b class="flash-flood-rank-value">'+(row.maxRain===null?row.count+' จุด':row.maxRain.toLocaleString("th-TH",{maximumFractionDigits:1})+' มม.')+'</b></div>').join(''):'<div class="flash-flood-rank-row"><span class="flash-flood-rank-name">กำลังตรวจสอบข้อมูลพื้นที่เสี่ยง</span><b class="flash-flood-rank-value">'+escapeHtml(count.textContent||'–')+'</b></div>';
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",render);else render();
+ [300,900,1800,3000,5000].forEach(ms=>setTimeout(render,ms));
+})();
+</script>
 </body>
 </html>
