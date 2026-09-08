@@ -2694,7 +2694,7 @@ body{font-size:16px!important;font-weight:400!important;background:#f7f8fa!impor
   var warning=document.getElementById("warning"),shell=warning&&warning.querySelector(".new4all-water-shell");if(!warning||!shell)return;
   if(!warning.querySelector(".flood-support-heading")){
    var head=document.createElement("header");head.className="flood-support-heading";
-   head.innerHTML='<div><h1>ข้อมูลสนับสนุนกรณีเกิดเหตุน้ำท่วม</h1><p>ติดตามพื้นที่เฝ้าระวัง ปริมาณฝน และสถานการณ์น้ำจากข้อมูลล่าสุด</p></div><div class="flood-support-heading-actions"><button type="button" data-target="warning">หน้ารายงานข่าว</button><button type="button" data-target="infographic">ข้อมูล</button></div>';
+   head.innerHTML='<div class="flood-support-heading-copy"><h1>รายงานสถานการณ์น้ำประจำวัน</h1><p>สรุปข้อมูลที่สัมพันธ์กับพื้นที่นิคมอุตสาหกรรมจากแหล่งข้อมูลเดิมของระบบ</p></div><div class="flood-support-heading-date">ข้อมูลวันที่ 8 ก.ย. 2569</div><div class="flood-support-heading-actions"><button type="button" data-target="warning">หน้ารายงานข่าว</button><button type="button" data-target="infographic">ข้อมูล</button></div>';
    warning.insertBefore(head,shell);
    head.querySelectorAll("button").forEach(function(b){b.onclick=function(){var target=b.dataset.target;document.querySelector('.nav button[data-view="'+target+'"]')?.click()}});
   }
@@ -3227,6 +3227,27 @@ html body #warning .flood-final-cards>.national-kpi{
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(updateHeading,120));else setTimeout(updateHeading,120);
  setTimeout(updateHeading,900);
+})();
+</script>
+<script id="flood-daily-heading-observer-fix">
+(function(){
+ function forceDailyHeading(){
+  const heading=document.querySelector("#warning .flood-support-heading");if(!heading)return false;
+  let copy=heading.querySelector(".flood-support-heading-copy");
+  if(!copy){copy=heading.firstElementChild;copy&&copy.classList.add("flood-support-heading-copy")}
+  if(copy)copy.innerHTML="<h1>รายงานสถานการณ์น้ำประจำวัน</h1><p>สรุปข้อมูลที่สัมพันธ์กับพื้นที่นิคมอุตสาหกรรมจากแหล่งข้อมูลเดิมของระบบ</p>";
+  let date=heading.querySelector(".flood-support-heading-date");
+  if(!date){date=document.createElement("div");date.className="flood-support-heading-date";heading.querySelector(".flood-support-heading-actions")?.before(date)}
+  const source=document.getElementById("dailyReportDate");
+  date.textContent=(source&&source.textContent.trim())||"ข้อมูลวันที่ 8 ก.ย. 2569";
+  return true;
+ }
+ if(!forceDailyHeading()){
+  const observer=new MutationObserver(()=>{if(forceDailyHeading())observer.disconnect()});
+  observer.observe(document.documentElement,{childList:true,subtree:true});
+ }
+ document.addEventListener("DOMContentLoaded",forceDailyHeading);
+ setTimeout(forceDailyHeading,100);setTimeout(forceDailyHeading,800);setTimeout(forceDailyHeading,2000);
 })();
 </script>
 </body>
