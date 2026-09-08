@@ -3095,5 +3095,71 @@ html body #warning .flood-support-heading-actions button::after{font-family:"Not
 #warning .status-color-legend .warning{color:#ff9900!important}
 #warning .status-color-legend .normal{color:#7fbb00!important}
 </style>
+<style id="flood-six-cards-report-map-v3">
+/* Top heading matching the supplied reference */
+.flood-support-heading{min-height:116px!important;padding:20px 30px!important;background:#fff!important;border-radius:0!important}
+.flood-support-heading h1{margin:0!important;font-family:"Noto Sans Thai",sans-serif!important;font-size:20px!important;font-weight:500!important;color:#004b79!important}
+.flood-support-heading p{margin:8px 0 0!important;font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:300!important;color:#000!important}
+.flood-support-heading-actions{gap:16px!important}
+.flood-support-heading-actions button{min-width:170px!important;min-height:54px!important;background:#0091cd!important;color:#fff!important;border-radius:999px!important}
+.flood-support-heading-actions button::after{font-size:16px!important;color:#fff!important}
+
+/* Wider data area and slightly narrower map */
+html body #warning.view.active>.flood-final-layout{
+ grid-template-columns:minmax(0,62%) minmax(0,38%)!important;
+ height:calc(100vh - 194px)!important;min-height:650px!important
+}
+html body #warning .flood-final-cards{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:14px!important}
+html body #warning .flood-final-cards>.kpi,
+html body #warning .flood-final-cards>.national-kpi{
+ height:138px!important;min-height:138px!important;padding:16px 18px!important
+}
+#warning .flood-final-cards h2,
+#warning .flood-final-cards .kpi>div>span,
+#warning .flood-final-cards .national-kpi>h2{font-size:16px!important;font-weight:300!important;line-height:1.45!important;overflow-wrap:normal!important}
+#warning .flood-final-cards strong{font-size:25px!important;font-weight:700!important}
+
+/* Daily water report typography */
+#warning .daily-water-report h2,#warning #dailyWaterTitle{
+ font-family:"Noto Sans Thai",sans-serif!important;font-size:20px!important;line-height:1.35!important;font-weight:500!important;color:#0091cd!important
+}
+#warning .daily-water-report .daily-water-head p{
+ font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;line-height:1.4!important;font-weight:300!important;color:#000!important
+}
+#warning #dailyReportDate{
+ font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;line-height:1.4!important;font-weight:300!important;color:#000!important
+}
+
+/* Map title and map controls */
+#warning .flood-final-map .overview-map-label{max-width:310px!important;padding:10px 14px!important}
+#warning .flood-final-map .overview-map-label b{font-size:18px!important;font-weight:500!important}
+#warning .flood-final-map .overview-map-label small{font-size:16px!important;font-weight:300!important}
+#warning .flood-final-map .floating-map-nav,
+#warning .flood-final-map .map-view-tabs,
+#warning .flood-final-map .map-actions,
+#warning .flood-final-map button[data-view],
+#warning .flood-final-map button[data-target],
+#warning .flood-final-map a[href*="infographic"]{display:none!important}
+
+/* The seventh flash-flood card is not part of the requested six-card strip */
+#warning .flood-final-cards>.national-kpi[data-excluded-card="true"]{display:none!important}
+@media(max-width:1250px) and (min-width:901px){html body #warning .flood-final-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:900px){html body #warning.view.active>.flood-final-layout{height:auto!important}.flood-support-heading{padding:18px!important}}
+@media(max-width:650px){html body #warning .flood-final-cards{grid-template-columns:1fr!important}.flood-support-heading-actions button{min-width:0!important;min-height:44px!important}}
+</style>
+<script id="flood-six-cards-report-map-v3-script">
+(function(){
+ function orderSix(){
+  const grid=document.querySelector("#warning .flood-final-cards");if(!grid)return;
+  const ids=["outEstateCount","outFactory","outCritical","nationalStormCount","nationalWaterProvinceCount","nationalHeavyRainCount"];
+  ids.forEach(id=>{const el=document.getElementById(id),card=el&&el.closest(".kpi,.national-kpi");if(card){card.removeAttribute("data-excluded-card");grid.appendChild(card)}});
+  const flood=document.getElementById("nationalFloodCount"),extra=flood&&flood.closest(".national-kpi");if(extra)extra.setAttribute("data-excluded-card","true");
+  [...grid.children].forEach(card=>{if(!ids.some(id=>card.querySelector("#"+id)))card.setAttribute("data-excluded-card","true")});
+  document.querySelectorAll("#warning .flood-final-map .floating-map-nav button").forEach(button=>button.remove());
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(orderSix,120));else setTimeout(orderSix,120);
+ setTimeout(orderSix,900);setTimeout(orderSix,1900);
+})();
+</script>
 </body>
 </html>
