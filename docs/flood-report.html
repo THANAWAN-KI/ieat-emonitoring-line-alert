@@ -1360,8 +1360,9 @@ body{color:#172033!important}
   <header class="topbar"><div class="top-inner">
     <div class="brand"><span class="brand-mark" aria-hidden="true">IEAT</span><b>ศูนย์ติดตามสถานการณ์น้ำ</b><span>การนิคมอุตสาหกรรมแห่งประเทศไทย</span></div>
     <nav class="nav" aria-label="เมนูหลัก">
-      <button class="active" data-view="warning">พื้นที่เฝ้าระวัง</button>
-      <button data-view="infographic">ส่งออกข้อมูล</button>
+      <button class="active" data-view="warning">หน้ารายงานข่าว</button>
+      <button data-view="thaiwater-warning">พื้นที่เฝ้าระวัง</button>
+      <button data-view="infographic">ข้อมูล</button>
     </nav>
     
   </div></header>
@@ -1440,6 +1441,25 @@ body{color:#172033!important}
         </article>
       <article class="card warning-table focus-data-table station-watch-table"><div class="table-section-head"><div><h2>สถานการณ์น้ำในพื้นที่เฝ้าระวังใกล้นิคมอุตสาหกรรม</h2><p>แสดงสถานีระดับน้ำที่อยู่ใกล้พื้นที่นิคมอุตสาหกรรม เรียงตามระดับความสำคัญ</p></div><span>ข้อมูลล่าสุด</span></div><div class="status-color-legend" aria-label="คำอธิบายสีสถานะ"><span class="critical"><i></i>ต้องติดตามใกล้ชิด</span><span class="warning"><i></i>เฝ้าระวัง</span><span class="normal"><i></i>สถานการณ์ปกติ</span></div><div class="status-color-legend" aria-label="คำอธิบายสีสถานะ"><span class="critical"><i></i>ต้องติดตามใกล้ชิด</span><span class="warning"><i></i>เฝ้าระวัง</span><span class="normal"><i></i>สถานการณ์ปกติ</span></div><div class="table-scroll"><table class="table water-status-table"><thead><tr><th>สถานี</th><th>ระดับน้ำ</th><th class="water-situation-head">สถานการณ์น้ำ</th><th>เวลา</th></tr></thead><tbody id="stations"><tr><td colspan="4" class="table-empty">กำลังประมวลผลข้อมูล…</td></tr></tbody></table></div></article><article class="card warning-table focus-data-table nearby-watch-table"><div class="table-section-head"><div><h2 contenteditable="true">พื้นที่เฝ้าระวัง 24 ชั่วโมง / 48 ชั่วโมง ใกล้เคียงพื้นที่นิคมฯ</h2><p>พื้นที่คาดการณ์ที่อยู่ใกล้นิคมอุตสาหกรรมภายในรัศมี 30 กิโลเมตร</p></div><span>ข้อมูลคาดการณ์ล่าสุด</span></div><div class="table-scroll"><table class="table"><thead><tr><th>ช่วงเวลา</th><th>จังหวัด</th><th>อำเภอ</th><th>ตำบล</th><th>ฝนสะสม</th><th>นิคมฯ ใกล้ที่สุด</th></tr></thead><tbody id="nearbyWatchRows"><tr><td colspan="6" class="table-empty">กำลังประมวลผลข้อมูล…</td></tr></tbody></table></div></article>
       </section>
+    </section>
+
+    <section class="view thaiwater-warning-view" id="thaiwater-warning">
+      <div class="thaiwater-warning-shell">
+        <header class="thaiwater-warning-head">
+          <div>
+            <span>ข้อมูลเตือนภัยจากคลังข้อมูลน้ำแห่งชาติ</span>
+            <h1>พื้นที่เฝ้าระวัง</h1>
+            <p>ติดตามพื้นที่ประกาศเตือนภัย สถานการณ์ฝน และระดับน้ำจากข้อมูล ThaiWater</p>
+          </div>
+          <a href="https://www.thaiwater.net/new4all/warning" target="_blank" rel="noopener">เปิดเต็มหน้า</a>
+        </header>
+        <div class="thaiwater-warning-frame">
+          <iframe src="https://www.thaiwater.net/new4all/warning" title="พื้นที่เฝ้าระวัง ThaiWater" loading="eager" allow="fullscreen; geolocation" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          <div class="thaiwater-warning-fallback">
+            หากแผนที่ไม่แสดง โปรดเลือก “เปิดเต็มหน้า” เพื่อดูข้อมูลจาก ThaiWater โดยตรง
+          </div>
+        </div>
+      </div>
     </section>
 
     <section class="view" id="infographic">
@@ -4725,5 +4745,35 @@ html body #warning .status-color-legend .normal{color:#598c14!important}
 html body #warning .status-color-legend .warning i{background:#ffc719!important}
 html body #warning .status-color-legend .warning{color:#8a6800!important}
 </style>
+<style id="thaiwater-warning-tab-20260908-v1">
+html body #thaiwater-warning{width:100%!important;padding:0!important}
+html body #thaiwater-warning.active{display:block!important}
+.thaiwater-warning-shell{width:100%;min-height:calc(100vh - 118px);background:#eef3f7;border-radius:16px;overflow:hidden;box-shadow:0 5px 20px rgba(30,66,100,.10)}
+.thaiwater-warning-head{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px 22px;background:#fff;border-bottom:1px solid #dce5ec}
+.thaiwater-warning-head span{display:block;margin-bottom:2px;color:#687783;font-family:"Noto Sans Thai",sans-serif;font-size:14px;font-weight:300}
+.thaiwater-warning-head h1{margin:0;color:#388ed1;font-family:"Noto Sans Thai",sans-serif;font-size:24px;font-weight:500;line-height:1.35}
+.thaiwater-warning-head p{margin:3px 0 0;color:#4e5e69;font-family:"Noto Sans Thai",sans-serif;font-size:16px;font-weight:300}
+.thaiwater-warning-head a{flex:0 0 auto;padding:10px 18px;background:#388ed1;color:#fff;border-radius:9px;text-decoration:none;font-family:"Noto Sans Thai",sans-serif;font-size:16px;font-weight:400}
+.thaiwater-warning-frame{position:relative;width:100%;height:calc(100vh - 220px);min-height:680px;background:#eaf0f4}
+.thaiwater-warning-frame iframe{position:relative;z-index:2;display:block;width:100%;height:100%;border:0;background:#fff}
+.thaiwater-warning-fallback{position:absolute;z-index:1;inset:0;display:grid;place-items:center;padding:30px;color:#536572;text-align:center;font-family:"Noto Sans Thai",sans-serif;font-size:16px;font-weight:300}
+@media(max-width:700px){.thaiwater-warning-head{align-items:flex-start;flex-direction:column}.thaiwater-warning-frame{height:720px;min-height:720px}.thaiwater-warning-head a{width:100%;text-align:center}}
+</style>
+<script id="thaiwater-warning-tab-20260908-v1-script">
+(function(){
+ function fixFloodNav(){
+  const nav=document.querySelector(".topbar .nav");if(!nav)return;
+  let report=nav.querySelector('[data-view="warning"]');
+  let watch=nav.querySelector('[data-view="thaiwater-warning"]');
+  let info=nav.querySelector('[data-view="infographic"]');
+  if(report)report.textContent="หน้ารายงานข่าว";
+  if(watch)watch.textContent="พื้นที่เฝ้าระวัง";
+  if(info)info.textContent="ข้อมูล";
+  [report,watch,info].filter(Boolean).forEach(function(button){button.onclick=function(){go(button.dataset.view)}});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",fixFloodNav);else fixFloodNav();
+ [200,800,1800,3000].forEach(function(ms){setTimeout(fixFloodNav,ms)});
+})();
+</script>
 </body>
 </html>
