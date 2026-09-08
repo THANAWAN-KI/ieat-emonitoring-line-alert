@@ -2745,5 +2745,105 @@ body{min-height:100vh!important}
 @media(max-width:1150px){.new4all-water-shell{height:auto!important;grid-template-columns:1fr!important}.flood-dashboard-left{height:auto!important}.flood-dashboard-map,.flood-dashboard-map .operations-map,.flood-dashboard-map .operations-map iframe{height:680px!important}}
 @media(max-width:700px){.container{padding:7px!important}.new4all-water-shell{min-height:0!important}.flood-dashboard-map,.flood-dashboard-map .operations-map,.flood-dashboard-map .operations-map iframe{height:540px!important;min-height:540px!important}}
 </style>
+<style id="flood-annotated-fix-20260908">
+/* Blue frame: requested heading color */
+.flood-support-heading h1{color:#0091cd!important}
+
+/* Orange frame: no black outline */
+.flood-support-heading{border:0!important;outline:0!important;box-shadow:0 2px 9px rgba(32,62,91,.08)!important}
+
+/* Green and purple frames: dashboard left, map right */
+.new4all-water-shell{
+ display:grid!important;
+ grid-template-columns:minmax(0,56%) minmax(0,44%)!important;
+ grid-template-rows:minmax(0,1fr)!important;
+ width:100%!important;max-width:100%!important;
+ height:calc(100vh - 166px)!important;min-height:650px!important;
+ gap:14px!important;overflow:hidden!important
+}
+.flood-dashboard-left{
+ grid-column:1!important;grid-row:1!important;
+ display:flex!important;flex-direction:column!important;
+ width:100%!important;min-width:0!important;max-width:100%!important;
+ height:100%!important;overflow:auto!important;padding:2px 8px 4px 2px!important
+}
+.flood-dashboard-left .new4all-center,
+.flood-dashboard-left .new4all-left{
+ display:flex!important;flex-direction:column!important;
+ position:static!important;float:none!important;
+ width:100%!important;min-width:0!important;max-width:100%!important;
+ grid-column:auto!important;grid-row:auto!important;gap:14px!important
+}
+.flood-dashboard-left .new4all-left{margin-top:14px!important}
+.flood-dashboard-left .new4all-metrics{
+ display:grid!important;position:static!important;
+ grid-template-columns:repeat(4,minmax(0,1fr))!important;
+ grid-auto-flow:row!important;gap:14px!important;
+ width:100%!important;min-width:0!important;max-width:100%!important;
+ margin:0!important
+}
+.flood-dashboard-left .new4all-metrics>*{
+ position:static!important;float:none!important;
+ grid-column:auto!important;grid-row:auto!important;
+ width:100%!important;min-width:0!important;max-width:100%!important;
+ margin:0!important
+}
+.flood-dashboard-left .daily-water-report,
+.flood-dashboard-left .nationwide-indicators,
+.flood-dashboard-left .national-alert,
+.flood-dashboard-left .live-viz-card{
+ position:static!important;float:none!important;
+ grid-column:auto!important;grid-row:auto!important;
+ width:100%!important;min-width:0!important;max-width:100%!important;
+ margin:0!important
+}
+.flood-dashboard-map{
+ grid-column:2!important;grid-row:1!important;
+ position:relative!important;inset:auto!important;
+ width:100%!important;min-width:0!important;max-width:100%!important;
+ height:100%!important;min-height:650px!important;
+ margin:0!important;overflow:hidden!important
+}
+.flood-dashboard-map .operations-map,
+.flood-dashboard-map .operations-map iframe{
+ position:absolute!important;inset:0!important;
+ display:block!important;width:100%!important;max-width:100%!important;
+ height:100%!important;min-height:0!important;margin:0!important;
+ border:0!important;border-radius:14px!important
+}
+
+/* Red frames: remove every colored stripe from cards */
+#warning .new4all-metrics>*,
+#warning .kpi,#warning .national-kpi,
+#warning .card,#warning .daily-water-report,
+#warning .nationwide-indicators,#warning .live-viz-card{
+ border-top:0!important;border-left-color:transparent!important;
+ outline:0!important;background-image:none!important
+}
+#warning .new4all-metrics>*:before,
+#warning .new4all-metrics>*:after,
+#warning .kpi:before,#warning .kpi:after,
+#warning .national-kpi:before,#warning .national-kpi:after{
+ display:none!important;content:none!important
+}
+#warning .national-alert{border-left:0!important}
+#warning .kpi,#warning .national-kpi{overflow:hidden!important}
+#warning .kpi strong,#warning .national-kpi strong{white-space:normal!important;word-break:normal!important}
+
+/* Keep map title compact and out of the map controls */
+#warning .overview-map-label{top:12px!important;left:12px!important;right:12px!important;width:auto!important;max-width:360px!important}
+@media(max-width:1250px){
+ .flood-dashboard-left .new4all-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:900px){
+ .new4all-water-shell{display:flex!important;flex-direction:column!important;height:auto!important;overflow:visible!important}
+ .flood-dashboard-left{height:auto!important;overflow:visible!important}
+ .flood-dashboard-map{height:620px!important;min-height:620px!important}
+}
+@media(max-width:600px){
+ .flood-dashboard-left .new4all-metrics{grid-template-columns:1fr!important}
+ .flood-dashboard-map{height:520px!important;min-height:520px!important}
+}
+</style>
 </body>
 </html>
