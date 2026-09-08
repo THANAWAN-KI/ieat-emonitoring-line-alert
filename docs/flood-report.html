@@ -5015,5 +5015,37 @@ html body #thaiwater-warning.active{display:block!important}
 })();
 </script>
 
+<style id="external-persistent-tabs-20260908-v4">
+body>.ieat-persistent-tabbar{position:sticky!important;top:0!important;z-index:999!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:12px!important;width:100%!important;min-height:72px!important;padding:12px 20px!important;background:rgba(255,255,255,.96)!important;border-bottom:1px solid #dce5ec!important;box-shadow:0 3px 12px rgba(34,70,99,.10)!important;backdrop-filter:blur(10px)!important}
+body>.ieat-persistent-tabbar button{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:180px!important;min-height:46px!important;padding:11px 24px!important;border:0!important;border-radius:999px!important;background:#0a98ca!important;color:#fff!important;font-family:"Noto Sans Thai",sans-serif!important;font-size:17px!important;font-weight:400!important;line-height:1.2!important;cursor:pointer!important;opacity:1!important;visibility:visible!important}
+body>.ieat-persistent-tabbar button:hover{background:#087fad!important}
+body>.ieat-persistent-tabbar button.active{background:#388ed1!important;box-shadow:0 4px 12px rgba(56,142,209,.32)!important}
+.topbar .ieat-main-tabs{display:none!important}
+@media(max-width:650px){body>.ieat-persistent-tabbar{position:relative!important;flex-direction:column!important}body>.ieat-persistent-tabbar button{width:100%!important}}
+</style>
+<script id="external-persistent-tabs-20260908-v4-script">
+(function(){
+ const tabs=[["warning","ภาพรวม"],["thaiwater-warning","พื้นที่เฝ้าระวัง"],["infographic","ส่งออกข้อมูล"]];
+ function selectPage(id){
+  document.querySelectorAll("main .view").forEach(function(view){view.classList.toggle("active",view.id===id)});
+  document.querySelectorAll(".ieat-persistent-tabbar button").forEach(function(button){
+   const active=button.dataset.page===id;button.classList.toggle("active",active);
+   if(active)button.setAttribute("aria-current","page");else button.removeAttribute("aria-current");
+  });
+  if(id==="infographic"&&typeof window.prepareReportExport==="function")window.prepareReportExport();
+  window.scrollTo({top:0,behavior:"smooth"});
+ }
+ function mountExternalTabs(){
+  let bar=document.querySelector("body>.ieat-persistent-tabbar");
+  if(!bar){bar=document.createElement("nav");bar.className="ieat-persistent-tabbar";bar.setAttribute("aria-label","เมนูหลัก");document.body.insertBefore(bar,document.querySelector("main"))}
+  bar.innerHTML=tabs.map(function(tab){return '<button type="button" data-page="'+tab[0]+'">'+tab[1]+'</button>'}).join("");
+  bar.querySelectorAll("button").forEach(function(button){button.onclick=function(){selectPage(button.dataset.page)}});
+  selectPage(document.querySelector("main .view.active")?.id||"warning");
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mountExternalTabs);else mountExternalTabs();
+ [100,700,1800,3500,6500].forEach(function(ms){setTimeout(mountExternalTabs,ms)});
+})();
+</script>
+
 </body>
 </html>
