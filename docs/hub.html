@@ -281,11 +281,11 @@ function floodApplyEstate(){
   var fireStatus=document.getElementById('fireEstateStatus');status.textContent=fireStatus.textContent;status.className=fireStatus.className;
   var data={};try{data=JSON.parse(localStorage.getItem('dss-report')||'{}')||{}}catch(error){}
   data.event='เหตุน้ำท่วม';localStorage.setItem('dss-report',JSON.stringify(data));updateFireSupportDashboard();
-  var frame=document.getElementById('floodReportFrame');if(frame)frame.src='./flood-report.html?hub=water-dashboard-af6a08e5&t='+Date.now();
+  var frame=document.getElementById('floodReportFrame');if(frame)frame.src='./flood-report.html?hub=water-dashboard-5a0d2476&t='+Date.now();
 }
 document.getElementById('floodEstateApply').addEventListener('click',floodApplyEstate);document.getElementById('floodEstateSearch').addEventListener('keydown',function(event){if(event.key==='Enter'){event.preventDefault();floodApplyEstate()}});
 updateFireSupportDashboard();syncFireEstateOptions();window.addEventListener('storage',updateFireSupportDashboard);setInterval(function(){updateFireSupportDashboard();syncFireEstateOptions()},1500);
-const floodView=document.createElement('section');floodView.id='floodView';floodView.className='flood-hub';floodView.innerHTML=`<iframe id="floodReportFrame" class="flood-report-frame" src="./flood-report.html?hub=water-dashboard-af6a08e5" title="Dashboard สถานการณ์น้ำท่วม" loading="eager" allowfullscreen></iframe>`;otherView.parentNode.insertBefore(floodView,otherView);
+const floodView=document.createElement('section');floodView.id='floodView';floodView.className='flood-hub';floodView.innerHTML=`<iframe id="floodReportFrame" class="flood-report-frame" src="./flood-report.html?hub=water-dashboard-5a0d2476" title="Dashboard สถานการณ์น้ำท่วม" loading="eager" allowfullscreen></iframe>`;otherView.parentNode.insertBefore(floodView,otherView);
 const droughtView=document.createElement('section');droughtView.id='droughtView';droughtView.className='drought-hub';droughtView.innerHTML=`<iframe class="drought-report-frame" src="./drought.html?theme=fire-heading-20260904" title="ศูนย์ข้อมูลสถานการณ์ภัยแล้ง" loading="eager" allowfullscreen></iframe>`;otherView.parentNode.insertBefore(droughtView,otherView);
 const pm25View=document.createElement('section');pm25View.id='pm25View';pm25View.className='pm25-hub';pm25View.innerHTML=`<iframe class="pm25-report-frame" src="./pm25.html?theme=fire-heading-20260904" title="ศูนย์ข้อมูลสถานการณ์ฝุ่น PM2.5" loading="eager" allowfullscreen></iframe>`;otherView.parentNode.insertBefore(pm25View,otherView);
 document.querySelectorAll('.tab').forEach(tab=>tab.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===tab));const type=tab.dataset.type;fireView.style.display='none';fireHub.classList.toggle('show',type==='fire');floodView.classList.toggle('show',type==='flood');droughtView.classList.toggle('show',type==='drought');pm25View.classList.toggle('show',type==='pm25');otherView.classList.toggle('show',!['fire','flood','drought','pm25'].includes(type));if(!['fire','flood','drought','pm25'].includes(type))otherTitle.textContent=labels[type]});
@@ -1448,7 +1448,7 @@ document.addEventListener('DOMContentLoaded',function(){
 #floodView .flood-report-frame{display:block!important;width:100%!important;height:calc(100vh - 82px)!important;min-height:900px!important;border:0!important;border-radius:0!important;background:#f7f7f7!important}
 @media(max-width:850px){#floodView .flood-report-frame{height:calc(100vh - 72px)!important;min-height:760px!important}}
 </style>
-<style id="hub-direct-page-router-20260908">
+<style id="hub-direct-5a0d2476">
 #directPagePortal{display:none;width:100%;height:calc(100vh - 112px);min-height:720px;margin:0;padding:0;background:#fff;overflow:hidden}
 #directPagePortal.show{display:block!important}
 #directPagePortal iframe{display:block;width:100%;height:100%;min-height:720px;border:0;background:#fff}
@@ -1460,12 +1460,12 @@ body.direct-page-open #pm25View,
 body.direct-page-open #otherView{display:none!important}
 @media(max-width:700px){#directPagePortal,#directPagePortal iframe{height:calc(100vh - 96px);min-height:640px}}
 </style>
-<script id="hub-direct-page-router-20260908-script">
+<script id="hub-direct-5a0d2476">
 (function(){
  const pages={
-  flood:{src:"./flood-report.html?from=hub-direct-af6a08e5",title:"ข้อมูลสนับสนุนกรณีเกิดเหตุน้ำท่วม"},
-  drought:{src:"./drought.html?from=hub-direct-20260908",title:"ข้อมูลสนับสนุนกรณีภัยแล้ง"},
-  pm25:{src:"./pm25.html?from=hub-direct-20260908",title:"ข้อมูลสนับสนุนกรณีฝุ่น PM2.5"}
+  flood:{src:"./flood-report.html?from=hub-direct-5a0d2476",title:"ข้อมูลสนับสนุนกรณีเกิดเหตุน้ำท่วม"},
+  drought:{src:"./drought.html?from=hub-direct-5a0d2476",title:"ข้อมูลสนับสนุนกรณีภัยแล้ง"},
+  pm25:{src:"./pm25.html?from=hub-direct-5a0d2476",title:"ข้อมูลสนับสนุนกรณีฝุ่น PM2.5"}
  };
  function portal(){
   let box=document.getElementById("directPagePortal");
