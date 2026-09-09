@@ -2542,7 +2542,7 @@ body .floating-map-nav button.active:after{display:none!important}
    placeNavigation();
    ["warning","infographic"].forEach(function(id){
      const view=document.getElementById(id);
-     if(view)new MutationObserver(placeNavigation).observe(view,{attributes:true,attributeFilter:["class","style"]});
+     if(view)new MutationObserver(placeNavigation).observe(view,{attributes:true,attributeFilter:["class"]});
    });
    document.querySelectorAll(".nav button").forEach(function(button){button.addEventListener("click",function(){requestAnimationFrame(placeNavigation)})});
  }
@@ -7720,7 +7720,7 @@ html body main.container #exportHeaderTabs .export-nav-title{color:#59267c!impor
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",lockPurpleNavigation);else lockPurpleNavigation();
  document.addEventListener("click",function(){setTimeout(lockPurpleNavigation,0)});
  const main=document.querySelector("main.container");
- if(main)new MutationObserver(lockPurpleNavigation).observe(main,{subtree:true,childList:true,attributes:true,attributeFilter:["class"]});
+ if(main)new MutationObserver(lockPurpleNavigation).observe(main,{subtree:true,childList:true,attributes:true,attributeFilter:["class","style"]});
  [100,500,1200,2500,5000,8000].forEach(function(ms){setTimeout(lockPurpleNavigation,ms)});
 })();
 </script>
