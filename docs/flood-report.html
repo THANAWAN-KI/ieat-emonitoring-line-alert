@@ -5792,7 +5792,7 @@ body.infographic-modal-open{overflow:hidden!important}
   const preview=document.createElement("div");preview.className="infographic-preview";
   const actions=document.createElement("div");actions.className="infographic-card-actions";
   actions.innerHTML='<button type="button" class="info-view-full">ดูแบบเต็ม</button><button type="button" class="info-download-png">ดาวน์โหลด PNG</button>';
-  sheet.parentElement.insertBefore(item,sheet);item.appendChild(preview);preview.appendChild(sheet);item.appendChild(actions);
+  sheet.parentElement.insertBefore(item,sheet);item.appendChild(preview);preview.appendChild(sheet);
   actions.querySelector(".info-view-full").onclick=function(){
    const open=item.classList.toggle("is-expanded");this.textContent=open?"ปิด":"ดูแบบเต็ม";document.body.classList.toggle("infographic-modal-open",open);
   };
