@@ -7725,5 +7725,32 @@ html body main.container #exportHeaderTabs .export-nav-title{color:#59267c!impor
 })();
 </script>
 
+<style id="remove-duplicate-export-heading-controls-20260909-v1">
+html body main.container #infographic>.daily-export-control{display:none!important}
+html body main.container #infographic>.export-page-heading>div:not(#exportHeaderTabs),
+html body main.container #infographic>.export-page-heading>h1:not(.export-nav-title),
+html body main.container #infographic>.export-page-heading>p{display:none!important}
+html body main.container #infographic>.export-page-heading{
+ padding-bottom:0!important;
+ margin-bottom:0!important;
+}
+</style>
+<script id="remove-duplicate-export-heading-controls-20260909-v1-script">
+(function(){
+ "use strict";
+ function removeSection(){
+  const view=document.getElementById("infographic");if(!view)return;
+  view.querySelectorAll(":scope>.daily-export-control").forEach(function(el){el.remove()});
+  const heading=view.querySelector(":scope>.export-page-heading");
+  if(!heading)return;
+  heading.querySelectorAll(":scope>div:not(#exportHeaderTabs),:scope>p,:scope>h1:not(.export-nav-title)").forEach(function(el){el.remove()});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeSection);else removeSection();
+ const view=document.getElementById("infographic");
+ if(view)new MutationObserver(removeSection).observe(view,{subtree:false,childList:true});
+ [100,500,1200,2500,5000,8000].forEach(function(ms){setTimeout(removeSection,ms)});
+})();
+</script>
+
 </body>
 </html>
