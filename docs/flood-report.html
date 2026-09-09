@@ -6982,5 +6982,158 @@ body main.container #infographic #exportHeaderTabs button.active{
 }
 </style>
 
+<style id="complete-daily-export-report-20260909-v1">
+#infographic .daily-export-control{
+ display:flex!important;align-items:center!important;justify-content:space-between!important;
+ gap:16px!important;margin:-4px 0 18px!important;padding:12px 16px!important;
+ background:#fff!important;border:1px solid #bcced6!important;border-radius:12px!important;
+ box-shadow:0 4px 12px rgba(13,26,43,.07)!important
+}
+#infographic .daily-export-meta{display:flex!important;flex-direction:column!important;gap:2px!important;min-width:0!important}
+#infographic .daily-export-meta b{color:#0082ca!important;font-size:16px!important;font-weight:600!important}
+#infographic .daily-export-meta span{color:#526777!important;font-size:14px!important;font-weight:400!important}
+#infographic .daily-export-actions{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:8px!important;flex-wrap:wrap!important}
+#infographic .daily-export-actions button{
+ min-height:40px!important;padding:8px 16px!important;border:0!important;border-radius:999px!important;
+ background:#0072cf!important;color:#fff!important;font-size:15px!important;font-weight:500!important;
+ cursor:pointer!important;box-shadow:0 4px 10px rgba(0,114,207,.18)!important
+}
+#infographic .daily-export-actions .save-all-report{background:#199051!important}
+#infographic .daily-export-actions button:disabled{opacity:.65!important;cursor:wait!important}
+#infographic .report-freshness{
+ display:inline-flex!important;align-items:center!important;gap:6px!important
+}
+#infographic .report-freshness:before{
+ content:"";width:8px;height:8px;border-radius:50%;background:#199051;box-shadow:0 0 0 3px rgba(25,144,81,.14)
+}
+#infographic.report-capture-mode .report-pages{
+ display:block!important;width:1240px!important;max-width:none!important;background:#f2f7f9!important;padding:18px!important
+}
+#infographic.report-capture-mode .infographic-gallery-item{
+ width:100%!important;margin:0 0 18px!important;break-inside:avoid!important
+}
+#infographic.report-capture-mode .infographic-card-actions{display:none!important}
+#infographic.report-capture-mode .infographic-preview{overflow:visible!important}
+@media(max-width:760px){
+ #infographic .daily-export-control{align-items:stretch!important;flex-direction:column!important}
+ #infographic .daily-export-actions{justify-content:flex-start!important}
+}
+</style>
+<script id="complete-daily-export-report-20260909-v1-script">
+(function(){
+ "use strict";
+ const DATA_URL="./data/thaiwater_latest.json";
+ const REFRESH_MS=5*60*1000;
+ let refreshing=false,lastDataTime="";
+ const thDateTime=value=>{
+  const d=value?new Date(value):new Date();
+  return Number.isNaN(d.getTime())?new Date().toLocaleString("th-TH"):d.toLocaleString("th-TH",{dateStyle:"long",timeStyle:"short"});
+ };
+ function safeName(){
+  const d=new Date(),p=n=>String(n).padStart(2,"0");
+  return "รายงานสถานการณ์น้ำ_กนอ_"+d.getFullYear()+p(d.getMonth()+1)+p(d.getDate())+"_"+p(d.getHours())+p(d.getMinutes())+".png";
+ }
+ function getSourceTime(data){
+  return data&&(
+   data.updated_at||data.generated_at||data.update_time||data.datetime||
+   data.flash_flood&&data.flash_flood.updated_at
+  );
+ }
+ function mountControls(){
+  const view=document.getElementById("infographic");
+  const heading=view&&view.querySelector(":scope>.export-page-heading");
+  if(!view||!heading)return null;
+  let bar=view.querySelector(":scope>.daily-export-control");
+  if(!bar){
+   bar=document.createElement("section");
+   bar.className="daily-export-control";
+   bar.setAttribute("aria-label","เครื่องมือรายงานสถานการณ์น้ำประจำวัน");
+   bar.innerHTML='<div class="daily-export-meta"><b>รายงานสถานการณ์น้ำประจำวัน</b><span class="report-freshness" id="dailyExportUpdated">กำลังตรวจสอบข้อมูลล่าสุด…</span></div><div class="daily-export-actions"><button type="button" id="refreshDailyExport">อัปเดตข้อมูลล่าสุด</button><button type="button" class="save-all-report" id="saveAllDailyReport">บันทึกภาพรายงานทั้งหมด</button></div>';
+   heading.insertAdjacentElement("afterend",bar);
+   bar.querySelector("#refreshDailyExport").addEventListener("click",()=>refreshData(true));
+   bar.querySelector("#saveAllDailyReport").addEventListener("click",saveAll);
+  }
+  return bar;
+ }
+ function updateDates(data){
+  const now=new Date();
+  const start=new Date(now);start.setHours(7,0,0,0);
+  if(now<start)start.setDate(start.getDate()-1);
+  const end=new Date(start.getTime()+86400000);
+  const fmt=d=>d.toLocaleString("th-TH",{day:"numeric",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"});
+  const period="วันที่ "+fmt(start)+" น. ถึง "+fmt(end)+" น. (เวลากรุงเทพฯ)";
+  const main=document.getElementById("reportPeriodTitle");if(main)main.textContent=period;
+  document.querySelectorAll("#infographic .shared-report-period").forEach(el=>el.textContent=period);
+  const source=getSourceTime(data);
+  lastDataTime=source||new Date().toISOString();
+  const status=document.getElementById("dailyExportUpdated");
+  if(status)status.textContent="ข้อมูลล่าสุด "+thDateTime(lastDataTime)+" · ตรวจสอบอัตโนมัติทุก 5 นาที";
+ }
+ async function refreshData(manual){
+  if(refreshing)return;
+  refreshing=true;
+  const btn=document.getElementById("refreshDailyExport");
+  if(btn){btn.disabled=true;btn.textContent="กำลังอัปเดต…"}
+  try{
+   const response=await fetch(new URL(DATA_URL,document.baseURI),{cache:"no-store"});
+   if(!response.ok)throw new Error("HTTP "+response.status);
+   const data=await response.json();
+   window.IEAT_LIVE_DATA=data;
+   if(typeof window.renderExecutiveReport==="function")window.renderExecutiveReport(window.reportPeriod||"24h");
+   if(typeof window.renderNearbyWatchTable==="function")window.renderNearbyWatchTable(data);
+   if(typeof window.updateMapShot==="function")await window.updateMapShot();
+   window.dispatchEvent(new CustomEvent("ieat:data-ready",{detail:data}));
+   updateDates(data);
+   if(manual){
+    const status=document.getElementById("dailyExportUpdated");
+    if(status)status.textContent="อัปเดตสำเร็จ "+new Date().toLocaleString("th-TH")+" · ตรวจสอบอัตโนมัติทุก 5 นาที";
+   }
+  }catch(error){
+   updateDates(window.IEAT_LIVE_DATA||null);
+   const status=document.getElementById("dailyExportUpdated");
+   if(status)status.textContent="ใช้ข้อมูลล่าสุดที่บันทึกในระบบ · จะตรวจสอบใหม่อัตโนมัติ";
+   console.error("daily export refresh",error);
+  }finally{
+   refreshing=false;
+   if(btn){btn.disabled=false;btn.textContent="อัปเดตข้อมูลล่าสุด"}
+  }
+ }
+ async function saveAll(){
+  const view=document.getElementById("infographic");
+  const pages=view&&view.querySelector(".report-pages");
+  const btn=document.getElementById("saveAllDailyReport");
+  if(!view||!pages)return;
+  if(typeof html2canvas!=="function"){alert("ระบบบันทึกภาพกำลังโหลด โปรดลองอีกครั้ง");return}
+  btn.disabled=true;btn.textContent="กำลังสร้างภาพ…";
+  view.classList.add("report-capture-mode");
+  try{
+   await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+   const canvas=await html2canvas(pages,{scale:1.5,useCORS:true,allowTaint:false,backgroundColor:"#f2f7f9",logging:false});
+   canvas.toBlob(blob=>{
+    if(!blob){alert("ไม่สามารถสร้างไฟล์ภาพได้");return}
+    const a=document.createElement("a"),url=URL.createObjectURL(blob);
+    a.href=url;a.download=safeName();document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1500);
+   },"image/png",.96);
+  }catch(error){
+   console.error(error);alert("ไม่สามารถบันทึกภาพรวมได้ กรุณาใช้ปุ่มดาวน์โหลด PNG ของแต่ละรายงาน");
+  }finally{
+   view.classList.remove("report-capture-mode");
+   btn.disabled=false;btn.textContent="บันทึกภาพรายงานทั้งหมด";
+  }
+ }
+ function init(){
+  mountControls();
+  updateDates(window.IEAT_LIVE_DATA||null);
+  refreshData(false);
+  setInterval(()=>refreshData(false),REFRESH_MS);
+  document.addEventListener("visibilitychange",()=>{if(!document.hidden)refreshData(false)});
+  const view=document.getElementById("infographic");
+  if(view)new MutationObserver(()=>mountControls()).observe(view,{childList:true});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
+})();
+</script>
+
 </body>
 </html>
