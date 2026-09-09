@@ -5312,5 +5312,19 @@ body>.ieat-persistent-tabbar{
 @media(max-width:1050px){#warning>.dashboard-intro .dashboard-intro-inner{align-items:stretch!important;flex-direction:column!important}}
 </style>
 
+
+<script id="move-visible-header-to-top-final-20260909-v4">
+(function(){
+ "use strict";
+ function moveHeader(){
+  const view=document.getElementById("warning");
+  const head=view&&view.querySelector(":scope>.dashboard-intro");
+  if(view&&head&&view.firstElementChild!==head)view.insertBefore(head,view.firstElementChild);
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",moveHeader);else moveHeader();
+ [50,200,600,1200,2500,5000,8000].forEach(ms=>setTimeout(moveHeader,ms));
+})();
+</script>
+
 </body>
 </html>
