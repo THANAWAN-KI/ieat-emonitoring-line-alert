@@ -5545,5 +5545,66 @@ body>.ieat-persistent-tabbar{
 })();
 </script>
 
+
+<style id="swoc-estate-watch-center-20260909-v1">
+#thaiwater-warning .swoc-watch-center{margin:0 0 18px;background:#fff;border:1px solid #dce5ec;border-radius:15px;overflow:hidden;box-shadow:0 4px 14px rgba(30,66,100,.08)}
+#thaiwater-warning .swoc-watch-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:18px 20px;border-bottom:1px solid #e1e8ed}
+#thaiwater-warning .swoc-watch-head h2{margin:0;color:#004b79;font-size:20px;font-weight:500}
+#thaiwater-warning .swoc-watch-head p{margin:4px 0 0;color:#687984;font-size:14px}
+#thaiwater-warning .swoc-watch-source{flex:0 0 auto;padding:8px 12px;border-radius:999px;background:#eaf4df;color:#426d24;font-size:12px}
+#thaiwater-warning .swoc-watch-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:14px 18px;background:#f7fafc}
+#thaiwater-warning .swoc-watch-tab{border:1px solid #d7e2e9;border-radius:12px;background:#fff;padding:13px 15px;text-align:left;cursor:pointer}
+#thaiwater-warning .swoc-watch-tab b{display:block;color:#263746;font-size:16px;font-weight:500}
+#thaiwater-warning .swoc-watch-tab span{display:block;margin-top:3px;color:#71808a;font-size:12px;line-height:1.45}
+#thaiwater-warning .swoc-watch-tab.active{border-color:#0098ca;background:#eaf7fc;box-shadow:0 3px 10px rgba(0,152,202,.12)}
+#thaiwater-warning .swoc-watch-tab.active b{color:#006d9c}
+#thaiwater-warning .swoc-watch-body{display:grid;grid-template-columns:310px minmax(0,1fr);min-height:680px}
+#thaiwater-warning .swoc-use-guide{padding:18px;border-right:1px solid #dce5ec;background:#fbfcfd}
+#thaiwater-warning .swoc-use-guide h3{margin:0 0 10px;color:#263746;font-size:17px;font-weight:500}
+#thaiwater-warning .swoc-use-guide ul{margin:0;padding-left:20px;color:#5f707a;font-size:14px;line-height:1.7}
+#thaiwater-warning .swoc-use-guide .swoc-rule{margin-top:15px;padding:11px 12px;border-radius:9px;background:#fff4dc;color:#7b5a10;font-size:12px;line-height:1.55}
+#thaiwater-warning .swoc-live-frame{position:relative;min-width:0}
+#thaiwater-warning .swoc-live-frame iframe{display:block;width:100%;height:100%;min-height:680px;border:0;background:#eef3f7}
+#thaiwater-warning .swoc-frame-loading{position:absolute;inset:0;display:grid;place-items:center;background:#f5f8fa;color:#687984;font-size:14px;pointer-events:none}
+#thaiwater-warning .swoc-frame-loading.hidden{display:none}
+@media(max-width:950px){#thaiwater-warning .swoc-watch-body{grid-template-columns:1fr}#thaiwater-warning .swoc-use-guide{border-right:0;border-bottom:1px solid #dce5ec}#thaiwater-warning .swoc-watch-tabs{grid-template-columns:1fr}}
+</style>
+<script id="swoc-estate-watch-center-20260909-v1-script">
+(function(){
+ "use strict";
+ const sets={
+  reservoir:{title:"อ่างเก็บน้ำที่เกี่ยวข้อง",url:"https://bigdata-swoc.rid.go.th/reservoir",items:["สถานะอ่างเทียบเกณฑ์ URC / LRC","ปริมาณน้ำเก็บกักและร้อยละความจุ","ปริมาณน้ำใช้การ","น้ำไหลเข้าและน้ำระบายล่าสุด"],rule:"ใช้ประเมินแนวโน้มการระบายน้ำที่อาจส่งผลต่อลุ่มน้ำและพื้นที่นิคมฯ ด้านท้ายน้ำ"},
+  pier:{title:"สถานีระดับน้ำและน้ำท่า",url:"https://bigdata-swoc.rid.go.th/pier/all",items:["ระดับน้ำเทียบระดับตลิ่ง","สถานะน้อย ปกติ มาก หรือล้นตลิ่ง","ความจุลำน้ำ","อัตราการไหลล่าสุด"],rule:"เลือกสถานีในจังหวัดเดียวกันหรือพื้นที่ต้นน้ำ–ท้ายน้ำที่เชื่อมต่อกับนิคมฯ"},
+  rainfall:{title:"สถานีฝนใกล้พื้นที่นิคมฯ",url:"https://bigdata-swoc.rid.go.th/rainfall/all",items:["ปริมาณฝนสะสมล่าสุด","ระดับฝนน้อย ปานกลาง มาก หรือวิกฤต","สถานีและจังหวัดที่ตรวจวัด","วันและเวลาของข้อมูล"],rule:"ใช้ร่วมกับตารางความเสี่ยง 24/48 ชั่วโมงและสถานีระดับน้ำก่อนยกระดับการเฝ้าระวัง"}
+ };
+ function shell(){
+  const box=document.createElement("section");box.className="swoc-watch-center";box.id="swocEstateWatchCenter";
+  box.innerHTML='<div class="swoc-watch-head"><div><h2>ข้อมูล SWOC เพื่อสนับสนุนพื้นที่นิคมอุตสาหกรรม</h2><p>ตรวจสอบเฉพาะข้อมูลน้ำและฝนที่ใช้ประกอบการเฝ้าระวังพื้นที่นิคมฯ</p></div><span class="swoc-watch-source">กรมชลประทาน · ข้อมูลต้นทางสด</span></div><div class="swoc-watch-tabs"><button class="swoc-watch-tab active" data-swoc="reservoir"><b>อ่างเก็บน้ำ</b><span>น้ำเก็บกัก น้ำไหลเข้า และน้ำระบาย</span></button><button class="swoc-watch-tab" data-swoc="pier"><b>ระดับน้ำและน้ำท่า</b><span>ระดับตลิ่ง สถานะ และอัตราการไหล</span></button><button class="swoc-watch-tab" data-swoc="rainfall"><b>ข้อมูลฝน</b><span>ฝนสะสมและระดับความรุนแรง</span></button></div><div class="swoc-watch-body"><aside class="swoc-use-guide"><h3 id="swocGuideTitle"></h3><ul id="swocGuideItems"></ul><div class="swoc-rule" id="swocGuideRule"></div></aside><div class="swoc-live-frame"><div class="swoc-frame-loading" id="swocFrameLoading">กำลังโหลดข้อมูล SWOC…</div><iframe id="swocWatchFrame" title="ข้อมูล SWOC สำหรับพื้นที่นิคมอุตสาหกรรม" loading="lazy"></iframe></div></div>';
+  return box;
+ }
+ function show(key){
+  const s=sets[key]||sets.reservoir,frame=document.getElementById("swocWatchFrame"),loading=document.getElementById("swocFrameLoading");
+  document.querySelectorAll(".swoc-watch-tab").forEach(b=>b.classList.toggle("active",b.dataset.swoc===key));
+  document.getElementById("swocGuideTitle").textContent=s.title;
+  document.getElementById("swocGuideItems").innerHTML=s.items.map(x=>"<li>"+x+"</li>").join("");
+  document.getElementById("swocGuideRule").textContent=s.rule;
+  if(frame&&frame.src!==s.url){loading.classList.remove("hidden");frame.onload=()=>loading.classList.add("hidden");frame.src=s.url}
+ }
+ function mount(){
+  const holder=document.querySelector("#thaiwater-warning .moved-overview-tables");
+  const anchor=document.querySelector("#thaiwater-warning .watch-analysis-title");
+  if(!anchor)return;
+  let box=document.getElementById("swocEstateWatchCenter");
+  if(!box)box=shell();
+  if(holder){if(holder.nextElementSibling!==box)holder.insertAdjacentElement("afterend",box)}
+  else if(anchor.nextElementSibling!==box)anchor.insertAdjacentElement("afterend",box);
+  box.querySelectorAll("[data-swoc]").forEach(b=>b.onclick=()=>show(b.dataset.swoc));
+  if(!document.getElementById("swocWatchFrame").src)show("reservoir");
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
+ [100,500,1200,2500,5000].forEach(ms=>setTimeout(mount,ms));
+})();
+</script>
+
 </body>
 </html>
