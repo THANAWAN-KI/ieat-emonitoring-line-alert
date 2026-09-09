@@ -5449,5 +5449,23 @@ body>.ieat-persistent-tabbar{
 })();
 </script>
 
+
+<style id="move-rid-basin-under-heading-20260909-v1">
+#warning>.flood-support-heading{margin-bottom:0!important;padding-bottom:12px!important}
+#warning>#ridBasinOverview{margin-top:0!important}
+</style>
+<script id="move-rid-basin-under-heading-20260909-v1-script">
+(function(){
+ "use strict";
+ function moveBasinUp(){
+  const heading=document.querySelector("#warning>.flood-support-heading");
+  const basin=document.getElementById("ridBasinOverview");
+  if(heading&&basin&&heading.nextElementSibling!==basin)heading.insertAdjacentElement("afterend",basin);
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",moveBasinUp);else moveBasinUp();
+ [100,500,1200,2500,5000,8000].forEach(ms=>setTimeout(moveBasinUp,ms));
+})();
+</script>
+
 </body>
 </html>
