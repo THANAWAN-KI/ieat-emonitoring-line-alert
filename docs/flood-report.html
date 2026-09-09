@@ -5114,5 +5114,26 @@ body>.ieat-persistent-tabbar{display:none!important}
 })();
 </script>
 
+
+<style id="remove-old-blue-pill-tabs-20260909-v1">
+.topbar,
+.topbar .nav,
+.flood-support-heading-actions,
+.native-page-tabs,
+body>.ieat-persistent-tabbar{
+  display:none!important;
+}
+</style>
+<script id="remove-old-blue-pill-tabs-20260909-v1-script">
+(function(){
+ "use strict";
+ function removeOldTabs(){
+  document.querySelectorAll(".topbar,.flood-support-heading-actions,.native-page-tabs,body>.ieat-persistent-tabbar").forEach(function(el){el.remove()});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeOldTabs);else removeOldTabs();
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeOldTabs,ms)});
+})();
+</script>
+
 </body>
 </html>
