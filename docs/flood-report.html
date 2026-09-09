@@ -7986,5 +7986,47 @@ body main.container #warning .flood-final-cards>*:nth-child(-n+6) .source-link{d
 }
 </style>
 
+
+<style id="force-top-four-white-reference-cards-20260909-v1">
+html body main.container #warning .daily-water-grid>.daily-water-item{
+ background:#fff!important;
+ background-color:#fff!important;
+ background-image:none!important;
+ border:0!important;
+ border-radius:18px!important;
+ box-shadow:0 7px 22px rgba(40,70,120,.10)!important;
+}
+html body main.container #warning .daily-water-grid>.daily-water-item,
+html body main.container #warning .daily-water-grid>.daily-water-item *{
+ color:#2468F2!important;
+}
+html body main.container #warning .daily-water-grid>.daily-water-item::before{
+ background:#F5F8FF!important;
+ color:#2468F2!important;
+}
+</style>
+<script id="force-top-four-white-reference-cards-20260909-v1-script">
+(function(){
+ function forceWhiteCards(){
+  document.querySelectorAll("#warning .daily-water-grid>.daily-water-item").forEach(function(card){
+   card.style.setProperty("background","#fff","important");
+   card.style.setProperty("background-color","#fff","important");
+   card.style.setProperty("background-image","none","important");
+   card.style.setProperty("border","0","important");
+   card.style.setProperty("border-radius","18px","important");
+   card.style.setProperty("box-shadow","0 7px 22px rgba(40,70,120,.10)","important");
+   card.querySelectorAll("*").forEach(function(el){
+    el.style.setProperty("color","#2468F2","important");
+    el.style.setProperty("background-color","transparent","important");
+   });
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",forceWhiteCards);else forceWhiteCards();
+ const area=document.querySelector("#warning");
+ if(area)new MutationObserver(forceWhiteCards).observe(area,{subtree:true,childList:true});
+ [100,500,1200,2500,5000,8000].forEach(function(ms){setTimeout(forceWhiteCards,ms)});
+})();
+</script>
+
 </body>
 </html>
