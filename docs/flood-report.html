@@ -7620,5 +7620,50 @@ html body main.container #warning>.flood-support-heading .flood-support-heading-
 })();
 </script>
 
+
+<style id="remove-ieat-word-and-tab-backgrounds-20260909-v1">
+html body main.container #warning>.flood-support-heading::before,
+html body main.container #thaiwater-warning .watch-intro::before,
+html body main.container #infographic>.export-page-heading::before{
+ content:none!important;
+ display:none!important;
+}
+html body main.container #warning #finalFloodHeaderTabs button,
+html body main.container #thaiwater-warning #finalFloodHeaderTabs button,
+html body main.container #infographic #exportHeaderTabs button{
+ background:transparent!important;
+ background-color:transparent!important;
+ background-image:none!important;
+ box-shadow:none!important;
+}
+html body main.container #warning #finalFloodHeaderTabs button.active,
+html body main.container #thaiwater-warning #finalFloodHeaderTabs button.active,
+html body main.container #infographic #exportHeaderTabs button.active{
+ background:transparent!important;
+ background-color:transparent!important;
+ color:#25671E!important;
+ border-bottom-color:#25671E!important;
+}
+</style>
+<script id="remove-ieat-word-and-tab-backgrounds-20260909-v1-script">
+(function(){
+ const selector="#warning #finalFloodHeaderTabs button,#thaiwater-warning #finalFloodHeaderTabs button,#infographic #exportHeaderTabs button";
+ function clearTabBackgrounds(){
+  document.querySelectorAll(selector).forEach(function(button){
+   const active=button.classList.contains("active");
+   button.style.setProperty("background","transparent","important");
+   button.style.setProperty("background-color","transparent","important");
+   button.style.setProperty("background-image","none","important");
+   button.style.setProperty("box-shadow","none","important");
+   button.style.setProperty("color",active?"#25671E":"#555","important");
+   button.style.setProperty("border-bottom",active?"3px solid #25671E":"3px solid transparent","important");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",clearTabBackgrounds);else clearTabBackgrounds();
+ document.addEventListener("click",function(e){if(e.target.closest(selector))setTimeout(clearTabBackgrounds,0)});
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(clearTabBackgrounds,ms)});
+})();
+</script>
+
 </body>
 </html>
