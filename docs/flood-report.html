@@ -7672,5 +7672,58 @@ html body main.container #exportHeaderTabs .export-nav-title{
 })();
 </script>
 
+<style id="force-long-purple-navigation-20260909-v2">
+html body main.container #warning>.flood-support-heading,
+html body main.container #thaiwater-warning .watch-intro,
+html body main.container #infographic>.export-page-heading{overflow:visible!important;background:#fff!important}
+html body main.container #finalFloodHeaderTabs,
+html body main.container #exportHeaderTabs{
+ position:relative!important;left:50%!important;right:auto!important;
+ width:100vw!important;max-width:100vw!important;flex:0 0 100vw!important;
+ min-height:60px!important;margin:0 0 12px -50vw!important;
+ padding:0 clamp(20px,2.2vw,44px)!important;background:#e2d4e7!important;
+ border:0!important;border-radius:0!important;box-shadow:none!important
+}
+html body main.container #finalFloodHeaderTabs button,
+html body main.container #exportHeaderTabs button,
+html body main.container #finalFloodHeaderTabs button:hover,
+html body main.container #exportHeaderTabs button:hover,
+html body main.container #finalFloodHeaderTabs button.active,
+html body main.container #exportHeaderTabs button.active{
+ background:#e2d4e7!important;background-color:#e2d4e7!important;color:#59267c!important;
+ border-color:transparent!important;box-shadow:none!important
+}
+html body main.container #finalFloodHeaderTabs button.active:after,
+html body main.container #exportHeaderTabs button.active:after{background:#59267c!important}
+html body main.container #exportHeaderTabs .export-nav-title{color:#59267c!important}
+</style>
+<script id="force-long-purple-navigation-20260909-v2-script">
+(function(){
+ "use strict";
+ function lockPurpleNavigation(){
+  document.querySelectorAll("#finalFloodHeaderTabs,#exportHeaderTabs").forEach(function(nav){
+   nav.style.setProperty("background","#e2d4e7","important");
+   nav.style.setProperty("background-color","#e2d4e7","important");
+   nav.style.setProperty("border","0","important");
+   nav.style.setProperty("box-shadow","none","important");
+   nav.querySelectorAll("button").forEach(function(button){
+    button.style.setProperty("background","#e2d4e7","important");
+    button.style.setProperty("background-color","#e2d4e7","important");
+    button.style.setProperty("color","#59267c","important");
+    button.style.setProperty("border-color","transparent","important");
+    button.style.setProperty("box-shadow","none","important");
+   });
+   const title=nav.querySelector(".export-nav-title");
+   if(title)title.style.setProperty("color","#59267c","important");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",lockPurpleNavigation);else lockPurpleNavigation();
+ document.addEventListener("click",function(){setTimeout(lockPurpleNavigation,0)});
+ const main=document.querySelector("main.container");
+ if(main)new MutationObserver(lockPurpleNavigation).observe(main,{subtree:true,childList:true,attributes:true,attributeFilter:["class","style"]});
+ [100,500,1200,2500,5000,8000].forEach(function(ms){setTimeout(lockPurpleNavigation,ms)});
+})();
+</script>
+
 </body>
 </html>
