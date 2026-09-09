@@ -5467,5 +5467,24 @@ body>.ieat-persistent-tabbar{
 })();
 </script>
 
+
+<style id="place-rid-basin-after-daily-report-20260909-v2">
+#warning>.flood-support-heading{margin-bottom:18px!important;padding-bottom:0!important}
+#warning>.flood-final-layout{margin-bottom:0!important}
+#warning>#ridBasinOverview{margin-top:14px!important}
+</style>
+<script id="place-rid-basin-after-daily-report-20260909-v2-script">
+(function(){
+ "use strict";
+ function placeAfterDailyReport(){
+  const report=document.querySelector("#warning>.flood-final-layout");
+  const basin=document.getElementById("ridBasinOverview");
+  if(report&&basin&&report.nextElementSibling!==basin)report.insertAdjacentElement("afterend",basin);
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",placeAfterDailyReport);else placeAfterDailyReport();
+ [100,500,1200,2500,5000,8000,10000].forEach(ms=>setTimeout(placeAfterDailyReport,ms));
+})();
+</script>
+
 </body>
 </html>
