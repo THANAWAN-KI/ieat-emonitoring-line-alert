@@ -5135,5 +5135,96 @@ body>.ieat-persistent-tabbar{
 })();
 </script>
 
+
+<style id="move-workflow-tabs-to-header-20260909-v1">
+#floodWorkflowNav{
+  position:static!important;
+  z-index:auto!important;
+  flex:0 0 auto!important;
+  width:auto!important;
+  margin:0 0 0 auto!important;
+  padding:0!important;
+  background:transparent!important;
+  backdrop-filter:none!important;
+  border:0!important;
+}
+#floodWorkflowNav .workflow-nav-inner{
+  display:flex!important;
+  grid-template-columns:none!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  gap:10px!important;
+  width:auto!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0!important;
+}
+#floodWorkflowNav button{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:auto!important;
+  min-width:150px!important;
+  min-height:44px!important;
+  padding:10px 22px!important;
+  border:0!important;
+  border-radius:999px!important;
+  background:#0098ca!important;
+  color:#fff!important;
+  box-shadow:0 5px 13px rgba(0,91,145,.20)!important;
+  text-align:center!important;
+  transform:none!important;
+  white-space:nowrap!important;
+}
+#floodWorkflowNav button:hover{background:#007faa!important;transform:translateY(-1px)!important}
+#floodWorkflowNav button.active{background:#005b91!important;color:#fff!important;box-shadow:0 5px 13px rgba(0,75,121,.28)!important}
+#floodWorkflowNav .workflow-no,#floodWorkflowNav small{display:none!important}
+#floodWorkflowNav b{display:block!important;margin:0!important;color:inherit!important;font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:500!important;line-height:1.3!important}
+#warning .dashboard-intro-inner,
+#thaiwater-warning .watch-intro,
+#infographic .multi-report-toolbar{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:22px!important;
+}
+@media(max-width:1050px){
+ #warning .dashboard-intro-inner,#thaiwater-warning .watch-intro,#infographic .multi-report-toolbar{align-items:stretch!important;flex-direction:column!important}
+ #floodWorkflowNav{width:100%!important;margin-left:0!important;overflow-x:auto!important}
+ #floodWorkflowNav .workflow-nav-inner{justify-content:flex-start!important;width:max-content!important;min-width:100%!important;padding-bottom:4px!important}
+}
+@media(max-width:620px){
+ #floodWorkflowNav button{min-width:135px!important;padding:9px 16px!important}
+ #floodWorkflowNav b{font-size:14px!important}
+}
+</style>
+<script id="move-workflow-tabs-to-header-20260909-v1-script">
+(function(){
+ "use strict";
+ function placeTabs(){
+  const nav=document.getElementById("floodWorkflowNav");if(!nav)return;
+  const active=document.querySelector("main .view.active");
+  let target=null;
+  if(active&&active.id==="warning")target=document.querySelector("#warning .dashboard-intro-inner");
+  if(active&&active.id==="thaiwater-warning")target=document.querySelector("#thaiwater-warning .watch-intro");
+  if(active&&active.id==="infographic")target=document.querySelector("#infographic .multi-report-toolbar");
+  if(target&&nav.parentElement!==target)target.appendChild(nav);
+  const labels={warning:"ภาพรวม", "thaiwater-warning":"พื้นที่เฝ้าระวัง", infographic:"ส่งออกข้อมูล"};
+  nav.querySelectorAll("button[data-open-view]").forEach(function(b){
+   const title=b.querySelector("b");if(title)title.textContent=labels[b.dataset.openView]||title.textContent;
+  });
+ }
+ function bind(){
+  const nav=document.getElementById("floodWorkflowNav");if(!nav)return;
+  nav.addEventListener("click",function(){setTimeout(placeTabs,0)});
+  const main=document.querySelector("main.container");
+  if(main)new MutationObserver(placeTabs).observe(main,{subtree:true,attributes:true,attributeFilter:["class"]});
+  placeTabs();
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",bind);else bind();
+ [100,600,1400,2800,5000].forEach(function(ms){setTimeout(placeTabs,ms)});
+})();
+</script>
+
 </body>
 </html>
