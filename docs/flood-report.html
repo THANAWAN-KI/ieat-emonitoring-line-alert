@@ -1508,8 +1508,8 @@ body{color:#172033!important}
           <section class="export-sheet landscape-sheet" id="reportPage3" data-report-page="3">
             <header class="sheet-header compact"><h2>พื้นที่เฝ้าระวัง 24 ชั่วโมง / 48 ชั่วโมง ใกล้เคียงพื้นที่นิคมฯ</h2><p class="shared-report-period" contenteditable="true">ข้อมูลตามช่วงเวลารายงาน</p></header>
             <div class="dual-forecast-maps">
-              <figure class="forecast-map-card"><figcaption contenteditable="true">แผนที่คาดการณ์พื้นที่เฝ้าระวัง 24 ชั่วโมง</figcaption><div class="forecast-map-frame"><img id="forecastMap24" src="assets/thaiwater-overall-latest.png" alt="แผนที่คาดการณ์ 24 ชั่วโมง"><div id="forecastPinOverlay24" class="estate-pin-overlay"></div></div></figure>
-              <figure class="forecast-map-card"><figcaption contenteditable="true">แผนที่คาดการณ์พื้นที่เฝ้าระวัง 48 ชั่วโมง</figcaption><div class="forecast-map-frame"><img id="forecastMap48" src="assets/thaiwater-overall-latest.png" alt="แผนที่คาดการณ์ 48 ชั่วโมง"><div id="forecastPinOverlay48" class="estate-pin-overlay"></div></div></figure>
+              <figure class="forecast-map-card"><figcaption contenteditable="true">แผนที่คาดการณ์พื้นที่เฝ้าระวัง 24 ชั่วโมง</figcaption><div class="forecast-map-frame"><iframe class="interactive-forecast-map" src="https://www.thaiwater.net/risk-rainfall" title="แผนที่คาดการณ์พื้นที่เฝ้าระวัง 24 ชั่วโมง" loading="eager" allow="fullscreen; geolocation" referrerpolicy="strict-origin-when-cross-origin"></iframe><img id="forecastMap24" src="assets/thaiwater-overall-latest.png" alt="แผนที่คาดการณ์ 24 ชั่วโมง" hidden><div id="forecastPinOverlay24" class="estate-pin-overlay"></div></div></figure>
+              <figure class="forecast-map-card"><figcaption contenteditable="true">แผนที่คาดการณ์พื้นที่เฝ้าระวัง 48 ชั่วโมง</figcaption><div class="forecast-map-frame"><iframe class="interactive-forecast-map" src="https://www.thaiwater.net/risk-rainfall" title="แผนที่คาดการณ์พื้นที่เฝ้าระวัง 48 ชั่วโมง" loading="eager" allow="fullscreen; geolocation" referrerpolicy="strict-origin-when-cross-origin"></iframe><img id="forecastMap48" src="assets/thaiwater-overall-latest.png" alt="แผนที่คาดการณ์ 48 ชั่วโมง" hidden><div id="forecastPinOverlay48" class="estate-pin-overlay"></div></div></figure>
             </div>
             <div class="forecast-legend horizontal"><p><i class="legend-24"></i> เฝ้าระวัง 24 ชั่วโมง</p><p><i class="legend-48"></i> เฝ้าระวัง 48 ชั่วโมง</p><p><i class="legend-estate"></i> นิคมอุตสาหกรรม</p></div>
             <section class="export-table-block forecast-table-block">
@@ -7193,6 +7193,23 @@ body main.container #infographic td{
 <style id="export-main-title-color-406093-20260909-v1">
 body main.container #infographic > .export-page-heading h1{
  color:#406093!important;
+}
+</style>
+
+
+<style id="interactive-thaiwater-risk-rainfall-maps-20260909-v1">
+body main.container #infographic #reportPage3 .forecast-map-frame{
+ position:relative!important;
+ overflow:hidden!important;
+}
+body main.container #infographic #reportPage3 .interactive-forecast-map{
+ position:absolute!important;
+ inset:0!important;
+ display:block!important;
+ width:100%!important;
+ height:100%!important;
+ border:0!important;
+ pointer-events:auto!important;
 }
 </style>
 
