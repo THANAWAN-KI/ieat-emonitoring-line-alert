@@ -5656,5 +5656,20 @@ body>.ieat-persistent-tabbar{
 }
 </style>
 
+
+<style id="remove-watch-updated-time-20260909-v1">
+#thaiwater-warning .watch-time,
+#thaiwater-warning #watchDataTime{display:none!important}
+</style>
+<script id="remove-watch-updated-time-20260909-v1-script">
+(function(){
+ function removeWatchUpdatedTime(){
+  document.querySelectorAll("#thaiwater-warning .watch-time,#thaiwater-warning #watchDataTime").forEach(function(el){el.remove()});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeWatchUpdatedTime);else removeWatchUpdatedTime();
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeWatchUpdatedTime,ms)});
+})();
+</script>
+
 </body>
 </html>
