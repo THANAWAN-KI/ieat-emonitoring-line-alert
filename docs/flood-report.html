@@ -6768,5 +6768,134 @@ body main.container #thaiwater-warning .swoc-live-frame iframe{
 })();
 </script>
 
+
+<style id="click-table-values-zoom-map-20260909-v1">
+#thaiwater-warning .tw-rain,
+#thaiwater-warning .estate-watch-table td:last-child,
+#thaiwater-warning .station-watch-table td:nth-child(3){
+ cursor:pointer!important;
+ transition:filter .15s ease,transform .15s ease!important;
+}
+#thaiwater-warning .tw-rain:hover,
+#thaiwater-warning .estate-watch-table td:last-child:hover,
+#thaiwater-warning .station-watch-table td:nth-child(3):hover{
+ filter:brightness(.92)!important;
+}
+#thaiwater-warning .tw-rain:focus-visible,
+#thaiwater-warning .estate-watch-table td:last-child:focus-visible,
+#thaiwater-warning .station-watch-table td:nth-child(3):focus-visible{
+ outline:3px solid #55a51c!important;
+ outline-offset:2px!important;
+}
+#thaiwater-warning .focused-location-map{
+ position:absolute!important;
+ z-index:20!important;
+ inset:0!important;
+ display:flex!important;
+ flex-direction:column!important;
+ background:#fff!important;
+}
+#thaiwater-warning .focused-location-head{
+ display:flex!important;
+ align-items:center!important;
+ justify-content:space-between!important;
+ gap:12px!important;
+ min-height:58px!important;
+ padding:10px 14px!important;
+ background:#0082ca!important;
+ color:#fff!important;
+}
+#thaiwater-warning .focused-location-head b{
+ color:#fff!important;
+ font-size:16px!important;
+ font-weight:500!important;
+}
+#thaiwater-warning .focused-location-head button{
+ flex:0 0 auto!important;
+ padding:7px 12px!important;
+ border:1px solid #fff!important;
+ border-radius:999px!important;
+ background:#199051!important;
+ color:#fff!important;
+ font-size:13px!important;
+ cursor:pointer!important;
+}
+#thaiwater-warning .focused-location-map iframe{
+ position:static!important;
+ flex:1!important;
+ display:block!important;
+ width:100%!important;
+ max-width:none!important;
+ height:100%!important;
+ min-height:0!important;
+ border:0!important;
+ transform:none!important;
+}
+#thaiwater-warning .zoom-hint{
+ display:block!important;
+ margin-top:3px!important;
+ color:#0082ca!important;
+ font-size:11px!important;
+ font-weight:400!important;
+}
+</style>
+<script id="click-table-values-zoom-map-20260909-v1-script">
+(function(){
+ "use strict";
+ let data=null;
+ const norm=v=>String(v||"").replace(/\s+/g," ").trim();
+ const n=v=>Number.isFinite(Number(v))?Number(v):null;
+ function osmUrl(lat,lon){
+  const d=.12,w=(lon-d).toFixed(6),s=(lat-d).toFixed(6),e=(lon+d).toFixed(6),nn=(lat+d).toFixed(6);
+  return "https://www.openstreetmap.org/export/embed.html?bbox="+encodeURIComponent(w+","+s+","+e+","+nn)+"&layer=mapnik&marker="+encodeURIComponent(lat+","+lon);
+ }
+ function openFocus(lat,lon,title){
+  lat=n(lat);lon=n(lon);if(lat==null||lon==null)return;
+  const card=document.querySelector("#thaiwater-warning .tw-map-card");if(!card)return;
+  let panel=card.querySelector(".focused-location-map");
+  if(!panel){panel=document.createElement("div");panel.className="focused-location-map";panel.innerHTML='<div class="focused-location-head"><b></b><button type="button">กลับไปแผนที่ ThaiWater</button></div><iframe title="แผนที่ซูมตำแหน่งที่เลือก" loading="eager"></iframe>';card.appendChild(panel);panel.querySelector("button").onclick=()=>panel.remove()}
+  panel.querySelector("b").textContent=title||"ตำแหน่งที่เลือก";
+  panel.querySelector("iframe").src=osmUrl(lat,lon);
+  card.scrollIntoView({behavior:"smooth",block:"center"});
+ }
+ function riskPoint(pill){
+  if(!data)return null;
+  const card=pill.closest(".tw-risk-card"),cards=[...document.querySelectorAll("#thaiwater-warning .tw-risk-card")],period=cards.indexOf(card)===0?"24h":"48h";
+  const rows=[...card.querySelectorAll("tbody tr")],idx=rows.indexOf(pill.closest("tr"));
+  const areas=(((data.flash_flood||{})[period]||{}).areas||[]).slice().sort((a,b)=>(Number(b.sum_rainfall_mm)||0)-(Number(a.sum_rainfall_mm)||0));
+  return areas[idx]||null;
+ }
+ function estatePoint(cell){
+  if(!data)return null;
+  const row=cell.closest("tr"),name=norm(row&&row.cells[1]&&row.cells[1].innerText);
+  return (data.estates||[]).find(x=>name.includes(norm(x.name))||norm(x.name).includes(name))||null;
+ }
+ function stationPoint(cell){
+  if(!data)return null;
+  const row=cell.closest("tr"),txt=norm(row&&row.cells[0]&&row.cells[0].innerText);
+  return (data.stations||[]).filter(x=>x.kind==="waterlevel").find(x=>txt.includes(norm(x.station)))||null;
+ }
+ function prepare(){
+  document.querySelectorAll("#thaiwater-warning .tw-rain,#thaiwater-warning .estate-watch-table td:last-child,#thaiwater-warning .station-watch-table td:nth-child(3)").forEach(el=>{
+   el.tabIndex=0;el.setAttribute("role","button");el.setAttribute("aria-label","คลิกเพื่อซูมตำแหน่งบนแผนที่");
+  });
+  document.querySelectorAll("#thaiwater-warning .tw-risk-head").forEach(h=>{if(!h.querySelector(".zoom-hint"))h.insertAdjacentHTML("beforeend",'<span class="zoom-hint">คลิกตัวเลขเพื่อซูมตำแหน่งบนแผนที่</span>')});
+ }
+ function activate(el){
+  if(el.matches(".tw-rain")){const x=riskPoint(el);if(x)openFocus(x.latitude,x.longitude,[x.tambon,x.amphoe,x.province].filter(Boolean).join(" "));return}
+  if(el.closest(".estate-watch-table")){const x=estatePoint(el);if(x)openFocus(x.lat,x.lon,x.name);return}
+  if(el.closest(".station-watch-table")){const x=stationPoint(el);if(x)openFocus(x.latitude,x.longitude,x.station);return}
+ }
+ async function init(){
+  try{const r=await fetch(new URL("./data/thaiwater_latest.json",document.baseURI),{cache:"no-store"});if(r.ok)data=await r.json()}catch(e){console.error(e)}
+  prepare();
+  document.addEventListener("click",e=>{const el=e.target.closest("#thaiwater-warning .tw-rain,#thaiwater-warning .estate-watch-table td:last-child,#thaiwater-warning .station-watch-table td:nth-child(3)");if(el)activate(el)});
+  document.addEventListener("keydown",e=>{if(e.key!=="Enter"&&e.key!==" ")return;const el=e.target.closest("#thaiwater-warning .tw-rain,#thaiwater-warning .estate-watch-table td:last-child,#thaiwater-warning .station-watch-table td:nth-child(3)");if(el){e.preventDefault();activate(el)}});
+  const view=document.getElementById("thaiwater-warning");if(view)new MutationObserver(prepare).observe(view,{subtree:true,childList:true});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
+})();
+</script>
+
 </body>
 </html>
