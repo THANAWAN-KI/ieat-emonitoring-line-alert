@@ -4967,5 +4967,69 @@ body>.ieat-persistent-tabbar{display:none!important}
 })();
 </script>
 
+
+<style id="watch-layout-custom-20260909-v1">
+#thaiwater-warning .thaiwater-reference-panel{overflow:visible!important;background:transparent!important;border:0!important;box-shadow:none!important}
+#thaiwater-warning .thaiwater-reference-bar{margin-bottom:14px;border:1px solid #dce5ec!important;border-radius:14px!important;box-shadow:0 4px 14px rgba(30,66,100,.08)}
+#thaiwater-warning .tw-risk-map-grid{display:grid;grid-template-columns:minmax(390px,.72fr) minmax(560px,1.28fr);grid-template-rows:minmax(0,1fr) minmax(0,1fr);gap:14px;height:720px}
+#thaiwater-warning .tw-risk-card,#thaiwater-warning .tw-map-card{background:#fff;border:1px solid #dce5ec;border-radius:14px;overflow:hidden;box-shadow:0 4px 14px rgba(30,66,100,.08)}
+#thaiwater-warning .tw-risk-card{display:flex;flex-direction:column;min-height:0}
+#thaiwater-warning .tw-risk-head{padding:13px 16px 9px;border-bottom:1px solid #e5ebef}
+#thaiwater-warning .tw-risk-head h3{margin:0;color:#263746;font-size:17px;font-weight:600;line-height:1.45}
+#thaiwater-warning .tw-risk-head p{margin:3px 0 0;color:#70808b;font-size:12px}
+#thaiwater-warning .tw-risk-scroll{flex:1;min-height:0;overflow:auto;padding:0 10px 8px}
+#thaiwater-warning .tw-risk-table{width:100%;border-collapse:collapse;font-size:14px}
+#thaiwater-warning .tw-risk-table th{position:sticky;top:0;z-index:1;padding:10px 7px;background:#f7f9fa;color:#61717d;text-align:left;font-weight:500}
+#thaiwater-warning .tw-risk-table th:last-child,#thaiwater-warning .tw-risk-table td:last-child{text-align:right;white-space:nowrap}
+#thaiwater-warning .tw-risk-table td{padding:9px 7px;border-bottom:1px solid #e8edf0;vertical-align:middle;color:#344651}
+#thaiwater-warning .tw-rank{display:inline-grid;width:27px;height:27px;place-items:center;border-radius:50%;background:#f2f4f5;color:#344651;margin-right:7px}
+#thaiwater-warning .tw-area b{display:block;font-weight:500;color:#263746}
+#thaiwater-warning .tw-area small{display:block;color:#7a8790;font-size:11px;margin-top:2px}
+#thaiwater-warning .tw-rain{display:inline-block;padding:5px 8px;border-radius:7px;background:#ef442f;color:#fff;font-weight:600}
+#thaiwater-warning .tw-map-card{grid-column:2;grid-row:1/3;position:relative}
+#thaiwater-warning .tw-map-card iframe{display:block;width:100%;height:100%;border:0}
+#thaiwater-warning .tw-map-label{position:absolute;z-index:2;left:14px;top:14px;padding:9px 12px;border-radius:9px;background:#fffffff0;box-shadow:0 4px 14px rgba(30,66,100,.15);color:#263746;font-size:14px;font-weight:500}
+#thaiwater-warning .watch-grid>.watch-panel:first-child{display:none!important}
+#thaiwater-warning .watch-grid{grid-template-columns:1fr!important}
+@media(max-width:980px){#thaiwater-warning .tw-risk-map-grid{grid-template-columns:1fr;height:auto}.tw-map-card{grid-column:1!important;grid-row:auto!important;height:600px}.tw-risk-card{height:350px}}
+@media(max-width:620px){#thaiwater-warning .tw-map-card{height:500px}#thaiwater-warning .tw-risk-head h3{font-size:15px}}
+</style>
+<script id="watch-layout-custom-20260909-v1-script">
+(function(){
+ "use strict";
+ const esc=v=>String(v??"–").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+ const stamp=v=>{if(!v)return "ข้อมูลล่าสุด";const d=new Date(v);return Number.isNaN(d.getTime())?esc(v):"ข้อมูล ณ "+d.toLocaleString("th-TH")};
+ function rows(items){
+  const sorted=(items||[]).slice().sort((a,b)=>(Number(b.sum_rainfall_mm)||0)-(Number(a.sum_rainfall_mm)||0));
+  if(!sorted.length)return '<tr><td colspan="2" class="watch-empty">ยังไม่พบข้อมูลพื้นที่เสี่ยง</td></tr>';
+  return sorted.map((x,i)=>{
+   const place=[x.tambon,x.amphoe,x.province].filter(Boolean).join(" ");
+   const rain=Number(x.sum_rainfall_mm);
+   return '<tr><td><span class="tw-rank">'+(i+1)+'</span><span class="tw-area"><b>'+esc(place||"ไม่ระบุพื้นที่")+'</b><small>'+esc(x.observed_at||"")+'</small></span></td><td><span class="tw-rain">'+(Number.isFinite(rain)?rain.toLocaleString("th-TH",{minimumFractionDigits:1,maximumFractionDigits:1}):"–")+' มม.</span></td></tr>';
+  }).join("");
+ }
+ function card(hours,items,generated){
+  return '<section class="tw-risk-card"><div class="tw-risk-head"><h3>พื้นที่เสี่ยงน้ำท่วมจากฝนตกสะสมใน '+hours+' ชม. ข้างหน้า</h3><p>'+stamp(generated)+'</p></div><div class="tw-risk-scroll"><table class="tw-risk-table"><thead><tr><th>อันดับ (พื้นที่)</th><th>ฝนสะสม</th></tr></thead><tbody>'+rows(items)+'</tbody></table></div></section>';
+ }
+ async function mount(){
+  const panel=document.querySelector("#thaiwater-warning .thaiwater-reference-panel");
+  if(!panel)return;
+  panel.innerHTML='<div class="thaiwater-reference-bar"><div><b>พื้นที่เฝ้าระวังน้ำท่วม</b><span>ข้อมูลพื้นที่เสี่ยง 24/48 ชั่วโมง และแผนที่น้ำท่วมสำหรับนิคมอุตสาหกรรม</span></div><a href="https://www.thaiwater.net/new4all/warning" target="_blank" rel="noopener">แหล่งข้อมูล ThaiWater</a></div><div class="tw-risk-map-grid"><section class="tw-risk-card"><div class="tw-risk-head"><h3>พื้นที่เสี่ยงน้ำท่วมจากฝนตกสะสมใน 24 ชม. ข้างหน้า</h3><p>กำลังโหลดข้อมูลล่าสุด…</p></div></section><section class="tw-risk-card"><div class="tw-risk-head"><h3>พื้นที่เสี่ยงน้ำท่วมจากฝนตกสะสมใน 48 ชม. ข้างหน้า</h3><p>กำลังโหลดข้อมูลล่าสุด…</p></div></section><section class="tw-map-card"><div class="tw-map-label">แผนที่สถานการณ์น้ำท่วม</div><iframe allow="local-network-access; geolocation" title="flood" loading="eager" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=3d24287ac6ea49cd823625ddad496e01&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=false&basemaps=true&center=101.62504126049268,13.643355627339425&scale=9244648.868618"></iframe></section></div>';
+  try{
+   const r=await fetch(new URL("./data/thaiwater_latest.json",document.baseURI),{cache:"no-store"});
+   if(!r.ok)throw new Error("HTTP "+r.status);
+   const data=await r.json(),ff=data.flash_flood||{},grid=panel.querySelector(".tw-risk-map-grid"),map=grid.querySelector(".tw-map-card");
+   grid.innerHTML=card(24,ff["24h"]&&ff["24h"].areas,data.generated_at)+card(48,ff["48h"]&&ff["48h"].areas,data.generated_at);
+   grid.appendChild(map);
+  }catch(e){
+   panel.querySelectorAll(".tw-risk-head p").forEach(x=>x.textContent="โหลดข้อมูลล่าสุดไม่สำเร็จ");
+   console.error(e);
+  }
+ }
+ function start(){setTimeout(mount,0)}
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start);else start();
+})();
+</script>
+
 </body>
 </html>
