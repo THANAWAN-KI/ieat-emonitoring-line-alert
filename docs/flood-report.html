@@ -7135,5 +7135,62 @@ body main.container #infographic #exportHeaderTabs button.active{
 })();
 </script>
 
+<style id="compact-headings-flat-export-20260909-v1">
+/* แถบหัวหน้าพื้นที่เฝ้าระวัง: เหลือเฉพาะหัวข้อหลัก */
+body main.container #thaiwater-warning .watch-intro{
+ min-height:64px!important;
+ padding:10px 20px!important;
+ margin-bottom:12px!important;
+}
+body main.container #thaiwater-warning .watch-intro h1,
+body main.container #thaiwater-warning .watch-intro h2{
+ margin:0!important;
+ color:#004b8d!important;
+ font-size:22px!important;
+ line-height:1.35!important;
+}
+body main.container #thaiwater-warning .watch-intro p{display:none!important}
+
+/* เครื่องมือรายงานประจำวันแบบแบน ไม่มีกรอบ เงา หรือมิติ */
+body main.container #infographic .daily-export-control{
+ margin:0 0 14px!important;
+ padding:6px 0 10px!important;
+ background:transparent!important;
+ border:0!important;
+ border-radius:0!important;
+ box-shadow:none!important;
+}
+body main.container #infographic .daily-export-meta b{color:#004b8d!important}
+body main.container #infographic .infographic-card-head{
+ display:none!important;
+ height:0!important;
+ min-height:0!important;
+ margin:0!important;
+ padding:0!important;
+ border:0!important;
+ overflow:hidden!important;
+}
+body main.container #infographic .infographic-gallery-item{
+ border-radius:10px!important;
+ box-shadow:none!important;
+}
+</style>
+<script id="compact-headings-flat-export-20260909-v1-script">
+(function(){
+ "use strict";
+ function clean(){
+  const intro=document.querySelector("#thaiwater-warning .watch-intro");
+  if(intro){
+   intro.querySelectorAll("p").forEach(function(el){el.remove()});
+   const title=intro.querySelector("h1,h2");
+   if(title)title.style.setProperty("color","#004b8d","important");
+  }
+  document.querySelectorAll("#infographic .infographic-card-head").forEach(function(el){el.remove()});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",clean);else clean();
+ const main=document/cannot happen/
+})();
+</script>
+
 </body>
 </html>
