@@ -7004,5 +7004,29 @@ body main.container #infographic #reportPage2 .export-table-block:nth-of-type(2)
 }
 </style>
 
+
+<style id="remove-export-card-labels-center-report-tables-20260909-v1">
+/* Remove the three gallery titles and latest-data subtitles above the report sheets. */
+body main.container #infographic .infographic-card-head{
+ display:none!important;
+ height:0!important;
+ min-height:0!important;
+ margin:0!important;
+ padding:0!important;
+ border:0!important;
+ overflow:hidden!important;
+}
+/* Center every heading and value inside both tables on report page 2. */
+body main.container #infographic #reportPage2 .export-table-block,
+body main.container #infographic #reportPage2 .export-table-block > h3,
+body main.container #infographic #reportPage2 .export-data-table th,
+body main.container #infographic #reportPage2 .export-data-table td,
+body main.container #infographic #reportPage2 .export-data-table th *,
+body main.container #infographic #reportPage2 .export-data-table td *{
+ text-align:center!important;
+ vertical-align:middle!important;
+}
+</style>
+
 </body>
 </html>
