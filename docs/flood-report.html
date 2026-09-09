@@ -7194,5 +7194,90 @@ body main.container #infographic .infographic-gallery-item{
 })();
 </script>
 
+<style id="export-sarabun-font-remove-subtitle-20260909-v1">
+body main.container #infographic,
+body main.container #infographic *:not(svg):not(path){
+ font-family:"Sarabun","TH Sarabun New",Tahoma,sans-serif!important;
+}
+body main.container #infographic{
+ font-size:16px!important;
+ font-weight:400!important;
+ line-height:1.65!important;
+}
+body main.container #infographic>.export-page-heading p{display:none!important}
+body main.container #infographic>.export-page-heading{
+ min-height:82px!important;
+ padding-top:14px!important;
+ padding-bottom:14px!important;
+}
+body main.container #infographic>.export-page-heading h1{
+ font-family:"Sarabun","TH Sarabun New",Tahoma,sans-serif!important;
+ font-size:24px!important;
+ font-weight:600!important;
+ line-height:1.4!important;
+}
+body main.container #infographic h2,
+body main.container #infographic .infographic-card-head h2,
+body main.container #infographic .export-sheet h2{
+ font-family:"Sarabun","TH Sarabun New",Tahoma,sans-serif!important;
+ font-size:20px!important;
+ font-weight:600!important;
+ line-height:1.45!important;
+}
+body main.container #infographic h3,
+body main.container #infographic .export-sheet h3{
+ font-family:"Sarabun","TH Sarabun New",Tahoma,sans-serif!important;
+ font-size:18px!important;
+ font-weight:500!important;
+ line-height:1.5!important;
+}
+body main.container #infographic p,
+body main.container #infographic li,
+body main.container #infographic label,
+body main.container #infographic figcaption{
+ font-family:"Sarabun","TH Sarabun New",Tahoma,sans-serif!important;
+ font-size:16px!important;
+ font-weight:400!important;
+ line-height:1.6!important;
+}
+body main.container #infographic small,
+body main.container #infographic .sheet-page-label,
+body main.container #infographic .sheet-footer,
+body main.container #infographic .sheet-map-note{
+ font-family:"Sarabun","TH Sarabun New",Tahoma,sans-serif!important;
+ font-size:14px!important;
+ font-weight:400!important;
+}
+body main.container #infographic table,
+body main.container #infographic th,
+body main.container #infographic td{
+ font-family:"Sarabun","TH Sarabun New",Tahoma,sans-serif!important;
+ font-size:14px!important;
+ line-height:1.5!important;
+}
+body main.container #infographic th{font-weight:600!important}
+body main.container #infographic td{font-weight:400!important}
+body main.container #infographic button,
+body main.container #infographic [role="button"]{
+ font-family:"Sarabun","TH Sarabun New",Tahoma,sans-serif!important;
+}
+</style>
+<script id="export-sarabun-font-remove-subtitle-20260909-v1-script">
+(function(){
+ "use strict";
+ function cleanExportSubtitle(){
+  const heading=document.querySelector("#infographic>.export-page-heading");
+  if(!heading)return;
+  heading.querySelectorAll("p").forEach(function(el){
+   if(el.textContent.includes("เลือกรายงาน ตรวจสอบข้อมูล และดาวน์โหลดเป็น PNG/PDF สำหรับ LINE หรือรายงานผู้บริหาร"))el.remove();
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",cleanExportSubtitle);else cleanExportSubtitle();
+ const view=document.getElementById("infographic");
+ if(view)new MutationObserver(cleanExportSubtitle).observe(view,{subtree:true,childList:true});
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(cleanExportSubtitle,ms)});
+})();
+</script>
+
 </body>
 </html>
