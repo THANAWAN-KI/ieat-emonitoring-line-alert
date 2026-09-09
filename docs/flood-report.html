@@ -1413,7 +1413,7 @@ body{color:#172033!important}
           <article class="national-alert"><b>ประกาศสำคัญและข้อมูลที่ต้องเฝ้าระวัง</b><p id="nationalAlertText">กำลังตรวจสอบประกาศล่าสุดจากกรมอุตุนิยมวิทยา</p><a class="warning-source" id="nationalWarningLink" href="https://tmd.go.th/warning-and-events/warning-storm" target="_blank" rel="noopener">อ่านประกาศกรมอุตุนิยมวิทยา</a></article>
           <section class="daily-water-report" aria-labelledby="dailyWaterTitle">
             <div class="daily-water-head">
-              <div><h2 id="dailyWaterTitle">รายงานสถานการณ์น้ำประจำวัน</h2><p>สรุปข้อมูลที่สัมพันธ์กับพื้นที่นิคมอุตสาหกรรมจากแหล่งข้อมูลเดิมของระบบ</p></div>
+              <div><h2 id="dailyWaterTitle">รายงานสถานการณ์น้ำประจำวัน</h2></div>
               <span id="dailyReportDate">กำลังตรวจสอบวันที่</span>
             </div>
             <div class="daily-water-grid">
@@ -2714,7 +2714,7 @@ body{font-size:16px!important;font-weight:400!important;background:#f7f8fa!impor
   var warning=document.getElementById("warning"),shell=warning&&warning.querySelector(".new4all-water-shell");if(!warning||!shell)return;
   if(!warning.querySelector(".flood-support-heading")){
    var head=document.createElement("header");head.className="flood-support-heading";
-   head.innerHTML='<div class="flood-support-heading-copy"><h1>รายงานสถานการณ์น้ำประจำวัน</h1><p>สรุปข้อมูลที่สัมพันธ์กับพื้นที่นิคมอุตสาหกรรมจากแหล่งข้อมูลเดิมของระบบ</p></div><div class="flood-support-heading-date">ข้อมูลวันที่ 8 ก.ย. 2569</div><div class="flood-support-heading-actions"><button type="button" data-target="warning">หน้ารายงานข่าว</button><button type="button" data-target="infographic">ข้อมูล</button></div>';
+   head.innerHTML='<div class="flood-support-heading-copy"><h1>รายงานสถานการณ์น้ำประจำวัน</h1></div><div class="flood-support-heading-date">ข้อมูลวันที่ 8 ก.ย. 2569</div><div class="flood-support-heading-actions"><button type="button" data-target="warning">หน้ารายงานข่าว</button><button type="button" data-target="infographic">ข้อมูล</button></div>';
    warning.insertBefore(head,shell);
    head.querySelectorAll("button").forEach(function(b){b.onclick=function(){var target=b.dataset.target;document.querySelector('.nav button[data-view="'+target+'"]')?.click()}});
   }
@@ -3238,7 +3238,7 @@ html body #warning .flood-final-cards>.national-kpi{
   const heading=document.querySelector("#warning .flood-support-heading"),daily=document.querySelector("#warning .daily-water-report");if(!heading||!daily)return;
   let copy=heading.querySelector(".flood-support-heading-copy");
   if(!copy){copy=heading.querySelector("div:first-child");if(copy)copy.classList.add("flood-support-heading-copy")}
-  if(copy)copy.innerHTML='<h1>รายงานสถานการณ์น้ำประจำวัน</h1><p>สรุปข้อมูลที่สัมพันธ์กับพื้นที่นิคมอุตสาหกรรมจากแหล่งข้อมูลเดิมของระบบ</p>';
+  if(copy)copy.innerHTML='<h1>รายงานสถานการณ์น้ำประจำวัน</h1>';
   let date=heading.querySelector(".flood-support-heading-date");
   if(!date){date=document.createElement("div");date.className="flood-support-heading-date";heading.querySelector(".flood-support-heading-actions")?.before(date)}
   const source=document.getElementById("dailyReportDate");
@@ -3255,7 +3255,7 @@ html body #warning .flood-final-cards>.national-kpi{
   const heading=document.querySelector("#warning .flood-support-heading");if(!heading)return false;
   let copy=heading.querySelector(".flood-support-heading-copy");
   if(!copy){copy=heading.firstElementChild;copy&&copy.classList.add("flood-support-heading-copy")}
-  if(copy)copy.innerHTML="<h1>รายงานสถานการณ์น้ำประจำวัน</h1><p>สรุปข้อมูลที่สัมพันธ์กับพื้นที่นิคมอุตสาหกรรมจากแหล่งข้อมูลเดิมของระบบ</p>";
+  if(copy)copy.innerHTML="<h1>รายงานสถานการณ์น้ำประจำวัน</h1>";
   let date=heading.querySelector(".flood-support-heading-date");
   if(!date){date=document.createElement("div");date.className="flood-support-heading-date";heading.querySelector(".flood-support-heading-actions")?.before(date)}
   const source=document.getElementById("dailyReportDate");
@@ -7278,6 +7278,23 @@ html body main.container #thaiwater-warning .watch-intro h2{color:#406093!import
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",setWatchTitleColor);else setWatchTitleColor();
  [100,500,1200,2500,5000].forEach(function(ms){setTimeout(setWatchTitleColor,ms)});
+})();
+</script>
+
+
+<style id="overview-main-title-color-406093-20260909-v1">
+html body main.container #warning > .flood-support-heading .flood-support-heading-copy h1,
+html body main.container #warning #dailyWaterTitle{color:#406093!important}
+</style>
+<script id="overview-main-title-color-406093-20260909-v1-script">
+(function(){
+ function updateOverviewTitle(){
+  document.querySelectorAll("#warning > .flood-support-heading .flood-support-heading-copy h1,#warning #dailyWaterTitle").forEach(function(title){
+   title.style.setProperty("color","#406093","important");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",updateOverviewTitle);else updateOverviewTitle();
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(updateOverviewTitle,ms)});
 })();
 </script>
 
