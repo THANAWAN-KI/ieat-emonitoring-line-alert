@@ -5623,5 +5623,28 @@ body>.ieat-persistent-tabbar{
 })();
 </script>
 
+
+<style id="watch-tables-side-by-side-20260909-v1">
+#thaiwater-warning .moved-overview-tables{
+ display:grid!important;
+ grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:16px!important;
+ align-items:stretch!important;
+}
+#thaiwater-warning .moved-overview-tables>.warning-table{
+ min-width:0!important;
+ height:100%!important;
+ overflow:hidden!important;
+}
+#thaiwater-warning .moved-overview-tables .table-wrap,
+#thaiwater-warning .moved-overview-tables .warning-table>div:last-child{
+ overflow:auto!important;
+}
+#thaiwater-warning .moved-overview-tables table{min-width:760px!important}
+@media(max-width:1100px){
+ #thaiwater-warning .moved-overview-tables{grid-template-columns:1fr!important}
+}
+</style>
+
 </body>
 </html>
