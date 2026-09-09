@@ -7764,5 +7764,123 @@ body main.container #warning .flood-final-cards>*:nth-child(-n+6) strong *{
 }
 </style>
 
+
+<style id="unify-all-three-page-headers-to-overview-20260909-v2">
+html body main.container #warning>.flood-support-heading,
+html body main.container #thaiwater-warning .watch-intro,
+html body main.container #infographic>.export-page-heading{
+ display:flex!important;
+ align-items:center!important;
+ justify-content:space-between!important;
+ gap:24px!important;
+ width:100%!important;
+ min-height:72px!important;
+ margin:0 0 16px!important;
+ padding:12px 26px!important;
+ border:0!important;
+ border-radius:0!important;
+ background:#fff!important;
+ box-shadow:0 3px 9px rgba(0,0,0,.18)!important;
+}
+html body main.container #warning>.flood-support-heading::before,
+html body main.container #thaiwater-warning .watch-intro::before,
+html body main.container #infographic>.export-page-heading::before{content:none!important;display:none!important}
+html body main.container #warning>.flood-support-heading .flood-support-heading-copy,
+html body main.container #thaiwater-warning .watch-intro>div:first-of-type,
+html body main.container #infographic>.export-page-heading>div:first-of-type{
+ flex:0 1 auto!important;
+ margin:0!important;
+ padding:0!important;
+}
+html body main.container #warning>.flood-support-heading h1,
+html body main.container #thaiwater-warning .watch-intro h1,
+html body main.container #thaiwater-warning .watch-intro h2,
+html body main.container #infographic>.export-page-heading h1{
+ margin:0!important;
+ color:#00809D!important;
+ font-family:"Sarabun",sans-serif!important;
+ font-size:28px!important;
+ font-weight:600!important;
+ line-height:1.25!important;
+ white-space:nowrap!important;
+}
+html body main.container #warning>.flood-support-heading p,
+html body main.container #thaiwater-warning .watch-intro p,
+html body main.container #infographic>.export-page-heading p,
+html body main.container #warning>.flood-support-heading .flood-support-heading-date,
+html body main.container #thaiwater-warning .watch-time{display:none!important}
+html body main.container #warning #finalFloodHeaderTabs,
+html body main.container #thaiwater-warning #finalFloodHeaderTabs,
+html body main.container #infographic #exportHeaderTabs{
+ flex:0 0 auto!important;
+ display:flex!important;
+ align-items:center!important;
+ justify-content:flex-end!important;
+ gap:0!important;
+ margin:0 0 0 auto!important;
+ padding:0!important;
+ background:transparent!important;
+}
+html body main.container #warning #finalFloodHeaderTabs button,
+html body main.container #thaiwater-warning #finalFloodHeaderTabs button,
+html body main.container #infographic #exportHeaderTabs button{
+ min-width:0!important;
+ min-height:42px!important;
+ padding:9px 17px!important;
+ border:0!important;
+ border-bottom:3px solid transparent!important;
+ border-radius:0!important;
+ background:transparent!important;
+ color:#555!important;
+ box-shadow:none!important;
+ font-family:"Sarabun",sans-serif!important;
+ font-size:16px!important;
+ font-weight:400!important;
+ white-space:nowrap!important;
+}
+html body main.container #warning #finalFloodHeaderTabs button.active,
+html body main.container #thaiwater-warning #finalFloodHeaderTabs button.active,
+html body main.container #infographic #exportHeaderTabs button.active{
+ background:transparent!important;
+ color:#25671E!important;
+ border-bottom-color:#25671E!important;
+ font-weight:600!important;
+}
+@media(max-width:900px){
+ html body main.container #warning>.flood-support-heading,
+ html body main.container #thaiwater-warning .watch-intro,
+ html body main.container #infographic>.export-page-heading{align-items:flex-start!important;flex-direction:column!important;gap:8px!important}
+ html body main.container #warning #finalFloodHeaderTabs,
+ html body main.container #thaiwater-warning #finalFloodHeaderTabs,
+ html body main.container #infographic #exportHeaderTabs{width:100%!important;justify-content:flex-start!important;overflow-x:auto!important}
+ html body main.container #warning>.flood-support-heading h1,
+ html body main.container #thaiwater-warning .watch-intro h1,
+ html body main.container #thaiwater-warning .watch-intro h2,
+ html body main.container #infographic>.export-page-heading h1{font-size:23px!important;white-space:normal!important}
+}
+</style>
+<script id="unify-all-three-page-headers-to-overview-20260909-v2-script">
+(function(){
+ const selector="#warning #finalFloodHeaderTabs button,#thaiwater-warning #finalFloodHeaderTabs button,#infographic #exportHeaderTabs button";
+ function unifyTabs(){
+  document.querySelectorAll(selector).forEach(function(button){
+   const active=button.classList.contains("active");
+   button.style.setProperty("background","transparent","important");
+   button.style.setProperty("color",active?"#25671E":"#555","important");
+   button.style.setProperty("border-radius","0","important");
+   button.style.setProperty("box-shadow","none","important");
+   button.style.setProperty("border-bottom",active?"3px solid #25671E":"3px solid transparent","important");
+  });
+  document.querySelectorAll("#warning>.flood-support-heading h1,#thaiwater-warning .watch-intro h1,#thaiwater-warning .watch-intro h2,#infographic>.export-page-heading h1").forEach(function(title){
+   title.style.setProperty("color","#00809D","important");
+   title.style.setProperty("font-size","28px","important");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",unifyTabs);else unifyTabs();
+ document.addEventListener("click",function(e){if(e.target.closest(selector))setTimeout(unifyTabs,0)});
+ [100,500,1200,2500,5000,8000].forEach(function(ms){setTimeout(unifyTabs,ms)});
+})();
+</script>
+
 </body>
 </html>
