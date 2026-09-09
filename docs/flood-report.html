@@ -5226,5 +5226,53 @@ body>.ieat-persistent-tabbar{
 })();
 </script>
 
+
+<style id="restore-visible-corner-tabs-20260909-v1">
+#floodWorkflowNav{display:none!important}
+#floodCornerTabs{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:10px!important;margin-left:auto!important;flex:0 0 auto!important}
+#floodCornerTabs button{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:150px!important;min-height:44px!important;padding:10px 22px!important;border:0!important;border-radius:999px!important;background:#0098ca!important;color:#fff!important;box-shadow:0 5px 13px rgba(0,91,145,.22)!important;font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:500!important;line-height:1.3!important;cursor:pointer!important;white-space:nowrap!important}
+#floodCornerTabs button:hover{background:#007faa!important}
+#floodCornerTabs button.active{background:#005b91!important;box-shadow:0 5px 14px rgba(0,75,121,.32)!important}
+@media(max-width:1050px){#floodCornerTabs{width:100%!important;margin-left:0!important;justify-content:flex-start!important;overflow-x:auto!important;padding-bottom:4px!important}}
+@media(max-width:620px){#floodCornerTabs button{min-width:135px!important;padding:9px 16px!important;font-size:14px!important}}
+</style>
+<script id="restore-visible-corner-tabs-20260909-v1-script">
+(function(){
+ "use strict";
+ const items=[["warning","ภาพรวม"],["thaiwater-warning","พื้นที่เฝ้าระวัง"],["infographic","ส่งออกข้อมูล"]];
+ function activeId(){return document.querySelector("main .view.active")?.id||"warning"}
+ function target(id){
+  if(id==="warning")return document.querySelector("#warning .dashboard-intro-inner");
+  if(id==="thaiwater-warning")return document.querySelector("#thaiwater-warning .watch-intro");
+  return document.querySelector("#infographic .multi-report-toolbar");
+ }
+ function open(id){
+  document.querySelectorAll("main .view").forEach(v=>v.classList.toggle("active",v.id===id));
+  history.replaceState(null,"","#"+id);
+  if(id==="infographic"&&typeof window.prepareReportExport==="function")window.prepareReportExport();
+  render();
+  window.scrollTo({top:0,behavior:"smooth"});
+ }
+ function render(){
+  const id=activeId(),host=target(id);if(!host)return;
+  let tabs=document.getElementById("floodCornerTabs");
+  if(!tabs){
+   tabs=document.createElement("div");tabs.id="floodCornerTabs";
+   tabs.innerHTML=items.map(x=>'<button type="button" data-corner-view="'+x[0]+'">'+x[1]+'</button>').join("");
+   tabs.addEventListener("click",e=>{const b=e.target.closest("[data-corner-view]");if(b)open(b.dataset.cornerView)});
+  }
+  tabs.querySelectorAll("button").forEach(b=>b.classList.toggle("active",b.dataset.cornerView===id));
+  if(tabs.parentElement!==host)host.appendChild(tabs);
+ }
+ function start(){
+  render();
+  const main=document.querySelector("main.container");
+  if(main)new MutationObserver(render).observe(main,{subtree:true,attributes:true,attributeFilter:["class"]});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start);else start();
+ [100,500,1200,2500,5000].forEach(ms=>setTimeout(render,ms));
+})();
+</script>
+
 </body>
 </html>
