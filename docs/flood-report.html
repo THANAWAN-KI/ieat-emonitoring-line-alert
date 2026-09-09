@@ -7265,5 +7265,21 @@ body main.container #floodWorkflowNav button.active{background:#25671E!important
 })();
 </script>
 
+
+<style id="watch-main-title-color-406093-20260909-v1">
+html body main.container #thaiwater-warning .watch-intro h1,
+html body main.container #thaiwater-warning .watch-intro h2{color:#406093!important}
+</style>
+<script id="watch-main-title-color-406093-20260909-v1-script">
+(function(){
+ function setWatchTitleColor(){
+  const title=document.querySelector("#thaiwater-warning .watch-intro h1,#thaiwater-warning .watch-intro h2");
+  if(title)title.style.setProperty("color","#406093","important");
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",setWatchTitleColor);else setWatchTitleColor();
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(setWatchTitleColor,ms)});
+})();
+</script>
+
 </body>
 </html>
