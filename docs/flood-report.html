@@ -5326,5 +5326,42 @@ body>.ieat-persistent-tabbar{
 })();
 </script>
 
+
+<style id="remove-duplicate-overview-heading-20260909-v1">
+#warning>.dashboard-intro{display:none!important}
+#warning>.flood-support-heading{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:22px!important}
+#floodCornerTabs{display:none!important}
+#finalFloodHeaderTabs{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:10px!important;margin-left:auto!important;flex:0 0 auto!important}
+#finalFloodHeaderTabs button{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:150px!important;min-height:44px!important;padding:10px 22px!important;border:0!important;border-radius:999px!important;background:#0098ca!important;color:#fff!important;box-shadow:0 5px 13px rgba(0,91,145,.22)!important;font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:500!important;cursor:pointer!important;white-space:nowrap!important}
+#finalFloodHeaderTabs button.active{background:#005b91!important}
+@media(max-width:1050px){#warning>.flood-support-heading{align-items:stretch!important;flex-direction:column!important}#finalFloodHeaderTabs{width:100%!important;margin-left:0!important;justify-content:flex-start!important;overflow-x:auto!important}}
+</style>
+<script id="remove-duplicate-overview-heading-20260909-v1-script">
+(function(){
+ "use strict";
+ const items=[["warning","ภาพรวม"],["thaiwater-warning","พื้นที่เฝ้าระวัง"],["infographic","ส่งออกข้อมูล"]];
+ function openPage(id){
+  document.querySelectorAll("main .view").forEach(v=>v.classList.toggle("active",v.id===id));
+  document.querySelectorAll("#finalFloodHeaderTabs button").forEach(b=>b.classList.toggle("active",b.dataset.finalView===id));
+  history.replaceState(null,"","#"+id);
+  if(id==="infographic"&&typeof window.prepareReportExport==="function")window.prepareReportExport();
+  window.scrollTo({top:0,behavior:"smooth"});
+ }
+ function mount(){
+  const host=document.querySelector("#warning>.flood-support-heading");if(!host)return;
+  let tabs=document.getElementById("finalFloodHeaderTabs");
+  if(!tabs){
+   tabs=document.createElement("div");tabs.id="finalFloodHeaderTabs";
+   tabs.innerHTML=items.map(x=>'<button type="button" data-final-view="'+x[0]+'">'+x[1]+'</button>').join("");
+   tabs.addEventListener("click",e=>{const b=e.target.closest("[data-final-view]");if(b)openPage(b.dataset.finalView)});
+  }
+  if(tabs.parentElement!==host)host.appendChild(tabs);
+  tabs.querySelectorAll("button").forEach(b=>b.classList.toggle("active",b.dataset.finalView===(document.querySelector("main .view.active")?.id||"warning")));
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
+ [50,200,600,1200,2500,5000,8000].forEach(ms=>setTimeout(mount,ms));
+})();
+</script>
+
 </body>
 </html>
