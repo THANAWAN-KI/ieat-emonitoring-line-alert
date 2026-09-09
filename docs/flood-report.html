@@ -5812,5 +5812,43 @@ body.infographic-modal-open{overflow:hidden!important}
 })();
 </script>
 
+
+<style id="export-header-match-other-pages-20260909-v1">
+#infographic .export-page-heading{display:flex;align-items:center;justify-content:space-between;gap:22px;margin:0 0 18px;padding:22px 26px;border-radius:16px;background:#eef5f9}
+#infographic .export-page-heading h1{margin:0;color:#263746;font-family:"Noto Sans Thai",sans-serif;font-size:24px;font-weight:500;line-height:1.35}
+#infographic .export-page-heading p{margin:5px 0 0;color:#687984;font-family:"Noto Sans Thai",sans-serif;font-size:14px;font-weight:300}
+#infographic #exportHeaderTabs{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-left:auto;flex:0 0 auto}
+#infographic #exportHeaderTabs button{display:inline-flex;align-items:center;justify-content:center;min-width:150px;min-height:48px;padding:10px 22px;border:0;border-radius:999px;background:#0098ca;color:#fff;box-shadow:0 5px 13px rgba(0,91,145,.20);font-family:"Noto Sans Thai",sans-serif;font-size:16px;font-weight:500;cursor:pointer;white-space:nowrap}
+#infographic #exportHeaderTabs button.active{background:#005b91;box-shadow:0 5px 14px rgba(0,75,121,.30)}
+#infographic .multi-report-toolbar .report-toolbar-copy{display:none!important}
+#infographic .multi-report-toolbar{justify-content:flex-end!important}
+@media(max-width:950px){#infographic .export-page-heading{align-items:stretch;flex-direction:column}#infographic #exportHeaderTabs{width:100%;margin-left:0;justify-content:flex-start;overflow-x:auto;padding-bottom:4px}}
+@media(max-width:620px){#infographic .export-page-heading{padding:18px}#infographic #exportHeaderTabs button{min-width:135px;font-size:14px;padding:9px 16px}}
+</style>
+<script id="export-header-match-other-pages-20260909-v1-script">
+(function(){
+ "use strict";
+ const items=[["warning","ภาพรวม"],["thaiwater-warning","พื้นที่เฝ้าระวัง"],["infographic","ส่งออกข้อมูล"]];
+ function openPage(id){
+  document.querySelectorAll("main .view").forEach(v=>v.classList.toggle("active",v.id===id));
+  history.replaceState(null,"","#"+id);
+  if(id==="infographic"&&typeof window.prepareReportExport==="function")window.prepareReportExport();
+  window.scrollTo({top:0,behavior:"smooth"});
+ }
+ function mount(){
+  const view=document.getElementById("infographic"),workspace=view&&view.querySelector(".report-export-workspace");if(!view||!workspace)return;
+  let head=view.querySelector(":scope>.export-page-heading");
+  if(!head){
+   head=document.createElement("header");head.className="export-page-heading";
+   head.innerHTML='<div><h1>ส่งออกข้อมูลและจัดทำรายงานสถานการณ์น้ำ</h1><p>เลือกรายงาน ตรวจสอบข้อมูล และดาวน์โหลดเป็น PNG/PDF สำหรับ LINE หรือรายงานผู้บริหาร</p></div><div id="exportHeaderTabs">'+items.map(x=>'<button type="button" data-export-view="'+x[0]+'" class="'+(x[0]==="infographic"?"active":"")+'">'+x[1]+'</button>').join("")+'</div>';
+   view.insertBefore(head,workspace);
+   head.querySelectorAll("[data-export-view]").forEach(b=>b.onclick=()=>openPage(b.dataset.exportView));
+  }
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
+ [100,500,1200,2500,5000].forEach(ms=>setTimeout(mount,ms));
+})();
+</script>
+
 </body>
 </html>
