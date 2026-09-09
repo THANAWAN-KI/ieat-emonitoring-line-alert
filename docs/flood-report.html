@@ -5486,5 +5486,17 @@ body>.ieat-persistent-tabbar{
 })();
 </script>
 
+
+<style id="remove-rid-map-overlay-label-20260909-v1">
+.rid-basin-frame-label{display:none!important}
+</style>
+<script id="remove-rid-map-overlay-label-20260909-v1-script">
+(function(){
+ function removeRidLabel(){document.querySelectorAll(".rid-basin-frame-label").forEach(function(el){el.remove()})}
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeRidLabel);else removeRidLabel();
+ [100,500,1200,2500].forEach(function(ms){setTimeout(removeRidLabel,ms)});
+})();
+</script>
+
 </body>
 </html>
