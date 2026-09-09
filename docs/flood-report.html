@@ -5671,5 +5671,32 @@ body>.ieat-persistent-tabbar{
 })();
 </script>
 
+
+<style id="white-watch-page-background-20260909-v1">
+html:has(#thaiwater-warning.active),
+body:has(#thaiwater-warning.active),
+body:has(#thaiwater-warning.active) main.container,
+#thaiwater-warning,
+#thaiwater-warning.active{
+ background:#fff!important;
+}
+#thaiwater-warning.active{
+ min-height:100vh!important;
+}
+</style>
+<script id="white-watch-page-background-20260909-v1-script">
+(function(){
+ function syncWatchBackground(){
+  document.body.classList.toggle("watch-page-active",!!document.querySelector("#thaiwater-warning.active"));
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",syncWatchBackground);else syncWatchBackground();
+ const main=document.querySelector("main.container");
+ if(main)new MutationObserver(syncWatchBackground).observe(main,{subtree:true,attributes:true,attributeFilter:["class"]});
+})();
+</script>
+<style>
+body.watch-page-active,body.watch-page-active main.container{background:#fff!important}
+</style>
+
 </body>
 </html>
