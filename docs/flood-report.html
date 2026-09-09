@@ -7481,5 +7481,113 @@ html body main.container #warning #finalFloodHeaderTabs button.active{
 })();
 </script>
 
+
+<style id="compact-status-header-all-three-pages-20260909-v1">
+html body main.container #thaiwater-warning .watch-intro,
+html body main.container #infographic>.export-page-heading{
+ display:flex!important;
+ align-items:center!important;
+ justify-content:flex-start!important;
+ gap:16px!important;
+ min-height:58px!important;
+ margin:0 0 16px!important;
+ padding:9px 20px!important;
+ border:0!important;
+ border-radius:0!important;
+ background:#fff!important;
+ box-shadow:0 2px 7px rgba(0,0,0,.16)!important;
+}
+html body main.container #thaiwater-warning .watch-intro::before,
+html body main.container #infographic>.export-page-heading::before{
+ content:"กนอ."!important;
+ flex:0 0 auto!important;
+ color:#406093!important;
+ font-family:"Sarabun",sans-serif!important;
+ font-size:25px!important;
+ font-weight:700!important;
+ font-style:italic!important;
+ line-height:1!important;
+}
+html body main.container #thaiwater-warning .watch-intro>div:first-of-type,
+html body main.container #infographic>.export-page-heading>div:first-of-type{flex:0 0 auto!important}
+html body main.container #thaiwater-warning .watch-intro h1,
+html body main.container #thaiwater-warning .watch-intro h2,
+html body main.container #infographic>.export-page-heading h1{
+ margin:0!important;
+ color:#353535!important;
+ font-size:19px!important;
+ font-weight:600!important;
+ white-space:nowrap!important;
+}
+html body main.container #thaiwater-warning .watch-intro p,
+html body main.container #infographic>.export-page-heading p{display:none!important}
+html body main.container #thaiwater-warning .watch-time{
+ flex:0 0 auto!important;
+ margin:0!important;
+ padding:0!important;
+ border:0!important;
+ background:transparent!important;
+ color:#858585!important;
+ font-size:13px!important;
+ font-weight:400!important;
+ white-space:nowrap!important;
+}
+html body main.container #thaiwater-warning #finalFloodHeaderTabs,
+html body main.container #infographic #exportHeaderTabs{
+ flex:1 1 auto!important;
+ display:flex!important;
+ justify-content:flex-end!important;
+ gap:2px!important;
+ margin-left:auto!important;
+ padding:0!important;
+ background:transparent!important;
+}
+html body main.container #thaiwater-warning #finalFloodHeaderTabs button,
+html body main.container #infographic #exportHeaderTabs button{
+ min-width:0!important;
+ min-height:36px!important;
+ padding:7px 13px!important;
+ border:0!important;
+ border-bottom:3px solid transparent!important;
+ border-radius:0!important;
+ background:#fff!important;
+ color:#555!important;
+ box-shadow:none!important;
+ font-size:14px!important;
+ font-weight:400!important;
+}
+html body main.container #thaiwater-warning #finalFloodHeaderTabs button.active,
+html body main.container #infographic #exportHeaderTabs button.active{
+ background:#fff!important;
+ color:#25671E!important;
+ border-bottom-color:#25671E!important;
+ font-weight:600!important;
+}
+@media(max-width:900px){
+ html body main.container #thaiwater-warning .watch-intro,
+ html body main.container #infographic>.export-page-heading{flex-wrap:wrap!important}
+ html body main.container #thaiwater-warning #finalFloodHeaderTabs,
+ html body main.container #infographic #exportHeaderTabs{order:4!important;flex-basis:100%!important;justify-content:flex-start!important;overflow-x:auto!important}
+}
+</style>
+<script id="compact-status-header-all-three-pages-20260909-v1-script">
+(function(){
+ const selector="#warning #finalFloodHeaderTabs button,#thaiwater-warning #finalFloodHeaderTabs button,#infographic #exportHeaderTabs button";
+ function styleAllCompactTabs(){
+  document.querySelectorAll(selector).forEach(function(button){
+   const active=button.classList.contains("active");
+   button.style.setProperty("background","#fff","important");
+   button.style.setProperty("color",active?"#25671E":"#555","important");
+   button.style.setProperty("border-radius","0","important");
+   button.style.setProperty("box-shadow","none","important");
+   button.style.setProperty("border-bottom",active?"3px solid #25671E":"3px solid transparent","important");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",styleAllCompactTabs);else styleAllCompactTabs();
+ document.addEventListener("click",function(e){if(e.target.closest(selector))setTimeout(styleAllCompactTabs,0)});
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(styleAllCompactTabs,ms)});
+})();
+</script>
+
 </body>
 </html>
