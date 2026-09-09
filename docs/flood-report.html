@@ -5698,5 +5698,24 @@ body:has(#thaiwater-warning.active) main.container,
 body.watch-page-active,body.watch-page-active main.container{background:#fff!important}
 </style>
 
+
+<style id="remove-export-black-marked-sections-20260909-v1">
+#infographic>.flood-page-purpose,
+#infographic #finalFloodHeaderTabs,
+#infographic #floodCornerTabs,
+#infographic .native-page-tabs{
+ display:none!important;
+}
+</style>
+<script id="remove-export-black-marked-sections-20260909-v1-script">
+(function(){
+ function removeMarkedExportParts(){
+  document.querySelectorAll("#infographic>.flood-page-purpose,#infographic #finalFloodHeaderTabs,#infographic #floodCornerTabs,#infographic .native-page-tabs").forEach(function(el){el.remove()});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeMarkedExportParts);else removeMarkedExportParts();
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeMarkedExportParts,ms)});
+})();
+</script>
+
 </body>
 </html>
