@@ -6244,5 +6244,21 @@ body main.container :is(#warning,#thaiwater-warning,#infographic) [class*="-card
 }
 </style>
 
+
+<script id="lock-visible-card-typography-20260909-v3">
+(function(){
+ "use strict";
+ function set(el,props){if(!el)return;Object.entries(props).forEach(([k,v])=>el.style.setProperty(k,v,"important"))}
+ function lockTypography(){
+  document.querySelectorAll("#warning .card.kpi strong,#warning .national-kpi strong,#thaiwater-warning [class*='kpi'] strong").forEach(el=>set(el,{"font-family":"'Noto Sans Thai', sans-serif","font-size":"28px","font-weight":"600","line-height":"1.25","color":"#1565c0"}));
+  document.querySelectorAll("#warning .card.kpi span,#warning .national-kpi span,#thaiwater-warning [class*='kpi'] span").forEach(el=>set(el,{"font-family":"'Noto Sans Thai', sans-serif","font-size":"16px","font-weight":"400","line-height":"1.5","color":"#0d1a2b"}));
+  document.querySelectorAll("#warning .national-kpi h2").forEach(el=>set(el,{"font-family":"'Noto Sans Thai', sans-serif","font-size":"20px","font-weight":"600","line-height":"1.45","color":"#0d1a2b"}));
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",lockTypography);else lockTypography();
+ const main=document.querySelector("main.container");if(main)new MutationObserver(lockTypography).observe(main,{subtree:true,childList:true,characterData:true});
+ [100,500,1200,2500,5000,8000].forEach(ms=>setTimeout(lockTypography,ms));
+})();
+</script>
+
 </body>
 </html>
