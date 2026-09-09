@@ -7428,5 +7428,92 @@ html body main.container #exportHeaderTabs button.active:after{
 }
 </style>
 
+<style id="exact-flat-tabs-white-page-20260909-v2">
+html,
+body,
+body main.container,
+body main.container #warning,
+body main.container #thaiwater-warning,
+body main.container #infographic,
+body main.container .view,
+body main.container .view.active{
+ background:#ffffff!important;
+}
+
+/* ยกแถบเมนูขึ้นเป็นแถวบนเต็มความกว้างแบบตัวอย่าง */
+body main.container #warning>.flood-support-heading,
+body main.container #thaiwater-warning .watch-intro,
+body main.container #infographic>.export-page-heading{
+ display:flex!important;
+ flex-wrap:wrap!important;
+ align-items:center!important;
+ padding:0 20px 10px!important;
+ min-height:0!important;
+ background:#fff!important;
+}
+body main.container #warning>.flood-support-heading>div:not(#finalFloodHeaderTabs),
+body main.container #thaiwater-warning .watch-intro>div:not(#finalFloodHeaderTabs),
+body main.container #infographic>.export-page-heading>div:not(#exportHeaderTabs){
+ order:2!important;
+}
+html body main.container #finalFloodHeaderTabs,
+html body main.container #exportHeaderTabs{
+ order:1!important;
+ flex:0 0 calc(100% + 40px)!important;
+ width:calc(100% + 40px)!important;
+ min-height:55px!important;
+ margin:0 -20px 10px!important;
+ padding:0 14px!important;
+ align-items:stretch!important;
+ justify-content:flex-start!important;
+ gap:0!important;
+ background:#fff!important;
+ border-top:0!important;
+ border-bottom:1px solid #d9d9d9!important;
+ box-shadow:0 -2px 8px rgba(0,0,0,.12)!important;
+}
+html body main.container #finalFloodHeaderTabs button,
+html body main.container #exportHeaderTabs button{
+ flex:0 0 auto!important;
+ min-width:86px!important;
+ min-height:54px!important;
+ padding:14px 14px 11px!important;
+ background:#fff!important;
+ color:#646464!important;
+ border:0!important;
+ border-radius:0!important;
+ box-shadow:none!important;
+ font-family:"Sarabun",sans-serif!important;
+ font-size:16px!important;
+ font-weight:400!important;
+}
+html body main.container #finalFloodHeaderTabs button:hover,
+html body main.container #exportHeaderTabs button:hover{
+ background:#fff!important;
+ color:#1565c0!important;
+}
+html body main.container #finalFloodHeaderTabs button.active,
+html body main.container #exportHeaderTabs button.active{
+ background:#fff!important;
+ color:#1f5fe0!important;
+ font-weight:400!important;
+}
+html body main.container #finalFloodHeaderTabs button.active:after,
+html body main.container #exportHeaderTabs button.active:after{
+ left:7px!important;
+ right:7px!important;
+ bottom:-1px!important;
+ height:2px!important;
+ background:#2f6fe8!important;
+ border-radius:0!important;
+}
+@media(max-width:620px){
+ html body main.container #finalFloodHeaderTabs button,
+ html body main.container #exportHeaderTabs button{
+  min-width:0!important;flex:1 1 0!important;padding-left:6px!important;padding-right:6px!important
+ }
+}
+</style>
+
 </body>
 </html>
