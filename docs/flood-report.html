@@ -6668,5 +6668,105 @@ body main.container #thaiwater-warning #finalFloodHeaderTabs button.active{
 })();
 </script>
 
+
+<style id="watch-compact-center-swoc-expand-20260909-v1">
+body main.container #thaiwater-warning .watch-intro{
+ min-height:78px!important;
+ padding:12px 20px!important;
+ margin-bottom:14px!important;
+ gap:18px!important;
+}
+body main.container #thaiwater-warning .watch-intro h1,
+body main.container #thaiwater-warning .watch-intro h2{
+ margin-bottom:2px!important;
+ font-size:22px!important;
+ line-height:1.35!important;
+}
+body main.container #thaiwater-warning .watch-intro p{
+ font-size:14px!important;
+ line-height:1.5!important;
+}
+body main.container #thaiwater-warning #finalFloodHeaderTabs button{
+ min-height:44px!important;
+ padding-top:8px!important;
+ padding-bottom:8px!important;
+}
+body main.container #thaiwater-warning .tw-risk-card:first-child,
+body main.container #thaiwater-warning .tw-risk-card:nth-child(2){
+ border-top:1px solid #bcced6!important;
+}
+body main.container #thaiwater-warning .moved-overview-tables table th,
+body main.container #thaiwater-warning .moved-overview-tables table td{
+ text-align:center!important;
+ vertical-align:middle!important;
+}
+body main.container #thaiwater-warning .moved-overview-tables table td *{
+ text-align:center!important;
+}
+body main.container #thaiwater-warning .swoc-watch-tabs{
+ gap:10px!important;
+ background:#f2f7f9!important;
+}
+body main.container #thaiwater-warning .swoc-watch-tab{
+ background:#0082ca!important;
+ border-color:#0082ca!important;
+ color:#fff!important;
+}
+body main.container #thaiwater-warning .swoc-watch-tab b,
+body main.container #thaiwater-warning .swoc-watch-tab span{
+ color:#fff!important;
+}
+body main.container #thaiwater-warning .swoc-watch-tab.active{
+ background:#199051!important;
+ border-color:#199051!important;
+ color:#fff!important;
+ box-shadow:0 4px 12px rgba(25,144,81,.22)!important;
+}
+body main.container #thaiwater-warning .swoc-watch-tab.active b,
+body main.container #thaiwater-warning .swoc-watch-tab.active span{
+ color:#fff!important;
+}
+body main.container #thaiwater-warning .swoc-watch-body{
+ min-height:1100px!important;
+}
+body main.container #thaiwater-warning .swoc-use-guide{
+ min-height:1100px!important;
+}
+body main.container #thaiwater-warning .swoc-live-frame,
+body main.container #thaiwater-warning .swoc-live-frame iframe{
+ height:1100px!important;
+ min-height:1100px!important;
+}
+@media(max-width:950px){
+ body main.container #thaiwater-warning .swoc-watch-body,
+ body main.container #thaiwater-warning .swoc-use-guide{
+  min-height:0!important;
+ }
+ body main.container #thaiwater-warning .swoc-live-frame,
+ body main.container #thaiwater-warning .swoc-live-frame iframe{
+  height:950px!important;
+  min-height:950px!important;
+ }
+}
+</style>
+<script id="watch-compact-center-swoc-expand-20260909-v1-script">
+(function(){
+ "use strict";
+ function lockSwocTabColors(){
+  document.querySelectorAll("#thaiwater-warning .swoc-watch-tab").forEach(function(tab){
+   const active=tab.classList.contains("active");
+   tab.style.setProperty("background",active?"#199051":"#0082ca","important");
+   tab.style.setProperty("border-color",active?"#199051":"#0082ca","important");
+   tab.style.setProperty("color","#fff","important");
+   tab.querySelectorAll("b,span").forEach(function(x){x.style.setProperty("color","#fff","important")});
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",lockSwocTabColors);else lockSwocTabColors();
+ document.addEventListener("click",function(e){if(e.target.closest(".swoc-watch-tab"))setTimeout(lockSwocTabColors,0)});
+ const area=document.querySelector("#thaiwater-warning");if(area)new MutationObserver(lockSwocTabColors).observe(area,{subtree:true,attributes:true,attributeFilter:["class"]});
+ [100,500,1200,2500,5000].forEach(ms=>setTimeout(lockSwocTabColors,ms));
+})();
+</script>
+
 </body>
 </html>
