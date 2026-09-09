@@ -5501,5 +5501,19 @@ body>.ieat-persistent-tabbar{
 
 <style id="remove-empty-overview-bottom-shell-20260909-v1">
 #warning>.new4all-water-shell{display:none!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important}
-</style></body>
+</style>
+<style id="remove-watch-purpose-strip-20260909-v1">
+#thaiwater-warning>.flood-page-purpose{display:none!important}
+</style>
+<script id="remove-watch-purpose-strip-20260909-v1-script">
+(function(){
+ function removeWatchPurpose(){
+  document.querySelectorAll("#thaiwater-warning>.flood-page-purpose").forEach(function(el){el.remove()});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeWatchPurpose);else removeWatchPurpose();
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeWatchPurpose,ms)});
+})();
+</script>
+
+</body>
 </html>
