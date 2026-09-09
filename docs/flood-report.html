@@ -5274,5 +5274,31 @@ body>.ieat-persistent-tabbar{
 })();
 </script>
 
+
+<style id="corner-tabs-visible-header-fix-20260909-v2">
+#warning>.flood-support-heading{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:22px!important}
+#warning>.flood-support-heading #floodCornerTabs{display:flex!important;visibility:visible!important;opacity:1!important}
+@media(max-width:1050px){#warning>.flood-support-heading{align-items:stretch!important;flex-direction:column!important}}
+</style>
+<script id="corner-tabs-visible-header-fix-20260909-v2-script">
+(function(){
+ "use strict";
+ function fixCornerTabs(){
+  const tabs=document.getElementById("floodCornerTabs");if(!tabs)return;
+  const active=document.querySelector("main .view.active");
+  let host=null;
+  if(active&&active.id==="warning")host=document.querySelector("#warning>.flood-support-heading");
+  else if(active&&active.id==="thaiwater-warning")host=document.querySelector("#thaiwater-warning .watch-intro");
+  else if(active&&active.id==="infographic")host=document.querySelector("#infographic .multi-report-toolbar");
+  if(host&&tabs.parentElement!==host)host.appendChild(tabs);
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",fixCornerTabs);else fixCornerTabs();
+ document.addEventListener("click",function(e){if(e.target.closest("#floodCornerTabs button"))setTimeout(fixCornerTabs,0)});
+ const main=document.querySelector("main.container");
+ if(main)new MutationObserver(fixCornerTabs).observe(main,{subtree:true,attributes:true,attributeFilter:["class"]});
+ [50,200,600,1200,2500,5000].forEach(ms=>setTimeout(fixCornerTabs,ms));
+})();
+</script>
+
 </body>
 </html>
