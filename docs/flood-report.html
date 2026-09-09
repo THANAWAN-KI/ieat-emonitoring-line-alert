@@ -7048,5 +7048,49 @@ body main.container #infographic #reportPage2 .export-data-table td{
 }
 </style>
 
+
+<style id="export-full-status-overflow-time-colors-20260909-v1">
+/* Estate status: fill the complete header and data cells. */
+body main.container #infographic #reportPage2 .export-table-block:first-of-type .export-data-table th:last-child,
+body main.container #infographic #reportPage2 .export-table-block:first-of-type .export-data-table td:last-child,
+body main.container #infographic #reportPage2 .export-table-block:first-of-type .export-data-table th:last-child *,
+body main.container #infographic #reportPage2 .export-table-block:first-of-type .export-data-table td:last-child *{
+ background:#E63946!important;
+ color:#fff!important;
+ box-shadow:none!important;
+}
+/* Water situation: only overflow rows are fully red. */
+body main.container #infographic #reportPage2 #exportWaterRows td.export-overflow-cell,
+body main.container #infographic #reportPage2 #exportWaterRows td.export-overflow-cell *{
+ background:#E63946!important;
+ color:#fff!important;
+ box-shadow:none!important;
+}
+/* Time column: full blue cells. */
+body main.container #infographic #reportPage2 .export-table-block:nth-of-type(2) .export-data-table th:last-child,
+body main.container #infographic #reportPage2 #exportWaterRows td:last-child,
+body main.container #infographic #reportPage2 .export-table-block:nth-of-type(2) .export-data-table th:last-child *,
+body main.container #infographic #reportPage2 #exportWaterRows td:last-child *{
+ background:#4C8CE4!important;
+ color:#fff!important;
+ box-shadow:none!important;
+}
+</style>
+<script id="export-full-status-overflow-time-colors-20260909-v1-script">
+(function(){
+ "use strict";
+ function markOverflow(){
+  document.querySelectorAll("#infographic #reportPage2 #exportWaterRows tr").forEach(function(row){
+   const cell=row.cells[2];
+   if(cell)cell.classList.toggle("export-overflow-cell",cell.textContent.replace(/\s+/g," ").includes("ล้นตลิ่ง"));
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",markOverflow);else markOverflow();
+ const rows=document.getElementById("exportWaterRows");
+ if(rows)new MutationObserver(markOverflow).observe(rows,{subtree:true,childList:true,characterData:true});
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(markOverflow,ms)});
+})();
+</script>
+
 </body>
 </html>
