@@ -7665,5 +7665,38 @@ html body main.container #infographic #exportHeaderTabs button.active{
 })();
 </script>
 
+
+<style id="overview-title-teal-remove-kpi-value-bg-20260909-v1">
+html body main.container #warning>.flood-support-heading .flood-support-heading-copy h1{color:#00809D!important}
+body main.container #warning .flood-final-cards>.kpi>div,
+body main.container #warning .flood-final-cards>.kpi>div>strong,
+body main.container #warning .flood-final-cards>.kpi>div>strong *,
+body main.container #warning .flood-final-cards>.kpi>strong,
+body main.container #warning .flood-final-cards>.kpi>strong *{
+ background:transparent!important;
+ background-color:transparent!important;
+ background-image:none!important;
+ border:0!important;
+ border-radius:0!important;
+ box-shadow:none!important;
+ outline:0!important;
+}
+</style>
+<script id="overview-title-teal-remove-kpi-value-bg-20260909-v1-script">
+(function(){
+ function applyOverviewFix(){
+  const title=document.querySelector("#warning>.flood-support-heading .flood-support-heading-copy h1");
+  if(title)title.style.setProperty("color","#00809D","important");
+  document.querySelectorAll("#warning .flood-final-cards>.kpi>div,#warning .flood-final-cards>.kpi strong").forEach(function(el){
+   el.style.setProperty("background","transparent","important");
+   el.style.setProperty("background-color","transparent","important");
+   el.style.setProperty("box-shadow","none","important");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",applyOverviewFix);else applyOverviewFix();
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(applyOverviewFix,ms)});
+})();
+</script>
+
 </body>
 </html>
