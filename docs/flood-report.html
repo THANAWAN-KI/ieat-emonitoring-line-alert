@@ -5731,5 +5731,86 @@ body.watch-page-active,body.watch-page-active main.container{background:#fff!imp
 })();
 </script>
 
+
+<style id="thaiwater-style-infographic-gallery-20260909-v1">
+#infographic{background:#f5f7f8!important;padding:18px!important;border-radius:16px}
+#infographic .report-export-workspace{max-width:1500px;margin:0 auto}
+#infographic .multi-report-toolbar{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:18px!important;padding:18px 20px!important;margin-bottom:18px!important;background:#fff!important;border:1px solid #e0e6ea!important;border-radius:14px!important;box-shadow:0 4px 14px rgba(30,66,100,.07)!important}
+#infographic .report-toolbar-copy h1{margin:0!important;color:#004b79!important;font-size:22px!important;font-weight:500!important}
+#infographic .report-toolbar-copy:after{content:"เลือกรายงานที่ต้องการดูหรือดาวน์โหลดเป็นภาพ";display:block;margin-top:4px;color:#6d7b85;font-size:14px}
+#infographic .multi-report-actions{display:flex!important;flex-wrap:wrap!important;justify-content:flex-end!important;gap:8px!important}
+#infographic .map-upload-button,#infographic .infographic-print-all{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:38px!important;padding:8px 13px!important;border:1px solid #b9d8e7!important;border-radius:999px!important;background:#eef8fc!important;color:#006f9e!important;font-size:13px!important;cursor:pointer!important}
+#infographic .infographic-print-all{border-color:#0098ca!important;background:#0098ca!important;color:#fff!important}
+#infographic .report-pages{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:22px!important;align-items:start!important}
+#infographic .infographic-gallery-item{min-width:0;background:#fff;border:1px solid #dce4e9;border-radius:15px;overflow:hidden;box-shadow:0 7px 20px rgba(30,66,100,.09)}
+#infographic .infographic-gallery-item:nth-child(3){grid-column:1/-1}
+#infographic .infographic-card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid #e1e8ed}
+#infographic .infographic-card-head h2{margin:0;color:#263746;font-size:17px;font-weight:500}
+#infographic .infographic-card-head span{color:#77858e;font-size:12px}
+#infographic .infographic-preview{padding:14px;background:#eef2f4;overflow:auto}
+#infographic .infographic-preview>.export-sheet{width:100%!important;max-width:none!important;margin:0!important;transform:none!important;box-shadow:0 2px 8px rgba(0,0,0,.10)!important}
+#infographic .infographic-card-actions{display:flex;justify-content:flex-end;gap:8px;padding:12px 16px}
+#infographic .infographic-card-actions button{border:0;border-radius:999px;padding:8px 15px;font-family:"Noto Sans Thai",sans-serif;font-size:13px;cursor:pointer}
+#infographic .info-view-full{background:#eef4f7;color:#005b91}
+#infographic .info-download-png{background:#0098ca;color:#fff}
+#infographic .infographic-gallery-item.is-expanded{position:fixed;z-index:9999;inset:16px;display:flex;flex-direction:column;background:#fff}
+#infographic .infographic-gallery-item.is-expanded .infographic-preview{flex:1;overflow:auto}
+#infographic .infographic-gallery-item.is-expanded .infographic-preview>.export-sheet{width:min(1200px,100%)!important;margin:0 auto!important}
+body.infographic-modal-open{overflow:hidden!important}
+@media(max-width:1000px){#infographic .report-pages{grid-template-columns:1fr!important}#infographic .infographic-gallery-item:nth-child(3){grid-column:auto}}
+@media(max-width:720px){#infographic{padding:10px!important}#infographic .multi-report-toolbar{align-items:stretch!important;flex-direction:column!important}#infographic .multi-report-actions{justify-content:flex-start!important}}
+@media print{
+ body *{visibility:hidden!important}
+ #infographic,#infographic *{visibility:visible!important}
+ #infographic{position:absolute!important;inset:0!important;background:#fff!important;padding:0!important}
+ #infographic .multi-report-toolbar,#infographic .infographic-card-head,#infographic .infographic-card-actions{display:none!important}
+ #infographic .report-pages{display:block!important}
+ #infographic .infographic-gallery-item{box-shadow:none!important;border:0!important;break-after:page!important}
+ #infographic .infographic-preview{padding:0!important;background:#fff!important}
+}
+</style>
+<script id="thaiwater-style-infographic-gallery-20260909-v1-script">
+(function(){
+ "use strict";
+ const titles={
+  reportCanvas:"ภาพรวมสถานการณ์และพื้นที่เสี่ยงน้ำท่วม",
+  reportPage2:"สถานการณ์น้ำใกล้พื้นที่นิคมอุตสาหกรรม",
+  reportPage3:"พื้นที่เฝ้าระวัง 24 และ 48 ชั่วโมง"
+ };
+ function savePng(sheet,title){
+  if(typeof html2canvas!=="function"){alert("ระบบสร้างภาพกำลังโหลด โปรดลองอีกครั้ง");return}
+  html2canvas(sheet,{scale:2,useCORS:true,backgroundColor:"#ffffff"}).then(canvas=>{
+   const a=document.createElement("a");a.download=title+".png";a.href=canvas.toDataURL("image/png");a.click();
+  });
+ }
+ function wrap(sheet,index){
+  if(sheet.parentElement.classList.contains("infographic-preview"))return;
+  const item=document.createElement("article");item.className="infographic-gallery-item";
+  const head=document.createElement("div");head.className="infographic-card-head";
+  const title=titles[sheet.id]||("รายงานหน้า "+(index+1));
+  head.innerHTML="<div><h2>"+title+"</h2><span>รายงานหน้า "+(index+1)+" · ข้อมูลล่าสุดจากระบบ</span></div>";
+  const preview=document.createElement("div");preview.className="infographic-preview";
+  const actions=document.createElement("div");actions.className="infographic-card-actions";
+  actions.innerHTML='<button type="button" class="info-view-full">ดูแบบเต็ม</button><button type="button" class="info-download-png">ดาวน์โหลด PNG</button>';
+  sheet.parentElement.insertBefore(item,sheet);item.appendChild(head);item.appendChild(preview);preview.appendChild(sheet);item.appendChild(actions);
+  actions.querySelector(".info-view-full").onclick=function(){
+   const open=item.classList.toggle("is-expanded");this.textContent=open?"ปิด":"ดูแบบเต็ม";document.body.classList.toggle("infographic-modal-open",open);
+  };
+  actions.querySelector(".info-download-png").onclick=()=>savePng(sheet,title);
+ }
+ function mount(){
+  const pages=document.querySelector("#infographic .report-pages");
+  const toolbar=document.querySelector("#infographic .multi-report-actions");
+  if(!pages||!toolbar)return;
+  [...pages.querySelectorAll(":scope>.export-sheet")].forEach(wrap);
+  if(!toolbar.querySelector(".infographic-print-all")){
+   const b=document.createElement("button");b.type="button";b.className="infographic-print-all";b.textContent="ดาวน์โหลด / พิมพ์ PDF";b.onclick=()=>window.print();toolbar.appendChild(b);
+  }
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
+ [100,600,1500,3000,5000].forEach(ms=>setTimeout(mount,ms));
+})();
+</script>
+
 </body>
 </html>
