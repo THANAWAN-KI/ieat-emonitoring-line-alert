@@ -8,7 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Kanit:wght@300;400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+  <script type="module" src="https://js.arcgis.com/5.1/embeddable-components/"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
   <script src="data/thaiwater_latest.js?v=20260821-3"></script>
   <script src="flood-live-data.js?v=20260908-1" defer></script>
   <script src="data/thaiwater-map-meta.js" defer></script>
@@ -1453,7 +1454,7 @@ body{color:#172033!important}
           <a href="https://www.thaiwater.net/new4all/warning" target="_blank" rel="noopener">เปิดเต็มหน้า</a>
         </header>
         <div class="thaiwater-warning-frame">
-          <iframe src="https://www.thaiwater.net/new4all/warning" title="พื้นที่เฝ้าระวัง ThaiWater" loading="lazy" allow="fullscreen; geolocation" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          <iframe src="https://www.thaiwater.net/new4all/warning" title="พื้นที่เฝ้าระวัง ThaiWater" loading="eager" allow="fullscreen; geolocation" referrerpolicy="strict-origin-when-cross-origin"></iframe>
           <div class="thaiwater-warning-fallback">
             หากแผนที่ไม่แสดง โปรดเลือก “เปิดเต็มหน้า” เพื่อดูข้อมูลจาก ThaiWater โดยตรง
           </div>
@@ -4176,7 +4177,7 @@ html body #warning .flood-final-cards .source-link{display:none!important}
   pair.appendChild(indicators);pair.appendChild(flood);
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",pairCards);else pairCards();
- [0].forEach(ms=>setTimeout(pairCards,ms));
+ [300,900,1900,2400].forEach(ms=>setTimeout(pairCards,ms));
 })();
 </script>
 <style id="flash-flood-ranking-card-v1">
@@ -4205,7 +4206,7 @@ html body #warning .flood-final-cards .source-link{display:none!important}
   list.innerHTML=rows.length?rows.map((row,index)=>'<div class="flash-flood-rank-row"><span class="flash-flood-rank-name">'+(index+1)+'. '+escapeHtml(row.province)+'</span><b class="flash-flood-rank-value">'+(row.maxRain===null?row.count+' จุด':row.maxRain.toLocaleString("th-TH",{maximumFractionDigits:1})+' มม.')+'</b></div>').join(''):'<div class="flash-flood-rank-row"><span class="flash-flood-rank-name">กำลังตรวจสอบข้อมูลพื้นที่เสี่ยง</span><b class="flash-flood-rank-value">'+escapeHtml(count.textContent||'–')+'</b></div>';
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",render);else render();
- [0].forEach(ms=>setTimeout(render,ms));
+ [300,900,1800,3000,5000].forEach(ms=>setTimeout(render,ms));
 })();
 </script>
 <style id="flood-font-alignment-20260908-v1">
@@ -4711,7 +4712,7 @@ html body #warning .flood-final-cards>.national-kpi span{
   }
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeAllCardIcons);
   else removeAllCardIcons();
-  [0].forEach(function(ms){setTimeout(removeAllCardIcons,ms)});
+  [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeAllCardIcons,ms)});
 })();
 </script>
 <style id="water-overflow-text-font-20260908-v9">
@@ -4771,7 +4772,7 @@ html body #thaiwater-warning.active{display:block!important}
   [report,watch,info].filter(Boolean).forEach(function(button){button.onclick=function(){go(button.dataset.view)}});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",fixFloodNav);else fixFloodNav();
- [0].forEach(function(ms){setTimeout(fixFloodNav,ms)});
+ [200,800,1800,3000].forEach(function(ms){setTimeout(fixFloodNav,ms)});
 })();
 </script>
 <style id="visible-thaiwater-warning-button-20260908-v2">
@@ -4806,7 +4807,7 @@ html body #thaiwater-warning.active{display:block!important}
   });
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",ensureVisibleWatchButton);else ensureVisibleWatchButton();
- [0].forEach(function(ms){setTimeout(ensureVisibleWatchButton,ms)});
+ [100,400,900,1600,2600,4500].forEach(function(ms){setTimeout(ensureVisibleWatchButton,ms)});
 })();
 </script>
 
@@ -4859,7 +4860,7 @@ html body #thaiwater-warning.active{display:block!important}
  function nearest(estate,items){let best=null;items.forEach(x=>{if(num(x.latitude)==null||num(x.longitude)==null)return;const d=km(estate,x);if(!best||d<best.distance)best={item:x,distance:d}});return best}
  function shell(){
   const host=document.querySelector("#thaiwater-warning .thaiwater-warning-shell");if(!host)return null;
-  host.innerHTML='<div class="watch-dashboard"><div class="watch-intro"><div><h2>พื้นที่เฝ้าระวังใกล้นิคมอุตสาหกรรมทั่วประเทศ</h2><p>คัดกรองพื้นที่เสี่ยงและสถานีตรวจวัดภายในรัศมี '+RADIUS+' กม. จากตำแหน่งนิคมอุตสาหกรรม</p></div><div class="watch-time" id="watchDataTime">กำลังโหลดข้อมูลล่าสุด…</div></div><section class="thaiwater-reference-panel"><div class="thaiwater-reference-bar"><div><b>พื้นที่เฝ้าระวัง — ThaiWater</b><span>แผนที่และอันดับพื้นที่เสี่ยง 24/48 ชั่วโมง และข้อมูลความเสี่ยง 6 เดือน</span></div><a href="https://www.thaiwater.net/new4all/warning" target="_blank" rel="noopener">เปิดเต็มหน้าจอ</a></div><iframe class="thaiwater-reference-frame" title="พื้นที่เฝ้าระวัง ThaiWater" loading="lazy" src="https://www.thaiwater.net/new4all/warning"></iframe></section><div class="watch-analysis-title">ข้อมูลวิเคราะห์เพิ่มเติมสำหรับนิคมอุตสาหกรรม</div><div class="watch-grid">'+
+  host.innerHTML='<div class="watch-dashboard"><div class="watch-intro"><div><h2>พื้นที่เฝ้าระวังใกล้นิคมอุตสาหกรรมทั่วประเทศ</h2><p>คัดกรองพื้นที่เสี่ยงและสถานีตรวจวัดภายในรัศมี '+RADIUS+' กม. จากตำแหน่งนิคมอุตสาหกรรม</p></div><div class="watch-time" id="watchDataTime">กำลังโหลดข้อมูลล่าสุด…</div></div><section class="thaiwater-reference-panel"><div class="thaiwater-reference-bar"><div><b>พื้นที่เฝ้าระวัง — ThaiWater</b><span>แผนที่และอันดับพื้นที่เสี่ยง 24/48 ชั่วโมง และข้อมูลความเสี่ยง 6 เดือน</span></div><a href="https://www.thaiwater.net/new4all/warning" target="_blank" rel="noopener">เปิดเต็มหน้าจอ</a></div><iframe class="thaiwater-reference-frame" title="พื้นที่เฝ้าระวัง ThaiWater" loading="eager" src="https://www.thaiwater.net/new4all/warning"></iframe></section><div class="watch-analysis-title">ข้อมูลวิเคราะห์เพิ่มเติมสำหรับนิคมอุตสาหกรรม</div><div class="watch-grid">'+
   '<section class="watch-panel"><div class="watch-panel-head"><div><h3>พื้นที่เสี่ยงน้ำท่วมฉับพลัน</h3><p>เปรียบเทียบทุกนิคมฯ กับพื้นที่เสี่ยงรายตำบลใน 24 และ 48 ชั่วโมงข้างหน้า</p></div><div class="watch-tabs"><button class="active" data-risk-period="24h">24 ชั่วโมง</button><button data-risk-period="48h">48 ชั่วโมง</button></div></div><div class="watch-tools"><input id="riskSearch" placeholder="ค้นหานิคม จังหวัด อำเภอ หรือตำบล"><span class="watch-count" id="riskCount"></span></div><div class="watch-table-wrap"><table class="watch-table"><thead><tr><th>นิคมอุตสาหกรรม</th><th>สายปฏิบัติการ</th><th>สถานะ</th><th>พื้นที่เสี่ยงใกล้สุด</th><th>ระยะทาง</th><th>ฝนสะสม</th><th>ข้อมูล ณ เวลา</th></tr></thead><tbody id="riskRows"></tbody></table></div></section>'+
   '<section class="watch-panel"><div class="watch-panel-head"><div><h3>สถานการณ์น้ำในจุดเฝ้าระวังใกล้นิคมฯ</h3><p>สถานีระดับน้ำที่ใกล้แต่ละนิคมฯ มากที่สุด แสดงครบทุกนิคมอุตสาหกรรม</p></div></div><div class="watch-tools"><input id="waterSearch" placeholder="ค้นหานิคม สถานี จังหวัด หรือสถานะ"><span class="watch-count" id="waterCount"></span></div><div class="watch-table-wrap"><table class="watch-table"><thead><tr><th>นิคมอุตสาหกรรม</th><th>สถานีใกล้สุด</th><th>จังหวัด/อำเภอ</th><th>ระยะทาง</th><th>ระดับน้ำ</th><th>สถานะ</th><th>ตรวจวัดล่าสุด</th></tr></thead><tbody id="waterRows"></tbody></table></div></section>'+
   '<section class="watch-panel"><div class="watch-panel-head"><div><h3>แนวโน้มฝนและทิศทางกลุ่มฝน</h3><p>เลื่อนแถบเวลาบนแผนที่เพื่อดูฝนล่วงหน้าและการเคลื่อนตัวของกลุ่มฝน</p></div></div><div class="rain-layout"><iframe class="rain-map" title="แผนที่พยากรณ์ฝน" loading="lazy" src="https://embed.windy.com/embed2.html?lat=13.8&lon=100.6&detailLat=13.8&detailLon=100.6&width=900&height=520&zoom=5&level=surface&overlay=rain&product=ecmwf&menu=&message=true&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1"></iframe><aside class="rain-guide"><h4>วิธีใช้เพื่อประกอบการพยากรณ์</h4><ol><li>กดเล่นหรือเลื่อนเวลา เพื่อดูว่าช่วงใดฝนเข้าพื้นที่นิคมฯ</li><li>สังเกตการเคลื่อนของแถบสีจากหลายช่วงเวลา เพื่อประเมินทิศทางกลุ่มฝน</li><li>เทียบกับตารางฝนสะสมและระดับน้ำด้านบนก่อนออกประกาศเฝ้าระวัง</li></ol><p><b>ข้อควรระวัง:</b> แผนที่เป็นผลพยากรณ์จากแบบจำลอง ไม่ใช่ประกาศเตือนภัยอย่างเป็นทางการ ควรยืนยันกับ TMD/ThaiWater ทุกครั้ง</p><div class="source-row"><a href="https://www.tmd.go.th/weather/radar" target="_blank" rel="noopener">เรดาร์ฝน TMD</a><a href="https://www.thaiwater.net/new4all" target="_blank" rel="noopener">ThaiWater</a><a href="https://www.tmd.go.th/weather/forecast/daily" target="_blank" rel="noopener">พยากรณ์อากาศ TMD</a></div></aside></div></section>'+
@@ -4925,7 +4926,7 @@ html body #thaiwater-warning.active{display:block!important}
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",syncMainTabs);else syncMainTabs();
  document.addEventListener("click",function(event){if(event.target.closest(".nav button,.flood-support-heading-actions button"))setTimeout(syncMainTabs,0)});
- [0].forEach(function(ms){setTimeout(syncMainTabs,ms)});
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(syncMainTabs,ms)});
 })();
 </script>
 
@@ -4962,7 +4963,7 @@ body>.ieat-persistent-tabbar{display:none!important}
   openPage(document.querySelector("main .view.active")?.id||"warning");
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
- [0].forEach(function(ms){setTimeout(mount,ms)});
+ [100,700,1800,3500,6000].forEach(function(ms){setTimeout(mount,ms)});
 })();
 </script>
 
@@ -5013,7 +5014,7 @@ body>.ieat-persistent-tabbar{display:none!important}
  async function mount(){
   const panel=document.querySelector("#thaiwater-warning .thaiwater-reference-panel");
   if(!panel)return;
-  panel.innerHTML='<div class="thaiwater-reference-bar"><div><b>พื้นที่เฝ้าระวังน้ำท่วม</b><span>ข้อมูลพื้นที่เสี่ยง 24/48 ชั่วโมง และแผนที่น้ำท่วมสำหรับนิคมอุตสาหกรรม</span></div><a href="https://www.thaiwater.net/new4all/warning" target="_blank" rel="noopener">แหล่งข้อมูล ThaiWater</a></div><div class="tw-risk-map-grid"><section class="tw-risk-card"><div class="tw-risk-head"><h3>พื้นที่เสี่ยงน้ำท่วมจากฝนตกสะสมใน 24 ชม. ข้างหน้า</h3><p>กำลังโหลดข้อมูลล่าสุด…</p></div></section><section class="tw-risk-card"><div class="tw-risk-head"><h3>พื้นที่เสี่ยงน้ำท่วมจากฝนตกสะสมใน 48 ชม. ข้างหน้า</h3><p>กำลังโหลดข้อมูลล่าสุด…</p></div></section><section class="tw-map-card"><div class="tw-map-label">แผนที่สถานการณ์น้ำท่วม</div><iframe allow="local-network-access; geolocation" title="flood" loading="lazy" src="https://www.thaiwater.net/new4all/warning"></iframe></section></div>';
+  panel.innerHTML='<div class="thaiwater-reference-bar"><div><b>พื้นที่เฝ้าระวังน้ำท่วม</b><span>ข้อมูลพื้นที่เสี่ยง 24/48 ชั่วโมง และแผนที่น้ำท่วมสำหรับนิคมอุตสาหกรรม</span></div><a href="https://www.thaiwater.net/new4all/warning" target="_blank" rel="noopener">แหล่งข้อมูล ThaiWater</a></div><div class="tw-risk-map-grid"><section class="tw-risk-card"><div class="tw-risk-head"><h3>พื้นที่เสี่ยงน้ำท่วมจากฝนตกสะสมใน 24 ชม. ข้างหน้า</h3><p>กำลังโหลดข้อมูลล่าสุด…</p></div></section><section class="tw-risk-card"><div class="tw-risk-head"><h3>พื้นที่เสี่ยงน้ำท่วมจากฝนตกสะสมใน 48 ชม. ข้างหน้า</h3><p>กำลังโหลดข้อมูลล่าสุด…</p></div></section><section class="tw-map-card"><div class="tw-map-label">แผนที่สถานการณ์น้ำท่วม</div><iframe allow="local-network-access; geolocation" title="flood" loading="eager" src="https://www.thaiwater.net/new4all/warning"></iframe></section></div>';
   try{
    const r=await fetch(new URL("./data/thaiwater_latest.json",document.baseURI),{cache:"no-store"});
    if(!r.ok)throw new Error("HTTP "+r.status);
@@ -5109,7 +5110,7 @@ body>.ieat-persistent-tabbar{display:none!important}
   setActive(current);
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
- [0].forEach(ms=>setTimeout(mount,ms));
+ [150,800,2200].forEach(ms=>setTimeout(mount,ms));
 })();
 </script>
 
@@ -5130,7 +5131,7 @@ body>.ieat-persistent-tabbar{
   document.querySelectorAll(".topbar,.flood-support-heading-actions,.native-page-tabs,body>.ieat-persistent-tabbar").forEach(function(el){el.remove()});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeOldTabs);else removeOldTabs();
- [0].forEach(function(ms){setTimeout(removeOldTabs,ms)});
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeOldTabs,ms)});
 })();
 </script>
 
@@ -5221,7 +5222,7 @@ body>.ieat-persistent-tabbar{
   placeTabs();
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",bind);else bind();
- [0].forEach(function(ms){setTimeout(placeTabs,ms)});
+ [100,600,1400,2800,5000].forEach(function(ms){setTimeout(placeTabs,ms)});
 })();
 </script>
 
@@ -5269,7 +5270,7 @@ body>.ieat-persistent-tabbar{
   if(main)new MutationObserver(render).observe(main,{subtree:true,attributes:true,attributeFilter:["class"]});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start);else start();
- [0].forEach(ms=>setTimeout(render,ms));
+ [100,500,1200,2500,5000].forEach(ms=>setTimeout(render,ms));
 })();
 </script>
 
@@ -5295,7 +5296,7 @@ body>.ieat-persistent-tabbar{
  document.addEventListener("click",function(e){if(e.target.closest("#floodCornerTabs button"))setTimeout(fixCornerTabs,0)});
  const main=document.querySelector("main.container");
  if(main)new MutationObserver(fixCornerTabs).observe(main,{subtree:true,attributes:true,attributeFilter:["class"]});
- [0].forEach(ms=>setTimeout(fixCornerTabs,ms));
+ [50,200,600,1200,2500,5000].forEach(ms=>setTimeout(fixCornerTabs,ms));
 })();
 </script>
 
@@ -5321,7 +5322,7 @@ body>.ieat-persistent-tabbar{
   if(view&&head&&view.firstElementChild!==head)view.insertBefore(head,view.firstElementChild);
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",moveHeader);else moveHeader();
- [0].forEach(ms=>setTimeout(moveHeader,ms));
+ [50,200,600,1200,2500,5000,8000].forEach(ms=>setTimeout(moveHeader,ms));
 })();
 </script>
 
@@ -5358,7 +5359,7 @@ body>.ieat-persistent-tabbar{
   tabs.querySelectorAll("button").forEach(b=>b.classList.toggle("active",b.dataset.finalView===(document.querySelector("main .view.active")?.id||"warning")));
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
- [0].forEach(ms=>setTimeout(mount,ms));
+ [50,200,600,1200,2500,5000,8000].forEach(ms=>setTimeout(mount,ms));
 })();
 </script>
 
@@ -5430,7 +5431,7 @@ body>.ieat-persistent-tabbar{
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
  document.addEventListener("click",e=>{if(e.target.closest("#finalFloodHeaderTabs button"))setTimeout(mount,0)});
  const main=document.querySelector("main.container");if(main)new MutationObserver(moveNav).observe(main,{subtree:true,attributes:true,attributeFilter:["class"]});
- [0].forEach(ms=>setTimeout(mount,ms));
+ [100,500,1200,2500,5000].forEach(ms=>setTimeout(mount,ms));
 })();
 </script>
 
@@ -5444,7 +5445,7 @@ body>.ieat-persistent-tabbar{
   document.querySelectorAll("#warning>.flood-page-purpose").forEach(function(el){el.remove()});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeOverviewSummary);else removeOverviewSummary();
- [0].forEach(function(ms){setTimeout(removeOverviewSummary,ms)});
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeOverviewSummary,ms)});
 })();
 </script>
 
@@ -5462,7 +5463,7 @@ body>.ieat-persistent-tabbar{
   if(heading&&basin&&heading.nextElementSibling!==basin)heading.insertAdjacentElement("afterend",basin);
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",moveBasinUp);else moveBasinUp();
- [0].forEach(ms=>setTimeout(moveBasinUp,ms));
+ [100,500,1200,2500,5000,8000].forEach(ms=>setTimeout(moveBasinUp,ms));
 })();
 </script>
 
@@ -5481,7 +5482,7 @@ body>.ieat-persistent-tabbar{
   if(report&&basin&&report.nextElementSibling!==basin)report.insertAdjacentElement("afterend",basin);
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",placeAfterDailyReport);else placeAfterDailyReport();
- [0].forEach(ms=>setTimeout(placeAfterDailyReport,ms));
+ [100,500,1200,2500,5000,8000,10000].forEach(ms=>setTimeout(placeAfterDailyReport,ms));
 })();
 </script>
 
@@ -5493,7 +5494,7 @@ body>.ieat-persistent-tabbar{
 (function(){
  function removeRidLabel(){document.querySelectorAll(".rid-basin-frame-label").forEach(function(el){el.remove()})}
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeRidLabel);else removeRidLabel();
- [0].forEach(function(ms){setTimeout(removeRidLabel,ms)});
+ [100,500,1200,2500].forEach(function(ms){setTimeout(removeRidLabel,ms)});
 })();
 </script>
 
@@ -5510,7 +5511,7 @@ body>.ieat-persistent-tabbar{
   document.querySelectorAll("#thaiwater-warning>.flood-page-purpose").forEach(function(el){el.remove()});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeWatchPurpose);else removeWatchPurpose();
- [0].forEach(function(ms){setTimeout(removeWatchPurpose,ms)});
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeWatchPurpose,ms)});
 })();
 </script>
 
@@ -5540,7 +5541,7 @@ body>.ieat-persistent-tabbar{
   if(frame&&frame.src.indexOf("thaiwater.net/new4all/warning")===-1)frame.src="https://www.thaiwater.net/new4all/warning";
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",ensureThaiwaterMap);else ensureThaiwaterMap();
- [0].forEach(ms=>setTimeout(ensureThaiwaterMap,ms));
+ [100,500,1200,2500,5000].forEach(ms=>setTimeout(ensureThaiwaterMap,ms));
 })();
 </script>
 
@@ -5601,7 +5602,7 @@ body>.ieat-persistent-tabbar{
   if(!document.getElementById("swocWatchFrame").src)show("reservoir");
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
- [0].forEach(ms=>setTimeout(mount,ms));
+ [100,500,1200,2500,5000].forEach(ms=>setTimeout(mount,ms));
 })();
 </script>
 
@@ -5618,7 +5619,7 @@ body>.ieat-persistent-tabbar{
   });
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeRainTrend);else removeRainTrend();
- [0].forEach(function(ms){setTimeout(removeRainTrend,ms)});
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeRainTrend,ms)});
 })();
 </script>
 
@@ -5666,7 +5667,7 @@ body>.ieat-persistent-tabbar{
   document.querySelectorAll("#thaiwater-warning .watch-time,#thaiwater-warning #watchDataTime").forEach(function(el){el.remove()});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeWatchUpdatedTime);else removeWatchUpdatedTime();
- [0].forEach(function(ms){setTimeout(removeWatchUpdatedTime,ms)});
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeWatchUpdatedTime,ms)});
 })();
 </script>
 
@@ -5712,7 +5713,7 @@ body.watch-page-active,body.watch-page-active main.container{background:#fff!imp
   document.querySelectorAll("#infographic>.flood-page-purpose,#infographic #finalFloodHeaderTabs,#infographic #floodCornerTabs,#infographic .native-page-tabs").forEach(function(el){el.remove()});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeMarkedExportParts);else removeMarkedExportParts();
- [0].forEach(function(ms){setTimeout(removeMarkedExportParts,ms)});
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeMarkedExportParts,ms)});
 })();
 </script>
 
@@ -5726,7 +5727,7 @@ body.watch-page-active,body.watch-page-active main.container{background:#fff!imp
   document.querySelectorAll("#infographic .report-edit-links").forEach(function(el){el.remove()});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeExportMapLinks);else removeExportMapLinks();
- [0].forEach(function(ms){setTimeout(removeExportMapLinks,ms)});
+ [100,500,1200,2500].forEach(function(ms){setTimeout(removeExportMapLinks,ms)});
 })();
 </script>
 
@@ -5807,7 +5808,7 @@ body.infographic-modal-open{overflow:hidden!important}
   }
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
- [0].forEach(ms=>setTimeout(mount,ms));
+ [100,600,1500,3000,5000].forEach(ms=>setTimeout(mount,ms));
 })();
 </script>
 
@@ -5845,7 +5846,7 @@ body.infographic-modal-open{overflow:hidden!important}
   }
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
- [0].forEach(ms=>setTimeout(mount,ms));
+ [100,500,1200,2500,5000].forEach(ms=>setTimeout(mount,ms));
 })();
 </script>
 
@@ -5859,7 +5860,7 @@ body.infographic-modal-open{overflow:hidden!important}
   document.querySelectorAll("#infographic .multi-report-toolbar").forEach(function(el){el.remove()});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeExportToolbar);else removeExportToolbar();
- [0].forEach(function(ms){setTimeout(removeExportToolbar,ms)});
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeExportToolbar,ms)});
 })();
 </script>
 
@@ -5885,7 +5886,7 @@ body.infographic-modal-open{overflow:hidden!important}
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeFloatingExportNav);else removeFloatingExportNav();
  const view=document.getElementById("infographic");
  if(view)new MutationObserver(removeFloatingExportNav).observe(view,{childList:true,subtree:true});
- [0].forEach(function(ms){setTimeout(removeFloatingExportNav,ms)});
+ [100,500,1200,2500,5000,8000,12000].forEach(function(ms){setTimeout(removeFloatingExportNav,ms)});
 })();
 </script>
 
@@ -6121,7 +6122,7 @@ main input:focus,main select:focus,main textarea:focus{
   document.querySelectorAll("#thaiwater-warning .thaiwater-reference-bar").forEach(function(el){el.remove()});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeWatchFloodBar);else removeWatchFloodBar();
- [0].forEach(function(ms){setTimeout(removeWatchFloodBar,ms)});
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeWatchFloodBar,ms)});
 })();
 </script>
 
@@ -6255,7 +6256,7 @@ body main.container :is(#warning,#thaiwater-warning,#infographic) [class*="-card
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",lockTypography);else lockTypography();
  const main=document.querySelector("main.container");if(main)new MutationObserver(lockTypography).observe(main,{subtree:true,childList:true,characterData:true});
- [0].forEach(ms=>setTimeout(lockTypography,ms));
+ [100,500,1200,2500,5000,8000].forEach(ms=>setTimeout(lockTypography,ms));
 })();
 </script>
 
@@ -6368,7 +6369,7 @@ body main.container #exportHeaderTabs button.active{
   });
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",lockHeaderTypography);else lockHeaderTypography();
- [0].forEach(ms=>setTimeout(lockHeaderTypography,ms));
+ [100,500,1200,2500,5000].forEach(ms=>setTimeout(lockHeaderTypography,ms));
 })();
 </script>
 
@@ -6397,7 +6398,7 @@ html body td{
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",matchHubFont);else matchHubFont();
  const main=document.querySelector("main");if(main)new MutationObserver(matchHubFont).observe(main,{subtree:true,childList:true});
- [0].forEach(ms=>setTimeout(matchHubFont,ms));
+ [100,500,1200,2500,5000].forEach(ms=>setTimeout(matchHubFont,ms));
 })();
 </script>
 
@@ -6599,7 +6600,7 @@ body main.container #thaiwater-warning td.alert-status-cell *{
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",colorAlertCells);else colorAlertCells();
  const watch=document.getElementById("thaiwater-warning");if(watch)new MutationObserver(colorAlertCells).observe(watch,{subtree:true,childList:true,characterData:true});
- [0].forEach(ms=>setTimeout(colorAlertCells,ms));
+ [100,500,1200,2500,5000].forEach(ms=>setTimeout(colorAlertCells,ms));
 })();
 </script>
 
@@ -6663,7 +6664,7 @@ body main.container #thaiwater-warning #finalFloodHeaderTabs button.active{
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",lockWatchColors);else lockWatchColors();
  const main=document.querySelector("main.container");if(main)new MutationObserver(lockWatchColors).observe(main,{subtree:true,attributes:true,attributeFilter:["class"]});
- [0].forEach(ms=>setTimeout(lockWatchColors,ms));
+ [100,500,1200,2500,5000].forEach(ms=>setTimeout(lockWatchColors,ms));
 })();
 </script>
 
@@ -6763,7 +6764,7 @@ body main.container #thaiwater-warning .swoc-live-frame iframe{
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",lockSwocTabColors);else lockSwocTabColors();
  document.addEventListener("click",function(e){if(e.target.closest(".swoc-watch-tab"))setTimeout(lockSwocTabColors,0)});
  const area=document.querySelector("#thaiwater-warning");if(area)new MutationObserver(lockSwocTabColors).observe(area,{subtree:true,attributes:true,attributeFilter:["class"]});
- [0].forEach(ms=>setTimeout(lockSwocTabColors,ms));
+ [100,500,1200,2500,5000].forEach(ms=>setTimeout(lockSwocTabColors,ms));
 })();
 </script>
 
@@ -6852,7 +6853,7 @@ body main.container #thaiwater-warning .swoc-live-frame iframe{
   lat=n(lat);lon=n(lon);if(lat==null||lon==null)return;
   const card=document.querySelector("#thaiwater-warning .tw-map-card");if(!card)return;
   let panel=card.querySelector(".focused-location-map");
-  if(!panel){panel=document.createElement("div");panel.className="focused-location-map";panel.innerHTML='<div class="focused-location-head"><b></b><button type="button">กลับไปแผนที่ ThaiWater</button></div><iframe title="แผนที่ซูมตำแหน่งที่เลือก" loading="lazy"></iframe>';card.appendChild(panel);panel.querySelector("button").onclick=()=>panel.remove()}
+  if(!panel){panel=document.createElement("div");panel.className="focused-location-map";panel.innerHTML='<div class="focused-location-head"><b></b><button type="button">กลับไปแผนที่ ThaiWater</button></div><iframe title="แผนที่ซูมตำแหน่งที่เลือก" loading="eager"></iframe>';card.appendChild(panel);panel.querySelector("button").onclick=()=>panel.remove()}
   panel.querySelector("b").textContent=title||"ตำแหน่งที่เลือก";
   panel.querySelector("iframe").src=osmUrl(lat,lon);
   card.scrollIntoView({behavior:"smooth",block:"center"});
@@ -6893,938 +6894,6 @@ body main.container #thaiwater-warning .swoc-live-frame iframe{
   const view=document.getElementById("thaiwater-warning");if(view)new MutationObserver(prepare).observe(view,{subtree:true,childList:true});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
-})();
-</script>
-
-<style id="export-page-colors-typography-20260909-v1">
-/* หน้าส่งออกข้อมูล: ใช้สีและลำดับตัวอักษรเดียวกับหน้าพื้นที่เฝ้าระวัง */
-body main.container #infographic{
- font-family:"Noto Sans Thai",sans-serif!important;
- color:#0d1a2b!important;
- font-size:16px!important;
- font-weight:400!important;
- line-height:1.6!important;
-}
-body main.container #infographic,
-body main.container #infographic *:not(svg):not(path){
- font-family:"Noto Sans Thai",sans-serif!important;
-}
-body main.container #infographic>.export-page-heading h1{
- color:#0082ca!important;
- font-size:24px!important;
- font-weight:600!important;
- line-height:1.4!important;
-}
-body main.container #infographic>.export-page-heading p,
-body main.container #infographic p,
-body main.container #infographic li{
- font-size:16px!important;
- font-weight:400!important;
- line-height:1.6!important;
-}
-body main.container #infographic h2{
- font-size:20px!important;
- font-weight:600!important;
- line-height:1.45!important;
-}
-body main.container #infographic h3{
- font-size:18px!important;
- font-weight:500!important;
- line-height:1.5!important;
-}
-body main.container #infographic h4{
- font-size:16px!important;
- font-weight:500!important;
- line-height:1.5!important;
-}
-body main.container #infographic small,
-body main.container #infographic .infographic-card-head span{
- font-size:14px!important;
- font-weight:400!important;
- line-height:1.5!important;
-}
-body main.container #infographic table,
-body main.container #infographic table th,
-body main.container #infographic table td{
- font-size:14px!important;
- line-height:1.5!important;
-}
-body main.container #infographic table th{font-weight:600!important}
-body main.container #infographic table td{font-weight:400!important}
-body main.container #infographic button,
-body main.container #infographic [role="button"]{
- font-size:15px!important;
- font-weight:500!important;
-}
-body main.container #infographic .infographic-card-head h2{
- color:#0082ca!important;
- font-size:20px!important;
- font-weight:600!important;
- line-height:1.45!important;
-}
-body main.container #infographic #exportHeaderTabs button{
- background:#0072cf!important;
- color:#fff!important;
- font-size:16px!important;
- font-weight:500!important;
-}
-body main.container #infographic #exportHeaderTabs button.active{
- background:#55a51c!important;
- color:#fff!important;
-}
-@media(max-width:720px){
- body main.container #infographic>.export-page-heading h1{font-size:22px!important}
- body main.container #infographic h2,
- body main.container #infographic .infographic-card-head h2{font-size:19px!important}
- body main.container #infographic h3{font-size:17px!important}
- body main.container #infographic #exportHeaderTabs button{font-size:14px!important}
-}
-</style>
-
-<style id="complete-daily-export-report-20260909-v1">
-#infographic .daily-export-control{
- display:flex!important;align-items:center!important;justify-content:space-between!important;
- gap:16px!important;margin:-4px 0 18px!important;padding:12px 16px!important;
- background:#fff!important;border:1px solid #bcced6!important;border-radius:12px!important;
- box-shadow:0 4px 12px rgba(13,26,43,.07)!important
-}
-#infographic .daily-export-meta{display:flex!important;flex-direction:column!important;gap:2px!important;min-width:0!important}
-#infographic .daily-export-meta b{color:#0082ca!important;font-size:16px!important;font-weight:600!important}
-#infographic .daily-export-meta span{color:#526777!important;font-size:14px!important;font-weight:400!important}
-#infographic .daily-export-actions{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:8px!important;flex-wrap:wrap!important}
-#infographic .daily-export-actions button{
- min-height:40px!important;padding:8px 16px!important;border:0!important;border-radius:999px!important;
- background:#0072cf!important;color:#fff!important;font-size:15px!important;font-weight:500!important;
- cursor:pointer!important;box-shadow:0 4px 10px rgba(0,114,207,.18)!important
-}
-#infographic .daily-export-actions .save-all-report{background:#199051!important}
-#infographic .daily-export-actions button:disabled{opacity:.65!important;cursor:wait!important}
-#infographic .report-freshness{
- display:inline-flex!important;align-items:center!important;gap:6px!important
-}
-#infographic .report-freshness:before{
- content:"";width:8px;height:8px;border-radius:50%;background:#199051;box-shadow:0 0 0 3px rgba(25,144,81,.14)
-}
-#infographic.report-capture-mode .report-pages{
- display:block!important;width:1240px!important;max-width:none!important;background:#f2f7f9!important;padding:18px!important
-}
-#infographic.report-capture-mode .infographic-gallery-item{
- width:100%!important;margin:0 0 18px!important;break-inside:avoid!important
-}
-#infographic.report-capture-mode .infographic-card-actions{display:none!important}
-#infographic.report-capture-mode .infographic-preview{overflow:visible!important}
-@media(max-width:760px){
- #infographic .daily-export-control{align-items:stretch!important;flex-direction:column!important}
- #infographic .daily-export-actions{justify-content:flex-start!important}
-}
-</style>
-<script id="complete-daily-export-report-20260909-v1-script">
-(function(){
- "use strict";
- const DATA_URL="./data/thaiwater_latest.json";
- const REFRESH_MS=5*60*1000;
- let refreshing=false,lastDataTime="";
- const thDateTime=value=>{
-  const d=value?new Date(value):new Date();
-  return Number.isNaN(d.getTime())?new Date().toLocaleString("th-TH"):d.toLocaleString("th-TH",{dateStyle:"long",timeStyle:"short"});
- };
- function safeName(){
-  const d=new Date(),p=n=>String(n).padStart(2,"0");
-  return "รายงานสถานการณ์น้ำ_กนอ_"+d.getFullYear()+p(d.getMonth()+1)+p(d.getDate())+"_"+p(d.getHours())+p(d.getMinutes())+".png";
- }
- function getSourceTime(data){
-  return data&&(
-   data.updated_at||data.generated_at||data.update_time||data.datetime||
-   data.flash_flood&&data.flash_flood.updated_at
-  );
- }
- function mountControls(){
-  const view=document.getElementById("infographic");
-  const heading=view&&view.querySelector(":scope>.export-page-heading");
-  if(!view||!heading)return null;
-  let bar=view.querySelector(":scope>.daily-export-control");
-  if(!bar){
-   bar=document.createElement("section");
-   bar.className="daily-export-control";
-   bar.setAttribute("aria-label","เครื่องมือรายงานสถานการณ์น้ำประจำวัน");
-   bar.innerHTML='<div class="daily-export-meta"><b>รายงานสถานการณ์น้ำประจำวัน</b><span class="report-freshness" id="dailyExportUpdated">กำลังตรวจสอบข้อมูลล่าสุด…</span></div><div class="daily-export-actions"><button type="button" id="refreshDailyExport">อัปเดตข้อมูลล่าสุด</button><button type="button" class="save-all-report" id="saveAllDailyReport">บันทึกภาพรายงานทั้งหมด</button></div>';
-   heading.insertAdjacentElement("afterend",bar);
-   bar.querySelector("#refreshDailyExport").addEventListener("click",()=>refreshData(true));
-   bar.querySelector("#saveAllDailyReport").addEventListener("click",saveAll);
-  }
-  return bar;
- }
- function updateDates(data){
-  const now=new Date();
-  const start=new Date(now);start.setHours(7,0,0,0);
-  if(now<start)start.setDate(start.getDate()-1);
-  const end=new Date(start.getTime()+86400000);
-  const fmt=d=>d.toLocaleString("th-TH",{day:"numeric",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"});
-  const period="วันที่ "+fmt(start)+" น. ถึง "+fmt(end)+" น. (เวลากรุงเทพฯ)";
-  const main=document.getElementById("reportPeriodTitle");if(main)main.textContent=period;
-  document.querySelectorAll("#infographic .shared-report-period").forEach(el=>el.textContent=period);
-  const source=getSourceTime(data);
-  lastDataTime=source||new Date().toISOString();
-  const status=document.getElementById("dailyExportUpdated");
-  if(status)status.textContent="ข้อมูลล่าสุด "+thDateTime(lastDataTime)+" · ตรวจสอบอัตโนมัติทุก 5 นาที";
- }
- async function refreshData(manual){
-  if(refreshing)return;
-  refreshing=true;
-  const btn=document.getElementById("refreshDailyExport");
-  if(btn){btn.disabled=true;btn.textContent="กำลังอัปเดต…"}
-  try{
-   const response=await fetch(new URL(DATA_URL,document.baseURI),{cache:"no-store"});
-   if(!response.ok)throw new Error("HTTP "+response.status);
-   const data=await response.json();
-   window.IEAT_LIVE_DATA=data;
-   if(typeof window.renderExecutiveReport==="function")window.renderExecutiveReport(window.reportPeriod||"24h");
-   if(typeof window.renderNearbyWatchTable==="function")window.renderNearbyWatchTable(data);
-   if(typeof window.updateMapShot==="function")await window.updateMapShot();
-   window.dispatchEvent(new CustomEvent("ieat:data-ready",{detail:data}));
-   updateDates(data);
-   if(manual){
-    const status=document.getElementById("dailyExportUpdated");
-    if(status)status.textContent="อัปเดตสำเร็จ "+new Date().toLocaleString("th-TH")+" · ตรวจสอบอัตโนมัติทุก 5 นาที";
-   }
-  }catch(error){
-   updateDates(window.IEAT_LIVE_DATA||null);
-   const status=document.getElementById("dailyExportUpdated");
-   if(status)status.textContent="ใช้ข้อมูลล่าสุดที่บันทึกในระบบ · จะตรวจสอบใหม่อัตโนมัติ";
-   console.error("daily export refresh",error);
-  }finally{
-   refreshing=false;
-   if(btn){btn.disabled=false;btn.textContent="อัปเดตข้อมูลล่าสุด"}
-  }
- }
- async function saveAll(){
-  const view=document.getElementById("infographic");
-  const pages=view&&view.querySelector(".report-pages");
-  const btn=document.getElementById("saveAllDailyReport");
-  if(!view||!pages)return;
-  if(typeof html2canvas!=="function"){alert("ระบบบันทึกภาพกำลังโหลด โปรดลองอีกครั้ง");return}
-  btn.disabled=true;btn.textContent="กำลังสร้างภาพ…";
-  view.classList.add("report-capture-mode");
-  try{
-   await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
-   const canvas=await html2canvas(pages,{scale:1.5,useCORS:true,allowTaint:false,backgroundColor:"#f2f7f9",logging:false});
-   canvas.toBlob(blob=>{
-    if(!blob){alert("ไม่สามารถสร้างไฟล์ภาพได้");return}
-    const a=document.createElement("a"),url=URL.createObjectURL(blob);
-    a.href=url;a.download=safeName();document.body.appendChild(a);a.click();a.remove();
-    setTimeout(()=>URL.revokeObjectURL(url),1500);
-   },"image/png",.96);
-  }catch(error){
-   console.error(error);alert("ไม่สามารถบันทึกภาพรวมได้ กรุณาใช้ปุ่มดาวน์โหลด PNG ของแต่ละรายงาน");
-  }finally{
-   view.classList.remove("report-capture-mode");
-   btn.disabled=false;btn.textContent="บันทึกภาพรายงานทั้งหมด";
-  }
- }
- function init(){
-  /* ปิดการสร้างแถบควบคุมซ้ำ ซึ่งชนกับคำสั่งซ่อนแถบและทำให้หน้าโหลดวน */
-  updateDates(window.IEAT_LIVE_DATA||null);
-  refreshData(false);
-  setInterval(()=>refreshData(false),REFRESH_MS);
-  document.addEventListener("visibilitychange",()=>{if(!document.hidden)refreshData(false)});
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
-})();
-</script>
-
-<style id="compact-headings-flat-export-20260909-v1">
-/* แถบหัวหน้าพื้นที่เฝ้าระวัง: เหลือเฉพาะหัวข้อหลัก */
-body main.container #thaiwater-warning .watch-intro{
- min-height:64px!important;
- padding:10px 20px!important;
- margin-bottom:12px!important;
-}
-body main.container #thaiwater-warning .watch-intro h1,
-body main.container #thaiwater-warning .watch-intro h2{
- margin:0!important;
- color:#004b8d!important;
- font-size:22px!important;
- line-height:1.35!important;
-}
-body main.container #thaiwater-warning .watch-intro p{display:none!important}
-
-/* เครื่องมือรายงานประจำวันแบบแบน ไม่มีกรอบ เงา หรือมิติ */
-body main.container #infographic .daily-export-control{
- margin:0 0 14px!important;
- padding:6px 0 10px!important;
- background:transparent!important;
- border:0!important;
- border-radius:0!important;
- box-shadow:none!important;
-}
-body main.container #infographic .daily-export-meta b{color:#004b8d!important}
-body main.container #infographic .infographic-card-head{
- display:none!important;
- height:0!important;
- min-height:0!important;
- margin:0!important;
- padding:0!important;
- border:0!important;
- overflow:hidden!important;
-}
-body main.container #infographic .infographic-gallery-item{
- border-radius:10px!important;
- box-shadow:none!important;
-}
-</style>
-<script id="compact-headings-flat-export-20260909-v1-script">
-(function(){
- "use strict";
- function clean(){
-  const intro=document.querySelector("#thaiwater-warning .watch-intro");
-  if(intro){
-   intro.querySelectorAll("p").forEach(function(el){el.remove()});
-   const title=intro.querySelector("h1,h2");
-   if(title)title.style.setProperty("color","#004b8d","important");
-  }
-  document.querySelectorAll("#infographic .infographic-card-head").forEach(function(el){el.remove()});
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",clean);else clean();
- const main=document.querySelector("main.container");
- if(main)new MutationObserver(clean).observe(main,{subtree:true,childList:true});
- [0].forEach(function(ms){setTimeout(clean,ms)});
-})();
-</script>
-
-<style id="export-sarabun-font-remove-subtitle-20260909-v1">
-body main.container #infographic,
-body main.container #infographic *:not(svg):not(path){
- font-family:"Sarabun","TH Sarabun New",Tahoma,sans-serif!important;
-}
-body main.container #infographic{
- font-size:16px!important;
- font-weight:400!important;
- line-height:1.65!important;
-}
-body main.container #infographic>.export-page-heading p{display:none!important}
-body main.container #infographic>.export-page-heading{
- min-height:82px!important;
- padding-top:14px!important;
- padding-bottom:14px!important;
-}
-body main.container #infographic>.export-page-heading h1{
- font-family:"Sarabun","TH Sarabun New",Tahoma,sans-serif!important;
- font-size:24px!important;
- font-weight:600!important;
- line-height:1.4!important;
-}
-body main.container #infographic h2,
-body main.container #infographic .infographic-card-head h2,
-body main.container #infographic .export-sheet h2{
- font-family:"Sarabun","TH Sarabun New",Tahoma,sans-serif!important;
- font-size:20px!important;
- font-weight:600!important;
- line-height:1.45!important;
-}
-body main.container #infographic h3,
-body main.container #infographic .export-sheet h3{
- font-family:"Sarabun","TH Sarabun New",Tahoma,sans-serif!important;
- font-size:18px!important;
- font-weight:500!important;
- line-height:1.5!important;
-}
-body main.container #infographic p,
-body main.container #infographic li,
-body main.container #infographic label,
-body main.container #infographic figcaption{
- font-family:"Sarabun","TH Sarabun New",Tahoma,sans-serif!important;
- font-size:16px!important;
- font-weight:400!important;
- line-height:1.6!important;
-}
-body main.container #infographic small,
-body main.container #infographic .sheet-page-label,
-body main.container #infographic .sheet-footer,
-body main.container #infographic .sheet-map-note{
- font-family:"Sarabun","TH Sarabun New",Tahoma,sans-serif!important;
- font-size:14px!important;
- font-weight:400!important;
-}
-body main.container #infographic table,
-body main.container #infographic th,
-body main.container #infographic td{
- font-family:"Sarabun","TH Sarabun New",Tahoma,sans-serif!important;
- font-size:14px!important;
- line-height:1.5!important;
-}
-body main.container #infographic th{font-weight:600!important}
-body main.container #infographic td{font-weight:400!important}
-body main.container #infographic button,
-body main.container #infographic [role="button"]{
- font-family:"Sarabun","TH Sarabun New",Tahoma,sans-serif!important;
-}
-</style>
-<script id="export-sarabun-font-remove-subtitle-20260909-v1-script">
-(function(){
- "use strict";
- function cleanExportSubtitle(){
-  const heading=document.querySelector("#infographic>.export-page-heading");
-  if(!heading)return;
-  heading.querySelectorAll("p").forEach(function(el){
-   if(el.textContent.includes("เลือกรายงาน ตรวจสอบข้อมูล และดาวน์โหลดเป็น PNG/PDF สำหรับ LINE หรือรายงานผู้บริหาร"))el.remove();
-  });
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",cleanExportSubtitle);else cleanExportSubtitle();
- const view=document.getElementById("infographic");
- if(view)new MutationObserver(cleanExportSubtitle).observe(view,{subtree:true,childList:true});
- [0].forEach(function(ms){setTimeout(cleanExportSubtitle,ms)});
-})();
-</script>
-
-<style id="compact-export-header-final-20260909-v1">
-body main.container #infographic>.export-page-heading{
- min-height:64px!important;
- padding:8px 20px!important;
- margin-bottom:12px!important;
- gap:18px!important;
-}
-body main.container #infographic>.export-page-heading h1{
- margin:0!important;
- color:#004b8d!important;
- font-size:22px!important;
- font-weight:600!important;
- line-height:1.3!important;
-}
-body main.container #infographic #exportHeaderTabs button{
- min-height:42px!important;
- padding-top:7px!important;
- padding-bottom:7px!important;
-}
-</style>
-<script id="compact-export-header-final-20260909-v1-script">
-(function(){
- function lockExportHeader(){
-  const h=document.querySelector("#infographic>.export-page-heading h1");
-  if(h)h.style.setProperty("color","#004b8d","important");
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",lockExportHeader);else lockExportHeader();
- [0].forEach(function(ms){setTimeout(lockExportHeader,ms)});
-})();
-</script>
-
-<style id="force-sarabun-entire-export-page-20260909-v2">
-html body.export-sarabun-active,
-html body.export-sarabun-active main,
-html body.export-sarabun-active main.container,
-html body.export-sarabun-active #infographic,
-html body.export-sarabun-active #infographic *,
-html body main.container #infographic,
-html body main.container #infographic *{
- font-family:"Sarabun",sans-serif!important;
-}
-html body.export-sarabun-active button,
-html body.export-sarabun-active input,
-html body.export-sarabun-active select,
-html body.export-sarabun-active textarea,
-html body.export-sarabun-active table,
-html body.export-sarabun-active th,
-html body.export-sarabun-active td,
-html body.export-sarabun-active [contenteditable="true"]{
- font-family:"Sarabun",sans-serif!important;
-}
-</style>
-<script id="force-sarabun-entire-export-page-20260909-v2-script">
-(function(){
- "use strict";
- function sync(){
-  const active=!!document.querySelector("#infographic.active");
-  document.body.classList.toggle("export-sarabun-active",active);
-  if(active){
-   document.querySelectorAll("#infographic,#infographic *").forEach(function(el){
-    el.style.setProperty("font-family","Sarabun, sans-serif","important");
-   });
-  }
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",sync);else sync();
- const main=document.querySelector("main.container");
- if(main)new MutationObserver(sync).observe(main,{subtree:true,attributes:true,attributeFilter:["class"],childList:true});
- document.addEventListener("click",function(){setTimeout(sync,0)});
- [0].forEach(function(ms){setTimeout(sync,ms)});
-})();
-</script>
-
-<style id="transparent-export-header-20260909-v1">
-html body main.container #infographic>.export-page-heading{
- background:transparent!important;
- border:0!important;
- box-shadow:none!important;
-}
-</style>
-
-<style id="flat-underline-header-tabs-20260909-v1">
-html body main.container #finalFloodHeaderTabs,
-html body main.container #exportHeaderTabs{
- display:flex!important;
- align-items:flex-end!important;
- justify-content:flex-start!important;
- gap:0!important;
- min-height:44px!important;
- margin-left:auto!important;
- padding:0 0 1px!important;
- background:transparent!important;
- border-bottom:1px solid #d5dadd!important;
- border-radius:0!important;
- box-shadow:none!important;
- overflow:visible!important;
-}
-html body main.container #finalFloodHeaderTabs button,
-html body main.container #exportHeaderTabs button{
- position:relative!important;
- display:inline-flex!important;
- align-items:center!important;
- justify-content:center!important;
- min-width:100px!important;
- min-height:44px!important;
- padding:9px 14px!important;
- margin:0!important;
- background:transparent!important;
- border:0!important;
- border-radius:0!important;
- box-shadow:none!important;
- color:#5f6670!important;
- font-family:"Sarabun",sans-serif!important;
- font-size:16px!important;
- font-weight:400!important;
- line-height:1.4!important;
-}
-html body main.container #finalFloodHeaderTabs button:hover,
-html body main.container #exportHeaderTabs button:hover{
- color:#1565c0!important;
- background:#f2f7f9!important;
-}
-html body main.container #finalFloodHeaderTabs button.active,
-html body main.container #exportHeaderTabs button.active{
- background:transparent!important;
- color:#1565c0!important;
- font-weight:500!important;
- box-shadow:none!important;
-}
-html body main.container #finalFloodHeaderTabs button.active:after,
-html body main.container #exportHeaderTabs button.active:after{
- content:""!important;
- position:absolute!important;
- left:12px!important;
- right:12px!important;
- bottom:-2px!important;
- height:2px!important;
- background:#1565c0!important;
- border-radius:2px 2px 0 0!important;
-}
-@media(max-width:620px){
- html body main.container #finalFloodHeaderTabs,
- html body main.container #exportHeaderTabs{width:100%!important}
- html body main.container #finalFloodHeaderTabs button,
- html body main.container #exportHeaderTabs button{
-  flex:1 1 0!important;min-width:0!important;padding:8px 6px!important;font-size:14px!important
- }
-}
-</style>
-
-<style id="exact-flat-tabs-white-page-20260909-v2">
-html,
-body,
-body main.container,
-body main.container #warning,
-body main.container #thaiwater-warning,
-body main.container #infographic,
-body main.container .view,
-body main.container .view.active{
- background:#ffffff!important;
-}
-
-/* ยกแถบเมนูขึ้นเป็นแถวบนเต็มความกว้างแบบตัวอย่าง */
-body main.container #warning>.flood-support-heading,
-body main.container #thaiwater-warning .watch-intro,
-body main.container #infographic>.export-page-heading{
- display:flex!important;
- flex-wrap:wrap!important;
- align-items:center!important;
- padding:0 20px 10px!important;
- min-height:0!important;
- background:#fff!important;
-}
-body main.container #warning>.flood-support-heading>div:not(#finalFloodHeaderTabs),
-body main.container #thaiwater-warning .watch-intro>div:not(#finalFloodHeaderTabs),
-body main.container #infographic>.export-page-heading>div:not(#exportHeaderTabs){
- order:2!important;
-}
-html body main.container #finalFloodHeaderTabs,
-html body main.container #exportHeaderTabs{
- order:1!important;
- flex:0 0 calc(100% + 40px)!important;
- width:calc(100% + 40px)!important;
- min-height:55px!important;
- margin:0 -20px 10px!important;
- padding:0 14px!important;
- align-items:stretch!important;
- justify-content:flex-start!important;
- gap:0!important;
- background:#fff!important;
- border-top:0!important;
- border-bottom:1px solid #d9d9d9!important;
- box-shadow:0 -2px 8px rgba(0,0,0,.12)!important;
-}
-html body main.container #finalFloodHeaderTabs button,
-html body main.container #exportHeaderTabs button{
- flex:0 0 auto!important;
- min-width:86px!important;
- min-height:54px!important;
- padding:14px 14px 11px!important;
- background:#fff!important;
- color:#646464!important;
- border:0!important;
- border-radius:0!important;
- box-shadow:none!important;
- font-family:"Sarabun",sans-serif!important;
- font-size:16px!important;
- font-weight:400!important;
-}
-html body main.container #finalFloodHeaderTabs button:hover,
-html body main.container #exportHeaderTabs button:hover{
- background:#fff!important;
- color:#1565c0!important;
-}
-html body main.container #finalFloodHeaderTabs button.active,
-html body main.container #exportHeaderTabs button.active{
- background:#fff!important;
- color:#1f5fe0!important;
- font-weight:400!important;
-}
-html body main.container #finalFloodHeaderTabs button.active:after,
-html body main.container #exportHeaderTabs button.active:after{
- left:7px!important;
- right:7px!important;
- bottom:-1px!important;
- height:2px!important;
- background:#2f6fe8!important;
- border-radius:0!important;
-}
-@media(max-width:620px){
- html body main.container #finalFloodHeaderTabs button,
- html body main.container #exportHeaderTabs button{
-  min-width:0!important;flex:1 1 0!important;padding-left:6px!important;padding-right:6px!important
- }
-}
-</style>
-
-<style id="blue-outline-dashboard-tabs-20260909-v3">
-html body main.container #finalFloodHeaderTabs,
-html body main.container #exportHeaderTabs{
- box-sizing:border-box!important;
- display:flex!important;
- align-items:stretch!important;
- justify-content:flex-start!important;
- gap:0!important;
- flex:0 0 calc(100% + 40px)!important;
- width:calc(100% + 40px)!important;
- min-height:64px!important;
- margin:0 -20px 12px!important;
- padding:0 14px!important;
- background:#fff!important;
- border:4px solid #0099d8!important;
- border-radius:0!important;
- box-shadow:none!important;
- overflow:visible!important;
-}
-html body main.container #finalFloodHeaderTabs button,
-html body main.container #exportHeaderTabs button{
- position:relative!important;
- flex:0 0 auto!important;
- display:inline-flex!important;
- align-items:center!important;
- justify-content:center!important;
- min-width:92px!important;
- min-height:56px!important;
- margin:0!important;
- padding:13px 15px 10px!important;
- background:#fff!important;
- border:0!important;
- border-radius:0!important;
- box-shadow:none!important;
- color:#666!important;
- font-family:"Sarabun",sans-serif!important;
- font-size:16px!important;
- font-weight:400!important;
- line-height:1.4!important;
-}
-html body main.container #finalFloodHeaderTabs button:hover,
-html body main.container #exportHeaderTabs button:hover{
- background:#fff!important;
- color:#1f5fe0!important;
-}
-html body main.container #finalFloodHeaderTabs button.active,
-html body main.container #exportHeaderTabs button.active{
- background:#fff!important;
- color:#1f5fe0!important;
- font-weight:400!important;
-}
-html body main.container #finalFloodHeaderTabs button.active:after,
-html body main.container #exportHeaderTabs button.active:after{
- content:""!important;
- position:absolute!important;
- left:8px!important;
- right:8px!important;
- bottom:12px!important;
- height:2px!important;
- background:#2f6fe8!important;
- border-radius:0!important;
-}
-@media(max-width:620px){
- html body main.container #finalFloodHeaderTabs,
- html body main.container #exportHeaderTabs{padding-left:4px!important;padding-right:4px!important}
- html body main.container #finalFloodHeaderTabs button,
- html body main.container #exportHeaderTabs button{
-  min-width:0!important;flex:1 1 0!important;padding-left:4px!important;padding-right:4px!important;font-size:14px!important
- }
-}
-</style>
-
-<style id="purple-tabs-export-title-inline-20260909-v1">
-html body main.container #finalFloodHeaderTabs,
-html body main.container #exportHeaderTabs{
- align-items:center!important;
- min-height:58px!important;
- padding:0 18px!important;
- background:#e2d4e7!important;
- border:0!important;
- box-shadow:none!important;
-}
-html body main.container #finalFloodHeaderTabs button,
-html body main.container #exportHeaderTabs button{
- min-height:58px!important;
- background:transparent!important;
- color:#59267c!important;
-}
-html body main.container #finalFloodHeaderTabs button:hover,
-html body main.container #exportHeaderTabs button:hover,
-html body main.container #finalFloodHeaderTabs button.active,
-html body main.container #exportHeaderTabs button.active{
- background:transparent!important;
- color:#59267c!important;
-}
-html body main.container #finalFloodHeaderTabs button.active:after,
-html body main.container #exportHeaderTabs button.active:after{
- bottom:0!important;
- background:#59267c!important;
-}
-html body main.container #infographic>.export-page-heading{
- padding:0 20px 0!important;
- margin-bottom:12px!important;
-}
-html body main.container #infographic>.export-page-heading>div:not(#exportHeaderTabs){
- display:none!important;
-}
-html body main.container #exportHeaderTabs .export-nav-title{
- display:block!important;
- margin:0 0 0 auto!important;
- padding-left:24px!important;
- color:#59267c!important;
- font-family:"Sarabun",sans-serif!important;
- font-size:22px!important;
- font-weight:600!important;
- line-height:1.35!important;
- white-space:nowrap!important;
-}
-@media(max-width:850px){
- html body main.container #exportHeaderTabs{
-  flex-wrap:wrap!important;height:auto!important;padding-top:4px!important;padding-bottom:4px!important
- }
- html body main.container #exportHeaderTabs .export-nav-title{
-  flex:0 0 100%!important;order:-1!important;margin:0!important;padding:8px 4px 2px!important;
-  font-size:19px!important;white-space:normal!important
- }
-}
-</style>
-<script id="purple-tabs-export-title-inline-20260909-v1-script">
-(function(){
- "use strict";
- function mount(){
-  const heading=document.querySelector("#infographic>.export-page-heading");
-  const nav=document.getElementById("exportHeaderTabs");
-  if(!heading||!nav)return;
-  let title=nav.querySelector(".export-nav-title");
-  if(!title){
-   title=heading.querySelector("h1");
-   if(title){
-    title.classList.add("export-nav-title");
-    nav.appendChild(title);
-   }else{
-    title=document.createElement("h1");
-    title.className="export-nav-title";
-    title.textContent="ส่งออกข้อมูลและจัดทำรายงานสถานการณ์น้ำ";
-    nav.appendChild(title);
-   }
-  }
-  title.style.setProperty("color","#59267c","important");
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
- const view=document.getElementById("infographic");
- if(view)new MutationObserver(mount).observe(view,{subtree:true,childList:true});
- [0].forEach(function(ms){setTimeout(mount,ms)});
-})();
-</script>
-
-<style id="force-long-purple-navigation-20260909-v2">
-html body main.container #warning>.flood-support-heading,
-html body main.container #thaiwater-warning .watch-intro,
-html body main.container #infographic>.export-page-heading{overflow:visible!important;background:#fff!important}
-html body main.container #finalFloodHeaderTabs,
-html body main.container #exportHeaderTabs{
- position:relative!important;left:50%!important;right:auto!important;
- width:100vw!important;max-width:100vw!important;flex:0 0 100vw!important;
- min-height:60px!important;margin:0 0 12px -50vw!important;
- padding:0 clamp(20px,2.2vw,44px)!important;background:#e2d4e7!important;
- border:0!important;border-radius:0!important;box-shadow:none!important
-}
-html body main.container #finalFloodHeaderTabs button,
-html body main.container #exportHeaderTabs button,
-html body main.container #finalFloodHeaderTabs button:hover,
-html body main.container #exportHeaderTabs button:hover,
-html body main.container #finalFloodHeaderTabs button.active,
-html body main.container #exportHeaderTabs button.active{
- background:#e2d4e7!important;background-color:#e2d4e7!important;color:#59267c!important;
- border-color:transparent!important;box-shadow:none!important
-}
-html body main.container #finalFloodHeaderTabs button.active:after,
-html body main.container #exportHeaderTabs button.active:after{background:#59267c!important}
-html body main.container #exportHeaderTabs .export-nav-title{color:#59267c!important}
-</style>
-<script id="force-long-purple-navigation-20260909-v2-script">
-(function(){
- "use strict";
- function lockPurpleNavigation(){
-  document.querySelectorAll("#finalFloodHeaderTabs,#exportHeaderTabs").forEach(function(nav){
-   nav.style.setProperty("background","#e2d4e7","important");
-   nav.style.setProperty("background-color","#e2d4e7","important");
-   nav.style.setProperty("border","0","important");
-   nav.style.setProperty("box-shadow","none","important");
-   nav.querySelectorAll("button").forEach(function(button){
-    button.style.setProperty("background","#e2d4e7","important");
-    button.style.setProperty("background-color","#e2d4e7","important");
-    button.style.setProperty("color","#59267c","important");
-    button.style.setProperty("border-color","transparent","important");
-    button.style.setProperty("box-shadow","none","important");
-   });
-   const title=nav.querySelector(".export-nav-title");
-   if(title)title.style.setProperty("color","#59267c","important");
-  });
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",lockPurpleNavigation);else lockPurpleNavigation();
- document.addEventListener("click",function(){setTimeout(lockPurpleNavigation,0)});
- const main=document.querySelector("main.container");
- if(main)new MutationObserver(lockPurpleNavigation).observe(main,{subtree:true,childList:true});
- [0].forEach(function(ms){setTimeout(lockPurpleNavigation,ms)});
-})();
-</script>
-
-<style id="remove-duplicate-export-heading-controls-20260909-v1">
-html body main.container #infographic>.daily-export-control{display:none!important}
-html body main.container #infographic>.export-page-heading>div:not(#exportHeaderTabs),
-html body main.container #infographic>.export-page-heading>h1:not(.export-nav-title),
-html body main.container #infographic>.export-page-heading>p{display:none!important}
-html body main.container #infographic>.export-page-heading{
- padding-bottom:0!important;
- margin-bottom:0!important;
-}
-</style>
-<script id="remove-duplicate-export-heading-controls-20260909-v1-script">
-(function(){
- "use strict";
- function removeSection(){
-  const view=document.getElementById("infographic");if(!view)return;
-  view.querySelectorAll(":scope>.daily-export-control").forEach(function(el){el.remove()});
-  const heading=view.querySelector(":scope>.export-page-heading");
-  if(!heading)return;
-  heading.querySelectorAll(":scope>div:not(#exportHeaderTabs),:scope>p,:scope>h1:not(.export-nav-title)").forEach(function(el){el.remove()});
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeSection);else removeSection();
- const view=document.getElementById("infographic");
- if(view)new MutationObserver(removeSection).observe(view,{subtree:false,childList:true});
- [0].forEach(function(ms){setTimeout(removeSection,ms)});
-})();
-</script>
-
-<script id="performance-lazy-media-20260909-v1">
-(function(){
- "use strict";
- function tune(){
-  document.querySelectorAll("iframe").forEach(function(frame){
-   frame.setAttribute("loading","lazy");
-   frame.setAttribute("referrerpolicy","strict-origin-when-cross-origin");
-  });
-  document.querySelectorAll("#infographic img").forEach(function(img){
-   img.setAttribute("loading","lazy");
-   img.setAttribute("decoding","async");
-  });
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",tune);else tune();
-})();
-</script>
-
-<style id="restore-three-page-navigation-20260909-v1">
-#restoredMainPageTabs{
- position:sticky!important;top:0!important;z-index:1000!important;
- display:flex!important;align-items:center!important;justify-content:flex-start!important;
- width:100%!important;min-height:58px!important;margin:0 0 14px!important;
- padding:0 clamp(14px,2vw,28px)!important;background:#e2d4e7!important;
- border:0!important;border-bottom:1px solid #cbb8d5!important;box-shadow:0 2px 8px rgba(89,38,124,.10)!important
-}
-#restoredMainPageTabs button{
- position:relative!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;
- min-width:150px!important;min-height:58px!important;padding:12px 18px!important;
- background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;
- color:#59267c!important;font-family:"Sarabun",sans-serif!important;font-size:16px!important;font-weight:400!important;
- cursor:pointer!important
-}
-#restoredMainPageTabs button.active{color:#59267c!important;font-weight:600!important}
-#restoredMainPageTabs button.active:after{
- content:""!important;position:absolute!important;left:14px!important;right:14px!important;bottom:0!important;
- height:3px!important;background:#59267c!important
-}
-#restoredMainPageTabs button:hover{background:rgba(255,255,255,.25)!important}
-#finalFloodHeaderTabs,#exportHeaderTabs{display:none!important}
-@media(max-width:620px){
- #restoredMainPageTabs{padding:0!important}
- #restoredMainPageTabs button{flex:1 1 0!important;min-width:0!important;padding:9px 5px!important;font-size:14px!important}
-}
-</style>
-<script id="restore-three-page-navigation-20260909-v1-script">
-(function(){
- "use strict";
- const pages=[
-  {id:"warning",label:"ภาพรวม"},
-  {id:"thaiwater-warning",label:"พื้นที่เฝ้าระวัง"},
-  {id:"infographic",label:"ส่งออกข้อมูล"}
- ];
- function valid(id){return pages.some(function(p){return p.id===id})}
- function current(){const h=location.hash.slice(1);if(valid(h))return h;const v=document.querySelector("main.container .view.active");return v&&valid(v.id)?v.id:"warning"}
- function show(id,push){
-  if(!valid(id))id="warning";
-  document.querySelectorAll("main.container .view").forEach(function(view){view.classList.toggle("active",view.id===id)});
-  document.querySelectorAll("#restoredMainPageTabs button").forEach(function(button){button.classList.toggle("active",button.dataset.page===id)});
-  if(push)history.replaceState(null,"","#"+id);
-  if(id==="infographic"&&typeof window.prepareReportExport==="function")window.prepareReportExport();
-  window.scrollTo({top:0,behavior:"smooth"});
- }
- function mount(){
-  const main=document.querySelector("main.container");if(!main)return;
-  let nav=document.getElementById("restoredMainPageTabs");
-  if(!nav){
-   nav=document.createElement("nav");nav.id="restoredMainPageTabs";nav.setAttribute("aria-label","เมนูหน้ารายงานสถานการณ์น้ำ");
-   nav.innerHTML=pages.map(function(p){return '<button type="button" data-page="'+p.id+'">'+p.label+"</button>"}).join("");
-   main.insertBefore(nav,main.firstChild);
-   nav.addEventListener("click",function(event){const b=event.target.closest("button[data-page]");if(b)show(b.dataset.page,true)});
-  }
-  show(current(),false);
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
- window.addEventListener("hashchange",function(){show(current(),false)});
- [100,500,1200].forEach(function(ms){setTimeout(mount,ms)});
 })();
 </script>
 
