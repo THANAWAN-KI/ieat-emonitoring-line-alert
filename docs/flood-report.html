@@ -7382,5 +7382,104 @@ body main.container #warning .nationwide-indicators .bar.teal{
 }
 </style>
 
+
+<style id="compact-gistda-style-overview-header-20260909-v1">
+html body main.container #warning>.flood-support-heading{
+ display:flex!important;
+ align-items:center!important;
+ justify-content:flex-start!important;
+ gap:16px!important;
+ min-height:58px!important;
+ margin:0 0 16px!important;
+ padding:9px 20px!important;
+ border:0!important;
+ border-radius:0!important;
+ background:#fff!important;
+ box-shadow:0 2px 7px rgba(0,0,0,.16)!important;
+}
+html body main.container #warning>.flood-support-heading::before{
+ content:"กนอ."!important;
+ flex:0 0 auto!important;
+ color:#406093!important;
+ font-family:"Sarabun",sans-serif!important;
+ font-size:25px!important;
+ font-weight:700!important;
+ font-style:italic!important;
+ line-height:1!important;
+}
+html body main.container #warning>.flood-support-heading .flood-support-heading-copy{
+ flex:0 0 auto!important;
+ display:block!important;
+}
+html body main.container #warning>.flood-support-heading .flood-support-heading-copy h1{
+ margin:0!important;
+ color:#353535!important;
+ font-size:19px!important;
+ font-weight:600!important;
+ white-space:nowrap!important;
+}
+html body main.container #warning>.flood-support-heading .flood-support-heading-copy p{display:none!important}
+html body main.container #warning>.flood-support-heading .flood-support-heading-date{
+ flex:0 0 auto!important;
+ margin:0!important;
+ padding:0!important;
+ color:#858585!important;
+ background:transparent!important;
+ border:0!important;
+ font-size:13px!important;
+ font-weight:400!important;
+ white-space:nowrap!important;
+}
+html body main.container #warning #finalFloodHeaderTabs{
+ flex:1 1 auto!important;
+ display:flex!important;
+ justify-content:flex-end!important;
+ gap:2px!important;
+ margin-left:auto!important;
+ padding:0!important;
+ background:transparent!important;
+}
+html body main.container #warning #finalFloodHeaderTabs button{
+ min-width:0!important;
+ min-height:36px!important;
+ padding:7px 13px!important;
+ border:0!important;
+ border-bottom:3px solid transparent!important;
+ border-radius:0!important;
+ background:#fff!important;
+ color:#555!important;
+ box-shadow:none!important;
+ font-size:14px!important;
+ font-weight:400!important;
+}
+html body main.container #warning #finalFloodHeaderTabs button.active{
+ background:#fff!important;
+ color:#25671E!important;
+ border-bottom-color:#25671E!important;
+ font-weight:600!important;
+}
+@media(max-width:900px){
+ html body main.container #warning>.flood-support-heading{flex-wrap:wrap!important}
+ html body main.container #warning #finalFloodHeaderTabs{order:4!important;flex-basis:100%!important;justify-content:flex-start!important;overflow-x:auto!important}
+}
+</style>
+<script id="compact-gistda-style-overview-header-20260909-v1-script">
+(function(){
+ function styleCompactTabs(){
+  document.querySelectorAll("#warning #finalFloodHeaderTabs button").forEach(function(button){
+   const active=button.classList.contains("active");
+   button.style.setProperty("background","#fff","important");
+   button.style.setProperty("color",active?"#25671E":"#555","important");
+   button.style.setProperty("border-radius","0","important");
+   button.style.setProperty("box-shadow","none","important");
+   button.style.setProperty("border-bottom",active?"3px solid #25671E":"3px solid transparent","important");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",styleCompactTabs);else styleCompactTabs();
+ document.addEventListener("click",function(e){if(e.target.closest("#finalFloodHeaderTabs button"))setTimeout(styleCompactTabs,0)});
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(styleCompactTabs,ms)});
+})();
+</script>
+
 </body>
 </html>
