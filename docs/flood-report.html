@@ -7587,5 +7587,90 @@ html body main.container #exportHeaderTabs button.active:after{
 }
 </style>
 
+<style id="purple-tabs-export-title-inline-20260909-v1">
+html body main.container #finalFloodHeaderTabs,
+html body main.container #exportHeaderTabs{
+ align-items:center!important;
+ min-height:58px!important;
+ padding:0 18px!important;
+ background:#e2d4e7!important;
+ border:0!important;
+ box-shadow:none!important;
+}
+html body main.container #finalFloodHeaderTabs button,
+html body main.container #exportHeaderTabs button{
+ min-height:58px!important;
+ background:transparent!important;
+ color:#59267c!important;
+}
+html body main.container #finalFloodHeaderTabs button:hover,
+html body main.container #exportHeaderTabs button:hover,
+html body main.container #finalFloodHeaderTabs button.active,
+html body main.container #exportHeaderTabs button.active{
+ background:transparent!important;
+ color:#59267c!important;
+}
+html body main.container #finalFloodHeaderTabs button.active:after,
+html body main.container #exportHeaderTabs button.active:after{
+ bottom:0!important;
+ background:#59267c!important;
+}
+html body main.container #infographic>.export-page-heading{
+ padding:0 20px 0!important;
+ margin-bottom:12px!important;
+}
+html body main.container #infographic>.export-page-heading>div:not(#exportHeaderTabs){
+ display:none!important;
+}
+html body main.container #exportHeaderTabs .export-nav-title{
+ display:block!important;
+ margin:0 0 0 auto!important;
+ padding-left:24px!important;
+ color:#59267c!important;
+ font-family:"Sarabun",sans-serif!important;
+ font-size:22px!important;
+ font-weight:600!important;
+ line-height:1.35!important;
+ white-space:nowrap!important;
+}
+@media(max-width:850px){
+ html body main.container #exportHeaderTabs{
+  flex-wrap:wrap!important;height:auto!important;padding-top:4px!important;padding-bottom:4px!important
+ }
+ html body main.container #exportHeaderTabs .export-nav-title{
+  flex:0 0 100%!important;order:-1!important;margin:0!important;padding:8px 4px 2px!important;
+  font-size:19px!important;white-space:normal!important
+ }
+}
+</style>
+<script id="purple-tabs-export-title-inline-20260909-v1-script">
+(function(){
+ "use strict";
+ function mount(){
+  const heading=document.querySelector("#infographic>.export-page-heading");
+  const nav=document.getElementById("exportHeaderTabs");
+  if(!heading||!nav)return;
+  let title=nav.querySelector(".export-nav-title");
+  if(!title){
+   title=heading.querySelector("h1");
+   if(title){
+    title.classList.add("export-nav-title");
+    nav.appendChild(title);
+   }else{
+    title=document.createElement("h1");
+    title.className="export-nav-title";
+    title.textContent="ส่งออกข้อมูลและจัดทำรายงานสถานการณ์น้ำ";
+    nav.appendChild(title);
+   }
+  }
+  title.style.setProperty("color","#59267c","important");
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
+ const view=document.getElementById("infographic");
+ if(view)new MutationObserver(mount).observe(view,{subtree:true,childList:true});
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(mount,ms)});
+})();
+</script>
+
 </body>
 </html>
