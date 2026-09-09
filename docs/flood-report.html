@@ -1478,7 +1478,7 @@ body{color:#172033!important}
               <p class="sheet-risk-line">พื้นที่เฝ้าระวังสูงสุด: <strong id="reportRiskEstate" contenteditable="true">นิคมอุตสาหกรรมภาคใต้ จังหวัดสงขลา และพื้นที่ต่อเนื่อง</strong></p>
             </header>
             <div class="sheet-map-frame">
-              <img id="infographicMap" src="assets/thaiwater-overall-latest.png" alt="แผนที่พื้นที่เสี่ยงน้ำท่วมฉับพลัน">
+              <iframe id="interactiveReportMap" src="https://twa.thaiwater.net/th/map/basic/overall/overall/0?ds=rr%2Csc&amp;p=hide&amp;c=104.14958%2C12.63781%2C3.114z" title="แผนที่ ThaiWater แบบโต้ตอบ" loading="eager" allow="fullscreen; geolocation" referrerpolicy="strict-origin-when-cross-origin"></iframe><img id="infographicMap" src="assets/thaiwater-overall-latest.png" alt="แผนที่พื้นที่เสี่ยงน้ำท่วมฉับพลัน" hidden>
               <div id="estatePinOverlay" class="estate-pin-overlay" aria-label="ตำแหน่งนิคมอุตสาหกรรม"></div>
               <div class="map-placeholder" id="mapPlaceholder" hidden>กำลังโหลดภาพแผนที่ล่าสุด…</div>
             </div>
@@ -7128,6 +7128,35 @@ body main.container #infographic #reportPage2 .status-column-head,
 body main.container #infographic #reportPage2 .status-column-head *{
  background:#4C8CE4!important;
  color:#fff!important;
+}
+</style>
+
+
+<style id="remove-context-hint-enable-interactive-export-map-20260909-v1">
+body main.container #infographic .export-sheet{
+ cursor:default!important;
+}
+body main.container #infographic .export-sheet::after{
+ content:none!important;
+ display:none!important;
+}
+body main.container #infographic #reportCanvas .sheet-map-frame{
+ position:relative!important;
+ overflow:hidden!important;
+}
+body main.container #infographic #reportCanvas #interactiveReportMap{
+ position:absolute!important;
+ inset:0!important;
+ z-index:1!important;
+ display:block!important;
+ width:100%!important;
+ height:100%!important;
+ border:0!important;
+ pointer-events:auto!important;
+}
+body main.container #infographic #reportCanvas .estate-pin-overlay,
+body main.container #infographic #reportCanvas .map-placeholder{
+ pointer-events:none!important;
 }
 </style>
 
