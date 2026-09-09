@@ -5606,5 +5606,22 @@ body>.ieat-persistent-tabbar{
 })();
 </script>
 
+
+<style id="remove-rain-trend-panel-20260909-v1">
+#thaiwater-warning .watch-grid>.watch-panel:nth-child(3){display:none!important}
+</style>
+<script id="remove-rain-trend-panel-20260909-v1-script">
+(function(){
+ function removeRainTrend(){
+  document.querySelectorAll("#thaiwater-warning .watch-panel").forEach(function(panel){
+   const heading=panel.querySelector("h3");
+   if(heading&&heading.textContent.trim()==="แนวโน้มฝนและทิศทางกลุ่มฝน")panel.remove();
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeRainTrend);else removeRainTrend();
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeRainTrend,ms)});
+})();
+</script>
+
 </body>
 </html>
