@@ -7605,5 +7605,20 @@ body main.container #warning .daily-water-grid>.daily-water-item:nth-child(4),
 body main.container #warning .daily-water-grid>.daily-water-item:nth-child(4) *{color:#172238!important}
 </style>
 
+
+<style id="overview-header-title-450c3f-20260909-v1">
+html body main.container #warning>.flood-support-heading .flood-support-heading-copy h1{color:#450C3F!important}
+</style>
+<script id="overview-header-title-450c3f-20260909-v1-script">
+(function(){
+ function setOverviewHeaderTitle(){
+  const title=document.querySelector("#warning>.flood-support-heading .flood-support-heading-copy h1");
+  if(title)title.style.setProperty("color","#450C3F","important");
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",setOverviewHeaderTitle);else setOverviewHeaderTitle();
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(setOverviewHeaderTitle,ms)});
+})();
+</script>
+
 </body>
 </html>
