@@ -7698,5 +7698,43 @@ body main.container #warning .flood-final-cards>.kpi>strong *{
 })();
 </script>
 
+
+<style id="clear-all-three-tab-backgrounds-final-20260909-v1">
+html body .ieat-persistent-tabbar,
+html body .ieat-persistent-tabbar button,
+html body main.container #finalFloodHeaderTabs,
+html body main.container #finalFloodHeaderTabs button,
+html body main.container #exportHeaderTabs,
+html body main.container #exportHeaderTabs button,
+html body main.container #floodWorkflowNav,
+html body main.container #floodWorkflowNav button{
+ background:transparent!important;
+ background-color:transparent!important;
+ background-image:none!important;
+ box-shadow:none!important;
+}
+</style>
+<script id="clear-all-three-tab-backgrounds-final-20260909-v1-script">
+(function(){
+ const selector=".ieat-persistent-tabbar button,#finalFloodHeaderTabs button,#exportHeaderTabs button,#floodWorkflowNav button";
+ function clearBackgrounds(){
+  document.querySelectorAll(selector).forEach(function(button){
+   const active=button.classList.contains("active");
+   button.style.setProperty("background","transparent","important");
+   button.style.setProperty("background-color","transparent","important");
+   button.style.setProperty("background-image","none","important");
+   button.style.setProperty("box-shadow","none","important");
+   button.style.setProperty("color",active?"#25671E":"#555","important");
+   button.style.setProperty("border-bottom",active?"3px solid #25671E":"3px solid transparent","important");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",clearBackgrounds);else clearBackgrounds();
+ document.addEventListener("click",function(e){if(e.target.closest(selector))setTimeout(clearBackgrounds,0)});
+ const root=document.body;
+ if(root)new MutationObserver(clearBackgrounds).observe(root,{subtree:true,childList:true,attributes:true,attributeFilter:["class"]});
+ [100,500,1200,2500,5000,8000].forEach(function(ms){setTimeout(clearBackgrounds,ms)});
+})();
+</script>
+
 </body>
 </html>
