@@ -8048,5 +8048,24 @@ body main.container #warning .flood-final-cards>*>*>*{
 }
 </style>
 
+
+<style id="all-three-main-titles-27548a-20260909-v1">
+html body main.container #warning>.flood-support-heading .flood-support-heading-copy h1,
+html body main.container #thaiwater-warning .watch-intro h1,
+html body main.container #thaiwater-warning .watch-intro h2,
+html body main.container #infographic>.export-page-heading h1{color:#27548A!important}
+</style>
+<script id="all-three-main-titles-27548a-20260909-v1-script">
+(function(){
+ function setAllTitleColors(){
+  document.querySelectorAll("#warning>.flood-support-heading .flood-support-heading-copy h1,#thaiwater-warning .watch-intro h1,#thaiwater-warning .watch-intro h2,#infographic>.export-page-heading h1").forEach(function(title){
+   title.style.setProperty("color","#27548A","important");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",setAllTitleColors);else setAllTitleColors();
+ [100,500,1200,2500,5000,8000].forEach(function(ms){setTimeout(setAllTitleColors,ms)});
+})();
+</script>
+
 </body>
 </html>
