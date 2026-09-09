@@ -5840,7 +5840,7 @@ body.infographic-modal-open{overflow:hidden!important}
   let head=view.querySelector(":scope>.export-page-heading");
   if(!head){
    head=document.createElement("header");head.className="export-page-heading";
-   head.innerHTML='<div><h1>ส่งออกข้อมูลและจัดทำรายงานสถานการณ์น้ำ</h1><p>เลือกรายงาน ตรวจสอบข้อมูล และดาวน์โหลดเป็น PNG/PDF สำหรับ LINE หรือรายงานผู้บริหาร</p></div><div id="exportHeaderTabs">'+items.map(x=>'<button type="button" data-export-view="'+x[0]+'" class="'+(x[0]==="infographic"?"active":"")+'">'+x[1]+'</button>').join("")+'</div>';
+   head.innerHTML='<div><h1>ส่งออกข้อมูลและจัดทำรายงานสถานการณ์น้ำ</h1></div><div id="exportHeaderTabs">'+items.map(x=>'<button type="button" data-export-view="'+x[0]+'" class="'+(x[0]==="infographic"?"active":"")+'">'+x[1]+'</button>').join("")+'</div>';
    view.insertBefore(head,workspace);
    head.querySelectorAll("[data-export-view]").forEach(b=>b.onclick=()=>openPage(b.dataset.exportView));
   }
