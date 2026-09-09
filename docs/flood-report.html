@@ -5864,5 +5864,31 @@ body.infographic-modal-open{overflow:hidden!important}
 })();
 </script>
 
+
+<style id="remove-export-floating-nav-final-20260909-v1">
+#infographic .floating-map-nav,
+#infographic nav.floating-map-nav,
+#infographic .ieat-persistent-tabbar{
+ display:none!important;
+ width:0!important;
+ height:0!important;
+ min-height:0!important;
+ margin:0!important;
+ padding:0!important;
+ overflow:hidden!important;
+}
+</style>
+<script id="remove-export-floating-nav-final-20260909-v1-script">
+(function(){
+ function removeFloatingExportNav(){
+  document.querySelectorAll("#infographic .floating-map-nav,#infographic nav.floating-map-nav,#infographic .ieat-persistent-tabbar").forEach(function(el){el.remove()});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeFloatingExportNav);else removeFloatingExportNav();
+ const view=document.getElementById("infographic");
+ if(view)new MutationObserver(removeFloatingExportNav).observe(view,{childList:true,subtree:true});
+ [100,500,1200,2500,5000,8000,12000].forEach(function(ms){setTimeout(removeFloatingExportNav,ms)});
+})();
+</script>
+
 </body>
 </html>
