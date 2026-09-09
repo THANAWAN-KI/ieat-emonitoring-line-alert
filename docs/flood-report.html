@@ -6910,5 +6910,47 @@ body main.container #infographic > .export-page-heading h1{
 }
 </style>
 
+
+<style id="three-page-tabs-pink-square-20260909-v1">
+body .ieat-persistent-tabbar button,
+body main.container #finalFloodHeaderTabs button,
+body main.container #exportHeaderTabs button,
+body main.container #floodWorkflowNav button{
+ background:#FFDADA!important;
+ color:#FF788D!important;
+ border-radius:0!important;
+ box-shadow:none!important;
+}
+body .ieat-persistent-tabbar button.active,
+body main.container #finalFloodHeaderTabs button.active,
+body main.container #exportHeaderTabs button.active,
+body main.container #floodWorkflowNav button.active{
+ background:#FFDADA!important;
+ color:#165823!important;
+}
+</style>
+<script id="three-page-tabs-pink-square-20260909-v1-script">
+(function(){
+ "use strict";
+ const selector=".ieat-persistent-tabbar button,#finalFloodHeaderTabs button,#exportHeaderTabs button,#floodWorkflowNav button";
+ function applyTabColors(){
+  document.querySelectorAll(selector).forEach(function(button){
+   button.style.setProperty("background","#FFDADA","important");
+   button.style.setProperty("color",button.classList.contains("active")?"#165823":"#FF788D","important");
+   button.style.setProperty("border-radius","0","important");
+   button.style.setProperty("box-shadow","none","important");
+   button.querySelectorAll("b,small,span").forEach(function(part){
+    part.style.setProperty("color",button.classList.contains("active")?"#165823":"#FF788D","important");
+   });
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",applyTabColors);else applyTabColors();
+ document.addEventListener("click",function(e){if(e.target.closest(selector))setTimeout(applyTabColors,0)});
+ const root=document.querySelector("main.container")||document.body;
+ if(root)new MutationObserver(applyTabColors).observe(root,{subtree:true,childList:true,attributes:true,attributeFilter:["class"]});
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(applyTabColors,ms)});
+})();
+</script>
+
 </body>
 </html>
