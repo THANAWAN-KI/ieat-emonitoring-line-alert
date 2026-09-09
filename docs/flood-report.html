@@ -7882,5 +7882,109 @@ html body main.container #infographic #exportHeaderTabs button.active{
 })();
 </script>
 
+
+<style id="overview-metric-cards-reference-style-20260909-v1">
+/* Shared compact white metric-card look. */
+body main.container #warning .daily-water-grid,
+body main.container #warning .flood-final-cards{gap:16px!important}
+body main.container #warning .daily-water-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+body main.container #warning .daily-water-grid>.daily-water-item,
+body main.container #warning .flood-final-cards>*:nth-child(-n+6){
+ position:relative!important;
+ display:grid!important;
+ grid-template-columns:58px minmax(0,1fr)!important;
+ grid-auto-rows:auto!important;
+ align-content:center!important;
+ align-items:center!important;
+ column-gap:14px!important;
+ width:100%!important;
+ min-width:0!important;
+ min-height:116px!important;
+ height:auto!important;
+ padding:18px 18px!important;
+ overflow:hidden!important;
+ border:0!important;
+ border-radius:18px!important;
+ background:#fff!important;
+ background-color:#fff!important;
+ background-image:none!important;
+ box-shadow:0 7px 22px rgba(40,70,120,.10)!important;
+ color:#2468F2!important;
+ text-align:left!important;
+}
+body main.container #warning .daily-water-grid>.daily-water-item::before,
+body main.container #warning .flood-final-cards>*:nth-child(-n+6)::before{
+ grid-column:1!important;
+ grid-row:1 / span 4!important;
+ content:"≋"!important;
+ display:grid!important;
+ place-items:center!important;
+ width:50px!important;
+ height:50px!important;
+ border-radius:50%!important;
+ background:#F5F8FF!important;
+ color:#2468F2!important;
+ font-family:Arial,sans-serif!important;
+ font-size:28px!important;
+ font-weight:400!important;
+ line-height:1!important;
+}
+body main.container #warning .daily-water-grid>.daily-water-item:nth-child(2)::before{content:"⌂"!important}
+body main.container #warning .daily-water-grid>.daily-water-item:nth-child(3)::before{content:"⌁"!important}
+body main.container #warning .daily-water-grid>.daily-water-item:nth-child(4)::before{content:"!"!important}
+body main.container #warning .flood-final-cards>*:nth-child(1)::before{content:"⌖"!important}
+body main.container #warning .flood-final-cards>*:nth-child(2)::before{content:"☂"!important}
+body main.container #warning .flood-final-cards>*:nth-child(3)::before{content:"≋"!important}
+body main.container #warning .flood-final-cards>*:nth-child(4)::before{content:"◉"!important}
+body main.container #warning .flood-final-cards>*:nth-child(5)::before{content:"⌁"!important}
+body main.container #warning .flood-final-cards>*:nth-child(6)::before{content:"☔"!important}
+body main.container #warning .daily-water-grid>.daily-water-item>*,
+body main.container #warning .flood-final-cards>*:nth-child(-n+6)>*,
+body main.container #warning .flood-final-cards>*:nth-child(-n+6)>*>*{
+ grid-column:2!important;
+ position:static!important;
+ width:auto!important;
+ max-width:100%!important;
+ margin:0!important;
+ padding:0!important;
+ border:0!important;
+ background:transparent!important;
+ background-color:transparent!important;
+ background-image:none!important;
+ box-shadow:none!important;
+ color:#2468F2!important;
+ text-align:left!important;
+}
+body main.container #warning .daily-water-grid>.daily-water-item strong,
+body main.container #warning .flood-final-cards>*:nth-child(-n+6) strong{
+ font-size:25px!important;
+ line-height:1.2!important;
+ font-weight:600!important;
+ color:#2468F2!important;
+}
+body main.container #warning .daily-water-grid>.daily-water-item small,
+body main.container #warning .daily-water-grid>.daily-water-item span,
+body main.container #warning .flood-final-cards>*:nth-child(-n+6) h2,
+body main.container #warning .flood-final-cards>*:nth-child(-n+6) span{
+ font-size:13px!important;
+ line-height:1.4!important;
+ font-weight:400!important;
+ color:#2468F2!important;
+}
+body main.container #warning .flood-final-cards>*:nth-child(-n+6) .icon,
+body main.container #warning .flood-final-cards>*:nth-child(-n+6) .n-icon,
+body main.container #warning .flood-final-cards>*:nth-child(-n+6) .source-link{display:none!important}
+@media(max-width:1100px){
+ body main.container #warning .daily-water-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:850px){
+ body main.container #warning .flood-final-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:560px){
+ body main.container #warning .daily-water-grid,
+ body main.container #warning .flood-final-cards{grid-template-columns:1fr!important}
+}
+</style>
+
 </body>
 </html>
