@@ -6604,5 +6604,69 @@ body main.container #thaiwater-warning td.alert-status-cell *{
 })();
 </script>
 
+
+<style id="watch-page-custom-color-scheme-20260909-v1">
+body main.container #thaiwater-warning .watch-intro h1,
+body main.container #thaiwater-warning .watch-intro h2{
+ color:#0082ca!important;
+}
+body main.container #thaiwater-warning .tw-risk-card:first-child{
+ border-top:4px solid #199051!important;
+}
+body main.container #thaiwater-warning .tw-risk-card:first-child .tw-risk-head h3{
+ color:#199051!important;
+}
+body main.container #thaiwater-warning .tw-risk-card:first-child .tw-rain{
+ background:#199051!important;
+ color:#fff!important;
+}
+body main.container #thaiwater-warning .tw-risk-card:nth-child(2){
+ border-top:4px solid #e76829!important;
+}
+body main.container #thaiwater-warning .tw-risk-card:nth-child(2) .tw-risk-head h3{
+ color:#e76829!important;
+}
+body main.container #thaiwater-warning .tw-risk-card:nth-child(2) .tw-rain{
+ background:#e76829!important;
+ color:#fff!important;
+}
+body main.container #thaiwater-warning .watch-analysis-title,
+body main.container #thaiwater-warning .estate-watch-table h2,
+body main.container #thaiwater-warning .estate-watch-table h3,
+body main.container #thaiwater-warning .station-watch-table h2,
+body main.container #thaiwater-warning .station-watch-table h3{
+ color:#0082ca!important;
+}
+body main.container #thaiwater-warning .estate-watch-table table th,
+body main.container #thaiwater-warning .station-watch-table table th{
+ background:#0082ca!important;
+ color:#fff!important;
+}
+body main.container #thaiwater-warning #finalFloodHeaderTabs button{
+ background:#0072cf!important;
+ color:#fff!important;
+}
+body main.container #thaiwater-warning #finalFloodHeaderTabs button.active{
+ background:#55a51c!important;
+ color:#fff!important;
+}
+</style>
+<script id="watch-page-custom-color-scheme-20260909-v1-script">
+(function(){
+ "use strict";
+ function lockWatchColors(){
+  const title=document.querySelector("#thaiwater-warning .watch-intro h1,#thaiwater-warning .watch-intro h2");
+  if(title)title.style.setProperty("color","#0082ca","important");
+  document.querySelectorAll("#thaiwater-warning #finalFloodHeaderTabs button").forEach(function(b){
+   b.style.setProperty("background",b.classList.contains("active")?"#55a51c":"#0072cf","important");
+   b.style.setProperty("color","#fff","important");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",lockWatchColors);else lockWatchColors();
+ const main=document.querySelector("main.container");if(main)new MutationObserver(lockWatchColors).observe(main,{subtree:true,attributes:true,attributeFilter:["class"]});
+ [100,500,1200,2500,5000].forEach(ms=>setTimeout(lockWatchColors,ms));
+})();
+</script>
+
 </body>
 </html>
