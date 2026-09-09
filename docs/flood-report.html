@@ -8028,5 +8028,25 @@ html body main.container #warning .daily-water-grid>.daily-water-item::before{
 })();
 </script>
 
+
+<style id="remove-all-overview-card-icons-20260909-v1">
+body main.container #warning .daily-water-grid>.daily-water-item,
+body main.container #warning .flood-final-cards>*{grid-template-columns:1fr!important}
+body main.container #warning .daily-water-grid>.daily-water-item::before,
+body main.container #warning .flood-final-cards>*::before,
+body main.container #warning .daily-water-grid .icon,
+body main.container #warning .daily-water-grid .n-icon,
+body main.container #warning .flood-final-cards .icon,
+body main.container #warning .flood-final-cards .n-icon{
+ content:none!important;
+ display:none!important;
+}
+body main.container #warning .daily-water-grid>.daily-water-item>*,
+body main.container #warning .flood-final-cards>*>*,
+body main.container #warning .flood-final-cards>*>*>*{
+ grid-column:1!important;
+}
+</style>
+
 </body>
 </html>
