@@ -5850,5 +5850,19 @@ body.infographic-modal-open{overflow:hidden!important}
 })();
 </script>
 
+
+<style id="remove-export-upload-toolbar-20260909-v1">
+#infographic .multi-report-toolbar{display:none!important}
+</style>
+<script id="remove-export-upload-toolbar-20260909-v1-script">
+(function(){
+ function removeExportToolbar(){
+  document.querySelectorAll("#infographic .multi-report-toolbar").forEach(function(el){el.remove()});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeExportToolbar);else removeExportToolbar();
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeExportToolbar,ms)});
+})();
+</script>
+
 </body>
 </html>
