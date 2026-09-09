@@ -6260,5 +6260,118 @@ body main.container :is(#warning,#thaiwater-warning,#infographic) [class*="-card
 })();
 </script>
 
+
+<style id="match-all-page-headers-to-overview-20260909-v1">
+body main.container #warning>.flood-support-heading,
+body main.container #thaiwater-warning .watch-intro,
+body main.container #infographic>.export-page-heading{
+ display:flex!important;
+ align-items:center!important;
+ justify-content:space-between!important;
+ gap:24px!important;
+ width:100%!important;
+ min-height:106px!important;
+ margin:0 0 18px!important;
+ padding:20px 24px!important;
+ background:#fff!important;
+ border:0!important;
+ border-radius:0!important;
+ box-shadow:none!important;
+}
+body main.container #warning>.flood-support-heading h1,
+body main.container #thaiwater-warning .watch-intro h1,
+body main.container #thaiwater-warning .watch-intro h2,
+body main.container #infographic>.export-page-heading h1{
+ margin:0 0 4px!important;
+ color:#0d1a2b!important;
+ font-family:"Noto Sans Thai",sans-serif!important;
+ font-size:24px!important;
+ font-weight:600!important;
+ line-height:1.4!important;
+}
+body main.container #warning>.flood-support-heading p,
+body main.container #thaiwater-warning .watch-intro p,
+body main.container #infographic>.export-page-heading p{
+ margin:0!important;
+ color:#0d1a2b!important;
+ font-family:"Noto Sans Thai",sans-serif!important;
+ font-size:16px!important;
+ font-weight:400!important;
+ line-height:1.6!important;
+}
+body main.container #finalFloodHeaderTabs,
+body main.container #exportHeaderTabs{
+ display:flex!important;
+ align-items:center!important;
+ justify-content:flex-end!important;
+ gap:10px!important;
+ margin-left:auto!important;
+ flex:0 0 auto!important;
+}
+body main.container #finalFloodHeaderTabs button,
+body main.container #exportHeaderTabs button{
+ display:inline-flex!important;
+ align-items:center!important;
+ justify-content:center!important;
+ min-width:180px!important;
+ min-height:50px!important;
+ padding:10px 22px!important;
+ border:0!important;
+ border-radius:999px!important;
+ background:#1e88e5!important;
+ color:#fff!important;
+ box-shadow:0 6px 14px rgba(21,101,192,.22)!important;
+ font-family:"Noto Sans Thai",sans-serif!important;
+ font-size:16px!important;
+ font-weight:500!important;
+ white-space:nowrap!important;
+}
+body main.container #finalFloodHeaderTabs button.active,
+body main.container #exportHeaderTabs button.active{
+ background:#1565c0!important;
+ color:#fff!important;
+}
+@media(max-width:1050px){
+ body main.container #warning>.flood-support-heading,
+ body main.container #thaiwater-warning .watch-intro,
+ body main.container #infographic>.export-page-heading{
+  align-items:stretch!important;
+  flex-direction:column!important;
+ }
+ body main.container #finalFloodHeaderTabs,
+ body main.container #exportHeaderTabs{
+  width:100%!important;
+  margin-left:0!important;
+  justify-content:flex-start!important;
+  overflow-x:auto!important;
+  padding-bottom:4px!important;
+ }
+}
+@media(max-width:620px){
+ body main.container #finalFloodHeaderTabs button,
+ body main.container #exportHeaderTabs button{
+  min-width:145px!important;
+  min-height:44px!important;
+  padding:9px 16px!important;
+  font-size:14px!important;
+ }
+}
+</style>
+<script id="match-all-page-headers-to-overview-20260909-v1-script">
+(function(){
+ "use strict";
+ function lockHeaderTypography(){
+  ["#warning>.flood-support-heading","#thaiwater-warning .watch-intro","#infographic>.export-page-heading"].forEach(sel=>{
+   const h=document.querySelector(sel);if(!h)return;
+   const title=h.querySelector("h1,h2");const desc=h.querySelector("p");
+   if(title){title.style.setProperty("font-family","'Noto Sans Thai', sans-serif","important");title.style.setProperty("font-size","24px","important");title.style.setProperty("font-weight","600","important");title.style.setProperty("color","#0d1a2b","important")}
+   if(desc){desc.style.setProperty("font-family","'Noto Sans Thai', sans-serif","important");desc.style.setProperty("font-size","16px","important");desc.style.setProperty("font-weight","400","important");desc.style.setProperty("color","#0d1a2b","important")}
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",lockHeaderTypography);else lockHeaderTypography();
+ [100,500,1200,2500,5000].forEach(ms=>setTimeout(lockHeaderTypography,ms));
+})();
+</script>
+
 </body>
 </html>
