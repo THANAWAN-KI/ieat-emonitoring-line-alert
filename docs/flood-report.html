@@ -16,7 +16,7 @@
   <script src="flood-export.js?v=20260821-1" defer></script>
   <style>
     :root{--purple:#388ed1;--blue:#1769C2;--cyan:#81D4FA;--teal:#66BB6A;--ink:#283142;--muted:#697386;--bg:#F6F6F4;--line:#E5E2E8;--soft:#F5F1F7;--white:#FFFFFF;--red:#B0005A;--orange:#F6BB42;--green:#58B957}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Sarabun","Noto Sans Thai",sans-serif;font-size:16px;font-weight:400}button,input,select,textarea{font:inherit}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Sarabun","Sarabun",sans-serif;font-size:16px;font-weight:400}button,input,select,textarea{font:inherit}
     .topbar{position:sticky;top:0;z-index:50;background:#ffffffee;backdrop-filter:blur(14px);border:1px solid #ebe8ed;box-shadow:0 2px 10px rgba(52,45,60,.06)}
     .top-inner{width:100%;max-width:none;margin:0;min-height:78px;padding:12px clamp(20px,2.2vw,44px);display:flex;align-items:center;gap:28px}.brand{min-width:280px;border-left:5px solid var(--purple);padding-left:14px}.brand b{display:block;font-size:21px;font-weight:600;color:var(--purple)}.brand span{color:var(--muted);font-size:14px}
     .nav{display:flex;gap:5px;padding:5px;border-radius:999px;background:#F3F1F4}.nav button{border:0;background:transparent;color:#5f6670;padding:10px 18px;border-radius:999px;cursor:pointer;font-size:16px;font-weight:400;white-space:nowrap}.nav button.active{background:var(--purple);color:#fff;box-shadow:0 4px 12px rgba(107,75,125,.24)}
@@ -27,7 +27,7 @@
     .national-dashboard{display:grid;grid-template-columns:minmax(300px,.72fr) minmax(500px,1.25fr) minmax(500px,1.05fr);gap:18px;margin-bottom:20px;align-items:stretch}
     .national-column{display:grid;gap:16px}.national-alert{padding:20px;background:#fff1ec;border:1px solid #ffd4c5;border-radius:20px}.national-alert b{display:block;color:#b53b13;font-size:19px;font-weight:500;margin-bottom:8px}.national-alert p{margin:0;color:#6d5047;line-height:1.6}
     .radar-card{padding:0;display:flex;flex-direction:column;background:transparent;border:0;box-shadow:none}.radar-card h2{font-size:19px;font-weight:500;margin:0}.radar-card small{color:var(--muted)}.radar-card img{width:100%;height:330px;object-fit:contain;margin:12px 0;background:transparent;border:0;border-radius:0}.radar-actions{display:flex;gap:8px}.radar-actions a,.radar-actions button{flex:1;border:0;text-align:center;text-decoration:none;border-radius:11px;padding:10px;font:inherit;font-weight:500;cursor:pointer}.radar-actions .download{background:var(--purple);color:#fff}.radar-actions .open{background:#f2edf4;color:var(--purple)}
-    .national-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;font-family:"Noto Sans Thai",sans-serif}.national-kpi{padding:20px 22px;min-height:155px;position:relative}.national-kpi .n-icon{width:52px;height:52px;display:grid;place-items:center;background:transparent;border:0}.national-kpi .n-icon img{display:block;width:52px;height:52px;object-fit:contain}.national-kpi h2{font-size:18px;line-height:1.45;font-weight:600;margin:10px 0 0;color:#111827}.national-kpi strong{display:block;color:#ef101f;font-size:56px;line-height:1.05;font-weight:700;margin-top:8px}.national-kpi span{color:#4b5563;font-size:16px;line-height:1.5}.source-link{display:inline-block;margin-top:8px;color:var(--blue);font-size:13px;text-decoration:none}.source-link:hover{text-decoration:underline}.warning-source{display:inline-block;margin-top:12px;color:#9b3212;font-weight:500;text-decoration:none}
+    .national-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;font-family:"Sarabun",sans-serif}.national-kpi{padding:20px 22px;min-height:155px;position:relative}.national-kpi .n-icon{width:52px;height:52px;display:grid;place-items:center;background:transparent;border:0}.national-kpi .n-icon img{display:block;width:52px;height:52px;object-fit:contain}.national-kpi h2{font-size:18px;line-height:1.45;font-weight:600;margin:10px 0 0;color:#111827}.national-kpi strong{display:block;color:#ef101f;font-size:56px;line-height:1.05;font-weight:700;margin-top:8px}.national-kpi span{color:#4b5563;font-size:16px;line-height:1.5}.source-link{display:inline-block;margin-top:8px;color:var(--blue);font-size:13px;text-decoration:none}.source-link:hover{text-decoration:underline}.warning-source{display:inline-block;margin-top:12px;color:#9b3212;font-weight:500;text-decoration:none}
     .province-watch{grid-column:1/-1;padding:18px}.province-watch h2{font-size:18px;font-weight:500;margin:0 0 10px}.province-list{display:flex;flex-wrap:wrap;gap:8px}.province-list span,.province-list a{display:inline-block;padding:7px 11px;border-radius:999px;background:#f4eff6;color:var(--purple);font-size:14px;text-decoration:none;cursor:pointer}.province-list a:hover{background:var(--purple);color:#fff;transform:translateY(-1px)}.province-list .empty{color:var(--muted);background:#f4f5f7}
     .overview-map-card{grid-column:auto;overflow:hidden;min-height:640px;position:relative}.overview-map-card iframe{display:block;border:0;width:100%;height:100%;min-height:640px}.overview-map-label{position:absolute;z-index:2;top:14px;left:14px;background:#fffffff0;padding:10px 13px;border-radius:11px;box-shadow:0 4px 14px #26354c22;font-weight:500}
     .estate-section-title{margin:28px 0 16px}.estate-section-title h2{font-size:24px;font-weight:500;margin:0}.estate-section-title p{margin:4px 0 0;color:var(--muted)}.kpis{grid-template-columns:repeat(4,1fr);margin-bottom:20px}.card{background:#fff;border-radius:20px;box-shadow:0 8px 24px rgba(56,46,63,.055);border:1px solid #e8e5ea}.kpi{min-height:126px;padding:21px;display:grid;grid-template-columns:66px 1fr;gap:16px;align-items:center}.icon{width:66px;height:66px;border-radius:18px;display:grid;place-items:center;background:#F4EFF6;border:1px solid #E4DCE8;overflow:hidden}.icon img,.icon svg{display:block;width:48px;height:48px;object-fit:contain}.icon svg{color:#1769c2}.kpis>.kpi:nth-child(2) .icon svg{width:52px;height:52px}.kpis>.kpi:nth-child(3) .icon svg{color:#1769c2}.kpi strong{display:block;color:var(--purple);font-size:28px;font-weight:500;line-height:1.15}.kpi span{display:block;color:var(--muted);line-height:1.45;margin-top:4px}.kpis>.kpi:nth-child(2) .icon{background:#FFF0F6;border-color:#F2D4E2}.kpis>.kpi:nth-child(2) strong{color:var(--red)}.kpis>.kpi:nth-child(3) .icon{background:#EEF6FF;border-color:#D5E5F6}.kpis>.kpi:nth-child(3) strong{color:var(--blue)}.kpis>.kpi:nth-child(4) .icon{background:#FFF8E8;border-color:#F2E1B4}.kpis>.kpi:nth-child(4) strong{color:#C77A00}
@@ -50,7 +50,7 @@
     .view.active{width:100%;min-height:calc(100vh - 110px)}
 
 /* drought-layout-parity-2026-09-03 */
-body{background:var(--bg);font-family:"Sarabun","Noto Sans Thai",sans-serif}
+body{background:var(--bg);font-family:"Sarabun","Sarabun",sans-serif}
 .topbar{height:70px;position:sticky;top:0;z-index:50;background:#fff;border:0;border-bottom:1px solid var(--line);box-shadow:none;backdrop-filter:none}
 .top-inner{width:100%;max-width:1500px;min-height:70px;height:70px;margin:auto;padding:0 22px;gap:13px}
 .flood-head-icon{flex:0 0 52px;width:52px;height:45px;display:grid;place-items:center;color:var(--purple)}
@@ -228,7 +228,7 @@ body{background:var(--bg);font-family:"Sarabun","Noto Sans Thai",sans-serif}
 
   <style id="thaiwater-report-theme">
     :root{--purple:#1769c2;--blue:#1769c2;--ink:#171a1f;--muted:#626a75;--bg:#fff;--line:#d6d6d6;--soft:#f7f7f7}
-    body{font-family:"Sarabun","Noto Sans Thai",sans-serif;background:#fff;color:var(--ink)}
+    body{font-family:"Sarabun","Sarabun",sans-serif;background:#fff;color:var(--ink)}
     .topbar{position:sticky;background:rgba(255,255,255,.96);border:0;border-bottom:1px solid #e9edf1;box-shadow:none}
     .top-inner{max-width:none;min-height:64px;margin:0;padding:9px 32px;gap:22px}
     .brand{min-width:250px;border-left:0;padding-left:0}.brand b{font-size:18px;color:#111;font-weight:600}.brand span{font-size:12px}
@@ -951,12 +951,12 @@ button,input,select,textarea{font:inherit!important}
 <style id="flood-db-heavent-typography">
 /* Requested flood-page typography only — 2026-09-04 */
 body,button,input,select,textarea{
-  font-family:"DB Heavent","DB Heavent Li","DB Heavent Med","Sarabun",sans-serif!important;
+  font-family:"Sarabun","DB Heavent Li","DB Heavent Med","Sarabun",sans-serif!important;
   font-size:14px!important;
   font-weight:200!important;
 }
 .nav button{
-  font-family:"DB Heavent","DB Heavent Li","Sarabun",sans-serif!important;
+  font-family:"Sarabun","DB Heavent Li","Sarabun",sans-serif!important;
   font-size:16px!important;
   font-weight:300!important;
 }
@@ -1014,7 +1014,7 @@ body,button,input,select,textarea{
       --soft:#f3f7fa;--white:#fff;--red:#df4c45;--orange:#f3a53b;--green:#35a66f;
       --navy:#07314f;--navy-2:#0a456b;--sky:#dff3fa;
     }
-    body{background:#eef2f5;color:var(--ink);font-family:"Noto Sans Thai","Sarabun",sans-serif}
+    body{background:#eef2f5;color:var(--ink);font-family:"Sarabun","Sarabun",sans-serif}
     .topbar{position:sticky;top:0;z-index:50;background:linear-gradient(100deg,#062f4c 0%,#074a72 68%,#075f88 100%);border:0;box-shadow:0 5px 18px rgba(1,31,50,.2);backdrop-filter:none}
     .top-inner{min-height:74px;padding:10px clamp(18px,3vw,52px);gap:32px}
     .brand{min-width:340px;border:0;padding:0;display:grid;grid-template-columns:48px 1fr;column-gap:13px;align-items:center}
@@ -1128,7 +1128,7 @@ body,button,input,select,textarea{
   --soft:#f4f6f8;--white:#fff;--red:#d34b5d;--orange:#dd9820;--green:#4ca85b
 }
 html,body{min-height:100%;background:#f2f5f8;color:#172033}
-body{font-family:"Sarabun","Noto Sans Thai",sans-serif}
+body{font-family:"Sarabun","Sarabun",sans-serif}
 .topbar{
   position:sticky;top:0;z-index:50;background:#fff;
   border:0;border-bottom:1px solid #dce2e8;box-shadow:0 1px 8px rgba(34,48,67,.04);
@@ -2255,7 +2255,7 @@ body{background:#f5f6f8!important}
 
 <style>
 /* db-heavent-and-nearby-table-placement-v10 */
-html,body,button,input,select,textarea{font-family:"DB Heavent","DB Heavent Li","Sarabun",sans-serif!important}
+html,body,button,input,select,textarea{font-family:"Sarabun","DB Heavent Li","Sarabun",sans-serif!important}
 body{font-size:14px!important;font-weight:200!important}
 body p,body span,body td,body label,body small,body a{font-weight:200!important}
 .topbar .nav button,.nav button{font-size:14px!important;font-weight:300!important}
@@ -2303,7 +2303,7 @@ body p,body span,body td,body label,body small,body a{font-weight:200!important}
  else moveNearbyTable();
 })();
 </script>
-<style>/* db-heavent-menu-weight-v11 */body .topbar .top-inner .nav button{font-family:"DB Heavent","DB Heavent Li","Sarabun",sans-serif!important;font-size:14px!important;font-weight:300!important}</style>
+<style>/* db-heavent-menu-weight-v11 */body .topbar .top-inner .nav button{font-family:"Sarabun","DB Heavent Li","Sarabun",sans-serif!important;font-size:14px!important;font-weight:300!important}</style>
 
 <style>
 /* right-purple-nav-black-text-v12 */
@@ -2319,7 +2319,7 @@ body .topbar .top-inner .nav{
 body .topbar .top-inner .nav button{
   position:relative!important;min-height:38px!important;padding:7px 18px!important;
   border:0!important;border-radius:999px!important;background:#3e0f8d!important;
-  color:#fff!important;font-family:"DB Heavent","DB Heavent Li","Sarabun",sans-serif!important;
+  color:#fff!important;font-family:"Sarabun","DB Heavent Li","Sarabun",sans-serif!important;
   font-size:16px!important;line-height:1.2!important;font-weight:500!important;
   box-shadow:0 4px 12px rgba(62,15,141,.18)!important
 }
@@ -2328,7 +2328,7 @@ body .topbar .top-inner .nav button.active{background:#3e0f8d!important;color:#f
 body .topbar .top-inner .nav button.active:after{display:none!important}
 #warning,#warning button,#warning input,#warning select,#warning textarea,
 #infographic,#infographic button,#infographic input,#infographic select,#infographic textarea{
-  font-family:"DB Heavent","DB Heavent Li","Sarabun",sans-serif!important
+  font-family:"Sarabun","DB Heavent Li","Sarabun",sans-serif!important
 }
 #warning{font-size:14px!important;font-weight:200!important}
 #warning p,#warning small,#warning td,#warning label,
@@ -2348,17 +2348,17 @@ body .topbar .top-inner .nav button.active:after{display:none!important}
 #warning .nationwide-indicators h2,#warning .warning-table h2,
 #warning .live-viz-card h2,#warning .overview-map-label b,
 #warning .table-section-head h2{
-  font-family:"DB Heavent","DB Heavent Li","Sarabun",sans-serif!important;
+  font-family:"Sarabun","DB Heavent Li","Sarabun",sans-serif!important;
   font-size:24px!important;line-height:1.25!important;font-weight:500!important;color:#000!important
 }
 #warning .kpi strong,#warning .national-kpi strong,
 #warning .daily-water-item strong,#warning .barrow>b,
 #warning .estate-chart-value,#warning .station-rank-value{
-  font-family:"DB Heavent","DB Heavent Li","Sarabun",sans-serif!important;
+  font-family:"Sarabun","DB Heavent Li","Sarabun",sans-serif!important;
   font-size:16px!important;font-weight:500!important
 }
 #infographic{font-size:14px!important;font-weight:200!important;color:#000!important}
-#infographic h1,#infographic h2,#infographic h3{font-family:"DB Heavent","DB Heavent Li","Sarabun",sans-serif!important;color:#000!important}
+#infographic h1,#infographic h2,#infographic h3{font-family:"Sarabun","DB Heavent Li","Sarabun",sans-serif!important;color:#000!important}
 @media(max-width:600px){
  .topbar .top-inner{min-height:56px!important;padding:8px 10px!important}
  body .topbar .top-inner .nav{width:auto!important}
@@ -2575,7 +2575,7 @@ html,body{background:var(--n4-bg)!important;color:#111!important}
 .brand{min-width:550px!important;border:0!important;padding:0!important}.brand-mark{background:linear-gradient(135deg,#ff7a21,#f9c51b)!important;color:#fff!important;border-radius:50%!important}
 .brand b{font-size:19px!important;color:#111!important}.brand span{font-size:12px!important}
 .nav{margin:0 auto!important;background:#f2f2f2!important;border-radius:30px!important;padding:5px!important;gap:2px!important}
-.nav button{border:0!important;border-radius:22px!important;padding:9px 18px!important;background:transparent!important;color:#444!important;font-family:"Noto Sans Thai",sans-serif!important;font-size:14px!important}
+.nav button{border:0!important;border-radius:22px!important;padding:9px 18px!important;background:transparent!important;color:#444!important;font-family:"Sarabun",sans-serif!important;font-size:14px!important}
 .nav button.active{background:#fff!important;color:#111!important;box-shadow:0 2px 8px rgba(0,0,0,.13)!important}
 .container{max-width:none!important;padding:14px 20px 28px!important}
 #warning>.dashboard-intro,#warning>.operations-section-title,#warning>.dri-chart-section{display:none!important}
@@ -2656,17 +2656,17 @@ html,body{background:var(--n4-bg)!important;color:#111!important}
 #warning button.active,#warning .primary{background:var(--dash-blue)!important;color:#fff!important}
 </style>
 <style id="flood-reference-layout-20260908">
-html,body,button,input,select,textarea{font-family:"Noto Sans Thai",sans-serif!important}
+html,body,button,input,select,textarea{font-family:"Sarabun",sans-serif!important}
 body{font-size:16px!important;font-weight:400!important;background:#f7f8fa!important;color:#000!important}
 .topbar{height:60px!important;background:#fff!important;border-bottom:1px solid #e1e5e9!important;box-shadow:0 2px 7px rgba(0,0,0,.08)!important}
 .top-inner{height:60px!important;min-height:60px!important;padding:0 28px!important;gap:22px!important}
 .brand{min-width:430px!important}.brand b{font-size:18px!important;font-weight:500!important;color:#004b79!important}.brand>span:not(.brand-mark){font-size:12px!important;font-weight:500!important}
 .brand-mark{width:39px!important;height:39px!important;font-size:13px!important}
 .nav{margin-left:auto!important;margin-right:0!important;background:transparent!important;border-radius:0!important;padding:0!important}
-.nav button{font-family:"Noto Sans Thai",sans-serif!important;font-size:12px!important;font-weight:500!important;color:#004b79!important;background:#fff!important;border:1px solid #c4dff6!important;border-radius:7px!important;padding:8px 13px!important}
+.nav button{font-family:"Sarabun",sans-serif!important;font-size:12px!important;font-weight:500!important;color:#004b79!important;background:#fff!important;border:1px solid #c4dff6!important;border-radius:7px!important;padding:8px 13px!important}
 .nav button.active{background:#004b79!important;color:#fff!important}
 .container{padding:12px 20px 28px!important}
-#warning{font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:400!important}
+#warning{font-family:"Sarabun",sans-serif!important;font-size:16px!important;font-weight:400!important}
 .flood-support-heading{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:18px!important;width:100%!important;min-height:86px!important;margin:0 0 12px!important;padding:14px 18px!important;background:#fff!important;border:2px solid #000!important}
 .flood-support-heading h1{margin:0!important;color:#004b79!important;font-size:20px!important;line-height:1.35!important;font-weight:500!important}
 .flood-support-heading p{margin:4px 0 0!important;color:#000!important;font-size:16px!important;line-height:1.4!important;font-weight:300!important}
@@ -2704,7 +2704,7 @@ body{font-size:16px!important;font-weight:400!important;background:#f7f8fa!impor
 #warning .table th{font-weight:400!important;background:#c4dff6!important;color:#000!important}
 #warning .status-column-head,#warning .water-situation-head{background:#004b79!important;color:#fff!important}
 #warning>.top-overview-grid,#warning>.operations-dashboard,#warning>.tables-overview-grid{display:none!important}
-#infographic,#infographic *{font-family:"Noto Sans Thai",sans-serif!important}
+#infographic,#infographic *{font-family:"Sarabun",sans-serif!important}
 @media(max-width:1150px){.new4all-water-shell{grid-template-columns:1fr!important}.flood-dashboard-left{max-height:none!important;overflow:visible!important}.flood-dashboard-map{height:680px!important}.new4all-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:700px){.topbar,.top-inner{height:auto!important}.top-inner{padding:9px 10px!important;flex-wrap:wrap!important}.brand{min-width:0!important;width:100%!important}.flood-support-heading{display:block!important}.flood-support-heading-actions{margin-top:10px!important}.new4all-metrics,#warning .daily-water-grid,.new4all-lower{grid-template-columns:1fr!important}.new4all-lower .nearby-watch-table{grid-column:auto!important}.flood-dashboard-map{height:540px!important;min-height:540px!important}}
 </style>
@@ -2733,22 +2733,22 @@ body{font-size:16px!important;font-weight:400!important;background:#f7f8fa!impor
 })();
 </script>
 <style id="flood-typography-spec-20260908">
-html,body,button,input,select,textarea{font-family:"Noto Sans Thai",sans-serif!important}
+html,body,button,input,select,textarea{font-family:"Sarabun",sans-serif!important}
 body,#warning,#infographic{font-size:16px!important;font-weight:400!important}
-.topbar .brand b{font-family:"Noto Sans Thai",sans-serif!important;font-size:18px!important;font-weight:700!important}
-.topbar .nav button,.flood-support-heading-actions button{font-family:"Noto Sans Thai",sans-serif!important;font-size:12px!important;font-weight:500!important}
-.topbar .contact,.topbar [href*="contact"],.contact-btn{font-family:"Noto Sans Thai",sans-serif!important;font-size:12px!important;font-weight:700!important}
-.flood-support-heading h1{font-family:"Noto Sans Thai",sans-serif!important;font-size:20px!important;font-weight:500!important}
-.flood-support-heading p{font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:300!important}
-#warning .table-section-head h2,#warning .overview-map-label b,#warning .daily-water-report h2,#warning .nationwide-indicators h2,#warning .national-alert b,#warning .live-viz-card h2{font-family:"Noto Sans Thai",sans-serif!important;font-size:18px!important;font-weight:500!important}
-#warning .kpi h2,#warning .national-kpi h2,#warning .daily-water-item small{font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:500!important}
-#warning .kpi strong,#warning .national-kpi strong,#warning .daily-water-item strong,#warning .barrow>b{font-family:"Noto Sans Thai",sans-serif!important;font-size:25px!important;font-weight:700!important}
-#warning .kpi span,#warning .national-kpi span,#warning .daily-water-item span,#warning .daily-water-report p,#warning .nationwide-indicators span,#warning .national-alert p,#warning .live-viz-card p,#warning .overview-map-label small{font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:300!important}
-#warning .search-row button,#warning [id*="EstateApply"],#warning .open-flood-hub,#warning .table-section-head>a,#warning .overview-map-label+a{font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:300!important}
-#warning .tab.fire-tab,[data-type="fire"]{font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:300!important}
-#warning .tab:not(.fire-tab),[data-type="flood"],[data-type="drought"],[data-type="pm25"]{font-family:"Noto Sans Thai",sans-serif!important;font-size:13px!important;font-weight:400!important}
-#warning .tab.active,[data-type].active{font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:600!important}
-footer,.footer,#warning .report-footer{font-family:"Noto Sans Thai",sans-serif!important;font-size:14px!important;font-weight:300!important}
+.topbar .brand b{font-family:"Sarabun",sans-serif!important;font-size:18px!important;font-weight:700!important}
+.topbar .nav button,.flood-support-heading-actions button{font-family:"Sarabun",sans-serif!important;font-size:12px!important;font-weight:500!important}
+.topbar .contact,.topbar [href*="contact"],.contact-btn{font-family:"Sarabun",sans-serif!important;font-size:12px!important;font-weight:700!important}
+.flood-support-heading h1{font-family:"Sarabun",sans-serif!important;font-size:20px!important;font-weight:500!important}
+.flood-support-heading p{font-family:"Sarabun",sans-serif!important;font-size:16px!important;font-weight:300!important}
+#warning .table-section-head h2,#warning .overview-map-label b,#warning .daily-water-report h2,#warning .nationwide-indicators h2,#warning .national-alert b,#warning .live-viz-card h2{font-family:"Sarabun",sans-serif!important;font-size:18px!important;font-weight:500!important}
+#warning .kpi h2,#warning .national-kpi h2,#warning .daily-water-item small{font-family:"Sarabun",sans-serif!important;font-size:16px!important;font-weight:500!important}
+#warning .kpi strong,#warning .national-kpi strong,#warning .daily-water-item strong,#warning .barrow>b{font-family:"Sarabun",sans-serif!important;font-size:25px!important;font-weight:700!important}
+#warning .kpi span,#warning .national-kpi span,#warning .daily-water-item span,#warning .daily-water-report p,#warning .nationwide-indicators span,#warning .national-alert p,#warning .live-viz-card p,#warning .overview-map-label small{font-family:"Sarabun",sans-serif!important;font-size:16px!important;font-weight:300!important}
+#warning .search-row button,#warning [id*="EstateApply"],#warning .open-flood-hub,#warning .table-section-head>a,#warning .overview-map-label+a{font-family:"Sarabun",sans-serif!important;font-size:16px!important;font-weight:300!important}
+#warning .tab.fire-tab,[data-type="fire"]{font-family:"Sarabun",sans-serif!important;font-size:16px!important;font-weight:300!important}
+#warning .tab:not(.fire-tab),[data-type="flood"],[data-type="drought"],[data-type="pm25"]{font-family:"Sarabun",sans-serif!important;font-size:13px!important;font-weight:400!important}
+#warning .tab.active,[data-type].active{font-family:"Sarabun",sans-serif!important;font-size:16px!important;font-weight:600!important}
+footer,.footer,#warning .report-footer{font-family:"Sarabun",sans-serif!important;font-size:14px!important;font-weight:300!important}
 </style>
 <style id="flood-fullscreen-fix-20260908">
 html,body{width:100%!important;max-width:none!important;min-height:100%!important;margin:0!important;overflow-x:hidden!important}
@@ -2876,7 +2876,7 @@ body{min-height:100vh!important}
  min-height:42px!important;padding:9px 20px!important;
  border:0!important;border-radius:999px!important;
  background:#8ec06c!important;color:#537b35!important;
- font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:500!important;
+ font-family:"Sarabun",sans-serif!important;font-size:16px!important;font-weight:500!important;
  line-height:1.2!important;box-shadow:none!important;white-space:nowrap!important;cursor:pointer!important
 }
 .flood-support-heading-actions button:hover,
@@ -3061,8 +3061,8 @@ html body #warning .flood-final-cards>.national-kpi:after{display:none!important
 </script>
 <style id="flood-annotated-typography-colors-v2">
 /* 2, 5, 6: flood heading */
-.flood-support-heading h1{font-family:"Noto Sans Thai",sans-serif!important;font-size:20px!important;line-height:1.35!important;font-weight:500!important;color:#004b79!important}
-.flood-support-heading p{font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;line-height:1.4!important;font-weight:300!important;color:#000!important}
+.flood-support-heading h1{font-family:"Sarabun",sans-serif!important;font-size:20px!important;line-height:1.35!important;font-weight:500!important;color:#004b79!important}
+.flood-support-heading p{font-family:"Sarabun",sans-serif!important;font-size:16px!important;line-height:1.4!important;font-weight:300!important;color:#000!important}
 
 /* 3: white icon backgrounds */
 #warning .flood-final-cards .icon,#warning .flood-final-cards .n-icon,
@@ -3071,22 +3071,22 @@ html body #warning .flood-final-cards>.national-kpi:after{display:none!important
 /* 4: card headings */
 #warning .flood-final-cards h2,
 #warning .flood-final-cards .kpi>div>span,
-#warning .flood-final-cards .national-kpi>h2{font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;line-height:1.35!important;font-weight:300!important;color:#000!important}
+#warning .flood-final-cards .national-kpi>h2{font-family:"Sarabun",sans-serif!important;font-size:16px!important;line-height:1.35!important;font-weight:300!important;color:#000!important}
 
 /* 7, 9, 10: supporting text */
 #warning .daily-water-report p,#warning .daily-water-report span,#warning .daily-water-report small,
 #warning .nationwide-indicators span,#warning .nationwide-indicators p,
 #warning .national-alert p,#warning .national-alert a,
 #warning .live-viz-card p,#warning .live-viz-card span,
-#warning .source-note,#warning .barrow span{font-family:"Noto Sans Thai",sans-serif!important;font-size:14px!important;line-height:1.4!important;font-weight:300!important}
+#warning .source-note,#warning .barrow span{font-family:"Sarabun",sans-serif!important;font-size:14px!important;line-height:1.4!important;font-weight:300!important}
 
 /* 8: title-strip buttons */
 html body #warning .flood-support-heading-actions button{
- font-family:"Noto Sans Thai",sans-serif!important;font-size:0!important;font-weight:400!important;
+ font-family:"Sarabun",sans-serif!important;font-size:0!important;font-weight:400!important;
  background:#0091cd!important;color:#fff!important;border:0!important;border-radius:999px!important;
  min-height:42px!important;padding:9px 20px!important
 }
-html body #warning .flood-support-heading-actions button::after{font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:400!important;color:#fff!important}
+html body #warning .flood-support-heading-actions button::after{font-family:"Sarabun",sans-serif!important;font-size:16px!important;font-weight:400!important;color:#fff!important}
 
 /* 10: station watch and important notice */
 #warning .daily-water-item:nth-child(3),#warning .national-alert{background:#b3dcff!important;background-color:#b3dcff!important;border-color:#b3dcff!important}
@@ -3095,10 +3095,10 @@ html body #warning .flood-support-heading-actions button::after{font-family:"Not
 
 /* 9, 10, 11: report and table typography */
 #warning .daily-water-report h2,#warning .nationwide-indicators h2,#warning .national-alert b,
-#warning .table-section-head h2{font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:400!important}
+#warning .table-section-head h2{font-family:"Sarabun",sans-serif!important;font-size:16px!important;font-weight:400!important}
 #warning .table-section-head p,#warning .table-section-head span,
 #warning .status-color-legend span,#warning .table th,#warning .table td,
-#warning .table td b,#warning .table td small{font-family:"Noto Sans Thai",sans-serif!important;font-size:14px!important;line-height:1.4!important;font-weight:300!important}
+#warning .table td b,#warning .table td small{font-family:"Sarabun",sans-serif!important;font-size:14px!important;line-height:1.4!important;font-weight:300!important}
 
 /* 11, 12: table headers and status colors */
 #warning .table th,#warning .status-column-head,#warning .water-situation-head{background:#d7d7d8!important;color:#000!important}
@@ -3118,8 +3118,8 @@ html body #warning .flood-support-heading-actions button::after{font-family:"Not
 <style id="flood-six-cards-report-map-v3">
 /* Top heading matching the supplied reference */
 .flood-support-heading{min-height:116px!important;padding:20px 30px!important;background:#fff!important;border-radius:0!important}
-.flood-support-heading h1{margin:0!important;font-family:"Noto Sans Thai",sans-serif!important;font-size:20px!important;font-weight:500!important;color:#004b79!important}
-.flood-support-heading p{margin:8px 0 0!important;font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:300!important;color:#000!important}
+.flood-support-heading h1{margin:0!important;font-family:"Sarabun",sans-serif!important;font-size:20px!important;font-weight:500!important;color:#004b79!important}
+.flood-support-heading p{margin:8px 0 0!important;font-family:"Sarabun",sans-serif!important;font-size:16px!important;font-weight:300!important;color:#000!important}
 .flood-support-heading-actions{gap:16px!important}
 .flood-support-heading-actions button{min-width:170px!important;min-height:54px!important;background:#0091cd!important;color:#fff!important;border-radius:999px!important}
 .flood-support-heading-actions button::after{font-size:16px!important;color:#fff!important}
@@ -3141,13 +3141,13 @@ html body #warning .flood-final-cards>.national-kpi{
 
 /* Daily water report typography */
 #warning .daily-water-report h2,#warning #dailyWaterTitle{
- font-family:"Noto Sans Thai",sans-serif!important;font-size:20px!important;line-height:1.35!important;font-weight:500!important;color:#0091cd!important
+ font-family:"Sarabun",sans-serif!important;font-size:20px!important;line-height:1.35!important;font-weight:500!important;color:#0091cd!important
 }
 #warning .daily-water-report .daily-water-head p{
- font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;line-height:1.4!important;font-weight:300!important;color:#000!important
+ font-family:"Sarabun",sans-serif!important;font-size:16px!important;line-height:1.4!important;font-weight:300!important;color:#000!important
 }
 #warning #dailyReportDate{
- font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;line-height:1.4!important;font-weight:300!important;color:#000!important
+ font-family:"Sarabun",sans-serif!important;font-size:16px!important;line-height:1.4!important;font-weight:300!important;color:#000!important
 }
 
 /* Map title and map controls */
@@ -3212,11 +3212,11 @@ html body #warning .flood-final-cards>.national-kpi{
  padding:20px 30px!important;background:#fff!important
 }
 .flood-support-heading-copy{min-width:0!important}
-.flood-support-heading h1{margin:0!important;font-family:"Noto Sans Thai",sans-serif!important;font-size:20px!important;font-weight:500!important;color:#0091cd!important}
-.flood-support-heading p{margin:7px 0 0!important;font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:300!important;color:#000!important}
+.flood-support-heading h1{margin:0!important;font-family:"Sarabun",sans-serif!important;font-size:20px!important;font-weight:500!important;color:#0091cd!important}
+.flood-support-heading p{margin:7px 0 0!important;font-family:"Sarabun",sans-serif!important;font-size:16px!important;font-weight:300!important;color:#000!important}
 .flood-support-heading-date{
  justify-self:center!important;white-space:nowrap!important;
- font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:300!important;color:#000!important
+ font-family:"Sarabun",sans-serif!important;font-size:16px!important;font-weight:300!important;color:#000!important
 }
 .flood-support-heading-actions{justify-self:end!important;margin:0!important;gap:16px!important}
 .flood-support-heading-actions button{min-width:170px!important;min-height:52px!important}
@@ -3414,9 +3414,9 @@ html body #warning>.flood-final-layout+*{margin-top:0!important}
 </style>
 <style id="flood-fire-card-type-and-remove-ghost">
 /* Requested heading and body typography */
-#warning .flood-support-heading h1{font-family:"Noto Sans Thai",sans-serif!important;font-size:20px!important;font-weight:500!important;color:#1c79c0!important}
+#warning .flood-support-heading h1{font-family:"Sarabun",sans-serif!important;font-size:20px!important;font-weight:500!important;color:#1c79c0!important}
 #warning .flood-support-heading p,#warning .flood-support-heading-date,
-#warning .flood-support-heading-actions button::after{font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:300!important}
+#warning .flood-support-heading-actions button::after{font-family:"Sarabun",sans-serif!important;font-size:16px!important;font-weight:300!important}
 #warning .flood-support-heading{width:100%!important;max-width:none!important}
 
 /* Fire-page card treatment */
@@ -3428,15 +3428,15 @@ html body #warning .flood-final-cards>.national-kpi{
  box-shadow:0 2px 8px rgba(60,42,74,.05)!important
 }
 #warning .flood-final-cards h2,#warning .flood-final-cards .kpi>div>span,
-#warning .flood-final-cards .national-kpi>h2{font-family:"Noto Sans Thai",sans-serif!important;font-size:18px!important;font-weight:500!important;color:#000!important}
-#warning .flood-final-cards span,#warning .flood-final-cards p,#warning .flood-final-cards a{font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:300!important;color:#000!important}
-#warning .flood-final-cards strong{font-family:"Noto Sans Thai",sans-serif!important;font-size:25px!important;font-weight:700!important;color:#7f181b!important}
+#warning .flood-final-cards .national-kpi>h2{font-family:"Sarabun",sans-serif!important;font-size:18px!important;font-weight:500!important;color:#000!important}
+#warning .flood-final-cards span,#warning .flood-final-cards p,#warning .flood-final-cards a{font-family:"Sarabun",sans-serif!important;font-size:16px!important;font-weight:300!important;color:#000!important}
+#warning .flood-final-cards strong{font-family:"Sarabun",sans-serif!important;font-size:25px!important;font-weight:700!important;color:#7f181b!important}
 
 /* Nationwide indicators */
-#warning .nationwide-indicators h2,#warning .nationwide-indicators .card-head h2{font-family:"Noto Sans Thai",sans-serif!important;font-size:18px!important;font-weight:500!important;color:#000!important}
+#warning .nationwide-indicators h2,#warning .nationwide-indicators .card-head h2{font-family:"Sarabun",sans-serif!important;font-size:18px!important;font-weight:500!important;color:#000!important}
 #warning .nationwide-indicators p,#warning .nationwide-indicators span,#warning .nationwide-indicators b,
 #warning .daily-water-report p,#warning .daily-water-report span,#warning .daily-water-report small,
-#warning .national-alert p,#warning .national-alert a{font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:300!important}
+#warning .national-alert p,#warning .national-alert a{font-family:"Sarabun",sans-serif!important;font-size:16px!important;font-weight:300!important}
 
 /* Real table container directly below dashboard */
 #warning>.flood-final-tables{
@@ -3477,7 +3477,7 @@ html body #warning .flood-final-cards>.national-kpi{
 html body #warning,html body #warning button,html body #warning input,html body #warning select,
 html body #warning textarea,html body #warning table,html body #warning th,html body #warning td,
 html body #warning p,html body #warning span,html body #warning small,html body #warning a,
-html body #warning label{font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;line-height:1.45!important;font-weight:300!important;color:#000!important}
+html body #warning label{font-family:"Sarabun",sans-serif!important;font-size:16px!important;line-height:1.45!important;font-weight:300!important;color:#000!important}
 
 /* Fire-page headline scale */
 html body #warning .flood-support-heading{min-height:94px!important;padding:16px 20px!important;background:#fff!important;border:0!important;border-radius:0!important;box-shadow:none!important}
@@ -3598,7 +3598,7 @@ html body #warning .daily-water-grid .daily-water-item *,
 html body #warning .daily-water-item small,
 html body #warning .daily-water-item strong,
 html body #warning .daily-water-item span{
- font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;line-height:1.4!important;font-weight:300!important;
+ font-family:"Sarabun",sans-serif!important;font-size:16px!important;line-height:1.4!important;font-weight:300!important;
  white-space:normal!important;word-break:normal!important;overflow-wrap:anywhere!important;
  width:auto!important;max-width:100%!important;margin:0!important;padding:0!important
 }
@@ -3620,7 +3620,7 @@ html body #warning .flood-final-cards h2,
 html body #warning .flood-final-cards strong,
 html body #warning .flood-final-cards span,
 html body #warning .flood-final-cards p{
- font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;line-height:1.45!important;font-weight:300!important;
+ font-family:"Sarabun",sans-serif!important;font-size:16px!important;line-height:1.45!important;font-weight:300!important;
  white-space:normal!important;word-break:normal!important;overflow-wrap:anywhere!important;
  max-width:100%!important;margin:0!important
 }
@@ -3641,7 +3641,7 @@ html body #warning .flood-final-cards .source-link{display:none!important}
 #warning .daily-water-item:nth-child(1) small,
 #warning .daily-water-item:nth-child(2) small,
 #warning .daily-water-item:nth-child(3) small{
- font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;line-height:1.4!important;font-weight:300!important
+ font-family:"Sarabun",sans-serif!important;font-size:16px!important;line-height:1.4!important;font-weight:300!important
 }
 @media(max-width:1200px){html body #warning .flood-final-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:650px){html body #warning .flood-final-cards{grid-template-columns:1fr!important}}
@@ -3676,7 +3676,7 @@ html body #warning .flood-final-cards h2,
 html body #warning .flood-final-cards strong,
 html body #warning .flood-final-cards span,
 html body #warning .flood-final-cards p{
- font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;
+ font-family:"Sarabun",sans-serif!important;font-size:16px!important;
  line-height:1.45!important;font-weight:300!important;text-align:center!important;
  color:#000!important;margin-left:auto!important;margin-right:auto!important
 }
@@ -3692,7 +3692,7 @@ html body #warning .nationwide-indicators span,
 html body #warning .nationwide-indicators small,
 html body #warning .nationwide-indicators b,
 html body #warning .nationwide-indicators strong{
- font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;
+ font-family:"Sarabun",sans-serif!important;font-size:16px!important;
  line-height:1.45!important;font-weight:300!important;color:#000!important
 }
 
@@ -3777,11 +3777,11 @@ html body #warning .flood-final-cards>.national-kpi>span{
 html body #warning .flood-final-cards h2,
 html body #warning .flood-final-cards .kpi>div>span,
 html body #warning .flood-final-cards .national-kpi>span{
- font-family:"Noto Sans Thai",sans-serif!important;font-size:13px!important;line-height:1.3!important;
+ font-family:"Sarabun",sans-serif!important;font-size:13px!important;line-height:1.3!important;
  font-weight:300!important;color:var(--flood-card-blue)!important;text-align:left!important
 }
 html body #warning .flood-final-cards strong{
- font-family:"Noto Sans Thai",sans-serif!important;font-size:22px!important;line-height:1.2!important;
+ font-family:"Sarabun",sans-serif!important;font-size:22px!important;line-height:1.2!important;
  font-weight:500!important;color:var(--flood-card-blue)!important;text-align:left!important
 }
 
@@ -3793,7 +3793,7 @@ html body #warning .daily-water-grid .daily-water-item{
 html body #warning .daily-water-item small,
 html body #warning .daily-water-item strong,
 html body #warning .daily-water-item span{
- font-family:"Noto Sans Thai",sans-serif!important;color:var(--flood-card-blue)!important;text-align:left!important
+ font-family:"Sarabun",sans-serif!important;color:var(--flood-card-blue)!important;text-align:left!important
 }
 html body #warning .daily-water-item small{font-size:14px!important;font-weight:300!important}
 html body #warning .daily-water-item strong{font-size:22px!important;font-weight:500!important}
@@ -3897,12 +3897,12 @@ html body #warning p,html body #warning span,html body #warning small,
 html body #warning a,html body #warning label,html body #warning button,
 html body #warning input,html body #warning select,html body #warning textarea,
 html body #warning table,html body #warning th,html body #warning td{
- font-family:"Noto Sans Thai",sans-serif!important;
+ font-family:"Sarabun",sans-serif!important;
  font-size:16px!important;line-height:1.45!important;font-weight:300!important
 }
 html body #warning h1,
 html body #warning .flood-support-heading h1{
- font-family:"Noto Sans Thai",sans-serif!important;
+ font-family:"Sarabun",sans-serif!important;
  font-size:20px!important;line-height:1.35!important;font-weight:500!important
 }
 html body #warning h2,html body #warning h3,
@@ -3914,13 +3914,13 @@ html body #warning .nationwide-indicators h2,
 html body #warning .national-alert b,
 html body #warning .live-viz-card h2,
 html body #warning .table-section-head h2{
- font-family:"Noto Sans Thai",sans-serif!important;
+ font-family:"Sarabun",sans-serif!important;
  font-size:18px!important;line-height:1.35!important;font-weight:500!important
 }
 html body #warning .flood-final-cards strong,
 html body #warning .daily-water-item strong,
 html body #warning .barrow>b{
- font-family:"Noto Sans Thai",sans-serif!important;
+ font-family:"Sarabun",sans-serif!important;
  font-size:25px!important;line-height:1.2!important;font-weight:700!important
 }
 html body #warning .flood-support-heading p,
@@ -3934,7 +3934,7 @@ html body #warning .national-alert a,
 html body #warning .live-viz-card p,
 html body #warning .table-section-head p,
 html body #warning .table-section-head span{
- font-family:"Noto Sans Thai",sans-serif!important;
+ font-family:"Sarabun",sans-serif!important;
  font-size:16px!important;line-height:1.45!important;font-weight:300!important
 }
 /* Give Fire-size text enough room without clipping */
@@ -3961,12 +3961,12 @@ html body #warning .flood-support-heading-actions{display:flex!important;align-i
 }
 </style>
 <style id="flood-eleven-cards-centered-16-v1">
-html body #warning .flood-support-heading h1{font-family:"Noto Sans Thai",sans-serif!important;font-size:20px!important;line-height:1.35!important;font-weight:500!important}
-html body #warning .flood-support-heading p{font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;line-height:1.45!important;font-weight:300!important}
+html body #warning .flood-support-heading h1{font-family:"Sarabun",sans-serif!important;font-size:20px!important;line-height:1.35!important;font-weight:500!important}
+html body #warning .flood-support-heading p{font-family:"Sarabun",sans-serif!important;font-size:16px!important;line-height:1.45!important;font-weight:300!important}
 html body #warning .flood-support-heading svg,html body #warning .flood-support-heading img,html body #warning .flood-support-heading .icon,html body #warning .flood-support-heading .flood-head-icon{display:none!important}
 html body #warning .flood-support-heading-copy:before,html body #warning .flood-support-heading-copy:after,html body #warning .flood-support-heading h1:before,html body #warning .flood-support-heading h1:after{display:none!important;content:none!important}
 html body #warning .daily-water-grid .daily-water-item,html body #warning .daily-water-grid .daily-water-item:nth-child(n+3),html body #warning .flood-final-cards>.kpi,html body #warning .flood-final-cards>.national-kpi{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;width:100%!important;min-width:0!important;height:auto!important;min-height:126px!important;padding:16px 14px!important;gap:5px!important;overflow:visible!important;text-align:center!important}
-html body #warning .daily-water-grid .daily-water-item *,html body #warning .flood-final-cards>.kpi *,html body #warning .flood-final-cards>.national-kpi *,html body #warning .daily-water-item small,html body #warning .daily-water-item strong,html body #warning .daily-water-item span,html body #warning .flood-final-cards h2,html body #warning .flood-final-cards strong,html body #warning .flood-final-cards span,html body #warning .flood-final-cards p{font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;line-height:1.45!important;font-weight:300!important;text-align:center!important;white-space:normal!important;word-break:normal!important;overflow-wrap:anywhere!important;width:auto!important;max-width:100%!important;margin:0 auto!important;padding:0!important}
+html body #warning .daily-water-grid .daily-water-item *,html body #warning .flood-final-cards>.kpi *,html body #warning .flood-final-cards>.national-kpi *,html body #warning .daily-water-item small,html body #warning .daily-water-item strong,html body #warning .daily-water-item span,html body #warning .flood-final-cards h2,html body #warning .flood-final-cards strong,html body #warning .flood-final-cards span,html body #warning .flood-final-cards p{font-family:"Sarabun",sans-serif!important;font-size:16px!important;line-height:1.45!important;font-weight:300!important;text-align:center!important;white-space:normal!important;word-break:normal!important;overflow-wrap:anywhere!important;width:auto!important;max-width:100%!important;margin:0 auto!important;padding:0!important}
 html body #warning .flood-final-cards .icon,html body #warning .flood-final-cards .n-icon{display:none!important}
 </style>
 <script id="flood-eleven-cards-centered-16-v1-script">(function(){function r(){const h=document.querySelector("#warning .flood-support-heading");if(h)h.querySelectorAll("svg,img,.icon,.flood-head-icon").forEach(e=>e.remove())}document.addEventListener("DOMContentLoaded",r);r();setTimeout(r,100);setTimeout(r,1000)})();</script>
@@ -3989,7 +3989,7 @@ html body #warning .flood-final-cards>.kpi>div>strong,
 html body #warning .flood-final-cards>.kpi>div>span{
  display:block!important;position:static!important;grid-column:auto!important;grid-row:auto!important;
  width:100%!important;max-width:100%!important;margin:0!important;padding:0!important;
- font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;line-height:1.4!important;
+ font-family:"Sarabun",sans-serif!important;font-size:16px!important;line-height:1.4!important;
  font-weight:300!important;text-align:center!important;white-space:normal!important;
  word-break:normal!important;overflow-wrap:anywhere!important;text-overflow:clip!important
 }
@@ -4103,19 +4103,19 @@ html body #warning .flood-final-cards>.kpi>div{
 html body #warning .flood-final-cards h2,
 html body #warning .flood-final-cards .kpi span{
  order:1!important;width:100%!important;margin:0!important;
- font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;line-height:1.35!important;
+ font-family:"Sarabun",sans-serif!important;font-size:16px!important;line-height:1.35!important;
  font-weight:300!important;color:#555!important;text-align:center!important;
  white-space:normal!important;overflow-wrap:anywhere!important
 }
 html body #warning .flood-final-cards strong{
  order:2!important;width:auto!important;margin:0!important;padding:2px 7px!important;
- font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;line-height:1.35!important;
+ font-family:"Sarabun",sans-serif!important;font-size:16px!important;line-height:1.35!important;
  font-weight:300!important;color:#388ed1!important;text-align:center!important;
  background:#e8f2ff!important;border-radius:7px!important;white-space:normal!important
 }
 html body #warning .flood-final-cards>.national-kpi>span{
  order:3!important;width:100%!important;margin:0!important;
- font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;line-height:1.35!important;
+ font-family:"Sarabun",sans-serif!important;font-size:16px!important;line-height:1.35!important;
  font-weight:300!important;color:#999!important;text-align:center!important;
  white-space:normal!important;overflow-wrap:anywhere!important
 }
@@ -4182,12 +4182,12 @@ html body #warning .flood-final-cards .source-link{display:none!important}
 </script>
 <style id="flash-flood-ranking-card-v1">
 #warning .national-watch-pair>.national-kpi:has(#nationalFloodCount){display:block!important;padding:16px 18px 18px!important;min-height:0!important;border-radius:18px!important;background:#fff!important;overflow:hidden!important}
-#warning .national-watch-pair>.national-kpi:has(#nationalFloodCount)>h2{display:block!important;width:100%!important;margin:0 0 12px!important;font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;line-height:1.45!important;font-weight:500!important;color:#444!important;text-align:left!important}
+#warning .national-watch-pair>.national-kpi:has(#nationalFloodCount)>h2{display:block!important;width:100%!important;margin:0 0 12px!important;font-family:"Sarabun",sans-serif!important;font-size:16px!important;line-height:1.45!important;font-weight:500!important;color:#444!important;text-align:left!important}
 #warning .national-watch-pair>.national-kpi:has(#nationalFloodCount)>strong,#warning .national-watch-pair>.national-kpi:has(#nationalFloodCount)>span,#warning .national-watch-pair>.national-kpi:has(#nationalFloodCount)>.source-link,#warning .national-watch-pair>.national-kpi:has(#nationalFloodCount)>.n-icon{display:none!important}
 #warning .flash-flood-ranking{display:grid!important;gap:7px!important;width:100%!important}
 #warning .flash-flood-rank-row{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;align-items:center!important;gap:10px!important;width:100%!important;min-height:38px!important;padding:5px 7px!important;background:#f5f7fb!important;border-radius:10px!important}
-#warning .flash-flood-rank-name{min-width:0!important;font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;line-height:1.35!important;font-weight:300!important;color:#777!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
-#warning .flash-flood-rank-value{display:block!important;min-width:66px!important;margin:0!important;padding:5px 10px!important;border-radius:10px!important;background:#ffc95f!important;color:#604100!important;font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;line-height:1.2!important;font-weight:400!important;text-align:center!important;white-space:nowrap!important}
+#warning .flash-flood-rank-name{min-width:0!important;font-family:"Sarabun",sans-serif!important;font-size:16px!important;line-height:1.35!important;font-weight:300!important;color:#777!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+#warning .flash-flood-rank-value{display:block!important;min-width:66px!important;margin:0!important;padding:5px 10px!important;border-radius:10px!important;background:#ffc95f!important;color:#604100!important;font-family:"Sarabun",sans-serif!important;font-size:16px!important;line-height:1.2!important;font-weight:400!important;text-align:center!important;white-space:nowrap!important}
 @media(max-width:560px){#warning .national-watch-pair>.national-kpi:has(#nationalFloodCount){padding:14px!important}#warning .flash-flood-rank-name,#warning .flash-flood-rank-value{font-size:14px!important}}
 </style>
 <script id="flash-flood-ranking-card-v1-script">
@@ -4212,7 +4212,7 @@ html body #warning .flood-final-cards .source-link{display:none!important}
 <style id="flood-font-alignment-20260908-v1">
 /* ปรับฟอนต์และจัดกึ่งกลางตามคำขอ 2026-09-08 */
 #warning .top-overview-metrics .kpi span{
-  font-family:"Noto Sans Thai",sans-serif!important;
+  font-family:"Sarabun",sans-serif!important;
   font-size:16px!important;
   font-weight:300!important;
   line-height:1.45!important;
@@ -4227,7 +4227,7 @@ html body #warning .flood-final-cards .source-link{display:none!important}
   width:100%!important;
   margin-left:auto!important;
   margin-right:auto!important;
-  font-family:"Noto Sans Thai",sans-serif!important;
+  font-family:"Sarabun",sans-serif!important;
   font-size:14px!important;
   font-weight:300!important;
   line-height:1.45!important;
@@ -4276,7 +4276,7 @@ html body #warning .flood-final-cards .source-link{display:none!important}
   width:100%!important;
   margin:0!important;
   padding:0!important;
-  font-family:"Noto Sans Thai",sans-serif!important;
+  font-family:"Sarabun",sans-serif!important;
   font-size:14px!important;
   line-height:1.45!important;
   font-weight:300!important;
@@ -4289,7 +4289,7 @@ html body #warning .flood-final-cards .source-link{display:none!important}
   width:auto!important;
   margin:0!important;
   padding:2px 8px!important;
-  font-family:"Noto Sans Thai",sans-serif!important;
+  font-family:"Sarabun",sans-serif!important;
   font-size:16px!important;
   line-height:1.35!important;
   font-weight:300!important;
@@ -4302,7 +4302,7 @@ html body #warning .flood-final-cards .source-link{display:none!important}
   display:block!important;
   width:100%!important;
   margin:0!important;
-  font-family:"Noto Sans Thai",sans-serif!important;
+  font-family:"Sarabun",sans-serif!important;
   font-size:13px!important;
   line-height:1.35!important;
   font-weight:300!important;
@@ -4352,7 +4352,7 @@ html body #warning .flood-final-cards .source-link{display:none!important}
   border-radius:0!important;
   background:transparent!important;
   color:#fff!important;
-  font-family:"Noto Sans Thai",sans-serif!important;
+  font-family:"Sarabun",sans-serif!important;
   font-size:14px!important;
   font-weight:300!important;
   line-height:1.35!important;
@@ -4386,7 +4386,7 @@ html body #warning .flood-final-cards>.national-kpi>h2{
   width:100%!important;
   margin:0!important;
   padding:0!important;
-  font-family:"Noto Sans Thai",sans-serif!important;
+  font-family:"Sarabun",sans-serif!important;
   font-size:14px!important;
   font-weight:300!important;
   line-height:1.4!important;
@@ -4396,7 +4396,7 @@ html body #warning .flood-final-cards>.national-kpi>h2{
 }
 html body #warning .flood-final-cards>.national-kpi>strong{
   margin:3px auto!important;
-  font-family:"Noto Sans Thai",sans-serif!important;
+  font-family:"Sarabun",sans-serif!important;
   font-size:16px!important;
   font-weight:300!important;
   line-height:1.3!important;
@@ -4405,7 +4405,7 @@ html body #warning .flood-final-cards>.national-kpi>strong{
 html body #warning .flood-final-cards>.national-kpi>span{
   width:100%!important;
   margin:0!important;
-  font-family:"Noto Sans Thai",sans-serif!important;
+  font-family:"Sarabun",sans-serif!important;
   font-size:14px!important;
   font-weight:300!important;
   line-height:1.35!important;
@@ -4433,7 +4433,7 @@ html body #warning .flood-final-cards>.national-kpi>span{
   border:0!important;
   border-radius:0!important;
   color:#fff!important;
-  font-family:"Noto Sans Thai",sans-serif!important;
+  font-family:"Sarabun",sans-serif!important;
   font-size:14px!important;
   font-weight:300!important;
   line-height:1.35!important;
@@ -4445,7 +4445,7 @@ html body #warning .flood-final-cards>.national-kpi>span{
 <style id="flood-reference-national-cards-20260908-v4">
 /* ข้อความการ์ดนิคมฯ แถวบน */
 html body #warning .flood-final-cards>.kpi span{
-  font-family:"Noto Sans Thai",sans-serif!important;
+  font-family:"Sarabun",sans-serif!important;
   font-size:14px!important;
   font-weight:400!important;
   line-height:1.4!important;
@@ -4502,7 +4502,7 @@ html body #warning .flood-final-cards>.national-kpi>h2{
   width:100%!important;
   margin:0!important;
   padding:0!important;
-  font-family:"Noto Sans Thai",sans-serif!important;
+  font-family:"Sarabun",sans-serif!important;
   font-size:16px!important;
   font-weight:400!important;
   line-height:1.45!important;
@@ -4523,7 +4523,7 @@ html body #warning .flood-final-cards>.national-kpi>strong{
   background:transparent!important;
   border:0!important;
   border-radius:0!important;
-  font-family:"Noto Sans Thai",sans-serif!important;
+  font-family:"Sarabun",sans-serif!important;
   font-size:50px!important;
   font-weight:700!important;
   line-height:1!important;
@@ -4541,7 +4541,7 @@ html body #warning .flood-final-cards>.national-kpi>span{
   padding:0!important;
   background:transparent!important;
   border-radius:0!important;
-  font-family:"Noto Sans Thai",sans-serif!important;
+  font-family:"Sarabun",sans-serif!important;
   font-size:14px!important;
   font-weight:300!important;
   line-height:1.35!important;
@@ -4636,7 +4636,7 @@ html body #warning .flood-final-cards>.kpi{
 }
 html body #warning .daily-water-grid>.daily-water-item:nth-child(-n+3) small,
 html body #warning .flood-final-cards>.kpi span{
-  font-family:"Noto Sans Thai",sans-serif!important;
+  font-family:"Sarabun",sans-serif!important;
   font-size:14px!important;
   font-weight:400!important;
   line-height:1.4!important;
@@ -4718,7 +4718,7 @@ html body #warning .flood-final-cards>.national-kpi span{
 <style id="water-overflow-text-font-20260908-v9">
 /* ข้อความ “ล้นตลิ่ง” ในตารางสถานการณ์น้ำ */
 html body #warning .station-watch-table .water-status-table .water-status-cell.critical{
-  font-family:"Noto Sans Thai",sans-serif!important;
+  font-family:"Sarabun",sans-serif!important;
   font-size:16px!important;
   font-weight:300!important;
   line-height:1.45!important;
@@ -4750,13 +4750,13 @@ html body #thaiwater-warning{width:100%!important;padding:0!important}
 html body #thaiwater-warning.active{display:block!important}
 .thaiwater-warning-shell{width:100%;min-height:calc(100vh - 118px);background:#eef3f7;border-radius:16px;overflow:hidden;box-shadow:0 5px 20px rgba(30,66,100,.10)}
 .thaiwater-warning-head{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px 22px;background:#fff;border-bottom:1px solid #dce5ec}
-.thaiwater-warning-head span{display:block;margin-bottom:2px;color:#687783;font-family:"Noto Sans Thai",sans-serif;font-size:14px;font-weight:300}
-.thaiwater-warning-head h1{margin:0;color:#388ed1;font-family:"Noto Sans Thai",sans-serif;font-size:24px;font-weight:500;line-height:1.35}
-.thaiwater-warning-head p{margin:3px 0 0;color:#4e5e69;font-family:"Noto Sans Thai",sans-serif;font-size:16px;font-weight:300}
-.thaiwater-warning-head a{flex:0 0 auto;padding:10px 18px;background:#388ed1;color:#fff;border-radius:9px;text-decoration:none;font-family:"Noto Sans Thai",sans-serif;font-size:16px;font-weight:400}
+.thaiwater-warning-head span{display:block;margin-bottom:2px;color:#687783;font-family:"Sarabun",sans-serif;font-size:14px;font-weight:300}
+.thaiwater-warning-head h1{margin:0;color:#388ed1;font-family:"Sarabun",sans-serif;font-size:24px;font-weight:500;line-height:1.35}
+.thaiwater-warning-head p{margin:3px 0 0;color:#4e5e69;font-family:"Sarabun",sans-serif;font-size:16px;font-weight:300}
+.thaiwater-warning-head a{flex:0 0 auto;padding:10px 18px;background:#388ed1;color:#fff;border-radius:9px;text-decoration:none;font-family:"Sarabun",sans-serif;font-size:16px;font-weight:400}
 .thaiwater-warning-frame{position:relative;width:100%;height:calc(100vh - 220px);min-height:680px;background:#eaf0f4}
 .thaiwater-warning-frame iframe{position:relative;z-index:2;display:block;width:100%;height:100%;border:0;background:#fff}
-.thaiwater-warning-fallback{position:absolute;z-index:1;inset:0;display:grid;place-items:center;padding:30px;color:#536572;text-align:center;font-family:"Noto Sans Thai",sans-serif;font-size:16px;font-weight:300}
+.thaiwater-warning-fallback{position:absolute;z-index:1;inset:0;display:grid;place-items:center;padding:30px;color:#536572;text-align:center;font-family:"Sarabun",sans-serif;font-size:16px;font-weight:300}
 @media(max-width:700px){.thaiwater-warning-head{align-items:flex-start;flex-direction:column}.thaiwater-warning-frame{height:720px;min-height:720px}.thaiwater-warning-head a{width:100%;text-align:center}}
 </style>
 <script id="thaiwater-warning-tab-20260908-v1-script">
@@ -4812,7 +4812,7 @@ html body #thaiwater-warning.active{display:block!important}
 </script>
 
 <style id="estate-watch-dashboard-20260908-v1">
-#thaiwater-warning .watch-dashboard{padding:22px;background:#eef3f7;font-family:"Noto Sans Thai",sans-serif}
+#thaiwater-warning .watch-dashboard{padding:22px;background:#eef3f7;font-family:"Sarabun",sans-serif}
 #thaiwater-warning .watch-intro{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;margin-bottom:16px}
 #thaiwater-warning .watch-intro h2{margin:0;color:#263746;font-size:23px;font-weight:500}
 #thaiwater-warning .watch-intro p{margin:5px 0 0;color:#657480;line-height:1.6}
@@ -4903,7 +4903,7 @@ html body #thaiwater-warning.active{display:block!important}
 
 <style id="three-main-tabs-20260908-v1">
 .topbar .nav{display:grid!important;grid-template-columns:repeat(3,minmax(150px,1fr))!important;gap:10px!important;padding:0!important;background:transparent!important;border-radius:0!important}
-.topbar .nav button{min-width:150px!important;padding:11px 22px!important;border-radius:999px!important;background:#0a98ca!important;color:#fff!important;box-shadow:none!important;font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:400!important}
+.topbar .nav button{min-width:150px!important;padding:11px 22px!important;border-radius:999px!important;background:#0a98ca!important;color:#fff!important;box-shadow:none!important;font-family:"Sarabun",sans-serif!important;font-size:16px!important;font-weight:400!important}
 .topbar .nav button:hover{background:#087fad!important}
 .topbar .nav button.active{background:#388ed1!important;color:#fff!important;box-shadow:0 5px 13px rgba(56,142,209,.28)!important}
 @media(max-width:850px){.topbar .nav{width:100%!important;grid-template-columns:1fr!important}.topbar .nav button{width:100%!important}.top-inner{flex-wrap:wrap!important}}
@@ -4933,7 +4933,7 @@ html body #thaiwater-warning.active{display:block!important}
 <style id="native-three-tabs-20260908-v5">
 body>.ieat-persistent-tabbar{display:none!important}
 .flood-support-heading-actions,.native-page-tabs{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:10px!important;margin-left:auto!important}
-.flood-support-heading-actions button,.native-page-tabs button{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:150px!important;min-height:42px!important;padding:9px 20px!important;border:0!important;border-radius:999px!important;background:#0a98ca!important;color:#fff!important;font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:400!important;cursor:pointer!important}
+.flood-support-heading-actions button,.native-page-tabs button{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:150px!important;min-height:42px!important;padding:9px 20px!important;border:0!important;border-radius:999px!important;background:#0a98ca!important;color:#fff!important;font-family:"Sarabun",sans-serif!important;font-size:16px!important;font-weight:400!important;cursor:pointer!important}
 .flood-support-heading-actions button.active,.native-page-tabs button.active{background:#388ed1!important;box-shadow:0 4px 10px rgba(56,142,209,.28)!important}
 #thaiwater-warning .watch-intro{align-items:center!important}
 #infographic .multi-report-toolbar{align-items:center!important}
@@ -5041,11 +5041,11 @@ body>.ieat-persistent-tabbar{display:none!important}
 #floodWorkflowNav button.active{border-color:var(--flood-primary);background:var(--flood-primary);color:#fff;box-shadow:0 5px 14px rgba(0,75,121,.18)}
 #floodWorkflowNav .workflow-no{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:#e8f4fa;color:var(--flood-primary);font-weight:700}
 #floodWorkflowNav button.active .workflow-no{background:#fff;color:var(--flood-primary)}
-#floodWorkflowNav b{display:block;font-family:"Noto Sans Thai",sans-serif;font-size:15px;font-weight:600;line-height:1.3}
+#floodWorkflowNav b{display:block;font-family:"Sarabun",sans-serif;font-size:15px;font-weight:600;line-height:1.3}
 #floodWorkflowNav small{display:block;margin-top:2px;color:#72818b;font-size:11px;line-height:1.3}
 #floodWorkflowNav button.active small{color:#d9eef8}
 .flood-page-purpose{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:0 0 16px;padding:13px 16px;border:1px solid #dbe5ec;border-left:5px solid var(--flood-action);border-radius:12px;background:#fff}
-.flood-page-purpose b{color:#263746;font-family:"Noto Sans Thai",sans-serif;font-size:16px;font-weight:500}
+.flood-page-purpose b{color:#263746;font-family:"Sarabun",sans-serif;font-size:16px;font-weight:500}
 .flood-page-purpose span{color:#6c7b85;font-size:14px}
 .flood-page-purpose em{flex:0 0 auto;padding:6px 10px;border-radius:999px;background:#e7f3df;color:#426f23;font-size:12px;font-style:normal;font-weight:500}
 .flood-support-heading-actions,.native-page-tabs,.topbar .nav{display:none!important}
@@ -5179,7 +5179,7 @@ body>.ieat-persistent-tabbar{
 #floodWorkflowNav button:hover{background:#007faa!important;transform:translateY(-1px)!important}
 #floodWorkflowNav button.active{background:#005b91!important;color:#fff!important;box-shadow:0 5px 13px rgba(0,75,121,.28)!important}
 #floodWorkflowNav .workflow-no,#floodWorkflowNav small{display:none!important}
-#floodWorkflowNav b{display:block!important;margin:0!important;color:inherit!important;font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:500!important;line-height:1.3!important}
+#floodWorkflowNav b{display:block!important;margin:0!important;color:inherit!important;font-family:"Sarabun",sans-serif!important;font-size:16px!important;font-weight:500!important;line-height:1.3!important}
 #warning .dashboard-intro-inner,
 #thaiwater-warning .watch-intro,
 #infographic .multi-report-toolbar{
@@ -5230,7 +5230,7 @@ body>.ieat-persistent-tabbar{
 <style id="restore-visible-corner-tabs-20260909-v1">
 #floodWorkflowNav{display:none!important}
 #floodCornerTabs{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:10px!important;margin-left:auto!important;flex:0 0 auto!important}
-#floodCornerTabs button{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:150px!important;min-height:44px!important;padding:10px 22px!important;border:0!important;border-radius:999px!important;background:#0098ca!important;color:#fff!important;box-shadow:0 5px 13px rgba(0,91,145,.22)!important;font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:500!important;line-height:1.3!important;cursor:pointer!important;white-space:nowrap!important}
+#floodCornerTabs button{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:150px!important;min-height:44px!important;padding:10px 22px!important;border:0!important;border-radius:999px!important;background:#0098ca!important;color:#fff!important;box-shadow:0 5px 13px rgba(0,91,145,.22)!important;font-family:"Sarabun",sans-serif!important;font-size:16px!important;font-weight:500!important;line-height:1.3!important;cursor:pointer!important;white-space:nowrap!important}
 #floodCornerTabs button:hover{background:#007faa!important}
 #floodCornerTabs button.active{background:#005b91!important;box-shadow:0 5px 14px rgba(0,75,121,.32)!important}
 @media(max-width:1050px){#floodCornerTabs{width:100%!important;margin-left:0!important;justify-content:flex-start!important;overflow-x:auto!important;padding-bottom:4px!important}}
@@ -5306,8 +5306,8 @@ body>.ieat-persistent-tabbar{
 #warning>.dashboard-intro{display:block!important;margin:0 0 18px!important;padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
 #warning>.dashboard-intro .dashboard-intro-inner{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:22px!important;padding:0!important}
 #warning>.dashboard-intro .dashboard-kicker,#warning>.dashboard-intro .dashboard-intro-meta{display:none!important}
-#warning>.dashboard-intro h1{margin:0 0 4px!important;color:#0091cd!important;font-family:"Noto Sans Thai",sans-serif!important;font-size:20px!important;font-weight:500!important;line-height:1.35!important}
-#warning>.dashboard-intro p{margin:0!important;color:#000!important;font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:300!important}
+#warning>.dashboard-intro h1{margin:0 0 4px!important;color:#0091cd!important;font-family:"Sarabun",sans-serif!important;font-size:20px!important;font-weight:500!important;line-height:1.35!important}
+#warning>.dashboard-intro p{margin:0!important;color:#000!important;font-family:"Sarabun",sans-serif!important;font-size:16px!important;font-weight:300!important}
 #warning>.dashboard-intro #floodCornerTabs{display:flex!important;visibility:visible!important;opacity:1!important}
 @media(max-width:1050px){#warning>.dashboard-intro .dashboard-intro-inner{align-items:stretch!important;flex-direction:column!important}}
 </style>
@@ -5332,7 +5332,7 @@ body>.ieat-persistent-tabbar{
 #warning>.flood-support-heading{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:22px!important}
 #floodCornerTabs{display:none!important}
 #finalFloodHeaderTabs{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:10px!important;margin-left:auto!important;flex:0 0 auto!important}
-#finalFloodHeaderTabs button{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:150px!important;min-height:44px!important;padding:10px 22px!important;border:0!important;border-radius:999px!important;background:#0098ca!important;color:#fff!important;box-shadow:0 5px 13px rgba(0,91,145,.22)!important;font-family:"Noto Sans Thai",sans-serif!important;font-size:16px!important;font-weight:500!important;cursor:pointer!important;white-space:nowrap!important}
+#finalFloodHeaderTabs button{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:150px!important;min-height:44px!important;padding:10px 22px!important;border:0!important;border-radius:999px!important;background:#0098ca!important;color:#fff!important;box-shadow:0 5px 13px rgba(0,91,145,.22)!important;font-family:"Sarabun",sans-serif!important;font-size:16px!important;font-weight:500!important;cursor:pointer!important;white-space:nowrap!important}
 #finalFloodHeaderTabs button.active{background:#005b91!important}
 @media(max-width:1050px){#warning>.flood-support-heading{align-items:stretch!important;flex-direction:column!important}#finalFloodHeaderTabs{width:100%!important;margin-left:0!important;justify-content:flex-start!important;overflow-x:auto!important}}
 </style>
@@ -5368,7 +5368,7 @@ body>.ieat-persistent-tabbar{
 #warning .flood-final-tables{display:none!important}
 .rid-basin-section{margin:20px 0;background:#fff;border:1px solid #dce5ec;border-radius:16px;overflow:hidden;box-shadow:0 4px 14px rgba(30,66,100,.08)}
 .rid-basin-head{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:17px 20px;border-bottom:1px solid #e1e8ed}
-.rid-basin-head h2{margin:0;color:#004b79;font-family:"Noto Sans Thai",sans-serif;font-size:20px;font-weight:500}
+.rid-basin-head h2{margin:0;color:#004b79;font-family:"Sarabun",sans-serif;font-size:20px;font-weight:500}
 .rid-basin-head p{margin:4px 0 0;color:#667680;font-size:14px}
 .rid-basin-head a{flex:0 0 auto;padding:9px 14px;border-radius:999px;background:#0098ca;color:#fff;text-decoration:none;font-size:14px}
 .rid-basin-layout{display:grid;grid-template-columns:330px minmax(0,1fr);min-height:720px}
@@ -5750,7 +5750,7 @@ body.watch-page-active,body.watch-page-active main.container{background:#fff!imp
 #infographic .infographic-preview{padding:14px;background:#eef2f4;overflow:auto}
 #infographic .infographic-preview>.export-sheet{width:100%!important;max-width:none!important;margin:0!important;transform:none!important;box-shadow:0 2px 8px rgba(0,0,0,.10)!important}
 #infographic .infographic-card-actions{display:flex;justify-content:flex-end;gap:8px;padding:12px 16px}
-#infographic .infographic-card-actions button{border:0;border-radius:999px;padding:8px 15px;font-family:"Noto Sans Thai",sans-serif;font-size:13px;cursor:pointer}
+#infographic .infographic-card-actions button{border:0;border-radius:999px;padding:8px 15px;font-family:"Sarabun",sans-serif;font-size:13px;cursor:pointer}
 #infographic .info-view-full{background:#eef4f7;color:#005b91}
 #infographic .info-download-png{background:#0098ca;color:#fff}
 #infographic .infographic-gallery-item.is-expanded{position:fixed;z-index:9999;inset:16px;display:flex;flex-direction:column;background:#fff}
@@ -5815,10 +5815,10 @@ body.infographic-modal-open{overflow:hidden!important}
 
 <style id="export-header-match-other-pages-20260909-v1">
 #infographic .export-page-heading{display:flex;align-items:center;justify-content:space-between;gap:22px;margin:0 0 18px;padding:22px 26px;border-radius:16px;background:#eef5f9}
-#infographic .export-page-heading h1{margin:0;color:#263746;font-family:"Noto Sans Thai",sans-serif;font-size:24px;font-weight:500;line-height:1.35}
-#infographic .export-page-heading p{margin:5px 0 0;color:#687984;font-family:"Noto Sans Thai",sans-serif;font-size:14px;font-weight:300}
+#infographic .export-page-heading h1{margin:0;color:#263746;font-family:"Sarabun",sans-serif;font-size:24px;font-weight:500;line-height:1.35}
+#infographic .export-page-heading p{margin:5px 0 0;color:#687984;font-family:"Sarabun",sans-serif;font-size:14px;font-weight:300}
 #infographic #exportHeaderTabs{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-left:auto;flex:0 0 auto}
-#infographic #exportHeaderTabs button{display:inline-flex;align-items:center;justify-content:center;min-width:150px;min-height:48px;padding:10px 22px;border:0;border-radius:999px;background:#0098ca;color:#fff;box-shadow:0 5px 13px rgba(0,91,145,.20);font-family:"Noto Sans Thai",sans-serif;font-size:16px;font-weight:500;cursor:pointer;white-space:nowrap}
+#infographic #exportHeaderTabs button{display:inline-flex;align-items:center;justify-content:center;min-width:150px;min-height:48px;padding:10px 22px;border:0;border-radius:999px;background:#0098ca;color:#fff;box-shadow:0 5px 13px rgba(0,91,145,.20);font-family:"Sarabun",sans-serif;font-size:16px;font-weight:500;cursor:pointer;white-space:nowrap}
 #infographic #exportHeaderTabs button.active{background:#005b91;box-shadow:0 5px 14px rgba(0,75,121,.30)}
 #infographic .multi-report-toolbar .report-toolbar-copy{display:none!important}
 #infographic .multi-report-toolbar{justify-content:flex-end!important}
@@ -5914,13 +5914,13 @@ body.infographic-modal-open{overflow:hidden!important}
 html,body{
  background:var(--hub-bg)!important;
  color:var(--hub-ink)!important;
- font-family:"Noto Sans Thai",sans-serif!important;
+ font-family:"Sarabun",sans-serif!important;
  font-size:16px!important;
  font-weight:400!important;
  line-height:1.6!important;
 }
 main,main *:not(svg):not(path){
- font-family:"Noto Sans Thai",sans-serif!important;
+ font-family:"Sarabun",sans-serif!important;
 }
 main.container{background:var(--hub-bg)!important}
 main .view,main .view.active{color:var(--hub-ink)!important}
@@ -5997,7 +5997,7 @@ main [role="button"],
 main .primary,
 main .download-image,
 main .download{
- font-family:"Noto Sans Thai",sans-serif!important;
+ font-family:"Sarabun",sans-serif!important;
  font-size:15px!important;
  font-weight:500!important;
 }
@@ -6035,7 +6035,7 @@ main .map-upload-button{
 }
 main table{
  color:var(--hub-ink)!important;
- font-family:"Noto Sans Thai",sans-serif!important;
+ font-family:"Sarabun",sans-serif!important;
  font-size:14px!important;
  font-weight:400!important;
 }
@@ -6097,7 +6097,7 @@ main input:focus,main select:focus,main textarea:focus{
 }
 #infographic .export-sheet,
 #infographic .export-sheet *{
- font-family:"Noto Sans Thai",sans-serif!important;
+ font-family:"Sarabun",sans-serif!important;
 }
 #infographic .export-sheet h2{font-size:20px!important;font-weight:600!important}
 #infographic .export-sheet h3{font-size:18px!important;font-weight:500!important}
@@ -6131,7 +6131,7 @@ main input:focus,main select:focus,main textarea:focus{
 body main.container #warning,
 body main.container #thaiwater-warning,
 body main.container #infcographic{
- font-family:"Noto Sans Thai",sans-serif!important;
+ font-family:"Sarabun",sans-serif!important;
  color:#0d1a2b!important;
  font-size:16px!important;
  font-weight:400!important;
@@ -6139,7 +6139,7 @@ body main.container #infcographic{
 body main.container #warning *,
 body main.container #thaiwater-warning *,
 body main.container #infographic *{
- font-family:"Noto Sans Thai",sans-serif!important;
+ font-family:"Sarabun",sans-serif!important;
 }
 body main.container #warning .flood-support-heading h1,
 body main.container #thaiwater-warning .watch-intro h1,
@@ -6204,7 +6204,7 @@ body main.container #thaiwater-warning [class*="kpi"] span{
  line-height:1.5!important;
 }
 body main.container :is(#warning,#thaiwater-warning,#infographic) table{
- font-family:"Noto Sans Thai",sans-serif!important;
+ font-family:"Sarabun",sans-serif!important;
  font-size:14px!important;
  font-weight:400!important;
 }
@@ -6223,7 +6223,7 @@ body main.container :is(#warning,#thaiwater-warning,#infographic) table td{
 }
 body main.container :is(#warning,#thaiwater-warning,#infographic) button,
 body main.container :is(#warning,#thaiwater-warning,#infographic) [role="button"]{
- font-family:"Noto Sans Thai",sans-serif!important;
+ font-family:"Sarabun",sans-serif!important;
  font-size:15px!important;
  font-weight:500!important;
 }
@@ -6234,7 +6234,7 @@ body main.container #exportHeaderTabs button{
  font-weight:500!important;
 }
 body main.container :is(#warning,#thaiwater-warning,#infographic) a{
- font-family:"Noto Sans Thai",sans-serif!important;
+ font-family:"Sarabun",sans-serif!important;
  color:#1565c0!important;
  font-weight:500!important;
 }
@@ -6250,9 +6250,9 @@ body main.container :is(#warning,#thaiwater-warning,#infographic) [class*="-card
  "use strict";
  function set(el,props){if(!el)return;Object.entries(props).forEach(([k,v])=>el.style.setProperty(k,v,"important"))}
  function lockTypography(){
-  document.querySelectorAll("#warning .card.kpi strong,#warning .national-kpi strong,#thaiwater-warning [class*='kpi'] strong").forEach(el=>set(el,{"font-family":"'Noto Sans Thai', sans-serif","font-size":"28px","font-weight":"600","line-height":"1.25","color":"#1565c0"}));
-  document.querySelectorAll("#warning .card.kpi span,#warning .national-kpi span,#thaiwater-warning [class*='kpi'] span").forEach(el=>set(el,{"font-family":"'Noto Sans Thai', sans-serif","font-size":"16px","font-weight":"400","line-height":"1.5","color":"#0d1a2b"}));
-  document.querySelectorAll("#warning .national-kpi h2").forEach(el=>set(el,{"font-family":"'Noto Sans Thai', sans-serif","font-size":"20px","font-weight":"600","line-height":"1.45","color":"#0d1a2b"}));
+  document.querySelectorAll("#warning .card.kpi strong,#warning .national-kpi strong,#thaiwater-warning [class*='kpi'] strong").forEach(el=>set(el,{"font-family":"'Sarabun', sans-serif","font-size":"28px","font-weight":"600","line-height":"1.25","color":"#1565c0"}));
+  document.querySelectorAll("#warning .card.kpi span,#warning .national-kpi span,#thaiwater-warning [class*='kpi'] span").forEach(el=>set(el,{"font-family":"'Sarabun', sans-serif","font-size":"16px","font-weight":"400","line-height":"1.5","color":"#0d1a2b"}));
+  document.querySelectorAll("#warning .national-kpi h2").forEach(el=>set(el,{"font-family":"'Sarabun', sans-serif","font-size":"20px","font-weight":"600","line-height":"1.45","color":"#0d1a2b"}));
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",lockTypography);else lockTypography();
  const main=document.querySelector("main.container");if(main)new MutationObserver(lockTypography).observe(main,{subtree:true,childList:true,characterData:true});
@@ -6284,7 +6284,7 @@ body main.container #thaiwater-warning .watch-intro h2,
 body main.container #infographic>.export-page-heading h1{
  margin:0 0 4px!important;
  color:#0d1a2b!important;
- font-family:"Noto Sans Thai",sans-serif!important;
+ font-family:"Sarabun",sans-serif!important;
  font-size:24px!important;
  font-weight:600!important;
  line-height:1.4!important;
@@ -6294,7 +6294,7 @@ body main.container #thaiwater-warning .watch-intro p,
 body main.container #infographic>.export-page-heading p{
  margin:0!important;
  color:#0d1a2b!important;
- font-family:"Noto Sans Thai",sans-serif!important;
+ font-family:"Sarabun",sans-serif!important;
  font-size:16px!important;
  font-weight:400!important;
  line-height:1.6!important;
@@ -6321,7 +6321,7 @@ body main.container #exportHeaderTabs button{
  background:#1e88e5!important;
  color:#fff!important;
  box-shadow:0 6px 14px rgba(21,101,192,.22)!important;
- font-family:"Noto Sans Thai",sans-serif!important;
+ font-family:"Sarabun",sans-serif!important;
  font-size:16px!important;
  font-weight:500!important;
  white-space:nowrap!important;
@@ -6364,8 +6364,8 @@ body main.container #exportHeaderTabs button.active{
   ["#warning>.flood-support-heading","#thaiwater-warning .watch-intro","#infographic>.export-page-heading"].forEach(sel=>{
    const h=document.querySelector(sel);if(!h)return;
    const title=h.querySelector("h1,h2");const desc=h.querySelector("p");
-   if(title){title.style.setProperty("font-family","'Noto Sans Thai', sans-serif","important");title.style.setProperty("font-size","24px","important");title.style.setProperty("font-weight","600","important");title.style.setProperty("color","#0d1a2b","important")}
-   if(desc){desc.style.setProperty("font-family","'Noto Sans Thai', sans-serif","important");desc.style.setProperty("font-size","16px","important");desc.style.setProperty("font-weight","400","important");desc.style.setProperty("color","#0d1a2b","important")}
+   if(title){title.style.setProperty("font-family","'Sarabun', sans-serif","important");title.style.setProperty("font-size","24px","important");title.style.setProperty("font-weight","600","important");title.style.setProperty("color","#0d1a2b","important")}
+   if(desc){desc.style.setProperty("font-family","'Sarabun', sans-serif","important");desc.style.setProperty("font-size","16px","important");desc.style.setProperty("font-weight","400","important");desc.style.setProperty("color","#0d1a2b","important")}
   });
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",lockHeaderTypography);else lockHeaderTypography();
@@ -6385,7 +6385,7 @@ html body textarea,
 html body table,
 html body th,
 html body td{
- font-family:"Noto Sans Thai",sans-serif!important;
+ font-family:"Sarabun",sans-serif!important;
 }
 </style>
 <script id="match-hub-font-family-final-20260909-v1-script">
@@ -6393,7 +6393,7 @@ html body td{
  "use strict";
  function matchHubFont(){
   document.querySelectorAll("main h1,main h2,main h3,main h4,main h5,main h6,main p,main span,main strong,main small,main a,main button,main label,main input,main select,main textarea,main th,main td,main li,main div[contenteditable='true'],main p[contenteditable='true'],main h2[contenteditable='true']").forEach(function(el){
-   el.style.setProperty("font-family","'Noto Sans Thai', sans-serif","important");
+   el.style.setProperty("font-family","'Sarabun', sans-serif","important");
   });
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",matchHubFont);else matchHubFont();
@@ -6419,7 +6419,7 @@ html body td{
 #thaiwater-warning .tw-risk-head h3{
  margin:0!important;
  color:#0d1a2b!important;
- font-family:"Noto Sans Thai",sans-serif!important;
+ font-family:"Sarabun",sans-serif!important;
  font-size:18px!important;
  font-weight:500!important;
  line-height:1.5!important;
@@ -6427,7 +6427,7 @@ html body td{
 #thaiwater-warning .tw-risk-head p{
  margin:3px 0 0!important;
  color:#0d1a2b!important;
- font-family:"Noto Sans Thai",sans-serif!important;
+ font-family:"Sarabun",sans-serif!important;
  font-size:13px!important;
  font-weight:400!important;
 }
@@ -6463,7 +6463,7 @@ html body td{
  background:transparent!important;
  border:0!important;
  color:#0d1a2b!important;
- font-family:"Noto Sans Thai",sans-serif!important;
+ font-family:"Sarabun",sans-serif!important;
  font-size:14px!important;
  font-weight:400!important;
 }
