@@ -5014,7 +5014,7 @@ body>.ieat-persistent-tabbar{display:none!important}
  async function mount(){
   const panel=document.querySelector("#thaiwater-warning .thaiwater-reference-panel");
   if(!panel)return;
-  panel.innerHTML='<div class="thaiwater-reference-bar"><div><b>พื้นที่เฝ้าระวังน้ำท่วม</b><span>ข้อมูลพื้นที่เสี่ยง 24/48 ชั่วโมง และแผนที่น้ำท่วมสำหรับนิคมอุตสาหกรรม</span></div><a href="https://www.thaiwater.net/new4all/warning" target="_blank" rel="noopener">แหล่งข้อมูล ThaiWater</a></div><div class="tw-risk-map-grid"><section class="tw-risk-card"><div class="tw-risk-head"><h3>พื้นที่เสี่ยงน้ำท่วมจากฝนตกสะสมใน 24 ชม. ข้างหน้า</h3><p>กำลังโหลดข้อมูลล่าสุด…</p></div></section><section class="tw-risk-card"><div class="tw-risk-head"><h3>พื้นที่เสี่ยงน้ำท่วมจากฝนตกสะสมใน 48 ชม. ข้างหน้า</h3><p>กำลังโหลดข้อมูลล่าสุด…</p></div></section><section class="tw-map-card"><div class="tw-map-label">แผนที่สถานการณ์น้ำท่วม</div><iframe allow="local-network-access; geolocation" title="flood" loading="eager" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=3d24287ac6ea49cd823625ddad496e01&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=false&basemaps=true&center=101.62504126049268,13.643355627339425&scale=9244648.868618"></iframe></section></div>';
+  panel.innerHTML='<div class="thaiwater-reference-bar"><div><b>พื้นที่เฝ้าระวังน้ำท่วม</b><span>ข้อมูลพื้นที่เสี่ยง 24/48 ชั่วโมง และแผนที่น้ำท่วมสำหรับนิคมอุตสาหกรรม</span></div><a href="https://www.thaiwater.net/new4all/warning" target="_blank" rel="noopener">แหล่งข้อมูล ThaiWater</a></div><div class="tw-risk-map-grid"><section class="tw-risk-card"><div class="tw-risk-head"><h3>พื้นที่เสี่ยงน้ำท่วมจากฝนตกสะสมใน 24 ชม. ข้างหน้า</h3><p>กำลังโหลดข้อมูลล่าสุด…</p></div></section><section class="tw-risk-card"><div class="tw-risk-head"><h3>พื้นที่เสี่ยงน้ำท่วมจากฝนตกสะสมใน 48 ชม. ข้างหน้า</h3><p>กำลังโหลดข้อมูลล่าสุด…</p></div></section><section class="tw-map-card"><div class="tw-map-label">แผนที่สถานการณ์น้ำท่วม</div><iframe allow="local-network-access; geolocation" title="flood" loading="eager" src="https://www.thaiwater.net/new4all/warning"></iframe></section></div>';
   try{
    const r=await fetch(new URL("./data/thaiwater_latest.json",document.baseURI),{cache:"no-store"});
    if(!r.ok)throw new Error("HTTP "+r.status);
@@ -5512,6 +5512,36 @@ body>.ieat-persistent-tabbar{
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeWatchPurpose);else removeWatchPurpose();
  [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeWatchPurpose,ms)});
+})();
+</script>
+
+
+<style id="thaiwater-map-only-crop-20260909-v1">
+#thaiwater-warning .tw-map-card{position:relative!important;overflow:hidden!important;background:#d5edf4!important}
+#thaiwater-warning .tw-map-card>iframe{
+ position:absolute!important;
+ top:-90px!important;
+ left:-930px!important;
+ width:2200px!important;
+ max-width:none!important;
+ height:950px!important;
+ min-height:950px!important;
+ border:0!important;
+ transform:none!important;
+}
+#thaiwater-warning .tw-map-label{display:none!important}
+@media(max-width:980px){
+ #thaiwater-warning .tw-map-card>iframe{left:-930px!important;width:2200px!important;height:950px!important}
+}
+</style>
+<script id="thaiwater-map-only-crop-20260909-v1-script">
+(function(){
+ function ensureThaiwaterMap(){
+  const frame=document.querySelector("#thaiwater-warning .tw-map-card>iframe");
+  if(frame&&frame.src.indexOf("thaiwater.net/new4all/warning")===-1)frame.src="https://www.thaiwater.net/new4all/warning";
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",ensureThaiwaterMap);else ensureThaiwaterMap();
+ [100,500,1200,2500,5000].forEach(ms=>setTimeout(ensureThaiwaterMap,ms));
 })();
 </script>
 
