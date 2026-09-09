@@ -7122,13 +7122,11 @@ body main.container #infographic #exportHeaderTabs button.active{
   }
  }
  function init(){
-  mountControls();
+  /* ปิดการสร้างแถบควบคุมซ้ำ ซึ่งชนกับคำสั่งซ่อนแถบและทำให้หน้าโหลดวน */
   updateDates(window.IEAT_LIVE_DATA||null);
   refreshData(false);
   setInterval(()=>refreshData(false),REFRESH_MS);
   document.addEventListener("visibilitychange",()=>{if(!document.hidden)refreshData(false)});
-  const view=document.getElementById("infographic");
-  if(view)new MutationObserver(()=>mountControls()).observe(view,{childList:true});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
 })();
