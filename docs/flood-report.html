@@ -6373,5 +6373,34 @@ body main.container #exportHeaderTabs button.active{
 })();
 </script>
 
+
+<style id="match-hub-font-family-final-20260909-v1">
+html body,
+html body main,
+html body main *:not(svg):not(path):not(.material-icons):not([class*="fa-"]),
+html body button,
+html body input,
+html body select,
+html body textarea,
+html body table,
+html body th,
+html body td{
+ font-family:"Noto Sans Thai",sans-serif!important;
+}
+</style>
+<script id="match-hub-font-family-final-20260909-v1-script">
+(function(){
+ "use strict";
+ function matchHubFont(){
+  document.querySelectorAll("main h1,main h2,main h3,main h4,main h5,main h6,main p,main span,main strong,main small,main a,main button,main label,main input,main select,main textarea,main th,main td,main li,main div[contenteditable='true'],main p[contenteditable='true'],main h2[contenteditable='true']").forEach(function(el){
+   el.style.setProperty("font-family","'Noto Sans Thai', sans-serif","important");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",matchHubFont);else matchHubFont();
+ const main=document.querySelector("main");if(main)new MutationObserver(matchHubFont).observe(main,{subtree:true,childList:true});
+ [100,500,1200,2500,5000].forEach(ms=>setTimeout(matchHubFont,ms));
+})();
+</script>
+
 </body>
 </html>
