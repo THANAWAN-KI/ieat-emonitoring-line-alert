@@ -8,8 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Kanit:wght@300;400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script type="module" src="https://js.arcgis.com/5.1/embeddable-components/"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
   <script src="data/thaiwater_latest.js?v=20260821-3"></script>
   <script src="flood-live-data.js?v=20260908-1" defer></script>
   <script src="data/thaiwater-map-meta.js" defer></script>
@@ -1454,7 +1453,7 @@ body{color:#172033!important}
           <a href="https://www.thaiwater.net/new4all/warning" target="_blank" rel="noopener">เปิดเต็มหน้า</a>
         </header>
         <div class="thaiwater-warning-frame">
-          <iframe src="https://www.thaiwater.net/new4all/warning" title="พื้นที่เฝ้าระวัง ThaiWater" loading="eager" allow="fullscreen; geolocation" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          <iframe src="https://www.thaiwater.net/new4all/warning" title="พื้นที่เฝ้าระวัง ThaiWater" loading="lazy" allow="fullscreen; geolocation" referrerpolicy="strict-origin-when-cross-origin"></iframe>
           <div class="thaiwater-warning-fallback">
             หากแผนที่ไม่แสดง โปรดเลือก “เปิดเต็มหน้า” เพื่อดูข้อมูลจาก ThaiWater โดยตรง
           </div>
@@ -4177,7 +4176,7 @@ html body #warning .flood-final-cards .source-link{display:none!important}
   pair.appendChild(indicators);pair.appendChild(flood);
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",pairCards);else pairCards();
- [300,900,1900,2400].forEach(ms=>setTimeout(pairCards,ms));
+ [0].forEach(ms=>setTimeout(pairCards,ms));
 })();
 </script>
 <style id="flash-flood-ranking-card-v1">
@@ -4206,7 +4205,7 @@ html body #warning .flood-final-cards .source-link{display:none!important}
   list.innerHTML=rows.length?rows.map((row,index)=>'<div class="flash-flood-rank-row"><span class="flash-flood-rank-name">'+(index+1)+'. '+escapeHtml(row.province)+'</span><b class="flash-flood-rank-value">'+(row.maxRain===null?row.count+' จุด':row.maxRain.toLocaleString("th-TH",{maximumFractionDigits:1})+' มม.')+'</b></div>').join(''):'<div class="flash-flood-rank-row"><span class="flash-flood-rank-name">กำลังตรวจสอบข้อมูลพื้นที่เสี่ยง</span><b class="flash-flood-rank-value">'+escapeHtml(count.textContent||'–')+'</b></div>';
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",render);else render();
- [300,900,1800,3000,5000].forEach(ms=>setTimeout(render,ms));
+ [0].forEach(ms=>setTimeout(render,ms));
 })();
 </script>
 <style id="flood-font-alignment-20260908-v1">
@@ -4712,7 +4711,7 @@ html body #warning .flood-final-cards>.national-kpi span{
   }
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeAllCardIcons);
   else removeAllCardIcons();
-  [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeAllCardIcons,ms)});
+  [0].forEach(function(ms){setTimeout(removeAllCardIcons,ms)});
 })();
 </script>
 <style id="water-overflow-text-font-20260908-v9">
@@ -4772,7 +4771,7 @@ html body #thaiwater-warning.active{display:block!important}
   [report,watch,info].filter(Boolean).forEach(function(button){button.onclick=function(){go(button.dataset.view)}});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",fixFloodNav);else fixFloodNav();
- [200,800,1800,3000].forEach(function(ms){setTimeout(fixFloodNav,ms)});
+ [0].forEach(function(ms){setTimeout(fixFloodNav,ms)});
 })();
 </script>
 <style id="visible-thaiwater-warning-button-20260908-v2">
@@ -4807,7 +4806,7 @@ html body #thaiwater-warning.active{display:block!important}
   });
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",ensureVisibleWatchButton);else ensureVisibleWatchButton();
- [100,400,900,1600,2600,4500].forEach(function(ms){setTimeout(ensureVisibleWatchButton,ms)});
+ [0].forEach(function(ms){setTimeout(ensureVisibleWatchButton,ms)});
 })();
 </script>
 
@@ -4860,7 +4859,7 @@ html body #thaiwater-warning.active{display:block!important}
  function nearest(estate,items){let best=null;items.forEach(x=>{if(num(x.latitude)==null||num(x.longitude)==null)return;const d=km(estate,x);if(!best||d<best.distance)best={item:x,distance:d}});return best}
  function shell(){
   const host=document.querySelector("#thaiwater-warning .thaiwater-warning-shell");if(!host)return null;
-  host.innerHTML='<div class="watch-dashboard"><div class="watch-intro"><div><h2>พื้นที่เฝ้าระวังใกล้นิคมอุตสาหกรรมทั่วประเทศ</h2><p>คัดกรองพื้นที่เสี่ยงและสถานีตรวจวัดภายในรัศมี '+RADIUS+' กม. จากตำแหน่งนิคมอุตสาหกรรม</p></div><div class="watch-time" id="watchDataTime">กำลังโหลดข้อมูลล่าสุด…</div></div><section class="thaiwater-reference-panel"><div class="thaiwater-reference-bar"><div><b>พื้นที่เฝ้าระวัง — ThaiWater</b><span>แผนที่และอันดับพื้นที่เสี่ยง 24/48 ชั่วโมง และข้อมูลความเสี่ยง 6 เดือน</span></div><a href="https://www.thaiwater.net/new4all/warning" target="_blank" rel="noopener">เปิดเต็มหน้าจอ</a></div><iframe class="thaiwater-reference-frame" title="พื้นที่เฝ้าระวัง ThaiWater" loading="eager" src="https://www.thaiwater.net/new4all/warning"></iframe></section><div class="watch-analysis-title">ข้อมูลวิเคราะห์เพิ่มเติมสำหรับนิคมอุตสาหกรรม</div><div class="watch-grid">'+
+  host.innerHTML='<div class="watch-dashboard"><div class="watch-intro"><div><h2>พื้นที่เฝ้าระวังใกล้นิคมอุตสาหกรรมทั่วประเทศ</h2><p>คัดกรองพื้นที่เสี่ยงและสถานีตรวจวัดภายในรัศมี '+RADIUS+' กม. จากตำแหน่งนิคมอุตสาหกรรม</p></div><div class="watch-time" id="watchDataTime">กำลังโหลดข้อมูลล่าสุด…</div></div><section class="thaiwater-reference-panel"><div class="thaiwater-reference-bar"><div><b>พื้นที่เฝ้าระวัง — ThaiWater</b><span>แผนที่และอันดับพื้นที่เสี่ยง 24/48 ชั่วโมง และข้อมูลความเสี่ยง 6 เดือน</span></div><a href="https://www.thaiwater.net/new4all/warning" target="_blank" rel="noopener">เปิดเต็มหน้าจอ</a></div><iframe class="thaiwater-reference-frame" title="พื้นที่เฝ้าระวัง ThaiWater" loading="lazy" src="https://www.thaiwater.net/new4all/warning"></iframe></section><div class="watch-analysis-title">ข้อมูลวิเคราะห์เพิ่มเติมสำหรับนิคมอุตสาหกรรม</div><div class="watch-grid">'+
   '<section class="watch-panel"><div class="watch-panel-head"><div><h3>พื้นที่เสี่ยงน้ำท่วมฉับพลัน</h3><p>เปรียบเทียบทุกนิคมฯ กับพื้นที่เสี่ยงรายตำบลใน 24 และ 48 ชั่วโมงข้างหน้า</p></div><div class="watch-tabs"><button class="active" data-risk-period="24h">24 ชั่วโมง</button><button data-risk-period="48h">48 ชั่วโมง</button></div></div><div class="watch-tools"><input id="riskSearch" placeholder="ค้นหานิคม จังหวัด อำเภอ หรือตำบล"><span class="watch-count" id="riskCount"></span></div><div class="watch-table-wrap"><table class="watch-table"><thead><tr><th>นิคมอุตสาหกรรม</th><th>สายปฏิบัติการ</th><th>สถานะ</th><th>พื้นที่เสี่ยงใกล้สุด</th><th>ระยะทาง</th><th>ฝนสะสม</th><th>ข้อมูล ณ เวลา</th></tr></thead><tbody id="riskRows"></tbody></table></div></section>'+
   '<section class="watch-panel"><div class="watch-panel-head"><div><h3>สถานการณ์น้ำในจุดเฝ้าระวังใกล้นิคมฯ</h3><p>สถานีระดับน้ำที่ใกล้แต่ละนิคมฯ มากที่สุด แสดงครบทุกนิคมอุตสาหกรรม</p></div></div><div class="watch-tools"><input id="waterSearch" placeholder="ค้นหานิคม สถานี จังหวัด หรือสถานะ"><span class="watch-count" id="waterCount"></span></div><div class="watch-table-wrap"><table class="watch-table"><thead><tr><th>นิคมอุตสาหกรรม</th><th>สถานีใกล้สุด</th><th>จังหวัด/อำเภอ</th><th>ระยะทาง</th><th>ระดับน้ำ</th><th>สถานะ</th><th>ตรวจวัดล่าสุด</th></tr></thead><tbody id="waterRows"></tbody></table></div></section>'+
   '<section class="watch-panel"><div class="watch-panel-head"><div><h3>แนวโน้มฝนและทิศทางกลุ่มฝน</h3><p>เลื่อนแถบเวลาบนแผนที่เพื่อดูฝนล่วงหน้าและการเคลื่อนตัวของกลุ่มฝน</p></div></div><div class="rain-layout"><iframe class="rain-map" title="แผนที่พยากรณ์ฝน" loading="lazy" src="https://embed.windy.com/embed2.html?lat=13.8&lon=100.6&detailLat=13.8&detailLon=100.6&width=900&height=520&zoom=5&level=surface&overlay=rain&product=ecmwf&menu=&message=true&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1"></iframe><aside class="rain-guide"><h4>วิธีใช้เพื่อประกอบการพยากรณ์</h4><ol><li>กดเล่นหรือเลื่อนเวลา เพื่อดูว่าช่วงใดฝนเข้าพื้นที่นิคมฯ</li><li>สังเกตการเคลื่อนของแถบสีจากหลายช่วงเวลา เพื่อประเมินทิศทางกลุ่มฝน</li><li>เทียบกับตารางฝนสะสมและระดับน้ำด้านบนก่อนออกประกาศเฝ้าระวัง</li></ol><p><b>ข้อควรระวัง:</b> แผนที่เป็นผลพยากรณ์จากแบบจำลอง ไม่ใช่ประกาศเตือนภัยอย่างเป็นทางการ ควรยืนยันกับ TMD/ThaiWater ทุกครั้ง</p><div class="source-row"><a href="https://www.tmd.go.th/weather/radar" target="_blank" rel="noopener">เรดาร์ฝน TMD</a><a href="https://www.thaiwater.net/new4all" target="_blank" rel="noopener">ThaiWater</a><a href="https://www.tmd.go.th/weather/forecast/daily" target="_blank" rel="noopener">พยากรณ์อากาศ TMD</a></div></aside></div></section>'+
@@ -4926,7 +4925,7 @@ html body #thaiwater-warning.active{display:block!important}
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",syncMainTabs);else syncMainTabs();
  document.addEventListener("click",function(event){if(event.target.closest(".nav button,.flood-support-heading-actions button"))setTimeout(syncMainTabs,0)});
- [100,500,1200,2500,5000].forEach(function(ms){setTimeout(syncMainTabs,ms)});
+ [0].forEach(function(ms){setTimeout(syncMainTabs,ms)});
 })();
 </script>
 
@@ -4963,7 +4962,7 @@ body>.ieat-persistent-tabbar{display:none!important}
   openPage(document.querySelector("main .view.active")?.id||"warning");
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
- [100,700,1800,3500,6000].forEach(function(ms){setTimeout(mount,ms)});
+ [0].forEach(function(ms){setTimeout(mount,ms)});
 })();
 </script>
 
@@ -5014,7 +5013,7 @@ body>.ieat-persistent-tabbar{display:none!important}
  async function mount(){
   const panel=document.querySelector("#thaiwater-warning .thaiwater-reference-panel");
   if(!panel)return;
-  panel.innerHTML='<div class="thaiwater-reference-bar"><div><b>พื้นที่เฝ้าระวังน้ำท่วม</b><span>ข้อมูลพื้นที่เสี่ยง 24/48 ชั่วโมง และแผนที่น้ำท่วมสำหรับนิคมอุตสาหกรรม</span></div><a href="https://www.thaiwater.net/new4all/warning" target="_blank" rel="noopener">แหล่งข้อมูล ThaiWater</a></div><div class="tw-risk-map-grid"><section class="tw-risk-card"><div class="tw-risk-head"><h3>พื้นที่เสี่ยงน้ำท่วมจากฝนตกสะสมใน 24 ชม. ข้างหน้า</h3><p>กำลังโหลดข้อมูลล่าสุด…</p></div></section><section class="tw-risk-card"><div class="tw-risk-head"><h3>พื้นที่เสี่ยงน้ำท่วมจากฝนตกสะสมใน 48 ชม. ข้างหน้า</h3><p>กำลังโหลดข้อมูลล่าสุด…</p></div></section><section class="tw-map-card"><div class="tw-map-label">แผนที่สถานการณ์น้ำท่วม</div><iframe allow="local-network-access; geolocation" title="flood" loading="eager" src="https://www.thaiwater.net/new4all/warning"></iframe></section></div>';
+  panel.innerHTML='<div class="thaiwater-reference-bar"><div><b>พื้นที่เฝ้าระวังน้ำท่วม</b><span>ข้อมูลพื้นที่เสี่ยง 24/48 ชั่วโมง และแผนที่น้ำท่วมสำหรับนิคมอุตสาหกรรม</span></div><a href="https://www.thaiwater.net/new4all/warning" target="_blank" rel="noopener">แหล่งข้อมูล ThaiWater</a></div><div class="tw-risk-map-grid"><section class="tw-risk-card"><div class="tw-risk-head"><h3>พื้นที่เสี่ยงน้ำท่วมจากฝนตกสะสมใน 24 ชม. ข้างหน้า</h3><p>กำลังโหลดข้อมูลล่าสุด…</p></div></section><section class="tw-risk-card"><div class="tw-risk-head"><h3>พื้นที่เสี่ยงน้ำท่วมจากฝนตกสะสมใน 48 ชม. ข้างหน้า</h3><p>กำลังโหลดข้อมูลล่าสุด…</p></div></section><section class="tw-map-card"><div class="tw-map-label">แผนที่สถานการณ์น้ำท่วม</div><iframe allow="local-network-access; geolocation" title="flood" loading="lazy" src="https://www.thaiwater.net/new4all/warning"></iframe></section></div>';
   try{
    const r=await fetch(new URL("./data/thaiwater_latest.json",document.baseURI),{cache:"no-store"});
    if(!r.ok)throw new Error("HTTP "+r.status);
@@ -5110,7 +5109,7 @@ body>.ieat-persistent-tabbar{display:none!important}
   setActive(current);
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
- [150,800,2200].forEach(ms=>setTimeout(mount,ms));
+ [0].forEach(ms=>setTimeout(mount,ms));
 })();
 </script>
 
@@ -5131,7 +5130,7 @@ body>.ieat-persistent-tabbar{
   document.querySelectorAll(".topbar,.flood-support-heading-actions,.native-page-tabs,body>.ieat-persistent-tabbar").forEach(function(el){el.remove()});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeOldTabs);else removeOldTabs();
- [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeOldTabs,ms)});
+ [0].forEach(function(ms){setTimeout(removeOldTabs,ms)});
 })();
 </script>
 
@@ -5222,7 +5221,7 @@ body>.ieat-persistent-tabbar{
   placeTabs();
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",bind);else bind();
- [100,600,1400,2800,5000].forEach(function(ms){setTimeout(placeTabs,ms)});
+ [0].forEach(function(ms){setTimeout(placeTabs,ms)});
 })();
 </script>
 
@@ -5270,7 +5269,7 @@ body>.ieat-persistent-tabbar{
   if(main)new MutationObserver(render).observe(main,{subtree:true,attributes:true,attributeFilter:["class"]});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start);else start();
- [100,500,1200,2500,5000].forEach(ms=>setTimeout(render,ms));
+ [0].forEach(ms=>setTimeout(render,ms));
 })();
 </script>
 
@@ -5296,7 +5295,7 @@ body>.ieat-persistent-tabbar{
  document.addEventListener("click",function(e){if(e.target.closest("#floodCornerTabs button"))setTimeout(fixCornerTabs,0)});
  const main=document.querySelector("main.container");
  if(main)new MutationObserver(fixCornerTabs).observe(main,{subtree:true,attributes:true,attributeFilter:["class"]});
- [50,200,600,1200,2500,5000].forEach(ms=>setTimeout(fixCornerTabs,ms));
+ [0].forEach(ms=>setTimeout(fixCornerTabs,ms));
 })();
 </script>
 
@@ -5322,7 +5321,7 @@ body>.ieat-persistent-tabbar{
   if(view&&head&&view.firstElementChild!==head)view.insertBefore(head,view.firstElementChild);
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",moveHeader);else moveHeader();
- [50,200,600,1200,2500,5000,8000].forEach(ms=>setTimeout(moveHeader,ms));
+ [0].forEach(ms=>setTimeout(moveHeader,ms));
 })();
 </script>
 
@@ -5359,7 +5358,7 @@ body>.ieat-persistent-tabbar{
   tabs.querySelectorAll("button").forEach(b=>b.classList.toggle("active",b.dataset.finalView===(document.querySelector("main .view.active")?.id||"warning")));
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
- [50,200,600,1200,2500,5000,8000].forEach(ms=>setTimeout(mount,ms));
+ [0].forEach(ms=>setTimeout(mount,ms));
 })();
 </script>
 
@@ -5431,7 +5430,7 @@ body>.ieat-persistent-tabbar{
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
  document.addEventListener("click",e=>{if(e.target.closest("#finalFloodHeaderTabs button"))setTimeout(mount,0)});
  const main=document.querySelector("main.container");if(main)new MutationObserver(moveNav).observe(main,{subtree:true,attributes:true,attributeFilter:["class"]});
- [100,500,1200,2500,5000].forEach(ms=>setTimeout(mount,ms));
+ [0].forEach(ms=>setTimeout(mount,ms));
 })();
 </script>
 
@@ -5445,7 +5444,7 @@ body>.ieat-persistent-tabbar{
   document.querySelectorAll("#warning>.flood-page-purpose").forEach(function(el){el.remove()});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeOverviewSummary);else removeOverviewSummary();
- [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeOverviewSummary,ms)});
+ [0].forEach(function(ms){setTimeout(removeOverviewSummary,ms)});
 })();
 </script>
 
@@ -5463,7 +5462,7 @@ body>.ieat-persistent-tabbar{
   if(heading&&basin&&heading.nextElementSibling!==basin)heading.insertAdjacentElement("afterend",basin);
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",moveBasinUp);else moveBasinUp();
- [100,500,1200,2500,5000,8000].forEach(ms=>setTimeout(moveBasinUp,ms));
+ [0].forEach(ms=>setTimeout(moveBasinUp,ms));
 })();
 </script>
 
@@ -5482,7 +5481,7 @@ body>.ieat-persistent-tabbar{
   if(report&&basin&&report.nextElementSibling!==basin)report.insertAdjacentElement("afterend",basin);
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",placeAfterDailyReport);else placeAfterDailyReport();
- [100,500,1200,2500,5000,8000,10000].forEach(ms=>setTimeout(placeAfterDailyReport,ms));
+ [0].forEach(ms=>setTimeout(placeAfterDailyReport,ms));
 })();
 </script>
 
@@ -5494,7 +5493,7 @@ body>.ieat-persistent-tabbar{
 (function(){
  function removeRidLabel(){document.querySelectorAll(".rid-basin-frame-label").forEach(function(el){el.remove()})}
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeRidLabel);else removeRidLabel();
- [100,500,1200,2500].forEach(function(ms){setTimeout(removeRidLabel,ms)});
+ [0].forEach(function(ms){setTimeout(removeRidLabel,ms)});
 })();
 </script>
 
@@ -5511,7 +5510,7 @@ body>.ieat-persistent-tabbar{
   document.querySelectorAll("#thaiwater-warning>.flood-page-purpose").forEach(function(el){el.remove()});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeWatchPurpose);else removeWatchPurpose();
- [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeWatchPurpose,ms)});
+ [0].forEach(function(ms){setTimeout(removeWatchPurpose,ms)});
 })();
 </script>
 
@@ -5541,7 +5540,7 @@ body>.ieat-persistent-tabbar{
   if(frame&&frame.src.indexOf("thaiwater.net/new4all/warning")===-1)frame.src="https://www.thaiwater.net/new4all/warning";
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",ensureThaiwaterMap);else ensureThaiwaterMap();
- [100,500,1200,2500,5000].forEach(ms=>setTimeout(ensureThaiwaterMap,ms));
+ [0].forEach(ms=>setTimeout(ensureThaiwaterMap,ms));
 })();
 </script>
 
@@ -5602,7 +5601,7 @@ body>.ieat-persistent-tabbar{
   if(!document.getElementById("swocWatchFrame").src)show("reservoir");
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
- [100,500,1200,2500,5000].forEach(ms=>setTimeout(mount,ms));
+ [0].forEach(ms=>setTimeout(mount,ms));
 })();
 </script>
 
@@ -5619,7 +5618,7 @@ body>.ieat-persistent-tabbar{
   });
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeRainTrend);else removeRainTrend();
- [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeRainTrend,ms)});
+ [0].forEach(function(ms){setTimeout(removeRainTrend,ms)});
 })();
 </script>
 
@@ -5667,7 +5666,7 @@ body>.ieat-persistent-tabbar{
   document.querySelectorAll("#thaiwater-warning .watch-time,#thaiwater-warning #watchDataTime").forEach(function(el){el.remove()});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeWatchUpdatedTime);else removeWatchUpdatedTime();
- [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeWatchUpdatedTime,ms)});
+ [0].forEach(function(ms){setTimeout(removeWatchUpdatedTime,ms)});
 })();
 </script>
 
@@ -5713,7 +5712,7 @@ body.watch-page-active,body.watch-page-active main.container{background:#fff!imp
   document.querySelectorAll("#infographic>.flood-page-purpose,#infographic #finalFloodHeaderTabs,#infographic #floodCornerTabs,#infographic .native-page-tabs").forEach(function(el){el.remove()});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeMarkedExportParts);else removeMarkedExportParts();
- [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeMarkedExportParts,ms)});
+ [0].forEach(function(ms){setTimeout(removeMarkedExportParts,ms)});
 })();
 </script>
 
@@ -5727,7 +5726,7 @@ body.watch-page-active,body.watch-page-active main.container{background:#fff!imp
   document.querySelectorAll("#infographic .report-edit-links").forEach(function(el){el.remove()});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeExportMapLinks);else removeExportMapLinks();
- [100,500,1200,2500].forEach(function(ms){setTimeout(removeExportMapLinks,ms)});
+ [0].forEach(function(ms){setTimeout(removeExportMapLinks,ms)});
 })();
 </script>
 
@@ -5808,7 +5807,7 @@ body.infographic-modal-open{overflow:hidden!important}
   }
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
- [100,600,1500,3000,5000].forEach(ms=>setTimeout(mount,ms));
+ [0].forEach(ms=>setTimeout(mount,ms));
 })();
 </script>
 
@@ -5846,7 +5845,7 @@ body.infographic-modal-open{overflow:hidden!important}
   }
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
- [100,500,1200,2500,5000].forEach(ms=>setTimeout(mount,ms));
+ [0].forEach(ms=>setTimeout(mount,ms));
 })();
 </script>
 
@@ -5860,7 +5859,7 @@ body.infographic-modal-open{overflow:hidden!important}
   document.querySelectorAll("#infographic .multi-report-toolbar").forEach(function(el){el.remove()});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeExportToolbar);else removeExportToolbar();
- [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeExportToolbar,ms)});
+ [0].forEach(function(ms){setTimeout(removeExportToolbar,ms)});
 })();
 </script>
 
@@ -5886,7 +5885,7 @@ body.infographic-modal-open{overflow:hidden!important}
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeFloatingExportNav);else removeFloatingExportNav();
  const view=document.getElementById("infographic");
  if(view)new MutationObserver(removeFloatingExportNav).observe(view,{childList:true,subtree:true});
- [100,500,1200,2500,5000,8000,12000].forEach(function(ms){setTimeout(removeFloatingExportNav,ms)});
+ [0].forEach(function(ms){setTimeout(removeFloatingExportNav,ms)});
 })();
 </script>
 
@@ -6122,7 +6121,7 @@ main input:focus,main select:focus,main textarea:focus{
   document.querySelectorAll("#thaiwater-warning .thaiwater-reference-bar").forEach(function(el){el.remove()});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeWatchFloodBar);else removeWatchFloodBar();
- [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeWatchFloodBar,ms)});
+ [0].forEach(function(ms){setTimeout(removeWatchFloodBar,ms)});
 })();
 </script>
 
@@ -6256,7 +6255,7 @@ body main.container :is(#warning,#thaiwater-warning,#infographic) [class*="-card
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",lockTypography);else lockTypography();
  const main=document.querySelector("main.container");if(main)new MutationObserver(lockTypography).observe(main,{subtree:true,childList:true,characterData:true});
- [100,500,1200,2500,5000,8000].forEach(ms=>setTimeout(lockTypography,ms));
+ [0].forEach(ms=>setTimeout(lockTypography,ms));
 })();
 </script>
 
@@ -6369,7 +6368,7 @@ body main.container #exportHeaderTabs button.active{
   });
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",lockHeaderTypography);else lockHeaderTypography();
- [100,500,1200,2500,5000].forEach(ms=>setTimeout(lockHeaderTypography,ms));
+ [0].forEach(ms=>setTimeout(lockHeaderTypography,ms));
 })();
 </script>
 
@@ -6398,7 +6397,7 @@ html body td{
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",matchHubFont);else matchHubFont();
  const main=document.querySelector("main");if(main)new MutationObserver(matchHubFont).observe(main,{subtree:true,childList:true});
- [100,500,1200,2500,5000].forEach(ms=>setTimeout(matchHubFont,ms));
+ [0].forEach(ms=>setTimeout(matchHubFont,ms));
 })();
 </script>
 
@@ -6600,7 +6599,7 @@ body main.container #thaiwater-warning td.alert-status-cell *{
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",colorAlertCells);else colorAlertCells();
  const watch=document.getElementById("thaiwater-warning");if(watch)new MutationObserver(colorAlertCells).observe(watch,{subtree:true,childList:true,characterData:true});
- [100,500,1200,2500,5000].forEach(ms=>setTimeout(colorAlertCells,ms));
+ [0].forEach(ms=>setTimeout(colorAlertCells,ms));
 })();
 </script>
 
@@ -6664,7 +6663,7 @@ body main.container #thaiwater-warning #finalFloodHeaderTabs button.active{
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",lockWatchColors);else lockWatchColors();
  const main=document.querySelector("main.container");if(main)new MutationObserver(lockWatchColors).observe(main,{subtree:true,attributes:true,attributeFilter:["class"]});
- [100,500,1200,2500,5000].forEach(ms=>setTimeout(lockWatchColors,ms));
+ [0].forEach(ms=>setTimeout(lockWatchColors,ms));
 })();
 </script>
 
@@ -6764,7 +6763,7 @@ body main.container #thaiwater-warning .swoc-live-frame iframe{
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",lockSwocTabColors);else lockSwocTabColors();
  document.addEventListener("click",function(e){if(e.target.closest(".swoc-watch-tab"))setTimeout(lockSwocTabColors,0)});
  const area=document.querySelector("#thaiwater-warning");if(area)new MutationObserver(lockSwocTabColors).observe(area,{subtree:true,attributes:true,attributeFilter:["class"]});
- [100,500,1200,2500,5000].forEach(ms=>setTimeout(lockSwocTabColors,ms));
+ [0].forEach(ms=>setTimeout(lockSwocTabColors,ms));
 })();
 </script>
 
@@ -6853,7 +6852,7 @@ body main.container #thaiwater-warning .swoc-live-frame iframe{
   lat=n(lat);lon=n(lon);if(lat==null||lon==null)return;
   const card=document.querySelector("#thaiwater-warning .tw-map-card");if(!card)return;
   let panel=card.querySelector(".focused-location-map");
-  if(!panel){panel=document.createElement("div");panel.className="focused-location-map";panel.innerHTML='<div class="focused-location-head"><b></b><button type="button">กลับไปแผนที่ ThaiWater</button></div><iframe title="แผนที่ซูมตำแหน่งที่เลือก" loading="eager"></iframe>';card.appendChild(panel);panel.querySelector("button").onclick=()=>panel.remove()}
+  if(!panel){panel=document.createElement("div");panel.className="focused-location-map";panel.innerHTML='<div class="focused-location-head"><b></b><button type="button">กลับไปแผนที่ ThaiWater</button></div><iframe title="แผนที่ซูมตำแหน่งที่เลือก" loading="lazy"></iframe>';card.appendChild(panel);panel.querySelector("button").onclick=()=>panel.remove()}
   panel.querySelector("b").textContent=title||"ตำแหน่งที่เลือก";
   panel.querySelector("iframe").src=osmUrl(lat,lon);
   card.scrollIntoView({behavior:"smooth",block:"center"});
@@ -7190,7 +7189,7 @@ body main.container #infographic .infographic-gallery-item{
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",clean);else clean();
  const main=document.querySelector("main.container");
  if(main)new MutationObserver(clean).observe(main,{subtree:true,childList:true});
- [100,500,1200,2500,5000].forEach(function(ms){setTimeout(clean,ms)});
+ [0].forEach(function(ms){setTimeout(clean,ms)});
 })();
 </script>
 
@@ -7275,7 +7274,7 @@ body main.container #infographic [role="button"]{
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",cleanExportSubtitle);else cleanExportSubtitle();
  const view=document.getElementById("infographic");
  if(view)new MutationObserver(cleanExportSubtitle).observe(view,{subtree:true,childList:true});
- [100,500,1200,2500,5000].forEach(function(ms){setTimeout(cleanExportSubtitle,ms)});
+ [0].forEach(function(ms){setTimeout(cleanExportSubtitle,ms)});
 })();
 </script>
 
@@ -7306,7 +7305,7 @@ body main.container #infographic #exportHeaderTabs button{
   if(h)h.style.setProperty("color","#004b8d","important");
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",lockExportHeader);else lockExportHeader();
- [100,500,1200,2500].forEach(function(ms){setTimeout(lockExportHeader,ms)});
+ [0].forEach(function(ms){setTimeout(lockExportHeader,ms)});
 })();
 </script>
 
@@ -7347,7 +7346,7 @@ html body.export-sarabun-active [contenteditable="true"]{
  const main=document.querySelector("main.container");
  if(main)new MutationObserver(sync).observe(main,{subtree:true,attributes:true,attributeFilter:["class"],childList:true});
  document.addEventListener("click",function(){setTimeout(sync,0)});
- [100,500,1200,2500,5000].forEach(function(ms){setTimeout(sync,ms)});
+ [0].forEach(function(ms){setTimeout(sync,ms)});
 })();
 </script>
 
@@ -7668,7 +7667,7 @@ html body main.container #exportHeaderTabs .export-nav-title{
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
  const view=document.getElementById("infographic");
  if(view)new MutationObserver(mount).observe(view,{subtree:true,childList:true});
- [100,500,1200,2500,5000].forEach(function(ms){setTimeout(mount,ms)});
+ [0].forEach(function(ms){setTimeout(mount,ms)});
 })();
 </script>
 
@@ -7720,8 +7719,8 @@ html body main.container #exportHeaderTabs .export-nav-title{color:#59267c!impor
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",lockPurpleNavigation);else lockPurpleNavigation();
  document.addEventListener("click",function(){setTimeout(lockPurpleNavigation,0)});
  const main=document.querySelector("main.container");
- if(main)new MutationObserver(lockPurpleNavigation).observe(main,{subtree:true,childList:true,attributes:true,attributeFilter:["class","style"]});
- [100,500,1200,2500,5000,8000].forEach(function(ms){setTimeout(lockPurpleNavigation,ms)});
+ if(main)new MutationObserver(lockPurpleNavigation).observe(main,{subtree:true,childList:true});
+ [0].forEach(function(ms){setTimeout(lockPurpleNavigation,ms)});
 })();
 </script>
 
@@ -7748,7 +7747,24 @@ html body main.container #infographic>.export-page-heading{
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeSection);else removeSection();
  const view=document.getElementById("infographic");
  if(view)new MutationObserver(removeSection).observe(view,{subtree:false,childList:true});
- [100,500,1200,2500,5000,8000].forEach(function(ms){setTimeout(removeSection,ms)});
+ [0].forEach(function(ms){setTimeout(removeSection,ms)});
+})();
+</script>
+
+<script id="performance-lazy-media-20260909-v1">
+(function(){
+ "use strict";
+ function tune(){
+  document.querySelectorAll("iframe").forEach(function(frame){
+   frame.setAttribute("loading","lazy");
+   frame.setAttribute("referrerpolicy","strict-origin-when-cross-origin");
+  });
+  document.querySelectorAll("#infographic img").forEach(function(img){
+   img.setAttribute("loading","lazy");
+   img.setAttribute("decoding","async");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",tune);else tune();
 })();
 </script>
 
