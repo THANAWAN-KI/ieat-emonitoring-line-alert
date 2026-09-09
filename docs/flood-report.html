@@ -7310,5 +7310,46 @@ body main.container #infographic #exportHeaderTabs button{
 })();
 </script>
 
+<style id="force-sarabun-entire-export-page-20260909-v2">
+html body.export-sarabun-active,
+html body.export-sarabun-active main,
+html body.export-sarabun-active main.container,
+html body.export-sarabun-active #infographic,
+html body.export-sarabun-active #infographic *,
+html body main.container #infographic,
+html body main.container #infographic *{
+ font-family:"Sarabun",sans-serif!important;
+}
+html body.export-sarabun-active button,
+html body.export-sarabun-active input,
+html body.export-sarabun-active select,
+html body.export-sarabun-active textarea,
+html body.export-sarabun-active table,
+html body.export-sarabun-active th,
+html body.export-sarabun-active td,
+html body.export-sarabun-active [contenteditable="true"]{
+ font-family:"Sarabun",sans-serif!important;
+}
+</style>
+<script id="force-sarabun-entire-export-page-20260909-v2-script">
+(function(){
+ "use strict";
+ function sync(){
+  const active=!!document.querySelector("#infographic.active");
+  document.body.classList.toggle("export-sarabun-active",active);
+  if(active){
+   document.querySelectorAll("#infographic,#infographic *").forEach(function(el){
+    el.style.setProperty("font-family","Sarabun, sans-serif","important");
+   });
+  }
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",sync);else sync();
+ const main=document.querySelector("main.container");
+ if(main)new MutationObserver(sync).observe(main,{subtree:true,attributes:true,attributeFilter:["class"],childList:true});
+ document.addEventListener("click",function(){setTimeout(sync,0)});
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(sync,ms)});
+})();
+</script>
+
 </body>
 </html>
