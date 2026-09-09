@@ -6517,5 +6517,92 @@ html body td{
 }
 </style>
 
+
+<style id="watch-white-fit-tables-status-20260909-v1">
+html:has(#thaiwater-warning.active),
+body:has(#thaiwater-warning.active),
+body:has(#thaiwater-warning.active) main.container,
+body main.container #thaiwater-warning,
+body main.container #thaiwater-warning.active{
+ background:#fff!important;
+}
+body main.container #thaiwater-warning .moved-overview-tables{
+ width:100%!important;
+ grid-template-columns:repeat(2,minmax(0,1fr))!important;
+}
+body main.container #thaiwater-warning .moved-overview-tables>.warning-table{
+ min-width:0!important;
+ width:100%!important;
+ overflow:hidden!important;
+}
+body main.container #thaiwater-warning .moved-overview-tables .table-wrap,
+body main.container #thaiwater-warning .moved-overview-tables .table-scroll,
+body main.container #thaiwater-warning .moved-overview-tables .warning-table>div:last-child{
+ width:100%!important;
+ max-width:100%!important;
+ overflow:visible!important;
+}
+body main.container #thaiwater-warning .moved-overview-tables table{
+ width:100%!important;
+ min-width:0!important;
+ max-width:100%!important;
+ table-layout:fixed!important;
+}
+body main.container #thaiwater-warning .moved-overview-tables th,
+body main.container #thaiwater-warning .moved-overview-tables td{
+ padding:8px 6px!important;
+ overflow-wrap:anywhere!important;
+ word-break:break-word!important;
+ white-space:normal!important;
+ font-size:12px!important;
+ line-height:1.45!important;
+ vertical-align:middle!important;
+}
+body main.container #thaiwater-warning .estate-watch-table th:nth-child(1){width:7%!important}
+body main.container #thaiwater-warning .estate-watch-table th:nth-child(2){width:29%!important}
+body main.container #thaiwater-warning .estate-watch-table th:nth-child(3){width:15%!important}
+body main.container #thaiwater-warning .estate-watch-table th:nth-child(4){width:17%!important}
+body main.container #thaiwater-warning .estate-watch-table th:nth-child(5){width:15%!important}
+body main.container #thaiwater-warning .estate-watch-table th:nth-child(6){width:17%!important}
+body main.container #thaiwater-warning .station-watch-table th:nth-child(1){width:40%!important}
+body main.container #thaiwater-warning .station-watch-table th:nth-child(2){width:18%!important}
+body main.container #thaiwater-warning .station-watch-table th:nth-child(3){width:20%!important}
+body main.container #thaiwater-warning .station-watch-table th:nth-child(4){width:22%!important}
+body main.container #thaiwater-warning .estate-watch-table td.alert-status-cell,
+body main.container #thaiwater-warning .station-watch-table td.alert-status-cell{
+ background:#cf0a2c!important;
+ color:#fff!important;
+ font-weight:600!important;
+ text-align:center!important;
+}
+body main.container #thaiwater-warning td.alert-status-cell *{
+ background:transparent!important;
+ color:#fff!important;
+ font-size:12px!important;
+ font-weight:600!important;
+}
+@media(max-width:1100px){
+ body main.container #thaiwater-warning .moved-overview-tables{grid-template-columns:1fr!important}
+ body main.container #thaiwater-warning .moved-overview-tables th,
+ body main.container #thaiwater-warning .moved-overview-tables td{font-size:13px!important}
+}
+</style>
+<script id="watch-white-fit-tables-status-20260909-v1-script">
+(function(){
+ "use strict";
+ function colorAlertCells(){
+  document.querySelectorAll("#thaiwater-warning .estate-watch-table tbody tr").forEach(function(row){
+   const cell=row.cells[5];if(cell){const t=cell.textContent.trim();cell.classList.toggle("alert-status-cell",!!t&&!/ปกติ|ไม่มีข้อมูล|ไม่เข้าเกณฑ์/.test(t))}
+  });
+  document.querySelectorAll("#thaiwater-warning .station-watch-table tbody tr").forEach(function(row){
+   const cell=row.cells[2];if(cell){const t=cell.textContent.trim();cell.classList.toggle("alert-status-cell",!!t&&!/ปกติ|ไม่มีข้อมูล|ไม่เข้าเกณฑ์/.test(t))}
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",colorAlertCells);else colorAlertCells();
+ const watch=document.getElementById("thaiwater-warning");if(watch)new MutationObserver(colorAlertCells).observe(watch,{subtree:true,childList:true,characterData:true});
+ [100,500,1200,2500,5000].forEach(ms=>setTimeout(colorAlertCells,ms));
+})();
+</script>
+
 </body>
 </html>
