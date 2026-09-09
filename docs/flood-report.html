@@ -5435,5 +5435,19 @@ body>.ieat-persistent-tabbar{
 })();
 </script>
 
+
+<style id="remove-overview-purpose-summary-20260909-v1">
+#warning>.flood-page-purpose{display:none!important}
+</style>
+<script id="remove-overview-purpose-summary-20260909-v1-script">
+(function(){
+ function removeOverviewSummary(){
+  document.querySelectorAll("#warning>.flood-page-purpose").forEach(function(el){el.remove()});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeOverviewSummary);else removeOverviewSummary();
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeOverviewSummary,ms)});
+})();
+</script>
+
 </body>
 </html>
