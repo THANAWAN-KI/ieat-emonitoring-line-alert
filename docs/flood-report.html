@@ -5498,5 +5498,17 @@ body>.ieat-persistent-tabbar{
 })();
 </script>
 
+
+<style id="remove-empty-overview-bottom-shell-20260909-v1">
+#warning>.new4all-water-shell{display:none!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important}
+</style>
+<script id="remove-empty-overview-bottom-shell-20260909-v1-script">
+(function(){
+ function removeEmptyBottom(){document.querySelectorAll("#warning>.new4all-water-shell").forEach(function(el){el.remove()})}
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeEmptyBottom);else removeEmptyBottom();
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeEmptyBottom,ms)});
+})();
+</script>
+
 </body>
 </html>
