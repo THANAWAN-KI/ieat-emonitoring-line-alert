@@ -6111,5 +6111,20 @@ main input:focus,main select:focus,main textarea:focus{
 }
 </style>
 
+
+<style id="remove-watch-flood-heading-bar-20260909-v1">
+#thaiwater-warning .thaiwater-reference-bar{display:none!important}
+#thaiwater-warning .thaiwater-reference-panel{margin-top:0!important}
+</style>
+<script id="remove-watch-flood-heading-bar-20260909-v1-script">
+(function(){
+ function removeWatchFloodBar(){
+  document.querySelectorAll("#thaiwater-warning .thaiwater-reference-bar").forEach(function(el){el.remove()});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeWatchFloodBar);else removeWatchFloodBar();
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeWatchFloodBar,ms)});
+})();
+</script>
+
 </body>
 </html>
