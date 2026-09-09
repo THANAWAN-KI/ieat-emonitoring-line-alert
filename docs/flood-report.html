@@ -5363,5 +5363,77 @@ body>.ieat-persistent-tabbar{
 })();
 </script>
 
+
+<style id="rid-basin-and-watch-tables-20260909-v1">
+#warning .flood-final-tables{display:none!important}
+.rid-basin-section{margin:20px 0;background:#fff;border:1px solid #dce5ec;border-radius:16px;overflow:hidden;box-shadow:0 4px 14px rgba(30,66,100,.08)}
+.rid-basin-head{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:17px 20px;border-bottom:1px solid #e1e8ed}
+.rid-basin-head h2{margin:0;color:#004b79;font-family:"Noto Sans Thai",sans-serif;font-size:20px;font-weight:500}
+.rid-basin-head p{margin:4px 0 0;color:#667680;font-size:14px}
+.rid-basin-head a{flex:0 0 auto;padding:9px 14px;border-radius:999px;background:#0098ca;color:#fff;text-decoration:none;font-size:14px}
+.rid-basin-layout{display:grid;grid-template-columns:330px minmax(0,1fr);min-height:720px}
+.rid-basin-related{padding:19px;border-right:1px solid #dce5ec;background:#f8fbfd}
+.rid-basin-related h3{margin:0 0 5px;color:#263746;font-size:17px;font-weight:500}
+.rid-basin-related>p{margin:0 0 14px;color:#6a7a84;font-size:13px;line-height:1.55}
+.rid-basin-group{margin:0 0 14px;padding:12px;background:#fff;border:1px solid #e0e8ed;border-radius:11px}
+.rid-basin-group b{display:block;color:#005b91;font-size:14px;font-weight:500;margin-bottom:4px}
+.rid-basin-group span{display:block;color:#5f707a;font-size:12px;line-height:1.5}
+.rid-basin-note{padding:11px 12px;border-radius:9px;background:#eaf4df;color:#426d24;font-size:12px;line-height:1.55}
+.rid-basin-frame{position:relative;min-width:0}
+.rid-basin-frame iframe{display:block;width:100%;height:100%;min-height:720px;border:0;background:#eef3f7}
+.rid-basin-frame-label{position:absolute;z-index:2;top:12px;left:12px;padding:8px 11px;border-radius:8px;background:#fffffff2;box-shadow:0 3px 12px rgba(31,62,82,.18);color:#263746;font-size:13px}
+#thaiwater-warning .moved-overview-tables{display:grid;grid-template-columns:1fr;gap:16px;margin:0 0 18px}
+#thaiwater-warning .moved-overview-tables .warning-table{display:block!important;width:100%!important;margin:0!important}
+#thaiwater-warning .watch-grid>.watch-panel:nth-child(2){display:none!important}
+@media(max-width:950px){.rid-basin-layout{grid-template-columns:1fr}.rid-basin-related{border-right:0;border-bottom:1px solid #dce5ec}.rid-basin-frame iframe{min-height:680px}}
+@media(max-width:620px){.rid-basin-head{align-items:flex-start;flex-direction:column}.rid-basin-head a{width:100%;text-align:center}}
+</style>
+<script id="rid-basin-and-watch-tables-20260909-v1-script">
+(function(){
+ "use strict";
+ const basinGroups=[
+  ["เจ้าพระยา / ป่าสัก","กรุงเทพมหานคร พระนครศรีอยุธยา ปทุมธานี สระบุรี และพื้นที่ต่อเนื่อง"],
+  ["ท่าจีน / แม่กลอง","สมุทรสาคร นครปฐม ราชบุรี กาญจนบุรี และพื้นที่ต่อเนื่อง"],
+  ["บางปะกง","ฉะเชิงเทรา ปราจีนบุรี สระแก้ว และพื้นที่ต่อเนื่อง"],
+  ["ชายฝั่งทะเลตะวันออก","ชลบุรี ระยอง จันทบุรี ตราด และพื้นที่ต่อเนื่อง"],
+  ["เพชรบุรี–ประจวบคีรีขันธ์","เพชรบุรี ประจวบคีรีขันธ์ และพื้นที่ต่อเนื่อง"],
+  ["ปิง / น่าน / โขงตะวันออกเฉียงเหนือ","ลำพูน พิจิตร อุดรธานี หนองคาย และนิคมฯ ในภาคเหนือ–ตะวันออกเฉียงเหนือ"],
+  ["ภาคใต้ฝั่งตะวันออก / ทะเลสาบสงขลา","สุราษฎร์ธานี สงขลา ปัตตานี และนิคมฯ ในภาคใต้"]
+ ];
+ function basinPanel(){
+  const section=document.createElement("section");section.className="rid-basin-section";section.id="ridBasinOverview";
+  section.innerHTML='<div class="rid-basin-head"><div><h2>ผังน้ำที่เกี่ยวข้องกับพื้นที่นิคมอุตสาหกรรม</h2><p>ใช้ประกอบการประเมินทิศทางน้ำ โครงข่ายลำน้ำ และพื้นที่รับน้ำรอบนิคมอุตสาหกรรม</p></div><a href="https://bigdata-swoc.rid.go.th/basin_manage" target="_blank" rel="noopener">เปิดระบบ SWOC เต็มหน้า</a></div><div class="rid-basin-layout"><aside class="rid-basin-related"><h3>ลุ่มน้ำที่มีนิคมฯ เกี่ยวข้อง</h3><p>เลือกลุ่มน้ำในแผนผังด้านขวา โดยพิจารณาจากจังหวัดที่ตั้งและพื้นที่ต่อเนื่องของนิคมฯ</p>'+basinGroups.map(x=>'<div class="rid-basin-group"><b>'+x[0]+'</b><span>'+x[1]+'</span></div>').join("")+'<div class="rid-basin-note">ข้อมูลผังน้ำใช้เพื่อสนับสนุนการวิเคราะห์ ควรตรวจสอบร่วมกับสถานการณ์ฝน ระดับน้ำ และประกาศทางการก่อนแจ้งเตือน</div></aside><div class="rid-basin-frame"><div class="rid-basin-frame-label">กรมชลประทาน — ระบบ SWOC / ผังน้ำ</div><iframe title="ผังน้ำ SWOC กรมชลประทาน" loading="lazy" src="https://bigdata-swoc.rid.go.th/basin_manage"></iframe></div></div>';
+  return section;
+ }
+ function placeBasin(){
+  const warning=document.getElementById("warning");if(!warning)return;
+  let panel=document.getElementById("ridBasinOverview");
+  if(!panel)panel=basinPanel();
+  const tables=warning.querySelector(".flood-final-tables");
+  if(tables&&panel.parentElement!==warning)warning.insertBefore(panel,tables);
+  else if(!panel.parentElement)warning.appendChild(panel);
+ }
+ function moveTables(){
+  const source=document.querySelector("#warning .flood-final-tables");
+  const watch=document.querySelector("#thaiwater-warning .watch-analysis-title");
+  if(!source||!watch)return;
+  let holder=document.querySelector("#thaiwater-warning .moved-overview-tables");
+  if(!holder){holder=document.createElement("div");holder.className="moved-overview-tables";watch.insertAdjacentElement("afterend",holder)}
+  ["estate-watch-table","station-watch-table"].forEach(cls=>{const table=source.querySelector("."+cls)||document.querySelector("#thaiwater-warning ."+cls);if(table&&table.parentElement!==holder)holder.appendChild(table)});
+ }
+ function moveNav(){
+  const tabs=document.getElementById("finalFloodHeaderTabs"),active=document.querySelector("main .view.active");if(!tabs||!active)return;
+  let host=active.id==="warning"?document.querySelector("#warning>.flood-support-heading"):active.id==="thaiwater-warning"?document.querySelector("#thaiwater-warning .watch-intro"):document.querySelector("#infographic .multi-report-toolbar");
+  if(host&&tabs.parentElement!==host)host.appendChild(tabs);
+  tabs.querySelectorAll("button").forEach(b=>b.classList.toggle("active",b.dataset.finalView===active.id));
+ }
+ function mount(){placeBasin();moveTables();moveNav()}
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
+ document.addEventListener("click",e=>{if(e.target.closest("#finalFloodHeaderTabs button"))setTimeout(mount,0)});
+ const main=document.querySelector("main.container");if(main)new MutationObserver(moveNav).observe(main,{subtree:true,attributes:true,attributeFilter:["class"]});
+ [100,500,1200,2500,5000].forEach(ms=>setTimeout(mount,ms));
+})();
+</script>
+
 </body>
 </html>
