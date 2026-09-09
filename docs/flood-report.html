@@ -5717,5 +5717,19 @@ body.watch-page-active,body.watch-page-active main.container{background:#fff!imp
 })();
 </script>
 
+
+<style id="remove-export-map-links-20260909-v1">
+#infographic .report-edit-links{display:none!important}
+</style>
+<script id="remove-export-map-links-20260909-v1-script">
+(function(){
+ function removeExportMapLinks(){
+  document.querySelectorAll("#infographic .report-edit-links").forEach(function(el){el.remove()});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeExportMapLinks);else removeExportMapLinks();
+ [100,500,1200,2500].forEach(function(ms){setTimeout(removeExportMapLinks,ms)});
+})();
+</script>
+
 </body>
 </html>
