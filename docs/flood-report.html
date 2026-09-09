@@ -7188,7 +7188,9 @@ body main.container #infographic .infographic-gallery-item{
   document.querySelectorAll("#infographic .infographic-card-head").forEach(function(el){el.remove()});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",clean);else clean();
- const main=document/cannot happen/
+ const main=document.querySelector("main.container");
+ if(main)new MutationObserver(clean).observe(main,{subtree:true,childList:true});
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(clean,ms)});
 })();
 </script>
 
