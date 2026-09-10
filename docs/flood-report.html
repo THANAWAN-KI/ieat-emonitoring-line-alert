@@ -8794,9 +8794,7 @@ html body #warning .daily-water-grid > .daily-water-item:nth-child(n+2):nth-chil
   });
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",replaceIcons);else replaceIcons();
- const area=document.getElementById("warning");
- if(area)new MutationObserver(replaceIcons).observe(area,{subtree:true,childList:true});
- [100,500,1200,2500,5000,8000].forEach(function(ms){setTimeout(replaceIcons,ms)});
+ [100,500,1200,2200].forEach(function(ms){setTimeout(replaceIcons,ms)});
 })();
 </script>
 </body>
