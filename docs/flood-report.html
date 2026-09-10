@@ -9652,10 +9652,17 @@ html body main.container #infographic .report-pages{
  }
  html body main.container #infographic #reportPage4 .three-day-risk-map{
   flex-basis:42vw!important;
-  height:42vw!importantRepositories;
+  height:42vw!important;
   min-height:320px!important;
  }
 }
 </style>
+<style id="page3-right-click-copy-png-20260910-v1">#reportPage3 .export-table-block,#reportPage3 .export-data-table{cursor:context-menu}.copy-png-toast{position:fixed;left:50%;bottom:28px;z-index:99999;transform:translateX(-50%);padding:10px 18px;border-radius:999px;background:#11862F;color:#fff;font-size:15px;box-shadow:0 6px 20px rgba(0,0,0,.2);pointer-events:none}</style>
+<script id="page3-right-click-copy-png-20260910-v1-script">(function(){
+function note(m){var o=document.querySelector(".copy-png-toast");if(o)o.remove();var t=document.createElement("div");t.className="copy-png-toast";t.textContent=m;document.body.appendChild(t);setTimeout(function(){t.remove()},2200)}
+function save(b,n){var a=document.createElement("a"),u=URL.createObjectURL(b);a.href=u;a.download=n+".png";a.click();setTimeout(function(){URL.revokeObjectURL(u)},1000)}
+async function make(n,name){if(typeof html2canvas!=="function"){note("ระบบสร้าง PNG ยังโหลดไม่เสร็จ");return}note("กำลังสร้างภาพ PNG…");try{var w=n.scrollWidth||n.offsetWidth,h=n.scrollHeight||n.offsetHeight;var canvas=await html2canvas(n,{scale:3,useCORS:true,backgroundColor:"#fff",logging:false,width:w,height:h,windowWidth:Math.max(document.documentElement.clientWidth,w),windowHeight:Math.max(document.documentElement.clientHeight,h),scrollX:0,scrollY:0});canvas.toBlob(async function(blob){if(!blob){note("ไม่สามารถสร้าง PNG ได้");return}try{if(!navigator.clipboard||!window.ClipboardItem)throw new Error();await navigator.clipboard.write([new ClipboardItem({"image/png":blob})]);note("คัดลอก PNG แล้ว")}catch(e){save(blob,name);note("ดาวน์โหลด PNG แล้ว")}},"image/png")}catch(e){note("ไม่สามารถสร้าง PNG ได้ กรุณาลองอีกครั้ง")}}
+document.addEventListener("contextmenu",function(e){var p=e.target.closest("#reportPage3");if(!p)return;e.preventDefault();var b=e.target.closest("#reportPage3 .export-table-block,#reportPage3 img");make(b||p,b?"ตารางสถานการณ์น้ำพื้นที่เฝ้าระวัง":"รายงานสถานการณ์น้ำหน้า3")});
+})();</script>
 </body>
 </html>
