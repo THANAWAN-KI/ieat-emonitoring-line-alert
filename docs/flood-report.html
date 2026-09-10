@@ -8797,5 +8797,107 @@ html body #warning .daily-water-grid > .daily-water-item:nth-child(n+2):nth-chil
  [100,500,1200,2200].forEach(function(ms){setTimeout(replaceIcons,ms)});
 })();
 </script>
+
+<style id="bottom-six-match-top-four-20260910-v1">
+html body main.container #warning .flood-final-cards > .kpi,
+html body main.container #warning .flood-final-cards > .national-kpi{
+ grid-template-columns:64px minmax(0,1fr)!important;
+ column-gap:22px!important;
+ height:142px!important;
+ min-height:142px!important;
+ padding:22px 24px!important;
+ background:#fff!important;
+ border:0!important;
+ border-radius:18px!important;
+ box-shadow:0 7px 22px rgba(40,70,120,.10)!important;
+}
+html body main.container #warning .flood-final-cards .dashboard-custom-icon{
+ width:64px!important;
+ height:64px!important;
+ min-width:64px!important;
+ background:transparent!important;
+ border-radius:0!important;
+}
+html body main.container #warning .flood-final-cards .dashboard-custom-icon > circle,
+html body main.container #warning .flood-final-cards .dashboard-custom-icon > rect:first-child{
+ display:none!important;
+}
+html body main.container #warning .flood-final-cards .metric-card-copy,
+html body main.container #warning .flood-final-cards .metric-card-copy > *,
+html body main.container #warning .flood-final-cards .metric-card-copy h2,
+html body main.container #warning .flood-final-cards .metric-card-copy strong,
+html body main.container #warning .flood-final-cards .metric-card-copy span,
+html body main.container #warning .flood-final-cards .metric-card-copy small{
+ color:#007FDB!important;
+ font-family:"Sarabun",sans-serif!important;
+ font-weight:300!important;
+ text-align:left!important;
+}
+html body main.container #warning .flood-final-cards .metric-card-copy strong{
+ order:1!important;
+ font-size:28px!important;
+ line-height:1.2!important;
+}
+html body main.container #warning .flood-final-cards .metric-card-copy h2,
+html body main.container #warning .flood-final-cards .metric-card-copy small{
+ order:2!important;
+ font-size:16px!important;
+ line-height:1.4!important;
+}
+html body main.container #warning .flood-final-cards .metric-card-copy span{
+ order:3!important;
+ font-size:14px!important;
+ line-height:1.4!important;
+}
+</style>
+<script id="bottom-six-match-top-four-20260910-v1-script">
+(function(){
+ const ns="http://www.w3.org/2000/svg";
+ const weather={
+  storm:'<g fill="#007fdb"><path d="M17 38h31a11 11 0 0 0 1-22A17 17 0 0 0 17 15a12 12 0 0 0 0 23zm1-5a7 7 0 0 1 1-14l3 .3 1-3a12 12 0 0 1 22 4l.4 2.5 2.6-.2a6 6 0 1 1 0 12.4H17z"/><path d="M31 36 24 49h8l-4 11 14-17h-8l5-7zM14 43h5l-5 10H9zm34 0h5l-5 10h-5z"/></g>',
+  rain:'<g fill="#007fdb"><path d="M17 36h31a11 11 0 0 0 1-22A17 17 0 0 0 17 13a12 12 0 0 0 0 23zm1-5a7 7 0 0 1 1-14l3 .3 1-3a12 12 0 0 1 22 4l.4 2.5 2.6-.2a6 6 0 1 1 0 12.4H17z"/><path d="m18 41 4 2-6 13-4-2zm14 0 4 2-6 13-4-2zm14 0 4 2-6 13-4-2z"/></g>'
+ };
+ function makeWeather(type){
+  const svg=document.createElementNS(ns,"svg");
+  svg.setAttribute("class","dashboard-custom-icon");
+  svg.setAttribute("viewBox","0 0 64 64");
+  svg.setAttribute("aria-hidden","true");
+  svg.innerHTML=weather[type];
+  return svg;
+ }
+ function cloneIcon(source){
+  if(!source)return null;
+  const svg=source.cloneNode(true);
+  svg.classList.remove("rain-card-custom-icon");
+  svg.classList.add("dashboard-custom-icon");
+  const bg=svg.querySelector("rect:first-child,circle:first-child");
+  if(bg)bg.remove();
+  return svg;
+ }
+ function apply(){
+  const daily=document.querySelectorAll("#warning .daily-water-grid > .daily-water-item");
+  const lower=document.querySelectorAll("#warning .flood-final-cards > .kpi,#warning .flood-final-cards > .national-kpi");
+  if(lower.length<6)return;
+  const floodSource=daily[3]&&daily[3].querySelector("svg");
+  const waterSource=daily[1]&&daily[1].querySelector("svg");
+  const icons=[
+   cloneIcon(floodSource),
+   makeWeather("storm"),
+   cloneIcon(waterSource),
+   makeWeather("storm"),
+   cloneIcon(waterSource),
+   makeWeather("rain")
+  ];
+  lower.forEach(function(card,index){
+   if(index>=6||card.dataset.bottomIconMatched==="1")return;
+   card.querySelectorAll(":scope > svg.dashboard-custom-icon").forEach(function(old){old.remove()});
+   if(icons[index])card.insertBefore(icons[index],card.firstChild);
+   card.dataset.bottomIconMatched="1";
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply);else apply();
+ [100,500,1200,2200].forEach(function(ms){setTimeout(apply,ms)});
+})();
+</script>
 </body>
 </html>
