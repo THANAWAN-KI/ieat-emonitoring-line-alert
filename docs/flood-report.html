@@ -9674,5 +9674,13 @@ function blob(canvas,node,name,isPage){canvas.toBlob(function(raw){if(!raw){toas
 async function render(node,name,isPage){if(typeof html2canvas!=="function"){toast("ระบบสร้าง PNG ยังโหลดไม่เสร็จ");return}toast("กำลังสร้าง PNG มาตรฐาน…");try{var w=isPage?794:(node.scrollWidth||node.offsetWidth),h=isPage?1123:(node.scrollHeight||node.offsetHeight);var scale=isPage?A4W/794:3;var canvas=await html2canvas(node,{scale:scale,useCORS:true,backgroundColor:"#fff",logging:false,width:w,height:h,scrollX:0,scrollY:0,windowWidth:Math.max(1200,w),windowHeight:Math.max(1400,h),onclone:function(doc){var clone=doc.getElementById(node.id);if(isPage&&clone){clone.classList.add("png-standard-render");clone.style.setProperty("width","794px","important");clone.style.setProperty("min-width","794px","important");clone.style.setProperty("max-width","794px","important");clone.style.setProperty("height","1123px","important");clone.style.setProperty("min-height","1123px","important");clone.style.setProperty("max-height","1123px","important");clone.style.setProperty("margin","0","important");clone.style.setProperty("transform","none","important")}}});blob(canvas,node,name,isPage)}catch(e){toast("สร้าง PNG ไม่สำเร็จ กรุณาลองอีกครั้ง")}}
 document.addEventListener("contextmenu",function(e){var page=e.target.closest("#infographic .export-sheet");if(!page)return;e.preventDefault();e.stopImmediatePropagation();var part=e.target.closest(".export-table-block");var target=part||page;var no=page.dataset.reportPage||"";render(target,part?"ตารางรายงานหน้า"+no:"รายงานสถานการณ์น้ำหน้า"+no,!part)},true);
 })();</script>
+<style id="three-day-map-link-white-text-20260910-v1">
+html body main.container #infographic .three-day-risk-map .three-day-risk-fallback a,
+html body main.container #infographic #reportPage4 .three-day-risk-fallback a{
+ color:#fff!important;
+ -webkit-text-fill-color:#fff!important;
+}
+</style>
+<script id="three-day-map-link-white-text-20260910-v1-script">(function(){function paint(){document.querySelectorAll("#infographic .three-day-risk-fallback a").forEach(function(a){a.style.setProperty("color","#fff","important");a.style.setProperty("-webkit-text-fill-color","#fff","important")})}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",paint);else paint();[100,500,1200,2500].forEach(function(ms){setTimeout(paint,ms)})})();</script>
 </body>
 </html>
