@@ -8961,5 +8961,26 @@ html body .ieat-persistent-tabbar{
  }
 }
 </style>
+
+<style id="both-watch-headings-11862f-20260910-v1">
+html body main.container #warning .national-kpi:has(#nationalFloodCount) h2,
+html body main.container #warning .kpi:has(#nationalFloodCount) h2,
+html body main.container #warning .operations-section-title,
+html body main.container #warning .nationwide-indicators h2,
+html body main.container #warning .nationwide-indicators .card-head h2{
+ color:#11862F!important;
+}
+</style>
+<script id="both-watch-headings-11862f-20260910-v1-script">
+(function(){
+ function setColors(){
+  document.querySelectorAll("#warning .national-kpi:has(#nationalFloodCount) h2,#warning .kpi:has(#nationalFloodCount) h2,#warning .operations-section-title,#warning .nationwide-indicators h2").forEach(function(el){
+   el.style.setProperty("color","#11862F","important");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",setColors);else setColors();
+ [100,500,1200,2500].forEach(function(ms){setTimeout(setColors,ms)});
+})();
+</script>
 </body>
 </html>
