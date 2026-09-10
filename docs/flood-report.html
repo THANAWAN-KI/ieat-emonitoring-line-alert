@@ -1510,7 +1510,7 @@ body{color:#172033!important}
             </section>
 <footer class="sheet-footer"><span>ข้อมูลจากสถานีที่อยู่ภายในรัศมี 30 กิโลเมตรจากนิคมฯ</span><span>หน้า 3 / 4</span></footer>
 </section>
-<section class="export-sheet landscape-sheet" id="reportPage4" data-report-page="4">
+<section class="export-sheet portrait-sheet" id="reportPage4" data-report-page="4">
 <header class="sheet-header compact"><h2>แผนที่ความเสี่ยงจากฝนสะสม 3 วันล่วงหน้า</h2><p class="shared-report-period" contenteditable="true">ข้อมูลคาดการณ์จากระบบ ThaiWater</p></header>
 <section class="three-day-risk-map">
 <iframe src="https://www.thaiwater.net/risk-rainfall-3-day-forecast" title="แผนที่ความเสี่ยงจากฝนสะสม 3 วันล่วงหน้า" loading="eager" allow="fullscreen; geolocation" referrerpolicy="strict-origin-when-cross-origin"></iframe>
@@ -9521,5 +9521,52 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 #infographic #reportPage4 .forecast-table-block{margin-top:16px!important}
 #infographic #reportPage4 .forecast-table-block h3{margin:0 0 10px;color:#832561;font-size:18px;font-weight:500}
 </style>
+<style id="report-page4-a4-portrait-20260910-v1">
+html body main.container #infographic #reportPage4{
+ box-sizing:border-box!important;
+ width:794px!important;
+ min-width:794px!important;
+ max-width:794px!important;
+ height:1123px!important;
+ min-height:1123px!important;
+ max-height:1123px!important;
+ padding:34px 38px 30px!important;
+ display:flex!important;
+ flex-direction:column!important;
+ gap:12px!important;
+ overflow:hidden!important;
+}
+html body main.container #infographic #reportPage4 .sheet-header h2{
+ font-size:22px!important;
+ line-height:1.35!important;
+ white-space:normal!important;
+}
+html body main.container #infographic #reportPage4 .three-day-risk-map{
+ flex:0 0 520px!important;
+ width:100%!important;
+ min-height:520px!important;
+ max-height:520px!important;
+}
+html body main.container #infographic #reportPage4 .forecast-table-block{
+ flex:1 1 auto!important;
+ min-height:0!important;
+ overflow:hidden!important;
+}
+html body main.container #infographic #reportPage4 .export-data-table{
+ font-size:10px!important;
+}
+html body main.container #infographic #reportPage4 .export-data-table th,
+html body main.container #infographic #reportPage4 .export-data-table td{
+ padding:5px 4px!important;
+}
+@media print{
+ @page{size:A4 portrait;margin:0}
+ html body main.container #infographic #reportPage4{
+  width:210mm!important;min-width:210mm!important;max-width:210mm!important;
+  height:297mm!important;min-height:297mm!important;max-height:297mm!important;
+  page-break-before:always!important;page-break-after:always!important;
+ }
+}
+</style>-altogether
 </body>
 </html>
