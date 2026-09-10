@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Kanit:wght@300;400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script type="module" src="https://js.arcgis.com/5.1/embeddable-components/"></script>
+  <script type="module" src="https://js.arcgis.com/5.1/map-components/"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
   <script src="data/thaiwater_latest.js?v=20260821-3"></script>
   <script src="flood-live-data.js?v=20260908-1" defer></script>
@@ -1429,7 +1429,11 @@ body{color:#172033!important}
         </div>
         <article class="card operations-map embedded-water-map">
           <div class="overview-map-label"><b>แผนที่สถานการณ์น้ำท่วม</b><small>เลื่อนแผนที่หรือซูมเข้า–ออกเพื่อดูรายละเอียด</small></div>
-          <arcgis-embedded-map id="overviewArcgisMap" item-id="3d24287ac6ea49cd823625ddad496e01" portal-url="https://ieat.maps.arcgis.com" theme="light" heading-enabled legend-enabled bookmarks-enabled share-enabled style="display:block;width:100%;height:100%;min-height:640px"></arcgis-embedded-map>
+          <arcgis-map id="overviewArcgisMap" item-id="3d24287ac6ea49cd823625ddad496e01" portal-url="https://ieat.maps.arcgis.com" style="display:block;width:100%;height:100%;min-height:640px">
+  <arcgis-zoom slot="top-left"></arcgis-zoom>
+  <arcgis-home slot="top-left"></arcgis-home>
+  <arcgis-legend slot="bottom-left"></arcgis-legend>
+</arcgis-map>
         </article>
       </section>
 
@@ -9282,6 +9286,109 @@ html body #warning .nationwide-indicators .barrow b{
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",bind);else bind();
  [100,500,1200,2500,5000].forEach(function(ms){setTimeout(bind,ms)});
+})();
+</script>
+
+<style id="actual-map-zoom-and-swoc-purple-20260910-v2">
+.rid-basin-head a,
+a.rid-basin-fullscreen {
+  background:#832561 !important;
+  color:#fff !important;
+  border-color:#832561 !important;
+}
+.flash-flood-rank-value,
+.nationwide-indicators .barrow b {
+  cursor:pointer !important;
+}
+</style>
+<script id="actual-map-zoom-and-swoc-purple-20260910-v2-script">
+(function(){
+  var mapReadyPromise;
+  function mapElement(){ return document.getElementById("overviewArcgisMap"); }
+  async function readyMap(){
+    if(mapReadyPromise) return mapReadyPromise;
+    mapReadyPromise=(async function(){
+      await customElements.whenDefined("arcgis-map");
+      var map=mapElement();
+      if(!map) throw new Error("Map element not found");
+      if(typeof map.viewOnReady==="function") await map.viewOnReady();
+      else if(map.view && typeof map.view.when==="function") await map.view.when();
+      return map;
+    })();
+    return mapReadyPromise;
+  }
+  async function goTo(target){
+    var map=await readyMap();
+    if(typeof map.goTo==="function") return map.goTo(target,{duration:900});
+    if(map.view && typeof map.view.goTo==="function") return map.view.goTo(target,{duration:900});
+    throw new Error("Map navigation is unavailable");
+  }
+  function showMap(){
+    var map=mapElement();
+    if(map) map.scrollIntoView({behavior:"smooth",block:"center"});
+  }
+  async function provinceLocation(name){
+    var q=(name||"").replace(/^\s*\d+\.\s*/,"").replace(/^จ\./,"จังหวัด").trim();
+    var url="https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?f=json&countryCode=THA&maxLocations=1&outFields=Match_addr&SingleLine="+encodeURIComponent(q+", ประเทศไทย");
+    var data=await fetch(url).then(function(r){return r.json()});
+    return data.candidates && data.candidates[0] && data.candidates[0].location;
+  }
+  async function zoomProvince(name){
+    showMap();
+    try{
+      var point=await provinceLocation(name);
+      if(point) await goTo({center:[point.x,point.y],zoom:10});
+      else await goTo({center:[100.7,13.2],zoom:6});
+    }catch(e){ try{await goTo({center:[100.7,13.2],zoom:6})}catch(_){} }
+  }
+  async function zoomLayer(label){
+    showMap();
+    try{
+      var map=await readyMap();
+      var source=(map.map && map.map.allLayers) || (map.view && map.view.map && map.view.map.allLayers);
+      var layers=source ? source.toArray() : [];
+      var words=(label||"").replace(/[^ก-๙A-Za-z0-9]+/g," ").trim().split(/\s+/).filter(function(w){return w.length>2});
+      var layer=layers.find(function(l){
+        var title=(l.title||"").toLowerCase();
+        return words.some(function(w){return title.indexOf(w.toLowerCase())>=0});
+      });
+      if(layer){
+        if(typeof layer.queryExtent==="function"){
+          var result=await layer.queryExtent();
+          if(result && result.extent){await goTo(result.extent.expand(1.35));return;}
+        }
+        if(layer.fullExtent){await goTo(layer.fullExtent.expand(1.35));return;}
+      }
+      await goTo({center:[100.7,13.2],zoom:6});
+    }catch(e){ try{await goTo({center:[100.7,13.2],zoom:6})}catch(_){} }
+  }
+  document.addEventListener("click",function(ev){
+    var value=ev.target.closest(".flash-flood-rank-value");
+    if(value){
+      ev.preventDefault();
+      var row=value.closest(".flash-flood-rank-row");
+      var name=row && row.querySelector(".flash-flood-rank-name");
+      zoomProvince(name ? name.textContent : "");
+      return;
+    }
+    var metric=ev.target.closest(".nationwide-indicators .barrow b");
+    if(metric){
+      ev.preventDefault();
+      var metricRow=metric.closest(".barrow");
+      var label=metricRow && metricRow.querySelector("span");
+      zoomLayer(label ? label.textContent : "");
+    }
+  },true);
+  function styleSwoc(){
+    document.querySelectorAll(".rid-basin-head a, a.rid-basin-fullscreen").forEach(function(a){
+      a.style.setProperty("background","#832561","important");
+      a.style.setProperty("color","#fff","important");
+      a.style.setProperty("border-color","#832561","important");
+    });
+  }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",styleSwoc);
+  else styleSwoc();
+  [300,1000,2500].forEach(function(ms){setTimeout(styleSwoc,ms)});
 })();
 </script>
 </body>
