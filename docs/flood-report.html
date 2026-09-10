@@ -1513,7 +1513,7 @@ body{color:#172033!important}
 <section class="export-sheet portrait-sheet" id="reportPage4" data-report-page="4">
 <header class="sheet-header compact"><h2>แผนที่ความเสี่ยงจากฝนสะสม 3 วันล่วงหน้า</h2><p class="shared-report-period" contenteditable="true">ข้อมูลคาดการณ์จากระบบ ThaiWater</p></header>
 <section class="three-day-risk-map">
-<iframe src="https://www.thaiwater.net/risk-rainfall-3-day-forecast" title="แผนที่ความเสี่ยงจากฝนสะสม 3 วันล่วงหน้า" loading="eager" allow="fullscreen; geolocation" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+<iframe src="https://www.thaiwater.net/risk-rainfall-3-day-forecast" title="แผนที่ความเสี่ยงจากฝนสะสม 3 วันล่วงหน้า" loading="eager" scrolling="no" allow="fullscreen; geolocation" referrerpolicy="strict-origin-when-cross-origin"></iframe>
 <div class="three-day-risk-fallback"><a href="https://www.thaiwater.net/risk-rainfall-3-day-forecast" target="_blank" rel="noopener">เปิดแผนที่ความเสี่ยงจากฝนสะสม 3 วันล่วงหน้าแบบเต็มหน้า</a></div>
 </section>
 <section class="export-table-block forecast-table-block">
@@ -9609,5 +9609,53 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 [100,500,1200,2500,5000].forEach(function(ms){setTimeout(mark,ms)});
 })();
 </script>
+<style id="center-water-table-fit-page4-20260910-v1">
+html body main.container #infographic #reportPage3 .export-data-table th,
+html body main.container #infographic #reportPage3 .export-data-table td,
+html body main.container #infographic #reportPage3 #exportWaterRows td,
+html body main.container #infographic #reportPage3 #exportWaterRows td *{
+ text-align:center!important;
+ vertical-align:middle!important;
+}
+html body main.container #infographic #reportPage4{
+ min-width:0!important;
+ width:min(794px,100%)!important;
+ max-width:794px!important;
+}
+html body main.container #infographic #reportPage4 .three-day-risk-map{
+ flex:0 0 480px!important;
+ height:480px!important;
+ min-height:480px!important;
+ max-height:480px!important;
+ overflow:hidden!important;
+}
+html body main.container #infographic #reportPage4 .three-day-risk-map iframe{
+ display:block!important;
+ width:100%!important;
+ height:100%!important;
+ min-height:0!important;
+ overflow:hidden!important;
+ border:0!important;
+}
+html body main.container #infographic .report-pages{
+ grid-template-columns:minmax(0,794px)!important;
+ justify-content:center!important;
+ overflow:visible!important;
+}
+@media(max-width:850px){
+ html body main.container #infographic #reportPage4{
+  width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  aspect-ratio:210/297!important;
+  padding:24px!important;
+ }
+ html body main.container #infographic #reportPage4 .three-day-risk-map{
+  flex-basis:42vw!important;
+  height:42vw!importantRepositories;
+  min-height:320px!important;
+ }
+}
+</style>
 </body>
 </html>
