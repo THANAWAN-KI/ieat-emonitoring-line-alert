@@ -9018,5 +9018,47 @@ html body #warning .flood-final-cards>*:nth-child(-n+6),html body #warning .floo
 <script id="force-bottom-six-blue-final-20260910-v2-script">
 (function(){function fix(){document.querySelectorAll("#warning .flood-final-cards>*:nth-child(-n+6)").forEach(function(card){card.style.setProperty("color","#007FDB","important");card.querySelectorAll("*").forEach(function(el){el.style.setProperty("color","#007FDB","important");if(!el.matches("svg,path,g"))el.style.setProperty("font-weight","300","important")})})}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",fix);else fix();[100,500,1200,2500,5000,8000,12000].forEach(function(ms){setTimeout(fix,ms)})})();
 </script>
+
+<style id="tabs-green-inactive-purple-active-20260910-v1">
+html body main.container #finalFloodHeaderTabs button,
+html body main.container #exportHeaderTabs button,
+html body main.container #floodWorkflowNav button,
+html body .ieat-persistent-tabbar button{
+ background:#11862F!important;
+ background-color:#11862F!important;
+ background-image:none!important;
+ color:#FFFFFF!important;
+ border:0!important;
+ box-shadow:none!important;
+}
+html body main.container #finalFloodHeaderTabs button.active,
+html body main.container #exportHeaderTabs button.active,
+html body main.container #floodWorkflowNav button.active,
+html body .ieat-persistent-tabbar button.active{
+ background:#832561!important;
+ background-color:#832561!important;
+ color:#FFFFFF!important;
+}
+</style>
+<script id="tabs-green-inactive-purple-active-20260910-v1-script">
+(function(){
+ const selector="#finalFloodHeaderTabs button,#exportHeaderTabs button,#floodWorkflowNav button,.ieat-persistent-tabbar button";
+ function apply(){
+  document.querySelectorAll(selector).forEach(function(button){
+   const active=button.classList.contains("active");
+   const color=active?"#832561":"#11862F";
+   button.style.setProperty("background",color,"important");
+   button.style.setProperty("background-color",color,"important");
+   button.style.setProperty("background-image","none","important");
+   button.style.setProperty("color","#FFFFFF","important");
+   button.style.setProperty("border","0","important");
+   button.style.setProperty("box-shadow","none","important");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply);else apply();
+ document.addEventListener("click",function(e){if(e.target.closest(selector))setTimeout(apply,0)});
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(apply,ms)});
+})();
+</script>
 </body>
 </html>
