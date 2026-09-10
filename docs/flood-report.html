@@ -9834,5 +9834,37 @@ html body #warning #nationalHeavyRainCount~span{
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start);else start();
 })();
 </script>
+<script id="lock-flood-house-icons-20260910-v2-script">
+(function(){
+ var ids=["outFactory","nationalHeavyRainCount","nationalStormCount"],template="",busy=false;
+ function iconBox(id){
+  var n=document.getElementById(id),card=n&&n.closest(".card");
+  return card&&(card.querySelector(".icon")||card.querySelector(".n-icon"));
+ }
+ function remember(){
+  if(template)return true;
+  var icon=document.querySelector("#warning .flood-house-icon");
+  if(icon){template=icon.outerHTML;return true}
+  return false;
+ }
+ function lock(){
+  if(busy)return;busy=true;
+  if(remember()){
+   ids.forEach(function(id){
+    var box=iconBox(id);
+    if(box&&!box.querySelector(".flood-house-icon"))box.innerHTML=template;
+   });
+  }
+  busy=false;
+ }
+ function start(){
+  lock();
+  var root=document.getElementById("warning");
+  if(root)new MutationObserver(function(){queueMicrotask(lock)}).observe(root,{subtree:true,childList:true});
+  [100,500,1200,2500,5000,8500].forEach(function(ms){setTimeout(lock,ms)});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start);else start();
+})();
+</script>
 </body>
 </html>
