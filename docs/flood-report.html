@@ -9164,5 +9164,53 @@ html body #warning .nationwide-indicators .barrow > span{
  [100,500,1200,2500,5000].forEach(function(ms){setTimeout(apply,ms)});
 })();
 </script>
+
+<style id="green-value-buttons-focus-map-20260910-v1">
+html body #warning .flash-flood-rank-value,
+html body #warning .nationwide-indicators .barrow b{
+ cursor:pointer!important;
+ transition:transform .15s ease,filter .15s ease!important;
+}
+html body #warning .flash-flood-rank-value:hover,
+html body #warning .nationwide-indicators .barrow b:hover{
+ filter:brightness(.92)!important;
+ transform:translateY(-1px)!important;
+}
+html body #warning .flash-flood-rank-value:focus,
+html body #warning .nationwide-indicators .barrow b:focus{
+ outline:3px solid #832561!important;
+ outline-offset:2px!important;
+}
+html body #warning .operations-map.green-button-map-focus{
+ outline:5px solid #832561!important;
+ outline-offset:5px!important;
+}
+</style>
+<script id="green-value-buttons-focus-map-20260910-v1-script">
+(function(){
+ function goToMap(){
+  const map=document.querySelector("#warning .operations-map");
+  if(!map)return;
+  map.scrollIntoView({behavior:"smooth",block:"center"});
+  map.classList.add("green-button-map-focus");
+  const frame=map.querySelector("iframe");
+  if(frame)frame.focus();
+  setTimeout(function(){map.classList.remove("green-button-map-focus")},2200);
+ }
+ function bind(){
+  document.querySelectorAll("#warning .flash-flood-rank-value,#warning .nationwide-indicators .barrow b").forEach(function(button){
+   if(button.dataset.greenMapBound)return;
+   button.dataset.greenMapBound="true";
+   button.setAttribute("role","button");
+   button.setAttribute("tabindex","0");
+   button.setAttribute("title","คลิกเพื่อดูบนแผนที่");
+   button.addEventListener("click",function(e){e.stopPropagation();goToMap()});
+   button.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();goToMap()}});
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",bind);else bind();
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(bind,ms)});
+})();
+</script>
 </body>
 </html>
