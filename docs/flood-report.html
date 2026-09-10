@@ -9146,5 +9146,23 @@ html body #warning [data-value-pill-tone="low"]{background:#008B8B!important;col
 <script id="numeric-pills-reference-colors-20260910-v1-script">
 (function(){function apply(){document.querySelectorAll("#warning .flash-flood-rank-value,#warning .nationwide-indicators .barrow b").forEach(function(el){var value=parseFloat(String(el.textContent||"").replace(/,/g,""));var tone=!isFinite(value)?"low":value>=50?"high":value>=10?"medium":"low";var bg=tone==="high"?"#FFC85F":tone==="medium"?"#FF8A2A":"#008B8B";var fg=tone==="low"?"#FFFFFF":"#4E421F";el.setAttribute("data-value-pill-tone",tone);el.style.setProperty("background",bg,"important");el.style.setProperty("background-color",bg,"important");el.style.setProperty("color",fg,"important");el.style.setProperty("border-radius","10px","important");el.style.setProperty("padding","6px 12px","important")})}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply);else apply();[100,500,1200,2500,5000].forEach(function(ms){setTimeout(apply,ms)})})();
 </script>
+
+<style id="nationwide-labels-black-20260910-v1">
+html body #warning .nationwide-indicators .card-head h2,
+html body #warning .nationwide-indicators .barrow > span{
+ color:#000000!important;
+}
+</style>
+<script id="nationwide-labels-black-20260910-v1-script">
+(function(){
+ function apply(){
+  document.querySelectorAll("#warning .nationwide-indicators .card-head h2,#warning .nationwide-indicators .barrow > span").forEach(function(el){
+   el.style.setProperty("color","#000000","important");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply);else apply();
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(apply,ms)});
+})();
+</script>
 </body>
 </html>
