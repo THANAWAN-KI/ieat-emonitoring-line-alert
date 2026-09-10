@@ -9012,5 +9012,11 @@ html body main.container #warning .flood-final-cards > :nth-child(-n+6) small{
  [100,500,1200,2200,4000].forEach(function(ms){setTimeout(apply,ms)});
 })();
 </script>
+<style id="force-bottom-six-blue-final-20260910-v2">
+html body #warning .flood-final-cards>*:nth-child(-n+6),html body #warning .flood-final-cards>*:nth-child(-n+6) *{color:#007FDB!important;font-weight:300!important}
+</style>
+<script id="force-bottom-six-blue-final-20260910-v2-script">
+(function(){function fix(){document.querySelectorAll("#warning .flood-final-cards>*:nth-child(-n+6)").forEach(function(card){card.style.setProperty("color","#007FDB","important");card.querySelectorAll("*").forEach(function(el){el.style.setProperty("color","#007FDB","important");if(!el.matches("svg,path,g"))el.style.setProperty("font-weight","300","important")})})}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",fix);else fix();[100,500,1200,2500,5000,8000,12000].forEach(function(ms){setTimeout(fix,ms)})})();
+</script>
 </body>
 </html>
