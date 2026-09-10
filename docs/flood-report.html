@@ -1429,11 +1429,7 @@ body{color:#172033!important}
         </div>
         <article class="card operations-map embedded-water-map">
           <div class="overview-map-label"><b>แผนที่สถานการณ์น้ำท่วม</b><small>เลื่อนแผนที่หรือซูมเข้า–ออกเพื่อดูรายละเอียด</small></div>
-          <arcgis-map id="overviewArcgisMap" item-id="3d24287ac6ea49cd823625ddad496e01" portal-url="https://ieat.maps.arcgis.com" style="display:block;width:100%;height:100%;min-height:640px">
-  <arcgis-zoom slot="top-left"></arcgis-zoom>
-  <arcgis-home slot="top-left"></arcgis-home>
-  <arcgis-legend slot="bottom-left"></arcgis-legend>
-</arcgis-map>
+          <iframe id="overviewArcgisMap" title="แผนที่สถานการณ์น้ำ" loading="lazy" style="display:block;width:100%;height:640px;border:0" src="https://ieat.maps.arcgis.com/apps/Embed/index.html?webmap=3d24287ac6ea49cd823625ddad496e01&amp;zoom=true&amp;scale=true&amp;disable_scroll=false&amp;theme=light"></iframe>
         </article>
       </section>
 
@@ -9389,6 +9385,35 @@ a.rid-basin-fullscreen {
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",styleSwoc);
   else styleSwoc();
   [300,1000,2500].forEach(function(ms){setTimeout(styleSwoc,ms)});
+})();
+</script>
+<style id="reliable-iframe-map-zoom-20260910-v3">
+.rid-basin-head a,a.rid-basin-fullscreen{background:#832561!important;color:#fff!important;border-color:#832561!important}
+.flash-flood-rank-row,.nationwide-indicators .barrow,.flash-flood-rank-value,.nationwide-indicators .barrow b{cursor:pointer!important}
+</style>
+<script id="reliable-iframe-map-zoom-20260910-v3-script">
+(function(){
+var id="3d24287ac6ea49cd823625ddad496e01";
+var base="https://ieat.maps.arcgis.com/apps/Embed/index.html?webmap="+id+"&zoom=true&scale=true&disable_scroll=false&theme=light";
+function frame(){return document.getElementById("overviewArcgisMap")}
+function extent(box){var m=frame();if(!m)return;m.src=base+"&extent="+box.join(",");setTimeout(function(){m.scrollIntoView({behavior:"smooth",block:"center"})},100)}
+function thailand(){extent([97.30,5.50,105.70,20.60])}
+async function province(name){
+var q=(name||"").replace(/^\s*\d+\.\s*/,"").replace(/^จ\./,"จังหวัด").trim();
+try{
+var u="https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?f=json&countryCode=THA&maxLocations=1&SingleLine="+encodeURIComponent(q+", ประเทศไทย");
+var d=await fetch(u).then(function(r){if(!r.ok)throw Error(r.status);return r.json()});
+var p=d.candidates&&d.candidates[0]&&d.candidates[0].location;
+if(!p)return thailand();
+extent([p.x-.45,p.y-.35,p.x+.45,p.y+.35]);
+}catch(e){thailand()}
+}
+document.addEventListener("click",function(e){
+var r=e.target.closest(".flash-flood-rank-row");
+if(r){e.preventDefault();var n=r.querySelector(".flash-flood-rank-name");province(n?n.textContent:"");return}
+var b=e.target.closest(".nationwide-indicators .barrow");
+if(b){e.preventDefault();var s=b.querySelector("span");if(s&&/ฝนสูงสุด/.test(s.textContent)){var n=document.querySelector(".flash-flood-rank-name");province(n?n.textContent:"")}else thailand()}
+},true);
 })();
 </script>
 </body>
