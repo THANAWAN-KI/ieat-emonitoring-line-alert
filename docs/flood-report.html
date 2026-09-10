@@ -1454,7 +1454,7 @@ body{color:#172033!important}
           <a href="https://www.thaiwater.net/new4all/warning" target="_blank" rel="noopener">เปิดเต็มหน้า</a>
         </header>
         <div class="thaiwater-warning-frame">
-          <iframe src="https://www.thaiwater.net/new4all/warning" title="พื้นที่เฝ้าระวัง ThaiWater" loading="eager" allow="fullscreen; geolocation" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          <iframe src="https://www.thaiwater.net/new4all/warning" title="พื้นที่เฝ้าระวัง ThaiWater" loading="lazy" allow="fullscreen; geolocation" referrerpolicy="strict-origin-when-cross-origin"></iframe>
           <div class="thaiwater-warning-fallback">
             หากแผนที่ไม่แสดง โปรดเลือก “เปิดเต็มหน้า” เพื่อดูข้อมูลจาก ThaiWater โดยตรง
           </div>
@@ -1478,7 +1478,7 @@ body{color:#172033!important}
               <p class="sheet-risk-line">พื้นที่เฝ้าระวังสูงสุด: <strong id="reportRiskEstate" contenteditable="true">นิคมอุตสาหกรรมภาคใต้ จังหวัดสงขลา และพื้นที่ต่อเนื่อง</strong></p>
             </header>
             <div class="sheet-map-frame">
-              <iframe id="interactiveReportMap" src="https://www.thaiwater.net/FlashFlood" title="แผนที่ ThaiWater แบบโต้ตอบ" loading="eager" allow="fullscreen; geolocation" referrerpolicy="strict-origin-when-cross-origin"></iframe><img id="infographicMap" src="assets/thaiwater-overall-latest.png" alt="แผนที่พื้นที่เสี่ยงน้ำท่วมฉับพลัน" hidden>
+              <iframe id="interactiveReportMap" src="https://www.thaiwater.net/FlashFlood" title="แผนที่ ThaiWater แบบโต้ตอบ" loading="lazy" allow="fullscreen; geolocation" referrerpolicy="strict-origin-when-cross-origin"></iframe><img id="infographicMap" src="assets/thaiwater-overall-latest.png" alt="แผนที่พื้นที่เสี่ยงน้ำท่วมฉับพลัน" hidden>
               <div id="estatePinOverlay" class="estate-pin-overlay" aria-label="ตำแหน่งนิคมอุตสาหกรรม"></div>
               <div class="map-placeholder" id="mapPlaceholder" hidden>กำลังโหลดภาพแผนที่ล่าสุด…</div>
             </div>
@@ -1513,7 +1513,7 @@ body{color:#172033!important}
 <section class="export-sheet portrait-sheet" id="reportPage4" data-report-page="4">
 <header class="sheet-header compact"><h2>แผนที่ความเสี่ยงจากฝนสะสม 3 วันล่วงหน้า</h2><p class="shared-report-period" contenteditable="true">ข้อมูลคาดการณ์จากระบบ ThaiWater</p></header>
 <section class="three-day-risk-map">
-<iframe src="https://www.thaiwater.net/risk-rainfall-3-day-forecast" title="แผนที่ความเสี่ยงจากฝนสะสม 3 วันล่วงหน้า" loading="eager" scrolling="no" allow="fullscreen; geolocation" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+<iframe src="https://www.thaiwater.net/risk-rainfall-3-day-forecast" title="แผนที่ความเสี่ยงจากฝนสะสม 3 วันล่วงหน้า" loading="lazy" scrolling="no" allow="fullscreen; geolocation" referrerpolicy="strict-origin-when-cross-origin"></iframe>
 <div class="three-day-risk-fallback"><a href="https://www.thaiwater.net/risk-rainfall-3-day-forecast" target="_blank" rel="noopener">เปิดแผนที่ความเสี่ยงจากฝนสะสม 3 วันล่วงหน้าแบบเต็มหน้า</a></div>
 </section>
 <section class="export-table-block forecast-table-block">
@@ -4864,7 +4864,7 @@ html body #thaiwater-warning.active{display:block!important}
  function nearest(estate,items){let best=null;items.forEach(x=>{if(num(x.latitude)==null||num(x.longitude)==null)return;const d=km(estate,x);if(!best||d<best.distance)best={item:x,distance:d}});return best}
  function shell(){
   const host=document.querySelector("#thaiwater-warning .thaiwater-warning-shell");if(!host)return null;
-  host.innerHTML='<div class="watch-dashboard"><div class="watch-intro"><div><h2>พื้นที่เฝ้าระวังใกล้นิคมอุตสาหกรรมทั่วประเทศ</h2></div><div class="watch-time" id="watchDataTime">กำลังโหลดข้อมูลล่าสุด…</div></div><section class="thaiwater-reference-panel"><div class="thaiwater-reference-bar"><div><b>พื้นที่เฝ้าระวัง — ThaiWater</b><span>แผนที่และอันดับพื้นที่เสี่ยง 24/48 ชั่วโมง และข้อมูลความเสี่ยง 6 เดือน</span></div><a href="https://www.thaiwater.net/new4all/warning" target="_blank" rel="noopener">เปิดเต็มหน้าจอ</a></div><iframe class="thaiwater-reference-frame" title="พื้นที่เฝ้าระวัง ThaiWater" loading="eager" src="https://www.thaiwater.net/new4all/warning"></iframe></section><div class="watch-analysis-title">ข้อมูลวิเคราะห์เพิ่มเติมสำหรับนิคมอุตสาหกรรม</div><div class="watch-grid">'+
+  host.innerHTML='<div class="watch-dashboard"><div class="watch-intro"><div><h2>พื้นที่เฝ้าระวังใกล้นิคมอุตสาหกรรมทั่วประเทศ</h2></div><div class="watch-time" id="watchDataTime">กำลังโหลดข้อมูลล่าสุด…</div></div><section class="thaiwater-reference-panel"><div class="thaiwater-reference-bar"><div><b>พื้นที่เฝ้าระวัง — ThaiWater</b><span>แผนที่และอันดับพื้นที่เสี่ยง 24/48 ชั่วโมง และข้อมูลความเสี่ยง 6 เดือน</span></div><a href="https://www.thaiwater.net/new4all/warning" target="_blank" rel="noopener">เปิดเต็มหน้าจอ</a></div><iframe class="thaiwater-reference-frame" title="พื้นที่เฝ้าระวัง ThaiWater" loading="lazy" src="https://www.thaiwater.net/new4all/warning"></iframe></section><div class="watch-analysis-title">ข้อมูลวิเคราะห์เพิ่มเติมสำหรับนิคมอุตสาหกรรม</div><div class="watch-grid">'+
   '<section class="watch-panel"><div class="watch-panel-head"><div><h3>พื้นที่เสี่ยงน้ำท่วมฉับพลัน</h3><p>เปรียบเทียบทุกนิคมฯ กับพื้นที่เสี่ยงรายตำบลใน 24 และ 48 ชั่วโมงข้างหน้า</p></div><div class="watch-tabs"><button class="active" data-risk-period="24h">24 ชั่วโมง</button><button data-risk-period="48h">48 ชั่วโมง</button></div></div><div class="watch-tools"><input id="riskSearch" placeholder="ค้นหานิคม จังหวัด อำเภอ หรือตำบล"><span class="watch-count" id="riskCount"></span></div><div class="watch-table-wrap"><table class="watch-table"><thead><tr><th>นิคมอุตสาหกรรม</th><th>สายปฏิบัติการ</th><th>สถานะ</th><th>พื้นที่เสี่ยงใกล้สุด</th><th>ระยะทาง</th><th>ฝนสะสม</th><th>ข้อมูล ณ เวลา</th></tr></thead><tbody id="riskRows"></tbody></table></div></section>'+
   '<section class="watch-panel"><div class="watch-panel-head"><div><h3>สถานการณ์น้ำในจุดเฝ้าระวังใกล้นิคมฯ</h3><p>สถานีระดับน้ำที่ใกล้แต่ละนิคมฯ มากที่สุด แสดงครบทุกนิคมอุตสาหกรรม</p></div></div><div class="watch-tools"><input id="waterSearch" placeholder="ค้นหานิคม สถานี จังหวัด หรือสถานะ"><span class="watch-count" id="waterCount"></span></div><div class="watch-table-wrap"><table class="watch-table"><thead><tr><th>นิคมอุตสาหกรรม</th><th>สถานีใกล้สุด</th><th>จังหวัด/อำเภอ</th><th>ระยะทาง</th><th>ระดับน้ำ</th><th>สถานะ</th><th>ตรวจวัดล่าสุด</th></tr></thead><tbody id="waterRows"></tbody></table></div></section>'+
   '<section class="watch-panel"><div class="watch-panel-head"><div><h3>แนวโน้มฝนและทิศทางกลุ่มฝน</h3><p>เลื่อนแถบเวลาบนแผนที่เพื่อดูฝนล่วงหน้าและการเคลื่อนตัวของกลุ่มฝน</p></div></div><div class="rain-layout"><iframe class="rain-map" title="แผนที่พยากรณ์ฝน" loading="lazy" src="https://embed.windy.com/embed2.html?lat=13.8&lon=100.6&detailLat=13.8&detailLon=100.6&width=900&height=520&zoom=5&level=surface&overlay=rain&product=ecmwf&menu=&message=true&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1"></iframe><aside class="rain-guide"><h4>วิธีใช้เพื่อประกอบการพยากรณ์</h4><ol><li>กดเล่นหรือเลื่อนเวลา เพื่อดูว่าช่วงใดฝนเข้าพื้นที่นิคมฯ</li><li>สังเกตการเคลื่อนของแถบสีจากหลายช่วงเวลา เพื่อประเมินทิศทางกลุ่มฝน</li><li>เทียบกับตารางฝนสะสมและระดับน้ำด้านบนก่อนออกประกาศเฝ้าระวัง</li></ol><p><b>ข้อควรระวัง:</b> แผนที่เป็นผลพยากรณ์จากแบบจำลอง ไม่ใช่ประกาศเตือนภัยอย่างเป็นทางการ ควรยืนยันกับ TMD/ThaiWater ทุกครั้ง</p><div class="source-row"><a href="https://www.tmd.go.th/weather/radar" target="_blank" rel="noopener">เรดาร์ฝน TMD</a><a href="https://www.thaiwater.net/new4all" target="_blank" rel="noopener">ThaiWater</a><a href="https://www.tmd.go.th/weather/forecast/daily" target="_blank" rel="noopener">พยากรณ์อากาศ TMD</a></div></aside></div></section>'+
@@ -5018,7 +5018,7 @@ body>.ieat-persistent-tabbar{display:none!important}
  async function mount(){
   const panel=document.querySelector("#thaiwater-warning .thaiwater-reference-panel");
   if(!panel)return;
-  panel.innerHTML='<div class="thaiwater-reference-bar"><div><b>พื้นที่เฝ้าระวังน้ำท่วม</b><span>ข้อมูลพื้นที่เสี่ยง 24/48 ชั่วโมง และแผนที่น้ำท่วมสำหรับนิคมอุตสาหกรรม</span></div><a href="https://www.thaiwater.net/new4all/warning" target="_blank" rel="noopener">แหล่งข้อมูล ThaiWater</a></div><div class="tw-risk-map-grid"><section class="tw-risk-card"><div class="tw-risk-head"><h3>พื้นที่เสี่ยงน้ำท่วมจากฝนตกสะสมใน 24 ชม. ข้างหน้า</h3><p>กำลังโหลดข้อมูลล่าสุด…</p></div></section><section class="tw-risk-card"><div class="tw-risk-head"><h3>พื้นที่เสี่ยงน้ำท่วมจากฝนตกสะสมใน 48 ชม. ข้างหน้า</h3><p>กำลังโหลดข้อมูลล่าสุด…</p></div></section><section class="tw-map-card"><div class="tw-map-label">แผนที่สถานการณ์น้ำท่วม</div><iframe allow="local-network-access; geolocation" title="flood" loading="eager" src="https://www.thaiwater.net/new4all/warning"></iframe></section></div>';
+  panel.innerHTML='<div class="thaiwater-reference-bar"><div><b>พื้นที่เฝ้าระวังน้ำท่วม</b><span>ข้อมูลพื้นที่เสี่ยง 24/48 ชั่วโมง และแผนที่น้ำท่วมสำหรับนิคมอุตสาหกรรม</span></div><a href="https://www.thaiwater.net/new4all/warning" target="_blank" rel="noopener">แหล่งข้อมูล ThaiWater</a></div><div class="tw-risk-map-grid"><section class="tw-risk-card"><div class="tw-risk-head"><h3>พื้นที่เสี่ยงน้ำท่วมจากฝนตกสะสมใน 24 ชม. ข้างหน้า</h3><p>กำลังโหลดข้อมูลล่าสุด…</p></div></section><section class="tw-risk-card"><div class="tw-risk-head"><h3>พื้นที่เสี่ยงน้ำท่วมจากฝนตกสะสมใน 48 ชม. ข้างหน้า</h3><p>กำลังโหลดข้อมูลล่าสุด…</p></div></section><section class="tw-map-card"><div class="tw-map-label">แผนที่สถานการณ์น้ำท่วม</div><iframe allow="local-network-access; geolocation" title="flood" loading="lazy" src="https://www.thaiwater.net/new4all/warning"></iframe></section></div>';
   try{
    const r=await fetch(new URL("./data/thaiwater_latest.json",document.baseURI),{cache:"no-store"});
    if(!r.ok)throw new Error("HTTP "+r.status);
@@ -6857,7 +6857,7 @@ body main.container #thaiwater-warning .swoc-live-frame iframe{
   lat=n(lat);lon=n(lon);if(lat==null||lon==null)return;
   const card=document.querySelector("#thaiwater-warning .tw-map-card");if(!card)return;
   let panel=card.querySelector(".focused-location-map");
-  if(!panel){panel=document.createElement("div");panel.className="focused-location-map";panel.innerHTML='<div class="focused-location-head"><b></b><button type="button">กลับไปแผนที่ ThaiWater</button></div><iframe title="แผนที่ซูมตำแหน่งที่เลือก" loading="eager"></iframe>';card.appendChild(panel);panel.querySelector("button").onclick=()=>panel.remove()}
+  if(!panel){panel=document.createElement("div");panel.className="focused-location-map";panel.innerHTML='<div class="focused-location-head"><b></b><button type="button">กลับไปแผนที่ ThaiWater</button></div><iframe title="แผนที่ซูมตำแหน่งที่เลือก" loading="lazy"></iframe>';card.appendChild(panel);panel.querySelector("button").onclick=()=>panel.remove()}
   panel.querySelector("b").textContent=title||"ตำแหน่งที่เลือก";
   panel.querySelector("iframe").src=osmUrl(lat,lon);
   card.scrollIntoView({behavior:"smooth",block:"center"});
@@ -9711,6 +9711,23 @@ html body main.container #infographic #reportPage4 .three-day-risk-fallback a{
 /* Remove the three SWOC selector cards from the monitoring page. */
 html body main.container #thaiwater-warning .swoc-watch-tabs{
  display:none!important;
+}
+</style>
+<style id="flood-performance-smoothness-20260910-v1">
+/* Reduce layout/paint work and avoid animated jumps on this large multi-view page. */
+html{scroll-behavior:auto!important}
+main.container .view:not(.active){display:none!important}
+main.container .view.active{contain:layout style}
+#warning .card,
+#warning .kpi,
+#warning iframe,
+#thaiwater-warning iframe,
+#infographic iframe{
+ transition:none!important;
+ animation:none!important;
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
 }
 </style>
 </body>
