@@ -1497,25 +1497,30 @@ body{color:#172033!important}
               <h3>นิคมอุตสาหกรรมที่เข้าเกณฑ์เฝ้าระวัง</h3>
               <table class="export-data-table"><thead><tr><th>ลำดับ</th><th>นิคมอุตสาหกรรม</th><th>สถานีผิดปกติ</th><th>ระยะใกล้ที่สุด</th><th>ฝนสูงสุด</th><th class="status-column-head">สถานะ</th></tr></thead><tbody id="exportEstateRows"><tr><td colspan="6">กำลังโหลดข้อมูล…</td></tr></tbody></table>
             </section>
-            <section class="export-table-block">
-              <h3>สถานการณ์น้ำในพื้นที่เฝ้าระวังใกล้นิคมอุตสาหกรรม</h3>
-              <table class="export-data-table"><thead><tr><th>สถานี</th><th>ระดับน้ำ</th><th class="water-situation-head">สถานการณ์น้ำ</th><th>เวลา</th></tr></thead><tbody id="exportWaterRows"><tr><td colspan="4">กำลังโหลดข้อมูล…</td></tr></tbody></table>
-            </section>
-            <footer class="sheet-footer"><span>ข้อมูลจากสถานีที่อยู่ภายในรัศมี 30 กิโลเมตรจากนิคมฯ</span><span>หน้า 2 / 3</span></footer>
+            
+            <footer class="sheet-footer"><span>ข้อมูลจากสถานีที่อยู่ภายในรัศมี 30 กิโลเมตรจากนิคมฯ</span><span>หน้า 2 / 4</span></footer>
             
           </section>
 
-          <section class="export-sheet landscape-sheet" id="reportPage3" data-report-page="3">
+          <section class="export-sheet" id="reportPage3" data-report-page="3">
+<header class="sheet-header compact"><h2 contenteditable="true">สถานการณ์น้ำในพื้นที่เฝ้าระวังใกล้นิคมอุตสาหกรรม</h2><p class="shared-report-period" contenteditable="true">ข้อมูลตามช่วงเวลารายงาน</p></header>
+<section class="export-table-block">
+              <h3>สถานการณ์น้ำในพื้นที่เฝ้าระวังใกล้นิคมอุตสาหกรรม</h3>
+              <table class="export-data-table"><thead><tr><th>สถานี</th><th>ระดับน้ำ</th><th class="water-situation-head">สถานการณ์น้ำ</th><th>เวลา</th></tr></thead><tbody id="exportWaterRows"><tr><td colspan="4">กำลังโหลดข้อมูล…</td></tr></tbody></table>
+            </section>
+<footer class="sheet-footer"><span>ข้อมูลจากสถานีที่อยู่ภายในรัศมี 30 กิโลเมตรจากนิคมฯ</span><span>หน้า 3 / 4</span></footer>
+</section>
+<section class="export-sheet landscape-sheet" id="reportPage4" data-report-page="4">
             <header class="sheet-header compact"><h2>พื้นที่เฝ้าระวัง 24 ชั่วโมง / 48 ชั่วโมง ใกล้เคียงพื้นที่นิคมฯ</h2><p class="shared-report-period" contenteditable="true">ข้อมูลตามช่วงเวลารายงาน</p></header>
             <div class="dual-forecast-maps">
-              <figure class="forecast-map-card"><figcaption contenteditable="true">แผนที่คาดการณ์พื้นที่เฝ้าระวัง 24 ชั่วโมง</figcaption><div class="forecast-map-frame"><iframe class="interactive-forecast-map" src="https://experience.arcgis.com/experience/2f661f46b4b743cda30b51d7069416f2" title="แผนที่คาดการณ์พื้นที่เฝ้าระวัง 24 ชั่วโมง" loading="eager" allow="fullscreen; geolocation" referrerpolicy="strict-origin-when-cross-origin" scrolling="no"></iframe><img id="forecastMap24" src="assets/thaiwater-overall-latest.png" alt="แผนที่คาดการณ์ 24 ชั่วโมง" hidden><div id="forecastPinOverlay24" class="estate-pin-overlay"></div></div></figure>
-              <figure class="forecast-map-card"><figcaption contenteditable="true">แผนที่คาดการณ์พื้นที่เฝ้าระวัง 48 ชั่วโมง</figcaption><div class="forecast-map-frame"><iframe class="interactive-forecast-map" src="https://experience.arcgis.com/experience/2f661f46b4b743cda30b51d7069416f2" title="แผนที่คาดการณ์พื้นที่เฝ้าระวัง 48 ชั่วโมง" loading="eager" allow="fullscreen; geolocation" referrerpolicy="strict-origin-when-cross-origin" scrolling="no"></iframe><img id="forecastMap48" src="assets/thaiwater-overall-latest.png" alt="แผนที่คาดการณ์ 48 ชั่วโมง" hidden><div id="forecastPinOverlay48" class="estate-pin-overlay"></div></div></figure>
+              <figure class="forecast-map-card"><figcaption contenteditable="true">แผนที่คาดการณ์พื้นที่เฝ้าระวัง 24 ชั่วโมง</figcaption><div class="forecast-map-frame"><img id="forecastMap24" alt="ภาพคาดการณ์พื้นที่เฝ้าระวัง 24 ชั่วโมง"><label class="forecast-png-upload" for="forecastPng24"><b>อัปโหลดภาพ PNG</b><span>สำหรับแผนที่คาดการณ์ 24 ชั่วโมง</span></label><input id="forecastPng24" type="file" accept="image/png" hidden></div></figure>
+              <figure class="forecast-map-card"><figcaption contenteditable="true">แผนที่คาดการณ์พื้นที่เฝ้าระวัง 48 ชั่วโมง</figcaption><div class="forecast-map-frame"><img id="forecastMap48" alt="ภาพคาดการณ์พื้นที่เฝ้าระวัง 48 ชั่วโมง"><label class="forecast-png-upload" for="forecastPng48"><b>อัปโหลดภาพ PNG</b><span>สำหรับแผนที่คาดการณ์ 48 ชั่วโมง</span></label><input id="forecastPng48" type="file" accept="image/png" hidden></div></figure>
             </div>
             <div class="forecast-legend horizontal"><p><i class="legend-24"></i> เฝ้าระวัง 24 ชั่วโมง</p><p><i class="legend-48"></i> เฝ้าระวัง 48 ชั่วโมง</p><p><i class="legend-estate"></i> นิคมอุตสาหกรรม</p></div>
             <section class="export-table-block forecast-table-block">
               <table class="export-data-table"><thead><tr><th>ช่วงเวลา</th><th>จังหวัด</th><th>อำเภอ</th><th>ตำบล</th><th>ฝนสะสม</th><th>นิคมฯ ใกล้ที่สุด</th></tr></thead><tbody id="exportForecastRows"><tr><td colspan="6">กำลังโหลดข้อมูล…</td></tr></tbody></table>
             </section>
-            <footer class="sheet-footer"><span>พื้นที่คาดการณ์ควรตรวจสอบร่วมกับประกาศทางการและข้อมูลภาคสนาม</span><span>หน้า 3 / 3</span></footer>
+            <footer class="sheet-footer"><span>พื้นที่คาดการณ์ควรตรวจสอบร่วมกับประกาศทางการและข้อมูลภาคสนาม</span><span>หน้า 4 / 4</span></footer>
             
           </section>
         </div>
@@ -9471,6 +9476,38 @@ body main.container #thaiwater-warning .swoc-watch-tab[data-swoc="rainfall"] spa
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",applyPalette);else applyPalette();
  [100,500,1200,2500,5200,7000].forEach(function(ms){setTimeout(applyPalette,ms)});
  document.addEventListener("click",function(e){if(e.target.closest("#thaiwater-warning .swoc-watch-tab"))setTimeout(applyPalette,0)},true);
+})();
+</script>
+<style id="split-water-report-and-png-forecast-20260910-v1">
+#infographic #reportPage4 .forecast-map-frame{position:relative!important;display:flex!important;align-items:center!important;justify-content:center!important;min-height:340px!important;background:#f7f7f7!important;overflow:hidden!important}
+#infographic #reportPage4 .forecast-map-frame>img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important}
+#infographic #reportPage4 .forecast-map-frame>img:not([src]){display:none!important}
+#infographic #reportPage4 .forecast-png-upload{display:flex;position:absolute;inset:18px;align-items:center;justify-content:center;flex-direction:column;gap:5px;border:2px dashed #832561;border-radius:12px;background:#fff;color:#832561;cursor:pointer;text-align:center}
+#infographic #reportPage4 .forecast-png-upload b{font-size:18px;font-weight:500}
+#infographic #reportPage4 .forecast-png-upload span{font-size:14px;font-weight:300}
+#infographic #reportPage4 .forecast-map-frame.has-image .forecast-png-upload{inset:auto 12px 12px auto;padding:8px 14px;border:0;background:#832561;color:#fff}
+#infographic #reportPage4 .forecast-map-frame.has-image .forecast-png-upload span{display:none}
+@media print{#infographic #reportPage4 .forecast-png-upload{display:none!important}}
+</style>
+<script id="split-water-report-and-png-forecast-20260910-v1-script">
+(function(){
+function connect(inputId,imageId){
+ var input=document.getElementById(inputId),image=document.getElementById(imageId);
+ if(!input||!image)return;
+ input.addEventListener("change",function(){
+  var file=input.files&&input.files[0];
+  if(!file)return;
+  if(file.type!=="image/png"){alert("กรุณาเลือกไฟล์ PNG เท่านั้น");input.value="";return}
+  var reader=new FileReader();
+  reader.onload=function(){
+   image.src=reader.result;
+   image.closest(".forecast-map-frame").classList.add("has-image");
+  };
+  reader.readAsDataURL(file);
+ });
+}
+function init(){connect("forecastPng24","forecastMap24");connect("forecastPng48","forecastMap48")}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
 })();
 </script>
 </body>
