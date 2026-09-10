@@ -8929,5 +8929,37 @@ html body main.container #warning .nationwide-indicators .card-head h2{
  [100,500,1200,2500].forEach(function(ms){setTimeout(apply,ms)});
 })();
 </script>
+
+<style id="align-three-page-tabs-top-right-20260910-v1">
+html body main.container #warning > .flood-support-heading,
+html body main.container #thaiwater-warning .watch-intro,
+html body main.container #infographic > .export-page-heading{
+ justify-content:flex-end!important;
+ align-items:flex-start!important;
+}
+html body main.container #finalFloodHeaderTabs,
+html body main.container #exportHeaderTabs,
+html body main.container #floodWorkflowNav .workflow-nav-inner,
+html body .ieat-persistent-tabbar{
+ width:auto!important;
+ margin-left:auto!important;
+ margin-right:0!important;
+ justify-content:flex-end!important;
+ align-self:flex-start!important;
+}
+@media(max-width:900px){
+ html body main.container #warning > .flood-support-heading,
+ html body main.container #thaiwater-warning .watch-intro,
+ html body main.container #infographic > .export-page-heading{
+  align-items:flex-end!important;
+ }
+ html body main.container #finalFloodHeaderTabs,
+ html body main.container #exportHeaderTabs{
+  margin-left:auto!important;
+  margin-right:0!important;
+  justify-content:flex-end!important;
+ }
+}
+</style>
 </body>
 </html>
