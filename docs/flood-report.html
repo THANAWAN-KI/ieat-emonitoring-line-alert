@@ -9791,5 +9791,48 @@ html body #warning .national-cards-dashboard>.national-kpi:nth-child(-n+3) span{
  [100,500,1200,2500,5000,8200].forEach(function(ms){setTimeout(paint,ms)});
 })();
 </script>
+<style id="six-overview-cards-blue-text-20260910-v2">
+html body #warning #outEstateCount,
+html body #warning #outEstateCount~span,
+html body #warning #outFactory,
+html body #warning #outFactory~span,
+html body #warning #outCritical,
+html body #warning #outCritical~span,
+html body #warning #nationalStormCount,
+html body #warning #nationalStormCount~span,
+html body #warning #nationalStormCount~h2,
+html body #warning #nationalWaterProvinceCount,
+html body #warning #nationalWaterProvinceCount~span,
+html body #warning #nationalHeavyRainCount,
+html body #warning #nationalHeavyRainCount~span{
+ color:#2468F2!important;
+ -webkit-text-fill-color:#2468F2!important;
+}
+</style>
+<script id="six-overview-cards-blue-text-20260910-v2-script">
+(function(){
+ var ids=["outEstateCount","outFactory","outCritical","nationalStormCount","nationalWaterProvinceCount","nationalHeavyRainCount"];
+ var blue="#2468F2",painting=false;
+ function cards(){
+  return ids.map(function(id){var n=document.getElementById(id);return n&&n.closest(".card")}).filter(function(n,i,a){return n&&a.indexOf(n)===i});
+ }
+ function paint(){
+  if(painting)return;painting=true;
+  cards().forEach(function(card){
+   card.querySelectorAll("h2,strong,span").forEach(function(el){
+    if(el.style.getPropertyValue("color").toLowerCase()!==blue.toLowerCase()||el.style.getPropertyPriority("color")!=="important")el.style.setProperty("color",blue,"important");
+    if(el.style.getPropertyValue("-webkit-text-fill-color").toLowerCase()!==blue.toLowerCase())el.style.setProperty("-webkit-text-fill-color",blue,"important");
+   });
+  });
+  painting=false;
+ }
+ function start(){
+  paint();
+  var root=document.getElementById("warning");
+  if(root)new MutationObserver(function(){queueMicrotask(paint)}).observe(root,{subtree:true,childList:true,attributes:true,attributeFilter:["style"]});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start);else start();
+})();
+</script>
 </body>
 </html>
