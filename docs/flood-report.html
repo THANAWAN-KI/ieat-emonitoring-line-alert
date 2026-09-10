@@ -8091,5 +8091,75 @@ html body main.container #infographic>.export-page-heading{
 }
 </style>
 
+
+<style id="three-header-tabs-pill-style-20260910-v1">
+/* ปุ่มนำทาง 3 ปุ่มแบบแคปซูลตามภาพตัวอย่าง */
+html body main.container #warning #finalFloodHeaderTabs,
+html body main.container #thaiwater-warning #finalFloodHeaderTabs,
+html body main.container #infographic #exportHeaderTabs{
+ display:flex!important;
+ align-items:center!important;
+ gap:8px!important;
+ padding:0!important;
+ background:transparent!important;
+ box-shadow:none!important;
+}
+html body main.container #warning #finalFloodHeaderTabs button,
+html body main.container #thaiwater-warning #finalFloodHeaderTabs button,
+html body main.container #infographic #exportHeaderTabs button{
+ min-width:0!important;
+ min-height:36px!important;
+ padding:8px 17px!important;
+ border:0!important;
+ border-radius:999px!important;
+ background:#F7F6F9!important;
+ background-color:#F7F6F9!important;
+ background-image:none!important;
+ box-shadow:none!important;
+ color:#6A4A7B!important;
+ font-family:"Sarabun",sans-serif!important;
+ font-size:14px!important;
+ font-weight:400!important;
+ line-height:1.4!important;
+}
+html body main.container #warning #finalFloodHeaderTabs button.active,
+html body main.container #thaiwater-warning #finalFloodHeaderTabs button.active,
+html body main.container #infographic #exportHeaderTabs button.active{
+ border:0!important;
+ border-bottom:0!important;
+ border-radius:999px!important;
+ background:#59267C!important;
+ background-color:#59267C!important;
+ background-image:none!important;
+ box-shadow:none!important;
+ color:#fff!important;
+ font-weight:600!important;
+}
+</style>
+<script id="three-header-tabs-pill-style-20260910-v1-script">
+(function(){
+ const selector="#warning #finalFloodHeaderTabs button,#thaiwater-warning #finalFloodHeaderTabs button,#infographic #exportHeaderTabs button";
+ function applyPillTabs(){
+  document.querySelectorAll(selector).forEach(function(button){
+   const active=button.classList.contains("active");
+   button.style.setProperty("border","0","important");
+   button.style.setProperty("border-bottom","0","important");
+   button.style.setProperty("border-radius","999px","important");
+   button.style.setProperty("background",active?"#59267C":"#F7F6F9","important");
+   button.style.setProperty("background-color",active?"#59267C":"#F7F6F9","important");
+   button.style.setProperty("background-image","none","important");
+   button.style.setProperty("box-shadow","none","important");
+   button.style.setProperty("color",active?"#fff":"#6A4A7B","important");
+   button.style.setProperty("font-weight",active?"600":"400","important");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",applyPillTabs);else applyPillTabs();
+ document.addEventListener("click",function(e){if(e.target.closest(selector))setTimeout(applyPillTabs,0)});
+ const root=document.body;
+ if(root)new MutationObserver(applyPillTabs).observe(root,{subtree:true,attributes:true,attributeFilter:["class"]});
+ [100,500,1200,2500,5000,8000].forEach(function(ms){setTimeout(applyPillTabs,ms)});
+})();
+</script>
+
 </body>
 </html>
