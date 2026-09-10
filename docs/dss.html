@@ -164,4 +164,23 @@ html body .leaflet-control{
  font-family:"Sarabun","TH Sarabun New",sans-serif!important;
 }
 </style>
+<style id="dss-force-sarabun-final-20260910-v2">
+html body .top,html body .top *,html body .workspace,html body .workspace *,
+html body .report,html body .report *,html body .leaflet-container,
+html body button,html body input,html body select,html body textarea,
+html body table,html body th,html body td{
+ font-family:"Sarabun","TH Sarabun New",sans-serif!important;
+}
+</style>
+<script id="dss-force-sarabun-final-20260910-v2-script">
+(function(){
+ function apply(){
+  document.querySelectorAll("body *:not(svg):not(path):not(.material-icons):not([class*='fa-'])").forEach(function(el){
+   el.style.setProperty("font-family","Sarabun, 'TH Sarabun New', sans-serif","important");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply);else apply();
+ setTimeout(apply,500);
+})();
+</script>
 </body></html>
