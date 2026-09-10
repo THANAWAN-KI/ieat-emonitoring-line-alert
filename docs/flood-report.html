@@ -9435,5 +9435,43 @@ body.watch-page-active main.container,
 }
 #thaiwater-warning.active{min-height:100vh!important}
 </style>
+<style id="watch-page-three-color-palette-20260910-v1">
+/* หน้าที่สอง: เขียวเดิมเป็น #11862F และส้มเดิมเป็น #832561 */
+body main.container #thaiwater-warning .tw-risk-card:first-child{border-top-color:#11862F!important}
+body main.container #thaiwater-warning .tw-risk-card:first-child .tw-risk-head h3{color:#11862F!important}
+body main.container #thaiwater-warning .tw-risk-card:first-child .tw-rain{background:#11862F!important;color:#BFCA02!important}
+body main.container #thaiwater-warning .tw-risk-card:nth-child(2){border-top-color:#832561!important}
+body main.container #thaiwater-warning .tw-risk-card:nth-child(2) .tw-risk-head h3{color:#832561!important}
+body main.container #thaiwater-warning .tw-risk-card:nth-child(2) .tw-rain{background:#832561!important;color:#fff!important}
+body main.container #thaiwater-warning #finalFloodHeaderTabs button.active{background:#11862F!important}
+body main.container #thaiwater-warning .alert-status-cell{background:#832561!important;color:#fff!important}
+body main.container #thaiwater-warning .swoc-watch-tabs{background:#fff!important}
+body main.container #thaiwater-warning .swoc-watch-tab[data-swoc="reservoir"]{background:#11862F!important;border-color:#11862F!important;color:#fff!important}
+body main.container #thaiwater-warning .swoc-watch-tab[data-swoc="pier"]{background:#832561!important;border-color:#832561!important;color:#fff!important}
+body main.container #thaiwater-warning .swoc-watch-tab[data-swoc="rainfall"]{background:#BFCA02!important;border-color:#BFCA02!important;color:#832561!important}
+body main.container #thaiwater-warning .swoc-watch-tab[data-swoc="reservoir"] b,
+body main.container #thaiwater-warning .swoc-watch-tab[data-swoc="reservoir"] span,
+body main.container #thaiwater-warning .swoc-watch-tab[data-swoc="pier"] b,
+body main.container #thaiwater-warning .swoc-watch-tab[data-swoc="pier"] span{color:#fff!important}
+body main.container #thaiwater-warning .swoc-watch-tab[data-swoc="rainfall"] b,
+body main.container #thaiwater-warning .swoc-watch-tab[data-swoc="rainfall"] span{color:#832561!important}
+</style>
+<script id="watch-page-three-color-palette-20260910-v1-script">
+(function(){
+ function applyPalette(){
+  var colors={reservoir:["#11862F","#fff"],pier:["#832561","#fff"],rainfall:["#BFCA02","#832561"]};
+  document.querySelectorAll("#thaiwater-warning .swoc-watch-tab").forEach(function(tab){
+   var pair=colors[tab.dataset.swoc];if(!pair)return;
+   tab.style.setProperty("background",pair[0],"important");
+   tab.style.setProperty("border-color",pair[0],"important");
+   tab.style.setProperty("color",pair[1],"important");
+   tab.querySelectorAll("b,span").forEach(function(el){el.style.setProperty("color",pair[1],"important")});
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",applyPalette);else applyPalette();
+ [100,500,1200,2500,5200,7000].forEach(function(ms){setTimeout(applyPalette,ms)});
+ document.addEventListener("click",function(e){if(e.target.closest("#thaiwater-warning .swoc-watch-tab"))setTimeout(applyPalette,0)},true);
+})();
+</script>
 </body>
 </html>
