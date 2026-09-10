@@ -9568,5 +9568,46 @@ html body main.container #infographic #reportPage4 .export-data-table td{
  }
 }
 </style>
+<style id="overflow-red-white-values-thin-icons-20260910-v1">
+#warning .flash-flood-rank-value{color:#fff!important}
+#warning .flash-flood-rank-value *{color:#fff!important}
+#warning .grid.kpis .card.kpi .icon svg,
+#warning .national-cards-dashboard .n-icon svg{color:#007FDB!important}
+#warning .grid.kpis .card.kpi .icon svg path,
+#warning .grid.kpis .card.kpi .icon svg circle,
+#warning .grid.kpis .card.kpi .icon svg line,
+#warning .grid.kpis .card.kpi .icon svg polyline,
+#warning .national-cards-dashboard .n-icon svg path{
+ fill:none!important;
+ stroke:currentColor!important;
+ stroke-width:1.25!important;
+ vector-effect:non-scaling-stroke!important;
+ stroke-linecap:round!important;
+ stroke-linejoin:round!important;
+}
+#thaiwater-warning .station-watch-table tbody td.water-overflow-cell,
+#thaiwater-warning .station-watch-table tbody td.water-overflow-cell *,
+#infographic #reportPage3 #exportWaterRows td.export-overflow-cell,
+#infographic #reportPage3 #exportWaterRows td.export-overflow-cell *{
+ background:#D50000!important;
+ color:#fff!important;
+ box-shadow:none!important;
+}
+</style>
+<script id="overflow-red-white-values-thin-icons-20260910-v1-script">
+(function(){
+function mark(){
+ document.querySelectorAll("#thaiwater-warning .station-watch-table tbody tr,#infographic #reportPage3 #exportWaterRows tr").forEach(function(row){
+  var cell=row.cells&&row.cells[2];
+  if(!cell)return;
+  var overflow=cell.textContent.replace(/\s+/g," ").indexOf("ล้นตลิ่ง")>=0;
+  cell.classList.toggle(row.closest("#reportPage3")?"export-overflow-cell":"water-overflow-cell",overflow);
+ });
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mark);else mark();
+["stations","exportWaterRows"].forEach(function(id){var node=document.getElementById(id);if(node)new MutationObserver(mark).observe(node,{subtree:true,childList:true,characterData:true})});
+[100,500,1200,2500,5000].forEach(function(ms){setTimeout(mark,ms)});
+})();
+</script>
 </body>
 </html>
