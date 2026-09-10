@@ -9867,5 +9867,48 @@ html body #warning #nationalHeavyRainCount~span{
  object-position:center center!important;margin:0!important;border:0!important;
 }
 </style>
+<style id="report-watch-map-zoom-20260910-v1">
+#infographic #reportPage4 .three-day-risk-map{cursor:grab!important;touch-action:none!important}
+#infographic #reportPage4 .three-day-risk-map.dragging{cursor:grabbing!important}
+#infographic #reportPage4 .report-watch-map-image{
+ transform-origin:center center!important;will-change:transform!important;
+ user-select:none!important;-webkit-user-drag:none!important;
+}
+#infographic #reportPage4 .report-map-zoom-controls{
+ position:absolute!important;left:12px!important;top:12px!important;z-index:10!important;
+ display:flex!important;flex-direction:column!important;gap:5px!important;
+}
+#infographic #reportPage4 .report-map-zoom-controls button{
+ width:38px!important;height:38px!important;padding:0!important;border:1px solid #ccd4dc!important;
+ border-radius:7px!important;background:#fff!important;color:#243447!important;
+ font:600 21px/1 "Sarabun",sans-serif!important;cursor:pointer!important;
+ box-shadow:0 2px 7px rgba(0,0,0,.18)!important;
+}
+#infographic #reportPage4 .report-map-zoom-controls button[data-map-reset]{font-size:15px!important}
+</style>
+<script id="report-watch-map-zoom-20260910-v1-script">
+(function(){
+ function init(){
+  var frame=document.querySelector("#reportPage4 .three-day-risk-map");
+  var image=frame&&frame.querySelector(".report-watch-map-image");
+  if(!frame||!image||frame.dataset.zoomReady)return;
+  frame.dataset.zoomReady="true";
+  var scale=1,x=0,y=0,drag=false,sx=0,sy=0,ox=0,oy=0;
+  function clamp(){var maxX=(frame.clientWidth*(scale-1))/2,maxY=(frame.clientHeight*(scale-1))/2;x=Math.max(-maxX,Math.min(maxX,x));y=Math.max(-maxY,Math.min(maxY,y))}
+  function draw(){clamp();image.style.setProperty("transform","translate("+x+"px,"+y+"px) scale("+scale+")","important")}
+  function zoom(delta){scale=Math.max(1,Math.min(4,+(scale+delta).toFixed(2)));if(scale===1){x=0;y=0}draw()}
+  var controls=document.createElement("div");controls.className="report-map-zoom-controls";controls.setAttribute("data-html2canvas-ignore","true");
+  controls.innerHTML='<button type="button" aria-label="ซูมเข้า" data-map-plus>+</button><button type="button" aria-label="ซูมออก" data-map-minus>−</button><button type="button" aria-label="คืนค่ามุมมอง" data-map-reset>⟳</button>';
+  controls.onclick=function(e){e.stopPropagation();if(e.target.closest("[data-map-plus]"))zoom(.35);if(e.target.closest("[data-map-minus]"))zoom(-.35);if(e.target.closest("[data-map-reset]")){scale=1;x=0;y=0;draw()}};
+  frame.appendChild(controls);
+  frame.addEventListener("wheel",function(e){e.preventDefault();zoom(e.deltaY<0?.2:-.2)},{passive:false});
+  frame.addEventListener("pointerdown",function(e){if(e.target.closest(".report-map-zoom-controls")||scale<=1)return;drag=true;sx=e.clientX;sy=e.clientY;ox=x;oy=y;frame.classList.add("dragging");frame.setPointerCapture(e.pointerId)});
+  frame.addEventListener("pointermove",function(e){if(!drag)return;x=ox+e.clientX-sx;y=oy+e.clientY-sy;draw()});
+  function stop(){drag=false;frame.classList.remove("dragging")}
+  frame.addEventListener("pointerup",stop);frame.addEventListener("pointercancel",stop);
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
+})();
+</script>
 </body>
 </html>
