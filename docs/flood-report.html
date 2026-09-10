@@ -1511,18 +1511,13 @@ body{color:#172033!important}
 <footer class="sheet-footer"><span>ข้อมูลจากสถานีที่อยู่ภายในรัศมี 30 กิโลเมตรจากนิคมฯ</span><span>หน้า 3 / 4</span></footer>
 </section>
 <section class="export-sheet landscape-sheet" id="reportPage4" data-report-page="4">
-            <header class="sheet-header compact"><h2>พื้นที่เฝ้าระวัง 24 ชั่วโมง / 48 ชั่วโมง ใกล้เคียงพื้นที่นิคมฯ</h2><p class="shared-report-period" contenteditable="true">ข้อมูลตามช่วงเวลารายงาน</p></header>
-            <div class="dual-forecast-maps">
-              <figure class="forecast-map-card"><figcaption contenteditable="true">แผนที่คาดการณ์พื้นที่เฝ้าระวัง 24 ชั่วโมง</figcaption><div class="forecast-map-frame"><img id="forecastMap24" alt="ภาพคาดการณ์พื้นที่เฝ้าระวัง 24 ชั่วโมง"><label class="forecast-png-upload" for="forecastPng24"><b>อัปโหลดภาพ PNG</b><span>สำหรับแผนที่คาดการณ์ 24 ชั่วโมง</span></label><input id="forecastPng24" type="file" accept="image/png" hidden></div></figure>
-              <figure class="forecast-map-card"><figcaption contenteditable="true">แผนที่คาดการณ์พื้นที่เฝ้าระวัง 48 ชั่วโมง</figcaption><div class="forecast-map-frame"><img id="forecastMap48" alt="ภาพคาดการณ์พื้นที่เฝ้าระวัง 48 ชั่วโมง"><label class="forecast-png-upload" for="forecastPng48"><b>อัปโหลดภาพ PNG</b><span>สำหรับแผนที่คาดการณ์ 48 ชั่วโมง</span></label><input id="forecastPng48" type="file" accept="image/png" hidden></div></figure>
-            </div>
-            <div class="forecast-legend horizontal"><p><i class="legend-24"></i> เฝ้าระวัง 24 ชั่วโมง</p><p><i class="legend-48"></i> เฝ้าระวัง 48 ชั่วโมง</p><p><i class="legend-estate"></i> นิคมอุตสาหกรรม</p></div>
-            <section class="export-table-block forecast-table-block">
-              <table class="export-data-table"><thead><tr><th>ช่วงเวลา</th><th>จังหวัด</th><th>อำเภอ</th><th>ตำบล</th><th>ฝนสะสม</th><th>นิคมฯ ใกล้ที่สุด</th></tr></thead><tbody id="exportForecastRows"><tr><td colspan="6">กำลังโหลดข้อมูล…</td></tr></tbody></table>
-            </section>
-            <footer class="sheet-footer"><span>พื้นที่คาดการณ์ควรตรวจสอบร่วมกับประกาศทางการและข้อมูลภาคสนาม</span><span>หน้า 4 / 4</span></footer>
-            
-          </section>
+<header class="sheet-header compact"><h2>แผนที่ความเสี่ยงจากฝนสะสม 3 วันล่วงหน้า</h2><p class="shared-report-period" contenteditable="true">ข้อมูลคาดการณ์จากระบบ ThaiWater</p></header>
+<section class="three-day-risk-map">
+<iframe src="https://www.thaiwater.net/risk-rainfall-3-day-forecast" title="แผนที่ความเสี่ยงจากฝนสะสม 3 วันล่วงหน้า" loading="eager" allow="fullscreen; geolocation" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+<div class="three-day-risk-fallback"><a href="https://www.thaiwater.net/risk-rainfall-3-day-forecast" target="_blank" rel="noopener">เปิดแผนที่ความเสี่ยงจากฝนสะสม 3 วันล่วงหน้าแบบเต็มหน้า</a></div>
+</section>
+<footer class="sheet-footer"><span>แหล่งข้อมูล: ThaiWater · ควรตรวจสอบร่วมกับประกาศทางการและข้อมูลภาคสนาม</span><span>หน้า 4 / 4</span></footer>
+</section>
         </div>
 
         <div class="report-hidden-support" aria-hidden="true">
@@ -9510,5 +9505,12 @@ function init(){connect("forecastPng24","forecastMap24");connect("forecastPng48"
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
 })();
 </script>
+<style id="thaiwater-three-day-risk-map-20260910-v1">
+#infographic #reportPage4 .three-day-risk-map{display:flex;flex-direction:column;width:100%;height:calc(100% - 125px);min-height:650px;background:#fff;border:1px solid #d9e1e6;border-radius:12px;overflow:hidden}
+#infographic #reportPage4 .three-day-risk-map iframe{display:block;flex:1;width:100%;min-height:600px;border:0;background:#fff}
+#infographic #reportPage4 .three-day-risk-fallback{padding:9px 14px;text-align:right;background:#fff}
+#infographic #reportPage4 .three-day-risk-fallback a{display:inline-flex;padding:8px 14px;border-radius:9px;background:#832561;color:#fff;text-decoration:none;font-size:14px;font-weight:400}
+@media print{#infographic #reportPage4 .three-day-risk-fallback{display:none!important}}
+</style>
 </body>
 </html>
