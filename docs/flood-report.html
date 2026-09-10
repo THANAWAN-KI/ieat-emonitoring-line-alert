@@ -1512,7 +1512,7 @@ body{color:#172033!important}
 <section class="export-sheet portrait-sheet" id="reportPage4" data-report-page="4">
 <header class="sheet-header compact"><h2>แผนที่พื้นที่เฝ้าระวังน้ำท่วม</h2><p class="shared-report-period" contenteditable="true">ข้อมูลพื้นที่เฝ้าระวังล่าสุดจากระบบ ThaiWater</p></header>
 <section class="three-day-risk-map">
-<iframe src="https://www.thaiwater.net/new4all/warning" title="แผนที่พื้นที่เฝ้าระวังน้ำท่วม" loading="lazy" scrolling="no" allow="fullscreen; geolocation" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+<img class="report-watch-map-image" src="assets/thaiwater-watch-map-only.svg" alt="แผนที่พื้นที่เฝ้าระวังน้ำท่วมจาก ThaiWater">
 
 </section>
 <section class="export-table-block forecast-table-block">
@@ -9859,6 +9859,13 @@ html body #warning #nationalHeavyRainCount~span{
  margin:0!important;padding:0!important;border:0!important;background:#fff!important;
 }
 #infographic #reportPage4 .three-day-risk-fallback{display:none!important}
+</style>
+<style id="report-watch-static-map-only-20260910-v1">
+#infographic #reportPage4 .three-day-risk-map .report-watch-map-image{
+ display:block!important;width:100%!important;height:100%!important;
+ min-height:0!important;max-height:none!important;object-fit:cover!important;
+ object-position:center center!important;margin:0!important;border:0!important;
+}
 </style>
 </body>
 </html>
