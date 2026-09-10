@@ -9665,13 +9665,38 @@ async function make(n,name){if(typeof html2canvas!=="function"){note("ระบ�
 document.addEventListener("contextmenu",function(e){var p=e.target.closest("#reportPage3");if(!p)return;e.preventDefault();var b=e.target.closest("#reportPage3 .export-table-block,#reportPage3 img");make(b||p,b?"ตารางสถานการณ์น้ำพื้นที่เฝ้าระวัง":"รายงานสถานการณ์น้ำหน้า3")});
 })();</script>
 <style id="standard-a4-png-all-report-pages-20260910-v1">#infographic .export-sheet,#infographic .export-table-block{cursor:context-menu}.png-standard-render{transform:none!important;zoom:1!important}</style>
-<script id="standard-a4-png-all-report-pages-20260910-v1-script">(function(){
-var A4W=2480,A4H=3508;
+<script id="standard-a4-png-all-report-pages-20260910-v2-script">(function(){
+var A4W=2480,A4H=3508,SHEET_W=794,SHEET_H=1123;
 function toast(m){var o=document.querySelector(".copy-png-toast");if(o)o.remove();var t=document.createElement("div");t.className="copy-png-toast";t.textContent=m;document.body.appendChild(t);setTimeout(function(){t.remove()},2400)}
 function save(blob,name){var a=document.createElement("a"),u=URL.createObjectURL(blob);a.href=u;a.download=name+".png";a.click();setTimeout(function(){URL.revokeObjectURL(u)},1200)}
 async function deliver(blob,name){try{if(!navigator.clipboard||!window.ClipboardItem)throw Error("clipboard");await navigator.clipboard.write([new ClipboardItem({"image/png":blob})]);toast("คัดลอก PNG แล้ว")}catch(e){save(blob,name);toast("ดาวน์โหลด PNG แล้ว")}}
-function blob(canvas,node,name,isPage){canvas.toBlob(function(raw){if(!raw){toast("ไม่สามารถสร้าง PNG ได้");return}if(!isPage){deliver(raw,name);return}var out=document.createElement("canvas");out.width=A4W;out.height=A4H;var g=out.getContext("2d");g.fillStyle="#fff";g.fillRect(0,0,A4W,A4H);g.drawImage(canvas,0,0,A4W,A4H);out.toBlob(function(b){if(b)deliver(b,name)},"image/png")},"image/png")}
-async function render(node,name,isPage){if(typeof html2canvas!=="function"){toast("ระบบสร้าง PNG ยังโหลดไม่เสร็จ");return}toast("กำลังสร้าง PNG มาตรฐาน…");try{var w=isPage?794:(node.scrollWidth||node.offsetWidth),h=isPage?1123:(node.scrollHeight||node.offsetHeight);var scale=isPage?A4W/794:3;var canvas=await html2canvas(node,{scale:scale,useCORS:true,backgroundColor:"#fff",logging:false,width:w,height:h,scrollX:0,scrollY:0,windowWidth:Math.max(1200,w),windowHeight:Math.max(1400,h),onclone:function(doc){var clone=doc.getElementById(node.id);if(isPage&&clone){clone.classList.add("png-standard-render");clone.style.setProperty("width","794px","important");clone.style.setProperty("min-width","794px","important");clone.style.setProperty("max-width","794px","important");clone.style.setProperty("height","1123px","important");clone.style.setProperty("min-height","1123px","important");clone.style.setProperty("max-height","1123px","important");clone.style.setProperty("margin","0","important");clone.style.setProperty("transform","none","important")}}});blob(canvas,node,name,isPage)}catch(e){toast("สร้าง PNG ไม่สำเร็จ กรุณาลองอีกครั้ง")}}
+function output(canvas,name,isPage){canvas.toBlob(function(raw){if(!raw){toast("ไม่สามารถสร้าง PNG ได้");return}if(!isPage){deliver(raw,name);return}var out=document.createElement("canvas");out.width=A4W;out.height=A4H;var g=out.getContext("2d");g.imageSmoothingEnabled=true;g.imageSmoothingQuality="high";g.fillStyle="#fff";g.fillRect(0,0,A4W,A4H);g.drawImage(canvas,0,0,canvas.width,canvas.height,0,0,A4W,A4H);out.toBlob(function(b){if(b)deliver(b,name)},"image/png")}, "image/png")}
+async function render(node,name,isPage){
+ if(typeof html2canvas!=="function"){toast("ระบบสร้าง PNG ยังโหลดไม่เสร็จ");return}
+ toast("กำลังสร้าง PNG ขนาด A4…");
+ try{
+  if(document.fonts&&document.fonts.ready)await document.fonts.ready;
+  var w=isPage?SHEET_W:(node.scrollWidth||node.offsetWidth),h=isPage?SHEET_H:(node.scrollHeight||node.offsetHeight);
+  var canvas=await html2canvas(node,{
+   scale:isPage?1:2,useCORS:true,allowTaint:false,backgroundColor:"#fff",logging:false,
+   width:w,height:h,scrollX:0,scrollY:0,windowWidth:1400,windowHeight:1600,
+   onclone:function(doc){
+    var clone=doc.getElementById(node.id);
+    var css=doc.createElement("style");
+    css.textContent=".png-standard-render,.png-standard-render *{box-sizing:border-box!important;letter-spacing:normal!important;text-rendering:geometricPrecision!important}.png-standard-render{font-family:'Noto Sans Thai','Sarabun',sans-serif!important}.png-standard-render [contenteditable]{outline:0!important}.png-standard-render .sheet-header h2{font-size:25px!important;line-height:1.45!important;margin:0!important}.png-standard-render .sheet-header p{font-size:16px!important;line-height:1.55!important;margin:4px 0 0!important}.png-standard-render .sheet-summary h3{line-height:1.45!important}.png-standard-render .sheet-summary p{line-height:1.6!important}.png-standard-render .sheet-map-note{line-height:1.5!important}";
+    doc.head.appendChild(css);
+    if(isPage&&clone){
+     clone.classList.add("png-standard-render");
+     ["width","min-width","max-width"].forEach(function(k){clone.style.setProperty(k,SHEET_W+"px","important")});
+     ["height","min-height","max-height"].forEach(function(k){clone.style.setProperty(k,SHEET_H+"px","important")});
+     clone.style.setProperty("margin","0","important");clone.style.setProperty("transform","none","important");clone.style.setProperty("zoom","1","important");clone.style.setProperty("overflow","hidden","important");
+     clone.querySelectorAll("[contenteditable]").forEach(function(el){el.removeAttribute("contenteditable")});
+    }
+   }
+  });
+  output(canvas,name,isPage);
+ }catch(e){console.error(e);toast("สร้าง PNG ไม่สำเร็จ กรุณาลองอีกครั้ง")}
+}
 document.addEventListener("contextmenu",function(e){var page=e.target.closest("#infographic .export-sheet");if(!page)return;e.preventDefault();e.stopImmediatePropagation();var part=e.target.closest(".export-table-block");var target=part||page;var no=page.dataset.reportPage||"";render(target,part?"ตารางรายงานหน้า"+no:"รายงานสถานการณ์น้ำหน้า"+no,!part)},true);
 })();</script>
 <style id="three-day-map-link-white-text-20260910-v1">
