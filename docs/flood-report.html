@@ -1513,7 +1513,7 @@ body{color:#172033!important}
 <header class="sheet-header compact"><h2>แผนที่พื้นที่เฝ้าระวังน้ำท่วม</h2><p class="shared-report-period" contenteditable="true">ข้อมูลพื้นที่เฝ้าระวังล่าสุดจากระบบ ThaiWater</p></header>
 <section class="three-day-risk-map">
 <iframe src="https://www.thaiwater.net/new4all/warning" title="แผนที่พื้นที่เฝ้าระวังน้ำท่วม" loading="lazy" scrolling="no" allow="fullscreen; geolocation" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-<div class="three-day-risk-fallback"><a href="https://www.thaiwater.net/new4all/warning" target="_blank" rel="noopener">เปิดแผนที่พื้นที่เฝ้าระวังน้ำท่วมแบบเต็มหน้า</a></div>
+
 </section>
 <section class="export-table-block forecast-table-block">
 <h3>พื้นที่เฝ้าระวัง 24 ชั่วโมง / 48 ชั่วโมง ใกล้เคียงพื้นที่นิคมฯ</h3>
@@ -9846,6 +9846,19 @@ html body #warning #nationalHeavyRainCount~span{
  object-fit:cover!important;object-position:center center!important;background:#f4f6f8!important;
 }
 #infographic #reportCanvas #interactiveReportMap{display:none!important}
+</style>
+<style id="report-watch-map-only-20260910-v1">
+#infographic #reportPage4 .three-day-risk-map{
+ position:relative!important;display:block!important;height:480px!important;
+ min-height:480px!important;max-height:480px!important;overflow:hidden!important;
+ padding:0!important;border:1px solid #d9e1e6!important;background:#fff!important;
+}
+#infographic #reportPage4 .three-day-risk-map iframe{
+ position:absolute!important;inset:0!important;display:block!important;
+ width:100%!important;height:100%!important;min-height:100%!important;
+ margin:0!important;padding:0!important;border:0!important;background:#fff!important;
+}
+#infographic #reportPage4 .three-day-risk-fallback{display:none!important}
 </style>
 </body>
 </html>
