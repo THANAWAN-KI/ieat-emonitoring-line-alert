@@ -8473,5 +8473,58 @@ html body main.container #exportHeaderTabs,
 html body main.container #floodWorkflowNav .workflow-nav-inner,
 html body .ieat-persistent-tabbar { width:auto!important; margin-left:auto!important; margin-right:auto!important; justify-content:center!important; }
 </style>
+
+<style id="first-rain-card-blue-custom-icon-20260910-v1">
+html body main.container #warning .daily-water-grid > .daily-water-item:first-child,
+html body main.container #warning .daily-water-grid > .daily-water-item:first-child *{
+ color:#007FDB!important;
+ font-weight:300!important;
+}
+html body main.container #warning .daily-water-grid > .daily-water-item:first-child strong{
+ color:#007FDB!important;
+ font-size:28px!important;
+ font-weight:300!important;
+}
+html body main.container #warning .daily-water-grid > .daily-water-item:first-child small,
+html body main.container #warning .daily-water-grid > .daily-water-item:first-child span{
+ color:#007FDB!important;
+ font-weight:300!important;
+}
+html body main.container #warning .daily-water-grid > .daily-water-item:first-child::before{
+ content:none!important;
+ display:none!important;
+}
+html body main.container #warning .daily-water-grid > .daily-water-item:first-child > .rain-card-custom-icon{
+ display:block!important;
+ grid-column:1!important;
+ grid-row:1 / span 3!important;
+ width:52px!important;
+ height:52px!important;
+ margin:0!important;
+ padding:0!important;
+ border:0!important;
+ border-radius:50%!important;
+ background:#DBEBFA!important;
+ box-shadow:none!important;
+ color:#007FDB!important;
+ align-self:center!important;
+}
+</style>
+<script id="first-rain-card-blue-custom-icon-20260910-v1-script">
+(function(){
+ function mountRainIcon(){
+  const card=document.querySelector("#warning .daily-water-grid > .daily-water-item:first-child");
+  if(!card||card.querySelector(".rain-card-custom-icon"))return;
+  const svg=document.createElementNS("http://www.w3.org/2000/svg","svg");
+  svg.setAttribute("class","rain-card-custom-icon");
+  svg.setAttribute("viewBox","-37.97 -37.97 455.65 455.65");
+  svg.setAttribute("aria-hidden","true");
+  svg.innerHTML='<rect x="-37.97" y="-37.97" width="455.65" height="455.65" rx="227.825" fill="#dbebfa"></rect><g fill="#007fdb"><path d="M57.625 312.362c14.944 0 22.979-5.771 29.436-10.408 5.905-4.241 10.57-7.592 20.686-7.592 10.117 0 14.781 3.351 20.687 7.592 6.456 4.637 14.492 10.408 29.436 10.408 14.945 0 22.981-5.771 29.438-10.408 5.906-4.241 10.57-7.592 20.688-7.592 10.117 0 14.781 3.351 20.687 7.592 6.457 4.637 14.492 10.408 29.437 10.408 14.947 0 22.983-5.771 29.44-10.408 5.906-4.241 10.572-7.592 20.69-7.592 10.119 0 14.784 3.351 20.69 7.592 6.457 4.637 14.494 10.408 29.44 10.408 4.142 0 7.5-3.357 7.5-7.5s-3.358-7.5-7.5-7.5c-10.119 0-14.784-3.351-20.691-7.592-6.457-4.638-14.493-10.408-29.439-10.408-.389 0-.772.005-1.149.014-1.048.026-3.042.189-3.042-2.311V157.607c0-2.416 2.13-2.492 2.13-2.492h18.545c5.165 0 8.031-2.989 8.991-5.786.961-2.797.535-6.916-3.539-10.089l-28.909-22.509c-1.795-1.415-1.88-2.964-1.88-3.703v-50.78c0-6.341-5.159-11.5-11.5-11.5h-34.933c-6.341 0-11.5 5.159-11.5 11.5v6.005c0 2.25-1.423.798-1.423.798L175.88 19.095c-4.427-3.446-11.102-3.446-15.528 0L6.048 139.24c-4.075 3.173-4.5 7.292-3.539 10.089.96 2.797 3.827 5.786 8.991 5.786h17.979s2.695-.175 2.695 2.825v126.708c0 1.75-.785 1.338-1.19 1.092-5.581-3.397-12.746-6.378-23.484-6.378-4.142 0-7.5 3.357-7.5 7.5s3.358 7.5 7.5 7.5c10.117 0 14.782 3.351 20.688 7.592 6.456 4.637 14.492 10.408 29.437 10.408zm-24.271-172.247c-3.375 0-.901-2.424-.901-2.424L166.207 33.548s.898-.795 2.064-.774c1.149.02 2.373 1.255 2.373 1.255l132.948 103.517s3.513 2.57-.987 2.57h-2.047c-6.341 0-11.5 5.159-11.5 11.5v130.242c0 1.5-1.221 2.156-1.805 2.466-3.248 1.723-5.965 3.667-8.444 5.447-5.906 4.241-10.572 7.592-20.69 7.592-10.117 0-14.781-3.351-20.687-7.592-6.106-4.385-13.624-9.785-27.065-10.358-.771-.033-2.551.028-2.551-2.639v-17.964c0-2.175.023-5.733.049-7.907.009-.741.088-18.304-11.857-30.397-7.179-7.269-16.9-10.954-28.893-10.954-11.48 0-20.766 3.586-27.6 10.659-11.737 12.147-11.258 30.103-11.232 30.86.072 2.099.133 5.643.133 7.739v22.818c0 2.313-1.279 1.879-1.951 1.571-4.83-2.214-10.801-3.837-18.719-3.837-14.945 0-22.98 5.772-29.437 10.408-5.905 4.241-10.569 7.592-20.685 7.592-4.35 0-10.451-1.422-10.451-3.714V151.615c0-6.341-5.159-11.5-11.5-11.5h-2.821z"></path><path d="M372.209 348.198c-10.119 0-14.784-3.351-20.691-7.592-6.457-4.638-14.493-10.408-29.439-10.408-14.946 0-22.982 5.771-29.44 10.408-5.906 4.241-10.572 7.592-20.69 7.592-10.117 0-14.781-3.351-20.687-7.592-6.456-4.637-14.492-10.408-29.437-10.408-14.945 0-22.981 5.771-29.438 10.408-5.906 4.241-10.57 7.592-20.688 7.592-10.117 0-14.781-3.351-20.687-7.592-6.456-4.637-14.492-10.408-29.437-10.408-14.945 0-22.98 5.771-29.437 10.408-5.905 4.241-10.569 7.592-20.685 7.592-10.117 0-14.782-3.351-20.688-7.592-6.457-4.637-14.492-10.408-29.438-10.408-4.142 0-7.5 3.357-7.5 7.5s3.358 7.5 7.5 7.5c10.117 0 14.782 3.351 20.688 7.592 6.456 4.637 14.492 10.408 29.438 10.408 14.944 0 22.979-5.772 29.436-10.408 5.905-4.241 10.57-7.592 20.686-7.592 10.117 0 14.781 3.351 20.687 7.592 6.456 4.637 14.492 10.408 29.437 10.408 14.945 0 22.981-5.772 29.438-10.408 5.906-4.241 10.57-7.592 20.688-7.592 10.117 0 14.781 3.351 20.687 7.592 6.457 4.637 14.492 10.408 29.437 10.408 14.947 0 22.983-5.772 29.44-10.408 5.906-4.241 10.572-7.592 20.69-7.592 10.119 0 14.784 3.351 20.69 7.592 6.458 4.637 14.494 10.408 29.44 10.408 4.142 0 7.5-3.357 7.5-7.5s-3.358-7.5-7.5-7.5z"></path></g>';
+  card.insertBefore(svg,card.firstChild);
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mountRainIcon);else mountRainIcon();
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(mountRainIcon,ms)});
+})();
+</script>
 </body>
 </html>
