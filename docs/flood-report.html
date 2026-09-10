@@ -8910,5 +8910,24 @@ html body main.container #warning .nationwide-indicators h2{
  color:#11862F!important;
 }
 </style>
+
+<style id="force-indicator-green-11862f-20260910-v1">
+html body main.container #warning .operations-section-title,
+html body main.container #warning .nationwide-indicators h2,
+html body main.container #warning .nationwide-indicators .card-head h2{
+ color:#11862F!important;
+}
+</style>
+<script id="force-indicator-green-11862f-20260910-v1-script">
+(function(){
+ function apply(){
+  document.querySelectorAll("#warning .operations-section-title,#warning .nationwide-indicators h2,#warning .nationwide-indicators .card-head h2").forEach(function(el){
+   el.style.setProperty("color","#11862F","important");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply);else apply();
+ [100,500,1200,2500].forEach(function(ms){setTimeout(apply,ms)});
+})();
+</script>
 </body>
 </html>
