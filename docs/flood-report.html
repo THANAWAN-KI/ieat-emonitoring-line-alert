@@ -1477,7 +1477,7 @@ body{color:#172033!important}
               <p class="sheet-risk-line">พื้นที่เฝ้าระวังสูงสุด: <strong id="reportRiskEstate" contenteditable="true">นิคมอุตสาหกรรมภาคใต้ จังหวัดสงขลา และพื้นที่ต่อเนื่อง</strong></p>
             </header>
             <div class="sheet-map-frame">
-              <iframe id="interactiveReportMap" src="https://www.thaiwater.net/FlashFlood" title="แผนที่ ThaiWater แบบโต้ตอบ" loading="lazy" allow="fullscreen; geolocation" referrerpolicy="strict-origin-when-cross-origin"></iframe><img id="infographicMap" src="assets/thaiwater-overall-latest.png" alt="แผนที่พื้นที่เสี่ยงน้ำท่วมฉับพลัน" hidden>
+              <img id="infographicMap" src="assets/thaiwater-overall-latest.png" alt="แผนที่พื้นที่เสี่ยงน้ำท่วมฉับพลัน">
               <div id="estatePinOverlay" class="estate-pin-overlay" aria-label="ตำแหน่งนิคมอุตสาหกรรม"></div>
               <div class="map-placeholder" id="mapPlaceholder" hidden>กำลังโหลดภาพแผนที่ล่าสุด…</div>
             </div>
@@ -9840,5 +9840,12 @@ html body #warning #nationalHeavyRainCount~span{
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start);else start();
 })();
 </script>
+<style id="report-map-static-fallback-20260910-v1">
+#infographic #reportCanvas .sheet-map-frame>#infographicMap{
+ display:block!important;width:100%!important;height:100%!important;
+ object-fit:contain!important;background:#f4f6f8!important;
+}
+#infographic #reportCanvas #interactiveReportMap{display:none!important}
+</style>
 </body>
 </html>
