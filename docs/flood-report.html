@@ -1429,7 +1429,7 @@ body{color:#172033!important}
         </div>
         <article class="card operations-map embedded-water-map">
           <div class="overview-map-label"><b>แผนที่สถานการณ์น้ำท่วม</b><small>เลื่อนแผนที่หรือซูมเข้า–ออกเพื่อดูรายละเอียด</small></div>
-          <iframe id="overviewArcgisMap" title="แผนที่สถานการณ์น้ำ" loading="lazy" style="display:block;width:100%;height:640px;border:0" src="https://ieat.maps.arcgis.com/apps/Embed/index.html?webmap=3d24287ac6ea49cd823625ddad496e01&amp;zoom=true&amp;scale=true&amp;disable_scroll=false&amp;theme=light"></iframe>
+          <iframe id="overviewArcgisMap" title="แผนที่สถานการณ์น้ำ" loading="lazy" style="display:block;width:100%;height:640px;border:0" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&amp;webmap=3d24287ac6ea49cd823625ddad496e01&amp;theme=light&amp;bookmarks=true&amp;legend=true&amp;information=true&amp;share=true&amp;scroll=true&amp;basemaps=true&amp;center=100.38863619797984,14.34381658929649&amp;scale=577790.554289"></iframe>
         </article>
       </section>
 
@@ -9398,7 +9398,7 @@ a.rid-basin-fullscreen {
 <script id="reliable-iframe-map-zoom-20260910-v3-script">
 (function(){
 var id="3d24287ac6ea49cd823625ddad496e01";
-var base="https://ieat.maps.arcgis.com/apps/Embed/index.html?webmap="+id+"&zoom=true&scale=true&disable_scroll=false&theme=light";
+var base="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap="+id+"&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=true&basemaps=true";
 function frame(){return document.getElementById("overviewArcgisMap")}
 function extent(box){var m=frame();if(!m)return;m.src=base+"&extent="+box.join(",");setTimeout(function(){m.scrollIntoView({behavior:"smooth",block:"center"})},100)}
 function thailand(){extent([97.30,5.50,105.70,20.60])}
@@ -9728,6 +9728,20 @@ main.container .view.active{contain:layout style}
 }
 @media(prefers-reduced-motion:reduce){
  *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+}
+</style>
+<style id="arcgis-mapviewer-responsive-fix-20260910-v1">
+html body #warning .operations-map.embedded-water-map{
+ overflow:hidden!important;
+}
+html body #warning #overviewArcgisMap{
+ display:block!important;
+ width:100%!important;
+ height:640px!important;
+ min-height:640px!important;
+ max-width:100%!important;
+ border:0!important;
+ overflow:hidden!important;
 }
 </style>
 </body>
