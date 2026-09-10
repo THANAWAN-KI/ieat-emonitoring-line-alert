@@ -9769,5 +9769,27 @@ html body #warning #overviewArcgisMap{
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start);else start();
 })();
 </script>
+<style id="six-overview-cards-blue-text-20260910-v1">
+html body #warning .grid.kpis>.card.kpi:nth-child(-n+3) strong,
+html body #warning .grid.kpis>.card.kpi:nth-child(-n+3) span,
+html body #warning .national-cards-dashboard>.national-kpi:nth-child(-n+3) h2,
+html body #warning .national-cards-dashboard>.national-kpi:nth-child(-n+3) strong,
+html body #warning .national-cards-dashboard>.national-kpi:nth-child(-n+3) span{
+ color:#2468F2!important;
+ -webkit-text-fill-color:#2468F2!important;
+}
+</style>
+<script id="six-overview-cards-blue-text-20260910-v1-script">
+(function(){
+ function paint(){
+  document.querySelectorAll("#warning .grid.kpis>.card.kpi:nth-child(-n+3) strong,#warning .grid.kpis>.card.kpi:nth-child(-n+3) span,#warning .national-cards-dashboard>.national-kpi:nth-child(-n+3) h2,#warning .national-cards-dashboard>.national-kpi:nth-child(-n+3) strong,#warning .national-cards-dashboard>.national-kpi:nth-child(-n+3) span").forEach(function(el){
+   el.style.setProperty("color","#2468F2","important");
+   el.style.setProperty("-webkit-text-fill-color","#2468F2","important");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",paint);else paint();
+ [100,500,1200,2500,5000,8200].forEach(function(ms){setTimeout(paint,ms)});
+})();
+</script>
 </body>
 </html>
