@@ -8333,5 +8333,114 @@ html body .ieat-persistent-tabbar button.active{
  }
 }
 </style>
+
+<style id="overview-cards-match-orange-reference-20260910-v1">
+/* การ์ดตัวชี้วัดตามภาพตัวอย่างสีส้ม */
+html body main.container #warning .daily-water-grid{
+ gap:16px!important;
+}
+html body main.container #warning .daily-water-grid > .daily-water-item,
+html body main.container #warning .flood-final-cards > .kpi,
+html body main.container #warning .flood-final-cards > .national-kpi{
+ position:relative!important;
+ display:grid!important;
+ grid-template-columns:52px minmax(0,1fr)!important;
+ grid-template-rows:auto auto auto!important;
+ align-content:center!important;
+ align-items:center!important;
+ column-gap:14px!important;
+ width:100%!important;
+ min-width:0!important;
+ min-height:118px!important;
+ height:auto!important;
+ padding:18px 20px!important;
+ border:0!important;
+ border-radius:18px!important;
+ background:#FFFFFF!important;
+ background-color:#FFFFFF!important;
+ background-image:none!important;
+ box-shadow:0 7px 22px rgba(40,70,120,.10)!important;
+ overflow:hidden!important;
+ text-align:left!important;
+}
+html body main.container #warning .daily-water-grid > .daily-water-item::before,
+html body main.container #warning .flood-final-cards > .kpi::before,
+html body main.container #warning .flood-final-cards > .national-kpi::before{
+ content:"⌁"!important;
+ display:grid!important;
+ grid-column:1!important;
+ grid-row:1 / span 3!important;
+ place-items:center!important;
+ width:48px!important;
+ height:48px!important;
+ border-radius:50%!important;
+ background:#FFF8E9!important;
+ color:#E69A1B!important;
+ font-family:Arial,sans-serif!important;
+ font-size:30px!important;
+ font-weight:400!important;
+ line-height:1!important;
+}
+html body main.container #warning .daily-water-grid > .daily-water-item > *,
+html body main.container #warning .flood-final-cards > .kpi > div,
+html body main.container #warning .flood-final-cards > .kpi > div > *,
+html body main.container #warning .flood-final-cards > .national-kpi > *{
+ grid-column:2!important;
+ position:static!important;
+ width:auto!important;
+ max-width:100%!important;
+ margin:0!important;
+ padding:0!important;
+ border:0!important;
+ background:transparent!important;
+ background-color:transparent!important;
+ background-image:none!important;
+ box-shadow:none!important;
+ color:#E69A1B!important;
+ text-align:left!important;
+}
+html body main.container #warning .daily-water-grid > .daily-water-item > strong,
+html body main.container #warning .flood-final-cards > .kpi strong,
+html body main.container #warning .flood-final-cards > .national-kpi strong{
+ grid-row:1!important;
+ display:block!important;
+ color:#E69A1B!important;
+ font-size:28px!important;
+ font-weight:500!important;
+ line-height:1.15!important;
+}
+html body main.container #warning .daily-water-grid > .daily-water-item > small,
+html body main.container #warning .flood-final-cards > .kpi h2,
+html body main.container #warning .flood-final-cards > .national-kpi h2{
+ grid-row:2!important;
+ display:block!important;
+ color:#E69A1B!important;
+ font-size:15px!important;
+ font-weight:400!important;
+ line-height:1.45!important;
+}
+html body main.container #warning .daily-water-grid > .daily-water-item > span,
+html body main.container #warning .flood-final-cards > .kpi span,
+html body main.container #warning .flood-final-cards > .national-kpi span{
+ grid-row:3!important;
+ display:block!important;
+ color:#E69A1B!important;
+ font-size:14px!important;
+ font-weight:300!important;
+ line-height:1.4!important;
+}
+html body main.container #warning .flood-final-cards .icon,
+html body main.container #warning .flood-final-cards .n-icon,
+html body main.container #warning .flood-final-cards .source-link{
+ display:none!important;
+}
+@media(max-width:1100px){
+ html body main.container #warning .daily-water-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:560px){
+ html body main.container #warning .daily-water-grid,
+ html body main.container #warning .flood-final-cards{grid-template-columns:1fr!important}
+}
+</style>
 </body>
 </html>
