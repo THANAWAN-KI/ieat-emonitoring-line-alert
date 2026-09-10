@@ -9060,5 +9060,25 @@ html body .ieat-persistent-tabbar button.active{
  [100,500,1200,2500,5000].forEach(function(ms){setTimeout(apply,ms)});
 })();
 </script>
+<style id="purple-watch-data-click-map-20260910-v1">
+html body #warning .national-kpi:has(#nationalFloodCount),html body #warning .national-kpi:has(#nationalFloodCount) *,html body #warning .nationwide-indicators,html body #warning .nationwide-indicators *{color:#832561!important}
+html body #warning .national-kpi:has(#nationalFloodCount),html body #warning .nationwide-indicators .barrow{cursor:pointer!important}
+html body #warning .national-kpi:has(#nationalFloodCount):hover,html body #warning .nationwide-indicators .barrow:hover{outline:2px solid #832561!important;outline-offset:2px!important}
+html body #warning .operations-map.map-focus-highlight{outline:4px solid #832561!important;outline-offset:4px!important}
+</style>
+<script id="purple-watch-data-click-map-20260910-v1-script">
+(function(){
+ function apply(){
+  document.querySelectorAll("#warning .national-kpi:has(#nationalFloodCount),#warning .nationwide-indicators").forEach(function(box){box.style.setProperty("color","#832561","important");box.querySelectorAll("*").forEach(function(el){el.style.setProperty("color","#832561","important")})});
+  document.querySelectorAll("#warning .national-kpi:has(#nationalFloodCount),#warning .nationwide-indicators .barrow").forEach(function(item){
+   if(item.dataset.mapFocusBound)return;
+   item.dataset.mapFocusBound="true";item.setAttribute("role","button");item.setAttribute("tabindex","0");item.setAttribute("title","ดูข้อมูลบนแผนที่");
+   function focusMap(){const map=document.querySelector("#warning .operations-map");if(!map)return;map.scrollIntoView({behavior:"smooth",block:"center"});map.classList.add("map-focus-highlight");const frame=map.querySelector("iframe");if(frame)frame.focus();setTimeout(function(){map.classList.remove("map-focus-highlight")},1800)}
+   item.addEventListener("click",focusMap);item.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();focusMap()}});
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply);else apply();[100,500,1200,2500,5000].forEach(function(ms){setTimeout(apply,ms)});
+})();
+</script>
 </body>
 </html>
