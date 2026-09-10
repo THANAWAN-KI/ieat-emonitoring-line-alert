@@ -9080,5 +9080,28 @@ html body #warning .operations-map.map-focus-highlight{outline:4px solid #832561
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply);else apply();[100,500,1200,2500,5000].forEach(function(ms){setTimeout(apply,ms)});
 })();
 </script>
+
+<style id="flash-flood-title-purple-832561-20260910-v1">
+html body #warning [data-flash-flood-title-purple="true"]{
+ color:#832561!important;
+}
+</style>
+<script id="flash-flood-title-purple-832561-20260910-v1-script">
+(function(){
+ const phrase="พื้นที่เสี่ยงน้ำท่วมฉับพลันใน 24 ชั่วโมงข้างหน้า";
+ function apply(){
+  const root=document.getElementById("warning");
+  if(!root)return;
+  root.querySelectorAll("h1,h2,h3,h4,b,strong,span,p,div").forEach(function(el){
+   const text=String(el.textContent||"").replace(/\s+/g," ").trim();
+   if(text!==phrase)return;
+   el.setAttribute("data-flash-flood-title-purple","true");
+   el.style.setProperty("color","#832561","important");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply);else apply();
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(apply,ms)});
+})();
+</script>
 </body>
 </html>
