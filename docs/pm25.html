@@ -22,7 +22,7 @@ html body main.wrap .kpi-icon svg{display:block!important;width:38px!important;h
 
 <section class="panel control"> <div class="panel-head"><div><h2>คัดกรองและสรุปสถานี</h2><p>ค้นหาตามนิคมอุตสาหกรรม ชื่อสถานี หรือสถานะการเชื่อมต่อ</p></div><span class="badge" id="updatedAt">กำลังโหลดข้อมูล</span></div> <div class="filters"><div><label for="estateFilter">นิคมอุตสาหกรรม</label><select id="estateFilter"><option value="">ทุกนิคมอุตสาหกรรม</option></select></div><div><label for="stationSearch">ค้นหาสถานี</label><input id="stationSearch" placeholder="พิมพ์ชื่อสถานี"></div><button type="button" id="resetFilter">แสดงทั้งหมด</button></div> <div class="summary-list"><div class="summary-item"><b>เกณฑ์สี PM2.5</b><span>ควรอ่านค่าร่วมกับคำอธิบายและเวลาตรวจวัดจากแหล่งข้อมูลทางการ</span></div><div class="summary-item"><b>สถานะข้อมูล</b><span id="dataStatus">กำลังเชื่อมต่อข้อมูล e-Monitoring</span></div><div class="summary-item"><b>การใช้ข้อมูล</b><span>ใช้สนับสนุนการเฝ้าระวังเบื้องต้นและตรวจสอบกับข้อมูลภาคสนาม</span></div><div class="summary-item"><b>ข้อควรระวัง</b><span>สถานีออฟไลน์หรือข้อมูลล่าช้าไม่ควรนำไปสรุปสถานการณ์ปัจจุบัน</span></div></div> </section>
 
-<section class="panel map-panel"> <div class="map-head"><div class="map-title">แผนที่ PM2.5 และพื้นที่นิคมอุตสาหกรรม</div></div> <iframe class="pm-map" width="700" height="600" allow="local-network-access; geolocation" title="pm 2.5" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=c2b910f0bc5e42e7ae68a2bb7a048157&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=true&basemaps=true&center=103.64927288807529,13.120087367299625&scale=9244648.868618"></iframe> </section>
+<section class="panel map-panel"> <div class="map-head"><div class="map-title">แผนที่ PM2.5 และพื้นที่นิคมอุตสาหกรรม</div><a class="map-source" href="https://pm25.gistda.or.th/" target="_blank" rel="noopener">ตรวจสอบข้อมูล GISTDA ↗</a></div> <iframe class="pm-map" width="700" height="600" allow="local-network-access; geolocation" title="pm 2.5" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=c2b910f0bc5e42e7ae68a2bb7a048157&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=true&basemaps=true&center=103.64927288807529,13.120087367299625&scale=9244648.868618"></iframe> </section>
 
 <section class="section station-section"> <div class="section-head"><div><h2>ข้อมูลสถานีตรวจวัดคุณภาพอากาศของนิคมอุตสาหกรรม</h2><p>แสดงสถานะ เวลาอัปเดต และข้อมูล PM2.5 ที่ตรวจพบจาก e-Monitoring</p></div><span class="badge" id="tableSummary">กำลังโหลดข้อมูล</span></div> <div class="table-wrap"><table class="table"><thead><tr><th style="width:48px">ลำดับ</th><th>สถานีตรวจวัด</th><th>นิคมอุตสาหกรรม</th><th style="width:120px">สถานะ</th><th style="width:160px">ข้อมูลล่าสุด</th><th>ข้อมูล PM2.5 / หมายเหตุ</th><th style="width:90px">ตำแหน่ง</th></tr></thead><tbody id="stationRows"><tr><td colspan="7" class="table-empty">กำลังโหลดข้อมูลสถานี…</td></tr></tbody></table></div> </section>
 
@@ -188,17 +188,6 @@ html body main.wrap .station-section .section-head h2,
 html body main.wrap .sources h2,
 html body main.wrap .guidance h2{
  color:#0091cd!important;
-}
-</style>
-<style id="pm25-all-text-color-20260911-v1">
-html body main.wrap,
-html body main.wrap *{
- color:#0389ff!important;
-}
-html body main.wrap input::placeholder,
-html body main.wrap textarea::placeholder{
- color:#0389ff!important;
- opacity:1!important;
 }
 </style>
 </body> </html>
