@@ -221,4 +221,56 @@ html body main.wrap .station-section .status.online{
  color:#ffffff!important;
 }
 </style>
+<style id="pm25-table-filter-refinement-20260911-v1">
+/* หัวข้อสีแดงเข้มและไม่มีจุดนำหน้า */
+html body main.wrap .control .panel-head h2,
+html body main.wrap .station-section .section-head h2,
+html body main.wrap .sources h2,
+html body main.wrap .guidance h2{
+ color:#7f181b!important;
+}
+html body main.wrap .control .panel-head h2::before,
+html body main.wrap .control .panel-head h2:before,
+html body main.wrap .station-section .section-head h2::before,
+html body main.wrap .station-section .section-head h2:before{
+ display:none!important;
+ content:none!important;
+}
+
+/* สีสถานะเต็มช่องตาราง */
+html body main.wrap .station-section .table td:has(.status){
+ padding:0!important;
+}
+html body main.wrap .station-section .table td:has(.status.offline){
+ background:#ed1b2e!important;
+ background-color:#ed1b2e!important;
+}
+html body main.wrap .station-section .table td:has(.status.online){
+ background:#537b35!important;
+ background-color:#537b35!important;
+}
+html body main.wrap .station-section .status,
+html body main.wrap .station-section .status.offline,
+html body main.wrap .station-section .status.online{
+ display:flex!important;
+ align-items:center!important;
+ justify-content:center!important;
+ width:100%!important;
+ min-height:38px!important;
+ padding:5px 3px!important;
+ border-radius:0!important;
+ background:transparent!important;
+ background-color:transparent!important;
+ color:#ffffff!important;
+}
+
+/* สีเน้นในส่วนคัดกรอง */
+html body main.wrap .control .filters button{
+ background:#ecb731!important;
+ background-color:#ecb731!important;
+}
+html body main.wrap .control .badge{
+ color:#ecb731!important;
+}
+</style>
 </body> </html>
