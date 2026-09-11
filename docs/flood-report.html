@@ -11088,66 +11088,7 @@ html body #infographic #reportPage3 [data-status="critical"] {
 </style>
 
 
-<style id="overview-cards-three-columns-20260911-v2">
-/* Arrange all nine overview cards as one continuous 3 x 3 grid. */
-html body #warning .top-overview-metrics{
-  display:grid!important;
-  grid-template-columns:repeat(3,minmax(0,1fr))!important;
-  gap:12px!important;
-  width:100%!important;
-  align-items:stretch!important;
-}
-html body #warning .top-overview-metrics>.watch-dashboard-block,
-html body #warning .top-overview-metrics>.national-situation-block,
-html body #warning .top-overview-metrics .grid.kpis,
-html body #warning .top-overview-metrics .national-cards-dashboard{
-  display:contents!important;
-}
-html body #warning .top-overview-metrics>.card,
-html body #warning .top-overview-metrics .card.kpi,
-html body #warning .top-overview-metrics .card.national-kpi,
-html body #warning .top-overview-metrics>.national-alert,
-html body #warning .top-overview-metrics>.daily-water-report{
-  width:100%!important;
-  min-width:0!important;
-  height:100%!important;
-  margin:0!important;
-}
-html body #warning .operations-dashboard{
-  grid-template-columns:1fr!important;
-}
-html body #warning .operations-side:empty{
-  display:none!important;
-}
-html body #warning .operations-map{
-  grid-column:1!important;
-  width:100%!important;
-}
-@media(max-width:850px){
-  html body #warning .top-overview-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important}
-}
-@media(max-width:560px){
-  html body #warning .top-overview-metrics{grid-template-columns:1fr!important}
-}
-</style>
-<script id="overview-cards-three-columns-20260911-v2-script">
-(function(){
-  function arrangeNineOverviewCards(){
-    var target=document.querySelector("#warning .top-overview-metrics");
-    var source=document.querySelector("#warning .operations-side");
-    if(!target||!source)return;
-    [".national-alert",".daily-water-report",".nationwide-indicators"].forEach(function(selector){
-      var card=source.querySelector(selector);
-      if(card)target.appendChild(card);
-    });
-  }
-  if(document.readyState==="loading"){
-    document.addEventListener("DOMContentLoaded",arrangeNineOverviewCards);
-  }else{
-    arrangeNineOverviewCards();
-  }
-})();
-</script>
+
 
 <style id="global-tabs-green-active-20260911-v1">
 /* Active flood-report tab colors requested from the supplied reference image. */
@@ -11160,5 +11101,48 @@ html body main.container>#globalFloodHeader .global-flood-tabs button[aria-curre
   border-color:#8ec06c!important;
 }
 </style>
+
+<style id="merge-nine-summary-cards-20260911-v1">
+/* Keep all nine visible summary cards in one continuous 3 x 3 grid. */
+html body #warning .daily-water-grid[data-nine-cards-merged="true"]{
+ display:grid!important;
+ grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ gap:12px!important;
+ align-items:stretch!important;
+ width:100%!important;
+}
+html body #warning .daily-water-grid[data-nine-cards-merged="true"]>*{
+ width:100%!important;
+ min-width:0!important;
+ min-height:160px!important;
+ height:100%!important;
+ margin:0!important;
+ box-sizing:border-box!important;
+}
+html body #warning .flood-final-cards:empty{display:none!important}
+@media(max-width:850px){
+ html body #warning .daily-water-grid[data-nine-cards-merged="true"]{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:560px){
+ html body #warning .daily-water-grid[data-nine-cards-merged="true"]{grid-template-columns:1fr!important}
+}
+</style>
+<script id="merge-nine-summary-cards-20260911-v1-script">
+(function(){
+ function mergeNineCards(){
+  var target=document.querySelector("#warning .daily-water-grid");
+  var source=document.querySelector("#warning .flood-final-cards");
+  if(!target||!source)return false;
+  Array.from(source.children).forEach(function(card){target.appendChild(card)});
+  target.setAttribute("data-nine-cards-merged","true");
+  return target.children.length===9;
+ }
+ function run(){mergeNineCards()}
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",run);else run();
+ var observer=new MutationObserver(function(){if(mergeNineCards())observer.disconnect()});
+ observer.observe(document.documentElement,{childList:true,subtree:true});
+ [100,300,700,1200,2000,3500,6000].forEach(function(ms){setTimeout(run,ms)});
+})();
+</script>
 </body>
 </html>
