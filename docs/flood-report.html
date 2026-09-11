@@ -10972,5 +10972,60 @@ html body #infographic table td {
 }
 </style>
 
+
+<style id="flood-force-table-black-grid-20260911-v2">
+html body main.container #warning .estate-watch-table .table-scroll,
+html body main.container #warning .station-watch-table .table-scroll {
+  border: 0 !important;
+}
+html body main.container #warning table,
+html body main.container #infographic table {
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+  outline: 1px solid #000000 !important;
+  outline-offset: -1px !important;
+}
+html body main.container #warning table > thead > tr > th,
+html body main.container #warning table > tbody > tr > td,
+html body main.container #infographic table > thead > tr > th,
+html body main.container #infographic table > tbody > tr > td {
+  border: 1px solid #000000 !important;
+  box-shadow: none !important;
+}
+</style>
+<script id="flood-force-table-black-grid-20260911-v2-script">
+(function () {
+  function forceBlackTableGrid() {
+    document.querySelectorAll("#warning table, #infographic table").forEach(function (table) {
+      table.style.setProperty("border-collapse", "collapse", "important");
+      table.style.setProperty("border-spacing", "0", "important");
+      table.style.setProperty("border", "1px solid #000000", "important");
+      table.style.setProperty("outline", "1px solid #000000", "important");
+      table.style.setProperty("outline-offset", "-1px", "important");
+      table.querySelectorAll("th, td").forEach(function (cell) {
+        cell.style.setProperty("border", "1px solid #000000", "important");
+        cell.style.setProperty("border-color", "#000000", "important");
+        cell.style.setProperty("border-style", "solid", "important");
+        cell.style.setProperty("border-width", "1px", "important");
+      });
+    });
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", forceBlackTableGrid, {once:true});
+  } else {
+    forceBlackTableGrid();
+  }
+  [100, 500, 1200, 2500, 5000, 9000, 15000].forEach(function (ms) {
+    setTimeout(forceBlackTableGrid, ms);
+  });
+  const warning = document.getElementById("warning");
+  if (warning) {
+    new MutationObserver(function () {
+      requestAnimationFrame(forceBlackTableGrid);
+    }).observe(warning, {childList:true, subtree:true});
+  }
+})();
+</script>
+
 </body>
 </html>
