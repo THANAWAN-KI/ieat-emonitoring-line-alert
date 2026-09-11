@@ -4699,80 +4699,6 @@ html body #warning .estate-watch-table #estateRanks>tr>td:last-child>.water-stat
   box-shadow:none!important;
 }
 </style>
-<style id="flood-nine-uniform-cards-20260908-v5">
-/* การ์ด 9 ช่อง: 3 ตัวชี้วัดบน + 3 นิคมฯ + 3 สถานการณ์ประเทศ */
-html body #warning .daily-water-grid>.daily-water-item:nth-child(-n+3),
-html body #warning .flood-final-cards>.kpi,
-html body #warning .flood-final-cards>.national-kpi{
-  width:100%!important;
-  min-width:0!important;
-  height:172px!important;
-  min-height:172px!important;
-  margin:0!important;
-  padding:17px 16px 15px!important;
-  overflow:hidden!important;
-  background:#fff!important;
-  border:1px solid #dedede!important;
-  border-radius:8px!important;
-  box-shadow:0 2px 5px rgba(0,0,0,.16)!important;
-}
-html body #warning .daily-water-grid>.daily-water-item:nth-child(-n+3){
-  display:flex!important;
-  flex-direction:column!important;
-  align-items:center!important;
-  justify-content:center!important;
-  gap:5px!important;
-  text-align:center!important;
-}
-html body #warning .flood-final-cards>.kpi{
-  display:flex!important;
-  flex-direction:column!important;
-  align-items:center!important;
-  justify-content:center!important;
-  gap:7px!important;
-  text-align:center!important;
-}
-html body #warning .daily-water-grid>.daily-water-item:nth-child(-n+3) small,
-html body #warning .flood-final-cards>.kpi span{
-  font-family:"Sarabun",sans-serif!important;
-  font-size:14px!important;
-  font-weight:400!important;
-  line-height:1.4!important;
-  text-align:center!important;
-}
-/* เปลี่ยนตัวเลขสีแดงเป็นสีน้ำเงินตามคำขอ */
-html body #warning .flood-final-cards>.national-kpi>strong{
-  color:#388ed1!important;
-}
-@media(max-width:760px){
-  html body #warning .daily-water-grid>.daily-water-item:nth-child(-n+3),
-  html body #warning .flood-final-cards>.kpi,
-  html body #warning .flood-final-cards>.national-kpi{
-    height:160px!important;
-    min-height:160px!important;
-  }
-}
-</style>
-<style id="flood-remove-nine-card-icons-20260908-v6">
-/* ลบไอคอนออกจากการ์ดทั้งหมดตามคำขอ */
-html body #warning .daily-water-grid>.daily-water-item:nth-child(-n+3) .icon,
-html body #warning .daily-water-grid>.daily-water-item:nth-child(-n+3) img,
-html body #warning .daily-water-grid>.daily-water-item:nth-child(-n+3) svg,
-html body #warning .flood-final-cards .icon,
-html body #warning .flood-final-cards .n-icon,
-html body #warning .flood-final-cards img,
-html body #warning .flood-final-cards svg{
-  display:none!important;
-}
-html body #warning .flood-final-cards>.national-kpi{
-  grid-template-columns:1fr!important;
-}
-html body #warning .flood-final-cards>.national-kpi>h2,
-html body #warning .flood-final-cards>.national-kpi>strong,
-html body #warning .flood-final-cards>.national-kpi>span{
-  grid-column:1!important;
-}
-</style>
 <style id="flood-purple-to-blue-20260908-v7">
 /* เปลี่ยนสีม่วงทั้งหมดของหน้ารายงานเป็น #388ed1 */
 html body #warning{--purple:#388ed1!important}
@@ -4780,39 +4706,6 @@ html body #warning [style*="#52057f" i],
 html body #warning [style*="#6b4b7d" i],
 html body #warning [style*="#8f5db7" i]{color:#388ed1!important}
 </style>
-<style id="flood-hard-remove-all-icons-20260908-v8">
-/* ลบไอคอนทั้งหมดในการ์ด และบังคับสีม่วงเดิมเป็น #388ed1 */
-html body #warning .kpi .icon,
-html body #warning .national-kpi .n-icon,
-html body #warning .daily-water-item .icon{
-  display:none!important;
-  width:0!important;
-  height:0!important;
-  margin:0!important;
-  padding:0!important;
-}
-html body #warning .flood-final-cards>.kpi,
-html body #warning .flood-final-cards>.national-kpi{
-  grid-template-columns:1fr!important;
-}
-html body #warning .flood-final-cards>.kpi span,
-html body #warning .flood-final-cards>.national-kpi h2,
-html body #warning .flood-final-cards>.national-kpi span{
-  color:#388ed1!important;
-}
-</style>
-<script id="flood-hard-remove-all-icons-20260908-v8-script">
-(function(){
-  function removeAllCardIcons(){
-    const warning=document.getElementById("warning");
-    if(!warning)return;
-    warning.querySelectorAll(".kpi .icon,.national-kpi .n-icon,.daily-water-item .icon").forEach(function(icon){icon.remove()});
-  }
-  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeAllCardIcons);
-  else removeAllCardIcons();
-  [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeAllCardIcons,ms)});
-})();
-</script>
 <style id="water-overflow-text-font-20260908-v9">
 /* ข้อความ “ล้นตลิ่ง” ในตารางสถานการณ์น้ำ */
 html body #warning .station-watch-table .water-status-table .water-status-cell.critical{
@@ -7900,26 +7793,6 @@ html body main.container #warning .daily-water-grid>.daily-water-item::before{
 </script>
 
 
-<style id="remove-all-overview-card-icons-20260909-v1">
-body main.container #warning .daily-water-grid>.daily-water-item,
-body main.container #warning .flood-final-cards>*{grid-template-columns:1fr!important}
-body main.container #warning .daily-water-grid>.daily-water-item::before,
-body main.container #warning .flood-final-cards>*::before,
-body main.container #warning .daily-water-grid .icon,
-body main.container #warning .daily-water-grid .n-icon,
-body main.container #warning .flood-final-cards .icon,
-body main.container #warning .flood-final-cards .n-icon{
- content:none!important;
- display:none!important;
-}
-body main.container #warning .daily-water-grid>.daily-water-item>*,
-body main.container #warning .flood-final-cards>*>*,
-body main.container #warning .flood-final-cards>*>*>*{
- grid-column:1!important;
-}
-</style>
-
-
 <style id="all-three-main-titles-27548a-20260909-v1">
 html body main.container #warning>.flood-support-heading .flood-support-heading-copy h1,
 html body main.container #thaiwater-warning .watch-intro h1,
@@ -8205,115 +8078,6 @@ html body .ieat-persistent-tabbar button.active{
 }
 </style>
 
-<style id="overview-cards-match-orange-reference-20260910-v1">
-/* การ์ดตัวชี้วัดตามภาพตัวอย่างสีส้ม */
-html body main.container #warning .daily-water-grid{
- gap:16px!important;
-}
-html body main.container #warning .daily-water-grid > .daily-water-item,
-html body main.container #warning .flood-final-cards > .kpi,
-html body main.container #warning .flood-final-cards > .national-kpi{
- position:relative!important;
- display:grid!important;
- grid-template-columns:52px minmax(0,1fr)!important;
- grid-template-rows:auto auto auto!important;
- align-content:center!important;
- align-items:center!important;
- column-gap:14px!important;
- width:100%!important;
- min-width:0!important;
- min-height:118px!important;
- height:auto!important;
- padding:18px 20px!important;
- border:0!important;
- border-radius:18px!important;
- background:#FFFFFF!important;
- background-color:#FFFFFF!important;
- background-image:none!important;
- box-shadow:0 7px 22px rgba(40,70,120,.10)!important;
- overflow:hidden!important;
- text-align:left!important;
-}
-html body main.container #warning .daily-water-grid > .daily-water-item::before,
-html body main.container #warning .flood-final-cards > .kpi::before,
-html body main.container #warning .flood-final-cards > .national-kpi::before{
- content:"⌁"!important;
- display:grid!important;
- grid-column:1!important;
- grid-row:1 / span 3!important;
- place-items:center!important;
- width:48px!important;
- height:48px!important;
- border-radius:50%!important;
- background:#FFF8E9!important;
- color:#E69A1B!important;
- font-family:Arial,sans-serif!important;
- font-size:30px!important;
- font-weight:400!important;
- line-height:1!important;
-}
-html body main.container #warning .daily-water-grid > .daily-water-item > *,
-html body main.container #warning .flood-final-cards > .kpi > div,
-html body main.container #warning .flood-final-cards > .kpi > div > *,
-html body main.container #warning .flood-final-cards > .national-kpi > *{
- grid-column:2!important;
- position:static!important;
- width:auto!important;
- max-width:100%!important;
- margin:0!important;
- padding:0!important;
- border:0!important;
- background:transparent!important;
- background-color:transparent!important;
- background-image:none!important;
- box-shadow:none!important;
- color:#E69A1B!important;
- text-align:left!important;
-}
-html body main.container #warning .daily-water-grid > .daily-water-item > strong,
-html body main.container #warning .flood-final-cards > .kpi strong,
-html body main.container #warning .flood-final-cards > .national-kpi strong{
- grid-row:1!important;
- display:block!important;
- color:#E69A1B!important;
- font-size:28px!important;
- font-weight:500!important;
- line-height:1.15!important;
-}
-html body main.container #warning .daily-water-grid > .daily-water-item > small,
-html body main.container #warning .flood-final-cards > .kpi h2,
-html body main.container #warning .flood-final-cards > .national-kpi h2{
- grid-row:2!important;
- display:block!important;
- color:#E69A1B!important;
- font-size:15px!important;
- font-weight:400!important;
- line-height:1.45!important;
-}
-html body main.container #warning .daily-water-grid > .daily-water-item > span,
-html body main.container #warning .flood-final-cards > .kpi span,
-html body main.container #warning .flood-final-cards > .national-kpi span{
- grid-row:3!important;
- display:block!important;
- color:#E69A1B!important;
- font-size:14px!important;
- font-weight:300!important;
- line-height:1.4!important;
-}
-html body main.container #warning .flood-final-cards .icon,
-html body main.container #warning .flood-final-cards .n-icon,
-html body main.container #warning .flood-final-cards .source-link{
- display:none!important;
-}
-@media(max-width:1100px){
- html body main.container #warning .daily-water-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
-}
-@media(max-width:560px){
- html body main.container #warning .daily-water-grid,
- html body main.container #warning .flood-final-cards{grid-template-columns:1fr!important}
-}
-</style>
-
 <style id="hide-three-main-page-titles-20260910-v1">
 /* ซ่อนชื่อหัวข้อหลักทั้ง 3 หน้า แต่คงแถบปุ่มนำทาง */
 html body main.container #warning > .flood-support-heading .flood-support-heading-copy,
@@ -8344,330 +8108,6 @@ html body main.container #exportHeaderTabs,
 html body main.container #floodWorkflowNav .workflow-nav-inner,
 html body .ieat-persistent-tabbar { width:auto!important; margin-left:auto!important; margin-right:auto!important; justify-content:center!important; }
 </style>
-
-<style id="first-rain-card-blue-custom-icon-20260910-v1">
-html body main.container #warning .daily-water-grid > .daily-water-item:first-child,
-html body main.container #warning .daily-water-grid > .daily-water-item:first-child *{
- color:#007FDB!important;
- font-weight:300!important;
-}
-html body main.container #warning .daily-water-grid > .daily-water-item:first-child strong{
- color:#007FDB!important;
- font-size:28px!important;
- font-weight:300!important;
-}
-html body main.container #warning .daily-water-grid > .daily-water-item:first-child small,
-html body main.container #warning .daily-water-grid > .daily-water-item:first-child span{
- color:#007FDB!important;
- font-weight:300!important;
-}
-html body main.container #warning .daily-water-grid > .daily-water-item:first-child::before{
- content:none!important;
- display:none!important;
-}
-html body main.container #warning .daily-water-grid > .daily-water-item:first-child > .rain-card-custom-icon{
- display:block!important;
- grid-column:1!important;
- grid-row:1 / span 3!important;
- width:52px!important;
- height:52px!important;
- margin:0!important;
- padding:0!important;
- border:0!important;
- border-radius:50%!important;
- background:#DBEBFA!important;
- box-shadow:none!important;
- color:#007FDB!important;
- align-self:center!important;
-}
-</style>
-<script id="first-rain-card-blue-custom-icon-20260910-v1-script">
-(function(){
- function mountRainIcon(){
-  const card=document.querySelector("#warning .daily-water-grid > .daily-water-item:first-child");
-  if(!card||card.querySelector(".rain-card-custom-icon"))return;
-  const svg=document.createElementNS("http://www.w3.org/2000/svg","svg");
-  svg.setAttribute("class","rain-card-custom-icon");
-  svg.setAttribute("viewBox","-37.97 -37.97 455.65 455.65");
-  svg.setAttribute("aria-hidden","true");
-  svg.innerHTML='<rect x="-37.97" y="-37.97" width="455.65" height="455.65" rx="227.825" fill="#dbebfa"></rect><g fill="#007fdb"><path d="M57.625 312.362c14.944 0 22.979-5.771 29.436-10.408 5.905-4.241 10.57-7.592 20.686-7.592 10.117 0 14.781 3.351 20.687 7.592 6.456 4.637 14.492 10.408 29.436 10.408 14.945 0 22.981-5.771 29.438-10.408 5.906-4.241 10.57-7.592 20.688-7.592 10.117 0 14.781 3.351 20.687 7.592 6.457 4.637 14.492 10.408 29.437 10.408 14.947 0 22.983-5.771 29.44-10.408 5.906-4.241 10.572-7.592 20.69-7.592 10.119 0 14.784 3.351 20.69 7.592 6.457 4.637 14.494 10.408 29.44 10.408 4.142 0 7.5-3.357 7.5-7.5s-3.358-7.5-7.5-7.5c-10.119 0-14.784-3.351-20.691-7.592-6.457-4.638-14.493-10.408-29.439-10.408-.389 0-.772.005-1.149.014-1.048.026-3.042.189-3.042-2.311V157.607c0-2.416 2.13-2.492 2.13-2.492h18.545c5.165 0 8.031-2.989 8.991-5.786.961-2.797.535-6.916-3.539-10.089l-28.909-22.509c-1.795-1.415-1.88-2.964-1.88-3.703v-50.78c0-6.341-5.159-11.5-11.5-11.5h-34.933c-6.341 0-11.5 5.159-11.5 11.5v6.005c0 2.25-1.423.798-1.423.798L175.88 19.095c-4.427-3.446-11.102-3.446-15.528 0L6.048 139.24c-4.075 3.173-4.5 7.292-3.539 10.089.96 2.797 3.827 5.786 8.991 5.786h17.979s2.695-.175 2.695 2.825v126.708c0 1.75-.785 1.338-1.19 1.092-5.581-3.397-12.746-6.378-23.484-6.378-4.142 0-7.5 3.357-7.5 7.5s3.358 7.5 7.5 7.5c10.117 0 14.782 3.351 20.688 7.592 6.456 4.637 14.492 10.408 29.437 10.408zm-24.271-172.247c-3.375 0-.901-2.424-.901-2.424L166.207 33.548s.898-.795 2.064-.774c1.149.02 2.373 1.255 2.373 1.255l132.948 103.517s3.513 2.57-.987 2.57h-2.047c-6.341 0-11.5 5.159-11.5 11.5v130.242c0 1.5-1.221 2.156-1.805 2.466-3.248 1.723-5.965 3.667-8.444 5.447-5.906 4.241-10.572 7.592-20.69 7.592-10.117 0-14.781-3.351-20.687-7.592-6.106-4.385-13.624-9.785-27.065-10.358-.771-.033-2.551.028-2.551-2.639v-17.964c0-2.175.023-5.733.049-7.907.009-.741.088-18.304-11.857-30.397-7.179-7.269-16.9-10.954-28.893-10.954-11.48 0-20.766 3.586-27.6 10.659-11.737 12.147-11.258 30.103-11.232 30.86.072 2.099.133 5.643.133 7.739v22.818c0 2.313-1.279 1.879-1.951 1.571-4.83-2.214-10.801-3.837-18.719-3.837-14.945 0-22.98 5.772-29.437 10.408-5.905 4.241-10.569 7.592-20.685 7.592-4.35 0-10.451-1.422-10.451-3.714V151.615c0-6.341-5.159-11.5-11.5-11.5h-2.821z"></path><path d="M372.209 348.198c-10.119 0-14.784-3.351-20.691-7.592-6.457-4.638-14.493-10.408-29.439-10.408-14.946 0-22.982 5.771-29.44 10.408-5.906 4.241-10.572 7.592-20.69 7.592-10.117 0-14.781-3.351-20.687-7.592-6.456-4.637-14.492-10.408-29.437-10.408-14.945 0-22.981 5.771-29.438 10.408-5.906 4.241-10.57 7.592-20.688 7.592-10.117 0-14.781-3.351-20.687-7.592-6.456-4.637-14.492-10.408-29.437-10.408-14.945 0-22.98 5.771-29.437 10.408-5.905 4.241-10.569 7.592-20.685 7.592-10.117 0-14.782-3.351-20.688-7.592-6.457-4.637-14.492-10.408-29.438-10.408-4.142 0-7.5 3.357-7.5 7.5s3.358 7.5 7.5 7.5c10.117 0 14.782 3.351 20.688 7.592 6.456 4.637 14.492 10.408 29.438 10.408 14.944 0 22.979-5.772 29.436-10.408 5.905-4.241 10.57-7.592 20.686-7.592 10.117 0 14.781 3.351 20.687 7.592 6.456 4.637 14.492 10.408 29.437 10.408 14.945 0 22.981-5.772 29.438-10.408 5.906-4.241 10.57-7.592 20.688-7.592 10.117 0 14.781 3.351 20.687 7.592 6.457 4.637 14.492 10.408 29.437 10.408 14.947 0 22.983-5.772 29.44-10.408 5.906-4.241 10.572-7.592 20.69-7.592 10.119 0 14.784 3.351 20.69 7.592 6.458 4.637 14.494 10.408 29.44 10.408 4.142 0 7.5-3.357 7.5-7.5s-3.358-7.5-7.5-7.5z"></path></g>';
-  card.insertBefore(svg,card.firstChild);
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mountRainIcon);else mountRainIcon();
- [100,500,1200,2500,5000].forEach(function(ms){setTimeout(mountRainIcon,ms)});
-})();
-</script>
-
-<style id="remaining-eight-blue-cards-icons-20260910-v1">
-html body main.container #warning .daily-water-grid > .daily-water-item,
-html body main.container #warning .flood-final-cards > .kpi,
-html body main.container #warning .flood-final-cards > .national-kpi,
-html body main.container #warning .daily-water-grid > .daily-water-item *,
-html body main.container #warning .flood-final-cards > .kpi *,
-html body main.container #warning .flood-final-cards > .national-kpi *{
- color:#007FDB!important;
- font-weight:300!important;
-}
-html body main.container #warning .daily-water-grid > .daily-water-item strong,
-html body main.container #warning .flood-final-cards > .kpi strong,
-html body main.container #warning .flood-final-cards > .national-kpi strong{
- color:#007FDB!important;
- font-weight:300!important;
-}
-html body main.container #warning .daily-water-grid > .daily-water-item::before,
-html body main.container #warning .flood-final-cards > .kpi::before,
-html body main.container #warning .flood-final-cards > .national-kpi::before{
- content:none!important;
- display:none!important;
-}
-html body main.container #warning .dashboard-custom-icon{
- display:block!important;
- grid-column:1!important;
- grid-row:1 / span 3!important;
- width:52px!important;
- height:52px!important;
- min-width:52px!important;
- margin:0!important;
- padding:0!important;
- border:0!important;
- border-radius:50%!important;
- background:#DBEBFA!important;
- box-shadow:none!important;
- color:#007FDB!important;
- align-self:center!important;
-}
-html body main.container #warning .flood-final-cards > .kpi > .dashboard-custom-icon,
-html body main.container #warning .flood-final-cards > .national-kpi > .dashboard-custom-icon{
- grid-column:1!important;
- grid-row:1 / span 3!important;
-}
-</style>
-<script id="remaining-eight-blue-cards-icons-20260910-v1-script">
-(function(){
- const ns="http://www.w3.org/2000/svg";
- const icons={
-  water:'<path d="M9 19c5 0 5-4 10-4s5 4 10 4 5-4 10-4 5 4 10 4 5-4 10-4"/><path d="M9 31c5 0 5-4 10-4s5 4 10 4 5-4 10-4 5 4 10 4 5-4 10-4"/><path d="M9 43c5 0 5-4 10-4s5 4 10 4 5-4 10-4 5 4 10 4 5-4 10-4"/>',
-  station:'<path d="M12 31 32 15l20 16"/><path d="M17 29v20h30V29"/><path d="M25 49V36h14v13"/><path d="M19 10c0 4-5 7-5 12a5 5 0 0 0 10 0c0-5-5-8-5-12Zm26 0c0 4-5 7-5 12a5 5 0 0 0 10 0c0-5-5-8-5-12Z"/>',
-  floodhouse:'<path d="M9 31 31 13l22 18"/><path d="M15 29v17M47 29v17"/><rect x="25" y="29" width="13" height="15" rx="1"/><path d="M38 20v-4a7 7 0 0 1 14 0v4"/><rect x="38" y="20" width="18" height="15" rx="2"/><path d="M7 49c4 0 4-3 8-3s4 3 8 3 4-3 8-3 4 3 8 3 4-3 8-3 4 3 8 3"/>',
-  storm:'<path d="M18 40h29a11 11 0 0 0 1-22 17 17 0 0 0-31-2A12 12 0 0 0 18 40Z"/><path d="m31 39-6 11h7l-4 9 13-15h-8l4-5M16 45l-4 7M49 45l-4 7"/>',
-  rain:'<path d="M17 35h31a11 11 0 0 0 0-22 17 17 0 0 0-32 3A10 10 0 0 0 17 35Z"/><path d="m18 43-4 8m18-8-4 8m18-8-4 8m-16 3-4 8m18-8-4 8"/>'
- };
- function svg(type){
-  const el=document.createElementNS(ns,"svg");
-  el.setAttribute("class","dashboard-custom-icon");
-  el.setAttribute("viewBox","0 0 64 64");
-  el.setAttribute("aria-hidden","true");
-  el.innerHTML='<circle cx="32" cy="32" r="32" fill="#dbebfa"/><g fill="none" stroke="#007fdb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">'+icons[type]+'</g>';
-  return el;
- }
- function add(card,type){
-  if(!card||card.querySelector(".dashboard-custom-icon")||card.querySelector(".rain-card-custom-icon"))return;
-  card.insertBefore(svg(type),card.firstChild);
- }
- function mount(){
-  const daily=document.querySelectorAll("#warning .daily-water-grid > .daily-water-item");
-  add(daily[1],"water");
-  add(daily[2],"station");
-  add(daily[3],"floodhouse");
-  const lower=document.querySelectorAll("#warning .flood-final-cards > .kpi,#warning .flood-final-cards > .national-kpi");
-  const types=["floodhouse","storm","water","storm","water","rain"];
-  lower.forEach(function(card,index){if(index<types.length)add(card,types[index])});
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
- [100,500,1200,2200].forEach(function(ms){setTimeout(mount,ms)});
-})();
-</script>
-
-<style id="normalize-all-overview-cards-like-first-20260910-v1">
-html body main.container #warning .daily-water-grid > .daily-water-item,
-html body main.container #warning .flood-final-cards > .kpi,
-html body main.container #warning .flood-final-cards > .national-kpi{
- display:grid!important;
- grid-template-columns:64px minmax(0,1fr)!important;
- grid-template-rows:1fr!important;
- align-items:center!important;
- align-content:center!important;
- column-gap:22px!important;
- min-height:142px!important;
- height:142px!important;
- padding:22px 24px!important;
- border:0!important;
- border-radius:18px!important;
- background:#fff!important;
- box-shadow:0 7px 22px rgba(40,70,120,.10)!important;
- text-align:left!important;
-}
-html body main.container #warning .daily-water-grid > .daily-water-item > .rain-card-custom-icon,
-html body main.container #warning .daily-water-grid > .daily-water-item > .dashboard-custom-icon,
-html body main.container #warning .flood-final-cards > .kpi > .dashboard-custom-icon,
-html body main.container #warning .flood-final-cards > .national-kpi > .dashboard-custom-icon{
- display:block!important;
- grid-column:1!important;
- grid-row:1!important;
- width:64px!important;
- height:64px!important;
- min-width:64px!important;
- align-self:center!important;
- justify-self:center!important;
- margin:0!important;
- padding:0!important;
- background:transparent!important;
- border:0!important;
- box-shadow:none!important;
-}
-html body main.container #warning .metric-card-copy{
- display:flex!important;
- grid-column:2!important;
- grid-row:1!important;
- flex-direction:column!important;
- align-items:flex-start!important;
- justify-content:center!important;
- width:100%!important;
- min-width:0!important;
- margin:0!important;
- padding:0!important;
- gap:3px!important;
- background:transparent!important;
- border:0!important;
- box-shadow:none!important;
- text-align:left!important;
-}
-html body main.container #warning .metric-card-copy > *{
- position:static!important;
- display:block!important;
- width:auto!important;
- max-width:100%!important;
- margin:0!important;
- padding:0!important;
- color:#007FDB!important;
- background:transparent!important;
- border:0!important;
- box-shadow:none!important;
- text-align:left!important;
- font-family:"Sarabun",sans-serif!important;
- font-weight:300!important;
-}
-html body main.container #warning .metric-card-copy > strong{
- order:1!important;
- font-size:28px!important;
- line-height:1.2!important;
- font-weight:300!important;
-}
-html body main.container #warning .metric-card-copy > h2,
-html body main.container #warning .metric-card-copy > small{
- order:2!important;
- font-size:16px!important;
- line-height:1.4!important;
- font-weight:300!important;
-}
-html body main.container #warning .metric-card-copy > span{
- order:3!important;
- font-size:14px!important;
- line-height:1.4!important;
- font-weight:300!important;
-}
-html body main.container #warning .daily-water-grid > .daily-water-item::before,
-html body main.container #warning .flood-final-cards > *::before,
-html body main.container #warning .daily-water-grid .icon,
-html body main.container #warning .daily-water-grid .n-icon,
-html body main.container #warning .flood-final-cards .icon,
-html body main.container #warning .flood-final-cards .n-icon,
-html body main.container #warning .flood-final-cards .source-link{
- content:none!important;
- display:none!important;
-}
-@media(max-width:560px){
- html body main.container #warning .daily-water-grid > .daily-water-item,
- html body main.container #warning .flood-final-cards > .kpi,
- html body main.container #warning .flood-final-cards > .national-kpi{
-  grid-template-columns:56px minmax(0,1fr)!important;
-  column-gap:16px!important;
-  padding:18px!important;
- }
- html body main.container #warning .daily-water-grid > .daily-water-item > .rain-card-custom-icon,
- html body main.container #warning .daily-water-grid > .daily-water-item > .dashboard-custom-icon,
- html body main.container #warning .flood-final-cards .dashboard-custom-icon{
-  width:56px!important;
-  height:56px!important;
-  min-width:56px!important;
- }
-}
-</style>
-<script id="normalize-all-overview-cards-like-first-20260910-v1-script">
-(function(){
- function normalizeCard(card){
-  if(!card)return;
-  let copy=card.querySelector(":scope > .metric-card-copy");
-  if(!copy){
-   copy=document.createElement("div");
-   copy.className="metric-card-copy";
-   const candidates=[];
-   Array.from(card.children).forEach(function(child){
-    if(child.matches("strong,h2,small,span"))candidates.push(child);
-    else if(!child.matches("svg,.icon,.n-icon,.source-link")&&!child.classList.contains("metric-card-copy")){
-     child.querySelectorAll(":scope > strong,:scope > h2,:scope > small,:scope > span").forEach(function(el){candidates.push(el)});
-    }
-   });
-   candidates.sort(function(a,b){
-    function rank(el){return el.tagName==="STRONG"?1:(el.tagName==="H2"||el.tagName==="SMALL"?2:3)}
-    return rank(a)-rank(b);
-   });
-   candidates.forEach(function(el){copy.appendChild(el)});
-   card.appendChild(copy);
-  }
- }
- function run(){
-  document.querySelectorAll("#warning .daily-water-grid > .daily-water-item,#warning .flood-final-cards > .kpi,#warning .flood-final-cards > .national-kpi").forEach(normalizeCard);
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",run);else run();
- [100,500,1200,2500,5000,8000].forEach(function(ms){setTimeout(run,ms)});
-})();
-</script>
-
-<style id="exact-style-top-card-icons-20260910-v1">
-html body #warning .daily-water-grid > .daily-water-item:nth-child(n+2):nth-child(-n+4) > .dashboard-custom-icon{
- width:64px!important;
- height:64px!important;
- background:transparent!important;
- border-radius:0!important;
-}
-</style>
-<script id="exact-style-top-card-icons-20260910-v1-script">
-(function(){
- const svgNS="http://www.w3.org/2000/svg";
- const defs=[
-  {
-   viewBox:"-19.18 -19.18 230.21 230.21",
-   body:'<rect x="-19.18" y="-19.18" width="230.21" height="230.21" rx="115.105" fill="#dbebfa"/><g fill="#007fdb"><path d="M36.978 56.937c11.167 0 21.767-4.545 29.476-12.293 7.71 7.749 18.309 12.293 29.476 12.293 11.169 0 21.767-4.543 29.472-12.29 7.709 7.747 18.307 12.29 29.476 12.29 14.778 0 28.559-7.958 35.966-20.767 2.073-3.586.847-8.174-2.739-10.247-3.586-2.071-8.174-.847-10.247 2.739-4.733 8.188-13.539 13.275-22.979 13.275-9.442 0-18.25-5.087-22.983-13.275-1.341-2.318-3.816-3.747-6.494-3.746-2.679 0-5.153 1.429-6.493 3.748-4.73 8.188-13.534 13.273-22.977 13.273-9.439 0-18.247-5.088-22.987-13.278-1.341-2.317-3.815-3.744-6.491-3.744-2.679 0-5.153 1.428-6.493 3.746-4.733 8.188-13.539 13.275-22.98 13.275-9.442 0-18.25-5.087-22.983-13.275-2.073-3.585-6.661-4.813-10.247-2.739-3.586 2.073-4.813 6.661-2.739 10.247 7.406 12.809 21.188 20.767 35.97 20.767z"/><path d="M188.103 80.922c-3.586-2.071-8.174-.848-10.247 2.739-4.733 8.188-13.539 13.275-22.979 13.275-9.442 0-18.25-5.087-22.983-13.275-1.341-2.318-3.816-3.747-6.494-3.746-2.679 0-5.153 1.429-6.493 3.748-4.73 8.188-13.534 13.273-22.977 13.273-9.439 0-18.247-5.088-22.987-13.278-1.341-2.317-3.815-3.744-6.493-3.744-2.677 0-5.151 1.428-6.491 3.746-4.733 8.188-13.539 13.275-22.98 13.275-9.442 0-18.25-5.087-22.983-13.275-2.073-3.586-6.661-4.813-10.247-2.739-3.586 2.073-4.813 6.661-2.739 10.247 7.406 12.81 21.188 20.768 35.97 20.768 11.167 0 21.767-4.545 29.476-12.293 7.71 7.749 18.309 12.293 29.476 12.293 11.169 0 21.767-4.543 29.472-12.29 7.709 7.747 18.307 12.29 29.476 12.29 14.778 0 28.559-7.957 35.966-20.768 2.071-3.585.845-8.173-2.741-10.245z"/><path d="M188.103 135.922c-3.586-2.072-8.174-.848-10.247 2.739-4.733 8.188-13.539 13.275-22.979 13.275-9.442 0-18.25-5.087-22.983-13.275-1.341-2.318-3.816-3.747-6.494-3.746-2.679 0-5.153 1.429-6.493 3.748-4.73 8.188-13.534 13.273-22.977 13.273-9.439 0-18.247-5.088-22.987-13.278-1.341-2.317-3.815-3.744-6.493-3.744-2.677 0-5.151 1.428-6.491 3.746-4.733 8.188-13.539 13.275-22.98 13.275-9.442 0-18.25-5.087-22.983-13.275-2.073-3.586-6.661-4.812-10.247-2.739-3.586 2.073-4.813 6.661-2.739 10.247 7.406 12.81 21.188 20.768 35.97 20.768 11.167 0 21.767-4.545 29.476-12.293 7.71 7.749 18.309 12.293 29.476 12.293 11.169 0 21.767-4.543 29.472-12.29 7.709 7.747 18.307 12.29 29.476 12.29 14.778 0 28.559-7.958 35.966-20.768 2.071-3.585.845-8.173-2.741-10.245z"/></g>'
-  },
-  {
-   viewBox:"-43.2 -43.2 518.38 518.38",
-   body:'<rect x="-43.2" y="-43.2" width="518.38" height="518.38" rx="259.19" fill="#dbebfa"/><g fill="#007fdb"><path d="M59.374 271.944h18.214c2.46 0 2.46.09 2.46 1.598v74.408a7.5 7.5 0 0 0 15 0v-79.506c0-6.341-5.159-11.5-11.5-11.5h-3.21l132.013-105.222c2.487-1.712 3.64-1.712 3.64-1.712 1.246 0 3.93 1.94 3.93 1.94l132.114 102.866c3.055 2.127-2.07 2.127-2.07 2.127h-1.531c-6.341 0-11.5 5.159-11.5 11.5v80.172a7.5 7.5 0 0 0 15 0V273.74c0-1.796 1.719-1.796 1.719-1.796h18.956c5.164 0 8.031-2.988 8.991-5.786.96-2.797.535-6.916-3.54-10.089l-29.524-22.988v-54.004c0-6.341-5.159-11.5-11.5-11.5h-34.933c-6.341 0-11.5 5.159-11.5 11.5v6.867l-64.242-50.02c-4.426-3.445-11.101-3.445-15.528 0L53.922 256.069c-4.075 3.173-4.5 7.292-3.54 10.089.961 2.798 3.827 5.786 8.992 5.786z"/><path d="M177 273h78v82h-78z" fill="#dbebfa"/><path d="M190 286h52v56h-52z"/><path d="M143 77c-14 0-24 25-24 36a24 24 0 0 0 48 0c0-11-10-36-24-36zm0 46a10 10 0 0 1-10-10c0-6 5-20 10-21 5 1 10 15 10 21a10 10 0 0 1-10 10zM288 77c-14 0-24 25-24 36a24 24 0 0 0 48 0c0-11-10-36-24-36zm0 46a10 10 0 0 1-10-10c0-6 5-20 10-21 5 1 10 15 10 21a10 10 0 0 1-10 10zM216 19c-14 0-24 25-24 36a24 24 0 0 0 48 0c0-11-10-36-24-36zm0 46a10 10 0 0 1-10-10c0-6 5-20 10-21 5 1 10 15 10 21a10 10 0 0 1-10 10z"/></g>'
-  },
-  {
-   viewBox:"-47.73 -47.73 572.75 572.75",
-   body:'<rect x="-47.73" y="-47.73" width="572.75" height="572.75" rx="286.375" fill="#dbebfa"/><g fill="#007fdb"><path d="M84 380V207H53c-7 0-10-9-5-13L228 34c3-3 7-3 10 0l110 97h9v-27c0-28 23-50 50-50s51 22 51 50v27h12c4 0 7 3 7 8v110c0 4-3 8-7 8h-87v123c-10-3-20-2-29 3V250h-17V142L233 49 72 192h19c4 0 8 3 8 8v188c-5-2-10-5-15-8z"/><path d="M352 146h110v96H352z" fill="#dbebfa"/><path d="M367 161h80v66h-80z"/><path d="M372 131v-27c0-20 16-35 35-35 20 0 36 15 36 35v27h-15v-27c0-11-9-20-21-20-11 0-20 9-20 20v27z"/><path d="M176 219h115v137H176z"/><path d="M191 234h85v107h-85z" fill="#dbebfa"/><path d="M0 388c3-4 8-5 11-2 10 6 23 6 33 0 15-10 34-10 49 0 10 6 23 6 33 0 15-10 34-10 49 0 10 6 23 6 33 0 15-10 34-10 49 0 10 6 23 6 33 0 15-10 34-10 49 0 10 6 23 6 33 0 15-10 34-10 49 0 10 6 23 6 33 0 4-3 9-2 11 2 2 3 1 8-2 10-15 10-34 10-49 0-10-6-23-6-33 0-15 10-34 10-49 0-10-6-23-6-33 0-15 10-34 10-49 0-10-6-23-6-33 0-15 10-34 10-49 0-10-6-23-6-33 0-15 10-34 10-49 0-10-6-23-6-33 0-4 3-9 2-11-2-2-3-1-8 2-10z"/></g>'
-  }
- ];
- function replaceIcons(){
-  const cards=document.querySelectorAll("#warning .daily-water-grid > .daily-water-item");
-  [1,2,3].forEach(function(cardIndex,defIndex){
-   const card=cards[cardIndex];
-   if(!card)return;
-   let icon=card.querySelector(".dashboard-custom-icon");
-   if(!icon){
-    icon=document.createElementNS(svgNS,"svg");
-    icon.setAttribute("class","dashboard-custom-icon");
-    card.insertBefore(icon,card.firstChild);
-   }
-   icon.setAttribute("viewBox",defs[defIndex].viewBox);
-   icon.innerHTML=defs[defIndex].body;
-  });
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",replaceIcons);else replaceIcons();
- [100,500,1200,2200].forEach(function(ms){setTimeout(replaceIcons,ms)});
-})();
-</script>
 
 <style id="bottom-six-match-top-four-20260910-v1">
 html body main.container #warning .flood-final-cards > .kpi,
@@ -9435,47 +8875,6 @@ html body main.container #infographic #reportPage4 .export-data-table td{
  }
 }
 </style>
-<style id="overflow-red-white-values-thin-icons-20260910-v1">
-#warning .flash-flood-rank-value{color:#fff!important}
-#warning .flash-flood-rank-value *{color:#fff!important}
-#warning .grid.kpis .card.kpi .icon svg,
-#warning .national-cards-dashboard .n-icon svg{color:#007FDB!important}
-#warning .grid.kpis .card.kpi .icon svg path,
-#warning .grid.kpis .card.kpi .icon svg circle,
-#warning .grid.kpis .card.kpi .icon svg line,
-#warning .grid.kpis .card.kpi .icon svg polyline,
-#warning .national-cards-dashboard .n-icon svg path{
- fill:none!important;
- stroke:currentColor!important;
- stroke-width:1.25!important;
- vector-effect:non-scaling-stroke!important;
- stroke-linecap:round!important;
- stroke-linejoin:round!important;
-}
-#thaiwater-warning .station-watch-table tbody td.water-overflow-cell,
-#thaiwater-warning .station-watch-table tbody td.water-overflow-cell *,
-#infographic #reportPage3 #exportWaterRows td.export-overflow-cell,
-#infographic #reportPage3 #exportWaterRows td.export-overflow-cell *{
- background:#D50000!important;
- color:#fff!important;
- box-shadow:none!important;
-}
-</style>
-<script id="overflow-red-white-values-thin-icons-20260910-v1-script">
-(function(){
-function mark(){
- document.querySelectorAll("#thaiwater-warning .station-watch-table tbody tr,#infographic #reportPage3 #exportWaterRows tr").forEach(function(row){
-  var cell=row.cells&&row.cells[2];
-  if(!cell)return;
-  var overflow=cell.textContent.replace(/\s+/g," ").indexOf("ล้นตลิ่ง")>=0;
-  cell.classList.toggle(row.closest("#reportPage3")?"export-overflow-cell":"water-overflow-cell",overflow);
- });
-}
-if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mark);else mark();
-["stations","exportWaterRows"].forEach(function(id){var node=document.getElementById(id);if(node)new MutationObserver(mark).observe(node,{subtree:true,childList:true,characterData:true})});
-[100,500,1200,2500,5000].forEach(function(ms){setTimeout(mark,ms)});
-})();
-</script>
 <style id="center-water-table-fit-page4-20260910-v1">
 html body main.container #infographic #reportPage3 .export-data-table th,
 html body main.container #infographic #reportPage3 .export-data-table td,
@@ -9571,103 +8970,6 @@ html body #warning #overviewArcgisMap{
  overflow:hidden!important;
 }
 </style>
-<style id="six-overview-cards-blue-text-20260910-v1">
-html body #warning .grid.kpis>.card.kpi:nth-child(-n+3) strong,
-html body #warning .grid.kpis>.card.kpi:nth-child(-n+3) span,
-html body #warning .national-cards-dashboard>.national-kpi:nth-child(-n+3) h2,
-html body #warning .national-cards-dashboard>.national-kpi:nth-child(-n+3) strong,
-html body #warning .national-cards-dashboard>.national-kpi:nth-child(-n+3) span{
- color:#2468F2!important;
- -webkit-text-fill-color:#2468F2!important;
-}
-</style>
-<script id="six-overview-cards-blue-text-20260910-v1-script">
-(function(){
- function paint(){
-  document.querySelectorAll("#warning .grid.kpis>.card.kpi:nth-child(-n+3) strong,#warning .grid.kpis>.card.kpi:nth-child(-n+3) span,#warning .national-cards-dashboard>.national-kpi:nth-child(-n+3) h2,#warning .national-cards-dashboard>.national-kpi:nth-child(-n+3) strong,#warning .national-cards-dashboard>.national-kpi:nth-child(-n+3) span").forEach(function(el){
-   el.style.setProperty("color","#2468F2","important");
-   el.style.setProperty("-webkit-text-fill-color","#2468F2","important");
-  });
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",paint);else paint();
- [100,500,1200,2500,5000,8200].forEach(function(ms){setTimeout(paint,ms)});
-})();
-</script>
-<style id="six-overview-cards-blue-text-20260910-v2">
-html body #warning #outEstateCount,
-html body #warning #outEstateCount~span,
-html body #warning #outFactory,
-html body #warning #outFactory~span,
-html body #warning #outCritical,
-html body #warning #outCritical~span,
-html body #warning #nationalStormCount,
-html body #warning #nationalStormCount~span,
-html body #warning #nationalStormCount~h2,
-html body #warning #nationalWaterProvinceCount,
-html body #warning #nationalWaterProvinceCount~span,
-html body #warning #nationalHeavyRainCount,
-html body #warning #nationalHeavyRainCount~span{
- color:#2468F2!important;
- -webkit-text-fill-color:#2468F2!important;
-}
-</style>
-<script id="six-overview-cards-blue-text-20260910-v2-script">
-(function(){
- var ids=["outEstateCount","outFactory","outCritical","nationalStormCount","nationalWaterProvinceCount","nationalHeavyRainCount"];
- var blue="#2468F2",painting=false;
- function cards(){
-  return ids.map(function(id){var n=document.getElementById(id);return n&&n.closest(".card")}).filter(function(n,i,a){return n&&a.indexOf(n)===i});
- }
- function paint(){
-  if(painting)return;painting=true;
-  cards().forEach(function(card){
-   card.querySelectorAll("h2,strong,span").forEach(function(el){
-    if(el.style.getPropertyValue("color").toLowerCase()!==blue.toLowerCase()||el.style.getPropertyPriority("color")!=="important")el.style.setProperty("color",blue,"important");
-    if(el.style.getPropertyValue("-webkit-text-fill-color").toLowerCase()!==blue.toLowerCase())el.style.setProperty("-webkit-text-fill-color",blue,"important");
-   });
-  });
-  painting=false;
- }
- function start(){
-  paint();
-  var root=document.getElementById("warning");
-  if(root)new MutationObserver(function(){queueMicrotask(paint)}).observe(root,{subtree:true,childList:true,attributes:true,attributeFilter:["style"]});
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start);else start();
-})();
-</script>
-<script id="lock-flood-house-icons-20260910-v2-script">
-(function(){
- var ids=["outFactory","nationalHeavyRainCount","nationalStormCount"],template="",busy=false;
- function iconBox(id){
-  var n=document.getElementById(id),card=n&&n.closest(".card");
-  return card&&(card.querySelector(".icon")||card.querySelector(".n-icon"));
- }
- function remember(){
-  if(template)return true;
-  var icon=document.querySelector("#warning .flood-house-icon");
-  if(icon){template=icon.outerHTML;return true}
-  return false;
- }
- function lock(){
-  if(busy)return;busy=true;
-  if(remember()){
-   ids.forEach(function(id){
-    var box=iconBox(id);
-    if(box&&!box.querySelector(".flood-house-icon"))box.innerHTML=template;
-   });
-  }
-  busy=false;
- }
- function start(){
-  lock();
-  var root=document.getElementById("warning");
-  if(root)new MutationObserver(function(){queueMicrotask(lock)}).observe(root,{subtree:true,childList:true});
-  [100,500,1200,2500,5000,8500].forEach(function(ms){setTimeout(lock,ms)});
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start);else start();
-})();
-</script>
 <style id="report-map-static-fallback-20260910-v2">
 #infographic #reportCanvas .sheet-map-frame>#infographicMap{
  display:block!important;width:100%!important;height:100%!important;
@@ -10429,221 +9731,6 @@ html body #infographic #reportPage4 .forecast-table-block .export-data-table td{
 
 
 
-<style id="flood-nine-cards-clean-final-20260911-v1">
-/* การ์ด 9 ช่อง: ไอคอนเดียว ข้อความดำ ตัวเลข #0091cd */
-html body main.container #warning .daily-water-grid>.daily-water-item,
-html body main.container #warning .flood-final-cards>.kpi,
-html body main.container #warning .flood-final-cards>.national-kpi{
- display:grid!important;
- grid-template-columns:64px minmax(0,1fr)!important;
- grid-template-rows:1fr!important;
- align-items:center!important;
- gap:14px!important;
- min-height:142px!important;
- padding:18px 20px!important;
- overflow:hidden!important;
- text-align:left!important
-}
-html body main.container #warning .daily-water-grid>.daily-water-item>.metric-card-copy,
-html body main.container #warning .flood-final-cards>.kpi>.metric-card-copy,
-html body main.container #warning .flood-final-cards>.national-kpi>.metric-card-copy{
- display:flex!important;
- flex-direction:column!important;
- align-items:flex-start!important;
- justify-content:center!important;
- min-width:0!important;
- gap:3px!important;
- margin:0!important;
- padding:0!important;
- color:#000!important
-}
-html body main.container #warning .daily-water-grid>.daily-water-item>.metric-card-copy>*,
-html body main.container #warning .flood-final-cards>.kpi>.metric-card-copy>*,
-html body main.container #warning .flood-final-cards>.national-kpi>.metric-card-copy>*{
- color:#000!important;
- text-align:left!important
-}
-html body main.container #warning .daily-water-grid>.daily-water-item>.metric-card-copy>strong,
-html body main.container #warning .flood-final-cards>.kpi>.metric-card-copy>strong,
-html body main.container #warning .flood-final-cards>.national-kpi>.metric-card-copy>strong{
- color:#0091cd!important;
- font-size:28px!important;
- font-weight:600!important;
- line-height:1.2!important
-}
-html body main.container #warning .unified-flood-card-icon{
- display:grid!important;
- place-items:center!important;
- width:64px!important;
- height:64px!important;
- min-width:64px!important;
- margin:0!important;
- padding:6px!important;
- box-sizing:border-box!important;
- border:0!important;
- border-radius:14px!important;
- background:#eef8fd!important;
- overflow:hidden!important
-}
-html body main.container #warning .unified-flood-card-icon svg{
- display:block!important;
- width:52px!important;
- height:52px!important;
- max-width:52px!important;
- max-height:52px!important
-}
-@media(max-width:700px){
- html body main.container #warning .daily-water-grid>.daily-water-item,
- html body main.container #warning .flood-final-cards>.kpi,
- html body main.container #warning .flood-final-cards>.national-kpi{
-  grid-template-columns:52px minmax(0,1fr)!important;
-  gap:10px!important;padding:14px!important
- }
- html body main.container #warning .unified-flood-card-icon{
-  width:52px!important;height:52px!important;min-width:52px!important
- }
- html body main.container #warning .unified-flood-card-icon svg{
-  width:42px!important;height:42px!important;max-width:42px!important;max-height:42px!important
- }
-}
-</style>
-<script id="flood-nine-cards-clean-final-20260911-v1-script">
-(function(){
- const icon="<svg height=\"200px\" width=\"200px\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 511.998 511.998\" xml:space=\"preserve\" fill=\"#000000\" role=\"img\" aria-label=\"สถานการณ์น้ำท่วม\"><g id=\"SVGRepo_bgCarrier\" stroke-width=\"0\"></g><g id=\"SVGRepo_tracerCarrier\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></g><g id=\"SVGRepo_iconCarrier\">\n<path style=\"fill:#56a0d3;\" d=\"M8.335,408.119c0,0,96.323-7.049,131.564-82.227s29.367-222.014,200.87-222.014c37.604,0,78.782,17.786,101.315,33.474c113.063,78.708,59.615,240.227-73.123,198.82c0,0,48.162-2.056,48.162-65.489s-79.414-72.83-91.625-19.97c-8.699,37.657-3.524,151.534,162.105,157.406\"/>\n<path style=\"fill:#56a0d3;\" d=\"M368.961,336.17c41.113,0,121.579-63.726,72.76-139.669c-34.136-53.107-127.382-63.844-193.751,2.525c-66.298,66.298-27.1,194.738-239.011,209.045c8.27-0.764,97.357-10.525,130.941-82.18c35.241-75.179,29.367-222.014,200.869-222.014c37.601,0,78.774,17.785,101.315,33.478C555.147,216.059,501.699,377.577,368.961,336.17z\"/>\n<path style=\"fill:#FFFFFF;\" d=\"M401.699,342.548c94.949-7.049,121.743-137.109,23.94-205.193c-21.25-14.79-59.039-31.434-94.796-33.302c3.242-0.118,6.554-0.176,9.926-0.176c37.601,0,78.774,17.785,101.315,33.478C545.327,209.222,509.734,350.137,401.699,342.548z\"/>\n<path style=\"fill:#0091cd;\" d=\"M487.603,408.119h-219.59c-24.667-10.239-34.422-46.235-21.218-99.847c14.672-59.567,43.228-91.672,85.751-98.673c25.549-4.206,45.366,4.159,58.017,12.522c-24.269-12.98-57.525-4.1-65.066,28.592C316.794,288.372,321.974,402.246,487.603,408.119z\"/>\n<path d=\"M368.604,327.843c-4.048.173-7.385,3.231-7.909,7.249-.526,4.018,1.915,7.83,5.783,9.037c30.377,9.476,59.23,9.356,83.442-.343c22.359-8.957,39.929-25.436,50.806-47.656c12.434-25.4,14.664-55.495,6.278-84.741-9.139-31.876-29.942-59.843-60.159-80.879-25.004-17.405-67.5-34.967-106.078-34.967-41.87,0-75.617,8.298-103.172,25.367-3.913,2.424-5.12,7.562-2.697,11.475c2.425,3.913,7.564,5.121,11.475,2.696c24.841-15.388,55.716-22.868,94.394-22.868c34.776,0,74.428,16.577,96.553,31.979c44.188,30.762,75.013,90.31,48.431,144.607-9.032,18.452-23.566,32.114-42.031,39.511-11.711,4.691-24.838,6.7-38.881,6.041c3.296-1.717,6.584-3.631,9.823-5.735c16.638-10.807,30.647-25.636,39.447-41.756c16.469-30.163,14.562-63.854-5.373-94.865-17.575-27.342-48.922-44.506-86.006-47.092-4.59-.312-8.575,3.143-8.895,7.735-.32,4.592,3.143,8.575,7.735,8.895c31.314,2.183,58.656,16.94,73.141,39.475c21.128,32.87,14.253,60.484,4.765,77.862-4.95,9.066-11.569,17.207-18.973,24.133c3.808-11.062,4.952-22.547,4.952-32.322c0-17.427-5.44-32.649-15.73-44.02-4.191-4.63-23.483-16.994-29.004-19.38-12.997-5.62-29.666-9.178-49.534-5.908-23.217,3.821-42.813,14.71-58.243,32.363-15.133,17.316-26.656,41.723-34.247,72.541-1.101,4.47,1.63,8.986,6.099,10.087.67.164,1.34.245,2.001.245c3.745,0,7.152-2.544,8.087-6.344c13.724-55.713,39.569-85.95,79.01-92.442c1.405-.231,2.783-.406,4.148-.556-10.094,7.128-17.547,18.047-20.67,31.569-6.234,26.99-3.738,71.257,23.816,107.193c28.891,37.678,78.052,58.007,146.116,60.421.101.003.201.006.301.006c4.467,0,8.166-3.541,8.324-8.04.163-4.6-3.434-8.462-8.034-8.626-62.85-2.228-107.758-20.366-133.477-53.905-25.694-33.508-25.166-74.41-20.802-93.296c4.977-21.543,22.983-29.385,38.625-27.604c18.188,2.074,36.542,17.008,36.542,45.698C408.787,324.959,370.194,327.753,368.604,327.843z\"/>\n<path d=\"M167.478,270.661c11.681-40.502,24.92-86.409,56.317-117.703c3.261-3.25,3.269-8.528.019-11.789-3.25-3.26-8.528-3.27-11.788-.019-34.449,34.338-48.323,82.447-60.564,124.891-5.994,20.78-11.654,40.409-19.109,56.312-13.618,29.051-38.529,50.889-74.042,64.907-27.044,10.674-50.358,12.528-50.59,12.546-4.588.34-8.033,4.332-7.698,8.921.321,4.385,3.978,7.728,8.306,7.728.205,0,.41-.008.617-.023,1.036-.076,25.677-1.986,54.999-13.474,39.295-15.394,68.171-40.821,83.504-73.529C155.461,312.335,161.298,292.092,167.478,270.661z\"/>\n<path d=\"M253.864,204.921c23.229-23.229,51.198-37.853,80.885-42.289c4.553-.68,7.693-4.924,7.013-9.476-.68-4.553-4.931-7.691-9.476-7.012-33.244,4.968-64.439,21.217-90.211,46.988-3.255,3.255-3.255,8.533,0,11.788,1.628,1.628,3.761,2.442,5.895,2.442C250.102,207.361,252.236,206.548,253.864,204.921z\"/>\n<path d=\"M233.773,215.818c-3.93-2.394-9.058-1.148-11.455,2.784-9.612,15.787-16.648,33.378-23.451,50.39-11.731,29.33-23.86,59.659-49.864,83.383-3.402,3.103-3.642,8.375-.54,11.775,1.645,1.803,3.899,2.717,6.161,2.717,2.006,0,4.018-.719,5.616-2.177,28.828-26.301,41.679-58.433,54.107-89.508,6.852-17.131,13.323-33.312,22.212-47.91C238.952,223.341,237.705,218.213,233.773,215.818z\"/>\n<path d=\"M320.664,365.57c-8.409-12.733-12.673-27.664-12.673-44.378,0-4.603-3.731-8.336-8.336-8.336-4.605,0-8.336,3.732-8.336,8.336,0,20.037,5.193,38.058,15.435,53.565,1.602,2.427,4.257,3.743,6.963,3.743,1.577,0,3.172-.447,4.587-1.382C322.144,374.583,323.202,369.412,320.664,365.57z\"/>\n<path d=\"M366.611,400.121c-.16-.047-16.077-4.864-31.146-17.856-3.486-3.005-8.749-2.618-11.757.87-3.005,3.487-2.616,8.75.87,11.757,17.939,15.465,36.571,21.002,37.356,21.231.777.226,1.559.333,2.33.333,3.603,0,6.921-2.359,7.987-5.992C373.544,406.055,371.016,401.427,366.611,400.121z\"/>\n<path d=\"M304.519,401.35c-32.847-23.609-27.416-65.365-27.156-67.218.657-4.549-2.493-8.774-7.043-9.439-4.553-.666-8.788,2.485-9.455,7.041-.318,2.172-7.309,53.519,33.924,83.155,1.471,1.058,3.172,1.567,4.858,1.567,2.592,0,5.147-1.205,6.775-3.471C309.11,409.246,308.258,404.036,304.519,401.35z\"/>\n</g></svg>";
- let running=false;
- function targetCards(){
-  const daily=Array.from(document.querySelectorAll("#warning .daily-water-grid>.daily-water-item"));
-  const lower=Array.from(document.querySelectorAll("#warning .flood-final-cards>.kpi,#warning .flood-final-cards>.national-kpi")).filter(function(card){
-   return getComputedStyle(card).display!=="none";
-  });
-  return daily.concat(lower).slice(0,9);
- }
- function clean(){
-  if(running)return;running=true;
-  targetCards().forEach(function(card){
-   card.querySelectorAll(":scope>svg,:scope>.icon,:scope>.n-icon,:scope>.daily-flood-icon,:scope>.flood-nine-icon,:scope>.dashboard-custom-icon,:scope>.rain-card-custom-icon").forEach(function(el){el.remove()});
-   let holder=card.querySelector(":scope>.unified-flood-card-icon");
-   if(!holder){
-    holder=document.createElement("span");
-    holder.className="unified-flood-card-icon";
-    holder.innerHTML=icon;
-    card.insertBefore(holder,card.firstChild);
-   }else if(!holder.querySelector('svg[viewBox="0 0 511.998 511.998"]')){
-    holder.innerHTML=icon;
-   }
-   card.querySelectorAll(":scope>.metric-card-copy>*[style]").forEach(function(el){
-    if(el.style.getPropertyValue("color"))el.style.removeProperty("color");
-   });
-  });
-  running=false;
- }
- function queue(){requestAnimationFrame(clean)}
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",clean,{once:true});else clean();
- [100,600,1400,2800,5200,8500,12000].forEach(function(ms){setTimeout(clean,ms)});
- const root=document.getElementById("warning");
- if(root)new MutationObserver(queue).observe(root,{childList:true,subtree:true});
-})();
-</script>
-
-<style id="flood-card-and-watch-colors-20260911-v2">
-/* ปรับการ์ด 9 ช่องให้สมส่วน และใช้ข้อความสีดำ */
-html body main.container #warning .daily-water-grid,
-html body main.container #warning .flood-final-cards{
-  align-items:stretch!important;
-  grid-auto-rows:1fr!important;
-}
-html body main.container #warning .daily-water-grid>.daily-water-item,
-html body main.container #warning .flood-final-cards>.kpi,
-html body main.container #warning .flood-final-cards>.national-kpi{
-  width:100%!important;
-  min-width:0!important;
-  height:auto!important;
-  min-height:142px!important;
-  padding:18px 20px!important;
-  margin:0!important;
-  align-self:stretch!important;
-  box-sizing:border-box!important;
-}
-html body main.container #warning .daily-water-grid>.daily-water-item .metric-card-copy,
-html body main.container #warning .flood-final-cards>.kpi .metric-card-copy,
-html body main.container #warning .flood-final-cards>.national-kpi .metric-card-copy{
-  min-width:0!important;
-  width:100%!important;
-}
-html body main.container #warning .daily-water-grid>.daily-water-item .metric-card-copy>*,
-html body main.container #warning .flood-final-cards>.kpi .metric-card-copy>*,
-html body main.container #warning .flood-final-cards>.national-kpi .metric-card-copy>*,
-html body main.container #warning .daily-water-grid>.daily-water-item small,
-html body main.container #warning .daily-water-grid>.daily-water-item strong,
-html body main.container #warning .daily-water-grid>.daily-water-item span,
-html body main.container #warning .flood-final-cards>.kpi h2,
-html body main.container #warning .flood-final-cards>.kpi strong,
-html body main.container #warning .flood-final-cards>.kpi span,
-html body main.container #warning .flood-final-cards>.national-kpi h2,
-html body main.container #warning .flood-final-cards>.national-kpi strong,
-html body main.container #warning .flood-final-cards>.national-kpi span{
-  color:#000000!important;
-  overflow-wrap:anywhere!important;
-}
-/* หัวข้อสองส่วนเป็นสีดำ */
-html body #warning [data-flood-heading="risk-24"],
-html body #warning [data-flood-heading="indicators"],
-html body #warning .nationwide-indicators .card-head h2,
-html body #warning .national-kpi:has(#nationalFloodCount) h2{
-  color:#000000!important;
-}
-/* แท็บที่เลือก: ทอง #ecb731 และข้อความเขียว #537b35 */
-html body main.container>#globalFloodHeader .global-flood-tabs button.active,
-html body main.container>#globalFloodHeader .global-flood-tabs button[aria-current="page"]{
-  background:#ecb731!important;
-  background-color:#ecb731!important;
-  color:#537b35!important;
-}
-/* ปุ่มเปิดระบบ SWOC */
-html body #warning #ridBasinOverview .rid-basin-head>a{
-  background:#c4dff6!important;
-  background-color:#c4dff6!important;
-  color:#0091cd!important;
-  border-color:#c4dff6!important;
-}
-@media(max-width:700px){
-  html body main.container #warning .daily-water-grid>.daily-water-item,
-  html body main.container #warning .flood-final-cards>.kpi,
-  html body main.container #warning .flood-final-cards>.national-kpi{
-    min-height:126px!important;
-    padding:14px!important;
-  }
-}
-</style>
-<script id="flood-card-and-watch-colors-20260911-v2-script">
-(function(){
-  const titles=[
-    "พื้นที่เสี่ยงน้ำท่วมฉับพลันใน 24 ชั่วโมงข้างหน้า",
-    "พื้นที่เสี่ยงน้ำท่วมฉับพลัน 24 ชั่วโมง",
-    "ตัวชี้วัดเฝ้าระวังทั่วประเทศ"
-  ];
-  function applyFloodCardColors(){
-    const root=document.getElementById("warning"); if(!root)return;
-    root.querySelectorAll("h1,h2,h3,h4").forEach(function(el){
-      const value=String(el.textContent||"").replace(/\s+/g," ").trim();
-      if(titles.some(function(title){return value===title||value.indexOf(title)>=0;})){
-        el.style.setProperty("color","#000000","important");
-      }
-    });
-    root.querySelectorAll(".daily-water-grid>.daily-water-item,.flood-final-cards>.kpi,.flood-final-cards>.national-kpi").forEach(function(card){
-      card.querySelectorAll(".metric-card-copy>*,small,strong,span,h2").forEach(function(el){
-        if(!el.closest(".unified-flood-card-icon"))el.style.setProperty("color","#000000","important");
-      });
-    });
-  }
-  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",applyFloodCardColors,{once:true});else applyFloodCardColors();
-  [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(applyFloodCardColors,ms);});
-  const root=document.getElementById("warning");
-  if(root)new MutationObserver(function(){requestAnimationFrame(applyFloodCardColors);}).observe(root,{childList:true,subtree:true});
-})();
-</script>
-
-
 <style id="flood-watch-page-colors-20260911-v3">
 /* หน้าที่สอง: สีหัวข้อพื้นที่ 48 ชั่วโมง */
 html body main.container #warning .tw-risk-card:nth-of-type(2) .tw-risk-head h3,
@@ -11145,92 +10232,6 @@ html body #warning .flood-final-cards:empty{display:none!important}
 })();
 </script>
 
-<style id="normalize-nine-summary-cards-20260911-v2">
-/* Match drought.html KPI typography, spacing and icon scale. */
-html body #warning .daily-water-grid[data-nine-cards-merged="true"]>*{
- position:relative!important;
- display:flex!important;
- flex-direction:column!important;
- align-items:center!important;
- justify-content:center!important;
- min-height:136px!important;
- padding:15px 16px 44px!important;
- overflow:hidden!important;
- text-align:center!important;
- background:#fff!important;
- border:1px solid #fff!important;
- border-radius:12px!important;
- box-shadow:0 3px 14px rgba(42,58,75,.08)!important;
- font-family:"Noto Sans Thai","Sarabun",sans-serif!important;
- color:#111!important;
-}
-html body #warning .daily-water-grid[data-nine-cards-merged="true"] .metric-card-copy{
- display:flex!important;
- flex-direction:column!important;
- align-items:center!important;
- justify-content:center!important;
- width:100%!important;
- gap:3px!important;
- margin:0!important;
- padding:0!important;
- background:transparent!important;
- box-shadow:none!important;
- text-align:center!important;
-}
-html body #warning .daily-water-grid[data-nine-cards-merged="true"] .metric-card-copy>strong{
- order:1!important;margin:0!important;
- font-family:"Noto Sans Thai","Sarabun",sans-serif!important;
- font-size:24px!important;font-weight:600!important;line-height:1.25!important;
- color:#111!important;-webkit-text-fill-color:#111!important;
-}
-html body #warning .daily-water-grid[data-nine-cards-merged="true"] .metric-card-copy>h2,
-html body #warning .daily-water-grid[data-nine-cards-merged="true"] .metric-card-copy>.reference-card-title{
- order:2!important;margin:0!important;min-height:0!important;
- font-family:"Noto Sans Thai","Sarabun",sans-serif!important;
- font-size:14px!important;font-weight:400!important;line-height:1.45!important;
- color:#111!important;-webkit-text-fill-color:#111!important;
-}
-html body #warning .daily-water-grid[data-nine-cards-merged="true"] .metric-card-copy>span:not(.reference-card-title){
- order:3!important;margin:0!important;
- font-family:"Noto Sans Thai","Sarabun",sans-serif!important;
- font-size:14px!important;font-weight:400!important;line-height:1.45!important;
- color:#333!important;-webkit-text-fill-color:#333!important;
-}
-html body #warning .daily-water-grid[data-nine-cards-merged="true"] .unified-flood-card-icon{
- position:absolute!important;left:16px!important;bottom:10px!important;
- display:block!important;width:38px!important;height:38px!important;
- margin:0!important;padding:0!important;overflow:visible!important;
-}
-html body #warning .daily-water-grid[data-nine-cards-merged="true"] .unified-flood-card-icon svg{
- display:block!important;width:38px!important;height:38px!important;max-width:100%!important;
-}
-html body #warning .daily-water-grid[data-nine-cards-merged="true"] .source-link{display:none!important}
-</style>
-<script id="normalize-nine-summary-cards-20260911-v2-script">
-(function(){
- var suppliedIcon="<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" viewBox=\"0 0 512.005 512.005\" xml:space=\"preserve\" fill=\"#000000\"><g id=\"SVGRepo_bgCarrier\" stroke-width=\"0\"></g><g id=\"SVGRepo_tracerCarrier\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></g><g id=\"SVGRepo_iconCarrier\"> <path style=\"fill:#0091cd;\" d=\"M503.407,427.87c-22.494,0-22.494-21.783-44.989-21.783c-22.495,0-22.494,21.783-44.989,21.783 c-22.492,0-22.492-21.783-44.983-21.783c-22.492,0-22.492,21.783-44.984,21.783c-22.491,0-22.491-21.783-44.983-21.783 c-22.491,0-22.491,21.783-44.981,21.783c-22.488,0-22.488-21.783-44.976-21.783c-22.491,0-22.491,21.783-44.981,21.783 s-22.491-21.783-44.983-21.783c-22.491,0-22.491,21.783-44.981,21.783c-22.49,0-22.49-21.783-44.979-21.783v-52.962 c22.49,0,22.49,21.783,44.979,21.783c22.491,0,22.491-21.783,44.981-21.783s22.491,21.783,44.983,21.783 c22.491,0,22.491-21.783,44.981-21.783c22.488,0,22.488,21.783,44.976,21.783c22.491,0,22.491-21.783,44.981-21.783 s22.491,21.783,44.983,21.783c22.492,0,22.492-21.783,44.984-21.783s22.492,21.783,44.983,21.783 c22.494,0,22.494-21.783,44.989-21.783c22.495,0,22.494,21.783,44.989,21.783\"></path> <path style=\"fill:#E6E6E6;\" d=\"M188.334,327.099V168.096c0-22.781-18.468-41.248-41.248-41.248l0,0 c-22.781,0-41.248,18.468-41.248,41.248v159.002c-24.158,14.178-40.389,40.406-40.389,70.442c0,45.087,36.55,54.137,81.637,54.137 s81.638-9.05,81.638-54.137C228.723,367.505,212.492,341.276,188.334,327.099z\"></path> <path style=\"fill:#ed1b2e;\" d=\"M147.086,451.677c-29.852,0-54.137-24.285-54.137-54.137c0-19.116,10.273-37.02,26.808-46.724 l13.582-7.971v-174.75c0-7.581,6.167-13.748,13.748-13.748c7.581,0,13.748,6.167,13.748,13.748v174.751l13.582,7.97 c16.537,9.704,26.808,27.608,26.808,46.724C201.223,427.392,176.937,451.677,147.086,451.677z\"></path> <path style=\"fill:#56a0d3;\" d=\"M503.407,480.832c-22.494,0-22.494-21.783-44.989-21.783c-22.495,0-22.494,21.783-44.989,21.783 c-22.492,0-22.492-21.783-44.983-21.783c-22.492,0-22.492,21.783-44.984,21.783c-22.491,0-22.491-21.783-44.983-21.783 c-22.491,0-22.491,21.783-44.981,21.783c-22.488,0-22.488-21.783-44.976-21.783c-22.491,0-22.491,21.783-44.981,21.783 s-22.491-21.783-44.983-21.783c-22.491,0-22.491,21.783-44.981,21.783c-22.49,0-22.49-21.783-44.979-21.783v-52.961 c22.49,0,22.49,21.783,44.979,21.783c22.491,0,22.491-21.783,44.981-21.783s22.491,21.783,44.983,21.783 c22.491,0,22.491-21.783,44.981-21.783c22.488,0,22.488,21.783,44.976,21.783c22.491,0,22.491-21.783,44.981-21.783 s22.491,21.783,44.983,21.783c22.492,0,22.492-21.783,44.984-21.783s22.492,21.783,44.983,21.783 c22.494,0,22.494-21.783,44.989-21.783c22.495,0,22.494,21.783,44.989,21.783\"></path> <circle style=\"fill:#ecb731;\" cx=\"278.777\" cy=\"86.169\" r=\"27.499\"></circle> <path d=\"M368.449,361.72c7.767,0,11.245,3.37,16.513,8.471c6.125,5.931,13.744,13.311,28.47,13.311 c14.728,0,22.349-7.38,28.474-13.311c5.267-5.101,8.747-8.471,16.515-8.471c7.769,0,11.249,3.37,16.517,8.471 c6.125,5.93,13.746,13.311,28.472,13.311c4.747,0,8.594-3.848,8.594-8.594c0-4.746-3.847-8.594-8.594-8.594 c-7.768,0-11.248-3.37-16.515-8.471c-6.126-5.931-13.747-13.311-28.474-13.311c-14.726,0-22.347,7.38-28.472,13.311 c-5.269,5.101-8.749,8.471-16.517,8.471c-7.765,0-11.244-3.37-16.512-8.47c-6.125-5.931-13.746-13.312-28.471-13.312 c-4.747,0-8.594,3.848-8.594,8.594S363.702,361.72,368.449,361.72z\"></path> <path d=\"M160.83,318.193c4.747,0,8.594-3.848,8.594-8.594V168.101c0-12.32-10.024-22.344-22.344-22.344 c-12.313,0-22.331,10.024-22.331,22.344v11.449c0,4.746,3.847,8.594,8.594,8.594s8.594-3.848,8.594-8.594v-11.449 c0-2.843,2.308-5.156,5.144-5.156c2.843,0,5.156,2.313,5.156,5.156v141.498C152.236,314.345,156.084,318.193,160.83,318.193z\"></path> <path d=\"M202.814,453.302c-4.369-1.916-9.043-2.846-14.288-2.846c-14.725,0-22.346,7.38-28.47,13.311 c-5.267,5.101-8.746,8.471-16.512,8.471c-7.767,0-11.245-3.37-16.513-8.471c-6.125-5.931-13.744-13.311-28.47-13.311 s-22.346,7.38-28.47,13.311c-5.267,5.101-8.746,8.471-16.512,8.471c-7.764,0-11.244-3.37-16.511-8.47 c-6.123-5.931-13.743-13.312-28.469-13.312c-4.747,0-8.594,3.848-8.594,8.594s3.847,8.594,8.594,8.594 c7.764,0,11.244,3.37,16.511,8.47c6.123,5.931,13.743,13.312,28.469,13.312s22.346-7.38,28.47-13.311 c5.267-5.101,8.746-8.471,16.512-8.471s11.244,3.37,16.512,8.47c6.125,5.931,13.744,13.312,28.471,13.312 c14.725,0,22.346-7.38,28.47-13.311c5.267-5.101,8.746-8.471,16.512-8.471c2.821,0,5.237,0.457,7.385,1.4 c4.348,1.907,9.417-0.072,11.322-4.42C209.139,460.277,207.16,455.208,202.814,453.302z\"></path> <path d=\"M503.41,472.239c-7.768,0-11.248-3.37-16.515-8.471c-6.126-5.931-13.747-13.311-28.474-13.311 c-14.726,0-22.347,7.38-28.472,13.311c-5.269,5.101-8.749,8.471-16.517,8.471c-7.765,0-11.244-3.37-16.512-8.47 c-6.125-5.931-13.744-13.312-28.471-13.312c-14.725,0-22.346,7.38-28.471,13.311c-5.267,5.101-8.746,8.471-16.513,8.471 s-11.245-3.37-16.513-8.471c-6.125-5.931-13.744-13.311-28.47-13.311c-14.725,0-22.346,7.38-28.47,13.312 c-5.267,5.1-8.746,8.47-16.512,8.47c-3.89,0-6.919-0.84-9.818-2.721c-3.981-2.585-9.303-1.453-11.888,2.529 c-2.584,3.981-1.452,9.303,2.529,11.887c5.695,3.697,11.967,5.493,19.177,5.493c14.725,0,22.346-7.38,28.47-13.312 c5.267-5.1,8.746-8.47,16.512-8.47s11.244,3.37,16.512,8.47c6.125,5.931,13.746,13.312,28.471,13.312 c14.725,0,22.346-7.38,28.471-13.311c5.267-5.101,8.746-8.471,16.513-8.471s11.245,3.37,16.513,8.471 c6.125,5.931,13.744,13.311,28.47,13.311c14.728,0,22.349-7.38,28.474-13.311c5.267-5.101,8.747-8.471,16.515-8.471 c7.769,0,11.249,3.37,16.517,8.471c6.125,5.93,13.746,13.311,28.472,13.311c4.747,0,8.594-3.848,8.594-8.594 S508.157,472.239,503.41,472.239z\"></path> <path d=\"M503.41,419.276c-7.768,0-11.248-3.37-16.515-8.471c-6.126-5.931-13.747-13.312-28.474-13.312 c-14.726,0-22.347,7.38-28.473,13.311c-5.267,5.101-8.747,8.471-16.516,8.471c-7.765,0-11.244-3.37-16.512-8.471 c-6.125-5.931-13.744-13.312-28.471-13.312c-14.725,0-22.346,7.382-28.471,13.312c-5.267,5.101-8.746,8.471-16.513,8.471 s-11.245-3.37-16.513-8.471c-6.125-5.931-13.744-13.312-28.47-13.312c-14.725,0-22.346,7.382-28.47,13.312 c-4.995,4.837-8.388,8.113-15.347,8.438c1.746-7.065,2.649-14.325,2.649-21.699c0-4.769-0.385-9.492-1.129-14.131 c12.992-0.834,20.049-7.669,25.79-13.23c5.265-5.099,8.742-8.468,16.501-8.468c7.767,0,11.246,3.37,16.514,8.471 c6.125,5.931,13.746,13.311,28.472,13.311c12.479,0,20.002-5.4,25.714-10.684c3.484-3.222,3.698-8.659,0.476-12.145 c-3.223-3.484-8.66-3.698-12.145-0.474c-4.289,3.966-7.797,6.114-14.046,6.114c-7.767,0-11.246-3.37-16.514-8.471 c-6.125-5.931-13.746-13.311-28.472-13.311c-14.72,0-22.338,7.38-28.461,13.31c-5.267,5.101-8.746,8.472-16.514,8.472 c-0.644,0-1.256-0.031-1.855-0.078c-6.594-17.718-18.662-33.224-34.725-43.895V168.101c0-27.484-22.36-49.844-49.844-49.844 c-13.312,0-25.826,5.183-35.242,14.598c-9.409,9.422-14.59,21.94-14.59,35.246v154.238c-15.217,10.109-26.848,24.558-33.637,41.115 c-2.387,1.59-5.389,2.858-10.027,2.858c-7.767,0-11.246-3.37-16.514-8.471c-6.125-5.931-13.746-13.311-28.472-13.311 c-4.747,0-8.594,3.848-8.594,8.594s3.847,8.594,8.594,8.594c7.767,0,11.246,3.37,16.514,8.471 c6.125,5.931,13.746,13.311,28.472,13.311c1.562,0,3.032-0.093,4.431-0.25c-0.761,4.692-1.157,9.469-1.157,14.296 c0,4.746,3.847,8.594,8.594,8.594s8.594-3.848,8.594-8.594c0-25.804,13.85-49.958,36.145-63.034 c2.631-1.542,4.247-4.363,4.247-7.412V168.101c0-8.72,3.397-16.924,9.561-23.097c6.165-6.165,14.362-9.56,23.084-9.56 c18.007,0,32.657,14.65,32.657,32.657v158.998c0,3.049,1.616,5.87,4.245,7.412c22.296,13.078,36.146,37.231,36.146,63.034 c0,5.019-0.52,9.97-1.518,14.816c-0.525-0.5-1.06-1.015-1.617-1.556c-2.223-2.153-4.65-4.495-7.535-6.608 c0.235-2.213,0.359-4.436,0.359-6.653c0-22.157-11.901-42.903-31.055-54.139l-9.342-5.487c-0.172-4.595-3.951-8.268-8.588-8.268 c-4.747,0-8.594,3.848-8.594,8.594v4.597c0,3.048,1.613,5.867,4.242,7.41l13.583,7.977c13.92,8.165,22.566,23.23,22.566,39.315 c0,0.057-0.005,0.113-0.005,0.171c-1.307-0.133-2.658-0.222-4.096-0.222c-14.725,0-22.346,7.382-28.47,13.312 c-5.267,5.101-8.746,8.471-16.512,8.471c-7.767,0-11.245-3.37-16.513-8.471c-5.695-5.516-12.693-12.277-25.486-13.198 c0-0.021-0.001-0.041-0.001-0.062c0-16.084,8.643-31.15,22.557-39.316l13.59-7.975c2.63-1.542,4.244-4.363,4.244-7.411V208.196 c0-4.746-3.847-8.594-8.594-8.594c-4.747,0-8.594,3.848-8.594,8.594v129.725l-9.347,5.485 c-19.148,11.241-31.044,31.985-31.044,54.139c0,0.91,0.022,1.818,0.061,2.726c-6.212,2.69-10.556,6.884-14.324,10.535 c-5.267,5.101-8.746,8.471-16.512,8.471c-7.764,0-11.244-3.37-16.511-8.471c-6.123-5.931-13.743-13.312-28.469-13.312 c-4.747,0-8.594,3.848-8.594,8.594s3.847,8.594,8.594,8.594c7.764,0,11.244,3.37,16.511,8.471 c6.123,5.931,13.743,13.312,28.469,13.312s22.346-7.382,28.47-13.312c5.267-5.101,8.746-8.471,16.512-8.471 s11.244,3.37,16.512,8.471c6.125,5.931,13.744,13.312,28.471,13.312c14.725,0,22.346-7.382,28.47-13.312 c5.267-5.101,8.746-8.471,16.512-8.471c7.763,0,11.243,3.37,16.508,8.47c6.122,5.931,13.743,13.312,28.467,13.312 c14.725,0,22.346-7.382,28.47-13.312c5.267-5.101,8.746-8.471,16.512-8.471s11.244,3.37,16.512,8.471 c6.125,5.931,13.744,13.312,28.471,13.312c14.725,0,22.346-7.382,28.471-13.312c5.267-5.101,8.746-8.471,16.513-8.471 s11.245,3.37,16.513,8.471c6.125,5.931,13.744,13.312,28.47,13.312c14.728,0,22.349-7.38,28.474-13.312 c5.267-5.101,8.747-8.471,16.515-8.471c7.769,0,11.249,3.37,16.516,8.471c6.126,5.931,13.747,13.311,28.473,13.311 c4.747,0,8.594-3.848,8.594-8.594S508.157,419.276,503.41,419.276z\"></path> <path d=\"M220.916,189.291h36.092c4.747,0,8.594-3.848,8.594-8.594c0-4.746-3.847-8.594-8.594-8.594h-36.092 c-4.747,0-8.594,3.848-8.594,8.594C212.322,185.443,216.169,189.291,220.916,189.291z\"></path> <path d=\"M220.916,288.975h36.092c4.747,0,8.594-3.848,8.594-8.594s-3.847-8.594-8.594-8.594h-36.092 c-4.747,0-8.594,3.848-8.594,8.594S216.169,288.975,220.916,288.975z\"></path> <path d=\"M220.916,239.133h36.092c4.747,0,8.594-3.848,8.594-8.594c0-4.746-3.847-8.594-8.594-8.594h-36.092 c-4.747,0-8.594,3.848-8.594,8.594C212.322,235.285,216.169,239.133,220.916,239.133z\"></path> <path d=\"M223.783,94.763h19.947c0.886,3.612,2.309,7.015,4.192,10.11l-14.109,14.109c-3.356,3.356-3.356,8.797,0,12.153 c1.679,1.679,3.879,2.517,6.078,2.517s4.399-0.839,6.078-2.517l14.109-14.108c3.096,1.884,6.498,3.307,10.11,4.193v19.947 c0,4.746,3.847,8.594,8.594,8.594s8.594-3.848,8.594-8.594v-19.946c3.612-0.886,7.015-2.309,10.11-4.193l14.108,14.108 c1.679,1.679,3.879,2.517,6.078,2.517s4.399-0.839,6.078-2.517c3.356-3.356,3.356-8.797,0-12.153l-14.109-14.109 c1.884-3.096,3.307-6.498,4.193-10.11h19.947c4.747,0,8.594-3.848,8.594-8.594s-3.847-8.594-8.594-8.594H313.83 c-0.886-3.612-2.309-7.015-4.193-10.11l14.109-14.109c3.356-3.356,3.356-8.797,0-12.153c-3.357-3.356-8.798-3.356-12.154,0 l-14.109,14.107c-3.096-1.884-6.498-3.307-10.11-4.193V31.172c0-4.746-3.847-8.594-8.594-8.594s-8.594,3.848-8.594,8.594v19.947 c-3.612,0.886-7.015,2.309-10.11,4.193l-14.109-14.108c-3.357-3.356-8.798-3.356-12.154,0c-3.356,3.356-3.356,8.797,0,12.153 l14.109,14.109c-1.884,3.096-3.306,6.498-4.192,10.11h-19.947c-4.747,0-8.594,3.848-8.594,8.594 C215.19,90.916,219.036,94.763,223.783,94.763z M278.78,67.265c10.425,0,18.905,8.48,18.905,18.905s-8.48,18.905-18.905,18.905 c-10.424,0-18.904-8.48-18.904-18.905S268.356,67.265,278.78,67.265z\"></path> </g></svg>";
- function normalizeCards(){
-  var grid=document.querySelector("#warning .daily-water-grid[data-nine-cards-merged='true']");
-  if(!grid||grid.children.length!==9)return false;
-  Array.from(grid.children).forEach(function(card){
-   var icon=card.querySelector(".unified-flood-card-icon");
-   if(!icon){icon=document.createElement("span");icon.className="unified-flood-card-icon";card.insertBefore(icon,card.firstChild)}
-   if(icon.getAttribute("data-supplied-icon")!=="true"){icon.innerHTML=suppliedIcon;icon.setAttribute("data-supplied-icon","true")}
-   var copy=card.querySelector(":scope > .metric-card-copy");
-   if(!copy){
-    var existing=Array.from(card.children).filter(function(el){return !el.classList.contains("unified-flood-card-icon")&&!el.classList.contains("source-link")});
-    if(existing.length===1&&existing[0].tagName==="DIV"){copy=existing[0];copy.classList.add("metric-card-copy")}
-    else{copy=document.createElement("div");copy.className="metric-card-copy";existing.forEach(function(el){copy.appendChild(el)});card.appendChild(copy)}
-   }
-  });
-  return true;
- }
- function run(){normalizeCards()}
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",run);else run();
- [200,500,900,1500,2500,4000,6500,9000].forEach(function(ms){setTimeout(run,ms)});
-})();
-</script>
-
 <style id="flood-header-match-drought-20260911-v1">
 /* Match drought.html header typography exactly. */
 html body main.container>#globalFloodHeader{
@@ -11265,5 +10266,79 @@ html body main.container>#globalFloodHeader .global-flood-tabs button{
  html body main.container>#globalFloodHeader .global-flood-tabs button{font-size:16px!important}
 }
 </style>
+
+<style id="drought-card-copy-final-20260911-v1">
+/* Single authoritative card style copied from drought.html. */
+html body #warning .daily-water-grid[data-nine-cards-merged="true"]{
+ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ gap:10px!important;align-items:stretch!important;width:100%!important;
+}
+html body #warning .daily-water-grid[data-nine-cards-merged="true"]>*{
+ min-width:0!important;width:100%!important;min-height:136px!important;height:100%!important;
+ margin:0!important;padding:15px 16px!important;box-sizing:border-box!important;
+ display:grid!important;grid-template-columns:38px minmax(0,1fr)!important;gap:9px!important;
+ align-items:center!important;text-align:left!important;
+ background:#fff!important;border:1px solid #fff!important;border-radius:12px!important;
+ box-shadow:0 3px 14px rgba(42,58,75,.08)!important;overflow:hidden!important;
+ font-family:"Noto Sans Thai","Sarabun",sans-serif!important;color:#111!important;
+}
+html body #warning .daily-water-grid[data-nine-cards-merged="true"] .unified-flood-card-icon{
+ position:static!important;display:grid!important;place-items:center!important;
+ width:38px!important;height:38px!important;min-width:38px!important;margin:0!important;padding:0!important;
+ background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important;
+}
+html body #warning .daily-water-grid[data-nine-cards-merged="true"] .unified-flood-card-icon svg{
+ display:block!important;width:38px!important;height:38px!important;max-width:38px!important;max-height:38px!important;
+}
+html body #warning .daily-water-grid[data-nine-cards-merged="true"] .metric-card-copy{
+ min-width:0!important;width:100%!important;margin:0!important;padding:0!important;
+ display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;
+ gap:3px!important;text-align:left!important;background:transparent!important;box-shadow:none!important;
+}
+html body #warning .daily-water-grid[data-nine-cards-merged="true"] .metric-card-copy>strong{
+ order:1!important;margin:0!important;font-family:"Noto Sans Thai","Sarabun",sans-serif!important;
+ font-size:24px!important;font-weight:600!important;line-height:1.25!important;
+ color:#111!important;-webkit-text-fill-color:#111!important;
+}
+html body #warning .daily-water-grid[data-nine-cards-merged="true"] .metric-card-copy>h2,
+html body #warning .daily-water-grid[data-nine-cards-merged="true"] .metric-card-copy>.reference-card-title{
+ order:2!important;margin:0!important;min-height:0!important;font-family:"Noto Sans Thai","Sarabun",sans-serif!important;
+ font-size:14px!important;font-weight:400!important;line-height:1.45!important;
+ color:#111!important;-webkit-text-fill-color:#111!important;
+}
+html body #warning .daily-water-grid[data-nine-cards-merged="true"] .metric-card-copy>span:not(.reference-card-title){
+ order:3!important;margin:0!important;font-family:"Noto Sans Thai","Sarabun",sans-serif!important;
+ font-size:14px!important;font-weight:400!important;line-height:1.45!important;
+ color:#333!important;-webkit-text-fill-color:#333!important;
+}
+html body #warning .daily-water-grid[data-nine-cards-merged="true"] .source-link{display:none!important}
+@media(max-width:850px){html body #warning .daily-water-grid[data-nine-cards-merged="true"]{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:560px){html body #warning .daily-water-grid[data-nine-cards-merged="true"]{grid-template-columns:1fr!important}}
+</style>
+<script id="drought-card-copy-final-20260911-v1-script">
+(function(){
+ var suppliedIcon="<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" viewBox=\"0 0 512.005 512.005\" xml:space=\"preserve\" fill=\"#000000\"><g id=\"SVGRepo_bgCarrier\" stroke-width=\"0\"></g><g id=\"SVGRepo_tracerCarrier\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></g><g id=\"SVGRepo_iconCarrier\"> <path style=\"fill:#0091cd;\" d=\"M503.407,427.87c-22.494,0-22.494-21.783-44.989-21.783c-22.495,0-22.494,21.783-44.989,21.783 c-22.492,0-22.492-21.783-44.983-21.783c-22.492,0-22.492,21.783-44.984,21.783c-22.491,0-22.491-21.783-44.983-21.783 c-22.491,0-22.491,21.783-44.981,21.783c-22.488,0-22.488-21.783-44.976-21.783c-22.491,0-22.491,21.783-44.981,21.783 s-22.491-21.783-44.983-21.783c-22.491,0-22.491,21.783-44.981,21.783c-22.49,0-22.49-21.783-44.979-21.783v-52.962 c22.49,0,22.49,21.783,44.979,21.783c22.491,0,22.491-21.783,44.981-21.783s22.491,21.783,44.983,21.783 c22.491,0,22.491-21.783,44.981-21.783c22.488,0,22.488,21.783,44.976,21.783c22.491,0,22.491-21.783,44.981-21.783 s22.491,21.783,44.983,21.783c22.492,0,22.492-21.783,44.984-21.783s22.492,21.783,44.983,21.783 c22.494,0,22.494-21.783,44.989-21.783c22.495,0,22.494,21.783,44.989,21.783\"></path> <path style=\"fill:#E6E6E6;\" d=\"M188.334,327.099V168.096c0-22.781-18.468-41.248-41.248-41.248l0,0 c-22.781,0-41.248,18.468-41.248,41.248v159.002c-24.158,14.178-40.389,40.406-40.389,70.442c0,45.087,36.55,54.137,81.637,54.137 s81.638-9.05,81.638-54.137C228.723,367.505,212.492,341.276,188.334,327.099z\"></path> <path style=\"fill:#ed1b2e;\" d=\"M147.086,451.677c-29.852,0-54.137-24.285-54.137-54.137c0-19.116,10.273-37.02,26.808-46.724 l13.582-7.971v-174.75c0-7.581,6.167-13.748,13.748-13.748c7.581,0,13.748,6.167,13.748,13.748v174.751l13.582,7.97 c16.537,9.704,26.808,27.608,26.808,46.724C201.223,427.392,176.937,451.677,147.086,451.677z\"></path> <path style=\"fill:#56a0d3;\" d=\"M503.407,480.832c-22.494,0-22.494-21.783-44.989-21.783c-22.495,0-22.494,21.783-44.989,21.783 c-22.492,0-22.492-21.783-44.983-21.783c-22.492,0-22.492,21.783-44.984,21.783c-22.491,0-22.491-21.783-44.983-21.783 c-22.491,0-22.491,21.783-44.981,21.783c-22.488,0-22.488-21.783-44.976-21.783c-22.491,0-22.491,21.783-44.981,21.783 s-22.491-21.783-44.983-21.783c-22.491,0-22.491,21.783-44.981,21.783c-22.49,0-22.49-21.783-44.979-21.783v-52.961 c22.49,0,22.49,21.783,44.979,21.783c22.491,0,22.491-21.783,44.981-21.783s22.491,21.783,44.983,21.783 c22.491,0,22.491-21.783,44.981-21.783c22.488,0,22.488,21.783,44.976,21.783c22.491,0,22.491-21.783,44.981-21.783 s22.491,21.783,44.983,21.783c22.492,0,22.492-21.783,44.984-21.783s22.492,21.783,44.983,21.783 c22.494,0,22.494-21.783,44.989-21.783c22.495,0,22.494,21.783,44.989,21.783\"></path> <circle style=\"fill:#ecb731;\" cx=\"278.777\" cy=\"86.169\" r=\"27.499\"></circle> <path d=\"M368.449,361.72c7.767,0,11.245,3.37,16.513,8.471c6.125,5.931,13.744,13.311,28.47,13.311 c14.728,0,22.349-7.38,28.474-13.311c5.267-5.101,8.747-8.471,16.515-8.471c7.769,0,11.249,3.37,16.517,8.471 c6.125,5.93,13.746,13.311,28.472,13.311c4.747,0,8.594-3.848,8.594-8.594c0-4.746-3.847-8.594-8.594-8.594 c-7.768,0-11.248-3.37-16.515-8.471c-6.126-5.931-13.747-13.311-28.474-13.311c-14.726,0-22.347,7.38-28.472,13.311 c-5.269,5.101-8.749,8.471-16.517,8.471c-7.765,0-11.244-3.37-16.512-8.47c-6.125-5.931-13.746-13.312-28.471-13.312 c-4.747,0-8.594,3.848-8.594,8.594S363.702,361.72,368.449,361.72z\"></path> <path d=\"M160.83,318.193c4.747,0,8.594-3.848,8.594-8.594V168.101c0-12.32-10.024-22.344-22.344-22.344 c-12.313,0-22.331,10.024-22.331,22.344v11.449c0,4.746,3.847,8.594,8.594,8.594s8.594-3.848,8.594-8.594v-11.449 c0-2.843,2.308-5.156,5.144-5.156c2.843,0,5.156,2.313,5.156,5.156v141.498C152.236,314.345,156.084,318.193,160.83,318.193z\"></path> <path d=\"M202.814,453.302c-4.369-1.916-9.043-2.846-14.288-2.846c-14.725,0-22.346,7.38-28.47,13.311 c-5.267,5.101-8.746,8.471-16.512,8.471c-7.767,0-11.245-3.37-16.513-8.471c-6.125-5.931-13.744-13.311-28.47-13.311 s-22.346,7.38-28.47,13.311c-5.267,5.101-8.746,8.471-16.512,8.471c-7.764,0-11.244-3.37-16.511-8.47 c-6.123-5.931-13.743-13.312-28.469-13.312c-4.747,0-8.594,3.848-8.594,8.594s3.847,8.594,8.594,8.594 c7.764,0,11.244,3.37,16.511,8.47c6.123,5.931,13.743,13.312,28.469,13.312s22.346-7.38,28.47-13.311 c5.267-5.101,8.746-8.471,16.512-8.471s11.244,3.37,16.512,8.47c6.125,5.931,13.744,13.312,28.471,13.312 c14.725,0,22.346-7.38,28.47-13.311c5.267-5.101,8.746-8.471,16.512-8.471c2.821,0,5.237,0.457,7.385,1.4 c4.348,1.907,9.417-0.072,11.322-4.42C209.139,460.277,207.16,455.208,202.814,453.302z\"></path> <path d=\"M503.41,472.239c-7.768,0-11.248-3.37-16.515-8.471c-6.126-5.931-13.747-13.311-28.474-13.311 c-14.726,0-22.347,7.38-28.472,13.311c-5.269,5.101-8.749,8.471-16.517,8.471c-7.765,0-11.244-3.37-16.512-8.47 c-6.125-5.931-13.744-13.312-28.471-13.312c-14.725,0-22.346,7.38-28.471,13.311c-5.267,5.101-8.746,8.471-16.513,8.471 s-11.245-3.37-16.513-8.471c-6.125-5.931-13.744-13.311-28.47-13.311c-14.725,0-22.346,7.38-28.47,13.312 c-5.267,5.1-8.746,8.47-16.512,8.47c-3.89,0-6.919-0.84-9.818-2.721c-3.981-2.585-9.303-1.453-11.888,2.529 c-2.584,3.981-1.452,9.303,2.529,11.887c5.695,3.697,11.967,5.493,19.177,5.493c14.725,0,22.346-7.38,28.47-13.312 c5.267-5.1,8.746-8.47,16.512-8.47s11.244,3.37,16.512,8.47c6.125,5.931,13.746,13.312,28.471,13.312 c14.725,0,22.346-7.38,28.471-13.311c5.267-5.101,8.746-8.471,16.513-8.471s11.245,3.37,16.513,8.471 c6.125,5.931,13.744,13.311,28.47,13.311c14.728,0,22.349-7.38,28.474-13.311c5.267-5.101,8.747-8.471,16.515-8.471 c7.769,0,11.249,3.37,16.517,8.471c6.125,5.93,13.746,13.311,28.472,13.311c4.747,0,8.594-3.848,8.594-8.594 S508.157,472.239,503.41,472.239z\"></path> <path d=\"M503.41,419.276c-7.768,0-11.248-3.37-16.515-8.471c-6.126-5.931-13.747-13.312-28.474-13.312 c-14.726,0-22.347,7.38-28.473,13.311c-5.267,5.101-8.747,8.471-16.516,8.471c-7.765,0-11.244-3.37-16.512-8.471 c-6.125-5.931-13.744-13.312-28.471-13.312c-14.725,0-22.346,7.382-28.471,13.312c-5.267,5.101-8.746,8.471-16.513,8.471 s-11.245-3.37-16.513-8.471c-6.125-5.931-13.744-13.312-28.47-13.312c-14.725,0-22.346,7.382-28.47,13.312 c-4.995,4.837-8.388,8.113-15.347,8.438c1.746-7.065,2.649-14.325,2.649-21.699c0-4.769-0.385-9.492-1.129-14.131 c12.992-0.834,20.049-7.669,25.79-13.23c5.265-5.099,8.742-8.468,16.501-8.468c7.767,0,11.246,3.37,16.514,8.471 c6.125,5.931,13.746,13.311,28.472,13.311c12.479,0,20.002-5.4,25.714-10.684c3.484-3.222,3.698-8.659,0.476-12.145 c-3.223-3.484-8.66-3.698-12.145-0.474c-4.289,3.966-7.797,6.114-14.046,6.114c-7.767,0-11.246-3.37-16.514-8.471 c-6.125-5.931-13.746-13.311-28.472-13.311c-14.72,0-22.338,7.38-28.461,13.31c-5.267,5.101-8.746,8.472-16.514,8.472 c-0.644,0-1.256-0.031-1.855-0.078c-6.594-17.718-18.662-33.224-34.725-43.895V168.101c0-27.484-22.36-49.844-49.844-49.844 c-13.312,0-25.826,5.183-35.242,14.598c-9.409,9.422-14.59,21.94-14.59,35.246v154.238c-15.217,10.109-26.848,24.558-33.637,41.115 c-2.387,1.59-5.389,2.858-10.027,2.858c-7.767,0-11.246-3.37-16.514-8.471c-6.125-5.931-13.746-13.311-28.472-13.311 c-4.747,0-8.594,3.848-8.594,8.594s3.847,8.594,8.594,8.594c7.767,0,11.246,3.37,16.514,8.471 c6.125,5.931,13.746,13.311,28.472,13.311c1.562,0,3.032-0.093,4.431-0.25c-0.761,4.692-1.157,9.469-1.157,14.296 c0,4.746,3.847,8.594,8.594,8.594s8.594-3.848,8.594-8.594c0-25.804,13.85-49.958,36.145-63.034 c2.631-1.542,4.247-4.363,4.247-7.412V168.101c0-8.72,3.397-16.924,9.561-23.097c6.165-6.165,14.362-9.56,23.084-9.56 c18.007,0,32.657,14.65,32.657,32.657v158.998c0,3.049,1.616,5.87,4.245,7.412c22.296,13.078,36.146,37.231,36.146,63.034 c0,5.019-0.52,9.97-1.518,14.816c-0.525-0.5-1.06-1.015-1.617-1.556c-2.223-2.153-4.65-4.495-7.535-6.608 c0.235-2.213,0.359-4.436,0.359-6.653c0-22.157-11.901-42.903-31.055-54.139l-9.342-5.487c-0.172-4.595-3.951-8.268-8.588-8.268 c-4.747,0-8.594,3.848-8.594,8.594v4.597c0,3.048,1.613,5.867,4.242,7.41l13.583,7.977c13.92,8.165,22.566,23.23,22.566,39.315 c0,0.057-0.005,0.113-0.005,0.171c-1.307-0.133-2.658-0.222-4.096-0.222c-14.725,0-22.346,7.382-28.47,13.312 c-5.267,5.101-8.746,8.471-16.512,8.471c-7.767,0-11.245-3.37-16.513-8.471c-5.695-5.516-12.693-12.277-25.486-13.198 c0-0.021-0.001-0.041-0.001-0.062c0-16.084,8.643-31.15,22.557-39.316l13.59-7.975c2.63-1.542,4.244-4.363,4.244-7.411V208.196 c0-4.746-3.847-8.594-8.594-8.594c-4.747,0-8.594,3.848-8.594,8.594v129.725l-9.347,5.485 c-19.148,11.241-31.044,31.985-31.044,54.139c0,0.91,0.022,1.818,0.061,2.726c-6.212,2.69-10.556,6.884-14.324,10.535 c-5.267,5.101-8.746,8.471-16.512,8.471c-7.764,0-11.244-3.37-16.511-8.471c-6.123-5.931-13.743-13.312-28.469-13.312 c-4.747,0-8.594,3.848-8.594,8.594s3.847,8.594,8.594,8.594c7.764,0,11.244,3.37,16.511,8.471 c6.123,5.931,13.743,13.312,28.469,13.312s22.346-7.382,28.47-13.312c5.267-5.101,8.746-8.471,16.512-8.471 s11.244,3.37,16.512,8.471c6.125,5.931,13.744,13.312,28.471,13.312c14.725,0,22.346-7.382,28.47-13.312 c5.267-5.101,8.746-8.471,16.512-8.471c7.763,0,11.243,3.37,16.508,8.47c6.122,5.931,13.743,13.312,28.467,13.312 c14.725,0,22.346-7.382,28.47-13.312c5.267-5.101,8.746-8.471,16.512-8.471s11.244,3.37,16.512,8.471 c6.125,5.931,13.744,13.312,28.471,13.312c14.725,0,22.346-7.382,28.471-13.312c5.267-5.101,8.746-8.471,16.513-8.471 s11.245,3.37,16.513,8.471c6.125,5.931,13.744,13.312,28.47,13.312c14.728,0,22.349-7.38,28.474-13.312 c5.267-5.101,8.747-8.471,16.515-8.471c7.769,0,11.249,3.37,16.516,8.471c6.126,5.931,13.747,13.311,28.473,13.311 c4.747,0,8.594-3.848,8.594-8.594S508.157,419.276,503.41,419.276z\"></path> <path d=\"M220.916,189.291h36.092c4.747,0,8.594-3.848,8.594-8.594c0-4.746-3.847-8.594-8.594-8.594h-36.092 c-4.747,0-8.594,3.848-8.594,8.594C212.322,185.443,216.169,189.291,220.916,189.291z\"></path> <path d=\"M220.916,288.975h36.092c4.747,0,8.594-3.848,8.594-8.594s-3.847-8.594-8.594-8.594h-36.092 c-4.747,0-8.594,3.848-8.594,8.594S216.169,288.975,220.916,288.975z\"></path> <path d=\"M220.916,239.133h36.092c4.747,0,8.594-3.848,8.594-8.594c0-4.746-3.847-8.594-8.594-8.594h-36.092 c-4.747,0-8.594,3.848-8.594,8.594C212.322,235.285,216.169,239.133,220.916,239.133z\"></path> <path d=\"M223.783,94.763h19.947c0.886,3.612,2.309,7.015,4.192,10.11l-14.109,14.109c-3.356,3.356-3.356,8.797,0,12.153 c1.679,1.679,3.879,2.517,6.078,2.517s4.399-0.839,6.078-2.517l14.109-14.108c3.096,1.884,6.498,3.307,10.11,4.193v19.947 c0,4.746,3.847,8.594,8.594,8.594s8.594-3.848,8.594-8.594v-19.946c3.612-0.886,7.015-2.309,10.11-4.193l14.108,14.108 c1.679,1.679,3.879,2.517,6.078,2.517s4.399-0.839,6.078-2.517c3.356-3.356,3.356-8.797,0-12.153l-14.109-14.109 c1.884-3.096,3.307-6.498,4.193-10.11h19.947c4.747,0,8.594-3.848,8.594-8.594s-3.847-8.594-8.594-8.594H313.83 c-0.886-3.612-2.309-7.015-4.193-10.11l14.109-14.109c3.356-3.356,3.356-8.797,0-12.153c-3.357-3.356-8.798-3.356-12.154,0 l-14.109,14.107c-3.096-1.884-6.498-3.307-10.11-4.193V31.172c0-4.746-3.847-8.594-8.594-8.594s-8.594,3.848-8.594,8.594v19.947 c-3.612,0.886-7.015,2.309-10.11,4.193l-14.109-14.108c-3.357-3.356-8.798-3.356-12.154,0c-3.356,3.356-3.356,8.797,0,12.153 l14.109,14.109c-1.884,3.096-3.306,6.498-4.192,10.11h-19.947c-4.747,0-8.594,3.848-8.594,8.594 C215.19,90.916,219.036,94.763,223.783,94.763z M278.78,67.265c10.425,0,18.905,8.48,18.905,18.905s-8.48,18.905-18.905,18.905 c-10.424,0-18.904-8.48-18.904-18.905S268.356,67.265,278.78,67.265z\"></path> </g></svg>";
+ function enforce(){
+  var grid=document.querySelector("#warning .daily-water-grid[data-nine-cards-merged='true']");
+  if(!grid||grid.children.length!==9)return;
+  Array.from(grid.children).forEach(function(card){
+   var icon=card.querySelector(":scope > .unified-flood-card-icon");
+   if(!icon){icon=document.createElement("span");icon.className="unified-flood-card-icon";card.insertBefore(icon,card.firstChild)}
+   if(icon.getAttribute("data-final-drought-icon")!=="1"){icon.innerHTML=suppliedIcon;icon.setAttribute("data-final-drought-icon","1")}
+   var copy=card.querySelector(":scope > .metric-card-copy");
+   if(!copy){
+    var nodes=Array.from(card.children).filter(function(el){return el!==icon&&!el.classList.contains("source-link")});
+    if(nodes.length===1&&nodes[0].tagName==="DIV"){copy=nodes[0];copy.classList.add("metric-card-copy")}
+    else{copy=document.createElement("div");copy.className="metric-card-copy";nodes.forEach(function(el){copy.appendChild(el)});card.appendChild(copy)}
+   }
+  });
+ }
+ var queued=false;
+ var observer=new MutationObserver(function(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;enforce()})});
+ function start(){enforce();observer.observe(document.body,{childList:true,subtree:true})}
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+ [250,700,1500,3000,6000,10000].forEach(function(ms){setTimeout(enforce,ms)});
+})();
+</script>
 </body>
 </html>
