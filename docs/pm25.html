@@ -125,6 +125,8 @@ footer,.footer{background:#fff!important;color:#858d97!important;border-color:#e
 <div class="export-stage" aria-hidden="true">
   <section class="pm-report" id="pmReport">
     <section class="pm-report-title"><div><h1>รายงานค่าฝุ่นละออง PM2.5</h1><p>พื้นที่นิคมอุตสาหกรรมทั่วประเทศไทย</p></div><div><b id="reportDate">–</b><span id="reportDataTime">–</span></div></section>
+    <section class="pm-report-table-block"><div class="pm-report-section-head"><h2>ข้อมูลสถานีตรวจวัดคุณภาพอากาศของนิคมอุตสาหกรรม</h2><span>เรียงสถานีที่พบ PM2.5 และสถานีออฟไลน์ก่อน</span></div><table><thead><tr><th>ลำดับ</th><th>สถานีตรวจวัด</th><th>นิคมอุตสาหกรรม</th><th>สถานะ</th><th>ข้อมูลล่าสุด</th><th>ข้อมูล PM2.5 / หมายเหตุ</th></tr></thead><tbody id="reportStationRows"></tbody></table></section>
+    <h2 class="pm-report-kpi-heading">สรุปข้อมูลสถานีตรวจวัดคุณภาพอากาศ</h2>
     <section class="pm-report-kpis">
       <article><span>สถานีทั้งหมด</span><strong id="reportTotal">–</strong><small>สถานี</small></article>
       <article><span>ออนไลน์</span><strong id="reportOnline">–</strong><small>สถานี</small></article>
@@ -133,7 +135,6 @@ footer,.footer{background:#fff!important;color:#858d97!important;border-color:#e
       <article><span>พื้นที่นิคมฯ</span><strong id="reportEstates">–</strong><small>แห่ง</small></article>
     </section>
     <section class="pm-report-summary"><h2>สรุปสถานการณ์</h2><p id="reportSummaryText">กำลังประมวลผลข้อมูลสถานีคุณภาพอากาศ</p></section>
-    <section class="pm-report-table-block"><div class="pm-report-section-head"><h2>สถานีที่ต้องติดตาม</h2><span>เรียงสถานีที่พบ PM2.5 และสถานีออฟไลน์ก่อน</span></div><table><thead><tr><th>ลำดับ</th><th>สถานีตรวจวัด</th><th>นิคมอุตสาหกรรม</th><th>สถานะ</th><th>ข้อมูลล่าสุด</th><th>ข้อมูล PM2.5 / หมายเหตุ</th></tr></thead><tbody id="reportStationRows"></tbody></table></section>
     <section class="pm-report-note"><b>ข้อสังเกตสำคัญ</b><p>ข้อมูลใช้สำหรับสนับสนุนการเฝ้าระวังเบื้องต้น ควรตรวจสอบเวลาตรวจวัด สถานะการเชื่อมต่อ ประกาศทางการ และข้อมูลภาคสนามก่อนสื่อสารหรือดำเนินการ</p></section>
     <footer class="pm-report-footer"><span>แหล่งข้อมูล: ระบบ e-Monitoring กนอ. / GISTDA PM2.5</span><span>จัดทำโดย EMCC กนอ.</span></footer>
   </section>
@@ -594,6 +595,64 @@ html body .pm-report .pm-report-footer{
  margin:0!important;padding:8px 0 0!important;border-top:1px solid #9AA3AA!important;
  color:#555!important;font-size:12px!important;font-weight:400!important;line-height:1.35!important
 }
+</style>
+
+<style id="pm25-station-table-reference-layout-20260911-v1">
+/* ตารางสถานีบนหน้าเว็บ รูปแบบเดียวกับตารางตัวอย่าง */
+html body main.wrap .station-section{
+ border:1px solid #D7DEE5!important;border-radius:0!important;box-shadow:none!important;background:#fff!important
+}
+html body main.wrap .station-section .section-head{
+ display:block!important;padding:16px 14px!important;background:#fff!important;
+ border-bottom:1px solid #D7DEE5!important;text-align:center!important
+}
+html body main.wrap .station-section .section-head>div{text-align:center!important}
+html body main.wrap .station-section .section-head h2{
+ margin:0!important;color:#111!important;font-size:18px!important;font-weight:600!important;
+ line-height:1.35!important;text-align:center!important
+}
+html body main.wrap .station-section .section-head h2::before,
+html body main.wrap .station-section .section-head h2:before{display:none!important;content:none!important}
+html body main.wrap .station-section .section-head p{
+ margin:3px 0 0!important;color:#111!important;font-size:13px!important;font-weight:400!important;
+ line-height:1.4!important;text-align:center!important
+}
+html body main.wrap .station-section .section-head .badge{
+ display:block!important;width:max-content!important;margin:5px auto 0!important;padding:0!important;
+ border:0!important;border-radius:0!important;background:transparent!important;color:#111!important;
+ font-size:12px!important;font-weight:400!important;box-shadow:none!important
+}
+html body main.wrap .station-section .table-wrap{width:100%!important;padding:10px!important;overflow-x:auto!important;background:#fff!important}
+html body main.wrap .station-section .table{
+ width:100%!important;min-width:1100px!important;border-collapse:collapse!important;
+ table-layout:fixed!important;border:1px solid #111!important
+}
+html body main.wrap .station-section .table th,
+html body main.wrap .station-section .table td{
+ padding:7px 5px!important;border:1px solid #111!important;color:#111!important;
+ background:#fff!important;font-size:12px!important;font-weight:400!important;
+ line-height:1.35!important;text-align:center!important;vertical-align:middle!important
+}
+html body main.wrap .station-section .table th{background:#EFEFEF!important;font-weight:600!important}
+html body main.wrap .station-section .table td:nth-child(2),
+html body main.wrap .station-section .table td:nth-child(3){text-align:center!important;font-weight:500!important}
+html body main.wrap .station-section .table tbody tr:nth-child(even) td{background:#FAFAFA!important}
+html body main.wrap .station-section .table tbody tr:hover td{background:#EEF4FF!important}
+html body main.wrap .station-section .table a{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ padding:5px 9px!important;border:1px solid #C9D2DC!important;border-radius:12px!important;
+ background:#F5F7F9!important;color:#526274!important;font-size:11px!important;
+ text-decoration:none!important;box-shadow:none!important
+}
+
+/* จัดลำดับและหัวข้อในรายงาน PNG ให้เหมือนตัวอย่าง */
+html body .pm-report .pm-report-kpi-heading{
+ margin:18px 0 8px!important;padding:0!important;color:#111!important;
+ font-size:19px!important;font-weight:600!important;line-height:1.35!important;text-align:center!important
+}
+html body .pm-report .pm-report-table-block{margin-top:14px!important}
+html body .pm-report .pm-report-section-head h2{font-size:19px!important}
+html body .pm-report .pm-report-kpis{margin-top:0!important}
 </style>
 </body>
 </html>
