@@ -445,7 +445,7 @@ footer,.footer{background:#fff!important;color:#858d97!important;border-color:#e
 <main class="wrap">
 <section class="dashboard-head">
 <div class="head-brand"><div><h2>สถานการณ์ภัยแล้งของนิคมอุตสาหกรรมทั่วประเทศไทย</h2><p>คัดกรองพื้นที่ ติดตามแนวโน้ม และสนับสนุนการเตรียมความพร้อมของนิคมอุตสาหกรรม</p></div></div>
-<div class="report-actions"><button type="button" id="downloadPngBtn"><i class="fa-solid fa-file-image"></i><span>ดาวน์โหลดรายงาน PNG</span></button></div>
+<div class="report-actions"><button type="button" id="downloadPngBtn"><span>ดาวน์โหลดรายงาน PNG</span></button></div>
 </section>
 <section class="kpis dashboard-kpis">
 <div class="kpi kpi-purple"><span>นิคมอุตสาหกรรม / ท่าเรือฯ</span><div><i class="fa-solid fa-city kpi-icon"></i><strong id="estateCount">–</strong></div><small>แห่ง</small></div>
@@ -835,6 +835,22 @@ html body main.wrap>.section .table th{font-weight:600!important}
 html body main.wrap>.section .zoom{
  font-size:10px!important;line-height:1.3!important;box-shadow:none!important;transform:none!important
 }
+</style>
+
+<style id="drought-flat-png-button-20260911-v1">
+/* ปุ่มดาวน์โหลดรายงาน PNG แบบแบน ไม่มีไอคอนหรือมิติ */
+html body main.wrap .report-actions #downloadPngBtn,
+html body main.wrap .report-actions #downloadPngBtn:hover,
+html body main.wrap .report-actions #downloadPngBtn:focus,
+html body main.wrap .report-actions #downloadPngBtn:active{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ gap:0!important;border:0!important;border-radius:0!important;
+ background:#34500E!important;background-image:none!important;color:#fff!important;
+ box-shadow:none!important;filter:none!important;transform:none!important;
+ text-shadow:none!important;transition:none!important
+}
+html body main.wrap .report-actions #downloadPngBtn i,
+html body main.wrap .report-actions #downloadPngBtn svg{display:none!important}
 </style>
 </body>
 </html>
