@@ -654,5 +654,170 @@ html body .pm-report .pm-report-table-block{margin-top:14px!important}
 html body .pm-report .pm-report-section-head h2{font-size:19px!important}
 html body .pm-report .pm-report-kpis{margin-top:0!important}
 </style>
+
+<style id="pm25-drought-visual-clone-20260911-v1">
+/* หน้า PM2.5 ใช้แพตเทิร์นภาพเดียวกับหน้าภัยแล้ง โดยคงข้อมูล PM2.5 เดิม */
+:root{
+ --clone-primary:#3478D4;
+ --clone-dark:#34500E;
+ --clone-button:#1655A6;
+ --clone-ink:#111111;
+ --clone-muted:#171717;
+ --clone-line:#DFE4E8;
+ --clone-soft:#F2F6FC;
+}
+html,html body{background:#FFFFFF!important;color:var(--clone-ink)!important}
+html body main.wrap{
+ width:100%!important;max-width:1800px!important;margin:0 auto!important;padding:12px 16px 34px!important;
+ color:var(--clone-ink)!important
+}
+html body main.wrap .dashboard-head{
+ min-height:86px!important;margin:0 0 14px!important;padding:13px 18px!important;
+ display:flex!important;align-items:center!important;justify-content:space-between!important;gap:18px!important;
+ background:#fff!important;border:1px solid #E5E1E8!important;border-radius:0!important;box-shadow:none!important
+}
+html body main.wrap .dashboard-head .head-brand{display:flex!important;align-items:center!important;gap:0!important}
+html body main.wrap .dashboard-head .head-brand img{display:none!important}
+html body main.wrap .dashboard-head h1{
+ margin:0!important;color:var(--clone-dark)!important;font-size:24px!important;font-weight:600!important;line-height:1.4!important
+}
+html body main.wrap .dashboard-head p{
+ margin:3px 0 0!important;color:#0D1A2B!important;font-size:16px!important;font-weight:400!important;line-height:1.6!important
+}
+html body main.wrap .dashboard-head .head-links #exportPngBtn,
+html body main.wrap .dashboard-head .head-links #exportPngBtn:hover,
+html body main.wrap .dashboard-head .head-links #exportPngBtn:focus,
+html body main.wrap .dashboard-head .head-links #exportPngBtn:active{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ min-height:42px!important;padding:9px 20px!important;border:0!important;border-radius:999px!important;
+ background:var(--clone-button)!important;background-image:none!important;color:#fff!important;
+ box-shadow:none!important;filter:none!important;transform:none!important;text-shadow:none!important;
+ font-size:16px!important;font-weight:400!important;line-height:1.4!important;transition:none!important
+}
+html body main.wrap .kpis{gap:10px!important;margin:0!important}
+html body main.wrap .kpi{
+ min-height:104px!important;padding:11px 12px!important;background:#fff!important;
+ border:0!important;border-radius:12px!important;box-shadow:0 3px 13px rgba(48,60,72,.08)!important;
+ transform:none!important
+}
+html body main.wrap .kpi:hover{transform:none!important;box-shadow:0 3px 13px rgba(48,60,72,.08)!important}
+html body main.wrap .kpi>span{
+ min-height:0!important;color:var(--clone-ink)!important;font-size:14px!important;font-weight:400!important;line-height:1.45!important
+}
+html body main.wrap .kpi .kpi-icon{
+ width:36px!important;height:36px!important;background:var(--clone-soft)!important;
+ color:var(--clone-primary)!important;border-radius:50%!important;box-shadow:none!important
+}
+html body main.wrap .kpi strong{color:var(--clone-primary)!important;font-size:24px!important;font-weight:600!important;line-height:1.25!important}
+html body main.wrap .kpi small{color:var(--clone-ink)!important;font-size:14px!important;font-weight:400!important}
+html body main.wrap .kpi.alert strong,
+html body main.wrap .kpi.alert .kpi-icon{color:#C93B36!important}
+html body main.wrap .kpi.offline strong,
+html body main.wrap .kpi.offline .kpi-icon{color:#6B7263!important}
+html body main.wrap .control,
+html body main.wrap .map-panel,
+html body main.wrap .sources,
+html body main.wrap .guidance{
+ background:#fff!important;border:0!important;border-radius:14px!important;
+ box-shadow:0 3px 18px rgba(42,58,75,.07)!important
+}
+html body main.wrap .panel-head{
+ background:#fff!important;border-bottom:1px solid #EFF1F4!important;box-shadow:none!important
+}
+html body main.wrap .panel-head h2,
+html body main.wrap .sources h2,
+html body main.wrap .guidance h2{
+ color:var(--clone-ink)!important;font-size:18px!important;font-weight:500!important;line-height:1.5!important
+}
+html body main.wrap .panel-head h2::before,
+html body main.wrap .section-head h2::before{background:var(--clone-primary)!important}
+html body main.wrap .badge{
+ border:0!important;border-radius:6px!important;background:var(--clone-soft)!important;
+ color:var(--clone-primary)!important;box-shadow:none!important
+}
+html body main.wrap .filters select,
+html body main.wrap .filters input{
+ border:1px solid var(--clone-line)!important;border-radius:7px!important;
+ background:#fff!important;color:var(--clone-ink)!important;box-shadow:none!important
+}
+html body main.wrap .filters button{
+ border:0!important;border-radius:7px!important;background:var(--clone-primary)!important;color:#fff!important;box-shadow:none!important
+}
+html body main.wrap .summary-item,
+html body main.wrap .source,
+html body main.wrap .check{
+ background:#fff!important;border:1px solid var(--clone-line)!important;
+ border-radius:10px!important;box-shadow:none!important;color:var(--clone-ink)!important
+}
+html body main.wrap .summary-item b,
+html body main.wrap .source b,
+html body main.wrap .check span{color:var(--clone-ink)!important}
+html body main.wrap .map-panel{background:#EEF3F6!important;overflow:hidden!important}
+html body main.wrap .map-title,
+html body main.wrap .map-source{
+ border:0!important;border-radius:7px!important;background:rgba(255,255,255,.95)!important;
+ color:var(--clone-ink)!important;box-shadow:0 3px 14px rgba(42,58,75,.08)!important
+}
+html body main.wrap .map-source{color:var(--clone-primary)!important}
+@media(min-width:1101px){
+ html body main.wrap .map-panel{position:relative!important;top:auto!important;height:auto!important;min-height:0!important;align-self:stretch!important}
+ html body main.wrap .map-panel .pm-map{display:block!important;width:100%!important;height:100%!important;min-height:100%!important;max-height:none!important}
+}
+html body main.wrap .station-section{
+ border:1px solid var(--clone-line)!important;border-radius:0!important;box-shadow:none!important;background:#fff!important
+}
+html body main.wrap .station-section .section-head{
+ display:block!important;padding:12px 14px!important;text-align:center!important;
+ background:#fff!important;border-bottom:1px solid var(--clone-line)!important;box-shadow:none!important
+}
+html body main.wrap .station-section .section-head h2{
+ margin:0!important;padding:0!important;color:var(--clone-ink)!important;
+ font-size:16px!important;font-weight:500!important;line-height:1.45!important;text-align:center!important
+}
+html body main.wrap .station-section .section-head h2::before,
+html body main.wrap .station-section .section-head h2:before{display:none!important;content:none!important}
+html body main.wrap .station-section .section-head p{
+ margin:3px 0 0!important;color:var(--clone-ink)!important;font-size:12px!important;
+ font-weight:400!important;line-height:1.45!important;text-align:center!important
+}
+html body main.wrap .station-section .section-head .badge{
+ display:inline-block!important;margin:5px auto 0!important;padding:0!important;
+ border:0!important;border-radius:0!important;background:transparent!important;
+ color:var(--clone-ink)!important;font-size:11px!important;font-weight:400!important
+}
+html body main.wrap .station-section .table-wrap{padding:8px!important;background:#fff!important;box-shadow:none!important}
+html body main.wrap .station-section .table{
+ width:100%!important;min-width:980px!important;border-collapse:collapse!important;
+ table-layout:fixed!important;border:1px solid #000!important
+}
+html body main.wrap .station-section .table th,
+html body main.wrap .station-section .table td{
+ padding:5px 3px!important;border:1px solid #000!important;color:#111!important;
+ background:#fff!important;font-size:11px!important;font-weight:400!important;
+ line-height:1.35!important;text-align:center!important;vertical-align:middle!important
+}
+html body main.wrap .station-section .table th{background:#E4E4E4!important;font-weight:600!important}
+html body main.wrap .station-section .table tbody tr:nth-child(even) td{background:#FAFAFA!important}
+html body main.wrap .station-section .table tbody tr:hover td{background:#FFF2B8!important}
+html body main.wrap .station-section .status,
+html body main.wrap .station-section .table a{
+ font-size:10px!important;box-shadow:none!important;transform:none!important
+}
+html body main.wrap .footer{
+ padding:12px!important;background:#fff!important;color:var(--clone-muted)!important;
+ border-color:var(--clone-line)!important;font-size:12px!important
+}
+@media(max-width:1100px){
+ html body main.wrap{display:block!important;max-width:1100px!important;padding:10px!important}
+ html body main.wrap .map-panel,
+ html body main.wrap .map-panel .pm-map{height:650px!important;min-height:650px!important;max-height:none!important}
+}
+@media(max-width:560px){
+ html body main.wrap .dashboard-head{display:block!important}
+ html body main.wrap .dashboard-head .head-links{margin-top:8px!important;justify-content:flex-start!important}
+ html body main.wrap .map-panel,
+ html body main.wrap .map-panel .pm-map{height:500px!important;min-height:500px!important}
+}
+</style>
 </body>
 </html>
