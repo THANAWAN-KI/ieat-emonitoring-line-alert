@@ -10075,5 +10075,48 @@ html body main.container #warning>.top-overview-grid{
  [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(moveGap,ms)});
 })();
 </script>
+
+<style id="requested-overview-colors-20260911-v1-style">
+html body #warning .flash-flood-ranking .flash-flood-rank-value{
+ background:#bfca02!important;
+ background-color:#bfca02!important;
+}
+html body #warning .nationwide-indicators .bars .barrow .track .bar,
+html body #warning .nationwide-indicators .bars .barrow b{
+ background:#11862f!important;
+ background-color:#11862f!important;
+ color:#ffffff!important;
+}
+html body #warning .rid-basin-head a[href*="bigdata-swoc.rid.go.th"],
+html body a.rid-basin-fullscreen[href*="bigdata-swoc.rid.go.th"]{
+ background:#007fdb!important;
+ background-color:#007fdb!important;
+ border-color:#007fdb!important;
+ color:#ffffff!important;
+}
+</style>
+<script id="requested-overview-colors-20260911-v1-script">
+(function(){
+ function applyColors(){
+  document.querySelectorAll("#warning .flash-flood-rank-value").forEach(function(el){
+   el.style.setProperty("background","#bfca02","important");
+   el.style.setProperty("background-color","#bfca02","important");
+  });
+  document.querySelectorAll("#warning .nationwide-indicators .barrow .bar,#warning .nationwide-indicators .barrow b").forEach(function(el){
+   el.style.setProperty("background","#11862f","important");
+   el.style.setProperty("background-color","#11862f","important");
+   el.style.setProperty("color","#ffffff","important");
+  });
+  document.querySelectorAll('.rid-basin-head a[href*="bigdata-swoc.rid.go.th"],a.rid-basin-fullscreen[href*="bigdata-swoc.rid.go.th"]').forEach(function(el){
+   el.style.setProperty("background","#007fdb","important");
+   el.style.setProperty("background-color","#007fdb","important");
+   el.style.setProperty("border-color","#007fdb","important");
+   el.style.setProperty("color","#ffffff","important");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",applyColors,{once:true});else applyColors();
+ [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(applyColors,ms)});
+})();
+</script>
 </body>
 </html>
