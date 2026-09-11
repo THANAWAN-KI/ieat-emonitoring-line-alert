@@ -9739,7 +9739,7 @@ html body #warning #nationalHeavyRainCount~span{
 })();
 </script>
 <script id="normalize-stale-version-url-20260911-v1">
-(function(){var expected="20260911-cards9-v4";var u=new URL(location.href);if(u.searchParams.get("v")!==expected){u.searchParams.set("v",expected);history.replaceState(null,"",u.pathname+"?"+u.searchParams.toString()+u.hash)}})();
+(function(){var expected="20260911-cards9-v5";var u=new URL(location.href);if(u.searchParams.get("v")!==expected){u.searchParams.set("v",expected);history.replaceState(null,"",u.pathname+"?"+u.searchParams.toString()+u.hash)}})();
 </script>
 <style id="flood-header-match-fire-20260911-v1">
 html body main.container #warning>.flood-support-heading{
@@ -10521,13 +10521,18 @@ html body main.container #warning .unified-flood-card-icon svg{
  function clean(){
   if(running)return;running=true;
   targetCards().forEach(function(card){
-   card.querySelectorAll(":scope>svg,:scope>.icon,:scope>.n-icon,:scope>.daily-flood-icon,:scope>.flood-nine-icon,:scope>.dashboard-custom-icon,:scope>.rain-card-custom-icon,:scope>.unified-flood-card-icon").forEach(function(el){el.remove()});
-   const holder=document.createElement("span");
-   holder.className="unified-flood-card-icon";
-   holder.innerHTML=icon;
-   card.insertBefore(holder,card.firstChild);
-   card.querySelectorAll(":scope>.metric-card-copy>*").forEach(function(el){
-    el.style.removeProperty("color");
+   card.querySelectorAll(":scope>svg,:scope>.icon,:scope>.n-icon,:scope>.daily-flood-icon,:scope>.flood-nine-icon,:scope>.dashboard-custom-icon,:scope>.rain-card-custom-icon").forEach(function(el){el.remove()});
+   let holder=card.querySelector(":scope>.unified-flood-card-icon");
+   if(!holder){
+    holder=document.createElement("span");
+    holder.className="unified-flood-card-icon";
+    holder.innerHTML=icon;
+    card.insertBefore(holder,card.firstChild);
+   }else if(!holder.querySelector('svg[viewBox="0 0 511.998 511.998"]')){
+    holder.innerHTML=icon;
+   }
+   card.querySelectorAll(":scope>.metric-card-copy>*[style]").forEach(function(el){
+    if(el.style.getPropertyValue("color"))el.style.removeProperty("color");
    });
   });
   running=false;
