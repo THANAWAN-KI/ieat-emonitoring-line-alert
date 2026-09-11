@@ -5258,7 +5258,7 @@ body>.ieat-persistent-tabbar{
  const items=[["warning","ภาพรวม"],["thaiwater-warning","พื้นที่เฝ้าระวัง"],["infographic","ส่งออกข้อมูล"]];
  function activeId(){return document.querySelector("main .view.active")?.id||"warning"}
  function target(id){
-  if(id==="warning")return document.querySelector("#warning .dashboard-intro-inner");
+  if(id==="warning")return document.querySelector("#warning>.flood-support-heading");
   if(id==="thaiwater-warning")return document.querySelector("#thaiwater-warning .watch-intro");
   return document.querySelector("#infographic .multi-report-toolbar");
  }
@@ -5296,27 +5296,6 @@ body>.ieat-persistent-tabbar{
 #warning>.flood-support-heading #floodCornerTabs{display:flex!important;visibility:visible!important;opacity:1!important}
 @media(max-width:1050px){#warning>.flood-support-heading{align-items:stretch!important;flex-direction:column!important}}
 </style>
-<script id="corner-tabs-visible-header-fix-20260909-v2-script">
-(function(){
- "use strict";
- function fixCornerTabs(){
-  const tabs=document.getElementById("floodCornerTabs");if(!tabs)return;
-  const active=document.querySelector("main .view.active");
-  let host=null;
-  if(active&&active.id==="warning")host=document.querySelector("#warning>.flood-support-heading");
-  else if(active&&active.id==="thaiwater-warning")host=document.querySelector("#thaiwater-warning .watch-intro");
-  else if(active&&active.id==="infographic")host=document.querySelector("#infographic .multi-report-toolbar");
-  if(host&&tabs.parentElement!==host)host.appendChild(tabs);
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",fixCornerTabs);else fixCornerTabs();
- document.addEventListener("click",function(e){if(e.target.closest("#floodCornerTabs button"))setTimeout(fixCornerTabs,0)});
- const main=document.querySelector("main.container");
- if(main)new MutationObserver(fixCornerTabs).observe(main,{subtree:true,attributes:true,attributeFilter:["class"]});
- [50,200,600,1200,2500,5000].forEach(ms=>setTimeout(fixCornerTabs,ms));
-})();
-</script>
-
-
 <style id="show-tabs-host-header-final-20260909-v3">
 #warning>.flood-support-heading{display:none!important}
 #warning>.dashboard-intro{display:block!important;margin:0 0 18px!important;padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
@@ -5726,7 +5705,7 @@ body.watch-page-active,body.watch-page-active main.container{background:#fff!imp
 <script id="remove-export-black-marked-sections-20260909-v1-script">
 (function(){
  function removeMarkedExportParts(){
-  document.querySelectorAll("#infographic>.flood-page-purpose,#infographic #finalFloodHeaderTabs,#infographic #floodCornerTabs,#infographic .native-page-tabs").forEach(function(el){el.remove()});
+  document.querySelectorAll("#infographic>.flood-page-purpose,#infographic #finalFloodHeaderTabs,#infographic .native-page-tabs").forEach(function(el){el.remove()});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",removeMarkedExportParts);else removeMarkedExportParts();
  [100,500,1200,2500,5000].forEach(function(ms){setTimeout(removeMarkedExportParts,ms)});
@@ -9925,6 +9904,60 @@ html body #warning #nationalHeavyRainCount~span{
 </script>
 <script id="normalize-stale-version-url-20260911-v1">
 (function(){var expected="20260911-stable";var u=new URL(location.href);if(u.searchParams.get("v")!==expected){u.searchParams.set("v",expected);history.replaceState(null,"",u.pathname+"?"+u.searchParams.toString()+u.hash)}})();
+</script>
+<style id="flood-header-match-fire-20260911-v1">
+html body main.container #warning>.flood-support-heading{
+ display:flex!important;align-items:center!important;justify-content:space-between!important;
+ gap:28px!important;width:100%!important;min-height:86px!important;margin:0 0 12px!important;
+ padding:13px 18px!important;background:#fff!important;border:1px solid #e5e1e8!important;
+ border-radius:0!important;box-shadow:none!important;
+}
+html body #warning>.flood-support-heading .flood-support-heading-copy{
+ flex:1 1 auto!important;min-width:0!important;text-align:left!important;
+}
+html body #warning>.flood-support-heading .flood-support-heading-copy h1{
+ margin:0!important;color:#27548A!important;font-family:"Sarabun",sans-serif!important;
+ font-size:24px!important;font-weight:600!important;line-height:1.3!important;text-align:left!important;
+}
+html body #warning>.flood-support-heading .flood-support-heading-copy p{
+ display:block!important;margin:3px 0 0!important;color:#111!important;
+ font-family:"Sarabun",sans-serif!important;font-size:16px!important;font-weight:300!important;
+ line-height:1.4!important;text-align:left!important;
+}
+html body #warning>.flood-support-heading .flood-support-heading-date{display:none!important}
+html body #warning>.flood-support-heading #floodCornerTabs{
+ position:static!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;
+ flex:0 0 auto!important;width:auto!important;margin:0!important;padding:0!important;gap:10px!important;
+ transform:none!important;visibility:visible!important;opacity:1!important;
+}
+html body #warning>.flood-support-heading #floodCornerTabs button{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ min-width:145px!important;min-height:42px!important;padding:9px 18px!important;
+ border:0!important;border-radius:999px!important;background:#F7F6F9!important;
+ color:#6A4A7B!important;font-family:"Sarabun",sans-serif!important;font-size:16px!important;
+ font-weight:400!important;line-height:1.3!important;white-space:nowrap!important;box-shadow:none!important;
+}
+html body #warning>.flood-support-heading #floodCornerTabs button.active{
+ background:#59267C!important;color:#fff!important;font-weight:600!important;
+}
+@media(max-width:900px){
+ html body main.container #warning>.flood-support-heading{align-items:stretch!important;flex-direction:column!important;gap:12px!important}
+ html body #warning>.flood-support-heading #floodCornerTabs{justify-content:flex-start!important;width:100%!important;overflow-x:auto!important}
+ html body #warning>.flood-support-heading #floodCornerTabs button{min-width:130px!important}
+}
+</style>
+<script id="flood-header-match-fire-20260911-v1-script">
+(function(){
+ function apply(){
+  var head=document.querySelector("#warning>.flood-support-heading");if(!head)return;
+  var copy=head.querySelector(".flood-support-heading-copy")||head.firstElementChild;if(!copy)return;
+  copy.classList.add("flood-support-heading-copy");
+  copy.innerHTML="<h1>ข้อมูลสนับสนุนกรณีเกิดเหตุน้ำท่วม</h1><p>ติดตามพื้นที่เฝ้าระวัง ปริมาณฝน และสถานการณ์น้ำจากข้อมูลล่าสุด</p>";
+  var tabs=document.getElementById("floodCornerTabs");if(tabs&&tabs.parentElement!==head)head.appendChild(tabs);
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply);else apply();
+ setTimeout(apply,100);setTimeout(apply,700);
+})();
 </script>
 </body>
 </html>
