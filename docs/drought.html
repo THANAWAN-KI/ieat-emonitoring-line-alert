@@ -456,7 +456,7 @@ footer,.footer{background:#fff!important;color:#858d97!important;border-color:#e
 </section>
 <section class="charts-grid charts-focus">
 <div class="chart-panel"><h3>10 อันดับนิคมอุตสาหกรรม / ท่าเรือ ที่มีการใช้น้ำมากที่สุด</h3><div class="chart-box"><canvas id="waterUseChart"></canvas></div><p class="chart-hint">คลิกแท่งกราฟเพื่อซูมไปยังตำแหน่งบนแผนที่</p></div>
-<div class="chart-panel"><h3><i class="fa-solid fa-water"></i> แนวโน้มปริมาณน้ำสำรอง</h3><div class="chart-box"><canvas id="reserveChart"></canvas></div><p class="chart-hint">คลิกเดือนเพื่อกรองข้อมูลและแสดงตำแหน่งบนแผนที่</p></div>
+<div class="chart-panel"><h3>แนวโน้มปริมาณน้ำสำรอง</h3><div class="chart-box"><canvas id="reserveChart"></canvas></div><p class="chart-hint">คลิกเดือนเพื่อกรองข้อมูลและแสดงตำแหน่งบนแผนที่</p></div>
 </section>
 <section class="main-grid">
 <aside class="panel filters">
@@ -987,6 +987,22 @@ html body main.wrap .dashboard-kpis .kpi-icon{
 }
 html body main.wrap .dashboard-kpis .kpi-icon svg{
  display:block!important;width:38px!important;height:38px!important;max-width:100%!important
+}
+</style>
+<style id="drought-chart-map-heading-override-20260911-v1">
+html body main.wrap .charts-focus .chart-panel h3,
+html body main.wrap .station-section .section-head h2{
+ color:#537b35!important;
+}
+@media(min-width:1101px){
+ html body main.wrap .charts-grid,
+ html body main.wrap .main-grid{
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+ }
+ html body main.wrap .main-grid .map-panel{
+  width:100%!important;
+  max-width:none!important;
+ }
 }
 </style>
 </body>
