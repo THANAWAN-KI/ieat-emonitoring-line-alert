@@ -88,16 +88,16 @@ footer,.footer{background:#fff!important;color:#858d97!important;border-color:#e
 <main class="wrap">
   <section class="dashboard-head">
     <div class="head-brand"><img src="./assets/cloudy-cloud-svgrepo-com.png" alt="ฝุ่น PM2.5"><div><h1>สถานการณ์ฝุ่น PM2.5 ของนิคมอุตสาหกรรมทั่วประเทศไทย</h1><p>ติดตามสถานีคุณภาพอากาศ คัดกรองพื้นที่ และสนับสนุนการเตรียมความพร้อมของนิคมอุตสาหกรรม</p></div></div>
-    <div class="head-links"><button type="button" id="exportPngBtn">ส่งออกรายงาน PNG</button></div>
+    <div class="head-links"><a href="https://emonitor.ieat.go.th/emcc/pm25.php" target="_blank" rel="noopener">e-Monitoring กนอ.</a><a href="https://pm25.gistda.or.th/" target="_blank" rel="noopener">PM2.5 GISTDA</a><a class="primary" href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=c2b910f0bc5e42e7ae68a2bb7a048157" target="_blank" rel="noopener">เปิดแผนที่เต็มหน้า</a><button type="button" id="exportPngBtn">ส่งออกรายงาน PNG</button></div>
   </section>
 
   <section class="kpis" aria-label="ตัวชี้วัดสถานีคุณภาพอากาศ">
-    <article class="kpi"><span>สถานีคุณภาพอากาศทั้งหมด</span><div class="kpi-row"><i class="kpi-icon">●</i><strong id="aqmTotal">–</strong></div><small>สถานี</small></article>
-    <article class="kpi"><span>สถานีที่ออนไลน์</span><div class="kpi-row"><i class="kpi-icon">✓</i><strong id="aqmOnline">–</strong></div><small>สถานี</small></article>
-    <article class="kpi offline"><span>สถานีที่ออฟไลน์</span><div class="kpi-row"><i class="kpi-icon">–</i><strong id="aqmOffline">–</strong></div><small>สถานี</small></article>
-    <article class="kpi alert"><span>สถานีที่พบข้อมูล PM2.5 ผิดปกติ</span><div class="kpi-row"><i class="kpi-icon">!</i><strong id="pmAlert">–</strong></div><small>สถานี</small></article>
-    <article class="kpi"><span>นิคมอุตสาหกรรมที่มีสถานี</span><div class="kpi-row"><i class="kpi-icon">⌂</i><strong id="estateTotal">–</strong></div><small>แห่ง</small></article>
-    <article class="kpi"><span>สถานีที่แสดงบนแผนที่</span><div class="kpi-row"><i class="kpi-icon">⌖</i><strong id="mappedTotal">–</strong></div><small>สถานี</small></article>
+    <article class="kpi"><span>สถานีคุณภาพอากาศทั้งหมด</span><div class="kpi-row"><i class="kpi-icon"><svg fill="#52057f" height="200px" width="200px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 195.732 195.732" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M169.421,152.547H38.766C17.391,152.547,0,135.157,0,113.781s17.391-38.767,38.766-38.767c5.094,0,10.02,0.967,14.674,2.876 c8.177-20.847,28.363-34.705,50.902-34.705c30.151,0,54.681,24.529,54.681,54.681c0,1.419-0.056,2.847-0.167,4.273 c3.314-1.457,6.906-2.215,10.566-2.215c14.508,0,26.311,11.804,26.311,26.312S183.929,152.547,169.421,152.547z M38.766,79.014 C19.596,79.014,4,94.611,4,113.781s15.596,34.767,34.766,34.767h130.655c12.302,0,22.311-10.009,22.311-22.312 s-10.009-22.312-22.311-22.312c-4.227,0-8.345,1.192-11.909,3.448c-0.661,0.419-1.506,0.413-2.161-0.014 c-0.656-0.427-1.002-1.196-0.887-1.97c0.371-2.494,0.559-5.025,0.559-7.523c0-27.945-22.735-50.681-50.681-50.681 c-21.563,0-40.802,13.685-47.875,34.053c-0.187,0.537-0.593,0.97-1.118,1.189c-0.525,0.218-1.119,0.204-1.632-0.041 C49.025,80.149,43.995,79.014,38.766,79.014z M138.366,136.069h-7.174c-0.809,0-1.538-0.487-1.848-1.234 c-0.31-0.748-0.139-1.608,0.434-2.18l5.651-5.65c0.604-0.604,0.938-1.409,0.938-2.265v-2.33c0-0.735-0.598-1.333-1.333-1.333h-0.167 c-0.735,0-1.333,0.598-1.333,1.333c0,1.104-0.896,2-2,2s-2-0.896-2-2c0-2.94,2.393-5.333,5.333-5.333h0.167 c2.941,0,5.333,2.393,5.333,5.333v2.33c0,1.924-0.749,3.732-2.109,5.093l-2.236,2.236h2.346c1.104,0,2,0.896,2,2 S139.471,136.069,138.366,136.069z M107.272,130.33c-10.859,0-19.693-8.834-19.693-19.692c0-10.859,8.834-19.693,19.693-19.693 s19.693,8.834,19.693,19.693C126.966,121.496,118.131,130.33,107.272,130.33z M107.272,94.944c-8.653,0-15.693,7.04-15.693,15.693 c0,8.652,7.04,15.692,15.693,15.692c8.653,0,15.693-7.04,15.693-15.692C122.966,101.984,115.926,94.944,107.272,94.944z M78.629,129.887h-6.527c-10.614,0-19.25-8.636-19.25-19.25s8.636-19.25,19.25-19.25h6.527c1.104,0,2,0.896,2,2s-0.896,2-2,2h-6.527 c-8.409,0-15.25,6.841-15.25,15.25s6.841,15.25,15.25,15.25h6.527c1.104,0,2,0.896,2,2S79.734,129.887,78.629,129.887z"></path> </g></svg></i><strong id="aqmTotal">–</strong></div><small>สถานี</small></article>
+    <article class="kpi"><span>สถานีที่ออนไลน์</span><div class="kpi-row"><i class="kpi-icon"><svg fill="#52057f" height="200px" width="200px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 195.732 195.732" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M169.421,152.547H38.766C17.391,152.547,0,135.157,0,113.781s17.391-38.767,38.766-38.767c5.094,0,10.02,0.967,14.674,2.876 c8.177-20.847,28.363-34.705,50.902-34.705c30.151,0,54.681,24.529,54.681,54.681c0,1.419-0.056,2.847-0.167,4.273 c3.314-1.457,6.906-2.215,10.566-2.215c14.508,0,26.311,11.804,26.311,26.312S183.929,152.547,169.421,152.547z M38.766,79.014 C19.596,79.014,4,94.611,4,113.781s15.596,34.767,34.766,34.767h130.655c12.302,0,22.311-10.009,22.311-22.312 s-10.009-22.312-22.311-22.312c-4.227,0-8.345,1.192-11.909,3.448c-0.661,0.419-1.506,0.413-2.161-0.014 c-0.656-0.427-1.002-1.196-0.887-1.97c0.371-2.494,0.559-5.025,0.559-7.523c0-27.945-22.735-50.681-50.681-50.681 c-21.563,0-40.802,13.685-47.875,34.053c-0.187,0.537-0.593,0.97-1.118,1.189c-0.525,0.218-1.119,0.204-1.632-0.041 C49.025,80.149,43.995,79.014,38.766,79.014z M138.366,136.069h-7.174c-0.809,0-1.538-0.487-1.848-1.234 c-0.31-0.748-0.139-1.608,0.434-2.18l5.651-5.65c0.604-0.604,0.938-1.409,0.938-2.265v-2.33c0-0.735-0.598-1.333-1.333-1.333h-0.167 c-0.735,0-1.333,0.598-1.333,1.333c0,1.104-0.896,2-2,2s-2-0.896-2-2c0-2.94,2.393-5.333,5.333-5.333h0.167 c2.941,0,5.333,2.393,5.333,5.333v2.33c0,1.924-0.749,3.732-2.109,5.093l-2.236,2.236h2.346c1.104,0,2,0.896,2,2 S139.471,136.069,138.366,136.069z M107.272,130.33c-10.859,0-19.693-8.834-19.693-19.692c0-10.859,8.834-19.693,19.693-19.693 s19.693,8.834,19.693,19.693C126.966,121.496,118.131,130.33,107.272,130.33z M107.272,94.944c-8.653,0-15.693,7.04-15.693,15.693 c0,8.652,7.04,15.692,15.693,15.692c8.653,0,15.693-7.04,15.693-15.692C122.966,101.984,115.926,94.944,107.272,94.944z M78.629,129.887h-6.527c-10.614,0-19.25-8.636-19.25-19.25s8.636-19.25,19.25-19.25h6.527c1.104,0,2,0.896,2,2s-0.896,2-2,2h-6.527 c-8.409,0-15.25,6.841-15.25,15.25s6.841,15.25,15.25,15.25h6.527c1.104,0,2,0.896,2,2S79.734,129.887,78.629,129.887z"></path> </g></svg></i><strong id="aqmOnline">–</strong></div><small>สถานี</small></article>
+    <article class="kpi offline"><span>สถานีที่ออฟไลน์</span><div class="kpi-row"><i class="kpi-icon"><svg fill="#52057f" height="200px" width="200px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 195.732 195.732" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M169.421,152.547H38.766C17.391,152.547,0,135.157,0,113.781s17.391-38.767,38.766-38.767c5.094,0,10.02,0.967,14.674,2.876 c8.177-20.847,28.363-34.705,50.902-34.705c30.151,0,54.681,24.529,54.681,54.681c0,1.419-0.056,2.847-0.167,4.273 c3.314-1.457,6.906-2.215,10.566-2.215c14.508,0,26.311,11.804,26.311,26.312S183.929,152.547,169.421,152.547z M38.766,79.014 C19.596,79.014,4,94.611,4,113.781s15.596,34.767,34.766,34.767h130.655c12.302,0,22.311-10.009,22.311-22.312 s-10.009-22.312-22.311-22.312c-4.227,0-8.345,1.192-11.909,3.448c-0.661,0.419-1.506,0.413-2.161-0.014 c-0.656-0.427-1.002-1.196-0.887-1.97c0.371-2.494,0.559-5.025,0.559-7.523c0-27.945-22.735-50.681-50.681-50.681 c-21.563,0-40.802,13.685-47.875,34.053c-0.187,0.537-0.593,0.97-1.118,1.189c-0.525,0.218-1.119,0.204-1.632-0.041 C49.025,80.149,43.995,79.014,38.766,79.014z M138.366,136.069h-7.174c-0.809,0-1.538-0.487-1.848-1.234 c-0.31-0.748-0.139-1.608,0.434-2.18l5.651-5.65c0.604-0.604,0.938-1.409,0.938-2.265v-2.33c0-0.735-0.598-1.333-1.333-1.333h-0.167 c-0.735,0-1.333,0.598-1.333,1.333c0,1.104-0.896,2-2,2s-2-0.896-2-2c0-2.94,2.393-5.333,5.333-5.333h0.167 c2.941,0,5.333,2.393,5.333,5.333v2.33c0,1.924-0.749,3.732-2.109,5.093l-2.236,2.236h2.346c1.104,0,2,0.896,2,2 S139.471,136.069,138.366,136.069z M107.272,130.33c-10.859,0-19.693-8.834-19.693-19.692c0-10.859,8.834-19.693,19.693-19.693 s19.693,8.834,19.693,19.693C126.966,121.496,118.131,130.33,107.272,130.33z M107.272,94.944c-8.653,0-15.693,7.04-15.693,15.693 c0,8.652,7.04,15.692,15.693,15.692c8.653,0,15.693-7.04,15.693-15.692C122.966,101.984,115.926,94.944,107.272,94.944z M78.629,129.887h-6.527c-10.614,0-19.25-8.636-19.25-19.25s8.636-19.25,19.25-19.25h6.527c1.104,0,2,0.896,2,2s-0.896,2-2,2h-6.527 c-8.409,0-15.25,6.841-15.25,15.25s6.841,15.25,15.25,15.25h6.527c1.104,0,2,0.896,2,2S79.734,129.887,78.629,129.887z"></path> </g></svg></i><strong id="aqmOffline">–</strong></div><small>สถานี</small></article>
+    <article class="kpi alert"><span>สถานีที่พบข้อมูล PM2.5 ผิดปกติ</span><div class="kpi-row"><i class="kpi-icon"><svg fill="#52057f" height="200px" width="200px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 195.732 195.732" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M169.421,152.547H38.766C17.391,152.547,0,135.157,0,113.781s17.391-38.767,38.766-38.767c5.094,0,10.02,0.967,14.674,2.876 c8.177-20.847,28.363-34.705,50.902-34.705c30.151,0,54.681,24.529,54.681,54.681c0,1.419-0.056,2.847-0.167,4.273 c3.314-1.457,6.906-2.215,10.566-2.215c14.508,0,26.311,11.804,26.311,26.312S183.929,152.547,169.421,152.547z M38.766,79.014 C19.596,79.014,4,94.611,4,113.781s15.596,34.767,34.766,34.767h130.655c12.302,0,22.311-10.009,22.311-22.312 s-10.009-22.312-22.311-22.312c-4.227,0-8.345,1.192-11.909,3.448c-0.661,0.419-1.506,0.413-2.161-0.014 c-0.656-0.427-1.002-1.196-0.887-1.97c0.371-2.494,0.559-5.025,0.559-7.523c0-27.945-22.735-50.681-50.681-50.681 c-21.563,0-40.802,13.685-47.875,34.053c-0.187,0.537-0.593,0.97-1.118,1.189c-0.525,0.218-1.119,0.204-1.632-0.041 C49.025,80.149,43.995,79.014,38.766,79.014z M138.366,136.069h-7.174c-0.809,0-1.538-0.487-1.848-1.234 c-0.31-0.748-0.139-1.608,0.434-2.18l5.651-5.65c0.604-0.604,0.938-1.409,0.938-2.265v-2.33c0-0.735-0.598-1.333-1.333-1.333h-0.167 c-0.735,0-1.333,0.598-1.333,1.333c0,1.104-0.896,2-2,2s-2-0.896-2-2c0-2.94,2.393-5.333,5.333-5.333h0.167 c2.941,0,5.333,2.393,5.333,5.333v2.33c0,1.924-0.749,3.732-2.109,5.093l-2.236,2.236h2.346c1.104,0,2,0.896,2,2 S139.471,136.069,138.366,136.069z M107.272,130.33c-10.859,0-19.693-8.834-19.693-19.692c0-10.859,8.834-19.693,19.693-19.693 s19.693,8.834,19.693,19.693C126.966,121.496,118.131,130.33,107.272,130.33z M107.272,94.944c-8.653,0-15.693,7.04-15.693,15.693 c0,8.652,7.04,15.692,15.693,15.692c8.653,0,15.693-7.04,15.693-15.692C122.966,101.984,115.926,94.944,107.272,94.944z M78.629,129.887h-6.527c-10.614,0-19.25-8.636-19.25-19.25s8.636-19.25,19.25-19.25h6.527c1.104,0,2,0.896,2,2s-0.896,2-2,2h-6.527 c-8.409,0-15.25,6.841-15.25,15.25s6.841,15.25,15.25,15.25h6.527c1.104,0,2,0.896,2,2S79.734,129.887,78.629,129.887z"></path> </g></svg></i><strong id="pmAlert">–</strong></div><small>สถานี</small></article>
+    <article class="kpi"><span>นิคมอุตสาหกรรมที่มีสถานี</span><div class="kpi-row"><i class="kpi-icon"><svg fill="#52057f" height="200px" width="200px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 195.732 195.732" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M169.421,152.547H38.766C17.391,152.547,0,135.157,0,113.781s17.391-38.767,38.766-38.767c5.094,0,10.02,0.967,14.674,2.876 c8.177-20.847,28.363-34.705,50.902-34.705c30.151,0,54.681,24.529,54.681,54.681c0,1.419-0.056,2.847-0.167,4.273 c3.314-1.457,6.906-2.215,10.566-2.215c14.508,0,26.311,11.804,26.311,26.312S183.929,152.547,169.421,152.547z M38.766,79.014 C19.596,79.014,4,94.611,4,113.781s15.596,34.767,34.766,34.767h130.655c12.302,0,22.311-10.009,22.311-22.312 s-10.009-22.312-22.311-22.312c-4.227,0-8.345,1.192-11.909,3.448c-0.661,0.419-1.506,0.413-2.161-0.014 c-0.656-0.427-1.002-1.196-0.887-1.97c0.371-2.494,0.559-5.025,0.559-7.523c0-27.945-22.735-50.681-50.681-50.681 c-21.563,0-40.802,13.685-47.875,34.053c-0.187,0.537-0.593,0.97-1.118,1.189c-0.525,0.218-1.119,0.204-1.632-0.041 C49.025,80.149,43.995,79.014,38.766,79.014z M138.366,136.069h-7.174c-0.809,0-1.538-0.487-1.848-1.234 c-0.31-0.748-0.139-1.608,0.434-2.18l5.651-5.65c0.604-0.604,0.938-1.409,0.938-2.265v-2.33c0-0.735-0.598-1.333-1.333-1.333h-0.167 c-0.735,0-1.333,0.598-1.333,1.333c0,1.104-0.896,2-2,2s-2-0.896-2-2c0-2.94,2.393-5.333,5.333-5.333h0.167 c2.941,0,5.333,2.393,5.333,5.333v2.33c0,1.924-0.749,3.732-2.109,5.093l-2.236,2.236h2.346c1.104,0,2,0.896,2,2 S139.471,136.069,138.366,136.069z M107.272,130.33c-10.859,0-19.693-8.834-19.693-19.692c0-10.859,8.834-19.693,19.693-19.693 s19.693,8.834,19.693,19.693C126.966,121.496,118.131,130.33,107.272,130.33z M107.272,94.944c-8.653,0-15.693,7.04-15.693,15.693 c0,8.652,7.04,15.692,15.693,15.692c8.653,0,15.693-7.04,15.693-15.692C122.966,101.984,115.926,94.944,107.272,94.944z M78.629,129.887h-6.527c-10.614,0-19.25-8.636-19.25-19.25s8.636-19.25,19.25-19.25h6.527c1.104,0,2,0.896,2,2s-0.896,2-2,2h-6.527 c-8.409,0-15.25,6.841-15.25,15.25s6.841,15.25,15.25,15.25h6.527c1.104,0,2,0.896,2,2S79.734,129.887,78.629,129.887z"></path> </g></svg></i><strong id="estateTotal">–</strong></div><small>แห่ง</small></article>
+    <article class="kpi"><span>สถานีที่แสดงบนแผนที่</span><div class="kpi-row"><i class="kpi-icon"><svg fill="#52057f" height="200px" width="200px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 195.732 195.732" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M169.421,152.547H38.766C17.391,152.547,0,135.157,0,113.781s17.391-38.767,38.766-38.767c5.094,0,10.02,0.967,14.674,2.876 c8.177-20.847,28.363-34.705,50.902-34.705c30.151,0,54.681,24.529,54.681,54.681c0,1.419-0.056,2.847-0.167,4.273 c3.314-1.457,6.906-2.215,10.566-2.215c14.508,0,26.311,11.804,26.311,26.312S183.929,152.547,169.421,152.547z M38.766,79.014 C19.596,79.014,4,94.611,4,113.781s15.596,34.767,34.766,34.767h130.655c12.302,0,22.311-10.009,22.311-22.312 s-10.009-22.312-22.311-22.312c-4.227,0-8.345,1.192-11.909,3.448c-0.661,0.419-1.506,0.413-2.161-0.014 c-0.656-0.427-1.002-1.196-0.887-1.97c0.371-2.494,0.559-5.025,0.559-7.523c0-27.945-22.735-50.681-50.681-50.681 c-21.563,0-40.802,13.685-47.875,34.053c-0.187,0.537-0.593,0.97-1.118,1.189c-0.525,0.218-1.119,0.204-1.632-0.041 C49.025,80.149,43.995,79.014,38.766,79.014z M138.366,136.069h-7.174c-0.809,0-1.538-0.487-1.848-1.234 c-0.31-0.748-0.139-1.608,0.434-2.18l5.651-5.65c0.604-0.604,0.938-1.409,0.938-2.265v-2.33c0-0.735-0.598-1.333-1.333-1.333h-0.167 c-0.735,0-1.333,0.598-1.333,1.333c0,1.104-0.896,2-2,2s-2-0.896-2-2c0-2.94,2.393-5.333,5.333-5.333h0.167 c2.941,0,5.333,2.393,5.333,5.333v2.33c0,1.924-0.749,3.732-2.109,5.093l-2.236,2.236h2.346c1.104,0,2,0.896,2,2 S139.471,136.069,138.366,136.069z M107.272,130.33c-10.859,0-19.693-8.834-19.693-19.692c0-10.859,8.834-19.693,19.693-19.693 s19.693,8.834,19.693,19.693C126.966,121.496,118.131,130.33,107.272,130.33z M107.272,94.944c-8.653,0-15.693,7.04-15.693,15.693 c0,8.652,7.04,15.692,15.693,15.692c8.653,0,15.693-7.04,15.693-15.692C122.966,101.984,115.926,94.944,107.272,94.944z M78.629,129.887h-6.527c-10.614,0-19.25-8.636-19.25-19.25s8.636-19.25,19.25-19.25h6.527c1.104,0,2,0.896,2,2s-0.896,2-2,2h-6.527 c-8.409,0-15.25,6.841-15.25,15.25s6.841,15.25,15.25,15.25h6.527c1.104,0,2,0.896,2,2S79.734,129.887,78.629,129.887z"></path> </g></svg></i><strong id="mappedTotal">–</strong></div><small>สถานี</small></article>
   </section>
 
   <section class="panel control">
@@ -124,9 +124,11 @@ footer,.footer{background:#fff!important;color:#858d97!important;border-color:#e
 </main>
 <div class="export-stage" aria-hidden="true">
   <section class="pm-report" id="pmReport">
+    <header class="pm-report-head">
+      <div class="pm-report-brand"><img src="./ieat_logo.png.PNG" alt=""><div><b>การนิคมอุตสาหกรรมแห่งประเทศไทย</b><span>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย (EMCC)</span></div></div>
+      <div class="pm-report-label">รายงานสถานการณ์คุณภาพอากาศ</div>
+    </header>
     <section class="pm-report-title"><div><h1>รายงานค่าฝุ่นละออง PM2.5</h1><p>พื้นที่นิคมอุตสาหกรรมทั่วประเทศไทย</p></div><div><b id="reportDate">–</b><span id="reportDataTime">–</span></div></section>
-    <section class="pm-report-table-block"><div class="pm-report-section-head"><h2>ข้อมูลสถานีตรวจวัดคุณภาพอากาศของนิคมอุตสาหกรรม</h2><span>เรียงสถานีที่พบ PM2.5 และสถานีออฟไลน์ก่อน</span></div><table><thead><tr><th>ลำดับ</th><th>สถานีตรวจวัด</th><th>นิคมอุตสาหกรรม</th><th>สถานะ</th><th>ข้อมูลล่าสุด</th><th>ข้อมูล PM2.5 / หมายเหตุ</th></tr></thead><tbody id="reportStationRows"></tbody></table></section>
-    <h2 class="pm-report-kpi-heading">สรุปข้อมูลสถานีตรวจวัดคุณภาพอากาศ</h2>
     <section class="pm-report-kpis">
       <article><span>สถานีทั้งหมด</span><strong id="reportTotal">–</strong><small>สถานี</small></article>
       <article><span>ออนไลน์</span><strong id="reportOnline">–</strong><small>สถานี</small></article>
@@ -135,6 +137,7 @@ footer,.footer{background:#fff!important;color:#858d97!important;border-color:#e
       <article><span>พื้นที่นิคมฯ</span><strong id="reportEstates">–</strong><small>แห่ง</small></article>
     </section>
     <section class="pm-report-summary"><h2>สรุปสถานการณ์</h2><p id="reportSummaryText">กำลังประมวลผลข้อมูลสถานีคุณภาพอากาศ</p></section>
+    <section class="pm-report-table-block"><div class="pm-report-section-head"><h2>สถานีที่ต้องติดตาม</h2><span>เรียงสถานีที่พบ PM2.5 และสถานีออฟไลน์ก่อน</span></div><table><thead><tr><th>ลำดับ</th><th>สถานีตรวจวัด</th><th>นิคมอุตสาหกรรม</th><th>สถานะ</th><th>ข้อมูลล่าสุด</th><th>ข้อมูล PM2.5 / หมายเหตุ</th></tr></thead><tbody id="reportStationRows"></tbody></table></section>
     <section class="pm-report-note"><b>ข้อสังเกตสำคัญ</b><p>ข้อมูลใช้สำหรับสนับสนุนการเฝ้าระวังเบื้องต้น ควรตรวจสอบเวลาตรวจวัด สถานะการเชื่อมต่อ ประกาศทางการ และข้อมูลภาคสนามก่อนสื่อสารหรือดำเนินการ</p></section>
     <footer class="pm-report-footer"><span>แหล่งข้อมูล: ระบบ e-Monitoring กนอ. / GISTDA PM2.5</span><span>จัดทำโดย EMCC กนอ.</span></footer>
   </section>
@@ -182,9 +185,8 @@ footer,.footer{background:#fff!important;color:#858d97!important;border-color:#e
     try{
       if(typeof html2canvas!=="function")throw new Error("ไม่พบเครื่องมือสร้างภาพ");
       buildPmReport();if(document.fonts?.ready)await document.fonts.ready;
-      if(document.fonts?.load){await Promise.all([document.fonts.load("700 34px Sarabun"),document.fonts.load("400 20px Sarabun"),document.fonts.load("400 17px Sarabun")]);}
       await new Promise(resolve=>setTimeout(resolve,300));
-      const canvas=await html2canvas($("pmReport"),{scale:1,useCORS:true,backgroundColor:"#ffffff",logging:false});
+      const canvas=await html2canvas($("pmReport"),{scale:1.25,useCORS:true,backgroundColor:"#ffffff",logging:false});
       const link=document.createElement("a");link.download="IEAT_PM25_Report_"+new Date().toISOString().slice(0,10)+".png";link.href=canvas.toDataURL("image/png");link.click();
     }catch(error){console.error(error);alert("ไม่สามารถสร้างรายงาน PNG ได้ กรุณาลองใหม่อีกครั้ง");}
     finally{button.disabled=false;button.textContent=label;}
@@ -350,13 +352,13 @@ html body .kpi strong,html body [class*="kpi"] strong{font-size:28px!important;f
 </style>
 <script id="pm25-match-flood-font-lock-20260910-v1">
 (function(){
- function apply(){document.querySelectorAll("body *:not(svg):not(path):not(.material-icons):not([class*='fa-'])").forEach(function(el){if(!el.closest(".pm-report"))el.style.setProperty("font-family","Sarabun, 'TH Sarabun New', sans-serif","important")})}
+ function apply(){document.querySelectorAll("body *:not(svg):not(path):not(.material-icons):not([class*='fa-'])").forEach(function(el){el.style.setProperty("font-family","Sarabun, 'TH Sarabun New', sans-serif","important")})}
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply);else apply();setTimeout(apply,500);
 })();
 </script>
 
-<style id="ieat-disaster-shared-pattern-20260911-v2">
-/* ระบบตัวอักษรเดียวกับ docs/flood-report.html — ไม่เปลี่ยนข้อมูลหรือฟังก์ชัน */
+<style id="ieat-disaster-shared-pattern-20260911-v1">
+/* รูปแบบกลาง: ไม่เปลี่ยนข้อมูลสถานี แผนที่ หรือระบบกรอง */
 html body,
 html body button,
 html body input,
@@ -365,521 +367,23 @@ html body textarea,
 html body table,
 html body th,
 html body td{font-family:"Noto Sans Thai","Sarabun",sans-serif!important}
-html body{font-size:16px!important;font-weight:400!important;line-height:1.6!important}
-html body main.wrap h1{font-size:24px!important;font-weight:600!important;line-height:1.4!important;letter-spacing:0!important}
-html body main.wrap h2{font-size:20px!important;font-weight:600!important;line-height:1.45!important;letter-spacing:0!important}
-html body main.wrap h3{font-size:18px!important;font-weight:500!important;line-height:1.5!important;letter-spacing:0!important}
-html body main.wrap h4{font-size:16px!important;font-weight:500!important;line-height:1.5!important}
-html body main.wrap p,
-html body main.wrap li,
-html body main.wrap td,
-html body main.wrap label,
-html body main.wrap input,
-html body main.wrap select,
-html body main.wrap textarea{font-size:16px!important;font-weight:400!important;line-height:1.6!important}
-html body main.wrap small,
-html body main.wrap .muted,
-html body main.wrap [class*="subtitle"],
-html body main.wrap [class*="description"],
-html body main.wrap [class*="meta"],
-html body main.wrap [class*="hint"]{font-size:14px!important;font-weight:400!important;line-height:1.5!important}
-html body main.wrap button,
-html body main.wrap a{font-size:16px!important;font-weight:400!important;line-height:1.4!important}
-html body main.wrap th{font-size:14px!important;font-weight:600!important;line-height:1.5!important}
-html body main.wrap .kpi>span{font-size:14px!important;font-weight:400!important;line-height:1.45!important}
-html body main.wrap .kpi strong{font-size:24px!important;font-weight:600!important;line-height:1.25!important}
-html body main.wrap .dashboard-head{
- min-height:86px!important;margin:0 0 14px!important;padding:13px 18px!important;
+html body{font-size:16px!important;font-weight:400!important;line-height:1.5!important}
+html body .dashboard-head{
+ min-height:86px!important;margin:0!important;padding:13px 18px!important;
  background:#fff!important;border:1px solid #e5e1e8!important;border-radius:0!important;box-shadow:none!important
 }
-html body main.wrap .dashboard-head .head-brand img{display:none!important}
-html body main.wrap .dashboard-head h1,
-html body main.wrap .dashboard-head h2{margin:0!important;color:#1655A6!important;font-size:24px!important;font-weight:600!important;line-height:1.4!important}
-html body main.wrap .dashboard-head p{margin:3px 0 0!important;color:#0d1a2b!important;font-size:16px!important;font-weight:400!important;line-height:1.6!important}
-</style>
-
-<style id="pm25-blue-heading-palette-and-actions-20260911-v1">
-/* โทนสี PM2.5 ให้สอดคล้องกับหัวข้อสีน้ำเงิน */
-:root{
- --pm-primary:#1655A6;
- --pm-accent:#306BEC;
- --pm-soft:#EEF4FF;
- --pm-soft-2:#F7FAFF;
- --pm-line:#D7E3F4;
- --pm-ink:#0D1A2B;
- --pm-muted:#526274;
- --pm-alert:#D63B4B;
- --pm-warning:#D88712;
-}
-
-/* เหลือเฉพาะปุ่มส่งออกรายงาน PNG */
-html body main.wrap .dashboard-head .head-links>a{display:none!important}
-html body main.wrap .dashboard-head .head-links{
- display:flex!important;align-items:center!important;justify-content:flex-end!important;margin-left:auto!important
-}
-html body main.wrap .dashboard-head .head-links #exportPngBtn{
- display:inline-flex!important;align-items:center!important;justify-content:center!important;
- min-height:42px!important;padding:9px 18px!important;border:0!important;border-radius:999px!important;
- background:var(--pm-primary)!important;color:#fff!important;box-shadow:none!important;
- font-size:16px!important;font-weight:500!important;line-height:1.3!important;cursor:pointer!important
-}
-html body main.wrap .dashboard-head .head-links #exportPngBtn:hover{background:#104581!important}
-html body main.wrap .dashboard-head h1{color:var(--pm-primary)!important}
-html body main.wrap .dashboard-head p{color:var(--pm-ink)!important}
-
-/* การ์ดและหัวข้อ */
-html body main.wrap .kpi,
-html body main.wrap .panel,
-html body main.wrap .section{
- background:#fff!important;border:1px solid var(--pm-line)!important;
- box-shadow:0 4px 14px rgba(22,85,166,.08)!important
-}
-html body main.wrap .kpi:hover{transform:none!important;box-shadow:0 6px 18px rgba(22,85,166,.12)!important}
-html body main.wrap .kpi>span,
-html body main.wrap .kpi strong,
-html body main.wrap .kpi .kpi-icon{color:var(--pm-primary)!important}
-html body main.wrap .kpi .kpi-icon{background:var(--pm-soft)!important}
-html body main.wrap .kpi.alert strong,
-html body main.wrap .kpi.alert .kpi-icon{color:var(--pm-alert)!important}
-html body main.wrap .kpi.alert .kpi-icon{background:#FFF0F2!important}
-html body main.wrap .kpi.offline strong,
-html body main.wrap .kpi.offline .kpi-icon{color:var(--pm-muted)!important}
-html body main.wrap .kpi.offline .kpi-icon{background:#F1F4F7!important}
-html body main.wrap .panel-head,
-html body main.wrap .section-head{background:var(--pm-soft-2)!important;border-bottom-color:var(--pm-line)!important}
-html body main.wrap .panel-head h2,
-html body main.wrap .section-head h2,
-html body main.wrap .map-title{color:var(--pm-primary)!important}
-html body main.wrap .panel-head h2::before,
-html body main.wrap .section-head h2::before{background:var(--pm-accent)!important}
-html body main.wrap .badge{background:var(--pm-soft)!important;color:var(--pm-primary)!important}
-html body main.wrap .filters select,
-html body main.wrap .filters input{border-color:var(--pm-line)!important;background:#fff!important;color:var(--pm-ink)!important}
-html body main.wrap .filters button{background:var(--pm-primary)!important;color:#fff!important}
-html body main.wrap .summary-item,
-html body main.wrap .source,
-html body main.wrap .check{border-color:var(--pm-line)!important;background:#fff!important}
-html body main.wrap .map-panel{background:var(--pm-soft)!important}
-html body main.wrap .map-source{color:var(--pm-primary)!important}
-html body main.wrap .table th{background:var(--pm-primary)!important;color:#fff!important;border-color:#86A9D2!important}
-html body main.wrap .table td{color:var(--pm-ink)!important;border-color:var(--pm-line)!important}
-html body main.wrap .table tr:nth-child(even) td{background:var(--pm-soft-2)!important}
-html body main.wrap .table tr:hover td{background:var(--pm-soft)!important}
-html body main.wrap .status.online{background:#E8F4EE!important;color:#18794E!important}
-html body main.wrap .status.offline{background:#EEF1F4!important;color:var(--pm-muted)!important}
-html body main.wrap .pm-value{color:var(--pm-alert)!important}
-html body main.wrap .check i{color:var(--pm-accent)!important}
-
-/* สีในภาพรายงานที่ส่งออกให้ไปในทิศทางเดียวกัน */
-html body .pm-report-head{border-bottom-color:var(--pm-primary)!important}
-html body .pm-report-brand b,
-html body .pm-report-title{color:var(--pm-primary)!important}
-</style>
-
-<style id="pm25-export-match-drought-example-20260911-v1">
-/* รายงาน PNG PM2.5 แบบเดียวกับตัวอย่างรายงานภัยแล้ง: A4 เรียบ ตารางชัด ไม่มีโลโก้ */
-html body .export-stage{width:1123px!important}
-html body .pm-report{
- position:relative!important;box-sizing:border-box!important;
- width:1123px!important;min-width:1123px!important;max-width:1123px!important;
- height:1587px!important;min-height:1587px!important;max-height:1587px!important;
- margin:0!important;padding:28px 36px 34px!important;overflow:hidden!important;
- background:#fff!important;color:#111!important;border:1px solid #7F8B96!important;
- border-radius:0!important;box-shadow:none!important;
- font-family:"Sarabun","Noto Sans Thai",sans-serif!important;font-size:14px!important;line-height:1.45!important
-}
-html body .pm-report .pm-report-head,
-html body .pm-report .pm-report-brand,
-html body .pm-report .pm-report-label,
-html body .pm-report img{display:none!important}
-html body .pm-report .pm-report-title{
- display:block!important;margin:0!important;padding:0 0 14px!important;
- text-align:center!important;border:0!important;border-bottom:1px solid #111!important
-}
-html body .pm-report .pm-report-title>div,
-html body .pm-report .pm-report-title>div:last-child{text-align:center!important}
-html body .pm-report .pm-report-title h1{
- margin:0!important;padding:0!important;color:#111!important;
- font-family:"Sarabun","Noto Sans Thai",sans-serif!important;font-size:30px!important;
- font-weight:700!important;line-height:1.25!important;text-align:center!important
-}
-html body .pm-report .pm-report-title p{
- margin:4px 0 0!important;color:#555!important;font-size:17px!important;
- font-weight:400!important;line-height:1.35!important;text-align:center!important
-}
-html body .pm-report .pm-report-title>div:last-child b{
- display:block!important;margin:5px 0 0!important;color:#555!important;
- font-size:15px!important;font-weight:400!important;line-height:1.35!important
-}
-html body .pm-report .pm-report-title>div:last-child span{
- display:block!important;margin:1px 0 0!important;color:#555!important;
- font-size:14px!important;font-weight:400!important;line-height:1.35!important
-}
-html body .pm-report .pm-report-kpis{
- display:grid!important;grid-template-columns:repeat(5,1fr)!important;gap:0!important;
- margin:14px 0 18px!important;border:1px solid #222!important
-}
-html body .pm-report .pm-report-kpis article{
- min-height:88px!important;margin:0!important;padding:9px 7px!important;
- text-align:center!important;background:#fff!important;border:0!important;
- border-right:1px solid #222!important;border-radius:0!important;box-shadow:none!important
-}
-html body .pm-report .pm-report-kpis article:last-child{border-right:0!important}
-html body .pm-report .pm-report-kpis span{
- display:block!important;min-height:34px!important;color:#111!important;
- font-size:14px!important;font-weight:600!important;line-height:1.3!important;text-align:center!important
-}
-html body .pm-report .pm-report-kpis strong{
- display:block!important;margin:3px 0 0!important;color:#111!important;
- font-size:22px!important;font-weight:600!important;line-height:1.15!important;text-align:center!important
-}
-html body .pm-report .pm-report-kpis small{
- display:block!important;margin:2px 0 0!important;color:#333!important;
- font-size:13px!important;font-weight:400!important;line-height:1.25!important;text-align:center!important
-}
-html body .pm-report .pm-report-kpis .offline strong{color:#555!important}
-html body .pm-report .pm-report-kpis .alert strong{color:#B00020!important}
-html body .pm-report .pm-report-summary{
- margin:0 0 18px!important;padding:10px 12px!important;background:#fff!important;
- border:1px solid #222!important;border-left:1px solid #222!important;border-radius:0!important;box-shadow:none!important
-}
-html body .pm-report .pm-report-summary h2{
- margin:0 0 4px!important;color:#111!important;font-size:18px!important;
- font-weight:600!important;line-height:1.35!important;text-align:center!important
-}
-html body .pm-report .pm-report-summary p{
- margin:0!important;color:#111!important;font-size:14px!important;
- font-weight:400!important;line-height:1.5!important;text-align:left!important
-}
-html body .pm-report .pm-report-table-block{
- margin:0!important;padding:0!important;border:0!important;border-radius:0!important;box-shadow:none!important
-}
-html body .pm-report .pm-report-section-head{
- display:block!important;margin:0!important;padding:0 0 8px!important;
- background:#fff!important;border:0!important;text-align:center!important
-}
-html body .pm-report .pm-report-section-head h2{
- margin:0!important;color:#111!important;font-size:19px!important;
- font-weight:600!important;line-height:1.35!important;text-align:center!important
-}
-html body .pm-report .pm-report-section-head span{
- display:block!important;margin:2px 0 0!important;color:#555!important;
- font-size:13px!important;font-weight:400!important;text-align:center!important
-}
-html body .pm-report table{
- width:100%!important;border-collapse:collapse!important;table-layout:fixed!important;border:1px solid #222!important
-}
-html body .pm-report th,
-html body .pm-report td{
- box-sizing:border-box!important;padding:7px 6px!important;border:1px solid #222!important;
- color:#111!important;background:#fff!important;font-size:13px!important;font-weight:400!important;
- line-height:1.35!important;vertical-align:middle!important;text-align:center!important;overflow-wrap:anywhere!important
-}
-html body .pm-report th{background:#EFEFEF!important;font-size:14px!important;font-weight:600!important}
-html body .pm-report td:nth-child(2),
-html body .pm-report td:nth-child(3){text-align:left!important}
-html body .pm-report tbody tr:nth-child(even) td{background:#FAFAFA!important}
-html body .pm-report .pm-report-note{
- margin:18px 0 0!important;padding:10px 12px!important;background:#fff!important;
- border:1px solid #222!important;border-radius:0!important;box-shadow:none!important
-}
-html body .pm-report .pm-report-note b{
- display:block!important;margin:0 0 3px!important;color:#111!important;
- font-size:15px!important;font-weight:600!important
-}
-html body .pm-report .pm-report-note p{
- margin:0!important;color:#333!important;font-size:13px!important;font-weight:400!important;line-height:1.45!important
-}
-html body .pm-report .pm-report-footer{
- position:absolute!important;left:36px!important;right:36px!important;bottom:20px!important;
- display:flex!important;justify-content:space-between!important;gap:18px!important;
- margin:0!important;padding:8px 0 0!important;border-top:1px solid #9AA3AA!important;
- color:#555!important;font-size:12px!important;font-weight:400!important;line-height:1.35!important
-}
-</style>
-
-<style id="pm25-station-table-reference-layout-20260911-v1">
-/* ตารางสถานีบนหน้าเว็บ รูปแบบเดียวกับตารางตัวอย่าง */
-html body main.wrap .station-section{
- border:1px solid #D7DEE5!important;border-radius:0!important;box-shadow:none!important;background:#fff!important
-}
-html body main.wrap .station-section .section-head{
- display:block!important;padding:16px 14px!important;background:#fff!important;
- border-bottom:1px solid #D7DEE5!important;text-align:center!important
-}
-html body main.wrap .station-section .section-head>div{text-align:center!important}
-html body main.wrap .station-section .section-head h2{
- margin:0!important;color:#111!important;font-size:18px!important;font-weight:600!important;
- line-height:1.35!important;text-align:center!important
-}
-html body main.wrap .station-section .section-head h2::before,
-html body main.wrap .station-section .section-head h2:before{display:none!important;content:none!important}
-html body main.wrap .station-section .section-head p{
- margin:3px 0 0!important;color:#111!important;font-size:13px!important;font-weight:400!important;
- line-height:1.4!important;text-align:center!important
-}
-html body main.wrap .station-section .section-head .badge{
- display:block!important;width:max-content!important;margin:5px auto 0!important;padding:0!important;
- border:0!important;border-radius:0!important;background:transparent!important;color:#111!important;
- font-size:12px!important;font-weight:400!important;box-shadow:none!important
-}
-html body main.wrap .station-section .table-wrap{width:100%!important;padding:10px!important;overflow-x:auto!important;background:#fff!important}
-html body main.wrap .station-section .table{
- width:100%!important;min-width:1100px!important;border-collapse:collapse!important;
- table-layout:fixed!important;border:1px solid #111!important
-}
-html body main.wrap .station-section .table th,
-html body main.wrap .station-section .table td{
- padding:7px 5px!important;border:1px solid #111!important;color:#111!important;
- background:#fff!important;font-size:12px!important;font-weight:400!important;
- line-height:1.35!important;text-align:center!important;vertical-align:middle!important
-}
-html body main.wrap .station-section .table th{background:#EFEFEF!important;font-weight:600!important}
-html body main.wrap .station-section .table td:nth-child(2),
-html body main.wrap .station-section .table td:nth-child(3){text-align:center!important;font-weight:500!important}
-html body main.wrap .station-section .table tbody tr:nth-child(even) td{background:#FAFAFA!important}
-html body main.wrap .station-section .table tbody tr:hover td{background:#EEF4FF!important}
-html body main.wrap .station-section .table a{
- display:inline-flex!important;align-items:center!important;justify-content:center!important;
- padding:5px 9px!important;border:1px solid #C9D2DC!important;border-radius:12px!important;
- background:#F5F7F9!important;color:#526274!important;font-size:11px!important;
- text-decoration:none!important;box-shadow:none!important
-}
-
-/* จัดลำดับและหัวข้อในรายงาน PNG ให้เหมือนตัวอย่าง */
-html body .pm-report .pm-report-kpi-heading{
- margin:18px 0 8px!important;padding:0!important;color:#111!important;
- font-size:19px!important;font-weight:600!important;line-height:1.35!important;text-align:center!important
-}
-html body .pm-report .pm-report-table-block{margin-top:14px!important}
-html body .pm-report .pm-report-section-head h2{font-size:19px!important}
-html body .pm-report .pm-report-kpis{margin-top:0!important}
-</style>
-
-<style id="pm25-drought-visual-clone-20260911-v1">
-/* หน้า PM2.5 ใช้แพตเทิร์นภาพเดียวกับหน้าภัยแล้ง โดยคงข้อมูล PM2.5 เดิม */
-:root{
- --clone-primary:#3478D4;
- --clone-dark:#34500E;
- --clone-button:#1655A6;
- --clone-ink:#111111;
- --clone-muted:#171717;
- --clone-line:#DFE4E8;
- --clone-soft:#F2F6FC;
-}
-html,html body{background:#FFFFFF!important;color:var(--clone-ink)!important}
-html body main.wrap{
- width:100%!important;max-width:1800px!important;margin:0 auto!important;padding:12px 16px 34px!important;
- color:var(--clone-ink)!important
-}
-html body main.wrap .dashboard-head{
- min-height:86px!important;margin:0 0 14px!important;padding:13px 18px!important;
- display:flex!important;align-items:center!important;justify-content:space-between!important;gap:18px!important;
- background:#fff!important;border:1px solid #E5E1E8!important;border-radius:0!important;box-shadow:none!important
-}
-html body main.wrap .dashboard-head .head-brand{display:flex!important;align-items:center!important;gap:0!important}
-html body main.wrap .dashboard-head .head-brand img{display:none!important}
-html body main.wrap .dashboard-head h1{
- margin:0!important;color:var(--clone-dark)!important;font-size:24px!important;font-weight:600!important;line-height:1.4!important
-}
-html body main.wrap .dashboard-head p{
- margin:3px 0 0!important;color:#0D1A2B!important;font-size:16px!important;font-weight:400!important;line-height:1.6!important
-}
-html body main.wrap .dashboard-head .head-links #exportPngBtn,
-html body main.wrap .dashboard-head .head-links #exportPngBtn:hover,
-html body main.wrap .dashboard-head .head-links #exportPngBtn:focus,
-html body main.wrap .dashboard-head .head-links #exportPngBtn:active{
- display:inline-flex!important;align-items:center!important;justify-content:center!important;
- min-height:42px!important;padding:9px 20px!important;border:0!important;border-radius:999px!important;
- background:var(--clone-button)!important;background-image:none!important;color:#fff!important;
- box-shadow:none!important;filter:none!important;transform:none!important;text-shadow:none!important;
- font-size:16px!important;font-weight:400!important;line-height:1.4!important;transition:none!important
-}
-html body main.wrap .kpis{gap:10px!important;margin:0!important}
-html body main.wrap .kpi{
- min-height:104px!important;padding:11px 12px!important;background:#fff!important;
- border:0!important;border-radius:12px!important;box-shadow:0 3px 13px rgba(48,60,72,.08)!important;
- transform:none!important
-}
-html body main.wrap .kpi:hover{transform:none!important;box-shadow:0 3px 13px rgba(48,60,72,.08)!important}
-html body main.wrap .kpi>span{
- min-height:0!important;color:var(--clone-ink)!important;font-size:14px!important;font-weight:400!important;line-height:1.45!important
-}
-html body main.wrap .kpi .kpi-icon{
- width:36px!important;height:36px!important;background:var(--clone-soft)!important;
- color:var(--clone-primary)!important;border-radius:50%!important;box-shadow:none!important
-}
-html body main.wrap .kpi strong{color:var(--clone-primary)!important;font-size:24px!important;font-weight:600!important;line-height:1.25!important}
-html body main.wrap .kpi small{color:var(--clone-ink)!important;font-size:14px!important;font-weight:400!important}
-html body main.wrap .kpi.alert strong,
-html body main.wrap .kpi.alert .kpi-icon{color:#C93B36!important}
-html body main.wrap .kpi.offline strong,
-html body main.wrap .kpi.offline .kpi-icon{color:#6B7263!important}
-html body main.wrap .control,
-html body main.wrap .map-panel,
-html body main.wrap .sources,
-html body main.wrap .guidance{
- background:#fff!important;border:0!important;border-radius:14px!important;
- box-shadow:0 3px 18px rgba(42,58,75,.07)!important
-}
-html body main.wrap .panel-head{
- background:#fff!important;border-bottom:1px solid #EFF1F4!important;box-shadow:none!important
-}
-html body main.wrap .panel-head h2,
-html body main.wrap .sources h2,
-html body main.wrap .guidance h2{
- color:var(--clone-ink)!important;font-size:18px!important;font-weight:500!important;line-height:1.5!important
-}
-html body main.wrap .panel-head h2::before,
-html body main.wrap .section-head h2::before{background:var(--clone-primary)!important}
-html body main.wrap .badge{
- border:0!important;border-radius:6px!important;background:var(--clone-soft)!important;
- color:var(--clone-primary)!important;box-shadow:none!important
-}
-html body main.wrap .filters select,
-html body main.wrap .filters input{
- border:1px solid var(--clone-line)!important;border-radius:7px!important;
- background:#fff!important;color:var(--clone-ink)!important;box-shadow:none!important
-}
-html body main.wrap .filters button{
- border:0!important;border-radius:7px!important;background:var(--clone-primary)!important;color:#fff!important;box-shadow:none!important
-}
-html body main.wrap .summary-item,
-html body main.wrap .source,
-html body main.wrap .check{
- background:#fff!important;border:1px solid var(--clone-line)!important;
- border-radius:10px!important;box-shadow:none!important;color:var(--clone-ink)!important
-}
-html body main.wrap .summary-item b,
-html body main.wrap .source b,
-html body main.wrap .check span{color:var(--clone-ink)!important}
-html body main.wrap .map-panel{background:#EEF3F6!important;overflow:hidden!important}
-html body main.wrap .map-title,
-html body main.wrap .map-source{
- border:0!important;border-radius:7px!important;background:rgba(255,255,255,.95)!important;
- color:var(--clone-ink)!important;box-shadow:0 3px 14px rgba(42,58,75,.08)!important
-}
-html body main.wrap .map-source{color:var(--clone-primary)!important}
-@media(min-width:1101px){
- html body main.wrap .map-panel{position:relative!important;top:auto!important;height:auto!important;min-height:0!important;align-self:stretch!important}
- html body main.wrap .map-panel .pm-map{display:block!important;width:100%!important;height:100%!important;min-height:100%!important;max-height:none!important}
-}
-html body main.wrap .station-section{
- border:1px solid var(--clone-line)!important;border-radius:0!important;box-shadow:none!important;background:#fff!important
-}
-html body main.wrap .station-section .section-head{
- display:block!important;padding:12px 14px!important;text-align:center!important;
- background:#fff!important;border-bottom:1px solid var(--clone-line)!important;box-shadow:none!important
-}
-html body main.wrap .station-section .section-head h2{
- margin:0!important;padding:0!important;color:var(--clone-ink)!important;
- font-size:16px!important;font-weight:500!important;line-height:1.45!important;text-align:center!important
-}
-html body main.wrap .station-section .section-head h2::before,
-html body main.wrap .station-section .section-head h2:before{display:none!important;content:none!important}
-html body main.wrap .station-section .section-head p{
- margin:3px 0 0!important;color:var(--clone-ink)!important;font-size:12px!important;
- font-weight:400!important;line-height:1.45!important;text-align:center!important
-}
-html body main.wrap .station-section .section-head .badge{
- display:inline-block!important;margin:5px auto 0!important;padding:0!important;
- border:0!important;border-radius:0!important;background:transparent!important;
- color:var(--clone-ink)!important;font-size:11px!important;font-weight:400!important
-}
-html body main.wrap .station-section .table-wrap{padding:8px!important;background:#fff!important;box-shadow:none!important}
-html body main.wrap .station-section .table{
- width:100%!important;min-width:980px!important;border-collapse:collapse!important;
- table-layout:fixed!important;border:1px solid #000!important
-}
-html body main.wrap .station-section .table th,
-html body main.wrap .station-section .table td{
- padding:5px 3px!important;border:1px solid #000!important;color:#111!important;
- background:#fff!important;font-size:11px!important;font-weight:400!important;
- line-height:1.35!important;text-align:center!important;vertical-align:middle!important
-}
-html body main.wrap .station-section .table th{background:#E4E4E4!important;font-weight:600!important}
-html body main.wrap .station-section .table tbody tr:nth-child(even) td{background:#FAFAFA!important}
-html body main.wrap .station-section .table tbody tr:hover td{background:#FFF2B8!important}
-html body main.wrap .station-section .status,
-html body main.wrap .station-section .table a{
- font-size:10px!important;box-shadow:none!important;transform:none!important
-}
-html body main.wrap .footer{
- padding:12px!important;background:#fff!important;color:var(--clone-muted)!important;
- border-color:var(--clone-line)!important;font-size:12px!important
-}
-@media(max-width:1100px){
- html body main.wrap{display:block!important;max-width:1100px!important;padding:10px!important}
- html body main.wrap .map-panel,
- html body main.wrap .map-panel .pm-map{height:650px!important;min-height:650px!important;max-height:none!important}
-}
-@media(max-width:560px){
- html body main.wrap .dashboard-head{display:block!important}
- html body main.wrap .dashboard-head .head-links{margin-top:8px!important;justify-content:flex-start!important}
- html body main.wrap .map-panel,
- html body main.wrap .map-panel .pm-map{height:500px!important;min-height:500px!important}
-}
-</style>
-
-<style id="pm25-export-drought-font-exact-20260911-v2">
-/* ขนาดกระดาษและตัวอักษรรายงานตรงกับรายงานภัยแล้ง 1240 × 1754 */
-html body .export-stage{width:1240px!important}
-html body .pm-report{
- position:relative!important;box-sizing:border-box!important;
- width:1240px!important;min-width:1240px!important;max-width:1240px!important;
- height:1754px!important;min-height:1754px!important;max-height:1754px!important;
- padding:48px 70px 58px!important;border:0!important;
- font-family:"Sarabun",sans-serif!important;font-size:17px!important;line-height:1.45!important
-}
-html body .pm-report::before{
- content:""!important;position:absolute!important;inset:30px!important;
- border:2px solid #9AA2A8!important;pointer-events:none!important;z-index:20!important
-}
-html body .pm-report,
-html body .pm-report *:not(svg):not(path){
- font-family:"Sarabun",sans-serif!important
-}
-html body .pm-report .pm-report-title{padding:0 0 18px!important;border-bottom:2px solid #111!important}
-html body .pm-report .pm-report-title h1{
- font-family:"Sarabun",sans-serif!important;font-size:34px!important;font-weight:700!important;
- line-height:1.25!important;color:#111!important
-}
-html body .pm-report .pm-report-title p{
- margin-top:5px!important;font-size:20px!important;font-weight:400!important;line-height:1.35!important;color:#555!important
-}
-html body .pm-report .pm-report-title>div:last-child b{
- margin-top:4px!important;font-size:20px!important;font-weight:400!important;line-height:1.35!important
-}
-html body .pm-report .pm-report-title>div:last-child span{
- font-size:17px!important;font-weight:400!important;line-height:1.35!important
-}
-html body .pm-report .pm-report-section-head{padding:0 0 10px!important}
-html body .pm-report .pm-report-section-head h2,
-html body .pm-report .pm-report-kpi-heading{
- font-family:"Sarabun",sans-serif!important;font-size:23px!important;font-weight:700!important;
- line-height:1.35!important;color:#111!important
-}
-html body .pm-report .pm-report-section-head span{font-size:16px!important;font-weight:400!important}
-html body .pm-report th{
- padding:9px 7px!important;font-family:"Sarabun",sans-serif!important;
- font-size:18px!important;font-weight:700!important;line-height:1.35!important
-}
-html body .pm-report td{
- padding:9px 7px!important;font-family:"Sarabun",sans-serif!important;
- font-size:17px!important;font-weight:400!important;line-height:1.35!important
-}
-html body .pm-report .pm-report-kpis article{min-height:98px!important;padding:10px 8px!important}
-html body .pm-report .pm-report-kpis span{min-height:38px!important;font-size:17px!important;font-weight:600!important}
-html body .pm-report .pm-report-kpis strong{font-size:24px!important;font-weight:600!important}
-html body .pm-report .pm-report-kpis small{font-size:16px!important;font-weight:400!important}
-html body .pm-report .pm-report-summary h2{font-size:23px!important;font-weight:700!important}
-html body .pm-report .pm-report-summary p{font-size:17px!important;font-weight:400!important;line-height:1.5!important}
-html body .pm-report .pm-report-note b{font-size:18px!important;font-weight:700!important}
-html body .pm-report .pm-report-note p{font-size:16px!important;font-weight:400!important;line-height:1.45!important}
-html body .pm-report .pm-report-footer{
- left:70px!important;right:70px!important;bottom:48px!important;
- font-size:15px!important;font-weight:400!important;line-height:1.35!important
-}
+html body .dashboard-head .head-brand img{display:none!important}
+html body .dashboard-head .head-brand h1{margin:0!important;font-size:24px!important;font-weight:600!important;line-height:1.3!important}
+html body .dashboard-head .head-brand p{margin:3px 0 0!important;font-size:16px!important;font-weight:300!important;line-height:1.4!important;color:#111!important}
+html body .panel-head h2,
+html body .map-title,
+html body h3{font-size:20px!important;font-weight:500!important;line-height:1.35!important}
+html body label,
+html body input,
+html body select,
+html body button,
+html body td,
+html body th{font-size:16px!important;line-height:1.45!important}
 </style>
 </body>
 </html>
