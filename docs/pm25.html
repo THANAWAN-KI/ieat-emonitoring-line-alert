@@ -399,5 +399,83 @@ html body main.wrap .dashboard-head h1,
 html body main.wrap .dashboard-head h2{margin:0!important;color:#1655A6!important;font-size:24px!important;font-weight:600!important;line-height:1.4!important}
 html body main.wrap .dashboard-head p{margin:3px 0 0!important;color:#0d1a2b!important;font-size:16px!important;font-weight:400!important;line-height:1.6!important}
 </style>
+
+<style id="pm25-blue-heading-palette-and-actions-20260911-v1">
+/* โทนสี PM2.5 ให้สอดคล้องกับหัวข้อสีน้ำเงิน */
+:root{
+ --pm-primary:#1655A6;
+ --pm-accent:#306BEC;
+ --pm-soft:#EEF4FF;
+ --pm-soft-2:#F7FAFF;
+ --pm-line:#D7E3F4;
+ --pm-ink:#0D1A2B;
+ --pm-muted:#526274;
+ --pm-alert:#D63B4B;
+ --pm-warning:#D88712;
+}
+
+/* เหลือเฉพาะปุ่มส่งออกรายงาน PNG */
+html body main.wrap .dashboard-head .head-links>a{display:none!important}
+html body main.wrap .dashboard-head .head-links{
+ display:flex!important;align-items:center!important;justify-content:flex-end!important;margin-left:auto!important
+}
+html body main.wrap .dashboard-head .head-links #exportPngBtn{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ min-height:42px!important;padding:9px 18px!important;border:0!important;border-radius:999px!important;
+ background:var(--pm-primary)!important;color:#fff!important;box-shadow:none!important;
+ font-size:16px!important;font-weight:500!important;line-height:1.3!important;cursor:pointer!important
+}
+html body main.wrap .dashboard-head .head-links #exportPngBtn:hover{background:#104581!important}
+html body main.wrap .dashboard-head h1{color:var(--pm-primary)!important}
+html body main.wrap .dashboard-head p{color:var(--pm-ink)!important}
+
+/* การ์ดและหัวข้อ */
+html body main.wrap .kpi,
+html body main.wrap .panel,
+html body main.wrap .section{
+ background:#fff!important;border:1px solid var(--pm-line)!important;
+ box-shadow:0 4px 14px rgba(22,85,166,.08)!important
+}
+html body main.wrap .kpi:hover{transform:none!important;box-shadow:0 6px 18px rgba(22,85,166,.12)!important}
+html body main.wrap .kpi>span,
+html body main.wrap .kpi strong,
+html body main.wrap .kpi .kpi-icon{color:var(--pm-primary)!important}
+html body main.wrap .kpi .kpi-icon{background:var(--pm-soft)!important}
+html body main.wrap .kpi.alert strong,
+html body main.wrap .kpi.alert .kpi-icon{color:var(--pm-alert)!important}
+html body main.wrap .kpi.alert .kpi-icon{background:#FFF0F2!important}
+html body main.wrap .kpi.offline strong,
+html body main.wrap .kpi.offline .kpi-icon{color:var(--pm-muted)!important}
+html body main.wrap .kpi.offline .kpi-icon{background:#F1F4F7!important}
+html body main.wrap .panel-head,
+html body main.wrap .section-head{background:var(--pm-soft-2)!important;border-bottom-color:var(--pm-line)!important}
+html body main.wrap .panel-head h2,
+html body main.wrap .section-head h2,
+html body main.wrap .map-title{color:var(--pm-primary)!important}
+html body main.wrap .panel-head h2::before,
+html body main.wrap .section-head h2::before{background:var(--pm-accent)!important}
+html body main.wrap .badge{background:var(--pm-soft)!important;color:var(--pm-primary)!important}
+html body main.wrap .filters select,
+html body main.wrap .filters input{border-color:var(--pm-line)!important;background:#fff!important;color:var(--pm-ink)!important}
+html body main.wrap .filters button{background:var(--pm-primary)!important;color:#fff!important}
+html body main.wrap .summary-item,
+html body main.wrap .source,
+html body main.wrap .check{border-color:var(--pm-line)!important;background:#fff!important}
+html body main.wrap .map-panel{background:var(--pm-soft)!important}
+html body main.wrap .map-source{color:var(--pm-primary)!important}
+html body main.wrap .table th{background:var(--pm-primary)!important;color:#fff!important;border-color:#86A9D2!important}
+html body main.wrap .table td{color:var(--pm-ink)!important;border-color:var(--pm-line)!important}
+html body main.wrap .table tr:nth-child(even) td{background:var(--pm-soft-2)!important}
+html body main.wrap .table tr:hover td{background:var(--pm-soft)!important}
+html body main.wrap .status.online{background:#E8F4EE!important;color:#18794E!important}
+html body main.wrap .status.offline{background:#EEF1F4!important;color:var(--pm-muted)!important}
+html body main.wrap .pm-value{color:var(--pm-alert)!important}
+html body main.wrap .check i{color:var(--pm-accent)!important}
+
+/* สีในภาพรายงานที่ส่งออกให้ไปในทิศทางเดียวกัน */
+html body .pm-report-head{border-bottom-color:var(--pm-primary)!important}
+html body .pm-report-brand b,
+html body .pm-report-title{color:var(--pm-primary)!important}
+</style>
 </body>
 </html>
