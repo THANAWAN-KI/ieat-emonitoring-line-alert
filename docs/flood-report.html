@@ -1405,6 +1405,19 @@ document.documentElement.classList.add("flood-initializing");
 <body>
   <main class="container">
     <section class="view active" id="warning">
+      <header class="dashboard-intro">
+        <div class="dashboard-intro-inner">
+          <div>
+            <div class="dashboard-kicker">ระบบติดตามและสนับสนุนการตัดสินใจ</div>
+            <h1>สถานการณ์น้ำท่วมของนิคมอุตสาหกรรม</h1>
+            <p>ติดตามพื้นที่เฝ้าระวัง ปริมาณฝน และสถานการณ์น้ำจากข้อมูลล่าสุด</p>
+          </div>
+          <div class="dashboard-intro-meta">
+            <b>ภาพรวมพื้นที่นิคมอุตสาหกรรมทั่วประเทศ</b>
+            <span>ข้อมูลจะปรับปรุงตามแหล่งข้อมูลที่เชื่อมต่อ</span>
+          </div>
+        </div>
+      </header>
       <div class="top-overview-grid">
         <div class="top-overview-metrics">
       <section class="watch-dashboard-block" aria-labelledby="estateRiskTitle">
@@ -9949,35 +9962,6 @@ html body #warning .table th,html body #warning .table td{font-size:16px!importa
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",lock);else lock();
  setTimeout(lock,800);
-})();
-</script>
-
-<style id="remove-warning-gap-box-20260911-v1-style">
-#warning>.dashboard-intro,
-#warning>.flood-support-heading,
-#warning>.overview-page-title,
-#warning>.page-head:not(.fire-style-flood-header),
-#warning>.header-shell:not(.fire-style-flood-header){display:none!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;overflow:hidden!important}
-</style>
-<script id="remove-warning-gap-box-20260911-v1-script">
-(function(){
- function clean(){
-  var page=document.getElementById("warning");
-  if(!page)return;
-  page.querySelectorAll(":scope>.dashboard-intro,:scope>.flood-support-heading,:scope>.overview-page-title,:scope>.page-head:not(.fire-style-flood-header),:scope>.header-shell:not(.fire-style-flood-header)").forEach(function(n){n.remove()});
-  var header=page.querySelector(":scope>.fire-style-flood-header");
-  var grid=page.querySelector(":scope>.top-overview-grid");
-  if(header&&grid){
-   var node=header.nextElementSibling;
-   while(node&&node!==grid){
-    var next=node.nextElementSibling;
-    node.remove();
-    node=next;
-   }
-  }
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",clean,{once:true});else clean();
- [100,500,1000,2000,5000,9000].forEach(function(ms){setTimeout(clean,ms)});
 })();
 </script>
 </body>
