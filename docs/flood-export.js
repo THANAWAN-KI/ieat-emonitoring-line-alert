@@ -75,14 +75,64 @@
     const style=document.createElement("style");style.textContent="#pngPreviewModal{position:fixed;inset:0;z-index:99999;background:rgba(20,31,48,.75);padding:20px;display:grid;place-items:center}.png-dialog{width:min(1100px,96vw);max-height:94vh;overflow:auto;background:#fff;border-radius:16px;padding:20px;font-family:Sarabun,sans-serif}.png-head{display:flex;justify-content:space-between;align-items:center;font-size:20px}.png-head button{border:0;background:#eee;border-radius:50%;width:38px;height:38px;font-size:24px}.png-dialog p{color:#68717d}.png-preview-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:15px}.png-preview-list section{border:1px solid #ccd3d9;padding:10px}.png-preview-list h3{margin:0 0 8px}.png-preview-list img{display:block;width:100%;height:auto;border:1px solid #ddd}";
     modal.appendChild(style);document.body.appendChild(modal);modal.querySelector(".png-head button").onclick=()=>{items.forEach(x=>URL.revokeObjectURL(x.url));modal.remove()};
   }
+  async function waitForSheetAssets(sheet){
+    if(document.fonts?.ready)await document.fonts.ready;
+    const images=[...sheet.querySelectorAll("img")];
+    await Promise.all(images.map(image=>{
+      if(image.complete){
+        if(typeof image.decode==="function")return image.decode().catch(()=>{});
+        return Promise.resolve();
+      }
+      return new Promise(resolve=>{
+        const done=()=>resolve();
+        image.addEventListener("load",done,{once:true});
+        image.addEventListener("error",done,{once:true});
+        setTimeout(done,12000);
+      });
+    }));
+    await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+  }
   async function captureSheet(sheet){
     if(typeof html2canvas!=="function")throw new Error("Export library unavailable");
     const host=sheet.parentElement,oldZoom=host?.style.zoom||"";
     if(host)host.style.zoom="1";
     sheet.classList.add("report-exporting");
     try{
-      const landscape=sheet.classList.contains("landscape-sheet"),width=landscape?1123:794,height=landscape?794:1123;
-      const canvas=await html2canvas(sheet,{scale:2,backgroundColor:"#ffffff",useCORS:true,logging:false,width,height,windowWidth:landscape?1280:1200,scrollX:0,scrollY:0});
+      await waitForSheetAssets(sheet);
+      const landscape=sheet.classList.contains("landscape-sheet");
+      const targetWidth=landscape?1123:794;
+      const targetHeight=landscape?794:1123;
+      const scale=Math.max(2,Math.min(3,Number(window.devicePixelRatio)||1));
+      const canvas=await html2canvas(sheet,{
+        scale,
+        backgroundColor:"#ffffff",
+        useCORS:true,
+        allowTaint:false,
+        logging:false,
+        width:targetWidth,
+        height:targetHeight,
+        windowWidth:Math.max(targetWidth,document.documentElement.clientWidth),
+        windowHeight:Math.max(targetHeight,document.documentElement.clientHeight),
+        scrollX:0,
+        scrollY:-window.scrollY,
+        imageTimeout:15000,
+        removeContainer:true,
+        onclone:function(clonedDocument){
+          const cloned=clonedDocument.querySelector('[data-report-page="'+sheet.dataset.reportPage+'"]');
+          if(!cloned)return;
+          cloned.classList.add("report-exporting","report-render-clone");
+          cloned.style.setProperty("width",targetWidth+"px","important");
+          cloned.style.setProperty("min-width",targetWidth+"px","important");
+          cloned.style.setProperty("max-width",targetWidth+"px","important");
+          cloned.style.setProperty("height",targetHeight+"px","important");
+          cloned.style.setProperty("min-height",targetHeight+"px","important");
+          cloned.style.setProperty("max-height",targetHeight+"px","important");
+          cloned.style.setProperty("margin","0","important");
+          cloned.style.setProperty("transform","none","important");
+          cloned.style.setProperty("box-sizing","border-box","important");
+          cloned.style.setProperty("overflow","hidden","important");
+        }
+      });
       return await new Promise((resolve,reject)=>canvas.toBlob(blob=>blob?resolve(blob):reject(new Error("PNG blob unavailable")),"image/png",1));
     }finally{
       sheet.classList.remove("report-exporting");
