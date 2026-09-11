@@ -10153,5 +10153,50 @@ html body main.container #thaiwater-warning .tw-risk-card:first-child .tw-rain *
  [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(apply,ms)});
 })();
 </script>
+
+<style id="watch-table-row-zoom-and-black-risk-text-20260911-v1-style">
+html body main.container #thaiwater-warning .tw-risk-card,
+html body main.container #thaiwater-warning .tw-risk-card .tw-risk-head h3,
+html body main.container #thaiwater-warning .tw-risk-card .zoom-hint,
+html body main.container #thaiwater-warning .tw-risk-card .tw-rain,
+html body main.container #thaiwater-warning .tw-risk-card .tw-rain *{
+ color:#000000!important;
+}
+#thaiwater-warning .estate-watch-table tbody tr,
+#thaiwater-warning .station-watch-table tbody tr{
+ cursor:pointer!important;
+}
+#thaiwater-warning .estate-watch-table tbody tr:hover,
+#thaiwater-warning .station-watch-table tbody tr:hover{
+ background:#eaf5ff!important;
+}
+</style>
+<script id="watch-table-row-zoom-and-black-risk-text-20260911-v1-script">
+(function(){
+ var forwarding=false;
+ function prepareRows(){
+  document.querySelectorAll("#thaiwater-warning .estate-watch-table tbody tr,#thaiwater-warning .station-watch-table tbody tr").forEach(function(row){
+   row.tabIndex=0;row.setAttribute("role","button");row.setAttribute("aria-label","คลิกเพื่อซูมตำแหน่งบนแผนที่");
+  });
+ }
+ function forward(row,original){
+  if(forwarding)return;
+  var target=row.closest(".estate-watch-table")?row.querySelector("td:last-child"):row.querySelector("td:nth-child(3)");
+  if(!target||target===original)return;
+  forwarding=true;target.click();forwarding=false;
+ }
+ document.addEventListener("click",function(e){
+  var row=e.target.closest("#thaiwater-warning .estate-watch-table tbody tr,#thaiwater-warning .station-watch-table tbody tr");
+  if(row)forward(row,e.target.closest("td"));
+ });
+ document.addEventListener("keydown",function(e){
+  if(e.key!=="Enter"&&e.key!==" ")return;
+  var row=e.target.closest("#thaiwater-warning .estate-watch-table tbody tr,#thaiwater-warning .station-watch-table tbody tr");
+  if(row){e.preventDefault();forward(row,null)}
+ });
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",prepareRows,{once:true});else prepareRows();
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(prepareRows,ms)});
+})();
+</script>
 </body>
 </html>
