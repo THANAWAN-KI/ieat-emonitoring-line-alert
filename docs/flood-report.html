@@ -10902,5 +10902,45 @@ html body main.container #warning .nationwide-indicators .barrow>b{
 }
 </style>
 
+
+<style id="swoc-button-pastel-blue-20260911-v5">
+html body #warning a[href*="bigdata-swoc.rid.go.th/basin_manage"] {
+  background: #c4dff6 !important;
+  background-color: #c4dff6 !important;
+  background-image: none !important;
+  color: #0091cd !important;
+  border-color: #c4dff6 !important;
+  box-shadow: none !important;
+}
+html body #warning a[href*="bigdata-swoc.rid.go.th/basin_manage"]:hover {
+  background: #c4dff6 !important;
+  background-color: #c4dff6 !important;
+  color: #0091cd !important;
+}
+</style>
+<script id="swoc-button-pastel-blue-20260911-v5-script">
+(function () {
+  function apply() {
+    document.querySelectorAll('#warning a[href*="bigdata-swoc.rid.go.th/basin_manage"]').forEach(function (el) {
+      if (String(el.textContent || "").indexOf("เปิดระบบ SWOC") < 0) return;
+      el.style.setProperty("background", "#c4dff6", "important");
+      el.style.setProperty("background-color", "#c4dff6", "important");
+      el.style.setProperty("background-image", "none", "important");
+      el.style.setProperty("color", "#0091cd", "important");
+      el.style.setProperty("border-color", "#c4dff6", "important");
+      el.style.setProperty("box-shadow", "none", "important");
+    });
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", apply, {once:true});
+  } else {
+    apply();
+  }
+  [100, 500, 1200, 2500, 5000, 9000].forEach(function (ms) {
+    setTimeout(apply, ms);
+  });
+})();
+</script>
+
 </body>
 </html>
