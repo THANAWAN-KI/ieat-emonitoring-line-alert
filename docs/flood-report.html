@@ -10462,5 +10462,83 @@ html body main.container>#globalFloodHeader .global-flood-tabs button[aria-curre
  #warning .top-overview-metrics .national-kpi{min-height:126px!important;padding:14px!important}
 }
 </style>
+
+<style id="flood-requested-section-table-colors-20260911-v1">
+/* สีส่วนเฝ้าระวังและตารางตามชุดสีที่กำหนด */
+html body #warning [data-heading-green-11862f="true"]{color:#ecb731!important}
+html body #warning .nationwide-indicators .card-head h2,
+html body #warning .nationwide-indicators .barrow b,
+ color:#ecb731!important
+}
+html body #warning #ridBasinOverview .rid-basin-head>a{
+ background:#c4dff6!important;background-color:#c4dff6!important;
+ color:#0091cd!important;border-color:#c4dff6!important;box-shadow:none!important
+}
+html body #warning .tw-risk-card:nth-of-type(2) .tw-risk-head h3,
+html body #warning [data-flood-heading="risk-48"]{color:#7f181b!important}
+html body #warning .watch-analysis-title,
+html body #warning [data-flood-heading="analysis"]{color:#000!important}
+html body #warning .estate-watch-table .table-section-head h2,
+html body #warning .station-watch-table .table-section-head h2{color:#004b79!important}
+html body #warning .estate-watch-table table thead th,
+html body #warning .station-watch-table table thead th{
+ background:#d7d7d8!important;background-color:#d7d7d8!important;
+ color:#000!important;border-color:#bfc0c2!important
+}
+html body #warning .estate-watch-table .critical,
+html body #warning .estate-watch-table .danger,
+html body #warning .estate-watch-table .status-critical,
+html body #warning .estate-watch-table [class*="critical"],
+html body #warning .station-watch-table .critical,
+html body #warning .station-watch-table .danger,
+html body #warning .station-watch-table .status-critical,
+html body #warning .station-watch-table [class*="critical"]{
+ background:#ed1b2e!important;background-color:#ed1b2e!important;
+ border-color:#ed1b2e!important;color:#fff!important
+}
+html body #warning .estate-watch-table .critical *,
+html body #warning .estate-watch-table .danger *,
+html body #warning .estate-watch-table [class*="critical"] *,
+html body #warning .station-watch-table .critical *,
+html body #warning .station-watch-table .danger *,
+html body #warning .station-watch-table [class*="critical"] *{color:#fff!important}
+</style>
+<script id="flood-requested-section-table-colors-20260911-v1-script">
+(function(){
+ const rules=[
+  ["พื้นที่เสี่ยงน้ำท่วมฉับพลันใน 24 ชั่วโมงข้างหน้า","#ecb731","risk-24"],
+  ["พื้นที่เสี่ยงน้ำท่วมฉับพลัน 24 ชั่วโมง","#ecb731","risk-24"],
+  ["ตัวชี้วัดเฝ้าระวังทั่วประเทศ","#ecb731","indicators"],
+  ["พื้นที่เสี่ยงน้ำท่วมจากฝนตกสะสมใน 48 ชม. ข้างหน้า","#7f181b","risk-48"],
+  ["ข้อมูลวิเคราะห์เพิ่มเติมสำหรับนิคมอุตสาหกรรม","#000000","analysis"]
+ ];
+ function norm(v){return String(v||"").replace(/\s+/g," ").trim()}
+ function apply(){
+  const root=document.getElementById("warning");if(!root)return;
+  root.querySelectorAll("h1,h2,h3,h4,.watch-analysis-title").forEach(function(el){
+   const text=norm(el.textContent);
+   rules.forEach(function(rule){
+    if(text===rule[0]||text.indexOf(rule[0])>=0){
+     el.setAttribute("data-flood-heading",rule[2]);
+     el.style.setProperty("color",rule[1],"important");
+    }
+   });
+  });
+  root.querySelectorAll(".estate-watch-table *, .station-watch-table *").forEach(function(el){
+   const cls=String(el.className||"").toLowerCase();
+   const bg=(el.style.backgroundColor||el.style.background||"").toLowerCase().replace(/\s/g,"");
+   if(/critical|danger/.test(cls)||/#(?:ef101f|ef442f|ff0000|dc2626|b91c1c|7f181b)/.test(bg)){
+    el.style.setProperty("background-color","#ed1b2e","important");
+    el.style.setProperty("border-color","#ed1b2e","important");
+    el.style.setProperty("color","#ffffff","important");
+   }
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply,{once:true});else apply();
+ [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(apply,ms)});
+ const root=document.getElementById("warning");
+ if(root)new MutationObserver(apply).observe(root,{childList:true,subtree:true});
+})();
+</script>
 </body>
 </html>
