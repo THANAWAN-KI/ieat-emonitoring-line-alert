@@ -991,7 +991,9 @@ html body main.wrap .dashboard-kpis .kpi-icon svg{
 </style>
 <style id="drought-chart-map-heading-override-20260911-v1">
 html body main.wrap .charts-focus .chart-panel h3,
-html body main.wrap .station-section .section-head h2{
+html body main.wrap .station-section .section-head h2,
+html body main.wrap .sources h2,
+html body main.wrap .guidance h2{
  color:#537b35!important;
 }
 html body main.wrap .charts-focus .chart-panel{
@@ -999,21 +1001,51 @@ html body main.wrap .charts-focus .chart-panel{
  width:100%!important;
 }
 @media(min-width:1101px){
- html body main.wrap .charts-grid,
- html body main.wrap .main-grid{
+ html body main.wrap{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  grid-template-areas:
+   "head head"
+   "kpis map"
+   "filters map"
+   "charts map"
+   "table table"
+   "extras extras"
+   "footer footer"!important;
+  align-items:start!important;
+ }
+ html body main.wrap .dashboard-head{grid-area:head!important}
+ html body main.wrap .dashboard-kpis{grid-area:kpis!important}
+ html body main.wrap .main-grid{display:contents!important}
+ html body main.wrap .filters{grid-area:filters!important}
+ html body main.wrap .charts-focus{
+  grid-area:charts!important;
+  display:grid!important;
   grid-template-columns:minmax(0,1fr)!important;
   width:100%!important;
+  margin:0!important;
  }
  html body main.wrap .main-grid .map-panel{
+  grid-area:map!important;
+  position:relative!important;
+  top:auto!important;
   width:100%!important;
   max-width:none!important;
-  height:650px!important;
-  min-height:650px!important;
+  height:auto!important;
+  min-height:0!important;
+  align-self:stretch!important;
+  overflow:hidden!important;
  }
  html body main.wrap .main-grid .map-panel #viewDiv{
-  height:650px!important;
-  min-height:650px!important;
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  min-height:100%!important;
  }
+ html body main.wrap .station-section{grid-area:table!important}
+ html body main.wrap .extras{grid-area:extras!important}
+ html body main.wrap .footer{grid-area:footer!important}
 }
 </style>
 </body>
