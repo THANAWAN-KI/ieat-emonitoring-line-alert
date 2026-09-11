@@ -5057,62 +5057,6 @@ body>.ieat-persistent-tabbar{display:none!important}
  .flood-page-purpose{align-items:flex-start;flex-direction:column;gap:6px}
 }
 </style>
-<script id="flood-workflow-redesign-20260909-v1-script">
-(function(){
- "use strict";
- const pages=[
-  {id:"warning",no:"1",title:"ภาพรวมประจำวัน",sub:"รู้สถานการณ์วันนี้"},
-  {id:"thaiwater-warning",no:"2",title:"พื้นที่เฝ้าระวัง",sub:"ค้นหาและติดตามพื้นที่"},
-  {id:"infographic",no:"3",title:"ส่งออกข้อมูล",sub:"จัดทำรายงานพร้อมส่ง"}
- ];
- const purposes={
-  warning:["สรุปสถานการณ์น้ำประจำวัน","ใช้ดูภาพรวม ตัวชี้วัด พื้นที่เสี่ยง และสถานการณ์น้ำล่าสุดก่อนตัดสินใจ","สำหรับผู้บริหารและศูนย์เฝ้าระวัง"],
-  "thaiwater-warning":["ตรวจสอบพื้นที่ที่ต้องเฝ้าระวัง","เปรียบเทียบความเสี่ยง 24/48 ชั่วโมง ระดับน้ำใกล้นิคมฯ และทิศทางกลุ่มฝน","สำหรับติดตามเชิงปฏิบัติการ"],
-  infographic:["จัดทำและส่งออกรายงาน","ตรวจทานข้อมูล แก้ไขข้อความ และส่งออกเป็น PNG/PDF สำหรับ LINE หรือรายงานผู้บริหาร","ผลลัพธ์พร้อมใช้งาน"]
- };
- function setActive(id){
-  document.querySelectorAll("main .view").forEach(v=>v.classList.toggle("active",v.id===id));
-  document.querySelectorAll("#floodWorkflowNav button").forEach(b=>{
-   const on=b.dataset.openView===id;b.classList.toggle("active",on);b.setAttribute("aria-current",on?"page":"false");
-  });
-  history.replaceState(null,"","#"+id);
-  if(id==="infographic"&&typeof window.prepareReportExport==="function")window.prepareReportExport();
-  window.scrollTo({top:0,behavior:"smooth"});
- }
- function purpose(id){
-  const v=purposes[id];return '<div class="flood-page-purpose"><div><b>'+v[0]+'</b><br><span>'+v[1]+'</span></div><em>'+v[2]+'</em></div>';
- }
- function mount(){
-  const main=document.querySelector("main.container");if(!main)return;
-  let nav=document.getElementById("floodWorkflowNav");
-  if(!nav){
-   nav=document.createElement("nav");nav.id="floodWorkflowNav";nav.setAttribute("aria-label","ขั้นตอนการใช้งานหน้าสถานการณ์น้ำ");
-   nav.innerHTML='<div class="workflow-nav-inner">'+pages.map(p=>'<button type="button" data-open-view="'+p.id+'"><span class="workflow-no">'+p.no+'</span><span><b>'+p.title+'</b><small>'+p.sub+'</small></span></button>').join("")+'</div>';
-   main.insertBefore(nav,main.firstChild);
-  }
-  const overview=document.querySelector("#warning .dashboard-intro");
-  if(overview){
-   const h=overview.querySelector("h1"),p=overview.querySelector("p");
-   if(h)h.textContent="รายงานสถานการณ์น้ำประจำวัน";
-   if(p)p.textContent="สรุปข้อมูลที่สัมพันธ์กับพื้นที่นิคมอุตสาหกรรมจากข้อมูลล่าสุดของระบบ";
-  }
-  const exportH=document.querySelector("#infographic .report-toolbar-copy h1");
-  if(exportH)exportH.textContent="ส่งออกข้อมูลและจัดทำรายงานสถานการณ์น้ำ";
-  pages.forEach(p=>{
-   const view=document.getElementById(p.id);
-   if(view&&!view.querySelector(":scope > .flood-page-purpose"))view.insertAdjacentHTML("afterbegin",purpose(p.id));
-  });
-  nav.querySelectorAll("button").forEach(b=>b.onclick=()=>setActive(b.dataset.openView));
-  const requested=location.hash.slice(1);
-  const current=pages.some(p=>p.id===requested)?requested:(document.querySelector("main .view.active")?.id||"warning");
-  setActive(current);
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
- [150,800,2200].forEach(ms=>setTimeout(mount,ms));
-})();
-</script>
-
-
 <style id="remove-old-blue-pill-tabs-20260909-v1">
 .topbar,
 .topbar .nav,
@@ -5706,32 +5650,6 @@ body.infographic-modal-open{overflow:hidden!important}
 @media(max-width:950px){#infographic .export-page-heading{align-items:stretch;flex-direction:column}#infographic #exportHeaderTabs{width:100%;margin-left:0;justify-content:flex-start;overflow-x:auto;padding-bottom:4px}}
 @media(max-width:620px){#infographic .export-page-heading{padding:18px}#infographic #exportHeaderTabs button{min-width:135px;font-size:14px;padding:9px 16px}}
 </style>
-<script id="export-header-match-other-pages-20260909-v1-script">
-(function(){
- "use strict";
- const items=[["warning","ภาพรวม"],["thaiwater-warning","พื้นที่เฝ้าระวัง"],["infographic","ส่งออกข้อมูล"]];
- function openPage(id){
-  document.querySelectorAll("main .view").forEach(v=>v.classList.toggle("active",v.id===id));
-  history.replaceState(null,"","#"+id);
-  if(id==="infographic"&&typeof window.prepareReportExport==="function")window.prepareReportExport();
-  window.scrollTo({top:0,behavior:"smooth"});
- }
- function mount(){
-  const view=document.getElementById("infographic"),workspace=view&&view.querySelector(".report-export-workspace");if(!view||!workspace)return;
-  let head=view.querySelector(":scope>.export-page-heading");
-  if(!head){
-   head=document.createElement("header");head.className="export-page-heading";
-   head.innerHTML='<div><h1>ส่งออกข้อมูลและจัดทำรายงานสถานการณ์น้ำ</h1></div><div id="exportHeaderTabs">'+items.map(x=>'<button type="button" data-export-view="'+x[0]+'" class="'+(x[0]==="infographic"?"active":"")+'">'+x[1]+'</button>').join("")+'</div>';
-   view.insertBefore(head,workspace);
-   head.querySelectorAll("[data-export-view]").forEach(b=>b.onclick=()=>openPage(b.dataset.exportView));
-  }
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
- [100,500,1200,2500,5000].forEach(ms=>setTimeout(mount,ms));
-})();
-</script>
-
-
 <style id="remove-export-upload-toolbar-20260909-v1">
 #infographic .multi-report-toolbar{display:none!important}
 </style>
@@ -9949,6 +9867,66 @@ html body #warning .table th,html body #warning .table td{font-size:16px!importa
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",lock);else lock();
  setTimeout(lock,800);
+})();
+</script>
+
+<style id="compact-consistent-three-view-header-20260911-v1-style">
+html body main.container{
+ padding-top:0!important;
+}
+html body main.container .view{
+ margin-top:0!important;
+ padding-top:0!important;
+}
+html body main.container .view>.fire-style-flood-header{
+ width:100%!important;
+ height:86px!important;
+ min-height:86px!important;
+ max-height:86px!important;
+ margin:0!important;
+ padding:13px 18px!important;
+ box-sizing:border-box!important;
+}
+html body main.container .view>.fire-style-flood-header+*{
+ margin-top:0!important;
+}
+#warning>.top-overview-grid,
+#thaiwater-warning>.thaiwater-warning-shell,
+#infographic>.report-export-workspace{
+ margin-top:0!important;
+}
+#floodWorkflowNav,
+.flood-page-purpose,
+#infographic>.export-page-heading,
+#infographic #exportHeaderTabs,
+#floodCornerTabs,
+#finalFloodHeaderTabs,
+.native-page-tabs,
+.ieat-persistent-tabbar,
+.flood-support-heading-actions{
+ display:none!important;
+ height:0!important;
+ min-height:0!important;
+ max-height:0!important;
+ margin:0!important;
+ padding:0!important;
+ border:0!important;
+ overflow:hidden!important;
+}
+@media(max-width:900px){
+ html body main.container .view>.fire-style-flood-header{
+  height:auto!important;min-height:86px!important;max-height:none!important;
+ }
+}
+</style>
+<script id="compact-consistent-three-view-header-20260911-v1-script">
+(function(){
+ var duplicateSelector="#floodWorkflowNav,.flood-page-purpose,#infographic>.export-page-heading,#infographic #exportHeaderTabs,#floodCornerTabs,#finalFloodHeaderTabs,.native-page-tabs,.ieat-persistent-tabbar,.flood-support-heading-actions";
+ function cleanDuplicateMenus(){
+  document.querySelectorAll(duplicateSelector).forEach(function(node){node.remove()});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",cleanDuplicateMenus,{once:true});else cleanDuplicateMenus();
+ [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(cleanDuplicateMenus,ms)});
 })();
 </script>
 </body>
