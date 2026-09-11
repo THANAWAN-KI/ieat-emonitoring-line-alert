@@ -10036,5 +10036,44 @@ html body main.container #warning .grid.kpis{
  max-height:none!important;
 }
 </style>
+
+<style id="move-empty-overview-gap-to-bottom-20260911-v1-style">
+html body main.container #warning>.flood-support-heading.moved-empty-gap{
+ display:block!important;
+ width:100%!important;
+ min-height:0!important;
+ margin:12px 0 0!important;
+ padding:0!important;
+ border:0!important;
+ order:9999!important;
+}
+html body main.container #warning>.flood-support-heading.moved-empty-gap>
+.flood-support-heading-copy,
+html body main.container #warning>.flood-support-heading.moved-empty-gap>
+.flood-support-heading-date,
+html body main.container #warning>.flood-support-heading.moved-empty-gap>
+.flood-support-heading-actions{display:none!important}
+html body main.container #warning>.top-overview-grid{
+ margin-top:0!important;
+ padding-top:0!important;
+}
+</style>
+<script id="move-empty-overview-gap-to-bottom-20260911-v1-script">
+(function(){
+ function moveGap(){
+  var page=document.getElementById("warning");if(!page)return;
+  var gap=page.querySelector(":scope>.flood-support-heading");if(!gap)return;
+  var containsContent=gap.querySelector(".card,.top-overview-grid,.new4all-water-shell,.operations-dashboard,.tables-overview-grid,iframe,table");
+  if(containsContent){
+   gap.style.setProperty("display","contents","important");
+   return;
+  }
+  gap.classList.add("moved-empty-gap");
+  if(page.lastElementChild!==gap)page.appendChild(gap);
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",moveGap,{once:true});else moveGap();
+ [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(moveGap,ms)});
+})();
+</script>
 </body>
 </html>
