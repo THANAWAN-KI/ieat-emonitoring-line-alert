@@ -10643,5 +10643,61 @@ html body #warning #ridBasinOverview .rid-basin-head>a{
 })();
 </script>
 
+
+<style id="flood-watch-page-colors-20260911-v3">
+/* หน้าที่สอง: สีหัวข้อพื้นที่ 48 ชั่วโมง */
+html body main.container #warning .tw-risk-card:nth-of-type(2) .tw-risk-head h3,
+html body main.container #warning [data-flood-heading="risk-48"]{
+  color:#7f181b!important;
+}
+/* ชื่อหัวตารางทั้งสองชุด */
+html body main.container #warning .estate-watch-table .table-section-head h2,
+html body main.container #warning .station-watch-table .table-section-head h2{
+  color:#004b79!important;
+}
+/* แถวหัวตาราง: พื้นหลังเทาและข้อความดำ */
+html body main.container #warning .estate-watch-table table thead th,
+html body main.container #warning .station-watch-table table thead th{
+  background:#d7d7d8!important;
+  background-color:#d7d7d8!important;
+  background-image:none!important;
+  color:#000000!important;
+  border-color:#bfc0c2!important;
+}
+/* ครอบคลุมตารางที่สร้างหรือปรับปรุงข้อมูลภายหลัง */
+html body main.container #warning .estate-watch-table table thead th *,
+html body main.container #warning .station-watch-table table thead th *{
+  color:#000000!important;
+}
+</style>
+<script id="flood-watch-page-colors-20260911-v3-script">
+(function(){
+  function normalize(value){return String(value||"").replace(/\s+/g," ").trim();}
+  function applyWatchPageColors(){
+    const root=document.getElementById("warning"); if(!root)return;
+    root.querySelectorAll("h1,h2,h3,h4").forEach(function(el){
+      const label=normalize(el.textContent);
+      if(label.indexOf("พื้นที่เสี่ยงน้ำท่วมจากฝนตกสะสมใน 48 ชม. ข้างหน้า")>=0){
+        el.style.setProperty("color","#7f181b","important");
+      }
+      if(label.indexOf("นิคมอุตสาหกรรมที่เข้าเกณฑ์เฝ้าระวัง")>=0 ||
+         label.indexOf("สถานการณ์น้ำในพื้นที่เฝ้าระวังใกล้นิคมอุตสาหกรรม")>=0){
+        const page=el.closest("#warning");
+        if(page)el.style.setProperty("color","#004b79","important");
+      }
+    });
+    root.querySelectorAll(".estate-watch-table table thead th,.station-watch-table table thead th").forEach(function(th){
+      th.style.setProperty("background","#d7d7d8","important");
+      th.style.setProperty("background-color","#d7d7d8","important");
+      th.style.setProperty("color","#000000","important");
+    });
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",applyWatchPageColors,{once:true});else applyWatchPageColors();
+  [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(applyWatchPageColors,ms);});
+  const root=document.getElementById("warning");
+  if(root)new MutationObserver(function(){requestAnimationFrame(applyWatchPageColors);}).observe(root,{childList:true,subtree:true});
+})();
+</script>
+
 </body>
 </html>
