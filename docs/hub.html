@@ -1531,4 +1531,73 @@ html body .tabs .tab[data-type="pm25"] *{
  font-family:"Sarabun","TH Sarabun New",sans-serif!important;
 }
 </style>
+
+<style id="hub-fire-match-flood-global-header-20260911-v1-style">
+/* แถบหัวข้อหน้าไฟไหม้ ใช้รูปแบบเดียวกับแถบหัวข้อหน้าน้ำท่วม */
+:root{--fire-header-active:#8B0000;--fire-header-title:#8B0000;--fire-header-text:#111111}
+html body>.hub-site-header{display:none!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;overflow:hidden!important}
+html body main.page{padding-top:0!important}
+html body main.page>#globalFireHeader{
+ display:flex!important;position:relative!important;align-items:center!important;justify-content:space-between!important;
+ gap:28px!important;width:100%!important;height:86px!important;min-height:86px!important;max-height:86px!important;
+ margin:0!important;padding:13px 18px!important;box-sizing:border-box!important;background:#fff!important;
+ border:1px solid #e5e1e8!important;border-radius:0!important;box-shadow:none!important;
+ font-family:"Noto Sans Thai","Sarabun",sans-serif!important
+}
+#globalFireHeader .global-fire-copy{flex:1 1 auto!important;min-width:0!important;margin:0!important;padding:0!important}
+#globalFireHeader h1{
+ margin:0!important;padding:0!important;color:var(--fire-header-title)!important;
+ font-family:"Noto Sans Thai","Sarabun",sans-serif!important;font-size:24px!important;font-weight:600!important;
+ line-height:1.3!important;letter-spacing:0!important;text-align:left!important
+}
+#globalFireHeader p{
+ margin:3px 0 0!important;padding:0!important;color:var(--fire-header-text)!important;
+ font-family:"Noto Sans Thai","Sarabun",sans-serif!important;font-size:16px!important;font-weight:300!important;
+ line-height:1.4!important;letter-spacing:0!important;text-align:left!important
+}
+#globalFireHeader>.tabs{
+ display:flex!important;align-items:center!important;justify-content:flex-end!important;overflow:visible!important;
+ gap:10px!important;flex:0 0 auto!important;width:auto!important;height:auto!important;min-height:0!important;
+ margin:0!important;padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important
+}
+#globalFireHeader>.tabs .tab{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ width:125px!important;min-width:125px!important;height:42px!important;min-height:42px!important;
+ margin:0!important;padding:9px 16px!important;box-sizing:border-box!important;border:0!important;
+ border-radius:999px!important;background:#F7F6F9!important;color:#6A4A7B!important;
+ font-family:"Noto Sans Thai","Sarabun",sans-serif!important;font-size:16px!important;font-weight:400!important;
+ line-height:1.3!important;box-shadow:none!important;cursor:pointer!important;white-space:nowrap!important
+}
+#globalFireHeader>.tabs .tab img{display:none!important}
+#globalFireHeader>.tabs .tab::after{display:none!important}
+#globalFireHeader>.tabs .tab.active{
+ background:var(--fire-header-active)!important;background-color:var(--fire-header-active)!important;
+ color:#fff!important;font-weight:600!important;border:0!important
+}
+#fireReportView>.fire-overview-head{display:none!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;overflow:hidden!important}
+html body main.page>#globalFireHeader+#fireReportView{margin-top:0!important}
+@media(max-width:1100px){
+ html body main.page>#globalFireHeader{height:auto!important;min-height:86px!important;max-height:none!important;flex-direction:column!important;align-items:stretch!important;gap:10px!important}
+ #globalFireHeader>.tabs{justify-content:flex-start!important;overflow-x:auto!important}
+ #globalFireHeader>.tabs .tab{width:120px!important;min-width:120px!important}
+}
+</style>
+<script id="hub-fire-match-flood-global-header-20260911-v1-script">
+(function(){
+ function mountFireHeader(){
+  var main=document.querySelector("main.page"),tabs=main&&main.querySelector(":scope > .tabs");
+  if(!main||!tabs)return;
+  var header=document.getElementById("globalFireHeader");
+  if(!header){
+   header=document.createElement("header");
+   header.id="globalFireHeader";
+   header.innerHTML='<div class="global-fire-copy"><h1>ข้อมูลสนับสนุนกรณีเกิดเหตุไฟไหม้</h1><p>ติดตามข้อมูลสนับสนุน พื้นที่ใกล้เคียง และแผนที่วิเคราะห์จากข้อมูลล่าสุด</p></div>';
+  }
+  if(tabs.parentElement!==header)header.appendChild(tabs);
+  if(main.firstElementChild!==header)main.prepend(header);
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mountFireHeader,{once:true});else mountFireHeader();
+ [100,500,1200,2500,5000].forEach(function(ms){setTimeout(mountFireHeader,ms)});
+})();
+</script>
 </body></html>
