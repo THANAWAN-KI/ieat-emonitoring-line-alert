@@ -11088,13 +11088,14 @@ html body #infographic #reportPage3 [data-status="critical"] {
 </style>
 
 
-<style id="overview-cards-three-columns-20260911-v1">
-/* Arrange the six top summary cards as one continuous 3-column grid. */
+<style id="overview-cards-three-columns-20260911-v2">
+/* Arrange all nine overview cards as one continuous 3 x 3 grid. */
 html body #warning .top-overview-metrics{
   display:grid!important;
   grid-template-columns:repeat(3,minmax(0,1fr))!important;
   gap:12px!important;
   width:100%!important;
+  align-items:stretch!important;
 }
 html body #warning .top-overview-metrics>.watch-dashboard-block,
 html body #warning .top-overview-metrics>.national-situation-block,
@@ -11102,11 +11103,25 @@ html body #warning .top-overview-metrics .grid.kpis,
 html body #warning .top-overview-metrics .national-cards-dashboard{
   display:contents!important;
 }
+html body #warning .top-overview-metrics>.card,
 html body #warning .top-overview-metrics .card.kpi,
-html body #warning .top-overview-metrics .card.national-kpi{
+html body #warning .top-overview-metrics .card.national-kpi,
+html body #warning .top-overview-metrics>.national-alert,
+html body #warning .top-overview-metrics>.daily-water-report{
   width:100%!important;
   min-width:0!important;
+  height:100%!important;
   margin:0!important;
+}
+html body #warning .operations-dashboard{
+  grid-template-columns:1fr!important;
+}
+html body #warning .operations-side:empty{
+  display:none!important;
+}
+html body #warning .operations-map{
+  grid-column:1!important;
+  width:100%!important;
 }
 @media(max-width:850px){
   html body #warning .top-overview-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important}
@@ -11115,5 +11130,23 @@ html body #warning .top-overview-metrics .card.national-kpi{
   html body #warning .top-overview-metrics{grid-template-columns:1fr!important}
 }
 </style>
+<script id="overview-cards-three-columns-20260911-v2-script">
+(function(){
+  function arrangeNineOverviewCards(){
+    var target=document.querySelector("#warning .top-overview-metrics");
+    var source=document.querySelector("#warning .operations-side");
+    if(!target||!source)return;
+    [".national-alert",".daily-water-report",".nationwide-indicators"].forEach(function(selector){
+      var card=source.querySelector(selector);
+      if(card)target.appendChild(card);
+    });
+  }
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",arrangeNineOverviewCards);
+  }else{
+    arrangeNineOverviewCards();
+  }
+})();
+</script>
 </body>
 </html>
