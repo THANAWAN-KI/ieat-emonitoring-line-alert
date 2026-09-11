@@ -9929,5 +9929,89 @@ html body main.container .view>.fire-style-flood-header+*{
  [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(cleanDuplicateMenus,ms)});
 })();
 </script>
+
+<style id="final-header-ux-standard-832561-20260911-v2-style">
+:root{--flood-menu-active:#832561}
+html body main.container{padding-top:0!important}
+html body main.container>.view{margin:0!important;padding-top:0!important}
+html body main.container>.view>.fire-style-flood-header{
+ display:flex!important;
+ position:relative!important;
+ width:100%!important;
+ height:86px!important;
+ min-height:86px!important;
+ max-height:86px!important;
+ margin:0!important;
+ padding:13px 18px!important;
+ align-items:center!important;
+ justify-content:space-between!important;
+ box-sizing:border-box!important;
+}
+html body .fire-style-flood-header .flood-header-tabs button.active,
+html body .fire-style-flood-header .flood-header-tabs button[aria-current="page"]{
+ background:#832561!important;
+ background-color:#832561!important;
+ color:#fff!important;
+}
+html body main.container>.view>.fire-style-flood-header+*,
+#warning>.top-overview-grid,
+#thaiwater-warning>.thaiwater-warning-shell,
+#infographic>.report-export-workspace{
+ margin-top:0!important;
+}
+#warning>.flood-support-heading,
+#warning>.dashboard-intro,
+#floodWorkflowNav,
+.flood-page-purpose,
+#infographic>.export-page-heading,
+#exportHeaderTabs,
+#floodCornerTabs,
+#finalFloodHeaderTabs,
+.native-page-tabs,
+.ieat-persistent-tabbar,
+.flood-support-heading-actions,
+body>.topbar{
+ display:none!important;
+ width:0!important;height:0!important;min-height:0!important;max-height:0!important;
+ margin:0!important;padding:0!important;border:0!important;overflow:hidden!important;
+}
+@media(max-width:900px){
+ html body main.container>.view>.fire-style-flood-header{
+  height:auto!important;min-height:86px!important;max-height:none!important;
+ }
+}
+</style>
+<script id="final-header-ux-standard-832561-20260911-v2-script">
+(function(){
+ var duplicateSelector="#floodWorkflowNav,.flood-page-purpose,#infographic>.export-page-heading,#exportHeaderTabs,#floodCornerTabs,#finalFloodHeaderTabs,.native-page-tabs,.ieat-persistent-tabbar,.flood-support-heading-actions,body>.topbar";
+ var cleaning=false;
+ function enforce(){
+  if(cleaning)return;cleaning=true;
+  document.querySelectorAll(duplicateSelector).forEach(function(node){node.remove()});
+  var activeView=(document.querySelector("main.container>.view.active")||{}).id||"warning";
+  document.querySelectorAll(".fire-style-flood-header .flood-header-tabs button[data-view]").forEach(function(button){
+   var on=button.dataset.view===activeView;
+   button.classList.toggle("active",on);
+   if(on){
+    button.setAttribute("aria-current","page");
+    button.style.setProperty("background","#832561","important");
+    button.style.setProperty("background-color","#832561","important");
+    button.style.setProperty("color","#fff","important");
+   }else{
+    button.removeAttribute("aria-current");
+    button.style.setProperty("background","#F7F6F9","important");
+    button.style.setProperty("background-color","#F7F6F9","important");
+    button.style.setProperty("color","#6A4A7B","important");
+   }
+  });
+  cleaning=false;
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",enforce,{once:true});else enforce();
+ var main=document.querySelector("main.container");
+ if(main)new MutationObserver(enforce).observe(main,{childList:true,subtree:true,attributes:true,attributeFilter:["class"]});
+ document.addEventListener("click",function(e){if(e.target.closest(".fire-style-flood-header button[data-view]"))setTimeout(enforce,0)});
+ [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(enforce,ms)});
+})();
+</script>
 </body>
 </html>
