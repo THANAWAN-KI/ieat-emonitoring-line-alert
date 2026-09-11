@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="th">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8">\r\n  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">\r\n  <meta http-equiv="Pragma" content="no-cache">\r\n  <meta http-equiv="Expires" content="0">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>ศูนย์ข้อมูลสถานการณ์น้ำเพื่อสนับสนุนนิคมอุตสาหกรรม</title>
   <link rel="stylesheet" href="https://oc.ieat.go.th/assets/app/fonts/includes.css">
@@ -10,10 +10,10 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Kanit:wght@300;400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script type="module" src="https://js.arcgis.com/5.1/map-components/"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
-  <script src="data/thaiwater_latest.js?v=20260821-3"></script>
-  <script src="flood-live-data.js?v=20260908-1" defer></script>
+  <script src="data/thaiwater_latest.js?v=20260911-1"></script>
+  <script src="flood-live-data.js?v=20260911-1" defer></script>
   <script src="data/thaiwater-map-meta.js" defer></script>
-  <script src="flood-export.js?v=20260821-1" defer></script>
+  <script src="flood-export.js?v=20260911-1" defer></script>
   <style>
     :root{--purple:#388ed1;--blue:#1769C2;--cyan:#81D4FA;--teal:#66BB6A;--ink:#283142;--muted:#697386;--bg:#F6F6F4;--line:#E5E2E8;--soft:#F5F1F7;--white:#FFFFFF;--red:#B0005A;--orange:#F6BB42;--green:#58B957}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Sarabun","Sarabun",sans-serif;font-size:16px;font-weight:400}button,input,select,textarea{font:inherit}
@@ -1355,6 +1355,19 @@ body{color:#172033!important}
  #warning .operations-map iframe{min-height:580px!important}
 }
 </style>
+<style id="stable-first-paint-20260911-v1">
+html.flood-initializing body>main.container{visibility:hidden!important}
+html.flood-initializing body::before{content:"กำลังโหลดข้อมูลล่าสุด…";position:fixed;inset:0;z-index:999999;display:grid;place-items:center;background:#fff;color:#59267c;font:500 18px "Sarabun",sans-serif}
+</style>
+<script id="stable-first-paint-20260911-v1-script">
+document.documentElement.classList.add("flood-initializing");
+(function(){
+ var shown=false;
+ function show(){if(shown)return;shown=true;document.documentElement.classList.remove("flood-initializing")}
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",function(){setTimeout(show,900)},{once:true});else setTimeout(show,300);
+ setTimeout(show,2500);
+})();
+</script>
 </head>
 <body>
   <header class="topbar"><div class="top-inner">
@@ -9909,6 +9922,9 @@ html body #warning #nationalHeavyRainCount~span{
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
 })();
+</script>
+<script id="normalize-stale-version-url-20260911-v1">
+(function(){var expected="20260911-stable";var u=new URL(location.href);if(u.searchParams.get("v")!==expected){u.searchParams.set("v",expected);history.replaceState(null,"",u.pathname+"?"+u.searchParams.toString()+u.hash)}})();
 </script>
 </body>
 </html>
