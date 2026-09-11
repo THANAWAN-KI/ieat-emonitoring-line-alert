@@ -11087,5 +11087,33 @@ html body #infographic #reportPage3 [data-status="critical"] {
 #infographic #reportPage2 .export-data-table tbody tr td:last-child:not([colspan]) *{color:#fff!important}
 </style>
 
+
+<style id="overview-cards-three-columns-20260911-v1">
+/* Arrange the six top summary cards as one continuous 3-column grid. */
+html body #warning .top-overview-metrics{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:12px!important;
+  width:100%!important;
+}
+html body #warning .top-overview-metrics>.watch-dashboard-block,
+html body #warning .top-overview-metrics>.national-situation-block,
+html body #warning .top-overview-metrics .grid.kpis,
+html body #warning .top-overview-metrics .national-cards-dashboard{
+  display:contents!important;
+}
+html body #warning .top-overview-metrics .card.kpi,
+html body #warning .top-overview-metrics .card.national-kpi{
+  width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+}
+@media(max-width:850px){
+  html body #warning .top-overview-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:560px){
+  html body #warning .top-overview-metrics{grid-template-columns:1fr!important}
+}
+</style>
 </body>
 </html>
