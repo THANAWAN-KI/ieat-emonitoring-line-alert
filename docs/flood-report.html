@@ -11144,5 +11144,83 @@ html body #warning .flood-final-cards:empty{display:none!important}
  [100,300,700,1200,2000,3500,6000].forEach(function(ms){setTimeout(run,ms)});
 })();
 </script>
+
+<style id="normalize-nine-summary-cards-20260911-v1">
+html body #warning .daily-water-grid[data-nine-cards-merged="true"]>*{
+ position:relative!important;
+ display:flex!important;
+ flex-direction:column!important;
+ align-items:center!important;
+ justify-content:center!important;
+ text-align:center!important;
+ padding:18px 18px 42px!important;
+ overflow:hidden!important;
+ border-radius:14px!important;
+ background:#fff!important;
+ box-shadow:0 7px 20px rgba(0,75,121,.12)!important;
+ border:1px solid #fff!important;
+}
+html body #warning .daily-water-grid[data-nine-cards-merged="true"] .metric-card-copy{
+ display:flex!important;
+ flex-direction:column!important;
+ align-items:center!important;
+ justify-content:center!important;
+ width:100%!important;
+ min-width:0!important;
+ gap:3px!important;
+ margin:0!important;
+ padding:0!important;
+ text-align:center!important;
+ background:transparent!important;
+ box-shadow:none!important;
+}
+html body #warning .daily-water-grid[data-nine-cards-merged="true"] .metric-card-copy>strong{order:1!important;margin:0!important}
+html body #warning .daily-water-grid[data-nine-cards-merged="true"] .metric-card-copy>h2,
+html body #warning .daily-water-grid[data-nine-cards-merged="true"] .metric-card-copy>.reference-card-title{order:2!important;margin:0!important}
+html body #warning .daily-water-grid[data-nine-cards-merged="true"] .metric-card-copy>span:not(.reference-card-title){order:3!important;margin:0!important}
+html body #warning .daily-water-grid[data-nine-cards-merged="true"] .unified-flood-card-icon{
+ position:absolute!important;
+ left:16px!important;
+ bottom:10px!important;
+ width:38px!important;
+ height:38px!important;
+ display:block!important;
+ margin:0!important;
+ padding:0!important;
+}
+html body #warning .daily-water-grid[data-nine-cards-merged="true"] .unified-flood-card-icon svg{
+ display:block!important;
+ width:38px!important;
+ height:38px!important;
+}
+html body #warning .daily-water-grid[data-nine-cards-merged="true"] .source-link{display:none!important}
+</style>
+<script id="normalize-nine-summary-cards-20260911-v1-script">
+(function(){
+ function normalizeCards(){
+  var grid=document.querySelector("#warning .daily-water-grid[data-nine-cards-merged='true']");
+  if(!grid||grid.children.length!==9)return false;
+  var cards=Array.from(grid.children);
+  var sourceIcon=cards.map(function(c){return c.querySelector(".unified-flood-card-icon")}).find(Boolean);
+  cards.forEach(function(card){
+   if(sourceIcon&&!card.querySelector(".unified-flood-card-icon"))card.insertBefore(sourceIcon.cloneNode(true),card.firstChild);
+   var copy=card.querySelector(":scope > .metric-card-copy");
+   if(!copy){
+    var existing=Array.from(card.children).filter(function(el){return !el.classList.contains("unified-flood-card-icon")&&!el.classList.contains("source-link")});
+    if(existing.length===1&&existing[0].tagName==="DIV"){
+     copy=existing[0];copy.classList.add("metric-card-copy");
+    }else{
+     copy=document.createElement("div");copy.className="metric-card-copy";
+     existing.forEach(function(el){copy.appendChild(el)});card.appendChild(copy);
+    }
+   }
+  });
+  return true;
+ }
+ function run(){normalizeCards()}
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",run);else run();
+ [200,500,900,1500,2500,4000,6500,9000].forEach(function(ms){setTimeout(run,ms)});
+})();
+</script>
 </body>
 </html>
