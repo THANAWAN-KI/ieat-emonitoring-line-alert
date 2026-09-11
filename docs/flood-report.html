@@ -10544,5 +10544,104 @@ html body main.container #warning .unified-flood-card-icon svg{
  if(root)new MutationObserver(queue).observe(root,{childList:true,subtree:true});
 })();
 </script>
+
+<style id="flood-card-and-watch-colors-20260911-v2">
+/* ปรับการ์ด 9 ช่องให้สมส่วน และใช้ข้อความสีดำ */
+html body main.container #warning .daily-water-grid,
+html body main.container #warning .flood-final-cards{
+  align-items:stretch!important;
+  grid-auto-rows:1fr!important;
+}
+html body main.container #warning .daily-water-grid>.daily-water-item,
+html body main.container #warning .flood-final-cards>.kpi,
+html body main.container #warning .flood-final-cards>.national-kpi{
+  width:100%!important;
+  min-width:0!important;
+  height:auto!important;
+  min-height:142px!important;
+  padding:18px 20px!important;
+  margin:0!important;
+  align-self:stretch!important;
+  box-sizing:border-box!important;
+}
+html body main.container #warning .daily-water-grid>.daily-water-item .metric-card-copy,
+html body main.container #warning .flood-final-cards>.kpi .metric-card-copy,
+html body main.container #warning .flood-final-cards>.national-kpi .metric-card-copy{
+  min-width:0!important;
+  width:100%!important;
+}
+html body main.container #warning .daily-water-grid>.daily-water-item .metric-card-copy>*,
+html body main.container #warning .flood-final-cards>.kpi .metric-card-copy>*,
+html body main.container #warning .flood-final-cards>.national-kpi .metric-card-copy>*,
+html body main.container #warning .daily-water-grid>.daily-water-item small,
+html body main.container #warning .daily-water-grid>.daily-water-item strong,
+html body main.container #warning .daily-water-grid>.daily-water-item span,
+html body main.container #warning .flood-final-cards>.kpi h2,
+html body main.container #warning .flood-final-cards>.kpi strong,
+html body main.container #warning .flood-final-cards>.kpi span,
+html body main.container #warning .flood-final-cards>.national-kpi h2,
+html body main.container #warning .flood-final-cards>.national-kpi strong,
+html body main.container #warning .flood-final-cards>.national-kpi span{
+  color:#000000!important;
+  overflow-wrap:anywhere!important;
+}
+/* หัวข้อสองส่วนเป็นสีดำ */
+html body #warning [data-flood-heading="risk-24"],
+html body #warning [data-flood-heading="indicators"],
+html body #warning .nationwide-indicators .card-head h2,
+html body #warning .national-kpi:has(#nationalFloodCount) h2{
+  color:#000000!important;
+}
+/* แท็บที่เลือก: ทอง #ecb731 และข้อความเขียว #537b35 */
+html body main.container>#globalFloodHeader .global-flood-tabs button.active,
+html body main.container>#globalFloodHeader .global-flood-tabs button[aria-current="page"]{
+  background:#ecb731!important;
+  background-color:#ecb731!important;
+  color:#537b35!important;
+}
+/* ปุ่มเปิดระบบ SWOC */
+html body #warning #ridBasinOverview .rid-basin-head>a{
+  background:#c4dff6!important;
+  background-color:#c4dff6!important;
+  color:#0091cd!important;
+  border-color:#c4dff6!important;
+}
+@media(max-width:700px){
+  html body main.container #warning .daily-water-grid>.daily-water-item,
+  html body main.container #warning .flood-final-cards>.kpi,
+  html body main.container #warning .flood-final-cards>.national-kpi{
+    min-height:126px!important;
+    padding:14px!important;
+  }
+}
+</style>
+<script id="flood-card-and-watch-colors-20260911-v2-script">
+(function(){
+  const titles=[
+    "พื้นที่เสี่ยงน้ำท่วมฉับพลันใน 24 ชั่วโมงข้างหน้า",
+    "พื้นที่เสี่ยงน้ำท่วมฉับพลัน 24 ชั่วโมง",
+    "ตัวชี้วัดเฝ้าระวังทั่วประเทศ"
+  ];
+  function applyFloodCardColors(){
+    const root=document.getElementById("warning"); if(!root)return;
+    root.querySelectorAll("h1,h2,h3,h4").forEach(function(el){
+      const value=String(el.textContent||"").replace(/\s+/g," ").trim();
+      if(titles.some(function(title){return value===title||value.indexOf(title)>=0;})){
+        el.style.setProperty("color","#000000","important");
+      }
+    });
+    root.querySelectorAll(".daily-water-grid>.daily-water-item,.flood-final-cards>.kpi,.flood-final-cards>.national-kpi").forEach(function(card){
+      card.querySelectorAll(".metric-card-copy>*,small,strong,span,h2").forEach(function(el){
+        if(!el.closest(".unified-flood-card-icon"))el.style.setProperty("color","#000000","important");
+      });
+    });
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",applyFloodCardColors,{once:true});else applyFloodCardColors();
+  [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(applyFloodCardColors,ms);});
+  const root=document.getElementById("warning");
+  if(root)new MutationObserver(function(){requestAnimationFrame(applyFloodCardColors);}).observe(root,{childList:true,subtree:true});
+})();
+</script>
+
 </body>
 </html>
