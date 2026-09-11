@@ -9934,7 +9934,8 @@ html body main.container>.view.active{
 }
 html body main.container>#globalFloodHeader+.view.active{margin-top:0!important}
 html body main.container>.view>.fire-style-flood-header,
-#warning>.dashboard-intro,#warning>.flood-support-heading,
+#warning>.dashboard-intro,
+#warning>.flood-support-heading-copy,#warning>.flood-support-heading-date,#warning>.flood-support-heading-actions,
 #floodWorkflowNav,.flood-page-purpose,#infographic>.export-page-heading,
 #exportHeaderTabs,#floodCornerTabs,#finalFloodHeaderTabs,.native-page-tabs,
 .ieat-persistent-tabbar,.flood-support-heading-actions,body>.topbar{
@@ -9958,7 +9959,7 @@ html body main.container>.view>.fire-style-flood-header,
 <script id="one-global-flood-header-20260911-v1-script">
 (function(){
  var pages=[["warning","ภาพรวม"],["thaiwater-warning","พื้นที่เฝ้าระวัง"],["infographic","ส่งออกข้อมูล"]];
- var duplicateSelector=".view>.fire-style-flood-header,#warning>.dashboard-intro,#warning>.flood-support-heading,#floodWorkflowNav,.flood-page-purpose,#infographic>.export-page-heading,#exportHeaderTabs,#floodCornerTabs,#finalFloodHeaderTabs,.native-page-tabs,.ieat-persistent-tabbar,.flood-support-heading-actions,body>.topbar";
+ var duplicateSelector=".view>.fire-style-flood-header,#warning>.dashboard-intro,#warning>.flood-support-heading-copy,#warning>.flood-support-heading-date,#warning>.flood-support-heading-actions,#floodWorkflowNav,.flood-page-purpose,#infographic>.export-page-heading,#exportHeaderTabs,#floodCornerTabs,#finalFloodHeaderTabs,.native-page-tabs,.ieat-persistent-tabbar,body>.topbar";
  var busy=false;
  function current(){var v=document.querySelector("main.container>.view.active");return v?v.id:"warning"}
  function sync(){
@@ -9977,6 +9978,11 @@ html body main.container>.view>.fire-style-flood-header,
  function mount(){
   if(busy)return;busy=true;
   var main=document.querySelector("main.container");if(!main){busy=false;return}
+  document.querySelectorAll("#warning>.flood-support-heading").forEach(function(n){
+   var parent=n.parentNode;if(!parent)return;
+   while(n.firstChild)parent.insertBefore(n.firstChild,n);
+   n.remove();
+  });
   document.querySelectorAll(duplicateSelector).forEach(function(n){n.remove()});
   var h=document.getElementById("globalFloodHeader");
   if(!h){
@@ -9994,5 +10000,18 @@ html body main.container>.view>.fire-style-flood-header,
  if(root)new MutationObserver(mount).observe(root,{childList:true,subtree:true});
 })();
 </script>
+
+<style id="preserve-overview-cards-20260911-v1">
+html body main.container #warning>.top-overview-grid{
+ display:grid!important;
+ visibility:visible!important;
+ opacity:1!important;
+ height:auto!important;
+ min-height:0!important;
+ overflow:visible!important;
+ margin-top:0!important;
+ padding-top:0!important;
+}
+</style>
 </body>
 </html>
