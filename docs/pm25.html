@@ -124,10 +124,6 @@ footer,.footer{background:#fff!important;color:#858d97!important;border-color:#e
 </main>
 <div class="export-stage" aria-hidden="true">
   <section class="pm-report" id="pmReport">
-    <header class="pm-report-head">
-      <div class="pm-report-brand"><img src="./ieat_logo.png.PNG" alt=""><div><b>การนิคมอุตสาหกรรมแห่งประเทศไทย</b><span>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย (EMCC)</span></div></div>
-      <div class="pm-report-label">รายงานสถานการณ์คุณภาพอากาศ</div>
-    </header>
     <section class="pm-report-title"><div><h1>รายงานค่าฝุ่นละออง PM2.5</h1><p>พื้นที่นิคมอุตสาหกรรมทั่วประเทศไทย</p></div><div><b id="reportDate">–</b><span id="reportDataTime">–</span></div></section>
     <section class="pm-report-kpis">
       <article><span>สถานีทั้งหมด</span><strong id="reportTotal">–</strong><small>สถานี</small></article>
@@ -476,6 +472,128 @@ html body main.wrap .check i{color:var(--pm-accent)!important}
 html body .pm-report-head{border-bottom-color:var(--pm-primary)!important}
 html body .pm-report-brand b,
 html body .pm-report-title{color:var(--pm-primary)!important}
+</style>
+
+<style id="pm25-export-match-drought-example-20260911-v1">
+/* รายงาน PNG PM2.5 แบบเดียวกับตัวอย่างรายงานภัยแล้ง: A4 เรียบ ตารางชัด ไม่มีโลโก้ */
+html body .export-stage{width:1123px!important}
+html body .pm-report{
+ position:relative!important;box-sizing:border-box!important;
+ width:1123px!important;min-width:1123px!important;max-width:1123px!important;
+ height:1587px!important;min-height:1587px!important;max-height:1587px!important;
+ margin:0!important;padding:28px 36px 34px!important;overflow:hidden!important;
+ background:#fff!important;color:#111!important;border:1px solid #7F8B96!important;
+ border-radius:0!important;box-shadow:none!important;
+ font-family:"Sarabun","Noto Sans Thai",sans-serif!important;font-size:14px!important;line-height:1.45!important
+}
+html body .pm-report .pm-report-head,
+html body .pm-report .pm-report-brand,
+html body .pm-report .pm-report-label,
+html body .pm-report img{display:none!important}
+html body .pm-report .pm-report-title{
+ display:block!important;margin:0!important;padding:0 0 14px!important;
+ text-align:center!important;border:0!important;border-bottom:1px solid #111!important
+}
+html body .pm-report .pm-report-title>div,
+html body .pm-report .pm-report-title>div:last-child{text-align:center!important}
+html body .pm-report .pm-report-title h1{
+ margin:0!important;padding:0!important;color:#111!important;
+ font-family:"Sarabun","Noto Sans Thai",sans-serif!important;font-size:30px!important;
+ font-weight:700!important;line-height:1.25!important;text-align:center!important
+}
+html body .pm-report .pm-report-title p{
+ margin:4px 0 0!important;color:#555!important;font-size:17px!important;
+ font-weight:400!important;line-height:1.35!important;text-align:center!important
+}
+html body .pm-report .pm-report-title>div:last-child b{
+ display:block!important;margin:5px 0 0!important;color:#555!important;
+ font-size:15px!important;font-weight:400!important;line-height:1.35!important
+}
+html body .pm-report .pm-report-title>div:last-child span{
+ display:block!important;margin:1px 0 0!important;color:#555!important;
+ font-size:14px!important;font-weight:400!important;line-height:1.35!important
+}
+html body .pm-report .pm-report-kpis{
+ display:grid!important;grid-template-columns:repeat(5,1fr)!important;gap:0!important;
+ margin:14px 0 18px!important;border:1px solid #222!important
+}
+html body .pm-report .pm-report-kpis article{
+ min-height:88px!important;margin:0!important;padding:9px 7px!important;
+ text-align:center!important;background:#fff!important;border:0!important;
+ border-right:1px solid #222!important;border-radius:0!important;box-shadow:none!important
+}
+html body .pm-report .pm-report-kpis article:last-child{border-right:0!important}
+html body .pm-report .pm-report-kpis span{
+ display:block!important;min-height:34px!important;color:#111!important;
+ font-size:14px!important;font-weight:600!important;line-height:1.3!important;text-align:center!important
+}
+html body .pm-report .pm-report-kpis strong{
+ display:block!important;margin:3px 0 0!important;color:#111!important;
+ font-size:22px!important;font-weight:600!important;line-height:1.15!important;text-align:center!important
+}
+html body .pm-report .pm-report-kpis small{
+ display:block!important;margin:2px 0 0!important;color:#333!important;
+ font-size:13px!important;font-weight:400!important;line-height:1.25!important;text-align:center!important
+}
+html body .pm-report .pm-report-kpis .offline strong{color:#555!important}
+html body .pm-report .pm-report-kpis .alert strong{color:#B00020!important}
+html body .pm-report .pm-report-summary{
+ margin:0 0 18px!important;padding:10px 12px!important;background:#fff!important;
+ border:1px solid #222!important;border-left:1px solid #222!important;border-radius:0!important;box-shadow:none!important
+}
+html body .pm-report .pm-report-summary h2{
+ margin:0 0 4px!important;color:#111!important;font-size:18px!important;
+ font-weight:600!important;line-height:1.35!important;text-align:center!important
+}
+html body .pm-report .pm-report-summary p{
+ margin:0!important;color:#111!important;font-size:14px!important;
+ font-weight:400!important;line-height:1.5!important;text-align:left!important
+}
+html body .pm-report .pm-report-table-block{
+ margin:0!important;padding:0!important;border:0!important;border-radius:0!important;box-shadow:none!important
+}
+html body .pm-report .pm-report-section-head{
+ display:block!important;margin:0!important;padding:0 0 8px!important;
+ background:#fff!important;border:0!important;text-align:center!important
+}
+html body .pm-report .pm-report-section-head h2{
+ margin:0!important;color:#111!important;font-size:19px!important;
+ font-weight:600!important;line-height:1.35!important;text-align:center!important
+}
+html body .pm-report .pm-report-section-head span{
+ display:block!important;margin:2px 0 0!important;color:#555!important;
+ font-size:13px!important;font-weight:400!important;text-align:center!important
+}
+html body .pm-report table{
+ width:100%!important;border-collapse:collapse!important;table-layout:fixed!important;border:1px solid #222!important
+}
+html body .pm-report th,
+html body .pm-report td{
+ box-sizing:border-box!important;padding:7px 6px!important;border:1px solid #222!important;
+ color:#111!important;background:#fff!important;font-size:13px!important;font-weight:400!important;
+ line-height:1.35!important;vertical-align:middle!important;text-align:center!important;overflow-wrap:anywhere!important
+}
+html body .pm-report th{background:#EFEFEF!important;font-size:14px!important;font-weight:600!important}
+html body .pm-report td:nth-child(2),
+html body .pm-report td:nth-child(3){text-align:left!important}
+html body .pm-report tbody tr:nth-child(even) td{background:#FAFAFA!important}
+html body .pm-report .pm-report-note{
+ margin:18px 0 0!important;padding:10px 12px!important;background:#fff!important;
+ border:1px solid #222!important;border-radius:0!important;box-shadow:none!important
+}
+html body .pm-report .pm-report-note b{
+ display:block!important;margin:0 0 3px!important;color:#111!important;
+ font-size:15px!important;font-weight:600!important
+}
+html body .pm-report .pm-report-note p{
+ margin:0!important;color:#333!important;font-size:13px!important;font-weight:400!important;line-height:1.45!important
+}
+html body .pm-report .pm-report-footer{
+ position:absolute!important;left:36px!important;right:36px!important;bottom:20px!important;
+ display:flex!important;justify-content:space-between!important;gap:18px!important;
+ margin:0!important;padding:8px 0 0!important;border-top:1px solid #9AA3AA!important;
+ color:#555!important;font-size:12px!important;font-weight:400!important;line-height:1.35!important
+}
 </style>
 </body>
 </html>
