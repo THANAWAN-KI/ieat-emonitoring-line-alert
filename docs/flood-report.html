@@ -9739,7 +9739,7 @@ html body #warning #nationalHeavyRainCount~span{
 })();
 </script>
 <script id="normalize-stale-version-url-20260911-v1">
-(function(){var expected="20260911-cards9-v2";var u=new URL(location.href);if(u.searchParams.get("v")!==expected){u.searchParams.set("v",expected);history.replaceState(null,"",u.pathname+"?"+u.searchParams.toString()+u.hash)}})();
+(function(){var expected="20260911-cards9-v3";var u=new URL(location.href);if(u.searchParams.get("v")!==expected){u.searchParams.set("v",expected);history.replaceState(null,"",u.pathname+"?"+u.searchParams.toString()+u.hash)}})();
 </script>
 <style id="flood-header-match-fire-20260911-v1">
 html body main.container #warning>.flood-support-heading{
@@ -10683,8 +10683,12 @@ html body #warning .flood-nine-icon svg{
  function apply(){
   if(applying)return;applying=true;
   cards().forEach(function(card){
-   card.querySelectorAll("small,span,h1,h2,h3,h4,p,b,a,div").forEach(function(el){el.style.setProperty("color","#000000","important")});
-   card.querySelectorAll("strong").forEach(function(el){el.style.setProperty("color","#0091cd","important")});
+   card.querySelectorAll("small,span,h1,h2,h3,h4,p,b,a,div").forEach(function(el){
+    if(el.style.getPropertyValue("color")!=="#000000"||el.style.getPropertyPriority("color")!=="important")el.style.setProperty("color","#000000","important");
+   });
+   card.querySelectorAll("strong").forEach(function(el){
+    if(el.style.getPropertyValue("color")!=="#0091cd"||el.style.getPropertyPriority("color")!=="important")el.style.setProperty("color","#0091cd","important");
+   });
    let holder=card.querySelector(":scope>.icon, :scope>.n-icon, :scope>.daily-flood-icon, :scope>.flood-nine-icon");
    if(!holder){
     holder=document.createElement("span");
@@ -10699,7 +10703,7 @@ html body #warning .flood-nine-icon svg{
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply,{once:true});else apply();
  [100,500,1200,2500,5000,8000,11000,15000].forEach(function(ms){setTimeout(apply,ms)});
  const root=document.getElementById("warning");
- if(root)new MutationObserver(queue).observe(root,{childList:true,subtree:true});
+ if(root)new MutationObserver(queue).observe(root,{childList:true,subtree:true,attributes:true,attributeFilter:["style","class"]});
 })();
 </script>
 </body>
