@@ -16,7 +16,7 @@
   <script src="data/thaiwater_latest.js?v=20260911-1"></script>
   <script src="flood-live-data.js?v=20260911-1" defer></script>
   <script src="data/thaiwater-map-meta.js" defer></script>
-  <script src="flood-export.js?v=20260911-1" defer></script>
+  <script src="flood-export.js?v=20260911-2" defer></script>
   <style>
     :root{--purple:#388ed1;--blue:#1769C2;--cyan:#81D4FA;--teal:#66BB6A;--ink:#283142;--muted:#697386;--bg:#F6F6F4;--line:#E5E2E8;--soft:#F5F1F7;--white:#FFFFFF;--red:#B0005A;--orange:#F6BB42;--green:#58B957}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Sarabun","Sarabun",sans-serif;font-size:16px;font-weight:400}button,input,select,textarea{font:inherit}
@@ -9453,47 +9453,7 @@ html body main.container #infographic .report-pages{
 }
 </style>
 <style id="page3-right-click-copy-png-20260910-v1">#reportPage3 .export-table-block,#reportPage3 .export-data-table{cursor:context-menu}.copy-png-toast{position:fixed;left:50%;bottom:28px;z-index:99999;transform:translateX(-50%);padding:10px 18px;border-radius:999px;background:#11862F;color:#fff;font-size:15px;box-shadow:0 6px 20px rgba(0,0,0,.2);pointer-events:none}</style>
-<script id="page3-right-click-copy-png-20260910-v1-script">(function(){
-function note(m){var o=document.querySelector(".copy-png-toast");if(o)o.remove();var t=document.createElement("div");t.className="copy-png-toast";t.textContent=m;document.body.appendChild(t);setTimeout(function(){t.remove()},2200)}
-function save(b,n){var a=document.createElement("a"),u=URL.createObjectURL(b);a.href=u;a.download=n+".png";a.click();setTimeout(function(){URL.revokeObjectURL(u)},1000)}
-async function make(n,name){if(typeof html2canvas!=="function"){note("ระบบสร้าง PNG ยังโหลดไม่เสร็จ");return}note("กำลังสร้างภาพ PNG…");try{var w=n.scrollWidth||n.offsetWidth,h=n.scrollHeight||n.offsetHeight;var canvas=await html2canvas(n,{scale:3,useCORS:true,backgroundColor:"#fff",logging:false,width:w,height:h,windowWidth:Math.max(document.documentElement.clientWidth,w),windowHeight:Math.max(document.documentElement.clientHeight,h),scrollX:0,scrollY:0});canvas.toBlob(async function(blob){if(!blob){note("ไม่สามารถสร้าง PNG ได้");return}try{if(!navigator.clipboard||!window.ClipboardItem)throw new Error();await navigator.clipboard.write([new ClipboardItem({"image/png":blob})]);note("คัดลอก PNG แล้ว")}catch(e){save(blob,name);note("ดาวน์โหลด PNG แล้ว")}},"image/png")}catch(e){note("ไม่สามารถสร้าง PNG ได้ กรุณาลองอีกครั้ง")}}
-document.addEventListener("contextmenu",function(e){var p=e.target.closest("#reportPage3");if(!p)return;e.preventDefault();var b=e.target.closest("#reportPage3 .export-table-block,#reportPage3 img");make(b||p,b?"ตารางสถานการณ์น้ำพื้นที่เฝ้าระวัง":"รายงานสถานการณ์น้ำหน้า3")});
-})();</script>
 <style id="standard-a4-png-all-report-pages-20260910-v1">#infographic .export-sheet,#infographic .export-table-block{cursor:context-menu}.png-standard-render{transform:none!important;zoom:1!important}</style>
-<script id="standard-a4-png-all-report-pages-20260910-v2-script">(function(){
-var A4W=2480,A4H=3508,SHEET_W=794,SHEET_H=1123;
-function toast(m){var o=document.querySelector(".copy-png-toast");if(o)o.remove();var t=document.createElement("div");t.className="copy-png-toast";t.textContent=m;document.body.appendChild(t);setTimeout(function(){t.remove()},2400)}
-function save(blob,name){var a=document.createElement("a"),u=URL.createObjectURL(blob);a.href=u;a.download=name+".png";a.click();setTimeout(function(){URL.revokeObjectURL(u)},1200)}
-async function deliver(blob,name){try{if(!navigator.clipboard||!window.ClipboardItem)throw Error("clipboard");await navigator.clipboard.write([new ClipboardItem({"image/png":blob})]);toast("คัดลอก PNG แล้ว")}catch(e){save(blob,name);toast("ดาวน์โหลด PNG แล้ว")}}
-function output(canvas,name,isPage){canvas.toBlob(function(raw){if(!raw){toast("ไม่สามารถสร้าง PNG ได้");return}if(!isPage){deliver(raw,name);return}var out=document.createElement("canvas");out.width=A4W;out.height=A4H;var g=out.getContext("2d");g.imageSmoothingEnabled=true;g.imageSmoothingQuality="high";g.fillStyle="#fff";g.fillRect(0,0,A4W,A4H);g.drawImage(canvas,0,0,canvas.width,canvas.height,0,0,A4W,A4H);out.toBlob(function(b){if(b)deliver(b,name)},"image/png")}, "image/png")}
-async function render(node,name,isPage){
- if(typeof html2canvas!=="function"){toast("ระบบสร้าง PNG ยังโหลดไม่เสร็จ");return}
- toast("กำลังสร้าง PNG ขนาด A4…");
- try{
-  if(document.fonts&&document.fonts.ready)await document.fonts.ready;
-  var w=isPage?SHEET_W:(node.scrollWidth||node.offsetWidth),h=isPage?SHEET_H:(node.scrollHeight||node.offsetHeight);
-  var canvas=await html2canvas(node,{
-   scale:isPage?1:2,useCORS:true,allowTaint:false,backgroundColor:"#fff",logging:false,
-   width:w,height:h,scrollX:0,scrollY:0,windowWidth:1400,windowHeight:1600,
-   onclone:function(doc){
-    var clone=doc.getElementById(node.id);
-    var css=doc.createElement("style");
-    css.textContent=".png-standard-render,.png-standard-render *{box-sizing:border-box!important;letter-spacing:normal!important;text-rendering:geometricPrecision!important}.png-standard-render{font-family:'Noto Sans Thai','Sarabun',sans-serif!important}.png-standard-render [contenteditable]{outline:0!important}.png-standard-render .sheet-header h2{font-size:25px!important;line-height:1.45!important;margin:0!important}.png-standard-render .sheet-header p{font-size:16px!important;line-height:1.55!important;margin:4px 0 0!important}.png-standard-render .sheet-summary h3{line-height:1.45!important}.png-standard-render .sheet-summary p{line-height:1.6!important}.png-standard-render .sheet-map-note{line-height:1.5!important}";
-    doc.head.appendChild(css);
-    if(isPage&&clone){
-     clone.classList.add("png-standard-render");
-     ["width","min-width","max-width"].forEach(function(k){clone.style.setProperty(k,SHEET_W+"px","important")});
-     ["height","min-height","max-height"].forEach(function(k){clone.style.setProperty(k,SHEET_H+"px","important")});
-     clone.style.setProperty("margin","0","important");clone.style.setProperty("transform","none","important");clone.style.setProperty("zoom","1","important");clone.style.setProperty("overflow","hidden","important");
-     clone.querySelectorAll("[contenteditable]").forEach(function(el){el.removeAttribute("contenteditable")});
-    }
-   }
-  });
-  output(canvas,name,isPage);
- }catch(e){console.error(e);toast("สร้าง PNG ไม่สำเร็จ กรุณาลองอีกครั้ง")}
-}
-document.addEventListener("contextmenu",function(e){var page=e.target.closest("#infographic .export-sheet");if(!page)return;e.preventDefault();e.stopImmediatePropagation();var part=e.target.closest(".export-table-block");var target=part||page;var no=page.dataset.reportPage||"";render(target,part?"ตารางรายงานหน้า"+no:"รายงานสถานการณ์น้ำหน้า"+no,!part)},true);
-})();</script>
 <style id="three-day-map-link-white-text-20260910-v1">
 html body main.container #infographic .three-day-risk-map .three-day-risk-fallback a,
 html body main.container #infographic #reportPage4 .three-day-risk-fallback a{
@@ -10214,6 +10174,13 @@ html body main.container #thaiwater-warning .tw-risk-card .tw-rain *{
 #infographic .export-sheet .sheet-summary p{display:block!important;margin:0!important;padding:0!important;font-family:"Noto Sans Thai","Sarabun",sans-serif!important;font-size:13px!important;font-weight:400!important;line-height:1.55!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:normal!important}
 #infographic .export-sheet .sheet-footer{flex:0 0 auto!important;display:flex!important;align-items:center!important;justify-content:space-between!important;min-height:26px!important;margin-top:auto!important;padding-top:7px!important;box-sizing:border-box!important;font-family:"Noto Sans Thai","Sarabun",sans-serif!important;font-size:11px!important;line-height:1.3!important}
 #infographic .export-sheet.report-exporting,#infographic .export-sheet.report-render-clone{box-shadow:none!important;transform:none!important;zoom:1!important}
+</style>
+
+<style id="single-hd-export-engine-20260911-v1">
+#infographic .export-sheet.report-exporting [contenteditable],
+#infographic .export-sheet.report-render-clone [contenteditable]{outline:0!important;caret-color:transparent!important}
+#infographic .export-sheet.report-render-clone,
+#infographic .export-sheet.report-render-clone *{letter-spacing:normal!important;text-shadow:none!important;box-sizing:border-box!important}
 </style>
 </body>
 </html>
