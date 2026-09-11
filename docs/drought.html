@@ -444,16 +444,15 @@ footer,.footer{background:#fff!important;color:#858d97!important;border-color:#e
 <body>
 <main class="wrap">
 <section class="dashboard-head">
-<div class="head-brand"><div><h2>สถานการณ์ภัยแล้งของนิคมอุตสาหกรรมทั่วประเทศไทย</h2><p>คัดกรองพื้นที่ ติดตามแนวโน้ม และสนับสนุนการเตรียมความพร้อมของนิคมอุตสาหกรรม</p></div></div>
-<div class="report-actions"><button type="button" id="downloadPngBtn"><span>ดาวน์โหลดรายงาน PNG</span></button></div>
+<div class="head-brand"><div><h1>สถานการณ์ภัยแล้งของนิคมอุตสาหกรรมทั่วประเทศไทย</h1><p>คัดกรองพื้นที่ ติดตามแนวโน้ม และสนับสนุนการเตรียมความพร้อมของนิคมอุตสาหกรรม</p></div></div>
 </section>
 <section class="kpis dashboard-kpis">
-<div class="kpi kpi-purple"><span>นิคมอุตสาหกรรม / ท่าเรือฯ</span><div><i class="fa-solid fa-city kpi-icon"></i><strong id="estateCount">–</strong></div><small>แห่ง</small></div>
-<div class="kpi kpi-yellow"><span>จำนวนผู้ประกอบการ</span><div><i class="fa-solid fa-people-group kpi-icon"></i><strong id="operatorTotal">–</strong></div><small>ราย</small></div>
-<div class="kpi kpi-pink"><span>พื้นที่ตามผังแม่นิคมฯ</span><div><i class="fa-solid fa-draw-polygon kpi-icon"></i><strong id="areaTotal">–</strong></div><small>ไร่</small></div>
-<div class="kpi kpi-blue"><span>ปริมาณน้ำใช้</span><div><i class="fa-solid fa-faucet-drip kpi-icon"></i><strong id="waterUseTotal">–</strong></div><small>ลบ.ม./เดือน</small></div>
-<div class="kpi kpi-green"><span>ปริมาณน้ำ 3R</span><div><i class="fa-solid fa-recycle kpi-icon"></i><strong id="water3rTotal">–</strong></div><small>ลบ.ม./เดือน</small></div>
-<div class="kpi kpi-orange"><span>ปริมาณน้ำสำรอง</span><div><i class="fa-solid fa-water kpi-icon"></i><strong id="waterReserveTotal">–</strong></div><small>ลบ.ม.</small></div>
+<div class="kpi kpi-purple"><span>นิคมอุตสาหกรรม / ท่าเรือฯ</span><div class="kpi-row"><i class="fa-solid fa-city kpi-icon"></i><strong id="estateCount">–</strong></div><small>แห่ง</small></div>
+<div class="kpi kpi-yellow"><span>จำนวนผู้ประกอบการ</span><div class="kpi-row"><i class="fa-solid fa-people-group kpi-icon"></i><strong id="operatorTotal">–</strong></div><small>ราย</small></div>
+<div class="kpi kpi-pink"><span>พื้นที่ตามผังแม่นิคมฯ</span><div class="kpi-row"><i class="fa-solid fa-draw-polygon kpi-icon"></i><strong id="areaTotal">–</strong></div><small>ไร่</small></div>
+<div class="kpi kpi-blue"><span>ปริมาณน้ำใช้</span><div class="kpi-row"><i class="fa-solid fa-faucet-drip kpi-icon"></i><strong id="waterUseTotal">–</strong></div><small>ลบ.ม./เดือน</small></div>
+<div class="kpi kpi-green"><span>ปริมาณน้ำ 3R</span><div class="kpi-row"><i class="fa-solid fa-recycle kpi-icon"></i><strong id="water3rTotal">–</strong></div><small>ลบ.ม./เดือน</small></div>
+<div class="kpi kpi-orange"><span>ปริมาณน้ำสำรอง</span><div class="kpi-row"><i class="fa-solid fa-water kpi-icon"></i><strong id="waterReserveTotal">–</strong></div><small>ลบ.ม.</small></div>
 </section>
 <section class="charts-grid charts-focus">
 <div class="chart-panel"><h3>10 อันดับนิคมอุตสาหกรรม / ท่าเรือ ที่มีการใช้น้ำมากที่สุด</h3><div class="chart-box"><canvas id="waterUseChart"></canvas></div><p class="chart-hint">คลิกแท่งกราฟเพื่อซูมไปยังตำแหน่งบนแผนที่</p></div>
@@ -472,12 +471,12 @@ footer,.footer{background:#fff!important;color:#858d97!important;border-color:#e
 </aside>
 <section class="panel map-panel"><div class="map-title">แผนที่ภัยแล้งและพื้นที่นิคมอุตสาหกรรม</div><div id="viewDiv" class="map"></div><div class="map-status" id="mapStatus">กำลังโหลดแผนที่…</div></section>
 </section>
-<section class="section">
-<div class="section-head"><div><h3>ข้อมูลสถานภาพนิคมอุตสาหกรรมและท่าเรืออุตสาหกรรม</h3><p>ปริมาณการใช้น้ำรายเดือนของแต่ละนิคมฯ ตามปีที่เลือกจาก Hosted Feature Layer</p></div><span class="badge" id="tableSummary">กำลังโหลดข้อมูล</span></div>
+<section class="section station-section">
+<div class="section-head"><div><h2>ข้อมูลสถานภาพนิคมอุตสาหกรรมและท่าเรืออุตสาหกรรม</h2><p>ปริมาณการใช้น้ำรายเดือนของแต่ละนิคมฯ ตามปีที่เลือกจาก Hosted Feature Layer</p></div><span class="badge" id="tableSummary">กำลังโหลดข้อมูล</span></div>
 <div class="table-wrap"><table class="table"><thead><tr><th>ลำดับ</th><th>นิคมอุตสาหกรรม/ท่าเรืออุตสาหกรรม</th><th>สายฯ</th><th>ม.ค.</th><th>ก.พ.</th><th>มี.ค.</th><th>เม.ย.</th><th>พ.ค.</th><th>มิ.ย.</th><th>ก.ค.</th><th>ส.ค.</th><th>ก.ย.</th><th>ต.ค.</th><th>พ.ย.</th><th>ธ.ค.</th><th>รวมทั้งปี</th><th>ตำแหน่ง</th></tr></thead><tbody id="estateRows"><tr><td colspan="17">กำลังโหลดข้อมูลการใช้น้ำ…</td></tr></tbody></table></div>
 </section>
-<div class="two-col">
-<section class="panel sources"><h3>ประกาศและแหล่งข้อมูลทางการ</h3><div class="source-grid">
+<div class="two-col extras">
+<section class="panel sources"><h2>ประกาศและแหล่งข้อมูลทางการ</h2><div class="source-grid">
 <a class="source" href="https://www.tmd.go.th/" target="_blank"><b>กรมอุตุนิยมวิทยา</b><span>พยากรณ์อากาศและปริมาณฝน</span></a>
 <a class="source" href="https://water.rid.go.th/" target="_blank"><b>กรมชลประทาน</b><span>สถานการณ์น้ำและอ่างเก็บน้ำ</span></a>
 <a class="source" href="https://www.onwr.go.th/" target="_blank"><b>สำนักงานทรัพยากรน้ำแห่งชาติ</b><span>ประกาศและมาตรการบริหารจัดการน้ำ</span></a>
@@ -485,7 +484,7 @@ footer,.footer{background:#fff!important;color:#858d97!important;border-color:#e
 <a class="source" href="https://www.thaiwater.net/" target="_blank"><b>ThaiWater</b><span>ข้อมูลน้ำ ฝน และคลังข้อมูลน้ำแห่งชาติ</span></a>
 <a class="source" href="https://www.disaster.go.th/" target="_blank"><b>กรมป้องกันและบรรเทาสาธารณภัย</b><span>ประกาศพื้นที่และข่าวสถานการณ์ภัย</span></a>
 </div></section>
-<section class="panel actions"><h3>แนวทางเตรียมความพร้อม</h3><div class="checklist">
+<section class="panel actions guidance"><h2>แนวทางเตรียมความพร้อม</h2><div class="checklist">
 <div class="check"><i>✓</i><span>ตรวจสอบปริมาณน้ำสำรองและจำนวนวันที่รองรับได้</span></div>
 <div class="check"><i>✓</i><span>ประสานผู้ให้บริการน้ำและหน่วยงานชลประทาน</span></div>
 <div class="check"><i>✓</i><span>ติดตามปริมาณการใช้น้ำของผู้ประกอบการ</span></div>
@@ -691,7 +690,7 @@ async function downloadDroughtReport(){
  }catch(error){alert("ไม่สามารถจัดทำรายงาน PNG ได้ กรุณารีเฟรชหน้าแล้วลองอีกครั้ง");console.error(error);}
  finally{button.disabled=false;button.innerHTML=oldHtml;}
 }
-document.getElementById("downloadPngBtn").onclick=downloadDroughtReport;
+const downloadPngButton=document.getElementById("downloadPngBtn");if(downloadPngButton)downloadPngButton.onclick=downloadDroughtReport;
 </script>
 <style>
 /* Align drought title and subtitle exactly like flood-report.html */
@@ -852,6 +851,132 @@ html body main.wrap .report-actions #downloadPngBtn:active{
 }
 html body main.wrap .report-actions #downloadPngBtn i,
 html body main.wrap .report-actions #downloadPngBtn svg{display:none!important}
+</style>
+<style id="drought-match-pm25-complete-20260911-v1">
+/* รูปแบบและสัดส่วนเดียวกับหน้า PM2.5 โดยคงชุดสีและเนื้อหาภัยแล้ง */
+html body{background:#fff!important}
+html body main.wrap{
+ width:100%!important;max-width:1800px!important;margin:auto!important;
+ padding:12px 16px 34px!important;gap:12px!important
+}
+html body main.wrap .dashboard-head{
+ min-height:86px!important;margin:0 0 14px!important;padding:13px 18px!important;
+ display:flex!important;align-items:center!important;justify-content:space-between!important;
+ border-radius:0!important;box-shadow:none!important
+}
+html body main.wrap .dashboard-head .head-brand h1{
+ margin:0!important;font-size:20px!important;font-weight:600!important;line-height:1.4!important
+}
+html body main.wrap .dashboard-head .head-brand p{
+ margin:3px 0 0!important;font-size:14px!important;font-weight:300!important;line-height:1.5!important
+}
+html body main.wrap .dashboard-kpis{
+ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:10px!important
+}
+html body main.wrap .dashboard-kpis .kpi{
+ min-height:136px!important;padding:15px 16px!important;
+ background:#fff!important;border:1px solid #fff!important;border-radius:12px!important;
+ box-shadow:0 3px 14px rgba(42,58,75,.08)!important
+}
+html body main.wrap .dashboard-kpis .kpi:hover{
+ transform:none!important;box-shadow:0 6px 20px rgba(42,58,75,.11)!important
+}
+html body main.wrap .dashboard-kpis .kpi>span{
+ display:block!important;min-height:40px!important;font-size:14px!important;font-weight:400!important;line-height:1.45!important
+}
+html body main.wrap .dashboard-kpis .kpi-row{
+ display:flex!important;align-items:center!important;gap:9px!important;margin-top:7px!important
+}
+html body main.wrap .dashboard-kpis .kpi-icon{
+ width:38px!important;height:38px!important;flex:0 0 38px!important;
+ display:grid!important;place-items:center!important;font-size:20px!important
+}
+html body main.wrap .dashboard-kpis .kpi strong{
+ font-size:24px!important;font-weight:600!important;line-height:1.25!important
+}
+html body main.wrap .dashboard-kpis .kpi small{
+ display:block!important;margin-top:4px!important;font-size:14px!important;text-align:right!important
+}
+html body main.wrap .charts-grid{gap:12px!important}
+html body main.wrap .chart-panel,
+html body main.wrap .panel,
+html body main.wrap .section{
+ background:#fff!important;border-radius:12px!important;
+ box-shadow:0 3px 14px rgba(42,58,75,.08)!important
+}
+@media(min-width:1101px){
+ html body main.wrap .main-grid{
+  display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  gap:12px!important;align-items:stretch!important
+ }
+ html body main.wrap .main-grid .map-panel{
+  position:relative!important;top:auto!important;height:auto!important;min-height:0!important;
+  align-self:stretch!important;overflow:hidden!important
+ }
+ html body main.wrap .main-grid .map-panel #viewDiv{
+  position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:100%!important
+ }
+}
+html body main.wrap .filters{padding:12px!important}
+html body main.wrap .filters .field select,
+html body main.wrap .filters .field input{
+ width:100%!important;height:36px!important;padding:7px 10px!important;border-radius:7px!important
+}
+html body main.wrap .filters .buttons{gap:8px!important}
+html body main.wrap .filters .btn{min-height:36px!important;border-radius:7px!important}
+html body main.wrap .station-section{
+ border-radius:0!important;box-shadow:none!important;background:#fff!important
+}
+html body main.wrap .station-section .section-head{
+ display:block!important;padding:12px 14px!important;text-align:center!important;background:#fff!important;box-shadow:none!important
+}
+html body main.wrap .station-section .section-head h2{
+ margin:0!important;padding:0!important;text-align:center!important;font-size:16px!important;font-weight:500!important;line-height:1.45!important
+}
+html body main.wrap .station-section .section-head p{
+ margin:3px 0 0!important;text-align:center!important;font-size:12px!important;font-weight:400!important;line-height:1.45!important
+}
+html body main.wrap .station-section .section-head .badge{
+ display:inline-block!important;margin:5px auto 0!important;padding:0!important;
+ border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;font-size:11px!important
+}
+html body main.wrap .station-section .table-wrap{padding:8px!important;background:#fff!important}
+html body main.wrap .station-section .table th,
+html body main.wrap .station-section .table td{
+ padding:5px 3px!important;text-align:center!important;vertical-align:middle!important;
+ font-size:11px!important;font-weight:400!important;line-height:1.35!important
+}
+html body main.wrap .station-section .table th{font-weight:600!important}
+html body main.wrap .extras{
+ display:grid!important;grid-template-columns:1.2fr .8fr!important;gap:12px!important
+}
+html body main.wrap .sources,
+html body main.wrap .guidance{padding:13px!important}
+html body main.wrap .sources h2,
+html body main.wrap .guidance h2{margin:0 0 10px!important;font-size:16px!important}
+html body main.wrap .source-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}
+html body main.wrap .checklist{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important}
+html body main.wrap .footer{padding:12px!important;text-align:center!important;font-size:11px!important}
+@media(max-width:1100px){
+ html body main.wrap{display:block!important;max-width:1100px!important;padding:10px!important}
+ html body main.wrap .dashboard-head,
+ html body main.wrap .dashboard-kpis,
+ html body main.wrap .charts-grid,
+ html body main.wrap .main-grid,
+ html body main.wrap .station-section,
+ html body main.wrap .extras{margin-bottom:10px!important}
+ html body main.wrap .main-grid .map-panel,
+ html body main.wrap .main-grid .map-panel #viewDiv{height:650px!important;min-height:650px!important}
+}
+@media(max-width:700px){
+ html body main.wrap .dashboard-kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+ html body main.wrap .dashboard-kpis .kpi{min-height:120px!important;padding:12px!important}
+ html body main.wrap .extras{grid-template-columns:1fr!important}
+ html body main.wrap .source-grid{grid-template-columns:1fr 1fr!important}
+ html body main.wrap .checklist{grid-template-columns:1fr!important}
+ html body main.wrap .main-grid .map-panel,
+ html body main.wrap .main-grid .map-panel #viewDiv{height:500px!important;min-height:500px!important}
+}
 </style>
 </body>
 </html>
