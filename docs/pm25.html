@@ -182,8 +182,9 @@ footer,.footer{background:#fff!important;color:#858d97!important;border-color:#e
     try{
       if(typeof html2canvas!=="function")throw new Error("ไม่พบเครื่องมือสร้างภาพ");
       buildPmReport();if(document.fonts?.ready)await document.fonts.ready;
+      if(document.fonts?.load){await Promise.all([document.fonts.load("700 34px Sarabun"),document.fonts.load("400 20px Sarabun"),document.fonts.load("400 17px Sarabun")]);}
       await new Promise(resolve=>setTimeout(resolve,300));
-      const canvas=await html2canvas($("pmReport"),{scale:1.25,useCORS:true,backgroundColor:"#ffffff",logging:false});
+      const canvas=await html2canvas($("pmReport"),{scale:1,useCORS:true,backgroundColor:"#ffffff",logging:false});
       const link=document.createElement("a");link.download="IEAT_PM25_Report_"+new Date().toISOString().slice(0,10)+".png";link.href=canvas.toDataURL("image/png");link.click();
     }catch(error){console.error(error);alert("ไม่สามารถสร้างรายงาน PNG ได้ กรุณาลองใหม่อีกครั้ง");}
     finally{button.disabled=false;button.textContent=label;}
@@ -349,7 +350,7 @@ html body .kpi strong,html body [class*="kpi"] strong{font-size:28px!important;f
 </style>
 <script id="pm25-match-flood-font-lock-20260910-v1">
 (function(){
- function apply(){document.querySelectorAll("body *:not(svg):not(path):not(.material-icons):not([class*='fa-'])").forEach(function(el){el.style.setProperty("font-family","Sarabun, 'TH Sarabun New', sans-serif","important")})}
+ function apply(){document.querySelectorAll("body *:not(svg):not(path):not(.material-icons):not([class*='fa-'])").forEach(function(el){if(!el.closest(".pm-report"))el.style.setProperty("font-family","Sarabun, 'TH Sarabun New', sans-serif","important")})}
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply);else apply();setTimeout(apply,500);
 })();
 </script>
@@ -817,6 +818,67 @@ html body main.wrap .footer{
  html body main.wrap .dashboard-head .head-links{margin-top:8px!important;justify-content:flex-start!important}
  html body main.wrap .map-panel,
  html body main.wrap .map-panel .pm-map{height:500px!important;min-height:500px!important}
+}
+</style>
+
+<style id="pm25-export-drought-font-exact-20260911-v2">
+/* ขนาดกระดาษและตัวอักษรรายงานตรงกับรายงานภัยแล้ง 1240 × 1754 */
+html body .export-stage{width:1240px!important}
+html body .pm-report{
+ position:relative!important;box-sizing:border-box!important;
+ width:1240px!important;min-width:1240px!important;max-width:1240px!important;
+ height:1754px!important;min-height:1754px!important;max-height:1754px!important;
+ padding:48px 70px 58px!important;border:0!important;
+ font-family:"Sarabun",sans-serif!important;font-size:17px!important;line-height:1.45!important
+}
+html body .pm-report::before{
+ content:""!important;position:absolute!important;inset:30px!important;
+ border:2px solid #9AA2A8!important;pointer-events:none!important;z-index:20!important
+}
+html body .pm-report,
+html body .pm-report *:not(svg):not(path){
+ font-family:"Sarabun",sans-serif!important
+}
+html body .pm-report .pm-report-title{padding:0 0 18px!important;border-bottom:2px solid #111!important}
+html body .pm-report .pm-report-title h1{
+ font-family:"Sarabun",sans-serif!important;font-size:34px!important;font-weight:700!important;
+ line-height:1.25!important;color:#111!important
+}
+html body .pm-report .pm-report-title p{
+ margin-top:5px!important;font-size:20px!important;font-weight:400!important;line-height:1.35!important;color:#555!important
+}
+html body .pm-report .pm-report-title>div:last-child b{
+ margin-top:4px!important;font-size:20px!important;font-weight:400!important;line-height:1.35!important
+}
+html body .pm-report .pm-report-title>div:last-child span{
+ font-size:17px!important;font-weight:400!important;line-height:1.35!important
+}
+html body .pm-report .pm-report-section-head{padding:0 0 10px!important}
+html body .pm-report .pm-report-section-head h2,
+html body .pm-report .pm-report-kpi-heading{
+ font-family:"Sarabun",sans-serif!important;font-size:23px!important;font-weight:700!important;
+ line-height:1.35!important;color:#111!important
+}
+html body .pm-report .pm-report-section-head span{font-size:16px!important;font-weight:400!important}
+html body .pm-report th{
+ padding:9px 7px!important;font-family:"Sarabun",sans-serif!important;
+ font-size:18px!important;font-weight:700!important;line-height:1.35!important
+}
+html body .pm-report td{
+ padding:9px 7px!important;font-family:"Sarabun",sans-serif!important;
+ font-size:17px!important;font-weight:400!important;line-height:1.35!important
+}
+html body .pm-report .pm-report-kpis article{min-height:98px!important;padding:10px 8px!important}
+html body .pm-report .pm-report-kpis span{min-height:38px!important;font-size:17px!important;font-weight:600!important}
+html body .pm-report .pm-report-kpis strong{font-size:24px!important;font-weight:600!important}
+html body .pm-report .pm-report-kpis small{font-size:16px!important;font-weight:400!important}
+html body .pm-report .pm-report-summary h2{font-size:23px!important;font-weight:700!important}
+html body .pm-report .pm-report-summary p{font-size:17px!important;font-weight:400!important;line-height:1.5!important}
+html body .pm-report .pm-report-note b{font-size:18px!important;font-weight:700!important}
+html body .pm-report .pm-report-note p{font-size:16px!important;font-weight:400!important;line-height:1.45!important}
+html body .pm-report .pm-report-footer{
+ left:70px!important;right:70px!important;bottom:48px!important;
+ font-size:15px!important;font-weight:400!important;line-height:1.35!important
 }
 </style>
 </body>
