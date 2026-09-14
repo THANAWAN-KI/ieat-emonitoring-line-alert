@@ -1,0 +1,31 @@
+name: Assemble daily news video
+
+on:
+  push:
+    paths:
+      - ".github/workflows/assemble_daily_video.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  assemble-video:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assemble optimized MP4
+        shell: bash
+        run: |
+          test -d .video_upload
+          cat .video_upload/daily-news-intro.part-* | base64 --decode > docs/assets/daily-news-intro.mp4
+          test -s docs/assets/daily-news-intro.mp4
+      - name: Commit video asset
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/assets/daily-news-intro.mp4
+          git rm -r .video_upload
+          git commit -m "Add optimized daily news intro video"
+          git push
