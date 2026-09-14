@@ -1248,5 +1248,117 @@ body{font-size:16px;line-height:1.55}
     renderOffices();
 </script>
 
+
+<style id="contacts-match-hub-typography-header-20260914-v1">
+/* Match the final typography and top header used by docs/hub.html. */
+html body,
+html body button,
+html body input,
+html body select,
+html body textarea,
+html body table,
+html body a{
+ font-family:"Sarabun","TH Sarabun New",sans-serif!important;
+}
+html body{font-size:16px!important;font-weight:400!important;line-height:1.6!important}
+
+/* Top bar: same dimensions, spacing, depth and type scale as hub.html. */
+html body .contacts-site-header{
+ height:62px!important;min-height:62px!important;padding:0 34px!important;
+ display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:14px!important;
+ background:linear-gradient(180deg,#fff 0%,#fff 58%,#fbfcfd 100%)!important;
+ border:0!important;border-bottom:1px solid rgba(96,108,120,.22)!important;
+ box-shadow:0 1px 0 rgba(255,255,255,.96) inset,0 2px 5px rgba(31,42,55,.09),0 9px 22px rgba(31,42,55,.07)!important;
+ position:sticky!important;top:0!important;z-index:1000!important;isolation:isolate!important;
+}
+html body .contacts-site-header::after{
+ content:""!important;position:absolute!important;left:0!important;right:0!important;bottom:-1px!important;
+ height:1px!important;background:linear-gradient(90deg,transparent,rgba(92,105,119,.25) 18%,rgba(92,105,119,.25) 82%,transparent)!important;
+ pointer-events:none!important;
+}
+html body .contacts-site-brand{
+ flex:0 1 auto!important;min-width:600px!important;
+ display:flex!important;align-items:center!important;gap:11px!important;
+ color:#111!important;text-decoration:none!important;
+}
+html body .contacts-site-brand img{
+ width:58px!important;height:45px!important;flex:0 0 58px!important;object-fit:contain!important;
+}
+html body .contacts-site-brand span{display:block!important;min-width:0!important}
+html body .contacts-site-brand strong{
+ display:block!important;margin:0!important;color:#111!important;
+ font-size:20px!important;font-weight:600!important;line-height:1.4!important;letter-spacing:0!important;white-space:nowrap!important;
+}
+html body .contacts-site-brand small{
+ display:block!important;margin:0!important;color:#818791!important;
+ font-size:14px!important;font-weight:300!important;line-height:1.5!important;white-space:nowrap!important;
+}
+html body .contacts-header-actions{
+ margin-left:auto!important;display:flex!important;align-items:center!important;gap:8px!important;
+}
+html body .contacts-header-actions a{
+ height:33px!important;min-height:33px!important;padding:7px 16px!important;
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ border:0!important;border-radius:20px!important;background:#f2f3f5!important;color:#666d77!important;
+ font-size:13px!important;font-weight:400!important;line-height:1.4!important;text-decoration:none!important;white-space:nowrap!important;
+ box-shadow:0 1px 0 rgba(255,255,255,.95) inset,0 2px 5px rgba(34,45,58,.10)!important;
+ transition:box-shadow .18s ease,transform .18s ease,filter .18s ease!important;
+}
+html body .contacts-header-actions a.primary{
+ border:0!important;background:#628f36!important;color:#fff!important;font-weight:600!important;
+ box-shadow:0 1px 0 rgba(255,255,255,.22) inset,0 3px 7px rgba(67,111,38,.22)!important;
+}
+html body .contacts-header-actions a:hover{filter:brightness(.96)!important;transform:translateY(-1px)!important;box-shadow:0 4px 10px rgba(34,45,58,.16)!important}
+html body .contacts-header-actions a:active{transform:translateY(0)!important;box-shadow:0 1px 3px rgba(34,45,58,.12)!important}
+
+/* Page typography: same hierarchy as hub.html. */
+html body .page>.header .header-title{font-size:20px!important;font-weight:600!important;line-height:1.4!important}
+html body .page>.header .header-subtitle{font-size:14px!important;font-weight:300!important;line-height:1.5!important}
+html body .content h2{font-size:20px!important;font-weight:600!important;line-height:1.45!important}
+html body .content h3,
+html body .office-name{font-size:18px!important;font-weight:500!important;line-height:1.5!important}
+html body .content p,
+html body .content li,
+html body .notice{font-size:16px!important;font-weight:400!important;line-height:1.6!important}
+html body .content label{font-size:12px!important;font-weight:600!important;line-height:1.6!important}
+html body .content input,
+html body .content select{font-size:13px!important;font-weight:400!important;line-height:1.6!important}
+html body .content button,
+html body .content a{font-size:12px!important;line-height:1.4!important}
+html body .contact-summary span,
+html body .information-value{font-size:14px!important;font-weight:400!important;line-height:1.5!important}
+html body .contact-summary strong{font-size:24px!important;font-weight:600!important;line-height:1.25!important}
+html body .contact-summary small,
+html body .result-count,
+html body .information-label,
+html body .footer{font-size:11px!important;font-weight:400!important;line-height:1.6!important}
+
+@media(max-width:900px){
+ html body .contacts-site-header{height:58px!important;min-height:58px!important;padding:0 8px!important}
+ html body .contacts-site-brand{min-width:0!important;flex:1!important}
+ html body .contacts-site-brand img{width:43px!important;height:39px!important;flex-basis:43px!important}
+ html body .contacts-site-brand strong{font-size:12px!important;white-space:normal!important}
+ html body .contacts-site-brand small{display:none!important}
+ html body .contacts-header-actions{gap:5px!important}
+ html body .contacts-header-actions a{height:34px!important;min-height:34px!important;padding:7px 10px!important;font-size:12px!important}
+}
+@media(max-width:520px){
+ html body .contacts-header-actions a:first-child{display:none!important}
+ html body .page>.header .header-title{font-size:19px!important}
+}
+</style>
+<script id="contacts-match-hub-typography-header-20260914-v1-lock">
+(function(){
+ function apply(){
+  document.querySelectorAll(".contacts-site-header *:not(svg):not(path),.page *:not(svg):not(path)").forEach(function(el){
+   el.style.setProperty("font-family","Sarabun, 'TH Sarabun New', sans-serif","important");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply,{once:true});else apply();
+ var root=document.querySelector(".page");
+ if(root)new MutationObserver(function(){requestAnimationFrame(apply)}).observe(root,{childList:true,subtree:true});
+ [500,1500,4000].forEach(function(ms){setTimeout(apply,ms)});
+})();
+</script>
 </body>
 </html>
