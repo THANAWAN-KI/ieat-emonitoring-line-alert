@@ -2505,6 +2505,66 @@ html body #hubInformationHeader .header-actions a:active{
  box-shadow:0 1px 3px rgba(34,45,58,.12)!important
 }
 </style>
+<style id="hub-scroll-tabs-white-background-20260914-v1">
+/* Keep disaster tabs in normal document flow and make the hub canvas uniformly white. */
+html,html body{background:#ffffff!important;background-color:#ffffff!important}
+html body main#captureArea.page,
+html body main#captureArea.page>nav.tabs,
+html body #fireReportView,
+html body #fireReportView.fire-hub,
+html body #fireReportView .fire-dashboard-grid,
+html body #fireReportView .fire-overview-head,
+html body #fireReportView .fire-support-board,
+html body #fireReportView .fire-analysis-panel,
+html body #fireReportView .fire-dss-panel,
+html body #fireReportView .fire-readiness,
+html body #fireReportView .fire-readiness-grid>div,
+html body #fireReportView .fire-estate-search,
+html body #fireReportView .fire-search-panel,
+html body #fireReportView .fire-support-card,
+html body #fireReportView .panel,
+html body #fireReportView .panel-head,
+html body #fireReportView .notice,
+html body footer{
+ background:#ffffff!important;background-color:#ffffff!important
+}
+html body main#captureArea.page>nav.tabs{
+ position:relative!important;top:auto!important;bottom:auto!important;left:auto!important;right:auto!important;
+ z-index:auto!important;outline:0!important;
+ border:0!important;border-bottom:1px solid #d9dde2!important;
+ border-radius:0!important;box-shadow:none!important;transform:none!important
+}
+html body main#captureArea.page>nav.tabs:focus,
+html body main#captureArea.page>nav.tabs:focus-visible{
+ outline:0!important;box-shadow:none!important
+}
+html body #fireReportView iframe,
+html body #directPagePortal,
+html body #directPagePortal iframe,
+html body #floodView,
+html body #floodView iframe,
+html body #droughtView,
+html body #droughtView iframe{
+ background:#ffffff!important;background-color:#ffffff!important
+}
+</style>
+<script id="hub-scroll-tabs-white-background-20260914-v1-iframe">
+(function(){
+ function whiten(frame){
+  try{
+   var doc=frame.contentDocument;
+   if(!doc||!doc.head)return;
+   if(doc.getElementById("hub-force-white-background"))return;
+   var style=doc.createElement("style");style.id="hub-force-white-background";
+   style.textContent="html,body,main{background:#fff!important;background-color:#fff!important}";
+   doc.head.appendChild(style);
+  }catch(error){}
+ }
+ document.querySelectorAll("iframe").forEach(function(frame){
+  frame.addEventListener("load",function(){whiten(frame)});whiten(frame);
+ });
+})();
+</script>
 </body></html>
 
 <style id="hub-reference-spacing-20260914-v2">
