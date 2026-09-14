@@ -178,7 +178,7 @@ const fireHub=document.createElement('section');fireHub.id='fireReportView';fire
   <article class="fire-support-board">
     <div class="fire-board-title"><h2>ข้อมูลสนับสนุนที่ใกล้เคียง</h2><p>ค้นหานิคมอุตสาหกรรม แล้วระบบจะคำนวณและเติมข้อมูลลงในรายงานให้อัตโนมัติ</p></div>
     <section class="fire-estate-search">
-      <label for="fireEstateSearch">ค้นหานิคมอุตสาหกรรม / ท่าเรือฯ</label>
+      <label for="fireEstateSearch">ค้นหานิคมอุตสาหกรรม</label>
       <div class="fire-search-row"><input id="fireEstateSearch" list="fireEstateOptions" placeholder="เช่น นิคมอุตสาหกรรมบางปู" autocomplete="off"><datalist id="fireEstateOptions"></datalist><button id="fireEstateApply" type="button">ค้นหาและเติมรายงาน</button></div>
       <p id="fireEstateStatus">เลือกพื้นที่เกิดเหตุเพื่อดึงพิกัดและข้อมูลสนับสนุนที่ใกล้เคียง</p>
     </section>
@@ -224,11 +224,28 @@ function firePoint(record){
   if(Math.abs(x)>180){var lon=x/20037508.34*180;var lat=y/20037508.34*180;lat=180/Math.PI*(2*Math.atan(Math.exp(lat*Math.PI/180))-Math.PI/2);return{lat:lat,lng:lon}}return{lat:y,lng:x};
 }
 function fireDistanceKm(a,b){var dLat=(b.lat-a.lat)*Math.PI/180,dLng=(b.lng-a.lng)*Math.PI/180;var s=Math.sin(dLat/2)**2+Math.cos(a.lat*Math.PI/180)*Math.cos(b.lat*Math.PI/180)*Math.sin(dLng/2)**2;return 6371*2*Math.atan2(Math.sqrt(s),Math.sqrt(1-s))}
-function fireEstateNames(){
-  var found=[];(records||[]).forEach(function(record){var values=[record.estate];var attrs=record.feature&&record.feature.attributes||{};Object.keys(attrs).forEach(function(key){var value=attrs[key];if(typeof value==='string'&&/(นิคม|ท่าเรือ)/.test(value))values.push(value)});values.forEach(function(value){value=String(value||'').trim();if(value&&value!=='—'&&!found.includes(value))found.push(value)})});
-  return found.sort(function(a,b){return a.localeCompare(b,'th')});
+function fireCanonicalEstateName(value,allowPlain){
+  var name=String(value||'').replace(/\s+/g,' ').trim();
+  if(!name||name==='—'||/ท่าเรือ/.test(name))return '';
+  if(/นิคมอุตสาหกรรม|นิคมฯ|^นิคม/.test(name))return name.replace(/^นิคมฯ\s*/,'นิคมอุตสาหกรรม');
+  return allowPlain?'นิคมอุตสาหกรรม'+name:'';
 }
-function syncFireEstateOptions(){var list=document.getElementById('fireEstateOptions'),status=document.getElementById('fireEstateStatus');if(!list)return;if(!(records||[]).length){if(status&&!status.className)status.textContent='กำลังโหลดรายชื่อนิคมอุตสาหกรรมและข้อมูลตำแหน่ง…';return}var names=fireEstateNames();list.innerHTML=names.map(function(name){return '<option value="'+name.replace(/"/g,'&quot;')+'"></option>'}).join('');if(status&&!status.className)status.textContent=names.length?'พร้อมค้นหา '+names.length.toLocaleString('th-TH')+' พื้นที่ — พิมพ์ชื่อเต็มหรือชื่อย่อได้':'โหลดข้อมูลตำแหน่งแล้ว แต่ไม่พบฟิลด์ชื่อนิคมอุตสาหกรรม'}
+function fireEstateNames(){
+  var unique={};
+  (records||[]).forEach(function(record){
+    var direct=fireCanonicalEstateName(record.estate,true);
+    if(direct)unique[fireNormalize(direct)]=direct;
+    var attrs=record.feature&&record.feature.attributes||{};
+    Object.keys(attrs).forEach(function(key){
+      var value=attrs[key];
+      if(typeof value!=='string'||!/นิคม/.test(value)||/ท่าเรือ/.test(value))return;
+      var name=fireCanonicalEstateName(value,false);
+      if(name)unique[fireNormalize(name)]=name;
+    });
+  });
+  return Object.keys(unique).map(function(key){return unique[key]}).sort(function(a,b){return a.localeCompare(b,'th')});
+}
+function syncFireEstateOptions(){var list=document.getElementById('fireEstateOptions'),status=document.getElementById('fireEstateStatus');if(!list)return;if(!(records||[]).length){if(status&&!status.className)status.textContent='กำลังโหลดรายชื่อนิคมอุตสาหกรรม…';return}var names=fireEstateNames();list.innerHTML=names.map(function(name){return '<option value="'+name.replace(/"/g,'&quot;')+'"></option>'}).join('');if(status&&!status.className)status.textContent=names.length?'พร้อมค้นหา '+names.length.toLocaleString('th-TH')+' นิคมอุตสาหกรรม — พิมพ์ชื่อเต็มหรือชื่อย่อได้':'โหลดข้อมูลตำแหน่งแล้ว แต่ไม่พบฟิลด์ชื่อนิคมอุตสาหกรรม'}
 async function loadFireSupportRest(){
   var status=document.getElementById('fireEstateStatus');if(status){status.textContent='กำลังเชื่อมต่อฐานข้อมูลตำแหน่ง กนอ.…';status.className='loading'}
   var loaded=[];
@@ -245,7 +262,7 @@ async function loadFireSupportRest(){
       features.forEach(function(feature){loaded.push({config:config,feature:feature,name:val(feature.attributes||{},config.name),estate:val(feature.attributes||{},config.estate)})});
     }catch(error){console.warn('REST fallback: '+config.label,error)}
   }));
-  if(loaded.length){records.splice(0,records.length);Array.prototype.push.apply(records,loaded);buildUI();syncFireEstateOptions();if(status){var names=fireEstateNames();status.textContent='พร้อมค้นหา '+names.length.toLocaleString('th-TH')+' พื้นที่ — พิมพ์ชื่อเต็มหรือชื่อย่อได้';status.className=''}}
+  if(loaded.length){records.splice(0,records.length);Array.prototype.push.apply(records,loaded);buildUI();syncFireEstateOptions();if(status){var names=fireEstateNames();status.textContent='พร้อมค้นหา '+names.length.toLocaleString('th-TH')+' นิคมอุตสาหกรรม — พิมพ์ชื่อเต็มหรือชื่อย่อได้';status.className=''}}
   else if(status){status.textContent='ไม่สามารถเชื่อมต่อฐานข้อมูลตำแหน่งได้ กรุณารีเฟรชหน้าแล้วลองใหม่';status.className='error'}
 }
 setTimeout(loadFireSupportRest,1200);
@@ -256,8 +273,18 @@ function fireApplyEstate(){
   if(!(records||[]).length){status.textContent='กำลังโหลดข้อมูลตำแหน่ง กรุณาลองอีกครั้งในอีกสักครู่';status.className='loading';return}
   var q=fireNormalize(query),names=fireEstateNames();var estate=names.find(function(name){return fireNormalize(name)===q})||names.find(function(name){var n=fireNormalize(name);return n.includes(q)||q.includes(n)});
   if(!estate){status.textContent='ไม่พบนิคมอุตสาหกรรมนี้ในข้อมูลแผนที่ กรุณาเลือกชื่อจากรายการ';status.className='error';return}
-  input.value=estate;var matching=(records||[]).filter(function(record){return fireNormalize(record.estate)===fireNormalize(estate)&&firePoint(record)});
-  if(!matching.length)matching=(records||[]).filter(function(record){var attrs=record.feature&&record.feature.attributes||{};return Object.values(attrs).some(function(value){return typeof value==='string'&&fireNormalize(value)===fireNormalize(estate)})&&firePoint(record)});
+  input.value=estate;var matching=(records||[]).filter(function(record){
+    var recordEstate=fireCanonicalEstateName(record.estate,true);
+    return recordEstate&&!/ท่าเรือ/.test(recordEstate)&&fireNormalize(recordEstate)===fireNormalize(estate)&&firePoint(record);
+  });
+  if(!matching.length)matching=(records||[]).filter(function(record){
+    var attrs=record.feature&&record.feature.attributes||{};
+    return Object.values(attrs).some(function(value){
+      if(typeof value!=='string'||/ท่าเรือ/.test(value))return false;
+      var candidate=fireCanonicalEstateName(value,false);
+      return candidate&&fireNormalize(candidate)===fireNormalize(estate);
+    })&&firePoint(record);
+  });
   if(!matching.length){status.textContent='พบชื่อพื้นที่ แต่ยังไม่พบพิกัดสำหรับคำนวณ';status.className='error';return}
   var points=matching.map(firePoint);var origin={lat:points.reduce(function(sum,p){return sum+p.lat},0)/points.length,lng:points.reduce(function(sum,p){return sum+p.lng},0)/points.length};
   var hospital=fireNearest('hospital',origin),fire=fireNearest('fire',origin),police=fireNearest('police',origin),hydrant=fireNearest('hydrant',origin);
