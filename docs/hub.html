@@ -1948,4 +1948,29 @@ html body main.page nav.tabs button.tab[data-type].active *{color:#2f6fed!import
  html body main.page nav.tabs button.tab[data-type]{height:46px!important;min-width:78px!important;padding:0 10px!important;font-size:14px!important}
 }
 </style>
+<style>
+/* Force visible active-tab labels over legacy purple-button selectors */
+html body main#captureArea.page nav.tabs button.tab[data-type="fire"].active,
+html body main#captureArea.page nav.tabs button.tab[data-type="flood"].active,
+html body main#captureArea.page nav.tabs button.tab[data-type="drought"].active,
+html body main#captureArea.page nav.tabs button.tab[data-type="pm25"].active,
+html body main#captureArea.page nav.tabs button.tab[data-type="fire"].active:hover,
+html body main#captureArea.page nav.tabs button.tab[data-type="fire"].active:focus,
+html body main#captureArea.page nav.tabs button.tab[data-type="flood"].active:hover,
+html body main#captureArea.page nav.tabs button.tab[data-type="flood"].active:focus,
+html body main#captureArea.page nav.tabs button.tab[data-type="drought"].active:hover,
+html body main#captureArea.page nav.tabs button.tab[data-type="drought"].active:focus,
+html body main#captureArea.page nav.tabs button.tab[data-type="pm25"].active:hover,
+html body main#captureArea.page nav.tabs button.tab[data-type="pm25"].active:focus{
+  background:#fff!important;background-color:#fff!important;
+  color:#2f6fed!important;border:0!important;border-bottom:2px solid #2f6fed!important;
+  border-radius:0!important;box-shadow:none!important;font-weight:500!important;
+  opacity:1!important;visibility:visible!important
+}
+html body main#captureArea.page nav.tabs button.tab[data-type].active *,
+html body main#captureArea.page nav.tabs button.tab[data-type].active:hover *,
+html body main#captureArea.page nav.tabs button.tab[data-type].active:focus *{
+  color:#2f6fed!important;opacity:1!important;visibility:visible!important
+}
+</style>
 </body></html>
