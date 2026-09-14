@@ -2266,7 +2266,7 @@ html body #hubInformationHeader .estate-option.active{background:#eef5e8;color:#
  var period=document.getElementById("period"),clock=document.getElementById("clock");
  function update(){
   var now=new Date();
-  if(period)period.textContent="ข้อมูล ณ วันที่ "+now.toLocaleDateString("th-TH",{day:"numeric",month:"long",year:"numeric"});
+  if(period)period.textContent="ข้อมูลสนับสนุนการเฝ้าระวังและรับมือเหตุฉุกเฉิน";
   if(clock)clock.textContent=now.toLocaleDateString("th-TH",{weekday:"short",day:"2-digit",month:"short",year:"2-digit"})+" "+now.toLocaleTimeString("th-TH",{hour:"2-digit",minute:"2-digit"})+" น.";
  }
  update();setInterval(update,30000);
@@ -2281,6 +2281,81 @@ html body #hubInformationHeader .estate-option.active{background:#eef5e8;color:#
  if(search)search.addEventListener("input",function(){render(search.value)});
  if(list)list.addEventListener("click",function(e){var o=e.target.closest(".estate-option");if(!o)return;if(btn)btn.textContent=o.dataset.name;pop.classList.remove("open");render(search?search.value:"")});
  document.addEventListener("click",function(e){if(pop&&!pop.contains(e.target)&&e.target!==btn)pop.classList.remove("open")});
+})();
+</script>
+<script id="hub-header-estate-filter-20260914-v1">
+(function(){
+ var allLabel="พื้นที่นิคมอุตสาหกรรมทั่วประเทศ";
+ var btn=document.getElementById("scopeBtn"),pop=document.getElementById("estatePop");
+ var list=document.getElementById("estateList"),search=document.getElementById("estateSearch");
+ var selected="";
+ function normalize(value){
+  if(typeof fireNormalize==="function")return fireNormalize(value||"");
+  return String(value||"").toLowerCase().replace(/\s+/g,"");
+ }
+ function names(){
+  var found=[];
+  if(typeof fireEstateNames==="function"){
+   try{found=fireEstateNames()||[]}catch(error){}
+  }
+  if(!found.length){
+   var select=document.getElementById("estateFilter");
+   if(select)found=Array.from(select.options).map(function(o){return o.value}).filter(Boolean);
+  }
+  return Array.from(new Set(found.filter(Boolean))).sort(function(a,b){return a.localeCompare(b,"th")});
+ }
+ function render(){
+  if(!list)return;
+  var key=normalize(search&&search.value),items=names();
+  if(key)items=items.filter(function(name){return normalize(name).includes(key)});
+  list.innerHTML='<button class="estate-option'+(!selected?' active':'')+'" type="button" data-name="">'+allLabel+'</button>'+
+   items.map(function(name){return '<button class="estate-option'+(normalize(selected)===normalize(name)?' active':'')+'" type="button" data-name="'+name.replace(/&/g,"&amp;").replace(/"/g,"&quot;")+'">'+name+'</button>'}).join("");
+ }
+ function syncNativeFilter(name){
+  var select=document.getElementById("estateFilter");
+  if(!select)return;
+  var target=Array.from(select.options).find(function(o){return normalize(o.value)===normalize(name)});
+  select.value=target?target.value:"";
+  if(typeof renderList==="function")renderList();else select.dispatchEvent(new Event("change",{bubbles:true}));
+ }
+ function apply(name){
+  selected=name||"";
+  if(btn)btn.textContent=selected||allLabel;
+  syncNativeFilter(selected);
+  try{localStorage.setItem("hub-selected-estate",selected)}catch(error){}
+  var fireInput=document.getElementById("fireEstateSearch");
+  if(!selected){
+   if(fireInput)fireInput.value="";
+   var status=document.getElementById("fireEstateStatus");
+   if(status){status.textContent="แสดงข้อมูลสนับสนุนทุกนิคมอุตสาหกรรม";status.className=""}
+  }else if(fireInput&&typeof fireApplyEstate==="function"){
+   fireInput.value=selected;
+   fireApplyEstate();
+  }
+  document.querySelectorAll("iframe").forEach(function(frame){
+   try{frame.contentWindow.postMessage({type:"hub-estate-filter",estate:selected},location.origin)}catch(error){}
+  });
+  if(pop)pop.classList.remove("open");
+  if(btn)btn.setAttribute("aria-expanded","false");
+  render();
+ }
+ if(list)list.addEventListener("click",function(event){
+  var option=event.target.closest(".estate-option");if(!option)return;
+  apply(option.dataset.name||"");
+ });
+ if(search)search.addEventListener("input",render);
+ var source=document.getElementById("fireEstateOptions");
+ if(source)new MutationObserver(render).observe(source,{childList:true});
+ var attempts=0,timer=setInterval(function(){
+  render();attempts++;
+  if(names().length&&attempts>8)clearInterval(timer);
+  if(attempts>30)clearInterval(timer);
+ },1000);
+ try{
+  var saved=localStorage.getItem("hub-selected-estate")||"";
+  if(saved){selected=saved;if(btn)btn.textContent=saved}
+ }catch(error){}
+ render();
 })();
 </script>
 </body></html>
