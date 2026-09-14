@@ -32,30 +32,62 @@ body.overview-mode{overflow:hidden;background:#f5f7fa}.situation-dashboard{heigh
 </head><body>
 <header class="header"><div class="brand"><img src="./assets/TH-Vertical.png" alt="กนอ."><div><h1>ระบบสารสนเทศและการเชื่อมโยงข้อมูล</h1></div></div><div class="header-right"><button class="clock" id="clock" aria-expanded="false"></button><div class="scope-wrap"><button class="scope" id="scopeBtn" aria-expanded="false">พื้นที่นิคมอุตสาหกรรมทั่วประเทศ</button><div class="estate-pop" id="estatePop"><div class="search-box"><img src="./assets/search.png" alt=""><input id="estateSearch" type="search" placeholder="ค้นหาชื่อนิคมอุตสาหกรรม"></div><div class="estate-list" id="estateList"></div></div></div><a class="hub" href="./hub.html">กลับ Hub</a></div><div class="weather-pop" id="weatherPop"><div class="weather-item"><img class="weather-symbol" src="./assets/extreme-rain-fill.png" alt=""><b id="rainValue">กำลังโหลด</b><span>ปริมาณฝน</span></div><div class="weather-item"><img class="weather-symbol" src="./assets/humidity-fill.png" alt=""><b id="humidityValue">กำลังโหลด</b><span>ความชื้นสัมพัทธ์</span></div><div class="weather-item"><img class="weather-symbol" src="./assets/windsock.png" alt=""><b id="directionValue">กำลังโหลด</b><span>ทิศทางลม</span></div><div class="weather-item"><img class="weather-symbol" src="./assets/wind-onshore-fill.png" alt=""><b id="windValue">กำลังโหลด</b><span>ความเร็วลม</span></div></div></header>
 <nav class="tabs"><button class="tab active" data-tab="overview">ภาพรวม</button><button class="tab" data-tab="gis">ข้อมูลระบบ GIS</button><button class="tab" data-tab="monitor">e‑Monitoring</button><button class="tab" data-tab="water">ข้อมูลระดับน้ำ</button><button class="tab" data-tab="accident">สถิติอุบัติเหตุ</button></nav>
-<section class="requested-overview"><div class="situation-dashboard">
-<section class="sd-left">
-  <div class="sd-kpis">
-    <button data-go="monitor"><span class="sd-kpi-icon">AQ</span><div><b>e‑Monitoring</b><small>AQMs • WQMs • CEMs</small></div><em>ตรวจสอบ ›</em></button>
-    <button data-go="water"><span class="sd-kpi-icon water">WL</span><div><b>สถานการณ์น้ำ</b><small>ฝนและระดับน้ำใกล้นิคมฯ</small></div><em>ติดตาม ›</em></button>
-    <a href="./hub.html"><span class="sd-kpi-icon alert">!</span><div><b>เหตุฉุกเฉิน</b><small>ไฟไหม้และภัยพิบัติ</small></div><em>เปิด Hub ›</em></a>
+<section class="requested-overview"><span id="period" hidden></span>
+<div class="ieat-gis-dashboard">
+ <section class="ieat-kpi-row" aria-label="ข้อมูลสรุป">
+  <a class="ieat-kpi flood" href="./flood-report.html"><span class="ieat-kpi-icon">≋</span><div><strong>—</strong><b>ข้อมูลน้ำท่วม</b><small>พื้นที่ได้รับผลกระทบในนิคมฯ</small></div></a>
+  <a class="ieat-kpi hotspot" href="./hub.html"><span class="ieat-kpi-icon">♨</span><div><strong>—</strong><b>จุดความร้อน</b><small>จุดที่ตรวจพบในพื้นที่นิคมฯ</small></div></a>
+  <a class="ieat-kpi drought" href="./drought.html"><span class="ieat-kpi-icon">⌁</span><div><strong>—</strong><b>ข้อมูลภัยแล้ง</b><small>พื้นที่เฝ้าระวังในนิคมฯ</small></div></a>
+  <a class="ieat-kpi dust" href="./pm25.html"><span class="ieat-kpi-icon">☁</span><div><strong>—</strong><b>ค่าเฉลี่ยฝุ่น PM2.5</b><small>ไมโครกรัมต่อลูกบาศก์เมตร</small></div></a>
+ </section>
+
+ <section class="ieat-dashboard-grid">
+  <div class="ieat-dashboard-content">
+   <article class="ieat-panel ieat-overview-chart">
+    <header><div><h2>กราฟแสดงภาพรวมข้อมูลที่ต้องเฝ้าระวังในพื้นที่นิคมฯ</h2><p>สรุปข้อมูลจากระบบเฝ้าระวังและข้อมูลสนับสนุน</p></div><span>ทุกพื้นที่นิคมฯ</span></header>
+    <div class="ieat-bars" aria-label="กราฟภาพรวมข้อมูลเฝ้าระวัง">
+     <a href="./flood-report.html"><i style="height:72%"></i><b>น้ำท่วม</b></a>
+     <a href="./hub.html"><i style="height:58%"></i><b>จุดความร้อน</b></a>
+     <a href="./drought.html"><i style="height:47%"></i><b>ภัยแล้ง</b></a>
+     <a href="./pm25.html"><i style="height:64%"></i><b>PM2.5</b></a>
+     <button data-go="accident"><i style="height:39%"></i><b>อุบัติเหตุ</b></button>
+     <button data-go="monitor"><i style="height:55%"></i><b>e‑Monitoring</b></button>
+    </div>
+   </article>
+
+   <div class="ieat-chart-pair">
+    <article class="ieat-panel ieat-accident">
+     <header><div><h2>อุบัติเหตุที่เกิดขึ้น</h2><p>จำแนกตามประเภทเหตุการณ์</p></div><button data-go="accident">ดูรายละเอียด</button></header>
+     <div class="ieat-mini-bars">
+      <span><i style="height:66%"></i><b>ทั่วไป</b></span><span><i style="height:48%"></i><b>อัคคีภัย</b></span><span><i style="height:31%"></i><b>สารเคมี</b></span><span><i style="height:22%"></i><b>อื่น ๆ</b></span>
+     </div>
+    </article>
+    <article class="ieat-panel ieat-monitor">
+     <header><div><h2>ข้อมูล e‑Monitoring</h2><p>สถานะระบบตรวจวัดสิ่งแวดล้อม</p></div><button data-go="monitor">เปิดระบบ</button></header>
+     <div class="ieat-monitor-list"><span><i></i><b>AQMs</b><em>ข้อมูลคุณภาพอากาศ</em></span><span><i></i><b>WQMs</b><em>ข้อมูลคุณภาพน้ำ</em></span><span><i></i><b>CEMs</b><em>ข้อมูลการระบายมลพิษ</em></span></div>
+    </article>
+   </div>
+
+   <article class="ieat-panel ieat-forecast">
+    <header><div><h2>พยากรณ์อากาศ 7 วันข้างหน้า</h2><p id="forecastLocation">พื้นที่นิคมอุตสาหกรรมทั่วประเทศ</p></div><button id="opsWeatherRefresh">อัปเดตข้อมูล</button></header>
+    <div class="ieat-weather-week" id="overviewForecast"><span>กำลังโหลดข้อมูลพยากรณ์อากาศ…</span></div>
+    <div class="ieat-current-weather" hidden><b id="opsRain"></b><b id="opsHumidity"></b><b id="opsDirection"></b><b id="opsWind"></b></div>
+   </article>
   </div>
-  <article class="sd-chart-card sd-main-chart"><header><div><b>ภาพรวมข้อมูลที่ต้องเฝ้าระวังในพื้นที่นิคมฯ</b><small>เลือกหัวข้อเพื่อเปิดดูข้อมูลรายละเอียด</small></div><span>พื้นที่นิคมอุตสาหกรรมทั่วประเทศ⌄</span></header><div class="sd-bars">
-    <button data-go="monitor"><i style="height:78%"></i><b>e‑Monitoring</b></button>
-    <button data-go="water"><i style="height:61%"></i><b>ระดับน้ำ</b></button>
-    <a href="./drought.html"><i style="height:49%"></i><b>ภัยแล้ง</b></a>
-    <a href="./pm25.html"><i style="height:55%"></i><b>PM2.5</b></a>
-    <button data-go="accident"><i style="height:38%"></i><b>อุบัติเหตุ</b></button>
-    <a href="./hub.html"><i style="height:46%"></i><b>เหตุฉุกเฉิน</b></a>
-  </div></article>
-  <article class="sd-chart-card sd-trend"><header><div><b>สถานการณ์และแนวโน้มสำหรับการติดตาม</b><small><i></i> ข้อมูลสิ่งแวดล้อม　<i class="orange"></i> ข้อมูลภัยพิบัติ</small></div><span>เลือกมุมมอง⌄</span></header><div class="sd-line-chart"><svg viewBox="0 0 800 210" preserveAspectRatio="none"><path d="M0 170 C80 145 120 160 185 105 S310 45 370 105 S490 160 555 82 S685 65 800 25" fill="none" stroke="#3478d4" stroke-width="5"/><path d="M0 188 C95 175 150 112 225 148 S350 178 430 126 S585 151 800 83" fill="none" stroke="#b0563c" stroke-width="4"/></svg></div><footer><a href="./flood-report.html">น้ำท่วม</a><a href="./drought.html">ภัยแล้ง</a><a href="./pm25.html">PM2.5</a><a href="./hub.html">ข้อมูลฉุกเฉิน</a></footer></article>
-</section>
-<aside class="sd-middle">
-  <article><header>จำแนกตามระบบข้อมูล　⌄</header><div class="sd-donut"><b>4</b></div><h3>ระบบเฝ้าระวังหลัก</h3><p>สิ่งแวดล้อม • น้ำ • ภัยพิบัติ • ความปลอดภัย</p></article>
-  <article><header>สถานะข้อมูลเชิงพื้นที่　⌄</header><div class="sd-gauge"><b>GIS</b></div><h3>แผนที่กลาง กนอ.</h3><p>เชื่อมโยงข้อมูลเพื่อสนับสนุนการตัดสินใจ</p></article>
-  <article class="sd-weather"><header>สภาพอากาศพื้นที่ที่เลือก</header><div><span>ฝน</span><b id="opsRain">เลือกพื้นที่</b><span>ความชื้น</span><b id="opsHumidity">เลือกพื้นที่</b><span>ทิศลม</span><b id="opsDirection">เลือกพื้นที่</b><span>ความเร็วลม</span><b id="opsWind">เลือกพื้นที่</b></div><button id="opsWeatherRefresh">อัปเดตข้อมูล</button></article>
-</aside>
-<section class="sd-map"><header><nav><button class="active">ชั้นข้อมูล</button><button>คำอธิบาย</button><button>แผนที่ฐาน</button></nav><a href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=590841b3f03147f38703740281ff87a6" target="_blank" rel="noopener">เปิดเต็มหน้าจอ ↗</a></header><iframe class="ops-map-frame" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&amp;webmap=590841b3f03147f38703740281ff87a6&amp;theme=light&amp;bookmarks=true&amp;legend=true&amp;information=true&amp;share=true&amp;scroll=false&amp;basemaps=true" title="แผนที่ภาพรวมการเฝ้าระวังพื้นที่นิคมอุตสาหกรรม" allowfullscreen></iframe><div class="sd-legend"><b>สัญลักษณ์</b><span><i></i>ขอบเขตนิคมฯ</span><span><i></i>สถานีตรวจวัด</span><span><i></i>พื้นที่เฝ้าระวัง</span><span><i></i>ข้อมูลสนับสนุน</span></div></section>
-</div></section><main class="dashboard"><section class="left"><div class="summary" id="summary"></div><article class="card chart-card"><div class="chart-head"><h2 id="chartTitle"></h2><span class="filter" id="chartFilter"></span></div><div class="bar-chart" id="bars"></div></article><article class="card lower"><div class="lower-title"><b id="lowerTitle"></b><span class="filter">⌁ เลือกมุมมอง　⌄</span></div><div class="legend"><span><i></i>ข้อมูลหลัก</span><span><i class="alt"></i>ข้อมูลสนับสนุน</span></div><div class="spark"><svg viewBox="0 0 600 110" preserveAspectRatio="none"><path d="M0 92 C70 80,95 88,145 62 S230 20,280 55 S370 90,430 42 S520 32,600 12" fill="none" stroke="#2868ef" stroke-width="4"/><path d="M0 101 C80 94,130 64,190 82 S290 93,350 70 S470 77,600 49" fill="none" stroke="#631a9d" stroke-width="3"/></svg></div></article></section>
+
+  <aside class="ieat-dashboard-side">
+   <article class="ieat-panel ieat-donut-card"><header><h2>จำแนกตามการใช้ประโยชน์ที่ดิน</h2><span>พื้นที่นิคมฯ</span></header><div class="ieat-donut land"><b>GIS</b></div><div class="ieat-donut-legend"><span><i></i>พื้นที่อุตสาหกรรม</span><span><i></i>พื้นที่สีเขียว</span><span><i></i>สาธารณูปโภค</span><span><i></i>พื้นที่อื่น ๆ</span></div></article>
+   <article class="ieat-panel ieat-donut-card"><header><h2>พื้นที่เผาไหม้ทั้งหมด</h2><span>ข้อมูลล่าสุด</span></header><div class="ieat-donut burned"><b>— ไร่</b></div><div class="ieat-donut-legend burned-legend"><span><i></i>พื้นที่เผาไหม้</span><span><i></i>พื้นที่ไม่พบการเผาไหม้</span></div></article>
+  </aside>
+
+  <section class="ieat-panel ieat-map-panel">
+   <header><div><h2>แผนที่ภาพรวมข้อมูล GIS</h2><p>ข้อมูลเฝ้าระวังและข้อมูลเชิงพื้นที่ของนิคมอุตสาหกรรม</p></div><a href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=590841b3f03147f38703740281ff87a6" target="_blank" rel="noopener">เปิดเต็มหน้าจอ ↗</a></header>
+   <iframe src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&amp;webmap=590841b3f03147f38703740281ff87a6&amp;theme=light&amp;bookmarks=true&amp;legend=true&amp;information=true&amp;share=true&amp;scroll=false&amp;basemaps=true" title="แผนที่ภาพรวมข้อมูล GIS ของการนิคมอุตสาหกรรม" allow="geolocation; fullscreen" allowfullscreen></iframe>
+   <div class="ieat-map-legend"><b>ชั้นข้อมูล</b><span><i></i>น้ำท่วม</span><span><i></i>จุดความร้อน</span><span><i></i>ภัยแล้ง</span><span><i></i>PM2.5</span></div>
+  </section>
+ </section>
+</div>
+</section><main class="dashboard"><section class="left"><div class="summary" id="summary"></div><article class="card chart-card"><div class="chart-head"><h2 id="chartTitle"></h2><span class="filter" id="chartFilter"></span></div><div class="bar-chart" id="bars"></div></article><article class="card lower"><div class="lower-title"><b id="lowerTitle"></b><span class="filter">⌁ เลือกมุมมอง　⌄</span></div><div class="legend"><span><i></i>ข้อมูลหลัก</span><span><i class="alt"></i>ข้อมูลสนับสนุน</span></div><div class="spark"><svg viewBox="0 0 600 110" preserveAspectRatio="none"><path d="M0 92 C70 80,95 88,145 62 S230 20,280 55 S370 90,430 42 S520 32,600 12" fill="none" stroke="#2868ef" stroke-width="4"/><path d="M0 101 C80 94,130 64,190 82 S290 93,350 70 S470 77,600 49" fill="none" stroke="#631a9d" stroke-width="3"/></svg></div></article></section>
 <aside class="middle"><article class="card mid-card"><select aria-label="ตัวกรอง"><option>จำแนกตามระบบข้อมูล</option></select><div class="donut"><strong id="donutValue"></strong></div><h3 id="donutTitle"></h3><p id="donutText"></p></article><article class="card mid-card"><select aria-label="ตัวชี้วัด"><option id="gaugeSelect"></option></select><div class="gauge"><strong id="gaugeValue"></strong></div><div class="mini-row"><span><i class="dot"></i><span id="gaugeTitle"></span></span><b id="gaugeSide"></b></div></article></aside>
 <section class="map-panel"><div class="map-tools"><span class="active" id="mapChip1"></span><span id="mapChip2"></span><span id="mapChip3"></span></div><a class="open-full" id="fullLink" target="_blank" rel="noopener">เปิดเต็มหน้าจอ ↗</a><iframe class="map-frame" id="mapFrame" allow="local-network-access; geolocation" title="แผนที่ระบบสารสนเทศ" allowfullscreen></iframe><div class="legend-box"><h3>สัญลักษณ์</h3><div class="legend-grid" id="legend"></div></div></section></main>
 <script>
@@ -168,4 +200,48 @@ html body td{font-size:11px!important;line-height:1.35!important}
 })();
 </script>
 
+<style id="ieat-overview-dashboard-v2">
+body.overview-mode{overflow:auto!important;background:#fff!important}
+body.overview-mode .requested-overview{padding:16px 24px 28px!important;background:#f7f9fb!important}
+.ieat-gis-dashboard{width:100%;max-width:1920px;margin:auto}
+.ieat-kpi-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:14px}
+.ieat-kpi{min-width:0;min-height:118px;padding:18px;display:flex;align-items:center;gap:14px;border:1px solid #edf0f3;border-radius:18px;background:#fff;color:#232a33!important;text-decoration:none;box-shadow:0 5px 18px rgba(27,39,51,.07);transition:.2s}
+.ieat-kpi:hover{transform:translateY(-2px);box-shadow:0 9px 24px rgba(27,39,51,.12)}
+.ieat-kpi-icon{display:grid;place-items:center;flex:0 0 46px;width:46px;height:46px;border-radius:14px;background:#edf5ff;color:#2877d5;font-size:25px!important}
+.ieat-kpi strong{display:block;color:#1f6ed4;font-size:27px!important;line-height:1!important}.ieat-kpi b{display:block;margin-top:5px;color:#202832;font-size:16px!important}.ieat-kpi small{display:block;margin-top:2px;color:#7a8490;font-size:13px!important}
+.ieat-kpi.hotspot .ieat-kpi-icon{background:#fff2e9;color:#ef6c21}.ieat-kpi.hotspot strong{color:#ef6c21}.ieat-kpi.drought .ieat-kpi-icon{background:#fff7df;color:#d89400}.ieat-kpi.drought strong{color:#d89400}.ieat-kpi.dust .ieat-kpi-icon{background:#eef9f2;color:#319b62}.ieat-kpi.dust strong{color:#319b62}
+.ieat-dashboard-grid{display:grid;grid-template-columns:minmax(540px,1.5fr) 310px minmax(470px,1.15fr);gap:14px;align-items:stretch}
+.ieat-dashboard-content{display:grid;grid-template-rows:360px 245px 230px;gap:14px;min-width:0}
+.ieat-dashboard-side{display:grid;grid-template-rows:1fr 1fr;gap:14px;min-width:0}
+.ieat-panel{min-width:0;overflow:hidden;border:1px solid #edf0f3;border-radius:18px;background:#fff;box-shadow:0 5px 18px rgba(27,39,51,.06)}
+.ieat-panel>header{min-height:68px;padding:14px 17px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #eef1f4}.ieat-panel h2{margin:0;color:#222b35!important;font-size:17px!important}.ieat-panel header p{margin:2px 0 0;color:#7c8692!important;font-size:13px!important}.ieat-panel header>span{padding:7px 11px;border-radius:15px;background:#f3f5f7;color:#7b8490;font-size:12px!important}.ieat-panel header button,.ieat-panel header a{padding:8px 12px;border:0;border-radius:16px;background:#edf4fd;color:#2871ca!important;font-size:12px!important;text-decoration:none;cursor:pointer}
+.ieat-bars{height:calc(100% - 68px);padding:24px 18px 12px;display:flex;align-items:flex-end;justify-content:space-around;border-bottom:1px solid #edf0f3;background:repeating-linear-gradient(to bottom,transparent 0,transparent 24%,#eef1f4 25%,transparent 26%)}.ieat-bars a,.ieat-bars button{width:14%;height:100%;padding:0;border:0;background:transparent;color:#58616d!important;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;text-decoration:none;cursor:pointer}.ieat-bars i{display:block;width:34px;min-height:16px;border-radius:11px 11px 2px 2px;background:#2d76cf;box-shadow:0 5px 12px rgba(45,118,207,.18)}.ieat-bars a:nth-child(2) i{background:#ef7827}.ieat-bars a:nth-child(3) i{background:#dda123}.ieat-bars a:nth-child(4) i{background:#4ba36d}.ieat-bars button:nth-child(5) i{background:#d44f5e}.ieat-bars button:nth-child(6) i{background:#7254a6}.ieat-bars b{margin-top:8px;font-size:12px!important;font-weight:500!important;text-align:center}
+.ieat-chart-pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;min-width:0}.ieat-mini-bars{height:170px;padding:22px 22px 10px;display:flex;align-items:flex-end;justify-content:space-around;background:repeating-linear-gradient(to bottom,transparent 0,transparent 32%,#eef1f4 33%,transparent 34%)}.ieat-mini-bars span{height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center}.ieat-mini-bars i{display:block;width:28px;min-height:10px;border-radius:9px 9px 1px 1px;background:#d14d5b}.ieat-mini-bars b{margin-top:7px;font-size:11px!important;font-weight:500!important}
+.ieat-monitor-list{padding:13px 17px;display:grid;gap:9px}.ieat-monitor-list span{padding:8px 10px;display:grid;grid-template-columns:10px 58px 1fr;align-items:center;border-radius:10px;background:#f8fafb}.ieat-monitor-list i{width:8px;height:8px;border-radius:50%;background:#52ac63;box-shadow:0 0 0 4px #e7f5ea}.ieat-monitor-list b{font-size:13px!important}.ieat-monitor-list em{color:#77818d;font-size:11px!important;font-style:normal}
+.ieat-weather-week{height:155px;padding:14px;display:grid;grid-template-columns:repeat(7,1fr);gap:8px}.ieat-day{padding:9px 5px;border-radius:12px;background:#f7f9fb;text-align:center}.ieat-day b{display:block;font-size:11px!important}.ieat-day i{display:block;margin:7px 0;font-size:22px!important;font-style:normal}.ieat-day strong{color:#236dc3;font-size:12px!important}.ieat-day small{display:block;color:#7b8490;font-size:9px!important}
+.ieat-donut-card{padding-bottom:12px}.ieat-donut-card>header{display:block}.ieat-donut-card header span{display:block;margin-top:3px;padding:0;background:none}.ieat-donut{position:relative;width:155px;height:155px;margin:24px auto 18px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(#246fc5 0 43%,#55b86a 43% 68%,#f1c52c 68% 83%,#aeb5bd 83%)}.ieat-donut:before{content:"";position:absolute;width:96px;height:96px;border-radius:50%;background:#fff}.ieat-donut b{position:relative;z-index:1;color:#245da6;font-size:17px!important}.ieat-donut.burned{background:conic-gradient(#f27924 0 22%,#e5e9ed 22%)}.ieat-donut-legend{padding:0 18px;display:grid;grid-template-columns:1fr 1fr;gap:8px;color:#68727e}.ieat-donut-legend span{font-size:10px!important}.ieat-donut-legend i{display:inline-block;width:8px;height:8px;margin-right:5px;border-radius:50%;background:#246fc5}.ieat-donut-legend span:nth-child(2) i{background:#55b86a}.ieat-donut-legend span:nth-child(3) i{background:#f1c52c}.ieat-donut-legend span:nth-child(4) i{background:#aeb5bd}.burned-legend span:first-child i{background:#f27924}.burned-legend span:nth-child(2) i{background:#e5e9ed}
+.ieat-map-panel{position:relative;min-height:849px}.ieat-map-panel>header{position:absolute;z-index:3;top:12px;left:12px;right:12px;border:0;border-radius:14px;background:#fffffff0;box-shadow:0 4px 15px rgba(29,42,54,.14)}.ieat-map-panel iframe{width:100%;height:100%;min-height:849px;border:0;background:#e9eef3}.ieat-map-legend{position:absolute;z-index:3;left:18px;right:18px;bottom:18px;padding:13px 14px;border-radius:13px;background:#fffffff2;box-shadow:0 5px 18px rgba(29,42,54,.16);display:grid;grid-template-columns:repeat(2,1fr);gap:7px;color:#68727e}.ieat-map-legend b{grid-column:1/-1;font-size:13px!important}.ieat-map-legend span{font-size:10px!important}.ieat-map-legend i{display:inline-block;width:8px;height:8px;margin-right:5px;border-radius:50%;background:#239fda}.ieat-map-legend span:nth-of-type(2) i{background:#ef7827}.ieat-map-legend span:nth-of-type(3) i{background:#dda123}.ieat-map-legend span:nth-of-type(4) i{background:#55a56e}
+@media(max-width:1280px){.ieat-dashboard-grid{grid-template-columns:minmax(520px,1.5fr) 280px}.ieat-map-panel{grid-column:1/-1;min-height:700px}.ieat-map-panel iframe{min-height:700px}.ieat-dashboard-side{grid-column:2;grid-row:1}.ieat-dashboard-content{grid-column:1;grid-row:1}}
+@media(max-width:850px){body.overview-mode .requested-overview{padding:10px!important}.ieat-kpi-row{grid-template-columns:1fr 1fr}.ieat-dashboard-grid{display:flex;flex-direction:column}.ieat-dashboard-content{display:flex;flex-direction:column}.ieat-overview-chart{height:350px}.ieat-chart-pair{grid-template-columns:1fr}.ieat-accident,.ieat-monitor{min-height:240px}.ieat-forecast{min-height:250px}.ieat-dashboard-side{grid-template-columns:1fr 1fr}.ieat-map-panel{min-height:620px}.ieat-map-panel iframe{min-height:620px}}
+@media(max-width:560px){.ieat-kpi-row,.ieat-dashboard-side{grid-template-columns:1fr}.ieat-kpi{min-height:100px}.ieat-weather-week{height:auto;grid-template-columns:repeat(2,1fr)}.ieat-map-panel>header{display:block}.ieat-map-panel header a{display:inline-block;margin-top:8px}.ieat-map-legend{grid-template-columns:1fr}}
+</style>
+<script id="ieat-overview-dashboard-v2-script">
+(function(){
+ const weatherIcons={0:"☀️",1:"🌤️",2:"⛅",3:"☁️",45:"🌫️",48:"🌫️",51:"🌦️",53:"🌦️",55:"🌧️",61:"🌧️",63:"🌧️",65:"🌧️",80:"🌦️",81:"🌧️",82:"⛈️",95:"⛈️"};
+ async function loadOverviewForecast(){
+  const box=document.getElementById("overviewForecast");if(!box)return;
+  const estate=(typeof activeEstate!=="undefined"&&activeEstate)||["พื้นที่นิคมอุตสาหกรรมทั่วประเทศ",13.2,101];
+  const label=document.getElementById("forecastLocation");if(label)label.textContent=estate[0];
+  box.innerHTML="<span>กำลังโหลดข้อมูลพยากรณ์อากาศ…</span>";
+  try{
+   const url="https://api.open-meteo.com/v1/forecast?latitude="+estate[1]+"&longitude="+estate[2]+"&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia%2FBangkok&forecast_days=7";
+   const response=await fetch(url),json=await response.json(),d=json.daily;
+   box.innerHTML=d.time.map(function(date,i){const day=new Date(date+"T12:00:00").toLocaleDateString("th-TH",{weekday:"short",day:"numeric"});return '<article class="ieat-day"><b>'+day+'</b><i>'+(weatherIcons[d.weather_code[i]]||"🌤️")+'</i><strong>'+Math.round(d.temperature_2m_max[i])+'° / '+Math.round(d.temperature_2m_min[i])+'°</strong><small>ฝน '+(d.precipitation_probability_max[i]??0)+'%</small></article>'}).join("");
+  }catch(e){box.innerHTML="<span>ไม่สามารถโหลดข้อมูลพยากรณ์อากาศได้ในขณะนี้</span>"}
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",loadOverviewForecast,{once:true});else loadOverviewForecast();
+ const refresh=document.getElementById("opsWeatherRefresh");if(refresh)refresh.addEventListener("click",loadOverviewForecast);
+ const scope=document.getElementById("scopeBtn");if(scope)new MutationObserver(loadOverviewForecast).observe(scope,{childList:true,characterData:true,subtree:true});
+})();
+</script>
 </body></html>
