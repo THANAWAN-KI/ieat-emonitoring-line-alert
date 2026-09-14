@@ -439,6 +439,34 @@ body{font-size:16px;line-height:1.55}
     /* Unified website typography matching the supplied reference */
     html,body,button,input,select,textarea,table{font-family:"Noto Sans Thai","Segoe UI",Tahoma,sans-serif!important}
   </style>
+
+<style id="daily-situation-redesign-20260914-v2">
+body{background:#f5f7fa!important;color:#242b34!important}
+.situation-page{max-width:1880px;margin:auto;padding:24px 28px 44px}
+.situation-hero{min-height:190px;padding:30px 34px;display:flex;align-items:center;justify-content:space-between;gap:28px;border-radius:22px;background:linear-gradient(120deg,#351145 0%,#631a9d 58%,#8543ad 100%);color:#fff;box-shadow:0 14px 34px rgba(68,29,88,.20)}
+.situation-hero .eyebrow,.section-heading>div>span{display:block;color:#dcb9ed;font-size:12px!important;font-weight:600;letter-spacing:.12em}
+.situation-hero h1{margin:8px 0 7px;font-size:32px!important;color:#fff!important}
+.situation-hero p{max-width:920px;margin:0;color:#f1e9f4;font-size:16px!important}
+.overall-status{flex:0 0 280px;padding:18px 20px;border:1px solid rgba(255,255,255,.22);border-radius:16px;background:rgba(255,255,255,.12);backdrop-filter:blur(6px)}
+.overall-status small,.overall-status strong,.overall-status span{display:block;color:#fff}.overall-status small{font-size:13px!important}.overall-status strong{margin:4px 0;font-size:21px!important}.overall-status span{font-size:13px!important;color:#eadff0}.overall-status.alert{border-left:5px solid #ffcf33}
+.daily-kpis{margin:14px 0;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.daily-kpis article{min-height:118px;padding:18px;border:1px solid #e7eaee;border-radius:17px;background:#fff;box-shadow:0 5px 18px rgba(27,39,51,.07)}
+.daily-kpis span,.daily-kpis small{display:block}.daily-kpis span{font-size:14px!important;font-weight:500}.daily-kpis strong{display:block;margin:9px 0 4px;color:#631a9d;font-size:29px!important;line-height:1}.daily-kpis small{color:#737d88;font-size:12px!important}.daily-kpis .warning strong{color:#bf033b}
+.section-block{margin-top:14px;padding:20px;border:1px solid #e7eaee;border-radius:18px;background:#fff;box-shadow:0 5px 18px rgba(27,39,51,.06)}
+.section-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:15px}.section-heading>div>span{color:#631a9d}.section-heading h2{margin:3px 0 0!important}.section-heading>p{margin:0;color:#707a86;font-size:14px!important}.section-heading>a{padding:8px 13px;border-radius:18px;background:#f2eaf7;color:#631a9d!important;font-size:13px!important;font-weight:600;text-decoration:none}
+.situation-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.situation-card{min-height:190px;padding:20px;display:flex;flex-direction:column;border:1px solid #e8ebee;border-top:4px solid #3579c8;border-radius:15px;background:#fff;color:#242b34!important;text-decoration:none;transition:.2s}
+.situation-card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(28,39,51,.11)}.situation-card.fire{border-top-color:#bf033b}.situation-card.pm{border-top-color:#8a63b8}.situation-card.monitor{border-top-color:#0091cd}
+.system-code{color:#687481;font-size:11px!important;font-weight:700;letter-spacing:.09em}.situation-card h3{margin:10px 0 7px!important}.situation-card p{margin:0 0 14px;color:#65707d;font-size:14px!important}.situation-card b{margin-top:auto;color:#631a9d;font-size:13px}
+.content-grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(310px,.72fr);gap:14px}.content-grid>.section-block{height:100%}
+.new-news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.new-news-card{min-width:0;overflow:hidden;border:1px solid #e7eaee;border-radius:14px;background:#fff}.news-thumb{height:180px;display:block;overflow:hidden;background:#eceff2}.news-thumb img{width:100%;height:100%;object-fit:cover}.news-thumb.fallback{display:grid;place-items:center;background:linear-gradient(135deg,#f1e8f6,#e6edf7);color:#631a9d!important;font-weight:600;text-decoration:none}.new-news-card>div{padding:15px}.new-news-card h3{margin:7px 0!important}.new-news-card p{margin:0;color:#65707d;font-size:14px!important}.read-news{display:inline-block;margin-top:12px;color:#631a9d!important;font-size:13px!important;font-weight:600}.loading-news{grid-column:1/-1;padding:45px;text-align:center;color:#737d88}
+.source-list{display:grid;gap:8px}.source-list a{padding:11px;display:flex;align-items:center;gap:10px;border:1px solid #e8ebee;border-radius:11px;color:#29313a!important;text-decoration:none}.source-list i{width:10px;height:10px;flex:0 0 10px;border-radius:50%;background:#d8a52b}.source-list i.ok{background:#4aa363}.source-list b,.source-list small{display:block}.source-list b{font-size:14px}.source-list small{color:#737d88;font-size:12px!important}.data-notice{margin:14px 0 0;padding:12px;border-left:3px solid #631a9d;background:#f8f4fa;color:#596470;font-size:13px!important}
+.map-report-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(380px,.72fr);gap:14px}.situation-map,.line-report{height:620px}.situation-map{display:flex;flex-direction:column}.situation-map iframe{width:100%;flex:1;border:0;border-radius:12px;background:#e8edf1}
+.line-report{display:flex;flex-direction:column}.line-summary{flex:1;padding:20px;border:1px solid #e1e5e9;border-radius:14px;background:#f8fafb;color:#25303b;font-size:17px!important;line-height:1.8!important;white-space:pre-wrap}.report-actions{margin-top:13px;display:grid;grid-template-columns:1fr 1fr;gap:8px}.report-actions button{padding:11px 14px;border:0;border-radius:22px;background:#631a9d;color:#fff;font-size:14px!important;font-weight:600;cursor:pointer}.report-actions button.secondary{background:#2f6fed}.report-actions button:disabled{opacity:.55}.line-report>small{margin-top:9px;color:#6e7884;font-size:12px!important;text-align:center}
+@media(max-width:1200px){.situation-cards{grid-template-columns:1fr 1fr}.content-grid,.map-report-grid{grid-template-columns:1fr}.situation-map{height:650px}.line-report{height:auto;min-height:540px}}
+@media(max-width:800px){.situation-page{padding:12px}.situation-hero{display:block;padding:23px}.situation-hero h1{font-size:25px!important}.overall-status{margin-top:18px}.daily-kpis{grid-template-columns:1fr 1fr}.new-news-grid{grid-template-columns:1fr}.news-thumb{height:220px}}
+@media(max-width:520px){.daily-kpis,.situation-cards{grid-template-columns:1fr}.section-block{padding:14px}.section-heading{display:block}.section-heading>p{margin-top:5px}.situation-map{height:560px}.report-actions{grid-template-columns:1fr}.line-summary{font-size:15px!important}}
+</style>
 </head>
   <body>
     <header class="bar">
@@ -456,12 +484,72 @@ body{font-size:16px;line-height:1.55}
         </div>
       </div>
     </header>
-    <main class="wrap">
-      <section class="report" id="capture">
-        <section class="news-wrap">
-          <h3>ข่าวสารและกิจกรรม</h3>
-          <div class="news-grid" id="news"><div class="muted">กำลังรวบรวมข่าวล่าสุด…</div></div>
-        </section>
+    <main class="situation-page">
+      <section class="situation-hero" id="dailyOverview">
+        <div>
+          <span class="eyebrow">IEAT EMCC · DAILY SITUATION</span>
+          <h1>รายงานสถานการณ์และข่าวสารประจำวัน</h1>
+          <p>สรุปเหตุการณ์ ข่าวสาร และข้อมูลเฝ้าระวังที่เกี่ยวข้องกับพื้นที่นิคมอุตสาหกรรมทั่วประเทศ</p>
+        </div>
+        <div class="overall-status" id="overallStatus"><small>สถานะภาพรวม</small><strong>กำลังประมวลผล</strong><span id="reportUpdated">กำลังโหลดข้อมูลล่าสุด…</span></div>
+      </section>
+
+      <section class="daily-kpis" aria-label="ตัวชี้วัดสถานการณ์ประจำวัน">
+        <article><span>ข่าวสำคัญวันนี้</span><strong id="newsTotal">–</strong><small>รายการจากแหล่งข้อมูลที่ติดตาม</small></article>
+        <article><span>สถานี e‑Monitoring</span><strong id="stationTotal">–</strong><small>สถานีตรวจวัดทุกระบบ</small></article>
+        <article><span>สถานี Online</span><strong id="onlineTotal">–</strong><small>สถานีที่กำลังส่งข้อมูล</small></article>
+        <article class="warning"><span>ต้องติดตาม</span><strong id="alertTotal">–</strong><small>สถานีที่พบค่าพารามิเตอร์แจ้งเตือน</small></article>
+      </section>
+
+      <section class="section-block">
+        <header class="section-heading"><div><span>สถานการณ์สำคัญ</span><h2>ข้อมูลเฝ้าระวัง 4 ด้าน</h2></div><p>เลือกเปิดรายละเอียดของแต่ละระบบเพื่อตรวจสอบข้อมูลล่าสุด</p></header>
+        <div class="situation-cards">
+          <a class="situation-card flood" href="./flood-report.html">
+            <span class="system-code">WATER</span><h3>น้ำท่วมและสถานการณ์น้ำ</h3>
+            <p>พื้นที่เฝ้าระวัง ปริมาณฝน ระดับน้ำ และรายงานใกล้นิคมอุตสาหกรรม</p><b>เปิดรายงานสถานการณ์น้ำ →</b>
+          </a>
+          <a class="situation-card fire" href="./hub.html#fire">
+            <span class="system-code">EMERGENCY</span><h3>ไฟไหม้และอุบัติเหตุ</h3>
+            <p>ข้อมูลสนับสนุนเหตุฉุกเฉิน ทรัพยากรใกล้เคียง และแผนที่วิเคราะห์</p><b>เปิดข้อมูลสนับสนุนเหตุ →</b>
+          </a>
+          <a class="situation-card pm" href="./pm25.html">
+            <span class="system-code">AIR QUALITY</span><h3>ฝุ่น PM2.5 และคุณภาพอากาศ</h3>
+            <p>ข้อมูลสถานีตรวจวัด แนวโน้มคุณภาพอากาศ และพื้นที่ที่ควรติดตาม</p><b>เปิดรายงาน PM2.5 →</b>
+          </a>
+          <a class="situation-card monitor" href="./information.html#monitor">
+            <span class="system-code">e‑MONITORING</span><h3>สถานีและค่าพารามิเตอร์</h3>
+            <p id="monitorCardText">กำลังโหลดข้อมูลสถานี AQMs, WQMs และ CEMs</p><b>เปิดหน้า e‑Monitoring →</b>
+          </a>
+        </div>
+      </section>
+
+      <section class="content-grid">
+        <div class="section-block news-section">
+          <header class="section-heading"><div><span>ข่าวสารล่าสุด</span><h2>ข่าวและประกาศที่ควรติดตาม</h2></div><p>เปิดตรวจสอบรายละเอียดจากหน่วยงานเจ้าของข้อมูล</p></header>
+          <div class="new-news-grid" id="news"><div class="loading-news">กำลังรวบรวมข่าวล่าสุด…</div></div>
+        </div>
+        <aside class="section-block source-panel">
+          <header class="section-heading"><div><span>แหล่งข้อมูล</span><h2>สถานะการเชื่อมโยง</h2></div></header>
+          <div id="sourceList" class="source-list"><p>กำลังตรวจสอบแหล่งข้อมูล…</p></div>
+          <p class="data-notice" id="dataNotice"></p>
+        </aside>
+      </section>
+
+      <section class="map-report-grid">
+        <article class="section-block situation-map">
+          <header class="section-heading"><div><span>แผนที่ภาพรวม</span><h2>พื้นที่นิคมอุตสาหกรรมและข้อมูลเฝ้าระวัง</h2></div><a href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=590841b3f03147f38703740281ff87a6" target="_blank" rel="noopener">เปิดเต็มหน้าจอ ↗</a></header>
+          <iframe src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&amp;webmap=590841b3f03147f38703740281ff87a6&amp;theme=light&amp;legend=true&amp;information=true&amp;scroll=true" title="แผนที่ภาพรวมสถานการณ์" allow="geolocation; fullscreen" allowfullscreen></iframe>
+        </article>
+
+        <article class="section-block line-report" id="lineReport">
+          <header class="section-heading"><div><span>LINE REPORT</span><h2>สรุปสำหรับส่ง LINE</h2></div></header>
+          <div class="line-summary" id="lineSummary">กำลังจัดทำข้อความสรุปสถานการณ์…</div>
+          <div class="report-actions" data-html2canvas-ignore="true">
+            <button type="button" id="copyLineReport">คัดลอกข้อความ</button>
+            <button type="button" class="secondary" id="downloadLineReport">ดาวน์โหลด PNG</button>
+          </div>
+          <small id="copyStatus">ข้อความจะอัปเดตตามข้อมูลล่าสุดของระบบ</small>
+        </article>
       </section>
     </main>
     <footer class="site-footer">
@@ -488,7 +576,8 @@ body{font-size:16px;line-height:1.55}
         <div class="footer-bottom">ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย กนอ. · Environmental Monitoring and Control Center: EMCC</div>
       </div>
     </footer>
-    <script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script id="daily-situation-dashboard-v2">
       function updateHeaderClock() {
         const now = new Date();
         document.querySelector("#headerDate").textContent = "ข้อมูล ณ วันที่ " + new Intl.DateTimeFormat("th-TH", { timeZone: "Asia/Bangkok", day: "numeric", month: "short", year: "numeric" }).format(now);
@@ -496,38 +585,99 @@ body{font-size:16px;line-height:1.55}
       }
       updateHeaderClock();
       setInterval(updateHeaderClock, 60000);
-      const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" })[c]);
-      const galleries = {};
-      function moveGallery(id, direction) {
-        const gallery = galleries[id];
-        if (!gallery) return;
-        gallery.index = (gallery.index + direction + gallery.images.length) % gallery.images.length;
-        const current = gallery.images[gallery.index];
-        const image = document.querySelector(`#${id} .news-cover`);
-        const link = document.querySelector(`#${id} .news-image-link`);
-        document.querySelector(`#${id} .gallery-count`).textContent = `${gallery.index + 1} / ${gallery.images.length}`;
-        image.src = current.url;
-        image.alt = current.title;
-        link.href = current.url;
+      const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" })[ch]);
+      const fmt = (value) => Number(value || 0).toLocaleString("th-TH");
+      let currentReport = null;
+
+      function buildLineSummary(report) {
+        const summary = report.station_summary || {};
+        const newsCount = (report.news || []).length;
+        const status = Number(summary.alert || 0) > 0 ? "พบข้อมูลที่ต้องติดตาม" : "ไม่พบค่าพารามิเตอร์แจ้งเตือน";
+        return [
+          "รายงานสถานการณ์และข่าวสารประจำวัน",
+          "ข้อมูล ณ " + (report.generated_at_th || report.report_date || "–"),
+          "",
+          "สถานการณ์ e‑Monitoring: " + status,
+          "สถานีทั้งหมด " + fmt(summary.total) + " สถานี",
+          "Online " + fmt(summary.online) + " สถานี | Offline " + fmt(summary.offline) + " สถานี",
+          "พบค่าพารามิเตอร์แจ้งเตือน " + fmt(summary.alert) + " สถานี",
+          "ข่าวและประกาศที่ติดตาม " + fmt(newsCount) + " รายการ",
+          "",
+          "โปรดตรวจสอบรายละเอียดจากแดชบอร์ดและหน่วยงานเจ้าของข้อมูลก่อนนำไปใช้อ้างอิง"
+        ].join("\n");
       }
+
+      function renderReport(report) {
+        currentReport = report;
+        const summary = report.station_summary || {};
+        const news = report.news || [];
+        const sources = report.sources || [];
+        const alerts = Number(summary.alert || 0);
+        document.querySelector("#newsTotal").textContent = fmt(news.length);
+        document.querySelector("#stationTotal").textContent = fmt(summary.total);
+        document.querySelector("#onlineTotal").textContent = fmt(summary.online);
+        document.querySelector("#alertTotal").textContent = fmt(alerts);
+        document.querySelector("#reportUpdated").textContent = "อัปเดต " + (report.generated_at_th || summary.updated_at || "–");
+        const overall = document.querySelector("#overallStatus");
+        overall.classList.toggle("alert", alerts > 0);
+        overall.querySelector("strong").textContent = alerts > 0 ? "ต้องติดตามสถานการณ์" : "สถานการณ์ปกติ";
+        document.querySelector("#monitorCardText").textContent = alerts > 0
+          ? "พบ " + fmt(alerts) + " สถานีที่มีค่าพารามิเตอร์แจ้งเตือน จากทั้งหมด " + fmt(summary.total) + " สถานี"
+          : "ไม่พบสถานีที่มีค่าพารามิเตอร์แจ้งเตือนจากข้อมูลล่าสุด";
+
+        document.querySelector("#news").innerHTML = news.length ? news.map((item) => {
+          const image = item.image || ((item.images || [])[0] || {}).url || "";
+          const media = image && !item.hide_image
+            ? '<a class="news-thumb" href="' + esc(item.url) + '" target="_blank" rel="noopener"><img src="' + esc(image) + '" alt="' + esc(item.title) + '" loading="lazy"></a>'
+            : '<a class="news-thumb fallback" href="' + esc(item.url) + '" target="_blank" rel="noopener"><span>' + esc(item.source) + '</span></a>';
+          return '<article class="new-news-card">' + media + '<div><span class="news-source">' + esc(item.source) + '</span><h3>' + esc(item.title) + '</h3><p>' + esc(item.summary) + '</p><a class="read-news" href="' + esc(item.url) + '" target="_blank" rel="noopener">อ่านจากแหล่งข่าว →</a></div></article>';
+        }).join("") : '<div class="loading-news">ยังไม่มีข่าวที่ผ่านการคัดกรองในรอบนี้</div>';
+
+        document.querySelector("#sourceList").innerHTML = sources.length ? sources.map((source) =>
+          '<a href="' + esc(source.url) + '" target="_blank" rel="noopener"><i class="' + (source.ok ? "ok" : "wait") + '"></i><span><b>' + esc(source.name) + '</b><small>' + (source.ok ? "เชื่อมโยงข้อมูลสำเร็จ" : "เปิดตรวจสอบจากแหล่งข้อมูล") + '</small></span></a>'
+        ).join("") : "<p>ยังไม่มีข้อมูลแหล่งที่มา</p>";
+        document.querySelector("#dataNotice").textContent = report.notice || "";
+        document.querySelector("#lineSummary").textContent = buildLineSummary(report);
+      }
+
       fetch("./daily-report.json?t=" + Date.now(), { cache: "no-store" })
-        .then((r) => r.json())
-        .then((d) => {
-          const cards = d.news || [];
-          document.querySelector("#news").innerHTML = cards.map((n, index) => {
-            const images = n.images || [];
-            const galleryId = `gallery-${index}`;
-            if (images.length) galleries[galleryId] = { images, index: 0 };
-            const firstImage = images.length ? images[0].url : n.image;
-            const media = firstImage
-              ? `<div class="news-media" id="${galleryId}"><a class="news-image-link" href="${esc(firstImage)}" target="_blank" rel="noopener"><img class="news-cover" src="${esc(firstImage)}" alt="ภาพข่าวจาก ${esc(n.source)}" loading="lazy"></a>${images.length > 1 ? `<div class="gallery-controls"><button type="button" aria-label="ภาพก่อนหน้า" onclick="moveGallery('${galleryId}',-1)">‹</button><span class="gallery-count">1 / ${images.length}</span><button type="button" aria-label="ภาพถัดไป" onclick="moveGallery('${galleryId}',1)">›</button></div>` : ""}</div>`
-              : `<div class="news-media"><div class="news-fallback">${esc(n.source)}</div></div>`;
-            return `<article class="news-item">${media}<div class="news-content"><span class="news-source">${esc(n.source)}</span><h4>${esc(n.title)}</h4><p>${esc(n.summary)}</p><div>${(n.matched_keywords || []).map((k) => `<span class="keyword">${esc(k)}</span>`).join("")}</div><a class="news-link" href="${esc(n.url)}" target="_blank" rel="noopener">อ่านจากแหล่งข่าว →</a></div></article>`;
-          }).join("") || '<div class="muted">ยังไม่มีข่าวที่ผ่านการคัดกรองในรอบนี้</div>';
-        })
+        .then((response) => { if (!response.ok) throw new Error("HTTP " + response.status); return response.json(); })
+        .then(renderReport)
         .catch(() => {
-          document.querySelector("#news").innerHTML = '<div class="muted">ไม่สามารถโหลดข่าวสารได้ในขณะนี้</div>';
+          document.querySelector("#news").innerHTML = '<div class="loading-news">ไม่สามารถโหลดข่าวสารได้ในขณะนี้</div>';
+          document.querySelector("#overallStatus strong").textContent = "ไม่สามารถโหลดข้อมูล";
+          document.querySelector("#reportUpdated").textContent = "กรุณาลองใหม่อีกครั้ง";
         });
+
+      document.querySelector("#copyLineReport").addEventListener("click", async () => {
+        const status = document.querySelector("#copyStatus");
+        try {
+          await navigator.clipboard.writeText(document.querySelector("#lineSummary").textContent);
+          status.textContent = "คัดลอกข้อความเรียบร้อยแล้ว";
+        } catch (error) {
+          const range = document.createRange();
+          range.selectNodeContents(document.querySelector("#lineSummary"));
+          const selection = window.getSelection();
+          selection.removeAllRanges(); selection.addRange(range);
+          status.textContent = "เลือกข้อความแล้ว กรุณากด Ctrl + C";
+        }
+      });
+
+      document.querySelector("#downloadLineReport").addEventListener("click", async () => {
+        const button = document.querySelector("#downloadLineReport");
+        const status = document.querySelector("#copyStatus");
+        if (typeof html2canvas !== "function") { status.textContent = "ไม่สามารถสร้างภาพได้ในขณะนี้"; return; }
+        button.disabled = true; status.textContent = "กำลังจัดทำภาพ PNG…";
+        try {
+          const canvas = await html2canvas(document.querySelector("#lineReport"), { backgroundColor: "#ffffff", scale: 2, useCORS: true });
+          const link = document.createElement("a");
+          link.download = "IEAT-daily-situation-" + new Date().toISOString().slice(0,10) + ".png";
+          link.href = canvas.toDataURL("image/png");
+          link.click();
+          status.textContent = "ดาวน์โหลดภาพเรียบร้อยแล้ว";
+        } catch (error) { status.textContent = "ไม่สามารถสร้างภาพได้ กรุณาลองใหม่"; }
+        finally { button.disabled = false; }
+      });
     </script>
   
 <style id="daily-match-information-typography-20260914-v1">
