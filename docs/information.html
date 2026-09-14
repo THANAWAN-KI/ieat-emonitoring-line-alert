@@ -244,4 +244,39 @@ body.overview-mode .requested-overview{padding:16px 24px 28px!important;backgrou
  const scope=document.getElementById("scopeBtn");if(scope)new MutationObserver(loadOverviewForecast).observe(scope,{childList:true,characterData:true,subtree:true});
 })();
 </script>
+<style id="ieat-overview-estate-sync-v3-style">
+.ieat-map-panel iframe{pointer-events:auto!important;touch-action:auto}
+.ieat-area-context{display:flex;align-items:center;gap:7px;margin:0 0 12px;padding:9px 13px;border-radius:12px;background:#eef5fd;color:#245f9f;font-size:13px!important}
+.ieat-area-context:before{content:"⌖";display:grid;place-items:center;width:25px;height:25px;border-radius:50%;background:#fff;color:#2877d5}
+</style>
+<script id="ieat-overview-estate-sync-v3">
+(function(){
+ const mapBase="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=590841b3f03147f38703740281ff87a6&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=true&basemaps=true";
+ function selectedEstate(){
+  return (typeof activeEstate!=="undefined"&&activeEstate)||["พื้นที่นิคมอุตสาหกรรมทั่วประเทศ",13.2,101,1155581];
+ }
+ function syncOverviewEstate(){
+  const estate=selectedEstate(),name=estate[0],lat=estate[1],lon=estate[2],scale=estate[3]||65000;
+  const dashboard=document.querySelector(".ieat-gis-dashboard");if(!dashboard)return;
+  let context=dashboard.querySelector(".ieat-area-context");
+  if(!context){context=document.createElement("div");context.className="ieat-area-context";dashboard.insertBefore(context,dashboard.firstChild)}
+  context.textContent="กำลังแสดงข้อมูล: "+name;
+  const chartArea=dashboard.querySelector(".ieat-overview-chart header>span");if(chartArea)chartArea.textContent=name;
+  dashboard.querySelectorAll(".ieat-kpi small").forEach(function(el){if(!el.dataset.base)el.dataset.base=el.textContent;el.textContent=el.dataset.base+" • "+name});
+  dashboard.querySelectorAll(".ieat-donut-card header>span").forEach(function(el){el.textContent=name});
+  const forecastLabel=document.getElementById("forecastLocation");if(forecastLabel)forecastLabel.textContent=name;
+  const map=dashboard.querySelector(".ieat-map-panel iframe");
+  const full=dashboard.querySelector(".ieat-map-panel header a");
+  const nationwide=(typeof estates!=="undefined"&&estate===estates[0]);
+  const mapUrl=nationwide?mapBase:mapBase+"&center="+lon+","+lat+"&scale="+scale;
+  if(map&&map.dataset.area!==name){map.src=mapUrl;map.dataset.area=name}
+  if(full)full.href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=590841b3f03147f38703740281ff87a6"+(nationwide?"":"&center="+lon+","+lat+"&scale="+scale);
+  const mapText=dashboard.querySelector(".ieat-map-panel header p");if(mapText)mapText.textContent="ข้อมูลเฝ้าระวังและข้อมูลเชิงพื้นที่ • "+name;
+ }
+ function scheduleSync(){setTimeout(syncOverviewEstate,60)}
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",syncOverviewEstate,{once:true});else syncOverviewEstate();
+ const scope=document.getElementById("scopeBtn");if(scope)new MutationObserver(scheduleSync).observe(scope,{childList:true,characterData:true,subtree:true});
+ document.querySelectorAll(".estate-option").forEach(function(btn){btn.addEventListener("click",scheduleSync)});
+})();
+</script>
 </body></html>
