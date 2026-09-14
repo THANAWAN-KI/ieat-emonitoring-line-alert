@@ -10556,5 +10556,55 @@ html body main.container #warning [data-flood-risk-hours="48"] button{
  [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(apply,ms)});
 })();
 </script>
+
+<style id="analysis-heading-and-estate-status-final">
+html body main.container #warning .watch-analysis-title,
+html body main.container #warning [data-analysis-heading-final="true"]{
+ color:#000000!important;-webkit-text-fill-color:#000000!important;
+}
+html body main.container #warning .estate-watch-table td[data-estate-status-final="true"],
+html body main.container #warning .estate-watch-table td[data-estate-status-final="true"] *{
+ background:#ed1b2e!important;background-color:#ed1b2e!important;background-image:none!important;
+ border-color:#000000!important;color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;
+}
+</style>
+<script id="analysis-heading-and-estate-status-final-script">
+(function(){
+ function norm(v){return String(v||"").replace(/\s+/g," ").trim()}
+ function apply(){
+  var root=document.getElementById("warning");if(!root)return;
+  root.querySelectorAll("h1,h2,h3,h4,.watch-analysis-title").forEach(function(el){
+   if(norm(el.textContent).indexOf("ข้อมูลวิเคราะห์เพิ่มเติมสำหรับนิคมอุตสาหกรรม")>=0){
+    el.setAttribute("data-analysis-heading-final","true");
+    el.style.setProperty("color","#000000","important");
+    el.style.setProperty("-webkit-text-fill-color","#000000","important");
+   }
+  });
+  root.querySelectorAll(".estate-watch-table table").forEach(function(table){
+   var heads=Array.from(table.querySelectorAll("thead th"));
+   var index=heads.findIndex(function(th){return norm(th.textContent)==="สถานะ"});
+   if(index<0)return;
+   table.querySelectorAll("tbody tr").forEach(function(tr){
+    var cell=tr.children[index];if(!cell)return;
+    cell.setAttribute("data-estate-status-final","true");
+    cell.style.setProperty("background","#ed1b2e","important");
+    cell.style.setProperty("background-color","#ed1b2e","important");
+    cell.style.setProperty("background-image","none","important");
+    cell.style.setProperty("color","#ffffff","important");
+    cell.querySelectorAll("*").forEach(function(el){
+     el.style.setProperty("background","#ed1b2e","important");
+     el.style.setProperty("background-color","#ed1b2e","important");
+     el.style.setProperty("background-image","none","important");
+     el.style.setProperty("color","#ffffff","important");
+    });
+   });
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply,{once:true});else apply();
+ var root=document.getElementById("warning");
+ if(root)new MutationObserver(function(){requestAnimationFrame(apply)}).observe(root,{childList:true,subtree:true});
+ [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(apply,ms)});
+})();
+</script>
 </body>
 </html>
