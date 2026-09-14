@@ -2358,6 +2358,72 @@ html body #hubInformationHeader .estate-option.active{background:#eef5e8;color:#
  render();
 })();
 </script>
+<style id="hub-match-drought-typography-20260914-v1">
+/* Typography scale copied from the rendered drought dashboard. */
+html body{font-family:"Noto Sans Thai","Sarabun",sans-serif!important;font-size:16px!important;font-weight:400!important;line-height:1.6!important}
+html body #hubInformationHeader,
+html body #hubInformationHeader *,
+html body main#captureArea.page,
+html body main#captureArea.page *,
+html body footer{
+ font-family:"Sarabun","TH Sarabun New",sans-serif!important
+}
+html body #hubInformationHeader .brand h1{font-size:20px!important;font-weight:600!important;line-height:1.4!important}
+html body #hubInformationHeader .brand p{font-size:14px!important;font-weight:300!important;line-height:1.5!important}
+html body #hubInformationHeader .clock,
+html body #hubInformationHeader .scope,
+html body #hubInformationHeader .hub,
+html body #hubInformationHeader .estate-option,
+html body #hubInformationHeader input{font-size:13px!important;line-height:1.4!important}
+html body main#captureArea.page nav.tabs button.tab[data-type]{font-size:16px!important;font-weight:400!important;line-height:1.4!important}
+html body main#captureArea.page nav.tabs button.tab[data-type].active{font-weight:600!important}
+html body main#captureArea.page .fire-overview-head h1{font-size:20px!important;font-weight:600!important;line-height:1.4!important}
+html body main#captureArea.page .fire-overview-head p{font-size:14px!important;font-weight:300!important;line-height:1.5!important}
+html body main#captureArea.page h2,
+html body main#captureArea.page .panel-head h2,
+html body main#captureArea.page .fire-board-title h2,
+html body main#captureArea.page .fire-map-head h2,
+html body main#captureArea.page .fire-dss-head h2{font-size:20px!important;font-weight:600!important;line-height:1.45!important}
+html body main#captureArea.page h3,
+html body main#captureArea.page .fire-readiness-head h3{font-size:18px!important;font-weight:500!important;line-height:1.5!important}
+html body main#captureArea.page p,
+html body main#captureArea.page li{font-size:16px!important;font-weight:400!important;line-height:1.6!important}
+html body main#captureArea.page label{font-size:12px!important;font-weight:600!important;line-height:1.6!important}
+html body main#captureArea.page input,
+html body main#captureArea.page select{font-size:13px!important;font-weight:400!important;line-height:1.6!important}
+html body main#captureArea.page button,
+html body main#captureArea.page a{font-size:12px!important;line-height:1.4!important}
+html body main#captureArea.page .fire-support-card h3{font-size:14px!important;font-weight:400!important;line-height:1.45!important}
+html body main#captureArea.page .fire-support-card strong{font-size:24px!important;font-weight:600!important;line-height:1.25!important}
+html body main#captureArea.page .fire-support-card span{font-size:14px!important;font-weight:400!important;line-height:1.5!important}
+html body main#captureArea.page .fire-board-title p,
+html body main#captureArea.page .fire-map-head p,
+html body main#captureArea.page .fire-dss-head p,
+html body main#captureArea.page .fire-readiness-head span,
+html body main#captureArea.page #fireEstateStatus{font-size:12px!important;font-weight:400!important;line-height:1.45!important}
+html body main#captureArea.page table th,
+html body main#captureArea.page table td{font-size:11px!important;line-height:1.35!important}
+html body main#captureArea.page table th{font-weight:600!important}
+html body footer{font-size:11px!important;font-weight:400!important;line-height:1.6!important}
+@media(max-width:700px){
+ html body #hubInformationHeader .brand h1{font-size:19px!important}
+ html body main#captureArea.page .fire-overview-head h1{font-size:19px!important}
+ html body main#captureArea.page nav.tabs button.tab[data-type]{font-size:14px!important}
+}
+</style>
+<script id="hub-match-drought-typography-20260914-v1-lock">
+(function(){
+ function apply(){
+  document.querySelectorAll("#hubInformationHeader *:not(svg):not(path),main#captureArea *:not(svg):not(path):not(.material-icons):not([class*='fa-']),body>footer").forEach(function(el){
+   el.style.setProperty("font-family","Sarabun, 'TH Sarabun New', sans-serif","important");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply,{once:true});else apply();
+ var root=document.querySelector("main#captureArea");
+ if(root)new MutationObserver(function(){requestAnimationFrame(apply)}).observe(root,{childList:true,subtree:true});
+ [500,1500,4000].forEach(function(ms){setTimeout(apply,ms)});
+})();
+</script>
 </body></html>
 
 <style id="hub-reference-spacing-20260914-v2">
