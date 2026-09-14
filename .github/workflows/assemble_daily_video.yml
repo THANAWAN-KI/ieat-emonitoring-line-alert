@@ -1,4 +1,4 @@
-name: Assemble daily news 3D cartoon video
+name: Assemble combined daily news hero image
 
 on:
   push:
@@ -10,22 +10,22 @@ permissions:
   contents: write
 
 jobs:
-  assemble-video:
+  assemble-image:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Assemble optimized MP4
+      - name: Assemble optimized hero image
         shell: bash
         run: |
-          test -d .video_upload
-          cat .video_upload/daily-news-intro.part-* | base64 --decode > docs/assets/daily-news-intro.mp4
-          test -s docs/assets/daily-news-intro.mp4
-      - name: Commit video asset
+          test -d .image_upload
+          cat .image_upload/daily-news-hero.part-* | base64 --decode > docs/assets/daily-news-hero-composite.webp
+          test -s docs/assets/daily-news-hero-composite.webp
+      - name: Commit hero image
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/assets/daily-news-intro.mp4
-          git rm -r .video_upload
-          git commit -m "Add optimized daily news intro video"
+          git add docs/assets/daily-news-hero-composite.webp
+          git rm -r .image_upload
+          git commit -m "Add combined daily news hero image"
           git push
