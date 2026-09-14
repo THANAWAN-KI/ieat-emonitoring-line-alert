@@ -1,4 +1,4 @@
-name: Assemble daily news video
+name: Assemble daily news cartoon video
 
 on:
   push:
