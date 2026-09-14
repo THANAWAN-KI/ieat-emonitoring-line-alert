@@ -1,4 +1,4 @@
-<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="build" content="2026-09-14-overview-dashboard-v4"><title>ภาพรวมระบบสารสนเทศ | IEAT EMCC</title>
+<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="build" content="2026-09-14-gis-dashboard-v1"><title>ภาพรวมระบบสารสนเทศ | IEAT EMCC</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--blue:#2868ef;--purple:#631a9d;--ink:#2d3138;--muted:#777e88;--line:#e4e7eb;--bg:#f7f8fa;--card:#fff}*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:"Noto Sans Thai","Segoe UI",Tahoma,sans-serif;color:var(--ink);background:var(--bg)}button,a,input,select{font:inherit}
@@ -87,6 +87,68 @@ body.overview-mode{overflow:hidden;background:#f5f7fa}.situation-dashboard{heigh
   </section>
  </section>
 </div>
+</section><section class="requested-gis" aria-label="Dashboard ข้อมูลระบบ GIS">
+ <div class="gis-data-dashboard">
+  <section class="gis-data-kpis">
+   <article><span class="gis-card-icon">▧</span><div><strong>0</strong><b>แผนผังแม่บทนิคมฯ</b><small>รายการ</small></div></article>
+   <article><span class="gis-card-icon">⌂</span><div><strong>0</strong><b>นิคมอุตสาหกรรม</b><small>แห่ง</small></div></article>
+   <article><span class="gis-card-icon">🏭</span><div><strong>0</strong><b>โรงงานทั้งหมด</b><small>โรงงาน</small></div></article>
+   <article><span class="gis-card-icon">✓</span><div><strong>0</strong><b>มีเลขทะเบียน</b><small>โรงงาน</small></div></article>
+   <article><span class="gis-card-icon">!</span><div><strong>0</strong><b>ไม่มีเลขทะเบียน</b><small>โรงงาน</small></div></article>
+   <article><span class="gis-card-icon">⌗</span><div><strong>0</strong><b>ขนาดพื้นที่รวม</b><small>ไร่</small></div></article>
+  </section>
+
+  <div class="gis-data-area"><span>ข้อมูลพื้นที่: </span><b id="gisAreaName">พื้นที่นิคมอุตสาหกรรมทั่วประเทศ</b></div>
+
+  <section class="gis-data-layout">
+   <div class="gis-data-left">
+    <article class="gis-data-panel gis-utility-panel">
+     <header><div><h2>สาธารณูปโภคในพื้นที่นิคมฯ</h2><p>ภาพรวมโครงสร้างพื้นฐานและระบบสนับสนุน</p></div><span>ข้อมูล GIS</span></header>
+     <div class="gis-utility-grid">
+      <div><i>⚡</i><b>ระบบไฟฟ้า</b><strong>ไม่มี</strong></div><div><i>💧</i><b>ระบบประปา</b><strong>ไม่มี</strong></div><div><i>≋</i><b>ระบบบำบัดน้ำเสีย</b><strong>ไม่มี</strong></div><div><i>═</i><b>ถนนและการคมนาคม</b><strong>ไม่มี</strong></div><div><i>♨</i><b>ระบบดับเพลิง</b><strong>ไม่มี</strong></div><div><i>♻</i><b>ระบบจัดการของเสีย</b><strong>ไม่มี</strong></div>
+     </div>
+    </article>
+
+    <div class="gis-data-two">
+     <article class="gis-data-panel gis-risk-panel">
+      <header><div><h2>ข้อมูลความเสี่ยงในนิคมฯ</h2><p>อัคคีภัยสูง 12 ประเภท และ PSM</p></div><a href="https://riskmap.disaster.go.th/" target="_blank" rel="noopener">แหล่งข้อมูล Risk Map ↗</a></header>
+      <div class="gis-risk-summary"><div class="gis-risk-ring"><b>0</b><small>พื้นที่เสี่ยงสูง</small></div><div class="gis-risk-details"><span><i></i>ความเสี่ยงอัคคีภัยสูง <b>0</b></span><span><i></i>กลุ่มความเสี่ยง 12 ประเภท <b>0</b></span><span><i></i>โรงงานระบบ PSM <b>0</b></span></div></div>
+     </article>
+     <article class="gis-data-panel gis-industry-panel">
+      <header><div><h2>กลุ่มอุตสาหกรรม</h2><p>จำแนกโรงงานตามกิจกรรมอุตสาหกรรม</p></div><span>12 กลุ่ม</span></header>
+      <div class="gis-horizontal-bars"><span><b>ปิโตรเคมี</b><i><em style="width:0%"></em></i><strong>0</strong></span><span><b>โลหะและเครื่องจักร</b><i><em style="width:0%"></em></i><strong>0</strong></span><span><b>อาหารและเครื่องดื่ม</b><i><em style="width:0%"></em></i><strong>0</strong></span><span><b>ยานยนต์และชิ้นส่วน</b><i><em style="width:0%"></em></i><strong>0</strong></span><span><b>อื่น ๆ</b><i><em style="width:0%"></em></i><strong>0</strong></span></div>
+     </article>
+    </div>
+
+    <div class="gis-data-two gis-lower-charts">
+     <article class="gis-data-panel">
+      <header><div><h2>สัดส่วนการใช้ประโยชน์ที่ดิน</h2><p>การใช้ที่ดินในพื้นที่นิคมอุตสาหกรรม</p></div><span>หน่วย: ไร่</span></header>
+      <div class="gis-chart-body"><div class="gis-land-ring"><b>0 ไร่</b></div><div class="gis-chart-legend"><span><i></i>พื้นที่อุตสาหกรรม <b>0</b></span><span><i></i>สาธารณูปโภค <b>0</b></span><span><i></i>พื้นที่สีเขียว <b>0</b></span><span><i></i>พื้นที่อื่น ๆ <b>0</b></span></div></div>
+     </article>
+     <article class="gis-data-panel">
+      <header><div><h2>สถานะการขออนุญาตใช้ที่ดิน</h2><p>ขออนุญาตและไม่ได้ขออนุญาต</p></div><span>ข้อมูลล่าสุด</span></header>
+      <div class="gis-chart-body"><div class="gis-permit-ring"><b>0</b></div><div class="gis-chart-legend permit"><span><i></i>ขออนุญาต <b>0</b></span><span><i></i>ไม่ได้ขออนุญาต <b>0</b></span></div></div>
+     </article>
+    </div>
+
+    <article class="gis-data-panel gis-chemical-panel">
+     <header><div><h2>ข้อมูลสารเคมี</h2><p>สารเคมีที่จัดเก็บและใช้งานในพื้นที่นิคมฯ</p></div><span>เชื่อมโยงข้อมูลโรงงาน</span></header>
+     <div class="gis-chemical-grid"><div><b>ชนิดสารเคมี</b><strong>0</strong><small>รายการ</small></div><div><b>สารไวไฟ</b><strong>0</strong><small>รายการ</small></div><div><b>สารอันตราย</b><strong>0</strong><small>รายการ</small></div><div><b>มีข้อมูล SDS</b><strong>0</strong><small>รายการ</small></div></div>
+    </article>
+
+    <article class="gis-data-panel gis-land-table">
+     <header><div><h2>การใช้ที่ดินในพื้นที่นิคมอุตสาหกรรม</h2><p>รายละเอียดประเภทการใช้ประโยชน์และขนาดพื้นที่</p></div><span>ขนาดพื้นที่ (ไร่)</span></header>
+     <div class="gis-table-wrap"><table><thead><tr><th>ประเภทการใช้ที่ดิน</th><th>สถานะการอนุญาต</th><th>จำนวนแปลง</th><th>ขนาดพื้นที่ (ไร่)</th></tr></thead><tbody><tr><td colspan="4">ไม่มีข้อมูลสำหรับพื้นที่ที่เลือก</td></tr></tbody></table></div>
+    </article>
+   </div>
+
+   <aside class="gis-data-panel gis-main-map">
+    <header><div><h2>แผนที่ข้อมูลระบบ GIS</h2><p id="gisMapSubtitle">แผนผังแม่บท โรงงาน สาธารณูปโภค และข้อมูลความเสี่ยง</p></div><a id="gisFullMap" href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=9c25f3f77ba5481cb481b402177884c2" target="_blank" rel="noopener">เปิดเต็มหน้าจอ ↗</a></header>
+    <iframe id="gisDataMap" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&amp;webmap=9c25f3f77ba5481cb481b402177884c2&amp;theme=light&amp;bookmarks=true&amp;legend=true&amp;information=true&amp;share=true&amp;scroll=true&amp;basemaps=true" title="แผนที่ข้อมูลระบบ GIS" allow="geolocation; fullscreen" allowfullscreen></iframe>
+    <div class="gis-map-layers"><b>ชั้นข้อมูล</b><span><i></i>ผังแม่บทนิคมฯ</span><span><i></i>โรงงาน</span><span><i></i>สาธารณูปโภค</span><span><i></i>พื้นที่ความเสี่ยง</span><span><i></i>การใช้ประโยชน์ที่ดิน</span><span><i></i>ข้อมูลสารเคมี</span></div>
+   </aside>
+  </section>
+ </div>
 </section><main class="dashboard"><section class="left"><div class="summary" id="summary"></div><article class="card chart-card"><div class="chart-head"><h2 id="chartTitle"></h2><span class="filter" id="chartFilter"></span></div><div class="bar-chart" id="bars"></div></article><article class="card lower"><div class="lower-title"><b id="lowerTitle"></b><span class="filter">⌁ เลือกมุมมอง　⌄</span></div><div class="legend"><span><i></i>ข้อมูลหลัก</span><span><i class="alt"></i>ข้อมูลสนับสนุน</span></div><div class="spark"><svg viewBox="0 0 600 110" preserveAspectRatio="none"><path d="M0 92 C70 80,95 88,145 62 S230 20,280 55 S370 90,430 42 S520 32,600 12" fill="none" stroke="#2868ef" stroke-width="4"/><path d="M0 101 C80 94,130 64,190 82 S290 93,350 70 S470 77,600 49" fill="none" stroke="#631a9d" stroke-width="3"/></svg></div></article></section>
 <aside class="middle"><article class="card mid-card"><select aria-label="ตัวกรอง"><option>จำแนกตามระบบข้อมูล</option></select><div class="donut"><strong id="donutValue"></strong></div><h3 id="donutTitle"></h3><p id="donutText"></p></article><article class="card mid-card"><select aria-label="ตัวชี้วัด"><option id="gaugeSelect"></option></select><div class="gauge"><strong id="gaugeValue"></strong></div><div class="mini-row"><span><i class="dot"></i><span id="gaugeTitle"></span></span><b id="gaugeSide"></b></div></article></aside>
 <section class="map-panel"><div class="map-tools"><span class="active" id="mapChip1"></span><span id="mapChip2"></span><span id="mapChip3"></span></div><a class="open-full" id="fullLink" target="_blank" rel="noopener">เปิดเต็มหน้าจอ ↗</a><iframe class="map-frame" id="mapFrame" allow="local-network-access; geolocation" title="แผนที่ระบบสารสนเทศ" allowfullscreen></iframe><div class="legend-box"><h3>สัญลักษณ์</h3><div class="legend-grid" id="legend"></div></div></section></main>
@@ -110,7 +172,7 @@ document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>render(t.dataset.tab)
 const now=new Date();period.textContent="ข้อมูล ณ วันที่ "+now.toLocaleDateString("th-TH",{day:"numeric",month:"long",year:"numeric"});function tick(){clock.textContent=new Date().toLocaleString("th-TH",{weekday:"short",day:"2-digit",month:"short",year:"2-digit",hour:"2-digit",minute:"2-digit"})+" น."}tick();setInterval(tick,60000);const first=location.hash.slice(1);render(data[first]?first:"overview");
 </script><script>
 const baseRender=render,overviewMap=document.querySelector(".ops-map-frame"),heroMap=document.querySelector(".esri-hero-map");render=function(key){baseRender(key);const overviewUrl=focusedMap(maps.gis);if(heroMap)heroMap.src=overviewUrl;setOverviewMode(key)}
-function setOverviewMode(key){document.body.classList.toggle("overview-mode",key==="overview")}
+function setOverviewMode(key){document.body.classList.toggle("overview-mode",key==="overview");document.body.classList.toggle("gis-mode",key==="gis")}
 document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>setOverviewMode(t.dataset.tab)));
 document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>{const key=b.dataset.go;setOverviewMode(key);render(key);document.querySelector(".tabs").scrollIntoView({behavior:"smooth",block:"start"})}));
 document.querySelectorAll("[data-scroll]").forEach(b=>b.addEventListener("click",()=>document.getElementById(b.dataset.scroll).scrollIntoView({behavior:"smooth"})));
@@ -280,6 +342,38 @@ body.overview-mode .requested-overview{padding:16px 24px 28px!important;backgrou
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",syncOverviewEstate,{once:true});else syncOverviewEstate();
  const scope=document.getElementById("scopeBtn");if(scope)new MutationObserver(scheduleSync).observe(scope,{childList:true,characterData:true,subtree:true});
  document.querySelectorAll(".estate-option").forEach(function(btn){btn.addEventListener("click",scheduleSync)});
+})();
+</script>
+<style id="information-gis-data-dashboard-v1">
+.requested-gis{display:none}body.gis-mode .requested-gis{display:block}body.gis-mode .dashboard{display:none!important}body.gis-mode{overflow:auto!important;background:#fff!important}
+.gis-data-dashboard{padding:16px 24px 30px;background:#f7f9fb;color:#252d37}
+.gis-data-kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}.gis-data-kpis article{min-height:112px;padding:16px;display:flex;align-items:center;gap:12px;border:1px solid #edf0f3;border-radius:17px;background:#fff;box-shadow:0 5px 18px rgba(27,39,51,.07)}.gis-card-icon{display:grid;place-items:center;flex:0 0 43px;width:43px;height:43px;border-radius:13px;background:#edf5ff;color:#286fc5;font-size:21px!important}.gis-data-kpis strong{display:block;color:#2168bd;font-size:25px!important;line-height:1!important}.gis-data-kpis b{display:block;margin-top:5px;font-size:14px!important}.gis-data-kpis small{display:block;color:#7b8590;font-size:11px!important}
+.gis-data-area{margin:12px 0;padding:9px 13px;border-radius:11px;background:#fff;border:1px solid #e9edf1;color:#68737f;font-size:13px!important}.gis-data-area b{color:#2769b9}
+.gis-data-layout{display:grid;grid-template-columns:minmax(700px,1.55fr) minmax(480px,1fr);gap:14px;align-items:start}.gis-data-left{display:grid;gap:14px;min-width:0}.gis-data-panel{min-width:0;overflow:hidden;border:1px solid #edf0f3;border-radius:17px;background:#fff;box-shadow:0 5px 18px rgba(27,39,51,.06)}.gis-data-panel>header{min-height:66px;padding:13px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #edf0f3}.gis-data-panel h2{margin:0;font-size:17px!important;color:#232c36!important}.gis-data-panel header p{margin:2px 0 0;color:#7b8590!important;font-size:12px!important}.gis-data-panel header>span,.gis-data-panel header>a{padding:7px 10px;border-radius:15px;background:#f1f5fa;color:#286fc5!important;font-size:11px!important;text-decoration:none}
+.gis-utility-grid{padding:14px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.gis-utility-grid div{min-height:86px;padding:12px;border-radius:12px;background:#f8fafb;display:grid;grid-template-columns:32px 1fr;align-items:center;column-gap:8px}.gis-utility-grid i{grid-row:1/3;font-size:20px!important;font-style:normal}.gis-utility-grid b{font-size:12px!important}.gis-utility-grid strong{color:#727d88;font-size:12px!important}
+.gis-data-two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.gis-risk-summary{min-height:214px;padding:20px;display:flex;align-items:center;justify-content:center;gap:25px}.gis-risk-ring,.gis-land-ring,.gis-permit-ring{width:135px;height:135px;flex:0 0 135px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle,#fff 0 52%,transparent 53%),conic-gradient(#d64d5b 0 0%,#e7ebef 0)}.gis-risk-ring b{color:#c94050;font-size:27px!important}.gis-risk-ring small{font-size:9px!important}.gis-risk-details{display:grid;gap:12px}.gis-risk-details span{display:grid;grid-template-columns:10px 1fr auto;align-items:center;gap:7px;color:#68727e;font-size:11px!important}.gis-risk-details i{width:8px;height:8px;border-radius:50%;background:#d64d5b}.gis-risk-details b{color:#252d36}
+.gis-horizontal-bars{padding:16px;display:grid;gap:11px}.gis-horizontal-bars span{display:grid;grid-template-columns:125px 1fr 24px;align-items:center;gap:8px}.gis-horizontal-bars b,.gis-horizontal-bars strong{font-size:10px!important}.gis-horizontal-bars i{height:9px;border-radius:6px;background:#edf0f3;overflow:hidden}.gis-horizontal-bars em{display:block;height:100%;border-radius:6px;background:#2d78ca}
+.gis-chart-body{min-height:220px;padding:17px;display:flex;align-items:center;justify-content:center;gap:25px}.gis-land-ring{background:radial-gradient(circle,#fff 0 52%,transparent 53%),conic-gradient(#3478cf 0 0%,#e7ebef 0)}.gis-permit-ring{background:radial-gradient(circle,#fff 0 52%,transparent 53%),conic-gradient(#53aa68 0 0%,#e7ebef 0)}.gis-land-ring b,.gis-permit-ring b{color:#286abd;font-size:16px!important}.gis-chart-legend{display:grid;gap:9px}.gis-chart-legend span{display:grid;grid-template-columns:9px 1fr auto;gap:7px;align-items:center;color:#68727e;font-size:10px!important}.gis-chart-legend i{width:8px;height:8px;border-radius:50%;background:#3478cf}.gis-chart-legend span:nth-child(2) i{background:#e4ab28}.gis-chart-legend span:nth-child(3) i{background:#50a868}.gis-chart-legend span:nth-child(4) i{background:#aeb5bd}.gis-chart-legend.permit span:first-child i{background:#50a868}.gis-chart-legend.permit span:nth-child(2) i{background:#d64d5b}
+.gis-chemical-grid{padding:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.gis-chemical-grid div{padding:13px;border-radius:11px;background:#f8fafb}.gis-chemical-grid b{display:block;font-size:11px!important}.gis-chemical-grid strong{display:block;margin:5px 0;color:#286abd;font-size:22px!important}.gis-chemical-grid small{color:#7b8590;font-size:10px!important}
+.gis-table-wrap{overflow:auto;padding:0 14px 14px}.gis-table-wrap table{width:100%;border-collapse:collapse}.gis-table-wrap th,.gis-table-wrap td{padding:11px;border-bottom:1px solid #e6eaee;text-align:left;font-size:11px!important}.gis-table-wrap th{background:#f5f7f9;color:#68727e}.gis-table-wrap td[colspan]{padding:25px;text-align:center;color:#7b8590}
+.gis-main-map{position:sticky;top:12px;height:calc(100vh - 145px);min-height:820px}.gis-main-map>header{position:absolute;z-index:3;top:12px;left:12px;right:12px;border:0;border-radius:13px;background:#fffffff2;box-shadow:0 4px 15px rgba(25,38,50,.14)}.gis-main-map iframe{display:block;width:100%;height:100%;border:0;background:#e8eef3;pointer-events:auto;touch-action:auto}.gis-map-layers{position:absolute;z-index:3;left:18px;right:18px;bottom:18px;padding:13px;border-radius:12px;background:#fffffff2;box-shadow:0 5px 17px rgba(25,38,50,.16);display:grid;grid-template-columns:repeat(2,1fr);gap:7px;color:#68727e}.gis-map-layers b{grid-column:1/-1;font-size:12px!important}.gis-map-layers span{font-size:10px!important}.gis-map-layers i{display:inline-block;width:8px;height:8px;margin-right:5px;border-radius:50%;background:#2d78ca}.gis-map-layers span:nth-of-type(2) i{background:#d44f5e}.gis-map-layers span:nth-of-type(3) i{background:#e0a727}.gis-map-layers span:nth-of-type(4) i{background:#8d5db2}.gis-map-layers span:nth-of-type(5) i{background:#4da66a}.gis-map-layers span:nth-of-type(6) i{background:#ed7826}
+@media(max-width:1300px){.gis-data-kpis{grid-template-columns:repeat(3,1fr)}.gis-data-layout{grid-template-columns:1fr}.gis-main-map{position:relative;top:auto;height:720px;min-height:720px}}
+@media(max-width:760px){.gis-data-dashboard{padding:10px}.gis-data-kpis{grid-template-columns:1fr 1fr}.gis-data-layout,.gis-data-two{display:flex;flex-direction:column}.gis-utility-grid{grid-template-columns:1fr 1fr}.gis-chemical-grid{grid-template-columns:1fr 1fr}.gis-main-map{height:600px;min-height:600px}.gis-map-layers{grid-template-columns:1fr}.gis-chart-body{flex-direction:column}}
+@media(max-width:480px){.gis-data-kpis,.gis-utility-grid,.gis-chemical-grid{grid-template-columns:1fr}}
+</style>
+<script id="information-gis-data-dashboard-v1-script">
+(function(){
+ const mapBase="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=9c25f3f77ba5481cb481b402177884c2&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=true&basemaps=true";
+ function syncGisDashboard(){
+  const estate=(typeof activeEstate!=="undefined"&&activeEstate)||["พื้นที่นิคมอุตสาหกรรมทั่วประเทศ",13.2,101,1155581],name=estate[0],lat=estate[1],lon=estate[2],scale=estate[3]||65000;
+  const area=document.getElementById("gisAreaName");if(area)area.textContent=name;
+  const subtitle=document.getElementById("gisMapSubtitle");if(subtitle)subtitle.textContent="แผนผังแม่บท โรงงาน สาธารณูปโภค และข้อมูลความเสี่ยง • "+name;
+  const map=document.getElementById("gisDataMap"),national=(typeof estates!=="undefined"&&estate===estates[0]),url=national?mapBase:mapBase+"&center="+lon+","+lat+"&scale="+scale;
+  if(map&&map.dataset.area!==name){map.src=url;map.dataset.area=name}
+  const full=document.getElementById("gisFullMap");if(full)full.href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=9c25f3f77ba5481cb481b402177884c2"+(national?"":"&center="+lon+","+lat+"&scale="+scale);
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",syncGisDashboard,{once:true});else syncGisDashboard();
+ const scope=document.getElementById("scopeBtn");if(scope)new MutationObserver(function(){setTimeout(syncGisDashboard,60)}).observe(scope,{childList:true,characterData:true,subtree:true});
 })();
 </script>
 </body></html>
