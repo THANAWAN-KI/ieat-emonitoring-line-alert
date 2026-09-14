@@ -2597,6 +2597,36 @@ html body #hubInformationHeader .header-news>span:last-child{
  font-size:13px!important;font-weight:400!important;line-height:1.4!important
 }
 </style>
+<script id="hub-iframe-heading-borderless-20260914-v2">
+(function(){
+ var css=[
+  "html,body,main{background:#fff!important;background-color:#fff!important}",
+  "main>.dashboard-head,main.wrap>.dashboard-head,main>.intro,main.wrap>.intro{border:0!important;border-left:0!important;outline:0!important;box-shadow:none!important}",
+  "#warning>.flood-support-heading,#warning>.dashboard-intro,#thaiwater-warning .watch-intro,#infographic>.export-page-heading{border:0!important;outline:0!important;box-shadow:none!important}",
+  ".dashboard-head>.head-brand,.flood-support-heading>.flood-support-heading-copy{border:0!important;outline:0!important;box-shadow:none!important}"
+ ].join("");
+ function apply(frame){
+  try{
+   var doc=frame.contentDocument;if(!doc||!doc.head)return;
+   var old=doc.getElementById("hub-force-borderless-headings");
+   if(!old){old=doc.createElement("style");old.id="hub-force-borderless-headings";doc.head.appendChild(old)}
+   old.textContent=css;
+  }catch(error){}
+ }
+ function bind(){
+  document.querySelectorAll("iframe").forEach(function(frame){
+   if(frame.dataset.borderlessHeadingBound!=="1"){
+    frame.dataset.borderlessHeadingBound="1";
+    frame.addEventListener("load",function(){apply(frame)});
+   }
+   apply(frame);
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",bind,{once:true});else bind();
+ new MutationObserver(function(){requestAnimationFrame(bind)}).observe(document.body,{childList:true,subtree:true});
+ [500,1500,3500,7000].forEach(function(ms){setTimeout(bind,ms)});
+})();
+</script>
 </body></html>
 
 <style id="hub-reference-spacing-20260914-v2">
