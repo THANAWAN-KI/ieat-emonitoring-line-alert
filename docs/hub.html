@@ -2267,7 +2267,7 @@ html body #hubInformationHeader .estate-option.active{background:#eef5e8;color:#
  function update(){
   var now=new Date();
   if(period)period.textContent="ข้อมูลสนับสนุนการเฝ้าระวังและรับมือเหตุฉุกเฉิน";
-  if(clock)clock.textContent=now.toLocaleDateString("th-TH",{weekday:"short",day:"2-digit",month:"short",year:"2-digit"})+" "+now.toLocaleTimeString("th-TH",{hour:"2-digit",minute:"2-digit"})+" น.";
+  if(clock)clock.textContent="☀ "+now.toLocaleDateString("th-TH",{weekday:"short",day:"2-digit",month:"short",year:"2-digit"})+" "+now.toLocaleTimeString("th-TH",{hour:"2-digit",minute:"2-digit"})+" น.";
  }
  update();setInterval(update,30000);
  var names=["พื้นที่นิคมอุตสาหกรรมทั่วประเทศ","นิคมอุตสาหกรรมมาบตาพุด","นิคมอุตสาหกรรมแหลมฉบัง","นิคมอุตสาหกรรมบางปู","นิคมอุตสาหกรรมบางชัน"];
