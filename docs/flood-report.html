@@ -10522,5 +10522,39 @@ html body main.container #warning .daily-water-grid .station-card-custom-icon sv
  [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(apply,ms)});
 })();
 </script>
+
+<style id="risk-48-action-green-final">
+html body main.container #thaiwater-warning .tw-risk-card:nth-of-type(2) a,
+html body main.container #thaiwater-warning .tw-risk-card:nth-of-type(2) button,
+html body main.container #warning .tw-risk-card:nth-of-type(2) a,
+html body main.container #warning .tw-risk-card:nth-of-type(2) button,
+html body main.container #warning [data-flood-risk-hours="48"] a,
+html body main.container #warning [data-flood-risk-hours="48"] button{
+ background:#537b35!important;background-color:#537b35!important;background-image:none!important;border-color:#537b35!important;
+}
+</style>
+<script id="risk-48-action-green-final-script">
+(function(){
+ function apply(){
+  var root=document.querySelector("#thaiwater-warning")||document.getElementById("warning");if(!root)return;
+  root.querySelectorAll("h1,h2,h3,h4").forEach(function(head){
+   var text=String(head.textContent||"").replace(/\s+/g," ").trim();
+   if(text.indexOf("พื้นที่เสี่ยงน้ำท่วมจากฝนตกสะสมใน 48 ชม. ข้างหน้า")<0)return;
+   var box=head.closest(".tw-risk-card,section,article,.card");if(!box)return;
+   box.setAttribute("data-flood-risk-hours","48");
+   box.querySelectorAll("a,button").forEach(function(el){
+    el.style.setProperty("background","#537b35","important");
+    el.style.setProperty("background-color","#537b35","important");
+    el.style.setProperty("background-image","none","important");
+    el.style.setProperty("border-color","#537b35","important");
+   });
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply,{once:true});else apply();
+ var root=document.getElementById("thaiwater-warning")||document.getElementById("warning");
+ if(root)new MutationObserver(function(){requestAnimationFrame(apply)}).observe(root,{childList:true,subtree:true});
+ [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(apply,ms)});
+})();
+</script>
 </body>
 </html>
