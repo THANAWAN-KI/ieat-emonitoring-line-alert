@@ -529,5 +529,89 @@ body{font-size:16px;line-height:1.55}
           document.querySelector("#news").innerHTML = '<div class="muted">ไม่สามารถโหลดข่าวสารได้ในขณะนี้</div>';
         });
     </script>
-  </body>
+  
+<style id="daily-match-information-typography-20260914-v1">
+/* Typography copied from docs/information.html. */
+html body,
+html body button,
+html body input,
+html body select,
+html body textarea,
+html body table,
+html body th,
+html body td,
+html body a{
+ font-family:"Sarabun","TH Sarabun New",sans-serif!important;
+}
+html body{font-size:16px!important;font-weight:400!important;line-height:1.6!important}
+html body .bar,
+html body .bar *:not(svg):not(path),
+html body .wrap,
+html body .wrap *:not(svg):not(path),
+html body .site-footer,
+html body .site-footer *:not(svg):not(path){
+ font-family:"Sarabun","TH Sarabun New",sans-serif!important;
+}
+html body .brand-copy strong{font-size:20px!important;font-weight:600!important;line-height:1.4!important;letter-spacing:0!important}
+html body .brand-copy span{font-size:14px!important;font-weight:300!important;line-height:1.5!important}
+html body .header-status b,
+html body .header-status small,
+html body .actions .btn{font-size:13px!important;line-height:1.4!important}
+html body h1{font-size:24px!important;font-weight:600!important;line-height:1.4!important}
+html body h2{font-size:20px!important;font-weight:600!important;line-height:1.45!important}
+html body h3,
+html body .news-wrap h3,
+html body .footer-col h3{font-size:18px!important;font-weight:500!important;line-height:1.5!important}
+html body h4,
+html body .news-item h4{font-size:16px!important;font-weight:500!important;line-height:1.5!important}
+html body p,
+html body label,
+html body li,
+html body .news-item p,
+html body .footer-col p{font-size:16px!important;line-height:1.6!important}
+html body button,
+html body input,
+html body select,
+html body textarea,
+html body a,
+html body .news-link,
+html body .footer-col a{font-size:16px!important;line-height:1.4!important}
+html body small,
+html body .muted,
+html body [class*="subtitle"],
+html body [class*="description"],
+html body [class*="meta"],
+html body [class*="hint"],
+html body .news-source,
+html body .gallery-count,
+html body .keyword,
+html body .footer-bottom{font-size:14px!important;line-height:1.5!important}
+html body .kpi strong{font-size:24px!important;font-weight:600!important;line-height:1.25!important}
+html body .kpi small{font-size:14px!important;line-height:1.45!important}
+@media(max-width:900px){
+ html body .brand-copy strong{font-size:19px!important}
+ html body .brand-copy span{font-size:12px!important}
+ html body h1{font-size:20px!important}
+ html body h2{font-size:18px!important}
+}
+@media(max-width:650px){
+ html body .brand-copy strong{font-size:16px!important}
+ html body .brand-copy span{font-size:11px!important}
+ html body .actions .btn{font-size:12px!important}
+}
+</style>
+<script id="daily-match-information-typography-20260914-v1-lock">
+(function(){
+ function apply(){
+  document.querySelectorAll("body *:not(svg):not(path):not(.material-icons):not([class*='fa-'])").forEach(function(el){
+   el.style.setProperty("font-family","Sarabun, 'TH Sarabun New', sans-serif","important");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply,{once:true});else apply();
+ var root=document.body;
+ if(root)new MutationObserver(function(){requestAnimationFrame(apply)}).observe(root,{childList:true,subtree:true});
+ [500,1500,4000].forEach(function(ms){setTimeout(apply,ms)});
+})();
+</script>
+</body>
 </html>
