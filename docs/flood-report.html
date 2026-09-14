@@ -10291,9 +10291,13 @@ html body #warning .daily-water-grid[data-nine-cards-merged="true"]>* ::after{co
 #warning .daily-water-grid[data-nine-cards-merged="true"] svg,
 #warning .daily-water-grid[data-nine-cards-merged="true"] img,
 #warning .daily-water-grid[data-nine-cards-merged="true"] i{display:none!important}
-/* Remove the boxed house icon from the second card */
+/* Remove icons from: abnormal water level, monitored stations, and overall status */
 html body main.container #warning .daily-water-grid[data-nine-cards-merged="true"] > :nth-child(2)::before,
-html body main.container #warning .daily-water-grid[data-nine-cards-merged="true"] > :nth-child(2):before{
+html body main.container #warning .daily-water-grid[data-nine-cards-merged="true"] > :nth-child(2):before,
+html body main.container #warning .daily-water-grid[data-nine-cards-merged="true"] > :nth-child(3)::before,
+html body main.container #warning .daily-water-grid[data-nine-cards-merged="true"] > :nth-child(3):before,
+html body main.container #warning .daily-water-grid[data-nine-cards-merged="true"] > :nth-child(4)::before,
+html body main.container #warning .daily-water-grid[data-nine-cards-merged="true"] > :nth-child(4):before{
   content:none!important;
   display:none!important;
   width:0!important;
