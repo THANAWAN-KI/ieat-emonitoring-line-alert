@@ -10456,5 +10456,36 @@ html body main.container #warning .bottom-three-center-card .bottom-card-detail{
  [50,150,400,900,1800,3500,6000,10000].forEach(function(ms){setTimeout(repair,ms)});
 })();
 </script>
+
+<style id="critical-estate-custom-icon-style">
+html body main.container #warning .daily-water-grid .critical-card-value-row{
+ display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;
+ gap:10px!important;width:100%!important;text-align:center!important;
+}
+html body main.container #warning .daily-water-grid .critical-card-custom-icon{
+ display:inline-flex!important;flex:0 0 38px!important;align-items:center!important;justify-content:center!important;
+ width:38px!important;height:38px!important;margin:0!important;
+}
+html body main.container #warning .daily-water-grid .critical-card-custom-icon svg{
+ display:block!important;width:38px!important;height:38px!important;max-width:38px!important;max-height:38px!important;
+}
+</style>
+<script id="critical-estate-custom-icon-script">
+(function(){
+ var svg='<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 511.986 511.986" aria-hidden="true"><polygon fill="#b9cfed" points="127.996,160.003 127.519,365.426 383.738,365.426 384.222,160.003 255.992,32.007"/><rect x="223.992" y="203.442" width="63.998" height="100.61" fill="#424953"/><path fill="#424953" d="M90.06 208.595c-2.727 0-5.461-1.031-7.539-3.125-4.164-4.156-4.164-10.906 0-15.078L248.445 24.461c4.164-4.156 10.923-4.156 15.086 0 4.164 4.171 4.164 10.921 0 15.092L97.606 205.47c-2.085 2.094-4.811 3.125-7.546 3.125zM421.925 208.595c-2.733 0-5.468-1.031-7.546-3.125L248.445 39.553c-4.164-4.171-4.164-10.921 0-15.092 4.164-4.156 10.923-4.156 15.086 0l165.925 165.931c4.172 4.172 4.172 10.921 0 15.078-2.078 2.094-4.813 3.125-7.531 3.125z"/><path fill="#4A89DC" d="M463.579 312.178l-30.67-3.125-52.671-23.999-35.327 27.124-28.67 6.188-48.655-24.655-18-4-32.67 17.999-22.664 4.469-43.998-9.812-26-17.313s-9.851 18-17.593 20c-7.734 1.999-38.405 11.312-38.405 11.312l-21.999-4.188L0 289.054v201.587h511.984V289.054z"/><path fill="#5D9CEC" d="M0 358.958c6.438 0 12.867 1.625 17.75 4.874l28.499 18.999c4.883 3.25 11.312 4.875 17.749 4.875s12.867-1.625 17.75-4.875l28.499-18.999c4.883-3.249 11.312-4.874 17.749-4.874 6.43 0 12.867 1.625 17.75 4.874l28.499 18.999c4.883 3.25 11.311 4.875 17.749 4.875 6.43 0 12.867-1.625 17.75-4.875l28.499-18.999c4.882-3.249 11.311-4.874 17.749-4.874 6.43 0 12.867 1.625 17.758 4.874l28.499 18.999c4.875 3.25 11.312 4.875 17.75 4.875 6.421 0 12.858-1.625 17.749-4.875l28.498-18.999c4.875-3.249 11.312-4.874 17.75-4.874 6.422 0 12.859 1.625 17.75 4.874l28.5 18.999c4.875 3.25 11.311 4.875 17.748 4.875 6.422 0 12.859-1.625 17.75-4.875l28.5-18.999c4.843-3.249 11.249-4.874 17.655-4.874v21.312c-3.094.032-5.156.875-5.844 1.313l-28.483 18.999c-8.203 5.469-18.703 8.469-29.578 8.469-10.904 0-21.404-3-29.591-8.469l-28.5-18.999c-.672-.469-2.781-1.313-5.906-1.313-3.157 0-5.25.844-5.938 1.313l-28.499 18.999c-8.188 5.469-18.687 8.469-29.561 8.469-10.906 0-21.406-3-29.594-8.469l-28.499-18.999c-.672-.469-2.772-1.313-5.914-1.313-3.141 0-5.242.844-5.922 1.313l-28.499 18.999c-8.186 5.469-18.686 8.469-29.577 8.469s-21.397-3-29.585-8.469l-28.499-18.999c-.672-.469-2.773-1.313-5.914-1.313s-5.242.844-5.922 1.313l-28.49 18.999c-8.195 5.469-18.695 8.469-29.586 8.469-10.89 0-21.397-3-29.585-8.469L6 381.582c-.672-.469-2.773-1.313-5.914-1.313H0z"/></svg>';
+ function apply(){
+  var value=document.getElementById("dailyCritical");if(!value)return;
+  var row=value.closest(".drought-card-row");
+  if(!row){row=document.createElement("div");row.className="drought-card-row";value.parentNode.insertBefore(row,value);row.appendChild(value)}
+  row.classList.add("critical-card-value-row");
+  var icon=row.querySelector(".critical-card-custom-icon");
+  if(!icon){icon=document.createElement("span");icon.className="critical-card-custom-icon";icon.innerHTML=svg;row.insertBefore(icon,value)}
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply,{once:true});else apply();
+ var root=document.getElementById("warning");
+ if(root)new MutationObserver(function(){requestAnimationFrame(apply)}).observe(root,{childList:true,subtree:true});
+ [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(apply,ms)});
+})();
+</script>
 </body>
 </html>
