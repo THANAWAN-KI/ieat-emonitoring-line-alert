@@ -10487,5 +10487,41 @@ html body main.container #warning .daily-water-grid .critical-card-custom-icon s
  [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(apply,ms)});
 })();
 </script>
-<style id="nationwide-indicators-title-black-final">html body main.container #warning .nationwide-indicators .card-head h2{color:#000000!important;-webkit-text-fill-color:#000000!important}</style><style id="green-active-tab-black-text-final">html body main.container>#globalFloodHeader .global-flood-tabs button.active,html body main.container>#globalFloodHeader .global-flood-tabs button[aria-current="page"]{color:#000000!important;-webkit-text-fill-color:#000000!important}</style></body>
+<style id="nationwide-indicators-title-black-final">html body main.container #warning .nationwide-indicators .card-head h2{color:#000000!important;-webkit-text-fill-color:#000000!important}</style><style id="green-active-tab-black-text-final">html body main.container>#globalFloodHeader .global-flood-tabs button.active,html body main.container>#globalFloodHeader .global-flood-tabs button[aria-current="page"]{color:#000000!important;-webkit-text-fill-color:#000000!important}</style>
+<style id="station-card-custom-icon-style">
+html body main.container # precisestation .x{display:none}
+html body main.container #warning .daily-water-grid .station-card-value-row{
+ display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;
+ gap:10px!important;width:100%!important;text-align:center!important;
+}
+html body main.container #warning .daily-water-grid .station-card-custom-icon{
+ display:inline-flex!important;flex:0 0 38px!important;align-items:center!important;justify-content:center!important;
+ width:38px!important;height:38px!important;margin:0!important;
+}
+html body main.container #warning .daily-water-grid .station-card-custom-icon svg{
+ display:block!important;width:38px!important;height:38px!important;max-width:38px!important;max-height:38px!important;
+}
+</style>
+<script id="station-card-custom-icon-script">
+(function(){
+ function apply(){
+  var value=document.getElementById("dailyStations");if(!value)return;
+  var row=value.closest(".drought-card-row");
+  if(!row){row=document.createElement("div");row.className="drought-card-row";value.parentNode.insertBefore(row,value);row.appendChild(value)}
+  row.classList.add("station-card-value-row");
+  if(row.querySelector(".station-card-custom-icon"))return;
+  var source=document.querySelector(".critical-card-custom-icon");
+  if(!source)return;
+  var icon=document.createElement("span");
+  icon.className="station-card-custom-icon";
+  icon.innerHTML=source.innerHTML;
+  row.insertBefore(icon,value);
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply,{once:true});else apply();
+ var root=document.getElementById("warning");
+ if(root)new MutationObserver(function(){requestAnimationFrame(apply)}).observe(root,{childList:true,subtree:true});
+ [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(apply,ms)});
+})();
+</script>
+</body>
 </html>
