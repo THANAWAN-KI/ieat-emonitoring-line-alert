@@ -10307,5 +10307,28 @@ html body main.container #warning .daily-water-grid[data-nine-cards-merged="true
   background:transparent!important;
 }
 </style>
+
+<style id="remove-specific-daily-card-icons-v2">
+/* Remove generated circle icons from these three named daily cards, regardless of reordering. */
+html body main.container #warning .daily-water-grid > .daily-water-item.level::before,
+html body main.container #warning .daily-water-grid > .daily-water-item.level:before,
+html body main.container #warning .daily-water-grid > .daily-water-item.station::before,
+html body main.container #warning .daily-water-grid > .daily-water-item.station:before,
+html body main.container #warning .daily-water-grid > .daily-water-item.status::before,
+html body main.container #warning .daily-water-grid > .daily-water-item.status:before {
+  content:none!important;
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  width:0!important;
+  min-width:0!important;
+  height:0!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  background:none!important;
+}
+</style>
 </body>
 </html>
