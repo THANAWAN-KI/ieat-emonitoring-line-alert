@@ -1,4 +1,4 @@
-<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="build" content="2026-09-14-emonitoring-blue-headings-v3"><title>ภาพรวมระบบสารสนเทศ | IEAT EMCC</title>
+<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="build" content="2026-09-14-emonitoring-live-data-v1"><title>ภาพรวมระบบสารสนเทศ | IEAT EMCC</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--blue:#2868ef;--purple:#631a9d;--ink:#2d3138;--muted:#777e88;--line:#e4e7eb;--bg:#f7f8fa;--card:#fff}*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:"Noto Sans Thai","Segoe UI",Tahoma,sans-serif;color:var(--ink);background:var(--bg)}button,a,input,select{font:inherit}
@@ -492,9 +492,114 @@ body.monitor-mode .em-system-row article>strong{color:#0091cd!important}
 @media(max-width:850px){.em-dashboard{padding:10px}.em-kpis{grid-template-columns:1fr 1fr}.em-system-row,.em-two-charts{grid-template-columns:1fr}.em-map{height:620px;min-height:620px}.em-status-summary,.em-alert-summary>div{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.em-kpis{grid-template-columns:1fr}.em-system-row article{grid-template-columns:48px 1fr}.em-system-row article>strong{grid-column:2}.em-status-summary,.em-alert-summary>div{grid-template-columns:1fr}.em-map-legend{grid-template-columns:1fr}}
 </style>
-<script id="information-emonitoring-dashboard-v1-script">
+<script id="information-emonitoring-dashboard-v2-script">
 (function(){
+ const stationUrl="https://emonitor.ieat.go.th/call_feed/geog/GeoData/station_all.json";
+ const fallbackUrl="./status.json";
  const mapBase="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=43f93c5608a74dd19a48b0ffc6bd639d&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=true&basemaps=true";
+ let stationCache=null,loadingPromise=null,renderToken=0;
+
+ function text(value){return value==null?"":String(value).trim()}
+ function prop(record){
+  if(record&&record.properties)return record.properties;
+  return record||{};
+ }
+ function normalizeType(value){
+  const v=text(value).toUpperCase();
+  if(v.includes("AQM")||v.includes("AIR QUALITY")||v.includes("AIR_QUALITY"))return"AQMs";
+  if(v.includes("WQM")||v.includes("WATER QUALITY")||v.includes("WATER_QUALITY"))return"WQMs";
+  if(v.includes("CEM"))return"CEMs";
+  return"ประเภทอื่น";
+ }
+ function normalizeStation(record){
+  const p=prop(record);
+  return{
+   code:text(p.Code||p.code),
+   name:text(p.StationTH||p.station_name||p.StationNameTH||p.name)||"-",
+   estate:text(p.IndustryZone||p.EstateTH||p.IndustrialEstate||p.IndustrialEstateTH||p.estate_name)||"-",
+   type:normalizeType(p.Type||p.station_type),
+   status:text(p.Status||p.status).toUpperCase(),
+   updated:text(p["LastUpdate-TH"]||p.LastUpdateTH||p.LastUpdate||p.record_tim||p.RecordTime||p.last_update)||"-",
+   alarm:text(p.ParameterAlram||p.parameter_alarm)
+  };
+ }
+ function rowsFromJson(json){
+  const raw=Array.isArray(json)?json:Array.isArray(json.features)?json.features:Array.isArray(json.data)?json.data:Array.isArray(json.stations)?json.stations:Array.isArray(json.all_stations)?json.all_stations:[];
+  return raw.map(normalizeStation).filter(s=>s.name!=="-"&&s.code!=="0"&&s.code!=="9999");
+ }
+ async function fetchJson(url){
+  const response=await fetch(url+"?v="+Date.now(),{cache:"no-store"});
+  if(!response.ok)throw new Error("HTTP "+response.status);
+  return response.json();
+ }
+ async function loadStations(){
+  if(stationCache)return stationCache;
+  if(loadingPromise)return loadingPromise;
+  loadingPromise=(async function(){
+   try{stationCache=rowsFromJson(await fetchJson(stationUrl))}
+   catch(error){stationCache=rowsFromJson(await fetchJson(fallbackUrl))}
+   return stationCache;
+  })().finally(function(){loadingPromise=null});
+  return loadingPromise;
+ }
+ function key(value){
+  return text(value).toLowerCase()
+   .replace(/นิคมอุตสาหกรรม/g,"")
+   .replace(/อีสเทิร์นซีบอร์ด\s*ระยอง/g,"อีสเทิร์นซีบอร์ด")
+   .replace(/อมตะนคร/g,"อมตะซิตี้ชลบุรี")
+   .replace(/[^ก-๙a-z0-9]/g,"");
+ }
+ function selectedRows(all,name){
+  if(!name||name.includes("ทั่วประเทศ"))return all;
+  const wanted=key(name);
+  return all.filter(s=>{const actual=key(s.estate);return actual&&actual!=="-"&&(actual.includes(wanted)||wanted.includes(actual))});
+ }
+ function hasAlarm(station){
+  const a=station.alarm.toLowerCase();
+  return a&&!["-","none","null","nan","n/a"].includes(a);
+ }
+ function isOnline(station){return station.status==="ONLINE"}
+ function esc(value){
+  return text(value).replace(/[&<>"']/g,function(ch){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]});
+ }
+ function setStrong(nodes,index,value){if(nodes[index])nodes[index].textContent=value}
+ function setLoading(){
+  document.querySelectorAll(".em-kpis strong,.em-system-row>article>strong,.em-status-summary strong,.em-alert-summary strong").forEach(el=>el.textContent="…");
+  const body=document.querySelector(".em-table-wrap tbody");if(body)body.innerHTML='<tr><td colspan="5">กำลังโหลดข้อมูลล่าสุด…</td></tr>';
+ }
+ function renderData(all,name,token){
+  if(token!==renderToken)return;
+  const rows=selectedRows(all,name);
+  const online=rows.filter(isOnline),offline=rows.filter(s=>!isOnline(s));
+  const aq=rows.filter(s=>s.type==="AQMs"),wq=rows.filter(s=>s.type==="WQMs"),ce=rows.filter(s=>s.type==="CEMs");
+  const alarms=rows.filter(hasAlarm);
+  const kpis=document.querySelectorAll(".em-kpis article strong");
+  [rows.length,online.length,offline.length,aq.length,wq.length,ce.length].forEach((v,i)=>setStrong(kpis,i,v.toLocaleString("th-TH")));
+  const systems=document.querySelectorAll(".em-system-row>article>strong");
+  [aq.length,wq.length,ce.length].forEach((v,i)=>setStrong(systems,i,v.toLocaleString("th-TH")+" สถานี"));
+  const summaries=document.querySelectorAll(".em-status-summary strong");
+  [online.length,offline.length,0,alarms.length].forEach((v,i)=>setStrong(summaries,i,v.toLocaleString("th-TH")));
+  const alerts=document.querySelectorAll(".em-alert-summary strong");
+  const missing=rows.filter(s=>s.updated==="-"||!s.updated).length;
+  [Math.max(0,rows.length-alarms.length-missing),0,alarms.length,missing].forEach((v,i)=>setStrong(alerts,i,v.toLocaleString("th-TH")));
+  const tbody=document.querySelector(".em-table-wrap tbody");
+  if(tbody){
+   const sorted=rows.slice().sort((a,b)=>(isOnline(b)?1:0)-(isOnline(a)?1:0)||Number(hasAlarm(b))-Number(hasAlarm(a)));
+   tbody.innerHTML=sorted.length?sorted.slice(0,30).map(s=>'<tr><td>'+esc(s.name)+'</td><td>'+esc(s.type)+'</td><td>'+esc(s.estate)+'</td><td>'+esc(s.status||"-")+'</td><td>'+esc(s.updated)+'</td></tr>').join(""):'<tr><td colspan="5">ไม่พบสถานี e‑Monitoring สำหรับพื้นที่ที่เลือก</td></tr>';
+  }
+  const latest=document.querySelector(".em-alert-summary>header>span");
+  if(latest)latest.textContent="ข้อมูลล่าสุดจาก e‑Monitoring • "+rows.length.toLocaleString("th-TH")+" สถานี";
+ }
+ async function refreshData(name){
+  const token=++renderToken;
+  setLoading();
+  try{renderData(await loadStations(),name,token)}
+  catch(error){
+   if(token!==renderToken)return;
+   const body=document.querySelector(".em-table-wrap tbody");if(body)body.innerHTML='<tr><td colspan="5">ไม่สามารถโหลดข้อมูล e‑Monitoring ได้ในขณะนี้</td></tr>';
+   document.querySelectorAll(".em-kpis strong,.em-system-row>article>strong,.em-status-summary strong,.em-alert-summary strong").forEach(el=>el.textContent="—");
+  }
+ }
  function syncMonitoringDashboard(){
   const estate=(typeof activeEstate!=="undefined"&&activeEstate)||["พื้นที่นิคมอุตสาหกรรมทั่วประเทศ",13.2,101,1155581],name=estate[0],lat=estate[1],lon=estate[2],scale=estate[3]||65000;
   const pm=document.getElementById("emPmArea");if(pm)pm.textContent=name;
@@ -503,9 +608,11 @@ body.monitor-mode .em-system-row article>strong{color:#0091cd!important}
   const map=document.getElementById("emDataMap"),national=(typeof estates!=="undefined"&&estate===estates[0]),url=national?mapBase:mapBase+"&center="+lon+","+lat+"&scale="+scale;
   if(map&&map.dataset.area!==name){map.src=url;map.dataset.area=name}
   const full=document.getElementById("emFullMap");if(full)full.href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=43f93c5608a74dd19a48b0ffc6bd639d"+(national?"":"&center="+lon+","+lat+"&scale="+scale);
+  refreshData(name);
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",syncMonitoringDashboard,{once:true});else syncMonitoringDashboard();
  const scope=document.getElementById("scopeBtn");if(scope)new MutationObserver(function(){setTimeout(syncMonitoringDashboard,60)}).observe(scope,{childList:true,characterData:true,subtree:true});
+ setInterval(function(){stationCache=null;const name=(typeof activeEstate!=="undefined"&&activeEstate[0])||"พื้นที่นิคมอุตสาหกรรมทั่วประเทศ";refreshData(name)},300000);
 })();
 </script>
 </body></html>
