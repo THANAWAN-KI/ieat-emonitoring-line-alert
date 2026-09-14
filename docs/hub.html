@@ -1912,4 +1912,40 @@ html body header.hub-site-header .hub-header-right{margin-left:auto!important}
 html body .hub-current-time{display:flex!important;align-items:center!important;gap:8px!important}
 html body .hub-current-time .hub-calendar-icon{display:block!important;width:17px!important;height:17px!important;flex:0 0 17px!important;fill:#6534ac!important}
 </style>
+<style>
+/* Final GISTDA flat disaster tabs: no pills, active underline only */
+html body main.page nav.tabs{
+  display:flex!important;align-items:flex-end!important;justify-content:flex-start!important;
+  width:100%!important;height:52px!important;min-height:52px!important;
+  margin:0 0 16px!important;padding:0 15px!important;gap:4px!important;
+  background:#fff!important;background-color:#fff!important;
+  border:0!important;border-bottom:1px solid #d9dde2!important;border-radius:0!important;
+  box-shadow:none!important;overflow-x:auto!important
+}
+html body main.page nav.tabs button.tab[data-type]{
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  width:auto!important;min-width:86px!important;height:52px!important;
+  margin:0!important;padding:0 15px!important;
+  background:#fff!important;background-color:#fff!important;
+  color:#666b73!important;border:0!important;border-bottom:2px solid transparent!important;
+  border-radius:0!important;box-shadow:none!important;transform:none!important;
+  font-family:"Sarabun","Noto Sans Thai",sans-serif!important;
+  font-size:16px!important;font-weight:400!important;line-height:1.4!important
+}
+html body main.page nav.tabs button.tab[data-type] img,
+html body main.page nav.tabs button.tab[data-type] svg{display:none!important}
+html body main.page nav.tabs button.tab[data-type]:hover{
+  background:#fff!important;color:#2f6fed!important;border-bottom-color:#b9c9f6!important
+}
+html body main.page nav.tabs button.tab[data-type].active{
+  background:#fff!important;background-color:#fff!important;color:#2f6fed!important;
+  border:0!important;border-bottom:2px solid #2f6fed!important;border-radius:0!important;
+  box-shadow:none!important;font-weight:500!important
+}
+html body main.page nav.tabs button.tab[data-type].active *{color:#2f6fed!important}
+@media(max-width:700px){
+ html body main.page nav.tabs{height:46px!important;min-height:46px!important;padding:0 4px!important}
+ html body main.page nav.tabs button.tab[data-type]{height:46px!important;min-width:78px!important;padding:0 10px!important;font-size:14px!important}
+}
+</style>
 </body></html>
