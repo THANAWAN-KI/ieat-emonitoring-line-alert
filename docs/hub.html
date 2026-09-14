@@ -116,7 +116,15 @@ body{font-weight:400}
  .tabs{margin-bottom:9px!important}
  .tab{min-width:98px!important;font-size:12px!important}
 }
-</style></head><body>
+</style><style>
+/* Keep the analysis map level with the complete emergency-check information panel. */
+@media (min-width:1281px){
+  .fire-analysis-panel{display:flex!important;flex-direction:column!important;height:100%!important}
+  .fire-analysis-panel .fire-map-head{flex:0 0 auto!important}
+  .fire-analysis-panel .fire-analysis-map{flex:1 1 auto!important;height:auto!important;min-height:0!important}
+}
+</style>
+</head><body>
 <header class="hub-site-header hub-compact-header">
   <div class="hub-header-left">
     <a class="hub-site-brand" href="https://oc.ieat.go.th/th" target="_blank" rel="noopener">
