@@ -397,4 +397,31 @@ html body #report .map-caption{
  [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(apply,ms)});
 })();
 </script>
+
+<style id="dss-specified-report-text-black-final">
+html body #report .note,
+html body #report .note *,
+html body #report .support b,
+html body #report .event-card b,
+html body #report .weather,
+html body #report .weather *,
+html body #report .wind-arrow{
+ color:#1d1d1b!important;
+ -webkit-text-fill-color:#1d1d1b!important;
+}
+</style>
+<script id="dss-specified-report-text-black-final-script">
+(function(){
+ function paint(){
+  document.querySelectorAll("#report .note,#report .note *,#report .support b,#report .event-card b,#report .weather,#report .weather *,#report .wind-arrow").forEach(function(el){
+   el.style.setProperty("color","#1d1d1b","important");
+   el.style.setProperty("-webkit-text-fill-color","#1d1d1b","important");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",paint,{once:true});else paint();
+ var report=document.getElementById("report");
+ if(report)new MutationObserver(function(){requestAnimationFrame(paint)}).observe(report,{childList:true,subtree:true,characterData:true});
+ [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(paint,ms)});
+})();
+</script>
 </body></html>
