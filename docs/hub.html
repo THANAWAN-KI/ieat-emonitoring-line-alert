@@ -1621,4 +1621,107 @@ html body main.page .tabs .tab[data-type="pm25"].active{
 }
 html body main.page .tabs .tab[data-type].active *{color:#FFFFFF!important}
 </style>
+
+<style id="hub-match-drought-typography-final">
+html body #fireView,
+html body #fireView button,
+html body #fireView input,
+html body #fireView select,
+html body #fireView textarea,
+html body #fireView table,
+html body #fireView th,
+html body #fireView td,
+html body #fireReportView,
+html body #fireReportView button,
+html body #fireReportView input,
+html body #fireReportView select,
+html body #fireReportView textarea,
+html body #fireReportView table,
+html body #fireReportView th,
+html body #fireReportView td{
+ font-family:"Sarabun","TH Sarabun New",sans-serif!important;
+}
+html body #fireView,
+html body #fireReportView{font-size:16px!important;font-weight:400!important;line-height:1.6!important}
+html body #fireView h1,
+html body #fireReportView h1{font-size:24px!important;font-weight:600!important;line-height:1.4!important;letter-spacing:0!important}
+html body #fireView h2,
+html body #fireReportView h2{font-size:20px!important;font-weight:600!important;line-height:1.45!important;letter-spacing:0!important}
+html body #fireView h3,
+html body #fireReportView h3{font-size:18px!important;font-weight:500!important;line-height:1.5!important;letter-spacing:0!important}
+html body #fireView h4,
+html body #fireReportView h4{font-size:16px!important;font-weight:500!important;line-height:1.5!important}
+html body #fireView p,
+html body #fireView li,
+html body #fireView td,
+html body #fireView label,
+html body #fireView input,
+html body #fireView select,
+html body #fireView textarea,
+html body #fireReportView p,
+html body #fireReportView li,
+html body #fireReportView td,
+html body #fireReportView label,
+html body #fireReportView input,
+html body #fireReportView select,
+html body #fireReportView textarea{
+ font-size:16px!important;font-weight:400!important;line-height:1.6!important;
+}
+html body #fireView small,
+html body #fireView .muted,
+html body #fireView [class*="subtitle"],
+html body #fireView [class*="description"],
+html body #fireView [class*="meta"],
+html body #fireView [class*="hint"],
+html body #fireReportView small,
+html body #fireReportView .muted,
+html body #fireReportView [class*="subtitle"],
+html body #fireReportView [class*="description"],
+html body #fireReportView [class*="meta"],
+html body #fireReportView [class*="hint"]{
+ font-size:14px!important;font-weight:400!important;line-height:1.5!important;
+}
+html body #fireView button,
+html body #fireView a,
+html body #fireReportView button,
+html body #fireReportView a{
+ font-size:16px!important;font-weight:400!important;line-height:1.4!important;
+}
+html body #fireView th,
+html body #fireReportView th{font-size:14px!important;font-weight:600!important;line-height:1.5!important}
+html body #fireView .fire-support-card>span,
+html body #fireReportView .fire-support-card>span{
+ font-size:14px!important;font-weight:400!important;line-height:1.45!important;
+}
+html body #fireView .fire-value-row strong,
+html body #fireReportView .fire-value-row strong{
+ font-size:24px!important;font-weight:600!important;line-height:1.25!important;
+}
+html body #fireView .fire-overview-head h1,
+html body #fireReportView .fire-overview-head h1{
+ font-size:20px!important;font-weight:600!important;line-height:1.4!important;
+}
+html body #fireView .fire-overview-head p,
+html body #fireReportView .fire-overview-head p{
+ font-size:14px!important;font-weight:300!important;line-height:1.5!important;
+}
+html body main.page .tabs .tab[data-type]{
+ font-family:"Sarabun","TH Sarabun New",sans-serif!important;
+ font-size:16px!important;font-weight:400!important;line-height:1.4!important;
+}
+html body main.page .tabs .tab[data-type].active{font-weight:600!important}
+</style>
+<script id="hub-match-drought-font-lock-final">
+(function(){
+ function apply(){
+  document.querySelectorAll("#fireView,#fireView *:not(svg):not(path):not(.material-icons):not([class*='fa-']),#fireReportView,#fireReportView *:not(svg):not(path):not(.material-icons):not([class*='fa-']),main.page .tabs .tab[data-type],main.page .tabs .tab[data-type] *").forEach(function(el){
+   el.style.setProperty("font-family","Sarabun, 'TH Sarabun New', sans-serif","important");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply,{once:true});else apply();
+ var root=document.querySelector("main.page");
+ if(root)new MutationObserver(function(){requestAnimationFrame(apply)}).observe(root,{childList:true,subtree:true});
+ [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(apply,ms)});
+})();
+</script>
 </body></html>
