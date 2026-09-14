@@ -206,4 +206,89 @@ html body .editor textarea,
 html body .top button{font-size:16px!important;line-height:1.45!important}
 html body .report{font-family:"Noto Sans Thai","Sarabun",sans-serif!important}
 </style>
+
+<style id="dss-match-fire-typography-purple-report-final">
+html body,
+html body button,
+html body input,
+html body select,
+html body textarea,
+html body table,
+html body th,
+html body td{
+ font-family:"Sarabun","TH Sarabun New",sans-serif!important;
+}
+html body{font-size:16px!important;font-weight:400!important;line-height:1.6!important}
+html body .top h1,
+html body .report h1{font-size:24px!important;font-weight:600!important;line-height:1.4!important;letter-spacing:0!important}
+html body .editor h2,
+html body .report h2,
+html body .section-title{font-size:20px!important;font-weight:600!important;line-height:1.45!important;letter-spacing:0!important}
+html body .editor h3,
+html body .report h3{font-size:18px!important;font-weight:500!important;line-height:1.5!important;letter-spacing:0!important}
+html body .report h4{font-size:16px!important;font-weight:500!important;line-height:1.5!important}
+html body p,
+html body li,
+html body td,
+html body label,
+html body input,
+html body select,
+html body textarea,
+html body .row b,
+html body .row span{
+ font-size:16px!important;font-weight:400!important;line-height:1.6!important;
+}
+html body .top span,
+html body small,
+html body .muted,
+html body .hint,
+html body .map-caption,
+html body .support span{
+ font-size:14px!important;font-weight:400!important;line-height:1.5!important;
+}
+html body button,
+html body a{font-size:16px!important;font-weight:400!important;line-height:1.4!important}
+html body th{font-size:14px!important;font-weight:600!important;line-height:1.5!important}
+html body .support b{font-size:16px!important;font-weight:500!important;line-height:1.5!important}
+html body .support strong{font-size:24px!important;font-weight:600!important;line-height:1.25!important}
+
+/* IEAT logo purple for every textual element in the generated report */
+html body #report,
+html body #report h1,
+html body #report h2,
+html body #report h3,
+html body #report h4,
+html body #report p,
+html body #report b,
+html body #report strong,
+html body #report span,
+html body #report small,
+html body #report .section-title,
+html body #report .row b,
+html body #report .row span,
+html body #report .meta,
+html body #report .event-card,
+html body #report .support,
+html body #report .note,
+html body #report .map-caption,
+html body #report .weather,
+html body #report .temp,
+html body #report .wind-arrow{
+ color:#59267c!important;
+ -webkit-text-fill-color:#59267c!important;
+}
+</style>
+<script id="dss-match-fire-font-lock-final">
+(function(){
+ function apply(){
+  document.querySelectorAll("body *:not(svg):not(path):not(.material-icons):not([class*='fa-'])").forEach(function(el){
+   el.style.setProperty("font-family","Sarabun, 'TH Sarabun New', sans-serif","important");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply,{once:true});else apply();
+ var root=document.body;
+ if(root)new MutationObserver(function(){requestAnimationFrame(apply)}).observe(root,{childList:true,subtree:true});
+ [100,500,1200,2500].forEach(function(ms){setTimeout(apply,ms)});
+})();
+</script>
 </body></html>
