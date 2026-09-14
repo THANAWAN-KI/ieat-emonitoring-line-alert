@@ -14,6 +14,18 @@
 html body main.wrap .kpi-icon{padding:0!important;background:transparent!important;overflow:visible!important}
 html body main.wrap .kpi-icon svg{display:block!important;width:38px!important;height:38px!important;max-width:100%!important}
 </style>
+<style>
+/* Exact desktop map height synchronized with KPI and station-filter stack */
+@media(min-width:1101px){
+  html body main.wrap .map-panel{
+    position:relative!important;top:auto!important;align-self:stretch!important;
+    min-height:0!important;max-height:none!important;overflow:hidden!important
+  }
+  html body main.wrap .map-panel .pm-map{
+    display:block!important;width:100%!important;min-height:0!important;max-height:none!important;border:0!important
+  }
+}
+</style>
 </head>
 
 <body> <main class="wrap"> <section class="dashboard-head"> <div class="head-brand"><div><h1>สถานการณ์ฝุ่น PM2.5 ของนิคมอุตสาหกรรมทั่วประเทศไทย</h1><p>ติดตามสถานีคุณภาพอากาศ คัดกรองพื้นที่ และสนับสนุนการเตรียมความพร้อมของนิคมอุตสาหกรรม</p></div></div> </section>
@@ -320,4 +332,37 @@ html body main.wrap .control #updatedAt{
  color:#0091cd!important;
 }
 </style>
+<script>
+(function(){
+  function syncPm25MapHeight(){
+    var mapPanel=document.querySelector('main.wrap .map-panel');
+    var mapFrame=mapPanel&&mapPanel.querySelector('.pm-map');
+    var kpis=document.querySelector('main.wrap .kpis');
+    var control=document.querySelector('main.wrap .control');
+    if(!mapPanel||!mapFrame||!kpis||!control)return;
+    if(window.innerWidth<=1100){
+      mapPanel.style.removeProperty('height');
+      mapFrame.style.removeProperty('height');
+      return;
+    }
+    var height=Math.round(control.getBoundingClientRect().bottom-kpis.getBoundingClientRect().top);
+    if(height>0){
+      mapPanel.style.setProperty('height',height+'px','important');
+      mapFrame.style.setProperty('height',height+'px','important');
+    }
+  }
+  window.addEventListener('load',syncPm25MapHeight);
+  window.addEventListener('resize',syncPm25MapHeight);
+  document.addEventListener('DOMContentLoaded',syncPm25MapHeight);
+  if('ResizeObserver' in window){
+    var observer=new ResizeObserver(syncPm25MapHeight);
+    document.addEventListener('DOMContentLoaded',function(){
+      var k=document.querySelector('main.wrap .kpis');
+      var c=document.querySelector('main.wrap .control');
+      if(k)observer.observe(k);if(c)observer.observe(c);
+    });
+  }
+  setTimeout(syncPm25MapHeight,250);
+})();
+</script>
 </body> </html>
