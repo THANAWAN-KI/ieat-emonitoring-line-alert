@@ -10291,6 +10291,17 @@ html body #warning .daily-water-grid[data-nine-cards-merged="true"]>* ::after{co
 #warning .daily-water-grid[data-nine-cards-merged="true"] svg,
 #warning .daily-water-grid[data-nine-cards-merged="true"] img,
 #warning .daily-water-grid[data-nine-cards-merged="true"] i{display:none!important}
+/* Remove the boxed house icon from the second card */
+html body main.container #warning .daily-water-grid[data-nine-cards-merged="true"] > :nth-child(2)::before,
+html body main.container #warning .daily-water-grid[data-nine-cards-merged="true"] > :nth-child(2):before{
+  content:none!important;
+  display:none!important;
+  width:0!important;
+  height:0!important;
+  margin:0!important;
+  padding:0!important;
+  background:transparent!important;
+}
 </style>
 </body>
 </html>
