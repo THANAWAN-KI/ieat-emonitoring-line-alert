@@ -10388,5 +10388,73 @@ html body main.container #warning .daily-water-grid[data-nine-cards-merged="true
  content:none!important;display:none!important;
 }
 </style>
+
+<style id="repair-bottom-three-center-final">
+html body main.container #warning .daily-water-grid > .bottom-three-center-card{
+ display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;
+ gap:8px!important;padding:16px!important;text-align:center!important;
+}
+html body main.container #warning .daily-water-grid > .bottom-three-center-card > *{
+ display:block!important;position:static!important;width:100%!important;max-width:100%!important;
+ margin:0 auto!important;padding:0!important;align-self:center!important;justify-self:center!important;
+ text-align:center!important;white-space:normal!important;overflow:visible!important;overflow-wrap:anywhere!important;
+}
+html body main.container #warning .daily-water-grid > .bottom-three-center-card::before,
+html body main.container #warning .daily-water-grid > .bottom-three-center-card::after{
+ content:none!important;display:none!important;
+}
+html body main.container #warning .bottom-three-center-card .bottom-card-title{
+ font-size:15px!important;line-height:1.35!important;font-weight:400!important;color:#0077c0!important;
+}
+html body main.container #warning .bottom-three-center-card .bottom-card-value{
+ font-size:24px!important;line-height:1.15!important;font-weight:600!important;color:#0077c0!important;
+}
+html body main.container #warning .bottom-three-center-card .bottom-card-detail{
+ font-size:13px!important;line-height:1.35!important;font-weight:400!important;color:#0077c0!important;
+}
+</style>
+<script id="repair-bottom-three-center-final-script">
+(function(){
+ var specs=[
+  ["nationalStormCount","พายุเข้าใกล้ประเทศไทย","nationalStormLabel"],
+  ["nationalWaterProvinceCount","เฝ้าระวังระดับน้ำ",null],
+  ["nationalHeavyRainCount","ฝนตกหนักใน 24 ชั่วโมง",null]
+ ];
+ function repair(){
+  specs.forEach(function(spec){
+   var value=document.getElementById(spec[0]);
+   if(!value)return;
+   var card=value.closest(".kpi,.national-kpi,[data-reference-card]");
+   if(!card)return;
+   var detail=spec[2]?document.getElementById(spec[2]):null;
+   if(!detail){
+    detail=Array.from(card.querySelectorAll("span")).find(function(el){return el!==value&&el.textContent.trim()})||null;
+   }
+   var title=document.createElement("div");
+   title.className="bottom-card-title";
+   title.textContent=spec[1];
+   value.className="bottom-card-value";
+   value.style.cssText="";
+   if(detail){
+    detail.className="bottom-card-detail";
+    detail.style.cssText="";
+   }
+   card.querySelectorAll("svg,img,i,.icon,.n-icon,.kpi-icon,.unified-flood-card-icon,.source-link").forEach(function(el){el.remove()});
+   card.replaceChildren(title,value);
+   if(detail)card.appendChild(detail);
+   card.removeAttribute("data-reference-card");
+   card.setAttribute("data-drought-card-v3","1");
+   card.classList.add("bottom-three-center-card");
+   card.style.setProperty("display","flex","important");
+   card.style.setProperty("flex-direction","column","important");
+   card.style.setProperty("align-items","center","important");
+   card.style.setProperty("justify-content","center","important");
+   card.style.setProperty("text-align","center","important");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",repair,{once:true});else repair();
+ [50,150,400,900,1800,3500,6000,10000].forEach(function(ms){setTimeout(repair,ms)});
+})();
+</script>
 </body>
 </html>
