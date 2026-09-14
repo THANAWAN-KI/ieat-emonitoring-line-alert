@@ -366,4 +366,35 @@ html body .report .support strong{
  [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(apply,ms)});
 })();
 </script>
+
+<style id="dss-specified-copy-black-final">
+html body #report .report-header p,
+html body #report .meta small,
+html body #report .meta b,
+html body #report .company .row > b,
+html body #report .company .row > span,
+html body #report .event-card small,
+html body #report .event-card b,
+html body #report .support > span,
+html body #report [data-out="weatherTime"],
+html body #report .map-caption{
+ color:#1d1d1b!important;
+ -webkit-text-fill-color:#1d1d1b!important;
+}
+</style>
+<script id="dss-specified-copy-black-final-script">
+(function(){
+ var selector='#report .report-header p,#report .meta small,#report .meta b,#report .company .row > b,#report .company .row > span,#report .event-card small,#report .event-card b,#report .support > span,#report [data-out="weatherTime"],#report .map-caption';
+ function apply(){
+  document.querySelectorAll(selector).forEach(function(el){
+   el.style.setProperty("color","#1d1d1b","important");
+   el.style.setProperty("-webkit-text-fill-color","#1d1d1b","important");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply,{once:true});else apply();
+ var report=document.getElementById("report");
+ if(report)new MutationObserver(function(){requestAnimationFrame(apply)}).observe(report,{childList:true,subtree:true,characterData:true});
+ [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(apply,ms)});
+})();
+</script>
 </body></html>
