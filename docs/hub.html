@@ -216,6 +216,16 @@ body{font-weight:400}
  .hub-header-actions .hub-contact-primary{margin-left:5px!important}
 }
 </style>
+<style>
+/* Header title aligned tightly with the IEAT logo; nationwide selector removed */
+.hub-header-left{gap:7px!important}
+.hub-site-brand{margin:0!important;padding:0!important}
+.hub-title-block{margin-left:0!important;transform:translateX(-2px)!important}
+@media(max-width:700px){
+  .hub-header-left{gap:5px!important}
+  .hub-title-block{transform:none!important}
+}
+</style>
 </head><body>
 <header class="hub-site-header hub-compact-header">
   <div class="hub-header-left">
@@ -229,7 +239,6 @@ body{font-weight:400}
   </div>
   <div class="hub-header-right">
     <span class="hub-current-time" id="hubCurrentTime" aria-label="วันและเวลาปัจจุบัน"></span>
-    <span class="hub-area-control">⌖&nbsp;&nbsp;พื้นที่ทั่วประเทศ&nbsp;&nbsp;⌄</span>
     <nav class="hub-header-actions" aria-label="เมนูส่วนหัว">
       <a class="hub-back-link" href="./daily-situation.html">◉&nbsp;&nbsp;หน้ารายงานข่าว</a>
       <a class="hub-contact-link hub-info-menu" href="./information.html" aria-label="ข้อมูลเพิ่มเติม">⋮</a>
