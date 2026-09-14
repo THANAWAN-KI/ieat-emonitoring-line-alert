@@ -10606,5 +10606,28 @@ html body main.container #warning .estate-watch-table td[data-estate-status-fina
  [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(apply,ms)});
 })();
 </script>
+
+<style id="risk-48-purple-badges-green-final">
+html body main.container #thaiwater-warning .tw-risk-card:nth-child(2) .tw-rain,
+html body main.container #thaiwater-warning .tw-risk-card:nth-of-type(2) .tw-rain{
+ background:#537b35!important;background-color:#537b35!important;background-image:none!important;border-color:#537b35!important;
+}
+</style>
+<script id="risk-48-purple-badges-green-final-script">
+(function(){
+ function apply(){
+  document.querySelectorAll("#thaiwater-warning .tw-risk-card:nth-child(2) .tw-rain,#thaiwater-warning .tw-risk-card:nth-of-type(2) .tw-rain").forEach(function(el){
+   el.style.setProperty("background","#537b35","important");
+   el.style.setProperty("background-color","#537b35","important");
+   el.style.setProperty("background-image","none","important");
+   el.style.setProperty("border-color","#537b35","important");
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply,{once:true});else apply();
+ var root=document.getElementById("thaiwater-warning");
+ if(root)new MutationObserver(function(){requestAnimationFrame(apply)}).observe(root,{childList:true,subtree:true});
+ [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(apply,ms)});
+})();
+</script>
 </body>
 </html>
