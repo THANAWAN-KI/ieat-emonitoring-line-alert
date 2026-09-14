@@ -1,4 +1,4 @@
-<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="build" content="2026-09-14-overview-black-text-v5"><title>ภาพรวมระบบสารสนเทศ | IEAT EMCC</title>
+<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="build" content="2026-09-14-emonitoring-dashboard-v1"><title>ภาพรวมระบบสารสนเทศ | IEAT EMCC</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--blue:#2868ef;--purple:#631a9d;--ink:#2d3138;--muted:#777e88;--line:#e4e7eb;--bg:#f7f8fa;--card:#fff}*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:"Noto Sans Thai","Segoe UI",Tahoma,sans-serif;color:var(--ink);background:var(--bg)}button,a,input,select{font:inherit}
@@ -146,6 +146,61 @@ body.overview-mode{overflow:hidden;background:#f5f7fa}.situation-dashboard{heigh
    </aside>
   </section>
  </div>
+</section><section class="requested-monitor" aria-label="Dashboard ระบบ e-Monitoring">
+ <div class="em-dashboard">
+  <section class="em-kpis">
+   <article><span>Σ</span><div><strong>0</strong><b>สถานีทั้งหมด</b><small>สถานีตรวจวัดทุกระบบ</small></div></article>
+   <article class="online"><span>●</span><div><strong>0</strong><b>สถานี Online</b><small>กำลังส่งข้อมูล</small></div></article>
+   <article class="offline"><span>○</span><div><strong>0</strong><b>สถานี Offline</b><small>ไม่พบการเชื่อมต่อ</small></div></article>
+   <article><span>AQ</span><div><strong>0</strong><b>ระบบ AQMs</b><small>สถานีตรวจวัดในชั้นบรรยากาศ</small></div></article>
+   <article><span>WQ</span><div><strong>0</strong><b>ระบบ WQMs</b><small>ระบบตรวจวัดคุณภาพน้ำ</small></div></article>
+   <article><span>CE</span><div><strong>0</strong><b>ระบบ CEMs</b><small>ตรวจวัดอากาศจากปล่องอัตโนมัติ</small></div></article>
+  </section>
+
+  <section class="em-system-row">
+   <article><span class="aq">AQ</span><div><h2>สถานีตรวจวัดในชั้นบรรยากาศ</h2><b>Ambient Air Quality Monitoring: AQMs</b><p>PM2.5 • PM10 • O₃ • NO₂ • SO₂ • CO</p></div><strong>0 สถานี</strong></article>
+   <article><span class="wq">WQ</span><div><h2>ระบบตรวจวัดคุณภาพน้ำ</h2><b>Water Quality Monitoring: WQMs</b><p>pH • DO • BOD • COD • TSS</p></div><strong>0 สถานี</strong></article>
+   <article><span class="ce">CE</span><div><h2>ระบบตรวจวัดอากาศจากปล่องอัตโนมัติ</h2><b>Continuous Emission Monitoring: CEMs</b><p>SO₂ • NOx • CO • O₂ • Opacity</p></div><strong>0 สถานี</strong></article>
+  </section>
+
+  <div class="em-layout">
+   <main class="em-content">
+    <article class="em-panel em-pm-chart">
+     <header><div><h2>แนวโน้มตรวจวัดคุณภาพฝุ่น PM2.5</h2><p id="emPmArea">พื้นที่นิคมอุตสาหกรรมทั่วประเทศ</p></div><span>หน่วย: µg/m³</span></header>
+     <div class="em-line-chart"><div class="em-y"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div><svg viewBox="0 0 800 240" preserveAspectRatio="none" aria-label="กราฟแนวโน้ม PM2.5"><path d="M0 40H800M0 90H800M0 140H800M0 190H800M0 235H800" stroke="#e7ebef" stroke-width="2"/><path d="" fill="none" stroke="#2b78ce" stroke-width="4"/></svg><div class="em-empty">ไม่มีข้อมูล PM2.5 สำหรับพื้นที่ที่เลือก</div></div>
+     <footer><span><i></i>PM2.5</span><span><i></i>ค่ามาตรฐาน 37.5 µg/m³</span></footer>
+    </article>
+
+    <div class="em-two-charts">
+     <article class="em-panel">
+      <header><div><h2>ผลตรวจวัดระบบบำบัดน้ำเสีย</h2><p>ค่าคุณภาพน้ำจากระบบ WQMs</p></div><span>ข้อมูลล่าสุด</span></header>
+      <div class="em-water-bars"><div><em>0</em><i style="height:0%"></i><b>BOD</b><small>mg/L</small></div><div><em>0</em><i style="height:0%"></i><b>COD</b><small>mg/L</small></div><div><em>0</em><i style="height:0%"></i><b>TSS</b><small>mg/L</small></div><div><em>0</em><i style="height:0%"></i><b>DO</b><small>mg/L</small></div><div><em>0</em><i style="height:0%"></i><b>pH</b><small>pH</small></div></div>
+     </article>
+     <article class="em-panel">
+      <header><div><h2>ผลตรวจวัดคุณภาพอากาศจากปล่อง</h2><p>ค่าการระบายจากระบบ CEMs</p></div><span>ข้อมูลล่าสุด</span></header>
+      <div class="em-emission-list"><span><b>SO₂</b><i><em style="width:0%"></em></i><strong>0 ppm</strong></span><span><b>NOx</b><i><em style="width:0%"></em></i><strong>0 ppm</strong></span><span><b>CO</b><i><em style="width:0%"></em></i><strong>0 ppm</strong></span><span><b>O₂</b><i><em style="width:0%"></em></i><strong>0 %</strong></span><span><b>Opacity</b><i><em style="width:0%"></em></i><strong>0 %</strong></span></div>
+     </article>
+    </div>
+
+    <article class="em-panel em-status">
+     <header><div><h2>สถานะสถานีตรวจวัด</h2><p>สถานะการเชื่อมต่อและเวลารับข้อมูลล่าสุด</p></div><span id="emTableArea">ทุกพื้นที่นิคมฯ</span></header>
+     <div class="em-status-summary"><div><i class="green"></i><b>Online</b><strong>0</strong></div><div><i class="gray"></i><b>Offline</b><strong>0</strong></div><div><i class="amber"></i><b>เฝ้าระวัง</b><strong>0</strong></div><div><i class="red"></i><b>เกินมาตรฐาน</b><strong>0</strong></div></div>
+     <div class="em-table-wrap"><table><thead><tr><th>สถานี</th><th>ระบบ</th><th>นิคมอุตสาหกรรม</th><th>สถานะ</th><th>ข้อมูลล่าสุด</th></tr></thead><tbody><tr><td colspan="5">ไม่มีข้อมูลสถานีสำหรับพื้นที่ที่เลือก</td></tr></tbody></table></div>
+    </article>
+
+    <article class="em-panel em-alert-summary">
+     <header><div><h2>สรุปผลการตรวจวัดและการแจ้งเตือน</h2><p>ตัวชี้วัดที่ต้องเฝ้าระวังจากทั้ง 3 ระบบ</p></div><span>อัปเดตตามข้อมูลล่าสุด</span></header>
+     <div><article><b>ค่าปกติ</b><strong>0</strong><small>ตัวชี้วัด</small></article><article><b>เฝ้าระวัง</b><strong>0</strong><small>ตัวชี้วัด</small></article><article><b>เกินมาตรฐาน</b><strong>0</strong><small>ตัวชี้วัด</small></article><article><b>ไม่มีข้อมูล</b><strong>0</strong><small>ตัวชี้วัด</small></article></div>
+    </article>
+   </main>
+
+   <aside class="em-panel em-map">
+    <header><div><h2>แผนที่สถานี e‑Monitoring</h2><p id="emMapSubtitle">AQMs • WQMs • CEMs</p></div><a id="emFullMap" href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=43f93c5608a74dd19a48b0ffc6bd639d" target="_blank" rel="noopener">เปิดเต็มหน้าจอ ↗</a></header>
+    <iframe id="emDataMap" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&amp;webmap=43f93c5608a74dd19a48b0ffc6bd639d&amp;theme=light&amp;bookmarks=true&amp;legend=true&amp;information=true&amp;share=true&amp;scroll=true&amp;basemaps=true" title="แผนที่สถานี e-Monitoring" allow="geolocation; fullscreen" allowfullscreen></iframe>
+    <div class="em-map-legend"><b>สถานีตรวจวัด</b><span><i class="aq"></i>AQMs</span><span><i class="wq"></i>WQMs</span><span><i class="ce"></i>CEMs</span><span><i class="off"></i>Offline</span></div>
+   </aside>
+  </div>
+ </div>
 </section><main class="dashboard"><section class="left"><div class="summary" id="summary"></div><article class="card chart-card"><div class="chart-head"><h2 id="chartTitle"></h2><span class="filter" id="chartFilter"></span></div><div class="bar-chart" id="bars"></div></article><article class="card lower"><div class="lower-title"><b id="lowerTitle"></b><span class="filter">⌁ เลือกมุมมอง　⌄</span></div><div class="legend"><span><i></i>ข้อมูลหลัก</span><span><i class="alt"></i>ข้อมูลสนับสนุน</span></div><div class="spark"><svg viewBox="0 0 600 110" preserveAspectRatio="none"><path d="M0 92 C70 80,95 88,145 62 S230 20,280 55 S370 90,430 42 S520 32,600 12" fill="none" stroke="#2868ef" stroke-width="4"/><path d="M0 101 C80 94,130 64,190 82 S290 93,350 70 S470 77,600 49" fill="none" stroke="#631a9d" stroke-width="3"/></svg></div></article></section>
 <aside class="middle"><article class="card mid-card"><select aria-label="ตัวกรอง"><option>จำแนกตามระบบข้อมูล</option></select><div class="donut"><strong id="donutValue"></strong></div><h3 id="donutTitle"></h3><p id="donutText"></p></article><article class="card mid-card"><select aria-label="ตัวชี้วัด"><option id="gaugeSelect"></option></select><div class="gauge"><strong id="gaugeValue"></strong></div><div class="mini-row"><span><i class="dot"></i><span id="gaugeTitle"></span></span><b id="gaugeSide"></b></div></article></aside>
 <section class="map-panel"><div class="map-tools"><span class="active" id="mapChip1"></span><span id="mapChip2"></span><span id="mapChip3"></span></div><a class="open-full" id="fullLink" target="_blank" rel="noopener">เปิดเต็มหน้าจอ ↗</a><iframe class="map-frame" id="mapFrame" allow="local-network-access; geolocation" title="แผนที่ระบบสารสนเทศ" allowfullscreen></iframe><div class="legend-box"><h3>สัญลักษณ์</h3><div class="legend-grid" id="legend"></div></div></section></main>
@@ -169,7 +224,7 @@ document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>render(t.dataset.tab)
 const now=new Date();period.textContent="ข้อมูล ณ วันที่ "+now.toLocaleDateString("th-TH",{day:"numeric",month:"long",year:"numeric"});function tick(){clock.textContent=new Date().toLocaleString("th-TH",{weekday:"short",day:"2-digit",month:"short",year:"2-digit",hour:"2-digit",minute:"2-digit"})+" น."}tick();setInterval(tick,60000);const first=location.hash.slice(1);render(data[first]?first:"overview");
 </script><script>
 const baseRender=render,overviewMap=document.querySelector(".ops-map-frame"),heroMap=document.querySelector(".esri-hero-map");render=function(key){baseRender(key);const overviewUrl=focusedMap(maps.gis);if(heroMap)heroMap.src=overviewUrl;setOverviewMode(key)}
-function setOverviewMode(key){document.body.classList.toggle("overview-mode",key==="overview");document.body.classList.toggle("gis-mode",key==="gis")}
+function setOverviewMode(key){document.body.classList.toggle("overview-mode",key==="overview");document.body.classList.toggle("gis-mode",key==="gis");document.body.classList.toggle("monitor-mode",key==="monitor")}
 document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>setOverviewMode(t.dataset.tab)));
 document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>{const key=b.dataset.go;setOverviewMode(key);render(key);document.querySelector(".tabs").scrollIntoView({behavior:"smooth",block:"start"})}));
 document.querySelectorAll("[data-scroll]").forEach(b=>b.addEventListener("click",()=>document.getElementById(b.dataset.scroll).scrollIntoView({behavior:"smooth"})));
@@ -408,6 +463,37 @@ body.gis-mode .gis-map-layers span{font-size:12px!important}
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",syncGisDashboard,{once:true});else syncGisDashboard();
  const scope=document.getElementById("scopeBtn");if(scope)new MutationObserver(function(){setTimeout(syncGisDashboard,60)}).observe(scope,{childList:true,characterData:true,subtree:true});
+})();
+</script>
+<style id="information-emonitoring-dashboard-v1">
+.requested-monitor{display:none}body.monitor-mode .requested-monitor{display:block}body.monitor-mode .dashboard{display:none!important}body.monitor-mode{overflow:auto!important;background:#fff!important}
+.em-dashboard{padding:16px 24px 30px;background:#f7f9fb;color:#000}
+.em-kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}.em-kpis article{min-height:122px;padding:17px;display:flex;align-items:center;gap:13px;border:1px solid #e9edf1;border-radius:17px;background:#fff;box-shadow:0 5px 18px rgba(27,39,51,.07)}.em-kpis article>span{display:grid;place-items:center;flex:0 0 46px;width:46px;height:46px;border-radius:14px;background:#edf5ff;color:#1872ca;font-size:18px!important;font-weight:700}.em-kpis strong{display:block;color:#1470ca;font-size:31px!important;line-height:1!important}.em-kpis b{display:block;margin-top:6px;color:#000;font-size:16px!important}.em-kpis small{display:block;margin-top:2px;color:#000;font-size:13px!important}.em-kpis .online>span,.em-kpis .online strong{color:#319455}.em-kpis .online>span{background:#ecf8f0}.em-kpis .offline>span,.em-kpis .offline strong{color:#707781}.em-kpis .offline>span{background:#f0f2f4}
+.em-system-row{margin:14px 0;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.em-system-row article{min-height:125px;padding:17px;display:grid;grid-template-columns:50px 1fr auto;align-items:center;gap:13px;border:1px solid #e9edf1;border-radius:17px;background:#fff;box-shadow:0 5px 18px rgba(27,39,51,.06)}.em-system-row>article>span{display:grid;place-items:center;width:50px;height:50px;border-radius:15px;background:#e9f4ff;color:#1971c7;font-size:16px!important;font-weight:700}.em-system-row>article>span.wq{background:#e9faf8;color:#168d88}.em-system-row>article>span.ce{background:#fff1ec;color:#d8622c}.em-system-row h2{margin:0;color:#000!important;font-size:18px!important}.em-system-row b{display:block;color:#000;font-size:13px!important}.em-system-row p{margin:3px 0 0;color:#000!important;font-size:13px!important}.em-system-row article>strong{color:#176fc6;font-size:16px!important}
+.em-layout{display:grid;grid-template-columns:minmax(700px,1.5fr) minmax(480px,1fr);gap:14px;align-items:start}.em-content{display:grid;gap:14px;min-width:0}.em-panel{min-width:0;overflow:hidden;border:1px solid #e9edf1;border-radius:17px;background:#fff;box-shadow:0 5px 18px rgba(27,39,51,.06)}.em-panel>header{min-height:72px;padding:14px 17px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #e9edf1}.em-panel h2{margin:0;color:#000!important;font-size:20px!important}.em-panel header p{margin:3px 0 0;color:#000!important;font-size:14px!important}.em-panel header>span,.em-panel header>a{padding:8px 11px;border-radius:16px;background:#eef5fd;color:#166dc3!important;font-size:13px!important;text-decoration:none}
+.em-pm-chart{height:390px}.em-line-chart{position:relative;height:260px;padding:15px 18px 10px 48px}.em-line-chart svg{width:100%;height:100%}.em-y{position:absolute;left:13px;top:16px;bottom:12px;display:flex;flex-direction:column;justify-content:space-between;color:#000}.em-y span{font-size:11px!important}.em-empty{position:absolute;inset:0;display:grid;place-items:center;color:#000;font-size:15px!important}.em-pm-chart footer{height:52px;padding:8px 18px;display:flex;align-items:center;gap:20px;color:#000}.em-pm-chart footer span{font-size:13px!important}.em-pm-chart footer i{display:inline-block;width:9px;height:9px;margin-right:6px;border-radius:50%;background:#2b78ce}.em-pm-chart footer span:nth-child(2) i{background:#d94e5b}
+.em-two-charts{display:grid;grid-template-columns:1fr 1fr;gap:14px}.em-water-bars{height:225px;padding:25px 16px 13px;display:flex;align-items:flex-end;justify-content:space-around;background:repeating-linear-gradient(to bottom,transparent 0,transparent 32%,#e9edf1 33%,transparent 34%)}.em-water-bars div{height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center}.em-water-bars em{margin-bottom:5px;color:#000;font-size:13px!important;font-style:normal}.em-water-bars i{display:block;width:30px;min-height:8px;border-radius:9px 9px 1px 1px;background:#159b9a}.em-water-bars b{margin-top:6px;color:#000;font-size:13px!important}.em-water-bars small{color:#000;font-size:11px!important}.em-emission-list{padding:19px;display:grid;gap:16px}.em-emission-list span{display:grid;grid-template-columns:62px 1fr 65px;align-items:center;gap:10px}.em-emission-list b,.em-emission-list strong{color:#000;font-size:12px!important}.em-emission-list i{height:10px;border-radius:8px;background:#edf0f3;overflow:hidden}.em-emission-list em{display:block;height:100%;background:#e16b32}
+.em-status-summary{padding:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.em-status-summary div{padding:12px;border-radius:11px;background:#f7f9fb;display:grid;grid-template-columns:12px 1fr auto;align-items:center;gap:8px}.em-status-summary i{width:9px;height:9px;border-radius:50%}.em-status-summary i.green{background:#43a560}.em-status-summary i.gray{background:#9198a0}.em-status-summary i.amber{background:#dfa322}.em-status-summary i.red{background:#d74c5b}.em-status-summary b,.em-status-summary strong{font-size:13px!important}.em-table-wrap{overflow:auto;padding:0 14px 14px}.em-table-wrap table{width:100%;border-collapse:collapse}.em-table-wrap th,.em-table-wrap td{padding:12px;border-bottom:1px solid #e5e9ed;color:#000!important;font-size:13px!important;text-align:left}.em-table-wrap th{background:#f4f6f8}.em-table-wrap td[colspan]{padding:28px;text-align:center}
+.em-alert-summary>div{padding:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.em-alert-summary article{padding:14px;border-radius:12px;background:#f7f9fb}.em-alert-summary article b{display:block;font-size:13px!important}.em-alert-summary article strong{display:block;margin:6px 0;color:#2875c8;font-size:25px!important}.em-alert-summary article small{color:#000;font-size:12px!important}
+.em-map{position:sticky;top:12px;height:calc(100vh - 145px);min-height:860px}.em-map>header{position:absolute;z-index:3;top:12px;left:12px;right:12px;border:0;border-radius:14px;background:#fffffff2;box-shadow:0 4px 15px rgba(25,38,50,.14)}.em-map iframe{display:block;width:100%;height:100%;border:0;background:#e8eef3;pointer-events:auto;touch-action:auto}.em-map-legend{position:absolute;z-index:3;left:18px;right:18px;bottom:18px;padding:14px;border-radius:13px;background:#fffffff2;box-shadow:0 5px 17px rgba(25,38,50,.16);display:grid;grid-template-columns:repeat(2,1fr);gap:8px;color:#000}.em-map-legend b{grid-column:1/-1;font-size:15px!important}.em-map-legend span{font-size:13px!important}.em-map-legend i{display:inline-block;width:9px;height:9px;margin-right:6px;border-radius:50%}.em-map-legend i.aq{background:#2776cc}.em-map-legend i.wq{background:#159b9a}.em-map-legend i.ce{background:#e16b32}.em-map-legend i.off{background:#939aa2}
+@media(max-width:1350px){.em-kpis{grid-template-columns:repeat(3,1fr)}.em-layout{grid-template-columns:1fr}.em-map{position:relative;top:auto;height:720px;min-height:720px}}
+@media(max-width:850px){.em-dashboard{padding:10px}.em-kpis{grid-template-columns:1fr 1fr}.em-system-row,.em-two-charts{grid-template-columns:1fr}.em-map{height:620px;min-height:620px}.em-status-summary,.em-alert-summary>div{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.em-kpis{grid-template-columns:1fr}.em-system-row article{grid-template-columns:48px 1fr}.em-system-row article>strong{grid-column:2}.em-status-summary,.em-alert-summary>div{grid-template-columns:1fr}.em-map-legend{grid-template-columns:1fr}}
+</style>
+<script id="information-emonitoring-dashboard-v1-script">
+(function(){
+ const mapBase="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=43f93c5608a74dd19a48b0ffc6bd639d&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=true&basemaps=true";
+ function syncMonitoringDashboard(){
+  const estate=(typeof activeEstate!=="undefined"&&activeEstate)||["พื้นที่นิคมอุตสาหกรรมทั่วประเทศ",13.2,101,1155581],name=estate[0],lat=estate[1],lon=estate[2],scale=estate[3]||65000;
+  const pm=document.getElementById("emPmArea");if(pm)pm.textContent=name;
+  const table=document.getElementById("emTableArea");if(table)table.textContent=name;
+  const sub=document.getElementById("emMapSubtitle");if(sub)sub.textContent="AQMs • WQMs • CEMs • "+name;
+  const map=document.getElementById("emDataMap"),national=(typeof estates!=="undefined"&&estate===estates[0]),url=national?mapBase:mapBase+"&center="+lon+","+lat+"&scale="+scale;
+  if(map&&map.dataset.area!==name){map.src=url;map.dataset.area=name}
+  const full=document.getElementById("emFullMap");if(full)full.href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=43f93c5608a74dd19a48b0ffc6bd639d"+(national?"":"&center="+lon+","+lat+"&scale="+scale);
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",syncMonitoringDashboard,{once:true});else syncMonitoringDashboard();
+ const scope=document.getElementById("scopeBtn");if(scope)new MutationObserver(function(){setTimeout(syncMonitoringDashboard,60)}).observe(scope,{childList:true,characterData:true,subtree:true});
 })();
 </script>
 </body></html>
