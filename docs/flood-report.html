@@ -10698,5 +10698,46 @@ html body main.container #infographic #reportPage2 .export-data-table tbody td[d
  [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(apply,ms)});
 })();
 </script>
+
+<style id="export-page3-water-situation-red-final">
+html body main.container #infographic #reportPage3 .export-data-table tbody td[data-water-situation-red="true"],
+html body main.container #infographic #reportPage3 .export-data-table tbody td[data-water-situation-red="true"] *{
+ background:#ed1b2e!important;background-color:#ed1b2e!important;background-image:none!important;
+ color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;
+}
+html body main.container #infographic #reportPage3 .export-data-table tbody td[data-water-situation-red="true"]{
+ background-clip:border-box!important;
+}
+</style>
+<script id="export-page3-water-situation-red-final-script">
+(function(){
+ function norm(v){return String(v||"").replace(/\s+/g," ").trim()}
+ function apply(){
+  var table=document.querySelector("#infographic #reportPage3 .export-data-table");if(!table)return;
+  var heads=Array.from(table.querySelectorAll("thead th"));
+  var index=heads.findIndex(function(th){return norm(th.textContent)==="สถานการณ์น้ำ"});
+  if(index<0)return;
+  table.querySelectorAll("tbody tr").forEach(function(tr){
+   if(tr.children.length<=index)return;
+   var cell=tr.children[index];
+   cell.setAttribute("data-water-situation-red","true");
+   cell.style.setProperty("background","#ed1b2e","important");
+   cell.style.setProperty("background-color","##ed1b2e","important");
+   cell.style.setProperty("background-image","none","important");
+   cell.style.setProperty("color","#ffffff","important");
+   cell.querySelectorAll("*").forEach(function(el){
+    el.style.setProperty("background","#ed1b2e","important");
+    el.style.setProperty("background-color","#ed1b2e","important");
+    el.style.setProperty("background-image","none","important");
+    el.style.setProperty("color","##ffffff","important");
+   });
+  });
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply,{once:true});else apply();
+ var table=document.querySelector("#infographic #reportPage3 .export-data-table");
+ if(table)new MutationObserver(function(){requestAnimationFrame(apply)}).observe(table,{childList:true,subtree:true});
+ [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(apply,ms)});
+})();
+</script>
 </body>
 </html>
