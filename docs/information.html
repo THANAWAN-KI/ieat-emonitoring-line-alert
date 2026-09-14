@@ -35,10 +35,10 @@ body.overview-mode{overflow:hidden;background:#f5f7fa}.situation-dashboard{heigh
 <section class="requested-overview"><span id="period" hidden></span>
 <div class="ieat-gis-dashboard">
  <section class="ieat-kpi-row" aria-label="ข้อมูลสรุป">
-  <a class="ieat-kpi flood" href="./flood-report.html"><span class="ieat-kpi-icon">≋</span><div><strong>—</strong><b>ข้อมูลน้ำท่วม</b><small>พื้นที่ได้รับผลกระทบในนิคมฯ</small></div></a>
-  <a class="ieat-kpi hotspot" href="./hub.html"><span class="ieat-kpi-icon">♨</span><div><strong>—</strong><b>จุดความร้อน</b><small>จุดที่ตรวจพบในพื้นที่นิคมฯ</small></div></a>
-  <a class="ieat-kpi drought" href="./drought.html"><span class="ieat-kpi-icon">⌁</span><div><strong>—</strong><b>ข้อมูลภัยแล้ง</b><small>พื้นที่เฝ้าระวังในนิคมฯ</small></div></a>
-  <a class="ieat-kpi dust" href="./pm25.html"><span class="ieat-kpi-icon">☁</span><div><strong>—</strong><b>ค่าเฉลี่ยฝุ่น PM2.5</b><small>ไมโครกรัมต่อลูกบาศก์เมตร</small></div></a>
+  <article class="ieat-kpi flood"><span class="ieat-kpi-icon">≋</span><div><strong>—</strong><b>ข้อมูลน้ำท่วม</b><small>พื้นที่ได้รับผลกระทบในนิคมฯ</small></div></article>
+  <article class="ieat-kpi hotspot"><span class="ieat-kpi-icon">♨</span><div><strong>—</strong><b>จุดความร้อน</b><small>จุดที่ตรวจพบในพื้นที่นิคมฯ</small></div></article>
+  <article class="ieat-kpi drought"><span class="ieat-kpi-icon">⌁</span><div><strong>—</strong><b>ข้อมูลภัยแล้ง</b><small>พื้นที่เฝ้าระวังในนิคมฯ</small></div></article>
+  <article class="ieat-kpi dust"><span class="ieat-kpi-icon">☁</span><div><strong>—</strong><b>ค่าเฉลี่ยฝุ่น PM2.5</b><small>ไมโครกรัมต่อลูกบาศก์เมตร</small></div></article>
  </section>
 
  <section class="ieat-dashboard-grid">
@@ -248,6 +248,7 @@ body.overview-mode .requested-overview{padding:16px 24px 28px!important;backgrou
 .ieat-map-panel iframe{pointer-events:auto!important;touch-action:auto}
 .ieat-area-context{display:flex;align-items:center;gap:7px;margin:0 0 12px;padding:9px 13px;border-radius:12px;background:#eef5fd;color:#245f9f;font-size:13px!important}
 .ieat-area-context:before{content:"⌖";display:grid;place-items:center;width:25px;height:25px;border-radius:50%;background:#fff;color:#2877d5}
+.ieat-kpi{cursor:default!important}.ieat-kpi:hover{transform:none!important;box-shadow:0 5px 18px rgba(27,39,51,.07)!important}
 </style>
 <script id="ieat-overview-estate-sync-v3">
 (function(){
