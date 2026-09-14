@@ -1883,4 +1883,28 @@ html body main.page .tabs .tab[data-type].active{font-weight:600!important}
   el.textContent='☀  '+date+' น.';
 })();
 </script>
+<style>
+/* Final header placement: title block immediately beside the IEAT logo */
+html body header.hub-site-header .hub-header-left{
+  display:flex!important;align-items:center!important;justify-content:flex-start!important;
+  flex:0 1 auto!important;width:auto!important;min-width:0!important;gap:8px!important
+}
+html body header.hub-site-header .hub-site-brand{
+  display:flex!important;flex:0 0 54px!important;width:54px!important;min-width:54px!important;
+  max-width:54px!important;margin:0!important;padding:0!important
+}
+html body header.hub-site-header .hub-site-brand img{
+  display:block!important;width:54px!important;height:44px!important;flex:0 0 54px!important
+}
+html body header.hub-site-header .hub-title-block{
+  position:static!important;display:flex!important;flex:0 1 auto!important;
+  width:auto!important;min-width:0!important;margin:0!important;padding:0!important;
+  transform:none!important;justify-content:flex-start!important;text-align:left!important
+}
+html body header.hub-site-header .hub-header-right{margin-left:auto!important}
+@media(max-width:700px){
+ html body header.hub-site-header .hub-site-brand{flex-basis:39px!important;width:39px!important;min-width:39px!important;max-width:39px!important}
+ html body header.hub-site-header .hub-site-brand img{width:39px!important;height:34px!important;flex-basis:39px!important}
+}
+</style>
 </body></html>
