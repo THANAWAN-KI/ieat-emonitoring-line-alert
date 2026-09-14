@@ -97,10 +97,7 @@ body.overview-mode{overflow:hidden;background:#f5f7fa}.situation-dashboard{heigh
    <article><span class="gis-card-icon">!</span><div><strong>0</strong><b>ไม่มีเลขทะเบียน</b><small>โรงงาน</small></div></article>
    <article><span class="gis-card-icon">⌗</span><div><strong>0</strong><b>ขนาดพื้นที่รวม</b><small>ไร่</small></div></article>
   </section>
-
-  <div class="gis-data-area"><span>ข้อมูลพื้นที่: </span><b id="gisAreaName">พื้นที่นิคมอุตสาหกรรมทั่วประเทศ</b></div>
-
-  <section class="gis-data-layout">
+<section class="gis-data-layout">
    <div class="gis-data-left">
     <article class="gis-data-panel gis-utility-panel">
      <header><div><h2>สาธารณูปโภคในพื้นที่นิคมฯ</h2><p>ภาพรวมโครงสร้างพื้นฐานและระบบสนับสนุน</p></div><span>ข้อมูล GIS</span></header>
@@ -348,7 +345,7 @@ body.overview-mode .requested-overview{padding:16px 24px 28px!important;backgrou
 .requested-gis{display:none}body.gis-mode .requested-gis{display:block}body.gis-mode .dashboard{display:none!important}body.gis-mode{overflow:auto!important;background:#fff!important}
 .gis-data-dashboard{padding:16px 24px 30px;background:#f7f9fb;color:#252d37}
 .gis-data-kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}.gis-data-kpis article{min-height:112px;padding:16px;display:flex;align-items:center;gap:12px;border:1px solid #edf0f3;border-radius:17px;background:#fff;box-shadow:0 5px 18px rgba(27,39,51,.07)}.gis-card-icon{display:grid;place-items:center;flex:0 0 43px;width:43px;height:43px;border-radius:13px;background:#edf5ff;color:#286fc5;font-size:21px!important}.gis-data-kpis strong{display:block;color:#2168bd;font-size:25px!important;line-height:1!important}.gis-data-kpis b{display:block;margin-top:5px;font-size:14px!important}.gis-data-kpis small{display:block;color:#7b8590;font-size:11px!important}
-.gis-data-area{margin:12px 0;padding:9px 13px;border-radius:11px;background:#fff;border:1px solid #e9edf1;color:#68737f;font-size:13px!important}.gis-data-area b{color:#2769b9}
+
 .gis-data-layout{display:grid;grid-template-columns:minmax(700px,1.55fr) minmax(480px,1fr);gap:14px;align-items:start}.gis-data-left{display:grid;gap:14px;min-width:0}.gis-data-panel{min-width:0;overflow:hidden;border:1px solid #edf0f3;border-radius:17px;background:#fff;box-shadow:0 5px 18px rgba(27,39,51,.06)}.gis-data-panel>header{min-height:66px;padding:13px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #edf0f3}.gis-data-panel h2{margin:0;font-size:17px!important;color:#232c36!important}.gis-data-panel header p{margin:2px 0 0;color:#7b8590!important;font-size:12px!important}.gis-data-panel header>span,.gis-data-panel header>a{padding:7px 10px;border-radius:15px;background:#f1f5fa;color:#286fc5!important;font-size:11px!important;text-decoration:none}
 .gis-utility-grid{padding:14px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.gis-utility-grid div{min-height:86px;padding:12px;border-radius:12px;background:#f8fafb;display:grid;grid-template-columns:32px 1fr;align-items:center;column-gap:8px}.gis-utility-grid i{grid-row:1/3;font-size:20px!important;font-style:normal}.gis-utility-grid b{font-size:12px!important}.gis-utility-grid strong{color:#727d88;font-size:12px!important}
 .gis-data-two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.gis-risk-summary{min-height:214px;padding:20px;display:flex;align-items:center;justify-content:center;gap:25px}.gis-risk-ring,.gis-land-ring,.gis-permit-ring{width:135px;height:135px;flex:0 0 135px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle,#fff 0 52%,transparent 53%),conic-gradient(#d64d5b 0 0%,#e7ebef 0)}.gis-risk-ring b{color:#c94050;font-size:27px!important}.gis-risk-ring small{font-size:9px!important}.gis-risk-details{display:grid;gap:12px}.gis-risk-details span{display:grid;grid-template-columns:10px 1fr auto;align-items:center;gap:7px;color:#68727e;font-size:11px!important}.gis-risk-details i{width:8px;height:8px;border-radius:50%;background:#d64d5b}.gis-risk-details b{color:#252d36}
@@ -366,7 +363,6 @@ body.overview-mode .requested-overview{padding:16px 24px 28px!important;backgrou
  const mapBase="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=9c25f3f77ba5481cb481b402177884c2&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=true&basemaps=true";
  function syncGisDashboard(){
   const estate=(typeof activeEstate!=="undefined"&&activeEstate)||["พื้นที่นิคมอุตสาหกรรมทั่วประเทศ",13.2,101,1155581],name=estate[0],lat=estate[1],lon=estate[2],scale=estate[3]||65000;
-  const area=document.getElementById("gisAreaName");if(area)area.textContent=name;
   const subtitle=document.getElementById("gisMapSubtitle");if(subtitle)subtitle.textContent="แผนผังแม่บท โรงงาน สาธารณูปโภค และข้อมูลความเสี่ยง • "+name;
   const map=document.getElementById("gisDataMap"),national=(typeof estates!=="undefined"&&estate===estates[0]),url=national?mapBase:mapBase+"&center="+lon+","+lat+"&scale="+scale;
   if(map&&map.dataset.area!==name){map.src=url;map.dataset.area=name}
