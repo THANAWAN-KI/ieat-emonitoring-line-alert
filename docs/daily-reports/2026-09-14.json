@@ -1,7 +1,7 @@
 {
   "report_date": "2026-09-14",
-  "generated_at": "2026-09-14T12:18:22+07:00",
-  "generated_at_th": "14/09/2026 12:18 น.",
+  "generated_at": "2026-09-14T15:47:57+07:00",
+  "generated_at_th": "14/09/2026 15:47 น.",
   "station_summary": {
     "available": true,
     "total": 178,
@@ -13,19 +13,55 @@
   "sources": [
     {
       "name": "กรมอุตุนิยมวิทยา",
-      "url": "https://www.tmd.go.th/",
-      "ok": false,
-      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)>"
-    },
-    {
-      "name": "ประกาศเตือนภัย กรมอุตุนิยมวิทยา",
       "url": "https://www.tmd.go.th/warning-and-events",
       "ok": false,
       "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)>"
     },
     {
-      "name": "แผ่นดินไหว กรมอุตุนิยมวิทยา",
+      "name": "กรมอุตุนิยมวิทยา",
+      "url": "https://www.tmd.go.th/forecast/daily",
+      "ok": false,
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)>"
+    },
+    {
+      "name": "กองเฝ้าระวังแผ่นดินไหว",
       "url": "https://earthquake.tmd.go.th/",
+      "ok": true,
+      "http_status": 200
+    },
+    {
+      "name": "GISTDA Disaster Platform",
+      "url": "https://disaster.gistda.or.th/landing/news",
+      "ok": true,
+      "http_status": 200
+    },
+    {
+      "name": "กรมป้องกันและบรรเทาสาธารณภัย",
+      "url": "https://www.disaster.go.th/th/news/",
+      "ok": false,
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "name": "ศูนย์เตือนภัยพิบัติแห่งชาติ",
+      "url": "https://ndwc.disaster.go.th/ndwc/cms/7085",
+      "ok": false,
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "name": "กรมควบคุมมลพิษ",
+      "url": "https://www.pcd.go.th/pcd_news/",
+      "ok": false,
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "name": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th/ieat-news",
+      "ok": true,
+      "http_status": 200
+    },
+    {
+      "name": "กรมโรงงานอุตสาหกรรม",
+      "url": "https://www.diw.go.th/webdiw/pr-news/",
       "ok": true,
       "http_status": 200
     },
@@ -38,13 +74,155 @@
   ],
   "news": [
     {
+      "source": "แผ่นดินไหว กรมอุตุนิยมวิทยา",
+      "url": "https://earthquake.tmd.go.th/inside-info.html",
+      "title": "แผ่นดินไหว ประเทศเมียนมา (18.823,95.688) ขนาด 3.4 วันที่ 13 กันยายน 2569 เวลา 19:01 น. ตามเวลาประเทศไทย [TMD] #แผ่นดินไหว #กองเฝ้าระวังแผ่นดินไหว #earthquaketmd",
+      "summary": "2026-09-13 19:01:16 น. Lat. 18.823 , Long. 95.688 ขนาด 3.4",
+      "image": "",
+      "category": "แผ่นดินไหวและภัยพิบัติ",
+      "published_date": "Sun, 13 Sep 2026 19:01:16 +0700",
+      "available": true
+    },
+    {
+      "source": "กองเฝ้าระวังแผ่นดินไหว",
+      "url": "https://earthquake.tmd.go.th/inside.html",
+      "title": "แผ่นดินไหวในประเทศและใกล้เคียงทั้งหมด",
+      "summary": "t> Myanmar แผ่นดินไหวในประเทศและใกล้เคียงทั้งหมด <font style=\"font-family: 'Kanit',",
+      "image": "",
+      "category": "แผ่นดินไหวและภัยพิบัติ",
+      "published_date": "2026-09-14",
+      "available": true
+    },
+    {
+      "source": "กองเฝ้าระวังแผ่นดินไหว",
+      "url": "https://eq.tmd.go.th",
+      "title": "https://eq.tmd.go.th",
+      "summary": "go.th\" target=\"_blank\">https://earthquake.tmd.go.th Website: https://eq.tmd.go.th สายด่วน แผ่นดินไหว 1182 กด 3",
+      "image": "",
+      "category": "แผ่นดินไหวและภัยพิบัติ",
+      "published_date": "2026-09-14",
+      "available": true
+    },
+    {
+      "source": "GISTDA Disaster Platform",
+      "url": "https://disaster.gistda.or.th/landing/news",
+      "title": "Disaster Platform | Gistda",
+      "summary": "ระบบสนับสนุนการตัดสินใจเพื่อบริหารจัดการภัยพิบัติ",
+      "image": "https://disaster.gistda.or.th/metadata/landing.png",
+      "category": "แผ่นดินไหวและภัยพิบัติ",
+      "published_date": "2026-09-14",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th",
+      "title": "การนิคมอุตสาหกรรมแห่งประเทศไทย (กนอ.) Industrial Estate Authority of Thailand",
+      "summary": "arentNode.insertBefore(s, x); })(); การนิคมอุตสาหกรรมแห่งประเทศไทย (กนอ.) Industrial Estate Authority of Thailand <div class=\"item\"",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-09-14",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th/ieat-news",
+      "title": "การจัดตั้งนิคมอุตสาหกรรม",
+      "summary": "การจัดตั้งนิคมอุตสาหกรรม",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-09-14",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th/ieat-law",
+      "title": "พระราชบัญญัติการนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "summary": "พระราชบัญญัติการนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-09-14",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th/industrial-estate-development-establishment",
+      "title": "การจัดตั้ง/พัฒนานิคมอุตสาหกรรม",
+      "summary": "การจัดตั้ง/พัฒนานิคมอุตสาหกรรม",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-09-14",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th/business-operations-in-the-industrial-estate",
+      "title": "การประกอบกิจการในนิคมอุตสาหกรรม",
+      "summary": "การประกอบกิจการในนิคมอุตสาหกรรม",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-09-14",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th/benefits-in-industrial-estates",
+      "title": "สิทธิประโยชน์ในนิคมอุตสาหกรรม",
+      "summary": "สิทธิประโยชน์ในนิคมอุตสาหกรรม",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-09-14",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th/industrial-estate-establishment-process",
+      "title": "กระบวนการจัดตั้งนิคมอุตสาหกรรม",
+      "summary": "กระบวนการจัดตั้งนิคมอุตสาหกรรม <a data-mid=\"8207\" href=\"https://www.ieat.go.th/th/getting-approval-i",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-09-14",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th/getting-approval-in-principle",
+      "title": "การขออนุมัติในหลักการ",
+      "summary": "นการจัดตั้งนิคมอุตสาหกรรม การขออนุมัติในหลักการ <a data-mid=\"8206\" href=\"https://www.ieat.go.th/th/manual-of-applicat",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-09-14",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th/ieathandbook",
+      "title": "การขอประกอบกิจการในนิคมอุตสาหกรรม",
+      "summary": "้านบริการ การขอประกอบกิจการในนิคมอุตสาหกรรม <a data-mid=\"8194\" href=\"https://www.ieat.go.th/th/se",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-09-14",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th/eia-ehia",
+      "title": "โครงการนิคมอุตสาหกรรมที่ได้รับความเห็นชอบรายงาน EIA/EHIA",
+      "summary": "ISO 14001 โครงการนิคมอุตสาหกรรมที่ได้รับความเห็นชอบรายงาน EIA/EHIA <a data-mid=\"8394\" href=\"https://ehia.ieat.go.th/th\"",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-09-14",
+      "available": true
+    },
+    {
       "source": "GISTDA",
       "url": "https://disaster.gistda.or.th/landing/news/%e0%b8%9e%e0%b8%b7%e0%b9%89%e0%b8%99%e0%b8%97%e0%b8%b5%e0%b9%88%e0%b8%99%e0%b9%89%e0%b8%b3%e0%b8%97%e0%b9%88%e0%b8%a7%e0%b8%a1%e0%b8%9a%e0%b8%a3%e0%b8%b4%e0%b9%80%e0%b8%a7%e0%b8%93%e0%b8%9b%e0%b8%a3-2",
       "title": "Disaster Platform | Gistda",
       "summary": "เปิดตรวจสอบข่าวและประกาศล่าสุดจากแหล่งข้อมูลต้นทาง",
       "image": "./news-images/gistda.png",
       "matched_keywords": [],
-      "available": true
+      "available": true,
+      "category": "ข่าวและประกาศ",
+      "published_date": ""
     },
     {
       "source": "กรมอุตุนิยมวิทยา",
@@ -55,7 +233,9 @@
       "available": false,
       "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)>",
       "image": "",
-      "hide_image": true
+      "hide_image": true,
+      "category": "ข่าวและประกาศ",
+      "published_date": ""
     },
     {
       "source": "ปภ. / ศูนย์เตือนภัยพิบัติแห่งชาติ",
@@ -91,9 +271,17 @@
           "url": "https://ndwc.disaster.go.th/upload/userfiles/ndwc/5.%20%E0%B9%81%E0%B8%9C%E0%B8%99%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%84%E0%B8%A5%E0%B8%B7%E0%B9%88%E0%B8%99%E0%B8%A5%E0%B8%A1%E0%B9%81%E0%B8%A3%E0%B8%87-2026-09-01.jpg"
         }
       ],
-      "image": ""
+      "image": "",
+      "category": "แผ่นดินไหวและภัยพิบัติ",
+      "published_date": ""
     }
   ],
-  "experience_id": "a6b0cc340ae343379c4f66951610f535",
-  "notice": "ข้อมูลเพื่อสนับสนุนการติดตามและประสานงานเบื้องต้น โปรดตรวจสอบกับหน่วยงานเจ้าของข้อมูลก่อนนำไปใช้อ้างอิง"
+  "news_total": 17,
+  "new_today": 13,
+  "categories": {
+    "แผ่นดินไหวและภัยพิบัติ": 5,
+    "นิคมฯ และโรงงาน": 10,
+    "ข่าวและประกาศ": 2
+  },
+  "notice": "รวบรวมอัตโนมัติจากแหล่งข้อมูลสาธารณะของหน่วยงาน โปรดเปิดตรวจสอบรายละเอียดจากแหล่งข่าวต้นทางก่อนนำไปใช้อ้างอิง"
 }
