@@ -261,25 +261,7 @@ body{font-weight:400}
 }
 </style>
 </head><body>
-<header class="hub-site-header hub-compact-header">
-  <div class="hub-header-left">
-    <a class="hub-site-brand" href="https://oc.ieat.go.th/th" target="_blank" rel="noopener">
-      <img src="./assets/TH-Vertical.png" alt="กนอ.">
-    </a>
-    <div class="hub-title-block">
-      <strong>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย</strong>
-      <small>ข้อมูลสนับสนุนการเฝ้าระวังและรับมือเหตุฉุกเฉิน</small>
-    </div>
-  </div>
-  <div class="hub-header-right">
-    <span class="hub-current-time" id="hubCurrentTime" aria-label="วันและเวลาปัจจุบัน"><svg class="hub-calendar-icon" fill="#6534ac" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="m22 2.25h-3.25v-1.5c-.014-.404-.344-.726-.75-.726s-.736.322-.75.725v.001 1.5h-4.5v-1.5c-.014-.404-.344-.726-.75-.726s-.736.322-.75.725v.001 1.5h-4.5v-1.5c-.014-.404-.344-.726-.75-.726s-.736.322-.75.725v.001 1.5h-3.25c-1.104 0-2 .895-2 1.999v17.75c0 1.105.895 2 2 2h20c1.105 0 2-.895 2-2v-17.75c0-1.104-.896-1.999-2-1.999zm.5 19.75c0 .276-.224.499-.499.5h-20.001c-.276 0-.5-.224-.5-.5v-17.75c.001-.276.224-.499.5-.499h3.25v1.5c.014.404.344.726.75.726s.736-.322.75-.725v-.001-1.5h4.5v1.5c.014.404.344.726.75.726s.736-.322.75-.725v-.001-1.5h4.5v1.5c.014.404.344.726.75.726s.736-.322.75-.725v-.001-1.5h3.25c.276 0 .499.224.499.499z"></path><path d="m5.25 9h3v2.25h-3z"></path><path d="m5.25 12.75h3v2.25h-3z"></path><path d="m5.25 16.5h3v2.25h-3z"></path><path d="m10.5 16.5h3v2.25h-3z"></path><path d="m10.5 12.75h3v2.25h-3z"></path><path d="m10.5 9h3v2.25h-3z"></path><path d="m15.75 16.5h3v2.25h-3z"></path><path d="m15.75 12.75h3v2.25h-3z"></path><path d="m15.75 9h3v2.25h-3z"></path></svg><span id="hubCurrentTimeText"></span></span>
-    <nav class="hub-header-actions" aria-label="เมนูส่วนหัว">
-      <a class="hub-back-link" href="./daily-situation.html"><svg class="hub-news-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="#6534ac" aria-hidden="true"><path d="M9.069 2.672v14.928h-6.397v8.718c0 2.129 1.983 3.010 3.452 3.010h20.006c1.616 0 3.199-1.572 3.199-3.199V2.672H9.069zM6.124 28.262c-.664 0-2.385-.349-2.385-1.944v-7.652h5.331v7.192c0 .714-.933 2.404-2.404 2.404h-.542zM28.262 26.129c0 1.036-1.096 2.133-2.133 2.133H9.016c.718-.748 1.119-1.731 1.119-2.404V3.738h18.126v22.391z"/><path d="M12.268 5.871h13.861v1.066H12.268zM12.268 20.265h13.861v1.066H12.268zM12.268 23.997h13.861v1.066H12.268z"/><path d="M26.129 9.602H12.268v7.997h13.861V9.602zm-1.066 6.931H13.334v-5.864h11.729v5.864z"/></svg><span>หน้ารายงานข่าว</span></a>
-      <a class="hub-contact-link hub-info-menu" href="./information.html" aria-label="ข้อมูลเพิ่มเติม">⋮</a>
-      <a class="hub-contact-link hub-contact-primary" href="./contacts.html">ติดต่อ</a>
-    </nav>
-  </div>
-</header><div class="loading" id="loading">กำลังจัดทำภาพ PNG…</div>
+<header class="header" id="hubInformationHeader"><div class="brand"><img src="./assets/TH-Vertical.png" alt="กนอ."><div><h1>ระบบสารสนเทศและการเชื่อมโยงข้อมูล <p id="period"></p></h1></div></div><div class="header-right"><button class="clock" id="clock" aria-expanded="false"></button><div class="scope-wrap"><button class="scope" id="scopeBtn" aria-expanded="false">พื้นที่นิคมอุตสาหกรรมทั่วประเทศ</button><div class="estate-pop" id="estatePop"><div class="search-box"><img src="./assets/search.png" alt=""><input id="estateSearch" type="search" placeholder="ค้นหาชื่อนิคมอุตสาหกรรม"></div><div class="estate-list" id="estateList"></div></div></div><a class="hub" href="./hub.html">กลับ Hub</a></div></header><div class="loading" id="loading">กำลังจัดทำภาพ PNG…</div>
 <main class="page" id="captureArea"><nav class="tabs"><button class="tab active" data-type="fire"><img src="./assets/fire-svgrepo-com.png" alt="ไฟไหม้">ไฟไหม้</button><button class="tab" data-type="flood"><img src="./assets/flood-svgrepo-com.png" alt="น้ำท่วม">น้ำท่วม</button><button class="tab" data-type="drought"><img src="./assets/drought-svgrepo-com.png" alt="ภัยแล้ง">ภัยแล้ง</button><button class="tab" data-type="pm25"><img src="./assets/cloudy-cloud-svgrepo-com.png" alt="ฝุ่น PM2.5">ฝุ่น PM2.5</button></nav>
 <section id="fireView"><div class="kpis" id="kpis"></div><div class="toolbar"><select id="estateFilter"><option value="">ทุกนิคมอุตสาหกรรม</option></select><input id="searchInput" placeholder="ค้นหาชื่อจุดหรือข้อมูลสนับสนุน"><span id="filterSummary">กำลังเชื่อมต่อข้อมูล…</span></div>
 <div class="map-grid"><article class="panel"><div class="panel-head"><h2>Risk Map และข้อมูลสนับสนุน</h2><a href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=9c25f3f77ba5481cb481b402177884c2" target="_blank">เปิดเต็มหน้า ↗</a></div><div class="risk-layout"><div id="riskMap" class="risk-map"></div><aside class="directory"><div class="dir-head"><b id="listTitle">ข้อมูลสนับสนุนทั้งหมด</b><span>คลิกรายการเพื่อซูมไปยังตำแหน่งบนแผนที่</span></div><div class="list" id="featureList"><div class="empty">กำลังโหลดข้อมูล…</div></div></aside></div></article>
@@ -2212,6 +2194,95 @@ html body header.hub-site-header .hub-header-actions a:hover{filter:brightness(.
  }
 }
 </style>
+<style id="hub-exact-information-header-20260914-v1">
+html body #hubInformationHeader{
+ height:62px!important;min-height:62px!important;padding:0 34px!important;
+ display:flex!important;align-items:center!important;gap:14px!important;
+ background:#fff!important;border:0!important;border-bottom:1px solid #ddd!important;
+ box-shadow:0 2px 8px #1c253014!important;position:relative!important;top:auto!important;z-index:5!important;
+ font-family:"Noto Sans Thai","Segoe UI",Tahoma,sans-serif!important
+}
+html body #hubInformationHeader *{font-family:"Noto Sans Thai","Segoe UI",Tahoma,sans-serif!important}
+html body #hubInformationHeader .brand{
+ display:flex!important;align-items:center!important;gap:11px!important;min-width:600px!important
+}
+html body #hubInformationHeader .brand img{width:58px!important;height:45px!important;object-fit:contain!important}
+html body #hubInformationHeader .brand h1{
+ margin:0!important;font-size:17px!important;line-height:1.25!important;font-weight:600!important;white-space:nowrap!important
+}
+html body #hubInformationHeader .brand p{
+ display:inline!important;margin:0 0 0 8px!important;color:#818791!important;
+ font-size:10px!important;font-weight:400!important
+}
+html body #hubInformationHeader .header-right{
+ margin-left:auto!important;display:flex!important;align-items:center!important;gap:12px!important
+}
+html body #hubInformationHeader .clock{
+ display:block!important;padding:7px 10px!important;border:0!important;border-radius:0!important;
+ background:transparent!important;color:#555b65!important;font-size:11px!important;font-weight:400!important;
+ line-height:normal!important;white-space:nowrap!important;cursor:pointer!important
+}
+html body #hubInformationHeader .clock:hover{background:#f4f4f5!important;border-radius:8px!important}
+html body #hubInformationHeader .scope-wrap{position:relative!important}
+html body #hubInformationHeader .scope{
+ display:block!important;min-width:210px!important;padding:8px 35px 8px 42px!important;
+ border:0!important;border-radius:20px!important;background-color:#f2f3f5!important;
+ background-image:url("./assets/search.png")!important;background-repeat:no-repeat!important;
+ background-position:15px center!important;background-size:18px 18px!important;
+ color:#777d86!important;font-size:11px!important;font-weight:400!important;
+ line-height:normal!important;text-align:left!important;white-space:nowrap!important;cursor:pointer!important
+}
+html body #hubInformationHeader .scope:after{content:"⌄"!important;position:absolute!important;right:15px!important}
+html body #hubInformationHeader .hub{
+ display:block!important;padding:8px 16px!important;border:0!important;border-radius:20px!important;
+ background:#628f36!important;color:#fff!important;font-size:11px!important;font-weight:700!important;
+ line-height:normal!important;text-decoration:none!important;white-space:nowrap!important
+}
+html body #hubInformationHeader .estate-pop{
+ display:none;position:absolute;z-index:20;top:48px;right:0;width:320px;padding:13px;
+ border:1px solid #e2e5e8;border-radius:16px;background:#fff;box-shadow:0 6px 22px #28323d2b
+}
+html body #hubInformationHeader .estate-pop.open{display:block!important}
+html body #hubInformationHeader .search-box{display:flex;align-items:center;gap:8px;padding:0 11px;border:1px solid #dfe3e7;border-radius:10px}
+html body #hubInformationHeader .search-box img{width:18px;height:18px;object-fit:contain}
+html body #hubInformationHeader .search-box input{width:100%;padding:10px 0;border:0;outline:0;font-size:11px}
+html body #hubInformationHeader .estate-list{max-height:270px;margin-top:8px;overflow:auto}
+html body #hubInformationHeader .estate-option{width:100%;padding:9px 10px;border:0;border-radius:8px;background:#fff;color:#555d68;font-size:11px;text-align:left;cursor:pointer}
+html body #hubInformationHeader .estate-option:hover,
+html body #hubInformationHeader .estate-option.active{background:#eef5e8;color:#628f36}
+@media(max-width:900px){
+ html body #hubInformationHeader{height:58px!important;min-height:58px!important;padding:0 8px!important}
+ html body #hubInformationHeader .brand{min-width:0!important;flex:1!important}
+ html body #hubInformationHeader .brand img{width:43px!important;height:39px!important}
+ html body #hubInformationHeader .brand h1{font-size:12px!important;white-space:normal!important}
+ html body #hubInformationHeader .brand p,
+ html body #hubInformationHeader .clock,
+ html body #hubInformationHeader .scope-wrap{display:none!important}
+ html body #hubInformationHeader .hub{padding:7px 10px!important}
+}
+</style>
+<script id="hub-exact-information-header-20260914-v1-script">
+(function(){
+ var period=document.getElementById("period"),clock=document.getElementById("clock");
+ function update(){
+  var now=new Date();
+  if(period)period.textContent="ข้อมูล ณ วันที่ "+now.toLocaleDateString("th-TH",{day:"numeric",month:"long",year:"numeric"});
+  if(clock)clock.textContent=now.toLocaleDateString("th-TH",{weekday:"short",day:"2-digit",month:"short",year:"2-digit"})+" "+now.toLocaleTimeString("th-TH",{hour:"2-digit",minute:"2-digit"})+" น.";
+ }
+ update();setInterval(update,30000);
+ var names=["พื้นที่นิคมอุตสาหกรรมทั่วประเทศ","นิคมอุตสาหกรรมมาบตาพุด","นิคมอุตสาหกรรมแหลมฉบัง","นิคมอุตสาหกรรมบางปู","นิคมอุตสาหกรรมบางชัน"];
+ var btn=document.getElementById("scopeBtn"),pop=document.getElementById("estatePop"),list=document.getElementById("estateList"),search=document.getElementById("estateSearch");
+ function render(q){
+  if(!list)return;var key=(q||"").trim().toLowerCase();
+  list.innerHTML=names.filter(function(n){return !key||n.toLowerCase().includes(key)}).map(function(n){return '<button class="estate-option'+(btn&&btn.textContent===n?' active':'')+'" type="button" data-name="'+n+'">'+n+'</button>'}).join("");
+ }
+ render("");
+ if(btn&&pop)btn.addEventListener("click",function(e){e.stopPropagation();pop.classList.toggle("open");btn.setAttribute("aria-expanded",pop.classList.contains("open"))});
+ if(search)search.addEventListener("input",function(){render(search.value)});
+ if(list)list.addEventListener("click",function(e){var o=e.target.closest(".estate-option");if(!o)return;if(btn)btn.textContent=o.dataset.name;pop.classList.remove("open");render(search?search.value:"")});
+ document.addEventListener("click",function(e){if(pop&&!pop.contains(e.target)&&e.target!==btn)pop.classList.remove("open")});
+})();
+</script>
 </body></html>
 
 <style id="hub-reference-spacing-20260914-v2">
