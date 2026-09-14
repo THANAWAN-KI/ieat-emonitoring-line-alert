@@ -10629,5 +10629,36 @@ html body main.container #thaiwater-warning .tw-risk-card:nth-of-type(2) .tw-rai
  [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(apply,ms)});
 })();
 </script>
-<style id="remove-station-status-legends-final">html body main.container #warning .station-watch-table .status-color-legend{display:none!important}</style></body>
+<style id="remove-station-status-legends-final">html body main.container #warning .station-watch-table .status-color-legend{display:none!important}</style>
+<style id="export-reports-two-per-row-final">
+html body main.container #infographic .report-pages{
+ display:grid!important;
+ grid-template-columns:repeat(2,minmax(0,794px))!important;
+ gap:22px!important;
+ align-items:start!important;
+ justify-content:center!important;
+ width:100%!important;
+ max-width:none!important;
+ overflow:visible!important;
+}
+html body main.container #infographic .report-pages > *,
+html body main.container #infographic .infographic-gallery-item,
+html body main.container #infographic .infographic-gallery-item:nth-child(3),
+html body main.container #infographic .infographic-gallery-item:nth-child(4){
+ grid-column:auto!important;
+ min-width:0!important;
+ width:100%!important;
+ max-width:794px!important;
+ margin:0!important;
+}
+html body main.container #infographic .infographic-preview > .export-sheet{
+ width:100%!important;
+ max-width:794px!important;
+ margin:0 auto!important;
+}
+@media(max-width:1050px){
+ html body main.container #infographic .report-pages{grid-template-columns:minmax(0,794px)!important}
+}
+</style>
+</body>
 </html>
