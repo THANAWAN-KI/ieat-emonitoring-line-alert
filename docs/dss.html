@@ -291,4 +291,44 @@ html body #report .wind-arrow{
  [100,500,1200,2500].forEach(function(ms){setTimeout(apply,ms)});
 })();
 </script>
+
+<style id="dss-purple-important-only-final">
+/* Normal report copy */
+html body .report,
+html body .report p,
+html body .report span,
+html body .report td,
+html body .report .company .row > span,
+html body .report .weather p,
+html body .report .note span{
+ color:#25232a!important;
+ -webkit-text-fill-color:#25232a!important;
+}
+/* Secondary descriptions */
+html body .report small,
+html body .report .report-header p,
+html body .report .map-caption,
+html body .report .support > span{
+ color:#6c6871!important;
+ -webkit-text-fill-color:#6c6871!important;
+}
+/* Row labels remain neutral */
+html body .report .company .row > b{
+ color:#4d4952!important;
+ -webkit-text-fill-color:#4d4952!important;
+}
+/* IEAT purple only for important headings and values */
+html body .report .report-header h1,
+html body .report .section-title,
+html body .report .meta b,
+html body .report .event-card b,
+html body .report .weather .temp,
+html body .report .weather p b,
+html body .report .support b,
+html body .report .support strong,
+html body .report .note > b{
+ color:#59267c!important;
+ -webkit-text-fill-color:#59267c!important;
+}
+</style>
 </body></html>
