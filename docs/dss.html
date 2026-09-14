@@ -424,4 +424,50 @@ html body #report .wind-arrow{
  [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(paint,ms)});
 })();
 </script>
-<style id="dss-selected-values-purple-final">html body #report .meta b,html body #report .event-card:nth-child(1) b,html body #report .event-card:nth-child(2) b,html body #report .support strong{color:#59267c!important;-webkit-text-fill-color:#59267c!important}html body #report .event-card:nth-child(3) b,html body #report .event-card:nth-child(3) b *{color:#1d1d1b!important;-webkit-text-fill-color:#1d1d1b!important}</style><script id="dss-selected-values-purple-final-script">(function(){function p(s,c){document.querySelectorAll(s).forEach(function(e){e.style.setProperty("color",c,"important");e.style.setProperty("-webkit-text-fill-color",c,"important")})}function a(){p("#report .meta b,#report .event-card:nth-child(1) b,#report .event-card:nth-child(2) b,#report .support strong","#59267c");p("#report .event-card:nth-child(3) b,#report .event-card:nth-child(3) b *","#1d1d1b")}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",a,{once:true});else a();var r=document.getElementById("report");if(r)new MutationObserver(function(){requestAnimationFrame(a)}).observe(r,{childList:true,subtree:true,characterData:true});[100,500,1200,2500,5000,9000].forEach(function(m){setTimeout(a,m)})})();</script></body></html>
+<style id="dss-selected-values-purple-final">html body #report .meta b,html body #report .event-card:nth-child(1) b,html body #report .event-card:nth-child(2) b,html body #report .support strong{color:#59267c!important;-webkit-text-fill-color:#59267c!important}html body #report .event-card:nth-child(3) b,html body #report .event-card:nth-child(3) b *{color:#1d1d1b!important;-webkit-text-fill-color:#1d1d1b!important}</style><script id="dss-selected-values-purple-final-script">(function(){function p(s,c){document.querySelectorAll(s).forEach(function(e){e.style.setProperty("color",c,"important");e.style.setProperty("-webkit-text-fill-color",c,"important")})}function a(){p("#report .meta b,#report .event-card:nth-child(1) b,#report .event-card:nth-child(2) b,#report .support strong","#59267c");p("#report .event-card:nth-child(3) b,#report .event-card:nth-child(3) b *","#1d1d1b")}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",a,{once:true});else a();var r=document.getElementById("report");if(r)new MutationObserver(function(){requestAnimationFrame(a)}).observe(r,{childList:true,subtree:true,characterData:true});[100,500,1200,2500,5000,9000].forEach(function(m){setTimeout(a,m)})})();</script>
+<style id="dss-purple-title-only-final">
+html body #report .section-title,
+html body #report .meta b,
+html body #report .event-card b,
+html body #report .event-card b *,
+html body #report .weather .temp,
+html body #report .weather p b,
+html body #report .support b,
+html body #report .support strong,
+html body #report .note > b{
+ color:#1d1d1b!important;
+ -webkit-text-fill-color:#1d1d1b!important;
+}
+html body #report .report-header h1,
+html body #report .report-header h1 *{
+ color:#59267c!important;
+ -webkit-text-fill-color:#59267c!important;
+}
+</style>
+<script id="dss-purple-title-only-final-script">
+(function(){
+ function apply(){
+  var report=document.getElementById("report");if(!report)return;
+  var title=report.querySelector(".report-header h1");
+  report.querySelectorAll("*").forEach(function(el){
+   if(el===title||el.closest(".report-header h1"))return;
+   var style=getComputedStyle(el);
+   var color=String(style.color).replace(/\s/g,"").toLowerCase();
+   var fill=String(style.webkitTextFillColor||"").replace(/\s/g,"").toLowerCase();
+   if(color==="rgb(89,38,124)"||color==="rgba(89,38,124,1)"||fill==="rgb(89,38,124)"||fill==="rgba(89,38,124,1)"){
+    el.style.setProperty("color","#1d1d1b","important");
+    el.style.setProperty("-webkit-text-fill-color","#1d1d1b","important");
+   }
+  });
+  if(title){
+   title.style.setProperty("color","#59267c","important");
+   title.style.setProperty("-webkit-text-fill-color","#59267c","important");
+  }
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply,{once:true});else apply();
+ var report=document.getElementById("report");
+ if(report)new MutationObserver(function(){requestAnimationFrame(apply)}).observe(report,{childList:true,subtree:true,characterData:true});
+ [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(apply,ms)});
+})();
+</script>
+</body></html>
