@@ -903,7 +903,7 @@ function ensure(){
  '<section class="wb-decision-info-v3" id="wbDecisionInfo"><article class="wb-info-item"><span>สถานีใกล้นิคมฯ ที่สุด</span><strong id="wbNearest">–</strong><small id="wbNearestDetail">กำลังคำนวณระยะทาง</small></article><article class="wb-info-item"><span>สถานีระดับน้ำสูงสุด</span><strong id="wbHighest">–</strong><small id="wbHighestDetail">กำลังประเมินระดับเทียบตลิ่ง</small></article><article class="wb-info-item"><span>ข้อมูลล่าสุด</span><strong id="wbLatest">–</strong><small>ใช้ตรวจสอบความสดใหม่ของข้อมูล</small></article><article class="wb-info-item"><span>แม่น้ำ / ลุ่มน้ำที่เกี่ยวข้อง</span><strong id="wbRivers">–</strong><small id="wbRiverDetail">จากสถานีใกล้พื้นที่นิคมฯ</small></article></section><section class="wb-overview-charts-v2"><article class="wb-card"><header class="wb-head"><div><h2>ระดับน้ำเทียบตลิ่ง (%)</h2><p>เปรียบเทียบสถานีใกล้นิคมฯ • เส้นประสีแดงคือระดับตลิ่ง 100%</p></div><span class="wb-badge">กราฟเปอร์เซ็นต์</span></header><div class="wb-chart-body" id="wbPercentChart"><div class="wb-empty">กำลังโหลดกราฟ…</div></div></article><article class="wb-card"><header class="wb-head"><div><h2>แนวโน้มระดับน้ำ</h2><p>กราฟเส้นข้อมูลย้อนหลังจากสถานี ThaiWater</p></div><span class="wb-badge">ย้อนหลัง 3 วัน</span></header><div class="wb-chart-body" id="wbTrendChart"><div class="wb-empty">กำลังโหลดกราฟ…</div></div></article></section><article class="wb-card"><header class="wb-head"><div><h2>สถานีตรวจวัดระดับน้ำที่เกี่ยวข้องกับนิคมฯ</h2><p id="wbArea">ระดับน้ำเทียบตลิ่งและแนวโน้มระดับน้ำ</p></div><span class="wb-badge" id="wbCount">กำลังโหลด</span></header><div class="wb-scroll"><table class="wb-table"><thead><tr><th>ชื่อสถานี</th><th>แม่น้ำ / ลุ่มน้ำ</th><th>ระดับน้ำปัจจุบัน</th><th>ระดับน้ำเทียบตลิ่ง (%) — กราฟ</th><th>สูง/ต่ำกว่าตลิ่ง</th><th>สถานะ</th><th>แนวโน้มระดับน้ำ — กราฟย้อนหลัง</th><th>ระยะห่าง</th><th>ข้อมูลล่าสุด / หน่วยงาน</th></tr></thead><tbody id="wbRows"></tbody></table></div></article>'+
  '<article class="wb-card"><header class="wb-head"><div><h2>พื้นที่เสี่ยงน้ำท่วมใกล้นิคมฯ</h2><p>แสดงเฉพาะสถานีที่ระดับน้ำล้นตลิ่ง (ตั้งแต่ 100%)</p></div><span class="wb-badge" id="wbRiskCount">0 จุด</span></header><div class="wb-risk-list" id="wbRisks"></div></article>'+
  '<article class="wb-card wb-source"><b>แหล่งข้อมูล: ThaiWater API • ระดับน้ำอัปเดตล่าสุด พร้อมข้อมูลสนับสนุน:</b><a href="https://www.thaiwater.net/water/wl" target="_blank" rel="noopener">ระดับน้ำ</a><a href="https://www.thaiwater.net/water" target="_blank" rel="noopener">สถานการณ์น้ำ</a><a href="https://www.thaiwater.net/water/gate" target="_blank" rel="noopener">ประตูระบายน้ำ</a><a href="https://www.thaiwater.net/water/quality" target="_blank" rel="noopener">คุณภาพน้ำ</a></article>';
- root.appendChild(el);return el;
+ root.appendChild(el);var info=el.querySelector("#wbDecisionInfo"),left=root.querySelector(".left");if(info&&left)left.appendChild(info);return el;
 }
 async function render(){
  if(typeof activeTab!=="undefined"&&activeTab!=="water")return;var token=++renderId;ensure();var e=estate(),name=e[0],tbody=document.getElementById("wbRows"),risks=document.getElementById("wbRisks");
@@ -941,4 +941,24 @@ setInterval(function(){cache=null;render()},300000);
 
 <style id="wb-overview-charts-v2"></style>
 <style id="wb-decision-info-v3"></style>
+
+<style id="wb-layout-balance-v4">
+@media(min-width:1101px){
+ body.water-mode .dashboard{grid-template-columns:minmax(560px,1.15fr) minmax(520px,.95fr)!important;grid-template-rows:auto auto!important}
+ body.water-mode .dashboard>.left{height:430px!important;min-height:430px!important;display:flex!important;flex-direction:column!important;gap:14px!important;padding:0!important;overflow:visible!important}
+ body.water-mode .dashboard>.left #summary{flex:0 0 auto;margin:0!important}
+ body.water-mode .dashboard>.left .wb-decision-info-v3{flex:1;display:grid!important;grid-template-columns:1fr 1fr!important;grid-template-rows:1fr 1fr!important;gap:12px!important}
+ body.water-mode .dashboard>.left .wb-info-item{min-height:0!important;display:flex;flex-direction:column;justify-content:center;padding:14px 18px!important}
+ body.water-mode .dashboard>.map-panel{height:430px!important;min-height:430px!important}
+ body.water-mode .dashboard>.map-panel .map-frame{height:430px!important;min-height:430px!important}
+ body.water-mode #waterBankDashboard{margin-top:0!important;grid-column:1/-1!important}
+ body.water-mode #waterBankDashboard>.wb-overview-charts-v2{grid-column:1/-1!important}
+}
+@media(max-width:1100px){
+ body.water-mode .dashboard>.left .wb-decision-info-v3{margin-top:12px}
+ body.water-mode .dashboard>.map-panel{height:520px!important;min-height:520px!important}
+ body.water-mode .dashboard>.map-panel .map-frame{height:520px!important;min-height:520px!important}
+}
+</style>
+
 </body></html>
