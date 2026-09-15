@@ -127,20 +127,50 @@ html body .footer{font-size:14px!important;line-height:1.5!important}
  html body main p,html body main button,html body main input,html body main select,html body main a{font-size:14px!important}
 }
 </style>
+
+<style id="system-header-match-reference-20260915">
+html body .system-header{position:sticky!important;top:0!important;z-index:2200!important;width:100%!important;min-height:66px!important;padding:0 36px!important;background:#fff!important;border-top:1px solid #dedede!important;border-bottom:1px solid #d9dcde!important;box-shadow:0 2px 5px rgba(31,41,55,.08)!important}
+html body .system-header-inner{width:100%!important;min-height:66px!important;margin:0!important;display:flex!important;align-items:center!important;gap:18px!important}
+html body .system-brand{display:flex!important;align-items:center!important;gap:12px!important;min-width:0!important;color:#111!important;text-decoration:none!important;white-space:nowrap!important}
+html body .system-brand img{width:42px!important;height:42px!important;flex:0 0 42px!important;object-fit:contain!important}
+html body .system-brand strong{font-family:"Noto Sans Thai","Sarabun",sans-serif!important;font-size:18px!important;font-weight:600!important;line-height:1.4!important;color:#050505!important}
+html body .system-brand>span{margin-left:2px!important;color:#89939e!important;font-family:"Noto Sans Thai","Sarabun",sans-serif!important;font-size:12px!important;font-weight:300!important;line-height:1.4!important}
+html body .system-clock{margin-left:auto!important;color:#4b5660!important;font-size:11px!important;font-weight:400!important;white-space:nowrap!important}
+html body .system-actions{display:flex!important;align-items:center!important;gap:7px!important}
+html body .news-nav,html body .contact-nav,html body .more-btn{min-height:34px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;border:0!important;border-radius:999px!important;text-decoration:none!important;white-space:nowrap!important;font-size:11px!important;font-weight:500!important;line-height:1!important}
+html body .news-nav{gap:6px!important;padding:0 14px!important;background:#f1f3f5!important;color:#66717b!important}
+html body .news-nav span{font-size:13px!important}
+html body .more-wrap{position:relative!important}
+html body .more-btn{width:38px!important;padding:0!important;background:#f1f3f5!important;color:#66717b!important;font-size:18px!important;cursor:pointer!important}
+html body .contact-nav{padding:0 15px!important;background:#598c14!important;color:#fff!important}
+html body .more-menu{position:absolute!important;top:42px!important;right:0!important;width:168px!important;padding:6px!important;display:none!important;border:1px solid #e1e5e8!important;border-radius:12px!important;background:#fff!important;box-shadow:0 12px 28px rgba(28,39,51,.15)!important}
+html body .more-menu.open{display:grid!important}
+html body .more-menu a{padding:9px 10px!important;border-radius:8px!important;color:#3f4b55!important;font-size:12px!important;text-decoration:none!important}
+html body .more-menu a:hover{background:#f2f6f6!important;color:#08766a!important}
+@media(max-width:980px){html body .system-header{padding:0 16px!important}html body .system-brand>span{display:none!important}html body .system-clock{display:none!important}}
+@media(max-width:650px){html body .system-header{padding:5px 10px!important;min-height:58px!important}html body .system-header-inner{min-height:48px!important;gap:7px!important}html body .system-brand{flex:1!important}.system-brand img{width:36px!important;height:36px!important;flex-basis:36px!important}html body .system-brand strong{font-size:14px!important;white-space:normal!important;line-height:1.25!important}html body .news-nav{padding:0 9px!important;font-size:10px!important}html body .news-nav span{display:none!important}html body .more-btn{width:34px!important}html body .contact-nav{display:none!important}}
+</style>
 </head>
 <body>
-<header class="bar">
- <div class="bar-in">
-  <a class="brand-link" href="https://oc.ieat.go.th/th" target="_blank" rel="noopener">
-   <img class="brand-logo" src="./assets/TH-Vertical.png" alt="โลโก้การนิคมอุตสาหกรรมแห่งประเทศไทย">
-   <span class="brand-copy"><strong>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย</strong><span>Environmental Monitoring and Control Center: EMCC</span></span>
+<header class="bar system-header">
+ <div class="bar-in system-header-inner">
+  <a class="system-brand" href="#overview" aria-label="หน้าแรก">
+   <img src="./assets/TH-Vertical.png" alt="โลโก้การนิคมอุตสาหกรรมแห่งประเทศไทย">
+   <strong>ระบบสารสนเทศและการเชื่อมโยงข้อมูล</strong>
+   <span>ข้อมูลสนับสนุนการเฝ้าระวังและรับมือเหตุฉุกเฉิน</span>
   </a>
-  <div class="header-status" aria-label="วันและเวลาปัจจุบัน"><span class="status-icon">☀</span><span><b id="headerDate">กำลังตรวจสอบวันที่</b><small id="headerTime">เวลา --:-- น.</small></span></div>
-  <nav class="header-actions">
-   <a class="header-btn active" href="#overview">สภาพอากาศ</a>
-   <a class="header-btn" href="./information.html">ข้อมูล</a>
-   <a class="header-btn" href="./contacts.html">ติดต่อ</a>
-   <a class="header-btn hub" href="./hub.html">เข้าสู่หน้า Hub</a>
+  <div class="system-clock" id="headerClock">☀ กำลังตรวจสอบเวลา</div>
+  <nav class="system-actions" aria-label="เมนูหลัก">
+   <a class="news-nav" href="#relatedNews"><span>📰</span> หน้ารายงานข่าว</a>
+   <div class="more-wrap">
+    <button class="more-btn" id="headerMoreBtn" type="button" aria-label="เมนูเพิ่มเติม" aria-expanded="false">⋮</button>
+    <div class="more-menu" id="headerMoreMenu">
+     <a href="#overview">สภาพอากาศ</a>
+     <a href="./information.html">ข้อมูล</a>
+     <a href="./hub.html">เข้าสู่หน้า Hub</a>
+    </div>
+   </div>
+   <a class="contact-nav" href="./contacts.html">ติดต่อ</a>
   </nav>
  </div>
 </header><div class="app-shell">
@@ -229,6 +259,15 @@ fetch(DATA_URL+"?t="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)th
 
 <script id="homepage-header-clock">
 (function(){function tick(){var now=new Date();var date=document.querySelector("#headerDate"),time=document.querySelector("#headerTime");if(date)date.textContent="ข้อมูล ณ วันที่ "+new Intl.DateTimeFormat("th-TH",{timeZone:"Asia/Bangkok",day:"numeric",month:"short",year:"numeric"}).format(now);if(time)time.textContent="เวลา "+new Intl.DateTimeFormat("th-TH",{timeZone:"Asia/Bangkok",hour:"2-digit",minute:"2-digit",hour12:false}).format(now)+" น."}tick();setInterval(tick,60000)})();
+</script>
+
+<script id="system-header-behavior-20260915">
+(function(){
+ function updateHeaderClock(){var el=document.querySelector("#headerClock");if(!el)return;var now=new Date(),date=new Intl.DateTimeFormat("th-TH",{timeZone:"Asia/Bangkok",weekday:"short",day:"numeric",month:"short",year:"2-digit"}).format(now),time=new Intl.DateTimeFormat("th-TH",{timeZone:"Asia/Bangkok",hour:"2-digit",minute:"2-digit",hour12:false}).format(now);el.textContent="☀ "+date+" "+time+" น."}
+ updateHeaderClock();setInterval(updateHeaderClock,60000);
+ var btn=document.querySelector("#headerMoreBtn"),menu=document.querySelector("#headerMoreMenu");
+ if(btn&&menu){btn.addEventListener("click",function(e){e.stopPropagation();var open=menu.classList.toggle("open");btn.setAttribute("aria-expanded",String(open))});document.addEventListener("click",function(){menu.classList.remove("open");btn.setAttribute("aria-expanded","false")});menu.addEventListener("click",function(e){e.stopPropagation()})}
+})();
 </script>
 </body>
 </html>
