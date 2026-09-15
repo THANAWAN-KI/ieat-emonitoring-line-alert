@@ -1,836 +1,154 @@
 <!doctype html>
 <html lang="th">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>รายงานสถานการณ์ประจำวัน | IEAT EMCC</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      :root {
-        --p: #631a9d;
-        --n: #631a9d;
-        --r: #bf033b;
-        --o: #ff6908;
-        --g: #598c14;
-        --b: #631a9d;
-        --bg: #f3f6f8;
-        --line: #dde4ea;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-        background: #fff;
-        color: #253247;
-        font-family: Sarabun, sans-serif;
-        font-size: 16px;
-      }
-      .bar {
-        background: #fff;
-        color: #666;
-        padding: 0 22px;
-        border-top: 1px solid #ddd;
-        border-bottom: 1px solid #d8d8d8;
-        box-shadow: 0 2px 5px rgba(0,0,0,.12);
-      }
-      .bar-in {
-        max-width: 1440px;
-        margin: auto;
-        min-height: 46px;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-      }
-      .brand-link { display:flex; align-items:center; gap:10px; color:inherit; text-decoration:none; }
-      .brand-logo { width:72px; height:38px; object-fit:contain; }
-      .brand-copy strong { display:block; color:#111; font-size:18px; font-weight:600; line-height:1.25; }
-      .brand-copy span { display:block; color:#777; font-size:10px; line-height:1.3; }
-      .bar h1 {
-        font-size: 17px;
-        color: #333;
-        margin: 0;
-      }
-      .bar p {
-        display: none;
-      }
-      .actions {
-        margin-left: auto;
-        display: flex;
-        gap: 8px;
-      }
-      .btn {
-        border: 0;
-        border-radius: 9px;
-        padding: 10px 13px;
-        background: #fff;
-        color: var(--n);
-        font-weight: 700;
-        cursor: pointer;
-      }
-      .btn.primary {
-        background: var(--p);
-        color: #fff;
-      }
-      .wrap {
-        width: min(1440px, calc(100% - 48px));
-        max-width: 1440px;
-        margin: auto;
-        padding: 34px 0 50px;
-      }
-      .report {
-        background: #fff;
-        border-radius: 0;
-        padding: 0;
-        box-shadow: none;
-      }
-      .report-head {
-        display: flex;
-        justify-content: space-between;
-        gap: 15px;
-        border-bottom: 1px solid var(--line);
-        padding-bottom: 12px;
-      }
-      .report-head h2 {
-        margin: 0;
-        font-size: 22px;
-      }
-      .muted {
-        color: #6c7888;
-      }
-      .kpis {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 10px;
-        margin: 15px 0;
-      }
-      .kpi {
-        padding: 14px;
-        border-radius: 12px;
-      }
-      .kpi b {
-        display: block;
-        font-size: 26px;
-      }
-      .kpi span {
-        font-size: 13px;
-      }
-      .red {
-        background: #fdecef;
-        color: var(--r);
-      }
-      .orange {
-        background: #fff2e8;
-        color: var(--o);
-      }
-      .green {
-        background: #edf5e4;
-        color: var(--g);
-      }
-      .blue {
-        background: #f1e7f7;
-        color: var(--b);
-      }
-      .layout {
-        display: grid;
-        grid-template-columns: 1.55fr 0.75fr;
-        gap: 14px;
-      }
-      .map {
-        height: 600px;
-        width: 100%;
-        border: 1px solid var(--line);
-        border-radius: 12px;
-      }
-      .side {
-        display: grid;
-        gap: 12px;
-      }
-      .card {
-        border: 1px solid var(--line);
-        border-radius: 12px;
-        padding: 15px;
-      }
-      .card h3 {
-        margin: 0 0 10px;
-        font-size: 17px;
-      }
-      .links {
-        display: grid;
-        gap: 8px;
-      }
-      .links a {
-        display: flex;
-        justify-content: space-between;
-        padding: 10px;
-        background: #f5f7f9;
-        border-radius: 8px;
-        color: var(--n);
-        text-decoration: none;
-      }
-      .source {
-        display: flex;
-        gap: 8px;
-        align-items: flex-start;
-        padding: 8px 0;
-        border-bottom: 1px solid #edf0f3;
-      }
-      .dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        margin-top: 6px;
-        background: #99a3af;
-      }
-      .dot.ok {
-        background: var(--g);
-      }
-      .foot {
-        margin-top: 14px;
-        padding: 12px;
-        background: #f5f1f8;
-        border-radius: 10px;
-        font-size: 13px;
-        color: #5b4670;
-      }
-      .news-wrap { margin: 0 0 40px; padding: 0; }
-      .news-wrap h3 { margin: 0 0 26px; font-size: 20px; }
-      .news-wrap h3 { color: #631a9d; font-size: 27px; line-height: 1.3; }
-      .news-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; gap: 26px 24px; }
-      .news-item { min-width: 0; height: 100%; display: flex; flex-direction: column; border: 1px solid #d5d9de; border-radius: 9px; background: #fff; overflow: hidden; box-shadow: 0 2px 7px rgba(31,41,55,.08); }
-      .news-media { position: relative; width: 100%; height: 230px; flex: 0 0 230px; overflow: hidden; background: linear-gradient(135deg,#f2e9f8,#fff); }
-      .news-cover { display: block; width: 100%; height: 100%; object-fit: cover; border: 0; border-radius: 0; }
-      .news-content { display: flex; flex-direction: column; flex: 1; padding: 14px 15px 16px; }
-      @media (max-width: 1100px) {
-        .news-grid { grid-template-columns: repeat(2, 1fr); }
-      }
-      .news-fallback { display: grid; width: 100%; height: 100%; place-items: center; padding: 24px; color: #631a9d; text-align: center; font-size: 22px; font-weight: 700; }
-      .news-source { align-self: flex-start; display: inline-block; margin: 0 0 9px; padding: 3px 9px; border-radius: 999px; background: #f1e7f7; color: #631a9d; font-size: 12px; font-weight: 700; }
-      .news-item h4 { font-size: 19px; line-height: 1.45; margin: 8px 0 6px; }
-      .news-item p { font-size: 13px; color: #606d7e; margin: 0; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
-      .news-item a { color: #631a9d; font-weight: 700; text-decoration: none; }
-      .news-link { display: inline-block; margin-top: auto; padding-top: 13px; }
-      .gallery-controls { position: absolute; right: 10px; bottom: 10px; left: 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-      .gallery-controls button { width: 34px; height: 34px; border: 0; border-radius: 50%; background: rgba(255,255,255,.94); color: #631a9d; font-size: 20px; font-weight: 700; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,.2); }
-      .gallery-count { padding: 5px 9px; border-radius: 999px; background: rgba(34,34,34,.78); color: #fff; font-size: 12px; }
-      .keyword { display: inline-block; margin: 8px 4px 0 0; padding: 2px 6px; border-radius: 5px; background: #fff1e8; color: #a74608; font-size: 11px; }
-      .site-footer { border-top: 1px solid #e4e4e4; background: #fff; color: #555; padding: 38px 24px 28px; }
-      .footer-inner { width: min(1440px, 100%); margin: auto; }
-      .footer-brand { display: flex; align-items: center; gap: 14px; margin-bottom: 34px; color: #222; text-decoration: none; font-size: 21px; }
-      .footer-brand img { width: 90px; height: 50px; object-fit: contain; }
-      .footer-grid { display: grid; grid-template-columns: 1.35fr 1fr .8fr; gap: 56px; }
-      .footer-col h3 { margin: 0 0 12px; color: #222; font-size: 19px; }
-      .footer-col p { margin: 5px 0; line-height: 1.6; }
-      .footer-col a { color: #555; text-decoration: none; }
-      .footer-col a:hover { color: #631a9d; text-decoration: underline; }
-      .footer-bottom { margin-top: 38px; padding-top: 18px; border-top: 1px solid #f0f0f0; color: #666; font-size: 13px; }
-      @media (max-width: 900px) {
-        .kpis {
-          grid-template-columns: 1fr 1fr;
-        }
-        .layout {
-          grid-template-columns: 1fr;
-        }
-        .map {
-          height: 480px;
-        }
-      }
-      @media (max-width: 560px) {
-        body { font-size: 16px; }
-        .bar { padding: 0 14px; }
-        .bar-in { min-height: 62px; }
-        .brand-logo { width: 56px; height: 36px; }
-        .brand-copy strong { font-size: 16px; }
-        .brand-copy span { font-size: 9px; }
-        .actions { margin-left: auto; }
-        .btn { padding: 8px 10px; font-size: 13px; }
-        .news-grid { grid-template-columns: 1fr; gap: 24px; }
-        .news-media { height: auto; flex-basis: auto; aspect-ratio: 16 / 10; }
-        .report-head {
-          display: block;
-        }
-        .actions {
-          margin-top: 10px;
-        }
-        .wrap {
-          width: 100%;
-          padding: 22px 14px;
-        }
-        .report {
-          padding: 12px;
-        }
-        .map {
-          height: 420px;
-        }
-        .site-footer { padding: 30px 20px 24px; }
-        .footer-brand { align-items: flex-start; margin-bottom: 26px; font-size: 18px; }
-        .footer-brand img { width: 72px; height: 42px; }
-        .footer-grid { grid-template-columns: 1fr; gap: 24px; }
-        .footer-bottom { margin-top: 28px; }
-      }
-    </style>
-    <style>
-      /* GISTDA-inspired first-page header using the IEAT identity */
-      .bar{
-        position:sticky;
-        top:0;
-        z-index:1000;
-        width:100%;
-        min-height:62px;
-        padding:0 32px;
-        background:#fff;
-        border:0;
-        border-top:1px solid #e8e8e8;
-        border-bottom:1px solid #dfe3e7;
-        box-shadow:0 3px 8px rgba(31,41,55,.12);
-      }
-      .bar-in{
-        width:100%;
-        max-width:none;
-        min-height:62px;
-        margin:0;
-        gap:18px;
-      }
-      .brand-link{min-width:0;gap:13px}
-      .brand-logo{
-        width:82px;
-        height:48px;
-        flex:0 0 82px;
-        object-fit:contain;
-      }
-      .brand-copy{min-width:0}
-      .brand-copy strong{
-        color:#2f3338;
-        font-size:19px;
-        line-height:1.25;
-        font-weight:700;
-        white-space:nowrap;
-      }
-      .brand-copy span{
-        margin-top:2px;
-        color:#111;
-        font-size:11px;
-        line-height:1.25;
-        font-weight:500;
-        white-space:nowrap;
-      }
-      .header-status{
-        margin-left:auto;
-        padding-left:20px;
-        border-left:1px solid #eceff2;
-        display:flex;
-        align-items:center;
-        gap:9px;
-        color:#40454b;
-        white-space:nowrap;
-      }
-      .status-icon{color:#e7a51b;font-size:17px}
-      .header-status b{display:inline;font-size:13px;font-weight:500}
-      .header-status small{display:inline;margin-left:6px;color:#111;font-size:13px}
-      .actions{margin-left:0;flex:0 0 auto}
-      .actions .hub-btn{
-        display:inline-flex;
-        align-items:center;
-        justify-content:center;
-        min-height:38px;
-        padding:9px 18px;
-        border-radius:20px;
-        background:#306bec;
-        color:#fff;
-        font-size:13px;
-        line-height:1;
-        text-decoration:none;
-        box-shadow:none;
-      }
-      .actions .hub-btn:hover{background:#1959df}
-      @media(max-width:900px){
-        .bar{padding:0 16px}
-        .bar-in{gap:12px}
-        .brand-logo{width:68px;flex-basis:68px}
-        .brand-copy strong{font-size:16px;white-space:normal}
-        .brand-copy span{font-size:10px;white-space:normal}
-        .header-status{padding-left:12px}
-        .header-status small{display:block;margin:2px 0 0}
-      }
-      @media(max-width:650px){
-        .bar{padding:6px 10px}
-        .bar-in{min-height:56px}
-        .brand-logo{width:54px;height:40px;flex-basis:54px}
-        .brand-copy strong{font-size:14px}
-        .brand-copy span{font-size:9px}
-        .header-status{display:none}
-        .actions .hub-btn{padding:8px 11px;font-size:11px;white-space:nowrap}
-      }
-    </style>
-    <style>
-      /* Larger IEAT EMCC identity typography */
-      .bar-in{min-height:70px!important}
-      .brand-link{
-        flex:0 1 650px!important;
-        min-width:560px!important;
-        gap:15px!important;
-      }
-      .brand-copy{min-width:520px!important}
-      .brand-copy strong{
-        color:#111!important;
-        font-size:22px!important;
-        line-height:1.25!important;
-        font-weight:700!important;
-      }
-      .brand-copy span{
-        margin-top:3px!important;
-        color:#111!important;
-        font-size:13px!important;
-        line-height:1.3!important;
-        font-weight:500!important;
-      }
-      @media(max-width:1000px){
-        .brand-link{
-          flex:1 1 auto!important;
-          min-width:0!important;
-        }
-        .brand-copy{min-width:0!important}
-        .brand-copy strong{font-size:19px!important;white-space:normal!important}
-        .brand-copy span{font-size:11px!important;white-space:normal!important}
-      }
-      @media(max-width:650px){
-        .bar-in{min-height:60px!important}
-        .brand-copy strong{font-size:16px!important}
-        .brand-copy span{font-size:10px!important}
-      }
-    </style>
-    <style>
-      /* Contact navigation beside the Hub button */
-      .actions .contact-btn{
-        display:inline-flex;
-        align-items:center;
-        justify-content:center;
-        min-height:38px;
-        padding:9px 16px;
-        border:1px solid #d9c8e5;
-        border-radius:20px;
-        background:#fff;
-        color:#631a9d;
-        font-size:13px;
-        line-height:1;
-        text-decoration:none;
-      }
-      @media(max-width:650px){.actions .contact-btn{padding:8px 10px;font-size:11px}}
-    </style>
-  
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย | IEAT EMCC</title>
+<meta name="description" content="แดชบอร์ดข้อมูลสภาพอากาศล่าสุดสำหรับสนับสนุนการเฝ้าระวังพื้นที่นิคมอุตสาหกรรม">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
-/* Professional IEAT typography system */
-html{-webkit-text-size-adjust:100%}
-body,button,input,select,textarea{font-family:"Sarabun","Noto Sans Thai",Tahoma,sans-serif!important;font-feature-settings:"kern";text-rendering:optimizeLegibility}
-body{font-size:16px;line-height:1.55}
-</style>
-<style>
-.brand-copy strong{font-size:clamp(18px,1.35vw,22px)!important;line-height:1.28!important;font-weight:700!important;letter-spacing:.005em}.brand-copy span{font-size:clamp(11px,.82vw,13px)!important;line-height:1.35!important}.actions .btn{font-size:14px!important}.news-wrap h3{font-size:clamp(23px,1.8vw,27px)!important;line-height:1.35!important}.news-item h4{font-size:18px!important;line-height:1.5!important}.news-item p{font-size:14px!important;line-height:1.55!important}.footer-col h3{font-size:18px!important}.footer-col p,.footer-col a{font-size:14px!important}
-@media(max-width:650px){.brand-copy strong{font-size:16px!important}.brand-copy span{font-size:10px!important}.actions .btn{font-size:12px!important}.news-wrap h3{font-size:22px!important}.news-item h4{font-size:17px!important}}
-</style>
+:root{--teal:#0f9685;--teal-dark:#08766a;--blue:#1768ad;--ink:#17202b;--muted:#697784;--line:#dfe8eb;--panel:rgba(255,255,255,.94);--green:#42a846;--yellow:#ffc719;--orange:#ff6908;--red:#bf033b;--purple:#6534ac;--shadow:0 16px 50px rgba(16,64,78,.13)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Noto Sans Thai",sans-serif;background:radial-gradient(circle at 4% 0%,rgba(86,206,221,.24),transparent 28%),linear-gradient(150deg,#edfafd 0%,#f5fbf8 52%,#eef5fb 100%);font-size:15px}
+button,input,select{font:inherit}.app-shell{width:min(1880px,calc(100% - 28px));margin:14px auto 26px;border:1px solid rgba(255,255,255,.9);border-radius:24px;background:rgba(246,252,252,.83);box-shadow:var(--shadow);overflow:hidden;backdrop-filter:blur(18px)}
+.topbar{min-height:78px;padding:0 24px;display:flex;align-items:center;gap:22px;border-bottom:1px solid rgba(16,93,104,.12);background:rgba(255,255,255,.82)}
+.brand{display:flex;align-items:center;gap:13px;text-decoration:none;color:inherit;white-space:nowrap}.brand img{width:66px;height:46px;object-fit:contain}.brand strong{display:block;font-size:20px;line-height:1.25}.brand small{display:block;color:var(--muted);font-size:11px}
+.nav{display:flex;gap:6px}.nav a{padding:9px 12px;border-radius:10px;color:#50606b;text-decoration:none;font-size:13px}.nav a.active{background:#e5f6f3;color:var(--teal-dark);font-weight:600}
+.searchbox{margin-left:auto;width:min(430px,31vw);position:relative}.searchbox input{width:100%;height:42px;padding:0 44px 0 16px;border:1px solid #dce9eb;border-radius:14px;background:#f6fafb;outline:none}.searchbox input:focus{border-color:#55bdb0;box-shadow:0 0 0 4px rgba(15,150,133,.1)}.searchbox button{position:absolute;right:4px;top:4px;width:34px;height:34px;border:0;border-radius:10px;background:var(--teal);color:#fff;cursor:pointer}
+.sync{display:flex;align-items:center;gap:8px;color:#66747e;font-size:12px;white-space:nowrap}.sync-dot{width:9px;height:9px;border-radius:50%;background:#aab4bb;box-shadow:0 0 0 4px rgba(170,180,187,.16)}.sync.ok .sync-dot{background:#34b565;box-shadow:0 0 0 4px rgba(52,181,101,.14)}
+.main{padding:14px}.ticker{min-height:52px;padding:10px 15px;display:flex;align-items:center;gap:12px;border:1px solid #dbe9eb;border-radius:15px;background:#fff}.ticker-label{color:var(--teal-dark);font-size:12px;font-weight:700;letter-spacing:.06em}.ticker-text{font-weight:500}.ticker-time{margin-left:auto;color:var(--muted);font-size:12px}.source-link{padding:8px 12px;border-radius:10px;background:#e9f6f4;color:var(--teal-dark);font-size:12px;font-weight:600;text-decoration:none}
+.dashboard{margin-top:12px;display:grid;grid-template-columns:minmax(0,1.62fr) minmax(350px,.68fr);gap:12px}.left-column,.right-column{display:grid;gap:12px}.left-column{grid-template-rows:auto auto}.right-column{grid-auto-rows:min-content}
+.panel{border:1px solid rgba(25,94,105,.11);border-radius:18px;background:var(--panel);box-shadow:0 5px 18px rgba(25,68,78,.05);overflow:hidden}.panel-head{min-height:55px;padding:12px 15px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #e7edef}.panel-head h2,.panel-head h3{margin:0}.panel-head h2{font-size:16px}.panel-head h3{font-size:15px}.panel-head p{margin:2px 0 0;color:var(--muted);font-size:11px}.panel-actions{display:flex;gap:7px}.ghost-btn{height:34px;padding:0 11px;border:1px solid #d9e4e7;border-radius:10px;background:#fff;color:#52616b;font-size:12px;cursor:pointer}.ghost-btn.active{border-color:var(--teal);background:#e8f6f4;color:var(--teal-dark)}
+.map-wrap{position:relative;height:575px;background:#dceef0}#map{width:100%;height:100%}.map-badge{position:absolute;z-index:500;left:16px;top:16px;padding:9px 12px;border:1px solid rgba(255,255,255,.92);border-radius:12px;background:rgba(255,255,255,.92);box-shadow:0 5px 18px rgba(25,45,55,.15);font-size:12px;font-weight:600}.map-badge b{color:var(--red)}.legend{position:absolute;z-index:500;left:16px;bottom:16px;padding:9px 11px;border-radius:11px;background:rgba(255,255,255,.92);box-shadow:0 5px 18px rgba(25,45,55,.13);font-size:11px}.legend span{display:inline-flex;align-items:center;margin-right:9px}.legend i{width:9px;height:9px;margin-right:5px;border-radius:50%}
+.map-loading{position:absolute;z-index:600;inset:0;display:grid;place-items:center;background:rgba(238,248,249,.8);font-weight:600;color:var(--teal-dark)}.map-loading.hide{display:none}
+.station-marker{border:3px solid #fff;border-radius:50%;box-shadow:0 2px 7px rgba(17,48,60,.3)}
+.bottom-grid{display:grid;grid-template-columns:minmax(280px,.63fr) minmax(0,1.37fr);gap:12px}.extremes{padding:15px}.alert-box{padding:12px;border:1px solid #f1d27e;border-radius:13px;background:#fff9e8;color:#7b5a08;font-size:12px}.metric-list{margin-top:10px}.metric-row{padding:11px 1px;display:flex;justify-content:space-between;border-bottom:1px solid #edf1f2}.metric-row span{color:#65727d;font-size:12px}.metric-row b{font-size:14px}.metric-row:last-child{border-bottom:0}.report-btn{width:100%;height:40px;margin-top:10px;border:0;border-radius:11px;background:#eaf1f3;color:#394850;font-weight:600;cursor:pointer}
+.rain-chart{padding:12px 15px 15px}.bars{height:182px;display:flex;align-items:flex-end;gap:9px;padding:12px 4px 4px;border-bottom:1px solid #dfe7e9;background:repeating-linear-gradient(to top,transparent 0,transparent 44px,rgba(100,130,140,.08) 45px)}.bar-item{height:100%;min-width:0;flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:5px}.bar{width:min(28px,70%);min-height:3px;border-radius:7px 7px 2px 2px;background:linear-gradient(180deg,#36c3e8,#1595cf);transition:.2s}.bar-item:hover .bar{filter:saturate(1.25);transform:translateY(-2px)}.bar-item b{font-size:10px}.bar-item span{width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:center;color:#75818b;font-size:9px}
+.detail{padding:17px}.detail-top{display:flex;align-items:center;gap:13px}.weather-icon{width:58px;height:58px;display:grid;place-items:center;border-radius:16px;background:linear-gradient(145deg,#e8f8ff,#edf8f0);font-size:30px}.temperature{font-size:40px;font-weight:600;line-height:1}.temperature small{font-size:17px;font-weight:400;color:#6c7880}.condition{margin-left:auto;text-align:right}.condition b{display:block}.condition span{color:var(--muted);font-size:11px}.station-name{margin:14px 0 3px;font-size:18px}.station-location{color:var(--muted);font-size:12px}.detail-metrics{margin-top:15px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.detail-metrics div{padding:10px;border-radius:11px;background:#f4f8f8}.detail-metrics span{display:block;color:#77838c;font-size:10px}.detail-metrics b{display:block;margin-top:4px;font-size:13px}
+.ranking{padding:8px 15px 15px}.rank-row{padding:9px 0;display:grid;grid-template-columns:25px 1fr auto;align-items:center;gap:8px;border-bottom:1px solid #edf1f2;cursor:pointer}.rank-row:last-child{border-bottom:0}.rank-no{width:22px;height:22px;display:grid;place-items:center;border-radius:7px;background:#eef4f5;color:#64727c;font-size:10px}.rank-name b,.rank-name small{display:block}.rank-name b{font-size:12px}.rank-name small{color:#7b8790;font-size:10px}.rank-rain{color:#1879b7;font-size:13px;font-weight:600}
+.table-panel{margin-top:12px}.table-tools{padding:10px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #edf1f2}.table-tools input,.table-tools select{height:36px;padding:0 11px;border:1px solid #dfe7e9;border-radius:9px;background:#fff;outline:none}.table-tools input{width:260px}.table-tools select{margin-left:auto}.table-scroll{max-height:390px;overflow:auto}.weather-table{width:100%;border-collapse:collapse}.weather-table th{position:sticky;top:0;z-index:1;padding:11px 13px;background:#f0f7f7;color:#51616c;text-align:left;font-size:11px}.weather-table td{padding:11px 13px;border-bottom:1px solid #edf1f2;font-size:12px}.weather-table tbody tr{cursor:pointer}.weather-table tbody tr:hover{background:#f3fbfa}.weather-table td:nth-child(n+3),.weather-table th:nth-child(n+3){text-align:right}.status-pill{display:inline-block;min-width:72px;padding:4px 7px;border-radius:999px;text-align:center;font-size:10px;font-weight:600}.normal{background:#e9f6e7;color:#3a853b}.watch{background:#fff3d1;color:#8d6500}.warning{background:#ffeadf;color:#ad4705}.critical{background:#fde3eb;color:#a60437}
+.notice{padding:13px 15px;color:#65737d;font-size:11px}.notice strong{color:#3e4b55}.error-state{padding:40px;text-align:center;color:#a60437}
+.footer{padding:17px 24px;display:flex;justify-content:space-between;gap:20px;border-top:1px solid #e2ebed;color:#6d7a83;font-size:11px;background:rgba(255,255,255,.68)}.footer a{color:var(--teal-dark)}
+@media(max-width:1180px){.nav{display:none}.searchbox{width:36vw}.dashboard{grid-template-columns:1fr}.right-column{grid-template-columns:repeat(2,1fr)}.right-column .panel:first-child{grid-row:span 2}.map-wrap{height:520px}}
+@media(max-width:760px){body{background:#eef7f8}.app-shell{width:100%;margin:0;border:0;border-radius:0}.topbar{padding:10px 12px;flex-wrap:wrap;gap:10px}.brand img{width:52px}.brand strong{font-size:16px}.brand small{font-size:9px}.searchbox{order:3;width:100%}.sync{margin-left:auto}.main{padding:8px}.ticker{align-items:flex-start;flex-wrap:wrap}.ticker-time{margin-left:0}.source-link{margin-left:auto}.map-wrap{height:480px}.bottom-grid,.right-column{grid-template-columns:1fr}.detail-metrics{grid-template-columns:repeat(3,1fr)}.table-tools{flex-wrap:wrap}.table-tools input{width:100%}.table-tools select{margin-left:0;width:100%}.table-scroll{max-height:520px}.weather-table{min-width:650px}.footer{display:block}.footer span{display:block;margin-top:6px}}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    /* Unified website typography matching the supplied reference */
-    html,body,button,input,select,textarea,table{font-family:"Noto Sans Thai","Segoe UI",Tahoma,sans-serif!important}
-  </style>
+.news-section{margin-top:12px;padding:18px;border:1px solid rgba(25,94,105,.11);border-radius:18px;background:var(--panel);box-shadow:0 5px 18px rgba(25,68,78,.05)}
+.news-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:14px}.news-heading span{display:block;color:var(--teal-dark);font-size:11px;font-weight:700;letter-spacing:.1em}.news-heading h2{margin:3px 0 0;font-size:20px}.news-heading p{margin:0;color:var(--muted);font-size:12px}.news-heading a{padding:8px 12px;border-radius:10px;background:#e9f6f4;color:var(--teal-dark);font-size:12px;font-weight:600;text-decoration:none;white-space:nowrap}
+.news-tabs{display:flex;gap:7px;margin-bottom:14px;overflow-x:auto;padding-bottom:3px}.news-tabs button{padding:7px 11px;border:1px solid #dce6e8;border-radius:999px;background:#fff;color:#5d6b75;font-size:11px;white-space:nowrap;cursor:pointer}.news-tabs button.active{border-color:var(--teal);background:var(--teal);color:#fff}
+.news-featured{display:grid;grid-template-columns:minmax(280px,.9fr) minmax(0,1.1fr);min-height:285px;margin-bottom:12px;border:1px solid #e2e9eb;border-radius:15px;overflow:hidden;background:#f8fbfb}.news-featured-image{display:block;min-height:285px;background:linear-gradient(145deg,#d9f1f0,#e8eef7);overflow:hidden}.news-featured-image img{width:100%;height:100%;object-fit:cover}.news-featured-image.no-image{display:grid;place-items:center;color:var(--teal-dark);font-weight:600}.news-featured-copy{padding:24px;display:flex;flex-direction:column;justify-content:center}.news-meta{color:var(--teal-dark);font-size:11px;font-weight:700}.news-featured-copy h3{margin:9px 0 8px;font-size:21px;line-height:1.45}.news-featured-copy p{margin:0;color:#65737d;font-size:13px;line-height:1.65}.news-read{display:inline-block;margin-top:14px;color:var(--teal-dark);font-size:12px;font-weight:700;text-decoration:none}
+.news-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.news-card{min-width:0;border:1px solid #e3eaec;border-radius:14px;background:#fff;overflow:hidden}.news-card-image{display:block;height:155px;background:linear-gradient(145deg,#e0f3f2,#eef2f7);overflow:hidden}.news-card-image img{width:100%;height:100%;object-fit:cover}.news-card-image.no-image{display:grid;place-items:center;padding:15px;color:var(--teal-dark);font-size:12px;font-weight:600;text-align:center}.news-card-copy{padding:14px}.news-card-copy small{display:block;color:#7b8790;font-size:10px}.news-card-copy h3{margin:7px 0;font-size:14px;line-height:1.5}.news-card-copy p{margin:0;color:#687681;font-size:11px;line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.news-empty{grid-column:1/-1;padding:42px;text-align:center;color:#71808a}
+@media(max-width:980px){.news-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:650px){.news-section{padding:13px}.news-heading{display:block}.news-heading p{margin:5px 0 10px}.news-featured{grid-template-columns:1fr}.news-featured-image{min-height:210px}.news-featured-copy{padding:18px}.news-featured-copy h3{font-size:17px}.news-grid{grid-template-columns:1fr}}
 
-<style id="daily-situation-redesign-20260914-v2">
-body{background:#f5f7fa!important;color:#242b34!important}
-.situation-page{max-width:1880px;margin:auto;padding:24px 28px 44px}
-.situation-hero{min-height:190px;padding:30px 34px;display:flex;align-items:center;justify-content:space-between;gap:28px;border-radius:22px;background:linear-gradient(120deg,#351145 0%,#631a9d 58%,#8543ad 100%);color:#fff;box-shadow:0 14px 34px rgba(68,29,88,.20)}
-.situation-hero .eyebrow,.section-heading>div>span{display:block;color:#dcb9ed;font-size:12px!important;font-weight:600;letter-spacing:.12em}
-.situation-hero h1{margin:8px 0 7px;font-size:32px!important;color:#fff!important}
-.situation-hero p{max-width:920px;margin:0;color:#f1e9f4;font-size:16px!important}
-.overall-status{flex:0 0 280px;padding:18px 20px;border:1px solid rgba(255,255,255,.22);border-radius:16px;background:rgba(255,255,255,.12);backdrop-filter:blur(6px)}
-.overall-status small,.overall-status strong,.overall-status span{display:block;color:#fff}.overall-status small{font-size:13px!important}.overall-status strong{margin:4px 0;font-size:21px!important}.overall-status span{font-size:13px!important;color:#eadff0}.overall-status.alert{border-left:5px solid #ffcf33}
-.daily-kpis{margin:14px 0;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.daily-kpis article{min-height:118px;padding:18px;border:1px solid #e7eaee;border-radius:17px;background:#fff;box-shadow:0 5px 18px rgba(27,39,51,.07)}
-.daily-kpis span,.daily-kpis small{display:block}.daily-kpis span{font-size:14px!important;font-weight:500}.daily-kpis strong{display:block;margin:9px 0 4px;color:#631a9d;font-size:29px!important;line-height:1}.daily-kpis small{color:#737d88;font-size:12px!important}.daily-kpis .warning strong{color:#bf033b}
-.section-block{margin-top:14px;padding:20px;border:1px solid #e7eaee;border-radius:18px;background:#fff;box-shadow:0 5px 18px rgba(27,39,51,.06)}
-.section-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:15px}.section-heading>div>span{color:#631a9d}.section-heading h2{margin:3px 0 0!important}.section-heading>p{margin:0;color:#707a86;font-size:14px!important}.section-heading>a{padding:8px 13px;border-radius:18px;background:#f2eaf7;color:#631a9d!important;font-size:13px!important;font-weight:600;text-decoration:none}
-.situation-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.situation-card{min-height:190px;padding:20px;display:flex;flex-direction:column;border:1px solid #e8ebee;border-top:4px solid #3579c8;border-radius:15px;background:#fff;color:#242b34!important;text-decoration:none;transition:.2s}
-.situation-card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(28,39,51,.11)}.situation-card.fire{border-top-color:#bf033b}.situation-card.pm{border-top-color:#8a63b8}.situation-card.monitor{border-top-color:#0091cd}
-.system-code{color:#687481;font-size:11px!important;font-weight:700;letter-spacing:.09em}.situation-card h3{margin:10px 0 7px!important}.situation-card p{margin:0 0 14px;color:#65707d;font-size:14px!important}.situation-card b{margin-top:auto;color:#631a9d;font-size:13px}
-.content-grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(310px,.72fr);gap:14px}.content-grid>.section-block{height:100%}
-.new-news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.new-news-card{min-width:0;overflow:hidden;border:1px solid #e7eaee;border-radius:14px;background:#fff}.news-thumb{height:180px;display:block;overflow:hidden;background:#eceff2}.news-thumb img{width:100%;height:100%;object-fit:cover}.news-thumb.fallback{display:grid;place-items:center;background:linear-gradient(135deg,#f1e8f6,#e6edf7);color:#631a9d!important;font-weight:600;text-decoration:none}.new-news-card>div{padding:15px}.new-news-card h3{margin:7px 0!important}.new-news-card p{margin:0;color:#65707d;font-size:14px!important}.read-news{display:inline-block;margin-top:12px;color:#631a9d!important;font-size:13px!important;font-weight:600}.loading-news{grid-column:1/-1;padding:45px;text-align:center;color:#737d88}
-.source-list{display:grid;gap:8px}.source-list a{padding:11px;display:flex;align-items:center;gap:10px;border:1px solid #e8ebee;border-radius:11px;color:#29313a!important;text-decoration:none}.source-list i{width:10px;height:10px;flex:0 0 10px;border-radius:50%;background:#d8a52b}.source-list i.ok{background:#4aa363}.source-list b,.source-list small{display:block}.source-list b{font-size:14px}.source-list small{color:#737d88;font-size:12px!important}.data-notice{margin:14px 0 0;padding:12px;border-left:3px solid #631a9d;background:#f8f4fa;color:#596470;font-size:13px!important}
-.map-report-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(380px,.72fr);gap:14px}.situation-map,.line-report{height:620px}.situation-map{display:flex;flex-direction:column}.situation-map iframe{width:100%;flex:1;border:0;border-radius:12px;background:#e8edf1}
-.line-report{display:flex;flex-direction:column}.line-summary{flex:1;padding:20px;border:1px solid #e1e5e9;border-radius:14px;background:#f8fafb;color:#25303b;font-size:17px!important;line-height:1.8!important;white-space:pre-wrap}.report-actions{margin-top:13px;display:grid;grid-template-columns:1fr 1fr;gap:8px}.report-actions button{padding:11px 14px;border:0;border-radius:22px;background:#631a9d;color:#fff;font-size:14px!important;font-weight:600;cursor:pointer}.report-actions button.secondary{background:#2f6fed}.report-actions button:disabled{opacity:.55}.line-report>small{margin-top:9px;color:#6e7884;font-size:12px!important;text-align:center}
-@media(max-width:1200px){.situation-cards{grid-template-columns:1fr 1fr}.content-grid,.map-report-grid{grid-template-columns:1fr}.situation-map{height:650px}.line-report{height:auto;min-height:540px}}
-@media(max-width:800px){.situation-page{padding:12px}.situation-hero{display:block;padding:23px}.situation-hero h1{font-size:25px!important}.overall-status{margin-top:18px}.daily-kpis{grid-template-columns:1fr 1fr}.new-news-grid{grid-template-columns:1fr}.news-thumb{height:220px}}
-@media(max-width:520px){.daily-kpis,.situation-cards{grid-template-columns:1fr}.section-block{padding:14px}.section-heading{display:block}.section-heading>p{margin-top:5px}.situation-map{height:560px}.report-actions{grid-template-columns:1fr}.line-summary{font-size:15px!important}}
+/* Original IEAT EMCC top navigation retained on the homepage */
+body{padding-top:0}.bar{position:sticky;top:0;z-index:2000;width:100%;min-height:70px;padding:0 32px;background:#fff;border-top:1px solid #e8e8e8;border-bottom:1px solid #dfe3e7;box-shadow:0 3px 8px rgba(31,41,55,.12)}
+.bar-in{width:100%;min-height:70px;margin:0;display:flex;align-items:center;gap:18px}.brand-link{display:flex;align-items:center;gap:15px;min-width:540px;color:inherit;text-decoration:none}.brand-logo{width:82px;height:48px;flex:0 0 82px;object-fit:contain}.brand-copy{min-width:0}.brand-copy strong{display:block;color:#111;font-size:20px;line-height:1.35;font-weight:600}.brand-copy span{display:block;margin-top:2px;color:#111;font-size:12px;line-height:1.35;font-weight:400}.header-status{margin-left:auto;padding-left:20px;border-left:1px solid #eceff2;display:flex;align-items:center;gap:8px;color:#40454b;white-space:nowrap}.status-icon{color:#e7a51b;font-size:16px}.header-status b,.header-status small{font-size:12px;font-weight:400}.header-status small{margin-left:6px;color:#111}.header-actions{display:flex;align-items:center;gap:8px}.header-btn{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:8px 16px;border:1px solid #d9c8e5;border-radius:20px;background:#fff;color:#631a9d;font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap}.header-btn.active{background:#f4eef8}.header-btn.hub{border-color:#306bec;background:#306bec;color:#fff}.app-shell{margin-top:14px}
+@media(max-width:1050px){.bar{padding:0 16px}.brand-link{min-width:0;flex:1}.brand-logo{width:68px;flex-basis:68px}.brand-copy strong{font-size:17px}.brand-copy span{font-size:10px}.header-status{display:none}.header-btn{padding:8px 11px}}
+@media(max-width:700px){.bar{padding:6px 10px}.bar-in{min-height:58px;gap:8px}.brand-logo{width:50px;height:40px;flex-basis:50px}.brand-copy strong{font-size:14px}.brand-copy span{font-size:8px}.header-actions{gap:4px}.header-btn{min-height:32px;padding:6px 8px;font-size:10px}.header-btn:not(.active):not(.hub){display:none}.app-shell{margin-top:0}}
 </style>
-
-<style id="daily-compact-four-systems-20260914-v3">
-body{overflow:hidden!important;background:#f3f5f7!important}
-.compact-dashboard{height:calc(100vh - 70px);min-height:700px;padding:12px 18px 16px;display:grid;grid-template-rows:74px 76px minmax(0,1fr);gap:10px;color:#242b34}
-.compact-title{padding:0 18px;display:flex;align-items:center;justify-content:space-between;gap:20px;border:1px solid #e5e8ec;border-radius:15px;background:#fff;box-shadow:0 4px 14px rgba(28,39,51,.06)}
-.compact-title>div:first-child>span,.compact-panel-head>div>span{display:block;color:#631a9d;font-size:10px!important;font-weight:700;letter-spacing:.1em}
-.compact-title h1{margin:2px 0 0!important;color:#252c35!important;font-size:24px!important}
-.compact-title .overall-status{min-width:275px;padding:9px 13px;border:0;border-left:4px solid #598c14;border-radius:9px;background:#f5f8f3}
-.compact-title .overall-status.alert{border-left-color:#bf033b;background:#fff3f5}.compact-title .overall-status small,.compact-title .overall-status strong,.compact-title .overall-status span{display:inline;color:#28312b}.compact-title .overall-status small{font-size:11px!important}.compact-title .overall-status strong{display:block;margin:0;font-size:16px!important}.compact-title .overall-status span{font-size:11px!important;color:#69736d}
-.compact-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.compact-kpis article{padding:11px 15px;display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto;align-items:center;border:1px solid #e5e8ec;border-radius:13px;background:#fff;box-shadow:0 4px 13px rgba(28,39,51,.05)}.compact-kpis span{font-size:13px!important;font-weight:500}.compact-kpis strong{grid-row:1/3;grid-column:2;align-self:center;color:#631a9d;font-size:28px!important;line-height:1!important}.compact-kpis small{color:#7a838e;font-size:11px!important}.compact-kpis .warning strong{color:#bf033b}
-.compact-content{min-height:0;display:grid;grid-template-columns:minmax(540px,1.45fr) minmax(300px,.72fr) minmax(315px,.70fr);gap:10px}
-.compact-panel{min-width:0;min-height:0;overflow:hidden;border:1px solid #e5e8ec;border-radius:15px;background:#fff;box-shadow:0 4px 14px rgba(28,39,51,.06)}
-.compact-panel-head{height:60px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid #eaedf0}.compact-panel-head h2{margin:2px 0 0!important;font-size:18px!important}.compact-panel-head>p{margin:0;color:#7a838e;font-size:12px!important}.compact-panel-head>strong,.compact-panel-head>a{padding:6px 9px;border-radius:13px;background:#f2eaf7;color:#631a9d!important;font-size:11px!important;text-decoration:none}
-.systems-panel{display:flex;flex-direction:column}.four-systems{flex:1;min-height:0;padding:10px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:10px}.system-card{min-height:0;padding:18px;display:flex;flex-direction:column;border:1px solid #e7eaed;border-left:6px solid #3479ca;border-radius:13px;background:linear-gradient(135deg,#fff,#f7fbff);color:#252d36!important;text-decoration:none;transition:.18s}.system-card:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(29,40,52,.10)}.system-card.fire{border-left-color:#bf033b;background:linear-gradient(135deg,#fff,#fff7f8)}.system-card.pm{border-left-color:#8a63b8;background:linear-gradient(135deg,#fff,#faf7fc)}.system-card.monitor{border-left-color:#0091cd;background:linear-gradient(135deg,#fff,#f3fbfe)}.system-card .system-code{color:#66727e;font-size:10px!important;font-weight:700;letter-spacing:.08em}.system-card h3{margin:9px 0 5px!important;font-size:19px!important}.system-card p{margin:0;color:#5f6a76;font-size:14px!important;line-height:1.55!important}.system-card b{margin-top:auto;padding-top:8px;color:#631a9d;font-size:13px!important}.system-card i{font-style:normal}
-.news-panel{display:flex;flex-direction:column}.compact-news{flex:1;min-height:0;padding:8px;display:grid;gap:7px;overflow:auto}.new-news-card{display:grid!important;grid-template-columns:76px 1fr;min-height:0;border:1px solid #e8ebee!important;border-radius:10px!important;overflow:hidden}.new-news-card .news-thumb{width:76px;height:100%!important;min-height:105px}.new-news-card>div{padding:9px!important}.new-news-card .news-source{font-size:10px!important}.new-news-card h3{margin:3px 0!important;font-size:13px!important;line-height:1.4!important;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.new-news-card p{font-size:11px!important;line-height:1.4!important;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.new-news-card .read-news{margin-top:5px;font-size:10px!important}.panel-link{margin:0 10px 9px;padding:8px;border-radius:16px;background:#f4f1f6;color:#631a9d!important;font-size:11px!important;text-align:center;text-decoration:none}
-.compact-side{min-height:0;display:grid;grid-template-rows:40% 27% minmax(0,33%);gap:10px}.mini-map,.source-compact,.line-compact{display:flex;flex-direction:column}.mini-map .compact-panel-head,.source-compact .compact-panel-head,.line-compact .compact-panel-head{height:48px;padding:7px 10px}.mini-map .compact-panel-head h2,.source-compact .compact-panel-head h2,.line-compact .compact-panel-head h2{font-size:15px!important}.mini-map iframe{width:100%;flex:1;border:0;background:#e9edf1}
-.source-compact .source-list{padding:7px;display:grid;grid-template-columns:1fr 1fr;gap:5px;overflow:auto}.source-compact .source-list a{padding:6px!important;gap:6px!important;border-radius:8px!important}.source-compact .source-list i{width:7px;height:7px;flex-basis:7px}.source-compact .source-list b{font-size:10px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.source-compact .source-list small{font-size:9px!important}.source-compact .data-notice{display:none}
-.line-compact .line-summary{flex:1;min-height:0;margin:7px;padding:9px!important;overflow:auto;border-radius:9px!important;font-size:11px!important;line-height:1.45!important}.line-compact .report-actions{margin:0 7px 5px;display:grid;grid-template-columns:1fr 1fr;gap:5px}.line-compact .report-actions button{padding:6px 8px!important;font-size:11px!important}.line-compact>small{margin:0 7px 6px;font-size:9px!important}
-@media(max-width:1250px){body{overflow:auto!important}.compact-dashboard{height:auto;min-height:0;grid-template-rows:auto auto auto}.compact-content{grid-template-columns:1fr 1fr}.compact-side{grid-column:1/-1;grid-template-columns:1fr 1fr 1fr;grid-template-rows:420px}.systems-panel{min-height:620px}.news-panel{min-height:620px}}
-@media(max-width:800px){.compact-dashboard{padding:8px}.compact-title{display:block;padding:12px}.compact-title .overall-status{margin-top:9px}.compact-kpis{grid-template-columns:1fr 1fr}.compact-content{grid-template-columns:1fr}.systems-panel,.news-panel{min-height:0}.four-systems{grid-template-columns:1fr;grid-template-rows:none}.system-card{min-height:190px}.compact-side{grid-column:auto;display:grid;grid-template-columns:1fr;grid-template-rows:480px auto auto}.compact-panel-head>p{display:none}}
-@media(max-width:480px){.compact-kpis{grid-template-columns:1fr}.compact-title h1{font-size:20px!important}}
-</style>
-
-<style id="daily-official-news-portal-20260914-v4">
-body{overflow:auto!important;background:#f5f6f8!important;color:#252c35!important}.news-portal{max-width:1540px;margin:auto;padding:22px 28px 48px}
-.portal-heading{padding:26px 30px;display:flex;align-items:center;justify-content:space-between;gap:30px;border-bottom:4px solid #631a9d;background:#fff}.portal-heading>div:first-child>span{color:#631a9d;font-size:11px!important;font-weight:700;letter-spacing:.13em}.portal-heading h1{margin:5px 0!important;font-size:30px!important}.portal-heading p{margin:0;color:#68727e;font-size:15px!important}.portal-update{min-width:220px;padding-left:20px;border-left:1px solid #e1e4e8;text-align:right}.portal-update small,.portal-update strong,.portal-update span{display:block}.portal-update small{color:#7a838e;font-size:11px!important}.portal-update strong{margin:3px 0;color:#631a9d;font-size:15px!important}.portal-update span{font-size:13px!important}.portal-update span b{font-size:22px;color:#252c35}
-.news-toolbar{margin:12px 0;padding:10px 12px;display:flex;align-items:center;gap:14px;border:1px solid #e3e6ea;background:#fff}.category-tabs{flex:1;display:flex;gap:5px;overflow-x:auto}.category-tabs button{padding:8px 12px;border:0;border-radius:17px;background:#f1f3f5;color:#5e6873;font-size:12px!important;white-space:nowrap;cursor:pointer}.category-tabs button.active{background:#631a9d;color:#fff}.news-search{width:310px;position:relative}.news-search>span{position:absolute;left:12px;top:9px;color:#7b8490;font-size:11px!important}.news-search input{width:100%;height:36px;padding:8px 12px 8px 52px;border:1px solid #dce0e5;border-radius:18px;background:#fafbfc;font-size:12px!important}
-.portal-layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:14px}.news-main{min-width:0}.featured-news{min-height:335px;display:grid;grid-template-columns:55% 45%;overflow:hidden;border:1px solid #e3e6ea;background:#fff}.featured-image{min-height:335px;display:block;overflow:hidden;background:#e7eaf0}.featured-image img{width:100%;height:100%;object-fit:cover}.featured-image.no-image{display:grid;place-items:center;background:linear-gradient(135deg,#321042,#79329a);color:#fff;font-size:22px;font-weight:600}.featured-copy{padding:30px;display:flex;flex-direction:column;justify-content:center}.featured-copy>span{color:#631a9d;font-size:11px!important;font-weight:700}.featured-copy h2{margin:10px 0!important;font-size:25px!important}.featured-copy p{margin:0;color:#626d79;font-size:15px!important;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}.featured-copy>a{align-self:flex-start;margin-top:18px;padding:9px 15px;border-radius:18px;background:#631a9d;color:#fff!important;font-size:12px!important;font-weight:600;text-decoration:none}.featured-placeholder{grid-column:1/-1;display:grid;place-items:center;color:#737d88}
-.news-list-head{margin:22px 0 10px;display:flex;align-items:flex-end;justify-content:space-between}.news-list-head span{color:#631a9d;font-size:11px!important;font-weight:700;letter-spacing:.1em}.news-list-head h2{margin:3px 0 0!important}.news-list-head>b{color:#68727e;font-size:12px}
-.all-news-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.portal-news-card{min-width:0;display:grid;grid-template-columns:145px 1fr;overflow:hidden;border:1px solid #e3e6ea;background:#fff}.portal-thumb{min-height:180px;display:block;overflow:hidden;background:#e7eaf0}.portal-thumb img{width:100%;height:100%;object-fit:cover}.portal-thumb.no-image{display:grid;place-items:center;padding:10px;background:#eee8f2;color:#631a9d!important;font-size:12px!important;font-weight:600;text-align:center;text-decoration:none}.portal-news-card>div{padding:14px}.portal-category{display:inline-block;margin-bottom:5px;padding:3px 7px;border-radius:10px;background:#f0e7f5;color:#631a9d;font-size:10px!important;font-weight:600}.portal-news-card small{display:block;color:#7b8490;font-size:10px!important}.portal-news-card h3{margin:5px 0!important;font-size:16px!important;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.portal-news-card p{margin:0;color:#66717d;font-size:12px!important;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.portal-news-card .read-news{display:inline-block;margin-top:8px;color:#631a9d!important;font-size:11px!important;font-weight:600}
-.portal-sidebar{display:grid;align-content:start;gap:10px}.side-card{padding:16px;border:1px solid #e3e6ea;background:#fff}.side-card header{margin-bottom:12px}.side-card header span{color:#631a9d;font-size:10px!important;font-weight:700;letter-spacing:.1em}.side-card header h2{margin:2px 0!important;font-size:18px!important}.station-brief{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.station-brief div{padding:10px 5px;background:#f5f7f9;text-align:center}.station-brief span,.station-brief strong{display:block}.station-brief span{font-size:10px!important}.station-brief strong{margin-top:3px;color:#2875c8;font-size:22px!important}.station-brief .alert strong{color:#bf033b}.side-card>p{color:#65707c;font-size:12px!important}.side-card>a{color:#631a9d!important;font-size:12px!important;font-weight:600}.source-list{display:grid;gap:5px;max-height:300px;overflow:auto}.source-list a{padding:8px!important;display:flex;align-items:center;gap:8px;border:1px solid #eaedf0!important;color:#29313a!important;text-decoration:none}.source-list i{width:8px;height:8px;flex:0 0 8px;border-radius:50%;background:#d9a52b}.source-list i.ok{background:#4ba365}.source-list b,.source-list small{display:block}.source-list b{font-size:11px!important}.source-list small{color:#7a838e;font-size:9px!important}.data-notice{margin:10px 0 0!important;padding:9px;border-left:3px solid #631a9d;background:#f7f4f9;font-size:10px!important}.quick-links>a{padding:10px 0;display:flex;justify-content:space-between;border-top:1px solid #eceef1;color:#38424d!important;font-size:12px!important;text-decoration:none}.quick-links>a b{color:#631a9d}.empty-news,.loading-news{grid-column:1/-1;padding:45px;border:1px solid #e3e6ea;background:#fff;color:#737d88;text-align:center}
-@media(max-width:1100px){.portal-layout{grid-template-columns:1fr}.portal-sidebar{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:760px){.news-portal{padding:10px}.portal-heading{display:block;padding:18px}.portal-heading h1{font-size:23px!important}.portal-update{margin-top:15px;padding:10px 0 0;border-left:0;border-top:1px solid #e1e4e8;text-align:left}.news-toolbar{display:block}.news-search{width:100%;margin-top:8px}.featured-news{grid-template-columns:1fr}.featured-image{min-height:230px}.featured-copy{padding:20px}.all-news-grid,.portal-sidebar{grid-template-columns:1fr}.portal-news-card{grid-template-columns:115px 1fr}}
-</style>
-<style id="daily-fullscreen-image-20260914-v2">
-html,body{width:100%;max-width:none;overflow-x:hidden}
-.news-portal{width:100%!important;max-width:none!important;margin:0!important;padding:0 28px 48px!important}
-.image-hero{position:relative;width:100%;overflow:hidden;background:#201128}
-.image-hero img{display:block;width:100%;height:auto;max-height:760px;object-fit:cover;object-position:center}
-.image-hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 62%,rgba(20,8,27,.58) 100%)}
-.portal-heading{margin-top:20px}
-@media(max-width:760px){
- .news-portal{padding:0 10px 32px!important}
- .image-hero img{height:52vh;min-height:330px;object-fit:cover;object-position:center}
- .portal-heading{margin-top:10px}
-}
-</style>
-
-<style id="homepage-live-data-20260915">
-.live-data-panel{margin:16px 0;padding:20px;border:1px solid #e1e5ea;border-radius:18px;background:#fff;box-shadow:0 5px 18px rgba(27,39,51,.06)}
-.live-data-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:14px}
-.live-data-head span{display:block;color:#631a9d;font-size:12px!important;font-weight:600;letter-spacing:.1em}
-.live-data-head h2{margin:3px 0 0!important;color:#242b34}
-.live-data-head p{margin:0;color:#687481;font-size:14px!important}
-.live-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-.live-kpi{min-height:112px;padding:16px;border:1px solid #e6e9ed;border-radius:14px;background:#f8fafc}
-.live-kpi span,.live-kpi small{display:block}.live-kpi span{color:#687481;font-size:13px!important}.live-kpi strong{display:block;margin:7px 0 3px;color:#631a9d;font-size:27px!important;line-height:1.1}.live-kpi small{color:#7b8590;font-size:12px!important}
-.live-kpi.rain strong{color:#306bec}.live-kpi.alert strong{color:#bf033b}
-.live-data-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(280px,.75fr);gap:14px;margin-top:14px}
-.live-table-wrap,.live-source-card{overflow:hidden;border:1px solid #e6e9ed;border-radius:14px}
-.live-table-title{display:flex;justify-content:space-between;gap:12px;padding:13px 15px;background:#f4f0f7;color:#4b326e}.live-table-title b{font-size:14px}.live-table-title small{font-size:12px!important;color:#6d6175}
-.live-weather-table{width:100%;border-collapse:collapse}.live-weather-table th,.live-weather-table td{padding:10px 12px;border-bottom:1px solid #edf0f3;text-align:left;font-size:13px!important}.live-weather-table th{background:#fafbfc;color:#56616e;font-weight:600}.live-weather-table td:nth-child(n+3),.live-weather-table th:nth-child(n+3){text-align:right}.live-weather-table tbody tr:last-child td{border-bottom:0}
-.live-source-card{padding:16px}.live-source-card h3{margin:0 0 8px!important}.live-source-card p{margin:0 0 12px;color:#65707d;font-size:13px!important}.live-source-card a{display:block;margin-top:8px;color:#631a9d!important;font-size:13px!important;font-weight:600;text-decoration:none}.live-source-status{padding:11px 12px;border-radius:10px;background:#f5f7f9;color:#3f4a56;font-size:13px}.live-source-status.ok{background:#edf5e4;color:#48720f}.live-source-status.error{background:#fdecef;color:#a70435}
-@media(max-width:980px){.live-kpis{grid-template-columns:repeat(2,1fr)}.live-data-grid{grid-template-columns:1fr}}
-@media(max-width:600px){.live-data-panel{padding:14px}.live-data-head{display:block}.live-data-head p{margin-top:7px}.live-kpis{grid-template-columns:1fr 1fr}.live-kpi{min-height:100px;padding:13px}.live-kpi strong{font-size:23px!important}.live-table-wrap{overflow-x:auto}.live-weather-table{min-width:600px}}
-</style>
-
 </head>
-  <body>
-    <header class="bar">
-      <div class="bar-in">
-        <a class="brand-link" href="https://oc.ieat.go.th/th" target="_blank" rel="noopener">
-          <img class="brand-logo" src="./assets/TH-Vertical.png" alt="โลโก้การนิคมอุตสาหกรรมแห่งประเทศไทย">
-          <span class="brand-copy"><strong>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย</strong><span>Environmental Monitoring and Control Center: EMCC</span></span>
-        </a>
-        <div class="header-status" aria-label="วันและเวลาปัจจุบัน">
-          <span class="status-icon">☀</span>
-          <span><b id="headerDate">กำลังตรวจสอบวันที่</b><small id="headerTime">เวลา --:-- น.</small></span>
-        </div>
-        <div class="actions">
-          <a class="btn contact-btn" href="./weather-dashboard.html">สภาพอากาศ</a><a class="btn contact-btn" href="./information.html">ข้อมูล</a><a class="btn contact-btn" href="./contacts.html">ติดต่อ</a><a class="btn primary hub-btn" href="./hub.html">เข้าสู่หน้า Hub</a>
-        </div>
-      </div>
-    </header>
-    <section class="image-hero" aria-label="ภาพรวมระบบเฝ้าระวังสิ่งแวดล้อมและความปลอดภัย">
-      <img src="./assets/daily-news-hero-composite.webp" alt="เจ้าหน้าที่ศูนย์เฝ้าระวังวิเคราะห์สถานการณ์สิ่งแวดล้อมและภัยพิบัติบนแผนที่ประเทศไทย">
-    </section>
-    <main class="news-portal">
-      <section class="portal-heading">
-        <div><span>IEAT EMCC · NEWS CENTER</span><h1>ข่าวสารและสถานการณ์ที่เกี่ยวข้อง</h1><p>รวบรวมข่าวจากหน่วยงานทางการด้านนิคมอุตสาหกรรม สิ่งแวดล้อม และภัยพิบัติ อัปเดตอัตโนมัติทุกวัน</p></div>
-        <div class="portal-update"><small>อัปเดตล่าสุด</small><strong id="reportUpdated">กำลังโหลดข้อมูล…</strong><span><b id="newsTotal">–</b> ข่าวในระบบ</span></div>
-      </section>
+<body>
+<header class="bar">
+ <div class="bar-in">
+  <a class="brand-link" href="https://oc.ieat.go.th/th" target="_blank" rel="noopener">
+   <img class="brand-logo" src="./assets/TH-Vertical.png" alt="โลโก้การนิคมอุตสาหกรรมแห่งประเทศไทย">
+   <span class="brand-copy"><strong>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย</strong><span>Environmental Monitoring and Control Center: EMCC</span></span>
+  </a>
+  <div class="header-status" aria-label="วันและเวลาปัจจุบัน"><span class="status-icon">☀</span><span><b id="headerDate">กำลังตรวจสอบวันที่</b><small id="headerTime">เวลา --:-- น.</small></span></div>
+  <nav class="header-actions">
+   <a class="header-btn active" href="#overview">สภาพอากาศ</a>
+   <a class="header-btn" href="./information.html">ข้อมูล</a>
+   <a class="header-btn" href="./contacts.html">ติดต่อ</a>
+   <a class="header-btn hub" href="./hub.html">เข้าสู่หน้า Hub</a>
+  </nav>
+ </div>
+</header><div class="app-shell">
+<main class="main" id="overview">
+ <section class="ticker"><span class="ticker-label">LIVE UPDATE</span><strong class="ticker-text" id="tickerText">กำลังประมวลผลสถานการณ์อากาศล่าสุดทั่วประเทศ</strong><span class="ticker-time" id="tickerTime">–</span><span class="sync" id="syncState"><i class="sync-dot"></i><span id="syncText">กำลังเชื่อมต่อข้อมูล</span></span><a class="source-link" href="https://nawakonnakhonchai-wq.github.io/temp_3_hr/weather_data.geojson" target="_blank" rel="noopener">แหล่งข้อมูล ↗</a></section>
+ <div class="dashboard">
+  <div class="left-column">
+   <section class="panel" id="mapPanel">
+    <header class="panel-head"><div><h2>แผนที่สถานีตรวจวัดสภาพอากาศ</h2><p>เลือกจุดบนแผนที่เพื่อดูรายละเอียดสถานี</p></div><div class="panel-actions"><button class="ghost-btn active" data-mode="rainfall_24hr">ฝน 24 ชม.</button><button class="ghost-btn" data-mode="temp">อุณหภูมิ</button></div></header>
+    <div class="map-wrap"><div id="map"></div><div class="map-badge">พื้นที่เข้าเกณฑ์เฝ้าระวัง <b id="mapAlertCount">–</b> สถานี</div><div class="legend"><span><i style="background:#42a846"></i>ปกติ</span><span><i style="background:#ffc719"></i>เฝ้าระวัง</span><span><i style="background:#ff6908"></i>ฝนหนัก</span><span><i style="background:#bf033b"></i>วิกฤต</span></div><div class="map-loading" id="mapLoading">กำลังโหลดข้อมูลสถานีทั่วประเทศ…</div></div>
+   </section>
+   <div class="bottom-grid">
+    <section class="panel extremes"><header class="panel-head" style="padding:0 0 10px;min-height:auto"><div><h3>สถานการณ์เด่นทั่วประเทศ</h3><p>ประเมินจากข้อมูลล่าสุด</p></div></header><div class="alert-box" id="alertBox">กำลังวิเคราะห์พื้นที่ที่ต้องเฝ้าระวัง</div><div class="metric-list"><div class="metric-row"><span>ความเร็วลมสูงสุด</span><b id="maxWind">–</b></div><div class="metric-row"><span>ฝนสะสมสูงสุด</span><b id="maxRain">–</b></div><div class="metric-row"><span>อุณหภูมิสูงสุด</span><b id="maxTemp">–</b></div><div class="metric-row"><span>จำนวนสถานีทั้งหมด</span><b id="stationCount">–</b></div></div><button class="report-btn" id="scrollTable">ดูรายละเอียดทุกสถานี</button></section>
+    <section class="panel"><header class="panel-head"><div><h3>ภาพรวมฝนสะสม 24 ชั่วโมง</h3><p>10 สถานีที่มีปริมาณฝนสูงสุด</p></div><span id="rainTotalLabel"></span></header><div class="rain-chart"><div class="bars" id="rainBars"></div></div></section>
+   </div>
+  </div>
+  <aside class="right-column">
+   <section class="panel detail"><header class="panel-head" style="padding:0 0 13px;min-height:auto"><div><h3>รายละเอียดสถานี</h3><p id="localTime">เวลาประเทศไทย –</p></div></header><div class="detail-top"><div class="weather-icon" id="weatherIcon">🌦️</div><div class="temperature" id="detailTemp">–<small>°C</small></div><div class="condition"><span>สถานการณ์</span><b id="detailCondition">รอข้อมูล</b></div></div><h2 class="station-name" id="detailName">กำลังเลือกสถานีล่าสุด</h2><div class="station-location" id="detailProvince">–</div><div class="detail-metrics"><div><span>ฝนล่าสุด</span><b id="detailRain">–</b></div><div><span>ฝน 24 ชม.</span><b id="detailRain24">–</b></div><div><span>ความเร็วลม</span><b id="detailWind">–</b></div></div><div class="detail-metrics"><div><span>ทิศทางลม</span><b id="detailDirection">–</b></div><div><span>ละติจูด</span><b id="detailLat">–</b></div><div><span>ลองจิจูด</span><b id="detailLng">–</b></div></div></section>
+   <section class="panel"><header class="panel-head"><div><h3>สถานีฝนสูงสุด</h3><p>คลิกเพื่อดูตำแหน่งบนแผนที่</p></div><span class="status-pill watch">24 ชม.</span></header><div class="ranking" id="ranking"><div class="notice">กำลังจัดอันดับข้อมูล</div></div></section>
+   <section class="panel"><header class="panel-head"><div><h3>หลักเกณฑ์การแสดงสถานะ</h3><p>ปริมาณฝนสะสม 24 ชั่วโมง</p></div></header><div class="notice"><strong>ปกติ</strong> น้อยกว่า 35 มม. · <strong>เฝ้าระวัง</strong> 35–59.9 มม. · <strong>ฝนหนัก</strong> 60–89.9 มม. · <strong>วิกฤต</strong> ตั้งแต่ 90 มม. ขึ้นไป<br><br>เป็นการคัดกรองข้อมูลเบื้องต้นเพื่อสนับสนุนการเฝ้าระวัง ไม่ใช่ประกาศเตือนภัยอย่างเป็นทางการ</div></section>
+  </aside>
+ </div>
+ <section class="panel table-panel" id="stationTable">
+  <header class="panel-head"><div><h2>ข้อมูลสถานีตรวจวัดทั่วประเทศ</h2><p>ค้นหา กรอง และเรียงตามปริมาณฝนสะสม</p></div><span id="visibleRows">0 รายการ</span></header>
+  <div class="table-tools"><input id="tableSearch" type="search" placeholder="ค้นหาชื่อสถานีหรือจังหวัด"><select id="statusFilter"><option value="all">ทุกสถานะ</option><option value="critical">วิกฤต</option><option value="warning">ฝนหนัก</option><option value="watch">เฝ้าระวัง</option><option value="normal">ปกติ</option></select></div>
+  <div class="table-scroll"><table class="weather-table"><thead><tr><th>สถานี</th><th>จังหวัด</th><th>อุณหภูมิ</th><th>ฝนล่าสุด</th><th>ฝนสะสม 24 ชม.</th><th>ความเร็วลม</th><th>ทิศทางลม</th><th>สถานะ</th></tr></thead><tbody id="stationRows"><tr><td colspan="8">กำลังโหลดข้อมูล…</td></tr></tbody></table></div>
+ </section>
 
-      <section class="live-data-panel" aria-labelledby="liveDataTitle">
-        <header class="live-data-head">
-          <div><span>LIVE SITUATION DATA</span><h2 id="liveDataTitle">ข้อมูลสถานการณ์ล่าสุด</h2></div>
-          <p id="weatherUpdated">กำลังเรียกข้อมูลสภาพอากาศล่าสุด…</p>
-        </header>
-        <div class="live-kpis">
-          <article class="live-kpi"><span>สถานีอากาศทั้งหมด</span><strong id="weatherStationCount">–</strong><small>สถานีทั่วประเทศ</small></article>
-          <article class="live-kpi rain"><span>สถานีที่ตรวจพบฝน</span><strong id="rainingStationCount">–</strong><small>ค่าฝนล่าสุดมากกว่า 0 มม.</small></article>
-          <article class="live-kpi alert"><span>ฝนสะสม 24 ชม. สูงสุด</span><strong id="maxRain24">–</strong><small id="maxRainStation">กำลังประมวลผล</small></article>
-          <article class="live-kpi"><span>ข้อมูลพื้นที่จาก ArcGIS</span><strong id="arcgisFeatureCount">–</strong><small id="arcgisLayerName">กำลังเชื่อมโยง Layer</small></article>
-        </div>
-        <div class="live-data-grid">
-          <div class="live-table-wrap">
-            <div class="live-table-title"><b>สถานีที่มีฝนสะสม 24 ชั่วโมงสูงสุด</b><small>เรียงจากค่ามากไปน้อย</small></div>
-            <table class="live-weather-table">
-              <thead><tr><th>สถานี</th><th>จังหวัด</th><th>อุณหภูมิ</th><th>ฝนล่าสุด</th><th>ฝนสะสม 24 ชม.</th></tr></thead>
-              <tbody id="weatherRows"><tr><td colspan="5">กำลังโหลดข้อมูล…</td></tr></tbody>
-            </table>
-          </div>
-          <aside class="live-source-card">
-            <h3>แหล่งข้อมูลที่ใช้ในหน้าแรก</h3>
-            <p>หน้าเว็บเรียกข้อมูลล่าสุดจากแหล่งต้นทางโดยตรงทุกครั้งที่เปิดหน้า</p>
-            <div class="live-source-status" id="liveSourceStatus">กำลังตรวจสอบการเชื่อมโยงข้อมูล</div>
-            <a href="https://nawakonnakhonchai-wq.github.io/temp_3_hr/weather_data.geojson" target="_blank" rel="noopener">ข้อมูลสภาพอากาศ 3 ชั่วโมง →</a>
-            <a href="https://ieat.maps.arcgis.com/home/item.html?id=40825fa0e23044deb6ee9c075e50c657&sublayer=0#overview" target="_blank" rel="noopener">ข้อมูลพื้นที่ ArcGIS กนอ. →</a>
-            <a href="https://ieat.maps.arcgis.com/apps/dashboards/524fcc0f90fd4725aa8f96e489c397f3" target="_blank" rel="noopener">เปิด Dashboard ต้นแบบ →</a>
-          </aside>
-        </div>
-      </section>
+ <section class="news-section" id="relatedNews" aria-labelledby="relatedNewsTitle">
+  <header class="news-heading">
+   <div><span>IEAT EMCC · NEWS CENTER</span><h2 id="relatedNewsTitle">ข่าวสารและสถานการณ์ที่เกี่ยวข้อง</h2><p>รวบรวมข่าวจากหน่วยงานทางการด้านสภาพอากาศ สิ่งแวดล้อม และภัยพิบัติ</p></div>
+   <a href="./daily-situation.html">ดูข่าวทั้งหมด →</a>
+  </header>
+  <div class="news-tabs" id="weatherNewsTabs"><button class="active" data-category="ทั้งหมด">ข่าวทั้งหมด</button></div>
+  <article class="news-featured" id="weatherFeaturedNews"><div class="news-empty">กำลังโหลดข่าวล่าสุด…</div></article>
+  <div class="news-grid" id="weatherNewsGrid"><div class="news-empty">กำลังรวบรวมข่าวและประกาศ…</div></div>
+ </section>
 
-      <section class="news-toolbar">
-        <div class="category-tabs" id="categoryTabs"><button class="active" data-category="ทั้งหมด">ข่าวทั้งหมด</button></div>
-        <label class="news-search"><span>ค้นหา</span><input id="newsSearch" type="search" placeholder="ค้นหาข่าว แหล่งข่าว หรือคำสำคัญ"></label>
-      </section>
-      <div class="portal-layout">
-        <section class="news-main">
-          <article class="featured-news" id="featuredNews"><div class="featured-placeholder">กำลังเลือกข่าวเด่นล่าสุด…</div></article>
-          <header class="news-list-head"><div><span>ข่าวทั้งหมด</span><h2 id="listTitle">ข่าวและประกาศล่าสุด</h2></div><b id="visibleCount">0 รายการ</b></header>
-          <div class="all-news-grid" id="news"><div class="loading-news">กำลังรวบรวมข่าวล่าสุด…</div></div>
-        </section>
-        <aside class="portal-sidebar">
-          <section class="side-card">
-            <header><span>e‑MONITORING</span><h2>สถานีตรวจวัดล่าสุด</h2></header>
-            <div class="station-brief"><div><span>ทั้งหมด</span><strong id="stationTotal">–</strong></div><div><span>Online</span><strong id="onlineTotal">–</strong></div><div class="alert"><span>แจ้งเตือน</span><strong id="alertTotal">–</strong></div></div>
-            <p id="monitorCardText">กำลังโหลดข้อมูลสถานี</p><a href="./information.html#monitor">เปิดหน้า e‑Monitoring →</a>
-          </section>
-          <section class="side-card">
-            <header><span>OFFICIAL SOURCES</span><h2>หน่วยงานเจ้าของข้อมูล</h2></header>
-            <div id="sourceList" class="source-list"><p>กำลังตรวจสอบแหล่งข้อมูล…</p></div>
-            <p class="data-notice" id="dataNotice"></p>
-          </section>
-          <section class="side-card quick-links">
-            <header><span>RELATED REPORTS</span><h2>รายงานที่เกี่ยวข้อง</h2></header>
-            <a href="./flood-report.html">สถานการณ์น้ำและพื้นที่เฝ้าระวัง <b>→</b></a>
-            <a href="./pm25.html">รายงานฝุ่น PM2.5 <b>→</b></a>
-            <a href="./hub.html#fire">ข้อมูลสนับสนุนเหตุฉุกเฉิน <b>→</b></a>
-          </section>
-        </aside>
-      </div>
-    </main>
-    <footer class="site-footer">
-      <div class="footer-inner">
-        <a class="footer-brand" href="https://oc.ieat.go.th/th" target="_blank" rel="noopener">
-          <img src="./assets/TH-Vertical.png" alt="โลโก้การนิคมอุตสาหกรรมแห่งประเทศไทย">
-          <span>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย</span>
-        </a>
-        <div class="footer-grid">
-          <section class="footer-col">
-            <h3>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย</h3>
-            <p>5,6 ซอยร่วมศิริมิตร ถนนวิภาวดีรังสิต แขวงจอมพล<br>เขตจตุจักร กรุงเทพฯ 10900</p>
-          </section>
-          <section class="footer-col">
-            <h3>ติดต่อเรา</h3>
-            <p><strong>โทรศัพท์</strong>&nbsp; <a href="tel:022072700">0 2207 2700 ต่อ 10401, 10402, 10403</a></p>
-            <p><strong>อีเมล</strong>&nbsp; <a href="mailto:warroom1@ieat.mail.go.th">warroom1@ieat.mail.go.th</a></p>
-          </section>
-          <section class="footer-col">
-            <h3>เว็บไซต์</h3>
-            <p><a href="https://oc.ieat.go.th/th" target="_blank" rel="noopener">oc.ieat.go.th</a></p>
-          </section>
-        </div>
-        <div class="footer-bottom">ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย กนอ. · Environmental Monitoring and Control Center: EMCC</div>
-      </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-    <script id="daily-news-portal-v3">
+</main>
+<footer class="footer"><strong>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย กนอ.</strong><span>ข้อมูลสภาพอากาศอัปเดตจากแหล่งต้นทาง · <a href="#overview">กลับด้านบน</a> · <a href="./hub.html">หน้า Hub</a></span></footer>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
 (function(){
- const esc=(value)=>String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[ch]));
- const fmt=(value)=>Number(value||0).toLocaleString("th-TH");
- let allNews=[],activeCategory="ทั้งหมด";
- function updateHeaderClock(){const now=new Date();document.querySelector("#headerDate").textContent="ข้อมูล ณ วันที่ "+new Intl.DateTimeFormat("th-TH",{timeZone:"Asia/Bangkok",day:"numeric",month:"short",year:"numeric"}).format(now);document.querySelector("#headerTime").textContent="เวลา "+new Intl.DateTimeFormat("th-TH",{timeZone:"Asia/Bangkok",hour:"2-digit",minute:"2-digit",hour12:false}).format(now)+" น."}
- function categoryOf(item){if(item.category)return item.category;const value=((item.title||"")+" "+(item.summary||"")).toLowerCase();if(/ฝน|น้ำท่วม|พายุ|ลมแรง|คลื่น/.test(value))return"น้ำและสภาพอากาศ";if(/ไฟไหม้|ไฟป่า|สารเคมี|ฉุกเฉิน/.test(value))return"ไฟไหม้และเหตุฉุกเฉิน";if(/pm2\.5|ฝุ่น|มลพิษ|คุณภาพอากาศ|น้ำเสีย/.test(value))return"PM2.5 และสิ่งแวดล้อม";if(/แผ่นดินไหว|สึนามิ|ดินถล่ม|ภัยพิบัติ/.test(value))return"แผ่นดินไหวและภัยพิบัติ";if(/นิคม|โรงงาน|อุตสาหกรรม/.test(value))return"นิคมฯ และโรงงาน";return"ข่าวและประกาศ"}
- function imageOf(item){return item.image||((item.images||[])[0]||{}).url||""}
- function renderFeatured(items){
-  const box=document.querySelector("#featuredNews"),item=items[0];
-  if(!item){box.innerHTML='<div class="featured-placeholder">ไม่พบข่าวในหมวดที่เลือก</div>';return}
-  const image=imageOf(item);
-  box.innerHTML=(image?'<a class="featured-image" href="'+esc(item.url)+'" target="_blank" rel="noopener"><img src="'+esc(image)+'" alt="'+esc(item.title)+'"></a>':'<div class="featured-image no-image"><span>'+esc(item.source)+'</span></div>')+
-   '<div class="featured-copy"><span>'+esc(categoryOf(item))+' · '+esc(item.source)+'</span><h2>'+esc(item.title)+'</h2><p>'+esc(item.summary)+'</p><a href="'+esc(item.url)+'" target="_blank" rel="noopener">อ่านข่าวฉบับเต็ม →</a></div>';
- }
- function renderNews(){
-  const term=document.querySelector("#newsSearch").value.trim().toLowerCase();
-  const filtered=allNews.filter(item=>(activeCategory==="ทั้งหมด"||categoryOf(item)===activeCategory)&&(!term||((item.title||"")+" "+(item.summary||"")+" "+(item.source||"")).toLowerCase().includes(term)));
-  document.querySelector("#visibleCount").textContent=fmt(filtered.length)+" รายการ";
-  document.querySelector("#listTitle").textContent=activeCategory==="ทั้งหมด"?"ข่าวและประกาศล่าสุด":activeCategory;
-  renderFeatured(filtered);
-  const rows=filtered.slice(1);
-  document.querySelector("#news").innerHTML=rows.length?rows.map(item=>{
-   const image=imageOf(item);
-   return '<article class="portal-news-card">'+(image?'<a class="portal-thumb" href="'+esc(item.url)+'" target="_blank" rel="noopener"><img src="'+esc(image)+'" alt="'+esc(item.title)+'" loading="lazy"></a>':'<a class="portal-thumb no-image" href="'+esc(item.url)+'" target="_blank" rel="noopener"><span>'+esc(item.source)+'</span></a>')+
-    '<div><span class="portal-category">'+esc(categoryOf(item))+'</span><small>'+esc(item.source)+(item.published_date?' · '+esc(item.published_date):'')+'</small><h3>'+esc(item.title)+'</h3><p>'+esc(item.summary)+'</p><a class="read-news" href="'+esc(item.url)+'" target="_blank" rel="noopener">อ่านจากแหล่งข่าว →</a></div></article>'
-  }).join(""):(filtered.length?'<div class="empty-news">ข่าวที่ตรงกับตัวกรองแสดงเป็นข่าวเด่นด้านบน</div>':'<div class="empty-news">ไม่พบข่าวที่ตรงกับคำค้นหา</div>');
- }
- function renderReport(report){
-  allNews=(report.news||[]).map(item=>({...item,category:categoryOf(item)}));
-  const summary=report.station_summary||{},categories=["ทั้งหมด",...new Set(allNews.map(categoryOf))];
-  document.querySelector("#newsTotal").textContent=fmt(report.news_total??allNews.length);
-  document.querySelector("#reportUpdated").textContent=report.generated_at_th||report.report_date||"–";
-  document.querySelector("#stationTotal").textContent=fmt(summary.total);
-  document.querySelector("#onlineTotal").textContent=fmt(summary.online);
-  document.querySelector("#alertTotal").textContent=fmt(summary.alert);
-  document.querySelector("#monitorCardText").textContent=Number(summary.alert||0)>0?"พบ "+fmt(summary.alert)+" สถานีที่มีค่าพารามิเตอร์แจ้งเตือน":"ไม่พบค่าพารามิเตอร์แจ้งเตือน";
-  document.querySelector("#categoryTabs").innerHTML=categories.map(cat=>'<button class="'+(cat==="ทั้งหมด"?"active":"")+'" data-category="'+esc(cat)+'">'+(cat==="ทั้งหมด"?"ข่าวทั้งหมด":esc(cat))+'</button>').join("");
-  document.querySelectorAll("#categoryTabs button").forEach(button=>button.addEventListener("click",()=>{activeCategory=button.dataset.category;document.querySelectorAll("#categoryTabs button").forEach(x=>x.classList.toggle("active",x===button));renderNews()}));
-  const sources=report.sources||[];
-  document.querySelector("#sourceList").innerHTML=sources.map(source=>'<a href="'+esc(source.url)+'" target="_blank" rel="noopener"><i class="'+(source.ok?"ok":"wait")+'"></i><span><b>'+esc(source.name)+'</b><small>'+(source.ok?"เชื่อมโยงสำเร็จ":"เปิดตรวจสอบจากต้นทาง")+'</small></span></a>').join("");
-  document.querySelector("#dataNotice").textContent=report.notice||"";
-  renderNews();
- }
- updateHeaderClock();setInterval(updateHeaderClock,60000);
- document.querySelector("#newsSearch").addEventListener("input",renderNews);
- fetch("./daily-report.json?t="+Date.now(),{cache:"no-store"}).then(response=>{if(!response.ok)throw new Error("HTTP "+response.status);return response.json()}).then(renderReport).catch(()=>{document.querySelector("#news").innerHTML='<div class="empty-news">ไม่สามารถโหลดข่าวสารได้ในขณะนี้</div>';document.querySelector("#featuredNews").innerHTML='<div class="featured-placeholder">กรุณาลองใหม่อีกครั้ง</div>'});
-})();
-</script>
-  
-<style id="daily-match-information-typography-20260914-v1">
-/* Typography copied from docs/information.html. */
-html body,
-html body button,
-html body input,
-html body select,
-html body textarea,
-html body table,
-html body th,
-html body td,
-html body a{
- font-family:"Sarabun","TH Sarabun New",sans-serif!important;
-}
-html body{font-size:16px!important;font-weight:400!important;line-height:1.6!important}
-html body .bar,
-html body .bar *:not(svg):not(path),
-html body .wrap,
-html body .wrap *:not(svg):not(path),
-html body .site-footer,
-html body .site-footer *:not(svg):not(path){
- font-family:"Sarabun","TH Sarabun New",sans-serif!important;
-}
-html body .brand-copy strong{font-size:20px!important;font-weight:600!important;line-height:1.4!important;letter-spacing:0!important}
-html body .brand-copy span{font-size:14px!important;font-weight:300!important;line-height:1.5!important}
-html body .header-status b,
-html body .header-status small,
-html body .actions .btn{font-size:13px!important;line-height:1.4!important}
-html body h1{font-size:24px!important;font-weight:600!important;line-height:1.4!important}
-html body h2{font-size:20px!important;font-weight:600!important;line-height:1.45!important}
-html body h3,
-html body .news-wrap h3,
-html body .footer-col h3{font-size:18px!important;font-weight:500!important;line-height:1.5!important}
-html body h4,
-html body .news-item h4{font-size:16px!important;font-weight:500!important;line-height:1.5!important}
-html body p,
-html body label,
-html body li,
-html body .news-item p,
-html body .footer-col p{font-size:16px!important;line-height:1.6!important}
-html body button,
-html body input,
-html body select,
-html body textarea,
-html body a,
-html body .news-link,
-html body .footer-col a{font-size:16px!important;line-height:1.4!important}
-html body small,
-html body .muted,
-html body [class*="subtitle"],
-html body [class*="description"],
-html body [class*="meta"],
-html body [class*="hint"],
-html body .news-source,
-html body .gallery-count,
-html body .keyword,
-html body .footer-bottom{font-size:14px!important;line-height:1.5!important}
-html body .kpi strong{font-size:24px!important;font-weight:600!important;line-height:1.25!important}
-html body .kpi small{font-size:14px!important;line-height:1.45!important}
-@media(max-width:900px){
- html body .brand-copy strong{font-size:19px!important}
- html body .brand-copy span{font-size:12px!important}
- html body h1{font-size:20px!important}
- html body h2{font-size:18px!important}
-}
-@media(max-width:650px){
- html body .brand-copy strong{font-size:16px!important}
- html body .brand-copy span{font-size:11px!important}
- html body .actions .btn{font-size:12px!important}
-}
-</style>
-<script id="daily-match-information-typography-20260914-v1-lock">
-(function(){
- function apply(){
-  document.querySelectorAll("body *:not(svg):not(path):not(.material-icons):not([class*='fa-'])").forEach(function(el){
-   el.style.setProperty("font-family","Sarabun, 'TH Sarabun New', sans-serif","important");
-  });
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply,{once:true});else apply();
- var root=document.body;
- if(root)new MutationObserver(function(){requestAnimationFrame(apply)}).observe(root,{childList:true,subtree:true});
- [500,1500,4000].forEach(function(ms){setTimeout(apply,ms)});
+"use strict";
+var DATA_URL="https://nawakonnakhonchai-wq.github.io/temp_3_hr/weather_data.geojson";
+var all=[],filtered=[],markers=[],mode="rainfall_24hr",selected=null;
+var map=L.map("map",{zoomControl:true,minZoom:4}).setView([13.25,101.1],6);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:"© OpenStreetMap contributors"}).addTo(map);
+var markerLayer=L.layerGroup().addTo(map);
+function n(v,d){return Number(v||0).toLocaleString("th-TH",{minimumFractionDigits:d||0,maximumFractionDigits:d==null?1:d})}
+function esc(v){return String(v==null?"":v).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]})}
+function statusOf(v){v=Number(v||0);if(v>=90)return{key:"critical",label:"วิกฤต",color:"#bf033b"};if(v>=60)return{key:"warning",label:"ฝนหนัก",color:"#ff6908"};if(v>=35)return{key:"watch",label:"เฝ้าระวัง",color:"#ffc719"};return{key:"normal",label:"ปกติ",color:"#42a846"}}
+function conditionOf(p){var r=Number(p.rainfall||0),r24=Number(p.rainfall_24hr||0);if(r>=35||r24>=90)return["🌧️","ฝนตกหนักมาก"];if(r>=10||r24>=60)return["⛈️","ฝนตกหนัก"];if(r>0||r24>=35)return["🌦️","มีฝน / เฝ้าระวัง"];return["⛅","สภาพอากาศทั่วไป"]}
+function selectStation(item,zoom){selected=item;var p=item.properties,c=item.geometry.coordinates,cond=conditionOf(p),st=statusOf(p.rainfall_24hr);document.querySelector("#weatherIcon").textContent=cond[0];document.querySelector("#detailTemp").innerHTML=n(p.temp,1)+"<small>°C</small>";document.querySelector("#detailCondition").textContent=cond[1];document.querySelector("#detailCondition").style.color=st.color;document.querySelector("#detailName").textContent=p.station_name||"ไม่ระบุสถานี";document.querySelector("#detailProvince").textContent="จังหวัด"+(p.province||"–");document.querySelector("#detailRain").textContent=n(p.rainfall,1)+" มม.";document.querySelector("#detailRain24").textContent=n(p.rainfall_24hr,1)+" มม.";document.querySelector("#detailWind").textContent=n(p.wind_speed,1)+" กม./ชม.";document.querySelector("#detailDirection").textContent=p.wind_direction_label||"–";document.querySelector("#detailLat").textContent=n(c[1],3);document.querySelector("#detailLng").textContent=n(c[0],3);if(zoom)map.flyTo([c[1],c[0]],9,{duration:.8})}
+function drawMarkers(){markerLayer.clearLayers();markers=[];all.forEach(function(item){var p=item.properties,c=item.geometry&&item.geometry.coordinates;if(!c)return;var val=Number(p[mode]||0),color=mode==="temp"?(val>=35?"#bf033b":val>=30?"#ff6908":val>=25?"#ffc719":"#42a846"):statusOf(val).color;var size=mode==="temp"?12:Math.min(24,10+val/8);var marker=L.circleMarker([c[1],c[0]],{radius:size/2,color:"#fff",weight:2,fillColor:color,fillOpacity:.88}).addTo(markerLayer);marker.bindTooltip("<b>"+esc(p.station_name)+"</b><br>"+(mode==="temp"?"อุณหภูมิ "+n(p.temp,1)+" °C":"ฝน 24 ชม. "+n(p.rainfall_24hr,1)+" มม."));marker.on("click",function(){selectStation(item,false)});markers.push({item:item,marker:marker})})}
+function renderSummary(){var rain=[].concat(all).sort(function(a,b){return Number(b.properties.rainfall_24hr||0)-Number(a.properties.rainfall_24hr||0)}),wind=[].concat(all).sort(function(a,b){return Number(b.properties.wind_speed||0)-Number(a.properties.wind_speed||0)}),temp=[].concat(all).sort(function(a,b){return Number(b.properties.temp||0)-Number(a.properties.temp||0)}),alertCount=all.filter(function(x){return Number(x.properties.rainfall_24hr||0)>=35}).length,max=rain[0],severe=all.filter(function(x){return Number(x.properties.rainfall_24hr||0)>=60}).length;
+document.querySelector("#mapAlertCount").textContent=alertCount.toLocaleString("th-TH");document.querySelector("#stationCount").textContent=all.length.toLocaleString("th-TH")+" แห่ง";document.querySelector("#maxWind").textContent=n(wind[0].properties.wind_speed,1)+" กม./ชม.";document.querySelector("#maxRain").textContent=n(max.properties.rainfall_24hr,1)+" มม.";document.querySelector("#maxTemp").textContent=n(temp[0].properties.temp,1)+" °C";document.querySelector("#rainTotalLabel").textContent="สูงสุด "+n(max.properties.rainfall_24hr,1)+" มม.";
+var msg=severe?"พบ "+severe.toLocaleString("th-TH")+" สถานีที่มีฝนสะสม 24 ชั่วโมงตั้งแต่ 60 มม. ควรติดตามสถานการณ์อย่างใกล้ชิด":"ยังไม่พบสถานีที่เข้าเกณฑ์ฝนหนักจากข้อมูลล่าสุด";document.querySelector("#alertBox").textContent=msg;document.querySelector("#tickerText").textContent=severe?"เฝ้าระวังฝนหนักใน "+severe.toLocaleString("th-TH")+" สถานี · สูงสุดที่ "+max.properties.station_name:"สถานการณ์โดยรวมอยู่ในเกณฑ์ปกติ";
+var top=rain.slice(0,10),scale=Math.max(1,Number(top[0].properties.rainfall_24hr||0));document.querySelector("#rainBars").innerHTML=top.map(function(x){var p=x.properties,h=Math.max(3,Math.round(Number(p.rainfall_24hr||0)/scale*145));return'<div class="bar-item" title="'+esc(p.station_name)+" "+n(p.rainfall_24hr,1)+' มม."><b>'+n(p.rainfall_24hr,0)+'</b><i class="bar" style="height:'+h+'px"></i><span>'+esc(p.province)+'</span></div>'}).join("");
+document.querySelector("#ranking").innerHTML=rain.slice(0,6).map(function(x,i){var p=x.properties;return'<div class="rank-row" data-index="'+all.indexOf(x)+'"><span class="rank-no">'+(i+1)+'</span><span class="rank-name"><b>'+esc(p.station_name)+'</b><small>'+esc(p.province)+'</small></span><b class="rank-rain">'+n(p.rainfall_24hr,1)+' มม.</b></div>'}).join("");document.querySelectorAll(".rank-row").forEach(function(row){row.addEventListener("click",function(){selectStation(all[Number(row.dataset.index)],true)})});
+selectStation(max,false)}
+function renderTable(){var term=document.querySelector("#tableSearch").value.trim().toLowerCase(),status=document.querySelector("#statusFilter").value;filtered=all.filter(function(x){var p=x.properties,s=statusOf(p.rainfall_24hr);return(!term||((p.station_name||"")+" "+(p.province||"")).toLowerCase().indexOf(term)>-1)&&(status==="all"||s.key===status)}).sort(function(a,b){return Number(b.properties.rainfall_24hr||0)-Number(a.properties.rainfall_24hr||0)});document.querySelector("#visibleRows").textContent=filtered.length.toLocaleString("th-TH")+" รายการ";document.querySelector("#stationRows").innerHTML=filtered.length?filtered.map(function(x){var p=x.properties,s=statusOf(p.rainfall_24hr),idx=all.indexOf(x);return'<tr data-index="'+idx+'"><td><b>'+esc(p.station_name)+'</b></td><td>'+esc(p.province)+'</td><td>'+n(p.temp,1)+' °C</td><td>'+n(p.rainfall,1)+' มม.</td><td><b>'+n(p.rainfall_24hr,1)+' มม.</b></td><td>'+n(p.wind_speed,1)+' กม./ชม.</td><td>'+esc(p.wind_direction_label||"–")+'</td><td><span class="status-pill '+s.key+'">'+s.label+'</span></td></tr>'}).join(""):'<tr><td colspan="8">ไม่พบข้อมูลที่ตรงกับตัวกรอง</td></tr>';document.querySelectorAll("#stationRows tr[data-index]").forEach(function(row){row.addEventListener("click",function(){selectStation(all[Number(row.dataset.index)],true);document.querySelector("#mapPanel").scrollIntoView({behavior:"smooth"})})})}
+function searchGlobal(){var term=document.querySelector("#globalSearch").value.trim().toLowerCase();if(!term)return;var hit=all.find(function(x){var p=x.properties;return((p.station_name||"")+" "+(p.province||"")).toLowerCase().indexOf(term)>-1});if(hit){selectStation(hit,true);document.querySelector("#mapPanel").scrollIntoView({behavior:"smooth"})}}
+document.querySelectorAll("[data-mode]").forEach(function(btn){btn.addEventListener("click",function(){mode=btn.dataset.mode;document.querySelectorAll("[data-mode]").forEach(function(x){x.classList.toggle("active",x===btn)});drawMarkers()})});document.querySelector("#tableSearch").addEventListener("input",renderTable);document.querySelector("#statusFilter").addEventListener("change",renderTable);var searchBtn=document.querySelector("#searchBtn"),globalSearch=document.querySelector("#globalSearch");if(searchBtn)searchBtn.addEventListener("click",searchGlobal);if(globalSearch)globalSearch.addEventListener("keydown",function(e){if(e.key==="Enter")searchGlobal()});document.querySelector("#scrollTable").addEventListener("click",function(){document.querySelector("#stationTable").scrollIntoView({behavior:"smooth"})});
+function updateClock(){document.querySelector("#localTime").textContent="เวลาประเทศไทย "+new Intl.DateTimeFormat("th-TH",{hour:"2-digit",minute:"2-digit",hour12:false,timeZone:"Asia/Bangkok"}).format(new Date())+" น."}updateClock();setInterval(updateClock,60000);
+fetch(DATA_URL+"?t="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json()}).then(function(data){all=(data.features||[]).filter(function(x){return x.geometry&&x.properties});var stamp=all[0]&&all[0].properties.record_timestamp;document.querySelector("#syncState").classList.add("ok");document.querySelector("#syncText").textContent="เชื่อมโยงข้อมูลแล้ว";document.querySelector("#tickerTime").textContent=stamp?"ข้อมูล ณ "+new Intl.DateTimeFormat("th-TH",{dateStyle:"medium",timeStyle:"short",timeZone:"Asia/Bangkok"}).format(new Date(stamp+"Z")):"ข้อมูลล่าสุด";document.querySelector("#mapLoading").classList.add("hide");drawMarkers();renderSummary();renderTable();setTimeout(function(){map.invalidateSize()},100)}).catch(function(err){document.querySelector("#syncText").textContent="เชื่อมต่อไม่สำเร็จ";document.querySelector("#tickerText").textContent="ไม่สามารถเรียกข้อมูลสภาพอากาศได้ในขณะนี้";document.querySelector("#mapLoading").textContent="ไม่สามารถโหลดข้อมูล กรุณาลองใหม่อีกครั้ง";document.querySelector("#stationRows").innerHTML='<tr><td colspan="8" class="error-state">ไม่สามารถเรียกข้อมูลจากแหล่งต้นทางได้</td></tr>';console.error(err)});
 })();
 </script>
 
-<script id="homepage-live-data-20260915">
+<script id="weather-related-news-20260915">
 (function(){
- const WEATHER_URL="https://nawakonnakhonchai-wq.github.io/temp_3_hr/weather_data.geojson";
- const ITEM_ID="40825fa0e23044deb6ee9c075e50c657";
- const PORTAL="https://ieat.maps.arcgis.com";
- const num=(value,digits=1)=>Number(value||0).toLocaleString("th-TH",{minimumFractionDigits:digits,maximumFractionDigits:digits});
- const escLive=(value)=>String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[ch]));
- function setSourceStatus(ok,message){const box=document.querySelector("#liveSourceStatus");if(!box)return;box.className="live-source-status "+(ok?"ok":"error");box.textContent=message}
- async function loadWeather(){
-  const response=await fetch(WEATHER_URL+"?t="+Date.now(),{cache:"no-store"});
-  if(!response.ok)throw new Error("Weather HTTP "+response.status);
-  const data=await response.json(),features=Array.isArray(data.features)?data.features:[],items=features.map(f=>f.properties||{});
-  const raining=items.filter(x=>Number(x.rainfall)>0),sorted=[...items].sort((a,b)=>Number(b.rainfall_24hr||0)-Number(a.rainfall_24hr||0)),max=sorted[0]||{};
-  document.querySelector("#weatherStationCount").textContent=items.length.toLocaleString("th-TH");
-  document.querySelector("#rainingStationCount").textContent=raining.length.toLocaleString("th-TH");
-  document.querySelector("#maxRain24").textContent=num(max.rainfall_24hr)+" มม.";
-  document.querySelector("#maxRainStation").textContent=max.station_name?max.station_name+" · "+(max.province||""):"ไม่พบข้อมูล";
-  const stamp=max.record_timestamp||items[0]?.record_timestamp;
-  document.querySelector("#weatherUpdated").textContent=stamp?"ข้อมูลสภาพอากาศ ณ "+new Intl.DateTimeFormat("th-TH",{dateStyle:"medium",timeStyle:"short",timeZone:"Asia/Bangkok"}).format(new Date(stamp+"Z")):"โหลดข้อมูลสภาพอากาศล่าสุดแล้ว";
-  document.querySelector("#weatherRows").innerHTML=sorted.slice(0,6).map(x=>"<tr><td>"+escLive(x.station_name)+"</td><td>"+escLive(x.province)+"</td><td>"+num(x.temp)+" °C</td><td>"+num(x.rainfall)+" มม.</td><td><b>"+num(x.rainfall_24hr)+" มม.</b></td></tr>").join("")||'<tr><td colspan="5">ไม่พบข้อมูลสถานี</td></tr>';
-  return true;
+ var items=[],active="ทั้งหมด";
+ function escNews(v){return String(v==null?"":v).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]})}
+ function category(item){if(item.category)return item.category;var text=((item.title||"")+" "+(item.summary||"")).toLowerCase();if(/ฝน|น้ำท่วม|พายุ|ลมแรง|คลื่น|อากาศ/.test(text))return"อากาศและน้ำ";if(/ไฟไหม้|ไฟป่า|สารเคมี|ฉุกเฉิน/.test(text))return"เหตุฉุกเฉิน";if(/pm2\\.5|ฝุ่น|มลพิษ|คุณภาพอากาศ|น้ำเสีย/.test(text))return"สิ่งแวดล้อม";if(/แผ่นดินไหว|สึนามิ|ดินถล่ม|ภัยพิบัติ/.test(text))return"ภัยพิบัติ";if(/นิคม|โรงงาน|อุตสาหกรรม/.test(text))return"นิคมฯ และโรงงาน";return"ข่าวและประกาศ"}
+ function imageOf(item){return item.image||(((item.images||[])[0]||{}).url)||""}
+ function render(){
+  var filtered=items.filter(function(x){return active==="ทั้งหมด"||category(x)===active}),featured=filtered[0],rest=filtered.slice(1,7),box=document.querySelector("#weatherFeaturedNews");
+  if(featured){var image=imageOf(featured);box.innerHTML=(image?'<a class="news-featured-image" href="'+escNews(featured.url)+'" target="_blank" rel="noopener"><img src="'+escNews(image)+'" alt="'+escNews(featured.title)+'"></a>':'<a class="news-featured-image no-image" href="'+escNews(featured.url)+'" target="_blank" rel="noopener">'+escNews(featured.source||"ข่าวล่าสุด")+'</a>')+'<div class="news-featured-copy"><span class="news-meta">'+escNews(category(featured))+' · '+escNews(featured.source||"")+'</span><h3>'+escNews(featured.title)+'</h3><p>'+escNews(featured.summary||"")+'</p><a class="news-read" href="'+escNews(featured.url)+'" target="_blank" rel="noopener">อ่านข่าวฉบับเต็ม →</a></div>'}else box.innerHTML='<div class="news-empty">ไม่พบข่าวในหมวดที่เลือก</div>';
+  document.querySelector("#weatherNewsGrid").innerHTML=rest.length?rest.map(function(item){var image=imageOf(item);return'<article class="news-card">'+(image?'<a class="news-card-image" href="'+escNews(item.url)+'" target="_blank" rel="noopener"><img src="'+escNews(image)+'" alt="'+escNews(item.title)+'" loading="lazy"></a>':'<a class="news-card-image no-image" href="'+escNews(item.url)+'" target="_blank" rel="noopener">'+escNews(item.source||"ข่าวและประกาศ")+'</a>')+'<div class="news-card-copy"><span class="news-meta">'+escNews(category(item))+'</span><small>'+escNews(item.source||"")+(item.published_date?" · "+escNews(item.published_date):"")+'</small><h3>'+escNews(item.title)+'</h3><p>'+escNews(item.summary||"")+'</p><a class="news-read" href="'+escNews(item.url)+'" target="_blank" rel="noopener">อ่านจากแหล่งข่าว →</a></div></article>'}).join(""):'<div class="news-empty">ยังไม่มีข่าวเพิ่มเติมในหมวดนี้</div>'
  }
- async function loadArcGIS(){
-  const itemResponse=await fetch(PORTAL+"/sharing/rest/content/items/"+ITEM_ID+"?f=json",{cache:"no-store"});
-  if(!itemResponse.ok)throw new Error("ArcGIS item HTTP "+itemResponse.status);
-  const item=await itemResponse.json();
-  if(item.error||!item.url)throw new Error(item.error?.message||"ไม่พบ URL ของ ArcGIS Layer");
-  let serviceUrl=String(item.url).replace(/\/$/,""),layerUrl=/FeatureServer\/\d+$/i.test(serviceUrl)?serviceUrl:serviceUrl+"/0";
-  const countResponse=await fetch(layerUrl+"/query?where=1%3D1&returnCountOnly=true&f=json",{cache:"no-store"});
-  if(!countResponse.ok)throw new Error("ArcGIS query HTTP "+countResponse.status);
-  const countData=await countResponse.json();
-  if(countData.error)throw new Error(countData.error.message||"ArcGIS query error");
-  document.querySelector("#arcgisFeatureCount").textContent=Number(countData.count||0).toLocaleString("th-TH");
-  document.querySelector("#arcgisLayerName").textContent=item.title||"ArcGIS Layer กนอ.";
-  return true;
- }
- Promise.allSettled([loadWeather(),loadArcGIS()]).then(results=>{
-  const ok=results.filter(x=>x.status==="fulfilled").length;
-  if(ok===2)setSourceStatus(true,"เชื่อมโยงข้อมูลสำเร็จทั้ง 2 แหล่ง");
-  else if(ok===1)setSourceStatus(false,"เชื่อมโยงสำเร็จ 1 แหล่ง อีก 1 แหล่งอาจจำกัดสิทธิ์การเข้าถึง");
-  else setSourceStatus(false,"ไม่สามารถเรียกข้อมูลต้นทางได้ในขณะนี้");
-  if(results[0].status==="rejected"){
-   document.querySelector("#weatherUpdated").textContent="ไม่สามารถโหลดข้อมูลสภาพอากาศได้";
-   document.querySelector("#weatherRows").innerHTML='<tr><td colspan="5">กรุณาลองโหลดหน้าใหม่อีกครั้ง</td></tr>';
-  }
-  if(results[1].status==="rejected"){
-   document.querySelector("#arcgisFeatureCount").textContent="–";
-   document.querySelector("#arcgisLayerName").textContent="Layer อาจต้องลงชื่อเข้าใช้";
-  }
- });
+ fetch("./daily-report.json?t="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json()}).then(function(data){items=(data.news||[]).map(function(x){x.category=category(x);return x});var cats=["ทั้งหมด"].concat(Array.from(new Set(items.map(category))));document.querySelector("#weatherNewsTabs").innerHTML=cats.map(function(cat){return'<button class="'+(cat==="ทั้งหมด"?"active":"")+'" data-category="'+escNews(cat)+'">'+(cat==="ทั้งหมด"?"ข่าวทั้งหมด":escNews(cat))+'</button>'}).join("");document.querySelectorAll("#weatherNewsTabs button").forEach(function(btn){btn.addEventListener("click",function(){active=btn.dataset.category;document.querySelectorAll("#weatherNewsTabs button").forEach(function(x){x.classList.toggle("active",x===btn)});render()})});render()}).catch(function(){document.querySelector("#weatherFeaturedNews").innerHTML='<div class="news-empty">ไม่สามารถโหลดข่าวสารได้ในขณะนี้</div>';document.querySelector("#weatherNewsGrid").innerHTML=""});
 })();
 </script>
 
+
+<script id="homepage-header-clock">
+(function(){function tick(){var now=new Date();var date=document.querySelector("#headerDate"),time=document.querySelector("#headerTime");if(date)date.textContent="ข้อมูล ณ วันที่ "+new Intl.DateTimeFormat("th-TH",{timeZone:"Asia/Bangkok",day:"numeric",month:"short",year:"numeric"}).format(now);if(time)time.textContent="เวลา "+new Intl.DateTimeFormat("th-TH",{timeZone:"Asia/Bangkok",hour:"2-digit",minute:"2-digit",hour12:false}).format(now)+" น."}tick();setInterval(tick,60000)})();
+</script>
 </body>
 </html>
