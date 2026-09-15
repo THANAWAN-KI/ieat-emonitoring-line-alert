@@ -7,7 +7,7 @@
 <meta name="description" content="แดชบอร์ดข้อมูลสภาพอากาศล่าสุดสำหรับสนับสนุนการเฝ้าระวังพื้นที่นิคมอุตสาหกรรม">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
 :root{--teal:#0f9685;--teal-dark:#08766a;--blue:#1768ad;--ink:#17202b;--muted:#697784;--line:#dfe8eb;--panel:rgba(255,255,255,.94);--green:#42a846;--yellow:#ffc719;--orange:#ff6908;--red:#bf033b;--purple:#6534ac;--shadow:0 16px 50px rgba(16,64,78,.13)}
@@ -47,86 +47,6 @@ body{padding-top:0}.bar{position:sticky;top:0;z-index:2000;width:100%;min-height
 @media(max-width:1050px){.bar{padding:0 16px}.brand-link{min-width:0;flex:1}.brand-logo{width:68px;flex-basis:68px}.brand-copy strong{font-size:20.4px}.brand-copy span{font-size:12px}.header-status{display:none}.header-btn{padding:8px 11px}}
 @media(max-width:700px){.bar{padding:6px 10px}.bar-in{min-height:58px;gap:8px}.brand-logo{width:50px;height:40px;flex-basis:50px}.brand-copy strong{font-size:16.8px}.brand-copy span{font-size:9.6px}.header-actions{gap:4px}.header-btn{min-height:32px;padding:6px 8px;font-size:12px}.header-btn:not(.active):not(.hub){display:none}.app-shell{margin-top:0}}
 </style>
-<style id="weather-match-drought-typography-20260915">
-/* Typography matched to docs/drought.html */
-html body,
-html body button,
-html body input,
-html body select,
-html body textarea,
-html body table,
-html body th,
-html body td,
-html body a{font-family:"Noto Sans Thai","Sarabun","Segoe UI",sans-serif!important}
-html body{font-size:15.6px!important;font-weight:400!important;line-height:1.5!important}
-html body .brand-copy strong,
-html body .brand strong{font-size:24px!important;font-weight:600!important;line-height:1.4!important}
-html body .brand-copy span,
-html body .brand small{font-size:14.4px!important;font-weight:300!important;line-height:1.5!important}
-html body main h1{font-size:24px!important;font-weight:600!important;line-height:1.4!important;letter-spacing:0!important}
-html body main h2{font-size:19.2px!important;font-weight:500!important;line-height:1.45!important;letter-spacing:0!important}
-html body main h3{font-size:18px!important;font-weight:500!important;line-height:1.5!important;letter-spacing:0!important}
-html body main h4{font-size:16.8px!important;font-weight:500!important;line-height:1.5!important}
-html body main p,
-html body main label,
-html body main li{font-size:15.6px!important;font-weight:400!important;line-height:1.55!important}
-html body main button,
-html body main input,
-html body main select,
-html body main textarea,
-html body main a{font-size:14.4px!important;line-height:1.4!important}
-html body main small,
-html body main .muted,
-html body main [class*="meta"],
-html body main [class*="subtitle"],
-html body main [class*="description"],
-html body main [class*="hint"]{font-size:13.2px!important;font-weight:400!important;line-height:1.5!important}
-html body .ticker-label,
-html body .ticker-time,
-html body .sync,
-html body .source-link{font-size:14.4px!important;line-height:1.5!important}
-html body .panel-head h2{font-size:19.2px!important;font-weight:500!important}
-html body .panel-head h3{font-size:18px!important;font-weight:500!important}
-html body .panel-head p{font-size:13.2px!important;font-weight:400!important;line-height:1.5!important}
-html body .ghost-btn,
-html body .report-btn,
-html body .header-btn{font-size:14.4px!important;font-weight:400!important}
-html body .detail .temperature{font-size:48px!important;font-weight:500!important;line-height:1.15!important}
-html body .detail .temperature small{font-size:19.2px!important}
-html body .station-name{font-size:21.6px!important;font-weight:600!important}
-html body .station-location{font-size:14.4px!important}
-html body .detail-metrics span{font-size:12px!important;line-height:1.45!important}
-html body .detail-metrics b{font-size:15.6px!important;font-weight:500!important}
-html body .alert-box,
-html body .notice{font-size:14.4px!important;line-height:1.55!important}
-html body .metric-row span,
-html body .metric-row b{font-size:15.6px!important}
-html body .rank-name b,
-html body .rank-rain{font-size:14.4px!important}
-html body .rank-name small,
-html body .rank-no{font-size:14.4px!important}
-html body .weather-table th{font-size:14.4px!important;font-weight:600!important;line-height:1.4!important}
-html body .weather-table td{font-size:14.4px!important;font-weight:400!important;line-height:1.4!important}
-html body .status-pill{font-size:13.2px!important}
-html body .news-heading h2{font-size:19.2px!important;font-weight:500!important}
-html body .news-heading p{font-size:14.4px!important;font-weight:400!important}
-html body .news-heading span,
-html body .news-meta{font-size:13.2px!important}
-html body .news-featured-copy h3{font-size:19.2px!important;font-weight:500!important}
-html body .news-featured-copy p,
-html body .news-card-copy p{font-size:14.4px!important;line-height:1.6!important}
-html body .news-card-copy h3{font-size:16.8px!important;font-weight:500!important;line-height:1.5!important}
-html body .news-card-copy small,
-html body .news-read{font-size:13.2px!important}
-html body .footer{font-size:13.2px!important;line-height:1.5!important}
-@media(max-width:700px){
- html body .brand-copy strong,html body .brand strong{font-size:19.2px!important}
- html body .brand-copy span,html body .brand small{font-size:13.2px!important}
- html body main h2{font-size:21.6px!important}
- html body main h3{font-size:19.2px!important}
- html body main p,html body main button,html body main input,html body main select,html body main a{font-size:14.4px!important}
-}
-</style>
 
 <style id="tmd-warning-forecast-20260915">
 .tmd-grid{margin-top:12px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}.tmd-panel{min-width:0}.tmd-panel .panel-head a{padding:7px 11px;border-radius:7px;background:#f2f6fc;color:#3478d4;text-decoration:none;white-space:nowrap}.warning-content{padding:14px}.warning-item{padding:14px;border-left:4px solid #ed1b2e;background:#fff8f8;box-shadow:0 3px 12px rgba(42,58,75,.06)}.warning-item+.warning-item{margin-top:10px}.warning-item h3{margin:0 0 6px;color:#7f181b}.warning-item p{margin:0;color:#59636d;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}.warning-meta{margin-top:9px;display:flex;align-items:center;justify-content:space-between;gap:10px;color:#7c858d;font-size:13.2px}.warning-meta a{color:#3478d4;text-decoration:none;font-weight:500}.warning-empty{padding:28px;text-align:center;color:#697784}.forecast-frame{width:100%;height:420px;display:block;border:0;background:#fff}.forecast-note{padding:9px 14px;border-top:1px solid #edf1f2;color:#697784;font-size:13.2px}.load-state{padding:28px;text-align:center;color:#697784}
@@ -139,183 +59,6 @@ html,body,html body{background:#fff!important}.app-shell,.main,.ticker,.panel,.n
 @media(max-width:760px){html body{background:#fff!important}.table-scroll{max-height:600px}.weather-table{min-width:760px}}
 </style>
 
-<style id="system-header-match-reference-20260915">
-html body .system-header{position:sticky!important;top:0!important;z-index:2200!important;width:100%!important;min-height:66px!important;padding:0 36px!important;background:#fff!important;border-top:1px solid #dedede!important;border-bottom:1px solid #d9dcde!important;box-shadow:0 2px 5px rgba(31,41,55,.08)!important}
-html body .system-header-inner{width:100%!important;min-height:66px!important;margin:0!important;display:flex!important;align-items:center!important;gap:18px!important}
-html body .system-brand{display:flex!important;align-items:center!important;gap:12px!important;min-width:0!important;color:#111!important;text-decoration:none!important;white-space:nowrap!important}
-html body .system-brand img{width:42px!important;height:42px!important;flex:0 0 42px!important;object-fit:contain!important}
-html body .system-brand strong{font-family:"Noto Sans Thai","Sarabun",sans-serif!important;font-size:21.6px!important;font-weight:600!important;line-height:1.4!important;color:#050505!important}
-html body .system-brand>span{margin-left:2px!important;color:#89939e!important;font-family:"Noto Sans Thai","Sarabun",sans-serif!important;font-size:14.4px!important;font-weight:300!important;line-height:1.4!important}
-html body .system-clock{margin-left:auto!important;color:#4b5660!important;font-size:13.2px!important;font-weight:400!important;white-space:nowrap!important}
-html body .system-actions{display:flex!important;align-items:center!important;gap:7px!important}
-html body .news-nav,html body .contact-nav,html body .more-btn{min-height:34px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;border:0!important;border-radius:999px!important;text-decoration:none!important;white-space:nowrap!important;font-size:13.2px!important;font-weight:500!important;line-height:1!important}
-html body .news-nav{gap:6px!important;padding:0 14px!important;background:#f1f3f5!important;color:#66717b!important}
-html body .news-nav span{font-size:15.6px!important}
-html body .more-wrap{position:relative!important}
-html body .more-btn{width:38px!important;padding:0!important;background:#f1f3f5!important;color:#66717b!important;font-size:21.6px!important;cursor:pointer!important}
-html body .contact-nav{padding:0 15px!important;background:#598c14!important;color:#fff!important}
-html body .more-menu{position:absolute!important;top:42px!important;right:0!important;width:168px!important;padding:6px!important;display:none!important;border:1px solid #e1e5e8!important;border-radius:12px!important;background:#fff!important;box-shadow:0 12px 28px rgba(28,39,51,.15)!important}
-html body .more-menu.open{display:grid!important}
-html body .more-menu a{padding:9px 10px!important;border-radius:8px!important;color:#3f4b55!important;font-size:14.4px!important;text-decoration:none!important}
-html body .more-menu a:hover{background:#f2f6f6!important;color:#08766a!important}
-@media(max-width:980px){html body .system-header{padding:0 16px!important}html body .system-brand>span{display:none!important}html body .system-clock{display:none!important}}
-@media(max-width:650px){html body .system-header{padding:5px 10px!important;min-height:58px!important}html body .system-header-inner{min-height:48px!important;gap:7px!important}html body .system-brand{flex:1!important}.system-brand img{width:36px!important;height:36px!important;flex-basis:36px!important}html body .system-brand strong{font-size:16.8px!important;white-space:normal!important;line-height:1.25!important}html body .news-nav{padding:0 9px!important;font-size:12px!important}html body .news-nav span{display:none!important}html body .more-btn{width:34px!important}html body .contact-nav{display:none!important}}
-</style>
-<style id="daily-match-hub-exact-20260915-v1">
-/* Exact typography scale mirrored from docs/hub.html */
-html body,
-html body button,
-html body input,
-html body select,
-html body textarea,
-html body table,
-html body th,
-html body td,
-html body a,
-html body *:not(svg):not(path):not(.material-icons):not([class*="fa-"]){
- font-family:"Sarabun","TH Sarabun New",sans-serif!important
-}
-html body{font-size:19.2px!important;font-weight:400!important;line-height:1.6!important}
-html body .system-brand strong,
-html body .brand strong,
-html body .brand-copy strong{font-size:24px!important;font-weight:600!important;line-height:1.4!important}
-html body .system-brand>span,
-html body .brand small,
-html body .brand-copy span{font-size:16.8px!important;font-weight:300!important;line-height:1.5!important}
-html body main h1{font-size:24px!important;font-weight:600!important;line-height:1.4!important;letter-spacing:0!important}
-html body main h2,
-html body .panel-head h2,
-html body .news-heading h2{font-size:24px!important;font-weight:600!important;line-height:1.45!important;letter-spacing:0!important}
-html body main h3,
-html body .panel-head h3{font-size:21.6px!important;font-weight:500!important;line-height:1.5!important;letter-spacing:0!important}
-html body main h4{font-size:19.2px!important;font-weight:500!important;line-height:1.5!important}
-html body main p,
-html body main li{font-size:19.2px!important;font-weight:400!important;line-height:1.6!important}
-html body main label{font-size:14.4px!important;font-weight:600!important;line-height:1.6!important}
-html body main input,
-html body main select,
-html body main textarea{font-size:15.6px!important;font-weight:400!important;line-height:1.6!important}
-html body main button,
-html body main a{font-size:14.4px!important;line-height:1.4!important}
-html body .detail .temperature{font-size:28.8px!important;font-weight:600!important;line-height:1.25!important}
-html body .detail .temperature small{font-size:16.8px!important;font-weight:400!important}
-html body .station-name{font-size:24px!important;font-weight:600!important;line-height:1.4!important}
-html body .detail-metrics span,
-html body .rank-name small,
-html body .news-meta,
-html body .news-card-copy small,
-html body .warning-meta,
-html body .ticker-time,
-html body .sync{font-size:16.8px!important;font-weight:400!important;line-height:1.5!important}
-html body .detail-metrics b,
-html body .metric-row b,
-html body .rank-name b,
-html body .rank-rain{font-size:19.2px!important;font-weight:400!important;line-height:1.6!important}
-html body .weather-table th,
-html body .weather-table td{font-size:13.2px!important;line-height:1.35!important}
-html body .weather-table th{font-weight:600!important}
-html body .footer{font-size:13.2px!important;font-weight:400!important;line-height:1.6!important}
-html body .brand small,
-html body .brand-copy span,
-html body .system-brand>span,
-html body .system-clock,
-html body .sync,
-html body .ticker-time,
-html body .panel-head p,
-html body .ghost-btn,
-html body .metric-row span,
-html body .condition span,
-html body .station-location,
-html body .detail-metrics span,
-html body .rank-name small,
-html body .rank-no,
-html body .weather-table th,
-html body .notice,
-html body .footer,
-html body .news-heading p,
-html body .news-card-copy small,
-html body .news-featured-copy p,
-html body .news-card-copy p,
-html body .warning-meta,
-html body .warning-empty,
-html body .forecast-note,
-html body .load-state,
-html body .map-status,
-html body .map-badge,
-html body .legend{color:#000!important}
-@media(max-width:700px){
- html body .system-brand strong,
- html body .brand strong,
- html body .brand-copy strong{font-size:22.8px!important}
- html body main h1{font-size:22.8px!important}
- html body main button,
- html body main a{font-size:14.4px!important}
-}
-</style>
-<style id="daily-hub-size-lock-20260915-v2">
-/* Component font-size scale matched to docs/hub.html */
-html body header.system-header .system-brand strong{font-size:24px!important;line-height:1.4!important}
-html body header.system-header .system-brand>span{font-size:16.8px!important;line-height:1.5!important}
-html body header.system-header .system-clock,
-html body header.system-header .news-nav,
-html body header.system-header .contact-nav{font-size:15.6px!important;line-height:1.4!important}
-html body main.main .ticker,
-html body main.main .ticker-label,
-html body main.main .ticker-text,
-html body main.main .ticker-time,
-html body main.main .sync,
-html body main.main .source-link{font-size:15.6px!important;line-height:1.4!important}
-html body main.main .panel-head h2,
-html body main.main .news-heading h2{font-size:24px!important;font-weight:600!important;line-height:1.45!important}
-html body main.main .panel-head h3{font-size:21.6px!important;font-weight:500!important;line-height:1.5!important}
-html body main.main .panel-head p,
-html body main.main .news-heading p{font-size:14.4px!important;font-weight:400!important;line-height:1.45!important}
-html body main.main .ghost-btn,
-html body main.main .report-btn,
-html body main.main .source-link,
-html body main.main .news-read,
-html body main.main .news-tabs button,
-html body main.main .panel-head a{font-size:14.4px!important;line-height:1.4!important}
-html body main.main .map-badge,
-html body main.main .legend,
-html body main.main .alert-box,
-html body main.main .notice{font-size:14.4px!important;line-height:1.5!important}
-html body main.main .metric-row span,
-html body main.main .rank-name b,
-html body main.main .rank-rain{font-size:16.8px!important;line-height:1.5!important}
-html body main.main .metric-row b{font-size:16.8px!important;font-weight:600!important}
-html body main.main .rank-name small,
-html body main.main .rank-no{font-size:13.2px!important;line-height:1.4!important}
-html body main.main .detail .temperature{font-size:28.8px!important;font-weight:600!important;line-height:1.25!important}
-html body main.main .detail .temperature small{font-size:16.8px!important}
-html body main.main .station-name{font-size:24px!important;font-weight:600!important;line-height:1.4!important}
-html body main.main .station-location{font-size:14.4px!important;line-height:1.45!important}
-html body main.main .detail-metrics span{font-size:14.4px!important;line-height:1.45!important}
-html body main.main .detail-metrics b{font-size:16.8px!important;font-weight:500!important;line-height:1.5!important}
-html body main.main .table-tools input,
-html body main.main .table-tools select{font-size:15.6px!important;line-height:1.6!important}
-html body main.main .weather-table th,
-html body main.main .weather-table td{font-size:13.2px!important;line-height:1.35!important}
-html body main.main .weather-table th{font-weight:600!important}
-html body main.main .news-meta,
-html body main.main .news-card-copy small,
-html body main.main .warning-meta,
-html body main.main .forecast-note{font-size:14.4px!important;line-height:1.45!important}
-html body main.main .news-featured-copy h3{font-size:24px!important;font-weight:600!important;line-height:1.45!important}
-html body main.main .news-card-copy h3,
-html body main.main .warning-item h3{font-size:16.8px!important;font-weight:500!important;line-height:1.5!important}
-html body main.main .news-featured-copy p,
-html body main.main .news-card-copy p,
-html body main.main .warning-item p{font-size:16.8px!important;font-weight:400!important;line-height:1.55!important}
-html body .footer{font-size:13.2px!important;line-height:1.6!important}
-@media(max-width:700px){
- html body header.system-header .system-brand strong{font-size:22.8px!important}
- html body main.main .panel-head h2,
- html body main.main .news-heading h2{font-size:21.6px!important}
- html body main.main .panel-head h3{font-size:19.2px!important}
- html body main.main .news-featured-copy h3{font-size:21.6px!important}
-}
-</style>
 <style id="arcgis-province-boundary-20260915-v1">
 html body .province-boundary-legend{width:18px!important;height:12px!important;border:2px solid #832561!important;border-radius:2px!important;background:rgba(131,37,97,.10)!important}
 html body .province-popup b{color:#000!important;font-size:16.8px!important}
@@ -391,332 +134,9 @@ html body .weather-table td:last-child{
 }
 </style>
 
-<style id="daily-match-pm25-typography-20260915-v1">
-/* ระบบตัวอักษรและสเกลขนาดคัดลอกจาก docs/pm25.html */
-html body,
-html body *,
-html body button,
-html body input,
-html body select,
-html body textarea,
-html body table,
-html body th,
-html body td,
-html body a {
-  font-family:"Noto Sans Thai","Sarabun",sans-serif!important;
-}
-html body {font-size:16px!important;font-weight:400!important;line-height:1.6!important}
-html body .system-brand strong,
-html body .brand strong,
-html body .brand-copy strong {font-size:20px!important;font-weight:600!important;line-height:1.4!important}
-html body .system-brand>span,
-html body .brand small,
-html body .brand-copy span {font-size:14px!important;font-weight:300!important;line-height:1.5!important}
-html body main h1 {font-size:24px!important;font-weight:600!important;line-height:1.4!important;letter-spacing:0!important}
-html body main h2,
-html body .panel-head h2,
-html body .news-heading h2 {font-size:20px!important;font-weight:600!important;line-height:1.45!important;letter-spacing:0!important}
-html body main h3,
-html body .panel-head h3 {font-size:18px!important;font-weight:500!important;line-height:1.5!important;letter-spacing:0!important}
-html body main h4 {font-size:16px!important;font-weight:500!important;line-height:1.5!important}
-html body main p,
-html body main li {font-size:16px!important;font-weight:400!important;line-height:1.6!important}
-html body main label {font-size:16px!important;font-weight:400!important;line-height:1.55!important}
-html body main input,
-html body main select,
-html body main textarea,
-html body main button,
-html body main a {font-size:16px!important;font-weight:400!important;line-height:1.4!important}
-html body main small,
-html body main .muted,
-html body main [class*="meta"],
-html body main [class*="subtitle"],
-html body main [class*="description"],
-html body main [class*="hint"] {font-size:14px!important;font-weight:400!important;line-height:1.5!important}
-html body .ticker,
-html body .ticker-label,
-html body .ticker-text,
-html body .ticker-time,
-html body .sync,
-html body .source-link,
-html body .system-clock,
-html body .news-nav,
-html body .contact-nav {font-size:14px!important;line-height:1.5!important}
-html body .panel-head p,
-html body .news-heading p {font-size:14px!important;font-weight:400!important;line-height:1.5!important}
-html body .ghost-btn,
-html body .report-btn,
-html body .header-btn {font-size:16px!important;font-weight:400!important}
-html body .map-badge,
-html body .legend,
-html body .alert-box,
-html body .notice,
-html body .forecast-note {font-size:14px!important;line-height:1.5!important}
-html body .detail .temperature {font-size:28px!important;font-weight:500!important;line-height:1.15!important}
-html body .detail .temperature small {font-size:14px!important}
-html body .station-name {font-size:20px!important;font-weight:600!important;line-height:1.4!important}
-html body .station-location {font-size:14px!important}
-html body .detail-metrics span {font-size:14px!important;line-height:1.45!important}
-html body .detail-metrics b,
-html body .metric-row b,
-html body .rank-name b,
-html body .rank-rain {font-size:16px!important;font-weight:500!important;line-height:1.5!important}
-html body .rank-name small,
-html body .rank-no,
-html body .status-pill,
-html body .news-meta,
-html body .news-card-copy small,
-html body .warning-meta {font-size:14px!important;line-height:1.45!important}
-html body .weather-table th,
-html body .weather-table td {font-size:11px!important;line-height:1.35!important}
-html body .weather-table th {font-weight:600!important}
-html body .news-featured-copy h3 {font-size:20px!important;font-weight:600!important;line-height:1.45!important}
-html body .news-card-copy h3,
-html body .warning-item h3 {font-size:18px!important;font-weight:500!important;line-height:1.5!important}
-html body .news-featured-copy p,
-html body .news-card-copy p,
-html body .warning-item p {font-size:16px!important;font-weight:400!important;line-height:1.55!important}
-html body .footer {font-size:11px!important;font-weight:400!important;line-height:1.6!important}
-html body .province-popup b {font-size:16px!important}
-html body .province-popup span {font-size:14px!important}
-</style>
 
-<style id="daily-pm25-typography-specificity-fix-20260915-v2">
-/* Specificity fix: enforce the exact PM2.5 typography scale over legacy page rules */
-html body header.system-header .system-brand strong,
-html body header.system-header .brand strong,
-html body header.system-header .brand-copy strong {font-family:"Noto Sans Thai","Sarabun",sans-serif!important;font-size:20px!important;font-weight:600!important;line-height:1.4!important}
-html body header.system-header .system-brand>span,
-html body header.system-header .brand small,
-html body header.system-header .brand-copy span {font-family:"Noto Sans Thai","Sarabun",sans-serif!important;font-size:14px!important;font-weight:300!important;line-height:1.5!important}
-html body header.system-header .system-clock,
-html body header.system-header .news-nav,
-html body header.system-header .contact-nav,
-html body header.system-header .header-btn {font-family:"Noto Sans Thai","Sarabun",sans-serif!important;font-size:14px!important;line-height:1.4!important}
-html body main.main,
-html body main.main *:not(svg):not(path):not(.material-icons):not([class*="fa-"]) {font-family:"Noto Sans Thai","Sarabun",sans-serif!important}
-html body main.main h1 {font-size:24px!important;font-weight:600!important;line-height:1.4!important}
-html body main.main h2,
-html body main.main .panel-head h2,
-html body main.main .news-heading h2 {font-size:20px!important;font-weight:600!important;line-height:1.45!important}
-html body main.main h3,
-html body main.main .panel-head h3 {font-size:18px!important;font-weight:500!important;line-height:1.5!important}
-html body main.main h4 {font-size:16px!important;font-weight:500!important;line-height:1.5!important}
-html body main.main p,
-html body main.main li,
-html body main.main label,
-html body main.main input,
-html body main.main select,
-html body main.main textarea,
-html body main.main button,
-html body main.main a {font-size:16px!important;font-weight:400!important;line-height:1.55!important}
-html body main.main small,
-html body main.main .muted,
-html body main.main [class*="meta"],
-html body main.main [class*="subtitle"],
-html body main.main [class*="description"],
-html body main.main [class*="hint"],
-html body main.main .panel-head p,
-html body main.main .news-heading p {font-size:14px!important;font-weight:400!important;line-height:1.5!important}
-html body main.main .ticker,
-html body main.main .ticker-label,
-html body main.main .ticker-text,
-html body main.main .ticker-time,
-html body main.main .sync,
-html body main.main .source-link,
-html body main.main .map-badge,
-html body main.main .legend,
-html body main.main .alert-box,
-html body main.main .notice,
-html body main.main .forecast-note {font-size:14px!important;line-height:1.5!important}
-html body main.main .ghost-btn,
-html body main.main .report-btn,
-html body main.main .header-btn,
-html body main.main .news-read,
-html body main.main .news-tabs button,
-html body main.main .panel-head a {font-size:16px!important;line-height:1.4!important}
-html body main.main .detail .temperature {font-size:28px!important;font-weight:500!important;line-height:1.15!important}
-html body main.main .detail .temperature small {font-size:14px!important}
-html body main.main .station-name {font-size:20px!important;font-weight:600!important;line-height:1.4!important}
-html body main.main .station-location,
-html body main.main .detail-metrics span,
-html body main.main .rank-name small,
-html body main.main .rank-no,
-html body main.main .status-pill,
-html body main.main .news-meta,
-html body main.main .news-card-copy small,
-html body main.main .warning-meta {font-size:14px!important;line-height:1.45!important}
-html body main.main .detail-metrics b,
-html body main.main .metric-row span,
-html body main.main .metric-row b,
-html body main.main .rank-name b,
-html body main.main .rank-rain {font-size:16px!important;line-height:1.5!important}
-html body main.main .weather-table th,
-html body main.main .weather-table td {font-size:11px!important;line-height:1.35!important}
-html body main.main .weather-table th {font-weight:600!important}
-html body main.main .news-featured-copy h3 {font-size:20px!important;font-weight:600!important;line-height:1.45!important}
-html body main.main .news-card-copy h3,
-html body main.main .warning-item h3 {font-size:18px!important;font-weight:500!important;line-height:1.5!important}
-html body main.main .news-featured-copy p,
-html body main.main .news-card-copy p,
-html body main.main .warning-item p {font-size:16px!important;font-weight:400!important;line-height:1.55!important}
-html body footer.footer {font-family:"Noto Sans Thai","Sarabun",sans-serif!important;font-size:11px!important;line-height:1.6!important}
-</style>
 
-<style id="daily-pm25-exact-font-rendering-20260915-v3">
-/* Exact rendered typography from docs/pm25.html */
-html body,
-html body *:not(svg):not(path):not(.material-icons):not([class*="fa-"]),
-html body button,
-html body input,
-html body select,
-html body textarea,
-html body table,
-html body th,
-html body td,
-html body a {font-family:"Sarabun","TH Sarabun New",sans-serif!important}
-html body {font-size:16px!important;font-weight:400!important;line-height:1.5!important}
-html body header.system-header .system-brand strong {font-size:21.6px!important;font-weight:600!important;line-height:1.35!important}
-html body header.system-header .system-brand>span {font-size:14px!important;font-weight:300!important;line-height:1.45!important}
-html body header.system-header .system-clock,
-html body header.system-header .news-nav,
-html body header.system-header .contact-nav {font-size:13px!important;line-height:1.4!important}
-html body main.main .ticker,
-html body main.main .ticker-label,
-html body main.main .ticker-text,
-html body main.main .ticker-time,
-html body main.main .sync,
-html body main.main .source-link {font-size:12px!important;line-height:1.45!important}
-html body main.main .panel-head h2,
-html body main.main .news-heading h2 {font-size:17px!important;font-weight:500!important;line-height:1.3!important}
-html body main.main .panel-head h3 {font-size:16px!important;font-weight:500!important;line-height:1.4!important}
-html body main.main .panel-head p,
-html body main.main .news-heading p {font-size:12px!important;font-weight:400!important;line-height:1.45!important}
-html body main.main .ghost-btn,
-html body main.main .report-btn,
-html body main.main .source-link,
-html body main.main .news-read,
-html body main.main .news-tabs button,
-html body main.main .panel-head a {font-size:11px!important;line-height:1.4!important}
-html body main.main .map-badge,
-html body main.main .legend,
-html body main.main .alert-box,
-html body main.main .notice {font-size:12px!important;line-height:1.45!important}
-html body main.main .metric-row span,
-html body main.main .rank-name b,
-html body main.main .rank-rain {font-size:12px!important;line-height:1.45!important}
-html body main.main .metric-row b {font-size:14px!important;font-weight:600!important}
-html body main.main .rank-name small,
-html body main.main .rank-no {font-size:11px!important;line-height:1.4!important}
-html body main.main .detail .temperature {font-size:28px!important;font-weight:500!important;line-height:1.15!important}
-html body main.main .detail .temperature small {font-size:14px!important}
-html body main.main .station-name {font-size:17px!important;font-weight:600!important;line-height:1.4!important}
-html body main.main .station-location {font-size:12px!important;line-height:1.45!important}
-html body main.main .detail-metrics span {font-size:11px!important;line-height:1.45!important}
-html body main.main .detail-metrics b {font-size:13px!important;font-weight:500!important;line-height:1.5!important}
-html body main.main .table-tools input,
-html body main.main .table-tools select {font-size:11px!important;line-height:1.4!important}
-html body main.main .weather-table th,
-html body main.main .weather-table td {font-size:11px!important;line-height:1.35!important}
-html body main.main .weather-table th {font-weight:600!important}
-html body main.main .news-meta,
-html body main.main .news-card-copy small,
-html body main.main .warning-meta,
-html body main.main .forecast-note {font-size:11px!important;line-height:1.45!important}
-html body main.main .news-featured-copy h3 {font-size:17px!important;font-weight:500!important;line-height:1.45!important}
-html body main.main .news-card-copy h3,
-html body main.main .warning-item h3 {font-size:14px!important;font-weight:500!important;line-height:1.5!important}
-html body main.main .news-featured-copy p,
-html body main.main .news-card-copy p,
-html body main.main .warning-item p {font-size:12px!important;font-weight:400!important;line-height:1.55!important}
-html body footer.footer {font-size:11px!important;line-height:1.6!important}
-</style>
-<script id="daily-pm25-exact-font-script-20260915-v3">
-(function(){
-  function matchPm25Font(){
-    document.querySelectorAll("body *:not(svg):not(path):not(.material-icons):not([class*='fa-'])").forEach(function(el){
-      el.style.setProperty("font-family","Sarabun, 'TH Sarabun New', sans-serif","important");
-    });
-  }
-  if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",matchPm25Font)}
-  else{matchPm25Font()}
-})();
-</script>
 
-<style id="daily-top-header-reference-20260915-v1">
-/* Top header matched to the supplied reference image */
-html body header.system-header {
-  position:sticky!important;top:0!important;z-index:2200!important;
-  width:100%!important;min-height:76px!important;padding:0 52px!important;
-  background:#fff!important;border-top:1px solid #dedede!important;
-  border-bottom:1px solid #d9dcde!important;
-  box-shadow:0 2px 5px rgba(31,41,55,.08)!important;
-}
-html body header.system-header .system-header-inner {
-  width:100%!important;min-height:75px!important;margin:0!important;
-  display:flex!important;align-items:center!important;gap:18px!important;
-}
-html body header.system-header .system-brand {
-  display:flex!important;align-items:center!important;gap:16px!important;
-  min-width:0!important;color:#111!important;text-decoration:none!important;white-space:nowrap!important;
-}
-html body header.system-header .system-brand img {
-  width:38px!important;height:46px!important;flex:0 0 38px!important;object-fit:contain!important;
-}
-html body header.system-header .system-brand strong {
-  font-family:"Sarabun","TH Sarabun New",sans-serif!important;
-  font-size:24px!important;font-weight:600!important;line-height:1.3!important;color:#050505!important;
-}
-html body header.system-header .system-brand>span {
-  margin-left:0!important;color:#89939e!important;
-  font-family:"Sarabun","TH Sarabun New",sans-serif!important;
-  font-size:14px!important;font-weight:300!important;line-height:1.4!important;
-}
-html body header.system-header .system-clock {
-  margin-left:auto!important;color:#4b5660!important;
-  font-family:"Sarabun","TH Sarabun New",sans-serif!important;
-  font-size:13px!important;font-weight:400!important;white-space:nowrap!important;
-}
-html body header.system-header .system-actions {
-  display:flex!important;align-items:center!important;gap:7px!important;
-}
-html body header.system-header .news-nav,
-html body header.system-header .contact-nav,
-html body header.system-header .more-btn {
-  min-height:40px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;
-  border:0!important;border-radius:999px!important;text-decoration:none!important;white-space:nowrap!important;
-  font-family:"Sarabun","TH Sarabun New",sans-serif!important;
-  font-size:13px!important;font-weight:500!important;line-height:1!important;
-}
-html body header.system-header .news-nav {
-  gap:7px!important;padding:0 20px!important;background:#f1f3f5!important;color:#66717b!important;
-}
-html body header.system-header .news-nav span {font-size:16px!important}
-html body header.system-header .more-btn {
-  width:44px!important;padding:0!important;background:#f1f3f5!important;
-  color:#66717b!important;font-size:22px!important;cursor:pointer!important;
-}
-html body header.system-header .contact-nav {
-  padding:0 18px!important;background:#598c14!important;color:#fff!important;
-  font-size:14px!important;font-weight:600!important;
-}
-@media(max-width:980px){
-  html body header.system-header{padding:0 16px!important}
-  html body header.system-header .system-brand>span{display:none!important}
-  html body header.system-header .system-clock{display:none!important}
-}
-@media(max-width:650px){
-  html body header.system-header{padding:5px 10px!important;min-height:58px!important}
-  html body header.system-header .system-header-inner{min-height:48px!important;gap:7px!important}
-  html body header.system-header .system-brand{flex:1!important;gap:8px!important}
-  html body header.system-header .system-brand img{width:36px!important;height:36px!important;flex-basis:36px!important}
-  html body header.system-header .system-brand strong{font-size:17px!important;white-space:normal!important;line-height:1.25!important}
-  html body header.system-header .news-nav{min-height:34px!important;padding:0 9px!important;font-size:12px!important}
-  html body header.system-header .news-nav span{display:none!important}
-  html body header.system-header .more-btn{width:34px!important;min-height:34px!important}
-  html body header.system-header .contact-nav{display:none!important}
-}
-</style>
 
 <style id="daily-remove-live-update-strip-20260915">
 html body main.main > section.ticker {display:none!important}
@@ -974,6 +394,125 @@ html body main.main .forecast-note {
   html body main.main .tmd-grid{grid-template-columns:1fr!important}
 }
 </style>
+
+<style id="daily-unified-information-typography-20260915-v1">
+/* Single typography source copied from docs/information.html */
+html body,
+html body button,
+html body input,
+html body select,
+html body textarea,
+html body table,
+html body th,
+html body td,
+html body a,
+html body *:not(svg):not(path):not(.material-icons):not([class*="fa-"]) {
+  font-family:"Sarabun","TH Sarabun New",sans-serif!important;
+}
+html body {font-size:16px!important;font-weight:400!important;line-height:1.6!important}
+html body header.system-header {
+  min-height:76px!important;padding:0 52px!important;
+  background:#fff!important;border-top:1px solid #dedede!important;
+  border-bottom:1px solid #d9dcde!important;box-shadow:0 2px 5px rgba(31,41,55,.08)!important;
+}
+html body header.system-header .system-header-inner {
+  min-height:75px!important;display:flex!important;align-items:center!important;gap:18px!important;
+}
+html body header.system-header .system-brand {display:flex!important;align-items:center!important;gap:16px!important}
+html body header.system-header .system-brand img {width:38px!important;height:46px!important;flex:0 0 38px!important;object-fit:contain!important}
+html body header.system-header .system-brand strong {font-size:19px!important;font-weight:600!important;line-height:1.4!important}
+html body header.system-header .system-brand>span {font-size:12px!important;font-weight:300!important;line-height:1.5!important;color:#89939e!important}
+html body header.system-header .system-clock,
+html body header.system-header .news-nav,
+html body header.system-header .contact-nav {font-size:13px!important;line-height:1.4!important}
+html body header.system-header .system-actions {display:flex!important;align-items:center!important;gap:7px!important}
+html body header.system-header .news-nav,
+html body header.system-header .contact-nav,
+html body header.system-header .more-btn {min-height:40px!important;border-radius:999px!important}
+html body header.system-header .news-nav {padding:0 20px!important}
+html body header.system-header .more-btn {width:44px!important;font-size:22px!important}
+html body header.system-header .contact-nav {padding:0 18px!important;font-size:13px!important;font-weight:600!important}
+html body main.main h1 {font-size:20px!important;font-weight:600!important;line-height:1.4!important}
+html body main.main h2 {font-size:18px!important;font-weight:600!important;line-height:1.45!important}
+html body main.main h3 {font-size:17px!important;font-weight:500!important;line-height:1.5!important}
+html body main.main h4 {font-size:16px!important;font-weight:500!important;line-height:1.5!important}
+html body main.main .panel-head h2,
+html body main.main .panel-head h3,
+html body main.main .news-heading h2 {font-size:17px!important;font-weight:600!important;line-height:1.45!important}
+html body main.main .panel-head p,
+html body main.main .news-heading p {font-size:13px!important;font-weight:400!important;line-height:1.5!important}
+html body main.main p,
+html body main.main label,
+html body main.main li {font-size:14px!important;line-height:1.6!important}
+html body main.main button,
+html body main.main input,
+html body main.main select,
+html body main.main textarea,
+html body main.main a {font-size:13px!important;line-height:1.4!important}
+html body main.main small,
+html body main.main .muted,
+html body main.main [class*="subtitle"],
+html body main.main [class*="description"],
+html body main.main [class*="meta"],
+html body main.main [class*="hint"] {font-size:12px!important;line-height:1.5!important}
+html body main.main .temperature {font-size:27px!important;font-weight:600!important;line-height:1.15!important}
+html body main.main .temperature small {font-size:13px!important}
+html body main.main .station-name {font-size:17px!important;font-weight:600!important}
+html body main.main .metric-row span,
+html body main.main .detail-metrics span,
+html body main.main .rank-name small,
+html body main.main .station-location {font-size:12px!important;line-height:1.45!important}
+html body main.main .metric-row b,
+html body main.main .detail-metrics b,
+html body main.main .rank-name b,
+html body main.main .rank-rain {font-size:13px!important;line-height:1.4!important}
+html body main.main .map-badge,
+html body main.main .legend,
+html body main.main .notice,
+html body main.main .alert-box,
+html body main.main .forecast-note {font-size:12px!important;line-height:1.5!important}
+html body main.main table,
+html body main.main th,
+html body main.main td,
+html body main.main .weather-table th,
+html body main.main .weather-table td {font-size:11px!important;line-height:1.35!important}
+html body main.main .status-pill,
+html body main.main .status-criteria-row span,
+html body main.main .status-criteria-row b,
+html body main.main .forecast-summary-list a,
+html body main.main .forecast-summary-list a b,
+html body main.main .warning-item p,
+html body main.main .warning-meta,
+html body main.main .warning-meta a {font-size:11px!important}
+html body main.main .warning-item h3 {font-size:13px!important}
+html body footer.footer {font-size:11px!important;line-height:1.5!important}
+@media(max-width:980px){
+  html body header.system-header{padding:0 16px!important}
+  html body header.system-header .system-brand>span,
+  html body header.system-header .system-clock{display:none!important}
+}
+@media(max-width:650px){
+  html body header.system-header{padding:5px 10px!important;min-height:58px!important}
+  html body header.system-header .system-header-inner{min-height:48px!important;gap:7px!important}
+  html body header.system-header .system-brand{flex:1!important;gap:8px!important}
+  html body header.system-header .system-brand img{width:36px!important;height:36px!important;flex-basis:36px!important}
+  html body header.system-header .system-brand strong{font-size:17px!important;white-space:normal!important;line-height:1.25!important}
+  html body header.system-header .news-nav{min-height:34px!important;padding:0 9px!important;font-size:12px!important}
+  html body header.system-header .more-btn{width:34px!important;min-height:34px!important}
+  html body header.system-header .contact-nav{display:none!important}
+}
+</style>
+<script id="daily-unified-information-font-20260915-v1">
+(function(){
+  function applyUnifiedFont(){
+    document.querySelectorAll("body *:not(svg):not(path):not(.material-icons):not([class*='fa-'])").forEach(function(el){
+      el.style.setProperty("font-family","Sarabun, 'TH Sarabun New', sans-serif","important");
+    });
+  }
+  if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",applyUnifiedFont)}
+  else{applyUnifiedFont()}
+})();
+</script>
 </head>
 <body>
 <header class="bar system-header">
