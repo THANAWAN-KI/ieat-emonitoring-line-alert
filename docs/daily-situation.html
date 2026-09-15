@@ -907,6 +907,73 @@ html body main.main .status-criteria-card .criteria-note {
   font-size:10px!important;line-height:1.45!important;
 }
 </style>
+
+<style id="daily-tmd-two-card-reference-layout-20260915-v1">
+html body main.main .tmd-grid {
+  margin:12px 0 18px!important;display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:16px!important;
+}
+html body main.main .tmd-grid .tmd-panel {
+  padding:16px!important;border:0!important;border-radius:18px!important;
+  background:#fff!important;box-shadow:0 7px 22px rgba(35,54,72,.09)!important;
+  overflow:hidden!important;
+}
+html body main.main .tmd-grid .tmd-panel > .panel-head {
+  min-height:auto!important;padding:0 0 10px!important;border:0!important;background:#fff!important;
+}
+html body main.main .tmd-grid .tmd-panel > .panel-head h2 {
+  font-size:17px!important;font-weight:500!important;color:#3e4248!important;
+}
+html body main.main .tmd-grid .tmd-panel > .panel-head p {
+  font-size:12px!important;color:#7d8289!important;
+}
+html body main.main .tmd-grid .tmd-panel > .panel-head a {
+  padding:7px 11px!important;border:0!important;border-radius:999px!important;
+  background:#f3f3f3!important;color:#737980!important;font-size:11px!important;
+}
+html body main.main .tmd-pdf-button {
+  width:100%!important;min-height:38px!important;margin:0 0 9px!important;padding:8px 12px!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  border:0!important;border-radius:10px!important;background:#91402f!important;color:#fff!important;
+  font-size:12px!important;font-weight:500!important;text-align:center!important;text-decoration:none!important;
+}
+html body main.main .warning-content {padding:0!important}
+html body main.main .warning-item {
+  margin:7px 0!important;padding:9px 10px!important;border:0!important;border-radius:10px!important;
+  background:#f4f6fb!important;box-shadow:none!important;
+}
+html body main.main .warning-item h3 {
+  margin:0 0 3px!important;color:#595f67!important;font-size:13px!important;font-weight:500!important;
+}
+html body main.main .warning-item p {
+  margin:0!important;color:#7a7f87!important;font-size:11px!important;line-height:1.45!important;
+  -webkit-line-clamp:2!important;
+}
+html body main.main .warning-meta {margin-top:6px!important;font-size:10px!important}
+html body main.main .warning-meta a {
+  padding:4px 9px!important;border-radius:9px!important;background:#ffc85a!important;
+  color:#504b3e!important;font-size:10px!important;font-weight:500!important;
+}
+html body main.main .forecast-summary-list {display:grid!important;gap:7px!important}
+html body main.main .forecast-summary-list a {
+  min-height:38px!important;padding:6px 7px 6px 10px!important;
+  display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;
+  border:0!important;border-radius:10px!important;background:#f4f6fb!important;
+  color:#7a7f87!important;font-size:12px!important;text-decoration:none!important;
+}
+html body main.main .forecast-summary-list a b {
+  min-width:58px!important;padding:5px 10px!important;border-radius:10px!important;
+  background:#ffda25!important;color:#514a24!important;font-size:11px!important;
+  font-weight:500!important;text-align:center!important;
+}
+html body main.main .forecast-note {
+  margin-top:9px!important;padding:0 2px!important;border:0!important;
+  color:#8a8f95!important;font-size:10px!important;line-height:1.45!important;
+}
+@media(max-width:980px){
+  html body main.main .tmd-grid{grid-template-columns:1fr!important}
+}
+</style>
 </head>
 <body>
 <header class="bar system-header">
@@ -964,12 +1031,13 @@ html body main.main .status-criteria-card .criteria-note {
   <div class="tmd-grid" id="tmdWeatherInformation">
    <section class="panel tmd-panel" aria-labelledby="tmdWarningTitle">
     <header class="panel-head"><div><h2 id="tmdWarningTitle">ข่าวแจ้งเตือนกรมอุตุนิยมวิทยา</h2><p>ประกาศเตือนภัยล่าสุดจากกรมอุตุนิยมวิทยา</p></div><a href="https://www.tmd.go.th/warning-and-events/warning-storm" target="_blank" rel="noopener">ดูประกาศทั้งหมด ↗</a></header>
+    <a class="tmd-pdf-button" href="https://tmd.go.th/media/forecast/daily-forecast/2026-09_15_05_warning_th.pdf" target="_blank" rel="noopener" download>ดาวน์โหลด/อ่านประกาศฉบับเต็ม (PDF)</a>
     <div class="warning-content" id="tmdWarningList"><div class="load-state">กำลังโหลดข่าวแจ้งเตือนล่าสุด…</div></div>
    </section>
    <section class="panel tmd-panel" aria-labelledby="tmdForecastTitle">
     <header class="panel-head"><div><h2 id="tmdForecastTitle">พยากรณ์อากาศ 7 วันข้างหน้า</h2><p>ข้อมูลพยากรณ์จากกรมอุตุนิยมวิทยา</p></div><a href="https://www.tmd.go.th/forecast/sevenday" target="_blank" rel="noopener">เปิดหน้าพยากรณ์ ↗</a></header>
-    <iframe class="forecast-frame" title="พยากรณ์อากาศ 7 วันข้างหน้า กรมอุตุนิยมวิทยา" loading="lazy" src="https://www.tmd.go.th/weatherForecast7DaysWidget?province=%E0%B8%81%E0%B8%A3%E0%B8%B8%E0%B8%87%E0%B9%80%E0%B8%97%E0%B8%9E%E0%B8%A1%E0%B8%AB%E0%B8%B2%E0%B8%99%E0%B8%84%E0%B8%A3"></iframe>
-    <div class="forecast-note">กด “เปิดหน้าพยากรณ์” เพื่อดูรายละเอียดครบทุกภาคและประกาศฉบับล่าสุด</div>
+    <div class="forecast-summary-list"><a href="https://www.tmd.go.th/forecast/sevenday" target="_blank" rel="noopener"><span>1. ภาคเหนือ</span><b>7 วัน</b></a><a href="https://www.tmd.go.th/forecast/sevenday" target="_blank" rel="noopener"><span>2. ภาคตะวันออกเฉียงเหนือ</span><b>7 วัน</b></a><a href="https://www.tmd.go.th/forecast/sevenday" target="_blank" rel="noopener"><span>3. ภาคกลางและกรุงเทพฯ</span><b>7 วัน</b></a><a href="https://www.tmd.go.th/forecast/sevenday" target="_blank" rel="noopener"><span>4. ภาคตะวันออก</span><b>7 วัน</b></a><a href="https://www.tmd.go.th/forecast/sevenday" target="_blank" rel="noopener"><span>5. ภาคใต้</span><b>7 วัน</b></a></div>
+    <div class="forecast-note">เลือกภูมิภาคเพื่ออ่านรายละเอียดพยากรณ์จากกรมอุตุนิยมวิทยา</div>
    </section>
   </div>
   <div class="news-tabs" id="weatherNewsTabs"><button class="active" data-category="ทั้งหมด">ข่าวทั้งหมด</button></div>
