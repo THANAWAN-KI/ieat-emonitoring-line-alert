@@ -316,6 +316,11 @@ html body .footer{font-size:11px!important;line-height:1.6!important}
  html body main.main .news-featured-copy h3{font-size:18px!important}
 }
 </style>
+<style id="arcgis-province-boundary-20260915-v1">
+html body .province-boundary-legend{width:18px!important;height:12px!important;border:2px solid #832561!important;border-radius:2px!important;background:rgba(131,37,97,.10)!important}
+html body .province-popup b{color:#000!important;font-size:14px!important}
+html body .province-popup span{color:#000!important;font-size:12px!important}
+</style>
 </head>
 <body>
 <header class="bar system-header">
@@ -346,7 +351,7 @@ html body .footer{font-size:11px!important;line-height:1.6!important}
   <div class="left-column">
    <section class="panel" id="mapPanel">
     <header class="panel-head"><div><h2>แผนที่สถานีตรวจวัดสภาพอากาศ</h2><p>เลือกจุดบนแผนที่เพื่อดูรายละเอียดสถานี</p></div><div class="panel-actions"><button class="ghost-btn active" data-mode="rainfall_24hr">ฝน 24 ชม.</button><button class="ghost-btn" data-mode="temp">อุณหภูมิ</button></div></header>
-    <div class="map-wrap"><div id="map"></div><div class="map-badge">พื้นที่เข้าเกณฑ์เฝ้าระวัง <b id="mapAlertCount">–</b> สถานี · สำนักงานนิคมฯ <b id="estateOfficeCount">–</b> แห่ง</div><div class="legend"><span><i class="estate-legend"></i>สำนักงานนิคมฯ</span><span><i style="background:#42a846"></i>ปกติ</span><span><i style="background:#ffc719"></i>เฝ้าระวัง</span><span><i style="background:#ff6908"></i>ฝนหนัก</span><span><i style="background:#bf033b"></i>วิกฤต</span></div><div class="map-loading" id="mapLoading">กำลังโหลดข้อมูลสถานีทั่วประเทศ…</div></div>
+    <div class="map-wrap"><div id="map"></div><div class="map-badge">พื้นที่เข้าเกณฑ์เฝ้าระวัง <b id="mapAlertCount">–</b> สถานี · สำนักงานนิคมฯ <b id="estateOfficeCount">–</b> แห่ง</div><div class="legend"><span><i class="estate-legend"></i>สำนักงานนิคมฯ</span><span><i class="province-boundary-legend"></i>ขอบเขตจังหวัด</span><span><i style="background:#42a846"></i>ปกติ</span><span><i style="background:#ffc719"></i>เฝ้าระวัง</span><span><i style="background:#ff6908"></i>ฝนหนัก</span><span><i style="background:#bf033b"></i>วิกฤต</span></div><div class="map-loading" id="mapLoading">กำลังโหลดข้อมูลสถานีทั่วประเทศ…</div></div>
    </section>
    <div class="bottom-grid">
     <section class="panel extremes"><header class="panel-head" style="padding:0 0 10px;min-height:auto"><div><h3>สถานการณ์เด่นทั่วประเทศ</h3><p>ประเมินจากข้อมูลล่าสุด</p></div></header><div class="alert-box" id="alertBox">กำลังวิเคราะห์พื้นที่ที่ต้องเฝ้าระวัง</div><div class="metric-list"><div class="metric-row"><span>ความเร็วลมสูงสุด</span><b id="maxWind">–</b></div><div class="metric-row"><span>ฝนสะสมสูงสุด</span><b id="maxRain">–</b></div><div class="metric-row"><span>อุณหภูมิสูงสุด</span><b id="maxTemp">–</b></div><div class="metric-row"><span>จำนวนสถานีทั้งหมด</span><b id="stationCount">–</b></div></div><button class="report-btn" id="scrollTable">ดูรายละเอียดทุกสถานี</button></section>
@@ -395,11 +400,31 @@ html body .footer{font-size:11px!important;line-height:1.6!important}
 "use strict";
 var DATA_URL="https://nawakonnakhonchai-wq.github.io/temp_3_hr/weather_data.geojson";
 var ESTATE_URL="https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/e_PP_2025/FeatureServer/1/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=geojson";
+var PROVINCE_URL="https://services1.arcgis.com/jSaRWj2TDlcN1zOC/arcgis/rest/services/Thailand_Province_Boundaries_view/FeatureServer/1/query?where=1%3D1&outFields=ADMIN_ID1%2CNAME1%2CNAME_ENG1&returnGeometry=true&outSR=4326&f=geojson";
 var all=[],filtered=[],markers=[],mode="rainfall_24hr",selected=null;
 var map=L.map("map",{zoomControl:true,minZoom:4}).setView([13.25,101.1],6);
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:"© OpenStreetMap contributors"}).addTo(map);
+map.createPane("provincePane");map.getPane("provincePane").style.zIndex=350;
 var markerLayer=L.layerGroup().addTo(map);
 var estateLayer=L.layerGroup().addTo(map);
+var selectedProvince=null;
+var provinceLayer=L.geoJSON(null,{
+ pane:"provincePane",
+ style:function(){return{pane:"provincePane",color:"#717780",weight:1,opacity:.75,fillColor:"#ffffff",fillOpacity:0}},
+ onEachFeature:function(feature,layer){
+  var p=feature.properties||{},thai=p.NAME1||"ไม่ระบุชื่อจังหวัด",english=p.NAME_ENG1||"";
+  layer.bindTooltip("จังหวัด "+thai,{sticky:true});
+  layer.bindPopup('<div class="province-popup"><b>จังหวัด '+esc(thai)+'</b>'+(english?'<br><span>'+esc(english)+'</span>':"")+'</div>');
+  layer.on("click",function(){
+   if(selectedProvince)provinceLayer.resetStyle(selectedProvince);
+   selectedProvince=layer;
+   layer.setStyle({color:"#832561",weight:3,opacity:1,fillColor:"#832561",fillOpacity:.10});
+   layer.bringToFront();
+   map.fitBounds(layer.getBounds(),{padding:[28,28],maxZoom:9});
+   layer.openPopup();
+  });
+ }
+}).addTo(map);
 function n(v,d){return Number(v||0).toLocaleString("th-TH",{minimumFractionDigits:d||0,maximumFractionDigits:d==null?1:d})}
 function esc(v){return String(v==null?"":v).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]})}
 function statusOf(v){v=Number(v||0);if(v>=90)return{key:"critical",label:"วิกฤต",color:"#bf033b"};if(v>=60)return{key:"warning",label:"ฝนหนัก",color:"#ff6908"};if(v>=35)return{key:"watch",label:"เฝ้าระวัง",color:"#ffc719"};return{key:"normal",label:"ปกติ",color:"#42a846"}}
@@ -419,6 +444,7 @@ document.querySelectorAll("[data-mode]").forEach(function(btn){btn.addEventListe
 function updateClock(){document.querySelector("#localTime").textContent="เวลาประเทศไทย "+new Intl.DateTimeFormat("th-TH",{hour:"2-digit",minute:"2-digit",hour12:false,timeZone:"Asia/Bangkok"}).format(new Date())+" น."}updateClock();setInterval(updateClock,60000);
 fetch(DATA_URL+"?t="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json()}).then(function(data){all=(data.features||[]).filter(function(x){return x.geometry&&x.properties});var stamp=all[0]&&all[0].properties.record_timestamp;document.querySelector("#syncState").classList.add("ok");document.querySelector("#syncText").textContent="เชื่อมโยงข้อมูลแล้ว";document.querySelector("#tickerTime").textContent=stamp?"ข้อมูล ณ "+new Intl.DateTimeFormat("th-TH",{dateStyle:"medium",timeStyle:"short",timeZone:"Asia/Bangkok"}).format(new Date(stamp+"Z")):"ข้อมูลล่าสุด";document.querySelector("#mapLoading").classList.add("hide");drawMarkers();renderSummary();renderTable();setTimeout(function(){map.invalidateSize()},100)}).catch(function(err){document.querySelector("#syncText").textContent="เชื่อมต่อไม่สำเร็จ";document.querySelector("#tickerText").textContent="ไม่สามารถเรียกข้อมูลสภาพอากาศได้ในขณะนี้";document.querySelector("#mapLoading").textContent="ไม่สามารถโหลดข้อมูล กรุณาลองใหม่อีกครั้ง";document.querySelector("#stationRows").innerHTML='<tr><td colspan="8" class="error-state">ไม่สามารถเรียกข้อมูลจากแหล่งต้นทางได้</td></tr>';console.error(err)});
 fetch(ESTATE_URL+"&t="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json()}).then(function(data){drawEstateOffices((data.features||[]).filter(function(x){return x.geometry&&x.properties}))}).catch(function(err){document.querySelector("#estateOfficeCount").textContent="–";console.error("IEAT office layer",err)});
+fetch(PROVINCE_URL+"&t="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json()}).then(function(data){provinceLayer.addData(data)}).catch(function(err){console.error("Thailand province boundary layer",err)});
 })();
 </script>
 
