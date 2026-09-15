@@ -977,4 +977,34 @@ body.water-mode .wb-source{display:none!important}
 }
 </style>
 
+
+<style id="wb-trend-cards-row-v6">
+@media(min-width:1101px){
+ body.water-mode #waterBankDashboard{grid-template-columns:minmax(520px,1fr) minmax(520px,1fr)!important;align-items:stretch!important}
+ body.water-mode #waterBankDashboard>.wb-decision-info-v3{
+  grid-column:1!important;display:grid!important;grid-template-columns:1fr 1fr!important;
+  grid-template-rows:1fr 1fr!important;gap:12px!important;min-height:350px
+ }
+ body.water-mode #waterBankDashboard>.wb-overview-charts-v2{
+  grid-column:2!important;display:block!important;min-height:350px
+ }
+ body.water-mode #waterBankDashboard>.wb-overview-charts-v2>.wb-card{
+  height:100%!important;display:flex;flex-direction:column
+ }
+ body.water-mode #waterBankDashboard>.wb-overview-charts-v2 .wb-chart-body{
+  flex:1;height:auto!important;min-height:270px!important
+ }
+ body.water-mode #waterBankDashboard>.wb-decision-info-v3 .wb-info-item{
+  min-height:0!important;display:flex;flex-direction:column;justify-content:center
+ }
+}
+@media(max-width:1100px){
+ body.water-mode #waterBankDashboard>.wb-decision-info-v3{grid-template-columns:1fr 1fr!important}
+ body.water-mode #waterBankDashboard>.wb-overview-charts-v2{display:block!important}
+}
+@media(max-width:600px){
+ body.water-mode #waterBankDashboard>.wb-decision-info-v3{grid-template-columns:1fr!important}
+}
+</style>
+
 </body></html>
