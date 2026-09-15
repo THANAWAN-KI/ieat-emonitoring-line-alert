@@ -173,11 +173,11 @@ body.overview-mode{overflow:hidden;background:#f5f7fa}.situation-dashboard{heigh
 
     <div class="em-two-charts">
      <article class="em-panel">
-      <header><div><h2>ผลตรวจวัดระบบบำบัดน้ำเสีย</h2><p>ค่าคุณภาพน้ำจากระบบ WQMs</p></div><span>ข้อมูลล่าสุด</span></header>
+      <header><div><h2>ผลตรวจวัดระบบบำบัดน้ำเสีย</h2><p id="emWqArea">ค่าคุณภาพน้ำจากระบบ WQMs</p></div><span>ข้อมูลล่าสุด</span></header>
       <div class="em-water-bars"><div><em>0</em><i style="height:0%"></i><b>BOD</b><small>mg/L</small></div><div><em>0</em><i style="height:0%"></i><b>COD</b><small>mg/L</small></div><div><em>0</em><i style="height:0%"></i><b>TSS</b><small>mg/L</small></div><div><em>0</em><i style="height:0%"></i><b>DO</b><small>mg/L</small></div><div><em>0</em><i style="height:0%"></i><b>pH</b><small>pH</small></div></div>
      </article>
      <article class="em-panel">
-      <header><div><h2>ผลตรวจวัดคุณภาพอากาศจากปล่อง</h2><p>ค่าการระบายจากระบบ CEMs</p></div><span>ข้อมูลล่าสุด</span></header>
+      <header><div><h2>ผลตรวจวัดคุณภาพอากาศจากปล่อง</h2><p id="emCeArea">ค่าการระบายจากระบบ CEMs</p></div><span>ข้อมูลล่าสุด</span></header>
       <div class="em-emission-list"><span><b>SO₂</b><i><em style="width:0%"></em></i><strong>0 ppm</strong></span><span><b>NOx</b><i><em style="width:0%"></em></i><strong>0 ppm</strong></span><span><b>CO</b><i><em style="width:0%"></em></i><strong>0 ppm</strong></span><span><b>O₂</b><i><em style="width:0%"></em></i><strong>0 %</strong></span><span><b>Opacity</b><i><em style="width:0%"></em></i><strong>0 %</strong></span></div>
      </article>
     </div>
@@ -510,6 +510,7 @@ body.monitor-mode .em-system-row article>strong{color:#0091cd!important}
 .em-pm-chart{height:390px}.em-line-chart{position:relative;height:260px;padding:15px 18px 10px 48px}.em-line-chart svg{width:100%;height:100%}.em-y{position:absolute;left:13px;top:16px;bottom:12px;display:flex;flex-direction:column;justify-content:space-between;color:#000}.em-y span{font-size:11px!important}.em-empty{position:absolute;inset:0;display:grid;place-items:center;color:#000;font-size:15px!important}.em-pm-chart footer{height:52px;padding:8px 18px;display:flex;align-items:center;gap:20px;color:#000}.em-pm-chart footer span{font-size:13px!important}.em-pm-chart footer i{display:inline-block;width:9px;height:9px;margin-right:6px;border-radius:50%;background:#2b78ce}.em-pm-chart footer span:nth-child(2) i{background:#d94e5b}
 .em-two-charts{display:grid;grid-template-columns:1fr 1fr;gap:14px}.em-water-bars{height:225px;padding:25px 16px 13px;display:flex;align-items:flex-end;justify-content:space-around;background:repeating-linear-gradient(to bottom,transparent 0,transparent 32%,#e9edf1 33%,transparent 34%)}.em-water-bars div{height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center}.em-water-bars em{margin-bottom:5px;color:#000;font-size:13px!important;font-style:normal}.em-water-bars i{display:block;width:30px;min-height:8px;border-radius:9px 9px 1px 1px;background:#159b9a}.em-water-bars b{margin-top:6px;color:#000;font-size:13px!important}.em-water-bars small{color:#000;font-size:11px!important}.em-emission-list{padding:19px;display:grid;gap:16px}.em-emission-list span{display:grid;grid-template-columns:62px 1fr 65px;align-items:center;gap:10px}.em-emission-list b,.em-emission-list strong{color:#000;font-size:12px!important}.em-emission-list i{height:10px;border-radius:8px;background:#edf0f3;overflow:hidden}.em-emission-list em{display:block;height:100%;background:#e16b32}
 .em-status-summary{padding:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.em-status-summary div{padding:12px;border-radius:11px;background:#f7f9fb;display:grid;grid-template-columns:12px 1fr auto;align-items:center;gap:8px}.em-status-summary i{width:9px;height:9px;border-radius:50%}.em-status-summary i.green{background:#43a560}.em-status-summary i.gray{background:#9198a0}.em-status-summary i.amber{background:#dfa322}.em-status-summary i.red{background:#d74c5b}.em-status-summary b,.em-status-summary strong{font-size:13px!important}.em-table-wrap{overflow:auto;padding:0 14px 14px}.em-table-wrap table{width:100%;border-collapse:collapse}.em-table-wrap th,.em-table-wrap td{padding:12px;border-bottom:1px solid #e5e9ed;color:#000!important;font-size:13px!important;text-align:left}.em-table-wrap th{background:#f4f6f8}.em-table-wrap td[colspan]{padding:28px;text-align:center}
+.em-table-wrap tbody tr[data-lat][data-lon]{cursor:pointer;transition:background .18s ease}.em-table-wrap tbody tr[data-lat][data-lon]:hover{background:#eef8fc}.em-station-status{display:inline-block;min-width:78px;padding:5px 10px;border-radius:999px;color:#fff!important;text-align:center;font-weight:700}.em-station-status.online{background:#598c14}.em-station-status.offline{background:#f00a36}
 .em-alert-summary>div{padding:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.em-alert-summary article{padding:14px;border-radius:12px;background:#f7f9fb}.em-alert-summary article b{display:block;font-size:13px!important}.em-alert-summary article strong{display:block;margin:6px 0;color:#2875c8;font-size:25px!important}.em-alert-summary article small{color:#000;font-size:12px!important}
 .em-map{position:sticky;top:12px;height:calc(100vh - 145px);min-height:860px}.em-map>header{position:absolute;z-index:3;top:12px;left:12px;right:12px;border:0;border-radius:14px;background:#fffffff2;box-shadow:0 4px 15px rgba(25,38,50,.14)}.em-map iframe{display:block;width:100%;height:100%;border:0;background:#e8eef3;pointer-events:auto;touch-action:auto}.em-map-legend{position:absolute;z-index:3;left:18px;right:18px;bottom:18px;padding:14px;border-radius:13px;background:#fffffff2;box-shadow:0 5px 17px rgba(25,38,50,.16);display:grid;grid-template-columns:repeat(2,1fr);gap:8px;color:#000}.em-map-legend b{grid-column:1/-1;font-size:15px!important}.em-map-legend span{font-size:13px!important}.em-map-legend i{display:inline-block;width:9px;height:9px;margin-right:6px;border-radius:50%}.em-map-legend i.aq{background:#2776cc}.em-map-legend i.wq{background:#159b9a}.em-map-legend i.ce{background:#e16b32}.em-map-legend i.off{background:#939aa2}
 @media(max-width:1350px){.em-kpis{grid-template-columns:repeat(3,1fr)}.em-layout{grid-template-columns:1fr}.em-map{position:relative;top:auto;height:720px;min-height:720px}}
@@ -544,7 +545,9 @@ body.monitor-mode .em-system-row article>strong{color:#0091cd!important}
    type:normalizeType(p.Type||p.station_type),
    status:text(p.Status||p.status).toUpperCase(),
    updated:text(p["LastUpdate-TH"]||p.LastUpdateTH||p.LastUpdate||p.record_tim||p.RecordTime||p.last_update)||"-",
-   alarm:text(p.ParameterAlram||p.parameter_alarm)
+   alarm:text(p.ParameterAlram||p.parameter_alarm),
+   lat:Number(p.Latitude||p.latitude||p.LAT||p.lat),
+   lon:Number(p.Longitude||p.longitude||p.LON||p.lon||p.lng)
   };
  }
  function rowsFromJson(json){
@@ -582,11 +585,25 @@ body.monitor-mode .em-system-row article>strong{color:#0091cd!important}
   const a=station.alarm.toLowerCase();
   return a&&!["-","none","null","nan","n/a"].includes(a);
  }
- function isOnline(station){return station.status==="ONLINE"}
+ function isOnline(station){return /^ONLINE\b/.test(station.status)}
  function esc(value){
   return text(value).replace(/[&<>"']/g,function(ch){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]});
  }
  function setStrong(nodes,index,value){if(nodes[index])nodes[index].textContent=value}
+ function measurements(rows,pattern){const values=[];rows.forEach(s=>{const source=s.alarm||"";let match;pattern.lastIndex=0;while((match=pattern.exec(source))!==null){const value=Number(match[1]);if(Number.isFinite(value)&&Math.abs(value)<100000)values.push(value)}});return values}
+ function average(values){return values.length?Math.round(values.reduce((a,b)=>a+b,0)/values.length*10)/10:0}
+ function renderMeasurementCharts(rows,name){
+  const aq=rows.filter(s=>s.type==="AQMs"),wq=rows.filter(s=>s.type==="WQMs"),ce=rows.filter(s=>s.type==="CEMs");
+  const pm=measurements(aq,/PM\s*2\.?5[^0-9-]*(-?\d+(?:\.\d+)?)/gi).slice(-8),pmPath=document.querySelector(".em-line-chart svg path:last-child"),pmEmpty=document.querySelector(".em-line-chart .em-empty"),pmMax=Math.max(...pm,100);
+  if(pmPath)pmPath.setAttribute("d",pm.length?pm.map((v,i)=>(i?"L":"M")+(pm.length===1?400:i*800/(pm.length-1)).toFixed(1)+" "+(235-Math.min(v,pmMax)/pmMax*195).toFixed(1)).join(" "):"");
+  if(pmEmpty){pmEmpty.style.display=pm.length?"none":"grid";pmEmpty.textContent="ไม่มีข้อมูล PM2.5 สำหรับ "+name}
+  const water=[/BOD[^0-9-]*(-?\d+(?:\.\d+)?)/gi,/COD[^0-9-]*(-?\d+(?:\.\d+)?)/gi,/TSS[^0-9-]*(-?\d+(?:\.\d+)?)/gi,/DO[^0-9-]*(-?\d+(?:\.\d+)?)/gi,/pH[^0-9-]*(-?\d+(?:\.\d+)?)/gi].map(re=>average(measurements(wq,re))),waterMax=Math.max(...water,1);document.querySelectorAll(".em-water-bars>div").forEach((el,i)=>{const value=water[i],label=el.querySelector("em"),bar=el.querySelector("i");if(label)label.textContent=value.toLocaleString("th-TH",{maximumFractionDigits:1});if(bar)bar.style.height=(value?Math.max(8,value/waterMax*88):0)+"%"});
+  const emission=[/SO2[^0-9-]*(-?\d+(?:\.\d+)?)/gi,/NOx[^0-9-]*(-?\d+(?:\.\d+)?)/gi,/\bCO\b[^0-9-]*(-?\d+(?:\.\d+)?)/gi,/\bO2\b[^0-9-]*(-?\d+(?:\.\d+)?)/gi,/Opacity[^0-9-]*(-?\d+(?:\.\d+)?)/gi].map(re=>average(measurements(ce,re))),emissionMax=Math.max(...emission,1);document.querySelectorAll(".em-emission-list>span").forEach((el,i)=>{const value=emission[i],bar=el.querySelector("em"),label=el.querySelector("strong"),unit=i<3?" ppm":" %";if(bar)bar.style.width=(value?Math.max(5,value/emissionMax*100):0)+"%";if(label)label.textContent=value.toLocaleString("th-TH",{maximumFractionDigits:1})+unit});
+  const wqArea=document.getElementById("emWqArea"),ceArea=document.getElementById("emCeArea");if(wqArea)wqArea.textContent="WQMs • "+name+" • "+wq.length.toLocaleString("th-TH")+" สถานี";if(ceArea)ceArea.textContent="CEMs • "+name+" • "+ce.length.toLocaleString("th-TH")+" สถานี";
+ }
+ function zoomMonitoringMap(lat,lon,name){
+  if(!Number.isFinite(lat)||!Number.isFinite(lon))return;const map=document.getElementById("emDataMap"),url=mapBase+"&center="+lon+","+lat+"&scale=9000";if(map){map.src=url;map.dataset.area="station:"+lat+","+lon;map.scrollIntoView({behavior:"smooth",block:"center"})}const sub=document.getElementById("emMapSubtitle");if(sub)sub.textContent="ซูมตำแหน่ง • "+name;
+ }
  function setLoading(){
   document.querySelectorAll(".em-kpis strong,.em-system-row>article>strong,.em-status-summary strong,.em-alert-summary strong").forEach(el=>el.textContent="…");
   const body=document.querySelector(".em-table-wrap tbody");if(body)body.innerHTML='<tr><td colspan="5">กำลังโหลดข้อมูลล่าสุด…</td></tr>';
@@ -597,6 +614,7 @@ body.monitor-mode .em-system-row article>strong{color:#0091cd!important}
   const online=rows.filter(isOnline),offline=rows.filter(s=>!isOnline(s));
   const aq=rows.filter(s=>s.type==="AQMs"),wq=rows.filter(s=>s.type==="WQMs"),ce=rows.filter(s=>s.type==="CEMs");
   const alarms=rows.filter(hasAlarm);
+  renderMeasurementCharts(rows,name);
   const kpis=document.querySelectorAll(".em-kpis article strong");
   [rows.length,online.length,offline.length,aq.length,wq.length,ce.length].forEach((v,i)=>setStrong(kpis,i,v.toLocaleString("th-TH")));
   const systems=document.querySelectorAll(".em-system-row>article>strong");
@@ -609,7 +627,8 @@ body.monitor-mode .em-system-row article>strong{color:#0091cd!important}
   const tbody=document.querySelector(".em-table-wrap tbody");
   if(tbody){
    const sorted=rows.slice().sort((a,b)=>(isOnline(b)?1:0)-(isOnline(a)?1:0)||Number(hasAlarm(b))-Number(hasAlarm(a)));
-   tbody.innerHTML=sorted.length?sorted.slice(0,30).map(s=>'<tr><td>'+esc(s.name)+'</td><td>'+esc(s.type)+'</td><td>'+esc(s.estate)+'</td><td>'+esc(s.status||"-")+'</td><td>'+esc(s.updated)+'</td></tr>').join(""):'<tr><td colspan="5">ไม่พบสถานี e‑Monitoring สำหรับพื้นที่ที่เลือก</td></tr>';
+   tbody.innerHTML=sorted.length?sorted.slice(0,30).map(s=>{const online=isOnline(s),coords=Number.isFinite(s.lat)&&Number.isFinite(s.lon)?' data-lat="'+s.lat+'" data-lon="'+s.lon+'" data-name="'+esc(s.name)+'" title="คลิกเพื่อซูมไปยังสถานีบนแผนที่"':'';return'<tr'+coords+'><td>'+esc(s.name)+'</td><td>'+esc(s.type)+'</td><td>'+esc(s.estate)+'</td><td><span class="em-station-status '+(online?'online':'offline')+'">'+(online?'ONLINE':'OFFLINE')+'</span></td><td>'+esc(s.updated)+'</td></tr>'}).join(""):'<tr><td colspan="5">ไม่พบสถานี e‑Monitoring สำหรับพื้นที่ที่เลือก</td></tr>';
+   tbody.querySelectorAll("tr[data-lat][data-lon]").forEach(tr=>tr.addEventListener("click",()=>zoomMonitoringMap(Number(tr.dataset.lat),Number(tr.dataset.lon),tr.dataset.name)));
   }
   const latest=document.querySelector(".em-alert-summary>header>span");
   if(latest)latest.textContent="ข้อมูลล่าสุดจาก e‑Monitoring • "+rows.length.toLocaleString("th-TH")+" สถานี";
