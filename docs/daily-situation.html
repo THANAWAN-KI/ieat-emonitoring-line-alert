@@ -800,6 +800,77 @@ html body main.main .right-column > .panel.green-data-frame:not(.detail) .rank-r
   html body main.main .detail.green-data-frame .detail-metrics{grid-template-columns:1fr!important}
 }
 </style>
+
+<style id="daily-rain-overview-reference-chart-20260915-v1">
+/* Rainfall overview card styled from the supplied chart reference */
+html body main.main .panel.red-rain-frame {
+  border:0!important;
+  border-radius:18px!important;
+  background:#fff!important;
+  box-shadow:0 7px 22px rgba(35,54,72,.09)!important;
+  overflow:hidden!important;
+}
+html body main.main .panel.red-rain-frame > .panel-head {
+  min-height:62px!important;padding:15px 18px 8px!important;
+  border:0!important;background:#fff!important;
+}
+html body main.main .panel.red-rain-frame > .panel-head h3 {
+  color:#3d4147!important;font-weight:500!important;
+}
+html body main.main .panel.red-rain-frame > .panel-head p {
+  color:#81858b!important;
+}
+html body main.main .panel.red-rain-frame #rainTotalLabel {
+  min-width:116px!important;padding:8px 14px!important;
+  border:0!important;border-radius:999px!important;
+  background:#f3f3f3!important;color:#858585!important;text-align:center!important;
+}
+html body main.main .panel.red-rain-frame .rain-chart {
+  position:relative!important;padding:34px 18px 18px!important;background:#fff!important;
+}
+html body main.main .panel.red-rain-frame .rain-chart::before {
+  content:"●  ฝนสะสม 24 ชม."!important;
+  position:absolute!important;left:20px!important;top:5px!important;
+  color:#91402f!important;font-size:11px!important;font-weight:400!important;
+}
+html body main.main .panel.red-rain-frame .bars {
+  height:225px!important;display:flex!important;align-items:flex-end!important;
+  gap:12px!important;padding:12px 8px 5px!important;
+  border:0!important;border-bottom:1px solid #e8e8e8!important;
+  background:repeating-linear-gradient(
+    to top,
+    transparent 0,
+    transparent 54px,
+    rgba(120,120,120,.13) 55px,
+    transparent 56px
+  )!important;
+}
+html body main.main .panel.red-rain-frame .bar-item {
+  height:100%!important;min-width:0!important;display:flex!important;
+  flex:1!important;flex-direction:column!important;justify-content:flex-end!important;
+  align-items:center!important;gap:6px!important;
+}
+html body main.main .panel.red-rain-frame .bar-item .bar {
+  width:min(20px,48%)!important;min-height:3px!important;
+  border-radius:9px 9px 0 0!important;
+  background:#91402f!important;box-shadow:none!important;
+  transition:transform .2s ease,filter .2s ease!important;
+}
+html body main.main .panel.red-rain-frame .bar-item:hover .bar {
+  filter:brightness(1.08)!important;transform:translateY(-2px)!important;
+}
+html body main.main .panel.red-rain-frame .bar-item b {
+  color:#6e6e6e!important;font-size:11px!important;font-weight:400!important;
+}
+html body main.main .panel.red-rain-frame .bar-item span {
+  width:100%!important;color:#7d7d7d!important;font-size:10px!important;
+  overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;text-align:center!important;
+}
+@media(max-width:650px){
+  html body main.main .panel.red-rain-frame .bars{height:190px!important;gap:5px!important}
+  html body main.main .panel.red-rain-frame .bar-item .bar{width:min(15px,55%)!important}
+}
+</style>
 </head>
 <body>
 <header class="bar system-header">
