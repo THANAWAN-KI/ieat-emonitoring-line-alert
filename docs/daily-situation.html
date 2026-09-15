@@ -514,6 +514,26 @@ html,body{width:100%;max-width:none;overflow-x:hidden}
  .portal-heading{margin-top:10px}
 }
 </style>
+
+<style id="homepage-live-data-20260915">
+.live-data-panel{margin:16px 0;padding:20px;border:1px solid #e1e5ea;border-radius:18px;background:#fff;box-shadow:0 5px 18px rgba(27,39,51,.06)}
+.live-data-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:14px}
+.live-data-head span{display:block;color:#631a9d;font-size:12px!important;font-weight:600;letter-spacing:.1em}
+.live-data-head h2{margin:3px 0 0!important;color:#242b34}
+.live-data-head p{margin:0;color:#687481;font-size:14px!important}
+.live-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.live-kpi{min-height:112px;padding:16px;border:1px solid #e6e9ed;border-radius:14px;background:#f8fafc}
+.live-kpi span,.live-kpi small{display:block}.live-kpi span{color:#687481;font-size:13px!important}.live-kpi strong{display:block;margin:7px 0 3px;color:#631a9d;font-size:27px!important;line-height:1.1}.live-kpi small{color:#7b8590;font-size:12px!important}
+.live-kpi.rain strong{color:#306bec}.live-kpi.alert strong{color:#bf033b}
+.live-data-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(280px,.75fr);gap:14px;margin-top:14px}
+.live-table-wrap,.live-source-card{overflow:hidden;border:1px solid #e6e9ed;border-radius:14px}
+.live-table-title{display:flex;justify-content:space-between;gap:12px;padding:13px 15px;background:#f4f0f7;color:#4b326e}.live-table-title b{font-size:14px}.live-table-title small{font-size:12px!important;color:#6d6175}
+.live-weather-table{width:100%;border-collapse:collapse}.live-weather-table th,.live-weather-table td{padding:10px 12px;border-bottom:1px solid #edf0f3;text-align:left;font-size:13px!important}.live-weather-table th{background:#fafbfc;color:#56616e;font-weight:600}.live-weather-table td:nth-child(n+3),.live-weather-table th:nth-child(n+3){text-align:right}.live-weather-table tbody tr:last-child td{border-bottom:0}
+.live-source-card{padding:16px}.live-source-card h3{margin:0 0 8px!important}.live-source-card p{margin:0 0 12px;color:#65707d;font-size:13px!important}.live-source-card a{display:block;margin-top:8px;color:#631a9d!important;font-size:13px!important;font-weight:600;text-decoration:none}.live-source-status{padding:11px 12px;border-radius:10px;background:#f5f7f9;color:#3f4a56;font-size:13px}.live-source-status.ok{background:#edf5e4;color:#48720f}.live-source-status.error{background:#fdecef;color:#a70435}
+@media(max-width:980px){.live-kpis{grid-template-columns:repeat(2,1fr)}.live-data-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.live-data-panel{padding:14px}.live-data-head{display:block}.live-data-head p{margin-top:7px}.live-kpis{grid-template-columns:1fr 1fr}.live-kpi{min-height:100px;padding:13px}.live-kpi strong{font-size:23px!important}.live-table-wrap{overflow-x:auto}.live-weather-table{min-width:600px}}
+</style>
+
 </head>
   <body>
     <header class="bar">
@@ -539,6 +559,37 @@ html,body{width:100%;max-width:none;overflow-x:hidden}
         <div><span>IEAT EMCC · NEWS CENTER</span><h1>ข่าวสารและสถานการณ์ที่เกี่ยวข้อง</h1><p>รวบรวมข่าวจากหน่วยงานทางการด้านนิคมอุตสาหกรรม สิ่งแวดล้อม และภัยพิบัติ อัปเดตอัตโนมัติทุกวัน</p></div>
         <div class="portal-update"><small>อัปเดตล่าสุด</small><strong id="reportUpdated">กำลังโหลดข้อมูล…</strong><span><b id="newsTotal">–</b> ข่าวในระบบ</span></div>
       </section>
+
+      <section class="live-data-panel" aria-labelledby="liveDataTitle">
+        <header class="live-data-head">
+          <div><span>LIVE SITUATION DATA</span><h2 id="liveDataTitle">ข้อมูลสถานการณ์ล่าสุด</h2></div>
+          <p id="weatherUpdated">กำลังเรียกข้อมูลสภาพอากาศล่าสุด…</p>
+        </header>
+        <div class="live-kpis">
+          <article class="live-kpi"><span>สถานีอากาศทั้งหมด</span><strong id="weatherStationCount">–</strong><small>สถานีทั่วประเทศ</small></article>
+          <article class="live-kpi rain"><span>สถานีที่ตรวจพบฝน</span><strong id="rainingStationCount">–</strong><small>ค่าฝนล่าสุดมากกว่า 0 มม.</small></article>
+          <article class="live-kpi alert"><span>ฝนสะสม 24 ชม. สูงสุด</span><strong id="maxRain24">–</strong><small id="maxRainStation">กำลังประมวลผล</small></article>
+          <article class="live-kpi"><span>ข้อมูลพื้นที่จาก ArcGIS</span><strong id="arcgisFeatureCount">–</strong><small id="arcgisLayerName">กำลังเชื่อมโยง Layer</small></article>
+        </div>
+        <div class="live-data-grid">
+          <div class="live-table-wrap">
+            <div class="live-table-title"><b>สถานีที่มีฝนสะสม 24 ชั่วโมงสูงสุด</b><small>เรียงจากค่ามากไปน้อย</small></div>
+            <table class="live-weather-table">
+              <thead><tr><th>สถานี</th><th>จังหวัด</th><th>อุณหภูมิ</th><th>ฝนล่าสุด</th><th>ฝนสะสม 24 ชม.</th></tr></thead>
+              <tbody id="weatherRows"><tr><td colspan="5">กำลังโหลดข้อมูล…</td></tr></tbody>
+            </table>
+          </div>
+          <aside class="live-source-card">
+            <h3>แหล่งข้อมูลที่ใช้ในหน้าแรก</h3>
+            <p>หน้าเว็บเรียกข้อมูลล่าสุดจากแหล่งต้นทางโดยตรงทุกครั้งที่เปิดหน้า</p>
+            <div class="live-source-status" id="liveSourceStatus">กำลังตรวจสอบการเชื่อมโยงข้อมูล</div>
+            <a href="https://nawakonnakhonchai-wq.github.io/temp_3_hr/weather_data.geojson" target="_blank" rel="noopener">ข้อมูลสภาพอากาศ 3 ชั่วโมง →</a>
+            <a href="https://ieat.maps.arcgis.com/home/item.html?id=40825fa0e23044deb6ee9c075e50c657&sublayer=0#overview" target="_blank" rel="noopener">ข้อมูลพื้นที่ ArcGIS กนอ. →</a>
+            <a href="https://ieat.maps.arcgis.com/apps/dashboards/524fcc0f90fd4725aa8f96e489c397f3" target="_blank" rel="noopener">เปิด Dashboard ต้นแบบ →</a>
+          </aside>
+        </div>
+      </section>
+
       <section class="news-toolbar">
         <div class="category-tabs" id="categoryTabs"><button class="active" data-category="ทั้งหมด">ข่าวทั้งหมด</button></div>
         <label class="news-search"><span>ค้นหา</span><input id="newsSearch" type="search" placeholder="ค้นหาข่าว แหล่งข่าว หรือคำสำคัญ"></label>
@@ -727,5 +778,59 @@ html body .kpi small{font-size:14px!important;line-height:1.45!important}
  [500,1500,4000].forEach(function(ms){setTimeout(apply,ms)});
 })();
 </script>
+
+<script id="homepage-live-data-20260915">
+(function(){
+ const WEATHER_URL="https://nawakonnakhonchai-wq.github.io/temp_3_hr/weather_data.geojson";
+ const ITEM_ID="40825fa0e23044deb6ee9c075e50c657";
+ const PORTAL="https://ieat.maps.arcgis.com";
+ const num=(value,digits=1)=>Number(value||0).toLocaleString("th-TH",{minimumFractionDigits:digits,maximumFractionDigits:digits});
+ const escLive=(value)=>String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[ch]));
+ function setSourceStatus(ok,message){const box=document.querySelector("#liveSourceStatus");if(!box)return;box.className="live-source-status "+(ok?"ok":"error");box.textContent=message}
+ async function loadWeather(){
+  const response=await fetch(WEATHER_URL+"?t="+Date.now(),{cache:"no-store"});
+  if(!response.ok)throw new Error("Weather HTTP "+response.status);
+  const data=await response.json(),features=Array.isArray(data.features)?data.features:[],items=features.map(f=>f.properties||{});
+  const raining=items.filter(x=>Number(x.rainfall)>0),sorted=[...items].sort((a,b)=>Number(b.rainfall_24hr||0)-Number(a.rainfall_24hr||0)),max=sorted[0]||{};
+  document.querySelector("#weatherStationCount").textContent=items.length.toLocaleString("th-TH");
+  document.querySelector("#rainingStationCount").textContent=raining.length.toLocaleString("th-TH");
+  document.querySelector("#maxRain24").textContent=num(max.rainfall_24hr)+" มม.";
+  document.querySelector("#maxRainStation").textContent=max.station_name?max.station_name+" · "+(max.province||""):"ไม่พบข้อมูล";
+  const stamp=max.record_timestamp||items[0]?.record_timestamp;
+  document.querySelector("#weatherUpdated").textContent=stamp?"ข้อมูลสภาพอากาศ ณ "+new Intl.DateTimeFormat("th-TH",{dateStyle:"medium",timeStyle:"short",timeZone:"Asia/Bangkok"}).format(new Date(stamp+"Z")):"โหลดข้อมูลสภาพอากาศล่าสุดแล้ว";
+  document.querySelector("#weatherRows").innerHTML=sorted.slice(0,6).map(x=>"<tr><td>"+escLive(x.station_name)+"</td><td>"+escLive(x.province)+"</td><td>"+num(x.temp)+" °C</td><td>"+num(x.rainfall)+" มม.</td><td><b>"+num(x.rainfall_24hr)+" มม.</b></td></tr>").join("")||'<tr><td colspan="5">ไม่พบข้อมูลสถานี</td></tr>';
+  return true;
+ }
+ async function loadArcGIS(){
+  const itemResponse=await fetch(PORTAL+"/sharing/rest/content/items/"+ITEM_ID+"?f=json",{cache:"no-store"});
+  if(!itemResponse.ok)throw new Error("ArcGIS item HTTP "+itemResponse.status);
+  const item=await itemResponse.json();
+  if(item.error||!item.url)throw new Error(item.error?.message||"ไม่พบ URL ของ ArcGIS Layer");
+  let serviceUrl=String(item.url).replace(/\/$/,""),layerUrl=/FeatureServer\/\d+$/i.test(serviceUrl)?serviceUrl:serviceUrl+"/0";
+  const countResponse=await fetch(layerUrl+"/query?where=1%3D1&returnCountOnly=true&f=json",{cache:"no-store"});
+  if(!countResponse.ok)throw new Error("ArcGIS query HTTP "+countResponse.status);
+  const countData=await countResponse.json();
+  if(countData.error)throw new Error(countData.error.message||"ArcGIS query error");
+  document.querySelector("#arcgisFeatureCount").textContent=Number(countData.count||0).toLocaleString("th-TH");
+  document.querySelector("#arcgisLayerName").textContent=item.title||"ArcGIS Layer กนอ.";
+  return true;
+ }
+ Promise.allSettled([loadWeather(),loadArcGIS()]).then(results=>{
+  const ok=results.filter(x=>x.status==="fulfilled").length;
+  if(ok===2)setSourceStatus(true,"เชื่อมโยงข้อมูลสำเร็จทั้ง 2 แหล่ง");
+  else if(ok===1)setSourceStatus(false,"เชื่อมโยงสำเร็จ 1 แหล่ง อีก 1 แหล่งอาจจำกัดสิทธิ์การเข้าถึง");
+  else setSourceStatus(false,"ไม่สามารถเรียกข้อมูลต้นทางได้ในขณะนี้");
+  if(results[0].status==="rejected"){
+   document.querySelector("#weatherUpdated").textContent="ไม่สามารถโหลดข้อมูลสภาพอากาศได้";
+   document.querySelector("#weatherRows").innerHTML='<tr><td colspan="5">กรุณาลองโหลดหน้าใหม่อีกครั้ง</td></tr>';
+  }
+  if(results[1].status==="rejected"){
+   document.querySelector("#arcgisFeatureCount").textContent="–";
+   document.querySelector("#arcgisLayerName").textContent="Layer อาจต้องลงชื่อเข้าใช้";
+  }
+ });
+})();
+</script>
+
 </body>
 </html>
