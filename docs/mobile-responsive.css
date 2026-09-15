@@ -1,0 +1,107 @@
+/* Shared mobile layout layer. Presentation only; no content or data rules. */
+html{max-width:100%;overflow-x:hidden}
+body{max-width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%}
+img,svg,video,canvas{max-width:100%}
+iframe{max-width:100%}
+button,a,select,input,textarea{touch-action:manipulation}
+
+@media(max-width:768px){
+  *{min-width:0}
+  body{width:100%;margin:0}
+  h1{font-size:clamp(20px,6vw,28px)!important;line-height:1.3!important}
+  h2{line-height:1.35!important}
+  input,select,textarea,button{font-size:16px}
+
+  /* Shared application headers and navigation */
+  .header,.topbar,.contacts-site-header,.page-header,.top,.bar-in{
+    width:100%!important;height:auto!important;min-height:0!important;
+    padding:9px 10px!important;gap:8px!important;flex-wrap:wrap!important;
+  }
+  .brand,.contacts-site-brand,.header-main,.brand-link{max-width:100%!important}
+  .header-right,.header-actions,.contacts-header-actions,.top-actions{
+    width:100%!important;margin:0!important;display:flex!important;
+    gap:6px!important;overflow-x:auto!important;overscroll-behavior-inline:contain;
+    scrollbar-width:none;
+  }
+  .header-right::-webkit-scrollbar,.header-actions::-webkit-scrollbar,.contacts-header-actions::-webkit-scrollbar,.top-actions::-webkit-scrollbar{display:none}
+  .header-actions>a,.header-actions>button,.contacts-header-actions>a,.top-actions>a,.top-actions>button{
+    flex:0 0 auto!important;min-height:40px!important;white-space:nowrap!important;
+  }
+  .tabs,.disaster-tabs,.quick-nav{
+    width:100%!important;display:flex!important;overflow-x:auto!important;
+    justify-content:flex-start!important;scroll-snap-type:x proximity;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  }
+  .tabs::-webkit-scrollbar,.disaster-tabs::-webkit-scrollbar,.quick-nav::-webkit-scrollbar{display:none}
+  .tabs>* ,.disaster-tabs>* ,.quick-nav>*{flex:0 0 auto!important;scroll-snap-align:start;white-space:nowrap}
+
+  /* Page shells */
+  .app-shell,.shell,.page,.workspace,main.main,main.page,.em-dashboard,.accident-dashboard{
+    width:100%!important;max-width:100%!important;margin:0!important;padding-left:10px!important;padding-right:10px!important;
+  }
+  .content,.dashboard,.bottom-grid,.right-column,.left-column,.main-grid,.grid,.cards,.summary,.kpis,.extras,.tmd-grid,.news-grid{
+    max-width:100%!important;
+  }
+
+  /* Daily situation and weather dashboard */
+  .system-header,.bar{position:relative!important;top:auto!important}
+  .system-brand{max-width:calc(100% - 10px)!important}
+  .system-nav,.nav{width:100%!important;overflow-x:auto!important;justify-content:flex-start!important}
+  .ticker{display:flex!important;flex-wrap:wrap!important;height:auto!important;gap:6px!important}
+  .dashboard,.bottom-grid,.right-column,.tmd-grid,.forecast-grid,.news-grid,.news-featured{
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  .map-wrap,.map-panel{position:relative!important;top:auto!important;width:100%!important;height:480px!important;min-height:480px!important}
+  .map-wrap iframe,.map-panel iframe,.pm-map{width:100%!important;height:100%!important;min-height:0!important}
+  .panel-head,.news-heading{align-items:flex-start!important;flex-wrap:wrap!important}
+  .panel-head>a,.news-heading>a{margin-left:0!important}
+  .detail-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+
+  /* Information dashboard and every tab */
+  body.overview-mode .dashboard,body.gis-mode .gis-data-dashboard,body.monitor-mode .em-dashboard,
+  body.water-mode .dashboard,body.accident-mode .accident-dashboard{width:100%!important;max-width:100%!important}
+  .gis-data-kpis,.em-kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .gis-data-layout,.gis-data-grid,.gis-utility-grid,.gis-chemical-grid,.em-system-row,.em-layout,.em-two-charts,.ac-grid,.ac-right,.ac-chart-row{
+    grid-template-columns:minmax(0,1fr)!important;display:grid!important;
+  }
+  .gis-data-layout>*,.em-layout>*,.ac-grid>*{grid-column:1!important;grid-row:auto!important}
+  .gis-data-map,.em-map,.ac-map{position:relative!important;top:auto!important;width:100%!important;height:520px!important;min-height:520px!important}
+  .gis-data-map iframe,.em-map iframe,.ac-map iframe{width:100%!important;height:100%!important}
+  .em-panel>header,.ac-head{height:auto!important;min-height:0!important;align-items:flex-start!important;flex-wrap:wrap!important}
+  .em-status-summary,.em-alert-summary>div{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .em-line-chart{overflow-x:auto!important}.em-line-chart svg{min-width:560px!important}
+  .em-water-bars,.em-emission-list{min-width:0!important}
+  .ac-chart{overflow-x:auto!important}.ac-chart .ac-bars{min-width:520px!important}
+  .ac-col{display:grid!important;grid-template-columns:minmax(0,1fr)!important}
+  .ac-panel{width:100%!important;height:auto!important;min-height:0!important}
+  .ac-map{height:520px!important;min-height:520px!important}
+
+  /* Hub and embedded situation pages */
+  main.page{display:block!important}
+  .toolbar,.filter-row,.filters,.tools,.search-row,.officer-actions{display:grid!important;grid-template-columns:minmax(0,1fr)!important;width:100%!important}
+  .toolbar>*,.filter-row>*,.filters>*,.tools>*,.search-row>*{width:100%!important;margin:0!important}
+  .hub-map,.fire-map,.map-card{position:relative!important;top:auto!important;width:100%!important;min-height:460px!important}
+  .pm25-report-frame,.drought-report-frame,.flood-report-frame{width:100%!important;min-height:720px!important}
+
+  /* Forms, contacts, stations and reports */
+  .content,.contact-summary,.contact-grid,.urgent-calls,.form-grid,.meta-grid,.report-grid,.grid{
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  .search-panel,.form-card,.report-wrap,.editor,.report{width:100%!important;max-width:100%!important}
+  .table-wrap,.table-scroll,.em-table-wrap,.water-table-scroll,.ac-rank,.ac-list{
+    width:100%!important;max-width:100%!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch;
+  }
+  table{max-width:none}
+  .weather-table,.table,.station-table{min-width:720px!important}
+  .footer{width:100%!important;display:block!important;text-align:center!important}
+}
+
+@media(max-width:430px){
+  .gis-data-kpis,.em-kpis{grid-template-columns:minmax(0,1fr)!important}
+  .detail-metrics,.em-status-summary,.em-alert-summary>div{grid-template-columns:minmax(0,1fr)!important}
+  .map-wrap,.map-panel,.gis-data-map,.em-map,.ac-map{height:440px!important;min-height:440px!important}
+  .em-map>header,.gis-data-map>header{left:8px!important;right:8px!important;top:8px!important}
+  .em-map-legend,.gis-map-layers{left:8px!important;right:8px!important;bottom:8px!important}
+  .ac-kpis{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  .ac-kpi{padding-left:4px!important;padding-right:4px!important}.ac-kpi b{font-size:25px!important}
+}
