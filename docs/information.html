@@ -900,8 +900,8 @@ function overviewCharts(rows){
 function ensure(){
  var root=document.querySelector(".dashboard");if(!root)return null;var el=document.getElementById("waterBankDashboard");if(el)return el;
  el=document.createElement("section");el.id="waterBankDashboard";el.innerHTML=
- '<section class="wb-decision-info-v3" id="wbDecisionInfo"><article class="wb-info-item"><span>สถานีใกล้นิคมฯ ที่สุด</span><strong id="wbNearest">–</strong><small id="wbNearestDetail">กำลังคำนวณระยะทาง</small></article><article class="wb-info-item"><span>สถานีระดับน้ำสูงสุด</span><strong id="wbHighest">–</strong><small id="wbHighestDetail">กำลังประเมินระดับเทียบตลิ่ง</small></article><article class="wb-info-item"><span>ข้อมูลล่าสุด</span><strong id="wbLatest">–</strong><small>ใช้ตรวจสอบความสดใหม่ของข้อมูล</small></article><article class="wb-info-item"><span>แม่น้ำ / ลุ่มน้ำที่เกี่ยวข้อง</span><strong id="wbRivers">–</strong><small id="wbRiverDetail">จากสถานีใกล้พื้นที่นิคมฯ</small></article></section><section class="wb-overview-charts-v2"><article class="wb-card"><header class="wb-head"><div><h2>ระดับน้ำเทียบตลิ่ง (%)</h2><p>เปรียบเทียบสถานีใกล้นิคมฯ • เส้นประสีแดงคือระดับตลิ่ง 100%</p></div><span class="wb-badge">กราฟเปอร์เซ็นต์</span></header><div class="wb-chart-body" id="wbPercentChart"><div class="wb-empty">กำลังโหลดกราฟ…</div></div></article><article class="wb-card"><header class="wb-head"><div><h2>แนวโน้มระดับน้ำ</h2><p>กราฟเส้นข้อมูลย้อนหลังจากสถานี ThaiWater</p></div><span class="wb-badge">ย้อนหลัง 3 วัน</span></header><div class="wb-chart-body" id="wbTrendChart"><div class="wb-empty">กำลังโหลดกราฟ…</div></div></article></section><article class="wb-card"><header class="wb-head"><div><h2>สถานีตรวจวัดระดับน้ำที่เกี่ยวข้องกับนิคมฯ</h2><p id="wbArea">ระดับน้ำเทียบตลิ่งและแนวโน้มระดับน้ำ</p></div><span class="wb-badge" id="wbCount">กำลังโหลด</span></header><div class="wb-scroll"><table class="wb-table"><thead><tr><th>ชื่อสถานี</th><th>แม่น้ำ / ลุ่มน้ำ</th><th>ระดับน้ำปัจจุบัน</th><th>ระดับน้ำเทียบตลิ่ง (%) — กราฟ</th><th>สูง/ต่ำกว่าตลิ่ง</th><th>สถานะ</th><th>แนวโน้มระดับน้ำ — กราฟย้อนหลัง</th><th>ระยะห่าง</th><th>ข้อมูลล่าสุด / หน่วยงาน</th></tr></thead><tbody id="wbRows"></tbody></table></div></article>'+
- '<article class="wb-card"><header class="wb-head"><div><h2>พื้นที่เสี่ยงน้ำท่วมใกล้นิคมฯ</h2><p>แสดงเฉพาะสถานีที่ระดับน้ำล้นตลิ่ง (ตั้งแต่ 100%)</p></div><span class="wb-badge" id="wbRiskCount">0 จุด</span></header><div class="wb-risk-list" id="wbRisks"></div></article>'+
+ '<section class="wb-decision-info-v3" id="wbDecisionInfo"><article class="wb-info-item"><span>สถานีใกล้นิคมฯ ที่สุด</span><strong id="wbNearest">–</strong><small id="wbNearestDetail">กำลังคำนวณระยะทาง</small></article><article class="wb-info-item"><span>สถานีระดับน้ำสูงสุด</span><strong id="wbHighest">–</strong><small id="wbHighestDetail">กำลังประเมินระดับเทียบตลิ่ง</small></article><article class="wb-info-item"><span>ข้อมูลล่าสุด</span><strong id="wbLatest">–</strong><small>ใช้ตรวจสอบความสดใหม่ของข้อมูล</small></article><article class="wb-info-item"><span>แม่น้ำ / ลุ่มน้ำที่เกี่ยวข้อง</span><strong id="wbRivers">–</strong><small id="wbRiverDetail">จากสถานีใกล้พื้นที่นิคมฯ</small></article></section><section class="wb-overview-charts-v2"><article class="wb-card"><header class="wb-head"><div><h2>ระดับน้ำเทียบตลิ่ง (%)</h2><p>เปรียบเทียบสถานีใกล้นิคมฯ • เส้นประสีแดงคือระดับตลิ่ง 100%</p></div><span class="wb-badge">กราฟเปอร์เซ็นต์</span></header><div class="wb-chart-body" id="wbPercentChart"><div class="wb-empty">กำลังโหลดกราฟ…</div></div></article><article class="wb-card"><header class="wb-head"><div><h2>แนวโน้มระดับน้ำ</h2><p>กราฟเส้นข้อมูลย้อนหลังจากสถานี ThaiWater</p></div><span class="wb-badge">ย้อนหลัง 3 วัน</span></header><div class="wb-chart-body" id="wbTrendChart"><div class="wb-empty">กำลังโหลดกราฟ…</div></div></article></section><article class="wb-card wb-station-card-v8"><header class="wb-head"><div><h2>สถานีตรวจวัดระดับน้ำที่เกี่ยวข้องกับนิคมฯ</h2><p id="wbArea">ระดับน้ำเทียบตลิ่งและแนวโน้มระดับน้ำ</p></div><span class="wb-badge" id="wbCount">กำลังโหลด</span></header><div class="wb-scroll"><table class="wb-table"><thead><tr><th>ชื่อสถานี</th><th>แม่น้ำ / ลุ่มน้ำ</th><th>ระดับน้ำปัจจุบัน</th><th>ระดับน้ำเทียบตลิ่ง (%) — กราฟ</th><th>สูง/ต่ำกว่าตลิ่ง</th><th>สถานะ</th><th>แนวโน้มระดับน้ำ — กราฟย้อนหลัง</th><th>ระยะห่าง</th><th>ข้อมูลล่าสุด / หน่วยงาน</th></tr></thead><tbody id="wbRows"></tbody></table></div></article>'+
+ '<article class="wb-card wb-risk-card-v8"><header class="wb-head"><div><h2>พื้นที่เสี่ยงน้ำท่วมใกล้นิคมฯ</h2><p>แสดงเฉพาะสถานีที่ระดับน้ำล้นตลิ่ง (ตั้งแต่ 100%)</p></div><span class="wb-badge" id="wbRiskCount">0 จุด</span></header><div class="wb-risk-list" id="wbRisks"></div></article>'+
  '';
  root.appendChild(el);var charts=el.querySelector(".wb-overview-charts-v2"),percent=charts&&charts.firstElementChild,left=root.querySelector(".left");if(percent&&left)left.appendChild(percent);var source=el.querySelector(".wb-source");if(source)source.remove();return el;
 }
@@ -1020,6 +1020,36 @@ body.water-mode #wbPercentChart .wb-main-svg{display:block;width:100%!important;
 @media(max-width:700px){
  body.water-mode #wbPercentChart{overflow-x:auto!important}
  body.water-mode #wbPercentChart .wb-main-svg{min-width:480px!important}
+}
+</style>
+
+
+<style id="wb-risk-beside-trend-v8">
+@media(min-width:1101px){
+ body.water-mode #waterBankDashboard{
+  grid-template-columns:minmax(300px,.8fr) minmax(390px,1.05fr) minmax(300px,.8fr)!important;
+  gap:14px!important;align-items:stretch!important
+ }
+ body.water-mode #waterBankDashboard>.wb-decision-info-v3{
+  grid-column:1!important;grid-row:1!important;min-height:350px!important
+ }
+ body.water-mode #waterBankDashboard>.wb-overview-charts-v2{
+  grid-column:2!important;grid-row:1!important;min-height:350px!important
+ }
+ body.water-mode #waterBankDashboard>.wb-risk-card-v8{
+  grid-column:3!important;grid-row:1!important;height:350px!important
+ }
+ body.water-mode #waterBankDashboard>.wb-risk-card-v8 .wb-risk-list{
+  max-height:285px!important;height:285px!important
+ }
+ body.water-mode #waterBankDashboard>.wb-station-card-v8{
+  grid-column:1/-1!important;grid-row:2!important
+ }
+}
+@media(min-width:701px) and (max-width:1100px){
+ body.water-mode #waterBankDashboard{grid-template-columns:1fr 1fr!important}
+ body.water-mode #waterBankDashboard>.wb-risk-card-v8{grid-column:2!important}
+ body.water-mode #waterBankDashboard>.wb-station-card-v8{grid-column:1/-1!important}
 }
 </style>
 
