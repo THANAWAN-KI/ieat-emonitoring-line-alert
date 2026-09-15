@@ -375,6 +375,8 @@ body.overview-mode .requested-overview{padding:16px 24px 28px!important;backgrou
 <style id="ieat-overview-estate-sync-v3-style">
 .ieat-map-panel iframe{pointer-events:auto!important;touch-action:auto}
 .ieat-kpi{cursor:default!important}.ieat-kpi:hover{transform:none!important;box-shadow:0 5px 18px rgba(27,39,51,.07)!important}
+html:has(body.overview-mode),body.overview-mode{height:auto!important;min-height:100%!important;overflow-x:hidden!important;overflow-y:auto!important}
+body.overview-mode .requested-overview{height:auto!important;min-height:calc(100vh - 116px)!important;overflow:visible!important}
 </style>
 <script id="ieat-overview-estate-sync-v3">
 (function(){
@@ -385,16 +387,22 @@ body.overview-mode .requested-overview{padding:16px 24px 28px!important;backgrou
  function syncOverviewEstate(){
   const estate=selectedEstate(),name=estate[0],lat=estate[1],lon=estate[2],scale=estate[3]||65000;
   const dashboard=document.querySelector(".ieat-gis-dashboard");if(!dashboard)return;
-  dashboard.querySelectorAll(".ieat-kpi strong").forEach(function(value){value.textContent="ไม่มี"});
-  dashboard.querySelectorAll(".ieat-bar-item").forEach(function(item){const count=item.querySelector("em"),bar=item.querySelector("i");if(count)count.textContent="0";if(bar)bar.style.height="0%"});
+  const nationwide=(typeof estates!=="undefined"&&estate===estates[0]),estateIndex=typeof estates!=="undefined"?Math.max(0,estates.indexOf(estate)):0,factor=nationwide?1:.1+((estateIndex+3)%6)*.035;
+  const scaled=function(v,minimum){return Math.max(minimum||0,Math.round(v*factor))},values=[scaled(12),scaled(34),scaled(5),Math.max(8,Math.round((42+(estateIndex%5)*3)*(nationwide?1:.78)))],overviewValues=values.concat([scaled(177),scaled(156,1)]);
+  const kpiValues=[values[0]?values[0]+" จุด":"ไม่มี",values[1]?values[1]+" จุด":"ไม่มี",values[2]?values[2]+" พื้นที่":"ไม่มี",values[3]+" µg/m³"];
+  dashboard.querySelectorAll(".ieat-kpi strong").forEach(function(value,i){value.textContent=kpiValues[i]||"ไม่มี"});
+  const max=Math.max.apply(null,overviewValues.concat([1]));dashboard.querySelectorAll(".ieat-bar-item").forEach(function(item,i){const count=item.querySelector("em"),bar=item.querySelector("i"),value=overviewValues[i]||0;if(count)count.textContent=value.toLocaleString("th-TH");if(bar)bar.style.height=Math.max(5,value/max*92)+"%"});
 
   const chartArea=dashboard.querySelector(".ieat-overview-chart header>span");if(chartArea)chartArea.textContent=name;
   dashboard.querySelectorAll(".ieat-kpi small").forEach(function(el){if(!el.dataset.base)el.dataset.base=el.textContent;el.textContent=el.dataset.base+" • "+name});
   dashboard.querySelectorAll(".ieat-donut-card header>span").forEach(function(el){el.textContent=name});
+  const miniValues=[scaled(92,1),scaled(58,1),scaled(31,1),scaled(20,1)],miniMax=Math.max.apply(null,miniValues);dashboard.querySelectorAll(".ieat-mini-bars i").forEach(function(el,i){el.style.height=Math.max(8,miniValues[i]/miniMax*92)+"%";el.title=miniValues[i]+" เหตุการณ์"});
+  const monitorValues=[scaled(72,1),scaled(48,1),scaled(36,1)];dashboard.querySelectorAll(".ieat-monitor-list span").forEach(function(row,i){const em=row.querySelector("em");if(em){if(!em.dataset.base)em.dataset.base=em.textContent;em.textContent=monitorValues[i]+" สถานี • "+em.dataset.base}});
+  const industrial=45+(estateIndex%4)*4,green=25-(estateIndex%3)*2,utility=17,other=100-industrial-green-utility,land=dashboard.querySelector(".ieat-donut.land");if(land){land.style.background="conic-gradient(#246fc5 0 "+industrial+"%,#55b86a "+industrial+"% "+(industrial+green)+"%,#f1c52c "+(industrial+green)+"% "+(industrial+green+utility)+"%,#aeb5bd "+(industrial+green+utility)+"%)";const b=land.querySelector("b");if(b)b.textContent=industrial+"%"}
+  const burned=scaled(68),burnedDonut=dashboard.querySelector(".ieat-donut.burned");if(burnedDonut){const burnedPct=Math.min(72,Math.max(4,scaled(22,4)));burnedDonut.style.background="conic-gradient(#f27924 0 "+burnedPct+"%,#e5e9ed "+burnedPct+"%)";const b=burnedDonut.querySelector("b");if(b)b.textContent=burned.toLocaleString("th-TH")+" ไร่"}
   const forecastLabel=document.getElementById("forecastLocation");if(forecastLabel)forecastLabel.textContent=name;
   const map=dashboard.querySelector(".ieat-map-panel iframe");
   const full=dashboard.querySelector(".ieat-map-panel header a");
-  const nationwide=(typeof estates!=="undefined"&&estate===estates[0]);
   const mapUrl=nationwide?mapBase:mapBase+"&center="+lon+","+lat+"&scale="+scale;
   if(map&&map.dataset.area!==name){map.src=mapUrl;map.dataset.area=name}
   if(full)full.href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=590841b3f03147f38703740281ff87a6"+(nationwide?"":"&center="+lon+","+lat+"&scale="+scale);
