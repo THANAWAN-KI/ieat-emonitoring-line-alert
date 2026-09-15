@@ -721,6 +721,85 @@ html body header.system-header .contact-nav {
 <style id="daily-remove-live-update-strip-20260915">
 html body main.main > section.ticker {display:none!important}
 </style>
+
+<style id="daily-three-cards-reference-layout-20260915-v1">
+/* Three requested cards: borderless soft cards with gray data rows and value pills */
+html body main.main .panel.green-data-frame {
+  border:0!important;
+  border-radius:18px!important;
+  background:#fff!important;
+  box-shadow:0 7px 22px rgba(35,54,72,.09)!important;
+  overflow:hidden!important;
+}
+html body main.main .panel.green-data-frame > .panel-head {
+  border-bottom:0!important;
+  background:#fff!important;
+}
+html body main.main .extremes.green-data-frame {padding:17px!important}
+html body main.main .extremes.green-data-frame .alert-box {
+  margin:2px 0 9px!important;padding:10px 12px!important;
+  border:0!important;border-radius:10px!important;
+  background:#f4f6fb!important;color:#59616b!important;
+}
+html body main.main .extremes.green-data-frame .metric-list {margin-top:5px!important}
+html body main.main .extremes.green-data-frame .metric-row {
+  min-height:38px!important;margin:7px 0!important;padding:6px 7px 6px 10px!important;
+  display:flex!important;align-items:center!important;gap:10px!important;
+  border:0!important;border-radius:10px!important;background:#f4f6fb!important;
+}
+html body main.main .extremes.green-data-frame .metric-row span {color:#7a7f87!important}
+html body main.main .extremes.green-data-frame .metric-row b {
+  min-width:62px!important;margin-left:auto!important;padding:4px 10px!important;
+  border-radius:10px!important;background:#ffc85a!important;color:#4f4b3f!important;
+  text-align:center!important;font-weight:500!important;
+}
+html body main.main .extremes.green-data-frame .report-btn {
+  border:0!important;border-radius:10px!important;background:#f4f6fb!important;
+  box-shadow:none!important;
+}
+html body main.main .detail.green-data-frame {padding:17px!important}
+html body main.main .detail.green-data-frame .detail-top {
+  padding:9px 10px!important;border:0!important;border-radius:10px!important;background:#f4f6fb!important;
+}
+html body main.main .detail.green-data-frame .detail-metrics {
+  margin-top:8px!important;display:grid!important;grid-template-columns:1fr!important;gap:7px!important;
+}
+html body main.main .detail.green-data-frame .detail-metrics div {
+  min-height:38px!important;padding:6px 7px 6px 10px!important;
+  display:flex!important;align-items:center!important;justify-content:space-between!important;gap:10px!important;
+  border:0!important;border-radius:10px!important;background:#f4f6fb!important;
+}
+html body main.main .detail.green-data-frame .detail-metrics span {
+  display:block!important;color:#7a7f87!important;
+}
+html body main.main .detail.green-data-frame .detail-metrics b {
+  display:block!important;min-width:62px!important;margin:0!important;padding:4px 10px!important;
+  border-radius:10px!important;background:#ffda25!important;color:#554d22!important;
+  text-align:center!important;font-weight:500!important;
+}
+html body main.main .right-column > .panel.green-data-frame:not(.detail) .ranking {
+  padding:2px 15px 15px!important;
+}
+html body main.main .right-column > .panel.green-data-frame:not(.detail) .rank-row {
+  min-height:38px!important;margin:7px 0!important;padding:6px 7px!important;
+  grid-template-columns:25px 1fr auto!important;gap:6px!important;
+  border:0!important;border-radius:10px!important;background:#f4f6fb!important;
+}
+html body main.main .right-column > .panel.green-data-frame:not(.detail) .rank-no {
+  width:auto!important;height:auto!important;background:transparent!important;color:#858991!important;
+}
+html body main.main .right-column > .panel.green-data-frame:not(.detail) .rank-name small {
+  color:#858991!important;
+}
+html body main.main .right-column > .panel.green-data-frame:not(.detail) .rank-rain {
+  min-width:70px!important;padding:4px 10px!important;
+  border-radius:10px!important;background:#008f8f!important;color:#fff!important;
+  text-align:center!important;font-weight:500!important;
+}
+@media(max-width:650px){
+  html body main.main .detail.green-data-frame .detail-metrics{grid-template-columns:1fr!important}
+}
+</style>
 </head>
 <body>
 <header class="bar system-header">
