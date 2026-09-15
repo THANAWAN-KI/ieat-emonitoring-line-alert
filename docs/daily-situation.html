@@ -871,6 +871,42 @@ html body main.main .panel.red-rain-frame .bar-item span {
   html body main.main .panel.red-rain-frame .bar-item .bar{width:min(15px,55%)!important}
 }
 </style>
+
+<style id="daily-status-criteria-reference-card-20260915-v1">
+html body main.main .status-criteria-card {
+  padding:16px!important;border:0!important;border-radius:18px!important;
+  background:#fff!important;box-shadow:0 7px 22px rgba(35,54,72,.09)!important;
+  overflow:hidden!important;
+}
+html body main.main .status-criteria-card > .panel-head {
+  min-height:auto!important;padding:0 0 8px!important;
+  border:0!important;background:#fff!important;
+}
+html body main.main .status-criteria-card .status-criteria-list {
+  display:grid!important;gap:7px!important;
+}
+html body main.main .status-criteria-card .status-criteria-row {
+  min-height:38px!important;padding:5px 6px 5px 10px!important;
+  display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;
+  border:0!important;border-radius:10px!important;background:#f4f6fb!important;
+}
+html body main.main .status-criteria-card .status-criteria-row span {
+  color:#7a7f87!important;font-size:12px!important;line-height:1.4!important;
+}
+html body main.main .status-criteria-card .status-criteria-row b {
+  min-width:94px!important;padding:5px 9px!important;border-radius:10px!important;
+  color:#fff!important;font-size:11px!important;font-weight:500!important;
+  line-height:1.2!important;text-align:center!important;white-space:nowrap!important;
+}
+html body main.main .status-criteria-card .criteria-normal {background:#008f8f!important}
+html body main.main .status-criteria-card .criteria-watch {background:#e7ad20!important}
+html body main.main .status-criteria-card .criteria-warning {background:#ef6a21!important}
+html body main.main .status-criteria-card .criteria-critical {background:#bf033b!important}
+html body main.main .status-criteria-card .criteria-note {
+  margin:9px 2px 0!important;color:#8a8f95!important;
+  font-size:10px!important;line-height:1.45!important;
+}
+</style>
 </head>
 <body>
 <header class="bar system-header">
@@ -911,7 +947,7 @@ html body main.main .panel.red-rain-frame .bar-item span {
   <aside class="right-column">
    <section class="panel detail green-data-frame"><header class="panel-head" style="padding:0 0 13px;min-height:auto"><div><h3>รายละเอียดสถานี</h3><p id="localTime">เวลาประเทศไทย –</p></div></header><div class="detail-top"><div class="weather-icon" id="weatherIcon">🌦️</div><div class="temperature" id="detailTemp">–<small>°C</small></div><div class="condition"><span>สถานการณ์</span><b id="detailCondition">รอข้อมูล</b></div></div><h2 class="station-name" id="detailName">กำลังเลือกสถานีล่าสุด</h2><div class="station-location" id="detailProvince">–</div><div class="detail-metrics"><div><span>ฝนล่าสุด</span><b id="detailRain">–</b></div><div><span>ฝน 24 ชม.</span><b id="detailRain24">–</b></div><div><span>ความเร็วลม</span><b id="detailWind">–</b></div></div><div class="detail-metrics"><div><span>ทิศทางลม</span><b id="detailDirection">–</b></div><div><span>ละติจูด</span><b id="detailLat">–</b></div><div><span>ลองจิจูด</span><b id="detailLng">–</b></div></div></section>
    <section class="panel green-data-frame"><header class="panel-head"><div><h3>สถานีฝนสูงสุด</h3><p>คลิกเพื่อดูตำแหน่งบนแผนที่</p></div><span class="status-pill watch">24 ชม.</span></header><div class="ranking" id="ranking"><div class="notice">กำลังจัดอันดับข้อมูล</div></div></section>
-   <section class="panel"><header class="panel-head"><div><h3>หลักเกณฑ์การแสดงสถานะ</h3><p>ปริมาณฝนสะสม 24 ชั่วโมง</p></div></header><div class="notice"><strong>ปกติ</strong> น้อยกว่า 35 มม. · <strong>เฝ้าระวัง</strong> 35–59.9 มม. · <strong>ฝนหนัก</strong> 60–89.9 มม. · <strong>วิกฤต</strong> ตั้งแต่ 90 มม. ขึ้นไป<br><br>เป็นการคัดกรองข้อมูลเบื้องต้นเพื่อสนับสนุนการเฝ้าระวัง ไม่ใช่ประกาศเตือนภัยอย่างเป็นทางการ</div></section>
+   <section class="panel status-criteria-card"><header class="panel-head"><div><h3>หลักเกณฑ์การแสดงสถานะ</h3><p>ปริมาณฝนสะสม 24 ชั่วโมง</p></div></header><div class="status-criteria-list"><div class="status-criteria-row"><span>1. ปกติ</span><b class="criteria-normal">น้อยกว่า 35 มม.</b></div><div class="status-criteria-row"><span>2. เฝ้าระวัง</span><b class="criteria-watch">35–59.9 มม.</b></div><div class="status-criteria-row"><span>3. ฝนหนัก</span><b class="criteria-warning">60–89.9 มม.</b></div><div class="status-criteria-row"><span>4. วิกฤต</span><b class="criteria-critical">90 มม. ขึ้นไป</b></div></div><p class="criteria-note">ข้อมูลสำหรับการคัดกรองและสนับสนุนการเฝ้าระวังเบื้องต้น</p></section>
   </aside>
  </div>
  <section class="panel table-panel" id="stationTable">
