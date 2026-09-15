@@ -205,7 +205,7 @@ body.overview-mode{overflow:hidden;background:#f5f7fa}.situation-dashboard{heigh
 <aside class="middle"><article class="card mid-card"><select aria-label="ตัวกรอง"><option>จำแนกตามระบบข้อมูล</option></select><div class="donut"><strong id="donutValue"></strong></div><h3 id="donutTitle"></h3><p id="donutText"></p></article><article class="card mid-card"><select aria-label="ตัวชี้วัด"><option id="gaugeSelect"></option></select><div class="gauge"><strong id="gaugeValue"></strong></div><div class="mini-row"><span><i class="dot"></i><span id="gaugeTitle"></span></span><b id="gaugeSide"></b></div></article></aside>
 <section class="map-panel"><div class="map-tools"><span class="active" id="mapChip1"></span><span id="mapChip2"></span><span id="mapChip3"></span></div><a class="open-full" id="fullLink" target="_blank" rel="noopener">เปิดเต็มหน้าจอ ↗</a><iframe class="map-frame" id="mapFrame" allow="local-network-access; geolocation" title="แผนที่ระบบสารสนเทศ" allowfullscreen></iframe><div class="legend-box"><h3>สัญลักษณ์</h3><div class="legend-grid" id="legend"></div></div></section></main>
 <script>
-const maps={gis:"https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=9c25f3f77ba5481cb481b402177884c2&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=false&basemaps=true&center=101.11399493277712,12.930016606311145&scale=18055.954822",monitor:"https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=43f93c5608a74dd19a48b0ffc6bd639d&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=false&basemaps=true&center=100.71865287529856,13.746819024567788&scale=1155581.1085775",water:"./flood-report.html",accident:"https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=fa10c76af7514d09a556d9c4c3613019&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=false&basemaps=true&center=101.14356222643022,12.686988731901023&scale=72223.819286"};
+const maps={gis:"https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=9c25f3f77ba5481cb481b402177884c2&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=false&basemaps=true&center=101.11399493277712,12.930016606311145&scale=18055.954822",monitor:"https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=43f93c5608a74dd19a48b0ffc6bd639d&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=false&basemaps=true&center=100.71865287529856,13.746819024567788&scale=1155581.1085775",water:"https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=6d57de59844044998c1f21c26fb44732&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=true&basemaps=true&center=100.64384686779294,13.664740084482801&scale=577790.554289",accident:"https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=fa10c76af7514d09a556d9c4c3613019&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=false&basemaps=true&center=101.14356222643022,12.686988731901023&scale=72223.819286"};
 const data={
 overview:{map:maps.gis,metrics:[["⌂","4 ระบบ","ระบบข้อมูลสำคัญของศูนย์ฯ"],["◉","GIS กลาง","เชื่อมโยงข้อมูลบนแผนที่เดียว"],["⌁","ทั่วประเทศ","ครอบคลุมพื้นที่นิคมอุตสาหกรรม"]],chart:"ภาพรวมการเชื่อมโยงข้อมูลของศูนย์ฯ",filter:"ระบบข้อมูลทั้งหมด　⌄",bars:[78,66,58,48],labels:["ข้อมูลระบบ GIS","e‑Monitoring","ข้อมูลระดับน้ำ","สถิติอุบัติเหตุ"],donut:"4",donutTitle:"ระบบข้อมูลที่เชื่อมโยง",donutText:"CAD • e‑PP • DSS • ข้อมูลสนับสนุน",gauge:"GIS",gaugeTitle:"ศูนย์กลางข้อมูล",gaugeSide:"เชื่อมโยง",lower:"ภาพรวมการใช้ข้อมูลสนับสนุนภารกิจ",chips:["GIS","e‑Monitoring","ระดับน้ำ"],legend:["ขอบเขตนิคมฯ","สถานีตรวจวัด","ข้อมูลผู้ประกอบการ","ข้อมูลสนับสนุนฉุกเฉิน"]},
 gis:{map:maps.gis,metrics:[["⌗","CAD","ข้อมูลผังและขอบเขตพื้นที่"],["▦","e‑PP + DSS","ข้อมูลผู้ประกอบการและการตัดสินใจ"],["✦","Emergency","ข้อมูลสนับสนุนภาวะฉุกเฉิน"]],chart:"ชั้นข้อมูลที่บูรณาการบนระบบ GIS",filter:"จำแนกตามแหล่งข้อมูล　⌄",bars:[82,68,60,52],labels:["ข้อมูล CAD","ระบบ e‑PP","ระบบ DSS","ภาวะฉุกเฉิน"],donut:"4",donutTitle:"กลุ่มชั้นข้อมูลหลัก",donutText:"แสดงผลร่วมกันบนแผนที่เดียว",gauge:"GIS",gaugeTitle:"ข้อมูลเชิงพื้นที่",gaugeSide:"พร้อมใช้",lower:"การเชื่อมโยงข้อมูลเพื่อสนับสนุนการตัดสินใจ",chips:["ชั้นข้อมูล","คำอธิบาย","แผนที่ฐาน"],legend:["ขอบเขตนิคมฯ","ข้อมูล CAD","ผู้ประกอบการ","ทรัพยากรฉุกเฉิน"]},
@@ -224,7 +224,7 @@ document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>render(t.dataset.tab)
 const now=new Date();period.textContent="ข้อมูล ณ วันที่ "+now.toLocaleDateString("th-TH",{day:"numeric",month:"long",year:"numeric"});function tick(){clock.textContent="🌟"+new Date().toLocaleString("th-TH",{weekday:"short",day:"2-digit",month:"short",year:"2-digit",hour:"2-digit",minute:"2-digit"})+" น."}tick();setInterval(tick,60000);const first=location.hash.slice(1);render(data[first]?first:"overview");
 </script><script>
 const baseRender=render,overviewMap=document.querySelector(".ops-map-frame"),heroMap=document.querySelector(".esri-hero-map");render=function(key){baseRender(key);const overviewUrl=focusedMap(maps.gis);if(heroMap)heroMap.src=overviewUrl;setOverviewMode(key)}
-function setOverviewMode(key){document.body.classList.toggle("overview-mode",key==="overview");document.body.classList.toggle("gis-mode",key==="gis");document.body.classList.toggle("monitor-mode",key==="monitor")}
+function setOverviewMode(key){document.body.classList.toggle("overview-mode",key==="overview");document.body.classList.toggle("gis-mode",key==="gis");document.body.classList.toggle("monitor-mode",key==="monitor");document.body.classList.toggle("water-mode",key==="water")}
 document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>setOverviewMode(t.dataset.tab)));
 document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>{const key=b.dataset.go;setOverviewMode(key);render(key);document.querySelector(".tabs").scrollIntoView({behavior:"smooth",block:"start"})}));
 document.querySelectorAll("[data-scroll]").forEach(b=>b.addEventListener("click",()=>document.getElementById(b.dataset.scroll).scrollIntoView({behavior:"smooth"})));
@@ -626,4 +626,72 @@ html body .weather-pop .weather-item span {
   -webkit-text-fill-color:#000000!important;
 }
 </style>
+
+<style id="information-water-dashboard-refresh-20260915-v1">
+body.water-mode{overflow:auto!important;background:#f7f9fb!important}
+body.water-mode .dashboard{height:auto!important;min-height:calc(100vh - 116px)!important;padding:16px 24px 30px!important;background:#f7f9fb!important}
+body.water-mode .dashboard .metric,
+body.water-mode .dashboard .chart-card,
+body.water-mode .dashboard .mini-card,
+body.water-mode .dashboard .map-panel{
+ border:0!important;border-radius:18px!important;background:#fff!important;
+ box-shadow:0 6px 22px rgba(27,39,51,.08)!important;
+}
+body.water-mode .dashboard .map-panel{overflow:hidden!important}
+body.water-mode .dashboard .map-frame{
+ min-height:650px!important;pointer-events:auto!important;touch-action:auto!important;background:#eef3f6!important;
+}
+body.water-mode .dashboard .map-tools span{background:#eef7fc!important;color:#007fbd!important}
+body.water-mode .dashboard .map-tools span.active{background:#0091cd!important;color:#fff!important}
+body.water-mode .dashboard .open-full{background:#c4dff6!important;color:#007fbd!important}
+body.water-mode .dashboard .metric b,
+body.water-mode .dashboard h2,
+body.water-mode .dashboard h3{color:#004b79!important}
+body.water-mode .dashboard .metric span,
+body.water-mode .dashboard p,
+body.water-mode .dashboard small{color:#000!important}
+@media(max-width:900px){
+ body.water-mode .dashboard{padding:10px!important}
+ body.water-mode .dashboard .map-frame{min-height:540px!important}
+}
+</style>
+<script id="information-water-estate-sync-20260915-v1">
+(function(){
+ "use strict";
+ var waterBase="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=6d57de59844044998c1f21c26fb44732&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=true&basemaps=true";
+ function currentEstate(){
+   return (typeof activeEstate!=="undefined"&&activeEstate)||["พื้นที่นิคมอุตสาหกรรมทั่วประเทศ",13.664740084482801,100.64384686779294,577790.554289];
+ }
+ function syncWater(){
+   if(typeof activeTab!=="undefined"&&activeTab!=="water")return;
+   var e=currentEstate(),name=e[0],lat=e[1],lon=e[2],scale=e[3]||65000;
+   var nationwide=typeof estates!=="undefined"&&e===estates[0];
+   var url=waterBase+(nationwide?"&center=100.64384686779294,13.664740084482801&scale=577790.554289":"&center="+lon+","+lat+"&scale="+scale);
+   var frame=document.getElementById("mapFrame"),full=document.getElementById("fullLink");
+   if(frame&&frame.dataset.waterArea!==name){frame.src=url;frame.dataset.waterArea=name;frame.title="แผนที่สถานีระดับน้ำ • "+name}
+   if(full)full.href=url;
+   var summary=document.getElementById("summary");
+   if(summary){
+     var cards=summary.querySelectorAll(".metric");
+     var values=["พื้นที่ที่เลือก","แผนที่ระดับน้ำ","พร้อมติดตาม"];
+     var details=[name,"สถานีและข้อมูลน้ำใกล้พื้นที่นิคมฯ","เชื่อมโยงข้อมูลเพื่อสนับสนุนการเฝ้าระวัง"];
+     cards.forEach(function(card,i){
+       var b=card.querySelector("b"),span=card.querySelector("span");
+       if(b)b.textContent=values[i]||"ข้อมูลระดับน้ำ";
+       if(span)span.textContent=details[i]||name;
+     });
+   }
+   var chart=document.getElementById("chartTitle");if(chart)chart.textContent="ภาพรวมสถานีระดับน้ำที่เกี่ยวข้องกับ "+name;
+   var filter=document.getElementById("chartFilter");if(filter)filter.textContent=name+"　⌄";
+   var lower=document.getElementById("lowerTitle");if(lower)lower.textContent="ข้อมูลสนับสนุนการเฝ้าระวังระดับน้ำ • "+name;
+   var chips=[document.getElementById("mapChip1"),document.getElementById("mapChip2"),document.getElementById("mapChip3")];
+   ["สถานีระดับน้ำ","พื้นที่นิคมฯ","พื้นที่เฝ้าระวัง"].forEach(function(v,i){if(chips[i])chips[i].textContent=v});
+ }
+ function schedule(){setTimeout(syncWater,80)}
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",schedule,{once:true});else schedule();
+ document.querySelectorAll('.tab[data-tab="water"]').forEach(function(tab){tab.addEventListener("click",schedule)});
+ var scope=document.getElementById("scopeBtn");if(scope)new MutationObserver(schedule).observe(scope,{childList:true,characterData:true,subtree:true});
+ window.addEventListener("hashchange",schedule);
+})();
+</script>
 </body></html>
