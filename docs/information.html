@@ -615,4 +615,15 @@ body.monitor-mode .em-system-row article>strong{color:#0091cd!important}
  setInterval(function(){stationCache=null;const name=(typeof activeEstate!=="undefined"&&activeEstate[0])||"พื้นที่นิคมอุตสาหกรรมทั่วประเทศ";refreshData(name)},300000);
 })();
 </script>
+
+<style id="information-weather-popup-black-text-20260915-v1">
+/* Requested: change all purple text in the weather popup to black */
+html body .header .weather-pop .weather-item b,
+html body .header .weather-pop .weather-item span,
+html body .weather-pop .weather-item b,
+html body .weather-pop .weather-item span {
+  color:#000000!important;
+  -webkit-text-fill-color:#000000!important;
+}
+</style>
 </body></html>
