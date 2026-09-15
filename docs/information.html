@@ -874,6 +874,14 @@ function historyValues(j){
 async function addTrends(rows){
  var end=new Date(),start=new Date(end.getTime()-3*86400000),date=function(d){return d.toISOString().slice(0,10)};
  await Promise.all(rows.slice(0,30).map(async function(r){if(!r.stationId)return;try{var u="https://api-v3.thaiwater.net/api/v1/thaiwater30/public/waterlevel_graph?station_type=tele_waterlevel&station_id="+encodeURIComponent(r.stationId)+"&start_date="+date(start)+"&end_date="+date(end),j=await fetch(u,{headers:{Accept:"application/json"}}).then(function(x){return x.json()}),v=historyValues(j);if(v.length>1)r.series=v}catch(e){}}));
+ var previous={};try{previous=JSON.parse(localStorage.getItem("ieat-water-level-snapshot")||"{}")||{}}catch(e){}
+ rows.forEach(function(r){
+  if(r.level==null)return;
+  var key=String(r.stationId||r.name),old=num(previous[key]);
+  if(!r.series||r.series.length<2)r.series=[old==null?r.level:old,r.level];
+  previous[key]=r.level;
+ });
+ try{localStorage.setItem("ieat-water-level-snapshot",JSON.stringify(previous))}catch(e){}
  return rows;
 }
 function estate(){return(typeof activeEstate!=="undefined"&&activeEstate)||["พื้นที่นิคมอุตสาหกรรมทั่วประเทศ",13.6647400845,100.6438468678]}
