@@ -1,215 +1,313 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#ffffff">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
-<title>รายงานสถานีตรวจวัด | IEAT e-Monitoring</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย | IEAT EMCC</title>
+<meta name="description" content="แดชบอร์ดข้อมูลสภาพอากาศล่าสุดสำหรับสนับสนุนการเฝ้าระวังพื้นที่นิคมอุตสาหกรรม">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap");
-:root{--purple:#5d2a7a;--purple-soft:#f4eff8;--green:#2f8f46;--green-soft:#eef7f0;--red:#e63946;--red-soft:#fdecef;--orange:#e67700;--orange-soft:#fff5df;--blue:#0871b9;--blue-soft:#e5f2fb;--ink:#202124;--muted:#667078;--line:#e2e5e7;--page:#f3f5f6;--white:#fff}
-*{box-sizing:border-box}
-body{margin:0;background:var(--page);color:var(--ink);font-family:"Sarabun",Tahoma,sans-serif}
-.page{width:100%;max-width:1180px;min-height:100vh;margin:0 auto;padding:14px}
-.header{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#fff;border-bottom:1px solid var(--line);border-radius:12px 12px 0 0}
-.logo{width:48px;height:48px;object-fit:contain}.header-main{min-width:0}.header h1{margin:0;font-size:20px;line-height:1.35}.header p{margin:3px 0 0;color:var(--muted);font-size:12px}
-.header-status{margin-left:auto;color:var(--green);font-size:12px;font-weight:600;white-space:nowrap}
-.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:10px;background:#fff}
-.summary-card{min-height:78px;padding:12px;border-radius:9px}.summary-card strong{display:block;font-size:24px;line-height:1;font-weight:600}.summary-card span{display:block;margin-top:8px;font-size:12px}
-.summary-card.all{color:var(--purple);background:var(--purple-soft)}.summary-card.online{color:var(--green);background:var(--green-soft)}.summary-card.offline{color:var(--orange);background:var(--orange-soft)}.summary-card.alert{color:var(--red);background:var(--red-soft)}
-.tools{display:grid;grid-template-columns:minmax(220px,2fr) repeat(3,minmax(130px,1fr));gap:8px;padding:10px;background:#fff;border-top:1px solid var(--line)}
-.control{width:100%;min-height:42px;padding:9px 10px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:13px;outline:none}
-.control:focus{border-color:var(--purple);box-shadow:0 0 0 2px rgba(93,42,122,.1)}
-.report-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;background:#fff;border-top:1px solid var(--line)}
-.result{color:var(--muted);font-size:12px}.actions{display:flex;gap:7px}
-.button{min-height:36px;padding:7px 10px;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--purple);font:600 12px inherit;cursor:pointer}.button.primary{color:#fff;background:var(--purple);border-color:var(--purple)}
-.table-card{overflow:hidden;background:#fff;border-top:1px solid var(--line);border-radius:0 0 12px 12px}
-.table-scroll{width:100%;overflow-x:auto}
-table{width:100%;min-width:1120px;border-collapse:collapse;table-layout:fixed}
-thead th{position:sticky;top:0;z-index:1;padding:10px 9px;color:#fff;background:var(--purple);font-size:12px;font-weight:600;text-align:left;white-space:nowrap}
-tbody td{padding:10px 9px;border-bottom:1px solid var(--line);font-size:12px;line-height:1.55;vertical-align:top;overflow-wrap:anywhere}
-tbody tr:hover{background:#faf8fc}
-.col-no{width:45px;text-align:center}.col-station{width:220px}.col-estate{width:180px}.col-type{width:85px}.col-status{width:120px}.col-update{width:135px}.col-alarm{width:160px}.col-comment{width:190px}.col-map{width:75px;text-align:center}
-.station-name{font-weight:600}.station-code{margin-top:2px;color:var(--muted);font-size:10px}
-.badge{display:inline-block;padding:4px 7px;border-radius:99px;font-size:10px;font-weight:600;white-space:nowrap}.badge.online{color:var(--green);background:var(--green-soft)}.badge.offline{color:var(--orange);background:var(--orange-soft)}.badge.alert{color:var(--red);background:var(--red-soft)}
-.alarm{color:var(--red);font-weight:600}.muted{color:var(--muted)}.map-link{display:inline-block;padding:5px 7px;color:var(--blue);background:var(--blue-soft);border-radius:6px;text-decoration:none;font-size:10px;white-space:nowrap}
-.empty,.loading{padding:34px 12px;color:var(--muted);font-size:13px;text-align:center}
-.footer{padding:18px;color:var(--muted);font-size:11px;line-height:1.6;text-align:center}
-@media(max-width:760px){
- .page{padding:8px}.header{padding:11px}.logo{width:42px;height:42px}.header h1{font-size:17px}.header p{font-size:10px}.header-status{font-size:9px}
- .summary{grid-template-columns:1fr 1fr}.summary-card{min-height:68px;padding:10px}.summary-card strong{font-size:21px}.summary-card span{font-size:10px}
- .tools{grid-template-columns:1fr 1fr}.tools .search-wrap{grid-column:1/-1}
- .report-bar{align-items:flex-start;flex-direction:column}.actions{width:100%}.button{flex:1}
- .table-scroll{border-top:1px solid var(--line)}
-}
-#pdfReport{display:none;width:1200px;max-width:none;padding:42px 46px;background:#fff;color:#111;font-family:"Sarabun",Tahoma,sans-serif}
-#pdfReport.pdf-active{display:block;position:relative;left:auto;top:auto;z-index:auto;opacity:1;visibility:visible}.pdf-render-stage{position:fixed;left:0;top:0;width:1200px;min-width:1200px;height:100vh;z-index:10000;overflow:auto;background:#eef1f4;padding:0;display:block}.pdf-render-stage:before{content:"กำลังจัดเตรียมภาพรายงาน PNG…";position:fixed;right:22px;bottom:20px;padding:10px 16px;border-radius:999px;background:#5d2a7a;color:#fff;font-size:13px;box-shadow:0 5px 18px #0002}.pdf-render-stage #pdfReport{position:absolute;left:0;top:0;width:1200px;min-width:1200px;max-width:1200px;margin:0;box-shadow:none;transform:none}.pdf-table th,.pdf-table td{overflow-wrap:anywhere;word-break:break-word}
-.pdf-head{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;border-bottom:2px solid #5d2a7a;padding-bottom:12px}.pdf-brand{display:flex;align-items:center;gap:12px}.pdf-logo{width:62px;height:62px;object-fit:contain}.pdf-org{color:#335238;font-size:13px;font-weight:600;line-height:1.5}.pdf-date{font-size:11px;text-align:right;line-height:1.5}.pdf-title{margin:22px 0 6px;font-size:17px;text-align:center}.pdf-subtitle{margin:0 0 18px;color:#555;font-size:10px;text-align:center}.pdf-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:18px}.pdf-kpi{padding:9px;border:1px solid #ddd;text-align:center}.pdf-kpi strong{display:block;color:#5d2a7a;font-size:18px}.pdf-kpi span{display:block;margin-top:3px;font-size:9px}.pdf-section{margin-top:15px;page-break-inside:avoid}.pdf-section-title{padding:7px 9px;color:#fff;background:#5d2a7a;font-size:11px;font-weight:600}.pdf-table{width:100%;min-width:0;border-collapse:collapse;table-layout:fixed}.pdf-table th,.pdf-table td{padding:6px;border:1px solid #555;font-size:8.5px;line-height:1.4;vertical-align:top}.pdf-table th{position:static;color:#111;background:#eee;text-align:center}.pdf-table .p-estate{width:20%}.pdf-table .p-station{width:27%}.pdf-table .p-alarm{width:19%}.pdf-table .p-update{width:15%}.pdf-table .p-note{width:19%}.pdf-empty{padding:14px;border:1px solid #bbb;font-size:9px;text-align:center}.pdf-footer{margin-top:18px;padding-top:8px;border-top:1px solid #bbb;color:#555;font-size:8px;text-align:center}
-@media print{
- body,.page{background:#fff}.page{max-width:none;padding:0}.tools,.actions,.footer{display:none}.header,.summary,.report-bar,.table-card{border-radius:0}
- .table-scroll{overflow:visible}table{min-width:0;font-size:8px}thead th,tbody td{padding:5px 4px;font-size:8px}.col-map{display:none}
+:root{--teal:#0f9685;--teal-dark:#08766a;--blue:#1768ad;--ink:#17202b;--muted:#697784;--line:#dfe8eb;--panel:rgba(255,255,255,.94);--green:#42a846;--yellow:#ffc719;--orange:#ff6908;--red:#bf033b;--purple:#6534ac;--shadow:0 16px 50px rgba(16,64,78,.13)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Noto Sans Thai",sans-serif;background:#fff;font-size:15px}
+button,input,select{font:inherit}.app-shell{width:min(1880px,calc(100% - 28px));margin:14px auto 26px;border:1px solid #fff;border-radius:24px;background:#fff;box-shadow:var(--shadow);overflow:hidden}
+.topbar{min-height:78px;padding:0 24px;display:flex;align-items:center;gap:22px;border-bottom:1px solid rgba(16,93,104,.12);background:rgba(255,255,255,.82)}
+.brand{display:flex;align-items:center;gap:13px;text-decoration:none;color:inherit;white-space:nowrap}.brand img{width:66px;height:46px;object-fit:contain}.brand strong{display:block;font-size:20px;line-height:1.25}.brand small{display:block;color:var(--muted);font-size:11px}
+.nav{display:flex;gap:6px}.nav a{padding:9px 12px;border-radius:10px;color:#50606b;text-decoration:none;font-size:13px}.nav a.active{background:#e5f6f3;color:var(--teal-dark);font-weight:600}
+.searchbox{margin-left:auto;width:min(430px,31vw);position:relative}.searchbox input{width:100%;height:42px;padding:0 44px 0 16px;border:1px solid #dce9eb;border-radius:14px;background:#f6fafb;outline:none}.searchbox input:focus{border-color:#55bdb0;box-shadow:0 0 0 4px rgba(15,150,133,.1)}.searchbox button{position:absolute;right:4px;top:4px;width:34px;height:34px;border:0;border-radius:10px;background:var(--teal);color:#fff;cursor:pointer}
+.sync{display:flex;align-items:center;gap:8px;color:#66747e;font-size:12px;white-space:nowrap}.sync-dot{width:9px;height:9px;border-radius:50%;background:#aab4bb;box-shadow:0 0 0 4px rgba(170,180,187,.16)}.sync.ok .sync-dot{background:#34b565;box-shadow:0 0 0 4px rgba(52,181,101,.14)}
+.main{padding:14px}.ticker{min-height:52px;padding:10px 15px;display:flex;align-items:center;gap:12px;border:1px solid #dbe9eb;border-radius:15px;background:#fff}.ticker-label{color:var(--teal-dark);font-size:12px;font-weight:700;letter-spacing:.06em}.ticker-text{font-weight:500}.ticker-time{margin-left:auto;color:var(--muted);font-size:12px}.source-link{padding:8px 12px;border-radius:10px;background:#e9f6f4;color:var(--teal-dark);font-size:12px;font-weight:600;text-decoration:none}
+.dashboard{margin-top:12px;display:grid;grid-template-columns:minmax(0,1.62fr) minmax(350px,.68fr);gap:12px}.left-column,.right-column{display:grid;gap:12px}.left-column{grid-template-rows:auto auto}.right-column{grid-auto-rows:min-content}
+.panel{border:1px solid rgba(25,94,105,.11);border-radius:18px;background:var(--panel);box-shadow:0 5px 18px rgba(25,68,78,.05);overflow:hidden}.panel-head{min-height:55px;padding:12px 15px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #e7edef}.panel-head h2,.panel-head h3{margin:0}.panel-head h2{font-size:16px}.panel-head h3{font-size:15px}.panel-head p{margin:2px 0 0;color:var(--muted);font-size:11px}.panel-actions{display:flex;gap:7px}.ghost-btn{height:34px;padding:0 11px;border:1px solid #d9e4e7;border-radius:10px;background:#fff;color:#52616b;font-size:12px;cursor:pointer}.ghost-btn.active{border-color:var(--teal);background:#e8f6f4;color:var(--teal-dark)}
+.map-wrap{position:relative;height:575px;background:#dceef0}#map{width:100%;height:100%}.map-badge{position:absolute;z-index:500;left:16px;top:16px;padding:9px 12px;border:1px solid rgba(255,255,255,.92);border-radius:12px;background:rgba(255,255,255,.92);box-shadow:0 5px 18px rgba(25,45,55,.15);font-size:12px;font-weight:600}.map-badge b{color:var(--red)}.legend{position:absolute;z-index:500;left:16px;bottom:16px;padding:9px 11px;border-radius:11px;background:rgba(255,255,255,.92);box-shadow:0 5px 18px rgba(25,45,55,.13);font-size:11px}.legend span{display:inline-flex;align-items:center;margin-right:9px}.legend i{width:9px;height:9px;margin-right:5px;border-radius:50%}
+.map-loading{position:absolute;z-index:600;inset:0;display:grid;place-items:center;background:rgba(238,248,249,.8);font-weight:600;color:var(--teal-dark)}.map-loading.hide{display:none}
+.station-marker{border:3px solid #fff;border-radius:50%;box-shadow:0 2px 7px rgba(17,48,60,.3)}.estate-office-marker{width:30px;height:30px;display:grid;place-items:center;border:2px solid #fff;border-radius:8px;background:#004b79;color:#fff;box-shadow:0 3px 10px rgba(0,75,121,.35);font-size:16px}.estate-legend{width:13px!important;height:13px!important;border-radius:3px!important;background:#004b79!important}.estate-popup b{color:#004b79}.estate-popup span{color:#697784;font-size:11px}
+.bottom-grid{display:grid;grid-template-columns:minmax(280px,.63fr) minmax(0,1.37fr);gap:12px}.extremes{padding:15px}.alert-box{padding:12px;border:1px solid #f1d27e;border-radius:13px;background:#fff9e8;color:#7b5a08;font-size:12px}.metric-list{margin-top:10px}.metric-row{padding:11px 1px;display:flex;justify-content:space-between;border-bottom:1px solid #edf1f2}.metric-row span{color:#65727d;font-size:12px}.metric-row b{font-size:14px}.metric-row:last-child{border-bottom:0}.report-btn{width:100%;height:40px;margin-top:10px;border:0;border-radius:11px;background:#eaf1f3;color:#394850;font-weight:600;cursor:pointer}
+.rain-chart{padding:12px 15px 15px}.bars{height:182px;display:flex;align-items:flex-end;gap:9px;padding:12px 4px 4px;border-bottom:1px solid #dfe7e9;background:repeating-linear-gradient(to top,transparent 0,transparent 44px,rgba(100,130,140,.08) 45px)}.bar-item{height:100%;min-width:0;flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:5px}.bar{width:min(28px,70%);min-height:3px;border-radius:7px 7px 2px 2px;background:linear-gradient(180deg,#36c3e8,#1595cf);transition:.2s}.bar-item:hover .bar{filter:saturate(1.25);transform:translateY(-2px)}.bar-item b{font-size:10px}.bar-item span{width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:center;color:#75818b;font-size:9px}
+.detail{padding:17px}.detail-top{display:flex;align-items:center;gap:13px}.weather-icon{width:58px;height:58px;display:grid;place-items:center;border-radius:16px;background:linear-gradient(145deg,#e8f8ff,#edf8f0);font-size:30px}.temperature{font-size:40px;font-weight:600;line-height:1}.temperature small{font-size:17px;font-weight:400;color:#6c7880}.condition{margin-left:auto;text-align:right}.condition b{display:block}.condition span{color:var(--muted);font-size:11px}.station-name{margin:14px 0 3px;font-size:18px}.station-location{color:var(--muted);font-size:12px}.detail-metrics{margin-top:15px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.detail-metrics div{padding:10px;border-radius:11px;background:#f4f8f8}.detail-metrics span{display:block;color:#77838c;font-size:10px}.detail-metrics b{display:block;margin-top:4px;font-size:13px}
+.ranking{padding:8px 15px 15px}.rank-row{padding:9px 0;display:grid;grid-template-columns:25px 1fr auto;align-items:center;gap:8px;border-bottom:1px solid #edf1f2;cursor:pointer}.rank-row:last-child{border-bottom:0}.rank-no{width:22px;height:22px;display:grid;place-items:center;border-radius:7px;background:#eef4f5;color:#64727c;font-size:10px}.rank-name b,.rank-name small{display:block}.rank-name b{font-size:12px}.rank-name small{color:#7b8790;font-size:10px}.rank-rain{color:#1879b7;font-size:13px;font-weight:600}
+.table-panel{margin-top:12px}.table-tools{padding:10px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #edf1f2}.table-tools input,.table-tools select{height:36px;padding:0 11px;border:1px solid #dfe7e9;border-radius:9px;background:#fff;outline:none}.table-tools input{width:260px}.table-tools select{margin-left:auto}.table-scroll{max-height:390px;overflow:auto}.weather-table{width:100%;border-collapse:collapse}.weather-table th{position:sticky;top:0;z-index:1;padding:11px 13px;background:#f0f7f7;color:#51616c;text-align:left;font-size:11px}.weather-table td{padding:11px 13px;border-bottom:1px solid #edf1f2;font-size:12px}.weather-table tbody tr{cursor:pointer}.weather-table tbody tr:hover{background:#f3fbfa}.weather-table td:nth-child(n+3),.weather-table th:nth-child(n+3){text-align:right}.status-pill{display:inline-block;min-width:72px;padding:4px 7px;border-radius:999px;text-align:center;font-size:10px;font-weight:600}.normal{background:#e9f6e7;color:#3a853b}.watch{background:#fff3d1;color:#8d6500}.warning{background:#ffeadf;color:#ad4705}.critical{background:#fde3eb;color:#a60437}
+.notice{padding:13px 15px;color:#65737d;font-size:11px}.notice strong{color:#3e4b55}.error-state{padding:40px;text-align:center;color:#a60437}
+.footer{padding:17px 24px;display:flex;justify-content:space-between;gap:20px;border-top:1px solid #e2ebed;color:#6d7a83;font-size:11px;background:rgba(255,255,255,.68)}.footer a{color:var(--teal-dark)}
+@media(max-width:1180px){.nav{display:none}.searchbox{width:36vw}.dashboard{grid-template-columns:1fr}.right-column{grid-template-columns:repeat(2,1fr)}.right-column .panel:first-child{grid-row:span 2}.map-wrap{height:520px}}
+@media(max-width:760px){body{background:#fff}.app-shell{width:100%;margin:0;border:0;border-radius:0}.topbar{padding:10px 12px;flex-wrap:wrap;gap:10px}.brand img{width:52px}.brand strong{font-size:16px}.brand small{font-size:9px}.searchbox{order:3;width:100%}.sync{margin-left:auto}.main{padding:8px}.ticker{align-items:flex-start;flex-wrap:wrap}.ticker-time{margin-left:0}.source-link{margin-left:auto}.map-wrap{height:480px}.bottom-grid,.right-column{grid-template-columns:1fr}.detail-metrics{grid-template-columns:repeat(3,1fr)}.table-tools{flex-wrap:wrap}.table-tools input{width:100%}.table-tools select{margin-left:0;width:100%}.table-scroll{max-height:520px}.weather-table{min-width:650px}.footer{display:block}.footer span{display:block;margin-top:6px}}
+
+.news-section{margin-top:12px;padding:18px;border:1px solid rgba(25,94,105,.11);border-radius:18px;background:var(--panel);box-shadow:0 5px 18px rgba(25,68,78,.05)}
+.news-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:14px}.news-heading span{display:block;color:var(--teal-dark);font-size:11px;font-weight:700;letter-spacing:.1em}.news-heading h2{margin:3px 0 0;font-size:20px}.news-heading p{margin:0;color:var(--muted);font-size:12px}.news-heading a{padding:8px 12px;border-radius:10px;background:#e9f6f4;color:var(--teal-dark);font-size:12px;font-weight:600;text-decoration:none;white-space:nowrap}
+.news-tabs{display:flex;gap:7px;margin-bottom:14px;overflow-x:auto;padding-bottom:3px}.news-tabs button{padding:7px 11px;border:1px solid #dce6e8;border-radius:999px;background:#fff;color:#5d6b75;font-size:11px;white-space:nowrap;cursor:pointer}.news-tabs button.active{border-color:var(--teal);background:var(--teal);color:#fff}
+.news-featured{display:grid;grid-template-columns:minmax(280px,.9fr) minmax(0,1.1fr);min-height:285px;margin-bottom:12px;border:1px solid #e2e9eb;border-radius:15px;overflow:hidden;background:#f8fbfb}.news-featured-image{display:block;min-height:285px;background:linear-gradient(145deg,#d9f1f0,#e8eef7);overflow:hidden}.news-featured-image img{width:100%;height:100%;object-fit:cover}.news-featured-image.no-image{display:grid;place-items:center;color:var(--teal-dark);font-weight:600}.news-featured-copy{padding:24px;display:flex;flex-direction:column;justify-content:center}.news-meta{color:var(--teal-dark);font-size:11px;font-weight:700}.news-featured-copy h3{margin:9px 0 8px;font-size:21px;line-height:1.45}.news-featured-copy p{margin:0;color:#65737d;font-size:13px;line-height:1.65}.news-read{display:inline-block;margin-top:14px;color:var(--teal-dark);font-size:12px;font-weight:700;text-decoration:none}
+.news-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.news-card{min-width:0;border:1px solid #e3eaec;border-radius:14px;background:#fff;overflow:hidden}.news-card-image{display:block;height:155px;background:linear-gradient(145deg,#e0f3f2,#eef2f7);overflow:hidden}.news-card-image img{width:100%;height:100%;object-fit:cover}.news-card-image.no-image{display:grid;place-items:center;padding:15px;color:var(--teal-dark);font-size:12px;font-weight:600;text-align:center}.news-card-copy{padding:14px}.news-card-copy small{display:block;color:#7b8790;font-size:10px}.news-card-copy h3{margin:7px 0;font-size:14px;line-height:1.5}.news-card-copy p{margin:0;color:#687681;font-size:11px;line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.news-empty{grid-column:1/-1;padding:42px;text-align:center;color:#71808a}
+@media(max-width:980px){.news-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:650px){.news-section{padding:13px}.news-heading{display:block}.news-heading p{margin:5px 0 10px}.news-featured{grid-template-columns:1fr}.news-featured-image{min-height:210px}.news-featured-copy{padding:18px}.news-featured-copy h3{font-size:17px}.news-grid{grid-template-columns:1fr}}
+
+/* Original IEAT EMCC top navigation retained on the homepage */
+body{padding-top:0}.bar{position:sticky;top:0;z-index:2000;width:100%;min-height:70px;padding:0 32px;background:#fff;border-top:1px solid #e8e8e8;border-bottom:1px solid #dfe3e7;box-shadow:0 3px 8px rgba(31,41,55,.12)}
+.bar-in{width:100%;min-height:70px;margin:0;display:flex;align-items:center;gap:18px}.brand-link{display:flex;align-items:center;gap:15px;min-width:540px;color:inherit;text-decoration:none}.brand-logo{width:82px;height:48px;flex:0 0 82px;object-fit:contain}.brand-copy{min-width:0}.brand-copy strong{display:block;color:#111;font-size:20px;line-height:1.35;font-weight:600}.brand-copy span{display:block;margin-top:2px;color:#111;font-size:12px;line-height:1.35;font-weight:400}.header-status{margin-left:auto;padding-left:20px;border-left:1px solid #eceff2;display:flex;align-items:center;gap:8px;color:#40454b;white-space:nowrap}.status-icon{color:#e7a51b;font-size:16px}.header-status b,.header-status small{font-size:12px;font-weight:400}.header-status small{margin-left:6px;color:#111}.header-actions{display:flex;align-items:center;gap:8px}.header-btn{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:8px 16px;border:1px solid #d9c8e5;border-radius:20px;background:#fff;color:#631a9d;font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap}.header-btn.active{background:#f4eef8}.header-btn.hub{border-color:#306bec;background:#306bec;color:#fff}.app-shell{margin-top:14px}
+@media(max-width:1050px){.bar{padding:0 16px}.brand-link{min-width:0;flex:1}.brand-logo{width:68px;flex-basis:68px}.brand-copy strong{font-size:17px}.brand-copy span{font-size:10px}.header-status{display:none}.header-btn{padding:8px 11px}}
+@media(max-width:700px){.bar{padding:6px 10px}.bar-in{min-height:58px;gap:8px}.brand-logo{width:50px;height:40px;flex-basis:50px}.brand-copy strong{font-size:14px}.brand-copy span{font-size:8px}.header-actions{gap:4px}.header-btn{min-height:32px;padding:6px 8px;font-size:10px}.header-btn:not(.active):not(.hub){display:none}.app-shell{margin-top:0}}
+</style>
+<style id="weather-match-drought-typography-20260915">
+/* Typography matched to docs/drought.html */
+html body,
+html body button,
+html body input,
+html body select,
+html body textarea,
+html body table,
+html body th,
+html body td,
+html body a{font-family:"Noto Sans Thai","Sarabun","Segoe UI",sans-serif!important}
+html body{font-size:13px!important;font-weight:400!important;line-height:1.5!important}
+html body .brand-copy strong,
+html body .brand strong{font-size:20px!important;font-weight:600!important;line-height:1.4!important}
+html body .brand-copy span,
+html body .brand small{font-size:12px!important;font-weight:300!important;line-height:1.5!important}
+html body main h1{font-size:20px!important;font-weight:600!important;line-height:1.4!important;letter-spacing:0!important}
+html body main h2{font-size:16px!important;font-weight:500!important;line-height:1.45!important;letter-spacing:0!important}
+html body main h3{font-size:15px!important;font-weight:500!important;line-height:1.5!important;letter-spacing:0!important}
+html body main h4{font-size:14px!important;font-weight:500!important;line-height:1.5!important}
+html body main p,
+html body main label,
+html body main li{font-size:13px!important;font-weight:400!important;line-height:1.55!important}
+html body main button,
+html body main input,
+html body main select,
+html body main textarea,
+html body main a{font-size:12px!important;line-height:1.4!important}
+html body main small,
+html body main .muted,
+html body main [class*="meta"],
+html body main [class*="subtitle"],
+html body main [class*="description"],
+html body main [class*="hint"]{font-size:11px!important;font-weight:400!important;line-height:1.5!important}
+html body .ticker-label,
+html body .ticker-time,
+html body .sync,
+html body .source-link{font-size:12px!important;line-height:1.5!important}
+html body .panel-head h2{font-size:16px!important;font-weight:500!important}
+html body .panel-head h3{font-size:15px!important;font-weight:500!important}
+html body .panel-head p{font-size:11px!important;font-weight:400!important;line-height:1.5!important}
+html body .ghost-btn,
+html body .report-btn,
+html body .header-btn{font-size:12px!important;font-weight:400!important}
+html body .detail .temperature{font-size:40px!important;font-weight:500!important;line-height:1.15!important}
+html body .detail .temperature small{font-size:16px!important}
+html body .station-name{font-size:18px!important;font-weight:600!important}
+html body .station-location{font-size:12px!important}
+html body .detail-metrics span{font-size:10px!important;line-height:1.45!important}
+html body .detail-metrics b{font-size:13px!important;font-weight:500!important}
+html body .alert-box,
+html body .notice{font-size:12px!important;line-height:1.55!important}
+html body .metric-row span,
+html body .metric-row b{font-size:13px!important}
+html body .rank-name b,
+html body .rank-rain{font-size:12px!important}
+html body .rank-name small,
+html body .rank-no{font-size:12px!important}
+html body .weather-table th{font-size:12px!important;font-weight:600!important;line-height:1.4!important}
+html body .weather-table td{font-size:12px!important;font-weight:400!important;line-height:1.4!important}
+html body .status-pill{font-size:11px!important}
+html body .news-heading h2{font-size:16px!important;font-weight:500!important}
+html body .news-heading p{font-size:12px!important;font-weight:400!important}
+html body .news-heading span,
+html body .news-meta{font-size:11px!important}
+html body .news-featured-copy h3{font-size:16px!important;font-weight:500!important}
+html body .news-featured-copy p,
+html body .news-card-copy p{font-size:12px!important;line-height:1.6!important}
+html body .news-card-copy h3{font-size:14px!important;font-weight:500!important;line-height:1.5!important}
+html body .news-card-copy small,
+html body .news-read{font-size:11px!important}
+html body .footer{font-size:11px!important;line-height:1.5!important}
+@media(max-width:700px){
+ html body .brand-copy strong,html body .brand strong{font-size:16px!important}
+ html body .brand-copy span,html body .brand small{font-size:11px!important}
+ html body main h2{font-size:18px!important}
+ html body main h3{font-size:16px!important}
+ html body main p,html body main button,html body main input,html body main select,html body main a{font-size:12px!important}
 }
 </style>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    /* Unified website typography matching the supplied reference */
-    html,body,button,input,select,textarea,table{font-family:"Noto Sans Thai","Segoe UI",Tahoma,sans-serif!important}
-  </style>
+<style id="tmd-warning-forecast-20260915">
+.tmd-grid{margin-top:12px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}.tmd-panel{min-width:0}.tmd-panel .panel-head a{padding:7px 11px;border-radius:7px;background:#f2f6fc;color:#3478d4;text-decoration:none;white-space:nowrap}.warning-content{padding:14px}.warning-item{padding:14px;border-left:4px solid #ed1b2e;background:#fff8f8;box-shadow:0 3px 12px rgba(42,58,75,.06)}.warning-item+.warning-item{margin-top:10px}.warning-item h3{margin:0 0 6px;color:#7f181b}.warning-item p{margin:0;color:#59636d;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}.warning-meta{margin-top:9px;display:flex;align-items:center;justify-content:space-between;gap:10px;color:#7c858d;font-size:11px}.warning-meta a{color:#3478d4;text-decoration:none;font-weight:500}.warning-empty{padding:28px;text-align:center;color:#697784}.forecast-frame{width:100%;height:420px;display:block;border:0;background:#fff}.forecast-note{padding:9px 14px;border-top:1px solid #edf1f2;color:#697784;font-size:11px}.load-state{padding:28px;text-align:center;color:#697784}
+@media(max-width:980px){.tmd-grid{grid-template-columns:1fr}.forecast-frame{height:460px}}
+</style>
+
+<style id="daily-white-table-news-20260915">
+html,body,html body{background:#fff!important}.app-shell,.main,.ticker,.panel,.news-section,.news-featured,.news-card,.detail-metrics div,.alert-box,.warning-item,.map-wrap,.map-loading,.legend,.map-badge{background:#fff!important}.app-shell{border-color:#fff!important;backdrop-filter:none!important}.ticker,.panel,.news-section,.news-featured,.news-card{border-color:#e1e4e7!important}.news-featured-image,.news-card-image{background:#fff!important}.tmd-grid{margin:0 0 16px!important}.tmd-panel .panel-head a{background:#fff!important;border:1px solid #dfe4e8}.warning-item{border-top:1px solid #e5e7e9;border-right:1px solid #e5e7e9;border-bottom:1px solid #e5e7e9}
+.table-panel{border:1px solid #cfd4d9!important;border-radius:0!important;box-shadow:none!important}.table-panel .panel-head{background:#fff!important;border-bottom:1px solid #cfd4d9!important}.table-tools{background:#fff!important;border-bottom:1px solid #cfd4d9!important}.table-tools input,.table-tools select{border:1px solid #aeb6bf!important;border-radius:4px!important;background:#fff!important}.table-scroll{max-height:520px;background:#fff}.weather-table{width:100%;border-collapse:collapse!important;border-spacing:0!important;border:0!important}.weather-table th{background:#fff!important;color:#20262c!important;font-weight:600!important;border-right:1px solid #cfd4d9!important;border-bottom:2px solid #9da7b1!important;text-align:center!important}.weather-table td{background:#fff!important;border-right:1px solid #dfe3e6!important;border-bottom:1px solid #d4d9de!important;vertical-align:middle!important}.weather-table th:first-child,.weather-table td:first-child{text-align:left!important}.weather-table th:last-child,.weather-table td:last-child{border-right:0!important}.weather-table tbody tr:hover td{background:#fff!important;box-shadow:inset 0 1px #3478d4,inset 0 -1px #3478d4}.status-pill{border:1px solid currentColor;border-radius:4px!important;background:#fff!important}
+@media(max-width:760px){html body{background:#fff!important}.table-scroll{max-height:600px}.weather-table{min-width:760px}}
+</style>
+
+<style id="system-header-match-reference-20260915">
+html body .system-header{position:sticky!important;top:0!important;z-index:2200!important;width:100%!important;min-height:66px!important;padding:0 36px!important;background:#fff!important;border-top:1px solid #dedede!important;border-bottom:1px solid #d9dcde!important;box-shadow:0 2px 5px rgba(31,41,55,.08)!important}
+html body .system-header-inner{width:100%!important;min-height:66px!important;margin:0!important;display:flex!important;align-items:center!important;gap:18px!important}
+html body .system-brand{display:flex!important;align-items:center!important;gap:12px!important;min-width:0!important;color:#111!important;text-decoration:none!important;white-space:nowrap!important}
+html body .system-brand img{width:42px!important;height:42px!important;flex:0 0 42px!important;object-fit:contain!important}
+html body .system-brand strong{font-family:"Noto Sans Thai","Sarabun",sans-serif!important;font-size:18px!important;font-weight:600!important;line-height:1.4!important;color:#050505!important}
+html body .system-brand>span{margin-left:2px!important;color:#89939e!important;font-family:"Noto Sans Thai","Sarabun",sans-serif!important;font-size:12px!important;font-weight:300!important;line-height:1.4!important}
+html body .system-clock{margin-left:auto!important;color:#4b5660!important;font-size:11px!important;font-weight:400!important;white-space:nowrap!important}
+html body .system-actions{display:flex!important;align-items:center!important;gap:7px!important}
+html body .news-nav,html body .contact-nav,html body .more-btn{min-height:34px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;border:0!important;border-radius:999px!important;text-decoration:none!important;white-space:nowrap!important;font-size:11px!important;font-weight:500!important;line-height:1!important}
+html body .news-nav{gap:6px!important;padding:0 14px!important;background:#f1f3f5!important;color:#66717b!important}
+html body .news-nav span{font-size:13px!important}
+html body .more-wrap{position:relative!important}
+html body .more-btn{width:38px!important;padding:0!important;background:#f1f3f5!important;color:#66717b!important;font-size:18px!important;cursor:pointer!important}
+html body .contact-nav{padding:0 15px!important;background:#598c14!important;color:#fff!important}
+html body .more-menu{position:absolute!important;top:42px!important;right:0!important;width:168px!important;padding:6px!important;display:none!important;border:1px solid #e1e5e8!important;border-radius:12px!important;background:#fff!important;box-shadow:0 12px 28px rgba(28,39,51,.15)!important}
+html body .more-menu.open{display:grid!important}
+html body .more-menu a{padding:9px 10px!important;border-radius:8px!important;color:#3f4b55!important;font-size:12px!important;text-decoration:none!important}
+html body .more-menu a:hover{background:#f2f6f6!important;color:#08766a!important}
+@media(max-width:980px){html body .system-header{padding:0 16px!important}html body .system-brand>span{display:none!important}html body .system-clock{display:none!important}}
+@media(max-width:650px){html body .system-header{padding:5px 10px!important;min-height:58px!important}html body .system-header-inner{min-height:48px!important;gap:7px!important}html body .system-brand{flex:1!important}.system-brand img{width:36px!important;height:36px!important;flex-basis:36px!important}html body .system-brand strong{font-size:14px!important;white-space:normal!important;line-height:1.25!important}html body .news-nav{padding:0 9px!important;font-size:10px!important}html body .news-nav span{display:none!important}html body .more-btn{width:34px!important}html body .contact-nav{display:none!important}}
+</style>
 </head>
 <body>
-<div class="page">
-<header class="header">
- <img class="logo" src="./assets/TH-Vertical.png" alt="กนอ.">
- <div class="header-main"><h1>รายงานสถานีตรวจวัด e-Monitoring</h1><p>ข้อมูลสถานีทั้งหมดในรูปแบบตาราง • อัปเดต <span id="updatedAt">กำลังโหลด…</span></p></div>
- <div class="header-status">● ข้อมูลล่าสุด</div>
-</header>
-
-<section class="summary" aria-label="สรุปจำนวนสถานี">
- <article class="summary-card all"><strong id="totalCount">—</strong><span>สถานีทั้งหมด</span></article>
- <article class="summary-card online"><strong id="onlineCount">—</strong><span>สถานี Online</span></article>
- <article class="summary-card offline"><strong id="offlineCount">—</strong><span>สถานี Offline</span></article>
- <article class="summary-card alert"><strong id="alertCount">—</strong><span>สถานีที่ต้องติดตาม</span></article>
-</section>
-
-<section class="tools" aria-label="ค้นหาและกรองรายงาน">
- <div class="search-wrap"><input id="searchInput" class="control" type="search" placeholder="ค้นหาชื่อสถานี นิคมฯ รหัส หรือพารามิเตอร์" oninput="renderTable()"></div>
- <select id="estateFilter" class="control" onchange="renderTable()" aria-label="เลือกนิคมอุตสาหกรรม"><option value="">ทุกนิคมอุตสาหกรรม</option></select>
- <select id="typeFilter" class="control" onchange="renderTable()" aria-label="เลือกประเภทสถานี"><option value="">ทุกประเภท</option><option value="AQMs">AQMs</option><option value="WQMs">WQMs</option><option value="CEMs">CEMs</option></select>
- <select id="statusFilter" class="control" onchange="renderTable()" aria-label="เลือกสถานะ"><option value="">ทุกสถานะ</option><option value="ALERT">ต้องติดตาม</option><option value="ONLINE">Online</option><option value="OFFLINE">Offline</option></select>
-</section>
-
-<div class="report-bar">
- <div id="resultCount" class="result">กำลังโหลดข้อมูล…</div>
- <div class="actions"><button id="pngButton" class="button" type="button" onclick="downloadPng()">ดาวน์โหลด PNG</button><button class="button primary" type="button" onclick="downloadCsv()">ดาวน์โหลด CSV</button></div>
-</div>
-
-<section class="table-card">
- <div class="table-scroll">
-  <table aria-label="ตารางรายงานสถานีตรวจวัด">
-   <thead><tr><th class="col-no">ลำดับ</th><th class="col-station">สถานีตรวจวัด</th><th class="col-estate">นิคมอุตสาหกรรม</th><th class="col-type">ประเภท</th><th class="col-status">สถานะ</th><th class="col-update">อัปเดตล่าสุด</th><th class="col-alarm">พารามิเตอร์แจ้งเตือน</th><th class="col-comment">หมายเหตุ</th><th class="col-map">ตำแหน่ง</th></tr></thead>
-   <tbody id="reportRows"><tr><td colspan="9" class="loading">กำลังโหลดข้อมูล…</td></tr></tbody>
-  </table>
+<header class="bar system-header">
+ <div class="bar-in system-header-inner">
+  <a class="system-brand" href="#overview" aria-label="หน้าแรก">
+   <img src="./assets/TH-Vertical.png" alt="โลโก้การนิคมอุตสาหกรรมแห่งประเทศไทย">
+   <strong>ระบบสารสนเทศและการเชื่อมโยงข้อมูล</strong>
+   <span>ข้อมูลสนับสนุนการเฝ้าระวังและรับมือเหตุฉุกเฉิน</span>
+  </a>
+  <div class="system-clock" id="headerClock">☀ กำลังตรวจสอบเวลา</div>
+  <nav class="system-actions" aria-label="เมนูหลัก">
+   <a class="news-nav" href="#relatedNews"><span>📰</span> หน้ารายงานข่าว</a>
+   <div class="more-wrap">
+    <button class="more-btn" id="headerMoreBtn" type="button" aria-label="เมนูเพิ่มเติม" aria-expanded="false">⋮</button>
+    <div class="more-menu" id="headerMoreMenu">
+     <a href="#overview">สภาพอากาศ</a>
+     <a href="./information.html">ข้อมูล</a>
+     <a href="./hub.html">เข้าสู่หน้า Hub</a>
+    </div>
+   </div>
+   <a class="contact-nav" href="./contacts.html">ติดต่อ</a>
+  </nav>
  </div>
-</section>
+</header><div class="app-shell">
+<main class="main" id="overview">
+ <section class="ticker"><span class="ticker-label">LIVE UPDATE</span><strong class="ticker-text" id="tickerText">กำลังประมวลผลสถานการณ์อากาศล่าสุดทั่วประเทศ</strong><span class="ticker-time" id="tickerTime">–</span><span class="sync" id="syncState"><i class="sync-dot"></i><span id="syncText">กำลังเชื่อมต่อข้อมูล</span></span><a class="source-link" href="https://nawakonnakhonchai-wq.github.io/temp_3_hr/weather_data.geojson" target="_blank" rel="noopener">แหล่งข้อมูล ↗</a></section>
+ <div class="dashboard">
+  <div class="left-column">
+   <section class="panel" id="mapPanel">
+    <header class="panel-head"><div><h2>แผนที่สถานีตรวจวัดสภาพอากาศ</h2><p>เลือกจุดบนแผนที่เพื่อดูรายละเอียดสถานี</p></div><div class="panel-actions"><button class="ghost-btn active" data-mode="rainfall_24hr">ฝน 24 ชม.</button><button class="ghost-btn" data-mode="temp">อุณหภูมิ</button></div></header>
+    <div class="map-wrap"><div id="map"></div><div class="map-badge">พื้นที่เข้าเกณฑ์เฝ้าระวัง <b id="mapAlertCount">–</b> สถานี · สำนักงานนิคมฯ <b id="estateOfficeCount">–</b> แห่ง</div><div class="legend"><span><i class="estate-legend"></i>สำนักงานนิคมฯ</span><span><i style="background:#42a846"></i>ปกติ</span><span><i style="background:#ffc719"></i>เฝ้าระวัง</span><span><i style="background:#ff6908"></i>ฝนหนัก</span><span><i style="background:#bf033b"></i>วิกฤต</span></div><div class="map-loading" id="mapLoading">กำลังโหลดข้อมูลสถานีทั่วประเทศ…</div></div>
+   </section>
+   <div class="bottom-grid">
+    <section class="panel extremes"><header class="panel-head" style="padding:0 0 10px;min-height:auto"><div><h3>สถานการณ์เด่นทั่วประเทศ</h3><p>ประเมินจากข้อมูลล่าสุด</p></div></header><div class="alert-box" id="alertBox">กำลังวิเคราะห์พื้นที่ที่ต้องเฝ้าระวัง</div><div class="metric-list"><div class="metric-row"><span>ความเร็วลมสูงสุด</span><b id="maxWind">–</b></div><div class="metric-row"><span>ฝนสะสมสูงสุด</span><b id="maxRain">–</b></div><div class="metric-row"><span>อุณหภูมิสูงสุด</span><b id="maxTemp">–</b></div><div class="metric-row"><span>จำนวนสถานีทั้งหมด</span><b id="stationCount">–</b></div></div><button class="report-btn" id="scrollTable">ดูรายละเอียดทุกสถานี</button></section>
+    <section class="panel"><header class="panel-head"><div><h3>ภาพรวมฝนสะสม 24 ชั่วโมง</h3><p>10 สถานีที่มีปริมาณฝนสูงสุด</p></div><span id="rainTotalLabel"></span></header><div class="rain-chart"><div class="bars" id="rainBars"></div></div></section>
+   </div>
+  </div>
+  <aside class="right-column">
+   <section class="panel detail"><header class="panel-head" style="padding:0 0 13px;min-height:auto"><div><h3>รายละเอียดสถานี</h3><p id="localTime">เวลาประเทศไทย –</p></div></header><div class="detail-top"><div class="weather-icon" id="weatherIcon">🌦️</div><div class="temperature" id="detailTemp">–<small>°C</small></div><div class="condition"><span>สถานการณ์</span><b id="detailCondition">รอข้อมูล</b></div></div><h2 class="station-name" id="detailName">กำลังเลือกสถานีล่าสุด</h2><div class="station-location" id="detailProvince">–</div><div class="detail-metrics"><div><span>ฝนล่าสุด</span><b id="detailRain">–</b></div><div><span>ฝน 24 ชม.</span><b id="detailRain24">–</b></div><div><span>ความเร็วลม</span><b id="detailWind">–</b></div></div><div class="detail-metrics"><div><span>ทิศทางลม</span><b id="detailDirection">–</b></div><div><span>ละติจูด</span><b id="detailLat">–</b></div><div><span>ลองจิจูด</span><b id="detailLng">–</b></div></div></section>
+   <section class="panel"><header class="panel-head"><div><h3>สถานีฝนสูงสุด</h3><p>คลิกเพื่อดูตำแหน่งบนแผนที่</p></div><span class="status-pill watch">24 ชม.</span></header><div class="ranking" id="ranking"><div class="notice">กำลังจัดอันดับข้อมูล</div></div></section>
+   <section class="panel"><header class="panel-head"><div><h3>หลักเกณฑ์การแสดงสถานะ</h3><p>ปริมาณฝนสะสม 24 ชั่วโมง</p></div></header><div class="notice"><strong>ปกติ</strong> น้อยกว่า 35 มม. · <strong>เฝ้าระวัง</strong> 35–59.9 มม. · <strong>ฝนหนัก</strong> 60–89.9 มม. · <strong>วิกฤต</strong> ตั้งแต่ 90 มม. ขึ้นไป<br><br>เป็นการคัดกรองข้อมูลเบื้องต้นเพื่อสนับสนุนการเฝ้าระวัง ไม่ใช่ประกาศเตือนภัยอย่างเป็นทางการ</div></section>
+  </aside>
+ </div>
+ <section class="panel table-panel" id="stationTable">
+  <header class="panel-head"><div><h2>ข้อมูลสถานีตรวจวัดทั่วประเทศ</h2><p>ค้นหา กรอง และเรียงตามปริมาณฝนสะสม</p></div><span id="visibleRows">0 รายการ</span></header>
+  <div class="table-tools"><input id="tableSearch" type="search" placeholder="ค้นหาชื่อสถานีหรือจังหวัด"><select id="statusFilter"><option value="all">ทุกสถานะ</option><option value="critical">วิกฤต</option><option value="warning">ฝนหนัก</option><option value="watch">เฝ้าระวัง</option><option value="normal">ปกติ</option></select></div>
+  <div class="table-scroll"><table class="weather-table"><thead><tr><th>สถานี</th><th>จังหวัด</th><th>อุณหภูมิ</th><th>ฝนล่าสุด</th><th>ฝนสะสม 24 ชม.</th><th>ความเร็วลม</th><th>ทิศทางลม</th><th>สถานะ</th></tr></thead><tbody id="stationRows"><tr><td colspan="8">กำลังโหลดข้อมูล…</td></tr></tbody></table></div>
+ </section>
 
-<footer class="footer">ระบบติดตามตรวจสอบสิ่งแวดล้อม<br>ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย กนอ.</footer>
+ <section class="news-section" id="relatedNews" aria-labelledby="relatedNewsTitle">
+  <header class="news-heading">
+   <div><h2 id="relatedNewsTitle">ข่าวสารและสถานการณ์ที่เกี่ยวข้อง</h2><p>รวบรวมข่าวจากหน่วยงานทางการด้านสภาพอากาศ สิ่งแวดล้อม และภัยพิบัติ</p></div>
+   <a href="./daily-situation.html">ดูข่าวทั้งหมด →</a>
+  </header>
+  <div class="tmd-grid" id="tmdWeatherInformation">
+   <section class="panel tmd-panel" aria-labelledby="tmdWarningTitle">
+    <header class="panel-head"><div><h2 id="tmdWarningTitle">ข่าวแจ้งเตือนกรมอุตุนิยมวิทยา</h2><p>ประกาศเตือนภัยล่าสุดจากกรมอุตุนิยมวิทยา</p></div><a href="https://www.tmd.go.th/warning-and-events/warning-storm" target="_blank" rel="noopener">ดูประกาศทั้งหมด ↗</a></header>
+    <div class="warning-content" id="tmdWarningList"><div class="load-state">กำลังโหลดข่าวแจ้งเตือนล่าสุด…</div></div>
+   </section>
+   <section class="panel tmd-panel" aria-labelledby="tmdForecastTitle">
+    <header class="panel-head"><div><h2 id="tmdForecastTitle">พยากรณ์อากาศ 7 วันข้างหน้า</h2><p>ข้อมูลพยากรณ์จากกรมอุตุนิยมวิทยา</p></div><a href="https://www.tmd.go.th/forecast/sevenday" target="_blank" rel="noopener">เปิดหน้าพยากรณ์ ↗</a></header>
+    <iframe class="forecast-frame" title="พยากรณ์อากาศ 7 วันข้างหน้า กรมอุตุนิยมวิทยา" loading="lazy" src="https://www.tmd.go.th/weatherForecast7DaysWidget?province=%E0%B8%81%E0%B8%A3%E0%B8%B8%E0%B8%87%E0%B9%80%E0%B8%97%E0%B8%9E%E0%B8%A1%E0%B8%AB%E0%B8%B2%E0%B8%99%E0%B8%84%E0%B8%A3"></iframe>
+    <div class="forecast-note">กด “เปิดหน้าพยากรณ์” เพื่อดูรายละเอียดครบทุกภาคและประกาศฉบับล่าสุด</div>
+   </section>
+  </div>
+  <div class="news-tabs" id="weatherNewsTabs"><button class="active" data-category="ทั้งหมด">ข่าวทั้งหมด</button></div>
+  <article class="news-featured" id="weatherFeaturedNews"><div class="news-empty">กำลังโหลดข่าวล่าสุด…</div></article>
+  <div class="news-grid" id="weatherNewsGrid"><div class="news-empty">กำลังรวบรวมข่าวและประกาศ…</div></div>
+ </section>
+
+</main>
+<footer class="footer"><strong>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย กนอ.</strong><span>ข้อมูลสภาพอากาศอัปเดตจากแหล่งต้นทาง · <a href="#overview">กลับด้านบน</a> · <a href="./hub.html">หน้า Hub</a></span></footer>
 </div>
-
-<section id="pdfReport" aria-hidden="true"></section>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const byId=id=>document.getElementById(id);
-const esc=value=>String(value??"-").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[char]));
-const fmt=value=>Number(value||0).toLocaleString("th-TH");
-let STATIONS=[],VISIBLE=[];
+(function(){
+"use strict";
+var DATA_URL="https://nawakonnakhonchai-wq.github.io/temp_3_hr/weather_data.geojson";
+var ESTATE_URL="https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/e_PP_2025/FeatureServer/1/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=geojson";
+var all=[],filtered=[],markers=[],mode="rainfall_24hr",selected=null;
+var map=L.map("map",{zoomControl:true,minZoom:4}).setView([13.25,101.1],6);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:"© OpenStreetMap contributors"}).addTo(map);
+var markerLayer=L.layerGroup().addTo(map);
+var estateLayer=L.layerGroup().addTo(map);
+function n(v,d){return Number(v||0).toLocaleString("th-TH",{minimumFractionDigits:d||0,maximumFractionDigits:d==null?1:d})}
+function esc(v){return String(v==null?"":v).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]})}
+function statusOf(v){v=Number(v||0);if(v>=90)return{key:"critical",label:"วิกฤต",color:"#bf033b"};if(v>=60)return{key:"warning",label:"ฝนหนัก",color:"#ff6908"};if(v>=35)return{key:"watch",label:"เฝ้าระวัง",color:"#ffc719"};return{key:"normal",label:"ปกติ",color:"#42a846"}}
+function conditionOf(p){var r=Number(p.rainfall||0),r24=Number(p.rainfall_24hr||0);if(r>=35||r24>=90)return["🌧️","ฝนตกหนักมาก"];if(r>=10||r24>=60)return["⛈️","ฝนตกหนัก"];if(r>0||r24>=35)return["🌦️","มีฝน / เฝ้าระวัง"];return["⛅","สภาพอากาศทั่วไป"]}
+function selectStation(item,zoom){selected=item;var p=item.properties,c=item.geometry.coordinates,cond=conditionOf(p),st=statusOf(p.rainfall_24hr);document.querySelector("#weatherIcon").textContent=cond[0];document.querySelector("#detailTemp").innerHTML=n(p.temp,1)+"<small>°C</small>";document.querySelector("#detailCondition").textContent=cond[1];document.querySelector("#detailCondition").style.color=st.color;document.querySelector("#detailName").textContent=p.station_name||"ไม่ระบุสถานี";document.querySelector("#detailProvince").textContent="จังหวัด"+(p.province||"–");document.querySelector("#detailRain").textContent=n(p.rainfall,1)+" มม.";document.querySelector("#detailRain24").textContent=n(p.rainfall_24hr,1)+" มม.";document.querySelector("#detailWind").textContent=n(p.wind_speed,1)+" กม./ชม.";document.querySelector("#detailDirection").textContent=p.wind_direction_label||"–";document.querySelector("#detailLat").textContent=n(c[1],3);document.querySelector("#detailLng").textContent=n(c[0],3);if(zoom)map.flyTo([c[1],c[0]],9,{duration:.8})}
+function drawMarkers(){markerLayer.clearLayers();markers=[];all.forEach(function(item){var p=item.properties,c=item.geometry&&item.geometry.coordinates;if(!c)return;var val=Number(p[mode]||0),color=mode==="temp"?(val>=35?"#bf033b":val>=30?"#ff6908":val>=25?"#ffc719":"#42a846"):statusOf(val).color;var size=mode==="temp"?12:Math.min(24,10+val/8);var marker=L.circleMarker([c[1],c[0]],{radius:size/2,color:"#fff",weight:2,fillColor:color,fillOpacity:.88}).addTo(markerLayer);marker.bindTooltip("<b>"+esc(p.station_name)+"</b><br>"+(mode==="temp"?"อุณหภูมิ "+n(p.temp,1)+" °C":"ฝน 24 ชม. "+n(p.rainfall_24hr,1)+" มม."));marker.on("click",function(){selectStation(item,false)});markers.push({item:item,marker:marker})})}
+function drawEstateOffices(features){estateLayer.clearLayers();features.forEach(function(item){var p=item.properties||{},c=item.geometry&&item.geometry.coordinates;if(!c||c.length<2)return;var name=p["สำนักงานนิคมฯ"]||p.IEAT||"สำนักงานนิคมอุตสาหกรรม",operation=p.Operations||"";var icon=L.divIcon({className:"",html:'<span class="estate-office-marker" aria-hidden="true">⌂</span>',iconSize:[30,30],iconAnchor:[15,15],popupAnchor:[0,-15]});L.marker([c[1],c[0]],{icon:icon,title:name,zIndexOffset:700}).bindTooltip("สำนักงานนิคมฯ "+esc(name),{direction:"top",offset:[0,-12]}).bindPopup('<div class="estate-popup"><b>สำนักงานนิคมฯ '+esc(name)+'</b>'+(operation?'<br><span>'+esc(operation)+'</span>':"")+'<br><span>พิกัด '+n(c[1],5)+", "+n(c[0],5)+"</span></div>").addTo(estateLayer)});document.querySelector("#estateOfficeCount").textContent=features.length.toLocaleString("th-TH")}
+function renderSummary(){var rain=[].concat(all).sort(function(a,b){return Number(b.properties.rainfall_24hr||0)-Number(a.properties.rainfall_24hr||0)}),wind=[].concat(all).sort(function(a,b){return Number(b.properties.wind_speed||0)-Number(a.properties.wind_speed||0)}),temp=[].concat(all).sort(function(a,b){return Number(b.properties.temp||0)-Number(a.properties.temp||0)}),alertCount=all.filter(function(x){return Number(x.properties.rainfall_24hr||0)>=35}).length,max=rain[0],severe=all.filter(function(x){return Number(x.properties.rainfall_24hr||0)>=60}).length;
+document.querySelector("#mapAlertCount").textContent=alertCount.toLocaleString("th-TH");document.querySelector("#stationCount").textContent=all.length.toLocaleString("th-TH")+" แห่ง";document.querySelector("#maxWind").textContent=n(wind[0].properties.wind_speed,1)+" กม./ชม.";document.querySelector("#maxRain").textContent=n(max.properties.rainfall_24hr,1)+" มม.";document.querySelector("#maxTemp").textContent=n(temp[0].properties.temp,1)+" °C";document.querySelector("#rainTotalLabel").textContent="สูงสุด "+n(max.properties.rainfall_24hr,1)+" มม.";
+var msg=severe?"พบ "+severe.toLocaleString("th-TH")+" สถานีที่มีฝนสะสม 24 ชั่วโมงตั้งแต่ 60 มม. ควรติดตามสถานการณ์อย่างใกล้ชิด":"ยังไม่พบสถานีที่เข้าเกณฑ์ฝนหนักจากข้อมูลล่าสุด";document.querySelector("#alertBox").textContent=msg;document.querySelector("#tickerText").textContent=severe?"เฝ้าระวังฝนหนักใน "+severe.toLocaleString("th-TH")+" สถานี · สูงสุดที่ "+max.properties.station_name:"สถานการณ์โดยรวมอยู่ในเกณฑ์ปกติ";
+var top=rain.slice(0,10),scale=Math.max(1,Number(top[0].properties.rainfall_24hr||0));document.querySelector("#rainBars").innerHTML=top.map(function(x){var p=x.properties,h=Math.max(3,Math.round(Number(p.rainfall_24hr||0)/scale*145));return'<div class="bar-item" title="'+esc(p.station_name)+" "+n(p.rainfall_24hr,1)+' มม."><b>'+n(p.rainfall_24hr,0)+'</b><i class="bar" style="height:'+h+'px"></i><span>'+esc(p.province)+'</span></div>'}).join("");
+document.querySelector("#ranking").innerHTML=rain.slice(0,6).map(function(x,i){var p=x.properties;return'<div class="rank-row" data-index="'+all.indexOf(x)+'"><span class="rank-no">'+(i+1)+'</span><span class="rank-name"><b>'+esc(p.station_name)+'</b><small>'+esc(p.province)+'</small></span><b class="rank-rain">'+n(p.rainfall_24hr,1)+' มม.</b></div>'}).join("");document.querySelectorAll(".rank-row").forEach(function(row){row.addEventListener("click",function(){selectStation(all[Number(row.dataset.index)],true)})});
+selectStation(max,false)}
+function renderTable(){var term=document.querySelector("#tableSearch").value.trim().toLowerCase(),status=document.querySelector("#statusFilter").value;filtered=all.filter(function(x){var p=x.properties,s=statusOf(p.rainfall_24hr);return(!term||((p.station_name||"")+" "+(p.province||"")).toLowerCase().indexOf(term)>-1)&&(status==="all"||s.key===status)}).sort(function(a,b){return Number(b.properties.rainfall_24hr||0)-Number(a.properties.rainfall_24hr||0)});document.querySelector("#visibleRows").textContent=filtered.length.toLocaleString("th-TH")+" รายการ";document.querySelector("#stationRows").innerHTML=filtered.length?filtered.map(function(x){var p=x.properties,s=statusOf(p.rainfall_24hr),idx=all.indexOf(x);return'<tr data-index="'+idx+'"><td><b>'+esc(p.station_name)+'</b></td><td>'+esc(p.province)+'</td><td>'+n(p.temp,1)+' °C</td><td>'+n(p.rainfall,1)+' มม.</td><td><b>'+n(p.rainfall_24hr,1)+' มม.</b></td><td>'+n(p.wind_speed,1)+' กม./ชม.</td><td>'+esc(p.wind_direction_label||"–")+'</td><td><span class="status-pill '+s.key+'">'+s.label+'</span></td></tr>'}).join(""):'<tr><td colspan="8">ไม่พบข้อมูลที่ตรงกับตัวกรอง</td></tr>';document.querySelectorAll("#stationRows tr[data-index]").forEach(function(row){row.addEventListener("click",function(){selectStation(all[Number(row.dataset.index)],true);document.querySelector("#mapPanel").scrollIntoView({behavior:"smooth"})})})}
+function searchGlobal(){var term=document.querySelector("#globalSearch").value.trim().toLowerCase();if(!term)return;var hit=all.find(function(x){var p=x.properties;return((p.station_name||"")+" "+(p.province||"")).toLowerCase().indexOf(term)>-1});if(hit){selectStation(hit,true);document.querySelector("#mapPanel").scrollIntoView({behavior:"smooth"})}}
+document.querySelectorAll("[data-mode]").forEach(function(btn){btn.addEventListener("click",function(){mode=btn.dataset.mode;document.querySelectorAll("[data-mode]").forEach(function(x){x.classList.toggle("active",x===btn)});drawMarkers()})});document.querySelector("#tableSearch").addEventListener("input",renderTable);document.querySelector("#statusFilter").addEventListener("change",renderTable);var searchBtn=document.querySelector("#searchBtn"),globalSearch=document.querySelector("#globalSearch");if(searchBtn)searchBtn.addEventListener("click",searchGlobal);if(globalSearch)globalSearch.addEventListener("keydown",function(e){if(e.key==="Enter")searchGlobal()});document.querySelector("#scrollTable").addEventListener("click",function(){document.querySelector("#stationTable").scrollIntoView({behavior:"smooth"})});
+function updateClock(){document.querySelector("#localTime").textContent="เวลาประเทศไทย "+new Intl.DateTimeFormat("th-TH",{hour:"2-digit",minute:"2-digit",hour12:false,timeZone:"Asia/Bangkok"}).format(new Date())+" น."}updateClock();setInterval(updateClock,60000);
+fetch(DATA_URL+"?t="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json()}).then(function(data){all=(data.features||[]).filter(function(x){return x.geometry&&x.properties});var stamp=all[0]&&all[0].properties.record_timestamp;document.querySelector("#syncState").classList.add("ok");document.querySelector("#syncText").textContent="เชื่อมโยงข้อมูลแล้ว";document.querySelector("#tickerTime").textContent=stamp?"ข้อมูล ณ "+new Intl.DateTimeFormat("th-TH",{dateStyle:"medium",timeStyle:"short",timeZone:"Asia/Bangkok"}).format(new Date(stamp+"Z")):"ข้อมูลล่าสุด";document.querySelector("#mapLoading").classList.add("hide");drawMarkers();renderSummary();renderTable();setTimeout(function(){map.invalidateSize()},100)}).catch(function(err){document.querySelector("#syncText").textContent="เชื่อมต่อไม่สำเร็จ";document.querySelector("#tickerText").textContent="ไม่สามารถเรียกข้อมูลสภาพอากาศได้ในขณะนี้";document.querySelector("#mapLoading").textContent="ไม่สามารถโหลดข้อมูล กรุณาลองใหม่อีกครั้ง";document.querySelector("#stationRows").innerHTML='<tr><td colspan="8" class="error-state">ไม่สามารถเรียกข้อมูลจากแหล่งต้นทางได้</td></tr>';console.error(err)});
+fetch(ESTATE_URL+"&t="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json()}).then(function(data){drawEstateOffices((data.features||[]).filter(function(x){return x.geometry&&x.properties}))}).catch(function(err){document.querySelector("#estateOfficeCount").textContent="–";console.error("IEAT office layer",err)});
+})();
+</script>
 
-function isOnline(s){return String(s.status||"").trim().toUpperCase()==="ONLINE"}
-function alarmOf(s){return String(s.parameter_alarm||s.ParameterAlram||"-").trim()}
-function hasAlarm(s){const value=alarmOf(s);return value&&value!=="-"}
-function estateOf(s){return String(s.estate_name||s.IndustryZone||"-").trim()}
-function typeOf(s){
- const value=String(s.station_type||s.StationType||"-").toUpperCase();
- if(value.includes("AIR")||value.includes("AQM"))return "AQMs";
- if(value.includes("WATER")||value.includes("WQM"))return "WQMs";
- if(value.includes("STACK")||value.includes("CEM"))return "CEMs";
- return "อื่น ๆ";
-}
-function stateOf(s){if(hasAlarm(s))return "ALERT";return isOnline(s)?"ONLINE":"OFFLINE"}
-function statusBadge(s){
- const state=stateOf(s);
- if(state==="ALERT")return '<span class="badge alert">ต้องติดตาม</span><br><span class="muted">'+esc(s.status||"-")+'</span>';
- if(state==="ONLINE")return '<span class="badge online">ONLINE</span>';
- return '<span class="badge offline">'+esc(s.status||"OFFLINE")+'</span>';
-}
-function mapUrl(s){
- const lat=Number(s.latitude),lon=Number(s.longitude);
- return Number.isFinite(lat)&&Number.isFinite(lon)?"https://www.google.com/maps/search/?api=1&query="+lat+","+lon:"";
-}
-function rowHtml(s,index){
- const map=mapUrl(s),alarm=alarmOf(s),comment=String(s.comment||"-").trim()||"-";
- return '<tr><td class="col-no">'+fmt(index+1)+'</td><td class="col-station"><div class="station-name">'+esc(s.station_name||"-")+'</div><div class="station-code">รหัส '+esc(s.code||"-")+'</div></td><td>'+esc(estateOf(s))+'</td><td>'+esc(typeOf(s))+'</td><td>'+statusBadge(s)+'</td><td>'+esc(s.last_update||s.LastUpdate||"-")+'</td><td>'+(hasAlarm(s)?'<span class="alarm">'+esc(alarm)+'</span>':'<span class="muted">-</span>')+'</td><td>'+esc(comment)+'</td><td class="col-map">'+(map?'<a class="map-link" target="_blank" rel="noopener" href="'+map+'">เปิดแผนที่</a>':'<span class="muted">-</span>')+'</td></tr>';
-}
-function populateEstates(){
- const select=byId("estateFilter");
- const names=[...new Set(STATIONS.map(estateOf).filter(v=>v&&v!=="-"))].sort((a,b)=>a.localeCompare(b,"th"));
- select.innerHTML='<option value="">ทุกนิคมอุตสาหกรรม</option>'+names.map(name=>'<option value="'+esc(name)+'">'+esc(name)+'</option>').join("");
- const requested=new URLSearchParams(location.search).get("estate");if(requested&&names.includes(requested))select.value=requested;
-}
-function renderTable(){
- const query=byId("searchInput").value.trim().toLowerCase(),estate=byId("estateFilter").value,type=byId("typeFilter").value,status=byId("statusFilter").value;
- VISIBLE=STATIONS.filter(s=>(!query||[s.station_name,s.code,estateOf(s),typeOf(s),s.status,alarmOf(s),s.comment].join(" ").toLowerCase().includes(query))&&(!estate||estateOf(s)===estate)&&(!type||typeOf(s)===type)&&(!status||stateOf(s)===status))
- .sort((a,b)=>{const rank={ALERT:0,OFFLINE:1,ONLINE:2};return rank[stateOf(a)]-rank[stateOf(b)]||estateOf(a).localeCompare(estateOf(b),"th")||String(a.station_name||"").localeCompare(String(b.station_name||""),"th")});
- byId("resultCount").textContent="แสดง "+fmt(VISIBLE.length)+" จาก "+fmt(STATIONS.length)+" สถานี";
- byId("reportRows").innerHTML=VISIBLE.length?VISIBLE.map(rowHtml).join(""):'<tr><td colspan="9" class="empty">ไม่พบสถานีตามเงื่อนไขที่เลือก</td></tr>';
-}
-function pdfRowsForType(type){
- const rows=VISIBLE.filter(s=>typeOf(s)===type);
- if(!rows.length)return '<div class="pdf-empty">ไม่พบข้อมูลสถานีในระบบ '+esc(type)+'</div>';
- return '<table class="pdf-table"><thead><tr><th class="p-estate">นิคมอุตสาหกรรม</th><th class="p-station">สถานีตรวจวัด</th><th class="p-alarm">พารามิเตอร์/สถานะ</th><th class="p-update">อัปเดตล่าสุด</th><th class="p-note">หมายเหตุ</th></tr></thead><tbody>'+rows.map(s=>'<tr><td>'+esc(estateOf(s))+'</td><td>'+esc(s.station_name||"-")+'</td><td>'+esc(alarmOf(s))+'<br>'+esc(s.status||"-")+'</td><td>'+esc(s.last_update||"-")+'</td><td>'+esc(s.comment||"-")+'</td></tr>').join("")+'</tbody></table>';
-}
-function buildPdfReport(){
- const alerts=VISIBLE.filter(hasAlarm),online=VISIBLE.filter(isOnline).length,offline=VISIBLE.length-online;
- const now=new Date(),dateText=now.toLocaleDateString("th-TH",{year:"numeric",month:"long",day:"numeric"}),timeText=now.toLocaleTimeString("th-TH",{hour:"2-digit",minute:"2-digit"});
- const sections=[["AQMs","ระบบตรวจวัดคุณภาพอากาศในบรรยากาศ"],["WQMs","ระบบตรวจวัดคุณภาพน้ำ"],["CEMs","ระบบตรวจวัดการระบายมลพิษ"]].map(([type,label])=>'<section class="pdf-section"><div class="pdf-section-title">รายงานสถานีตรวจวัด '+label+' '+type+'</div>'+pdfRowsForType(type)+'</section>').join("");
- byId("pdfReport").innerHTML='<div class="pdf-head"><div class="pdf-brand"><img class="pdf-logo" src="./assets/TH-Vertical.png" alt="กนอ."><div class="pdf-org">การนิคมอุตสาหกรรมแห่งประเทศไทย<br>ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย</div></div><div class="pdf-date">วันที่ '+esc(dateText)+'<br>เวลา '+esc(timeText)+' น.</div></div><h1 class="pdf-title">รายงานการตรวจสอบสถานะการทำงานของระบบเฝ้าระวังสิ่งแวดล้อม (E-Monitoring)</h1><p class="pdf-subtitle">รายงานสรุปจากข้อมูลที่แสดงตามตัวกรอง ณ เวลาที่ดาวน์โหลด</p><div class="pdf-summary"><div class="pdf-kpi"><strong>'+fmt(VISIBLE.length)+'</strong><span>สถานีในรายงาน</span></div><div class="pdf-kpi"><strong>'+fmt(online)+'</strong><span>Online</span></div><div class="pdf-kpi"><strong>'+fmt(offline)+'</strong><span>Offline</span></div><div class="pdf-kpi"><strong>'+fmt(alerts.length)+'</strong><span>ต้องติดตาม</span></div></div>'+sections+'<div class="pdf-footer">ข้อมูลจากระบบ IEAT e-Monitoring • โปรดตรวจสอบข้อมูลล่าสุดก่อนดำเนินการ</div>';
-}
-async function downloadPng(){
- if(!VISIBLE.length){alert("ไม่พบข้อมูลสำหรับสร้างรายงาน PNG");return}
- if(typeof html2canvas==="undefined"){alert("ไม่สามารถโหลดเครื่องมือสร้าง PNG ได้ กรุณาตรวจสอบอินเทอร์เน็ตแล้วลองใหม่");return}
- const button=byId("pngButton");button.disabled=true;button.textContent="กำลังสร้าง PNG…";
- const report=byId("pdfReport");
- const originalParent=report.parentNode;
- const originalNext=report.nextSibling;
- const stage=document.createElement("div");
- stage.className="pdf-render-stage";
- try{
-  buildPdfReport();
-  document.body.appendChild(stage);
-  stage.appendChild(report);
-  report.classList.add("pdf-active");
-  await document.fonts.ready;
-  const images=[...report.querySelectorAll("img")];
-  await Promise.all(images.map(image=>image.complete?Promise.resolve():new Promise(resolve=>{image.onload=resolve;image.onerror=resolve})));
-  await new Promise(resolve=>setTimeout(resolve,300));
-  const canvas=await html2canvas(report,{scale:2,useCORS:true,allowTaint:true,backgroundColor:"#ffffff",scrollX:0,scrollY:0,width:1200,windowWidth:1200});
-  const date=new Date().toISOString().slice(0,10);
-  const link=document.createElement("a");
-  link.download="IEAT-eMonitoring-Daily-Report-"+date+".png";
-  link.href=canvas.toDataURL("image/png",1);
-  document.body.appendChild(link);link.click();link.remove();
- }catch(error){
-  console.error(error);
-  alert("ไม่สามารถสร้าง PNG ได้ กรุณาลองใหม่อีกครั้ง");
- }finally{
-  report.classList.remove("pdf-active");
-  if(originalNext)originalParent.insertBefore(report,originalNext);else originalParent.appendChild(report);
-  stage.remove();
-  button.disabled=false;
-  button.textContent="ดาวน์โหลด PNG";
+<script id="tmd-warning-feed-20260915">
+(function(){
+ "use strict";
+ var WARNING_URL="https://nawakonnakhonchai-wq.github.io/WeatherWarningNews/data/storm.geojson";
+ var box=document.querySelector("#tmdWarningList");
+ function escTmd(v){return String(v==null?"":v).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]})}
+ function formatDate(v){if(!v)return"ไม่ระบุเวลา";var d=new Date(String(v).replace(" ","T")+(/Z$|[+-]\d\d:?\d\d$/.test(v)?"":"+07:00"));return isNaN(d)?v:new Intl.DateTimeFormat("th-TH",{dateStyle:"medium",timeStyle:"short",timeZone:"Asia/Bangkok"}).format(d)+" น."}
+ fetch(WARNING_URL+"?t="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json()}).then(function(data){
+  var rows=(data.features||[]).filter(function(x){return x&&x.properties});
+  box.innerHTML=rows.length?rows.map(function(x){var p=x.properties||{},empty=p.status==="no_data",url=p.webUrl||"https://www.tmd.go.th/warning-and-events/warning-storm";return '<article class="warning-item"><h3>'+escTmd(p.title||"ประกาศแจ้งเตือน")+'</h3><p>'+escTmd(p.headline||p.description||"ยังไม่มีรายละเอียดประกาศ")+'</p><div class="warning-meta"><span>'+(empty?"ตรวจสอบล่าสุด ":"ออกประกาศ ")+escTmd(formatDate(p.announceDate))+'</span><a href="'+escTmd(url)+'" target="_blank" rel="noopener">อ่านประกาศฉบับเต็ม →</a></div></article>'}).join(""):'<div class="warning-empty">ไม่พบประกาศเตือนภัยในขณะนี้</div>';
+ }).catch(function(){box.innerHTML='<div class="warning-empty">ไม่สามารถโหลดข่าวแจ้งเตือนได้ในขณะนี้ กรุณาเปิดดูจากเว็บไซต์กรมอุตุนิยมวิทยา</div>'});
+})();
+</script>
+
+<script id="weather-related-news-20260915">
+(function(){
+ var items=[],active="ทั้งหมด";
+ function escNews(v){return String(v==null?"":v).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]})}
+ function category(item){if(item.category)return item.category;var text=((item.title||"")+" "+(item.summary||"")).toLowerCase();if(/ฝน|น้ำท่วม|พายุ|ลมแรง|คลื่น|อากาศ/.test(text))return"อากาศและน้ำ";if(/ไฟไหม้|ไฟป่า|สารเคมี|ฉุกเฉิน/.test(text))return"เหตุฉุกเฉิน";if(/pm2\\.5|ฝุ่น|มลพิษ|คุณภาพอากาศ|น้ำเสีย/.test(text))return"สิ่งแวดล้อม";if(/แผ่นดินไหว|สึนามิ|ดินถล่ม|ภัยพิบัติ/.test(text))return"ภัยพิบัติ";if(/นิคม|โรงงาน|อุตสาหกรรม/.test(text))return"นิคมฯ และโรงงาน";return"ข่าวและประกาศ"}
+ function imageOf(item){return item.image||(((item.images||[])[0]||{}).url)||""}
+ function render(){
+  var filtered=items.filter(function(x){return active==="ทั้งหมด"||category(x)===active}),featured=filtered[0],rest=filtered.slice(1,7),box=document.querySelector("#weatherFeaturedNews");
+  if(featured){var image=imageOf(featured);box.innerHTML=(image?'<a class="news-featured-image" href="'+escNews(featured.url)+'" target="_blank" rel="noopener"><img src="'+escNews(image)+'" alt="'+escNews(featured.title)+'"></a>':'<a class="news-featured-image no-image" href="'+escNews(featured.url)+'" target="_blank" rel="noopener">'+escNews(featured.source||"ข่าวล่าสุด")+'</a>')+'<div class="news-featured-copy"><span class="news-meta">'+escNews(category(featured))+' · '+escNews(featured.source||"")+'</span><h3>'+escNews(featured.title)+'</h3><p>'+escNews(featured.summary||"")+'</p><a class="news-read" href="'+escNews(featured.url)+'" target="_blank" rel="noopener">อ่านข่าวฉบับเต็ม →</a></div>'}else box.innerHTML='<div class="news-empty">ไม่พบข่าวในหมวดที่เลือก</div>';
+  document.querySelector("#weatherNewsGrid").innerHTML=rest.length?rest.map(function(item){var image=imageOf(item);return'<article class="news-card">'+(image?'<a class="news-card-image" href="'+escNews(item.url)+'" target="_blank" rel="noopener"><img src="'+escNews(image)+'" alt="'+escNews(item.title)+'" loading="lazy"></a>':'<a class="news-card-image no-image" href="'+escNews(item.url)+'" target="_blank" rel="noopener">'+escNews(item.source||"ข่าวและประกาศ")+'</a>')+'<div class="news-card-copy"><span class="news-meta">'+escNews(category(item))+'</span><small>'+escNews(item.source||"")+(item.published_date?" · "+escNews(item.published_date):"")+'</small><h3>'+escNews(item.title)+'</h3><p>'+escNews(item.summary||"")+'</p><a class="news-read" href="'+escNews(item.url)+'" target="_blank" rel="noopener">อ่านจากแหล่งข่าว →</a></div></article>'}).join(""):'<div class="news-empty">ยังไม่มีข่าวเพิ่มเติมในหมวดนี้</div>'
  }
-}
-function csvCell(value){const text=String(value??"").replace(/"/g,'""');return '"'+text+'"'}
-function downloadCsv(){
- const header=["ลำดับ","รหัส","สถานีตรวจวัด","นิคมอุตสาหกรรม","ประเภท","สถานะ","อัปเดตล่าสุด","พารามิเตอร์แจ้งเตือน","หมายเหตุ","ละติจูด","ลองจิจูด"];
- const rows=VISIBLE.map((s,index)=>[index+1,s.code||"",s.station_name||"",estateOf(s),typeOf(s),s.status||"",s.last_update||"",alarmOf(s),s.comment||"",s.latitude??"",s.longitude??""]);
- const csv="\uFEFF"+[header,...rows].map(row=>row.map(csvCell).join(",")).join("\r\n");
- const blob=new Blob([csv],{type:"text/csv;charset=utf-8"}),url=URL.createObjectURL(blob),link=document.createElement("a");
- link.href=url;link.download="IEAT-eMonitoring-Stations-"+new Date().toISOString().slice(0,10)+".csv";document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
-}
-async function load(){
- try{
-  const response=await fetch("./status.json?t="+Date.now(),{cache:"no-store"});if(!response.ok)throw new Error("HTTP "+response.status);
-  const data=await response.json();STATIONS=Array.isArray(data.all_stations)?data.all_stations:[];
-  const online=STATIONS.filter(isOnline).length,offline=STATIONS.length-online,alerts=STATIONS.filter(hasAlarm).length;
-  byId("totalCount").textContent=fmt(STATIONS.length);byId("onlineCount").textContent=fmt(online);byId("offlineCount").textContent=fmt(offline);byId("alertCount").textContent=fmt(alerts);
-  byId("updatedAt").textContent=data.updated_at_text||data.updated_at||"-";populateEstates();renderTable();
- }catch(error){console.error(error);byId("updatedAt").textContent="ไม่สามารถโหลดข้อมูล";byId("reportRows").innerHTML='<tr><td colspan="9" class="empty">ไม่สามารถโหลดข้อมูลจาก status.json ได้</td></tr>';byId("resultCount").textContent="เกิดข้อผิดพลาดในการโหลดข้อมูล"}
-}
-load();setInterval(load,60000);
+ fetch("./daily-report.json?t="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json()}).then(function(data){items=(data.news||[]).map(function(x){x.category=category(x);return x});var cats=["ทั้งหมด"].concat(Array.from(new Set(items.map(category))));document.querySelector("#weatherNewsTabs").innerHTML=cats.map(function(cat){return'<button class="'+(cat==="ทั้งหมด"?"active":"")+'" data-category="'+escNews(cat)+'">'+(cat==="ทั้งหมด"?"ข่าวทั้งหมด":escNews(cat))+'</button>'}).join("");document.querySelectorAll("#weatherNewsTabs button").forEach(function(btn){btn.addEventListener("click",function(){active=btn.dataset.category;document.querySelectorAll("#weatherNewsTabs button").forEach(function(x){x.classList.toggle("active",x===btn)});render()})});render()}).catch(function(){document.querySelector("#weatherFeaturedNews").innerHTML='<div class="news-empty">ไม่สามารถโหลดข่าวสารได้ในขณะนี้</div>';document.querySelector("#weatherNewsGrid").innerHTML=""});
+})();
+</script>
+
+
+<script id="homepage-header-clock">
+(function(){function tick(){var now=new Date();var date=document.querySelector("#headerDate"),time=document.querySelector("#headerTime");if(date)date.textContent="ข้อมูล ณ วันที่ "+new Intl.DateTimeFormat("th-TH",{timeZone:"Asia/Bangkok",day:"numeric",month:"short",year:"numeric"}).format(now);if(time)time.textContent="เวลา "+new Intl.DateTimeFormat("th-TH",{timeZone:"Asia/Bangkok",hour:"2-digit",minute:"2-digit",hour12:false}).format(now)+" น."}tick();setInterval(tick,60000)})();
+</script>
+
+<script id="system-header-behavior-20260915">
+(function(){
+ function updateHeaderClock(){var el=document.querySelector("#headerClock");if(!el)return;var now=new Date(),date=new Intl.DateTimeFormat("th-TH",{timeZone:"Asia/Bangkok",weekday:"short",day:"numeric",month:"short",year:"2-digit"}).format(now),time=new Intl.DateTimeFormat("th-TH",{timeZone:"Asia/Bangkok",hour:"2-digit",minute:"2-digit",hour12:false}).format(now);el.textContent="☀ "+date+" "+time+" น."}
+ updateHeaderClock();setInterval(updateHeaderClock,60000);
+ var btn=document.querySelector("#headerMoreBtn"),menu=document.querySelector("#headerMoreMenu");
+ if(btn&&menu){btn.addEventListener("click",function(e){e.stopPropagation();var open=menu.classList.toggle("open");btn.setAttribute("aria-expanded",String(open))});document.addEventListener("click",function(){menu.classList.remove("open");btn.setAttribute("aria-expanded","false")});menu.addEventListener("click",function(e){e.stopPropagation()})}
+})();
 </script>
 </body>
 </html>
