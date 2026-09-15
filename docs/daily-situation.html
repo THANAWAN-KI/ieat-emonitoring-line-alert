@@ -373,77 +373,21 @@ html body .weather-table .status-pill.watch{
 }
 </style>
 
-<style id="daily-reference-grouped-frames-20260915">
-/* Layout follows the supplied reference: three summary cards in one green frame,
-   with the rainfall overview in its own full-width red frame. */
-html body .dashboard{
- display:grid!important;
- grid-template-columns:repeat(3,minmax(0,1fr))!important;
- column-gap:0!important;
- row-gap:12px!important;
+
+<style id="daily-table-gray-centered-20260915">
+/* Requested gray header and centered station table */
+html body .weather-table thead th{
+ background:#d9d9d9!important;
+ color:#000000!important;
+ font-weight:700!important;
+ text-align:center!important;
 }
-html body .dashboard>.left-column,
-html body .dashboard>.right-column,
-html body .dashboard .bottom-grid{
- display:contents!important;
-}
-html body #mapPanel{
- grid-column:1 / -1!important;
- grid-row:auto!important;
- order:1!important;
-}
-html body .extremes.green-data-frame{
- grid-column:1!important;
- order:2!important;
-}
-html body .detail.green-data-frame{
- grid-column:2!important;
- order:3!important;
-}
-html body .station-ranking-panel{
- grid-column:3!important;
- order:4!important;
-}
-html body .green-data-frame{
- min-width:0!important;
- margin:0!important;
- border-top:3px solid #01cd74!important;
- border-bottom:3px solid #01cd74!important;
- border-left:0!important;
- border-right:0!important;
- border-radius:0!important;
- box-shadow:none!important;
-}
-html body .extremes.green-data-frame{
- border-left:3px solid #01cd74!important;
- border-radius:6px 0 0 6px!important;
-}
-html body .station-ranking-panel{
- border-right:3px solid #01cd74!important;
- border-radius:0 6px 6px 0!important;
-}
-html body .red-rain-frame{
- grid-column:1 / -1!important;
- order:5!important;
- width:100%!important;
- margin:0!important;
- border:3px solid #fc636b!important;
- border-radius:6px!important;
- box-shadow:none!important;
-}
-html body .status-criteria-panel{
- grid-column:1 / -1!important;
- order:6!important;
-}
-@media(max-width:900px){
- html body .dashboard{grid-template-columns:1fr!important;column-gap:12px!important}
- html body #mapPanel,
- html body .extremes.green-data-frame,
- html body .detail.green-data-frame,
- html body .station-ranking-panel,
- html body .red-rain-frame,
- html body .status-criteria-panel{grid-column:1!important}
- html body .green-data-frame{border:2px solid #01cd74!important;border-radius:6px!important}
+html body .weather-table tbody td,
+html body .weather-table th:first-child,
+html body .weather-table td:first-child,
+html body .weather-table th:last-child,
+html body .weather-table td:last-child{
+ text-align:center!important;
 }
 </style>
 </head>
@@ -485,8 +429,8 @@ html body .status-criteria-panel{
   </div>
   <aside class="right-column">
    <section class="panel detail green-data-frame"><header class="panel-head" style="padding:0 0 13px;min-height:auto"><div><h3>รายละเอียดสถานี</h3><p id="localTime">เวลาประเทศไทย –</p></div></header><div class="detail-top"><div class="weather-icon" id="weatherIcon">🌦️</div><div class="temperature" id="detailTemp">–<small>°C</small></div><div class="condition"><span>สถานการณ์</span><b id="detailCondition">รอข้อมูล</b></div></div><h2 class="station-name" id="detailName">กำลังเลือกสถานีล่าสุด</h2><div class="station-location" id="detailProvince">–</div><div class="detail-metrics"><div><span>ฝนล่าสุด</span><b id="detailRain">–</b></div><div><span>ฝน 24 ชม.</span><b id="detailRain24">–</b></div><div><span>ความเร็วลม</span><b id="detailWind">–</b></div></div><div class="detail-metrics"><div><span>ทิศทางลม</span><b id="detailDirection">–</b></div><div><span>ละติจูด</span><b id="detailLat">–</b></div><div><span>ลองจิจูด</span><b id="detailLng">–</b></div></div></section>
-   <section class="panel green-data-frame station-ranking-panel"><header class="panel-head"><div><h3>สถานีฝนสูงสุด</h3><p>คลิกเพื่อดูตำแหน่งบนแผนที่</p></div><span class="status-pill watch">24 ชม.</span></header><div class="ranking" id="ranking"><div class="notice">กำลังจัดอันดับข้อมูล</div></div></section>
-   <section class="panel status-criteria-panel"><header class="panel-head"><div><h3>หลักเกณฑ์การแสดงสถานะ</h3><p>ปริมาณฝนสะสม 24 ชั่วโมง</p></div></header><div class="notice"><strong>ปกติ</strong> น้อยกว่า 35 มม. · <strong>เฝ้าระวัง</strong> 35–59.9 มม. · <strong>ฝนหนัก</strong> 60–89.9 มม. · <strong>วิกฤต</strong> ตั้งแต่ 90 มม. ขึ้นไป<br><br>เป็นการคัดกรองข้อมูลเบื้องต้นเพื่อสนับสนุนการเฝ้าระวัง ไม่ใช่ประกาศเตือนภัยอย่างเป็นทางการ</div></section>
+   <section class="panel green-data-frame"><header class="panel-head"><div><h3>สถานีฝนสูงสุด</h3><p>คลิกเพื่อดูตำแหน่งบนแผนที่</p></div><span class="status-pill watch">24 ชม.</span></header><div class="ranking" id="ranking"><div class="notice">กำลังจัดอันดับข้อมูล</div></div></section>
+   <section class="panel"><header class="panel-head"><div><h3>หลักเกณฑ์การแสดงสถานะ</h3><p>ปริมาณฝนสะสม 24 ชั่วโมง</p></div></header><div class="notice"><strong>ปกติ</strong> น้อยกว่า 35 มม. · <strong>เฝ้าระวัง</strong> 35–59.9 มม. · <strong>ฝนหนัก</strong> 60–89.9 มม. · <strong>วิกฤต</strong> ตั้งแต่ 90 มม. ขึ้นไป<br><br>เป็นการคัดกรองข้อมูลเบื้องต้นเพื่อสนับสนุนการเฝ้าระวัง ไม่ใช่ประกาศเตือนภัยอย่างเป็นทางการ</div></section>
   </aside>
  </div>
  <section class="panel table-panel" id="stationTable">
