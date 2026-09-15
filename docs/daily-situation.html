@@ -621,6 +621,31 @@ html body header.system-header .more-btn {
   color:#000000!important;
 }
 </style>
+
+<style id="daily-map-fill-own-panel-20260915-v1">
+/* Let the map fill the full height allocated to its panel */
+html body main.main .dashboard .left-column {
+  grid-template-rows:minmax(0,1fr) auto!important;
+}
+html body main.main #mapPanel {
+  height:100%!important;min-height:0!important;
+  display:flex!important;flex-direction:column!important;
+}
+html body main.main #mapPanel > .panel-head {
+  flex:0 0 auto!important;
+}
+html body main.main #mapPanel > .map-wrap {
+  height:auto!important;min-height:575px!important;
+  flex:1 1 auto!important;
+}
+html body main.main #mapPanel #map {
+  width:100%!important;height:100%!important;min-height:575px!important;
+}
+@media(max-width:980px){
+  html body main.main #mapPanel > .map-wrap,
+  html body main.main #mapPanel #map{min-height:480px!important}
+}
+</style>
 </head>
 <body>
 <header class="bar system-header">
