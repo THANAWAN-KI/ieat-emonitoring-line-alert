@@ -210,7 +210,7 @@ const data={
 overview:{map:maps.gis,metrics:[["⌂","4 ระบบ","ระบบข้อมูลสำคัญของศูนย์ฯ"],["◉","GIS กลาง","เชื่อมโยงข้อมูลบนแผนที่เดียว"],["⌁","ทั่วประเทศ","ครอบคลุมพื้นที่นิคมอุตสาหกรรม"]],chart:"ภาพรวมการเชื่อมโยงข้อมูลของศูนย์ฯ",filter:"ระบบข้อมูลทั้งหมด　⌄",bars:[78,66,58,48],labels:["ข้อมูลระบบ GIS","e‑Monitoring","ข้อมูลระดับน้ำ","สถิติอุบัติเหตุ"],donut:"4",donutTitle:"ระบบข้อมูลที่เชื่อมโยง",donutText:"CAD • e‑PP • DSS • ข้อมูลสนับสนุน",gauge:"GIS",gaugeTitle:"ศูนย์กลางข้อมูล",gaugeSide:"เชื่อมโยง",lower:"ภาพรวมการใช้ข้อมูลสนับสนุนภารกิจ",chips:["GIS","e‑Monitoring","ระดับน้ำ"],legend:["ขอบเขตนิคมฯ","สถานีตรวจวัด","ข้อมูลผู้ประกอบการ","ข้อมูลสนับสนุนฉุกเฉิน"]},
 gis:{map:maps.gis,metrics:[["⌗","CAD","ข้อมูลผังและขอบเขตพื้นที่"],["▦","e‑PP + DSS","ข้อมูลผู้ประกอบการและการตัดสินใจ"],["✦","Emergency","ข้อมูลสนับสนุนภาวะฉุกเฉิน"]],chart:"ชั้นข้อมูลที่บูรณาการบนระบบ GIS",filter:"จำแนกตามแหล่งข้อมูล　⌄",bars:[82,68,60,52],labels:["ข้อมูล CAD","ระบบ e‑PP","ระบบ DSS","ภาวะฉุกเฉิน"],donut:"4",donutTitle:"กลุ่มชั้นข้อมูลหลัก",donutText:"แสดงผลร่วมกันบนแผนที่เดียว",gauge:"GIS",gaugeTitle:"ข้อมูลเชิงพื้นที่",gaugeSide:"พร้อมใช้",lower:"การเชื่อมโยงข้อมูลเพื่อสนับสนุนการตัดสินใจ",chips:["ชั้นข้อมูล","คำอธิบาย","แผนที่ฐาน"],legend:["ขอบเขตนิคมฯ","ข้อมูล CAD","ผู้ประกอบการ","ทรัพยากรฉุกเฉิน"]},
 monitor:{map:maps.monitor,metrics:[["◉","Air Quality","ผลตรวจวัดคุณภาพอากาศ"],["⌖","สถานีตรวจวัด","ติดตามตำแหน่งและสถานะ"],["↗","LINE Alert","ส่งข้อมูลให้ผู้เกี่ยวข้อง"]],chart:"ภาพรวมข้อมูลตรวจวัดตามประเภทสถานี",filter:"จำแนกตามนิคมฯ　⌄",bars:[78,61,46,33],labels:["AQM","CEM","WQM","สถานะสถานี"],donut:"AQ",donutTitle:"ข้อมูล e‑Monitoring",donutText:"เฝ้าระวังข้อมูลสิ่งแวดล้อม",gauge:"LINE",gaugeTitle:"ระบบแจ้งเตือน",gaugeSide:"เชื่อมโยง",lower:"แนวโน้มข้อมูลสำหรับการเฝ้าระวัง",chips:["สถานี","สถานะ","ข้อมูลล่าสุด"],legend:["สถานีปกติ","สถานีเฝ้าระวัง","สถานี Offline","พื้นที่นิคมฯ"]},
-water:{map:maps.water,metrics:[["≈","ระดับน้ำ","ข้อมูลจากกรมชลประทาน"],["⌖","ใกล้นิคมฯ","คัดกรองพื้นที่ที่เกี่ยวข้อง"],["△","เฝ้าระวัง","สนับสนุนการเตรียมพร้อม"]],chart:"สถานีระดับน้ำที่ต้องติดตามตามพื้นที่",filter:"จำแนกตามพื้นที่รับผิดชอบ　⌄",bars:[72,58,43,28],labels:["ภาคกลาง","ภาคตะวันออก","ภาคเหนือ","ภาคใต้"],donut:"WL",donutTitle:"สถานีระดับน้ำ",donutText:"เน้นพื้นที่นิคมฯ และบริเวณใกล้เคียง",gauge:"RID",gaugeTitle:"ข้อมูลต้นทาง",gaugeSide:"กรมชลประทาน",lower:"แนวโน้มสถานการณ์น้ำในพื้นที่เฝ้าระวัง",chips:["ระดับน้ำ","พื้นที่เสี่ยง","ฝนสะสม"],legend:["ระดับปกติ","เฝ้าระวัง","วิกฤต","ขอบเขตนิคมฯ"]},
+water:{map:maps.water,metrics:[["≈","กำลังโหลด","สถานีระดับน้ำจาก ArcGIS Web Map"],["⌖","กำลังโหลด","สถานีที่เกี่ยวข้องกับพื้นที่นิคมฯ"],["△","กำลังโหลด","สถานีที่ต้องเฝ้าระวัง"]],chart:"สถานีระดับน้ำที่เกี่ยวข้องกับพื้นที่ที่เลือก",filter:"กำลังโหลดข้อมูลจาก ArcGIS　⌄",bars:[0,0,0,0],labels:["สถานี 1","สถานี 2","สถานี 3","สถานี 4"],donut:"WL",donutTitle:"สถานีระดับน้ำ",donutText:"เน้นพื้นที่นิคมฯ และบริเวณใกล้เคียง",gauge:"RID",gaugeTitle:"ข้อมูลต้นทาง",gaugeSide:"กรมชลประทาน",lower:"แนวโน้มสถานการณ์น้ำในพื้นที่เฝ้าระวัง",chips:["ระดับน้ำ","พื้นที่เสี่ยง","ฝนสะสม"],legend:["ระดับปกติ","เฝ้าระวัง","วิกฤต","ขอบเขตนิคมฯ"]},
 accident:{map:maps.accident,metrics:[["!","เหตุการณ์","ข้อมูลอุบัติเหตุในนิคมฯ"],["⌖","พื้นที่เกิดเหตุ","วิเคราะห์การกระจายตัว"],["⌁","แนวโน้ม","สนับสนุนมาตรการป้องกัน"]],chart:"สรุปข้อมูลอุบัติเหตุตามพื้นที่นิคมฯ",filter:"จำแนกตามประเภทเหตุ　⌄",bars:[76,57,39,24],labels:["อุบัติเหตุทั่วไป","อัคคีภัย","สารเคมี","เหตุอื่น ๆ"],donut:"STAT",donutTitle:"ข้อมูลสถิติอุบัติเหตุ",donutText:"วิเคราะห์ตามพื้นที่ ประเภท และเวลา",gauge:"RISK",gaugeTitle:"การวิเคราะห์",gaugeSide:"เพื่อป้องกัน",lower:"แนวโน้มเหตุการณ์เพื่อกำหนดมาตรการ",chips:["จุดเกิดเหตุ","พื้นที่เสี่ยง","สถิติ"],legend:["จุดเกิดเหตุ","พื้นที่นิคมฯ","พื้นที่เฝ้าระวัง","ข้อมูลสนับสนุน"]}
 };
 const estates=[["พื้นที่นิคมอุตสาหกรรมทั่วประเทศ",13.2,101.0,1155581],["นิคมอุตสาหกรรมมาบตาพุด",12.715,101.145,65000],["นิคมอุตสาหกรรมแหลมฉบัง",13.087,100.883,65000],["นิคมอุตสาหกรรมบางปู",13.548,100.656,65000],["นิคมอุตสาหกรรมบางชัน",13.821,100.712,65000],["นิคมอุตสาหกรรมลาดกระบัง",13.735,100.794,65000],["นิคมอุตสาหกรรมสมุทรสาคร",13.570,100.249,65000],["นิคมอุตสาหกรรมภาคเหนือ",18.577,99.045,65000],["นิคมอุตสาหกรรมพิจิตร",16.387,100.318,65000],["นิคมอุตสาหกรรมภาคใต้",6.932,100.430,65000],["นิคมอุตสาหกรรมอมตะซิตี้ ชลบุรี",13.435,101.002,65000],["นิคมอุตสาหกรรมอมตะซิตี้ ระยอง",13.005,101.166,65000],["นิคมอุตสาหกรรมอีสเทิร์นซีบอร์ด ระยอง",13.011,101.109,65000],["นิคมอุตสาหกรรมเกตเวย์ซิตี้",13.616,101.322,65000]];
@@ -692,6 +692,115 @@ body.water-mode .dashboard small{color:#000!important}
  document.querySelectorAll('.tab[data-tab="water"]').forEach(function(tab){tab.addEventListener("click",schedule)});
  var scope=document.getElementById("scopeBtn");if(scope)new MutationObserver(schedule).observe(scope,{childList:true,characterData:true,subtree:true});
  window.addEventListener("hashchange",schedule);
+})();
+</script>
+
+<style id="information-water-live-arcgis-data-20260915-v2">
+body:not(.water-mode) .water-live-table{display:none!important}
+.water-live-table{grid-column:1/-1;margin-top:14px;padding:0;overflow:hidden;border:0;border-radius:18px;background:#fff;box-shadow:0 6px 22px rgba(27,39,51,.08)}
+.water-live-table header{padding:15px 17px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #edf0f2}
+.water-live-table h2{margin:0;color:#004b79;font-size:18px!important}.water-live-table p{margin:3px 0 0;color:#000;font-size:13px!important}
+.water-live-table header span{padding:7px 11px;border-radius:15px;background:#eef7fc;color:#007fbd;font-size:12px}
+.water-live-table .water-table-scroll{max-height:360px;overflow:auto}
+.water-live-table table{width:100%;border-collapse:collapse}
+.water-live-table th,.water-live-table td{padding:10px 12px;border-bottom:1px solid #e8ecef;color:#000;text-align:center;font-size:12px!important}
+.water-live-table th{position:sticky;top:0;z-index:1;background:#e4e4e4;font-weight:600}
+.water-live-table .water-status{display:inline-block;min-width:72px;padding:4px 8px;border-radius:999px;background:#eef2f5;color:#36414b}
+.water-live-table .water-status.watch{background:#fff0bd;color:#7c5b00}.water-live-table .water-status.alert{background:#ed1b2e;color:#fff}
+.water-live-table .water-empty{padding:28px!important;color:#68737e}
+body.water-mode .chart-card .bar{background:linear-gradient(180deg,#56a0d3,#0091cd)!important}
+@media(max-width:700px){.water-live-table th,.water-live-table td{padding:8px 7px;font-size:11px!important}.water-live-table table{min-width:720px}}
+</style>
+<script id="information-water-live-arcgis-data-20260915-v2">
+(function(){
+ "use strict";
+ var ITEM="6d57de59844044998c1f21c26fb44732",cache=null,loading=null;
+ function pick(obj,patterns){
+  var keys=Object.keys(obj||{});
+  for(var i=0;i<patterns.length;i++){var re=patterns[i],key=keys.find(function(k){return re.test(k)});if(key!=null&&obj[key]!=null&&obj[key]!=="")return obj[key]}
+  return null;
+ }
+ function collectLayers(list,out){
+  (list||[]).forEach(function(layer){
+   if(layer.url)out.push({url:layer.url,title:layer.title||""});
+   collectLayers(layer.layers,out);
+  });return out;
+ }
+ function distanceKm(a,b,c,d){
+  var R=6371,p=Math.PI/180,dl=(d-b)*p,dp=(c-a)*p;
+  var q=Math.sin(dp/2)**2+Math.cos(a*p)*Math.cos(c*p)*Math.sin(dl/2)**2;
+  return 2*R*Math.asin(Math.sqrt(q));
+ }
+ function normalize(feature,layerTitle){
+  var a=feature.attributes||feature.properties||{},g=feature.geometry||{};
+  var name=pick(a,[/station.*name/i,/name.*station/i,/ชื่อ.*สถานี/i,/station/i,/ชื่อ/i,/name/i])||layerTitle||"ไม่ระบุสถานี";
+  var level=pick(a,[/water.*level/i,/level.*water/i,/ระดับ.*น้ำ/i,/wl(_|$)/i,/current.*level/i,/value/i]);
+  var status=pick(a,[/status/i,/สถานะ/i,/เกณฑ์/i,/condition/i])||"ไม่ระบุ";
+  var trend=pick(a,[/trend/i,/แนวโน้ม/i,/เปลี่ยนแปลง/i,/change/i])||"–";
+  var stamp=pick(a,[/update/i,/datetime/i,/date/i,/time/i,/วันที่/i,/เวลา/i]);
+  var x=g.x!=null?g.x:(Array.isArray(g.coordinates)?g.coordinates[0]:null);
+  var y=g.y!=null?g.y:(Array.isArray(g.coordinates)?g.coordinates[1]:null);
+  return{name:String(name),level:level,status:String(status),trend:String(trend),stamp:stamp,x:x,y:y,raw:a};
+ }
+ async function loadArcgis(){
+  if(cache)return cache;if(loading)return loading;
+  loading=(async function(){
+   var item=await fetch("https://www.arcgis.com/sharing/rest/content/items/"+ITEM+"/data?f=json").then(function(r){if(!r.ok)throw Error("item");return r.json()});
+   var layers=collectLayers(item.operationalLayers||[],[]);
+   var groups=await Promise.all(layers.map(async function(layer){
+    try{
+     var url=layer.url.replace(/\/$/,"")+"/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&resultRecordCount=2000&f=json";
+     var json=await fetch(url).then(function(r){if(!r.ok)throw Error("layer");return r.json()});
+     return(json.features||[]).map(function(f){return normalize(f,layer.title)});
+    }catch(e){return[]}
+   }));
+   cache=groups.flat();return cache;
+  })().finally(function(){loading=null});
+  return loading;
+ }
+ function areaRows(rows){
+  if(typeof activeEstate==="undefined"||typeof estates==="undefined"||activeEstate===estates[0])return rows;
+  var lat=activeEstate[1],lon=activeEstate[2],name=activeEstate[0].replace(/^นิคมอุตสาหกรรม/,"").trim().toLowerCase();
+  var spatial=rows.filter(function(r){return Number.isFinite(Number(r.x))&&Number.isFinite(Number(r.y))&&distanceKm(lat,lon,Number(r.y),Number(r.x))<=120});
+  var textual=rows.filter(function(r){return JSON.stringify(r.raw).toLowerCase().includes(name)});
+  return Array.from(new Set(spatial.concat(textual)));
+ }
+ function numeric(v){var n=Number(String(v==null?"":v).replace(/,/g,"").match(/-?\d+(?:\.\d+)?/)?.[0]);return Number.isFinite(n)?n:null}
+ function statusClass(v){var s=String(v).toLowerCase();if(/วิกฤต|อันตราย|สูงมาก|critical|danger/.test(s))return"alert";if(/เฝ้าระวัง|เตือน|สูง|watch|warn|high/.test(s))return"watch";return""}
+ function ensureTable(){
+  var root=document.querySelector(".dashboard");if(!root)return null;
+  var panel=document.getElementById("waterLiveTable");
+  if(!panel){panel=document.createElement("section");panel.id="waterLiveTable";panel.className="water-live-table";panel.innerHTML='<header><div><h2>สถานีตรวจวัดระดับน้ำที่เกี่ยวข้องกับนิคมฯ</h2><p id="waterTableArea">กำลังโหลดข้อมูลจาก ArcGIS Web Map</p></div><span id="waterTableCount">0 รายการ</span></header><div class="water-table-scroll"><table><thead><tr><th>สถานี</th><th>ระดับน้ำ</th><th>สถานะ</th><th>แนวโน้ม</th><th>ข้อมูลล่าสุด</th></tr></thead><tbody id="waterLiveRows"><tr><td colspan="5" class="water-empty">กำลังโหลดข้อมูล…</td></tr></tbody></table></div>';root.appendChild(panel)}
+  return panel;
+ }
+ async function renderLive(){
+  if(typeof activeTab!=="undefined"&&activeTab!=="water")return;
+  ensureTable();var name=(typeof activeEstate!=="undefined"&&activeEstate[0])||"พื้นที่นิคมอุตสาหกรรมทั่วประเทศ";
+  var body=document.getElementById("waterLiveRows");if(body)body.innerHTML='<tr><td colspan="5" class="water-empty">กำลังโหลดข้อมูลจาก ArcGIS Web Map…</td></tr>';
+  try{
+   var all=await loadArcgis(),rows=areaRows(all),ranked=rows.slice().sort(function(a,b){return(numeric(b.level)||-Infinity)-(numeric(a.level)||-Infinity)});
+   var alerts=rows.filter(function(r){return statusClass(r.status)}).length;
+   var cards=document.querySelectorAll("#summary .metric");
+   var vals=[rows.length,rows.filter(function(r){return numeric(r.level)!=null}).length,alerts];
+   var desc=["สถานีที่เกี่ยวข้องกับ "+name,"สถานีที่มีค่าระดับน้ำล่าสุด","สถานีที่มีสถานะเฝ้าระวังหรือสูง"];
+   cards.forEach(function(card,i){var b=card.querySelector("b"),s=card.querySelector("span");if(b)b.textContent=vals[i].toLocaleString("th-TH")+" สถานี";if(s)s.textContent=desc[i]});
+   var top=ranked.filter(function(r){return numeric(r.level)!=null}).slice(0,4),max=Math.max.apply(null,top.map(function(r){return numeric(r.level)||0}).concat([1]));
+   var bars=document.getElementById("bars");if(bars)bars.innerHTML=top.length?top.map(function(r){var n=numeric(r.level)||0;return'<div class="bar-wrap"><div class="bar" style="height:'+Math.max(6,n/max*92)+'%"><em>'+n.toLocaleString("th-TH",{maximumFractionDigits:2})+'</em></div><label>'+String(r.name).replace(/[<>&]/g,"")+'</label></div>'}).join(""):'<div class="water-empty">ไม่พบค่าระดับน้ำสำหรับพื้นที่ที่เลือก</div>';
+   document.getElementById("chartTitle").textContent="ระดับน้ำล่าสุดของสถานีที่เกี่ยวข้องกับ "+name;
+   document.getElementById("chartFilter").textContent=name+"　⌄";
+   document.getElementById("waterTableArea").textContent=name;
+   document.getElementById("waterTableCount").textContent=rows.length.toLocaleString("th-TH")+" รายการ";
+   document.getElementById("waterLiveRows").innerHTML=ranked.length?ranked.slice(0,100).map(function(r){var cls=statusClass(r.status),level=r.level==null?"–":String(r.level);return'<tr><td>'+String(r.name).replace(/[<>&]/g,"")+'</td><td>'+level+'</td><td><span class="water-status '+cls+'">'+String(r.status).replace(/[<>&]/g,"")+'</span></td><td>'+String(r.trend).replace(/[<>&]/g,"")+'</td><td>'+(r.stamp==null?"–":String(r.stamp).replace(/[<>&]/g,""))+'</td></tr>'}).join(""):'<tr><td colspan="5" class="water-empty">ไม่พบสถานีระดับน้ำที่เกี่ยวข้องกับพื้นที่ที่เลือก</td></tr>';
+  }catch(e){
+   var cards=document.querySelectorAll("#summary .metric b");cards.forEach(function(x){x.textContent="ไม่พบข้อมูล"});
+   document.getElementById("chartFilter").textContent="ไม่สามารถเชื่อมต่อ ArcGIS　⌄";
+   if(body)body.innerHTML='<tr><td colspan="5" class="water-empty">ไม่สามารถอ่านข้อมูลเลเยอร์จาก ArcGIS Web Map ได้ในขณะนี้</td></tr>';
+  }
+ }
+ function schedule(){setTimeout(renderLive,160)}
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",function(){ensureTable();schedule()},{once:true});else{ensureTable();schedule()}
+ document.querySelectorAll('.tab[data-tab="water"]').forEach(function(t){t.addEventListener("click",schedule)});
+ var scope=document.getElementById("scopeBtn");if(scope)new MutationObserver(schedule).observe(scope,{childList:true,characterData:true,subtree:true});
 })();
 </script>
 </body></html>
