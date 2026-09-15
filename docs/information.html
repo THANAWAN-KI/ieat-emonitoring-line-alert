@@ -813,7 +813,7 @@ body.water-mode .chart-card,body.water-mode .lower,body.water-mode .middle,body.
 body.water-mode .dashboard{grid-template-columns:minmax(520px,1.2fr) minmax(500px,1fr)!important;align-items:start!important}
 body.water-mode .left{display:block!important;overflow:visible!important}
 body.water-mode .left #summary{margin-bottom:16px}
-#waterBankDashboard{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.45fr) minmax(350px,.85fr);gap:16px}
+#waterBankDashboard{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.45fr) minmax(350px,.85fr);gap:16px}.wb-overview-charts-v2{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:16px}.wb-chart-body{height:280px;padding:16px;overflow:auto}.wb-main-svg{width:100%;height:240px;min-width:520px}.wb-axis{stroke:#d0d5dd;stroke-width:1}.wb-grid{stroke:#eaecf0;stroke-width:1}.wb-svg-label{fill:#667085;font-size:9px}.wb-svg-value{fill:#344054;font-size:9px;font-weight:700}.wb-chart-note{padding:0 16px 13px;color:#667085;font-size:10px}
 .wb-card{overflow:hidden;border-radius:18px;background:#fff;box-shadow:0 6px 22px rgba(27,39,51,.08)}
 .wb-head{padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #edf0f2}
 .wb-head h2{margin:0!important;color:#004b79!important;font-size:17px!important}.wb-head p{margin:3px 0 0!important;font-size:11px!important;color:#68737e!important}
@@ -829,7 +829,7 @@ body.water-mode .left #summary{margin-bottom:16px}
 .wb-empty{padding:28px!important;text-align:center!important;color:#667085!important}
 .wb-source{grid-column:1/-1;padding:14px 16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .wb-source b{margin-right:4px;color:#004b79;font-size:11px}.wb-source a{padding:6px 10px;border:1px solid #b9d8e8;border-radius:999px;color:#007fbd;font-size:10px;text-decoration:none;background:#f5fbfe}
-@media(max-width:1100px){body.water-mode .dashboard{display:block!important}body.water-mode .map-panel{height:620px;margin-top:16px}#waterBankDashboard{grid-template-columns:1fr;margin-top:16px}}
+@media(max-width:1100px){.wb-overview-charts-v2{grid-template-columns:1fr}body.water-mode .dashboard{display:block!important}body.water-mode .map-panel{height:620px;margin-top:16px}#waterBankDashboard{grid-template-columns:1fr;margin-top:16px}}
 @media(max-width:700px){#waterBankDashboard{display:block}.wb-card{margin-bottom:12px}.wb-source{display:flex}.wb-head{align-items:flex-start}.wb-badge{font-size:9px}}
 </style>
 <script id="information-water-bank-dashboard-20260915-v1">
@@ -886,10 +886,21 @@ function spark(vals){
  var delta=v.length>1?v[v.length-1]-v[0]:0,color=delta>0?"#d92d20":delta<0?"#027a48":"#667085",word=delta>0?"↑ เพิ่มขึ้น":delta<0?"↓ ลดลง":"→ ทรงตัว";
  return'<svg class="wb-spark" viewBox="0 0 116 34" aria-label="กราฟแนวโน้มระดับน้ำ"><line x1="3" y1="29" x2="113" y2="29" stroke="#e4e7ec"/><polyline points="'+pts+'" fill="none" stroke="'+color+'" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="wb-trend-label" style="color:'+color+'">'+word+'</span>';
 }
+function overviewCharts(rows){
+ var usable=rows.filter(function(r){return r.pct!=null}).slice(0,10),bar=document.getElementById("wbPercentChart"),trend=document.getElementById("wbTrendChart");
+ if(bar){if(!usable.length)bar.innerHTML='<div class="wb-empty">ไม่พบข้อมูลระดับน้ำเทียบตลิ่ง</div>';else{var W=620,H=220,left=42,bottom=38,top=15,max=Math.max(120,Math.ceil(Math.max.apply(null,usable.map(function(r){return r.pct}))/20)*20),pw=(W-left-10)/usable.length;
+ var grid=[0,25,50,75,100,max].filter(function(v,i,a){return a.indexOf(v)===i&&v<=max}).map(function(v){var y=H-bottom-(v/max)*(H-bottom-top);return'<line class="wb-grid" x1="'+left+'" y1="'+y+'" x2="'+(W-8)+'" y2="'+y+'"/><text class="wb-svg-label" x="'+(left-5)+'" y="'+(y+3)+'" text-anchor="end">'+v+'%</text>'}).join("");
+ var bs=usable.map(function(r,i){var x=left+i*pw+pw*.2,h=Math.max(2,(r.pct/max)*(H-bottom-top)),y=H-bottom-h,s=state(r.pct),color=s==="overflow"?"#d92d20":s==="watch"?"#f79009":"#12b76a";return'<rect x="'+x+'" y="'+y+'" width="'+(pw*.6)+'" height="'+h+'" rx="4" fill="'+color+'"/><text class="wb-svg-value" x="'+(x+pw*.3)+'" y="'+(y-5)+'" text-anchor="middle">'+r.pct.toFixed(1)+'%</text><text class="wb-svg-label" x="'+(x+pw*.3)+'" y="'+(H-20)+'" text-anchor="middle">'+esc(r.name).slice(0,12)+'</text>'}).join("");
+ bar.innerHTML='<svg class="wb-main-svg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="กราฟระดับน้ำเทียบตลิ่งเปอร์เซ็นต์">'+grid+'<line class="wb-axis" x1="'+left+'" y1="'+top+'" x2="'+left+'" y2="'+(H-bottom)+'"/><line x1="'+left+'" y1="'+(H-bottom-(100/max)*(H-bottom-top))+'" x2="'+(W-8)+'" y2="'+(H-bottom-(100/max)*(H-bottom-top))+'" stroke="#d92d20" stroke-width="2" stroke-dasharray="5 4"/>'+bs+'</svg>'}}
+ var seriesRows=rows.filter(function(r){return r.series&&r.series.length>1}).slice(0,5);
+ if(trend){if(!seriesRows.length)trend.innerHTML='<div class="wb-empty">กำลังรอข้อมูลย้อนหลังจากสถานี ThaiWater</div>';else{var W2=620,H2=220,l=42,b=30,t=15,all=seriesRows.reduce(function(a,r){return a.concat(r.series)},[]),mi=Math.min.apply(null,all),ma=Math.max.apply(null,all),span=ma-mi||1,colors=["#1570ef","#d92d20","#f79009","#12b76a","#7a5af8"],lines=seriesRows.map(function(r,ri){var v=r.series.slice(-24),pts=v.map(function(n,i){return(l+i*((W2-l-15)/Math.max(1,v.length-1))).toFixed(1)+","+(H2-b-(n-mi)/span*(H2-b-t)).toFixed(1)}).join(" ");return'<polyline points="'+pts+'" fill="none" stroke="'+colors[ri]+'" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><text x="'+(W2-10)+'" y="'+(18+ri*15)+'" text-anchor="end" font-size="9" fill="'+colors[ri]+'">'+esc(r.name).slice(0,20)+'</text>'}).join("");
+ var grids=[0,.25,.5,.75,1].map(function(p){var y=H2-b-p*(H2-b-t),v=mi+p*span;return'<line class="wb-grid" x1="'+l+'" y1="'+y+'" x2="'+(W2-8)+'" y2="'+y+'"/><text class="wb-svg-label" x="'+(l-5)+'" y="'+(y+3)+'" text-anchor="end">'+v.toFixed(1)+'</text>'}).join("");
+ trend.innerHTML='<svg class="wb-main-svg" viewBox="0 0 '+W2+' '+H2+'" role="img" aria-label="กราฟแนวโน้มระดับน้ำย้อนหลัง">'+grids+'<line class="wb-axis" x1="'+l+'" y1="'+t+'" x2="'+l+'" y2="'+(H2-b)+'"/>'+lines+'</svg>'}}
+}
 function ensure(){
  var root=document.querySelector(".dashboard");if(!root)return null;var el=document.getElementById("waterBankDashboard");if(el)return el;
  el=document.createElement("section");el.id="waterBankDashboard";el.innerHTML=
- '<article class="wb-card"><header class="wb-head"><div><h2>สถานีตรวจวัดระดับน้ำที่เกี่ยวข้องกับนิคมฯ</h2><p id="wbArea">ระดับน้ำเทียบตลิ่งและแนวโน้มระดับน้ำ</p></div><span class="wb-badge" id="wbCount">กำลังโหลด</span></header><div class="wb-scroll"><table class="wb-table"><thead><tr><th>ชื่อสถานี</th><th>ระดับน้ำเทียบตลิ่ง (%) — กราฟ</th><th>สถานะ</th><th>แนวโน้มระดับน้ำ — กราฟย้อนหลัง</th><th>ระยะห่างจากนิคมฯ</th></tr></thead><tbody id="wbRows"></tbody></table></div></article>'+
+ '<section class="wb-overview-charts-v2"><article class="wb-card"><header class="wb-head"><div><h2>ระดับน้ำเทียบตลิ่ง (%)</h2><p>เปรียบเทียบสถานีใกล้นิคมฯ • เส้นประสีแดงคือระดับตลิ่ง 100%</p></div><span class="wb-badge">กราฟเปอร์เซ็นต์</span></header><div class="wb-chart-body" id="wbPercentChart"><div class="wb-empty">กำลังโหลดกราฟ…</div></div></article><article class="wb-card"><header class="wb-head"><div><h2>แนวโน้มระดับน้ำ</h2><p>กราฟเส้นข้อมูลย้อนหลังจากสถานี ThaiWater</p></div><span class="wb-badge">ย้อนหลัง 3 วัน</span></header><div class="wb-chart-body" id="wbTrendChart"><div class="wb-empty">กำลังโหลดกราฟ…</div></div></article></section><article class="wb-card"><header class="wb-head"><div><h2>สถานีตรวจวัดระดับน้ำที่เกี่ยวข้องกับนิคมฯ</h2><p id="wbArea">ระดับน้ำเทียบตลิ่งและแนวโน้มระดับน้ำ</p></div><span class="wb-badge" id="wbCount">กำลังโหลด</span></header><div class="wb-scroll"><table class="wb-table"><thead><tr><th>ชื่อสถานี</th><th>ระดับน้ำเทียบตลิ่ง (%) — กราฟ</th><th>สถานะ</th><th>แนวโน้มระดับน้ำ — กราฟย้อนหลัง</th><th>ระยะห่างจากนิคมฯ</th></tr></thead><tbody id="wbRows"></tbody></table></div></article>'+
  '<article class="wb-card"><header class="wb-head"><div><h2>พื้นที่เสี่ยงน้ำท่วมใกล้นิคมฯ</h2><p>แสดงเฉพาะสถานีที่ระดับน้ำล้นตลิ่ง (ตั้งแต่ 100%)</p></div><span class="wb-badge" id="wbRiskCount">0 จุด</span></header><div class="wb-risk-list" id="wbRisks"></div></article>'+
  '<article class="wb-card wb-source"><b>แหล่งข้อมูล: ThaiWater API • ระดับน้ำอัปเดตล่าสุด พร้อมข้อมูลสนับสนุน:</b><a href="https://www.thaiwater.net/water/wl" target="_blank" rel="noopener">ระดับน้ำ</a><a href="https://www.thaiwater.net/water" target="_blank" rel="noopener">สถานการณ์น้ำ</a><a href="https://www.thaiwater.net/water/gate" target="_blank" rel="noopener">ประตูระบายน้ำ</a><a href="https://www.thaiwater.net/water/quality" target="_blank" rel="noopener">คุณภาพน้ำ</a></article>';
  root.appendChild(el);return el;
@@ -899,7 +910,7 @@ async function render(){
  tbody.innerHTML='<tr><td colspan="5" class="wb-empty">กำลังโหลดข้อมูล…</td></tr>';risks.innerHTML='<div class="wb-empty">กำลังประเมินพื้นที่เสี่ยง…</div>';
  try{var rows=scoped(await load(),e);if(token!==renderId)return;
  rows.forEach(function(r){r.distance=Number.isFinite(r.x)&&Number.isFinite(r.y)?km(e[1],e[2],r.y,r.x):null});
- rows.sort(function(a,b){return(b.pct==null?-1:b.pct)-(a.pct==null?-1:a.pct)});await addTrends(rows);if(token!==renderId)return;
+ rows.sort(function(a,b){return(b.pct==null?-1:b.pct)-(a.pct==null?-1:a.pct)});await addTrends(rows);if(token!==renderId)return;overviewCharts(rows);
  var counts={overflow:0,watch:0,normal:0};rows.forEach(function(r){var s=state(r.pct);if(counts[s]!=null)counts[s]++});
  var cards=document.querySelectorAll("#summary .metric"),vals=[counts.overflow,counts.watch,counts.normal],names=["น้ำล้นตลิ่ง","เฝ้าระวัง","ปกติ"];
  cards.forEach(function(c,i){var b=c.querySelector("b"),s=c.querySelector("span");if(b)b.textContent=vals[i].toLocaleString("th-TH")+" สถานี";if(s)s.textContent=names[i]});
@@ -919,4 +930,5 @@ setInterval(function(){cache=null;render()},300000);
 })();
 </script>
 
+<style id="wb-overview-charts-v2"></style>
 </body></html>
