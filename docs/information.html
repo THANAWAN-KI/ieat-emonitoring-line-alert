@@ -886,11 +886,20 @@ function spark(vals){
  var delta=v.length>1?v[v.length-1]-v[0]:0,color=delta>0?"#d92d20":delta<0?"#027a48":"#667085",word=delta>0?"↑ เพิ่มขึ้น":delta<0?"↓ ลดลง":"→ ทรงตัว";
  return'<svg class="wb-spark" viewBox="0 0 116 34" aria-label="กราฟแนวโน้มระดับน้ำ"><line x1="3" y1="29" x2="113" y2="29" stroke="#e4e7ec"/><polyline points="'+pts+'" fill="none" stroke="'+color+'" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="wb-trend-label" style="color:'+color+'">'+word+'</span>';
 }
+function focusWaterMap(row){
+ if(!row||!Number.isFinite(row.x)||!Number.isFinite(row.y))return;
+ var base="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=6d57de59844044998c1f21c26fb44732&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=true&basemaps=true";
+ var url=base+"&center="+row.x+","+row.y+"&scale=18000";
+ var frame=document.getElementById("mapFrame"),full=document.getElementById("fullLink"),panel=document.querySelector(".map-panel");
+ if(frame){frame.src=url;frame.dataset.waterArea="station:"+(row.stationId||row.name);frame.title="แผนที่สถานีระดับน้ำ • "+row.name}
+ if(full)full.href=url;
+ if(panel)panel.scrollIntoView({behavior:"smooth",block:"center"});
+}
 function overviewCharts(rows){
  var usable=rows.filter(function(r){return r.pct!=null}).slice(0,6),bar=document.getElementById("wbPercentChart"),trend=document.getElementById("wbTrendChart");
  if(bar){if(!usable.length)bar.innerHTML='<div class="wb-empty">ไม่พบข้อมูลระดับน้ำเทียบตลิ่ง</div>';else{var W=620,H=220,left=42,bottom=38,top=15,max=Math.max(120,Math.ceil(Math.max.apply(null,usable.map(function(r){return r.pct}))/20)*20),pw=(W-left-10)/usable.length;
- var grid=[0,25,50,75,100,max].filter(function(v,i,a){return a.indexOf(v)===i&&v<=max}).map(function(v){var y=H-bottom-(v/max)*(H-bottom-top);return'<line class="wb-grid" x1="'+left+'" y1="'+y+'" x2="'+(W-8)+'" y2="'+y+'"/><text class="wb-svg-label" x="'+(left-5)+'" y="'+(y+3)+'" text-anchor="end">'+v+'%</text>'}).join("");
- var bs=usable.map(function(r,i){var x=left+i*pw+pw*.2,h=Math.max(2,(r.pct/max)*(H-bottom-top)),y=H-bottom-h,s=state(r.pct),color=s==="overflow"?"#d92d20":s==="watch"?"#f79009":"#12b76a";return'<rect x="'+x+'" y="'+y+'" width="'+(pw*.6)+'" height="'+h+'" rx="4" fill="'+color+'"/><text class="wb-svg-value" x="'+(x+pw*.3)+'" y="'+(y-5)+'" text-anchor="middle">'+r.pct.toFixed(1)+'%</text><text class="wb-svg-label" x="'+(x+pw*.3)+'" y="'+(H-20)+'" text-anchor="middle">'+esc(r.name).slice(0,9)+(String(r.name).length>9?'…':'')+'</text>'}).join("");
+ var grid=[0,25,50,75,100].filter(function(v){return v<=max}).map(function(v){var y=H-bottom-(v/max)*(H-bottom-top);return'<line class="wb-grid" x1="'+left+'" y1="'+y+'" x2="'+(W-8)+'" y2="'+y+'"/><text class="wb-svg-label" x="'+(left-8)+'" y="'+(y+4)+'" text-anchor="end">'+v+'%</text>'}).join("");
+ var bs=usable.map(function(r,i){var x=left+i*pw+pw*.2,h=Math.max(2,(r.pct/max)*(H-bottom-top)),y=H-bottom-h,s=state(r.pct),color=s==="overflow"?"#d92d20":s==="watch"?"#f79009":"#12b76a";return'<g class="wb-map-target" data-row="'+rows.indexOf(r)+'" role="button" tabindex="0" aria-label="ซูมแผนที่ไปที่ '+esc(r.name)+'"><rect x="'+x+'" y="'+y+'" width="'+(pw*.6)+'" height="'+h+'" rx="4" fill="'+color+'"/><text class="wb-svg-value" x="'+(x+pw*.3)+'" y="'+(y-5)+'" text-anchor="middle">'+r.pct.toFixed(1)+'%</text><text class="wb-svg-label" x="'+(x+pw*.3)+'" y="'+(H-20)+'" text-anchor="middle">'+esc(r.name).slice(0,9)+(String(r.name).length>9?'…':'')+'</text></g>'}).join("");
  bar.innerHTML='<svg class="wb-main-svg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="กราฟระดับน้ำเทียบตลิ่งเปอร์เซ็นต์">'+grid+'<line class="wb-axis" x1="'+left+'" y1="'+top+'" x2="'+left+'" y2="'+(H-bottom)+'"/><line x1="'+left+'" y1="'+(H-bottom-(100/max)*(H-bottom-top))+'" x2="'+(W-8)+'" y2="'+(H-bottom-(100/max)*(H-bottom-top))+'" stroke="#d92d20" stroke-width="2" stroke-dasharray="5 4"/>'+bs+'</svg>'}}
  var seriesRows=rows.filter(function(r){return r.series&&r.series.length>1}).slice(0,5);
  if(trend){if(!seriesRows.length)trend.innerHTML='<div class="wb-empty">กำลังรอข้อมูลย้อนหลังจากสถานี ThaiWater</div>';else{var W2=620,H2=220,l=42,b=30,t=15,all=seriesRows.reduce(function(a,r){return a.concat(r.series)},[]),mi=Math.min.apply(null,all),ma=Math.max.apply(null,all),span=ma-mi||1,colors=["#1570ef","#d92d20","#f79009","#12b76a","#7a5af8"],lines=seriesRows.map(function(r,ri){var v=r.series.slice(-24),pts=v.map(function(n,i){return(l+i*((W2-l-15)/Math.max(1,v.length-1))).toFixed(1)+","+(H2-b-(n-mi)/span*(H2-b-t)).toFixed(1)}).join(" ");return'<polyline points="'+pts+'" fill="none" stroke="'+colors[ri]+'" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><text x="'+(W2-10)+'" y="'+(18+ri*15)+'" text-anchor="end" font-size="9" fill="'+colors[ri]+'">'+esc(r.name).slice(0,20)+'</text>'}).join("");
@@ -925,10 +934,11 @@ async function render(){
  document.getElementById("wbLatest").textContent=stamps[0]||"ไม่ระบุเวลา";
  document.getElementById("wbRivers").textContent=riverNames.length?riverNames.slice(0,2).join(" / "):"ไม่พบข้อมูล";
  document.getElementById("wbRiverDetail").textContent=riverNames.length>2?"และอีก "+(riverNames.length-2).toLocaleString("th-TH")+" แห่ง":"จากสถานีที่เกี่ยวข้อง";
- tbody.innerHTML=rows.length?rows.slice(0,150).map(function(r){var s=state(r.pct),pct=r.pct==null?"–":r.pct.toLocaleString("th-TH",{maximumFractionDigits:1})+"%",d=r.distance==null?"–":r.distance.toLocaleString("th-TH",{maximumFractionDigits:1})+" กม.";return'<tr><td>'+esc(r.name)+'</td><td>'+esc(r.river||r.basin||"–")+'</td><td>'+(r.level==null?"–":r.level.toLocaleString("th-TH",{maximumFractionDigits:2})+" ม.")+'</td><td class="wb-pct">'+pctGraph(r.pct)+'</td><td>'+(r.diff==null?"–":(r.diff>=0?"+":"")+r.diff.toLocaleString("th-TH",{maximumFractionDigits:2})+" ม.")+'</td><td><span class="wb-pill '+s+'">'+label(s)+'</span></td><td>'+spark(r.series)+'</td><td>'+d+'</td><td>'+esc(r.stamp||"–")+'<br><small>'+esc(r.agency||"ไม่ระบุหน่วยงาน")+'</small></td></tr>'}).join(""):'<tr><td colspan="9" class="wb-empty">ไม่พบสถานีที่เกี่ยวข้องกับพื้นที่ที่เลือก</td></tr>';
+ tbody.innerHTML=rows.length?rows.slice(0,150).map(function(r,i){var s=state(r.pct),pct=r.pct==null?"–":r.pct.toLocaleString("th-TH",{maximumFractionDigits:1})+"%",d=r.distance==null?"–":r.distance.toLocaleString("th-TH",{maximumFractionDigits:1})+" กม.";return'<tr class="wb-map-target" data-row="'+i+'" tabindex="0" title="คลิกเพื่อซูมแผนที่ไปยังสถานี"><td>'+esc(r.name)+'</td><td>'+esc(r.river||r.basin||"–")+'</td><td>'+(r.level==null?"–":r.level.toLocaleString("th-TH",{maximumFractionDigits:2})+" ม.")+'</td><td class="wb-pct">'+pctGraph(r.pct)+'</td><td>'+(r.diff==null?"–":(r.diff>=0?"+":"")+r.diff.toLocaleString("th-TH",{maximumFractionDigits:2})+" ม.")+'</td><td><span class="wb-pill '+s+'">'+label(s)+'</span></td><td>'+spark(r.series)+'</td><td>'+d+'</td><td>'+esc(r.stamp||"–")+'<br><small>'+esc(r.agency||"ไม่ระบุหน่วยงาน")+'</small></td></tr>'}).join(""):'<tr><td colspan="9" class="wb-empty">ไม่พบสถานีที่เกี่ยวข้องกับพื้นที่ที่เลือก</td></tr>';
  var over=rows.filter(function(r){return state(r.pct)==="overflow"}).sort(function(a,b){return(a.distance==null?Infinity:a.distance)-(b.distance==null?Infinity:b.distance)});
  document.getElementById("wbRiskCount").textContent=over.length.toLocaleString("th-TH")+" จุด";
- risks.innerHTML=over.length?over.slice(0,30).map(function(r){return'<div class="wb-risk"><b>'+esc(r.name)+'</b><span>'+esc(r.river||r.basin||"ไม่ระบุแม่น้ำ")+' • '+esc(r.agency||"ไม่ระบุหน่วยงาน")+'</span><span>ระดับน้ำเทียบตลิ่ง <strong>'+r.pct.toLocaleString("th-TH",{maximumFractionDigits:1})+'%</strong> • '+(r.diff==null?"ไม่พบค่าต่างตลิ่ง":((r.diff>=0?"สูงกว่าตลิ่ง ":"ต่ำกว่าตลิ่ง ")+Math.abs(r.diff).toLocaleString("th-TH",{maximumFractionDigits:2})+" ม."))+'</span><span>ระยะห่างจาก '+esc(name)+' <strong>'+(r.distance==null?"ไม่พบพิกัด":r.distance.toLocaleString("th-TH",{maximumFractionDigits:1})+" กม.")+'</strong></span><span>ข้อมูลล่าสุด '+esc(r.stamp||"ไม่ระบุเวลา")+'</span></div>'}).join(""):'<div class="wb-empty">ไม่พบจุดน้ำล้นตลิ่งใกล้พื้นที่ที่เลือก</div>';
+ risks.innerHTML=over.length?over.slice(0,30).map(function(r){return'<div class="wb-risk wb-map-target" data-row="'+rows.indexOf(r)+'" tabindex="0" title="คลิกเพื่อซูมแผนที่ไปยังจุดเสี่ยง"><b>'+esc(r.name)+'</b><span>'+esc(r.river||r.basin||"ไม่ระบุแม่น้ำ")+' • '+esc(r.agency||"ไม่ระบุหน่วยงาน")+'</span><span>ระดับน้ำเทียบตลิ่ง <strong>'+r.pct.toLocaleString("th-TH",{maximumFractionDigits:1})+'%</strong> • '+(r.diff==null?"ไม่พบค่าต่างตลิ่ง":((r.diff>=0?"สูงกว่าตลิ่ง ":"ต่ำกว่าตลิ่ง ")+Math.abs(r.diff).toLocaleString("th-TH",{maximumFractionDigits:2})+" ม."))+'</span><span>ระยะห่างจาก '+esc(name)+' <strong>'+(r.distance==null?"ไม่พบพิกัด":r.distance.toLocaleString("th-TH",{maximumFractionDigits:1})+" กม.")+'</strong></span><span>ข้อมูลล่าสุด '+esc(r.stamp||"ไม่ระบุเวลา")+'</span></div>'}).join(""):'<div class="wb-empty">ไม่พบจุดน้ำล้นตลิ่งใกล้พื้นที่ที่เลือก</div>';
+ document.querySelectorAll("#waterBankDashboard .wb-map-target").forEach(function(el){var row=rows[+el.dataset.row];el.onclick=function(){focusWaterMap(row)};el.onkeydown=function(ev){if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();focusWaterMap(row)}}});
  }catch(err){tbody.innerHTML='<tr><td colspan="9" class="wb-empty">ไม่สามารถโหลดข้อมูลระดับน้ำได้ในขณะนี้</td></tr>';risks.innerHTML='<div class="wb-empty">ไม่สามารถประเมินพื้นที่เสี่ยงได้</div>'}
 }
 function schedule(){setTimeout(render,420)}
@@ -1050,6 +1060,29 @@ body.water-mode #wbPercentChart .wb-main-svg{display:block;width:100%!important;
  body.water-mode #waterBankDashboard{grid-template-columns:1fr 1fr!important}
  body.water-mode #waterBankDashboard>.wb-risk-card-v8{grid-column:2!important}
  body.water-mode #waterBankDashboard>.wb-station-card-v8{grid-column:1/-1!important}
+}
+</style>
+
+<style id="wb-water-polish-v9">
+body.water-mode,
+body.water-mode .dashboard{background:#fff!important}
+body.water-mode .dashboard .map-frame{background:#fff!important}
+body.water-mode .wb-station-card-v8 .wb-scroll{border:1px solid #000}
+body.water-mode .wb-station-card-v8 .wb-table{border-collapse:collapse!important}
+body.water-mode .wb-station-card-v8 .wb-table th,
+body.water-mode .wb-station-card-v8 .wb-table td{border:1px solid #000!important}
+body.water-mode #wbPercentChart{min-height:255px!important;padding:10px 12px!important;overflow-x:auto!important;overflow-y:hidden!important}
+body.water-mode #wbPercentChart .wb-main-svg{width:100%!important;min-width:560px!important;height:245px!important;aspect-ratio:auto!important;overflow:visible}
+body.water-mode #wbPercentChart .wb-svg-label{font-size:11px!important}
+body.water-mode #wbPercentChart .wb-svg-value{font-size:10px!important}
+body.water-mode .wb-map-target{cursor:pointer;transition:background-color .18s ease,filter .18s ease,transform .18s ease}
+body.water-mode tr.wb-map-target:hover td{background:#eef8fd!important}
+body.water-mode .wb-risk.wb-map-target:hover{background:#fff0ee;transform:translateY(-1px)}
+body.water-mode svg .wb-map-target:hover{filter:brightness(.9)}
+body.water-mode .wb-map-target:focus-visible{outline:3px solid #0091cd;outline-offset:-3px}
+@media(max-width:700px){
+ body.water-mode #wbPercentChart{min-height:235px!important}
+ body.water-mode #wbPercentChart .wb-main-svg{min-width:620px!important;height:225px!important}
 }
 </style>
 
