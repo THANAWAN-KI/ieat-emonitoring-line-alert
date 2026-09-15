@@ -902,10 +902,10 @@ function focusWaterMap(row){
 }
 function overviewCharts(rows){
  var usable=rows.filter(function(r){return r.pct!=null}).slice(0,6),bar=document.getElementById("wbPercentChart"),trend=document.getElementById("wbTrendChart");
- if(bar){if(!usable.length)bar.innerHTML='<div class="wb-empty">ไม่พบข้อมูลระดับน้ำเทียบตลิ่ง</div>';else{var W=620,H=220,left=42,bottom=38,top=15,max=Math.max(120,Math.ceil(Math.max.apply(null,usable.map(function(r){return r.pct}))/20)*20),pw=(W-left-10)/usable.length;
- var grid=[0,25,50,75,100].filter(function(v){return v<=max}).map(function(v){var y=H-bottom-(v/max)*(H-bottom-top);return'<line class="wb-grid" x1="'+left+'" y1="'+y+'" x2="'+(W-8)+'" y2="'+y+'"/><text class="wb-svg-label" x="'+(left-8)+'" y="'+(y+4)+'" text-anchor="end">'+v+'%</text>'}).join("");
+ if(bar){if(!usable.length)bar.innerHTML='<div class="wb-empty">ไม่พบข้อมูลระดับน้ำเทียบตลิ่ง</div>';else{var W=900,H=220,left=12,bottom=38,top=15,max=Math.max(120,Math.ceil(Math.max.apply(null,usable.map(function(r){return r.pct}))/20)*20),pw=(W-left-10)/usable.length;
+ var grid=[0,.25,.5,.75,1].map(function(p){var y=H-bottom-p*(H-bottom-top);return'<line class="wb-grid" x1="'+left+'" y1="'+y+'" x2="'+(W-8)+'" y2="'+y+'"/>'}).join("");
  var bs=usable.map(function(r,i){var x=left+i*pw+pw*.2,h=Math.max(2,(r.pct/max)*(H-bottom-top)),y=H-bottom-h,s=state(r.pct),color=s==="overflow"?"#d92d20":s==="watch"?"#f79009":"#12b76a";return'<g class="wb-map-target" data-row="'+rows.indexOf(r)+'" role="button" tabindex="0" aria-label="ซูมแผนที่ไปที่ '+esc(r.name)+'"><rect x="'+x+'" y="'+y+'" width="'+(pw*.6)+'" height="'+h+'" rx="4" fill="'+color+'"/><text class="wb-svg-value" x="'+(x+pw*.3)+'" y="'+(y-5)+'" text-anchor="middle">'+r.pct.toFixed(1)+'%</text><text class="wb-svg-label" x="'+(x+pw*.3)+'" y="'+(H-20)+'" text-anchor="middle">'+esc(r.name).slice(0,9)+(String(r.name).length>9?'…':'')+'</text></g>'}).join("");
- bar.innerHTML='<svg class="wb-main-svg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="กราฟระดับน้ำเทียบตลิ่งเปอร์เซ็นต์">'+grid+'<line class="wb-axis" x1="'+left+'" y1="'+top+'" x2="'+left+'" y2="'+(H-bottom)+'"/><line x1="'+left+'" y1="'+(H-bottom-(100/max)*(H-bottom-top))+'" x2="'+(W-8)+'" y2="'+(H-bottom-(100/max)*(H-bottom-top))+'" stroke="#d92d20" stroke-width="2" stroke-dasharray="5 4"/>'+bs+'</svg>'}}
+ bar.innerHTML='<svg class="wb-main-svg" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="xMinYMid meet" role="img" aria-label="กราฟระดับน้ำเทียบตลิ่งเปอร์เซ็นต์">'+grid+'<line x1="'+left+'" y1="'+(H-bottom-(100/max)*(H-bottom-top))+'" x2="'+(W-8)+'" y2="'+(H-bottom-(100/max)*(H-bottom-top))+'" stroke="#d92d20" stroke-width="2" stroke-dasharray="5 4"/>'+bs+'</svg>'}}
  var trendRows=rows.filter(function(r){return r.series&&r.series.length>1}),groups=[{key:"down",label:"ลดลง",color:"#027a48",rows:[]},{key:"up",label:"เพิ่มขึ้น",color:"#d92d20",rows:[]},{key:"stable",label:"คงที่",color:"#667085",rows:[]}];
  trendRows.forEach(function(r){var v=r.series.slice(-24),delta=v[v.length-1]-v[0],g=Math.abs(delta)<=.01?groups[2]:(delta>0?groups[1]:groups[0]);g.rows.push(r)});
  if(trend){if(!trendRows.length)trend.innerHTML='<div class="wb-empty">ยังไม่มีข้อมูลเพียงพอสำหรับคำนวณแนวโน้ม</div>';else{var W2=620,H2=220,l=52,b=42,t=22,maxCount=Math.max.apply(null,groups.map(function(g){return g.rows.length}).concat([1])),step=(W2-l-22)/groups.length;
@@ -1081,7 +1081,7 @@ body.water-mode #summary .wb-kpi-value svg{width:38px;height:38px;flex:0 0 38px;
 body.water-mode #summary .wb-kpi-value b{margin:0;line-height:1.15!important}
 body.water-mode #summary .metric>div>span{margin:7px 0 0 50px!important;color:#000!important}
 body.water-mode #wbPercentChart{min-height:255px!important;padding:10px 12px!important;overflow-x:auto!important;overflow-y:hidden!important}
-body.water-mode #wbPercentChart .wb-main-svg{width:100%!important;min-width:560px!important;height:245px!important;aspect-ratio:auto!important;overflow:visible}
+body.water-mode #wbPercentChart .wb-main-svg{width:100%!important;min-width:560px!important;height:auto!important;aspect-ratio:900/220!important;overflow:visible}
 body.water-mode #wbPercentChart .wb-svg-label{font-size:11px!important}
 body.water-mode #wbPercentChart .wb-svg-value{font-size:10px!important}
 body.water-mode #wbTrendChart .wb-main-svg{display:block;width:100%!important;min-width:520px!important;height:245px!important}
@@ -1097,7 +1097,7 @@ body.water-mode .wb-map-target:focus-visible{outline:3px solid #0091cd;outline-o
  body.water-mode #summary .wb-kpi-value svg{width:32px;height:32px;flex-basis:32px}
  body.water-mode #summary .metric>div>span{margin-left:40px!important}
  body.water-mode #wbPercentChart{min-height:235px!important}
- body.water-mode #wbPercentChart .wb-main-svg{min-width:620px!important;height:225px!important}
+ body.water-mode #wbPercentChart .wb-main-svg{min-width:620px!important;height:auto!important}
  body.water-mode #wbTrendChart{overflow-x:auto!important}
  body.water-mode #wbTrendChart .wb-main-svg{min-width:560px!important;height:225px!important}
 }
