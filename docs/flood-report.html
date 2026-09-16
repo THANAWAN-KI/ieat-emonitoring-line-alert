@@ -1,3 +1,666 @@
+ข้อมูลสถานีวัดระดับน้ำแบบเรียลไทม์รายชั่วโมง(กรมชลประทาน) ในแผนที่ ฉันอยากให้แสดง Enable pop-ups   เหมือน  แสดงข้อมูลแบบนี้อ่ะ 
+ ตัวอย่าง 
+เปลี่ยนฟ้อนต์ภาษาเป็นแบบฟ้อนต์ในภาพที่ส่งให้ได้ไหม 
+ เป็นแบบนี้
+เริส  ต่อไปเขียนโค้ด เขียนโค้ด arcade ให้หน่อยสิงั้น สำหรับแสดงผลบน popup  แบบภาพตัวอย่างที่ส่งให้ และ ข้อมูลที่ใช้คือ https://raw.githubusercontent.com/nawakonnakhonchai-wq/Rain_24H/refs/heads/main/rainfall_24h.geojson 
+
+ได้เลยน้องน้ำ ข้อมูลชุดนี้เป็นข้อมูล เขื่อนและอ่างเก็บน้ำ 496 แห่ง ประกอบด้วยปริมาตรน้ำ ความจุ น้ำไหลเข้า น้ำระบาย และเปอร์เซ็นต์น้ำเก็บกัก
+
+นำโค้ดไปวางใน Pop-ups → Add content → Arcade:
+
+/*
+ * Popup เขื่อนและอ่างเก็บน้ำ
+ * ข้อมูล:
+ * https://emonitor.ieat.go.th/call_feed/geog/GeoData/rid_conv_gis.json
+ */
+
+/* =========================
+   1. ข้อมูลทั่วไป
+   ========================= */
+
+var recordDate = "ไม่ระบุวันที่";
+var regionName = "–";
+var reservoirGroup = "แหล่งน้ำ";
+var reservoirId = "–";
+var reservoirName = "ไม่ระบุชื่อ";
+var ownerName = "–";
+
+if (HasKey($feature, "date")) {
+    if (!IsEmpty($feature["date"])) {
+        recordDate = Text($feature["date"]);
+    }
+}
+
+if (HasKey($feature, "region")) {
+    if (!IsEmpty($feature["region"])) {
+        regionName = Text($feature["region"]);
+    }
+}
+
+if (HasKey($feature, "group")) {
+    if (!IsEmpty($feature["group"])) {
+        reservoirGroup = Text($feature["group"]);
+    }
+}
+
+if (HasKey($feature, "id")) {
+    if (!IsEmpty($feature["id"])) {
+        reservoirId = Text($feature["id"]);
+    }
+}
+
+if (HasKey($feature, "name")) {
+    if (!IsEmpty($feature["name"])) {
+        reservoirName = Text($feature["name"]);
+    }
+}
+
+if (HasKey($feature, "owner")) {
+    if (!IsEmpty($feature["owner"])) {
+        ownerName = Text($feature["owner"]);
+    }
+}
+
+/* =========================
+   2. ข้อมูลความจุและปริมาตร
+   ========================= */
+
+var capacity = 0;
+var storage = 0;
+var activeStorage = 0;
+var deadStorage = 0;
+var currentVolume = 0;
+var storagePercent = 0;
+
+var hasCapacity = false;
+var hasStorage = false;
+var hasActiveStorage = false;
+var hasDeadStorage = false;
+var hasCurrentVolume = false;
+var hasStoragePercent = false;
+
+if (HasKey($feature, "capacity")) {
+    if (!IsEmpty($feature["capacity"])) {
+        capacity = Number($feature["capacity"]);
+        hasCapacity = true;
+    }
+}
+
+if (HasKey($feature, "storage")) {
+    if (!IsEmpty($feature["storage"])) {
+        storage = Number($feature["storage"]);
+        hasStorage = true;
+    }
+}
+
+if (HasKey($feature, "active_storage")) {
+    if (!IsEmpty($feature["active_storage"])) {
+        activeStorage = Number($feature["active_storage"]);
+        hasActiveStorage = true;
+    }
+}
+
+if (HasKey($feature, "dead_storage")) {
+    if (!IsEmpty($feature["dead_storage"])) {
+        deadStorage = Number($feature["dead_storage"]);
+        hasDeadStorage = true;
+    }
+}
+
+if (HasKey($feature, "volume")) {
+    if (!IsEmpty($feature["volume"])) {
+        currentVolume = Number($feature["volume"]);
+        hasCurrentVolume = true;
+    }
+}
+
+if (HasKey($feature, "percent_storage")) {
+    if (!IsEmpty($feature["percent_storage"])) {
+        storagePercent = Number($feature["percent_storage"]);
+        hasStoragePercent = true;
+    }
+}
+
+/* =========================
+   3. น้ำไหลเข้าและระบายออก
+   ========================= */
+
+var inflow = 0;
+var outflow = 0;
+var hasInflow = false;
+var hasOutflow = false;
+
+if (HasKey($feature, "inflow")) {
+    if (!IsEmpty($feature["inflow"])) {
+        inflow = Number($feature["inflow"]);
+        hasInflow = true;
+    }
+}
+
+if (HasKey($feature, "outflow")) {
+    if (!IsEmpty($feature["outflow"])) {
+        outflow = Number($feature["outflow"]);
+        hasOutflow = true;
+    }
+}
+
+/* =========================
+   4. ประเมินสถานการณ์น้ำ
+   ========================= */
+
+var statusText = "ไม่มีข้อมูล";
+var statusColor = "#6d6e70";
+var statusBackground = "#f1f3f5";
+var statusDescription = "ไม่พบข้อมูลสำหรับประเมินสถานการณ์";
+
+if (hasStoragePercent == true) {
+
+    if (storagePercent <= 30) {
+
+        statusText = "น้ำน้อยวิกฤต";
+        statusColor = "#f00a36";
+        statusBackground = "#fff0f3";
+        statusDescription = "ปริมาตรน้ำอยู่ในระดับต่ำมาก ควรเฝ้าระวังสถานการณ์ภัยแล้ง";
+
+    } else if (storagePercent <= 50) {
+
+        statusText = "น้ำน้อย";
+        statusColor = "#f58220";
+        statusBackground = "#fff1e5";
+        statusDescription = "ปริมาตรน้ำอยู่ในระดับน้อย ควรติดตามการใช้น้ำ";
+
+    } else if (storagePercent <= 80) {
+
+        statusText = "ปานกลาง";
+        statusColor = "#598c14";
+        statusBackground = "#edf5e3";
+        statusDescription = "ปริมาตรน้ำอยู่ในระดับปานกลาง";
+
+    } else if (storagePercent <= 100) {
+
+        statusText = "น้ำมาก";
+        statusColor = "#007fdb";
+        statusBackground = "#eaf6ff";
+        statusDescription = "ปริมาตรน้ำอยู่ในระดับมาก ควรติดตามการบริหารจัดการน้ำ";
+
+    } else {
+
+        statusText = "เกินความจุเก็บกัก";
+        statusColor = "#f00a36";
+        statusBackground = "#fff0f3";
+        statusDescription = "ปริมาตรน้ำสูงกว่าความจุเก็บกักที่รายงาน";
+    }
+}
+
+/* =========================
+   5. สมดุลน้ำและแนวโน้ม
+   ========================= */
+
+var balanceValue = 0;
+var balanceText = "ไม่มีข้อมูล";
+var trendText = "ไม่สามารถประเมินได้";
+var trendColor = "#6d6e70";
+var hasBalance = false;
+
+if (hasInflow == true && hasOutflow == true) {
+
+    balanceValue = inflow - outflow;
+    hasBalance = true;
+
+    if (balanceValue > 0) {
+
+        trendText = "มีแนวโน้มเพิ่มขึ้น";
+        trendColor = "#007fdb";
+        balanceText =
+            "+" +
+            Text(balanceValue, "#,##0.000") +
+            " ล้าน ลบ.ม./วัน";
+
+    } else if (balanceValue < 0) {
+
+        trendText = "มีแนวโน้มลดลง";
+        trendColor = "#f58220";
+        balanceText =
+            Text(balanceValue, "#,##0.000") +
+            " ล้าน ลบ.ม./วัน";
+
+    } else {
+
+        trendText = "คงที่";
+        trendColor = "#598c14";
+        balanceText = "0.000 ล้าน ลบ.ม./วัน";
+    }
+}
+
+/* =========================
+   6. ความกว้างแถบปริมาตร
+   ========================= */
+
+var storageBar = storagePercent;
+
+if (storageBar < 0) {
+    storageBar = 0;
+}
+
+if (storageBar > 100) {
+    storageBar = 100;
+}
+
+/* =========================
+   7. สร้าง Popup
+   ========================= */
+
+var html = "";
+
+html += '<div style="font-family:Tahoma,Arial,sans-serif;width:100%;box-sizing:border-box;color:#202124;">';
+
+/* ส่วนหัว */
+
+html += '<div style="text-align:center;padding:4px 5px 13px 5px;">';
+
+html += '<div style="font-size:18px;font-weight:700;line-height:1.4;color:#111827;">';
+html += reservoirName;
+html += '</div>';
+
+html += '<div style="font-size:12px;color:#6b7280;margin-top:4px;">';
+html += reservoirGroup;
+
+if (regionName != "–") {
+    html += ' · ' + regionName;
+}
+
+html += '</div>';
+
+if (ownerName != "–") {
+    html += '<div style="font-size:11px;color:#9ca3af;margin-top:3px;">';
+    html += 'หน่วยงานรับผิดชอบ: ' + ownerName;
+    html += '</div>';
+}
+
+html += '<div style="display:inline-block;margin-top:9px;padding:5px 15px;border-radius:16px;background:';
+html += statusColor;
+html += ';color:#ffffff;font-size:12px;font-weight:700;">';
+html += statusText;
+html += '</div>';
+
+html += '</div>';
+
+/* การ์ดปริมาตรน้ำ */
+
+html += '<div style="background:';
+html += statusBackground;
+html += ';border:1px solid ';
+html += statusColor;
+html += ';border-radius:12px;padding:14px 13px;margin-bottom:12px;text-align:center;">';
+
+html += '<div style="font-size:12px;font-weight:700;color:#374151;">';
+html += 'ปริมาตรน้ำปัจจุบัน';
+html += '</div>';
+
+if (hasCurrentVolume == true) {
+
+    html += '<div style="margin-top:5px;">';
+
+    html += '<span style="font-size:35px;font-weight:700;line-height:1;color:';
+    html += statusColor;
+    html += ';">';
+    html += Text(currentVolume, "#,##0.000");
+    html += '</span>';
+
+    html += '<span style="font-size:12px;font-weight:600;color:#4b5563;margin-left:5px;">';
+    html += 'ล้าน ลบ.ม.';
+    html += '</span>';
+
+    html += '</div>';
+
+} else {
+
+    html += '<div style="font-size:24px;font-weight:700;color:#6d6e70;margin-top:6px;">';
+    html += 'ไม่มีข้อมูล';
+    html += '</div>';
+}
+
+if (hasStoragePercent == true) {
+
+    html += '<div style="font-size:14px;font-weight:700;color:';
+    html += statusColor;
+    html += ';margin-top:8px;">';
+    html += Text(storagePercent, "#,##0.00") + '%';
+    html += '</div>';
+
+    html += '<div style="height:10px;background:#e5e7eb;border-radius:5px;overflow:hidden;margin-top:8px;">';
+
+    html += '<div style="width:';
+    html += Text(storageBar, "0.0");
+    html += '%;height:10px;background:';
+    html += statusColor;
+    html += ';border-radius:5px;"></div>';
+
+    html += '</div>';
+}
+
+html += '<div style="font-size:11px;line-height:1.5;color:#4b5563;margin-top:9px;">';
+html += statusDescription;
+html += '</div>';
+
+html += '</div>';
+
+/* ตารางข้อมูลปริมาตร */
+
+html += '<div style="border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;margin-bottom:12px;">';
+
+html += '<div style="background:#f8fafc;padding:9px 11px;border-bottom:1px solid #e5e7eb;font-size:13px;font-weight:700;color:#007fdb;">';
+html += 'ข้อมูลปริมาตรน้ำ';
+html += '</div>';
+
+html += '<table style="width:100%;border-collapse:collapse;font-size:12px;">';
+
+/* ปริมาตรปัจจุบัน */
+
+html += '<tr>';
+html += '<td style="padding:8px 10px;color:#6b7280;border-bottom:1px solid #f0f0f0;">ปริมาตรปัจจุบัน</td>';
+html += '<td style="padding:8px 10px;text-align:right;font-weight:700;border-bottom:1px solid #f0f0f0;">';
+
+if (hasCurrentVolume == true) {
+    html += Text(currentVolume, "#,##0.000") + ' ล้าน ลบ.ม.';
+} else {
+    html += '–';
+}
+
+html += '</td>';
+html += '</tr>';
+
+/* ความจุเก็บกัก */
+
+html += '<tr>';
+html += '<td style="padding:8px 10px;color:#6b7280;border-bottom:1px solid #f0f0f0;">ความจุเก็บกัก</td>';
+html += '<td style="padding:8px 10px;text-align:right;font-weight:700;border-bottom:1px solid #f0f0f0;">';
+
+if (hasStorage == true) {
+    html += Text(storage, "#,##0.000") + ' ล้าน ลบ.ม.';
+} else {
+    html += '–';
+}
+
+html += '</td>';
+html += '</tr>';
+
+/* ความจุสูงสุด */
+
+if (hasCapacity == true) {
+    html += '<tr>';
+    html += '<td style="padding:8px 10px;color:#6b7280;border-bottom:1px solid #f0f0f0;">ความจุสูงสุด</td>';
+    html += '<td style="padding:8px 10px;text-align:right;font-weight:700;border-bottom:1px solid #f0f0f0;">';
+    html += Text(capacity, "#,##0.000") + ' ล้าน ลบ.ม.';
+    html += '</td>';
+    html += '</tr>';
+}
+
+/* ความจุใช้งาน */
+
+if (hasActiveStorage == true) {
+    html += '<tr>';
+    html += '<td style="padding:8px 10px;color:#6b7280;border-bottom:1px solid #f0f0f0;">ความจุใช้งาน</td>';
+    html += '<td style="padding:8px 10px;text-align:right;font-weight:700;border-bottom:1px solid #f0f0f0;">';
+    html += Text(activeStorage, "#,##0.000") + ' ล้าน ลบ.ม.';
+    html += '</td>';
+    html += '</tr>';
+}
+
+/* ปริมาตรต่ำสุด */
+
+html += '<tr>';
+html += '<td style="padding:8px 10px;color:#6b7280;border-bottom:1px solid #f0f0f0;">ปริมาตรเก็บกักต่ำสุด</td>';
+html += '<td style="padding:8px 10px;text-align:right;font-weight:700;border-bottom:1px solid #f0f0f0;">';
+
+if (hasDeadStorage == true) {
+    html += Text(deadStorage, "#,##0.000") + ' ล้าน ลบ.ม.';
+} else {
+    html += '–';
+}
+
+html += '</td>';
+html += '</tr>';
+
+/* เปอร์เซ็นต์ */
+
+html += '<tr>';
+html += '<td style="padding:8px 10px;color:#6b7280;">ร้อยละปริมาตรน้ำ</td>';
+
+html += '<td style="padding:8px 10px;text-align:right;font-weight:700;color:';
+html += statusColor;
+html += ';">';
+
+if (hasStoragePercent == true) {
+    html += Text(storagePercent, "#,##0.00") + ' %';
+} else {
+    html += '–';
+}
+
+html += '</td>';
+html += '</tr>';
+
+html += '</table>';
+html += '</div>';
+
+/* น้ำไหลเข้าและระบายออก */
+
+html += '<div style="border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;margin-bottom:12px;">';
+
+html += '<div style="background:#f8fafc;padding:9px 11px;border-bottom:1px solid #e5e7eb;font-size:13px;font-weight:700;color:#007fdb;">';
+html += 'น้ำไหลเข้าและการระบายน้ำ';
+html += '</div>';
+
+html += '<table style="width:100%;border-collapse:collapse;font-size:12px;">';
+
+/* น้ำไหลเข้า */
+
+html += '<tr>';
+html += '<td style="padding:8px 10px;color:#6b7280;border-bottom:1px solid #f0f0f0;">น้ำไหลเข้า</td>';
+html += '<td style="padding:8px 10px;text-align:right;font-weight:700;color:#007fdb;border-bottom:1px solid #f0f0f0;">';
+
+if (hasInflow == true) {
+    html += Text(inflow, "#,##0.000") + ' ล้าน ลบ.ม./วัน';
+} else {
+    html += '–';
+}
+
+html += '</td>';
+html += '</tr>';
+
+/* น้ำระบาย */
+
+html += '<tr>';
+html += '<td style="padding:8px 10px;color:#6b7280;border-bottom:1px solid #f0f0f0;">น้ำระบายออก</td>';
+html += '<td style="padding:8px 10px;text-align:right;font-weight:700;color:#f58220;border-bottom:1px solid #f0f0f0;">';
+
+if (hasOutflow == true) {
+    html += Text(outflow, "#,##0.000") + ' ล้าน ลบ.ม./วัน';
+} else {
+    html += '–';
+}
+
+html += '</td>';
+html += '</tr>';
+
+/* สมดุลน้ำ */
+
+html += '<tr>';
+html += '<td style="padding:8px 10px;color:#6b7280;border-bottom:1px solid #f0f0f0;">สมดุลน้ำ</td>';
+
+html += '<td style="padding:8px 10px;text-align:right;font-weight:700;color:';
+html += trendColor;
+html += ';border-bottom:1px solid #f0f0f0;">';
+html += balanceText;
+html += '</td>';
+html += '</tr>';
+
+/* แนวโน้ม */
+
+html += '<tr>';
+html += '<td style="padding:8px 10px;color:#6b7280;">แนวโน้มปริมาตรน้ำ</td>';
+
+html += '<td style="padding:8px 10px;text-align:right;font-weight:700;color:';
+html += trendColor;
+html += ';">';
+html += trendText;
+html += '</td>';
+
+html += '</tr>';
+
+html += '</table>';
+html += '</div>';
+
+/* รายละเอียดแหล่งน้ำ */
+
+html += '<div style="background:#f8fafc;border-radius:9px;padding:9px 11px;font-size:11px;line-height:1.7;color:#6b7280;">';
+
+html += '<div>';
+html += '<span style="font-weight:700;color:#374151;">รหัส:</span> ';
+html += reservoirId;
+html += '</div>';
+
+html += '<div>';
+html += '<span style="font-weight:700;color:#374151;">ประเภท:</span> ';
+html += reservoirGroup;
+html += '</div>';
+
+html += '<div>';
+html += '<span style="font-weight:700;color:#374151;">ภูมิภาค:</span> ';
+html += regionName;
+html += '</div>';
+
+html += '<div>';
+html += '<span style="font-weight:700;color:#374151;">หน่วยงาน:</span> ';
+html += ownerName;
+html += '</div>';
+
+html += '<div>';
+html += '<span style="font-weight:700;color:#374151;">ข้อมูลวันที่:</span> ';
+html += recordDate;
+html += '</div>';
+
+html += '</div>';
+
+/* คำเตือน */
+
+if (
+    statusText == "น้ำน้อยวิกฤต" ||
+    statusText == "เกินความจุเก็บกัก"
+) {
+
+    html += '<div style="margin-top:10px;padding:9px 11px;border-radius:8px;background:#fff0f3;border:1px solid #f00a36;color:#b00028;font-size:11px;font-weight:600;line-height:1.5;text-align:center;">';
+
+    if (statusText == "น้ำน้อยวิกฤต") {
+        html += 'ปริมาตรน้ำอยู่ในระดับต่ำมาก ควรติดตามแผนบริหารจัดการน้ำและสถานการณ์ภัยแล้ง';
+    } else {
+        html += 'ปริมาตรน้ำสูงกว่าความจุที่รายงาน ควรตรวจสอบสถานการณ์และแผนระบายน้ำ';
+    }
+
+    html += '</div>';
+}
+
+/* ส่วนท้าย */
+
+html += '<div style="border-top:1px solid #e5e7eb;margin-top:12px;padding-top:8px;font-size:10px;color:#9ca3af;text-align:center;">';
+html += 'แหล่งข้อมูล: ระบบข้อมูลเขื่อนและอ่างเก็บน้ำ e-Monitoring';
+html += '</div>';
+
+html += '</div>';
+
+return {
+    type: "text",
+    text: html
+};
+
+หากวางในช่อง Attribute expression ให้เปลี่ยนตอนท้ายเป็น:
+
+return html;
+
+หมายเหตุ: ข้อความ “แนวโน้มเพิ่มขึ้น/ลดลง” คำนวณจากน้ำไหลเข้าลบด้วยน้ำระบายออกของวันนั้น จึงเป็นแนวโน้มเชิงสมดุลน้ำ ไม่ใช่การเปรียบเทียบปริมาตรกับวันก่อนหน้าค่ะ
+
+image
+
+แนวท่อ East Water
+
+7
+
+svg
+
+svg
+
+image
+
+แนวท่อ Thai Oil
+
+1
+
+svg
+
+svg
+
+image
+
+แนวท่อ กรมชลประทาน
+
+7
+
+svg
+
+svg
+
+image
+
+แนวท่อ กรมธนารักษ์
+
+3
+
+svg
+
+svg
+
+image
+
+แนวท่อ การประปา  ขอโค้ดสี
+
+แนะนำใช้สีแยกแนวท่อให้มองเห็นชัดเจนบนแผนที่ดังนี้ค่ะ
+
+ประเภทแนวท่อ	สี	HEX	RGB	ขนาดเส้น
+แนวท่อ East Water	น้ำเงิน	#007FDB	0, 127, 219	3 px
+แนวท่อ Thai Oil	แดงเข้ม	#C62828	198, 40, 40	3 px
+แนวท่อกรมชลประทาน	ฟ้าอมเขียว	#00A6A6	0, 166, 166	3 px
+แนวท่อกรมธนารักษ์	ม่วง	#8E44AD	142, 68, 173	3 px
+แนวท่อการประปา	เขียว	#598C14	89, 140, 20	3 px
+
+เพื่อให้มองเห็นบนทั้งแผนที่ถนนและภาพถ่ายดาวเทียม แนะนำเพิ่มขอบเส้นสีขาว:
+
+Outline / Halo: #FFFFFF
+ขนาด: 1–1.5 px
+Transparency: 0–10%
+
+ถ้ามีตัวเลือก Line pattern แนะนำ:
+
+East Water: เส้นทึบ
+Thai Oil: เส้นประยาว
+กรมชลประทาน: เส้นทึบ
+กรมธนารักษ์: เส้นจุด
+การประปา: เส้นประสั้น
+โอเค ต่อไปแก้ไข ตรงหน้าน้ำท่วมแก้ไข docs/flood-report.html จากภาพที่ส่งให้ ในกรอบสีแดง ให้เปลี่ยนการ์ดเป็น ข้อมูล พื้นที่เสี่ยงน้ำท่วมใกล้นิคมฯ และบอกระยะห่างของสถานีระดับน้ำกับตำแหน่งนิคมฯด้วย 
+
+แก้ไข 
+docs/flood-report.html เรียบร้อยแล้วค่ะ
+
+การ์ดที่วงไว้เปลี่ยนเป็น:
+
+หัวข้อ “พื้นที่เสี่ยงน้ำท่วมใกล้นิคมฯ”
+แสดงจำนวนนิคมฯ ที่เข้าเกณฑ์เฝ้าระวังจากข้อมูลล่าสุด
+คำนวณระยะทางจากพิกัดจริงด้วยสูตร Haversine
+แสดงชื่อสถานีระดับน้ำ ชื่อนิคมฯ และระยะห่าง เช่น บางปะกง ห่าง นิคมฯ ทีเอฟดี 1 1.8 กม.
+รองรับข้อความยาวและหน้าจอมือถือ
+ป้องกันข้อมูลพิกัดหายหรือโหลดไม่สำเร็จ
+
+ตรวจไวยากรณ์ JavaScript และ git diff --check ผ่านแล้วค่ะ
+
 <!doctype html>
 <html lang="th">
 <head>
@@ -1440,7 +2103,7 @@ document.documentElement.classList.add("flood-initializing");
             </div>
             <div class="daily-water-grid">
               <article class="daily-water-item rain"><small>ฝนสูงสุด 24 ชั่วโมง</small><strong id="dailyRain">–</strong><span>ข้อมูลสถานีใกล้นิคมฯ</span></article>
-              <article class="daily-water-item level"><small>นิคมฯ ใกล้ระดับน้ำผิดปกติ</small><strong id="dailyCritical">–</strong><span>พื้นที่ที่ต้องติดตาม</span></article>
+              <article class="daily-water-item level nearby-flood-risk-card"><small>พื้นที่เสี่ยงน้ำท่วมใกล้นิคมฯ</small><strong id="nearbyFloodEstateCount">–</strong><span id="nearestWaterStationDistance">กำลังคำนวณระยะห่างสถานีระดับน้ำ</span></article>
               <article class="daily-water-item station"><small>สถานีที่ต้องติดตาม</small><strong id="dailyStations">–</strong><span>สถานีตรวจวัดที่เกี่ยวข้อง</span></article>
               <article class="daily-water-item status"><small>สถานการณ์ภาพรวม</small><strong id="dailyStatus">กำลังตรวจสอบ</strong><span id="dailyTrend">ประเมินจากข้อมูลล่าสุด</span></article>
             </div>
@@ -1787,7 +2450,8 @@ document.documentElement.classList.add("flood-initializing");
  function syncDailyWaterReport(){
   const rain=textOf("outRain"),critical=textOf("outCritical2"),stations=textOf("outRoute2"),trend=textOf("outTrend");
   document.getElementById("dailyRain").textContent=rain;
-  document.getElementById("dailyCritical").textContent=critical;
+  const legacyCritical=document.getElementById("dailyCritical");
+  if(legacyCritical)legacyCritical.textContent=critical;
   document.getElementById("dailyStations").textContent=stations;
   document.getElementById("dailyVerified").textContent=textOf("outVerify1");
   document.getElementById("dailyNext").textContent=textOf("outNext");
@@ -10738,6 +11402,112 @@ html body main.container > #globalFloodHeader::after {
   box-shadow:none!important;
 }
 </style>
+<style id="nearby-flood-risk-card-20260916-v1">
+html body main.container #warning .nearby-flood-risk-card{
+  cursor:default!important;
+}
+html body main.container #warning .nearby-flood-risk-card #nearestWaterStationDistance{
+  display:block!important;
+  max-width:100%!important;
+  margin-top:7px!important;
+  color:#0077c0!important;
+  font-size:13px!important;
+  line-height:1.45!important;
+  font-weight:400!important;
+  white-space:normal!important;
+  overflow-wrap:anywhere!important;
+}
+</style>
+<script id="nearby-flood-risk-card-20260916-v1-script">
+(function(){
+ "use strict";
+
+ function numeric(value){
+  var number=Number(value);
+  return Number.isFinite(number)?number:null;
+ }
+
+ function distanceKm(first,second){
+  var radius=6371;
+  var toRadians=Math.PI/180;
+  var lat1=numeric(first.lat);
+  var lon1=numeric(first.lon);
+  var lat2=numeric(second.lat);
+  var lon2=numeric(second.lon);
+  if(lat1===null||lon1===null||lat2===null||lon2===null)return null;
+  var latitudeDifference=(lat2-lat1)*toRadians;
+  var longitudeDifference=(lon2-lon1)*toRadians;
+  var value=Math.sin(latitudeDifference/2)*Math.sin(latitudeDifference/2)+Math.cos(lat1*toRadians)*Math.cos(lat2*toRadians)*Math.sin(longitudeDifference/2)*Math.sin(longitudeDifference/2);
+  return 2*radius*Math.asin(Math.sqrt(value));
+ }
+
+ function render(data){
+  var countElement=document.getElementById("nearbyFloodEstateCount");
+  var distanceElement=document.getElementById("nearestWaterStationDistance");
+  if(!countElement||!distanceElement)return;
+
+  var estates=Array.isArray(data.estates)?data.estates:[];
+  var watchedEstates=Array.isArray(data.estate_watch)?data.estate_watch:[];
+  var stations=(Array.isArray(data.stations)?data.stations:[]).filter(function(station){
+   return station&&station.kind==="waterlevel"&&numeric(station.lat)!==null&&numeric(station.lon)!==null;
+  });
+
+  var riskEstateIds=new Set();
+  var riskEstateNames=new Set();
+  watchedEstates.forEach(function(estate){
+   if(!estate)return;
+   if(estate.id!==null&&estate.id!==undefined)riskEstateIds.add(String(estate.id));
+   else if(estate.name)riskEstateNames.add(String(estate.name));
+  });
+  var riskCount=riskEstateIds.size+riskEstateNames.size;
+  if(!riskCount&&data.summary&&numeric(data.summary.estate_count)!==null){
+   riskCount=numeric(data.summary.estate_count);
+  }
+  countElement.textContent=Number(riskCount||0).toLocaleString("th-TH")+" แห่ง";
+
+  var nearest=null;
+  estates.forEach(function(estate){
+   if(!estate||numeric(estate.lat)===null||numeric(estate.lon)===null)return;
+   stations.forEach(function(station){
+    var distance=distanceKm(estate,station);
+    if(distance===null)return;
+    if(!nearest||distance<nearest.distance){
+     nearest={distance:distance,estate:estate,station:station};
+    }
+   });
+  });
+
+  if(!nearest){
+   distanceElement.textContent="ไม่พบพิกัดสถานีระดับน้ำสำหรับคำนวณระยะห่าง";
+   return;
+  }
+
+  var distanceText=nearest.distance.toLocaleString("th-TH",{minimumFractionDigits:1,maximumFractionDigits:1});
+  var stationName=nearest.station.station||nearest.station.station_code||"สถานีระดับน้ำ";
+  var estateName=nearest.estate.name||"นิคมฯ";
+  var shortEstateName=estateName.replace(/^นิคมอุตสาหกรรม/,"นิคมฯ ");
+  distanceElement.textContent=stationName+" ห่าง "+shortEstateName+" "+distanceText+" กม.";
+  distanceElement.title=stationName+" ถึง "+estateName+" ระยะทาง "+distanceText+" กิโลเมตร";
+ }
+
+ async function initialize(){
+  try{
+   var response=await fetch(new URL("./data/thaiwater_latest.json",document.baseURI),{cache:"no-store"});
+   if(!response.ok)throw new Error("HTTP "+response.status);
+   render(await response.json());
+  }catch(error){
+   var distanceElement=document.getElementById("nearestWaterStationDistance");
+   if(distanceElement)distanceElement.textContent="ไม่สามารถคำนวณระยะห่างจากข้อมูลล่าสุดได้";
+   console.error("โหลดข้อมูลพื้นที่เสี่ยงและระยะห่างสถานีระดับน้ำไม่สำเร็จ",error);
+  }
+ }
+
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",initialize,{once:true});
+ else initialize();
+})();
+</script>
 <link rel="stylesheet" href="./mobile-responsive.css?v=20260915-1">
 </body>
 </html>
+flood-report.html
+HTML
