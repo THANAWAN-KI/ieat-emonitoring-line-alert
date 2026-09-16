@@ -9017,9 +9017,8 @@ html body #warning>.flood-support-heading #floodCornerTabs button.active{
 (function(){
  function apply(){
   var head=document.querySelector("#warning>.flood-support-heading");if(!head)return;
-  var copy=head.querySelector(".flood-support-heading-copy")||head.firstElementChild;if(!copy)return;
-  copy.classList.add("flood-support-heading-copy");
-  copy.innerHTML="<h1>ข้อมูลสนับสนุนกรณีเกิดเหตุน้ำท่วม</h1><p>ติดตามพื้นที่เฝ้าระวัง ปริมาณฝน และสถานการณ์น้ำจากข้อมูลล่าสุด</p>";
+  var copy=head.querySelector(".flood-support-heading-copy")||head.firstElementChild;
+  if(copy)copy.remove();
   var tabs=document.getElementById("floodCornerTabs");if(tabs&&tabs.parentElement!==head)head.appendChild(tabs);
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply);else apply();
@@ -9245,7 +9244,7 @@ html body main.container>.view>.fire-style-flood-header,
   var h=document.getElementById("globalFloodHeader");
   if(!h){
    h=document.createElement("header");h.id="globalFloodHeader";
-   h.innerHTML='<div class="global-flood-copy"><h1>ข้อมูลสนับสนุนกรณีเกิดเหตุน้ำท่วม</h1><p>ติดตามพื้นที่เฝ้าระวัง ปริมาณฝน และสถานการณ์น้ำจากข้อมูลล่าสุด</p></div><nav class="global-flood-tabs" aria-label="เมนูหน้ารายงานน้ำท่วม">'+pages.map(function(x){return '<button type="button" data-view="'+x[0]+'">'+x[1]+'</button>'}).join("")+'</nav>';
+   h.innerHTML='<nav class="global-flood-tabs" aria-label="เมนูหน้ารายงานน้ำท่วม">'+pages.map(function(x){return '<button type="button" data-view="'+x[0]+'">'+x[1]+'</button>'}).join("")+'</nav>';
    h.addEventListener("click",function(e){var b=e.target.closest("button[data-view]");if(b)openView(b.dataset.view)});
   }
   if(main.firstElementChild!==h)main.prepend(h);
