@@ -12424,5 +12424,82 @@ html body main.container #warning #overviewFirstPageTables>.rid-panel{
 })();
 </script>
 
+
+
+<style id="flood-report-table-row-map-zoom-20260917-v22">
+html body main.container #warning #estateWaterTablePair tbody tr:has([data-map-lat][data-map-lon]){
+ cursor:pointer!important
+}
+html body main.container #warning #estateWaterTablePair tbody tr:has([data-map-lat][data-map-lon]):hover td{
+ background:#eaf6fc!important
+}
+html body main.container #warning #estateWaterTablePair .map-cell-zoom{
+ position:static!important;inset:auto!important;display:flex!important;
+ align-items:center!important;justify-content:center!important;width:100%!important;
+ min-height:34px!important;height:auto!important;cursor:pointer!important;
+ pointer-events:auto!important;touch-action:manipulation!important
+}
+html body main.container #warning #estateWaterTablePair tbody tr.table-map-focus td{
+ background:#d9f0fb!important
+}
+</style>
+<script id="flood-report-table-row-map-zoom-20260917-v22-script">
+(function(){
+ "use strict";
+ function zoom(button){
+  var lat=Number(button&&button.dataset.mapLat),lon=Number(button&&button.dataset.mapLon);
+  var label=button&&button.dataset.mapLabel||"ตำแหน่งที่เลือก";
+  if(!Number.isFinite(lat)||!Number.isFinite(lon))return;
+  if(typeof window.zoomRiskMap==="function"){
+   window.zoomRiskMap(lat,lon,label);
+  }else{
+   var frame=document.querySelector("#warning .thaiwater-risk-map,#warning #overviewArcgisMap");
+   if(frame&&frame.tagName==="IFRAME"){
+    try{
+     var url=new URL(frame.src,document.baseURI);
+     url.searchParams.set("center",lon+","+lat);
+     url.searchParams.set("scale","75000");
+     url.searchParams.set("_zoom",Date.now());
+     frame.src=url.toString();
+    }catch(error){}
+   }
+   var map=document.querySelector("#warning .operations-map,#warning .embedded-water-map");
+   if(map)map.scrollIntoView({behavior:"smooth",block:"center"});
+  }
+ }
+ function prepare(){
+  document.querySelectorAll("#estateWaterTablePair tbody tr").forEach(function(row){
+   var button=row.querySelector("[data-map-lat][data-map-lon]");
+   if(!button||row.dataset.tableMapReady)return;
+   row.dataset.tableMapReady="true";
+   row.setAttribute("role","button");
+   row.setAttribute("tabindex","0");
+   row.setAttribute("title","คลิกเพื่อซูมไปยังตำแหน่งบนแผนที่");
+   row.addEventListener("click",function(event){
+    if(event.target.closest("button,a,input,select,textarea")!==button&&event.target!==button){
+     event.preventDefault();event.stopPropagation();zoom(button);
+    }
+    row.classList.add("table-map-focus");
+    setTimeout(function(){row.classList.remove("table-map-focus")},1200);
+   });
+   row.addEventListener("keydown",function(event){
+    if(event.key==="Enter"||event.key===" "){
+     event.preventDefault();event.stopPropagation();zoom(button);
+    }
+   });
+  });
+ }
+ function start(){
+  prepare();
+  var pair=document.getElementById("estateWaterTablePair");
+  if(!pair){setTimeout(start,100);return}
+  var observer=new MutationObserver(function(){clearTimeout(observer.t);observer.t=setTimeout(prepare,20)});
+  observer.observe(pair,{childList:true,subtree:true});
+  [100,400,900,1800,3500,6000].forEach(function(ms){setTimeout(prepare,ms)});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>
+
 </body>
 </html>
