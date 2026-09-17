@@ -12223,5 +12223,71 @@ html body main.container #warning #ridTrendChart .rid-trend-col span{
 })();
 </script>
 
+
+
+<style id="flood-report-equal-water-table-heights-20260917-v18">
+/* Keep both overview tables the same length and fit text inside each cell. */
+html body main.container #warning #overviewFirstPageTables{
+ align-items:stretch!important
+}
+html body main.container #warning #overviewFirstPageTables>.station-watch-table,
+html body main.container #warning #overviewFirstPageTables>.rid-panel{
+ height:560px!important;min-height:560px!important;max-height:560px!important;
+ overflow:hidden!important;align-self:stretch!important
+}
+html body main.container #warning #overviewFirstPageTables :is(.table-scroll,.rid-table-wrap){
+ flex:1 1 auto!important;height:auto!important;min-height:0!important;
+ max-height:none!important;overflow:hidden!important
+}
+html body main.container #warning #overviewFirstPageTables table{
+ width:100%!important;max-width:100%!important;min-width:0!important;
+ table-layout:fixed!important
+}
+html body main.container #warning #overviewFirstPageTables .station-watch-table th,
+html body main.container #warning #overviewFirstPageTables .station-watch-table td{
+ padding:6px 5px!important;font-size:9.5px!important;line-height:1.25!important
+}
+html body main.container #warning #overviewFirstPageTables .rid-water-table th,
+html body main.container #warning #overviewFirstPageTables .rid-water-table td{
+ padding:3px 3px!important;font-size:8.5px!important;line-height:1.15!important
+}
+html body main.container #warning #overviewFirstPageTables th,
+html body main.container #warning #overviewFirstPageTables td{
+ height:auto!important;white-space:normal!important;overflow-wrap:anywhere!important;
+ word-break:normal!important;text-overflow:clip!important;vertical-align:middle!important
+}
+html body main.container #warning #overviewFirstPageTables td :is(small,span,b,strong){
+ font-size:inherit!important;line-height:inherit!important
+}
+html body main.container #warning #overviewFirstPageTables :is(.table-section-head,.rid-panel-head){
+ min-height:72px!important;height:72px!important;max-height:72px!important;
+ padding:10px 12px!important;overflow:hidden!important
+}
+html body main.container #warning #overviewFirstPageTables :is(.table-section-head,.rid-panel-head) h2{
+ font-size:15px!important;line-height:1.25!important;margin:0!important
+}
+html body main.container #warning #overviewFirstPageTables :is(.table-section-head,.rid-panel-head) p{
+ font-size:9px!important;line-height:1.25!important;margin:3px 0 0!important
+}
+html body main.container #warning #overviewFirstPageTables .rid-live-status{
+ flex:0 0 26px!important;height:26px!important;padding:6px 9px!important;
+ overflow:hidden!important;font-size:8px!important;line-height:1.2!important;
+ white-space:nowrap!important;text-overflow:ellipsis!important
+}
+@media(max-width:1100px){
+ html body main.container #warning #overviewFirstPageTables>.station-watch-table,
+ html body main.container #warning #overviewFirstPageTables>.rid-panel{
+  height:auto!important;min-height:0!important;max-height:none!important
+ }
+ html body main.container #warning #overviewFirstPageTables :is(.table-scroll,.rid-table-wrap){
+  overflow:visible!important
+ }
+ html body main.container #warning #overviewFirstPageTables .rid-water-table th,
+ html body main.container #warning #overviewFirstPageTables .rid-water-table td{
+  padding:5px 4px!important;font-size:9px!important
+ }
+}
+</style>
+
 </body>
 </html>
