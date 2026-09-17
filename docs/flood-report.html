@@ -11093,5 +11093,85 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 })();
 </script>
 
+
+<style id="flood-report-icon-layout-fix-20260917-v2">
+/* Definitively remove legacy icon elements and pseudo icons so the supplied SVG set is visible. */
+html body main.container #warning .grid.kpis>.kpi::before,
+html body main.container #warning .grid.kpis>.kpi::after,
+html body main.container #warning .national-cards-dashboard>.national-kpi::before,
+html body main.container #warning .national-cards-dashboard>.national-kpi::after,
+html body main.container #warning .daily-water-grid>.daily-water-item::before,
+html body main.container #warning .daily-water-grid>.daily-water-item::after{
+ content:none!important;display:none!important;background:none!important;
+ width:0!important;height:0!important;margin:0!important;padding:0!important
+}
+html body #warning .grid.kpis>.kpi>.icon,
+html body #warning .grid.kpis>.kpi>.n-icon,
+html body #warning .national-cards-dashboard>.national-kpi>.icon,
+html body #warning .national-cards-dashboard>.national-kpi>.n-icon,
+html body #warning .daily-water-grid>.daily-water-item>.icon,
+html body #warning .daily-water-grid>.daily-water-item>.n-icon{display:none!important}
+html body #warning .flood-card-icon{
+ display:flex!important;visibility:visible!important;opacity:1!important;
+ width:46px!important;height:46px!important;min-width:46px!important;
+ background:transparent!important;border:0!important;color:#2754ba!important
+}
+html body #warning .flood-card-icon svg{display:block!important;width:100%!important;height:100%!important;opacity:1!important}
+#warning .nationwide-monitoring-row{
+ display:grid!important;grid-template-columns:minmax(280px,.78fr) minmax(520px,1.22fr)!important;
+ gap:14px!important;align-items:stretch!important
+}
+#warning .rid-monitoring-side{display:grid;gap:14px;min-width:0}
+#warning .rid-monitoring-side .nearby-risk-detail-card{height:auto!important}
+#warning .rid-monitoring-side .rid-chart-grid{grid-template-columns:minmax(0,1.2fr) minmax(240px,.8fr)!important;margin:0!important}
+#warning .rid-monitoring-side .rid-panel{min-height:0}
+#warning .rid-monitoring-side .rid-level-chart{max-height:330px;overflow:auto}
+#warning #ridWaterDashboard{margin-top:14px}
+#warning #ridWaterDashboard>.rid-panel{margin-top:0}
+@media(max-width:1100px){
+ #warning .nationwide-monitoring-row{grid-template-columns:1fr!important}
+ #warning .rid-monitoring-side .rid-chart-grid{grid-template-columns:1fr 1fr!important}
+}
+@media(max-width:700px){
+ #warning .rid-monitoring-side .rid-chart-grid{grid-template-columns:1fr!important}
+}
+</style>
+<script id="flood-report-icon-layout-fix-20260917-v2-script">
+(function(){
+ function fixIcons(){
+  var selectors=[
+   "#warning .grid.kpis>.kpi",
+   "#warning .national-cards-dashboard>.national-kpi",
+   "#warning .daily-water-grid>.daily-water-item"
+  ];
+  document.querySelectorAll(selectors.join(",")).forEach(function(card){
+   card.querySelectorAll(":scope > .icon,:scope > .n-icon,:scope > .daily-index,:scope > .rank-number").forEach(function(el){el.remove()});
+  });
+  document.querySelectorAll("#warning .flood-card-icon").forEach(function(icon){
+   icon.style.setProperty("display","flex","important");
+   icon.style.setProperty("visibility","visible","important");
+   icon.style.setProperty("opacity","1","important");
+  });
+ }
+ function moveCharts(){
+  var row=document.getElementById("nationwideMonitoringRow");
+  var indicator=row&&row.querySelector(":scope > .nationwide-indicators");
+  var detail=row&&row.querySelector(":scope > .nearby-risk-detail-card");
+  var charts=document.querySelector("#ridWaterDashboard > .rid-chart-grid");
+  if(!row||!indicator||!detail||!charts)return;
+  var side=row.querySelector(":scope > .rid-monitoring-side");
+  if(!side){side=document.createElement("div");side.className="rid-monitoring-side";indicator.insertAdjacentElement("afterend",side)}
+  if(detail.parentNode!==side)side.appendChild(detail);
+  if(charts.parentNode!==side)side.appendChild(charts);
+ }
+ function apply(){fixIcons();moveCharts()}
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply,{once:true});else apply();
+ [100,500,1200,2500].forEach(function(ms){setTimeout(apply,ms)});
+ var observer=new MutationObserver(function(){clearTimeout(observer.timer);observer.timer=setTimeout(apply,50)});
+ observer.observe(document.documentElement,{childList:true,subtree:true});
+ setTimeout(function(){observer.disconnect()},10000);
+})();
+</script>
+
 </body>
 </html>
