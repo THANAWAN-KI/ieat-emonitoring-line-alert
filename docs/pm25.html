@@ -371,5 +371,70 @@ html body main.wrap>.dashboard-head{
  border:0!important;outline:0!important;box-shadow:none!important
 }
 </style>
+<style id="pm25-station-map-zoom-20260917-v1">
+#stationRows tr[data-pm-map-lat][data-pm-map-lon]{cursor:pointer;transition:background-color .18s ease,box-shadow .18s ease}
+#stationRows tr[data-pm-map-lat][data-pm-map-lon]:hover{background:#ecf9f7}
+#stationRows tr[data-pm-map-lat][data-pm-map-lon]:focus{outline:3px solid rgba(17,187,163,.35);outline-offset:-3px}
+#stationRows tr[data-pm-map-lat][data-pm-map-lon].pm-map-selected{background:#dff5f1;box-shadow:inset 4px 0 #11bba3}
+</style>
+<script>
+(function(){
+  var rows=document.getElementById('stationRows');
+  var frame=document.querySelector('.pm-map');
+  var title=document.querySelector('.map-panel .map-title');
+  if(!rows||!frame)return;
+
+  function prepareRows(){
+    rows.querySelectorAll('tr').forEach(function(row){
+      var link=row.querySelector('a[href*="google.com/maps?q="]');
+      if(!link)return;
+      var value='';
+      try{value=new URL(link.href,document.baseURI).searchParams.get('q')||'';}catch(error){return;}
+      var point=value.split(',').map(Number);
+      if(point.length!==2||!Number.isFinite(point[0])||!Number.isFinite(point[1]))return;
+      row.dataset.pmMapLat=String(point[0]);
+      row.dataset.pmMapLon=String(point[1]);
+      link.textContent='คลิก';
+      link.removeAttribute('target');
+      link.removeAttribute('rel');
+      row.tabIndex=0;
+      row.setAttribute('role','button');
+      row.setAttribute('aria-label','ซูมแผนที่ไปยังสถานี '+((row.cells[1]&&row.cells[1].textContent.trim())||''));
+    });
+  }
+
+  function zoomToRow(row){
+    var lat=Number(row.dataset.pmMapLat),lon=Number(row.dataset.pmMapLon);
+    if(!Number.isFinite(lat)||!Number.isFinite(lon))return;
+    var station=(row.cells[1]&&row.cells[1].textContent.trim())||'สถานีตรวจวัด';
+    try{
+      var url=new URL(frame.src,document.baseURI);
+      url.searchParams.set('center',lon+','+lat);
+      url.searchParams.set('scale','35000');
+      url.searchParams.set('_station_zoom',String(Date.now()));
+      frame.src=url.toString();
+    }catch(error){return;}
+    rows.querySelectorAll('.pm-map-selected').forEach(function(item){item.classList.remove('pm-map-selected');});
+    row.classList.add('pm-map-selected');
+    if(title)title.textContent='แผนที่ PM2.5 • กำลังแสดง: '+station;
+    frame.closest('.map-panel').scrollIntoView({behavior:'smooth',block:'center'});
+  }
+
+  rows.addEventListener('click',function(event){
+    var row=event.target.closest('tr[data-pm-map-lat][data-pm-map-lon]');
+    if(event.target.closest('a')&&row)event.preventDefault();
+    if(row)zoomToRow(row);
+  });
+  rows.addEventListener('keydown',function(event){
+    if(event.key!=='Enter'&&event.key!==' ')return;
+    var row=event.target.closest('tr[data-pm-map-lat][data-pm-map-lon]');
+    if(!row)return;
+    event.preventDefault();
+    zoomToRow(row);
+  });
+  new MutationObserver(prepareRows).observe(rows,{childList:true});
+  prepareRows();
+})();
+</script>
 <link rel="stylesheet" href="./mobile-responsive.css?v=20260915-1">
 </body> </html>

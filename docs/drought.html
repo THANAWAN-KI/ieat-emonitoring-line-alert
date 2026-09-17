@@ -1052,5 +1052,53 @@ html body main.wrap>.dashboard-head{
 }
 </style>
 <link rel="stylesheet" href="./mobile-responsive.css?v=20260915-1">
+<style id="drought-six-card-icons-20260917-v1">
+html body main.wrap .dashboard-kpis .kpi::before,
+html body main.wrap .dashboard-kpis .kpi::after{content:none!important;display:none!important}
+html body main.wrap .dashboard-kpis .kpi-icon{
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ width:48px!important;height:48px!important;min-width:48px!important;
+ margin:0!important;padding:0!important;background:transparent!important;
+ border:0!important;box-shadow:none!important;overflow:visible!important
+}
+html body main.wrap .dashboard-kpis .kpi-icon>img.drought-card-icon{
+ display:block!important;width:46px!important;height:46px!important;
+ max-width:46px!important;max-height:46px!important;object-fit:contain!important;
+ opacity:1!important;visibility:visible!important
+}
+</style>
+<script id="drought-six-card-icons-20260917-v1-script">
+(function(){
+ "use strict";
+ var sources=[
+  "assets/drought-icons/card-1.svg","assets/drought-icons/card-2.svg",
+  "assets/drought-icons/card-3.svg","assets/drought-icons/card-4.svg",
+  "assets/drought-icons/card-5.svg","assets/drought-icons/card-6.svg"
+ ];
+ var working=false;
+ function apply(){
+  if(working)return;working=true;
+  document.querySelectorAll("main.wrap .dashboard-kpis .kpi").forEach(function(card,index){
+   if(index>=sources.length)return;
+   var row=card.querySelector(".kpi-row")||card.querySelector("div");if(!row)return;
+   var holder=row.querySelector(".kpi-icon");
+   if(!holder){holder=document.createElement("i");holder.className="kpi-icon";holder.setAttribute("aria-hidden","true");row.insertBefore(holder,row.firstChild)}
+   var current=holder.querySelector(":scope > img.drought-card-icon");
+   if(current&&current.getAttribute("data-drought-card-icon")===String(index+1)&&holder.children.length===1)return;
+   holder.querySelectorAll("svg,img,picture,i,span").forEach(function(old){old.remove()});
+   Array.from(holder.childNodes).forEach(function(node){node.remove()});
+   var image=document.createElement("img");image.className="drought-card-icon";image.src=sources[index]+"?v=20260917-1";image.alt="";image.setAttribute("data-drought-card-icon",String(index+1));holder.appendChild(image);
+  });
+  working=false;
+ }
+ function start(){
+  apply();[100,400,1000,2500,5000].forEach(function(ms){setTimeout(apply,ms)});
+  var root=document.querySelector("main.wrap .dashboard-kpis");if(!root)return;
+  var observer=new MutationObserver(function(){clearTimeout(observer.timer);observer.timer=setTimeout(apply,30)});
+  observer.observe(root,{childList:true,subtree:true});setTimeout(function(){observer.disconnect();apply()},8000);
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>
 </body>
 </html>
