@@ -1741,6 +1741,7 @@ document.documentElement.classList.add("flood-initializing");
     }
     async function updateMapShot(){
       const image=$("infographicMap"),placeholder=$("mapPlaceholder");
+      if(!image||!placeholder)return;
       const stamp=window.THAIWATER_MAP_META?.updatedAt||new Date().toISOString();
       image.src="assets/thaiwater-overall-latest.png?v="+encodeURIComponent(stamp);
       image.alt="แผนที่พื้นฐานติดตามสถานการณ์น้ำประเทศไทยจาก ThaiWater";
