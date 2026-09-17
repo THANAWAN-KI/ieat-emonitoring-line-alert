@@ -11381,5 +11381,51 @@ html body #warning .flood-card-icon svg{display:block!important;width:100%!impor
 })();
 </script>
 
+
+<style id="flood-report-nine-card-width-fix-20260917-v6">
+html body main.container #warning #topFloodDashboard{width:100%!important;max-width:none!important}
+html body main.container #warning #topFloodDashboard>.top-flood-left{
+ width:100%!important;max-width:none!important;min-width:0!important;
+ justify-self:stretch!important;align-self:stretch!important
+}
+html body main.container #warning #topFloodNine{
+ display:grid!important;width:100%!important;max-width:none!important;min-width:0!important;
+ grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ grid-auto-flow:row!important;align-items:stretch!important;justify-items:stretch!important;
+ gap:12px!important;box-sizing:border-box!important
+}
+html body main.container #warning #topFloodNine>.grid.kpis,
+html body main.container #warning #topFloodNine>.national-cards-dashboard,
+html body main.container #warning #topFloodNine>.daily-water-grid{display:contents!important;width:auto!important;max-width:none!important}
+html body main.container #warning #topFloodNine :is(.kpi,.national-kpi,.daily-water-item){
+ width:100%!important;max-width:none!important;min-width:0!important;height:100%!important;
+ box-sizing:border-box!important;overflow:hidden!important;justify-self:stretch!important;
+ grid-template-columns:58px minmax(0,1fr)!important;padding:15px 18px!important
+}
+html body main.container #warning #topFloodNine :is(.kpi,.national-kpi,.daily-water-item)>*{
+ min-width:0!important;max-width:100%!important;overflow-wrap:anywhere!important;word-break:normal!important
+}
+html body main.container #warning #topFloodNine .flood-card-icon{
+ width:48px!important;height:48px!important;min-width:48px!important
+}
+html body main.container #warning #topFloodNine :is(strong,h2,small,span,a){
+ text-align:center!important;white-space:normal!important
+}
+html body main.container #warning #topFloodNine strong{font-size:clamp(22px,1.7vw,32px)!important;line-height:1.15!important}
+html body main.container #warning #topFloodNine h2,
+html body main.container #warning #topFloodNine small{font-size:clamp(13px,1vw,16px)!important;line-height:1.35!important}
+@media(max-width:1350px){
+ html body main.container #warning #topFloodDashboard{grid-template-columns:minmax(560px,1.45fr) minmax(390px,1fr)!important}
+ html body main.container #warning #topFloodNine :is(.kpi,.national-kpi,.daily-water-item){grid-template-columns:48px minmax(0,1fr)!important;padding:12px!important}
+}
+@media(max-width:1100px){
+ html body main.container #warning #topFloodDashboard{grid-template-columns:1fr!important}
+ html body main.container #warning #topFloodNine{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
+@media(max-width:700px){
+ html body main.container #warning #topFloodNine{grid-template-columns:1fr!important}
+}
+</style>
+
 </body>
 </html>
