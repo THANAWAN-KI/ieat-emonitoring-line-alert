@@ -10842,6 +10842,119 @@ html body main.container #warning .nearby-flood-risk-card #nearestWaterStationDi
  else initialize();
 })();
 </script>
+<style id="flood-report-live-risk-20260917-v1">
+/* Keep the three primary page actions aligned to the right. */
+#globalFloodHeader .global-flood-tabs{margin-left:auto!important;margin-right:0!important}
+
+/* Replace the former 24-hour rain card with the live nearby-flood-risk card. */
+#warning .daily-water-item.daily-nearby-risk{
+ background:#dbebfa!important;color:#00334e!important;
+ border:0!important;border-radius:20px!important;
+ min-height:150px!important;padding:18px!important;
+ display:flex!important;flex-direction:column!important;
+ align-items:center!important;justify-content:center!important;text-align:center!important
+}
+#warning .daily-water-item.daily-nearby-risk small,
+#warning .daily-water-item.daily-nearby-risk span,
+#warning .daily-water-item.daily-nearby-risk strong{
+ color:#00334e!important;-webkit-text-fill-color:#00334e!important
+}
+#warning .daily-water-item.daily-nearby-risk small{font-size:22px!important;font-weight:600!important}
+#warning .daily-water-item.daily-nearby-risk span{font-size:13px!important;margin-top:2px!important}
+#warning .daily-water-item.daily-nearby-risk strong{font-size:38px!important;line-height:1.2!important;margin-top:12px!important}
+#warning .daily-water-grid>.nearby-flood-risk-card{display:none!important}
+
+/* Nationwide indicators and the requested nearby-risk details sit side by side. */
+#warning .nationwide-monitoring-row{
+ display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+ gap:14px!important;align-items:stretch!important;margin-top:14px!important
+}
+#warning .nationwide-monitoring-row>.nationwide-indicators{margin:0!important;height:100%!important}
+#warning .nearby-risk-detail-card{
+ margin:0!important;padding:0!important;overflow:hidden!important;
+ border:0!important;border-radius:16px!important;background:#fff!important;
+ box-shadow:0 5px 18px rgba(27,39,51,.09)!important
+}
+#warning .nearby-risk-detail-head{padding:14px 16px;background:#dbebfa;color:#00334e}
+#warning .nearby-risk-detail-head h2{margin:0!important;color:#00334e!important;font-size:17px!important}
+#warning .nearby-risk-detail-head p{margin:3px 0 0!important;color:#00334e!important;font-size:11px!important}
+#warning .nearby-risk-detail-head b{display:block;margin-top:8px;color:#00334e;font-size:28px;line-height:1.15}
+#warning .nearby-risk-detail-list{max-height:250px;overflow:auto;padding:8px 12px}
+#warning .nearby-risk-detail-item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:9px 4px;border-bottom:1px solid #edf0f2}
+#warning .nearby-risk-detail-item:last-child{border-bottom:0}
+#warning .nearby-risk-detail-item b{display:block;color:#00334e;font-size:12px}
+#warning .nearby-risk-detail-item span{display:block;color:#667085;font-size:10px}
+#warning .nearby-risk-detail-item strong{align-self:center;color:#0091cd;font-size:12px;white-space:nowrap}
+#warning .nearby-risk-live-status{padding:8px 16px;background:#f7f9fb;color:#667085;font-size:10px}
+@media(max-width:850px){
+ #globalFloodHeader .global-flood-tabs{margin-left:0!important}
+ #warning .nationwide-monitoring-row{grid-template-columns:1fr!important}
+}
+</style>
+<script id="flood-report-live-risk-20260917-v1-script">
+(function(){
+ "use strict";
+ var URL="https://nawakonnakhonchai-wq.github.io/hii-flood-alert/flashflood.geojson";
+ var ESTATES=[
+  ["นิคมอุตสาหกรรมมาบตาพุด",12.715,101.145],
+  ["นิคมอุตสาหกรรมแหลมฉบัง",13.087,100.883],
+  ["นิคมอุตสาหกรรมบางปู",13.548,100.656],
+  ["นิคมอุตสาหกรรมบางชัน",13.821,100.712],
+  ["นิคมอุตสาหกรรมลาดกระบัง",13.735,100.794],
+  ["นิคมอุตสาหกรรมสมุทรสาคร",13.570,100.249],
+  ["นิคมอุตสาหกรรมภาคเหนือ",18.577,99.045],
+  ["นิคมอุตสาหกรรมพิจิตร",16.387,100.318],
+  ["นิคมอุตสาหกรรมภาคใต้",6.932,100.430],
+  ["นิคมอุตสาหกรรมอมตะซิตี้ ชลบุรี",13.435,101.002],
+  ["นิคมอุตสาหกรรมอมตะซิตี้ ระยอง",13.005,101.166],
+  ["นิคมอุตสาหกรรมอีสเทิร์นซีบอร์ด ระยอง",13.011,101.109],
+  ["นิคมอุตสาหกรรมเกตเวย์ซิตี้",13.616,101.322]
+ ];
+ var loading=false;
+ function esc(value){return String(value==null?"–":value).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+ function km(a,b,c,d){var p=Math.PI/180,x=(d-b)*p,y=(c-a)*p,q=Math.sin(y/2)**2+Math.cos(a*p)*Math.cos(c*p)*Math.sin(x/2)**2;return 12742*Math.asin(Math.sqrt(q))}
+ function mount(){
+  var first=document.querySelector("#warning .daily-water-item.rain");
+  if(first&&!first.classList.contains("daily-nearby-risk")){
+   first.classList.remove("rain");first.classList.add("daily-nearby-risk");
+   first.innerHTML='<small>พื้นที่เสี่ยงน้ำท่วมใกล้นิคมฯ</small><span>จุดเสี่ยงจากข้อมูลฝนสะสม 48 ชั่วโมง</span><strong id="dailyNearbyRiskCount">กำลังโหลด</strong>';
+  }
+  var indicator=document.querySelector("#warning .nationwide-indicators");
+  if(indicator&&!document.getElementById("nationwideMonitoringRow")){
+   var row=document.createElement("section");row.id="nationwideMonitoringRow";row.className="nationwide-monitoring-row";
+   indicator.parentNode.insertBefore(row,indicator);row.appendChild(indicator);
+   var detail=document.createElement("article");detail.className="card nearby-risk-detail-card";
+   detail.innerHTML='<div class="nearby-risk-detail-head"><h2>รายละเอียดข้อมูลพื้นที่เสี่ยงน้ำท่วมใกล้นิคมฯ</h2><p>จุดเสี่ยงจากฝนสะสม 48 ชั่วโมง ภายในรัศมี 120 กิโลเมตร</p><b id="nearbyRiskDetailCount">กำลังโหลด</b></div><div class="nearby-risk-detail-list" id="nearbyRiskDetailList"><div class="nearby-risk-detail-item"><span>กำลังโหลดข้อมูลล่าสุด…</span></div></div><div class="nearby-risk-live-status" id="nearbyRiskLiveStatus">กำลังตรวจสอบเวลาอัปเดต</div>';
+   row.appendChild(detail);
+  }
+ }
+ function render(json){
+  var features=Array.isArray(json.features)?json.features:[],rows=[];
+  features.forEach(function(feature){
+   var p=feature.properties||{},c=feature.geometry&&feature.geometry.coordinates||[],lon=Number(c[0]),lat=Number(c[1]);
+   if(!Number.isFinite(lat)||!Number.isFinite(lon))return;
+   var nearest=null;
+   ESTATES.forEach(function(e){var d=km(e[1],e[2],lat,lon);if(!nearest||d<nearest.distance)nearest={name:e[0],distance:d}});
+   if(nearest&&nearest.distance<=120)rows.push({name:p.station_name||p.station_code||"ไม่ระบุสถานี",location:[p.amphoe,p.province].filter(Boolean).join(" "),rain:Number(p.sum_rainfall_48h),stamp:p.latest_rainfall_datetime||"",estate:nearest.name,distance:nearest.distance});
+  });
+  rows.sort(function(a,b){return(b.rain||0)-(a.rain||0)});
+  var count=rows.length.toLocaleString("th-TH")+" แห่ง";
+  var card=document.getElementById("dailyNearbyRiskCount"),detailCount=document.getElementById("nearbyRiskDetailCount"),list=document.getElementById("nearbyRiskDetailList"),status=document.getElementById("nearbyRiskLiveStatus");
+  if(card)card.textContent=count;if(detailCount)detailCount.textContent=count;
+  if(list)list.innerHTML=rows.length?rows.slice(0,8).map(function(r){return'<div class="nearby-risk-detail-item"><div><b>'+esc(r.name)+'</b><span>'+esc(r.location||"ไม่ระบุพื้นที่")+' • ใกล้ '+esc(r.estate.replace(/^นิคมอุตสาหกรรม/,"นิคมฯ "))+' '+r.distance.toLocaleString("th-TH",{maximumFractionDigits:1})+' กม.</span></div><strong>'+(Number.isFinite(r.rain)?r.rain.toLocaleString("th-TH",{maximumFractionDigits:1})+" มม.":"–")+'</strong></div>'}).join(""):'<div class="nearby-risk-detail-item"><span>ไม่พบจุดเสี่ยงใกล้พื้นที่นิคมฯ</span></div>';
+  var stamps=rows.map(function(r){return r.stamp}).filter(Boolean).sort();
+  if(status)status.textContent=stamps.length?"ข้อมูลต้นทางล่าสุด "+new Date(stamps[stamps.length-1]).toLocaleString("th-TH",{dateStyle:"medium",timeStyle:"short"})+" • ตรวจใหม่ทุก 1 นาที":"ไม่พบเวลาอัปเดตจากข้อมูลต้นทาง";
+ }
+ async function refresh(){
+  if(loading)return;loading=true;mount();
+  try{var response=await fetch(URL+"?_="+Date.now(),{cache:"no-store"});if(!response.ok)throw Error("HTTP "+response.status);render(await response.json())}
+  catch(error){var status=document.getElementById("nearbyRiskLiveStatus");if(status)status.textContent="ไม่สามารถโหลดข้อมูลล่าสุดได้";console.error("โหลด flashflood.geojson ไม่สำเร็จ",error)}
+  finally{loading=false}
+ }
+ function start(){mount();refresh();setInterval(refresh,60000);document.addEventListener("visibilitychange",function(){if(!document.hidden)refresh()});window.addEventListener("focus",refresh)}
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>
 <link rel="stylesheet" href="./mobile-responsive.css?v=20260915-1">
 </body>
 </html>
