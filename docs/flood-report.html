@@ -11751,5 +11751,36 @@ html body main.container #warning #overviewForecastRisk .overview-risk-card[data
 })();
 </script>
 
+
+<style id="remove-obsolete-flood-final-layout-20260917-v14">
+html body main.container #warning>.flood-final-layout,
+html body main.container #warning .flood-final-layout{
+ display:none!important;width:0!important;height:0!important;min-height:0!important;
+ margin:0!important;padding:0!important;border:0!important;outline:0!important;
+ overflow:hidden!important;visibility:hidden!important
+}
+</style>
+<script id="remove-obsolete-flood-final-layout-20260917-v14-script">
+(function(){
+ "use strict";
+ var removing=false;
+ function removeOld(){
+  if(removing)return;removing=true;
+  document.querySelectorAll("#warning .flood-final-layout").forEach(function(layout){layout.remove()});
+  removing=false;
+ }
+ function start(){
+  removeOld();
+  [50,120,300,800,1500,2200,4000,7000].forEach(function(ms){setTimeout(removeOld,ms)});
+  var warning=document.getElementById("warning");if(!warning)return;
+  var observer=new MutationObserver(function(records){
+   if(records.some(function(record){return Array.from(record.addedNodes).some(function(node){return node.nodeType===1&&(node.matches&&node.matches(".flood-final-layout")||node.querySelector&&node.querySelector(".flood-final-layout"))})}))removeOld();
+  });
+  observer.observe(warning,{childList:true,subtree:true});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>
+
 </body>
 </html>
