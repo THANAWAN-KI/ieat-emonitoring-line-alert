@@ -11553,5 +11553,100 @@ html body main.container #warning #topFloodNine :is(strong,h2,small,span,a,.drou
 }
 </style>
 
+
+<style id="flood-report-rebuild-nine-cards-20260917-v10">
+html body main.container #warning #topFloodNine{grid-auto-rows:minmax(170px,1fr)!important}
+html body main.container #warning #topFloodNine>.final-flood-card{
+ display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;
+ gap:6px!important;width:100%!important;min-width:0!important;min-height:170px!important;height:100%!important;
+ padding:16px 18px!important;overflow:hidden!important;text-align:center!important;box-sizing:border-box!important
+}
+html body main.container #warning #topFloodNine>.final-flood-card>.final-card-content{
+ display:flex!important;flex:0 1 auto!important;flex-direction:column!important;align-items:center!important;
+ justify-content:center!important;gap:4px!important;width:100%!important;min-width:0!important;margin:0!important
+}
+html body main.container #warning #topFloodNine .final-card-title{
+ display:block!important;width:100%!important;margin:0!important;color:#005387!important;
+ font-size:16px!important;font-weight:500!important;line-height:1.35!important;text-align:center!important;
+ white-space:normal!important;overflow-wrap:anywhere!important
+}
+html body main.container #warning #topFloodNine .final-card-value{
+ display:block!important;position:static!important;width:100%!important;margin:3px 0!important;
+ color:#8cb811!important;font-size:30px!important;font-weight:700!important;line-height:1.15!important;
+ text-align:center!important;white-space:normal!important;overflow:visible!important;transform:none!important
+}
+html body main.container #warning #topFloodNine .final-card-detail{
+ display:block!important;width:100%!important;margin:0!important;color:#005387!important;
+ font-size:13px!important;font-weight:400!important;line-height:1.35!important;text-align:center!important;
+ white-space:normal!important;overflow-wrap:anywhere!important
+}
+html body main.container #warning #topFloodNine>.final-flood-card>.force-new-flood-icon{
+ order:-1!important;flex:0 0 48px!important;width:48px!important;height:48px!important;min-height:48px!important;
+ margin:0 auto 5px!important
+}
+</style>
+<script id="flood-report-rebuild-nine-cards-20260917-v10-script">
+(function(){
+ "use strict";
+ var specs=[
+  ["outFactory","นิคมฯ ใกล้สถานีฝนหนัก","แห่ง"],
+  ["dailyNearbyRiskCount","พื้นที่เสี่ยงน้ำท่วมใกล้นิคมฯ","จุดเสี่ยงจากข้อมูลฝนสะสม 48 ชั่วโมง"],
+  ["dailyStations","สถานีที่ต้องติดตาม","สถานีตรวจวัดที่เกี่ยวข้อง"],
+  ["dailyStatus","สถานการณ์ภาพรวม","dailyTrend"],
+  ["outCritical","นิคมฯ ใกล้ระดับน้ำผิดปกติ","แห่ง"],
+  ["nationalFloodCount","พื้นที่เสี่ยงน้ำท่วมฉับพลัน 24 ชั่วโมง","จังหวัด"],
+  ["nationalStormCount","พายุเข้าใกล้ประเทศไทย","nationalStormLabel"],
+  ["nationalWaterProvinceCount","เฝ้าระวังระดับน้ำ","จังหวัด"],
+  ["nationalHeavyRainCount","ฝนตกหนักใน 24 ชั่วโมง","จังหวัด"]
+ ];
+ var busy=false;
+ function valueNode(id){
+  var el=document.getElementById(id);
+  if(!el){el=document.createElement("strong");el.id=id;el.textContent="–"}
+  el.className="final-card-value";el.removeAttribute("style");return el;
+ }
+ function detailNode(value){
+  var existing=value&&document.getElementById(value);
+  if(existing){existing.className="final-card-detail";existing.removeAttribute("style");return existing}
+  var el=document.createElement("span");el.className="final-card-detail";el.textContent=value||"";return el;
+ }
+ function build(){
+  if(busy)return;busy=true;
+  var grid=document.getElementById("topFloodNine");
+  if(!grid){busy=false;return}
+  var existing={};
+  grid.querySelectorAll(".final-flood-card").forEach(function(card){existing[card.getAttribute("data-value-id")]=card});
+  var fragment=document.createDocumentFragment();
+  specs.forEach(function(spec){
+   var card=existing[spec[0]]||document.createElement("article");
+   var value=valueNode(spec[0]),detail=detailNode(spec[2]);
+   var icon=card.querySelector(":scope > .force-new-flood-icon");
+   var content=card.querySelector(":scope > .final-card-content");
+   var valid=content&&content.querySelector(".final-card-title")&&content.contains(value)&&content.contains(detail);
+   card.className="card kpi final-flood-card";card.setAttribute("data-value-id",spec[0]);card.removeAttribute("style");
+   if(!valid){
+    content=document.createElement("div");content.className="final-card-content";
+    var title=document.createElement("span");title.className="final-card-title";title.textContent=spec[1];
+    content.append(title,value,detail);
+    card.replaceChildren();
+    if(icon)card.appendChild(icon);
+    card.appendChild(content);
+   }
+   fragment.appendChild(card);
+  });
+  grid.replaceChildren(fragment);
+  busy=false;
+ }
+ function start(){
+  build();
+  var grid=document.getElementById("topFloodNine");if(!grid){setTimeout(start,100);return}
+  var observer=new MutationObserver(function(){clearTimeout(observer.t);observer.t=setTimeout(build,25)});
+  observer.observe(grid,{childList:true,subtree:true});
+  [100,300,700,1500,3000,6000,9000,11000,13000].forEach(function(ms){setTimeout(build,ms)});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>
+
 </body>
 </html>
