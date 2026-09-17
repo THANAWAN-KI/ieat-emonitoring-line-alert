@@ -12823,5 +12823,135 @@ html body main.container #warning #overviewFirstPageTables .rid-trend-cell>span{
 }
 </style>
 
+
+
+<style id="flood-report-export-rid-page-live-map-20260917-v27">
+html body main.container #infographic #reportCanvas .sheet-map-frame{
+ position:relative!important;overflow:hidden!important;background:#eef3f7!important
+}
+html body main.container #infographic #reportCanvas .sheet-map-frame>#exportOverviewFloodMap{
+ display:block!important;width:100%!important;height:100%!important;min-height:100%!important;
+ margin:0!important;padding:0!important;border:0!important;background:#eef3f7!important
+}
+html body main.container #infographic #reportPage5{
+ box-sizing:border-box!important;width:1123px!important;min-width:1123px!important;
+ max-width:1123px!important;height:794px!important;min-height:794px!important;
+ max-height:794px!important;padding:28px 32px 24px!important;
+ display:flex!important;flex-direction:column!important;gap:12px!important;
+ grid-column:1 / -1!important;justify-self:center!important;overflow:hidden!important
+}
+html body main.container #infographic #reportPage5 .export-table-block{
+ flex:1 1 auto!important;min-height:0!important;overflow:hidden!important
+}
+html body main.container #infographic #reportPage5 .export-data-table{
+ width:100%!important;table-layout:fixed!important;border-collapse:collapse!important;
+ font-size:10px!important
+}
+html body main.container #infographic #reportPage5 .export-data-table th,
+html body main.container #infographic #reportPage5 .export-data-table td{
+ padding:6px 5px!important;font-size:10px!important;line-height:1.25!important;
+ text-align:center!important;vertical-align:middle!important;white-space:normal!important;
+ overflow-wrap:anywhere!important
+}
+html body main.container #infographic #reportPage5 .export-data-table th{
+ background:#005387!important;color:#fff!important
+}
+html body main.container #infographic #reportPage5 .export-rid-trend{
+ color:#fff!important;font-weight:600!important
+}
+html body main.container #infographic #reportPage5 .export-rid-trend.down{background:#598c14!important}
+html body main.container #infographic #reportPage5 .export-rid-trend.up{background:#f00a36!important}
+html body main.container #infographic #reportPage5 .export-rid-trend.steady{background:#388ed1!important}
+@media print{
+ html body main.container #infographic #reportPage5{
+  width:297mm!important;min-width:297mm!important;max-width:297mm!important;
+  height:210mm!important;min-height:210mm!important;max-height:210mm!important;
+  page-break-before:always!important;page-break-after:always!important
+ }
+}
+</style>
+<script id="flood-report-export-rid-page-live-map-20260917-v27-script">
+(function(){
+ "use strict";
+ var MAP_FALLBACK="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=3d24287ac6ea49cd823625ddad496e01&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=true&basemaps=true&center=100.38863619797984,14.34381658929649&scale=577790.554289";
+ var busy=false;
+ function esc(v){return String(v==null?"–":v).replace(/[&<>"']/g,function(x){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[x]})}
+ function ensureMap(){
+  var frameBox=document.querySelector("#infographic #reportCanvas .sheet-map-frame");
+  if(!frameBox)return;
+  frameBox.querySelectorAll("#infographicMap,#interactiveReportMap,#estatePinOverlay,#mapPlaceholder").forEach(function(el){el.remove()});
+  var exportMap=document.getElementById("exportOverviewFloodMap");
+  if(!exportMap){
+   exportMap=document.createElement("iframe");exportMap.id="exportOverviewFloodMap";
+   exportMap.title="แผนที่สถานการณ์น้ำท่วม";exportMap.loading="lazy";
+   exportMap.setAttribute("allow","fullscreen; geolocation");
+   exportMap.referrerPolicy="strict-origin-when-cross-origin";
+   frameBox.replaceChildren(exportMap);
+  }
+  var source=document.getElementById("overviewArcgisMap");
+  var src=source&&source.src||MAP_FALLBACK;
+  if(exportMap.src!==src)exportMap.src=src;
+ }
+ function ensurePage(){
+  var pages=document.querySelector("#infographic .report-pages");if(!pages)return null;
+  var page=document.getElementById("reportPage5");
+  if(!page){
+   page=document.createElement("section");page.id="reportPage5";
+   page.className="export-sheet landscape-sheet";page.dataset.reportPage="5";
+   page.innerHTML='<header class="sheet-header compact"><h2>สถานีตรวจวัดระดับน้ำที่เกี่ยวข้องกับนิคมฯ</h2><p class="shared-report-period">ข้อมูลเรียลไทม์จากกรมชลประทานและสถานีภายในรัศมี 120 กิโลเมตรจากนิคมอุตสาหกรรม</p></header>'+
+    '<section class="export-table-block"><table class="export-data-table"><thead><tr><th>สถานี</th><th>จังหวัด</th><th>นิคมฯ ที่ใกล้ที่สุด</th><th>ระยะห่าง</th><th>ระดับน้ำเทียบตลิ่ง (%)</th><th>ระดับน้ำปัจจุบัน</th><th>แนวโน้ม</th><th>ข้อมูลล่าสุด</th></tr></thead><tbody id="exportRidStationRows"><tr><td colspan="8">กำลังโหลดข้อมูลล่าสุด…</td></tr></tbody></table></section>'+
+    '<footer class="sheet-footer"><span>แหล่งข้อมูล: กรมชลประทาน (RID) · ตรวจสอบข้อมูลล่าสุดทุก 1 นาที</span><span>หน้า 5 / 5</span></footer>';
+   pages.appendChild(page);
+  }
+  return page;
+ }
+ function copyRows(){
+  var target=document.getElementById("exportRidStationRows");
+  var source=document.getElementById("ridStationRows");
+  if(!target||!source)return;
+  var rows=Array.from(source.querySelectorAll("tr")).slice(0,18);
+  target.innerHTML=rows.length?rows.map(function(row){
+   var cells=Array.from(row.cells);
+   if(cells.length<8)return '<tr><td colspan="8">'+esc(row.textContent.trim())+'</td></tr>';
+   return '<tr>'+cells.map(function(cell,index){
+    var text=cell.textContent.replace(/\s+/g," ").trim();
+    var cls="";
+    if(index===6){
+     cls=' class="export-rid-trend '+(/ลด/.test(text)?"down":/เพิ่ม/.test(text)?"up":"steady")+'"';
+    }
+    return "<td"+cls+">"+esc(text)+"</td>";
+   }).join("")+"</tr>";
+  }).join(""):'<tr><td colspan="8">ไม่พบข้อมูลสถานี</td></tr>';
+ }
+ function updateFooters(){
+  document.querySelectorAll("#infographic [data-report-page]").forEach(function(page){
+   var number=page.getAttribute("data-report-page");
+   var target=page.querySelector(".sheet-footer span:last-child");
+   if(target)target.textContent="หน้า "+number+" / 5";
+  });
+ }
+ function apply(){
+  if(busy)return;busy=true;
+  ensureMap();ensurePage();copyRows();updateFooters();
+  busy=false;
+ }
+ function start(){
+  apply();
+  var root=document.getElementById("infographic");if(root){
+   var observer=new MutationObserver(function(){clearTimeout(observer.t);observer.t=setTimeout(apply,30)});
+   observer.observe(root,{childList:true,subtree:true});
+  }
+  var rid=document.getElementById("ridStationRows");if(rid){
+   new MutationObserver(copyRows).observe(rid,{childList:true,subtree:true,characterData:true});
+  }
+  var map=document.getElementById("overviewArcgisMap");if(map){
+   new MutationObserver(ensureMap).observe(map,{attributes:true,attributeFilter:["src"]});
+  }
+  [100,400,900,1800,3500,6000,9000].forEach(function(ms){setTimeout(apply,ms)});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>
+
 </body>
 </html>
