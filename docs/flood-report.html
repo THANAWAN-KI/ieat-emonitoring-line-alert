@@ -11481,5 +11481,49 @@ html body main.container #warning #topFloodNine .force-new-flood-icon svg{
 })();
 </script>
 
+
+<style id="flood-report-remove-all-legacy-icons-20260917-v8">
+html body main.container #warning #topFloodNine :is(.kpi,.national-kpi,.daily-water-item)::before,
+html body main.container #warning #topFloodNine :is(.kpi,.national-kpi,.daily-water-item)::after{
+ content:none!important;display:none!important;width:0!important;height:0!important;
+ margin:0!important;padding:0!important;background:transparent!important;background-image:none!important
+}
+html body main.container #warning #topFloodNine :is(.icon,.n-icon,.kpi-icon,.drought-card-icon,.unified-flood-card-icon,.legacy-icon,.card-icon){
+ display:none!important;width:0!important;height:0!important;margin:0!important;padding:0!important
+}
+html body main.container #warning #topFloodNine .force-new-flood-icon,
+html body main.container #warning #topFloodNine .force-new-flood-icon svg{display:flex!important}
+</style>
+<script id="flood-report-remove-all-legacy-icons-20260917-v8-script">
+(function(){
+ "use strict";
+ var cleaning=false;
+ function clean(){
+  if(cleaning)return;cleaning=true;
+  var root=document.getElementById("topFloodNine");
+  if(root){
+   root.querySelectorAll(".kpi,.national-kpi,.daily-water-item").forEach(function(card){
+    card.querySelectorAll("svg,img,i,picture,.icon,.n-icon,.kpi-icon,.drought-card-icon,.unified-flood-card-icon,.legacy-icon,.card-icon").forEach(function(el){
+     if(!el.closest(".force-new-flood-icon"))el.remove();
+    });
+    Array.from(card.childNodes).forEach(function(node){
+     if(node.nodeType===3&&/^[\s⌂⌁⌖☂≋◉!🏠🌊]+$/u.test(node.textContent||""))node.remove();
+    });
+   });
+  }
+  cleaning=false;
+ }
+ function start(){
+  clean();
+  var root=document.getElementById("topFloodNine");
+  if(!root){setTimeout(start,100);return}
+  var observer=new MutationObserver(function(){clearTimeout(observer.t);observer.t=setTimeout(clean,15)});
+  observer.observe(root,{childList:true,subtree:true});
+  [50,200,500,1000,2500,5000,8000,11000,15000].forEach(function(ms){setTimeout(clean,ms)});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>
+
 </body>
 </html>
