@@ -11002,5 +11002,96 @@ html body main.container #warning .nearby-flood-risk-card #nearestWaterStationDi
 })();
 </script>
 
+
+<style id="flood-report-rid-dashboard-20260917-v1">
+#warning .top-overview-metrics .kpi span,#warning .top-overview-metrics .national-kpi h2,#warning .top-overview-metrics .national-kpi span,#warning .daily-water-item small,#warning .daily-water-item span,#warning .nearby-risk-detail-card h2,#warning .nearby-risk-detail-card p,#warning .nearby-risk-detail-item b{color:#005387!important}
+#warning .top-overview-metrics .kpi strong,#warning .top-overview-metrics .national-kpi strong,#warning .daily-water-item strong,#warning .nearby-risk-detail-head b,#warning .nearby-risk-detail-item strong{color:#8cb811!important}
+#warning .rid-water-dashboard{margin:18px 0;display:grid;gap:14px}
+#warning .rid-chart-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(280px,.75fr);gap:14px}
+#warning .rid-panel{background:#fff;border:0!important;border-radius:16px!important;box-shadow:0 5px 18px rgba(27,39,51,.09)!important;overflow:hidden}
+#warning .rid-panel-head{padding:15px 18px;background:#dbebfa}
+#warning .rid-panel-head h2{margin:0;color:#005387!important;font-size:18px}
+#warning .rid-panel-head p{margin:4px 0 0;color:#526675;font-size:12px}
+#warning .rid-level-chart{padding:14px 18px;display:grid;gap:10px}
+#warning .rid-level-row{display:grid;grid-template-columns:minmax(115px,1fr) minmax(150px,2fr) 62px;gap:10px;align-items:center;font-size:12px;color:#005387}
+#warning .rid-level-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#warning .rid-level-track{height:13px;border-radius:999px;background:#edf2f5;overflow:hidden;position:relative}
+#warning .rid-level-fill{height:100%;border-radius:999px;background:#8cb811}
+#warning .rid-level-fill.watch{background:#0091cd}.rid-level-fill.high{background:#ff0b00}
+#warning .rid-level-value{text-align:right;color:#005387;font-weight:700}
+#warning .rid-trend-chart{padding:20px 18px;min-height:270px;display:flex;align-items:flex-end;justify-content:space-around;gap:15px}
+#warning .rid-trend-col{height:220px;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:7px;color:#005387;font-size:12px}
+#warning .rid-trend-col strong{color:#8cb811;font-size:22px}
+#warning .rid-trend-bar{width:min(62px,80%);min-height:4px;border-radius:8px 8px 0 0;background:#8cb811}
+#warning .rid-trend-col.up .rid-trend-bar{background:#ff0b00}.rid-trend-col.steady .rid-trend-bar{background:#0091cd}
+#warning .rid-table-wrap{overflow:auto}
+#warning .rid-water-table{width:100%;border-collapse:collapse;min-width:980px;font-size:12px}
+#warning .rid-water-table th{padding:11px 10px;background:#005387;color:#fff;text-align:center;white-space:nowrap}
+#warning .rid-water-table td{padding:10px;border-bottom:1px solid #e7edf1;text-align:center;color:#344756}
+#warning .rid-water-table td:first-child{text-align:left;color:#005387;font-weight:700}
+#warning .rid-percent{color:#8cb811!important;font-weight:800}.rid-percent.high{color:#ff0b00!important}.rid-percent.watch{color:#0091cd!important}
+#warning .rid-live-status{padding:9px 18px;background:#f7f9fb;color:#667085;font-size:11px}
+@media(max-width:900px){#warning .rid-chart-grid{grid-template-columns:1fr}#warning .rid-level-row{grid-template-columns:minmax(100px,1fr) minmax(100px,1.5fr) 55px}}
+</style>
+<script id="flood-report-rid-dashboard-20260917-v1-script">
+(function(){
+"use strict";
+var URL="https://nawakonnakhonchai-wq.github.io/rid-geojson-bot/rid_realtime.geojson";
+var ESTATES=[
+["นิคมอุตสาหกรรมมาบตาพุด",12.715,101.145],["นิคมอุตสาหกรรมแหลมฉบัง",13.087,100.883],
+["นิคมอุตสาหกรรมบางปู",13.548,100.656],["นิคมอุตสาหกรรมบางชัน",13.821,100.712],
+["นิคมอุตสาหกรรมลาดกระบัง",13.735,100.794],["นิคมอุตสาหกรรมสมุทรสาคร",13.570,100.249],
+["นิคมอุตสาหกรรมภาคเหนือ",18.577,99.045],["นิคมอุตสาหกรรมพิจิตร",16.387,100.318],
+["นิคมอุตสาหกรรมภาคใต้",6.932,100.430],["นิคมอุตสาหกรรมอมตะซิตี้ ชลบุรี",13.435,101.002],
+["นิคมอุตสาหกรรมอมตะซิตี้ ระยอง",13.005,101.166],["นิคมอุตสาหกรรมอีสเทิร์นซีบอร์ด ระยอง",13.011,101.109],
+["นิคมอุตสาหกรรมเกตเวย์ซิตี้",13.616,101.322]
+];
+var busy=false;
+function esc(v){return String(v==null?"–":v).replace(/[&<>"']/g,function(x){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[x]})}
+function distance(a,b,c,d){var p=Math.PI/180,x=(d-b)*p,y=(c-a)*p,q=Math.sin(y/2)**2+Math.cos(a*p)*Math.cos(c*p)*Math.sin(x/2)**2;return 12742*Math.asin(Math.sqrt(q))}
+function mount(){
+ if(document.getElementById("ridWaterDashboard"))return;
+ var anchor=document.querySelector("#warning .operations-dashboard");
+ if(!anchor)return;
+ var section=document.createElement("section");section.id="ridWaterDashboard";section.className="rid-water-dashboard";
+ section.innerHTML='<div class="rid-chart-grid">'+
+ '<article class="rid-panel"><div class="rid-panel-head"><h2>กราฟระดับน้ำเทียบตลิ่ง (%)</h2><p>สถานีตรวจวัดที่เกี่ยวข้องกับพื้นที่นิคมฯ เรียงจากค่าสูงสุด</p></div><div class="rid-level-chart" id="ridLevelChart"><p>กำลังโหลดข้อมูลล่าสุด…</p></div></article>'+
+ '<article class="rid-panel"><div class="rid-panel-head"><h2>กราฟแนวโน้มระดับน้ำ</h2><p>จำนวนสถานีจำแนกตามแนวโน้มล่าสุด</p></div><div class="rid-trend-chart" id="ridTrendChart"><p>กำลังโหลดข้อมูลล่าสุด…</p></div></article></div>'+
+ '<article class="rid-panel"><div class="rid-panel-head"><h2>สถานีตรวจวัดระดับน้ำที่เกี่ยวข้องกับนิคมฯ</h2><p>คัดกรองสถานีภายในรัศมี 120 กิโลเมตรจากพื้นที่นิคมอุตสาหกรรม</p></div><div class="rid-table-wrap"><table class="rid-water-table"><thead><tr><th>สถานี</th><th>จังหวัด</th><th>นิคมฯ ที่ใกล้ที่สุด</th><th>ระยะห่าง</th><th>ระดับน้ำเทียบตลิ่ง (%)</th><th>ระดับน้ำปัจจุบัน</th><th>แนวโน้ม</th><th>ข้อมูลล่าสุด</th></tr></thead><tbody id="ridStationRows"><tr><td colspan="8">กำลังโหลดข้อมูลล่าสุด…</td></tr></tbody></table></div><div class="rid-live-status" id="ridLiveStatus">เชื่อมต่อข้อมูลกรมชลประทานแบบเรียลไทม์</div></article>';
+ anchor.insertAdjacentElement("afterend",section);
+}
+function normalize(json){
+ var rows=[];
+ (Array.isArray(json.features)?json.features:[]).forEach(function(f){
+  var p=f.properties||{},g=f.geometry||{},c=g.coordinates||[];
+  var lat=Number(p.Latitude!=null?p.Latitude:c[1]),lon=Number(p.Longitude!=null?p.Longitude:c[0]);
+  var pct=Number(p["ระดับน้ำเทียบตลิ่ง (%)"]);
+  if(!Number.isFinite(lat)||!Number.isFinite(lon)||!Number.isFinite(pct))return;
+  var nearest=null;
+  ESTATES.forEach(function(e){var d=distance(e[1],e[2],lat,lon);if(!nearest||d<nearest.distance)nearest={name:e[0],distance:d}});
+  if(!nearest||nearest.distance>120)return;
+  rows.push({code:p["รหัสสถานี"]||"",name:p["ชื่อสถานี"]||p["รหัสสถานี"]||"ไม่ระบุสถานี",province:p["จังหวัด"]||"–",pct:pct,level:Number(p["ระดับน้ำปัจจุบัน (ม.รทก.)"]),trend:p["แนวโน้มระดับน้ำ"]||"ไม่ระบุ",stamp:p["เวลาบันทึกข้อมูล (เวลาไทย)"]||p["เวลาบันทึกข้อมูล (UTC)"]||"",estate:nearest.name,distance:nearest.distance});
+ });
+ return rows.sort(function(a,b){return b.pct-a.pct});
+}
+function cls(v){return v>=100?"high":v>=80?"watch":""}
+function render(rows){
+ var chart=document.getElementById("ridLevelChart"),trend=document.getElementById("ridTrendChart"),body=document.getElementById("ridStationRows"),status=document.getElementById("ridLiveStatus");
+ var top=rows.slice(0,10);
+ if(chart)chart.innerHTML=top.length?top.map(function(r){return'<div class="rid-level-row"><span class="rid-level-name" title="'+esc(r.name)+'">'+esc(r.name)+'</span><div class="rid-level-track"><div class="rid-level-fill '+cls(r.pct)+'" style="width:'+Math.max(2,Math.min(100,r.pct))+'%"></div></div><span class="rid-level-value">'+r.pct.toLocaleString("th-TH",{maximumFractionDigits:1})+'%</span></div>'}).join(""):'<p>ไม่พบสถานีในรัศมีที่กำหนด</p>';
+ var counts={up:0,steady:0,down:0};
+ rows.forEach(function(r){if(/เพิ่ม/.test(r.trend))counts.up++;else if(/ลด/.test(r.trend))counts.down++;else counts.steady++});
+ var max=Math.max(1,counts.up,counts.steady,counts.down);
+ if(trend)trend.innerHTML=[["up","เพิ่มขึ้น",counts.up],["steady","คงที่",counts.steady],["down","ลดลง",counts.down]].map(function(x){return'<div class="rid-trend-col '+x[0]+'"><strong>'+x[2].toLocaleString("th-TH")+'</strong><div class="rid-trend-bar" style="height:'+Math.max(4,Math.round(x[2]/max*145))+'px"></div><span>'+x[1]+'</span></div>'}).join("");
+ if(body)body.innerHTML=rows.length?rows.slice(0,30).map(function(r){var stamp=r.stamp?new Date(r.stamp).toLocaleString("th-TH",{dateStyle:"short",timeStyle:"short"}):"–";return'<tr><td>'+esc(r.name)+(r.code?' <small>('+esc(r.code)+')</small>':'')+'</td><td>'+esc(r.province)+'</td><td>'+esc(r.estate.replace(/^นิคมอุตสาหกรรม/,"นิคมฯ "))+'</td><td>'+r.distance.toLocaleString("th-TH",{maximumFractionDigits:1})+' กม.</td><td class="rid-percent '+cls(r.pct)+'">'+r.pct.toLocaleString("th-TH",{maximumFractionDigits:2})+'%</td><td>'+(Number.isFinite(r.level)?r.level.toLocaleString("th-TH",{maximumFractionDigits:2})+" ม.รทก.":"–")+'</td><td>'+esc(r.trend)+'</td><td>'+esc(stamp)+'</td></tr>'}).join(""):'<tr><td colspan="8">ไม่พบสถานีในรัศมีที่กำหนด</td></tr>';
+ var stamps=rows.map(function(r){return r.stamp}).filter(Boolean).sort();
+ if(status)status.textContent="แสดง "+rows.length.toLocaleString("th-TH")+" สถานี"+(stamps.length?" • ข้อมูลต้นทางล่าสุด "+new Date(stamps[stamps.length-1]).toLocaleString("th-TH",{dateStyle:"medium",timeStyle:"short"}):"")+" • อัปเดตอัตโนมัติทุก 1 นาที";
+}
+async function refresh(){if(busy)return;busy=true;mount();try{var res=await fetch(URL+"?_="+Date.now(),{cache:"no-store"});if(!res.ok)throw Error("HTTP "+res.status);render(normalize(await res.json()))}catch(e){var s=document.getElementById("ridLiveStatus");if(s)s.textContent="ไม่สามารถโหลดข้อมูลกรมชลประทานล่าสุดได้";console.error(e)}finally{busy=false}}
+function start(){mount();refresh();setInterval(refresh,60000);document.addEventListener("visibilitychange",function(){if(!document.hidden)refresh()});window.addEventListener("focus",refresh)}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>
+
 </body>
 </html>
