@@ -978,9 +978,8 @@ async function render(){
  try{var rows=scoped(await load(),e);if(token!==renderId)return;
  rows.forEach(function(r){r.distance=Number.isFinite(r.x)&&Number.isFinite(r.y)?km(e[1],e[2],r.y,r.x):null});
  rows.sort(function(a,b){return(b.pct==null?-1:b.pct)-(a.pct==null?-1:a.pct)});await addTrends(rows);if(token!==renderId)return;overviewCharts(rows);
- var latestRows=rows.filter(function(r){return r.level!=null&&r.stamp}),alertRows=rows.filter(function(r){return r.pct!=null&&r.pct>=80});
- var cards=document.querySelectorAll("#summary .metric"),vals=[rows.length,latestRows.length,alertRows.length],names=["สถานีที่เกี่ยวข้องกับ "+name,"สถานีที่มีค่าระดับน้ำล่าสุด","สถานีที่มีสถานะเฝ้าระวังหรือสูง"];
- cards.forEach(function(c,i){var box=c.firstElementChild||c;box.innerHTML='<div class="wb-kpi-value">'+metricIcons[i]+'<b>'+vals[i].toLocaleString("th-TH")+' สถานี</b></div><span>'+names[i]+'</span>'});
+ var cards=document.querySelectorAll("#summary .metric"),titles=["พื้นที่ที่เลือก","แผนที่ระดับน้ำ","พร้อมติดตาม"],descriptions=[name,"สถานีและข้อมูลน้ำใกล้พื้นที่นิคมฯ","เชื่อมโยงข้อมูลเพื่อสนับสนุนการเฝ้าระวัง"];
+ cards.forEach(function(c,i){var box=c.firstElementChild||c;box.innerHTML='<b class="wb-summary-title">'+titles[i]+'</b><span>'+descriptions[i]+'</span>'});
  document.getElementById("wbArea").textContent=name+" • เกณฑ์เฝ้าระวัง 80–99.99% • น้ำล้นตลิ่ง ≥100%";
  document.getElementById("wbCount").textContent=rows.length.toLocaleString("th-TH")+" สถานี • อัปเดต "+new Date().toLocaleTimeString("th-TH",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
  var nearest=rows.filter(function(r){return r.distance!=null}).slice().sort(function(a,b){return a.distance-b.distance})[0],highest=rows.filter(function(r){return r.pct!=null})[0];
@@ -1228,18 +1227,45 @@ body.accident-mode .tabs .tab.active{color:#537b35!important;border-bottom-color
 
 <link rel="stylesheet" href="./mobile-responsive.css?v=20260915-1">
 <style id="water-status-cards-image-match-20260917">
-body.water-mode #summary{display:grid!important;grid-template-columns:1fr!important;gap:10px!important}
-body.water-mode #summary .metric{min-height:112px!important;padding:12px 18px!important;border-radius:0!important;display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important;box-shadow:none!important}
-body.water-mode #summary .metric:nth-child(1){background:#ed0b0b!important;border:2px solid #0091cd!important}
-body.water-mode #summary .metric:nth-child(2){background:#ff9208!important}
-body.water-mode #summary .metric:nth-child(3){background:#7ee318!important}
+body.water-mode #summary{
+ display:grid!important;
+ grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ gap:18px!important;
+ width:100%!important
+}
+body.water-mode #summary .metric{
+ min-height:150px!important;
+ padding:24px 22px!important;
+ border:0!important;
+ border-radius:20px!important;
+ background:#fff!important;
+ display:flex!important;
+ align-items:flex-start!important;
+ justify-content:flex-start!important;
+ text-align:left!important;
+ box-shadow:0 8px 24px rgba(27,39,51,.08)!important
+}
 body.water-mode #summary .metric>div{width:100%!important}
-body.water-mode #summary .wb-kpi-value{justify-content:center!important;gap:14px!important}
-body.water-mode #summary .wb-kpi-value svg{width:48px!important;height:48px!important;flex:0 0 48px!important;fill:#fff!important}
-body.water-mode #summary .wb-kpi-value b,
-body.water-mode #summary .metric>div>span{color:#fff!important;-webkit-text-fill-color:#fff!important;text-align:center!important}
-body.water-mode #summary .wb-kpi-value b{font-size:34px!important;font-weight:700!important}
-body.water-mode #summary .metric>div>span{margin:4px 0 0!important;font-size:17px!important;font-weight:600!important}
+body.water-mode #summary .wb-summary-title{
+ display:block!important;
+ margin:0 0 6px!important;
+ font-size:28px!important;
+ font-weight:600!important;
+ line-height:1.35!important
+}
+body.water-mode #summary .metric:nth-child(1) .wb-summary-title{color:#ed1b2e!important;-webkit-text-fill-color:#ed1b2e!important}
+body.water-mode #summary .metric:nth-child(2) .wb-summary-title{color:#c44a00!important;-webkit-text-fill-color:#c44a00!important}
+body.water-mode #summary .metric:nth-child(3) .wb-summary-title{color:#007a3d!important;-webkit-text-fill-color:#007a3d!important}
+body.water-mode #summary .metric>div>span{
+ display:block!important;
+ margin:0!important;
+ color:#000!important;
+ -webkit-text-fill-color:#000!important;
+ font-size:17px!important;
+ font-weight:400!important;
+ line-height:1.45!important;
+ text-align:center!important
+}
 body.water-mode .wb-risk-card-v8 .wb-head{min-height:150px!important;padding:16px!important;display:flex!important;flex-direction:column!important;justify-content:center!important;text-align:center!important;background:#004b72!important;border:0!important}
 body.water-mode .wb-risk-card-v8 .wb-head h2,
 body.water-mode .wb-risk-card-v8 .wb-head p,
@@ -1248,8 +1274,12 @@ body.water-mode .wb-risk-card-v8 .wb-head h2{font-size:25px!important;font-weigh
 body.water-mode .wb-risk-card-v8 .wb-head p{font-size:12px!important}
 body.water-mode .wb-risk-card-v8 .wb-badge{padding:0!important;background:transparent!important;font-size:38px!important;font-weight:700!important}
 @media(min-width:1101px){
- body.water-mode .dashboard>.left{height:auto!important;min-height:480px!important}
- body.water-mode #summary{grid-template-columns:1fr!important}
+ body.water-mode .dashboard>.left{height:auto!important;min-height:300px!important}
+}
+@media(max-width:760px){
+ body.water-mode #summary{grid-template-columns:1fr!important;gap:12px!important}
+ body.water-mode #summary .metric{min-height:125px!important}
+ body.water-mode #summary .wb-summary-title{font-size:24px!important}
 }
 </style>
 </body></html>
