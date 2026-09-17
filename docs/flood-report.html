@@ -12802,5 +12802,26 @@ html body main.container #warning #topFloodMap #overviewArcgisMap{
 })();
 </script>
 
+
+
+<style id="flood-report-center-three-water-tables-20260917-v26">
+html body main.container #warning :is(#estateWaterTablePair,#overviewFirstPageTables)
+ :is(.estate-watch-table,.station-watch-table,.rid-panel) :is(th,td){
+ text-align:center!important;vertical-align:middle!important
+}
+html body main.container #warning :is(#estateWaterTablePair,#overviewFirstPageTables)
+ :is(.estate-watch-table,.station-watch-table,.rid-panel) td>*{
+ margin-left:auto!important;margin-right:auto!important;text-align:center!important
+}
+html body main.container #warning #estateWaterTablePair :is(.station-name,.station-estate),
+html body main.container #warning #overviewFirstPageTables .rid-water-table td:first-child{
+ display:block!important;text-align:center!important
+}
+html body main.container #warning #estateWaterTablePair .map-cell-zoom,
+html body main.container #warning #overviewFirstPageTables .rid-trend-cell>span{
+ align-items:center!important;justify-content:center!important;text-align:center!important
+}
+</style>
+
 </body>
 </html>
