@@ -909,14 +909,14 @@ function normalizeFlood(f){
 }
 async function load(){
  if(cache)return cache;if(loading)return loading;
- loading=fetch(RID_URL+"?_="+Date.now(),{cache:"no-store",headers:{Accept:"application/geo+json,application/json","Cache-Control":"no-cache"}})
+ loading=fetch(RID_URL+"?_="+Date.now(),{cache:"no-store"})
  .then(function(r){if(!r.ok)throw Error("rid-realtime");return r.json()})
  .then(function(j){cache=(j.features||[]).map(normalizeRid);return cache})
  .finally(function(){loading=null});return loading;
 }
 async function loadFloodRisks(){
  if(riskCache)return riskCache;if(riskLoading)return riskLoading;
- riskLoading=fetch(FLOOD_URL+"?_="+Date.now(),{cache:"no-store",headers:{Accept:"application/geo+json,application/json","Cache-Control":"no-cache"}})
+ riskLoading=fetch(FLOOD_URL+"?_="+Date.now(),{cache:"no-store"})
  .then(function(r){if(!r.ok)throw Error("flashflood");return r.json()})
  .then(function(j){riskCache=(j.features||[]).map(normalizeFlood);return riskCache})
  .finally(function(){riskLoading=null});return riskLoading;
@@ -968,7 +968,7 @@ function ensure(){
  var root=document.querySelector(".dashboard");if(!root)return null;var el=document.getElementById("waterBankDashboard");if(el)return el;
  el=document.createElement("section");el.id="waterBankDashboard";el.innerHTML=
  '<section class="wb-decision-info-v3" id="wbDecisionInfo"><article class="wb-info-item"><span>สถานีใกล้นิคมฯ ที่สุด</span><strong id="wbNearest">–</strong><small id="wbNearestDetail">กำลังคำนวณระยะทาง</small></article><article class="wb-info-item"><span>สถานีระดับน้ำสูงสุด</span><strong id="wbHighest">–</strong><small id="wbHighestDetail">กำลังประเมินระดับเทียบตลิ่ง</small></article><article class="wb-info-item"><span>ข้อมูลล่าสุด</span><strong id="wbLatest">–</strong><small>ใช้ตรวจสอบความสดใหม่ของข้อมูล</small></article><article class="wb-info-item"><span>แม่น้ำ / ลุ่มน้ำที่เกี่ยวข้อง</span><strong id="wbRivers">–</strong><small id="wbRiverDetail">จากสถานีใกล้พื้นที่นิคมฯ</small></article></section><section class="wb-overview-charts-v2"><article class="wb-card"><header class="wb-head"><div><h2>ระดับน้ำเทียบตลิ่ง (%)</h2><p>เปรียบเทียบสถานีใกล้นิคมฯ • เส้นประสีแดงคือระดับตลิ่ง 100%</p></div><span class="wb-badge">กราฟเปอร์เซ็นต์</span></header><div class="wb-chart-body" id="wbPercentChart"><div class="wb-empty">กำลังโหลดกราฟ…</div></div></article><article class="wb-card"><header class="wb-head"><div><h2>กราฟแนวโน้มระดับน้ำ</h2><p>จำนวนสถานีที่ระดับน้ำเพิ่มขึ้น ลดลง หรือคงที่</p></div><span class="wb-badge">จำนวนสถานี</span></header><div class="wb-chart-body" id="wbTrendChart"><div class="wb-empty">กำลังคำนวณแนวโน้ม…</div></div></article></section><article class="wb-card wb-station-card-v8"><header class="wb-head"><div><h2>สถานีตรวจวัดระดับน้ำที่เกี่ยวข้องกับนิคมฯ</h2><p id="wbArea">ระดับน้ำเทียบตลิ่งและแนวโน้มระดับน้ำ</p></div><span class="wb-badge" id="wbCount">กำลังโหลด</span></header><div class="wb-scroll"><table class="wb-table"><thead><tr><th>ชื่อสถานี</th><th>แม่น้ำ / ลุ่มน้ำ</th><th>ระดับน้ำปัจจุบัน</th><th>ระดับน้ำเทียบตลิ่ง (%) — กราฟ</th><th>สูง/ต่ำกว่าตลิ่ง</th><th>สถานะ</th><th>แนวโน้มระดับน้ำ — กราฟย้อนหลัง</th><th>ระยะห่าง</th><th>ข้อมูลล่าสุด / หน่วยงาน</th></tr></thead><tbody id="wbRows"></tbody></table></div></article>'+
- '<article class="wb-card wb-risk-card-v8"><header class="wb-head"><div><h2>พื้นที่เสี่ยงน้ำท่วมใกล้นิคมฯ</h2><p>แสดงเฉพาะสถานีที่ระดับน้ำล้นตลิ่ง (ตั้งแต่ 100%)</p></div><span class="wb-badge" id="wbRiskCount">0 จุด</span></header><div class="wb-risk-list" id="wbRisks"></div></article>'+
+ '<article class="wb-card wb-risk-card-v8"><header class="wb-head"><div><h2>พื้นที่เสี่ยงน้ำท่วมใกล้นิคมฯ</h2><p>จุดเสี่ยงจากข้อมูลฝนสะสม 48 ชั่วโมง</p></div><span class="wb-badge" id="wbRiskCount">0 จุด</span></header><div class="wb-risk-list" id="wbRisks"></div></article>'+
  '';
  root.appendChild(el);var charts=el.querySelector(".wb-overview-charts-v2"),percent=charts&&charts.firstElementChild,left=root.querySelector(".left");if(percent&&left)left.appendChild(percent);var source=el.querySelector(".wb-source");if(source)source.remove();return el;
 }
@@ -996,7 +996,7 @@ async function render(){
  var floodRows=scopedFlood(await loadFloodRisks(),e);if(token!==renderId)return;
  floodRows.forEach(function(r){r.distance=Number.isFinite(r.x)&&Number.isFinite(r.y)?km(e[1],e[2],r.y,r.x):null});
  floodRows.sort(function(a,b){return(b.rain48==null?-1:b.rain48)-(a.rain48==null?-1:a.rain48)});
- document.getElementById("wbRiskCount").textContent=floodRows.length.toLocaleString("th-TH")+" จุด";
+ document.getElementById("wbRiskCount").textContent=floodRows.length.toLocaleString("th-TH")+" แห่ง";
  risks.innerHTML=floodRows.length?floodRows.slice(0,30).map(function(r){return'<div class="wb-risk wb-flood-map-target" data-risk="'+floodRows.indexOf(r)+'" tabindex="0" title="คลิกเพื่อซูมแผนที่ไปยังจุดเสี่ยง"><b>'+esc(r.name)+'</b><span>'+esc(r.location||"ไม่ระบุพื้นที่")+' • '+esc(r.agency||"ไม่ระบุหน่วยงาน")+'</span><span>ฝนสะสม 48 ชั่วโมง <strong>'+(r.rain48==null?"ไม่พบข้อมูล":r.rain48.toLocaleString("th-TH",{maximumFractionDigits:1})+" มม.")+'</strong></span><span>ระยะห่างจาก '+esc(name)+' <strong>'+(r.distance==null?"ไม่พบพิกัด":r.distance.toLocaleString("th-TH",{maximumFractionDigits:1})+" กม.")+'</strong></span><span>ข้อมูลล่าสุด '+esc(r.stamp||"ไม่ระบุเวลา")+'</span></div>'}).join(""):'<div class="wb-empty">ไม่พบจุดเสี่ยงน้ำท่วมใกล้พื้นที่ที่เลือก</div>';
  document.querySelectorAll("#waterBankDashboard .wb-flood-map-target").forEach(function(el){var row=floodRows[+el.dataset.risk];el.onclick=function(){focusWaterMap(row)};el.onkeydown=function(ev){if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();focusWaterMap(row)}}});
  document.querySelectorAll("#waterBankDashboard .wb-map-target").forEach(function(el){var row=rows[+el.dataset.row];el.onclick=function(){focusWaterMap(row)};el.onkeydown=function(ev){if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();focusWaterMap(row)}}});
@@ -1227,4 +1227,29 @@ body.accident-mode .tabs .tab.active{color:#537b35!important;border-bottom-color
 </script>
 
 <link rel="stylesheet" href="./mobile-responsive.css?v=20260915-1">
+<style id="water-status-cards-image-match-20260917">
+body.water-mode #summary{display:grid!important;grid-template-columns:1fr!important;gap:10px!important}
+body.water-mode #summary .metric{min-height:112px!important;padding:12px 18px!important;border-radius:0!important;display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important;box-shadow:none!important}
+body.water-mode #summary .metric:nth-child(1){background:#ed0b0b!important;border:2px solid #0091cd!important}
+body.water-mode #summary .metric:nth-child(2){background:#ff9208!important}
+body.water-mode #summary .metric:nth-child(3){background:#7ee318!important}
+body.water-mode #summary .metric>div{width:100%!important}
+body.water-mode #summary .wb-kpi-value{justify-content:center!important;gap:14px!important}
+body.water-mode #summary .wb-kpi-value svg{width:48px!important;height:48px!important;flex:0 0 48px!important;fill:#fff!important}
+body.water-mode #summary .wb-kpi-value b,
+body.water-mode #summary .metric>div>span{color:#fff!important;-webkit-text-fill-color:#fff!important;text-align:center!important}
+body.water-mode #summary .wb-kpi-value b{font-size:34px!important;font-weight:700!important}
+body.water-mode #summary .metric>div>span{margin:4px 0 0!important;font-size:17px!important;font-weight:600!important}
+body.water-mode .wb-risk-card-v8 .wb-head{min-height:150px!important;padding:16px!important;display:flex!important;flex-direction:column!important;justify-content:center!important;text-align:center!important;background:#004b72!important;border:0!important}
+body.water-mode .wb-risk-card-v8 .wb-head h2,
+body.water-mode .wb-risk-card-v8 .wb-head p,
+body.water-mode .wb-risk-card-v8 .wb-badge{color:#fff!important;-webkit-text-fill-color:#fff!important}
+body.water-mode .wb-risk-card-v8 .wb-head h2{font-size:25px!important;font-weight:500!important}
+body.water-mode .wb-risk-card-v8 .wb-head p{font-size:12px!important}
+body.water-mode .wb-risk-card-v8 .wb-badge{padding:0!important;background:transparent!important;font-size:38px!important;font-weight:700!important}
+@media(min-width:1101px){
+ body.water-mode .dashboard>.left{height:auto!important;min-height:480px!important}
+ body.water-mode #summary{grid-template-columns:1fr!important}
+}
+</style>
 </body></html>
