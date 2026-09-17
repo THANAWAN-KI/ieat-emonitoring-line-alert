@@ -905,7 +905,7 @@ function normalizeThai(a){
 }
 async function load(){
  if(cache)return cache;if(loading)return loading;
- loading=fetch("https://api-v3.thaiwater.net/api/v1/thaiwater30/public/waterlevel_load",{headers:{Accept:"application/json"}})
+ loading=fetch("https://api-v3.thaiwater.net/api/v1/thaiwater30/public/waterlevel_load?_="+Date.now(),{cache:"no-store",headers:{Accept:"application/json","Cache-Control":"no-cache"}})
  .then(function(r){if(!r.ok)throw Error("thaiwater");return r.json()})
  .then(function(j){var data=(j.waterlevel_data&&j.waterlevel_data.data)||j.data||[];cache=data.map(normalizeThai);return cache})
  .finally(function(){loading=null});return loading;
@@ -916,7 +916,7 @@ function historyValues(j){
 }
 async function addTrends(rows){
  var end=new Date(),start=new Date(end.getTime()-3*86400000),date=function(d){return d.toISOString().slice(0,10)};
- await Promise.all(rows.slice(0,30).map(async function(r){if(!r.stationId)return;try{var u="https://api-v3.thaiwater.net/api/v1/thaiwater30/public/waterlevel_graph?station_type=tele_waterlevel&station_id="+encodeURIComponent(r.stationId)+"&start_date="+date(start)+"&end_date="+date(end),j=await fetch(u,{headers:{Accept:"application/json"}}).then(function(x){return x.json()}),v=historyValues(j);if(v.length>1)r.series=v}catch(e){}}));
+ await Promise.all(rows.slice(0,30).map(async function(r){if(!r.stationId)return;try{var u="https://api-v3.thaiwater.net/api/v1/thaiwater30/public/waterlevel_graph?station_type=tele_waterlevel&station_id="+encodeURIComponent(r.stationId)+"&start_date="+date(start)+"&end_date="+date(end),j=await fetch(u+"&_="+Date.now(),{cache:"no-store",headers:{Accept:"application/json","Cache-Control":"no-cache"}}).then(function(x){if(!x.ok)throw Error("thaiwater-history");return x.json()}),v=historyValues(j);if(v.length>1)r.series=v}catch(e){}}));
  var previous={};try{previous=JSON.parse(localStorage.getItem("ieat-water-level-snapshot")||"{}")||{}}catch(e){}
  rows.forEach(function(r){
   if(r.level==null)return;
@@ -983,7 +983,7 @@ async function render(){
  var cards=document.querySelectorAll("#summary .metric"),vals=[counts.overflow,counts.watch,counts.normal],names=["น้ำล้นตลิ่ง","เฝ้าระวัง","ปกติ"];
  cards.forEach(function(c,i){var box=c.firstElementChild||c;box.innerHTML='<div class="wb-kpi-value">'+metricIcons[i]+'<b>'+vals[i].toLocaleString("th-TH")+' สถานี</b></div><span>'+names[i]+'</span>'});
  document.getElementById("wbArea").textContent=name+" • เกณฑ์เฝ้าระวัง 80–99.99% • น้ำล้นตลิ่ง ≥100%";
- document.getElementById("wbCount").textContent=rows.length.toLocaleString("th-TH")+" สถานี";
+ document.getElementById("wbCount").textContent=rows.length.toLocaleString("th-TH")+" สถานี • อัปเดต "+new Date().toLocaleTimeString("th-TH",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
  var nearest=rows.filter(function(r){return r.distance!=null}).slice().sort(function(a,b){return a.distance-b.distance})[0],highest=rows.filter(function(r){return r.pct!=null})[0];
  var stamps=rows.map(function(r){return r.stamp}).filter(Boolean).sort().reverse(),riverNames=Array.from(new Set(rows.map(function(r){return r.river||r.basin}).filter(Boolean)));
  document.getElementById("wbNearest").textContent=nearest?nearest.name:"ไม่พบสถานี";
@@ -1004,7 +1004,11 @@ function schedule(){setTimeout(render,420)}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",function(){ensure();schedule()},{once:true});else{ensure();schedule()}
 document.querySelectorAll('.tab[data-tab="water"]').forEach(function(t){t.addEventListener("click",schedule)});
 var scope=document.getElementById("scopeBtn");if(scope)new MutationObserver(schedule).observe(scope,{childList:true,characterData:true,subtree:true});
-setInterval(function(){cache=null;render()},300000);
+function refreshWaterNow(){cache=null;if(typeof activeTab!=="undefined"&&activeTab==="water")render()}
+setInterval(refreshWaterNow,60000);
+document.addEventListener("visibilitychange",function(){if(!document.hidden)refreshWaterNow()});
+window.addEventListener("focus",refreshWaterNow);
+window.addEventListener("online",refreshWaterNow);
 })();
 </script>
 
