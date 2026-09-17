@@ -12065,5 +12065,163 @@ html body main.container #warning #overviewFirstPageTables .rid-live-status{
 }
 </style>
 
+
+
+<style id="flood-report-reference-style-water-charts-20260917-v17">
+/* RID charts styled to match the supplied reference images. */
+html body main.container #warning .rid-chart-grid{
+ grid-template-columns:minmax(0,1.35fr) minmax(340px,.9fr)!important;
+ gap:16px!important;align-items:stretch!important
+}
+html body main.container #warning .rid-chart-grid>.rid-panel{
+ min-width:0!important;min-height:390px!important;
+ background:#fff!important;border:0!important;border-radius:22px!important;
+ box-shadow:0 7px 22px rgba(34,50,70,.08)!important;overflow:hidden!important
+}
+html body main.container #warning .rid-chart-grid .rid-panel-head{
+ position:relative!important;min-height:96px!important;padding:20px 150px 16px 22px!important;
+ background:#fff!important;border-bottom:1px solid #e5e9ee!important
+}
+html body main.container #warning .rid-chart-grid .rid-panel-head h2{
+ margin:0!important;color:#005387!important;font-size:20px!important;
+ font-weight:600!important;line-height:1.35!important
+}
+html body main.container #warning .rid-chart-grid .rid-panel-head p{
+ margin:4px 0 0!important;color:#111!important;font-size:12px!important;line-height:1.45!important
+}
+html body main.container #warning .rid-chart-grid>.rid-panel:first-child .rid-panel-head::after{
+ content:"กราฟเปอร์เซ็นต์";position:absolute;top:18px;right:18px;
+ padding:10px 14px;border-radius:999px;background:#eef7fc;color:#0091cd;
+ font-size:12px;font-weight:500;white-space:nowrap
+}
+html body main.container #warning .rid-chart-grid>.rid-panel:nth-child(2) .rid-panel-head::after{
+ content:"จำนวนสถานี";position:absolute;top:18px;right:18px;
+ padding:10px 14px;border-radius:999px;background:#eef7fc;color:#0091cd;
+ font-size:12px;font-weight:500;white-space:nowrap
+}
+/* Percentage-to-bank vertical bars. */
+html body main.container #warning #ridLevelChart{
+ position:relative!important;display:flex!important;align-items:flex-end!important;
+ justify-content:space-around!important;gap:14px!important;
+ height:292px!important;max-height:none!important;padding:30px 22px 14px!important;
+ overflow:hidden!important;
+ background:
+  repeating-linear-gradient(to bottom,transparent 0,transparent 44px,#e7ebf0 45px,#e7ebf0 46px)!important
+}
+html body main.container #warning #ridLevelChart::after{
+ content:"";position:absolute;z-index:1;left:26px;right:20px;top:60px;
+ border-top:2px dashed #ed2b22;pointer-events:none
+}
+html body main.container #warning #ridLevelChart .rid-level-row{
+ position:relative!important;z-index:2!important;display:flex!important;flex:1 1 0!important;
+ min-width:0!important;max-width:118px!important;height:245px!important;
+ flex-direction:column!important;align-items:center!important;justify-content:flex-end!important;
+ gap:6px!important;padding:0!important;margin:0!important;font-size:12px!important
+}
+html body main.container #warning #ridLevelChart .rid-level-row:nth-child(n+7){
+ display:none!important
+}
+html body main.container #warning #ridLevelChart .rid-level-value{
+ order:1!important;width:100%!important;text-align:center!important;color:#172238!important;
+ font-size:11px!important;font-weight:700!important;line-height:1!important
+}
+html body main.container #warning #ridLevelChart .rid-level-track{
+ order:2!important;display:block!important;width:min(94px,82%)!important;
+ height:var(--rid-bar-height,150px)!important;min-height:8px!important;max-height:190px!important;
+ flex:0 0 auto!important;border-radius:5px 5px 0 0!important;
+ background:transparent!important;overflow:hidden!important
+}
+html body main.container #warning #ridLevelChart .rid-level-fill{
+ display:block!important;width:100%!important;height:100%!important;
+ border-radius:5px 5px 0 0!important;background:#ff930d!important
+}
+html body main.container #warning #ridLevelChart .rid-level-fill.high{background:#e22b20!important}
+html body main.container #warning #ridLevelChart .rid-level-fill.watch{background:#ff930d!important}
+html body main.container #warning #ridLevelChart .rid-level-name{
+ order:3!important;width:100%!important;min-height:30px!important;
+ overflow:hidden!important;color:#657080!important;font-size:11px!important;
+ line-height:1.3!important;text-align:center!important;text-overflow:ellipsis!important;
+ white-space:nowrap!important
+}
+/* Trend chart vertical columns. */
+html body main.container #warning #ridTrendChart{
+ position:relative!important;display:flex!important;align-items:flex-end!important;
+ justify-content:space-around!important;gap:26px!important;
+ height:292px!important;min-height:292px!important;padding:34px 24px 18px!important;
+ overflow:hidden!important;
+ background:
+  repeating-linear-gradient(to bottom,transparent 0,transparent 56px,#e7ebf0 57px,#e7ebf0 58px)!important
+}
+html body main.container #warning #ridTrendChart .rid-trend-col{
+ position:relative!important;z-index:2!important;display:flex!important;flex:1 1 0!important;
+ max-width:120px!important;height:235px!important;flex-direction:column!important;
+ align-items:center!important;justify-content:flex-end!important;gap:8px!important
+}
+html body main.container #warning #ridTrendChart .rid-trend-col strong{
+ order:1!important;color:#172238!important;font-size:13px!important;
+ font-weight:700!important;line-height:1!important
+}
+html body main.container #warning #ridTrendChart .rid-trend-col strong::after{
+ content:" สถานี";font-weight:700
+}
+html body main.container #warning #ridTrendChart .rid-trend-bar{
+ order:2!important;width:min(108px,90%)!important;min-height:8px!important;
+ max-height:180px!important;border-radius:7px 7px 0 0!important
+}
+html body main.container #warning #ridTrendChart .rid-trend-col.up .rid-trend-bar{background:#e22b20!important}
+html body main.container #warning #ridTrendChart .rid-trend-col.down .rid-trend-bar{background:#07864e!important}
+html body main.container #warning #ridTrendChart .rid-trend-col.steady .rid-trend-bar{background:#707b91!important}
+html body main.container #warning #ridTrendChart .rid-trend-col span{
+ order:3!important;color:#172238!important;font-size:12px!important;
+ font-weight:600!important;text-align:center!important;white-space:nowrap!important
+}
+@media(max-width:1050px){
+ html body main.container #warning .rid-chart-grid{grid-template-columns:1fr!important}
+ html body main.container #warning .rid-chart-grid>.rid-panel{min-height:380px!important}
+}
+@media(max-width:600px){
+ html body main.container #warning .rid-chart-grid .rid-panel-head{padding-right:22px!important;padding-top:64px!important}
+ html body main.container #warning #ridLevelChart{gap:5px!important;padding-left:8px!important;padding-right:8px!important}
+ html body main.container #warning #ridTrendChart{gap:10px!important}
+}
+</style>
+<script id="flood-report-reference-style-water-charts-20260917-v17-script">
+(function(){
+ "use strict";
+ var busy=false;
+ function enhance(){
+  if(busy)return;busy=true;
+  var level=document.getElementById("ridLevelChart");
+  if(level){
+   level.querySelectorAll(".rid-level-row").forEach(function(row){
+    var value=row.querySelector(".rid-level-value");
+    var pct=parseFloat((value&&value.textContent||"").replace(/[^0-9.-]/g,""));
+    if(Number.isFinite(pct)){
+     var height=Math.max(8,Math.min(190,Math.round(pct/120*190)));
+     row.style.setProperty("--rid-bar-height",height+"px");
+    }
+   });
+  }
+  var trend=document.getElementById("ridTrendChart");
+  if(trend){
+   ["up","down","steady"].forEach(function(name){
+    var col=trend.querySelector(".rid-trend-col."+name);
+    if(col)trend.appendChild(col);
+   });
+  }
+  busy=false;
+ }
+ function start(){
+  enhance();
+  var root=document.querySelector("#warning .rid-chart-grid");
+  if(!root){setTimeout(start,100);return}
+  var observer=new MutationObserver(function(){clearTimeout(observer.t);observer.t=setTimeout(enhance,20)});
+  observer.observe(root,{childList:true,subtree:true,characterData:true});
+  [100,400,900,1800,3500,6000].forEach(function(ms){setTimeout(enhance,ms)});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>
+
 </body>
 </html>
