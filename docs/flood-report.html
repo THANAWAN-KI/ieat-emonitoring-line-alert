@@ -11300,5 +11300,86 @@ html body #warning .flood-card-icon svg{display:block!important;width:100%!impor
 })();
 </script>
 
+
+<style id="flood-report-top-dashboard-order-20260917-v5">
+#warning .top-flood-dashboard{
+ display:grid!important;grid-template-columns:minmax(620px,1.62fr) minmax(430px,1fr)!important;
+ gap:14px!important;align-items:stretch!important;margin:0 0 18px!important
+}
+#warning .top-flood-left{display:grid;grid-template-rows:auto auto;gap:14px;min-width:0}
+#warning .top-flood-nine{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:10px!important}
+#warning .top-flood-nine>.grid.kpis,
+#warning .top-flood-nine>.national-cards-dashboard,
+#warning .top-flood-nine>.daily-water-grid{display:contents!important}
+#warning .top-flood-nine .kpi,
+#warning .top-flood-nine .national-kpi,
+#warning .top-flood-nine .daily-water-item{
+ display:grid!important;grid-template-columns:52px minmax(0,1fr)!important;
+ align-items:center!important;gap:10px!important;min-height:124px!important;
+ margin:0!important;padding:14px!important;background:#fff!important;
+ border:0!important;border-radius:14px!important;box-shadow:0 5px 18px rgba(27,39,51,.09)!important;
+ text-align:center!important
+}
+#warning .top-flood-nine .flood-card-icon{grid-column:1!important;grid-row:1 / span 4!important;margin:auto!important}
+#warning .top-flood-nine .kpi>div,
+#warning .top-flood-nine .national-kpi>*:not(.flood-card-icon),
+#warning .top-flood-nine .daily-water-item>*:not(.flood-card-icon){grid-column:2!important}
+#warning .top-flood-nine .national-kpi h2{min-height:0!important;margin:0!important}
+#warning .top-flood-nine .source-link{font-size:10px!important;margin-top:3px!important}
+#warning .top-flood-nine .daily-water-item:nth-child(2){display:none!important}
+#warning .top-flood-left>.nationwide-indicators{width:100%!important;margin:0!important;min-height:0!important}
+#warning .top-flood-map{min-width:0;min-height:100%;display:flex}
+#warning .top-flood-map>.operations-map{width:100%!important;height:auto!important;min-height:620px!important;margin:0!important}
+#warning .top-flood-map>.operations-map iframe{height:100%!important;min-height:620px!important}
+#warning .top-overview-grid,#warning .watch-dashboard-block,#warning .national-situation-block{margin:0!important}
+#warning .watch-dashboard-block:empty,#warning .national-situation-block:empty,#warning .daily-water-report:empty{display:none!important}
+#warning .operations-section-title{display:none!important}
+#warning .water-monitoring-stack>.nationwide-indicators{display:none!important}
+@media(max-width:1100px){
+ #warning .top-flood-dashboard{grid-template-columns:1fr!important}
+ #warning .top-flood-map>.operations-map,#warning .top-flood-map>.operations-map iframe{min-height:560px!important}
+}
+@media(max-width:720px){
+ #warning .top-flood-nine{grid-template-columns:1fr!important}
+ #warning .top-flood-nine .kpi,#warning .top-flood-nine .national-kpi,#warning .top-flood-nine .daily-water-item{min-height:108px!important}
+}
+</style>
+<script id="flood-report-top-dashboard-order-20260917-v5-script">
+(function(){
+ "use strict";
+ function placeTop(){
+  var view=document.getElementById("warning");if(!view)return;
+  var dashboard=document.getElementById("topFloodDashboard");
+  if(!dashboard){
+   dashboard=document.createElement("section");dashboard.id="topFloodDashboard";dashboard.className="top-flood-dashboard";
+   dashboard.innerHTML='<div class="top-flood-left"><div class="top-flood-nine" id="topFloodNine"></div></div><div class="top-flood-map" id="topFloodMap"></div>';
+   view.insertBefore(dashboard,view.firstChild);
+  }
+  var left=dashboard.querySelector(".top-flood-left"),nine=document.getElementById("topFloodNine"),mapHost=document.getElementById("topFloodMap");
+  var kpis=document.querySelector("#warning .grid.kpis");
+  var nationals=document.querySelector("#warning .national-cards-dashboard");
+  var daily=document.querySelector("#warning .daily-water-grid");
+  var indicator=document.querySelector("#warning .nationwide-indicators");
+  var map=document.querySelector("#warning .operations-map");
+  if(kpis&&kpis.parentNode!==nine)nine.appendChild(kpis);
+  if(nationals&&nationals.parentNode!==nine)nine.appendChild(nationals);
+  if(daily&&daily.parentNode!==nine)nine.appendChild(daily);
+  if(indicator&&indicator.parentNode!==left)left.appendChild(indicator);
+  if(map&&map.parentNode!==mapHost)mapHost.appendChild(map);
+  var dailyReport=document.querySelector("#warning .daily-water-report");
+  if(dailyReport)dailyReport.style.setProperty("display","none","important");
+  var row=document.getElementById("nationwideMonitoringRow");if(row)row.style.setProperty("display","none","important");
+ }
+ function start(){
+  placeTop();
+  [100,500,1200,2600,4200,6200,8500].forEach(function(ms){setTimeout(placeTop,ms)});
+  var observer=new MutationObserver(function(){clearTimeout(observer.t);observer.t=setTimeout(placeTop,40)});
+  observer.observe(document.getElementById("warning"),{childList:true,subtree:true});
+  setTimeout(function(){observer.disconnect();placeTop()},12000);
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>
+
 </body>
 </html>
