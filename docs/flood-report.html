@@ -12730,5 +12730,77 @@ html body main.container #warning #overviewFirstPageTables .rid-water-table td.r
 })();
 </script>
 
+
+
+<style id="flood-report-restore-top-map-20260917-v25">
+html body main.container #warning #topFloodDashboard{
+ display:grid!important;visibility:visible!important;width:100%!important;
+ grid-template-columns:minmax(620px,1.62fr) minmax(430px,1fr)!important
+}
+html body main.container #warning #topFloodMap{
+ display:flex!important;visibility:visible!important;min-width:0!important;
+ min-height:620px!important;height:auto!important;overflow:hidden!important
+}
+html body main.container #warning #topFloodMap>.operations-map{
+ display:block!important;visibility:visible!important;width:100%!important;height:100%!important;
+ min-height:620px!important;margin:0!important;overflow:hidden!important
+}
+html body main.container #warning #topFloodMap #overviewArcgisMap{
+ display:block!important;visibility:visible!important;opacity:1!important;
+ width:100%!important;height:100%!important;min-height:620px!important;
+ border:0!important;background:#eef3f7!important
+}
+@media(max-width:1100px){
+ html body main.container #warning #topFloodDashboard{grid-template-columns:1fr!important}
+ html body main.container #warning #topFloodMap,
+ html body main.container #warning #topFloodMap>.operations-map,
+ html body main.container #warning #topFloodMap #overviewArcgisMap{min-height:560px!important}
+}
+</style>
+<script id="flood-report-restore-top-map-20260917-v25-script">
+(function(){
+ "use strict";
+ var MAP_URL="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=3d24287ac6ea49cd823625ddad496e01&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=true&basemaps=true&center=100.38863619797984,14.34381658929649&scale=577790.554289";
+ var working=false;
+ function restore(){
+  if(working)return;working=true;
+  var warning=document.getElementById("warning");
+  if(!warning){working=false;return}
+  var dashboard=document.getElementById("topFloodDashboard");
+  if(!dashboard){
+   dashboard=document.createElement("section");dashboard.id="topFloodDashboard";dashboard.className="top-flood-dashboard";
+   dashboard.innerHTML='<div class="top-flood-left"><div class="top-flood-nine" id="topFloodNine"></div></div><div class="top-flood-map" id="topFloodMap"></div>';
+   warning.insertBefore(dashboard,warning.firstChild);
+  }
+  var host=document.getElementById("topFloodMap");
+  if(!host){
+   host=document.createElement("div");host.id="topFloodMap";host.className="top-flood-map";dashboard.appendChild(host);
+  }
+  var map=warning.querySelector(".operations-map");
+  if(!map){
+   map=document.createElement("article");map.className="card operations-map embedded-water-map";
+   map.innerHTML='<div class="overview-map-label"><b>แผนที่สถานการณ์น้ำท่วม</b><small>เลื่อนแผนที่หรือซูมเข้า–ออกเพื่อดูรายละเอียด</small></div>'+
+    '<iframe id="overviewArcgisMap" class="thaiwater-risk-map" title="แผนที่สถานการณ์น้ำ" loading="lazy" allow="fullscreen; geolocation" referrerpolicy="strict-origin-when-cross-origin"></iframe>';
+  }
+  if(map.parentNode!==host)host.appendChild(map);
+  var frame=map.querySelector("#overviewArcgisMap");
+  if(!frame){
+   frame=document.createElement("iframe");frame.id="overviewArcgisMap";frame.className="thaiwater-risk-map";
+   frame.title="แผนที่สถานการณ์น้ำ";frame.loading="lazy";map.appendChild(frame);
+  }
+  if(!frame.src||frame.src==="about:blank")frame.src=MAP_URL;
+  working=false;
+ }
+ function start(){
+  restore();
+  var warning=document.getElementById("warning");if(!warning){setTimeout(start,100);return}
+  var observer=new MutationObserver(function(){clearTimeout(observer.t);observer.t=setTimeout(restore,30)});
+  observer.observe(warning,{childList:true,subtree:true});
+  [50,150,350,700,1200,2200,4000,7000,11000,15000].forEach(function(ms){setTimeout(restore,ms)});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>
+
 </body>
 </html>
