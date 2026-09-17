@@ -436,5 +436,29 @@ html body main.wrap>.dashboard-head{
   prepareRows();
 })();
 </script>
+<style id="pm25-card-icons-20260917-v1">
+html body main.wrap .kpi-icon img{display:block!important;width:38px!important;height:38px!important;max-width:100%!important;object-fit:contain}
+</style>
+<script id="pm25-card-icons-20260917-v1">
+(function(){
+  var icons=[
+    'assets/pm25-icons/card-1.svg','assets/pm25-icons/card-2.svg',
+    'assets/pm25-icons/card-3.svg','assets/pm25-icons/card-4.svg',
+    'assets/pm25-icons/card-5.svg','assets/pm25-icons/card-6.svg'
+  ];
+  function replaceCardIcons(){
+    document.querySelectorAll('main.wrap .kpis .kpi-icon').forEach(function(slot,index){
+      if(!icons[index])return;
+      var image=document.createElement('img');
+      image.src=icons[index];
+      image.alt='';
+      image.setAttribute('aria-hidden','true');
+      slot.replaceChildren(image);
+    });
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',replaceCardIcons);
+  else replaceCardIcons();
+})();
+</script>
 <link rel="stylesheet" href="./mobile-responsive.css?v=20260915-1">
 </body> </html>
