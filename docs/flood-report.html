@@ -11427,5 +11427,59 @@ html body main.container #warning #topFloodNine small{font-size:clamp(13px,1vw,1
 }
 </style>
 
+
+<style id="flood-report-force-nine-icons-20260917-v7">
+html body main.container #warning #topFloodNine :is(.kpi,.national-kpi,.daily-water-item)::before,
+html body main.container #warning #topFloodNine :is(.kpi,.national-kpi,.daily-water-item)::after{
+ content:none!important;display:none!important;background:none!important;width:0!important;height:0!important
+}
+html body main.container #warning #topFloodNine .force-new-flood-icon{
+ display:flex!important;grid-column:1!important;grid-row:1 / span 5!important;
+ align-items:center!important;justify-content:center!important;align-self:center!important;justify-self:center!important;
+ width:50px!important;height:50px!important;min-width:50px!important;margin:0!important;padding:0!important;
+ background:transparent!important;border:0!important;opacity:1!important;visibility:visible!important
+}
+html body main.container #warning #topFloodNine .force-new-flood-icon svg{
+ display:block!important;width:46px!important;height:46px!important;max-width:46px!important;max-height:46px!important;
+ overflow:visible!important;opacity:1!important;visibility:visible!important
+}
+</style>
+<script id="flood-report-force-nine-icons-20260917-v7-script">
+(function(){
+ "use strict";
+ var blue="#2754ba";
+ var icons=[
+  '<svg viewBox="0 0 32 32"><g fill="none" stroke="'+blue+'" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round"><path d="M8.7 3.8s-2.2 4.8-2.2 7a2.2 2.2 0 0 0 4.4 0c0-2.2-2.2-7-2.2-7Z"/><path d="M16 3.8s-2.2 4.8-2.2 7a2.2 2.2 0 0 0 4.4 0c0-2.2-2.2-7-2.2-7Z"/><path d="M23.4 3.8s-2.2 4.8-2.2 7a2.2 2.2 0 0 0 4.4 0c0-2.2-2.2-7-2.2-7Z"/><path d="M2 18c2.6 2.4 4.8 2.8 7 .6 2.1-2.2 4.2-2.2 6.5-.2 2.2 2 4.4 2 6.4-.2 2-2.1 4.3-1.8 8.1.8"/><path d="M2 23.2c2.6 2.4 4.8 2.8 7 .6 2.1-2.2 4.2-2.2 6.5-.2 2.2 2 4.4 2 6.4-.2 2-2.1 4.3-1.8 8.1.8"/><path d="M2 28.4c2.6 2.4 4.8 2.8 7 .6 2.1-2.2 4.2-2.2 6.5-.2 2.2 2 4.4 2 6.4-.2 2-2.1 4.3-1.8 8.1.8"/></g></svg>',
+  '<svg viewBox="0 0 100 100"><g fill="none" stroke="'+blue+'" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 58 50 33l32 25"/><path d="M27 55v23M73 55v23M40 78V63h20v15"/><path d="M18 82c8-6 13 6 21 0s13 6 21 0 13 6 22 0"/><path d="M25 14s-5 8-5 12a5 5 0 0 0 10 0c0-4-5-12-5-12ZM50 7s-5 8-5 12a5 5 0 0 0 10 0c0-4-5-12-5-12ZM75 14s-5 8-5 12a5 5 0 0 0 10 0c0-4-5-12-5-12Z"/></g></svg>',
+  '<svg viewBox="0 0 32 32"><g fill="none" stroke="'+blue+'" stroke-width="1.8" stroke-linecap="round"><path d="M2 5c2.4 2.4 4.7 2.4 7 0 2.3 2.4 4.6 2.4 7 0 2.3 2.4 4.6 2.4 7 0 2.3 2.4 4.6 2.4 7 0"/><path d="M2 11c2.4 2.4 4.7 2.4 7 0 2.3 2.4 4.6 2.4 7 0 2.3 2.4 4.6 2.4 7 0 2.3 2.4 4.6 2.4 7 0"/><path d="M2 17c2.4 2.4 4.7 2.4 7 0 2.3 2.4 4.6 2.4 7 0 2.3 2.4 4.6 2.4 7 0 2.3 2.4 4.6 2.4 7 0"/><path d="M2 23c2.4 2.4 4.7 2.4 7 0 2.3 2.4 4.6 2.4 7 0 2.3 2.4 4.6 2.4 7 0 2.3 2.4 4.6 2.4 7 0"/></g></svg>',
+  '<svg viewBox="0 0 100 100"><g fill="none" stroke="'+blue+'" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 47 50 19l36 28"/><path d="M23 43v34M77 43v34M41 71V55h18v16"/><path d="M6 73c9-7 15 7 24 0s15 7 24 0 15 7 24 0 11 3 16 4"/><path d="M6 86c9-7 15 7 24 0s15 7 24 0 15 7 24 0 11 3 16 4"/></g></svg>',
+  '<svg viewBox="0 0 100 100"><g fill="none" stroke="'+blue+'" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 59 38 36l20 16"/><path d="M16 56v30M58 56v30M29 86V70h16v16"/><path d="M49 13 40 48l16-8-7 35 36-48-20 8 10-22Z"/><path d="M6 90h88"/></g></svg>'
+ ];
+ var order=[0,1,2,3,3,1,4,2,0],working=false;
+ function cards(){
+  var root=document.getElementById("topFloodNine");if(!root)return[];
+  return Array.from(root.querySelectorAll(".kpi,.national-kpi,.daily-water-item")).filter(function(card){return getComputedStyle(card).display!=="none"}).slice(0,9);
+ }
+ function apply(){
+  if(working)return;working=true;
+  cards().forEach(function(card,i){
+   card.querySelectorAll(":scope > .force-new-flood-icon,:scope > .flood-card-icon,:scope > .drought-card-icon,:scope > .unified-flood-card-icon,:scope > .icon,:scope > .n-icon,:scope > .kpi-icon").forEach(function(el){el.remove()});
+   var holder=document.createElement("span");holder.className="force-new-flood-icon";holder.setAttribute("aria-hidden","true");holder.setAttribute("data-new-icon",String(i+1));holder.innerHTML=icons[order[i]];
+   card.insertBefore(holder,card.firstChild);
+  });
+  working=false;
+ }
+ function start(){
+  apply();
+  [50,150,350,700,1200,2200,4200,6500,9000,10500,12500,15000].forEach(function(ms){setTimeout(apply,ms)});
+  var root=document.getElementById("topFloodNine");if(!root)return;
+  var observer=new MutationObserver(function(){clearTimeout(observer.t);observer.t=setTimeout(apply,25)});
+  observer.observe(root,{childList:true,subtree:true});
+  setTimeout(function(){observer.disconnect();apply()},18000);
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>
+
 </body>
 </html>
