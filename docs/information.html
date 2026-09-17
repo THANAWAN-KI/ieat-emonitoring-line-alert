@@ -923,11 +923,21 @@ async function loadFloodRisks(){
 }
 async function addTrends(rows){return rows}
 function scopedFlood(rows,e){
- if(typeof estates==="undefined"||e===estates[0])return rows;
- return rows.filter(function(r){return Number.isFinite(r.x)&&Number.isFinite(r.y)&&km(e[1],e[2],r.y,r.x)<=120});
+ if(typeof estates==="undefined")return rows;
+ var targets=e===estates[0]?estates.slice(1):[e];
+ return rows.filter(function(r){
+  return Number.isFinite(r.x)&&Number.isFinite(r.y)&&targets.some(function(t){return km(t[1],t[2],r.y,r.x)<=120});
+ });
 }
 function estate(){return(typeof activeEstate!=="undefined"&&activeEstate)||["พื้นที่นิคมอุตสาหกรรมทั่วประเทศ",13.6647400845,100.6438468678]}
-function scoped(rows,e){if(typeof estates==="undefined"||e===estates[0])return rows;var key=e[0].replace(/^นิคมอุตสาหกรรม/,"").trim().toLowerCase(),near=rows.filter(function(r){return Number.isFinite(r.x)&&Number.isFinite(r.y)&&km(e[1],e[2],r.y,r.x)<=120}),named=rows.filter(function(r){return JSON.stringify(r.raw).toLowerCase().includes(key)});return Array.from(new Set(near.concat(named)))}
+function scoped(rows,e){
+ if(typeof estates==="undefined")return rows;
+ var targets=e===estates[0]?estates.slice(1):[e];
+ var near=rows.filter(function(r){return Number.isFinite(r.x)&&Number.isFinite(r.y)&&targets.some(function(t){return km(t[1],t[2],r.y,r.x)<=120})});
+ if(e===estates[0])return near;
+ var key=e[0].replace(/^นิคมอุตสาหกรรม/,"").trim().toLowerCase(),named=rows.filter(function(r){return JSON.stringify(r.raw).toLowerCase().includes(key)});
+ return Array.from(new Set(near.concat(named)));
+}
 function state(p){return p==null?"unknown":p>=100?"overflow":p>=80?"watch":"normal"}
 function label(s){return{overflow:"น้ำล้นตลิ่ง",watch:"เฝ้าระวัง",normal:"ปกติ",unknown:"ไม่มีข้อมูล"}[s]}
 var metricIcons=[
