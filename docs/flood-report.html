@@ -11708,5 +11708,48 @@ html body main.container #warning #overviewForecastRisk .nearby-risk-live-status
 })();
 </script>
 
+
+<style id="move-overview-risk48-water-situation-20260917-v13">
+html body main.container #warning #overviewFirstPageTables{
+ display:block!important;width:100%!important;margin:14px 0 18px!important
+}
+html body main.container #warning #overviewFirstPageTables>.station-watch-table{
+ display:block!important;width:100%!important;max-width:none!important;margin:0!important;
+ border:0!important;border-radius:16px!important;box-shadow:0 5px 18px rgba(27,39,51,.09)!important
+}
+html body main.container #warning #overviewFirstPageTables .table-scroll{
+ display:block!important;width:100%!important;overflow-x:auto!important
+}
+html body main.container #warning #overviewForecastRisk .overview-risk-card[data-hours="48"]{
+ display:block!important;visibility:visible!important;opacity:1!important
+}
+</style>
+<script id="move-overview-risk48-water-situation-20260917-v13-script">
+(function(){
+ "use strict";
+ function moveToOverview(){
+  var overview=document.getElementById("warning");
+  var forecast=document.getElementById("overviewForecastRisk");
+  var station=overview&&overview.querySelector(".station-watch-table");
+  if(!overview||!forecast||!station)return;
+  var host=document.getElementById("overviewFirstPageTables");
+  if(!host){
+   host=document.createElement("section");host.id="overviewFirstPageTables";
+   host.setAttribute("aria-label","ตารางสถานการณ์น้ำในหน้าภาพรวม");
+   forecast.insertAdjacentElement("afterend",host);
+  }
+  if(station.parentNode!==host)host.appendChild(station);
+ }
+ function start(){
+  moveToOverview();
+  [100,400,900,1800,3500,6000].forEach(function(ms){setTimeout(moveToOverview,ms)});
+  var root=document.getElementById("warning");if(!root)return;
+  var observer=new MutationObserver(function(){clearTimeout(observer.t);observer.t=setTimeout(moveToOverview,30)});
+  observer.observe(root,{childList:true,subtree:true});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>
+
 </body>
 </html>
