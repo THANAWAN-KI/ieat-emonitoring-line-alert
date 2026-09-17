@@ -11218,5 +11218,87 @@ html body #warning .flood-card-icon svg{display:block!important;width:100%!impor
 })();
 </script>
 
+
+<style id="flood-report-final-section-order-20260917-v4">
+#warning .overview-forecast-risk{margin:18px 0}
+#warning .overview-forecast-head{padding:15px 18px;background:#dbebfa;border-radius:16px 16px 0 0}
+#warning .overview-forecast-head h2{margin:0;color:#005387;font-size:19px}
+#warning .overview-forecast-head p{margin:4px 0 0;color:#526675;font-size:12px}
+#warning .overview-forecast-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding-top:14px}
+#warning .overview-risk-card{background:#fff;border:0;border-left:4px solid #0091cd;border-radius:14px;box-shadow:0 5px 18px rgba(27,39,51,.09);overflow:hidden}
+#warning .overview-risk-card[data-hours="48"]{border-left-color:#8cb811}
+#warning .overview-risk-card h3{margin:0;padding:14px 16px 7px;color:#005387;font-size:17px}
+#warning .overview-risk-meta{padding:0 16px 10px;color:#667085;font-size:11px}
+#warning .overview-risk-list{max-height:270px;overflow:auto;padding:0 14px 12px}
+#warning .overview-risk-item{display:grid;grid-template-columns:32px minmax(0,1fr) auto;gap:8px;align-items:center;padding:9px 2px;border-bottom:1px solid #edf0f2}
+#warning .overview-risk-item:last-child{border-bottom:0}
+#warning .overview-risk-rank{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#dbebfa;color:#005387;font-weight:700;font-size:11px}
+#warning .overview-risk-place b{display:block;color:#005387;font-size:12px}.overview-risk-place small{color:#667085;font-size:10px}
+#warning .overview-risk-rain{color:#8cb811;font-size:12px;font-weight:800;white-space:nowrap}
+#warning .water-monitoring-stack{display:grid;gap:14px;margin:18px 0}
+#warning .water-monitoring-stack>.nationwide-indicators,
+#warning .water-monitoring-stack>.rid-chart-grid,
+#warning .water-monitoring-stack>.rid-panel,
+#warning .water-monitoring-stack>.nearby-risk-detail-card{width:100%!important;margin:0!important}
+#warning .water-monitoring-stack>.rid-chart-grid{display:grid!important;grid-template-columns:1.35fr .65fr!important;gap:14px!important}
+#warning .water-monitoring-stack>.nationwide-indicators{min-height:0!important}
+#warning .nationwide-monitoring-row{display:none!important}
+#warning #ridWaterDashboard{display:none!important}
+@media(max-width:800px){
+ #warning .overview-forecast-grid,#warning .water-monitoring-stack>.rid-chart-grid{grid-template-columns:1fr!important}
+}
+</style>
+<script id="flood-report-final-section-order-20260917-v4-script">
+(function(){
+ "use strict";
+ function esc(v){return String(v==null?"–":v).replace(/[&<>"']/g,function(x){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[x]})}
+ function riskRows(items){
+  var list=(items||[]).slice().sort(function(a,b){return(Number(b.sum_rainfall_mm)||0)-(Number(a.sum_rainfall_mm)||0)}).slice(0,10);
+  if(!list.length)return '<div class="overview-risk-item"><span></span><div class="overview-risk-place"><b>ยังไม่พบพื้นที่เสี่ยง</b></div><span></span></div>';
+  return list.map(function(x,i){var place=[x.tambon,x.amphoe,x.province].filter(Boolean).join(" "),rain=Number(x.sum_rainfall_mm);return'<div class="overview-risk-item"><span class="overview-risk-rank">'+(i+1)+'</span><div class="overview-risk-place"><b>'+esc(place||"ไม่ระบุพื้นที่")+'</b><small>'+esc(x.observed_at||"")+'</small></div><span class="overview-risk-rain">'+(Number.isFinite(rain)?rain.toLocaleString("th-TH",{maximumFractionDigits:1})+" มม.":"–")+'</span></div>'}).join("");
+ }
+ function ensureForecast(){
+  var operations=document.querySelector("#warning .operations-dashboard");
+  if(!operations)return null;
+  var section=document.getElementById("overviewForecastRisk");
+  if(!section){
+   section=document.createElement("section");section.id="overviewForecastRisk";section.className="overview-forecast-risk";
+   section.innerHTML='<div class="overview-forecast-head"><h2>พื้นที่เสี่ยงน้ำท่วมจากฝนตกสะสม</h2><p>ข้อมูลคาดการณ์ 24 และ 48 ชั่วโมงข้างหน้าในหน้าภาพรวม</p></div><div class="overview-forecast-grid"><article class="overview-risk-card" data-hours="24"><h3>พื้นที่เสี่ยงน้ำท่วมจากฝนตกสะสมใน 24 ชม. ข้างหน้า</h3><div class="overview-risk-meta">กำลังโหลดข้อมูลล่าสุด…</div><div class="overview-risk-list" id="overviewRisk24"></div></article><article class="overview-risk-card" data-hours="48"><h3>พื้นที่เสี่ยงน้ำท่วมจากฝนตกสะสมใน 48 ชม. ข้างหน้า</h3><div class="overview-risk-meta">กำลังโหลดข้อมูลล่าสุด…</div><div class="overview-risk-list" id="overviewRisk48"></div></article></div>';
+   operations.insertAdjacentElement("afterend",section);
+  }
+  return section;
+ }
+ async function loadForecast(){
+  var section=ensureForecast();if(!section)return;
+  try{
+   var res=await fetch(new URL("./data/thaiwater_latest.json",document.baseURI)+"?_="+Date.now(),{cache:"no-store"});
+   if(!res.ok)throw Error("HTTP "+res.status);
+   var data=await res.json(),ff=data.flash_flood||{},stamp=data.generated_at?new Date(data.generated_at).toLocaleString("th-TH",{dateStyle:"medium",timeStyle:"short"}):"ไม่พบเวลาอัปเดต";
+   var a=document.getElementById("overviewRisk24"),b=document.getElementById("overviewRisk48");
+   if(a)a.innerHTML=riskRows(ff["24h"]&&ff["24h"].areas);if(b)b.innerHTML=riskRows(ff["48h"]&&ff["48h"].areas);
+   section.querySelectorAll(".overview-risk-meta").forEach(function(el){el.textContent="ข้อมูลล่าสุด "+stamp});
+  }catch(e){section.querySelectorAll(".overview-risk-meta").forEach(function(el){el.textContent="ไม่สามารถโหลดข้อมูลล่าสุดได้"});console.error(e)}
+ }
+ function orderSections(){
+  var forecast=ensureForecast(),operations=document.querySelector("#warning .operations-dashboard");
+  if(!forecast||!operations)return;
+  var stack=document.getElementById("waterMonitoringStack");
+  if(!stack){stack=document.createElement("section");stack.id="waterMonitoringStack";stack.className="water-monitoring-stack";forecast.insertAdjacentElement("afterend",stack)}
+  var indicator=document.querySelector("#warning .nationwide-indicators");
+  var charts=document.querySelector("#warning .rid-chart-grid");
+  var stationBody=document.getElementById("ridStationRows");
+  var stationPanel=stationBody&&stationBody.closest(".rid-panel");
+  var detail=document.querySelector("#warning .nearby-risk-detail-card");
+  if(indicator&&indicator.parentNode!==stack)stack.appendChild(indicator);
+  if(charts&&charts.parentNode!==stack)stack.appendChild(charts);
+  if(stationPanel&&stationPanel.parentNode!==stack)stack.appendChild(stationPanel);
+  if(detail&&detail.parentNode!==stack)stack.appendChild(detail);
+  var oldRow=document.getElementById("nationwideMonitoringRow");if(oldRow)oldRow.style.setProperty("display","none","important");
+ }
+ function start(){orderSections();loadForecast();[100,600,1600,3600,5200].forEach(function(ms){setTimeout(orderSections,ms)});setInterval(loadForecast,60000)}
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>
+
 </body>
 </html>
