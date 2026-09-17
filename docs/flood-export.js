@@ -94,49 +94,64 @@
   }
   async function captureSheet(sheet){
     if(typeof html2canvas!=="function")throw new Error("Export library unavailable");
-    const host=sheet.parentElement,oldZoom=host?.style.zoom||"";
-    if(host)host.style.zoom="1";
-    sheet.classList.add("report-exporting");
+
+    // Render an exact duplicate of the visible report. Do not resize the live
+    // page or its parent: changing zoom/width here makes Thai text reflow and
+    // produces a PNG that is different from the preview.
+    await waitForSheetAssets(sheet);
+    const rect=sheet.getBoundingClientRect();
+    const renderWidth=Math.max(1,Math.round(sheet.offsetWidth||rect.width));
+    const renderHeight=Math.max(1,Math.round(sheet.offsetHeight||rect.height));
+    const renderRoot=document.createElement("div");
+    const clone=sheet.cloneNode(true);
+
+    renderRoot.setAttribute("aria-hidden","true");
+    renderRoot.style.cssText=[
+      "position:fixed",
+      "left:-100000px",
+      "top:0",
+      "width:"+renderWidth+"px",
+      "height:"+renderHeight+"px",
+      "overflow:hidden",
+      "pointer-events:none",
+      "background:#fff",
+      "z-index:-2147483647"
+    ].join(";");
+
+    clone.style.setProperty("width",renderWidth+"px","important");
+    clone.style.setProperty("min-width",renderWidth+"px","important");
+    clone.style.setProperty("max-width",renderWidth+"px","important");
+    clone.style.setProperty("height",renderHeight+"px","important");
+    clone.style.setProperty("min-height",renderHeight+"px","important");
+    clone.style.setProperty("max-height",renderHeight+"px","important");
+    clone.style.setProperty("margin","0","important");
+    clone.style.setProperty("transform","none","important");
+    clone.style.setProperty("zoom","1","important");
+    clone.style.setProperty("box-sizing","border-box","important");
+    renderRoot.appendChild(clone);
+    (document.getElementById("infographic")||document.body).appendChild(renderRoot);
+
     try{
-      await waitForSheetAssets(sheet);
-      const landscape=sheet.classList.contains("landscape-sheet");
-      const targetWidth=landscape?1123:794;
-      const targetHeight=landscape?794:1123;
+      await waitForSheetAssets(clone);
       const scale=Math.max(2,Math.min(3,Number(window.devicePixelRatio)||1));
-      const canvas=await html2canvas(sheet,{
+      const canvas=await html2canvas(clone,{
         scale,
         backgroundColor:"#ffffff",
         useCORS:true,
         allowTaint:false,
         logging:false,
-        width:targetWidth,
-        height:targetHeight,
-        windowWidth:Math.max(targetWidth,document.documentElement.clientWidth),
-        windowHeight:Math.max(targetHeight,document.documentElement.clientHeight),
+        width:renderWidth,
+        height:renderHeight,
+        windowWidth:Math.max(renderWidth,document.documentElement.clientWidth),
+        windowHeight:Math.max(renderHeight,document.documentElement.clientHeight),
         scrollX:0,
-        scrollY:-window.scrollY,
+        scrollY:0,
         imageTimeout:15000,
-        removeContainer:true,
-        onclone:function(clonedDocument){
-          const cloned=clonedDocument.querySelector('[data-report-page="'+sheet.dataset.reportPage+'"]');
-          if(!cloned)return;
-          cloned.classList.add("report-exporting","report-render-clone");
-          cloned.style.setProperty("width",targetWidth+"px","important");
-          cloned.style.setProperty("min-width",targetWidth+"px","important");
-          cloned.style.setProperty("max-width",targetWidth+"px","important");
-          cloned.style.setProperty("height",targetHeight+"px","important");
-          cloned.style.setProperty("min-height",targetHeight+"px","important");
-          cloned.style.setProperty("max-height",targetHeight+"px","important");
-          cloned.style.setProperty("margin","0","important");
-          cloned.style.setProperty("transform","none","important");
-          cloned.style.setProperty("box-sizing","border-box","important");
-          cloned.style.setProperty("overflow","hidden","important");
-        }
+        removeContainer:true
       });
       return await new Promise((resolve,reject)=>canvas.toBlob(blob=>blob?resolve(blob):reject(new Error("PNG blob unavailable")),"image/png",1));
     }finally{
-      sheet.classList.remove("report-exporting");
-      if(host)host.style.zoom=oldZoom;
+      renderRoot.remove();
     }
   }
   async function exportPages(pageNumber){
@@ -181,7 +196,7 @@
   }
   window.addEventListener("ieat:data-ready",event=>renderExportData(event.detail));
   window.addEventListener("DOMContentLoaded",()=>{
-    document.querySelectorAll("[data-report-page]").forEach(sheet=>sheet.addEventListener("contextmenu",event=>{event.preventDefault();exportPages(sheet.dataset.reportPage)}));
+    document.addEventListener("contextmenu",event=>{const sheet=event.target.closest?.("[data-report-page]");if(!sheet)return;event.preventDefault();exportPages(sheet.dataset.reportPage)});
     $("reportPeriodTitle")?.addEventListener("input",syncEditableText);
     setupMapUpload();
     refreshLatest();
