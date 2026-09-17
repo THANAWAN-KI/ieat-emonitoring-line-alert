@@ -10956,5 +10956,51 @@ html body main.container #warning .nearby-flood-risk-card #nearestWaterStationDi
 })();
 </script>
 <link rel="stylesheet" href="./mobile-responsive.css?v=20260915-1">
+
+<style id="flood-report-nine-card-icons-20260917-v1">
+  #warning .flood-card-icon{display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;min-width:46px;margin:0 auto 8px;color:#2754ba;line-height:1}
+  #warning .flood-card-icon svg{display:block;width:100%;height:100%;overflow:visible}
+  #warning .grid.kpis .kpi .flood-card-icon{margin:0 10px 0 0}
+  #warning .national-kpi .flood-card-icon,#warning .daily-water-item .flood-card-icon{margin-left:auto;margin-right:auto}
+  @media(max-width:640px){#warning .flood-card-icon{width:40px;height:40px;min-width:40px}}
+</style>
+<script id="flood-report-nine-card-icons-20260917-v1-script">
+(function(){
+  var blue="#2754ba";
+  var icons={
+    rainWater:'<svg viewBox="0 0 32 32" aria-hidden="true"><g fill="none" stroke="'+blue+'" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round"><path d="M8.7 3.8s-2.2 4.8-2.2 7a2.2 2.2 0 0 0 4.4 0c0-2.2-2.2-7-2.2-7Z"/><path d="M16 3.8s-2.2 4.8-2.2 7a2.2 2.2 0 0 0 4.4 0c0-2.2-2.2-7-2.2-7Z"/><path d="M23.4 3.8s-2.2 4.8-2.2 7a2.2 2.2 0 0 0 4.4 0c0-2.2-2.2-7-2.2-7Z"/><path d="M2 18c2.6 2.4 4.8 2.8 7 .6 2.1-2.2 4.2-2.2 6.5-.2 2.2 2 4.4 2 6.4-.2 2-2.1 4.3-1.8 8.1.8"/><path d="M2 23.2c2.6 2.4 4.8 2.8 7 .6 2.1-2.2 4.2-2.2 6.5-.2 2.2 2 4.4 2 6.4-.2 2-2.1 4.3-1.8 8.1.8"/><path d="M2 28.4c2.6 2.4 4.8 2.8 7 .6 2.1-2.2 4.2-2.2 6.5-.2 2.2 2 4.4 2 6.4-.2 2-2.1 4.3-1.8 8.1.8"/></g></svg>',
+    rainHouse:'<svg viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="'+blue+'" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 58 50 33l32 25"/><path d="M27 55v23M73 55v23M40 78V63h20v15"/><path d="M18 82c8-6 13 6 21 0s13 6 21 0 13 6 22 0"/><path d="M25 14s-5 8-5 12a5 5 0 0 0 10 0c0-4-5-12-5-12ZM50 7s-5 8-5 12a5 5 0 0 0 10 0c0-4-5-12-5-12ZM75 14s-5 8-5 12a5 5 0 0 0 10 0c0-4-5-12-5-12Z"/></g></svg>',
+    waves:'<svg viewBox="0 0 32 32" aria-hidden="true"><g fill="none" stroke="'+blue+'" stroke-width="1.7" stroke-linecap="round"><path d="M2 5c2.4 2.4 4.7 2.4 7 0 2.3 2.4 4.6 2.4 7 0 2.3 2.4 4.6 2.4 7 0 2.3 2.4 4.6 2.4 7 0"/><path d="M2 11c2.4 2.4 4.7 2.4 7 0 2.3 2.4 4.6 2.4 7 0 2.3 2.4 4.6 2.4 7 0 2.3 2.4 4.6 2.4 7 0"/><path d="M2 17c2.4 2.4 4.7 2.4 7 0 2.3 2.4 4.6 2.4 7 0 2.3 2.4 4.6 2.4 7 0 2.3 2.4 4.6 2.4 7 0"/><path d="M2 23c2.4 2.4 4.7 2.4 7 0 2.3 2.4 4.6 2.4 7 0 2.3 2.4 4.6 2.4 7 0 2.3 2.4 4.6 2.4 7 0"/></g></svg>',
+    floodedHouse:'<svg viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="'+blue+'" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 47 50 19l36 28"/><path d="M23 43v34M77 43v34M41 71V55h18v16"/><path d="M6 73c9-7 15 7 24 0s15 7 24 0 15 7 24 0 11 3 16 4"/><path d="M6 86c9-7 15 7 24 0s15 7 24 0 15 7 24 0 11 3 16 4"/></g></svg>',
+    stormHouse:'<svg viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="'+blue+'" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 59 38 36l20 16"/><path d="M16 56v30M58 56v30M29 86V70h16v16"/><path d="M49 13 40 48l16-8-7 35 36-48-20 8 10-22Z"/><path d="M6 90h88"/></g></svg>'
+  };
+  var targets=[
+    ['#warning .grid.kpis .kpi:nth-child(1)','rainWater'],
+    ['#warning .grid.kpis .kpi:nth-child(2)','rainHouse'],
+    ['#warning .national-cards-dashboard .national-kpi:nth-child(1)','waves'],
+    ['#warning .national-cards-dashboard .national-kpi:nth-child(2)','floodedHouse'],
+    ['#warning .national-cards-dashboard .national-kpi:nth-child(3)','floodedHouse'],
+    ['#warning .national-cards-dashboard .national-kpi:nth-child(4)','rainHouse'],
+    ['#warning .daily-water-grid .daily-water-item:nth-child(1)','stormHouse'],
+    ['#warning .daily-water-grid .daily-water-item:nth-child(3)','waves'],
+    ['#warning .daily-water-grid .daily-water-item:nth-child(4)','rainWater']
+  ];
+  function apply(){
+    targets.forEach(function(item,index){
+      var card=document.querySelector(item[0]); if(!card)return;
+      var old=card.querySelector(':scope > .flood-card-icon'); if(old)old.remove();
+      var holder=document.createElement('span');
+      holder.className='flood-card-icon';
+      holder.setAttribute('data-card-icon',String(index+1));
+      holder.setAttribute('aria-hidden','true');
+      holder.innerHTML=icons[item[1]];
+      card.insertBefore(holder,card.firstChild);
+    });
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply);else apply();
+  setTimeout(apply,500); setTimeout(apply,1800);
+})();
+</script>
+
 </body>
 </html>
