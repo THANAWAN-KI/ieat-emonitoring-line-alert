@@ -12940,7 +12940,7 @@ html body main.container #infographic #reportPage5 .export-rid-trend.steady{back
   apply();
   var root=document.getElementById("infographic");if(root){
    var observer=new MutationObserver(function(){clearTimeout(observer.t);observer.t=setTimeout(apply,30)});
-   observer.observe(root,{childList:true,subtree:true});
+   observer.observe(root,{childList:true,subtree:false});
   }
   var rid=document.getElementById("ridStationRows");if(rid){
    new MutationObserver(copyRows).observe(rid,{childList:true,subtree:true,characterData:true});
