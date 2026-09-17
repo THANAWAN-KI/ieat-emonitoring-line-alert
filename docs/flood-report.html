@@ -11663,5 +11663,50 @@ html body main.container #warning #overviewForecastRisk .overview-forecast-head:
 }
 </style>
 
+
+<style id="move-nearby-risk-next-to-48h-20260917-v12">
+html body main.container #warning #overviewForecastRisk .overview-forecast-grid{
+ grid-template-columns:repeat(3,minmax(0,1fr))!important;align-items:stretch!important
+}
+html body main.container #warning #overviewForecastRisk .nearby-risk-detail-card{
+ display:flex!important;flex-direction:column!important;height:100%!important;min-height:0!important;
+ margin:0!important;border-left:4px solid #8cb811!important;border-radius:14px!important
+}
+html body main.container #warning #overviewForecastRisk .nearby-risk-detail-head{flex:0 0 auto!important}
+html body main.container #warning #overviewForecastRisk .nearby-risk-detail-list{
+ flex:1 1 auto!important;max-height:270px!important;min-height:0!important
+}
+html body main.container #warning #overviewForecastRisk .nearby-risk-live-status{margin-top:auto!important}
+@media(max-width:1100px){
+ html body main.container #warning #overviewForecastRisk .overview-forecast-grid{grid-template-columns:1fr 1fr!important}
+ html body main.container #warning #overviewForecastRisk .nearby-risk-detail-card{grid-column:1 / -1!important}
+}
+@media(max-width:700px){
+ html body main.container #warning #overviewForecastRisk .overview-forecast-grid{grid-template-columns:1fr!important}
+ html body main.container #warning #overviewForecastRisk .nearby-risk-detail-card{grid-column:auto!important}
+}
+</style>
+<script id="move-nearby-risk-next-to-48h-20260917-v12-script">
+(function(){
+ "use strict";
+ var moving=false;
+ function move(){
+  if(moving)return;moving=true;
+  var grid=document.querySelector("#overviewForecastRisk .overview-forecast-grid");
+  var detail=document.querySelector("#warning .nearby-risk-detail-card");
+  if(grid&&detail&&detail.parentNode!==grid)grid.appendChild(detail);
+  moving=false;
+ }
+ function start(){
+  move();
+  [100,400,900,1800,3500,5500,7500,10000].forEach(function(ms){setTimeout(move,ms)});
+  var root=document.getElementById("warning");if(!root)return;
+  var observer=new MutationObserver(function(){clearTimeout(observer.t);observer.t=setTimeout(move,30)});
+  observer.observe(root,{childList:true,subtree:true});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>
+
 </body>
 </html>
