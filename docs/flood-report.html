@@ -11173,5 +11173,50 @@ html body #warning .flood-card-icon svg{display:block!important;width:100%!impor
 })();
 </script>
 
+
+<style id="flood-report-chart-placement-fix-20260917-v3">
+/* Exact requested arrangement: indicators on the left, both RID charts on the right. */
+#warning .nationwide-monitoring-row{
+ grid-template-columns:minmax(280px,.72fr) minmax(560px,1.28fr)!important;
+ align-items:stretch!important
+}
+#warning .nationwide-monitoring-row>.nationwide-indicators{grid-column:1!important;height:100%!important}
+#warning .nationwide-monitoring-row>.rid-monitoring-side{
+ grid-column:2!important;display:block!important;height:100%!important
+}
+#warning .nationwide-monitoring-row .rid-chart-grid{
+ display:grid!important;grid-template-columns:minmax(0,1.15fr) minmax(240px,.85fr)!important;
+ gap:14px!important;height:100%!important
+}
+#warning .nationwide-monitoring-row .rid-chart-grid>.rid-panel{height:100%!important}
+#warning #ridWaterDashboard>.nearby-risk-detail-card{margin:0 0 14px!important}
+@media(max-width:1100px){
+ #warning .nationwide-monitoring-row{grid-template-columns:1fr!important}
+ #warning .nationwide-monitoring-row>.rid-monitoring-side{grid-column:1!important}
+}
+@media(max-width:700px){
+ #warning .nationwide-monitoring-row .rid-chart-grid{grid-template-columns:1fr!important}
+}
+</style>
+<script id="flood-report-chart-placement-fix-20260917-v3-script">
+(function(){
+ function placeExactly(){
+  var row=document.getElementById("nationwideMonitoringRow");
+  var indicator=row&&row.querySelector(".nationwide-indicators");
+  var charts=document.querySelector("#ridWaterDashboard > .rid-chart-grid")||
+             document.querySelector(".rid-monitoring-side > .rid-chart-grid");
+  var dashboard=document.getElementById("ridWaterDashboard");
+  var detail=document.querySelector(".nearby-risk-detail-card");
+  if(!row||!indicator||!charts||!dashboard)return;
+  var side=row.querySelector(":scope > .rid-monitoring-side");
+  if(!side){side=document.createElement("div");side.className="rid-monitoring-side";indicator.insertAdjacentElement("afterend",side)}
+  if(charts.parentNode!==side)side.appendChild(charts);
+  if(detail&&detail.parentNode!==dashboard)dashboard.insertBefore(detail,dashboard.firstChild);
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",placeExactly,{once:true});else placeExactly();
+ [100,600,1500,3000].forEach(function(ms){setTimeout(placeExactly,ms)});
+})();
+</script>
+
 </body>
 </html>
