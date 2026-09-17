@@ -990,7 +990,7 @@ async function render(){
  rows.sort(function(a,b){return(b.pct==null?-1:b.pct)-(a.pct==null?-1:a.pct)});await addTrends(rows);if(token!==renderId)return;overviewCharts(rows);
  var latestRows=rows.filter(function(r){return r.level!=null&&r.stamp}),alertRows=rows.filter(function(r){return r.pct!=null&&r.pct>=80});
  var cards=document.querySelectorAll("#summary .metric"),vals=[rows.length,latestRows.length,alertRows.length],names=["สถานีที่เกี่ยวข้องกับ "+name,"สถานีที่มีค่าระดับน้ำล่าสุด","สถานีที่มีสถานะเฝ้าระวังหรือสูง"];
- cards.forEach(function(c,i){var box=c.firstElementChild||c;box.innerHTML='<div class="wb-kpi-value">'+metricIcons[i]+'<b>'+vals[i].toLocaleString("th-TH")+' สถานี</b></div><span>'+names[i]+'</span>'});
+ cards.forEach(function(c,i){var box=c.firstElementChild||c;box.innerHTML='<div class="wb-kpi-value"><b>'+vals[i].toLocaleString("th-TH")+' สถานี</b></div><span>'+names[i]+'</span>'});
  document.getElementById("wbArea").textContent=name+" • เกณฑ์เฝ้าระวัง 80–99.99% • น้ำล้นตลิ่ง ≥100%";
  document.getElementById("wbCount").textContent=rows.length.toLocaleString("th-TH")+" สถานี • อัปเดต "+new Date().toLocaleTimeString("th-TH",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
  var nearest=rows.filter(function(r){return r.distance!=null}).slice().sort(function(a,b){return a.distance-b.distance})[0],highest=rows.filter(function(r){return r.pct!=null})[0];
