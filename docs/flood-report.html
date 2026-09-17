@@ -10917,7 +10917,7 @@ html body main.container #warning .nearby-flood-risk-card #nearestWaterStationDi
   var first=document.querySelector("#warning .daily-water-item.rain");
   if(first&&!first.classList.contains("daily-nearby-risk")){
    first.classList.remove("rain");first.classList.add("daily-nearby-risk");
-   first.innerHTML='<small>พื้นที่เสี่ยงน้ำท่วมใกล้นิคมฯ</small><span>จุดเสี่ยงจากข้อมูลฝนสะสม 48 ชั่วโมง</span><strong id="dailyNearbyRiskCount">กำลังโหลด</strong>';
+   first.innerHTML='<small>พื้นที่เสี่ยงน้ำท่วมใกล้นิคมฯ</small><span>จุดเสี่ยงจากข้อมูลฝนสะสม 48 ชั่วโมง</span><strong id="dailyNearbyRiskCount">กำลังโหลด</strong><span id="dailyRain" hidden>–</span>';
   }
   var indicator=document.querySelector("#warning .nationwide-indicators");
   if(indicator&&!document.getElementById("nationwideMonitoringRow")){
