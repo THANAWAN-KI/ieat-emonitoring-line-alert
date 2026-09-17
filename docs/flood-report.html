@@ -11782,5 +11782,72 @@ html body main.container #warning .flood-final-layout{
 })();
 </script>
 
+
+<style id="side-by-side-water-station-tables-20260917-v15">
+html body main.container #warning #overviewFirstPageTables{
+ display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+ gap:14px!important;align-items:stretch!important;width:100%!important
+}
+html body main.container #warning #overviewFirstPageTables>.station-watch-table,
+html body main.container #warning #overviewFirstPageTables>.rid-panel{
+ display:flex!important;flex-direction:column!important;width:100%!important;min-width:0!important;
+ height:560px!important;min-height:560px!important;max-height:560px!important;
+ margin:0!important;overflow:hidden!important;box-sizing:border-box!important;
+ border:0!important;border-radius:16px!important;box-shadow:0 5px 18px rgba(27,39,51,.09)!important
+}
+html body main.container #warning #overviewFirstPageTables :is(.table-section-head,.rid-panel-head){
+ flex:0 0 auto!important;min-height:86px!important;box-sizing:border-box!important
+}
+html body main.container #warning #overviewFirstPageTables :is(.table-scroll,.rid-table-wrap){
+ display:block!important;flex:1 1 auto!important;width:100%!important;min-width:0!important;
+ min-height:0!important;max-height:none!important;overflow:auto!important
+}
+html body main.container #warning #overviewFirstPageTables .station-watch-table table{width:100%!important;min-width:620px!important}
+html body main.container #warning #overviewFirstPageTables .rid-water-table{width:100%!important;min-width:850px!important}
+html body main.container #warning #overviewFirstPageTables th,
+html body main.container #warning #overviewFirstPageTables td{
+ padding:9px 8px!important;font-size:11px!important;line-height:1.35!important
+}
+html body main.container #warning #overviewFirstPageTables thead th{
+ position:sticky!important;top:0!important;z-index:2!important
+}
+html body main.container #warning #overviewFirstPageTables .rid-live-status{flex:0 0 auto!important}
+@media(max-width:1100px){
+ html body main.container #warning #overviewFirstPageTables{grid-template-columns:1fr!important}
+ html body main.container #warning #overviewFirstPageTables>.station-watch-table,
+ html body main.container #warning #overviewFirstPageTables>.rid-panel{
+  height:520px!important;min-height:520px!important;max-height:520px!important
+ }
+}
+</style>
+<script id="side-by-side-water-station-tables-20260917-v15-script">
+(function(){
+ "use strict";
+ var moving=false;
+ function arrange(){
+  if(moving)return;moving=true;
+  var host=document.getElementById("overviewFirstPageTables");
+  var station=document.querySelector("#warning .station-watch-table");
+  var ridBody=document.getElementById("ridStationRows");
+  var rid=ridBody&&ridBody.closest(".rid-panel");
+  if(host&&station&&rid){
+   if(station.parentNode!==host)host.appendChild(station);
+   if(rid.parentNode!==host)host.appendChild(rid);
+   if(host.firstElementChild!==station)host.insertBefore(station,host.firstElementChild);
+   if(station.nextElementSibling!==rid)host.insertBefore(rid,station.nextElementSibling);
+  }
+  moving=false;
+ }
+ function start(){
+  arrange();
+  [100,400,900,1800,3500,5500,8000].forEach(function(ms){setTimeout(arrange,ms)});
+  var root=document.getElementById("warning");if(!root)return;
+  var observer=new MutationObserver(function(){clearTimeout(observer.t);observer.t=setTimeout(arrange,30)});
+  observer.observe(root,{childList:true,subtree:true});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>
+
 </body>
 </html>
