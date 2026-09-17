@@ -12340,5 +12340,41 @@ html body #thaiwater-warning{
 })();
 </script>
 
+
+
+<style id="flood-report-restore-water-table-scrollbars-20260917-v20">
+/* Restore visible vertical scrolling while preserving equal table heights. */
+html body main.container #warning #overviewFirstPageTables :is(.table-scroll,.rid-table-wrap){
+ flex:1 1 auto!important;height:auto!important;min-height:0!important;max-height:none!important;
+ overflow-x:hidden!important;overflow-y:auto!important;
+ scrollbar-width:auto!important;scrollbar-color:#8a8f96 #eef1f4!important;
+ overscroll-behavior:contain!important
+}
+html body main.container #warning #overviewFirstPageTables :is(.table-scroll,.rid-table-wrap)::-webkit-scrollbar{
+ width:12px!important;height:12px!important
+}
+html body main.container #warning #overviewFirstPageTables :is(.table-scroll,.rid-table-wrap)::-webkit-scrollbar-track{
+ background:#eef1f4!important;border-radius:999px!important
+}
+html body main.container #warning #overviewFirstPageTables :is(.table-scroll,.rid-table-wrap)::-webkit-scrollbar-thumb{
+ background:#8a8f96!important;border:3px solid #eef1f4!important;border-radius:999px!important
+}
+html body main.container #warning #overviewFirstPageTables :is(.table-scroll,.rid-table-wrap)::-webkit-scrollbar-thumb:hover{
+ background:#5f666e!important
+}
+html body main.container #warning #overviewFirstPageTables thead th{
+ position:sticky!important;top:0!important;z-index:4!important
+}
+@media(max-width:1100px){
+ html body main.container #warning #overviewFirstPageTables>.station-watch-table,
+ html body main.container #warning #overviewFirstPageTables>.rid-panel{
+  height:520px!important;min-height:520px!important;max-height:520px!important
+ }
+ html body main.container #warning #overviewFirstPageTables :is(.table-scroll,.rid-table-wrap){
+  overflow-x:auto!important;overflow-y:auto!important
+ }
+}
+</style>
+
 </body>
 </html>
