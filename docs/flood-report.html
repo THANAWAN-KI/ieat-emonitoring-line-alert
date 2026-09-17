@@ -12289,5 +12289,56 @@ html body main.container #warning #overviewFirstPageTables .rid-live-status{
 }
 </style>
 
+
+
+<style id="flood-report-remove-watch-page-20260917-v19">
+/* Remove the second “พื้นที่เฝ้าระวัง” page and every entry point to it. */
+html body [data-view="thaiwater-warning"],
+html body [data-target="thaiwater-warning"],
+html body #thaiwater-warning{
+ display:none!important;visibility:hidden!important;width:0!important;height:0!important;
+ min-width:0!important;min-height:0!important;margin:0!important;padding:0!important;
+ border:0!important;overflow:hidden!important
+}
+</style>
+<script id="flood-report-remove-watch-page-20260917-v19-script">
+(function(){
+ "use strict";
+ var cleaning=false;
+ function removeWatchPage(){
+  if(cleaning)return;cleaning=true;
+  document.querySelectorAll('[data-view="thaiwater-warning"],[data-target="thaiwater-warning"],#thaiwater-warning')
+   .forEach(function(el){el.remove()});
+  if(location.hash==="#thaiwater-warning"){
+   history.replaceState(null,"",location.pathname+location.search+"#warning");
+   var overview=document.getElementById("warning");
+   if(overview){
+    document.querySelectorAll(".view").forEach(function(view){view.classList.remove("active")});
+    overview.classList.add("active");
+   }
+  }
+  cleaning=false;
+ }
+ function start(){
+  removeWatchPage();
+  var root=document.body;if(!root)return;
+  var observer=new MutationObserver(function(records){
+   var found=records.some(function(record){
+    return Array.from(record.addedNodes).some(function(node){
+     return node.nodeType===1&&(
+      node.matches&&node.matches('[data-view="thaiwater-warning"],[data-target="thaiwater-warning"],#thaiwater-warning')||
+      node.querySelector&&node.querySelector('[data-view="thaiwater-warning"],[data-target="thaiwater-warning"],#thaiwater-warning')
+     );
+    });
+   });
+   if(found)removeWatchPage();
+  });
+  observer.observe(root,{childList:true,subtree:true});
+  [50,150,400,900,1800,3500,6000].forEach(function(ms){setTimeout(removeWatchPage,ms)});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>
+
 </body>
 </html>
