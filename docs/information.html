@@ -592,6 +592,20 @@ body.monitor-mode .em-system-row article>strong{color:#0091cd!important}
  function setStrong(nodes,index,value){if(nodes[index])nodes[index].textContent=value}
  function measurements(rows,pattern){const values=[];rows.forEach(s=>{const source=s.alarm||"";let match;pattern.lastIndex=0;while((match=pattern.exec(source))!==null){const value=Number(match[1]);if(Number.isFinite(value)&&Math.abs(value)<100000)values.push(value)}});return values}
  function average(values){return values.length?Math.round(values.reduce((a,b)=>a+b,0)/values.length*10)/10:0}
+ function renderPmSeries(points,name,source){
+  const values=points.map(p=>p.value),path=document.querySelector(".em-line-chart svg path:last-child"),empty=document.querySelector(".em-line-chart .em-empty"),max=Math.max(...values,100);
+  if(path)path.setAttribute("d",values.length?values.map((v,i)=>(i?"L":"M")+(values.length===1?400:i*800/(values.length-1)).toFixed(1)+" "+(235-Math.min(v,max)/max*195).toFixed(1)).join(" "):"");
+  if(empty){empty.style.display=values.length?"none":"grid";empty.textContent=values.length?"":"ไม่มีข้อมูล PM2.5 สำหรับ "+name}
+  const sourceLabel=document.querySelector(".em-pm-chart>header>span");
+  if(sourceLabel)sourceLabel.textContent=values.length?source+" • ล่าสุด "+points[points.length-1].time+" • µg/m³":"หน่วย: µg/m³";
+ }
+ async function loadExternalPm(estate,token){
+  const name=estate[0],url="https://air-quality-api.open-meteo.com/v1/air-quality?latitude="+encodeURIComponent(estate[1])+"&longitude="+encodeURIComponent(estate[2])+"&hourly=pm2_5&past_days=1&forecast_days=1&timezone=Asia%2FBangkok";
+  const response=await fetch(url,{cache:"no-store"});if(!response.ok)throw new Error("PM2.5 HTTP "+response.status);
+  const json=await response.json(),times=json.hourly&&json.hourly.time||[],values=json.hourly&&json.hourly.pm2_5||[],now=Date.now()+60*60*1000,points=[];
+  for(let i=0;i<times.length;i++){const value=Number(values[i]),stamp=new Date(times[i]).getTime();if(Number.isFinite(value)&&stamp<=now)points.push({value:value,time:new Date(times[i]).toLocaleString("th-TH",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"})})}
+  if(token!==renderToken)return;renderPmSeries(points.slice(-24),name,"Open-Meteo");
+ }
  function renderMeasurementCharts(rows,name){
   const aq=rows.filter(s=>s.type==="AQMs"),wq=rows.filter(s=>s.type==="WQMs"),ce=rows.filter(s=>s.type==="CEMs");
   const pm=measurements(aq,/PM\s*2\.?5[^0-9-]*(-?\d+(?:\.\d+)?)/gi).slice(-8),pmPath=document.querySelector(".em-line-chart svg path:last-child"),pmEmpty=document.querySelector(".em-line-chart .em-empty"),pmMax=Math.max(...pm,100);
@@ -633,7 +647,7 @@ body.monitor-mode .em-system-row article>strong{color:#0091cd!important}
   const latest=document.querySelector(".em-alert-summary>header>span");
   if(latest)latest.textContent="ข้อมูลล่าสุดจาก e‑Monitoring • "+rows.length.toLocaleString("th-TH")+" สถานี";
  }
- async function refreshData(name){
+ async function refreshData(name,estate){
   const token=++renderToken;
   setLoading();
   try{renderData(await loadStations(),name,token)}
@@ -642,6 +656,8 @@ body.monitor-mode .em-system-row article>strong{color:#0091cd!important}
    const body=document.querySelector(".em-table-wrap tbody");if(body)body.innerHTML='<tr><td colspan="5">ไม่สามารถโหลดข้อมูล e‑Monitoring ได้ในขณะนี้</td></tr>';
    document.querySelectorAll(".em-kpis strong,.em-system-row>article>strong,.em-status-summary strong,.em-alert-summary strong").forEach(el=>el.textContent="—");
   }
+  try{await loadExternalPm(estate||((typeof activeEstate!=="undefined"&&activeEstate)||["พื้นที่นิคมอุตสาหกรรมทั่วประเทศ",13.2,101]),token)}
+  catch(error){if(token===renderToken){const empty=document.querySelector(".em-line-chart .em-empty"),path=document.querySelector(".em-line-chart svg path:last-child");if(path&&!path.getAttribute("d")&&empty){empty.style.display="grid";empty.textContent="ไม่สามารถโหลดข้อมูล PM2.5 ภายนอกได้ในขณะนี้"}}}
  }
  function syncMonitoringDashboard(){
   const estate=(typeof activeEstate!=="undefined"&&activeEstate)||["พื้นที่นิคมอุตสาหกรรมทั่วประเทศ",13.2,101,1155581],name=estate[0],lat=estate[1],lon=estate[2],scale=estate[3]||65000;
@@ -651,11 +667,11 @@ body.monitor-mode .em-system-row article>strong{color:#0091cd!important}
   const map=document.getElementById("emDataMap"),national=(typeof estates!=="undefined"&&estate===estates[0]),url=national?mapBase:mapBase+"&center="+lon+","+lat+"&scale="+scale;
   if(map&&map.dataset.area!==name){map.src=url;map.dataset.area=name}
   const full=document.getElementById("emFullMap");if(full)full.href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=43f93c5608a74dd19a48b0ffc6bd639d"+(national?"":"&center="+lon+","+lat+"&scale="+scale);
-  refreshData(name);
+  refreshData(name,estate);
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",syncMonitoringDashboard,{once:true});else syncMonitoringDashboard();
  const scope=document.getElementById("scopeBtn");if(scope)new MutationObserver(function(){setTimeout(syncMonitoringDashboard,60)}).observe(scope,{childList:true,characterData:true,subtree:true});
- setInterval(function(){stationCache=null;const name=(typeof activeEstate!=="undefined"&&activeEstate[0])||"พื้นที่นิคมอุตสาหกรรมทั่วประเทศ";refreshData(name)},300000);
+ setInterval(function(){stationCache=null;const estate=(typeof activeEstate!=="undefined"&&activeEstate)||["พื้นที่นิคมอุตสาหกรรมทั่วประเทศ",13.2,101,1155581],name=estate[0];refreshData(name,estate)},300000);
 })();
 </script>
 
