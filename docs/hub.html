@@ -330,6 +330,11 @@ const fireHub=document.createElement('section');fireHub.id='fireReportView';fire
   </article>
   <article class="fire-analysis-panel">
     <div class="fire-map-head"><div><h2>แผนที่วิเคราะห์</h2><p>Risk Map และตำแหน่งข้อมูลสนับสนุนการระงับเหตุ</p></div><a href="https://experience.arcgis.com/experience/7cbfbc4231fc4a44b6891e84dc1e07db" target="_blank" rel="noopener">เปิดเต็มหน้า ↗</a></div>
+    <section class="fire-estate-search fire-factory-search">
+      <label for="fireFactorySearch">ค้นหาโรงงานที่เกิดเหตุ</label>
+      <div class="fire-search-row"><input id="fireFactorySearch" list="fireFactoryOptions" placeholder="พิมพ์ชื่อบริษัท / โรงงาน" autocomplete="off"><datalist id="fireFactoryOptions"></datalist><button id="fireFactoryApply" type="button">เลือกจุดเกิดเหตุ</button></div>
+      <p id="fireFactoryStatus">เลือกโรงงานเพื่อให้แผนที่ในรายงานซูมไปยังตำแหน่งเกิดเหตุ</p>
+    </section>
     <iframe class="fire-analysis-map" width="700" height="600" allow="local-network-access; geolocation" title="risk map" src="https://experience.arcgis.com/experience/7cbfbc4231fc4a44b6891e84dc1e07db"></iframe>
   </article>
 </section>
@@ -374,7 +379,17 @@ function fireEstateNames(){
   });
   return Object.keys(unique).map(function(key){return unique[key]}).sort(function(a,b){return a.localeCompare(b,'th')});
 }
-function syncFireEstateOptions(){var list=document.getElementById('fireEstateOptions'),status=document.getElementById('fireEstateStatus');if(!list)return;if(!(records||[]).length){if(status&&!status.className)status.textContent='กำลังโหลดรายชื่อนิคมอุตสาหกรรมและท่าเรืออุตสาหกรรม…';return}var names=fireEstateNames();list.innerHTML=names.map(function(name){return '<option value="'+name.replace(/"/g,'&quot;')+'"></option>'}).join('');if(status&&!status.className)status.textContent=names.length?'พร้อมค้นหา '+names.length.toLocaleString('th-TH')+' รายการ — เลือกชื่อเต็มเพื่อแยกนิคมฯ และท่าเรือฯ':'โหลดข้อมูลตำแหน่งแล้ว แต่ไม่พบฟิลด์ชื่อนิคมอุตสาหกรรม'}
+function fireFactoryRecords(){
+  return (records||[]).filter(function(record){return record.config&&record.config.id==='business'&&record.name&&record.name!=='—'&&firePoint(record)});
+}
+function syncFireFactoryOptions(){
+  var list=document.getElementById('fireFactoryOptions'),status=document.getElementById('fireFactoryStatus');if(!list)return;
+  var factories=fireFactoryRecords(),unique={};factories.forEach(function(record){unique[fireNormalize(record.name)]=record.name});
+  var names=Object.keys(unique).map(function(key){return unique[key]}).sort(function(a,b){return a.localeCompare(b,'th')});
+  list.innerHTML=names.map(function(name){return '<option value="'+name.replace(/"/g,'&quot;')+'"></option>'}).join('');
+  if(status&&!status.className)status.textContent=names.length?'พร้อมค้นหาโรงงาน '+names.length.toLocaleString('th-TH')+' แห่ง':'กำลังโหลดรายชื่อโรงงาน…';
+}
+function syncFireEstateOptions(){syncFireFactoryOptions();var list=document.getElementById('fireEstateOptions'),status=document.getElementById('fireEstateStatus');if(!list)return;if(!(records||[]).length){if(status&&!status.className)status.textContent='กำลังโหลดรายชื่อนิคมอุตสาหกรรมและท่าเรืออุตสาหกรรม…';return}var names=fireEstateNames();list.innerHTML=names.map(function(name){return '<option value="'+name.replace(/"/g,'&quot;')+'"></option>'}).join('');if(status&&!status.className)status.textContent=names.length?'พร้อมค้นหา '+names.length.toLocaleString('th-TH')+' รายการ — เลือกชื่อเต็มเพื่อแยกนิคมฯ และท่าเรือฯ':'โหลดข้อมูลตำแหน่งแล้ว แต่ไม่พบฟิลด์ชื่อนิคมอุตสาหกรรม'}
 async function loadFireSupportRest(){
   var status=document.getElementById('fireEstateStatus');if(status){status.textContent='กำลังเชื่อมต่อฐานข้อมูลตำแหน่ง กนอ.…';status.className='loading'}
   var loaded=fireCsvEstates.map(function(item){return{config:{id:'estate-origin',label:'นิคมอุตสาหกรรม / ท่าเรืออุตสาหกรรม'},feature:{attributes:{estate_name:item.name,source:'IEAT_LO_0.csv'},geometry:{x:item.lng,y:item.lat}},name:item.name,estate:item.name}});
@@ -438,7 +453,29 @@ function fireApplyEstate(){
   var frame=document.getElementById('fireDssFrame');if(frame&&frame.contentWindow)frame.contentWindow.postMessage({type:'dss-autofill',payload:payload},location.origin);
   status.textContent='เติมข้อมูลของ '+estate+' ลงในแบบรายงาน DSS แล้ว สามารถแก้รายละเอียดเหตุและ Export PNG ได้ทันที';status.className='success';
 }
-document.getElementById('fireEstateApply').addEventListener('click',fireApplyEstate);document.getElementById('fireEstateSearch').addEventListener('keydown',function(event){if(event.key==='Enter'){event.preventDefault();fireApplyEstate()}});
+function fireApplyFactory(){
+  var input=document.getElementById('fireFactorySearch'),status=document.getElementById('fireFactoryStatus'),query=input.value.trim();
+  if(!query){status.textContent='กรุณาพิมพ์หรือเลือกชื่อโรงงาน';status.className='error';return}
+  var factories=fireFactoryRecords(),q=fireNormalize(query),matching=factories.filter(function(record){return fireNormalize(record.name)===q});
+  if(!matching.length)matching=factories.filter(function(record){var name=fireNormalize(record.name);return name.includes(q)||q.includes(name)});
+  if(matching.length!==1){status.textContent=matching.length?'พบชื่อใกล้เคียงหลายแห่ง กรุณาเลือกชื่อเต็มจากรายการ':'ไม่พบโรงงานนี้ในฐานข้อมูลผู้ประกอบการ';status.className='error';return}
+  var record=matching[0],origin=firePoint(record);input.value=record.name;
+  var hospital=fireNearest('hospital',origin),fire=fireNearest('fire',origin),police=fireNearest('police',origin),hydrant=fireNearest('hydrant',origin);
+  var communities=(records||[]).filter(function(item){return item.config&&item.config.id==='community'&&firePoint(item)&&fireDistanceKm(origin,firePoint(item))<=3});
+  var cameras=(records||[]).filter(function(item){return item.config&&item.config.id==='cctv'&&firePoint(item)&&fireDistanceKm(origin,firePoint(item))<=3});
+  var previous={};try{previous=JSON.parse(localStorage.getItem('dss-report')||'{}')||{}}catch(error){}
+  var estate=record.estate&&record.estate!=='—'?fireCanonicalEstateName(record.estate,true):(previous.estate||'—');
+  var payload=Object.assign({},previous,{company:record.name,estate:estate,address:[record.name,estate].filter(function(value){return value&&value!=='—'}).join(' — '),lat:origin.lat.toFixed(6),lng:origin.lng.toFixed(6),event:'เหตุเพลิงไหม้',date:new Date().toLocaleString('th-TH'),source:'ฐานข้อมูลผู้ประกอบการ กนอ. และ ArcGIS Risk Map'});
+  if(hospital){payload.hospitalName=hospital.record.name||'โรงพยาบาลใกล้ที่สุด';payload.hospitalDistance=fireFormatKm(hospital.distance)}
+  if(fire){payload.fireName=fire.record.name||'สถานีดับเพลิงใกล้ที่สุด';payload.fireDistance=fireFormatKm(fire.distance)}
+  if(police){payload.policeName=police.record.name||'สถานีตำรวจใกล้ที่สุด';payload.policeDistance=fireFormatKm(police.distance)}
+  if(hydrant){payload.hydrantName=hydrant.record.name||'หัวจ่ายน้ำดับเพลิง';payload.hydrantDistance=Math.round(hydrant.distance*1000).toLocaleString('th-TH')+' เมตร'}
+  payload.communityName='ชุมชนในรัศมี 3 กม.';payload.communityDistance=communities.length.toLocaleString('th-TH')+' แห่ง';payload.cctvName='กล้อง CCTV ในรัศมี 3 กม.';payload.cctvDistance=cameras.length.toLocaleString('th-TH')+' จุด';
+  localStorage.setItem('dss-report',JSON.stringify(payload));updateFireSupportDashboard();fireSyncAnalysisMap(origin);
+  var frame=document.getElementById('fireDssFrame');if(frame&&frame.contentWindow)frame.contentWindow.postMessage({type:'dss-autofill',payload:payload},location.origin);
+  status.textContent='เลือก '+record.name+' เป็นจุดเกิดเหตุแล้ว — แผนที่และสภาพอากาศในรายงานกำลังอัปเดต';status.className='success';
+}
+document.getElementById('fireEstateApply').addEventListener('click',fireApplyEstate);document.getElementById('fireEstateSearch').addEventListener('keydown',function(event){if(event.key==='Enter'){event.preventDefault();fireApplyEstate()}});document.getElementById('fireFactoryApply').addEventListener('click',fireApplyFactory);document.getElementById('fireFactorySearch').addEventListener('keydown',function(event){if(event.key==='Enter'){event.preventDefault();fireApplyFactory()}});
 function floodApplyEstate(){
   var source=document.getElementById('fireEstateSearch'),input=document.getElementById('floodEstateSearch'),status=document.getElementById('floodEstateStatus');
   source.value=input.value;fireApplyEstate();
@@ -544,7 +581,7 @@ footer{padding:20px;font-size:14px}
 .fire-search-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
 .fire-search-row input{width:100%;min-width:0;border:1px solid #ccd1d6;border-radius:9px;padding:10px 12px;font:14px Sarabun,sans-serif;outline:none}.fire-search-row input:focus{border-color:#9b2031;box-shadow:0 0 0 3px rgba(155,32,49,.1)}
 .fire-search-row button{border:0;border-radius:9px;padding:10px 14px;background:#972638;color:#fff;font:700 13px Sarabun,sans-serif;cursor:pointer;white-space:nowrap}
-#fireEstateStatus{margin:7px 0 0;color:#737981;font-size:10px;line-height:1.4}#fireEstateStatus.success{color:#18794e;font-weight:600}#fireEstateStatus.error{color:#b42318;font-weight:600}#fireEstateStatus.loading{color:#8a5a00}
+#fireEstateStatus,#fireFactoryStatus{margin:7px 0 0;color:#737981;font-size:10px;line-height:1.4}#fireEstateStatus.success,#fireFactoryStatus.success{color:#18794e;font-weight:600}#fireEstateStatus.error,#fireFactoryStatus.error{color:#b42318;font-weight:600}#fireEstateStatus.loading{color:#8a5a00}
 .fire-support-card [data-fire-name]{min-height:26px;text-align:left!important;line-height:1.3}
 @media(max-width:700px){.fire-search-row{grid-template-columns:1fr}.fire-search-row button{width:100%}}
 </style>
