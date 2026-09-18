@@ -105,7 +105,7 @@ html body #hubInformationHeader .weather-pop{top:54px!important}
 
   <aside class="ieat-dashboard-side">
    <article class="ieat-panel ieat-donut-card"><header><h2>จำแนกตามการใช้ประโยชน์ที่ดิน</h2><span>พื้นที่นิคมฯ</span></header><div class="ieat-donut land"><b>GIS</b></div><div class="ieat-donut-legend"><span><i></i>พื้นที่อุตสาหกรรม</span><span><i></i>พื้นที่สีเขียว</span><span><i></i>สาธารณูปโภค</span><span><i></i>พื้นที่อื่น ๆ</span></div></article>
-   <article class="ieat-panel ieat-donut-card"><header><h2>พื้นที่เผาไหม้ทั้งหมด</h2><span>ข้อมูลล่าสุด</span></header><div class="ieat-donut burned"><b>— ไร่</b></div><div class="ieat-donut-legend burned-legend"><span><i></i>พื้นที่เผาไหม้</span><span><i></i>พื้นที่ไม่พบการเผาไหม้</span></div></article>
+   <article class="ieat-panel ieat-donut-card"><header><h2>จุดความร้อนใกล้พื้นที่นิคมฯ</h2><span>24 ชั่วโมงล่าสุด</span></header><div class="ieat-donut burned"><b>กำลังโหลด…</b></div><div class="ieat-donut-legend burned-legend"><span><i></i>ภายในรัศมี 10 กม.</span><span><i></i>พื้นที่นอกเกณฑ์</span></div></article>
   </aside>
 
   <section class="ieat-panel ieat-map-panel">
@@ -383,6 +383,24 @@ body.overview-mode .requested-overview{padding:16px 24px 28px!important;backgrou
 </style>
 <script id="ieat-overview-dashboard-v2-script">
 (function(){
+ const hotspotUrl="https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/Satellite_VIIRS_Thermal_Hotspots_and_Fire_Activity/FeatureServer/0/query?where=hours_old%3C%3D24&outFields=latitude%2Clongitude%2Chours_old%2Cacq_time&returnGeometry=false&resultRecordCount=16000&f=json";
+ let hotspotPromise=null,hotspotToken=0;
+ function hotspotDistance(a,b){const rad=Math.PI/180,dLat=(b[1]-a[1])*rad,dLon=(b[2]-a[2])*rad,x=Math.sin(dLat/2)**2+Math.cos(a[1]*rad)*Math.cos(b[1]*rad)*Math.sin(dLon/2)**2;return 6371*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x))}
+ function loadHotspots(){if(!hotspotPromise)hotspotPromise=fetch(hotspotUrl,{cache:"no-store"}).then(function(response){if(!response.ok)throw new Error("HTTP "+response.status);return response.json()}).then(function(json){if(json.error)throw new Error(json.error.message||"ArcGIS query error");return(json.features||[]).map(function(feature){var a=feature.attributes||{},lat=Number(a.latitude),lon=Number(a.longitude);return Number.isFinite(lat)&&Number.isFinite(lon)?[lat,lon]:null}).filter(Boolean)}).catch(function(error){hotspotPromise=null;throw error});return hotspotPromise}
+ async function syncOverviewHotspots(estate,nationwide){
+  const token=++hotspotToken,donut=document.querySelector(".ieat-donut.burned"),value=donut&&donut.querySelector("b"),kpi=document.querySelector(".ieat-kpi.hotspot");
+  if(value)value.textContent="กำลังโหลด…";
+  try{
+   const points=await loadHotspots();if(token!==hotspotToken)return;
+   const targets=nationwide&&typeof estates!=="undefined"?estates.slice(1):[estate];
+   const count=points.filter(function(point){return targets.some(function(target){return hotspotDistance(point,target)<=10})}).length;
+   if(value)value.textContent=count.toLocaleString("th-TH")+" จุด";
+   if(donut){const pct=count?Math.min(82,Math.max(6,count*4)):0;donut.style.background="conic-gradient(#f27924 0 "+pct+"%,#e5e9ed "+pct+"%)"}
+   if(kpi){const strong=kpi.querySelector("strong"),small=kpi.querySelector("small");if(strong)strong.textContent=count?count.toLocaleString("th-TH")+" จุด":"ไม่มี";if(small)small.textContent="ตรวจพบภายในรัศมี 10 กม. ใน 24 ชม. ล่าสุด"}
+  }catch(error){
+   if(token!==hotspotToken)return;if(value)value.textContent="— จุด";if(kpi){const strong=kpi.querySelector("strong"),small=kpi.querySelector("small");if(strong)strong.textContent="—";if(small)small.textContent="ไม่สามารถโหลดข้อมูล VIIRS ได้"}console.warn("ไม่สามารถโหลดข้อมูลจุดความร้อน VIIRS",error)
+  }
+ }
  const weatherIcons={0:"☀️",1:"🌤️",2:"⛅",3:"☁️",45:"🌫️",48:"🌫️",51:"🌦️",53:"🌦️",55:"🌧️",61:"🌧️",63:"🌧️",65:"🌧️",80:"🌦️",81:"🌧️",82:"⛈️",95:"⛈️"};
  async function loadOverviewForecast(){
   const box=document.getElementById("overviewForecast");if(!box)return;
@@ -427,7 +445,7 @@ body.overview-mode .requested-overview{height:auto!important;min-height:calc(100
   const miniValues=[scaled(92,1),scaled(58,1),scaled(31,1),scaled(20,1)],miniMax=Math.max.apply(null,miniValues);dashboard.querySelectorAll(".ieat-mini-bars span").forEach(function(row,i){const bar=row.querySelector("i");let count=row.querySelector("em");if(!count){count=document.createElement("em");row.insertBefore(count,bar)}count.textContent=miniValues[i].toLocaleString("th-TH");if(bar){bar.style.height=Math.max(8,miniValues[i]/miniMax*82)+"%";bar.title=miniValues[i]+" เหตุการณ์"}});
   const monitorValues=[scaled(72,1),scaled(48,1),scaled(36,1)];dashboard.querySelectorAll(".ieat-monitor-list span").forEach(function(row,i){const em=row.querySelector("em");if(em){if(!em.dataset.base)em.dataset.base=em.textContent;em.textContent=monitorValues[i]+" สถานี • "+em.dataset.base}});
   const industrial=45+(estateIndex%4)*4,green=25-(estateIndex%3)*2,utility=17,other=100-industrial-green-utility,land=dashboard.querySelector(".ieat-donut.land");if(land){land.style.background="conic-gradient(#246fc5 0 "+industrial+"%,#55b86a "+industrial+"% "+(industrial+green)+"%,#f1c52c "+(industrial+green)+"% "+(industrial+green+utility)+"%,#aeb5bd "+(industrial+green+utility)+"%)";const b=land.querySelector("b");if(b)b.textContent=industrial+"%"}
-  const burned=scaled(68),burnedDonut=dashboard.querySelector(".ieat-donut.burned");if(burnedDonut){const burnedPct=Math.min(72,Math.max(4,scaled(22,4)));burnedDonut.style.background="conic-gradient(#f27924 0 "+burnedPct+"%,#e5e9ed "+burnedPct+"%)";const b=burnedDonut.querySelector("b");if(b)b.textContent=burned.toLocaleString("th-TH")+" ไร่"}
+  syncOverviewHotspots(estate,nationwide);
   const forecastLabel=document.getElementById("forecastLocation");if(forecastLabel)forecastLabel.textContent=name;
   const map=dashboard.querySelector(".ieat-map-panel iframe");
   const full=dashboard.querySelector(".ieat-map-panel header a");
