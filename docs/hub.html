@@ -397,6 +397,13 @@ async function loadFireSupportRest(){
 setTimeout(loadFireSupportRest,1200);
 function fireNearest(type,origin){var candidates=(records||[]).filter(function(record){return record.config&&record.config.id===type&&firePoint(record)}).map(function(record){return{record:record,distance:fireDistanceKm(origin,firePoint(record))}}).sort(function(a,b){return a.distance-b.distance});return candidates[0]||null}
 function fireFormatKm(value){return (value<10?value.toFixed(2):value.toFixed(1))+' กม.'}
+function fireSyncAnalysisMap(origin){
+  var frame=document.querySelector('.fire-analysis-map'),link=document.querySelector('.fire-analysis-panel .fire-map-head a');
+  var base='https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=9c25f3f77ba5481cb481b402177884c2&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=false&basemaps=true';
+  var url=base+'&center='+origin.lng+','+origin.lat+'&scale=9027.977411';
+  if(frame)frame.src=url;
+  if(link)link.href=url;
+}
 function fireApplyEstate(){
   var input=document.getElementById('fireEstateSearch'),status=document.getElementById('fireEstateStatus');var query=input.value.trim();if(!query){status.textContent='กรุณาพิมพ์หรือเลือกชื่อนิคมอุตสาหกรรม';status.className='error';return}
   if(!(records||[]).length){status.textContent='กำลังโหลดข้อมูลตำแหน่ง กรุณาลองอีกครั้งในอีกสักครู่';status.className='loading';return}
@@ -427,7 +434,7 @@ function fireApplyEstate(){
   if(police){payload.policeName=police.record.name||'สถานีตำรวจใกล้ที่สุด';payload.policeDistance=fireFormatKm(police.distance)}
   if(hydrant){payload.hydrantName=hydrant.record.name||'หัวจ่ายน้ำดับเพลิง';payload.hydrantDistance=Math.round(hydrant.distance*1000).toLocaleString('th-TH')+' เมตร'}
   payload.communityName='ชุมชนในรัศมี 3 กม.';payload.communityDistance=communities.length.toLocaleString('th-TH')+' แห่ง';payload.cctvName='กล้อง CCTV ในรัศมี 3 กม.';payload.cctvDistance=cameras.length.toLocaleString('th-TH')+' จุด';
-  localStorage.setItem('dss-report',JSON.stringify(payload));updateFireSupportDashboard();
+  localStorage.setItem('dss-report',JSON.stringify(payload));updateFireSupportDashboard();fireSyncAnalysisMap(origin);
   var frame=document.getElementById('fireDssFrame');if(frame&&frame.contentWindow)frame.contentWindow.postMessage({type:'dss-autofill',payload:payload},location.origin);
   status.textContent='เติมข้อมูลของ '+estate+' ลงในแบบรายงาน DSS แล้ว สามารถแก้รายละเอียดเหตุและ Export PNG ได้ทันที';status.className='success';
 }
