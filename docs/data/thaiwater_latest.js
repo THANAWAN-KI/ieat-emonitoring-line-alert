@@ -1,7 +1,7 @@
 window.IEAT_THAIWATER_DATA = {
   "schema_version": 2,
   "status": "ok",
-  "generated_at": "2026-09-19T08:11:40+07:00",
+  "generated_at": "2026-09-19T12:55:22+07:00",
   "methodology": {
     "watch_radius_km": 30.0,
     "display_radius_km": 50.0,
@@ -550,7 +550,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 3,
       "max_rainfall_mm": 72.0,
       "nearest_alert_km": 7.3,
-      "latest_observed_at": "2026-09-19 08:00"
+      "latest_observed_at": "2026-09-19 12:40"
     },
     {
       "id": 12,
@@ -560,12 +560,27 @@ window.IEAT_THAIWATER_DATA = {
       "operations": "สายปฎิบัติการ1",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
-      "alert_station_count": 22,
-      "rain_alert_count": 8,
-      "water_alert_count": 14,
-      "max_rainfall_mm": 52.2,
+      "alert_station_count": 24,
+      "rain_alert_count": 9,
+      "water_alert_count": 15,
+      "max_rainfall_mm": 62.5,
       "nearest_alert_km": 7.2,
-      "latest_observed_at": "2026-09-19 08:00"
+      "latest_observed_at": "2026-09-19 12:40"
+    },
+    {
+      "id": 42,
+      "name": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก A",
+      "lat": 13.7972954,
+      "lon": 100.5599994,
+      "operations": "สำนักงานใหญ่",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "alert_station_count": 6,
+      "rain_alert_count": 1,
+      "water_alert_count": 5,
+      "max_rainfall_mm": 35.6,
+      "nearest_alert_km": 6.0,
+      "latest_observed_at": "2026-09-19 12:40"
     },
     {
       "id": 1,
@@ -580,7 +595,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 2,
       "max_rainfall_mm": null,
       "nearest_alert_km": 18.5,
-      "latest_observed_at": "2026-09-19 08:00"
+      "latest_observed_at": "2026-09-19 12:40"
     },
     {
       "id": 5,
@@ -595,7 +610,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 21,
       "max_rainfall_mm": null,
       "nearest_alert_km": 8.1,
-      "latest_observed_at": "2026-09-19 08:00"
+      "latest_observed_at": "2026-09-19 12:40"
     },
     {
       "id": 8,
@@ -610,7 +625,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 5,
       "max_rainfall_mm": null,
       "nearest_alert_km": 3.8,
-      "latest_observed_at": "2026-09-19 08:00"
+      "latest_observed_at": "2026-09-19 12:40"
     },
     {
       "id": 10,
@@ -625,7 +640,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 3,
       "max_rainfall_mm": null,
       "nearest_alert_km": 3.7,
-      "latest_observed_at": "2026-09-19 08:00"
+      "latest_observed_at": "2026-09-19 12:40"
     },
     {
       "id": 11,
@@ -640,7 +655,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 5,
       "max_rainfall_mm": null,
       "nearest_alert_km": 13.5,
-      "latest_observed_at": "2026-09-19 08:00"
+      "latest_observed_at": "2026-09-19 12:40"
     },
     {
       "id": 14,
@@ -655,7 +670,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 18,
       "max_rainfall_mm": null,
       "nearest_alert_km": 3.2,
-      "latest_observed_at": "2026-09-19 08:00"
+      "latest_observed_at": "2026-09-19 12:40"
     },
     {
       "id": 15,
@@ -685,7 +700,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 3,
       "max_rainfall_mm": null,
       "nearest_alert_km": 12.7,
-      "latest_observed_at": "2026-09-19 08:00"
+      "latest_observed_at": "2026-09-19 12:40"
     },
     {
       "id": 19,
@@ -700,7 +715,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 3,
       "max_rainfall_mm": null,
       "nearest_alert_km": 1.8,
-      "latest_observed_at": "2026-09-19 08:00"
+      "latest_observed_at": "2026-09-19 12:40"
     },
     {
       "id": 21,
@@ -715,7 +730,22 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 13,
       "max_rainfall_mm": null,
       "nearest_alert_km": 10.6,
-      "latest_observed_at": "2026-09-19 08:00"
+      "latest_observed_at": "2026-09-19 12:40"
+    },
+    {
+      "id": 26,
+      "name": "นิคมอุตสาหกรรมแพรกษา",
+      "lat": 13.56903519,
+      "lon": 100.6528202,
+      "operations": "สายปฎิบัติการ1",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "alert_station_count": 1,
+      "rain_alert_count": 0,
+      "water_alert_count": 1,
+      "max_rainfall_mm": null,
+      "nearest_alert_km": 13.8,
+      "latest_observed_at": "2026-09-19 12:40"
     },
     {
       "id": 29,
@@ -745,7 +775,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 6,
       "max_rainfall_mm": null,
       "nearest_alert_km": 11.7,
-      "latest_observed_at": "2026-09-19 08:00"
+      "latest_observed_at": "2026-09-19 12:40"
     },
     {
       "id": 86,
@@ -763,21 +793,6 @@ window.IEAT_THAIWATER_DATA = {
       "latest_observed_at": "2026-09-14 09:00"
     },
     {
-      "id": 2,
-      "name": "นิคมอุตสาหกรรมลาดกระบัง",
-      "lat": 13.7582559,
-      "lon": 100.7893183,
-      "operations": "สายปฎิบัติการ1",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "alert_station_count": 5,
-      "rain_alert_count": 3,
-      "water_alert_count": 2,
-      "max_rainfall_mm": 50.8,
-      "nearest_alert_km": 2.0,
-      "latest_observed_at": "2026-09-19 08:00"
-    },
-    {
       "id": 13,
       "name": "นิคมอุตสาหกรรมพิจิตร",
       "lat": 16.5753627,
@@ -785,27 +800,27 @@ window.IEAT_THAIWATER_DATA = {
       "operations": "สายปฎิบัติการ1",
       "status": "วิกฤต",
       "severity_score": 3,
-      "alert_station_count": 10,
+      "alert_station_count": 11,
       "rain_alert_count": 2,
-      "water_alert_count": 8,
+      "water_alert_count": 9,
       "max_rainfall_mm": 43.0,
       "nearest_alert_km": 9.6,
-      "latest_observed_at": "2026-09-19 08:00"
+      "latest_observed_at": "2026-09-19 12:40"
     },
     {
-      "id": 22,
-      "name": "นิคมอุตสาหกรรมหลักชัยเมืองยาง",
-      "lat": 12.72735973,
-      "lon": 101.455931,
-      "operations": "สายปฎิบัติการ3",
+      "id": 2,
+      "name": "นิคมอุตสาหกรรมลาดกระบัง",
+      "lat": 13.7582559,
+      "lon": 100.7893183,
+      "operations": "สายปฎิบัติการ1",
       "status": "วิกฤต",
       "severity_score": 3,
-      "alert_station_count": 3,
-      "rain_alert_count": 1,
+      "alert_station_count": 2,
+      "rain_alert_count": 0,
       "water_alert_count": 2,
-      "max_rainfall_mm": 40.8,
-      "nearest_alert_km": 22.6,
-      "latest_observed_at": "2026-09-19 08:00"
+      "max_rainfall_mm": null,
+      "nearest_alert_km": 2.0,
+      "latest_observed_at": "2026-09-19 12:40"
     },
     {
       "id": 3,
@@ -815,27 +830,12 @@ window.IEAT_THAIWATER_DATA = {
       "operations": "สายปฎิบัติการ1",
       "status": "วิกฤต",
       "severity_score": 3,
-      "alert_station_count": 5,
-      "rain_alert_count": 2,
+      "alert_station_count": 3,
+      "rain_alert_count": 0,
       "water_alert_count": 3,
-      "max_rainfall_mm": 37.5,
-      "nearest_alert_km": 3.1,
-      "latest_observed_at": "2026-09-19 08:00"
-    },
-    {
-      "id": 42,
-      "name": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก A",
-      "lat": 13.7972954,
-      "lon": 100.5599994,
-      "operations": "สำนักงานใหญ่",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "alert_station_count": 6,
-      "rain_alert_count": 1,
-      "water_alert_count": 5,
-      "max_rainfall_mm": 35.6,
-      "nearest_alert_km": 6.0,
-      "latest_observed_at": "2026-09-19 08:00"
+      "max_rainfall_mm": null,
+      "nearest_alert_km": 15.2,
+      "latest_observed_at": "2026-09-19 12:40"
     },
     {
       "id": 7,
@@ -850,7 +850,22 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 5,
       "max_rainfall_mm": null,
       "nearest_alert_km": 4.7,
-      "latest_observed_at": "2026-09-19 08:00"
+      "latest_observed_at": "2026-09-19 12:40"
+    },
+    {
+      "id": 9,
+      "name": "นิคมอุตสาหกรรมสินสาคร",
+      "lat": 13.54653659,
+      "lon": 100.3436175,
+      "operations": "สายปฎิบัติการ1",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "alert_station_count": 1,
+      "rain_alert_count": 0,
+      "water_alert_count": 1,
+      "max_rainfall_mm": null,
+      "nearest_alert_km": 4.6,
+      "latest_observed_at": "2026-09-19 12:40"
     },
     {
       "id": 18,
@@ -865,22 +880,22 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 1,
       "max_rainfall_mm": null,
       "nearest_alert_km": 20.7,
-      "latest_observed_at": "2026-09-19 08:00"
+      "latest_observed_at": "2026-09-19 12:40"
     },
     {
-      "id": 26,
-      "name": "นิคมอุตสาหกรรมแพรกษา",
-      "lat": 13.56903519,
-      "lon": 100.6528202,
-      "operations": "สายปฎิบัติการ1",
+      "id": 22,
+      "name": "นิคมอุตสาหกรรมหลักชัยเมืองยาง",
+      "lat": 12.72735973,
+      "lon": 101.455931,
+      "operations": "สายปฎิบัติการ3",
       "status": "วิกฤต",
       "severity_score": 3,
-      "alert_station_count": 1,
+      "alert_station_count": 2,
       "rain_alert_count": 0,
-      "water_alert_count": 1,
+      "water_alert_count": 2,
       "max_rainfall_mm": null,
-      "nearest_alert_km": 13.8,
-      "latest_observed_at": "2026-09-19 00:30"
+      "nearest_alert_km": 22.6,
+      "latest_observed_at": "2026-09-19 12:40"
     },
     {
       "id": 43,
@@ -895,7 +910,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 4,
       "max_rainfall_mm": null,
       "nearest_alert_km": 5.5,
-      "latest_observed_at": "2026-09-19 08:00"
+      "latest_observed_at": "2026-09-19 12:40"
     },
     {
       "id": 6,
@@ -910,22 +925,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 1,
       "max_rainfall_mm": null,
       "nearest_alert_km": 25.8,
-      "latest_observed_at": "2026-09-19 08:00"
-    },
-    {
-      "id": 9,
-      "name": "นิคมอุตสาหกรรมสินสาคร",
-      "lat": 13.54653659,
-      "lon": 100.3436175,
-      "operations": "สายปฎิบัติการ1",
-      "status": "เฝ้าระวัง",
-      "severity_score": 2,
-      "alert_station_count": 1,
-      "rain_alert_count": 0,
-      "water_alert_count": 1,
-      "max_rainfall_mm": null,
-      "nearest_alert_km": 4.6,
-      "latest_observed_at": "2026-09-19 08:00"
+      "latest_observed_at": "2026-09-19 12:40"
     },
     {
       "id": 39,
@@ -940,7 +940,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 1,
       "max_rainfall_mm": null,
       "nearest_alert_km": 7.2,
-      "latest_observed_at": "2026-09-19 07:00"
+      "latest_observed_at": "2026-09-19 12:00"
     },
     {
       "id": 85,
@@ -955,222 +955,182 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 1,
       "max_rainfall_mm": null,
       "nearest_alert_km": 7.1,
-      "latest_observed_at": "2026-09-19 08:00"
+      "latest_observed_at": "2026-09-19 12:40"
     }
   ],
   "stations": [
     {
       "kind": "rainfall",
-      "station": "บ้านซอย 8",
-      "station_code": "STN1620",
-      "province": "สตูล",
-      "district": "ควนกาหลง",
-      "lat": 6.881952,
-      "lon": 99.997221,
-      "rainfall_mm": 108.5,
-      "value_text": "108.5 มม.",
-      "observed_at": "2026-09-19 06:00",
+      "station": "หน่วยพิทักษ์ป่าดอยอีหุ้ย",
+      "station_code": "MOU334",
+      "province": "ลำพูน",
+      "district": "ทุ่งหัวช้าง",
+      "lat": 18.153486,
+      "lon": 98.9833,
+      "rainfall_mm": 131.0,
+      "value_text": "131 มม.",
+      "observed_at": "2026-09-19 12:00",
       "status": "วิกฤต",
       "severity_score": 4,
-      "distance_km": 42.4,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "distance_km": 49.2,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
+      "agency": "พพภ"
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านขุนป๋วย",
+      "station_code": "STN0520",
+      "province": "เชียงใหม่",
+      "district": "แม่วาง",
+      "lat": 18.603013,
+      "lon": 98.607522,
+      "rainfall_mm": 113.5,
+      "value_text": "113.5 มม.",
+      "observed_at": "2026-09-19 11:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 46.1,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
       "agency": "ทน."
     },
     {
       "kind": "rainfall",
-      "station": "บ้านปลักหว้า",
-      "station_code": "STN1923",
-      "province": "สตูล",
-      "district": "ท่าแพ",
-      "lat": 6.80296,
-      "lon": 99.963794,
-      "rainfall_mm": 90.5,
-      "value_text": "90.5 มม.",
-      "observed_at": "2026-09-19 06:00",
+      "station": "แม่น้ำปิงที่ อ.จอมทอง",
+      "station_code": "BBU01",
+      "province": "เชียงใหม่",
+      "district": "ดอยหล่อ",
+      "lat": 18.435266,
+      "lon": 98.740107,
+      "rainfall_mm": 103.0,
+      "value_text": "103 มม.",
+      "observed_at": "2026-09-19 11:00",
       "status": "วิกฤต",
       "severity_score": 4,
-      "distance_km": 49.3,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "ทน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "TW.28",
-      "station_code": "ridhydro_TW.28",
-      "province": "ลำปาง",
-      "district": "เมืองปาน",
-      "lat": 18.559259,
-      "lon": 99.466838,
-      "waterlevel_msl": 290.22,
-      "storage_percent": null,
-      "value_text": "290.22 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 44.6,
+      "distance_km": 36.5,
       "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
-      "agency": "ชป."
+      "agency": "กฟผ."
     },
     {
-      "kind": "waterlevel",
-      "station": "คลองเหมืองตะกั่ว",
-      "station_code": "ridhydro_TSL35",
-      "province": "พัทลุง",
-      "district": "ตะโหมด",
-      "lat": 7.26871,
-      "lon": 100.094388,
-      "waterlevel_msl": 36.7,
-      "storage_percent": null,
-      "value_text": "36.7 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
+      "kind": "rainfall",
+      "station": "อ่างเก็บน้ำห้วยแทง",
+      "station_code": "RES017",
+      "province": "ลำพูน",
+      "district": "บ้านโฮ่ง",
+      "lat": 18.29177,
+      "lon": 98.86272,
+      "rainfall_mm": 101.2,
+      "value_text": "101.2 มม.",
+      "observed_at": "2026-09-19 12:00",
+      "status": "วิกฤต",
       "severity_score": 4,
-      "distance_km": 41.2,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "ชป."
+      "distance_km": 38.5,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
+      "agency": "สสน."
     },
     {
-      "kind": "waterlevel",
-      "station": "บ้านพรุพร้อ",
-      "station_code": "ridhydro_TX69",
-      "province": "สงขลา",
-      "district": "รัตภูมิ",
-      "lat": 7.19253,
-      "lon": 100.221,
-      "waterlevel_msl": 25.36,
-      "storage_percent": null,
-      "value_text": "25.36 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 25.6,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "TC.60",
-      "station_code": "ridhydro_TC.60",
-      "province": "นครสวรรค์",
-      "district": "ท่าตะโก",
-      "lat": 15.67,
-      "lon": 100.334167,
-      "waterlevel_msl": 23.4,
-      "storage_percent": null,
-      "value_text": "23.4 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 26.7,
-      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "เขื่อนแม่กวงอุดมธารา",
-      "station_code": "ridhydro_TUP.12",
+      "kind": "rainfall",
+      "station": "แม่หาด",
+      "station_code": "VLGE25",
       "province": "เชียงใหม่",
-      "district": "ดอยสะเก็ด",
-      "lat": 18.929542,
-      "lon": 99.127708,
-      "waterlevel_msl": 377.38,
-      "storage_percent": null,
-      "value_text": "377.38 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
+      "district": "จอมทอง",
+      "lat": 18.46006,
+      "lon": 98.65094,
+      "rainfall_mm": 93.4,
+      "value_text": "93.4 มม.",
+      "observed_at": "2026-09-19 12:00",
+      "status": "วิกฤต",
       "severity_score": 4,
-      "distance_km": 38.6,
+      "distance_km": 44.0,
       "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
-      "agency": "ชป."
+      "agency": "สสน."
     },
     {
-      "kind": "waterlevel",
-      "station": "หอทอง",
-      "station_code": "ridhydro_TKgt61",
-      "province": "ปราจีนบุรี",
-      "district": "บ้านสร้าง",
-      "lat": 13.960857,
-      "lon": 101.216475,
-      "waterlevel_msl": 2.78,
-      "storage_percent": null,
-      "value_text": "2.78 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 40.4,
-      "nearest_estate": "นิคมอุตสาหกรรมเกตเวย์ ซิตี้",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สะพานเขาโค้ง",
-      "station_code": "ridhydro_TY.56",
-      "province": "สุโขทัย",
-      "district": "กงไกรลาศ",
-      "lat": 16.925978,
-      "lon": 99.890301,
-      "waterlevel_msl": 43.28,
-      "storage_percent": null,
-      "value_text": "43.28 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 47.7,
-      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สถานีคลองต่ำ",
-      "station_code": "ridhydro_STN05",
-      "province": "สงขลา",
-      "district": "หาดใหญ่",
-      "lat": 6.975436,
-      "lon": 100.36767,
-      "waterlevel_msl": 15.82,
-      "storage_percent": null,
-      "value_text": "15.82 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 3.8,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สถานีคลองส่งน้ำแม่แตง",
-      "station_code": "ridhydro_TUP.19",
+      "kind": "rainfall",
+      "station": "สะพานน้ำแม่กลาง",
+      "station_code": "MOU294",
       "province": "เชียงใหม่",
-      "district": "เมืองเชียงใหม่",
-      "lat": 18.804512,
-      "lon": 98.959762,
-      "waterlevel_msl": 321.55,
-      "storage_percent": null,
-      "value_text": "321.55 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
+      "district": "จอมทอง",
+      "lat": 18.507551,
+      "lon": 98.66203,
+      "rainfall_mm": 91.6,
+      "value_text": "91.6 มม.",
+      "observed_at": "2026-09-19 12:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 41.4,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
+      "agency": "พพภ"
+    },
+    {
+      "kind": "waterlevel",
+      "station": "ปตร. คลองลัดบางยอ 2",
+      "station_code": "BKC004",
+      "province": "สมุทรปราการ",
+      "district": "พระประแดง",
+      "lat": 13.661021,
+      "lon": 100.56727,
+      "waterlevel_msl": 1.17,
+      "storage_percent": 110.45,
+      "value_text": "1.17 ม.รทก.",
+      "observed_at": "2026-09-19 12:40",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
-      "distance_km": 25.3,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
+      "distance_km": 13.8,
+      "nearest_estate": "นิคมอุตสาหกรรมแพรกษา",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "ปตร.วัดบางกระเจ้านอก",
+      "station_code": "BKC002",
+      "province": "สมุทรปราการ",
+      "district": "พระประแดง",
+      "lat": 13.689612,
+      "lon": 100.554886,
+      "waterlevel_msl": 1.33,
+      "storage_percent": 102.62,
+      "value_text": "1.33 ม.รทก.",
+      "observed_at": "2026-09-19 12:40",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 12.0,
+      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก A",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "วัดท่ากระบือ",
+      "station_code": "ridhydro_TTC09",
+      "province": "สมุทรสาคร",
+      "district": "กระทุ่มแบน",
+      "lat": 13.662052,
+      "lon": 100.223332,
+      "waterlevel_msl": 1.42,
+      "storage_percent": null,
+      "value_text": "1.42 ม.รทก.",
+      "observed_at": "2026-09-14 08:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 13.2,
+      "nearest_estate": "นิคมอุตสาหกรรมสมุทรสาคร",
       "agency": "ชป."
     },
     {
       "kind": "waterlevel",
-      "station": "ปตร.ท่าช้าง-บางกล่ำ",
-      "station_code": "ridhydro_TSL28",
-      "province": "สงขลา",
-      "district": "บางกล่ำ",
-      "lat": 7.127928,
-      "lon": 100.433274,
-      "waterlevel_msl": 0.19,
+      "station": "วัดจอมเกษ",
+      "station_code": "ridhydro_TS.25",
+      "province": "พระนครศรีอยุธยา",
+      "district": "บางปะหัน",
+      "lat": 14.414349,
+      "lon": 100.55782,
+      "waterlevel_msl": 1.01,
       "storage_percent": null,
-      "value_text": "0.19 ม.รทก.",
+      "value_text": "1.01 ม.รทก.",
       "observed_at": "2026-09-14 09:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
-      "distance_km": 15.6,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "distance_km": 9.3,
+      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
       "agency": "ชป."
     },
     {
@@ -1193,38 +1153,20 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "บ้านอุใดใต้",
-      "station_code": "ridhydro_LA04 (TX.334)",
-      "province": "สตูล",
-      "district": "ควนกาหลง",
-      "lat": 6.928031,
-      "lon": 99.935987,
-      "waterlevel_msl": 24.09,
+      "station": "ปตร.ท่าช้าง-บางกล่ำ",
+      "station_code": "ridhydro_TSL28",
+      "province": "สงขลา",
+      "district": "บางกล่ำ",
+      "lat": 7.127928,
+      "lon": 100.433274,
+      "waterlevel_msl": 0.19,
       "storage_percent": null,
-      "value_text": "24.09 ม.รทก.",
+      "value_text": "0.19 ม.รทก.",
       "observed_at": "2026-09-14 09:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
-      "distance_km": 47.6,
+      "distance_km": 15.6,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สถานีฝายวังปาน",
-      "station_code": "ridhydro_TUP.22",
-      "province": "เชียงใหม่",
-      "district": "จอมทอง",
-      "lat": 18.405082,
-      "lon": 98.702804,
-      "waterlevel_msl": 272.68,
-      "storage_percent": null,
-      "value_text": "272.68 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 41.6,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
       "agency": "ชป."
     },
     {
@@ -1247,235 +1189,73 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "บ้านผังปาล์ม 1",
-      "station_code": "ridhydro_LA07 (TX.336)",
-      "province": "สตูล",
-      "district": "มะนัง",
-      "lat": 6.998849,
-      "lon": 99.911013,
-      "waterlevel_msl": 14.58,
-      "storage_percent": null,
-      "value_text": "14.58 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 49.5,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "วัดท่ากระบือ",
-      "station_code": "ridhydro_TTC09",
-      "province": "สมุทรสาคร",
-      "district": "กระทุ่มแบน",
-      "lat": 13.662052,
-      "lon": 100.223332,
-      "waterlevel_msl": 1.42,
-      "storage_percent": null,
-      "value_text": "1.42 ม.รทก.",
-      "observed_at": "2026-09-14 08:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 13.2,
-      "nearest_estate": "นิคมอุตสาหกรรมสมุทรสาคร",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "TW.30",
-      "station_code": "ridhydro_TW.30",
+      "station": "TW.28",
+      "station_code": "ridhydro_TW.28",
       "province": "ลำปาง",
-      "district": "เกาะคา",
-      "lat": 18.241214,
-      "lon": 99.316761,
-      "waterlevel_msl": 241.18,
+      "district": "เมืองปาน",
+      "lat": 18.559259,
+      "lon": 99.466838,
+      "waterlevel_msl": 290.22,
       "storage_percent": null,
-      "value_text": "241.18 ม.รทก.",
+      "value_text": "290.22 ม.รทก.",
       "observed_at": "2026-09-14 09:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
-      "distance_km": 48.4,
+      "distance_km": 44.6,
       "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
       "agency": "ชป."
     },
     {
       "kind": "waterlevel",
-      "station": "ฝายคลองสุคต",
-      "station_code": "ridhydro_TS.22",
-      "province": "สระบุรี",
-      "district": "วังม่วง",
-      "lat": 14.863621,
-      "lon": 101.119957,
-      "waterlevel_msl": 47.57,
+      "station": "สถานีฝายวังปาน",
+      "station_code": "ridhydro_TUP.22",
+      "province": "เชียงใหม่",
+      "district": "จอมทอง",
+      "lat": 18.405082,
+      "lon": 98.702804,
+      "waterlevel_msl": 272.68,
       "storage_percent": null,
-      "value_text": "47.57 ม.รทก.",
+      "value_text": "272.68 ม.รทก.",
       "observed_at": "2026-09-14 09:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
-      "distance_km": 29.2,
-      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "ปากแม่น้ำบางปะกง",
-      "station_code": "ridhydro_TKgt54",
-      "province": "ฉะเชิงเทรา",
-      "district": "บางปะกง",
-      "lat": 13.474833,
-      "lon": 100.98196,
-      "waterlevel_msl": 0.21,
-      "storage_percent": null,
-      "value_text": "0.21 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 6.4,
-      "nearest_estate": "นิคมอุตสาหกรรมอมตะซิตี้ ชลบุรี",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "ศรีมหาโพธิ์",
-      "station_code": "ridhydro_TKgt62",
-      "province": "ปราจีนบุรี",
-      "district": "ศรีมหาโพธิ",
-      "lat": 13.973075,
-      "lon": 101.512525,
-      "waterlevel_msl": 5.51,
-      "storage_percent": null,
-      "value_text": "5.51 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 16.9,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "วัดมณีวรรณ",
-      "station_code": "ridhydro_TTC05",
-      "province": "สุพรรณบุรี",
-      "district": "บางปลาม้า",
-      "lat": 14.3969,
-      "lon": 100.153,
-      "waterlevel_msl": 2.55,
-      "storage_percent": null,
-      "value_text": "2.55 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 48.8,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "บ้านแหลม",
-      "station_code": "ridhydro_TPB15",
-      "province": "เพชรบุรี",
-      "district": "บ้านแหลม",
-      "lat": 13.212777,
-      "lon": 99.982754,
-      "waterlevel_msl": 1.51,
-      "storage_percent": null,
-      "value_text": "1.51 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 43.4,
-      "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "บ้านหนองน้ำใส",
-      "station_code": "ridhydro_TTL.02",
-      "province": "สระแก้ว",
-      "district": "วัฒนานคร",
-      "lat": 13.85454,
-      "lon": 102.377483,
-      "waterlevel_msl": 65.75,
-      "storage_percent": null,
-      "value_text": "65.75 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 24.0,
-      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สมบูรณ์",
-      "station_code": "ridhydro_TNy9",
-      "province": "นครนายก",
-      "district": "องครักษ์",
-      "lat": 13.970389,
-      "lon": 101.138699,
-      "waterlevel_msl": 1.41,
-      "storage_percent": null,
-      "value_text": "1.41 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 42.4,
-      "nearest_estate": "นิคมอุตสาหกรรมเอเซีย (สุวรรณภูมิ)",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สถานีแม่น้ำปิงที่ฝายหนองสลีก",
-      "station_code": "ridhydro_TUP.10",
-      "province": "ลำพูน",
-      "district": "ป่าซาง",
-      "lat": 18.525197,
-      "lon": 98.902161,
-      "waterlevel_msl": 285.06,
-      "storage_percent": null,
-      "value_text": "285.06 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 16.8,
+      "distance_km": 41.6,
       "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
       "agency": "ชป."
     },
     {
       "kind": "waterlevel",
-      "station": "บ้านเนินหินกอง",
-      "station_code": "ridhydro_TKgt48",
-      "province": "ปราจีนบุรี",
-      "district": "กบินทร์บุรี",
-      "lat": 13.782015,
-      "lon": 101.900566,
-      "waterlevel_msl": 24.89,
+      "station": "วัดท่าไม้",
+      "station_code": "ridhydro_TY.58",
+      "province": "นครสวรรค์",
+      "district": "ชุมแสง",
+      "lat": 15.915063,
+      "lon": 100.247163,
+      "waterlevel_msl": 23.15,
       "storage_percent": null,
-      "value_text": "24.89 ม.รทก.",
+      "value_text": "23.15 ม.รทก.",
       "observed_at": "2026-09-14 09:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
-      "distance_km": 30.1,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
+      "distance_km": 46.2,
+      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
       "agency": "ชป."
     },
     {
       "kind": "waterlevel",
-      "station": "คลองตงตอนล่าง",
-      "station_code": "ridhydro_TSL38",
+      "station": "คลองหวะตอนบน",
+      "station_code": "ridhydro_TSL39",
       "province": "สงขลา",
-      "district": "หาดใหญ่",
-      "lat": 6.848806,
-      "lon": 100.471146,
-      "waterlevel_msl": 9.92,
+      "district": "นาหม่อม",
+      "lat": 6.969362,
+      "lon": 100.558293,
+      "waterlevel_msl": 19.84,
       "storage_percent": null,
-      "value_text": "9.92 ม.รทก.",
+      "value_text": "19.84 ม.รทก.",
       "observed_at": "2026-09-14 09:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
-      "distance_km": 21.6,
+      "distance_km": 22.3,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "ชป."
     },
@@ -1499,307 +1279,73 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "คลองหวะตอนบน",
-      "station_code": "ridhydro_TSL39",
-      "province": "สงขลา",
-      "district": "นาหม่อม",
-      "lat": 6.969362,
-      "lon": 100.558293,
-      "waterlevel_msl": 19.84,
+      "station": "ฝายคลองสุคต",
+      "station_code": "ridhydro_TS.22",
+      "province": "สระบุรี",
+      "district": "วังม่วง",
+      "lat": 14.863621,
+      "lon": 101.119957,
+      "waterlevel_msl": 47.57,
       "storage_percent": null,
-      "value_text": "19.84 ม.รทก.",
+      "value_text": "47.57 ม.รทก.",
       "observed_at": "2026-09-14 09:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
-      "distance_km": 22.3,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "วัดท่าไม้",
-      "station_code": "ridhydro_TY.58",
-      "province": "นครสวรรค์",
-      "district": "ชุมแสง",
-      "lat": 15.915063,
-      "lon": 100.247163,
-      "waterlevel_msl": 23.15,
-      "storage_percent": null,
-      "value_text": "23.15 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 46.2,
-      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สถานี X.112",
-      "station_code": "ridhydro_STN11",
-      "province": "สงขลา",
-      "district": "สะเดา",
-      "lat": 6.705239,
-      "lon": 100.433266,
-      "waterlevel_msl": 20.74,
-      "storage_percent": null,
-      "value_text": "20.74 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 18.3,
-      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "บ้านตะเภาลาย",
-      "station_code": "ridhydro_TKgt53",
-      "province": "ปราจีนบุรี",
-      "district": "บ้านสร้าง",
-      "lat": 14.012733,
-      "lon": 101.265193,
-      "waterlevel_msl": 2.03,
-      "storage_percent": null,
-      "value_text": "2.03 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 43.5,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "เขื่อนนายก",
-      "station_code": "ridhydro_TNy11",
-      "province": "นครนายก",
-      "district": "เมืองนครนายก",
-      "lat": 14.18205,
-      "lon": 101.162164,
-      "waterlevel_msl": 3.44,
-      "storage_percent": null,
-      "value_text": "3.44 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 36.0,
-      "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "บางขนาก",
-      "station_code": "ridhydro_TKgt60",
-      "province": "ฉะเชิงเทรา",
-      "district": "บางน้ำเปรี้ยว",
-      "lat": 13.874795,
-      "lon": 101.141647,
-      "waterlevel_msl": 1.5,
-      "storage_percent": null,
-      "value_text": "1.5 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 34.5,
-      "nearest_estate": "นิคมอุตสาหกรรมเอเซีย (สุวรรณภูมิ)",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "เหนือเขื่อนป่าสัก",
-      "station_code": "ridhydro_TS.10",
-      "province": "ลพบุรี",
-      "district": "พัฒนานิคม",
-      "lat": 14.848254,
-      "lon": 101.090205,
-      "waterlevel_msl": 39.25,
-      "storage_percent": null,
-      "value_text": "39.25 ม.รทก.",
-      "observed_at": "2026-09-14 08:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 26.4,
+      "distance_km": 29.2,
       "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
       "agency": "ชป."
     },
     {
       "kind": "waterlevel",
-      "station": "เขื่อนทดน้ำบางปะกง",
-      "station_code": "ridhydro_TKgt58",
-      "province": "ฉะเชิงเทรา",
-      "district": "เมืองฉะเชิงเทรา",
-      "lat": 13.706797,
-      "lon": 101.136945,
-      "waterlevel_msl": 2.19,
+      "station": "บ้านพรุพร้อ",
+      "station_code": "ridhydro_TX69",
+      "province": "สงขลา",
+      "district": "รัตภูมิ",
+      "lat": 7.19253,
+      "lon": 100.221,
+      "waterlevel_msl": 25.36,
       "storage_percent": null,
-      "value_text": "2.19 ม.รทก.",
+      "value_text": "25.36 ม.รทก.",
       "observed_at": "2026-09-14 09:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
-      "distance_km": 22.1,
-      "nearest_estate": "นิคมอุตสาหกรรมทีเอฟดี 1",
+      "distance_km": 25.6,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "ชป."
     },
     {
       "kind": "waterlevel",
-      "station": "วัดสง่างาม",
-      "station_code": "ridhydro_TKgt52",
-      "province": "ปราจีนบุรี",
-      "district": "เมืองปราจีนบุรี",
-      "lat": 14.031635,
-      "lon": 101.42646,
-      "waterlevel_msl": 3.36,
+      "station": "สถานีแม่น้ำปิงที่ฝายหนองสลีก",
+      "station_code": "ridhydro_TUP.10",
+      "province": "ลำพูน",
+      "district": "ป่าซาง",
+      "lat": 18.525197,
+      "lon": 98.902161,
+      "waterlevel_msl": 285.06,
       "storage_percent": null,
-      "value_text": "3.36 ม.รทก.",
+      "value_text": "285.06 ม.รทก.",
       "observed_at": "2026-09-14 09:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
-      "distance_km": 28.1,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สถานีโครงการชลประทานแม่ปิงเก่า",
-      "station_code": "ridhydro_TUP.18",
-      "province": "เชียงใหม่",
-      "district": "สารภี",
-      "lat": 18.690973,
-      "lon": 98.987948,
-      "waterlevel_msl": 296.24,
-      "storage_percent": null,
-      "value_text": "296.24 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 12.6,
+      "distance_km": 16.8,
       "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
       "agency": "ชป."
     },
     {
       "kind": "waterlevel",
-      "station": "สถานีบ่อยาง",
-      "station_code": "ridhydro_TSL09",
+      "station": "ปตร.อู่ตะเภา",
+      "station_code": "ridhydro_TSL24",
       "province": "สงขลา",
-      "district": "เมืองสงขลา",
-      "lat": 7.200311,
-      "lon": 100.587907,
-      "waterlevel_msl": 0.36,
+      "district": "หาดใหญ่",
+      "lat": 6.987824,
+      "lon": 100.462205,
+      "waterlevel_msl": 2.91,
       "storage_percent": null,
-      "value_text": "0.36 ม.รทก.",
+      "value_text": "2.91 ม.รทก.",
       "observed_at": "2026-09-14 09:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
-      "distance_km": 33.0,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "อ่างเก็บน้ำห้วยยาง",
-      "station_code": "ridhydro_TTL.01",
-      "province": "สระแก้ว",
-      "district": "ตาพระยา",
-      "lat": 14.013375,
-      "lon": 102.644844,
-      "waterlevel_msl": 100.91,
-      "storage_percent": null,
-      "value_text": "100.91 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 33.6,
-      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "ฝายท่าลาด",
-      "station_code": "ridhydro_TKgt59",
-      "province": "ฉะเชิงเทรา",
-      "district": "พนมสารคาม",
-      "lat": 13.707719,
-      "lon": 101.401415,
-      "waterlevel_msl": 2.69,
-      "storage_percent": null,
-      "value_text": "2.69 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 12.9,
-      "nearest_estate": "นิคมอุตสาหกรรมเกตเวย์ ซิตี้",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สะพานข้ามลำภาชี",
-      "station_code": "ridhydro_TK.68",
-      "province": "ราชบุรี",
-      "district": "จอมบึง",
-      "lat": 13.7521,
-      "lon": 99.4374,
-      "waterlevel_msl": 54.76,
-      "storage_percent": null,
-      "value_text": "54.76 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 46.4,
-      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "บ้านโพธิ์",
-      "station_code": "ridhydro_TKgt56",
-      "province": "ฉะเชิงเทรา",
-      "district": "บ้านโพธิ์",
-      "lat": 13.58335,
-      "lon": 101.070917,
-      "waterlevel_msl": 2.03,
-      "storage_percent": null,
-      "value_text": "2.03 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 8.5,
-      "nearest_estate": "นิคมอุตสาหกรรมทีเอฟดี 1",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "ฝายท่าเชียด",
-      "station_code": "ridhydro_TX21A",
-      "province": "พัทลุง",
-      "district": "บางแก้ว",
-      "lat": 7.361018,
-      "lon": 100.1085,
-      "waterlevel_msl": 21.8,
-      "storage_percent": null,
-      "value_text": "21.8 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 48.0,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "คลองห้วยเผยอ",
-      "station_code": "ridhydro_TSL36",
-      "province": "พัทลุง",
-      "district": "ปากพะยูน",
-      "lat": 7.277592,
-      "lon": 100.33808,
-      "waterlevel_msl": 1.39,
-      "storage_percent": null,
-      "value_text": "1.39 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 30.0,
+      "distance_km": 11.5,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "ชป."
     },
@@ -1823,56 +1369,110 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "ปตร.อู่ตะเภา",
-      "station_code": "ridhydro_TSL24",
-      "province": "สงขลา",
-      "district": "หาดใหญ่",
-      "lat": 6.987824,
-      "lon": 100.462205,
-      "waterlevel_msl": 2.91,
+      "station": "อำเภอโพธิ์ประทับช้าง จ.พิจิตร",
+      "station_code": "ridhydro_TY.42",
+      "province": "พิจิตร",
+      "district": "โพธิ์ประทับช้าง",
+      "lat": 16.310319,
+      "lon": 100.271461,
+      "waterlevel_msl": 29.53,
       "storage_percent": null,
-      "value_text": "2.91 ม.รทก.",
+      "value_text": "29.53 ม.รทก.",
       "observed_at": "2026-09-14 09:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
-      "distance_km": 11.5,
+      "distance_km": 32.2,
+      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "TW.29",
+      "station_code": "ridhydro_TW.29",
+      "province": "ลำปาง",
+      "district": "ห้างฉัตร",
+      "lat": 18.368642,
+      "lon": 99.326625,
+      "waterlevel_msl": 302.64,
+      "storage_percent": null,
+      "value_text": "302.64 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 38.7,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "หอทอง",
+      "station_code": "ridhydro_TKgt61",
+      "province": "ปราจีนบุรี",
+      "district": "บ้านสร้าง",
+      "lat": 13.960857,
+      "lon": 101.216475,
+      "waterlevel_msl": 2.78,
+      "storage_percent": null,
+      "value_text": "2.78 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 40.4,
+      "nearest_estate": "นิคมอุตสาหกรรมเกตเวย์ ซิตี้",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "วัดมณีวรรณ",
+      "station_code": "ridhydro_TTC05",
+      "province": "สุพรรณบุรี",
+      "district": "บางปลาม้า",
+      "lat": 14.3969,
+      "lon": 100.153,
+      "waterlevel_msl": 2.55,
+      "storage_percent": null,
+      "value_text": "2.55 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 48.8,
+      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "คลองเหมืองตะกั่ว",
+      "station_code": "ridhydro_TSL35",
+      "province": "พัทลุง",
+      "district": "ตะโหมด",
+      "lat": 7.26871,
+      "lon": 100.094388,
+      "waterlevel_msl": 36.7,
+      "storage_percent": null,
+      "value_text": "36.7 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 41.2,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "ชป."
     },
     {
       "kind": "waterlevel",
-      "station": "ปตร.คลอง 1ซ-ร1",
-      "station_code": "ridhydro_TSL27",
+      "station": "คลองตงตอนล่าง",
+      "station_code": "ridhydro_TSL38",
       "province": "สงขลา",
       "district": "หาดใหญ่",
-      "lat": 7.008409,
-      "lon": 100.442098,
-      "waterlevel_msl": 5.07,
+      "lat": 6.848806,
+      "lon": 100.471146,
+      "waterlevel_msl": 9.92,
       "storage_percent": null,
-      "value_text": "5.07 ม.รทก.",
+      "value_text": "9.92 ม.รทก.",
       "observed_at": "2026-09-14 09:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
-      "distance_km": 9.1,
+      "distance_km": 21.6,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "บ้านฟากห้วย",
-      "station_code": "ridhydro_TTL.04",
-      "province": "สระแก้ว",
-      "district": "อรัญประเทศ",
-      "lat": 13.684085,
-      "lon": 102.501103,
-      "waterlevel_msl": 41.4,
-      "storage_percent": null,
-      "value_text": "41.4 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 7.3,
-      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
       "agency": "ชป."
     },
     {
@@ -1895,20 +1495,380 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "คลองหวะตอนล่าง",
-      "station_code": "ridhydro_TSL40",
-      "province": "สงขลา",
-      "district": "หาดใหญ่",
-      "lat": 6.987312,
-      "lon": 100.474043,
-      "waterlevel_msl": 1.38,
+      "station": "ฝายท่าเชียด",
+      "station_code": "ridhydro_TX21A",
+      "province": "พัทลุง",
+      "district": "บางแก้ว",
+      "lat": 7.361018,
+      "lon": 100.1085,
+      "waterlevel_msl": 21.8,
       "storage_percent": null,
-      "value_text": "1.38 ม.รทก.",
+      "value_text": "21.8 ม.รทก.",
       "observed_at": "2026-09-14 09:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
-      "distance_km": 12.8,
+      "distance_km": 48.0,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "TW.30",
+      "station_code": "ridhydro_TW.30",
+      "province": "ลำปาง",
+      "district": "เกาะคา",
+      "lat": 18.241214,
+      "lon": 99.316761,
+      "waterlevel_msl": 241.18,
+      "storage_percent": null,
+      "value_text": "241.18 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 48.4,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "สมบูรณ์",
+      "station_code": "ridhydro_TNy9",
+      "province": "นครนายก",
+      "district": "องครักษ์",
+      "lat": 13.970389,
+      "lon": 101.138699,
+      "waterlevel_msl": 1.41,
+      "storage_percent": null,
+      "value_text": "1.41 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 42.4,
+      "nearest_estate": "นิคมอุตสาหกรรมเอเซีย (สุวรรณภูมิ)",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "สถานีบ่อยาง",
+      "station_code": "ridhydro_TSL09",
+      "province": "สงขลา",
+      "district": "เมืองสงขลา",
+      "lat": 7.200311,
+      "lon": 100.587907,
+      "waterlevel_msl": 0.36,
+      "storage_percent": null,
+      "value_text": "0.36 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 33.0,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "บ้านโพธิ์",
+      "station_code": "ridhydro_TKgt56",
+      "province": "ฉะเชิงเทรา",
+      "district": "บ้านโพธิ์",
+      "lat": 13.58335,
+      "lon": 101.070917,
+      "waterlevel_msl": 2.03,
+      "storage_percent": null,
+      "value_text": "2.03 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 8.5,
+      "nearest_estate": "นิคมอุตสาหกรรมทีเอฟดี 1",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "บ้านหนองน้ำใส",
+      "station_code": "ridhydro_TTL.02",
+      "province": "สระแก้ว",
+      "district": "วัฒนานคร",
+      "lat": 13.85454,
+      "lon": 102.377483,
+      "waterlevel_msl": 65.75,
+      "storage_percent": null,
+      "value_text": "65.75 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 24.0,
+      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "ฝายท่าลาด",
+      "station_code": "ridhydro_TKgt59",
+      "province": "ฉะเชิงเทรา",
+      "district": "พนมสารคาม",
+      "lat": 13.707719,
+      "lon": 101.401415,
+      "waterlevel_msl": 2.69,
+      "storage_percent": null,
+      "value_text": "2.69 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 12.9,
+      "nearest_estate": "นิคมอุตสาหกรรมเกตเวย์ ซิตี้",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "สถานีคลองต่ำ",
+      "station_code": "ridhydro_STN05",
+      "province": "สงขลา",
+      "district": "หาดใหญ่",
+      "lat": 6.975436,
+      "lon": 100.36767,
+      "waterlevel_msl": 15.82,
+      "storage_percent": null,
+      "value_text": "15.82 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 3.8,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "สถานีโครงการชลประทานแม่ปิงเก่า",
+      "station_code": "ridhydro_TUP.18",
+      "province": "เชียงใหม่",
+      "district": "สารภี",
+      "lat": 18.690973,
+      "lon": 98.987948,
+      "waterlevel_msl": 296.24,
+      "storage_percent": null,
+      "value_text": "296.24 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 12.6,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "เขื่อนทดน้ำบางปะกง",
+      "station_code": "ridhydro_TKgt58",
+      "province": "ฉะเชิงเทรา",
+      "district": "เมืองฉะเชิงเทรา",
+      "lat": 13.706797,
+      "lon": 101.136945,
+      "waterlevel_msl": 2.19,
+      "storage_percent": null,
+      "value_text": "2.19 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 22.1,
+      "nearest_estate": "นิคมอุตสาหกรรมทีเอฟดี 1",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "เหนือเขื่อนป่าสัก",
+      "station_code": "ridhydro_TS.10",
+      "province": "ลพบุรี",
+      "district": "พัฒนานิคม",
+      "lat": 14.848254,
+      "lon": 101.090205,
+      "waterlevel_msl": 39.25,
+      "storage_percent": null,
+      "value_text": "39.25 ม.รทก.",
+      "observed_at": "2026-09-14 08:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 26.4,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "เขื่อนแม่กวงอุดมธารา",
+      "station_code": "ridhydro_TUP.12",
+      "province": "เชียงใหม่",
+      "district": "ดอยสะเก็ด",
+      "lat": 18.929542,
+      "lon": 99.127708,
+      "waterlevel_msl": 377.38,
+      "storage_percent": null,
+      "value_text": "377.38 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 38.6,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "อ่างเก็บน้ำห้วยยาง",
+      "station_code": "ridhydro_TTL.01",
+      "province": "สระแก้ว",
+      "district": "ตาพระยา",
+      "lat": 14.013375,
+      "lon": 102.644844,
+      "waterlevel_msl": 100.91,
+      "storage_percent": null,
+      "value_text": "100.91 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 33.6,
+      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "สถานี ชป.คลองวาด",
+      "station_code": "ridhydro_STN01",
+      "province": "สงขลา",
+      "district": "หาดใหญ่",
+      "lat": 6.990953,
+      "lon": 100.38278,
+      "waterlevel_msl": 13.35,
+      "storage_percent": null,
+      "value_text": "13.35 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 3.2,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "บ้านแหลม",
+      "station_code": "ridhydro_TPB15",
+      "province": "เพชรบุรี",
+      "district": "บ้านแหลม",
+      "lat": 13.212777,
+      "lon": 99.982754,
+      "waterlevel_msl": 1.51,
+      "storage_percent": null,
+      "value_text": "1.51 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 43.4,
+      "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "บ้านเนินหินกอง",
+      "station_code": "ridhydro_TKgt48",
+      "province": "ปราจีนบุรี",
+      "district": "กบินทร์บุรี",
+      "lat": 13.782015,
+      "lon": 101.900566,
+      "waterlevel_msl": 24.89,
+      "storage_percent": null,
+      "value_text": "24.89 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 30.1,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "บ้านผังปาล์ม 1",
+      "station_code": "ridhydro_LA07 (TX.336)",
+      "province": "สตูล",
+      "district": "มะนัง",
+      "lat": 6.998849,
+      "lon": 99.911013,
+      "waterlevel_msl": 14.58,
+      "storage_percent": null,
+      "value_text": "14.58 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 49.5,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "คลองห้วยเผยอ",
+      "station_code": "ridhydro_TSL36",
+      "province": "พัทลุง",
+      "district": "ปากพะยูน",
+      "lat": 7.277592,
+      "lon": 100.33808,
+      "waterlevel_msl": 1.39,
+      "storage_percent": null,
+      "value_text": "1.39 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 30.0,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "สถานีคลองส่งน้ำแม่แตง",
+      "station_code": "ridhydro_TUP.19",
+      "province": "เชียงใหม่",
+      "district": "เมืองเชียงใหม่",
+      "lat": 18.804512,
+      "lon": 98.959762,
+      "waterlevel_msl": 321.55,
+      "storage_percent": null,
+      "value_text": "321.55 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 25.3,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "ปากแม่น้ำบางปะกง",
+      "station_code": "ridhydro_TKgt54",
+      "province": "ฉะเชิงเทรา",
+      "district": "บางปะกง",
+      "lat": 13.474833,
+      "lon": 100.98196,
+      "waterlevel_msl": 0.21,
+      "storage_percent": null,
+      "value_text": "0.21 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 6.4,
+      "nearest_estate": "นิคมอุตสาหกรรมอมตะซิตี้ ชลบุรี",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "ประจันตคาม",
+      "station_code": "ridhydro_TKgt51",
+      "province": "ปราจีนบุรี",
+      "district": "ประจันตคาม",
+      "lat": 14.069966,
+      "lon": 101.518579,
+      "waterlevel_msl": 4.65,
+      "storage_percent": null,
+      "value_text": "4.65 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 23.3,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
       "agency": "ชป."
     },
     {
@@ -1931,24 +1891,6 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "วัดบางคนฑีใน",
-      "station_code": "ridhydro_TK.72",
-      "province": "สมุทรสงคราม",
-      "district": "บางคนที",
-      "lat": 13.4913,
-      "lon": 99.9445,
-      "waterlevel_msl": 1.35,
-      "storage_percent": null,
-      "value_text": "1.35 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 19.2,
-      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
       "station": "คลองแม่น้ำใน(โพธิ์แทน)",
       "station_code": "ridhydro_TNy10",
       "province": "นครนายก",
@@ -1963,6 +1905,186 @@ window.IEAT_THAIWATER_DATA = {
       "severity_score": 4,
       "distance_km": 19.7,
       "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "คลองหวะตอนล่าง",
+      "station_code": "ridhydro_TSL40",
+      "province": "สงขลา",
+      "district": "หาดใหญ่",
+      "lat": 6.987312,
+      "lon": 100.474043,
+      "waterlevel_msl": 1.38,
+      "storage_percent": null,
+      "value_text": "1.38 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 12.8,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "บ้านอุใดใต้",
+      "station_code": "ridhydro_LA04 (TX.334)",
+      "province": "สตูล",
+      "district": "ควนกาหลง",
+      "lat": 6.928031,
+      "lon": 99.935987,
+      "waterlevel_msl": 24.09,
+      "storage_percent": null,
+      "value_text": "24.09 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 47.6,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "TC.60",
+      "station_code": "ridhydro_TC.60",
+      "province": "นครสวรรค์",
+      "district": "ท่าตะโก",
+      "lat": 15.67,
+      "lon": 100.334167,
+      "waterlevel_msl": 23.4,
+      "storage_percent": null,
+      "value_text": "23.4 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 26.7,
+      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "เขื่อนนายก",
+      "station_code": "ridhydro_TNy11",
+      "province": "นครนายก",
+      "district": "เมืองนครนายก",
+      "lat": 14.18205,
+      "lon": 101.162164,
+      "waterlevel_msl": 3.44,
+      "storage_percent": null,
+      "value_text": "3.44 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 36.0,
+      "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "บ้านตะเภาลาย",
+      "station_code": "ridhydro_TKgt53",
+      "province": "ปราจีนบุรี",
+      "district": "บ้านสร้าง",
+      "lat": 14.012733,
+      "lon": 101.265193,
+      "waterlevel_msl": 2.03,
+      "storage_percent": null,
+      "value_text": "2.03 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 43.5,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "ศรีมหาโพธิ์",
+      "station_code": "ridhydro_TKgt62",
+      "province": "ปราจีนบุรี",
+      "district": "ศรีมหาโพธิ",
+      "lat": 13.973075,
+      "lon": 101.512525,
+      "waterlevel_msl": 5.51,
+      "storage_percent": null,
+      "value_text": "5.51 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 16.9,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "สถานี X.112",
+      "station_code": "ridhydro_STN11",
+      "province": "สงขลา",
+      "district": "สะเดา",
+      "lat": 6.705239,
+      "lon": 100.433266,
+      "waterlevel_msl": 20.74,
+      "storage_percent": null,
+      "value_text": "20.74 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 18.3,
+      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "แม่น้ำยม ปากคลองเข้า ปตร.บางพระ",
+      "station_code": "ridhydro_TY.55",
+      "province": "สุโขทัย",
+      "district": "เมืองสุโขทัย",
+      "lat": 16.9145,
+      "lon": 99.8438,
+      "waterlevel_msl": 44.98,
+      "storage_percent": null,
+      "value_text": "44.98 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 49.8,
+      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "สะพานเขาโค้ง",
+      "station_code": "ridhydro_TY.56",
+      "province": "สุโขทัย",
+      "district": "กงไกรลาศ",
+      "lat": 16.925978,
+      "lon": 99.890301,
+      "waterlevel_msl": 43.28,
+      "storage_percent": null,
+      "value_text": "43.28 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 47.7,
+      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "สะพานข้ามลำภาชี",
+      "station_code": "ridhydro_TK.68",
+      "province": "ราชบุรี",
+      "district": "จอมบึง",
+      "lat": 13.7521,
+      "lon": 99.4374,
+      "waterlevel_msl": 54.76,
+      "storage_percent": null,
+      "value_text": "54.76 ม.รทก.",
+      "observed_at": "2026-09-14 09:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 46.4,
+      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
       "agency": "ชป."
     },
     {
@@ -2003,74 +2125,56 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "วัดจอมเกษ",
-      "station_code": "ridhydro_TS.25",
-      "province": "พระนครศรีอยุธยา",
-      "district": "บางปะหัน",
-      "lat": 14.414349,
-      "lon": 100.55782,
-      "waterlevel_msl": 1.01,
+      "station": "ปตร.คลอง 1ซ-ร1",
+      "station_code": "ridhydro_TSL27",
+      "province": "สงขลา",
+      "district": "หาดใหญ่",
+      "lat": 7.008409,
+      "lon": 100.442098,
+      "waterlevel_msl": 5.07,
       "storage_percent": null,
-      "value_text": "1.01 ม.รทก.",
+      "value_text": "5.07 ม.รทก.",
       "observed_at": "2026-09-14 09:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
-      "distance_km": 9.3,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
+      "distance_km": 9.1,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "ชป."
     },
     {
       "kind": "waterlevel",
-      "station": "แม่น้ำยม ปากคลองเข้า ปตร.บางพระ",
-      "station_code": "ridhydro_TY.55",
-      "province": "สุโขทัย",
-      "district": "เมืองสุโขทัย",
-      "lat": 16.9145,
-      "lon": 99.8438,
-      "waterlevel_msl": 44.98,
+      "station": "บ้านฟากห้วย",
+      "station_code": "ridhydro_TTL.04",
+      "province": "สระแก้ว",
+      "district": "อรัญประเทศ",
+      "lat": 13.684085,
+      "lon": 102.501103,
+      "waterlevel_msl": 41.4,
       "storage_percent": null,
-      "value_text": "44.98 ม.รทก.",
+      "value_text": "41.4 ม.รทก.",
       "observed_at": "2026-09-14 09:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
-      "distance_km": 49.8,
-      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
+      "distance_km": 7.3,
+      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
       "agency": "ชป."
     },
     {
       "kind": "waterlevel",
-      "station": "TW.29",
-      "station_code": "ridhydro_TW.29",
-      "province": "ลำปาง",
-      "district": "ห้างฉัตร",
-      "lat": 18.368642,
-      "lon": 99.326625,
-      "waterlevel_msl": 302.64,
+      "station": "วัดสง่างาม",
+      "station_code": "ridhydro_TKgt52",
+      "province": "ปราจีนบุรี",
+      "district": "เมืองปราจีนบุรี",
+      "lat": 14.031635,
+      "lon": 101.42646,
+      "waterlevel_msl": 3.36,
       "storage_percent": null,
-      "value_text": "302.64 ม.รทก.",
+      "value_text": "3.36 ม.รทก.",
       "observed_at": "2026-09-14 09:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
-      "distance_km": 38.7,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "อำเภอโพธิ์ประทับช้าง จ.พิจิตร",
-      "station_code": "ridhydro_TY.42",
-      "province": "พิจิตร",
-      "district": "โพธิ์ประทับช้าง",
-      "lat": 16.310319,
-      "lon": 100.271461,
-      "waterlevel_msl": 29.53,
-      "storage_percent": null,
-      "value_text": "29.53 ม.รทก.",
-      "observed_at": "2026-09-14 09:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 32.2,
-      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
+      "distance_km": 28.1,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
       "agency": "ชป."
     },
     {
@@ -2093,38 +2197,38 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "ประจันตคาม",
-      "station_code": "ridhydro_TKgt51",
-      "province": "ปราจีนบุรี",
-      "district": "ประจันตคาม",
-      "lat": 14.069966,
-      "lon": 101.518579,
-      "waterlevel_msl": 4.65,
+      "station": "บางขนาก",
+      "station_code": "ridhydro_TKgt60",
+      "province": "ฉะเชิงเทรา",
+      "district": "บางน้ำเปรี้ยว",
+      "lat": 13.874795,
+      "lon": 101.141647,
+      "waterlevel_msl": 1.5,
       "storage_percent": null,
-      "value_text": "4.65 ม.รทก.",
+      "value_text": "1.5 ม.รทก.",
       "observed_at": "2026-09-14 09:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
-      "distance_km": 23.3,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
+      "distance_km": 34.5,
+      "nearest_estate": "นิคมอุตสาหกรรมเอเซีย (สุวรรณภูมิ)",
       "agency": "ชป."
     },
     {
       "kind": "waterlevel",
-      "station": "สถานี ชป.คลองวาด",
-      "station_code": "ridhydro_STN01",
-      "province": "สงขลา",
-      "district": "หาดใหญ่",
-      "lat": 6.990953,
-      "lon": 100.38278,
-      "waterlevel_msl": 13.35,
+      "station": "วัดบางคนฑีใน",
+      "station_code": "ridhydro_TK.72",
+      "province": "สมุทรสงคราม",
+      "district": "บางคนที",
+      "lat": 13.4913,
+      "lon": 99.9445,
+      "waterlevel_msl": 1.35,
       "storage_percent": null,
-      "value_text": "13.35 ม.รทก.",
+      "value_text": "1.35 ม.รทก.",
       "observed_at": "2026-09-14 09:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
-      "distance_km": 3.2,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "distance_km": 19.2,
+      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
       "agency": "ชป."
     },
     {
@@ -2137,7 +2241,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.454595,
       "rainfall_mm": 89.5,
       "value_text": "89.5 มม.",
-      "observed_at": "2026-09-19 06:00",
+      "observed_at": "2026-09-19 10:00",
       "status": "เสี่ยงสูง",
       "severity_score": 3,
       "distance_km": 49.0,
@@ -2146,54 +2250,122 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "หน่วยพิทักษ์ป่าดอยอีหุ้ย",
-      "station_code": "MOU334",
-      "province": "ลำพูน",
-      "district": "ทุ่งหัวช้าง",
-      "lat": 18.153486,
-      "lon": 98.9833,
-      "rainfall_mm": 75.0,
-      "value_text": "75 มม.",
-      "observed_at": "2026-09-19 07:00",
+      "station": "บ้านแม่หอย",
+      "station_code": "STN1292",
+      "province": "เชียงใหม่",
+      "district": "จอมทอง",
+      "lat": 18.485818,
+      "lon": 98.668225,
+      "rainfall_mm": 84.5,
+      "value_text": "84.5 มม.",
+      "observed_at": "2026-09-19 11:00",
       "status": "เสี่ยงสูง",
       "severity_score": 3,
-      "distance_km": 49.2,
+      "distance_km": 41.4,
       "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านห้วยน้ำดำ",
-      "station_code": "STN1915",
-      "province": "สตูล",
-      "district": "ควนกาหลง",
-      "lat": 6.858916,
-      "lon": 100.031146,
-      "rainfall_mm": 74.5,
-      "value_text": "74.5 มม.",
-      "observed_at": "2026-09-19 06:00",
-      "status": "เสี่ยงสูง",
-      "severity_score": 3,
-      "distance_km": 39.9,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "ทน."
     },
     {
       "kind": "rainfall",
-      "station": "อ่างเก็บน้ำห้วยแทง",
-      "station_code": "RES017",
-      "province": "ลำพูน",
-      "district": "บ้านโฮ่ง",
-      "lat": 18.29177,
-      "lon": 98.86272,
-      "rainfall_mm": 72.4,
-      "value_text": "72.4 มม.",
-      "observed_at": "2026-09-19 07:00",
+      "station": "บ้านหนองห่าย",
+      "station_code": "STN1811",
+      "province": "เชียงใหม่",
+      "district": "จอมทอง",
+      "lat": 18.453694,
+      "lon": 98.729318,
+      "rainfall_mm": 83.5,
+      "value_text": "83.5 มม.",
+      "observed_at": "2026-09-19 11:00",
       "status": "เสี่ยงสูง",
       "severity_score": 3,
-      "distance_km": 38.5,
+      "distance_km": 36.6,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านแม่ปอน",
+      "station_code": "STN0014",
+      "province": "เชียงใหม่",
+      "district": "จอมทอง",
+      "lat": 18.467068,
+      "lon": 98.609275,
+      "rainfall_mm": 83.5,
+      "value_text": "83.5 มม.",
+      "observed_at": "2026-09-19 11:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 48.0,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านอ่างกาน้อย (สบหาด)",
+      "station_code": "STN2175",
+      "province": "เชียงใหม่",
+      "district": "จอมทอง",
+      "lat": 18.541897,
+      "lon": 98.593349,
+      "rainfall_mm": 83.0,
+      "value_text": "83 มม.",
+      "observed_at": "2026-09-19 11:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 47.9,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านห้วยกองเลาะ",
+      "station_code": "STN0434",
+      "province": "ลำพูน",
+      "district": "บ้านโฮ่ง",
+      "lat": 18.250809,
+      "lon": 98.91515,
+      "rainfall_mm": 80.5,
+      "value_text": "80.5 มม.",
+      "observed_at": "2026-09-19 11:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 40.3,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "แม่น้ำลี้ บ้านโฮ่ง",
+      "station_code": "PIN009",
+      "province": "ลำพูน",
+      "district": "บ้านโฮ่ง",
+      "lat": 18.310793,
+      "lon": 98.82355,
+      "rainfall_mm": 77.4,
+      "value_text": "77.4 มม.",
+      "observed_at": "2026-09-19 12:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 39.0,
       "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
       "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านแม่หาด",
+      "station_code": "STN0841",
+      "province": "ลำพูน",
+      "district": "บ้านโฮ่ง",
+      "lat": 18.166337,
+      "lon": 98.891556,
+      "rainfall_mm": 75.0,
+      "value_text": "75 มม.",
+      "observed_at": "2026-09-19 11:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 50.0,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
+      "agency": "ทน."
     },
     {
       "kind": "rainfall",
@@ -2205,11 +2377,45 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.465027,
       "rainfall_mm": 72.0,
       "value_text": "72 มม.",
-      "observed_at": "2026-09-19 06:00",
+      "observed_at": "2026-09-19 11:00",
       "status": "เสี่ยงสูง",
       "severity_score": 3,
       "distance_km": 9.7,
       "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านซอย 8",
+      "station_code": "STN1620",
+      "province": "สตูล",
+      "district": "ควนกาหลง",
+      "lat": 6.881952,
+      "lon": 99.997221,
+      "rainfall_mm": 71.0,
+      "value_text": "71 มม.",
+      "observed_at": "2026-09-19 11:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 42.4,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านแม่เตี๊ยะใต้",
+      "station_code": "STN1291",
+      "province": "เชียงใหม่",
+      "district": "จอมทอง",
+      "lat": 18.393421,
+      "lon": 98.651069,
+      "rainfall_mm": 71.0,
+      "value_text": "71 มม.",
+      "observed_at": "2026-09-19 11:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 47.0,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
       "agency": "ทน."
     },
     {
@@ -2220,10 +2426,10 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บางเลน",
       "lat": 14.05221,
       "lon": 100.175087,
-      "waterlevel_msl": 1.75,
-      "storage_percent": 99.34,
-      "value_text": "1.75 ม.รทก.",
-      "observed_at": "2026-09-19 07:00",
+      "waterlevel_msl": 1.7,
+      "storage_percent": 98.67,
+      "value_text": "1.7 ม.รทก.",
+      "observed_at": "2026-09-19 12:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 47.9,
@@ -2241,7 +2447,7 @@ window.IEAT_THAIWATER_DATA = {
       "waterlevel_msl": 1.32,
       "storage_percent": 98.3,
       "value_text": "1.32 ม.รทก.",
-      "observed_at": "2026-09-19 07:00",
+      "observed_at": "2026-09-19 12:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 28.8,
@@ -2256,10 +2462,10 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บางกระทุ่ม",
       "lat": 16.670555,
       "lon": 100.32789,
-      "waterlevel_msl": 38.69,
-      "storage_percent": 98.01,
-      "value_text": "38.69 ม.รทก.",
-      "observed_at": "2026-09-19 08:00",
+      "waterlevel_msl": 38.7,
+      "storage_percent": 98.15,
+      "value_text": "38.7 ม.รทก.",
+      "observed_at": "2026-09-19 12:40",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 21.8,
@@ -2274,10 +2480,10 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บางระกำ",
       "lat": 16.8586,
       "lon": 100.05965,
-      "waterlevel_msl": 40.25,
-      "storage_percent": 96.52,
-      "value_text": "40.25 ม.รทก.",
-      "observed_at": "2026-09-19 08:00",
+      "waterlevel_msl": 40.28,
+      "storage_percent": 96.85,
+      "value_text": "40.28 ม.รทก.",
+      "observed_at": "2026-09-19 12:40",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 32.9,
@@ -2292,15 +2498,33 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บางน้ำเปรี้ยว",
       "lat": 13.87032,
       "lon": 101.14574,
-      "waterlevel_msl": 0.94,
-      "storage_percent": 95.73,
-      "value_text": "0.94 ม.รทก.",
-      "observed_at": "2026-09-19 08:00",
+      "waterlevel_msl": 1.07,
+      "storage_percent": 96.81,
+      "value_text": "1.07 ม.รทก.",
+      "observed_at": "2026-09-19 12:40",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 34.5,
       "nearest_estate": "นิคมอุตสาหกรรมเอเซีย (สุวรรณภูมิ)",
       "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "ร.ร.บ้านสามพราน",
+      "station_code": "T.14",
+      "province": "นครปฐม",
+      "district": "สามพราน",
+      "lat": 13.72411,
+      "lon": 100.215683,
+      "waterlevel_msl": 1.17,
+      "storage_percent": 96.78,
+      "value_text": "1.17 ม.รทก.",
+      "observed_at": "2026-09-19 12:00",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "distance_km": 20.1,
+      "nearest_estate": "นิคมอุตสาหกรรมสมุทรสาคร",
+      "agency": "ชป."
     },
     {
       "kind": "waterlevel",
@@ -2313,7 +2537,7 @@ window.IEAT_THAIWATER_DATA = {
       "waterlevel_msl": 2.33,
       "storage_percent": 95.7,
       "value_text": "2.33 ม.รทก.",
-      "observed_at": "2026-09-19 08:00",
+      "observed_at": "2026-09-19 12:40",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 32.8,
@@ -2328,15 +2552,33 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บางเลน",
       "lat": 14.01636,
       "lon": 100.17979,
-      "waterlevel_msl": 1.68,
-      "storage_percent": 94.6,
-      "value_text": "1.68 ม.รทก.",
-      "observed_at": "2026-09-19 08:00",
+      "waterlevel_msl": 1.62,
+      "storage_percent": 94.02,
+      "value_text": "1.62 ม.รทก.",
+      "observed_at": "2026-09-19 12:40",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 47.7,
       "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก B",
       "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "กรมชลประทานสามเสน",
+      "station_code": "C.12",
+      "province": "กรุงเทพมหานคร",
+      "district": "ดุสิต",
+      "lat": 13.78815,
+      "lon": 100.509148,
+      "waterlevel_msl": 1.14,
+      "storage_percent": 93.33,
+      "value_text": "1.14 ม.รทก.",
+      "observed_at": "2026-09-19 12:00",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "distance_km": 5.5,
+      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก B",
+      "agency": "ชป."
     },
     {
       "kind": "waterlevel",
@@ -2346,10 +2588,10 @@ window.IEAT_THAIWATER_DATA = {
       "district": "เสนา",
       "lat": 14.36851,
       "lon": 100.414391,
-      "waterlevel_msl": 2.17,
-      "storage_percent": 93.78,
-      "value_text": "2.17 ม.รทก.",
-      "observed_at": "2026-09-19 07:00",
+      "waterlevel_msl": 2.11,
+      "storage_percent": 93.14,
+      "value_text": "2.11 ม.รทก.",
+      "observed_at": "2026-09-19 12:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 23.7,
@@ -2358,74 +2600,56 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "บ้านวังนกแอ่น",
-      "station_code": "N.24A",
-      "province": "พิษณุโลก",
-      "district": "วังทอง",
-      "lat": 16.84712,
-      "lon": 100.512093,
-      "waterlevel_msl": 51.44,
-      "storage_percent": 93.03,
-      "value_text": "51.44 ม.รทก.",
-      "observed_at": "2026-09-19 07:00",
+      "station": "บางปะกง",
+      "station_code": "BPK001",
+      "province": "ฉะเชิงเทรา",
+      "district": "บางปะกง",
+      "lat": 13.54901,
+      "lon": 101.00111,
+      "waterlevel_msl": 0.75,
+      "storage_percent": 93.14,
+      "value_text": "0.75 ม.รทก.",
+      "observed_at": "2026-09-19 12:40",
       "status": "วิกฤต",
       "severity_score": 3,
-      "distance_km": 49.1,
-      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "เมืองแกลง",
-      "station_code": "RAY001",
-      "province": "ระยอง",
-      "district": "แกลง",
-      "lat": 12.802991,
-      "lon": 101.65024,
-      "waterlevel_msl": 3.48,
-      "storage_percent": 92.42,
-      "value_text": "3.48 ม.รทก.",
-      "observed_at": "2026-09-19 08:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 22.7,
-      "nearest_estate": "นิคมอุตสาหกรรมหลักชัยเมืองยาง",
+      "distance_km": 1.8,
+      "nearest_estate": "นิคมอุตสาหกรรมทีเอฟดี 1",
       "agency": "สสน."
     },
     {
       "kind": "waterlevel",
-      "station": "วังทอง",
-      "station_code": "NAN013",
-      "province": "พิษณุโลก",
-      "district": "วังทอง",
-      "lat": 16.8222,
-      "lon": 100.43159,
-      "waterlevel_msl": 48.35,
-      "storage_percent": 91.85,
-      "value_text": "48.35 ม.รทก.",
-      "observed_at": "2026-09-19 08:00",
+      "station": "พระรามสอง",
+      "station_code": "MKG006",
+      "province": "สมุทรสงคราม",
+      "district": "เมืองสมุทรสงคราม",
+      "lat": 13.38362,
+      "lon": 99.9836,
+      "waterlevel_msl": 1.03,
+      "storage_percent": 93.1,
+      "value_text": "1.03 ม.รทก.",
+      "observed_at": "2026-09-19 12:40",
       "status": "วิกฤต",
       "severity_score": 3,
-      "distance_km": 40.7,
-      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
+      "distance_km": 29.2,
+      "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
       "agency": "สสน."
     },
     {
       "kind": "waterlevel",
-      "station": "ปากรอ",
-      "station_code": "SLA005",
-      "province": "สงขลา",
-      "district": "สิงหนคร",
-      "lat": 7.261514,
-      "lon": 100.42447,
-      "waterlevel_msl": 0.37,
-      "storage_percent": 91.72,
-      "value_text": "0.37 ม.รทก.",
-      "observed_at": "2026-09-19 08:00",
+      "station": "สะพานกรุงเทพ",
+      "station_code": "CPY015",
+      "province": "กรุงเทพมหานคร",
+      "district": "ธนบุรี",
+      "lat": 13.700301,
+      "lon": 100.49277,
+      "waterlevel_msl": 0.92,
+      "storage_percent": 93.05,
+      "value_text": "0.92 ม.รทก.",
+      "observed_at": "2026-09-19 12:40",
       "status": "วิกฤต",
       "severity_score": 3,
-      "distance_km": 29.1,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "distance_km": 13.0,
+      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก B",
       "agency": "สสน."
     },
     {
@@ -2436,10 +2660,10 @@ window.IEAT_THAIWATER_DATA = {
       "district": "นครชัยศรี",
       "lat": 13.79217,
       "lon": 100.19817,
-      "waterlevel_msl": 1.09,
-      "storage_percent": 91.44,
-      "value_text": "1.09 ม.รทก.",
-      "observed_at": "2026-09-19 08:00",
+      "waterlevel_msl": 1.19,
+      "storage_percent": 92.43,
+      "value_text": "1.19 ม.รทก.",
+      "observed_at": "2026-09-19 12:40",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 27.8,
@@ -2448,21 +2672,39 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "ร.ร.บ้านสามพราน",
-      "station_code": "T.14",
-      "province": "นครปฐม",
-      "district": "สามพราน",
-      "lat": 13.72411,
-      "lon": 100.215683,
-      "waterlevel_msl": 0.55,
-      "storage_percent": 90.74,
-      "value_text": "0.55 ม.รทก.",
-      "observed_at": "2026-09-19 07:00",
+      "station": "สะพานนวลฉวี",
+      "station_code": "CPY014",
+      "province": "นนทบุรี",
+      "district": "ปากเกร็ด",
+      "lat": 13.94749,
+      "lon": 100.53507,
+      "waterlevel_msl": 1.21,
+      "storage_percent": 91.84,
+      "value_text": "1.21 ม.รทก.",
+      "observed_at": "2026-09-19 12:40",
       "status": "วิกฤต",
       "severity_score": 3,
-      "distance_km": 20.1,
-      "nearest_estate": "นิคมอุตสาหกรรมสมุทรสาคร",
-      "agency": "ชป."
+      "distance_km": 16.9,
+      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก B",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "วังทอง",
+      "station_code": "NAN013",
+      "province": "พิษณุโลก",
+      "district": "วังทอง",
+      "lat": 16.8222,
+      "lon": 100.43159,
+      "waterlevel_msl": 48.27,
+      "storage_percent": 91.06,
+      "value_text": "48.27 ม.รทก.",
+      "observed_at": "2026-09-19 12:40",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "distance_km": 40.7,
+      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
+      "agency": "สสน."
     },
     {
       "kind": "waterlevel",
@@ -2475,7 +2717,7 @@ window.IEAT_THAIWATER_DATA = {
       "waterlevel_msl": 5.34,
       "storage_percent": 90.67,
       "value_text": "5.34 ม.รทก.",
-      "observed_at": "2026-09-19 07:00",
+      "observed_at": "2026-09-19 12:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 16.4,
@@ -2484,271 +2726,19 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "เมืองปราจีนบุรี",
-      "station_code": "PRC002",
-      "province": "ปราจีนบุรี",
-      "district": "เมืองปราจีนบุรี",
-      "lat": 14.053554,
-      "lon": 101.38684,
-      "waterlevel_msl": 3.18,
-      "storage_percent": 90.3,
-      "value_text": "3.18 ม.รทก.",
-      "observed_at": "2026-09-13 12:10",
+      "station": "บางตะบูนและบางตะบูนออก",
+      "station_code": "GLF003",
+      "province": "เพชรบุรี",
+      "district": "บ้านแหลม",
+      "lat": 13.26553,
+      "lon": 99.9418,
+      "waterlevel_msl": 1.35,
+      "storage_percent": 90.46,
+      "value_text": "1.35 ม.รทก.",
+      "observed_at": "2026-09-19 12:40",
       "status": "วิกฤต",
       "severity_score": 3,
-      "distance_km": 33.1,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "บ้านเนินผาสุก",
-      "station_code": "Kgt.10",
-      "province": "สระแก้ว",
-      "district": "เมืองสระแก้ว",
-      "lat": 13.8096,
-      "lon": 102.054382,
-      "waterlevel_msl": 33.93,
-      "storage_percent": 89.84,
-      "value_text": "33.93 ม.รทก.",
-      "observed_at": "2026-09-19 07:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 44.7,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สะพานต้นน้ำบางปะกง",
-      "station_code": "Kgt.3",
-      "province": "ปราจีนบุรี",
-      "district": "กบินทร์บุรี",
-      "lat": 13.98666,
-      "lon": 101.705406,
-      "waterlevel_msl": 7.74,
-      "storage_percent": 89.39,
-      "value_text": "7.74 ม.รทก.",
-      "observed_at": "2026-09-19 07:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 10.6,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สะพานณรงค์ดำริ",
-      "station_code": "Kgt.1",
-      "province": "ปราจีนบุรี",
-      "district": "เมืองปราจีนบุรี",
-      "lat": 14.05144,
-      "lon": 101.367378,
-      "waterlevel_msl": 3.01,
-      "storage_percent": 89.04,
-      "value_text": "3.01 ม.รทก.",
-      "observed_at": "2026-09-19 07:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 34.8,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "วัดขนอนใต้",
-      "station_code": "HDA005",
-      "province": "พระนครศรีอยุธยา",
-      "district": "บางปะอิน",
-      "lat": 14.288251,
-      "lon": 100.61132,
-      "waterlevel_msl": 2.0,
-      "storage_percent": 88.08,
-      "value_text": "2 ม.รทก.",
-      "observed_at": "2026-09-19 08:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 4.7,
-      "nearest_estate": "นิคมอุตสาหกรรมบ้านหว้า",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สะพานข้ามคลองอู่ตะเภา",
-      "station_code": "ONE037",
-      "province": "สงขลา",
-      "district": "หาดใหญ่",
-      "lat": 7.134997,
-      "lon": 100.45321,
-      "waterlevel_msl": 0.18,
-      "storage_percent": 87.74,
-      "value_text": "0.18 ม.รทก.",
-      "observed_at": "2026-09-19 08:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 17.5,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สะพานนวลฉวี",
-      "station_code": "CPY014",
-      "province": "นนทบุรี",
-      "district": "ปากเกร็ด",
-      "lat": 13.94749,
-      "lon": 100.53507,
-      "waterlevel_msl": 0.55,
-      "storage_percent": 87.66,
-      "value_text": "0.55 ม.รทก.",
-      "observed_at": "2026-09-19 08:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 16.9,
-      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก B",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "กรมชลประทานสามเสน",
-      "station_code": "C.12",
-      "province": "กรุงเทพมหานคร",
-      "district": "ดุสิต",
-      "lat": 13.78815,
-      "lon": 100.509148,
-      "waterlevel_msl": 0.09,
-      "storage_percent": 87.07,
-      "value_text": "0.09 ม.รทก.",
-      "observed_at": "2026-09-19 07:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 5.5,
-      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก B",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "พระรามสอง",
-      "station_code": "MKG006",
-      "province": "สมุทรสงคราม",
-      "district": "เมืองสมุทรสงคราม",
-      "lat": 13.38362,
-      "lon": 99.9836,
-      "waterlevel_msl": 0.17,
-      "storage_percent": 86.83,
-      "value_text": "0.17 ม.รทก.",
-      "observed_at": "2026-09-19 08:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 29.2,
-      "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "ศรีมหาโพธิ (KGT6)",
-      "station_code": "PRC005",
-      "province": "ปราจีนบุรี",
-      "district": "ศรีมหาโพธิ",
-      "lat": 13.97348,
-      "lon": 101.51751,
-      "waterlevel_msl": 6.24,
-      "storage_percent": 86.78,
-      "value_text": "6.24 ม.รทก.",
-      "observed_at": "2026-09-19 08:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 16.4,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "บางระกำ",
-      "station_code": "Y.64",
-      "province": "พิษณุโลก",
-      "district": "บางระกำ",
-      "lat": 16.762119,
-      "lon": 100.121201,
-      "waterlevel_msl": 37.83,
-      "storage_percent": 86.72,
-      "value_text": "37.83 ม.รทก.",
-      "observed_at": "2026-09-19 07:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 21.0,
-      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สะพานกรุงเทพ",
-      "station_code": "CPY015",
-      "province": "กรุงเทพมหานคร",
-      "district": "ธนบุรี",
-      "lat": 13.700301,
-      "lon": 100.49277,
-      "waterlevel_msl": -0.22,
-      "storage_percent": 86.67,
-      "value_text": "-0.22 ม.รทก.",
-      "observed_at": "2026-09-19 07:40",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 13.0,
-      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก B",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "บางระกำ",
-      "station_code": "Y.16",
-      "province": "พิษณุโลก",
-      "district": "บางระกำ",
-      "lat": 16.757919,
-      "lon": 100.115578,
-      "waterlevel_msl": 37.85,
-      "storage_percent": 86.65,
-      "value_text": "37.85 ม.รทก.",
-      "observed_at": "2026-09-19 07:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 20.6,
-      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "บ้านแก้ง",
-      "station_code": "Kgt.12A",
-      "province": "สระแก้ว",
-      "district": "เมืองสระแก้ว",
-      "lat": 13.93635,
-      "lon": 101.972321,
-      "waterlevel_msl": 19.84,
-      "storage_percent": 86.34,
-      "value_text": "19.84 ม.รทก.",
-      "observed_at": "2026-09-19 07:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 34.6,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "บ้านแพ้ว",
-      "station_code": "MKG005",
-      "province": "สมุทรสาคร",
-      "district": "บ้านแพ้ว",
-      "lat": 13.57563,
-      "lon": 100.07884,
-      "waterlevel_msl": 0.51,
-      "storage_percent": 86.08,
-      "value_text": "0.51 ม.รทก.",
-      "observed_at": "2026-09-19 08:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 13.5,
+      "distance_km": 41.5,
       "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
       "agency": "สสน."
     }
@@ -2756,33 +2746,32 @@ window.IEAT_THAIWATER_DATA = {
   "summary": {
     "estate_total": 72,
     "estate_count": 28,
-    "station_count": 1027,
-    "alert_station_count": 154,
+    "station_count": 1032,
+    "alert_station_count": 151,
     "heavy_rain_estate_count": 1,
     "water_alert_estate_count": 28,
-    "critical_count": 83,
-    "rain_station_count": 774,
-    "waterlevel_station_count": 253,
-    "waterlevel_alert_count": 135,
+    "critical_count": 88,
+    "rain_station_count": 778,
+    "waterlevel_station_count": 254,
+    "waterlevel_alert_count": 137,
     "max_rainfall_mm": 72.0,
     "risk_level": "ล้นตลิ่ง",
     "storm_count": 0,
     "storm_names": [],
     "flood_watch_provinces": [
-      "จ.กำแพงเพชร",
       "จ.ชัยภูมิ",
-      "จ.นครสวรรค์",
       "จ.พิษณุโลก",
       "จ.ลำปาง",
+      "จ.ลำพูน",
       "จ.สุโขทัย",
-      "จ.อุทัยธานี",
       "จ.เชียงใหม่",
       "จ.เพชรบูรณ์",
-      "จ.เลย"
+      "จ.เลย",
+      "จ.แพร่"
     ],
-    "flood_watch_province_count": 10,
-    "flash_flood_24h_area_count": 29,
-    "flash_flood_48h_area_count": 72,
+    "flood_watch_province_count": 9,
+    "flash_flood_24h_area_count": 25,
+    "flash_flood_48h_area_count": 84,
     "warning_title": "",
     "warning_summary": "",
     "warning_url": "https://tmd.go.th/warning-and-events/warning-storm"
@@ -2792,165 +2781,9 @@ window.IEAT_THAIWATER_DATA = {
     "24h": {
       "period": "24h",
       "date": "2026-09-19",
-      "time": "08:00:00",
+      "time": "12:00:00",
       "type": "แผนที่แสดงพื้นที่เสี่ยงน้ำท่วมฉับพลัน (รายตำบล)ใน 24 ชม. ข้างหน้า จากปริมาณฝนสะสมที่สถานีโทรมาตร",
       "areas": [
-        {
-          "geocode": "621101",
-          "tambon": "ต.โกสัมพี",
-          "amphoe": "อ.โกสัมพีนคร",
-          "province": "จ.กำแพงเพชร",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "อุทยานแห่งชาติคลองวังเจ้า",
-          "latitude": 16.505556,
-          "longitude": 99.169833,
-          "sum_rainfall_mm": 156.5,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "620411",
-          "tambon": "ต.ปางมะค่า",
-          "amphoe": "อ.ขาณุวรลักษบุรี",
-          "province": "จ.กำแพงเพชร",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "สะพานต้นน้ำ (เกาะแก้ว-ตลิ่งสูง)",
-          "latitude": 15.91465,
-          "longitude": 99.4194,
-          "sum_rainfall_mm": 156.6,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "620501",
-          "tambon": "ต.คลองขลุง",
-          "amphoe": "อ.คลองขลุง",
-          "province": "จ.กำแพงเพชร",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "อบต.คลองขลุง",
-          "latitude": 16.20864,
-          "longitude": 99.70895,
-          "sum_rainfall_mm": 152.60000000000002,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "620504",
-          "tambon": "ต.ท่าพุทรา",
-          "amphoe": "อ.คลองขลุง",
-          "province": "จ.กำแพงเพชร",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "คลองวังหิน",
-          "latitude": 16.229583,
-          "longitude": 99.696722,
-          "sum_rainfall_mm": 196.0,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "620509",
-          "tambon": "ต.วังไทร",
-          "amphoe": "อ.คลองขลุง",
-          "province": "จ.กำแพงเพชร",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "สำนักสงฆ์มอหินเพลิง",
-          "latitude": 16.151548,
-          "longitude": 99.527517,
-          "sum_rainfall_mm": 137.5,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "620303",
-          "tambon": "ต.คลองลานพัฒนา",
-          "amphoe": "อ.คลองลาน",
-          "province": "จ.กำแพงเพชร",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านโชคชัยพัฒนา-หินดาต",
-          "latitude": 16.085972,
-          "longitude": 99.420639,
-          "sum_rainfall_mm": 192.5,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "620118",
-          "tambon": "ต.ธำมรงค์",
-          "amphoe": "อ.เมืองกำแพงเพชร",
-          "province": "จ.กำแพงเพชร",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านคลองสีนวล",
-          "latitude": 16.343056,
-          "longitude": 99.598389,
-          "sum_rainfall_mm": 154.0,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "620105",
-          "tambon": "ต.นครชุม",
-          "amphoe": "อ.เมืองกำแพงเพชร",
-          "province": "จ.กำแพงเพชร",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "เมืองกำแพงเพชร (P7A)",
-          "latitude": 16.47816,
-          "longitude": 99.51866,
-          "sum_rainfall_mm": 115.2,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "620104",
-          "tambon": "ต.นาบ่อคำ",
-          "amphoe": "อ.เมืองกำแพงเพชร",
-          "province": "จ.กำแพงเพชร",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "วัดเขาแก้วสวรรค์",
-          "latitude": 16.406278,
-          "longitude": 99.349611,
-          "sum_rainfall_mm": 164.0,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "620110",
-          "tambon": "ต.หนองปลิง",
-          "amphoe": "อ.เมืองกำแพงเพชร",
-          "province": "จ.กำแพงเพชร",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "ท่อทองแดง1",
-          "latitude": 16.49714,
-          "longitude": 99.51958,
-          "sum_rainfall_mm": 112.4,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "601303",
-          "tambon": "ต.แม่เล่ย์",
-          "amphoe": "อ.แม่วงก์",
-          "province": "จ.นครสวรรค์",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านใหม่ศรีนคร",
-          "latitude": 15.788101,
-          "longitude": 99.458804,
-          "sum_rainfall_mm": 124.0,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "601116",
-          "tambon": "ต.ศาลเจ้าไก่ต่อ",
-          "amphoe": "อ.ลาดยาว",
-          "province": "จ.นครสวรรค์",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "อบต.ศาลเจ้าไก่ต่อ",
-          "latitude": 15.773471,
-          "longitude": 99.667092,
-          "sum_rainfall_mm": 188.0,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
         {
           "geocode": "650208",
           "tambon": "ต.ยางโกลน",
@@ -2961,8 +2794,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านน้ำพริก",
           "latitude": 17.19839,
           "longitude": 100.912409,
-          "sum_rainfall_mm": 231.5,
-          "observed_at": "2026-09-18T20:00:00+07:00"
+          "sum_rainfall_mm": 232.5,
+          "observed_at": "2026-09-19T00:00:00+07:00"
         },
         {
           "geocode": "670402",
@@ -2975,20 +2808,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 17.00782,
           "longitude": 101.252134,
           "sum_rainfall_mm": 196.0,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "670401",
-          "tambon": "ต.หล่มเก่า",
-          "amphoe": "อ.หล่มเก่า",
-          "province": "จ.เพชรบูรณ์",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "อบต.หล่มเก่า",
-          "latitude": 16.88067,
-          "longitude": 101.23835,
-          "sum_rainfall_mm": 121.39999999999999,
-          "observed_at": "2026-09-18T20:00:00+07:00"
+          "observed_at": "2026-09-19T00:00:00+07:00"
         },
         {
           "geocode": "640205",
@@ -3000,8 +2820,47 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านวังหาด",
           "latitude": 17.197262,
           "longitude": 99.384964,
-          "sum_rainfall_mm": 112.0,
-          "observed_at": "2026-09-18T20:00:00+07:00"
+          "sum_rainfall_mm": 112.5,
+          "observed_at": "2026-09-19T00:00:00+07:00"
+        },
+        {
+          "geocode": "640502",
+          "tambon": "ต.ป่างิ้ว",
+          "amphoe": "อ.ศรีสัชนาลัย",
+          "province": "จ.สุโขทัย",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านทุ่งพล้อ",
+          "latitude": 17.541266,
+          "longitude": 99.782301,
+          "sum_rainfall_mm": 136.0,
+          "observed_at": "2026-09-19T00:00:00+07:00"
+        },
+        {
+          "geocode": "640504",
+          "tambon": "ต.แม่สิน",
+          "amphoe": "อ.ศรีสัชนาลัย",
+          "province": "จ.สุโขทัย",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านสุเม่นเหนือ",
+          "latitude": 17.731856,
+          "longitude": 99.645754,
+          "sum_rainfall_mm": 180.5,
+          "observed_at": "2026-09-19T00:00:00+07:00"
+        },
+        {
+          "geocode": "640501",
+          "tambon": "ต.หาดเสี้ยว",
+          "amphoe": "อ.ศรีสัชนาลัย",
+          "province": "จ.สุโขทัย",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "ศรีสัชนาลัย",
+          "latitude": 17.51715,
+          "longitude": 99.75877,
+          "sum_rainfall_mm": 94.4,
+          "observed_at": "2026-09-19T00:00:00+07:00"
         },
         {
           "geocode": "640606",
@@ -3013,73 +2872,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ที่ทำการเขตรักษาพันธุ์สัตว์ป่าถ้ำเจ้าราม",
           "latitude": 17.24367,
           "longitude": 99.486084,
-          "sum_rainfall_mm": 112.8,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "610701",
-          "tambon": "ต.ลานสัก",
-          "amphoe": "อ.ลานสัก",
-          "province": "จ.อุทัยธานี",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "อบต.ลานสัก",
-          "latitude": 15.47279,
-          "longitude": 99.53976,
-          "sum_rainfall_mm": 158.0,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "610410",
-          "tambon": "ต.เขากวางทอง",
-          "amphoe": "อ.หนองฉาง",
-          "province": "จ.อุทัยธานี",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "ฝายทับเสลา",
-          "latitude": 15.407623,
-          "longitude": 99.714458,
-          "sum_rainfall_mm": 195.0,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "610401",
-          "tambon": "ต.หนองฉาง",
-          "amphoe": "อ.หนองฉาง",
-          "province": "จ.อุทัยธานี",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "ทต.หนองฉาง",
-          "latitude": 15.38896,
-          "longitude": 99.84505,
-          "sum_rainfall_mm": 166.4,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "610801",
-          "tambon": "ต.สุขฤทัย",
-          "amphoe": "อ.ห้วยคต",
-          "province": "จ.อุทัยธานี",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านกกงิ้ว",
-          "latitude": 15.304712,
-          "longitude": 99.648582,
-          "sum_rainfall_mm": 236.0,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "610803",
-          "tambon": "ต.ห้วยคต",
-          "amphoe": "อ.ห้วยคต",
-          "province": "จ.อุทัยธานี",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านหินโหง่น",
-          "latitude": 15.234026,
-          "longitude": 99.588856,
-          "sum_rainfall_mm": 107.5,
-          "observed_at": "2026-09-18T20:00:00+07:00"
+          "sum_rainfall_mm": 115.20000000000002,
+          "observed_at": "2026-09-19T00:00:00+07:00"
         },
         {
           "geocode": "360412",
@@ -3091,8 +2885,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านกลาง",
           "latitude": 16.37945,
           "longitude": 101.79831,
-          "sum_rainfall_mm": 216.5,
-          "observed_at": "2026-09-18T20:00:00+07:00"
+          "sum_rainfall_mm": 226.5,
+          "observed_at": "2026-09-19T00:00:00+07:00"
         },
         {
           "geocode": "361201",
@@ -3105,7 +2899,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 16.11598,
           "longitude": 102.23128,
           "sum_rainfall_mm": 171.6,
-          "observed_at": "2026-09-18T20:00:00+07:00"
+          "observed_at": "2026-09-19T00:00:00+07:00"
         },
         {
           "geocode": "361305",
@@ -3117,8 +2911,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหนองเชียงรอดเหนือ",
           "latitude": 16.515036,
           "longitude": 101.823138,
-          "sum_rainfall_mm": 212.5,
-          "observed_at": "2026-09-18T20:00:00+07:00"
+          "sum_rainfall_mm": 213.0,
+          "observed_at": "2026-09-19T00:00:00+07:00"
         },
         {
           "geocode": "420507",
@@ -3130,21 +2924,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.กกสะทอน",
           "latitude": 17.08953,
           "longitude": 101.11006,
-          "sum_rainfall_mm": 125.19999999999997,
-          "observed_at": "2026-09-18T20:00:00+07:00"
+          "sum_rainfall_mm": 125.6,
+          "observed_at": "2026-09-19T00:00:00+07:00"
         },
         {
-          "geocode": "420113",
-          "tambon": "ต.ศรีสองรัก",
-          "amphoe": "อ.เมืองเลย",
-          "province": "จ.เลย",
-          "region_id": "3",
-          "region_name": "ภาคตะวันออกเฉียงเหนือ",
-          "station": "บ้านโคกสว่าง",
-          "latitude": 17.658108,
-          "longitude": 101.703269,
-          "sum_rainfall_mm": 189.5,
-          "observed_at": "2026-09-18T20:00:00+07:00"
+          "geocode": "500203",
+          "tambon": "ต.บ้านหลวง",
+          "amphoe": "อ.จอมทอง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่กลาง",
+          "latitude": 18.533205,
+          "longitude": 98.52239,
+          "sum_rainfall_mm": 143.4,
+          "observed_at": "2026-09-19T00:00:00+07:00"
         },
         {
           "geocode": "500405",
@@ -3156,8 +2950,86 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ขุนวาง",
           "latitude": 19.4138,
           "longitude": 98.593,
-          "sum_rainfall_mm": 105.00000000000001,
-          "observed_at": "2026-09-18T19:00:00+07:00"
+          "sum_rainfall_mm": 136.4,
+          "observed_at": "2026-09-19T00:00:00+07:00"
+        },
+        {
+          "geocode": "500302",
+          "tambon": "ต.ท่าผา",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่อวม",
+          "latitude": 18.507107,
+          "longitude": 98.5005,
+          "sum_rainfall_mm": 132.20000000000002,
+          "observed_at": "2026-09-19T00:00:00+07:00"
+        },
+        {
+          "geocode": "500305",
+          "tambon": "ต.แม่นาจร",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่จอนหลวง",
+          "latitude": 18.66891,
+          "longitude": 98.47738,
+          "sum_rainfall_mm": 109.60000000000004,
+          "observed_at": "2026-09-19T00:00:00+07:00"
+        },
+        {
+          "geocode": "502204",
+          "tambon": "ต.แม่วิน",
+          "amphoe": "อ.แม่วาง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านหนองเต่า",
+          "latitude": 18.680499,
+          "longitude": 98.552366,
+          "sum_rainfall_mm": 107.5,
+          "observed_at": "2026-09-19T00:00:00+07:00"
+        },
+        {
+          "geocode": "540705",
+          "tambon": "ต.แม่พุง",
+          "amphoe": "อ.วังชิ้น",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านป่าคา",
+          "latitude": 17.822465,
+          "longitude": 99.551282,
+          "sum_rainfall_mm": 193.5,
+          "observed_at": "2026-09-19T00:00:00+07:00"
+        },
+        {
+          "geocode": "540701",
+          "tambon": "ต.วังชิ้น",
+          "amphoe": "อ.วังชิ้น",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "อบต.วังชิ้น",
+          "latitude": 17.87937,
+          "longitude": 99.61921,
+          "sum_rainfall_mm": 182.79999999999998,
+          "observed_at": "2026-09-19T00:00:00+07:00"
+        },
+        {
+          "geocode": "520803",
+          "tambon": "ต.แม่ปะ",
+          "amphoe": "อ.เถิน",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านปางกุ่ม",
+          "latitude": 17.707512,
+          "longitude": 99.366176,
+          "sum_rainfall_mm": 92.0,
+          "observed_at": "2026-09-19T00:00:00+07:00"
         },
         {
           "geocode": "520802",
@@ -3169,168 +3041,77 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ มว.1 (น้ำตกแม่วะ)",
           "latitude": 17.44925,
           "longitude": 99.22513,
-          "sum_rainfall_mm": 153.8,
-          "observed_at": "2026-09-18T20:00:00+07:00"
+          "sum_rainfall_mm": 159.0,
+          "observed_at": "2026-09-19T00:00:00+07:00"
+        },
+        {
+          "geocode": "521104",
+          "tambon": "ต.นายาง",
+          "amphoe": "อ.สบปราบ",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแก่น",
+          "latitude": 17.932787,
+          "longitude": 99.275337,
+          "sum_rainfall_mm": 121.5,
+          "observed_at": "2026-09-19T00:00:00+07:00"
+        },
+        {
+          "geocode": "520401",
+          "tambon": "ต.ทุ่งงาม",
+          "amphoe": "อ.เสริมงาม",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่กึ๊ด",
+          "latitude": 18.093353,
+          "longitude": 99.271891,
+          "sum_rainfall_mm": 127.5,
+          "observed_at": "2026-09-19T00:00:00+07:00"
+        },
+        {
+          "geocode": "520402",
+          "tambon": "ต.เสริมขวา",
+          "amphoe": "อ.เสริมงาม",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่เลียง ",
+          "latitude": 18.169743,
+          "longitude": 99.18275,
+          "sum_rainfall_mm": 161.0,
+          "observed_at": "2026-09-19T00:00:00+07:00"
+        },
+        {
+          "geocode": "510503",
+          "tambon": "ต.ตะเคียนปม",
+          "amphoe": "อ.ทุ่งหัวช้าง",
+          "province": "จ.ลำพูน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยพิทักษ์ป่าดอยอีหุ้ย",
+          "latitude": 18.153486,
+          "longitude": 98.9833,
+          "sum_rainfall_mm": 158.2,
+          "observed_at": "2026-09-19T00:00:00+07:00"
+        },
+        {
+          "geocode": "510302",
+          "tambon": "ต.ป่าพลู",
+          "amphoe": "อ.บ้านโฮ่ง",
+          "province": "จ.ลำพูน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านห้วยกองเลาะ",
+          "latitude": 18.250809,
+          "longitude": 98.91515,
+          "sum_rainfall_mm": 119.5,
+          "observed_at": "2026-09-19T00:00:00+07:00"
         }
       ],
       "area_nearby": [
         {
-          "geocode": "621101",
-          "tambon": "ต.โกสัมพี",
-          "amphoe": "อ.โกสัมพีนคร",
-          "province": "จ.กำแพงเพชร",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "อุทยานแห่งชาติคลองวังเจ้า",
-          "latitude": 16.505556,
-          "longitude": 99.169833,
-          "sum_rainfall_mm": 156.5,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "620411",
-          "tambon": "ต.ปางมะค่า",
-          "amphoe": "อ.ขาณุวรลักษบุรี",
-          "province": "จ.กำแพงเพชร",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "สะพานต้นน้ำ (เกาะแก้ว-ตลิ่งสูง)",
-          "latitude": 15.91465,
-          "longitude": 99.4194,
-          "sum_rainfall_mm": 156.6,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "620501",
-          "tambon": "ต.คลองขลุง",
-          "amphoe": "อ.คลองขลุง",
-          "province": "จ.กำแพงเพชร",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "อบต.คลองขลุง",
-          "latitude": 16.20864,
-          "longitude": 99.70895,
-          "sum_rainfall_mm": 152.60000000000002,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "620504",
-          "tambon": "ต.ท่าพุทรา",
-          "amphoe": "อ.คลองขลุง",
-          "province": "จ.กำแพงเพชร",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "คลองวังหิน",
-          "latitude": 16.229583,
-          "longitude": 99.696722,
-          "sum_rainfall_mm": 196.0,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "620509",
-          "tambon": "ต.วังไทร",
-          "amphoe": "อ.คลองขลุง",
-          "province": "จ.กำแพงเพชร",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "สำนักสงฆ์มอหินเพลิง",
-          "latitude": 16.151548,
-          "longitude": 99.527517,
-          "sum_rainfall_mm": 137.5,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "620303",
-          "tambon": "ต.คลองลานพัฒนา",
-          "amphoe": "อ.คลองลาน",
-          "province": "จ.กำแพงเพชร",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านโชคชัยพัฒนา-หินดาต",
-          "latitude": 16.085972,
-          "longitude": 99.420639,
-          "sum_rainfall_mm": 192.5,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "620118",
-          "tambon": "ต.ธำมรงค์",
-          "amphoe": "อ.เมืองกำแพงเพชร",
-          "province": "จ.กำแพงเพชร",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านคลองสีนวล",
-          "latitude": 16.343056,
-          "longitude": 99.598389,
-          "sum_rainfall_mm": 154.0,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "620105",
-          "tambon": "ต.นครชุม",
-          "amphoe": "อ.เมืองกำแพงเพชร",
-          "province": "จ.กำแพงเพชร",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "เมืองกำแพงเพชร (P7A)",
-          "latitude": 16.47816,
-          "longitude": 99.51866,
-          "sum_rainfall_mm": 115.2,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "620104",
-          "tambon": "ต.นาบ่อคำ",
-          "amphoe": "อ.เมืองกำแพงเพชร",
-          "province": "จ.กำแพงเพชร",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "วัดเขาแก้วสวรรค์",
-          "latitude": 16.406278,
-          "longitude": 99.349611,
-          "sum_rainfall_mm": 164.0,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "620110",
-          "tambon": "ต.หนองปลิง",
-          "amphoe": "อ.เมืองกำแพงเพชร",
-          "province": "จ.กำแพงเพชร",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "ท่อทองแดง1",
-          "latitude": 16.49714,
-          "longitude": 99.51958,
-          "sum_rainfall_mm": 112.4,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "601303",
-          "tambon": "ต.แม่เล่ย์",
-          "amphoe": "อ.แม่วงก์",
-          "province": "จ.นครสวรรค์",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านใหม่ศรีนคร",
-          "latitude": 15.788101,
-          "longitude": 99.458804,
-          "sum_rainfall_mm": 124.0,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "601116",
-          "tambon": "ต.ศาลเจ้าไก่ต่อ",
-          "amphoe": "อ.ลาดยาว",
-          "province": "จ.นครสวรรค์",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "อบต.ศาลเจ้าไก่ต่อ",
-          "latitude": 15.773471,
-          "longitude": 99.667092,
-          "sum_rainfall_mm": 188.0,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
           "geocode": "650208",
           "tambon": "ต.ยางโกลน",
           "amphoe": "อ.นครไทย",
@@ -3340,8 +3121,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านน้ำพริก",
           "latitude": 17.19839,
           "longitude": 100.912409,
-          "sum_rainfall_mm": 231.5,
-          "observed_at": "2026-09-18T20:00:00+07:00"
+          "sum_rainfall_mm": 232.5,
+          "observed_at": "2026-09-19T00:00:00+07:00"
         },
         {
           "geocode": "670402",
@@ -3354,20 +3135,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 17.00782,
           "longitude": 101.252134,
           "sum_rainfall_mm": 196.0,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "670401",
-          "tambon": "ต.หล่มเก่า",
-          "amphoe": "อ.หล่มเก่า",
-          "province": "จ.เพชรบูรณ์",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "อบต.หล่มเก่า",
-          "latitude": 16.88067,
-          "longitude": 101.23835,
-          "sum_rainfall_mm": 121.39999999999999,
-          "observed_at": "2026-09-18T20:00:00+07:00"
+          "observed_at": "2026-09-19T00:00:00+07:00"
         },
         {
           "geocode": "640205",
@@ -3379,8 +3147,47 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านวังหาด",
           "latitude": 17.197262,
           "longitude": 99.384964,
-          "sum_rainfall_mm": 112.0,
-          "observed_at": "2026-09-18T20:00:00+07:00"
+          "sum_rainfall_mm": 112.5,
+          "observed_at": "2026-09-19T00:00:00+07:00"
+        },
+        {
+          "geocode": "640502",
+          "tambon": "ต.ป่างิ้ว",
+          "amphoe": "อ.ศรีสัชนาลัย",
+          "province": "จ.สุโขทัย",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านทุ่งพล้อ",
+          "latitude": 17.541266,
+          "longitude": 99.782301,
+          "sum_rainfall_mm": 136.0,
+          "observed_at": "2026-09-19T00:00:00+07:00"
+        },
+        {
+          "geocode": "640504",
+          "tambon": "ต.แม่สิน",
+          "amphoe": "อ.ศรีสัชนาลัย",
+          "province": "จ.สุโขทัย",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านสุเม่นเหนือ",
+          "latitude": 17.731856,
+          "longitude": 99.645754,
+          "sum_rainfall_mm": 180.5,
+          "observed_at": "2026-09-19T00:00:00+07:00"
+        },
+        {
+          "geocode": "640501",
+          "tambon": "ต.หาดเสี้ยว",
+          "amphoe": "อ.ศรีสัชนาลัย",
+          "province": "จ.สุโขทัย",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "ศรีสัชนาลัย",
+          "latitude": 17.51715,
+          "longitude": 99.75877,
+          "sum_rainfall_mm": 94.4,
+          "observed_at": "2026-09-19T00:00:00+07:00"
         },
         {
           "geocode": "640606",
@@ -3392,73 +3199,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ที่ทำการเขตรักษาพันธุ์สัตว์ป่าถ้ำเจ้าราม",
           "latitude": 17.24367,
           "longitude": 99.486084,
-          "sum_rainfall_mm": 112.8,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "610701",
-          "tambon": "ต.ลานสัก",
-          "amphoe": "อ.ลานสัก",
-          "province": "จ.อุทัยธานี",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "อบต.ลานสัก",
-          "latitude": 15.47279,
-          "longitude": 99.53976,
-          "sum_rainfall_mm": 158.0,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "610410",
-          "tambon": "ต.เขากวางทอง",
-          "amphoe": "อ.หนองฉาง",
-          "province": "จ.อุทัยธานี",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "ฝายทับเสลา",
-          "latitude": 15.407623,
-          "longitude": 99.714458,
-          "sum_rainfall_mm": 195.0,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "610401",
-          "tambon": "ต.หนองฉาง",
-          "amphoe": "อ.หนองฉาง",
-          "province": "จ.อุทัยธานี",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "ทต.หนองฉาง",
-          "latitude": 15.38896,
-          "longitude": 99.84505,
-          "sum_rainfall_mm": 166.4,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "610801",
-          "tambon": "ต.สุขฤทัย",
-          "amphoe": "อ.ห้วยคต",
-          "province": "จ.อุทัยธานี",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านกกงิ้ว",
-          "latitude": 15.304712,
-          "longitude": 99.648582,
-          "sum_rainfall_mm": 236.0,
-          "observed_at": "2026-09-18T20:00:00+07:00"
-        },
-        {
-          "geocode": "610803",
-          "tambon": "ต.ห้วยคต",
-          "amphoe": "อ.ห้วยคต",
-          "province": "จ.อุทัยธานี",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านหินโหง่น",
-          "latitude": 15.234026,
-          "longitude": 99.588856,
-          "sum_rainfall_mm": 107.5,
-          "observed_at": "2026-09-18T20:00:00+07:00"
+          "sum_rainfall_mm": 115.20000000000002,
+          "observed_at": "2026-09-19T00:00:00+07:00"
         },
         {
           "geocode": "360412",
@@ -3470,8 +3212,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านกลาง",
           "latitude": 16.37945,
           "longitude": 101.79831,
-          "sum_rainfall_mm": 216.5,
-          "observed_at": "2026-09-18T20:00:00+07:00"
+          "sum_rainfall_mm": 226.5,
+          "observed_at": "2026-09-19T00:00:00+07:00"
         },
         {
           "geocode": "361201",
@@ -3484,7 +3226,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 16.11598,
           "longitude": 102.23128,
           "sum_rainfall_mm": 171.6,
-          "observed_at": "2026-09-18T20:00:00+07:00"
+          "observed_at": "2026-09-19T00:00:00+07:00"
         },
         {
           "geocode": "361305",
@@ -3496,8 +3238,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหนองเชียงรอดเหนือ",
           "latitude": 16.515036,
           "longitude": 101.823138,
-          "sum_rainfall_mm": 212.5,
-          "observed_at": "2026-09-18T20:00:00+07:00"
+          "sum_rainfall_mm": 213.0,
+          "observed_at": "2026-09-19T00:00:00+07:00"
         },
         {
           "geocode": "420507",
@@ -3509,21 +3251,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.กกสะทอน",
           "latitude": 17.08953,
           "longitude": 101.11006,
-          "sum_rainfall_mm": 125.19999999999997,
-          "observed_at": "2026-09-18T20:00:00+07:00"
+          "sum_rainfall_mm": 125.6,
+          "observed_at": "2026-09-19T00:00:00+07:00"
         },
         {
-          "geocode": "420113",
-          "tambon": "ต.ศรีสองรัก",
-          "amphoe": "อ.เมืองเลย",
-          "province": "จ.เลย",
-          "region_id": "3",
-          "region_name": "ภาคตะวันออกเฉียงเหนือ",
-          "station": "บ้านโคกสว่าง",
-          "latitude": 17.658108,
-          "longitude": 101.703269,
-          "sum_rainfall_mm": 189.5,
-          "observed_at": "2026-09-18T20:00:00+07:00"
+          "geocode": "500203",
+          "tambon": "ต.บ้านหลวง",
+          "amphoe": "อ.จอมทอง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่กลาง",
+          "latitude": 18.533205,
+          "longitude": 98.52239,
+          "sum_rainfall_mm": 143.4,
+          "observed_at": "2026-09-19T00:00:00+07:00"
         },
         {
           "geocode": "500405",
@@ -3535,8 +3277,86 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ขุนวาง",
           "latitude": 19.4138,
           "longitude": 98.593,
-          "sum_rainfall_mm": 105.00000000000001,
-          "observed_at": "2026-09-18T19:00:00+07:00"
+          "sum_rainfall_mm": 136.4,
+          "observed_at": "2026-09-19T00:00:00+07:00"
+        },
+        {
+          "geocode": "500302",
+          "tambon": "ต.ท่าผา",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่อวม",
+          "latitude": 18.507107,
+          "longitude": 98.5005,
+          "sum_rainfall_mm": 132.20000000000002,
+          "observed_at": "2026-09-19T00:00:00+07:00"
+        },
+        {
+          "geocode": "500305",
+          "tambon": "ต.แม่นาจร",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่จอนหลวง",
+          "latitude": 18.66891,
+          "longitude": 98.47738,
+          "sum_rainfall_mm": 109.60000000000004,
+          "observed_at": "2026-09-19T00:00:00+07:00"
+        },
+        {
+          "geocode": "502204",
+          "tambon": "ต.แม่วิน",
+          "amphoe": "อ.แม่วาง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านหนองเต่า",
+          "latitude": 18.680499,
+          "longitude": 98.552366,
+          "sum_rainfall_mm": 107.5,
+          "observed_at": "2026-09-19T00:00:00+07:00"
+        },
+        {
+          "geocode": "540705",
+          "tambon": "ต.แม่พุง",
+          "amphoe": "อ.วังชิ้น",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านป่าคา",
+          "latitude": 17.822465,
+          "longitude": 99.551282,
+          "sum_rainfall_mm": 193.5,
+          "observed_at": "2026-09-19T00:00:00+07:00"
+        },
+        {
+          "geocode": "540701",
+          "tambon": "ต.วังชิ้น",
+          "amphoe": "อ.วังชิ้น",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "อบต.วังชิ้น",
+          "latitude": 17.87937,
+          "longitude": 99.61921,
+          "sum_rainfall_mm": 182.79999999999998,
+          "observed_at": "2026-09-19T00:00:00+07:00"
+        },
+        {
+          "geocode": "520803",
+          "tambon": "ต.แม่ปะ",
+          "amphoe": "อ.เถิน",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านปางกุ่ม",
+          "latitude": 17.707512,
+          "longitude": 99.366176,
+          "sum_rainfall_mm": 92.0,
+          "observed_at": "2026-09-19T00:00:00+07:00"
         },
         {
           "geocode": "520802",
@@ -3548,17 +3368,82 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ มว.1 (น้ำตกแม่วะ)",
           "latitude": 17.44925,
           "longitude": 99.22513,
-          "sum_rainfall_mm": 153.8,
-          "observed_at": "2026-09-18T20:00:00+07:00"
+          "sum_rainfall_mm": 159.0,
+          "observed_at": "2026-09-19T00:00:00+07:00"
+        },
+        {
+          "geocode": "521104",
+          "tambon": "ต.นายาง",
+          "amphoe": "อ.สบปราบ",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแก่น",
+          "latitude": 17.932787,
+          "longitude": 99.275337,
+          "sum_rainfall_mm": 121.5,
+          "observed_at": "2026-09-19T00:00:00+07:00"
+        },
+        {
+          "geocode": "520401",
+          "tambon": "ต.ทุ่งงาม",
+          "amphoe": "อ.เสริมงาม",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่กึ๊ด",
+          "latitude": 18.093353,
+          "longitude": 99.271891,
+          "sum_rainfall_mm": 127.5,
+          "observed_at": "2026-09-19T00:00:00+07:00"
+        },
+        {
+          "geocode": "520402",
+          "tambon": "ต.เสริมขวา",
+          "amphoe": "อ.เสริมงาม",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่เลียง ",
+          "latitude": 18.169743,
+          "longitude": 99.18275,
+          "sum_rainfall_mm": 161.0,
+          "observed_at": "2026-09-19T00:00:00+07:00"
+        },
+        {
+          "geocode": "510503",
+          "tambon": "ต.ตะเคียนปม",
+          "amphoe": "อ.ทุ่งหัวช้าง",
+          "province": "จ.ลำพูน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยพิทักษ์ป่าดอยอีหุ้ย",
+          "latitude": 18.153486,
+          "longitude": 98.9833,
+          "sum_rainfall_mm": 158.2,
+          "observed_at": "2026-09-19T00:00:00+07:00"
+        },
+        {
+          "geocode": "510302",
+          "tambon": "ต.ป่าพลู",
+          "amphoe": "อ.บ้านโฮ่ง",
+          "province": "จ.ลำพูน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านห้วยกองเลาะ",
+          "latitude": 18.250809,
+          "longitude": 98.91515,
+          "sum_rainfall_mm": 119.5,
+          "observed_at": "2026-09-19T00:00:00+07:00"
         }
       ],
-      "risk_map": "https://api.hii.or.th/v2/proxy-image/3days_riskmap_18_09_2026.png?1789780020",
+      "risk_map": "https://api.hii.or.th/v2/proxy-image/3days_riskmap_19_09_2026.png?1789794435",
       "source_url": "https://api.hii.or.th/v2/4UQaYnf0Bx4fXPYyCdDRbqHyXH9Ixvd2nVUjaN1cLBY=/warning/flashflood-24h"
     },
     "48h": {
       "period": "48h",
       "date": "2026-09-19",
-      "time": "08:00:00",
+      "time": "12:00:00",
       "type": "พื้นที่เฝ้าระวังพิเศษ ล่วงหน้า 48 ชม. เสี่ยงน้ำท่วมจากฝนตกสะสม",
       "areas": [
         {
@@ -3571,8 +3456,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อุทยานแห่งชาติคลองวังเจ้า",
           "latitude": 16.505556,
           "longitude": 99.169833,
-          "sum_rainfall_mm": 153.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 160.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "620504",
@@ -3584,8 +3469,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองวังหิน",
           "latitude": 16.229583,
           "longitude": 99.696722,
-          "sum_rainfall_mm": 107.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 109.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "620118",
@@ -3597,8 +3482,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านคลองสีนวล",
           "latitude": 16.343056,
           "longitude": 99.598389,
-          "sum_rainfall_mm": 112.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 114.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "620104",
@@ -3610,8 +3495,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดเขาแก้วสวรรค์",
           "latitude": 16.406278,
           "longitude": 99.349611,
-          "sum_rainfall_mm": 101.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 101.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "601401",
@@ -3623,8 +3508,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านเขาแหลม",
           "latitude": 15.646343,
           "longitude": 99.424945,
-          "sum_rainfall_mm": 103.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 111.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "601303",
@@ -3636,8 +3521,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานแม่เล่ย์",
           "latitude": 15.84175,
           "longitude": 99.41808,
-          "sum_rainfall_mm": 105.4,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 105.60000000000001,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650201",
@@ -3650,7 +3535,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 17.125555,
           "longitude": 100.862292,
           "sum_rainfall_mm": 103.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650210",
@@ -3663,7 +3548,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 17.124356,
           "longitude": 100.775528,
           "sum_rainfall_mm": 138.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650208",
@@ -3675,8 +3560,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านน้ำพริก",
           "latitude": 17.19839,
           "longitude": 100.912409,
-          "sum_rainfall_mm": 149.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 150.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650202",
@@ -3688,8 +3573,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านแก่งไฮ",
           "latitude": 16.985166,
           "longitude": 100.772579,
-          "sum_rainfall_mm": 106.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 106.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650901",
@@ -3701,8 +3586,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ สล.12 (รักไทย)",
           "latitude": 16.74035,
           "longitude": 100.67061,
-          "sum_rainfall_mm": 119.4,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 119.80000000000001,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650407",
@@ -3714,8 +3599,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ชุมแสงสงคราม",
           "latitude": 16.8586,
           "longitude": 100.05965,
-          "sum_rainfall_mm": 102.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 104.6,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "670402",
@@ -3728,7 +3613,46 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 17.00782,
           "longitude": 101.252134,
           "sum_rainfall_mm": 170.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "640502",
+          "tambon": "ต.ป่างิ้ว",
+          "amphoe": "อ.ศรีสัชนาลัย",
+          "province": "จ.สุโขทัย",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านทุ่งพล้อ",
+          "latitude": 17.541266,
+          "longitude": 99.782301,
+          "sum_rainfall_mm": 118.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "640504",
+          "tambon": "ต.แม่สิน",
+          "amphoe": "อ.ศรีสัชนาลัย",
+          "province": "จ.สุโขทัย",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านแม่ฮู้",
+          "latitude": 17.704724,
+          "longitude": 99.732961,
+          "sum_rainfall_mm": 129.5,
+          "observed_at": "2026-09-19T09:00:00+07:00"
+        },
+        {
+          "geocode": "610704",
+          "tambon": "ต.ระบำ",
+          "amphoe": "อ.ลานสัก",
+          "province": "จ.อุทัยธานี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "เขื่อนทับเสลา",
+          "latitude": 15.543873,
+          "longitude": 99.447679,
+          "sum_rainfall_mm": 123.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "610801",
@@ -3740,8 +3664,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านกกงิ้ว",
           "latitude": 15.304712,
           "longitude": 99.648582,
-          "sum_rainfall_mm": 162.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 165.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "610803",
@@ -3753,8 +3677,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ห้วยคต",
           "latitude": 15.30362,
           "longitude": 99.60969,
-          "sum_rainfall_mm": 108.19999999999999,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 112.8,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "360412",
@@ -3766,8 +3690,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านกลาง",
           "latitude": 16.37945,
           "longitude": 101.79831,
-          "sum_rainfall_mm": 206.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 217.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "360401",
@@ -3779,21 +3703,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "น้ำพรม อ.เกษตรสมบูรณ์",
           "latitude": 16.309406,
           "longitude": 101.971772,
-          "sum_rainfall_mm": 138.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
-        },
-        {
-          "geocode": "361201",
-          "tambon": "ต.ช่องสามหมอ",
-          "amphoe": "อ.แก้งคร้อ",
-          "province": "จ.ชัยภูมิ",
-          "region_id": "3",
-          "region_name": "ภาคตะวันออกเฉียงเหนือ",
-          "station": "อบต.ช่องสามหมอ",
-          "latitude": 16.11598,
-          "longitude": 102.23128,
-          "sum_rainfall_mm": 134.4,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 134.0,
+          "observed_at": "2026-09-19T10:00:00+07:00"
         },
         {
           "geocode": "361305",
@@ -3805,8 +3716,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหนองเชียงรอดเหนือ",
           "latitude": 16.515036,
           "longitude": 101.823138,
-          "sum_rainfall_mm": 209.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 201.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "303205",
@@ -3818,21 +3729,99 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เฉลิมพระเกียรติ",
           "latitude": 14.968,
           "longitude": 102.23782,
-          "sum_rainfall_mm": 143.39999999999998,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 143.4,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
-          "geocode": "570803",
-          "tambon": "ต.บ้านแซว",
-          "amphoe": "อ.เชียงแสน",
-          "province": "จ.เชียงราย",
+          "geocode": "502502",
+          "tambon": "ต.แม่แดด",
+          "amphoe": "อ.กัลยาณิวัฒนา",
+          "province": "จ.เชียงใหม่",
           "region_id": "4",
           "region_name": "ภาคเหนือ",
-          "station": "บ้านห้วยข่อยหล่อย",
-          "latitude": 20.195756,
-          "longitude": 100.241329,
-          "sum_rainfall_mm": 103.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "station": "ชุมชนแม่แดด",
+          "latitude": 18.962732,
+          "longitude": 98.412445,
+          "sum_rainfall_mm": 98.19999999999997,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500203",
+          "tambon": "ต.บ้านหลวง",
+          "amphoe": "อ.จอมทอง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่กลาง",
+          "latitude": 18.533205,
+          "longitude": 98.52239,
+          "sum_rainfall_mm": 136.2,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500405",
+          "tambon": "ต.เมืองคอง",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ขุนวาง",
+          "latitude": 19.4138,
+          "longitude": 98.593,
+          "sum_rainfall_mm": 108.6,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "502401",
+          "tambon": "ต.ดอยหล่อ",
+          "amphoe": "อ.ดอยหล่อ",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "แม่น้ำปิงที่ อ.จอมทอง",
+          "latitude": 18.435266,
+          "longitude": 98.740107,
+          "sum_rainfall_mm": 102.0,
+          "observed_at": "2026-09-19T10:00:00+07:00"
+        },
+        {
+          "geocode": "500302",
+          "tambon": "ต.ท่าผา",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่อวม",
+          "latitude": 18.507107,
+          "longitude": 98.5005,
+          "sum_rainfall_mm": 124.4,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500305",
+          "tambon": "ต.แม่นาจร",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่สะงะ",
+          "latitude": 18.786606,
+          "longitude": 98.495445,
+          "sum_rainfall_mm": 102.39999999999998,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "502204",
+          "tambon": "ต.แม่วิน",
+          "amphoe": "อ.แม่วาง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านหนองเต่า",
+          "latitude": 18.680499,
+          "longitude": 98.552366,
+          "sum_rainfall_mm": 105.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "502001",
@@ -3844,21 +3833,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ นด.5 (น้ำตกแม่หาด)",
           "latitude": 19.628954,
           "longitude": 98.5769,
-          "sum_rainfall_mm": 102.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "550403",
-          "tambon": "ต.ศรีษะเกษ",
-          "amphoe": "อ.นาน้อย",
-          "province": "จ.น่าน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "ศูนย์ศึกษาการพัฒนาการอนุรักษ์ต้นน้ำลุ่มน้ำน่าน",
-          "latitude": 18.410538,
-          "longitude": 100.699066,
-          "sum_rainfall_mm": 94.8,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 106.60000000000002,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "551004",
@@ -3870,8 +3846,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อ.นาหมื่น",
           "latitude": 18.17219,
           "longitude": 100.507054,
-          "sum_rainfall_mm": 119.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "sum_rainfall_mm": 95.0,
+          "observed_at": "2026-09-19T10:00:00+07:00"
         },
         {
           "geocode": "550116",
@@ -3884,7 +3860,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.717311,
           "longitude": 100.626146,
           "sum_rainfall_mm": 117.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550710",
@@ -3896,8 +3872,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "น้ำสา",
           "latitude": 18.584002,
           "longitude": 100.600266,
-          "sum_rainfall_mm": 103.19999999999999,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 103.2,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550713",
@@ -3906,37 +3882,11 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.น่าน",
           "region_id": "4",
           "region_name": "ภาคเหนือ",
-          "station": "บ้านยาบนาเลิม",
-          "latitude": 18.679689,
-          "longitude": 100.568914,
-          "sum_rainfall_mm": 94.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "550709",
-          "tambon": "ต.ยาบหัวนา",
-          "amphoe": "อ.เวียงสา",
-          "province": "จ.น่าน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านบ่อหอย",
-          "latitude": 18.502661,
-          "longitude": 100.400493,
-          "sum_rainfall_mm": 125.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "550711",
-          "tambon": "ต.อ่ายนาไลย",
-          "amphoe": "อ.เวียงสา",
-          "province": "จ.น่าน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านห้วยน้ำอุ่น",
-          "latitude": 18.505597,
-          "longitude": 100.524484,
-          "sum_rainfall_mm": 99.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่ขะนิง",
+          "latitude": 18.75281,
+          "longitude": 100.54113,
+          "sum_rainfall_mm": 116.8,
+          "observed_at": "2026-09-19T10:00:00+07:00"
         },
         {
           "geocode": "560605",
@@ -3948,8 +3898,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานน้ำงิม",
           "latitude": 19.321678,
           "longitude": 100.456184,
-          "sum_rainfall_mm": 90.19999999999999,
-          "observed_at": "2026-09-19T05:00:00+07:00"
+          "sum_rainfall_mm": 90.2,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "540207",
@@ -3961,8 +3911,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านผาราง",
           "latitude": 18.316285,
           "longitude": 100.324273,
-          "sum_rainfall_mm": 110.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 104.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "540206",
@@ -3974,8 +3924,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านห้วยฮ่อมพัฒนา",
           "latitude": 18.203518,
           "longitude": 100.42659,
-          "sum_rainfall_mm": 123.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 90.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "540201",
@@ -3987,21 +3937,47 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ร้องกวาง",
           "latitude": 18.3588,
           "longitude": 100.3339,
-          "sum_rainfall_mm": 126.79999999999998,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 110.4,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
-          "geocode": "540213",
-          "tambon": "ต.ห้วยโรง",
-          "amphoe": "อ.ร้องกวาง",
+          "geocode": "540706",
+          "tambon": "ต.ป่าสัก",
+          "amphoe": "อ.วังชิ้น",
           "province": "จ.แพร่",
           "region_id": "4",
           "region_name": "ภาคเหนือ",
-          "station": "บ้านครกหนานทา",
-          "latitude": 18.481138,
-          "longitude": 100.409021,
-          "sum_rainfall_mm": 98.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "station": "บ้านแม่กระต๋อม",
+          "latitude": 17.789991,
+          "longitude": 99.478629,
+          "sum_rainfall_mm": 96.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "540705",
+          "tambon": "ต.แม่พุง",
+          "amphoe": "อ.วังชิ้น",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่แฮด",
+          "latitude": 17.858197,
+          "longitude": 99.53412,
+          "sum_rainfall_mm": 91.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "540701",
+          "tambon": "ต.วังชิ้น",
+          "amphoe": "อ.วังชิ้น",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านหาดรั่ว",
+          "latitude": 17.79514,
+          "longitude": 99.673173,
+          "sum_rainfall_mm": 94.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "540606",
@@ -4014,7 +3990,20 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.7548,
           "longitude": 100.2227,
           "sum_rainfall_mm": 116.4,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "580201",
+          "tambon": "ต.ขุนยวม",
+          "amphoe": "อ.ขุนยวม",
+          "province": "จ.แม่ฮ่องสอน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่สุริน",
+          "latitude": 18.916115,
+          "longitude": 97.943995,
+          "sum_rainfall_mm": 102.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "580501",
@@ -4026,8 +4015,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านท่าสองแคว",
           "latitude": 18.339649,
           "longitude": 97.918308,
-          "sum_rainfall_mm": 158.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 159.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "520504",
@@ -4039,21 +4028,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานน้ำงาว",
           "latitude": 18.889063,
           "longitude": 99.940125,
-          "sum_rainfall_mm": 106.60000000000001,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 95.8,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
-          "geocode": "520505",
-          "tambon": "ต.ปงเตา",
-          "amphoe": "อ.งาว",
+          "geocode": "520807",
+          "tambon": "ต.แม่ถอด",
+          "amphoe": "อ.เถิน",
           "province": "จ.ลำปาง",
           "region_id": "4",
           "region_name": "ภาคเหนือ",
-          "station": "หน่วยศึกษาการพัฒนาการอนุรักษ์ต้นน้ำขุนงาว",
-          "latitude": 18.8879,
-          "longitude": 99.8069,
-          "sum_rainfall_mm": 105.80000000000001,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "station": "บ้านแม่แก่ง",
+          "latitude": 17.700725,
+          "longitude": 99.163618,
+          "sum_rainfall_mm": 93.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "520802",
@@ -4065,8 +4054,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ มว.1 (น้ำตกแม่วะ)",
           "latitude": 17.44925,
           "longitude": 99.22513,
-          "sum_rainfall_mm": 140.4,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 145.6,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "521011",
@@ -4078,8 +4067,73 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านด่าน",
           "latitude": 17.996171,
           "longitude": 99.509398,
-          "sum_rainfall_mm": 116.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 126.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "521104",
+          "tambon": "ต.นายาง",
+          "amphoe": "อ.สบปราบ",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแก่น",
+          "latitude": 17.932787,
+          "longitude": 99.275337,
+          "sum_rainfall_mm": 96.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "521101",
+          "tambon": "ต.สบปราบ",
+          "amphoe": "อ.สบปราบ",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านทุ่ง",
+          "latitude": 17.873848,
+          "longitude": 99.362825,
+          "sum_rainfall_mm": 97.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "520401",
+          "tambon": "ต.ทุ่งงาม",
+          "amphoe": "อ.เสริมงาม",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่กึ๊ด",
+          "latitude": 18.093353,
+          "longitude": 99.271891,
+          "sum_rainfall_mm": 101.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "520402",
+          "tambon": "ต.เสริมขวา",
+          "amphoe": "อ.เสริมงาม",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านปงป่าป๋อ",
+          "latitude": 18.130482,
+          "longitude": 99.207081,
+          "sum_rainfall_mm": 94.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "521206",
+          "tambon": "ต.แม่สัน",
+          "amphoe": "อ.ห้างฉัตร",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยพิทักษ์ป่าหัวทุ่ง",
+          "latitude": 18.30243,
+          "longitude": 99.229454,
+          "sum_rainfall_mm": 97.6,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "510503",
@@ -4091,8 +4145,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านแม่แสม",
           "latitude": 18.053798,
           "longitude": 99.039799,
-          "sum_rainfall_mm": 92.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 113.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "510501",
@@ -4104,8 +4158,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อ่างเก็บน้ำห้วยหินฝน",
           "latitude": 18.00469,
           "longitude": 99.00955,
-          "sum_rainfall_mm": 95.19999999999999,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 113.00000000000001,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "510302",
+          "tambon": "ต.ป่าพลู",
+          "amphoe": "อ.บ้านโฮ่ง",
+          "province": "จ.ลำพูน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "อ่างเก็บน้ำห้วยแทง",
+          "latitude": 18.29177,
+          "longitude": 98.86272,
+          "sum_rainfall_mm": 104.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "510405",
@@ -4117,21 +4184,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านก้อทุ่ง",
           "latitude": 17.62713,
           "longitude": 98.78962,
-          "sum_rainfall_mm": 96.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "530601",
-          "tambon": "ต.ม่วงเจ็ดต้น",
-          "amphoe": "อ.บ้านโคก",
-          "province": "จ.อุตรดิตถ์",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านห้วยน้อยกา",
-          "latitude": 18.112832,
-          "longitude": 101.038356,
-          "sum_rainfall_mm": 91.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 101.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "710206",
@@ -4144,7 +4198,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 14.02271,
           "longitude": 99.19147,
           "sum_rainfall_mm": 133.8,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "711203",
@@ -4157,7 +4211,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 14.740015,
           "longitude": 99.330612,
           "sum_rainfall_mm": 135.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "760802",
@@ -4170,7 +4224,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 12.87273,
           "longitude": 99.6842,
           "sum_rainfall_mm": 104.19999999999999,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "760513",
@@ -4183,7 +4237,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 12.661321,
           "longitude": 99.65458,
           "sum_rainfall_mm": 157.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "810305",
@@ -4195,8 +4249,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านโล๊ะดุหยง",
           "latitude": 7.633624,
           "longitude": 99.046947,
-          "sum_rainfall_mm": 166.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "sum_rainfall_mm": 163.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "810105",
@@ -4208,8 +4262,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหนองจิก",
           "latitude": 8.218715,
           "longitude": 98.794988,
-          "sum_rainfall_mm": 168.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 168.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "860602",
@@ -4221,8 +4275,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านคลองเรือ",
           "latitude": 9.688383,
           "longitude": 98.669213,
-          "sum_rainfall_mm": 183.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 183.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "920503",
@@ -4234,8 +4288,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.กะลาเส",
           "latitude": 7.70389,
           "longitude": 99.31807,
-          "sum_rainfall_mm": 168.8,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 155.8,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820302",
@@ -4247,8 +4301,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านปากพู่",
           "latitude": 8.716267,
           "longitude": 98.424028,
-          "sum_rainfall_mm": 218.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 188.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820305",
@@ -4260,8 +4314,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านท่าหัน",
           "latitude": 8.828992,
           "longitude": 98.492709,
-          "sum_rainfall_mm": 234.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 220.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820303",
@@ -4273,8 +4327,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านสะพานเสือ",
           "latitude": 8.748697,
           "longitude": 98.389237,
-          "sum_rainfall_mm": 264.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 244.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820304",
@@ -4286,8 +4340,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านเหล",
           "latitude": 8.771167,
           "longitude": 98.438414,
-          "sum_rainfall_mm": 335.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 297.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820601",
@@ -4299,8 +4353,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหินลาด",
           "latitude": 9.224829,
           "longitude": 98.384409,
-          "sum_rainfall_mm": 175.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 157.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820605",
@@ -4312,8 +4366,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านทางด่าน",
           "latitude": 9.186204,
           "longitude": 98.425327,
-          "sum_rainfall_mm": 196.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 189.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820506",
@@ -4325,8 +4379,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านบางอี",
           "latitude": 8.836125,
           "longitude": 98.387642,
-          "sum_rainfall_mm": 180.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 172.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820501",
@@ -4339,7 +4393,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 8.868464,
           "longitude": 98.348746,
           "sum_rainfall_mm": 229.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820505",
@@ -4351,8 +4405,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านเหนือ",
           "latitude": 8.775901,
           "longitude": 98.390314,
-          "sum_rainfall_mm": 186.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 172.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820503",
@@ -4364,8 +4418,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านดอกแดง",
           "latitude": 8.7623,
           "longitude": 98.32074,
-          "sum_rainfall_mm": 326.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 283.5,
+          "observed_at": "2026-09-19T10:00:00+07:00"
         },
         {
           "geocode": "850302",
@@ -4377,8 +4431,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหินขาว",
           "latitude": 9.644632,
           "longitude": 98.614696,
-          "sum_rainfall_mm": 242.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 220.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "850303",
@@ -4390,8 +4444,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านย่านยาว",
           "latitude": 9.577557,
           "longitude": 98.666177,
-          "sum_rainfall_mm": 205.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 209.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "850106",
@@ -4403,8 +4457,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านบางนอนนอก",
           "latitude": 9.994826,
           "longitude": 98.647922,
-          "sum_rainfall_mm": 151.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 156.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "850104",
@@ -4416,8 +4470,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านพรรั้ง",
           "latitude": 9.880111,
           "longitude": 98.626948,
-          "sum_rainfall_mm": 183.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 160.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "850105",
@@ -4429,8 +4483,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านเขานางหงษ์",
           "latitude": 9.978944,
           "longitude": 98.599994,
-          "sum_rainfall_mm": 163.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 161.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "850102",
@@ -4442,8 +4496,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านห้วยน้ำใส",
           "latitude": 9.727078,
           "longitude": 98.602777,
-          "sum_rainfall_mm": 216.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 211.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "850204",
@@ -4455,21 +4509,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ละอุ่น",
           "latitude": 10.08942,
           "longitude": 98.7222,
-          "sum_rainfall_mm": 182.8,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "850501",
-          "tambon": "ต.นาคา",
-          "amphoe": "อ.สุขสำราญ",
-          "province": "จ.ระนอง",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "บ้านนาพรุ",
-          "latitude": 9.431411,
-          "longitude": 98.466908,
-          "sum_rainfall_mm": 164.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 176.2,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "840904",
@@ -4481,8 +4522,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์ป่าคลองมอญ จ.สุราษฎร์ธานี",
           "latitude": 9.080287,
           "longitude": 98.632318,
-          "sum_rainfall_mm": 252.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "sum_rainfall_mm": 239.0,
+          "observed_at": "2026-09-19T10:00:00+07:00"
         },
         {
           "geocode": "841003",
@@ -4494,8 +4535,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานคลองศก อ.พนม",
           "latitude": 8.881969,
           "longitude": 98.678887,
-          "sum_rainfall_mm": 182.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "sum_rainfall_mm": 169.0,
+          "observed_at": "2026-09-19T10:00:00+07:00"
         }
       ],
       "area_nearby": [
@@ -4509,8 +4550,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อุทยานแห่งชาติคลองวังเจ้า",
           "latitude": 16.505556,
           "longitude": 99.169833,
-          "sum_rainfall_mm": 153.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 160.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "621101",
@@ -4522,8 +4563,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหนองบัวสามัคคี",
           "latitude": 16.559187,
           "longitude": 99.259333,
-          "sum_rainfall_mm": 34.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 35.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "621101",
@@ -4535,8 +4576,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านไร่พิจิตร",
           "latitude": 16.510575,
           "longitude": 99.2561,
-          "sum_rainfall_mm": 36.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 37.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "621101",
@@ -4548,8 +4589,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ วจ.5 (โละโคะ)",
           "latitude": 16.4495,
           "longitude": 99.1115,
-          "sum_rainfall_mm": 27.8,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "sum_rainfall_mm": 34.8,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "621101",
@@ -4561,8 +4602,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ขุนวังเจ้า",
           "latitude": 16.502794,
           "longitude": 99.16898,
-          "sum_rainfall_mm": 123.39999999999999,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 129.6,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "621102",
@@ -4574,8 +4615,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านมอเสือดุ",
           "latitude": 16.557149,
           "longitude": 99.364643,
-          "sum_rainfall_mm": 86.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 87.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "620501",
@@ -4587,8 +4628,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.คลองขลุง",
           "latitude": 16.20864,
           "longitude": 99.70895,
-          "sum_rainfall_mm": 94.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 93.99999999999999,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "620504",
@@ -4600,8 +4641,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองวังหิน",
           "latitude": 16.229583,
           "longitude": 99.696722,
-          "sum_rainfall_mm": 107.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 109.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "620509",
@@ -4614,7 +4655,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 16.151548,
           "longitude": 99.527517,
           "sum_rainfall_mm": 94.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "620117",
@@ -4626,8 +4667,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านเขาน้ำเพชร",
           "latitude": 16.372171,
           "longitude": 99.401781,
-          "sum_rainfall_mm": 66.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 66.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "620106",
@@ -4639,8 +4680,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านห้วยกุ่ม",
           "latitude": 16.523629,
           "longitude": 99.385159,
-          "sum_rainfall_mm": 37.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 39.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "620115",
@@ -4652,8 +4693,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านสันติสุข",
           "latitude": 16.44708,
           "longitude": 99.426899,
-          "sum_rainfall_mm": 51.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 53.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "620118",
@@ -4665,8 +4706,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านคลองสีนวล",
           "latitude": 16.343056,
           "longitude": 99.598389,
-          "sum_rainfall_mm": 112.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 114.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "620105",
@@ -4678,8 +4719,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เมืองกำแพงเพชร (P7A)",
           "latitude": 16.47816,
           "longitude": 99.51866,
-          "sum_rainfall_mm": 70.60000000000001,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 72.20000000000002,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "620104",
@@ -4691,21 +4732,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดเขาแก้วสวรรค์",
           "latitude": 16.406278,
           "longitude": 99.349611,
-          "sum_rainfall_mm": 101.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "620104",
-          "tambon": "ต.นาบ่อคำ",
-          "amphoe": "อ.เมืองกำแพงเพชร",
-          "province": "จ.กำแพงเพชร",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านปางขนุน",
-          "latitude": 16.46868,
-          "longitude": 99.258865,
-          "sum_rainfall_mm": 70.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 101.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "620104",
@@ -4718,7 +4746,20 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 16.465842,
           "longitude": 99.346447,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "620104",
+          "tambon": "ต.นาบ่อคำ",
+          "amphoe": "อ.เมืองกำแพงเพชร",
+          "province": "จ.กำแพงเพชร",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านปางขนุน",
+          "latitude": 16.46868,
+          "longitude": 99.258865,
+          "sum_rainfall_mm": 73.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "620104",
@@ -4731,7 +4772,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 16.4348,
           "longitude": 99.36729,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "620107",
@@ -4743,8 +4784,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานลานดอกไม้",
           "latitude": 16.6282,
           "longitude": 99.43257,
-          "sum_rainfall_mm": 59.2,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 61.6,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "620110",
@@ -4756,8 +4797,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ท่อทองแดง1",
           "latitude": 16.49714,
           "longitude": 99.51958,
-          "sum_rainfall_mm": 78.80000000000001,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 80.60000000000001,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "601401",
+          "tambon": "ต.แม่เปิน",
+          "amphoe": "อ.แม่เปิน",
+          "province": "จ.นครสวรรค์",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านเขาแหลม",
+          "latitude": 15.646343,
+          "longitude": 99.424945,
+          "sum_rainfall_mm": 111.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "601401",
@@ -4770,20 +4824,20 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 15.751256,
           "longitude": 99.313844,
           "sum_rainfall_mm": 0.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
-          "geocode": "601401",
-          "tambon": "ต.แม่เปิน",
-          "amphoe": "อ.แม่เปิน",
+          "geocode": "601303",
+          "tambon": "ต.แม่เล่ย์",
+          "amphoe": "อ.แม่วงก์",
           "province": "จ.นครสวรรค์",
           "region_id": "1",
           "region_name": "ภาคกลาง",
-          "station": "บ้านเขาแหลม",
-          "latitude": 15.646343,
-          "longitude": 99.424945,
-          "sum_rainfall_mm": 103.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "station": "บ้านใหม่ศรีนคร",
+          "latitude": 15.788101,
+          "longitude": 99.458804,
+          "sum_rainfall_mm": 93.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "601303",
@@ -4795,8 +4849,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านตลิ่งสูง",
           "latitude": 15.912504,
           "longitude": 99.418904,
-          "sum_rainfall_mm": 87.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 90.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "601303",
@@ -4809,7 +4863,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 15.850186,
           "longitude": 99.429506,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "601303",
@@ -4821,21 +4875,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านปางข้าวสาร",
           "latitude": 15.840499,
           "longitude": 99.323096,
-          "sum_rainfall_mm": 41.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "601303",
-          "tambon": "ต.แม่เล่ย์",
-          "amphoe": "อ.แม่วงก์",
-          "province": "จ.นครสวรรค์",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านใหม่ศรีนคร",
-          "latitude": 15.788101,
-          "longitude": 99.458804,
-          "sum_rainfall_mm": 92.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 44.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "601303",
@@ -4848,7 +4889,20 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 15.8948,
           "longitude": 99.3084,
           "sum_rainfall_mm": 0.4,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "601303",
+          "tambon": "ต.แม่เล่ย์",
+          "amphoe": "อ.แม่วงก์",
+          "province": "จ.นครสวรรค์",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "สะพานแม่เล่ย์",
+          "latitude": 15.84175,
+          "longitude": 99.41808,
+          "sum_rainfall_mm": 105.6,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "601303",
@@ -4861,20 +4915,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 15.9125,
           "longitude": 99.32747,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "601303",
-          "tambon": "ต.แม่เล่ย์",
-          "amphoe": "อ.แม่วงก์",
-          "province": "จ.นครสวรรค์",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "สะพานแม่เล่ย์",
-          "latitude": 15.84175,
-          "longitude": 99.41808,
-          "sum_rainfall_mm": 105.4,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "601301",
@@ -4887,20 +4928,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 15.78101,
           "longitude": 99.54588,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "650206",
-          "tambon": "ต.นครชุม",
-          "amphoe": "อ.นครไทย",
-          "province": "จ.พิษณุโลก",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านนาเมือง",
-          "latitude": 17.295934,
-          "longitude": 100.830007,
-          "sum_rainfall_mm": 23.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650206",
@@ -4913,20 +4941,20 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 17.258822,
           "longitude": 100.796417,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
-          "geocode": "650201",
-          "tambon": "ต.นครไทย",
+          "geocode": "650206",
+          "tambon": "ต.นครชุม",
           "amphoe": "อ.นครไทย",
           "province": "จ.พิษณุโลก",
           "region_id": "1",
           "region_name": "ภาคกลาง",
-          "station": "บ้านน้ำพาย",
-          "latitude": 17.125555,
-          "longitude": 100.862292,
-          "sum_rainfall_mm": 103.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "station": "บ้านนาเมือง",
+          "latitude": 17.295934,
+          "longitude": 100.830007,
+          "sum_rainfall_mm": 23.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650201",
@@ -4939,7 +4967,20 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 17.107092,
           "longitude": 100.845891,
           "sum_rainfall_mm": 42.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "650201",
+          "tambon": "ต.นครไทย",
+          "amphoe": "อ.นครไทย",
+          "province": "จ.พิษณุโลก",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านน้ำพาย",
+          "latitude": 17.125555,
+          "longitude": 100.862292,
+          "sum_rainfall_mm": 103.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650201",
@@ -4951,8 +4992,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "นครไทย",
           "latitude": 17.10701,
           "longitude": 100.84587,
-          "sum_rainfall_mm": 63.6,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 63.800000000000004,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650205",
@@ -4964,21 +5005,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านน้ำตอน",
           "latitude": 17.242213,
           "longitude": 100.873726,
-          "sum_rainfall_mm": 4.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "650207",
-          "tambon": "ต.น้ำกุ่ม",
-          "amphoe": "อ.นครไทย",
-          "province": "จ.พิษณุโลก",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านบุ่งผำ",
-          "latitude": 17.438095,
-          "longitude": 100.837086,
-          "sum_rainfall_mm": 34.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 4.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650207",
@@ -4991,7 +5019,20 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 17.397498,
           "longitude": 100.883799,
           "sum_rainfall_mm": 8.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "650207",
+          "tambon": "ต.น้ำกุ่ม",
+          "amphoe": "อ.นครไทย",
+          "province": "จ.พิษณุโลก",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านบุ่งผำ",
+          "latitude": 17.438095,
+          "longitude": 100.837086,
+          "sum_rainfall_mm": 35.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650204",
@@ -5004,7 +5045,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 16.980447,
           "longitude": 101.025851,
           "sum_rainfall_mm": 58.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650204",
@@ -5016,8 +5057,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านแก่งออมสิงห์",
           "latitude": 17.123485,
           "longitude": 100.894521,
-          "sum_rainfall_mm": 68.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 69.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650204",
@@ -5029,8 +5070,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านห้วยน้ำไซ",
           "latitude": 17.023547,
           "longitude": 100.934506,
-          "sum_rainfall_mm": 35.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 36.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650204",
@@ -5042,8 +5083,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ที่ทำการอุทยานแห่งชาติภูหินร่องกล้า",
           "latitude": 17.004087,
           "longitude": 100.992645,
-          "sum_rainfall_mm": 74.8,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "sum_rainfall_mm": 69.4,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650209",
@@ -5053,23 +5094,10 @@ window.IEAT_THAIWATER_DATA = {
           "region_id": "1",
           "region_name": "ภาคกลาง",
           "station": "บ้านบ่อโพธิ์",
-          "latitude": 17.23296,
-          "longitude": 101.053442,
-          "sum_rainfall_mm": 91.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "650209",
-          "tambon": "ต.บ่อโพธิ์",
-          "amphoe": "อ.นครไทย",
-          "province": "จ.พิษณุโลก",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านน้ำเลา",
-          "latitude": 17.18943,
-          "longitude": 101.007817,
-          "sum_rainfall_mm": 44.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "latitude": 17.232192,
+          "longitude": 101.053443,
+          "sum_rainfall_mm": 21.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650209",
@@ -5082,7 +5110,20 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 17.1799,
           "longitude": 101.009,
           "sum_rainfall_mm": 51.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "650209",
+          "tambon": "ต.บ่อโพธิ์",
+          "amphoe": "อ.นครไทย",
+          "province": "จ.พิษณุโลก",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านน้ำเลา",
+          "latitude": 17.18943,
+          "longitude": 101.007817,
+          "sum_rainfall_mm": 44.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650209",
@@ -5092,10 +5133,10 @@ window.IEAT_THAIWATER_DATA = {
           "region_id": "1",
           "region_name": "ภาคกลาง",
           "station": "บ้านบ่อโพธิ์",
-          "latitude": 17.232192,
-          "longitude": 101.053443,
-          "sum_rainfall_mm": 20.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "latitude": 17.23296,
+          "longitude": 101.053442,
+          "sum_rainfall_mm": 92.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650209",
@@ -5107,8 +5148,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยป้องกันรักษาป่าที่ พล. ๑๑ (น้ำเลา)",
           "latitude": 17.209349,
           "longitude": 101.016914,
-          "sum_rainfall_mm": 15.000000000000002,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 15.000000000000004,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650210",
@@ -5121,20 +5162,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 17.124356,
           "longitude": 100.775528,
           "sum_rainfall_mm": 138.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "650203",
-          "tambon": "ต.บ้านแยง",
-          "amphoe": "อ.นครไทย",
-          "province": "จ.พิษณุโลก",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านแยง",
-          "latitude": 16.893437,
-          "longitude": 100.79906,
-          "sum_rainfall_mm": 49.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650203",
@@ -5146,8 +5174,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านถ้ำพริก",
           "latitude": 16.925895,
           "longitude": 100.706114,
-          "sum_rainfall_mm": 82.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 79.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "650203",
+          "tambon": "ต.บ้านแยง",
+          "amphoe": "อ.นครไทย",
+          "province": "จ.พิษณุโลก",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านแยง",
+          "latitude": 16.893437,
+          "longitude": 100.79906,
+          "sum_rainfall_mm": 50.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650203",
@@ -5159,8 +5200,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ที่ทำการ อช.ทุ่งแสลงหลวง",
           "latitude": 16.842468,
           "longitude": 100.879684,
-          "sum_rainfall_mm": 76.6,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 78.80000000000001,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650208",
@@ -5172,34 +5213,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านน้ำพริก",
           "latitude": 17.19839,
           "longitude": 100.912409,
-          "sum_rainfall_mm": 149.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "650202",
-          "tambon": "ต.หนองกะท้าว",
-          "amphoe": "อ.นครไทย",
-          "province": "จ.พิษณุโลก",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านแก่งไฮ",
-          "latitude": 16.985166,
-          "longitude": 100.772579,
-          "sum_rainfall_mm": 106.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "650202",
-          "tambon": "ต.หนองกะท้าว",
-          "amphoe": "อ.นครไทย",
-          "province": "จ.พิษณุโลก",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านนาหนอง",
-          "latitude": 17.085292,
-          "longitude": 100.762342,
-          "sum_rainfall_mm": 61.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 150.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650202",
@@ -5212,7 +5227,33 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 17.010981,
           "longitude": 100.664648,
           "sum_rainfall_mm": 71.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "650202",
+          "tambon": "ต.หนองกะท้าว",
+          "amphoe": "อ.นครไทย",
+          "province": "จ.พิษณุโลก",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านแก่งไฮ",
+          "latitude": 16.985166,
+          "longitude": 100.772579,
+          "sum_rainfall_mm": 106.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "650202",
+          "tambon": "ต.หนองกะท้าว",
+          "amphoe": "อ.นครไทย",
+          "province": "จ.พิษณุโลก",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านนาหนอง",
+          "latitude": 17.085292,
+          "longitude": 100.762342,
+          "sum_rainfall_mm": 61.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650202",
@@ -5224,47 +5265,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานพระร่วงข้ามน้ำแควน้อย",
           "latitude": 17.185375,
           "longitude": 100.68031,
-          "sum_rainfall_mm": 31.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "650211",
-          "tambon": "ต.ห้วยเฮี้ย",
-          "amphoe": "อ.นครไทย",
-          "province": "จ.พิษณุโลก",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านห้วยกอก",
-          "latitude": 16.911726,
-          "longitude": 100.870513,
-          "sum_rainfall_mm": 63.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "650211",
-          "tambon": "ต.ห้วยเฮี้ย",
-          "amphoe": "อ.นครไทย",
-          "province": "จ.พิษณุโลก",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านแก่งลาด",
-          "latitude": 16.959094,
-          "longitude": 100.928315,
-          "sum_rainfall_mm": 34.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "650211",
-          "tambon": "ต.ห้วยเฮี้ย",
-          "amphoe": "อ.นครไทย",
-          "province": "จ.พิษณุโลก",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านห้วยทรายเหนือ",
-          "latitude": 16.868553,
-          "longitude": 100.977428,
-          "sum_rainfall_mm": 31.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 31.400000000000002,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650211",
@@ -5276,8 +5278,47 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านซำรู้",
           "latitude": 16.939047,
           "longitude": 100.816776,
-          "sum_rainfall_mm": 0.5,
+          "sum_rainfall_mm": 0.0,
           "observed_at": "2026-09-17T13:00:00+07:00"
+        },
+        {
+          "geocode": "650211",
+          "tambon": "ต.ห้วยเฮี้ย",
+          "amphoe": "อ.นครไทย",
+          "province": "จ.พิษณุโลก",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านแก่งลาด",
+          "latitude": 16.959094,
+          "longitude": 100.928315,
+          "sum_rainfall_mm": 35.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "650211",
+          "tambon": "ต.ห้วยเฮี้ย",
+          "amphoe": "อ.นครไทย",
+          "province": "จ.พิษณุโลก",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านห้วยทรายเหนือ",
+          "latitude": 16.868553,
+          "longitude": 100.977428,
+          "sum_rainfall_mm": 30.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "650211",
+          "tambon": "ต.ห้วยเฮี้ย",
+          "amphoe": "อ.นครไทย",
+          "province": "จ.พิษณุโลก",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านห้วยกอก",
+          "latitude": 16.911726,
+          "longitude": 100.870513,
+          "sum_rainfall_mm": 60.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650901",
@@ -5290,7 +5331,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 16.696366,
           "longitude": 100.656815,
           "sum_rainfall_mm": 25.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "observed_at": "2026-09-19T10:00:00+07:00"
         },
         {
           "geocode": "650901",
@@ -5302,8 +5343,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ สล.12 (รักไทย)",
           "latitude": 16.74035,
           "longitude": 100.67061,
-          "sum_rainfall_mm": 119.40000000000002,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 119.79999999999998,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650906",
@@ -5315,8 +5356,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.เนินมะปราง",
           "latitude": 16.57068,
           "longitude": 100.6494,
-          "sum_rainfall_mm": 43.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 44.6,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650902",
@@ -5328,8 +5369,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านมุงเหนือ",
           "latitude": 16.562786,
           "longitude": 100.692792,
-          "sum_rainfall_mm": 46.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 48.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650902",
@@ -5341,8 +5382,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์ฯ สล. 6 (บ้านมุง)",
           "latitude": 16.5617,
           "longitude": 100.7066,
-          "sum_rainfall_mm": 83.6,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "sum_rainfall_mm": 85.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650907",
@@ -5354,8 +5395,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านทุ่งนาดี",
           "latitude": 16.461441,
           "longitude": 100.732394,
-          "sum_rainfall_mm": 24.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 28.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650407",
@@ -5367,8 +5408,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ปตร.บ้านวังสะตือ",
           "latitude": 16.87341,
           "longitude": 100.02551,
-          "sum_rainfall_mm": 53.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 55.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650407",
@@ -5380,21 +5421,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ชุมแสงสงคราม",
           "latitude": 16.8586,
           "longitude": 100.05965,
-          "sum_rainfall_mm": 102.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "650401",
-          "tambon": "ต.บางระกำ",
-          "amphoe": "อ.บางระกำ",
-          "province": "จ.พิษณุโลก",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บางระกำ",
-          "latitude": 16.70818,
-          "longitude": 100.17179,
-          "sum_rainfall_mm": 18.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 104.6,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "650401",
@@ -5406,8 +5434,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.บางระกำเมืองใหม่",
           "latitude": 16.74887,
           "longitude": 100.0903,
-          "sum_rainfall_mm": 9.8,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 10.0,
+          "observed_at": "2026-09-19T09:00:00+07:00"
+        },
+        {
+          "geocode": "650401",
+          "tambon": "ต.บางระกำ",
+          "amphoe": "อ.บางระกำ",
+          "province": "จ.พิษณุโลก",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บางระกำ",
+          "latitude": 16.70818,
+          "longitude": 100.17179,
+          "sum_rainfall_mm": 19.400000000000002,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "670409",
@@ -5419,8 +5460,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านตาดข่า (บ้านห้วยผักกูด)",
           "latitude": 17.05156,
           "longitude": 101.463759,
-          "sum_rainfall_mm": 25.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 15.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "670409",
@@ -5433,7 +5474,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 16.969831,
           "longitude": 101.296118,
           "sum_rainfall_mm": 62.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "670409",
@@ -5445,8 +5486,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ตาดกลอย",
           "latitude": 17.0035,
           "longitude": 101.36601,
-          "sum_rainfall_mm": 64.60000000000001,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 58.39999999999999,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "670402",
@@ -5459,7 +5500,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 17.00782,
           "longitude": 101.252134,
           "sum_rainfall_mm": 170.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "670404",
@@ -5471,8 +5512,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านโจะโหวะเหนือ",
           "latitude": 16.868677,
           "longitude": 101.137852,
-          "sum_rainfall_mm": 70.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 71.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "670404",
@@ -5484,8 +5525,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ขค.2 (น้ำเพียงดิน)",
           "latitude": 16.88352,
           "longitude": 101.12778,
-          "sum_rainfall_mm": 81.60000000000001,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 82.8,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "670405",
@@ -5497,21 +5538,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านวังเวินพัฒนา",
           "latitude": 17.023781,
           "longitude": 101.372247,
-          "sum_rainfall_mm": 30.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "670405",
-          "tambon": "ต.ศิลา",
-          "amphoe": "อ.หล่มเก่า",
-          "province": "จ.เพชรบูรณ์",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านซำบุ่น",
-          "latitude": 17.069559,
-          "longitude": 101.331859,
-          "sum_rainfall_mm": 30.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 29.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "670405",
@@ -5524,20 +5552,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 17.085187,
           "longitude": 101.242926,
           "sum_rainfall_mm": 30.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "670405",
-          "tambon": "ต.ศิลา",
-          "amphoe": "อ.หล่มเก่า",
-          "province": "จ.เพชรบูรณ์",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านกลาง",
-          "latitude": 17.088518,
-          "longitude": 101.374042,
-          "sum_rainfall_mm": 7.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "670405",
@@ -5549,8 +5564,34 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านห้วยข่อย",
           "latitude": 17.044677,
           "longitude": 101.297397,
-          "sum_rainfall_mm": 17.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 9.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "670405",
+          "tambon": "ต.ศิลา",
+          "amphoe": "อ.หล่มเก่า",
+          "province": "จ.เพชรบูรณ์",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านกลาง",
+          "latitude": 17.088518,
+          "longitude": 101.374042,
+          "sum_rainfall_mm": 2.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "670405",
+          "tambon": "ต.ศิลา",
+          "amphoe": "อ.หล่มเก่า",
+          "province": "จ.เพชรบูรณ์",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านซำบุ่น",
+          "latitude": 17.069559,
+          "longitude": 101.331859,
+          "sum_rainfall_mm": 19.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "670405",
@@ -5562,8 +5603,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ศูนย์ศึกษาการพัฒนาการอนุรักษ์ต้นน้ำลุ่มน้ำป่าสัก",
           "latitude": 17.082167,
           "longitude": 101.45538,
-          "sum_rainfall_mm": 12.6,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 6.6,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "670403",
@@ -5576,20 +5617,332 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 16.96073,
           "longitude": 101.179565,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
-          "geocode": "610801",
-          "tambon": "ต.สุขฤทัย",
-          "amphoe": "อ.ห้วยคต",
+          "geocode": "640509",
+          "tambon": "ต.ดงคู่",
+          "amphoe": "อ.ศรีสัชนาลัย",
+          "province": "จ.สุโขทัย",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านห้วยไคร้",
+          "latitude": 17.557045,
+          "longitude": 99.879548,
+          "sum_rainfall_mm": 56.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "640510",
+          "tambon": "ต.บ้านแก่ง",
+          "amphoe": "อ.ศรีสัชนาลัย",
+          "province": "จ.สุโขทัย",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านลำโชค",
+          "latitude": 17.449635,
+          "longitude": 99.608639,
+          "sum_rainfall_mm": 65.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "640510",
+          "tambon": "ต.บ้านแก่ง",
+          "amphoe": "อ.ศรีสัชนาลัย",
+          "province": "จ.สุโขทัย",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านปากคะยาง",
+          "latitude": 17.469324,
+          "longitude": 99.650859,
+          "sum_rainfall_mm": 0.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "640510",
+          "tambon": "ต.บ้านแก่ง",
+          "amphoe": "อ.ศรีสัชนาลัย",
+          "province": "จ.สุโขทัย",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "หน่วยศึกษาการพัฒนาการอนุรักษ์ต้นน้ำห้วยท่าแพ",
+          "latitude": 17.59327,
+          "longitude": 99.51376,
+          "sum_rainfall_mm": 69.19999999999999,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "640510",
+          "tambon": "ต.บ้านแก่ง",
+          "amphoe": "อ.ศรีสัชนาลัย",
+          "province": "จ.สุโขทัย",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "ห้วยแม่ท่าแพ",
+          "latitude": 17.43854,
+          "longitude": 99.6882,
+          "sum_rainfall_mm": 63.2,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "640505",
+          "tambon": "ต.บ้านตึก",
+          "amphoe": "อ.ศรีสัชนาลัย",
+          "province": "จ.สุโขทัย",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านแม่รากกลาง",
+          "latitude": 17.584356,
+          "longitude": 99.810257,
+          "sum_rainfall_mm": 40.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "640505",
+          "tambon": "ต.บ้านตึก",
+          "amphoe": "อ.ศรีสัชนาลัย",
+          "province": "จ.สุโขทัย",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านห้วยตม",
+          "latitude": 17.669157,
+          "longitude": 99.929983,
+          "sum_rainfall_mm": 22.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "640505",
+          "tambon": "ต.บ้านตึก",
+          "amphoe": "อ.ศรีสัชนาลัย",
+          "province": "จ.สุโขทัย",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านนาต้นจั่น",
+          "latitude": 17.619717,
+          "longitude": 99.829077,
+          "sum_rainfall_mm": 7.5,
+          "observed_at": "2026-09-18T09:00:00+07:00"
+        },
+        {
+          "geocode": "640505",
+          "tambon": "ต.บ้านตึก",
+          "amphoe": "อ.ศรีสัชนาลัย",
+          "province": "จ.สุโขทัย",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "สะพานบ้านตึก",
+          "latitude": 17.586782,
+          "longitude": 99.81109,
+          "sum_rainfall_mm": 51.99999999999999,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "640502",
+          "tambon": "ต.ป่างิ้ว",
+          "amphoe": "อ.ศรีสัชนาลัย",
+          "province": "จ.สุโขทัย",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านทุ่งพล้อ",
+          "latitude": 17.541266,
+          "longitude": 99.782301,
+          "sum_rainfall_mm": 118.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "640503",
+          "tambon": "ต.แม่สำ",
+          "amphoe": "อ.ศรีสัชนาลัย",
+          "province": "จ.สุโขทัย",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านวังขอนงุ้น",
+          "latitude": 17.639785,
+          "longitude": 99.68218,
+          "sum_rainfall_mm": 26.5,
+          "observed_at": "2026-09-19T10:00:00+07:00"
+        },
+        {
+          "geocode": "640503",
+          "tambon": "ต.แม่สำ",
+          "amphoe": "อ.ศรีสัชนาลัย",
+          "province": "จ.สุโขทัย",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านฟากท่า",
+          "latitude": 17.571233,
+          "longitude": 99.73619,
+          "sum_rainfall_mm": 65.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "640504",
+          "tambon": "ต.แม่สิน",
+          "amphoe": "อ.ศรีสัชนาลัย",
+          "province": "จ.สุโขทัย",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านแม่เทินเหนือ",
+          "latitude": 17.758944,
+          "longitude": 99.786703,
+          "sum_rainfall_mm": 0.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "640504",
+          "tambon": "ต.แม่สิน",
+          "amphoe": "อ.ศรีสัชนาลัย",
+          "province": "จ.สุโขทัย",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านแม่ฮู้",
+          "latitude": 17.704724,
+          "longitude": 99.732961,
+          "sum_rainfall_mm": 129.5,
+          "observed_at": "2026-09-19T09:00:00+07:00"
+        },
+        {
+          "geocode": "640504",
+          "tambon": "ต.แม่สิน",
+          "amphoe": "อ.ศรีสัชนาลัย",
+          "province": "จ.สุโขทัย",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านโป่งวัว",
+          "latitude": 17.661658,
+          "longitude": 99.684676,
+          "sum_rainfall_mm": 18.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "640504",
+          "tambon": "ต.แม่สิน",
+          "amphoe": "อ.ศรีสัชนาลัย",
+          "province": "จ.สุโขทัย",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านห้วยโป้",
+          "latitude": 17.728371,
+          "longitude": 99.714987,
+          "sum_rainfall_mm": 101.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "640504",
+          "tambon": "ต.แม่สิน",
+          "amphoe": "อ.ศรีสัชนาลัย",
+          "province": "จ.สุโขทัย",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านสุเม่นเหนือ",
+          "latitude": 17.731856,
+          "longitude": 99.645754,
+          "sum_rainfall_mm": 148.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "640504",
+          "tambon": "ต.แม่สิน",
+          "amphoe": "อ.ศรีสัชนาลัย",
+          "province": "จ.สุโขทัย",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "หน่วยศึกษาการพัฒนาการอนุรักษ์ต้นน้ำแม่สาน (หน่วยย่อย)",
+          "latitude": 17.653162,
+          "longitude": 99.604034,
+          "sum_rainfall_mm": 52.8,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "640504",
+          "tambon": "ต.แม่สิน",
+          "amphoe": "อ.ศรีสัชนาลัย",
+          "province": "จ.สุโขทัย",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "หน่วยศึกษาการพัฒนาการอนุรักษ์ต้นน้ำผาเวียง",
+          "latitude": 17.730116,
+          "longitude": 99.574196,
+          "sum_rainfall_mm": 79.8,
+          "observed_at": "2026-09-19T10:00:00+07:00"
+        },
+        {
+          "geocode": "640501",
+          "tambon": "ต.หาดเสี้ยว",
+          "amphoe": "อ.ศรีสัชนาลัย",
+          "province": "จ.สุโขทัย",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "ศรีสัชนาลัย",
+          "latitude": 17.51715,
+          "longitude": 99.75877,
+          "sum_rainfall_mm": 81.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "610703",
+          "tambon": "ต.ป่าอ้อ",
+          "amphoe": "อ.ลานสัก",
           "province": "จ.อุทัยธานี",
           "region_id": "1",
           "region_name": "ภาคกลาง",
-          "station": "บ้านวังบ่าง",
-          "latitude": 15.312792,
-          "longitude": 99.658732,
-          "sum_rainfall_mm": 77.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "station": "บ้านซับป่าพลู",
+          "latitude": 15.417764,
+          "longitude": 99.509529,
+          "sum_rainfall_mm": 36.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "610704",
+          "tambon": "ต.ระบำ",
+          "amphoe": "อ.ลานสัก",
+          "province": "จ.อุทัยธานี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "เขื่อนทับเสลา",
+          "latitude": 15.543873,
+          "longitude": 99.447679,
+          "sum_rainfall_mm": 123.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "610704",
+          "tambon": "ต.ระบำ",
+          "amphoe": "อ.ลานสัก",
+          "province": "จ.อุทัยธานี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านโป่งสามสิบ",
+          "latitude": 15.44668,
+          "longitude": 99.453534,
+          "sum_rainfall_mm": 29.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "610704",
+          "tambon": "ต.ระบำ",
+          "amphoe": "อ.ลานสัก",
+          "province": "จ.อุทัยธานี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์สะแกกรัง",
+          "latitude": 15.502394,
+          "longitude": 99.46196,
+          "sum_rainfall_mm": 77.8,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "610701",
+          "tambon": "ต.ลานสัก",
+          "amphoe": "อ.ลานสัก",
+          "province": "จ.อุทัยธานี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "อบต.ลานสัก",
+          "latitude": 15.47279,
+          "longitude": 99.53976,
+          "sum_rainfall_mm": 99.6,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "610801",
@@ -5601,8 +5954,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านกกงิ้ว",
           "latitude": 15.304712,
           "longitude": 99.648582,
-          "sum_rainfall_mm": 162.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 165.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "610801",
+          "tambon": "ต.สุขฤทัย",
+          "amphoe": "อ.ห้วยคต",
+          "province": "จ.อุทัยธานี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านวังบ่าง",
+          "latitude": 15.312792,
+          "longitude": 99.658732,
+          "sum_rainfall_mm": 80.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "610803",
@@ -5615,20 +5981,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 15.234026,
           "longitude": 99.588856,
           "sum_rainfall_mm": 73.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "610803",
-          "tambon": "ต.ห้วยคต",
-          "amphoe": "อ.ห้วยคต",
-          "province": "จ.อุทัยธานี",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านหนองจอก",
-          "latitude": 15.277273,
-          "longitude": 99.554759,
-          "sum_rainfall_mm": 31.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "610803",
@@ -5640,8 +5993,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านกลาง",
           "latitude": 15.313404,
           "longitude": 99.58156,
-          "sum_rainfall_mm": 57.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 70.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "610803",
+          "tambon": "ต.ห้วยคต",
+          "amphoe": "อ.ห้วยคต",
+          "province": "จ.อุทัยธานี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านหนองจอก",
+          "latitude": 15.277273,
+          "longitude": 99.554759,
+          "sum_rainfall_mm": 33.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "610803",
@@ -5653,8 +6019,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ห้วยคต",
           "latitude": 15.30362,
           "longitude": 99.60969,
-          "sum_rainfall_mm": 108.2,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 112.80000000000001,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "360406",
@@ -5667,7 +6033,20 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 16.19924,
           "longitude": 101.93238,
           "sum_rainfall_mm": 94.4,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "360412",
+          "tambon": "ต.โนนทอง",
+          "amphoe": "อ.เกษตรสมบูรณ์",
+          "province": "จ.ชัยภูมิ",
+          "region_id": "3",
+          "region_name": "ภาคตะวันออกเฉียงเหนือ",
+          "station": "บ้านกลาง",
+          "latitude": 16.37945,
+          "longitude": 101.79831,
+          "sum_rainfall_mm": 217.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "360412",
@@ -5680,20 +6059,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 16.321607,
           "longitude": 101.869929,
           "sum_rainfall_mm": 119.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "360412",
-          "tambon": "ต.โนนทอง",
-          "amphoe": "อ.เกษตรสมบูรณ์",
-          "province": "จ.ชัยภูมิ",
-          "region_id": "3",
-          "region_name": "ภาคตะวันออกเฉียงเหนือ",
-          "station": "บ้านกลาง",
-          "latitude": 16.37945,
-          "longitude": 101.79831,
-          "sum_rainfall_mm": 206.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "360412",
@@ -5705,8 +6071,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เขื่อนห้วยกุ่ม   ",
           "latitude": 16.410511,
           "longitude": 101.792984,
-          "sum_rainfall_mm": 24.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "sum_rainfall_mm": 30.0,
+          "observed_at": "2026-09-19T09:00:00+07:00"
         },
         {
           "geocode": "360410",
@@ -5719,7 +6085,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 16.227029,
           "longitude": 101.909718,
           "sum_rainfall_mm": 73.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "360401",
@@ -5731,8 +6097,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "น้ำพรม อ.เกษตรสมบูรณ์",
           "latitude": 16.309406,
           "longitude": 101.971772,
-          "sum_rainfall_mm": 138.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "sum_rainfall_mm": 134.0,
+          "observed_at": "2026-09-19T10:00:00+07:00"
         },
         {
           "geocode": "360401",
@@ -5744,8 +6110,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "น้ำพรม บ้านกุดเลาะ    ",
           "latitude": 16.293755,
           "longitude": 101.904798,
-          "sum_rainfall_mm": 89.0,
-          "observed_at": "2026-09-19T05:00:00+07:00"
+          "sum_rainfall_mm": 53.0,
+          "observed_at": "2026-09-19T10:00:00+07:00"
         },
         {
           "geocode": "360408",
@@ -5757,8 +6123,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านกุดจิก",
           "latitude": 16.142753,
           "longitude": 101.850658,
-          "sum_rainfall_mm": 38.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 38.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "360409",
@@ -5771,7 +6137,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 16.414536,
           "longitude": 101.793739,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "observed_at": "2026-09-19T10:00:00+07:00"
         },
         {
           "geocode": "360409",
@@ -5784,20 +6150,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 16.43053,
           "longitude": 101.96625,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "361201",
-          "tambon": "ต.ช่องสามหมอ",
-          "amphoe": "อ.แก้งคร้อ",
-          "province": "จ.ชัยภูมิ",
-          "region_id": "3",
-          "region_name": "ภาคตะวันออกเฉียงเหนือ",
-          "station": "อบต.ช่องสามหมอ",
-          "latitude": 16.11598,
-          "longitude": 102.23128,
-          "sum_rainfall_mm": 134.4,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "361302",
@@ -5810,7 +6163,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 16.639903,
           "longitude": 101.892638,
           "sum_rainfall_mm": 63.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "361302",
@@ -5822,8 +6175,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ลำเชิญ",
           "latitude": 16.660492,
           "longitude": 101.73749,
-          "sum_rainfall_mm": 91.4,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 94.8,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "361305",
@@ -5835,8 +6188,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหนองเชียงรอดเหนือ",
           "latitude": 16.515036,
           "longitude": 101.823138,
-          "sum_rainfall_mm": 209.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 201.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "361305",
+          "tambon": "ต.ทุ่งลุยลาย",
+          "amphoe": "อ.คอนสาร",
+          "province": "จ.ชัยภูมิ",
+          "region_id": "3",
+          "region_name": "ภาคตะวันออกเฉียงเหนือ",
+          "station": "เขื่อนจุฬาภรณ์",
+          "latitude": 16.535683,
+          "longitude": 101.644386,
+          "sum_rainfall_mm": 76.0,
+          "observed_at": "2026-09-19T10:00:00+07:00"
         },
         {
           "geocode": "361305",
@@ -5849,20 +6215,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 16.534794,
           "longitude": 101.649035,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
-        },
-        {
-          "geocode": "361305",
-          "tambon": "ต.ทุ่งลุยลาย",
-          "amphoe": "อ.คอนสาร",
-          "province": "จ.ชัยภูมิ",
-          "region_id": "3",
-          "region_name": "ภาคตะวันออกเฉียงเหนือ",
-          "station": "เขื่อนจุฬาภรณ์",
-          "latitude": 16.535683,
-          "longitude": 101.644386,
-          "sum_rainfall_mm": 74.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "observed_at": "2026-09-19T10:00:00+07:00"
         },
         {
           "geocode": "361305",
@@ -5874,8 +6227,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ทุ่งลุยลาย",
           "latitude": 16.499163,
           "longitude": 101.67309,
-          "sum_rainfall_mm": 162.20000000000002,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 164.8,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "303205",
@@ -5887,164 +6240,1516 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เฉลิมพระเกียรติ",
           "latitude": 14.968,
           "longitude": 102.23782,
-          "sum_rainfall_mm": 143.4,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 143.39999999999998,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
-          "geocode": "570803",
-          "tambon": "ต.บ้านแซว",
-          "amphoe": "อ.เชียงแสน",
-          "province": "จ.เชียงราย",
+          "geocode": "502503",
+          "tambon": "ต.แจ่มหลวง",
+          "amphoe": "อ.กัลยาณิวัฒนา",
+          "province": "จ.เชียงใหม่",
           "region_id": "4",
           "region_name": "ภาคเหนือ",
-          "station": "บ้านทุ่ง",
-          "latitude": 20.291739,
-          "longitude": 100.222461,
-          "sum_rainfall_mm": 49.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "station": "บ้านห้วยบง",
+          "latitude": 19.054314,
+          "longitude": 98.269801,
+          "sum_rainfall_mm": 29.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
-          "geocode": "570803",
-          "tambon": "ต.บ้านแซว",
-          "amphoe": "อ.เชียงแสน",
-          "province": "จ.เชียงราย",
+          "geocode": "502503",
+          "tambon": "ต.แจ่มหลวง",
+          "amphoe": "อ.กัลยาณิวัฒนา",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านเสาแดง",
+          "latitude": 18.973869,
+          "longitude": 98.237067,
+          "sum_rainfall_mm": 1.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "502503",
+          "tambon": "ต.แจ่มหลวง",
+          "amphoe": "อ.กัลยาณิวัฒนา",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแจ่มน้อย",
+          "latitude": 19.030521,
+          "longitude": 98.345079,
+          "sum_rainfall_mm": 29.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "502503",
+          "tambon": "ต.แจ่มหลวง",
+          "amphoe": "อ.กัลยาณิวัฒนา",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านขุนแม่ละอุปหมู่ที่ 3",
+          "latitude": 19.040228,
+          "longitude": 98.20028,
+          "sum_rainfall_mm": 57.699999999999996,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "502503",
+          "tambon": "ต.แจ่มหลวง",
+          "amphoe": "อ.กัลยาณิวัฒนา",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "ห้วยแม่แจ่ม",
+          "latitude": 19.073114,
+          "longitude": 98.30675,
+          "sum_rainfall_mm": 32.8,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "502503",
+          "tambon": "ต.แจ่มหลวง",
+          "amphoe": "อ.กัลยาณิวัฒนา",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "ชุมชนบ้านแม่ละอุป",
+          "latitude": 19.00122,
+          "longitude": 98.27111,
+          "sum_rainfall_mm": 49.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "502501",
+          "tambon": "ต.บ้านจันทร์",
+          "amphoe": "อ.กัลยาณิวัฒนา",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านวัดจันทร์",
+          "latitude": 19.06953,
+          "longitude": 98.304398,
+          "sum_rainfall_mm": 0.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "502501",
+          "tambon": "ต.บ้านจันทร์",
+          "amphoe": "อ.กัลยาณิวัฒนา",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านดงสามหมื่น",
+          "latitude": 19.02878,
+          "longitude": 98.41603,
+          "sum_rainfall_mm": 31.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "502501",
+          "tambon": "ต.บ้านจันทร์",
+          "amphoe": "อ.กัลยาณิวัฒนา",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านหนองแดง",
+          "latitude": 19.131092,
+          "longitude": 98.31795,
+          "sum_rainfall_mm": 44.6,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "502502",
+          "tambon": "ต.แม่แดด",
+          "amphoe": "อ.กัลยาณิวัฒนา",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่ตะละม้ง",
+          "latitude": 18.934595,
+          "longitude": 98.455287,
+          "sum_rainfall_mm": 47.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "502502",
+          "tambon": "ต.แม่แดด",
+          "amphoe": "อ.กัลยาณิวัฒนา",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่แดดน้อย",
+          "latitude": 18.964641,
+          "longitude": 98.415808,
+          "sum_rainfall_mm": 79.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "502502",
+          "tambon": "ต.แม่แดด",
+          "amphoe": "อ.กัลยาณิวัฒนา",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "ชุมชนแม่แดด",
+          "latitude": 18.962732,
+          "longitude": 98.412445,
+          "sum_rainfall_mm": 98.2,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "502502",
+          "tambon": "ต.แม่แดด",
+          "amphoe": "อ.กัลยาณิวัฒนา",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ขุนแม่แจ่ม",
+          "latitude": 19.01651,
+          "longitude": 98.413124,
+          "sum_rainfall_mm": 45.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500204",
+          "tambon": "ต.ข่วงเปา",
+          "amphoe": "อ.จอมทอง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านหนองห่าย",
+          "latitude": 18.453694,
+          "longitude": 98.729318,
+          "sum_rainfall_mm": 74.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500207",
+          "tambon": "ต.ดอยแก้ว",
+          "amphoe": "อ.จอมทอง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่เตี๊ยะใต้",
+          "latitude": 18.393421,
+          "longitude": 98.651069,
+          "sum_rainfall_mm": 72.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500207",
+          "tambon": "ต.ดอยแก้ว",
+          "amphoe": "อ.จอมทอง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านห้วยส้มป่อย",
+          "latitude": 18.375283,
+          "longitude": 98.533801,
+          "sum_rainfall_mm": 45.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500206",
+          "tambon": "ต.บ้านแปะ",
+          "amphoe": "อ.จอมทอง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านขุนแปะ",
+          "latitude": 18.311521,
+          "longitude": 98.479789,
+          "sum_rainfall_mm": 25.0,
+          "observed_at": "2026-09-19T10:00:00+07:00"
+        },
+        {
+          "geocode": "500206",
+          "tambon": "ต.บ้านแปะ",
+          "amphoe": "อ.จอมทอง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแปะ",
+          "latitude": 18.248958,
+          "longitude": 98.595039,
+          "sum_rainfall_mm": 44.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500206",
+          "tambon": "ต.บ้านแปะ",
+          "amphoe": "อ.จอมทอง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่เตี๊ยะ",
+          "latitude": 18.31208,
+          "longitude": 98.48189,
+          "sum_rainfall_mm": 49.599999999999994,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500206",
+          "tambon": "ต.บ้านแปะ",
+          "amphoe": "อ.จอมทอง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "สะพานน้ำแม่แจ่ม บ้านแปะ",
+          "latitude": 18.232069,
+          "longitude": 98.439766,
+          "sum_rainfall_mm": 22.200000000000003,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500203",
+          "tambon": "ต.บ้านหลวง",
+          "amphoe": "อ.จอมทอง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่หอย",
+          "latitude": 18.485818,
+          "longitude": 98.668225,
+          "sum_rainfall_mm": 68.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500203",
+          "tambon": "ต.บ้านหลวง",
+          "amphoe": "อ.จอมทอง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านน้ำตกแม่กลาง",
+          "latitude": 18.48915,
+          "longitude": 98.672086,
+          "sum_rainfall_mm": 58.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500203",
+          "tambon": "ต.บ้านหลวง",
+          "amphoe": "อ.จอมทอง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่ปอน",
+          "latitude": 18.467068,
+          "longitude": 98.609275,
+          "sum_rainfall_mm": 69.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500203",
+          "tambon": "ต.บ้านหลวง",
+          "amphoe": "อ.จอมทอง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านอ่างกาน้อย (สบหาด)",
+          "latitude": 18.541897,
+          "longitude": 98.593349,
+          "sum_rainfall_mm": 69.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500203",
+          "tambon": "ต.บ้านหลวง",
+          "amphoe": "อ.จอมทอง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านหัวเสือ",
+          "latitude": 18.453265,
+          "longitude": 98.640097,
+          "sum_rainfall_mm": 65.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500203",
+          "tambon": "ต.บ้านหลวง",
+          "amphoe": "อ.จอมทอง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านขุนกลาง",
+          "latitude": 18.538554,
+          "longitude": 98.524406,
+          "sum_rainfall_mm": 89.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500203",
+          "tambon": "ต.บ้านหลวง",
+          "amphoe": "อ.จอมทอง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านน้ำลัด",
+          "latitude": 18.430578,
+          "longitude": 98.66912,
+          "sum_rainfall_mm": 55.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500203",
+          "tambon": "ต.บ้านหลวง",
+          "amphoe": "อ.จอมทอง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "สะพานน้ำแม่กลาง",
+          "latitude": 18.507551,
+          "longitude": 98.66203,
+          "sum_rainfall_mm": 92.60000000000001,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500203",
+          "tambon": "ต.บ้านหลวง",
+          "amphoe": "อ.จอมทอง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่กลาง",
+          "latitude": 18.533205,
+          "longitude": 98.52239,
+          "sum_rainfall_mm": 136.20000000000002,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500203",
+          "tambon": "ต.บ้านหลวง",
+          "amphoe": "อ.จอมทอง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ อน.3 (แม่ยะ)",
+          "latitude": 18.44004,
+          "longitude": 98.59323,
+          "sum_rainfall_mm": 0.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500203",
+          "tambon": "ต.บ้านหลวง",
+          "amphoe": "อ.จอมทอง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "แม่หาด",
+          "latitude": 18.46006,
+          "longitude": 98.65094,
+          "sum_rainfall_mm": 100.6,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500209",
+          "tambon": "ต.แม่สอย",
+          "amphoe": "อ.จอมทอง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านห้วยสะแพด",
+          "latitude": 18.188109,
+          "longitude": 98.701759,
+          "sum_rainfall_mm": 15.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500209",
+          "tambon": "ต.แม่สอย",
+          "amphoe": "อ.จอมทอง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ อล.1 (ป่ากล้วย)",
+          "latitude": 18.347317,
+          "longitude": 98.55808,
+          "sum_rainfall_mm": 3.4000000000000004,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500401",
+          "tambon": "ต.เชียงดาว",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่ก๊ะ",
+          "latitude": 19.358993,
+          "longitude": 98.97056,
+          "sum_rainfall_mm": 15.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500401",
+          "tambon": "ต.เชียงดาว",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านทุ่งหลุก",
+          "latitude": 19.347847,
+          "longitude": 99.035047,
+          "sum_rainfall_mm": 59.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500401",
+          "tambon": "ต.เชียงดาว",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านถ้ำ",
+          "latitude": 19.387591,
+          "longitude": 98.928357,
+          "sum_rainfall_mm": 0.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500401",
+          "tambon": "ต.เชียงดาว",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "ที่ทำการเขตรักษาพันธุ์สัตว์ป่าเชียงดาว",
+          "latitude": 19.405449,
+          "longitude": 98.922516,
+          "sum_rainfall_mm": 25.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500401",
+          "tambon": "ต.เชียงดาว",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "ยอดดอยหลวงเชียงดาว",
+          "latitude": 19.3977,
+          "longitude": 98.8893,
+          "sum_rainfall_mm": 26.8,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500401",
+          "tambon": "ต.เชียงดาว",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "CHD004",
+          "latitude": 19.39339,
+          "longitude": 98.92826,
+          "sum_rainfall_mm": 40.199999999999996,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500401",
+          "tambon": "ต.เชียงดาว",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยพิทักษ์ป่าสบห้วยผาตั้ง-นาเลา",
+          "latitude": 19.41391,
+          "longitude": 98.91527,
+          "sum_rainfall_mm": 43.4,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500401",
+          "tambon": "ต.เชียงดาว",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "CHD002",
+          "latitude": 19.39301,
+          "longitude": 98.86552,
+          "sum_rainfall_mm": 53.4,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500401",
+          "tambon": "ต.เชียงดาว",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "CHD001",
+          "latitude": 19.39982,
+          "longitude": 98.87604,
+          "sum_rainfall_mm": 47.7,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500401",
+          "tambon": "ต.เชียงดาว",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "เชียงดาว",
+          "latitude": 19.36728,
+          "longitude": 98.96884,
+          "sum_rainfall_mm": 46.199999999999996,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500407",
+          "tambon": "ต.ทุ่งข้าวพวง",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านห้วยเป้า",
+          "latitude": 19.568531,
+          "longitude": 98.957338,
+          "sum_rainfall_mm": 14.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500407",
+          "tambon": "ต.ทุ่งข้าวพวง",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่กอน",
+          "latitude": 19.570266,
+          "longitude": 98.92202,
+          "sum_rainfall_mm": 9.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500407",
+          "tambon": "ต.ทุ่งข้าวพวง",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "สะพานแม่น้ำปิง",
+          "latitude": 19.507914,
+          "longitude": 98.95879,
+          "sum_rainfall_mm": 11.2,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500407",
+          "tambon": "ต.ทุ่งข้าวพวง",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่งาย",
+          "latitude": 19.55373,
+          "longitude": 98.80895,
+          "sum_rainfall_mm": 59.8,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500406",
+          "tambon": "ต.ปิงโค้ง",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านไตรสภาวคาม",
+          "latitude": 19.429654,
+          "longitude": 98.979224,
+          "sum_rainfall_mm": 41.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500406",
+          "tambon": "ต.ปิงโค้ง",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านปางมะกง",
+          "latitude": 19.421716,
+          "longitude": 99.095341,
+          "sum_rainfall_mm": 23.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500406",
+          "tambon": "ต.ปิงโค้ง",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านออน",
+          "latitude": 19.499074,
+          "longitude": 99.0736,
+          "sum_rainfall_mm": 16.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500406",
+          "tambon": "ต.ปิงโค้ง",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านป่าตึงงาม",
+          "latitude": 19.515406,
+          "longitude": 99.10566,
+          "sum_rainfall_mm": 11.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500406",
+          "tambon": "ต.ปิงโค้ง",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านใหม่สามัคคี",
+          "latitude": 19.51898,
+          "longitude": 99.055452,
+          "sum_rainfall_mm": 38.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500406",
+          "tambon": "ต.ปิงโค้ง",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่ป๋าม",
+          "latitude": 19.443453,
+          "longitude": 99.02858,
+          "sum_rainfall_mm": 35.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500406",
+          "tambon": "ต.ปิงโค้ง",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านห้วยจะค่าน",
+          "latitude": 19.60415,
+          "longitude": 99.070586,
+          "sum_rainfall_mm": 3.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500406",
+          "tambon": "ต.ปิงโค้ง",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ดอยผาแดง",
+          "latitude": 19.49586,
+          "longitude": 99.07811,
+          "sum_rainfall_mm": 32.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500406",
+          "tambon": "ต.ปิงโค้ง",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ห้วยจะค่าน",
+          "latitude": 19.602726,
+          "longitude": 99.08559,
+          "sum_rainfall_mm": 21.199999999999996,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500405",
+          "tambon": "ต.เมืองคอง",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านวังมะริว",
+          "latitude": 19.378589,
+          "longitude": 98.721217,
+          "sum_rainfall_mm": 13.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500405",
+          "tambon": "ต.เมืองคอง",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านหลวงเมืองคอง",
+          "latitude": 19.382972,
+          "longitude": 98.712097,
+          "sum_rainfall_mm": 23.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500405",
+          "tambon": "ต.เมืองคอง",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านน้ำรู",
+          "latitude": 19.428797,
+          "longitude": 98.6155,
+          "sum_rainfall_mm": 0.0,
+          "observed_at": "2026-09-19T06:00:00+07:00"
+        },
+        {
+          "geocode": "500405",
+          "tambon": "ต.เมืองคอง",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ดอยสามหมื่น",
+          "latitude": 19.413826,
+          "longitude": 98.593124,
+          "sum_rainfall_mm": 70.2,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500405",
+          "tambon": "ต.เมืองคอง",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ขุนวาง",
+          "latitude": 19.4138,
+          "longitude": 98.593,
+          "sum_rainfall_mm": 108.60000000000001,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500403",
+          "tambon": "ต.เมืองงาย",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านสบงาย",
+          "latitude": 19.48017,
+          "longitude": 98.964143,
+          "sum_rainfall_mm": 6.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500402",
+          "tambon": "ต.เมืองนะ",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่อ้อใน",
+          "latitude": 19.298099,
+          "longitude": 98.996602,
+          "sum_rainfall_mm": 4.0,
+          "observed_at": "2026-09-19T10:00:00+07:00"
+        },
+        {
+          "geocode": "500402",
+          "tambon": "ต.เมืองนะ",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่ซ้าย",
+          "latitude": 19.302102,
+          "longitude": 98.898304,
+          "sum_rainfall_mm": 20.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500402",
+          "tambon": "ต.เมืองนะ",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่ตะมาน",
+          "latitude": 19.3201,
+          "longitude": 98.8308,
+          "sum_rainfall_mm": 41.8,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500402",
+          "tambon": "ต.เมืองนะ",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ดอยถ้วย",
+          "latitude": 19.692413,
+          "longitude": 98.80144,
+          "sum_rainfall_mm": 20.2,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500402",
+          "tambon": "ต.เมืองนะ",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "สถานีวิจัยต้นน้ำดอยเชียงดาว",
+          "latitude": 19.2718,
+          "longitude": 98.96989,
+          "sum_rainfall_mm": 32.599999999999994,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500404",
+          "tambon": "ต.แม่นะ",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านนาหวาย",
+          "latitude": 19.629854,
+          "longitude": 98.962831,
+          "sum_rainfall_mm": 4.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500404",
+          "tambon": "ต.แม่นะ",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแกน้อย",
+          "latitude": 19.665209,
+          "longitude": 98.794829,
+          "sum_rainfall_mm": 23.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500404",
+          "tambon": "ต.แม่นะ",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านเมืองนะ",
+          "latitude": 19.73416,
+          "longitude": 98.896829,
+          "sum_rainfall_mm": 28.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500404",
+          "tambon": "ต.แม่นะ",
+          "amphoe": "อ.เชียงดาว",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "ทต.แม่นะ",
+          "latitude": 19.34123,
+          "longitude": 98.96134,
+          "sum_rainfall_mm": 19.4,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "502401",
+          "tambon": "ต.ดอยหล่อ",
+          "amphoe": "อ.ดอยหล่อ",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "แม่น้ำปิงที่ อ.จอมทอง",
+          "latitude": 18.435266,
+          "longitude": 98.740107,
+          "sum_rainfall_mm": 102.0,
+          "observed_at": "2026-09-19T10:00:00+07:00"
+        },
+        {
+          "geocode": "500308",
+          "tambon": "ต.กองแขก",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่หลุ",
+          "latitude": 18.445752,
+          "longitude": 98.447245,
+          "sum_rainfall_mm": 1.5,
+          "observed_at": "2026-09-18T22:00:00+07:00"
+        },
+        {
+          "geocode": "500308",
+          "tambon": "ต.กองแขก",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านอมลาน",
+          "latitude": 18.383935,
+          "longitude": 98.457657,
+          "sum_rainfall_mm": 0.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500308",
+          "tambon": "ต.กองแขก",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านหัวดอย",
+          "latitude": 18.307551,
+          "longitude": 98.362153,
+          "sum_rainfall_mm": 0.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500308",
+          "tambon": "ต.กองแขก",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์สวนป่าสิริกิติ์",
+          "latitude": 18.36419,
+          "longitude": 98.46656,
+          "sum_rainfall_mm": 23.2,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500308",
+          "tambon": "ต.กองแขก",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ อล.4 (น้ำพุร้อนเทพพนม)",
+          "latitude": 18.270575,
+          "longitude": 98.39645,
+          "sum_rainfall_mm": 14.799999999999999,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500301",
+          "tambon": "ต.ช่างเคิ่ง",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านกองกาน",
+          "latitude": 18.546353,
+          "longitude": 98.353798,
+          "sum_rainfall_mm": 11.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500301",
+          "tambon": "ต.ช่างเคิ่ง",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่มิงค์",
+          "latitude": 18.554995,
+          "longitude": 98.402412,
+          "sum_rainfall_mm": 51.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500301",
+          "tambon": "ต.ช่างเคิ่ง",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านป่าเท้อ",
+          "latitude": 18.502457,
+          "longitude": 98.346727,
+          "sum_rainfall_mm": 24.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500301",
+          "tambon": "ต.ช่างเคิ่ง",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่อวม (หน่วยย่อย) ",
+          "latitude": 18.5526,
+          "longitude": 98.41401,
+          "sum_rainfall_mm": 72.6,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500302",
+          "tambon": "ต.ท่าผา",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านสามสบ",
+          "latitude": 18.502639,
+          "longitude": 98.462273,
+          "sum_rainfall_mm": 7.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500302",
+          "tambon": "ต.ท่าผา",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่อวม",
+          "latitude": 18.507107,
+          "longitude": 98.5005,
+          "sum_rainfall_mm": 124.4,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500303",
+          "tambon": "ต.บ้านทับ",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านสบลอง",
+          "latitude": 18.394921,
+          "longitude": 98.278018,
+          "sum_rainfall_mm": 1.5,
+          "observed_at": "2026-09-19T04:00:00+07:00"
+        },
+        {
+          "geocode": "500303",
+          "tambon": "ต.บ้านทับ",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่ลอง",
+          "latitude": 18.427973,
+          "longitude": 98.240371,
+          "sum_rainfall_mm": 2.5,
+          "observed_at": "2026-09-17T21:00:00+07:00"
+        },
+        {
+          "geocode": "500303",
+          "tambon": "ต.บ้านทับ",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
           "region_id": "4",
           "region_name": "ภาคเหนือ",
           "station": "บ้านแม่แอบ",
-          "latitude": 20.191848,
-          "longitude": 100.221383,
-          "sum_rainfall_mm": 18.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "latitude": 18.262339,
+          "longitude": 98.168379,
+          "sum_rainfall_mm": 47.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
-          "geocode": "570803",
-          "tambon": "ต.บ้านแซว",
-          "amphoe": "อ.เชียงแสน",
-          "province": "จ.เชียงราย",
+          "geocode": "500303",
+          "tambon": "ต.บ้านทับ",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
           "region_id": "4",
           "region_name": "ภาคเหนือ",
-          "station": "บ้านห้วยข่อยหล่อย",
-          "latitude": 20.195756,
-          "longitude": 100.241329,
-          "sum_rainfall_mm": 103.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "station": "บ้านสองธาร",
+          "latitude": 18.467627,
+          "longitude": 98.312965,
+          "sum_rainfall_mm": 9.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
-          "geocode": "570803",
-          "tambon": "ต.บ้านแซว",
-          "amphoe": "อ.เชียงแสน",
-          "province": "จ.เชียงราย",
+          "geocode": "500303",
+          "tambon": "ต.บ้านทับ",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
           "region_id": "4",
           "region_name": "ภาคเหนือ",
-          "station": "ศูนย์ส่งเสริมการควบคุมไฟป่าเชียงราย",
-          "latitude": 20.241756,
-          "longitude": 100.17084,
-          "sum_rainfall_mm": 54.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่ลอง",
+          "latitude": 18.433792,
+          "longitude": 98.22566,
+          "sum_rainfall_mm": 0.4,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
-          "geocode": "570805",
-          "tambon": "ต.แม่เงิน",
-          "amphoe": "อ.เชียงแสน",
-          "province": "จ.เชียงราย",
+          "geocode": "500303",
+          "tambon": "ต.บ้านทับ",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
           "region_id": "4",
           "region_name": "ภาคเหนือ",
-          "station": "บ้านธารทอง",
-          "latitude": 20.265691,
-          "longitude": 100.294255,
-          "sum_rainfall_mm": 57.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "station": "ที่ทำการอุทยานแห่งชาติแม่โถ (เตรียมการ)",
+          "latitude": 18.25337,
+          "longitude": 98.20966,
+          "sum_rainfall_mm": 20.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
-          "geocode": "570805",
-          "tambon": "ต.แม่เงิน",
-          "amphoe": "อ.เชียงแสน",
-          "province": "จ.เชียงราย",
+          "geocode": "500307",
+          "tambon": "ต.ปางหินฝน",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
           "region_id": "4",
           "region_name": "ภาคเหนือ",
-          "station": "บ้านกิ่วกาญจน์",
-          "latitude": 20.326005,
-          "longitude": 100.312618,
-          "sum_rainfall_mm": 41.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "station": "บ้านแม่หงานหลวง",
+          "latitude": 18.59508,
+          "longitude": 98.241825,
+          "sum_rainfall_mm": 18.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
-          "geocode": "570805",
-          "tambon": "ต.แม่เงิน",
-          "amphoe": "อ.เชียงแสน",
-          "province": "จ.เชียงราย",
+          "geocode": "500307",
+          "tambon": "ต.ปางหินฝน",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
           "region_id": "4",
           "region_name": "ภาคเหนือ",
-          "station": "บ้านสันต้นเปา",
-          "latitude": 20.345817,
-          "longitude": 100.23851,
-          "sum_rainfall_mm": 16.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "station": "บ้านปางหินฝน",
+          "latitude": 18.510205,
+          "longitude": 98.229145,
+          "sum_rainfall_mm": 45.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
-          "geocode": "570806",
-          "tambon": "ต.โยนก",
-          "amphoe": "อ.เชียงแสน",
-          "province": "จ.เชียงราย",
+          "geocode": "500307",
+          "tambon": "ต.ปางหินฝน",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
           "region_id": "4",
           "region_name": "ภาคเหนือ",
-          "station": "ที่ทำการเขตห้ามล่าสัตว์ป่าหนองบงคาย",
-          "latitude": 20.261282,
-          "longitude": 100.046135,
-          "sum_rainfall_mm": 82.79999999999998,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ปางหินฝน",
+          "latitude": 18.48307,
+          "longitude": 98.22409,
+          "sum_rainfall_mm": 6.800000000000001,
+          "observed_at": "2026-09-18T10:00:00+07:00"
         },
         {
-          "geocode": "570806",
-          "tambon": "ต.โยนก",
-          "amphoe": "อ.เชียงแสน",
-          "province": "จ.เชียงราย",
+          "geocode": "500307",
+          "tambon": "ต.ปางหินฝน",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
           "region_id": "4",
           "region_name": "ภาคเหนือ",
-          "station": "เชียงแสน",
-          "latitude": 20.2197,
-          "longitude": 100.12121,
-          "sum_rainfall_mm": 60.99999999999999,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "station": "สถานีวิจัยต้นน้ำแม่แจ่ม",
+          "latitude": 18.5223,
+          "longitude": 98.2943,
+          "sum_rainfall_mm": 7.199999999999999,
+          "observed_at": "2026-09-19T06:00:00+07:00"
         },
         {
-          "geocode": "570806",
-          "tambon": "ต.โยนก",
-          "amphoe": "อ.เชียงแสน",
-          "province": "จ.เชียงราย",
+          "geocode": "500305",
+          "tambon": "ต.แม่นาจร",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
           "region_id": "4",
           "region_name": "ภาคเหนือ",
-          "station": "ทต.โยนก",
-          "latitude": 20.24011,
-          "longitude": 100.06739,
-          "sum_rainfall_mm": 89.4,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "station": "บ้านสบวาก",
+          "latitude": 18.639988,
+          "longitude": 98.377113,
+          "sum_rainfall_mm": 43.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
-          "geocode": "570801",
-          "tambon": "ต.เวียง",
-          "amphoe": "อ.เชียงแสน",
-          "province": "จ.เชียงราย",
+          "geocode": "500305",
+          "tambon": "ต.แม่นาจร",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
           "region_id": "4",
           "region_name": "ภาคเหนือ",
-          "station": "บ้านวังลาว",
-          "latitude": 20.373037,
-          "longitude": 100.060375,
-          "sum_rainfall_mm": 0.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "station": "บ้านแม่ซา",
+          "latitude": 18.814779,
+          "longitude": 98.333695,
+          "sum_rainfall_mm": 19.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
-          "geocode": "570804",
-          "tambon": "ต.ศรีดอนมูล",
-          "amphoe": "อ.เชียงแสน",
-          "province": "จ.เชียงราย",
+          "geocode": "500305",
+          "tambon": "ต.แม่นาจร",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
           "region_id": "4",
           "region_name": "ภาคเหนือ",
-          "station": "บ้านดอยสะโง้",
-          "latitude": 20.346087,
-          "longitude": 100.020618,
-          "sum_rainfall_mm": 10.0,
-          "observed_at": "2026-09-19T03:00:00+07:00"
+          "station": "บ้านขุนแม่รวม",
+          "latitude": 18.915711,
+          "longitude": 98.19744,
+          "sum_rainfall_mm": 75.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500305",
+          "tambon": "ต.แม่นาจร",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่นาจร",
+          "latitude": 18.684451,
+          "longitude": 98.376045,
+          "sum_rainfall_mm": 5.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500305",
+          "tambon": "ต.แม่นาจร",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่มุ",
+          "latitude": 18.727767,
+          "longitude": 98.400738,
+          "sum_rainfall_mm": 52.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500305",
+          "tambon": "ต.แม่นาจร",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่ซา",
+          "latitude": 18.81566,
+          "longitude": 98.332543,
+          "sum_rainfall_mm": 5.0,
+          "observed_at": "2026-09-18T22:00:00+07:00"
+        },
+        {
+          "geocode": "500305",
+          "tambon": "ต.แม่นาจร",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่สะงะ",
+          "latitude": 18.786606,
+          "longitude": 98.495445,
+          "sum_rainfall_mm": 102.4,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500305",
+          "tambon": "ต.แม่นาจร",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "สะพานข้ามห้วยแม่รวม บ้านแม่รวม",
+          "latitude": 18.919376,
+          "longitude": 98.20057,
+          "sum_rainfall_mm": 70.19999999999999,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500305",
+          "tambon": "ต.แม่นาจร",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์บ่อแก้ว",
+          "latitude": 18.86068,
+          "longitude": 98.51469,
+          "sum_rainfall_mm": 69.4,
+          "observed_at": "2026-09-19T10:00:00+07:00"
+        },
+        {
+          "geocode": "500305",
+          "tambon": "ต.แม่นาจร",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่จอนหลวง",
+          "latitude": 18.66891,
+          "longitude": 98.47738,
+          "sum_rainfall_mm": 104.60000000000001,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500304",
+          "tambon": "ต.แม่ศึก",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่ศึก",
+          "latitude": 18.554055,
+          "longitude": 98.344541,
+          "sum_rainfall_mm": 33.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500304",
+          "tambon": "ต.แม่ศึก",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านผาละปิ",
+          "latitude": 18.802806,
+          "longitude": 98.230744,
+          "sum_rainfall_mm": 34.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500304",
+          "tambon": "ต.แม่ศึก",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านสบแม่สะต๊อบ",
+          "latitude": 18.700775,
+          "longitude": 98.250846,
+          "sum_rainfall_mm": 24.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500304",
+          "tambon": "ต.แม่ศึก",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านปางอุ๋ง",
+          "latitude": 18.793556,
+          "longitude": 98.115298,
+          "sum_rainfall_mm": 35.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "500304",
+          "tambon": "ต.แม่ศึก",
+          "amphoe": "อ.แม่แจ่ม",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านนากลาง",
+          "latitude": 18.752393,
+          "longitude": 98.261339,
+          "sum_rainfall_mm": 39.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "502202",
+          "tambon": "ต.ทุ่งปี๊",
+          "amphoe": "อ.แม่วาง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านใหม่ปางเติม",
+          "latitude": 18.614812,
+          "longitude": 98.767551,
+          "sum_rainfall_mm": 46.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "502201",
+          "tambon": "ต.บ้านกาด",
+          "amphoe": "อ.แม่วาง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "ที่ว่าการอำเภอแม่วาง",
+          "latitude": 18.61261,
+          "longitude": 98.77524,
+          "sum_rainfall_mm": 83.6,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "502204",
+          "tambon": "ต.แม่วิน",
+          "amphoe": "อ.แม่วาง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านห้วยข้าวลีบ",
+          "latitude": 18.741518,
+          "longitude": 98.539693,
+          "sum_rainfall_mm": 0.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "502204",
+          "tambon": "ต.แม่วิน",
+          "amphoe": "อ.แม่วาง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านห้วยโป่ง",
+          "latitude": 18.658259,
+          "longitude": 98.661228,
+          "sum_rainfall_mm": 41.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "502204",
+          "tambon": "ต.แม่วิน",
+          "amphoe": "อ.แม่วาง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่สะป๊อก",
+          "latitude": 18.665041,
+          "longitude": 98.639008,
+          "sum_rainfall_mm": 41.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "502204",
+          "tambon": "ต.แม่วิน",
+          "amphoe": "อ.แม่วาง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านหนองเต่า",
+          "latitude": 18.680499,
+          "longitude": 98.552366,
+          "sum_rainfall_mm": 105.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "502204",
+          "tambon": "ต.แม่วิน",
+          "amphoe": "อ.แม่วาง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านขุนป๋วย",
+          "latitude": 18.603013,
+          "longitude": 98.607522,
+          "sum_rainfall_mm": 116.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "502204",
+          "tambon": "ต.แม่วิน",
+          "amphoe": "อ.แม่วาง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยป้องกันรักษาป่าที่ ชม. ๑๓ (สันป่าตอง)",
+          "latitude": 18.632383,
+          "longitude": 98.70691,
+          "sum_rainfall_mm": 52.4,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "502002",
@@ -6056,8 +7761,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านม่วงเครือ",
           "latitude": 19.646861,
           "longitude": 98.642664,
-          "sum_rainfall_mm": 29.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 34.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "502002",
@@ -6070,7 +7775,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 19.683727,
           "longitude": 98.627156,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "502002",
@@ -6082,47 +7787,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.เปียงหลวง",
           "latitude": 19.64923,
           "longitude": 98.63487,
-          "sum_rainfall_mm": 37.599999999999994,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "502001",
-          "tambon": "ต.เมืองแหง",
-          "amphoe": "อ.เวียงแหง",
-          "province": "จ.เชียงใหม่",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านขุนคอง",
-          "latitude": 19.515174,
-          "longitude": 98.79358,
-          "sum_rainfall_mm": 47.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "502001",
-          "tambon": "ต.เมืองแหง",
-          "amphoe": "อ.เวียงแหง",
-          "province": "จ.เชียงใหม่",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านกองลม",
-          "latitude": 19.576641,
-          "longitude": 98.615075,
-          "sum_rainfall_mm": 27.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "502001",
-          "tambon": "ต.เมืองแหง",
-          "amphoe": "อ.เวียงแหง",
-          "province": "จ.เชียงใหม่",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านนามน",
-          "latitude": 19.610079,
-          "longitude": 98.594873,
-          "sum_rainfall_mm": 20.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 44.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "502001",
@@ -6134,8 +7800,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านห้วยหก",
           "latitude": 19.543074,
           "longitude": 98.643656,
-          "sum_rainfall_mm": 69.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 71.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "502001",
@@ -6144,11 +7810,37 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.เชียงใหม่",
           "region_id": "4",
           "region_name": "ภาคเหนือ",
-          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ขุนแม่แตง (หน่วยย่อย)",
-          "latitude": 19.5768,
-          "longitude": 98.6722,
-          "sum_rainfall_mm": 27.4,
-          "observed_at": "2026-09-19T05:00:00+07:00"
+          "station": "บ้านนามน",
+          "latitude": 19.610079,
+          "longitude": 98.594873,
+          "sum_rainfall_mm": 25.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "502001",
+          "tambon": "ต.เมืองแหง",
+          "amphoe": "อ.เวียงแหง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านขุนคอง",
+          "latitude": 19.515174,
+          "longitude": 98.79358,
+          "sum_rainfall_mm": 54.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "502001",
+          "tambon": "ต.เมืองแหง",
+          "amphoe": "อ.เวียงแหง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านกองลม",
+          "latitude": 19.576641,
+          "longitude": 98.615075,
+          "sum_rainfall_mm": 29.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "502001",
@@ -6160,8 +7852,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ขุนคอง",
           "latitude": 19.5124,
           "longitude": 98.80015,
-          "sum_rainfall_mm": 77.2,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "sum_rainfall_mm": 85.60000000000001,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "502001",
+          "tambon": "ต.เมืองแหง",
+          "amphoe": "อ.เวียงแหง",
+          "province": "จ.เชียงใหม่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ขุนแม่แตง (หน่วยย่อย)",
+          "latitude": 19.5768,
+          "longitude": 98.6722,
+          "sum_rainfall_mm": 30.599999999999998,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "502001",
@@ -6173,8 +7878,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ นด.5 (น้ำตกแม่หาด)",
           "latitude": 19.628954,
           "longitude": 98.5769,
-          "sum_rainfall_mm": 102.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 106.6,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "502001",
@@ -6187,215 +7892,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 19.6323,
           "longitude": 98.5291,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
-        },
-        {
-          "geocode": "550402",
-          "tambon": "ต.เชียงของ",
-          "amphoe": "อ.นาน้อย",
-          "province": "จ.น่าน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านป่าสัก",
-          "latitude": 18.310669,
-          "longitude": 100.728303,
-          "sum_rainfall_mm": 19.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "550402",
-          "tambon": "ต.เชียงของ",
-          "amphoe": "อ.นาน้อย",
-          "province": "จ.น่าน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านห้วยเลา",
-          "latitude": 18.33723,
-          "longitude": 100.95749,
-          "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "550402",
-          "tambon": "ต.เชียงของ",
-          "amphoe": "อ.นาน้อย",
-          "province": "จ.น่าน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านน้ำหิน",
-          "latitude": 18.294692,
-          "longitude": 100.721618,
-          "sum_rainfall_mm": 24.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "550402",
-          "tambon": "ต.เชียงของ",
-          "amphoe": "อ.นาน้อย",
-          "province": "จ.น่าน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ศน.7 (ห้วยงาม)",
-          "latitude": 18.2799,
-          "longitude": 100.9562,
-          "sum_rainfall_mm": 0.4,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "550401",
-          "tambon": "ต.นาน้อย",
-          "amphoe": "อ.นาน้อย",
-          "province": "จ.น่าน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "อ.นาน้อย",
-          "latitude": 18.314601,
-          "longitude": 100.693776,
-          "sum_rainfall_mm": 40.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
-        },
-        {
-          "geocode": "550407",
-          "tambon": "ต.น้ำตก",
-          "amphoe": "อ.นาน้อย",
-          "province": "จ.น่าน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านวังกอก",
-          "latitude": 18.401079,
-          "longitude": 100.607072,
-          "sum_rainfall_mm": 52.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "550406",
-          "tambon": "ต.บัวใหญ่",
-          "amphoe": "อ.นาน้อย",
-          "province": "จ.น่าน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านทัพม่าน",
-          "latitude": 18.33798,
-          "longitude": 100.567497,
-          "sum_rainfall_mm": 14.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "550403",
-          "tambon": "ต.ศรีษะเกษ",
-          "amphoe": "อ.นาน้อย",
-          "province": "จ.น่าน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "ที่ทำการอุทยานแห่งชาติศรีน่าน",
-          "latitude": 18.36945,
-          "longitude": 100.83013,
-          "sum_rainfall_mm": 48.199999999999996,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "550403",
-          "tambon": "ต.ศรีษะเกษ",
-          "amphoe": "อ.นาน้อย",
-          "province": "จ.น่าน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "สถานีควบคุมไฟป่าศรีน่าน",
-          "latitude": 18.34464,
-          "longitude": 100.7927,
-          "sum_rainfall_mm": 41.800000000000004,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "550403",
-          "tambon": "ต.ศรีษะเกษ",
-          "amphoe": "อ.นาน้อย",
-          "province": "จ.น่าน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ศน.6 (กิ่วนกแซว)",
-          "latitude": 18.35957,
-          "longitude": 101.04883,
-          "sum_rainfall_mm": 51.8,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "550403",
-          "tambon": "ต.ศรีษะเกษ",
-          "amphoe": "อ.นาน้อย",
-          "province": "จ.น่าน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "ศูนย์ศึกษาการพัฒนาการอนุรักษ์ต้นน้ำลุ่มน้ำน่าน",
-          "latitude": 18.410538,
-          "longitude": 100.699066,
-          "sum_rainfall_mm": 94.8,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "550404",
-          "tambon": "ต.สถาน",
-          "amphoe": "อ.นาน้อย",
-          "province": "จ.น่าน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านป่ากล้วย",
-          "latitude": 18.229369,
-          "longitude": 100.686028,
-          "sum_rainfall_mm": 26.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "550405",
-          "tambon": "ต.สันทะ",
-          "amphoe": "อ.นาน้อย",
-          "province": "จ.น่าน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านส้าน",
-          "latitude": 18.282419,
-          "longitude": 100.565464,
-          "sum_rainfall_mm": 18.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "550405",
-          "tambon": "ต.สันทะ",
-          "amphoe": "อ.นาน้อย",
-          "province": "จ.น่าน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านเรืองสว่าง (บ้านขุนสถาน เดิม)",
-          "latitude": 18.292133,
-          "longitude": 100.483805,
-          "sum_rainfall_mm": 1.5,
-          "observed_at": "2026-09-18T18:00:00+07:00"
-        },
-        {
-          "geocode": "550405",
-          "tambon": "ต.สันทะ",
-          "amphoe": "อ.นาน้อย",
-          "province": "จ.น่าน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "สถานีวิจัยต้นน้ำขุนสถาน",
-          "latitude": 18.277527,
-          "longitude": 100.50524,
-          "sum_rainfall_mm": 45.60000000000001,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "550405",
-          "tambon": "ต.สันทะ",
-          "amphoe": "อ.นาน้อย",
-          "province": "จ.น่าน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ขุนสถาน",
-          "latitude": 18.273388,
-          "longitude": 100.53669,
-          "sum_rainfall_mm": 25.2,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "551001",
@@ -6407,8 +7904,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านดอนมูล",
           "latitude": 18.16671,
           "longitude": 100.635727,
-          "sum_rainfall_mm": 2.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 0.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "551001",
@@ -6421,7 +7918,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.177984,
           "longitude": 100.5748,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "551002",
@@ -6433,8 +7930,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหัวทุ่ง",
           "latitude": 18.201603,
           "longitude": 100.671618,
-          "sum_rainfall_mm": 23.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 11.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "551002",
@@ -6446,8 +7943,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สนามกีฬา ทต.บ่อแก้ว",
           "latitude": 18.21042,
           "longitude": 100.66244,
-          "sum_rainfall_mm": 64.6,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 24.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "551004",
@@ -6459,8 +7956,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านห้วยเย็น",
           "latitude": 18.182949,
           "longitude": 100.542672,
-          "sum_rainfall_mm": 29.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 21.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "551004",
@@ -6472,8 +7969,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านน้ำเคิม",
           "latitude": 18.103164,
           "longitude": 100.4444,
-          "sum_rainfall_mm": 22.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 18.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "551004",
@@ -6485,8 +7982,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อ.นาหมื่น",
           "latitude": 18.17219,
           "longitude": 100.507054,
-          "sum_rainfall_mm": 119.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "sum_rainfall_mm": 95.0,
+          "observed_at": "2026-09-19T10:00:00+07:00"
         },
         {
           "geocode": "551004",
@@ -6498,8 +7995,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์เมืองลี",
           "latitude": 18.18908,
           "longitude": 100.47599,
-          "sum_rainfall_mm": 114.6,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 79.60000000000001,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550105",
@@ -6512,7 +8009,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.785066,
           "longitude": 100.700092,
           "sum_rainfall_mm": 18.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550101",
@@ -6525,7 +8022,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.79898,
           "longitude": 100.73317,
           "sum_rainfall_mm": 22.6,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550102",
@@ -6538,7 +8035,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.951416,
           "longitude": 100.738659,
           "sum_rainfall_mm": 15.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550102",
@@ -6551,7 +8048,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 19.015332,
           "longitude": 100.780161,
           "sum_rainfall_mm": 24.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "observed_at": "2026-09-19T10:00:00+07:00"
         },
         {
           "geocode": "550102",
@@ -6563,21 +8060,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์น้ำงาว",
           "latitude": 18.981392,
           "longitude": 100.71825,
-          "sum_rainfall_mm": 35.4,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "550116",
-          "tambon": "ต.บ่อสวก",
-          "amphoe": "อ.เมืองน่าน",
-          "province": "จ.น่าน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านต้าม",
-          "latitude": 18.717311,
-          "longitude": 100.626146,
-          "sum_rainfall_mm": 117.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 35.400000000000006,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550116",
@@ -6590,7 +8074,20 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.738199,
           "longitude": 100.683482,
           "sum_rainfall_mm": 59.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "550116",
+          "tambon": "ต.บ่อสวก",
+          "amphoe": "อ.เมืองน่าน",
+          "province": "จ.น่าน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านต้าม",
+          "latitude": 18.717311,
+          "longitude": 100.626146,
+          "sum_rainfall_mm": 117.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550103",
@@ -6603,7 +8100,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.892062,
           "longitude": 100.750934,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550106",
@@ -6616,46 +8113,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.787085,
           "longitude": 100.654333,
           "sum_rainfall_mm": 52.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "550117",
-          "tambon": "ต.สะเนียน",
-          "amphoe": "อ.เมืองน่าน",
-          "province": "จ.น่าน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านปางเป๋ย",
-          "latitude": 18.858215,
-          "longitude": 100.549527,
-          "sum_rainfall_mm": 26.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "550117",
-          "tambon": "ต.สะเนียน",
-          "amphoe": "อ.เมืองน่าน",
-          "province": "จ.น่าน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านสะเนียน",
-          "latitude": 18.814657,
-          "longitude": 100.701851,
-          "sum_rainfall_mm": 31.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "550117",
-          "tambon": "ต.สะเนียน",
-          "amphoe": "อ.เมืองน่าน",
-          "province": "จ.น่าน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านละเบ้ายา",
-          "latitude": 18.918661,
-          "longitude": 100.622396,
-          "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550117",
@@ -6668,7 +8126,46 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.891772,
           "longitude": 100.683512,
           "sum_rainfall_mm": 34.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "550117",
+          "tambon": "ต.สะเนียน",
+          "amphoe": "อ.เมืองน่าน",
+          "province": "จ.น่าน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านสะเนียน",
+          "latitude": 18.814657,
+          "longitude": 100.701851,
+          "sum_rainfall_mm": 31.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "550117",
+          "tambon": "ต.สะเนียน",
+          "amphoe": "อ.เมืองน่าน",
+          "province": "จ.น่าน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านละเบ้ายา",
+          "latitude": 18.918661,
+          "longitude": 100.622396,
+          "sum_rainfall_mm": 0.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "550117",
+          "tambon": "ต.สะเนียน",
+          "amphoe": "อ.เมืองน่าน",
+          "province": "จ.น่าน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านปางเป๋ย",
+          "latitude": 18.858215,
+          "longitude": 100.549527,
+          "sum_rainfall_mm": 27.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550117",
@@ -6680,8 +8177,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์สะเนียน-ไสล",
           "latitude": 18.8532,
           "longitude": 100.592,
-          "sum_rainfall_mm": 42.8,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "sum_rainfall_mm": 42.800000000000004,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550117",
@@ -6693,8 +8190,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านกาใส",
           "latitude": 18.86399,
           "longitude": 100.67626,
-          "sum_rainfall_mm": 29.400000000000002,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 29.4,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550701",
@@ -6706,8 +8203,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "แม่น้ำสา",
           "latitude": 18.571873,
           "longitude": 100.74266,
-          "sum_rainfall_mm": 38.2,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 30.799999999999997,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550702",
@@ -6719,8 +8216,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ศน.3 (หาดกิตติ)",
           "latitude": 18.503033,
           "longitude": 100.79666,
-          "sum_rainfall_mm": 19.400000000000002,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 19.200000000000003,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550715",
@@ -6733,7 +8230,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.638724,
           "longitude": 100.869164,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550704",
@@ -6746,20 +8243,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.628265,
           "longitude": 100.805084,
           "sum_rainfall_mm": 24.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "550717",
-          "tambon": "ต.ทุ่งศรีทอง",
-          "amphoe": "อ.เวียงสา",
-          "province": "จ.น่าน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านทุ่งผง",
-          "latitude": 18.65339,
-          "longitude": 100.684398,
-          "sum_rainfall_mm": 45.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550717",
@@ -6772,7 +8256,20 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.680542,
           "longitude": 100.653676,
           "sum_rainfall_mm": 41.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "550717",
+          "tambon": "ต.ทุ่งศรีทอง",
+          "amphoe": "อ.เวียงสา",
+          "province": "จ.น่าน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านทุ่งผง",
+          "latitude": 18.65339,
+          "longitude": 100.684398,
+          "sum_rainfall_mm": 45.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550705",
@@ -6785,20 +8282,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.674678,
           "longitude": 100.822485,
           "sum_rainfall_mm": 2.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "550707",
-          "tambon": "ต.น้ำมวบ",
-          "amphoe": "อ.เวียงสา",
-          "province": "จ.น่าน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "สะพานน้ำมวบ บ้านน้ำมวบ",
-          "latitude": 18.484377,
-          "longitude": 100.93808,
-          "sum_rainfall_mm": 18.2,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T10:00:00+07:00"
         },
         {
           "geocode": "550707",
@@ -6810,8 +8294,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ห้วยสาลี่",
           "latitude": 18.393398,
           "longitude": 100.983185,
-          "sum_rainfall_mm": 40.1,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 17.2,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "550707",
+          "tambon": "ต.น้ำมวบ",
+          "amphoe": "อ.เวียงสา",
+          "province": "จ.น่าน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "สะพานน้ำมวบ บ้านน้ำมวบ",
+          "latitude": 18.484377,
+          "longitude": 100.93808,
+          "sum_rainfall_mm": 11.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550710",
@@ -6823,8 +8320,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เอาออกจากระบบ",
           "latitude": 18.586899,
           "longitude": 100.700788,
-          "sum_rainfall_mm": 8.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 7.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550710",
@@ -6837,7 +8334,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.586969,
           "longitude": 100.700766,
           "sum_rainfall_mm": 21.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550710",
@@ -6849,8 +8346,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "น้ำสา",
           "latitude": 18.584002,
           "longitude": 100.600266,
-          "sum_rainfall_mm": 103.19999999999999,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 103.2,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550713",
@@ -6862,8 +8359,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านยาบนาเลิม",
           "latitude": 18.679689,
           "longitude": 100.568914,
-          "sum_rainfall_mm": 94.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 84.0,
+          "observed_at": "2026-09-19T09:00:00+07:00"
         },
         {
           "geocode": "550713",
@@ -6875,8 +8372,34 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่ขะนิง",
           "latitude": 18.75281,
           "longitude": 100.54113,
-          "sum_rainfall_mm": 125.39999999999999,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 116.80000000000001,
+          "observed_at": "2026-09-19T10:00:00+07:00"
+        },
+        {
+          "geocode": "550709",
+          "tambon": "ต.ยาบหัวนา",
+          "amphoe": "อ.เวียงสา",
+          "province": "จ.น่าน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านบ่อหอย",
+          "latitude": 18.502661,
+          "longitude": 100.400493,
+          "sum_rainfall_mm": 87.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "550709",
+          "tambon": "ต.ยาบหัวนา",
+          "amphoe": "อ.เวียงสา",
+          "province": "จ.น่าน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านฮากฮาน",
+          "latitude": 18.661424,
+          "longitude": 100.481535,
+          "sum_rainfall_mm": 43.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550709",
@@ -6889,33 +8412,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.552787,
           "longitude": 100.544911,
           "sum_rainfall_mm": 5.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "550709",
-          "tambon": "ต.ยาบหัวนา",
-          "amphoe": "อ.เวียงสา",
-          "province": "จ.น่าน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านบ่อหอย",
-          "latitude": 18.502661,
-          "longitude": 100.400493,
-          "sum_rainfall_mm": 125.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "550709",
-          "tambon": "ต.ยาบหัวนา",
-          "amphoe": "อ.เวียงสา",
-          "province": "จ.น่าน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านฮากฮาน",
-          "latitude": 18.661424,
-          "longitude": 100.481535,
-          "sum_rainfall_mm": 77.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550709",
@@ -6927,8 +8424,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานห้วยแม่ถาบ้านปาหุ่ง",
           "latitude": 18.584373,
           "longitude": 100.50956,
-          "sum_rainfall_mm": 45.400000000000006,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 42.2,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550709",
@@ -6940,8 +8437,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่ถา",
           "latitude": 18.516405,
           "longitude": 100.40301,
-          "sum_rainfall_mm": 98.20000000000002,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 56.2,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550706",
@@ -6953,8 +8450,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อ.เวียงสา (N.13A) น้ำน่าน",
           "latitude": 18.549993,
           "longitude": 100.760637,
-          "sum_rainfall_mm": 27.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "sum_rainfall_mm": 25.0,
+          "observed_at": "2026-09-19T10:00:00+07:00"
         },
         {
           "geocode": "550706",
@@ -6966,8 +8463,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เวียงสา",
           "latitude": 18.54992,
           "longitude": 100.76151,
-          "sum_rainfall_mm": 29.8,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 28.400000000000002,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550712",
@@ -6979,8 +8476,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านสันนาเคียน",
           "latitude": 18.494757,
           "longitude": 100.945088,
-          "sum_rainfall_mm": 9.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 5.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550703",
@@ -6992,8 +8489,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหาดไร่",
           "latitude": 18.563037,
           "longitude": 100.925618,
-          "sum_rainfall_mm": 14.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 8.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550703",
@@ -7005,8 +8502,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านนาสา",
           "latitude": 18.593763,
           "longitude": 100.840496,
-          "sum_rainfall_mm": 6.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 5.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "550703",
@@ -7019,20 +8516,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.548273,
           "longitude": 100.808617,
           "sum_rainfall_mm": 13.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
-        },
-        {
-          "geocode": "550711",
-          "tambon": "ต.อ่ายนาไลย",
-          "amphoe": "อ.เวียงสา",
-          "province": "จ.น่าน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านชมพู",
-          "latitude": 18.514876,
-          "longitude": 100.596832,
-          "sum_rainfall_mm": 60.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T10:00:00+07:00"
         },
         {
           "geocode": "550711",
@@ -7044,34 +8528,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านห้วยน้ำอุ่น",
           "latitude": 18.505597,
           "longitude": 100.524484,
-          "sum_rainfall_mm": 99.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 66.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
-          "geocode": "560607",
-          "tambon": "ต.ขุนควร",
-          "amphoe": "อ.ปง",
-          "province": "จ.พะเยา",
+          "geocode": "550711",
+          "tambon": "ต.อ่ายนาไลย",
+          "amphoe": "อ.เวียงสา",
+          "province": "จ.น่าน",
           "region_id": "4",
           "region_name": "ภาคเหนือ",
-          "station": "บ้านสบขาม",
-          "latitude": 19.150395,
-          "longitude": 100.389803,
-          "sum_rainfall_mm": 32.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "560607",
-          "tambon": "ต.ขุนควร",
-          "amphoe": "อ.ปง",
-          "province": "จ.พะเยา",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านขุนกำลัง",
-          "latitude": 19.107895,
-          "longitude": 100.390588,
-          "sum_rainfall_mm": 31.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "station": "บ้านชมพู",
+          "latitude": 18.514876,
+          "longitude": 100.596832,
+          "sum_rainfall_mm": 44.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "560607",
@@ -7084,7 +8555,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 19.197005,
           "longitude": 100.461177,
           "sum_rainfall_mm": 20.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "560607",
@@ -7093,11 +8564,24 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.พะเยา",
           "region_id": "4",
           "region_name": "ภาคเหนือ",
-          "station": "หน่วยศึกษาการพัฒนาการอนุรักษ์ต้นน้ำดอยผาจิ",
-          "latitude": 19.0905,
-          "longitude": 100.4088,
-          "sum_rainfall_mm": 42.400000000000006,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "station": "บ้านขุนกำลัง",
+          "latitude": 19.107895,
+          "longitude": 100.390588,
+          "sum_rainfall_mm": 31.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "560607",
+          "tambon": "ต.ขุนควร",
+          "amphoe": "อ.ปง",
+          "province": "จ.พะเยา",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านสบขาม",
+          "latitude": 19.150395,
+          "longitude": 100.389803,
+          "sum_rainfall_mm": 32.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "560607",
@@ -7109,8 +8593,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานบ้านขุนควร บ้านสบขาม",
           "latitude": 19.150398,
           "longitude": 100.389786,
-          "sum_rainfall_mm": 58.60000000000001,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 58.6,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "560607",
@@ -7122,8 +8606,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์ป่าน้ำสาว",
           "latitude": 19.044817,
           "longitude": 100.49141,
-          "sum_rainfall_mm": 65.8,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 64.8,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "560607",
+          "tambon": "ต.ขุนควร",
+          "amphoe": "อ.ปง",
+          "province": "จ.พะเยา",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยศึกษาการพัฒนาการอนุรักษ์ต้นน้ำดอยผาจิ",
+          "latitude": 19.0905,
+          "longitude": 100.4088,
+          "sum_rainfall_mm": 42.4,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "560602",
@@ -7136,7 +8633,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 19.155619,
           "longitude": 100.307051,
           "sum_rainfall_mm": 9.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "560604",
@@ -7148,47 +8645,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านแฮะ จ.พะเยา",
           "latitude": 19.302907,
           "longitude": 100.390599,
-          "sum_rainfall_mm": 13.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "560604",
-          "tambon": "ต.งิม",
-          "amphoe": "อ.ปง",
-          "province": "จ.พะเยา",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านน้ำฮาก",
-          "latitude": 19.329427,
-          "longitude": 100.357865,
-          "sum_rainfall_mm": 18.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "560604",
-          "tambon": "ต.งิม",
-          "amphoe": "อ.ปง",
-          "province": "จ.พะเยา",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านหนองบัว",
-          "latitude": 19.283917,
-          "longitude": 100.380564,
-          "sum_rainfall_mm": 25.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
-        },
-        {
-          "geocode": "560604",
-          "tambon": "ต.งิม",
-          "amphoe": "อ.ปง",
-          "province": "จ.พะเยา",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านปางผักหม",
-          "latitude": 19.335588,
-          "longitude": 100.318604,
-          "sum_rainfall_mm": 16.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 13.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "560604",
@@ -7201,7 +8659,46 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 19.294227,
           "longitude": 100.357574,
           "sum_rainfall_mm": 16.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "560604",
+          "tambon": "ต.งิม",
+          "amphoe": "อ.ปง",
+          "province": "จ.พะเยา",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านน้ำฮาก",
+          "latitude": 19.329427,
+          "longitude": 100.357865,
+          "sum_rainfall_mm": 16.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "560604",
+          "tambon": "ต.งิม",
+          "amphoe": "อ.ปง",
+          "province": "จ.พะเยา",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านหนองบัว",
+          "latitude": 19.283917,
+          "longitude": 100.380564,
+          "sum_rainfall_mm": 25.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "560604",
+          "tambon": "ต.งิม",
+          "amphoe": "อ.ปง",
+          "province": "จ.พะเยา",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านปางผักหม",
+          "latitude": 19.335588,
+          "longitude": 100.318604,
+          "sum_rainfall_mm": 16.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "560604",
@@ -7213,8 +8710,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยศึกษาการพัฒนาการอนุรักษ์ต้นน้ำน้ำเงิน",
           "latitude": 19.36386,
           "longitude": 100.37124,
-          "sum_rainfall_mm": 29.400000000000002,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "sum_rainfall_mm": 29.399999999999995,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "560604",
@@ -7227,7 +8724,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 19.30203,
           "longitude": 100.40965,
           "sum_rainfall_mm": 22.2,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "560606",
@@ -7239,8 +8736,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านห้วยคอกหมู",
           "latitude": 19.216015,
           "longitude": 100.255061,
-          "sum_rainfall_mm": 39.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 34.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "560601",
@@ -7253,20 +8750,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 19.150733,
           "longitude": 100.275249,
           "sum_rainfall_mm": 18.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "560601",
-          "tambon": "ต.ปง",
-          "amphoe": "อ.ปง",
-          "province": "จ.พะเยา",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านค่าไพบูลย์",
-          "latitude": 19.119745,
-          "longitude": 100.27518,
-          "sum_rainfall_mm": 8.5,
-          "observed_at": "2026-09-19T03:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "560601",
@@ -7279,72 +8763,20 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 19.031743,
           "longitude": 100.249101,
           "sum_rainfall_mm": 23.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
-          "geocode": "560605",
-          "tambon": "ต.ผาช้างน้อย",
+          "geocode": "560601",
+          "tambon": "ต.ปง",
           "amphoe": "อ.ปง",
           "province": "จ.พะเยา",
           "region_id": "4",
           "region_name": "ภาคเหนือ",
-          "station": "บ้านห้วยกอก (บ้านน้ำปุก)",
-          "latitude": 19.25623,
-          "longitude": 100.49135,
-          "sum_rainfall_mm": 15.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "560605",
-          "tambon": "ต.ผาช้างน้อย",
-          "amphoe": "อ.ปง",
-          "province": "จ.พะเยา",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านสิบสองพัฒนา",
-          "latitude": 19.378142,
-          "longitude": 100.442811,
-          "sum_rainfall_mm": 21.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "560605",
-          "tambon": "ต.ผาช้างน้อย",
-          "amphoe": "อ.ปง",
-          "province": "จ.พะเยา",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านใหม่ปางค่า",
-          "latitude": 19.337223,
-          "longitude": 100.431249,
-          "sum_rainfall_mm": 31.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "560605",
-          "tambon": "ต.ผาช้างน้อย",
-          "amphoe": "อ.ปง",
-          "province": "จ.พะเยา",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านปางค่าเหนือ",
-          "latitude": 19.368361,
-          "longitude": 100.470562,
-          "sum_rainfall_mm": 2.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "560605",
-          "tambon": "ต.ผาช้างน้อย",
-          "amphoe": "อ.ปง",
-          "province": "จ.พะเยา",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านปางพริก",
-          "latitude": 19.314713,
-          "longitude": 100.464666,
-          "sum_rainfall_mm": 63.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "station": "บ้านค่าไพบูลย์",
+          "latitude": 19.119745,
+          "longitude": 100.27518,
+          "sum_rainfall_mm": 8.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "560605",
@@ -7357,7 +8789,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 19.354569,
           "longitude": 100.392999,
           "sum_rainfall_mm": 40.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "560605",
@@ -7379,11 +8811,89 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.พะเยา",
           "region_id": "4",
           "region_name": "ภาคเหนือ",
-          "station": "หน่วยศึกษาการพัฒนาการอนุรักษ์ต้นน้ำน้ำงิม",
-          "latitude": 19.3401,
-          "longitude": 100.4781,
-          "sum_rainfall_mm": 34.2,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "station": "บ้านใหม่ปางค่า",
+          "latitude": 19.337223,
+          "longitude": 100.431249,
+          "sum_rainfall_mm": 31.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "560605",
+          "tambon": "ต.ผาช้างน้อย",
+          "amphoe": "อ.ปง",
+          "province": "จ.พะเยา",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านสิบสองพัฒนา",
+          "latitude": 19.378142,
+          "longitude": 100.442811,
+          "sum_rainfall_mm": 21.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "560605",
+          "tambon": "ต.ผาช้างน้อย",
+          "amphoe": "อ.ปง",
+          "province": "จ.พะเยา",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านปางค่าเหนือ",
+          "latitude": 19.368361,
+          "longitude": 100.470562,
+          "sum_rainfall_mm": 2.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "560605",
+          "tambon": "ต.ผาช้างน้อย",
+          "amphoe": "อ.ปง",
+          "province": "จ.พะเยา",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านห้วยกอก (บ้านน้ำปุก)",
+          "latitude": 19.25623,
+          "longitude": 100.49135,
+          "sum_rainfall_mm": 12.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "560605",
+          "tambon": "ต.ผาช้างน้อย",
+          "amphoe": "อ.ปง",
+          "province": "จ.พะเยา",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านปางพริก",
+          "latitude": 19.314713,
+          "longitude": 100.464666,
+          "sum_rainfall_mm": 63.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "560605",
+          "tambon": "ต.ผาช้างน้อย",
+          "amphoe": "อ.ปง",
+          "province": "จ.พะเยา",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "สะพานน้ำแม่คะ ",
+          "latitude": 19.337248,
+          "longitude": 100.43124,
+          "sum_rainfall_mm": 52.199999999999996,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "560605",
+          "tambon": "ต.ผาช้างน้อย",
+          "amphoe": "อ.ปง",
+          "province": "จ.พะเยา",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยพิทักษ์อุทยานแห่งชาติ ที่ สก. 2 (ภูลังกา)",
+          "latitude": 19.393639,
+          "longitude": 100.45062,
+          "sum_rainfall_mm": 38.4,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "560605",
@@ -7396,7 +8906,20 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 19.321678,
           "longitude": 100.456184,
           "sum_rainfall_mm": 90.2,
-          "observed_at": "2026-09-19T05:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "560605",
+          "tambon": "ต.ผาช้างน้อย",
+          "amphoe": "อ.ปง",
+          "province": "จ.พะเยา",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยศึกษาการพัฒนาการอนุรักษ์ต้นน้ำน้ำงิม",
+          "latitude": 19.3401,
+          "longitude": 100.4781,
+          "sum_rainfall_mm": 34.400000000000006,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "560605",
@@ -7409,33 +8932,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 19.1549,
           "longitude": 100.6244,
           "sum_rainfall_mm": 82.4,
-          "observed_at": "2026-09-19T06:00:00+07:00"
-        },
-        {
-          "geocode": "560605",
-          "tambon": "ต.ผาช้างน้อย",
-          "amphoe": "อ.ปง",
-          "province": "จ.พะเยา",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "สะพานน้ำแม่คะ ",
-          "latitude": 19.337248,
-          "longitude": 100.43124,
-          "sum_rainfall_mm": 52.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "560605",
-          "tambon": "ต.ผาช้างน้อย",
-          "amphoe": "อ.ปง",
-          "province": "จ.พะเยา",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "หน่วยพิทักษ์อุทยานแห่งชาติ ที่ สก. 2 (ภูลังกา)",
-          "latitude": 19.393639,
-          "longitude": 100.45062,
-          "sum_rainfall_mm": 38.8,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "560603",
@@ -7448,7 +8945,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 19.187359,
           "longitude": 100.306189,
           "sum_rainfall_mm": 9.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "560603",
@@ -7461,7 +8958,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 19.266739,
           "longitude": 100.315912,
           "sum_rainfall_mm": 51.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "560603",
@@ -7474,7 +8971,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 19.228998,
           "longitude": 100.326294,
           "sum_rainfall_mm": 0.6000000000000001,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "540207",
@@ -7486,8 +8983,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านผาราง",
           "latitude": 18.316285,
           "longitude": 100.324273,
-          "sum_rainfall_mm": 110.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 104.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "540205",
@@ -7499,8 +8996,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านบุญแจ่ม",
           "latitude": 18.267415,
           "longitude": 100.333578,
-          "sum_rainfall_mm": 2.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 3.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "540206",
@@ -7513,7 +9010,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.223637,
           "longitude": 100.273272,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "540206",
@@ -7525,21 +9022,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านห้วยฮ่อมพัฒนา",
           "latitude": 18.203518,
           "longitude": 100.42659,
-          "sum_rainfall_mm": 123.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "540206",
-          "tambon": "ต.บ้านเวียง",
-          "amphoe": "อ.ร้องกวาง",
-          "province": "จ.แพร่",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "สถานีวิจัยต้นน้ำยม",
-          "latitude": 18.2346,
-          "longitude": 100.3548,
-          "sum_rainfall_mm": 43.2,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "sum_rainfall_mm": 90.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "540206",
@@ -7551,8 +9035,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานน้ำแม่ถาง",
           "latitude": 18.2166,
           "longitude": 100.3885,
-          "sum_rainfall_mm": 46.6,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "sum_rainfall_mm": 41.8,
+          "observed_at": "2026-09-19T10:00:00+07:00"
+        },
+        {
+          "geocode": "540206",
+          "tambon": "ต.บ้านเวียง",
+          "amphoe": "อ.ร้องกวาง",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "สถานีวิจัยต้นน้ำยม",
+          "latitude": 18.2346,
+          "longitude": 100.3548,
+          "sum_rainfall_mm": 48.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "540206",
@@ -7564,8 +9061,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อ่างเก็บน้ำแม่เติ๊ก",
           "latitude": 18.19978,
           "longitude": 100.29565,
-          "sum_rainfall_mm": 17.2,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 17.199999999999996,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "540206",
@@ -7577,8 +9074,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อ่างเก็บน้ำห้วยขึมโยธินอุทกพัฒนา",
           "latitude": 18.23289,
           "longitude": 100.31351,
-          "sum_rainfall_mm": 35.8,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 36.00000000000001,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "540210",
@@ -7590,8 +9087,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านห้วยเอียด",
           "latitude": 18.284968,
           "longitude": 100.417124,
-          "sum_rainfall_mm": 58.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 31.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "540210",
@@ -7603,8 +9100,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านจำวาย",
           "latitude": 18.331959,
           "longitude": 100.436023,
-          "sum_rainfall_mm": 68.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 21.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "540201",
@@ -7616,8 +9113,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วังโป่ง",
           "latitude": 18.330513,
           "longitude": 100.327475,
-          "sum_rainfall_mm": 19.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 11.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "540201",
@@ -7629,21 +9126,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ร้องกวาง",
           "latitude": 18.3588,
           "longitude": 100.3339,
-          "sum_rainfall_mm": 126.8,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "540213",
-          "tambon": "ต.ห้วยโรง",
-          "amphoe": "อ.ร้องกวาง",
-          "province": "จ.แพร่",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านห้วยโรงนอก",
-          "latitude": 18.416457,
-          "longitude": 100.479245,
-          "sum_rainfall_mm": 106.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 110.4,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "540213",
@@ -7655,8 +9139,281 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านครกหนานทา",
           "latitude": 18.481138,
           "longitude": 100.409021,
-          "sum_rainfall_mm": 98.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 69.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "540213",
+          "tambon": "ต.ห้วยโรง",
+          "amphoe": "อ.ร้องกวาง",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านห้วยโรงนอก",
+          "latitude": 18.416457,
+          "longitude": 100.479245,
+          "sum_rainfall_mm": 46.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "540704",
+          "tambon": "ต.นาพูน",
+          "amphoe": "อ.วังชิ้น",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่สิน",
+          "latitude": 17.802291,
+          "longitude": 99.857683,
+          "sum_rainfall_mm": 19.0,
+          "observed_at": "2026-09-19T09:00:00+07:00"
+        },
+        {
+          "geocode": "540704",
+          "tambon": "ต.นาพูน",
+          "amphoe": "อ.วังชิ้น",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านนาพูนพัฒนา",
+          "latitude": 17.832129,
+          "longitude": 99.763168,
+          "sum_rainfall_mm": 62.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "540704",
+          "tambon": "ต.นาพูน",
+          "amphoe": "อ.วังชิ้น",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยศึกษาการพัฒนาการอนุรักษ์ต้นน้ำแม่สูง",
+          "latitude": 17.804312,
+          "longitude": 99.828,
+          "sum_rainfall_mm": 1.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "540704",
+          "tambon": "ต.นาพูน",
+          "amphoe": "อ.วังชิ้น",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "สะพานน้ำแม่สิน",
+          "latitude": 17.801989,
+          "longitude": 99.849495,
+          "sum_rainfall_mm": 81.4,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "540706",
+          "tambon": "ต.ป่าสัก",
+          "amphoe": "อ.วังชิ้น",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่กระต๋อม",
+          "latitude": 17.789991,
+          "longitude": 99.478629,
+          "sum_rainfall_mm": 96.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "540706",
+          "tambon": "ต.ป่าสัก",
+          "amphoe": "อ.วังชิ้น",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยศึกษาการพัฒนาการอนุรักษ์ต้นน้ำแม่สรอย",
+          "latitude": 17.8275,
+          "longitude": 99.4638,
+          "sum_rainfall_mm": 0.0,
+          "observed_at": "2026-09-19T01:00:00+07:00"
+        },
+        {
+          "geocode": "540707",
+          "tambon": "ต.แม่เกิ๋ง",
+          "amphoe": "อ.วังชิ้น",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านปันเจน",
+          "latitude": 17.936096,
+          "longitude": 99.582519,
+          "sum_rainfall_mm": 53.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "540707",
+          "tambon": "ต.แม่เกิ๋ง",
+          "amphoe": "อ.วังชิ้น",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "ที่ทำการอุทยานแห่งชาติเวียงโกศัย",
+          "latitude": 17.966373,
+          "longitude": 99.59613,
+          "sum_rainfall_mm": 66.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "540703",
+          "tambon": "ต.แม่ป้าก",
+          "amphoe": "อ.วังชิ้น",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่จอก",
+          "latitude": 17.977693,
+          "longitude": 99.636121,
+          "sum_rainfall_mm": 34.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "540703",
+          "tambon": "ต.แม่ป้าก",
+          "amphoe": "อ.วังชิ้น",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "อ่างเก็บน้ำแม่ป้าก",
+          "latitude": 17.99031,
+          "longitude": 99.64955,
+          "sum_rainfall_mm": 34.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "540705",
+          "tambon": "ต.แม่พุง",
+          "amphoe": "อ.วังชิ้น",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านป่าคา",
+          "latitude": 17.822465,
+          "longitude": 99.551282,
+          "sum_rainfall_mm": 135.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "540705",
+          "tambon": "ต.แม่พุง",
+          "amphoe": "อ.วังชิ้น",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านขุนห้วย",
+          "latitude": 17.903802,
+          "longitude": 99.541516,
+          "sum_rainfall_mm": 0.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "540705",
+          "tambon": "ต.แม่พุง",
+          "amphoe": "อ.วังชิ้น",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่แฮด",
+          "latitude": 17.858197,
+          "longitude": 99.53412,
+          "sum_rainfall_mm": 91.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "540701",
+          "tambon": "ต.วังชิ้น",
+          "amphoe": "อ.วังชิ้น",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านหาดรั่ว",
+          "latitude": 17.79514,
+          "longitude": 99.673173,
+          "sum_rainfall_mm": 94.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "540701",
+          "tambon": "ต.วังชิ้น",
+          "amphoe": "อ.วังชิ้น",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "อบต.วังชิ้น",
+          "latitude": 17.87937,
+          "longitude": 99.61921,
+          "sum_rainfall_mm": 82.4,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "540702",
+          "tambon": "ต.สรอย",
+          "amphoe": "อ.วังชิ้น",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่ขมวก",
+          "latitude": 17.775018,
+          "longitude": 99.469853,
+          "sum_rainfall_mm": 28.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "540702",
+          "tambon": "ต.สรอย",
+          "amphoe": "อ.วังชิ้น",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแพะดอนมูล",
+          "latitude": 17.74928,
+          "longitude": 99.432498,
+          "sum_rainfall_mm": 50.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "540702",
+          "tambon": "ต.สรอย",
+          "amphoe": "อ.วังชิ้น",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "คลองสรอย วัดแม่ขมวก",
+          "latitude": 17.775057,
+          "longitude": 99.46933,
+          "sum_rainfall_mm": 56.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "540702",
+          "tambon": "ต.สรอย",
+          "amphoe": "อ.วังชิ้น",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "อ่างเก็บน้ำแม่อาง",
+          "latitude": 17.74115,
+          "longitude": 99.40274,
+          "sum_rainfall_mm": 64.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "540702",
+          "tambon": "ต.สรอย",
+          "amphoe": "อ.วังชิ้น",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "อ่างเก็บน้ำห้วยแม่ปะยาง",
+          "latitude": 17.773138,
+          "longitude": 99.41834,
+          "sum_rainfall_mm": 3.2,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "540607",
@@ -7669,20 +9426,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.367695,
           "longitude": 100.205709,
           "sum_rainfall_mm": 55.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "540604",
-          "tambon": "ต.เตาปูน",
-          "amphoe": "อ.สอง",
-          "province": "จ.แพร่",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านท่อสมาน",
-          "latitude": 18.497578,
-          "longitude": 100.208519,
-          "sum_rainfall_mm": 12.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "540604",
@@ -7695,7 +9439,20 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.574699,
           "longitude": 100.203708,
           "sum_rainfall_mm": 66.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "540604",
+          "tambon": "ต.เตาปูน",
+          "amphoe": "อ.สอง",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านท่อสมาน",
+          "latitude": 18.497578,
+          "longitude": 100.208519,
+          "sum_rainfall_mm": 12.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "540604",
@@ -7707,8 +9464,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ศาลเจ้าพ่อพญาอ้น",
           "latitude": 18.599714,
           "longitude": 100.1496,
-          "sum_rainfall_mm": 36.9,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 36.1,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "540602",
@@ -7721,7 +9478,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.484167,
           "longitude": 100.161389,
           "sum_rainfall_mm": 19.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "540601",
@@ -7733,8 +9490,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านวังดิน",
           "latitude": 18.508692,
           "longitude": 100.132687,
-          "sum_rainfall_mm": 22.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 21.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "540601",
@@ -7746,21 +9503,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานหนองจันทร์",
           "latitude": 18.46601,
           "longitude": 100.151665,
-          "sum_rainfall_mm": 20.999999999999996,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "540606",
-          "tambon": "ต.สะเอียบ",
-          "amphoe": "อ.สอง",
-          "province": "จ.แพร่",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านนาหลวง",
-          "latitude": 18.742005,
-          "longitude": 100.309278,
-          "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 21.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "540606",
@@ -7773,7 +9517,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.636704,
           "longitude": 100.239103,
           "sum_rainfall_mm": 52.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "540606",
@@ -7785,8 +9529,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านท่าวะ",
           "latitude": 18.681022,
           "longitude": 100.326985,
-          "sum_rainfall_mm": 90.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 81.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "540606",
@@ -7795,11 +9539,11 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.แพร่",
           "region_id": "4",
           "region_name": "ภาคเหนือ",
-          "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ มย.๖ (นาฝาย)",
-          "latitude": 18.777088,
-          "longitude": 100.30112,
-          "sum_rainfall_mm": 46.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "station": "บ้านนาหลวง",
+          "latitude": 18.742005,
+          "longitude": 100.309278,
+          "sum_rainfall_mm": 0.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "540606",
@@ -7812,7 +9556,20 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.7548,
           "longitude": 100.2227,
           "sum_rainfall_mm": 116.4,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "540606",
+          "tambon": "ต.สะเอียบ",
+          "amphoe": "อ.สอง",
+          "province": "จ.แพร่",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ มย.๖ (นาฝาย)",
+          "latitude": 18.777088,
+          "longitude": 100.30112,
+          "sum_rainfall_mm": 46.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "540606",
@@ -7824,8 +9581,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ที่ทำการอุทยานแห่งชาติแม่ยม",
           "latitude": 18.6259,
           "longitude": 100.1636,
-          "sum_rainfall_mm": 49.4,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "sum_rainfall_mm": 49.39999999999999,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "540603",
@@ -7837,8 +9594,164 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ที่ทำการเขตรักษาพันธุ์สัตว์ป่าดอยหลวง",
           "latitude": 18.433992,
           "longitude": 100.11433,
-          "sum_rainfall_mm": 17.6,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 19.6,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "580201",
+          "tambon": "ต.ขุนยวม",
+          "amphoe": "อ.ขุนยวม",
+          "province": "จ.แม่ฮ่องสอน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่สุริน",
+          "latitude": 18.916115,
+          "longitude": 97.943995,
+          "sum_rainfall_mm": 102.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "580201",
+          "tambon": "ต.ขุนยวม",
+          "amphoe": "อ.ขุนยวม",
+          "province": "จ.แม่ฮ่องสอน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านขุนยวม",
+          "latitude": 18.817962,
+          "longitude": 97.934949,
+          "sum_rainfall_mm": 0.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "580201",
+          "tambon": "ต.ขุนยวม",
+          "amphoe": "อ.ขุนยวม",
+          "province": "จ.แม่ฮ่องสอน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "ที่ทำการเขตรักษาพันธุ์สัตว์ป่าดอยเวียงหล้า",
+          "latitude": 18.901009,
+          "longitude": 97.8988,
+          "sum_rainfall_mm": 39.2,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "580203",
+          "tambon": "ต.เมืองปอน",
+          "amphoe": "อ.ขุนยวม",
+          "province": "จ.แม่ฮ่องสอน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านเมืองปอน",
+          "latitude": 18.745995,
+          "longitude": 97.927225,
+          "sum_rainfall_mm": 18.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "580203",
+          "tambon": "ต.เมืองปอน",
+          "amphoe": "อ.ขุนยวม",
+          "province": "จ.แม่ฮ่องสอน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านท่าหินส้ม",
+          "latitude": 18.657743,
+          "longitude": 97.928956,
+          "sum_rainfall_mm": 11.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "580202",
+          "tambon": "ต.แม่เงา",
+          "amphoe": "อ.ขุนยวม",
+          "province": "จ.แม่ฮ่องสอน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านประตูเมือง",
+          "latitude": 18.809018,
+          "longitude": 97.848674,
+          "sum_rainfall_mm": 15.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "580202",
+          "tambon": "ต.แม่เงา",
+          "amphoe": "อ.ขุนยวม",
+          "province": "จ.แม่ฮ่องสอน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านห้วยต้นนุ่น",
+          "latitude": 18.753525,
+          "longitude": 97.829615,
+          "sum_rainfall_mm": 1.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "580204",
+          "tambon": "ต.แม่ยวมน้อย",
+          "amphoe": "อ.ขุนยวม",
+          "province": "จ.แม่ฮ่องสอน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่โกปิ่",
+          "latitude": 18.703906,
+          "longitude": 98.066384,
+          "sum_rainfall_mm": 25.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "580204",
+          "tambon": "ต.แม่ยวมน้อย",
+          "amphoe": "อ.ขุนยวม",
+          "province": "จ.แม่ฮ่องสอน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่ออ",
+          "latitude": 18.773906,
+          "longitude": 98.037821,
+          "sum_rainfall_mm": 16.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "580206",
+          "tambon": "ต.แม่อูคอ",
+          "amphoe": "อ.ขุนยวม",
+          "province": "จ.แม่ฮ่องสอน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านใหม่พัฒนา",
+          "latitude": 18.842956,
+          "longitude": 97.996616,
+          "sum_rainfall_mm": 42.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "580206",
+          "tambon": "ต.แม่อูคอ",
+          "amphoe": "อ.ขุนยวม",
+          "province": "จ.แม่ฮ่องสอน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านพัฒนาปู่กู",
+          "latitude": 18.8422,
+          "longitude": 97.985507,
+          "sum_rainfall_mm": 35.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "580206",
+          "tambon": "ต.แม่อูคอ",
+          "amphoe": "อ.ขุนยวม",
+          "province": "จ.แม่ฮ่องสอน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านปางตอง",
+          "latitude": 18.843588,
+          "longitude": 98.064295,
+          "sum_rainfall_mm": 58.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "580508",
@@ -7850,8 +9763,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านขุนแม่ลาน้อย",
           "latitude": 18.622216,
           "longitude": 98.112245,
-          "sum_rainfall_mm": 11.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 14.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "580504",
@@ -7864,20 +9777,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.5751,
           "longitude": 98.018199,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "580504",
-          "tambon": "ต.แม่โถ",
-          "amphoe": "อ.แม่ลาน้อย",
-          "province": "จ.แม่ฮ่องสอน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านแม่จอ",
-          "latitude": 18.645832,
-          "longitude": 98.03918,
-          "sum_rainfall_mm": 31.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "580504",
@@ -7889,8 +9789,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านแม่โถใต้",
           "latitude": 18.608488,
           "longitude": 97.983469,
-          "sum_rainfall_mm": 20.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 23.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "580504",
+          "tambon": "ต.แม่โถ",
+          "amphoe": "อ.แม่ลาน้อย",
+          "province": "จ.แม่ฮ่องสอน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่จอ",
+          "latitude": 18.645832,
+          "longitude": 98.03918,
+          "sum_rainfall_mm": 34.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "580506",
@@ -7903,7 +9816,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.511358,
           "longitude": 98.074983,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "580506",
@@ -7916,7 +9829,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.529697,
           "longitude": 98.138502,
           "sum_rainfall_mm": 1.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "580501",
@@ -7928,8 +9841,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านท่าสองแคว",
           "latitude": 18.339649,
           "longitude": 97.918308,
-          "sum_rainfall_mm": 158.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 159.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "580501",
@@ -7941,21 +9854,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านท่าสองแคว",
           "latitude": 18.339602,
           "longitude": 97.918252,
-          "sum_rainfall_mm": 83.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "580501",
-          "tambon": "ต.แม่ลาน้อย",
-          "amphoe": "อ.แม่ลาน้อย",
-          "province": "จ.แม่ฮ่องสอน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านแม่แลบ",
-          "latitude": 18.379308,
-          "longitude": 97.8772,
-          "sum_rainfall_mm": 56.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 84.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "580501",
@@ -7967,8 +9867,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านทุ่งรวงทอง",
           "latitude": 18.338042,
           "longitude": 97.920476,
-          "sum_rainfall_mm": 122.5,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "sum_rainfall_mm": 123.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "580501",
+          "tambon": "ต.แม่ลาน้อย",
+          "amphoe": "อ.แม่ลาน้อย",
+          "province": "จ.แม่ฮ่องสอน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่แลบ",
+          "latitude": 18.379308,
+          "longitude": 97.8772,
+          "sum_rainfall_mm": 57.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "580502",
@@ -7981,7 +9894,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.513485,
           "longitude": 97.898379,
           "sum_rainfall_mm": 4.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "580502",
@@ -7993,7 +9906,7 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านแม่สุ",
           "latitude": 18.481651,
           "longitude": 97.906756,
-          "sum_rainfall_mm": 29.0,
+          "sum_rainfall_mm": 28.5,
           "observed_at": "2026-09-18T14:00:00+07:00"
         },
         {
@@ -8006,8 +9919,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหัวลา",
           "latitude": 18.543359,
           "longitude": 97.960378,
-          "sum_rainfall_mm": 8.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 10.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "580507",
@@ -8020,7 +9933,20 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.50562,
           "longitude": 98.009019,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T10:00:00+07:00"
+        },
+        {
+          "geocode": "580505",
+          "tambon": "ต.ห้วยห้อม",
+          "amphoe": "อ.แม่ลาน้อย",
+          "province": "จ.แม่ฮ่องสอน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านดูลาเปอ",
+          "latitude": 18.407426,
+          "longitude": 98.079866,
+          "sum_rainfall_mm": 31.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "580505",
@@ -8042,24 +9968,11 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.แม่ฮ่องสอน",
           "region_id": "4",
           "region_name": "ภาคเหนือ",
-          "station": "บ้านดูลาเปอ",
-          "latitude": 18.407426,
-          "longitude": 98.079866,
-          "sum_rainfall_mm": 30.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "580505",
-          "tambon": "ต.ห้วยห้อม",
-          "amphoe": "อ.แม่ลาน้อย",
-          "province": "จ.แม่ฮ่องสอน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่ลาน้อย",
           "latitude": 18.3675,
           "longitude": 98.0724,
-          "sum_rainfall_mm": 71.4,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "sum_rainfall_mm": 74.19999999999999,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "520504",
@@ -8071,8 +9984,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านข่อย",
           "latitude": 18.889093,
           "longitude": 99.94023,
-          "sum_rainfall_mm": 66.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 58.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "520504",
@@ -8085,20 +9998,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 19.034013,
           "longitude": 99.786146,
           "sum_rainfall_mm": 30.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "520504",
-          "tambon": "ต.บ้านร้อง",
-          "amphoe": "อ.งาว",
-          "province": "จ.ลำปาง",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ผท.๑ (ปากบอก)",
-          "latitude": 19.0587,
-          "longitude": 99.7755,
-          "sum_rainfall_mm": 38.2,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "520504",
@@ -8110,8 +10010,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานน้ำงาว",
           "latitude": 18.889063,
           "longitude": 99.940125,
-          "sum_rainfall_mm": 106.60000000000001,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 95.8,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "520504",
+          "tambon": "ต.บ้านร้อง",
+          "amphoe": "อ.งาว",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ผท.๑ (ปากบอก)",
+          "latitude": 19.0587,
+          "longitude": 99.7755,
+          "sum_rainfall_mm": 25.599999999999998,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "520509",
@@ -8123,8 +10036,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านปางหละ",
           "latitude": 18.546973,
           "longitude": 99.846301,
-          "sum_rainfall_mm": 37.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 36.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "520509",
@@ -8137,7 +10050,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.603598,
           "longitude": 99.900635,
           "sum_rainfall_mm": 1.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "520509",
@@ -8150,7 +10063,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.55175,
           "longitude": 99.839226,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "520508",
@@ -8162,21 +10075,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.บ้านแหง",
           "latitude": 18.76331,
           "longitude": 100.00877,
-          "sum_rainfall_mm": 29.6,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "520507",
-          "tambon": "ต.บ้านอ้อน",
-          "amphoe": "อ.งาว",
-          "province": "จ.ลำปาง",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "หน่วยศึกษาการพัฒนาการอนุรักษ์ต้นน้ำห้วยโล่ง",
-          "latitude": 18.82737,
-          "longitude": 99.83016,
-          "sum_rainfall_mm": 24.2,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 24.200000000000003,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "520507",
@@ -8188,8 +10088,34 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ 4 (แม่แก้)",
           "latitude": 18.74446,
           "longitude": 99.81539,
-          "sum_rainfall_mm": 29.599999999999998,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 24.8,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "520507",
+          "tambon": "ต.บ้านอ้อน",
+          "amphoe": "อ.งาว",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยศึกษาการพัฒนาการอนุรักษ์ต้นน้ำห้วยโล่ง",
+          "latitude": 18.82737,
+          "longitude": 99.83016,
+          "sum_rainfall_mm": 23.799999999999997,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "520505",
+          "tambon": "ต.ปงเตา",
+          "amphoe": "อ.งาว",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านขุนแหง",
+          "latitude": 18.845999,
+          "longitude": 99.998732,
+          "sum_rainfall_mm": 47.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "520505",
@@ -8202,20 +10128,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.880018,
           "longitude": 99.813558,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "520505",
-          "tambon": "ต.ปงเตา",
-          "amphoe": "อ.งาว",
-          "province": "จ.ลำปาง",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านขุนแหง",
-          "latitude": 18.845999,
-          "longitude": 99.998732,
-          "sum_rainfall_mm": 55.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "520505",
@@ -8227,8 +10140,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยศึกษาการพัฒนาการอนุรักษ์ต้นน้ำขุนงาว",
           "latitude": 18.8879,
           "longitude": 99.8069,
-          "sum_rainfall_mm": 105.79999999999998,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 71.39999999999999,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "520510",
@@ -8241,7 +10154,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.551374,
           "longitude": 100.011349,
           "sum_rainfall_mm": 2.0,
-          "observed_at": "2026-09-18T19:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "520510",
@@ -8254,7 +10167,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.60431,
           "longitude": 100.037,
           "sum_rainfall_mm": 46.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "520510",
@@ -8267,7 +10180,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.6275,
           "longitude": 100.04149,
           "sum_rainfall_mm": 34.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "520501",
@@ -8279,8 +10192,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหลวงเหนือ จ.ลำปาง",
           "latitude": 18.757743,
           "longitude": 99.975154,
-          "sum_rainfall_mm": 13.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 13.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "520808",
@@ -8292,8 +10205,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "TW.34",
           "latitude": 17.553855,
           "longitude": 99.178195,
-          "sum_rainfall_mm": 67.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 70.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "520806",
@@ -8305,7 +10218,33 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่อาบ",
           "latitude": 17.65963,
           "longitude": 99.12293,
-          "sum_rainfall_mm": 19.4,
+          "sum_rainfall_mm": 31.4,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "520807",
+          "tambon": "ต.แม่ถอด",
+          "amphoe": "อ.เถิน",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่แก่ง",
+          "latitude": 17.700725,
+          "longitude": 99.163618,
+          "sum_rainfall_mm": 93.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "520807",
+          "tambon": "ต.แม่ถอด",
+          "amphoe": "อ.เถิน",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่เตินเหนือ",
+          "latitude": 17.738137,
+          "longitude": 99.193731,
+          "sum_rainfall_mm": 67.0,
           "observed_at": "2026-09-19T07:00:00+07:00"
         },
         {
@@ -8318,34 +10257,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านแม่ถอด",
           "latitude": 17.757825,
           "longitude": 99.225892,
-          "sum_rainfall_mm": 54.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "520807",
-          "tambon": "ต.แม่ถอด",
-          "amphoe": "อ.เถิน",
-          "province": "จ.ลำปาง",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านแม่เตินเหนือ",
-          "latitude": 17.738137,
-          "longitude": 99.193731,
           "sum_rainfall_mm": 69.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "520807",
-          "tambon": "ต.แม่ถอด",
-          "amphoe": "อ.เถิน",
-          "province": "จ.ลำปาง",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านแม่แก่ง",
-          "latitude": 17.700725,
-          "longitude": 99.163618,
-          "sum_rainfall_mm": 67.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "520807",
@@ -8357,8 +10270,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สถานีวิจัยต้นน้ำวัง",
           "latitude": 17.7567,
           "longitude": 99.1794,
-          "sum_rainfall_mm": 17.6,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 25.6,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "520807",
@@ -8370,8 +10283,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เถิน",
           "latitude": 17.75171,
           "longitude": 99.23061,
-          "sum_rainfall_mm": 12.000000000000002,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 19.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "520803",
@@ -8383,8 +10296,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านแม่ปะแพะ",
           "latitude": 17.636333,
           "longitude": 99.269444,
-          "sum_rainfall_mm": 45.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 55.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "520803",
@@ -8396,8 +10309,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านปางกุ่ม",
           "latitude": 17.707512,
           "longitude": 99.366176,
-          "sum_rainfall_mm": 53.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 70.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "520803",
@@ -8410,7 +10323,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 17.680154,
           "longitude": 99.312242,
           "sum_rainfall_mm": 12.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "520803",
@@ -8422,34 +10335,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ มว.5 (แม่ปะ)",
           "latitude": 17.64238,
           "longitude": 99.28708,
-          "sum_rainfall_mm": 61.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "520804",
-          "tambon": "ต.แม่มอก",
-          "amphoe": "อ.เถิน",
-          "province": "จ.ลำปาง",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านกุ่มเนิ้งใต้",
-          "latitude": 17.598383,
-          "longitude": 99.338439,
-          "sum_rainfall_mm": 71.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "520804",
-          "tambon": "ต.แม่มอก",
-          "amphoe": "อ.เถิน",
-          "province": "จ.ลำปาง",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านแม่มอกใต้",
-          "latitude": 17.623949,
-          "longitude": 99.370664,
-          "sum_rainfall_mm": 51.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 71.6,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "520804",
@@ -8461,8 +10348,34 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหัวน้ำพัฒนา",
           "latitude": 17.645938,
           "longitude": 99.381117,
-          "sum_rainfall_mm": 35.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 39.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "520804",
+          "tambon": "ต.แม่มอก",
+          "amphoe": "อ.เถิน",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่มอกใต้",
+          "latitude": 17.623949,
+          "longitude": 99.370664,
+          "sum_rainfall_mm": 56.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "520804",
+          "tambon": "ต.แม่มอก",
+          "amphoe": "อ.เถิน",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านกุ่มเนิ้งใต้",
+          "latitude": 17.598383,
+          "longitude": 99.338439,
+          "sum_rainfall_mm": 81.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "520804",
@@ -8474,21 +10387,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ศช. 4 (แม่มอก)",
           "latitude": 17.661854,
           "longitude": 99.39075,
-          "sum_rainfall_mm": 40.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "520802",
-          "tambon": "ต.แม่วะ",
-          "amphoe": "อ.เถิน",
-          "province": "จ.ลำปาง",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ มว.1 (น้ำตกแม่วะ)",
-          "latitude": 17.44925,
-          "longitude": 99.22513,
-          "sum_rainfall_mm": 140.4,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 51.8,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "520802",
@@ -8500,21 +10400,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ 1 (น้ำดิบต้นกอก)",
           "latitude": 17.494926,
           "longitude": 99.214226,
-          "sum_rainfall_mm": 48.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 51.8,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
-          "geocode": "520805",
-          "tambon": "ต.เวียงมอก",
+          "geocode": "520802",
+          "tambon": "ต.แม่วะ",
           "amphoe": "อ.เถิน",
           "province": "จ.ลำปาง",
           "region_id": "4",
           "region_name": "ภาคเหนือ",
-          "station": "บ้านแม่แสลม",
-          "latitude": 17.384546,
-          "longitude": 99.304498,
-          "sum_rainfall_mm": 44.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ มว.1 (น้ำตกแม่วะ)",
+          "latitude": 17.44925,
+          "longitude": 99.22513,
+          "sum_rainfall_mm": 145.6,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "520805",
@@ -8526,8 +10426,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านปางอ้า",
           "latitude": 17.428228,
           "longitude": 99.361444,
-          "sum_rainfall_mm": 32.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 35.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "520805",
+          "tambon": "ต.เวียงมอก",
+          "amphoe": "อ.เถิน",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่แสลม",
+          "latitude": 17.384546,
+          "longitude": 99.304498,
+          "sum_rainfall_mm": 46.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "520805",
@@ -8539,8 +10452,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติ มว.๔ (แม่แสลม)",
           "latitude": 17.385424,
           "longitude": 99.30813,
-          "sum_rainfall_mm": 57.400000000000006,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 59.79999999999999,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "521007",
@@ -8553,7 +10466,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.110214,
           "longitude": 99.645832,
           "sum_rainfall_mm": 0.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "521002",
@@ -8565,8 +10478,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหลุกใต้",
           "latitude": 18.130707,
           "longitude": 99.532341,
-          "sum_rainfall_mm": 11.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 21.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "521004",
@@ -8578,21 +10491,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านแม่อิบ",
           "latitude": 18.028741,
           "longitude": 99.55689,
-          "sum_rainfall_mm": 36.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "521005",
-          "tambon": "ต.บ้านบอม",
-          "amphoe": "อ.แม่ทะ",
-          "province": "จ.ลำปาง",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "อ่างเก็บน้ำแม่กอง",
-          "latitude": 18.05428,
-          "longitude": 99.45685,
-          "sum_rainfall_mm": 24.299999999999997,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 66.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "521005",
@@ -8604,8 +10504,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อ่างเก็บน้ำห้วยแม่แพนน้อย ",
           "latitude": 18.0676,
           "longitude": 99.52639,
-          "sum_rainfall_mm": 1.2,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 1.2000000000000002,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "521005",
+          "tambon": "ต.บ้านบอม",
+          "amphoe": "อ.แม่ทะ",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "อ่างเก็บน้ำแม่กอง",
+          "latitude": 18.05428,
+          "longitude": 99.45685,
+          "sum_rainfall_mm": 27.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "521001",
@@ -8617,8 +10530,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านผาลาด",
           "latitude": 18.241118,
           "longitude": 99.596513,
-          "sum_rainfall_mm": 42.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 44.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "521010",
@@ -8631,7 +10544,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.13277,
           "longitude": 99.620037,
           "sum_rainfall_mm": 44.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "521010",
@@ -8644,7 +10557,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 18.052537,
           "longitude": 99.665897,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "521011",
@@ -8656,8 +10569,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านด่าน",
           "latitude": 17.996171,
           "longitude": 99.509398,
-          "sum_rainfall_mm": 116.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 126.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "521011",
@@ -8669,8 +10582,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อ่างฯแม่ยอนสันดอนแก้ว",
           "latitude": 17.97243,
           "longitude": 99.48753,
-          "sum_rainfall_mm": 60.2,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 100.60000000000001,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "521008",
@@ -8682,8 +10595,359 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านนายาบ",
           "latitude": 18.143931,
           "longitude": 99.713698,
-          "sum_rainfall_mm": 21.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 22.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "521104",
+          "tambon": "ต.นายาง",
+          "amphoe": "อ.สบปราบ",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแก่น",
+          "latitude": 17.932787,
+          "longitude": 99.275337,
+          "sum_rainfall_mm": 96.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "521104",
+          "tambon": "ต.นายาง",
+          "amphoe": "อ.สบปราบ",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "อบต.นายาง",
+          "latitude": 17.90977,
+          "longitude": 99.30969,
+          "sum_rainfall_mm": 88.6,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "521101",
+          "tambon": "ต.สบปราบ",
+          "amphoe": "อ.สบปราบ",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านทุ่ง",
+          "latitude": 17.873848,
+          "longitude": 99.362825,
+          "sum_rainfall_mm": 97.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "521102",
+          "tambon": "ต.สมัย",
+          "amphoe": "อ.สบปราบ",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านสมัยเหนือ",
+          "latitude": 17.904681,
+          "longitude": 99.416002,
+          "sum_rainfall_mm": 0.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "520401",
+          "tambon": "ต.ทุ่งงาม",
+          "amphoe": "อ.เสริมงาม",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่กึ๊ด",
+          "latitude": 18.093353,
+          "longitude": 99.271891,
+          "sum_rainfall_mm": 101.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "520404",
+          "tambon": "ต.เสริมกลาง",
+          "amphoe": "อ.เสริมงาม",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านโป่งน้ำร้อน",
+          "latitude": 18.145405,
+          "longitude": 99.106301,
+          "sum_rainfall_mm": 0.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "520404",
+          "tambon": "ต.เสริมกลาง",
+          "amphoe": "อ.เสริมงาม",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านสันโป่ง",
+          "latitude": 18.076908,
+          "longitude": 99.152528,
+          "sum_rainfall_mm": 68.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "520404",
+          "tambon": "ต.เสริมกลาง",
+          "amphoe": "อ.เสริมงาม",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่เสริม",
+          "latitude": 18.1331,
+          "longitude": 99.1106,
+          "sum_rainfall_mm": 66.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "520402",
+          "tambon": "ต.เสริมขวา",
+          "amphoe": "อ.เสริมงาม",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านปงป่าป๋อ",
+          "latitude": 18.130482,
+          "longitude": 99.207081,
+          "sum_rainfall_mm": 94.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "520402",
+          "tambon": "ต.เสริมขวา",
+          "amphoe": "อ.เสริมงาม",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่เลียงพัฒนา",
+          "latitude": 18.18034,
+          "longitude": 99.165629,
+          "sum_rainfall_mm": 64.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "520402",
+          "tambon": "ต.เสริมขวา",
+          "amphoe": "อ.เสริมงาม",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่เลียง ",
+          "latitude": 18.169743,
+          "longitude": 99.18275,
+          "sum_rainfall_mm": 114.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "520403",
+          "tambon": "ต.เสริมซ้าย",
+          "amphoe": "อ.เสริมงาม",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "TW.32",
+          "latitude": 18.024292,
+          "longitude": 99.218031,
+          "sum_rainfall_mm": 73.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "520403",
+          "tambon": "ต.เสริมซ้าย",
+          "amphoe": "อ.เสริมงาม",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านดงหนองจอก",
+          "latitude": 18.018543,
+          "longitude": 99.144126,
+          "sum_rainfall_mm": 73.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "520403",
+          "tambon": "ต.เสริมซ้าย",
+          "amphoe": "อ.เสริมงาม",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่ต๋ำ",
+          "latitude": 17.91228,
+          "longitude": 99.161903,
+          "sum_rainfall_mm": 47.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "520403",
+          "tambon": "ต.เสริมซ้าย",
+          "amphoe": "อ.เสริมงาม",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านนาเดา",
+          "latitude": 18.014434,
+          "longitude": 99.201135,
+          "sum_rainfall_mm": 79.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "521203",
+          "tambon": "ต.เมืองยาว",
+          "amphoe": "อ.ห้างฉัตร",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านทุ่งหลวง",
+          "latitude": 18.254,
+          "longitude": 99.216639,
+          "sum_rainfall_mm": 52.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "521206",
+          "tambon": "ต.แม่สัน",
+          "amphoe": "อ.ห้างฉัตร",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยพิทักษ์ป่าหัวทุ่ง",
+          "latitude": 18.30243,
+          "longitude": 99.229454,
+          "sum_rainfall_mm": 97.6,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "521207",
+          "tambon": "ต.วอแก้ว",
+          "amphoe": "อ.ห้างฉัตร",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านหล่ายทุ่ง",
+          "latitude": 18.396999,
+          "longitude": 99.352307,
+          "sum_rainfall_mm": 0.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "521207",
+          "tambon": "ต.วอแก้ว",
+          "amphoe": "อ.ห้างฉัตร",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ขต.5 (แม่ไพร)",
+          "latitude": 18.42716,
+          "longitude": 99.35545,
+          "sum_rainfall_mm": 42.2,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "521205",
+          "tambon": "ต.เวียงตาล",
+          "amphoe": "อ.ห้างฉัตร",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านปางปง-ปางทราย",
+          "latitude": 18.427697,
+          "longitude": 99.266721,
+          "sum_rainfall_mm": 31.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "521205",
+          "tambon": "ต.เวียงตาล",
+          "amphoe": "อ.ห้างฉัตร",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านทุ่งเกวียน",
+          "latitude": 18.332701,
+          "longitude": 99.249899,
+          "sum_rainfall_mm": 55.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "521205",
+          "tambon": "ต.เวียงตาล",
+          "amphoe": "อ.ห้างฉัตร",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "ที่ทำการเขตรักษาพันธุ์สัตว์ป่าดอยผาเมือง",
+          "latitude": 18.36925,
+          "longitude": 99.23496,
+          "sum_rainfall_mm": 59.39999999999999,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "521205",
+          "tambon": "ต.เวียงตาล",
+          "amphoe": "อ.ห้างฉัตร",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "ชุมชนแม่ตาลน้อย",
+          "latitude": 18.41521,
+          "longitude": 99.26469,
+          "sum_rainfall_mm": 1.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "521205",
+          "tambon": "ต.เวียงตาล",
+          "amphoe": "อ.ห้างฉัตร",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "อบต.เวียงตาล",
+          "latitude": 18.31132,
+          "longitude": 99.3252,
+          "sum_rainfall_mm": 58.2,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "521202",
+          "tambon": "ต.หนองหล่ม",
+          "amphoe": "อ.ห้างฉัตร",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านหนองหล่ม",
+          "latitude": 18.336259,
+          "longitude": 99.399912,
+          "sum_rainfall_mm": 46.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "521202",
+          "tambon": "ต.หนองหล่ม",
+          "amphoe": "อ.ห้างฉัตร",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "อบต.หนองหล่ม",
+          "latitude": 18.33624,
+          "longitude": 99.39992,
+          "sum_rainfall_mm": 63.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "521201",
+          "tambon": "ต.ห้างฉัตร",
+          "amphoe": "อ.ห้างฉัตร",
+          "province": "จ.ลำปาง",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "TW.29",
+          "latitude": 18.368642,
+          "longitude": 99.326625,
+          "sum_rainfall_mm": 25.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "510503",
@@ -8695,8 +10959,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านแม่แสม",
           "latitude": 18.053798,
           "longitude": 99.039799,
-          "sum_rainfall_mm": 92.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 113.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "510503",
@@ -8708,8 +10972,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านทุ่งข้าวหาง",
           "latitude": 18.138936,
           "longitude": 99.010399,
-          "sum_rainfall_mm": 15.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 26.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "510503",
@@ -8721,8 +10985,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์ป่าดอยอีหุ้ย",
           "latitude": 18.153486,
           "longitude": 98.9833,
-          "sum_rainfall_mm": 74.79999999999998,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 139.60000000000002,
+          "observed_at": "2026-09-19T10:00:00+07:00"
         },
         {
           "geocode": "510501",
@@ -8734,8 +10998,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหัวขัว",
           "latitude": 17.992936,
           "longitude": 99.04905,
-          "sum_rainfall_mm": 61.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 71.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "510501",
@@ -8747,21 +11011,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อ่างเก็บน้ำห้วยหินฝน",
           "latitude": 18.00469,
           "longitude": 99.00955,
-          "sum_rainfall_mm": 95.2,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "510502",
-          "tambon": "ต.บ้านปวง",
-          "amphoe": "อ.ทุ่งหัวช้าง",
-          "province": "จ.ลำพูน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านห้วยปิง",
-          "latitude": 17.845164,
-          "longitude": 99.074191,
-          "sum_rainfall_mm": 25.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 113.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "510502",
@@ -8773,8 +11024,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านแม่บอนใต้",
           "latitude": 17.898316,
           "longitude": 99.090131,
-          "sum_rainfall_mm": 32.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 39.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "510502",
@@ -8786,8 +11037,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านปวง",
           "latitude": 17.865614,
           "longitude": 99.066791,
-          "sum_rainfall_mm": 11.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 14.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "510502",
+          "tambon": "ต.บ้านปวง",
+          "amphoe": "อ.ทุ่งหัวช้าง",
+          "province": "จ.ลำพูน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านห้วยปิง",
+          "latitude": 17.845164,
+          "longitude": 99.074191,
+          "sum_rainfall_mm": 31.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "510502",
@@ -8799,8 +11063,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่ลี้",
           "latitude": 17.88562,
           "longitude": 99.0827,
-          "sum_rainfall_mm": 8.200000000000001,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 11.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "510502",
@@ -8812,8 +11076,99 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อ่างเก็บน้ำแม่แพม",
           "latitude": 17.86006,
           "longitude": 99.13616,
-          "sum_rainfall_mm": 2.2,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 2.1999999999999997,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "510301",
+          "tambon": "ต.บ้านโฮ่ง",
+          "amphoe": "อ.บ้านโฮ่ง",
+          "province": "จ.ลำพูน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "แม่น้ำลี้ บ้านโฮ่ง",
+          "latitude": 18.310793,
+          "longitude": 98.82355,
+          "sum_rainfall_mm": 79.99999999999999,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "510302",
+          "tambon": "ต.ป่าพลู",
+          "amphoe": "อ.บ้านโฮ่ง",
+          "province": "จ.ลำพูน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านห้วยกองเลาะ",
+          "latitude": 18.250809,
+          "longitude": 98.91515,
+          "sum_rainfall_mm": 74.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "510302",
+          "tambon": "ต.ป่าพลู",
+          "amphoe": "อ.บ้านโฮ่ง",
+          "province": "จ.ลำพูน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านเกาะทุ่งม่าน",
+          "latitude": 18.276021,
+          "longitude": 98.822322,
+          "sum_rainfall_mm": 3.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "510302",
+          "tambon": "ต.ป่าพลู",
+          "amphoe": "อ.บ้านโฮ่ง",
+          "province": "จ.ลำพูน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านแม่หาด",
+          "latitude": 18.166337,
+          "longitude": 98.891556,
+          "sum_rainfall_mm": 81.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "510302",
+          "tambon": "ต.ป่าพลู",
+          "amphoe": "อ.บ้านโฮ่ง",
+          "province": "จ.ลำพูน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "อ่างเก็บน้ำห้วยแทง",
+          "latitude": 18.29177,
+          "longitude": 98.86272,
+          "sum_rainfall_mm": 103.99999999999999,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "510302",
+          "tambon": "ต.ป่าพลู",
+          "amphoe": "อ.บ้านโฮ่ง",
+          "province": "จ.ลำพูน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "อ่างเก็บน้ำทุ่งม่าน",
+          "latitude": 18.25546,
+          "longitude": 98.84405,
+          "sum_rainfall_mm": 0.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "510305",
+          "tambon": "ต.หนองปลาสะวาย",
+          "amphoe": "อ.บ้านโฮ่ง",
+          "province": "จ.ลำพูน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "อ่างเก็บน้ำห้วยหนองสูน",
+          "latitude": 18.3069,
+          "longitude": 98.70883,
+          "sum_rainfall_mm": 0.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "510405",
@@ -8825,8 +11180,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านก้อทุ่ง",
           "latitude": 17.62713,
           "longitude": 98.78962,
-          "sum_rainfall_mm": 96.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 101.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "510405",
@@ -8838,8 +11193,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "น้ำก้อ",
           "latitude": 17.636518,
           "longitude": 98.77956,
-          "sum_rainfall_mm": 58.4,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 60.8,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "510404",
@@ -8852,7 +11207,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 17.736505,
           "longitude": 99.036495,
           "sum_rainfall_mm": 1.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "510403",
@@ -8864,8 +11219,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านแม่หว่างพัฒนา",
           "latitude": 17.674499,
           "longitude": 99.006732,
-          "sum_rainfall_mm": 49.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 54.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "510403",
@@ -8877,8 +11232,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านผาลาดเหนือ",
           "latitude": 17.696257,
           "longitude": 98.945512,
-          "sum_rainfall_mm": 36.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 40.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "510408",
@@ -8890,21 +11245,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านป่าไผ่",
           "latitude": 17.877175,
           "longitude": 98.925711,
-          "sum_rainfall_mm": 77.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "510402",
-          "tambon": "ต.แม่ตืน",
-          "amphoe": "อ.ลี้",
-          "province": "จ.ลำพูน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านสันวิไล",
-          "latitude": 17.957377,
-          "longitude": 98.913276,
-          "sum_rainfall_mm": 25.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 87.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "510402",
@@ -8916,8 +11258,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านแม่ตืน",
           "latitude": 18.013582,
           "longitude": 98.884889,
-          "sum_rainfall_mm": 37.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 46.5,
+          "observed_at": "2026-09-19T10:00:00+07:00"
         },
         {
           "geocode": "510402",
@@ -8929,8 +11271,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านสันวิไลพัฒนา",
           "latitude": 17.955891,
           "longitude": 98.905798,
-          "sum_rainfall_mm": 6.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "sum_rainfall_mm": 14.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "510402",
+          "tambon": "ต.แม่ตืน",
+          "amphoe": "อ.ลี้",
+          "province": "จ.ลำพูน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านสันวิไล",
+          "latitude": 17.957377,
+          "longitude": 98.913276,
+          "sum_rainfall_mm": 34.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "510402",
@@ -8942,21 +11297,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อ่างเก็บน้ำแม่ตืน",
           "latitude": 18.0204,
           "longitude": 98.83142,
-          "sum_rainfall_mm": 60.400000000000006,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "510406",
-          "tambon": "ต.แม่ลาน",
-          "amphoe": "อ.ลี้",
-          "province": "จ.ลำพูน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านห้วยทรายขาว",
-          "latitude": 17.736898,
-          "longitude": 98.833782,
-          "sum_rainfall_mm": 44.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 73.4,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "510406",
@@ -8968,8 +11310,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านเด่นเหม้า",
           "latitude": 17.7842,
           "longitude": 98.860318,
-          "sum_rainfall_mm": 53.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 57.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "510406",
+          "tambon": "ต.แม่ลาน",
+          "amphoe": "อ.ลี้",
+          "province": "จ.ลำพูน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านห้วยทรายขาว",
+          "latitude": 17.736898,
+          "longitude": 98.833782,
+          "sum_rainfall_mm": 48.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "510406",
@@ -8981,8 +11336,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่แตะ",
           "latitude": 17.7042,
           "longitude": 98.8346,
-          "sum_rainfall_mm": 59.39999999999999,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 63.99999999999999,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "510406",
@@ -8994,21 +11349,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ที่ทำการอุทยานแห่งชาติแม่ปิง",
           "latitude": 17.67078,
           "longitude": 98.87005,
-          "sum_rainfall_mm": 59.599999999999994,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "510401",
-          "tambon": "ต.ลี้",
-          "amphoe": "อ.ลี้",
-          "province": "จ.ลำพูน",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านปู",
-          "latitude": 17.839793,
-          "longitude": 99.005483,
-          "sum_rainfall_mm": 31.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 63.4,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "510401",
@@ -9021,7 +11363,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 17.801474,
           "longitude": 98.947044,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "510401",
@@ -9033,8 +11375,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านป่าหก",
           "latitude": 17.776736,
           "longitude": 98.971282,
-          "sum_rainfall_mm": 42.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 50.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "510401",
+          "tambon": "ต.ลี้",
+          "amphoe": "อ.ลี้",
+          "province": "จ.ลำพูน",
+          "region_id": "4",
+          "region_name": "ภาคเหนือ",
+          "station": "บ้านปู",
+          "latitude": 17.839793,
+          "longitude": 99.005483,
+          "sum_rainfall_mm": 39.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "510401",
@@ -9046,8 +11401,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ห้วยแม่ลี้",
           "latitude": 17.805399,
           "longitude": 98.953316,
-          "sum_rainfall_mm": 70.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 79.2,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "510409",
@@ -9059,8 +11414,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านแม่จ๋อง",
           "latitude": 18.033867,
           "longitude": 98.954574,
-          "sum_rainfall_mm": 59.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 80.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "510409",
@@ -9072,8 +11427,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านแม่ป้อกใน",
           "latitude": 18.08953,
           "longitude": 98.865333,
-          "sum_rainfall_mm": 49.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 59.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "510409",
@@ -9085,125 +11440,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อ่างเก็บน้ำห้วยแม่ปาง",
           "latitude": 18.10623,
           "longitude": 98.84675,
-          "sum_rainfall_mm": 3.8,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "530604",
-          "tambon": "ต.บ่อเบี้ย",
-          "amphoe": "อ.บ้านโคก",
-          "province": "จ.อุตรดิตถ์",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านห้วยไผ่",
-          "latitude": 18.304029,
-          "longitude": 101.109367,
-          "sum_rainfall_mm": 19.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
-        },
-        {
-          "geocode": "530604",
-          "tambon": "ต.บ่อเบี้ย",
-          "amphoe": "อ.บ้านโคก",
-          "province": "จ.อุตรดิตถ์",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านห้วยยาง",
-          "latitude": 18.332382,
-          "longitude": 101.108812,
-          "sum_rainfall_mm": 39.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "530604",
-          "tambon": "ต.บ่อเบี้ย",
-          "amphoe": "อ.บ้านโคก",
-          "province": "จ.อุตรดิตถ์",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านปางคอม",
-          "latitude": 18.239214,
-          "longitude": 101.08873,
-          "sum_rainfall_mm": 8.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "530602",
-          "tambon": "ต.บ้านโคก",
-          "amphoe": "อ.บ้านโคก",
-          "province": "จ.อุตรดิตถ์",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านน้ำแพ",
-          "latitude": 18.035642,
-          "longitude": 101.118524,
-          "sum_rainfall_mm": 48.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "530602",
-          "tambon": "ต.บ้านโคก",
-          "amphoe": "อ.บ้านโคก",
-          "province": "จ.อุตรดิตถ์",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านฟากนา",
-          "latitude": 18.021011,
-          "longitude": 101.058004,
-          "sum_rainfall_mm": 29.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "530602",
-          "tambon": "ต.บ้านโคก",
-          "amphoe": "อ.บ้านโคก",
-          "province": "จ.อุตรดิตถ์",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "ทต.บ้านโคก",
-          "latitude": 18.02097,
-          "longitude": 101.06478,
-          "sum_rainfall_mm": 61.400000000000006,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "530601",
-          "tambon": "ต.ม่วงเจ็ดต้น",
-          "amphoe": "อ.บ้านโคก",
-          "province": "จ.อุตรดิตถ์",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านห้วยน้อยกา",
-          "latitude": 18.112832,
-          "longitude": 101.038356,
-          "sum_rainfall_mm": 91.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "530601",
-          "tambon": "ต.ม่วงเจ็ดต้น",
-          "amphoe": "อ.บ้านโคก",
-          "province": "จ.อุตรดิตถ์",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "บ้านซำผาก้าม",
-          "latitude": 18.101506,
-          "longitude": 101.058516,
-          "sum_rainfall_mm": 65.5,
-          "observed_at": "2026-09-19T06:00:00+07:00"
-        },
-        {
-          "geocode": "530601",
-          "tambon": "ต.ม่วงเจ็ดต้น",
-          "amphoe": "อ.บ้านโคก",
-          "province": "จ.อุตรดิตถ์",
-          "region_id": "4",
-          "region_name": "ภาคเหนือ",
-          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ขุนน้ำปาด",
-          "latitude": 18.079493,
-          "longitude": 101.143715,
-          "sum_rainfall_mm": 44.4,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 38.800000000000004,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "710202",
@@ -9216,7 +11454,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 14.219713,
           "longitude": 99.099697,
           "sum_rainfall_mm": 52.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "710202",
@@ -9229,20 +11467,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 14.215,
           "longitude": 99.058,
           "sum_rainfall_mm": 39.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
-        },
-        {
-          "geocode": "710202",
-          "tambon": "ต.ท่าเสา",
-          "amphoe": "อ.ไทรโยค",
-          "province": "จ.กาญจนบุรี",
-          "region_id": "5",
-          "region_name": "ภาคตะวันตก",
-          "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ทย.1 (น้ำตกไทรโยคน้อย)",
-          "latitude": 14.2385,
-          "longitude": 99.05989,
-          "sum_rainfall_mm": 27.200000000000003,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T10:00:00+07:00"
         },
         {
           "geocode": "710202",
@@ -9255,7 +11480,20 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 14.21606,
           "longitude": 99.08133,
           "sum_rainfall_mm": 41.4,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "710202",
+          "tambon": "ต.ท่าเสา",
+          "amphoe": "อ.ไทรโยค",
+          "province": "จ.กาญจนบุรี",
+          "region_id": "5",
+          "region_name": "ภาคตะวันตก",
+          "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ทย.1 (น้ำตกไทรโยคน้อย)",
+          "latitude": 14.2385,
+          "longitude": 99.05989,
+          "sum_rainfall_mm": 27.200000000000003,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "710204",
@@ -9267,8 +11505,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านแม่น้ำน้อย",
           "latitude": 14.44497,
           "longitude": 98.80493,
-          "sum_rainfall_mm": 26.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "sum_rainfall_mm": 23.0,
+          "observed_at": "2026-09-19T10:00:00+07:00"
         },
         {
           "geocode": "710204",
@@ -9280,8 +11518,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ที่ทำการอุทยานแห่งชาติไทรโยค",
           "latitude": 14.4545,
           "longitude": 98.84806,
-          "sum_rainfall_mm": 15.600000000000001,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 13.8,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "710204",
@@ -9294,7 +11532,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 14.527559,
           "longitude": 98.66175,
           "sum_rainfall_mm": 7.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "710204",
@@ -9306,8 +11544,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ลิ่นถิ่น",
           "latitude": 14.53559,
           "longitude": 98.78764,
-          "sum_rainfall_mm": 7.6000000000000005,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 7.4,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "710207",
@@ -9320,7 +11558,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 14.073463,
           "longitude": 98.991506,
           "sum_rainfall_mm": 22.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "710207",
@@ -9333,7 +11571,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 14.171646,
           "longitude": 98.958187,
           "sum_rainfall_mm": 7.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "710201",
@@ -9346,7 +11584,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 14.09336,
           "longitude": 99.17583,
           "sum_rainfall_mm": 65.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "observed_at": "2026-09-19T10:00:00+07:00"
         },
         {
           "geocode": "710201",
@@ -9358,8 +11596,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ไทรโยค",
           "latitude": 14.11265,
           "longitude": 99.14635,
-          "sum_rainfall_mm": 88.2,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 88.19999999999999,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "710205",
@@ -9372,7 +11610,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 14.266877,
           "longitude": 98.77193,
           "sum_rainfall_mm": 15.2,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "710206",
@@ -9385,7 +11623,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 14.035485,
           "longitude": 99.1185,
           "sum_rainfall_mm": 68.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "710206",
@@ -9397,8 +11635,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ศรีมงคล",
           "latitude": 14.02271,
           "longitude": 99.19147,
-          "sum_rainfall_mm": 133.79999999999998,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 133.8,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "711203",
@@ -9411,7 +11649,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 14.740015,
           "longitude": 99.330612,
           "sum_rainfall_mm": 135.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "711201",
@@ -9423,8 +11661,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดหนองไม้เอื้อย",
           "latitude": 14.547573,
           "longitude": 99.462599,
-          "sum_rainfall_mm": 79.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 85.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "711201",
+          "tambon": "ต.หนองปรือ",
+          "amphoe": "อ.หนองปรือ",
+          "province": "จ.กาญจนบุรี",
+          "region_id": "5",
+          "region_name": "ภาคตะวันตก",
+          "station": "บ้านโป่งช้าง",
+          "latitude": 14.659865,
+          "longitude": 99.372097,
+          "sum_rainfall_mm": 52.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "711201",
@@ -9437,20 +11688,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 14.715639,
           "longitude": 99.430631,
           "sum_rainfall_mm": 31.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "711201",
-          "tambon": "ต.หนองปรือ",
-          "amphoe": "อ.หนองปรือ",
-          "province": "จ.กาญจนบุรี",
-          "region_id": "5",
-          "region_name": "ภาคตะวันตก",
-          "station": "บ้านโป่งช้าง",
-          "latitude": 14.659865,
-          "longitude": 99.372097,
-          "sum_rainfall_mm": 52.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "711201",
@@ -9463,20 +11701,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 14.609306,
           "longitude": 99.457694,
           "sum_rainfall_mm": 16.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
-        },
-        {
-          "geocode": "760801",
-          "tambon": "ต.แก่งกระจาน",
-          "amphoe": "อ.แก่งกระจาน",
-          "province": "จ.เพชรบุรี",
-          "region_id": "5",
-          "region_name": "ภาคตะวันตก",
-          "station": "เขื่อนแก่งกระจาน (ท้ายน้ำ)",
-          "latitude": 12.909761,
-          "longitude": 99.641615,
-          "sum_rainfall_mm": 81.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T10:00:00+07:00"
         },
         {
           "geocode": "760801",
@@ -9489,7 +11714,20 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 12.914213,
           "longitude": 99.627686,
           "sum_rainfall_mm": 52.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "760801",
+          "tambon": "ต.แก่งกระจาน",
+          "amphoe": "อ.แก่งกระจาน",
+          "province": "จ.เพชรบุรี",
+          "region_id": "5",
+          "region_name": "ภาคตะวันตก",
+          "station": "เขื่อนแก่งกระจาน (ท้ายน้ำ)",
+          "latitude": 12.909761,
+          "longitude": 99.641615,
+          "sum_rainfall_mm": 81.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "760801",
@@ -9502,20 +11740,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 12.948548,
           "longitude": 99.669796,
           "sum_rainfall_mm": 21.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "760801",
-          "tambon": "ต.แก่งกระจาน",
-          "amphoe": "อ.แก่งกระจาน",
-          "province": "จ.เพชรบุรี",
-          "region_id": "5",
-          "region_name": "ภาคตะวันตก",
-          "station": "บ้านแม่คะเมย",
-          "latitude": 12.999495,
-          "longitude": 99.586067,
-          "sum_rainfall_mm": 30.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "760801",
@@ -9528,7 +11753,20 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 12.983723,
           "longitude": 99.640643,
           "sum_rainfall_mm": 12.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "760801",
+          "tambon": "ต.แก่งกระจาน",
+          "amphoe": "อ.แก่งกระจาน",
+          "province": "จ.เพชรบุรี",
+          "region_id": "5",
+          "region_name": "ภาคตะวันตก",
+          "station": "บ้านแม่คะเมย",
+          "latitude": 12.999495,
+          "longitude": 99.586067,
+          "sum_rainfall_mm": 30.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "760801",
@@ -9540,8 +11778,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดคะเมยกาญจนผลาราม",
           "latitude": 13.00169,
           "longitude": 99.5863,
-          "sum_rainfall_mm": 26.400000000000002,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 26.4,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "760804",
@@ -9554,20 +11792,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 12.584,
           "longitude": 99.5344,
           "sum_rainfall_mm": 6.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "760804",
-          "tambon": "ต.ป่าเด็ง",
-          "amphoe": "อ.แก่งกระจาน",
-          "province": "จ.เพชรบุรี",
-          "region_id": "5",
-          "region_name": "ภาคตะวันตก",
-          "station": "บ้านปางไม้",
-          "latitude": 12.66131,
-          "longitude": 99.540425,
-          "sum_rainfall_mm": 39.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "760804",
@@ -9580,7 +11805,20 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 12.61253,
           "longitude": 99.531717,
           "sum_rainfall_mm": 9.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "760804",
+          "tambon": "ต.ป่าเด็ง",
+          "amphoe": "อ.แก่งกระจาน",
+          "province": "จ.เพชรบุรี",
+          "region_id": "5",
+          "region_name": "ภาคตะวันตก",
+          "station": "บ้านปางไม้",
+          "latitude": 12.66131,
+          "longitude": 99.540425,
+          "sum_rainfall_mm": 38.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "760804",
@@ -9592,8 +11830,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ปราณบุรี",
           "latitude": 12.611995,
           "longitude": 99.54675,
-          "sum_rainfall_mm": 20.999999999999996,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 20.8,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "760804",
@@ -9605,8 +11843,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "รร.ตชด. นเรศวรบ้านห้วยโสก",
           "latitude": 12.66014,
           "longitude": 99.53867,
-          "sum_rainfall_mm": 51.400000000000006,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 51.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "760805",
@@ -9619,7 +11857,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 13.005179,
           "longitude": 99.74277,
           "sum_rainfall_mm": 18.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "760805",
@@ -9632,7 +11870,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 13.00646,
           "longitude": 99.7397,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "760803",
@@ -9645,7 +11883,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 12.92212,
           "longitude": 99.81754,
           "sum_rainfall_mm": 1.4,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "760802",
@@ -9658,7 +11896,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 12.87273,
           "longitude": 99.6842,
           "sum_rainfall_mm": 104.2,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "760806",
@@ -9671,20 +11909,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 12.760391,
           "longitude": 99.61231,
           "sum_rainfall_mm": 47.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "760806",
-          "tambon": "ต.ห้วยแม่เพรียง",
-          "amphoe": "อ.แก่งกระจาน",
-          "province": "จ.เพชรบุรี",
-          "region_id": "5",
-          "region_name": "ภาคตะวันตก",
-          "station": "บ้านพุไทร",
-          "latitude": 12.857866,
-          "longitude": 99.552015,
-          "sum_rainfall_mm": 32.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T09:00:00+07:00"
         },
         {
           "geocode": "760806",
@@ -9697,7 +11922,20 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 12.784578,
           "longitude": 99.568753,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "760806",
+          "tambon": "ต.ห้วยแม่เพรียง",
+          "amphoe": "อ.แก่งกระจาน",
+          "province": "จ.เพชรบุรี",
+          "region_id": "5",
+          "region_name": "ภาคตะวันตก",
+          "station": "บ้านพุไทร",
+          "latitude": 12.857866,
+          "longitude": 99.552015,
+          "sum_rainfall_mm": 32.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "760806",
@@ -9709,21 +11947,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติแก่งกระจาน 10",
           "latitude": 12.97823,
           "longitude": 99.37312,
-          "sum_rainfall_mm": 73.19999999999999,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "760511",
-          "tambon": "ต.กลัดหลวง",
-          "amphoe": "อ.ท่ายาง",
-          "province": "จ.เพชรบุรี",
-          "region_id": "5",
-          "region_name": "ภาคตะวันตก",
-          "station": "ท่ายาง",
-          "latitude": 12.81345,
-          "longitude": 99.79404,
-          "sum_rainfall_mm": 5.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 72.80000000000001,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "760511",
@@ -9736,7 +11961,20 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 12.759098,
           "longitude": 99.61465,
           "sum_rainfall_mm": 33.2,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "760511",
+          "tambon": "ต.กลัดหลวง",
+          "amphoe": "อ.ท่ายาง",
+          "province": "จ.เพชรบุรี",
+          "region_id": "5",
+          "region_name": "ภาคตะวันตก",
+          "station": "ท่ายาง",
+          "latitude": 12.81345,
+          "longitude": 99.79404,
+          "sum_rainfall_mm": 5.199999999999999,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "760513",
@@ -9749,20 +11987,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 12.661321,
           "longitude": 99.65458,
           "sum_rainfall_mm": 157.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "760513",
-          "tambon": "ต.เขากระปุก",
-          "amphoe": "อ.ท่ายาง",
-          "province": "จ.เพชรบุรี",
-          "region_id": "5",
-          "region_name": "ภาคตะวันตก",
-          "station": "โรงเรียนบ้านเขาอ่างแก้ว",
-          "latitude": 12.668859,
-          "longitude": 99.65604,
-          "sum_rainfall_mm": 142.4,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "760513",
@@ -9775,7 +12000,20 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 12.71212,
           "longitude": 99.7317,
           "sum_rainfall_mm": 73.2,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "760513",
+          "tambon": "ต.เขากระปุก",
+          "amphoe": "อ.ท่ายาง",
+          "province": "จ.เพชรบุรี",
+          "region_id": "5",
+          "region_name": "ภาคตะวันตก",
+          "station": "โรงเรียนบ้านเขาอ่างแก้ว",
+          "latitude": 12.668859,
+          "longitude": 99.65604,
+          "sum_rainfall_mm": 142.4,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "760506",
@@ -9788,7 +12026,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 12.804497,
           "longitude": 99.797363,
           "sum_rainfall_mm": 6.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "760501",
@@ -9801,7 +12039,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 12.96333,
           "longitude": 99.89841,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "760507",
@@ -9814,7 +12052,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 12.922013,
           "longitude": 99.817665,
           "sum_rainfall_mm": 1.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "810301",
@@ -9826,21 +12064,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านเจ๊ะหลี",
           "latitude": 7.557419,
           "longitude": 99.071713,
-          "sum_rainfall_mm": 83.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "810305",
-          "tambon": "ต.ศาลาด่าน",
-          "amphoe": "อ.เกาะลันตา",
-          "province": "จ.กระบี่",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "บ้านทุ่งหยีเพ็ง",
-          "latitude": 7.586185,
-          "longitude": 99.069234,
-          "sum_rainfall_mm": 94.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 86.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "810305",
@@ -9852,8 +12077,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านโล๊ะดุหยง",
           "latitude": 7.633624,
           "longitude": 99.046947,
-          "sum_rainfall_mm": 166.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "sum_rainfall_mm": 163.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "810305",
+          "tambon": "ต.ศาลาด่าน",
+          "amphoe": "อ.เกาะลันตา",
+          "province": "จ.กระบี่",
+          "region_id": "6",
+          "region_name": "ภาคใต้",
+          "station": "บ้านทุ่งหยีเพ็ง",
+          "latitude": 7.586185,
+          "longitude": 99.069234,
+          "sum_rainfall_mm": 99.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "810103",
@@ -9866,20 +12104,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 8.186337,
           "longitude": 98.958256,
           "sum_rainfall_mm": 54.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "810105",
-          "tambon": "ต.เขาคราม",
-          "amphoe": "อ.เมืองกระบี่",
-          "province": "จ.กระบี่",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "บ้านหนองจิก",
-          "latitude": 8.218715,
-          "longitude": 98.794988,
-          "sum_rainfall_mm": 168.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "810105",
@@ -9891,8 +12116,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านเขาขาว",
           "latitude": 8.270661,
           "longitude": 98.830112,
-          "sum_rainfall_mm": 110.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 107.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "810105",
+          "tambon": "ต.เขาคราม",
+          "amphoe": "อ.เมืองกระบี่",
+          "province": "จ.กระบี่",
+          "region_id": "6",
+          "region_name": "ภาคใต้",
+          "station": "บ้านหนองจิก",
+          "latitude": 8.218715,
+          "longitude": 98.794988,
+          "sum_rainfall_mm": 168.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "810111",
@@ -9905,20 +12143,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 8.169816,
           "longitude": 98.889971,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "810111",
-          "tambon": "ต.ทับปริก",
-          "amphoe": "อ.เมืองกระบี่",
-          "province": "จ.กระบี่",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "บ้านทุ่งเจริญ",
-          "latitude": 8.18756,
-          "longitude": 98.879272,
-          "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "810111",
@@ -9931,7 +12156,20 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 8.240838,
           "longitude": 98.913578,
           "sum_rainfall_mm": 122.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "810111",
+          "tambon": "ต.ทับปริก",
+          "amphoe": "อ.เมืองกระบี่",
+          "province": "จ.กระบี่",
+          "region_id": "6",
+          "region_name": "ภาคใต้",
+          "station": "บ้านทุ่งเจริญ",
+          "latitude": 8.18756,
+          "longitude": 98.879272,
+          "sum_rainfall_mm": 0.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "810111",
@@ -9943,8 +12181,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ที่ทำการอุทยานแห่งชาติ.เขาพนมเบญจา",
           "latitude": 8.240531,
           "longitude": 98.91488,
-          "sum_rainfall_mm": 128.8,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 128.79999999999998,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "810111",
@@ -9957,7 +12195,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 8.187541,
           "longitude": 98.87916,
           "sum_rainfall_mm": 104.80000000000001,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "810150",
@@ -9970,7 +12208,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 8.112408,
           "longitude": 98.90422,
           "sum_rainfall_mm": 45.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "810150",
@@ -9983,7 +12221,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 8.1105,
           "longitude": 98.908151,
           "sum_rainfall_mm": 136.5,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "810101",
@@ -9996,7 +12234,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 8.109219,
           "longitude": 98.905525,
           "sum_rainfall_mm": 98.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "810116",
@@ -10009,7 +12247,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 8.050455,
           "longitude": 98.80316,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "860603",
@@ -10021,8 +12259,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านคลองนูน",
           "latitude": 9.948807,
           "longitude": 98.902894,
-          "sum_rainfall_mm": 15.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 12.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "860602",
@@ -10034,8 +12272,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านทับขอน",
           "latitude": 9.774972,
           "longitude": 98.6933,
-          "sum_rainfall_mm": 97.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 88.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "860602",
@@ -10047,8 +12285,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านคลองเรือ",
           "latitude": 9.688383,
           "longitude": 98.669213,
-          "sum_rainfall_mm": 183.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 183.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "860602",
@@ -10061,20 +12299,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 9.751751,
           "longitude": 98.646385,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "860604",
-          "tambon": "ต.พระรักษ์",
-          "amphoe": "อ.พะโต๊ะ",
-          "province": "จ.ชุมพร",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "บ้านจำปุย",
-          "latitude": 9.849725,
-          "longitude": 98.916672,
-          "sum_rainfall_mm": 53.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "860604",
@@ -10086,47 +12311,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านคลองราง",
           "latitude": 9.897285,
           "longitude": 98.863869,
-          "sum_rainfall_mm": 95.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 80.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
-          "geocode": "860601",
-          "tambon": "ต.พะโต๊ะ",
+          "geocode": "860604",
+          "tambon": "ต.พระรักษ์",
           "amphoe": "อ.พะโต๊ะ",
           "province": "จ.ชุมพร",
           "region_id": "6",
           "region_name": "ภาคใต้",
-          "station": "บ้านท่าตีน",
-          "latitude": 9.817266,
-          "longitude": 98.791604,
-          "sum_rainfall_mm": 87.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "860601",
-          "tambon": "ต.พะโต๊ะ",
-          "amphoe": "อ.พะโต๊ะ",
-          "province": "จ.ชุมพร",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "บ้านควน",
-          "latitude": 9.787064,
-          "longitude": 98.788012,
-          "sum_rainfall_mm": 63.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "860601",
-          "tambon": "ต.พะโต๊ะ",
-          "amphoe": "อ.พะโต๊ะ",
-          "province": "จ.ชุมพร",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "บ้านในแจะ",
-          "latitude": 9.74543,
-          "longitude": 98.758224,
-          "sum_rainfall_mm": 139.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "station": "บ้านจำปุย",
+          "latitude": 9.849725,
+          "longitude": 98.916672,
+          "sum_rainfall_mm": 46.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "860601",
@@ -10138,8 +12337,47 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านศรีสมุทร",
           "latitude": 9.816444,
           "longitude": 98.825045,
-          "sum_rainfall_mm": 106.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 98.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "860601",
+          "tambon": "ต.พะโต๊ะ",
+          "amphoe": "อ.พะโต๊ะ",
+          "province": "จ.ชุมพร",
+          "region_id": "6",
+          "region_name": "ภาคใต้",
+          "station": "บ้านท่าตีน",
+          "latitude": 9.817266,
+          "longitude": 98.791604,
+          "sum_rainfall_mm": 86.5,
+          "observed_at": "2026-09-19T10:00:00+07:00"
+        },
+        {
+          "geocode": "860601",
+          "tambon": "ต.พะโต๊ะ",
+          "amphoe": "อ.พะโต๊ะ",
+          "province": "จ.ชุมพร",
+          "region_id": "6",
+          "region_name": "ภาคใต้",
+          "station": "บ้านควน",
+          "latitude": 9.787064,
+          "longitude": 98.788012,
+          "sum_rainfall_mm": 62.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "860601",
+          "tambon": "ต.พะโต๊ะ",
+          "amphoe": "อ.พะโต๊ะ",
+          "province": "จ.ชุมพร",
+          "region_id": "6",
+          "region_name": "ภาคใต้",
+          "station": "บ้านในแจะ",
+          "latitude": 9.74543,
+          "longitude": 98.758224,
+          "sum_rainfall_mm": 136.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "860601",
@@ -10151,8 +12389,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานบ้านตรังพัฒนา",
           "latitude": 9.85488,
           "longitude": 98.8401,
-          "sum_rainfall_mm": 98.6,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 92.79999999999998,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "920503",
@@ -10164,8 +12402,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.กะลาเส",
           "latitude": 7.70389,
           "longitude": 99.31807,
-          "sum_rainfall_mm": 168.79999999999998,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 155.8,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "920505",
@@ -10177,8 +12415,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านไทรห้อย",
           "latitude": 7.553843,
           "longitude": 99.494829,
-          "sum_rainfall_mm": 99.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 98.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "920501",
@@ -10191,7 +12429,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 7.571998,
           "longitude": 99.331805,
           "sum_rainfall_mm": 89.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "920504",
@@ -10204,7 +12442,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 7.542418,
           "longitude": 99.397999,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820301",
@@ -10216,21 +12454,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านบางกุ่ม",
           "latitude": 8.665885,
           "longitude": 98.453109,
-          "sum_rainfall_mm": 110.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "820302",
-          "tambon": "ต.ท่านา",
-          "amphoe": "อ.กะปง",
-          "province": "จ.พังงา",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "บ้านปากพู่",
-          "latitude": 8.716267,
-          "longitude": 98.424028,
-          "sum_rainfall_mm": 218.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 106.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820302",
@@ -10242,8 +12467,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านฝ่ายท่า",
           "latitude": 8.683702,
           "longitude": 98.409252,
-          "sum_rainfall_mm": 182.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 158.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "820302",
+          "tambon": "ต.ท่านา",
+          "amphoe": "อ.กะปง",
+          "province": "จ.พังงา",
+          "region_id": "6",
+          "region_name": "ภาคใต้",
+          "station": "บ้านปากพู่",
+          "latitude": 8.716267,
+          "longitude": 98.424028,
+          "sum_rainfall_mm": 188.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820302",
@@ -10255,21 +12493,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ศูนย์พัฒนาเด็กเล็ก อบต.ท่านา",
           "latitude": 8.67848,
           "longitude": 98.41658,
-          "sum_rainfall_mm": 208.2,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "820305",
-          "tambon": "ต.รมณีย์",
-          "amphoe": "อ.กะปง",
-          "province": "จ.พังงา",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "บ้านศรีราชา",
-          "latitude": 8.818933,
-          "longitude": 98.440719,
-          "sum_rainfall_mm": 116.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 186.40000000000003,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820305",
@@ -10281,8 +12506,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านท่าหัน",
           "latitude": 8.828992,
           "longitude": 98.492709,
-          "sum_rainfall_mm": 234.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 220.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "820305",
+          "tambon": "ต.รมณีย์",
+          "amphoe": "อ.กะปง",
+          "province": "จ.พังงา",
+          "region_id": "6",
+          "region_name": "ภาคใต้",
+          "station": "บ้านศรีราชา",
+          "latitude": 8.818933,
+          "longitude": 98.440719,
+          "sum_rainfall_mm": 98.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820305",
@@ -10294,8 +12532,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "รร.บ้านท่าหัน",
           "latitude": 8.82912,
           "longitude": 98.49197,
-          "sum_rainfall_mm": 425.2,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 396.8,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820305",
@@ -10307,8 +12545,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์เกาะภูเก็ต-ตะกั่วป่า",
           "latitude": 8.7855,
           "longitude": 98.517,
-          "sum_rainfall_mm": 231.89999999999998,
-          "observed_at": "2026-09-19T01:00:00+07:00"
+          "sum_rainfall_mm": 209.10000000000002,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820303",
@@ -10320,8 +12558,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านสะพานเสือ",
           "latitude": 8.748697,
           "longitude": 98.389237,
-          "sum_rainfall_mm": 264.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 244.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820303",
@@ -10334,7 +12572,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 8.688779,
           "longitude": 98.355359,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820304",
@@ -10346,8 +12584,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านเหล",
           "latitude": 8.771167,
           "longitude": 98.438414,
-          "sum_rainfall_mm": 335.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 297.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820304",
@@ -10359,8 +12597,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านช้างเชื่อ",
           "latitude": 8.749234,
           "longitude": 98.485599,
-          "sum_rainfall_mm": 156.5,
-          "observed_at": "2026-09-18T12:00:00+07:00"
+          "sum_rainfall_mm": 131.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820304",
@@ -10372,8 +12610,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "รร.บ้านช้างเชื่อ",
           "latitude": 8.74471,
           "longitude": 98.48924,
-          "sum_rainfall_mm": 297.4,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 261.6,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "820601",
+          "tambon": "ต.คุระ",
+          "amphoe": "อ.คุระบุรี",
+          "province": "จ.พังงา",
+          "region_id": "6",
+          "region_name": "ภาคใต้",
+          "station": "บ้านหินลาด",
+          "latitude": 9.224829,
+          "longitude": 98.384409,
+          "sum_rainfall_mm": 157.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820601",
@@ -10386,20 +12637,20 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 9.230213,
           "longitude": 98.453567,
           "sum_rainfall_mm": 4.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
-          "geocode": "820601",
-          "tambon": "ต.คุระ",
+          "geocode": "820602",
+          "tambon": "ต.บางวัน",
           "amphoe": "อ.คุระบุรี",
           "province": "จ.พังงา",
           "region_id": "6",
           "region_name": "ภาคใต้",
-          "station": "บ้านหินลาด",
-          "latitude": 9.224829,
-          "longitude": 98.384409,
-          "sum_rainfall_mm": 175.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "station": "บ้านบางติบ",
+          "latitude": 9.089632,
+          "longitude": 98.423816,
+          "sum_rainfall_mm": 119.5,
+          "observed_at": "2026-09-18T13:00:00+07:00"
         },
         {
           "geocode": "820602",
@@ -10412,20 +12663,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 8.973246,
           "longitude": 98.40135,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "820602",
-          "tambon": "ต.บางวัน",
-          "amphoe": "อ.คุระบุรี",
-          "province": "จ.พังงา",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "บ้านบางติบ",
-          "latitude": 9.089632,
-          "longitude": 98.423816,
-          "sum_rainfall_mm": 138.5,
-          "observed_at": "2026-09-18T13:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820605",
@@ -10437,8 +12675,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านทางด่าน",
           "latitude": 9.186204,
           "longitude": 98.425327,
-          "sum_rainfall_mm": 196.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 189.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820605",
@@ -10450,8 +12688,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหัวสวน",
           "latitude": 9.136265,
           "longitude": 98.451955,
-          "sum_rainfall_mm": 245.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 232.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820507",
@@ -10464,7 +12702,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 8.64795,
           "longitude": 98.25976,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820506",
@@ -10476,8 +12714,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านบางอี",
           "latitude": 8.836125,
           "longitude": 98.387642,
-          "sum_rainfall_mm": 180.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 172.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820506",
@@ -10489,8 +12727,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ตลาดเก่าตะกั่วป่า",
           "latitude": 8.829399,
           "longitude": 98.36931,
-          "sum_rainfall_mm": 255.60000000000002,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 246.00000000000006,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820501",
@@ -10503,7 +12741,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 8.868464,
           "longitude": 98.348746,
           "sum_rainfall_mm": 229.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820505",
@@ -10515,8 +12753,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านเหนือ",
           "latitude": 8.775901,
           "longitude": 98.390314,
-          "sum_rainfall_mm": 186.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 172.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "820503",
@@ -10528,8 +12766,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านดอกแดง",
           "latitude": 8.7623,
           "longitude": 98.32074,
-          "sum_rainfall_mm": 326.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 283.5,
+          "observed_at": "2026-09-19T10:00:00+07:00"
         },
         {
           "geocode": "850302",
@@ -10541,8 +12779,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านกงษี",
           "latitude": 9.597371,
           "longitude": 98.604169,
-          "sum_rainfall_mm": 195.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 190.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "850302",
@@ -10554,8 +12792,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านคอกช้าง",
           "latitude": 9.618027,
           "longitude": 98.652284,
-          "sum_rainfall_mm": 0.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 0.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "850302",
@@ -10567,8 +12805,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหินขาว",
           "latitude": 9.644632,
           "longitude": 98.614696,
-          "sum_rainfall_mm": 242.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 220.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "850302",
@@ -10580,8 +12818,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานข้ามคลองกะเปอร์",
           "latitude": 9.590022,
           "longitude": 98.63291,
-          "sum_rainfall_mm": 273.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 262.8,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "850303",
@@ -10593,8 +12831,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านย่านยาว",
           "latitude": 9.577557,
           "longitude": 98.666177,
-          "sum_rainfall_mm": 205.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 209.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "850303",
@@ -10606,8 +12844,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านย่านยาว",
           "latitude": 9.574516,
           "longitude": 98.664959,
-          "sum_rainfall_mm": 94.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 95.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "850304",
+          "tambon": "ต.บ้านนา",
+          "amphoe": "อ.กะเปอร์",
+          "province": "จ.ระนอง",
+          "region_id": "6",
+          "region_name": "ภาคใต้",
+          "station": "บ้านแพรกขวา",
+          "latitude": 9.54677,
+          "longitude": 98.707785,
+          "sum_rainfall_mm": 11.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "850304",
@@ -10620,20 +12871,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 9.568157,
           "longitude": 98.703238,
           "sum_rainfall_mm": 0.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "850304",
-          "tambon": "ต.บ้านนา",
-          "amphoe": "อ.กะเปอร์",
-          "province": "จ.ระนอง",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "บ้านแพรกขวา",
-          "latitude": 9.54677,
-          "longitude": 98.707785,
-          "sum_rainfall_mm": 7.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "850101",
@@ -10645,8 +12883,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เมืองระนอง",
           "latitude": 9.961575,
           "longitude": 98.644485,
-          "sum_rainfall_mm": 146.8,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 140.79999999999998,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "850108",
@@ -10658,8 +12896,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านน้ำตก",
           "latitude": 10.085445,
           "longitude": 98.669169,
-          "sum_rainfall_mm": 146.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 145.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "850108",
@@ -10671,21 +12909,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านทรายแดง",
           "latitude": 10.156317,
           "longitude": 98.697453,
-          "sum_rainfall_mm": 131.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "850106",
-          "tambon": "ต.บางนอน",
-          "amphoe": "อ.เมืองระนอง",
-          "province": "จ.ระนอง",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "บ้านบางนอนใน",
-          "latitude": 10.007695,
-          "longitude": 98.655673,
-          "sum_rainfall_mm": 142.0,
-          "observed_at": "2026-09-19T01:00:00+07:00"
+          "sum_rainfall_mm": 118.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "850106",
@@ -10697,8 +12922,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านบางนอนนอก",
           "latitude": 9.994826,
           "longitude": 98.647922,
-          "sum_rainfall_mm": 151.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 156.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "850106",
+          "tambon": "ต.บางนอน",
+          "amphoe": "อ.เมืองระนอง",
+          "province": "จ.ระนอง",
+          "region_id": "6",
+          "region_name": "ภาคใต้",
+          "station": "บ้านบางนอนใน",
+          "latitude": 10.007695,
+          "longitude": 98.655673,
+          "sum_rainfall_mm": 138.5,
+          "observed_at": "2026-09-19T01:00:00+07:00"
         },
         {
           "geocode": "850106",
@@ -10710,8 +12948,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ กบ.2 (เขาเมืองสูง)",
           "latitude": 10.0237,
           "longitude": 98.66568,
-          "sum_rainfall_mm": 208.8,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 219.8,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "850104",
@@ -10723,8 +12961,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านพรรั้ง",
           "latitude": 9.880111,
           "longitude": 98.626948,
-          "sum_rainfall_mm": 183.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 160.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "850105",
@@ -10736,8 +12974,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านเขานางหงษ์",
           "latitude": 9.978944,
           "longitude": 98.599994,
-          "sum_rainfall_mm": 163.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 161.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "850105",
@@ -10749,8 +12987,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.ปากน้ำ",
           "latitude": 9.94654,
           "longitude": 98.5952,
-          "sum_rainfall_mm": 283.8,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 268.8,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "850102",
@@ -10763,7 +13001,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 9.638162,
           "longitude": 98.551851,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "850102",
@@ -10775,8 +13013,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านห้วยน้ำใส",
           "latitude": 9.727078,
           "longitude": 98.602777,
-          "sum_rainfall_mm": 216.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 211.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "850107",
@@ -10789,7 +13027,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 9.95134,
           "longitude": 98.693319,
           "sum_rainfall_mm": 17.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "850107",
@@ -10802,7 +13040,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 9.959389,
           "longitude": 98.690417,
           "sum_rainfall_mm": 1.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "850207",
@@ -10814,8 +13052,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านเนินทอง",
           "latitude": 10.028915,
           "longitude": 98.874756,
-          "sum_rainfall_mm": 71.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 72.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "850205",
@@ -10827,8 +13065,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านทุ่งตาพล",
           "latitude": 10.174842,
           "longitude": 98.79311,
-          "sum_rainfall_mm": 117.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 108.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "850204",
@@ -10853,8 +13091,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ละอุ่น",
           "latitude": 10.08942,
           "longitude": 98.7222,
-          "sum_rainfall_mm": 182.8,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 176.2,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "850201",
@@ -10866,8 +13104,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านด่าน",
           "latitude": 10.115174,
           "longitude": 98.75024,
-          "sum_rainfall_mm": 49.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 48.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "850202",
@@ -10879,60 +13117,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านบางสังโต้ง",
           "latitude": 10.085084,
           "longitude": 98.790694,
+          "sum_rainfall_mm": 9.0,
+          "observed_at": "2026-09-19T10:00:00+07:00"
+        },
+        {
+          "geocode": "850202",
+          "tambon": "ต.ละอุ่นเหนือ",
+          "amphoe": "อ.ละอุ่น",
+          "province": "จ.ระนอง",
+          "region_id": "6",
+          "region_name": "ภาคใต้",
+          "station": "บ้านปากแพรก",
+          "latitude": 10.083471,
+          "longitude": 98.801657,
           "sum_rainfall_mm": 5.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "850502",
-          "tambon": "ต.กำพวน",
-          "amphoe": "อ.สุขสำราญ",
-          "province": "จ.ระนอง",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "บ้านเหนือ",
-          "latitude": 9.372712,
-          "longitude": 98.414887,
-          "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "850501",
-          "tambon": "ต.นาคา",
-          "amphoe": "อ.สุขสำราญ",
-          "province": "จ.ระนอง",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "บ้านนาพรุ",
-          "latitude": 9.431411,
-          "longitude": 98.466908,
-          "sum_rainfall_mm": 164.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "840904",
-          "tambon": "ต.เขาพัง",
-          "amphoe": "อ.บ้านตาขุน",
-          "province": "จ.สุราษฎร์ธานี",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "หน่วยพิทักษ์ป่าเขาพัง จ.สุราษฎร์ธานี",
-          "latitude": 9.023022,
-          "longitude": 98.707218,
-          "sum_rainfall_mm": 216.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
-        },
-        {
-          "geocode": "840904",
-          "tambon": "ต.เขาพัง",
-          "amphoe": "อ.บ้านตาขุน",
-          "province": "จ.สุราษฎร์ธานี",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "หน่วยพิทักษ์ป่าคลองมอญ จ.สุราษฎร์ธานี",
-          "latitude": 9.080287,
-          "longitude": 98.632318,
-          "sum_rainfall_mm": 252.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "840904",
@@ -10957,8 +13156,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานคลองแสง อ.บ้านตาขุน",
           "latitude": 8.962559,
           "longitude": 98.814738,
-          "sum_rainfall_mm": 27.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "sum_rainfall_mm": 24.0,
+          "observed_at": "2026-09-19T10:00:00+07:00"
         },
         {
           "geocode": "840904",
@@ -10967,11 +13166,24 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.สุราษฎร์ธานี",
           "region_id": "6",
           "region_name": "ภาคใต้",
-          "station": "จุดชมวิวเขา ต. เต่า อุทยานแห่งชาติเขาสก",
-          "latitude": 8.941284,
-          "longitude": 98.79402,
-          "sum_rainfall_mm": 104.60000000000001,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "station": "หน่วยพิทักษ์ป่าคลองมอญ จ.สุราษฎร์ธานี",
+          "latitude": 9.080287,
+          "longitude": 98.632318,
+          "sum_rainfall_mm": 239.0,
+          "observed_at": "2026-09-19T10:00:00+07:00"
+        },
+        {
+          "geocode": "840904",
+          "tambon": "ต.เขาพัง",
+          "amphoe": "อ.บ้านตาขุน",
+          "province": "จ.สุราษฎร์ธานี",
+          "region_id": "6",
+          "region_name": "ภาคใต้",
+          "station": "หน่วยพิทักษ์ป่าเขาพัง จ.สุราษฎร์ธานี",
+          "latitude": 9.023022,
+          "longitude": 98.707218,
+          "sum_rainfall_mm": 196.0,
+          "observed_at": "2026-09-19T10:00:00+07:00"
         },
         {
           "geocode": "840904",
@@ -10983,8 +13195,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์ป่าเขาชาลี",
           "latitude": 9.227045,
           "longitude": 98.52561,
-          "sum_rainfall_mm": 351.59999999999997,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 344.19999999999993,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "840904",
+          "tambon": "ต.เขาพัง",
+          "amphoe": "อ.บ้านตาขุน",
+          "province": "จ.สุราษฎร์ธานี",
+          "region_id": "6",
+          "region_name": "ภาคใต้",
+          "station": "จุดชมวิวเขา ต. เต่า อุทยานแห่งชาติเขาสก",
+          "latitude": 8.941284,
+          "longitude": 98.79402,
+          "sum_rainfall_mm": 82.8,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "840901",
@@ -10996,8 +13221,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดตาขุน (X.38A)",
           "latitude": 8.915404,
           "longitude": 98.886323,
-          "sum_rainfall_mm": 75.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 70.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "840901",
@@ -11009,8 +13234,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านสวนทุเรียน",
           "latitude": 8.962793,
           "longitude": 98.904826,
-          "sum_rainfall_mm": 26.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 18.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "840901",
@@ -11022,8 +13247,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านบางสาว",
           "latitude": 8.924759,
           "longitude": 98.909439,
-          "sum_rainfall_mm": 69.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 66.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "840901",
@@ -11035,8 +13260,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานพุมดวง (วัดตาขุน) อ.บ้านตาขุน",
           "latitude": 8.915783,
           "longitude": 98.885678,
-          "sum_rainfall_mm": 76.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "sum_rainfall_mm": 73.0,
+          "observed_at": "2026-09-19T10:00:00+07:00"
         },
         {
           "geocode": "840902",
@@ -11048,21 +13273,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สถานีบ้านบางน้ำเย็น",
           "latitude": 8.924333,
           "longitude": 98.840194,
-          "sum_rainfall_mm": 81.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "840902",
-          "tambon": "ต.พะแสง",
-          "amphoe": "อ.บ้านตาขุน",
-          "province": "จ.สุราษฎร์ธานี",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "สะพานทางเข้าชุมชนบ้านปากซวด",
-          "latitude": 8.889655,
-          "longitude": 98.82028,
-          "sum_rainfall_mm": 105.19999999999999,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 72.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "840902",
@@ -11074,8 +13286,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "พิพิธภัณฑ์ธรรมชาติจัดการน้ำชุมชนฯ บ้านปากซวด",
           "latitude": 8.900032,
           "longitude": 98.80356,
-          "sum_rainfall_mm": 50.60000000000001,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 39.00000000000001,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "840902",
+          "tambon": "ต.พะแสง",
+          "amphoe": "อ.บ้านตาขุน",
+          "province": "จ.สุราษฎร์ธานี",
+          "region_id": "6",
+          "region_name": "ภาคใต้",
+          "station": "สะพานทางเข้าชุมชนบ้านปากซวด",
+          "latitude": 8.889655,
+          "longitude": 98.82028,
+          "sum_rainfall_mm": 89.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "841006",
@@ -11087,21 +13312,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านควนเขียว",
           "latitude": 8.671112,
           "longitude": 98.871423,
-          "sum_rainfall_mm": 52.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "841006",
-          "tambon": "ต.คลองชะอุ่น",
-          "amphoe": "อ.พนม",
-          "province": "จ.สุราษฎร์ธานี",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "บ้านบางเตย",
-          "latitude": 8.730431,
-          "longitude": 98.825382,
-          "sum_rainfall_mm": 50.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 53.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "841006",
@@ -11113,8 +13325,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านบางบ้าน",
           "latitude": 8.693174,
           "longitude": 98.790237,
-          "sum_rainfall_mm": 73.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 75.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "841006",
@@ -11123,11 +13335,11 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.สุราษฎร์ธานี",
           "region_id": "6",
           "region_name": "ภาคใต้",
-          "station": "ชุมชนบ้านทับคริสต์",
-          "latitude": 8.75029,
-          "longitude": 98.80189,
-          "sum_rainfall_mm": 102.80000000000001,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "station": "บ้านบางเตย",
+          "latitude": 8.730431,
+          "longitude": 98.825382,
+          "sum_rainfall_mm": 49.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "841006",
@@ -11139,8 +13351,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านทับคริสต์",
           "latitude": 8.725811,
           "longitude": 98.821014,
-          "sum_rainfall_mm": 77.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 77.19999999999999,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "841006",
+          "tambon": "ต.คลองชะอุ่น",
+          "amphoe": "อ.พนม",
+          "province": "จ.สุราษฎร์ธานี",
+          "region_id": "6",
+          "region_name": "ภาคใต้",
+          "station": "ชุมชนบ้านทับคริสต์",
+          "latitude": 8.75029,
+          "longitude": 98.80189,
+          "sum_rainfall_mm": 102.4,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "841003",
@@ -11152,8 +13377,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สถานีวัดสองพี่น้อง",
           "latitude": 8.847972,
           "longitude": 98.732583,
-          "sum_rainfall_mm": 130.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 113.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "841003",
@@ -11165,8 +13390,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหญ้าปล้อง",
           "latitude": 8.902617,
           "longitude": 98.572174,
-          "sum_rainfall_mm": 81.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 82.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "841003",
@@ -11178,7 +13403,7 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านคลองพนม อ.พนม ",
           "latitude": 8.793062,
           "longitude": 98.703056,
-          "sum_rainfall_mm": 82.0,
+          "sum_rainfall_mm": 79.0,
           "observed_at": "2026-09-19T03:00:00+07:00"
         },
         {
@@ -11191,8 +13416,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานคลองศก อ.พนม",
           "latitude": 8.881969,
           "longitude": 98.678887,
-          "sum_rainfall_mm": 182.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
+          "sum_rainfall_mm": 169.0,
+          "observed_at": "2026-09-19T10:00:00+07:00"
         },
         {
           "geocode": "841003",
@@ -11204,21 +13429,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.คลองศก",
           "latitude": 8.89049,
           "longitude": 98.66134,
-          "sum_rainfall_mm": 232.39999999999998,
-          "observed_at": "2026-09-19T07:00:00+07:00"
-        },
-        {
-          "geocode": "841001",
-          "tambon": "ต.พนม",
-          "amphoe": "อ.พนม",
-          "province": "จ.สุราษฎร์ธานี",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "บ้านเชี่ยวหมอน",
-          "latitude": 8.837498,
-          "longitude": 98.773987,
-          "sum_rainfall_mm": 83.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 214.2,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "841001",
@@ -11230,8 +13442,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านบางสาน",
           "latitude": 8.789444,
           "longitude": 98.795575,
-          "sum_rainfall_mm": 35.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 32.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "841001",
+          "tambon": "ต.พนม",
+          "amphoe": "อ.พนม",
+          "province": "จ.สุราษฎร์ธานี",
+          "region_id": "6",
+          "region_name": "ภาคใต้",
+          "station": "บ้านเชี่ยวหมอน",
+          "latitude": 8.837498,
+          "longitude": 98.773987,
+          "sum_rainfall_mm": 75.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         },
         {
           "geocode": "841001",
@@ -11243,21 +13468,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานเชี่ยวไทร อ.พนม",
           "latitude": 8.822734,
           "longitude": 98.832075,
-          "sum_rainfall_mm": 79.0,
-          "observed_at": "2026-09-19T06:00:00+07:00"
-        },
-        {
-          "geocode": "841004",
-          "tambon": "ต.พลูเถื่อน",
-          "amphoe": "อ.พนม",
-          "province": "จ.สุราษฎร์ธานี",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "บ้านเบญจา",
-          "latitude": 8.764658,
-          "longitude": 98.760921,
-          "sum_rainfall_mm": 95.5,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 75.0,
+          "observed_at": "2026-09-19T10:00:00+07:00"
         },
         {
           "geocode": "841004",
@@ -11269,11 +13481,24 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านบางลึก",
           "latitude": 8.658503,
           "longitude": 98.695234,
-          "sum_rainfall_mm": 77.0,
-          "observed_at": "2026-09-19T07:00:00+07:00"
+          "sum_rainfall_mm": 78.5,
+          "observed_at": "2026-09-19T11:00:00+07:00"
+        },
+        {
+          "geocode": "841004",
+          "tambon": "ต.พลูเถื่อน",
+          "amphoe": "อ.พนม",
+          "province": "จ.สุราษฎร์ธานี",
+          "region_id": "6",
+          "region_name": "ภาคใต้",
+          "station": "บ้านเบญจา",
+          "latitude": 8.764658,
+          "longitude": 98.760921,
+          "sum_rainfall_mm": 94.0,
+          "observed_at": "2026-09-19T11:00:00+07:00"
         }
       ],
-      "risk_map": "https://api.hii.or.th/v2/proxy-image/3days_riskmap_18_09_2026.png?1789780027",
+      "risk_map": "https://api.hii.or.th/v2/proxy-image/3days_riskmap_19_09_2026.png?1789794452",
       "source_url": "https://api.hii.or.th/v2/4UQaYnf0Bx4fXPYyCdDRbqHyXH9Ixvd2nVUjaN1cLBY=/warning/flashflood-48h"
     }
   }
