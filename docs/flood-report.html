@@ -13087,5 +13087,98 @@ html body main.container #warning #estateWaterTablePair
 }
 </style>
 
+
+<style id="flood-report-unified-table-colors-20260922-v2">
+/* One table palette for overview and export pages. */
+html body main.container :is(#warning,#infographic)
+ :is(#estateWaterTablePair,#overviewFirstPageTables,.export-table-block)
+ table thead th{
+ background:#075f8a!important;
+ color:#fff!important;
+ border-color:#17212b!important;
+ font-weight:600!important;
+ text-align:center!important;
+}
+html body main.container :is(#warning,#infographic)
+ :is(#estateWaterTablePair,#overviewFirstPageTables,.export-table-block)
+ table tbody td{
+ border-color:#17212b!important;
+}
+html body main.container :is(#warning,#infographic) td.table-state-red,
+html body main.container :is(#warning,#infographic) td.table-state-red>*{
+ background:#f20f3b!important;
+ color:#fff!important;
+}
+html body main.container :is(#warning,#infographic) td.table-state-green,
+html body main.container :is(#warning,#infographic) td.table-state-green>*{
+ background:#568f0b!important;
+ color:#fff!important;
+}
+html body main.container :is(#warning,#infographic) td.table-state-blue,
+html body main.container :is(#warning,#infographic) td.table-state-blue>*{
+ background:#3d93d1!important;
+ color:#fff!important;
+}
+html body main.container :is(#warning,#infographic)
+ td:is(.table-state-red,.table-state-green,.table-state-blue){
+ padding:0!important;
+ text-align:center!important;
+ font-weight:600!important;
+}
+html body main.container :is(#warning,#infographic)
+ td:is(.table-state-red,.table-state-green,.table-state-blue)>*{
+ display:flex!important;
+ width:100%!important;
+ height:100%!important;
+ min-height:42px!important;
+ margin:0!important;
+ padding:8px 5px!important;
+ border:0!important;
+ border-radius:0!important;
+ align-items:center!important;
+ justify-content:center!important;
+}
+</style>
+<script id="flood-report-unified-table-colors-20260922-v2-script">
+(function(){
+ "use strict";
+ var busy=false;
+ function stateClass(text){
+  text=String(text||"").replace(/\s+/g," ").trim();
+  if(/เพิ่ม|วิกฤต|ล้น|สูงมาก/.test(text))return "table-state-red";
+  if(/ลด|ปกติ/.test(text))return "table-state-green";
+  if(/คงที่|ทรงตัว|เฝ้าระวัง|เตือน/.test(text))return "table-state-blue";
+  return "";
+ }
+ function paintCell(cell){
+  if(!cell)return;
+  var cls=stateClass(cell.textContent);
+  cell.classList.remove("table-state-red","table-state-green","table-state-blue");
+  if(cls)cell.classList.add(cls);
+ }
+ function apply(){
+  if(busy)return;busy=true;
+  document.querySelectorAll("#warning #estateRanks tr").forEach(function(row){paintCell(row.cells[5])});
+  document.querySelectorAll("#warning #stations tr").forEach(function(row){paintCell(row.cells[2])});
+  document.querySelectorAll("#warning #ridStationRows tr").forEach(function(row){paintCell(row.cells[6])});
+  document.querySelectorAll("#infographic #exportEstateRows tr").forEach(function(row){paintCell(row.cells[5])});
+  document.querySelectorAll("#infographic #exportWaterRows tr").forEach(function(row){paintCell(row.cells[2])});
+  document.querySelectorAll("#infographic #exportRidStationRows tr").forEach(function(row){paintCell(row.cells[6])});
+  busy=false;
+ }
+ function start(){
+  apply();
+  var root=document.querySelector("main.container");
+  if(root){
+   var observer=new MutationObserver(function(){clearTimeout(observer.t);observer.t=setTimeout(apply,30)});
+   observer.observe(root,{childList:true,subtree:true,characterData:true});
+  }
+  document.addEventListener("click",function(event){if(event.target.closest("#globalFloodHeader,[data-view]"))setTimeout(apply,80)});
+  [100,400,900,1800,3500,6000,10000].forEach(function(ms){setTimeout(apply,ms)});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>
+
 </body>
 </html>
