@@ -14,7 +14,7 @@
   <script type="module" src="https://js.arcgis.com/5.1/map-components/"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
   <script src="data/thaiwater_latest.js?v=20260911-1"></script>
-  <script src="flood-live-data.js?v=20260911-1" defer></script>
+  <script src="flood-live-data.js?v=20260922-3" defer></script>
   <script src="data/thaiwater-map-meta.js" defer></script>
   <script src="flood-export.js?v=20260917-1" defer></script>
   <style>
@@ -13039,6 +13039,50 @@ html body main.container #warning #overviewFirstPageTables .rid-water-table :is(
 html body main.container #warning #overviewFirstPageTables .rid-water-table td.rid-trend-cell{
  padding:0!important;
  color:#fff!important;
+ font-weight:600!important;
+}
+</style>
+
+
+<style id="flood-report-two-table-status-colors-20260922">
+/* Final three-color lock for the two overview monitoring tables. */
+html body main.container #warning #estateWaterTablePair
+ :is(.estate-watch-table,.station-watch-table) tbody td:has(>.water-status-cell){
+ padding:0!important;
+ color:#fff!important;
+}
+html body main.container #warning #estateWaterTablePair
+ :is(.estate-watch-table,.station-watch-table) tbody td:has(>.water-status-cell.critical),
+html body main.container #warning #estateWaterTablePair
+ :is(.estate-watch-table,.station-watch-table) .water-status-cell.critical{
+ background:#f20f3b!important;
+ color:#fff!important;
+}
+html body main.container #warning #estateWaterTablePair
+ :is(.estate-watch-table,.station-watch-table) tbody td:has(>.water-status-cell.normal),
+html body main.container #warning #estateWaterTablePair
+ :is(.estate-watch-table,.station-watch-table) .water-status-cell.normal{
+ background:#568f0b!important;
+ color:#fff!important;
+}
+html body main.container #warning #estateWaterTablePair
+ :is(.estate-watch-table,.station-watch-table) tbody td:has(>.water-status-cell.warning),
+html body main.container #warning #estateWaterTablePair
+ :is(.estate-watch-table,.station-watch-table) .water-status-cell.warning{
+ background:#3d93d1!important;
+ color:#fff!important;
+}
+html body main.container #warning #estateWaterTablePair
+ :is(.estate-watch-table,.station-watch-table) .water-status-cell{
+ display:flex!important;
+ width:100%!important;
+ height:100%!important;
+ min-height:42px!important;
+ align-items:center!important;
+ justify-content:center!important;
+ margin:0!important;
+ border:0!important;
+ border-radius:0!important;
  font-weight:600!important;
 }
 </style>
