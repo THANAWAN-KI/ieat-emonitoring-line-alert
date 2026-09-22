@@ -113,6 +113,20 @@
         areaOverlay.dataset.zoom=String(Math.max(1,Math.min(4,zoom)));apply();
       },{passive:false});
     }
+    if(!areaOverlay.dataset.mouseZoomBound){
+      areaOverlay.dataset.mouseZoomBound="true";
+      areaOverlay.setAttribute("title","คลิกซ้ายเพื่อซูมเข้า · คลิกขวาเพื่อซูมออก · หมุนล้อเมาส์เพื่อซูม");
+      areaOverlay.addEventListener("click",event=>{
+        if(event.target.closest(".report-map-zoom-controls"))return;
+        const zoom=(Number(areaOverlay.dataset.zoom)||1)+0.25;
+        areaOverlay.dataset.zoom=String(Math.min(4,zoom));apply();
+      });
+      areaOverlay.addEventListener("contextmenu",event=>{
+        event.preventDefault();
+        const zoom=(Number(areaOverlay.dataset.zoom)||1)-0.25;
+        areaOverlay.dataset.zoom=String(Math.max(1,zoom));apply();
+      });
+    }
     apply();
   }
   async function renderForecastPeriodMap(period,areas,imageId){
