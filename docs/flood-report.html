@@ -13686,5 +13686,113 @@ html body main.container>#infographic .report-export-workspace{
 })();
 </script>
 
+
+<style id="flood-report-collapsible-export-20260922-v2">
+html body main.container>#infographic:not(.report-open){
+ display:none!important;
+}
+.flood-report-launch{
+ width:100%;
+ margin:30px 0 0;
+ padding:26px 22px;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ gap:8px;
+ text-align:center;
+ border:1px solid #B9D5E5;
+ border-radius:16px;
+ background:linear-gradient(135deg,#F4FAFD 0%,#E8F3F9 100%);
+}
+.flood-report-launch h2{margin:0;color:#00334E;font-size:22px;font-weight:600}
+.flood-report-launch p{margin:0;color:#4A6472;font-size:14px}
+.flood-report-launch button,.flood-report-close{
+ margin-top:8px;
+ min-height:46px;
+ padding:11px 24px;
+ border:0;
+ border-radius:999px;
+ background:#075F8A;
+ color:#fff;
+ font:600 16px/1.35 "Sarabun",sans-serif;
+ cursor:pointer;
+ box-shadow:0 6px 16px rgba(7,95,138,.2);
+}
+.flood-report-launch button:hover,.flood-report-close:hover{background:#064E72}
+.flood-report-close{
+ display:block;
+ margin:0 0 18px auto;
+ background:#5E6D75;
+ box-shadow:none;
+}
+html body main.container>#infographic.report-open{
+ display:block!important;
+}
+@media(max-width:700px){
+ .flood-report-launch{margin-top:22px;padding:22px 16px}
+ .flood-report-launch h2{font-size:19px}
+ .flood-report-launch button,.flood-report-close{width:100%}
+}
+</style>
+<script id="flood-report-collapsible-export-20260922-v2-script">
+(function(){
+ "use strict";
+ function openReport(){
+  var report=document.getElementById("infographic");
+  if(!report)return;
+  report.classList.add("active","report-open");
+  report.removeAttribute("hidden");
+  if(typeof window.prepareReportExport==="function")window.prepareReportExport();
+  requestAnimationFrame(function(){report.scrollIntoView({behavior:"smooth",block:"start"})});
+ }
+ function closeReport(){
+  var report=document.getElementById("infographic");
+  var launch=document.getElementById("floodReportLaunch");
+  if(report)report.classList.remove("report-open");
+  requestAnimationFrame(function(){(launch||document.getElementById("warning"))?.scrollIntoView({behavior:"smooth",block:"center"})});
+ }
+ function mount(){
+  var overview=document.getElementById("warning"),report=document.getElementById("infographic");
+  if(!overview||!report)return;
+  var launch=document.getElementById("floodReportLaunch");
+  if(!launch){
+   launch=document.createElement("section");
+   launch.id="floodReportLaunch";
+   launch.className="flood-report-launch";
+   launch.setAttribute("aria-label","เปิดส่วนจัดทำรายงาน");
+   launch.innerHTML='<h2>จัดทำรายงานสถานการณ์น้ำท่วม</h2><p>เปิดแบบรายงานสำหรับตรวจสอบ แก้ไข และบันทึกเป็นภาพ PNG</p><button type="button" id="openFloodReport">เปิดหน้าจัดทำรายงาน</button>';
+   overview.appendChild(launch);
+  }
+  var openButton=document.getElementById("openFloodReport");
+  if(openButton)openButton.onclick=openReport;
+  var workspace=report.querySelector(".report-export-workspace");
+  if(workspace&&!document.getElementById("closeFloodReport")){
+   var closeButton=document.createElement("button");
+   closeButton.type="button";
+   closeButton.id="closeFloodReport";
+   closeButton.className="flood-report-close";
+   closeButton.textContent="ปิดส่วนรายงานและกลับไป Dashboard";
+   closeButton.onclick=closeReport;
+   workspace.prepend(closeButton);
+  }
+  var drawerButton=document.querySelector('#editor [data-go="infographic"]');
+  if(drawerButton){
+   drawerButton.textContent="เปิดหน้าจัดทำรายงาน";
+   drawerButton.onclick=function(event){
+    event.preventDefault();
+    document.getElementById("editor")?.classList.remove("open");
+    openReport();
+   };
+  }
+ }
+ function start(){
+  mount();
+  [100,500,1200,2500,5000,9500].forEach(function(ms){setTimeout(mount,ms)});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>
+
 </body>
 </html>
