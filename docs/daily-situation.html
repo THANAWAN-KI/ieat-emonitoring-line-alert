@@ -858,6 +858,92 @@ body{
  .ticker .source-link{display:none!important}
 }
 </style>
+
+<style id="daily-water-intelligence-20260922-v1">
+.water-intelligence{
+ margin-top:24px;padding:36px;border:1px solid #d9e7eb;border-radius:26px;
+ background:linear-gradient(145deg,#f7fbfc 0%,#edf6f8 100%);
+ box-shadow:0 16px 42px rgba(9,62,82,.07);
+}
+.water-intelligence-head{
+ display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:22px;
+}
+.water-intelligence-head>div>span,.basin-kicker{
+ color:#0b7f91;font-size:12px;font-weight:700;letter-spacing:1.3px;
+}
+.water-intelligence-head h2{margin:5px 0 3px;color:#072d4b;font-size:29px}
+.water-intelligence-head p{margin:0;color:#657986}
+.water-report-date{
+ flex:0 0 auto;padding:8px 13px;border:1px solid #c9dfe4;border-radius:999px;
+ background:#fff;color:#496b78;font-size:13px;
+}
+.water-summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.water-summary-card{
+ position:relative;overflow:hidden;min-height:210px;padding:23px;border:1px solid #dce8eb;
+ border-radius:18px;background:#fff;box-shadow:0 10px 26px rgba(9,62,82,.06);
+}
+.water-summary-card::after{
+ content:"";position:absolute;right:-28px;bottom:-34px;width:100px;height:100px;
+ border-radius:50%;background:var(--card-tint);
+}
+.water-summary-card.watch{--card-color:#e09216;--card-tint:#fff3d9}
+.water-summary-card.forecast{--card-color:#0b7f91;--card-tint:#daf2f1}
+.water-summary-card.current{--card-color:#1768ad;--card-tint:#e0effa}
+.water-card-label{display:flex;align-items:center;gap:8px;color:var(--card-color);font-size:13px;font-weight:700}
+.water-card-label i{width:9px;height:9px;border-radius:50%;background:var(--card-color)}
+.water-summary-card h3{position:relative;z-index:1;margin:18px 0 9px;color:#15384c;font-size:20px}
+.water-summary-card p{position:relative;z-index:1;margin:0;color:#657986;line-height:1.68;font-size:15px}
+.water-data-layout{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(320px,.55fr);gap:16px;margin-top:16px}
+.water-kpi-panel,.basin-access-card{
+ padding:24px;border:1px solid #dce8eb;border-radius:18px;background:#fff;
+ box-shadow:0 10px 26px rgba(9,62,82,.06);
+}
+.water-panel-title{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.water-panel-title span{color:#71858f;font-size:13px}
+.water-panel-title h3{margin:2px 0 0;color:#072d4b;font-size:21px}
+.water-panel-title a{color:#0b6596;text-decoration:none;font-size:14px;font-weight:700}
+.water-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:19px}
+.water-kpis>div{padding:17px;border-radius:14px;background:#f3f8f9;border:1px solid #e2ecee}
+.water-kpis small{display:block;min-height:34px;color:#6c808a;line-height:1.35}
+.water-kpis strong{display:block;margin:5px 0 2px;color:#0b6596;font-size:29px;line-height:1}
+.water-kpis span{color:#526e7a;font-size:12px}
+.water-source-note{margin:15px 0 0;color:#7a6a45;font-size:12px;line-height:1.6}
+.basin-access-card{
+ display:flex;flex-direction:column;color:#fff;border:0;
+ background:linear-gradient(145deg,#073e61,#087d88);
+}
+.basin-access-card .basin-kicker{color:#81e2dc}
+.basin-access-card h3{margin:12px 0 8px;font-size:24px}
+.basin-access-card p{margin:0;color:rgba(255,255,255,.76);line-height:1.65}
+.basin-features{display:flex;flex-wrap:wrap;gap:7px;margin:18px 0}
+.basin-features span{
+ padding:6px 9px;border:1px solid rgba(255,255,255,.20);border-radius:999px;
+ background:rgba(255,255,255,.08);font-size:12px;
+}
+.basin-access-card>a{
+ display:flex;align-items:center;justify-content:center;margin-top:auto;min-height:44px;
+ border-radius:12px;background:#fff;color:#073e61;text-decoration:none;font-weight:700;
+}
+.home-quick-links{grid-template-columns:repeat(5,minmax(0,1fr))!important}
+@media(max-width:1180px){
+ .home-quick-links{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+ .water-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .water-data-layout{grid-template-columns:1fr}
+}
+@media(max-width:820px){
+ .water-intelligence{padding:24px}
+ .water-intelligence-head{align-items:flex-start;flex-direction:column}
+ .water-summary-grid{grid-template-columns:1fr}
+ .home-quick-links{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:560px){
+ .water-intelligence{padding:18px}
+ .water-intelligence-head h2{font-size:24px}
+ .water-kpis{grid-template-columns:1fr}
+ .water-panel-title{align-items:flex-start;flex-direction:column}
+ .home-quick-links{grid-template-columns:1fr!important}
+}
+</style>
 </head>
 <body>
 <header class="bar system-header">
@@ -895,8 +981,9 @@ body{
   <div class="home-quick-links" aria-label="เมนูทางลัด">
     <a href="#mapPanel"><span>01</span><b>แผนที่สถานี</b><small>ติดตามตำแหน่งและสถานะ</small></a>
     <a href="#stationTable"><span>02</span><b>ข้อมูลตรวจวัด</b><small>ค้นหาและกรองรายสถานี</small></a>
-    <a href="#relatedNews"><span>03</span><b>ข่าวและประกาศ</b><small>ข้อมูลจากหน่วยงานทางการ</small></a>
-    <a href="./hub.html"><span>04</span><b>ระบบทั้งหมด</b><small>เข้าสู่ศูนย์รวมบริการ</small></a>
+    <a href="#waterSituationReports"><span>03</span><b>สถานการณ์น้ำ</b><small>รายงานน้ำและข้อมูลลุ่มน้ำ</small></a>
+    <a href="#relatedNews"><span>04</span><b>ข่าวและประกาศ</b><small>ข้อมูลจากหน่วยงานทางการ</small></a>
+    <a href="./hub.html"><span>05</span><b>ระบบทั้งหมด</b><small>เข้าสู่ศูนย์รวมบริการ</small></a>
   </div>
 </section>
 
@@ -923,6 +1010,63 @@ body{
   <div class="table-tools"><input id="tableSearch" type="search" placeholder="ค้นหาชื่อสถานีหรือจังหวัด"><select id="statusFilter"><option value="all">ทุกสถานะ</option><option value="critical">วิกฤต</option><option value="warning">ฝนหนัก</option><option value="watch">เฝ้าระวัง</option><option value="normal">ปกติ</option></select></div>
   <div class="table-scroll"><table class="weather-table"><thead><tr><th>สถานี</th><th>จังหวัด</th><th>อุณหภูมิ</th><th>ฝนล่าสุด</th><th>ฝนสะสม 24 ชม.</th><th>ความเร็วลม</th><th>ทิศทางลม</th><th>สถานะ</th></tr></thead><tbody id="stationRows"><tr><td colspan="8">กำลังโหลดข้อมูล…</td></tr></tbody></table></div>
  </section>
+
+<section class="water-intelligence" id="waterSituationReports" aria-labelledby="waterSituationReportsTitle">
+  <header class="water-intelligence-head">
+    <div>
+      <span>WATER SITUATION REPORT</span>
+      <h2 id="waterSituationReportsTitle">รายงานสถานการณ์น้ำและข้อมูลลุ่มน้ำ</h2>
+      <p>ข้อมูลประกอบการเฝ้าระวังจากคลังข้อมูลน้ำแห่งชาติและสำนักงานทรัพยากรน้ำแห่งชาติ</p>
+    </div>
+    <span class="water-report-date">รายงานอ้างอิง 15 สิงหาคม 2569</span>
+  </header>
+
+  <div class="water-summary-grid">
+    <article class="water-summary-card watch">
+      <div class="water-card-label"><i></i>เฝ้าระวัง</div>
+      <h3>น้ำท่วมฉับพลันและน้ำป่าไหลหลาก</h3>
+      <p>เฝ้าระวังพื้นที่ลาดเชิงเขา พื้นที่น้ำท่วมขังในเขตเมือง และพื้นที่ลุ่มต่ำ โดยเฉพาะภาคเหนือและภาคตะวันออกเฉียงเหนือตอนบน</p>
+    </article>
+    <article class="water-summary-card forecast">
+      <div class="water-card-label"><i></i>คาดการณ์</div>
+      <h3>ฝนตกต่อเนื่องและฝนหนักบางแห่ง</h3>
+      <p>ร่องมรสุมและลมตะวันตกเฉียงใต้ส่งผลให้ภาคเหนือ ภาคตะวันออกเฉียงเหนือ ภาคตะวันออก และภาคใต้ฝั่งตะวันตกมีความเสี่ยงฝนหนัก</p>
+    </article>
+    <article class="water-summary-card current">
+      <div class="water-card-label"><i></i>สถานการณ์ปัจจุบัน</div>
+      <h3>ติดตามระดับน้ำในแม่น้ำสายหลัก</h3>
+      <p>รายงานพบจุดน้ำล้นตลิ่งในแม่น้ำเลย แม่น้ำสงคราม ลำน้ำก่ำ ห้วยแคน และห้วยบังอี่</p>
+    </article>
+  </div>
+
+  <div class="water-data-layout">
+    <article class="water-kpi-panel">
+      <div class="water-panel-title">
+        <div><span>ภาพรวมจากรายงานประจำวัน</span><h3>ตัวเลขสถานการณ์สำคัญ</h3></div>
+        <a href="https://twa.thaiwater.net/th/report/daily/%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%AA%E0%B8%96%E0%B8%B2%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%88%E0%B8%B3%E0%B8%A7%E0%B8%B1%E0%B8%99-15-%E0%B8%AA%E0%B8%B4%E0%B8%87%E0%B8%AB%E0%B8%B2%E0%B8%84%E0%B8%A1-2569#%E0%B9%80%E0%B8%9D%E0%B9%89%E0%B8%B2%E0%B8%A3%E0%B8%B0%E0%B8%A7%E0%B8%B1%E0%B8%87" target="_blank" rel="noopener">อ่านรายงานฉบับเต็ม ↗</a>
+      </div>
+      <div class="water-kpis">
+        <div><small>ฝนสูงสุด</small><strong>113</strong><span>มม. · กาญจนบุรี</span></div>
+        <div><small>น้ำในอ่างใหญ่ 35 แห่ง</small><strong>60%</strong><span>42,680 ล้าน ลบ.ม.</span></div>
+        <div><small>น้ำใช้การ</small><strong>19,130</strong><span>ล้าน ลบ.ม.</span></div>
+        <div><small>พื้นที่พบล้นตลิ่ง</small><strong>5</strong><span>ลำน้ำ/แม่น้ำสำคัญ</span></div>
+      </div>
+      <p class="water-source-note">ตัวเลขข้างต้นอ้างอิงรายงานสถานการณ์น้ำประจำวันที่ 15 สิงหาคม 2569 ไม่ใช่ข้อมูลเรียลไทม์ กรุณาเปิดรายงานต้นทางเพื่อตรวจสอบฉบับล่าสุดก่อนนำไปใช้ตัดสินใจ</p>
+    </article>
+
+    <article class="basin-access-card">
+      <span class="basin-kicker">ONWR BASIN MONITORING</span>
+      <h3>สถานการณ์ลุ่มน้ำโขงเหนือ</h3>
+      <p>เปิดระบบติดตามข้อมูลลุ่มน้ำของสำนักงานทรัพยากรน้ำแห่งชาติ เพื่อดูสถานการณ์และรายละเอียดพื้นที่จากแหล่งข้อมูลโดยตรง</p>
+      <div class="basin-features">
+        <span>ข้อมูลระดับลุ่มน้ำ</span>
+        <span>สถานการณ์เชิงพื้นที่</span>
+        <span>แหล่งข้อมูลทางการ</span>
+      </div>
+      <a href="https://wapt.onwr.go.th/info/basin/khongn" target="_blank" rel="noopener">เปิดระบบข้อมูลลุ่มน้ำ ↗</a>
+    </article>
+  </div>
+</section>
 
  <section class="news-section" id="relatedNews" aria-labelledby="relatedNewsTitle">
   <header class="news-heading">
