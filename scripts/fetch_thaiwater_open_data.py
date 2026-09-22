@@ -21,6 +21,14 @@ ESTATE_URL = (
 )
 OUTPUT = Path("docs/data/thaiwater_latest.json")
 SCRIPT_OUTPUT = Path("docs/data/thaiwater_latest.js")
+FLASH_FLOOD_OUTPUTS = {
+    "24h": Path("docs/data/flash_flood_24h.json"),
+    "48h": Path("docs/data/flash_flood_48h.json"),
+}
+FLASH_FLOOD_GEOJSON_OUTPUTS = {
+    "24h": Path("docs/data/flash_flood_24h.geojson"),
+    "48h": Path("docs/data/flash_flood_48h.geojson"),
+}
 USER_AGENT = "IEAT-Flood-Intelligence/2.0 (+https://www.ieat.go.th/)"
 WATCH_RADIUS_KM = 30.0
 DISPLAY_RADIUS_KM = 50.0
@@ -378,6 +386,58 @@ def fetch_latest_rain_image() -> bool:
         print(f"Rain image refresh skipped: {type(exc).__name__}: {exc}")
         return False
 
+
+def flash_flood_geojson(dataset: dict[str, Any]) -> dict[str, Any]:
+    """Convert the normalized warning feed to browser-ready GeoJSON."""
+    features = []
+    for collection_name in ("areas", "area_nearby"):
+        for row in dataset.get(collection_name, []):
+            properties = {key: value for key, value in row.items() if key != "geometry"}
+            properties["warning_group"] = collection_name
+            rings = (row.get("geometry") or {}).get("rings")
+            geometry = {"type": "Polygon", "coordinates": rings} if rings else None
+            features.append({
+                "type": "Feature",
+                "id": f"{collection_name}-{row.get('geocode', '')}",
+                "properties": properties,
+                "geometry": geometry,
+            })
+    return {
+        "type": "FeatureCollection",
+        "metadata": {
+            "period": dataset.get("period", ""),
+            "date": dataset.get("date", ""),
+            "time": dataset.get("time", ""),
+            "source_url": dataset.get("source_url", ""),
+        },
+        "features": features,
+    }
+
+
+def write_flash_flood_api(period: str, dataset: dict[str, Any]) -> None:
+    """Publish stable JSON and GeoJSON endpoints through GitHub Pages."""
+    api_payload = {
+        "schema_version": 1,
+        "period": period,
+        "date": dataset.get("date", ""),
+        "time": dataset.get("time", ""),
+        "type": dataset.get("type", ""),
+        "source_url": dataset.get("source_url", ""),
+        "area_count": len(dataset.get("areas", [])),
+        "nearby_count": len(dataset.get("area_nearby", [])),
+        "areas": dataset.get("areas", []),
+        "area_nearby": dataset.get("area_nearby", []),
+    }
+    FLASH_FLOOD_OUTPUTS[period].write_text(
+        json.dumps(api_payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    FLASH_FLOOD_GEOJSON_OUTPUTS[period].write_text(
+        json.dumps(flash_flood_geojson(dataset), ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+
+
 def main() -> int:
     now = datetime.now(timezone.utc).astimezone(ZoneInfo("Asia/Bangkok")).isoformat(timespec="seconds")
     previous = None
@@ -513,6 +573,9 @@ def main() -> int:
     SCRIPT_OUTPUT.write_text(
         "window.IEAT_THAIWATER_DATA = " + json_text + ";\n", encoding="utf-8"
     )
+    for period, dataset in result.get("flash_flood", {}).items():
+        if period in FLASH_FLOOD_OUTPUTS and isinstance(dataset, dict):
+            write_flash_flood_api(period, dataset)
     fetch_latest_rain_image()
     print(
         f"ThaiWater feed status={result['status']} "
