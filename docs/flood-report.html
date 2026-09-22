@@ -14539,7 +14539,7 @@ html body main.container #infographic #reportPage6 .export-rid-trend.steady{
  function setGalleryTitle(pageId,title){
   var page=document.getElementById(pageId),item=page&&page.closest(".infographic-gallery-item");
   var heading=item&&item.querySelector(".infographic-card-head h2");
-  if(heading)heading.textContent=title;
+  if(heading&&heading.textContent!==title)heading.textContent=title;
  }
  function apply(){
   if(busy)return;busy=true;
