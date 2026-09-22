@@ -12958,5 +12958,34 @@ html body main.container #infographic #reportPage5 .export-rid-trend.steady{back
 })();
 </script>
 
+
+<style id="flood-report-table-sticky-header-fix-20260922">
+/* Keep both table headers flush with the scroll viewport; prevent rows showing above them. */
+html body main.container #warning #estateWaterTablePair
+ :is(.estate-watch-table,.station-watch-table) .table-scroll{
+ padding:0!important;
+ position:relative!important;
+ background:#fff!important;
+}
+html body main.container #warning #estateWaterTablePair
+ :is(.estate-watch-table,.station-watch-table) table{
+ margin:0!important;
+}
+html body main.container #warning #estateWaterTablePair
+ :is(.estate-watch-table,.station-watch-table) thead{
+ position:relative!important;
+ z-index:10!important;
+}
+html body main.container #warning #estateWaterTablePair
+ :is(.estate-watch-table,.station-watch-table) thead th{
+ position:sticky!important;
+ top:0!important;
+ z-index:11!important;
+ background:#e8edf2!important;
+ background-clip:padding-box!important;
+ box-shadow:0 1px 0 #cbd3dc!important;
+}
+</style>
+
 </body>
 </html>
