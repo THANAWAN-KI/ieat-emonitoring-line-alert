@@ -16,7 +16,7 @@
   <script src="data/thaiwater_latest.js?v=20260911-1"></script>
   <script src="flood-live-data.js?v=20260922-3" defer></script>
   <script src="data/thaiwater-map-meta.js" defer></script>
-  <script src="flood-export.js?v=20260922-5" defer></script>
+  <script src="flood-export.js?v=20260922-6" defer></script>
   <style>
     :root{--purple:#388ed1;--blue:#1769C2;--cyan:#81D4FA;--teal:#66BB6A;--ink:#283142;--muted:#697386;--bg:#F6F6F4;--line:#E5E2E8;--soft:#F5F1F7;--white:#FFFFFF;--red:#B0005A;--orange:#F6BB42;--green:#58B957}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Sarabun","Sarabun",sans-serif;font-size:16px;font-weight:400}button,input,select,textarea{font:inherit}
@@ -14757,5 +14757,40 @@ html body .water-legend .water-legend-item.critical :is(span,b){
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();
 </script>
+
+<style id="flood-report-map-zoom-20260922-v1">
+html body main.container #infographic :is(#reportPage4,#reportPage5) .three-day-risk-map{
+ position:relative!important;
+ overflow:hidden!important;
+ background:#E9EEF1!important;
+}
+html body main.container #infographic :is(#reportPage4,#reportPage5) .forecast-area-overlay{
+ inset:0!important;
+ width:100%!important;
+ height:100%!important;
+ overflow:hidden!important;
+ pointer-events:auto!important;
+ transition:transform .18s ease!important;
+ cursor:zoom-in!important;
+}
+html body main.container #infographic :is(#reportPage4,#reportPage5) .forecast-area-overlay svg{
+ display:block!important;
+ width:100%!important;
+ height:100%!important;
+ min-width:100%!important;
+ min-height:100%!important;
+}
+.report-map-zoom-controls{
+ position:absolute;z-index:12;top:12px;right:12px;
+ display:grid;gap:5px;
+}
+.report-map-zoom-controls button{
+ width:34px;height:34px;border:1px solid #CBD6DC;border-radius:7px;
+ background:rgba(255,255,255,.96);color:#173B55;font:700 20px/1 Sarabun,sans-serif;
+ box-shadow:0 2px 8px rgba(0,0,0,.16);cursor:pointer;
+}
+.report-map-zoom-controls button:last-child{font-size:17px}
+.report-map-zoom-controls button:hover{background:#109DC0;color:#fff}
+</style>
 </body>
 </html>
