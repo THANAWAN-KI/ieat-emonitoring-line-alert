@@ -14236,5 +14236,141 @@ html body main.container #warning #dashboardVisualSummaryRow .rank-value{font-si
 })();
 </script>
 
+
+<style id="flood-report-layout-status-map-20260922-v7">
+/* Report launcher: button only. */
+html body main.container #warning #floodReportLaunch{
+ margin:24px 0!important;
+ padding:0!important;
+ min-height:0!important;
+ display:flex!important;
+ justify-content:center!important;
+ border:0!important;
+ border-radius:0!important;
+ background:transparent!important;
+ box-shadow:none!important;
+}
+html body main.container #warning #floodReportLaunch>:not(button){display:none!important}
+html body main.container #warning #floodReportLaunch #openFloodReport{
+ display:inline-flex!important;
+ align-items:center!important;
+ justify-content:center!important;
+ min-width:250px!important;
+ min-height:48px!important;
+ margin:0!important;
+ padding:12px 26px!important;
+ border:0!important;
+ border-radius:999px!important;
+ background:#109DC0!important;
+ color:#FFFFFF!important;
+ -webkit-text-fill-color:#FFFFFF!important;
+ font:600 16px/1.35 "Sarabun",sans-serif!important;
+ box-shadow:0 7px 18px rgba(16,157,192,.25)!important;
+}
+/* Pages 4, 5 and 6 use A4 landscape proportions. */
+html body main.container #infographic :is(#reportPage4,#reportPage5,#reportPage6){
+ box-sizing:border-box!important;
+ width:1123px!important;min-width:1123px!important;max-width:1123px!important;
+ height:794px!important;min-height:794px!important;max-height:794px!important;
+ padding:28px 32px 24px!important;
+ display:flex!important;flex-direction:column!important;
+ gap:10px!important;overflow:hidden!important;
+ aspect-ratio:auto!important;
+}
+html body main.container #infographic :is(#reportPage4,#reportPage5) .three-day-risk-map{
+ position:relative!important;
+ flex:0 0 390px!important;
+ width:100%!important;height:390px!important;
+ min-height:390px!important;max-height:390px!important;
+ overflow:hidden!important;background:#EEF3F6!important;
+}
+html body main.container #infographic :is(#reportPage4,#reportPage5) .forecast-table-block{
+ flex:1 1 auto!important;min-height:0!important;margin-top:4px!important;overflow:hidden!important;
+}
+html body main.container #infographic :is(#reportPage4,#reportPage5) .forecast-table-block h3{
+ margin:0 0 6px!important;font-size:15px!important;
+}
+html body main.container #infographic :is(#reportPage4,#reportPage5) .export-data-table{
+ font-size:9px!important;
+}
+html body main.container #infographic :is(#reportPage4,#reportPage5) .export-data-table th,
+html body main.container #infographic :is(#reportPage4,#reportPage5) .export-data-table td{
+ padding:4px!important;
+}
+/* Status palette for report pages 2 and 3. */
+html body main.container #infographic :is(#reportPage2,#reportPage3) .export-status.critical,
+html body main.container #infographic :is(#reportPage2,#reportPage3) td.table-state-red,
+html body main.container #infographic :is(#reportPage2,#reportPage3) td.table-state-red>*{
+ background:#F00A36!important;color:#FFFFFF!important;-webkit-text-fill-color:#FFFFFF!important;
+}
+html body main.container #infographic :is(#reportPage2,#reportPage3) .export-status.warning,
+html body main.container #infographic :is(#reportPage2,#reportPage3) td.table-state-blue,
+html body main.container #infographic :is(#reportPage2,#reportPage3) td.table-state-blue>*{
+ background:#FFC719!important;color:#263746!important;-webkit-text-fill-color:#263746!important;
+}
+html body main.container #infographic :is(#reportPage2,#reportPage3) .export-status.normal,
+html body main.container #infographic :is(#reportPage2,#reportPage3) td.table-state-green,
+html body main.container #infographic :is(#reportPage2,#reportPage3) td.table-state-green>*{
+ background:#598C14!important;color:#FFFFFF!important;-webkit-text-fill-color:#FFFFFF!important;
+}
+.report-status-legend{
+ display:flex!important;justify-content:center!important;align-items:center!important;
+ gap:18px!important;flex-wrap:wrap!important;
+ margin:8px 0 2px!important;padding:7px 10px!important;
+ border:1px solid #D7E0E5!important;background:#F7FAFB!important;
+ font-size:10px!important;color:#344756!important;
+}
+.report-status-legend span{display:inline-flex!important;align-items:center!important;gap:6px!important}
+.report-status-legend i{display:inline-block!important;width:14px!important;height:10px!important;border-radius:2px!important}
+.report-status-legend .normal{background:#598C14!important}
+.report-status-legend .critical{background:#F00A36!important}
+.report-status-legend .warning{background:#FFC719!important}
+/* Dashboard situation legend follows the same palette. */
+html body main.container #warning #waterSituationViz .water-legend-item.normal i{background:#598C14!important}
+html body main.container #warning #waterSituationViz .water-legend-item.critical i{background:#F00A36!important}
+html body main.container #warning #waterSituationViz .water-legend-item.warning i{background:#FFC719!important}
+.forecast-risk-overlay{position:absolute;inset:0;z-index:4;pointer-events:none}
+.forecast-risk-dot{
+ position:absolute;transform:translate(-50%,-50%);width:13px;height:13px;border-radius:50%;
+ border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.45),0 2px 5px rgba(0,0,0,.25);
+}
+.forecast-risk-dot.period-24{background:#FFC719}
+.forecast-risk-dot.period-48{background:#109DC0}
+.forecast-map-period-legend{
+ position:absolute;right:12px;bottom:12px;z-index:6;
+ display:flex;align-items:center;gap:7px;padding:7px 10px;border-radius:8px;
+ background:rgba(255,255,255,.94);color:#263746;font-size:11px;box-shadow:0 2px 9px rgba(0,0,0,.16);
+}
+.forecast-map-period-legend i{width:12px;height:12px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.35)}
+.forecast-map-period-legend.period-24 i{background:#FFC719}
+.forecast-map-period-legend.period-48 i{background:#109DC0}
+@media(max-width:900px){
+ html body main.container #infographic :is(#reportPage4,#reportPage5,#reportPage6){
+  width:1123px!important;min-width:1123px!important;max-width:1123px!important;
+  height:794px!important;min-height:794px!important;max-height:794px!important;
+ }
+}
+</style>
+<script id="flood-report-layout-status-map-20260922-v7-script">
+(function(){
+ "use strict";
+ function legend(){
+  return '<div class="report-status-legend" aria-label="คำอธิบายสีสถานะ"><b>คำอธิบายสถานะ</b><span><i class="normal"></i>ปกติ</span><span><i class="critical"></i>วิกฤต</span><span><i class="warning"></i>เฝ้าระวัง</span></div>';
+ }
+ function apply(){
+  var launch=document.getElementById("floodReportLaunch"),button=document.getElementById("openFloodReport");
+  if(launch&&button&&launch.children.length!==1)launch.replaceChildren(button);
+  if(button){button.textContent="เปิดหน้าจัดทำรายงาน";button.style.setProperty("background","#109DC0","important");button.style.setProperty("color","#FFFFFF","important")}
+  ["reportPage2","reportPage3"].forEach(function(id){
+   var page=document.getElementById(id);if(!page||page.querySelector(".report-status-legend"))return;
+   var footer=page.querySelector(".sheet-footer");
+   if(footer)footer.insertAdjacentHTML("beforebegin",legend());
+  });
+ }
+ function start(){apply();[100,400,900,1800,3500,6000,10000].forEach(function(ms){setTimeout(apply,ms)})}
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>
+
 </body>
 </html>
