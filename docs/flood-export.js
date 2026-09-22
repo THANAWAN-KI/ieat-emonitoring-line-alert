@@ -109,7 +109,7 @@
       frame.addEventListener("wheel",event=>{
         event.preventDefault();
         let zoom=Number(areaOverlay.dataset.zoom)||1;
-        zoom+=event.deltaY<0?.15:-.15;
+        zoom += event.deltaY < 0 ? 0.15 : -0.15;
         areaOverlay.dataset.zoom=String(Math.max(1,Math.min(4,zoom)));apply();
       },{passive:false});
     }
