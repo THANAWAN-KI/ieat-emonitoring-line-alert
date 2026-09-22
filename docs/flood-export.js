@@ -123,7 +123,8 @@
     const geometries=(areas||[]).filter(area=>area.geometry?.rings?.length);
     frame.querySelector(".forecast-risk-overlay")?.replaceChildren();
     let areaOverlay=frame.querySelector(".forecast-area-overlay");
-    if(!areaOverlay){areaOverlay=document.createElement("div");areaOverlay.className="forecast-area-overlay";frame.appendChild(areaOverlay)}\n    setupForecastMapZoom(frame,areaOverlay);
+    if(!areaOverlay){areaOverlay=document.createElement("div");areaOverlay.className="forecast-area-overlay";frame.appendChild(areaOverlay)}
+    setupForecastMapZoom(frame,areaOverlay);
     let legend=frame.querySelector(".forecast-map-period-legend");
     if(!legend){legend=document.createElement("div");frame.appendChild(legend)}
     legend.className="forecast-map-period-legend area-period-"+period.replace("h","");
