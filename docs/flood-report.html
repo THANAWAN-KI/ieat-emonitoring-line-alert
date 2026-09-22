@@ -14074,7 +14074,7 @@ html body main.container #warning .dashboard-chart-mode>.rid-table-wrap{
   var total=counts.critical+counts.warning+counts.normal+counts.unknown,sig=JSON.stringify(counts);if(target.dataset.sig===sig)return;target.dataset.sig=sig;
   if(!total){target.innerHTML='<div class="dashboard-viz-empty">กำลังประมวลผลข้อมูลล่าสุด…</div>';return}
   var a=counts.critical/total*100,b=a+counts.warning/total*100,c=b+counts.normal/total*100;
-  target.innerHTML='<div class="water-donut-layout"><div class="water-donut-wrap"><div class="water-donut" style="background:conic-gradient(#F00A36 0 '+a+'%,#FFC719 '+a+'% '+b+'%,#598C14 '+b+'% '+c+'%,#109DC0 '+c+'% 100%)"><div class="water-donut-center"><strong>'+total.toLocaleString("th-TH")+'</strong><span>สถานีทั้งหมด</span></div></div></div><div class="water-legend">'+
+  target.innerHTML='<div class="water-donut-layout"><div class="water-donut-wrap"><div class="water-donut" style="background:conic-gradient(#F00A36 0 '+a+'%,#FF8A00 '+a+'% '+b+'%,#598C14 '+b+'% '+c+'%,#109DC0 '+c+'% 100%)"><div class="water-donut-center"><strong>'+total.toLocaleString("th-TH")+'</strong><span>สถานีทั้งหมด</span></div></div></div><div class="water-legend">'+
    [['critical','วิกฤต / น้ำล้นตลิ่ง'],['warning','เฝ้าระวัง / ทรงตัว'],['normal','ปกติ / ลดลง'],['unknown','ไม่ระบุสถานะ']].map(function(x){return '<div class="water-legend-item '+x[0]+'"><i></i><span>'+x[1]+'</span><b>'+counts[x[0]].toLocaleString("th-TH")+'</b></div>'}).join("")+
    '</div></div>';
  }
@@ -14095,6 +14095,60 @@ html body main.container #warning .dashboard-chart-mode>.rid-table-wrap{
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();
 </script>
+
+<style id="flood-dashboard-palette-20260922-v7">
+/* Dashboard palette only: green, orange, red and blue. */
+html body main.container #warning{
+ --flood-green:#598C14;
+ --flood-orange:#FF8A00;
+ --flood-red:#F00A36;
+ --flood-blue:#109DC0;
+}
+/* Forecast 24 h / 48 h and 120 km risk cards. */
+html body main.container #warning #overviewForecastRisk .overview-risk-card[data-hours="24"]{border-left-color:var(--flood-blue)!important}
+html body main.container #warning #overviewForecastRisk .overview-risk-card[data-hours="48"]{border-left-color:var(--flood-orange)!important}
+html body main.container #warning #overviewForecastRisk .overview-risk-card[data-hours="24"] .overview-risk-rank{background:var(--flood-blue)!important;color:#fff!important}
+html body main.container #warning #overviewForecastRisk .overview-risk-card[data-hours="48"] .overview-risk-rank{background:var(--flood-orange)!important;color:#fff!important}
+html body main.container #warning #overviewForecastRisk .overview-risk-card[data-hours="24"] .overview-risk-rain{color:var(--flood-blue)!important}
+html body main.container #warning #overviewForecastRisk .overview-risk-card[data-hours="48"] .overview-risk-rain{color:var(--flood-orange)!important}
+html body main.container #warning #overviewForecastRisk .nearby-risk-detail-card{border-left:4px solid var(--flood-red)!important}
+html body main.container #warning #overviewForecastRisk .nearby-risk-detail-head b,
+html body main.container #warning #overviewForecastRisk .nearby-risk-detail-item strong{color:var(--flood-red)!important}
+html body main.container #warning #overviewForecastRisk .nearby-risk-detail-item>div::before{background:var(--flood-red)!important}
+
+/* Water level against bank chart. */
+html body main.container #warning #ridLevelChart .rid-level-fill,
+html body main.container #warning #ridLevelRankViz .rank-fill.normal{background:var(--flood-green)!important}
+html body main.container #warning #ridLevelChart .rid-level-fill.watch,
+html body main.container #warning #ridLevelRankViz .rank-fill.watch{background:var(--flood-orange)!important}
+html body main.container #warning #ridLevelChart .rid-level-fill.high,
+html body main.container #warning #ridLevelRankViz .rank-fill.critical{background:var(--flood-red)!important}
+html body main.container #warning #ridLevelChart .rid-level-value,
+html body main.container #warning #ridLevelRankViz .rank-value{color:var(--flood-blue)!important}
+
+/* Water trend chart: rising / steady / falling. */
+html body main.container #warning #ridTrendChart .rid-trend-col.up .rid-trend-bar{background:var(--flood-red)!important}
+html body main.container #warning #ridTrendChart .rid-trend-col.steady .rid-trend-bar{background:var(--flood-blue)!important}
+html body main.container #warning #ridTrendChart .rid-trend-col.down .rid-trend-bar{background:var(--flood-green)!important}
+html body main.container #warning #ridTrendChart .rid-trend-col.up strong{color:var(--flood-red)!important}
+html body main.container #warning #ridTrendChart .rid-trend-col.steady strong{color:var(--flood-blue)!important}
+html body main.container #warning #ridTrendChart .rid-trend-col.down strong{color:var(--flood-green)!important}
+
+/* Three visual summaries: estate ranking, water situation and RID stations. */
+html body main.container #warning #dashboardVisualSummaryRow .rank-fill{background:var(--flood-blue)!important}
+html body main.container #warning #dashboardVisualSummaryRow .rank-number{background:var(--flood-blue)!important;color:#fff!important}
+html body main.container #warning #dashboardVisualSummaryRow .rank-row:nth-child(1) .rank-number{background:var(--flood-red)!important;color:#fff!important}
+html body main.container #warning #dashboardVisualSummaryRow .rank-row:nth-child(2) .rank-number{background:var(--flood-orange)!important;color:#fff!important}
+html body main.container #warning #dashboardVisualSummaryRow .rank-row:nth-child(3) .rank-number{background:var(--flood-green)!important;color:#fff!important}
+html body main.container #warning #dashboardVisualSummaryRow .rank-value{color:var(--flood-blue)!important}
+html body main.container #warning #dashboardVisualSummaryRow .water-legend-item.critical i{background:var(--flood-red)!important}
+html body main.container #warning #dashboardVisualSummaryRow .water-legend-item.warning i{background:var(--flood-orange)!important}
+html body main.container #warning #dashboardVisualSummaryRow .water-legend-item.normal i{background:var(--flood-green)!important}
+html body main.container #warning #dashboardVisualSummaryRow .water-legend-item.unknown i{background:var(--flood-blue)!important}
+html body main.container #warning #dashboardVisualSummaryRow .rid-rank-row .rank-fill.critical{background:var(--flood-red)!important}
+html body main.container #warning #dashboardVisualSummaryRow .rid-rank-row .rank-fill.watch{background:var(--flood-orange)!important}
+html body main.container #warning #dashboardVisualSummaryRow .rid-rank-row .rank-fill.normal{background:var(--flood-green)!important}
+</style>
 
 
 <style id="flood-dashboard-three-visuals-row-20260922-v6">
@@ -14157,16 +14211,16 @@ html body main.container #warning #dashboardVisualSummaryRow .rank-fill{
 html body main.container #warning #dashboardVisualSummaryRow .rank-number{
  background:#109DC0!important;
 }
-html body main.container #warning #dashboardVisualSummaryRow .rank-row:nth-child(1) .rank-number{background:#FFC719!important;color:#263746!important}
-html body main.container #warning #dashboardVisualSummaryRow .rank-row:nth-child(2) .rank-number{background:#109DC0!important;color:#fff!important}
+html body main.container #warning #dashboardVisualSummaryRow .rank-row:nth-child(1) .rank-number{background:#F00A36!important;color:#fff!important}
+html body main.container #warning #dashboardVisualSummaryRow .rank-row:nth-child(2) .rank-number{background:#FF8A00!important;color:#fff!important}
 html body main.container #warning #dashboardVisualSummaryRow .rank-row:nth-child(3) .rank-number{background:#598C14!important;color:#fff!important}
 html body main.container #warning #dashboardVisualSummaryRow .rank-value{color:#109DC0!important}
 html body main.container #warning #dashboardVisualSummaryRow .water-legend-item.critical i{background:#F00A36!important}
-html body main.container #warning #dashboardVisualSummaryRow .water-legend-item.warning i{background:#FFC719!important}
+html body main.container #warning #dashboardVisualSummaryRow .water-legend-item.warning i{background:#FF8A00!important}
 html body main.container #warning #dashboardVisualSummaryRow .water-legend-item.normal i{background:#598C14!important}
 html body main.container #warning #dashboardVisualSummaryRow .water-legend-item.unknown i{background:#109DC0!important}
 html body main.container #warning #dashboardVisualSummaryRow .rid-rank-row .rank-fill.critical{background:#F00A36!important}
-html body main.container #warning #dashboardVisualSummaryRow .rid-rank-row .rank-fill.watch{background:#FFC719!important}
+html body main.container #warning #dashboardVisualSummaryRow .rid-rank-row .rank-fill.watch{background:#FF8A00!important}
 html body main.container #warning #dashboardVisualSummaryRow .rid-rank-row .rank-fill.normal{background:#598C14!important}
 html body main.container #warning #dashboardVisualSummaryRow .water-donut-layout{
  grid-template-columns:1fr!important;
