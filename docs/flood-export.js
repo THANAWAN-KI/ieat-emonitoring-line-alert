@@ -93,17 +93,17 @@
     let legend=frame.querySelector(".forecast-map-period-legend");
     if(!legend){legend=document.createElement("div");frame.appendChild(legend)}
     legend.className="forecast-map-period-legend area-period-"+period.replace("h","");
-    legend.innerHTML='<b><i></i>พื้นที่เฝ้าระวังน้ำท่วม '+(period==="24h"?"24":"48")+' ชั่วโมง</b><span>ที่มา: ThaiWater · แสดงเฉพาะชั้นข้อมูล '+(period==="24h"?"24":"48")+' ชั่วโมง</span>';
+    legend.innerHTML='<b><i></i>พื้นที่เฝ้าระวังน้ำท่วม '+(period==="24h"?"24":"48")+' ชั่วโมง</b><span>ที่มา: ThaiWater new4all/warning · แสดงเฉพาะชั้นข้อมูล '+(period==="24h"?"24":"48")+' ชั่วโมง</span>';
     if(image.dataset.userUploaded==="true"){areaOverlay.replaceChildren();return}
     if(!geometries.length){areaOverlay.innerHTML='<div class="forecast-map-message">ไม่พบขอบเขตพื้นที่เฝ้าระวัง '+(period==="24h"?"24":"48")+' ชั่วโมงในข้อมูลล่าสุด</div>';return}
     const points=geometries.flatMap(area=>area.geometry.rings.flat());
     let west=Math.min(...points.map(p=>Number(p[0]))),east=Math.max(...points.map(p=>Number(p[0]))),south=Math.min(...points.map(p=>Number(p[1]))),north=Math.max(...points.map(p=>Number(p[1])));
-    const padX=Math.max((east-west)*.09,.08),padY=Math.max((north-south)*.12,.08),bounds=[west-padX,south-padY,east+padX,north+padY];
+    const bounds=[97.3,5.6,105.8,20.5]; // Thailand extent used by ThaiWater new4all/warning
     const osm=osmLayout(bounds);
     if(image.dataset.userUploaded!=="true")image.src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'/%3E";
     const paths=geometries.map(area=>'<path d="'+polygonPath(area.geometry,osm.project)+'" fill="#ED3B21" fill-opacity=".34" stroke="#F00A36" stroke-width="2.2" vector-effect="non-scaling-stroke"><title>'+esc([area.tambon,area.amphoe,area.province].filter(Boolean).join(" "))+'</title></path>').join("");
     const labels=geometries.filter(area=>Number.isFinite(Number(area.longitude))&&Number.isFinite(Number(area.latitude))).map(area=>{const p=osm.project([area.longitude,area.latitude]),rain=fmt(area.sum_rainfall_mm);return '<g transform="translate('+p[0].toFixed(1)+' '+p[1].toFixed(1)+')"><circle r="20" fill="#F00A36" stroke="#fff" stroke-width="2"/><text text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="13" font-weight="700">'+rain+'</text></g>'}).join("");
-    areaOverlay.innerHTML='<svg viewBox="0 0 1100 405" preserveAspectRatio="none" aria-label="แผนที่ ThaiWater พื้นที่เฝ้าระวังน้ำท่วม '+(period==="24h"?"24":"48")+' ชั่วโมง">'+osm.tiles+'<g>'+paths+labels+'</g><text x="1092" y="397" text-anchor="end" fill="#2f3b43" font-size="10" paint-order="stroke" stroke="#fff" stroke-width="3">© OpenStreetMap contributors · ThaiWater</text></svg>';
+    areaOverlay.innerHTML='<svg viewBox="0 0 1100 405" preserveAspectRatio="none" aria-label="แผนที่ ThaiWater พื้นที่เฝ้าระวังน้ำท่วม '+(period==="24h"?"24":"48")+' ชั่วโมง">'+osm.tiles+'<g>'+paths+labels+'</g><text x="1092" y="397" text-anchor="end" fill="#2f3b43" font-size="10" paint-order="stroke" stroke="#fff" stroke-width="3">© OpenStreetMap contributors · ThaiWater new4all/warning</text></svg>';
   }
   function renderForecastMaps(data){
     renderForecastPeriodMap("24h",data.flash_flood?.["24h"]?.areas||[],"forecastMap24");
