@@ -31,6 +31,10 @@ FLASH_FLOOD_URLS = {
     "48h": "https://api.hii.or.th/v2/4UQaYnf0Bx4fXPYyCdDRbqHyXH9Ixvd2nVUjaN1cLBY=/warning/flashflood-48h",
 }
 TMD_WARNING_URL = "https://tmd.go.th/warning-and-events/warning-storm"
+TAMBON_URL = (
+    "https://gisportal.dmr.go.th/arcgis/rest/services/Hosted/"
+    "TAMBON/FeatureServer/0/query"
+)
 
 
 def get_json(url: str, params: dict[str, str] | None = None) -> dict[str, Any]:
@@ -137,13 +141,43 @@ def fetch_flash_flood_warning(period: str) -> dict[str, Any]:
                     "observed_at": str(item.get("latest_rainfall_datetime") or ""),
                 })
             return rows
+        areas = clean(payload.get("area"))
+        nearby = clean(payload.get("area_nearby"))
+        # Keep the boundary geometry with the hourly feed. Rendering it locally
+        # avoids browser CORS failures from the DMR ArcGIS service.
+        codes = sorted({row["geocode"] for row in areas + nearby})
+        geometries: dict[str, Any] = {}
+        if codes:
+            try:
+                boundary_payload = get_json(
+                    TAMBON_URL,
+                    {
+                        "where": "tambon_idn IN (" + ",".join(f"'{code}'" for code in codes) + ")",
+                        "outFields": "tambon_idn",
+                        "returnGeometry": "true",
+                        "outSR": "4326",
+                        "geometryPrecision": "5",
+                        "maxAllowableOffset": "0.0007",
+                        "f": "json",
+                    },
+                )
+                for feature in boundary_payload.get("features", []):
+                    code = str(feature.get("attributes", {}).get("tambon_idn") or "").zfill(6)
+                    rings = feature.get("geometry", {}).get("rings")
+                    if code and rings:
+                        geometries[code] = {"rings": rings}
+            except Exception as boundary_exc:
+                print(f"Tambon geometry refresh skipped: {type(boundary_exc).__name__}: {boundary_exc}")
+        for row in areas + nearby:
+            if row["geocode"] in geometries:
+                row["geometry"] = geometries[row["geocode"]]
         return {
             "period": period,
             "date": str(payload.get("date") or ""),
             "time": str(payload.get("time") or ""),
             "type": str(payload.get("type") or ""),
-            "areas": clean(payload.get("area")),
-            "area_nearby": clean(payload.get("area_nearby")),
+            "areas": areas,
+            "area_nearby": nearby,
             "risk_map": str(payload.get("riskMap") or ""),
             "source_url": url,
         }
