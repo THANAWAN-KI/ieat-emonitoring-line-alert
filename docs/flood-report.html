@@ -14074,7 +14074,7 @@ html body main.container #warning .dashboard-chart-mode>.rid-table-wrap{
   var total=counts.critical+counts.warning+counts.normal+counts.unknown,sig=JSON.stringify(counts);if(target.dataset.sig===sig)return;target.dataset.sig=sig;
   if(!total){target.innerHTML='<div class="dashboard-viz-empty">กำลังประมวลผลข้อมูลล่าสุด…</div>';return}
   var a=counts.critical/total*100,b=a+counts.warning/total*100,c=b+counts.normal/total*100;
-  target.innerHTML='<div class="water-donut-layout"><div class="water-donut-wrap"><div class="water-donut" style="background:conic-gradient(#F00A36 0 '+a+'%,#FF8A00 '+a+'% '+b+'%,#598C14 '+b+'% '+c+'%,#109DC0 '+c+'% 100%)"><div class="water-donut-center"><strong>'+total.toLocaleString("th-TH")+'</strong><span>สถานีทั้งหมด</span></div></div></div><div class="water-legend">'+
+  target.innerHTML='<div class="water-donut-layout"><div class="water-donut-wrap"><div class="water-donut" style="background:conic-gradient(#598C14 0 '+a+'%,#335238 '+a+'% '+b+'%,#4A8594 '+b+'% '+c+'%,#051736 '+c+'% 100%)"><div class="water-donut-center"><strong>'+total.toLocaleString("th-TH")+'</strong><span>สถานีทั้งหมด</span></div></div></div><div class="water-legend">'+
    [['critical','วิกฤต / น้ำล้นตลิ่ง'],['warning','เฝ้าระวัง / ทรงตัว'],['normal','ปกติ / ลดลง'],['unknown','ไม่ระบุสถานะ']].map(function(x){return '<div class="water-legend-item '+x[0]+'"><i></i><span>'+x[1]+'</span><b>'+counts[x[0]].toLocaleString("th-TH")+'</b></div>'}).join("")+
    '</div></div>';
  }
@@ -14624,6 +14624,65 @@ html body main.container #infographic #reportPage6 .export-rid-trend.steady{
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();
 </script>
+
+<style id="flood-dashboard-annotated-colors-20260922-v8">
+/* Exact dashboard changes marked in the supplied reference images. */
+html body main.container #warning #overviewForecastRisk :is(.overview-risk-card h3,.nearby-risk-detail-head h2){color:#00387B!important}
+
+/* Remove the marked decorative edge and row-number markers from the 120 km card. */
+html body main.container #warning #overviewForecastRisk .nearby-risk-detail-card{border:0!important;border-left:0!important}
+html body main.container #warning #overviewForecastRisk .nearby-risk-detail-item{grid-template-columns:minmax(0,1fr) auto!important}
+html body main.container #warning #overviewForecastRisk .nearby-risk-detail-item>div{padding-left:0!important}
+html body main.container #warning #overviewForecastRisk .nearby-risk-detail-item>div::before{content:none!important;display:none!important}
+
+/* Rain-value pills: 24 h, 48 h and the 120 km list. */
+html body main.container #warning #overviewForecastRisk .overview-risk-card[data-hours="24"] .overview-risk-rain{
+ background:#598C14!important;color:#fff!important;padding:7px 12px!important;border-radius:999px!important
+}
+html body main.container #warning #overviewForecastRisk .overview-risk-card[data-hours="48"] .overview-risk-rain{
+ background:#FF6908!important;color:#fff!important;padding:7px 12px!important;border-radius:999px!important
+}
+html body main.container #warning #overviewForecastRisk .nearby-risk-detail-item strong{
+ background:#109DC0!important;color:#fff!important;padding:7px 12px!important;border-radius:999px!important
+}
+
+/* Water level chart. */
+html body main.container #warning #ridLevelChart .rid-level-fill,
+html body main.container #warning #ridLevelChart .rid-level-fill.watch,
+html body main.container #warning #ridLevelChart .rid-level-fill.high{background:#4A8594!important}
+html body main.container #warning #ridLevelChart .rid-level-value{color:#4A8594!important}
+
+/* Trend chart: rising, steady and falling. */
+html body main.container #warning #ridTrendChart .rid-trend-col.up .rid-trend-bar{background:#F00A36!important}
+html body main.container #warning #ridTrendChart .rid-trend-col.steady .rid-trend-bar{background:#FF6908!important}
+html body main.container #warning #ridTrendChart .rid-trend-col.down .rid-trend-bar{background:#598C14!important}
+html body main.container #warning #ridTrendChart .rid-trend-col.up strong{color:#F00A36!important}
+html body main.container #warning #ridTrendChart .rid-trend-col.steady strong{color:#FF6908!important}
+html body main.container #warning #ridTrendChart .rid-trend-col.down strong{color:#598C14!important}
+
+/* Industrial-estate ranking: purple number badges and alternating green/orange bars. */
+html body main.container #warning #estateRankViz .rank-number,
+html body main.container #warning #estateRankViz .rank-row:nth-child(n) .rank-number{background:#52057F!important;color:#fff!important}
+html body main.container #warning #estateRankViz .rank-row:nth-child(odd) .rank-fill{background:#598C14!important}
+html body main.container #warning #estateRankViz .rank-row:nth-child(even) .rank-fill{background:#FF6908!important}
+html body main.container #warning #estateRankViz .rank-value{color:#52057F!important}
+
+/* Water-situation donut and legend. */
+html body main.container #warning #waterSituationViz .water-legend-item.critical i{background:#598C14!important}
+html body main.container #warning #waterSituationViz .water-legend-item.warning i{background:#335238!important}
+html body main.container #warning #waterSituationViz .water-legend-item.normal i{background:#4A8594!important}
+html body main.container #warning #waterSituationViz .water-legend-item.unknown i{background:#051736!important}
+html body main.container #warning #waterSituationViz .water-donut-center strong{color:#051736!important}
+
+/* Related water-level station ranking. */
+html body main.container #warning #ridLevelRankViz .rank-number{background:#598C14!important;color:#fff!important}
+html body main.container #warning #ridLevelRankViz .rank-name{color:#335238!important}
+html body main.container #warning #ridLevelRankViz .rank-fill,
+html body main.container #warning #ridLevelRankViz .rank-fill.normal,
+html body main.container #warning #ridLevelRankViz .rank-fill.watch,
+html body main.container #warning #ridLevelRankViz .rank-fill.critical{background:#4A8594!important}
+html body main.container #warning #ridLevelRankViz .rank-value{color:#051736!important}
+</style>
 
 </body>
 </html>
