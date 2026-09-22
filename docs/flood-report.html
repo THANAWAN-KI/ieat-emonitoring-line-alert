@@ -14074,7 +14074,7 @@ html body main.container #warning .dashboard-chart-mode>.rid-table-wrap{
   var total=counts.critical+counts.warning+counts.normal+counts.unknown,sig=JSON.stringify(counts);if(target.dataset.sig===sig)return;target.dataset.sig=sig;
   if(!total){target.innerHTML='<div class="dashboard-viz-empty">กำลังประมวลผลข้อมูลล่าสุด…</div>';return}
   var a=counts.critical/total*100,b=a+counts.warning/total*100,c=b+counts.normal/total*100;
-  target.innerHTML='<div class="water-donut-layout"><div class="water-donut-wrap"><div class="water-donut" style="background:conic-gradient(#F20F3B 0 '+a+'%,#3D93D1 '+a+'% '+b+'%,#568F0B '+b+'% '+c+'%,#9AA8B0 '+c+'% 100%)"><div class="water-donut-center"><strong>'+total.toLocaleString("th-TH")+'</strong><span>สถานีทั้งหมด</span></div></div></div><div class="water-legend">'+
+  target.innerHTML='<div class="water-donut-layout"><div class="water-donut-wrap"><div class="water-donut" style="background:conic-gradient(#F00A36 0 '+a+'%,#FFC719 '+a+'% '+b+'%,#598C14 '+b+'% '+c+'%,#109DC0 '+c+'% 100%)"><div class="water-donut-center"><strong>'+total.toLocaleString("th-TH")+'</strong><span>สถานีทั้งหมด</span></div></div></div><div class="water-legend">'+
    [['critical','วิกฤต / น้ำล้นตลิ่ง'],['warning','เฝ้าระวัง / ทรงตัว'],['normal','ปกติ / ลดลง'],['unknown','ไม่ระบุสถานะ']].map(function(x){return '<div class="water-legend-item '+x[0]+'"><i></i><span>'+x[1]+'</span><b>'+counts[x[0]].toLocaleString("th-TH")+'</b></div>'}).join("")+
    '</div></div>';
  }
@@ -14091,6 +14091,146 @@ html body main.container #warning .dashboard-chart-mode>.rid-table-wrap{
   apply();
   ["estateRanks","stations","ridStationRows"].forEach(function(id){var el=document.getElementById(id);if(el)new MutationObserver(schedule).observe(el,{childList:true,subtree:true,characterData:true})});
   [100,400,900,1800,3500,6000,10000].forEach(function(ms){setTimeout(apply,ms)});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>
+
+
+<style id="flood-dashboard-three-visuals-row-20260922-v6">
+html body main.container #warning #dashboardVisualSummaryRow{
+ display:grid!important;
+ grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ gap:16px!important;
+ align-items:stretch!important;
+ width:100%!important;
+ margin:18px 0!important;
+}
+html body main.container #warning #dashboardVisualSummaryRow>
+ :is(.estate-watch-table,.station-watch-table,.rid-panel){
+ display:flex!important;
+ flex-direction:column!important;
+ width:100%!important;
+ min-width:0!important;
+ height:560px!important;
+ min-height:560px!important;
+ max-height:560px!important;
+ margin:0!important;
+ overflow:hidden!important;
+ border:1px solid #D9E4E9!important;
+ border-radius:16px!important;
+ background:#fff!important;
+ box-shadow:0 5px 18px rgba(27,57,75,.09)!important;
+}
+html body main.container #warning #dashboardVisualSummaryRow
+ :is(.table-section-head,.rid-panel-head){
+ flex:0 0 auto!important;
+ min-height:92px!important;
+ padding:16px 17px!important;
+ border-bottom:1px solid #DCE6EB!important;
+ background:#fff!important;
+}
+html body main.container #warning #dashboardVisualSummaryRow
+ :is(.table-section-head,.rid-panel-head) h2{
+ margin:0!important;
+ color:#263746!important;
+ font-size:17px!important;
+ line-height:1.35!important;
+}
+html body main.container #warning #dashboardVisualSummaryRow
+ :is(.table-section-head,.rid-panel-head) p{
+ margin:5px 0 0!important;
+ color:#6C7E88!important;
+ font-size:11px!important;
+ line-height:1.4!important;
+}
+html body main.container #warning #dashboardVisualSummaryRow .dashboard-viz{
+ flex:1 1 auto!important;
+ min-height:0!important;
+ padding:13px!important;
+ overflow:auto!important;
+}
+/* Requested palette: green, red, yellow, blue. */
+html body main.container #warning #dashboardVisualSummaryRow .rank-fill{
+ background:#109DC0!important;
+}
+html body main.container #warning #dashboardVisualSummaryRow .rank-number{
+ background:#109DC0!important;
+}
+html body main.container #warning #dashboardVisualSummaryRow .rank-row:nth-child(1) .rank-number{background:#FFC719!important;color:#263746!important}
+html body main.container #warning #dashboardVisualSummaryRow .rank-row:nth-child(2) .rank-number{background:#109DC0!important;color:#fff!important}
+html body main.container #warning #dashboardVisualSummaryRow .rank-row:nth-child(3) .rank-number{background:#598C14!important;color:#fff!important}
+html body main.container #warning #dashboardVisualSummaryRow .rank-value{color:#109DC0!important}
+html body main.container #warning #dashboardVisualSummaryRow .water-legend-item.critical i{background:#F00A36!important}
+html body main.container #warning #dashboardVisualSummaryRow .water-legend-item.warning i{background:#FFC719!important}
+html body main.container #warning #dashboardVisualSummaryRow .water-legend-item.normal i{background:#598C14!important}
+html body main.container #warning #dashboardVisualSummaryRow .water-legend-item.unknown i{background:#109DC0!important}
+html body main.container #warning #dashboardVisualSummaryRow .rid-rank-row .rank-fill.critical{background:#F00A36!important}
+html body main.container #warning #dashboardVisualSummaryRow .rid-rank-row .rank-fill.watch{background:#FFC719!important}
+html body main.container #warning #dashboardVisualSummaryRow .rid-rank-row .rank-fill.normal{background:#598C14!important}
+html body main.container #warning #dashboardVisualSummaryRow .water-donut-layout{
+ grid-template-columns:1fr!important;
+ gap:10px!important;
+ align-content:start!important;
+}
+html body main.container #warning #dashboardVisualSummaryRow .water-donut{width:150px!important;height:150px!important}
+html body main.container #warning #dashboardVisualSummaryRow .water-donut::after{inset:31px!important}
+html body main.container #warning #dashboardVisualSummaryRow .water-legend{
+ grid-template-columns:1fr 1fr!important;
+ gap:7px!important;
+ width:100%!important;
+}
+html body main.container #warning #dashboardVisualSummaryRow .water-legend-item{
+ padding:8px 9px!important;
+ grid-template-columns:10px 1fr auto!important;
+ gap:6px!important;
+}
+html body main.container #warning #dashboardVisualSummaryRow .water-legend-item span{font-size:10px!important}
+html body main.container #warning #dashboardVisualSummaryRow .water-legend-item b{font-size:15px!important}
+html body main.container #warning #dashboardVisualSummaryRow :is(.rank-row,.rid-rank-row){
+ grid-template-columns:28px minmax(105px,1.2fr) minmax(80px,.85fr) 65px!important;
+ gap:7px!important;
+ padding:7px 8px!important;
+}
+html body main.container #warning #dashboardVisualSummaryRow .rank-name{font-size:11px!important}
+html body main.container #warning #dashboardVisualSummaryRow .rank-value{font-size:10px!important}
+@media(max-width:1350px){
+ html body main.container #warning #dashboardVisualSummaryRow{grid-template-columns:1fr!important}
+ html body main.container #warning #dashboardVisualSummaryRow>
+  :is(.estate-watch-table,.station-watch-table,.rid-panel){
+  height:520px!important;min-height:520px!important;max-height:520px!important;
+ }
+ html body main.container #warning #dashboardVisualSummaryRow .water-donut-layout{grid-template-columns:minmax(180px,.7fr) minmax(260px,1.3fr)!important;align-items:center!important}
+}
+</style>
+<script id="flood-dashboard-three-visuals-row-20260922-v6-script">
+(function(){
+ "use strict";
+ var moving=false,timer=0;
+ function arrange(){
+  if(moving)return;moving=true;
+  var warning=document.getElementById("warning");
+  var estate=document.getElementById("estateRanks")?.closest(".estate-watch-table");
+  var water=document.getElementById("stations")?.closest(".station-watch-table");
+  var rid=document.getElementById("ridStationRows")?.closest(".rid-panel");
+  if(!warning||!estate||!water||!rid){moving=false;return}
+  var row=document.getElementById("dashboardVisualSummaryRow");
+  if(!row){
+   row=document.createElement("section");
+   row.id="dashboardVisualSummaryRow";
+   row.setAttribute("aria-label","สรุปสถานการณ์น้ำและพื้นที่เฝ้าระวัง");
+   var anchor=document.getElementById("estateWaterTablePair")||estate;
+   anchor.parentNode.insertBefore(row,anchor);
+  }
+  [estate,water,rid].forEach(function(panel){if(panel.parentElement!==row)row.appendChild(panel)});
+  moving=false;
+ }
+ function schedule(){clearTimeout(timer);timer=setTimeout(arrange,40)}
+ function start(){
+  arrange();
+  var warning=document.getElementById("warning");
+  if(warning)new MutationObserver(schedule).observe(warning,{childList:true,subtree:true});
+  [100,400,900,1800,3500,6000,10000,15000].forEach(function(ms){setTimeout(arrange,ms)});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();
