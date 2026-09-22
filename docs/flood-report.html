@@ -16,7 +16,7 @@
   <script src="data/thaiwater_latest.js?v=20260911-1"></script>
   <script src="flood-live-data.js?v=20260922-3" defer></script>
   <script src="data/thaiwater-map-meta.js" defer></script>
-  <script src="flood-export.js?v=20260922-4" defer></script>
+  <script src="flood-export.js?v=20260922-5" defer></script>
   <style>
     :root{--purple:#388ed1;--blue:#1769C2;--cyan:#81D4FA;--teal:#66BB6A;--ink:#283142;--muted:#697386;--bg:#F6F6F4;--line:#E5E2E8;--soft:#F5F1F7;--white:#FFFFFF;--red:#B0005A;--orange:#F6BB42;--green:#58B957}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Sarabun","Sarabun",sans-serif;font-size:16px;font-weight:400}button,input,select,textarea{font:inherit}
@@ -14075,7 +14075,7 @@ html body main.container #warning .dashboard-chart-mode>.rid-table-wrap{
   if(!total){target.innerHTML='<div class="dashboard-viz-empty">กำลังประมวลผลข้อมูลล่าสุด…</div>';return}
   var a=counts.critical/total*100,b=a+counts.warning/total*100,c=b+counts.normal/total*100;
   target.innerHTML='<div class="water-donut-layout"><div class="water-donut-wrap"><div class="water-donut" style="background:conic-gradient(#598C14 0 '+a+'%,#335238 '+a+'% '+b+'%,#4A8594 '+b+'% '+c+'%,#051736 '+c+'% 100%)"><div class="water-donut-center"><strong>'+total.toLocaleString("th-TH")+'</strong><span>สถานีทั้งหมด</span></div></div></div><div class="water-legend">'+
-   [['critical','วิกฤต / น้ำล้นตลิ่ง'],['warning','เฝ้าระวัง / ทรงตัว'],['normal','ปกติ / ลดลง'],['unknown','ไม่ระบุสถานะ']].map(function(x){return '<div class="water-legend-item '+x[0]+'"><i></i><span>'+x[1]+'</span><b>'+counts[x[0]].toLocaleString("th-TH")+'</b></div>'}).join("")+
+   [['critical','วิกฤต / น้ำล้นตลิ่ง'],['warning','เฝ้าระวัง / ทรงตัว'],['normal','ปกติ / ลดลง'],['unknown','ไม่ระบุสถานะ']].map(function(x){var white=x[0]==="critical"?' style="background:#fff!important;background-color:#fff!important;color:#263746!important"':'';return '<div class="water-legend-item '+x[0]+'"'+white+'><i></i><span style="color:#263746!important">'+x[1]+'</span><b style="color:#263746!important">'+counts[x[0]].toLocaleString("th-TH")+'</b></div>'}).join("")+
    '</div></div>';
  }
  function renderRid(){
