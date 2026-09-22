@@ -35,6 +35,37 @@
       });
     });
   }
+  const FORECAST_BASE_MAP="https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/export?bbox=97.3,5.6,105.8,20.5&bboxSR=4326&imageSR=4326&size=1100,405&format=png32&transparent=false&f=image";
+  function renderForecastPeriodMap(period,areas,imageId){
+    const image=$(imageId);if(!image)return;
+    const frame=image.closest(".three-day-risk-map");if(!frame)return;
+    image.style.setProperty("object-fit","fill","important");
+    image.style.setProperty("object-position","center","important");
+    if(image.dataset.userUploaded!=="true")image.src=FORECAST_BASE_MAP;
+    let overlay=frame.querySelector(".forecast-risk-overlay");
+    if(!overlay){overlay=document.createElement("div");overlay.className="forecast-risk-overlay";frame.appendChild(overlay)}
+    let legend=frame.querySelector(".forecast-map-period-legend");
+    if(!legend){legend=document.createElement("div");frame.appendChild(legend)}
+    legend.className="forecast-map-period-legend period-"+period.replace("h","");
+    legend.innerHTML='<i></i>พื้นที่เฝ้าระวัง '+(period==="24h"?"24":"48")+' ชั่วโมง';
+    if(image.dataset.userUploaded==="true"){overlay.replaceChildren();return}
+    const west=97.3,east=105.8,south=5.6,north=20.5;
+    overlay.replaceChildren();
+    (areas||[]).forEach(area=>{
+      const lat=Number(area.latitude),lon=Number(area.longitude);
+      if(!Number.isFinite(lat)||!Number.isFinite(lon)||lon<west||lon>east||lat<south||lat>north)return;
+      const dot=document.createElement("i");
+      dot.className="forecast-risk-dot period-"+period.replace("h","");
+      dot.style.left=((lon-west)/(east-west)*100)+"%";
+      dot.style.top=((north-lat)/(north-south)*100)+"%";
+      dot.title=[area.tambon,area.amphoe,area.province].filter(Boolean).join(" ")+" • ฝนสะสม "+fmt(area.sum_rainfall_mm)+" มม.";
+      overlay.appendChild(dot);
+    });
+  }
+  function renderForecastMaps(data){
+    renderForecastPeriodMap("24h",data.flash_flood?.["24h"]?.areas||[],"forecastMap24");
+    renderForecastPeriodMap("48h",data.flash_flood?.["48h"]?.areas||[],"forecastMap48");
+  }
   function renderExportData(data){
     latestData=data;
     const estates=(data.estate_watch||[]).slice(0,8);
@@ -69,6 +100,7 @@
     renderForecastPeriod("24h","exportForecastRows24");
     renderForecastPeriod("48h","exportForecastRows48");
     renderPins(data);
+    renderForecastMaps(data);
   }
   function syncEditableText(){
     const period=$("reportPeriodTitle")?.textContent?.trim()||"ข้อมูลตามช่วงเวลารายงาน";
@@ -184,7 +216,7 @@
   function bindImageUpload(inputId,imageIds){
     $(inputId)?.addEventListener("change",event=>{
       const file=event.target.files?.[0];if(!file)return;
-      const reader=new FileReader();reader.onload=()=>imageIds.forEach(id=>{const img=$(id);if(img)img.src=reader.result});reader.readAsDataURL(file);
+      const reader=new FileReader();reader.onload=()=>imageIds.forEach(id=>{const img=$(id);if(img){img.src=reader.result;img.dataset.userUploaded="true";const overlay=img.closest(".three-day-risk-map")?.querySelector(".forecast-risk-overlay");if(overlay)overlay.replaceChildren()}});reader.readAsDataURL(file);
     });
   }
   function setupMapUpload(){
