@@ -1441,7 +1441,7 @@ document.documentElement.classList.add("flood-initializing");
             <div class="daily-water-grid">
               <article class="daily-water-item rain"><small>ฝนสูงสุด 24 ชั่วโมง</small><strong id="dailyRain">–</strong><span>ข้อมูลสถานีใกล้นิคมฯ</span></article>
               <article class="daily-water-item level nearby-flood-risk-card"><small>พื้นที่เสี่ยงน้ำท่วมใกล้นิคมฯ</small><strong id="nearbyFloodEstateCount">–</strong><span id="nearestWaterStationDistance">กำลังคำนวณระยะห่างสถานีระดับน้ำ</span></article>
-              <article class="daily-water-item station"><small>สถานีที่ต้องติดตาม</small><strong id="dailyStations">–</strong><span>สถานีตรวจวัดที่เกี่ยวข้อง</span></article>
+              <article class="daily-water-item station"><small>ระดับน้ำสูงสุดเทียบตลิ่ง (%)</small><strong id="dailyStations">–</strong><span>ค่าสูงสุดจากสถานีตรวจวัดที่เกี่ยวข้อง</span></article>
               <article class="daily-water-item status"><small>สถานการณ์ภาพรวม</small><strong id="dailyStatus">กำลังตรวจสอบ</strong><span id="dailyTrend">ประเมินจากข้อมูลล่าสุด</span></article>
             </div>
             <div class="daily-water-foot"><span><b>สถานะข้อมูล:</b> <i id="dailyVerified">กำลังตรวจสอบ</i></span><span><b>รายงานครั้งถัดไป:</b> <i id="dailyNext">–</i></span></div>
@@ -1790,7 +1790,6 @@ document.documentElement.classList.add("flood-initializing");
   document.getElementById("dailyRain").textContent=rain;
   const legacyCritical=document.getElementById("dailyCritical");
   if(legacyCritical)legacyCritical.textContent=critical;
-  document.getElementById("dailyStations").textContent=stations;
   document.getElementById("dailyVerified").textContent=textOf("outVerify1");
   document.getElementById("dailyNext").textContent=textOf("outNext");
   if(trend!=="–")document.getElementById("dailyTrend").textContent=trend;
@@ -11080,8 +11079,10 @@ function render(rows){
  var chart=document.getElementById("ridLevelChart"),trend=document.getElementById("ridTrendChart"),body=document.getElementById("ridStationRows"),status=document.getElementById("ridLiveStatus");
  var top=rows.slice(0,10);
  var stationCount=rows.length.toLocaleString("th-TH");
- ["dailyStations","outRoute2","outRouteCount"].forEach(function(id){var el=document.getElementById(id);if(el)el.textContent=stationCount});
+ ["outRoute2","outRouteCount"].forEach(function(id){var el=document.getElementById(id);if(el)el.textContent=stationCount});
  var routeInput=document.getElementById("routeCountIn");if(routeInput)routeInput.value=stationCount;
+ var maxWaterPct=rows.reduce(function(max,row){return Number.isFinite(row.pct)?Math.max(max,row.pct):max},-Infinity);
+ var maxWaterNode=document.getElementById("dailyStations");if(maxWaterNode)maxWaterNode.textContent=Number.isFinite(maxWaterPct)?maxWaterPct.toLocaleString("th-TH",{maximumFractionDigits:2})+"%":"–";
  if(chart)chart.innerHTML=top.length?top.map(function(r){return'<div class="rid-level-row"><span class="rid-level-name" title="'+esc(r.name)+'">'+esc(r.name)+'</span><div class="rid-level-track"><div class="rid-level-fill '+cls(r.pct)+'" style="width:'+Math.max(2,Math.min(100,r.pct))+'%"></div></div><span class="rid-level-value">'+r.pct.toLocaleString("th-TH",{maximumFractionDigits:1})+'%</span></div>'}).join(""):'<p>ไม่พบสถานีในรัศมีที่กำหนด</p>';
  var counts={up:0,steady:0,down:0};
  rows.forEach(function(r){if(/เพิ่ม/.test(r.trend))counts.up++;else if(/ลด/.test(r.trend))counts.down++;else counts.steady++});
@@ -11595,7 +11596,7 @@ html body main.container #warning #topFloodNine>.final-flood-card>.force-new-flo
  var specs=[
   ["outFactory","นิคมฯ ใกล้สถานีฝนหนัก","แห่ง"],
   ["dailyNearbyRiskCount","พื้นที่เสี่ยงน้ำท่วมใกล้นิคมฯ","จุดเสี่ยงจากข้อมูลฝนสะสม 48 ชั่วโมง"],
-  ["dailyStations","สถานีที่ต้องติดตาม","สถานีตรวจวัดที่เกี่ยวข้อง"],
+  ["dailyStations","ระดับน้ำสูงสุดเทียบตลิ่ง (%)","ค่าสูงสุดจากสถานีตรวจวัดที่เกี่ยวข้อง"],
   ["dailyStatus","สถานการณ์ภาพรวม","dailyTrend"],
   ["outCritical","นิคมฯ ใกล้ระดับน้ำผิดปกติ","แห่ง"],
   ["nationalFloodCount","พื้นที่เสี่ยงน้ำท่วมฉับพลัน 24 ชั่วโมง","จังหวัด"],
