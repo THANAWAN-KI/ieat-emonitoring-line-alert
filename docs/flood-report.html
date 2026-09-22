@@ -14439,5 +14439,137 @@ html body main.container #infographic .forecast-map-period-legend i.watch{backgr
 html body main.container #infographic .forecast-map-period-legend i.critical{background:#F00A36!important}
 </style>
 
+
+<style id="flood-report-exact-five-fixes-20260922-v9">
+/* 1–2: distinct overflow color in both report status columns. */
+html body main.container #infographic :is(#reportPage2,#reportPage3) td.report-overflow-status,
+html body main.container #infographic :is(#reportPage2,#reportPage3) td.report-overflow-status>*{
+ background:#ED3B21!important;
+ background-color:#ED3B21!important;
+ color:#FFFFFF!important;
+ -webkit-text-fill-color:#FFFFFF!important;
+}
+.report-status-legend .overflow{background:#ED3B21!important}
+/* 3–5: pages 4, 5 and 6 each occupy one complete gallery row. */
+html body main.container #infographic .report-pages>
+ :is(.infographic-gallery-item:has(#reportPage4),.infographic-gallery-item:has(#reportPage5),.infographic-gallery-item:has(#reportPage6)),
+html body main.container #infographic .report-pages>
+ :is(#reportPage4,#reportPage5,#reportPage6){
+ grid-column:1/-1!important;
+ justify-self:center!important;
+ width:min(100%,1180px)!important;
+ max-width:1180px!important;
+}
+html body main.container #infographic .infographic-gallery-item:has(#reportPage4) .infographic-preview,
+html body main.container #infographic .infographic-gallery-item:has(#reportPage5) .infographic-preview,
+html body main.container #infographic .infographic-gallery-item:has(#reportPage6) .infographic-preview{
+ display:flex!important;
+ justify-content:center!important;
+}
+/* ThaiWater 24/48-hour polygon layers; remove the previous point-marker overlays. */
+html body main.container #infographic :is(#reportPage4,#reportPage5)
+ :is(.forecast-risk-overlay,#forecastPinOverlay24,#forecastPinOverlay48){
+ display:none!important;
+}
+.forecast-area-overlay{position:absolute;inset:0;z-index:4;pointer-events:none}
+.forecast-area-overlay svg{display:block;width:100%;height:100%}
+.forecast-map-message{
+ position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+ padding:9px 14px;border-radius:8px;background:rgba(255,255,255,.94);
+ color:#52636D;font-size:12px;box-shadow:0 2px 8px rgba(0,0,0,.14)
+}
+.forecast-map-message.error{color:#B42318}
+html body main.container #infographic :is(#reportPage4,#reportPage5) .forecast-map-period-legend{
+ display:block!important;
+ right:12px!important;bottom:12px!important;
+ max-width:360px!important;padding:9px 12px!important;
+}
+html body main.container #infographic :is(#reportPage4,#reportPage5) .forecast-map-period-legend b,
+html body main.container #infographic :is(#reportPage4,#reportPage5) .forecast-map-period-legend span{
+ display:flex!important;align-items:center!important;gap:7px!important;
+}
+html body main.container #infographic :is(#reportPage4,#reportPage5) .forecast-map-period-legend span{
+ margin-top:4px!important;color:#60727C!important;font-size:9px!important;
+}
+html body main.container #infographic .forecast-map-period-legend.area-period-24 b i{
+ background:#FFC719!important;border-color:#D58B00!important;border-radius:2px!important;
+}
+html body main.container #infographic .forecast-map-period-legend.area-period-48 b i{
+ background:#109DC0!important;border-color:#075F8A!important;border-radius:2px!important;
+}
+/* 5: trend colors on the standalone water-level station report. */
+html body main.container #infographic #reportPage6 .export-rid-trend.up{
+ background:#F00A36!important;color:#FFFFFF!important;-webkit-text-fill-color:#FFFFFF!important;
+}
+html body main.container #infographic #reportPage6 .export-rid-trend.down{
+ background:#598C14!important;color:#FFFFFF!important;-webkit-text-fill-color:#FFFFFF!important;
+}
+html body main.container #infographic #reportPage6 .export-rid-trend.steady{
+ background:#109DC0!important;color:#FFFFFF!important;-webkit-text-fill-color:#FFFFFF!important;
+}
+.report-trend-legend{
+ display:flex!important;justify-content:center!important;align-items:center!important;
+ gap:18px!important;flex-wrap:wrap!important;
+ margin:7px 0 2px!important;padding:7px 10px!important;
+ border:1px solid #D7E0E5!important;background:#F7FAFB!important;
+ color:#344756!important;font-size:10px!important;
+}
+.report-trend-legend span{display:inline-flex!important;align-items:center!important;gap:6px!important}
+.report-trend-legend i{width:14px!important;height:10px!important;border-radius:2px!important}
+.report-trend-legend .up{background:#F00A36!important}
+.report-trend-legend .down{background:#598C14!important}
+.report-trend-legend .steady{background:#109DC0!important}
+</style>
+<script id="flood-report-exact-five-fixes-20260922-v9-script">
+(function(){
+ "use strict";
+ var busy=false;
+ function statusLegend(){
+  return '<b>คำอธิบายสถานะ</b><span><i class="normal"></i>ปกติ</span><span><i class="overflow"></i>ล้นตลิ่ง</span><span><i class="critical"></i>วิกฤต</span><span><i class="warning"></i>เฝ้าระวัง</span>';
+ }
+ function trendLegend(){
+  return '<b>คำอธิบายแนวโน้ม</b><span><i class="up"></i>เพิ่มขึ้น</span><span><i class="down"></i>ลดลง</span><span><i class="steady"></i>คงที่</span>';
+ }
+ function paintOverflow(selector,index){
+  document.querySelectorAll(selector+" tr").forEach(function(row){
+   var cell=row.cells&&row.cells[index];if(!cell)return;
+   cell.classList.toggle("report-overflow-status",/ล้นตลิ่ง/.test(cell.textContent||""));
+  });
+ }
+ function setGalleryTitle(pageId,title){
+  var page=document.getElementById(pageId),item=page&&page.closest(".infographic-gallery-item");
+  var heading=item&&item.querySelector(".infographic-card-head h2");
+  if(heading)heading.textContent=title;
+ }
+ function apply(){
+  if(busy)return;busy=true;
+  paintOverflow("#infographic #exportEstateRows",5);
+  paintOverflow("#infographic #exportWaterRows",2);
+  ["reportPage2","reportPage3"].forEach(function(id){
+   var page=document.getElementById(id),legend=page&&page.querySelector(".report-status-legend");
+   if(legend&&!legend.querySelector(".overflow"))legend.innerHTML=statusLegend();
+  });
+  var page6=document.getElementById("reportPage6");
+  if(page6&&!page6.querySelector(".report-trend-legend")){
+   var footer=page6.querySelector(".sheet-footer");
+   if(footer){var legend=document.createElement("div");legend.className="report-trend-legend";legend.innerHTML=trendLegend();footer.before(legend)}
+  }
+  setGalleryTitle("reportPage2","รายงานสถานการณ์น้ำในพื้นที่เฝ้าระวังใกล้พื้นที่นิคมฯ");
+  setGalleryTitle("reportPage3","สถานการณ์น้ำในพื้นที่เฝ้าระวังใกล้นิคมอุตสาหกรรม");
+  setGalleryTitle("reportPage4","พื้นที่เฝ้าระวัง 24 ชั่วโมงใกล้เคียงพื้นที่นิคมฯ");
+  setGalleryTitle("reportPage5","พื้นที่เฝ้าระวัง 48 ชั่วโมงใกล้เคียงพื้นที่นิคมฯ");
+  setGalleryTitle("reportPage6","สถานีตรวจวัดระดับน้ำที่เกี่ยวข้องกับนิคมฯ");
+  busy=false;
+ }
+ function start(){
+  apply();
+  var root=document.getElementById("infographic");
+  if(root)new MutationObserver(function(){clearTimeout(root._reportFixTimer);root._reportFixTimer=setTimeout(apply,35)}).observe(root,{childList:true,subtree:true,characterData:true});
+  [100,400,900,1800,3500,6000,10000].forEach(function(ms){setTimeout(apply,ms)});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>
+
 </body>
 </html>
