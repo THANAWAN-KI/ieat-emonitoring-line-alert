@@ -1,6 +1,7 @@
 (function(){
   "use strict";
   const $=id=>document.getElementById(id);
+  const esc=value=>String(value==null?"":value).replace(/[&<>"\']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","\'":"&#39;"}[char]));
   let latestData=null;
 
   function statusLevel(status,score){
