@@ -14372,5 +14372,72 @@ html body main.container #warning #waterSituationViz .water-legend-item.warning 
 })();
 </script>
 
+
+<style id="flood-report-reference-map-markers-20260922-v8">
+/* Marker colors and shapes matched to the supplied reference map. */
+html body main.container #infographic :is(#reportPage4,#reportPage5) .forecast-risk-dot,
+html body main.container #infographic :is(#reportPage4,#reportPage5) .report-estate-dot{
+ width:14px!important;
+ height:14px!important;
+ border:1.5px solid #4A4A4A!important;
+ border-radius:50%!important;
+ box-shadow:0 1px 3px rgba(0,0,0,.28)!important;
+ transform:translate(-50%,-50%)!important;
+}
+html body main.container #infographic :is(#reportPage4,#reportPage5) .forecast-risk-dot.risk-normal{
+ background:#598C14!important;
+}
+html body main.container #infographic :is(#reportPage4,#reportPage5) .forecast-risk-dot.risk-watch{
+ background:#FF8A00!important;
+}
+html body main.container #infographic :is(#reportPage4,#reportPage5) .forecast-risk-dot.risk-critical{
+ background:#F00A36!important;
+}
+html body main.container #infographic :is(#reportPage4,#reportPage5) .report-estate-dot{
+ background:#109DC0!important;
+}
+html body main.container #infographic :is(#reportPage4,#reportPage5) .forecast-map-period-legend{
+ position:absolute!important;
+ right:12px!important;
+ bottom:12px!important;
+ z-index:8!important;
+ display:grid!important;
+ grid-template-columns:auto auto!important;
+ align-items:center!important;
+ gap:6px 12px!important;
+ max-width:310px!important;
+ padding:9px 12px!important;
+ border:1px solid #CBD6DC!important;
+ border-radius:10px!important;
+ background:rgba(255,255,255,.95)!important;
+ color:#263746!important;
+ font-size:10px!important;
+ box-shadow:0 3px 12px rgba(0,0,0,.16)!important;
+}
+html body main.container #infographic :is(#reportPage4,#reportPage5) .forecast-map-period-legend b{
+ grid-column:1/-1!important;
+ color:#263746!important;
+ font-size:11px!important;
+}
+html body main.container #infographic :is(#reportPage4,#reportPage5) .forecast-map-period-legend span{
+ display:inline-flex!important;
+ align-items:center!important;
+ gap:6px!important;
+ white-space:nowrap!important;
+}
+html body main.container #infographic :is(#reportPage4,#reportPage5) .forecast-map-period-legend i{
+ display:inline-block!important;
+ width:11px!important;
+ height:11px!important;
+ border:1px solid #4A4A4A!important;
+ border-radius:50%!important;
+ box-shadow:none!important;
+}
+html body main.container #infographic .forecast-map-period-legend i.estate{background:#109DC0!important}
+html body main.container #infographic .forecast-map-period-legend i.normal{background:#598C14!important}
+html body main.container #infographic .forecast-map-period-legend i.watch{background:#FF8A00!important}
+html body main.container #infographic .forecast-map-period-legend i.critical{background:#F00A36!important}
+</style>
+
 </body>
 </html>
