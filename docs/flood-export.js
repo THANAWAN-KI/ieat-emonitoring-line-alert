@@ -35,14 +35,51 @@
       });
     });
   }
-  function mapImageUrl(bounds){
-    return "https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/export?bbox="+bounds.join(",")+"&bboxSR=4326&imageSR=4326&size=1100,405&format=png32&transparent=false&f=image";
+  const MAP_WIDTH=1100,MAP_HEIGHT=405,OSM_TILE_SIZE=256;
+  function mercatorWorld(lon,lat,zoom){
+    const scale=OSM_TILE_SIZE*Math.pow(2,zoom);
+    const safeLat=Math.max(-85.05112878,Math.min(85.05112878,Number(lat)));
+    const sin=Math.sin(safeLat*Math.PI/180);
+    return [
+      (Number(lon)+180)/360*scale,
+      (.5-Math.log((1+sin)/(1-sin))/(4*Math.PI))*scale
+    ];
   }
-  function polygonPath(geometry,bounds){
-    const [west,south,east,north]=bounds,W=1100,H=405;
-    const point=c=>[((Number(c[0])-west)/(east-west)*W),((north-Number(c[1]))/(north-south)*H)];
+  function osmLayout(bounds){
+    const [west,south,east,north]=bounds;
+    const nw0=mercatorWorld(west,north,0),se0=mercatorWorld(east,south,0);
+    const spanX=Math.max(.000001,se0[0]-nw0[0]),spanY=Math.max(.000001,se0[1]-nw0[1]);
+    const zoom=Math.max(3,Math.min(13,Math.floor(Math.min(
+      Math.log2(MAP_WIDTH/spanX),
+      Math.log2(MAP_HEIGHT/spanY)
+    ))));
+    const nw=mercatorWorld(west,north,zoom),se=mercatorWorld(east,south,zoom);
+    const spanW=se[0]-nw[0],spanH=se[1]-nw[1];
+    const scale=Math.min(MAP_WIDTH/spanW,MAP_HEIGHT/spanH);
+    const drawW=spanW*scale,drawH=spanH*scale;
+    const offsetX=(MAP_WIDTH-drawW)/2,offsetY=(MAP_HEIGHT-drawH)/2;
+    const project=coord=>{
+      const p=mercatorWorld(coord[0],coord[1],zoom);
+      return [offsetX+(p[0]-nw[0])*scale,offsetY+(p[1]-nw[1])*scale];
+    };
+    const tiles=[];
+    const minX=Math.floor(nw[0]/OSM_TILE_SIZE),maxX=Math.floor(se[0]/OSM_TILE_SIZE);
+    const minY=Math.floor(nw[1]/OSM_TILE_SIZE),maxY=Math.floor(se[1]/OSM_TILE_SIZE);
+    const limit=Math.pow(2,zoom);
+    for(let x=minX;x<=maxX;x++)for(let y=minY;y<=maxY;y++){
+      if(y<0||y>=limit)continue;
+      const wrappedX=((x%limit)+limit)%limit;
+      const px=offsetX+(x*OSM_TILE_SIZE-nw[0])*scale;
+      const py=offsetY+(y*OSM_TILE_SIZE-nw[1])*scale;
+      const size=OSM_TILE_SIZE*scale+1;
+      const host=["a","b","c"][Math.abs(x+y)%3];
+      tiles.push('<image href="https://'+host+'.tile.openstreetmap.org/'+zoom+'/'+wrappedX+'/'+y+'.png" x="'+px.toFixed(2)+'" y="'+py.toFixed(2)+'" width="'+size.toFixed(2)+'" height="'+size.toFixed(2)+'" preserveAspectRatio="none" crossorigin="anonymous"/>');
+    }
+    return {project,tiles:tiles.join("")};
+  }
+  function polygonPath(geometry,project){
     const polygons=geometry?.rings?[geometry.rings]:geometry?.type==="MultiPolygon"?geometry.coordinates:geometry?.type==="Polygon"?[geometry.coordinates]:[];
-    return polygons.map(poly=>poly.map(ring=>ring.map((coord,index)=>{const p=point(coord);return(index?"L":"M")+p[0].toFixed(1)+","+p[1].toFixed(1)}).join(" ")+" Z").join(" ")).join(" ");
+    return polygons.map(poly=>poly.map(ring=>ring.map((coord,index)=>{const p=project(coord);return(index?"L":"M")+p[0].toFixed(1)+","+p[1].toFixed(1)}).join(" ")+" Z").join(" ")).join(" ");
   }
   async function renderForecastPeriodMap(period,areas,imageId){
     const image=$(imageId);if(!image)return;
@@ -62,11 +99,11 @@
     const points=geometries.flatMap(area=>area.geometry.rings.flat());
     let west=Math.min(...points.map(p=>Number(p[0]))),east=Math.max(...points.map(p=>Number(p[0]))),south=Math.min(...points.map(p=>Number(p[1]))),north=Math.max(...points.map(p=>Number(p[1])));
     const padX=Math.max((east-west)*.09,.08),padY=Math.max((north-south)*.12,.08),bounds=[west-padX,south-padY,east+padX,north+padY];
-    if(image.dataset.userUploaded!=="true")image.src=mapImageUrl(bounds);
-    const point=c=>[((Number(c[0])-bounds[0])/(bounds[2]-bounds[0])*1100),((bounds[3]-Number(c[1]))/(bounds[3]-bounds[1])*405)];
-    const paths=geometries.map(area=>'<path d="'+polygonPath(area.geometry,bounds)+'" fill="#ED3B21" fill-opacity=".34" stroke="#F00A36" stroke-width="2.2" vector-effect="non-scaling-stroke"><title>'+esc([area.tambon,area.amphoe,area.province].filter(Boolean).join(" "))+'</title></path>').join("");
-    const labels=geometries.filter(area=>Number.isFinite(Number(area.longitude))&&Number.isFinite(Number(area.latitude))).map(area=>{const p=point([area.longitude,area.latitude]),rain=fmt(area.sum_rainfall_mm);return '<g transform="translate('+p[0].toFixed(1)+' '+p[1].toFixed(1)+')"><circle r="20" fill="#F00A36" stroke="#fff" stroke-width="2"/><text text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="13" font-weight="700">'+rain+'</text></g>'}).join("");
-    areaOverlay.innerHTML='<svg viewBox="0 0 1100 405" preserveAspectRatio="none" aria-label="พื้นที่เฝ้าระวังน้ำท่วม '+(period==="24h"?"24":"48")+' ชั่วโมง">'+paths+labels+'</svg>';
+    const osm=osmLayout(bounds);
+    if(image.dataset.userUploaded!=="true")image.src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'/%3E";
+    const paths=geometries.map(area=>'<path d="'+polygonPath(area.geometry,osm.project)+'" fill="#ED3B21" fill-opacity=".34" stroke="#F00A36" stroke-width="2.2" vector-effect="non-scaling-stroke"><title>'+esc([area.tambon,area.amphoe,area.province].filter(Boolean).join(" "))+'</title></path>').join("");
+    const labels=geometries.filter(area=>Number.isFinite(Number(area.longitude))&&Number.isFinite(Number(area.latitude))).map(area=>{const p=osm.project([area.longitude,area.latitude]),rain=fmt(area.sum_rainfall_mm);return '<g transform="translate('+p[0].toFixed(1)+' '+p[1].toFixed(1)+')"><circle r="20" fill="#F00A36" stroke="#fff" stroke-width="2"/><text text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="13" font-weight="700">'+rain+'</text></g>'}).join("");
+    areaOverlay.innerHTML='<svg viewBox="0 0 1100 405" preserveAspectRatio="none" aria-label="แผนที่ ThaiWater พื้นที่เฝ้าระวังน้ำท่วม '+(period==="24h"?"24":"48")+' ชั่วโมง">'+osm.tiles+'<g>'+paths+labels+'</g><text x="1092" y="397" text-anchor="end" fill="#2f3b43" font-size="10" paint-order="stroke" stroke="#fff" stroke-width="3">© OpenStreetMap contributors · ThaiWater</text></svg>';
   }
   function renderForecastMaps(data){
     renderForecastPeriodMap("24h",data.flash_flood?.["24h"]?.areas||[],"forecastMap24");
