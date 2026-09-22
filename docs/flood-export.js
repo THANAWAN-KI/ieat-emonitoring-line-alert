@@ -56,7 +56,7 @@
     ))));
     const nw=mercatorWorld(west,north,zoom),se=mercatorWorld(east,south,zoom);
     const spanW=se[0]-nw[0],spanH=se[1]-nw[1];
-    const scale=Math.min(MAP_WIDTH/spanW,MAP_HEIGHT/spanH);
+    const scale=Math.max(MAP_WIDTH/spanW,MAP_HEIGHT/spanH); // cover the entire report map frame
     const drawW=spanW*scale,drawH=spanH*scale;
     const offsetX=(MAP_WIDTH-drawW)/2,offsetY=(MAP_HEIGHT-drawH)/2;
     const project=coord=>{
@@ -82,6 +82,39 @@
     const polygons=geometry?.rings?[geometry.rings]:geometry?.type==="MultiPolygon"?geometry.coordinates:geometry?.type==="Polygon"?[geometry.coordinates]:[];
     return polygons.map(poly=>poly.map(ring=>ring.map((coord,index)=>{const p=project(coord);return(index?"L":"M")+p[0].toFixed(1)+","+p[1].toFixed(1)}).join(" ")+" Z").join(" ")).join(" ");
   }
+  function setupForecastMapZoom(frame,areaOverlay){
+    let controls=frame.querySelector(".report-map-zoom-controls");
+    if(!controls){
+      controls=document.createElement("div");
+      controls.className="report-map-zoom-controls";
+      controls.innerHTML='<button type="button" data-zoom="in" aria-label="ซูมเข้า">+</button><button type="button" data-zoom="out" aria-label="ซูมออก">−</button><button type="button" data-zoom="reset" aria-label="รีเซ็ตแผนที่">↺</button>';
+      frame.appendChild(controls);
+    }
+    const apply=()=>{
+      const zoom=Math.max(1,Math.min(4,Number(areaOverlay.dataset.zoom)||1));
+      areaOverlay.dataset.zoom=String(zoom);
+      areaOverlay.style.setProperty("transform","scale("+zoom+")");
+      areaOverlay.style.setProperty("transform-origin","center center");
+    };
+    if(!controls.dataset.bound){
+      controls.dataset.bound="true";
+      controls.addEventListener("click",event=>{
+        const action=event.target.closest("button")?.dataset.zoom;if(!action)return;
+        let zoom=Number(areaOverlay.dataset.zoom)||1;
+        if(action==="in")zoom+=.25;
+        else if(action==="out")zoom-=.25;
+        else zoom=1;
+        areaOverlay.dataset.zoom=String(Math.max(1,Math.min(4,zoom)));apply();
+      });
+      frame.addEventListener("wheel",event=>{
+        event.preventDefault();
+        let zoom=Number(areaOverlay.dataset.zoom)||1;
+        zoom+=event.deltaY<0?.15:-.15;
+        areaOverlay.dataset.zoom=String(Math.max(1,Math.min(4,zoom)));apply();
+      },{passive:false});
+    }
+    apply();
+  }
   async function renderForecastPeriodMap(period,areas,imageId){
     const image=$(imageId);if(!image)return;
     const frame=image.closest(".three-day-risk-map");if(!frame)return;
@@ -90,7 +123,7 @@
     const geometries=(areas||[]).filter(area=>area.geometry?.rings?.length);
     frame.querySelector(".forecast-risk-overlay")?.replaceChildren();
     let areaOverlay=frame.querySelector(".forecast-area-overlay");
-    if(!areaOverlay){areaOverlay=document.createElement("div");areaOverlay.className="forecast-area-overlay";frame.appendChild(areaOverlay)}
+    if(!areaOverlay){areaOverlay=document.createElement("div");areaOverlay.className="forecast-area-overlay";frame.appendChild(areaOverlay)}\n    setupForecastMapZoom(frame,areaOverlay);
     let legend=frame.querySelector(".forecast-map-period-legend");
     if(!legend){legend=document.createElement("div");frame.appendChild(legend)}
     legend.className="forecast-map-period-legend area-period-"+period.replace("h","");
