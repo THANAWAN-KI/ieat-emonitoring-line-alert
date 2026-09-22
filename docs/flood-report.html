@@ -1535,8 +1535,7 @@ document.documentElement.classList.add("flood-initializing");
 <section class="export-sheet portrait-sheet forecast-period-page" id="reportPage4" data-report-page="4" data-forecast-period="24h">
 <header class="sheet-header compact"><h2>พื้นที่เฝ้าระวัง 24 ชั่วโมงใกล้เคียงพื้นที่นิคมฯ</h2><p class="shared-report-period" contenteditable="true">ข้อมูลพื้นที่เฝ้าระวังล่าสุดจากระบบ ThaiWater</p></header>
 <section class="three-day-risk-map">
-<img id="forecastMap24" class="report-watch-map-image" src="assets/thaiwater-watch-map-only.svg" alt="แผนที่พื้นที่เฝ้าระวัง 24 ชั่วโมงใกล้เคียงพื้นที่นิคมอุตสาหกรรม">
-<div id="forecastPinOverlay24" class="estate-pin-overlay" aria-label="ตำแหน่งนิคมอุตสาหกรรม"></div>
+<iframe class="report-arcgis-map" width="700" height="600" allow="local-network-access; geolocation" title="แผนที่แสดงข้อมูลน้ำท่วม" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&amp;webmap=3d24287ac6ea49cd823625ddad496e01&amp;theme=light&amp;bookmarks=true&amp;legend=true&amp;information=true&amp;share=true&amp;scroll=false&amp;basemaps=true&amp;center=101.60218426570209,13.611210763141127&amp;scale=4622324.434309"></iframe>
 </section>
 <section class="export-table-block forecast-table-block">
 <h3>พื้นที่เฝ้าระวัง 24 ชั่วโมงใกล้เคียงพื้นที่นิคมฯ</h3>
@@ -1547,8 +1546,7 @@ document.documentElement.classList.add("flood-initializing");
 <section class="export-sheet portrait-sheet forecast-period-page" id="reportPage5" data-report-page="5" data-forecast-period="48h">
 <header class="sheet-header compact"><h2>พื้นที่เฝ้าระวัง 48 ชั่วโมงใกล้เคียงพื้นที่นิคมฯ</h2><p class="shared-report-period" contenteditable="true">ข้อมูลพื้นที่เฝ้าระวังล่าสุดจากระบบ ThaiWater</p></header>
 <section class="three-day-risk-map">
-<img id="forecastMap48" class="report-watch-map-image" src="assets/thaiwater-watch-map-only.svg" alt="แผนที่พื้นที่เฝ้าระวัง 48 ชั่วโมงใกล้เคียงพื้นที่นิคมอุตสาหกรรม">
-<div id="forecastPinOverlay48" class="estate-pin-overlay" aria-label="ตำแหน่งนิคมอุตสาหกรรม"></div>
+<iframe class="report-arcgis-map" width="700" height="600" allow="local-network-access; geolocation" title="แผนที่แสดงข้อมูลน้ำท่วม" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&amp;webmap=3d24287ac6ea49cd823625ddad496e01&amp;theme=light&amp;bookmarks=true&amp;legend=true&amp;information=true&amp;share=true&amp;scroll=false&amp;basemaps=true&amp;center=101.60218426570209,13.611210763141127&amp;scale=4622324.434309"></iframe>
 </section>
 <section class="export-table-block forecast-table-block">
 <h3>พื้นที่เฝ้าระวัง 48 ชั่วโมงใกล้เคียงพื้นที่นิคมฯ</h3>
@@ -14793,6 +14791,22 @@ html body main.container #infographic :is(#reportPage4,#reportPage5) .forecast-a
 }
 .report-map-zoom-controls button:last-child{font-size:17px}
 .report-map-zoom-controls button:hover{background:#109DC0;color:#fff}
+</style>
+
+<style id="flood-report-interactive-arcgis-map-20260922-v1">
+html body main.container #infographic :is(#reportPage4,#reportPage5) .three-day-risk-map{
+  position:relative!important;
+  overflow:hidden!important;
+  min-height:600px!important;
+  background:#E9EEF1!important;
+}
+html body main.container #infographic :is(#reportPage4,#reportPage5) .report-arcgis-map{
+  display:block!important;
+  width:100%!important;
+  height:600px!important;
+  min-height:600px!important;
+  border:0!important;
+}
 </style>
 </body>
 </html>
