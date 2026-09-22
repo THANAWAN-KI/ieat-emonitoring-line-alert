@@ -41,7 +41,7 @@
   function polygonPath(geometry,bounds){
     const [west,south,east,north]=bounds,W=1100,H=405;
     const point=c=>[((Number(c[0])-west)/(east-west)*W),((north-Number(c[1]))/(north-south)*H)];
-    const polygons=geometry?.type==="MultiPolygon"?geometry.coordinates:geometry?.type==="Polygon"?[geometry.coordinates]:[];
+    const polygons=geometry?.rings?[geometry.rings]:geometry?.type==="MultiPolygon"?geometry.coordinates:geometry?.type==="Polygon"?[geometry.coordinates]:[];
     return polygons.map(poly=>poly.map(ring=>ring.map((coord,index)=>{const p=point(coord);return(index?"L":"M")+p[0].toFixed(1)+","+p[1].toFixed(1)}).join(" ")+" Z").join(" ")).join(" ");
   }
   async function renderForecastPeriodMap(period,areas,imageId){
