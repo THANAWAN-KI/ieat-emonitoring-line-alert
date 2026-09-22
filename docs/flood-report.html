@@ -13611,5 +13611,80 @@ html body main.container :is(#warning,#infographic)
 })();
 </script>
 
+
+<style id="flood-report-single-page-20260922-v1">
+/* One continuous flood page: live overview first, export workspace below. */
+html body main.container>#globalFloodHeader{
+ display:none!important;
+ height:0!important;
+ min-height:0!important;
+ margin:0!important;
+ padding:0!important;
+ border:0!important;
+ overflow:hidden!important;
+}
+html body main.container>#warning,
+html body main.container>#infographic{
+ display:block!important;
+ visibility:visible!important;
+ opacity:1!important;
+ width:100%!important;
+ height:auto!important;
+ min-height:0!important;
+ overflow:visible!important;
+}
+html body main.container>#infographic{
+ margin-top:38px!important;
+ padding-top:34px!important;
+ border-top:3px solid #075F8A!important;
+}
+html body main.container>#infographic .report-export-workspace{
+ margin-top:0!important;
+ padding-top:0!important;
+}
+@media(max-width:700px){
+ html body main.container>#infographic{
+  margin-top:26px!important;
+  padding-top:24px!important;
+ }
+}
+</style>
+<script id="flood-report-single-page-20260922-v1-script">
+(function(){
+ "use strict";
+ function applySinglePage(){
+  var main=document.querySelector("main.container");
+  var overview=document.getElementById("warning");
+  var exportView=document.getElementById("infographic");
+  if(!main||!overview||!exportView)return;
+  document.getElementById("globalFloodHeader")?.remove();
+  document.querySelectorAll('[data-view="warning"],[data-view="infographic"]').forEach(function(button){
+   if(button.closest("#editor"))return;
+   button.remove();
+  });
+  overview.classList.add("active");
+  exportView.classList.add("active");
+  exportView.setAttribute("aria-label","ส่วนจัดทำและส่งออกข้อมูล");
+  var drawerButton=document.querySelector('#editor [data-go="infographic"]');
+  if(drawerButton){
+   drawerButton.textContent="ไปยังส่วนส่งออกข้อมูล";
+   drawerButton.onclick=function(event){
+    event.preventDefault();
+    document.getElementById("editor")?.classList.remove("open");
+    if(typeof window.prepareReportExport==="function")window.prepareReportExport();
+    exportView.scrollIntoView({behavior:"smooth",block:"start"});
+   };
+  }
+  if(typeof window.prepareReportExport==="function")window.prepareReportExport();
+ }
+ function start(){
+  applySinglePage();
+  [100,500,1200,2500,5000,9500].forEach(function(ms){setTimeout(applySinglePage,ms)});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+ window.addEventListener("hashchange",function(){setTimeout(applySinglePage,0)});
+})();
+</script>
+
 </body>
 </html>
