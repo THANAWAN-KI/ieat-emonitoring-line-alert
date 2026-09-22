@@ -90,44 +90,71 @@
       controls.innerHTML='<button type="button" data-zoom="in" aria-label="ซูมเข้า">+</button><button type="button" data-zoom="out" aria-label="ซูมออก">−</button><button type="button" data-zoom="reset" aria-label="รีเซ็ตแผนที่">↺</button>';
       frame.appendChild(controls);
     }
-    const apply=()=>{
+    const state=()=>{
       const zoom=Math.max(1,Math.min(4,Number(areaOverlay.dataset.zoom)||1));
+      let panX=Number(areaOverlay.dataset.panX)||0,panY=Number(areaOverlay.dataset.panY)||0;
+      if(zoom<=1){panX=0;panY=0}
+      const limitX=(zoom-1)*frame.clientWidth*.5,limitY=(zoom-1)*frame.clientHeight*.5;
+      panX=Math.max(-limitX,Math.min(limitX,panX));
+      panY=Math.max(-limitY,Math.min(limitY,panY));
       areaOverlay.dataset.zoom=String(zoom);
-      areaOverlay.style.setProperty("transform","scale("+zoom+")");
+      areaOverlay.dataset.panX=String(panX);
+      areaOverlay.dataset.panY=String(panY);
+      areaOverlay.style.setProperty("transform","translate("+panX+"px,"+panY+"px) scale("+zoom+")");
       areaOverlay.style.setProperty("transform-origin","center center");
+      areaOverlay.style.setProperty("cursor",areaOverlay.dataset.dragging==="true"?"grabbing":zoom>1?"grab":"zoom-in");
+    };
+    const changeZoom=delta=>{
+      const zoom=Math.max(1,Math.min(4,(Number(areaOverlay.dataset.zoom)||1)+delta));
+      areaOverlay.dataset.zoom=String(zoom);
+      if(zoom<=1){areaOverlay.dataset.panX="0";areaOverlay.dataset.panY="0"}
+      state();
     };
     if(!controls.dataset.bound){
       controls.dataset.bound="true";
       controls.addEventListener("click",event=>{
         const action=event.target.closest("button")?.dataset.zoom;if(!action)return;
-        let zoom=Number(areaOverlay.dataset.zoom)||1;
-        if(action==="in")zoom+=.25;
-        else if(action==="out")zoom-=.25;
-        else zoom=1;
-        areaOverlay.dataset.zoom=String(Math.max(1,Math.min(4,zoom)));apply();
+        event.stopPropagation();
+        if(action==="in")changeZoom(.25);
+        else if(action==="out")changeZoom(-.25);
+        else{areaOverlay.dataset.zoom="1";areaOverlay.dataset.panX="0";areaOverlay.dataset.panY="0";state()}
       });
       frame.addEventListener("wheel",event=>{
         event.preventDefault();
-        let zoom=Number(areaOverlay.dataset.zoom)||1;
-        zoom += event.deltaY < 0 ? 0.15 : -0.15;
-        areaOverlay.dataset.zoom=String(Math.max(1,Math.min(4,zoom)));apply();
+        changeZoom(event.deltaY < 0 ? 0.15 : -0.15);
       },{passive:false});
     }
     if(!areaOverlay.dataset.mouseZoomBound){
       areaOverlay.dataset.mouseZoomBound="true";
-      areaOverlay.setAttribute("title","คลิกซ้ายเพื่อซูมเข้า · คลิกขวาเพื่อซูมออก · หมุนล้อเมาส์เพื่อซูม");
+      areaOverlay.setAttribute("title","ลากเพื่อเลื่อน · คลิกซ้ายเพื่อซูมเข้า · คลิกขวาเพื่อซูมออก · หมุนล้อเมาส์เพื่อซูม");
+      let drag=null,moved=false;
+      areaOverlay.addEventListener("pointerdown",event=>{
+        if(event.button!==0)return;
+        drag={x:event.clientX,y:event.clientY,panX:Number(areaOverlay.dataset.panX)||0,panY:Number(areaOverlay.dataset.panY)||0};
+        moved=false;areaOverlay.dataset.dragging="true";areaOverlay.setPointerCapture?.(event.pointerId);state();
+      });
+      areaOverlay.addEventListener("pointermove",event=>{
+        if(!drag)return;
+        const dx=event.clientX-drag.x,dy=event.clientY-drag.y;
+        if(Math.abs(dx)+Math.abs(dy)>4)moved=true;
+        areaOverlay.dataset.panX=String(drag.panX+dx);
+        areaOverlay.dataset.panY=String(drag.panY+dy);
+        state();
+      });
+      const stopDrag=event=>{
+        if(!drag)return;
+        areaOverlay.releasePointerCapture?.(event.pointerId);
+        drag=null;areaOverlay.dataset.dragging="false";areaOverlay.dataset.dragMoved=moved?"true":"false";state();
+      };
+      areaOverlay.addEventListener("pointerup",stopDrag);
+      areaOverlay.addEventListener("pointercancel",stopDrag);
       areaOverlay.addEventListener("click",event=>{
-        if(event.target.closest(".report-map-zoom-controls"))return;
-        const zoom=(Number(areaOverlay.dataset.zoom)||1)+0.25;
-        areaOverlay.dataset.zoom=String(Math.min(4,zoom));apply();
+        if(areaOverlay.dataset.dragMoved==="true"){areaOverlay.dataset.dragMoved="false";return}
+        changeZoom(.25);
       });
-      areaOverlay.addEventListener("contextmenu",event=>{
-        event.preventDefault();
-        const zoom=(Number(areaOverlay.dataset.zoom)||1)-0.25;
-        areaOverlay.dataset.zoom=String(Math.max(1,zoom));apply();
-      });
+      areaOverlay.addEventListener("contextmenu",event=>{event.preventDefault();changeZoom(-.25)});
     }
-    apply();
+    state();
   }
   async function renderForecastPeriodMap(period,areas,imageId){
     const image=$(imageId);if(!image)return;
