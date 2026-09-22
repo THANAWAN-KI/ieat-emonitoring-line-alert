@@ -2753,7 +2753,7 @@ body{font-size:16px!important;font-weight:400!important;background:#f7f8fa!impor
   var warning=document.getElementById("warning"),shell=warning&&warning.querySelector(".new4all-water-shell");if(!warning||!shell)return;
   if(!warning.querySelector(".flood-support-heading")){
    var head=document.createElement("header");head.className="flood-support-heading";
-   head.innerHTML='<div class="flood-support-heading-copy"><h1>รายงานสถานการณ์น้ำประจำวัน</h1></div><div class="flood-support-heading-date">ข้อมูลวันที่ 8 ก.ย. 2569</div><div class="flood-support-heading-actions"><button type="button" data-target="warning">หน้ารายงานข่าว</button><button type="button" data-target="infographic">ข้อมูล</button></div>';
+   head.innerHTML='<div class="flood-support-heading-copy"><h1>รายงานสถานการณ์น้ำประจำวัน</h1></div><div class="flood-support-heading-date">ข้อมูลวันที่ 8 ก.ย. 2569</div><div class="flood-support-heading-actions"><button type="button" data-target="warning">หน้าแรก</button><button type="button" data-target="infographic">ข้อมูล</button></div>';
    warning.insertBefore(head,shell);
    head.querySelectorAll("button").forEach(function(b){b.onclick=function(){var target=b.dataset.target;document.querySelector('.nav button[data-view="'+target+'"]')?.click()}});
   }
@@ -2765,7 +2765,7 @@ body{font-size:16px!important;font-weight:400!important;background:#f7f8fa!impor
    var map=right&&right.querySelector(".operations-map");if(map)mapWrap.appendChild(map);
    shell.replaceChildren(dashboard,mapWrap);
   }
-  var nav=document.querySelectorAll(".topbar .nav button");if(nav[0])nav[0].textContent="หน้ารายงานข่าว";if(nav[1])nav[1].textContent="ข้อมูล";
+  var nav=document.querySelectorAll(".topbar .nav button");if(nav[0])nav[0].textContent="หน้าแรก";if(nav[1])nav[1].textContent="ข้อมูล";
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",function(){setTimeout(applyReferenceLayout,30)});else setTimeout(applyReferenceLayout,30);
  setTimeout(applyReferenceLayout,900);
@@ -4698,7 +4698,7 @@ html body #thaiwater-warning.active{display:block!important}
   let report=nav.querySelector('[data-view="warning"]');
   let watch=nav.querySelector('[data-view="thaiwater-warning"]');
   let info=nav.querySelector('[data-view="infographic"]');
-  if(report)report.textContent="หน้ารายงานข่าว";
+  if(report)report.textContent="หน้าแรก";
   if(watch)watch.textContent="พื้นที่เฝ้าระวัง";
   if(info)info.textContent="ข้อมูล";
   [report,watch,info].filter(Boolean).forEach(function(button){button.onclick=function(){go(button.dataset.view)}});
@@ -4731,7 +4731,7 @@ html body #thaiwater-warning.active{display:block!important}
    watch.type="button";watch.dataset.target="thaiwater-warning";
    actions.insertBefore(watch,info||null);
   }
-  if(report)report.textContent="หน้ารายงานข่าว";
+  if(report)report.textContent="หน้าแรก";
   watch.textContent="พื้นที่เฝ้าระวัง";
   if(info)info.textContent="ข้อมูล";
   actions.querySelectorAll("button[data-target]").forEach(function(button){
