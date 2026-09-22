@@ -1532,17 +1532,29 @@ document.documentElement.classList.add("flood-initializing");
             </section>
 <footer class="sheet-footer"><span>ข้อมูลจากสถานีที่อยู่ภายในรัศมี 30 กิโลเมตรจากนิคมฯ</span><span>หน้า 3 / 4</span></footer>
 </section>
-<section class="export-sheet portrait-sheet" id="reportPage4" data-report-page="4">
-<header class="sheet-header compact"><h2>แผนที่พื้นที่เฝ้าระวังน้ำท่วม</h2><p class="shared-report-period" contenteditable="true">ข้อมูลพื้นที่เฝ้าระวังล่าสุดจากระบบ ThaiWater</p></header>
+<section class="export-sheet portrait-sheet forecast-period-page" id="reportPage4" data-report-page="4" data-forecast-period="24h">
+<header class="sheet-header compact"><h2>พื้นที่เฝ้าระวัง 24 ชั่วโมงใกล้เคียงพื้นที่นิคมฯ</h2><p class="shared-report-period" contenteditable="true">ข้อมูลพื้นที่เฝ้าระวังล่าสุดจากระบบ ThaiWater</p></header>
 <section class="three-day-risk-map">
-<img class="report-watch-map-image" src="assets/thaiwater-watch-map-only.svg" alt="แผนที่พื้นที่เฝ้าระวังน้ำท่วมจาก ThaiWater">
-
+<img id="forecastMap24" class="report-watch-map-image" src="assets/thaiwater-watch-map-only.svg" alt="แผนที่พื้นที่เฝ้าระวัง 24 ชั่วโมงใกล้เคียงพื้นที่นิคมอุตสาหกรรม">
+<div id="forecastPinOverlay24" class="estate-pin-overlay" aria-label="ตำแหน่งนิคมอุตสาหกรรม"></div>
 </section>
 <section class="export-table-block forecast-table-block">
-<h3>พื้นที่เฝ้าระวัง 24 ชั่วโมง / 48 ชั่วโมง ใกล้เคียงพื้นที่นิคมฯ</h3>
-<table class="export-data-table"><thead><tr><th>ช่วงเวลา</th><th>จังหวัด</th><th>อำเภอ</th><th>ตำบล</th><th>ฝนสะสม</th><th>นิคมฯ ใกล้ที่สุด</th></tr></thead><tbody id="exportForecastRows"><tr><td colspan="6">กำลังโหลดข้อมูล…</td></tr></tbody></table>
+<h3>พื้นที่เฝ้าระวัง 24 ชั่วโมงใกล้เคียงพื้นที่นิคมฯ</h3>
+<table class="export-data-table"><thead><tr><th>จังหวัด</th><th>อำเภอ</th><th>ตำบล</th><th>ฝนสะสม</th><th>นิคมฯ ใกล้ที่สุด</th></tr></thead><tbody id="exportForecastRows24"><tr><td colspan="5">กำลังโหลดข้อมูล…</td></tr></tbody></table>
 </section>
-<footer class="sheet-footer"><span>แหล่งข้อมูล: ThaiWater · ควรตรวจสอบร่วมกับประกาศทางการและข้อมูลภาคสนาม</span><span>หน้า 4 / 4</span></footer>
+<footer class="sheet-footer"><span>แหล่งข้อมูล: ThaiWater · ข้อมูลเฝ้าระวัง 24 ชั่วโมง</span><span>หน้า 4 / 6</span></footer>
+</section>
+<section class="export-sheet portrait-sheet forecast-period-page" id="reportPage5" data-report-page="5" data-forecast-period="48h">
+<header class="sheet-header compact"><h2>พื้นที่เฝ้าระวัง 48 ชั่วโมงใกล้เคียงพื้นที่นิคมฯ</h2><p class="shared-report-period" contenteditable="true">ข้อมูลพื้นที่เฝ้าระวังล่าสุดจากระบบ ThaiWater</p></header>
+<section class="three-day-risk-map">
+<img id="forecastMap48" class="report-watch-map-image" src="assets/thaiwater-watch-map-only.svg" alt="แผนที่พื้นที่เฝ้าระวัง 48 ชั่วโมงใกล้เคียงพื้นที่นิคมอุตสาหกรรม">
+<div id="forecastPinOverlay48" class="estate-pin-overlay" aria-label="ตำแหน่งนิคมอุตสาหกรรม"></div>
+</section>
+<section class="export-table-block forecast-table-block">
+<h3>พื้นที่เฝ้าระวัง 48 ชั่วโมงใกล้เคียงพื้นที่นิคมฯ</h3>
+<table class="export-data-table"><thead><tr><th>จังหวัด</th><th>อำเภอ</th><th>ตำบล</th><th>ฝนสะสม</th><th>นิคมฯ ใกล้ที่สุด</th></tr></thead><tbody id="exportForecastRows48"><tr><td colspan="5">กำลังโหลดข้อมูล…</td></tr></tbody></table>
+</section>
+<footer class="sheet-footer"><span>แหล่งข้อมูล: ThaiWater · ข้อมูลเฝ้าระวัง 48 ชั่วโมง</span><span>หน้า 5 / 6</span></footer>
 </section>
         </div>
 
@@ -13330,13 +13342,13 @@ html body main.container #infographic #reportPage5 .export-rid-trend.steady{back
  }
  function ensurePage(){
   var pages=document.querySelector("#infographic .report-pages");if(!pages)return null;
-  var page=document.getElementById("reportPage5");
+  var page=document.getElementById("reportPage6");
   if(!page){
-   page=document.createElement("section");page.id="reportPage5";
-   page.className="export-sheet landscape-sheet";page.dataset.reportPage="5";
+   page=document.createElement("section");page.id="reportPage6";
+   page.className="export-sheet landscape-sheet";page.dataset.reportPage="6";
    page.innerHTML='<header class="sheet-header compact"><h2>สถานีตรวจวัดระดับน้ำที่เกี่ยวข้องกับนิคมฯ</h2><p class="shared-report-period">ข้อมูลเรียลไทม์จากกรมชลประทานและสถานีภายในรัศมี 120 กิโลเมตรจากนิคมอุตสาหกรรม</p></header>'+
     '<section class="export-table-block"><table class="export-data-table"><thead><tr><th>สถานี</th><th>จังหวัด</th><th>นิคมฯ ที่ใกล้ที่สุด</th><th>ระยะห่าง</th><th>ระดับน้ำเทียบตลิ่ง (%)</th><th>ระดับน้ำปัจจุบัน</th><th>แนวโน้ม</th><th>ข้อมูลล่าสุด</th></tr></thead><tbody id="exportRidStationRows"><tr><td colspan="8">กำลังโหลดข้อมูลล่าสุด…</td></tr></tbody></table></section>'+
-    '<footer class="sheet-footer"><span>แหล่งข้อมูล: กรมชลประทาน (RID) · ตรวจสอบข้อมูลล่าสุดทุก 1 นาที</span><span>หน้า 5 / 5</span></footer>';
+    '<footer class="sheet-footer"><span>แหล่งข้อมูล: กรมชลประทาน (RID) · ตรวจสอบข้อมูลล่าสุดทุก 1 นาที</span><span>หน้า 6 / 6</span></footer>';
    pages.appendChild(page);
   }
   return page;
@@ -13363,7 +13375,7 @@ html body main.container #infographic #reportPage5 .export-rid-trend.steady{back
   document.querySelectorAll("#infographic [data-report-page]").forEach(function(page){
    var number=page.getAttribute("data-report-page");
    var target=page.querySelector(".sheet-footer span:last-child");
-   if(target)target.textContent="หน้า "+number+" / 5";
+   if(target)target.textContent="หน้า "+number+" / 6";
   });
  }
  function apply(){
@@ -13794,5 +13806,40 @@ html body main.container>#infographic.report-open{
 })();
 </script>
 
+
+<style id="flood-report-split-forecast-pages-20260922-v3">
+html body main.container #infographic :is(#reportPage4,#reportPage5){
+ box-sizing:border-box!important;width:min(794px,100%)!important;max-width:794px!important;
+ height:1123px!important;min-height:1123px!important;padding:34px 38px 30px!important;
+ display:flex!important;flex-direction:column!important;gap:12px!important;overflow:hidden!important;
+}
+html body main.container #infographic :is(#reportPage4,#reportPage5) .sheet-header h2{font-size:22px!important;line-height:1.35!important;white-space:normal!important}
+html body main.container #infographic :is(#reportPage4,#reportPage5) .three-day-risk-map{
+ position:relative!important;flex:0 0 480px!important;width:100%!important;height:480px!important;
+ min-height:480px!important;max-height:480px!important;overflow:hidden!important;padding:0!important;
+ border:1px solid #d9e1e6!important;background:#fff!important;
+}
+html body main.container #infographic :is(#reportPage4,#reportPage5) .report-watch-map-image{
+ display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;
+ object-position:center!important;margin:0!important;border:0!important;
+}
+html body main.container #infographic :is(#reportPage4,#reportPage5) .forecast-table-block{flex:1 1 auto!important;min-height:0!important;overflow:hidden!important;margin-top:16px!important}
+html body main.container #infographic :is(#reportPage4,#reportPage5) .forecast-table-block h3{margin:0 0 10px!important;color:#075F8A!important;font-size:18px!important;font-weight:600!important}
+html body main.container #infographic :is(#reportPage4,#reportPage5) .export-data-table{font-size:10px!important;border-collapse:collapse!important}
+html body main.container #infographic :is(#reportPage4,#reportPage5) .export-data-table th,
+html body main.container #infographic :is(#reportPage4,#reportPage5) .export-data-table td{padding:5px 4px!important;border:1px solid #000!important}
+@media(max-width:850px){
+ html body main.container #infographic :is(#reportPage4,#reportPage5){width:100%!important;height:auto!important;min-height:0!important;aspect-ratio:210/297!important;padding:24px!important}
+ html body main.container #infographic :is(#reportPage4,#reportPage5) .three-day-risk-map{flex-basis:42vw!important;height:42vw!important;min-height:320px!important}
+}
+@media print{
+ @page{size:A4 portrait;margin:0}
+ html body main.container #infographic :is(#reportPage4,#reportPage5){
+  width:210mm!important;min-width:210mm!important;max-width:210mm!important;
+  height:297mm!important;min-height:297mm!important;max-height:297mm!important;
+  page-break-before:always!important;page-break-after:always!important;
+ }
+}
+</style>
 </body>
 </html>
