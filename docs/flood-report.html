@@ -13841,5 +13841,163 @@ html body main.container #infographic :is(#reportPage4,#reportPage5) .export-dat
  }
 }
 </style>
+
+<style id="flood-dashboard-readable-cards-20260922-v4">
+/* Dashboard only: present monitoring rows as labelled cards. Export report tables stay unchanged. */
+html body main.container #warning table.dashboard-readable-cards{
+ display:block!important;
+ width:100%!important;
+ min-width:0!important;
+ border:0!important;
+ border-collapse:separate!important;
+ background:transparent!important;
+}
+html body main.container #warning table.dashboard-readable-cards thead{
+ position:absolute!important;
+ width:1px!important;height:1px!important;
+ padding:0!important;margin:-1px!important;
+ overflow:hidden!important;clip:rect(0,0,0,0)!important;
+ white-space:nowrap!important;border:0!important;
+}
+html body main.container #warning table.dashboard-readable-cards tbody{
+ display:grid!important;
+ gap:10px!important;
+ padding:12px!important;
+ background:#F3F7F9!important;
+}
+html body main.container #warning table.dashboard-readable-cards tbody tr{
+ display:grid!important;
+ width:100%!important;
+ min-width:0!important;
+ border:1px solid #CBD9E1!important;
+ border-radius:12px!important;
+ overflow:hidden!important;
+ background:#fff!important;
+ box-shadow:0 3px 10px rgba(31,67,91,.07)!important;
+}
+html body main.container #warning #estateRanks tr{
+ grid-template-columns:52px minmax(190px,1.55fr) repeat(4,minmax(105px,1fr))!important;
+}
+html body main.container #warning #stations tr{
+ grid-template-columns:minmax(210px,1.5fr) repeat(3,minmax(125px,1fr))!important;
+}
+html body main.container #warning #ridStationRows tr{
+ grid-template-columns:repeat(4,minmax(150px,1fr))!important;
+}
+html body main.container #warning table.dashboard-readable-cards tbody td,
+html body main.container #warning table.dashboard-readable-cards tbody td:first-child{
+ position:relative!important;
+ display:flex!important;
+ width:auto!important;height:auto!important;min-height:70px!important;
+ flex-direction:column!important;
+ align-items:flex-start!important;
+ justify-content:center!important;
+ gap:4px!important;
+ padding:12px 13px!important;
+ border:0!important;
+ border-right:1px solid #E2E9ED!important;
+ border-bottom:1px solid #E2E9ED!important;
+ background:#fff!important;
+ color:#263746!important;
+ text-align:left!important;
+ vertical-align:middle!important;
+ font-size:13px!important;
+ line-height:1.45!important;
+ overflow-wrap:anywhere!important;
+}
+html body main.container #warning table.dashboard-readable-cards tbody td::before{
+ content:attr(data-label);
+ display:block!important;
+ color:#667985!important;
+ font-size:10px!important;
+ font-weight:600!important;
+ line-height:1.25!important;
+ letter-spacing:.1px!important;
+ text-align:left!important;
+}
+html body main.container #warning table.dashboard-readable-cards tbody td>*{
+ margin-left:0!important;margin-right:0!important;
+ text-align:left!important;
+}
+html body main.container #warning table.dashboard-readable-cards tbody tr:hover td:not(.table-state-red):not(.table-state-green):not(.table-state-blue){
+ background:#F7FBFD!important;
+}
+html body main.container #warning table.dashboard-readable-cards tbody td.table-state-red,
+html body main.container #warning table.dashboard-readable-cards tbody td.table-state-green,
+html body main.container #warning table.dashboard-readable-cards tbody td.table-state-blue{
+ color:#fff!important;
+ align-items:center!important;
+ text-align:center!important;
+}
+html body main.container #warning table.dashboard-readable-cards tbody td:is(.table-state-red,.table-state-green,.table-state-blue)::before{
+ color:rgba(255,255,255,.84)!important;
+ text-align:center!important;
+}
+html body main.container #warning table.dashboard-readable-cards .water-status-cell{
+ min-height:0!important;height:auto!important;
+ padding:0!important;background:transparent!important;
+ color:inherit!important;text-align:center!important;
+ justify-content:center!important;
+}
+html body main.container #warning table.dashboard-readable-cards .station-name,
+html body main.container #warning table.dashboard-readable-cards .station-estate{
+ display:block!important;text-align:left!important;
+}
+html body main.container #warning table.dashboard-readable-cards td.rid-percent{
+ font-size:16px!important;font-weight:700!important;color:#075F8A!important;
+}
+html body main.container #warning #ridStationRows td.rid-trend-cell>span{
+ display:block!important;width:100%!important;padding:0!important;
+ background:transparent!important;color:inherit!important;text-align:center!important;
+}
+html body main.container #warning :is(.table-scroll,.rid-table-wrap){
+ background:#F3F7F9!important;
+}
+@media(max-width:1100px){
+ html body main.container #warning #estateRanks tr{grid-template-columns:52px repeat(2,minmax(170px,1fr))!important}
+ html body main.container #warning #stations tr{grid-template-columns:repeat(2,minmax(180px,1fr))!important}
+ html body main.container #warning #ridStationRows tr{grid-template-columns:repeat(2,minmax(180px,1fr))!important}
+}
+@media(max-width:650px){
+ html body main.container #warning :is(#estateRanks,#stations,#ridStationRows) tr{grid-template-columns:1fr!important}
+ html body main.container #warning table.dashboard-readable-cards tbody td{min-height:62px!important;border-right:0!important}
+}
+</style>
+<script id="flood-dashboard-readable-cards-20260922-v4-script">
+(function(){
+ "use strict";
+ var busy=false;
+ function labelTable(table){
+  if(!table)return;
+  table.classList.add("dashboard-readable-cards");
+  var labels=Array.from(table.querySelectorAll("thead th")).map(function(th){return th.textContent.replace(/\s+/g," ").trim()});
+  table.querySelectorAll("tbody tr").forEach(function(row){
+   Array.from(row.cells||[]).forEach(function(cell,index){cell.dataset.label=labels[index]||"ข้อมูล"});
+  });
+ }
+ function apply(){
+  if(busy)return;busy=true;
+  labelTable(document.querySelector("#warning .estate-watch-table table"));
+  labelTable(document.querySelector("#warning .station-watch-table table"));
+  labelTable(document.querySelector("#warning .rid-water-table"));
+  var overview=document.getElementById("warning");
+  var launch=document.getElementById("floodReportLaunch");
+  var basin=document.getElementById("ridBasinOverview");
+  if(overview&&launch&&basin&&launch.previousElementSibling!==basin)basin.insertAdjacentElement("afterend",launch);
+  busy=false;
+ }
+ function start(){
+  apply();
+  var warning=document.getElementById("warning");
+  if(warning){
+   var observer=new MutationObserver(function(){clearTimeout(observer.t);observer.t=setTimeout(apply,30)});
+   observer.observe(warning,{childList:true,subtree:true});
+  }
+  [100,400,900,1800,3500,6000,10000].forEach(function(ms){setTimeout(apply,ms)});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>
+
 </body>
 </html>
