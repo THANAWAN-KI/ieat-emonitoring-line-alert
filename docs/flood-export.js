@@ -36,32 +36,41 @@
     });
   }
   const FORECAST_BASE_MAP="https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/export?bbox=97.3,5.6,105.8,20.5&bboxSR=4326&imageSR=4326&size=1100,405&format=png32&transparent=false&f=image";
-  function renderForecastPeriodMap(period,areas,imageId){
+  const TAMBON_LAYER="https://gisportal.dmr.go.th/arcgis/rest/services/Hosted/TAMBON/FeatureServer/0";
+  function polygonPath(geometry){
+    const west=97.3,east=105.8,south=5.6,north=20.5,W=1100,H=405;
+    const point=c=>[((Number(c[0])-west)/(east-west)*W),((north-Number(c[1]))/(north-south)*H)];
+    const polygons=geometry?.type==="MultiPolygon"?geometry.coordinates:geometry?.type==="Polygon"?[geometry.coordinates]:[];
+    return polygons.map(poly=>poly.map(ring=>ring.map((coord,index)=>{const p=point(coord);return(index?"L":"M")+p[0].toFixed(1)+","+p[1].toFixed(1)}).join(" ")+" Z").join(" ")).join(" ");
+  }
+  async function renderForecastPeriodMap(period,areas,imageId){
     const image=$(imageId);if(!image)return;
     const frame=image.closest(".three-day-risk-map");if(!frame)return;
     image.style.setProperty("object-fit","fill","important");
     image.style.setProperty("object-position","center","important");
     if(image.dataset.userUploaded!=="true")image.src=FORECAST_BASE_MAP;
-    let overlay=frame.querySelector(".forecast-risk-overlay");
-    if(!overlay){overlay=document.createElement("div");overlay.className="forecast-risk-overlay";frame.appendChild(overlay)}
+    frame.querySelector(".forecast-risk-overlay")?.replaceChildren();
+    let areaOverlay=frame.querySelector(".forecast-area-overlay");
+    if(!areaOverlay){areaOverlay=document.createElement("div");areaOverlay.className="forecast-area-overlay";frame.appendChild(areaOverlay)}
     let legend=frame.querySelector(".forecast-map-period-legend");
     if(!legend){legend=document.createElement("div");frame.appendChild(legend)}
-    legend.className="forecast-map-period-legend";
-    legend.innerHTML='<b>พื้นที่เฝ้าระวัง '+(period==="24h"?"24":"48")+' ชั่วโมง</b><span><i class="estate"></i>นิคมอุตสาหกรรม</span><span><i class="normal"></i>ปกติ</span><span><i class="watch"></i>เฝ้าระวัง</span><span><i class="critical"></i>วิกฤต</span>';
-    if(image.dataset.userUploaded==="true"){overlay.replaceChildren();return}
-    const west=97.3,east=105.8,south=5.6,north=20.5;
-    overlay.replaceChildren();
-    (areas||[]).forEach(area=>{
-      const lat=Number(area.latitude),lon=Number(area.longitude);
-      if(!Number.isFinite(lat)||!Number.isFinite(lon)||lon<west||lon>east||lat<south||lat>north)return;
-      const dot=document.createElement("i");
-      const rain=Number(area.sum_rainfall_mm),riskClass=Number.isFinite(rain)?(rain>=150?"risk-critical":rain>=100?"risk-watch":"risk-normal"):"risk-normal";
-      dot.className="forecast-risk-dot "+riskClass;
-      dot.style.left=((lon-west)/(east-west)*100)+"%";
-      dot.style.top=((north-lat)/(north-south)*100)+"%";
-      dot.title=[area.tambon,area.amphoe,area.province].filter(Boolean).join(" ")+" • ฝนสะสม "+fmt(area.sum_rainfall_mm)+" มม.";
-      overlay.appendChild(dot);
-    });
+    legend.className="forecast-map-period-legend area-period-"+period.replace("h","");
+    legend.innerHTML='<b><i></i>พื้นที่เฝ้าระวังน้ำท่วม '+(period==="24h"?"24":"48")+' ชั่วโมง</b><span>ที่มา: ThaiWater · แสดงเฉพาะชั้นข้อมูล '+(period==="24h"?"24":"48")+' ชั่วโมง</span>';
+    if(image.dataset.userUploaded==="true"){areaOverlay.replaceChildren();return}
+    const codes=[...new Set((areas||[]).map(area=>String(area.geocode||"").padStart(6,"0")).filter(code=>/^\d{6}$/.test(code)))];
+    if(!codes.length){areaOverlay.innerHTML='<div class="forecast-map-message">ไม่พบพื้นที่เฝ้าระวัง '+(period==="24h"?"24":"48")+' ชั่วโมง</div>';return}
+    const where="tambon_idn IN ("+codes.map(code=>"'"+code+"'").join(",")+")";
+    const url=TAMBON_LAYER+"/query?where="+encodeURIComponent(where)+"&outFields=tambon_idn,tam_nam_t,amphoe_t,prov_nam_t&returnGeometry=true&outSR=4326&f=geojson";
+    areaOverlay.innerHTML='<div class="forecast-map-message">กำลังโหลดพื้นที่เฝ้าระวัง…</div>';
+    try{
+      const response=await fetch(url,{cache:"no-store"});if(!response.ok)throw Error("HTTP "+response.status);
+      const geojson=await response.json(),features=geojson.features||[];
+      const fill=period==="24h"?"#FFC719":"#109DC0",stroke=period==="24h"?"#D58B00":"#075F8A";
+      areaOverlay.innerHTML='<svg viewBox="0 0 1100 405" preserveAspectRatio="none" aria-label="พื้นที่เฝ้าระวังน้ำท่วม '+(period==="24h"?"24":"48")+' ชั่วโมง">'+features.map(feature=>'<path d="'+polygonPath(feature.geometry)+'" fill="'+fill+'" fill-opacity=".42" stroke="'+stroke+'" stroke-width="1.8" vector-effect="non-scaling-stroke"><title>'+esc([feature.properties?.tam_nam_t,feature.properties?.amphoe_t,feature.properties?.prov_nam_t].filter(Boolean).join(" "))+'</title></path>').join("")+'</svg>';
+    }catch(error){
+      console.warn("โหลดขอบเขตพื้นที่เฝ้าระวังไม่สำเร็จ",error);
+      areaOverlay.innerHTML='<div class="forecast-map-message error">ไม่สามารถโหลดชั้นพื้นที่เฝ้าระวังได้</div>';
+    }
   }
   function renderForecastMaps(data){
     renderForecastPeriodMap("24h",data.flash_flood?.["24h"]?.areas||[],"forecastMap24");
