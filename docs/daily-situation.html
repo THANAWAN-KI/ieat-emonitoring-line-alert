@@ -651,6 +651,213 @@ html body main.main #mapPanel #map {
   html body main.main #mapPanel #map{min-height:480px!important}
 }
 </style>
+
+<style id="daily-homepage-redesign-20260922-v1">
+:root{
+ --home-navy:#072d4b;--home-blue:#0b6596;--home-cyan:#10a5a5;
+ --home-mint:#eaf7f5;--home-sky:#edf6fb;--home-paper:#f4f7f8;
+ --home-text:#183244;--home-muted:#657986;--home-line:#dbe6e9;
+ --home-shadow:0 14px 38px rgba(12,57,74,.09);
+}
+html{scroll-padding-top:92px}
+body{
+ font-family:"Sarabun",sans-serif!important;
+ color:var(--home-text)!important;
+ background:
+  radial-gradient(circle at 8% 5%,rgba(16,165,165,.10),transparent 26%),
+  radial-gradient(circle at 94% 13%,rgba(11,101,150,.09),transparent 25%),
+  var(--home-paper)!important;
+}
+.system-header{
+ position:sticky!important;top:0!important;z-index:1000!important;
+ min-height:76px!important;border:0!important;
+ background:rgba(255,255,255,.92)!important;
+ box-shadow:0 1px 0 rgba(7,45,75,.08)!important;
+ backdrop-filter:blur(16px)!important;
+}
+.system-header-inner{width:min(1760px,calc(100% - 40px))!important;margin:auto!important}
+.system-brand img{width:56px!important;height:44px!important}
+.system-brand strong{font-size:20px!important;color:var(--home-navy)!important}
+.system-clock{
+ border:1px solid var(--home-line)!important;border-radius:999px!important;
+ background:#f7fafb!important;color:var(--home-muted)!important;
+ padding:8px 13px!important;font-size:13px!important;
+}
+.system-actions{gap:8px!important}
+.system-actions a,.more-btn{
+ border-radius:999px!important;padding:10px 16px!important;
+ font-weight:600!important;color:#526c7b!important;
+}
+.system-actions a:hover,.system-actions a.active{
+ background:var(--home-navy)!important;color:#fff!important;
+}
+.contact-nav{background:var(--home-cyan)!important;color:#fff!important}
+.app-shell{
+ width:min(1760px,calc(100% - 40px))!important;margin:22px auto 40px!important;
+ border:0!important;border-radius:28px!important;background:transparent!important;
+ box-shadow:none!important;overflow:visible!important;
+}
+.main{padding:0!important}
+.home-hero{
+ position:relative;overflow:hidden;
+ display:grid;grid-template-columns:minmax(0,1.22fr) minmax(420px,.78fr);
+ gap:44px;align-items:center;min-height:430px;
+ padding:54px 58px;margin-bottom:20px;border-radius:28px;
+ background:
+  linear-gradient(118deg,rgba(5,42,70,.98),rgba(8,88,120,.96) 58%,rgba(12,147,145,.91)),
+  var(--home-navy);
+ box-shadow:0 24px 58px rgba(7,45,75,.20);color:#fff;
+}
+.home-hero::before{
+ content:"";position:absolute;width:420px;height:420px;border-radius:50%;
+ right:-110px;top:-210px;border:70px solid rgba(255,255,255,.055);
+}
+.home-hero::after{
+ content:"";position:absolute;width:230px;height:230px;border-radius:50%;
+ left:47%;bottom:-190px;border:48px solid rgba(255,255,255,.045);
+}
+.home-hero-copy,.home-quick-links{position:relative;z-index:1}
+.home-eyebrow{
+ display:inline-flex;align-items:center;gap:9px;margin-bottom:18px;
+ color:#93e5dc;font-size:12px;font-weight:700;letter-spacing:1.4px;
+}
+.home-eyebrow::before{content:"";width:28px;height:2px;background:#49d5c6}
+.home-hero h1{
+ max-width:800px;margin:0;font-size:clamp(34px,4vw,62px);
+ line-height:1.13;letter-spacing:-1.5px;font-weight:500;
+}
+.home-hero h1 em{font-style:normal;color:#79e1d6}
+.home-hero-copy>p{
+ max-width:720px;margin:22px 0 0;color:rgba(255,255,255,.76);
+ font-size:17px;line-height:1.8;
+}
+.home-hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.home-hero-actions a{
+ display:inline-flex;align-items:center;justify-content:center;min-height:48px;
+ padding:0 22px;border-radius:13px;text-decoration:none;font-weight:700;
+ transition:transform .18s ease,background .18s ease;
+}
+.home-hero-actions a:hover{transform:translateY(-2px)}
+.home-primary-action{background:#fff;color:var(--home-navy)}
+.home-secondary-action{border:1px solid rgba(255,255,255,.35);color:#fff}
+.home-quick-links{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;
+}
+.home-quick-links a{
+ min-height:142px;padding:20px;border:1px solid rgba(255,255,255,.17);
+ border-radius:18px;background:rgba(255,255,255,.10);
+ backdrop-filter:blur(10px);text-decoration:none;color:#fff;
+ transition:transform .18s ease,background .18s ease,border-color .18s ease;
+}
+.home-quick-links a:hover{
+ transform:translateY(-3px);background:rgba(255,255,255,.17);
+ border-color:rgba(255,255,255,.34);
+}
+.home-quick-links span{
+ display:block;color:#72ddd1;font-size:12px;font-weight:700;letter-spacing:1px;
+}
+.home-quick-links b{display:block;margin-top:18px;font-size:18px}
+.home-quick-links small{display:block;margin-top:6px;color:rgba(255,255,255,.68);line-height:1.45}
+.ticker{
+ margin:0 0 20px!important;padding:11px 16px!important;
+ border:1px solid #cfe2e5!important;border-radius:15px!important;
+ background:rgba(255,255,255,.86)!important;box-shadow:none!important;
+}
+.ticker-label{
+ border-radius:999px!important;background:#dcf4f0!important;
+ color:#08766a!important;padding:6px 11px!important;
+}
+.dashboard{gap:20px!important}
+.left-column,.right-column{gap:20px!important}
+.panel{
+ border:1px solid rgba(18,87,105,.10)!important;border-radius:20px!important;
+ background:rgba(255,255,255,.96)!important;box-shadow:var(--home-shadow)!important;
+}
+.panel-head{border-bottom-color:#e6edef!important}
+.panel-head h2,.panel-head h3{color:var(--home-navy)!important;letter-spacing:-.2px}
+.panel-head p{color:var(--home-muted)!important}
+#mapPanel{overflow:hidden!important}
+.map-wrap{border-radius:0 0 20px 20px!important;overflow:hidden!important}
+.map-badge,.legend{
+ border:1px solid rgba(7,45,75,.10)!important;
+ background:rgba(255,255,255,.93)!important;
+ box-shadow:0 8px 24px rgba(7,45,75,.12)!important;
+ backdrop-filter:blur(10px)!important;
+}
+.ghost-btn{border-radius:999px!important}
+.ghost-btn.active{background:var(--home-navy)!important;color:#fff!important}
+.green-data-frame,.red-rain-frame{
+ border-top:0!important;box-shadow:var(--home-shadow)!important;
+}
+.green-data-frame::before,.red-rain-frame::before{display:none!important}
+.metric-row,.detail-metrics>div,.status-criteria-row{
+ border-color:#e4ecee!important;background:#f7fafb!important;border-radius:12px!important;
+}
+.report-btn{
+ border-radius:12px!important;background:var(--home-navy)!important;
+ box-shadow:none!important;
+}
+.weather-icon{background:var(--home-sky)!important}
+.temperature,.station-name{color:var(--home-navy)!important}
+.rank-row{border-radius:12px!important}
+.rank-row:hover{background:var(--home-sky)!important}
+.table-panel{margin-top:20px!important;overflow:hidden!important}
+.table-tools{background:#f7fafb!important;border-bottom:1px solid var(--home-line)!important}
+.table-tools input,.table-tools select{
+ border:1px solid var(--home-line)!important;border-radius:12px!important;background:#fff!important;
+}
+.weather-table thead th{
+ position:sticky;top:0;z-index:2;background:var(--home-navy)!important;
+ color:#fff!important;border:0!important;
+}
+.weather-table tbody tr:nth-child(even){background:#f7fafb!important}
+.weather-table tbody tr:hover{background:#edf7f7!important}
+.news-section{
+ margin-top:24px!important;padding:34px!important;border-radius:26px!important;
+ background:linear-gradient(180deg,#eef6f7 0,#f7fafb 100%)!important;
+ border:1px solid #dcebed!important;
+}
+.news-heading h2{color:var(--home-navy)!important;font-size:28px!important}
+.news-heading>a{color:var(--home-blue)!important;font-weight:700!important}
+.tmd-grid{gap:18px!important}
+.tmd-pdf-button{border-radius:12px!important;background:var(--home-navy)!important}
+.news-tabs button{border-radius:999px!important}
+.news-tabs button.active{background:var(--home-navy)!important;color:#fff!important}
+.news-card,.news-featured{border-radius:18px!important;overflow:hidden!important}
+.footer{
+ width:min(1760px,calc(100% - 40px))!important;margin:0 auto 30px!important;
+ border:0!important;border-radius:18px!important;background:var(--home-navy)!important;
+ color:rgba(255,255,255,.75)!important;padding:22px 26px!important;
+}
+.footer strong,.footer a{color:#fff!important}
+@media(max-width:1180px){
+ .home-hero{grid-template-columns:1fr;padding:44px}
+ .home-quick-links{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .home-quick-links a{min-height:124px}
+}
+@media(max-width:820px){
+ .system-header-inner{width:min(100% - 24px,1760px)!important}
+ .system-clock{display:none!important}
+ .system-brand strong{font-size:16px!important}
+ .app-shell,.footer{width:calc(100% - 20px)!important}
+ .home-hero{padding:34px 24px;border-radius:22px}
+ .home-hero h1{font-size:34px}
+ .home-quick-links{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .home-quick-links a{min-height:118px}
+ .news-section{padding:22px!important}
+}
+@media(max-width:560px){
+ .system-brand strong{max-width:190px;white-space:normal;line-height:1.25}
+ .contact-nav{display:none!important}
+ .home-hero{padding:30px 20px}
+ .home-hero h1{font-size:30px;letter-spacing:-.6px}
+ .home-hero-copy>p{font-size:15px}
+ .home-hero-actions a{width:100%}
+ .home-quick-links{grid-template-columns:1fr}
+ .home-quick-links a{min-height:auto}
+ .ticker .source-link{display:none!important}
+}
+</style>
 </head>
 <body>
 <header class="bar system-header">
@@ -661,7 +868,7 @@ html body main.main #mapPanel #map {
   </a>
   <div class="system-clock" id="headerClock">🌟 กำลังตรวจสอบเวลา</div>
   <nav class="system-actions" aria-label="เมนูหลัก">
-   <a class="news-nav" href="#relatedNews"><span>📰</span> หน้าแรก</a>
+   <a class="news-nav active" href="#homeHero"><span>⌂</span> หน้าแรก</a>
    <div class="more-wrap">
     <button class="more-btn" id="headerMoreBtn" type="button" aria-label="เมนูเพิ่มเติม" aria-expanded="false">⋮</button>
     <div class="more-menu" id="headerMoreMenu">
@@ -675,6 +882,24 @@ html body main.main #mapPanel #map {
  </div>
 </header><div class="app-shell">
 <main class="main" id="overview">
+ <section class="home-hero" id="homeHero" aria-labelledby="homeHeroTitle">
+  <div class="home-hero-copy">
+    <span class="home-eyebrow">IEAT ENVIRONMENTAL MONITORING &amp; CONTROL CENTER</span>
+    <h1 id="homeHeroTitle">ศูนย์เฝ้าระวังสถานการณ์<br><em>สิ่งแวดล้อมและความปลอดภัย</em></h1>
+    <p>ติดตามสภาพอากาศ ปริมาณฝน และสถานีตรวจวัดทั่วประเทศ เพื่อสนับสนุนการตัดสินใจของพื้นที่นิคมอุตสาหกรรม</p>
+    <div class="home-hero-actions">
+      <a class="home-primary-action" href="#mapPanel">ดูสถานการณ์ล่าสุด</a>
+      <a class="home-secondary-action" href="#stationTable">ข้อมูลสถานีทั่วประเทศ</a>
+    </div>
+  </div>
+  <div class="home-quick-links" aria-label="เมนูทางลัด">
+    <a href="#mapPanel"><span>01</span><b>แผนที่สถานี</b><small>ติดตามตำแหน่งและสถานะ</small></a>
+    <a href="#stationTable"><span>02</span><b>ข้อมูลตรวจวัด</b><small>ค้นหาและกรองรายสถานี</small></a>
+    <a href="#relatedNews"><span>03</span><b>ข่าวและประกาศ</b><small>ข้อมูลจากหน่วยงานทางการ</small></a>
+    <a href="./hub.html"><span>04</span><b>ระบบทั้งหมด</b><small>เข้าสู่ศูนย์รวมบริการ</small></a>
+  </div>
+</section>
+
  <section class="ticker"><span class="ticker-label">LIVE UPDATE</span><strong class="ticker-text" id="tickerText">กำลังประมวลผลสถานการณ์อากาศล่าสุดทั่วประเทศ</strong><span class="ticker-time" id="tickerTime">–</span><span class="sync" id="syncState"><i class="sync-dot"></i><span id="syncText">กำลังเชื่อมต่อข้อมูล</span></span><a class="source-link" href="https://nawakonnakhonchai-wq.github.io/temp_3_hr/weather_data.geojson" target="_blank" rel="noopener">แหล่งข้อมูล ↗</a></section>
  <div class="dashboard">
   <div class="left-column">
