@@ -46,8 +46,8 @@
     if(!overlay){overlay=document.createElement("div");overlay.className="forecast-risk-overlay";frame.appendChild(overlay)}
     let legend=frame.querySelector(".forecast-map-period-legend");
     if(!legend){legend=document.createElement("div");frame.appendChild(legend)}
-    legend.className="forecast-map-period-legend period-"+period.replace("h","");
-    legend.innerHTML='<i></i>พื้นที่เฝ้าระวัง '+(period==="24h"?"24":"48")+' ชั่วโมง';
+    legend.className="forecast-map-period-legend";
+    legend.innerHTML='<b>พื้นที่เฝ้าระวัง '+(period==="24h"?"24":"48")+' ชั่วโมง</b><span><i class="estate"></i>นิคมอุตสาหกรรม</span><span><i class="normal"></i>ปกติ</span><span><i class="watch"></i>เฝ้าระวัง</span><span><i class="critical"></i>วิกฤต</span>';
     if(image.dataset.userUploaded==="true"){overlay.replaceChildren();return}
     const west=97.3,east=105.8,south=5.6,north=20.5;
     overlay.replaceChildren();
@@ -55,7 +55,8 @@
       const lat=Number(area.latitude),lon=Number(area.longitude);
       if(!Number.isFinite(lat)||!Number.isFinite(lon)||lon<west||lon>east||lat<south||lat>north)return;
       const dot=document.createElement("i");
-      dot.className="forecast-risk-dot period-"+period.replace("h","");
+      const rain=Number(area.sum_rainfall_mm),riskClass=Number.isFinite(rain)?(rain>=150?"risk-critical":rain>=100?"risk-watch":"risk-normal"):"risk-normal";
+      dot.className="forecast-risk-dot "+riskClass;
       dot.style.left=((lon-west)/(east-west)*100)+"%";
       dot.style.top=((north-lat)/(north-south)*100)+"%";
       dot.title=[area.tambon,area.amphoe,area.province].filter(Boolean).join(" ")+" • ฝนสะสม "+fmt(area.sum_rainfall_mm)+" มม.";
