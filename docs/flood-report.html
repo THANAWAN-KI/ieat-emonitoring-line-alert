@@ -16,7 +16,7 @@
   <script src="data/thaiwater_latest.js?v=20260911-1"></script>
   <script src="flood-live-data.js?v=20260922-3" defer></script>
   <script src="data/thaiwater-map-meta.js" defer></script>
-  <script src="flood-export.js?v=20260922-3" defer></script>
+  <script src="flood-export.js?v=20260922-4" defer></script>
   <style>
     :root{--purple:#388ed1;--blue:#1769C2;--cyan:#81D4FA;--teal:#66BB6A;--ink:#283142;--muted:#697386;--bg:#F6F6F4;--line:#E5E2E8;--soft:#F5F1F7;--white:#FFFFFF;--red:#B0005A;--orange:#F6BB42;--green:#58B957}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Sarabun","Sarabun",sans-serif;font-size:16px;font-weight:400}button,input,select,textarea{font:inherit}
@@ -14722,5 +14722,40 @@ html body main.container #warning #waterSituationViz .water-legend-item.critical
   -webkit-text-fill-color:#263746!important;
 }
 </style>
+
+<style id="flood-force-critical-white-20260922-v2">
+html body .water-legend .water-legend-item.critical,
+html body main.container #warning #waterSituationViz .water-legend .water-legend-item.critical{
+ background:#FFFFFF!important;
+ background-color:#FFFFFF!important;
+ color:#263746!important;
+ -webkit-text-fill-color:#263746!important;
+}
+html body .water-legend .water-legend-item.critical :is(span,b){
+ color:#263746!important;
+ -webkit-text-fill-color:#263746!important;
+}
+</style>
+<script id="flood-force-critical-white-20260922-v2-script">
+(function(){
+ "use strict";
+ function clearCriticalRed(){
+  document.querySelectorAll(".water-legend .water-legend-item.critical").forEach(function(row){
+   row.style.setProperty("background","#FFFFFF","important");
+   row.style.setProperty("background-color","#FFFFFF","important");
+   row.style.setProperty("color","#263746","important");
+   row.querySelectorAll("span,b").forEach(function(el){el.style.setProperty("color","#263746","important")});
+  });
+ }
+ function start(){
+  clearCriticalRed();
+  var root=document.getElementById("waterSituationViz")||document.getElementById("warning");
+  if(root)new MutationObserver(clearCriticalRed).observe(root,{childList:true,subtree:true,characterData:true});
+  window.addEventListener("ieat:data-ready",function(){setTimeout(clearCriticalRed,0)});
+  [100,400,900,1800,3500,6000,10000].forEach(function(ms){setTimeout(clearCriticalRed,ms)});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>
 </body>
 </html>
