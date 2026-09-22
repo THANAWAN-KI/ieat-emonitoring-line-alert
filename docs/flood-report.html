@@ -11079,6 +11079,9 @@ function cls(v){return v>=100?"high":v>=80?"watch":""}
 function render(rows){
  var chart=document.getElementById("ridLevelChart"),trend=document.getElementById("ridTrendChart"),body=document.getElementById("ridStationRows"),status=document.getElementById("ridLiveStatus");
  var top=rows.slice(0,10);
+ var stationCount=rows.length.toLocaleString("th-TH");
+ ["dailyStations","outRoute2","outRouteCount"].forEach(function(id){var el=document.getElementById(id);if(el)el.textContent=stationCount});
+ var routeInput=document.getElementById("routeCountIn");if(routeInput)routeInput.value=stationCount;
  if(chart)chart.innerHTML=top.length?top.map(function(r){return'<div class="rid-level-row"><span class="rid-level-name" title="'+esc(r.name)+'">'+esc(r.name)+'</span><div class="rid-level-track"><div class="rid-level-fill '+cls(r.pct)+'" style="width:'+Math.max(2,Math.min(100,r.pct))+'%"></div></div><span class="rid-level-value">'+r.pct.toLocaleString("th-TH",{maximumFractionDigits:1})+'%</span></div>'}).join(""):'<p>ไม่พบสถานีในรัศมีที่กำหนด</p>';
  var counts={up:0,steady:0,down:0};
  rows.forEach(function(r){if(/เพิ่ม/.test(r.trend))counts.up++;else if(/ลด/.test(r.trend))counts.down++;else counts.steady++});
@@ -11088,7 +11091,7 @@ function render(rows){
  var stamps=rows.map(function(r){return r.stamp}).filter(Boolean).sort();
  if(status)status.textContent="แสดง "+rows.length.toLocaleString("th-TH")+" สถานี"+(stamps.length?" • ข้อมูลต้นทางล่าสุด "+new Date(stamps[stamps.length-1]).toLocaleString("th-TH",{dateStyle:"medium",timeStyle:"short"}):"")+" • อัปเดตอัตโนมัติทุก 1 นาที";
 }
-async function refresh(){if(busy)return;busy=true;mount();try{var res=await fetch(URL+"?_="+Date.now(),{cache:"no-store"});if(!res.ok)throw Error("HTTP "+res.status);render(normalize(await res.json()))}catch(e){var s=document.getElementById("ridLiveStatus");if(s)s.textContent="ไม่สามารถโหลดข้อมูลกรมชลประทานล่าสุดได้";console.error(e)}finally{busy=false}}
+async function refresh(){if(busy)return;busy=true;mount();try{var res=await fetch(URL+"?_="+Date.now(),{cache:"no-store"});if(!res.ok)throw Error("HTTP "+res.status);render(normalize(await res.json()))}catch(e){var s=document.getElementById("ridLiveStatus");if(s)s.textContent="ไม่สามารถโหลดข้อมูลกรมชลประทานล่าสุดได้";["dailyStations","outRoute2","outRouteCount"].forEach(function(id){var el=document.getElementById(id);if(el&&(/กำลังโหลด/.test(el.textContent)||el.textContent.trim()==="–"))el.textContent="ไม่พร้อมใช้งาน"});console.error(e)}finally{busy=false}}
 function start(){mount();refresh();setInterval(refresh,60000);document.addEventListener("visibilitychange",function(){if(!document.hidden)refresh()});window.addEventListener("focus",refresh)}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();
