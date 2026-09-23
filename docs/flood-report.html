@@ -14958,5 +14958,40 @@ html body main.container #warning #topFloodNine>.final-flood-card:nth-child(n+7)
 html body main.container #warning #topFloodNine>.final-flood-card .final-card-detail{font-size:3px!important}
 html body main.container #warning #topFloodNine>.final-flood-card>.force-new-flood-icon svg{width:46px!important;height:46px!important}
 </style>
+<script id="flood-card-readable-type-20260923">
+(function(){
+ "use strict";
+ var ids=["outFactory","dailyNearbyRiskCount","dailyStations","dailyStatus","outCritical","nationalFloodCount","nationalStormCount","nationalWaterProvinceCount","nationalHeavyRainCount"];
+ var colors=["#832561","#11862f","#bfca02"];
+ var scheduled=false;
+ function set(el,key,value){if(el&&el.style.getPropertyValue(key)!==value)el.style.setProperty(key,value,"important")}
+ function apply(){
+  scheduled=false;
+  var root=document.getElementById("topFloodNine");if(!root)return;
+  ids.forEach(function(id,index){
+   var value=root.querySelector("#"+id);if(!value)return;
+   var card=value.closest(".final-flood-card,.kpi,.national-kpi,.daily-water-item");if(!card)return;
+   var title=card.querySelector(".final-card-title,.drought-card-title,.bottom-card-title,.reference-card-title");
+   var detail=card.querySelector(".final-card-detail,.drought-card-detail,.bottom-card-detail,.reference-card-unit");
+   set(title,"font-size","13px");set(title,"line-height","1.3");set(title,"overflow-wrap","anywhere");
+   set(value,"font-size",id==="dailyStatus"?"16px":"20px");
+   set(value,"line-height","1.15");set(value,"overflow-wrap","anywhere");
+   set(value,"white-space","normal");
+   set(detail,"font-size","10px");set(detail,"line-height","1.25");
+   set(detail,"overflow-wrap","anywhere");
+   var color=colors[Math.floor(index/3)];
+   set(value,"color",color);set(value,"-webkit-text-fill-color",color);
+  });
+ }
+ function schedule(){if(scheduled)return;scheduled=true;requestAnimationFrame(apply)}
+ function start(){
+  apply();
+  var root=document.getElementById("topFloodNine");if(root)new MutationObserver(schedule).observe(root,{childList:true,subtree:true,characterData:true});
+  [100,400,1000,3000,8000,15000].forEach(function(ms){setTimeout(apply,ms)});
+  window.addEventListener("ieat:data-ready",schedule);
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>
 </body>
 </html>
