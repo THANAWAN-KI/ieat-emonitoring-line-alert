@@ -15383,30 +15383,19 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
 #warning #topFloodMap{position:relative!important;min-height:640px!important}
 #warning #topFloodMap>.operations-map{display:block!important;position:relative!important;width:100%!important;height:100%!important;min-height:640px!important;overflow:hidden!important}
 #warning #topFloodMap #overviewArcgisMap{display:block!important;width:100%!important;height:100%!important;min-height:640px!important;border:0!important}
-#warning #topFloodMap .flood-map-controls{position:absolute;z-index:8;bottom:12px;right:12px;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
-#warning #topFloodMap .flood-map-controls button,#warning #topFloodMap .flood-map-controls a{font:inherit;padding:8px 12px;background:#fff;color:#007fdb;border:1px solid #cbdbe8;box-shadow:0 2px 10px #0003;text-decoration:none;cursor:pointer}
-#warning #topFloodMap .flood-map-controls button[aria-pressed="true"]{background:#007fdb;color:#fff}
 </style>
 <script id="flood-map-authoritative-20260923-script">
 (function(){
  "use strict";
- var URL="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=3d24287ac6ea49cd823625ddad496e01&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=false&basemaps=true&center=101.92510244344074,14.048909798054707&scale=288895.277144";
- var FALLBACK="./flood-map-legacy.html",card=null,mode="legacy";
- function setMode(next){
-  mode=next;
-  var frame=card&&card.querySelector("#overviewArcgisMap");
-  if(frame){var src=next==="arcgis"?URL:FALLBACK;if(frame.getAttribute("src")!==src)frame.setAttribute("src",src)}
-  if(card)card.querySelectorAll("[data-map-mode]").forEach(function(button){button.setAttribute("aria-pressed",String(button.getAttribute("data-map-mode")===next))});
- }
+ var BASE="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=3d24287ac6ea49cd823625ddad496e01&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=false&basemaps=true";
+ var START=BASE+"&center=101.92510244344074,14.048909798054707&scale=288895.277144";
+ var card=null;
  function ensure(){
   var target=document.querySelector("#warning #topFloodMap");if(!target)return;
   if(!card){
    card=document.createElement("article");card.className="card operations-map embedded-water-map";
-   card.innerHTML='<div class="overview-map-label"><b>แผนที่สถานการณ์น้ำท่วม</b><small>เลือกดูแผนที่ ArcGIS ต้นฉบับหรือแผนที่สำหรับซูมจากข้อมูล</small></div>'+
-    '<iframe id="overviewArcgisMap" title="แผนที่แสดงข้อมูลน้ำท่วม" allow="local-network-access; geolocation" loading="eager"></iframe>'+
-    '<div class="flood-map-controls"><button type="button" data-map-mode="arcgis" aria-pressed="false">แผนที่ ArcGIS ต้นฉบับ</button><button type="button" data-map-mode="legacy" aria-pressed="true">แผนที่ข้อมูลและซูม</button><a href="'+URL+'" target="_blank" rel="noopener">เปิด ArcGIS เต็มหน้า</a></div>';
-   card.querySelectorAll("[data-map-mode]").forEach(function(button){button.onclick=function(){setMode(button.getAttribute("data-map-mode"))}});
-   setMode("legacy");
+   card.innerHTML='<div class="overview-map-label"><b>แผนที่สถานการณ์น้ำท่วม</b><small>เลื่อนแผนที่หรือซูมเข้า–ออกเพื่อดูรายละเอียด</small></div>'+
+    '<iframe id="overviewArcgisMap" title="แผนที่แสดงข้อมูลน้ำท่วม" allow="local-network-access; geolocation" loading="eager" src="'+START+'"></iframe>';
   }
   if(card.parentElement!==target)target.appendChild(card);
  }
@@ -15414,9 +15403,8 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
   var a=Number(lat),b=Number(lon);if(!Number.isFinite(a)||!Number.isFinite(b))return;
   ensure();if(!card)return;card.scrollIntoView({behavior:"smooth",block:"center"});
   var caption=card.querySelector(".overview-map-label small");if(caption&&label)caption.textContent="กำลังแสดงตำแหน่ง: "+label;
-  var frame=card.querySelector("iframe");
-  if(mode!=="legacy"){setMode("legacy");frame.addEventListener("load",function once(){frame.removeEventListener("load",once);frame.contentWindow.postMessage({type:"flood-map-zoom",lat:a,lon:b},location.origin)},{once:true})}
-  else if(frame&&frame.contentWindow)frame.contentWindow.postMessage({type:"flood-map-zoom",lat:a,lon:b},location.origin);
+  var frame=card.querySelector("#overviewArcgisMap");
+  if(frame)frame.src=BASE+"&center="+encodeURIComponent(b+","+a)+"&scale=75000";
  };
  function start(){
   ensure();
