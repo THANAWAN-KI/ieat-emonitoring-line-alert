@@ -11285,13 +11285,13 @@ html body main.container #warning .nearby-flood-risk-card #nearestWaterStationDi
    if(!Number.isFinite(lat)||!Number.isFinite(lon))return;
    var nearest=null;
    ESTATES.forEach(function(e){var d=km(e[1],e[2],lat,lon);if(!nearest||d<nearest.distance)nearest={name:e[0],distance:d}});
-   if(nearest&&nearest.distance<=120)rows.push({name:p.station_name||p.station_code||"ไม่ระบุสถานี",location:[p.amphoe,p.province].filter(Boolean).join(" "),rain:Number(p.sum_rainfall_48h),stamp:p.latest_rainfall_datetime||"",estate:nearest.name,distance:nearest.distance});
+   if(nearest&&nearest.distance<=120)rows.push({name:p.station_name||p.station_code||"ไม่ระบุสถานี",location:[p.amphoe,p.province].filter(Boolean).join(" "),lat:lat,lon:lon,rain:Number(p.sum_rainfall_48h),stamp:p.latest_rainfall_datetime||"",estate:nearest.name,distance:nearest.distance});
   });
   rows.sort(function(a,b){return(b.rain||0)-(a.rain||0)});
   var count=rows.length.toLocaleString("th-TH")+" แห่ง";
   var card=document.getElementById("dailyNearbyRiskCount"),detailCount=document.getElementById("nearbyRiskDetailCount"),list=document.getElementById("nearbyRiskDetailList"),status=document.getElementById("nearbyRiskLiveStatus");
   if(card)card.textContent=count;if(detailCount)detailCount.textContent=count;
-  if(list)list.innerHTML=rows.length?rows.slice(0,8).map(function(r){return'<div class="nearby-risk-detail-item"><div><b>'+esc(r.name)+'</b><span>'+esc(r.location||"ไม่ระบุพื้นที่")+' • ใกล้ '+esc(r.estate.replace(/^นิคมอุตสาหกรรม/,"นิคมฯ "))+' '+r.distance.toLocaleString("th-TH",{maximumFractionDigits:1})+' กม.</span></div><strong>'+(Number.isFinite(r.rain)?r.rain.toLocaleString("th-TH",{maximumFractionDigits:1})+" มม.":"–")+'</strong></div>'}).join(""):'<div class="nearby-risk-detail-item"><span>ไม่พบจุดเสี่ยงใกล้พื้นที่นิคมฯ</span></div>';
+  if(list)list.innerHTML=rows.length?rows.slice(0,8).map(function(r){return'<button type="button" class="nearby-risk-detail-item flood-map-zoom-row" data-map-lat="'+r.lat+'" data-map-lon="'+r.lon+'" data-map-label="'+esc(r.name)+'" aria-label="ซูมแผนที่ไปที่ '+esc(r.name)+'"><div><b>'+esc(r.name)+'</b><span>'+esc(r.location||"ไม่ระบุพื้นที่")+' • ใกล้ '+esc(r.estate.replace(/^นิคมอุตสาหกรรม/,"นิคมฯ "))+' '+r.distance.toLocaleString("th-TH",{maximumFractionDigits:1})+' กม.</span></div><strong>'+(Number.isFinite(r.rain)?r.rain.toLocaleString("th-TH",{maximumFractionDigits:1})+" มม.":"–")+'</strong></button>'}).join(""):'<div class="nearby-risk-detail-item"><span>ไม่พบจุดเสี่ยงใกล้พื้นที่นิคมฯ</span></div>';
   var stamps=rows.map(function(r){return r.stamp}).filter(Boolean).sort();
   if(status)status.textContent=stamps.length?"ข้อมูลต้นทางล่าสุด "+new Date(stamps[stamps.length-1]).toLocaleString("th-TH",{dateStyle:"medium",timeStyle:"short"})+" • ตรวจใหม่ทุก 1 นาที":"ไม่พบเวลาอัปเดตจากข้อมูลต้นทาง";
  }
@@ -11624,7 +11624,12 @@ html body #warning .flood-card-icon svg{display:block!important;width:100%!impor
  function riskRows(items){
   var list=(items||[]).slice().sort(function(a,b){return(Number(b.sum_rainfall_mm)||0)-(Number(a.sum_rainfall_mm)||0)}).slice(0,10);
   if(!list.length)return '<div class="overview-risk-item"><span></span><div class="overview-risk-place"><b>ยังไม่พบพื้นที่เสี่ยง</b></div><span></span></div>';
-  return list.map(function(x,i){var place=[x.tambon,x.amphoe,x.province].filter(Boolean).join(" "),rain=Number(x.sum_rainfall_mm);return'<div class="overview-risk-item"><span class="overview-risk-rank">'+(i+1)+'</span><div class="overview-risk-place"><b>'+esc(place||"ไม่ระบุพื้นที่")+'</b><small>'+esc(x.observed_at||"")+'</small></div><span class="overview-risk-rain">'+(Number.isFinite(rain)?rain.toLocaleString("th-TH",{maximumFractionDigits:1})+" มม.":"–")+'</span></div>'}).join("");
+  return list.map(function(x,i){
+   var place=[x.tambon,x.amphoe,x.province].filter(Boolean).join(" "),rain=Number(x.sum_rainfall_mm);
+   var lat=Number(x.latitude),lon=Number(x.longitude),hasCoords=x.latitude!=null&&x.longitude!=null&&Number.isFinite(lat)&&Number.isFinite(lon)&&lat!==0&&lon!==0&&Math.abs(lat)<=90&&Math.abs(lon)<=180;
+   var open=hasCoords?'<button type="button" class="overview-risk-item flood-map-zoom-row" data-map-lat="'+lat+'" data-map-lon="'+lon+'" data-map-label="'+esc(place||"พื้นที่เสี่ยง")+'" aria-label="ซูมแผนที่ไปที่ '+esc(place||"พื้นที่เสี่ยง")+'">':'<div class="overview-risk-item">';
+   return open+'<span class="overview-risk-rank">'+(i+1)+'</span><div class="overview-risk-place"><b>'+esc(place||"ไม่ระบุพื้นที่")+'</b><small>'+esc(x.observed_at||"")+'</small></div><span class="overview-risk-rain">'+(Number.isFinite(rain)?rain.toLocaleString("th-TH",{maximumFractionDigits:1})+" มม.":"–")+'</span>'+(hasCoords?'</button>':'</div>');
+  }).join("");
  }
  function ensureForecast(){
   var operations=document.querySelector("#warning .operations-dashboard");
@@ -13875,11 +13880,13 @@ html body main.container #warning .dashboard-chart-mode>.rid-table-wrap{
  }
  function renderEstate(){
   var body=document.getElementById("estateRanks"),panel=body&&body.closest(".estate-watch-table"),target=viz(panel,"estateRankViz");if(!target)return;
-  var rows=rowsOf("#estateRanks").map(function(row){return{name:row.cells[1]?.textContent.trim()||"–",count:number(row.cells[2]?.textContent)}})
+  var rows=rowsOf("#estateRanks").map(function(row){var pin=row.cells[5]?.querySelector("[data-map-lat][data-map-lon]"),lat=pin?.dataset.mapLat,lon=pin?.dataset.mapLon;return{name:row.cells[1]?.textContent.trim()||"–",count:number(row.cells[2]?.textContent),lat:lat,lon:lon}})
    .sort(function(a,b){return b.count-a.count}).slice(0,5);
   var sig=JSON.stringify(rows);if(target.dataset.sig===sig)return;target.dataset.sig=sig;
   target.innerHTML=rows.length?'<div class="flood-estate-ranking">'+rows.map(function(x,i){
-   return '<div class="flood-estate-rank"><span class="flood-estate-name" title="'+esc(x.name)+'">'+(i+1)+'. '+esc(x.name)+'</span><strong>'+x.count.toLocaleString("th-TH")+'</strong></div>';
+   var lat=Number(x.lat),lon=Number(x.lon),hasCoords=x.lat!=null&&x.lon!=null&&x.lat!==""&&x.lon!==""&&Number.isFinite(lat)&&Number.isFinite(lon)&&lat!==0&&lon!==0&&Math.abs(lat)<=90&&Math.abs(lon)<=180;
+   var open=hasCoords?'<button type="button" class="flood-estate-rank flood-map-zoom-row" data-map-lat="'+lat+'" data-map-lon="'+lon+'" data-map-label="'+esc(x.name)+'" aria-label="ซูมแผนที่ไปที่ '+esc(x.name)+'">':'<div class="flood-estate-rank">';
+   return open+'<span class="flood-estate-name" title="'+esc(x.name)+'">'+(i+1)+'. '+esc(x.name)+'</span><strong>'+x.count.toLocaleString("th-TH")+'</strong>'+(hasCoords?'</button>':'</div>');
   }).join("")+'</div>':'<div class="dashboard-viz-empty">กำลังประมวลผลข้อมูลล่าสุด…</div>';
  }
  function state(text){text=String(text||"");return /ล้น|วิกฤต|สูง|เพิ่ม/.test(text)?"critical":/ปกติ|ลด/.test(text)?"normal":/เฝ้าระวัง|เตือน|คงที่|ทรงตัว/.test(text)?"warning":"unknown"}
@@ -15442,5 +15449,29 @@ html body main.container #warning #ridBasinOverview .rid-basin-actions>a{
  [100,500,1500].forEach(function(ms){setTimeout(place,ms)});
 })();
 </script>
-</body>
+<style id="flood-click-to-zoom-risk-estate-20260923">
+html body main.container #warning #overviewForecastRisk button.flood-map-zoom-row,
+html body main.container #warning #topFloodDashboard #estateRankViz button.flood-map-zoom-row{
+ appearance:none!important;-webkit-appearance:none!important;
+ display:grid!important;width:100%!important;height:auto;
+ margin:0!important;border:0!important;text-align:left!important;
+ font:inherit!important;cursor:pointer!important
+}
+html body main.container #warning #overviewForecastRisk button.flood-map-zoom-row{
+ min-height:37px!important;height:37px!important;
+ grid-template-columns:minmax(0,1fr) auto!important;
+ align-items:center!important;gap:5px!important;padding:4px 5px!important;
+ border-radius:9px!important;background:#f5f7ff!important
+}
+html body main.container #warning #topFloodDashboard #estateRankViz button.flood-map-zoom-row{
+ grid-template-columns:minmax(0,1fr) auto!important;
+ align-items:center!important;gap:7px!important;
+ min-height:36px!important;padding:4px 6px!important;
+ border-radius:9px!important;background:#f5f7ff!important
+}
+html body main.container #warning .flood-map-zoom-row:hover{filter:brightness(.97)}
+html body main.container #warning .flood-map-zoom-row:focus-visible{
+ outline:2px solid #007fdb!important;outline-offset:2px!important
+}
+</style></body>
 </html>
