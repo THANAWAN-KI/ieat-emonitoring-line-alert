@@ -1535,7 +1535,7 @@ document.documentElement.classList.add("flood-initializing");
 <section class="export-sheet portrait-sheet forecast-period-page" id="reportPage4" data-report-page="4" data-forecast-period="24h">
 <header class="sheet-header compact"><h2>พื้นที่เฝ้าระวัง 24 ชั่วโมงใกล้เคียงพื้นที่นิคมฯ</h2><p class="shared-report-period" contenteditable="true">ข้อมูลพื้นที่เฝ้าระวังล่าสุดจากระบบ ThaiWater</p></header>
 <section class="three-day-risk-map">
-<iframe class="report-arcgis-map" width="700" height="600" allow="local-network-access; geolocation" title="แผนที่แสดงข้อมูลน้ำท่วม" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&amp;webmap=3d24287ac6ea49cd823625ddad496e01&amp;theme=light&amp;bookmarks=true&amp;legend=true&amp;information=true&amp;share=true&amp;scroll=false&amp;basemaps=true&amp;center=101.60218426570209,13.611210763141127&amp;scale=4622324.434309"></iframe>
+<iframe class="report-arcgis-map" width="700" height="600" allow="local-network-access; geolocation" title="แผนที่แสดงข้อมูลน้ำท่วม" loading="lazy" data-src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&amp;webmap=3d24287ac6ea49cd823625ddad496e01&amp;theme=light&amp;bookmarks=true&amp;legend=true&amp;information=true&amp;share=true&amp;scroll=false&amp;basemaps=true&amp;center=101.60218426570209,13.611210763141127&amp;scale=4622324.434309"></iframe>
 </section>
 <section class="export-table-block forecast-table-block">
 <h3>พื้นที่เฝ้าระวัง 24 ชั่วโมงใกล้เคียงพื้นที่นิคมฯ</h3>
@@ -1546,7 +1546,7 @@ document.documentElement.classList.add("flood-initializing");
 <section class="export-sheet portrait-sheet forecast-period-page" id="reportPage5" data-report-page="5" data-forecast-period="48h">
 <header class="sheet-header compact"><h2>พื้นที่เฝ้าระวัง 48 ชั่วโมงใกล้เคียงพื้นที่นิคมฯ</h2><p class="shared-report-period" contenteditable="true">ข้อมูลพื้นที่เฝ้าระวังล่าสุดจากระบบ ThaiWater</p></header>
 <section class="three-day-risk-map">
-<iframe class="report-arcgis-map" width="700" height="600" allow="local-network-access; geolocation" title="แผนที่แสดงข้อมูลน้ำท่วม" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&amp;webmap=3d24287ac6ea49cd823625ddad496e01&amp;theme=light&amp;bookmarks=true&amp;legend=true&amp;information=true&amp;share=true&amp;scroll=false&amp;basemaps=true&amp;center=101.60218426570209,13.611210763141127&amp;scale=4622324.434309"></iframe>
+<iframe class="report-arcgis-map" width="700" height="600" allow="local-network-access; geolocation" title="แผนที่แสดงข้อมูลน้ำท่วม" loading="lazy" data-src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&amp;webmap=3d24287ac6ea49cd823625ddad496e01&amp;theme=light&amp;bookmarks=true&amp;legend=true&amp;information=true&amp;share=true&amp;scroll=false&amp;basemaps=true&amp;center=101.60218426570209,13.611210763141127&amp;scale=4622324.434309"></iframe>
 </section>
 <section class="export-table-block forecast-table-block">
 <h3>พื้นที่เฝ้าระวัง 48 ชั่วโมงใกล้เคียงพื้นที่นิคมฯ</h3>
@@ -5948,20 +5948,7 @@ body main.container :is(#warning,#thaiwater-warning,#infographic) [class*="-card
 </style>
 
 
-<script id="lock-visible-card-typography-20260909-v3">
-(function(){
- "use strict";
- function set(el,props){if(!el)return;Object.entries(props).forEach(([k,v])=>el.style.setProperty(k,v,"important"))}
- function lockTypography(){
-  document.querySelectorAll("#warning .card.kpi strong,#warning .national-kpi strong,#thaiwater-warning [class*='kpi'] strong").forEach(el=>set(el,{"font-family":"'Sarabun', sans-serif","font-size":"28px","font-weight":"600","line-height":"1.25","color":"#1565c0"}));
-  document.querySelectorAll("#warning .card.kpi span,#warning .national-kpi span,#thaiwater-warning [class*='kpi'] span").forEach(el=>set(el,{"font-family":"'Sarabun', sans-serif","font-size":"16px","font-weight":"400","line-height":"1.5","color":"#0d1a2b"}));
-  document.querySelectorAll("#warning .national-kpi h2").forEach(el=>set(el,{"font-family":"'Sarabun', sans-serif","font-size":"20px","font-weight":"600","line-height":"1.45","color":"#0d1a2b"}));
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",lockTypography);else lockTypography();
- const main=document.querySelector("main.container");if(main)new MutationObserver(lockTypography).observe(main,{subtree:true,childList:true,characterData:true});
- [100,500,1200,2500,5000,8000].forEach(ms=>setTimeout(lockTypography,ms));
-})();
-</script>
+
 
 
 <style id="match-all-page-headers-to-overview-20260909-v1">
@@ -6091,19 +6078,7 @@ html body td{
  font-family:"Sarabun",sans-serif!important;
 }
 </style>
-<script id="match-hub-font-family-final-20260909-v1-script">
-(function(){
- "use strict";
- function matchHubFont(){
-  document.querySelectorAll("main h1,main h2,main h3,main h4,main h5,main h6,main p,main span,main strong,main small,main a,main button,main label,main input,main select,main textarea,main th,main td,main li,main div[contenteditable='true'],main p[contenteditable='true'],main h2[contenteditable='true']").forEach(function(el){
-   el.style.setProperty("font-family","'Sarabun', sans-serif","important");
-  });
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",matchHubFont);else matchHubFont();
- const main=document.querySelector("main");if(main)new MutationObserver(matchHubFont).observe(main,{subtree:true,childList:true});
- [100,500,1200,2500,5000].forEach(ms=>setTimeout(matchHubFont,ms));
-})();
-</script>
+
 
 
 <style id="risk-24-48-compact-card-list-20260909-v1">
@@ -10018,39 +9993,7 @@ html body main.container #infographic table > tbody > tr > td {
   box-shadow: none !important;
 }
 </style>
-<script id="flood-force-table-black-grid-20260911-v2-script">
-(function () {
-  function forceBlackTableGrid() {
-    document.querySelectorAll("#warning table, #infographic table").forEach(function (table) {
-      table.style.setProperty("border-collapse", "collapse", "important");
-      table.style.setProperty("border-spacing", "0", "important");
-      table.style.setProperty("border", "1px solid #000000", "important");
-      table.style.setProperty("outline", "1px solid #000000", "important");
-      table.style.setProperty("outline-offset", "-1px", "important");
-      table.querySelectorAll("th, td").forEach(function (cell) {
-        cell.style.setProperty("border", "1px solid #000000", "important");
-        cell.style.setProperty("border-color", "#000000", "important");
-        cell.style.setProperty("border-style", "solid", "important");
-        cell.style.setProperty("border-width", "1px", "important");
-      });
-    });
-  }
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", forceBlackTableGrid, {once:true});
-  } else {
-    forceBlackTableGrid();
-  }
-  [100, 500, 1200, 2500, 5000, 9000, 15000].forEach(function (ms) {
-    setTimeout(forceBlackTableGrid, ms);
-  });
-  const warning = document.getElementById("warning");
-  if (warning) {
-    new MutationObserver(function () {
-      requestAnimationFrame(forceBlackTableGrid);
-    }).observe(warning, {childList:true, subtree:true});
-  }
-})();
-</script>
+
 
 
 <style id="flood-export-report-table-colors-20260911-v2">
@@ -13326,7 +13269,8 @@ html body main.container #infographic #reportPage5 .export-rid-trend.steady{back
   }
   var source=document.getElementById("overviewArcgisMap");
   var src=source&&source.src||MAP_FALLBACK;
-  if(exportMap.src!==src)exportMap.src=src;
+  if(getComputedStyle(document.getElementById("infographic")).display==="none"){exportMap.dataset.src=src;exportMap.removeAttribute("src")}
+  else if(exportMap.src!==src){exportMap.src=src;delete exportMap.dataset.src}
  }
  function ensurePage(){
   var pages=document.querySelector("#infographic .report-pages");if(!pages)return null;
@@ -15127,5 +15071,26 @@ html body main.container #warning #overviewForecastRisk .nearby-risk-detail-item
  html body main.container #warning #topFloodDashboard #ridTrendChart .flood-trend-row{grid-template-columns:62px minmax(0,1fr) 64px;gap:6px}
 }
 </style>
+<script id="flood-report-defer-hidden-maps-20260923">
+(function(){
+ "use strict";
+ function loadReportMaps(){
+  var report=document.getElementById("infographic");
+  if(!report||getComputedStyle(report).display==="none")return;
+  report.querySelectorAll("iframe[data-src]").forEach(function(frame){
+   var src=frame.dataset.src;
+   if(src&&frame.getAttribute("src")!==src)frame.setAttribute("src",src);
+   delete frame.dataset.src;
+  });
+ }
+ function start(){
+  loadReportMaps();
+  var report=document.getElementById("infographic");
+  if(report)new MutationObserver(loadReportMaps).observe(report,{attributes:true,attributeFilter:["style","class"]});
+  document.addEventListener("click",function(){setTimeout(loadReportMaps,0)});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>
 </body>
 </html>
