@@ -13802,10 +13802,6 @@ html body main.container #warning :is(.table-scroll,.rid-table-wrap){
   labelTable(document.querySelector("#warning .estate-watch-table table"));
   labelTable(document.querySelector("#warning .station-watch-table table"));
   labelTable(document.querySelector("#warning .rid-water-table"));
-  var overview=document.getElementById("warning");
-  var launch=document.getElementById("floodReportLaunch");
-  var basin=document.getElementById("ridBasinOverview");
-  if(overview&&launch&&basin&&launch.previousElementSibling!==basin)basin.insertAdjacentElement("afterend",launch);
   busy=false;
  }
  function start(){
@@ -15395,5 +15391,56 @@ html body main.container #warning #overviewForecastRisk .overview-risk-card[data
 html body main.container #warning #overviewForecastRisk .overview-risk-card[data-hours="48"]::before{
  content:none!important;display:none!important;border:0!important
 }
-</style></body>
+</style><style id="flood-basin-heading-report-action-20260923">
+html body main.container #warning #ridBasinOverview .rid-basin-head{
+ display:flex!important;align-items:center!important;justify-content:space-between!important;
+ gap:16px!important;flex-wrap:wrap!important
+}
+html body main.container #warning #ridBasinOverview .rid-basin-head>div:first-child{
+ flex:1 1 330px!important;min-width:0!important
+}
+html body main.container #warning #ridBasinOverview .rid-basin-head h2,
+html body main.container #warning #ridBasinOverview .rid-basin-head p{
+ color:#007fdb!important;-webkit-text-fill-color:#007fdb!important
+}
+html body main.container #warning #ridBasinOverview .rid-basin-actions{
+ display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;
+ gap:10px;min-width:0
+}
+html body main.container #warning #ridBasinOverview .rid-basin-actions #floodReportLaunch{
+ flex:0 0 auto!important;width:auto!important;margin:0!important;
+ padding:0!important;align-items:center!important
+}
+html body main.container #warning #ridBasinOverview .rid-basin-actions #openFloodReport{
+ min-width:0!important;min-height:40px!important;padding:9px 16px!important;
+ font-size:14px!important
+}
+html body main.container #warning #ridBasinOverview .rid-basin-actions>a{
+ display:inline-flex;align-items:center;justify-content:center;
+ min-height:40px;padding:9px 16px;white-space:nowrap
+}
+@media(max-width:700px){
+ html body main.container #warning #ridBasinOverview .rid-basin-actions{
+  width:100%;justify-content:flex-start
+ }
+}
+</style>
+<script id="flood-basin-heading-report-action-20260923-script">
+(function(){
+ "use strict";
+ function place(){
+  var head=document.querySelector("#ridBasinOverview .rid-basin-head");
+  var link=head&&head.querySelector('a[href*="bigdata-swoc.rid.go.th/basin_manage"]');
+  var launch=document.getElementById("floodReportLaunch");
+  if(!head||!link||!launch)return;
+  var actions=head.querySelector(".rid-basin-actions");
+  if(!actions){actions=document.createElement("div");actions.className="rid-basin-actions";link.before(actions)}
+  if(link.parentElement!==actions)actions.appendChild(link);
+  if(launch.parentElement!==actions)actions.appendChild(launch);
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",place,{once:true});else place();
+ [100,500,1500].forEach(function(ms){setTimeout(place,ms)});
+})();
+</script>
+</body>
 </html>
