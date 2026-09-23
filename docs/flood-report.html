@@ -15423,6 +15423,8 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
 </style>
 <style id="flood-native-webmap-20260923">
 #warning #topFloodMap #overviewArcgisMap{position:relative!important;min-height:620px!important;background:#eef3f7!important}
+#warning #topFloodMap .operations-map{position:relative!important}
+#warning #topFloodMap #floodMapFallback{position:absolute;inset:0;width:100%;height:100%;min-height:620px;border:0;background:#eef3f7;z-index:2}
 #warning #topFloodMap #overviewArcgisMap .esri-view-surface{touch-action:pan-x pan-y}
 #warning #overviewForecastRisk .overview-risk-card[data-hours="48"] button.overview-risk-item{background:#f5f7ff!important;background-color:#f5f7ff!important;border-color:transparent!important}
 </style>
@@ -15433,7 +15435,14 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
  var webmapId="3d24287ac6ea49cd823625ddad496e01";
  var host=document.querySelector("#warning #topFloodMap #overviewArcgisMap");
  if(!host)return;
- var view,pending;
+ var view,pending,ready=false;
+ var fallbackUrl="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap="+webmapId+"&theme=light&legend=true&center=100.38863619797984,14.34381658929649&scale=577790.554289";
+ function fallback(){
+  if(ready||document.getElementById("floodMapFallback"))return;
+  var iframe=document.createElement("iframe");iframe.id="floodMapFallback";iframe.title="แผนที่สถานการณ์น้ำท่วม";
+  iframe.loading="eager";iframe.src=fallbackUrl;host.parentNode.appendChild(iframe);
+ }
+ var fallbackTimer=setTimeout(fallback,15000);
  var originalZoom=window.zoomRiskMap;
  window.zoomRiskMap=function(lat,lon,label){
   var latitude=Number(lat),longitude=Number(lon);
@@ -15441,8 +15450,14 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
   var mapLabel=document.querySelector("#topFloodMap .overview-map-label small");
   if(mapLabel&&label)mapLabel.textContent="กำลังแสดงตำแหน่ง: "+label;
   host.closest(".embedded-water-map")?.scrollIntoView({behavior:"smooth",block:"center"});
-  if(view){view.goTo({center:[longitude,latitude],scale:75000},{duration:450}).catch(function(e){if(e.name!=="AbortError")console.error(e)})}
-  else pending=[longitude,latitude];
+  if(ready&&view){view.goTo({center:[longitude,latitude],scale:75000},{duration:450}).catch(function(e){if(e.name!=="AbortError")console.error(e)})}
+  else{
+   pending=[longitude,latitude];
+   var frame=document.getElementById("floodMapFallback");if(frame){
+    var url=new URL(frame.src);url.searchParams.set("center",longitude+","+latitude);
+    url.searchParams.set("scale","75000");frame.src=url.toString()
+   }
+  }
  };
  function loadApi(){return new Promise(function(resolve,reject){
   if(window.require&&window.require.toUrl)return resolve();
@@ -15456,16 +15471,17 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
     view=new MapView({container:host,map:map,center:[100.38863619797984,14.34381658929649],scale:577790.554289,
      popup:{dockEnabled:true,dockOptions:{buttonEnabled:false,position:"bottom-right"}}});
     view.when(function(){
+     ready=true;clearTimeout(fallbackTimer);document.getElementById("floodMapFallback")?.remove();
      view.ui.add(new Home({view:view}),"top-left");
      view.ui.add(new Search({view:view}),"top-right");
      view.ui.add(new Expand({view:view,content:new LayerList({view:view}),group:"flood-map-tools",expandTooltip:"ชั้นข้อมูล"}),"top-right");
      view.ui.add(new Expand({view:view,content:new Legend({view:view}),group:"flood-map-tools",expandTooltip:"คำอธิบายสัญลักษณ์"}),"top-right");
      if(pending){var point=pending;pending=null;view.goTo({center:point,scale:75000})}
-    }).catch(function(e){console.error("โหลดแผนที่น้ำท่วมไม่สำเร็จ",e)});
+    }).catch(function(e){console.error("โหลดแผนที่น้ำท่วมไม่สำเร็จ",e);fallback()});
    });
  }).catch(function(e){
   console.error("โหลดเครื่องมือ ArcGIS ไม่สำเร็จ",e);
-  window.zoomRiskMap=originalZoom;
+  fallback();
   host.innerHTML='<a href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap='+webmapId+'" target="_blank" rel="noopener">เปิดแผนที่สถานการณ์น้ำท่วม</a>';
  });
 }
