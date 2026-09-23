@@ -15403,7 +15403,7 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
  function fallback(){
   if(!card||card.querySelector("#floodDirectFallback"))return;
   var f=document.createElement("iframe");f.id="floodDirectFallback";f.title="แผนที่สถานการณ์น้ำท่วม";
-  f.src=URL;card.appendChild(f);
+  f.src="./flood-map-legacy.html";card.appendChild(f);
   var link=document.createElement("a");link.className="flood-map-open-link";link.href=URL;link.target="_blank";link.rel="noopener";link.textContent="เปิดแผนที่น้ำท่วมเต็มหน้า";card.appendChild(link);
  }
  function init(){
@@ -15433,7 +15433,7 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
   ensure();card.scrollIntoView({behavior:"smooth",block:"center"});
   var caption=card.querySelector(".overview-map-label small");if(caption&&label)caption.textContent="กำลังแสดงตำแหน่ง: "+label;
   if(mapView&&mapView.ready)mapView.goTo({center:[b,a],scale:75000},{duration:700}).catch(function(){});
-  else pending=[b,a];
+  else{pending=[b,a];var frame=card.querySelector("#floodDirectFallback");if(frame&&frame.contentWindow)frame.contentWindow.postMessage({type:"flood-map-zoom",lat:a,lon:b},location.origin)}
  };
  function start(){
   ensure();
