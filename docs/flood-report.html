@@ -15429,6 +15429,7 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
 <script id="flood-native-webmap-20260923-script">
 (function(){
  "use strict";
+ function start(){
  var webmapId="3d24287ac6ea49cd823625ddad496e01";
  var host=document.querySelector("#warning #topFloodMap #overviewArcgisMap");
  if(!host)return;
@@ -15467,6 +15468,8 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
   window.zoomRiskMap=originalZoom;
   host.innerHTML='<a href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap='+webmapId+'" target="_blank" rel="noopener">เปิดแผนที่สถานการณ์น้ำท่วม</a>';
  });
+}
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();
 </script>
 </body>
