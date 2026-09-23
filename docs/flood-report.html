@@ -8620,7 +8620,7 @@ a.rid-basin-fullscreen {
 var id="3d24287ac6ea49cd823625ddad496e01";
 var base="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap="+id+"&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=true&basemaps=true";
 function frame(){return document.getElementById("overviewArcgisMap")}
-function extent(box){var m=frame();if(!m)return;if(m.view&&typeof m.view.goTo==="function")m.view.goTo({extent:{xmin:box[0],ymin:box[1],xmax:box[2],ymax:box[3],spatialReference:{wkid:4326}}},{duration:900}).catch(function(){});else m.src=base+"&extent="+box.join(",");setTimeout(function(){m.scrollIntoView({behavior:"smooth",block:"center"})},100)}
+function extent(box){var m=frame();if(!m)return;var lon=(box[0]+box[2])/2,lat=(box[1]+box[3])/2;if(m.contentWindow)m.contentWindow.postMessage({type:"flood-map-zoom",lon:lon,lat:lat},location.origin);setTimeout(function(){m.scrollIntoView({behavior:"smooth",block:"center"})},100)}
 function thailand(){extent([97.30,5.50,105.70,20.60])}
 async function province(name){
 var q=(name||"").replace(/^\s*\d+\.\s*/,"").replace(/^จ\./,"จังหวัด").trim();
@@ -15382,58 +15382,29 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
 <style id="flood-map-authoritative-20260923">
 #warning #topFloodMap{position:relative!important;min-height:640px!important}
 #warning #topFloodMap>.operations-map{display:block!important;position:relative!important;width:100%!important;height:100%!important;min-height:640px!important;overflow:hidden!important}
-#warning #topFloodMap #overviewArcgisMap{display:block!important;width:100%!important;height:100%!important;min-height:640px!important}
-#warning #topFloodMap #floodDirectFallback{position:absolute;inset:0;display:block;width:100%;height:100%;min-height:640px;border:0}\n#warning #topFloodMap .flood-map-open-link{position:absolute;z-index:8;bottom:12px;right:12px;padding:8px 12px;background:#fff;color:#007fdb;box-shadow:0 2px 10px #0003;text-decoration:none}
+#warning #topFloodMap #overviewArcgisMap{display:block!important;width:100%!important;height:100%!important;min-height:640px!important;border:0!important}
+#warning #topFloodMap .flood-map-open-link{position:absolute;z-index:8;bottom:12px;right:12px;padding:8px 12px;background:#fff;color:#007fdb;box-shadow:0 2px 10px #0003;text-decoration:none}
 </style>
 <script id="flood-map-authoritative-20260923-script">
 (function(){
  "use strict";
- var WEBMAP="3d24287ac6ea49cd823625ddad496e01";
- var URL="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap="+WEBMAP;
- var mapView=null,card=null,initialized=false,pending=null;
+ var URL="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=3d24287ac6ea49cd823625ddad496e01";
+ var card=null;
  function ensure(){
   var target=document.querySelector("#warning #topFloodMap");if(!target)return;
   if(!card){
    card=document.createElement("article");card.className="card operations-map embedded-water-map";
-   card.innerHTML='<div class="overview-map-label"><b>แผนที่สถานการณ์น้ำท่วม</b><small>เลื่อนแผนที่หรือซูมเข้า–ออกเพื่อดูรายละเอียด</small></div><div id="overviewArcgisMap"></div>';
+   card.innerHTML='<div class="overview-map-label"><b>แผนที่สถานการณ์น้ำท่วม</b><small>เลื่อนแผนที่หรือซูมเข้า–ออกเพื่อดูรายละเอียด</small></div>'+
+    '<iframe id="overviewArcgisMap" title="แผนที่สถานการณ์น้ำท่วม" loading="eager" src="./flood-map-legacy.html"></iframe>'+
+    '<a class="flood-map-open-link" href="'+URL+'" target="_blank" rel="noopener">เปิดแผนที่เต็มหน้า</a>';
   }
   if(card.parentElement!==target)target.appendChild(card);
-  if(!initialized){initialized=true;init()}
- }
- function fallback(){
-  if(!card||card.querySelector("#floodDirectFallback"))return;
-  var f=document.createElement("iframe");f.id="floodDirectFallback";f.title="แผนที่สถานการณ์น้ำท่วม";
-  f.src="./flood-map-legacy.html";card.appendChild(f);
-  var link=document.createElement("a");link.className="flood-map-open-link";link.href=URL;link.target="_blank";link.rel="noopener";link.textContent="เปิดแผนที่น้ำท่วมเต็มหน้า";card.appendChild(link);
- }
- function init(){
-  function run(){
-   window.require(["esri/WebMap","esri/views/MapView","esri/widgets/Home","esri/widgets/Search","esri/widgets/LayerList","esri/widgets/Legend","esri/widgets/Expand"],
-    function(WebMap,MapView,Home,Search,LayerList,Legend,Expand){
-     try{
-      var webmap=new WebMap({portalItem:{id:WEBMAP}});
-      mapView=new MapView({container:"overviewArcgisMap",map:webmap,center:[101,13],zoom:5,constraints:{minZoom:4}});
-      mapView.when(function(){
-       document.getElementById("overviewArcgisMap").view=mapView;
-       document.getElementById("overviewArcgisMap").src=URL;
-       mapView.ui.add(new Home({view:mapView}),"top-left");
-       mapView.ui.add(new Search({view:mapView}),"top-right");
-       mapView.ui.add(new Expand({view:mapView,content:new LayerList({view:mapView}),group:"tools",expandTooltip:"ชั้นข้อมูล"}),"top-right");
-       mapView.ui.add(new Expand({view:mapView,content:new Legend({view:mapView}),group:"tools",expandTooltip:"คำอธิบายสัญลักษณ์"}),"top-right");
-       if(pending){mapView.goTo({center:pending,scale:75000});pending=null}
-      }).catch(function(){fallback()});
-     }catch(e){console.error("Flood map",e);fallback()}
-    },function(e){console.error("Flood modules",e);fallback()});
-  }
-  if(window.require&&window.require.toUrl)run();
-  else{var tag=document.createElement("script");tag.src="https://js.arcgis.com/4.30/";tag.onload=run;tag.onerror=fallback;document.head.appendChild(tag)}
  }
  window.zoomRiskMap=function(lat,lon,label){
   var a=Number(lat),b=Number(lon);if(!Number.isFinite(a)||!Number.isFinite(b))return;
-  ensure();card.scrollIntoView({behavior:"smooth",block:"center"});
+  ensure();if(!card)return;card.scrollIntoView({behavior:"smooth",block:"center"});
   var caption=card.querySelector(".overview-map-label small");if(caption&&label)caption.textContent="กำลังแสดงตำแหน่ง: "+label;
-  if(mapView&&mapView.ready)mapView.goTo({center:[b,a],scale:75000},{duration:700}).catch(function(){});
-  else{pending=[b,a];var frame=card.querySelector("#floodDirectFallback");if(frame&&frame.contentWindow)frame.contentWindow.postMessage({type:"flood-map-zoom",lat:a,lon:b},location.origin)}
+  var frame=card.querySelector("iframe");if(frame&&frame.contentWindow)frame.contentWindow.postMessage({type:"flood-map-zoom",lat:a,lon:b},location.origin);
  };
  function start(){
   ensure();
