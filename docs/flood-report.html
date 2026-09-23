@@ -1452,7 +1452,7 @@ document.documentElement.classList.add("flood-initializing");
         </div>
         <article class="card operations-map embedded-water-map">
           <div class="overview-map-label"><b>แผนที่สถานการณ์น้ำท่วม</b><small>เลื่อนแผนที่หรือซูมเข้า–ออกเพื่อดูรายละเอียด</small></div>
-          <iframe id="overviewArcgisMap" class="thaiwater-risk-map" title="แผนที่สถานการณ์น้ำ" loading="eager" style="display:block;width:100%;height:640px;border:0" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&amp;webmap=3d24287ac6ea49cd823625ddad496e01&amp;theme=light&amp;bookmarks=true&amp;legend=true&amp;information=true&amp;share=true&amp;scroll=false&amp;basemaps=true&amp;center=101.60218426570209,13.611210763141127&amp;scale=4622324.434309"></iframe>
+          <iframe id="overviewArcgisMap" class="thaiwater-risk-map" title="แผนที่สถานการณ์น้ำ" loading="eager" style="display:block;width:100%;height:640px;border:0" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&amp;webmap=3d24287ac6ea49cd823625ddad496e01&amp;theme=light&amp;bookmarks=true&amp;legend=true&amp;information=true&amp;share=true&amp;scroll=false&amp;basemaps=true&amp;center=101.92510244344074,14.048909798054707&amp;scale=288895.277144"></iframe>
         </article>
       </section>
 
@@ -15392,17 +15392,15 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
   var target=document.querySelector("#warning #topFloodMap");if(!target)return;
   if(!card){
    card=document.createElement("article");card.className="card operations-map embedded-water-map";
-   card.innerHTML='<div class="overview-map-label"><b>แผนที่สถานการณ์น้ำท่วม</b><small>เลื่อนแผนที่หรือซูมเข้า–ออกเพื่อดูรายละเอียด</small></div>'+
-    '<iframe id="overviewArcgisMap" title="แผนที่แสดงข้อมูลน้ำท่วม" loading="eager" src="./flood-map-legacy.html"></iframe>';
+   card.innerHTML='<iframe id="overviewArcgisMap" class="thaiwater-risk-map" title="แผนที่แสดงข้อมูลน้ำท่วม" loading="eager" allow="local-network-access; geolocation; fullscreen" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&amp;webmap=3d24287ac6ea49cd823625ddad496e01&amp;theme=light&amp;bookmarks=true&amp;legend=true&amp;information=true&amp;share=true&amp;scroll=false&amp;basemaps=true&amp;center=101.92510244344074,14.048909798054707&amp;scale=288895.277144"></iframe>';
   }
   if(card.parentElement!==target)target.appendChild(card);
  }
  window.zoomRiskMap=function(lat,lon,label){
   var a=Number(lat),b=Number(lon);if(!Number.isFinite(a)||!Number.isFinite(b))return;
   ensure();if(!card)return;card.scrollIntoView({behavior:"smooth",block:"center"});
-  var caption=card.querySelector(".overview-map-label small");if(caption&&label)caption.textContent="กำลังแสดงตำแหน่ง: "+label;
   var frame=card.querySelector("#overviewArcgisMap");
-  if(frame&&frame.contentWindow)frame.contentWindow.postMessage({type:"flood-map-zoom",lat:a,lon:b},location.origin);
+  if(frame){var url=new URL(frame.src);url.searchParams.set("center",b+","+a);url.searchParams.set("scale","75000");frame.src=url.toString()}
  };
  function start(){
   ensure();
