@@ -15433,8 +15433,13 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
  "use strict";
  function start(){
  var webmapId="3d24287ac6ea49cd823625ddad496e01";
- var host=document.querySelector("#warning #topFloodMap #overviewArcgisMap");
- if(!host)return;
+ var frame=document.querySelector("#warning #topFloodMap iframe#overviewArcgisMap");
+ if(!frame)return;
+ var host=document.createElement("div");
+ host.id="overviewArcgisMap";host.className="flood-sdk-map";
+ host.style.cssText="display:block;width:100%;height:640px;min-height:620px";
+ host.src=frame.src;host.dataset.mapUrl=frame.src;
+ frame.replaceWith(host);
  var view,pending,ready=false;
  var fallbackUrl="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap="+webmapId+"&theme=light&legend=true&center=100.38863619797984,14.34381658929649&scale=577790.554289";
  function fallback(){
@@ -15442,7 +15447,7 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
   var iframe=document.createElement("iframe");iframe.id="floodMapFallback";iframe.title="แผนที่สถานการณ์น้ำท่วม";
   iframe.loading="eager";iframe.src=fallbackUrl;host.parentNode.appendChild(iframe);
  }
- var fallbackTimer=setTimeout(fallback,3000);
+ var fallbackTimer=setTimeout(fallback,10000);
  var originalZoom=window.zoomRiskMap;
  window.zoomRiskMap=function(lat,lon,label){
   var latitude=Number(lat),longitude=Number(lon);
@@ -15471,7 +15476,7 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
     view=new MapView({container:host,map:map,center:[100.38863619797984,14.34381658929649],scale:577790.554289,
      popup:{dockEnabled:true,dockOptions:{buttonEnabled:false,position:"bottom-right"}}});
     view.when(function(){
-     ready=true;if(host.querySelector(".esri-view")){clearTimeout(fallbackTimer);document.getElementById("floodMapFallback")?.remove()}else fallback();
+     ready=true;host.view=view;if(host.querySelector(".esri-view")){clearTimeout(fallbackTimer);document.getElementById("floodMapFallback")?.remove()}else fallback();
      view.ui.add(new Home({view:view}),"top-left");
      view.ui.add(new Search({view:view}),"top-right");
      view.ui.add(new Expand({view:view,content:new LayerList({view:view}),group:"flood-map-tools",expandTooltip:"ชั้นข้อมูล"}),"top-right");
