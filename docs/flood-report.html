@@ -15438,11 +15438,11 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
  var view,pending,ready=false;
  var fallbackUrl="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap="+webmapId+"&theme=light&legend=true&center=100.38863619797984,14.34381658929649&scale=577790.554289";
  function fallback(){
-  if(ready||document.getElementById("floodMapFallback"))return;
+  if((ready&&host.querySelector(".esri-view"))||document.getElementById("floodMapFallback"))return;
   var iframe=document.createElement("iframe");iframe.id="floodMapFallback";iframe.title="แผนที่สถานการณ์น้ำท่วม";
   iframe.loading="eager";iframe.src=fallbackUrl;host.parentNode.appendChild(iframe);
  }
- var fallbackTimer=setTimeout(fallback,15000);
+ var fallbackTimer=setTimeout(fallback,3000);
  var originalZoom=window.zoomRiskMap;
  window.zoomRiskMap=function(lat,lon,label){
   var latitude=Number(lat),longitude=Number(lon);
@@ -15471,7 +15471,7 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
     view=new MapView({container:host,map:map,center:[100.38863619797984,14.34381658929649],scale:577790.554289,
      popup:{dockEnabled:true,dockOptions:{buttonEnabled:false,position:"bottom-right"}}});
     view.when(function(){
-     ready=true;clearTimeout(fallbackTimer);document.getElementById("floodMapFallback")?.remove();
+     ready=true;if(host.querySelector(".esri-view")){clearTimeout(fallbackTimer);document.getElementById("floodMapFallback")?.remove()}else fallback();
      view.ui.add(new Home({view:view}),"top-left");
      view.ui.add(new Search({view:view}),"top-right");
      view.ui.add(new Expand({view:view,content:new LayerList({view:view}),group:"flood-map-tools",expandTooltip:"ชั้นข้อมูล"}),"top-right");
