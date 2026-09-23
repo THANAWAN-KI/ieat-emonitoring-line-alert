@@ -1401,6 +1401,7 @@ document.documentElement.classList.add("flood-initializing");
       [100,500,1200,2500,5000,9000].forEach(function(ms){ setTimeout(removeLegacyFloodNav,ms); });
     })();
   </script>
+<link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css">
 </head>
 <body>
   <main class="container">
@@ -10377,39 +10378,7 @@ html body main.container #warning .bottom-three-center-card .bottom-card-detail{
 </script>
 
 <style id="nationwide-indicators-title-black-final">html body main.container #warning .nationwide-indicators .card-head h2{color:#000000!important;-webkit-text-fill-color:#000000!important}</style><style id="green-active-tab-black-text-final">html body main.container>#globalFloodHeader .global-flood-tabs button.active,html body main.container>#globalFloodHeader .global-flood-tabs button[aria-current="page"]{color:#000000!important;-webkit-text-fill-color:#000000!important}</style>
-<style id="risk-48-action-green-final">
-html body main.container #thaiwater-warning .tw-risk-card:nth-of-type(2) a,
-html body main.container #thaiwater-warning .tw-risk-card:nth-of-type(2) button,
-html body main.container #warning .tw-risk-card:nth-of-type(2) a,
-html body main.container #warning .tw-risk-card:nth-of-type(2) button,
-html body main.container #warning [data-flood-risk-hours="48"] a,
-html body main.container #warning [data-flood-risk-hours="48"] button{
- background:#537b35!important;background-color:#537b35!important;background-image:none!important;border-color:#537b35!important;
-}
-</style>
-<script id="risk-48-action-green-final-script">
-(function(){
- function apply(){
-  var root=document.querySelector("#thaiwater-warning")||document.getElementById("warning");if(!root)return;
-  root.querySelectorAll("h1,h2,h3,h4").forEach(function(head){
-   var text=String(head.textContent||"").replace(/\s+/g," ").trim();
-   if(text.indexOf("พื้นที่เสี่ยงน้ำท่วมจากฝนตกสะสมใน 48 ชม. ข้างหน้า")<0)return;
-   var box=head.closest(".tw-risk-card,section,article,.card");if(!box)return;
-   box.setAttribute("data-flood-risk-hours","48");
-   box.querySelectorAll("a,button").forEach(function(el){
-    el.style.setProperty("background","#537b35","important");
-    el.style.setProperty("background-color","#537b35","important");
-    el.style.setProperty("background-image","none","important");
-    el.style.setProperty("border-color","#537b35","important");
-   });
-  });
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply,{once:true});else apply();
- var root=document.getElementById("thaiwater-warning")||document.getElementById("warning");
- if(root)new MutationObserver(function(){requestAnimationFrame(apply)}).observe(root,{childList:true,subtree:true});
- [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(apply,ms)});
-})();
-</script>
+
 
 <style id="analysis-heading-and-estate-status-final">
 html body main.container #warning .watch-analysis-title,
@@ -10461,28 +10430,7 @@ html body main.container #warning .estate-watch-table td[data-estate-status-fina
 })();
 </script>
 
-<style id="risk-48-purple-badges-green-final">
-html body main.container #thaiwater-warning .tw-risk-card:nth-child(2) .tw-rain,
-html body main.container #thaiwater-warning .tw-risk-card:nth-of-type(2) .tw-rain{
- background:#537b35!important;background-color:#537b35!important;background-image:none!important;border-color:#537b35!important;
-}
-</style>
-<script id="risk-48-purple-badges-green-final-script">
-(function(){
- function apply(){
-  document.querySelectorAll("#thaiwater-warning .tw-risk-card:nth-child(2) .tw-rain,#thaiwater-warning .tw-risk-card:nth-of-type(2) .tw-rain").forEach(function(el){
-   el.style.setProperty("background","#537b35","important");
-   el.style.setProperty("background-color","#537b35","important");
-   el.style.setProperty("background-image","none","important");
-   el.style.setProperty("border-color","#537b35","important");
-  });
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply,{once:true});else apply();
- var root=document.getElementById("thaiwater-warning");
- if(root)new MutationObserver(function(){requestAnimationFrame(apply)}).observe(root,{childList:true,subtree:true});
- [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(apply,ms)});
-})();
-</script>
+
 <style id="remove-station-status-legends-final">html body main.container #warning .station-watch-table .status-color-legend{display:none!important}</style>
 <style id="export-reports-two-per-row-final">
 html body main.container #infographic .report-pages{
@@ -13030,8 +12978,7 @@ html body main.container #warning #topFloodMap #overviewArcgisMap{
 <script id="flood-report-restore-top-map-20260917-v25-script">
 (function(){
  "use strict";
- var MAP_URL="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=3d24287ac6ea49cd823625ddad496e01&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=true&basemaps=true&center=100.38863619797984,14.34381658929649&scale=577790.554289";
- var working=false;
+  var working=false;
  function restore(){
   if(working)return;working=true;
   var warning=document.getElementById("warning");
@@ -13050,15 +12997,15 @@ html body main.container #warning #topFloodMap #overviewArcgisMap{
   if(!map){
    map=document.createElement("article");map.className="card operations-map embedded-water-map";
    map.innerHTML='<div class="overview-map-label"><b>แผนที่สถานการณ์น้ำท่วม</b><small>เลื่อนแผนที่หรือซูมเข้า–ออกเพื่อดูรายละเอียด</small></div>'+
-    '<iframe id="overviewArcgisMap" class="thaiwater-risk-map" title="แผนที่สถานการณ์น้ำ" loading="lazy" allow="fullscreen; geolocation" referrerpolicy="strict-origin-when-cross-origin"></iframe>';
+    '<div id="overviewArcgisMap" class="thaiwater-risk-map" role="application" aria-label="แผนที่สถานการณ์น้ำท่วม"></div>';
   }
   if(map.parentNode!==host)host.appendChild(map);
   var frame=map.querySelector("#overviewArcgisMap");
-  if(!frame){
-   frame=document.createElement("iframe");frame.id="overviewArcgisMap";frame.className="thaiwater-risk-map";
-   frame.title="แผนที่สถานการณ์น้ำ";frame.loading="lazy";map.appendChild(frame);
+  if(!frame||frame.tagName==="IFRAME"){
+   var surface=document.createElement("div");surface.id="overviewArcgisMap";surface.className="thaiwater-risk-map";
+   surface.setAttribute("role","application");surface.setAttribute("aria-label","แผนที่สถานการณ์น้ำท่วม");
+   if(frame)frame.replaceWith(surface);else map.appendChild(surface);
   }
-  if(!frame.src||frame.src==="about:blank")frame.src=MAP_URL;
   working=false;
  }
  function start(){
@@ -15473,5 +15420,54 @@ html body main.container #warning .flood-map-zoom-row:hover{filter:brightness(.9
 html body main.container #warning .flood-map-zoom-row:focus-visible{
  outline:2px solid #007fdb!important;outline-offset:2px!important
 }
-</style></body>
+</style>
+<style id="flood-native-webmap-20260923">
+#warning #topFloodMap #overviewArcgisMap{position:relative!important;min-height:620px!important;background:#eef3f7!important}
+#warning #topFloodMap #overviewArcgisMap .esri-view-surface{touch-action:pan-x pan-y}
+#warning #overviewForecastRisk .overview-risk-card[data-hours="48"] button.overview-risk-item{background:#f5f7ff!important;background-color:#f5f7ff!important;border-color:transparent!important}
+</style>
+<script id="flood-native-webmap-20260923-script">
+(function(){
+ "use strict";
+ var webmapId="3d24287ac6ea49cd823625ddad496e01";
+ var host=document.querySelector("#warning #topFloodMap #overviewArcgisMap");
+ if(!host)return;
+ var view,pending;
+ var originalZoom=window.zoomRiskMap;
+ window.zoomRiskMap=function(lat,lon,label){
+  var latitude=Number(lat),longitude=Number(lon);
+  if(!Number.isFinite(latitude)||!Number.isFinite(longitude)||Math.abs(latitude)>90||Math.abs(longitude)>180)return;
+  var mapLabel=document.querySelector("#topFloodMap .overview-map-label small");
+  if(mapLabel&&label)mapLabel.textContent="กำลังแสดงตำแหน่ง: "+label;
+  host.closest(".embedded-water-map")?.scrollIntoView({behavior:"smooth",block:"center"});
+  if(view){view.goTo({center:[longitude,latitude],scale:75000},{duration:450}).catch(function(e){if(e.name!=="AbortError")console.error(e)})}
+  else pending=[longitude,latitude];
+ };
+ function loadApi(){return new Promise(function(resolve,reject){
+  if(window.require&&window.require.toUrl)return resolve();
+  var script=document.createElement("script");script.src="https://js.arcgis.com/4.30/";
+  script.onload=resolve;script.onerror=reject;document.head.appendChild(script);
+ })}
+ loadApi().then(function(){
+  window.require(["esri/WebMap","esri/views/MapView","esri/widgets/Home","esri/widgets/Search","esri/widgets/LayerList","esri/widgets/Legend","esri/widgets/Expand"],
+   function(WebMap,MapView,Home,Search,LayerList,Legend,Expand){
+    var map=new WebMap({portalItem:{id:webmapId}});
+    view=new MapView({container:host,map:map,center:[100.38863619797984,14.34381658929649],scale:577790.554289,
+     popup:{dockEnabled:true,dockOptions:{buttonEnabled:false,position:"bottom-right"}}});
+    view.when(function(){
+     view.ui.add(new Home({view:view}),"top-left");
+     view.ui.add(new Search({view:view}),"top-right");
+     view.ui.add(new Expand({view:view,content:new LayerList({view:view}),group:"flood-map-tools",expandTooltip:"ชั้นข้อมูล"}),"top-right");
+     view.ui.add(new Expand({view:view,content:new Legend({view:view}),group:"flood-map-tools",expandTooltip:"คำอธิบายสัญลักษณ์"}),"top-right");
+     if(pending){var point=pending;pending=null;view.goTo({center:point,scale:75000})}
+    }).catch(function(e){console.error("โหลดแผนที่น้ำท่วมไม่สำเร็จ",e)});
+   });
+ }).catch(function(e){
+  console.error("โหลดเครื่องมือ ArcGIS ไม่สำเร็จ",e);
+  window.zoomRiskMap=originalZoom;
+  host.innerHTML='<a href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap='+webmapId+'" target="_blank" rel="noopener">เปิดแผนที่สถานการณ์น้ำท่วม</a>';
+ });
+})();
+</script>
+</body>
 </html>
