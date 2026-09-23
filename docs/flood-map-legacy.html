@@ -17,6 +17,50 @@
    var layers=utils.getLayerList(result);
    var list=new LayerList({map:map,layers:layers},"layersPanel");list.startup();
    var legend=new Legend({map:map,layerInfos:utils.getLegendLayers(result)},"legendPanel");legend.startup();
+   require(["esri/layers/GraphicsLayer","esri/graphic","esri/geometry/Point","esri/symbols/SimpleMarkerSymbol","esri/symbols/SimpleLineSymbol","esri/Color","esri/InfoTemplate"],function(GraphicsLayer,Graphic,Point,Marker,Line,Color,InfoTemplate){
+    var sources=[
+     {name:"สถานีวัดระดับน้ำแบบเรียลไทม์รายชั่วโมง (กรมชลประทาน)",url:"https://nawakonnakhonchai-wq.github.io/rid-geojson-bot/rid_realtime.geojson",field:"ระดับน้ำเทียบตลิ่ง (%)",steps:[30,70,100,Infinity],colors:[[0,145,205],[89,140,20],[247,144,9],[240,10,54]],labels:["0–30%","มากกว่า 30–70%","มากกว่า 70–100%","มากกว่า 100%"],valueLabel:"ระดับน้ำเทียบตลิ่ง"},
+     {name:"ข้อมูลปริมาณน้ำฝนสะสม 24 ชม.",url:"https://nawakonnakhonchai-wq.github.io/Rain_24H/rainfall_24h.geojson",field:"rain_24h",steps:[10,20,35,50,70,90,Infinity],colors:[[153,211,240],[153,240,231],[33,173,2],[235,231,0],[240,155,77],[207,107,8],[179,7,7]],labels:["0–10 มม.","มากกว่า 10–20 มม.","มากกว่า 20–35 มม.","มากกว่า 35–50 มม.","มากกว่า 50–70 มม.","มากกว่า 70–90 มม.","มากกว่า 90 มม."],valueLabel:"ฝนสะสม 24 ชั่วโมง"}
+    ];
+    function escapeHtml(value){return String(value==null?"–":value).replace(/[&<>"']/g,function(ch){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]})}
+    var layerPanel=document.getElementById("layersPanel"),legendPanel=document.getElementById("legendPanel");
+    sources.forEach(function(source){
+     var layer=new GraphicsLayer({id:source.field==="rain_24h"?"floodRainStations":"floodRidStations",opacity:0.95});
+     map.addLayer(layer);
+     var row=document.createElement("label");row.style.cssText="display:block;padding:9px 2px;border-bottom:1px solid #eee;cursor:pointer";
+     var checkbox=document.createElement("input");checkbox.type="checkbox";checkbox.checked=true;checkbox.style.marginRight="8px";
+     checkbox.onchange=function(){layer.setVisibility(checkbox.checked)};
+     var title=document.createElement("span");title.textContent=source.name+" (กำลังโหลด)";
+     row.appendChild(checkbox);row.appendChild(title);layerPanel.insertBefore(row,layerPanel.firstChild);
+     var section=document.createElement("section");section.style.cssText="border-bottom:1px solid #ddd;padding:8px 0";
+     var heading=document.createElement("strong");heading.textContent=source.name;section.appendChild(heading);
+     source.labels.forEach(function(label,index){
+      var key=document.createElement("div");key.style.cssText="display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12px";
+      var dot=document.createElement("i");dot.style.cssText="display:inline-block;width:10px;height:10px;border-radius:50%;background:rgb("+source.colors[index].join(",")+")";
+      var text=document.createElement("span");text.textContent=label;key.appendChild(dot);key.appendChild(text);section.appendChild(key);
+     });
+     legendPanel.insertBefore(section,legendPanel.firstChild);
+     fetch(source.url,{cache:"no-store"}).then(function(response){if(!response.ok)throw Error("HTTP "+response.status);return response.json()}).then(function(data){
+      var count=0;
+      (data.features||[]).forEach(function(feature){
+       if(!feature.geometry||feature.geometry.type!=="Point")return;
+       var coords=feature.geometry.coordinates,lon=Number(coords&&coords[0]),lat=Number(coords&&coords[1]);
+       if(!isFinite(lon)||!isFinite(lat))return;
+       var properties=feature.properties||{},value=Number(properties[source.field]);
+       if(!isFinite(value))value=0;
+       var index=source.steps.findIndex(function(max){return value<=max});if(index<0)index=source.steps.length-1;
+       var color=source.colors[index],outline=new Line(Line.STYLE_SOLID,new Color([30,65,80,0.65]),0.75);
+       var symbol=new Marker(Marker.STYLE_CIRCLE,6,outline,new Color(color));
+       var point=new Point(lon,lat,{wkid:4326});
+       var graphic=new Graphic(point,symbol,properties);
+       var station=properties["ชื่อสถานี"]||properties.station_name||properties.name||source.name;
+       graphic.setInfoTemplate(new InfoTemplate(escapeHtml(station),"<b>"+source.valueLabel+":</b> "+escapeHtml(value)+" "+(source.field==="rain_24h"?"มม.":"%")+"<br><b>จังหวัด:</b> "+escapeHtml(properties["จังหวัด"]||properties.province)));
+       layer.add(graphic);count++;
+      });
+      title.textContent=source.name+" ("+count.toLocaleString("th-TH")+" จุด)";
+     }).catch(function(error){title.textContent=source.name+" (ข้อมูลยังไม่พร้อม)";console.warn("GeoJSON "+source.name,error)});
+    });
+   });
    window.addEventListener("message",function(event){if(event.origin!==location.origin)return;var p=event.data;if(p&&p.type==="flood-map-zoom"&&isFinite(p.lon)&&isFinite(p.lat))require(["esri/geometry/Point"],function(Point){map.centerAndZoom(new Point(Number(p.lon),Number(p.lat)),10)})});
   },function(error){console.error("WebMap legacy",error);showError()});
  },showError);
