@@ -12,11 +12,11 @@
  panel("layers");panel("legend");
  require(["esri/arcgis/utils","esri/dijit/LayerList","esri/dijit/Legend","dojo/domReady!"],function(utils,LayerList,Legend){
   utils.createMap(id,"map",{mapOptions:{slider:true,center:[101,13],zoom:5}}).then(function(result){
-   map=result.map;document.body.dataset.operationalLayers=JSON.stringify((result.itemInfo.itemData.operationalLayers||[]).map(function(x){return {id:x.id,title:x.title,url:x.url,type:x.layerType,visibility:x.visibility,renderer:x.layerDefinition&&x.layerDefinition.drawingInfo&&x.layerDefinition.drawingInfo.renderer}}));
+   map=result.map;
    var layers=utils.getLayerList(result);
    var list=new LayerList({map:map,layers:layers},"layersPanel");list.startup();
    var legend=new Legend({map:map,layerInfos:utils.getLegendLayers(result)},"legendPanel");legend.startup();
-   require(["esri/layers/GraphicsLayer","esri/graphic","esri/geometry/Point","esri/symbols/SimpleMarkerSymbol","esri/symbols/SimpleLineSymbol","esri/Color","esri/InfoTemplate","esri/geometry/webMercatorUtils","esri/geometry/Extent"],function(GraphicsLayer,Graphic,Point,Marker,Line,Color,InfoTemplate,webMercatorUtils,Extent){
+   require(["esri/layers/GraphicsLayer","esri/graphic","esri/geometry/Point","esri/symbols/SimpleMarkerSymbol","esri/symbols/SimpleLineSymbol","esri/Color","esri/InfoTemplate","esri/geometry/webMercatorUtils","esri/geometry/Extent","esri/geometry/Polygon","esri/geometry/Polyline","esri/symbols/SimpleFillSymbol"],function(GraphicsLayer,Graphic,Point,Marker,Line,Color,InfoTemplate,webMercatorUtils,Extent,Polygon,Polyline,Fill){
     map.setExtent(webMercatorUtils.geographicToWebMercator(new Extent(97,5,106,21,{wkid:4326})),true);
     var sources=[
      {name:"สถานีวัดระดับน้ำแบบเรียลไทม์รายชั่วโมง (กรมชลประทาน)",url:"https://nawakonnakhonchai-wq.github.io/rid-geojson-bot/rid_realtime.geojson",field:"ระดับน้ำเทียบตลิ่ง (%)",steps:[30,70,100,Infinity],colors:[[0,145,205],[89,140,20],[247,144,9],[240,10,54]],labels:["0–30%","มากกว่า 30–70%","มากกว่า 70–100%","มากกว่า 100%"],valueLabel:"ระดับน้ำเทียบตลิ่ง"},
@@ -59,6 +59,48 @@
        layer.add(graphic);count++;
       });
       title.textContent=source.name+" ("+count.toLocaleString("th-TH")+" จุด)";
+     }).catch(function(error){title.textContent=source.name+" (ข้อมูลยังไม่พร้อม)";console.warn("GeoJSON "+source.name,error)});
+    });
+    var extraSources=[
+     {id:"floodRisk24",name:"พื้นที่เสี่ยงน้ำท่วมฉับพลันใน 24 ชั่วโมงข้างหน้า",url:"https://thanawan-ki.github.io/ieat-emonitoring-line-alert/data/flash_flood_24h.geojson",color:[240,50,30]},
+     {id:"floodRisk48",name:"พื้นที่เสี่ยงน้ำท่วมฉับพลันใน 48 ชั่วโมงข้างหน้า",url:"https://thanawan-ki.github.io/ieat-emonitoring-line-alert/data/flash_flood_48h.geojson",color:[191,39,23]},
+     {id:"floodHiiRisk",name:"พื้นที่เสี่ยงน้ำท่วม (HII)",url:"https://nawakonnakhonchai-wq.github.io/hii-flood-alert/flashflood.geojson",color:[255,125,0]},
+     {id:"floodWebcams",name:"กล้อง Windy",url:"https://raw.githubusercontent.com/THANAWAN-KI/windy-webcam/main/cctv_windy_updated.geojson",color:[47,105,190]}
+    ];
+    extraSources.forEach(function(source){
+     var layer=new GraphicsLayer({id:source.id,opacity:0.85});map.addLayer(layer);
+     var row=document.createElement("label");row.style.cssText="display:block;padding:9px 2px;border-bottom:1px solid #eee;cursor:pointer";
+     var checkbox=document.createElement("input");checkbox.type="checkbox";checkbox.checked=true;checkbox.style.marginRight="8px";
+     checkbox.onchange=function(){layer.setVisibility(checkbox.checked)};
+     var title=document.createElement("span");title.textContent=source.name+" (กำลังโหลด)";
+     row.appendChild(checkbox);row.appendChild(title);layerPanel.insertBefore(row,layerPanel.firstChild);
+     var section=document.createElement("section");section.style.cssText="border-bottom:1px solid #ddd;padding:8px 0";
+     var key=document.createElement("div");key.style.cssText="display:flex;align-items:center;gap:8px;font-size:12px";
+     var swatch=document.createElement("i");swatch.style.cssText="display:inline-block;width:12px;height:12px;flex:none;border:1px solid #777;background:rgb("+source.color.join(",")+")";
+     var label=document.createElement("span");label.textContent=source.name;key.appendChild(swatch);key.appendChild(label);section.appendChild(key);legendPanel.insertBefore(section,legendPanel.firstChild);
+     function addShape(type,coordinates,properties){
+      if(!coordinates)return 0;
+      var geometry,symbol,outline=new Line(Line.STYLE_SOLID,new Color(source.color),1.25);
+      if(type==="Point"){geometry=new Point(coordinates[0],coordinates[1],{wkid:4326});symbol=new Marker(Marker.STYLE_CIRCLE,10,outline,new Color(source.color))}
+      else if(type==="Polygon"){geometry=new Polygon({rings:coordinates,spatialReference:{wkid:4326}});symbol=new Fill(Fill.STYLE_SOLID,outline,new Color([source.color[0],source.color[1],source.color[2],0.25]))}
+      else if(type==="LineString"){geometry=new Polyline({paths:[coordinates],spatialReference:{wkid:4326}});symbol=outline}
+      else return 0;
+      if(map.spatialReference&&map.spatialReference.wkid!==4326)geometry=webMercatorUtils.geographicToWebMercator(geometry);
+      var graphic=new Graphic(geometry,symbol,properties),name=properties.name||properties.Name||properties["จังหวัด"]||properties["ตำบล"]||source.name;
+      graphic.setInfoTemplate(new InfoTemplate(escapeHtml(name),Object.keys(properties).slice(0,12).map(function(k){return "<b>"+escapeHtml(k)+":</b> "+escapeHtml(properties[k])}).join("<br>")));
+      layer.add(graphic);return 1;
+     }
+     fetch(source.url,{cache:"no-store"}).then(function(response){if(!response.ok)throw Error("HTTP "+response.status);return response.json()}).then(function(data){
+      var count=0;(data.features||[]).forEach(function(feature){
+       var g=feature.geometry,p=feature.properties||{};if(!g)return;
+       try{
+        if(g.type==="MultiPolygon")g.coordinates.forEach(function(part){count+=addShape("Polygon",part,p)});
+        else if(g.type==="MultiPoint")g.coordinates.forEach(function(part){count+=addShape("Point",part,p)});
+        else if(g.type==="MultiLineString")g.coordinates.forEach(function(part){count+=addShape("LineString",part,p)});
+        else count+=addShape(g.type,g.coordinates,p);
+       }catch(error){console.warn("Feature "+source.name,error)}
+      });
+      title.textContent=source.name+" ("+count.toLocaleString("th-TH")+" รายการ)";
      }).catch(function(error){title.textContent=source.name+" (ข้อมูลยังไม่พร้อม)";console.warn("GeoJSON "+source.name,error)});
     });
    });
