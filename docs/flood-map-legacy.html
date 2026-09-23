@@ -13,6 +13,7 @@
  require(["esri/arcgis/utils","esri/dijit/LayerList","esri/dijit/Legend","dojo/domReady!"],function(utils,LayerList,Legend){
   utils.createMap(id,"map",{mapOptions:{slider:true,center:[101,13],zoom:5}}).then(function(result){
    map=result.map;
+   window.floodMapItem=result.itemInfo;
    var layers=utils.getLayerList(result);
    var list=new LayerList({map:map,layers:layers},"layersPanel");list.startup();
    var legend=new Legend({map:map,layerInfos:utils.getLegendLayers(result)},"legendPanel");legend.startup();
