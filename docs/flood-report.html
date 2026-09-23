@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Kanit:wght@300;400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script type="module" src="https://js.arcgis.com/5.1/map-components/"></script>
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
   <script src="data/thaiwater_latest.js?v=20260911-1"></script>
   <script src="flood-live-data.js?v=20260922-3" defer></script>
@@ -15383,8 +15383,8 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
 <style id="flood-map-authoritative-20260923">
 #warning #topFloodMap{position:relative!important;min-height:640px!important}
 #warning #topFloodMap>.operations-map{display:block!important;position:relative!important;width:100%!important;height:100%!important;min-height:640px!important;overflow:hidden!important}
-#warning #topFloodMap #floodMainView{display:block!important;width:100%!important;height:100%!important;min-height:640px!important}
-#warning #topFloodMap #floodDirectFallback{position:absolute;inset:0;display:block;width:100%;height:100%;min-height:640px;border:0}
+#warning #topFloodMap #overviewArcgisMap{display:block!important;width:100%!important;height:100%!important;min-height:640px!important}
+#warning #topFloodMap #floodDirectFallback{position:absolute;inset:0;display:block;width:100%;height:100%;min-height:640px;border:0}\n#warning #topFloodMap .flood-map-open-link{position:absolute;z-index:8;bottom:12px;right:12px;padding:8px 12px;background:#fff;color:#007fdb;box-shadow:0 2px 10px #0003;text-decoration:none}
 </style>
 <script id="flood-map-authoritative-20260923-script">
 (function(){
@@ -15396,7 +15396,7 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
   var target=document.querySelector("#warning #topFloodMap");if(!target)return;
   if(!card){
    card=document.createElement("article");card.className="card operations-map embedded-water-map";
-   card.innerHTML='<div class="overview-map-label"><b>แผนที่สถานการณ์น้ำท่วม</b><small>เลื่อนแผนที่หรือซูมเข้า–ออกเพื่อดูรายละเอียด</small></div><div id="floodMainView"></div>';
+   card.innerHTML='<div class="overview-map-label"><b>แผนที่สถานการณ์น้ำท่วม</b><small>เลื่อนแผนที่หรือซูมเข้า–ออกเพื่อดูรายละเอียด</small></div><div id="overviewArcgisMap"></div>';
   }
   if(card.parentElement!==target)target.appendChild(card);
   if(!initialized){initialized=true;init()}
@@ -15405,6 +15405,7 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
   if(!card||card.querySelector("#floodDirectFallback"))return;
   var f=document.createElement("iframe");f.id="floodDirectFallback";f.title="แผนที่สถานการณ์น้ำท่วม";
   f.src=URL;card.appendChild(f);
+  var link=document.createElement("a");link.className="flood-map-open-link";link.href=URL;link.target="_blank";link.rel="noopener";link.textContent="เปิดแผนที่น้ำท่วมเต็มหน้า";card.appendChild(link);
  }
  function init(){
   function run(){
@@ -15412,8 +15413,10 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
     function(WebMap,MapView,Home,Search,LayerList,Legend,Expand){
      try{
       var webmap=new WebMap({portalItem:{id:WEBMAP}});
-      mapView=new MapView({container:"floodMainView",map:webmap,center:[101,13],zoom:5,constraints:{minZoom:4}});
+      mapView=new MapView({container:"overviewArcgisMap",map:webmap,center:[101,13],zoom:5,constraints:{minZoom:4}});
       mapView.when(function(){
+       document.getElementById("overviewArcgisMap").view=mapView;
+       document.getElementById("overviewArcgisMap").src=URL;
        mapView.ui.add(new Home({view:mapView}),"top-left");
        mapView.ui.add(new Search({view:mapView}),"top-right");
        mapView.ui.add(new Expand({view:mapView,content:new LayerList({view:mapView}),group:"tools",expandTooltip:"ชั้นข้อมูล"}),"top-right");
