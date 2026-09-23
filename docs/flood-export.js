@@ -263,7 +263,7 @@
       if(frame){
         const mapImage=document.createElement("img");
         mapImage.alt="แผนที่สถานการณ์น้ำท่วมสำหรับรายงาน";
-        mapImage.src=window.IEAT_REPORT_MAP_IMAGE||new URL("./flood-risk-map-reference.png",document.baseURI).href;
+        mapImage.src=window.IEAT_REPORT_MAP_IMAGE||new URL("./assets/flood-risk-map-reference.png",document.baseURI).href;
         mapImage.style.cssText="display:block;width:100%;height:100%;object-fit:contain;background:#fff";
         try{await mapImage.decode()}catch(error){throw new Error("Report map image unavailable")}
         frame.replaceChildren(mapImage);
