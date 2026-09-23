@@ -10286,7 +10286,7 @@ html body #warning .daily-water-grid[data-nine-cards-merged="true"]>* ::after{co
  }
  var queued=false;
  var observer=new MutationObserver(function(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;rebuild()})});
- function start(){rebuild();observer.observe(document.body,{childList:true,subtree:true})}
+ function start(){rebuild();observer.observe(document.getElementById("topFloodNine")||document.body,{childList:true})}
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
  [250,700,1500,3000,6000,10000].forEach(function(ms){setTimeout(rebuild,ms)});
 })();
@@ -11939,8 +11939,8 @@ html body main.container #warning #topFloodNine .force-new-flood-icon svg{
   [50,150,350,700,1200,2200,4200,6500,9000,10500,12500,15000].forEach(function(ms){setTimeout(apply,ms)});
   var root=document.getElementById("topFloodNine");if(!root)return;
   var observer=new MutationObserver(function(){clearTimeout(observer.t);observer.t=setTimeout(apply,25)});
-  observer.observe(root,{childList:true,subtree:true});
-  setTimeout(function(){observer.disconnect();apply()},18000);
+  observer.observe(root,{childList:true});
+  setTimeout(function(){observer.disconnect();apply()},5000);
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();
@@ -12113,8 +12113,8 @@ html body main.container #warning #topFloodNine>.final-flood-card>.force-new-flo
   build();
   var grid=document.getElementById("topFloodNine");if(!grid){setTimeout(start,100);return}
   var observer=new MutationObserver(function(){clearTimeout(observer.t);observer.t=setTimeout(build,25)});
-  observer.observe(grid,{childList:true,subtree:true});
-  [100,300,700,1500,3000,6000,9000,11000,13000].forEach(function(ms){setTimeout(build,ms)});
+  observer.observe(grid,{childList:true});
+  [100,300,700,1500,3000].forEach(function(ms){setTimeout(build,ms)});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();
@@ -12598,43 +12598,7 @@ html body main.container #warning #ridTrendChart .rid-trend-col span{
  html body main.container #warning #ridTrendChart{gap:10px!important}
 }
 </style>
-<script id="flood-report-reference-style-water-charts-20260917-v17-script">
-(function(){
- "use strict";
- var busy=false;
- function enhance(){
-  if(busy)return;busy=true;
-  var level=document.getElementById("ridLevelChart");
-  if(level){
-   level.querySelectorAll(".rid-level-row").forEach(function(row){
-    var value=row.querySelector(".rid-level-value");
-    var pct=parseFloat((value&&value.textContent||"").replace(/[^0-9.-]/g,""));
-    if(Number.isFinite(pct)){
-     var height=Math.max(8,Math.min(190,Math.round(pct/120*190)));
-     row.style.setProperty("--rid-bar-height",height+"px");
-    }
-   });
-  }
-  var trend=document.getElementById("ridTrendChart");
-  if(trend){
-   ["up","down","steady"].forEach(function(name){
-    var col=trend.querySelector(".rid-trend-col."+name);
-    if(col)trend.appendChild(col);
-   });
-  }
-  busy=false;
- }
- function start(){
-  enhance();
-  var root=document.querySelector("#warning .rid-chart-grid");
-  if(!root){setTimeout(start,100);return}
-  var observer=new MutationObserver(function(){clearTimeout(observer.t);observer.t=setTimeout(enhance,20)});
-  observer.observe(root,{childList:true,subtree:true,characterData:true});
-  [100,400,900,1800,3500,6000].forEach(function(ms){setTimeout(enhance,ms)});
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
-})();
-</script>
+
 
 
 
@@ -13620,6 +13584,7 @@ html body main.container :is(#warning,#infographic)
  function paintCell(cell){
   if(!cell)return;
   var cls=stateClass(cell.textContent);
+  if(cell.classList.contains(cls)&&["table-state-red","table-state-green","table-state-blue"].filter(function(name){return cell.classList.contains(name)}).length===1)return;
   cell.classList.remove("table-state-red","table-state-green","table-state-blue");
   if(cls)cell.classList.add(cls);
  }
@@ -13637,7 +13602,10 @@ html body main.container :is(#warning,#infographic)
   apply();
   var root=document.querySelector("main.container");
   if(root){
-   var observer=new MutationObserver(function(){clearTimeout(observer.t);observer.t=setTimeout(apply,30)});
+   var observer=new MutationObserver(function(records){
+    if(!records.some(function(record){var target=record.target;return target.nodeType===1&&target.closest&&target.closest("#estateRanks,#stations,#ridStationRows,#exportEstateRows,#exportWaterRows,#exportRidStationRows")}))return;
+    clearTimeout(observer.t);observer.t=setTimeout(apply,80)
+   });
    observer.observe(root,{childList:true,subtree:true,characterData:true});
   }
   document.addEventListener("click",function(event){if(event.target.closest("#globalFloodHeader,[data-view]"))setTimeout(apply,80)});
@@ -15009,8 +14977,8 @@ html body main.container #warning #topFloodNine>.final-flood-card>.force-new-flo
  function schedule(){if(scheduled)return;scheduled=true;requestAnimationFrame(apply)}
  function start(){
   apply();
-  var root=document.getElementById("topFloodNine");if(root)new MutationObserver(schedule).observe(root,{childList:true,subtree:true,characterData:true});
-  [100,400,1000,3000,8000,15000].forEach(function(ms){setTimeout(apply,ms)});
+  var root=document.getElementById("topFloodNine");if(root)new MutationObserver(schedule).observe(root,{childList:true});
+  [100,400,1000,3000].forEach(function(ms){setTimeout(apply,ms)});
   window.addEventListener("ieat:data-ready",schedule);
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
