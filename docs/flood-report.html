@@ -15422,74 +15422,69 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
 }
 </style>
 <style id="flood-native-webmap-20260923">
-#warning #topFloodMap #overviewArcgisMap{position:relative!important;min-height:620px!important;background:#eef3f7!important}
-#warning #topFloodMap .operations-map{position:relative!important}
-#warning #topFloodMap #floodMapFallback{position:absolute;inset:0;width:100%;height:100%;min-height:620px;border:0;background:#eef3f7;z-index:2}
-#warning #topFloodMap #overviewArcgisMap .esri-view-surface{touch-action:pan-x pan-y}
-#warning #overviewForecastRisk .overview-risk-card[data-hours="48"] button.overview-risk-item{background:#f5f7ff!important;background-color:#f5f7ff!important;border-color:transparent!important}
+#warning #topFloodMap .operations-map{position:relative!important;min-height:640px}
+#warning #topFloodMap #overviewArcgisMap{display:block!important;width:100%!important;height:640px!important;min-height:640px!important;border:0!important;position:relative!important;z-index:2!important}
+#warning #topFloodMap #floodSdkMap{position:absolute;inset:0;width:100%;height:100%;min-height:640px;z-index:1;background:#eef3f7}
+#warning #topFloodMap .overview-map-label{z-index:4}
 </style>
 <script id="flood-native-webmap-20260923-script">
 (function(){
  "use strict";
  function start(){
- var webmapId="3d24287ac6ea49cd823625ddad496e01";
- var frame=document.querySelector("#warning #topFloodMap iframe#overviewArcgisMap");
- if(!frame)return;
- var host=document.createElement("div");
- host.id="overviewArcgisMap";host.className="flood-sdk-map";
- host.style.cssText="display:block;width:100%;height:640px;min-height:620px";
- host.src=frame.src;host.dataset.mapUrl=frame.src;
- frame.replaceWith(host);
- var view,pending,ready=false;
- var fallbackUrl="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap="+webmapId+"&theme=light&legend=true&center=100.38863619797984,14.34381658929649&scale=577790.554289";
- function fallback(){
-  if((ready&&host.querySelector(".esri-view"))||document.getElementById("floodMapFallback"))return;
-  var iframe=document.createElement("iframe");iframe.id="floodMapFallback";iframe.title="แผนที่สถานการณ์น้ำท่วม";
-  iframe.loading="eager";iframe.src=fallbackUrl;host.parentNode.appendChild(iframe);
- }
- var fallbackTimer=setTimeout(fallback,10000);
- var originalZoom=window.zoomRiskMap;
- window.zoomRiskMap=function(lat,lon,label){
-  var latitude=Number(lat),longitude=Number(lon);
-  if(!Number.isFinite(latitude)||!Number.isFinite(longitude)||Math.abs(latitude)>90||Math.abs(longitude)>180)return;
-  var mapLabel=document.querySelector("#topFloodMap .overview-map-label small");
-  if(mapLabel&&label)mapLabel.textContent="กำลังแสดงตำแหน่ง: "+label;
-  host.closest(".embedded-water-map")?.scrollIntoView({behavior:"smooth",block:"center"});
-  if(ready&&view){view.goTo({center:[longitude,latitude],scale:75000},{duration:450}).catch(function(e){if(e.name!=="AbortError")console.error(e)})}
-  else{
-   pending=[longitude,latitude];
-   var frame=document.getElementById("floodMapFallback");if(frame){
-    var url=new URL(frame.src);url.searchParams.set("center",longitude+","+latitude);
-    url.searchParams.set("scale","75000");frame.src=url.toString()
-   }
+  var frame=document.querySelector("#warning #topFloodMap iframe#overviewArcgisMap");
+  if(!frame)return;
+  frame.loading="eager";
+  var box=frame.closest(".operations-map");
+  if(!box)return;
+  var host=document.createElement("div");host.id="floodSdkMap";
+  box.appendChild(host);
+  var view=null,ready=false,pending=null;
+  function useSdk(){
+   if(ready)return;
+   ready=true;
+   frame.style.visibility="hidden";
+   frame.style.pointerEvents="none";
+   frame.style.position="absolute";
+   host.style.zIndex="3";
+   frame.view=view;
   }
- };
- function loadApi(){return new Promise(function(resolve,reject){
-  if(window.require&&window.require.toUrl)return resolve();
-  var script=document.createElement("script");script.src="https://js.arcgis.com/4.30/";
-  script.onload=resolve;script.onerror=reject;document.head.appendChild(script);
- })}
- loadApi().then(function(){
-  window.require(["esri/WebMap","esri/views/MapView","esri/widgets/Home","esri/widgets/Search","esri/widgets/LayerList","esri/widgets/Legend","esri/widgets/Expand"],
-   function(WebMap,MapView,Home,Search,LayerList,Legend,Expand){
-    var map=new WebMap({portalItem:{id:webmapId}});
-    view=new MapView({container:host,map:map,center:[100.38863619797984,14.34381658929649],scale:577790.554289,
-     popup:{dockEnabled:true,dockOptions:{buttonEnabled:false,position:"bottom-right"}}});
-    view.when(function(){
-     ready=true;host.view=view;if(host.querySelector(".esri-view")){clearTimeout(fallbackTimer);document.getElementById("floodMapFallback")?.remove()}else fallback();
-     view.ui.add(new Home({view:view}),"top-left");
-     view.ui.add(new Search({view:view}),"top-right");
-     view.ui.add(new Expand({view:view,content:new LayerList({view:view}),group:"flood-map-tools",expandTooltip:"ชั้นข้อมูล"}),"top-right");
-     view.ui.add(new Expand({view:view,content:new Legend({view:view}),group:"flood-map-tools",expandTooltip:"คำอธิบายสัญลักษณ์"}),"top-right");
-     if(pending){var point=pending;pending=null;view.goTo({center:point,scale:75000})}
-    }).catch(function(e){console.error("โหลดแผนที่น้ำท่วมไม่สำเร็จ",e);fallback()});
-   });
- }).catch(function(e){
-  console.error("โหลดเครื่องมือ ArcGIS ไม่สำเร็จ",e);
-  fallback();
-  host.innerHTML='<a href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap='+webmapId+'" target="_blank" rel="noopener">เปิดแผนที่สถานการณ์น้ำท่วม</a>';
- });
-}
+  window.zoomRiskMap=function(lat,lon,label){
+   var latitude=Number(lat),longitude=Number(lon);
+   if(!Number.isFinite(latitude)||!Number.isFinite(longitude)||Math.abs(latitude)>90||Math.abs(longitude)>180)return;
+   var mapLabel=box.querySelector(".overview-map-label small");
+   if(mapLabel&&label)mapLabel.textContent="กำลังแสดงตำแหน่ง: "+label;
+   box.scrollIntoView({behavior:"smooth",block:"center"});
+   if(ready&&view){view.goTo({center:[longitude,latitude],scale:75000},{duration:450}).catch(function(e){if(e.name!=="AbortError")console.error(e)})}
+   else{
+    pending=[longitude,latitude];
+    try{var url=new URL(frame.src);url.searchParams.set("center",longitude+","+latitude);url.searchParams.set("scale","75000");frame.src=url.toString()}catch(e){}
+   }
+  };
+  function initialize(){
+   window.require(["esri/WebMap","esri/views/MapView","esri/widgets/Home","esri/widgets/Search","esri/widgets/LayerList","esri/widgets/Legend","esri/widgets/Expand"],
+    function(WebMap,MapView,Home,Search,LayerList,Legend,Expand){
+     try{
+      var map=new WebMap({portalItem:{id:"3d24287ac6ea49cd823625ddad496e01"}});
+      view=new MapView({container:host,map:map,center:[100.38863619797984,14.34381658929649],scale:577790.554289});
+      view.when(function(){
+       view.ui.add(new Home({view:view}),"top-left");
+       view.ui.add(new Search({view:view}),"top-right");
+       view.ui.add(new Expand({view:view,content:new LayerList({view:view}),group:"flood-map-tools",expandTooltip:"ชั้นข้อมูล"}),"top-right");
+       view.ui.add(new Expand({view:view,content:new Legend({view:view}),group:"flood-map-tools",expandTooltip:"คำอธิบายสัญลักษณ์"}),"top-right");
+       map.when(function(){useSdk()}).catch(function(e){console.error("Web Map:",e);host.remove()});
+       if(pending){var point=pending;pending=null;view.goTo({center:point,scale:75000})}
+      }).catch(function(e){console.error("แผนที่น้ำท่วม:",e);host.remove()});
+     }catch(e){console.error("แผนที่น้ำท่วม:",e);host.remove()}
+    },function(e){console.error("ArcGIS modules:",e);host.remove()});
+  }
+  if(window.require&&window.require.toUrl)initialize();
+  else{
+   var script=document.createElement("script");script.src="https://js.arcgis.com/4.30/";
+   script.onload=initialize;
+   script.onerror=function(){host.remove()};
+   document.head.appendChild(script);
+  }
+ }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();
 </script>
