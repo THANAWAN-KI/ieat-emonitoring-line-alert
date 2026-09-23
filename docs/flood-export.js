@@ -263,10 +263,16 @@
       if(frame){
         const mapImage=document.createElement("img");
         mapImage.alt="แผนที่สถานการณ์น้ำท่วมสำหรับรายงาน";
-        mapImage.src=window.IEAT_REPORT_MAP_IMAGE||new URL("./assets/thaiwater-overall-latest.png",document.baseURI).href;
-        mapImage.style.cssText="display:block;width:100%;height:100%;object-fit:cover;background:#eef3f7";
+        mapImage.src=window.IEAT_REPORT_MAP_IMAGE||new URL("./flood-risk-map-reference.png",document.baseURI).href;
+        mapImage.style.cssText="display:block;width:100%;height:100%;object-fit:contain;background:#fff";
         try{await mapImage.decode()}catch(error){throw new Error("Report map image unavailable")}
         frame.replaceChildren(mapImage);
+        if(!window.IEAT_REPORT_MAP_IMAGE){
+          const note=document.createElement("span");
+          note.textContent="ภาพแผนที่อ้างอิง • ตรวจสอบสถานการณ์ล่าสุดบนแผนที่ออนไลน์";
+          note.style.cssText="position:absolute;left:10px;bottom:10px;padding:4px 7px;background:#fff;color:#263746;font:12px Sarabun,sans-serif";
+          frame.appendChild(note);
+        }
       }
     }
 
