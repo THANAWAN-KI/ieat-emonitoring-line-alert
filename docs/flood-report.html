@@ -13970,30 +13970,41 @@ html body main.container #warning .dashboard-chart-mode>.rid-table-wrap{
   }).join("")+'</div><p class="viz-note">จัดอันดับตามจำนวนสถานีผิดปกติ • แสดง 10 อันดับแรก</p>':'<div class="dashboard-viz-empty">กำลังประมวลผลข้อมูลล่าสุด…</div>';
  }
  function state(text){text=String(text||"");return /ล้น|วิกฤต|สูง|เพิ่ม/.test(text)?"critical":/ปกติ|ลด/.test(text)?"normal":/เฝ้าระวัง|เตือน|คงที่|ทรงตัว/.test(text)?"warning":"unknown"}
+ function renderMatrix(target,rows,types,firstHeader){
+  var totals=types.map(function(type){return rows.reduce(function(sum,row){return sum+(row.values[type[0]]||0)},0)});
+  var grand=totals.reduce(function(a,b){return a+b},0);
+  if(!grand){target.innerHTML='<div class="dashboard-viz-empty">กำลังโหลดข้อมูลล่าสุด…</div>';return}
+  var shades=["#51cf51","#e654e9","#397e48","#a77943","#efc81a","#a9adb2"];
+  var cursor=0,stops=types.map(function(type,i){var next=cursor+totals[i]/grand*100,part=shades[i]+" "+cursor+"% "+next+"%";cursor=next;return part}).join(",");
+  var top=rows.slice().sort(function(a,b){return Object.values(b.values).reduce(function(x,y){return x+y},0)-Object.values(a.values).reduce(function(x,y){return x+y},0)}).slice(0,5);
+  var sig=JSON.stringify({rows:top,totals:totals,types:types});
+  if(target.dataset.sig===sig)return;target.dataset.sig=sig;
+  target.innerHTML='<div class="flood-matrix-layout"><div class="flood-matrix-summary"><div class="flood-donut" style="background:conic-gradient('+stops+')" role="img" aria-label="ทั้งหมด '+grand+' รายการ"><span>'+grand.toLocaleString("th-TH")+'</span></div><div class="flood-matrix-legend">'+types.map(function(type,i){return '<div><i style="background:'+shades[i]+'"></i><span>'+esc(type[1])+'</span><strong>'+totals[i].toLocaleString("th-TH")+'</strong></div>'}).join("")+'</div><p>หน่วย: รายการ</p></div>'+
+   '<div class="flood-matrix-table-wrap"><table class="flood-matrix-table"><thead><tr><th>'+esc(firstHeader)+'</th>'+types.map(function(type){return '<th>'+esc(type[1])+'</th>'}).join("")+'<th>รวม</th></tr></thead><tbody>'+top.map(function(row){var sum=types.reduce(function(n,type){return n+(row.values[type[0]]||0)},0);return '<tr><th title="'+esc(row.label)+'">'+esc(row.label)+'</th>'+types.map(function(type){var n=row.values[type[0]]||0;return '<td class="'+(n>=2?"high":n?"medium":"")+'">'+n+'</td>'}).join("")+'<td>'+sum+'</td></tr>'}).join("")+'<tr class="matrix-total"><th>รวมทั้งหมด</th>'+totals.map(function(n){return '<td>'+n+'</td>'}).join("")+'<td>'+grand+'</td></tr></tbody></table></div></div>';
+ }
  function renderWater(){
   var body=document.getElementById("stations"),panel=body&&body.closest(".station-watch-table"),target=viz(panel,"waterSituationViz");if(!target)return;
-  var counts={critical:0,warning:0,normal:0,unknown:0};
-  rowsOf("#stations").forEach(function(row){counts[state(row.cells[2]?.textContent)]++});
-  var total=counts.critical+counts.warning+counts.normal+counts.unknown,sig=JSON.stringify(counts);if(target.dataset.sig===sig)return;target.dataset.sig=sig;
-  if(!total){target.innerHTML='<div class="dashboard-viz-empty">กำลังประมวลผลข้อมูลล่าสุด…</div>';return}
-  var groups=[['critical','วิกฤต / น้ำล้นตลิ่ง'],['warning','เฝ้าระวัง / ทรงตัว'],['normal','ปกติ / ลดลง'],['unknown','ไม่ระบุสถานะ']];
-  target.innerHTML='<div class="water-summary"><div class="water-summary-top"><div><span class="water-summary-eyebrow">ภาพรวมสถานีระดับน้ำ</span><div class="water-summary-total"><strong>'+total.toLocaleString("th-TH")+'</strong><span>สถานีทั้งหมด</span></div></div><span class="water-summary-caption">ข้อมูลสถานีล่าสุด</span></div>'+
-   '<div class="water-summary-bar" role="img" aria-label="สัดส่วนสถานีตามสถานการณ์น้ำ">'+groups.map(function(x){return counts[x[0]]?'<span class="severity-'+x[0]+'" style="width:'+(counts[x[0]]/total*100)+'%"></span>':''}).join("")+'</div>'+
-   '<div class="water-summary-grid">'+groups.map(function(x){return '<div class="water-summary-item severity-'+x[0]+'"><span class="water-summary-label"><i aria-hidden="true"></i>'+x[1]+'</span><strong>'+counts[x[0]].toLocaleString("th-TH")+'</strong></div>'}).join("")+'</div></div>';
+  var types=[["critical","วิกฤต"],["warning","เฝ้าระวัง"],["normal","ปกติ"],["unknown","อื่น ๆ"]];
+  var rows=rowsOf("#stations").map(function(row){var values={};values[state(row.cells[2]?.textContent)]=1;return{label:row.cells[0]?.textContent.trim()||"–",values:values}});
+  renderMatrix(target,rows,types,"สถานี");
  }
  function renderRid(){
   var body=document.getElementById("ridStationRows"),panel=body&&body.closest(".rid-panel"),target=viz(panel,"ridLevelRankViz");if(!target)return;
-  var rows=rowsOf("#ridStationRows").map(function(row){return{name:row.cells[0]?.textContent.trim()||"–",pct:number(row.cells[4]?.textContent),province:row.cells[1]?.textContent.trim()||"–"}}).sort(function(a,b){return b.pct-a.pct}).slice(0,10);
-  var sig=JSON.stringify(rows);if(target.dataset.sig===sig)return;target.dataset.sig=sig;
-  var max=Math.max(100,...rows.map(function(x){return x.pct}));
-  target.innerHTML=rows.length?'<div class="rid-rank-chart">'+rows.map(function(x,i){var cls=x.pct>=100?"critical":x.pct>=80?"watch":"normal";return '<div class="rid-rank-row"><span class="rank-number">'+(i+1)+'</span><span class="rank-name" title="'+esc(x.name)+'">'+esc(x.name)+' · '+esc(x.province)+'</span><span class="rank-track"><i class="rank-fill '+cls+'" style="width:'+Math.max(4,x.pct/max*100)+'%"></i></span><span class="rank-value">'+x.pct.toLocaleString("th-TH",{maximumFractionDigits:1})+'%</span></div>'}).join("")+'</div><p class="viz-note">จัดอันดับระดับน้ำเทียบตลิ่งสูงสุด • เส้นแท่งเทียบค่าสูงสุดของชุดข้อมูล</p>':'<div class="dashboard-viz-empty">กำลังโหลดข้อมูลสถานีล่าสุด…</div>';
+  var provinces={};
+  rowsOf("#ridStationRows").forEach(function(row){
+   var name=row.cells[1]?.textContent.trim()||"ไม่ระบุจังหวัด",pct=number(row.cells[4]?.textContent);
+   var key=pct>=100?"critical":pct>=80?"watch":pct>0?"normal":"unknown";
+   if(!provinces[name])provinces[name]={label:name,values:{}};
+   provinces[name].values[key]=(provinces[name].values[key]||0)+1;
+  });
+  renderMatrix(target,Object.values(provinces),[["critical","ล้นตลิ่ง"],["watch","เฝ้าระวัง"],["normal","ปกติ"],["unknown","ไม่มีข้อมูล"]],"จังหวัด");
  }
  function apply(){renderEstate();renderWater();renderRid()}
  function schedule(){clearTimeout(timer);timer=setTimeout(apply,40)}
  function start(){
   apply();
   ["estateRanks","stations","ridStationRows"].forEach(function(id){var el=document.getElementById(id);if(el)new MutationObserver(schedule).observe(el,{childList:true,subtree:true,characterData:true})});
-  [100,400,900,1800,3500,6000,10000].forEach(function(ms){setTimeout(apply,ms)});
+  [100,600,1800].forEach(function(ms){setTimeout(apply,ms)});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();
@@ -14160,38 +14171,7 @@ html body main.container #warning #dashboardVisualSummaryRow .rank-value{font-si
  html body main.container #warning #dashboardVisualSummaryRow .water-donut-layout{grid-template-columns:minmax(180px,.7fr) minmax(260px,1.3fr)!important;align-items:center!important}
 }
 </style>
-<script id="flood-dashboard-three-visuals-row-20260922-v6-script">
-(function(){
- "use strict";
- var moving=false,timer=0;
- function arrange(){
-  if(moving)return;moving=true;
-  var warning=document.getElementById("warning");
-  var estate=document.getElementById("estateRanks")?.closest(".estate-watch-table");
-  var water=document.getElementById("stations")?.closest(".station-watch-table");
-  var rid=document.getElementById("ridStationRows")?.closest(".rid-panel");
-  if(!warning||!estate||!water||!rid){moving=false;return}
-  var row=document.getElementById("dashboardVisualSummaryRow");
-  if(!row){
-   row=document.createElement("section");
-   row.id="dashboardVisualSummaryRow";
-   row.setAttribute("aria-label","สรุปสถานการณ์น้ำและพื้นที่เฝ้าระวัง");
-   var anchor=document.getElementById("estateWaterTablePair")||estate;
-   anchor.parentNode.insertBefore(row,anchor);
-  }
-  [estate,water,rid].forEach(function(panel){if(panel.parentElement!==row)row.appendChild(panel)});
-  moving=false;
- }
- function schedule(){clearTimeout(timer);timer=setTimeout(arrange,40)}
- function start(){
-  arrange();
-  var warning=document.getElementById("warning");
-  if(warning)new MutationObserver(schedule).observe(warning,{childList:true,subtree:true});
-  [100,400,900,1800,3500,6000,10000,15000].forEach(function(ms){setTimeout(arrange,ms)});
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
-})();
-</script>
+
 
 
 <style id="flood-report-layout-status-map-20260922-v7">
@@ -14864,7 +14844,7 @@ html body main.container #warning #topFloodNine>.final-flood-card>.force-new-flo
 (function(){
  "use strict";
  var ids=["outFactory","dailyNearbyRiskCount","dailyStations","dailyStatus","outCritical","nationalFloodCount","nationalStormCount","nationalWaterProvinceCount","nationalHeavyRainCount"];
- var colors=["#832561","#11862f","#bfca02"];
+ var colors=["#007fdb","#007fdb","#007fdb"];
  var scheduled=false;
  function set(el,key,value){if(el&&el.style.getPropertyValue(key)!==value)el.style.setProperty(key,value,"important")}
  function apply(){
@@ -14879,7 +14859,7 @@ html body main.container #warning #topFloodNine>.final-flood-card>.force-new-flo
    set(value,"font-size",id==="dailyStatus"?"16px":"20px");
    set(value,"line-height","1.15");set(value,"overflow-wrap","anywhere");
    set(value,"white-space","normal");
-   set(detail,"font-size","10px");set(detail,"line-height","1.25");
+   set(detail,"font-size","13px");set(detail,"line-height","1.25");
    set(detail,"overflow-wrap","anywhere");
    var color=colors[Math.floor(index/3)];
    set(value,"color",color);set(value,"-webkit-text-fill-color",color);
@@ -15059,5 +15039,144 @@ html body main.container #warning #overviewForecastRisk .nearby-risk-detail-item
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();
 </script>
+<script id="flood-dashboard-matrix-layout-20260923">
+(function(){
+ "use strict";
+ function arrange(){
+  var warning=document.getElementById("warning");
+  var chart=warning&&warning.querySelector(".top-flood-left>.rid-chart-grid");
+  var estate=document.getElementById("estateRanks")?.closest(".estate-watch-table");
+  var water=document.getElementById("stations")?.closest(".station-watch-table");
+  var rid=document.getElementById("ridStationRows")?.closest(".rid-panel");
+  if(!warning||!chart||!estate||!water||!rid)return;
+  if(estate.parentElement!==chart)chart.appendChild(estate);
+  var row=document.getElementById("dashboardVisualSummaryRow");
+  if(!row){row=document.createElement("section");row.id="dashboardVisualSummaryRow";row.setAttribute("aria-label","สรุปสถานีระดับน้ำ");document.getElementById("topFloodDashboard").insertAdjacentElement("afterend",row)}
+  if(water.parentElement!==row)row.appendChild(water);
+  if(rid.parentElement!==row)row.appendChild(rid);
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",arrange,{once:true});else arrange();
+ document.addEventListener("ieat:data-ready",arrange);
+ [300,1200,5000].forEach(function(ms){setTimeout(arrange,ms)});
+})();
+</script>
+<style id="flood-dashboard-matrix-reference-and-performance-20260923">
+/* Keep the water-level chart wide; put the estate ranking beside the trend chart. */
+html body main.container #warning #topFloodDashboard .top-flood-left>.rid-chart-grid{
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ align-items:stretch!important;gap:12px!important
+}
+html body main.container #warning #topFloodDashboard .rid-chart-grid>.rid-panel:first-child{
+ grid-column:1/-1!important
+}
+html body main.container #warning #topFloodDashboard .rid-chart-grid>.estate-watch-table{
+ grid-column:2!important;grid-row:2!important;display:flex!important;flex-direction:column!important;
+ min-width:0!important;height:380px!important;min-height:380px!important;max-height:380px!important;
+ margin:0!important;overflow:hidden!important;background:#fff!important;
+ border:1px solid #e7ebf1!important;border-radius:14px!important
+}
+html body main.container #warning #topFloodDashboard .rid-chart-grid>.rid-panel:nth-child(2){
+ grid-column:1!important;grid-row:2!important;min-width:0!important
+}
+html body main.container #warning #topFloodDashboard .rid-chart-grid>.estate-watch-table .table-section-head{
+ padding:16px!important;min-height:58px!important;background:#fff!important;border-bottom:1px solid #e7ebf1!important
+}
+html body main.container #warning #topFloodDashboard .rid-chart-grid>.estate-watch-table .table-section-head h2{
+ margin:0!important;color:#527d1a!important;font-size:16px!important;font-weight:500!important
+}
+html body main.container #warning #topFloodDashboard .rid-chart-grid>.estate-watch-table .table-section-head p,
+html body main.container #warning #topFloodDashboard .rid-chart-grid>.estate-watch-table .table-section-head>span{display:none!important}
+html body main.container #warning #topFloodDashboard #estateRankViz{
+ flex:1!important;min-height:0!important;padding:12px!important;overflow:auto!important;background:#fff!important
+}
+html body main.container #warning #topFloodDashboard #estateRankViz .rank-row{
+ grid-template-columns:22px minmax(55px,1fr) minmax(35px,.8fr) 53px!important;
+ gap:4px!important;padding:6px 3px!important;font-size:10px!important
+}
+html body main.container #warning #topFloodDashboard #estateRankViz .rank-name{
+ white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important
+}
+html body main.container #warning #topFloodDashboard #estateRankViz .rank-number{
+ width:20px!important;height:20px!important;font-size:10px!important
+}
+html body main.container #warning #topFloodDashboard #estateRankViz .rank-value{font-size:9px!important}
+html body main.container #warning #topFloodDashboard #estateRankViz .viz-note{font-size:9px!important}
+/* Two full-width summary panels with donut charts and compact heatmap tables. */
+html body main.container #warning #dashboardVisualSummaryRow{
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:14px!important;width:100%!important;margin:16px 0!important
+}
+html body main.container #warning #dashboardVisualSummaryRow>:is(.station-watch-table,.rid-panel){
+ display:flex!important;flex-direction:column!important;min-width:0!important;
+ height:410px!important;min-height:410px!important;max-height:410px!important;
+ background:#fff!important;overflow:hidden!important
+}
+html body main.container #warning #dashboardVisualSummaryRow .dashboard-viz{
+ flex:1!important;min-height:0!important;padding:12px!important;background:#fff!important;overflow:auto!important
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-matrix-layout{
+ display:grid;grid-template-columns:minmax(125px,.32fr) minmax(0,.68fr);
+ gap:14px;align-items:start;height:100%;color:#39424c
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-matrix-summary{
+ display:flex;flex-direction:column;align-items:stretch;height:100%;min-width:0
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-donut{
+ position:relative;display:grid;place-items:center;align-self:center;
+ width:112px;height:112px;flex:none;border-radius:50%;margin:8px 0 15px
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-donut::before{
+ content:"";position:absolute;inset:17px;border-radius:50%;background:#fff
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-donut span{
+ position:relative;z-index:1;color:#007fdb;font-size:19px;font-weight:700
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-matrix-legend{
+ display:grid;gap:5px;width:100%;font-size:11px
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-matrix-legend>div{
+ display:grid;grid-template-columns:8px minmax(0,1fr) auto;align-items:center;gap:5px
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-matrix-legend i{
+ display:block;width:8px;height:8px;border-radius:50%
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-matrix-legend strong{color:#007fdb;font-size:11px}
+html body main.container #warning #dashboardVisualSummaryRow .flood-matrix-summary p{
+ margin:auto 0 0;text-align:right;font-size:10px
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-matrix-table-wrap{min-width:0;max-width:100%;overflow:auto}
+html body main.container #warning #dashboardVisualSummaryRow .flood-matrix-table{
+ width:100%;min-width:380px;border-collapse:collapse!important;table-layout:fixed;font-size:11px;color:#41454d
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-matrix-table :is(th,td){
+ padding:9px 5px!important;border:1px solid #e1e4eb!important;text-align:center!important;
+ background:#fff!important;font-weight:400!important;line-height:1.25!important
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-matrix-table thead th{background:#f9fafc!important}
+html body main.container #warning #dashboardVisualSummaryRow .flood-matrix-table tbody th{
+ width:90px;max-width:90px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-matrix-table td.medium{background:#fff0d7!important}
+html body main.container #warning #dashboardVisualSummaryRow .flood-matrix-table td.high{background:#ffc174!important}
+html body main.container #warning #dashboardVisualSummaryRow .flood-matrix-table .matrix-total :is(th,td){
+ background:#f4f8fc!important;font-weight:700!important
+}
+/* Nine KPI values share the requested blue; units match their card titles. */
+html body main.container #warning #topFloodNine>.final-flood-card .final-card-value{
+ color:#007fdb!important;-webkit-text-fill-color:#007fdb!important
+}
+html body main.container #warning #topFloodNine>.final-flood-card .final-card-detail{
+ font-size:13px!important;line-height:1.3!important
+}
+@media(max-width:800px){
+ html body main.container #warning #dashboardVisualSummaryRow{grid-template-columns:1fr!important}
+}
+@media(max-width:600px){
+ html body main.container #warning #topFloodDashboard .top-flood-left>.rid-chart-grid{grid-template-columns:1fr!important}
+ html body main.container #warning #topFloodDashboard .rid-chart-grid>:is(.rid-panel,.estate-watch-table){
+  grid-column:1!important;grid-row:auto!important
+ }
+}
+</style>
 </body>
 </html>
