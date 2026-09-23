@@ -15002,5 +15002,82 @@ html body main.container #warning #topFloodNine>.final-flood-card>.force-new-flo
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();
 </script>
+<style id="flood-risk-three-reference-cards-20260923">
+/* Compact five-row ranking cards for 24 h, 48 h and nearby 120 km risk. */
+html body main.container #warning #topFloodDashboard #overviewForecastRisk .overview-forecast-grid{
+ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ align-items:stretch!important;gap:12px!important;padding:0!important
+}
+html body main.container #warning #overviewForecastRisk :is(.overview-risk-card,.nearby-risk-detail-card){
+ display:flex!important;flex-direction:column!important;
+ height:324px!important;min-height:324px!important;max-height:324px!important;
+ min-width:0!important;padding:16px!important;margin:0!important;
+ background:#fff!important;border:1px solid #edf1f7!important;border-radius:18px!important;
+ box-shadow:0 4px 18px rgba(39,58,91,.06)!important;overflow:hidden!important
+}
+html body main.container #warning #overviewForecastRisk .overview-risk-card h3,
+html body main.container #warning #overviewForecastRisk .nearby-risk-detail-head p{
+ display:block!important;flex:none!important;height:64px!important;min-height:64px!important;
+ margin:0!important;padding:0!important;color:#343941!important;
+ font-size:13px!important;font-weight:600!important;line-height:1.35!important;
+ text-align:left!important;overflow:hidden!important
+}
+html body main.container #warning #overviewForecastRisk .nearby-risk-detail-head{
+ flex:none!important;height:64px!important;min-height:64px!important;margin:0!important;padding:0!important;
+ background:transparent!important
+}
+html body main.container #warning #overviewForecastRisk :is(.overview-risk-list,.nearby-risk-detail-list){
+ display:grid!important;grid-template-rows:repeat(5,37px)!important;gap:7px!important;
+ flex:1 1 auto!important;min-height:0!important;max-height:none!important;
+ margin:0!important;padding:0!important;overflow:hidden!important
+}
+html body main.container #warning #overviewForecastRisk :is(.overview-risk-item,.nearby-risk-detail-item){
+ display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;
+ align-items:center!important;gap:5px!important;
+ width:100%!important;min-height:37px!important;height:37px!important;
+ margin:0!important;padding:4px 5px!important;border:0!important;
+ border-radius:9px!important;background:#f5f7ff!important
+}
+html body main.container #warning #overviewForecastRisk :is(.overview-risk-item,.nearby-risk-detail-item):nth-child(n+6){display:none!important}
+html body main.container #warning #overviewForecastRisk :is(.overview-risk-place,.nearby-risk-detail-item>div){
+ min-width:0!important;display:flex!important;align-items:center!important
+}
+html body main.container #warning #overviewForecastRisk .overview-risk-place::before,
+html body main.container #warning #overviewForecastRisk .nearby-risk-detail-item>div::before{
+ display:inline!important;content:counter(risk-rank) ". "!important;
+ flex:none!important;color:#7c828b!important;font-size:12px!important
+}
+html body main.container #warning #overviewForecastRisk .nearby-risk-detail-item>div::before{
+ content:counter(nearby-rank) ". "!important
+}
+html body main.container #warning #overviewForecastRisk :is(.overview-risk-place b,.nearby-risk-detail-item b){
+ min-width:0!important;color:#737982!important;font-size:12px!important;
+ font-weight:400!important;line-height:1.2!important;white-space:nowrap!important;
+ overflow:hidden!important;text-overflow:ellipsis!important
+}
+html body main.container #warning #overviewForecastRisk :is(.overview-risk-rain,.nearby-risk-detail-item strong){
+ display:block!important;min-width:55px!important;max-width:100px!important;
+ padding:4px 7px!important;border:0!important;border-radius:10px!important;
+ font-size:12px!important;font-weight:600!important;line-height:1.2!important;
+ text-align:center!important;white-space:nowrap!important
+}
+html body main.container #warning #overviewForecastRisk .overview-risk-card[data-hours="24"] .overview-risk-rain{
+ background:#f8ce7b!important;color:#4d421e!important
+}
+html body main.container #warning #overviewForecastRisk .overview-risk-card[data-hours="48"] .overview-risk-rain{
+ background:#ffe66b!important;color:#414125!important
+}
+html body main.container #warning #overviewForecastRisk .nearby-risk-detail-item strong{
+ background:#007d85!important;color:#fff!important
+}
+@media(max-width:850px){
+ html body main.container #warning #topFloodDashboard #overviewForecastRisk .overview-forecast-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ html body main.container #warning #overviewForecastRisk .nearby-risk-detail-card{grid-column:1/-1!important}
+}
+@media(max-width:600px){
+ html body main.container #warning #topFloodDashboard #overviewForecastRisk .overview-forecast-grid{grid-template-columns:1fr!important}
+ html body main.container #warning #overviewForecastRisk .nearby-risk-detail-card{grid-column:auto!important}
+}
+</style>
 </body>
 </html>
