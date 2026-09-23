@@ -258,6 +258,17 @@
     const renderHeight=Math.max(1,Math.round(sheet.offsetHeight||rect.height));
     const renderRoot=document.createElement("div");
     const clone=sheet.cloneNode(true);
+    if(sheet.id==="reportCanvas"){
+      const frame=clone.querySelector(".sheet-map-frame");
+      if(frame){
+        const mapImage=document.createElement("img");
+        mapImage.alt="แผนที่สถานการณ์น้ำท่วมสำหรับรายงาน";
+        mapImage.src=window.IEAT_REPORT_MAP_IMAGE||new URL("./assets/thaiwater-overall-latest.png",document.baseURI).href;
+        mapImage.style.cssText="display:block;width:100%;height:100%;object-fit:cover;background:#eef3f7";
+        try{await mapImage.decode()}catch(error){throw new Error("Report map image unavailable")}
+        frame.replaceChildren(mapImage);
+      }
+    }
 
     renderRoot.setAttribute("aria-hidden","true");
     renderRoot.style.cssText=[
@@ -336,7 +347,12 @@
     });
   }
   function setupMapUpload(){
-    bindImageUpload("reportMapUpload",["infographicMap"]);
+    $("reportMapUpload")?.addEventListener("change",event=>{
+      const file=event.target.files?.[0];if(!file)return;
+      const reader=new FileReader();
+      reader.onload=()=>{window.IEAT_REPORT_MAP_IMAGE=reader.result};
+      reader.readAsDataURL(file);
+    });
     bindImageUpload("forecast24Upload",["forecastMap24"]);
     bindImageUpload("forecast48Upload",["forecastMap48"]);
   }
