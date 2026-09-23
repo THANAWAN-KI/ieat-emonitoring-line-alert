@@ -15471,7 +15471,13 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
        view.ui.add(new Search({view:view}),"top-right");
        view.ui.add(new Expand({view:view,content:new LayerList({view:view}),group:"flood-map-tools",expandTooltip:"ชั้นข้อมูล"}),"top-right");
        view.ui.add(new Expand({view:view,content:new Legend({view:view}),group:"flood-map-tools",expandTooltip:"คำอธิบายสัญลักษณ์"}),"top-right");
-       map.when(function(){useSdk()}).catch(function(e){console.error("Web Map:",e);host.remove()});
+       map.when(function(){
+        var first=map.layers&&map.layers.at(0);
+        if(!first){host.remove();return}
+        view.whenLayerView(first).then(function(layerView){
+         layerView.when(function(){useSdk()}).catch(function(e){console.error("ชั้นข้อมูล:",e);host.remove()});
+        }).catch(function(e){console.error("ชั้นข้อมูล:",e);host.remove()});
+       }).catch(function(e){console.error("Web Map:",e);host.remove()});
        if(pending){var point=pending;pending=null;view.goTo({center:point,scale:75000})}
       }).catch(function(e){console.error("แผนที่น้ำท่วม:",e);host.remove()});
      }catch(e){console.error("แผนที่น้ำท่วม:",e);host.remove()}
