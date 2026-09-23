@@ -13879,14 +13879,12 @@ html body main.container #warning .dashboard-chart-mode>.rid-table-wrap{
  }
  function renderEstate(){
   var body=document.getElementById("estateRanks"),panel=body&&body.closest(".estate-watch-table"),target=viz(panel,"estateRankViz");if(!target)return;
-  var rows=rowsOf("#estateRanks").map(function(row){
-   return{name:row.cells[1]?.textContent.trim()||"–",count:number(row.cells[2]?.textContent),rain:row.cells[4]?.textContent.trim()||"–",status:row.cells[5]?.textContent.trim()||"เฝ้าระวัง"};
-  }).sort(function(a,b){return b.count-a.count}).slice(0,10);
+  var rows=rowsOf("#estateRanks").map(function(row){return{name:row.cells[1]?.textContent.trim()||"–",count:number(row.cells[2]?.textContent)}})
+   .sort(function(a,b){return b.count-a.count}).slice(0,5);
   var sig=JSON.stringify(rows);if(target.dataset.sig===sig)return;target.dataset.sig=sig;
-  var max=Math.max(1,...rows.map(function(x){return x.count}));
-  target.innerHTML=rows.length?'<div class="rank-chart">'+rows.map(function(x,i){
-   return '<div class="rank-row"><span class="rank-number">'+(i+1)+'</span><span class="rank-name" title="'+esc(x.name)+'">'+esc(x.name)+'</span><span class="rank-track"><i class="rank-fill" style="width:'+Math.max(5,x.count/max*100)+'%"></i></span><span class="rank-value">'+x.count.toLocaleString("th-TH")+' สถานี</span></div>';
-  }).join("")+'</div><p class="viz-note">จัดอันดับตามจำนวนสถานีผิดปกติ • แสดง 10 อันดับแรก</p>':'<div class="dashboard-viz-empty">กำลังประมวลผลข้อมูลล่าสุด…</div>';
+  target.innerHTML=rows.length?'<div class="flood-estate-ranking">'+rows.map(function(x,i){
+   return '<div class="flood-estate-rank"><span class="flood-estate-name" title="'+esc(x.name)+'">'+(i+1)+'. '+esc(x.name)+'</span><strong>'+x.count.toLocaleString("th-TH")+'</strong></div>';
+  }).join("")+'</div>':'<div class="dashboard-viz-empty">กำลังประมวลผลข้อมูลล่าสุด…</div>';
  }
  function state(text){text=String(text||"");return /ล้น|วิกฤต|สูง|เพิ่ม/.test(text)?"critical":/ปกติ|ลด/.test(text)?"normal":/เฝ้าระวัง|เตือน|คงที่|ทรงตัว/.test(text)?"warning":"unknown"}
  function renderMatrix(target,rows,types,firstHeader){
@@ -13903,20 +13901,21 @@ html body main.container #warning .dashboard-chart-mode>.rid-table-wrap{
  }
  function renderWater(){
   var body=document.getElementById("stations"),panel=body&&body.closest(".station-watch-table"),target=viz(panel,"waterSituationViz");if(!target)return;
-  var types=[["critical","วิกฤต"],["warning","เฝ้าระวัง"],["normal","ปกติ"],["unknown","อื่น ๆ"]];
-  var rows=rowsOf("#stations").map(function(row){var values={};values[state(row.cells[2]?.textContent)]=1;return{label:row.cells[0]?.textContent.trim()||"–",values:values}});
-  renderMatrix(target,rows,types,"สถานี");
+  var rows=rowsOf("#stations"),total=rows.length,sig=String(total);
+  if(target.dataset.sig===sig)return;target.dataset.sig=sig;
+  if(!total){target.innerHTML='<div class="dashboard-viz-empty">กำลังโหลดข้อมูลสถานีล่าสุด…</div>';return}
+  target.innerHTML='<div class="flood-water-gauge" role="img" aria-label="สถานีระดับน้ำทั้งหมด '+total+' สถานี"><div class="flood-gauge-arc"><div class="flood-gauge-hole"></div><strong>'+total.toLocaleString("th-TH")+' สถานี</strong></div><div class="flood-gauge-legend"><span><i></i>สถานีระดับน้ำ</span><strong>'+total.toLocaleString("th-TH")+' สถานี</strong></div></div>';
  }
  function renderRid(){
   var body=document.getElementById("ridStationRows"),panel=body&&body.closest(".rid-panel"),target=viz(panel,"ridLevelRankViz");if(!target)return;
-  var provinces={};
-  rowsOf("#ridStationRows").forEach(function(row){
-   var name=row.cells[1]?.textContent.trim()||"ไม่ระบุจังหวัด",pct=number(row.cells[4]?.textContent);
-   var key=pct>=100?"critical":pct>=80?"watch":pct>0?"normal":"unknown";
-   if(!provinces[name])provinces[name]={label:name,values:{}};
-   provinces[name].values[key]=(provinces[name].values[key]||0)+1;
-  });
-  renderMatrix(target,Object.values(provinces),[["critical","ล้นตลิ่ง"],["watch","เฝ้าระวัง"],["normal","ปกติ"],["unknown","ไม่มีข้อมูล"]],"จังหวัด");
+  var counts={critical:0,watch:0,normal:0,unknown:0};
+  rowsOf("#ridStationRows").forEach(function(row){var pct=number(row.cells[4]?.textContent);counts[pct>=100?"critical":pct>=80?"watch":pct>0?"normal":"unknown"]++});
+  var total=Object.values(counts).reduce(function(a,b){return a+b},0),sig=JSON.stringify(counts);
+  if(target.dataset.sig===sig)return;target.dataset.sig=sig;
+  if(!total){target.innerHTML='<div class="dashboard-viz-empty">กำลังโหลดข้อมูลสถานีล่าสุด…</div>';return}
+  var types=[["critical","ล้นตลิ่ง","#f45950"],["watch","เฝ้าระวัง","#f4ca2e"],["normal","ปกติ","#4caa72"],["unknown","ไม่มีข้อมูล","#a9adb2"]],cursor=0;
+  var stops=types.map(function(type){var next=cursor+counts[type[0]]/total*100,part=type[2]+" "+cursor+"% "+next+"%";cursor=next;return part}).join(",");
+  target.innerHTML='<div class="flood-rid-donut-only"><div class="flood-donut" style="background:conic-gradient('+stops+')" role="img" aria-label="สถานีทั้งหมด '+total+' สถานี"><span>'+total.toLocaleString("th-TH")+'</span></div><div class="flood-rid-legend">'+types.map(function(type){return '<div><i style="background:'+type[2]+'"></i><span>'+type[1]+'</span><strong>'+counts[type[0]].toLocaleString("th-TH")+'</strong></div>'}).join("")+'</div><p>หน่วย: สถานี</p></div>';
  }
  function apply(){renderEstate();renderWater();renderRid()}
  function schedule(){clearTimeout(timer);timer=setTimeout(apply,40)}
@@ -14763,7 +14762,7 @@ html body main.container #warning #topFloodNine>.final-flood-card>.force-new-flo
 (function(){
  "use strict";
  var ids=["outFactory","dailyNearbyRiskCount","dailyStations","dailyStatus","outCritical","nationalFloodCount","nationalStormCount","nationalWaterProvinceCount","nationalHeavyRainCount"];
- var colors=["#007fdb","#007fdb","#007fdb"];
+ var colors=["#161b22","#161b22","#161b22"];
  var scheduled=false;
  function set(el,key,value){if(el&&el.style.getPropertyValue(key)!==value)el.style.setProperty(key,value,"important")}
  function apply(){
@@ -14778,7 +14777,7 @@ html body main.container #warning #topFloodNine>.final-flood-card>.force-new-flo
    set(value,"font-size",id==="dailyStatus"?"16px":"20px");
    set(value,"line-height","1.15");set(value,"overflow-wrap","anywhere");
    set(value,"white-space","normal");
-   set(detail,"font-size","13px");set(detail,"line-height","1.25");
+   set(detail,"font-size","13px");set(detail,"color","#161b22");set(title,"color","#161b22");set(detail,"line-height","1.25");
    set(detail,"overflow-wrap","anywhere");
    var color=colors[Math.floor(index/3)];
    set(value,"color",color);set(value,"-webkit-text-fill-color",color);
@@ -15095,6 +15094,109 @@ html body main.container #warning #topFloodNine>.final-flood-card .final-card-de
  html body main.container #warning #topFloodDashboard .rid-chart-grid>:is(.rid-panel,.estate-watch-table){
   grid-column:1!important;grid-row:auto!important
  }
+}
+</style>
+<style id="flood-dashboard-requested-finishing-20260923">
+/* KPI card text */
+html body main.container #warning #topFloodNine>.final-flood-card
+ :is(.final-card-title,.final-card-detail,.final-card-value){
+ color:#161b22!important;-webkit-text-fill-color:#161b22!important
+}
+/* Blue section headings; remove the thin header separators on the three forecast cards. */
+html body main.container #warning #overviewForecastRisk
+ :is(.overview-risk-card h3,.nearby-risk-detail-head p,.nearby-risk-detail-head h2),
+html body main.container #warning #topFloodDashboard .rid-chart-grid .rid-panel-head h2,
+html body main.container #warning #topFloodDashboard .rid-chart-grid>.estate-watch-table .table-section-head h2,
+html body main.container #warning #dashboardVisualSummaryRow :is(.table-section-head,.rid-panel-head) h2{
+ color:#007fdb!important;-webkit-text-fill-color:#007fdb!important
+}
+html body main.container #warning #overviewForecastRisk
+ :is(.overview-risk-card h3,.nearby-risk-detail-head,.nearby-risk-detail-head p){
+ border-bottom:0!important;box-shadow:none!important
+}
+html body main.container #warning #overviewForecastRisk
+ :is(.overview-risk-card h3,.nearby-risk-detail-head,.nearby-risk-detail-head p)::after{
+ content:none!important;display:none!important;border:0!important
+}
+html body main.container #warning #overviewForecastRisk
+ :is(.overview-risk-list,.nearby-risk-detail-list){border-top:0!important}
+/* Top-five estate ranking, using the live abnormal-station counts. */
+html body main.container #warning #topFloodDashboard #estateRankViz{
+ display:block!important;padding:12px 14px!important;background:#fff!important;overflow:auto!important
+}
+html body main.container #warning #topFloodDashboard #estateRankViz .flood-estate-ranking{
+ display:grid;gap:7px
+}
+html body main.container #warning #topFloodDashboard #estateRankViz .flood-estate-rank{
+ display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;
+ min-height:36px;gap:7px;padding:4px 6px;border-radius:9px;background:#f5f7ff
+}
+html body main.container #warning #topFloodDashboard #estateRankViz .flood-estate-name{
+ overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#737982;font-size:12px
+}
+html body main.container #warning #topFloodDashboard #estateRankViz .flood-estate-rank strong{
+ min-width:48px;padding:5px 8px;border-radius:10px;background:#007d85;
+ color:#fff;font-size:12px;line-height:1.1;text-align:center;font-weight:600
+}
+/* Water situation: one half-ring and a single legend, without the station matrix. */
+html body main.container #warning #dashboardVisualSummaryRow #waterSituationViz{
+ padding:18px 18px 12px!important
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-water-gauge{
+ display:flex;flex-direction:column;justify-content:space-between;align-items:center;
+ width:100%;height:100%;min-height:245px
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-gauge-arc{
+ position:relative;align-self:center;margin:auto 0;
+ width:min(90%,280px);aspect-ratio:2 / 1;
+ border-radius:280px 280px 0 0;background:#f45950;overflow:hidden
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-gauge-hole{
+ position:absolute;left:15%;right:15%;bottom:0;height:70%;
+ border-radius:250px 250px 0 0;background:#fff
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-gauge-arc strong{
+ position:absolute;bottom:10px;left:0;width:100%;text-align:center;
+ color:#007fdb;font-size:15px
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-gauge-legend{
+ display:flex;justify-content:space-between;align-items:center;gap:10px;
+ width:100%;margin-top:auto;color:#62666d;font-size:12px
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-gauge-legend span{
+ display:inline-flex;align-items:center;gap:5px
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-gauge-legend i{
+ width:8px;height:8px;border-radius:50%;background:#f45950
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-gauge-legend strong{
+ font-size:12px;color:#161b22;font-weight:500
+}
+/* Related RID stations: circular breakdown only; source table remains available for export. */
+html body main.container #warning #dashboardVisualSummaryRow #ridLevelRankViz{
+ padding:16px!important
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-rid-donut-only{
+ display:flex;flex-direction:column;align-items:center;justify-content:center;
+ height:100%;gap:12px
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-rid-donut-only .flood-donut{
+ width:140px;height:140px;margin:0
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-rid-legend{
+ display:grid;gap:6px;width:min(100%,260px);font-size:12px
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-rid-legend>div{
+ display:grid;grid-template-columns:8px minmax(0,1fr) auto;align-items:center;gap:6px
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-rid-legend i{
+ width:8px;height:8px;border-radius:50%
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-rid-legend strong{
+ color:#161b22;font-size:12px
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-rid-donut-only p{
+ margin:0;align-self:flex-end;color:#62666d;font-size:11px
 }
 </style>
 </body>
