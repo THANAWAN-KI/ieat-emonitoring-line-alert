@@ -185,7 +185,9 @@
     const estates=(data.estate_watch||[]).slice(0,8);
     $("exportEstateRows").innerHTML=estates.length?estates.map((e,i)=>{
       const overflow=String(e.status||"").includes("ล้นตลิ่ง"),level=overflow?"overflow":statusLevel(e.status,e.severity_score);
-      return '<tr><td>'+(i+1)+'</td><td><b>'+e.name+'</b></td><td>'+fmt(e.alert_station_count,0)+' สถานี</td><td>'+fmt(e.nearest_alert_km)+' กม.</td><td>'+(e.max_rainfall_mm==null?"–":fmt(e.max_rainfall_mm)+" มม.")+'</td><td><span class="export-status '+level+'"'+(overflow?' style="background:#ED3B21!important;color:#fff!important"':'')+'>'+(e.status||"เฝ้าระวัง")+'</span></td></tr>';
+      const lat=Number(e.lat),lon=Number(e.lon),hasPoint=Number.isFinite(lat)&&Number.isFinite(lon)&&lat!==0&&lon!==0&&Math.abs(lat)<=90&&Math.abs(lon)<=180;
+      const estateName=hasPoint?'<button type="button" class="report-estate-map-link" data-report-lat="'+lat+'" data-report-lon="'+lon+'" title="ดูตำแหน่งนิคมฯ บนแผนที่รายงาน">'+e.name+'</button>':'<b>'+e.name+'</b>';
+      return '<tr><td>'+(i+1)+'</td><td>'+estateName+'</td><td>'+fmt(e.alert_station_count,0)+' สถานี</td><td>'+fmt(e.nearest_alert_km)+' กม.</td><td>'+(e.max_rainfall_mm==null?"–":fmt(e.max_rainfall_mm)+" มม.")+'</td><td><span class="export-status '+level+'"'+(overflow?' style="background:#ED3B21!important;color:#fff!important"':'')+'>'+(e.status||"เฝ้าระวัง")+'</span></td></tr>';
     }).join(""):'<tr><td colspan="6">ไม่พบนิคมอุตสาหกรรมเข้าเกณฑ์เฝ้าระวัง</td></tr>';
 
     const waters=(data.stations||[]).filter(s=>s.kind==="waterlevel"&&Number(s.distance_km)<=30&&Number(s.severity_score)>=2).slice(0,8);
