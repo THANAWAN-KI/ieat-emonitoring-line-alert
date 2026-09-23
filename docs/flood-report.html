@@ -15411,5 +15411,74 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();
 </script>
+
+<style id="flood-nine-card-map-focus">
+#warning #topFloodNine>.final-flood-card[data-map-focus]{cursor:pointer!important}
+#warning #topFloodNine>.final-flood-card[data-map-focus]:hover{box-shadow:0 5px 18px rgba(0,127,219,.18)!important}
+#warning #topFloodNine>.final-flood-card[data-map-focus]:focus-visible{outline:2px solid #007fdb!important;outline-offset:2px!important}
+</style>
+<script id="flood-nine-card-map-focus-script">
+(function(){
+ "use strict";
+ var ids=["outFactory","dailyNearbyRiskCount","dailyStations","dailyStatus","outCritical","nationalFloodCount","nationalStormCount","nationalWaterProvinceCount","nationalHeavyRainCount"];
+ var cache=null;
+ function valid(x){var lat=Number(x&&((x.lat??x.latitude))),lon=Number(x&&((x.lon??x.longitude)));return Number.isFinite(lat)&&Number.isFinite(lon)&&lat!==0&&lon!==0&&Math.abs(lat)<=90&&Math.abs(lon)<=180}
+ function max(rows,key){return (rows||[]).filter(valid).slice().sort(function(a,b){return (Number(b[key])||0)-(Number(a[key])||0)})[0]}
+ function area(data,period){return max(data.flash_flood&&data.flash_flood[period]&&data.flash_flood[period].areas,"sum_rainfall_mm")}
+ function station(data,kind,key){return max((data.stations||[]).filter(function(x){return x.kind===kind&&Number(x.severity_score)>=2&&Number(x.distance_km)<=30}),key)}
+ function estate(data,key){return max((data.estate_watch||[]).filter(function(x){return Number(x[key])>0}),key)}
+ function target(id,data){
+  var water=station(data,"waterlevel","storage_percent");
+  var rain=station(data,"rainfall","rainfall_mm");
+  var choices={
+   outFactory:estate(data,"rain_alert_count"),
+   dailyNearbyRiskCount:area(data,"48h"),
+   dailyStations:water,
+   dailyStatus:max((data.stations||[]).filter(function(x){return Number(x.distance_km)<=30&&Number(x.severity_score)>=2}),"severity_score"),
+   outCritical:estate(data,"water_alert_count"),
+   nationalFloodCount:area(data,"24h"),
+   nationalStormCount:null,
+   nationalWaterProvinceCount:water,
+   nationalHeavyRainCount:rain
+  };
+  return choices[id]||null;
+ }
+ function focus(point){
+  var map=document.querySelector("#warning #topFloodMap #overviewArcgisMap");if(!map)return;
+  var url=new URL(map.src,document.baseURI),local=!!point;
+  url.searchParams.set("center",local?Number(point.lon??point.longitude)+","+Number(point.lat??point.latitude):"101,13.2");
+  url.searchParams.set("scale",local?"75000":"4622324");
+  map.src=url.toString();
+  map.scrollIntoView({behavior:"smooth",block:"center"});
+ }
+ async function data(){
+  if(window.IEAT_LIVE_DATA&&window.IEAT_LIVE_DATA.stations)return window.IEAT_LIVE_DATA;
+  if(cache)return cache;
+  try{var response=await fetch(new URL("./data/thaiwater_latest.json",document.baseURI),{cache:"no-store"});if(!response.ok)throw Error(response.status);cache=await response.json();return cache}catch(error){return null}
+ }
+ function setup(){
+  document.querySelectorAll("#warning #topFloodNine>.final-flood-card").forEach(function(card){
+   if(!ids.includes(card.dataset.valueId))return;
+   card.dataset.mapFocus="true";card.tabIndex=0;card.setAttribute("role","button");
+   card.setAttribute("aria-label","ซูมแผนที่ตามข้อมูล "+(card.querySelector(".final-card-title")?.textContent||""));
+  });
+ }
+ async function activate(card){
+  var d=await data();if(!d)return;
+  focus(target(card.dataset.valueId,d));
+ }
+ document.addEventListener("click",function(event){
+  var card=event.target.closest("#warning #topFloodNine>.final-flood-card[data-map-focus]");
+  if(card&&!event.target.closest("a,button"))activate(card);
+ });
+ document.addEventListener("keydown",function(event){
+  var card=event.target.closest("#warning #topFloodNine>.final-flood-card[data-map-focus]");
+  if(card&&(event.key==="Enter"||event.key===" ")){event.preventDefault();activate(card)}
+ });
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",setup,{once:true});else setup();
+ var grid=document.getElementById("topFloodNine");if(grid)new MutationObserver(function(){requestAnimationFrame(setup)}).observe(grid,{childList:true});
+ [300,1000,3000].forEach(function(ms){setTimeout(setup,ms)});
+})();
+</script>
 </body>
 </html>
