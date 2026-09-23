@@ -12,7 +12,7 @@
  panel("layers");panel("legend");
  require(["esri/arcgis/utils","esri/dijit/LayerList","esri/dijit/Legend","dojo/domReady!"],function(utils,LayerList,Legend){
   utils.createMap(id,"map",{mapOptions:{slider:true,center:[101,13],zoom:5}}).then(function(result){
-   map=result.map;
+   map=result.map;document.body.dataset.operationalLayers=JSON.stringify((result.itemInfo.itemData.operationalLayers||[]).map(function(x){return {id:x.id,title:x.title,url:x.url,type:x.layerType,visibility:x.visibility,renderer:x.layerDefinition&&x.layerDefinition.drawingInfo&&x.layerDefinition.drawingInfo.renderer}}));
    var layers=utils.getLayerList(result);
    var list=new LayerList({map:map,layers:layers},"layersPanel");list.startup();
    var legend=new Legend({map:map,layerInfos:utils.getLegendLayers(result)},"legendPanel");legend.startup();
