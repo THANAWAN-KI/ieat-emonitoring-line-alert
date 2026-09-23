@@ -11912,8 +11912,10 @@ html body main.container #warning #topFloodNine .force-new-flood-icon svg{
  function apply(){
   if(working)return;working=true;
   cards().forEach(function(card,i){
+   var current=card.querySelector(":scope > .force-new-flood-icon[data-icon-version='20260923-v1']");
+   if(current&&current.getAttribute("data-new-icon")===String(i+1))return;
    card.querySelectorAll(":scope > .force-new-flood-icon,:scope > .flood-card-icon,:scope > .drought-card-icon,:scope > .unified-flood-card-icon,:scope > .icon,:scope > .n-icon,:scope > .kpi-icon").forEach(function(el){el.remove()});
-   var holder=document.createElement("span");holder.className="force-new-flood-icon";holder.setAttribute("aria-hidden","true");holder.setAttribute("data-new-icon",String(i+1));holder.innerHTML=icons[order[i]];
+   var holder=document.createElement("span");holder.className="force-new-flood-icon";holder.setAttribute("aria-hidden","true");holder.setAttribute("data-new-icon",String(i+1));holder.setAttribute("data-icon-version","20260923-v1");holder.innerHTML=icons[order[i]];
    card.insertBefore(holder,card.firstChild);
   });
   working=false;
@@ -12063,6 +12065,13 @@ html body main.container #warning #topFloodNine>.final-flood-card>.force-new-flo
   if(busy)return;busy=true;
   var grid=document.getElementById("topFloodNine");
   if(!grid){busy=false;return}
+  var ready=Array.from(grid.children);
+  if(ready.length===specs.length&&ready.every(function(card,i){
+   var content=card.querySelector(":scope > .final-card-content");
+   var value=card.querySelector("#"+specs[i][0]);
+   return card.classList.contains("final-flood-card")&&card.getAttribute("data-value-id")===specs[i][0]&&
+    content&&content.querySelector(".final-card-title")&&value&&content.contains(value)&&content.querySelector(".final-card-detail");
+  })){busy=false;return}
   var existing={};
   grid.querySelectorAll(".final-flood-card").forEach(function(card){existing[card.getAttribute("data-value-id")]=card});
   var fragment=document.createDocumentFragment();
