@@ -15391,7 +15391,7 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
 (function(){
  "use strict";
  var URL="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=3d24287ac6ea49cd823625ddad496e01&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=false&basemaps=true&center=101.92510244344074,14.048909798054707&scale=288895.277144";
- var FALLBACK="./flood-map-legacy.html",card=null,mode="arcgis";
+ var FALLBACK="./flood-map-legacy.html",card=null,mode="legacy";
  function setMode(next){
   mode=next;
   var frame=card&&card.querySelector("#overviewArcgisMap");
@@ -15404,9 +15404,9 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
    card=document.createElement("article");card.className="card operations-map embedded-water-map";
    card.innerHTML='<div class="overview-map-label"><b>แผนที่สถานการณ์น้ำท่วม</b><small>เลือกดูแผนที่ ArcGIS ต้นฉบับหรือแผนที่สำหรับซูมจากข้อมูล</small></div>'+
     '<iframe id="overviewArcgisMap" title="แผนที่แสดงข้อมูลน้ำท่วม" allow="local-network-access; geolocation" loading="eager"></iframe>'+
-    '<div class="flood-map-controls"><button type="button" data-map-mode="arcgis" aria-pressed="true">แผนที่ ArcGIS (ข้อมูลครบ)</button><button type="button" data-map-mode="legacy" aria-pressed="false">แผนที่สำหรับซูม</button><a href="'+URL+'" target="_blank" rel="noopener">เปิด ArcGIS เต็มหน้า</a></div>';
+    '<div class="flood-map-controls"><button type="button" data-map-mode="arcgis" aria-pressed="false">แผนที่ ArcGIS ต้นฉบับ</button><button type="button" data-map-mode="legacy" aria-pressed="true">แผนที่ข้อมูลและซูม</button><a href="'+URL+'" target="_blank" rel="noopener">เปิด ArcGIS เต็มหน้า</a></div>';
    card.querySelectorAll("[data-map-mode]").forEach(function(button){button.onclick=function(){setMode(button.getAttribute("data-map-mode"))}});
-   setMode("arcgis");
+   setMode("legacy");
   }
   if(card.parentElement!==target)target.appendChild(card);
  }
