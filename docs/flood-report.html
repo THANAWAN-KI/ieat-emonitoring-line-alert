@@ -1577,7 +1577,7 @@ document.documentElement.classList.add("flood-initializing");
     function go(id){document.querySelectorAll(".nav button,.view").forEach(e=>e.classList.remove("active"));document.querySelector(`.nav button[data-view="${id}"]`)?.classList.add("active");$(id)?.classList.add("active");if(id==="warning"&&warningView)setTimeout(()=>warningView.resize(),100);if(id==="infographic")prepareReportExport();window.scrollTo({top:0,behavior:"smooth"})}
     document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>go(b.dataset.view));document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{go(b.dataset.go);$("editor").classList.remove("open")});
     $("openEditor")?.addEventListener("click",()=>$("editor").classList.add("open"));$("closeEditor").onclick=()=>$("editor").classList.remove("open");$("editor").onclick=e=>{if(e.target===$("editor"))$("editor").classList.remove("open")};
-    function sync(){const period=`ช่วงข้อมูล ${thaiDate(value("startIn"))} ถึง ${thaiDate(value("endIn"))}`;document.querySelectorAll(".outEstate").forEach(e=>e.textContent=value("estateIn"));document.querySelectorAll(".outPeriod").forEach(e=>e.textContent=period);const map={outEstateCount:"estateCountIn",outFactory:"factoryIn",outCritical:"criticalIn",outCritical2:"criticalIn",outRouteCount:"routeCountIn",outRoute2:"routeCountIn",outRain:"rainIn",outRainWarning:"rainIn",outRoadWarning:"roadIn",outTrend:"trendIn",outNext:"nextIn",outVerify1:"verifyIn",outSummary:"summaryIn",outAction:"actionIn",infoEstate:"estateCountIn",infoFactory:"factoryIn",infoCritical:"criticalIn",infoRoute:"routeCountIn",infoLevel:"levelIn",infoSummary:"summaryIn",infoRain:"rainIn",infoTrend:"trendIn",infoRoad:"roadIn",infoAction:"actionIn",infoVerify:"verifyIn"};Object.entries(map).forEach(([o,i])=>{if($(o))$(o).textContent=value(i)});$("outLevel").textContent=value("levelIn");const num=id=>parseFloat((value(id).match(/[\d.]+/)||[0])[0]);$("rainBar").style.width=Math.min(100,num("rainIn")/2)+"%";$("criticalBar").style.width=Math.min(100,num("criticalIn")*16)+"%";$("routeBar").style.width=Math.min(100,num("routeCountIn")*18)+"%";$("generatedAt").textContent="จัดทำ "+new Date().toLocaleString("th-TH")}
+    function sync(){const period=`ช่วงข้อมูล ${thaiDate(value("startIn"))} ถึง ${thaiDate(value("endIn"))}`;document.querySelectorAll(".outEstate").forEach(e=>e.textContent=value("estateIn"));document.querySelectorAll(".outPeriod").forEach(e=>e.textContent=period);const map={outEstateCount:"estateCountIn",outFactory:"factoryIn",outCritical:"criticalIn",outCritical2:"criticalIn",outRouteCount:"routeCountIn",outRoute2:"routeCountIn",outRain:"rainIn",outRainWarning:"rainIn",outRoadWarning:"roadIn",outTrend:"trendIn",outNext:"nextIn",outVerify1:"verifyIn",outSummary:"summaryIn",outAction:"actionIn",infoEstate:"estateCountIn",infoFactory:"factoryIn",infoCritical:"criticalIn",infoRoute:"routeCountIn",infoLevel:"levelIn",infoSummary:"summaryIn",infoRain:"rainIn",infoTrend:"trendIn",infoRoad:"roadIn",infoAction:"actionIn",infoVerify:"verifyIn"};Object.entries(map).forEach(([o,i])=>{if($(o))$(o).textContent=value(i)});$("outLevel").textContent=value("levelIn");const num=id=>parseFloat((value(id).match(/[\d.]+/)||[0])[0]);if($("rainBar"))$("rainBar").style.width=Math.min(100,num("rainIn")/2)+"%";if($("criticalBar"))$("criticalBar").style.width=Math.min(100,num("criticalIn")*16)+"%";if($("routeBar"))$("routeBar").style.width=Math.min(100,num("routeCountIn")*18)+"%";if($("generatedAt"))$("generatedAt").textContent="จัดทำ "+new Date().toLocaleString("th-TH")}
     $("applyData").onclick=()=>{sync();$("editor").classList.remove("open")};
     window.zoomRiskMap=function(lat,lon,label){const frame=document.querySelector(".thaiwater-risk-map"),latitude=Number(lat),longitude=Number(lon);if(!frame||!Number.isFinite(latitude)||!Number.isFinite(longitude))return;const url=new URL(frame.src,document.baseURI);url.searchParams.set("center",longitude+","+latitude);url.searchParams.set("scale","75000");url.searchParams.set("_zoom",Date.now());frame.src=url.toString();frame.closest(".embedded-water-map")?.scrollIntoView({behavior:"smooth",block:"center"});const mapLabel=document.querySelector(".embedded-water-map .overview-map-label small");if(mapLabel&&label)mapLabel.textContent="กำลังแสดงตำแหน่ง: "+label};
     document.addEventListener("click",event=>{const target=event.target.closest("[data-map-lat][data-map-lon]");if(target)window.zoomRiskMap(target.dataset.mapLat,target.dataset.mapLon,target.dataset.mapLabel||target.textContent.trim())});
@@ -1796,22 +1796,21 @@ document.documentElement.classList.add("flood-initializing");
  function textOf(id){const node=document.getElementById(id);return node&&node.textContent.trim()?node.textContent.trim():"–";}
  function numericValue(value){const match=String(value||"").replace(/,/g,"").match(/-?\d+(?:\.\d+)?/);return match?Number(match[0]):0;}
  function syncDailyWaterReport(){
-  const rain=textOf("outRain"),critical=textOf("outCritical2"),stations=textOf("outRoute2"),trend=textOf("outTrend");
-  document.getElementById("dailyRain").textContent=rain;
-  const legacyCritical=document.getElementById("dailyCritical");
-  if(legacyCritical)legacyCritical.textContent=critical;
-  document.getElementById("dailyVerified").textContent=textOf("outVerify1");
-  document.getElementById("dailyNext").textContent=textOf("outNext");
-  if(trend!=="–")document.getElementById("dailyTrend").textContent=trend;
-  const statusCard=document.querySelector(".daily-water-item.status"),status=document.getElementById("dailyStatus");
-  statusCard.classList.remove("watch","critical");
-  if(numericValue(critical)>0){status.textContent="เฝ้าระวังระดับน้ำ";statusCard.classList.add("critical");}
-  else if(numericValue(rain)>=90){status.textContent="เฝ้าระวังฝนหนัก";statusCard.classList.add("watch");}
-  else if(rain==="–"&&critical==="–"){status.textContent="รอข้อมูลล่าสุด";}
-  else{status.textContent="สถานการณ์ปกติ";}
+  const rain=textOf("outRain"),critical=textOf("outCritical2"),trend=textOf("outTrend");
+  function assign(id,value){const node=document.getElementById(id);if(node&&node.textContent!==value)node.textContent=value}
+  assign("dailyRain",rain);assign("dailyCritical",critical);
+  assign("dailyVerified",textOf("outVerify1"));assign("dailyNext",textOf("outNext"));
+  if(trend!=="–")assign("dailyTrend",trend);
+  const status=document.getElementById("dailyStatus");
+  const statusCard=status&&status.closest(".final-flood-card,.daily-water-item");
+  if(statusCard)statusCard.classList.remove("watch","critical");
+  if(numericValue(critical)>0){assign("dailyStatus","เฝ้าระวังระดับน้ำ");if(statusCard)statusCard.classList.add("critical")}
+  else if(numericValue(rain)>=90){assign("dailyStatus","เฝ้าระวังฝนหนัก");if(statusCard)statusCard.classList.add("watch")}
+  else if(rain==="–"&&critical==="–")assign("dailyStatus","รอข้อมูลล่าสุด");
+  else assign("dailyStatus","สถานการณ์ปกติ");
  }
  function initDailyWaterReport(){
-  const now=new Date();document.getElementById("dailyReportDate").textContent="ข้อมูลวันที่ "+now.toLocaleDateString("th-TH",{day:"numeric",month:"short",year:"numeric"});
+  const now=new Date();const date=document.getElementById("dailyReportDate");if(date)date.textContent="ข้อมูลวันที่ "+now.toLocaleDateString("th-TH",{day:"numeric",month:"short",year:"numeric"});
   ["outRain","outCritical2","outRoute2","outVerify1","outNext","outTrend"].forEach(function(id){const node=document.getElementById(id);if(node)new MutationObserver(syncDailyWaterReport).observe(node,{childList:true,subtree:true,characterData:true});});
   syncDailyWaterReport();setTimeout(syncDailyWaterReport,1500);setTimeout(syncDailyWaterReport,5000);
  }
@@ -12727,48 +12726,7 @@ html body main.container #warning #overviewFirstPageTables>.rid-panel{
  }
 }
 </style>
-<script id="flood-report-pair-estate-water-tables-20260917-v21-script">
-(function(){
- "use strict";
- var moving=false;
- function arrange(){
-  if(moving)return;moving=true;
-  var warning=document.getElementById("warning");
-  var estate=warning&&warning.querySelector(".estate-watch-table");
-  var station=warning&&warning.querySelector(".station-watch-table");
-  var ridBody=document.getElementById("ridStationRows");
-  var rid=ridBody&&ridBody.closest(".rid-panel");
-  if(!warning||!estate||!station){moving=false;return}
-  var pair=document.getElementById("estateWaterTablePair");
-  if(!pair){
-   pair=document.createElement("section");pair.id="estateWaterTablePair";
-   pair.setAttribute("aria-label","ตารางนิคมอุตสาหกรรมและสถานการณ์น้ำเฝ้าระวัง");
-   estate.parentNode.insertBefore(pair,estate);
-  }
-  if(estate.parentNode!==pair)pair.appendChild(estate);
-  if(station.parentNode!==pair)pair.appendChild(station);
-  if(pair.firstElementChild!==estate)pair.insertBefore(estate,pair.firstElementChild);
-  if(estate.nextElementSibling!==station)pair.insertBefore(station,estate.nextElementSibling);
-  var ridHost=document.getElementById("overviewFirstPageTables");
-  if(rid){
-   if(!ridHost){
-    ridHost=document.createElement("section");ridHost.id="overviewFirstPageTables";
-    pair.insertAdjacentElement("afterend",ridHost);
-   }
-   if(rid.parentNode!==ridHost)ridHost.appendChild(rid);
-  }
-  moving=false;
- }
- function start(){
-  arrange();
-  var root=document.getElementById("warning");if(!root){setTimeout(start,100);return}
-  var observer=new MutationObserver(function(){clearTimeout(observer.t);observer.t=setTimeout(arrange,25)});
-  observer.observe(root,{childList:true,subtree:true});
-  [100,300,700,1400,2500,4500,7000].forEach(function(ms){setTimeout(arrange,ms)});
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
-})();
-</script>
+
 
 
 
@@ -12898,46 +12856,7 @@ html body main.container #warning>#overviewFirstPageTables .rid-water-table thea
  }
 }
 </style>
-<script id="flood-report-full-width-table-sequence-20260917-v23-script">
-(function(){
- "use strict";
- var moving=false;
- function arrangeFullWidth(){
-  if(moving)return;moving=true;
-  var warning=document.getElementById("warning");
-  var pair=document.getElementById("estateWaterTablePair");
-  var ridHost=document.getElementById("overviewFirstPageTables");
-  var ridBody=document.getElementById("ridStationRows");
-  var rid=ridBody&&ridBody.closest(".rid-panel");
-  if(!warning||!pair){moving=false;return}
-  var anchor=document.getElementById("waterMonitoringStack")||
-             document.getElementById("overviewForecastRisk")||
-             warning.querySelector(".operations-dashboard");
-  if(pair.parentNode!==warning){
-   if(anchor&&anchor.parentNode===warning)anchor.insertAdjacentElement("afterend",pair);
-   else warning.appendChild(pair);
-  }
-  if(!ridHost&&rid){
-   ridHost=document.createElement("section");ridHost.id="overviewFirstPageTables";
-  }
-  if(ridHost){
-   if(rid&&rid.parentNode!==ridHost)ridHost.appendChild(rid);
-   if(ridHost.parentNode!==warning||pair.nextElementSibling!==ridHost){
-    pair.insertAdjacentElement("afterend",ridHost);
-   }
-  }
-  moving=false;
- }
- function start(){
-  arrangeFullWidth();
-  var warning=document.getElementById("warning");if(!warning){setTimeout(start,100);return}
-  var observer=new MutationObserver(function(){clearTimeout(observer.t);observer.t=setTimeout(arrangeFullWidth,30)});
-  observer.observe(warning,{childList:true,subtree:true});
-  [100,350,800,1600,3000,5000,8000].forEach(function(ms){setTimeout(arrangeFullWidth,ms)});
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
-})();
-</script>
+
 
 
 
