@@ -151,8 +151,8 @@ html body #hubInformationHeader .weather-pop{top:54px!important}
       <div class="gis-chart-body"><div class="gis-land-ring"><b>0 ไร่</b></div><div class="gis-chart-legend"><span><i></i>พื้นที่อุตสาหกรรม <b>0</b></span><span><i></i>สาธารณูปโภค <b>0</b></span><span><i></i>พื้นที่สีเขียว <b>0</b></span><span><i></i>พื้นที่อื่น ๆ <b>0</b></span></div></div>
      </article>
      <article class="gis-data-panel">
-      <header><div><h2>ข้อมูลโรงงานและพื้นที่ว่างเปล่า</h2><p>ขออนุญาตและไม่ได้ขออนุญาต</p></div><span>ข้อมูลล่าสุด</span></header>
-      <div class="gis-chart-body"><div class="gis-permit-ring"><b>0</b></div><div class="gis-chart-legend permit"><span><i></i>ขออนุญาต <b>0</b></span><span><i></i>ไม่ได้ขออนุญาต <b>0</b></span></div></div>
+      <header><div><h2>ข้อมูลโรงงานและพื้นที่ว่างเปล่า</h2><p>จำนวนโรงงานและข้อมูลพื้นที่ว่างในนิคมฯ</p></div><span>ข้อมูลตามพื้นที่ที่เลือก</span></header>
+      <div class="gis-factory-vacant-grid"><div><span>โรงงานทั้งหมด</span><strong class="gis-factory-count">0</strong><small>โรงงาน</small></div><div><span>พื้นที่ว่างเปล่า</span><strong class="gis-vacant-area">–</strong><small>ยังไม่มีข้อมูลพื้นที่ว่าง (ไร่)</small></div></div>
      </article>
     </div>
 
@@ -505,6 +505,12 @@ body.gis-mode .gis-map-layers span{font-size:12px!important}
 @media(max-width:760px){.gis-data-dashboard{padding:10px}.gis-data-kpis{grid-template-columns:1fr 1fr}.gis-data-layout,.gis-data-two{display:flex;flex-direction:column}.gis-utility-grid{grid-template-columns:1fr 1fr}.gis-chemical-grid{grid-template-columns:1fr 1fr}.gis-main-map{height:600px;min-height:600px}.gis-map-layers{grid-template-columns:1fr}.gis-chart-body{flex-direction:column}}
 @media(max-width:480px){.gis-data-kpis,.gis-utility-grid,.gis-chemical-grid{grid-template-columns:1fr}}
 </style>
+<style id="gis-factory-vacant-card-20260923">
+.gis-factory-vacant-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:17px;min-height:220px;align-items:stretch}
+.gis-factory-vacant-grid>div{display:flex;flex-direction:column;justify-content:center;gap:8px;min-width:0;padding:18px;border-radius:12px;background:#f8fafb;border:1px solid #e6eaee}
+.gis-factory-vacant-grid span{font-size:13px;color:#526474}.gis-factory-vacant-grid strong{font-size:27px;color:#286abd}.gis-factory-vacant-grid small{font-size:11px;color:#68727e}
+@media(max-width:480px){.gis-factory-vacant-grid{grid-template-columns:1fr}}
+</style>
 <script id="information-gis-data-dashboard-v1-script">
 (function(){
  const mapBase="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=9c25f3f77ba5481cb481b402177884c2&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=true&basemaps=true";
@@ -522,7 +528,7 @@ body.gis-mode .gis-map-layers span{font-size:12px!important}
   dashboard.querySelectorAll(".gis-risk-details b").forEach(function(el,i){el.textContent=number(risk[i]||0)});
   const industry=[scaled(1380,12),scaled(1120,10),scaled(890,8),scaled(760,7),scaled(1090,10)],industryMax=Math.max.apply(null,industry);dashboard.querySelectorAll(".gis-horizontal-bars span").forEach(function(row,i){const value=industry[i]||0,strong=row.querySelector("strong"),bar=row.querySelector("em");if(strong)strong.textContent=number(value);if(bar)bar.style.width=Math.max(5,value/industryMax*100)+"%"});
   const totalArea=kpi[5],land=[Math.round(totalArea*.54),Math.round(totalArea*.18),Math.round(totalArea*.12),0];land[3]=totalArea-land[0]-land[1]-land[2];const landRing=dashboard.querySelector(".gis-land-ring");if(landRing){const b=landRing.querySelector("b");if(b)b.textContent=number(totalArea)+" ไร่";landRing.style.background="radial-gradient(circle,#fff 0 52%,transparent 53%),conic-gradient(#3478cf 0 54%,#e4ab28 54% 72%,#50a868 72% 84%,#aeb5bd 84%)"}dashboard.querySelectorAll(".gis-chart-legend:not(.permit) b").forEach(function(el,i){el.textContent=number(land[i]||0)});
-  const permit=[Math.round(kpi[2]*.92),0];permit[1]=kpi[2]-permit[0];const permitRing=dashboard.querySelector(".gis-permit-ring");if(permitRing){const b=permitRing.querySelector("b");if(b)b.textContent=number(kpi[2]);permitRing.style.background="radial-gradient(circle,#fff 0 52%,transparent 53%),conic-gradient(#53aa68 0 92%,#d64d5b 92%)"}dashboard.querySelectorAll(".gis-chart-legend.permit b").forEach(function(el,i){el.textContent=number(permit[i]||0)});
+  const factoryCount=dashboard.querySelector(".gis-factory-count");if(factoryCount)factoryCount.textContent=number(kpi[2]);
   const chemicals=[scaled(860,8),scaled(315,3),scaled(204,2),scaled(742,7)];dashboard.querySelectorAll(".gis-chemical-grid strong").forEach(function(el,i){el.textContent=number(chemicals[i]||0)});
   const landNames=["พื้นที่อุตสาหกรรม","สาธารณูปโภค","พื้นที่สีเขียว","พื้นที่อื่น ๆ"],landBody=dashboard.querySelector(".gis-land-table tbody");if(landBody)landBody.innerHTML=landNames.map(function(label,i){const plots=Math.max(1,Math.round((land[i]/Math.max(totalArea,1))*kpi[2]));return'<tr><td>'+label+'</td><td>'+(i===3?"อยู่ระหว่างตรวจสอบ":"อนุญาตแล้ว")+'</td><td>'+number(plots)+'</td><td>'+number(land[i])+'</td></tr>'}).join("");
   dashboard.querySelectorAll(".gis-data-panel header p").forEach(function(el){if(!el.dataset.base)el.dataset.base=el.textContent.split(" • ")[0];el.textContent=el.dataset.base+" • "+name});
