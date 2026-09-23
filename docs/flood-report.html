@@ -8529,7 +8529,6 @@ a.rid-basin-fullscreen {
   async function readyMap(){
     if(mapReadyPromise) return mapReadyPromise;
     mapReadyPromise=(async function(){
-      await customElements.whenDefined("arcgis-map");
       var map=mapElement();
       if(!map) throw new Error("Map element not found");
       if(typeof map.viewOnReady==="function") await map.viewOnReady();
@@ -8621,7 +8620,7 @@ a.rid-basin-fullscreen {
 var id="3d24287ac6ea49cd823625ddad496e01";
 var base="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap="+id+"&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=true&basemaps=true";
 function frame(){return document.getElementById("overviewArcgisMap")}
-function extent(box){var m=frame();if(!m)return;m.src=base+"&extent="+box.join(",");setTimeout(function(){m.scrollIntoView({behavior:"smooth",block:"center"})},100)}
+function extent(box){var m=frame();if(!m)return;if(m.view&&typeof m.view.goTo==="function")m.view.goTo({extent:{xmin:box[0],ymin:box[1],xmax:box[2],ymax:box[3],spatialReference:{wkid:4326}}},{duration:900}).catch(function(){});else m.src=base+"&extent="+box.join(",");setTimeout(function(){m.scrollIntoView({behavior:"smooth",block:"center"})},100)}
 function thailand(){extent([97.30,5.50,105.70,20.60])}
 async function province(name){
 var q=(name||"").replace(/^\s*\d+\.\s*/,"").replace(/^จ\./,"จังหวัด").trim();
