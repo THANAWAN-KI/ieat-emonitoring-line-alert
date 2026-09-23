@@ -9849,40 +9849,7 @@ html body main.container #warning [data-reference-card="true"] .source-link{
   }
 }
 </style>
-<script id="flood-nine-cards-reference-layout-20260911-v4-script">
-(function(){
-  let applying=false;
-  function selectedCards(){
-    const daily=Array.from(document.querySelectorAll("#warning .daily-water-grid>.daily-water-item"));
-    const main=Array.from(document.querySelectorAll("#warning .flood-final-cards>.kpi,#warning .flood-final-cards>.national-kpi"));
-    return daily.concat(main).slice(0,9);
-  }
-  function prepare(){
-    if(applying)return; applying=true;
-    selectedCards().forEach(function(card){
-      card.setAttribute("data-reference-card","true");
-      let copy=card.querySelector(":scope>.metric-card-copy");
-      if(!copy){applying=false;return;}
-      Array.from(copy.children).forEach(function(el){
-        el.classList.remove("reference-card-title","reference-card-value","reference-card-unit");
-      });
-      const value=copy.querySelector(":scope>strong");
-      let title=copy.querySelector(":scope>h2,:scope>small");
-      const spans=Array.from(copy.querySelectorAll(":scope>span"));
-      if(!title&&spans.length)title=spans.shift();
-      const unit=spans.length?spans[spans.length-1]:null;
-      if(title)title.classList.add("reference-card-title");
-      if(value)value.classList.add("reference-card-value");
-      if(unit&&unit!==title)unit.classList.add("reference-card-unit");
-    });
-    applying=false;
-  }
-  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",prepare,{once:true});else prepare();
-  [100,500,1200,2500,5000,9000].forEach(function(ms){setTimeout(prepare,ms);});
-  const root=document.getElementById("warning");
-  if(root)new MutationObserver(function(){requestAnimationFrame(prepare);}).observe(root,{childList:true,subtree:true});
-})();
-</script>
+
 
 
 <style id="flood-highlight-colors-20260911-v5">
