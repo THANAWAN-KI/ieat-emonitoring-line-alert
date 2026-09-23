@@ -13784,13 +13784,13 @@ html body main.container #warning .dashboard-chart-mode>.rid-table-wrap{
  }
  function renderEstate(){
   var body=document.getElementById("estateRanks"),panel=body&&body.closest(".estate-watch-table"),target=viz(panel,"estateRankViz");if(!target)return;
-  var rows=rowsOf("#estateRanks").map(function(row){var pin=row.cells[5]?.querySelector("[data-map-lat][data-map-lon]"),lat=pin?.dataset.mapLat,lon=pin?.dataset.mapLon;return{name:row.cells[1]?.textContent.trim()||"–",count:number(row.cells[2]?.textContent),lat:lat,lon:lon}})
+  var rows=rowsOf("#estateRanks").map(function(row){var pin=row.cells[5]?.querySelector("[data-map-lat][data-map-lon]"),lat=pin?.dataset.mapLat,lon=pin?.dataset.mapLon;return{name:row.cells[1]?.textContent.trim()||"–",count:number(row.cells[2]?.textContent),distance:row.cells[3]?.textContent.trim()||"–",lat:lat,lon:lon}})
    .sort(function(a,b){return b.count-a.count}).slice(0,5);
   var sig=JSON.stringify(rows);if(target.dataset.sig===sig)return;target.dataset.sig=sig;
   target.innerHTML=rows.length?'<div class="flood-estate-ranking">'+rows.map(function(x,i){
    var lat=Number(x.lat),lon=Number(x.lon),hasCoords=x.lat!=null&&x.lon!=null&&x.lat!==""&&x.lon!==""&&Number.isFinite(lat)&&Number.isFinite(lon)&&lat!==0&&lon!==0&&Math.abs(lat)<=90&&Math.abs(lon)<=180;
    var open=hasCoords?'<button type="button" class="flood-estate-rank flood-map-zoom-row" data-map-lat="'+lat+'" data-map-lon="'+lon+'" data-map-label="'+esc(x.name)+'" aria-label="ซูมแผนที่ไปที่ '+esc(x.name)+'">':'<div class="flood-estate-rank">';
-   return open+'<span class="flood-estate-name" title="'+esc(x.name)+'">'+(i+1)+'. '+esc(x.name)+'</span><strong>'+x.count.toLocaleString("th-TH")+'</strong>'+(hasCoords?'</button>':'</div>');
+   return open+'<span class="flood-estate-name" title="'+esc(x.name)+'">'+(i+1)+'. '+esc(x.name)+'</span><strong title="ระยะทางถึงสถานีผิดปกติใกล้ที่สุด">'+esc(x.distance)+'</strong>'+(hasCoords?'</button>':'</div>');
   }).join("")+'</div>':'<div class="dashboard-viz-empty">กำลังประมวลผลข้อมูลล่าสุด…</div>';
  }
  function state(text){text=String(text||"");return /ล้น|วิกฤต|สูง|เพิ่ม/.test(text)?"critical":/ปกติ|ลด/.test(text)?"normal":/เฝ้าระวัง|เตือน|คงที่|ทรงตัว/.test(text)?"warning":"unknown"}
