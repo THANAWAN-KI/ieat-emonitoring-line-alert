@@ -58,7 +58,7 @@
        graphic.setInfoTemplate(new InfoTemplate(escapeHtml(station),"<b>"+source.valueLabel+":</b> "+escapeHtml(value)+" "+(source.field==="rain_24h"?"มม.":"%")+"<br><b>จังหวัด:</b> "+escapeHtml(properties["จังหวัด"]||properties.province)));
        layer.add(graphic);count++;
       });
-      title.textContent=source.name+" ("+count.toLocaleString("th-TH")+" จุด)";
+      title.textContent=source.name+" ("+count.toLocaleString("th-TH")+" จุด)";document.body.setAttribute("data-"+layer.id,JSON.stringify({count:layer.graphics.length,geometry:layer.graphics[0]&&layer.graphics[0].geometry.toJson(),mapSR:map.spatialReference&&map.spatialReference.toJson(),extent:map.extent&&map.extent.toJson(),visible:layer.visible}));
      }).catch(function(error){title.textContent=source.name+" (ข้อมูลยังไม่พร้อม)";console.warn("GeoJSON "+source.name,error)});
     });
    });
