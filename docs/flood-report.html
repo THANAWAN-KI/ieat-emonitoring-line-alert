@@ -13063,7 +13063,7 @@ html body main.container #infographic #reportPage5 .export-rid-trend.steady{back
    frameBox.replaceChildren(exportMap);
   }
   var source=document.getElementById("overviewArcgisMap");
-  var src=source&&source.src||MAP_FALLBACK;
+  var src=frameBox.dataset.reportFocusSrc||(source&&source.src)||MAP_FALLBACK;
   if(getComputedStyle(document.getElementById("infographic")).display==="none"){exportMap.dataset.src=src;exportMap.removeAttribute("src")}
   else if(exportMap.src!==src){exportMap.src=src;delete exportMap.dataset.src}
  }
@@ -15478,6 +15478,45 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",setup,{once:true});else setup();
  var grid=document.getElementById("topFloodNine");if(grid)new MutationObserver(function(){requestAnimationFrame(setup)}).observe(grid,{childList:true});
  [300,1000,3000].forEach(function(ms){setTimeout(setup,ms)});
+})();
+</script>
+
+<style id="report-estate-map-link-style">
+#infographic #reportPage2 .report-estate-map-link{
+ appearance:none;background:none;border:0;padding:0;margin:0;
+ color:inherit;font:inherit;font-weight:600;text-align:left;cursor:pointer;
+ text-decoration:underline;text-decoration-color:#007fdb;text-underline-offset:3px
+}
+#infographic #reportPage2 .report-estate-map-link:hover{color:#007fdb}
+#infographic #reportPage2 .report-estate-map-link:focus-visible{outline:2px solid #007fdb;outline-offset:3px}
+</style>
+<script id="report-estate-map-link-script">
+(function(){
+ "use strict";
+ document.addEventListener("click",function(event){
+  var button=event.target.closest("#infographic #reportPage2 .report-estate-map-link");
+  if(!button)return;
+  var lat=Number(button.dataset.reportLat),lon=Number(button.dataset.reportLon);
+  if(!Number.isFinite(lat)||!Number.isFinite(lon)||lat===0||lon===0)return;
+  var frameBox=document.querySelector("#infographic #reportCanvas .sheet-map-frame");
+  var sheet=document.getElementById("reportCanvas");
+  if(!frameBox||!sheet)return;
+  var source=document.getElementById("overviewArcgisMap");
+  var map=document.getElementById("exportOverviewFloodMap");
+  var base=(map&&map.getAttribute("src"))||(source&&source.src)||
+   "https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=3d24287ac6ea49cd823625ddad496e01&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=false&basemaps=true";
+  var url=new URL(base,document.baseURI);
+  url.searchParams.set("center",lon+","+lat);
+  url.searchParams.set("scale","75000");
+  frameBox.dataset.reportFocusSrc=url.toString();
+  if(!map){
+   map=document.createElement("iframe");map.id="exportOverviewFloodMap";
+   map.title="แผนที่สถานการณ์น้ำท่วม";map.setAttribute("allow","fullscreen; geolocation");
+   frameBox.replaceChildren(map);
+  }
+  map.src=url.toString();
+  sheet.scrollIntoView({behavior:"smooth",block:"start"});
+ });
 })();
 </script>
 </body>
