@@ -1452,7 +1452,7 @@ document.documentElement.classList.add("flood-initializing");
         </div>
         <article class="card operations-map embedded-water-map">
           <div class="overview-map-label"><b>แผนที่สถานการณ์น้ำท่วม</b><small>เลื่อนแผนที่หรือซูมเข้า–ออกเพื่อดูรายละเอียด</small></div>
-          <iframe id="overviewArcgisMap" title="แผนที่สถานการณ์น้ำ" loading="eager" style="display:block;width:100%;height:640px;border:0" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=3d24287ac6ea49cd823625ddad496e01"></iframe>
+          <iframe id="overviewArcgisMap" class="thaiwater-risk-map" title="แผนที่สถานการณ์น้ำ" loading="eager" style="display:block;width:100%;height:640px;border:0" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&amp;webmap=3d24287ac6ea49cd823625ddad496e01&amp;theme=light&amp;bookmarks=true&amp;legend=true&amp;information=true&amp;share=true&amp;scroll=false&amp;basemaps=true&amp;center=101.60218426570209,13.611210763141127&amp;scale=4622324.434309"></iframe>
         </article>
       </section>
 
@@ -15379,80 +15379,6 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
  outline:2px solid #007fdb!important;outline-offset:2px!important
 }
 </style>
-<style id="flood-native-webmap-20260923">
-#warning #topFloodMap .operations-map{position:relative!important;min-height:640px}
-#warning #topFloodMap #overviewArcgisMap{display:block!important;width:100%!important;height:640px!important;min-height:640px!important;border:0!important;position:relative!important;z-index:2!important}
-#warning #topFloodMap #floodSdkMap{position:absolute;inset:0;width:100%;height:100%;min-height:640px;z-index:1;background:#eef3f7}
-#warning #topFloodMap #overviewArcgisMap.flood-sdk-ready{opacity:0!important;pointer-events:none!important}
-#warning #topFloodMap #floodSdkMap.flood-sdk-ready{z-index:3!important}
-#warning #topFloodMap .overview-map-label{z-index:4}
-</style>
-<script id="flood-native-webmap-20260923-script">
-(function(){
- "use strict";
- function start(){
-  var frame=document.querySelector("#warning #topFloodMap iframe#overviewArcgisMap");
-  if(!frame)return;
-  frame.loading="eager";
-  var box=frame.closest(".operations-map");
-  if(!box)return;
-  var host=document.createElement("div");host.id="floodSdkMap";
-  box.appendChild(host);
-  var view=null,ready=false,pending=null;
-  function useSdk(){
-   if(ready)return;
-   ready=true;
-   frame.classList.add("flood-sdk-ready");
-   frame.style.pointerEvents="none";
-   
-   host.classList.add("flood-sdk-ready");
-   frame.view=view;
-  }
-  window.zoomRiskMap=function(lat,lon,label){
-   var latitude=Number(lat),longitude=Number(lon);
-   if(!Number.isFinite(latitude)||!Number.isFinite(longitude)||Math.abs(latitude)>90||Math.abs(longitude)>180)return;
-   var mapLabel=box.querySelector(".overview-map-label small");
-   if(mapLabel&&label)mapLabel.textContent="กำลังแสดงตำแหน่ง: "+label;
-   box.scrollIntoView({behavior:"smooth",block:"center"});
-   if(ready&&view){view.goTo({center:[longitude,latitude],scale:75000},{duration:450}).catch(function(e){if(e.name!=="AbortError")console.error(e)})}
-   else{
-    pending=[longitude,latitude];
-    try{var url=new URL(frame.src);url.searchParams.set("center",longitude+","+latitude);url.searchParams.set("scale","75000");frame.src=url.toString()}catch(e){}
-   }
-  };
-  function initialize(){
-   window.require(["esri/WebMap","esri/views/MapView","esri/widgets/Home","esri/widgets/Search","esri/widgets/LayerList","esri/widgets/Legend","esri/widgets/Expand"],
-    function(WebMap,MapView,Home,Search,LayerList,Legend,Expand){
-     try{
-      var map=new WebMap({portalItem:{id:"3d24287ac6ea49cd823625ddad496e01"}});
-      view=new MapView({container:host,map:map,center:[100.38863619797984,14.34381658929649],scale:577790.554289});
-      view.when(function(){
-       view.ui.add(new Home({view:view}),"top-left");
-       view.ui.add(new Search({view:view}),"top-right");
-       view.ui.add(new Expand({view:view,content:new LayerList({view:view}),group:"flood-map-tools",expandTooltip:"ชั้นข้อมูล"}),"top-right");
-       view.ui.add(new Expand({view:view,content:new Legend({view:view}),group:"flood-map-tools",expandTooltip:"คำอธิบายสัญลักษณ์"}),"top-right");
-       map.when(function(){
-        var first=map.layers&&map.layers.at(0);
-        if(!first){host.remove();return}
-        view.whenLayerView(first).then(function(layerView){
-         layerView.when(function(){useSdk()}).catch(function(e){console.error("ชั้นข้อมูล:",e);host.remove()});
-        }).catch(function(e){console.error("ชั้นข้อมูล:",e);host.remove()});
-       }).catch(function(e){console.error("Web Map:",e);host.remove()});
-       if(pending){var point=pending;pending=null;view.goTo({center:point,scale:75000})}
-      }).catch(function(e){console.error("แผนที่น้ำท่วม:",e);host.remove()});
-     }catch(e){console.error("แผนที่น้ำท่วม:",e);host.remove()}
-    },function(e){console.error("ArcGIS modules:",e);host.remove()});
-  }
-  if(window.require&&window.require.toUrl)initialize();
-  else{
-   var script=document.createElement("script");script.src="https://js.arcgis.com/4.30/";
-   script.onload=initialize;
-   script.onerror=function(){host.remove()};
-   document.head.appendChild(script);
-  }
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
-})();
-</script>
+
 </body>
 </html>
