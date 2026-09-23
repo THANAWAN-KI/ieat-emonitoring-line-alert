@@ -17,7 +17,8 @@
    var layers=utils.getLayerList(result);
    var list=new LayerList({map:map,layers:layers},"layersPanel");list.startup();
    var legend=new Legend({map:map,layerInfos:utils.getLegendLayers(result)},"legendPanel");legend.startup();
-   require(["esri/layers/GraphicsLayer","esri/graphic","esri/geometry/Point","esri/symbols/SimpleMarkerSymbol","esri/symbols/SimpleLineSymbol","esri/Color","esri/InfoTemplate","esri/geometry/webMercatorUtils"],function(GraphicsLayer,Graphic,Point,Marker,Line,Color,InfoTemplate,webMercatorUtils){
+   require(["esri/layers/GraphicsLayer","esri/graphic","esri/geometry/Point","esri/symbols/SimpleMarkerSymbol","esri/symbols/SimpleLineSymbol","esri/Color","esri/InfoTemplate","esri/geometry/webMercatorUtils","esri/geometry/Extent"],function(GraphicsLayer,Graphic,Point,Marker,Line,Color,InfoTemplate,webMercatorUtils,Extent){
+    map.setExtent(webMercatorUtils.geographicToWebMercator(new Extent(97,5,106,21,{wkid:4326})),true);
     var sources=[
      {name:"สถานีวัดระดับน้ำแบบเรียลไทม์รายชั่วโมง (กรมชลประทาน)",url:"https://nawakonnakhonchai-wq.github.io/rid-geojson-bot/rid_realtime.geojson",field:"ระดับน้ำเทียบตลิ่ง (%)",steps:[30,70,100,Infinity],colors:[[0,145,205],[89,140,20],[247,144,9],[240,10,54]],labels:["0–30%","มากกว่า 30–70%","มากกว่า 70–100%","มากกว่า 100%"],valueLabel:"ระดับน้ำเทียบตลิ่ง"},
      {name:"ข้อมูลปริมาณน้ำฝนสะสม 24 ชม.",url:"https://nawakonnakhonchai-wq.github.io/Rain_24H/rainfall_24h.geojson",field:"rain_24h",steps:[10,20,35,50,70,90,Infinity],colors:[[153,211,240],[153,240,231],[33,173,2],[235,231,0],[240,155,77],[207,107,8],[179,7,7]],labels:["0–10 มม.","มากกว่า 10–20 มม.","มากกว่า 20–35 มม.","มากกว่า 35–50 มม.","มากกว่า 50–70 มม.","มากกว่า 70–90 มม.","มากกว่า 90 มม."],valueLabel:"ฝนสะสม 24 ชั่วโมง"}
