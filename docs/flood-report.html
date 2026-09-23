@@ -1452,7 +1452,7 @@ document.documentElement.classList.add("flood-initializing");
         </div>
         <article class="card operations-map embedded-water-map">
           <div class="overview-map-label"><b>แผนที่สถานการณ์น้ำท่วม</b><small>เลื่อนแผนที่หรือซูมเข้า–ออกเพื่อดูรายละเอียด</small></div>
-          <iframe id="overviewArcgisMap" title="แผนที่สถานการณ์น้ำ" loading="lazy" style="display:block;width:100%;height:640px;border:0" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&amp;webmap=3d24287ac6ea49cd823625ddad496e01&amp;theme=light&amp;bookmarks=true&amp;legend=true&amp;information=true&amp;share=true&amp;scroll=true&amp;basemaps=true&amp;center=100.38863619797984,14.34381658929649&amp;scale=577790.554289"></iframe>
+          <iframe id="overviewArcgisMap" title="แผนที่สถานการณ์น้ำ" loading="eager" style="display:block;width:100%;height:640px;border:0" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=3d24287ac6ea49cd823625ddad496e01"></iframe>
         </article>
       </section>
 
@@ -12975,49 +12975,7 @@ html body main.container #warning #topFloodMap #overviewArcgisMap{
  html body main.container #warning #topFloodMap #overviewArcgisMap{min-height:560px!important}
 }
 </style>
-<script id="flood-report-restore-top-map-20260917-v25-script">
-(function(){
- "use strict";
-  var working=false;
- function restore(){
-  if(working)return;working=true;
-  var warning=document.getElementById("warning");
-  if(!warning){working=false;return}
-  var dashboard=document.getElementById("topFloodDashboard");
-  if(!dashboard){
-   dashboard=document.createElement("section");dashboard.id="topFloodDashboard";dashboard.className="top-flood-dashboard";
-   dashboard.innerHTML='<div class="top-flood-left"><div class="top-flood-nine" id="topFloodNine"></div></div><div class="top-flood-map" id="topFloodMap"></div>';
-   warning.insertBefore(dashboard,warning.firstChild);
-  }
-  var host=document.getElementById("topFloodMap");
-  if(!host){
-   host=document.createElement("div");host.id="topFloodMap";host.className="top-flood-map";dashboard.appendChild(host);
-  }
-  var map=warning.querySelector(".operations-map");
-  if(!map){
-   map=document.createElement("article");map.className="card operations-map embedded-water-map";
-   map.innerHTML='<div class="overview-map-label"><b>แผนที่สถานการณ์น้ำท่วม</b><small>เลื่อนแผนที่หรือซูมเข้า–ออกเพื่อดูรายละเอียด</small></div>';
-  }
-  if(map.parentNode!==host)host.appendChild(map);
-  var frame=map.querySelector("#overviewArcgisMap");
-  if(!frame||frame.tagName!=="IFRAME"){
-   var embed=document.createElement("iframe");embed.id="overviewArcgisMap";
-   embed.title="แผนที่สถานการณ์น้ำท่วม";embed.loading="eager";
-   embed.src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=3d24287ac6ea49cd823625ddad496e01&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=true&basemaps=true&center=100.38863619797984,14.34381658929649&scale=577790.554289";
-   if(frame)frame.replaceWith(embed);else map.appendChild(embed);
-  }
-  working=false;
- }
- function start(){
-  restore();
-  var warning=document.getElementById("warning");if(!warning){setTimeout(start,100);return}
-  var observer=new MutationObserver(function(){clearTimeout(observer.t);observer.t=setTimeout(restore,30)});
-  observer.observe(warning,{childList:true,subtree:true});
-  [50,150,350,700,1200,2200,4000,7000,11000,15000].forEach(function(ms){setTimeout(restore,ms)});
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
-})();
-</script>
+
 
 
 
@@ -15425,6 +15383,8 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
 #warning #topFloodMap .operations-map{position:relative!important;min-height:640px}
 #warning #topFloodMap #overviewArcgisMap{display:block!important;width:100%!important;height:640px!important;min-height:640px!important;border:0!important;position:relative!important;z-index:2!important}
 #warning #topFloodMap #floodSdkMap{position:absolute;inset:0;width:100%;height:100%;min-height:640px;z-index:1;background:#eef3f7}
+#warning #topFloodMap #overviewArcgisMap.flood-sdk-ready{opacity:0!important;pointer-events:none!important}
+#warning #topFloodMap #floodSdkMap.flood-sdk-ready{z-index:3!important}
 #warning #topFloodMap .overview-map-label{z-index:4}
 </style>
 <script id="flood-native-webmap-20260923-script">
@@ -15442,10 +15402,10 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
   function useSdk(){
    if(ready)return;
    ready=true;
-   frame.style.visibility="hidden";
+   frame.classList.add("flood-sdk-ready");
    frame.style.pointerEvents="none";
-   frame.style.position="absolute";
-   host.style.zIndex="3";
+   
+   host.classList.add("flood-sdk-ready");
    frame.view=view;
   }
   window.zoomRiskMap=function(lat,lon,label){
