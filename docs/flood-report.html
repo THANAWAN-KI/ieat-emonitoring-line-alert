@@ -11451,7 +11451,7 @@ function render(rows){
  var counts={up:0,steady:0,down:0};
  rows.forEach(function(r){if(/เพิ่ม/.test(r.trend))counts.up++;else if(/ลด/.test(r.trend))counts.down++;else counts.steady++});
  var max=Math.max(1,counts.up,counts.steady,counts.down);
- if(trend)trend.innerHTML=[["up","เพิ่มขึ้น",counts.up],["steady","คงที่",counts.steady],["down","ลดลง",counts.down]].map(function(x){return'<div class="flood-trend-row '+x[0]+'"><span>'+x[1]+'</span><div class="flood-trend-track"><i style="width:'+(x[2]/max*100).toFixed(1)+'%"></i></div><strong>'+x[2].toLocaleString("th-TH")+' สถานี</strong></div>'}).join("")+'<p class="flood-chart-note">จำนวนสถานีตามแนวโน้มระดับน้ำล่าสุด</p>';
+ if(trend)trend.innerHTML='<div class="flood-trend-columns">'+[["up","เพิ่มขึ้น",counts.up],["steady","คงที่",counts.steady],["down","ลดลง",counts.down]].map(function(x){return'<div class="flood-trend-column '+x[0]+'"><strong>'+x[2].toLocaleString("th-TH")+'</strong><div class="flood-trend-column-track"><i style="height:'+(x[2]?Math.max(4,x[2]/max*100):0).toFixed(1)+'%"></i></div><span>'+x[1]+'</span></div>'}).join("")+'</div><p class="flood-chart-note">จำนวนสถานีตามแนวโน้มระดับน้ำล่าสุด</p>';
  if(body)body.innerHTML=rows.length?rows.slice(0,30).map(function(r){var stamp=r.stamp?new Date(r.stamp).toLocaleString("th-TH",{dateStyle:"short",timeStyle:"short"}):"–";return'<tr><td>'+esc(r.name)+(r.code?' <small>('+esc(r.code)+')</small>':'')+'</td><td>'+esc(r.province)+'</td><td>'+esc(r.estate.replace(/^นิคมอุตสาหกรรม/,"นิคมฯ "))+'</td><td>'+r.distance.toLocaleString("th-TH",{maximumFractionDigits:1})+' กม.</td><td class="rid-percent '+cls(r.pct)+'">'+r.pct.toLocaleString("th-TH",{maximumFractionDigits:2})+'%</td><td>'+(Number.isFinite(r.level)?r.level.toLocaleString("th-TH",{maximumFractionDigits:2})+" ม.รทก.":"–")+'</td><td>'+esc(r.trend)+'</td><td>'+esc(stamp)+'</td></tr>'}).join(""):'<tr><td colspan="8">ไม่พบสถานีในรัศมีที่กำหนด</td></tr>';
  var stamps=rows.map(function(r){return r.stamp}).filter(Boolean).sort();
  if(status)status.textContent="แสดง "+rows.length.toLocaleString("th-TH")+" สถานี"+(stamps.length?" • ข้อมูลต้นทางล่าสุด "+new Date(stamps[stamps.length-1]).toLocaleString("th-TH",{dateStyle:"medium",timeStyle:"short"}):"")+" • อัปเดตอัตโนมัติทุก 1 นาที";
@@ -15341,6 +15341,59 @@ html body main.container #warning #topFloodDashboard>.rid-chart-grid #ridLevelCh
  html body main.container #warning #topFloodDashboard>.rid-chart-grid>#dashboardVisualSummaryRow>*{
   grid-column:1!important;grid-row:auto!important
  }
+}
+</style><style id="flood-trend-vertical-legend-risks-20260923">
+html body main.container #warning #topFloodDashboard #ridTrendChart{
+ display:flex!important;flex-direction:column!important;justify-content:flex-end!important;
+ min-height:300px!important;height:auto!important;padding:20px 16px 16px!important;
+ overflow:hidden!important
+}
+html body main.container #warning #topFloodDashboard #ridTrendChart .flood-trend-columns{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:16px;align-items:end;width:100%;height:225px
+}
+html body main.container #warning #topFloodDashboard #ridTrendChart .flood-trend-column{
+ display:flex;flex-direction:column;align-items:center;justify-content:end;gap:7px;
+ min-width:0;height:100%
+}
+html body main.container #warning #topFloodDashboard #ridTrendChart .flood-trend-column strong{
+ color:#161b22;font-size:16px;line-height:1.2
+}
+html body main.container #warning #topFloodDashboard #ridTrendChart .flood-trend-column-track{
+ position:relative;width:min(100%,72px);height:160px;
+ border-radius:4px 4px 0 0;background:#f0f3f6;overflow:hidden
+}
+html body main.container #warning #topFloodDashboard #ridTrendChart .flood-trend-column-track i{
+ position:absolute;bottom:0;left:0;right:0;display:block;width:100%;
+ border-radius:4px 4px 0 0
+}
+html body main.container #warning #topFloodDashboard #ridTrendChart .flood-trend-column.up i{background:#f00a36}
+html body main.container #warning #topFloodDashboard #ridTrendChart .flood-trend-column.steady i{background:#ff6908}
+html body main.container #warning #topFloodDashboard #ridTrendChart .flood-trend-column.down i{background:#598c14}
+html body main.container #warning #topFloodDashboard #ridTrendChart .flood-trend-column span{
+ color:#45515d;font-size:12px;white-space:nowrap
+}
+html body main.container #warning #topFloodDashboard #ridTrendChart .flood-chart-note{
+ align-self:flex-end;margin:12px 0 0;color:#71808a;font-size:11px
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-rid-legend{
+ display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;
+ gap:7px!important;width:100%!important;max-width:none!important
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-rid-legend>div{
+ display:flex!important;align-items:center;justify-content:center;
+ min-width:0;gap:4px!important;font-size:10px;white-space:nowrap
+}
+html body main.container #warning #dashboardVisualSummaryRow .flood-rid-legend strong{
+ font-size:10px!important
+}
+html body main.container #warning #overviewForecastRisk .overview-risk-card[data-hours="24"],
+html body main.container #warning #overviewForecastRisk .overview-risk-card[data-hours="48"]{
+ border-left:0!important
+}
+html body main.container #warning #overviewForecastRisk .overview-risk-card[data-hours="24"]::before,
+html body main.container #warning #overviewForecastRisk .overview-risk-card[data-hours="48"]::before{
+ content:none!important;display:none!important;border:0!important
 }
 </style></body>
 </html>
