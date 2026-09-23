@@ -12996,15 +12996,15 @@ html body main.container #warning #topFloodMap #overviewArcgisMap{
   var map=warning.querySelector(".operations-map");
   if(!map){
    map=document.createElement("article");map.className="card operations-map embedded-water-map";
-   map.innerHTML='<div class="overview-map-label"><b>แผนที่สถานการณ์น้ำท่วม</b><small>เลื่อนแผนที่หรือซูมเข้า–ออกเพื่อดูรายละเอียด</small></div>'+
-    '<div id="overviewArcgisMap" class="thaiwater-risk-map" role="application" aria-label="แผนที่สถานการณ์น้ำท่วม"></div>';
+   map.innerHTML='<div class="overview-map-label"><b>แผนที่สถานการณ์น้ำท่วม</b><small>เลื่อนแผนที่หรือซูมเข้า–ออกเพื่อดูรายละเอียด</small></div>';
   }
   if(map.parentNode!==host)host.appendChild(map);
   var frame=map.querySelector("#overviewArcgisMap");
-  if(!frame||frame.tagName==="IFRAME"){
-   var surface=document.createElement("div");surface.id="overviewArcgisMap";surface.className="thaiwater-risk-map";
-   surface.setAttribute("role","application");surface.setAttribute("aria-label","แผนที่สถานการณ์น้ำท่วม");
-   if(frame)frame.replaceWith(surface);else map.appendChild(surface);
+  if(!frame||frame.tagName!=="IFRAME"){
+   var embed=document.createElement("iframe");embed.id="overviewArcgisMap";
+   embed.title="แผนที่สถานการณ์น้ำท่วม";embed.loading="eager";
+   embed.src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=3d24287ac6ea49cd823625ddad496e01&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=true&basemaps=true&center=100.38863619797984,14.34381658929649&scale=577790.554289";
+   if(frame)frame.replaceWith(embed);else map.appendChild(embed);
   }
   working=false;
  }
