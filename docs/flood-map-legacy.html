@@ -13,7 +13,7 @@
  require(["esri/arcgis/utils","esri/dijit/LayerList","esri/dijit/Legend","dojo/domReady!"],function(utils,LayerList,Legend){
   utils.createMap(id,"map",{mapOptions:{slider:true,center:[101,13],zoom:5}}).then(function(result){
    map=result.map;
-   window.floodMapItem=result.itemInfo;document.body.setAttribute("data-map-meta",JSON.stringify({keys:Object.keys(result),infoKeys:result.itemInfo&&Object.keys(result.itemInfo),layers:result.itemInfo&&result.itemInfo.itemData&&result.itemInfo.itemData.operationalLayers&&result.itemInfo.itemData.operationalLayers.map(function(x){return {title:x.title,url:x.url,type:x.layerType,visibility:x.visibility}})}));
+   window.floodMapItem=result.itemInfo;document.body.setAttribute("data-map-meta",JSON.stringify({keys:Object.keys(result),infoKeys:result.itemInfo&&Object.keys(result.itemInfo),layers:result.itemInfo&&result.itemInfo.itemData&&result.itemInfo.itemData.operationalLayers&&result.itemInfo.itemData.operationalLayers.map(function(x){return {title:x.title,url:x.url,type:x.layerType,visibility:x.visibility,renderer:x.layerType==="GeoJSON"?(x.layerDefinition&&x.layerDefinition.drawingInfo&&x.layerDefinition.drawingInfo.renderer):undefined,popup:x.layerType==="GeoJSON"&&x.popupInfo&&x.popupInfo.title}})}));
    var layers=utils.getLayerList(result);
    var list=new LayerList({map:map,layers:layers},"layersPanel");list.startup();
    var legend=new Legend({map:map,layerInfos:utils.getLegendLayers(result)},"legendPanel");legend.startup();
