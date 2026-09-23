@@ -15388,7 +15388,7 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
 <script id="flood-map-authoritative-20260923-script">
 (function(){
  "use strict";
- var URL="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=3d24287ac6ea49cd823625ddad496e01";
+ var URL="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=3d24287ac6ea49cd823625ddad496e01&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=false&basemaps=true&center=103.19455467643526,13.497612767361916&scale=9244648.868618";
  var card=null;
  function ensure(){
   var target=document.querySelector("#warning #topFloodMap");if(!target)return;
@@ -15396,7 +15396,7 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
    card=document.createElement("article");card.className="card operations-map embedded-water-map";
    card.innerHTML='<div class="overview-map-label"><b>แผนที่สถานการณ์น้ำท่วม</b><small>เลื่อนแผนที่หรือซูมเข้า–ออกเพื่อดูรายละเอียด</small></div>'+
     '<iframe id="overviewArcgisMap" title="แผนที่สถานการณ์น้ำท่วม" loading="eager" src="./flood-map-legacy.html"></iframe>'+
-    '<a class="flood-map-open-link" href="'+URL+'" target="_blank" rel="noopener">เปิดแผนที่เต็มหน้า</a>';
+    '<a class="flood-map-open-link" href="'+URL+'" target="_blank" rel="noopener">เปิดแผนที่ ArcGIS ต้นฉบับ</a>';
   }
   if(card.parentElement!==target)target.appendChild(card);
  }
