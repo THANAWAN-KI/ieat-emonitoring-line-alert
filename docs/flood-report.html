@@ -11662,7 +11662,7 @@ html body #warning .flood-card-icon svg{display:block!important;width:100%!impor
   var grid=forecast.querySelector(".overview-forecast-grid");
   if(left){
    if(forecast.parentNode!==left)left.appendChild(forecast);
-   if(charts&&charts.parentNode!==left)left.appendChild(charts);
+   /* Chart grid belongs to the full-width dashboard row below the map. */
    if(indicator&&indicator.parentNode!==left)left.appendChild(indicator);
   }
   if(stationPanel&&stationPanel.parentNode!==stack)stack.appendChild(stationPanel);
@@ -11741,7 +11741,7 @@ html body #warning .flood-card-icon svg{display:block!important;width:100%!impor
   var forecast=document.getElementById("overviewForecastRisk");
   var charts=document.querySelector("#warning .rid-chart-grid");
   if(forecast&&forecast.parentNode!==left)left.appendChild(forecast);
-  if(charts&&charts.parentNode!==left)left.appendChild(charts);
+  /* Chart grid belongs to the full-width dashboard row below the map. */
   if(indicator&&indicator.parentNode!==left)left.appendChild(indicator);
   if(map&&map.parentNode!==mapHost)mapHost.appendChild(map);
   var dailyReport=document.querySelector("#warning .daily-water-report");
@@ -14962,13 +14962,15 @@ html body main.container #warning #overviewForecastRisk .nearby-risk-detail-item
  "use strict";
  function arrange(){
   var warning=document.getElementById("warning");
-  var chart=warning&&warning.querySelector(".top-flood-left>.rid-chart-grid");
+  var dashboard=document.getElementById("topFloodDashboard");
+  var chart=warning&&warning.querySelector(".rid-chart-grid");
   var level=document.getElementById("ridLevelChart")?.closest(".rid-panel");
   var trend=document.getElementById("ridTrendChart")?.closest(".rid-panel");
   var estate=document.getElementById("estateRanks")?.closest(".estate-watch-table");
   var water=document.getElementById("stations")?.closest(".station-watch-table");
   var rid=document.getElementById("ridStationRows")?.closest(".rid-panel");
-  if(!chart||!level||!trend||!estate||!water||!rid)return;
+  if(!dashboard||!chart||!level||!trend||!estate||!water||!rid)return;
+  if(chart.parentElement!==dashboard)dashboard.appendChild(chart);
   if(level.parentElement!==chart)chart.prepend(level);
   if(estate.parentElement!==chart)chart.appendChild(estate);
   var row=document.getElementById("dashboardVisualSummaryRow");
@@ -15261,6 +15263,82 @@ html body main.container #warning #topFloodDashboard #estateRankViz .flood-estat
   grid-template-columns:1fr!important
  }
  html body main.container #warning #topFloodDashboard .rid-chart-grid>#dashboardVisualSummaryRow>*{
+  grid-column:1!important;grid-row:auto!important
+ }
+}
+</style><style id="flood-dashboard-full-width-charts-map-height-20260923">
+/* The left column ends at the three risk cards; the map stretches to that edge. */
+html body main.container #warning #topFloodDashboard{
+ align-items:stretch!important;grid-auto-rows:auto!important
+}
+html body main.container #warning #topFloodDashboard>.top-flood-left{
+ grid-column:1!important;grid-row:1!important;align-self:start!important
+}
+html body main.container #warning #topFloodDashboard>#topFloodMap{
+ grid-column:2!important;grid-row:1!important;height:100%!important;
+ min-height:0!important;align-self:stretch!important
+}
+html body main.container #warning #topFloodDashboard>#topFloodMap>.operations-map,
+html body main.container #warning #topFloodDashboard>#topFloodMap #overviewArcgisMap{
+ width:100%!important;height:100%!important;min-height:0!important
+}
+html body main.container #warning #topFloodDashboard>.rid-chart-grid{
+ grid-column:1/-1!important;grid-row:2!important;
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:14px!important;width:100%!important;min-width:0!important;margin:0!important
+}
+html body main.container #warning #topFloodDashboard>.rid-chart-grid>.rid-panel:first-child{
+ grid-column:1!important;grid-row:1!important;min-width:0!important
+}
+html body main.container #warning #topFloodDashboard>.rid-chart-grid>.estate-watch-table{
+ grid-column:2!important;grid-row:1!important;min-width:0!important;
+ height:380px!important;min-height:380px!important;max-height:380px!important;
+ display:flex!important;flex-direction:column!important;overflow:hidden!important;
+ background:#fff!important;border:1px solid #e7ebf1!important;border-radius:14px!important
+}
+html body main.container #warning #topFloodDashboard>.rid-chart-grid>.estate-watch-table .table-section-head{
+ min-height:58px!important;padding:16px!important;background:#fff!important;
+ border-bottom:1px solid #e7ebf1!important
+}
+html body main.container #warning #topFloodDashboard>.rid-chart-grid>.estate-watch-table .table-section-head h2{
+ margin:0!important;color:#007fdb!important;font-size:16px!important
+}
+html body main.container #warning #topFloodDashboard>.rid-chart-grid>.estate-watch-table .table-section-head :is(p,span){display:none!important}
+html body main.container #warning #topFloodDashboard>.rid-chart-grid #estateRankViz{
+ flex:1!important;min-height:0!important;padding:14px!important;overflow:auto!important;background:#fff!important
+}
+html body main.container #warning #topFloodDashboard>.rid-chart-grid>#dashboardVisualSummaryRow{
+ grid-column:1/-1!important;grid-row:2!important;
+ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ gap:14px!important;width:100%!important;min-width:0!important;margin:0!important
+}
+html body main.container #warning #topFloodDashboard>.rid-chart-grid>#dashboardVisualSummaryRow>.rid-panel,
+html body main.container #warning #topFloodDashboard>.rid-chart-grid>#dashboardVisualSummaryRow>.station-watch-table{
+ width:100%!important;min-width:0!important;height:410px!important;
+ min-height:410px!important;max-height:410px!important;
+ grid-column:auto!important;grid-row:1!important
+}
+html body main.container #warning #topFloodDashboard>.rid-chart-grid>#dashboardVisualSummaryRow>.rid-panel:first-child{
+ grid-column:1!important
+}
+html body main.container #warning #topFloodDashboard>.rid-chart-grid #ridLevelChart .flood-level-area{
+ width:100%!important;min-width:0!important
+}
+@media(max-width:1100px){
+ html body main.container #warning #topFloodDashboard>.top-flood-left,
+ html body main.container #warning #topFloodDashboard>#topFloodMap,
+ html body main.container #warning #topFloodDashboard>.rid-chart-grid{
+  grid-column:1!important;grid-row:auto!important
+ }
+ html body main.container #warning #topFloodDashboard>#topFloodMap{height:540px!important}
+}
+@media(max-width:700px){
+ html body main.container #warning #topFloodDashboard>.rid-chart-grid{grid-template-columns:1fr!important}
+ html body main.container #warning #topFloodDashboard>.rid-chart-grid>:is(.rid-panel,.estate-watch-table,#dashboardVisualSummaryRow){
+  grid-column:1!important;grid-row:auto!important
+ }
+ html body main.container #warning #topFloodDashboard>.rid-chart-grid>#dashboardVisualSummaryRow{grid-template-columns:1fr!important}
+ html body main.container #warning #topFloodDashboard>.rid-chart-grid>#dashboardVisualSummaryRow>*{
   grid-column:1!important;grid-row:auto!important
  }
 }
