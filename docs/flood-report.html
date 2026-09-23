@@ -14071,10 +14071,10 @@ html body main.container #warning .dashboard-chart-mode>.rid-table-wrap{
   rowsOf("#stations").forEach(function(row){counts[state(row.cells[2]?.textContent)]++});
   var total=counts.critical+counts.warning+counts.normal+counts.unknown,sig=JSON.stringify(counts);if(target.dataset.sig===sig)return;target.dataset.sig=sig;
   if(!total){target.innerHTML='<div class="dashboard-viz-empty">กำลังประมวลผลข้อมูลล่าสุด…</div>';return}
-  var a=counts.critical/total*100,b=a+counts.warning/total*100,c=b+counts.normal/total*100;
-  target.innerHTML='<div class="water-donut-layout"><div class="water-donut-wrap"><div class="water-donut" style="background:conic-gradient(#598C14 0 '+a+'%,#335238 '+a+'% '+b+'%,#4A8594 '+b+'% '+c+'%,#051736 '+c+'% 100%)"><div class="water-donut-center"><strong>'+total.toLocaleString("th-TH")+'</strong><span>สถานีทั้งหมด</span></div></div></div><div class="water-legend">'+
-   [['critical','วิกฤต / น้ำล้นตลิ่ง'],['warning','เฝ้าระวัง / ทรงตัว'],['normal','ปกติ / ลดลง'],['unknown','ไม่ระบุสถานะ']].map(function(x){var white=x[0]==="critical"?' style="background:#fff!important;background-color:#fff!important;color:#263746!important"':'';return '<div class="water-legend-item '+x[0]+'"'+white+'><i></i><span style="color:#263746!important">'+x[1]+'</span><b style="color:#263746!important">'+counts[x[0]].toLocaleString("th-TH")+'</b></div>'}).join("")+
-   '</div></div>';
+  var groups=[['critical','วิกฤต / น้ำล้นตลิ่ง'],['warning','เฝ้าระวัง / ทรงตัว'],['normal','ปกติ / ลดลง'],['unknown','ไม่ระบุสถานะ']];
+  target.innerHTML='<div class="water-summary"><div class="water-summary-top"><div><span class="water-summary-eyebrow">ภาพรวมสถานีระดับน้ำ</span><div class="water-summary-total"><strong>'+total.toLocaleString("th-TH")+'</strong><span>สถานีทั้งหมด</span></div></div><span class="water-summary-caption">ข้อมูลสถานีล่าสุด</span></div>'+
+   '<div class="water-summary-bar" role="img" aria-label="สัดส่วนสถานีตามสถานการณ์น้ำ">'+groups.map(function(x){return counts[x[0]]?'<span class="severity-'+x[0]+'" style="width:'+(counts[x[0]]/total*100)+'%"></span>':''}).join("")+'</div>'+
+   '<div class="water-summary-grid">'+groups.map(function(x){return '<div class="water-summary-item severity-'+x[0]+'"><span class="water-summary-label"><i aria-hidden="true"></i>'+x[1]+'</span><strong>'+counts[x[0]].toLocaleString("th-TH")+'</strong></div>'}).join("")+'</div></div>';
  }
  function renderRid(){
   var body=document.getElementById("ridStationRows"),panel=body&&body.closest(".rid-panel"),target=viz(panel,"ridLevelRankViz");if(!target)return;
@@ -14811,6 +14811,28 @@ html body main.container #infographic :is(#reportPage4,#reportPage5) .report-arc
   min-height:0!important;
   border:0!important;
 }
+</style>
+<style id="flood-water-summary-redesign-20260923">
+html body main.container #warning #waterSituationViz{padding:18px;background:#f7fafc}
+html body main.container #warning #waterSituationViz .water-summary{display:grid;gap:18px;align-content:start}
+html body main.container #warning #waterSituationViz .water-summary-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+html body main.container #warning #waterSituationViz .water-summary-eyebrow{display:block;color:#617486;font-size:12px;font-weight:600}
+html body main.container #warning #waterSituationViz .water-summary-total{display:flex;align-items:baseline;gap:9px;margin-top:2px;color:#102a43}
+html body main.container #warning #waterSituationViz .water-summary-total strong{font-size:42px;line-height:1.1;color:#102a43}
+html body main.container #warning #waterSituationViz .water-summary-total span{font-size:14px}
+html body main.container #warning #waterSituationViz .water-summary-caption{font-size:12px;color:#617486;text-align:right}
+html body main.container #warning #waterSituationViz .water-summary-bar{display:flex;gap:2px;height:12px;overflow:hidden;border-radius:99px;background:#e3eaf0}
+html body main.container #warning #waterSituationViz .water-summary-bar span{display:block;min-width:2px}
+html body main.container #warning #waterSituationViz .water-summary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+html body main.container #warning #waterSituationViz .water-summary-item{display:flex;justify-content:space-between;align-items:center;gap:8px;min-width:0;padding:14px;border:1px solid #dce6eb;border-radius:12px;background:#fff;color:#263746}
+html body main.container #warning #waterSituationViz .water-summary-label{display:flex;align-items:center;gap:9px;min-width:0;font-size:13px;color:#263746}
+html body main.container #warning #waterSituationViz .water-summary-label i{flex:none;width:9px;height:9px;border-radius:50%}
+html body main.container #warning #waterSituationViz .water-summary-item strong{font-size:22px;line-height:1;color:#102a43}
+html body main.container #warning #waterSituationViz .water-summary-item.tone-red i,html body main.container #warning #waterSituationViz .water-summary-bar .tone-red{background:#e34b57}
+html body main.container #warning #waterSituationViz .water-summary-item.tone-amber i,html body main.container #warning #waterSituationViz .water-summary-bar .tone-amber{background:#e5a932}
+html body main.container #warning #waterSituationViz .water-summary-item.tone-teal i,html body main.container #warning #waterSituationViz .water-summary-bar .tone-teal{background:#3f947d}
+html body main.container #warning #waterSituationViz .water-summary-item.tone-gray i,html body main.container #warning #waterSituationViz .water-summary-bar .tone-gray{background:#92a2b0}
+@media(max-width:560px){html body main.container #warning #waterSituationViz{padding:14px}html body main.container #warning #waterSituationViz .water-summary-grid{grid-template-columns:1fr}html body main.container #warning #waterSituationViz .water-summary-item{padding:11px 13px}}
 </style>
 </body>
 </html>
