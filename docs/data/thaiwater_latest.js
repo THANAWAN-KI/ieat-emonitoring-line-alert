@@ -1,7 +1,7 @@
 window.IEAT_THAIWATER_DATA = {
   "schema_version": 2,
   "status": "ok",
-  "generated_at": "2026-09-25T02:11:55+07:00",
+  "generated_at": "2026-09-25T05:26:09+07:00",
   "methodology": {
     "watch_radius_km": 30.0,
     "display_radius_km": 50.0,
@@ -538,6 +538,21 @@ window.IEAT_THAIWATER_DATA = {
   ],
   "estate_watch": [
     {
+      "id": 5,
+      "name": "นิคมอุตสาหกรรมนครหลวง",
+      "lat": 14.4893393,
+      "lon": 100.5957211,
+      "operations": "สายปฎิบัติการ1",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "alert_station_count": 40,
+      "rain_alert_count": 21,
+      "water_alert_count": 19,
+      "max_rainfall_mm": 139.2,
+      "nearest_alert_km": 8.1,
+      "latest_observed_at": "2026-09-25 05:10"
+    },
+    {
       "id": 20,
       "name": "นิคมอุตสาหกรรมสระแก้ว",
       "lat": 13.72389768,
@@ -545,42 +560,57 @@ window.IEAT_THAIWATER_DATA = {
       "operations": "สายปฎิบัติการ2",
       "status": "วิกฤต",
       "severity_score": 4,
-      "alert_station_count": 12,
-      "rain_alert_count": 11,
+      "alert_station_count": 13,
+      "rain_alert_count": 12,
       "water_alert_count": 1,
-      "max_rainfall_mm": 134.0,
+      "max_rainfall_mm": 138.5,
       "nearest_alert_km": 6.7,
-      "latest_observed_at": "2026-09-25 02:00"
+      "latest_observed_at": "2026-09-25 05:10"
     },
     {
-      "id": 34,
-      "name": "นิคมอุตสาหกรรมแหลมฉบัง",
-      "lat": 13.076561,
-      "lon": 100.909175,
-      "operations": "สายปฎิบัติการ2",
+      "id": 7,
+      "name": "นิคมอุตสาหกรรมบ้านหว้า",
+      "lat": 14.246309,
+      "lon": 100.610012,
+      "operations": "สายปฎิบัติการ1",
       "status": "วิกฤต",
       "severity_score": 4,
-      "alert_station_count": 3,
-      "rain_alert_count": 3,
-      "water_alert_count": 0,
-      "max_rainfall_mm": 128.6,
-      "nearest_alert_km": 12.1,
-      "latest_observed_at": "2026-09-25 00:50"
+      "alert_station_count": 15,
+      "rain_alert_count": 9,
+      "water_alert_count": 6,
+      "max_rainfall_mm": 123.6,
+      "nearest_alert_km": 4.7,
+      "latest_observed_at": "2026-09-25 05:10"
     },
     {
-      "id": 41,
-      "name": "นิคมอุตสาหกรรมสมาร์ท ปาร์ค",
-      "lat": 12.75079527,
-      "lon": 101.1226103,
-      "operations": "สายปฎิบัติการ3",
+      "id": 64,
+      "name": "นิคมอุตสาหกรรมแก่งคอย",
+      "lat": 14.624646,
+      "lon": 101.008107,
+      "operations": "สายปฎิบัติการ1",
       "status": "วิกฤต",
       "severity_score": 4,
-      "alert_station_count": 2,
-      "rain_alert_count": 2,
-      "water_alert_count": 0,
-      "max_rainfall_mm": 113.5,
-      "nearest_alert_km": 11.5,
-      "latest_observed_at": "2026-09-25 01:00"
+      "alert_station_count": 18,
+      "rain_alert_count": 14,
+      "water_alert_count": 4,
+      "max_rainfall_mm": 111.0,
+      "nearest_alert_km": 0.8,
+      "latest_observed_at": "2026-09-25 05:10"
+    },
+    {
+      "id": 1,
+      "name": "นิคมอุตสาหกรรมหนองแค",
+      "lat": 14.3863882,
+      "lon": 100.9035767,
+      "operations": "สายปฎิบัติการ1",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "alert_station_count": 10,
+      "rain_alert_count": 9,
+      "water_alert_count": 1,
+      "max_rainfall_mm": 109.4,
+      "nearest_alert_km": 7.4,
+      "latest_observed_at": "2026-09-25 05:10"
     },
     {
       "id": 38,
@@ -593,84 +623,69 @@ window.IEAT_THAIWATER_DATA = {
       "alert_station_count": 3,
       "rain_alert_count": 3,
       "water_alert_count": 0,
-      "max_rainfall_mm": 111.0,
+      "max_rainfall_mm": 109.0,
       "nearest_alert_km": 13.8,
-      "latest_observed_at": "2026-09-25 01:00"
+      "latest_observed_at": "2026-09-25 05:00"
     },
     {
-      "id": 84,
-      "name": "นิคมอุตสาหกรรมเฮอร์มีส",
-      "lat": 12.939485747704445,
-      "lon": 101.04139943537544,
+      "id": 86,
+      "name": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
+      "lat": 15.653923104685944,
+      "lon": 100.58284169495818,
       "operations": "",
       "status": "วิกฤต",
       "severity_score": 4,
-      "alert_station_count": 2,
-      "rain_alert_count": 2,
-      "water_alert_count": 0,
-      "max_rainfall_mm": 102.0,
-      "nearest_alert_km": 7.6,
-      "latest_observed_at": "2026-09-25 00:00"
-    },
-    {
-      "id": 30,
-      "name": "นิคมอุตสาหกรรมอมตะซิตี้ ระยอง",
-      "lat": 13.024547,
-      "lon": 101.072437,
-      "operations": "สายปฎิบัติการ2",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "alert_station_count": 1,
-      "rain_alert_count": 1,
-      "water_alert_count": 0,
-      "max_rainfall_mm": 101.0,
-      "nearest_alert_km": 4.4,
-      "latest_observed_at": "2026-09-25 01:00"
-    },
-    {
-      "id": 17,
-      "name": "นิคมอุตสาหกรรมเกตเวย์ ซิตี้",
-      "lat": 13.614694,
-      "lon": 101.329567,
-      "operations": "สายปฎิบัติการ2",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "alert_station_count": 5,
+      "alert_station_count": 4,
       "rain_alert_count": 4,
-      "water_alert_count": 1,
-      "max_rainfall_mm": 96.4,
-      "nearest_alert_km": 7.7,
-      "latest_observed_at": "2026-09-25 02:00"
+      "water_alert_count": 0,
+      "max_rainfall_mm": 106.0,
+      "nearest_alert_km": 10.0,
+      "latest_observed_at": "2026-09-25 05:00"
     },
     {
-      "id": 64,
-      "name": "นิคมอุตสาหกรรมแก่งคอย",
-      "lat": 14.624646,
-      "lon": 101.008107,
+      "id": 2,
+      "name": "นิคมอุตสาหกรรมลาดกระบัง",
+      "lat": 13.7582559,
+      "lon": 100.7893183,
       "operations": "สายปฎิบัติการ1",
       "status": "วิกฤต",
       "severity_score": 4,
-      "alert_station_count": 18,
-      "rain_alert_count": 15,
-      "water_alert_count": 3,
-      "max_rainfall_mm": 93.5,
-      "nearest_alert_km": 7.6,
-      "latest_observed_at": "2026-09-25 02:00"
+      "alert_station_count": 16,
+      "rain_alert_count": 14,
+      "water_alert_count": 2,
+      "max_rainfall_mm": 102.8,
+      "nearest_alert_km": 2.0,
+      "latest_observed_at": "2026-09-25 05:10"
     },
     {
-      "id": 5,
-      "name": "นิคมอุตสาหกรรมนครหลวง",
-      "lat": 14.4893393,
-      "lon": 100.5957211,
-      "operations": "สายปฎิบัติการ1",
-      "status": "ล้นตลิ่ง",
+      "id": 41,
+      "name": "นิคมอุตสาหกรรมสมาร์ท ปาร์ค",
+      "lat": 12.75079527,
+      "lon": 101.1226103,
+      "operations": "สายปฎิบัติการ3",
+      "status": "วิกฤต",
       "severity_score": 4,
-      "alert_station_count": 29,
-      "rain_alert_count": 10,
-      "water_alert_count": 19,
-      "max_rainfall_mm": 87.4,
-      "nearest_alert_km": 8.1,
-      "latest_observed_at": "2026-09-25 02:00"
+      "alert_station_count": 3,
+      "rain_alert_count": 3,
+      "water_alert_count": 0,
+      "max_rainfall_mm": 97.0,
+      "nearest_alert_km": 2.2,
+      "latest_observed_at": "2026-09-25 05:00"
+    },
+    {
+      "id": 3,
+      "name": "นิคมอุตสาหกรรมบางชัน",
+      "lat": 13.803881,
+      "lon": 100.704757,
+      "operations": "สายปฎิบัติการ1",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "alert_station_count": 20,
+      "rain_alert_count": 17,
+      "water_alert_count": 3,
+      "max_rainfall_mm": 93.0,
+      "nearest_alert_km": 0.7,
+      "latest_observed_at": "2026-09-25 05:10"
     },
     {
       "id": 11,
@@ -680,12 +695,12 @@ window.IEAT_THAIWATER_DATA = {
       "operations": "สายปฎิบัติการ1",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
-      "alert_station_count": 7,
-      "rain_alert_count": 3,
+      "alert_station_count": 8,
+      "rain_alert_count": 4,
       "water_alert_count": 4,
-      "max_rainfall_mm": 64.0,
+      "max_rainfall_mm": 65.0,
       "nearest_alert_km": 13.5,
-      "latest_observed_at": "2026-09-25 02:00"
+      "latest_observed_at": "2026-09-25 05:10"
     },
     {
       "id": 26,
@@ -703,109 +718,49 @@ window.IEAT_THAIWATER_DATA = {
       "latest_observed_at": "2026-09-24 17:40"
     },
     {
-      "id": 86,
-      "name": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
-      "lat": 15.653923104685944,
-      "lon": 100.58284169495818,
-      "operations": "",
+      "id": 17,
+      "name": "นิคมอุตสาหกรรมเกตเวย์ ซิตี้",
+      "lat": 13.614694,
+      "lon": 101.329567,
+      "operations": "สายปฎิบัติการ2",
       "status": "เสี่ยงสูง",
       "severity_score": 3,
-      "alert_station_count": 4,
+      "alert_station_count": 5,
       "rain_alert_count": 4,
-      "water_alert_count": 0,
-      "max_rainfall_mm": 89.5,
-      "nearest_alert_km": 10.0,
-      "latest_observed_at": "2026-09-25 01:00"
+      "water_alert_count": 1,
+      "max_rainfall_mm": 84.2,
+      "nearest_alert_km": 7.7,
+      "latest_observed_at": "2026-09-25 05:10"
     },
     {
-      "id": 22,
-      "name": "นิคมอุตสาหกรรมหลักชัยเมืองยาง",
-      "lat": 12.72735973,
-      "lon": 101.455931,
-      "operations": "สายปฎิบัติการ3",
+      "id": 4,
+      "name": "นิคมอุตสาหกรรมอัญธานี",
+      "lat": 13.686102,
+      "lon": 100.707712,
+      "operations": "สายปฎิบัติการ1",
       "status": "เสี่ยงสูง",
       "severity_score": 3,
       "alert_station_count": 8,
-      "rain_alert_count": 7,
-      "water_alert_count": 1,
-      "max_rainfall_mm": 84.9,
-      "nearest_alert_km": 8.0,
-      "latest_observed_at": "2026-09-25 02:00"
+      "rain_alert_count": 8,
+      "water_alert_count": 0,
+      "max_rainfall_mm": 73.6,
+      "nearest_alert_km": 3.7,
+      "latest_observed_at": "2026-09-25 05:00"
     },
     {
-      "id": 2,
-      "name": "นิคมอุตสาหกรรมลาดกระบัง",
-      "lat": 13.7582559,
-      "lon": 100.7893183,
-      "operations": "สายปฎิบัติการ1",
-      "status": "เสี่ยงสูง",
-      "severity_score": 3,
-      "alert_station_count": 15,
-      "rain_alert_count": 13,
-      "water_alert_count": 2,
-      "max_rainfall_mm": 83.8,
-      "nearest_alert_km": 2.0,
-      "latest_observed_at": "2026-09-25 02:00"
-    },
-    {
-      "id": 1,
-      "name": "นิคมอุตสาหกรรมหนองแค",
-      "lat": 14.3863882,
-      "lon": 100.9035767,
-      "operations": "สายปฎิบัติการ1",
-      "status": "เสี่ยงสูง",
-      "severity_score": 3,
-      "alert_station_count": 7,
-      "rain_alert_count": 6,
-      "water_alert_count": 1,
-      "max_rainfall_mm": 82.8,
-      "nearest_alert_km": 7.4,
-      "latest_observed_at": "2026-09-25 02:00"
-    },
-    {
-      "id": 7,
-      "name": "นิคมอุตสาหกรรมบ้านหว้า",
-      "lat": 14.246309,
-      "lon": 100.610012,
-      "operations": "สายปฎิบัติการ1",
-      "status": "เสี่ยงสูง",
-      "severity_score": 3,
-      "alert_station_count": 10,
-      "rain_alert_count": 4,
-      "water_alert_count": 6,
-      "max_rainfall_mm": 76.0,
-      "nearest_alert_km": 4.7,
-      "latest_observed_at": "2026-09-25 02:00"
-    },
-    {
-      "id": 18,
-      "name": "นิคมอุตสาหกรรมเอเซีย (สุวรรณภูมิ)",
-      "lat": 13.6599038,
-      "lon": 100.9114833,
-      "operations": "สายปฎิบัติการ1",
-      "status": "เสี่ยงสูง",
-      "severity_score": 3,
-      "alert_station_count": 4,
-      "rain_alert_count": 3,
-      "water_alert_count": 1,
-      "max_rainfall_mm": 72.0,
-      "nearest_alert_km": 8.0,
-      "latest_observed_at": "2026-09-25 02:00"
-    },
-    {
-      "id": 3,
-      "name": "นิคมอุตสาหกรรมบางชัน",
-      "lat": 13.803881,
-      "lon": 100.704757,
+      "id": 12,
+      "name": "นิคมอุตสาหกรรมภาคเหนือ",
+      "lat": 18.591755,
+      "lon": 99.044877,
       "operations": "สายปฎิบัติการ1",
       "status": "วิกฤต",
       "severity_score": 3,
-      "alert_station_count": 9,
-      "rain_alert_count": 6,
-      "water_alert_count": 3,
-      "max_rainfall_mm": 47.6,
-      "nearest_alert_km": 3.1,
-      "latest_observed_at": "2026-09-25 02:00"
+      "alert_station_count": 15,
+      "rain_alert_count": 4,
+      "water_alert_count": 11,
+      "max_rainfall_mm": 62.0,
+      "nearest_alert_km": 7.2,
+      "latest_observed_at": "2026-09-25 05:10"
     },
     {
       "id": 6,
@@ -815,12 +770,42 @@ window.IEAT_THAIWATER_DATA = {
       "operations": "สายปฎิบัติการ1",
       "status": "วิกฤต",
       "severity_score": 3,
-      "alert_station_count": 3,
-      "rain_alert_count": 2,
+      "alert_station_count": 5,
+      "rain_alert_count": 4,
       "water_alert_count": 1,
-      "max_rainfall_mm": 45.8,
+      "max_rainfall_mm": 59.8,
       "nearest_alert_km": 7.9,
-      "latest_observed_at": "2026-09-25 02:00"
+      "latest_observed_at": "2026-09-25 05:10"
+    },
+    {
+      "id": 43,
+      "name": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก B",
+      "lat": 13.7973442,
+      "lon": 100.5592795,
+      "operations": "สำนักงานใหญ่",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "alert_station_count": 26,
+      "rain_alert_count": 22,
+      "water_alert_count": 4,
+      "max_rainfall_mm": 53.5,
+      "nearest_alert_km": 2.6,
+      "latest_observed_at": "2026-09-25 05:10"
+    },
+    {
+      "id": 42,
+      "name": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก A",
+      "lat": 13.7972954,
+      "lon": 100.5599994,
+      "operations": "สำนักงานใหญ่",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "alert_station_count": 24,
+      "rain_alert_count": 19,
+      "water_alert_count": 5,
+      "max_rainfall_mm": 52.4,
+      "nearest_alert_km": 2.1,
+      "latest_observed_at": "2026-09-25 05:10"
     },
     {
       "id": 21,
@@ -830,27 +815,42 @@ window.IEAT_THAIWATER_DATA = {
       "operations": "สายปฎิบัติการ2",
       "status": "วิกฤต",
       "severity_score": 3,
-      "alert_station_count": 8,
-      "rain_alert_count": 3,
+      "alert_station_count": 11,
+      "rain_alert_count": 6,
       "water_alert_count": 5,
-      "max_rainfall_mm": 44.0,
+      "max_rainfall_mm": 45.0,
       "nearest_alert_km": 10.6,
-      "latest_observed_at": "2026-09-25 02:00"
+      "latest_observed_at": "2026-09-25 05:10"
     },
     {
-      "id": 19,
-      "name": "นิคมอุตสาหกรรมทีเอฟดี 1",
-      "lat": 13.56379732,
-      "lon": 100.9949185,
-      "operations": "สายปฎิบัติการ2",
+      "id": 18,
+      "name": "นิคมอุตสาหกรรมเอเซีย (สุวรรณภูมิ)",
+      "lat": 13.6599038,
+      "lon": 100.9114833,
+      "operations": "สายปฎิบัติการ1",
       "status": "วิกฤต",
       "severity_score": 3,
-      "alert_station_count": 3,
-      "rain_alert_count": 2,
+      "alert_station_count": 2,
+      "rain_alert_count": 1,
       "water_alert_count": 1,
-      "max_rainfall_mm": 43.2,
-      "nearest_alert_km": 1.8,
-      "latest_observed_at": "2026-09-25 02:00"
+      "max_rainfall_mm": 44.8,
+      "nearest_alert_km": 20.7,
+      "latest_observed_at": "2026-09-25 05:10"
+    },
+    {
+      "id": 9,
+      "name": "นิคมอุตสาหกรรมสินสาคร",
+      "lat": 13.54653659,
+      "lon": 100.3436175,
+      "operations": "สายปฎิบัติการ1",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "alert_station_count": 5,
+      "rain_alert_count": 3,
+      "water_alert_count": 2,
+      "max_rainfall_mm": 41.8,
+      "nearest_alert_km": 4.6,
+      "latest_observed_at": "2026-09-25 05:10"
     },
     {
       "id": 8,
@@ -865,7 +865,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 3,
       "max_rainfall_mm": null,
       "nearest_alert_km": 4.7,
-      "latest_observed_at": "2026-09-25 02:00"
+      "latest_observed_at": "2026-09-25 05:10"
     },
     {
       "id": 13,
@@ -880,7 +880,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 10,
       "max_rainfall_mm": null,
       "nearest_alert_km": 9.6,
-      "latest_observed_at": "2026-09-25 02:00"
+      "latest_observed_at": "2026-09-25 05:10"
     },
     {
       "id": 14,
@@ -895,82 +895,52 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 8,
       "max_rainfall_mm": null,
       "nearest_alert_km": 10.9,
-      "latest_observed_at": "2026-09-25 02:00"
+      "latest_observed_at": "2026-09-25 05:10"
     },
     {
-      "id": 42,
-      "name": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก A",
-      "lat": 13.7972954,
-      "lon": 100.5599994,
-      "operations": "สำนักงานใหญ่",
+      "id": 19,
+      "name": "นิคมอุตสาหกรรมทีเอฟดี 1",
+      "lat": 13.56379732,
+      "lon": 100.9949185,
+      "operations": "สายปฎิบัติการ2",
       "status": "วิกฤต",
       "severity_score": 3,
-      "alert_station_count": 5,
+      "alert_station_count": 1,
       "rain_alert_count": 0,
-      "water_alert_count": 5,
+      "water_alert_count": 1,
       "max_rainfall_mm": null,
-      "nearest_alert_km": 6.0,
-      "latest_observed_at": "2026-09-25 02:00"
+      "nearest_alert_km": 1.8,
+      "latest_observed_at": "2026-09-25 05:10"
     },
     {
-      "id": 43,
-      "name": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก B",
-      "lat": 13.7973442,
-      "lon": 100.5592795,
-      "operations": "สำนักงานใหญ่",
+      "id": 22,
+      "name": "นิคมอุตสาหกรรมหลักชัยเมืองยาง",
+      "lat": 12.72735973,
+      "lon": 101.455931,
+      "operations": "สายปฎิบัติการ3",
       "status": "วิกฤต",
       "severity_score": 3,
-      "alert_station_count": 4,
+      "alert_station_count": 1,
       "rain_alert_count": 0,
-      "water_alert_count": 4,
+      "water_alert_count": 1,
       "max_rainfall_mm": null,
-      "nearest_alert_km": 5.5,
-      "latest_observed_at": "2026-09-25 02:00"
+      "nearest_alert_km": 22.7,
+      "latest_observed_at": "2026-09-25 05:10"
     },
     {
-      "id": 27,
-      "name": "นิคมอุตสาหกรรมอีสเทิร์นซีบอร์ด (ระยอง)",
-      "lat": 13.0044858,
-      "lon": 101.1626075,
+      "id": 30,
+      "name": "นิคมอุตสาหกรรมอมตะซิตี้ ระยอง",
+      "lat": 13.024547,
+      "lon": 101.072437,
       "operations": "สายปฎิบัติการ2",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "alert_station_count": 1,
       "rain_alert_count": 1,
       "water_alert_count": 0,
-      "max_rainfall_mm": 69.2,
-      "nearest_alert_km": 5.9,
-      "latest_observed_at": "2026-09-25 01:00"
-    },
-    {
-      "id": 31,
-      "name": "นิคมอุตสาหกรรมปิ่นทอง (โครงการ 2)",
-      "lat": 13.118954,
-      "lon": 101.033398,
-      "operations": "สายปฎิบัติการ2",
-      "status": "เฝ้าระวัง",
-      "severity_score": 2,
-      "alert_station_count": 2,
-      "rain_alert_count": 2,
-      "water_alert_count": 0,
-      "max_rainfall_mm": 66.6,
-      "nearest_alert_km": 5.5,
-      "latest_observed_at": "2026-09-25 01:00"
-    },
-    {
-      "id": 12,
-      "name": "นิคมอุตสาหกรรมภาคเหนือ",
-      "lat": 18.591755,
-      "lon": 99.044877,
-      "operations": "สายปฎิบัติการ1",
-      "status": "เฝ้าระวัง",
-      "severity_score": 2,
-      "alert_station_count": 15,
-      "rain_alert_count": 4,
-      "water_alert_count": 11,
-      "max_rainfall_mm": 62.0,
-      "nearest_alert_km": 7.2,
-      "latest_observed_at": "2026-09-25 02:00"
+      "max_rainfall_mm": 59.8,
+      "nearest_alert_km": 4.4,
+      "latest_observed_at": "2026-09-25 05:00"
     },
     {
       "id": 10,
@@ -983,9 +953,9 @@ window.IEAT_THAIWATER_DATA = {
       "alert_station_count": 7,
       "rain_alert_count": 4,
       "water_alert_count": 3,
-      "max_rainfall_mm": 51.0,
+      "max_rainfall_mm": 53.0,
       "nearest_alert_km": 3.7,
-      "latest_observed_at": "2026-09-25 02:00"
+      "latest_observed_at": "2026-09-25 05:10"
     },
     {
       "id": 85,
@@ -998,39 +968,9 @@ window.IEAT_THAIWATER_DATA = {
       "alert_station_count": 2,
       "rain_alert_count": 1,
       "water_alert_count": 1,
-      "max_rainfall_mm": 51.0,
-      "nearest_alert_km": 7.1,
-      "latest_observed_at": "2026-09-25 02:00"
-    },
-    {
-      "id": 29,
-      "name": "นิคมอุตสาหกรรมอมตะซิตี้ ชลบุรี",
-      "lat": 13.4214885,
-      "lon": 101.0041244,
-      "operations": "สายปฎิบัติการ2",
-      "status": "เฝ้าระวัง",
-      "severity_score": 2,
-      "alert_station_count": 2,
-      "rain_alert_count": 2,
-      "water_alert_count": 0,
-      "max_rainfall_mm": 46.2,
-      "nearest_alert_km": 6.4,
-      "latest_observed_at": "2026-09-25 00:00"
-    },
-    {
-      "id": 32,
-      "name": "นิคมอุตสาหกรรมปิ่นทอง",
-      "lat": 13.12134595,
-      "lon": 100.9904306,
-      "operations": "สายปฎิบัติการ2",
-      "status": "เฝ้าระวัง",
-      "severity_score": 2,
-      "alert_station_count": 1,
-      "rain_alert_count": 1,
-      "water_alert_count": 0,
-      "max_rainfall_mm": 45.4,
-      "nearest_alert_km": 10.7,
-      "latest_observed_at": "2026-09-25 01:00"
+      "max_rainfall_mm": 46.0,
+      "nearest_alert_km": 4.4,
+      "latest_observed_at": "2026-09-25 05:10"
     },
     {
       "id": 24,
@@ -1043,42 +983,76 @@ window.IEAT_THAIWATER_DATA = {
       "alert_station_count": 1,
       "rain_alert_count": 1,
       "water_alert_count": 0,
-      "max_rainfall_mm": 41.9,
+      "max_rainfall_mm": 44.5,
       "nearest_alert_km": 6.5,
-      "latest_observed_at": "2026-09-25 01:00"
+      "latest_observed_at": "2026-09-25 04:00"
     },
     {
-      "id": 4,
-      "name": "นิคมอุตสาหกรรมอัญธานี",
-      "lat": 13.686102,
-      "lon": 100.707712,
-      "operations": "สายปฎิบัติการ1",
+      "id": 31,
+      "name": "นิคมอุตสาหกรรมปิ่นทอง (โครงการ 2)",
+      "lat": 13.118954,
+      "lon": 101.033398,
+      "operations": "สายปฎิบัติการ2",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
-      "alert_station_count": 4,
-      "rain_alert_count": 4,
+      "alert_station_count": 1,
+      "rain_alert_count": 1,
       "water_alert_count": 0,
-      "max_rainfall_mm": 38.0,
-      "nearest_alert_km": 3.7,
-      "latest_observed_at": "2026-09-25 01:00"
+      "max_rainfall_mm": 40.8,
+      "nearest_alert_km": 13.6,
+      "latest_observed_at": "2026-09-25 05:00"
     },
     {
-      "id": 9,
-      "name": "นิคมอุตสาหกรรมสินสาคร",
-      "lat": 13.54653659,
-      "lon": 100.3436175,
-      "operations": "สายปฎิบัติการ1",
+      "id": 27,
+      "name": "นิคมอุตสาหกรรมอีสเทิร์นซีบอร์ด (ระยอง)",
+      "lat": 13.0044858,
+      "lon": 101.1626075,
+      "operations": "สายปฎิบัติการ2",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
-      "alert_station_count": 2,
-      "rain_alert_count": 0,
-      "water_alert_count": 2,
-      "max_rainfall_mm": null,
-      "nearest_alert_km": 4.6,
-      "latest_observed_at": "2026-09-25 02:00"
+      "alert_station_count": 1,
+      "rain_alert_count": 1,
+      "water_alert_count": 0,
+      "max_rainfall_mm": 35.6,
+      "nearest_alert_km": 5.9,
+      "latest_observed_at": "2026-09-25 05:00"
     }
   ],
   "stations": [
+    {
+      "kind": "rainfall",
+      "station": "บ้านหนองผักแว่น",
+      "station_code": "STN1589",
+      "province": "สระแก้ว",
+      "district": "ตาพระยา",
+      "lat": 14.040789,
+      "lon": 102.577395,
+      "rainfall_mm": 141.0,
+      "value_text": "141 มม.",
+      "observed_at": "2026-09-25 04:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 35.3,
+      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ท้ายปตร.พระนารายน์",
+      "station_code": "ATG052",
+      "province": "พระนครศรีอยุธยา",
+      "district": "ท่าเรือ",
+      "lat": 14.55667,
+      "lon": 100.76201,
+      "rainfall_mm": 139.2,
+      "value_text": "139.2 มม.",
+      "observed_at": "2026-09-25 05:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 19.4,
+      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
+      "agency": "สสน."
+    },
     {
       "kind": "rainfall",
       "station": "บ้านซับแม็ก",
@@ -1087,14 +1061,31 @@ window.IEAT_THAIWATER_DATA = {
       "district": "วัฒนานคร",
       "lat": 13.874664,
       "lon": 102.42264,
-      "rainfall_mm": 134.0,
-      "value_text": "134 มม.",
-      "observed_at": "2026-09-25 00:00",
+      "rainfall_mm": 138.5,
+      "value_text": "138.5 มม.",
+      "observed_at": "2026-09-25 04:00",
       "status": "วิกฤต",
       "severity_score": 4,
       "distance_km": 22.0,
       "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
       "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "เหนือปตร.พระนารายน์",
+      "station_code": "ATG051",
+      "province": "พระนครศรีอยุธยา",
+      "district": "ท่าเรือ",
+      "lat": 14.5583,
+      "lon": 100.76205,
+      "rainfall_mm": 130.6,
+      "value_text": "130.6 มม.",
+      "observed_at": "2026-09-25 05:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 19.5,
+      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -1104,9 +1095,9 @@ window.IEAT_THAIWATER_DATA = {
       "district": "โคกเจริญ",
       "lat": 15.4321,
       "lon": 100.9245,
-      "rainfall_mm": 132.4,
-      "value_text": "132.4 มม.",
-      "observed_at": "2026-09-25 01:00",
+      "rainfall_mm": 129.2,
+      "value_text": "129.2 มม.",
+      "observed_at": "2026-09-25 05:00",
       "status": "วิกฤต",
       "severity_score": 4,
       "distance_km": 44.1,
@@ -1115,71 +1106,54 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "ชุมชนหนองสาหร่าย (สะพานขาว)",
-      "station_code": "STN2201",
-      "province": "นครราชสีมา",
-      "district": "ปากช่อง",
-      "lat": 14.717627,
-      "lon": 101.430923,
-      "rainfall_mm": 129.5,
-      "value_text": "129.5 มม.",
-      "observed_at": "2026-09-25 00:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 46.6,
-      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "พัทยา",
-      "station_code": "48461",
-      "province": "ชลบุรี",
-      "district": "บางละมุง",
-      "lat": 12.92,
-      "lon": 100.86944,
-      "rainfall_mm": 128.6,
-      "value_text": "128.6 มม.",
-      "observed_at": "2026-09-24 22:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 17.9,
-      "nearest_estate": "นิคมอุตสาหกรรมแหลมฉบัง",
-      "agency": "อต."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านหนองผักแว่น",
-      "station_code": "STN1589",
-      "province": "สระแก้ว",
-      "district": "ตาพระยา",
-      "lat": 14.040789,
-      "lon": 102.577395,
-      "rainfall_mm": 126.0,
-      "value_text": "126 มม.",
-      "observed_at": "2026-09-25 00:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 35.3,
-      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านซับสมบูรณ์",
-      "station_code": "STN1002",
+      "station": "อบต.ท่าเกวียน",
+      "station_code": "TON004",
       "province": "สระแก้ว",
       "district": "วัฒนานคร",
-      "lat": 13.950064,
-      "lon": 102.556857,
-      "rainfall_mm": 122.5,
-      "value_text": "122.5 มม.",
-      "observed_at": "2026-09-25 00:00",
+      "lat": 13.68734,
+      "lon": 102.28413,
+      "rainfall_mm": 124.6,
+      "value_text": "124.6 มม.",
+      "observed_at": "2026-09-25 05:00",
       "status": "วิกฤต",
       "severity_score": 4,
-      "distance_km": 25.1,
+      "distance_km": 29.5,
       "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
-      "agency": "ทน."
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ท่าเรือ",
+      "station_code": "PAS008",
+      "province": "พระนครศรีอยุธยา",
+      "district": "ท่าเรือ",
+      "lat": 14.56014,
+      "lon": 100.71987,
+      "rainfall_mm": 124.4,
+      "value_text": "124.4 มม.",
+      "observed_at": "2026-09-25 05:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 15.5,
+      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านน้อยสว่าง",
+      "station_code": "LK13",
+      "province": "ปทุมธานี",
+      "district": "หนองเสือ",
+      "lat": 14.1652,
+      "lon": 100.77855,
+      "rainfall_mm": 123.6,
+      "value_text": "123.6 มม.",
+      "observed_at": "2026-09-25 05:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 20.3,
+      "nearest_estate": "นิคมอุตสาหกรรมบ้านหว้า",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -1191,7 +1165,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.505896,
       "rainfall_mm": 120.5,
       "value_text": "120.5 มม.",
-      "observed_at": "2026-09-25 00:00",
+      "observed_at": "2026-09-25 04:00",
       "status": "วิกฤต",
       "severity_score": 4,
       "distance_km": 26.8,
@@ -1200,20 +1174,88 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "บ้านหนองผักกูด",
-      "station_code": "STN1655",
-      "province": "ชลบุรี",
-      "district": "บางละมุง",
-      "lat": 12.818632,
-      "lon": 101.038965,
-      "rainfall_mm": 113.5,
-      "value_text": "113.5 มม.",
-      "observed_at": "2026-09-25 00:00",
+      "station": "บ้านซับสมบูรณ์",
+      "station_code": "STN1002",
+      "province": "สระแก้ว",
+      "district": "วัฒนานคร",
+      "lat": 13.950064,
+      "lon": 102.556857,
+      "rainfall_mm": 120.0,
+      "value_text": "120 มม.",
+      "observed_at": "2026-09-25 04:00",
       "status": "วิกฤต",
       "severity_score": 4,
-      "distance_km": 11.8,
-      "nearest_estate": "นิคมอุตสาหกรรมสมาร์ท ปาร์ค",
+      "distance_km": 25.1,
+      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
       "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ฝายคลองสุคต",
+      "station_code": "ridtele_TS.22",
+      "province": "สระบุรี",
+      "district": "วังม่วง",
+      "lat": 14.863621,
+      "lon": 101.119957,
+      "rainfall_mm": 111.0,
+      "value_text": "111 มม.",
+      "observed_at": "2026-09-25 04:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 29.2,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "ชป."
+    },
+    {
+      "kind": "rainfall",
+      "station": "พระนครศรีอยุธยา",
+      "station_code": "48415",
+      "province": "พระนครศรีอยุธยา",
+      "district": "ท่าเรือ",
+      "lat": 14.53472,
+      "lon": 100.725,
+      "rainfall_mm": 110.2,
+      "value_text": "110.2 มม.",
+      "observed_at": "2026-09-25 04:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 14.8,
+      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
+      "agency": "อต."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ที่ทำการกองทุนบ้านหนองผักแว่น หมู่ 9",
+      "station_code": "TE65",
+      "province": "สระแก้ว",
+      "district": "ตาพระยา",
+      "lat": 14.04115,
+      "lon": 102.57745,
+      "rainfall_mm": 109.6,
+      "value_text": "109.6 มม.",
+      "observed_at": "2026-09-25 04:50",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 35.4,
+      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
+      "agency": "ปภ."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ท้ายปตร.พระศรีศิลป์",
+      "station_code": "ATG072",
+      "province": "สระบุรี",
+      "district": "หนองแค",
+      "lat": 14.32729,
+      "lon": 100.87117,
+      "rainfall_mm": 109.4,
+      "value_text": "109.4 มม.",
+      "observed_at": "2026-09-25 05:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 7.4,
+      "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -1223,9 +1265,9 @@ window.IEAT_THAIWATER_DATA = {
       "district": "สัตหีบ",
       "lat": 12.69861,
       "lon": 100.9762,
-      "rainfall_mm": 111.0,
-      "value_text": "111 มม.",
-      "observed_at": "2026-09-25 01:00",
+      "rainfall_mm": 109.0,
+      "value_text": "109 มม.",
+      "observed_at": "2026-09-25 05:00",
       "status": "วิกฤต",
       "severity_score": 4,
       "distance_km": 14.2,
@@ -1240,9 +1282,9 @@ window.IEAT_THAIWATER_DATA = {
       "district": "ปากช่อง",
       "lat": 14.777422,
       "lon": 101.341215,
-      "rainfall_mm": 108.0,
-      "value_text": "108 มม.",
-      "observed_at": "2026-09-25 00:00",
+      "rainfall_mm": 108.5,
+      "value_text": "108.5 มม.",
+      "observed_at": "2026-09-25 04:00",
       "status": "วิกฤต",
       "severity_score": 4,
       "distance_km": 39.7,
@@ -1251,105 +1293,105 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "รพ.สต.บ้านชากหมาก",
-      "station_code": "ONE090",
-      "province": "ระยอง",
-      "district": "บ้านฉาง",
-      "lat": 12.796795,
-      "lon": 101.027664,
-      "rainfall_mm": 106.8,
-      "value_text": "106.8 มม.",
-      "observed_at": "2026-09-25 01:00",
+      "station": "อบต.วังม่วง",
+      "station_code": "WGYG",
+      "province": "สระบุรี",
+      "district": "วังม่วง",
+      "lat": 14.84867,
+      "lon": 101.14549,
+      "rainfall_mm": 108.2,
+      "value_text": "108.2 มม.",
+      "observed_at": "2026-09-25 05:00",
       "status": "วิกฤต",
       "severity_score": 4,
-      "distance_km": 11.5,
-      "nearest_estate": "นิคมอุตสาหกรรมสมาร์ท ปาร์ค",
+      "distance_km": 29.0,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
       "agency": "สสน."
     },
     {
       "kind": "rainfall",
-      "station": "สัตหีบ",
-      "station_code": "48477",
-      "province": "ชลบุรี",
-      "district": "สัตหีบ",
-      "lat": 12.68333,
-      "lon": 100.98333,
-      "rainfall_mm": 102.3,
-      "value_text": "102.3 มม.",
-      "observed_at": "2026-09-24 22:00",
+      "station": "บ้านซับสมบูรณ์",
+      "station_code": "STN1526",
+      "province": "นครสวรรค์",
+      "district": "ไพศาลี",
+      "lat": 15.566287,
+      "lon": 100.778566,
+      "rainfall_mm": 106.0,
+      "value_text": "106 มม.",
+      "observed_at": "2026-09-25 04:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 23.1,
+      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านหินลับ",
+      "station_code": "STN0678",
+      "province": "สระบุรี",
+      "district": "มวกเหล็ก",
+      "lat": 14.672587,
+      "lon": 101.126529,
+      "rainfall_mm": 104.0,
+      "value_text": "104 มม.",
+      "observed_at": "2026-09-25 04:00",
       "status": "วิกฤต",
       "severity_score": 4,
       "distance_km": 13.8,
-      "nearest_estate": "นิคมอุตสาหกรรมเอเชีย",
-      "agency": "อต."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านนาวัง",
-      "station_code": "STN1654",
-      "province": "ชลบุรี",
-      "district": "บางละมุง",
-      "lat": 12.998358,
-      "lon": 101.005843,
-      "rainfall_mm": 102.0,
-      "value_text": "102 มม.",
-      "observed_at": "2026-09-25 00:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 7.6,
-      "nearest_estate": "นิคมอุตสาหกรรมเฮอร์มีส",
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
       "agency": "ทน."
     },
     {
       "kind": "rainfall",
-      "station": "ที่ทำการกองทุนบ้านหนองผักแว่น หมู่ 9",
-      "station_code": "TE65",
-      "province": "สระแก้ว",
-      "district": "ตาพระยา",
-      "lat": 14.04115,
-      "lon": 102.57745,
-      "rainfall_mm": 101.4,
-      "value_text": "101.4 มม.",
-      "observed_at": "2026-09-25 00:50",
+      "station": "คลองลำปลาทิว ลาดกระบัง",
+      "station_code": "BKK009",
+      "province": "กรุงเทพมหานคร",
+      "district": "ลาดกระบัง",
+      "lat": 13.7407,
+      "lon": 100.79468,
+      "rainfall_mm": 102.8,
+      "value_text": "102.8 มม.",
+      "observed_at": "2026-09-25 05:00",
       "status": "วิกฤต",
       "severity_score": 4,
-      "distance_km": 35.4,
-      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
-      "agency": "ปภ."
-    },
-    {
-      "kind": "rainfall",
-      "station": "รพสต.บ่อวิน",
-      "station_code": "SWNG",
-      "province": "ชลบุรี",
-      "district": "ศรีราชา",
-      "lat": 13.05505,
-      "lon": 101.09782,
-      "rainfall_mm": 101.0,
-      "value_text": "101 มม.",
-      "observed_at": "2026-09-25 01:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 4.4,
-      "nearest_estate": "นิคมอุตสาหกรรมอมตะซิตี้ ระยอง",
+      "distance_km": 2.0,
+      "nearest_estate": "นิคมอุตสาหกรรมลาดกระบัง",
       "agency": "สสน."
     },
     {
       "kind": "rainfall",
-      "station": "ชุมชนชัยพรราชา",
-      "station_code": "STN1973",
-      "province": "ชลบุรี",
-      "district": "บางละมุง",
-      "lat": 12.96831,
-      "lon": 100.92304,
+      "station": "บ้านถนนโค้ง",
+      "station_code": "STN2196",
+      "province": "สระบุรี",
+      "district": "แก่งคอย",
+      "lat": 14.743917,
+      "lon": 101.039334,
       "rainfall_mm": 101.0,
       "value_text": "101 มม.",
-      "observed_at": "2026-09-25 00:00",
+      "observed_at": "2026-09-25 04:00",
       "status": "วิกฤต",
       "severity_score": 4,
-      "distance_km": 12.1,
-      "nearest_estate": "นิคมอุตสาหกรรมแหลมฉบัง",
+      "distance_km": 13.7,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
       "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "อ่างเก็บน้ำห้วยยาง",
+      "station_code": "ridtele_TTL.01",
+      "province": "สระแก้ว",
+      "district": "ตาพระยา",
+      "lat": 14.013375,
+      "lon": 102.644844,
+      "rainfall_mm": 100.0,
+      "value_text": "100 มม.",
+      "observed_at": "2026-09-25 04:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 33.6,
+      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
+      "agency": "ชป."
     },
     {
       "kind": "rainfall",
@@ -1370,88 +1412,139 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "พนมสารคาม",
-      "station_code": "BPK004",
-      "province": "ฉะเชิงเทรา",
-      "district": "พนมสารคาม",
-      "lat": 13.72662,
-      "lon": 101.35298,
-      "rainfall_mm": 96.4,
-      "value_text": "96.4 มม.",
-      "observed_at": "2026-09-25 01:00",
+      "station": "อบต.วังท่าช้าง",
+      "station_code": "WTCH",
+      "province": "ปราจีนบุรี",
+      "district": "กบินทร์บุรี",
+      "lat": 13.75941,
+      "lon": 101.88693,
+      "rainfall_mm": 97.4,
+      "value_text": "97.4 มม.",
+      "observed_at": "2026-09-25 05:00",
       "status": "วิกฤต",
       "severity_score": 4,
-      "distance_km": 12.7,
-      "nearest_estate": "นิคมอุตสาหกรรมเกตเวย์ ซิตี้",
+      "distance_km": 30.1,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
       "agency": "สสน."
     },
     {
       "kind": "rainfall",
-      "station": "ชุมชนมิตรสัมพันธ์",
-      "station_code": "STN1974",
+      "station": "บ้านหนองผักกูด",
+      "station_code": "STN1655",
       "province": "ชลบุรี",
       "district": "บางละมุง",
-      "lat": 12.952748,
-      "lon": 100.91541,
-      "rainfall_mm": 96.0,
-      "value_text": "96 มม.",
-      "observed_at": "2026-09-25 00:00",
+      "lat": 12.818632,
+      "lon": 101.038965,
+      "rainfall_mm": 97.0,
+      "value_text": "97 มม.",
+      "observed_at": "2026-09-25 04:00",
       "status": "วิกฤต",
       "severity_score": 4,
-      "distance_km": 13.7,
-      "nearest_estate": "นิคมอุตสาหกรรมเฮอร์มีส",
+      "distance_km": 11.8,
+      "nearest_estate": "นิคมอุตสาหกรรมสมาร์ท ปาร์ค",
       "agency": "ทน."
     },
     {
       "kind": "rainfall",
-      "station": "บ้านหินลับ",
-      "station_code": "STN0678",
-      "province": "สระบุรี",
-      "district": "มวกเหล็ก",
-      "lat": 14.672587,
-      "lon": 101.126529,
+      "station": "คลองส้ม",
+      "station_code": "ridtele_TS.23",
+      "province": "ลพบุรี",
+      "district": "พัฒนานิคม",
+      "lat": 14.822028,
+      "lon": 101.014594,
+      "rainfall_mm": 95.0,
+      "value_text": "95 มม.",
+      "observed_at": "2026-09-25 04:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 22.0,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "ชป."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ชุมชนวังปาตอง",
+      "station_code": "STN2205",
+      "province": "สระแก้ว",
+      "district": "อรัญประเทศ",
+      "lat": 13.682056,
+      "lon": 102.504417,
       "rainfall_mm": 93.5,
       "value_text": "93.5 มม.",
-      "observed_at": "2026-09-25 00:00",
+      "observed_at": "2026-09-25 04:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 7.1,
+      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ปตร.ประชาร่วมใจ",
+      "station_code": "RF.MBR.02",
+      "province": "กรุงเทพมหานคร",
+      "district": "มีนบุรี",
+      "lat": 13.8212,
+      "lon": 100.74717,
+      "rainfall_mm": 93.0,
+      "value_text": "93 มม.",
+      "observed_at": "2026-09-25 05:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 5.0,
+      "nearest_estate": "นิคมอุตสาหกรรมบางชัน",
+      "agency": "สนน กทม."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านเนินหินกอง",
+      "station_code": "ridtele_TKgt48",
+      "province": "ปราจีนบุรี",
+      "district": "กบินทร์บุรี",
+      "lat": 13.782015,
+      "lon": 101.900566,
+      "rainfall_mm": 92.0,
+      "value_text": "92 มม.",
+      "observed_at": "2026-09-25 04:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 30.1,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
+      "agency": "ชป."
+    },
+    {
+      "kind": "rainfall",
+      "station": "สัตหีบ",
+      "station_code": "48477",
+      "province": "ชลบุรี",
+      "district": "สัตหีบ",
+      "lat": 12.68333,
+      "lon": 100.98333,
+      "rainfall_mm": 92.0,
+      "value_text": "92 มม.",
+      "observed_at": "2026-09-25 04:00",
       "status": "วิกฤต",
       "severity_score": 4,
       "distance_km": 13.8,
-      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "เขตห้ามล่าสัตว์ป่าเขาชีโอน",
-      "station_code": "MOU121",
-      "province": "ชลบุรี",
-      "district": "สัตหีบ",
-      "lat": 12.768159,
-      "lon": 100.97308,
-      "rainfall_mm": 92.4,
-      "value_text": "92.4 มม.",
-      "observed_at": "2026-09-25 01:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 15.5,
       "nearest_estate": "นิคมอุตสาหกรรมเอเชีย",
-      "agency": "พพภ"
+      "agency": "อต."
     },
     {
       "kind": "rainfall",
-      "station": "อ่างเก็บน้ำห้วยยาง",
-      "station_code": "ridtele_TTL.01",
-      "province": "สระแก้ว",
-      "district": "ตาพระยา",
-      "lat": 14.013375,
-      "lon": 102.644844,
-      "rainfall_mm": 91.0,
-      "value_text": "91 มม.",
-      "observed_at": "2026-09-25 00:00",
+      "station": "ปตร.คลองสามวา",
+      "station_code": "RF.KSW.02",
+      "province": "กรุงเทพมหานคร",
+      "district": "คลองสามวา",
+      "lat": 13.85954,
+      "lon": 100.72909,
+      "rainfall_mm": 91.5,
+      "value_text": "91.5 มม.",
+      "observed_at": "2026-09-25 05:00",
       "status": "วิกฤต",
       "severity_score": 4,
-      "distance_km": 33.6,
-      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
-      "agency": "ชป."
+      "distance_km": 6.7,
+      "nearest_estate": "นิคมอุตสาหกรรมบางชัน",
+      "agency": "สนน กทม."
     },
     {
       "kind": "rainfall",
@@ -1490,39 +1583,39 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "สะพานหัวเวียง",
-      "station_code": "C.67",
-      "province": "พระนครศรีอยุธยา",
-      "district": "เสนา",
-      "lat": 14.36851,
-      "lon": 100.414391,
-      "waterlevel_msl": 4.27,
-      "storage_percent": 116.29,
-      "value_text": "4.27 ม.รทก.",
-      "observed_at": "2026-09-25 01:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 23.7,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
       "station": "คลองพรหมโหด",
       "station_code": "SKE003",
       "province": "สระแก้ว",
       "district": "อรัญประเทศ",
       "lat": 13.705864,
       "lon": 102.48168,
-      "waterlevel_msl": 44.84,
-      "storage_percent": 115.12,
-      "value_text": "44.84 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
+      "waterlevel_msl": 44.96,
+      "storage_percent": 118.46,
+      "value_text": "44.96 ม.รทก.",
+      "observed_at": "2026-09-25 05:10",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
       "distance_km": 8.1,
       "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
       "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "สะพานหัวเวียง",
+      "station_code": "C.67",
+      "province": "พระนครศรีอยุธยา",
+      "district": "เสนา",
+      "lat": 14.36851,
+      "lon": 100.414391,
+      "waterlevel_msl": 4.33,
+      "storage_percent": 116.93,
+      "value_text": "4.33 ม.รทก.",
+      "observed_at": "2026-09-25 04:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 23.7,
+      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
+      "agency": "ชป."
     },
     {
       "kind": "waterlevel",
@@ -1532,10 +1625,10 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บางบาล",
       "lat": 14.4158,
       "lon": 100.44071,
-      "waterlevel_msl": 5.17,
-      "storage_percent": 109.83,
-      "value_text": "5.17 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
+      "waterlevel_msl": 5.21,
+      "storage_percent": 110.32,
+      "value_text": "5.21 ม.รทก.",
+      "observed_at": "2026-09-25 05:10",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
       "distance_km": 18.6,
@@ -1550,10 +1643,10 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บางบาล",
       "lat": 14.41588,
       "lon": 100.440804,
-      "waterlevel_msl": 5.16,
-      "storage_percent": 108.39,
-      "value_text": "5.16 ม.รทก.",
-      "observed_at": "2026-09-25 01:00",
+      "waterlevel_msl": 5.22,
+      "storage_percent": 108.98,
+      "value_text": "5.22 ม.รทก.",
+      "observed_at": "2026-09-25 04:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
       "distance_km": 18.6,
@@ -1568,10 +1661,10 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บางบาล",
       "lat": 14.42303,
       "lon": 100.48186,
-      "waterlevel_msl": 6.13,
-      "storage_percent": 104.15,
-      "value_text": "6.13 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
+      "waterlevel_msl": 6.18,
+      "storage_percent": 104.83,
+      "value_text": "6.18 ม.รทก.",
+      "observed_at": "2026-09-25 05:10",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
       "distance_km": 14.3,
@@ -1587,9 +1680,9 @@ window.IEAT_THAIWATER_DATA = {
       "lat": 16.8586,
       "lon": 100.05965,
       "waterlevel_msl": 40.7,
-      "storage_percent": 102.03,
+      "storage_percent": 102.06,
       "value_text": "40.7 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
+      "observed_at": "2026-09-25 05:10",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
       "distance_km": 32.9,
@@ -1640,10 +1733,10 @@ window.IEAT_THAIWATER_DATA = {
       "district": "องครักษ์",
       "lat": 14.113633,
       "lon": 101.01952,
-      "waterlevel_msl": 2.63,
-      "storage_percent": 100.92,
-      "value_text": "2.63 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
+      "waterlevel_msl": 2.64,
+      "storage_percent": 101.1,
+      "value_text": "2.64 ม.รทก.",
+      "observed_at": "2026-09-25 05:10",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
       "distance_km": 32.8,
@@ -1652,37 +1745,20 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "บ้านซับสมบูรณ์",
-      "station_code": "STN1526",
-      "province": "นครสวรรค์",
-      "district": "ไพศาลี",
-      "lat": 15.566287,
-      "lon": 100.778566,
-      "rainfall_mm": 89.5,
-      "value_text": "89.5 มม.",
-      "observed_at": "2026-09-25 00:00",
+      "station": "อบต.ศีรษะจรเข้น้อย",
+      "station_code": "BST1",
+      "province": "สมุทรปราการ",
+      "district": "บางเสาธง",
+      "lat": 13.67777,
+      "lon": 100.7945,
+      "rainfall_mm": 89.8,
+      "value_text": "89.8 มม.",
+      "observed_at": "2026-09-25 05:00",
       "status": "เสี่ยงสูง",
       "severity_score": 3,
-      "distance_km": 23.1,
-      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านหนองกะโตวา",
-      "station_code": "STN1475",
-      "province": "นครราชสีมา",
-      "district": "ปากช่อง",
-      "lat": 14.718076,
-      "lon": 101.364047,
-      "rainfall_mm": 88.5,
-      "value_text": "88.5 มม.",
-      "observed_at": "2026-09-25 00:00",
-      "status": "เสี่ยงสูง",
-      "severity_score": 3,
-      "distance_km": 39.7,
-      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
-      "agency": "ทน."
+      "distance_km": 9.0,
+      "nearest_estate": "นิคมอุตสาหกรรมลาดกระบัง",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -1692,9 +1768,9 @@ window.IEAT_THAIWATER_DATA = {
       "district": "วัฒนานคร",
       "lat": 13.98736,
       "lon": 102.43794,
-      "rainfall_mm": 87.6,
-      "value_text": "87.6 มม.",
-      "observed_at": "2026-09-25 01:00",
+      "rainfall_mm": 89.0,
+      "value_text": "89 มม.",
+      "observed_at": "2026-09-25 05:00",
       "status": "เสี่ยงสูง",
       "severity_score": 3,
       "distance_km": 31.9,
@@ -1703,121 +1779,53 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "ท่าเรือ",
-      "station_code": "PAS008",
-      "province": "พระนครศรีอยุธยา",
-      "district": "ท่าเรือ",
-      "lat": 14.56014,
-      "lon": 100.71987,
-      "rainfall_mm": 87.4,
-      "value_text": "87.4 มม.",
-      "observed_at": "2026-09-25 01:00",
+      "station": "บ้านฟากห้วย",
+      "station_code": "ridtele_TTL.04",
+      "province": "สระแก้ว",
+      "district": "อรัญประเทศ",
+      "lat": 13.684085,
+      "lon": 102.501103,
+      "rainfall_mm": 89.0,
+      "value_text": "89 มม.",
+      "observed_at": "2026-09-25 04:00",
       "status": "เสี่ยงสูง",
       "severity_score": 3,
-      "distance_km": 15.5,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "สสน."
+      "distance_km": 7.3,
+      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
+      "agency": "ชป."
     },
     {
       "kind": "rainfall",
-      "station": "อบต.หนองแหน",
-      "station_code": "NGNG",
-      "province": "ฉะเชิงเทรา",
-      "district": "พนมสารคาม",
-      "lat": 13.68338,
-      "lon": 101.32512,
-      "rainfall_mm": 86.0,
-      "value_text": "86 มม.",
-      "observed_at": "2026-09-25 01:00",
+      "station": "เหนือเขื่อนป่าสัก",
+      "station_code": "ridtele_TS.10",
+      "province": "ลพบุรี",
+      "district": "พัฒนานิคม",
+      "lat": 14.848254,
+      "lon": 101.090205,
+      "rainfall_mm": 88.0,
+      "value_text": "88 มม.",
+      "observed_at": "2026-09-25 04:00",
       "status": "เสี่ยงสูง",
       "severity_score": 3,
-      "distance_km": 7.7,
-      "nearest_estate": "นิคมอุตสาหกรรมเกตเวย์ ซิตี้",
-      "agency": "สสน."
+      "distance_km": 26.4,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "ชป."
     },
     {
       "kind": "rainfall",
-      "station": "ท้ายปตร.พระนารายน์",
-      "station_code": "ATG052",
-      "province": "พระนครศรีอยุธยา",
-      "district": "ท่าเรือ",
-      "lat": 14.55667,
-      "lon": 100.76201,
-      "rainfall_mm": 85.4,
-      "value_text": "85.4 มม.",
-      "observed_at": "2026-09-25 01:00",
+      "station": "คลองจระเข้ใหญ่ บางเสาธง (วัดศรีวารีน้อย)",
+      "station_code": "BKK017",
+      "province": "สมุทรปราการ",
+      "district": "บางเสาธง",
+      "lat": 13.66949,
+      "lon": 100.80058,
+      "rainfall_mm": 87.6,
+      "value_text": "87.6 มม.",
+      "observed_at": "2026-09-25 05:00",
       "status": "เสี่ยงสูง",
       "severity_score": 3,
-      "distance_km": 19.4,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ระยอง",
-      "station_code": "48478",
-      "province": "ระยอง",
-      "district": "เมืองระยอง",
-      "lat": 12.63369,
-      "lon": 101.34075,
-      "rainfall_mm": 84.9,
-      "value_text": "84.9 มม.",
-      "observed_at": "2026-09-25 01:00",
-      "status": "เสี่ยงสูง",
-      "severity_score": 3,
-      "distance_km": 16.3,
-      "nearest_estate": "นิคมอุตสาหกรรมหลักชัยเมืองยาง",
-      "agency": "อต."
-    },
-    {
-      "kind": "rainfall",
-      "station": "อบต.ดอนฉิมพลี",
-      "station_code": "DKLG",
-      "province": "ฉะเชิงเทรา",
-      "district": "บางน้ำเปรี้ยว",
-      "lat": 13.90535,
-      "lon": 100.97028,
-      "rainfall_mm": 83.8,
-      "value_text": "83.8 มม.",
-      "observed_at": "2026-09-25 01:00",
-      "status": "เสี่ยงสูง",
-      "severity_score": 3,
-      "distance_km": 25.5,
+      "distance_km": 9.9,
       "nearest_estate": "นิคมอุตสาหกรรมลาดกระบัง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านหัวพุ",
-      "station_code": "STN1249",
-      "province": "นครสวรรค์",
-      "district": "ไพศาลี",
-      "lat": 15.564188,
-      "lon": 100.705829,
-      "rainfall_mm": 83.0,
-      "value_text": "83 มม.",
-      "observed_at": "2026-09-25 00:00",
-      "status": "เสี่ยงสูง",
-      "severity_score": 3,
-      "distance_km": 16.5,
-      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ท้ายปตร.พระศรีศิลป์",
-      "station_code": "ATG072",
-      "province": "สระบุรี",
-      "district": "หนองแค",
-      "lat": 14.32729,
-      "lon": 100.87117,
-      "rainfall_mm": 82.8,
-      "value_text": "82.8 มม.",
-      "observed_at": "2026-09-25 01:00",
-      "status": "เสี่ยงสูง",
-      "severity_score": 3,
-      "distance_km": 7.4,
-      "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
       "agency": "สสน."
     },
     {
@@ -1828,9 +1836,9 @@ window.IEAT_THAIWATER_DATA = {
       "district": "โคกสำโรง",
       "lat": 15.017018,
       "lon": 100.793065,
-      "rainfall_mm": 81.5,
-      "value_text": "81.5 มม.",
-      "observed_at": "2026-09-25 00:00",
+      "rainfall_mm": 86.5,
+      "value_text": "86.5 มม.",
+      "observed_at": "2026-09-25 04:00",
       "status": "เสี่ยงสูง",
       "severity_score": 3,
       "distance_km": 49.4,
@@ -1839,19 +1847,359 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "เหนือปตร.พระนารายน์",
-      "station_code": "ATG051",
-      "province": "พระนครศรีอยุธยา",
-      "district": "ท่าเรือ",
-      "lat": 14.5583,
-      "lon": 100.76205,
-      "rainfall_mm": 80.8,
-      "value_text": "80.8 มม.",
-      "observed_at": "2026-09-25 01:00",
+      "station": "สระแก้ว",
+      "station_code": "48440",
+      "province": "สระแก้ว",
+      "district": "เมืองสระแก้ว",
+      "lat": 13.78889,
+      "lon": 102.03472,
+      "rainfall_mm": 84.6,
+      "value_text": "84.6 มม.",
+      "observed_at": "2026-09-25 04:00",
       "status": "เสี่ยงสูง",
       "severity_score": 3,
-      "distance_km": 19.5,
+      "distance_km": 43.2,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
+      "agency": "อต."
+    },
+    {
+      "kind": "rainfall",
+      "station": "พนมสารคาม",
+      "station_code": "BPK004",
+      "province": "ฉะเชิงเทรา",
+      "district": "พนมสารคาม",
+      "lat": 13.72662,
+      "lon": 101.35298,
+      "rainfall_mm": 84.2,
+      "value_text": "84.2 มม.",
+      "observed_at": "2026-09-25 05:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 12.7,
+      "nearest_estate": "นิคมอุตสาหกรรมเกตเวย์ ซิตี้",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "อรัญประเทศ",
+      "station_code": "48462",
+      "province": "สระแก้ว",
+      "district": "อรัญประเทศ",
+      "lat": 13.68869,
+      "lon": 102.50417,
+      "rainfall_mm": 83.4,
+      "value_text": "83.4 มม.",
+      "observed_at": "2026-09-25 04:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 6.7,
+      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
+      "agency": "อต."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บางปะหัน",
+      "station_code": "LBI001",
+      "province": "พระนครศรีอยุธยา",
+      "district": "บางปะหัน",
+      "lat": 14.42731,
+      "lon": 100.55605,
+      "rainfall_mm": 83.0,
+      "value_text": "83 มม.",
+      "observed_at": "2026-09-25 05:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 8.1,
       "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านหนองกะโตวา",
+      "station_code": "STN1475",
+      "province": "นครราชสีมา",
+      "district": "ปากช่อง",
+      "lat": 14.718076,
+      "lon": 101.364047,
+      "rainfall_mm": 82.5,
+      "value_text": "82.5 มม.",
+      "observed_at": "2026-09-25 04:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 39.7,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ปตร.บึงขวาง",
+      "station_code": "RF.MBR.03",
+      "province": "กรุงเทพมหานคร",
+      "district": "มีนบุรี",
+      "lat": 13.79988,
+      "lon": 100.74482,
+      "rainfall_mm": 82.0,
+      "value_text": "82 มม.",
+      "observed_at": "2026-09-25 05:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 4.3,
+      "nearest_estate": "นิคมอุตสาหกรรมบางชัน",
+      "agency": "สนน กทม."
+    },
+    {
+      "kind": "rainfall",
+      "station": "สนข.มีนบุรี",
+      "station_code": "RF.MBR.01",
+      "province": "กรุงเทพมหานคร",
+      "district": "มีนบุรี",
+      "lat": 13.8136,
+      "lon": 100.73122,
+      "rainfall_mm": 81.5,
+      "value_text": "81.5 มม.",
+      "observed_at": "2026-09-25 05:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 3.1,
+      "nearest_estate": "นิคมอุตสาหกรรมบางชัน",
+      "agency": "สนน กทม."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านหัวพุ",
+      "station_code": "STN1249",
+      "province": "นครสวรรค์",
+      "district": "ไพศาลี",
+      "lat": 15.564188,
+      "lon": 100.705829,
+      "rainfall_mm": 81.0,
+      "value_text": "81 มม.",
+      "observed_at": "2026-09-25 04:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 16.5,
+      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "นครหลวง",
+      "station_code": "PAS009",
+      "province": "พระนครศรีอยุธยา",
+      "district": "นครหลวง",
+      "lat": 14.40269,
+      "lon": 100.5864,
+      "rainfall_mm": 80.8,
+      "value_text": "80.8 มม.",
+      "observed_at": "2026-09-25 05:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 9.7,
+      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ปตร.พระยาสุเรนทร์",
+      "station_code": "RF.SMI.03",
+      "province": "กรุงเทพมหานคร",
+      "district": "สายไหม",
+      "lat": 13.92126,
+      "lon": 100.68741,
+      "rainfall_mm": 80.5,
+      "value_text": "80.5 มม.",
+      "observed_at": "2026-09-25 05:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 13.2,
+      "nearest_estate": "นิคมอุตสาหกรรมบางชัน",
+      "agency": "สนน กทม."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ทต.ไพศาลี",
+      "station_code": "PSLI",
+      "province": "นครสวรรค์",
+      "district": "ไพศาลี",
+      "lat": 15.60012,
+      "lon": 100.6572,
+      "rainfall_mm": 80.4,
+      "value_text": "80.4 มม.",
+      "observed_at": "2026-09-25 05:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 10.0,
+      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "สะพานคลองส่งน้ำชลประทาน บ้านสร่างโศก",
+      "station_code": "HDA011",
+      "province": "สระบุรี",
+      "district": "บ้านหมอ",
+      "lat": 14.650794,
+      "lon": 100.742775,
+      "rainfall_mm": 80.2,
+      "value_text": "80.2 มม.",
+      "observed_at": "2026-09-25 05:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 23.9,
+      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ลำตะคอง",
+      "station_code": "MOU263",
+      "province": "นครราชสีมา",
+      "district": "ปากช่อง",
+      "lat": 14.735245,
+      "lon": 101.3785,
+      "rainfall_mm": 80.0,
+      "value_text": "80 มม.",
+      "observed_at": "2026-09-25 05:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 41.7,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "พพภ"
+    },
+    {
+      "kind": "rainfall",
+      "station": "วัดจอมเกษ",
+      "station_code": "ridtele_TS.25",
+      "province": "พระนครศรีอยุธยา",
+      "district": "บางปะหัน",
+      "lat": 14.414349,
+      "lon": 100.55782,
+      "rainfall_mm": 80.0,
+      "value_text": "80 มม.",
+      "observed_at": "2026-09-25 04:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 9.3,
+      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
+      "agency": "ชป."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านหมาก",
+      "station_code": "STN1374",
+      "province": "สระบุรี",
+      "district": "มวกเหล็ก",
+      "lat": 14.689007,
+      "lon": 101.198163,
+      "rainfall_mm": 78.5,
+      "value_text": "78.5 มม.",
+      "observed_at": "2026-09-25 04:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 21.7,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ปตร.คลองประเวศฯ-ลาดกระบัง",
+      "station_code": "RF.LKB.02",
+      "province": "กรุงเทพมหานคร",
+      "district": "ลาดกระบัง",
+      "lat": 13.72386,
+      "lon": 100.74979,
+      "rainfall_mm": 78.5,
+      "value_text": "78.5 มม.",
+      "observed_at": "2026-09-25 05:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 5.7,
+      "nearest_estate": "นิคมอุตสาหกรรมลาดกระบัง",
+      "agency": "สนน กทม."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านหนองยาง",
+      "station_code": "STN1478",
+      "province": "นครราชสีมา",
+      "district": "ปากช่อง",
+      "lat": 14.607045,
+      "lon": 101.207572,
+      "rainfall_mm": 78.0,
+      "value_text": "78 มม.",
+      "observed_at": "2026-09-25 04:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 21.6,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ที่ทำการเขตห้ามล่าสัตว์ป่าแก่งคอย",
+      "station_code": "MOU427",
+      "province": "สระบุรี",
+      "district": "แก่งคอย",
+      "lat": 14.5439,
+      "lon": 101.0983,
+      "rainfall_mm": 77.8,
+      "value_text": "77.8 มม.",
+      "observed_at": "2026-09-25 05:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 13.2,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "พพภ"
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านถ้ำมงกุฎ",
+      "station_code": "STN0449",
+      "province": "สระบุรี",
+      "district": "พระพุทธบาท",
+      "lat": 14.678451,
+      "lon": 100.846683,
+      "rainfall_mm": 77.5,
+      "value_text": "77.5 มม.",
+      "observed_at": "2026-09-25 04:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 18.4,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "รร.วัดอู่ข้าว",
+      "station_code": "RSK7",
+      "province": "ปทุมธานี",
+      "district": "คลองหลวง",
+      "lat": 14.19111,
+      "lon": 100.75421,
+      "rainfall_mm": 77.0,
+      "value_text": "77 มม.",
+      "observed_at": "2026-09-25 05:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 16.7,
+      "nearest_estate": "นิคมอุตสาหกรรมบ้านหว้า",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "อบต.คลองตะเกรา",
+      "station_code": "NKOK",
+      "province": "ฉะเชิงเทรา",
+      "district": "ท่าตะเกียบ",
+      "lat": 13.41823,
+      "lon": 101.64146,
+      "rainfall_mm": 76.8,
+      "value_text": "76.8 มม.",
+      "observed_at": "2026-09-25 05:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 40.2,
+      "nearest_estate": "นิคมอุตสาหกรรมเกตเวย์ ซิตี้",
       "agency": "สสน."
     },
     {
@@ -1862,9 +2210,9 @@ window.IEAT_THAIWATER_DATA = {
       "district": "วัฒนานคร",
       "lat": 13.94595,
       "lon": 102.28505,
-      "rainfall_mm": 79.4,
-      "value_text": "79.4 มม.",
-      "observed_at": "2026-09-25 01:00",
+      "rainfall_mm": 76.6,
+      "value_text": "76.6 มม.",
+      "observed_at": "2026-09-25 05:00",
       "status": "เสี่ยงสูง",
       "severity_score": 3,
       "distance_km": 38.2,
@@ -1873,155 +2221,207 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "ที่ทำการเขตห้ามล่าสัตว์ป่าแก่งคอย",
-      "station_code": "MOU427",
-      "province": "สระบุรี",
-      "district": "แก่งคอย",
-      "lat": 14.5439,
-      "lon": 101.0983,
-      "rainfall_mm": 78.0,
-      "value_text": "78 มม.",
-      "observed_at": "2026-09-25 01:00",
+      "station": "คลองบางบาล",
+      "station_code": "CPY010",
+      "province": "พระนครศรีอยุธยา",
+      "district": "บางบาล",
+      "lat": 14.42303,
+      "lon": 100.48186,
+      "rainfall_mm": 76.4,
+      "value_text": "76.4 มม.",
+      "observed_at": "2026-09-25 05:00",
       "status": "เสี่ยงสูง",
       "severity_score": 3,
-      "distance_km": 13.2,
-      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "distance_km": 14.3,
+      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "อบต.ตาคลี",
+      "station_code": "TAKI",
+      "province": "นครสวรรค์",
+      "district": "ตาคลี",
+      "lat": 15.29119,
+      "lon": 100.38288,
+      "rainfall_mm": 75.4,
+      "value_text": "75.4 มม.",
+      "observed_at": "2026-09-25 05:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 45.7,
+      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ที่ทำการอุทยานแห่งชาติเขาชะเมา-เขาวง",
+      "station_code": "MOU479",
+      "province": "ระยอง",
+      "district": "เขาชะเมา",
+      "lat": 12.912333,
+      "lon": 101.72454,
+      "rainfall_mm": 75.2,
+      "value_text": "75.2 มม.",
+      "observed_at": "2026-09-25 05:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 35.7,
+      "nearest_estate": "นิคมอุตสาหกรรมหลักชัยเมืองยาง",
       "agency": "พพภ"
     },
     {
       "kind": "rainfall",
-      "station": "บ้านหนองยาง",
-      "station_code": "STN1478",
-      "province": "นครราชสีมา",
-      "district": "ปากช่อง",
-      "lat": 14.607045,
-      "lon": 101.207572,
-      "rainfall_mm": 77.5,
-      "value_text": "77.5 มม.",
-      "observed_at": "2026-09-25 00:00",
+      "station": "อบต.หนองแหน",
+      "station_code": "NGNG",
+      "province": "ฉะเชิงเทรา",
+      "district": "พนมสารคาม",
+      "lat": 13.68338,
+      "lon": 101.32512,
+      "rainfall_mm": 73.8,
+      "value_text": "73.8 มม.",
+      "observed_at": "2026-09-25 05:00",
       "status": "เสี่ยงสูง",
       "severity_score": 3,
-      "distance_km": 21.6,
+      "distance_km": 7.7,
+      "nearest_estate": "นิคมอุตสาหกรรมเกตเวย์ ซิตี้",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "สนามบินสุวรรณภูมิ",
+      "station_code": "48429",
+      "province": "สมุทรปราการ",
+      "district": "บางพลี",
+      "lat": 13.68639,
+      "lon": 100.7675,
+      "rainfall_mm": 73.6,
+      "value_text": "73.6 มม.",
+      "observed_at": "2026-09-25 04:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 6.5,
+      "nearest_estate": "นิคมอุตสาหกรรมอัญธานี",
+      "agency": "อต."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านเจ้าพ่อเขาตก",
+      "station_code": "STN0677",
+      "province": "สระบุรี",
+      "district": "พระพุทธบาท",
+      "lat": 14.693386,
+      "lon": 100.784861,
+      "rainfall_mm": 73.5,
+      "value_text": "73.5 มม.",
+      "observed_at": "2026-09-25 04:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 25.2,
       "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
       "agency": "ทน."
     },
     {
       "kind": "rainfall",
-      "station": "ชุมชนวังปาตอง",
-      "station_code": "STN2205",
-      "province": "สระแก้ว",
-      "district": "อรัญประเทศ",
-      "lat": 13.682056,
-      "lon": 102.504417,
-      "rainfall_mm": 76.5,
-      "value_text": "76.5 มม.",
-      "observed_at": "2026-09-25 00:00",
+      "station": "TC.60",
+      "station_code": "ridtele_TC.60",
+      "province": "นครสวรรค์",
+      "district": "ท่าตะโก",
+      "lat": 15.67,
+      "lon": 100.334167,
+      "rainfall_mm": 73.0,
+      "value_text": "73 มม.",
+      "observed_at": "2026-09-25 04:00",
       "status": "เสี่ยงสูง",
       "severity_score": 3,
-      "distance_km": 7.1,
-      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
-      "agency": "ทน."
+      "distance_km": 26.7,
+      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
+      "agency": "ชป."
     },
     {
       "kind": "rainfall",
-      "station": "บ้านน้อยสว่าง",
-      "station_code": "LK13",
-      "province": "ปทุมธานี",
-      "district": "หนองเสือ",
-      "lat": 14.1652,
-      "lon": 100.77855,
-      "rainfall_mm": 76.0,
-      "value_text": "76 มม.",
-      "observed_at": "2026-09-25 01:00",
+      "station": "ทม.ทับกวาง",
+      "station_code": "CMKK",
+      "province": "สระบุรี",
+      "district": "แก่งคอย",
+      "lat": 14.60885,
+      "lon": 101.07645,
+      "rainfall_mm": 73.0,
+      "value_text": "73 มม.",
+      "observed_at": "2026-09-25 05:00",
       "status": "เสี่ยงสูง",
       "severity_score": 3,
-      "distance_km": 20.3,
+      "distance_km": 7.6,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "รพ.สต.บ้านชากหมาก",
+      "station_code": "ONE090",
+      "province": "ระยอง",
+      "district": "บ้านฉาง",
+      "lat": 12.796795,
+      "lon": 101.027664,
+      "rainfall_mm": 72.6,
+      "value_text": "72.6 มม.",
+      "observed_at": "2026-09-25 05:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 11.5,
+      "nearest_estate": "นิคมอุตสาหกรรมสมาร์ท ปาร์ค",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "เสนา (ทุ่งบางบาล-บ้านแพน)",
+      "station_code": "TCP012",
+      "province": "พระนครศรีอยุธยา",
+      "district": "เสนา",
+      "lat": 14.327773,
+      "lon": 100.405464,
+      "rainfall_mm": 72.0,
+      "value_text": "72 มม.",
+      "observed_at": "2026-09-25 05:00",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "distance_km": 23.8,
       "nearest_estate": "นิคมอุตสาหกรรมบ้านหว้า",
       "agency": "สสน."
     },
     {
       "kind": "rainfall",
-      "station": "คลองส้ม",
-      "station_code": "ridtele_TS.23",
-      "province": "ลพบุรี",
-      "district": "พัฒนานิคม",
-      "lat": 14.822028,
-      "lon": 101.014594,
-      "rainfall_mm": 75.0,
-      "value_text": "75 มม.",
-      "observed_at": "2026-09-25 00:00",
-      "status": "เสี่ยงสูง",
-      "severity_score": 3,
-      "distance_km": 22.0,
-      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
-      "agency": "ชป."
-    },
-    {
-      "kind": "rainfall",
-      "station": "พระนครศรีอยุธยา",
-      "station_code": "48415",
-      "province": "พระนครศรีอยุธยา",
-      "district": "ท่าเรือ",
-      "lat": 14.53472,
-      "lon": 100.725,
-      "rainfall_mm": 74.9,
-      "value_text": "74.9 มม.",
-      "observed_at": "2026-09-25 01:00",
-      "status": "เสี่ยงสูง",
-      "severity_score": 3,
-      "distance_km": 14.8,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "อต."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ปากคลองพระองค์เจ้าฯ (บางน้ำเปรี้ยว)",
-      "station_code": "BKK016",
-      "province": "ฉะเชิงเทรา",
-      "district": "บางน้ำเปรี้ยว",
-      "lat": 13.83819,
-      "lon": 100.9666,
+      "station": "บ้านด่าน",
+      "station_code": "STN1003",
+      "province": "สระแก้ว",
+      "district": "อรัญประเทศ",
+      "lat": 13.721552,
+      "lon": 102.465027,
       "rainfall_mm": 72.0,
       "value_text": "72 มม.",
-      "observed_at": "2026-09-25 01:00",
+      "observed_at": "2026-09-25 04:00",
       "status": "เสี่ยงสูง",
       "severity_score": 3,
-      "distance_km": 20.7,
-      "nearest_estate": "นิคมอุตสาหกรรมเอเซีย (สุวรรณภูมิ)",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านถนนโค้ง",
-      "station_code": "STN2196",
-      "province": "สระบุรี",
-      "district": "แก่งคอย",
-      "lat": 14.743917,
-      "lon": 101.039334,
-      "rainfall_mm": 71.5,
-      "value_text": "71.5 มม.",
-      "observed_at": "2026-09-25 00:00",
-      "status": "เสี่ยงสูง",
-      "severity_score": 3,
-      "distance_km": 13.7,
-      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "distance_km": 9.7,
+      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
       "agency": "ทน."
     },
     {
-      "kind": "rainfall",
-      "station": "คลองลำปลาทิว ลาดกระบัง",
-      "station_code": "BKK009",
-      "province": "กรุงเทพมหานคร",
-      "district": "ลาดกระบัง",
-      "lat": 13.7407,
-      "lon": 100.79468,
-      "rainfall_mm": 70.8,
-      "value_text": "70.8 มม.",
-      "observed_at": "2026-09-25 01:00",
-      "status": "เสี่ยงสูง",
+      "kind": "waterlevel",
+      "station": "ศรีมหาโพธิ (KGT6)",
+      "station_code": "PRC005",
+      "province": "ปราจีนบุรี",
+      "district": "ศรีมหาโพธิ",
+      "lat": 13.97348,
+      "lon": 101.51751,
+      "waterlevel_msl": 7.56,
+      "storage_percent": 99.79,
+      "value_text": "7.56 ม.รทก.",
+      "observed_at": "2026-09-25 05:10",
+      "status": "วิกฤต",
       "severity_score": 3,
-      "distance_km": 2.0,
-      "nearest_estate": "นิคมอุตสาหกรรมลาดกระบัง",
+      "distance_km": 16.4,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
       "agency": "สสน."
     },
     {
@@ -2032,32 +2432,14 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บางน้ำเปรี้ยว",
       "lat": 13.87032,
       "lon": 101.14574,
-      "waterlevel_msl": 1.41,
-      "storage_percent": 99.52,
-      "value_text": "1.41 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
+      "waterlevel_msl": 1.37,
+      "storage_percent": 99.18,
+      "value_text": "1.37 ม.รทก.",
+      "observed_at": "2026-09-25 05:10",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 34.5,
       "nearest_estate": "นิคมอุตสาหกรรมเอเซีย (สุวรรณภูมิ)",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "ศรีมหาโพธิ (KGT6)",
-      "station_code": "PRC005",
-      "province": "ปราจีนบุรี",
-      "district": "ศรีมหาโพธิ",
-      "lat": 13.97348,
-      "lon": 101.51751,
-      "waterlevel_msl": 7.51,
-      "storage_percent": 99.3,
-      "value_text": "7.51 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 16.4,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
       "agency": "สสน."
     },
     {
@@ -2068,10 +2450,10 @@ window.IEAT_THAIWATER_DATA = {
       "district": "เมืองสระแก้ว",
       "lat": 13.937376,
       "lon": 101.922035,
-      "waterlevel_msl": 19.43,
-      "storage_percent": 98.04,
-      "value_text": "19.43 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
+      "waterlevel_msl": 19.46,
+      "storage_percent": 98.35,
+      "value_text": "19.46 ม.รทก.",
+      "observed_at": "2026-09-25 05:10",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 29.3,
@@ -2086,10 +2468,10 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บางระกำ",
       "lat": 16.757919,
       "lon": 100.115578,
-      "waterlevel_msl": 38.77,
-      "storage_percent": 98.02,
-      "value_text": "38.77 ม.รทก.",
-      "observed_at": "2026-09-25 01:00",
+      "waterlevel_msl": 38.75,
+      "storage_percent": 97.78,
+      "value_text": "38.75 ม.รทก.",
+      "observed_at": "2026-09-25 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 20.6,
@@ -2104,10 +2486,10 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บางเลน",
       "lat": 14.01636,
       "lon": 100.17979,
-      "waterlevel_msl": 1.98,
-      "storage_percent": 97.62,
-      "value_text": "1.98 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
+      "waterlevel_msl": 1.97,
+      "storage_percent": 97.55,
+      "value_text": "1.97 ม.รทก.",
+      "observed_at": "2026-09-25 05:10",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 47.7,
@@ -2134,34 +2516,16 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "บางระกำ",
-      "station_code": "Y.64",
-      "province": "พิษณุโลก",
-      "district": "บางระกำ",
-      "lat": 16.762119,
-      "lon": 100.121201,
-      "waterlevel_msl": 38.65,
-      "storage_percent": 96.8,
-      "value_text": "38.65 ม.รทก.",
-      "observed_at": "2026-09-25 01:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 21.0,
-      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
       "station": "บ้านป้อม",
       "station_code": "C.35",
       "province": "พระนครศรีอยุธยา",
       "district": "พระนครศรีอยุธยา",
       "lat": 14.3691,
       "lon": 100.528732,
-      "waterlevel_msl": 3.86,
-      "storage_percent": 96.4,
-      "value_text": "3.86 ม.รทก.",
-      "observed_at": "2026-09-25 01:00",
+      "waterlevel_msl": 3.92,
+      "storage_percent": 96.84,
+      "value_text": "3.92 ม.รทก.",
+      "observed_at": "2026-09-25 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 15.2,
@@ -2170,38 +2534,56 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "สะพานนครชัยศรี",
-      "station_code": "THA008",
-      "province": "นครปฐม",
-      "district": "นครชัยศรี",
-      "lat": 13.79217,
-      "lon": 100.19817,
-      "waterlevel_msl": 1.41,
-      "storage_percent": 94.57,
-      "value_text": "1.41 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
+      "station": "บางระกำ",
+      "station_code": "Y.64",
+      "province": "พิษณุโลก",
+      "district": "บางระกำ",
+      "lat": 16.762119,
+      "lon": 100.121201,
+      "waterlevel_msl": 38.64,
+      "storage_percent": 96.68,
+      "value_text": "38.64 ม.รทก.",
+      "observed_at": "2026-09-25 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
-      "distance_km": 27.8,
-      "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
+      "distance_km": 21.0,
+      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "คลองจระเข้ใหญ่ บางเสาธง (วัดศรีวารีน้อย)",
+      "station_code": "BKK017",
+      "province": "สมุทรปราการ",
+      "district": "บางเสาธง",
+      "lat": 13.66949,
+      "lon": 100.80058,
+      "waterlevel_msl": 0.32,
+      "storage_percent": 95.71,
+      "value_text": "0.32 ม.รทก.",
+      "observed_at": "2026-09-25 05:10",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "distance_km": 9.9,
+      "nearest_estate": "นิคมอุตสาหกรรมลาดกระบัง",
       "agency": "สสน."
     },
     {
       "kind": "waterlevel",
-      "station": "บางปะอิน",
-      "station_code": "CPY012",
-      "province": "พระนครศรีอยุธยา",
-      "district": "บางปะอิน",
-      "lat": 14.30455,
-      "lon": 100.56645,
-      "waterlevel_msl": 1.93,
-      "storage_percent": 93.83,
-      "value_text": "1.93 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
+      "station": "คลองลาดพร้าว วัดบางบัว",
+      "station_code": "BKK021",
+      "province": "กรุงเทพมหานคร",
+      "district": "บางเขน",
+      "lat": 13.85402,
+      "lon": 100.58746,
+      "waterlevel_msl": 2.07,
+      "storage_percent": 95.02,
+      "value_text": "2.07 ม.รทก.",
+      "observed_at": "2026-09-25 05:10",
       "status": "วิกฤต",
       "severity_score": 3,
-      "distance_km": 8.0,
-      "nearest_estate": "นิคมอุตสาหกรรมบ้านหว้า",
+      "distance_km": 7.0,
+      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก A",
       "agency": "สสน."
     },
     {
@@ -2212,14 +2594,32 @@ window.IEAT_THAIWATER_DATA = {
       "district": "หนองเสือ",
       "lat": 14.2206,
       "lon": 100.89168,
-      "waterlevel_msl": 3.65,
-      "storage_percent": 93.19,
-      "value_text": "3.65 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
+      "waterlevel_msl": 3.71,
+      "storage_percent": 94.49,
+      "value_text": "3.71 ม.รทก.",
+      "observed_at": "2026-09-25 05:10",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 18.5,
       "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "บางปะอิน",
+      "station_code": "CPY012",
+      "province": "พระนครศรีอยุธยา",
+      "district": "บางปะอิน",
+      "lat": 14.30455,
+      "lon": 100.56645,
+      "waterlevel_msl": 1.92,
+      "storage_percent": 93.75,
+      "value_text": "1.92 ม.รทก.",
+      "observed_at": "2026-09-25 05:10",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "distance_km": 8.0,
+      "nearest_estate": "นิคมอุตสาหกรรมบ้านหว้า",
       "agency": "สสน."
     },
     {
@@ -2230,14 +2630,50 @@ window.IEAT_THAIWATER_DATA = {
       "district": "ปากเกร็ด",
       "lat": 13.94749,
       "lon": 100.53507,
-      "waterlevel_msl": 1.42,
-      "storage_percent": 93.17,
-      "value_text": "1.42 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
+      "waterlevel_msl": 1.5,
+      "storage_percent": 93.67,
+      "value_text": "1.5 ม.รทก.",
+      "observed_at": "2026-09-25 05:10",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 16.9,
       "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก B",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "สะพานนครชัยศรี",
+      "station_code": "THA008",
+      "province": "นครปฐม",
+      "district": "นครชัยศรี",
+      "lat": 13.79217,
+      "lon": 100.19817,
+      "waterlevel_msl": 1.31,
+      "storage_percent": 93.58,
+      "value_text": "1.31 ม.รทก.",
+      "observed_at": "2026-09-25 05:10",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "distance_km": 27.8,
+      "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "วัดขนอนใต้",
+      "station_code": "HDA005",
+      "province": "พระนครศรีอยุธยา",
+      "district": "บางปะอิน",
+      "lat": 14.288251,
+      "lon": 100.61132,
+      "waterlevel_msl": 2.23,
+      "storage_percent": 93.18,
+      "value_text": "2.23 ม.รทก.",
+      "observed_at": "2026-09-25 05:10",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "distance_km": 4.7,
+      "nearest_estate": "นิคมอุตสาหกรรมบ้านหว้า",
       "agency": "สสน."
     },
     {
@@ -2248,68 +2684,14 @@ window.IEAT_THAIWATER_DATA = {
       "district": "กบินทร์บุรี",
       "lat": 13.986616,
       "lon": 101.70547,
-      "waterlevel_msl": 10.47,
-      "storage_percent": 92.73,
-      "value_text": "10.47 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
+      "waterlevel_msl": 10.51,
+      "storage_percent": 93.04,
+      "value_text": "10.51 ม.รทก.",
+      "observed_at": "2026-09-25 05:10",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 10.6,
       "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สะพานวัดมงคลร่วมใจ (บ้านวังสาร)",
-      "station_code": "FOP022",
-      "province": "พิษณุโลก",
-      "district": "บางกระทุ่ม",
-      "lat": 16.670555,
-      "lon": 100.32789,
-      "waterlevel_msl": 38.3,
-      "storage_percent": 92.68,
-      "value_text": "38.3 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 21.8,
-      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "waterlevel",
-      "station": "วัดขนอนใต้",
-      "station_code": "HDA005",
-      "province": "พระนครศรีอยุธยา",
-      "district": "บางปะอิน",
-      "lat": 14.288251,
-      "lon": 100.61132,
-      "waterlevel_msl": 2.19,
-      "storage_percent": 92.3,
-      "value_text": "2.19 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 4.7,
-      "nearest_estate": "นิคมอุตสาหกรรมบ้านหว้า",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "เมืองแกลง",
-      "station_code": "RAY001",
-      "province": "ระยอง",
-      "district": "แกลง",
-      "lat": 12.802991,
-      "lon": 101.65024,
-      "waterlevel_msl": 3.43,
-      "storage_percent": 91.64,
-      "value_text": "3.43 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 22.7,
-      "nearest_estate": "นิคมอุตสาหกรรมหลักชัยเมืองยาง",
       "agency": "สสน."
     },
     {
@@ -2320,10 +2702,10 @@ window.IEAT_THAIWATER_DATA = {
       "district": "ดุสิต",
       "lat": 13.78815,
       "lon": 100.509148,
-      "waterlevel_msl": 0.84,
-      "storage_percent": 91.54,
-      "value_text": "0.84 ม.รทก.",
-      "observed_at": "2026-09-25 01:00",
+      "waterlevel_msl": 1.04,
+      "storage_percent": 92.73,
+      "value_text": "1.04 ม.รทก.",
+      "observed_at": "2026-09-25 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 5.5,
@@ -2332,75 +2714,21 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "ปากรอ",
-      "station_code": "SLA005",
-      "province": "สงขลา",
-      "district": "สิงหนคร",
-      "lat": 7.261514,
-      "lon": 100.42447,
-      "waterlevel_msl": 0.34,
-      "storage_percent": 91.31,
-      "value_text": "0.34 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
+      "station": "สะพานวัดมงคลร่วมใจ (บ้านวังสาร)",
+      "station_code": "FOP022",
+      "province": "พิษณุโลก",
+      "district": "บางกระทุ่ม",
+      "lat": 16.670555,
+      "lon": 100.32789,
+      "waterlevel_msl": 38.28,
+      "storage_percent": 92.41,
+      "value_text": "38.28 ม.รทก.",
+      "observed_at": "2026-09-25 05:10",
       "status": "วิกฤต",
       "severity_score": 3,
-      "distance_km": 29.1,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "บ้านราชช้างขวัญ",
-      "station_code": "N.7A",
-      "province": "พิจิตร",
-      "district": "เมืองพิจิตร",
-      "lat": 16.4695,
-      "lon": 100.330872,
-      "waterlevel_msl": 34.76,
-      "storage_percent": 91.28,
-      "value_text": "34.76 ม.รทก.",
-      "observed_at": "2026-09-25 01:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 22.7,
+      "distance_km": 21.8,
       "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "เมืองลพบุรี",
-      "station_code": "LBI002",
-      "province": "ลพบุรี",
-      "district": "เมืองลพบุรี",
-      "lat": 14.76049,
-      "lon": 100.5996,
-      "waterlevel_msl": 5.85,
-      "storage_percent": 90.8,
-      "value_text": "5.85 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 30.2,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "พนมสารคาม",
-      "station_code": "BPK004",
-      "province": "ฉะเชิงเทรา",
-      "district": "พนมสารคาม",
-      "lat": 13.72662,
-      "lon": 101.35298,
-      "waterlevel_msl": 4.68,
-      "storage_percent": 89.82,
-      "value_text": "4.68 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 12.7,
-      "nearest_estate": "นิคมอุตสาหกรรมเกตเวย์ ซิตี้",
-      "agency": "สสน."
+      "agency": "พพภ"
     },
     {
       "kind": "waterlevel",
@@ -2410,460 +2738,52 @@ window.IEAT_THAIWATER_DATA = {
       "district": "ธนบุรี",
       "lat": 13.700301,
       "lon": 100.49277,
-      "waterlevel_msl": 0.32,
-      "storage_percent": 89.69,
-      "value_text": "0.32 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
+      "waterlevel_msl": 0.73,
+      "storage_percent": 91.99,
+      "value_text": "0.73 ม.รทก.",
+      "observed_at": "2026-09-25 05:10",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 13.0,
       "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก B",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "บางปะหัน",
-      "station_code": "LBI001",
-      "province": "พระนครศรีอยุธยา",
-      "district": "บางปะหัน",
-      "lat": 14.42731,
-      "lon": 100.55605,
-      "waterlevel_msl": 3.7,
-      "storage_percent": 89.16,
-      "value_text": "3.7 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 8.1,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "คลองจระเข้ใหญ่ บางเสาธง (วัดศรีวารีน้อย)",
-      "station_code": "BKK017",
-      "province": "สมุทรปราการ",
-      "district": "บางเสาธง",
-      "lat": 13.66949,
-      "lon": 100.80058,
-      "waterlevel_msl": 0.13,
-      "storage_percent": 88.52,
-      "value_text": "0.13 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 9.9,
-      "nearest_estate": "นิคมอุตสาหกรรมลาดกระบัง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "บ้านบางบาล",
-      "station_code": "C.37",
-      "province": "พระนครศรีอยุธยา",
-      "district": "บางบาล",
-      "lat": 14.36319,
-      "lon": 100.484833,
-      "waterlevel_msl": 3.31,
-      "storage_percent": 88.44,
-      "value_text": "3.31 ม.รทก.",
-      "observed_at": "2026-09-25 01:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 18.4,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "ตะพานหิน",
-      "station_code": "NAN007",
-      "province": "พิจิตร",
-      "district": "ตะพานหิน",
-      "lat": 16.27034,
-      "lon": 100.41396,
-      "waterlevel_msl": 32.61,
-      "storage_percent": 87.57,
-      "value_text": "32.61 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 44.2,
-      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สะพานข้ามคลองอู่ตะเภา",
-      "station_code": "ONE037",
-      "province": "สงขลา",
-      "district": "หาดใหญ่",
-      "lat": 7.134997,
-      "lon": 100.45321,
-      "waterlevel_msl": 0.17,
-      "storage_percent": 87.55,
-      "value_text": "0.17 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 17.5,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "ประจันตคาม (KGT7A)",
-      "station_code": "PRC004",
-      "province": "ปราจีนบุรี",
-      "district": "ประจันตคาม",
-      "lat": 14.070941,
-      "lon": 101.51893,
-      "waterlevel_msl": 5.93,
-      "storage_percent": 87.27,
-      "value_text": "5.93 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 23.3,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "บางปะกง",
-      "station_code": "BPK001",
-      "province": "ฉะเชิงเทรา",
-      "district": "บางปะกง",
-      "lat": 13.54901,
-      "lon": 101.00111,
-      "waterlevel_msl": -0.06,
-      "storage_percent": 87.09,
-      "value_text": "-0.06 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 1.8,
-      "nearest_estate": "นิคมอุตสาหกรรมทีเอฟดี 1",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "คลองลำปลาทิว ลาดกระบัง",
-      "station_code": "BKK009",
-      "province": "กรุงเทพมหานคร",
-      "district": "ลาดกระบัง",
-      "lat": 13.7407,
-      "lon": 100.79468,
-      "waterlevel_msl": 0.12,
-      "storage_percent": 86.77,
-      "value_text": "0.12 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 2.0,
-      "nearest_estate": "นิคมอุตสาหกรรมลาดกระบัง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "พรหมบุรี",
-      "station_code": "CPY007",
-      "province": "สิงห์บุรี",
-      "district": "พรหมบุรี",
-      "lat": 14.79091,
-      "lon": 100.45184,
-      "waterlevel_msl": 8.81,
-      "storage_percent": 86.7,
-      "value_text": "8.81 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 36.9,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "พระรามสอง",
-      "station_code": "MKG006",
-      "province": "สมุทรสงคราม",
-      "district": "เมืองสมุทรสงคราม",
-      "lat": 13.38362,
-      "lon": 99.9836,
-      "waterlevel_msl": 0.14,
-      "storage_percent": 86.62,
-      "value_text": "0.14 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 29.2,
-      "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "พระนครศรีอยุธยา",
-      "station_code": "CPY011",
-      "province": "พระนครศรีอยุธยา",
-      "district": "พระนครศรีอยุธยา",
-      "lat": 14.36913,
-      "lon": 100.52861,
-      "waterlevel_msl": 3.64,
-      "storage_percent": 86.54,
-      "value_text": "3.64 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 15.2,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "วัดเกยไชยเหนือ",
-      "station_code": "N.67",
-      "province": "นครสวรรค์",
-      "district": "ชุมแสง",
-      "lat": 15.86918,
-      "lon": 100.264732,
-      "waterlevel_msl": 26.07,
-      "storage_percent": 86.34,
-      "value_text": "26.07 ม.รทก.",
-      "observed_at": "2026-09-25 01:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 41.6,
-      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "คลองหกวา ลำลูกกา คลอง8",
-      "station_code": "BKK015",
-      "province": "ปทุมธานี",
-      "district": "ลำลูกกา",
-      "lat": 13.9416,
-      "lon": 100.77499,
-      "waterlevel_msl": 1.92,
-      "storage_percent": 84.9,
-      "value_text": "1.92 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 17.1,
-      "nearest_estate": "นิคมอุตสาหกรรมบางชัน",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "บ้านนาสีทอง",
-      "station_code": "X.67A",
-      "province": "สงขลา",
-      "district": "รัตภูมิ",
-      "lat": 7.10502,
-      "lon": 100.193932,
-      "waterlevel_msl": 33.61,
-      "storage_percent": 84.66,
-      "value_text": "33.61 ม.รทก.",
-      "observed_at": "2026-09-25 01:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 21.2,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "เมืองอ่างทอง",
-      "station_code": "CPY008",
-      "province": "อ่างทอง",
-      "district": "เมืองอ่างทอง",
-      "lat": 14.5765,
-      "lon": 100.44852,
-      "waterlevel_msl": 6.75,
-      "storage_percent": 84.58,
-      "value_text": "6.75 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 18.6,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "คลองมหาสวัสดิ บางกรวย-สวนผัก",
-      "station_code": "BKK003",
-      "province": "กรุงเทพมหานคร",
-      "district": "ตลิ่งชัน",
-      "lat": 13.79965,
-      "lon": 100.43863,
-      "waterlevel_msl": 1.24,
-      "storage_percent": 84.02,
-      "value_text": "1.24 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 13.0,
-      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก B",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สะพานปรีดี-ธำรง",
-      "station_code": "S.5",
-      "province": "พระนครศรีอยุธยา",
-      "district": "พระนครศรีอยุธยา",
-      "lat": 14.35872,
-      "lon": 100.580452,
-      "waterlevel_msl": 2.56,
-      "storage_percent": 83.9,
-      "value_text": "2.56 ม.รทก.",
-      "observed_at": "2026-09-25 01:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 12.9,
-      "nearest_estate": "นิคมอุตสาหกรรมบ้านหว้า",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สะพานค่ายบางระจัน",
-      "station_code": "HDA007",
-      "province": "สิงห์บุรี",
-      "district": "ค่ายบางระจัน",
-      "lat": 14.815288,
-      "lon": 100.36448,
-      "waterlevel_msl": 8.51,
-      "storage_percent": 83.57,
-      "value_text": "8.51 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 44.0,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "บ้านบางแก้ว",
-      "station_code": "C.7A",
-      "province": "อ่างทอง",
-      "district": "เมืองอ่างทอง",
-      "lat": 14.59044,
-      "lon": 100.453293,
-      "waterlevel_msl": 7.14,
-      "storage_percent": 83.4,
-      "value_text": "7.14 ม.รทก.",
-      "observed_at": "2026-09-25 01:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 19.0,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "นครหลวง",
-      "station_code": "PAS009",
-      "province": "พระนครศรีอยุธยา",
-      "district": "นครหลวง",
-      "lat": 14.40269,
-      "lon": 100.5864,
-      "waterlevel_msl": 2.18,
-      "storage_percent": 81.51,
-      "value_text": "2.18 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 9.7,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "ทรบ. ปากคลองห้าวา (ทุ่งท่าวุ้ง)",
-      "station_code": "TCP010",
-      "province": "ลพบุรี",
-      "district": "เมืองลพบุรี",
-      "lat": 14.818599,
-      "lon": 100.576515,
-      "waterlevel_msl": 6.42,
-      "storage_percent": 80.25,
-      "value_text": "6.42 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 36.7,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สะพานอนุสรณ์ 100 ปีสิงห์บุรี (สะพานหลวงพ่อแพ 89)",
-      "station_code": "HDA006",
-      "province": "สิงห์บุรี",
-      "district": "เมืองสิงห์บุรี",
-      "lat": 14.870205,
-      "lon": 100.408585,
-      "waterlevel_msl": 10.15,
-      "storage_percent": 79.75,
-      "value_text": "10.15 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 46.9,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "ชุมแสง",
-      "station_code": "NAN008",
-      "province": "นครสวรรค์",
-      "district": "ชุมแสง",
-      "lat": 15.86923,
-      "lon": 100.26481,
-      "waterlevel_msl": 25.54,
-      "storage_percent": 79.35,
-      "value_text": "25.54 ม.รทก.",
-      "observed_at": "2026-09-25 02:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 41.6,
-      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
       "agency": "สสน."
     }
   ],
   "summary": {
     "estate_total": 72,
-    "estate_count": 36,
-    "station_count": 951,
-    "alert_station_count": 221,
-    "heavy_rain_estate_count": 15,
+    "estate_count": 32,
+    "station_count": 949,
+    "alert_station_count": 288,
+    "heavy_rain_estate_count": 12,
     "water_alert_estate_count": 24,
-    "critical_count": 87,
-    "rain_station_count": 780,
+    "critical_count": 113,
+    "rain_station_count": 778,
     "waterlevel_station_count": 171,
-    "waterlevel_alert_count": 97,
-    "max_rainfall_mm": 134.0,
+    "waterlevel_alert_count": 98,
+    "max_rainfall_mm": 139.2,
     "risk_level": "วิกฤต",
     "storm_count": 0,
     "storm_names": [],
     "flood_watch_provinces": [
+      "จ.กรุงเทพมหานคร",
       "จ.จันทบุรี",
+      "จ.ฉะเชิงเทรา",
+      "จ.ชลบุรี",
       "จ.นครสวรรค์",
       "จ.ปทุมธานี",
+      "จ.ปราจีนบุรี",
       "จ.พระนครศรีอยุธยา",
+      "จ.ระยอง",
       "จ.ลพบุรี",
+      "จ.สมุทรปราการ",
       "จ.สมุทรสงคราม",
       "จ.สระบุรี",
       "จ.สระแก้ว",
       "จ.เพชรบูรณ์"
     ],
-    "flood_watch_province_count": 9,
-    "flash_flood_24h_area_count": 15,
-    "flash_flood_48h_area_count": 13,
+    "flood_watch_province_count": 15,
+    "flash_flood_24h_area_count": 38,
+    "flash_flood_48h_area_count": 26,
     "warning_title": "",
     "warning_summary": "",
     "warning_url": "https://tmd.go.th/warning-and-events/warning-storm"
@@ -2873,7 +2793,7 @@ window.IEAT_THAIWATER_DATA = {
     "24h": {
       "period": "24h",
       "date": "2026-09-25",
-      "time": "02:00:00",
+      "time": "05:00:00",
       "type": "แผนที่แสดงพื้นที่เสี่ยงน้ำท่วมฉับพลัน (รายตำบล)ใน 24 ชม. ข้างหน้า จากปริมาณฝนสะสมที่สถานีโทรมาตร",
       "areas": [
         {
@@ -2886,8 +2806,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "TC.60",
           "latitude": 15.67,
           "longitude": 100.334167,
-          "sum_rainfall_mm": 176.0,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "sum_rainfall_mm": 178.0,
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -3120,6 +3040,305 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
+          "geocode": "600908",
+          "tambon": "ต.ไพศาลี",
+          "amphoe": "อ.ไพศาลี",
+          "province": "จ.นครสวรรค์",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "ทต.ไพศาลี",
+          "latitude": 15.60012,
+          "longitude": 100.6572,
+          "sum_rainfall_mm": 234.79999999999998,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.76061,
+                  15.66908
+                ],
+                [
+                  100.76181,
+                  15.66606
+                ],
+                [
+                  100.76085,
+                  15.66538
+                ],
+                [
+                  100.75131,
+                  15.66762
+                ],
+                [
+                  100.75631,
+                  15.65689
+                ],
+                [
+                  100.75636,
+                  15.65431
+                ],
+                [
+                  100.76044,
+                  15.6501
+                ],
+                [
+                  100.75896,
+                  15.64534
+                ],
+                [
+                  100.7548,
+                  15.64215
+                ],
+                [
+                  100.74669,
+                  15.64066
+                ],
+                [
+                  100.7424,
+                  15.63731
+                ],
+                [
+                  100.73849,
+                  15.63665
+                ],
+                [
+                  100.73429,
+                  15.63322
+                ],
+                [
+                  100.7258,
+                  15.63238
+                ],
+                [
+                  100.7253,
+                  15.63058
+                ],
+                [
+                  100.72841,
+                  15.62835
+                ],
+                [
+                  100.72946,
+                  15.62291
+                ],
+                [
+                  100.7338,
+                  15.61806
+                ],
+                [
+                  100.7333,
+                  15.61662
+                ],
+                [
+                  100.72791,
+                  15.61476
+                ],
+                [
+                  100.71794,
+                  15.60846
+                ],
+                [
+                  100.71021,
+                  15.60727
+                ],
+                [
+                  100.69865,
+                  15.60768
+                ],
+                [
+                  100.69567,
+                  15.60614
+                ],
+                [
+                  100.6949,
+                  15.60292
+                ],
+                [
+                  100.69549,
+                  15.59284
+                ],
+                [
+                  100.69015,
+                  15.58755
+                ],
+                [
+                  100.69328,
+                  15.58324
+                ],
+                [
+                  100.69619,
+                  15.57561
+                ],
+                [
+                  100.69598,
+                  15.57098
+                ],
+                [
+                  100.69341,
+                  15.56584
+                ],
+                [
+                  100.69082,
+                  15.56653
+                ],
+                [
+                  100.68587,
+                  15.56394
+                ],
+                [
+                  100.68003,
+                  15.56532
+                ],
+                [
+                  100.67351,
+                  15.56166
+                ],
+                [
+                  100.66288,
+                  15.56315
+                ],
+                [
+                  100.65592,
+                  15.56178
+                ],
+                [
+                  100.64572,
+                  15.56228
+                ],
+                [
+                  100.63845,
+                  15.5658
+                ],
+                [
+                  100.63769,
+                  15.56675
+                ],
+                [
+                  100.63924,
+                  15.57164
+                ],
+                [
+                  100.64479,
+                  15.57901
+                ],
+                [
+                  100.64432,
+                  15.58464
+                ],
+                [
+                  100.6453,
+                  15.59025
+                ],
+                [
+                  100.64289,
+                  15.59986
+                ],
+                [
+                  100.64553,
+                  15.60555
+                ],
+                [
+                  100.64529,
+                  15.61157
+                ],
+                [
+                  100.63922,
+                  15.62813
+                ],
+                [
+                  100.64373,
+                  15.64105
+                ],
+                [
+                  100.64269,
+                  15.64871
+                ],
+                [
+                  100.64489,
+                  15.6634
+                ],
+                [
+                  100.65295,
+                  15.6625
+                ],
+                [
+                  100.6561,
+                  15.65874
+                ],
+                [
+                  100.66541,
+                  15.65507
+                ],
+                [
+                  100.67177,
+                  15.64817
+                ],
+                [
+                  100.68192,
+                  15.64556
+                ],
+                [
+                  100.68634,
+                  15.65308
+                ],
+                [
+                  100.69606,
+                  15.66078
+                ],
+                [
+                  100.69938,
+                  15.66605
+                ],
+                [
+                  100.71324,
+                  15.67455
+                ],
+                [
+                  100.72734,
+                  15.68637
+                ],
+                [
+                  100.7376,
+                  15.6981
+                ],
+                [
+                  100.75114,
+                  15.69311
+                ],
+                [
+                  100.75621,
+                  15.68832
+                ],
+                [
+                  100.75742,
+                  15.68873
+                ],
+                [
+                  100.75701,
+                  15.69116
+                ],
+                [
+                  100.75794,
+                  15.69292
+                ],
+                [
+                  100.76139,
+                  15.69144
+                ],
+                [
+                  100.75971,
+                  15.675
+                ],
+                [
+                  100.76061,
+                  15.66908
+                ]
+              ]
+            ]
+          }
+        },
+        {
           "geocode": "140201",
           "tambon": "ต.ท่าเรือ",
           "amphoe": "อ.ท่าเรือ",
@@ -3129,8 +3348,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ท่าเรือ",
           "latitude": 14.56014,
           "longitude": 100.71987,
-          "sum_rainfall_mm": 163.59999999999997,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "sum_rainfall_mm": 200.8,
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -3212,8 +3431,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เหนือปตร.พระนารายน์",
           "latitude": 14.5583,
           "longitude": 100.76205,
-          "sum_rainfall_mm": 117.0,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "sum_rainfall_mm": 166.0,
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -3314,6 +3533,294 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
+          "geocode": "140303",
+          "tambon": "ต.บ่อโพง",
+          "amphoe": "อ.นครหลวง",
+          "province": "จ.พระนครศรีอยุธยา",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "นครหลวง",
+          "latitude": 14.40269,
+          "longitude": 100.5864,
+          "sum_rainfall_mm": 122.6,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.62948,
+                  14.4055
+                ],
+                [
+                  100.63186,
+                  14.40432
+                ],
+                [
+                  100.63179,
+                  14.40211
+                ],
+                [
+                  100.61434,
+                  14.39287
+                ],
+                [
+                  100.60831,
+                  14.39423
+                ],
+                [
+                  100.58322,
+                  14.39605
+                ],
+                [
+                  100.58166,
+                  14.39755
+                ],
+                [
+                  100.57872,
+                  14.39707
+                ],
+                [
+                  100.57606,
+                  14.39515
+                ],
+                [
+                  100.57518,
+                  14.39581
+                ],
+                [
+                  100.57487,
+                  14.40514
+                ],
+                [
+                  100.57695,
+                  14.4096
+                ],
+                [
+                  100.5781,
+                  14.42122
+                ],
+                [
+                  100.59508,
+                  14.42124
+                ],
+                [
+                  100.62114,
+                  14.4076
+                ],
+                [
+                  100.62948,
+                  14.4055
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "140503",
+          "tambon": "ต.ไทรน้อย",
+          "amphoe": "อ.บางบาล",
+          "province": "จ.พระนครศรีอยุธยา",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "คลองบางบาล",
+          "latitude": 14.42303,
+          "longitude": 100.48186,
+          "sum_rainfall_mm": 137.2,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.49672,
+                  14.41637
+                ],
+                [
+                  100.50369,
+                  14.40452
+                ],
+                [
+                  100.49696,
+                  14.39716
+                ],
+                [
+                  100.48303,
+                  14.3878
+                ],
+                [
+                  100.48067,
+                  14.38957
+                ],
+                [
+                  100.47855,
+                  14.39503
+                ],
+                [
+                  100.47052,
+                  14.40389
+                ],
+                [
+                  100.47091,
+                  14.40917
+                ],
+                [
+                  100.48409,
+                  14.4264
+                ],
+                [
+                  100.48778,
+                  14.42505
+                ],
+                [
+                  100.49015,
+                  14.4212
+                ],
+                [
+                  100.49211,
+                  14.42152
+                ],
+                [
+                  100.49672,
+                  14.41637
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "140702",
+          "tambon": "ต.ขยาย",
+          "amphoe": "อ.บางปะหัน",
+          "province": "จ.พระนครศรีอยุธยา",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "วัดจอมเกษ",
+          "latitude": 14.414349,
+          "longitude": 100.55782,
+          "sum_rainfall_mm": 122.0,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.57697,
+                  14.41206
+                ],
+                [
+                  100.57678,
+                  14.40907
+                ],
+                [
+                  100.57461,
+                  14.40502
+                ],
+                [
+                  100.55647,
+                  14.40519
+                ],
+                [
+                  100.55681,
+                  14.41034
+                ],
+                [
+                  100.55434,
+                  14.42366
+                ],
+                [
+                  100.55469,
+                  14.42744
+                ],
+                [
+                  100.55713,
+                  14.42938
+                ],
+                [
+                  100.57697,
+                  14.41206
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "140714",
+          "tambon": "ต.โพธิ์สามต้น",
+          "amphoe": "อ.บางปะหัน",
+          "province": "จ.พระนครศรีอยุธยา",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บางปะหัน",
+          "latitude": 14.42731,
+          "longitude": 100.55605,
+          "sum_rainfall_mm": 115.6,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.55712,
+                  14.43105
+                ],
+                [
+                  100.55727,
+                  14.42959
+                ],
+                [
+                  100.55421,
+                  14.42619
+                ],
+                [
+                  100.55681,
+                  14.41034
+                ],
+                [
+                  100.55647,
+                  14.40519
+                ],
+                [
+                  100.54955,
+                  14.40548
+                ],
+                [
+                  100.54415,
+                  14.40302
+                ],
+                [
+                  100.54012,
+                  14.41906
+                ],
+                [
+                  100.53223,
+                  14.42915
+                ],
+                [
+                  100.5352,
+                  14.42815
+                ],
+                [
+                  100.53773,
+                  14.4289
+                ],
+                [
+                  100.54234,
+                  14.43599
+                ],
+                [
+                  100.54703,
+                  14.43774
+                ],
+                [
+                  100.55144,
+                  14.43636
+                ],
+                [
+                  100.55712,
+                  14.43105
+                ]
+              ]
+            ]
+          }
+        },
+        {
           "geocode": "670601",
           "tambon": "ต.ศรีเทพ",
           "amphoe": "อ.ศรีเทพ",
@@ -3323,8 +3830,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ศรีเทพ",
           "latitude": 15.43789,
           "longitude": 101.16249,
-          "sum_rainfall_mm": 124.4,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "sum_rainfall_mm": 125.60000000000001,
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -4058,8 +4565,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.หนองมะค่า",
           "latitude": 15.4321,
           "longitude": 100.9245,
-          "sum_rainfall_mm": 280.4,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "sum_rainfall_mm": 275.79999999999995,
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -4520,315 +5027,674 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
-          "geocode": "161106",
-          "tambon": "ต.ชอนสารเดช",
-          "amphoe": "อ.หนองม่วง",
+          "geocode": "160201",
+          "tambon": "ต.พัฒนานิคม",
+          "amphoe": "อ.พัฒนานิคม",
           "province": "จ.ลพบุรี",
           "region_id": "1",
           "region_name": "ภาคกลาง",
-          "station": "อบต.ชอนสารเดช",
-          "latitude": 15.18496,
-          "longitude": 100.68131,
-          "sum_rainfall_mm": 175.39999999999998,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "station": "คลองส้ม",
+          "latitude": 14.822028,
+          "longitude": 101.014594,
+          "sum_rainfall_mm": 138.0,
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
                 [
-                  100.79572,
-                  15.19513
+                  100.99592,
+                  14.93468
                 ],
                 [
-                  100.79189,
-                  15.18328
+                  100.99862,
+                  14.93391
                 ],
                 [
-                  100.78298,
-                  15.17211
+                  101.00054,
+                  14.93613
                 ],
                 [
-                  100.78051,
-                  15.16355
+                  101.00194,
+                  14.93585
                 ],
                 [
-                  100.77544,
-                  15.15706
+                  101.0047,
+                  14.9322
                 ],
                 [
-                  100.76937,
-                  15.16369
+                  101.00547,
+                  14.92832
                 ],
                 [
-                  100.7637,
-                  15.1741
+                  101.01048,
+                  14.92523
                 ],
                 [
-                  100.7448,
-                  15.18711
+                  101.02206,
+                  14.82096
                 ],
                 [
-                  100.74181,
-                  15.18682
+                  101.0194,
+                  14.81788
                 ],
                 [
-                  100.74104,
-                  15.18544
+                  101.01722,
+                  14.81986
                 ],
                 [
-                  100.73612,
-                  15.18412
+                  101.01795,
+                  14.8214
                 ],
                 [
-                  100.72851,
-                  15.18504
+                  101.01573,
+                  14.82121
                 ],
                 [
-                  100.72361,
-                  15.18264
+                  101.00873,
+                  14.82376
                 ],
                 [
-                  100.71614,
-                  15.18197
+                  101.00675,
+                  14.82671
                 ],
                 [
-                  100.71069,
-                  15.17825
+                  101.00207,
+                  14.82857
                 ],
                 [
-                  100.70801,
-                  15.175
+                  100.99804,
+                  14.83291
                 ],
                 [
-                  100.70425,
-                  15.17332
+                  100.99412,
+                  14.8305
                 ],
                 [
-                  100.69966,
-                  15.16771
+                  100.98811,
+                  14.82884
                 ],
                 [
-                  100.69675,
-                  15.16823
+                  100.98482,
+                  14.83022
                 ],
                 [
-                  100.68589,
-                  15.16206
+                  100.9774,
+                  14.82762
                 ],
                 [
-                  100.66801,
-                  15.15769
+                  100.97172,
+                  14.82996
                 ],
                 [
-                  100.65259,
-                  15.14692
+                  100.96903,
+                  14.83254
                 ],
                 [
-                  100.64617,
-                  15.14383
+                  100.96027,
+                  14.83033
                 ],
                 [
-                  100.63844,
-                  15.14271
+                  100.95563,
+                  14.83557
                 ],
                 [
-                  100.63684,
-                  15.14051
+                  100.94795,
+                  14.83279
                 ],
                 [
-                  100.64163,
-                  15.13208
+                  100.94111,
+                  14.83291
                 ],
                 [
-                  100.62183,
-                  15.14846
+                  100.9377,
+                  14.8353
                 ],
                 [
-                  100.63124,
-                  15.17072
+                  100.93336,
+                  14.83381
                 ],
                 [
-                  100.62764,
-                  15.18375
+                  100.92888,
+                  14.8341
                 ],
                 [
-                  100.64846,
-                  15.18442
+                  100.9175,
+                  14.9281
                 ],
                 [
-                  100.64747,
-                  15.18733
+                  100.91003,
+                  14.96054
                 ],
                 [
-                  100.64714,
-                  15.19846
+                  100.91662,
+                  14.95787
                 ],
                 [
-                  100.64817,
-                  15.20801
+                  100.91853,
+                  14.94736
                 ],
                 [
-                  100.64923,
-                  15.206
+                  100.92082,
+                  14.94622
                 ],
                 [
-                  100.66138,
-                  15.20003
+                  100.92645,
+                  14.94589
                 ],
                 [
-                  100.67157,
-                  15.20114
+                  100.92946,
+                  14.94689
                 ],
                 [
-                  100.67537,
-                  15.19327
+                  100.93571,
+                  14.95227
                 ],
                 [
-                  100.6819,
-                  15.19929
+                  100.93796,
+                  14.95245
                 ],
                 [
-                  100.68392,
-                  15.21226
+                  100.94142,
+                  14.95
                 ],
                 [
-                  100.68565,
-                  15.21328
+                  100.94347,
+                  14.95123
                 ],
                 [
-                  100.7039,
-                  15.212
+                  100.95196,
+                  14.96504
                 ],
                 [
-                  100.71088,
-                  15.21404
+                  100.95475,
+                  14.96764
                 ],
                 [
-                  100.71628,
-                  15.2118
+                  100.95634,
+                  14.96593
                 ],
                 [
-                  100.72253,
-                  15.21134
+                  100.95709,
+                  14.9611
                 ],
                 [
-                  100.73012,
-                  15.21328
+                  100.95252,
+                  14.95146
                 ],
                 [
-                  100.7419,
-                  15.21323
+                  100.9605,
+                  14.95553
                 ],
                 [
-                  100.74616,
-                  15.21282
+                  100.96948,
+                  14.96245
                 ],
                 [
-                  100.75055,
-                  15.21089
+                  100.9721,
+                  14.95663
                 ],
                 [
-                  100.75388,
-                  15.21329
+                  100.97033,
+                  14.94571
                 ],
                 [
-                  100.76091,
-                  15.21333
+                  100.98295,
+                  14.93106
                 ],
                 [
-                  100.76629,
-                  15.21721
+                  100.99592,
+                  14.93468
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "160207",
+          "tambon": "ต.หนองบัว",
+          "amphoe": "อ.พัฒนานิคม",
+          "province": "จ.ลพบุรี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "เหนือเขื่อนป่าสัก",
+          "latitude": 14.848254,
+          "longitude": 101.090205,
+          "sum_rainfall_mm": 115.0,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  101.08488,
+                  14.89073
+                ],
+                [
+                  101.08703,
+                  14.88927
+                ],
+                [
+                  101.08683,
+                  14.88788
+                ],
+                [
+                  101.07491,
+                  14.88102
+                ],
+                [
+                  101.07331,
+                  14.87898
+                ],
+                [
+                  101.0832,
+                  14.87047
+                ],
+                [
+                  101.08304,
+                  14.86853
+                ],
+                [
+                  101.07913,
+                  14.86771
+                ],
+                [
+                  101.07838,
+                  14.86631
+                ],
+                [
+                  101.07931,
+                  14.86515
+                ],
+                [
+                  101.08468,
+                  14.8641
+                ],
+                [
+                  101.08439,
+                  14.85701
+                ],
+                [
+                  101.08752,
+                  14.8554
+                ],
+                [
+                  101.08728,
+                  14.85213
+                ],
+                [
+                  101.09016,
+                  14.85218
+                ],
+                [
+                  101.09184,
+                  14.85067
+                ],
+                [
+                  101.09143,
+                  14.8437
+                ],
+                [
+                  101.09027,
+                  14.84213
+                ],
+                [
+                  101.08589,
+                  14.84034
+                ],
+                [
+                  101.08484,
+                  14.83441
+                ],
+                [
+                  101.08819,
+                  14.83211
+                ],
+                [
+                  101.08859,
+                  14.82987
+                ],
+                [
+                  101.07789,
+                  14.81813
+                ],
+                [
+                  101.07828,
+                  14.8147
+                ],
+                [
+                  101.08158,
+                  14.81218
+                ],
+                [
+                  101.08143,
+                  14.81097
+                ],
+                [
+                  101.07656,
+                  14.81051
+                ],
+                [
+                  101.07447,
+                  14.81443
+                ],
+                [
+                  101.07195,
+                  14.81573
+                ],
+                [
+                  101.07021,
+                  14.81545
+                ],
+                [
+                  101.06824,
+                  14.81241
+                ],
+                [
+                  101.06847,
+                  14.8029
+                ],
+                [
+                  101.07246,
+                  14.79067
+                ],
+                [
+                  101.06574,
+                  14.79271
+                ],
+                [
+                  101.06349,
+                  14.79184
+                ],
+                [
+                  101.06187,
+                  14.78933
+                ],
+                [
+                  101.06544,
+                  14.77566
+                ],
+                [
+                  101.07222,
+                  14.76754
+                ],
+                [
+                  101.07333,
+                  14.76343
+                ],
+                [
+                  101.06859,
+                  14.75921
+                ],
+                [
+                  101.06388,
+                  14.75919
+                ],
+                [
+                  101.06312,
+                  14.76144
+                ],
+                [
+                  101.06007,
+                  14.75964
+                ],
+                [
+                  101.05955,
+                  14.7606
+                ],
+                [
+                  101.06127,
+                  14.76277
+                ],
+                [
+                  101.06002,
+                  14.76416
+                ],
+                [
+                  101.06146,
+                  14.7642
+                ],
+                [
+                  101.06161,
+                  14.76739
+                ],
+                [
+                  101.05875,
+                  14.76846
+                ],
+                [
+                  101.0558,
+                  14.77276
+                ],
+                [
+                  101.05624,
+                  14.7736
+                ],
+                [
+                  101.05434,
+                  14.77413
+                ],
+                [
+                  101.05557,
+                  14.77776
+                ],
+                [
+                  101.05708,
+                  14.77583
+                ],
+                [
+                  101.05879,
+                  14.77821
+                ],
+                [
+                  101.05832,
+                  14.78052
+                ],
+                [
+                  101.05681,
+                  14.78165
+                ],
+                [
+                  101.0578,
+                  14.78408
+                ],
+                [
+                  101.05502,
+                  14.78412
+                ],
+                [
+                  101.05412,
+                  14.78799
+                ],
+                [
+                  101.05259,
+                  14.789
+                ],
+                [
+                  101.05405,
+                  14.79025
+                ],
+                [
+                  101.05216,
+                  14.79014
+                ],
+                [
+                  101.04756,
+                  14.79431
+                ],
+                [
+                  101.0451,
+                  14.79425
+                ],
+                [
+                  101.04175,
+                  14.79865
+                ],
+                [
+                  101.03821,
+                  14.80051
+                ],
+                [
+                  101.03303,
+                  14.80098
+                ],
+                [
+                  101.03262,
+                  14.80323
+                ],
+                [
+                  101.03147,
+                  14.80252
+                ],
+                [
+                  101.03088,
+                  14.80475
+                ],
+                [
+                  101.02872,
+                  14.80781
+                ],
+                [
+                  101.02673,
+                  14.80819
+                ],
+                [
+                  101.02563,
+                  14.81106
+                ],
+                [
+                  101.0239,
+                  14.80906
+                ],
+                [
+                  101.02258,
+                  14.80981
+                ],
+                [
+                  101.02363,
+                  14.81306
+                ],
+                [
+                  101.02145,
+                  14.81419
+                ],
+                [
+                  101.0194,
+                  14.81788
+                ],
+                [
+                  101.02237,
+                  14.82158
+                ],
+                [
+                  101.01577,
+                  14.87914
+                ],
+                [
+                  101.02058,
+                  14.87813
+                ],
+                [
+                  101.02401,
+                  14.87976
+                ],
+                [
+                  101.02406,
+                  14.88142
+                ],
+                [
+                  101.0257,
+                  14.88292
                 ],
                 [
-                  100.76923,
-                  15.2163
+                  101.02568,
+                  14.88537
                 ],
                 [
-                  100.77179,
-                  15.21707
+                  101.03038,
+                  14.88822
                 ],
                 [
-                  100.77215,
-                  15.21622
+                  101.0322,
+                  14.89227
                 ],
                 [
-                  100.77324,
-                  15.21746
+                  101.04156,
+                  14.89991
                 ],
                 [
-                  100.77431,
-                  15.21676
+                  101.04299,
+                  14.90455
                 ],
                 [
-                  100.77461,
-                  15.2178
+                  101.04484,
+                  14.90478
                 ],
                 [
-                  100.77675,
-                  15.21612
+                  101.04613,
+                  14.90793
                 ],
                 [
-                  100.77947,
-                  15.21594
+                  101.0477,
+                  14.90836
                 ],
                 [
-                  100.78103,
-                  15.21299
+                  101.04673,
+                  14.91164
                 ],
                 [
-                  100.78243,
-                  15.21321
+                  101.04952,
+                  14.91335
                 ],
                 [
-                  100.78103,
-                  15.21128
+                  101.05039,
+                  14.92005
                 ],
                 [
-                  100.78128,
-                  15.20934
+                  101.05605,
+                  14.92209
                 ],
                 [
-                  100.78284,
-                  15.20807
+                  101.0587,
+                  14.9204
                 ],
                 [
-                  100.78211,
-                  15.20753
+                  101.06599,
+                  14.92188
                 ],
                 [
-                  100.78315,
-                  15.20673
+                  101.06825,
+                  14.91861
                 ],
                 [
-                  100.78286,
-                  15.20492
+                  101.07133,
+                  14.91665
                 ],
                 [
-                  100.7842,
-                  15.20392
+                  101.07162,
+                  14.91291
                 ],
                 [
-                  100.78544,
-                  15.20528
+                  101.08135,
+                  14.9083
                 ],
                 [
-                  100.7865,
-                  15.20301
+                  101.08167,
+                  14.90669
                 ],
                 [
-                  100.78839,
-                  15.20257
+                  101.07716,
+                  14.90576
                 ],
                 [
-                  100.78985,
-                  15.19921
+                  101.08331,
+                  14.9014
                 ],
                 [
-                  100.79488,
-                  15.19793
+                  101.08538,
+                  14.8985
                 ],
                 [
-                  100.79572,
-                  15.19513
+                  101.08488,
+                  14.89073
                 ]
               ]
             ]
@@ -4844,8 +5710,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "พระรามสอง",
           "latitude": 13.38362,
           "longitude": 99.9836,
-          "sum_rainfall_mm": 119.4,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "sum_rainfall_mm": 121.39999999999999,
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -4947,8 +5813,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ที่ทำการเขตห้ามล่าสัตว์ป่าแก่งคอย",
           "latitude": 14.5439,
           "longitude": 101.0983,
-          "sum_rainfall_mm": 125.39999999999998,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "sum_rainfall_mm": 115.0,
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -5230,8 +6096,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทม.ทับกวาง",
           "latitude": 14.60885,
           "longitude": 101.07645,
-          "sum_rainfall_mm": 95.6,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "sum_rainfall_mm": 99.80000000000001,
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -5564,6 +6430,297 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
+          "geocode": "191105",
+          "tambon": "ต.ลำสมพุง",
+          "amphoe": "อ.มวกเหล็ก",
+          "province": "จ.สระบุรี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "ที่ทำการเขตห้ามล่าสัตว์ป่าเขาวงจันแดง",
+          "latitude": 14.99967,
+          "longitude": 101.39597,
+          "sum_rainfall_mm": 104.2,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  101.39892,
+                  15.07275
+                ],
+                [
+                  101.40256,
+                  15.066
+                ],
+                [
+                  101.40305,
+                  15.06177
+                ],
+                [
+                  101.4044,
+                  15.06161
+                ],
+                [
+                  101.41068,
+                  15.05314
+                ],
+                [
+                  101.41046,
+                  15.05172
+                ],
+                [
+                  101.41526,
+                  15.04112
+                ],
+                [
+                  101.41382,
+                  15.0342
+                ],
+                [
+                  101.41649,
+                  15.0316
+                ],
+                [
+                  101.4194,
+                  15.01836
+                ],
+                [
+                  101.42461,
+                  15.0127
+                ],
+                [
+                  101.42294,
+                  15.01006
+                ],
+                [
+                  101.42298,
+                  15.00664
+                ],
+                [
+                  101.42093,
+                  15.00461
+                ],
+                [
+                  101.42033,
+                  14.99696
+                ],
+                [
+                  101.42338,
+                  14.99392
+                ],
+                [
+                  101.42456,
+                  14.98826
+                ],
+                [
+                  101.42909,
+                  14.98301
+                ],
+                [
+                  101.42898,
+                  14.97771
+                ],
+                [
+                  101.43069,
+                  14.9765
+                ],
+                [
+                  101.43167,
+                  14.97183
+                ],
+                [
+                  101.42872,
+                  14.96851
+                ],
+                [
+                  101.4206,
+                  14.96709
+                ],
+                [
+                  101.41331,
+                  14.96283
+                ],
+                [
+                  101.41105,
+                  14.96326
+                ],
+                [
+                  101.40781,
+                  14.962
+                ],
+                [
+                  101.3976,
+                  14.95487
+                ],
+                [
+                  101.38323,
+                  14.94835
+                ],
+                [
+                  101.37815,
+                  14.94344
+                ],
+                [
+                  101.37408,
+                  14.93686
+                ],
+                [
+                  101.36877,
+                  14.93386
+                ],
+                [
+                  101.36546,
+                  14.9288
+                ],
+                [
+                  101.36385,
+                  14.92927
+                ],
+                [
+                  101.36249,
+                  14.93208
+                ],
+                [
+                  101.35794,
+                  14.9314
+                ],
+                [
+                  101.35448,
+                  14.93298
+                ],
+                [
+                  101.35092,
+                  14.93239
+                ],
+                [
+                  101.34599,
+                  14.93633
+                ],
+                [
+                  101.33851,
+                  14.9329
+                ],
+                [
+                  101.33848,
+                  14.94281
+                ],
+                [
+                  101.33556,
+                  14.94889
+                ],
+                [
+                  101.33718,
+                  14.9511
+                ],
+                [
+                  101.33798,
+                  14.9582
+                ],
+                [
+                  101.33523,
+                  14.95942
+                ],
+                [
+                  101.32879,
+                  14.96609
+                ],
+                [
+                  101.33064,
+                  14.97278
+                ],
+                [
+                  101.33359,
+                  14.97719
+                ],
+                [
+                  101.33198,
+                  14.98296
+                ],
+                [
+                  101.33467,
+                  14.98512
+                ],
+                [
+                  101.33655,
+                  14.99018
+                ],
+                [
+                  101.34366,
+                  14.99049
+                ],
+                [
+                  101.34824,
+                  14.99404
+                ],
+                [
+                  101.34946,
+                  14.99991
+                ],
+                [
+                  101.34842,
+                  15.00621
+                ],
+                [
+                  101.34953,
+                  15.01401
+                ],
+                [
+                  101.35304,
+                  15.02223
+                ],
+                [
+                  101.35979,
+                  15.02857
+                ],
+                [
+                  101.36283,
+                  15.03716
+                ],
+                [
+                  101.36298,
+                  15.04606
+                ],
+                [
+                  101.36405,
+                  15.04646
+                ],
+                [
+                  101.36818,
+                  15.04338
+                ],
+                [
+                  101.37108,
+                  15.04319
+                ],
+                [
+                  101.37437,
+                  15.04901
+                ],
+                [
+                  101.37566,
+                  15.06054
+                ],
+                [
+                  101.38118,
+                  15.06743
+                ],
+                [
+                  101.39526,
+                  15.07395
+                ],
+                [
+                  101.39707,
+                  15.07411
+                ],
+                [
+                  101.39892,
+                  15.07275
+                ]
+              ]
+            ]
+          }
+        },
+        {
           "geocode": "191203",
           "tambon": "ต.วังม่วง",
           "amphoe": "อ.วังม่วง",
@@ -5573,8 +6730,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ฝายคลองสุคต",
           "latitude": 14.863621,
           "longitude": 101.119957,
-          "sum_rainfall_mm": 106.0,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "sum_rainfall_mm": 134.0,
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -5916,8 +7073,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ท้ายปตร.พระศรีศิลป์",
           "latitude": 14.32729,
           "longitude": 100.87117,
-          "sum_rainfall_mm": 122.39999999999999,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "sum_rainfall_mm": 146.79999999999998,
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -5954,6 +7111,633 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
+          "geocode": "221005",
+          "tambon": "ต.จันทเขลม",
+          "amphoe": "อ.เขาคิชฌกูฏ",
+          "province": "จ.จันทบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "สะพานคลองจันทเขลม",
+          "latitude": 13.003336,
+          "longitude": 102.04864,
+          "sum_rainfall_mm": 110.20000000000002,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  102.12888,
+                  13.19664
+                ],
+                [
+                  102.13316,
+                  13.1927
+                ],
+                [
+                  102.13784,
+                  13.18511
+                ],
+                [
+                  102.13656,
+                  13.18156
+                ],
+                [
+                  102.13513,
+                  13.18095
+                ],
+                [
+                  102.1354,
+                  13.17917
+                ],
+                [
+                  102.1337,
+                  13.17848
+                ],
+                [
+                  102.13442,
+                  13.17565
+                ],
+                [
+                  102.13877,
+                  13.1724
+                ],
+                [
+                  102.13788,
+                  13.16775
+                ],
+                [
+                  102.13654,
+                  13.1671
+                ],
+                [
+                  102.13526,
+                  13.16402
+                ],
+                [
+                  102.13687,
+                  13.15852
+                ],
+                [
+                  102.13426,
+                  13.1559
+                ],
+                [
+                  102.13149,
+                  13.15591
+                ],
+                [
+                  102.12707,
+                  13.15333
+                ],
+                [
+                  102.12086,
+                  13.15318
+                ],
+                [
+                  102.11988,
+                  13.15168
+                ],
+                [
+                  102.11447,
+                  13.15554
+                ],
+                [
+                  102.11058,
+                  13.1522
+                ],
+                [
+                  102.116,
+                  13.1408
+                ],
+                [
+                  102.11453,
+                  13.13954
+                ],
+                [
+                  102.11521,
+                  13.13581
+                ],
+                [
+                  102.119,
+                  13.13495
+                ],
+                [
+                  102.12174,
+                  13.12958
+                ],
+                [
+                  102.12462,
+                  13.12876
+                ],
+                [
+                  102.12772,
+                  13.13012
+                ],
+                [
+                  102.13293,
+                  13.13041
+                ],
+                [
+                  102.13705,
+                  13.13267
+                ],
+                [
+                  102.14527,
+                  13.1317
+                ],
+                [
+                  102.15034,
+                  13.1332
+                ],
+                [
+                  102.15414,
+                  13.1284
+                ],
+                [
+                  102.14832,
+                  13.1217
+                ],
+                [
+                  102.1467,
+                  13.11284
+                ],
+                [
+                  102.14225,
+                  13.10962
+                ],
+                [
+                  102.14137,
+                  13.10523
+                ],
+                [
+                  102.1448,
+                  13.10188
+                ],
+                [
+                  102.15394,
+                  13.08304
+                ],
+                [
+                  102.15443,
+                  13.07758
+                ],
+                [
+                  102.15229,
+                  13.07434
+                ],
+                [
+                  102.15607,
+                  13.06597
+                ],
+                [
+                  102.15482,
+                  13.06136
+                ],
+                [
+                  102.15598,
+                  13.0571
+                ],
+                [
+                  102.15601,
+                  13.05005
+                ],
+                [
+                  102.15677,
+                  13.04748
+                ],
+                [
+                  102.16087,
+                  13.04217
+                ],
+                [
+                  102.16696,
+                  13.03794
+                ],
+                [
+                  102.16809,
+                  13.02897
+                ],
+                [
+                  102.17388,
+                  13.0212
+                ],
+                [
+                  102.17422,
+                  13.01894
+                ],
+                [
+                  102.17157,
+                  13.01343
+                ],
+                [
+                  102.17381,
+                  13.011
+                ],
+                [
+                  102.16787,
+                  13.01075
+                ],
+                [
+                  102.16568,
+                  13.00516
+                ],
+                [
+                  102.16379,
+                  13.00379
+                ],
+                [
+                  102.15743,
+                  13.00343
+                ],
+                [
+                  102.138,
+                  12.9985
+                ],
+                [
+                  102.13761,
+                  12.99237
+                ],
+                [
+                  102.14002,
+                  12.9896
+                ],
+                [
+                  102.13947,
+                  12.98709
+                ],
+                [
+                  102.13584,
+                  12.98596
+                ],
+                [
+                  102.13329,
+                  12.98352
+                ],
+                [
+                  102.12619,
+                  12.98312
+                ],
+                [
+                  102.12222,
+                  12.9791
+                ],
+                [
+                  102.11746,
+                  12.98048
+                ],
+                [
+                  102.11394,
+                  12.98553
+                ],
+                [
+                  102.11013,
+                  12.98579
+                ],
+                [
+                  102.10801,
+                  12.98745
+                ],
+                [
+                  102.10493,
+                  12.98648
+                ],
+                [
+                  102.09905,
+                  12.98867
+                ],
+                [
+                  102.09241,
+                  12.98767
+                ],
+                [
+                  102.0898,
+                  12.98464
+                ],
+                [
+                  102.08559,
+                  12.98438
+                ],
+                [
+                  102.07751,
+                  12.97765
+                ],
+                [
+                  102.07172,
+                  12.97567
+                ],
+                [
+                  102.07091,
+                  12.97255
+                ],
+                [
+                  102.06636,
+                  12.97233
+                ],
+                [
+                  102.06341,
+                  12.9707
+                ],
+                [
+                  102.06172,
+                  12.97225
+                ],
+                [
+                  102.06072,
+                  12.96988
+                ],
+                [
+                  102.06183,
+                  12.96767
+                ],
+                [
+                  102.05933,
+                  12.96798
+                ],
+                [
+                  102.05744,
+                  12.96598
+                ],
+                [
+                  102.05644,
+                  12.96732
+                ],
+                [
+                  102.05463,
+                  12.96474
+                ],
+                [
+                  102.0554,
+                  12.96129
+                ],
+                [
+                  102.05404,
+                  12.96082
+                ],
+                [
+                  102.05081,
+                  12.96374
+                ],
+                [
+                  102.0522,
+                  12.96374
+                ],
+                [
+                  102.05176,
+                  12.9656
+                ],
+                [
+                  102.05409,
+                  12.9701
+                ],
+                [
+                  102.05187,
+                  12.96932
+                ],
+                [
+                  102.03782,
+                  12.98104
+                ],
+                [
+                  102.02184,
+                  12.98163
+                ],
+                [
+                  102.00062,
+                  12.98961
+                ],
+                [
+                  102.00523,
+                  13.00312
+                ],
+                [
+                  102.00742,
+                  13.0054
+                ],
+                [
+                  102.00728,
+                  13.00768
+                ],
+                [
+                  102.00976,
+                  13.00964
+                ],
+                [
+                  102.01054,
+                  13.01241
+                ],
+                [
+                  102.0125,
+                  13.01327
+                ],
+                [
+                  102.01277,
+                  13.01702
+                ],
+                [
+                  102.01573,
+                  13.01752
+                ],
+                [
+                  102.02093,
+                  13.01554
+                ],
+                [
+                  102.01921,
+                  13.0428
+                ],
+                [
+                  102.01954,
+                  13.04694
+                ],
+                [
+                  102.02183,
+                  13.0523
+                ],
+                [
+                  102.02024,
+                  13.05483
+                ],
+                [
+                  102.01835,
+                  13.05505
+                ],
+                [
+                  102.01712,
+                  13.05659
+                ],
+                [
+                  102.01668,
+                  13.06513
+                ],
+                [
+                  102.01057,
+                  13.0666
+                ],
+                [
+                  102.0126,
+                  13.06861
+                ],
+                [
+                  102.02916,
+                  13.07444
+                ],
+                [
+                  102.03032,
+                  13.07577
+                ],
+                [
+                  102.03127,
+                  13.08353
+                ],
+                [
+                  102.0342,
+                  13.08853
+                ],
+                [
+                  102.03853,
+                  13.0893
+                ],
+                [
+                  102.04196,
+                  13.09159
+                ],
+                [
+                  102.04316,
+                  13.09412
+                ],
+                [
+                  102.04739,
+                  13.09575
+                ],
+                [
+                  102.05335,
+                  13.10002
+                ],
+                [
+                  102.05397,
+                  13.10632
+                ],
+                [
+                  102.05641,
+                  13.10933
+                ],
+                [
+                  102.05638,
+                  13.11704
+                ],
+                [
+                  102.05803,
+                  13.11774
+                ],
+                [
+                  102.05636,
+                  13.12348
+                ],
+                [
+                  102.05764,
+                  13.1249
+                ],
+                [
+                  102.05271,
+                  13.14161
+                ],
+                [
+                  102.04235,
+                  13.15107
+                ],
+                [
+                  102.04618,
+                  13.15815
+                ],
+                [
+                  102.05108,
+                  13.1624
+                ],
+                [
+                  102.04986,
+                  13.16901
+                ],
+                [
+                  102.05534,
+                  13.17311
+                ],
+                [
+                  102.06163,
+                  13.1753
+                ],
+                [
+                  102.06532,
+                  13.18027
+                ],
+                [
+                  102.06824,
+                  13.18214
+                ],
+                [
+                  102.0694,
+                  13.18547
+                ],
+                [
+                  102.07143,
+                  13.18719
+                ],
+                [
+                  102.07828,
+                  13.18801
+                ],
+                [
+                  102.08235,
+                  13.18581
+                ],
+                [
+                  102.0846,
+                  13.18846
+                ],
+                [
+                  102.09166,
+                  13.19131
+                ],
+                [
+                  102.0944,
+                  13.19457
+                ],
+                [
+                  102.09908,
+                  13.1928
+                ],
+                [
+                  102.11101,
+                  13.19646
+                ],
+                [
+                  102.11306,
+                  13.19835
+                ],
+                [
+                  102.11463,
+                  13.19634
+                ],
+                [
+                  102.11945,
+                  13.19616
+                ],
+                [
+                  102.12246,
+                  13.19861
+                ],
+                [
+                  102.12548,
+                  13.19933
+                ],
+                [
+                  102.12888,
+                  13.19664
+                ]
+              ]
+            ]
+          }
+        },
+        {
           "geocode": "221003",
           "tambon": "ต.ตะเคียนทอง",
           "amphoe": "อ.เขาคิชฌกูฏ",
@@ -5963,8 +7747,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.ตะเคียนทอง",
           "latitude": 12.9131,
           "longitude": 102.0815,
-          "sum_rainfall_mm": 117.19999999999999,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "sum_rainfall_mm": 177.8,
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -6441,379 +8225,3632 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
-          "geocode": "220704",
-          "tambon": "ต.ทรายขาว",
-          "amphoe": "อ.สอยดาว",
+          "geocode": "220402",
+          "tambon": "ต.โป่งน้ำร้อน",
+          "amphoe": "อ.โป่งน้ำร้อน",
           "province": "จ.จันทบุรี",
           "region_id": "2",
           "region_name": "ภาคตะวันออก",
-          "station": "เขตรักษาพันธุ์สัตว์ป่าเขาสอยดาว",
-          "latitude": 13.10355,
-          "longitude": 102.19194,
-          "sum_rainfall_mm": 244.40000000000003,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "station": "ทต.โป่งน้ำร้อน",
+          "latitude": 12.90515,
+          "longitude": 102.26646,
+          "sum_rainfall_mm": 170.2,
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
                 [
-                  102.28997,
-                  13.17381
+                  102.4092,
+                  13.00415
                 ],
                 [
-                  102.28895,
-                  13.15698
+                  102.40903,
+                  12.99818
                 ],
                 [
-                  102.29176,
-                  13.1521
+                  102.42404,
+                  12.98986
                 ],
                 [
-                  102.29252,
-                  13.14781
+                  102.42723,
+                  12.99486
                 ],
                 [
-                  102.28349,
-                  13.1314
+                  102.44553,
+                  12.96591
                 ],
                 [
-                  102.29592,
-                  13.12011
+                  102.44019,
+                  12.96159
                 ],
                 [
-                  102.30665,
-                  13.11304
+                  102.4308,
+                  12.9584
                 ],
                 [
-                  102.32178,
-                  13.11675
+                  102.41567,
+                  12.95805
                 ],
                 [
-                  102.33203,
-                  13.12418
+                  102.42073,
+                  12.94732
                 ],
                 [
-                  102.33714,
-                  13.12006
+                  102.41547,
+                  12.94094
                 ],
                 [
-                  102.34096,
-                  13.11968
+                  102.41573,
+                  12.93034
                 ],
                 [
-                  102.34451,
-                  13.11713
+                  102.41777,
+                  12.93076
                 ],
                 [
-                  102.3485,
-                  13.11712
+                  102.42282,
+                  12.9293
                 ],
                 [
-                  102.34934,
-                  13.11316
+                  102.4225,
+                  12.92291
                 ],
                 [
-                  102.35134,
-                  13.11124
+                  102.42487,
+                  12.92135
                 ],
                 [
-                  102.35711,
-                  13.10935
+                  102.42152,
+                  12.91817
                 ],
                 [
-                  102.35667,
-                  13.10451
+                  102.42189,
+                  12.91564
                 ],
                 [
-                  102.35805,
-                  13.10207
+                  102.41763,
+                  12.91116
                 ],
                 [
-                  102.35659,
-                  13.10108
+                  102.41745,
+                  12.9081
                 ],
                 [
-                  102.35845,
-                  13.09764
+                  102.42021,
+                  12.90741
                 ],
                 [
-                  102.35578,
-                  13.09382
+                  102.42062,
+                  12.90169
                 ],
                 [
-                  102.35635,
-                  13.08888
+                  102.42422,
+                  12.89925
                 ],
                 [
-                  102.35799,
-                  13.08695
+                  102.42607,
+                  12.89653
                 ],
                 [
-                  102.35954,
-                  13.07967
+                  102.42964,
+                  12.89622
                 ],
                 [
-                  102.36374,
-                  13.07738
+                  102.43309,
+                  12.89295
                 ],
                 [
-                  102.35696,
-                  13.06442
+                  102.43174,
+                  12.8902
                 ],
                 [
-                  102.3484,
-                  13.05259
+                  102.4356,
+                  12.88183
                 ],
                 [
-                  102.33872,
-                  13.05062
+                  102.43852,
+                  12.88038
                 ],
                 [
-                  102.32732,
-                  13.04634
+                  102.43759,
+                  12.87773
                 ],
                 [
-                  102.31717,
-                  13.04553
+                  102.43853,
+                  12.87687
                 ],
                 [
-                  102.30142,
-                  13.04217
+                  102.43607,
+                  12.87214
                 ],
                 [
-                  102.28887,
-                  13.04268
+                  102.43634,
+                  12.86741
                 ],
                 [
-                  102.26947,
-                  13.03956
+                  102.43495,
+                  12.86591
                 ],
                 [
-                  102.25868,
-                  13.03991
+                  102.43623,
+                  12.86251
                 ],
                 [
-                  102.22855,
-                  13.04169
+                  102.43559,
+                  12.85829
                 ],
                 [
-                  102.20814,
-                  13.04553
+                  102.43889,
+                  12.85298
                 ],
                 [
-                  102.18648,
-                  13.04974
+                  102.44176,
+                  12.85078
                 ],
                 [
-                  102.1675,
-                  13.0552
+                  102.44401,
+                  12.84551
                 ],
                 [
-                  102.1552,
-                  13.05996
+                  102.44978,
+                  12.84383
                 ],
                 [
-                  102.15607,
-                  13.06597
+                  102.46215,
+                  12.76786
                 ],
                 [
-                  102.15229,
-                  13.07434
+                  102.46387,
+                  12.76225
                 ],
                 [
-                  102.15443,
-                  13.07758
+                  102.46397,
+                  12.76084
                 ],
                 [
-                  102.15394,
-                  13.08304
+                  102.45736,
+                  12.76231
                 ],
                 [
-                  102.1448,
-                  13.10188
+                  102.45167,
+                  12.75905
                 ],
                 [
-                  102.14125,
-                  13.10598
+                  102.44676,
+                  12.75913
                 ],
                 [
-                  102.14225,
-                  13.10962
+                  102.44493,
+                  12.75698
                 ],
                 [
-                  102.1467,
-                  13.11284
+                  102.43254,
+                  12.76479
                 ],
                 [
-                  102.14888,
-                  13.12272
+                  102.42921,
+                  12.76303
                 ],
                 [
-                  102.15414,
-                  13.1284
+                  102.42557,
+                  12.76285
                 ],
                 [
-                  102.15775,
-                  13.12848
+                  102.42575,
+                  12.75861
                 ],
                 [
-                  102.16276,
-                  13.12556
+                  102.42465,
+                  12.75775
                 ],
                 [
-                  102.16814,
-                  13.12436
+                  102.41946,
+                  12.76419
                 ],
                 [
-                  102.17781,
-                  13.1258
+                  102.41596,
+                  12.77125
                 ],
                 [
-                  102.18642,
-                  13.12298
+                  102.41354,
+                  12.77125
                 ],
                 [
-                  102.19097,
-                  13.12632
+                  102.41066,
+                  12.77296
                 ],
                 [
-                  102.19428,
-                  13.12659
+                  102.40464,
+                  12.76955
                 ],
                 [
-                  102.19865,
-                  13.12456
+                  102.39896,
+                  12.76122
                 ],
                 [
-                  102.20556,
-                  13.1257
+                  102.3929,
+                  12.75622
                 ],
                 [
-                  102.21039,
-                  13.12407
+                  102.38564,
+                  12.76056
                 ],
                 [
-                  102.21455,
-                  13.12489
+                  102.37822,
+                  12.76091
                 ],
                 [
-                  102.21646,
-                  13.12281
+                  102.37817,
+                  12.76323
                 ],
                 [
-                  102.21925,
-                  13.12287
+                  102.37559,
+                  12.76579
                 ],
                 [
-                  102.22053,
-                  13.12174
+                  102.37646,
+                  12.76988
                 ],
                 [
-                  102.22509,
-                  13.12249
+                  102.37445,
+                  12.77189
                 ],
                 [
-                  102.22643,
-                  13.12348
+                  102.37355,
+                  12.77599
                 ],
                 [
-                  102.22751,
-                  13.12704
+                  102.3701,
+                  12.78205
                 ],
                 [
-                  102.23066,
-                  13.12706
+                  102.3721,
+                  12.7827
                 ],
                 [
-                  102.23243,
-                  13.13104
+                  102.37647,
+                  12.78763
                 ],
                 [
-                  102.23687,
-                  13.13136
+                  102.37582,
+                  12.7915
                 ],
                 [
-                  102.23931,
-                  13.13381
+                  102.36818,
+                  12.79888
                 ],
                 [
-                  102.24466,
-                  13.1343
+                  102.36665,
+                  12.80401
                 ],
                 [
-                  102.25305,
-                  13.14045
+                  102.35626,
+                  12.80939
                 ],
                 [
-                  102.25168,
-                  13.14191
+                  102.3521,
+                  12.81416
                 ],
                 [
-                  102.25174,
-                  13.14418
+                  102.34947,
+                  12.81087
                 ],
                 [
-                  102.24902,
-                  13.14543
+                  102.34044,
+                  12.80951
                 ],
                 [
-                  102.24813,
-                  13.14736
+                  102.33751,
+                  12.81115
                 ],
                 [
-                  102.2505,
-                  13.15246
+                  102.33617,
+                  12.8136
                 ],
                 [
-                  102.25556,
-                  13.15324
+                  102.33356,
+                  12.81157
                 ],
                 [
-                  102.2542,
-                  13.1621
+                  102.32806,
+                  12.81386
                 ],
                 [
-                  102.2567,
-                  13.16236
+                  102.32648,
+                  12.82291
                 ],
                 [
-                  102.2572,
-                  13.16377
+                  102.33299,
+                  12.83592
                 ],
                 [
-                  102.25539,
-                  13.16769
+                  102.32993,
+                  12.83952
                 ],
                 [
-                  102.25345,
-                  13.16782
+                  102.32799,
+                  12.85118
                 ],
                 [
-                  102.25303,
-                  13.16999
+                  102.32489,
+                  12.85822
                 ],
                 [
-                  102.24936,
-                  13.17069
+                  102.32595,
+                  12.86422
                 ],
                 [
-                  102.24945,
-                  13.17488
+                  102.31805,
+                  12.86874
                 ],
                 [
-                  102.25417,
-                  13.17613
+                  102.3155,
+                  12.87158
                 ],
                 [
-                  102.27078,
-                  13.17284
+                  102.31561,
+                  12.88746
                 ],
                 [
-                  102.28058,
-                  13.17471
+                  102.3141,
+                  12.89028
                 ],
                 [
-                  102.28997,
-                  13.17381
+                  102.31131,
+                  12.8924
+                ],
+                [
+                  102.3102,
+                  12.89592
+                ],
+                [
+                  102.30578,
+                  12.89678
+                ],
+                [
+                  102.30596,
+                  12.89966
+                ],
+                [
+                  102.30808,
+                  12.90059
+                ],
+                [
+                  102.3059,
+                  12.9013
+                ],
+                [
+                  102.30784,
+                  12.90321
+                ],
+                [
+                  102.3066,
+                  12.90495
+                ],
+                [
+                  102.30753,
+                  12.90629
+                ],
+                [
+                  102.30504,
+                  12.90585
+                ],
+                [
+                  102.3054,
+                  12.90849
+                ],
+                [
+                  102.30359,
+                  12.91018
+                ],
+                [
+                  102.30369,
+                  12.91148
+                ],
+                [
+                  102.30237,
+                  12.91121
+                ],
+                [
+                  102.30254,
+                  12.91388
+                ],
+                [
+                  102.30075,
+                  12.91342
+                ],
+                [
+                  102.30366,
+                  12.91479
+                ],
+                [
+                  102.30696,
+                  12.91356
+                ],
+                [
+                  102.30912,
+                  12.91559
+                ],
+                [
+                  102.30716,
+                  12.91673
+                ],
+                [
+                  102.3087,
+                  12.91939
+                ],
+                [
+                  102.30782,
+                  12.92149
+                ],
+                [
+                  102.30929,
+                  12.92237
+                ],
+                [
+                  102.30972,
+                  12.9252
+                ],
+                [
+                  102.31135,
+                  12.92616
+                ],
+                [
+                  102.30939,
+                  12.95294
+                ],
+                [
+                  102.30993,
+                  12.9647
+                ],
+                [
+                  102.32136,
+                  13.0054
+                ],
+                [
+                  102.33738,
+                  13.00361
+                ],
+                [
+                  102.36111,
+                  13.01063
+                ],
+                [
+                  102.37981,
+                  13.0132
+                ],
+                [
+                  102.39977,
+                  13.02056
+                ],
+                [
+                  102.4081,
+                  13.02478
+                ],
+                [
+                  102.41024,
+                  13.02826
+                ],
+                [
+                  102.41172,
+                  13.02831
+                ],
+                [
+                  102.41257,
+                  13.02798
+                ],
+                [
+                  102.41103,
+                  13.02739
+                ],
+                [
+                  102.40962,
+                  13.01753
+                ],
+                [
+                  102.40938,
+                  13.00979
+                ],
+                [
+                  102.41039,
+                  13.00634
+                ],
+                [
+                  102.4092,
+                  13.00415
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "241002",
+          "tambon": "ต.คลองตะเกรา",
+          "amphoe": "อ.ท่าตะเกียบ",
+          "province": "จ.ฉะเชิงเทรา",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ภูไท",
+          "latitude": 13.417764,
+          "longitude": 101.883095,
+          "sum_rainfall_mm": 221.6,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  101.67467,
+                  13.39494
+                ],
+                [
+                  101.67468,
+                  13.39985
+                ],
+                [
+                  101.6777,
+                  13.40116
+                ],
+                [
+                  101.67382,
+                  13.40349
+                ],
+                [
+                  101.67446,
+                  13.40678
+                ],
+                [
+                  101.67837,
+                  13.40874
+                ],
+                [
+                  101.67908,
+                  13.41085
+                ],
+                [
+                  101.67666,
+                  13.41507
+                ],
+                [
+                  101.67797,
+                  13.41776
+                ],
+                [
+                  101.67766,
+                  13.42096
+                ],
+                [
+                  101.67551,
+                  13.42183
+                ],
+                [
+                  101.67587,
+                  13.42566
+                ],
+                [
+                  101.67437,
+                  13.4272
+                ],
+                [
+                  101.67624,
+                  13.43127
+                ],
+                [
+                  101.678,
+                  13.43085
+                ],
+                [
+                  101.68244,
+                  13.4332
+                ],
+                [
+                  101.68655,
+                  13.43035
+                ],
+                [
+                  101.68723,
+                  13.42764
+                ],
+                [
+                  101.69013,
+                  13.42738
+                ],
+                [
+                  101.69455,
+                  13.42908
+                ],
+                [
+                  101.6991,
+                  13.42321
+                ],
+                [
+                  101.70599,
+                  13.42358
+                ],
+                [
+                  101.70777,
+                  13.42158
+                ],
+                [
+                  101.70654,
+                  13.41878
+                ],
+                [
+                  101.70991,
+                  13.41519
+                ],
+                [
+                  101.71317,
+                  13.41733
+                ],
+                [
+                  101.71636,
+                  13.4175
+                ],
+                [
+                  101.72206,
+                  13.41611
+                ],
+                [
+                  101.72475,
+                  13.41355
+                ],
+                [
+                  101.73065,
+                  13.41351
+                ],
+                [
+                  101.73272,
+                  13.4116
+                ],
+                [
+                  101.73814,
+                  13.41397
+                ],
+                [
+                  101.74641,
+                  13.41345
+                ],
+                [
+                  101.74748,
+                  13.41232
+                ],
+                [
+                  101.74971,
+                  13.41303
+                ],
+                [
+                  101.7508,
+                  13.41514
+                ],
+                [
+                  101.75343,
+                  13.41328
+                ],
+                [
+                  101.75733,
+                  13.41256
+                ],
+                [
+                  101.75894,
+                  13.41014
+                ],
+                [
+                  101.76189,
+                  13.4108
+                ],
+                [
+                  101.76397,
+                  13.40892
+                ],
+                [
+                  101.76708,
+                  13.40991
+                ],
+                [
+                  101.76832,
+                  13.40651
+                ],
+                [
+                  101.77448,
+                  13.40717
+                ],
+                [
+                  101.77784,
+                  13.4055
+                ],
+                [
+                  101.77994,
+                  13.40799
+                ],
+                [
+                  101.78296,
+                  13.40691
+                ],
+                [
+                  101.78469,
+                  13.40944
+                ],
+                [
+                  101.78893,
+                  13.40827
+                ],
+                [
+                  101.79304,
+                  13.40977
+                ],
+                [
+                  101.79736,
+                  13.40759
+                ],
+                [
+                  101.80173,
+                  13.40111
+                ],
+                [
+                  101.806,
+                  13.4
+                ],
+                [
+                  101.80999,
+                  13.40095
+                ],
+                [
+                  101.81271,
+                  13.40529
+                ],
+                [
+                  101.81301,
+                  13.40775
+                ],
+                [
+                  101.81688,
+                  13.41012
+                ],
+                [
+                  101.81883,
+                  13.41347
+                ],
+                [
+                  101.82718,
+                  13.41833
+                ],
+                [
+                  101.82961,
+                  13.41722
+                ],
+                [
+                  101.83743,
+                  13.41862
+                ],
+                [
+                  101.83912,
+                  13.41503
+                ],
+                [
+                  101.84259,
+                  13.41304
+                ],
+                [
+                  101.84493,
+                  13.41324
+                ],
+                [
+                  101.85063,
+                  13.40918
+                ],
+                [
+                  101.85283,
+                  13.40963
+                ],
+                [
+                  101.85858,
+                  13.40451
+                ],
+                [
+                  101.86328,
+                  13.40497
+                ],
+                [
+                  101.86646,
+                  13.40651
+                ],
+                [
+                  101.86943,
+                  13.40571
+                ],
+                [
+                  101.8699,
+                  13.40294
+                ],
+                [
+                  101.87378,
+                  13.40066
+                ],
+                [
+                  101.87546,
+                  13.40356
+                ],
+                [
+                  101.87996,
+                  13.40484
+                ],
+                [
+                  101.87968,
+                  13.40752
+                ],
+                [
+                  101.88173,
+                  13.41036
+                ],
+                [
+                  101.88262,
+                  13.41461
+                ],
+                [
+                  101.88818,
+                  13.42116
+                ],
+                [
+                  101.89399,
+                  13.42263
+                ],
+                [
+                  101.89795,
+                  13.42819
+                ],
+                [
+                  101.90039,
+                  13.42878
+                ],
+                [
+                  101.90209,
+                  13.43225
+                ],
+                [
+                  101.90552,
+                  13.43349
+                ],
+                [
+                  101.90683,
+                  13.43549
+                ],
+                [
+                  101.9114,
+                  13.43639
+                ],
+                [
+                  101.93816,
+                  13.45077
+                ],
+                [
+                  101.93873,
+                  13.44592
+                ],
+                [
+                  101.94246,
+                  13.44376
+                ],
+                [
+                  101.94352,
+                  13.43875
+                ],
+                [
+                  101.95746,
+                  13.42446
+                ],
+                [
+                  101.96101,
+                  13.42252
+                ],
+                [
+                  101.96353,
+                  13.41626
+                ],
+                [
+                  101.96893,
+                  13.41163
+                ],
+                [
+                  101.97313,
+                  13.40931
+                ],
+                [
+                  101.97707,
+                  13.40873
+                ],
+                [
+                  101.97693,
+                  13.39961
+                ],
+                [
+                  101.97375,
+                  13.39617
+                ],
+                [
+                  101.97318,
+                  13.39405
+                ],
+                [
+                  101.97536,
+                  13.3911
+                ],
+                [
+                  101.9756,
+                  13.38562
+                ],
+                [
+                  101.98198,
+                  13.3809
+                ],
+                [
+                  101.98125,
+                  13.37617
+                ],
+                [
+                  101.98227,
+                  13.36956
+                ],
+                [
+                  101.98061,
+                  13.36516
+                ],
+                [
+                  101.98186,
+                  13.35975
+                ],
+                [
+                  101.99013,
+                  13.35334
+                ],
+                [
+                  101.98896,
+                  13.3448
+                ],
+                [
+                  101.98559,
+                  13.3406
+                ],
+                [
+                  101.98913,
+                  13.33403
+                ],
+                [
+                  101.98255,
+                  13.33158
+                ],
+                [
+                  101.9762,
+                  13.32731
+                ],
+                [
+                  101.96701,
+                  13.32489
+                ],
+                [
+                  101.96091,
+                  13.30928
+                ],
+                [
+                  101.95701,
+                  13.3054
+                ],
+                [
+                  101.95472,
+                  13.30067
+                ],
+                [
+                  101.94697,
+                  13.29336
+                ],
+                [
+                  101.94289,
+                  13.2925
+                ],
+                [
+                  101.93612,
+                  13.29478
+                ],
+                [
+                  101.93043,
+                  13.28944
+                ],
+                [
+                  101.92831,
+                  13.28869
+                ],
+                [
+                  101.92665,
+                  13.28999
+                ],
+                [
+                  101.92705,
+                  13.29565
+                ],
+                [
+                  101.91935,
+                  13.29263
+                ],
+                [
+                  101.91605,
+                  13.28911
+                ],
+                [
+                  101.90542,
+                  13.28715
+                ],
+                [
+                  101.90404,
+                  13.28446
+                ],
+                [
+                  101.90623,
+                  13.27968
+                ],
+                [
+                  101.90564,
+                  13.27104
+                ],
+                [
+                  101.90077,
+                  13.26626
+                ],
+                [
+                  101.89804,
+                  13.2663
+                ],
+                [
+                  101.89724,
+                  13.26382
+                ],
+                [
+                  101.89796,
+                  13.25961
+                ],
+                [
+                  101.89584,
+                  13.25086
+                ],
+                [
+                  101.89661,
+                  13.24843
+                ],
+                [
+                  101.89543,
+                  13.24352
+                ],
+                [
+                  101.90082,
+                  13.23524
+                ],
+                [
+                  101.89135,
+                  13.22699
+                ],
+                [
+                  101.88999,
+                  13.22738
+                ],
+                [
+                  101.89012,
+                  13.23058
+                ],
+                [
+                  101.88745,
+                  13.23506
+                ],
+                [
+                  101.88587,
+                  13.23651
+                ],
+                [
+                  101.88315,
+                  13.23662
+                ],
+                [
+                  101.87937,
+                  13.23398
+                ],
+                [
+                  101.87863,
+                  13.22711
+                ],
+                [
+                  101.87958,
+                  13.22554
+                ],
+                [
+                  101.87874,
+                  13.22397
+                ],
+                [
+                  101.87483,
+                  13.22215
+                ],
+                [
+                  101.87259,
+                  13.22256
+                ],
+                [
+                  101.87127,
+                  13.22451
+                ],
+                [
+                  101.87217,
+                  13.22658
+                ],
+                [
+                  101.87254,
+                  13.23914
+                ],
+                [
+                  101.86902,
+                  13.2504
+                ],
+                [
+                  101.86779,
+                  13.24998
+                ],
+                [
+                  101.86706,
+                  13.24741
+                ],
+                [
+                  101.8612,
+                  13.24646
+                ],
+                [
+                  101.85033,
+                  13.24786
+                ],
+                [
+                  101.84796,
+                  13.24624
+                ],
+                [
+                  101.84547,
+                  13.24059
+                ],
+                [
+                  101.84223,
+                  13.2389
+                ],
+                [
+                  101.83983,
+                  13.24015
+                ],
+                [
+                  101.84004,
+                  13.23771
+                ],
+                [
+                  101.8376,
+                  13.23644
+                ],
+                [
+                  101.83667,
+                  13.23303
+                ],
+                [
+                  101.83156,
+                  13.23822
+                ],
+                [
+                  101.82734,
+                  13.23722
+                ],
+                [
+                  101.82462,
+                  13.2329
+                ],
+                [
+                  101.82428,
+                  13.22638
+                ],
+                [
+                  101.81899,
+                  13.21786
+                ],
+                [
+                  101.80857,
+                  13.21139
+                ],
+                [
+                  101.80598,
+                  13.20801
+                ],
+                [
+                  101.79636,
+                  13.20259
+                ],
+                [
+                  101.79475,
+                  13.20178
+                ],
+                [
+                  101.79078,
+                  13.20295
+                ],
+                [
+                  101.78921,
+                  13.20224
+                ],
+                [
+                  101.77763,
+                  13.19094
+                ],
+                [
+                  101.77287,
+                  13.18427
+                ],
+                [
+                  101.76544,
+                  13.18504
+                ],
+                [
+                  101.75987,
+                  13.18838
+                ],
+                [
+                  101.75528,
+                  13.18833
+                ],
+                [
+                  101.75351,
+                  13.18648
+                ],
+                [
+                  101.7527,
+                  13.18133
+                ],
+                [
+                  101.74922,
+                  13.18375
+                ],
+                [
+                  101.74042,
+                  13.18648
+                ],
+                [
+                  101.7314,
+                  13.17898
+                ],
+                [
+                  101.72611,
+                  13.17885
+                ],
+                [
+                  101.71863,
+                  13.18124
+                ],
+                [
+                  101.71569,
+                  13.18404
+                ],
+                [
+                  101.71456,
+                  13.18946
+                ],
+                [
+                  101.71249,
+                  13.19174
+                ],
+                [
+                  101.71311,
+                  13.19542
+                ],
+                [
+                  101.71196,
+                  13.20066
+                ],
+                [
+                  101.71373,
+                  13.20337
+                ],
+                [
+                  101.71319,
+                  13.20586
+                ],
+                [
+                  101.70494,
+                  13.20836
+                ],
+                [
+                  101.69946,
+                  13.21761
+                ],
+                [
+                  101.69326,
+                  13.222
+                ],
+                [
+                  101.68813,
+                  13.23042
+                ],
+                [
+                  101.68846,
+                  13.23473
+                ],
+                [
+                  101.6859,
+                  13.24516
+                ],
+                [
+                  101.6835,
+                  13.25032
+                ],
+                [
+                  101.6822,
+                  13.25224
+                ],
+                [
+                  101.6796,
+                  13.25279
+                ],
+                [
+                  101.67305,
+                  13.25781
+                ],
+                [
+                  101.66746,
+                  13.27323
+                ],
+                [
+                  101.65717,
+                  13.27553
+                ],
+                [
+                  101.65083,
+                  13.28453
+                ],
+                [
+                  101.64575,
+                  13.28602
+                ],
+                [
+                  101.64163,
+                  13.28964
+                ],
+                [
+                  101.63952,
+                  13.29313
+                ],
+                [
+                  101.6355,
+                  13.2919
+                ],
+                [
+                  101.63105,
+                  13.29621
+                ],
+                [
+                  101.62835,
+                  13.29588
+                ],
+                [
+                  101.62547,
+                  13.29791
+                ],
+                [
+                  101.62182,
+                  13.29813
+                ],
+                [
+                  101.61976,
+                  13.30107
+                ],
+                [
+                  101.61717,
+                  13.3024
+                ],
+                [
+                  101.61543,
+                  13.30209
+                ],
+                [
+                  101.61421,
+                  13.30009
+                ],
+                [
+                  101.61059,
+                  13.29994
+                ],
+                [
+                  101.59993,
+                  13.30269
+                ],
+                [
+                  101.59849,
+                  13.3051
+                ],
+                [
+                  101.59764,
+                  13.31156
+                ],
+                [
+                  101.59474,
+                  13.31058
+                ],
+                [
+                  101.59247,
+                  13.31123
+                ],
+                [
+                  101.59044,
+                  13.3169
+                ],
+                [
+                  101.58319,
+                  13.32134
+                ],
+                [
+                  101.58337,
+                  13.32934
+                ],
+                [
+                  101.58024,
+                  13.33312
+                ],
+                [
+                  101.57584,
+                  13.33323
+                ],
+                [
+                  101.57284,
+                  13.32974
+                ],
+                [
+                  101.56768,
+                  13.32999
+                ],
+                [
+                  101.56409,
+                  13.33149
+                ],
+                [
+                  101.56431,
+                  13.3392
+                ],
+                [
+                  101.56098,
+                  13.34003
+                ],
+                [
+                  101.55815,
+                  13.34708
+                ],
+                [
+                  101.55824,
+                  13.35356
+                ],
+                [
+                  101.55658,
+                  13.35772
+                ],
+                [
+                  101.55669,
+                  13.36751
+                ],
+                [
+                  101.55353,
+                  13.3694
+                ],
+                [
+                  101.55036,
+                  13.36713
+                ],
+                [
+                  101.55066,
+                  13.36944
+                ],
+                [
+                  101.54891,
+                  13.37121
+                ],
+                [
+                  101.55111,
+                  13.37328
+                ],
+                [
+                  101.55106,
+                  13.3766
+                ],
+                [
+                  101.54841,
+                  13.37592
+                ],
+                [
+                  101.54548,
+                  13.37736
+                ],
+                [
+                  101.54746,
+                  13.37994
+                ],
+                [
+                  101.54823,
+                  13.38374
+                ],
+                [
+                  101.54752,
+                  13.38574
+                ],
+                [
+                  101.54971,
+                  13.3865
+                ],
+                [
+                  101.5502,
+                  13.38787
+                ],
+                [
+                  101.53915,
+                  13.4104
+                ],
+                [
+                  101.53698,
+                  13.41333
+                ],
+                [
+                  101.53452,
+                  13.41344
+                ],
+                [
+                  101.53328,
+                  13.415
+                ],
+                [
+                  101.53208,
+                  13.41879
+                ],
+                [
+                  101.53259,
+                  13.42462
+                ],
+                [
+                  101.53108,
+                  13.42622
+                ],
+                [
+                  101.52349,
+                  13.42394
+                ],
+                [
+                  101.51587,
+                  13.41967
+                ],
+                [
+                  101.51099,
+                  13.41073
+                ],
+                [
+                  101.50148,
+                  13.4101
+                ],
+                [
+                  101.50006,
+                  13.41931
+                ],
+                [
+                  101.49793,
+                  13.42118
+                ],
+                [
+                  101.49474,
+                  13.42202
+                ],
+                [
+                  101.4905,
+                  13.428
+                ],
+                [
+                  101.49054,
+                  13.4305
+                ],
+                [
+                  101.49443,
+                  13.43321
+                ],
+                [
+                  101.49564,
+                  13.43618
+                ],
+                [
+                  101.49375,
+                  13.44023
+                ],
+                [
+                  101.49005,
+                  13.44389
+                ],
+                [
+                  101.49253,
+                  13.44934
+                ],
+                [
+                  101.49731,
+                  13.44915
+                ],
+                [
+                  101.50329,
+                  13.45141
+                ],
+                [
+                  101.5062,
+                  13.45908
+                ],
+                [
+                  101.50855,
+                  13.4623
+                ],
+                [
+                  101.51334,
+                  13.46441
+                ],
+                [
+                  101.51909,
+                  13.46972
+                ],
+                [
+                  101.51876,
+                  13.47273
+                ],
+                [
+                  101.52028,
+                  13.4769
+                ],
+                [
+                  101.52298,
+                  13.47759
+                ],
+                [
+                  101.52509,
+                  13.47982
+                ],
+                [
+                  101.52836,
+                  13.47909
+                ],
+                [
+                  101.5298,
+                  13.47996
+                ],
+                [
+                  101.53008,
+                  13.48199
+                ],
+                [
+                  101.5325,
+                  13.4821
+                ],
+                [
+                  101.53348,
+                  13.48689
+                ],
+                [
+                  101.53279,
+                  13.48783
+                ],
+                [
+                  101.535,
+                  13.49166
+                ],
+                [
+                  101.53544,
+                  13.49801
+                ],
+                [
+                  101.53735,
+                  13.49825
+                ],
+                [
+                  101.6538,
+                  13.41029
+                ],
+                [
+                  101.66295,
+                  13.40597
+                ],
+                [
+                  101.67467,
+                  13.39494
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "240601",
+          "tambon": "ต.เกาะขนุน",
+          "amphoe": "อ.พนมสารคาม",
+          "province": "จ.ฉะเชิงเทรา",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "พนมสารคาม",
+          "latitude": 13.72662,
+          "longitude": 101.35298,
+          "sum_rainfall_mm": 208.6,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  101.4238,
+                  13.75741
+                ],
+                [
+                  101.42358,
+                  13.74932
+                ],
+                [
+                  101.43116,
+                  13.74172
+                ],
+                [
+                  101.43647,
+                  13.72604
+                ],
+                [
+                  101.44371,
+                  13.71884
+                ],
+                [
+                  101.44342,
+                  13.71279
+                ],
+                [
+                  101.44562,
+                  13.70475
+                ],
+                [
+                  101.44558,
+                  13.68971
+                ],
+                [
+                  101.44037,
+                  13.68716
+                ],
+                [
+                  101.43714,
+                  13.67846
+                ],
+                [
+                  101.43428,
+                  13.67554
+                ],
+                [
+                  101.42259,
+                  13.67345
+                ],
+                [
+                  101.42039,
+                  13.67149
+                ],
+                [
+                  101.42052,
+                  13.66346
+                ],
+                [
+                  101.42279,
+                  13.65607
+                ],
+                [
+                  101.41568,
+                  13.64305
+                ],
+                [
+                  101.41297,
+                  13.63475
+                ],
+                [
+                  101.40795,
+                  13.62696
+                ],
+                [
+                  101.40081,
+                  13.62093
+                ],
+                [
+                  101.39909,
+                  13.61518
+                ],
+                [
+                  101.38811,
+                  13.61909
+                ],
+                [
+                  101.38213,
+                  13.62285
+                ],
+                [
+                  101.3779,
+                  13.62753
+                ],
+                [
+                  101.36707,
+                  13.64379
+                ],
+                [
+                  101.36552,
+                  13.64917
+                ],
+                [
+                  101.36577,
+                  13.65388
+                ],
+                [
+                  101.36379,
+                  13.65719
+                ],
+                [
+                  101.36332,
+                  13.66168
+                ],
+                [
+                  101.35863,
+                  13.66946
+                ],
+                [
+                  101.35795,
+                  13.67379
+                ],
+                [
+                  101.36439,
+                  13.68266
+                ],
+                [
+                  101.36495,
+                  13.68668
+                ],
+                [
+                  101.36496,
+                  13.70599
+                ],
+                [
+                  101.36298,
+                  13.71463
+                ],
+                [
+                  101.3593,
+                  13.72324
+                ],
+                [
+                  101.36435,
+                  13.73005
+                ],
+                [
+                  101.36667,
+                  13.74043
+                ],
+                [
+                  101.38908,
+                  13.75783
+                ],
+                [
+                  101.39747,
+                  13.77024
+                ],
+                [
+                  101.41171,
+                  13.76273
+                ],
+                [
+                  101.41358,
+                  13.75286
+                ],
+                [
+                  101.4238,
+                  13.75741
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "200903",
+          "tambon": "ต.พลูตาหลวง",
+          "amphoe": "อ.สัตหีบ",
+          "province": "จ.ชลบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "อบต.พลูตาหลวง",
+          "latitude": 12.69861,
+          "longitude": 100.9762,
+          "sum_rainfall_mm": 231.8,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  101.01209,
+                  12.76718
+                ],
+                [
+                  101.01251,
+                  12.76189
+                ],
+                [
+                  101.0145,
+                  12.76108
+                ],
+                [
+                  101.01473,
+                  12.75896
+                ],
+                [
+                  101.01172,
+                  12.75363
+                ],
+                [
+                  101.00842,
+                  12.7512
+                ],
+                [
+                  101.00808,
+                  12.74581
+                ],
+                [
+                  101.00325,
+                  12.73873
+                ],
+                [
+                  101.00336,
+                  12.73343
+                ],
+                [
+                  100.99046,
+                  12.72596
+                ],
+                [
+                  100.99109,
+                  12.72284
+                ],
+                [
+                  100.99294,
+                  12.72189
+                ],
+                [
+                  100.99248,
+                  12.72048
+                ],
+                [
+                  100.99447,
+                  12.71468
+                ],
+                [
+                  100.99,
+                  12.70933
+                ],
+                [
+                  100.98946,
+                  12.70578
+                ],
+                [
+                  100.98628,
+                  12.69964
+                ],
+                [
+                  100.98758,
+                  12.69781
+                ],
+                [
+                  100.98549,
+                  12.6958
+                ],
+                [
+                  100.98455,
+                  12.69277
+                ],
+                [
+                  100.9879,
+                  12.68749
+                ],
+                [
+                  100.98735,
+                  12.68432
+                ],
+                [
+                  100.98959,
+                  12.68448
+                ],
+                [
+                  100.99051,
+                  12.67882
+                ],
+                [
+                  100.99228,
+                  12.67643
+                ],
+                [
+                  100.99026,
+                  12.66992
+                ],
+                [
+                  100.99269,
+                  12.66475
+                ],
+                [
+                  100.99173,
+                  12.66308
+                ],
+                [
+                  100.99328,
+                  12.66106
+                ],
+                [
+                  100.99251,
+                  12.65974
+                ],
+                [
+                  100.99309,
+                  12.6561
+                ],
+                [
+                  100.98152,
+                  12.65244
+                ],
+                [
+                  100.96954,
+                  12.64622
+                ],
+                [
+                  100.96802,
+                  12.64183
+                ],
+                [
+                  100.97077,
+                  12.63893
+                ],
+                [
+                  100.96595,
+                  12.63497
+                ],
+                [
+                  100.96366,
+                  12.62899
+                ],
+                [
+                  100.95345,
+                  12.64446
+                ],
+                [
+                  100.95479,
+                  12.64646
+                ],
+                [
+                  100.95202,
+                  12.66698
+                ],
+                [
+                  100.92677,
+                  12.66548
+                ],
+                [
+                  100.92828,
+                  12.66971
+                ],
+                [
+                  100.92672,
+                  12.68449
+                ],
+                [
+                  100.92229,
+                  12.68497
+                ],
+                [
+                  100.92271,
+                  12.68762
+                ],
+                [
+                  100.92132,
+                  12.68856
+                ],
+                [
+                  100.91924,
+                  12.70106
+                ],
+                [
+                  100.91547,
+                  12.70117
+                ],
+                [
+                  100.91628,
+                  12.70488
+                ],
+                [
+                  100.92004,
+                  12.71135
+                ],
+                [
+                  100.92927,
+                  12.71018
+                ],
+                [
+                  100.93036,
+                  12.71207
+                ],
+                [
+                  100.93775,
+                  12.71
+                ],
+                [
+                  100.94109,
+                  12.71144
+                ],
+                [
+                  100.94316,
+                  12.71079
+                ],
+                [
+                  100.94238,
+                  12.71523
+                ],
+                [
+                  100.96248,
+                  12.7188
+                ],
+                [
+                  100.96412,
+                  12.72355
+                ],
+                [
+                  100.96257,
+                  12.73134
+                ],
+                [
+                  100.96319,
+                  12.74104
+                ],
+                [
+                  100.97304,
+                  12.74825
+                ],
+                [
+                  100.97818,
+                  12.7576
+                ],
+                [
+                  100.98606,
+                  12.76191
+                ],
+                [
+                  100.99125,
+                  12.76279
+                ],
+                [
+                  100.99136,
+                  12.7644
+                ],
+                [
+                  100.99385,
+                  12.76646
+                ],
+                [
+                  101.00395,
+                  12.7687
+                ],
+                [
+                  101.01209,
+                  12.76718
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "250214",
+          "tambon": "ต.วังท่าช้าง",
+          "amphoe": "อ.กบินทร์บุรี",
+          "province": "จ.ปราจีนบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "บ้านเนินหินกอง",
+          "latitude": 13.782015,
+          "longitude": 101.900566,
+          "sum_rainfall_mm": 155.0,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  101.93926,
+                  13.81078
+                ],
+                [
+                  101.94208,
+                  13.81107
+                ],
+                [
+                  101.94613,
+                  13.80681
+                ],
+                [
+                  101.94807,
+                  13.79908
+                ],
+                [
+                  101.94389,
+                  13.78853
+                ],
+                [
+                  101.9445,
+                  13.78504
+                ],
+                [
+                  101.94121,
+                  13.75786
+                ],
+                [
+                  101.94177,
+                  13.75486
+                ],
+                [
+                  101.93903,
+                  13.74388
+                ],
+                [
+                  101.93616,
+                  13.74049
+                ],
+                [
+                  101.93959,
+                  13.73861
+                ],
+                [
+                  101.94158,
+                  13.73916
+                ],
+                [
+                  101.93862,
+                  13.72398
+                ],
+                [
+                  101.93889,
+                  13.71667
+                ],
+                [
+                  101.93765,
+                  13.7107
+                ],
+                [
+                  101.94033,
+                  13.70847
+                ],
+                [
+                  101.94294,
+                  13.70118
+                ],
+                [
+                  101.94264,
+                  13.69511
+                ],
+                [
+                  101.94497,
+                  13.68737
+                ],
+                [
+                  101.94426,
+                  13.67686
+                ],
+                [
+                  101.94763,
+                  13.67242
+                ],
+                [
+                  101.94859,
+                  13.66803
+                ],
+                [
+                  101.94369,
+                  13.65049
+                ],
+                [
+                  101.9388,
+                  13.64688
+                ],
+                [
+                  101.9404,
+                  13.64334
+                ],
+                [
+                  101.9391,
+                  13.63984
+                ],
+                [
+                  101.9394,
+                  13.63662
+                ],
+                [
+                  101.93575,
+                  13.62879
+                ],
+                [
+                  101.94172,
+                  13.61955
+                ],
+                [
+                  101.94204,
+                  13.61624
+                ],
+                [
+                  101.93341,
+                  13.61119
+                ],
+                [
+                  101.92059,
+                  13.61112
+                ],
+                [
+                  101.90952,
+                  13.60492
+                ],
+                [
+                  101.90874,
+                  13.60165
+                ],
+                [
+                  101.91221,
+                  13.59403
+                ],
+                [
+                  101.91248,
+                  13.58904
+                ],
+                [
+                  101.91566,
+                  13.58552
+                ],
+                [
+                  101.91046,
+                  13.58697
+                ],
+                [
+                  101.90408,
+                  13.58665
+                ],
+                [
+                  101.89856,
+                  13.58317
+                ],
+                [
+                  101.89267,
+                  13.58446
+                ],
+                [
+                  101.88996,
+                  13.58232
+                ],
+                [
+                  101.88432,
+                  13.59734
+                ],
+                [
+                  101.87898,
+                  13.60161
+                ],
+                [
+                  101.87642,
+                  13.60032
+                ],
+                [
+                  101.87254,
+                  13.60178
+                ],
+                [
+                  101.86983,
+                  13.60503
+                ],
+                [
+                  101.87019,
+                  13.61059
+                ],
+                [
+                  101.86475,
+                  13.62002
+                ],
+                [
+                  101.86469,
+                  13.63154
+                ],
+                [
+                  101.86143,
+                  13.63297
+                ],
+                [
+                  101.85828,
+                  13.63627
+                ],
+                [
+                  101.83285,
+                  13.63669
+                ],
+                [
+                  101.83253,
+                  13.64376
+                ],
+                [
+                  101.83406,
+                  13.64712
+                ],
+                [
+                  101.83468,
+                  13.65342
+                ],
+                [
+                  101.83816,
+                  13.65932
+                ],
+                [
+                  101.83732,
+                  13.66633
+                ],
+                [
+                  101.83841,
+                  13.66882
+                ],
+                [
+                  101.83609,
+                  13.67348
+                ],
+                [
+                  101.84163,
+                  13.68127
+                ],
+                [
+                  101.83855,
+                  13.68695
+                ],
+                [
+                  101.83755,
+                  13.69599
+                ],
+                [
+                  101.8355,
+                  13.70104
+                ],
+                [
+                  101.82867,
+                  13.7049
+                ],
+                [
+                  101.82197,
+                  13.70558
+                ],
+                [
+                  101.82527,
+                  13.7099
+                ],
+                [
+                  101.82729,
+                  13.71501
+                ],
+                [
+                  101.83197,
+                  13.71533
+                ],
+                [
+                  101.83452,
+                  13.72607
+                ],
+                [
+                  101.83828,
+                  13.72792
+                ],
+                [
+                  101.84048,
+                  13.73116
+                ],
+                [
+                  101.84063,
+                  13.73559
+                ],
+                [
+                  101.83928,
+                  13.74047
+                ],
+                [
+                  101.84011,
+                  13.74238
+                ],
+                [
+                  101.84673,
+                  13.74916
+                ],
+                [
+                  101.85159,
+                  13.75151
+                ],
+                [
+                  101.85645,
+                  13.752
+                ],
+                [
+                  101.86371,
+                  13.75847
+                ],
+                [
+                  101.86376,
+                  13.76539
+                ],
+                [
+                  101.86764,
+                  13.77124
+                ],
+                [
+                  101.87014,
+                  13.77955
+                ],
+                [
+                  101.86992,
+                  13.78273
+                ],
+                [
+                  101.87717,
+                  13.78732
+                ],
+                [
+                  101.87896,
+                  13.79049
+                ],
+                [
+                  101.88132,
+                  13.78987
+                ],
+                [
+                  101.88995,
+                  13.79147
+                ],
+                [
+                  101.89173,
+                  13.79405
+                ],
+                [
+                  101.89195,
+                  13.7973
+                ],
+                [
+                  101.89957,
+                  13.80001
+                ],
+                [
+                  101.90552,
+                  13.79918
+                ],
+                [
+                  101.92363,
+                  13.79355
+                ],
+                [
+                  101.92345,
+                  13.80796
+                ],
+                [
+                  101.92229,
+                  13.81292
+                ],
+                [
+                  101.92392,
+                  13.8162
+                ],
+                [
+                  101.93926,
+                  13.81078
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "210701",
+          "tambon": "ต.น้ำเป็น",
+          "amphoe": "อ.เขาชะเมา",
+          "province": "จ.ระยอง",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "ที่ทำการอุทยานแห่งชาติเขาชะเมา-เขาวง",
+          "latitude": 12.912333,
+          "longitude": 101.72454,
+          "sum_rainfall_mm": 144.39999999999998,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  101.74064,
+                  12.95809
+                ],
+                [
+                  101.74793,
+                  12.94922
+                ],
+                [
+                  101.75128,
+                  12.95096
+                ],
+                [
+                  101.75273,
+                  12.95053
+                ],
+                [
+                  101.75285,
+                  12.94587
+                ],
+                [
+                  101.75711,
+                  12.94043
+                ],
+                [
+                  101.76675,
+                  12.94388
+                ],
+                [
+                  101.77342,
+                  12.95115
+                ],
+                [
+                  101.77544,
+                  12.95104
+                ],
+                [
+                  101.7789,
+                  12.95307
+                ],
+                [
+                  101.78388,
+                  12.94693
+                ],
+                [
+                  101.78999,
+                  12.94308
+                ],
+                [
+                  101.79206,
+                  12.93872
+                ],
+                [
+                  101.79073,
+                  12.93239
+                ],
+                [
+                  101.79156,
+                  12.92935
+                ],
+                [
+                  101.79496,
+                  12.92667
+                ],
+                [
+                  101.79914,
+                  12.92724
+                ],
+                [
+                  101.80072,
+                  12.925
+                ],
+                [
+                  101.80027,
+                  12.92198
+                ],
+                [
+                  101.80236,
+                  12.91732
+                ],
+                [
+                  101.80262,
+                  12.90728
+                ],
+                [
+                  101.80613,
+                  12.9012
+                ],
+                [
+                  101.80616,
+                  12.8955
+                ],
+                [
+                  101.80776,
+                  12.89096
+                ],
+                [
+                  101.80788,
+                  12.88667
+                ],
+                [
+                  101.80925,
+                  12.88454
+                ],
+                [
+                  101.80393,
+                  12.88092
+                ],
+                [
+                  101.80025,
+                  12.88167
+                ],
+                [
+                  101.78959,
+                  12.87825
+                ],
+                [
+                  101.78775,
+                  12.87881
+                ],
+                [
+                  101.78433,
+                  12.87626
+                ],
+                [
+                  101.78198,
+                  12.87635
+                ],
+                [
+                  101.77907,
+                  12.87214
+                ],
+                [
+                  101.77665,
+                  12.87195
+                ],
+                [
+                  101.77542,
+                  12.86944
+                ],
+                [
+                  101.7748,
+                  12.87036
+                ],
+                [
+                  101.76796,
+                  12.86562
+                ],
+                [
+                  101.76236,
+                  12.86366
+                ],
+                [
+                  101.76057,
+                  12.86189
+                ],
+                [
+                  101.75767,
+                  12.86157
+                ],
+                [
+                  101.75481,
+                  12.85921
+                ],
+                [
+                  101.75006,
+                  12.8596
+                ],
+                [
+                  101.74794,
+                  12.85583
+                ],
+                [
+                  101.74786,
+                  12.85353
+                ],
+                [
+                  101.7432,
+                  12.84808
+                ],
+                [
+                  101.74615,
+                  12.84302
+                ],
+                [
+                  101.74032,
+                  12.83934
+                ],
+                [
+                  101.73913,
+                  12.83381
+                ],
+                [
+                  101.73447,
+                  12.83035
+                ],
+                [
+                  101.735,
+                  12.83424
+                ],
+                [
+                  101.73399,
+                  12.83572
+                ],
+                [
+                  101.73312,
+                  12.83539
+                ],
+                [
+                  101.73091,
+                  12.83986
+                ],
+                [
+                  101.72799,
+                  12.83897
+                ],
+                [
+                  101.72165,
+                  12.84351
+                ],
+                [
+                  101.72059,
+                  12.84246
+                ],
+                [
+                  101.7227,
+                  12.83744
+                ],
+                [
+                  101.71775,
+                  12.83779
+                ],
+                [
+                  101.70473,
+                  12.85887
+                ],
+                [
+                  101.70388,
+                  12.86356
+                ],
+                [
+                  101.70648,
+                  12.86989
+                ],
+                [
+                  101.71011,
+                  12.8674
+                ],
+                [
+                  101.71134,
+                  12.86865
+                ],
+                [
+                  101.70747,
+                  12.88862
+                ],
+                [
+                  101.71343,
+                  12.90067
+                ],
+                [
+                  101.71175,
+                  12.90054
+                ],
+                [
+                  101.71024,
+                  12.90232
+                ],
+                [
+                  101.7091,
+                  12.90766
+                ],
+                [
+                  101.70639,
+                  12.90904
+                ],
+                [
+                  101.70259,
+                  12.90848
+                ],
+                [
+                  101.70028,
+                  12.91138
+                ],
+                [
+                  101.70128,
+                  12.91221
+                ],
+                [
+                  101.69998,
+                  12.9134
+                ],
+                [
+                  101.69946,
+                  12.91668
+                ],
+                [
+                  101.6967,
+                  12.91782
+                ],
+                [
+                  101.6982,
+                  12.91963
+                ],
+                [
+                  101.6963,
+                  12.92178
+                ],
+                [
+                  101.69756,
+                  12.92333
+                ],
+                [
+                  101.69631,
+                  12.92684
+                ],
+                [
+                  101.69759,
+                  12.92664
+                ],
+                [
+                  101.69598,
+                  12.92851
+                ],
+                [
+                  101.69744,
+                  12.93233
+                ],
+                [
+                  101.69676,
+                  12.93352
+                ],
+                [
+                  101.69876,
+                  12.93577
+                ],
+                [
+                  101.70556,
+                  12.93588
+                ],
+                [
+                  101.70583,
+                  12.94034
+                ],
+                [
+                  101.71637,
+                  12.94369
+                ],
+                [
+                  101.71804,
+                  12.94756
+                ],
+                [
+                  101.72021,
+                  12.94886
+                ],
+                [
+                  101.72563,
+                  12.94746
+                ],
+                [
+                  101.7289,
+                  12.94827
+                ],
+                [
+                  101.73479,
+                  12.95665
+                ],
+                [
+                  101.73936,
+                  12.95896
+                ],
+                [
+                  101.74064,
+                  12.95809
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "210201",
+          "tambon": "ต.สำนักท้อน",
+          "amphoe": "อ.บ้านฉาง",
+          "province": "จ.ระยอง",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "รพ.สต.บ้านชากหมาก",
+          "latitude": 12.796795,
+          "longitude": 101.027664,
+          "sum_rainfall_mm": 231.4,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  101.09203,
+                  12.80496
+                ],
+                [
+                  101.09132,
+                  12.80275
+                ],
+                [
+                  101.0838,
+                  12.79941
+                ],
+                [
+                  101.08273,
+                  12.79706
+                ],
+                [
+                  101.07564,
+                  12.79163
+                ],
+                [
+                  101.06937,
+                  12.78872
+                ],
+                [
+                  101.06298,
+                  12.78796
+                ],
+                [
+                  101.05832,
+                  12.78286
+                ],
+                [
+                  101.05384,
+                  12.77151
+                ],
+                [
+                  101.05875,
+                  12.76432
+                ],
+                [
+                  101.06063,
+                  12.75858
+                ],
+                [
+                  101.0604,
+                  12.75355
+                ],
+                [
+                  101.05836,
+                  12.74903
+                ],
+                [
+                  101.05224,
+                  12.74179
+                ],
+                [
+                  101.04802,
+                  12.73883
+                ],
+                [
+                  101.04635,
+                  12.73592
+                ],
+                [
+                  101.03961,
+                  12.73429
+                ],
+                [
+                  101.03779,
+                  12.728
+                ],
+                [
+                  101.0294,
+                  12.72409
+                ],
+                [
+                  101.02931,
+                  12.71184
+                ],
+                [
+                  100.98533,
+                  12.69508
+                ],
+                [
+                  100.98758,
+                  12.69781
+                ],
+                [
+                  100.98628,
+                  12.69964
+                ],
+                [
+                  100.98946,
+                  12.70578
+                ],
+                [
+                  100.99,
+                  12.70933
+                ],
+                [
+                  100.99447,
+                  12.71468
+                ],
+                [
+                  100.99248,
+                  12.72048
+                ],
+                [
+                  100.99294,
+                  12.72189
+                ],
+                [
+                  100.99109,
+                  12.72284
+                ],
+                [
+                  100.99046,
+                  12.72596
+                ],
+                [
+                  101.00309,
+                  12.73302
+                ],
+                [
+                  101.00325,
+                  12.73873
+                ],
+                [
+                  101.00808,
+                  12.74581
+                ],
+                [
+                  101.00842,
+                  12.7512
+                ],
+                [
+                  101.01172,
+                  12.75363
+                ],
+                [
+                  101.01209,
+                  12.7557
+                ],
+                [
+                  101.0146,
+                  12.75852
+                ],
+                [
+                  101.0145,
+                  12.76108
+                ],
+                [
+                  101.01251,
+                  12.76189
+                ],
+                [
+                  101.01206,
+                  12.76638
+                ],
+                [
+                  101.01246,
+                  12.77023
+                ],
+                [
+                  101.01437,
+                  12.77243
+                ],
+                [
+                  101.01329,
+                  12.786
+                ],
+                [
+                  101.01885,
+                  12.7982
+                ],
+                [
+                  101.0252,
+                  12.80137
+                ],
+                [
+                  101.02928,
+                  12.80204
+                ],
+                [
+                  101.03143,
+                  12.80898
+                ],
+                [
+                  101.03601,
+                  12.811
+                ],
+                [
+                  101.03749,
+                  12.81282
+                ],
+                [
+                  101.04409,
+                  12.81122
+                ],
+                [
+                  101.05147,
+                  12.81472
+                ],
+                [
+                  101.05295,
+                  12.81781
+                ],
+                [
+                  101.06074,
+                  12.81735
+                ],
+                [
+                  101.06488,
+                  12.81977
+                ],
+                [
+                  101.06821,
+                  12.8198
+                ],
+                [
+                  101.07104,
+                  12.81608
+                ],
+                [
+                  101.07653,
+                  12.8124
+                ],
+                [
+                  101.09203,
+                  12.80496
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "270502",
+          "tambon": "ต.ท่าเกวียน",
+          "amphoe": "อ.วัฒนานคร",
+          "province": "จ.สระแก้ว",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "อบต.ท่าเกวียน",
+          "latitude": 13.68734,
+          "longitude": 102.28413,
+          "sum_rainfall_mm": 197.8,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  102.33463,
+                  13.64212
+                ],
+                [
+                  102.32911,
+                  13.64143
+                ],
+                [
+                  102.32511,
+                  13.63895
+                ],
+                [
+                  102.32163,
+                  13.6391
+                ],
+                [
+                  102.31226,
+                  13.64445
+                ],
+                [
+                  102.30642,
+                  13.64471
+                ],
+                [
+                  102.30447,
+                  13.64328
+                ],
+                [
+                  102.3012,
+                  13.64297
+                ],
+                [
+                  102.29543,
+                  13.64453
+                ],
+                [
+                  102.29257,
+                  13.64108
+                ],
+                [
+                  102.28656,
+                  13.63817
+                ],
+                [
+                  102.28486,
+                  13.63409
+                ],
+                [
+                  102.27182,
+                  13.62604
+                ],
+                [
+                  102.27036,
+                  13.62394
+                ],
+                [
+                  102.26511,
+                  13.62267
+                ],
+                [
+                  102.26054,
+                  13.61739
+                ],
+                [
+                  102.25855,
+                  13.61665
+                ],
+                [
+                  102.25054,
+                  13.62244
+                ],
+                [
+                  102.24787,
+                  13.62164
+                ],
+                [
+                  102.24624,
+                  13.62342
+                ],
+                [
+                  102.23837,
+                  13.62334
+                ],
+                [
+                  102.22566,
+                  13.62531
+                ],
+                [
+                  102.22105,
+                  13.62916
+                ],
+                [
+                  102.21659,
+                  13.62878
+                ],
+                [
+                  102.2097,
+                  13.62447
+                ],
+                [
+                  102.20955,
+                  13.62708
+                ],
+                [
+                  102.20844,
+                  13.62791
+                ],
+                [
+                  102.20529,
+                  13.62714
+                ],
+                [
+                  102.20301,
+                  13.62822
+                ],
+                [
+                  102.20118,
+                  13.62729
+                ],
+                [
+                  102.19968,
+                  13.62881
+                ],
+                [
+                  102.19561,
+                  13.62418
+                ],
+                [
+                  102.19187,
+                  13.62385
+                ],
+                [
+                  102.19239,
+                  13.6277
+                ],
+                [
+                  102.18451,
+                  13.63154
+                ],
+                [
+                  102.1818,
+                  13.63651
+                ],
+                [
+                  102.17885,
+                  13.65016
+                ],
+                [
+                  102.17657,
+                  13.6525
+                ],
+                [
+                  102.17772,
+                  13.65541
+                ],
+                [
+                  102.17641,
+                  13.65638
+                ],
+                [
+                  102.17758,
+                  13.65819
+                ],
+                [
+                  102.1753,
+                  13.65858
+                ],
+                [
+                  102.1722,
+                  13.65578
+                ],
+                [
+                  102.17043,
+                  13.65952
+                ],
+                [
+                  102.16857,
+                  13.65823
+                ],
+                [
+                  102.16571,
+                  13.65983
+                ],
+                [
+                  102.1664,
+                  13.66084
+                ],
+                [
+                  102.17451,
+                  13.66099
+                ],
+                [
+                  102.17428,
+                  13.66345
+                ],
+                [
+                  102.17164,
+                  13.66455
+                ],
+                [
+                  102.17337,
+                  13.66654
+                ],
+                [
+                  102.17544,
+                  13.66685
+                ],
+                [
+                  102.17371,
+                  13.66816
+                ],
+                [
+                  102.17472,
+                  13.66911
+                ],
+                [
+                  102.17482,
+                  13.67206
+                ],
+                [
+                  102.17638,
+                  13.67414
+                ],
+                [
+                  102.18017,
+                  13.67379
+                ],
+                [
+                  102.17593,
+                  13.67768
+                ],
+                [
+                  102.17699,
+                  13.68205
+                ],
+                [
+                  102.1725,
+                  13.68643
+                ],
+                [
+                  102.17135,
+                  13.69092
+                ],
+                [
+                  102.16919,
+                  13.69362
+                ],
+                [
+                  102.17318,
+                  13.69323
+                ],
+                [
+                  102.17835,
+                  13.69098
+                ],
+                [
+                  102.18899,
+                  13.68013
+                ],
+                [
+                  102.19958,
+                  13.67457
+                ],
+                [
+                  102.2044,
+                  13.67363
+                ],
+                [
+                  102.20926,
+                  13.68001
+                ],
+                [
+                  102.21998,
+                  13.68513
+                ],
+                [
+                  102.22881,
+                  13.69766
+                ],
+                [
+                  102.23788,
+                  13.70452
+                ],
+                [
+                  102.24307,
+                  13.71172
+                ],
+                [
+                  102.2537,
+                  13.71032
+                ],
+                [
+                  102.26322,
+                  13.70667
+                ],
+                [
+                  102.27355,
+                  13.7048
+                ],
+                [
+                  102.29742,
+                  13.70283
+                ],
+                [
+                  102.30109,
+                  13.70354
+                ],
+                [
+                  102.30452,
+                  13.70676
+                ],
+                [
+                  102.30914,
+                  13.70943
+                ],
+                [
+                  102.31169,
+                  13.70964
+                ],
+                [
+                  102.31271,
+                  13.71153
+                ],
+                [
+                  102.31533,
+                  13.71267
+                ],
+                [
+                  102.32547,
+                  13.70307
+                ],
+                [
+                  102.33475,
+                  13.68501
+                ],
+                [
+                  102.33568,
+                  13.67528
+                ],
+                [
+                  102.33253,
+                  13.6593
+                ],
+                [
+                  102.33341,
+                  13.64405
+                ],
+                [
+                  102.33463,
+                  13.64212
                 ]
               ]
             ]
@@ -6830,7 +11867,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 13.85454,
           "longitude": 102.377483,
           "sum_rainfall_mm": 174.0,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -7207,6 +12244,226 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
+          "geocode": "270601",
+          "tambon": "ต.อรัญประเทศ",
+          "amphoe": "อ.อรัญประเทศ",
+          "province": "จ.สระแก้ว",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "บ้านฟากห้วย",
+          "latitude": 13.684085,
+          "longitude": 102.501103,
+          "sum_rainfall_mm": 218.0,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  102.49647,
+                  13.7012
+                ],
+                [
+                  102.55087,
+                  13.66401
+                ],
+                [
+                  102.55045,
+                  13.662
+                ],
+                [
+                  102.54852,
+                  13.66008
+                ],
+                [
+                  102.54634,
+                  13.66078
+                ],
+                [
+                  102.54459,
+                  13.65968
+                ],
+                [
+                  102.54303,
+                  13.66123
+                ],
+                [
+                  102.5412,
+                  13.6606
+                ],
+                [
+                  102.54076,
+                  13.66166
+                ],
+                [
+                  102.5341,
+                  13.66298
+                ],
+                [
+                  102.5302,
+                  13.66709
+                ],
+                [
+                  102.52505,
+                  13.66725
+                ],
+                [
+                  102.52202,
+                  13.66854
+                ],
+                [
+                  102.52224,
+                  13.66989
+                ],
+                [
+                  102.51949,
+                  13.6726
+                ],
+                [
+                  102.51534,
+                  13.67039
+                ],
+                [
+                  102.51376,
+                  13.67122
+                ],
+                [
+                  102.5144,
+                  13.67297
+                ],
+                [
+                  102.51133,
+                  13.67278
+                ],
+                [
+                  102.50998,
+                  13.67404
+                ],
+                [
+                  102.5056,
+                  13.67475
+                ],
+                [
+                  102.50255,
+                  13.67883
+                ],
+                [
+                  102.50396,
+                  13.6814
+                ],
+                [
+                  102.50169,
+                  13.68161
+                ],
+                [
+                  102.50089,
+                  13.68417
+                ],
+                [
+                  102.49824,
+                  13.68339
+                ],
+                [
+                  102.49752,
+                  13.6887
+                ],
+                [
+                  102.49493,
+                  13.69008
+                ],
+                [
+                  102.49281,
+                  13.69324
+                ],
+                [
+                  102.49012,
+                  13.69323
+                ],
+                [
+                  102.48851,
+                  13.69614
+                ],
+                [
+                  102.49089,
+                  13.70219
+                ],
+                [
+                  102.49408,
+                  13.70284
+                ],
+                [
+                  102.49647,
+                  13.7012
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "104603",
+          "tambon": "ต.บางขัน",
+          "amphoe": "อ.คลองสามวา",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "ปตร.คลองสามวา",
+          "latitude": 13.85954,
+          "longitude": 100.72909,
+          "sum_rainfall_mm": 133.5,
+          "observed_at": "2026-09-24T17:00:00+07:00"
+        },
+        {
+          "geocode": "101001",
+          "tambon": "ต.มีนบุรี",
+          "amphoe": "อ.มีนบุรี",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "สนข.มีนบุรี",
+          "latitude": 13.8136,
+          "longitude": 100.73122,
+          "sum_rainfall_mm": 117.0,
+          "observed_at": "2026-09-24T17:00:00+07:00"
+        },
+        {
+          "geocode": "101002",
+          "tambon": "ต.แสนแสบ",
+          "amphoe": "อ.มีนบุรี",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "ปตร.ประชาร่วมใจ",
+          "latitude": 13.8212,
+          "longitude": 100.74717,
+          "sum_rainfall_mm": 131.0,
+          "observed_at": "2026-09-24T17:00:00+07:00"
+        },
+        {
+          "geocode": "101101",
+          "tambon": "ต.ลาดกระบัง",
+          "amphoe": "อ.ลาดกระบัง",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "คลองลำปลาทิว ลาดกระบัง",
+          "latitude": 13.7407,
+          "longitude": 100.79468,
+          "sum_rainfall_mm": 214.0,
+          "observed_at": "2026-09-24T17:00:00+07:00"
+        },
+        {
+          "geocode": "104401",
+          "tambon": "ต.สะพานสูง",
+          "amphoe": "อ.สะพานสูง",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "สนข.สะพานสูง",
+          "latitude": 13.76881,
+          "longitude": 100.68545,
+          "sum_rainfall_mm": 123.5,
+          "observed_at": "2026-09-24T17:00:00+07:00"
+        },
+        {
           "geocode": "130404",
           "tambon": "ต.บึงชำอ้อ",
           "amphoe": "อ.หนองเสือ",
@@ -7216,8 +12473,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านน้อยสว่าง",
           "latitude": 14.1652,
           "longitude": 100.77855,
-          "sum_rainfall_mm": 136.2,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "sum_rainfall_mm": 183.2,
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -7244,6 +12501,288 @@ window.IEAT_THAIWATER_DATA = {
                 [
                   100.80085,
                   14.15677
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "110602",
+          "tambon": "ต.ศีรษะจรเข้น้อย",
+          "amphoe": "อ.บางเสาธง",
+          "province": "จ.สมุทรปราการ",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "อบต.ศีรษะจรเข้น้อย",
+          "latitude": 13.67777,
+          "longitude": 100.7945,
+          "sum_rainfall_mm": 191.40000000000003,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.82831,
+                  13.70177
+                ],
+                [
+                  100.81908,
+                  13.68513
+                ],
+                [
+                  100.81696,
+                  13.68306
+                ],
+                [
+                  100.82308,
+                  13.67525
+                ],
+                [
+                  100.8224,
+                  13.67311
+                ],
+                [
+                  100.8238,
+                  13.6673
+                ],
+                [
+                  100.81877,
+                  13.66338
+                ],
+                [
+                  100.80489,
+                  13.66162
+                ],
+                [
+                  100.80152,
+                  13.65877
+                ],
+                [
+                  100.7993,
+                  13.66027
+                ],
+                [
+                  100.79697,
+                  13.65996
+                ],
+                [
+                  100.79645,
+                  13.6638
+                ],
+                [
+                  100.80028,
+                  13.6696
+                ],
+                [
+                  100.80204,
+                  13.67534
+                ],
+                [
+                  100.79345,
+                  13.67773
+                ],
+                [
+                  100.77212,
+                  13.67375
+                ],
+                [
+                  100.76303,
+                  13.6748
+                ],
+                [
+                  100.77864,
+                  13.70153
+                ],
+                [
+                  100.78518,
+                  13.70682
+                ],
+                [
+                  100.78182,
+                  13.70986
+                ],
+                [
+                  100.78465,
+                  13.71649
+                ],
+                [
+                  100.78871,
+                  13.71627
+                ],
+                [
+                  100.80111,
+                  13.71215
+                ],
+                [
+                  100.82831,
+                  13.70177
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "110603",
+          "tambon": "ต.ศีรษะจรเข้ใหญ่",
+          "amphoe": "อ.บางเสาธง",
+          "province": "จ.สมุทรปราการ",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "คลองจระเข้ใหญ่ บางเสาธง (วัดศรีวารีน้อย)",
+          "latitude": 13.66949,
+          "longitude": 100.80058,
+          "sum_rainfall_mm": 177.4,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.8238,
+                  13.6673
+                ],
+                [
+                  100.82663,
+                  13.66573
+                ],
+                [
+                  100.81938,
+                  13.64767
+                ],
+                [
+                  100.8156,
+                  13.63094
+                ],
+                [
+                  100.81294,
+                  13.62796
+                ],
+                [
+                  100.7991,
+                  13.61931
+                ],
+                [
+                  100.79839,
+                  13.61718
+                ],
+                [
+                  100.8009,
+                  13.60951
+                ],
+                [
+                  100.80037,
+                  13.60468
+                ],
+                [
+                  100.7972,
+                  13.60118
+                ],
+                [
+                  100.79893,
+                  13.59092
+                ],
+                [
+                  100.7957,
+                  13.59125
+                ],
+                [
+                  100.79403,
+                  13.58893
+                ],
+                [
+                  100.79091,
+                  13.5891
+                ],
+                [
+                  100.78878,
+                  13.59284
+                ],
+                [
+                  100.77925,
+                  13.59487
+                ],
+                [
+                  100.77947,
+                  13.59903
+                ],
+                [
+                  100.7821,
+                  13.60201
+                ],
+                [
+                  100.78274,
+                  13.60677
+                ],
+                [
+                  100.78603,
+                  13.61496
+                ],
+                [
+                  100.78405,
+                  13.62223
+                ],
+                [
+                  100.78491,
+                  13.63074
+                ],
+                [
+                  100.78312,
+                  13.64766
+                ],
+                [
+                  100.78712,
+                  13.6562
+                ],
+                [
+                  100.79428,
+                  13.6662
+                ],
+                [
+                  100.79086,
+                  13.67371
+                ],
+                [
+                  100.79065,
+                  13.67716
+                ],
+                [
+                  100.79345,
+                  13.67773
+                ],
+                [
+                  100.80204,
+                  13.67534
+                ],
+                [
+                  100.80028,
+                  13.6696
+                ],
+                [
+                  100.79645,
+                  13.6638
+                ],
+                [
+                  100.79697,
+                  13.65996
+                ],
+                [
+                  100.7993,
+                  13.66027
+                ],
+                [
+                  100.80152,
+                  13.65877
+                ],
+                [
+                  100.80489,
+                  13.66162
+                ],
+                [
+                  100.81877,
+                  13.66338
+                ],
+                [
+                  100.8238,
+                  13.6673
                 ]
               ]
             ]
@@ -7261,8 +12800,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "TC.60",
           "latitude": 15.67,
           "longitude": 100.334167,
-          "sum_rainfall_mm": 176.0,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "sum_rainfall_mm": 178.0,
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -7495,6 +13034,305 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
+          "geocode": "600908",
+          "tambon": "ต.ไพศาลี",
+          "amphoe": "อ.ไพศาลี",
+          "province": "จ.นครสวรรค์",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "ทต.ไพศาลี",
+          "latitude": 15.60012,
+          "longitude": 100.6572,
+          "sum_rainfall_mm": 234.79999999999998,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.76061,
+                  15.66908
+                ],
+                [
+                  100.76181,
+                  15.66606
+                ],
+                [
+                  100.76085,
+                  15.66538
+                ],
+                [
+                  100.75131,
+                  15.66762
+                ],
+                [
+                  100.75631,
+                  15.65689
+                ],
+                [
+                  100.75636,
+                  15.65431
+                ],
+                [
+                  100.76044,
+                  15.6501
+                ],
+                [
+                  100.75896,
+                  15.64534
+                ],
+                [
+                  100.7548,
+                  15.64215
+                ],
+                [
+                  100.74669,
+                  15.64066
+                ],
+                [
+                  100.7424,
+                  15.63731
+                ],
+                [
+                  100.73849,
+                  15.63665
+                ],
+                [
+                  100.73429,
+                  15.63322
+                ],
+                [
+                  100.7258,
+                  15.63238
+                ],
+                [
+                  100.7253,
+                  15.63058
+                ],
+                [
+                  100.72841,
+                  15.62835
+                ],
+                [
+                  100.72946,
+                  15.62291
+                ],
+                [
+                  100.7338,
+                  15.61806
+                ],
+                [
+                  100.7333,
+                  15.61662
+                ],
+                [
+                  100.72791,
+                  15.61476
+                ],
+                [
+                  100.71794,
+                  15.60846
+                ],
+                [
+                  100.71021,
+                  15.60727
+                ],
+                [
+                  100.69865,
+                  15.60768
+                ],
+                [
+                  100.69567,
+                  15.60614
+                ],
+                [
+                  100.6949,
+                  15.60292
+                ],
+                [
+                  100.69549,
+                  15.59284
+                ],
+                [
+                  100.69015,
+                  15.58755
+                ],
+                [
+                  100.69328,
+                  15.58324
+                ],
+                [
+                  100.69619,
+                  15.57561
+                ],
+                [
+                  100.69598,
+                  15.57098
+                ],
+                [
+                  100.69341,
+                  15.56584
+                ],
+                [
+                  100.69082,
+                  15.56653
+                ],
+                [
+                  100.68587,
+                  15.56394
+                ],
+                [
+                  100.68003,
+                  15.56532
+                ],
+                [
+                  100.67351,
+                  15.56166
+                ],
+                [
+                  100.66288,
+                  15.56315
+                ],
+                [
+                  100.65592,
+                  15.56178
+                ],
+                [
+                  100.64572,
+                  15.56228
+                ],
+                [
+                  100.63845,
+                  15.5658
+                ],
+                [
+                  100.63769,
+                  15.56675
+                ],
+                [
+                  100.63924,
+                  15.57164
+                ],
+                [
+                  100.64479,
+                  15.57901
+                ],
+                [
+                  100.64432,
+                  15.58464
+                ],
+                [
+                  100.6453,
+                  15.59025
+                ],
+                [
+                  100.64289,
+                  15.59986
+                ],
+                [
+                  100.64553,
+                  15.60555
+                ],
+                [
+                  100.64529,
+                  15.61157
+                ],
+                [
+                  100.63922,
+                  15.62813
+                ],
+                [
+                  100.64373,
+                  15.64105
+                ],
+                [
+                  100.64269,
+                  15.64871
+                ],
+                [
+                  100.64489,
+                  15.6634
+                ],
+                [
+                  100.65295,
+                  15.6625
+                ],
+                [
+                  100.6561,
+                  15.65874
+                ],
+                [
+                  100.66541,
+                  15.65507
+                ],
+                [
+                  100.67177,
+                  15.64817
+                ],
+                [
+                  100.68192,
+                  15.64556
+                ],
+                [
+                  100.68634,
+                  15.65308
+                ],
+                [
+                  100.69606,
+                  15.66078
+                ],
+                [
+                  100.69938,
+                  15.66605
+                ],
+                [
+                  100.71324,
+                  15.67455
+                ],
+                [
+                  100.72734,
+                  15.68637
+                ],
+                [
+                  100.7376,
+                  15.6981
+                ],
+                [
+                  100.75114,
+                  15.69311
+                ],
+                [
+                  100.75621,
+                  15.68832
+                ],
+                [
+                  100.75742,
+                  15.68873
+                ],
+                [
+                  100.75701,
+                  15.69116
+                ],
+                [
+                  100.75794,
+                  15.69292
+                ],
+                [
+                  100.76139,
+                  15.69144
+                ],
+                [
+                  100.75971,
+                  15.675
+                ],
+                [
+                  100.76061,
+                  15.66908
+                ]
+              ]
+            ]
+          }
+        },
+        {
           "geocode": "140201",
           "tambon": "ต.ท่าเรือ",
           "amphoe": "อ.ท่าเรือ",
@@ -7504,8 +13342,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ท่าเรือ",
           "latitude": 14.56014,
           "longitude": 100.71987,
-          "sum_rainfall_mm": 163.59999999999997,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "sum_rainfall_mm": 200.8,
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -7587,8 +13425,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เหนือปตร.พระนารายน์",
           "latitude": 14.5583,
           "longitude": 100.76205,
-          "sum_rainfall_mm": 117.0,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "sum_rainfall_mm": 166.0,
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -7689,6 +13527,294 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
+          "geocode": "140303",
+          "tambon": "ต.บ่อโพง",
+          "amphoe": "อ.นครหลวง",
+          "province": "จ.พระนครศรีอยุธยา",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "นครหลวง",
+          "latitude": 14.40269,
+          "longitude": 100.5864,
+          "sum_rainfall_mm": 122.6,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.62948,
+                  14.4055
+                ],
+                [
+                  100.63186,
+                  14.40432
+                ],
+                [
+                  100.63179,
+                  14.40211
+                ],
+                [
+                  100.61434,
+                  14.39287
+                ],
+                [
+                  100.60831,
+                  14.39423
+                ],
+                [
+                  100.58322,
+                  14.39605
+                ],
+                [
+                  100.58166,
+                  14.39755
+                ],
+                [
+                  100.57872,
+                  14.39707
+                ],
+                [
+                  100.57606,
+                  14.39515
+                ],
+                [
+                  100.57518,
+                  14.39581
+                ],
+                [
+                  100.57487,
+                  14.40514
+                ],
+                [
+                  100.57695,
+                  14.4096
+                ],
+                [
+                  100.5781,
+                  14.42122
+                ],
+                [
+                  100.59508,
+                  14.42124
+                ],
+                [
+                  100.62114,
+                  14.4076
+                ],
+                [
+                  100.62948,
+                  14.4055
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "140503",
+          "tambon": "ต.ไทรน้อย",
+          "amphoe": "อ.บางบาล",
+          "province": "จ.พระนครศรีอยุธยา",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "คลองบางบาล",
+          "latitude": 14.42303,
+          "longitude": 100.48186,
+          "sum_rainfall_mm": 137.2,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.49672,
+                  14.41637
+                ],
+                [
+                  100.50369,
+                  14.40452
+                ],
+                [
+                  100.49696,
+                  14.39716
+                ],
+                [
+                  100.48303,
+                  14.3878
+                ],
+                [
+                  100.48067,
+                  14.38957
+                ],
+                [
+                  100.47855,
+                  14.39503
+                ],
+                [
+                  100.47052,
+                  14.40389
+                ],
+                [
+                  100.47091,
+                  14.40917
+                ],
+                [
+                  100.48409,
+                  14.4264
+                ],
+                [
+                  100.48778,
+                  14.42505
+                ],
+                [
+                  100.49015,
+                  14.4212
+                ],
+                [
+                  100.49211,
+                  14.42152
+                ],
+                [
+                  100.49672,
+                  14.41637
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "140702",
+          "tambon": "ต.ขยาย",
+          "amphoe": "อ.บางปะหัน",
+          "province": "จ.พระนครศรีอยุธยา",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "วัดจอมเกษ",
+          "latitude": 14.414349,
+          "longitude": 100.55782,
+          "sum_rainfall_mm": 122.0,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.57697,
+                  14.41206
+                ],
+                [
+                  100.57678,
+                  14.40907
+                ],
+                [
+                  100.57461,
+                  14.40502
+                ],
+                [
+                  100.55647,
+                  14.40519
+                ],
+                [
+                  100.55681,
+                  14.41034
+                ],
+                [
+                  100.55434,
+                  14.42366
+                ],
+                [
+                  100.55469,
+                  14.42744
+                ],
+                [
+                  100.55713,
+                  14.42938
+                ],
+                [
+                  100.57697,
+                  14.41206
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "140714",
+          "tambon": "ต.โพธิ์สามต้น",
+          "amphoe": "อ.บางปะหัน",
+          "province": "จ.พระนครศรีอยุธยา",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บางปะหัน",
+          "latitude": 14.42731,
+          "longitude": 100.55605,
+          "sum_rainfall_mm": 115.6,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.55712,
+                  14.43105
+                ],
+                [
+                  100.55727,
+                  14.42959
+                ],
+                [
+                  100.55421,
+                  14.42619
+                ],
+                [
+                  100.55681,
+                  14.41034
+                ],
+                [
+                  100.55647,
+                  14.40519
+                ],
+                [
+                  100.54955,
+                  14.40548
+                ],
+                [
+                  100.54415,
+                  14.40302
+                ],
+                [
+                  100.54012,
+                  14.41906
+                ],
+                [
+                  100.53223,
+                  14.42915
+                ],
+                [
+                  100.5352,
+                  14.42815
+                ],
+                [
+                  100.53773,
+                  14.4289
+                ],
+                [
+                  100.54234,
+                  14.43599
+                ],
+                [
+                  100.54703,
+                  14.43774
+                ],
+                [
+                  100.55144,
+                  14.43636
+                ],
+                [
+                  100.55712,
+                  14.43105
+                ]
+              ]
+            ]
+          }
+        },
+        {
           "geocode": "670601",
           "tambon": "ต.ศรีเทพ",
           "amphoe": "อ.ศรีเทพ",
@@ -7698,8 +13824,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ศรีเทพ",
           "latitude": 15.43789,
           "longitude": 101.16249,
-          "sum_rainfall_mm": 124.4,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "sum_rainfall_mm": 125.60000000000001,
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -8433,8 +14559,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.หนองมะค่า",
           "latitude": 15.4321,
           "longitude": 100.9245,
-          "sum_rainfall_mm": 280.4,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "sum_rainfall_mm": 275.79999999999995,
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -8895,315 +15021,674 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
-          "geocode": "161106",
-          "tambon": "ต.ชอนสารเดช",
-          "amphoe": "อ.หนองม่วง",
+          "geocode": "160201",
+          "tambon": "ต.พัฒนานิคม",
+          "amphoe": "อ.พัฒนานิคม",
           "province": "จ.ลพบุรี",
           "region_id": "1",
           "region_name": "ภาคกลาง",
-          "station": "อบต.ชอนสารเดช",
-          "latitude": 15.18496,
-          "longitude": 100.68131,
-          "sum_rainfall_mm": 175.39999999999998,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "station": "คลองส้ม",
+          "latitude": 14.822028,
+          "longitude": 101.014594,
+          "sum_rainfall_mm": 138.0,
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
                 [
-                  100.79572,
-                  15.19513
+                  100.99592,
+                  14.93468
                 ],
                 [
-                  100.79189,
-                  15.18328
+                  100.99862,
+                  14.93391
                 ],
                 [
-                  100.78298,
-                  15.17211
+                  101.00054,
+                  14.93613
                 ],
                 [
-                  100.78051,
-                  15.16355
+                  101.00194,
+                  14.93585
                 ],
                 [
-                  100.77544,
-                  15.15706
+                  101.0047,
+                  14.9322
                 ],
                 [
-                  100.76937,
-                  15.16369
+                  101.00547,
+                  14.92832
                 ],
                 [
-                  100.7637,
-                  15.1741
+                  101.01048,
+                  14.92523
                 ],
                 [
-                  100.7448,
-                  15.18711
+                  101.02206,
+                  14.82096
                 ],
                 [
-                  100.74181,
-                  15.18682
+                  101.0194,
+                  14.81788
                 ],
                 [
-                  100.74104,
-                  15.18544
+                  101.01722,
+                  14.81986
                 ],
                 [
-                  100.73612,
-                  15.18412
+                  101.01795,
+                  14.8214
                 ],
                 [
-                  100.72851,
-                  15.18504
+                  101.01573,
+                  14.82121
                 ],
                 [
-                  100.72361,
-                  15.18264
+                  101.00873,
+                  14.82376
                 ],
                 [
-                  100.71614,
-                  15.18197
+                  101.00675,
+                  14.82671
                 ],
                 [
-                  100.71069,
-                  15.17825
+                  101.00207,
+                  14.82857
                 ],
                 [
-                  100.70801,
-                  15.175
+                  100.99804,
+                  14.83291
                 ],
                 [
-                  100.70425,
-                  15.17332
+                  100.99412,
+                  14.8305
                 ],
                 [
-                  100.69966,
-                  15.16771
+                  100.98811,
+                  14.82884
                 ],
                 [
-                  100.69675,
-                  15.16823
+                  100.98482,
+                  14.83022
                 ],
                 [
-                  100.68589,
-                  15.16206
+                  100.9774,
+                  14.82762
                 ],
                 [
-                  100.66801,
-                  15.15769
+                  100.97172,
+                  14.82996
                 ],
                 [
-                  100.65259,
-                  15.14692
+                  100.96903,
+                  14.83254
                 ],
                 [
-                  100.64617,
-                  15.14383
+                  100.96027,
+                  14.83033
                 ],
                 [
-                  100.63844,
-                  15.14271
+                  100.95563,
+                  14.83557
                 ],
                 [
-                  100.63684,
-                  15.14051
+                  100.94795,
+                  14.83279
                 ],
                 [
-                  100.64163,
-                  15.13208
+                  100.94111,
+                  14.83291
                 ],
                 [
-                  100.62183,
-                  15.14846
+                  100.9377,
+                  14.8353
                 ],
                 [
-                  100.63124,
-                  15.17072
+                  100.93336,
+                  14.83381
                 ],
                 [
-                  100.62764,
-                  15.18375
+                  100.92888,
+                  14.8341
                 ],
                 [
-                  100.64846,
-                  15.18442
+                  100.9175,
+                  14.9281
                 ],
                 [
-                  100.64747,
-                  15.18733
+                  100.91003,
+                  14.96054
                 ],
                 [
-                  100.64714,
-                  15.19846
+                  100.91662,
+                  14.95787
                 ],
                 [
-                  100.64817,
-                  15.20801
+                  100.91853,
+                  14.94736
                 ],
                 [
-                  100.64923,
-                  15.206
+                  100.92082,
+                  14.94622
                 ],
                 [
-                  100.66138,
-                  15.20003
+                  100.92645,
+                  14.94589
                 ],
                 [
-                  100.67157,
-                  15.20114
+                  100.92946,
+                  14.94689
                 ],
                 [
-                  100.67537,
-                  15.19327
+                  100.93571,
+                  14.95227
                 ],
                 [
-                  100.6819,
-                  15.19929
+                  100.93796,
+                  14.95245
                 ],
                 [
-                  100.68392,
-                  15.21226
+                  100.94142,
+                  14.95
                 ],
                 [
-                  100.68565,
-                  15.21328
+                  100.94347,
+                  14.95123
                 ],
                 [
-                  100.7039,
-                  15.212
+                  100.95196,
+                  14.96504
                 ],
                 [
-                  100.71088,
-                  15.21404
+                  100.95475,
+                  14.96764
                 ],
                 [
-                  100.71628,
-                  15.2118
+                  100.95634,
+                  14.96593
                 ],
                 [
-                  100.72253,
-                  15.21134
+                  100.95709,
+                  14.9611
                 ],
                 [
-                  100.73012,
-                  15.21328
+                  100.95252,
+                  14.95146
                 ],
                 [
-                  100.7419,
-                  15.21323
+                  100.9605,
+                  14.95553
                 ],
                 [
-                  100.74616,
-                  15.21282
+                  100.96948,
+                  14.96245
                 ],
                 [
-                  100.75055,
-                  15.21089
+                  100.9721,
+                  14.95663
                 ],
                 [
-                  100.75388,
-                  15.21329
+                  100.97033,
+                  14.94571
                 ],
                 [
-                  100.76091,
-                  15.21333
+                  100.98295,
+                  14.93106
                 ],
                 [
-                  100.76629,
-                  15.21721
+                  100.99592,
+                  14.93468
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "160207",
+          "tambon": "ต.หนองบัว",
+          "amphoe": "อ.พัฒนานิคม",
+          "province": "จ.ลพบุรี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "เหนือเขื่อนป่าสัก",
+          "latitude": 14.848254,
+          "longitude": 101.090205,
+          "sum_rainfall_mm": 115.0,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  101.08488,
+                  14.89073
+                ],
+                [
+                  101.08703,
+                  14.88927
+                ],
+                [
+                  101.08683,
+                  14.88788
+                ],
+                [
+                  101.07491,
+                  14.88102
+                ],
+                [
+                  101.07331,
+                  14.87898
+                ],
+                [
+                  101.0832,
+                  14.87047
+                ],
+                [
+                  101.08304,
+                  14.86853
+                ],
+                [
+                  101.07913,
+                  14.86771
+                ],
+                [
+                  101.07838,
+                  14.86631
+                ],
+                [
+                  101.07931,
+                  14.86515
+                ],
+                [
+                  101.08468,
+                  14.8641
+                ],
+                [
+                  101.08439,
+                  14.85701
+                ],
+                [
+                  101.08752,
+                  14.8554
+                ],
+                [
+                  101.08728,
+                  14.85213
+                ],
+                [
+                  101.09016,
+                  14.85218
+                ],
+                [
+                  101.09184,
+                  14.85067
+                ],
+                [
+                  101.09143,
+                  14.8437
+                ],
+                [
+                  101.09027,
+                  14.84213
+                ],
+                [
+                  101.08589,
+                  14.84034
+                ],
+                [
+                  101.08484,
+                  14.83441
+                ],
+                [
+                  101.08819,
+                  14.83211
+                ],
+                [
+                  101.08859,
+                  14.82987
+                ],
+                [
+                  101.07789,
+                  14.81813
+                ],
+                [
+                  101.07828,
+                  14.8147
+                ],
+                [
+                  101.08158,
+                  14.81218
+                ],
+                [
+                  101.08143,
+                  14.81097
+                ],
+                [
+                  101.07656,
+                  14.81051
+                ],
+                [
+                  101.07447,
+                  14.81443
+                ],
+                [
+                  101.07195,
+                  14.81573
+                ],
+                [
+                  101.07021,
+                  14.81545
+                ],
+                [
+                  101.06824,
+                  14.81241
+                ],
+                [
+                  101.06847,
+                  14.8029
+                ],
+                [
+                  101.07246,
+                  14.79067
+                ],
+                [
+                  101.06574,
+                  14.79271
+                ],
+                [
+                  101.06349,
+                  14.79184
+                ],
+                [
+                  101.06187,
+                  14.78933
+                ],
+                [
+                  101.06544,
+                  14.77566
+                ],
+                [
+                  101.07222,
+                  14.76754
+                ],
+                [
+                  101.07333,
+                  14.76343
+                ],
+                [
+                  101.06859,
+                  14.75921
+                ],
+                [
+                  101.06388,
+                  14.75919
+                ],
+                [
+                  101.06312,
+                  14.76144
+                ],
+                [
+                  101.06007,
+                  14.75964
+                ],
+                [
+                  101.05955,
+                  14.7606
+                ],
+                [
+                  101.06127,
+                  14.76277
+                ],
+                [
+                  101.06002,
+                  14.76416
+                ],
+                [
+                  101.06146,
+                  14.7642
+                ],
+                [
+                  101.06161,
+                  14.76739
+                ],
+                [
+                  101.05875,
+                  14.76846
+                ],
+                [
+                  101.0558,
+                  14.77276
+                ],
+                [
+                  101.05624,
+                  14.7736
+                ],
+                [
+                  101.05434,
+                  14.77413
+                ],
+                [
+                  101.05557,
+                  14.77776
+                ],
+                [
+                  101.05708,
+                  14.77583
+                ],
+                [
+                  101.05879,
+                  14.77821
+                ],
+                [
+                  101.05832,
+                  14.78052
+                ],
+                [
+                  101.05681,
+                  14.78165
+                ],
+                [
+                  101.0578,
+                  14.78408
+                ],
+                [
+                  101.05502,
+                  14.78412
+                ],
+                [
+                  101.05412,
+                  14.78799
+                ],
+                [
+                  101.05259,
+                  14.789
+                ],
+                [
+                  101.05405,
+                  14.79025
+                ],
+                [
+                  101.05216,
+                  14.79014
+                ],
+                [
+                  101.04756,
+                  14.79431
+                ],
+                [
+                  101.0451,
+                  14.79425
+                ],
+                [
+                  101.04175,
+                  14.79865
+                ],
+                [
+                  101.03821,
+                  14.80051
+                ],
+                [
+                  101.03303,
+                  14.80098
+                ],
+                [
+                  101.03262,
+                  14.80323
+                ],
+                [
+                  101.03147,
+                  14.80252
+                ],
+                [
+                  101.03088,
+                  14.80475
+                ],
+                [
+                  101.02872,
+                  14.80781
+                ],
+                [
+                  101.02673,
+                  14.80819
+                ],
+                [
+                  101.02563,
+                  14.81106
+                ],
+                [
+                  101.0239,
+                  14.80906
+                ],
+                [
+                  101.02258,
+                  14.80981
+                ],
+                [
+                  101.02363,
+                  14.81306
+                ],
+                [
+                  101.02145,
+                  14.81419
+                ],
+                [
+                  101.0194,
+                  14.81788
+                ],
+                [
+                  101.02237,
+                  14.82158
+                ],
+                [
+                  101.01577,
+                  14.87914
+                ],
+                [
+                  101.02058,
+                  14.87813
+                ],
+                [
+                  101.02401,
+                  14.87976
+                ],
+                [
+                  101.02406,
+                  14.88142
+                ],
+                [
+                  101.0257,
+                  14.88292
                 ],
                 [
-                  100.76923,
-                  15.2163
+                  101.02568,
+                  14.88537
                 ],
                 [
-                  100.77179,
-                  15.21707
+                  101.03038,
+                  14.88822
                 ],
                 [
-                  100.77215,
-                  15.21622
+                  101.0322,
+                  14.89227
                 ],
                 [
-                  100.77324,
-                  15.21746
+                  101.04156,
+                  14.89991
                 ],
                 [
-                  100.77431,
-                  15.21676
+                  101.04299,
+                  14.90455
                 ],
                 [
-                  100.77461,
-                  15.2178
+                  101.04484,
+                  14.90478
                 ],
                 [
-                  100.77675,
-                  15.21612
+                  101.04613,
+                  14.90793
                 ],
                 [
-                  100.77947,
-                  15.21594
+                  101.0477,
+                  14.90836
                 ],
                 [
-                  100.78103,
-                  15.21299
+                  101.04673,
+                  14.91164
                 ],
                 [
-                  100.78243,
-                  15.21321
+                  101.04952,
+                  14.91335
                 ],
                 [
-                  100.78103,
-                  15.21128
+                  101.05039,
+                  14.92005
                 ],
                 [
-                  100.78128,
-                  15.20934
+                  101.05605,
+                  14.92209
                 ],
                 [
-                  100.78284,
-                  15.20807
+                  101.0587,
+                  14.9204
                 ],
                 [
-                  100.78211,
-                  15.20753
+                  101.06599,
+                  14.92188
                 ],
                 [
-                  100.78315,
-                  15.20673
+                  101.06825,
+                  14.91861
                 ],
                 [
-                  100.78286,
-                  15.20492
+                  101.07133,
+                  14.91665
                 ],
                 [
-                  100.7842,
-                  15.20392
+                  101.07162,
+                  14.91291
                 ],
                 [
-                  100.78544,
-                  15.20528
+                  101.08135,
+                  14.9083
                 ],
                 [
-                  100.7865,
-                  15.20301
+                  101.08167,
+                  14.90669
                 ],
                 [
-                  100.78839,
-                  15.20257
+                  101.07716,
+                  14.90576
                 ],
                 [
-                  100.78985,
-                  15.19921
+                  101.08331,
+                  14.9014
                 ],
                 [
-                  100.79488,
-                  15.19793
+                  101.08538,
+                  14.8985
                 ],
                 [
-                  100.79572,
-                  15.19513
+                  101.08488,
+                  14.89073
                 ]
               ]
             ]
@@ -9219,8 +15704,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "พระรามสอง",
           "latitude": 13.38362,
           "longitude": 99.9836,
-          "sum_rainfall_mm": 119.4,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "sum_rainfall_mm": 121.39999999999999,
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -9322,8 +15807,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ที่ทำการเขตห้ามล่าสัตว์ป่าแก่งคอย",
           "latitude": 14.5439,
           "longitude": 101.0983,
-          "sum_rainfall_mm": 125.39999999999998,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "sum_rainfall_mm": 115.0,
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -9605,8 +16090,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทม.ทับกวาง",
           "latitude": 14.60885,
           "longitude": 101.07645,
-          "sum_rainfall_mm": 95.6,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "sum_rainfall_mm": 99.80000000000001,
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -9939,6 +16424,297 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
+          "geocode": "191105",
+          "tambon": "ต.ลำสมพุง",
+          "amphoe": "อ.มวกเหล็ก",
+          "province": "จ.สระบุรี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "ที่ทำการเขตห้ามล่าสัตว์ป่าเขาวงจันแดง",
+          "latitude": 14.99967,
+          "longitude": 101.39597,
+          "sum_rainfall_mm": 104.2,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  101.39892,
+                  15.07275
+                ],
+                [
+                  101.40256,
+                  15.066
+                ],
+                [
+                  101.40305,
+                  15.06177
+                ],
+                [
+                  101.4044,
+                  15.06161
+                ],
+                [
+                  101.41068,
+                  15.05314
+                ],
+                [
+                  101.41046,
+                  15.05172
+                ],
+                [
+                  101.41526,
+                  15.04112
+                ],
+                [
+                  101.41382,
+                  15.0342
+                ],
+                [
+                  101.41649,
+                  15.0316
+                ],
+                [
+                  101.4194,
+                  15.01836
+                ],
+                [
+                  101.42461,
+                  15.0127
+                ],
+                [
+                  101.42294,
+                  15.01006
+                ],
+                [
+                  101.42298,
+                  15.00664
+                ],
+                [
+                  101.42093,
+                  15.00461
+                ],
+                [
+                  101.42033,
+                  14.99696
+                ],
+                [
+                  101.42338,
+                  14.99392
+                ],
+                [
+                  101.42456,
+                  14.98826
+                ],
+                [
+                  101.42909,
+                  14.98301
+                ],
+                [
+                  101.42898,
+                  14.97771
+                ],
+                [
+                  101.43069,
+                  14.9765
+                ],
+                [
+                  101.43167,
+                  14.97183
+                ],
+                [
+                  101.42872,
+                  14.96851
+                ],
+                [
+                  101.4206,
+                  14.96709
+                ],
+                [
+                  101.41331,
+                  14.96283
+                ],
+                [
+                  101.41105,
+                  14.96326
+                ],
+                [
+                  101.40781,
+                  14.962
+                ],
+                [
+                  101.3976,
+                  14.95487
+                ],
+                [
+                  101.38323,
+                  14.94835
+                ],
+                [
+                  101.37815,
+                  14.94344
+                ],
+                [
+                  101.37408,
+                  14.93686
+                ],
+                [
+                  101.36877,
+                  14.93386
+                ],
+                [
+                  101.36546,
+                  14.9288
+                ],
+                [
+                  101.36385,
+                  14.92927
+                ],
+                [
+                  101.36249,
+                  14.93208
+                ],
+                [
+                  101.35794,
+                  14.9314
+                ],
+                [
+                  101.35448,
+                  14.93298
+                ],
+                [
+                  101.35092,
+                  14.93239
+                ],
+                [
+                  101.34599,
+                  14.93633
+                ],
+                [
+                  101.33851,
+                  14.9329
+                ],
+                [
+                  101.33848,
+                  14.94281
+                ],
+                [
+                  101.33556,
+                  14.94889
+                ],
+                [
+                  101.33718,
+                  14.9511
+                ],
+                [
+                  101.33798,
+                  14.9582
+                ],
+                [
+                  101.33523,
+                  14.95942
+                ],
+                [
+                  101.32879,
+                  14.96609
+                ],
+                [
+                  101.33064,
+                  14.97278
+                ],
+                [
+                  101.33359,
+                  14.97719
+                ],
+                [
+                  101.33198,
+                  14.98296
+                ],
+                [
+                  101.33467,
+                  14.98512
+                ],
+                [
+                  101.33655,
+                  14.99018
+                ],
+                [
+                  101.34366,
+                  14.99049
+                ],
+                [
+                  101.34824,
+                  14.99404
+                ],
+                [
+                  101.34946,
+                  14.99991
+                ],
+                [
+                  101.34842,
+                  15.00621
+                ],
+                [
+                  101.34953,
+                  15.01401
+                ],
+                [
+                  101.35304,
+                  15.02223
+                ],
+                [
+                  101.35979,
+                  15.02857
+                ],
+                [
+                  101.36283,
+                  15.03716
+                ],
+                [
+                  101.36298,
+                  15.04606
+                ],
+                [
+                  101.36405,
+                  15.04646
+                ],
+                [
+                  101.36818,
+                  15.04338
+                ],
+                [
+                  101.37108,
+                  15.04319
+                ],
+                [
+                  101.37437,
+                  15.04901
+                ],
+                [
+                  101.37566,
+                  15.06054
+                ],
+                [
+                  101.38118,
+                  15.06743
+                ],
+                [
+                  101.39526,
+                  15.07395
+                ],
+                [
+                  101.39707,
+                  15.07411
+                ],
+                [
+                  101.39892,
+                  15.07275
+                ]
+              ]
+            ]
+          }
+        },
+        {
           "geocode": "191203",
           "tambon": "ต.วังม่วง",
           "amphoe": "อ.วังม่วง",
@@ -9948,8 +16724,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ฝายคลองสุคต",
           "latitude": 14.863621,
           "longitude": 101.119957,
-          "sum_rainfall_mm": 106.0,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "sum_rainfall_mm": 134.0,
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -10291,8 +17067,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ท้ายปตร.พระศรีศิลป์",
           "latitude": 14.32729,
           "longitude": 100.87117,
-          "sum_rainfall_mm": 122.39999999999999,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "sum_rainfall_mm": 146.79999999999998,
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -10329,6 +17105,633 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
+          "geocode": "221005",
+          "tambon": "ต.จันทเขลม",
+          "amphoe": "อ.เขาคิชฌกูฏ",
+          "province": "จ.จันทบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "สะพานคลองจันทเขลม",
+          "latitude": 13.003336,
+          "longitude": 102.04864,
+          "sum_rainfall_mm": 110.20000000000002,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  102.12888,
+                  13.19664
+                ],
+                [
+                  102.13316,
+                  13.1927
+                ],
+                [
+                  102.13784,
+                  13.18511
+                ],
+                [
+                  102.13656,
+                  13.18156
+                ],
+                [
+                  102.13513,
+                  13.18095
+                ],
+                [
+                  102.1354,
+                  13.17917
+                ],
+                [
+                  102.1337,
+                  13.17848
+                ],
+                [
+                  102.13442,
+                  13.17565
+                ],
+                [
+                  102.13877,
+                  13.1724
+                ],
+                [
+                  102.13788,
+                  13.16775
+                ],
+                [
+                  102.13654,
+                  13.1671
+                ],
+                [
+                  102.13526,
+                  13.16402
+                ],
+                [
+                  102.13687,
+                  13.15852
+                ],
+                [
+                  102.13426,
+                  13.1559
+                ],
+                [
+                  102.13149,
+                  13.15591
+                ],
+                [
+                  102.12707,
+                  13.15333
+                ],
+                [
+                  102.12086,
+                  13.15318
+                ],
+                [
+                  102.11988,
+                  13.15168
+                ],
+                [
+                  102.11447,
+                  13.15554
+                ],
+                [
+                  102.11058,
+                  13.1522
+                ],
+                [
+                  102.116,
+                  13.1408
+                ],
+                [
+                  102.11453,
+                  13.13954
+                ],
+                [
+                  102.11521,
+                  13.13581
+                ],
+                [
+                  102.119,
+                  13.13495
+                ],
+                [
+                  102.12174,
+                  13.12958
+                ],
+                [
+                  102.12462,
+                  13.12876
+                ],
+                [
+                  102.12772,
+                  13.13012
+                ],
+                [
+                  102.13293,
+                  13.13041
+                ],
+                [
+                  102.13705,
+                  13.13267
+                ],
+                [
+                  102.14527,
+                  13.1317
+                ],
+                [
+                  102.15034,
+                  13.1332
+                ],
+                [
+                  102.15414,
+                  13.1284
+                ],
+                [
+                  102.14832,
+                  13.1217
+                ],
+                [
+                  102.1467,
+                  13.11284
+                ],
+                [
+                  102.14225,
+                  13.10962
+                ],
+                [
+                  102.14137,
+                  13.10523
+                ],
+                [
+                  102.1448,
+                  13.10188
+                ],
+                [
+                  102.15394,
+                  13.08304
+                ],
+                [
+                  102.15443,
+                  13.07758
+                ],
+                [
+                  102.15229,
+                  13.07434
+                ],
+                [
+                  102.15607,
+                  13.06597
+                ],
+                [
+                  102.15482,
+                  13.06136
+                ],
+                [
+                  102.15598,
+                  13.0571
+                ],
+                [
+                  102.15601,
+                  13.05005
+                ],
+                [
+                  102.15677,
+                  13.04748
+                ],
+                [
+                  102.16087,
+                  13.04217
+                ],
+                [
+                  102.16696,
+                  13.03794
+                ],
+                [
+                  102.16809,
+                  13.02897
+                ],
+                [
+                  102.17388,
+                  13.0212
+                ],
+                [
+                  102.17422,
+                  13.01894
+                ],
+                [
+                  102.17157,
+                  13.01343
+                ],
+                [
+                  102.17381,
+                  13.011
+                ],
+                [
+                  102.16787,
+                  13.01075
+                ],
+                [
+                  102.16568,
+                  13.00516
+                ],
+                [
+                  102.16379,
+                  13.00379
+                ],
+                [
+                  102.15743,
+                  13.00343
+                ],
+                [
+                  102.138,
+                  12.9985
+                ],
+                [
+                  102.13761,
+                  12.99237
+                ],
+                [
+                  102.14002,
+                  12.9896
+                ],
+                [
+                  102.13947,
+                  12.98709
+                ],
+                [
+                  102.13584,
+                  12.98596
+                ],
+                [
+                  102.13329,
+                  12.98352
+                ],
+                [
+                  102.12619,
+                  12.98312
+                ],
+                [
+                  102.12222,
+                  12.9791
+                ],
+                [
+                  102.11746,
+                  12.98048
+                ],
+                [
+                  102.11394,
+                  12.98553
+                ],
+                [
+                  102.11013,
+                  12.98579
+                ],
+                [
+                  102.10801,
+                  12.98745
+                ],
+                [
+                  102.10493,
+                  12.98648
+                ],
+                [
+                  102.09905,
+                  12.98867
+                ],
+                [
+                  102.09241,
+                  12.98767
+                ],
+                [
+                  102.0898,
+                  12.98464
+                ],
+                [
+                  102.08559,
+                  12.98438
+                ],
+                [
+                  102.07751,
+                  12.97765
+                ],
+                [
+                  102.07172,
+                  12.97567
+                ],
+                [
+                  102.07091,
+                  12.97255
+                ],
+                [
+                  102.06636,
+                  12.97233
+                ],
+                [
+                  102.06341,
+                  12.9707
+                ],
+                [
+                  102.06172,
+                  12.97225
+                ],
+                [
+                  102.06072,
+                  12.96988
+                ],
+                [
+                  102.06183,
+                  12.96767
+                ],
+                [
+                  102.05933,
+                  12.96798
+                ],
+                [
+                  102.05744,
+                  12.96598
+                ],
+                [
+                  102.05644,
+                  12.96732
+                ],
+                [
+                  102.05463,
+                  12.96474
+                ],
+                [
+                  102.0554,
+                  12.96129
+                ],
+                [
+                  102.05404,
+                  12.96082
+                ],
+                [
+                  102.05081,
+                  12.96374
+                ],
+                [
+                  102.0522,
+                  12.96374
+                ],
+                [
+                  102.05176,
+                  12.9656
+                ],
+                [
+                  102.05409,
+                  12.9701
+                ],
+                [
+                  102.05187,
+                  12.96932
+                ],
+                [
+                  102.03782,
+                  12.98104
+                ],
+                [
+                  102.02184,
+                  12.98163
+                ],
+                [
+                  102.00062,
+                  12.98961
+                ],
+                [
+                  102.00523,
+                  13.00312
+                ],
+                [
+                  102.00742,
+                  13.0054
+                ],
+                [
+                  102.00728,
+                  13.00768
+                ],
+                [
+                  102.00976,
+                  13.00964
+                ],
+                [
+                  102.01054,
+                  13.01241
+                ],
+                [
+                  102.0125,
+                  13.01327
+                ],
+                [
+                  102.01277,
+                  13.01702
+                ],
+                [
+                  102.01573,
+                  13.01752
+                ],
+                [
+                  102.02093,
+                  13.01554
+                ],
+                [
+                  102.01921,
+                  13.0428
+                ],
+                [
+                  102.01954,
+                  13.04694
+                ],
+                [
+                  102.02183,
+                  13.0523
+                ],
+                [
+                  102.02024,
+                  13.05483
+                ],
+                [
+                  102.01835,
+                  13.05505
+                ],
+                [
+                  102.01712,
+                  13.05659
+                ],
+                [
+                  102.01668,
+                  13.06513
+                ],
+                [
+                  102.01057,
+                  13.0666
+                ],
+                [
+                  102.0126,
+                  13.06861
+                ],
+                [
+                  102.02916,
+                  13.07444
+                ],
+                [
+                  102.03032,
+                  13.07577
+                ],
+                [
+                  102.03127,
+                  13.08353
+                ],
+                [
+                  102.0342,
+                  13.08853
+                ],
+                [
+                  102.03853,
+                  13.0893
+                ],
+                [
+                  102.04196,
+                  13.09159
+                ],
+                [
+                  102.04316,
+                  13.09412
+                ],
+                [
+                  102.04739,
+                  13.09575
+                ],
+                [
+                  102.05335,
+                  13.10002
+                ],
+                [
+                  102.05397,
+                  13.10632
+                ],
+                [
+                  102.05641,
+                  13.10933
+                ],
+                [
+                  102.05638,
+                  13.11704
+                ],
+                [
+                  102.05803,
+                  13.11774
+                ],
+                [
+                  102.05636,
+                  13.12348
+                ],
+                [
+                  102.05764,
+                  13.1249
+                ],
+                [
+                  102.05271,
+                  13.14161
+                ],
+                [
+                  102.04235,
+                  13.15107
+                ],
+                [
+                  102.04618,
+                  13.15815
+                ],
+                [
+                  102.05108,
+                  13.1624
+                ],
+                [
+                  102.04986,
+                  13.16901
+                ],
+                [
+                  102.05534,
+                  13.17311
+                ],
+                [
+                  102.06163,
+                  13.1753
+                ],
+                [
+                  102.06532,
+                  13.18027
+                ],
+                [
+                  102.06824,
+                  13.18214
+                ],
+                [
+                  102.0694,
+                  13.18547
+                ],
+                [
+                  102.07143,
+                  13.18719
+                ],
+                [
+                  102.07828,
+                  13.18801
+                ],
+                [
+                  102.08235,
+                  13.18581
+                ],
+                [
+                  102.0846,
+                  13.18846
+                ],
+                [
+                  102.09166,
+                  13.19131
+                ],
+                [
+                  102.0944,
+                  13.19457
+                ],
+                [
+                  102.09908,
+                  13.1928
+                ],
+                [
+                  102.11101,
+                  13.19646
+                ],
+                [
+                  102.11306,
+                  13.19835
+                ],
+                [
+                  102.11463,
+                  13.19634
+                ],
+                [
+                  102.11945,
+                  13.19616
+                ],
+                [
+                  102.12246,
+                  13.19861
+                ],
+                [
+                  102.12548,
+                  13.19933
+                ],
+                [
+                  102.12888,
+                  13.19664
+                ]
+              ]
+            ]
+          }
+        },
+        {
           "geocode": "221003",
           "tambon": "ต.ตะเคียนทอง",
           "amphoe": "อ.เขาคิชฌกูฏ",
@@ -10338,8 +17741,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.ตะเคียนทอง",
           "latitude": 12.9131,
           "longitude": 102.0815,
-          "sum_rainfall_mm": 117.19999999999999,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "sum_rainfall_mm": 177.8,
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -10816,379 +18219,3632 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
-          "geocode": "220704",
-          "tambon": "ต.ทรายขาว",
-          "amphoe": "อ.สอยดาว",
+          "geocode": "220402",
+          "tambon": "ต.โป่งน้ำร้อน",
+          "amphoe": "อ.โป่งน้ำร้อน",
           "province": "จ.จันทบุรี",
           "region_id": "2",
           "region_name": "ภาคตะวันออก",
-          "station": "เขตรักษาพันธุ์สัตว์ป่าเขาสอยดาว",
-          "latitude": 13.10355,
-          "longitude": 102.19194,
-          "sum_rainfall_mm": 244.40000000000003,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "station": "ทต.โป่งน้ำร้อน",
+          "latitude": 12.90515,
+          "longitude": 102.26646,
+          "sum_rainfall_mm": 170.2,
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
                 [
-                  102.28997,
-                  13.17381
+                  102.4092,
+                  13.00415
                 ],
                 [
-                  102.28895,
-                  13.15698
+                  102.40903,
+                  12.99818
                 ],
                 [
-                  102.29176,
-                  13.1521
+                  102.42404,
+                  12.98986
                 ],
                 [
-                  102.29252,
-                  13.14781
+                  102.42723,
+                  12.99486
                 ],
                 [
-                  102.28349,
-                  13.1314
+                  102.44553,
+                  12.96591
                 ],
                 [
-                  102.29592,
-                  13.12011
+                  102.44019,
+                  12.96159
                 ],
                 [
-                  102.30665,
-                  13.11304
+                  102.4308,
+                  12.9584
                 ],
                 [
-                  102.32178,
-                  13.11675
+                  102.41567,
+                  12.95805
                 ],
                 [
-                  102.33203,
-                  13.12418
+                  102.42073,
+                  12.94732
                 ],
                 [
-                  102.33714,
-                  13.12006
+                  102.41547,
+                  12.94094
                 ],
                 [
-                  102.34096,
-                  13.11968
+                  102.41573,
+                  12.93034
                 ],
                 [
-                  102.34451,
-                  13.11713
+                  102.41777,
+                  12.93076
                 ],
                 [
-                  102.3485,
-                  13.11712
+                  102.42282,
+                  12.9293
                 ],
                 [
-                  102.34934,
-                  13.11316
+                  102.4225,
+                  12.92291
                 ],
                 [
-                  102.35134,
-                  13.11124
+                  102.42487,
+                  12.92135
                 ],
                 [
-                  102.35711,
-                  13.10935
+                  102.42152,
+                  12.91817
                 ],
                 [
-                  102.35667,
-                  13.10451
+                  102.42189,
+                  12.91564
                 ],
                 [
-                  102.35805,
-                  13.10207
+                  102.41763,
+                  12.91116
                 ],
                 [
-                  102.35659,
-                  13.10108
+                  102.41745,
+                  12.9081
                 ],
                 [
-                  102.35845,
-                  13.09764
+                  102.42021,
+                  12.90741
                 ],
                 [
-                  102.35578,
-                  13.09382
+                  102.42062,
+                  12.90169
                 ],
                 [
-                  102.35635,
-                  13.08888
+                  102.42422,
+                  12.89925
                 ],
                 [
-                  102.35799,
-                  13.08695
+                  102.42607,
+                  12.89653
                 ],
                 [
-                  102.35954,
-                  13.07967
+                  102.42964,
+                  12.89622
                 ],
                 [
-                  102.36374,
-                  13.07738
+                  102.43309,
+                  12.89295
                 ],
                 [
-                  102.35696,
-                  13.06442
+                  102.43174,
+                  12.8902
                 ],
                 [
-                  102.3484,
-                  13.05259
+                  102.4356,
+                  12.88183
                 ],
                 [
-                  102.33872,
-                  13.05062
+                  102.43852,
+                  12.88038
                 ],
                 [
-                  102.32732,
-                  13.04634
+                  102.43759,
+                  12.87773
                 ],
                 [
-                  102.31717,
-                  13.04553
+                  102.43853,
+                  12.87687
                 ],
                 [
-                  102.30142,
-                  13.04217
+                  102.43607,
+                  12.87214
                 ],
                 [
-                  102.28887,
-                  13.04268
+                  102.43634,
+                  12.86741
                 ],
                 [
-                  102.26947,
-                  13.03956
+                  102.43495,
+                  12.86591
                 ],
                 [
-                  102.25868,
-                  13.03991
+                  102.43623,
+                  12.86251
                 ],
                 [
-                  102.22855,
-                  13.04169
+                  102.43559,
+                  12.85829
                 ],
                 [
-                  102.20814,
-                  13.04553
+                  102.43889,
+                  12.85298
                 ],
                 [
-                  102.18648,
-                  13.04974
+                  102.44176,
+                  12.85078
                 ],
                 [
-                  102.1675,
-                  13.0552
+                  102.44401,
+                  12.84551
                 ],
                 [
-                  102.1552,
-                  13.05996
+                  102.44978,
+                  12.84383
                 ],
                 [
-                  102.15607,
-                  13.06597
+                  102.46215,
+                  12.76786
                 ],
                 [
-                  102.15229,
-                  13.07434
+                  102.46387,
+                  12.76225
                 ],
                 [
-                  102.15443,
-                  13.07758
+                  102.46397,
+                  12.76084
                 ],
                 [
-                  102.15394,
-                  13.08304
+                  102.45736,
+                  12.76231
                 ],
                 [
-                  102.1448,
-                  13.10188
+                  102.45167,
+                  12.75905
                 ],
                 [
-                  102.14125,
-                  13.10598
+                  102.44676,
+                  12.75913
                 ],
                 [
-                  102.14225,
-                  13.10962
+                  102.44493,
+                  12.75698
                 ],
                 [
-                  102.1467,
-                  13.11284
+                  102.43254,
+                  12.76479
                 ],
                 [
-                  102.14888,
-                  13.12272
+                  102.42921,
+                  12.76303
                 ],
                 [
-                  102.15414,
-                  13.1284
+                  102.42557,
+                  12.76285
                 ],
                 [
-                  102.15775,
-                  13.12848
+                  102.42575,
+                  12.75861
                 ],
                 [
-                  102.16276,
-                  13.12556
+                  102.42465,
+                  12.75775
                 ],
                 [
-                  102.16814,
-                  13.12436
+                  102.41946,
+                  12.76419
                 ],
                 [
-                  102.17781,
-                  13.1258
+                  102.41596,
+                  12.77125
                 ],
                 [
-                  102.18642,
-                  13.12298
+                  102.41354,
+                  12.77125
                 ],
                 [
-                  102.19097,
-                  13.12632
+                  102.41066,
+                  12.77296
                 ],
                 [
-                  102.19428,
-                  13.12659
+                  102.40464,
+                  12.76955
                 ],
                 [
-                  102.19865,
-                  13.12456
+                  102.39896,
+                  12.76122
                 ],
                 [
-                  102.20556,
-                  13.1257
+                  102.3929,
+                  12.75622
                 ],
                 [
-                  102.21039,
-                  13.12407
+                  102.38564,
+                  12.76056
                 ],
                 [
-                  102.21455,
-                  13.12489
+                  102.37822,
+                  12.76091
                 ],
                 [
-                  102.21646,
-                  13.12281
+                  102.37817,
+                  12.76323
                 ],
                 [
-                  102.21925,
-                  13.12287
+                  102.37559,
+                  12.76579
                 ],
                 [
-                  102.22053,
-                  13.12174
+                  102.37646,
+                  12.76988
                 ],
                 [
-                  102.22509,
-                  13.12249
+                  102.37445,
+                  12.77189
                 ],
                 [
-                  102.22643,
-                  13.12348
+                  102.37355,
+                  12.77599
                 ],
                 [
-                  102.22751,
-                  13.12704
+                  102.3701,
+                  12.78205
                 ],
                 [
-                  102.23066,
-                  13.12706
+                  102.3721,
+                  12.7827
                 ],
                 [
-                  102.23243,
-                  13.13104
+                  102.37647,
+                  12.78763
                 ],
                 [
-                  102.23687,
-                  13.13136
+                  102.37582,
+                  12.7915
                 ],
                 [
-                  102.23931,
-                  13.13381
+                  102.36818,
+                  12.79888
                 ],
                 [
-                  102.24466,
-                  13.1343
+                  102.36665,
+                  12.80401
                 ],
                 [
-                  102.25305,
-                  13.14045
+                  102.35626,
+                  12.80939
                 ],
                 [
-                  102.25168,
-                  13.14191
+                  102.3521,
+                  12.81416
                 ],
                 [
-                  102.25174,
-                  13.14418
+                  102.34947,
+                  12.81087
                 ],
                 [
-                  102.24902,
-                  13.14543
+                  102.34044,
+                  12.80951
                 ],
                 [
-                  102.24813,
-                  13.14736
+                  102.33751,
+                  12.81115
                 ],
                 [
-                  102.2505,
-                  13.15246
+                  102.33617,
+                  12.8136
                 ],
                 [
-                  102.25556,
-                  13.15324
+                  102.33356,
+                  12.81157
                 ],
                 [
-                  102.2542,
-                  13.1621
+                  102.32806,
+                  12.81386
                 ],
                 [
-                  102.2567,
-                  13.16236
+                  102.32648,
+                  12.82291
                 ],
                 [
-                  102.2572,
-                  13.16377
+                  102.33299,
+                  12.83592
                 ],
                 [
-                  102.25539,
-                  13.16769
+                  102.32993,
+                  12.83952
                 ],
                 [
-                  102.25345,
-                  13.16782
+                  102.32799,
+                  12.85118
                 ],
                 [
-                  102.25303,
-                  13.16999
+                  102.32489,
+                  12.85822
                 ],
                 [
-                  102.24936,
-                  13.17069
+                  102.32595,
+                  12.86422
                 ],
                 [
-                  102.24945,
-                  13.17488
+                  102.31805,
+                  12.86874
                 ],
                 [
-                  102.25417,
-                  13.17613
+                  102.3155,
+                  12.87158
                 ],
                 [
-                  102.27078,
-                  13.17284
+                  102.31561,
+                  12.88746
                 ],
                 [
-                  102.28058,
-                  13.17471
+                  102.3141,
+                  12.89028
                 ],
                 [
-                  102.28997,
-                  13.17381
+                  102.31131,
+                  12.8924
+                ],
+                [
+                  102.3102,
+                  12.89592
+                ],
+                [
+                  102.30578,
+                  12.89678
+                ],
+                [
+                  102.30596,
+                  12.89966
+                ],
+                [
+                  102.30808,
+                  12.90059
+                ],
+                [
+                  102.3059,
+                  12.9013
+                ],
+                [
+                  102.30784,
+                  12.90321
+                ],
+                [
+                  102.3066,
+                  12.90495
+                ],
+                [
+                  102.30753,
+                  12.90629
+                ],
+                [
+                  102.30504,
+                  12.90585
+                ],
+                [
+                  102.3054,
+                  12.90849
+                ],
+                [
+                  102.30359,
+                  12.91018
+                ],
+                [
+                  102.30369,
+                  12.91148
+                ],
+                [
+                  102.30237,
+                  12.91121
+                ],
+                [
+                  102.30254,
+                  12.91388
+                ],
+                [
+                  102.30075,
+                  12.91342
+                ],
+                [
+                  102.30366,
+                  12.91479
+                ],
+                [
+                  102.30696,
+                  12.91356
+                ],
+                [
+                  102.30912,
+                  12.91559
+                ],
+                [
+                  102.30716,
+                  12.91673
+                ],
+                [
+                  102.3087,
+                  12.91939
+                ],
+                [
+                  102.30782,
+                  12.92149
+                ],
+                [
+                  102.30929,
+                  12.92237
+                ],
+                [
+                  102.30972,
+                  12.9252
+                ],
+                [
+                  102.31135,
+                  12.92616
+                ],
+                [
+                  102.30939,
+                  12.95294
+                ],
+                [
+                  102.30993,
+                  12.9647
+                ],
+                [
+                  102.32136,
+                  13.0054
+                ],
+                [
+                  102.33738,
+                  13.00361
+                ],
+                [
+                  102.36111,
+                  13.01063
+                ],
+                [
+                  102.37981,
+                  13.0132
+                ],
+                [
+                  102.39977,
+                  13.02056
+                ],
+                [
+                  102.4081,
+                  13.02478
+                ],
+                [
+                  102.41024,
+                  13.02826
+                ],
+                [
+                  102.41172,
+                  13.02831
+                ],
+                [
+                  102.41257,
+                  13.02798
+                ],
+                [
+                  102.41103,
+                  13.02739
+                ],
+                [
+                  102.40962,
+                  13.01753
+                ],
+                [
+                  102.40938,
+                  13.00979
+                ],
+                [
+                  102.41039,
+                  13.00634
+                ],
+                [
+                  102.4092,
+                  13.00415
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "241002",
+          "tambon": "ต.คลองตะเกรา",
+          "amphoe": "อ.ท่าตะเกียบ",
+          "province": "จ.ฉะเชิงเทรา",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ภูไท",
+          "latitude": 13.417764,
+          "longitude": 101.883095,
+          "sum_rainfall_mm": 221.6,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  101.67467,
+                  13.39494
+                ],
+                [
+                  101.67468,
+                  13.39985
+                ],
+                [
+                  101.6777,
+                  13.40116
+                ],
+                [
+                  101.67382,
+                  13.40349
+                ],
+                [
+                  101.67446,
+                  13.40678
+                ],
+                [
+                  101.67837,
+                  13.40874
+                ],
+                [
+                  101.67908,
+                  13.41085
+                ],
+                [
+                  101.67666,
+                  13.41507
+                ],
+                [
+                  101.67797,
+                  13.41776
+                ],
+                [
+                  101.67766,
+                  13.42096
+                ],
+                [
+                  101.67551,
+                  13.42183
+                ],
+                [
+                  101.67587,
+                  13.42566
+                ],
+                [
+                  101.67437,
+                  13.4272
+                ],
+                [
+                  101.67624,
+                  13.43127
+                ],
+                [
+                  101.678,
+                  13.43085
+                ],
+                [
+                  101.68244,
+                  13.4332
+                ],
+                [
+                  101.68655,
+                  13.43035
+                ],
+                [
+                  101.68723,
+                  13.42764
+                ],
+                [
+                  101.69013,
+                  13.42738
+                ],
+                [
+                  101.69455,
+                  13.42908
+                ],
+                [
+                  101.6991,
+                  13.42321
+                ],
+                [
+                  101.70599,
+                  13.42358
+                ],
+                [
+                  101.70777,
+                  13.42158
+                ],
+                [
+                  101.70654,
+                  13.41878
+                ],
+                [
+                  101.70991,
+                  13.41519
+                ],
+                [
+                  101.71317,
+                  13.41733
+                ],
+                [
+                  101.71636,
+                  13.4175
+                ],
+                [
+                  101.72206,
+                  13.41611
+                ],
+                [
+                  101.72475,
+                  13.41355
+                ],
+                [
+                  101.73065,
+                  13.41351
+                ],
+                [
+                  101.73272,
+                  13.4116
+                ],
+                [
+                  101.73814,
+                  13.41397
+                ],
+                [
+                  101.74641,
+                  13.41345
+                ],
+                [
+                  101.74748,
+                  13.41232
+                ],
+                [
+                  101.74971,
+                  13.41303
+                ],
+                [
+                  101.7508,
+                  13.41514
+                ],
+                [
+                  101.75343,
+                  13.41328
+                ],
+                [
+                  101.75733,
+                  13.41256
+                ],
+                [
+                  101.75894,
+                  13.41014
+                ],
+                [
+                  101.76189,
+                  13.4108
+                ],
+                [
+                  101.76397,
+                  13.40892
+                ],
+                [
+                  101.76708,
+                  13.40991
+                ],
+                [
+                  101.76832,
+                  13.40651
+                ],
+                [
+                  101.77448,
+                  13.40717
+                ],
+                [
+                  101.77784,
+                  13.4055
+                ],
+                [
+                  101.77994,
+                  13.40799
+                ],
+                [
+                  101.78296,
+                  13.40691
+                ],
+                [
+                  101.78469,
+                  13.40944
+                ],
+                [
+                  101.78893,
+                  13.40827
+                ],
+                [
+                  101.79304,
+                  13.40977
+                ],
+                [
+                  101.79736,
+                  13.40759
+                ],
+                [
+                  101.80173,
+                  13.40111
+                ],
+                [
+                  101.806,
+                  13.4
+                ],
+                [
+                  101.80999,
+                  13.40095
+                ],
+                [
+                  101.81271,
+                  13.40529
+                ],
+                [
+                  101.81301,
+                  13.40775
+                ],
+                [
+                  101.81688,
+                  13.41012
+                ],
+                [
+                  101.81883,
+                  13.41347
+                ],
+                [
+                  101.82718,
+                  13.41833
+                ],
+                [
+                  101.82961,
+                  13.41722
+                ],
+                [
+                  101.83743,
+                  13.41862
+                ],
+                [
+                  101.83912,
+                  13.41503
+                ],
+                [
+                  101.84259,
+                  13.41304
+                ],
+                [
+                  101.84493,
+                  13.41324
+                ],
+                [
+                  101.85063,
+                  13.40918
+                ],
+                [
+                  101.85283,
+                  13.40963
+                ],
+                [
+                  101.85858,
+                  13.40451
+                ],
+                [
+                  101.86328,
+                  13.40497
+                ],
+                [
+                  101.86646,
+                  13.40651
+                ],
+                [
+                  101.86943,
+                  13.40571
+                ],
+                [
+                  101.8699,
+                  13.40294
+                ],
+                [
+                  101.87378,
+                  13.40066
+                ],
+                [
+                  101.87546,
+                  13.40356
+                ],
+                [
+                  101.87996,
+                  13.40484
+                ],
+                [
+                  101.87968,
+                  13.40752
+                ],
+                [
+                  101.88173,
+                  13.41036
+                ],
+                [
+                  101.88262,
+                  13.41461
+                ],
+                [
+                  101.88818,
+                  13.42116
+                ],
+                [
+                  101.89399,
+                  13.42263
+                ],
+                [
+                  101.89795,
+                  13.42819
+                ],
+                [
+                  101.90039,
+                  13.42878
+                ],
+                [
+                  101.90209,
+                  13.43225
+                ],
+                [
+                  101.90552,
+                  13.43349
+                ],
+                [
+                  101.90683,
+                  13.43549
+                ],
+                [
+                  101.9114,
+                  13.43639
+                ],
+                [
+                  101.93816,
+                  13.45077
+                ],
+                [
+                  101.93873,
+                  13.44592
+                ],
+                [
+                  101.94246,
+                  13.44376
+                ],
+                [
+                  101.94352,
+                  13.43875
+                ],
+                [
+                  101.95746,
+                  13.42446
+                ],
+                [
+                  101.96101,
+                  13.42252
+                ],
+                [
+                  101.96353,
+                  13.41626
+                ],
+                [
+                  101.96893,
+                  13.41163
+                ],
+                [
+                  101.97313,
+                  13.40931
+                ],
+                [
+                  101.97707,
+                  13.40873
+                ],
+                [
+                  101.97693,
+                  13.39961
+                ],
+                [
+                  101.97375,
+                  13.39617
+                ],
+                [
+                  101.97318,
+                  13.39405
+                ],
+                [
+                  101.97536,
+                  13.3911
+                ],
+                [
+                  101.9756,
+                  13.38562
+                ],
+                [
+                  101.98198,
+                  13.3809
+                ],
+                [
+                  101.98125,
+                  13.37617
+                ],
+                [
+                  101.98227,
+                  13.36956
+                ],
+                [
+                  101.98061,
+                  13.36516
+                ],
+                [
+                  101.98186,
+                  13.35975
+                ],
+                [
+                  101.99013,
+                  13.35334
+                ],
+                [
+                  101.98896,
+                  13.3448
+                ],
+                [
+                  101.98559,
+                  13.3406
+                ],
+                [
+                  101.98913,
+                  13.33403
+                ],
+                [
+                  101.98255,
+                  13.33158
+                ],
+                [
+                  101.9762,
+                  13.32731
+                ],
+                [
+                  101.96701,
+                  13.32489
+                ],
+                [
+                  101.96091,
+                  13.30928
+                ],
+                [
+                  101.95701,
+                  13.3054
+                ],
+                [
+                  101.95472,
+                  13.30067
+                ],
+                [
+                  101.94697,
+                  13.29336
+                ],
+                [
+                  101.94289,
+                  13.2925
+                ],
+                [
+                  101.93612,
+                  13.29478
+                ],
+                [
+                  101.93043,
+                  13.28944
+                ],
+                [
+                  101.92831,
+                  13.28869
+                ],
+                [
+                  101.92665,
+                  13.28999
+                ],
+                [
+                  101.92705,
+                  13.29565
+                ],
+                [
+                  101.91935,
+                  13.29263
+                ],
+                [
+                  101.91605,
+                  13.28911
+                ],
+                [
+                  101.90542,
+                  13.28715
+                ],
+                [
+                  101.90404,
+                  13.28446
+                ],
+                [
+                  101.90623,
+                  13.27968
+                ],
+                [
+                  101.90564,
+                  13.27104
+                ],
+                [
+                  101.90077,
+                  13.26626
+                ],
+                [
+                  101.89804,
+                  13.2663
+                ],
+                [
+                  101.89724,
+                  13.26382
+                ],
+                [
+                  101.89796,
+                  13.25961
+                ],
+                [
+                  101.89584,
+                  13.25086
+                ],
+                [
+                  101.89661,
+                  13.24843
+                ],
+                [
+                  101.89543,
+                  13.24352
+                ],
+                [
+                  101.90082,
+                  13.23524
+                ],
+                [
+                  101.89135,
+                  13.22699
+                ],
+                [
+                  101.88999,
+                  13.22738
+                ],
+                [
+                  101.89012,
+                  13.23058
+                ],
+                [
+                  101.88745,
+                  13.23506
+                ],
+                [
+                  101.88587,
+                  13.23651
+                ],
+                [
+                  101.88315,
+                  13.23662
+                ],
+                [
+                  101.87937,
+                  13.23398
+                ],
+                [
+                  101.87863,
+                  13.22711
+                ],
+                [
+                  101.87958,
+                  13.22554
+                ],
+                [
+                  101.87874,
+                  13.22397
+                ],
+                [
+                  101.87483,
+                  13.22215
+                ],
+                [
+                  101.87259,
+                  13.22256
+                ],
+                [
+                  101.87127,
+                  13.22451
+                ],
+                [
+                  101.87217,
+                  13.22658
+                ],
+                [
+                  101.87254,
+                  13.23914
+                ],
+                [
+                  101.86902,
+                  13.2504
+                ],
+                [
+                  101.86779,
+                  13.24998
+                ],
+                [
+                  101.86706,
+                  13.24741
+                ],
+                [
+                  101.8612,
+                  13.24646
+                ],
+                [
+                  101.85033,
+                  13.24786
+                ],
+                [
+                  101.84796,
+                  13.24624
+                ],
+                [
+                  101.84547,
+                  13.24059
+                ],
+                [
+                  101.84223,
+                  13.2389
+                ],
+                [
+                  101.83983,
+                  13.24015
+                ],
+                [
+                  101.84004,
+                  13.23771
+                ],
+                [
+                  101.8376,
+                  13.23644
+                ],
+                [
+                  101.83667,
+                  13.23303
+                ],
+                [
+                  101.83156,
+                  13.23822
+                ],
+                [
+                  101.82734,
+                  13.23722
+                ],
+                [
+                  101.82462,
+                  13.2329
+                ],
+                [
+                  101.82428,
+                  13.22638
+                ],
+                [
+                  101.81899,
+                  13.21786
+                ],
+                [
+                  101.80857,
+                  13.21139
+                ],
+                [
+                  101.80598,
+                  13.20801
+                ],
+                [
+                  101.79636,
+                  13.20259
+                ],
+                [
+                  101.79475,
+                  13.20178
+                ],
+                [
+                  101.79078,
+                  13.20295
+                ],
+                [
+                  101.78921,
+                  13.20224
+                ],
+                [
+                  101.77763,
+                  13.19094
+                ],
+                [
+                  101.77287,
+                  13.18427
+                ],
+                [
+                  101.76544,
+                  13.18504
+                ],
+                [
+                  101.75987,
+                  13.18838
+                ],
+                [
+                  101.75528,
+                  13.18833
+                ],
+                [
+                  101.75351,
+                  13.18648
+                ],
+                [
+                  101.7527,
+                  13.18133
+                ],
+                [
+                  101.74922,
+                  13.18375
+                ],
+                [
+                  101.74042,
+                  13.18648
+                ],
+                [
+                  101.7314,
+                  13.17898
+                ],
+                [
+                  101.72611,
+                  13.17885
+                ],
+                [
+                  101.71863,
+                  13.18124
+                ],
+                [
+                  101.71569,
+                  13.18404
+                ],
+                [
+                  101.71456,
+                  13.18946
+                ],
+                [
+                  101.71249,
+                  13.19174
+                ],
+                [
+                  101.71311,
+                  13.19542
+                ],
+                [
+                  101.71196,
+                  13.20066
+                ],
+                [
+                  101.71373,
+                  13.20337
+                ],
+                [
+                  101.71319,
+                  13.20586
+                ],
+                [
+                  101.70494,
+                  13.20836
+                ],
+                [
+                  101.69946,
+                  13.21761
+                ],
+                [
+                  101.69326,
+                  13.222
+                ],
+                [
+                  101.68813,
+                  13.23042
+                ],
+                [
+                  101.68846,
+                  13.23473
+                ],
+                [
+                  101.6859,
+                  13.24516
+                ],
+                [
+                  101.6835,
+                  13.25032
+                ],
+                [
+                  101.6822,
+                  13.25224
+                ],
+                [
+                  101.6796,
+                  13.25279
+                ],
+                [
+                  101.67305,
+                  13.25781
+                ],
+                [
+                  101.66746,
+                  13.27323
+                ],
+                [
+                  101.65717,
+                  13.27553
+                ],
+                [
+                  101.65083,
+                  13.28453
+                ],
+                [
+                  101.64575,
+                  13.28602
+                ],
+                [
+                  101.64163,
+                  13.28964
+                ],
+                [
+                  101.63952,
+                  13.29313
+                ],
+                [
+                  101.6355,
+                  13.2919
+                ],
+                [
+                  101.63105,
+                  13.29621
+                ],
+                [
+                  101.62835,
+                  13.29588
+                ],
+                [
+                  101.62547,
+                  13.29791
+                ],
+                [
+                  101.62182,
+                  13.29813
+                ],
+                [
+                  101.61976,
+                  13.30107
+                ],
+                [
+                  101.61717,
+                  13.3024
+                ],
+                [
+                  101.61543,
+                  13.30209
+                ],
+                [
+                  101.61421,
+                  13.30009
+                ],
+                [
+                  101.61059,
+                  13.29994
+                ],
+                [
+                  101.59993,
+                  13.30269
+                ],
+                [
+                  101.59849,
+                  13.3051
+                ],
+                [
+                  101.59764,
+                  13.31156
+                ],
+                [
+                  101.59474,
+                  13.31058
+                ],
+                [
+                  101.59247,
+                  13.31123
+                ],
+                [
+                  101.59044,
+                  13.3169
+                ],
+                [
+                  101.58319,
+                  13.32134
+                ],
+                [
+                  101.58337,
+                  13.32934
+                ],
+                [
+                  101.58024,
+                  13.33312
+                ],
+                [
+                  101.57584,
+                  13.33323
+                ],
+                [
+                  101.57284,
+                  13.32974
+                ],
+                [
+                  101.56768,
+                  13.32999
+                ],
+                [
+                  101.56409,
+                  13.33149
+                ],
+                [
+                  101.56431,
+                  13.3392
+                ],
+                [
+                  101.56098,
+                  13.34003
+                ],
+                [
+                  101.55815,
+                  13.34708
+                ],
+                [
+                  101.55824,
+                  13.35356
+                ],
+                [
+                  101.55658,
+                  13.35772
+                ],
+                [
+                  101.55669,
+                  13.36751
+                ],
+                [
+                  101.55353,
+                  13.3694
+                ],
+                [
+                  101.55036,
+                  13.36713
+                ],
+                [
+                  101.55066,
+                  13.36944
+                ],
+                [
+                  101.54891,
+                  13.37121
+                ],
+                [
+                  101.55111,
+                  13.37328
+                ],
+                [
+                  101.55106,
+                  13.3766
+                ],
+                [
+                  101.54841,
+                  13.37592
+                ],
+                [
+                  101.54548,
+                  13.37736
+                ],
+                [
+                  101.54746,
+                  13.37994
+                ],
+                [
+                  101.54823,
+                  13.38374
+                ],
+                [
+                  101.54752,
+                  13.38574
+                ],
+                [
+                  101.54971,
+                  13.3865
+                ],
+                [
+                  101.5502,
+                  13.38787
+                ],
+                [
+                  101.53915,
+                  13.4104
+                ],
+                [
+                  101.53698,
+                  13.41333
+                ],
+                [
+                  101.53452,
+                  13.41344
+                ],
+                [
+                  101.53328,
+                  13.415
+                ],
+                [
+                  101.53208,
+                  13.41879
+                ],
+                [
+                  101.53259,
+                  13.42462
+                ],
+                [
+                  101.53108,
+                  13.42622
+                ],
+                [
+                  101.52349,
+                  13.42394
+                ],
+                [
+                  101.51587,
+                  13.41967
+                ],
+                [
+                  101.51099,
+                  13.41073
+                ],
+                [
+                  101.50148,
+                  13.4101
+                ],
+                [
+                  101.50006,
+                  13.41931
+                ],
+                [
+                  101.49793,
+                  13.42118
+                ],
+                [
+                  101.49474,
+                  13.42202
+                ],
+                [
+                  101.4905,
+                  13.428
+                ],
+                [
+                  101.49054,
+                  13.4305
+                ],
+                [
+                  101.49443,
+                  13.43321
+                ],
+                [
+                  101.49564,
+                  13.43618
+                ],
+                [
+                  101.49375,
+                  13.44023
+                ],
+                [
+                  101.49005,
+                  13.44389
+                ],
+                [
+                  101.49253,
+                  13.44934
+                ],
+                [
+                  101.49731,
+                  13.44915
+                ],
+                [
+                  101.50329,
+                  13.45141
+                ],
+                [
+                  101.5062,
+                  13.45908
+                ],
+                [
+                  101.50855,
+                  13.4623
+                ],
+                [
+                  101.51334,
+                  13.46441
+                ],
+                [
+                  101.51909,
+                  13.46972
+                ],
+                [
+                  101.51876,
+                  13.47273
+                ],
+                [
+                  101.52028,
+                  13.4769
+                ],
+                [
+                  101.52298,
+                  13.47759
+                ],
+                [
+                  101.52509,
+                  13.47982
+                ],
+                [
+                  101.52836,
+                  13.47909
+                ],
+                [
+                  101.5298,
+                  13.47996
+                ],
+                [
+                  101.53008,
+                  13.48199
+                ],
+                [
+                  101.5325,
+                  13.4821
+                ],
+                [
+                  101.53348,
+                  13.48689
+                ],
+                [
+                  101.53279,
+                  13.48783
+                ],
+                [
+                  101.535,
+                  13.49166
+                ],
+                [
+                  101.53544,
+                  13.49801
+                ],
+                [
+                  101.53735,
+                  13.49825
+                ],
+                [
+                  101.6538,
+                  13.41029
+                ],
+                [
+                  101.66295,
+                  13.40597
+                ],
+                [
+                  101.67467,
+                  13.39494
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "240601",
+          "tambon": "ต.เกาะขนุน",
+          "amphoe": "อ.พนมสารคาม",
+          "province": "จ.ฉะเชิงเทรา",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "พนมสารคาม",
+          "latitude": 13.72662,
+          "longitude": 101.35298,
+          "sum_rainfall_mm": 208.6,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  101.4238,
+                  13.75741
+                ],
+                [
+                  101.42358,
+                  13.74932
+                ],
+                [
+                  101.43116,
+                  13.74172
+                ],
+                [
+                  101.43647,
+                  13.72604
+                ],
+                [
+                  101.44371,
+                  13.71884
+                ],
+                [
+                  101.44342,
+                  13.71279
+                ],
+                [
+                  101.44562,
+                  13.70475
+                ],
+                [
+                  101.44558,
+                  13.68971
+                ],
+                [
+                  101.44037,
+                  13.68716
+                ],
+                [
+                  101.43714,
+                  13.67846
+                ],
+                [
+                  101.43428,
+                  13.67554
+                ],
+                [
+                  101.42259,
+                  13.67345
+                ],
+                [
+                  101.42039,
+                  13.67149
+                ],
+                [
+                  101.42052,
+                  13.66346
+                ],
+                [
+                  101.42279,
+                  13.65607
+                ],
+                [
+                  101.41568,
+                  13.64305
+                ],
+                [
+                  101.41297,
+                  13.63475
+                ],
+                [
+                  101.40795,
+                  13.62696
+                ],
+                [
+                  101.40081,
+                  13.62093
+                ],
+                [
+                  101.39909,
+                  13.61518
+                ],
+                [
+                  101.38811,
+                  13.61909
+                ],
+                [
+                  101.38213,
+                  13.62285
+                ],
+                [
+                  101.3779,
+                  13.62753
+                ],
+                [
+                  101.36707,
+                  13.64379
+                ],
+                [
+                  101.36552,
+                  13.64917
+                ],
+                [
+                  101.36577,
+                  13.65388
+                ],
+                [
+                  101.36379,
+                  13.65719
+                ],
+                [
+                  101.36332,
+                  13.66168
+                ],
+                [
+                  101.35863,
+                  13.66946
+                ],
+                [
+                  101.35795,
+                  13.67379
+                ],
+                [
+                  101.36439,
+                  13.68266
+                ],
+                [
+                  101.36495,
+                  13.68668
+                ],
+                [
+                  101.36496,
+                  13.70599
+                ],
+                [
+                  101.36298,
+                  13.71463
+                ],
+                [
+                  101.3593,
+                  13.72324
+                ],
+                [
+                  101.36435,
+                  13.73005
+                ],
+                [
+                  101.36667,
+                  13.74043
+                ],
+                [
+                  101.38908,
+                  13.75783
+                ],
+                [
+                  101.39747,
+                  13.77024
+                ],
+                [
+                  101.41171,
+                  13.76273
+                ],
+                [
+                  101.41358,
+                  13.75286
+                ],
+                [
+                  101.4238,
+                  13.75741
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "200903",
+          "tambon": "ต.พลูตาหลวง",
+          "amphoe": "อ.สัตหีบ",
+          "province": "จ.ชลบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "อบต.พลูตาหลวง",
+          "latitude": 12.69861,
+          "longitude": 100.9762,
+          "sum_rainfall_mm": 231.8,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  101.01209,
+                  12.76718
+                ],
+                [
+                  101.01251,
+                  12.76189
+                ],
+                [
+                  101.0145,
+                  12.76108
+                ],
+                [
+                  101.01473,
+                  12.75896
+                ],
+                [
+                  101.01172,
+                  12.75363
+                ],
+                [
+                  101.00842,
+                  12.7512
+                ],
+                [
+                  101.00808,
+                  12.74581
+                ],
+                [
+                  101.00325,
+                  12.73873
+                ],
+                [
+                  101.00336,
+                  12.73343
+                ],
+                [
+                  100.99046,
+                  12.72596
+                ],
+                [
+                  100.99109,
+                  12.72284
+                ],
+                [
+                  100.99294,
+                  12.72189
+                ],
+                [
+                  100.99248,
+                  12.72048
+                ],
+                [
+                  100.99447,
+                  12.71468
+                ],
+                [
+                  100.99,
+                  12.70933
+                ],
+                [
+                  100.98946,
+                  12.70578
+                ],
+                [
+                  100.98628,
+                  12.69964
+                ],
+                [
+                  100.98758,
+                  12.69781
+                ],
+                [
+                  100.98549,
+                  12.6958
+                ],
+                [
+                  100.98455,
+                  12.69277
+                ],
+                [
+                  100.9879,
+                  12.68749
+                ],
+                [
+                  100.98735,
+                  12.68432
+                ],
+                [
+                  100.98959,
+                  12.68448
+                ],
+                [
+                  100.99051,
+                  12.67882
+                ],
+                [
+                  100.99228,
+                  12.67643
+                ],
+                [
+                  100.99026,
+                  12.66992
+                ],
+                [
+                  100.99269,
+                  12.66475
+                ],
+                [
+                  100.99173,
+                  12.66308
+                ],
+                [
+                  100.99328,
+                  12.66106
+                ],
+                [
+                  100.99251,
+                  12.65974
+                ],
+                [
+                  100.99309,
+                  12.6561
+                ],
+                [
+                  100.98152,
+                  12.65244
+                ],
+                [
+                  100.96954,
+                  12.64622
+                ],
+                [
+                  100.96802,
+                  12.64183
+                ],
+                [
+                  100.97077,
+                  12.63893
+                ],
+                [
+                  100.96595,
+                  12.63497
+                ],
+                [
+                  100.96366,
+                  12.62899
+                ],
+                [
+                  100.95345,
+                  12.64446
+                ],
+                [
+                  100.95479,
+                  12.64646
+                ],
+                [
+                  100.95202,
+                  12.66698
+                ],
+                [
+                  100.92677,
+                  12.66548
+                ],
+                [
+                  100.92828,
+                  12.66971
+                ],
+                [
+                  100.92672,
+                  12.68449
+                ],
+                [
+                  100.92229,
+                  12.68497
+                ],
+                [
+                  100.92271,
+                  12.68762
+                ],
+                [
+                  100.92132,
+                  12.68856
+                ],
+                [
+                  100.91924,
+                  12.70106
+                ],
+                [
+                  100.91547,
+                  12.70117
+                ],
+                [
+                  100.91628,
+                  12.70488
+                ],
+                [
+                  100.92004,
+                  12.71135
+                ],
+                [
+                  100.92927,
+                  12.71018
+                ],
+                [
+                  100.93036,
+                  12.71207
+                ],
+                [
+                  100.93775,
+                  12.71
+                ],
+                [
+                  100.94109,
+                  12.71144
+                ],
+                [
+                  100.94316,
+                  12.71079
+                ],
+                [
+                  100.94238,
+                  12.71523
+                ],
+                [
+                  100.96248,
+                  12.7188
+                ],
+                [
+                  100.96412,
+                  12.72355
+                ],
+                [
+                  100.96257,
+                  12.73134
+                ],
+                [
+                  100.96319,
+                  12.74104
+                ],
+                [
+                  100.97304,
+                  12.74825
+                ],
+                [
+                  100.97818,
+                  12.7576
+                ],
+                [
+                  100.98606,
+                  12.76191
+                ],
+                [
+                  100.99125,
+                  12.76279
+                ],
+                [
+                  100.99136,
+                  12.7644
+                ],
+                [
+                  100.99385,
+                  12.76646
+                ],
+                [
+                  101.00395,
+                  12.7687
+                ],
+                [
+                  101.01209,
+                  12.76718
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "250214",
+          "tambon": "ต.วังท่าช้าง",
+          "amphoe": "อ.กบินทร์บุรี",
+          "province": "จ.ปราจีนบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "บ้านเนินหินกอง",
+          "latitude": 13.782015,
+          "longitude": 101.900566,
+          "sum_rainfall_mm": 155.0,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  101.93926,
+                  13.81078
+                ],
+                [
+                  101.94208,
+                  13.81107
+                ],
+                [
+                  101.94613,
+                  13.80681
+                ],
+                [
+                  101.94807,
+                  13.79908
+                ],
+                [
+                  101.94389,
+                  13.78853
+                ],
+                [
+                  101.9445,
+                  13.78504
+                ],
+                [
+                  101.94121,
+                  13.75786
+                ],
+                [
+                  101.94177,
+                  13.75486
+                ],
+                [
+                  101.93903,
+                  13.74388
+                ],
+                [
+                  101.93616,
+                  13.74049
+                ],
+                [
+                  101.93959,
+                  13.73861
+                ],
+                [
+                  101.94158,
+                  13.73916
+                ],
+                [
+                  101.93862,
+                  13.72398
+                ],
+                [
+                  101.93889,
+                  13.71667
+                ],
+                [
+                  101.93765,
+                  13.7107
+                ],
+                [
+                  101.94033,
+                  13.70847
+                ],
+                [
+                  101.94294,
+                  13.70118
+                ],
+                [
+                  101.94264,
+                  13.69511
+                ],
+                [
+                  101.94497,
+                  13.68737
+                ],
+                [
+                  101.94426,
+                  13.67686
+                ],
+                [
+                  101.94763,
+                  13.67242
+                ],
+                [
+                  101.94859,
+                  13.66803
+                ],
+                [
+                  101.94369,
+                  13.65049
+                ],
+                [
+                  101.9388,
+                  13.64688
+                ],
+                [
+                  101.9404,
+                  13.64334
+                ],
+                [
+                  101.9391,
+                  13.63984
+                ],
+                [
+                  101.9394,
+                  13.63662
+                ],
+                [
+                  101.93575,
+                  13.62879
+                ],
+                [
+                  101.94172,
+                  13.61955
+                ],
+                [
+                  101.94204,
+                  13.61624
+                ],
+                [
+                  101.93341,
+                  13.61119
+                ],
+                [
+                  101.92059,
+                  13.61112
+                ],
+                [
+                  101.90952,
+                  13.60492
+                ],
+                [
+                  101.90874,
+                  13.60165
+                ],
+                [
+                  101.91221,
+                  13.59403
+                ],
+                [
+                  101.91248,
+                  13.58904
+                ],
+                [
+                  101.91566,
+                  13.58552
+                ],
+                [
+                  101.91046,
+                  13.58697
+                ],
+                [
+                  101.90408,
+                  13.58665
+                ],
+                [
+                  101.89856,
+                  13.58317
+                ],
+                [
+                  101.89267,
+                  13.58446
+                ],
+                [
+                  101.88996,
+                  13.58232
+                ],
+                [
+                  101.88432,
+                  13.59734
+                ],
+                [
+                  101.87898,
+                  13.60161
+                ],
+                [
+                  101.87642,
+                  13.60032
+                ],
+                [
+                  101.87254,
+                  13.60178
+                ],
+                [
+                  101.86983,
+                  13.60503
+                ],
+                [
+                  101.87019,
+                  13.61059
+                ],
+                [
+                  101.86475,
+                  13.62002
+                ],
+                [
+                  101.86469,
+                  13.63154
+                ],
+                [
+                  101.86143,
+                  13.63297
+                ],
+                [
+                  101.85828,
+                  13.63627
+                ],
+                [
+                  101.83285,
+                  13.63669
+                ],
+                [
+                  101.83253,
+                  13.64376
+                ],
+                [
+                  101.83406,
+                  13.64712
+                ],
+                [
+                  101.83468,
+                  13.65342
+                ],
+                [
+                  101.83816,
+                  13.65932
+                ],
+                [
+                  101.83732,
+                  13.66633
+                ],
+                [
+                  101.83841,
+                  13.66882
+                ],
+                [
+                  101.83609,
+                  13.67348
+                ],
+                [
+                  101.84163,
+                  13.68127
+                ],
+                [
+                  101.83855,
+                  13.68695
+                ],
+                [
+                  101.83755,
+                  13.69599
+                ],
+                [
+                  101.8355,
+                  13.70104
+                ],
+                [
+                  101.82867,
+                  13.7049
+                ],
+                [
+                  101.82197,
+                  13.70558
+                ],
+                [
+                  101.82527,
+                  13.7099
+                ],
+                [
+                  101.82729,
+                  13.71501
+                ],
+                [
+                  101.83197,
+                  13.71533
+                ],
+                [
+                  101.83452,
+                  13.72607
+                ],
+                [
+                  101.83828,
+                  13.72792
+                ],
+                [
+                  101.84048,
+                  13.73116
+                ],
+                [
+                  101.84063,
+                  13.73559
+                ],
+                [
+                  101.83928,
+                  13.74047
+                ],
+                [
+                  101.84011,
+                  13.74238
+                ],
+                [
+                  101.84673,
+                  13.74916
+                ],
+                [
+                  101.85159,
+                  13.75151
+                ],
+                [
+                  101.85645,
+                  13.752
+                ],
+                [
+                  101.86371,
+                  13.75847
+                ],
+                [
+                  101.86376,
+                  13.76539
+                ],
+                [
+                  101.86764,
+                  13.77124
+                ],
+                [
+                  101.87014,
+                  13.77955
+                ],
+                [
+                  101.86992,
+                  13.78273
+                ],
+                [
+                  101.87717,
+                  13.78732
+                ],
+                [
+                  101.87896,
+                  13.79049
+                ],
+                [
+                  101.88132,
+                  13.78987
+                ],
+                [
+                  101.88995,
+                  13.79147
+                ],
+                [
+                  101.89173,
+                  13.79405
+                ],
+                [
+                  101.89195,
+                  13.7973
+                ],
+                [
+                  101.89957,
+                  13.80001
+                ],
+                [
+                  101.90552,
+                  13.79918
+                ],
+                [
+                  101.92363,
+                  13.79355
+                ],
+                [
+                  101.92345,
+                  13.80796
+                ],
+                [
+                  101.92229,
+                  13.81292
+                ],
+                [
+                  101.92392,
+                  13.8162
+                ],
+                [
+                  101.93926,
+                  13.81078
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "210701",
+          "tambon": "ต.น้ำเป็น",
+          "amphoe": "อ.เขาชะเมา",
+          "province": "จ.ระยอง",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "ที่ทำการอุทยานแห่งชาติเขาชะเมา-เขาวง",
+          "latitude": 12.912333,
+          "longitude": 101.72454,
+          "sum_rainfall_mm": 144.39999999999998,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  101.74064,
+                  12.95809
+                ],
+                [
+                  101.74793,
+                  12.94922
+                ],
+                [
+                  101.75128,
+                  12.95096
+                ],
+                [
+                  101.75273,
+                  12.95053
+                ],
+                [
+                  101.75285,
+                  12.94587
+                ],
+                [
+                  101.75711,
+                  12.94043
+                ],
+                [
+                  101.76675,
+                  12.94388
+                ],
+                [
+                  101.77342,
+                  12.95115
+                ],
+                [
+                  101.77544,
+                  12.95104
+                ],
+                [
+                  101.7789,
+                  12.95307
+                ],
+                [
+                  101.78388,
+                  12.94693
+                ],
+                [
+                  101.78999,
+                  12.94308
+                ],
+                [
+                  101.79206,
+                  12.93872
+                ],
+                [
+                  101.79073,
+                  12.93239
+                ],
+                [
+                  101.79156,
+                  12.92935
+                ],
+                [
+                  101.79496,
+                  12.92667
+                ],
+                [
+                  101.79914,
+                  12.92724
+                ],
+                [
+                  101.80072,
+                  12.925
+                ],
+                [
+                  101.80027,
+                  12.92198
+                ],
+                [
+                  101.80236,
+                  12.91732
+                ],
+                [
+                  101.80262,
+                  12.90728
+                ],
+                [
+                  101.80613,
+                  12.9012
+                ],
+                [
+                  101.80616,
+                  12.8955
+                ],
+                [
+                  101.80776,
+                  12.89096
+                ],
+                [
+                  101.80788,
+                  12.88667
+                ],
+                [
+                  101.80925,
+                  12.88454
+                ],
+                [
+                  101.80393,
+                  12.88092
+                ],
+                [
+                  101.80025,
+                  12.88167
+                ],
+                [
+                  101.78959,
+                  12.87825
+                ],
+                [
+                  101.78775,
+                  12.87881
+                ],
+                [
+                  101.78433,
+                  12.87626
+                ],
+                [
+                  101.78198,
+                  12.87635
+                ],
+                [
+                  101.77907,
+                  12.87214
+                ],
+                [
+                  101.77665,
+                  12.87195
+                ],
+                [
+                  101.77542,
+                  12.86944
+                ],
+                [
+                  101.7748,
+                  12.87036
+                ],
+                [
+                  101.76796,
+                  12.86562
+                ],
+                [
+                  101.76236,
+                  12.86366
+                ],
+                [
+                  101.76057,
+                  12.86189
+                ],
+                [
+                  101.75767,
+                  12.86157
+                ],
+                [
+                  101.75481,
+                  12.85921
+                ],
+                [
+                  101.75006,
+                  12.8596
+                ],
+                [
+                  101.74794,
+                  12.85583
+                ],
+                [
+                  101.74786,
+                  12.85353
+                ],
+                [
+                  101.7432,
+                  12.84808
+                ],
+                [
+                  101.74615,
+                  12.84302
+                ],
+                [
+                  101.74032,
+                  12.83934
+                ],
+                [
+                  101.73913,
+                  12.83381
+                ],
+                [
+                  101.73447,
+                  12.83035
+                ],
+                [
+                  101.735,
+                  12.83424
+                ],
+                [
+                  101.73399,
+                  12.83572
+                ],
+                [
+                  101.73312,
+                  12.83539
+                ],
+                [
+                  101.73091,
+                  12.83986
+                ],
+                [
+                  101.72799,
+                  12.83897
+                ],
+                [
+                  101.72165,
+                  12.84351
+                ],
+                [
+                  101.72059,
+                  12.84246
+                ],
+                [
+                  101.7227,
+                  12.83744
+                ],
+                [
+                  101.71775,
+                  12.83779
+                ],
+                [
+                  101.70473,
+                  12.85887
+                ],
+                [
+                  101.70388,
+                  12.86356
+                ],
+                [
+                  101.70648,
+                  12.86989
+                ],
+                [
+                  101.71011,
+                  12.8674
+                ],
+                [
+                  101.71134,
+                  12.86865
+                ],
+                [
+                  101.70747,
+                  12.88862
+                ],
+                [
+                  101.71343,
+                  12.90067
+                ],
+                [
+                  101.71175,
+                  12.90054
+                ],
+                [
+                  101.71024,
+                  12.90232
+                ],
+                [
+                  101.7091,
+                  12.90766
+                ],
+                [
+                  101.70639,
+                  12.90904
+                ],
+                [
+                  101.70259,
+                  12.90848
+                ],
+                [
+                  101.70028,
+                  12.91138
+                ],
+                [
+                  101.70128,
+                  12.91221
+                ],
+                [
+                  101.69998,
+                  12.9134
+                ],
+                [
+                  101.69946,
+                  12.91668
+                ],
+                [
+                  101.6967,
+                  12.91782
+                ],
+                [
+                  101.6982,
+                  12.91963
+                ],
+                [
+                  101.6963,
+                  12.92178
+                ],
+                [
+                  101.69756,
+                  12.92333
+                ],
+                [
+                  101.69631,
+                  12.92684
+                ],
+                [
+                  101.69759,
+                  12.92664
+                ],
+                [
+                  101.69598,
+                  12.92851
+                ],
+                [
+                  101.69744,
+                  12.93233
+                ],
+                [
+                  101.69676,
+                  12.93352
+                ],
+                [
+                  101.69876,
+                  12.93577
+                ],
+                [
+                  101.70556,
+                  12.93588
+                ],
+                [
+                  101.70583,
+                  12.94034
+                ],
+                [
+                  101.71637,
+                  12.94369
+                ],
+                [
+                  101.71804,
+                  12.94756
+                ],
+                [
+                  101.72021,
+                  12.94886
+                ],
+                [
+                  101.72563,
+                  12.94746
+                ],
+                [
+                  101.7289,
+                  12.94827
+                ],
+                [
+                  101.73479,
+                  12.95665
+                ],
+                [
+                  101.73936,
+                  12.95896
+                ],
+                [
+                  101.74064,
+                  12.95809
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "210201",
+          "tambon": "ต.สำนักท้อน",
+          "amphoe": "อ.บ้านฉาง",
+          "province": "จ.ระยอง",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "รพ.สต.บ้านชากหมาก",
+          "latitude": 12.796795,
+          "longitude": 101.027664,
+          "sum_rainfall_mm": 231.4,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  101.09203,
+                  12.80496
+                ],
+                [
+                  101.09132,
+                  12.80275
+                ],
+                [
+                  101.0838,
+                  12.79941
+                ],
+                [
+                  101.08273,
+                  12.79706
+                ],
+                [
+                  101.07564,
+                  12.79163
+                ],
+                [
+                  101.06937,
+                  12.78872
+                ],
+                [
+                  101.06298,
+                  12.78796
+                ],
+                [
+                  101.05832,
+                  12.78286
+                ],
+                [
+                  101.05384,
+                  12.77151
+                ],
+                [
+                  101.05875,
+                  12.76432
+                ],
+                [
+                  101.06063,
+                  12.75858
+                ],
+                [
+                  101.0604,
+                  12.75355
+                ],
+                [
+                  101.05836,
+                  12.74903
+                ],
+                [
+                  101.05224,
+                  12.74179
+                ],
+                [
+                  101.04802,
+                  12.73883
+                ],
+                [
+                  101.04635,
+                  12.73592
+                ],
+                [
+                  101.03961,
+                  12.73429
+                ],
+                [
+                  101.03779,
+                  12.728
+                ],
+                [
+                  101.0294,
+                  12.72409
+                ],
+                [
+                  101.02931,
+                  12.71184
+                ],
+                [
+                  100.98533,
+                  12.69508
+                ],
+                [
+                  100.98758,
+                  12.69781
+                ],
+                [
+                  100.98628,
+                  12.69964
+                ],
+                [
+                  100.98946,
+                  12.70578
+                ],
+                [
+                  100.99,
+                  12.70933
+                ],
+                [
+                  100.99447,
+                  12.71468
+                ],
+                [
+                  100.99248,
+                  12.72048
+                ],
+                [
+                  100.99294,
+                  12.72189
+                ],
+                [
+                  100.99109,
+                  12.72284
+                ],
+                [
+                  100.99046,
+                  12.72596
+                ],
+                [
+                  101.00309,
+                  12.73302
+                ],
+                [
+                  101.00325,
+                  12.73873
+                ],
+                [
+                  101.00808,
+                  12.74581
+                ],
+                [
+                  101.00842,
+                  12.7512
+                ],
+                [
+                  101.01172,
+                  12.75363
+                ],
+                [
+                  101.01209,
+                  12.7557
+                ],
+                [
+                  101.0146,
+                  12.75852
+                ],
+                [
+                  101.0145,
+                  12.76108
+                ],
+                [
+                  101.01251,
+                  12.76189
+                ],
+                [
+                  101.01206,
+                  12.76638
+                ],
+                [
+                  101.01246,
+                  12.77023
+                ],
+                [
+                  101.01437,
+                  12.77243
+                ],
+                [
+                  101.01329,
+                  12.786
+                ],
+                [
+                  101.01885,
+                  12.7982
+                ],
+                [
+                  101.0252,
+                  12.80137
+                ],
+                [
+                  101.02928,
+                  12.80204
+                ],
+                [
+                  101.03143,
+                  12.80898
+                ],
+                [
+                  101.03601,
+                  12.811
+                ],
+                [
+                  101.03749,
+                  12.81282
+                ],
+                [
+                  101.04409,
+                  12.81122
+                ],
+                [
+                  101.05147,
+                  12.81472
+                ],
+                [
+                  101.05295,
+                  12.81781
+                ],
+                [
+                  101.06074,
+                  12.81735
+                ],
+                [
+                  101.06488,
+                  12.81977
+                ],
+                [
+                  101.06821,
+                  12.8198
+                ],
+                [
+                  101.07104,
+                  12.81608
+                ],
+                [
+                  101.07653,
+                  12.8124
+                ],
+                [
+                  101.09203,
+                  12.80496
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "270502",
+          "tambon": "ต.ท่าเกวียน",
+          "amphoe": "อ.วัฒนานคร",
+          "province": "จ.สระแก้ว",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "อบต.ท่าเกวียน",
+          "latitude": 13.68734,
+          "longitude": 102.28413,
+          "sum_rainfall_mm": 197.8,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  102.33463,
+                  13.64212
+                ],
+                [
+                  102.32911,
+                  13.64143
+                ],
+                [
+                  102.32511,
+                  13.63895
+                ],
+                [
+                  102.32163,
+                  13.6391
+                ],
+                [
+                  102.31226,
+                  13.64445
+                ],
+                [
+                  102.30642,
+                  13.64471
+                ],
+                [
+                  102.30447,
+                  13.64328
+                ],
+                [
+                  102.3012,
+                  13.64297
+                ],
+                [
+                  102.29543,
+                  13.64453
+                ],
+                [
+                  102.29257,
+                  13.64108
+                ],
+                [
+                  102.28656,
+                  13.63817
+                ],
+                [
+                  102.28486,
+                  13.63409
+                ],
+                [
+                  102.27182,
+                  13.62604
+                ],
+                [
+                  102.27036,
+                  13.62394
+                ],
+                [
+                  102.26511,
+                  13.62267
+                ],
+                [
+                  102.26054,
+                  13.61739
+                ],
+                [
+                  102.25855,
+                  13.61665
+                ],
+                [
+                  102.25054,
+                  13.62244
+                ],
+                [
+                  102.24787,
+                  13.62164
+                ],
+                [
+                  102.24624,
+                  13.62342
+                ],
+                [
+                  102.23837,
+                  13.62334
+                ],
+                [
+                  102.22566,
+                  13.62531
+                ],
+                [
+                  102.22105,
+                  13.62916
+                ],
+                [
+                  102.21659,
+                  13.62878
+                ],
+                [
+                  102.2097,
+                  13.62447
+                ],
+                [
+                  102.20955,
+                  13.62708
+                ],
+                [
+                  102.20844,
+                  13.62791
+                ],
+                [
+                  102.20529,
+                  13.62714
+                ],
+                [
+                  102.20301,
+                  13.62822
+                ],
+                [
+                  102.20118,
+                  13.62729
+                ],
+                [
+                  102.19968,
+                  13.62881
+                ],
+                [
+                  102.19561,
+                  13.62418
+                ],
+                [
+                  102.19187,
+                  13.62385
+                ],
+                [
+                  102.19239,
+                  13.6277
+                ],
+                [
+                  102.18451,
+                  13.63154
+                ],
+                [
+                  102.1818,
+                  13.63651
+                ],
+                [
+                  102.17885,
+                  13.65016
+                ],
+                [
+                  102.17657,
+                  13.6525
+                ],
+                [
+                  102.17772,
+                  13.65541
+                ],
+                [
+                  102.17641,
+                  13.65638
+                ],
+                [
+                  102.17758,
+                  13.65819
+                ],
+                [
+                  102.1753,
+                  13.65858
+                ],
+                [
+                  102.1722,
+                  13.65578
+                ],
+                [
+                  102.17043,
+                  13.65952
+                ],
+                [
+                  102.16857,
+                  13.65823
+                ],
+                [
+                  102.16571,
+                  13.65983
+                ],
+                [
+                  102.1664,
+                  13.66084
+                ],
+                [
+                  102.17451,
+                  13.66099
+                ],
+                [
+                  102.17428,
+                  13.66345
+                ],
+                [
+                  102.17164,
+                  13.66455
+                ],
+                [
+                  102.17337,
+                  13.66654
+                ],
+                [
+                  102.17544,
+                  13.66685
+                ],
+                [
+                  102.17371,
+                  13.66816
+                ],
+                [
+                  102.17472,
+                  13.66911
+                ],
+                [
+                  102.17482,
+                  13.67206
+                ],
+                [
+                  102.17638,
+                  13.67414
+                ],
+                [
+                  102.18017,
+                  13.67379
+                ],
+                [
+                  102.17593,
+                  13.67768
+                ],
+                [
+                  102.17699,
+                  13.68205
+                ],
+                [
+                  102.1725,
+                  13.68643
+                ],
+                [
+                  102.17135,
+                  13.69092
+                ],
+                [
+                  102.16919,
+                  13.69362
+                ],
+                [
+                  102.17318,
+                  13.69323
+                ],
+                [
+                  102.17835,
+                  13.69098
+                ],
+                [
+                  102.18899,
+                  13.68013
+                ],
+                [
+                  102.19958,
+                  13.67457
+                ],
+                [
+                  102.2044,
+                  13.67363
+                ],
+                [
+                  102.20926,
+                  13.68001
+                ],
+                [
+                  102.21998,
+                  13.68513
+                ],
+                [
+                  102.22881,
+                  13.69766
+                ],
+                [
+                  102.23788,
+                  13.70452
+                ],
+                [
+                  102.24307,
+                  13.71172
+                ],
+                [
+                  102.2537,
+                  13.71032
+                ],
+                [
+                  102.26322,
+                  13.70667
+                ],
+                [
+                  102.27355,
+                  13.7048
+                ],
+                [
+                  102.29742,
+                  13.70283
+                ],
+                [
+                  102.30109,
+                  13.70354
+                ],
+                [
+                  102.30452,
+                  13.70676
+                ],
+                [
+                  102.30914,
+                  13.70943
+                ],
+                [
+                  102.31169,
+                  13.70964
+                ],
+                [
+                  102.31271,
+                  13.71153
+                ],
+                [
+                  102.31533,
+                  13.71267
+                ],
+                [
+                  102.32547,
+                  13.70307
+                ],
+                [
+                  102.33475,
+                  13.68501
+                ],
+                [
+                  102.33568,
+                  13.67528
+                ],
+                [
+                  102.33253,
+                  13.6593
+                ],
+                [
+                  102.33341,
+                  13.64405
+                ],
+                [
+                  102.33463,
+                  13.64212
                 ]
               ]
             ]
@@ -11205,7 +21861,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 13.85454,
           "longitude": 102.377483,
           "sum_rainfall_mm": 174.0,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -11582,6 +22238,226 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
+          "geocode": "270601",
+          "tambon": "ต.อรัญประเทศ",
+          "amphoe": "อ.อรัญประเทศ",
+          "province": "จ.สระแก้ว",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "บ้านฟากห้วย",
+          "latitude": 13.684085,
+          "longitude": 102.501103,
+          "sum_rainfall_mm": 218.0,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  102.49647,
+                  13.7012
+                ],
+                [
+                  102.55087,
+                  13.66401
+                ],
+                [
+                  102.55045,
+                  13.662
+                ],
+                [
+                  102.54852,
+                  13.66008
+                ],
+                [
+                  102.54634,
+                  13.66078
+                ],
+                [
+                  102.54459,
+                  13.65968
+                ],
+                [
+                  102.54303,
+                  13.66123
+                ],
+                [
+                  102.5412,
+                  13.6606
+                ],
+                [
+                  102.54076,
+                  13.66166
+                ],
+                [
+                  102.5341,
+                  13.66298
+                ],
+                [
+                  102.5302,
+                  13.66709
+                ],
+                [
+                  102.52505,
+                  13.66725
+                ],
+                [
+                  102.52202,
+                  13.66854
+                ],
+                [
+                  102.52224,
+                  13.66989
+                ],
+                [
+                  102.51949,
+                  13.6726
+                ],
+                [
+                  102.51534,
+                  13.67039
+                ],
+                [
+                  102.51376,
+                  13.67122
+                ],
+                [
+                  102.5144,
+                  13.67297
+                ],
+                [
+                  102.51133,
+                  13.67278
+                ],
+                [
+                  102.50998,
+                  13.67404
+                ],
+                [
+                  102.5056,
+                  13.67475
+                ],
+                [
+                  102.50255,
+                  13.67883
+                ],
+                [
+                  102.50396,
+                  13.6814
+                ],
+                [
+                  102.50169,
+                  13.68161
+                ],
+                [
+                  102.50089,
+                  13.68417
+                ],
+                [
+                  102.49824,
+                  13.68339
+                ],
+                [
+                  102.49752,
+                  13.6887
+                ],
+                [
+                  102.49493,
+                  13.69008
+                ],
+                [
+                  102.49281,
+                  13.69324
+                ],
+                [
+                  102.49012,
+                  13.69323
+                ],
+                [
+                  102.48851,
+                  13.69614
+                ],
+                [
+                  102.49089,
+                  13.70219
+                ],
+                [
+                  102.49408,
+                  13.70284
+                ],
+                [
+                  102.49647,
+                  13.7012
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "104603",
+          "tambon": "ต.บางขัน",
+          "amphoe": "อ.คลองสามวา",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "ปตร.คลองสามวา",
+          "latitude": 13.85954,
+          "longitude": 100.72909,
+          "sum_rainfall_mm": 133.5,
+          "observed_at": "2026-09-24T17:00:00+07:00"
+        },
+        {
+          "geocode": "101001",
+          "tambon": "ต.มีนบุรี",
+          "amphoe": "อ.มีนบุรี",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "สนข.มีนบุรี",
+          "latitude": 13.8136,
+          "longitude": 100.73122,
+          "sum_rainfall_mm": 117.0,
+          "observed_at": "2026-09-24T17:00:00+07:00"
+        },
+        {
+          "geocode": "101002",
+          "tambon": "ต.แสนแสบ",
+          "amphoe": "อ.มีนบุรี",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "ปตร.ประชาร่วมใจ",
+          "latitude": 13.8212,
+          "longitude": 100.74717,
+          "sum_rainfall_mm": 131.0,
+          "observed_at": "2026-09-24T17:00:00+07:00"
+        },
+        {
+          "geocode": "101101",
+          "tambon": "ต.ลาดกระบัง",
+          "amphoe": "อ.ลาดกระบัง",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "คลองลำปลาทิว ลาดกระบัง",
+          "latitude": 13.7407,
+          "longitude": 100.79468,
+          "sum_rainfall_mm": 214.0,
+          "observed_at": "2026-09-24T17:00:00+07:00"
+        },
+        {
+          "geocode": "104401",
+          "tambon": "ต.สะพานสูง",
+          "amphoe": "อ.สะพานสูง",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "สนข.สะพานสูง",
+          "latitude": 13.76881,
+          "longitude": 100.68545,
+          "sum_rainfall_mm": 123.5,
+          "observed_at": "2026-09-24T17:00:00+07:00"
+        },
+        {
           "geocode": "130404",
           "tambon": "ต.บึงชำอ้อ",
           "amphoe": "อ.หนองเสือ",
@@ -11591,8 +22467,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านน้อยสว่าง",
           "latitude": 14.1652,
           "longitude": 100.77855,
-          "sum_rainfall_mm": 136.2,
-          "observed_at": "2026-09-24T14:00:00+07:00",
+          "sum_rainfall_mm": 183.2,
+          "observed_at": "2026-09-24T17:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -11623,15 +22499,297 @@ window.IEAT_THAIWATER_DATA = {
               ]
             ]
           }
+        },
+        {
+          "geocode": "110602",
+          "tambon": "ต.ศีรษะจรเข้น้อย",
+          "amphoe": "อ.บางเสาธง",
+          "province": "จ.สมุทรปราการ",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "อบต.ศีรษะจรเข้น้อย",
+          "latitude": 13.67777,
+          "longitude": 100.7945,
+          "sum_rainfall_mm": 191.40000000000003,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.82831,
+                  13.70177
+                ],
+                [
+                  100.81908,
+                  13.68513
+                ],
+                [
+                  100.81696,
+                  13.68306
+                ],
+                [
+                  100.82308,
+                  13.67525
+                ],
+                [
+                  100.8224,
+                  13.67311
+                ],
+                [
+                  100.8238,
+                  13.6673
+                ],
+                [
+                  100.81877,
+                  13.66338
+                ],
+                [
+                  100.80489,
+                  13.66162
+                ],
+                [
+                  100.80152,
+                  13.65877
+                ],
+                [
+                  100.7993,
+                  13.66027
+                ],
+                [
+                  100.79697,
+                  13.65996
+                ],
+                [
+                  100.79645,
+                  13.6638
+                ],
+                [
+                  100.80028,
+                  13.6696
+                ],
+                [
+                  100.80204,
+                  13.67534
+                ],
+                [
+                  100.79345,
+                  13.67773
+                ],
+                [
+                  100.77212,
+                  13.67375
+                ],
+                [
+                  100.76303,
+                  13.6748
+                ],
+                [
+                  100.77864,
+                  13.70153
+                ],
+                [
+                  100.78518,
+                  13.70682
+                ],
+                [
+                  100.78182,
+                  13.70986
+                ],
+                [
+                  100.78465,
+                  13.71649
+                ],
+                [
+                  100.78871,
+                  13.71627
+                ],
+                [
+                  100.80111,
+                  13.71215
+                ],
+                [
+                  100.82831,
+                  13.70177
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "110603",
+          "tambon": "ต.ศีรษะจรเข้ใหญ่",
+          "amphoe": "อ.บางเสาธง",
+          "province": "จ.สมุทรปราการ",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "คลองจระเข้ใหญ่ บางเสาธง (วัดศรีวารีน้อย)",
+          "latitude": 13.66949,
+          "longitude": 100.80058,
+          "sum_rainfall_mm": 177.4,
+          "observed_at": "2026-09-24T17:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.8238,
+                  13.6673
+                ],
+                [
+                  100.82663,
+                  13.66573
+                ],
+                [
+                  100.81938,
+                  13.64767
+                ],
+                [
+                  100.8156,
+                  13.63094
+                ],
+                [
+                  100.81294,
+                  13.62796
+                ],
+                [
+                  100.7991,
+                  13.61931
+                ],
+                [
+                  100.79839,
+                  13.61718
+                ],
+                [
+                  100.8009,
+                  13.60951
+                ],
+                [
+                  100.80037,
+                  13.60468
+                ],
+                [
+                  100.7972,
+                  13.60118
+                ],
+                [
+                  100.79893,
+                  13.59092
+                ],
+                [
+                  100.7957,
+                  13.59125
+                ],
+                [
+                  100.79403,
+                  13.58893
+                ],
+                [
+                  100.79091,
+                  13.5891
+                ],
+                [
+                  100.78878,
+                  13.59284
+                ],
+                [
+                  100.77925,
+                  13.59487
+                ],
+                [
+                  100.77947,
+                  13.59903
+                ],
+                [
+                  100.7821,
+                  13.60201
+                ],
+                [
+                  100.78274,
+                  13.60677
+                ],
+                [
+                  100.78603,
+                  13.61496
+                ],
+                [
+                  100.78405,
+                  13.62223
+                ],
+                [
+                  100.78491,
+                  13.63074
+                ],
+                [
+                  100.78312,
+                  13.64766
+                ],
+                [
+                  100.78712,
+                  13.6562
+                ],
+                [
+                  100.79428,
+                  13.6662
+                ],
+                [
+                  100.79086,
+                  13.67371
+                ],
+                [
+                  100.79065,
+                  13.67716
+                ],
+                [
+                  100.79345,
+                  13.67773
+                ],
+                [
+                  100.80204,
+                  13.67534
+                ],
+                [
+                  100.80028,
+                  13.6696
+                ],
+                [
+                  100.79645,
+                  13.6638
+                ],
+                [
+                  100.79697,
+                  13.65996
+                ],
+                [
+                  100.7993,
+                  13.66027
+                ],
+                [
+                  100.80152,
+                  13.65877
+                ],
+                [
+                  100.80489,
+                  13.66162
+                ],
+                [
+                  100.81877,
+                  13.66338
+                ],
+                [
+                  100.8238,
+                  13.6673
+                ]
+              ]
+            ]
+          }
         }
       ],
-      "risk_map": "https://api.hii.or.th/v2/proxy-image/3days_riskmap_24_09_2026.png?1790276895",
+      "risk_map": "https://api.hii.or.th/v2/proxy-image/3days_riskmap_24_09_2026.png?1790287637",
       "source_url": "https://api.hii.or.th/v2/4UQaYnf0Bx4fXPYyCdDRbqHyXH9Ixvd2nVUjaN1cLBY=/warning/flashflood-24h"
     },
     "48h": {
       "period": "48h",
       "date": "2026-09-25",
-      "time": "02:00:00",
+      "time": "05:00:00",
       "type": "พื้นที่เฝ้าระวังพิเศษ ล่วงหน้า 48 ชม. เสี่ยงน้ำท่วมจากฝนตกสะสม",
       "areas": [
         {
@@ -11644,8 +22802,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ที่ทำการอุทยานแห่งชาติแม่วงก์",
           "latitude": 16.039022,
           "longitude": 99.233345,
-          "sum_rainfall_mm": 100.60000000000001,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 102.8,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -12770,6 +23928,133 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
+          "geocode": "180102",
+          "tambon": "ต.บ้านกล้วย",
+          "amphoe": "อ.เมืองชัยนาท",
+          "province": "จ.ชัยนาท",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "เหนือปตร.มหาราช",
+          "latitude": 15.15892,
+          "longitude": 100.17329,
+          "sum_rainfall_mm": 106.8,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.17551,
+                  15.16157
+                ],
+                [
+                  100.17672,
+                  15.15753
+                ],
+                [
+                  100.17063,
+                  15.15416
+                ],
+                [
+                  100.16098,
+                  15.15576
+                ],
+                [
+                  100.15423,
+                  15.16239
+                ],
+                [
+                  100.14608,
+                  15.16613
+                ],
+                [
+                  100.14214,
+                  15.16669
+                ],
+                [
+                  100.12657,
+                  15.16504
+                ],
+                [
+                  100.12535,
+                  15.16686
+                ],
+                [
+                  100.12531,
+                  15.17015
+                ],
+                [
+                  100.12895,
+                  15.1708
+                ],
+                [
+                  100.13261,
+                  15.17474
+                ],
+                [
+                  100.13151,
+                  15.17808
+                ],
+                [
+                  100.13281,
+                  15.1817
+                ],
+                [
+                  100.13275,
+                  15.18589
+                ],
+                [
+                  100.13036,
+                  15.18865
+                ],
+                [
+                  100.1517,
+                  15.20046
+                ],
+                [
+                  100.1799,
+                  15.21015
+                ],
+                [
+                  100.17965,
+                  15.20095
+                ],
+                [
+                  100.17609,
+                  15.18941
+                ],
+                [
+                  100.17563,
+                  15.18144
+                ],
+                [
+                  100.17339,
+                  15.17418
+                ],
+                [
+                  100.17151,
+                  15.17198
+                ],
+                [
+                  100.1752,
+                  15.16846
+                ],
+                [
+                  100.17284,
+                  15.16467
+                ],
+                [
+                  100.17313,
+                  15.16137
+                ],
+                [
+                  100.17551,
+                  15.16157
+                ]
+              ]
+            ]
+          }
+        },
+        {
           "geocode": "180302",
           "tambon": "ต.มะขามเฒ่า",
           "amphoe": "อ.วัดสิงห์",
@@ -12779,8 +24064,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "T.ปตร.มะขามเฒ่า",
           "latitude": 15.222455,
           "longitude": 100.062221,
-          "sum_rainfall_mm": 108.0,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 126.0,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -12966,8 +24251,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.สรรพยา",
           "latitude": 15.13217,
           "longitude": 100.25129,
-          "sum_rainfall_mm": 116.19999999999999,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 131.8,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -13080,6 +24365,405 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
+          "geocode": "600701",
+          "tambon": "ต.ตาคลี",
+          "amphoe": "อ.ตาคลี",
+          "province": "จ.นครสวรรค์",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "อบต.ตาคลี",
+          "latitude": 15.29119,
+          "longitude": 100.38288,
+          "sum_rainfall_mm": 102.0,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.40324,
+                  15.32947
+                ],
+                [
+                  100.40114,
+                  15.32531
+                ],
+                [
+                  100.40182,
+                  15.32017
+                ],
+                [
+                  100.39807,
+                  15.31853
+                ],
+                [
+                  100.39745,
+                  15.3146
+                ],
+                [
+                  100.40482,
+                  15.31223
+                ],
+                [
+                  100.40943,
+                  15.30722
+                ],
+                [
+                  100.41916,
+                  15.30751
+                ],
+                [
+                  100.42605,
+                  15.30113
+                ],
+                [
+                  100.42723,
+                  15.29838
+                ],
+                [
+                  100.42805,
+                  15.2938
+                ],
+                [
+                  100.42237,
+                  15.2869
+                ],
+                [
+                  100.4223,
+                  15.27941
+                ],
+                [
+                  100.42081,
+                  15.27714
+                ],
+                [
+                  100.42042,
+                  15.2692
+                ],
+                [
+                  100.41656,
+                  15.26376
+                ],
+                [
+                  100.41897,
+                  15.2622
+                ],
+                [
+                  100.41621,
+                  15.25834
+                ],
+                [
+                  100.4214,
+                  15.2514
+                ],
+                [
+                  100.42135,
+                  15.24658
+                ],
+                [
+                  100.41952,
+                  15.24649
+                ],
+                [
+                  100.41813,
+                  15.24457
+                ],
+                [
+                  100.41203,
+                  15.24176
+                ],
+                [
+                  100.40388,
+                  15.24418
+                ],
+                [
+                  100.40248,
+                  15.24206
+                ],
+                [
+                  100.40294,
+                  15.23964
+                ],
+                [
+                  100.40152,
+                  15.23373
+                ],
+                [
+                  100.39578,
+                  15.23011
+                ],
+                [
+                  100.39349,
+                  15.23006
+                ],
+                [
+                  100.38883,
+                  15.23262
+                ],
+                [
+                  100.38718,
+                  15.23131
+                ],
+                [
+                  100.38731,
+                  15.22988
+                ],
+                [
+                  100.39009,
+                  15.22703
+                ],
+                [
+                  100.39036,
+                  15.22291
+                ],
+                [
+                  100.39482,
+                  15.22053
+                ],
+                [
+                  100.39401,
+                  15.21814
+                ],
+                [
+                  100.39507,
+                  15.21438
+                ],
+                [
+                  100.3978,
+                  15.21278
+                ],
+                [
+                  100.39401,
+                  15.20642
+                ],
+                [
+                  100.38917,
+                  15.1906
+                ],
+                [
+                  100.38284,
+                  15.19081
+                ],
+                [
+                  100.37749,
+                  15.18143
+                ],
+                [
+                  100.37443,
+                  15.17841
+                ],
+                [
+                  100.36202,
+                  15.18703
+                ],
+                [
+                  100.35467,
+                  15.19393
+                ],
+                [
+                  100.35257,
+                  15.20015
+                ],
+                [
+                  100.35605,
+                  15.20693
+                ],
+                [
+                  100.33677,
+                  15.22592
+                ],
+                [
+                  100.27886,
+                  15.24811
+                ],
+                [
+                  100.27501,
+                  15.25146
+                ],
+                [
+                  100.26972,
+                  15.25162
+                ],
+                [
+                  100.26923,
+                  15.2593
+                ],
+                [
+                  100.26547,
+                  15.26997
+                ],
+                [
+                  100.26576,
+                  15.27453
+                ],
+                [
+                  100.26266,
+                  15.27725
+                ],
+                [
+                  100.26353,
+                  15.28694
+                ],
+                [
+                  100.25874,
+                  15.29072
+                ],
+                [
+                  100.25415,
+                  15.291
+                ],
+                [
+                  100.25467,
+                  15.29795
+                ],
+                [
+                  100.25117,
+                  15.30303
+                ],
+                [
+                  100.25202,
+                  15.30632
+                ],
+                [
+                  100.25922,
+                  15.31225
+                ],
+                [
+                  100.26346,
+                  15.31431
+                ],
+                [
+                  100.26484,
+                  15.31909
+                ],
+                [
+                  100.26406,
+                  15.32649
+                ],
+                [
+                  100.26926,
+                  15.32585
+                ],
+                [
+                  100.27631,
+                  15.32857
+                ],
+                [
+                  100.27883,
+                  15.32723
+                ],
+                [
+                  100.28065,
+                  15.3222
+                ],
+                [
+                  100.29011,
+                  15.31777
+                ],
+                [
+                  100.30711,
+                  15.31682
+                ],
+                [
+                  100.31181,
+                  15.31301
+                ],
+                [
+                  100.31497,
+                  15.3141
+                ],
+                [
+                  100.31786,
+                  15.31218
+                ],
+                [
+                  100.32535,
+                  15.31649
+                ],
+                [
+                  100.34627,
+                  15.31896
+                ],
+                [
+                  100.34844,
+                  15.32382
+                ],
+                [
+                  100.34707,
+                  15.3273
+                ],
+                [
+                  100.34832,
+                  15.3318
+                ],
+                [
+                  100.35492,
+                  15.33388
+                ],
+                [
+                  100.35838,
+                  15.33651
+                ],
+                [
+                  100.36072,
+                  15.33649
+                ],
+                [
+                  100.36244,
+                  15.33909
+                ],
+                [
+                  100.36313,
+                  15.343
+                ],
+                [
+                  100.36497,
+                  15.34344
+                ],
+                [
+                  100.36648,
+                  15.34571
+                ],
+                [
+                  100.37089,
+                  15.34628
+                ],
+                [
+                  100.37268,
+                  15.34544
+                ],
+                [
+                  100.37759,
+                  15.34686
+                ],
+                [
+                  100.38333,
+                  15.34484
+                ],
+                [
+                  100.38713,
+                  15.33581
+                ],
+                [
+                  100.39007,
+                  15.33509
+                ],
+                [
+                  100.39564,
+                  15.32836
+                ],
+                [
+                  100.40046,
+                  15.33125
+                ],
+                [
+                  100.40324,
+                  15.32947
+                ]
+              ]
+            ]
+          }
+        },
+        {
           "geocode": "140201",
           "tambon": "ต.ท่าเรือ",
           "amphoe": "อ.ท่าเรือ",
@@ -13089,8 +24773,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ท่าเรือ",
           "latitude": 14.56014,
           "longitude": 100.71987,
-          "sum_rainfall_mm": 110.19999999999999,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 147.4,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -13163,6 +24847,117 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
+          "geocode": "140203",
+          "tambon": "ต.ท่าหลวง",
+          "amphoe": "อ.ท่าเรือ",
+          "province": "จ.พระนครศรีอยุธยา",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "เหนือปตร.พระนารายน์",
+          "latitude": 14.5583,
+          "longitude": 100.76205,
+          "sum_rainfall_mm": 138.0,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.78074,
+                  14.56733
+                ],
+                [
+                  100.78239,
+                  14.5664
+                ],
+                [
+                  100.78137,
+                  14.56108
+                ],
+                [
+                  100.77743,
+                  14.55642
+                ],
+                [
+                  100.77556,
+                  14.55041
+                ],
+                [
+                  100.77941,
+                  14.53918
+                ],
+                [
+                  100.77854,
+                  14.53033
+                ],
+                [
+                  100.7752,
+                  14.52686
+                ],
+                [
+                  100.77123,
+                  14.52703
+                ],
+                [
+                  100.76949,
+                  14.52502
+                ],
+                [
+                  100.76749,
+                  14.52482
+                ],
+                [
+                  100.755,
+                  14.53742
+                ],
+                [
+                  100.74808,
+                  14.54276
+                ],
+                [
+                  100.74692,
+                  14.54522
+                ],
+                [
+                  100.74734,
+                  14.54919
+                ],
+                [
+                  100.75297,
+                  14.56227
+                ],
+                [
+                  100.75469,
+                  14.56345
+                ],
+                [
+                  100.75643,
+                  14.56109
+                ],
+                [
+                  100.75757,
+                  14.56122
+                ],
+                [
+                  100.76271,
+                  14.56855
+                ],
+                [
+                  100.76939,
+                  14.56565
+                ],
+                [
+                  100.77438,
+                  14.56716
+                ],
+                [
+                  100.78074,
+                  14.56733
+                ]
+              ]
+            ]
+          }
+        },
+        {
           "geocode": "160903",
           "tambon": "ต.หนองมะค่า",
           "amphoe": "อ.โคกเจริญ",
@@ -13172,8 +24967,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.หนองมะค่า",
           "latitude": 15.4321,
           "longitude": 100.9245,
-          "sum_rainfall_mm": 132.40000000000003,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 137.6,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -13643,8 +25438,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": " สะพานข้ามคลองโคน",
           "latitude": 13.3319,
           "longitude": 99.96896,
-          "sum_rainfall_mm": 129.0,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 130.2,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -13851,11 +25646,11 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.สระบุรี",
           "region_id": "1",
           "region_name": "ภาคกลาง",
-          "station": "อบต.วังม่วง",
-          "latitude": 14.84867,
-          "longitude": 101.14549,
-          "sum_rainfall_mm": 143.79999999999998,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "station": "ฝายคลองสุคต",
+          "latitude": 14.863621,
+          "longitude": 101.119957,
+          "sum_rainfall_mm": 104.0,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -14188,6 +25983,540 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
+          "geocode": "190301",
+          "tambon": "ต.หนองแค",
+          "amphoe": "อ.หนองแค",
+          "province": "จ.สระบุรี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "ท้ายปตร.พระศรีศิลป์",
+          "latitude": 14.32729,
+          "longitude": 100.87117,
+          "sum_rainfall_mm": 118.80000000000001,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.8798,
+                  14.34303
+                ],
+                [
+                  100.88555,
+                  14.33368
+                ],
+                [
+                  100.88176,
+                  14.31998
+                ],
+                [
+                  100.85126,
+                  14.33653
+                ],
+                [
+                  100.84981,
+                  14.3451
+                ],
+                [
+                  100.8718,
+                  14.35254
+                ],
+                [
+                  100.8798,
+                  14.34303
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "221003",
+          "tambon": "ต.ตะเคียนทอง",
+          "amphoe": "อ.เขาคิชฌกูฏ",
+          "province": "จ.จันทบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "ทต.ตะเคียนทอง",
+          "latitude": 12.9131,
+          "longitude": 102.0815,
+          "sum_rainfall_mm": 154.8,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  102.18191,
+                  12.95855
+                ],
+                [
+                  102.18626,
+                  12.95243
+                ],
+                [
+                  102.19189,
+                  12.95009
+                ],
+                [
+                  102.19171,
+                  12.94263
+                ],
+                [
+                  102.19553,
+                  12.94015
+                ],
+                [
+                  102.20159,
+                  12.93275
+                ],
+                [
+                  102.20236,
+                  12.92658
+                ],
+                [
+                  102.20566,
+                  12.92204
+                ],
+                [
+                  102.21705,
+                  12.91755
+                ],
+                [
+                  102.21899,
+                  12.91542
+                ],
+                [
+                  102.22037,
+                  12.91075
+                ],
+                [
+                  102.23076,
+                  12.90214
+                ],
+                [
+                  102.23159,
+                  12.89945
+                ],
+                [
+                  102.23064,
+                  12.89646
+                ],
+                [
+                  102.23247,
+                  12.89358
+                ],
+                [
+                  102.23208,
+                  12.89141
+                ],
+                [
+                  102.23327,
+                  12.88867
+                ],
+                [
+                  102.23355,
+                  12.88531
+                ],
+                [
+                  102.19422,
+                  12.86776
+                ],
+                [
+                  102.19335,
+                  12.85985
+                ],
+                [
+                  102.19425,
+                  12.84392
+                ],
+                [
+                  102.19305,
+                  12.83427
+                ],
+                [
+                  102.18207,
+                  12.84311
+                ],
+                [
+                  102.17216,
+                  12.84899
+                ],
+                [
+                  102.16097,
+                  12.85379
+                ],
+                [
+                  102.15661,
+                  12.85329
+                ],
+                [
+                  102.13791,
+                  12.85805
+                ],
+                [
+                  102.12701,
+                  12.85557
+                ],
+                [
+                  102.11929,
+                  12.85658
+                ],
+                [
+                  102.11046,
+                  12.85538
+                ],
+                [
+                  102.10062,
+                  12.85188
+                ],
+                [
+                  102.09842,
+                  12.85341
+                ],
+                [
+                  102.09044,
+                  12.84841
+                ],
+                [
+                  102.08743,
+                  12.85147
+                ],
+                [
+                  102.08579,
+                  12.8506
+                ],
+                [
+                  102.08387,
+                  12.85227
+                ],
+                [
+                  102.08075,
+                  12.85028
+                ],
+                [
+                  102.07844,
+                  12.85395
+                ],
+                [
+                  102.07537,
+                  12.85315
+                ],
+                [
+                  102.07512,
+                  12.85501
+                ],
+                [
+                  102.07728,
+                  12.85709
+                ],
+                [
+                  102.07326,
+                  12.85717
+                ],
+                [
+                  102.07377,
+                  12.85947
+                ],
+                [
+                  102.07051,
+                  12.86254
+                ],
+                [
+                  102.0709,
+                  12.86675
+                ],
+                [
+                  102.06668,
+                  12.87023
+                ],
+                [
+                  102.06002,
+                  12.87238
+                ],
+                [
+                  102.05823,
+                  12.87254
+                ],
+                [
+                  102.05428,
+                  12.86893
+                ],
+                [
+                  102.05393,
+                  12.86498
+                ],
+                [
+                  102.05195,
+                  12.8627
+                ],
+                [
+                  102.04889,
+                  12.8621
+                ],
+                [
+                  102.04463,
+                  12.86359
+                ],
+                [
+                  102.04081,
+                  12.86083
+                ],
+                [
+                  102.0378,
+                  12.86143
+                ],
+                [
+                  102.03454,
+                  12.86496
+                ],
+                [
+                  102.03243,
+                  12.86506
+                ],
+                [
+                  102.03016,
+                  12.86704
+                ],
+                [
+                  102.02573,
+                  12.86561
+                ],
+                [
+                  102.02217,
+                  12.86708
+                ],
+                [
+                  102.02361,
+                  12.86976
+                ],
+                [
+                  102.02178,
+                  12.8724
+                ],
+                [
+                  102.02198,
+                  12.87421
+                ],
+                [
+                  102.02506,
+                  12.87732
+                ],
+                [
+                  102.02576,
+                  12.88147
+                ],
+                [
+                  102.02932,
+                  12.88589
+                ],
+                [
+                  102.03123,
+                  12.88667
+                ],
+                [
+                  102.03372,
+                  12.88599
+                ],
+                [
+                  102.035,
+                  12.88341
+                ],
+                [
+                  102.04527,
+                  12.88521
+                ],
+                [
+                  102.0488,
+                  12.88315
+                ],
+                [
+                  102.04707,
+                  12.88934
+                ],
+                [
+                  102.04847,
+                  12.89141
+                ],
+                [
+                  102.04763,
+                  12.8942
+                ],
+                [
+                  102.04929,
+                  12.89688
+                ],
+                [
+                  102.05105,
+                  12.89761
+                ],
+                [
+                  102.05328,
+                  12.90212
+                ],
+                [
+                  102.05373,
+                  12.90898
+                ],
+                [
+                  102.05822,
+                  12.91076
+                ],
+                [
+                  102.0593,
+                  12.91376
+                ],
+                [
+                  102.05874,
+                  12.91583
+                ],
+                [
+                  102.05991,
+                  12.91761
+                ],
+                [
+                  102.05895,
+                  12.91902
+                ],
+                [
+                  102.05935,
+                  12.9209
+                ],
+                [
+                  102.06324,
+                  12.92478
+                ],
+                [
+                  102.06155,
+                  12.92653
+                ],
+                [
+                  102.06173,
+                  12.92777
+                ],
+                [
+                  102.06392,
+                  12.92718
+                ],
+                [
+                  102.06808,
+                  12.93013
+                ],
+                [
+                  102.06898,
+                  12.93396
+                ],
+                [
+                  102.07201,
+                  12.93773
+                ],
+                [
+                  102.06717,
+                  12.9462
+                ],
+                [
+                  102.0695,
+                  12.94815
+                ],
+                [
+                  102.07483,
+                  12.94958
+                ],
+                [
+                  102.07579,
+                  12.95522
+                ],
+                [
+                  102.07983,
+                  12.9621
+                ],
+                [
+                  102.08304,
+                  12.96273
+                ],
+                [
+                  102.08608,
+                  12.96168
+                ],
+                [
+                  102.0912,
+                  12.96421
+                ],
+                [
+                  102.1098,
+                  12.96082
+                ],
+                [
+                  102.11307,
+                  12.95948
+                ],
+                [
+                  102.1143,
+                  12.95615
+                ],
+                [
+                  102.11649,
+                  12.95448
+                ],
+                [
+                  102.12173,
+                  12.96357
+                ],
+                [
+                  102.12437,
+                  12.96205
+                ],
+                [
+                  102.13438,
+                  12.96331
+                ],
+                [
+                  102.13441,
+                  12.95963
+                ],
+                [
+                  102.13556,
+                  12.95816
+                ],
+                [
+                  102.14257,
+                  12.95549
+                ],
+                [
+                  102.14981,
+                  12.95546
+                ],
+                [
+                  102.15309,
+                  12.95827
+                ],
+                [
+                  102.16143,
+                  12.95706
+                ],
+                [
+                  102.16446,
+                  12.95543
+                ],
+                [
+                  102.16569,
+                  12.95065
+                ],
+                [
+                  102.16765,
+                  12.95015
+                ],
+                [
+                  102.17109,
+                  12.95095
+                ],
+                [
+                  102.18191,
+                  12.95855
+                ]
+              ]
+            ]
+          }
+        },
+        {
           "geocode": "230404",
           "tambon": "ต.หนองบอน",
           "amphoe": "อ.บ่อไร่",
@@ -14197,8 +26526,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.หนองบอน",
           "latitude": 12.67735,
           "longitude": 102.45936,
-          "sum_rainfall_mm": 183.8,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 187.20000000000002,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -14647,555 +26976,155 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
-          "geocode": "270903",
-          "tambon": "ต.วังทอง",
-          "amphoe": "อ.วังสมบูรณ์",
+          "geocode": "270601",
+          "tambon": "ต.อรัญประเทศ",
+          "amphoe": "อ.อรัญประเทศ",
           "province": "จ.สระแก้ว",
           "region_id": "2",
           "region_name": "ภาคตะวันออก",
-          "station": "ศูนย์ศึกษาการพัฒนาการอนุรักษ์ต้นน้ำลุ่มน้ำบางปะกง",
-          "latitude": 13.351688,
-          "longitude": 101.99863,
-          "sum_rainfall_mm": 152.39999999999998,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "station": "บ้านฟากห้วย",
+          "latitude": 13.684085,
+          "longitude": 102.501103,
+          "sum_rainfall_mm": 151.0,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
                 [
-                  102.13856,
-                  13.39707
+                  102.49647,
+                  13.7012
                 ],
                 [
-                  102.14176,
-                  13.38858
+                  102.55087,
+                  13.66401
                 ],
                 [
-                  102.13747,
-                  13.38249
+                  102.55045,
+                  13.662
                 ],
                 [
-                  102.13944,
-                  13.38017
+                  102.54852,
+                  13.66008
                 ],
                 [
-                  102.14141,
-                  13.37471
+                  102.54634,
+                  13.66078
                 ],
                 [
-                  102.13882,
-                  13.36858
+                  102.54459,
+                  13.65968
                 ],
                 [
-                  102.14501,
-                  13.3552
+                  102.54303,
+                  13.66123
                 ],
                 [
-                  102.1765,
-                  13.34187
+                  102.5412,
+                  13.6606
                 ],
                 [
-                  102.16599,
-                  13.32888
+                  102.54076,
+                  13.66166
                 ],
                 [
-                  102.16506,
-                  13.32417
+                  102.5341,
+                  13.66298
                 ],
                 [
-                  102.15732,
-                  13.32117
+                  102.5302,
+                  13.66709
                 ],
                 [
-                  102.15644,
-                  13.32205
+                  102.52505,
+                  13.66725
                 ],
                 [
-                  102.15466,
-                  13.32014
+                  102.52202,
+                  13.66854
                 ],
                 [
-                  102.15025,
-                  13.31882
+                  102.52224,
+                  13.66989
                 ],
                 [
-                  102.14729,
-                  13.32078
+                  102.51949,
+                  13.6726
                 ],
                 [
-                  102.1472,
-                  13.32206
+                  102.51534,
+                  13.67039
                 ],
                 [
-                  102.1437,
-                  13.32321
+                  102.51376,
+                  13.67122
                 ],
                 [
-                  102.14314,
-                  13.32571
+                  102.5144,
+                  13.67297
                 ],
                 [
-                  102.14198,
-                  13.32546
+                  102.51133,
+                  13.67278
                 ],
                 [
-                  102.14148,
-                  13.32705
+                  102.50998,
+                  13.67404
                 ],
                 [
-                  102.13928,
-                  13.32773
+                  102.5056,
+                  13.67475
                 ],
                 [
-                  102.13895,
-                  13.32941
+                  102.50255,
+                  13.67883
                 ],
                 [
-                  102.13738,
-                  13.33012
+                  102.50396,
+                  13.6814
                 ],
                 [
-                  102.13783,
-                  13.33185
+                  102.50169,
+                  13.68161
                 ],
                 [
-                  102.13625,
-                  13.33314
+                  102.50089,
+                  13.68417
                 ],
                 [
-                  102.13371,
-                  13.33318
+                  102.49824,
+                  13.68339
                 ],
                 [
-                  102.13114,
-                  13.33548
+                  102.49752,
+                  13.6887
                 ],
                 [
-                  102.12764,
-                  13.33436
+                  102.49493,
+                  13.69008
                 ],
                 [
-                  102.12804,
-                  13.33291
+                  102.49281,
+                  13.69324
                 ],
                 [
-                  102.12695,
-                  13.33152
+                  102.49012,
+                  13.69323
                 ],
                 [
-                  102.12772,
-                  13.32918
+                  102.48851,
+                  13.69614
                 ],
                 [
-                  102.12666,
-                  13.32724
+                  102.49089,
+                  13.70219
                 ],
                 [
-                  102.12924,
-                  13.32522
+                  102.49408,
+                  13.70284
                 ],
                 [
-                  102.12741,
-                  13.32093
-                ],
-                [
-                  102.12815,
-                  13.31931
-                ],
-                [
-                  102.12542,
-                  13.31795
-                ],
-                [
-                  102.12551,
-                  13.31356
-                ],
-                [
-                  102.12375,
-                  13.31364
-                ],
-                [
-                  102.1226,
-                  13.31136
-                ],
-                [
-                  102.12417,
-                  13.30979
-                ],
-                [
-                  102.11899,
-                  13.30346
-                ],
-                [
-                  102.11953,
-                  13.30117
-                ],
-                [
-                  102.11825,
-                  13.29919
-                ],
-                [
-                  102.1197,
-                  13.297
-                ],
-                [
-                  102.11981,
-                  13.29265
-                ],
-                [
-                  102.11836,
-                  13.28941
-                ],
-                [
-                  102.11899,
-                  13.28345
-                ],
-                [
-                  102.11777,
-                  13.28218
-                ],
-                [
-                  102.11817,
-                  13.27713
-                ],
-                [
-                  102.11646,
-                  13.27672
-                ],
-                [
-                  102.1159,
-                  13.27438
-                ],
-                [
-                  102.11361,
-                  13.27469
-                ],
-                [
-                  102.11427,
-                  13.27294
-                ],
-                [
-                  102.11296,
-                  13.2724
-                ],
-                [
-                  102.11307,
-                  13.26968
-                ],
-                [
-                  102.1086,
-                  13.26395
-                ],
-                [
-                  102.10292,
-                  13.26114
-                ],
-                [
-                  102.0992,
-                  13.26122
-                ],
-                [
-                  102.09369,
-                  13.25929
-                ],
-                [
-                  102.08882,
-                  13.26028
-                ],
-                [
-                  102.08207,
-                  13.25718
-                ],
-                [
-                  102.07116,
-                  13.25571
-                ],
-                [
-                  102.0678,
-                  13.25223
-                ],
-                [
-                  102.0627,
-                  13.25003
-                ],
-                [
-                  102.06186,
-                  13.24721
-                ],
-                [
-                  102.06419,
-                  13.2467
-                ],
-                [
-                  102.05635,
-                  13.23977
-                ],
-                [
-                  102.04929,
-                  13.23887
-                ],
-                [
-                  102.04375,
-                  13.24167
-                ],
-                [
-                  102.03614,
-                  13.23846
-                ],
-                [
-                  102.03134,
-                  13.23896
-                ],
-                [
-                  102.02833,
-                  13.23657
-                ],
-                [
-                  102.02674,
-                  13.23982
-                ],
-                [
-                  102.02873,
-                  13.24324
-                ],
-                [
-                  102.02846,
-                  13.2482
-                ],
-                [
-                  102.0296,
-                  13.2499
-                ],
-                [
-                  102.0287,
-                  13.25769
-                ],
-                [
-                  102.03023,
-                  13.26091
-                ],
-                [
-                  102.02912,
-                  13.26621
-                ],
-                [
-                  102.03561,
-                  13.28116
-                ],
-                [
-                  102.03384,
-                  13.28505
-                ],
-                [
-                  102.0289,
-                  13.28759
-                ],
-                [
-                  102.02397,
-                  13.28696
-                ],
-                [
-                  102.02129,
-                  13.28888
-                ],
-                [
-                  102.01811,
-                  13.28882
-                ],
-                [
-                  102.01418,
-                  13.29251
-                ],
-                [
-                  102.01278,
-                  13.28913
-                ],
-                [
-                  102.01076,
-                  13.29091
-                ],
-                [
-                  102.00935,
-                  13.29698
-                ],
-                [
-                  102.00164,
-                  13.31652
-                ],
-                [
-                  101.99239,
-                  13.32431
-                ],
-                [
-                  101.98984,
-                  13.33324
-                ],
-                [
-                  101.98573,
-                  13.33917
-                ],
-                [
-                  101.98585,
-                  13.34142
-                ],
-                [
-                  101.98909,
-                  13.34518
-                ],
-                [
-                  101.99013,
-                  13.35334
-                ],
-                [
-                  101.99843,
-                  13.35949
-                ],
-                [
-                  102.00673,
-                  13.36102
-                ],
-                [
-                  102.00976,
-                  13.36433
-                ],
-                [
-                  102.01187,
-                  13.36911
-                ],
-                [
-                  102.02108,
-                  13.37706
-                ],
-                [
-                  102.02685,
-                  13.37817
-                ],
-                [
-                  102.03862,
-                  13.38504
-                ],
-                [
-                  102.04742,
-                  13.38857
-                ],
-                [
-                  102.05311,
-                  13.39314
-                ],
-                [
-                  102.06342,
-                  13.39647
-                ],
-                [
-                  102.06483,
-                  13.40226
-                ],
-                [
-                  102.06744,
-                  13.40382
-                ],
-                [
-                  102.06925,
-                  13.40302
-                ],
-                [
-                  102.07398,
-                  13.40665
-                ],
-                [
-                  102.07583,
-                  13.41064
-                ],
-                [
-                  102.07561,
-                  13.4125
-                ],
-                [
-                  102.07811,
-                  13.41313
-                ],
-                [
-                  102.07844,
-                  13.41865
-                ],
-                [
-                  102.0835,
-                  13.41926
-                ],
-                [
-                  102.08525,
-                  13.42136
-                ],
-                [
-                  102.0891,
-                  13.41963
-                ],
-                [
-                  102.09005,
-                  13.41684
-                ],
-                [
-                  102.09221,
-                  13.41721
-                ],
-                [
-                  102.09544,
-                  13.41508
-                ],
-                [
-                  102.09766,
-                  13.41623
-                ],
-                [
-                  102.0994,
-                  13.41216
-                ],
-                [
-                  102.10363,
-                  13.41156
-                ],
-                [
-                  102.10438,
-                  13.40936
-                ],
-                [
-                  102.11297,
-                  13.40771
-                ],
-                [
-                  102.11456,
-                  13.40822
-                ],
-                [
-                  102.11539,
-                  13.41205
-                ],
-                [
-                  102.1191,
-                  13.41556
-                ],
-                [
-                  102.12423,
-                  13.41641
-                ],
-                [
-                  102.12878,
-                  13.41436
-                ],
-                [
-                  102.14169,
-                  13.41836
-                ],
-                [
-                  102.14146,
-                  13.4101
-                ],
-                [
-                  102.13602,
-                  13.4033
-                ],
-                [
-                  102.13856,
-                  13.39707
+                  102.49647,
+                  13.7012
                 ]
               ]
             ]
@@ -15211,8 +27140,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ลำนางรอง",
           "latitude": 14.1899,
           "longitude": 102.68618,
-          "sum_rainfall_mm": 165.60000000000002,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 173.39999999999998,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -15790,8 +27719,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "โรงเรียนบ้านสายโท ๔ ใต้",
           "latitude": 14.370019,
           "longitude": 103.14561,
-          "sum_rainfall_mm": 209.20000000000002,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 209.8,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -15945,8 +27874,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ละหานทราย",
           "latitude": 14.39567,
           "longitude": 102.84726,
-          "sum_rainfall_mm": 149.0,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 152.39999999999998,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -16148,8 +28077,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ตย.๕ (บาระแนะ)",
           "latitude": 14.249989,
           "longitude": 102.97801,
-          "sum_rainfall_mm": 138.4,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 144.40000000000003,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -16652,6 +28581,396 @@ window.IEAT_THAIWATER_DATA = {
               ]
             ]
           }
+        },
+        {
+          "geocode": "104603",
+          "tambon": "ต.บางขัน",
+          "amphoe": "อ.คลองสามวา",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "ปตร.คลองสามวา",
+          "latitude": 13.85954,
+          "longitude": 100.72909,
+          "sum_rainfall_mm": 106.0,
+          "observed_at": "2026-09-25T04:00:00+07:00"
+        },
+        {
+          "geocode": "100905",
+          "tambon": "ต.บางจาก",
+          "amphoe": "อ.พระโขนง",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "สนข.พระโขนง",
+          "latitude": 13.70233,
+          "longitude": 100.60197,
+          "sum_rainfall_mm": 104.0,
+          "observed_at": "2026-09-25T04:00:00+07:00"
+        },
+        {
+          "geocode": "101001",
+          "tambon": "ต.มีนบุรี",
+          "amphoe": "อ.มีนบุรี",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "สนข.มีนบุรี",
+          "latitude": 13.8136,
+          "longitude": 100.73122,
+          "sum_rainfall_mm": 104.0,
+          "observed_at": "2026-09-25T04:00:00+07:00"
+        },
+        {
+          "geocode": "101002",
+          "tambon": "ต.แสนแสบ",
+          "amphoe": "อ.มีนบุรี",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "ปตร.ประชาร่วมใจ",
+          "latitude": 13.8212,
+          "longitude": 100.74717,
+          "sum_rainfall_mm": 117.5,
+          "observed_at": "2026-09-25T04:00:00+07:00"
+        },
+        {
+          "geocode": "101101",
+          "tambon": "ต.ลาดกระบัง",
+          "amphoe": "อ.ลาดกระบัง",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "คลองลำปลาทิว ลาดกระบัง",
+          "latitude": 13.7407,
+          "longitude": 100.79468,
+          "sum_rainfall_mm": 178.0,
+          "observed_at": "2026-09-25T04:00:00+07:00"
+        },
+        {
+          "geocode": "130404",
+          "tambon": "ต.บึงชำอ้อ",
+          "amphoe": "อ.หนองเสือ",
+          "province": "จ.ปทุมธานี",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "บ้านน้อยสว่าง",
+          "latitude": 14.1652,
+          "longitude": 100.77855,
+          "sum_rainfall_mm": 123.0,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.80085,
+                  14.15677
+                ],
+                [
+                  100.80096,
+                  14.13169
+                ],
+                [
+                  100.75532,
+                  14.11254
+                ],
+                [
+                  100.75503,
+                  14.21096
+                ],
+                [
+                  100.80048,
+                  14.23299
+                ],
+                [
+                  100.80085,
+                  14.15677
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "110602",
+          "tambon": "ต.ศีรษะจรเข้น้อย",
+          "amphoe": "อ.บางเสาธง",
+          "province": "จ.สมุทรปราการ",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "อบต.ศีรษะจรเข้น้อย",
+          "latitude": 13.67777,
+          "longitude": 100.7945,
+          "sum_rainfall_mm": 119.80000000000001,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.82831,
+                  13.70177
+                ],
+                [
+                  100.81908,
+                  13.68513
+                ],
+                [
+                  100.81696,
+                  13.68306
+                ],
+                [
+                  100.82308,
+                  13.67525
+                ],
+                [
+                  100.8224,
+                  13.67311
+                ],
+                [
+                  100.8238,
+                  13.6673
+                ],
+                [
+                  100.81877,
+                  13.66338
+                ],
+                [
+                  100.80489,
+                  13.66162
+                ],
+                [
+                  100.80152,
+                  13.65877
+                ],
+                [
+                  100.7993,
+                  13.66027
+                ],
+                [
+                  100.79697,
+                  13.65996
+                ],
+                [
+                  100.79645,
+                  13.6638
+                ],
+                [
+                  100.80028,
+                  13.6696
+                ],
+                [
+                  100.80204,
+                  13.67534
+                ],
+                [
+                  100.79345,
+                  13.67773
+                ],
+                [
+                  100.77212,
+                  13.67375
+                ],
+                [
+                  100.76303,
+                  13.6748
+                ],
+                [
+                  100.77864,
+                  13.70153
+                ],
+                [
+                  100.78518,
+                  13.70682
+                ],
+                [
+                  100.78182,
+                  13.70986
+                ],
+                [
+                  100.78465,
+                  13.71649
+                ],
+                [
+                  100.78871,
+                  13.71627
+                ],
+                [
+                  100.80111,
+                  13.71215
+                ],
+                [
+                  100.82831,
+                  13.70177
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "110603",
+          "tambon": "ต.ศีรษะจรเข้ใหญ่",
+          "amphoe": "อ.บางเสาธง",
+          "province": "จ.สมุทรปราการ",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "คลองจระเข้ใหญ่ บางเสาธง (วัดศรีวารีน้อย)",
+          "latitude": 13.66949,
+          "longitude": 100.80058,
+          "sum_rainfall_mm": 112.0,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.8238,
+                  13.6673
+                ],
+                [
+                  100.82663,
+                  13.66573
+                ],
+                [
+                  100.81938,
+                  13.64767
+                ],
+                [
+                  100.8156,
+                  13.63094
+                ],
+                [
+                  100.81294,
+                  13.62796
+                ],
+                [
+                  100.7991,
+                  13.61931
+                ],
+                [
+                  100.79839,
+                  13.61718
+                ],
+                [
+                  100.8009,
+                  13.60951
+                ],
+                [
+                  100.80037,
+                  13.60468
+                ],
+                [
+                  100.7972,
+                  13.60118
+                ],
+                [
+                  100.79893,
+                  13.59092
+                ],
+                [
+                  100.7957,
+                  13.59125
+                ],
+                [
+                  100.79403,
+                  13.58893
+                ],
+                [
+                  100.79091,
+                  13.5891
+                ],
+                [
+                  100.78878,
+                  13.59284
+                ],
+                [
+                  100.77925,
+                  13.59487
+                ],
+                [
+                  100.77947,
+                  13.59903
+                ],
+                [
+                  100.7821,
+                  13.60201
+                ],
+                [
+                  100.78274,
+                  13.60677
+                ],
+                [
+                  100.78603,
+                  13.61496
+                ],
+                [
+                  100.78405,
+                  13.62223
+                ],
+                [
+                  100.78491,
+                  13.63074
+                ],
+                [
+                  100.78312,
+                  13.64766
+                ],
+                [
+                  100.78712,
+                  13.6562
+                ],
+                [
+                  100.79428,
+                  13.6662
+                ],
+                [
+                  100.79086,
+                  13.67371
+                ],
+                [
+                  100.79065,
+                  13.67716
+                ],
+                [
+                  100.79345,
+                  13.67773
+                ],
+                [
+                  100.80204,
+                  13.67534
+                ],
+                [
+                  100.80028,
+                  13.6696
+                ],
+                [
+                  100.79645,
+                  13.6638
+                ],
+                [
+                  100.79697,
+                  13.65996
+                ],
+                [
+                  100.7993,
+                  13.66027
+                ],
+                [
+                  100.80152,
+                  13.65877
+                ],
+                [
+                  100.80489,
+                  13.66162
+                ],
+                [
+                  100.81877,
+                  13.66338
+                ],
+                [
+                  100.8238,
+                  13.6673
+                ]
+              ]
+            ]
+          }
         }
       ],
       "area_nearby": [
@@ -16662,1146 +28981,11 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.กำแพงเพชร",
           "region_id": "1",
           "region_name": "ภาคกลาง",
-          "station": "บ้านปางเหนือ",
-          "latitude": 16.062207,
-          "longitude": 99.314654,
-          "sum_rainfall_mm": 49.5,
-          "observed_at": "2026-09-25T00:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.185,
-                  16.09483
-                ],
-                [
-                  99.18426,
-                  16.0941
-                ],
-                [
-                  99.18687,
-                  16.0903
-                ],
-                [
-                  99.19371,
-                  16.08741
-                ],
-                [
-                  99.19993,
-                  16.0789
-                ],
-                [
-                  99.20322,
-                  16.078
-                ],
-                [
-                  99.20302,
-                  16.07602
-                ],
-                [
-                  99.21047,
-                  16.06835
-                ],
-                [
-                  99.21267,
-                  16.0675
-                ],
-                [
-                  99.21322,
-                  16.06499
-                ],
-                [
-                  99.21545,
-                  16.06416
-                ],
-                [
-                  99.21477,
-                  16.06207
-                ],
-                [
-                  99.21611,
-                  16.05945
-                ],
-                [
-                  99.21973,
-                  16.06
-                ],
-                [
-                  99.2192,
-                  16.05901
-                ],
-                [
-                  99.22041,
-                  16.05872
-                ],
-                [
-                  99.22601,
-                  16.05143
-                ],
-                [
-                  99.22871,
-                  16.04258
-                ],
-                [
-                  99.2352,
-                  16.04093
-                ],
-                [
-                  99.23982,
-                  16.04285
-                ],
-                [
-                  99.24125,
-                  16.03932
-                ],
-                [
-                  99.24447,
-                  16.04111
-                ],
-                [
-                  99.24553,
-                  16.03993
-                ],
-                [
-                  99.24492,
-                  16.03727
-                ],
-                [
-                  99.24624,
-                  16.03302
-                ],
-                [
-                  99.24703,
-                  16.03222
-                ],
-                [
-                  99.24852,
-                  16.03341
-                ],
-                [
-                  99.24969,
-                  16.03292
-                ],
-                [
-                  99.25189,
-                  16.03034
-                ],
-                [
-                  99.25345,
-                  16.03134
-                ],
-                [
-                  99.2524,
-                  16.03321
-                ],
-                [
-                  99.2529,
-                  16.03516
-                ],
-                [
-                  99.25603,
-                  16.03467
-                ],
-                [
-                  99.25729,
-                  16.03693
-                ],
-                [
-                  99.26025,
-                  16.03547
-                ],
-                [
-                  99.2658,
-                  16.03697
-                ],
-                [
-                  99.26971,
-                  16.03601
-                ],
-                [
-                  99.27155,
-                  16.04102
-                ],
-                [
-                  99.27541,
-                  16.04378
-                ],
-                [
-                  99.27988,
-                  16.04172
-                ],
-                [
-                  99.28416,
-                  16.04399
-                ],
-                [
-                  99.2896,
-                  16.04385
-                ],
-                [
-                  99.30088,
-                  16.04706
-                ],
-                [
-                  99.30292,
-                  16.05002
-                ],
-                [
-                  99.30373,
-                  16.05508
-                ],
-                [
-                  99.30772,
-                  16.05617
-                ],
-                [
-                  99.30874,
-                  16.05301
-                ],
-                [
-                  99.31344,
-                  16.05268
-                ],
-                [
-                  99.31385,
-                  16.05609
-                ],
-                [
-                  99.31182,
-                  16.05904
-                ],
-                [
-                  99.3138,
-                  16.06249
-                ],
-                [
-                  99.31807,
-                  16.06389
-                ],
-                [
-                  99.31967,
-                  16.06928
-                ],
-                [
-                  99.32397,
-                  16.06637
-                ],
-                [
-                  99.32688,
-                  16.06276
-                ],
-                [
-                  99.32953,
-                  16.06626
-                ],
-                [
-                  99.33128,
-                  16.06568
-                ],
-                [
-                  99.33421,
-                  16.06347
-                ],
-                [
-                  99.33642,
-                  16.05976
-                ],
-                [
-                  99.33896,
-                  16.06139
-                ],
-                [
-                  99.34068,
-                  16.06114
-                ],
-                [
-                  99.34245,
-                  16.06286
-                ],
-                [
-                  99.34563,
-                  16.06261
-                ],
-                [
-                  99.34945,
-                  16.05661
-                ],
-                [
-                  99.3517,
-                  16.05606
-                ],
-                [
-                  99.35391,
-                  16.05791
-                ],
-                [
-                  99.35727,
-                  16.05707
-                ],
-                [
-                  99.35882,
-                  16.05931
-                ],
-                [
-                  99.36152,
-                  16.05773
-                ],
-                [
-                  99.36462,
-                  16.06012
-                ],
-                [
-                  99.37098,
-                  16.05801
-                ],
-                [
-                  99.37089,
-                  16.06264
-                ],
-                [
-                  99.3736,
-                  16.06339
-                ],
-                [
-                  99.3758,
-                  16.066
-                ],
-                [
-                  99.38088,
-                  16.06541
-                ],
-                [
-                  99.38114,
-                  16.06893
-                ],
-                [
-                  99.38421,
-                  16.06824
-                ],
-                [
-                  99.38659,
-                  16.06897
-                ],
-                [
-                  99.38833,
-                  16.07394
-                ],
-                [
-                  99.39068,
-                  16.07381
-                ],
-                [
-                  99.39257,
-                  16.0705
-                ],
-                [
-                  99.39211,
-                  16.06568
-                ],
-                [
-                  99.39534,
-                  16.06388
-                ],
-                [
-                  99.39887,
-                  16.06605
-                ],
-                [
-                  99.40005,
-                  16.0649
-                ],
-                [
-                  99.40433,
-                  16.05284
-                ],
-                [
-                  99.40391,
-                  16.04929
-                ],
-                [
-                  99.40836,
-                  16.04052
-                ],
-                [
-                  99.40949,
-                  16.02959
-                ],
-                [
-                  99.41548,
-                  16.016
-                ],
-                [
-                  99.41576,
-                  16.01031
-                ],
-                [
-                  99.42091,
-                  16.00439
-                ],
-                [
-                  99.4269,
-                  15.99488
-                ],
-                [
-                  99.43094,
-                  15.9824
-                ],
-                [
-                  99.4338,
-                  15.9791
-                ],
-                [
-                  99.41838,
-                  15.9702
-                ],
-                [
-                  99.40093,
-                  15.97389
-                ],
-                [
-                  99.3913,
-                  15.96646
-                ],
-                [
-                  99.38433,
-                  15.96743
-                ],
-                [
-                  99.38445,
-                  15.97035
-                ],
-                [
-                  99.38263,
-                  15.97117
-                ],
-                [
-                  99.37455,
-                  15.96692
-                ],
-                [
-                  99.36984,
-                  15.97015
-                ],
-                [
-                  99.36808,
-                  15.96976
-                ],
-                [
-                  99.36589,
-                  15.96718
-                ],
-                [
-                  99.36349,
-                  15.96762
-                ],
-                [
-                  99.36198,
-                  15.96639
-                ],
-                [
-                  99.35545,
-                  15.96993
-                ],
-                [
-                  99.34583,
-                  15.96747
-                ],
-                [
-                  99.33953,
-                  15.96449
-                ],
-                [
-                  99.3379,
-                  15.96301
-                ],
-                [
-                  99.33352,
-                  15.95139
-                ],
-                [
-                  99.33601,
-                  15.94891
-                ],
-                [
-                  99.33947,
-                  15.93823
-                ],
-                [
-                  99.34438,
-                  15.93464
-                ],
-                [
-                  99.34651,
-                  15.93043
-                ],
-                [
-                  99.35032,
-                  15.92818
-                ],
-                [
-                  99.35088,
-                  15.92603
-                ],
-                [
-                  99.34967,
-                  15.92331
-                ],
-                [
-                  99.33008,
-                  15.91148
-                ],
-                [
-                  99.32613,
-                  15.91586
-                ],
-                [
-                  99.32774,
-                  15.92027
-                ],
-                [
-                  99.31953,
-                  15.92755
-                ],
-                [
-                  99.31849,
-                  15.92592
-                ],
-                [
-                  99.32002,
-                  15.92046
-                ],
-                [
-                  99.31945,
-                  15.91746
-                ],
-                [
-                  99.31739,
-                  15.91692
-                ],
-                [
-                  99.31335,
-                  15.9193
-                ],
-                [
-                  99.31039,
-                  15.9179
-                ],
-                [
-                  99.31008,
-                  15.91194
-                ],
-                [
-                  99.31138,
-                  15.90843
-                ],
-                [
-                  99.3091,
-                  15.90413
-                ],
-                [
-                  99.30512,
-                  15.90402
-                ],
-                [
-                  99.30189,
-                  15.90781
-                ],
-                [
-                  99.29721,
-                  15.90896
-                ],
-                [
-                  99.29528,
-                  15.90732
-                ],
-                [
-                  99.29431,
-                  15.90303
-                ],
-                [
-                  99.29263,
-                  15.90305
-                ],
-                [
-                  99.29108,
-                  15.90511
-                ],
-                [
-                  99.28962,
-                  15.9048
-                ],
-                [
-                  99.28919,
-                  15.90198
-                ],
-                [
-                  99.29179,
-                  15.90045
-                ],
-                [
-                  99.29208,
-                  15.89669
-                ],
-                [
-                  99.29204,
-                  15.89445
-                ],
-                [
-                  99.29026,
-                  15.8919
-                ],
-                [
-                  99.28607,
-                  15.8969
-                ],
-                [
-                  99.28091,
-                  15.89803
-                ],
-                [
-                  99.27794,
-                  15.90318
-                ],
-                [
-                  99.27405,
-                  15.90399
-                ],
-                [
-                  99.2732,
-                  15.9091
-                ],
-                [
-                  99.27057,
-                  15.91232
-                ],
-                [
-                  99.26879,
-                  15.9124
-                ],
-                [
-                  99.26671,
-                  15.90738
-                ],
-                [
-                  99.25745,
-                  15.9154
-                ],
-                [
-                  99.24314,
-                  15.92159
-                ],
-                [
-                  99.23895,
-                  15.92654
-                ],
-                [
-                  99.23392,
-                  15.9286
-                ],
-                [
-                  99.23129,
-                  15.93325
-                ],
-                [
-                  99.22519,
-                  15.93742
-                ],
-                [
-                  99.22439,
-                  15.94182
-                ],
-                [
-                  99.22242,
-                  15.94479
-                ],
-                [
-                  99.2211,
-                  15.94488
-                ],
-                [
-                  99.22037,
-                  15.94295
-                ],
-                [
-                  99.22077,
-                  15.93774
-                ],
-                [
-                  99.21845,
-                  15.93685
-                ],
-                [
-                  99.21329,
-                  15.93956
-                ],
-                [
-                  99.2173,
-                  15.94173
-                ],
-                [
-                  99.2168,
-                  15.94411
-                ],
-                [
-                  99.21199,
-                  15.94441
-                ],
-                [
-                  99.21087,
-                  15.94724
-                ],
-                [
-                  99.20824,
-                  15.94868
-                ],
-                [
-                  99.20517,
-                  15.94334
-                ],
-                [
-                  99.20448,
-                  15.93633
-                ],
-                [
-                  99.20286,
-                  15.93646
-                ],
-                [
-                  99.20161,
-                  15.93847
-                ],
-                [
-                  99.19917,
-                  15.93954
-                ],
-                [
-                  99.19745,
-                  15.94269
-                ],
-                [
-                  99.19426,
-                  15.94507
-                ],
-                [
-                  99.19253,
-                  15.94314
-                ],
-                [
-                  99.1954,
-                  15.9412
-                ],
-                [
-                  99.19503,
-                  15.93859
-                ],
-                [
-                  99.19202,
-                  15.9377
-                ],
-                [
-                  99.19138,
-                  15.93206
-                ],
-                [
-                  99.18644,
-                  15.92856
-                ],
-                [
-                  99.18493,
-                  15.9286
-                ],
-                [
-                  99.17978,
-                  15.93317
-                ],
-                [
-                  99.17599,
-                  15.93404
-                ],
-                [
-                  99.17336,
-                  15.93716
-                ],
-                [
-                  99.1722,
-                  15.93719
-                ],
-                [
-                  99.17156,
-                  15.93576
-                ],
-                [
-                  99.17302,
-                  15.93335
-                ],
-                [
-                  99.17341,
-                  15.92843
-                ],
-                [
-                  99.16433,
-                  15.92613
-                ],
-                [
-                  99.16365,
-                  15.92416
-                ],
-                [
-                  99.1617,
-                  15.92455
-                ],
-                [
-                  99.15686,
-                  15.92014
-                ],
-                [
-                  99.15343,
-                  15.92013
-                ],
-                [
-                  99.15289,
-                  15.91931
-                ],
-                [
-                  99.15428,
-                  15.91693
-                ],
-                [
-                  99.15329,
-                  15.91439
-                ],
-                [
-                  99.14821,
-                  15.90943
-                ],
-                [
-                  99.14213,
-                  15.90812
-                ],
-                [
-                  99.14006,
-                  15.90598
-                ],
-                [
-                  99.13815,
-                  15.90575
-                ],
-                [
-                  99.13631,
-                  15.90762
-                ],
-                [
-                  99.13039,
-                  15.90927
-                ],
-                [
-                  99.13019,
-                  15.91161
-                ],
-                [
-                  99.1287,
-                  15.91272
-                ],
-                [
-                  99.11764,
-                  15.9023
-                ],
-                [
-                  99.1071,
-                  15.89533
-                ],
-                [
-                  99.10487,
-                  15.89166
-                ],
-                [
-                  99.10116,
-                  15.89039
-                ],
-                [
-                  99.09526,
-                  15.88333
-                ],
-                [
-                  99.08674,
-                  15.88676
-                ],
-                [
-                  99.08841,
-                  15.89417
-                ],
-                [
-                  99.08787,
-                  15.89735
-                ],
-                [
-                  99.08562,
-                  15.90007
-                ],
-                [
-                  99.08665,
-                  15.90573
-                ],
-                [
-                  99.08551,
-                  15.90896
-                ],
-                [
-                  99.0858,
-                  15.91225
-                ],
-                [
-                  99.08664,
-                  15.9149
-                ],
-                [
-                  99.0957,
-                  15.92449
-                ],
-                [
-                  99.09691,
-                  15.93091
-                ],
-                [
-                  99.09383,
-                  15.93536
-                ],
-                [
-                  99.09048,
-                  15.93733
-                ],
-                [
-                  99.08902,
-                  15.9451
-                ],
-                [
-                  99.08701,
-                  15.94602
-                ],
-                [
-                  99.08631,
-                  15.948
-                ],
-                [
-                  99.08073,
-                  15.94859
-                ],
-                [
-                  99.07986,
-                  15.95041
-                ],
-                [
-                  99.07524,
-                  15.95189
-                ],
-                [
-                  99.07446,
-                  15.96038
-                ],
-                [
-                  99.07508,
-                  15.96201
-                ],
-                [
-                  99.07699,
-                  15.96178
-                ],
-                [
-                  99.08031,
-                  15.96523
-                ],
-                [
-                  99.08266,
-                  15.97032
-                ],
-                [
-                  99.08567,
-                  15.9717
-                ],
-                [
-                  99.08697,
-                  15.97748
-                ],
-                [
-                  99.08875,
-                  15.97981
-                ],
-                [
-                  99.0867,
-                  15.98663
-                ],
-                [
-                  99.08747,
-                  15.98995
-                ],
-                [
-                  99.08608,
-                  15.9969
-                ],
-                [
-                  99.08391,
-                  15.9999
-                ],
-                [
-                  99.08308,
-                  16.00498
-                ],
-                [
-                  99.08147,
-                  16.00727
-                ],
-                [
-                  99.08403,
-                  16.02415
-                ],
-                [
-                  99.08351,
-                  16.02626
-                ],
-                [
-                  99.08688,
-                  16.0332
-                ],
-                [
-                  99.08695,
-                  16.04189
-                ],
-                [
-                  99.09132,
-                  16.04522
-                ],
-                [
-                  99.1054,
-                  16.04952
-                ],
-                [
-                  99.10895,
-                  16.05578
-                ],
-                [
-                  99.11188,
-                  16.05731
-                ],
-                [
-                  99.11471,
-                  16.0606
-                ],
-                [
-                  99.11457,
-                  16.06244
-                ],
-                [
-                  99.11278,
-                  16.06366
-                ],
-                [
-                  99.11571,
-                  16.06855
-                ],
-                [
-                  99.11633,
-                  16.07535
-                ],
-                [
-                  99.11421,
-                  16.08003
-                ],
-                [
-                  99.10904,
-                  16.08226
-                ],
-                [
-                  99.10823,
-                  16.08534
-                ],
-                [
-                  99.1109,
-                  16.08866
-                ],
-                [
-                  99.11512,
-                  16.08946
-                ],
-                [
-                  99.12004,
-                  16.09422
-                ],
-                [
-                  99.12676,
-                  16.09454
-                ],
-                [
-                  99.12949,
-                  16.08962
-                ],
-                [
-                  99.13166,
-                  16.08872
-                ],
-                [
-                  99.135,
-                  16.09365
-                ],
-                [
-                  99.13846,
-                  16.09437
-                ],
-                [
-                  99.1451,
-                  16.08792
-                ],
-                [
-                  99.14522,
-                  16.09341
-                ],
-                [
-                  99.1464,
-                  16.09611
-                ],
-                [
-                  99.15582,
-                  16.10439
-                ],
-                [
-                  99.15898,
-                  16.10495
-                ],
-                [
-                  99.16368,
-                  16.10887
-                ],
-                [
-                  99.16554,
-                  16.10734
-                ],
-                [
-                  99.17182,
-                  16.10661
-                ],
-                [
-                  99.18032,
-                  16.10009
-                ],
-                [
-                  99.185,
-                  16.09483
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "620903",
-          "tambon": "ต.ปางตาไว",
-          "amphoe": "อ.ปางศิลาทอง",
-          "province": "จ.กำแพงเพชร",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
           "station": "บ้านไพรสวรรค์",
           "latitude": 16.060747,
           "longitude": 99.384051,
-          "sum_rainfall_mm": 34.0,
-          "observed_at": "2026-09-25T00:00:00+07:00",
+          "sum_rainfall_mm": 35.5,
+          "observed_at": "2026-09-25T03:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -18935,8 +30119,1143 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านตากฟ้าพัฒนา",
           "latitude": 15.974194,
           "longitude": 99.37996,
-          "sum_rainfall_mm": 15.0,
-          "observed_at": "2026-09-25T00:00:00+07:00",
+          "sum_rainfall_mm": 15.5,
+          "observed_at": "2026-09-25T03:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  99.185,
+                  16.09483
+                ],
+                [
+                  99.18426,
+                  16.0941
+                ],
+                [
+                  99.18687,
+                  16.0903
+                ],
+                [
+                  99.19371,
+                  16.08741
+                ],
+                [
+                  99.19993,
+                  16.0789
+                ],
+                [
+                  99.20322,
+                  16.078
+                ],
+                [
+                  99.20302,
+                  16.07602
+                ],
+                [
+                  99.21047,
+                  16.06835
+                ],
+                [
+                  99.21267,
+                  16.0675
+                ],
+                [
+                  99.21322,
+                  16.06499
+                ],
+                [
+                  99.21545,
+                  16.06416
+                ],
+                [
+                  99.21477,
+                  16.06207
+                ],
+                [
+                  99.21611,
+                  16.05945
+                ],
+                [
+                  99.21973,
+                  16.06
+                ],
+                [
+                  99.2192,
+                  16.05901
+                ],
+                [
+                  99.22041,
+                  16.05872
+                ],
+                [
+                  99.22601,
+                  16.05143
+                ],
+                [
+                  99.22871,
+                  16.04258
+                ],
+                [
+                  99.2352,
+                  16.04093
+                ],
+                [
+                  99.23982,
+                  16.04285
+                ],
+                [
+                  99.24125,
+                  16.03932
+                ],
+                [
+                  99.24447,
+                  16.04111
+                ],
+                [
+                  99.24553,
+                  16.03993
+                ],
+                [
+                  99.24492,
+                  16.03727
+                ],
+                [
+                  99.24624,
+                  16.03302
+                ],
+                [
+                  99.24703,
+                  16.03222
+                ],
+                [
+                  99.24852,
+                  16.03341
+                ],
+                [
+                  99.24969,
+                  16.03292
+                ],
+                [
+                  99.25189,
+                  16.03034
+                ],
+                [
+                  99.25345,
+                  16.03134
+                ],
+                [
+                  99.2524,
+                  16.03321
+                ],
+                [
+                  99.2529,
+                  16.03516
+                ],
+                [
+                  99.25603,
+                  16.03467
+                ],
+                [
+                  99.25729,
+                  16.03693
+                ],
+                [
+                  99.26025,
+                  16.03547
+                ],
+                [
+                  99.2658,
+                  16.03697
+                ],
+                [
+                  99.26971,
+                  16.03601
+                ],
+                [
+                  99.27155,
+                  16.04102
+                ],
+                [
+                  99.27541,
+                  16.04378
+                ],
+                [
+                  99.27988,
+                  16.04172
+                ],
+                [
+                  99.28416,
+                  16.04399
+                ],
+                [
+                  99.2896,
+                  16.04385
+                ],
+                [
+                  99.30088,
+                  16.04706
+                ],
+                [
+                  99.30292,
+                  16.05002
+                ],
+                [
+                  99.30373,
+                  16.05508
+                ],
+                [
+                  99.30772,
+                  16.05617
+                ],
+                [
+                  99.30874,
+                  16.05301
+                ],
+                [
+                  99.31344,
+                  16.05268
+                ],
+                [
+                  99.31385,
+                  16.05609
+                ],
+                [
+                  99.31182,
+                  16.05904
+                ],
+                [
+                  99.3138,
+                  16.06249
+                ],
+                [
+                  99.31807,
+                  16.06389
+                ],
+                [
+                  99.31967,
+                  16.06928
+                ],
+                [
+                  99.32397,
+                  16.06637
+                ],
+                [
+                  99.32688,
+                  16.06276
+                ],
+                [
+                  99.32953,
+                  16.06626
+                ],
+                [
+                  99.33128,
+                  16.06568
+                ],
+                [
+                  99.33421,
+                  16.06347
+                ],
+                [
+                  99.33642,
+                  16.05976
+                ],
+                [
+                  99.33896,
+                  16.06139
+                ],
+                [
+                  99.34068,
+                  16.06114
+                ],
+                [
+                  99.34245,
+                  16.06286
+                ],
+                [
+                  99.34563,
+                  16.06261
+                ],
+                [
+                  99.34945,
+                  16.05661
+                ],
+                [
+                  99.3517,
+                  16.05606
+                ],
+                [
+                  99.35391,
+                  16.05791
+                ],
+                [
+                  99.35727,
+                  16.05707
+                ],
+                [
+                  99.35882,
+                  16.05931
+                ],
+                [
+                  99.36152,
+                  16.05773
+                ],
+                [
+                  99.36462,
+                  16.06012
+                ],
+                [
+                  99.37098,
+                  16.05801
+                ],
+                [
+                  99.37089,
+                  16.06264
+                ],
+                [
+                  99.3736,
+                  16.06339
+                ],
+                [
+                  99.3758,
+                  16.066
+                ],
+                [
+                  99.38088,
+                  16.06541
+                ],
+                [
+                  99.38114,
+                  16.06893
+                ],
+                [
+                  99.38421,
+                  16.06824
+                ],
+                [
+                  99.38659,
+                  16.06897
+                ],
+                [
+                  99.38833,
+                  16.07394
+                ],
+                [
+                  99.39068,
+                  16.07381
+                ],
+                [
+                  99.39257,
+                  16.0705
+                ],
+                [
+                  99.39211,
+                  16.06568
+                ],
+                [
+                  99.39534,
+                  16.06388
+                ],
+                [
+                  99.39887,
+                  16.06605
+                ],
+                [
+                  99.40005,
+                  16.0649
+                ],
+                [
+                  99.40433,
+                  16.05284
+                ],
+                [
+                  99.40391,
+                  16.04929
+                ],
+                [
+                  99.40836,
+                  16.04052
+                ],
+                [
+                  99.40949,
+                  16.02959
+                ],
+                [
+                  99.41548,
+                  16.016
+                ],
+                [
+                  99.41576,
+                  16.01031
+                ],
+                [
+                  99.42091,
+                  16.00439
+                ],
+                [
+                  99.4269,
+                  15.99488
+                ],
+                [
+                  99.43094,
+                  15.9824
+                ],
+                [
+                  99.4338,
+                  15.9791
+                ],
+                [
+                  99.41838,
+                  15.9702
+                ],
+                [
+                  99.40093,
+                  15.97389
+                ],
+                [
+                  99.3913,
+                  15.96646
+                ],
+                [
+                  99.38433,
+                  15.96743
+                ],
+                [
+                  99.38445,
+                  15.97035
+                ],
+                [
+                  99.38263,
+                  15.97117
+                ],
+                [
+                  99.37455,
+                  15.96692
+                ],
+                [
+                  99.36984,
+                  15.97015
+                ],
+                [
+                  99.36808,
+                  15.96976
+                ],
+                [
+                  99.36589,
+                  15.96718
+                ],
+                [
+                  99.36349,
+                  15.96762
+                ],
+                [
+                  99.36198,
+                  15.96639
+                ],
+                [
+                  99.35545,
+                  15.96993
+                ],
+                [
+                  99.34583,
+                  15.96747
+                ],
+                [
+                  99.33953,
+                  15.96449
+                ],
+                [
+                  99.3379,
+                  15.96301
+                ],
+                [
+                  99.33352,
+                  15.95139
+                ],
+                [
+                  99.33601,
+                  15.94891
+                ],
+                [
+                  99.33947,
+                  15.93823
+                ],
+                [
+                  99.34438,
+                  15.93464
+                ],
+                [
+                  99.34651,
+                  15.93043
+                ],
+                [
+                  99.35032,
+                  15.92818
+                ],
+                [
+                  99.35088,
+                  15.92603
+                ],
+                [
+                  99.34967,
+                  15.92331
+                ],
+                [
+                  99.33008,
+                  15.91148
+                ],
+                [
+                  99.32613,
+                  15.91586
+                ],
+                [
+                  99.32774,
+                  15.92027
+                ],
+                [
+                  99.31953,
+                  15.92755
+                ],
+                [
+                  99.31849,
+                  15.92592
+                ],
+                [
+                  99.32002,
+                  15.92046
+                ],
+                [
+                  99.31945,
+                  15.91746
+                ],
+                [
+                  99.31739,
+                  15.91692
+                ],
+                [
+                  99.31335,
+                  15.9193
+                ],
+                [
+                  99.31039,
+                  15.9179
+                ],
+                [
+                  99.31008,
+                  15.91194
+                ],
+                [
+                  99.31138,
+                  15.90843
+                ],
+                [
+                  99.3091,
+                  15.90413
+                ],
+                [
+                  99.30512,
+                  15.90402
+                ],
+                [
+                  99.30189,
+                  15.90781
+                ],
+                [
+                  99.29721,
+                  15.90896
+                ],
+                [
+                  99.29528,
+                  15.90732
+                ],
+                [
+                  99.29431,
+                  15.90303
+                ],
+                [
+                  99.29263,
+                  15.90305
+                ],
+                [
+                  99.29108,
+                  15.90511
+                ],
+                [
+                  99.28962,
+                  15.9048
+                ],
+                [
+                  99.28919,
+                  15.90198
+                ],
+                [
+                  99.29179,
+                  15.90045
+                ],
+                [
+                  99.29208,
+                  15.89669
+                ],
+                [
+                  99.29204,
+                  15.89445
+                ],
+                [
+                  99.29026,
+                  15.8919
+                ],
+                [
+                  99.28607,
+                  15.8969
+                ],
+                [
+                  99.28091,
+                  15.89803
+                ],
+                [
+                  99.27794,
+                  15.90318
+                ],
+                [
+                  99.27405,
+                  15.90399
+                ],
+                [
+                  99.2732,
+                  15.9091
+                ],
+                [
+                  99.27057,
+                  15.91232
+                ],
+                [
+                  99.26879,
+                  15.9124
+                ],
+                [
+                  99.26671,
+                  15.90738
+                ],
+                [
+                  99.25745,
+                  15.9154
+                ],
+                [
+                  99.24314,
+                  15.92159
+                ],
+                [
+                  99.23895,
+                  15.92654
+                ],
+                [
+                  99.23392,
+                  15.9286
+                ],
+                [
+                  99.23129,
+                  15.93325
+                ],
+                [
+                  99.22519,
+                  15.93742
+                ],
+                [
+                  99.22439,
+                  15.94182
+                ],
+                [
+                  99.22242,
+                  15.94479
+                ],
+                [
+                  99.2211,
+                  15.94488
+                ],
+                [
+                  99.22037,
+                  15.94295
+                ],
+                [
+                  99.22077,
+                  15.93774
+                ],
+                [
+                  99.21845,
+                  15.93685
+                ],
+                [
+                  99.21329,
+                  15.93956
+                ],
+                [
+                  99.2173,
+                  15.94173
+                ],
+                [
+                  99.2168,
+                  15.94411
+                ],
+                [
+                  99.21199,
+                  15.94441
+                ],
+                [
+                  99.21087,
+                  15.94724
+                ],
+                [
+                  99.20824,
+                  15.94868
+                ],
+                [
+                  99.20517,
+                  15.94334
+                ],
+                [
+                  99.20448,
+                  15.93633
+                ],
+                [
+                  99.20286,
+                  15.93646
+                ],
+                [
+                  99.20161,
+                  15.93847
+                ],
+                [
+                  99.19917,
+                  15.93954
+                ],
+                [
+                  99.19745,
+                  15.94269
+                ],
+                [
+                  99.19426,
+                  15.94507
+                ],
+                [
+                  99.19253,
+                  15.94314
+                ],
+                [
+                  99.1954,
+                  15.9412
+                ],
+                [
+                  99.19503,
+                  15.93859
+                ],
+                [
+                  99.19202,
+                  15.9377
+                ],
+                [
+                  99.19138,
+                  15.93206
+                ],
+                [
+                  99.18644,
+                  15.92856
+                ],
+                [
+                  99.18493,
+                  15.9286
+                ],
+                [
+                  99.17978,
+                  15.93317
+                ],
+                [
+                  99.17599,
+                  15.93404
+                ],
+                [
+                  99.17336,
+                  15.93716
+                ],
+                [
+                  99.1722,
+                  15.93719
+                ],
+                [
+                  99.17156,
+                  15.93576
+                ],
+                [
+                  99.17302,
+                  15.93335
+                ],
+                [
+                  99.17341,
+                  15.92843
+                ],
+                [
+                  99.16433,
+                  15.92613
+                ],
+                [
+                  99.16365,
+                  15.92416
+                ],
+                [
+                  99.1617,
+                  15.92455
+                ],
+                [
+                  99.15686,
+                  15.92014
+                ],
+                [
+                  99.15343,
+                  15.92013
+                ],
+                [
+                  99.15289,
+                  15.91931
+                ],
+                [
+                  99.15428,
+                  15.91693
+                ],
+                [
+                  99.15329,
+                  15.91439
+                ],
+                [
+                  99.14821,
+                  15.90943
+                ],
+                [
+                  99.14213,
+                  15.90812
+                ],
+                [
+                  99.14006,
+                  15.90598
+                ],
+                [
+                  99.13815,
+                  15.90575
+                ],
+                [
+                  99.13631,
+                  15.90762
+                ],
+                [
+                  99.13039,
+                  15.90927
+                ],
+                [
+                  99.13019,
+                  15.91161
+                ],
+                [
+                  99.1287,
+                  15.91272
+                ],
+                [
+                  99.11764,
+                  15.9023
+                ],
+                [
+                  99.1071,
+                  15.89533
+                ],
+                [
+                  99.10487,
+                  15.89166
+                ],
+                [
+                  99.10116,
+                  15.89039
+                ],
+                [
+                  99.09526,
+                  15.88333
+                ],
+                [
+                  99.08674,
+                  15.88676
+                ],
+                [
+                  99.08841,
+                  15.89417
+                ],
+                [
+                  99.08787,
+                  15.89735
+                ],
+                [
+                  99.08562,
+                  15.90007
+                ],
+                [
+                  99.08665,
+                  15.90573
+                ],
+                [
+                  99.08551,
+                  15.90896
+                ],
+                [
+                  99.0858,
+                  15.91225
+                ],
+                [
+                  99.08664,
+                  15.9149
+                ],
+                [
+                  99.0957,
+                  15.92449
+                ],
+                [
+                  99.09691,
+                  15.93091
+                ],
+                [
+                  99.09383,
+                  15.93536
+                ],
+                [
+                  99.09048,
+                  15.93733
+                ],
+                [
+                  99.08902,
+                  15.9451
+                ],
+                [
+                  99.08701,
+                  15.94602
+                ],
+                [
+                  99.08631,
+                  15.948
+                ],
+                [
+                  99.08073,
+                  15.94859
+                ],
+                [
+                  99.07986,
+                  15.95041
+                ],
+                [
+                  99.07524,
+                  15.95189
+                ],
+                [
+                  99.07446,
+                  15.96038
+                ],
+                [
+                  99.07508,
+                  15.96201
+                ],
+                [
+                  99.07699,
+                  15.96178
+                ],
+                [
+                  99.08031,
+                  15.96523
+                ],
+                [
+                  99.08266,
+                  15.97032
+                ],
+                [
+                  99.08567,
+                  15.9717
+                ],
+                [
+                  99.08697,
+                  15.97748
+                ],
+                [
+                  99.08875,
+                  15.97981
+                ],
+                [
+                  99.0867,
+                  15.98663
+                ],
+                [
+                  99.08747,
+                  15.98995
+                ],
+                [
+                  99.08608,
+                  15.9969
+                ],
+                [
+                  99.08391,
+                  15.9999
+                ],
+                [
+                  99.08308,
+                  16.00498
+                ],
+                [
+                  99.08147,
+                  16.00727
+                ],
+                [
+                  99.08403,
+                  16.02415
+                ],
+                [
+                  99.08351,
+                  16.02626
+                ],
+                [
+                  99.08688,
+                  16.0332
+                ],
+                [
+                  99.08695,
+                  16.04189
+                ],
+                [
+                  99.09132,
+                  16.04522
+                ],
+                [
+                  99.1054,
+                  16.04952
+                ],
+                [
+                  99.10895,
+                  16.05578
+                ],
+                [
+                  99.11188,
+                  16.05731
+                ],
+                [
+                  99.11471,
+                  16.0606
+                ],
+                [
+                  99.11457,
+                  16.06244
+                ],
+                [
+                  99.11278,
+                  16.06366
+                ],
+                [
+                  99.11571,
+                  16.06855
+                ],
+                [
+                  99.11633,
+                  16.07535
+                ],
+                [
+                  99.11421,
+                  16.08003
+                ],
+                [
+                  99.10904,
+                  16.08226
+                ],
+                [
+                  99.10823,
+                  16.08534
+                ],
+                [
+                  99.1109,
+                  16.08866
+                ],
+                [
+                  99.11512,
+                  16.08946
+                ],
+                [
+                  99.12004,
+                  16.09422
+                ],
+                [
+                  99.12676,
+                  16.09454
+                ],
+                [
+                  99.12949,
+                  16.08962
+                ],
+                [
+                  99.13166,
+                  16.08872
+                ],
+                [
+                  99.135,
+                  16.09365
+                ],
+                [
+                  99.13846,
+                  16.09437
+                ],
+                [
+                  99.1451,
+                  16.08792
+                ],
+                [
+                  99.14522,
+                  16.09341
+                ],
+                [
+                  99.1464,
+                  16.09611
+                ],
+                [
+                  99.15582,
+                  16.10439
+                ],
+                [
+                  99.15898,
+                  16.10495
+                ],
+                [
+                  99.16368,
+                  16.10887
+                ],
+                [
+                  99.16554,
+                  16.10734
+                ],
+                [
+                  99.17182,
+                  16.10661
+                ],
+                [
+                  99.18032,
+                  16.10009
+                ],
+                [
+                  99.185,
+                  16.09483
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "620903",
+          "tambon": "ต.ปางตาไว",
+          "amphoe": "อ.ปางศิลาทอง",
+          "province": "จ.กำแพงเพชร",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านปางเหนือ",
+          "latitude": 16.062207,
+          "longitude": 99.314654,
+          "sum_rainfall_mm": 51.0,
+          "observed_at": "2026-09-25T03:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -20070,8 +32389,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ที่ทำการอุทยานแห่งชาติแม่วงก์",
           "latitude": 16.039022,
           "longitude": 99.233345,
-          "sum_rainfall_mm": 100.6,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 102.8,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -21196,6 +33515,1457 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
+          "geocode": "180104",
+          "tambon": "ต.ชัยนาท",
+          "amphoe": "อ.เมืองชัยนาท",
+          "province": "จ.ชัยนาท",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "T.ปตร.บรมธาตุ",
+          "latitude": 15.15713,
+          "longitude": 100.152981,
+          "sum_rainfall_mm": 70.0,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.17063,
+                  15.15416
+                ],
+                [
+                  100.16807,
+                  15.15323
+                ],
+                [
+                  100.16862,
+                  15.15088
+                ],
+                [
+                  100.17103,
+                  15.14876
+                ],
+                [
+                  100.17265,
+                  15.14386
+                ],
+                [
+                  100.17573,
+                  15.14031
+                ],
+                [
+                  100.17848,
+                  15.12808
+                ],
+                [
+                  100.18473,
+                  15.12567
+                ],
+                [
+                  100.18232,
+                  15.12084
+                ],
+                [
+                  100.18548,
+                  15.11697
+                ],
+                [
+                  100.1799,
+                  15.11011
+                ],
+                [
+                  100.1766,
+                  15.10679
+                ],
+                [
+                  100.16365,
+                  15.11225
+                ],
+                [
+                  100.16024,
+                  15.11604
+                ],
+                [
+                  100.15793,
+                  15.11683
+                ],
+                [
+                  100.15564,
+                  15.11055
+                ],
+                [
+                  100.15291,
+                  15.10799
+                ],
+                [
+                  100.14931,
+                  15.10992
+                ],
+                [
+                  100.1412,
+                  15.10748
+                ],
+                [
+                  100.13903,
+                  15.10417
+                ],
+                [
+                  100.13909,
+                  15.10101
+                ],
+                [
+                  100.13262,
+                  15.09542
+                ],
+                [
+                  100.12771,
+                  15.09541
+                ],
+                [
+                  100.12579,
+                  15.09877
+                ],
+                [
+                  100.12107,
+                  15.10042
+                ],
+                [
+                  100.11873,
+                  15.10328
+                ],
+                [
+                  100.12186,
+                  15.11168
+                ],
+                [
+                  100.1276,
+                  15.13497
+                ],
+                [
+                  100.1303,
+                  15.14104
+                ],
+                [
+                  100.13377,
+                  15.14561
+                ],
+                [
+                  100.14,
+                  15.15082
+                ],
+                [
+                  100.14244,
+                  15.15542
+                ],
+                [
+                  100.14324,
+                  15.16213
+                ],
+                [
+                  100.14493,
+                  15.16261
+                ],
+                [
+                  100.14548,
+                  15.16623
+                ],
+                [
+                  100.15423,
+                  15.16239
+                ],
+                [
+                  100.16098,
+                  15.15576
+                ],
+                [
+                  100.17063,
+                  15.15416
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "180104",
+          "tambon": "ต.ชัยนาท",
+          "amphoe": "อ.เมืองชัยนาท",
+          "province": "จ.ชัยนาท",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "เหนือปตร.บรมธาตุ",
+          "latitude": 15.15816,
+          "longitude": 100.15352,
+          "sum_rainfall_mm": 91.4,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.17063,
+                  15.15416
+                ],
+                [
+                  100.16807,
+                  15.15323
+                ],
+                [
+                  100.16862,
+                  15.15088
+                ],
+                [
+                  100.17103,
+                  15.14876
+                ],
+                [
+                  100.17265,
+                  15.14386
+                ],
+                [
+                  100.17573,
+                  15.14031
+                ],
+                [
+                  100.17848,
+                  15.12808
+                ],
+                [
+                  100.18473,
+                  15.12567
+                ],
+                [
+                  100.18232,
+                  15.12084
+                ],
+                [
+                  100.18548,
+                  15.11697
+                ],
+                [
+                  100.1799,
+                  15.11011
+                ],
+                [
+                  100.1766,
+                  15.10679
+                ],
+                [
+                  100.16365,
+                  15.11225
+                ],
+                [
+                  100.16024,
+                  15.11604
+                ],
+                [
+                  100.15793,
+                  15.11683
+                ],
+                [
+                  100.15564,
+                  15.11055
+                ],
+                [
+                  100.15291,
+                  15.10799
+                ],
+                [
+                  100.14931,
+                  15.10992
+                ],
+                [
+                  100.1412,
+                  15.10748
+                ],
+                [
+                  100.13903,
+                  15.10417
+                ],
+                [
+                  100.13909,
+                  15.10101
+                ],
+                [
+                  100.13262,
+                  15.09542
+                ],
+                [
+                  100.12771,
+                  15.09541
+                ],
+                [
+                  100.12579,
+                  15.09877
+                ],
+                [
+                  100.12107,
+                  15.10042
+                ],
+                [
+                  100.11873,
+                  15.10328
+                ],
+                [
+                  100.12186,
+                  15.11168
+                ],
+                [
+                  100.1276,
+                  15.13497
+                ],
+                [
+                  100.1303,
+                  15.14104
+                ],
+                [
+                  100.13377,
+                  15.14561
+                ],
+                [
+                  100.14,
+                  15.15082
+                ],
+                [
+                  100.14244,
+                  15.15542
+                ],
+                [
+                  100.14324,
+                  15.16213
+                ],
+                [
+                  100.14493,
+                  15.16261
+                ],
+                [
+                  100.14548,
+                  15.16623
+                ],
+                [
+                  100.15423,
+                  15.16239
+                ],
+                [
+                  100.16098,
+                  15.15576
+                ],
+                [
+                  100.17063,
+                  15.15416
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "180104",
+          "tambon": "ต.ชัยนาท",
+          "amphoe": "อ.เมืองชัยนาท",
+          "province": "จ.ชัยนาท",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "ท้ายปตร.บรมธาตุ",
+          "latitude": 15.15785,
+          "longitude": 100.15282,
+          "sum_rainfall_mm": 89.19999999999999,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.17063,
+                  15.15416
+                ],
+                [
+                  100.16807,
+                  15.15323
+                ],
+                [
+                  100.16862,
+                  15.15088
+                ],
+                [
+                  100.17103,
+                  15.14876
+                ],
+                [
+                  100.17265,
+                  15.14386
+                ],
+                [
+                  100.17573,
+                  15.14031
+                ],
+                [
+                  100.17848,
+                  15.12808
+                ],
+                [
+                  100.18473,
+                  15.12567
+                ],
+                [
+                  100.18232,
+                  15.12084
+                ],
+                [
+                  100.18548,
+                  15.11697
+                ],
+                [
+                  100.1799,
+                  15.11011
+                ],
+                [
+                  100.1766,
+                  15.10679
+                ],
+                [
+                  100.16365,
+                  15.11225
+                ],
+                [
+                  100.16024,
+                  15.11604
+                ],
+                [
+                  100.15793,
+                  15.11683
+                ],
+                [
+                  100.15564,
+                  15.11055
+                ],
+                [
+                  100.15291,
+                  15.10799
+                ],
+                [
+                  100.14931,
+                  15.10992
+                ],
+                [
+                  100.1412,
+                  15.10748
+                ],
+                [
+                  100.13903,
+                  15.10417
+                ],
+                [
+                  100.13909,
+                  15.10101
+                ],
+                [
+                  100.13262,
+                  15.09542
+                ],
+                [
+                  100.12771,
+                  15.09541
+                ],
+                [
+                  100.12579,
+                  15.09877
+                ],
+                [
+                  100.12107,
+                  15.10042
+                ],
+                [
+                  100.11873,
+                  15.10328
+                ],
+                [
+                  100.12186,
+                  15.11168
+                ],
+                [
+                  100.1276,
+                  15.13497
+                ],
+                [
+                  100.1303,
+                  15.14104
+                ],
+                [
+                  100.13377,
+                  15.14561
+                ],
+                [
+                  100.14,
+                  15.15082
+                ],
+                [
+                  100.14244,
+                  15.15542
+                ],
+                [
+                  100.14324,
+                  15.16213
+                ],
+                [
+                  100.14493,
+                  15.16261
+                ],
+                [
+                  100.14548,
+                  15.16623
+                ],
+                [
+                  100.15423,
+                  15.16239
+                ],
+                [
+                  100.16098,
+                  15.15576
+                ],
+                [
+                  100.17063,
+                  15.15416
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "180107",
+          "tambon": "ต.ธรรมามูล",
+          "amphoe": "อ.เมืองชัยนาท",
+          "province": "จ.ชัยนาท",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "สะพานธรรมจักร(วัดธรรมามูล)",
+          "latitude": 15.25029,
+          "longitude": 100.08347,
+          "sum_rainfall_mm": 47.0,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.13059,
+                  15.28908
+                ],
+                [
+                  100.13242,
+                  15.28176
+                ],
+                [
+                  100.14221,
+                  15.27971
+                ],
+                [
+                  100.14439,
+                  15.27612
+                ],
+                [
+                  100.14828,
+                  15.2741
+                ],
+                [
+                  100.15366,
+                  15.26588
+                ],
+                [
+                  100.15803,
+                  15.26309
+                ],
+                [
+                  100.15899,
+                  15.25738
+                ],
+                [
+                  100.15512,
+                  15.25246
+                ],
+                [
+                  100.15464,
+                  15.24618
+                ],
+                [
+                  100.13631,
+                  15.24535
+                ],
+                [
+                  100.13042,
+                  15.2461
+                ],
+                [
+                  100.12573,
+                  15.24509
+                ],
+                [
+                  100.10959,
+                  15.24796
+                ],
+                [
+                  100.10508,
+                  15.24753
+                ],
+                [
+                  100.10165,
+                  15.24575
+                ],
+                [
+                  100.11139,
+                  15.22511
+                ],
+                [
+                  100.108,
+                  15.22261
+                ],
+                [
+                  100.10519,
+                  15.22389
+                ],
+                [
+                  100.10074,
+                  15.22286
+                ],
+                [
+                  100.08917,
+                  15.22296
+                ],
+                [
+                  100.07954,
+                  15.22786
+                ],
+                [
+                  100.07668,
+                  15.23174
+                ],
+                [
+                  100.07629,
+                  15.23704
+                ],
+                [
+                  100.07868,
+                  15.24363
+                ],
+                [
+                  100.08378,
+                  15.25198
+                ],
+                [
+                  100.08455,
+                  15.25162
+                ],
+                [
+                  100.08315,
+                  15.25603
+                ],
+                [
+                  100.08065,
+                  15.25691
+                ],
+                [
+                  100.06849,
+                  15.25544
+                ],
+                [
+                  100.06416,
+                  15.25698
+                ],
+                [
+                  100.0584,
+                  15.26375
+                ],
+                [
+                  100.05684,
+                  15.26849
+                ],
+                [
+                  100.06858,
+                  15.26407
+                ],
+                [
+                  100.07247,
+                  15.26461
+                ],
+                [
+                  100.07699,
+                  15.2666
+                ],
+                [
+                  100.08229,
+                  15.27252
+                ],
+                [
+                  100.09441,
+                  15.27255
+                ],
+                [
+                  100.09732,
+                  15.27456
+                ],
+                [
+                  100.10763,
+                  15.27491
+                ],
+                [
+                  100.11394,
+                  15.28581
+                ],
+                [
+                  100.12049,
+                  15.29112
+                ],
+                [
+                  100.12464,
+                  15.28855
+                ],
+                [
+                  100.13059,
+                  15.28908
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "180102",
+          "tambon": "ต.บ้านกล้วย",
+          "amphoe": "อ.เมืองชัยนาท",
+          "province": "จ.ชัยนาท",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "เหนือปตร.มหาราช",
+          "latitude": 15.15892,
+          "longitude": 100.17329,
+          "sum_rainfall_mm": 106.79999999999998,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.17551,
+                  15.16157
+                ],
+                [
+                  100.17672,
+                  15.15753
+                ],
+                [
+                  100.17063,
+                  15.15416
+                ],
+                [
+                  100.16098,
+                  15.15576
+                ],
+                [
+                  100.15423,
+                  15.16239
+                ],
+                [
+                  100.14608,
+                  15.16613
+                ],
+                [
+                  100.14214,
+                  15.16669
+                ],
+                [
+                  100.12657,
+                  15.16504
+                ],
+                [
+                  100.12535,
+                  15.16686
+                ],
+                [
+                  100.12531,
+                  15.17015
+                ],
+                [
+                  100.12895,
+                  15.1708
+                ],
+                [
+                  100.13261,
+                  15.17474
+                ],
+                [
+                  100.13151,
+                  15.17808
+                ],
+                [
+                  100.13281,
+                  15.1817
+                ],
+                [
+                  100.13275,
+                  15.18589
+                ],
+                [
+                  100.13036,
+                  15.18865
+                ],
+                [
+                  100.1517,
+                  15.20046
+                ],
+                [
+                  100.1799,
+                  15.21015
+                ],
+                [
+                  100.17965,
+                  15.20095
+                ],
+                [
+                  100.17609,
+                  15.18941
+                ],
+                [
+                  100.17563,
+                  15.18144
+                ],
+                [
+                  100.17339,
+                  15.17418
+                ],
+                [
+                  100.17151,
+                  15.17198
+                ],
+                [
+                  100.1752,
+                  15.16846
+                ],
+                [
+                  100.17284,
+                  15.16467
+                ],
+                [
+                  100.17313,
+                  15.16137
+                ],
+                [
+                  100.17551,
+                  15.16157
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "180102",
+          "tambon": "ต.บ้านกล้วย",
+          "amphoe": "อ.เมืองชัยนาท",
+          "province": "จ.ชัยนาท",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "ท้ายปตร.มหาราช",
+          "latitude": 15.16144,
+          "longitude": 100.17268,
+          "sum_rainfall_mm": 109.79999999999998,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.17551,
+                  15.16157
+                ],
+                [
+                  100.17672,
+                  15.15753
+                ],
+                [
+                  100.17063,
+                  15.15416
+                ],
+                [
+                  100.16098,
+                  15.15576
+                ],
+                [
+                  100.15423,
+                  15.16239
+                ],
+                [
+                  100.14608,
+                  15.16613
+                ],
+                [
+                  100.14214,
+                  15.16669
+                ],
+                [
+                  100.12657,
+                  15.16504
+                ],
+                [
+                  100.12535,
+                  15.16686
+                ],
+                [
+                  100.12531,
+                  15.17015
+                ],
+                [
+                  100.12895,
+                  15.1708
+                ],
+                [
+                  100.13261,
+                  15.17474
+                ],
+                [
+                  100.13151,
+                  15.17808
+                ],
+                [
+                  100.13281,
+                  15.1817
+                ],
+                [
+                  100.13275,
+                  15.18589
+                ],
+                [
+                  100.13036,
+                  15.18865
+                ],
+                [
+                  100.1517,
+                  15.20046
+                ],
+                [
+                  100.1799,
+                  15.21015
+                ],
+                [
+                  100.17965,
+                  15.20095
+                ],
+                [
+                  100.17609,
+                  15.18941
+                ],
+                [
+                  100.17563,
+                  15.18144
+                ],
+                [
+                  100.17339,
+                  15.17418
+                ],
+                [
+                  100.17151,
+                  15.17198
+                ],
+                [
+                  100.1752,
+                  15.16846
+                ],
+                [
+                  100.17284,
+                  15.16467
+                ],
+                [
+                  100.17313,
+                  15.16137
+                ],
+                [
+                  100.17551,
+                  15.16157
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "180106",
+          "tambon": "ต.หาดท่าเสา",
+          "amphoe": "อ.เมืองชัยนาท",
+          "province": "จ.ชัยนาท",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "ปตร.พลเทพ",
+          "latitude": 15.215885,
+          "longitude": 100.073047,
+          "sum_rainfall_mm": 23.0,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.08378,
+                  15.25198
+                ],
+                [
+                  100.07747,
+                  15.24148
+                ],
+                [
+                  100.07629,
+                  15.23704
+                ],
+                [
+                  100.07668,
+                  15.23174
+                ],
+                [
+                  100.08013,
+                  15.22741
+                ],
+                [
+                  100.09411,
+                  15.21945
+                ],
+                [
+                  100.10115,
+                  15.20631
+                ],
+                [
+                  100.10409,
+                  15.2041
+                ],
+                [
+                  100.10372,
+                  15.19694
+                ],
+                [
+                  100.10203,
+                  15.19333
+                ],
+                [
+                  100.08909,
+                  15.18406
+                ],
+                [
+                  100.08145,
+                  15.16966
+                ],
+                [
+                  100.07634,
+                  15.17563
+                ],
+                [
+                  100.0721,
+                  15.17605
+                ],
+                [
+                  100.05845,
+                  15.181
+                ],
+                [
+                  100.05501,
+                  15.17949
+                ],
+                [
+                  100.05429,
+                  15.18222
+                ],
+                [
+                  100.05486,
+                  15.18872
+                ],
+                [
+                  100.05678,
+                  15.19388
+                ],
+                [
+                  100.06144,
+                  15.19452
+                ],
+                [
+                  100.06385,
+                  15.20023
+                ],
+                [
+                  100.06825,
+                  15.20207
+                ],
+                [
+                  100.06784,
+                  15.20584
+                ],
+                [
+                  100.06934,
+                  15.20829
+                ],
+                [
+                  100.06803,
+                  15.21157
+                ],
+                [
+                  100.07187,
+                  15.21364
+                ],
+                [
+                  100.07543,
+                  15.22182
+                ],
+                [
+                  100.06398,
+                  15.23429
+                ],
+                [
+                  100.05924,
+                  15.24421
+                ],
+                [
+                  100.05794,
+                  15.25184
+                ],
+                [
+                  100.06538,
+                  15.25656
+                ],
+                [
+                  100.06916,
+                  15.25544
+                ],
+                [
+                  100.08065,
+                  15.25691
+                ],
+                [
+                  100.08315,
+                  15.25603
+                ],
+                [
+                  100.08455,
+                  15.25162
+                ],
+                [
+                  100.08378,
+                  15.25198
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "180106",
+          "tambon": "ต.หาดท่าเสา",
+          "amphoe": "อ.เมืองชัยนาท",
+          "province": "จ.ชัยนาท",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "T.ปตร.พลเทพ",
+          "latitude": 15.214294,
+          "longitude": 100.073325,
+          "sum_rainfall_mm": 77.0,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.08378,
+                  15.25198
+                ],
+                [
+                  100.07747,
+                  15.24148
+                ],
+                [
+                  100.07629,
+                  15.23704
+                ],
+                [
+                  100.07668,
+                  15.23174
+                ],
+                [
+                  100.08013,
+                  15.22741
+                ],
+                [
+                  100.09411,
+                  15.21945
+                ],
+                [
+                  100.10115,
+                  15.20631
+                ],
+                [
+                  100.10409,
+                  15.2041
+                ],
+                [
+                  100.10372,
+                  15.19694
+                ],
+                [
+                  100.10203,
+                  15.19333
+                ],
+                [
+                  100.08909,
+                  15.18406
+                ],
+                [
+                  100.08145,
+                  15.16966
+                ],
+                [
+                  100.07634,
+                  15.17563
+                ],
+                [
+                  100.0721,
+                  15.17605
+                ],
+                [
+                  100.05845,
+                  15.181
+                ],
+                [
+                  100.05501,
+                  15.17949
+                ],
+                [
+                  100.05429,
+                  15.18222
+                ],
+                [
+                  100.05486,
+                  15.18872
+                ],
+                [
+                  100.05678,
+                  15.19388
+                ],
+                [
+                  100.06144,
+                  15.19452
+                ],
+                [
+                  100.06385,
+                  15.20023
+                ],
+                [
+                  100.06825,
+                  15.20207
+                ],
+                [
+                  100.06784,
+                  15.20584
+                ],
+                [
+                  100.06934,
+                  15.20829
+                ],
+                [
+                  100.06803,
+                  15.21157
+                ],
+                [
+                  100.07187,
+                  15.21364
+                ],
+                [
+                  100.07543,
+                  15.22182
+                ],
+                [
+                  100.06398,
+                  15.23429
+                ],
+                [
+                  100.05924,
+                  15.24421
+                ],
+                [
+                  100.05794,
+                  15.25184
+                ],
+                [
+                  100.06538,
+                  15.25656
+                ],
+                [
+                  100.06916,
+                  15.25544
+                ],
+                [
+                  100.08065,
+                  15.25691
+                ],
+                [
+                  100.08315,
+                  15.25603
+                ],
+                [
+                  100.08455,
+                  15.25162
+                ],
+                [
+                  100.08378,
+                  15.25198
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "180106",
+          "tambon": "ต.หาดท่าเสา",
+          "amphoe": "อ.เมืองชัยนาท",
+          "province": "จ.ชัยนาท",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "สะพานคง-ศุข ศรีสวัสดิ์",
+          "latitude": 15.225,
+          "longitude": 100.07824,
+          "sum_rainfall_mm": 72.60000000000001,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.08378,
+                  15.25198
+                ],
+                [
+                  100.07747,
+                  15.24148
+                ],
+                [
+                  100.07629,
+                  15.23704
+                ],
+                [
+                  100.07668,
+                  15.23174
+                ],
+                [
+                  100.08013,
+                  15.22741
+                ],
+                [
+                  100.09411,
+                  15.21945
+                ],
+                [
+                  100.10115,
+                  15.20631
+                ],
+                [
+                  100.10409,
+                  15.2041
+                ],
+                [
+                  100.10372,
+                  15.19694
+                ],
+                [
+                  100.10203,
+                  15.19333
+                ],
+                [
+                  100.08909,
+                  15.18406
+                ],
+                [
+                  100.08145,
+                  15.16966
+                ],
+                [
+                  100.07634,
+                  15.17563
+                ],
+                [
+                  100.0721,
+                  15.17605
+                ],
+                [
+                  100.05845,
+                  15.181
+                ],
+                [
+                  100.05501,
+                  15.17949
+                ],
+                [
+                  100.05429,
+                  15.18222
+                ],
+                [
+                  100.05486,
+                  15.18872
+                ],
+                [
+                  100.05678,
+                  15.19388
+                ],
+                [
+                  100.06144,
+                  15.19452
+                ],
+                [
+                  100.06385,
+                  15.20023
+                ],
+                [
+                  100.06825,
+                  15.20207
+                ],
+                [
+                  100.06784,
+                  15.20584
+                ],
+                [
+                  100.06934,
+                  15.20829
+                ],
+                [
+                  100.06803,
+                  15.21157
+                ],
+                [
+                  100.07187,
+                  15.21364
+                ],
+                [
+                  100.07543,
+                  15.22182
+                ],
+                [
+                  100.06398,
+                  15.23429
+                ],
+                [
+                  100.05924,
+                  15.24421
+                ],
+                [
+                  100.05794,
+                  15.25184
+                ],
+                [
+                  100.06538,
+                  15.25656
+                ],
+                [
+                  100.06916,
+                  15.25544
+                ],
+                [
+                  100.08065,
+                  15.25691
+                ],
+                [
+                  100.08315,
+                  15.25603
+                ],
+                [
+                  100.08455,
+                  15.25162
+                ],
+                [
+                  100.08378,
+                  15.25198
+                ]
+              ]
+            ]
+          }
+        },
+        {
           "geocode": "180302",
           "tambon": "ต.มะขามเฒ่า",
           "amphoe": "อ.วัดสิงห์",
@@ -21205,8 +34975,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "T.ปตร.มะขามเฒ่า",
           "latitude": 15.222455,
           "longitude": 100.062221,
-          "sum_rainfall_mm": 108.0,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 126.0,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -21392,8 +35162,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ท้ายปตร.มะขามเฒ่า-อู่ทอง",
           "latitude": 15.22229,
           "longitude": 100.06236,
-          "sum_rainfall_mm": 57.8,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 71.0,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -21579,8 +35349,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.วัดสิงห์",
           "latitude": 15.2584,
           "longitude": 100.04493,
-          "sum_rainfall_mm": 28.200000000000003,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 40.0,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -21638,8 +35408,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สรรพยา",
           "latitude": 15.10907,
           "longitude": 100.26785,
-          "sum_rainfall_mm": 81.80000000000001,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 99.0,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -21721,8 +35491,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.สรรพยา",
           "latitude": 15.13217,
           "longitude": 100.25129,
-          "sum_rainfall_mm": 116.19999999999999,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 131.79999999999998,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -21835,6 +35605,1192 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
+          "geocode": "600702",
+          "tambon": "ต.ช่องแค",
+          "amphoe": "อ.ตาคลี",
+          "province": "จ.นครสวรรค์",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ่อดินขาว",
+          "latitude": 15.169044,
+          "longitude": 100.41471,
+          "sum_rainfall_mm": 24.2,
+          "observed_at": "2026-09-25T03:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.45012,
+                  15.24033
+                ],
+                [
+                  100.44747,
+                  15.23823
+                ],
+                [
+                  100.44553,
+                  15.23341
+                ],
+                [
+                  100.4443,
+                  15.22672
+                ],
+                [
+                  100.44137,
+                  15.22039
+                ],
+                [
+                  100.44089,
+                  15.21517
+                ],
+                [
+                  100.43692,
+                  15.20923
+                ],
+                [
+                  100.43658,
+                  15.20652
+                ],
+                [
+                  100.44224,
+                  15.19994
+                ],
+                [
+                  100.45364,
+                  15.19767
+                ],
+                [
+                  100.45731,
+                  15.19521
+                ],
+                [
+                  100.45566,
+                  15.17539
+                ],
+                [
+                  100.44812,
+                  15.14567
+                ],
+                [
+                  100.44513,
+                  15.14622
+                ],
+                [
+                  100.4419,
+                  15.14511
+                ],
+                [
+                  100.43253,
+                  15.13852
+                ],
+                [
+                  100.42479,
+                  15.14912
+                ],
+                [
+                  100.421,
+                  15.15158
+                ],
+                [
+                  100.41387,
+                  15.16003
+                ],
+                [
+                  100.41578,
+                  15.16822
+                ],
+                [
+                  100.41343,
+                  15.17205
+                ],
+                [
+                  100.3904,
+                  15.19586
+                ],
+                [
+                  100.39401,
+                  15.20642
+                ],
+                [
+                  100.3978,
+                  15.21278
+                ],
+                [
+                  100.39507,
+                  15.21438
+                ],
+                [
+                  100.39401,
+                  15.21814
+                ],
+                [
+                  100.39482,
+                  15.22053
+                ],
+                [
+                  100.39036,
+                  15.22291
+                ],
+                [
+                  100.39009,
+                  15.22703
+                ],
+                [
+                  100.38709,
+                  15.23083
+                ],
+                [
+                  100.38883,
+                  15.23262
+                ],
+                [
+                  100.39349,
+                  15.23006
+                ],
+                [
+                  100.39578,
+                  15.23011
+                ],
+                [
+                  100.40152,
+                  15.23373
+                ],
+                [
+                  100.40294,
+                  15.23964
+                ],
+                [
+                  100.40248,
+                  15.24206
+                ],
+                [
+                  100.40388,
+                  15.24418
+                ],
+                [
+                  100.41217,
+                  15.24089
+                ],
+                [
+                  100.41775,
+                  15.24395
+                ],
+                [
+                  100.42116,
+                  15.24438
+                ],
+                [
+                  100.42426,
+                  15.23854
+                ],
+                [
+                  100.4261,
+                  15.23808
+                ],
+                [
+                  100.43384,
+                  15.23875
+                ],
+                [
+                  100.43809,
+                  15.24087
+                ],
+                [
+                  100.44481,
+                  15.23975
+                ],
+                [
+                  100.45012,
+                  15.24033
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "600702",
+          "tambon": "ต.ช่องแค",
+          "amphoe": "อ.ตาคลี",
+          "province": "จ.นครสวรรค์",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "เขาวง",
+          "latitude": 15.181689,
+          "longitude": 100.41453,
+          "sum_rainfall_mm": 77.0,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.45012,
+                  15.24033
+                ],
+                [
+                  100.44747,
+                  15.23823
+                ],
+                [
+                  100.44553,
+                  15.23341
+                ],
+                [
+                  100.4443,
+                  15.22672
+                ],
+                [
+                  100.44137,
+                  15.22039
+                ],
+                [
+                  100.44089,
+                  15.21517
+                ],
+                [
+                  100.43692,
+                  15.20923
+                ],
+                [
+                  100.43658,
+                  15.20652
+                ],
+                [
+                  100.44224,
+                  15.19994
+                ],
+                [
+                  100.45364,
+                  15.19767
+                ],
+                [
+                  100.45731,
+                  15.19521
+                ],
+                [
+                  100.45566,
+                  15.17539
+                ],
+                [
+                  100.44812,
+                  15.14567
+                ],
+                [
+                  100.44513,
+                  15.14622
+                ],
+                [
+                  100.4419,
+                  15.14511
+                ],
+                [
+                  100.43253,
+                  15.13852
+                ],
+                [
+                  100.42479,
+                  15.14912
+                ],
+                [
+                  100.421,
+                  15.15158
+                ],
+                [
+                  100.41387,
+                  15.16003
+                ],
+                [
+                  100.41578,
+                  15.16822
+                ],
+                [
+                  100.41343,
+                  15.17205
+                ],
+                [
+                  100.3904,
+                  15.19586
+                ],
+                [
+                  100.39401,
+                  15.20642
+                ],
+                [
+                  100.3978,
+                  15.21278
+                ],
+                [
+                  100.39507,
+                  15.21438
+                ],
+                [
+                  100.39401,
+                  15.21814
+                ],
+                [
+                  100.39482,
+                  15.22053
+                ],
+                [
+                  100.39036,
+                  15.22291
+                ],
+                [
+                  100.39009,
+                  15.22703
+                ],
+                [
+                  100.38709,
+                  15.23083
+                ],
+                [
+                  100.38883,
+                  15.23262
+                ],
+                [
+                  100.39349,
+                  15.23006
+                ],
+                [
+                  100.39578,
+                  15.23011
+                ],
+                [
+                  100.40152,
+                  15.23373
+                ],
+                [
+                  100.40294,
+                  15.23964
+                ],
+                [
+                  100.40248,
+                  15.24206
+                ],
+                [
+                  100.40388,
+                  15.24418
+                ],
+                [
+                  100.41217,
+                  15.24089
+                ],
+                [
+                  100.41775,
+                  15.24395
+                ],
+                [
+                  100.42116,
+                  15.24438
+                ],
+                [
+                  100.42426,
+                  15.23854
+                ],
+                [
+                  100.4261,
+                  15.23808
+                ],
+                [
+                  100.43384,
+                  15.23875
+                ],
+                [
+                  100.43809,
+                  15.24087
+                ],
+                [
+                  100.44481,
+                  15.23975
+                ],
+                [
+                  100.45012,
+                  15.24033
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "600701",
+          "tambon": "ต.ตาคลี",
+          "amphoe": "อ.ตาคลี",
+          "province": "จ.นครสวรรค์",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "อบต.ตาคลี",
+          "latitude": 15.29119,
+          "longitude": 100.38288,
+          "sum_rainfall_mm": 102.0,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.40324,
+                  15.32947
+                ],
+                [
+                  100.40114,
+                  15.32531
+                ],
+                [
+                  100.40182,
+                  15.32017
+                ],
+                [
+                  100.39807,
+                  15.31853
+                ],
+                [
+                  100.39745,
+                  15.3146
+                ],
+                [
+                  100.40482,
+                  15.31223
+                ],
+                [
+                  100.40943,
+                  15.30722
+                ],
+                [
+                  100.41916,
+                  15.30751
+                ],
+                [
+                  100.42605,
+                  15.30113
+                ],
+                [
+                  100.42723,
+                  15.29838
+                ],
+                [
+                  100.42805,
+                  15.2938
+                ],
+                [
+                  100.42237,
+                  15.2869
+                ],
+                [
+                  100.4223,
+                  15.27941
+                ],
+                [
+                  100.42081,
+                  15.27714
+                ],
+                [
+                  100.42042,
+                  15.2692
+                ],
+                [
+                  100.41656,
+                  15.26376
+                ],
+                [
+                  100.41897,
+                  15.2622
+                ],
+                [
+                  100.41621,
+                  15.25834
+                ],
+                [
+                  100.4214,
+                  15.2514
+                ],
+                [
+                  100.42135,
+                  15.24658
+                ],
+                [
+                  100.41952,
+                  15.24649
+                ],
+                [
+                  100.41813,
+                  15.24457
+                ],
+                [
+                  100.41203,
+                  15.24176
+                ],
+                [
+                  100.40388,
+                  15.24418
+                ],
+                [
+                  100.40248,
+                  15.24206
+                ],
+                [
+                  100.40294,
+                  15.23964
+                ],
+                [
+                  100.40152,
+                  15.23373
+                ],
+                [
+                  100.39578,
+                  15.23011
+                ],
+                [
+                  100.39349,
+                  15.23006
+                ],
+                [
+                  100.38883,
+                  15.23262
+                ],
+                [
+                  100.38718,
+                  15.23131
+                ],
+                [
+                  100.38731,
+                  15.22988
+                ],
+                [
+                  100.39009,
+                  15.22703
+                ],
+                [
+                  100.39036,
+                  15.22291
+                ],
+                [
+                  100.39482,
+                  15.22053
+                ],
+                [
+                  100.39401,
+                  15.21814
+                ],
+                [
+                  100.39507,
+                  15.21438
+                ],
+                [
+                  100.3978,
+                  15.21278
+                ],
+                [
+                  100.39401,
+                  15.20642
+                ],
+                [
+                  100.38917,
+                  15.1906
+                ],
+                [
+                  100.38284,
+                  15.19081
+                ],
+                [
+                  100.37749,
+                  15.18143
+                ],
+                [
+                  100.37443,
+                  15.17841
+                ],
+                [
+                  100.36202,
+                  15.18703
+                ],
+                [
+                  100.35467,
+                  15.19393
+                ],
+                [
+                  100.35257,
+                  15.20015
+                ],
+                [
+                  100.35605,
+                  15.20693
+                ],
+                [
+                  100.33677,
+                  15.22592
+                ],
+                [
+                  100.27886,
+                  15.24811
+                ],
+                [
+                  100.27501,
+                  15.25146
+                ],
+                [
+                  100.26972,
+                  15.25162
+                ],
+                [
+                  100.26923,
+                  15.2593
+                ],
+                [
+                  100.26547,
+                  15.26997
+                ],
+                [
+                  100.26576,
+                  15.27453
+                ],
+                [
+                  100.26266,
+                  15.27725
+                ],
+                [
+                  100.26353,
+                  15.28694
+                ],
+                [
+                  100.25874,
+                  15.29072
+                ],
+                [
+                  100.25415,
+                  15.291
+                ],
+                [
+                  100.25467,
+                  15.29795
+                ],
+                [
+                  100.25117,
+                  15.30303
+                ],
+                [
+                  100.25202,
+                  15.30632
+                ],
+                [
+                  100.25922,
+                  15.31225
+                ],
+                [
+                  100.26346,
+                  15.31431
+                ],
+                [
+                  100.26484,
+                  15.31909
+                ],
+                [
+                  100.26406,
+                  15.32649
+                ],
+                [
+                  100.26926,
+                  15.32585
+                ],
+                [
+                  100.27631,
+                  15.32857
+                ],
+                [
+                  100.27883,
+                  15.32723
+                ],
+                [
+                  100.28065,
+                  15.3222
+                ],
+                [
+                  100.29011,
+                  15.31777
+                ],
+                [
+                  100.30711,
+                  15.31682
+                ],
+                [
+                  100.31181,
+                  15.31301
+                ],
+                [
+                  100.31497,
+                  15.3141
+                ],
+                [
+                  100.31786,
+                  15.31218
+                ],
+                [
+                  100.32535,
+                  15.31649
+                ],
+                [
+                  100.34627,
+                  15.31896
+                ],
+                [
+                  100.34844,
+                  15.32382
+                ],
+                [
+                  100.34707,
+                  15.3273
+                ],
+                [
+                  100.34832,
+                  15.3318
+                ],
+                [
+                  100.35492,
+                  15.33388
+                ],
+                [
+                  100.35838,
+                  15.33651
+                ],
+                [
+                  100.36072,
+                  15.33649
+                ],
+                [
+                  100.36244,
+                  15.33909
+                ],
+                [
+                  100.36313,
+                  15.343
+                ],
+                [
+                  100.36497,
+                  15.34344
+                ],
+                [
+                  100.36648,
+                  15.34571
+                ],
+                [
+                  100.37089,
+                  15.34628
+                ],
+                [
+                  100.37268,
+                  15.34544
+                ],
+                [
+                  100.37759,
+                  15.34686
+                ],
+                [
+                  100.38333,
+                  15.34484
+                ],
+                [
+                  100.38713,
+                  15.33581
+                ],
+                [
+                  100.39007,
+                  15.33509
+                ],
+                [
+                  100.39564,
+                  15.32836
+                ],
+                [
+                  100.40046,
+                  15.33125
+                ],
+                [
+                  100.40324,
+                  15.32947
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "600710",
+          "tambon": "ต.พรหมนิมิต",
+          "amphoe": "อ.ตาคลี",
+          "province": "จ.นครสวรรค์",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "T.ปตร.ช่องแค",
+          "latitude": 15.145483,
+          "longitude": 100.411717,
+          "sum_rainfall_mm": 34.0,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.44812,
+                  15.14567
+                ],
+                [
+                  100.4478,
+                  15.13944
+                ],
+                [
+                  100.44941,
+                  15.1324
+                ],
+                [
+                  100.44325,
+                  15.12713
+                ],
+                [
+                  100.44017,
+                  15.12622
+                ],
+                [
+                  100.43434,
+                  15.12663
+                ],
+                [
+                  100.41878,
+                  15.12994
+                ],
+                [
+                  100.41373,
+                  15.1365
+                ],
+                [
+                  100.40686,
+                  15.16311
+                ],
+                [
+                  100.40446,
+                  15.16292
+                ],
+                [
+                  100.39266,
+                  15.15743
+                ],
+                [
+                  100.38475,
+                  15.15874
+                ],
+                [
+                  100.38201,
+                  15.16183
+                ],
+                [
+                  100.37443,
+                  15.17841
+                ],
+                [
+                  100.37749,
+                  15.18143
+                ],
+                [
+                  100.38284,
+                  15.19081
+                ],
+                [
+                  100.38917,
+                  15.1906
+                ],
+                [
+                  100.3904,
+                  15.19586
+                ],
+                [
+                  100.41343,
+                  15.17205
+                ],
+                [
+                  100.41578,
+                  15.16822
+                ],
+                [
+                  100.41387,
+                  15.16003
+                ],
+                [
+                  100.421,
+                  15.15158
+                ],
+                [
+                  100.42479,
+                  15.14912
+                ],
+                [
+                  100.43253,
+                  15.13852
+                ],
+                [
+                  100.4419,
+                  15.14511
+                ],
+                [
+                  100.44513,
+                  15.14622
+                ],
+                [
+                  100.44812,
+                  15.14567
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "600710",
+          "tambon": "ต.พรหมนิมิต",
+          "amphoe": "อ.ตาคลี",
+          "province": "จ.นครสวรรค์",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "ท้ายปตร.ช่องแค",
+          "latitude": 15.14554,
+          "longitude": 100.41321,
+          "sum_rainfall_mm": 67.0,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.44812,
+                  15.14567
+                ],
+                [
+                  100.4478,
+                  15.13944
+                ],
+                [
+                  100.44941,
+                  15.1324
+                ],
+                [
+                  100.44325,
+                  15.12713
+                ],
+                [
+                  100.44017,
+                  15.12622
+                ],
+                [
+                  100.43434,
+                  15.12663
+                ],
+                [
+                  100.41878,
+                  15.12994
+                ],
+                [
+                  100.41373,
+                  15.1365
+                ],
+                [
+                  100.40686,
+                  15.16311
+                ],
+                [
+                  100.40446,
+                  15.16292
+                ],
+                [
+                  100.39266,
+                  15.15743
+                ],
+                [
+                  100.38475,
+                  15.15874
+                ],
+                [
+                  100.38201,
+                  15.16183
+                ],
+                [
+                  100.37443,
+                  15.17841
+                ],
+                [
+                  100.37749,
+                  15.18143
+                ],
+                [
+                  100.38284,
+                  15.19081
+                ],
+                [
+                  100.38917,
+                  15.1906
+                ],
+                [
+                  100.3904,
+                  15.19586
+                ],
+                [
+                  100.41343,
+                  15.17205
+                ],
+                [
+                  100.41578,
+                  15.16822
+                ],
+                [
+                  100.41387,
+                  15.16003
+                ],
+                [
+                  100.421,
+                  15.15158
+                ],
+                [
+                  100.42479,
+                  15.14912
+                ],
+                [
+                  100.43253,
+                  15.13852
+                ],
+                [
+                  100.4419,
+                  15.14511
+                ],
+                [
+                  100.44513,
+                  15.14622
+                ],
+                [
+                  100.44812,
+                  15.14567
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "600710",
+          "tambon": "ต.พรหมนิมิต",
+          "amphoe": "อ.ตาคลี",
+          "province": "จ.นครสวรรค์",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "เหนือปตร.ช่องแค",
+          "latitude": 15.14624,
+          "longitude": 100.41298,
+          "sum_rainfall_mm": 68.4,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.44812,
+                  15.14567
+                ],
+                [
+                  100.4478,
+                  15.13944
+                ],
+                [
+                  100.44941,
+                  15.1324
+                ],
+                [
+                  100.44325,
+                  15.12713
+                ],
+                [
+                  100.44017,
+                  15.12622
+                ],
+                [
+                  100.43434,
+                  15.12663
+                ],
+                [
+                  100.41878,
+                  15.12994
+                ],
+                [
+                  100.41373,
+                  15.1365
+                ],
+                [
+                  100.40686,
+                  15.16311
+                ],
+                [
+                  100.40446,
+                  15.16292
+                ],
+                [
+                  100.39266,
+                  15.15743
+                ],
+                [
+                  100.38475,
+                  15.15874
+                ],
+                [
+                  100.38201,
+                  15.16183
+                ],
+                [
+                  100.37443,
+                  15.17841
+                ],
+                [
+                  100.37749,
+                  15.18143
+                ],
+                [
+                  100.38284,
+                  15.19081
+                ],
+                [
+                  100.38917,
+                  15.1906
+                ],
+                [
+                  100.3904,
+                  15.19586
+                ],
+                [
+                  100.41343,
+                  15.17205
+                ],
+                [
+                  100.41578,
+                  15.16822
+                ],
+                [
+                  100.41387,
+                  15.16003
+                ],
+                [
+                  100.421,
+                  15.15158
+                ],
+                [
+                  100.42479,
+                  15.14912
+                ],
+                [
+                  100.43253,
+                  15.13852
+                ],
+                [
+                  100.4419,
+                  15.14511
+                ],
+                [
+                  100.44513,
+                  15.14622
+                ],
+                [
+                  100.44812,
+                  15.14567
+                ]
+              ]
+            ]
+          }
+        },
+        {
           "geocode": "140201",
           "tambon": "ต.ท่าเรือ",
           "amphoe": "อ.ท่าเรือ",
@@ -21844,8 +36800,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ท่าเรือ",
           "latitude": 14.56014,
           "longitude": 100.71987,
-          "sum_rainfall_mm": 110.2,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 147.4,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -21924,11 +36880,11 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.พระนครศรีอยุธยา",
           "region_id": "1",
           "region_name": "ภาคกลาง",
-          "station": "เหนือปตร.พระนารายน์",
-          "latitude": 14.5583,
-          "longitude": 100.76205,
-          "sum_rainfall_mm": 89.0,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "station": "ท้ายปตร.พระนารายน์",
+          "latitude": 14.55667,
+          "longitude": 100.76201,
+          "sum_rainfall_mm": 145.8,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -22035,11 +36991,11 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.พระนครศรีอยุธยา",
           "region_id": "1",
           "region_name": "ภาคกลาง",
-          "station": "ท้ายปตร.พระนารายน์",
-          "latitude": 14.55667,
-          "longitude": 100.76201,
-          "sum_rainfall_mm": 93.0,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "station": "เหนือปตร.พระนารายน์",
+          "latitude": 14.5583,
+          "longitude": 100.76205,
+          "sum_rainfall_mm": 138.0,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -22149,8 +37105,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านโคกแสมสาร",
           "latitude": 15.336768,
           "longitude": 100.831599,
-          "sum_rainfall_mm": 6.5,
-          "observed_at": "2026-09-25T00:00:00+07:00",
+          "sum_rainfall_mm": 7.5,
+          "observed_at": "2026-09-25T03:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -22481,7 +37437,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 15.337537,
           "longitude": 100.960186,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-25T00:00:00+07:00",
+          "observed_at": "2026-09-25T03:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -22827,8 +37783,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านเขาขุยพัฒนา",
           "latitude": 15.528146,
           "longitude": 100.843028,
-          "sum_rainfall_mm": 29.5,
-          "observed_at": "2026-09-25T00:00:00+07:00",
+          "sum_rainfall_mm": 33.0,
+          "observed_at": "2026-09-25T03:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -23298,8 +38254,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.หนองมะค่า",
           "latitude": 15.4321,
           "longitude": 100.9245,
-          "sum_rainfall_mm": 132.39999999999998,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 137.6,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -23769,8 +38725,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": " สะพานข้ามคลองโคน",
           "latitude": 13.3319,
           "longitude": 99.96896,
-          "sum_rainfall_mm": 129.0,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 130.2,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -23980,8 +38936,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดศรัทธาธรรม",
           "latitude": 13.3773,
           "longitude": 99.993,
-          "sum_rainfall_mm": 75.0,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 76.5,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -24083,8 +39039,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "พระรามสอง",
           "latitude": 13.38362,
           "longitude": 99.9836,
-          "sum_rainfall_mm": 93.60000000000001,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 95.6,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -24186,8 +39142,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "โรงเรียนบ้านลาดใหญ่สามัคคี",
           "latitude": 13.482,
           "longitude": 100.044,
-          "sum_rainfall_mm": 46.0,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 47.0,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -24325,8 +39281,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ฝายคลองสุคต",
           "latitude": 14.863621,
           "longitude": 101.119957,
-          "sum_rainfall_mm": 75.0,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 104.0,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -24668,8 +39624,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.วังม่วง",
           "latitude": 14.84867,
           "longitude": 101.14549,
-          "sum_rainfall_mm": 143.8,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 175.8,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -25002,6 +39958,3104 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
+          "geocode": "190301",
+          "tambon": "ต.หนองแค",
+          "amphoe": "อ.หนองแค",
+          "province": "จ.สระบุรี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "ท้ายปตร.พระศรีศิลป์",
+          "latitude": 14.32729,
+          "longitude": 100.87117,
+          "sum_rainfall_mm": 118.80000000000001,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.8798,
+                  14.34303
+                ],
+                [
+                  100.88555,
+                  14.33368
+                ],
+                [
+                  100.88176,
+                  14.31998
+                ],
+                [
+                  100.85126,
+                  14.33653
+                ],
+                [
+                  100.84981,
+                  14.3451
+                ],
+                [
+                  100.8718,
+                  14.35254
+                ],
+                [
+                  100.8798,
+                  14.34303
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "221004",
+          "tambon": "ต.คลองพลู",
+          "amphoe": "อ.เขาคิชฌกูฏ",
+          "province": "จ.จันทบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "บ้านวังยายมุก",
+          "latitude": 12.92717,
+          "longitude": 102.015565,
+          "sum_rainfall_mm": 0.0,
+          "observed_at": "2026-09-25T03:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  102.17381,
+                  13.011
+                ],
+                [
+                  102.17793,
+                  13.00826
+                ],
+                [
+                  102.1781,
+                  13.00152
+                ],
+                [
+                  102.18579,
+                  12.99689
+                ],
+                [
+                  102.1856,
+                  12.99555
+                ],
+                [
+                  102.18159,
+                  12.99252
+                ],
+                [
+                  102.18011,
+                  12.98818
+                ],
+                [
+                  102.17524,
+                  12.98397
+                ],
+                [
+                  102.17366,
+                  12.97722
+                ],
+                [
+                  102.1758,
+                  12.9714
+                ],
+                [
+                  102.17588,
+                  12.96762
+                ],
+                [
+                  102.18055,
+                  12.9635
+                ],
+                [
+                  102.18191,
+                  12.95855
+                ],
+                [
+                  102.18096,
+                  12.95758
+                ],
+                [
+                  102.17109,
+                  12.95095
+                ],
+                [
+                  102.16765,
+                  12.95015
+                ],
+                [
+                  102.16569,
+                  12.95065
+                ],
+                [
+                  102.16446,
+                  12.95543
+                ],
+                [
+                  102.16143,
+                  12.95706
+                ],
+                [
+                  102.15309,
+                  12.95827
+                ],
+                [
+                  102.14981,
+                  12.95546
+                ],
+                [
+                  102.14257,
+                  12.95549
+                ],
+                [
+                  102.13556,
+                  12.95816
+                ],
+                [
+                  102.13441,
+                  12.95963
+                ],
+                [
+                  102.13438,
+                  12.96331
+                ],
+                [
+                  102.12437,
+                  12.96205
+                ],
+                [
+                  102.12173,
+                  12.96357
+                ],
+                [
+                  102.11649,
+                  12.95448
+                ],
+                [
+                  102.1143,
+                  12.95615
+                ],
+                [
+                  102.11307,
+                  12.95948
+                ],
+                [
+                  102.1098,
+                  12.96082
+                ],
+                [
+                  102.0912,
+                  12.96421
+                ],
+                [
+                  102.08608,
+                  12.96168
+                ],
+                [
+                  102.08304,
+                  12.96273
+                ],
+                [
+                  102.07983,
+                  12.9621
+                ],
+                [
+                  102.07579,
+                  12.95522
+                ],
+                [
+                  102.07483,
+                  12.94958
+                ],
+                [
+                  102.0695,
+                  12.94815
+                ],
+                [
+                  102.06717,
+                  12.9462
+                ],
+                [
+                  102.07201,
+                  12.93773
+                ],
+                [
+                  102.06898,
+                  12.93396
+                ],
+                [
+                  102.06808,
+                  12.93013
+                ],
+                [
+                  102.06392,
+                  12.92718
+                ],
+                [
+                  102.06173,
+                  12.92777
+                ],
+                [
+                  102.06155,
+                  12.92653
+                ],
+                [
+                  102.06324,
+                  12.92478
+                ],
+                [
+                  102.05935,
+                  12.9209
+                ],
+                [
+                  102.05895,
+                  12.91902
+                ],
+                [
+                  102.05991,
+                  12.91761
+                ],
+                [
+                  102.05874,
+                  12.91583
+                ],
+                [
+                  102.0593,
+                  12.91376
+                ],
+                [
+                  102.05822,
+                  12.91076
+                ],
+                [
+                  102.05373,
+                  12.90898
+                ],
+                [
+                  102.05328,
+                  12.90212
+                ],
+                [
+                  102.05105,
+                  12.89761
+                ],
+                [
+                  102.04929,
+                  12.89688
+                ],
+                [
+                  102.04763,
+                  12.8942
+                ],
+                [
+                  102.04847,
+                  12.89141
+                ],
+                [
+                  102.04707,
+                  12.88934
+                ],
+                [
+                  102.0488,
+                  12.88315
+                ],
+                [
+                  102.04527,
+                  12.88521
+                ],
+                [
+                  102.035,
+                  12.88341
+                ],
+                [
+                  102.03372,
+                  12.88599
+                ],
+                [
+                  102.03123,
+                  12.88667
+                ],
+                [
+                  102.02932,
+                  12.88589
+                ],
+                [
+                  102.02576,
+                  12.88147
+                ],
+                [
+                  102.02506,
+                  12.87732
+                ],
+                [
+                  102.02198,
+                  12.87421
+                ],
+                [
+                  102.02178,
+                  12.8724
+                ],
+                [
+                  102.02327,
+                  12.87047
+                ],
+                [
+                  102.01875,
+                  12.87075
+                ],
+                [
+                  102.01803,
+                  12.87792
+                ],
+                [
+                  102.01535,
+                  12.87864
+                ],
+                [
+                  102.01314,
+                  12.87721
+                ],
+                [
+                  102.01176,
+                  12.8782
+                ],
+                [
+                  102.00631,
+                  12.89452
+                ],
+                [
+                  102.00309,
+                  12.91058
+                ],
+                [
+                  102.00425,
+                  12.91775
+                ],
+                [
+                  102.0034,
+                  12.92002
+                ],
+                [
+                  101.99501,
+                  12.91957
+                ],
+                [
+                  101.99037,
+                  12.92152
+                ],
+                [
+                  101.98545,
+                  12.92174
+                ],
+                [
+                  101.97922,
+                  12.91294
+                ],
+                [
+                  101.97569,
+                  12.91205
+                ],
+                [
+                  101.97285,
+                  12.91335
+                ],
+                [
+                  101.96478,
+                  12.91123
+                ],
+                [
+                  101.96408,
+                  12.90839
+                ],
+                [
+                  101.96148,
+                  12.90712
+                ],
+                [
+                  101.95952,
+                  12.90442
+                ],
+                [
+                  101.95832,
+                  12.90552
+                ],
+                [
+                  101.95738,
+                  12.9125
+                ],
+                [
+                  101.96291,
+                  12.919
+                ],
+                [
+                  101.96601,
+                  12.921
+                ],
+                [
+                  101.96459,
+                  12.92401
+                ],
+                [
+                  101.96631,
+                  12.92725
+                ],
+                [
+                  101.96528,
+                  12.92989
+                ],
+                [
+                  101.96605,
+                  12.93221
+                ],
+                [
+                  101.96404,
+                  12.93426
+                ],
+                [
+                  101.96411,
+                  12.93668
+                ],
+                [
+                  101.96889,
+                  12.93986
+                ],
+                [
+                  101.97173,
+                  12.94529
+                ],
+                [
+                  101.97177,
+                  12.9477
+                ],
+                [
+                  101.97099,
+                  12.95374
+                ],
+                [
+                  101.96705,
+                  12.95582
+                ],
+                [
+                  101.96551,
+                  12.95954
+                ],
+                [
+                  101.96226,
+                  12.96181
+                ],
+                [
+                  101.96098,
+                  12.96809
+                ],
+                [
+                  101.96187,
+                  12.97157
+                ],
+                [
+                  101.959,
+                  12.97678
+                ],
+                [
+                  101.96048,
+                  12.97723
+                ],
+                [
+                  101.96182,
+                  12.97565
+                ],
+                [
+                  101.96477,
+                  12.98141
+                ],
+                [
+                  101.97118,
+                  12.98163
+                ],
+                [
+                  101.97476,
+                  12.9864
+                ],
+                [
+                  101.9761,
+                  12.98621
+                ],
+                [
+                  101.9824,
+                  12.9775
+                ],
+                [
+                  101.98302,
+                  12.97278
+                ],
+                [
+                  101.98821,
+                  12.96857
+                ],
+                [
+                  101.99142,
+                  12.97087
+                ],
+                [
+                  101.99277,
+                  12.97417
+                ],
+                [
+                  101.99476,
+                  12.97487
+                ],
+                [
+                  101.99422,
+                  12.981
+                ],
+                [
+                  102.00062,
+                  12.98961
+                ],
+                [
+                  102.02184,
+                  12.98163
+                ],
+                [
+                  102.03727,
+                  12.98127
+                ],
+                [
+                  102.05187,
+                  12.96932
+                ],
+                [
+                  102.05409,
+                  12.9701
+                ],
+                [
+                  102.05176,
+                  12.9656
+                ],
+                [
+                  102.0522,
+                  12.96374
+                ],
+                [
+                  102.05081,
+                  12.96374
+                ],
+                [
+                  102.05447,
+                  12.96073
+                ],
+                [
+                  102.0554,
+                  12.96129
+                ],
+                [
+                  102.05463,
+                  12.96474
+                ],
+                [
+                  102.0561,
+                  12.96702
+                ],
+                [
+                  102.05744,
+                  12.96598
+                ],
+                [
+                  102.05933,
+                  12.96798
+                ],
+                [
+                  102.06183,
+                  12.96767
+                ],
+                [
+                  102.06072,
+                  12.96988
+                ],
+                [
+                  102.06172,
+                  12.97225
+                ],
+                [
+                  102.06341,
+                  12.9707
+                ],
+                [
+                  102.06636,
+                  12.97233
+                ],
+                [
+                  102.07091,
+                  12.97255
+                ],
+                [
+                  102.07172,
+                  12.97567
+                ],
+                [
+                  102.07751,
+                  12.97765
+                ],
+                [
+                  102.08559,
+                  12.98438
+                ],
+                [
+                  102.0898,
+                  12.98464
+                ],
+                [
+                  102.09241,
+                  12.98767
+                ],
+                [
+                  102.09905,
+                  12.98867
+                ],
+                [
+                  102.10493,
+                  12.98648
+                ],
+                [
+                  102.10801,
+                  12.98745
+                ],
+                [
+                  102.11013,
+                  12.98579
+                ],
+                [
+                  102.11394,
+                  12.98553
+                ],
+                [
+                  102.11746,
+                  12.98048
+                ],
+                [
+                  102.12222,
+                  12.9791
+                ],
+                [
+                  102.12619,
+                  12.98312
+                ],
+                [
+                  102.13329,
+                  12.98352
+                ],
+                [
+                  102.13584,
+                  12.98596
+                ],
+                [
+                  102.13947,
+                  12.98709
+                ],
+                [
+                  102.14002,
+                  12.9896
+                ],
+                [
+                  102.13761,
+                  12.99237
+                ],
+                [
+                  102.138,
+                  12.9985
+                ],
+                [
+                  102.15743,
+                  13.00343
+                ],
+                [
+                  102.16379,
+                  13.00379
+                ],
+                [
+                  102.16568,
+                  13.00516
+                ],
+                [
+                  102.16787,
+                  13.01075
+                ],
+                [
+                  102.17381,
+                  13.011
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "221005",
+          "tambon": "ต.จันทเขลม",
+          "amphoe": "อ.เขาคิชฌกูฏ",
+          "province": "จ.จันทบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "บ้านคลองใหญ่",
+          "latitude": 12.972159,
+          "longitude": 102.057715,
+          "sum_rainfall_mm": 78.5,
+          "observed_at": "2026-09-25T03:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  102.12888,
+                  13.19664
+                ],
+                [
+                  102.13316,
+                  13.1927
+                ],
+                [
+                  102.13784,
+                  13.18511
+                ],
+                [
+                  102.13656,
+                  13.18156
+                ],
+                [
+                  102.13513,
+                  13.18095
+                ],
+                [
+                  102.1354,
+                  13.17917
+                ],
+                [
+                  102.1337,
+                  13.17848
+                ],
+                [
+                  102.13442,
+                  13.17565
+                ],
+                [
+                  102.13877,
+                  13.1724
+                ],
+                [
+                  102.13788,
+                  13.16775
+                ],
+                [
+                  102.13654,
+                  13.1671
+                ],
+                [
+                  102.13526,
+                  13.16402
+                ],
+                [
+                  102.13687,
+                  13.15852
+                ],
+                [
+                  102.13426,
+                  13.1559
+                ],
+                [
+                  102.13149,
+                  13.15591
+                ],
+                [
+                  102.12707,
+                  13.15333
+                ],
+                [
+                  102.12086,
+                  13.15318
+                ],
+                [
+                  102.11988,
+                  13.15168
+                ],
+                [
+                  102.11447,
+                  13.15554
+                ],
+                [
+                  102.11058,
+                  13.1522
+                ],
+                [
+                  102.116,
+                  13.1408
+                ],
+                [
+                  102.11453,
+                  13.13954
+                ],
+                [
+                  102.11521,
+                  13.13581
+                ],
+                [
+                  102.119,
+                  13.13495
+                ],
+                [
+                  102.12174,
+                  13.12958
+                ],
+                [
+                  102.12462,
+                  13.12876
+                ],
+                [
+                  102.12772,
+                  13.13012
+                ],
+                [
+                  102.13293,
+                  13.13041
+                ],
+                [
+                  102.13705,
+                  13.13267
+                ],
+                [
+                  102.14527,
+                  13.1317
+                ],
+                [
+                  102.15034,
+                  13.1332
+                ],
+                [
+                  102.15414,
+                  13.1284
+                ],
+                [
+                  102.14832,
+                  13.1217
+                ],
+                [
+                  102.1467,
+                  13.11284
+                ],
+                [
+                  102.14225,
+                  13.10962
+                ],
+                [
+                  102.14137,
+                  13.10523
+                ],
+                [
+                  102.1448,
+                  13.10188
+                ],
+                [
+                  102.15394,
+                  13.08304
+                ],
+                [
+                  102.15443,
+                  13.07758
+                ],
+                [
+                  102.15229,
+                  13.07434
+                ],
+                [
+                  102.15607,
+                  13.06597
+                ],
+                [
+                  102.15482,
+                  13.06136
+                ],
+                [
+                  102.15598,
+                  13.0571
+                ],
+                [
+                  102.15601,
+                  13.05005
+                ],
+                [
+                  102.15677,
+                  13.04748
+                ],
+                [
+                  102.16087,
+                  13.04217
+                ],
+                [
+                  102.16696,
+                  13.03794
+                ],
+                [
+                  102.16809,
+                  13.02897
+                ],
+                [
+                  102.17388,
+                  13.0212
+                ],
+                [
+                  102.17422,
+                  13.01894
+                ],
+                [
+                  102.17157,
+                  13.01343
+                ],
+                [
+                  102.17381,
+                  13.011
+                ],
+                [
+                  102.16787,
+                  13.01075
+                ],
+                [
+                  102.16568,
+                  13.00516
+                ],
+                [
+                  102.16379,
+                  13.00379
+                ],
+                [
+                  102.15743,
+                  13.00343
+                ],
+                [
+                  102.138,
+                  12.9985
+                ],
+                [
+                  102.13761,
+                  12.99237
+                ],
+                [
+                  102.14002,
+                  12.9896
+                ],
+                [
+                  102.13947,
+                  12.98709
+                ],
+                [
+                  102.13584,
+                  12.98596
+                ],
+                [
+                  102.13329,
+                  12.98352
+                ],
+                [
+                  102.12619,
+                  12.98312
+                ],
+                [
+                  102.12222,
+                  12.9791
+                ],
+                [
+                  102.11746,
+                  12.98048
+                ],
+                [
+                  102.11394,
+                  12.98553
+                ],
+                [
+                  102.11013,
+                  12.98579
+                ],
+                [
+                  102.10801,
+                  12.98745
+                ],
+                [
+                  102.10493,
+                  12.98648
+                ],
+                [
+                  102.09905,
+                  12.98867
+                ],
+                [
+                  102.09241,
+                  12.98767
+                ],
+                [
+                  102.0898,
+                  12.98464
+                ],
+                [
+                  102.08559,
+                  12.98438
+                ],
+                [
+                  102.07751,
+                  12.97765
+                ],
+                [
+                  102.07172,
+                  12.97567
+                ],
+                [
+                  102.07091,
+                  12.97255
+                ],
+                [
+                  102.06636,
+                  12.97233
+                ],
+                [
+                  102.06341,
+                  12.9707
+                ],
+                [
+                  102.06172,
+                  12.97225
+                ],
+                [
+                  102.06072,
+                  12.96988
+                ],
+                [
+                  102.06183,
+                  12.96767
+                ],
+                [
+                  102.05933,
+                  12.96798
+                ],
+                [
+                  102.05744,
+                  12.96598
+                ],
+                [
+                  102.05644,
+                  12.96732
+                ],
+                [
+                  102.05463,
+                  12.96474
+                ],
+                [
+                  102.0554,
+                  12.96129
+                ],
+                [
+                  102.05404,
+                  12.96082
+                ],
+                [
+                  102.05081,
+                  12.96374
+                ],
+                [
+                  102.0522,
+                  12.96374
+                ],
+                [
+                  102.05176,
+                  12.9656
+                ],
+                [
+                  102.05409,
+                  12.9701
+                ],
+                [
+                  102.05187,
+                  12.96932
+                ],
+                [
+                  102.03782,
+                  12.98104
+                ],
+                [
+                  102.02184,
+                  12.98163
+                ],
+                [
+                  102.00062,
+                  12.98961
+                ],
+                [
+                  102.00523,
+                  13.00312
+                ],
+                [
+                  102.00742,
+                  13.0054
+                ],
+                [
+                  102.00728,
+                  13.00768
+                ],
+                [
+                  102.00976,
+                  13.00964
+                ],
+                [
+                  102.01054,
+                  13.01241
+                ],
+                [
+                  102.0125,
+                  13.01327
+                ],
+                [
+                  102.01277,
+                  13.01702
+                ],
+                [
+                  102.01573,
+                  13.01752
+                ],
+                [
+                  102.02093,
+                  13.01554
+                ],
+                [
+                  102.01921,
+                  13.0428
+                ],
+                [
+                  102.01954,
+                  13.04694
+                ],
+                [
+                  102.02183,
+                  13.0523
+                ],
+                [
+                  102.02024,
+                  13.05483
+                ],
+                [
+                  102.01835,
+                  13.05505
+                ],
+                [
+                  102.01712,
+                  13.05659
+                ],
+                [
+                  102.01668,
+                  13.06513
+                ],
+                [
+                  102.01057,
+                  13.0666
+                ],
+                [
+                  102.0126,
+                  13.06861
+                ],
+                [
+                  102.02916,
+                  13.07444
+                ],
+                [
+                  102.03032,
+                  13.07577
+                ],
+                [
+                  102.03127,
+                  13.08353
+                ],
+                [
+                  102.0342,
+                  13.08853
+                ],
+                [
+                  102.03853,
+                  13.0893
+                ],
+                [
+                  102.04196,
+                  13.09159
+                ],
+                [
+                  102.04316,
+                  13.09412
+                ],
+                [
+                  102.04739,
+                  13.09575
+                ],
+                [
+                  102.05335,
+                  13.10002
+                ],
+                [
+                  102.05397,
+                  13.10632
+                ],
+                [
+                  102.05641,
+                  13.10933
+                ],
+                [
+                  102.05638,
+                  13.11704
+                ],
+                [
+                  102.05803,
+                  13.11774
+                ],
+                [
+                  102.05636,
+                  13.12348
+                ],
+                [
+                  102.05764,
+                  13.1249
+                ],
+                [
+                  102.05271,
+                  13.14161
+                ],
+                [
+                  102.04235,
+                  13.15107
+                ],
+                [
+                  102.04618,
+                  13.15815
+                ],
+                [
+                  102.05108,
+                  13.1624
+                ],
+                [
+                  102.04986,
+                  13.16901
+                ],
+                [
+                  102.05534,
+                  13.17311
+                ],
+                [
+                  102.06163,
+                  13.1753
+                ],
+                [
+                  102.06532,
+                  13.18027
+                ],
+                [
+                  102.06824,
+                  13.18214
+                ],
+                [
+                  102.0694,
+                  13.18547
+                ],
+                [
+                  102.07143,
+                  13.18719
+                ],
+                [
+                  102.07828,
+                  13.18801
+                ],
+                [
+                  102.08235,
+                  13.18581
+                ],
+                [
+                  102.0846,
+                  13.18846
+                ],
+                [
+                  102.09166,
+                  13.19131
+                ],
+                [
+                  102.0944,
+                  13.19457
+                ],
+                [
+                  102.09908,
+                  13.1928
+                ],
+                [
+                  102.11101,
+                  13.19646
+                ],
+                [
+                  102.11306,
+                  13.19835
+                ],
+                [
+                  102.11463,
+                  13.19634
+                ],
+                [
+                  102.11945,
+                  13.19616
+                ],
+                [
+                  102.12246,
+                  13.19861
+                ],
+                [
+                  102.12548,
+                  13.19933
+                ],
+                [
+                  102.12888,
+                  13.19664
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "221005",
+          "tambon": "ต.จันทเขลม",
+          "amphoe": "อ.เขาคิชฌกูฏ",
+          "province": "จ.จันทบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "บ้านจันตาแป๊ะ",
+          "latitude": 13.035104,
+          "longitude": 102.108348,
+          "sum_rainfall_mm": 11.5,
+          "observed_at": "2026-09-25T03:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  102.12888,
+                  13.19664
+                ],
+                [
+                  102.13316,
+                  13.1927
+                ],
+                [
+                  102.13784,
+                  13.18511
+                ],
+                [
+                  102.13656,
+                  13.18156
+                ],
+                [
+                  102.13513,
+                  13.18095
+                ],
+                [
+                  102.1354,
+                  13.17917
+                ],
+                [
+                  102.1337,
+                  13.17848
+                ],
+                [
+                  102.13442,
+                  13.17565
+                ],
+                [
+                  102.13877,
+                  13.1724
+                ],
+                [
+                  102.13788,
+                  13.16775
+                ],
+                [
+                  102.13654,
+                  13.1671
+                ],
+                [
+                  102.13526,
+                  13.16402
+                ],
+                [
+                  102.13687,
+                  13.15852
+                ],
+                [
+                  102.13426,
+                  13.1559
+                ],
+                [
+                  102.13149,
+                  13.15591
+                ],
+                [
+                  102.12707,
+                  13.15333
+                ],
+                [
+                  102.12086,
+                  13.15318
+                ],
+                [
+                  102.11988,
+                  13.15168
+                ],
+                [
+                  102.11447,
+                  13.15554
+                ],
+                [
+                  102.11058,
+                  13.1522
+                ],
+                [
+                  102.116,
+                  13.1408
+                ],
+                [
+                  102.11453,
+                  13.13954
+                ],
+                [
+                  102.11521,
+                  13.13581
+                ],
+                [
+                  102.119,
+                  13.13495
+                ],
+                [
+                  102.12174,
+                  13.12958
+                ],
+                [
+                  102.12462,
+                  13.12876
+                ],
+                [
+                  102.12772,
+                  13.13012
+                ],
+                [
+                  102.13293,
+                  13.13041
+                ],
+                [
+                  102.13705,
+                  13.13267
+                ],
+                [
+                  102.14527,
+                  13.1317
+                ],
+                [
+                  102.15034,
+                  13.1332
+                ],
+                [
+                  102.15414,
+                  13.1284
+                ],
+                [
+                  102.14832,
+                  13.1217
+                ],
+                [
+                  102.1467,
+                  13.11284
+                ],
+                [
+                  102.14225,
+                  13.10962
+                ],
+                [
+                  102.14137,
+                  13.10523
+                ],
+                [
+                  102.1448,
+                  13.10188
+                ],
+                [
+                  102.15394,
+                  13.08304
+                ],
+                [
+                  102.15443,
+                  13.07758
+                ],
+                [
+                  102.15229,
+                  13.07434
+                ],
+                [
+                  102.15607,
+                  13.06597
+                ],
+                [
+                  102.15482,
+                  13.06136
+                ],
+                [
+                  102.15598,
+                  13.0571
+                ],
+                [
+                  102.15601,
+                  13.05005
+                ],
+                [
+                  102.15677,
+                  13.04748
+                ],
+                [
+                  102.16087,
+                  13.04217
+                ],
+                [
+                  102.16696,
+                  13.03794
+                ],
+                [
+                  102.16809,
+                  13.02897
+                ],
+                [
+                  102.17388,
+                  13.0212
+                ],
+                [
+                  102.17422,
+                  13.01894
+                ],
+                [
+                  102.17157,
+                  13.01343
+                ],
+                [
+                  102.17381,
+                  13.011
+                ],
+                [
+                  102.16787,
+                  13.01075
+                ],
+                [
+                  102.16568,
+                  13.00516
+                ],
+                [
+                  102.16379,
+                  13.00379
+                ],
+                [
+                  102.15743,
+                  13.00343
+                ],
+                [
+                  102.138,
+                  12.9985
+                ],
+                [
+                  102.13761,
+                  12.99237
+                ],
+                [
+                  102.14002,
+                  12.9896
+                ],
+                [
+                  102.13947,
+                  12.98709
+                ],
+                [
+                  102.13584,
+                  12.98596
+                ],
+                [
+                  102.13329,
+                  12.98352
+                ],
+                [
+                  102.12619,
+                  12.98312
+                ],
+                [
+                  102.12222,
+                  12.9791
+                ],
+                [
+                  102.11746,
+                  12.98048
+                ],
+                [
+                  102.11394,
+                  12.98553
+                ],
+                [
+                  102.11013,
+                  12.98579
+                ],
+                [
+                  102.10801,
+                  12.98745
+                ],
+                [
+                  102.10493,
+                  12.98648
+                ],
+                [
+                  102.09905,
+                  12.98867
+                ],
+                [
+                  102.09241,
+                  12.98767
+                ],
+                [
+                  102.0898,
+                  12.98464
+                ],
+                [
+                  102.08559,
+                  12.98438
+                ],
+                [
+                  102.07751,
+                  12.97765
+                ],
+                [
+                  102.07172,
+                  12.97567
+                ],
+                [
+                  102.07091,
+                  12.97255
+                ],
+                [
+                  102.06636,
+                  12.97233
+                ],
+                [
+                  102.06341,
+                  12.9707
+                ],
+                [
+                  102.06172,
+                  12.97225
+                ],
+                [
+                  102.06072,
+                  12.96988
+                ],
+                [
+                  102.06183,
+                  12.96767
+                ],
+                [
+                  102.05933,
+                  12.96798
+                ],
+                [
+                  102.05744,
+                  12.96598
+                ],
+                [
+                  102.05644,
+                  12.96732
+                ],
+                [
+                  102.05463,
+                  12.96474
+                ],
+                [
+                  102.0554,
+                  12.96129
+                ],
+                [
+                  102.05404,
+                  12.96082
+                ],
+                [
+                  102.05081,
+                  12.96374
+                ],
+                [
+                  102.0522,
+                  12.96374
+                ],
+                [
+                  102.05176,
+                  12.9656
+                ],
+                [
+                  102.05409,
+                  12.9701
+                ],
+                [
+                  102.05187,
+                  12.96932
+                ],
+                [
+                  102.03782,
+                  12.98104
+                ],
+                [
+                  102.02184,
+                  12.98163
+                ],
+                [
+                  102.00062,
+                  12.98961
+                ],
+                [
+                  102.00523,
+                  13.00312
+                ],
+                [
+                  102.00742,
+                  13.0054
+                ],
+                [
+                  102.00728,
+                  13.00768
+                ],
+                [
+                  102.00976,
+                  13.00964
+                ],
+                [
+                  102.01054,
+                  13.01241
+                ],
+                [
+                  102.0125,
+                  13.01327
+                ],
+                [
+                  102.01277,
+                  13.01702
+                ],
+                [
+                  102.01573,
+                  13.01752
+                ],
+                [
+                  102.02093,
+                  13.01554
+                ],
+                [
+                  102.01921,
+                  13.0428
+                ],
+                [
+                  102.01954,
+                  13.04694
+                ],
+                [
+                  102.02183,
+                  13.0523
+                ],
+                [
+                  102.02024,
+                  13.05483
+                ],
+                [
+                  102.01835,
+                  13.05505
+                ],
+                [
+                  102.01712,
+                  13.05659
+                ],
+                [
+                  102.01668,
+                  13.06513
+                ],
+                [
+                  102.01057,
+                  13.0666
+                ],
+                [
+                  102.0126,
+                  13.06861
+                ],
+                [
+                  102.02916,
+                  13.07444
+                ],
+                [
+                  102.03032,
+                  13.07577
+                ],
+                [
+                  102.03127,
+                  13.08353
+                ],
+                [
+                  102.0342,
+                  13.08853
+                ],
+                [
+                  102.03853,
+                  13.0893
+                ],
+                [
+                  102.04196,
+                  13.09159
+                ],
+                [
+                  102.04316,
+                  13.09412
+                ],
+                [
+                  102.04739,
+                  13.09575
+                ],
+                [
+                  102.05335,
+                  13.10002
+                ],
+                [
+                  102.05397,
+                  13.10632
+                ],
+                [
+                  102.05641,
+                  13.10933
+                ],
+                [
+                  102.05638,
+                  13.11704
+                ],
+                [
+                  102.05803,
+                  13.11774
+                ],
+                [
+                  102.05636,
+                  13.12348
+                ],
+                [
+                  102.05764,
+                  13.1249
+                ],
+                [
+                  102.05271,
+                  13.14161
+                ],
+                [
+                  102.04235,
+                  13.15107
+                ],
+                [
+                  102.04618,
+                  13.15815
+                ],
+                [
+                  102.05108,
+                  13.1624
+                ],
+                [
+                  102.04986,
+                  13.16901
+                ],
+                [
+                  102.05534,
+                  13.17311
+                ],
+                [
+                  102.06163,
+                  13.1753
+                ],
+                [
+                  102.06532,
+                  13.18027
+                ],
+                [
+                  102.06824,
+                  13.18214
+                ],
+                [
+                  102.0694,
+                  13.18547
+                ],
+                [
+                  102.07143,
+                  13.18719
+                ],
+                [
+                  102.07828,
+                  13.18801
+                ],
+                [
+                  102.08235,
+                  13.18581
+                ],
+                [
+                  102.0846,
+                  13.18846
+                ],
+                [
+                  102.09166,
+                  13.19131
+                ],
+                [
+                  102.0944,
+                  13.19457
+                ],
+                [
+                  102.09908,
+                  13.1928
+                ],
+                [
+                  102.11101,
+                  13.19646
+                ],
+                [
+                  102.11306,
+                  13.19835
+                ],
+                [
+                  102.11463,
+                  13.19634
+                ],
+                [
+                  102.11945,
+                  13.19616
+                ],
+                [
+                  102.12246,
+                  13.19861
+                ],
+                [
+                  102.12548,
+                  13.19933
+                ],
+                [
+                  102.12888,
+                  13.19664
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "221005",
+          "tambon": "ต.จันทเขลม",
+          "amphoe": "อ.เขาคิชฌกูฏ",
+          "province": "จ.จันทบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "สะพานคลองจันทเขลม",
+          "latitude": 13.003336,
+          "longitude": 102.04864,
+          "sum_rainfall_mm": 86.2,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  102.12888,
+                  13.19664
+                ],
+                [
+                  102.13316,
+                  13.1927
+                ],
+                [
+                  102.13784,
+                  13.18511
+                ],
+                [
+                  102.13656,
+                  13.18156
+                ],
+                [
+                  102.13513,
+                  13.18095
+                ],
+                [
+                  102.1354,
+                  13.17917
+                ],
+                [
+                  102.1337,
+                  13.17848
+                ],
+                [
+                  102.13442,
+                  13.17565
+                ],
+                [
+                  102.13877,
+                  13.1724
+                ],
+                [
+                  102.13788,
+                  13.16775
+                ],
+                [
+                  102.13654,
+                  13.1671
+                ],
+                [
+                  102.13526,
+                  13.16402
+                ],
+                [
+                  102.13687,
+                  13.15852
+                ],
+                [
+                  102.13426,
+                  13.1559
+                ],
+                [
+                  102.13149,
+                  13.15591
+                ],
+                [
+                  102.12707,
+                  13.15333
+                ],
+                [
+                  102.12086,
+                  13.15318
+                ],
+                [
+                  102.11988,
+                  13.15168
+                ],
+                [
+                  102.11447,
+                  13.15554
+                ],
+                [
+                  102.11058,
+                  13.1522
+                ],
+                [
+                  102.116,
+                  13.1408
+                ],
+                [
+                  102.11453,
+                  13.13954
+                ],
+                [
+                  102.11521,
+                  13.13581
+                ],
+                [
+                  102.119,
+                  13.13495
+                ],
+                [
+                  102.12174,
+                  13.12958
+                ],
+                [
+                  102.12462,
+                  13.12876
+                ],
+                [
+                  102.12772,
+                  13.13012
+                ],
+                [
+                  102.13293,
+                  13.13041
+                ],
+                [
+                  102.13705,
+                  13.13267
+                ],
+                [
+                  102.14527,
+                  13.1317
+                ],
+                [
+                  102.15034,
+                  13.1332
+                ],
+                [
+                  102.15414,
+                  13.1284
+                ],
+                [
+                  102.14832,
+                  13.1217
+                ],
+                [
+                  102.1467,
+                  13.11284
+                ],
+                [
+                  102.14225,
+                  13.10962
+                ],
+                [
+                  102.14137,
+                  13.10523
+                ],
+                [
+                  102.1448,
+                  13.10188
+                ],
+                [
+                  102.15394,
+                  13.08304
+                ],
+                [
+                  102.15443,
+                  13.07758
+                ],
+                [
+                  102.15229,
+                  13.07434
+                ],
+                [
+                  102.15607,
+                  13.06597
+                ],
+                [
+                  102.15482,
+                  13.06136
+                ],
+                [
+                  102.15598,
+                  13.0571
+                ],
+                [
+                  102.15601,
+                  13.05005
+                ],
+                [
+                  102.15677,
+                  13.04748
+                ],
+                [
+                  102.16087,
+                  13.04217
+                ],
+                [
+                  102.16696,
+                  13.03794
+                ],
+                [
+                  102.16809,
+                  13.02897
+                ],
+                [
+                  102.17388,
+                  13.0212
+                ],
+                [
+                  102.17422,
+                  13.01894
+                ],
+                [
+                  102.17157,
+                  13.01343
+                ],
+                [
+                  102.17381,
+                  13.011
+                ],
+                [
+                  102.16787,
+                  13.01075
+                ],
+                [
+                  102.16568,
+                  13.00516
+                ],
+                [
+                  102.16379,
+                  13.00379
+                ],
+                [
+                  102.15743,
+                  13.00343
+                ],
+                [
+                  102.138,
+                  12.9985
+                ],
+                [
+                  102.13761,
+                  12.99237
+                ],
+                [
+                  102.14002,
+                  12.9896
+                ],
+                [
+                  102.13947,
+                  12.98709
+                ],
+                [
+                  102.13584,
+                  12.98596
+                ],
+                [
+                  102.13329,
+                  12.98352
+                ],
+                [
+                  102.12619,
+                  12.98312
+                ],
+                [
+                  102.12222,
+                  12.9791
+                ],
+                [
+                  102.11746,
+                  12.98048
+                ],
+                [
+                  102.11394,
+                  12.98553
+                ],
+                [
+                  102.11013,
+                  12.98579
+                ],
+                [
+                  102.10801,
+                  12.98745
+                ],
+                [
+                  102.10493,
+                  12.98648
+                ],
+                [
+                  102.09905,
+                  12.98867
+                ],
+                [
+                  102.09241,
+                  12.98767
+                ],
+                [
+                  102.0898,
+                  12.98464
+                ],
+                [
+                  102.08559,
+                  12.98438
+                ],
+                [
+                  102.07751,
+                  12.97765
+                ],
+                [
+                  102.07172,
+                  12.97567
+                ],
+                [
+                  102.07091,
+                  12.97255
+                ],
+                [
+                  102.06636,
+                  12.97233
+                ],
+                [
+                  102.06341,
+                  12.9707
+                ],
+                [
+                  102.06172,
+                  12.97225
+                ],
+                [
+                  102.06072,
+                  12.96988
+                ],
+                [
+                  102.06183,
+                  12.96767
+                ],
+                [
+                  102.05933,
+                  12.96798
+                ],
+                [
+                  102.05744,
+                  12.96598
+                ],
+                [
+                  102.05644,
+                  12.96732
+                ],
+                [
+                  102.05463,
+                  12.96474
+                ],
+                [
+                  102.0554,
+                  12.96129
+                ],
+                [
+                  102.05404,
+                  12.96082
+                ],
+                [
+                  102.05081,
+                  12.96374
+                ],
+                [
+                  102.0522,
+                  12.96374
+                ],
+                [
+                  102.05176,
+                  12.9656
+                ],
+                [
+                  102.05409,
+                  12.9701
+                ],
+                [
+                  102.05187,
+                  12.96932
+                ],
+                [
+                  102.03782,
+                  12.98104
+                ],
+                [
+                  102.02184,
+                  12.98163
+                ],
+                [
+                  102.00062,
+                  12.98961
+                ],
+                [
+                  102.00523,
+                  13.00312
+                ],
+                [
+                  102.00742,
+                  13.0054
+                ],
+                [
+                  102.00728,
+                  13.00768
+                ],
+                [
+                  102.00976,
+                  13.00964
+                ],
+                [
+                  102.01054,
+                  13.01241
+                ],
+                [
+                  102.0125,
+                  13.01327
+                ],
+                [
+                  102.01277,
+                  13.01702
+                ],
+                [
+                  102.01573,
+                  13.01752
+                ],
+                [
+                  102.02093,
+                  13.01554
+                ],
+                [
+                  102.01921,
+                  13.0428
+                ],
+                [
+                  102.01954,
+                  13.04694
+                ],
+                [
+                  102.02183,
+                  13.0523
+                ],
+                [
+                  102.02024,
+                  13.05483
+                ],
+                [
+                  102.01835,
+                  13.05505
+                ],
+                [
+                  102.01712,
+                  13.05659
+                ],
+                [
+                  102.01668,
+                  13.06513
+                ],
+                [
+                  102.01057,
+                  13.0666
+                ],
+                [
+                  102.0126,
+                  13.06861
+                ],
+                [
+                  102.02916,
+                  13.07444
+                ],
+                [
+                  102.03032,
+                  13.07577
+                ],
+                [
+                  102.03127,
+                  13.08353
+                ],
+                [
+                  102.0342,
+                  13.08853
+                ],
+                [
+                  102.03853,
+                  13.0893
+                ],
+                [
+                  102.04196,
+                  13.09159
+                ],
+                [
+                  102.04316,
+                  13.09412
+                ],
+                [
+                  102.04739,
+                  13.09575
+                ],
+                [
+                  102.05335,
+                  13.10002
+                ],
+                [
+                  102.05397,
+                  13.10632
+                ],
+                [
+                  102.05641,
+                  13.10933
+                ],
+                [
+                  102.05638,
+                  13.11704
+                ],
+                [
+                  102.05803,
+                  13.11774
+                ],
+                [
+                  102.05636,
+                  13.12348
+                ],
+                [
+                  102.05764,
+                  13.1249
+                ],
+                [
+                  102.05271,
+                  13.14161
+                ],
+                [
+                  102.04235,
+                  13.15107
+                ],
+                [
+                  102.04618,
+                  13.15815
+                ],
+                [
+                  102.05108,
+                  13.1624
+                ],
+                [
+                  102.04986,
+                  13.16901
+                ],
+                [
+                  102.05534,
+                  13.17311
+                ],
+                [
+                  102.06163,
+                  13.1753
+                ],
+                [
+                  102.06532,
+                  13.18027
+                ],
+                [
+                  102.06824,
+                  13.18214
+                ],
+                [
+                  102.0694,
+                  13.18547
+                ],
+                [
+                  102.07143,
+                  13.18719
+                ],
+                [
+                  102.07828,
+                  13.18801
+                ],
+                [
+                  102.08235,
+                  13.18581
+                ],
+                [
+                  102.0846,
+                  13.18846
+                ],
+                [
+                  102.09166,
+                  13.19131
+                ],
+                [
+                  102.0944,
+                  13.19457
+                ],
+                [
+                  102.09908,
+                  13.1928
+                ],
+                [
+                  102.11101,
+                  13.19646
+                ],
+                [
+                  102.11306,
+                  13.19835
+                ],
+                [
+                  102.11463,
+                  13.19634
+                ],
+                [
+                  102.11945,
+                  13.19616
+                ],
+                [
+                  102.12246,
+                  13.19861
+                ],
+                [
+                  102.12548,
+                  13.19933
+                ],
+                [
+                  102.12888,
+                  13.19664
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "221003",
+          "tambon": "ต.ตะเคียนทอง",
+          "amphoe": "อ.เขาคิชฌกูฏ",
+          "province": "จ.จันทบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "ทต.ตะเคียนทอง",
+          "latitude": 12.9131,
+          "longitude": 102.0815,
+          "sum_rainfall_mm": 154.79999999999998,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  102.18191,
+                  12.95855
+                ],
+                [
+                  102.18626,
+                  12.95243
+                ],
+                [
+                  102.19189,
+                  12.95009
+                ],
+                [
+                  102.19171,
+                  12.94263
+                ],
+                [
+                  102.19553,
+                  12.94015
+                ],
+                [
+                  102.20159,
+                  12.93275
+                ],
+                [
+                  102.20236,
+                  12.92658
+                ],
+                [
+                  102.20566,
+                  12.92204
+                ],
+                [
+                  102.21705,
+                  12.91755
+                ],
+                [
+                  102.21899,
+                  12.91542
+                ],
+                [
+                  102.22037,
+                  12.91075
+                ],
+                [
+                  102.23076,
+                  12.90214
+                ],
+                [
+                  102.23159,
+                  12.89945
+                ],
+                [
+                  102.23064,
+                  12.89646
+                ],
+                [
+                  102.23247,
+                  12.89358
+                ],
+                [
+                  102.23208,
+                  12.89141
+                ],
+                [
+                  102.23327,
+                  12.88867
+                ],
+                [
+                  102.23355,
+                  12.88531
+                ],
+                [
+                  102.19422,
+                  12.86776
+                ],
+                [
+                  102.19335,
+                  12.85985
+                ],
+                [
+                  102.19425,
+                  12.84392
+                ],
+                [
+                  102.19305,
+                  12.83427
+                ],
+                [
+                  102.18207,
+                  12.84311
+                ],
+                [
+                  102.17216,
+                  12.84899
+                ],
+                [
+                  102.16097,
+                  12.85379
+                ],
+                [
+                  102.15661,
+                  12.85329
+                ],
+                [
+                  102.13791,
+                  12.85805
+                ],
+                [
+                  102.12701,
+                  12.85557
+                ],
+                [
+                  102.11929,
+                  12.85658
+                ],
+                [
+                  102.11046,
+                  12.85538
+                ],
+                [
+                  102.10062,
+                  12.85188
+                ],
+                [
+                  102.09842,
+                  12.85341
+                ],
+                [
+                  102.09044,
+                  12.84841
+                ],
+                [
+                  102.08743,
+                  12.85147
+                ],
+                [
+                  102.08579,
+                  12.8506
+                ],
+                [
+                  102.08387,
+                  12.85227
+                ],
+                [
+                  102.08075,
+                  12.85028
+                ],
+                [
+                  102.07844,
+                  12.85395
+                ],
+                [
+                  102.07537,
+                  12.85315
+                ],
+                [
+                  102.07512,
+                  12.85501
+                ],
+                [
+                  102.07728,
+                  12.85709
+                ],
+                [
+                  102.07326,
+                  12.85717
+                ],
+                [
+                  102.07377,
+                  12.85947
+                ],
+                [
+                  102.07051,
+                  12.86254
+                ],
+                [
+                  102.0709,
+                  12.86675
+                ],
+                [
+                  102.06668,
+                  12.87023
+                ],
+                [
+                  102.06002,
+                  12.87238
+                ],
+                [
+                  102.05823,
+                  12.87254
+                ],
+                [
+                  102.05428,
+                  12.86893
+                ],
+                [
+                  102.05393,
+                  12.86498
+                ],
+                [
+                  102.05195,
+                  12.8627
+                ],
+                [
+                  102.04889,
+                  12.8621
+                ],
+                [
+                  102.04463,
+                  12.86359
+                ],
+                [
+                  102.04081,
+                  12.86083
+                ],
+                [
+                  102.0378,
+                  12.86143
+                ],
+                [
+                  102.03454,
+                  12.86496
+                ],
+                [
+                  102.03243,
+                  12.86506
+                ],
+                [
+                  102.03016,
+                  12.86704
+                ],
+                [
+                  102.02573,
+                  12.86561
+                ],
+                [
+                  102.02217,
+                  12.86708
+                ],
+                [
+                  102.02361,
+                  12.86976
+                ],
+                [
+                  102.02178,
+                  12.8724
+                ],
+                [
+                  102.02198,
+                  12.87421
+                ],
+                [
+                  102.02506,
+                  12.87732
+                ],
+                [
+                  102.02576,
+                  12.88147
+                ],
+                [
+                  102.02932,
+                  12.88589
+                ],
+                [
+                  102.03123,
+                  12.88667
+                ],
+                [
+                  102.03372,
+                  12.88599
+                ],
+                [
+                  102.035,
+                  12.88341
+                ],
+                [
+                  102.04527,
+                  12.88521
+                ],
+                [
+                  102.0488,
+                  12.88315
+                ],
+                [
+                  102.04707,
+                  12.88934
+                ],
+                [
+                  102.04847,
+                  12.89141
+                ],
+                [
+                  102.04763,
+                  12.8942
+                ],
+                [
+                  102.04929,
+                  12.89688
+                ],
+                [
+                  102.05105,
+                  12.89761
+                ],
+                [
+                  102.05328,
+                  12.90212
+                ],
+                [
+                  102.05373,
+                  12.90898
+                ],
+                [
+                  102.05822,
+                  12.91076
+                ],
+                [
+                  102.0593,
+                  12.91376
+                ],
+                [
+                  102.05874,
+                  12.91583
+                ],
+                [
+                  102.05991,
+                  12.91761
+                ],
+                [
+                  102.05895,
+                  12.91902
+                ],
+                [
+                  102.05935,
+                  12.9209
+                ],
+                [
+                  102.06324,
+                  12.92478
+                ],
+                [
+                  102.06155,
+                  12.92653
+                ],
+                [
+                  102.06173,
+                  12.92777
+                ],
+                [
+                  102.06392,
+                  12.92718
+                ],
+                [
+                  102.06808,
+                  12.93013
+                ],
+                [
+                  102.06898,
+                  12.93396
+                ],
+                [
+                  102.07201,
+                  12.93773
+                ],
+                [
+                  102.06717,
+                  12.9462
+                ],
+                [
+                  102.0695,
+                  12.94815
+                ],
+                [
+                  102.07483,
+                  12.94958
+                ],
+                [
+                  102.07579,
+                  12.95522
+                ],
+                [
+                  102.07983,
+                  12.9621
+                ],
+                [
+                  102.08304,
+                  12.96273
+                ],
+                [
+                  102.08608,
+                  12.96168
+                ],
+                [
+                  102.0912,
+                  12.96421
+                ],
+                [
+                  102.1098,
+                  12.96082
+                ],
+                [
+                  102.11307,
+                  12.95948
+                ],
+                [
+                  102.1143,
+                  12.95615
+                ],
+                [
+                  102.11649,
+                  12.95448
+                ],
+                [
+                  102.12173,
+                  12.96357
+                ],
+                [
+                  102.12437,
+                  12.96205
+                ],
+                [
+                  102.13438,
+                  12.96331
+                ],
+                [
+                  102.13441,
+                  12.95963
+                ],
+                [
+                  102.13556,
+                  12.95816
+                ],
+                [
+                  102.14257,
+                  12.95549
+                ],
+                [
+                  102.14981,
+                  12.95546
+                ],
+                [
+                  102.15309,
+                  12.95827
+                ],
+                [
+                  102.16143,
+                  12.95706
+                ],
+                [
+                  102.16446,
+                  12.95543
+                ],
+                [
+                  102.16569,
+                  12.95065
+                ],
+                [
+                  102.16765,
+                  12.95015
+                ],
+                [
+                  102.17109,
+                  12.95095
+                ],
+                [
+                  102.18191,
+                  12.95855
+                ]
+              ]
+            ]
+          }
+        },
+        {
           "geocode": "230403",
           "tambon": "ต.ด่านชุมพล",
           "amphoe": "อ.บ่อไร่",
@@ -25011,8 +43065,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ คก. ๓ (เขาพลู)",
           "latitude": 12.4193,
           "longitude": 102.744,
-          "sum_rainfall_mm": 84.6,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 84.19999999999999,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -25738,8 +43792,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านมะม่วง",
           "latitude": 12.549057,
           "longitude": 102.57967,
-          "sum_rainfall_mm": 56.0,
-          "observed_at": "2026-09-25T00:00:00+07:00",
+          "sum_rainfall_mm": 56.5,
+          "observed_at": "2026-09-25T03:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -26269,8 +44323,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดทุ่งตอง",
           "latitude": 12.515793,
           "longitude": 102.59027,
-          "sum_rainfall_mm": 50.39999999999999,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 53.8,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -26800,8 +44854,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหมื่นด่าน",
           "latitude": 12.595746,
           "longitude": 102.578773,
-          "sum_rainfall_mm": 61.5,
-          "observed_at": "2026-09-25T00:00:00+07:00",
+          "sum_rainfall_mm": 60.0,
+          "observed_at": "2026-09-25T03:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -27227,8 +45281,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านตาบาด",
           "latitude": 12.60122,
           "longitude": 102.567709,
-          "sum_rainfall_mm": 51.0,
-          "observed_at": "2026-09-25T00:00:00+07:00",
+          "sum_rainfall_mm": 50.5,
+          "observed_at": "2026-09-25T03:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -27654,8 +45708,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์คลองสะตอ",
           "latitude": 12.5973,
           "longitude": 102.608,
-          "sum_rainfall_mm": 48.599999999999994,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 50.0,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -28081,8 +46135,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหนองบอน",
           "latitude": 12.681499,
           "longitude": 102.466076,
-          "sum_rainfall_mm": 123.0,
-          "observed_at": "2026-09-25T00:00:00+07:00",
+          "sum_rainfall_mm": 124.0,
+          "observed_at": "2026-09-25T03:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -28541,7 +46595,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 12.7065,
           "longitude": 102.415,
           "sum_rainfall_mm": 94.4,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -28999,8 +47053,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.หนองบอน",
           "latitude": 12.67735,
           "longitude": 102.45936,
-          "sum_rainfall_mm": 183.8,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 187.2,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -29449,1685 +47503,1278 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
-          "geocode": "270903",
-          "tambon": "ต.วังทอง",
-          "amphoe": "อ.วังสมบูรณ์",
+          "geocode": "270611",
+          "tambon": "ต.คลองทับจันทร์",
+          "amphoe": "อ.อรัญประเทศ",
           "province": "จ.สระแก้ว",
           "region_id": "2",
           "region_name": "ภาคตะวันออก",
-          "station": "ศูนย์ศึกษาการพัฒนาการอนุรักษ์ต้นน้ำลุ่มน้ำบางปะกง",
-          "latitude": 13.351688,
-          "longitude": 101.99863,
-          "sum_rainfall_mm": 152.4,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "station": "บ้านบีกริม",
+          "latitude": 13.638481,
+          "longitude": 102.393412,
+          "sum_rainfall_mm": 49.5,
+          "observed_at": "2026-09-25T03:00:00+07:00",
           "geometry": {
             "rings": [
               [
                 [
-                  102.13856,
-                  13.39707
+                  102.43966,
+                  13.68965
                 ],
                 [
-                  102.14176,
-                  13.38858
+                  102.41629,
+                  13.68533
                 ],
                 [
-                  102.13747,
-                  13.38249
+                  102.41329,
+                  13.68383
                 ],
                 [
-                  102.13944,
-                  13.38017
+                  102.41458,
+                  13.65322
                 ],
                 [
-                  102.14141,
-                  13.37471
+                  102.41685,
+                  13.63826
                 ],
                 [
-                  102.13882,
-                  13.36858
+                  102.41283,
+                  13.62238
                 ],
                 [
-                  102.14501,
-                  13.3552
+                  102.41222,
+                  13.61222
                 ],
                 [
-                  102.1765,
-                  13.34187
+                  102.41091,
+                  13.60917
                 ],
                 [
-                  102.16599,
-                  13.32888
+                  102.40851,
+                  13.60984
                 ],
                 [
-                  102.16506,
-                  13.32417
+                  102.40475,
+                  13.60856
                 ],
                 [
-                  102.15732,
-                  13.32117
+                  102.39806,
+                  13.61046
                 ],
                 [
-                  102.15644,
-                  13.32205
+                  102.39665,
+                  13.60183
                 ],
                 [
-                  102.15466,
-                  13.32014
+                  102.39175,
+                  13.59938
                 ],
                 [
-                  102.15025,
-                  13.31882
+                  102.3823,
+                  13.60202
                 ],
                 [
-                  102.14729,
-                  13.32078
+                  102.37656,
+                  13.60824
                 ],
                 [
-                  102.1472,
-                  13.32206
+                  102.37363,
+                  13.6091
                 ],
                 [
-                  102.1437,
-                  13.32321
+                  102.36925,
+                  13.61245
                 ],
                 [
-                  102.14314,
-                  13.32571
+                  102.36384,
+                  13.61317
                 ],
                 [
-                  102.14198,
-                  13.32546
+                  102.35859,
+                  13.61618
                 ],
                 [
-                  102.14148,
-                  13.32705
+                  102.35294,
+                  13.61442
                 ],
                 [
-                  102.13928,
-                  13.32773
+                  102.35083,
+                  13.61648
                 ],
                 [
-                  102.13895,
-                  13.32941
+                  102.3484,
+                  13.61625
                 ],
                 [
-                  102.13738,
-                  13.33012
+                  102.3453,
+                  13.61805
                 ],
                 [
-                  102.13783,
-                  13.33185
+                  102.34185,
+                  13.61755
                 ],
                 [
-                  102.13625,
-                  13.33314
+                  102.33648,
+                  13.6216
                 ],
                 [
-                  102.13371,
-                  13.33318
+                  102.33666,
+                  13.63973
                 ],
                 [
-                  102.13114,
-                  13.33548
+                  102.33463,
+                  13.64212
                 ],
                 [
-                  102.12764,
-                  13.33436
+                  102.34203,
+                  13.65002
                 ],
                 [
-                  102.12804,
-                  13.33291
+                  102.34124,
+                  13.65318
                 ],
                 [
-                  102.12695,
-                  13.33152
+                  102.34584,
+                  13.65654
                 ],
                 [
-                  102.12772,
-                  13.32918
+                  102.34459,
+                  13.65877
                 ],
                 [
-                  102.12666,
-                  13.32724
+                  102.34479,
+                  13.66128
                 ],
                 [
-                  102.12924,
-                  13.32522
+                  102.34819,
+                  13.66178
                 ],
                 [
-                  102.12741,
-                  13.32093
+                  102.34937,
+                  13.66352
                 ],
                 [
-                  102.12815,
-                  13.31931
+                  102.35531,
+                  13.66632
                 ],
                 [
-                  102.12542,
-                  13.31795
+                  102.35947,
+                  13.66411
                 ],
                 [
-                  102.12551,
-                  13.31356
+                  102.35851,
+                  13.65974
                 ],
                 [
-                  102.12375,
-                  13.31364
+                  102.36273,
+                  13.66101
                 ],
                 [
-                  102.1226,
-                  13.31136
+                  102.36486,
+                  13.66041
                 ],
                 [
-                  102.12417,
-                  13.30979
+                  102.36852,
+                  13.66325
                 ],
                 [
-                  102.11899,
-                  13.30346
+                  102.36986,
+                  13.66305
                 ],
                 [
-                  102.11953,
-                  13.30117
+                  102.37584,
+                  13.66629
                 ],
                 [
-                  102.11825,
-                  13.29919
+                  102.37836,
+                  13.66918
                 ],
                 [
-                  102.1197,
-                  13.297
+                  102.37985,
+                  13.66856
                 ],
                 [
-                  102.11981,
-                  13.29265
+                  102.38445,
+                  13.67101
                 ],
                 [
-                  102.11836,
-                  13.28941
+                  102.38374,
+                  13.67454
                 ],
                 [
-                  102.11899,
-                  13.28345
+                  102.38614,
+                  13.67662
                 ],
                 [
-                  102.11777,
-                  13.28218
+                  102.38634,
+                  13.68518
                 ],
                 [
-                  102.11817,
-                  13.27713
+                  102.39421,
+                  13.69107
                 ],
                 [
-                  102.11646,
-                  13.27672
+                  102.39475,
+                  13.6946
                 ],
                 [
-                  102.1159,
-                  13.27438
+                  102.39914,
+                  13.69858
                 ],
                 [
-                  102.11361,
-                  13.27469
+                  102.40579,
+                  13.70018
                 ],
                 [
-                  102.11427,
-                  13.27294
+                  102.40762,
+                  13.70208
                 ],
                 [
-                  102.11296,
-                  13.2724
+                  102.41045,
+                  13.70237
                 ],
                 [
-                  102.11307,
-                  13.26968
+                  102.41787,
+                  13.70631
                 ],
                 [
-                  102.1086,
-                  13.26395
+                  102.42349,
+                  13.70639
                 ],
                 [
-                  102.10292,
-                  13.26114
+                  102.42584,
+                  13.70934
                 ],
                 [
-                  102.0992,
-                  13.26122
+                  102.4288,
+                  13.70931
                 ],
                 [
-                  102.09369,
-                  13.25929
+                  102.43086,
+                  13.71069
                 ],
                 [
-                  102.08882,
-                  13.26028
+                  102.43165,
+                  13.70832
                 ],
                 [
-                  102.08207,
-                  13.25718
+                  102.42752,
+                  13.70013
                 ],
                 [
-                  102.07116,
-                  13.25571
-                ],
-                [
-                  102.0678,
-                  13.25223
-                ],
-                [
-                  102.0627,
-                  13.25003
-                ],
-                [
-                  102.06186,
-                  13.24721
-                ],
-                [
-                  102.06419,
-                  13.2467
-                ],
-                [
-                  102.05635,
-                  13.23977
-                ],
-                [
-                  102.04929,
-                  13.23887
-                ],
-                [
-                  102.04375,
-                  13.24167
-                ],
-                [
-                  102.03614,
-                  13.23846
-                ],
-                [
-                  102.03134,
-                  13.23896
-                ],
-                [
-                  102.02833,
-                  13.23657
-                ],
-                [
-                  102.02674,
-                  13.23982
-                ],
-                [
-                  102.02873,
-                  13.24324
-                ],
-                [
-                  102.02846,
-                  13.2482
-                ],
-                [
-                  102.0296,
-                  13.2499
-                ],
-                [
-                  102.0287,
-                  13.25769
-                ],
-                [
-                  102.03023,
-                  13.26091
-                ],
-                [
-                  102.02912,
-                  13.26621
-                ],
-                [
-                  102.03561,
-                  13.28116
-                ],
-                [
-                  102.03384,
-                  13.28505
-                ],
-                [
-                  102.0289,
-                  13.28759
-                ],
-                [
-                  102.02397,
-                  13.28696
-                ],
-                [
-                  102.02129,
-                  13.28888
-                ],
-                [
-                  102.01811,
-                  13.28882
-                ],
-                [
-                  102.01418,
-                  13.29251
-                ],
-                [
-                  102.01278,
-                  13.28913
-                ],
-                [
-                  102.01076,
-                  13.29091
-                ],
-                [
-                  102.00935,
-                  13.29698
-                ],
-                [
-                  102.00164,
-                  13.31652
-                ],
-                [
-                  101.99239,
-                  13.32431
-                ],
-                [
-                  101.98984,
-                  13.33324
-                ],
-                [
-                  101.98573,
-                  13.33917
-                ],
-                [
-                  101.98585,
-                  13.34142
-                ],
-                [
-                  101.98909,
-                  13.34518
-                ],
-                [
-                  101.99013,
-                  13.35334
-                ],
-                [
-                  101.99843,
-                  13.35949
-                ],
-                [
-                  102.00673,
-                  13.36102
-                ],
-                [
-                  102.00976,
-                  13.36433
-                ],
-                [
-                  102.01187,
-                  13.36911
-                ],
-                [
-                  102.02108,
-                  13.37706
-                ],
-                [
-                  102.02685,
-                  13.37817
-                ],
-                [
-                  102.03862,
-                  13.38504
-                ],
-                [
-                  102.04742,
-                  13.38857
-                ],
-                [
-                  102.05311,
-                  13.39314
-                ],
-                [
-                  102.06342,
-                  13.39647
-                ],
-                [
-                  102.06483,
-                  13.40226
-                ],
-                [
-                  102.06744,
-                  13.40382
-                ],
-                [
-                  102.06925,
-                  13.40302
-                ],
-                [
-                  102.07398,
-                  13.40665
-                ],
-                [
-                  102.07583,
-                  13.41064
-                ],
-                [
-                  102.07561,
-                  13.4125
-                ],
-                [
-                  102.07811,
-                  13.41313
-                ],
-                [
-                  102.07844,
-                  13.41865
-                ],
-                [
-                  102.0835,
-                  13.41926
-                ],
-                [
-                  102.08525,
-                  13.42136
-                ],
-                [
-                  102.0891,
-                  13.41963
-                ],
-                [
-                  102.09005,
-                  13.41684
-                ],
-                [
-                  102.09221,
-                  13.41721
-                ],
-                [
-                  102.09544,
-                  13.41508
-                ],
-                [
-                  102.09766,
-                  13.41623
-                ],
-                [
-                  102.0994,
-                  13.41216
-                ],
-                [
-                  102.10363,
-                  13.41156
-                ],
-                [
-                  102.10438,
-                  13.40936
-                ],
-                [
-                  102.11297,
-                  13.40771
-                ],
-                [
-                  102.11456,
-                  13.40822
-                ],
-                [
-                  102.11539,
-                  13.41205
-                ],
-                [
-                  102.1191,
-                  13.41556
-                ],
-                [
-                  102.12423,
-                  13.41641
-                ],
-                [
-                  102.12878,
-                  13.41436
-                ],
-                [
-                  102.14169,
-                  13.41836
-                ],
-                [
-                  102.14146,
-                  13.4101
-                ],
-                [
-                  102.13602,
-                  13.4033
-                ],
-                [
-                  102.13856,
-                  13.39707
+                  102.43966,
+                  13.68965
                 ]
               ]
             ]
           }
         },
         {
-          "geocode": "270903",
-          "tambon": "ต.วังทอง",
-          "amphoe": "อ.วังสมบูรณ์",
+          "geocode": "270605",
+          "tambon": "ต.ท่าข้าม",
+          "amphoe": "อ.อรัญประเทศ",
           "province": "จ.สระแก้ว",
           "region_id": "2",
           "region_name": "ภาคตะวันออก",
-          "station": "โรงเรียนบ้านคลองยายอินทร์",
-          "latitude": 13.383314,
-          "longitude": 102.127266,
-          "sum_rainfall_mm": 30.2,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "station": "รพสต.ท่าข้าม",
+          "latitude": 13.62763,
+          "longitude": 102.57487,
+          "sum_rainfall_mm": 104.8,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
                 [
-                  102.13856,
-                  13.39707
+                  102.54852,
+                  13.66008
                 ],
                 [
-                  102.14176,
-                  13.38858
+                  102.54835,
+                  13.65885
                 ],
                 [
-                  102.13747,
-                  13.38249
+                  102.55027,
+                  13.65808
                 ],
                 [
-                  102.13944,
-                  13.38017
+                  102.5553,
+                  13.65188
                 ],
                 [
-                  102.14141,
-                  13.37471
+                  102.55746,
+                  13.65179
                 ],
                 [
-                  102.13882,
-                  13.36858
+                  102.55879,
+                  13.64822
                 ],
                 [
-                  102.14501,
-                  13.3552
+                  102.56095,
+                  13.64924
                 ],
                 [
-                  102.1765,
-                  13.34187
+                  102.56135,
+                  13.64696
                 ],
                 [
-                  102.16599,
-                  13.32888
+                  102.56355,
+                  13.64755
                 ],
                 [
-                  102.16506,
-                  13.32417
+                  102.56689,
+                  13.64437
                 ],
                 [
-                  102.15732,
-                  13.32117
+                  102.56954,
+                  13.64428
                 ],
                 [
-                  102.15644,
-                  13.32205
+                  102.57071,
+                  13.64267
                 ],
                 [
-                  102.15466,
-                  13.32014
+                  102.57109,
+                  13.63676
                 ],
                 [
-                  102.15025,
-                  13.31882
+                  102.57541,
+                  13.63004
                 ],
                 [
-                  102.14729,
-                  13.32078
+                  102.57884,
+                  13.63011
                 ],
                 [
-                  102.1472,
-                  13.32206
+                  102.57885,
+                  13.62863
                 ],
                 [
-                  102.1437,
-                  13.32321
+                  102.58109,
+                  13.62798
                 ],
                 [
-                  102.14314,
-                  13.32571
+                  102.58407,
+                  13.63015
                 ],
                 [
-                  102.14198,
-                  13.32546
+                  102.58679,
+                  13.62946
                 ],
                 [
-                  102.14148,
-                  13.32705
+                  102.59004,
+                  13.62508
                 ],
                 [
-                  102.13928,
-                  13.32773
+                  102.59239,
+                  13.62492
                 ],
                 [
-                  102.13895,
-                  13.32941
+                  102.59349,
+                  13.62608
                 ],
                 [
-                  102.13738,
-                  13.33012
+                  102.59482,
+                  13.623
                 ],
                 [
-                  102.13783,
-                  13.33185
+                  102.59989,
+                  13.62304
                 ],
                 [
-                  102.13625,
-                  13.33314
+                  102.60171,
+                  13.62175
                 ],
                 [
-                  102.13371,
-                  13.33318
+                  102.60215,
+                  13.6196
                 ],
                 [
-                  102.13114,
-                  13.33548
+                  102.60428,
+                  13.61983
                 ],
                 [
-                  102.12764,
-                  13.33436
+                  102.60719,
+                  13.61651
                 ],
                 [
-                  102.12804,
-                  13.33291
+                  102.61044,
+                  13.61537
                 ],
                 [
-                  102.12695,
-                  13.33152
+                  102.6113,
+                  13.61699
                 ],
                 [
-                  102.12772,
-                  13.32918
+                  102.6136,
+                  13.61622
                 ],
                 [
-                  102.12666,
-                  13.32724
+                  102.61418,
+                  13.61405
                 ],
                 [
-                  102.12924,
-                  13.32522
+                  102.6212,
+                  13.61319
                 ],
                 [
-                  102.12741,
-                  13.32093
+                  102.62455,
+                  13.61064
                 ],
                 [
-                  102.12815,
-                  13.31931
+                  102.62418,
+                  13.60901
                 ],
                 [
-                  102.12542,
-                  13.31795
+                  102.62162,
+                  13.6092
                 ],
                 [
-                  102.12551,
-                  13.31356
+                  102.62109,
+                  13.6079
                 ],
                 [
-                  102.12375,
-                  13.31364
+                  102.61694,
+                  13.60809
                 ],
                 [
-                  102.1226,
-                  13.31136
+                  102.6152,
+                  13.60613
                 ],
                 [
-                  102.12417,
-                  13.30979
+                  102.61426,
+                  13.60661
                 ],
                 [
-                  102.11899,
-                  13.30346
+                  102.61511,
+                  13.60837
                 ],
                 [
-                  102.11953,
-                  13.30117
+                  102.61411,
+                  13.60904
                 ],
                 [
-                  102.11825,
-                  13.29919
+                  102.61254,
+                  13.60616
                 ],
                 [
-                  102.1197,
-                  13.297
+                  102.61,
+                  13.60546
                 ],
                 [
-                  102.11981,
-                  13.29265
+                  102.60659,
+                  13.60677
                 ],
                 [
-                  102.11836,
-                  13.28941
+                  102.59818,
+                  13.60713
                 ],
                 [
-                  102.11899,
-                  13.28345
+                  102.59545,
+                  13.60854
                 ],
                 [
-                  102.11777,
-                  13.28218
+                  102.59246,
+                  13.60724
                 ],
                 [
-                  102.11817,
-                  13.27713
+                  102.58819,
+                  13.60777
                 ],
                 [
-                  102.11646,
-                  13.27672
+                  102.5744,
+                  13.60348
                 ],
                 [
-                  102.1159,
-                  13.27438
+                  102.57281,
+                  13.60464
                 ],
                 [
-                  102.11361,
-                  13.27469
+                  102.56095,
+                  13.60658
                 ],
                 [
-                  102.11427,
-                  13.27294
+                  102.56023,
+                  13.60707
                 ],
                 [
-                  102.11296,
-                  13.2724
+                  102.56145,
+                  13.60913
                 ],
                 [
-                  102.11307,
-                  13.26968
+                  102.55867,
+                  13.60966
                 ],
                 [
-                  102.1086,
-                  13.26395
+                  102.55606,
+                  13.60877
                 ],
                 [
-                  102.10292,
-                  13.26114
+                  102.54984,
+                  13.61472
                 ],
                 [
-                  102.0992,
-                  13.26122
+                  102.54522,
+                  13.61743
                 ],
                 [
-                  102.09369,
-                  13.25929
+                  102.54027,
+                  13.61719
                 ],
                 [
-                  102.08882,
-                  13.26028
+                  102.5336,
+                  13.61435
                 ],
                 [
-                  102.08207,
-                  13.25718
+                  102.52586,
+                  13.61403
                 ],
                 [
-                  102.07116,
-                  13.25571
+                  102.51953,
+                  13.61508
                 ],
                 [
-                  102.0678,
-                  13.25223
+                  102.51583,
+                  13.61364
                 ],
                 [
-                  102.0627,
-                  13.25003
+                  102.50053,
+                  13.6702
                 ],
                 [
-                  102.06186,
-                  13.24721
+                  102.50367,
+                  13.67221
                 ],
                 [
-                  102.06419,
-                  13.2467
+                  102.50522,
+                  13.67509
                 ],
                 [
-                  102.05635,
-                  13.23977
+                  102.50998,
+                  13.67404
                 ],
                 [
-                  102.04929,
-                  13.23887
+                  102.51133,
+                  13.67278
                 ],
                 [
-                  102.04375,
-                  13.24167
+                  102.5144,
+                  13.67297
                 ],
                 [
-                  102.03614,
-                  13.23846
+                  102.51376,
+                  13.67122
                 ],
                 [
-                  102.03134,
-                  13.23896
+                  102.51534,
+                  13.67039
                 ],
                 [
-                  102.02833,
-                  13.23657
+                  102.51949,
+                  13.6726
                 ],
                 [
-                  102.02674,
-                  13.23982
+                  102.52224,
+                  13.66989
                 ],
                 [
-                  102.02873,
-                  13.24324
+                  102.52202,
+                  13.66854
                 ],
                 [
-                  102.02846,
-                  13.2482
+                  102.52505,
+                  13.66725
                 ],
                 [
-                  102.0296,
-                  13.2499
+                  102.5302,
+                  13.66709
                 ],
                 [
-                  102.0287,
-                  13.25769
+                  102.5341,
+                  13.66298
                 ],
                 [
-                  102.03023,
-                  13.26091
+                  102.54076,
+                  13.66166
                 ],
                 [
-                  102.02912,
-                  13.26621
+                  102.5412,
+                  13.6606
                 ],
                 [
-                  102.03561,
-                  13.28116
+                  102.54303,
+                  13.66123
                 ],
                 [
-                  102.03384,
-                  13.28505
+                  102.54459,
+                  13.65968
                 ],
                 [
-                  102.0289,
-                  13.28759
+                  102.54634,
+                  13.66078
                 ],
                 [
-                  102.02397,
-                  13.28696
-                ],
-                [
-                  102.02129,
-                  13.28888
-                ],
-                [
-                  102.01811,
-                  13.28882
-                ],
-                [
-                  102.01418,
-                  13.29251
-                ],
-                [
-                  102.01278,
-                  13.28913
-                ],
-                [
-                  102.01076,
-                  13.29091
-                ],
-                [
-                  102.00935,
-                  13.29698
-                ],
-                [
-                  102.00164,
-                  13.31652
-                ],
-                [
-                  101.99239,
-                  13.32431
-                ],
-                [
-                  101.98984,
-                  13.33324
-                ],
-                [
-                  101.98573,
-                  13.33917
-                ],
-                [
-                  101.98585,
-                  13.34142
-                ],
-                [
-                  101.98909,
-                  13.34518
-                ],
-                [
-                  101.99013,
-                  13.35334
-                ],
-                [
-                  101.99843,
-                  13.35949
-                ],
-                [
-                  102.00673,
-                  13.36102
-                ],
-                [
-                  102.00976,
-                  13.36433
-                ],
-                [
-                  102.01187,
-                  13.36911
-                ],
-                [
-                  102.02108,
-                  13.37706
-                ],
-                [
-                  102.02685,
-                  13.37817
-                ],
-                [
-                  102.03862,
-                  13.38504
-                ],
-                [
-                  102.04742,
-                  13.38857
-                ],
-                [
-                  102.05311,
-                  13.39314
-                ],
-                [
-                  102.06342,
-                  13.39647
-                ],
-                [
-                  102.06483,
-                  13.40226
-                ],
-                [
-                  102.06744,
-                  13.40382
-                ],
-                [
-                  102.06925,
-                  13.40302
-                ],
-                [
-                  102.07398,
-                  13.40665
-                ],
-                [
-                  102.07583,
-                  13.41064
-                ],
-                [
-                  102.07561,
-                  13.4125
-                ],
-                [
-                  102.07811,
-                  13.41313
-                ],
-                [
-                  102.07844,
-                  13.41865
-                ],
-                [
-                  102.0835,
-                  13.41926
-                ],
-                [
-                  102.08525,
-                  13.42136
-                ],
-                [
-                  102.0891,
-                  13.41963
-                ],
-                [
-                  102.09005,
-                  13.41684
-                ],
-                [
-                  102.09221,
-                  13.41721
-                ],
-                [
-                  102.09544,
-                  13.41508
-                ],
-                [
-                  102.09766,
-                  13.41623
-                ],
-                [
-                  102.0994,
-                  13.41216
-                ],
-                [
-                  102.10363,
-                  13.41156
-                ],
-                [
-                  102.10438,
-                  13.40936
-                ],
-                [
-                  102.11297,
-                  13.40771
-                ],
-                [
-                  102.11456,
-                  13.40822
-                ],
-                [
-                  102.11539,
-                  13.41205
-                ],
-                [
-                  102.1191,
-                  13.41556
-                ],
-                [
-                  102.12423,
-                  13.41641
-                ],
-                [
-                  102.12878,
-                  13.41436
-                ],
-                [
-                  102.14169,
-                  13.41836
-                ],
-                [
-                  102.14146,
-                  13.4101
-                ],
-                [
-                  102.13602,
-                  13.4033
-                ],
-                [
-                  102.13856,
-                  13.39707
+                  102.54852,
+                  13.66008
                 ]
               ]
             ]
           }
         },
         {
-          "geocode": "270902",
-          "tambon": "ต.วังใหม่",
-          "amphoe": "อ.วังสมบูรณ์",
+          "geocode": "270613",
+          "tambon": "ต.บ้านด่าน",
+          "amphoe": "อ.อรัญประเทศ",
           "province": "จ.สระแก้ว",
           "region_id": "2",
           "region_name": "ภาคตะวันออก",
-          "station": "บ้านวังชุมทอง",
-          "latitude": 13.383704,
-          "longitude": 102.016914,
-          "sum_rainfall_mm": 145.0,
-          "observed_at": "2026-09-25T00:00:00+07:00",
+          "station": "บ้านด่าน",
+          "latitude": 13.721552,
+          "longitude": 102.465027,
+          "sum_rainfall_mm": 75.5,
+          "observed_at": "2026-09-25T03:00:00+07:00",
           "geometry": {
             "rings": [
               [
                 [
-                  102.22784,
-                  13.47831
+                  102.49647,
+                  13.76955
                 ],
                 [
-                  102.23497,
-                  13.47608
+                  102.53815,
+                  13.75573
                 ],
                 [
-                  102.23779,
-                  13.47292
+                  102.55519,
+                  13.75451
                 ],
                 [
-                  102.23713,
-                  13.47187
+                  102.5581,
+                  13.75518
                 ],
                 [
-                  102.24147,
-                  13.46864
+                  102.5578,
+                  13.75102
                 ],
                 [
-                  102.23804,
-                  13.46484
+                  102.53415,
+                  13.73085
                 ],
                 [
-                  102.23476,
-                  13.4666
+                  102.52981,
+                  13.73095
                 ],
                 [
-                  102.23455,
-                  13.45908
+                  102.52497,
+                  13.73321
                 ],
                 [
-                  102.23632,
-                  13.45621
+                  102.51982,
+                  13.733
                 ],
                 [
-                  102.23384,
-                  13.43564
+                  102.50566,
+                  13.73929
                 ],
                 [
-                  102.23612,
-                  13.43038
+                  102.49643,
+                  13.73935
                 ],
                 [
-                  102.23447,
-                  13.42853
+                  102.48241,
+                  13.73388
                 ],
                 [
-                  102.23393,
-                  13.41999
+                  102.47859,
+                  13.73026
                 ],
                 [
-                  102.22974,
-                  13.41466
+                  102.47422,
+                  13.71982
                 ],
                 [
-                  102.22613,
-                  13.41347
+                  102.46856,
+                  13.71132
                 ],
                 [
-                  102.22409,
-                  13.40744
+                  102.4693,
+                  13.70949
                 ],
                 [
-                  102.22635,
-                  13.38439
+                  102.46506,
+                  13.69547
                 ],
                 [
-                  102.22115,
-                  13.38481
+                  102.4559,
+                  13.69515
                 ],
                 [
-                  102.21931,
-                  13.38699
+                  102.4455,
+                  13.69299
                 ],
                 [
-                  102.20982,
-                  13.39114
+                  102.43931,
+                  13.68973
                 ],
                 [
-                  102.20419,
-                  13.39696
+                  102.42752,
+                  13.70013
                 ],
                 [
-                  102.1987,
-                  13.39985
+                  102.43165,
+                  13.70832
                 ],
                 [
-                  102.1965,
-                  13.39908
+                  102.43096,
+                  13.71255
                 ],
                 [
-                  102.19187,
-                  13.40167
+                  102.43545,
+                  13.7178
                 ],
                 [
-                  102.1859,
-                  13.41067
+                  102.43464,
+                  13.72115
                 ],
                 [
-                  102.18404,
-                  13.41189
+                  102.43636,
+                  13.72254
                 ],
                 [
-                  102.18366,
-                  13.41488
+                  102.44014,
+                  13.72144
                 ],
                 [
-                  102.18126,
-                  13.41648
+                  102.44128,
+                  13.72005
                 ],
                 [
-                  102.17945,
-                  13.41543
+                  102.44511,
+                  13.72148
                 ],
                 [
-                  102.17772,
-                  13.41611
+                  102.44886,
+                  13.72099
                 ],
                 [
-                  102.17829,
-                  13.41352
+                  102.45141,
+                  13.72208
                 ],
                 [
-                  102.17566,
-                  13.40961
+                  102.45297,
+                  13.72626
                 ],
                 [
-                  102.1756,
-                  13.40825
+                  102.45946,
+                  13.72815
                 ],
                 [
-                  102.17721,
-                  13.40844
+                  102.45967,
+                  13.72966
                 ],
                 [
-                  102.17729,
-                  13.40645
+                  102.4571,
+                  13.73096
                 ],
                 [
-                  102.17981,
-                  13.40304
+                  102.45888,
+                  13.73221
                 ],
                 [
-                  102.17893,
-                  13.40021
+                  102.45825,
+                  13.73545
                 ],
                 [
-                  102.17532,
-                  13.39629
+                  102.45942,
+                  13.73788
                 ],
                 [
-                  102.17171,
-                  13.39478
+                  102.46567,
+                  13.74284
                 ],
                 [
-                  102.1689,
-                  13.39555
+                  102.46972,
+                  13.7517
                 ],
                 [
-                  102.16709,
-                  13.39764
+                  102.47837,
+                  13.75703
                 ],
                 [
-                  102.16293,
-                  13.39601
+                  102.4852,
+                  13.76946
                 ],
                 [
-                  102.15834,
-                  13.39668
+                  102.49039,
+                  13.77025
                 ],
                 [
-                  102.15616,
-                  13.39491
+                  102.49647,
+                  13.76955
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "270608",
+          "tambon": "ต.บ้านใหม่หนองไทร",
+          "amphoe": "อ.อรัญประเทศ",
+          "province": "จ.สระแก้ว",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "คลองพรหมโหด",
+          "latitude": 13.705864,
+          "longitude": 102.48168,
+          "sum_rainfall_mm": 81.79999999999998,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  102.53415,
+                  13.73085
+                ],
+                [
+                  102.53198,
+                  13.72698
+                ],
+                [
+                  102.52257,
+                  13.71924
                 ],
                 [
-                  102.15303,
-                  13.39674
+                  102.51839,
+                  13.7142
                 ],
                 [
-                  102.1503,
-                  13.39603
+                  102.51257,
+                  13.6975
                 ],
                 [
-                  102.14747,
-                  13.39761
+                  102.51336,
+                  13.68962
                 ],
                 [
-                  102.14052,
-                  13.3964
+                  102.49408,
+                  13.70284
                 ],
                 [
-                  102.13875,
-                  13.39683
+                  102.49164,
+                  13.70261
                 ],
                 [
-                  102.13745,
-                  13.39867
+                  102.48851,
+                  13.69614
                 ],
                 [
-                  102.13602,
-                  13.4033
+                  102.49012,
+                  13.69323
                 ],
                 [
-                  102.14146,
-                  13.4101
+                  102.49281,
+                  13.69324
                 ],
                 [
-                  102.14169,
-                  13.41836
+                  102.49577,
+                  13.68931
                 ],
                 [
-                  102.12878,
-                  13.41436
+                  102.49528,
+                  13.68833
                 ],
                 [
-                  102.12423,
-                  13.41641
+                  102.49166,
+                  13.68776
                 ],
                 [
-                  102.1191,
-                  13.41556
+                  102.485,
+                  13.68103
                 ],
                 [
-                  102.11539,
-                  13.41205
+                  102.45707,
+                  13.67324
                 ],
                 [
-                  102.11456,
-                  13.40822
+                  102.45443,
+                  13.67471
                 ],
                 [
-                  102.11297,
-                  13.40771
+                  102.45376,
+                  13.6897
                 ],
                 [
-                  102.10438,
-                  13.40936
+                  102.44722,
+                  13.68855
                 ],
                 [
-                  102.10363,
-                  13.41156
+                  102.43966,
+                  13.68965
                 ],
                 [
-                  102.0994,
-                  13.41216
+                  102.4455,
+                  13.69299
                 ],
                 [
-                  102.09766,
-                  13.41623
+                  102.4559,
+                  13.69515
                 ],
                 [
-                  102.09544,
-                  13.41508
+                  102.46506,
+                  13.69547
                 ],
                 [
-                  102.09221,
-                  13.41721
+                  102.4693,
+                  13.70949
                 ],
                 [
-                  102.09005,
-                  13.41684
+                  102.46856,
+                  13.71132
                 ],
                 [
-                  102.0891,
-                  13.41963
+                  102.47422,
+                  13.71982
                 ],
                 [
-                  102.08525,
-                  13.42136
+                  102.47859,
+                  13.73026
                 ],
                 [
-                  102.0835,
-                  13.41926
+                  102.48241,
+                  13.73388
                 ],
                 [
-                  102.07844,
-                  13.41865
+                  102.49643,
+                  13.73935
                 ],
                 [
-                  102.07811,
-                  13.41313
+                  102.50566,
+                  13.73929
                 ],
                 [
-                  102.07561,
-                  13.4125
+                  102.51982,
+                  13.733
                 ],
                 [
-                  102.07583,
-                  13.41064
+                  102.52497,
+                  13.73321
                 ],
                 [
-                  102.07398,
-                  13.40665
+                  102.52981,
+                  13.73095
                 ],
                 [
-                  102.06925,
-                  13.40302
+                  102.53415,
+                  13.73085
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "270601",
+          "tambon": "ต.อรัญประเทศ",
+          "amphoe": "อ.อรัญประเทศ",
+          "province": "จ.สระแก้ว",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "บ้านฟากห้วย",
+          "latitude": 13.684085,
+          "longitude": 102.501103,
+          "sum_rainfall_mm": 151.0,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  102.49647,
+                  13.7012
+                ],
+                [
+                  102.55087,
+                  13.66401
                 ],
                 [
-                  102.06744,
-                  13.40382
+                  102.55045,
+                  13.662
                 ],
                 [
-                  102.06483,
-                  13.40226
+                  102.54852,
+                  13.66008
                 ],
                 [
-                  102.06342,
-                  13.39647
+                  102.54634,
+                  13.66078
                 ],
                 [
-                  102.05311,
-                  13.39314
+                  102.54459,
+                  13.65968
                 ],
                 [
-                  102.04742,
-                  13.38857
+                  102.54303,
+                  13.66123
                 ],
                 [
-                  102.03862,
-                  13.38504
+                  102.5412,
+                  13.6606
                 ],
                 [
-                  102.02685,
-                  13.37817
+                  102.54076,
+                  13.66166
                 ],
                 [
-                  102.02108,
-                  13.37706
+                  102.5341,
+                  13.66298
                 ],
                 [
-                  102.01187,
-                  13.36911
+                  102.5302,
+                  13.66709
                 ],
                 [
-                  102.00976,
-                  13.36433
+                  102.52505,
+                  13.66725
                 ],
                 [
-                  102.00673,
-                  13.36102
+                  102.52202,
+                  13.66854
                 ],
                 [
-                  101.99843,
-                  13.35949
+                  102.52224,
+                  13.66989
                 ],
                 [
-                  101.99013,
-                  13.35334
+                  102.51949,
+                  13.6726
                 ],
                 [
-                  101.98839,
-                  13.3555
+                  102.51534,
+                  13.67039
                 ],
                 [
-                  101.98524,
-                  13.35646
+                  102.51376,
+                  13.67122
                 ],
                 [
-                  101.98213,
-                  13.3592
+                  102.5144,
+                  13.67297
                 ],
                 [
-                  101.98061,
-                  13.36516
+                  102.51133,
+                  13.67278
                 ],
                 [
-                  101.98227,
-                  13.36956
+                  102.50998,
+                  13.67404
                 ],
                 [
-                  101.98125,
-                  13.37617
+                  102.5056,
+                  13.67475
                 ],
                 [
-                  101.98198,
-                  13.3809
+                  102.50255,
+                  13.67883
                 ],
                 [
-                  101.9756,
-                  13.38562
+                  102.50396,
+                  13.6814
                 ],
                 [
-                  101.97536,
-                  13.3911
+                  102.50169,
+                  13.68161
                 ],
                 [
-                  101.97318,
-                  13.39405
+                  102.50089,
+                  13.68417
                 ],
                 [
-                  101.97375,
-                  13.39617
+                  102.49824,
+                  13.68339
                 ],
                 [
-                  101.97693,
-                  13.39961
+                  102.49752,
+                  13.6887
                 ],
                 [
-                  101.97707,
-                  13.40873
+                  102.49493,
+                  13.69008
                 ],
                 [
-                  101.99324,
-                  13.40872
+                  102.49281,
+                  13.69324
                 ],
                 [
-                  102.00088,
-                  13.40593
+                  102.49012,
+                  13.69323
                 ],
                 [
-                  102.00324,
-                  13.4122
+                  102.48851,
+                  13.69614
                 ],
                 [
-                  102.00847,
-                  13.4201
+                  102.49089,
+                  13.70219
                 ],
+                [
+                  102.49408,
+                  13.70284
+                ],
+                [
+                  102.49647,
+                  13.7012
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "270601",
+          "tambon": "ต.อรัญประเทศ",
+          "amphoe": "อ.อรัญประเทศ",
+          "province": "จ.สระแก้ว",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "ชุมชนวังปาตอง",
+          "latitude": 13.682056,
+          "longitude": 102.504417,
+          "sum_rainfall_mm": 85.5,
+          "observed_at": "2026-09-25T03:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
                 [
-                  102.02265,
-                  13.43657
+                  102.49647,
+                  13.7012
                 ],
                 [
-                  102.03221,
-                  13.43962
+                  102.55087,
+                  13.66401
                 ],
                 [
-                  102.03542,
-                  13.43962
+                  102.55045,
+                  13.662
                 ],
                 [
-                  102.0385,
-                  13.44196
+                  102.54852,
+                  13.66008
                 ],
                 [
-                  102.04218,
-                  13.44152
+                  102.54634,
+                  13.66078
                 ],
                 [
-                  102.04511,
-                  13.43908
+                  102.54459,
+                  13.65968
                 ],
                 [
-                  102.04878,
-                  13.43872
+                  102.54303,
+                  13.66123
                 ],
                 [
-                  102.05488,
-                  13.43495
+                  102.5412,
+                  13.6606
                 ],
                 [
-                  102.05894,
-                  13.43716
+                  102.54076,
+                  13.66166
                 ],
                 [
-                  102.06073,
-                  13.43595
+                  102.5341,
+                  13.66298
                 ],
                 [
-                  102.06352,
-                  13.43654
+                  102.5302,
+                  13.66709
                 ],
                 [
-                  102.06996,
-                  13.43988
+                  102.52505,
+                  13.66725
                 ],
                 [
-                  102.06882,
-                  13.44357
+                  102.52202,
+                  13.66854
                 ],
                 [
-                  102.07151,
-                  13.44487
+                  102.52224,
+                  13.66989
                 ],
                 [
-                  102.07418,
-                  13.44453
+                  102.51949,
+                  13.6726
                 ],
                 [
-                  102.07472,
-                  13.44613
+                  102.51534,
+                  13.67039
                 ],
                 [
-                  102.07365,
-                  13.44958
+                  102.51376,
+                  13.67122
                 ],
                 [
-                  102.07644,
-                  13.45285
+                  102.5144,
+                  13.67297
                 ],
                 [
-                  102.0773,
-                  13.44853
+                  102.51133,
+                  13.67278
                 ],
                 [
-                  102.07829,
-                  13.4483
+                  102.50998,
+                  13.67404
                 ],
                 [
-                  102.09325,
-                  13.44846
+                  102.5056,
+                  13.67475
                 ],
                 [
-                  102.12027,
-                  13.45161
+                  102.50255,
+                  13.67883
                 ],
                 [
-                  102.13096,
-                  13.44974
+                  102.50396,
+                  13.6814
                 ],
                 [
-                  102.14335,
-                  13.44993
+                  102.50169,
+                  13.68161
                 ],
                 [
-                  102.14915,
-                  13.45533
+                  102.50089,
+                  13.68417
                 ],
                 [
-                  102.16229,
-                  13.47203
+                  102.49824,
+                  13.68339
                 ],
                 [
-                  102.16572,
-                  13.46601
+                  102.49752,
+                  13.6887
                 ],
                 [
-                  102.18018,
-                  13.46702
+                  102.49493,
+                  13.69008
                 ],
                 [
-                  102.18506,
-                  13.46637
+                  102.49281,
+                  13.69324
                 ],
                 [
-                  102.18852,
-                  13.46405
+                  102.49012,
+                  13.69323
                 ],
                 [
-                  102.2007,
-                  13.46941
+                  102.48851,
+                  13.69614
                 ],
                 [
-                  102.22253,
-                  13.4834
+                  102.49089,
+                  13.70219
                 ],
                 [
-                  102.22405,
-                  13.48074
+                  102.49408,
+                  13.70284
                 ],
                 [
-                  102.22784,
-                  13.47831
+                  102.49647,
+                  13.7012
                 ]
               ]
             ]
@@ -31143,8 +48790,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ที่ทำการเขตรักษาพันธุ์สัตว์ป่าดงใหญ่",
           "latitude": 14.29667,
           "longitude": 102.73718,
-          "sum_rainfall_mm": 22.4,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 28.8,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -31646,8 +49293,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ลำนางรอง",
           "latitude": 14.1899,
           "longitude": 102.68618,
-          "sum_rainfall_mm": 165.59999999999997,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 173.39999999999998,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -32225,8 +49872,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "โรงเรียนบ้านสายโท ๔ ใต้",
           "latitude": 14.370019,
           "longitude": 103.14561,
-          "sum_rainfall_mm": 209.2,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 209.8,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -32380,8 +50027,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ละหานทราย",
           "latitude": 14.39567,
           "longitude": 102.84726,
-          "sum_rainfall_mm": 149.0,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 152.40000000000003,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -32583,8 +50230,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ตย.๕ (บาระแนะ)",
           "latitude": 14.249989,
           "longitude": 102.97801,
-          "sum_rainfall_mm": 138.4,
-          "observed_at": "2026-09-25T01:00:00+07:00",
+          "sum_rainfall_mm": 144.39999999999998,
+          "observed_at": "2026-09-25T04:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -33087,9 +50734,605 @@ window.IEAT_THAIWATER_DATA = {
               ]
             ]
           }
+        },
+        {
+          "geocode": "104603",
+          "tambon": "ต.บางขัน",
+          "amphoe": "อ.คลองสามวา",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "สนข.คลองสามวา",
+          "latitude": 13.8599,
+          "longitude": 100.70424,
+          "sum_rainfall_mm": 74.0,
+          "observed_at": "2026-09-25T04:00:00+07:00"
+        },
+        {
+          "geocode": "104603",
+          "tambon": "ต.บางขัน",
+          "amphoe": "อ.คลองสามวา",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "ปตร.คลองสามวา",
+          "latitude": 13.85954,
+          "longitude": 100.72909,
+          "sum_rainfall_mm": 106.0,
+          "observed_at": "2026-09-25T04:00:00+07:00"
+        },
+        {
+          "geocode": "104602",
+          "tambon": "ต.สามวาตะวันออก",
+          "amphoe": "อ.คลองสามวา",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "จุดวัด ค.เก้า-วัดศรีสุขฯ",
+          "latitude": 13.92046,
+          "longitude": 100.79228,
+          "sum_rainfall_mm": 29.5,
+          "observed_at": "2026-09-24T16:00:00+07:00"
+        },
+        {
+          "geocode": "100905",
+          "tambon": "ต.บางจาก",
+          "amphoe": "อ.พระโขนง",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "ส.คลองเจ็ก",
+          "latitude": 13.69223,
+          "longitude": 100.58991,
+          "sum_rainfall_mm": 86.5,
+          "observed_at": "2026-09-25T04:00:00+07:00"
+        },
+        {
+          "geocode": "100905",
+          "tambon": "ต.บางจาก",
+          "amphoe": "อ.พระโขนง",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "ส.บางจาก",
+          "latitude": 13.6891,
+          "longitude": 100.59068,
+          "sum_rainfall_mm": 76.0,
+          "observed_at": "2026-09-25T04:00:00+07:00"
+        },
+        {
+          "geocode": "100905",
+          "tambon": "ต.บางจาก",
+          "amphoe": "อ.พระโขนง",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "สนข.พระโขนง",
+          "latitude": 13.70233,
+          "longitude": 100.60197,
+          "sum_rainfall_mm": 104.0,
+          "observed_at": "2026-09-25T04:00:00+07:00"
+        },
+        {
+          "geocode": "100905",
+          "tambon": "ต.บางจาก",
+          "amphoe": "อ.พระโขนง",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "ส.บางอ้อ",
+          "latitude": 13.68212,
+          "longitude": 100.59254,
+          "sum_rainfall_mm": 78.5,
+          "observed_at": "2026-09-25T04:00:00+07:00"
+        },
+        {
+          "geocode": "101001",
+          "tambon": "ต.มีนบุรี",
+          "amphoe": "อ.มีนบุรี",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "สนข.มีนบุรี",
+          "latitude": 13.8136,
+          "longitude": 100.73122,
+          "sum_rainfall_mm": 104.0,
+          "observed_at": "2026-09-25T04:00:00+07:00"
+        },
+        {
+          "geocode": "101002",
+          "tambon": "ต.แสนแสบ",
+          "amphoe": "อ.มีนบุรี",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "ปตร.บึงขวาง",
+          "latitude": 13.79988,
+          "longitude": 100.74482,
+          "sum_rainfall_mm": 99.0,
+          "observed_at": "2026-09-25T04:00:00+07:00"
+        },
+        {
+          "geocode": "101002",
+          "tambon": "ต.แสนแสบ",
+          "amphoe": "อ.มีนบุรี",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "จุดวัด ค.แสนแสบ-วัดทรัพย์ฯ",
+          "latitude": 13.8515,
+          "longitude": 100.80361,
+          "sum_rainfall_mm": 87.0,
+          "observed_at": "2026-09-25T04:00:00+07:00"
+        },
+        {
+          "geocode": "101002",
+          "tambon": "ต.แสนแสบ",
+          "amphoe": "อ.มีนบุรี",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "จุดวัด ค.บึงใหญ่-วัดทองสัมฤทธิ์",
+          "latitude": 13.80045,
+          "longitude": 100.78827,
+          "sum_rainfall_mm": 62.5,
+          "observed_at": "2026-09-25T04:00:00+07:00"
+        },
+        {
+          "geocode": "101002",
+          "tambon": "ต.แสนแสบ",
+          "amphoe": "อ.มีนบุรี",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "ปตร.ประชาร่วมใจ",
+          "latitude": 13.8212,
+          "longitude": 100.74717,
+          "sum_rainfall_mm": 117.5,
+          "observed_at": "2026-09-25T04:00:00+07:00"
+        },
+        {
+          "geocode": "101106",
+          "tambon": "ต.ขุมทอง",
+          "amphoe": "อ.ลาดกระบัง",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "จุดวัด ค.ประเวศฯ-ถ.ร่วมพัฒนา",
+          "latitude": 13.70097,
+          "longitude": 100.85106,
+          "sum_rainfall_mm": 74.0,
+          "observed_at": "2026-09-25T04:00:00+07:00"
+        },
+        {
+          "geocode": "101101",
+          "tambon": "ต.ลาดกระบัง",
+          "amphoe": "อ.ลาดกระบัง",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "คลองลำปลาทิว ลาดกระบัง",
+          "latitude": 13.7407,
+          "longitude": 100.79468,
+          "sum_rainfall_mm": 178.0,
+          "observed_at": "2026-09-25T04:00:00+07:00"
+        },
+        {
+          "geocode": "101101",
+          "tambon": "ต.ลาดกระบัง",
+          "amphoe": "อ.ลาดกระบัง",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "ค.ประเวศฯ-รพ.ลาดกระบัง",
+          "latitude": 13.72398,
+          "longitude": 100.78407,
+          "sum_rainfall_mm": 110.0,
+          "observed_at": "2026-09-25T04:00:00+07:00"
+        },
+        {
+          "geocode": "101101",
+          "tambon": "ต.ลาดกระบัง",
+          "amphoe": "อ.ลาดกระบัง",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "ปตร.คลองประเวศฯ-ลาดกระบัง",
+          "latitude": 13.72386,
+          "longitude": 100.74979,
+          "sum_rainfall_mm": 108.5,
+          "observed_at": "2026-09-25T04:00:00+07:00"
+        },
+        {
+          "geocode": "130407",
+          "tambon": "ต.นพรัตน์",
+          "amphoe": "อ.หนองเสือ",
+          "province": "จ.ปทุมธานี",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "คลองระพีพัฒน์แยกใต้ หนองเสือ",
+          "latitude": 14.2206,
+          "longitude": 100.89168,
+          "sum_rainfall_mm": 63.599999999999994,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.89134,
+                  14.25166
+                ],
+                [
+                  100.89269,
+                  14.24182
+                ],
+                [
+                  100.89186,
+                  14.22245
+                ],
+                [
+                  100.88038,
+                  14.22232
+                ],
+                [
+                  100.88064,
+                  14.19166
+                ],
+                [
+                  100.85812,
+                  14.19171
+                ],
+                [
+                  100.85796,
+                  14.15309
+                ],
+                [
+                  100.84617,
+                  14.15299
+                ],
+                [
+                  100.84597,
+                  14.2537
+                ],
+                [
+                  100.89166,
+                  14.27547
+                ],
+                [
+                  100.89134,
+                  14.25166
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "130404",
+          "tambon": "ต.บึงชำอ้อ",
+          "amphoe": "อ.หนองเสือ",
+          "province": "จ.ปทุมธานี",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "บ้านน้อยสว่าง",
+          "latitude": 14.1652,
+          "longitude": 100.77855,
+          "sum_rainfall_mm": 123.0,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.80085,
+                  14.15677
+                ],
+                [
+                  100.80096,
+                  14.13169
+                ],
+                [
+                  100.75532,
+                  14.11254
+                ],
+                [
+                  100.75503,
+                  14.21096
+                ],
+                [
+                  100.80048,
+                  14.23299
+                ],
+                [
+                  100.80085,
+                  14.15677
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "110602",
+          "tambon": "ต.ศีรษะจรเข้น้อย",
+          "amphoe": "อ.บางเสาธง",
+          "province": "จ.สมุทรปราการ",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "อบต.ศีรษะจรเข้น้อย",
+          "latitude": 13.67777,
+          "longitude": 100.7945,
+          "sum_rainfall_mm": 119.79999999999998,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.82831,
+                  13.70177
+                ],
+                [
+                  100.81908,
+                  13.68513
+                ],
+                [
+                  100.81696,
+                  13.68306
+                ],
+                [
+                  100.82308,
+                  13.67525
+                ],
+                [
+                  100.8224,
+                  13.67311
+                ],
+                [
+                  100.8238,
+                  13.6673
+                ],
+                [
+                  100.81877,
+                  13.66338
+                ],
+                [
+                  100.80489,
+                  13.66162
+                ],
+                [
+                  100.80152,
+                  13.65877
+                ],
+                [
+                  100.7993,
+                  13.66027
+                ],
+                [
+                  100.79697,
+                  13.65996
+                ],
+                [
+                  100.79645,
+                  13.6638
+                ],
+                [
+                  100.80028,
+                  13.6696
+                ],
+                [
+                  100.80204,
+                  13.67534
+                ],
+                [
+                  100.79345,
+                  13.67773
+                ],
+                [
+                  100.77212,
+                  13.67375
+                ],
+                [
+                  100.76303,
+                  13.6748
+                ],
+                [
+                  100.77864,
+                  13.70153
+                ],
+                [
+                  100.78518,
+                  13.70682
+                ],
+                [
+                  100.78182,
+                  13.70986
+                ],
+                [
+                  100.78465,
+                  13.71649
+                ],
+                [
+                  100.78871,
+                  13.71627
+                ],
+                [
+                  100.80111,
+                  13.71215
+                ],
+                [
+                  100.82831,
+                  13.70177
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "110603",
+          "tambon": "ต.ศีรษะจรเข้ใหญ่",
+          "amphoe": "อ.บางเสาธง",
+          "province": "จ.สมุทรปราการ",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "คลองจระเข้ใหญ่ บางเสาธง (วัดศรีวารีน้อย)",
+          "latitude": 13.66949,
+          "longitude": 100.80058,
+          "sum_rainfall_mm": 112.0,
+          "observed_at": "2026-09-25T04:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.8238,
+                  13.6673
+                ],
+                [
+                  100.82663,
+                  13.66573
+                ],
+                [
+                  100.81938,
+                  13.64767
+                ],
+                [
+                  100.8156,
+                  13.63094
+                ],
+                [
+                  100.81294,
+                  13.62796
+                ],
+                [
+                  100.7991,
+                  13.61931
+                ],
+                [
+                  100.79839,
+                  13.61718
+                ],
+                [
+                  100.8009,
+                  13.60951
+                ],
+                [
+                  100.80037,
+                  13.60468
+                ],
+                [
+                  100.7972,
+                  13.60118
+                ],
+                [
+                  100.79893,
+                  13.59092
+                ],
+                [
+                  100.7957,
+                  13.59125
+                ],
+                [
+                  100.79403,
+                  13.58893
+                ],
+                [
+                  100.79091,
+                  13.5891
+                ],
+                [
+                  100.78878,
+                  13.59284
+                ],
+                [
+                  100.77925,
+                  13.59487
+                ],
+                [
+                  100.77947,
+                  13.59903
+                ],
+                [
+                  100.7821,
+                  13.60201
+                ],
+                [
+                  100.78274,
+                  13.60677
+                ],
+                [
+                  100.78603,
+                  13.61496
+                ],
+                [
+                  100.78405,
+                  13.62223
+                ],
+                [
+                  100.78491,
+                  13.63074
+                ],
+                [
+                  100.78312,
+                  13.64766
+                ],
+                [
+                  100.78712,
+                  13.6562
+                ],
+                [
+                  100.79428,
+                  13.6662
+                ],
+                [
+                  100.79086,
+                  13.67371
+                ],
+                [
+                  100.79065,
+                  13.67716
+                ],
+                [
+                  100.79345,
+                  13.67773
+                ],
+                [
+                  100.80204,
+                  13.67534
+                ],
+                [
+                  100.80028,
+                  13.6696
+                ],
+                [
+                  100.79645,
+                  13.6638
+                ],
+                [
+                  100.79697,
+                  13.65996
+                ],
+                [
+                  100.7993,
+                  13.66027
+                ],
+                [
+                  100.80152,
+                  13.65877
+                ],
+                [
+                  100.80489,
+                  13.66162
+                ],
+                [
+                  100.81877,
+                  13.66338
+                ],
+                [
+                  100.8238,
+                  13.6673
+                ]
+              ]
+            ]
+          }
         }
       ],
-      "risk_map": "https://api.hii.or.th/v2/proxy-image/3days_riskmap_24_09_2026.png?1790276844",
+      "risk_map": "https://api.hii.or.th/v2/proxy-image/3days_riskmap_24_09_2026.png?1790287637",
       "source_url": "https://api.hii.or.th/v2/4UQaYnf0Bx4fXPYyCdDRbqHyXH9Ixvd2nVUjaN1cLBY=/warning/flashflood-48h"
     }
   }
