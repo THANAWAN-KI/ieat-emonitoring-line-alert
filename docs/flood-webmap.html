@@ -83,7 +83,7 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
   var webmap=new WebMap({portalItem:{id:itemId}});
   webmap.load().then(function(){
    if(fallback)return;
-   webmap.basemap="topo-vector";
+   webmap.basemap="osm";
    view=new MapView({container:"viewDiv",map:webmap});
    view.when(function(){
     if(fallback)return;
