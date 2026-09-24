@@ -438,14 +438,14 @@ function fireSyncAnalysisMap(origin){
   if(!image){
     host.replaceChildren();
     image=document.createElement('img');image.alt='ภาพแผนที่ ArcGIS รอบตำแหน่งที่เลือก';
-    image.style.cssText='width:100%;height:100%;object-fit:fill;display:block';
+    image.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block';
     image.onerror=function(){host.classList.add('map-image-unavailable')};
     host.appendChild(image);
     pin=document.createElement('span');pin.className='fire-static-pin';pin.textContent='●';
     pin.style.cssText='position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:32px;color:#d9273f;text-shadow:0 1px 4px #fff';
     host.appendChild(pin);
   }
-  host.style.position='relative';host.style.minHeight='520px';
+  host.style.position='relative';
   image.src=fireStaticMapUrl(origin);
   host.setAttribute('aria-label','แผนที่พิกัด '+origin.lat.toFixed(5)+', '+origin.lng.toFixed(5));
 }
@@ -2765,3 +2765,13 @@ html body #hubInformationHeader .header-more-menu a:hover{background:#f5f6f7!imp
 </style>
 <style id="fire-unified-report-map">#fireReportView .fire-dashboard-grid{grid-template-columns:minmax(400px,.95fr) minmax(420px,1.05fr)!important}@media(max-width:1100px){#fireReportView .fire-dashboard-grid{grid-template-columns:1fr!important}}#fireReportView .fire-factory-bridge{display:none!important}</style>
 <link rel="stylesheet" href="./mobile-responsive.css?v=20260915-1">
+
+<style id="fire-map-natural-aspect-20260924">
+#fireReportView .fire-analysis-panel{height:auto!important;align-self:start!important}
+#fireReportView #fireAnalysisMap{
+  width:100%!important;height:auto!important;min-height:0!important;
+  aspect-ratio:10/7!important;flex:0 0 auto!important;overflow:hidden!important;
+  background:#eef2f5!important
+}
+#fireReportView #fireAnalysisMap img{object-fit:contain!important}
+</style>
