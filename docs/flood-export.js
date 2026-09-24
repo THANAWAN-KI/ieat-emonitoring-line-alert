@@ -170,7 +170,7 @@
     iframe.height="600";
     iframe.allow="local-network-access; geolocation";
     iframe.title="แผนที่แสดงข้อมูลน้ำท่วม พื้นที่เฝ้าระวัง "+(period==="24h"?"24":"48")+" ชั่วโมง";
-    iframe.src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=3d24287ac6ea49cd823625ddad496e01&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=false&basemaps=true&center=101.60218426570209,13.611210763141127&scale=4622324.434309";
+    iframe.src="flood-webmap.html?center=101.60218426570209,13.611210763141127&scale=4622324.434309";
     iframe.loading="eager";
     iframe.referrerPolicy="strict-origin-when-cross-origin";
     iframe.style.cssText="display:block;width:100%;height:100%;min-height:600px;border:0;background:#fff;pointer-events:auto";
@@ -246,6 +246,27 @@
     }));
     await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
   }
+  function captureCurrentMap(frame){
+    return new Promise((resolve,reject)=>{
+      const src=frame.getAttribute("src")||"";
+      if(!src.includes("flood-webmap.html"))return reject(new Error("แผนที่รายงานยังไม่พร้อม กรุณารอให้แผนที่โหลดแล้วลองอีกครั้ง"));
+      const id="report-map-"+Date.now()+"-"+Math.random().toString(36).slice(2);
+      const timer=setTimeout(()=>finish(new Error("หมดเวลารอภาพแผนที่ กรุณาลองอีกครั้ง")),20000);
+      function finish(error,dataUrl){
+        clearTimeout(timer);window.removeEventListener("message",receive);
+        if(error)reject(error);else resolve(dataUrl);
+      }
+      function receive(event){
+        if(event.origin!==location.origin||event.source!==frame.contentWindow)return;
+        const data=event.data;
+        if(data?.type!=="flood-map-snapshot-result"||data.id!==id)return;
+        if(data.error||!data.dataUrl)finish(new Error(data.error||"ไม่สามารถจับภาพแผนที่ได้"));
+        else finish(null,data.dataUrl);
+      }
+      window.addEventListener("message",receive);
+      frame.contentWindow.postMessage({type:"flood-map-snapshot",id},location.origin);
+    });
+  }
   async function captureSheet(sheet){
     if(typeof html2canvas!=="function")throw new Error("Export library unavailable");
 
@@ -258,23 +279,17 @@
     const renderHeight=Math.max(1,Math.round(sheet.offsetHeight||rect.height));
     const renderRoot=document.createElement("div");
     const clone=sheet.cloneNode(true);
-    if(sheet.id==="reportCanvas"){
-      const frame=clone.querySelector(".sheet-map-frame");
-      if(frame){
-        const mapImage=document.createElement("img");
-        mapImage.alt="แผนที่สถานการณ์น้ำท่วมสำหรับรายงาน";
-        mapImage.src=window.IEAT_REPORT_MAP_IMAGE||new URL("./assets/flood-risk-map-reference.png",document.baseURI).href;
-        mapImage.style.cssText="display:block;width:100%;height:100%;object-fit:contain;background:#fff";
-        try{await mapImage.decode()}catch(error){throw new Error("Report map image unavailable")}
-        frame.replaceChildren(mapImage);
-        if(!window.IEAT_REPORT_MAP_IMAGE){
-          const note=document.createElement("span");
-          note.textContent="ภาพแผนที่อ้างอิง • ตรวจสอบสถานการณ์ล่าสุดบนแผนที่ออนไลน์";
-          note.style.cssText="position:absolute;left:10px;bottom:10px;padding:4px 7px;background:#fff;color:#263746;font:12px Sarabun,sans-serif";
-          frame.appendChild(note);
-        }
-      }
-    }
+    // Capture the map at its current extent before cloning the report.
+    // html2canvas cannot read pixels inside an iframe.
+    const liveFrames=[...sheet.querySelectorAll("iframe")];
+    const mapImages=await Promise.all(liveFrames.map(captureCurrentMap));
+    clone.querySelectorAll("iframe").forEach((frame,index)=>{
+      const image=document.createElement("img");
+      image.alt="ภาพแผนที่ ณ มุมมองปัจจุบัน";
+      image.src=mapImages[index];
+      image.style.cssText="display:block;width:100%;height:100%;object-fit:fill;background:#fff";
+      frame.replaceWith(image);
+    });
 
     renderRoot.setAttribute("aria-hidden","true");
     renderRoot.style.cssText=[
@@ -340,7 +355,7 @@
       }
       preview(items);
     }catch(error){
-      console.error(error);alert("ไม่สามารถสร้างภาพ PNG ได้ กรุณาเปิดด้วย Chrome หรือ Safari แล้วลองอีกครั้ง");
+      console.error(error);alert("ไม่สามารถสร้างภาพ PNG ได้: "+(error?.message||"กรุณาลองอีกครั้ง"));
     }finally{
       document.querySelectorAll(".report-exporting").forEach(el=>el.classList.remove("report-exporting"));
       if(button){button.disabled=false;button.textContent=old}
