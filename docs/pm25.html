@@ -382,7 +382,7 @@ html body main.wrap>.dashboard-head{
     if(window.pm25LeafletMap)return;
     if(typeof L==="undefined"){showError("โหลดระบบแผนที่สำรองไม่สำเร็จ");return;}
     viewElement.replaceChildren();
-    if(mapStatus)mapStatus.textContent="แสดงแผนที่และข้อมูลสถานีด้วยระบบสำรอง";
+    if(mapStatus)mapStatus.style.display="none";
     var map=L.map(viewElement,{zoomControl:true}).setView([13.7,101],6);
     window.pm25LeafletMap=map;
     L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",{
