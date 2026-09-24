@@ -26,7 +26,15 @@ html body main.wrap .kpi-icon svg{display:block!important;width:38px!important;h
   }
 }
 </style>
-<link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css"><script src="https://js.arcgis.com/4.30/"></script><style id="pm25-arcgis-map-style">.pm-map{height:100%;min-height:0}.map-panel .esri-view{width:100%;height:100%}.map-panel .esri-expand__content{max-width:min(340px,80vw);max-height:65vh;overflow:auto}.map-panel .esri-widget{font-family:"Noto Sans Thai",sans-serif}</style></head>
+<link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css"><script src="https://js.arcgis.com/4.30/"></script><style id="pm25-arcgis-map-style">.pm-map{height:100%;min-height:0}.map-panel .esri-view{width:100%;height:100%}.map-panel .esri-expand__content{max-width:min(340px,80vw);max-height:65vh;overflow:auto}.map-panel .esri-widget{font-family:"Noto Sans Thai",sans-serif}</style><style id="pm25-map-final">
+html body main.wrap .map-panel{position:relative!important;top:auto!important;height:780px!important;min-height:780px!important;max-height:none!important;align-self:start!important;overflow:hidden!important}
+html body main.wrap .map-panel #pmMapView{position:relative!important;inset:auto!important;display:block!important;width:100%!important;height:100%!important;min-height:0!important;max-height:none!important;border:0!important}
+html body main.wrap .map-panel .esri-view{height:100%!important;width:100%!important}
+html body main.wrap .map-panel .map-head{z-index:3;right:auto;max-width:calc(100% - 160px)}
+html body main.wrap .map-panel .esri-ui-top-right{top:58px}
+@media(max-width:1100px){html body main.wrap .map-panel{height:650px!important;min-height:650px!important}}
+@media(max-width:700px){html body main.wrap .map-panel{height:500px!important;min-height:500px!important}html body main.wrap .map-panel .map-head{max-width:calc(100% - 110px)}}
+</style></head>
 
 <body> <main class="wrap">
 
@@ -332,39 +340,7 @@ html body main.wrap .control #updatedAt{
  color:#0091cd!important;
 }
 </style>
-<script>
-(function(){
-  function syncPm25MapHeight(){
-    var mapPanel=document.querySelector('main.wrap .map-panel');
-    var mapFrame=mapPanel&&mapPanel.querySelector('.pm-map');
-    var kpis=document.querySelector('main.wrap .kpis');
-    var control=document.querySelector('main.wrap .control');
-    if(!mapPanel||!mapFrame||!kpis||!control)return;
-    if(window.innerWidth<=1100){
-      mapPanel.style.removeProperty('height');
-      mapFrame.style.removeProperty('height');
-      return;
-    }
-    var height=Math.round(control.getBoundingClientRect().bottom-kpis.getBoundingClientRect().top);
-    if(height>0){
-      mapPanel.style.setProperty('height',height+'px','important');
-      mapFrame.style.setProperty('height',height+'px','important');
-    }
-  }
-  window.addEventListener('load',syncPm25MapHeight);
-  window.addEventListener('resize',syncPm25MapHeight);
-  document.addEventListener('DOMContentLoaded',syncPm25MapHeight);
-  if('ResizeObserver' in window){
-    var observer=new ResizeObserver(syncPm25MapHeight);
-    document.addEventListener('DOMContentLoaded',function(){
-      var k=document.querySelector('main.wrap .kpis');
-      var c=document.querySelector('main.wrap .control');
-      if(k)observer.observe(k);if(c)observer.observe(c);
-    });
-  }
-  setTimeout(syncPm25MapHeight,250);
-})();
-</script>
+
 <style id="pm25-heading-borderless-20260914-v1">
 /* Remove only the frame around the top PM2.5 heading. */
 html body main.wrap>.dashboard-head{
@@ -377,60 +353,73 @@ html body main.wrap>.dashboard-head{
 #stationRows tr[data-pm-map-lat][data-pm-map-lon]:focus{outline:3px solid rgba(17,187,163,.35);outline-offset:-3px}
 #stationRows tr[data-pm-map-lat][data-pm-map-lon].pm-map-selected{background:#dff5f1;box-shadow:inset 4px 0 #11bba3}
 </style>
-<script>
+<script id="pm25-map-controller">
 (function(){
-  var rows=document.getElementById('stationRows');
-  var frame=document.querySelector('.pm-map');
-  var title=document.querySelector('.map-panel .map-title');
-  if(!rows||!frame)return;
-
-  function prepareRows(){
-    rows.querySelectorAll('tr').forEach(function(row){
+  var itemId="c2b910f0bc5e42e7ae68a2bb7a048157";
+  var viewElement=document.getElementById("pmMapView");
+  var rows=document.getElementById("stationRows");
+  var title=document.querySelector(".map-panel .map-title");
+  if(!viewElement)return;
+  var ready=false;
+  function fallback(){
+    if(ready)return;
+    viewElement.replaceChildren();
+    var iframe=document.createElement("iframe");
+    iframe.title="แผนที่ PM2.5 และพื้นที่นิคมอุตสาหกรรม";
+    iframe.src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap="+itemId+"&theme=light&legend=true&scroll=true&basemaps=true";
+    iframe.style.cssText="display:block;width:100%;height:100%;border:0";
+    viewElement.appendChild(iframe);
+    window.pm25FallbackFrame=iframe;
+  }
+  var timeout=setTimeout(fallback,18000);
+  if(typeof window.require==="function"){
+    window.require(["esri/WebMap","esri/views/MapView","esri/widgets/Home","esri/widgets/Search","esri/widgets/LayerList","esri/widgets/Legend","esri/widgets/Expand"],function(WebMap,MapView,Home,Search,LayerList,Legend,Expand){
+      try{
+        var webmap=new WebMap({portalItem:{id:itemId}});
+        var view=new MapView({container:viewElement,map:webmap,center:[103.64927288807529,13.120087367299625],scale:9244648.868618});
+        view.when(function(){
+          ready=true;clearTimeout(timeout);
+          window.pm25MapView=view;
+          view.ui.add(new Home({view:view}),"top-left");
+          view.ui.add(new Search({view:view}),"top-right");
+          view.ui.add(new Expand({view:view,content:new LayerList({view:view}),group:"pm-tools",expandTooltip:"ชั้นข้อมูล"}),"top-right");
+          view.ui.add(new Expand({view:view,content:new Legend({view:view}),group:"pm-tools",expandTooltip:"คำอธิบายสัญลักษณ์"}),"top-right");
+          if("ResizeObserver" in window)new ResizeObserver(function(){view.resize()}).observe(viewElement);
+        },fallback);
+      }catch(error){fallback();}
+    },fallback);
+  }else{fallback();}
+  if(!rows)return;
+  function prepare(){
+    rows.querySelectorAll("tr").forEach(function(row){
       var link=row.querySelector('a[href*="google.com/maps?q="]');
       if(!link)return;
-      var value='';
-      try{value=new URL(link.href,document.baseURI).searchParams.get('q')||'';}catch(error){return;}
-      var point=value.split(',').map(Number);
+      var point;
+      try{point=(new URL(link.href,document.baseURI).searchParams.get("q")||"").split(",").map(Number);}catch(error){return;}
       if(point.length!==2||!Number.isFinite(point[0])||!Number.isFinite(point[1]))return;
-      row.dataset.pmMapLat=String(point[0]);
-      row.dataset.pmMapLon=String(point[1]);
-      link.textContent='คลิก';
-      link.removeAttribute('target');
-      link.removeAttribute('rel');
-      row.tabIndex=0;
-      row.setAttribute('role','button');
-      row.setAttribute('aria-label','ซูมแผนที่ไปยังสถานี '+((row.cells[1]&&row.cells[1].textContent.trim())||''));
+      row.dataset.pmMapLat=point[0];
+      row.dataset.pmMapLon=point[1];
+      row.tabIndex=0;row.setAttribute("role","button");
+      row.setAttribute("aria-label","ซูมแผนที่ไปยังสถานี "+(row.cells[1]?.textContent.trim()||""));
+      link.textContent="คลิก";
     });
   }
-
-  function zoomToRow(row){
+  function zoom(row){
     var lat=Number(row.dataset.pmMapLat),lon=Number(row.dataset.pmMapLon);
     if(!Number.isFinite(lat)||!Number.isFinite(lon))return;
-    var station=(row.cells[1]&&row.cells[1].textContent.trim())||'สถานีตรวจวัด';
-    try{
-      if(!window.pm25MapView)return;
-      window.pm25MapView.goTo({center:[lon,lat],zoom:12},{duration:700}).catch(function(){});
-    }catch(error){return;}
-    rows.querySelectorAll('.pm-map-selected').forEach(function(item){item.classList.remove('pm-map-selected');});
-    row.classList.add('pm-map-selected');
-    if(title)title.textContent='แผนที่ PM2.5 • กำลังแสดง: '+station;
-    frame.closest('.map-panel').scrollIntoView({behavior:'smooth',block:'center'});
+    if(window.pm25MapView)window.pm25MapView.goTo({center:[lon,lat],zoom:12},{duration:700}).catch(function(){});
+    else if(window.pm25FallbackFrame){
+      var url=new URL(window.pm25FallbackFrame.src);url.searchParams.set("center",lon+","+lat);url.searchParams.set("scale","35000");
+      window.pm25FallbackFrame.src=url.href;
+    }
+    rows.querySelectorAll(".pm-map-selected").forEach(function(other){other.classList.remove("pm-map-selected")});
+    row.classList.add("pm-map-selected");
+    if(title)title.textContent="แผนที่ PM2.5 • "+(row.cells[1]?.textContent.trim()||"สถานีตรวจวัด");
+    viewElement.scrollIntoView({behavior:"smooth",block:"center"});
   }
-
-  rows.addEventListener('click',function(event){
-    var row=event.target.closest('tr[data-pm-map-lat][data-pm-map-lon]');
-    if(event.target.closest('a')&&row)event.preventDefault();
-    if(row)zoomToRow(row);
-  });
-  rows.addEventListener('keydown',function(event){
-    if(event.key!=='Enter'&&event.key!==' ')return;
-    var row=event.target.closest('tr[data-pm-map-lat][data-pm-map-lon]');
-    if(!row)return;
-    event.preventDefault();
-    zoomToRow(row);
-  });
-  new MutationObserver(prepareRows).observe(rows,{childList:true});
-  prepareRows();
+  rows.addEventListener("click",function(event){var row=event.target.closest("tr[data-pm-map-lat]");if(row){if(event.target.closest("a"))event.preventDefault();zoom(row)}});
+  rows.addEventListener("keydown",function(event){if(event.key!=="Enter"&&event.key!==" ")return;var row=event.target.closest("tr[data-pm-map-lat]");if(row){event.preventDefault();zoom(row)}});
+  new MutationObserver(prepare).observe(rows,{childList:true});prepare();
 })();
 </script>
 <style id="pm25-card-icons-20260917-v1">
@@ -458,21 +447,4 @@ html body main.wrap .kpi-icon img{display:block!important;width:38px!important;h
 })();
 </script>
 <link rel="stylesheet" href="./mobile-responsive.css?v=20260915-1">
-<script id="pm25-arcgis-map-init">
-(function(){
-  function start(){
-    if(typeof require!=='function')return;
-    require(["esri/WebMap","esri/views/MapView","esri/widgets/Home","esri/widgets/Search","esri/widgets/LayerList","esri/widgets/Legend","esri/widgets/Expand"],function(WebMap,MapView,Home,Search,LayerList,Legend,Expand){
-      var map=new WebMap({portalItem:{id:"c2b910f0bc5e42e7ae68a2bb7a048157"}});
-      var view=new MapView({container:"pmMapView",map:map,center:[103.64927288807529,13.120087367299625],scale:9244648.868618});
-      window.pm25MapView=view;
-      view.ui.add(new Home({view:view}),"top-left");
-      view.ui.add(new Search({view:view}),"top-right");
-      view.ui.add(new Expand({view:view,content:new LayerList({view:view}),group:"pm-tools",expandTooltip:"ชั้นข้อมูล",expandIconClass:"esri-icon-layer-list"}),"top-right");
-      view.ui.add(new Expand({view:view,content:new Legend({view:view}),group:"pm-tools",expandTooltip:"คำอธิบายสัญลักษณ์",expandIconClass:"esri-icon-legend"}),"top-right");
-      if("ResizeObserver" in window)new ResizeObserver(function(){view.resize()}).observe(document.getElementById("pmMapView"));
-    });
-  }
-  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start);else start();
-})();
-</script></body> </html>
+</body> </html>
