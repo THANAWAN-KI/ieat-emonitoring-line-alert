@@ -340,7 +340,7 @@ const fireHub=document.createElement('section');fireHub.id='fireReportView';fire
     </section>
   </article>
   <article class="fire-analysis-panel">
-    <div class="fire-map-head"><div><h2>แผนที่วิเคราะห์</h2><p>แผนที่เดียวกับระบบ ArcGIS Risk Map</p></div><a href="https://experience.arcgis.com/experience/7cbfbc4231fc4a44b6891e84dc1e07db" target="_blank" rel="noopener">เปิดเต็มหน้า ↗</a></div>
+    <div class="fire-map-head"><div><h2>แผนที่วิเคราะห์</h2><p>ภาพแผนที่ ArcGIS ของพื้นที่ที่เลือก</p></div><a href="https://experience.arcgis.com/experience/7cbfbc4231fc4a44b6891e84dc1e07db" target="_blank" rel="noopener">เปิดเต็มหน้า ↗</a></div>
     <div id="fireAnalysisMap" class="fire-analysis-map" role="region" aria-label="แผนที่วิเคราะห์พื้นที่เกิดเหตุ"></div>
   </article>
   <div class="fire-factory-bridge" hidden>
@@ -426,31 +426,30 @@ async function loadFireSupportRest(){
 setTimeout(loadFireSupportRest,1200);
 function fireNearest(type,origin){var candidates=(records||[]).filter(function(record){return record.config&&record.config.id===type&&firePoint(record)}).map(function(record){return{record:record,distance:fireDistanceKm(origin,firePoint(record))}}).sort(function(a,b){return a.distance-b.distance});return candidates[0]||null}
 function fireFormatKm(value){return (value<10?value.toFixed(2):value.toFixed(1))+' กม.'}
-let fireAnalysisView=null,firePendingOrigin=null;
-require(['esri/WebMap','esri/views/MapView','esri/Graphic'],function(WebMap,MapView,Graphic){
-  var map=new WebMap({portalItem:{id:'9c25f3f77ba5481cb481b402177884c2'}});
-  fireAnalysisView=new MapView({container:'fireAnalysisMap',map:map,center:[101.1,12.93],zoom:9});
-  fireAnalysisView.when(function(){
-    if(firePendingOrigin)fireSyncAnalysisMap(firePendingOrigin);
-    setTimeout(function(){if(!document.querySelector('#fireAnalysisMap canvas'))fireShowMapFallback()},4000);
-  },fireShowMapFallback);
-});
-function fireShowMapFallback(){
-  var host=document.getElementById('fireAnalysisMap');if(!host||host.querySelector('iframe'))return;
-  if(fireAnalysisView){fireAnalysisView.destroy();fireAnalysisView=null}
-  host.replaceChildren();
-  var frame=document.createElement('iframe');frame.title='แผนที่วิเคราะห์ ArcGIS';frame.className='fire-analysis-map-fallback';frame.style.cssText='width:100%;height:100%;min-height:600px;border:0';
-  frame.src=fireMapUrl(firePendingOrigin);host.appendChild(frame);
-}
-function fireMapUrl(origin){
-  var base='https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=9c25f3f77ba5481cb481b402177884c2&theme=light&legend=true';
-  return origin?base+'&center='+origin.lng+','+origin.lat+'&scale=9027.977411':base;
+function fireStaticMapUrl(origin,spanKm){
+  var lat=origin.lat,lng=origin.lng,span=(spanKm||8)/111.2,lonSpan=span*800/560/Math.cos(lat*Math.PI/180);
+  return 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export?bbox='+
+    [lng-lonSpan,lat-span,lng+lonSpan,lat+span].map(function(n){return n.toFixed(6)}).join(',')+
+    '&bboxSR=4326&imageSR=4326&size=800,560&format=png32&f=image';
 }
 function fireSyncAnalysisMap(origin){
-  firePendingOrigin=origin;
-  var fallback=document.querySelector('#fireAnalysisMap iframe');if(fallback){fallback.src=fireMapUrl(origin);return}
-  if(fireAnalysisView)fireAnalysisView.when(function(){fireAnalysisView.goTo({center:[origin.lng,origin.lat],zoom:13}).catch(function(error){console.warn('ไม่สามารถซูมแผนที่',error)})});
+  var host=document.getElementById('fireAnalysisMap');if(!host)return;
+  var image=host.querySelector('img'),pin=host.querySelector('.fire-static-pin');
+  if(!image){
+    host.replaceChildren();
+    image=document.createElement('img');image.alt='ภาพแผนที่ ArcGIS รอบตำแหน่งที่เลือก';
+    image.style.cssText='width:100%;height:100%;object-fit:fill;display:block';
+    image.onerror=function(){host.classList.add('map-image-unavailable')};
+    host.appendChild(image);
+    pin=document.createElement('span');pin.className='fire-static-pin';pin.textContent='●';
+    pin.style.cssText='position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:32px;color:#d9273f;text-shadow:0 1px 4px #fff';
+    host.appendChild(pin);
+  }
+  host.style.position='relative';host.style.minHeight='520px';
+  image.src=fireStaticMapUrl(origin);
+  host.setAttribute('aria-label','แผนที่พิกัด '+origin.lat.toFixed(5)+', '+origin.lng.toFixed(5));
 }
+fireSyncAnalysisMap({lat:12.93,lng:101.1});
 function fireApplyEstate(){
   var input=document.getElementById('fireEstateSearch'),status=document.getElementById('fireEstateStatus');var query=input.value.trim();if(!query){status.textContent='กรุณาพิมพ์หรือเลือกชื่อนิคมอุตสาหกรรม';status.className='error';return}
   if(!(records||[]).length){status.textContent='กำลังโหลดข้อมูลตำแหน่ง กรุณาลองอีกครั้งในอีกสักครู่';status.className='loading';return}
