@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>แผนที่สถานการณ์น้ำท่วม | IEAT EMCC</title>
+<link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css">
+<style>
+html,body,#viewDiv{width:100%;height:100%;margin:0}
+body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
+#viewDiv{position:absolute;inset:0}
+#message{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:5;padding:12px 16px;border-radius:8px;background:#fff;box-shadow:0 2px 12px #1b334433;color:#36495a;text-align:center}
+#fallback{display:none;position:absolute;inset:0;width:100%;height:100%;border:0}
+#fallbackLink{display:none;position:absolute;right:12px;bottom:12px;z-index:6;padding:9px 12px;border-radius:7px;background:#fff;color:#1769c2;box-shadow:0 2px 10px #0003;text-decoration:none;font-size:13px}
+.esri-ui .esri-widget{font-family:Arial,"Sarabun",sans-serif}
+</style>
+<script src="https://js.arcgis.com/4.30/" onerror="window.arcgisScriptFailed=true"></script>
+</head>
+<body>
+<div id="viewDiv" aria-label="แผนที่สถานการณ์น้ำท่วม"></div>
+<div id="message" role="status">กำลังโหลดแผนที่…</div>
+<iframe id="fallback" title="แผนที่สถานการณ์น้ำท่วมจาก ArcGIS Map Viewer" loading="eager" allow="fullscreen; geolocation"></iframe>
+<a id="fallbackLink" target="_blank" rel="noopener" href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=3d24287ac6ea49cd823625ddad496e01">เปิดแผนที่ใน ArcGIS</a>
+<script>
+(function(){
+ "use strict";
+ var itemId="3d24287ac6ea49cd823625ddad496e01";
+ var viewerUrl="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap="+itemId+"&theme=light&legend=true&information=true&scroll=false&basemaps=true";
+ var view=null, pending=null, ready=false, fallback=false;
+ var message=document.getElementById("message"),frame=document.getElementById("fallback");
+ function showFallback(){
+  if(ready||fallback)return;
+  fallback=true;
+  if(view){view.destroy();view=null}
+  document.getElementById("viewDiv").style.display="none";
+  frame.style.display="block";
+  frame.src=viewerUrl;
+  document.getElementById("fallbackLink").style.display="block";
+  message.textContent="กำลังเปิดแผนที่ ArcGIS…";
+  frame.addEventListener("load",function(){message.style.display="none"},{once:true});
+ }
+ function navigate(lon,lat,scale){
+  if(!Number.isFinite(lon)||!Number.isFinite(lat))return;
+  if(fallback){
+   var url=new URL(viewerUrl);
+   url.searchParams.set("center",lon+","+lat);
+   url.searchParams.set("scale",String(scale));
+   frame.src=url.toString();
+  }else if(view&&ready)view.goTo({center:[lon,lat],scale:scale}).catch(function(){});
+  else pending={center:[lon,lat],scale:scale};
+ }
+ window.addEventListener("message",function(event){
+  if(event.origin!==location.origin||!event.data||event.data.type!=="flood-map-focus")return;
+  var d=event.data;
+  if(d.reset){
+   if(fallback)frame.src=viewerUrl;
+   else if(view&&ready)view.goTo({center:[101,13.2],scale:4622324}).catch(function(){});
+   else pending={center:[101,13.2],scale:4622324};
+  }else navigate(Number(d.lon),Number(d.lat),Number(d.scale)||75000);
+ });
+ var timer=setTimeout(showFallback,25000);
+ if(window.arcgisScriptFailed||typeof window.require!=="function"){clearTimeout(timer);showFallback();return}
+ require(["esri/WebMap","esri/views/MapView","esri/widgets/Home","esri/widgets/Search","esri/widgets/LayerList","esri/widgets/Legend","esri/widgets/Expand"],
+ function(WebMap,MapView,Home,Search,LayerList,Legend,Expand){
+  var webmap=new WebMap({portalItem:{id:itemId}});
+  webmap.load().then(function(){
+   if(fallback)return;
+   view=new MapView({container:"viewDiv",map:webmap});
+   view.when(function(){
+    if(fallback)return;
+    ready=true;clearTimeout(timer);message.style.display="none";
+    view.ui.add(new Home({view:view}),"top-left");
+    view.ui.add(new Search({view:view}),"top-right");
+    view.ui.add(new Expand({view:view,content:new LayerList({view:view}),group:"map-tools",expandTooltip:"ชั้นข้อมูล"}),"top-right");
+    view.ui.add(new Expand({view:view,content:new Legend({view:view}),group:"map-tools",expandTooltip:"คำอธิบายสัญลักษณ์"}),"top-right");
+    if(pending)view.goTo(pending).catch(function(){});
+   }).catch(showFallback);
+  }).catch(showFallback);
+ },showFallback);
+})();
+</script>
+</body>
+</html>
