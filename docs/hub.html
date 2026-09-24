@@ -328,15 +328,9 @@ const fireHub=document.createElement('section');fireHub.id='fireReportView';fire
       <div class="fire-hotlines"><span>โทรฉุกเฉิน</span><a href="tel:199">เพลิงไหม้ 199</a><a href="tel:1669">การแพทย์ 1669</a><a href="tel:191">เหตุด่วน 191</a></div>
     </section>
   </article>
-  <article class="fire-analysis-panel">
-    <div class="fire-map-head"><div><h2>แผนที่วิเคราะห์</h2><p>Risk Map และตำแหน่งข้อมูลสนับสนุนการระงับเหตุ</p></div><a href="https://experience.arcgis.com/experience/7cbfbc4231fc4a44b6891e84dc1e07db" target="_blank" rel="noopener">เปิดเต็มหน้า ↗</a></div>
-    <section class="fire-estate-search fire-factory-search">
-      <label for="fireFactorySearch">ค้นหาโรงงานที่เกิดเหตุ</label>
-      <div class="fire-search-row"><input id="fireFactorySearch" list="fireFactoryOptions" placeholder="พิมพ์ชื่อผู้ประกอบการ หรือเลขทะเบียนโรงงาน" autocomplete="off"><datalist id="fireFactoryOptions"></datalist><button id="fireFactoryApply" type="button">เลือกจุดเกิดเหตุ</button></div>
-      <p id="fireFactoryStatus">เลือกโรงงานเพื่อให้แผนที่ในรายงานซูมไปยังตำแหน่งเกิดเหตุ</p>
-    </section>
-    <iframe class="fire-analysis-map" width="700" height="600" allow="local-network-access; geolocation" title="risk map" src="https://experience.arcgis.com/experience/7cbfbc4231fc4a44b6891e84dc1e07db"></iframe>
-  </article>
+  <div class="fire-factory-bridge" hidden>
+    <input id="fireFactorySearch" autocomplete="off"><datalist id="fireFactoryOptions"></datalist><button id="fireFactoryApply" type="button"></button><p id="fireFactoryStatus"></p>
+  </div>
 </section>
 <section class="fire-dss-panel">
   <div class="fire-dss-head"><p>แก้ไขข้อมูลและจัดทำรายงานตามรูปแบบมาตรฐาน</p></div>
@@ -387,6 +381,8 @@ function syncFireFactoryOptions(){
   var factories=fireFactoryRecords(),unique={};factories.forEach(function(record){var registration=record.registration&&record.registration!=='—'?record.registration:String(record.feature&&record.feature.attributes&&record.feature.attributes.fid14n||'').trim();var label=record.name+(registration?' — '+registration:'');unique[fireNormalize(label)]=label});
   var names=Object.keys(unique).map(function(key){return unique[key]}).sort(function(a,b){return a.localeCompare(b,'th')});
   list.innerHTML=names.map(function(name){return '<option value="'+name.replace(/"/g,'&quot;')+'"></option>'}).join('');
+  var frame=document.getElementById('fireDssFrame');
+  if(frame&&frame.contentWindow)frame.contentWindow.postMessage({type:'dss-factory-options',options:names},location.origin);
   if(status&&!status.className)status.textContent='ค้นหาได้จากชื่อผู้ประกอบการหรือเลขทะเบียนโรงงาน (fid14n)';
 }
 function syncFireEstateOptions(){syncFireFactoryOptions();var list=document.getElementById('fireEstateOptions'),status=document.getElementById('fireEstateStatus');if(!list)return;if(!(records||[]).length){if(status&&!status.className)status.textContent='กำลังโหลดรายชื่อนิคมอุตสาหกรรมและท่าเรืออุตสาหกรรม…';return}var names=fireEstateNames();list.innerHTML=names.map(function(name){return '<option value="'+name.replace(/"/g,'&quot;')+'"></option>'}).join('');if(status&&!status.className)status.textContent=names.length?'พร้อมค้นหา '+names.length.toLocaleString('th-TH')+' รายการ — เลือกชื่อเต็มเพื่อแยกนิคมฯ และท่าเรือฯ':'โหลดข้อมูลตำแหน่งแล้ว แต่ไม่พบฟิลด์ชื่อนิคมอุตสาหกรรม'}
@@ -491,7 +487,17 @@ async function fireApplyFactory(){
   var frame=document.getElementById('fireDssFrame');if(frame&&frame.contentWindow)frame.contentWindow.postMessage({type:'dss-autofill',payload:payload},location.origin);
   status.textContent='เลือก '+record.name+' เลขทะเบียน '+(record.registration||'—')+' เป็นจุดเกิดเหตุแล้ว';status.className='success';
 }
-document.getElementById('fireEstateApply').addEventListener('click',fireApplyEstate);document.getElementById('fireEstateSearch').addEventListener('keydown',function(event){if(event.key==='Enter'){event.preventDefault();fireApplyEstate()}});document.getElementById('fireFactoryApply').addEventListener('click',fireApplyFactory);document.getElementById('fireFactorySearch').addEventListener('keydown',function(event){if(event.key==='Enter'){event.preventDefault();fireApplyFactory()}});
+document.getElementById('fireEstateApply').addEventListener('click',fireApplyEstate);document.getElementById('fireEstateSearch').addEventListener('keydown',function(event){if(event.key==='Enter'){event.preventDefault();fireApplyEstate()}});window.addEventListener('message',function(event){
+  if(event.origin!==location.origin||!event.data||event.data.type!=='dss-factory-search')return;
+  var frame=document.getElementById('fireDssFrame');
+  if(!frame||event.source!==frame.contentWindow)return;
+  document.getElementById('fireFactorySearch').value=String(event.data.query||'');
+  fireApplyFactory().then(function(){
+    frame.contentWindow.postMessage({type:'dss-factory-status',text:document.getElementById('fireFactoryStatus').textContent,kind:document.getElementById('fireFactoryStatus').className},location.origin);
+  });
+});
+document.getElementById('fireDssFrame').addEventListener('load',syncFireFactoryOptions);
+document.getElementById('fireFactoryApply').addEventListener('click',fireApplyFactory);document.getElementById('fireFactorySearch').addEventListener('keydown',function(event){if(event.key==='Enter'){event.preventDefault();fireApplyFactory()}});
 function floodApplyEstate(){
   var source=document.getElementById('fireEstateSearch'),input=document.getElementById('floodEstateSearch'),status=document.getElementById('floodEstateStatus');
   source.value=input.value;fireApplyEstate();
@@ -2721,4 +2727,5 @@ html body #hubInformationHeader .header-more-menu a:hover{background:#f5f6f7!imp
  }
 }
 </style>
+<style id="fire-unified-report-map">#fireReportView .fire-dashboard-grid{grid-template-columns:minmax(0,1fr)!important}#fireReportView .fire-factory-bridge{display:none!important}</style>
 <link rel="stylesheet" href="./mobile-responsive.css?v=20260915-1">
