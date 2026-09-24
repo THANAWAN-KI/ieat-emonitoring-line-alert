@@ -266,7 +266,7 @@ body{font-weight:400}
 <section id="fireView"><div class="kpis" id="kpis"></div><div class="toolbar"><select id="estateFilter"><option value="">ทุกนิคมอุตสาหกรรม</option></select><input id="searchInput" placeholder="ค้นหาชื่อจุดหรือข้อมูลสนับสนุน"><span id="filterSummary">กำลังเชื่อมต่อข้อมูล…</span></div>
 <div class="map-grid"><article class="panel"><div class="panel-head"><h2>Risk Map และข้อมูลสนับสนุน</h2><a href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=9c25f3f77ba5481cb481b402177884c2" target="_blank">เปิดเต็มหน้า ↗</a></div><div class="risk-layout"><div id="riskMap" class="risk-map"></div><aside class="directory"><div class="dir-head"><b id="listTitle">ข้อมูลสนับสนุนทั้งหมด</b><span>คลิกรายการเพื่อซูมไปยังตำแหน่งบนแผนที่</span></div><div class="list" id="featureList"><div class="empty">กำลังโหลดข้อมูล…</div></div></aside></div></article>
 <article class="panel"><div class="panel-head"><h2>แผนที่วิเคราะห์</h2><a href="https://experience.arcgis.com/experience/7cbfbc4231fc4a44b6891e84dc1e07db" target="_blank">เปิดเต็มหน้า ↗</a></div><iframe class="analysis-frame" src="https://experience.arcgis.com/experience/7cbfbc4231fc4a44b6891e84dc1e07db" title="แผนที่วิเคราะห์เหตุฉุกเฉิน" loading="lazy" allowfullscreen></iframe><div class="notice">ค้นหาตำแหน่งโรงงานและวิเคราะห์พื้นที่โดยรอบ</div></article></div>
-<section class="dss-section panel"><div class="panel-head"><h2>คลังข้อมูล DSS กนอ.</h2><a href="./dss.html" target="_blank">เปิดเต็มหน้า ↗</a></div><iframe class="dss-frame" src="./dss.html?v=arcgis-20260924-2" title="คลังข้อมูล DSS กนอ." loading="lazy"></iframe></section></section>
+<section class="dss-section panel"><div class="panel-head"><h2>คลังข้อมูล DSS กนอ.</h2><a href="./dss.html" target="_blank">เปิดเต็มหน้า ↗</a></div><iframe class="dss-frame" src="./dss.html?v=report-png-20260924" title="คลังข้อมูล DSS กนอ." loading="lazy"></iframe></section></section>
 <section class="other-view" id="otherView"><article class="panel"><div class="panel-head"><h2 id="otherTitle"></h2></div><iframe class="other-frame" src="https://experience.arcgis.com/experience/a6b0cc340ae343379c4f66951610f535" title="แผนที่วิเคราะห์สถานการณ์ภัย" loading="lazy" allowfullscreen></iframe></article></section></main><footer>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย กนอ. · โทร. 0 2207 2700 ต่อ 10401, 10402, 10403</footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script><script>
 const configs=[
@@ -349,7 +349,7 @@ const fireHub=document.createElement('section');fireHub.id='fireReportView';fire
 </section>
 <section class="fire-dss-panel">
   <div class="fire-dss-head"><p>แก้ไขข้อมูลและจัดทำรายงานตามรูปแบบมาตรฐาน</p></div>
-  <iframe id="fireDssFrame" class="fire-dss-frame" src="./dss.html?v=arcgis-20260924-2" scrolling="no" title="IEAT DSS — จัดทำรายงานเหตุฉุกเฉิน" loading="eager" allowfullscreen></iframe>
+  <iframe id="fireDssFrame" class="fire-dss-frame" src="./dss.html?v=report-png-20260924" scrolling="no" title="IEAT DSS — จัดทำรายงานเหตุฉุกเฉิน" loading="eager" allowfullscreen></iframe>
 </section>`;fireView.parentNode.insertBefore(fireHub,fireView);fireView.style.display='none';
 function updateFireSupportDashboard(){
   let data={};try{data=JSON.parse(localStorage.getItem('dss-report')||'{}')||{}}catch(error){}
