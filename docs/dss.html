@@ -499,6 +499,7 @@ html body #report .report-header h1 *{
 })();
 </script>
 <link rel="stylesheet" href="./mobile-responsive.css?v=20260915-1">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script id="dss-static-map-and-export">
 const factoryLookup=document.getElementById('factoryLookup'),factoryLookupStatus=document.getElementById('factoryLookupStatus');
 function searchFactory(){
@@ -536,30 +537,28 @@ async function downloadReportPng(){
     updateMap();
     await Promise.race([mapLoadPromise,new Promise(resolve=>setTimeout(resolve,8000))]);
     if(!mapImage.complete||!mapImage.naturalWidth)throw new Error('ภาพแผนที่ยังไม่พร้อม');
-    const canvas=document.createElement('canvas');canvas.width=1200;canvas.height=1900;
-    const ctx=canvas.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,1200,1900);
-    ctx.fillStyle='#59267c';ctx.font='bold 34px Sarabun, sans-serif';reportText(ctx,state.title,65,78,1070,42);
-    ctx.fillStyle='#555';ctx.font='22px Sarabun, sans-serif';reportText(ctx,state.unit,65,119,1070,28);
-    ctx.strokeStyle='#59267c';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(65,142);ctx.lineTo(1135,142);ctx.stroke();
-    ctx.font='20px Sarabun, sans-serif';ctx.fillStyle='#25232a';
-    ctx.fillText('เลขที่รายงาน: '+state.reportNo,65,185);ctx.fillText('วันเวลาจัดทำ: '+state.date,65,220);ctx.fillText('สถานะ: '+state.status,65,255);
-    ctx.font='bold 26px Sarabun, sans-serif';ctx.fillStyle='#59267c';ctx.fillText('ข้อมูลสถานประกอบการ / พื้นที่เกิดเหตุ',65,320);
-    ctx.font='21px Sarabun, sans-serif';ctx.fillStyle='#25232a';
-    [['ชื่อสถานประกอบการ',state.company],['เลขทะเบียน',state.registration],['นิคมอุตสาหกรรม',state.estate],['ที่อยู่ / จุดเกิดเหตุ',state.address],['ประเภทเหตุ',state.event],['ระดับเหตุการณ์',state.level]].forEach((row,i)=>reportText(ctx,row[0]+': '+row[1],65,362+i*35,1060,28));
-    ctx.font='bold 26px Sarabun, sans-serif';ctx.fillStyle='#59267c';ctx.fillText('แผนที่และสภาพอากาศบริเวณเกิดเหตุ',65,610);
-    ctx.drawImage(mapImage,65,635,760,530);
-    const radius=Math.min(50,Math.max(.1,Number(state.bufferKm)||3)),spanKm=Math.max(radius*1.5,3),pixelRadius=radius/spanKm*265;
-    ctx.fillStyle='rgba(217,39,63,.13)';ctx.strokeStyle='#d9273f';ctx.lineWidth=4;
-    ctx.beginPath();ctx.arc(445,900,pixelRadius,0,Math.PI*2);ctx.fill();ctx.stroke();
-    ctx.fillStyle='#d9273f';ctx.beginPath();ctx.arc(445,900,8,0,Math.PI*2);ctx.fill();
-    ctx.font='19px Sarabun, sans-serif';ctx.fillStyle='#25232a';ctx.fillText('พิกัด '+state.lat+', '+state.lng+' • Buffer '+radius+' กม.',65,1200);
-    ctx.font='20px Sarabun, sans-serif';
-    [['อุณหภูมิ',state.temp+' °C'],['สภาพอากาศ',state.weather],['ความชื้น',state.humidity+'%'],['ลม',state.windSpeed+' กม./ชม.'],['ทิศทางลม',state.windDir]].forEach((row,i)=>reportText(ctx,row[0]+': '+row[1],850,690+i*55,285,30));
-    ctx.font='bold 26px Sarabun, sans-serif';ctx.fillStyle='#59267c';ctx.fillText('ข้อมูลสนับสนุนที่ใกล้เคียง',65,1260);
-    ctx.font='21px Sarabun, sans-serif';ctx.fillStyle='#25232a';
-    [['hospitalName','hospitalDistance'],['fireName','fireDistance'],['policeName','policeDistance'],['hydrantName','hydrantDistance'],['communityName','communityDistance'],['cctvName','cctvDistance']].forEach((keys,i)=>reportText(ctx,state[keys[0]]+': '+state[keys[1]],65,1305+i*45,1070,28));
-    ctx.font='19px Sarabun, sans-serif';reportText(ctx,'สารเคมี: '+state.chemical,65,1610,1050,28);reportText(ctx,'การระงับเหตุ: '+state.response,65,1660,1050,28);reportText(ctx,'หมายเหตุ: '+state.note,65,1740,1050,26);reportText(ctx,'แหล่งข้อมูล: '+state.source,65,1830,1050,26);
-    const a=document.createElement('a');a.download='IEAT-DSS-'+(state.reportNo||Date.now())+'.png';a.href=canvas.toDataURL('image/png');a.click();
+    await document.fonts.ready;
+    if(typeof html2canvas!=='function')throw new Error('ไม่สามารถโหลดเครื่องมือบันทึกภาพได้');
+    const report=document.getElementById('report');
+    const canvas=await html2canvas(report,{
+      backgroundColor:'#fff',scale:2,useCORS:true,allowTaint:false,logging:false,
+      width:report.scrollWidth,height:report.scrollHeight,
+      onclone(clonedDocument){
+        const clonedMap=clonedDocument.querySelector('#report #map');
+        if(!clonedMap)return;
+        const experience=clonedMap.querySelector('iframe');
+        if(experience)experience.style.setProperty('display','none','important');
+        clonedMap.querySelectorAll(':scope > img,:scope > div').forEach(el=>{
+          el.style.setProperty('visibility','visible','important');
+        });
+        const caption=clonedDocument.querySelector('#report .map-caption a');
+        if(caption)caption.style.setProperty('display','none','important');
+      }
+    });
+    const a=document.createElement('a');
+    a.download='IEAT-DSS-'+(state.reportNo||Date.now())+'.png';
+    a.href=canvas.toDataURL('image/png');
+    a.click();
   }catch(error){console.error(error);alert('ยังดาวน์โหลด PNG พร้อมแผนที่ไม่ได้ กรุณาลองใหม่อีกครั้ง')}
   finally{loading.classList.remove('show')}
 }
