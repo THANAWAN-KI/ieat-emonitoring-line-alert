@@ -13063,7 +13063,7 @@ html body main.container #infographic #reportPage5 .export-rid-trend.steady{back
    frameBox.replaceChildren(exportMap);
   }
   var source=document.getElementById("overviewArcgisMap");
-  var src=frameBox.dataset.reportFocusSrc||(source&&source.src)||MAP_FALLBACK;
+  var src=frameBox.dataset.reportFocusSrc||((source&&source.src&&!source.src.includes("flood-webmap.html"))?source.src:MAP_FALLBACK);
   if(getComputedStyle(document.getElementById("infographic")).display==="none"){exportMap.dataset.src=src;exportMap.removeAttribute("src")}
   else if(exportMap.src!==src){exportMap.src=src;delete exportMap.dataset.src}
  }
@@ -15387,26 +15387,33 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
 <script id="flood-map-authoritative-20260923-script">
 (function(){
  "use strict";
- var card=null;
- var url="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=3d24287ac6ea49cd823625ddad496e01&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=false&basemaps=true";
+ var card=null, mapUrl=new URL("flood-webmap.html",document.baseURI).href;
  function ensure(){
   var target=document.querySelector("#warning #topFloodMap");if(!target)return;
   if(!card){
    card=document.createElement("article");card.className="card operations-map embedded-water-map";
-   card.innerHTML='<iframe id="overviewArcgisMap" class="thaiwater-risk-map" title="แผนที่แสดงข้อมูลน้ำท่วม" loading="eager" allow="local-network-access; geolocation; fullscreen" src="'+url+'"></iframe>';
+   var frame=document.createElement("iframe");
+   frame.id="overviewArcgisMap";frame.className="thaiwater-risk-map";
+   frame.title="แผนที่แสดงข้อมูลน้ำท่วม";frame.loading="eager";
+   frame.addEventListener("load",function(){frame.dataset.ready="1";if(frame.pendingFocus){frame.contentWindow.postMessage(frame.pendingFocus,location.origin);frame.pendingFocus=null}});
+   frame.src=mapUrl;card.appendChild(frame);
   }
   if(card.parentElement!==target||target.children.length!==1||target.firstElementChild!==card)target.replaceChildren(card);
  }
- window.zoomRiskMap=function(lat,lon,label){
-  var a=Number(lat),b=Number(lon);if(!Number.isFinite(a)||!Number.isFinite(b))return;
-  ensure();if(!card)return;card.scrollIntoView({behavior:"smooth",block:"center"});
-  var frame=card.querySelector("#overviewArcgisMap");
-  if(frame){var next=new URL(frame.src);next.searchParams.set("center",b+","+a);next.searchParams.set("scale","75000");frame.src=next.toString()}
- };
- window.resetFloodDashboardMap=function(){
+ function focus(lat,lon,scale){
   ensure();var frame=card&&card.querySelector("#overviewArcgisMap");
-  if(frame){frame.src=url;frame.scrollIntoView({behavior:"smooth",block:"center"})}
+  if(!frame)return;
+  frame.scrollIntoView({behavior:"smooth",block:"center"});
+  if(frame.src!==mapUrl){frame.dataset.ready="";frame.src=mapUrl}
+  var command={type:"flood-map-focus",lat:lat,lon:lon,scale:scale,reset:lat==null};
+  if(frame.dataset.ready==="1")frame.contentWindow.postMessage(command,location.origin);
+  else frame.pendingFocus=command;
+ }
+ window.zoomRiskMap=function(lat,lon,label){
+  var a=Number(lat),b=Number(lon);
+  if(Number.isFinite(a)&&Number.isFinite(b))focus(a,b,75000);
  };
+ window.resetFloodDashboardMap=function(){focus(null,null,null)};
  function start(){
   ensure();var warning=document.getElementById("warning");
   if(warning)new MutationObserver(function(){if(card&&card.parentElement!==document.getElementById("topFloodMap"))ensure()}).observe(warning,{childList:true,subtree:true});
@@ -15502,7 +15509,7 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
   if(!frameBox||!sheet)return;
   var source=document.getElementById("overviewArcgisMap");
   var map=document.getElementById("exportOverviewFloodMap");
-  var base=(map&&map.getAttribute("src"))||(source&&source.src)||
+  var base=(map&&map.getAttribute("src"))||((source&&source.src&&!source.src.includes("flood-webmap.html"))?source.src:null)||
    "https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=3d24287ac6ea49cd823625ddad496e01&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=false&basemaps=true";
   var url=new URL(base,document.baseURI);
   url.searchParams.set("center",lon+","+lat);
