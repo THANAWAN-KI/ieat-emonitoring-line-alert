@@ -355,40 +355,38 @@ html body main.wrap>.dashboard-head{
 </style>
 <script id="pm25-map-controller">
 (function(){
-  var itemId="c2b910f0bc5e42e7ae68a2bb7a048157";
   var viewElement=document.getElementById("pmMapView");
   var rows=document.getElementById("stationRows");
   var title=document.querySelector(".map-panel .map-title");
   if(!viewElement)return;
-  var ready=false;
-  function fallback(){
-    if(ready)return;
-    viewElement.replaceChildren();
-    var iframe=document.createElement("iframe");
-    iframe.title="แผนที่ PM2.5 และพื้นที่นิคมอุตสาหกรรม";
-    iframe.src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap="+itemId+"&theme=light&legend=true&scroll=true&basemaps=true";
-    iframe.style.cssText="display:block;width:100%;height:100%;border:0";
-    viewElement.appendChild(iframe);
-    window.pm25FallbackFrame=iframe;
+  function showError(message){
+    var notice=document.createElement("div");
+    notice.setAttribute("role","alert");
+    notice.style.cssText="position:absolute;left:16px;right:16px;top:75px;z-index:5;padding:14px;background:white;border-radius:8px;box-shadow:0 3px 12px #0002;color:#111";
+    notice.textContent=message+" ";
+    var link=document.createElement("a");
+    link.href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=c2b910f0bc5e42e7ae68a2bb7a048157";
+    link.target="_blank";link.rel="noopener noreferrer";link.textContent="เปิดแผนที่ต้นฉบับ";
+    notice.appendChild(link);viewElement.appendChild(notice);
   }
-  var timeout=setTimeout(fallback,18000);
-  if(typeof window.require==="function"){
-    window.require(["esri/WebMap","esri/views/MapView","esri/widgets/Home","esri/widgets/Search","esri/widgets/LayerList","esri/widgets/Legend","esri/widgets/Expand"],function(WebMap,MapView,Home,Search,LayerList,Legend,Expand){
-      try{
-        var webmap=new WebMap({portalItem:{id:itemId}});
-        var view=new MapView({container:viewElement,map:webmap,center:[103.64927288807529,13.120087367299625],scale:9244648.868618});
-        view.when(function(){
-          ready=true;clearTimeout(timeout);
-          window.pm25MapView=view;
-          view.ui.add(new Home({view:view}),"top-left");
-          view.ui.add(new Search({view:view}),"top-right");
-          view.ui.add(new Expand({view:view,content:new LayerList({view:view}),group:"pm-tools",expandTooltip:"ชั้นข้อมูล"}),"top-right");
-          view.ui.add(new Expand({view:view,content:new Legend({view:view}),group:"pm-tools",expandTooltip:"คำอธิบายสัญลักษณ์"}),"top-right");
-          if("ResizeObserver" in window)new ResizeObserver(function(){view.resize()}).observe(viewElement);
-        },fallback);
-      }catch(error){fallback();}
-    },fallback);
-  }else{fallback();}
+  if(typeof window.require!=="function"){
+    showError("ไม่สามารถโหลด ArcGIS JavaScript API ได้");
+    return;
+  }
+  window.require(["esri/WebMap","esri/views/MapView","esri/widgets/Home","esri/widgets/Search","esri/widgets/LayerList","esri/widgets/Legend","esri/widgets/Expand"],function(WebMap,MapView,Home,Search,LayerList,Legend,Expand){
+    var map=new WebMap({portalItem:{id:"c2b910f0bc5e42e7ae68a2bb7a048157"}});
+    var view=new MapView({container:"pmMapView",map:map,center:[103.64927288807529,13.120087367299625],scale:9244648.868618,zoom:5});
+    window.pm25MapView=view;
+    view.when(function(){
+      view.ui.add(new Home({view:view}),"top-left");
+      view.ui.add(new Search({view:view}),"top-right");
+      view.ui.add(new Expand({view:view,content:new LayerList({view:view}),group:"tools",expandTooltip:"ชั้นข้อมูล"}),"top-right");
+      view.ui.add(new Expand({view:view,content:new Legend({view:view}),group:"tools",expandTooltip:"คำอธิบายสัญลักษณ์"}),"top-right");
+    },function(error){
+      console.error("PM2.5 map failed:",error);
+      showError("แผนที่แสดงไม่ได้ โปรดตรวจว่าตัวเลือก WebGL2 เปิดใช้งานในเบราว์เซอร์");
+    });
+  });
   if(!rows)return;
   function prepare(){
     rows.querySelectorAll("tr").forEach(function(row){
@@ -408,10 +406,7 @@ html body main.wrap>.dashboard-head{
     var lat=Number(row.dataset.pmMapLat),lon=Number(row.dataset.pmMapLon);
     if(!Number.isFinite(lat)||!Number.isFinite(lon))return;
     if(window.pm25MapView)window.pm25MapView.goTo({center:[lon,lat],zoom:12},{duration:700}).catch(function(){});
-    else if(window.pm25FallbackFrame){
-      var url=new URL(window.pm25FallbackFrame.src);url.searchParams.set("center",lon+","+lat);url.searchParams.set("scale","35000");
-      window.pm25FallbackFrame.src=url.href;
-    }
+
     rows.querySelectorAll(".pm-map-selected").forEach(function(other){other.classList.remove("pm-map-selected")});
     row.classList.add("pm-map-selected");
     if(title)title.textContent="แผนที่ PM2.5 • "+(row.cells[1]?.textContent.trim()||"สถานีตรวจวัด");
