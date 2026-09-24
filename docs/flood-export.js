@@ -170,7 +170,7 @@
     iframe.height="600";
     iframe.allow="local-network-access; geolocation";
     iframe.title="แผนที่แสดงข้อมูลน้ำท่วม พื้นที่เฝ้าระวัง "+(period==="24h"?"24":"48")+" ชั่วโมง";
-    iframe.src="flood-webmap.html?center=101.60218426570209,13.611210763141127&scale=4622324.434309";
+    iframe.src="flood-webmap.html?v=20260924-live-map-capture&center=101.60218426570209,13.611210763141127&scale=4622324.434309";
     iframe.loading="eager";
     iframe.referrerPolicy="strict-origin-when-cross-origin";
     iframe.style.cssText="display:block;width:100%;height:100%;min-height:600px;border:0;background:#fff;pointer-events:auto";
