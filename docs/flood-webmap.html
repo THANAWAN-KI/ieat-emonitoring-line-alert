@@ -27,6 +27,8 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
  var itemId="3d24287ac6ea49cd823625ddad496e01";
  var viewerUrl="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap="+itemId+"&theme=light&legend=true&information=true&scroll=false&basemaps=true";
  var view=null, pending=null, ready=false, fallback=false;
+ var initialCenter=new URLSearchParams(location.search).get("center");
+ var initialScale=Number(new URLSearchParams(location.search).get("scale"));
  var message=document.getElementById("message"),frame=document.getElementById("fallback");
  function showFallback(){
   if(ready||fallback)return;
@@ -49,8 +51,22 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
   }else if(view&&ready)view.goTo({center:[lon,lat],scale:scale}).catch(function(){});
   else pending={center:[lon,lat],scale:scale};
  }
- window.addEventListener("message",function(event){
-  if(event.origin!==location.origin||!event.data||event.data.type!=="flood-map-focus")return;
+ window.addEventListener("message",async function(event){
+  if(event.origin!==location.origin||!event.data)return;
+  if(event.data.type==="flood-map-snapshot"){
+   var id=event.data.id;
+   try{
+    if(!view||fallback)throw new Error("แผนที่ ArcGIS ยังไม่พร้อมสำหรับการคัดลอก");
+    await view.when();
+    await new Promise(function(resolve){requestAnimationFrame(function(){requestAnimationFrame(resolve)})});
+    var shot=await view.takeScreenshot({format:"png"});
+    event.source.postMessage({type:"flood-map-snapshot-result",id:id,dataUrl:shot.dataUrl},event.origin);
+   }catch(error){
+    event.source.postMessage({type:"flood-map-snapshot-result",id:id,error:String(error&&error.message||error)},event.origin);
+   }
+   return;
+  }
+  if(event.data.type!=="flood-map-focus")return;
   var d=event.data;
   if(d.reset){
    if(fallback)frame.src=viewerUrl;
@@ -74,6 +90,7 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
     view.ui.add(new Expand({view:view,content:new LayerList({view:view}),group:"map-tools",expandTooltip:"ชั้นข้อมูล"}),"top-right");
     view.ui.add(new Expand({view:view,content:new Legend({view:view}),group:"map-tools",expandTooltip:"คำอธิบายสัญลักษณ์"}),"top-right");
     if(pending)view.goTo(pending).catch(function(){});
+    else if(initialCenter){var coords=initialCenter.split(",").map(Number);if(coords.length===2&&coords.every(Number.isFinite))view.goTo({center:coords,scale:Number.isFinite(initialScale)&&initialScale>0?initialScale:75000}).catch(function(){})}
    }).catch(showFallback);
   }).catch(showFallback);
  },showFallback);
