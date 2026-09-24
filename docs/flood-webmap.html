@@ -27,6 +27,7 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
  var itemId="3d24287ac6ea49cd823625ddad496e01";
  var viewerUrl="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap="+itemId+"&theme=light&legend=true&information=true&scroll=false&basemaps=true";
  var view=null, pending=null, ready=false, fallback=false;
+ var captureMode=new URLSearchParams(location.search).get("capture")==="1";
  var initialCenter=new URLSearchParams(location.search).get("center");
  var initialScale=Number(new URLSearchParams(location.search).get("scale"));
  var message=document.getElementById("message"),frame=document.getElementById("fallback");
@@ -34,6 +35,7 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
   if(ready||fallback)return;
   fallback=true;
   if(view){view.destroy();view=null}
+  if(captureMode){message.textContent="ไม่สามารถโหลดแผนที่สำหรับรายงานได้ กรุณาลองใหม่";return}
   document.getElementById("viewDiv").style.display="none";
   frame.style.display="block";
   frame.src=viewerUrl;
@@ -81,6 +83,7 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
   var webmap=new WebMap({portalItem:{id:itemId}});
   webmap.load().then(function(){
    if(fallback)return;
+   webmap.basemap="topo-vector";
    view=new MapView({container:"viewDiv",map:webmap});
    view.when(function(){
     if(fallback)return;
