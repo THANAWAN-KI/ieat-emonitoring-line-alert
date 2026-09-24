@@ -14122,7 +14122,7 @@ html body main.container #warning #waterSituationViz .water-legend-item.warning 
  function apply(){
   var launch=document.getElementById("floodReportLaunch"),button=document.getElementById("openFloodReport");
   if(launch&&button&&launch.children.length!==1)launch.replaceChildren(button);
-  if(button){button.textContent="เปิดหน้าจัดทำรายงาน";button.style.setProperty("background","#109DC0","important");button.style.setProperty("color","#FFFFFF","important")}
+  if(button)button.textContent="เปิดหน้าจัดทำรายงาน";
   ["reportPage2","reportPage3"].forEach(function(id){
    var page=document.getElementById(id);if(!page||page.querySelector(".report-status-legend"))return;
    var footer=page.querySelector(".sheet-footer");
@@ -15525,5 +15525,24 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
  });
 })();
 </script>
+<style id="match-report-button-to-swoc-20260924">
+html body main.container #warning #ridBasinOverview .rid-basin-actions #floodReportLaunch #openFloodReport{
+ min-width:0!important;min-height:56px!important;
+ margin:0!important;padding:12px 20px!important;
+ border:0!important;border-radius:14px!important;
+ background:#D5E9FF!important;color:#006DA7!important;
+ -webkit-text-fill-color:#006DA7!important;
+ font:400 18px/1.35 "Sarabun",sans-serif!important;
+ box-shadow:none!important;white-space:nowrap!important
+}
+html body main.container #warning #ridBasinOverview .rid-basin-actions #floodReportLaunch #openFloodReport:hover{
+ background:#C4DFF6!important
+}
+@media(max-width:700px){
+ html body main.container #warning #ridBasinOverview .rid-basin-actions #floodReportLaunch #openFloodReport{
+  width:auto!important;white-space:normal!important
+ }
+}
+</style>
 </body>
 </html>
