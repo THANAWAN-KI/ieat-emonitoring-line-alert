@@ -2764,12 +2764,16 @@ html body #hubInformationHeader .header-more-menu a:hover{background:#f5f6f7!imp
 <style id="fire-unified-report-map">#fireReportView .fire-dashboard-grid{grid-template-columns:minmax(400px,.95fr) minmax(420px,1.05fr)!important}@media(max-width:1100px){#fireReportView .fire-dashboard-grid{grid-template-columns:1fr!important}}#fireReportView .fire-factory-bridge{display:none!important}</style>
 <link rel="stylesheet" href="./mobile-responsive.css?v=20260915-1">
 
-<style id="fire-map-natural-aspect-20260924">
-#fireReportView .fire-analysis-panel{height:auto!important;align-self:start!important}
-#fireReportView #fireAnalysisMap{
-  width:100%!important;height:auto!important;min-height:0!important;
-  aspect-ratio:10/7!important;flex:0 0 auto!important;overflow:hidden!important;
-  background:#eef2f5!important
+<style id="fire-map-match-hotlines-20260924">
+@media(min-width:1101px){
+  #fireReportView .fire-dashboard-grid{align-items:stretch!important}
+  #fireReportView .fire-analysis-panel{display:flex!important;flex-direction:column!important;align-self:stretch!important;height:100%!important}
+  #fireReportView #fireAnalysisMap{position:relative!important;display:block!important;flex:1 1 auto!important;width:100%!important;height:auto!important;min-height:0!important;aspect-ratio:auto!important;overflow:hidden!important;background:#eef2f5!important}
+  #fireReportView #fireAnalysisMap iframe{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;border:0!important}
 }
-#fireReportView #fireAnalysisMap iframe{width:100%!important;height:100%!important;border:0!important}
+@media(max-width:1100px){
+  #fireReportView .fire-analysis-panel{height:auto!important}
+  #fireReportView #fireAnalysisMap{position:relative!important;width:100%!important;height:auto!important;aspect-ratio:10/7!important}
+  #fireReportView #fireAnalysisMap iframe{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;border:0!important}
+}
 </style>
