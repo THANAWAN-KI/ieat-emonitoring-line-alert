@@ -174,28 +174,7 @@ const dirs=['เหนือ','ตะวันออกเฉียงเหน�
 document.getElementById('mapBtn').onclick=updateMap;document.getElementById('weatherBtn').onclick=loadWeather;resetBtn.onclick=()=>{if(confirm('ล้างข้อมูลที่แก้ไขและกลับเป็นค่าเริ่มต้นหรือไม่?')){state={...defaults};render();updateMap()}};
 pngBtn.onclick=()=>downloadReportPng();render();updateMap();
 </script>
-<script>
-const factoryLookup=document.getElementById('factoryLookup'),factoryLookupStatus=document.getElementById('factoryLookupStatus');
-function searchFactory(){
-  const query=factoryLookup.value.trim();
-  if(!query){factoryLookupStatus.textContent='กรุณากรอกชื่อหรือเลขทะเบียนโรงงาน';return}
-  factoryLookupStatus.textContent='กำลังค้นหาและวิเคราะห์พื้นที่…';
-  if(window.parent===window){factoryLookupStatus.textContent='เปิดหน้าไฟไหม้เพื่อค้นหาจากฐานข้อมูลโรงงาน';return}
-  window.parent.postMessage({type:'dss-factory-search',query},location.origin);
-}
-document.getElementById('factoryLookupBtn').addEventListener('click',searchFactory);
-factoryLookup.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();searchFactory()}});
-window.addEventListener('message',async event=>{
-  if(event.origin!==location.origin||event.source!==window.parent||!event.data)return;
-  if(event.data.type==='dss-factory-options'){
-    document.getElementById('factoryLookupOptions').innerHTML=event.data.options.map(o=>'<option value="'+String(o).replace(/[&"<>]/g,c=>({'&':'&amp;','"':'&quot;','<':'&lt;','>':'&gt;'}[c]))+'"></option>').join('');
-  }
-  if(event.data.type==='dss-factory-status')factoryLookupStatus.textContent=event.data.text||'';
-  if(event.data.type!=='dss-autofill')return;
-  state={...state,...event.data.payload};render();updateMap();await loadWeather();
-});
-window.addEventListener('load',()=>{map.invalidateSize(true);updateMap()});
-</script><style id="dss-match-flood-report-font-20260910-v1">
+<style id="dss-match-flood-report-font-20260910-v1">
 /* Use the same typeface as docs/flood-report.html throughout DSS. */
 html body,
 html body *:not(svg):not(path):not(.material-icons):not([class*="fa-"]),
