@@ -15382,36 +15382,51 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
 <style id="flood-map-authoritative-20260923">
 #warning #topFloodMap{position:relative!important;min-height:640px!important}
 #warning #topFloodMap>.operations-map{display:block!important;position:relative!important;width:100%!important;height:100%!important;min-height:640px!important;overflow:hidden!important}
-#warning #topFloodMap #overviewArcgisMap{display:block!important;width:100%!important;height:100%!important;min-height:640px!important;border:0!important}
+#warning #topFloodMap #floodDashboardWebMap{display:block!important;width:100%!important;height:100%!important;min-height:640px!important;border:0!important}
 </style>
+<link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css">
+<script src="https://js.arcgis.com/4.30/"></script>
 <script id="flood-map-authoritative-20260923-script">
 (function(){
  "use strict";
- var card=null;
+ var card=null,view=null,loading=false,pending=null;
  function ensure(){
   var target=document.querySelector("#warning #topFloodMap");if(!target)return;
-  if(!card){
-   card=document.createElement("article");card.className="card operations-map embedded-water-map";
-   card.innerHTML='<iframe id="overviewArcgisMap" class="thaiwater-risk-map" title="แผนที่แสดงข้อมูลน้ำท่วม" loading="eager" allow="local-network-access; geolocation; fullscreen" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&amp;webmap=3d24287ac6ea49cd823625ddad496e01&amp;theme=light&amp;bookmarks=true&amp;legend=true&amp;information=true&amp;share=true&amp;scroll=false&amp;basemaps=true&amp;center=101.92510244344074,14.048909798054707&amp;scale=288895.277144"></iframe>';
-  }
+  if(!card){card=document.createElement("article");card.className="card operations-map embedded-water-map";
+   card.innerHTML='<div id="floodDashboardWebMap" role="region" aria-label="แผนที่แสดงข้อมูลน้ำท่วม"></div>'}
   if(card.parentElement!==target)target.appendChild(card);
+  if(view||loading||!window.require)return;
+  loading=true;
+  require(["esri/WebMap","esri/portal/Portal","esri/views/MapView","esri/widgets/Home","esri/widgets/Search","esri/widgets/LayerList","esri/widgets/Legend","esri/widgets/Expand"],
+   function(WebMap,Portal,MapView,Home,Search,LayerList,Legend,Expand){
+    var webmap=new WebMap({portalItem:{id:"3d24287ac6ea49cd823625ddad496e01",portal:new Portal({url:"https://ieat.maps.arcgis.com"})}});
+    view=new MapView({container:"floodDashboardWebMap",map:webmap,center:[101.92510244344074,14.048909798054707],scale:288895.277144});
+    window.floodDashboardMapView=view;
+    view.when(function(){
+     view.ui.add(new Home({view:view}),"top-left");
+     view.ui.add(new Search({view:view}),"top-right");
+     view.ui.add(new Expand({view:view,content:new LayerList({view:view}),group:"flood-map-tools",expandTooltip:"ชั้นข้อมูล"}),"top-right");
+     view.ui.add(new Expand({view:view,content:new Legend({view:view}),group:"flood-map-tools",expandTooltip:"คำอธิบายสัญลักษณ์"}),"top-right");
+     if(pending){var focus=pending;pending=null;view.goTo(focus).catch(function(){})}
+    }).catch(function(error){console.error("Flood WebMap failed to load",error)});
+    if("ResizeObserver" in window)new ResizeObserver(function(){view.resize()}).observe(card);
+   });
  }
+ function move(target){ensure();if(card)card.scrollIntoView({behavior:"smooth",block:"center"});
+  if(view)view.when(function(){view.goTo(target).catch(function(){})});else pending=target}
  window.zoomRiskMap=function(lat,lon,label){
   var a=Number(lat),b=Number(lon);if(!Number.isFinite(a)||!Number.isFinite(b))return;
-  ensure();if(!card)return;card.scrollIntoView({behavior:"smooth",block:"center"});
-  var frame=card.querySelector("#overviewArcgisMap");
-  if(frame){var url=new URL(frame.src);url.searchParams.set("center",b+","+a);url.searchParams.set("scale","75000");frame.src=url.toString()}
+  move({center:[b,a],scale:75000});
  };
+ window.resetFloodDashboardMap=function(){move({center:[101,13.2],scale:4622324})};
  function start(){
-  ensure();
-  var warning=document.getElementById("warning");
+  ensure();var warning=document.getElementById("warning");
   if(warning)new MutationObserver(function(){if(card&&card.parentElement!==document.getElementById("topFloodMap"))ensure()}).observe(warning,{childList:true,subtree:true});
   [300,1000,2500,5000,10000].forEach(function(ms){setTimeout(ensure,ms)});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();
 </script>
-
 <style id="flood-nine-card-map-focus">
 #warning #topFloodNine>.final-flood-card[data-map-focus]{cursor:pointer!important}
 #warning #topFloodNine>.final-flood-card[data-map-focus]:hover{box-shadow:0 5px 18px rgba(0,127,219,.18)!important}
@@ -15444,12 +15459,8 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
   return choices[id]||null;
  }
  function focus(point){
-  var map=document.querySelector("#warning #topFloodMap #overviewArcgisMap");if(!map)return;
-  var url=new URL(map.src,document.baseURI),local=!!point;
-  url.searchParams.set("center",local?Number(point.lon??point.longitude)+","+Number(point.lat??point.latitude):"101,13.2");
-  url.searchParams.set("scale",local?"75000":"4622324");
-  map.src=url.toString();
-  map.scrollIntoView({behavior:"smooth",block:"center"});
+  if(point&&typeof window.zoomRiskMap==="function")window.zoomRiskMap(point.lat??point.latitude,point.lon??point.longitude);
+  else if(typeof window.resetFloodDashboardMap==="function")window.resetFloodDashboardMap();
  }
  async function data(){
   if(window.IEAT_LIVE_DATA&&window.IEAT_LIVE_DATA.stations)return window.IEAT_LIVE_DATA;
