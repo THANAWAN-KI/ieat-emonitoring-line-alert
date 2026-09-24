@@ -15394,13 +15394,13 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
   var target=document.querySelector("#warning #topFloodMap");if(!target)return;
   if(!card){card=document.createElement("article");card.className="card operations-map embedded-water-map";
    card.innerHTML='<div id="floodDashboardWebMap" role="region" aria-label="แผนที่แสดงข้อมูลน้ำท่วม"></div>'}
-  if(card.parentElement!==target)target.appendChild(card);
+  if(card.parentElement!==target||target.children.length!==1||target.firstElementChild!==card)target.replaceChildren(card);
   if(view||loading||!window.require)return;
   loading=true;
   require(["esri/WebMap","esri/portal/Portal","esri/views/MapView","esri/widgets/Home","esri/widgets/Search","esri/widgets/LayerList","esri/widgets/Legend","esri/widgets/Expand"],
    function(WebMap,Portal,MapView,Home,Search,LayerList,Legend,Expand){
     var webmap=new WebMap({portalItem:{id:"3d24287ac6ea49cd823625ddad496e01",portal:new Portal({url:"https://ieat.maps.arcgis.com"})}});
-    view=new MapView({container:"floodDashboardWebMap",map:webmap,center:[101.92510244344074,14.048909798054707],scale:288895.277144});
+    view=new MapView({container:"floodDashboardWebMap",map:webmap});
     window.floodDashboardMapView=view;
     view.when(function(){
      view.ui.add(new Home({view:view}),"top-left");
