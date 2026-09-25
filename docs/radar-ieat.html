@@ -335,11 +335,14 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
     try{
       if(!radarObjectUrl)throw Error('ภาพเรดาร์ระยองยังไม่พร้อม');
       fillReportSearch();
+      await refreshReportMap();reportMessage('หน้า 1 พร้อมแล้ว · ค้นหานิคมฯ หรือซูมก่อนดาวน์โหลดได้');
+    }catch(error){reportMessage('หน้า 1: '+error.message)}
+    try{
       const qpf=await fetch(qpfUrl,{cache:'no-store'});if(!qpf.ok)throw Error('โหลดภาพ Radar Composite QPF ไม่สำเร็จ');
       const qpfBlob=await qpf.blob();const old=document.getElementById('compositeReportImage').dataset.url;if(old)URL.revokeObjectURL(old);
       const qpfObjectUrl=URL.createObjectURL(qpfBlob);document.getElementById('compositeReportImage').dataset.url=qpfObjectUrl;document.getElementById('compositeReportImage').src=qpfObjectUrl;
-      await prepareNationalMap();await refreshReportMap();reportMessage('รายงานพร้อมบันทึก · ค้นหานิคมฯ หรือซูมก่อนดาวน์โหลดได้');
-    }catch(error){reportMessage(error.message)}
+      await prepareNationalMap();await refreshReportMap();reportMessage('รายงานทั้งสองหน้าพร้อมบันทึก · ค้นหานิคมฯ หรือซูมก่อนดาวน์โหลดได้');
+    }catch(error){reportMessage('หน้า 1 พร้อมใช้งาน · หน้า 2: '+error.message)}
   };
   async function composePage(kind){
     const canvas=document.createElement('canvas'),ctx=canvas.getContext('2d');
