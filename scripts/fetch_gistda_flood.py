@@ -1,6 +1,7 @@
-"""Refresh observed flood polygons without exposing the GISTDA API key on GitHub Pages."""
+"""Refresh observed flood locations without exposing the GISTDA API key."""
 import json
 import os
+import re
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
@@ -8,8 +9,32 @@ from pathlib import Path
 
 API = "https://api-gateway.gistda.or.th/api/2.0/resources/features/flood/7days"
 OUTPUT = Path("docs/data/gistda_flood_latest.geojson")
-PAGE_SIZE = 100
-MAX_PAGES = 100
+PAGE_SIZE = 1000
+MAX_PAGES = 1000
+
+
+def add_coordinates(value, bounds):
+    if not isinstance(value, list) or not value:
+        return
+    if len(value) >= 2 and all(isinstance(v, (int, float)) for v in value[:2]):
+        lon, lat = value[:2]
+        if -180 <= lon <= 180 and -90 <= lat <= 90:
+            bounds[0] = min(bounds[0], lon)
+            bounds[1] = min(bounds[1], lat)
+            bounds[2] = max(bounds[2], lon)
+            bounds[3] = max(bounds[3], lat)
+    else:
+        for part in value:
+            add_coordinates(part, bounds)
+
+
+def summary_feature(group):
+    left, bottom, right, top = group["bounds"]
+    props = group["properties"]
+    props["summary_count"] = group["count"]
+    props["file_name"] = group["scene"]
+    props["flood_bounds"] = [left, bottom, right, top]
+    return {"type": "Feature", "geometry": {"type": "Point", "coordinates": [(left + right) / 2, (bottom + top) / 2]}, "properties": props}
 
 
 def fetch_page(key, offset):
@@ -38,30 +63,50 @@ def main():
     if not key:
         print("GISTDA_API_KEY is not configured; keeping the previous feed")
         return
-    features, seen = [], set()
+    groups, seen, offset = {}, set(), 0
     for page in range(MAX_PAGES):
-        batch = fetch_page(key, len(features))
+        batch = fetch_page(key, offset)
         if not batch:
             break
-        new = [f for f in batch if str(f.get("id") or f.get("properties", {}).get("_id") or f.get("geometry")) not in seen]
-        if len(new) != len(batch):
-            raise RuntimeError("GISTDA flood pagination repeated a feature; existing feed was retained")
-        for f in new:
-            seen.add(str(f.get("id") or f.get("properties", {}).get("_id") or f.get("geometry")))
-        features.extend(new)
-        print(f"Fetched flood page {page + 1}: {len(batch)} areas, total {len(features)}")
+        for f in batch:
+            if not isinstance(f, dict) or not isinstance(f.get("geometry"), dict):
+                continue
+            uid = str(f.get("id") or f.get("properties", {}).get("_id") or f.get("geometry"))
+            if uid in seen:
+                raise RuntimeError("GISTDA flood pagination repeated a feature; existing feed was retained")
+            seen.add(uid)
+            p = f.get("properties") or {}
+            box = [float("inf"), float("inf"), float("-inf"), float("-inf")]
+            add_coordinates(f["geometry"].get("coordinates"), box)
+            if box[0] == float("inf"):
+                continue
+            place = (p.get("pv_idn") or p.get("pv_tn"), p.get("ap_idn") or p.get("ap_tn"), p.get("tb_idn") or p.get("tb_tn"))
+            if not all(place):
+                place = (*place, uid)
+            if place not in groups:
+                groups[place] = {"properties": {k: p.get(k) for k in ("pv_tn", "ap_tn", "tb_tn", "pv_idn", "ap_idn", "tb_idn")}, "count": 0,
+                                 "bounds": box.copy(), "scene": ""}
+            g = groups[place]
+            g["count"] += 1
+            g["bounds"] = [min(g["bounds"][0], box[0]), min(g["bounds"][1], box[1]),
+                           max(g["bounds"][2], box[2]), max(g["bounds"][3], box[3])]
+            scenes = re.findall(r"(?:19|20)\d{6}_\d{4}", str(p.get("file_name") or ""))
+            if scenes:
+                g["scene"] = max(g["scene"], *scenes)
+        offset += len(batch)
+        print(f"Fetched flood page {page + 1}: {len(batch)} areas, total {offset}, locations {len(groups)}", flush=True)
     else:
         raise RuntimeError("GISTDA flood feed exceeds the configured page limit; existing feed was retained")
-    valid = [f for f in features if isinstance(f, dict) and isinstance(f.get("geometry"), dict)
-             and f["geometry"].get("type") in ("Polygon", "MultiPolygon", "Point")]
-    if features and not valid:
+    valid = [summary_feature(g) for g in groups.values()]
+    if offset and not valid:
         raise RuntimeError("GISTDA flood geometries could not be parsed; existing feed was retained")
     result = {"type": "FeatureCollection", "features": valid,
               "metadata": {"source": "GISTDA Disaster Platform", "source_url": "https://disaster.gistda.or.th/flood",
-                           "window_days": 7, "feature_count": len(valid), "retrieved_at": datetime.now(timezone.utc).isoformat()}}
+                           "window_days": 7, "feature_count": offset, "location_count": len(valid),
+                           "display_mode": "observed_flood_centers_by_tambon", "retrieved_at": datetime.now(timezone.utc).isoformat()}}
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT.write_text(json.dumps(result, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    print(f"Saved {len(valid)} GISTDA flood features")
+    print(f"Saved {len(valid)} flood locations from {offset} detected polygons")
 
 
 if __name__ == "__main__":
