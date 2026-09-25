@@ -28,13 +28,19 @@ def add_coordinates(value, bounds):
             add_coordinates(part, bounds)
 
 
+def round_coordinates(value):
+    if isinstance(value, list) and value and isinstance(value[0], (int, float)):
+        return [round(n, 6) for n in value]
+    return [round_coordinates(part) for part in value]
+
+
 def summary_feature(group):
     left, bottom, right, top = group["bounds"]
     props = group["properties"]
     props["summary_count"] = group["count"]
     props["file_name"] = group["scene"]
     props["flood_bounds"] = [left, bottom, right, top]
-    return {"type": "Feature", "geometry": {"type": "Point", "coordinates": [(left + right) / 2, (bottom + top) / 2]}, "properties": props}
+    return {"type": "Feature", "geometry": {"type": "MultiPolygon", "coordinates": group["polygons"]}, "properties": props}
 
 
 def fetch_page(key, offset):
@@ -75,9 +81,13 @@ def main():
             if uid in seen:
                 raise RuntimeError("GISTDA flood pagination repeated a feature; existing feed was retained")
             seen.add(uid)
+            geometry = f["geometry"]
+            if geometry.get("type") not in ("Polygon", "MultiPolygon"):
+                continue
             p = f.get("properties") or {}
             box = [float("inf"), float("inf"), float("-inf"), float("-inf")]
-            add_coordinates(f["geometry"].get("coordinates"), box)
+            coordinates = geometry.get("coordinates")
+            add_coordinates(coordinates, box)
             if box[0] == float("inf"):
                 continue
             place = (p.get("pv_idn") or p.get("pv_tn"), p.get("ap_idn") or p.get("ap_tn"), p.get("tb_idn") or p.get("tb_tn"))
@@ -85,9 +95,11 @@ def main():
                 place = (*place, uid)
             if place not in groups:
                 groups[place] = {"properties": {k: p.get(k) for k in ("pv_tn", "ap_tn", "tb_tn", "pv_idn", "ap_idn", "tb_idn")}, "count": 0,
-                                 "bounds": box.copy(), "scene": ""}
+                                 "bounds": box.copy(), "scene": "", "polygons": []}
             g = groups[place]
             g["count"] += 1
+            parts = coordinates if geometry["type"] == "MultiPolygon" else [coordinates]
+            g["polygons"].extend(round_coordinates(parts))
             g["bounds"] = [min(g["bounds"][0], box[0]), min(g["bounds"][1], box[1]),
                            max(g["bounds"][2], box[2]), max(g["bounds"][3], box[3])]
             scenes = re.findall(r"(?:19|20)\d{6}_\d{4}", str(p.get("file_name") or ""))
@@ -103,10 +115,13 @@ def main():
     result = {"type": "FeatureCollection", "features": valid,
               "metadata": {"source": "GISTDA Disaster Platform", "source_url": "https://disaster.gistda.or.th/flood",
                            "window_days": 7, "feature_count": offset, "location_count": len(valid),
-                           "display_mode": "observed_flood_centers_by_tambon", "retrieved_at": datetime.now(timezone.utc).isoformat()}}
+                           "display_mode": "observed_flood_polygons_by_tambon", "retrieved_at": datetime.now(timezone.utc).isoformat()}}
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT.write_text(json.dumps(result, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    print(f"Saved {len(valid)} flood locations from {offset} detected polygons")
+    encoded = json.dumps(result, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+    if len(encoded) > 70_000_000:
+        raise RuntimeError("Flood geometry exceeds publishable file size; existing feed was retained")
+    OUTPUT.write_bytes(encoded)
+    print(f"Saved {len(valid)} flood area groups from {offset} detected polygons ({len(encoded)} bytes)")
 
 
 if __name__ == "__main__":
