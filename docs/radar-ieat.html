@@ -285,6 +285,19 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
       ctx.fillStyle='#ffffffeb';ctx.fillRect(lx,ly-12,width,17);ctx.fillStyle='#176437';ctx.fillText(label,lx+5,ly-3,width-10);
     }
   }
+  function drawReportLegend(ctx){
+    const x=ctx.canvas.width-210,y=ctx.canvas.height-274;
+    ctx.save();ctx.fillStyle='#fffffff0';ctx.strokeStyle='#dce2e9';ctx.lineWidth=1;
+    ctx.fillRect(x,y,196,258);ctx.strokeRect(x,y,196,258);
+    ctx.fillStyle='#27313e';ctx.font='bold 17px Sarabun, sans-serif';ctx.fillText('สัญลักษณ์เรดาร์ฝน',x+12,y+24);
+    const gradient=ctx.createLinearGradient(0,y+43,0,y+195);
+    [[0,'#fc00fb'],[.18,'#aa0000'],[.36,'#f80000'],[.52,'#ff5500'],[.69,'#fffd01'],[.78,'#01fd01'],[1,'#015501']].forEach(([stop,color])=>gradient.addColorStop(stop,color));
+    ctx.fillStyle=gradient;ctx.fillRect(x+14,y+42,23,156);
+    ctx.fillStyle='#34383f';ctx.font='13px Sarabun, sans-serif';
+    ['65+','50','40','30','20','10'].forEach((label,index)=>ctx.fillText(label+' dBZ',x+47,y+48+index*30));
+    ctx.fillStyle='#176437';ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.beginPath();ctx.arc(x+24,y+224,6,0,Math.PI*2);ctx.fill();ctx.stroke();
+    ctx.fillStyle='#176437';ctx.font='bold 14px Sarabun, sans-serif';ctx.fillText('ตำแหน่งนิคมอุตสาหกรรม',x+40,y+225);ctx.restore();
+  }
   const rayongProject=point=>({x:(point.longitude-bounds.west)/(bounds.east-bounds.west)*800,y:(bounds.north-point.latitude)/(bounds.north-bounds.south)*800});
   const reportSearch=document.getElementById('reportEstateSearch');
   let reportRenderSerial=0,reportPreviewTimer=0;
@@ -295,7 +308,7 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
     await view.when();const shot=await view.takeScreenshot({width:1200,height:750,format:'png'});
     const base=await loadImage(shot.dataUrl),canvas=document.createElement('canvas');canvas.width=1200;canvas.height=750;const ctx=canvas.getContext('2d');ctx.drawImage(base,0,0,1200,750);
     if(radarCanvas.width&&radarVisible){const p=radarPlacement(1200,750);ctx.globalAlpha=Number(radarCanvas.style.opacity);ctx.drawImage(radarCanvas,p.x,p.y,p.w,p.h);ctx.globalAlpha=1}
-    drawMapPins(ctx,1200,750);return canvas;
+    drawMapPins(ctx,1200,750);drawReportLegend(ctx);return canvas;
   }
   async function refreshReportMap(){
     if(reportView.hidden)return;const serial=++reportRenderSerial;
@@ -312,7 +325,13 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
   document.getElementById('reportReset').onclick=()=>view.goTo({center:[101.27,12.68],zoom:9});
   const preview=document.getElementById('rayongReport');
   preview.onclick=event=>{const box=preview.getBoundingClientRect();const point=view.toMap({x:(event.clientX-box.left)/box.width*view.width,y:(event.clientY-box.top)/box.height*view.height});if(point)view.goTo({center:point,zoom:view.zoom})};
-  preview.addEventListener('wheel',event=>{event.preventDefault();view.goTo({zoom:Math.max(4,Math.min(18,view.zoom+(event.deltaY<0?1:-1)))})},{passive:false});
+  preview.addEventListener('wheel',event=>{
+    event.preventDefault();const next=Math.max(4,Math.min(18,view.zoom+(event.deltaY<0?1:-1)));
+    if(next===view.zoom)return;
+    const box=preview.getBoundingClientRect(),x=(event.clientX-box.left)/box.width*view.width,y=(event.clientY-box.top)/box.height*view.height;
+    const factor=2**(next-view.zoom),center=view.toMap({x:x+(view.width/2-x)/factor,y:y+(view.height/2-y)/factor});
+    if(center)view.goTo({center,zoom:next},{animate:false});
+  },{passive:false});
   let nationalMapUrl='',nationalRows=[];
   async function prepareNationalMap(){
     const current=view.viewpoint.clone();
@@ -375,7 +394,7 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
             rainCtx.clearRect(0,0,800,800);rainCtx.drawImage(frame,0,0,800,800);const image=rainCtx.getImageData(0,0,800,800);
             for(let k=0;k<image.data.length;k+=4)if(!isRainColor(image.data[k],image.data[k+1],image.data[k+2]))image.data[k+3]=0;
             rainCtx.putImageData(image,0,0);const pos=radarPlacement(1200,750);ctx.globalAlpha=Number(radarCanvas.style.opacity);ctx.drawImage(rain,pos.x,pos.y,pos.w,pos.h);ctx.globalAlpha=1;
-            drawMapPins(ctx,1200,750);const pixels=ctx.getImageData(0,0,1200,750).data,palette=quantize(pixels,256);
+            drawMapPins(ctx,1200,750);drawReportLegend(ctx);const pixels=ctx.getImageData(0,0,1200,750).data,palette=quantize(pixels,256);
             encoder.writeFrame(applyPalette(pixels,palette),1200,750,{palette,delay:Math.max(100,Math.round((frame.duration||300000)/1000)*step)});frame.close();
           }
           decoder.close();
