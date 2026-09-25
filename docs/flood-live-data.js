@@ -38,6 +38,13 @@
       if(!Number.isFinite(retrieved)||Date.now()-retrieved>12*3600000)throw new Error("feed outdated");
       const clean=s=>String(s??"–").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
       const groups=new Map();
+      function bounds(coordinates,box){
+        if(!Array.isArray(coordinates))return;
+        if(typeof coordinates[0]==="number"&&typeof coordinates[1]==="number"){
+          const [lon,lat]=coordinates;
+          if(Math.abs(lat)<=90&&Math.abs(lon)<=180){box.minLon=Math.min(box.minLon,lon);box.maxLon=Math.max(box.maxLon,lon);box.minLat=Math.min(box.minLat,lat);box.maxLat=Math.max(box.maxLat,lat)}
+        }else coordinates.forEach(part=>bounds(part,box));
+      }
       (feed.features||[]).filter(f=>f.geometry&&f.properties).forEach(f=>{
         const p=f.properties,location=[p.tb_tn||p.tambon,p.ap_tn||p.amphoe||p.district].filter(Boolean).join(" ")||p.name||"พื้นที่ในภาพดาวเทียม";
         const province=p.pv_tn||p.province||p.prov_name||"–";
@@ -46,10 +53,17 @@
         const when=latest?`${Number(latest.slice(6,8))} ${["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."][Number(latest.slice(4,6))-1]} ${Number(latest.slice(0,4))+543} ${latest.slice(9,11)}:${latest.slice(11,13)} น. (ชื่อไฟล์ภาพ)`:
           observed&&Number.isFinite(Date.parse(observed))?new Date(observed).toLocaleString("th-TH"):"ไม่ระบุวันภาพ";
         const key=province+"|"+location;
-        if(!groups.has(key))groups.set(key,{location,province,when,count:0});
-        groups.get(key).count++;
+        if(!groups.has(key))groups.set(key,{location,province,when,count:0,box:{minLon:Infinity,maxLon:-Infinity,minLat:Infinity,maxLat:-Infinity}});
+        const group=groups.get(key);group.count++;
+        bounds(f.geometry.coordinates,group.box);
       });
-      const rows=[...groups.values()].slice(0,30).map((g,i)=>`<tr><td>${i+1}</td><td>${clean(g.location)} <small>(${g.count} ขอบเขต)</small></td><td>${clean(g.province)}</td><td>${clean(g.when)}</td><td>ยังไม่ยืนยันผลกระทบนิคมฯ</td><td><a href="https://disaster.gistda.or.th/flood" target="_blank" rel="noopener noreferrer">GISTDA ↗</a></td></tr>`);
+      const rows=[...groups.values()].slice(0,30).map((g,i)=>{
+        const b=g.box,valid=Number.isFinite(b.minLon)&&Number.isFinite(b.minLat);
+        const scale=valid?Math.round(Math.max(35000,Math.min(300000,Math.max((b.maxLon-b.minLon)*95,(b.maxLat-b.minLat)*111)*8000))):75000;
+        const attrs=valid?` data-map-lat="${(b.minLat+b.maxLat)/2}" data-map-lon="${(b.minLon+b.maxLon)/2}" data-map-scale="${scale}" data-map-label="${clean(g.location)}"`:"";
+        const badge=valid?`<button type="button" class="map-cell-zoom observed-flood-zoom"${attrs} aria-label="ซูมแผนที่ไปที่พื้นที่น้ำท่วม ${clean(g.location)}">${clean(g.when)}</button>`:clean(g.when);
+        return `<tr data-count="${g.count}"><td>${i+1}</td><td>${clean(g.location)} <small>(${g.count} ขอบเขต)</small></td><td>${clean(g.province)}</td><td>${badge}</td><td>ยังไม่ยืนยันผลกระทบนิคมฯ</td><td><a href="https://disaster.gistda.or.th/flood" target="_blank" rel="noopener noreferrer">GISTDA ↗</a></td></tr>`;
+      });
       body.innerHTML=rows.length?rows.join(""):'<tr><td colspan="6" class="table-empty">ไม่พบขอบเขตพื้นที่น้ำท่วมในข้อมูล GISTDA รอบ 7 วันที่ดึงล่าสุด</td></tr>';
     }catch(_error){renderEstateRanks()}
   }
