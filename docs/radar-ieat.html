@@ -320,9 +320,9 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
     }
   }
   function drawReportLegend(ctx){
-    const x=ctx.canvas.width-210,y=ctx.canvas.height-274;
+    const x=ctx.canvas.width-210,y=ctx.canvas.height-300;
     ctx.save();ctx.fillStyle='#fffffff0';ctx.strokeStyle='#dce2e9';ctx.lineWidth=1;
-    ctx.fillRect(x,y,196,258);ctx.strokeRect(x,y,196,258);
+    ctx.fillRect(x,y,196,284);ctx.strokeRect(x,y,196,284);
     ctx.fillStyle='#27313e';ctx.font='bold 17px Sarabun, sans-serif';ctx.fillText('สัญลักษณ์เรดาร์ฝน',x+12,y+24);
     const gradient=ctx.createLinearGradient(0,y+43,0,y+195);
     [[0,'#fc00fb'],[.18,'#aa0000'],[.36,'#f80000'],[.52,'#ff5500'],[.69,'#fffd01'],[.78,'#01fd01'],[1,'#015501']].forEach(([stop,color])=>gradient.addColorStop(stop,color));
@@ -330,14 +330,36 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
     ctx.fillStyle='#34383f';ctx.font='13px Sarabun, sans-serif';
     ['65+','50','40','30','20','10'].forEach((label,index)=>ctx.fillText(label+' dBZ',x+47,y+48+index*30));
     drawEstatePin(ctx,x+25,y+245,.55);
-    ctx.fillStyle='#52057f';ctx.font='bold 14px Sarabun, sans-serif';ctx.fillText('สำนักงานนิคมฯ',x+40,y+225);ctx.restore();
+    ctx.fillStyle='#52057f';ctx.font='bold 14px Sarabun, sans-serif';ctx.fillText('สำนักงานนิคมฯ',x+40,y+225);
+    ctx.beginPath();ctx.arc(x+25,y+267,10,0,Math.PI*2);ctx.fillStyle='#52057f';ctx.fill();
+    ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='bold 11px Sarabun, sans-serif';ctx.fillText('2',x+25,y+267);
+    ctx.textAlign='left';ctx.fillStyle='#52057f';ctx.font='13px Sarabun, sans-serif';ctx.fillText('จุดใกล้กัน (จำนวน)',x+42,y+267);ctx.restore();
   }
   const rayongProject=point=>({x:(point.longitude-bounds.west)/(bounds.east-bounds.west)*800,y:(bounds.north-point.latitude)/(bounds.north-bounds.south)*800});
   const reportSearch=document.getElementById('reportEstateSearch');
   let reportRenderSerial=0,reportPreviewTimer=0;
   function fillReportSearch(){const options=document.getElementById('reportEstateOptions');options.replaceChildren();for(const row of names){const option=document.createElement('option');option.value=row.name;options.append(option)}}
   function radarPlacement(width,height){return {x:parseFloat(radarCanvas.style.left)*width/view.width,y:parseFloat(radarCanvas.style.top)*height/view.height,w:parseFloat(radarCanvas.style.width)*width/view.width,h:parseFloat(radarCanvas.style.height)*height/view.height}}
-  function drawMapPins(ctx,width,height){drawPins(ctx,activeMarkerRows(),point=>{const pixel=view.toScreen(point);return pixel&&{x:pixel.x*width/view.width,y:pixel.y*height/view.height}})}
+  function drawMapPins(ctx,width,height){
+    const project=point=>{const pixel=view.toScreen(point);return pixel&&{x:pixel.x*width/view.width,y:pixel.y*height/view.height}};
+    const rows=activeMarkerRows();
+    if(view.zoom>10){drawPins(ctx,rows,project);return}
+    const cells=new Map(),selected=[];
+    for(const row of rows){
+      const pos=project(row.point);if(!pos||pos.x<0||pos.x>width||pos.y<0||pos.y>height)continue;
+      if(row.name===selectedMarkerName){selected.push(row);continue}
+      const key=Math.round(pos.x/34)+','+Math.round(pos.y/34);
+      if(!cells.has(key))cells.set(key,{x:0,y:0,count:0});
+      const cell=cells.get(key);cell.x+=pos.x;cell.y+=pos.y;cell.count++;
+    }
+    for(const cell of cells.values()){
+      const x=cell.x/cell.count,y=cell.y/cell.count;
+      if(cell.count===1){drawEstatePin(ctx,x,y,.7);continue}
+      ctx.save();ctx.beginPath();ctx.arc(x,y,13,0,Math.PI*2);ctx.fillStyle='#52057f';ctx.fill();ctx.lineWidth=2;ctx.strokeStyle='#fff';ctx.stroke();
+      ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='bold 12px Sarabun, sans-serif';ctx.fillText(String(cell.count),x,y);ctx.restore();
+    }
+    if(selected.length)drawPins(ctx,selected,project);
+  }
   async function composeRayongMap(){
     await view.when();await pinImage.decode().catch(()=>{});const shot=await view.takeScreenshot({width:1200,height:750,format:'png'});
     const base=await loadImage(shot.dataUrl),canvas=document.createElement('canvas');canvas.width=1200;canvas.height=750;const ctx=canvas.getContext('2d');ctx.drawImage(base,0,0,1200,750);
@@ -422,6 +444,7 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
     reportView.hidden=false;reportMessage('กำลังเตรียมภาพรายงาน…');
     try{
       if(!radarObjectUrl)throw Error('ภาพเรดาร์ระยองยังไม่พร้อม');
+      if(view.zoom<8&&!selectedMarkerName)await view.goTo({center:[101.27,12.68],zoom:9},{animate:false});
       fillReportSearch();
       await refreshReportMap();reportMessage('หน้า 1 พร้อมแล้ว · ค้นหานิคมฯ หรือซูมก่อนดาวน์โหลดได้');
     }catch(error){reportMessage('หน้า 1: '+error.message)}
