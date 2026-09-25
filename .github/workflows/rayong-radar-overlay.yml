@@ -21,7 +21,7 @@ jobs:
         run: python build_radar_overlay.py
       - name: Save radar overlay
         run: |
-          git add docs/data/ryg-rain-overlay.gif
+          git add docs/data/ryg-rain-overlay.gif docs/data/ryg-original.gif
           if git diff --cached --quiet; then exit 0; fi
           git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Update Rayong radar overlay'
           git push
