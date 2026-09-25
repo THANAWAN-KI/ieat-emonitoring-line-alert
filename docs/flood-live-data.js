@@ -54,8 +54,11 @@
           observed&&Number.isFinite(Date.parse(observed))?new Date(observed).toLocaleString("th-TH"):"ไม่ระบุวันภาพ";
         const key=province+"|"+location;
         if(!groups.has(key))groups.set(key,{location,province,when,count:0,box:{minLon:Infinity,maxLon:-Infinity,minLat:Infinity,maxLat:-Infinity}});
-        const group=groups.get(key);group.count++;
-        bounds(f.geometry.coordinates,group.box);
+        const group=groups.get(key);group.count+=Number(p.summary_count)||1;
+        if(Array.isArray(p.flood_bounds)&&p.flood_bounds.length===4){
+          bounds([p.flood_bounds[0],p.flood_bounds[1]],group.box);
+          bounds([p.flood_bounds[2],p.flood_bounds[3]],group.box);
+        }else bounds(f.geometry.coordinates,group.box);
       });
       const rows=[...groups.values()].sort((a,b)=>b.count-a.count).map((g,i)=>{
         const b=g.box,valid=Number.isFinite(b.minLon)&&Number.isFinite(b.minLat);
@@ -66,6 +69,8 @@
       });
       const heading=body.closest(".estate-watch-table")?.querySelector(".table-section-head h2");
       if(heading)heading.textContent=`ตำแหน่งพื้นที่ที่ตรวจพบน้ำท่วม (${groups.size.toLocaleString("th-TH")} ตำบล)`;
+      const explanation=body.closest(".estate-watch-table")?.querySelector(".table-section-head p");
+      if(explanation&&feed.metadata?.display_mode==="observed_flood_centers_by_tambon")explanation.textContent=`จุดกลางพื้นที่ตรวจพบในแต่ละตำบล • จาก ${Number(feed.metadata.feature_count).toLocaleString("th-TH")} ขอบเขต ช่วงย้อนหลัง 7 วัน • วันที่ภาพแสดงในแต่ละรายการ`;
       body.innerHTML=rows.length?rows.join(""):'<tr><td colspan="6" class="table-empty">ไม่พบขอบเขตพื้นที่น้ำท่วมในข้อมูล GISTDA รอบ 7 วันที่ดึงล่าสุด</td></tr>';
     }catch(_error){renderEstateRanks()}
   }
