@@ -342,7 +342,7 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
     const options=document.getElementById('reportEstateOptions');options.replaceChildren();
     for(const name of new Set([...activeMarkerRows(),...names].map(row=>row.name))){const option=document.createElement('option');option.value=name;options.append(option)}
   }
-  const reportCrop={x:320,y:0,w:560,h:750},reportMapBox={x:40,y:120,w:1020,h:1366},reportSize={w:1100,h:1530};
+  const reportCrop={x:320,y:0,w:560,h:750},reportMapBox={x:40,y:120,w:1020,h:1366},reportSize={w:1100,h:1530},reportMapScale=2;
   function radarPlacement(width,height){return {x:parseFloat(radarCanvas.style.left)*width/view.width,y:parseFloat(radarCanvas.style.top)*height/view.height,w:parseFloat(radarCanvas.style.width)*width/view.width,h:parseFloat(radarCanvas.style.height)*height/view.height}}
   function drawReportLabels(ctx,rows,project){
     const placed=[];ctx.save();ctx.font='bold 13px Sarabun, sans-serif';ctx.textBaseline='middle';
@@ -378,10 +378,11 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
     if(selected.length)drawPins(ctx,selected,project);
   }
   async function composeRayongMap(){
-    await view.when();await pinImage.decode().catch(()=>{});const shot=await view.takeScreenshot({width:1200,height:750,format:'png'});
-    const base=await loadImage(shot.dataUrl),canvas=document.createElement('canvas');canvas.width=1200;canvas.height=750;const ctx=canvas.getContext('2d');ctx.drawImage(base,0,0,1200,750);
-    if(radarCanvas.width&&radarVisible){const p=radarPlacement(1200,750);ctx.globalAlpha=Number(radarCanvas.style.opacity);ctx.imageSmoothingEnabled=false;ctx.drawImage(radarCanvas,p.x,p.y,p.w,p.h);ctx.globalAlpha=1;ctx.imageSmoothingEnabled=true}
-    drawMapPins(ctx,1200,750);return canvas;
+    await view.when();await pinImage.decode().catch(()=>{});const w=1200*reportMapScale,h=750*reportMapScale;
+    const shot=await view.takeScreenshot({width:w,height:h,format:'png'});
+    const base=await loadImage(shot.dataUrl),canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;const ctx=canvas.getContext('2d');ctx.drawImage(base,0,0,w,h);
+    if(radarCanvas.width&&radarVisible){const p=radarPlacement(w,h);ctx.globalAlpha=Number(radarCanvas.style.opacity);ctx.imageSmoothingEnabled=false;ctx.drawImage(radarCanvas,p.x,p.y,p.w,p.h);ctx.globalAlpha=1;ctx.imageSmoothingEnabled=true}
+    ctx.save();ctx.scale(reportMapScale,reportMapScale);drawMapPins(ctx,1200,750);ctx.restore();return canvas;
   }
   async function refreshReportMap(){
     if(reportView.hidden)return;const serial=++reportRenderSerial;
@@ -494,9 +495,10 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
     ctx.fillText('รายงานเฝ้าระวังฝนใกล้นิคมอุตสาหกรรม',w/2,44);
     ctx.font='17px Sarabun, sans-serif';ctx.fillText('เรดาร์ฝนระยอง · '+new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok',dateStyle:'long',timeStyle:'short'}),w/2,77);
     ctx.strokeStyle='#253444';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(40,98);ctx.lineTo(w-40,98);ctx.stroke();
-    const cropped=document.createElement('canvas');cropped.width=c.w;cropped.height=c.h;
-    const mapCtx=cropped.getContext('2d');mapCtx.drawImage(mapImage,c.x,c.y,c.w,c.h,0,0,c.w,c.h);
-    mapCtx.save();mapCtx.translate(c.w-146,c.h-213);mapCtx.scale(.68,.68);mapCtx.translate(-(c.w-210),-(c.h-300));drawReportLegend(mapCtx);mapCtx.restore();
+    const cropped=document.createElement('canvas');cropped.width=c.w*reportMapScale;cropped.height=c.h*reportMapScale;
+    const mapCtx=cropped.getContext('2d');mapCtx.drawImage(mapImage,c.x*reportMapScale,c.y*reportMapScale,c.w*reportMapScale,c.h*reportMapScale,0,0,cropped.width,cropped.height);
+    mapCtx.save();mapCtx.translate(cropped.width-273,cropped.height-390);mapCtx.scale(1.3,1.3);
+    mapCtx.translate(-(cropped.width-210),-(cropped.height-300));drawReportLegend(mapCtx);mapCtx.restore();
     ctx.drawImage(cropped,b.x,b.y,b.w,b.h);ctx.strokeStyle='#dce2e9';ctx.lineWidth=1;ctx.strokeRect(b.x,b.y,b.w,b.h);
     ctx.textAlign='left';ctx.fillStyle='#536373';ctx.font='14px Sarabun, sans-serif';ctx.fillText('แหล่งข้อมูล: กรมอุตุนิยมวิทยา / สำนักงานนิคมอุตสาหกรรม กนอ.',40,1513);
     ctx.textAlign='right';ctx.fillText('หน้า 1 / 2',w-40,1513);ctx.textAlign='left';
@@ -527,24 +529,25 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
         if(kind==='rayong'&&radarObjectUrl&&typeof ImageDecoder!=='undefined'){
           let decoder;
           try{
-            const shot=await view.takeScreenshot({width:1200,height:750,format:'png'}),base=await loadImage(shot.dataUrl);
+            const w=1200*reportMapScale,h=750*reportMapScale;
+            const shot=await view.takeScreenshot({width:w,height:h,format:'png'}),base=await loadImage(shot.dataUrl);
             decoder=new ImageDecoder({data:await (await fetch(radarObjectUrl)).arrayBuffer(),type:'image/gif',preferAnimation:true});
             await decoder.tracks.ready;await decoder.completed;
             const total=decoder.tracks.selectedTrack?.frameCount||0;
             if(!total)throw Error('ไม่มีเฟรมเรดาร์');
             const count=Math.min(total,8),step=Math.max(1,Math.ceil(total/count));
             const rain=document.createElement('canvas');rain.width=800;rain.height=800;const rainCtx=rain.getContext('2d',{willReadFrequently:true});rainCtx.imageSmoothingEnabled=false;
-            const mapFrame=document.createElement('canvas');mapFrame.width=1200;mapFrame.height=750;const mapCtx=mapFrame.getContext('2d');
+            const mapFrame=document.createElement('canvas');mapFrame.width=w;mapFrame.height=h;const mapCtx=mapFrame.getContext('2d');
             for(let i=0;i<count;i++){
               const frame=(await decoder.decode({frameIndex:Math.min(i*step,total-1)})).image;
               try{
-                mapCtx.clearRect(0,0,1200,750);mapCtx.drawImage(base,0,0,1200,750);
+                mapCtx.clearRect(0,0,w,h);mapCtx.drawImage(base,0,0,w,h);
                 rainCtx.clearRect(0,0,800,800);rainCtx.drawImage(frame,0,0,800,800);
                 const image=rainCtx.getImageData(0,0,800,800);
                 for(let k=0;k<image.data.length;k+=4)if(!isRainColor(image.data[k],image.data[k+1],image.data[k+2]))image.data[k+3]=0;
                 rainCtx.putImageData(image,0,0);
-                const pos=radarPlacement(1200,750);mapCtx.globalAlpha=Number(radarCanvas.style.opacity);mapCtx.imageSmoothingEnabled=false;mapCtx.drawImage(rain,pos.x,pos.y,pos.w,pos.h);mapCtx.globalAlpha=1;
-                drawMapPins(mapCtx,1200,750);drawRayongSheet(ctx,mapFrame);
+                const pos=radarPlacement(w,h);mapCtx.globalAlpha=Number(radarCanvas.style.opacity);mapCtx.imageSmoothingEnabled=false;mapCtx.drawImage(rain,pos.x,pos.y,pos.w,pos.h);mapCtx.globalAlpha=1;
+                mapCtx.save();mapCtx.scale(reportMapScale,reportMapScale);drawMapPins(mapCtx,1200,750);mapCtx.restore();drawRayongSheet(ctx,mapFrame);
                 writeGifFrame(Math.max(100,Math.round((frame.duration||300000)/1000)*step));encoded++;
                 reportMessage('กำลังสร้าง GIF '+encoded+'/'+count+' เฟรม…');
                 await new Promise(resolve=>setTimeout(resolve,0));
