@@ -8,11 +8,11 @@
 <header><div><h1>เรดาร์ฝน × นิคมอุตสาหกรรม</h1><p>ข้อมูลเรดาร์คอมโพสิท: กรมอุตุนิยมวิทยา · ที่ตั้งผู้ประกอบการและ IEAT: กนอ.</p></div><button id="export" class="primary">ส่งออกรายงาน PDF</button></header>
 <main class="layout"><section class="map-card"><div id="map"></div><nav class="toolbar" aria-label="แผนที่"><button id="country">ทั่วประเทศ</button><button id="east">ภาคตะวันออก</button><button id="rayong">ระยอง</button><button id="radar">ซ่อนเรดาร์</button><button id="play" disabled>เล่นภาพย้อนหลัง</button><label style="background:white;padding:7px;border-radius:8px">ภาพ <input id="frame" aria-label="ลำดับภาพเรดาร์" type="range" min="0" max="0" value="0" disabled></label><label style="background:white;padding:7px;border-radius:8px">ความทึบ <input id="opacity" aria-label="ความทึบเรดาร์" type="range" min="0" max="100" value="68"></label></nav><div class="status" id="status" role="status">กำลังโหลดแผนที่และข้อมูลเรดาร์…</div></section><aside class="side"><div class="side-head"><h2>นิคมในพื้นที่แผนที่ <span id="count">—</span></h2><small>เลื่อนหรือซูมแผนที่เพื่ออัปเดตรายการ · คลิกรายชื่อเพื่อซูม</small></div><ol class="list" id="estates"><li class="empty">กำลังโหลดข้อมูล IEAT…</li></ol><footer>รายการอ้างอิงจากฟิลด์ IEAT ของ EPP_2026_V1 · จุดบนแผนที่เป็นตำแหน่งผู้ประกอบการ</footer></aside></main>
 <script>
-require(['esri/WebMap','esri/views/MapView','esri/layers/FeatureLayer','esri/layers/MediaLayer','esri/layers/support/ImageElement','esri/geometry/Extent'],function(WebMap,MapView,FeatureLayer,MediaLayer,ImageElement,Extent){
+require(['esri/WebMap','esri/views/MapView','esri/layers/FeatureLayer','esri/layers/MediaLayer','esri/layers/support/ImageElement','esri/layers/support/ExtentAndRotationGeoreference','esri/geometry/Extent'],function(WebMap,MapView,FeatureLayer,MediaLayer,ImageElement,ExtentAndRotationGeoreference,Extent){
   const radarUrl='https://weather.tmd.go.th/composite/images/zr/00.png';
   const radarExtent=new Extent({xmin:95,ymin:4,xmax:108,ymax:22.5,spatialReference:{wkid:4326}});
   const map=new WebMap({portalItem:{id:'3d24287ac6ea49cd823625ddad496e01'}});
-  const radar=new MediaLayer({title:'เรดาร์คอมโพสิท TMD',opacity:.68,source:[new ImageElement({image:radarUrl,georeference:{extent:radarExtent}})]});
+  const radar=new MediaLayer({title:'เรดาร์คอมโพสิท TMD',opacity:.68,source:[new ImageElement({image:radarUrl,georeference:new ExtentAndRotationGeoreference({extent:radarExtent})})]});
   const businesses=new FeatureLayer({url:'https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/EPP_2026_V1/FeatureServer/0',title:'ผู้ประกอบการ (IEAT)',outFields:['IEAT','mercant_name'],popupTemplate:{title:'{mercant_name}',content:'นิคมอุตสาหกรรม: {IEAT}'},renderer:{type:'simple',symbol:{type:'simple-marker',size:5,color:'#355f97',outline:{color:'#fff',width:.5}}}});
   map.add(radar);map.add(businesses);
   const view=new MapView({container:'map',map,center:[101,13.3],zoom:6});
@@ -21,7 +21,7 @@ require(['esri/WebMap','esri/views/MapView','esri/layers/FeatureLayer','esri/lay
   const slider=document.getElementById('frame'),play=document.getElementById('play');
   function showFrame(index){
     if(!frames.length)return;frameIndex=(index+frames.length)%frames.length;slider.value=frameIndex;
-    const frame=frames[frameIndex];radar.source=[new ImageElement({image:'https://weather.tmd.go.th/composite/images/'+frame.file,georeference:{extent:radarExtent}})];
+    const frame=frames[frameIndex];radar.source=[new ImageElement({image:'https://weather.tmd.go.th/composite/images/'+frame.file,georeference:new ExtentAndRotationGeoreference({extent:radarExtent})})];
     setStatus('เรดาร์คอมโพสิท TMD · '+frame.time+' UTC · ภาพ '+(frameIndex+1)+'/'+frames.length);
   }
   fetch('https://weather.tmd.go.th/composite/images_composite.list',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error(r.status);return r.text()}).then(data=>{
