@@ -25,17 +25,9 @@
       t:s.observed_at||"–",agency:s.agency||"ThaiWater",lat:s.lat,lon:s.lon
     }));
   }
-  function renderEstateRanks(estates){
+  function renderEstateRanks(){
     const body=$("estateRanks");if(!body)return;
-    if(!estates.length){body.innerHTML='<tr><td colspan="6" class="table-empty">ไม่พบนิคมอุตสาหกรรมเข้าเกณฑ์เฝ้าระวังจากข้อมูลล่าสุด</td></tr>';return}
-    body.innerHTML=estates.slice(0,12).map((e,i)=>{
-      const rainfall=e.max_rainfall_mm==null?"–":fmt(e.max_rainfall_mm)+" มม.";
-      const distance=e.nearest_alert_km==null?"–":fmt(e.nearest_alert_km)+" กม.";
-      const sourceStatus=(e.status||"").trim(),score=Number(e.severity_score)||0;
-      const level=/ลด|ปกติ/.test(sourceStatus)?"normal":/คงที่|ทรงตัว|เฝ้าระวัง|เตือน/.test(sourceStatus)?"warning":/เพิ่ม|วิกฤต|ล้น|สูงมาก/.test(sourceStatus)||score>=4?"critical":score>=2?"warning":"normal";
-      const status=sourceStatus||(level==="critical"?"วิกฤต":level==="warning"?"เฝ้าระวัง":"ปกติ");
-      return `<tr><td>${i+1}</td><td><b>${e.name}</b></td><td>${fmt(e.alert_station_count,0)} สถานี</td><td>${distance}</td><td>${rainfall}</td><td><button type="button" class="water-status-cell map-cell-zoom ${level}" data-map-lat="${e.lat}" data-map-lon="${e.lon}" data-map-label="${e.name}">${status}</button></td></tr>`;
-    }).join("");
+    body.innerHTML='<tr><td colspan="6" class="table-empty" style="padding:24px;line-height:1.7">ยังไม่มีข้อมูลตำแหน่งน้ำท่วมที่ตรวจพบพร้อมวันเวลาให้แสดงในระบบนี้ ข้อมูลสถานีฝนและระดับน้ำไม่สามารถใช้ยืนยันว่าจุดใดน้ำท่วมแล้วได้<br><a href="https://disaster.gistda.or.th/flood" target="_blank" rel="noopener noreferrer">เปิดแผนที่พื้นที่น้ำท่วมของ GISTDA เพื่อตรวจสอบข้อมูลล่าสุด ↗</a></td></tr>';
   }
   function apply(data){
     window.IEAT_LIVE_DATA=data;
