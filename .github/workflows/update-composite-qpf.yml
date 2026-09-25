@@ -1,0 +1,30 @@
+name: Update nationwide radar at 13:00 Thailand time
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 06:00 UTC = 13:00 Thailand. Retry if TMD publishes the image later.
+    - cron: "15,35,55 6 * * *"
+    - cron: "20 7 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nationwide-composite-qpf
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download today's 13:00 radar image
+        run: python scripts/update_composite_qpf.py
+      - name: Publish image and source time
+        run: |
+          git add docs/assets/composite-qpf-1300.gif docs/data/composite-qpf.json
+          if git diff --cached --quiet; then exit 0; fi
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m "Update nationwide radar image at 13:00 Thailand time"
+          git push
