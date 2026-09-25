@@ -7,7 +7,7 @@ import urllib.request
 from PIL import Image
 
 SOURCE = 'https://weather.tmd.go.th/ryg/rygloop.gif'
-OUTPUT = pathlib.Path('data/ryg-rain-overlay.gif')
+OUTPUT = pathlib.Path('docs/data/ryg-rain-overlay.gif')
 
 
 def color_is_echo(r, g, b, x, y):
