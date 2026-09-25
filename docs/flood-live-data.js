@@ -112,6 +112,7 @@
   }
   window.addEventListener("DOMContentLoaded",()=>{
     banner();
+    renderObservedFloods();
     if(window.IEAT_THAIWATER_DATA?.summary)apply(window.IEAT_THAIWATER_DATA);
     load();
   });
