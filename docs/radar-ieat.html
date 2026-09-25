@@ -38,6 +38,7 @@ require(['esri/WebMap','esri/views/MapView','esri/layers/FeatureLayer','esri/geo
     if(radarCanvas.width!==radarImage.naturalWidth||radarCanvas.height!==radarImage.naturalHeight){
       radarCanvas.width=radarImage.naturalWidth;radarCanvas.height=radarImage.naturalHeight;
     }
+    radarContext.clearRect(0,0,radarCanvas.width,radarCanvas.height);
     radarContext.drawImage(radarImage,0,0);
     const frame=radarContext.getImageData(0,0,radarCanvas.width,radarCanvas.height),pixels=frame.data;
     for(let i=0;i<pixels.length;i+=4){
