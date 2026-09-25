@@ -1,0 +1,31 @@
+name: Update GISTDA observed flood
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "42 */3 * * *"
+permissions:
+  contents: write
+concurrency:
+  group: update-gistda-flood
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Fetch observed flood polygons
+        env:
+          GISTDA_API_KEY: ${{ secrets.GISTDA_API_KEY }}
+        run: python scripts/fetch_gistda_flood.py
+      - name: Publish refreshed flood feed
+        run: |
+          if [[ -z "$(git status --porcelain -- docs/data/gistda_flood_latest.geojson)" ]]; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data/gistda_flood_latest.geojson
+          git commit -m "Update observed flood areas [skip ci]"
+          git push
