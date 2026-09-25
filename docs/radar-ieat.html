@@ -24,7 +24,7 @@ button.primary{background:#59267c;border-color:#59267c}
 <header><div><h1>เรดาร์ฝนระยอง × นิคมอุตสาหกรรม</h1><p>ภาพฝนจาก <a href="https://weather.tmd.go.th/rygloop.php" target="_blank" rel="noopener">TMD Rayong Loop</a> · ที่ตั้งผู้ประกอบการและ IEAT: กนอ.</p></div><button id="export" class="primary">ส่งออกรายงาน PDF</button></header>
 <main class="layout"><section class="map-card"><div id="map"></div><img id="radarImage" alt="" aria-hidden="true" style="display:none"><canvas id="radarCanvas" aria-label="ภาพฝนเรดาร์ระยอง กรองพื้นหลังออก" role="img" style="position:absolute;z-index:1;pointer-events:none;display:none"></canvas><svg id="radarRings" viewBox="0 0 800 800" aria-label="วงระยะเรดาร์ 50 100 150 200 และ 240 กิโลเมตร" role="img" style="position:absolute;z-index:2;pointer-events:none;display:none;overflow:visible"><g fill="none" stroke="#171717" stroke-width="1.4" opacity=".9"><circle cx="410" cy="395" r="83"/><circle cx="410" cy="395" r="166"/><circle cx="410" cy="395" r="249"/><circle cx="410" cy="395" r="332"/><circle cx="410" cy="395" r="399"/></g><g fill="#111" font-size="14" font-weight="600" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="3"><text x="410" y="314">50 km</text><text x="410" y="563">100 km</text><text x="410" y="646">150 km</text><text x="410" y="729">200 km</text><text x="410" y="789">240 km</text></g></svg><nav class="toolbar" aria-label="แผนที่"><button id="country">ทั่วประเทศ</button><button id="east">ภาคตะวันออก</button><button id="rayong">ระยอง</button><button id="radar">ซ่อนเรดาร์</button><label style="background:white;padding:7px;border-radius:8px">ความทึบ <input id="opacity" aria-label="ความทึบเรดาร์" type="range" min="0" max="100" value="85"></label></nav><div class="status" id="status" role="status">กำลังโหลดแผนที่และข้อมูลเรดาร์ระยอง…</div></section><aside class="side"><div class="side-head"><h2>จำนวนนิคมอุตสาหกรรมที่อยู่ในพื้นที่เรดาร์ <span id="count">—</span></h2><small>แสดงรายชื่อนิคมในรัศมีเรดาร์ระยอง · คลิกรายชื่อเพื่อซูม</small></div><ol class="list" id="estates"><li class="empty">กำลังโหลดข้อมูล IEAT…</li></ol><footer>รายการอ้างอิงจากฟิลด์ IEAT ของ EPP_2026_V1 · เรดาร์ระยองครอบคลุมเฉพาะพื้นที่รอบสถานี</footer></aside></main>
 <script>
-require(['esri/WebMap','esri/views/MapView','esri/layers/FeatureLayer','esri/geometry/Point','esri/geometry/Circle','esri/widgets/Search','esri/widgets/LayerList','esri/widgets/Legend','esri/widgets/Expand'],function(WebMap,MapView,FeatureLayer,Point,Circle,Search,LayerList,Legend,Expand){
+require(['esri/WebMap','esri/views/MapView','esri/layers/FeatureLayer','esri/geometry/Point','esri/geometry/Circle','esri/widgets/Search','esri/widgets/LayerList','esri/widgets/Legend','esri/widgets/Expand','esri/widgets/BasemapGallery','esri/layers/GraphicsLayer','esri/Graphic'],function(WebMap,MapView,FeatureLayer,Point,Circle,Search,LayerList,Legend,Expand,BasemapGallery,GraphicsLayer,Graphic){
   // TMD Rayong scan: 800px square, 240 km radius, centre at pixel (410,395).
   // Radar station: 12°38′01″N, 101°20′26″E (TMD station table).
   const station={lat:12+38/60+1/3600,lon:101+20/60+26/3600};
@@ -32,14 +32,31 @@ require(['esri/WebMap','esri/views/MapView','esri/layers/FeatureLayer','esri/geo
   const bounds={west:station.lon-410*lonPerPixel,east:station.lon+390*lonPerPixel,north:station.lat+395*latPerPixel,south:station.lat-405*latPerPixel};
   const radarImage=document.getElementById('radarImage'),radarCanvas=document.getElementById('radarCanvas'),radarRings=document.getElementById('radarRings');
   const radarContext=radarCanvas.getContext('2d',{willReadFrequently:true});let radarVisible=true;
-  radarCanvas.style.opacity='.85';radarImage.src='./data/ryg-rain-overlay.gif';
+  radarCanvas.style.opacity='.85';
+  let lastRadarLoaded=0,radarLoading=false;
+  function reloadRadar(){
+    if(radarLoading)return;
+    radarLoading=true;
+    const probe=new Image();
+    probe.onload=()=>{
+      radarImage.src=probe.src;
+      lastRadarLoaded=Date.now();
+      radarLoading=false;
+    };
+    probe.onerror=()=>{
+      radarLoading=false;
+      if(!lastRadarLoaded)setStatus('ยังโหลดภาพเรดาร์ล่าสุดจาก TMD ไม่สำเร็จ');
+      else setStatus('ติดต่อ TMD ไม่สำเร็จ แสดงภาพที่โหลดไว้ก่อนหน้า');
+    };
+    probe.src='/api/rayong-radar.gif?t='+Date.now();
+  }
+  reloadRadar();
+  setInterval(reloadRadar,120000);
   function renderRadarFrame(){
     if(!radarImage.complete||!radarImage.naturalWidth||!radarVisible)return;
-    if(radarCanvas.width!==radarImage.naturalWidth||radarCanvas.height!==radarImage.naturalHeight){
-      radarCanvas.width=radarImage.naturalWidth;radarCanvas.height=radarImage.naturalHeight;
-    }
-    radarContext.clearRect(0,0,radarCanvas.width,radarCanvas.height);
-    radarContext.drawImage(radarImage,0,0);
+    if(radarCanvas.width!==800||radarCanvas.height!==800){radarCanvas.width=800;radarCanvas.height=800}
+    radarContext.clearRect(0,0,800,800);
+    radarContext.drawImage(radarImage,0,0,Math.min(800,radarImage.naturalWidth),Math.min(800,radarImage.naturalHeight),0,0,800,800);
     const frame=radarContext.getImageData(0,0,radarCanvas.width,radarCanvas.height),pixels=frame.data;
     for(let i=0;i<pixels.length;i+=4){
       const r=pixels[i],g=pixels[i+1],b=pixels[i+2];
@@ -53,11 +70,13 @@ require(['esri/WebMap','esri/views/MapView','esri/layers/FeatureLayer','esri/geo
   }
   setInterval(renderRadarFrame,180);
   const map=new WebMap({portalItem:{id:'3d24287ac6ea49cd823625ddad496e01'}});
+  const boundaryHighlight=new GraphicsLayer({title:'ขอบเขตนิคมฯ ที่เลือก',listMode:'hide'});map.add(boundaryHighlight);
   const businesses=new FeatureLayer({url:'https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/EPP_2026_V1/FeatureServer/0',title:'ผู้ประกอบการ (IEAT)',outFields:['IEAT','mercant_name'],popupTemplate:{title:'{mercant_name}',content:'นิคมอุตสาหกรรม: {IEAT}'},renderer:{type:'simple',symbol:{type:'simple-marker',size:5,color:'#355f97',outline:{color:'#fff',width:.5}}}});
   map.add(businesses);
   const view=new MapView({container:'map',map,center:[101,13.3],zoom:6});
   const search=new Search({view,includeDefaultSources:true,allPlaceholder:'ค้นหาที่อยู่หรือสถานที่'});
   view.ui.add(search,{position:'top-right',index:0});
+  view.ui.add(new Expand({view,content:new BasemapGallery({view}),expandIconClass:'esri-icon-basemap',expandTooltip:'เลือกแผนที่ฐาน'}),{position:'top-right',index:3});
   const layerListContainer=document.createElement('div');
   const layerList=new LayerList({view,container:layerListContainer});
   const layerPanel=document.createElement('div');
@@ -77,10 +96,10 @@ require(['esri/WebMap','esri/views/MapView','esri/layers/FeatureLayer','esri/geo
     const se=view.toScreen(new Point({longitude:bounds.east,latitude:bounds.south}));
     for(const overlay of [radarCanvas,radarRings])Object.assign(overlay.style,{left:nw.x+'px',top:nw.y+'px',width:(se.x-nw.x)+'px',height:(se.y-nw.y)+'px',display:radarVisible?'block':'none'});
   }
-  radarImage.onload=()=>{positionRadar();renderRadarFrame();setStatus('ภาพฝนจาก TMD Rayong Loop · อัปเดตผ่านไฟล์ภาพของรีโป โปรดตรวจเวลาภาพจากต้นทาง')};
+  radarImage.onload=()=>{positionRadar();renderRadarFrame();setStatus('')};
   radarImage.onerror=()=>setStatus('โหลดภาพฝนระยองไม่สำเร็จ');
   const clean=s=>String(s||'').trim();
-  function setStatus(s){status.textContent=s}
+  function setStatus(s){status.textContent=s;status.style.display=s?'block':'none'}
   async function refresh(){
     const serial=++querySerial;
     count.textContent='…';list.replaceChildren();
@@ -97,10 +116,42 @@ require(['esri/WebMap','esri/views/MapView','esri/layers/FeatureLayer','esri/geo
       names=[...all.values()].sort((a,b)=>a.name.localeCompare(b.name,'th'));
       count.textContent=names.length.toLocaleString('th-TH');
       if(!names.length){const li=document.createElement('li');li.className='empty';li.textContent='ไม่พบนิคมในพื้นที่เรดาร์';list.append(li)}
-      for(const row of names){const li=document.createElement('li'),btn=document.createElement('button');btn.style.cssText='border:0;box-shadow:none;text-align:left;width:100%;padding:0;color:inherit';const b=document.createElement('b');b.textContent=row.name;btn.append(b);btn.onclick=()=>view.goTo({target:row.point,zoom:12});li.append(btn);list.append(li)}
+      for(const row of names){const li=document.createElement('li'),btn=document.createElement('button');btn.style.cssText='border:0;box-shadow:none;text-align:left;width:100%;padding:0;color:inherit';const b=document.createElement('b');b.textContent=row.name;btn.append(b);btn.onclick=async()=>{await view.goTo({target:row.point,zoom:12});if(!await showEstateBoundary(row.point,row.name))view.popup.open({location:row.point,title:row.name,content:'มีข้อมูลตำแหน่งนิคมฯ แต่ยังไม่พบขอบเขต polygon จากแผนที่ กนอ.'})};li.append(btn);list.append(li)}
       if(offset>=20000)setStatus('รายการอาจไม่ครบ (เกิน 20,000 จุด)');
     }catch(err){if(serial!==querySerial)return;names=[];count.textContent='—';list.innerHTML='<li class="empty">โหลดรายชื่อนิคมไม่สำเร็จ</li>';setStatus('ไม่สามารถอ่านข้อมูล IEAT ได้: '+err.message)}
   }
+  const estateKey=name=>clean(name).split(' ').join('').toLowerCase();
+  function estateName(attributes){
+    const values=Object.values(attributes||{}).filter(value=>typeof value==='string'&&value.length<180);
+    return values.find(value=>names.some(row=>estateKey(row.name)===estateKey(value)))||'';
+  }
+  async function showEstateBoundary(point,preferredName){
+    boundaryHighlight.removeAll();
+    const candidates=map.allLayers.toArray().filter(layer=>layer.type==='feature'&&layer.visible);
+    for(const layer of candidates){
+      try{
+        await layer.load();if(layer.geometryType!=='polygon')continue;
+        const query=layer.createQuery();query.geometry=point;query.spatialRelationship='intersects';
+        query.returnGeometry=true;query.outFields=['*'];query.num=10;
+        const response=await layer.queryFeatures(query);
+        for(const feature of response.features){
+          const name=estateName(feature.attributes);
+          if(!name||preferredName&&estateKey(name)!==estateKey(preferredName))continue;
+          boundaryHighlight.add(new Graphic({geometry:feature.geometry,symbol:{type:'simple-fill',color:[89,38,124,.12],outline:{color:[89,38,124,1],width:3}}}));
+          view.popup.open({location:point,title:name,content:'ขอบเขตนิคมอุตสาหกรรมจากชั้นข้อมูล ArcGIS'});
+          return true;
+        }
+      }catch(error){console.warn('Boundary layer query failed',layer.title,error)}
+    }
+    return false;
+  }
+  view.on('click',async event=>{
+    const point=view.toMap({x:event.x,y:event.y});
+    if(point&&!await showEstateBoundary(point)){
+      const query=businesses.createQuery();query.geometry=point;query.distance=2;query.units='kilometers';query.outFields=['IEAT'];query.returnGeometry=false;query.num=10;
+      try{const result=await businesses.queryFeatures(query);const name=result.features.map(feature=>clean(feature.attributes.IEAT)).find(Boolean);if(name)view.popup.open({location:point,title:name,content:'พบนิคมฯ ใกล้จุดที่เลือก แต่ไม่มีขอบเขต polygon ที่ยืนยันได้'})}catch(error){console.warn('Estate lookup failed',error)}
+    }
+  });
   view.when(()=>{positionRadar();refresh();view.watch('extent',positionRadar)}).catch(e=>setStatus('เปิดแผนที่ กนอ. ไม่สำเร็จ: '+e.message));
   document.getElementById('country').onclick=()=>view.goTo({center:[101,13.3],zoom:6});
   document.getElementById('east').onclick=()=>view.goTo({center:[101.55,12.8],zoom:9});
