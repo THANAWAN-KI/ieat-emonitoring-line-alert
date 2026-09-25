@@ -1,14 +1,30 @@
 <!doctype html>
 <html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>เรดาร์ฝนและนิคมอุตสาหกรรม | กนอ.</title>
-<link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css"><script src="https://js.arcgis.com/4.30/"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css"><script src="https://js.arcgis.com/4.30/"></script>
 <style>
 *{box-sizing:border-box}body{margin:0;font:15px/1.5 Sarabun,'Noto Sans Thai',sans-serif;color:#27313e;background:#f4f6f9}button,input{font:inherit}header{padding:15px 22px;background:#fff;border-bottom:1px solid #dce2e9;display:flex;gap:15px;align-items:center;justify-content:space-between}h1{font-size:21px;margin:0}header p{margin:0;color:#667382;font-size:12px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:12px;padding:12px;height:calc(100vh - 79px);min-height:540px}.map-card,.side{background:#fff;border:1px solid #dce2e9;border-radius:12px;overflow:hidden}.map-card{position:relative}#map{height:100%;width:100%}.toolbar{position:absolute;top:14px;left:14px;z-index:2;display:flex;gap:6px;flex-wrap:wrap;max-width:calc(100% - 28px)}button{border:1px solid #cad4df;background:#fff;color:#245181;border-radius:8px;padding:7px 10px;cursor:pointer;box-shadow:0 2px 7px #172a3d20}button:hover{background:#eaf2fa}button.primary{background:#245181;color:#fff;border-color:#245181}.status{position:absolute;bottom:12px;left:12px;right:12px;z-index:2;background:#fffef2e8;border:1px solid #e6dbb6;border-radius:8px;padding:7px 10px;font-size:12px}.side{display:flex;flex-direction:column}.side-head{padding:14px;border-bottom:1px solid #dce2e9}.side-head h2{margin:0;font-size:17px}.side-head small{color:#667382}.list{overflow:auto;flex:1;margin:0;padding:0;list-style:none}.list li{border-bottom:1px solid #edf0f4;padding:9px 14px}.list li b{display:block;font-size:13px}.list li small{color:#667382}.empty{padding:20px;color:#667382}footer{padding:9px 14px;border-top:1px solid #dce2e9;font-size:11px;color:#667382}@media(max-width:800px){header{align-items:flex-start}.layout{height:auto;display:block}.map-card{height:60vh;min-height:380px}.side{height:330px;margin-top:12px}}
+/* Typography and spacing aligned with hub.html */
+html,body,button,input,select,.esri-widget{font-family:"Noto Sans Thai","Segoe UI",Tahoma,sans-serif!important}
+body{font-size:16px;line-height:1.55;color:#34383f;background:#fbfbfc}
+header{min-height:64px;padding:10px 28px;border-bottom:1px solid #e5e7eb;box-shadow:0 2px 7px #1e242c17}
+h1{font-size:18px;font-weight:500;line-height:1.3}header p{font-size:11px;color:#8a8e94}
+.layout{height:calc(100vh - 80px);padding:16px 28px;gap:14px}
+.map-card,.side{border:0;border-radius:14px;box-shadow:0 3px 18px #2a3a4b12}
+.side-head{border-bottom:1px solid #eff1f4}.side-head h2{font-size:16px;font-weight:500}.side-head small,.list li small{font-size:11px;color:#89919a}
+.list li b{font-size:13px;font-weight:500}
+button{font-size:13px;border-color:#dfe4e9;color:#59267c;box-shadow:none}
+button.primary{background:#59267c;border-color:#59267c}
+.status,footer{font-size:11px}
+.esri-widget{font-size:13px}.esri-layer-list__item-title,.esri-legend__layer-caption{font-size:13px}
+.radar-layer-control{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid #eff1f4;font-size:13px;cursor:pointer}
+.radar-layer-control input{accent-color:#59267c}
+@media(max-width:800px){header{padding:10px 12px;flex-wrap:wrap}.layout{height:auto;padding:10px}.map-card{height:60vh;min-height:380px}}
 </style></head><body>
 <header><div><h1>เรดาร์ฝนระยอง × นิคมอุตสาหกรรม</h1><p>ภาพฝนจาก <a href="https://weather.tmd.go.th/rygloop.php" target="_blank" rel="noopener">TMD Rayong Loop</a> · ที่ตั้งผู้ประกอบการและ IEAT: กนอ.</p></div><button id="export" class="primary">ส่งออกรายงาน PDF</button></header>
 <main class="layout"><section class="map-card"><div id="map"></div><img id="radarImage" alt="ภาพฝนเคลื่อนไหวจากเรดาร์ระยอง" style="position:absolute;z-index:1;pointer-events:none;display:none"><nav class="toolbar" aria-label="แผนที่"><button id="country">ทั่วประเทศ</button><button id="east">ภาคตะวันออก</button><button id="rayong">ระยอง</button><button id="radar">ซ่อนเรดาร์</button><label style="background:white;padding:7px;border-radius:8px">ความทึบ <input id="opacity" aria-label="ความทึบเรดาร์" type="range" min="0" max="100" value="85"></label></nav><div class="status" id="status" role="status">กำลังโหลดแผนที่และข้อมูลเรดาร์ระยอง…</div></section><aside class="side"><div class="side-head"><h2>นิคมในพื้นที่แผนที่ <span id="count">—</span></h2><small>เลื่อนหรือซูมแผนที่เพื่ออัปเดตรายการ · คลิกรายชื่อเพื่อซูม</small></div><ol class="list" id="estates"><li class="empty">กำลังโหลดข้อมูล IEAT…</li></ol><footer>รายการอ้างอิงจากฟิลด์ IEAT ของ EPP_2026_V1 · เรดาร์ระยองครอบคลุมเฉพาะพื้นที่รอบสถานี</footer></aside></main>
 <script>
-require(['esri/WebMap','esri/views/MapView','esri/layers/FeatureLayer','esri/geometry/Point'],function(WebMap,MapView,FeatureLayer,Point){
+require(['esri/WebMap','esri/views/MapView','esri/layers/FeatureLayer','esri/geometry/Point','esri/widgets/Search','esri/widgets/LayerList','esri/widgets/Legend','esri/widgets/Expand'],function(WebMap,MapView,FeatureLayer,Point,Search,LayerList,Legend,Expand){
   // TMD Rayong scan: 800px square, 240 km radius, centre at pixel (410,395).
   // Radar station: 12°38′01″N, 101°20′26″E (TMD station table).
   const station={lat:12+38/60+1/3600,lon:101+20/60+26/3600};
@@ -20,6 +36,18 @@ require(['esri/WebMap','esri/views/MapView','esri/layers/FeatureLayer','esri/geo
   const businesses=new FeatureLayer({url:'https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/EPP_2026_V1/FeatureServer/0',title:'ผู้ประกอบการ (IEAT)',outFields:['IEAT','mercant_name'],popupTemplate:{title:'{mercant_name}',content:'นิคมอุตสาหกรรม: {IEAT}'},renderer:{type:'simple',symbol:{type:'simple-marker',size:5,color:'#355f97',outline:{color:'#fff',width:.5}}}});
   map.add(businesses);
   const view=new MapView({container:'map',map,center:[101,13.3],zoom:6});
+  const search=new Search({view,includeDefaultSources:true,allPlaceholder:'ค้นหาที่อยู่หรือสถานที่'});
+  view.ui.add(search,{position:'top-right',index:0});
+  const layerListContainer=document.createElement('div');
+  const layerList=new LayerList({view,container:layerListContainer});
+  const layerPanel=document.createElement('div');
+  const radarControl=document.createElement('label');radarControl.className='radar-layer-control';
+  const radarCheckbox=document.createElement('input');radarCheckbox.type='checkbox';radarCheckbox.checked=true;
+  radarControl.append(radarCheckbox,document.createTextNode('เรดาร์ฝนระยอง (TMD)'));
+  layerPanel.append(radarControl,layerListContainer);
+  view.ui.add(new Expand({view,content:layerPanel,expandIconClass:'esri-icon-layers',expandTooltip:'เปิดปิดชั้นข้อมูล'}),{position:'top-right',index:1});
+  view.ui.add(new Expand({view,content:new Legend({view}),expandIconClass:'esri-icon-legend',expandTooltip:'คำอธิบายสัญลักษณ์'}),{position:'top-right',index:2});
+  radarCheckbox.onchange=()=>setRadarVisible(radarCheckbox.checked);
   const status=document.getElementById('status'), list=document.getElementById('estates'),count=document.getElementById('count');
   let names=[],timer=0,querySerial=0;
   function positionRadar(){
@@ -56,7 +84,8 @@ require(['esri/WebMap','esri/views/MapView','esri/layers/FeatureLayer','esri/geo
   document.getElementById('country').onclick=()=>view.goTo({center:[101,13.3],zoom:6});
   document.getElementById('east').onclick=()=>view.goTo({center:[101.55,12.8],zoom:9});
   document.getElementById('rayong').onclick=()=>view.goTo({center:[101.27,12.68],zoom:11});
-  document.getElementById('radar').onclick=e=>{radarVisible=!radarVisible;radarImage.style.display=radarVisible?'block':'none';e.currentTarget.textContent=radarVisible?'ซ่อนเรดาร์':'แสดงเรดาร์'};
+  function setRadarVisible(visible){radarVisible=visible;radarCheckbox.checked=visible;radarImage.style.display=visible?'block':'none';document.getElementById('radar').textContent=visible?'ซ่อนเรดาร์':'แสดงเรดาร์'}
+  document.getElementById('radar').onclick=()=>setRadarVisible(!radarVisible);
   document.getElementById('opacity').oninput=e=>radarImage.style.opacity=Number(e.target.value)/100;
   document.getElementById('export').onclick=async()=>{
     const btn=document.getElementById('export');btn.disabled=true;btn.textContent='กำลังสร้างรายงาน…';
