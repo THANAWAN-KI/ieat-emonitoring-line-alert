@@ -66,13 +66,21 @@ require(['esri/WebMap','esri/views/MapView','esri/layers/FeatureLayer','esri/geo
       const base=new Image();base.src=shot.dataUrl;await base.decode();ctx.drawImage(base,0,0,1200,750);
       if(radarVisible&&radarImage.naturalWidth){const x=parseFloat(radarImage.style.left)*1200/view.width,y=parseFloat(radarImage.style.top)*750/view.height,w=parseFloat(radarImage.style.width)*1200/view.width,h=parseFloat(radarImage.style.height)*750/view.height;ctx.globalAlpha=Number(radarImage.style.opacity);ctx.drawImage(radarImage,x,y,w,h);ctx.globalAlpha=1}
       const out=window.open('','_blank');if(!out)throw Error('โปรดอนุญาตให้เปิดหน้าต่างรายงาน');
-      const doc=out.document;doc.open();doc.write('<!doctype html><html lang="th"><head><meta charset="utf-8"><title>รายงานเรดาร์และนิคม</title><style>body{font:14px Sarabun,sans-serif;margin:22px;color:#263444}h1{font-size:22px}img{width:100%;max-height:58vh;object-fit:contain}li{padding:3px}small{color:#607080}@media print{button{display:none}}</style></head><body></body></html>');doc.close();
-      const h=doc.createElement('h1');h.textContent='รายงานเรดาร์ฝนและนิคมอุตสาหกรรม';doc.body.append(h);
-      const meta=doc.createElement('p');meta.textContent='ส่งออก: '+new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'})+' · ขอบเขต: พื้นที่ที่แสดงบนแผนที่ · ที่มา: TMD / กนอ.';doc.body.append(meta);
-      const img=doc.createElement('img');img.src=canvas.toDataURL('image/png');img.onload=()=>{out.focus();out.print()};doc.body.append(img);
-      const h2=doc.createElement('h2');h2.textContent='รายชื่อนิคมในกรอบแผนที่ ('+names.length+')';doc.body.append(h2);
-      const ol=doc.createElement('ol');for(const row of names){const li=doc.createElement('li');li.textContent=row.name+' — '+row.total+' ผู้ประกอบการ';ol.append(li)}doc.body.append(ol);
-      const foot=doc.createElement('small');foot.textContent='ภาพเรดาร์จาก TMD เป็นข้อมูลประกอบสถานการณ์ โปรดตรวจเวลาในต้นทาง';doc.body.append(foot);
+      const doc=out.document;doc.open();doc.write('<!doctype html><html lang="th"><head><meta charset="utf-8"><title>รายงานเรดาร์และนิคม</title><style>@page{size:A4 landscape;margin:11mm}body{font:12px Sarabun,sans-serif;margin:14px;color:#263444}h1{font-size:20px;margin:0 0 5px}h2{font-size:15px;margin:8px 0}.report{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(230px,.6fr);gap:14px;align-items:start}.qpf{width:100%;max-height:170mm;object-fit:contain;object-position:top}.estates{max-height:170mm;overflow:auto;border:1px solid #dce2e9;padding:10px}.estates ol{margin:0;padding-left:25px}.estates li{padding:2px 0;break-inside:avoid}.map-detail{break-before:page}.map-detail img{width:100%;max-height:175mm;object-fit:contain}small,.note{color:#607080}.note{font-size:11px;margin:4px 0 9px}@media print{.estates{max-height:none;overflow:visible}}</style></head><body></body></html>');doc.close();
+      const h=doc.createElement('h1');h.textContent='ภาพรวมเรดาร์ฝนและนิคมอุตสาหกรรม';doc.body.append(h);
+      const meta=doc.createElement('p');meta.textContent='ส่งออก: '+new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'})+' · รายการนิคม: ตามกรอบแผนที่ที่เลือก · ที่มา: TMD / กนอ.';doc.body.append(meta);
+      const report=doc.createElement('section');report.className='report';doc.body.append(report);
+      const imageBox=doc.createElement('div');report.append(imageBox);
+      const qpf=doc.createElement('img');qpf.className='qpf';qpf.alt='ภาพ TMD Radar Composite QPF';qpf.src='https://satda.tmd.go.th/wp-content/uploads/data/radar_composite/max/qpf_202609250600.gif';imageBox.append(qpf);
+      const qpfNote=doc.createElement('p');qpfNote.className='note';qpfNote.textContent='ภาพตัวอย่าง TMD Radar Composite / พยากรณ์ฝน 3 ชั่วโมง · เริ่ม 25 ก.ย. 2569 เวลา 13:00 น. · เป็นภาพตามเวลาที่ระบุ ไม่ใช่ภาพล่าสุด';imageBox.append(qpfNote);
+      const estateBox=doc.createElement('aside');estateBox.className='estates';report.append(estateBox);
+      const h2=doc.createElement('h2');h2.textContent='รายชื่อนิคมในกรอบแผนที่ ('+names.length+')';estateBox.append(h2);
+      const ol=doc.createElement('ol');for(const row of names){const li=doc.createElement('li');li.textContent=row.name+' — '+row.total+' ผู้ประกอบการ';ol.append(li)}estateBox.append(ol);
+      const detail=doc.createElement('section');detail.className='map-detail';doc.body.append(detail);
+      const h3=doc.createElement('h2');h3.textContent='พื้นที่ที่ซูมบนแผนที่ กนอ. พร้อมเรดาร์ระยอง';detail.append(h3);
+      const img=doc.createElement('img');img.src=canvas.toDataURL('image/png');detail.append(img);
+      const foot=doc.createElement('small');foot.textContent='ภาพเรดาร์ระยองมาจาก TMD Rayong Loop; วงเรดาร์ครอบคลุมเฉพาะพื้นที่รอบสถานี ตรวจเวลาและพิกัดกับต้นทางก่อนใช้ประกอบการตัดสินใจ';detail.append(foot);
+      await Promise.race([Promise.all([img.decode(),qpf.decode().catch(()=>{qpfNote.textContent='โหลดภาพตัวอย่าง TMD ไม่สำเร็จ กรุณาเปิดลิงก์ต้นทางเพื่อตรวจภาพ';qpf.style.display='none'})]),new Promise(resolve=>setTimeout(resolve,12000))]);out.focus();out.print();
     }catch(e){setStatus('ส่งออกรายงานไม่สำเร็จ: '+e.message)}finally{btn.disabled=false;btn.textContent='ส่งออกรายงาน PDF'}
   };
 });
