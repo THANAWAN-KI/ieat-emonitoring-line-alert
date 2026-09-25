@@ -549,4 +549,21 @@ html body main.wrap .kpi-icon img{display:block!important;width:38px!important;h
 })();
 </script>
 <link rel="stylesheet" href="./mobile-responsive.css?v=20260915-1">
+<style id="pm25-mobile-final">
+@media(max-width:800px){
+  html,body{max-width:100%;overflow-x:hidden}
+  html body main.wrap{width:100%!important;max-width:100%!important;padding-left:10px!important;padding-right:10px!important;overflow-x:hidden}
+  html body main.wrap .dashboard-head{width:100%!important;min-width:0!important;flex-wrap:wrap!important;gap:8px!important}
+  html body main.wrap .head-links{width:100%!important;display:flex!important;flex-wrap:wrap!important;justify-content:flex-start!important;gap:6px!important}
+  html body main.wrap .kpis{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  html body main.wrap .kpi,html body main.wrap .control,html body main.wrap .map-panel{min-width:0!important;max-width:100%!important}
+  html body main.wrap .filters,html body main.wrap .extras{grid-template-columns:minmax(0,1fr)!important}
+  html body main.wrap .filters input,html body main.wrap .filters select{max-width:100%!important}
+  html body main.wrap .map-panel,html body main.wrap .map-panel #viewDiv{width:100%!important;max-width:100%!important;height:500px!important;min-height:500px!important}
+  html body main.wrap .section-head,html body main.wrap .panel-head{height:auto!important;flex-wrap:wrap!important;gap:8px!important}
+  html body main.wrap .table-wrap{display:block!important;width:100%!important;max-width:100%!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch}
+  html body main.wrap .table-wrap table{width:max-content!important;min-width:720px!important;max-width:none!important}
+  html body main.wrap .source-grid{grid-template-columns:minmax(0,1fr)!important}
+}
+</style>
 </body> </html>
