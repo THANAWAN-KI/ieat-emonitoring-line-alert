@@ -18,6 +18,7 @@
     const url=new URL(frame.src,document.baseURI);url.searchParams.set("center",lon+","+lat);url.searchParams.set("scale","75000");frame.src=url.toString();frame.scrollIntoView({behavior:"smooth",block:"center"});
   }}
   async function start(){
+    const style=document.createElement("style");style.textContent="#warning .rain-zoom{background:none;border:0;padding:0;color:#005387;font:inherit;font-weight:700;text-align:left;cursor:pointer}#warning .rain-zoom:hover{text-decoration:underline}#warning .actual-rain-panel,#warning .actual-estate-panel{min-width:0}#warning .actual-rain-panel .table,#warning .actual-estate-panel .table{width:100%}";document.head.appendChild(style);
     const oldRain=document.querySelector("#warning .station-watch-table"),oldEstates=$("ridStationRows")?.closest(".rid-panel");
     if(!oldRain||!oldEstates)return;
     const rainPanel=makePanel("actual-rain-panel","ภาพรวมฝนสะสม 24 ชั่วโมง","สถานีฝนที่วัดได้ตั้งแต่ 20 มม. และอยู่ภายใน 30 กม. จากนิคมฯ • คลิกสถานีเพื่อซูมแผนที่",["สถานีฝน","จังหวัด","ฝนสะสม 24 ชม.","นิคมฯ ใกล้ที่สุด","ระยะห่าง","ข้อมูลล่าสุด"]);
