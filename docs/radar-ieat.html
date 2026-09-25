@@ -10,7 +10,13 @@
 @media(max-width:800px){.radar-legend{right:8px;bottom:8px;width:155px;padding:7px}.legend-body{height:95px}}
 /* Keep estate names and map controls above the rain image. */
 #estateMarkers{position:absolute;inset:0;z-index:20;pointer-events:none;overflow:hidden}
+.map-card #radarCanvas{z-index:10!important}
+.map-card #estateMarkers{z-index:21}
 .estate-marker{position:absolute;display:flex;align-items:center;gap:4px;transform:translate(-50%,-100%);max-width:180px;border:0!important;border-radius:16px;background:#fffffff0!important;color:#4b176d!important;padding:3px 7px!important;box-shadow:0 2px 7px #1b173544!important;font-size:12px!important;line-height:1.2!important;white-space:nowrap;cursor:pointer;pointer-events:auto}
+.list li:has(.estate-choice[aria-pressed="true"]){background:#e4f5e8}
+.list .estate-choice{display:block;width:100%;padding:3px 5px;text-align:left;border:0;box-shadow:none;background:transparent;color:inherit}
+.list .estate-choice[aria-pressed="true"],.list .estate-choice[aria-pressed="true"] b{color:#176437!important;font-weight:700}
+.list .estate-choice:hover{background:#edf7ef}
 .estate-marker-icon{font-size:17px;line-height:1;flex:0 0 auto;filter:drop-shadow(0 1px 1px #fff)}
 .estate-marker-name{font-size:13px!important;font-weight:600;line-height:1.25}
 .estate-marker span{overflow:hidden;text-overflow:ellipsis}
@@ -170,7 +176,11 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
   view.ui.add(new Expand({view,content:new Legend({view}),expandIconClass:'esri-icon-legend',expandTooltip:'คำอธิบายสัญลักษณ์'}),{position:'top-right',index:2});
   radarCheckbox.onchange=()=>setRadarVisible(radarCheckbox.checked);
   const status=document.getElementById('status'), list=document.getElementById('estates'),count=document.getElementById('count'),markers=document.getElementById('estateMarkers');
-  let names=[],querySerial=0;
+  let names=[],querySerial=0,selectedEstate='';
+  function selectEstate(row){
+    selectedEstate=row.name;
+    for(const choice of list.querySelectorAll('.estate-choice'))choice.setAttribute('aria-pressed',String(choice.dataset.estate===selectedEstate));
+  }
   function positionMarkers(){
     for(const marker of markers.children){
       const row=names[Number(marker.dataset.index)],screen=row&&view.toScreen(row.point);
@@ -186,7 +196,7 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
       marker.title=row.name;marker.setAttribute('aria-label',row.name);
       const icon=document.createElement('span');icon.className='estate-marker-icon';icon.textContent='📍';icon.setAttribute('aria-hidden','true');
       const label=document.createElement('span');label.className='estate-marker-name';label.textContent=row.name;marker.append(icon,label);
-      marker.onclick=async event=>{event.stopPropagation();boundaryHighlight.removeAll();await showEstateBoundary(row.point,row.name)};
+      marker.onclick=async event=>{event.stopPropagation();selectEstate(row);await view.goTo({target:row.point,zoom:12});await showEstateBoundary(row.point,row.name)};
       markers.append(marker);
     });
     positionMarkers();
@@ -218,7 +228,7 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
       names=[...all.values()].sort((a,b)=>a.name.localeCompare(b.name,'th'));
       count.textContent=names.length.toLocaleString('th-TH');renderMarkers();
       if(!names.length){const li=document.createElement('li');li.className='empty';li.textContent='ไม่พบนิคมในพื้นที่เรดาร์';list.append(li)}
-      for(const row of names){const li=document.createElement('li'),btn=document.createElement('button');btn.style.cssText='border:0;box-shadow:none;text-align:left;width:100%;padding:0;color:inherit';const b=document.createElement('b');b.textContent=row.name;btn.append(b);btn.onclick=async()=>{await view.goTo({target:row.point,zoom:12});await showEstateBoundary(row.point,row.name)};li.append(btn);list.append(li)}
+      for(const row of names){const li=document.createElement('li'),btn=document.createElement('button');btn.type='button';btn.className='estate-choice';btn.dataset.estate=row.name;btn.setAttribute('aria-pressed',String(row.name===selectedEstate));const b=document.createElement('b');b.textContent=row.name;btn.append(b);btn.onclick=async()=>{selectEstate(row);await view.goTo({target:row.point,zoom:12});await showEstateBoundary(row.point,row.name)};li.append(btn);list.append(li)}
       if(offset>=20000)setStatus('รายการอาจไม่ครบ (เกิน 20,000 จุด)');
     }catch(err){if(serial!==querySerial)return;names=[];count.textContent='—';list.innerHTML='<li class="empty">โหลดรายชื่อนิคมไม่สำเร็จ</li>';setStatus('ไม่สามารถอ่านข้อมูล IEAT ได้: '+err.message)}
   }
