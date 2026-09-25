@@ -8,6 +8,7 @@ from PIL import Image
 
 SOURCE = 'https://weather.tmd.go.th/ryg/rygloop.gif'
 OUTPUT = pathlib.Path('docs/data/ryg-rain-overlay.gif')
+ORIGINAL = pathlib.Path('docs/data/ryg-original.gif')
 
 
 def color_is_echo(r, g, b, x, y):
@@ -36,6 +37,8 @@ def main():
     with urllib.request.urlopen(req,timeout=45) as resp:
         data=resp.read(15_000_000)
     source=Image.open(io.BytesIO(data))
+    if source.n_frames < 2 or source.size[0] < 800:
+        raise RuntimeError('TMD image is incomplete; preserving previous files')
     frames=[]; durations=[]
     for idx in range(source.n_frames):
         source.seek(idx)
@@ -56,6 +59,7 @@ def main():
         frames.append(pal)
         durations.append(max(100,source.info.get('duration',500)))
     OUTPUT.parent.mkdir(parents=True,exist_ok=True)
+    ORIGINAL.write_bytes(data)
     frames[0].save(OUTPUT,save_all=True,append_images=frames[1:],duration=durations,loop=0,transparency=255,disposal=2,optimize=False)
     print(f'{OUTPUT}: {len(frames)} frames, {OUTPUT.stat().st_size} bytes')
 
