@@ -89,7 +89,7 @@ html body .radar-site-actions #export:hover{background:#51792d}
 </head><body>
 <header class="radar-site-header"><a class="radar-site-brand" href="./daily-situation.html" aria-label="ไปหน้าแรก"><img src="./assets/TH-Vertical.png" alt="กนอ."><span><strong>ระบบสารสนเทศและการเชื่อมโยงข้อมูล</strong><small>เรดาร์ฝนระยองและนิคมอุตสาหกรรม</small></span></a><div class="radar-site-actions"><span id="radarClock" class="radar-site-clock"></span><a class="nav-active" href="./daily-situation.html" aria-current="page">หน้าแรก</a><a href="./information.html#overview">ข้อมูล</a><a href="./hub.html">Disaster</a><button id="export" class="primary">ส่งออกรายงาน</button></div></header><script>(function(){const clock=document.getElementById('radarClock');function tick(){clock.textContent='🌟'+new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok',weekday:'short',day:'2-digit',month:'short',year:'2-digit',hour:'2-digit',minute:'2-digit'})+' น.'}tick();setInterval(tick,30000)})();</script>
 <main class="layout"><section class="map-card"><div id="map"></div><img id="radarImage" alt="" aria-hidden="true" style="position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none"><div id="estateMarkers" aria-label="ตำแหน่งนิคมอุตสาหกรรม"></div><canvas id="radarCanvas" aria-label="ภาพฝนเรดาร์ระยอง กรองพื้นหลังออก" role="img" style="position:absolute;z-index:1;pointer-events:none;display:none"></canvas><nav class="toolbar" aria-label="แผนที่"><button id="country">ทั่วประเทศ</button><button id="east">ภาคตะวันออก</button><button id="rayong">ระยอง</button><button id="radar">ซ่อนเรดาร์</button><label style="background:white;padding:7px;border-radius:8px">ความทึบ <input id="opacity" aria-label="ความทึบเรดาร์" type="range" min="0" max="100" value="100"></label></nav><aside class="radar-legend" aria-label="คำอธิบายค่าสะท้อนเรดาร์ฝน"><strong>CMAX (dBZ)</strong><div class="legend-body"><div class="legend-gradient" aria-hidden="true"></div><div class="legend-ticks"><span>65+</span><span>50</span><span>40</span><span>30</span><span>20</span><span>10</span></div></div><small>ค่าสะท้อนเรดาร์ ยิ่งสูงสัญญาณฝนยิ่งเข้ม</small><a href="https://weather.tmd.go.th/ryg/rygloop.gif" target="_blank" rel="noopener">ดู GIF และเวลาเรดาร์จาก TMD ↗</a><div id="radarTime" aria-live="polite">กำลังตรวจภาพจาก TMD…</div></aside><div class="status" id="status" role="status">กำลังโหลดแผนที่และข้อมูลเรดาร์ระยอง…</div></section><aside class="side"><div class="side-head"><h2>จำนวนนิคมอุตสาหกรรมที่อยู่ในพื้นที่เรดาร์ <span id="count">—</span></h2><small>แสดงรายชื่อนิคมในรัศมีเรดาร์ระยอง · คลิกรายชื่อเพื่อซูม</small></div><ol class="list" id="estates"><li class="empty">กำลังโหลดข้อมูล IEAT…</li></ol><footer>รายการอ้างอิงจากฟิลด์ IEAT ของ EPP_2026_V1 · เรดาร์ระยองครอบคลุมเฉพาะพื้นที่รอบสถานี</footer></aside></main>
-<section class="report-view" id="reportView" hidden aria-label="ส่งออกรายงานเรดาร์"><div class="report-top"><h2>ส่งออกรายงานเรดาร์ฝนและนิคมอุตสาหกรรม</h2><button id="closeReport">กลับสู่แผนที่</button></div><div class="report-pages"><article class="report-card"><h3>หน้า 1 · เรดาร์ฝนระยอง</h3><div class="report-map-controls"><input id="reportEstateSearch" list="reportEstateOptions" placeholder="ค้นหาชื่อนิคมอุตสาหกรรม" aria-label="ค้นหานิคมอุตสาหกรรม"><datalist id="reportEstateOptions"></datalist><button id="reportSearchButton">ค้นหาและซูม</button><button id="reportZoomIn" aria-label="ซูมเข้า">＋</button><button id="reportZoomOut" aria-label="ซูมออก">－</button><button id="reportReset">ภาพรวมเรดาร์</button></div><div class="report-image" id="rayongReport" title="ลากเพื่อเลื่อนแผนที่ ใช้ล้อเมาส์เพื่อซูม"><img id="rayongReportImage" draggable="false" alt="แผนที่นิคมอุตสาหกรรมและภาพฝนเรดาร์ระยอง"></div><p>ลากแผนที่และใช้ล้อเมาส์เพื่อซูม หรือค้นหานิคมฯ ก่อนดาวน์โหลด</p><button data-save="rayong-png">ดาวน์โหลด PNG</button><button data-save="rayong-gif">ดาวน์โหลด GIF</button></article><article class="report-card"><h3>หน้า 2 · เรดาร์คอมโพสิททั่วประเทศ</h3><div class="report-image report-national"><img id="compositeReportImage" alt="Radar Composite QPF พร้อมตำแหน่งสำนักงานนิคมอุตสาหกรรมทั่วประเทศ"><div id="nationalReportPins" class="report-pins" aria-label="ตำแหน่งนิคมอุตสาหกรรมบนภาพเรดาร์"></div><div id="nationalClusterDetail" class="report-cluster-detail" hidden></div></div><p>ภาพ Radar Composite QPF ตามเวลาของภาพต้นทาง พร้อมตำแหน่งสำนักงานนิคมฯ บนภาพเดียวกัน · ตัวเลขในวงกลมคือจำนวนตำแหน่งใกล้กัน คลิกเพื่อดูรายชื่อ</p><button data-save="national-png">ดาวน์โหลด PNG</button><button data-save="national-gif">ดาวน์โหลด GIF</button></article></div><p class="report-status" id="reportStatus" role="status"></p></section>
+<section class="report-view" id="reportView" hidden aria-label="ส่งออกรายงานเรดาร์"><div class="report-top"><h2>ส่งออกรายงานเรดาร์ฝนและนิคมอุตสาหกรรม</h2><button id="closeReport">กลับสู่แผนที่</button></div><div class="report-pages"><article class="report-card"><h3>หน้า 1 · เรดาร์ฝนระยอง</h3><div class="report-map-controls"><input id="reportEstateSearch" list="reportEstateOptions" placeholder="ค้นหาชื่อนิคมอุตสาหกรรม" aria-label="ค้นหานิคมอุตสาหกรรม"><datalist id="reportEstateOptions"></datalist><button id="reportSearchButton">ค้นหาและซูม</button><button id="reportZoomIn" aria-label="ซูมเข้า">＋</button><button id="reportZoomOut" aria-label="ซูมออก">－</button><button id="reportReset">ภาพรวมเรดาร์</button></div><div class="report-image" id="rayongReport" title="ลากเพื่อเลื่อนแผนที่ ใช้ล้อเมาส์เพื่อซูม"><img id="rayongReportImage" draggable="false" alt="แผนที่นิคมอุตสาหกรรมและภาพฝนเรดาร์ระยอง"></div><p>ลากแผนที่และใช้ล้อเมาส์เพื่อซูม หรือค้นหานิคมฯ ก่อนดาวน์โหลด</p><button data-save="rayong-png">ดาวน์โหลด PNG</button><button data-save="rayong-gif">ดาวน์โหลด GIF</button></article><article class="report-card"><h3>หน้า 2 · เรดาร์คอมโพสิททั่วประเทศ</h3><div class="report-image report-national"><img id="compositeReportImage" alt="Radar Composite QPF พร้อมตำแหน่งสำนักงานนิคมอุตสาหกรรมทั่วประเทศ"><div id="nationalReportPins" class="report-pins" aria-label="ตำแหน่งนิคมอุตสาหกรรมบนภาพเรดาร์"></div><div id="nationalClusterDetail" class="report-cluster-detail" hidden></div></div><p>ภาพ Radar Composite QPF พร้อมตำแหน่งสำนักงานนิคมฯ · ตัวเลขในวงกลมคือจำนวนตำแหน่งใกล้กัน คลิกเพื่อดูรายชื่อ</p><p id="compositeImageTime" aria-live="polite">กำลังตรวจวันเวลาของภาพ…</p><button data-save="national-png">ดาวน์โหลด PNG</button><button data-save="national-gif">ดาวน์โหลด GIF</button></article></div><p class="report-status" id="reportStatus" role="status"></p></section>
 <script>
 require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer','esri/geometry/Point','esri/geometry/Circle','esri/widgets/Search','esri/widgets/LayerList','esri/widgets/Legend','esri/widgets/Expand','esri/widgets/BasemapGallery','esri/layers/GraphicsLayer','esri/Graphic'],function(WebMap,EsriMap,MapView,FeatureLayer,Point,Circle,Search,LayerList,Legend,Expand,BasemapGallery,GraphicsLayer,Graphic){
   // TMD Rayong scan: 800px square, 240 km radius, centre at pixel (410,395).
@@ -334,6 +334,20 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
   document.getElementById('opacity').oninput=e=>radarCanvas.style.opacity=Number(e.target.value)/100;
   const reportView=document.getElementById('reportView'),reportStatus=document.getElementById('reportStatus');
   const qpfUrl='https://feature-tmd-ieat-radar-map-ieat-emonitoring-line-alert.thanawankaiyaso.workers.dev/api/composite-qpf.gif';
+  let nationalRadarLabel='ไม่ทราบวันเวลาภาพต้นทาง';
+  async function nationalRadarSource(){
+    try{
+      const response=await fetch('./data/composite-qpf.json?t='+Date.now(),{cache:'no-store'});
+      if(!response.ok)throw Error('ยังไม่มีภาพรายวัน');
+      const meta=await response.json();
+      if(!/^\d{4}-\d{2}-\d{2}T13:00:00\+07:00$/.test(meta.captured_at)||meta.image!=='assets/composite-qpf-1300.gif')throw Error('ข้อมูลวันเวลาภาพไม่ถูกต้อง');
+      nationalRadarLabel='ภาพวันที่ '+new Date(meta.captured_at).toLocaleDateString('th-TH',{timeZone:'Asia/Bangkok',dateStyle:'long'})+' เวลา 13:00 น. (ประเทศไทย)';
+      return './'+meta.image+'?v='+encodeURIComponent(meta.captured_at);
+    }catch(error){
+      nationalRadarLabel='ภาพสำรองจากต้นทาง · ยังไม่สามารถยืนยันวันเวลาภาพได้';
+      return qpfUrl+'?t='+Date.now();
+    }
+  }
   function reportMessage(message){reportStatus.textContent=message}
   function downloadBlob(blob,filename){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=filename;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000)}
   function loadImage(src){return new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=()=>reject(Error('โหลดภาพต้นทางไม่สำเร็จ'));img.src=src})}
@@ -488,7 +502,7 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
     ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillStyle='#172b3d';
     ctx.font='bold 29px Sarabun, sans-serif';ctx.fillText('รายงานเรดาร์คอมโพสิททั่วประเทศ',width/2,43);
     ctx.font='17px Sarabun, sans-serif';
-    ctx.fillText('Radar Composite QPF · '+new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok',dateStyle:'long',timeStyle:'short'}),width/2,75);
+    ctx.fillText('Radar Composite QPF · '+nationalRadarLabel,width/2,75,width-30);
     ctx.drawImage(image,0,top,width,mapHeight);
     const scale=width/compositePlot.width;
     for(const cluster of nationalClusters){
@@ -544,10 +558,17 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
       await refreshReportMap();reportMessage('หน้า 1 พร้อมแล้ว · ค้นหานิคมฯ หรือซูมก่อนดาวน์โหลดได้');
     }catch(error){reportMessage('หน้า 1: '+error.message)}
     try{
-      const qpf=await fetch(qpfUrl,{cache:'no-store'});if(!qpf.ok)throw Error('โหลดภาพ Radar Composite QPF ไม่สำเร็จ');
+      const source=await nationalRadarSource();
+      let qpf=await fetch(source,{cache:'no-store'});
+      if(!qpf.ok&&source!==qpfUrl){
+        nationalRadarLabel='ภาพสำรองจากต้นทาง · ยังไม่สามารถยืนยันวันเวลาภาพได้';
+        qpf=await fetch(qpfUrl+'?t='+Date.now(),{cache:'no-store'});
+      }
+      if(!qpf.ok)throw Error('โหลดภาพ Radar Composite QPF ไม่สำเร็จ');
       const qpfBlob=await qpf.blob();const old=document.getElementById('compositeReportImage').dataset.url;if(old)URL.revokeObjectURL(old);
       const qpfObjectUrl=URL.createObjectURL(qpfBlob);document.getElementById('compositeReportImage').dataset.url=qpfObjectUrl;document.getElementById('compositeReportImage').src=qpfObjectUrl;
-      await prepareNationalMap();await refreshReportMap();reportMessage('รายงานทั้งสองหน้าพร้อมบันทึก · ค้นหานิคมฯ หรือซูมก่อนดาวน์โหลดได้');
+      document.getElementById('compositeImageTime').textContent=nationalRadarLabel;
+      await prepareNationalMap();await refreshReportMap();reportMessage('รายงานทั้งสองหน้าพร้อมบันทึก · '+nationalRadarLabel);
     }catch(error){reportMessage('หน้า 1 พร้อมใช้งาน · หน้า 2: '+error.message)}
   };
   function drawRayongSheet(ctx,mapImage){
