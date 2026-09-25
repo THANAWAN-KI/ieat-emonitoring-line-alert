@@ -78,8 +78,8 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
  });
  var timer=setTimeout(showFallback,25000);
  if(window.arcgisScriptFailed||typeof window.require!=="function"){clearTimeout(timer);showFallback();return}
- require(["esri/WebMap","esri/views/MapView","esri/widgets/Home","esri/widgets/Search","esri/widgets/LayerList","esri/widgets/Legend","esri/widgets/Expand"],
- function(WebMap,MapView,Home,Search,LayerList,Legend,Expand){
+ require(["esri/WebMap","esri/views/MapView","esri/widgets/Home","esri/widgets/Search","esri/widgets/LayerList","esri/widgets/Legend","esri/widgets/Expand","esri/layers/GeoJSONLayer"],
+ function(WebMap,MapView,Home,Search,LayerList,Legend,Expand,GeoJSONLayer){
   var webmap=new WebMap({portalItem:{id:itemId}});
   webmap.load().then(function(){
    if(fallback)return;
@@ -92,6 +92,14 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
     view.ui.add(new Search({view:view}),"top-right");
     view.ui.add(new Expand({view:view,content:new LayerList({view:view}),group:"map-tools",expandTooltip:"ชั้นข้อมูล"}),"top-right");
     view.ui.add(new Expand({view:view,content:new Legend({view:view}),group:"map-tools",expandTooltip:"คำอธิบายสัญลักษณ์"}),"top-right");
+    fetch("./data/gistda_flood_latest.geojson?v="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw Error("feed unavailable");return r.json()}).then(function(feed){
+     var retrieved=Date.parse(feed.metadata&&feed.metadata.retrieved_at||"");
+     if(!Number.isFinite(retrieved)||Date.now()-retrieved>12*3600000||!Array.isArray(feed.features)||!feed.features.length)return;
+     var layer=new GeoJSONLayer({url:new URL("./data/gistda_flood_latest.geojson",location.href).href,title:"พื้นที่น้ำท่วมที่ตรวจพบ · GISTDA (ย้อนหลัง 7 วัน)",
+      renderer:{type:"simple",symbol:{type:"simple-fill",color:[0,114,221,.35],outline:{color:[0,76,170,.85],width:1}}},
+      popupTemplate:{title:"พื้นที่น้ำท่วมจาก GISTDA",content:"ตรวจสอบวันที่ภาพและรายละเอียดกับแผนที่ต้นทาง: https://disaster.gistda.or.th/flood"}});
+     webmap.add(layer);
+    }).catch(function(){/* No verified polygon feed; retain the watch map without a flood overlay. */});
     if(pending)view.goTo(pending).catch(function(){});
     else if(initialCenter){var coords=initialCenter.split(",").map(Number);if(coords.length===2&&coords.every(Number.isFinite))view.goTo({center:coords,scale:Number.isFinite(initialScale)&&initialScale>0?initialScale:75000}).catch(function(){})}
    }).catch(showFallback);
