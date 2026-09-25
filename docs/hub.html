@@ -262,6 +262,34 @@ body{font-weight:400}
 </style>
 
 <style id="ieat-three-page-navigation">html body #hubInformationHeader nav.header-actions a.main-nav-link{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:35px!important;padding:7px 17px!important;border-radius:22px!important;text-decoration:none!important;white-space:nowrap!important;color:#5a626b!important;background:transparent!important;font-weight:600!important}html body #hubInformationHeader nav.header-actions a.main-nav-link.nav-active,html body #hubInformationHeader nav.header-actions a.main-nav-link.nav-active:hover{background:#598c14!important;color:#fff!important;box-shadow:none!important}@media(max-width:700px){html body #hubInformationHeader nav.header-actions a.main-nav-link{padding:6px 9px!important;font-size:12px!important}}</style>
+<style id="hub-mobile-fit">
+@media(max-width:900px){
+  html,body{max-width:100%;overflow-x:hidden}
+  html body #hubInformationHeader{display:flex!important;flex-wrap:wrap!important;height:auto!important;min-height:0!important;padding:9px 10px!important;gap:6px!important}
+  html body #hubInformationHeader .brand{width:100%!important;max-width:100%!important;flex:1 1 100%!important;min-width:0!important}
+  html body #hubInformationHeader .brand h1{font-size:clamp(13px,4vw,17px)!important;white-space:normal!important}
+  html body #hubInformationHeader .header-right{width:100%!important;min-width:0!important;margin:0!important;justify-content:flex-start!important;overflow-x:auto!important;scrollbar-width:thin}
+  html body #hubInformationHeader nav.header-actions{width:max-content!important;min-width:max-content!important;flex-wrap:nowrap!important}
+  html body #hubInformationHeader nav.header-actions a.main-nav-link{flex:none!important}
+  html body main#captureArea.page{width:100%!important;max-width:100%!important;padding-left:10px!important;padding-right:10px!important;overflow-x:hidden!important}
+  html body main#captureArea.page>nav.tabs{width:auto!important;overflow-x:auto!important;overscroll-behavior-x:contain;scrollbar-width:thin}
+  .fire-dashboard-grid,.map-grid,.risk-layout{grid-template-columns:minmax(0,1fr)!important}
+  .fire-dashboard-grid>*,.map-grid>*,.risk-layout>*{min-width:0!important;max-width:100%!important}
+  .fire-support-grid,.kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .fire-search-panel,.toolbar{grid-template-columns:minmax(0,1fr)!important}
+  .fire-search-panel input,.fire-search-panel select,.toolbar input,.toolbar select{width:100%!important;min-width:0!important}
+  .fire-analysis-map,.risk-map,.analysis-frame,.dss-frame,.other-frame{width:100%!important;max-width:100%!important}
+  .fire-dashboard-grid table,.panel table{max-width:none}
+  .fire-table-wrap,.table-wrap,.table-scroll{max-width:100%!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch}
+}
+@media(max-width:600px){
+  .fire-overview-head,.fire-map-head,.fire-dss-head,.panel-head{height:auto!important;flex-wrap:wrap!important;gap:7px!important}
+  .fire-support-grid,.kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .fire-analysis-map,.risk-map{height:470px!important;min-height:470px!important}
+  .analysis-frame,.dss-frame,.other-frame{height:550px!important}
+  .directory{height:320px!important}
+}
+</style>
 </head><body>
 <header class="header" id="hubInformationHeader"><div class="brand"><img src="./assets/TH-Vertical.png" alt="กนอ."><div><h1>ระบบสารสนเทศและการเชื่อมโยงข้อมูล <p id="period"></p></h1></div></div><div class="header-right"><button class="clock" id="clock" aria-expanded="false"></button><nav class="header-actions" aria-label="เมนูหลัก"><a class="main-nav-link" href="./daily-situation.html">หน้าแรก</a><a class="main-nav-link" href="./information.html#overview">ข้อมูล</a><a class="main-nav-link nav-active" href="./hub.html" aria-current="page">Disaster</a></nav></div></header><div class="loading" id="loading">กำลังจัดทำภาพ PNG…</div>
 <main class="page" id="captureArea"><nav class="tabs"><button class="tab active" data-type="fire"><img src="./assets/fire-svgrepo-com.png" alt="ไฟไหม้">ไฟไหม้</button><button class="tab" data-type="flood"><img src="./assets/flood-svgrepo-com.png" alt="น้ำท่วม">น้ำท่วม</button><button class="tab" data-type="drought"><img src="./assets/drought-svgrepo-com.png" alt="ภัยแล้ง">ภัยแล้ง</button><button class="tab" data-type="pm25"><img src="./assets/cloudy-cloud-svgrepo-com.png" alt="ฝุ่น PM2.5">ฝุ่น PM2.5</button></nav>
