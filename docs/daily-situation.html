@@ -1,1369 +1,592 @@
 <!doctype html>
-<html lang="th">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย | IEAT EMCC</title>
-<meta name="description" content="แดชบอร์ดข้อมูลสภาพอากาศล่าสุดสำหรับสนับสนุนการเฝ้าระวังพื้นที่นิคมอุตสาหกรรม">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>เรดาร์ฝนและนิคมอุตสาหกรรม | กนอ.</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css"><script src="https://js.arcgis.com/4.30/"></script>
 <style>
-:root{--teal:#0f9685;--teal-dark:#08766a;--blue:#1768ad;--ink:#17202b;--muted:#697784;--line:#dfe8eb;--panel:rgba(255,255,255,.94);--green:#42a846;--yellow:#ffc719;--orange:#ff6908;--red:#bf033b;--purple:#6534ac;--shadow:0 16px 50px rgba(16,64,78,.13)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Noto Sans Thai",sans-serif;background:#fff;font-size:18px}
-button,input,select{font:inherit}.app-shell{width:min(1880px,calc(100% - 28px));margin:14px auto 26px;border:1px solid #fff;border-radius:24px;background:#fff;box-shadow:var(--shadow);overflow:hidden}
-.topbar{min-height:78px;padding:0 24px;display:flex;align-items:center;gap:22px;border-bottom:1px solid rgba(16,93,104,.12);background:rgba(255,255,255,.82)}
-.brand{display:flex;align-items:center;gap:13px;text-decoration:none;color:inherit;white-space:nowrap}.brand img{width:66px;height:46px;object-fit:contain}.brand strong{display:block;font-size:24px;line-height:1.25}.brand small{display:block;color:var(--muted);font-size:13.2px}
-.nav{display:flex;gap:6px}.nav a{padding:9px 12px;border-radius:10px;color:#50606b;text-decoration:none;font-size:15.6px}.nav a.active{background:#e5f6f3;color:var(--teal-dark);font-weight:600}
-.searchbox{margin-left:auto;width:min(430px,31vw);position:relative}.searchbox input{width:100%;height:42px;padding:0 44px 0 16px;border:1px solid #dce9eb;border-radius:14px;background:#f6fafb;outline:none}.searchbox input:focus{border-color:#55bdb0;box-shadow:0 0 0 4px rgba(15,150,133,.1)}.searchbox button{position:absolute;right:4px;top:4px;width:34px;height:34px;border:0;border-radius:10px;background:var(--teal);color:#fff;cursor:pointer}
-.sync{display:flex;align-items:center;gap:8px;color:#66747e;font-size:14.4px;white-space:nowrap}.sync-dot{width:9px;height:9px;border-radius:50%;background:#aab4bb;box-shadow:0 0 0 4px rgba(170,180,187,.16)}.sync.ok .sync-dot{background:#34b565;box-shadow:0 0 0 4px rgba(52,181,101,.14)}
-.main{padding:14px}.ticker{min-height:52px;padding:10px 15px;display:flex;align-items:center;gap:12px;border:1px solid #dbe9eb;border-radius:15px;background:#fff}.ticker-label{color:var(--teal-dark);font-size:14.4px;font-weight:700;letter-spacing:.06em}.ticker-text{font-weight:500}.ticker-time{margin-left:auto;color:var(--muted);font-size:14.4px}.source-link{padding:8px 12px;border-radius:10px;background:#e9f6f4;color:var(--teal-dark);font-size:14.4px;font-weight:600;text-decoration:none}
-.dashboard{margin-top:12px;display:grid;grid-template-columns:minmax(0,1.62fr) minmax(350px,.68fr);gap:12px}.left-column,.right-column{display:grid;gap:12px}.left-column{grid-template-rows:auto auto}.right-column{grid-auto-rows:min-content}
-.panel{border:1px solid rgba(25,94,105,.11);border-radius:18px;background:var(--panel);box-shadow:0 5px 18px rgba(25,68,78,.05);overflow:hidden}.panel-head{min-height:55px;padding:12px 15px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #e7edef}.panel-head h2,.panel-head h3{margin:0}.panel-head h2{font-size:19.2px}.panel-head h3{font-size:18px}.panel-head p{margin:2px 0 0;color:var(--muted);font-size:13.2px}.panel-actions{display:flex;gap:7px}.ghost-btn{height:34px;padding:0 11px;border:1px solid #d9e4e7;border-radius:10px;background:#fff;color:#52616b;font-size:14.4px;cursor:pointer}.ghost-btn.active{border-color:var(--teal);background:#e8f6f4;color:var(--teal-dark)}
-.map-wrap{position:relative;height:575px;background:#dceef0}#map{width:100%;height:100%}.map-badge{position:absolute;z-index:500;left:16px;top:16px;padding:9px 12px;border:1px solid rgba(255,255,255,.92);border-radius:12px;background:rgba(255,255,255,.92);box-shadow:0 5px 18px rgba(25,45,55,.15);font-size:14.4px;font-weight:600}.map-badge b{color:var(--red)}.legend{position:absolute;z-index:500;left:16px;bottom:16px;padding:9px 11px;border-radius:11px;background:rgba(255,255,255,.92);box-shadow:0 5px 18px rgba(25,45,55,.13);font-size:13.2px}.legend span{display:inline-flex;align-items:center;margin-right:9px}.legend i{width:9px;height:9px;margin-right:5px;border-radius:50%}
-.map-loading{position:absolute;z-index:600;inset:0;display:grid;place-items:center;background:rgba(238,248,249,.8);font-weight:600;color:var(--teal-dark)}.map-loading.hide{display:none}
-.station-marker{border:3px solid #fff;border-radius:50%;box-shadow:0 2px 7px rgba(17,48,60,.3)}.estate-office-marker{width:34px;height:34px;display:block;filter:drop-shadow(0 3px 4px rgba(65,38,24,.4))}.estate-legend{width:15px!important;height:15px!important;margin-right:5px;display:inline-block;flex:0 0 auto}.estate-popup b{color:#004b79}.estate-popup span{color:#697784;font-size:13.2px}
-.bottom-grid{display:grid;grid-template-columns:minmax(280px,.63fr) minmax(0,1.37fr);gap:12px}.extremes{padding:15px}.alert-box{padding:12px;border:1px solid #f1d27e;border-radius:13px;background:#fff9e8;color:#7b5a08;font-size:14.4px}.metric-list{margin-top:10px}.metric-row{padding:11px 1px;display:flex;justify-content:space-between;border-bottom:1px solid #edf1f2}.metric-row span{color:#65727d;font-size:14.4px}.metric-row b{font-size:16.8px}.metric-row:last-child{border-bottom:0}.report-btn{width:100%;height:40px;margin-top:10px;border:0;border-radius:11px;background:#eaf1f3;color:#394850;font-weight:600;cursor:pointer}
-.rain-chart{padding:12px 15px 15px}.bars{height:182px;display:flex;align-items:flex-end;gap:9px;padding:12px 4px 4px;border-bottom:1px solid #dfe7e9;background:repeating-linear-gradient(to top,transparent 0,transparent 44px,rgba(100,130,140,.08) 45px)}.bar-item{height:100%;min-width:0;flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:5px}.bar{width:min(28px,70%);min-height:3px;border-radius:7px 7px 2px 2px;background:linear-gradient(180deg,#36c3e8,#1595cf);transition:.2s}.bar-item:hover .bar{filter:saturate(1.25);transform:translateY(-2px)}.bar-item b{font-size:12px}.bar-item span{width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:center;color:#75818b;font-size:10.8px}
-.detail{padding:17px}.detail-top{display:flex;align-items:center;gap:13px}.weather-icon{width:58px;height:58px;display:grid;place-items:center;border-radius:16px;background:linear-gradient(145deg,#e8f8ff,#edf8f0);font-size:36px}.temperature{font-size:48px;font-weight:600;line-height:1}.temperature small{font-size:20.4px;font-weight:400;color:#6c7880}.condition{margin-left:auto;text-align:right}.condition b{display:block}.condition span{color:var(--muted);font-size:13.2px}.station-name{margin:14px 0 3px;font-size:21.6px}.station-location{color:var(--muted);font-size:14.4px}.detail-metrics{margin-top:15px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.detail-metrics div{padding:10px;border-radius:11px;background:#f4f8f8}.detail-metrics span{display:block;color:#77838c;font-size:12px}.detail-metrics b{display:block;margin-top:4px;font-size:15.6px}
-.ranking{padding:8px 15px 15px}.rank-row{padding:9px 0;display:grid;grid-template-columns:25px 1fr auto;align-items:center;gap:8px;border-bottom:1px solid #edf1f2;cursor:pointer}.rank-row:last-child{border-bottom:0}.rank-no{width:22px;height:22px;display:grid;place-items:center;border-radius:7px;background:#eef4f5;color:#64727c;font-size:12px}.rank-name b,.rank-name small{display:block}.rank-name b{font-size:14.4px}.rank-name small{color:#7b8790;font-size:12px}.rank-rain{color:#1879b7;font-size:15.6px;font-weight:600}
-.table-panel{margin-top:12px}.table-tools{padding:10px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #edf1f2}.table-tools input,.table-tools select{height:36px;padding:0 11px;border:1px solid #dfe7e9;border-radius:9px;background:#fff;outline:none}.table-tools input{width:260px}.table-tools select{margin-left:auto}.table-scroll{max-height:390px;overflow:auto}.weather-table{width:100%;border-collapse:collapse}.weather-table th{position:sticky;top:0;z-index:1;padding:11px 13px;background:#f0f7f7;color:#51616c;text-align:left;font-size:13.2px}.weather-table td{padding:11px 13px;border-bottom:1px solid #edf1f2;font-size:14.4px}.weather-table tbody tr{cursor:pointer}.weather-table tbody tr:hover{background:#f3fbfa}.weather-table td:nth-child(n+3),.weather-table th:nth-child(n+3){text-align:right}.status-pill{display:inline-block;min-width:72px;padding:4px 7px;border-radius:999px;text-align:center;font-size:12px;font-weight:600}.normal{background:#e9f6e7;color:#3a853b}.watch{background:#fff3d1;color:#8d6500}.warning{background:#ffeadf;color:#ad4705}.critical{background:#fde3eb;color:#d20962}
-.notice{padding:13px 15px;color:#65737d;font-size:13.2px}.notice strong{color:#3e4b55}.error-state{padding:40px;text-align:center;color:#a60437}
-.footer{padding:17px 24px;display:flex;justify-content:space-between;gap:20px;border-top:1px solid #e2ebed;color:#6d7a83;font-size:13.2px;background:rgba(255,255,255,.68)}.footer a{color:var(--teal-dark)}
-@media(max-width:1180px){.nav{display:none}.searchbox{width:36vw}.dashboard{grid-template-columns:1fr}.right-column{grid-template-columns:repeat(2,1fr)}.right-column .panel:first-child{grid-row:span 2}.map-wrap{height:520px}}
-@media(max-width:760px){body{background:#fff}.app-shell{width:100%;margin:0;border:0;border-radius:0}.topbar{padding:10px 12px;flex-wrap:wrap;gap:10px}.brand img{width:52px}.brand strong{font-size:19.2px}.brand small{font-size:10.8px}.searchbox{order:3;width:100%}.sync{margin-left:auto}.main{padding:8px}.ticker{align-items:flex-start;flex-wrap:wrap}.ticker-time{margin-left:0}.source-link{margin-left:auto}.map-wrap{height:480px}.bottom-grid,.right-column{grid-template-columns:1fr}.detail-metrics{grid-template-columns:repeat(3,1fr)}.table-tools{flex-wrap:wrap}.table-tools input{width:100%}.table-tools select{margin-left:0;width:100%}.table-scroll{max-height:520px}.weather-table{min-width:650px}.footer{display:block}.footer span{display:block;margin-top:6px}}
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 Sarabun,'Noto Sans Thai',sans-serif;color:#27313e;background:#f4f6f9}button,input{font:inherit}header{padding:15px 22px;background:#fff;border-bottom:1px solid #dce2e9;display:flex;gap:15px;align-items:center;justify-content:space-between}h1{font-size:21px;margin:0}header p{margin:0;color:#667382;font-size:12px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 430px;gap:12px;padding:12px;height:calc(100vh - 79px);min-height:540px}.map-card,.side{background:#fff;border:1px solid #dce2e9;border-radius:12px;overflow:hidden}.map-card{position:relative}#map{height:100%;width:100%}.toolbar{position:absolute;top:14px;left:14px;z-index:2;display:flex;gap:6px;flex-wrap:wrap;max-width:calc(100% - 28px)}button{border:1px solid #cad4df;background:#fff;color:#245181;border-radius:8px;padding:7px 10px;cursor:pointer;box-shadow:0 2px 7px #172a3d20}button:hover{background:#eaf2fa}button.primary{background:#245181;color:#fff;border-color:#245181}.status{position:absolute;bottom:12px;left:12px;right:12px;z-index:2;background:#fffef2e8;border:1px solid #e6dbb6;border-radius:8px;padding:7px 10px;font-size:12px}.side{display:flex;flex-direction:column}.side-head{padding:14px;border-bottom:1px solid #dce2e9}.side-head h2{margin:0;font-size:17px}.side-head small{color:#667382}.list{overflow:auto;flex:1;margin:0;padding:0;list-style:none}.list li{border-bottom:1px solid #edf0f4;padding:9px 14px}.list li b{display:block;font-size:13px}.list li small{color:#667382}.empty{padding:20px;color:#667382}footer{padding:9px 14px;border-top:1px solid #dce2e9;font-size:11px;color:#667382}@media(max-width:800px){header{align-items:flex-start}.layout{height:auto;display:block}.map-card{height:60vh;min-height:380px}.side{height:330px;margin-top:12px}}
+/* Radar layout */
+.radar-legend{position:absolute;right:16px;bottom:16px;z-index:31;width:193px;padding:10px 12px;background:#fffffff0;border:1px solid #e5e1e8;border-radius:9px;box-shadow:0 2px 12px #24202d24;color:#34303b;font-size:12px}
+.radar-legend strong{display:block;font-size:14px}.legend-body{display:flex;gap:8px;height:144px;margin:6px 0}.legend-gradient{width:24px;background:linear-gradient(to bottom,#fc00fb 0%,#aa00a9 20%,#aa0000 22%,#f80000 39%,#ff5500 40%,#fffd01 66%,#01fd01 69%,#015501 100%)}.legend-ticks{display:flex;flex-direction:column;justify-content:space-between;font-size:11px}.radar-legend small,.radar-legend a,#radarTime{display:block;font-size:11px;line-height:1.4}.radar-legend a{color:#59267c;margin:5px 0}#radarTime{color:#63606a}
+@media(max-width:800px){.radar-legend{right:8px;bottom:8px;width:155px;padding:7px}.legend-body{height:95px}}
+/* Keep estate names and map controls above the rain image. */
+#estateMarkers{position:absolute;inset:0;z-index:20;pointer-events:none;overflow:hidden}
+.map-card #radarCanvas{z-index:10!important}
+.map-card #radarCanvas{image-rendering:pixelated}
+.map-card #estateMarkers{z-index:21}
+.estate-marker{position:absolute;display:flex;flex-direction:column;align-items:center;gap:2px;transform:translate(-50%,-100%);max-width:205px;border:0!important;background:transparent!important;color:#52057f!important;padding:0!important;box-shadow:none!important;font-size:12px!important;line-height:1.2!important;cursor:pointer;pointer-events:auto}
+.list li:has(.estate-choice[aria-pressed="true"]){background:#e4f5e8}
+.list .estate-choice{display:block;width:100%;padding:3px 5px;text-align:left;border:0;box-shadow:none;background:transparent;color:inherit}
+.list .estate-choice[aria-pressed="true"],.list .estate-choice[aria-pressed="true"] b{color:#176437!important;font-weight:700}
+.list .estate-choice:hover{background:#edf7ef}
+.estate-marker-icon{display:block;order:2;width:28px;height:28px;overflow:visible!important;filter:drop-shadow(0 2px 3px #21112a88)}
+.estate-marker-icon svg{display:block;width:28px;height:28px}
+.estate-marker-name{display:none;order:1;max-width:205px;background:#fffffff5;border-radius:10px;padding:5px 8px;box-shadow:0 3px 10px #1b173544;font-size:13px!important;font-weight:600;line-height:1.25;white-space:normal;text-align:center}
+.estate-marker:hover .estate-marker-name,.estate-marker.is-selected .estate-marker-name{display:block}.estate-marker.is-selected{z-index:3}.estate-marker.is-selected .estate-marker-name{padding:8px 11px;color:#52057f!important;font-size:15px!important}
+.estate-marker-detail{display:none;color:#667382;font-size:12px;font-weight:400}.estate-marker.is-selected .estate-marker-detail{display:block;margin-top:3px}
+.estate-marker span{overflow:hidden;text-overflow:ellipsis}
 
-.news-section{margin-top:12px;padding:18px;border:1px solid rgba(25,94,105,.11);border-radius:18px;background:var(--panel);box-shadow:0 5px 18px rgba(25,68,78,.05)}
-.news-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:14px}.news-heading span{display:block;color:var(--teal-dark);font-size:13.2px;font-weight:700;letter-spacing:.1em}.news-heading h2{margin:3px 0 0;font-size:24px}.news-heading p{margin:0;color:var(--muted);font-size:14.4px}.news-heading a{padding:8px 12px;border-radius:10px;background:#e9f6f4;color:var(--teal-dark);font-size:14.4px;font-weight:600;text-decoration:none;white-space:nowrap}
-.news-tabs{display:flex;gap:7px;margin-bottom:14px;overflow-x:auto;padding-bottom:3px}.news-tabs button{padding:7px 11px;border:1px solid #dce6e8;border-radius:999px;background:#fff;color:#5d6b75;font-size:13.2px;white-space:nowrap;cursor:pointer}.news-tabs button.active{border-color:var(--teal);background:var(--teal);color:#fff}
-.news-featured{display:grid;grid-template-columns:minmax(280px,.9fr) minmax(0,1.1fr);min-height:285px;margin-bottom:12px;border:1px solid #e2e9eb;border-radius:15px;overflow:hidden;background:#f8fbfb}.news-featured-image{display:block;min-height:285px;background:linear-gradient(145deg,#d9f1f0,#e8eef7);overflow:hidden}.news-featured-image img{width:100%;height:100%;object-fit:cover}.news-featured-image.no-image{display:grid;place-items:center;color:var(--teal-dark);font-weight:600}.news-featured-copy{padding:24px;display:flex;flex-direction:column;justify-content:center}.news-meta{color:var(--teal-dark);font-size:13.2px;font-weight:700}.news-featured-copy h3{margin:9px 0 8px;font-size:25.2px;line-height:1.45}.news-featured-copy p{margin:0;color:#65737d;font-size:15.6px;line-height:1.65}.news-read{display:inline-block;margin-top:14px;color:var(--teal-dark);font-size:14.4px;font-weight:700;text-decoration:none}
-.news-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.news-card{min-width:0;border:1px solid #e3eaec;border-radius:14px;background:#fff;overflow:hidden}.news-card-image{display:block;height:155px;background:linear-gradient(145deg,#e0f3f2,#eef2f7);overflow:hidden}.news-card-image img{width:100%;height:100%;object-fit:cover}.news-card-image.no-image{display:grid;place-items:center;padding:15px;color:var(--teal-dark);font-size:14.4px;font-weight:600;text-align:center}.news-card-copy{padding:14px}.news-card-copy small{display:block;color:#7b8790;font-size:12px}.news-card-copy h3{margin:7px 0;font-size:16.8px;line-height:1.5}.news-card-copy p{margin:0;color:#687681;font-size:13.2px;line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.news-empty{grid-column:1/-1;padding:42px;text-align:center;color:#71808a}
-@media(max-width:980px){.news-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:650px){.news-section{padding:13px}.news-heading{display:block}.news-heading p{margin:5px 0 10px}.news-featured{grid-template-columns:1fr}.news-featured-image{min-height:210px}.news-featured-copy{padding:18px}.news-featured-copy h3{font-size:20.4px}.news-grid{grid-template-columns:1fr}}
+.map-card .esri-ui,.map-card .esri-popup{z-index:30!important}
+.map-card .toolbar{z-index:31}
+.side-head small{display:block;background:#f4ebfa!important;color:#4b176d!important;border-radius:8px;padding:9px 11px;margin-top:10px}
+html body,html body *,html body .esri-widget{font-family:"Sarabun","TH Sarabun New",sans-serif!important}
+body{font-size:16px;line-height:1.5;color:#34383f;background:#fbfbfc}
+header{min-height:64px;padding:10px 28px;border-bottom:1px solid #e5e7eb;box-shadow:0 2px 7px #1e242c17}
+h1{font-size:21px;font-weight:600;line-height:1.3}header p{font-size:14px;line-height:1.45;color:#8a8e94}
+.layout{height:calc(100vh - 80px);padding:16px 28px;gap:14px}
+.map-card,.side{border:0;border-radius:14px;box-shadow:0 3px 18px #2a3a4b12}
+.side-head{border-bottom:1px solid #eff1f4}.side-head h2{font-size:20px;font-weight:500;line-height:1.4}.side-head small{font-size:14px;line-height:1.45;color:#89919a}
+.list li b{font-size:16px;font-weight:400;line-height:1.55}
+button{font-size:16px;border-color:#dfe4e9;color:#59267c;box-shadow:none}
+button.primary{background:#59267c;border-color:#59267c}
+.status,footer{font-size:14px;line-height:1.45}
+.esri-widget,.esri-layer-list__item-title,.esri-legend__layer-caption{font-size:16px}
+.radar-layer-control{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid #eff1f4;font-size:16px;cursor:pointer}
+.radar-layer-control input{accent-color:#59267c}
+@media(max-width:800px){header{padding:10px 12px;flex-wrap:wrap}.layout{height:auto;padding:10px}.map-card{height:60vh;min-height:380px}}
 
-/* Original IEAT EMCC top navigation retained on the homepage */
-body{padding-top:0}.bar{position:sticky;top:0;z-index:2000;width:100%;min-height:70px;padding:0 32px;background:#fff;border-top:1px solid #e8e8e8;border-bottom:1px solid #dfe3e7;box-shadow:0 3px 8px rgba(31,41,55,.12)}
-.bar-in{width:100%;min-height:70px;margin:0;display:flex;align-items:center;gap:18px}.brand-link{display:flex;align-items:center;gap:15px;min-width:540px;color:inherit;text-decoration:none}.brand-logo{width:82px;height:48px;flex:0 0 82px;object-fit:contain}.brand-copy{min-width:0}.brand-copy strong{display:block;color:#111;font-size:24px;line-height:1.35;font-weight:600}.brand-copy span{display:block;margin-top:2px;color:#111;font-size:14.4px;line-height:1.35;font-weight:400}.header-status{margin-left:auto;padding-left:20px;border-left:1px solid #eceff2;display:flex;align-items:center;gap:8px;color:#40454b;white-space:nowrap}.status-icon{color:#e7a51b;font-size:19.2px}.header-status b,.header-status small{font-size:14.4px;font-weight:400}.header-status small{margin-left:6px;color:#111}.header-actions{display:flex;align-items:center;gap:8px}.header-btn{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:8px 16px;border:1px solid #d9c8e5;border-radius:20px;background:#fff;color:#631a9d;font-size:15.6px;font-weight:600;text-decoration:none;white-space:nowrap}.header-btn.active{background:#f4eef8}.header-btn.hub{border-color:#306bec;background:#306bec;color:#fff}.app-shell{margin-top:14px}
-@media(max-width:1050px){.bar{padding:0 16px}.brand-link{min-width:0;flex:1}.brand-logo{width:68px;flex-basis:68px}.brand-copy strong{font-size:20.4px}.brand-copy span{font-size:12px}.header-status{display:none}.header-btn{padding:8px 11px}}
-@media(max-width:700px){.bar{padding:6px 10px}.bar-in{min-height:58px;gap:8px}.brand-logo{width:50px;height:40px;flex-basis:50px}.brand-copy strong{font-size:16.8px}.brand-copy span{font-size:9.6px}.header-actions{gap:4px}.header-btn{min-height:32px;padding:6px 8px;font-size:12px}.header-btn:not(.active):not(.hub){display:none}.app-shell{margin-top:0}}
-</style>
-
-<style id="tmd-warning-forecast-20260915">
-.tmd-grid{margin-top:12px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}.tmd-panel{min-width:0}.tmd-panel .panel-head a{padding:7px 11px;border-radius:7px;background:#f2f6fc;color:#3478d4;text-decoration:none;white-space:nowrap}.warning-content{padding:14px}.warning-item{padding:14px;border-left:4px solid #ed1b2e;background:#fff8f8;box-shadow:0 3px 12px rgba(42,58,75,.06)}.warning-item+.warning-item{margin-top:10px}.warning-item h3{margin:0 0 6px;color:#7f181b}.warning-item p{margin:0;color:#59636d;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}.warning-meta{margin-top:9px;display:flex;align-items:center;justify-content:space-between;gap:10px;color:#7c858d;font-size:13.2px}.warning-meta a{color:#3478d4;text-decoration:none;font-weight:500}.warning-empty{padding:28px;text-align:center;color:#697784}.forecast-frame{width:100%;height:420px;display:block;border:0;background:#fff}.forecast-note{padding:9px 14px;border-top:1px solid #edf1f2;color:#697784;font-size:13.2px}.load-state{padding:28px;text-align:center;color:#697784}
-@media(max-width:980px){.tmd-grid{grid-template-columns:1fr}.forecast-frame{height:460px}}
-</style>
-
-<style id="daily-white-table-news-20260915">
-html,body,html body{background:#fff!important}.app-shell,.main,.ticker,.panel,.news-section,.news-featured,.news-card,.detail-metrics div,.alert-box,.warning-item,.map-wrap,.map-loading,.legend,.map-badge{background:#fff!important}.app-shell{border-color:#fff!important;backdrop-filter:none!important}.ticker,.panel,.news-section,.news-featured,.news-card{border-color:#e1e4e7!important}.news-featured-image,.news-card-image{background:#fff!important}.tmd-grid{margin:0 0 16px!important}.tmd-panel .panel-head a{background:#fff!important;border:1px solid #dfe4e8}.warning-item{border-top:1px solid #e5e7e9;border-right:1px solid #e5e7e9;border-bottom:1px solid #e5e7e9}
-.table-panel{border:1px solid #cfd4d9!important;border-radius:0!important;box-shadow:none!important}.table-panel .panel-head{background:#fff!important;border-bottom:1px solid #cfd4d9!important}.table-tools{background:#fff!important;border-bottom:1px solid #cfd4d9!important}.table-tools input,.table-tools select{border:1px solid #aeb6bf!important;border-radius:4px!important;background:#fff!important}.table-scroll{max-height:520px;background:#fff}.weather-table{width:100%;border-collapse:collapse!important;border-spacing:0!important;border:0!important}.weather-table th{background:#fff!important;color:#20262c!important;font-weight:600!important;border-right:1px solid #cfd4d9!important;border-bottom:2px solid #9da7b1!important;text-align:center!important}.weather-table td{background:#fff!important;border-right:1px solid #dfe3e6!important;border-bottom:1px solid #d4d9de!important;vertical-align:middle!important}.weather-table th:first-child,.weather-table td:first-child{text-align:left!important}.weather-table th:last-child,.weather-table td:last-child{border-right:0!important}.weather-table tbody tr:hover td{background:#fff!important;box-shadow:inset 0 1px #3478d4,inset 0 -1px #3478d4}.status-pill{border:1px solid currentColor;border-radius:4px!important;background:#fff!important}
-@media(max-width:760px){html body{background:#fff!important}.table-scroll{max-height:600px}.weather-table{min-width:760px}}
-</style>
-
-<style id="arcgis-province-boundary-20260915-v1">
-html body .province-boundary-legend{width:18px!important;height:12px!important;border:2px solid #832561!important;border-radius:2px!important;background:rgba(131,37,97,.10)!important}
-html body .province-popup b{color:#000!important;font-size:16.8px!important}
-html body .province-popup span{color:#000!important;font-size:14.4px!important}
-</style>
-
-<style id="daily-table-colors-and-readable-type-20260915">
-/* Requested station-table palette */
-html body .weather-table thead th{
- background:#fc636b!important;
- color:#ffffff!important;
-}
-html body .weather-table .status-pill.normal{
- background:#01cd74!important;
- border-color:#01cd74!important;
- color:#ffffff!important;
-}
-html body .weather-table .status-pill.warning{
- background:#ff4e00!important;
- border-color:#ff4e00!important;
- color:#ffffff!important;
-}
-html body .weather-table .status-pill.critical{
- background:#d20962!important;
- border-color:#d20962!important;
- color:#ffffff!important;
-}
-</style>
-
-<style id="daily-highlight-frames-20260915">
-/* Highlighted rectangular data frames */
-html body .panel.green-data-frame{
- border:2px solid #01cd74!important;
- border-radius:6px!important;
- background:#ffffff!important;
- box-shadow:0 5px 16px rgba(1,205,116,.12)!important;
-}
-html body .panel.red-rain-frame{
- border:2px solid #fc636b!important;
- border-radius:6px!important;
- background:#ffffff!important;
- box-shadow:0 5px 16px rgba(252,99,107,.12)!important;
-}
-</style>
-
-<style id="daily-table-black-lines-watch-20260915">
-/* Black station-table grid and requested watch status */
-html body .weather-table{
- border:1px solid #000000!important;
- border-collapse:collapse!important;
-}
-html body .weather-table th,
-html body .weather-table td{
- border:1px solid #000000!important;
-}
-html body .weather-table .status-pill.watch{
- background:#ffb900!important;
- border-color:#ffb900!important;
- color:#000000!important;
-}
-</style>
-
-
-<style id="daily-table-gray-centered-20260915">
-/* Requested gray header and centered station table */
-html body .weather-table thead th{
- background:#d9d9d9!important;
- color:#000000!important;
- font-weight:700!important;
- text-align:center!important;
-}
-html body .weather-table tbody td,
-html body .weather-table th:first-child,
-html body .weather-table td:first-child,
-html body .weather-table th:last-child,
-html body .weather-table td:last-child{
- text-align:center!important;
-}
-</style>
-
-
-
-
-
-<style id="daily-remove-live-update-strip-20260915">
-html body main.main > section.ticker {display:none!important}
-</style>
-
-<style id="daily-three-cards-reference-layout-20260915-v1">
-/* Three requested cards: borderless soft cards with gray data rows and value pills */
-html body main.main .panel.green-data-frame {
-  border:0!important;
-  border-radius:18px!important;
-  background:#fff!important;
-  box-shadow:0 7px 22px rgba(35,54,72,.09)!important;
-  overflow:hidden!important;
-}
-html body main.main .panel.green-data-frame > .panel-head {
-  border-bottom:0!important;
-  background:#fff!important;
-}
-html body main.main .extremes.green-data-frame {padding:17px!important}
-html body main.main .extremes.green-data-frame .alert-box {
-  margin:2px 0 9px!important;padding:10px 12px!important;
-  border:0!important;border-radius:10px!important;
-  background:#f4f6fb!important;color:#59616b!important;
-}
-html body main.main .extremes.green-data-frame .metric-list {margin-top:5px!important}
-html body main.main .extremes.green-data-frame .metric-row {
-  min-height:38px!important;margin:7px 0!important;padding:6px 7px 6px 10px!important;
-  display:flex!important;align-items:center!important;gap:10px!important;
-  border:0!important;border-radius:10px!important;background:#f4f6fb!important;
-}
-html body main.main .extremes.green-data-frame .metric-row span {color:#7a7f87!important}
-html body main.main .extremes.green-data-frame .metric-row b {
-  min-width:62px!important;margin-left:auto!important;padding:4px 10px!important;
-  border-radius:10px!important;background:#ffc85a!important;color:#4f4b3f!important;
-  text-align:center!important;font-weight:500!important;
-}
-html body main.main .extremes.green-data-frame .report-btn {
-  border:0!important;border-radius:10px!important;background:#f4f6fb!important;
-  box-shadow:none!important;
-}
-html body main.main .detail.green-data-frame {padding:17px!important}
-html body main.main .detail.green-data-frame .detail-top {
-  padding:9px 10px!important;border:0!important;border-radius:10px!important;background:#f4f6fb!important;
-}
-html body main.main .detail.green-data-frame .detail-metrics {
-  margin-top:8px!important;display:grid!important;grid-template-columns:1fr!important;gap:7px!important;
-}
-html body main.main .detail.green-data-frame .detail-metrics div {
-  min-height:38px!important;padding:6px 7px 6px 10px!important;
-  display:flex!important;align-items:center!important;justify-content:space-between!important;gap:10px!important;
-  border:0!important;border-radius:10px!important;background:#f4f6fb!important;
-}
-html body main.main .detail.green-data-frame .detail-metrics span {
-  display:block!important;color:#7a7f87!important;
-}
-html body main.main .detail.green-data-frame .detail-metrics b {
-  display:block!important;min-width:62px!important;margin:0!important;padding:4px 10px!important;
-  border-radius:10px!important;background:#ffda25!important;color:#554d22!important;
-  text-align:center!important;font-weight:500!important;
-}
-html body main.main .right-column > .panel.green-data-frame:not(.detail) .ranking {
-  padding:2px 15px 15px!important;
-}
-html body main.main .right-column > .panel.green-data-frame:not(.detail) .rank-row {
-  min-height:38px!important;margin:7px 0!important;padding:6px 7px!important;
-  grid-template-columns:25px 1fr auto!important;gap:6px!important;
-  border:0!important;border-radius:10px!important;background:#f4f6fb!important;
-}
-html body main.main .right-column > .panel.green-data-frame:not(.detail) .rank-no {
-  width:auto!important;height:auto!important;background:transparent!important;color:#858991!important;
-}
-html body main.main .right-column > .panel.green-data-frame:not(.detail) .rank-name small {
-  color:#858991!important;
-}
-html body main.main .right-column > .panel.green-data-frame:not(.detail) .rank-rain {
-  min-width:70px!important;padding:4px 10px!important;
-  border-radius:10px!important;background:#008f8f!important;color:#fff!important;
-  text-align:center!important;font-weight:500!important;
-}
-@media(max-width:650px){
-  html body main.main .detail.green-data-frame .detail-metrics{grid-template-columns:1fr!important}
-}
-</style>
-
-<style id="daily-rain-overview-reference-chart-20260915-v1">
-/* Rainfall overview card styled from the supplied chart reference */
-html body main.main .panel.red-rain-frame {
-  border:0!important;
-  border-radius:18px!important;
-  background:#fff!important;
-  box-shadow:0 7px 22px rgba(35,54,72,.09)!important;
-  overflow:hidden!important;
-}
-html body main.main .panel.red-rain-frame > .panel-head {
-  min-height:62px!important;padding:15px 18px 8px!important;
-  border:0!important;background:#fff!important;
-}
-html body main.main .panel.red-rain-frame > .panel-head h3 {
-  color:#3d4147!important;font-weight:500!important;
-}
-html body main.main .panel.red-rain-frame > .panel-head p {
-  color:#81858b!important;
-}
-html body main.main .panel.red-rain-frame #rainTotalLabel {
-  min-width:116px!important;padding:8px 14px!important;
-  border:0!important;border-radius:999px!important;
-  background:#f3f3f3!important;color:#858585!important;text-align:center!important;
-}
-html body main.main .panel.red-rain-frame .rain-chart {
-  position:relative!important;padding:34px 18px 18px!important;background:#fff!important;
-}
-html body main.main .panel.red-rain-frame .rain-chart::before {
-  content:"●  ฝนสะสม 24 ชม."!important;
-  position:absolute!important;left:20px!important;top:5px!important;
-  color:#91402f!important;font-size:11px!important;font-weight:400!important;
-}
-html body main.main .panel.red-rain-frame .bars {
-  height:225px!important;display:flex!important;align-items:flex-end!important;
-  gap:12px!important;padding:12px 8px 5px!important;
-  border:0!important;border-bottom:1px solid #e8e8e8!important;
-  background:repeating-linear-gradient(
-    to top,
-    transparent 0,
-    transparent 54px,
-    rgba(120,120,120,.13) 55px,
-    transparent 56px
-  )!important;
-}
-html body main.main .panel.red-rain-frame .bar-item {
-  height:100%!important;min-width:0!important;display:flex!important;
-  flex:1!important;flex-direction:column!important;justify-content:flex-end!important;
-  align-items:center!important;gap:6px!important;
-}
-html body main.main .panel.red-rain-frame .bar-item .bar {
-  width:min(20px,48%)!important;min-height:3px!important;
-  border-radius:9px 9px 0 0!important;
-  background:#91402f!important;box-shadow:none!important;
-  transition:transform .2s ease,filter .2s ease!important;
-}
-html body main.main .panel.red-rain-frame .bar-item:hover .bar {
-  filter:brightness(1.08)!important;transform:translateY(-2px)!important;
-}
-html body main.main .panel.red-rain-frame .bar-item b {
-  color:#6e6e6e!important;font-size:11px!important;font-weight:400!important;
-}
-html body main.main .panel.red-rain-frame .bar-item span {
-  width:100%!important;color:#7d7d7d!important;font-size:10px!important;
-  overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;text-align:center!important;
-}
-@media(max-width:650px){
-  html body main.main .panel.red-rain-frame .bars{height:190px!important;gap:5px!important}
-  html body main.main .panel.red-rain-frame .bar-item .bar{width:min(15px,55%)!important}
-}
-</style>
-
-<style id="daily-status-criteria-reference-card-20260915-v1">
-html body main.main .status-criteria-card {
-  padding:16px!important;border:0!important;border-radius:18px!important;
-  background:#fff!important;box-shadow:0 7px 22px rgba(35,54,72,.09)!important;
-  overflow:hidden!important;
-}
-html body main.main .status-criteria-card > .panel-head {
-  min-height:auto!important;padding:0 0 8px!important;
-  border:0!important;background:#fff!important;
-}
-html body main.main .status-criteria-card .status-criteria-list {
-  display:grid!important;gap:7px!important;
-}
-html body main.main .status-criteria-card .status-criteria-row {
-  min-height:38px!important;padding:5px 6px 5px 10px!important;
-  display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;
-  border:0!important;border-radius:10px!important;background:#f4f6fb!important;
-}
-html body main.main .status-criteria-card .status-criteria-row span {
-  color:#7a7f87!important;font-size:12px!important;line-height:1.4!important;
-}
-html body main.main .status-criteria-card .status-criteria-row b {
-  min-width:94px!important;padding:5px 9px!important;border-radius:10px!important;
-  color:#fff!important;font-size:11px!important;font-weight:500!important;
-  line-height:1.2!important;text-align:center!important;white-space:nowrap!important;
-}
-html body main.main .status-criteria-card .criteria-normal {background:#008f8f!important}
-html body main.main .status-criteria-card .criteria-watch {background:#e7ad20!important}
-html body main.main .status-criteria-card .criteria-warning {background:#ef6a21!important}
-html body main.main .status-criteria-card .criteria-critical {background:#bf033b!important}
-html body main.main .status-criteria-card .criteria-note {
-  margin:9px 2px 0!important;color:#8a8f95!important;
-  font-size:10px!important;line-height:1.45!important;
-}
-</style>
-
-<style id="daily-tmd-two-card-reference-layout-20260915-v1">
-html body main.main .tmd-grid {
-  margin:12px 0 18px!important;display:grid!important;
-  grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:16px!important;
-}
-html body main.main .tmd-grid .tmd-panel {
-  padding:16px!important;border:0!important;border-radius:18px!important;
-  background:#fff!important;box-shadow:0 7px 22px rgba(35,54,72,.09)!important;
-  overflow:hidden!important;
-}
-html body main.main .tmd-grid .tmd-panel > .panel-head {
-  min-height:auto!important;padding:0 0 10px!important;border:0!important;background:#fff!important;
-}
-html body main.main .tmd-grid .tmd-panel > .panel-head h2 {
-  font-size:17px!important;font-weight:500!important;color:#3e4248!important;
-}
-html body main.main .tmd-grid .tmd-panel > .panel-head p {
-  font-size:12px!important;color:#7d8289!important;
-}
-html body main.main .tmd-grid .tmd-panel > .panel-head a {
-  padding:7px 11px!important;border:0!important;border-radius:999px!important;
-  background:#f3f3f3!important;color:#737980!important;font-size:11px!important;
-}
-html body main.main .tmd-pdf-button {
-  width:100%!important;min-height:38px!important;margin:0 0 9px!important;padding:8px 12px!important;
-  display:flex!important;align-items:center!important;justify-content:center!important;
-  border:0!important;border-radius:10px!important;background:#91402f!important;color:#fff!important;
-  font-size:12px!important;font-weight:500!important;text-align:center!important;text-decoration:none!important;
-}
-html body main.main .warning-content {padding:0!important}
-html body main.main .warning-item {
-  margin:7px 0!important;padding:9px 10px!important;border:0!important;border-radius:10px!important;
-  background:#f4f6fb!important;box-shadow:none!important;
-}
-html body main.main .warning-item h3 {
-  margin:0 0 3px!important;color:#595f67!important;font-size:13px!important;font-weight:500!important;
-}
-html body main.main .warning-item p {
-  margin:0!important;color:#7a7f87!important;font-size:11px!important;line-height:1.45!important;
-  -webkit-line-clamp:2!important;
-}
-html body main.main .warning-meta {margin-top:6px!important;font-size:10px!important}
-html body main.main .warning-meta a {
-  padding:4px 9px!important;border-radius:9px!important;background:#ffc85a!important;
-  color:#504b3e!important;font-size:10px!important;font-weight:500!important;
-}
-html body main.main .forecast-summary-list {display:grid!important;gap:7px!important}
-html body main.main .forecast-summary-list a {
-  min-height:38px!important;padding:6px 7px 6px 10px!important;
-  display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;
-  border:0!important;border-radius:10px!important;background:#f4f6fb!important;
-  color:#7a7f87!important;font-size:12px!important;text-decoration:none!important;
-}
-html body main.main .forecast-summary-list a b {
-  min-width:58px!important;padding:5px 10px!important;border-radius:10px!important;
-  background:#ffda25!important;color:#514a24!important;font-size:11px!important;
-  font-weight:500!important;text-align:center!important;
-}
-html body main.main .forecast-note {
-  margin-top:9px!important;padding:0 2px!important;border:0!important;
-  color:#8a8f95!important;font-size:10px!important;line-height:1.45!important;
-}
-@media(max-width:980px){
-  html body main.main .tmd-grid{grid-template-columns:1fr!important}
-}
-</style>
-
-<style id="daily-unified-information-typography-20260915-v1">
-/* Single typography source copied from docs/information.html */
-html body,
-html body button,
-html body input,
-html body select,
-html body textarea,
-html body table,
-html body th,
-html body td,
-html body a,
-html body *:not(svg):not(path):not(.material-icons):not([class*="fa-"]) {
-  font-family:"Sarabun","TH Sarabun New",sans-serif!important;
-}
-html body {font-size:16px!important;font-weight:400!important;line-height:1.6!important}
-html body header.system-header {
-  min-height:76px!important;padding:0 52px!important;
-  background:#fff!important;border-top:1px solid #dedede!important;
-  border-bottom:1px solid #d9dcde!important;box-shadow:0 2px 5px rgba(31,41,55,.08)!important;
-}
-html body header.system-header .system-header-inner {
-  min-height:75px!important;display:flex!important;align-items:center!important;gap:18px!important;
-}
-html body header.system-header .system-brand {display:flex!important;align-items:center!important;gap:16px!important}
-html body header.system-header .system-brand img {width:38px!important;height:46px!important;flex:0 0 38px!important;object-fit:contain!important}
-html body header.system-header .system-brand strong {font-size:19px!important;font-weight:600!important;line-height:1.4!important}
-html body header.system-header .system-brand>span {font-size:12px!important;font-weight:300!important;line-height:1.5!important;color:#89939e!important}
-html body header.system-header .system-clock,
-html body header.system-header .news-nav,
-html body header.system-header .contact-nav {font-size:13px!important;line-height:1.4!important}
-html body header.system-header .system-actions {display:flex!important;align-items:center!important;gap:7px!important}
-html body header.system-header .news-nav,
-html body header.system-header .contact-nav,
-html body header.system-header .more-btn {min-height:40px!important;border-radius:999px!important}
-html body header.system-header .news-nav {padding:0 20px!important}
-html body header.system-header .more-btn {width:44px!important;font-size:22px!important}
-html body header.system-header .contact-nav {padding:0 18px!important;font-size:13px!important;font-weight:600!important}
-html body main.main h1 {font-size:20px!important;font-weight:600!important;line-height:1.4!important}
-html body main.main h2 {font-size:18px!important;font-weight:600!important;line-height:1.45!important}
-html body main.main h3 {font-size:17px!important;font-weight:500!important;line-height:1.5!important}
-html body main.main h4 {font-size:16px!important;font-weight:500!important;line-height:1.5!important}
-html body main.main .panel-head h2,
-html body main.main .panel-head h3,
-html body main.main .news-heading h2 {font-size:17px!important;font-weight:600!important;line-height:1.45!important}
-html body main.main .panel-head p,
-html body main.main .news-heading p {font-size:13px!important;font-weight:400!important;line-height:1.5!important}
-html body main.main p,
-html body main.main label,
-html body main.main li {font-size:14px!important;line-height:1.6!important}
-html body main.main button,
-html body main.main input,
-html body main.main select,
-html body main.main textarea,
-html body main.main a {font-size:13px!important;line-height:1.4!important}
-html body main.main small,
-html body main.main .muted,
-html body main.main [class*="subtitle"],
-html body main.main [class*="description"],
-html body main.main [class*="meta"],
-html body main.main [class*="hint"] {font-size:12px!important;line-height:1.5!important}
-html body main.main .temperature {font-size:27px!important;font-weight:600!important;line-height:1.15!important}
-html body main.main .temperature small {font-size:13px!important}
-html body main.main .station-name {font-size:17px!important;font-weight:600!important}
-html body main.main .metric-row span,
-html body main.main .detail-metrics span,
-html body main.main .rank-name small,
-html body main.main .station-location {font-size:12px!important;line-height:1.45!important}
-html body main.main .metric-row b,
-html body main.main .detail-metrics b,
-html body main.main .rank-name b,
-html body main.main .rank-rain {font-size:13px!important;line-height:1.4!important}
-html body main.main .map-badge,
-html body main.main .legend,
-html body main.main .notice,
-html body main.main .alert-box,
-html body main.main .forecast-note {font-size:12px!important;line-height:1.5!important}
-html body main.main table,
-html body main.main th,
-html body main.main td,
-html body main.main .weather-table th,
-html body main.main .weather-table td {font-size:11px!important;line-height:1.35!important}
-html body main.main .status-pill,
-html body main.main .status-criteria-row span,
-html body main.main .status-criteria-row b,
-html body main.main .forecast-summary-list a,
-html body main.main .forecast-summary-list a b,
-html body main.main .warning-item p,
-html body main.main .warning-meta,
-html body main.main .warning-meta a {font-size:11px!important}
-html body main.main .warning-item h3 {font-size:13px!important}
-html body footer.footer {font-size:11px!important;line-height:1.5!important}
-@media(max-width:980px){
-  html body header.system-header{padding:0 16px!important}
-  html body header.system-header .system-brand>span,
-  html body header.system-header .system-clock{display:none!important}
-}
-@media(max-width:650px){
-  html body header.system-header{padding:5px 10px!important;min-height:58px!important}
-  html body header.system-header .system-header-inner{min-height:48px!important;gap:7px!important}
-  html body header.system-header .system-brand{flex:1!important;gap:8px!important}
-  html body header.system-header .system-brand img{width:36px!important;height:36px!important;flex-basis:36px!important}
-  html body header.system-header .system-brand strong{font-size:17px!important;white-space:normal!important;line-height:1.25!important}
-  html body header.system-header .news-nav{min-height:34px!important;padding:0 9px!important;font-size:12px!important}
-  html body header.system-header .more-btn{width:34px!important;min-height:34px!important}
-  html body header.system-header .contact-nav{display:none!important}
-}
-</style>
-<script id="daily-unified-information-font-20260915-v1">
-(function(){
-  function applyUnifiedFont(){
-    document.querySelectorAll("body *:not(svg):not(path):not(.material-icons):not([class*='fa-'])").forEach(function(el){
-      el.style.setProperty("font-family","Sarabun, 'TH Sarabun New', sans-serif","important");
-    });
-  }
-  if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",applyUnifiedFont)}
-  else{applyUnifiedFont()}
-})();
-</script>
-
-<style id="daily-system-header-structure-fix-20260915-v1">
-/* Restore header structure after typography cleanup */
-html body header.system-header {
-  position:sticky!important;top:0!important;z-index:2200!important;width:100%!important;
-}
-html body header.system-header .system-header-inner {
-  width:100%!important;margin:0!important;display:flex!important;align-items:center!important;gap:18px!important;
-}
-html body header.system-header .system-brand {
-  display:flex!important;align-items:center!important;gap:16px!important;min-width:0!important;
-  color:#111!important;text-decoration:none!important;white-space:nowrap!important;
-}
-html body header.system-header .system-brand:link,
-html body header.system-header .system-brand:visited,
-html body header.system-header .system-brand:hover {
-  color:#111!important;text-decoration:none!important;
-}
-html body header.system-header .system-brand strong {color:#050505!important;text-decoration:none!important}
-html body header.system-header .system-brand>span {color:#89939e!important;text-decoration:none!important}
-html body header.system-header .system-clock {
-  margin-left:auto!important;color:#4b5660!important;font-weight:400!important;white-space:nowrap!important;
-}
-html body header.system-header .system-actions {
-  display:flex!important;align-items:center!important;gap:7px!important;
-}
-html body header.system-header .news-nav,
-html body header.system-header .contact-nav,
-html body header.system-header .more-btn {
-  display:inline-flex!important;align-items:center!important;justify-content:center!important;
-  border:0!important;border-radius:999px!important;text-decoration:none!important;white-space:nowrap!important;
-  line-height:1!important;
-}
-html body header.system-header .news-nav,
-html body header.system-header .news-nav:link,
-html body header.system-header .news-nav:visited {
-  gap:6px!important;padding:0 20px!important;background:#f1f3f5!important;color:#66717b!important;
-  text-decoration:none!important;
-}
-html body header.system-header .news-nav span {font-size:16px!important}
-html body header.system-header .more-wrap {position:relative!important}
-html body header.system-header .more-btn {
-  padding:0!important;background:#f1f3f5!important;color:#66717b!important;cursor:pointer!important;
-}
-html body header.system-header .contact-nav,
-html body header.system-header .contact-nav:link,
-html body header.system-header .contact-nav:visited {
-  background:#598c14!important;color:#fff!important;text-decoration:none!important;
-}
-html body header.system-header .more-menu {
-  position:absolute!important;top:48px!important;right:0!important;width:168px!important;
-  padding:6px!important;display:none!important;border:1px solid #e1e5e8!important;border-radius:12px!important;
-  background:#fff!important;box-shadow:0 12px 28px rgba(28,39,51,.15)!important;
-}
-html body header.system-header .more-menu.open {display:grid!important}
-html body header.system-header .more-menu a,
-html body header.system-header .more-menu a:link,
-html body header.system-header .more-menu a:visited {
-  padding:9px 10px!important;border-radius:8px!important;color:#3f4b55!important;
-  font-size:13px!important;text-decoration:none!important;
-}
-html body header.system-header .more-menu a:hover {background:#f2f6f6!important;color:#08766a!important}
-@media(max-width:980px){
-  html body header.system-header .system-brand>span,
-  html body header.system-header .system-clock{display:none!important}
-}
-@media(max-width:650px){
-  html body header.system-header .system-brand{flex:1!important}
-  html body header.system-header .news-nav span{display:none!important}
-  html body header.system-header .contact-nav{display:none!important}
-}
-</style>
-
-<style id="daily-remove-all-text-underlines-20260915-v1">
-/* Remove underlines from every link and linked text on this page */
-html body a,
-html body a:link,
-html body a:visited,
-html body a:hover,
-html body a:focus,
-html body a:active,
-html body a *,
-html body header.system-header a,
-html body header.system-header a * {
-  text-decoration:none!important;
-  text-decoration-line:none!important;
-  text-underline-offset:0!important;
-  border-bottom-color:transparent!important;
-}
-html body header.system-header .system-brand,
-html body header.system-header .system-brand strong,
-html body header.system-header .system-brand>span {
-  text-decoration:none!important;
-  text-decoration-line:none!important;
-  border-bottom:0!important;
-}
-</style>
-
-<style id="daily-header-gray-text-to-black-20260915-v1">
-html body header.system-header .system-brand>span,
-html body header.system-header .system-clock,
-html body header.system-header .news-nav,
-html body header.system-header .news-nav:link,
-html body header.system-header .news-nav:visited,
-html body header.system-header .more-btn {
-  color:#000000!important;
-}
-</style>
-
-<style id="daily-map-fill-own-panel-20260915-v1">
-/* Let the map fill the full height allocated to its panel */
-html body main.main .dashboard .left-column {
-  grid-template-rows:minmax(0,1fr) auto!important;
-}
-html body main.main #mapPanel {
-  height:100%!important;min-height:0!important;
-  display:flex!important;flex-direction:column!important;
-}
-html body main.main #mapPanel > .panel-head {
-  flex:0 0 auto!important;
-}
-html body main.main #mapPanel > .map-wrap {
-  height:auto!important;min-height:575px!important;
-  flex:1 1 auto!important;
-}
-html body main.main #mapPanel #map {
-  width:100%!important;height:100%!important;min-height:575px!important;
-}
-@media(max-width:980px){
-  html body main.main #mapPanel > .map-wrap,
-  html body main.main #mapPanel #map{min-height:480px!important}
-}
-</style>
-
-<style id="daily-homepage-redesign-20260922-v1">
-:root{
- --home-navy:#072d4b;--home-blue:#0b6596;--home-cyan:#10a5a5;
- --home-mint:#eaf7f5;--home-sky:#edf6fb;--home-paper:#f4f7f8;
- --home-text:#183244;--home-muted:#657986;--home-line:#dbe6e9;
- --home-shadow:0 14px 38px rgba(12,57,74,.09);
-}
-html{scroll-padding-top:92px}
-body{
- font-family:"Sarabun",sans-serif!important;
- color:var(--home-text)!important;
- background:
-  radial-gradient(circle at 8% 5%,rgba(16,165,165,.10),transparent 26%),
-  radial-gradient(circle at 94% 13%,rgba(11,101,150,.09),transparent 25%),
-  var(--home-paper)!important;
-}
-.system-header{
- position:sticky!important;top:0!important;z-index:1000!important;
- min-height:76px!important;border:0!important;
- background:rgba(255,255,255,.92)!important;
- box-shadow:0 1px 0 rgba(7,45,75,.08)!important;
- backdrop-filter:blur(16px)!important;
-}
-.system-header-inner{width:min(1760px,calc(100% - 40px))!important;margin:auto!important}
-.system-brand img{width:56px!important;height:44px!important}
-.system-brand strong{font-size:20px!important;color:var(--home-navy)!important}
-.system-clock{
- border:1px solid var(--home-line)!important;border-radius:999px!important;
- background:#f7fafb!important;color:var(--home-muted)!important;
- padding:8px 13px!important;font-size:13px!important;
-}
-.system-actions{gap:8px!important}
-.system-actions a,.more-btn{
- border-radius:999px!important;padding:10px 16px!important;
- font-weight:600!important;color:#526c7b!important;
-}
-.system-actions a:hover,.system-actions a.active{
- background:var(--home-navy)!important;color:#fff!important;
-}
-.contact-nav{background:var(--home-cyan)!important;color:#fff!important}
-.app-shell{
- width:min(1760px,calc(100% - 40px))!important;margin:22px auto 40px!important;
- border:0!important;border-radius:28px!important;background:transparent!important;
- box-shadow:none!important;overflow:visible!important;
-}
-.main{padding:0!important}
-.home-hero{
- position:relative;overflow:hidden;
- display:grid;grid-template-columns:minmax(0,1.22fr) minmax(420px,.78fr);
- gap:44px;align-items:center;min-height:430px;
- padding:54px 58px;margin-bottom:20px;border-radius:28px;
- background:
-  linear-gradient(118deg,rgba(5,42,70,.98),rgba(8,88,120,.96) 58%,rgba(12,147,145,.91)),
-  var(--home-navy);
- box-shadow:0 24px 58px rgba(7,45,75,.20);color:#fff;
-}
-.home-hero::before{
- content:"";position:absolute;width:420px;height:420px;border-radius:50%;
- right:-110px;top:-210px;border:70px solid rgba(255,255,255,.055);
-}
-.home-hero::after{
- content:"";position:absolute;width:230px;height:230px;border-radius:50%;
- left:47%;bottom:-190px;border:48px solid rgba(255,255,255,.045);
-}
-.home-hero-copy,.home-quick-links{position:relative;z-index:1}
-.home-eyebrow{
- display:inline-flex;align-items:center;gap:9px;margin-bottom:18px;
- color:#93e5dc;font-size:12px;font-weight:700;letter-spacing:1.4px;
-}
-.home-eyebrow::before{content:"";width:28px;height:2px;background:#49d5c6}
-.home-hero h1{
- max-width:800px;margin:0;font-size:clamp(34px,4vw,62px);
- line-height:1.13;letter-spacing:-1.5px;font-weight:500;
-}
-.home-hero h1 em{font-style:normal;color:#79e1d6}
-.home-hero-copy>p{
- max-width:720px;margin:22px 0 0;color:rgba(255,255,255,.76);
- font-size:17px;line-height:1.8;
-}
-.home-hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-.home-hero-actions a{
- display:inline-flex;align-items:center;justify-content:center;min-height:48px;
- padding:0 22px;border-radius:13px;text-decoration:none;font-weight:700;
- transition:transform .18s ease,background .18s ease;
-}
-.home-hero-actions a:hover{transform:translateY(-2px)}
-.home-primary-action{background:#fff;color:var(--home-navy)}
-.home-secondary-action{border:1px solid rgba(255,255,255,.35);color:#fff}
-.home-quick-links{
- display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;
-}
-.home-quick-links a{
- min-height:142px;padding:20px;border:1px solid rgba(255,255,255,.17);
- border-radius:18px;background:rgba(255,255,255,.10);
- backdrop-filter:blur(10px);text-decoration:none;color:#fff;
- transition:transform .18s ease,background .18s ease,border-color .18s ease;
-}
-.home-quick-links a:hover{
- transform:translateY(-3px);background:rgba(255,255,255,.17);
- border-color:rgba(255,255,255,.34);
-}
-.home-quick-links span{
- display:block;color:#72ddd1;font-size:12px;font-weight:700;letter-spacing:1px;
-}
-.home-quick-links b{display:block;margin-top:18px;font-size:18px}
-.home-quick-links small{display:block;margin-top:6px;color:rgba(255,255,255,.68);line-height:1.45}
-.ticker{
- margin:0 0 20px!important;padding:11px 16px!important;
- border:1px solid #cfe2e5!important;border-radius:15px!important;
- background:rgba(255,255,255,.86)!important;box-shadow:none!important;
-}
-.ticker-label{
- border-radius:999px!important;background:#dcf4f0!important;
- color:#08766a!important;padding:6px 11px!important;
-}
-.dashboard{gap:20px!important}
-.left-column,.right-column{gap:20px!important}
-.panel{
- border:1px solid rgba(18,87,105,.10)!important;border-radius:20px!important;
- background:rgba(255,255,255,.96)!important;box-shadow:var(--home-shadow)!important;
-}
-.panel-head{border-bottom-color:#e6edef!important}
-.panel-head h2,.panel-head h3{color:var(--home-navy)!important;letter-spacing:-.2px}
-.panel-head p{color:var(--home-muted)!important}
-#mapPanel{overflow:hidden!important}
-.map-wrap{border-radius:0 0 20px 20px!important;overflow:hidden!important}
-.map-badge,.legend{
- border:1px solid rgba(7,45,75,.10)!important;
- background:rgba(255,255,255,.93)!important;
- box-shadow:0 8px 24px rgba(7,45,75,.12)!important;
- backdrop-filter:blur(10px)!important;
-}
-.ghost-btn{border-radius:999px!important}
-.ghost-btn.active{background:var(--home-navy)!important;color:#fff!important}
-.green-data-frame,.red-rain-frame{
- border-top:0!important;box-shadow:var(--home-shadow)!important;
-}
-.green-data-frame::before,.red-rain-frame::before{display:none!important}
-.metric-row,.detail-metrics>div,.status-criteria-row{
- border-color:#e4ecee!important;background:#f7fafb!important;border-radius:12px!important;
-}
-.report-btn{
- border-radius:12px!important;background:var(--home-navy)!important;
- box-shadow:none!important;
-}
-.weather-icon{background:var(--home-sky)!important}
-.temperature,.station-name{color:var(--home-navy)!important}
-.rank-row{border-radius:12px!important}
-.rank-row:hover{background:var(--home-sky)!important}
-.table-panel{margin-top:20px!important;overflow:hidden!important}
-.table-tools{background:#f7fafb!important;border-bottom:1px solid var(--home-line)!important}
-.table-tools input,.table-tools select{
- border:1px solid var(--home-line)!important;border-radius:12px!important;background:#fff!important;
-}
-.weather-table thead th{
- position:sticky;top:0;z-index:2;background:var(--home-navy)!important;
- color:#fff!important;border:0!important;
-}
-.weather-table tbody tr:nth-child(even){background:#f7fafb!important}
-.weather-table tbody tr:hover{background:#edf7f7!important}
-.news-section{
- margin-top:24px!important;padding:34px!important;border-radius:26px!important;
- background:linear-gradient(180deg,#eef6f7 0,#f7fafb 100%)!important;
- border:1px solid #dcebed!important;
-}
-.news-heading h2{color:var(--home-navy)!important;font-size:28px!important}
-.news-heading>a{color:var(--home-blue)!important;font-weight:700!important}
-.tmd-grid{gap:18px!important}
-.tmd-pdf-button{border-radius:12px!important;background:var(--home-navy)!important}
-.news-tabs button{border-radius:999px!important}
-.news-tabs button.active{background:var(--home-navy)!important;color:#fff!important}
-.news-card,.news-featured{border-radius:18px!important;overflow:hidden!important}
-.footer{
- width:min(1760px,calc(100% - 40px))!important;margin:0 auto 30px!important;
- border:0!important;border-radius:18px!important;background:var(--home-navy)!important;
- color:rgba(255,255,255,.75)!important;padding:22px 26px!important;
-}
-.footer strong,.footer a{color:#fff!important}
-@media(max-width:1180px){
- .home-hero{grid-template-columns:1fr;padding:44px}
- .home-quick-links{grid-template-columns:repeat(4,minmax(0,1fr))}
- .home-quick-links a{min-height:124px}
-}
-@media(max-width:820px){
- .system-header-inner{width:min(100% - 24px,1760px)!important}
- .system-clock{display:none!important}
- .system-brand strong{font-size:16px!important}
- .app-shell,.footer{width:calc(100% - 20px)!important}
- .home-hero{padding:34px 24px;border-radius:22px}
- .home-hero h1{font-size:34px}
- .home-quick-links{grid-template-columns:repeat(2,minmax(0,1fr))}
- .home-quick-links a{min-height:118px}
- .news-section{padding:22px!important}
-}
-@media(max-width:560px){
- .system-brand strong{max-width:190px;white-space:normal;line-height:1.25}
- .contact-nav{display:none!important}
- .home-hero{padding:30px 20px}
- .home-hero h1{font-size:30px;letter-spacing:-.6px}
- .home-hero-copy>p{font-size:15px}
- .home-hero-actions a{width:100%}
- .home-quick-links{grid-template-columns:1fr}
- .home-quick-links a{min-height:auto}
- .ticker .source-link{display:none!important}
-}
-</style>
-
-<style id="daily-water-intelligence-20260922-v1">
-.water-intelligence{
- margin-top:24px;padding:36px;border:1px solid #d9e7eb;border-radius:26px;
- background:linear-gradient(145deg,#f7fbfc 0%,#edf6f8 100%);
- box-shadow:0 16px 42px rgba(9,62,82,.07);
-}
-.water-intelligence-head{
- display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:22px;
-}
-.water-intelligence-head>div>span,.basin-kicker{
- color:#0b7f91;font-size:12px;font-weight:700;letter-spacing:1.3px;
-}
-.water-intelligence-head h2{margin:5px 0 3px;color:#072d4b;font-size:29px}
-.water-intelligence-head p{margin:0;color:#657986}
-.water-report-date{
- flex:0 0 auto;padding:8px 13px;border:1px solid #c9dfe4;border-radius:999px;
- background:#fff;color:#496b78;font-size:13px;
-}
-.water-summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.water-summary-card{
- position:relative;overflow:hidden;min-height:210px;padding:23px;border:1px solid #dce8eb;
- border-radius:18px;background:#fff;box-shadow:0 10px 26px rgba(9,62,82,.06);
-}
-.water-summary-card::after{
- content:"";position:absolute;right:-28px;bottom:-34px;width:100px;height:100px;
- border-radius:50%;background:var(--card-tint);
-}
-.water-summary-card.watch{--card-color:#e09216;--card-tint:#fff3d9}
-.water-summary-card.forecast{--card-color:#0b7f91;--card-tint:#daf2f1}
-.water-summary-card.current{--card-color:#1768ad;--card-tint:#e0effa}
-.water-card-label{display:flex;align-items:center;gap:8px;color:var(--card-color);font-size:13px;font-weight:700}
-.water-card-label i{width:9px;height:9px;border-radius:50%;background:var(--card-color)}
-.water-summary-card h3{position:relative;z-index:1;margin:18px 0 9px;color:#15384c;font-size:20px}
-.water-summary-card p{position:relative;z-index:1;margin:0;color:#657986;line-height:1.68;font-size:15px}
-.water-data-layout{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(320px,.55fr);gap:16px;margin-top:16px}
-.water-kpi-panel,.basin-access-card{
- padding:24px;border:1px solid #dce8eb;border-radius:18px;background:#fff;
- box-shadow:0 10px 26px rgba(9,62,82,.06);
-}
-.water-panel-title{display:flex;justify-content:space-between;align-items:center;gap:16px}
-.water-panel-title span{color:#71858f;font-size:13px}
-.water-panel-title h3{margin:2px 0 0;color:#072d4b;font-size:21px}
-.water-panel-title a{color:#0b6596;text-decoration:none;font-size:14px;font-weight:700}
-.water-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:19px}
-.water-kpis>div{padding:17px;border-radius:14px;background:#f3f8f9;border:1px solid #e2ecee}
-.water-kpis small{display:block;min-height:34px;color:#6c808a;line-height:1.35}
-.water-kpis strong{display:block;margin:5px 0 2px;color:#0b6596;font-size:29px;line-height:1}
-.water-kpis span{color:#526e7a;font-size:12px}
-.water-source-note{margin:15px 0 0;color:#7a6a45;font-size:12px;line-height:1.6}
-.basin-access-card{
- display:flex;flex-direction:column;color:#fff;border:0;
- background:linear-gradient(145deg,#073e61,#087d88);
-}
-.basin-access-card .basin-kicker{color:#81e2dc}
-.basin-access-card h3{margin:12px 0 8px;font-size:24px}
-.basin-access-card p{margin:0;color:rgba(255,255,255,.76);line-height:1.65}
-.basin-features{display:flex;flex-wrap:wrap;gap:7px;margin:18px 0}
-.basin-features span{
- padding:6px 9px;border:1px solid rgba(255,255,255,.20);border-radius:999px;
- background:rgba(255,255,255,.08);font-size:12px;
-}
-.basin-access-card>a{
- display:flex;align-items:center;justify-content:center;margin-top:auto;min-height:44px;
- border-radius:12px;background:#fff;color:#073e61;text-decoration:none;font-weight:700;
-}
-.home-quick-links{grid-template-columns:repeat(5,minmax(0,1fr))!important}
-@media(max-width:1180px){
- .home-quick-links{grid-template-columns:repeat(3,minmax(0,1fr))!important}
- .water-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
- .water-data-layout{grid-template-columns:1fr}
-}
-@media(max-width:820px){
- .water-intelligence{padding:24px}
- .water-intelligence-head{align-items:flex-start;flex-direction:column}
- .water-summary-grid{grid-template-columns:1fr}
- .home-quick-links{grid-template-columns:repeat(2,minmax(0,1fr))!important}
-}
-@media(max-width:560px){
- .water-intelligence{padding:18px}
- .water-intelligence-head h2{font-size:24px}
- .water-kpis{grid-template-columns:1fr}
- .water-panel-title{align-items:flex-start;flex-direction:column}
- .home-quick-links{grid-template-columns:1fr!important}
-}
-</style>
-
-<style id="daily-compact-news-20260922-v1">
-html body main.main #relatedNews.news-section{
- margin-top:20px!important;
- padding:24px!important;
- border:1px solid #DCE5E8!important;
- border-radius:18px!important;
- background:#FFFFFF!important;
- box-shadow:0 8px 24px rgba(14,55,72,.055)!important;
-}
-html body main.main #relatedNews .news-heading{
- align-items:center!important;
- margin:0 0 18px!important;
- padding:0 0 14px!important;
- border-bottom:1px solid #E7ECEE!important;
-}
-html body main.main #relatedNews .news-heading h2{
- margin:0!important;
- color:#173B50!important;
- font-size:23px!important;
- font-weight:600!important;
-}
-html body main.main #relatedNews .news-heading p{
- margin:3px 0 0!important;
- color:#71818A!important;
- font-size:13px!important;
-}
-html body main.main #relatedNews .news-heading>a{display:none!important}
-html body main.main #relatedNews .tmd-grid{
- display:grid!important;
- grid-template-columns:repeat(2,minmax(0,1fr))!important;
- gap:12px!important;
- margin:0 0 16px!important;
-}
-html body main.main #relatedNews .tmd-panel{
- border:1px solid #E0E7E9!important;
- border-radius:14px!important;
- background:#FAFCFC!important;
- box-shadow:none!important;
- overflow:hidden!important;
-}
-html body main.main #relatedNews .tmd-panel .panel-head{
- min-height:auto!important;
- padding:14px 16px!important;
- border-bottom:1px solid #E5ECEE!important;
- background:#FFFFFF!important;
-}
-html body main.main #relatedNews .tmd-panel .panel-head h2{
- font-size:17px!important;
- line-height:1.35!important;
-}
-html body main.main #relatedNews .tmd-panel .panel-head p{
- margin-top:2px!important;
- font-size:12px!important;
-}
-html body main.main #relatedNews .tmd-panel .panel-head a{
- padding:6px 9px!important;
- border:1px solid #D9E4E7!important;
- border-radius:8px!important;
- background:#FFFFFF!important;
- color:#1768AD!important;
- font-size:12px!important;
-}
-html body main.main #relatedNews .tmd-pdf-button{
- margin:12px 14px 0!important;
- padding:9px 12px!important;
- border-radius:8px!important;
- background:#EEF5F8!important;
- color:#1768AD!important;
- font-size:12px!important;
-}
-html body main.main #relatedNews .warning-content{padding:12px 14px 14px!important}
-html body main.main #relatedNews .warning-item{
- padding:11px 12px!important;
- border:0!important;
- border-left:3px solid #D84444!important;
- border-radius:8px!important;
- background:#FFF7F7!important;
- box-shadow:none!important;
-}
-html body main.main #relatedNews .warning-item h3{
- margin:0 0 4px!important;
- font-size:14px!important;
-}
-html body main.main #relatedNews .warning-item p{
- font-size:12px!important;
- line-height:1.55!important;
- -webkit-line-clamp:3!important;
-}
-html body main.main #relatedNews .warning-meta{margin-top:6px!important;font-size:11px!important}
-html body main.main #relatedNews .forecast-summary-list{
- display:grid!important;
- grid-template-columns:repeat(2,minmax(0,1fr))!important;
- gap:7px!important;
- padding:12px 14px 7px!important;
-}
-html body main.main #relatedNews .forecast-summary-list a{
- min-height:38px!important;
- padding:8px 10px!important;
- border:1px solid #E1E8EA!important;
- border-radius:8px!important;
- background:#FFFFFF!important;
- font-size:12px!important;
-}
-html body main.main #relatedNews .forecast-note{
- margin:0 14px 14px!important;
- padding:8px 10px!important;
- border-radius:8px!important;
- font-size:11px!important;
-}
-html body main.main #relatedNews .news-tabs{
- gap:6px!important;
- margin:0 0 12px!important;
- padding:0 0 3px!important;
-}
-html body main.main #relatedNews .news-tabs button{
- padding:6px 11px!important;
- border-radius:8px!important;
- font-size:12px!important;
-}
-html body main.main #relatedNews .news-tabs button.active{
- border-color:#1768AD!important;
- background:#1768AD!important;
- color:#FFFFFF!important;
-}
-html body main.main #relatedNews .news-featured{
- display:grid!important;
- grid-template-columns:230px minmax(0,1fr)!important;
- min-height:190px!important;
- margin-bottom:12px!important;
- border:1px solid #E0E7E9!important;
- border-radius:12px!important;
- background:#FFFFFF!important;
- box-shadow:none!important;
-}
-html body main.main #relatedNews .news-featured-image{min-height:190px!important}
-html body main.main #relatedNews .news-featured-copy{padding:18px!important}
-html body main.main #relatedNews .news-featured-copy h3{
- margin:6px 0!important;
- font-size:19px!important;
- line-height:1.4!important;
-}
-html body main.main #relatedNews .news-featured-copy p{
- font-size:13px!important;
- line-height:1.55!important;
- display:-webkit-box!important;
- -webkit-box-orient:vertical!important;
- -webkit-line-clamp:2!important;
- overflow:hidden!important;
-}
-html body main.main #relatedNews .news-read{margin-top:8px!important;font-size:12px!important}
-html body main.main #relatedNews .news-grid{
- grid-template-columns:repeat(4,minmax(0,1fr))!important;
- gap:10px!important;
-}
-html body main.main #relatedNews .news-card{
- display:grid!important;
- grid-template-columns:105px minmax(0,1fr)!important;
- min-height:108px!important;
- border:1px solid #E1E8EA!important;
- border-radius:10px!important;
- box-shadow:none!important;
-}
-html body main.main #relatedNews .news-card-image{height:100%!important;min-height:108px!important}
-html body main.main #relatedNews .news-card-copy{padding:10px!important}
-html body main.main #relatedNews .news-card-copy small{font-size:10px!important}
-html body main.main #relatedNews .news-card-copy h3{
- margin:4px 0!important;
- font-size:13px!important;
- line-height:1.4!important;
- display:-webkit-box!important;
- -webkit-box-orient:vertical!important;
- -webkit-line-clamp:2!important;
- overflow:hidden!important;
-}
-html body main.main #relatedNews .news-card-copy p{display:none!important}
-@media(max-width:1250px){
- html body main.main #relatedNews .news-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
-}
-@media(max-width:820px){
- html body main.main #relatedNews.news-section{padding:18px!important}
- html body main.main #relatedNews .tmd-grid{grid-template-columns:1fr!important}
- html body main.main #relatedNews .news-featured{grid-template-columns:170px minmax(0,1fr)!important}
-}
-@media(max-width:560px){
- html body main.main #relatedNews .news-heading h2{font-size:20px!important}
- html body main.main #relatedNews .news-featured{grid-template-columns:1fr!important}
- html body main.main #relatedNews .news-featured-image{min-height:170px!important}
- html body main.main #relatedNews .news-grid{grid-template-columns:1fr!important}
- html body main.main #relatedNews .forecast-summary-list{grid-template-columns:1fr!important}
-}
-</style>
-</head>
-<body>
-<header class="bar system-header">
- <div class="bar-in system-header-inner">
-  <a class="system-brand" href="https://oc.ieat.go.th/th" target="_blank" rel="noopener noreferrer" aria-label="ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย">
-   <img src="./assets/TH-Vertical.png" alt="โลโก้การนิคมอุตสาหกรรมแห่งประเทศไทย">
-   <strong>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย</strong>
-  </a>
-  <div class="system-clock" id="headerClock">🌟 กำลังตรวจสอบเวลา</div>
-  <nav class="system-actions" aria-label="เมนูหลัก">
-   <a class="news-nav active" href="#overview"><span>⌂</span> หน้าแรก</a>
-   <div class="more-wrap">
-    <button class="more-btn" id="headerMoreBtn" type="button" aria-label="เมนูเพิ่มเติม" aria-expanded="false">⋮</button>
-    <div class="more-menu" id="headerMoreMenu">
-     <a href="#overview">สภาพอากาศ</a>
-     <a href="./information.html">ข้อมูล</a>
-     <a href="./hub.html">เข้าสู่หน้า Hub</a>
-    </div>
-   </div>
-   <a class="contact-nav" href="./contacts.html">รายงาน</a>
-  </nav>
- </div>
-</header><div class="app-shell">
-<main class="main" id="overview">
- 
-
- <section class="ticker"><span class="ticker-label">LIVE UPDATE</span><strong class="ticker-text" id="tickerText">กำลังประมวลผลสถานการณ์อากาศล่าสุดทั่วประเทศ</strong><span class="ticker-time" id="tickerTime">–</span><span class="sync" id="syncState"><i class="sync-dot"></i><span id="syncText">กำลังเชื่อมต่อข้อมูล</span></span><a class="source-link" href="https://nawakonnakhonchai-wq.github.io/temp_3_hr/weather_data.geojson" target="_blank" rel="noopener">แหล่งข้อมูล ↗</a></section>
- <div class="dashboard">
-  <div class="left-column">
-   <section class="panel" id="mapPanel">
-    <header class="panel-head"><div><h2>แผนที่สถานีตรวจวัดสภาพอากาศ</h2><p>เลือกจุดบนแผนที่เพื่อดูรายละเอียดสถานี</p></div><div class="panel-actions"><button class="ghost-btn active" data-mode="rainfall_24hr">ฝน 24 ชม.</button><button class="ghost-btn" data-mode="temp">อุณหภูมิ</button></div></header>
-    <div class="map-wrap"><div id="map"></div><div class="map-badge">พื้นที่เข้าเกณฑ์เฝ้าระวัง <b id="mapAlertCount">–</b> สถานี · สำนักงานนิคมฯ <b id="estateOfficeCount">–</b> แห่ง</div><div class="legend"><span><svg class="estate-legend" aria-hidden="true" viewBox="0 0 511.999 511.999" xmlns="http://www.w3.org/2000/svg"><path fill="#511378" d="M405.961 62.116C323.14-20.705 188.86-20.705 106.039 62.116s-82.821 217.101 0 299.922L256 511.999l149.961-149.961c82.821-82.821 82.821-217.101 0-299.922z"/><path fill="#7552cc" d="M130.368 337.708c-33.558-33.558-52.04-78.175-52.04-125.633s18.481-92.074 52.04-125.631C163.924 52.887 208.542 34.406 256 34.406c47.457 0 92.074 18.481 125.631 52.038s52.04 78.175 52.04 125.631c0 47.458-18.481 92.075-52.04 125.631L255.998 463.34 130.368 337.708z"/><circle fill="#E6E6E6" cx="256" cy="212.083" r="129.59"/><path fill="#CCCCCC" d="M298.319 299.352c-71.573 0-129.594-58.021-129.594-129.594 0-24.945 7.055-48.238 19.266-68.008-36.956 22.828-61.585 63.699-61.585 110.327 0 71.573 58.021 129.594 129.594 129.594 46.628 0 87.498-24.63 110.326-61.585-19.769 12.212-43.064 19.266-68.007 19.266z"/><path fill="#511378" d="M256 354.057c-78.288 0-141.98-63.692-141.98-141.98S177.712 70.097 256 70.097s141.98 63.692 141.98 141.98S334.287 354.057 256 354.057zm0-259.187c-64.628 0-117.207 52.579-117.207 117.207S191.371 329.284 256 329.284s117.207-52.579 117.207-117.207S320.628 94.87 256 94.87z"/><ellipse transform="matrix(-.7071 -.7071 .7071 -.7071 414.7711 493.1812)" fill="#FFF" cx="309.527" cy="160.689" rx="51.607" ry="30.964"/></svg>สำนักงานนิคมฯ</span><span><i class="province-boundary-legend"></i>ขอบเขตจังหวัด</span><span><i style="background:#42a846"></i>ปกติ</span><span><i style="background:#ffc719"></i>เฝ้าระวัง</span><span><i style="background:#ff6908"></i>ฝนหนัก</span><span><i style="background:#bf033b"></i>วิกฤต</span></div><div class="map-loading" id="mapLoading">กำลังโหลดข้อมูลสถานีทั่วประเทศ…</div></div>
-   </section>
-   <div class="bottom-grid">
-    <section class="panel extremes green-data-frame"><header class="panel-head" style="padding:0 0 10px;min-height:auto"><div><h3>สถานการณ์เด่นทั่วประเทศ</h3><p>ประเมินจากข้อมูลล่าสุด</p></div></header><div class="alert-box" id="alertBox">กำลังวิเคราะห์พื้นที่ที่ต้องเฝ้าระวัง</div><div class="metric-list"><div class="metric-row"><span>ความเร็วลมสูงสุด</span><b id="maxWind">–</b></div><div class="metric-row"><span>ฝนสะสมสูงสุด</span><b id="maxRain">–</b></div><div class="metric-row"><span>อุณหภูมิสูงสุด</span><b id="maxTemp">–</b></div><div class="metric-row"><span>จำนวนสถานีทั้งหมด</span><b id="stationCount">–</b></div></div><button class="report-btn" id="scrollTable">ดูรายละเอียดทุกสถานี</button></section>
-    <section class="panel red-rain-frame"><header class="panel-head"><div><h3>ภาพรวมฝนสะสม 24 ชั่วโมง</h3><p>10 สถานีที่มีปริมาณฝนสูงสุด</p></div><span id="rainTotalLabel"></span></header><div class="rain-chart"><div class="bars" id="rainBars"></div></div></section>
-   </div>
-  </div>
-  <aside class="right-column">
-   <section class="panel detail green-data-frame"><header class="panel-head" style="padding:0 0 13px;min-height:auto"><div><h3>รายละเอียดสถานี</h3><p id="localTime">เวลาประเทศไทย –</p></div></header><div class="detail-top"><div class="weather-icon" id="weatherIcon">🌦️</div><div class="temperature" id="detailTemp">–<small>°C</small></div><div class="condition"><span>สถานการณ์</span><b id="detailCondition">รอข้อมูล</b></div></div><h2 class="station-name" id="detailName">กำลังเลือกสถานีล่าสุด</h2><div class="station-location" id="detailProvince">–</div><div class="detail-metrics"><div><span>ฝนล่าสุด</span><b id="detailRain">–</b></div><div><span>ฝน 24 ชม.</span><b id="detailRain24">–</b></div><div><span>ความเร็วลม</span><b id="detailWind">–</b></div></div><div class="detail-metrics"><div><span>ทิศทางลม</span><b id="detailDirection">–</b></div><div><span>ละติจูด</span><b id="detailLat">–</b></div><div><span>ลองจิจูด</span><b id="detailLng">–</b></div></div></section>
-   <section class="panel green-data-frame"><header class="panel-head"><div><h3>สถานีฝนสูงสุด</h3><p>คลิกเพื่อดูตำแหน่งบนแผนที่</p></div><span class="status-pill watch">24 ชม.</span></header><div class="ranking" id="ranking"><div class="notice">กำลังจัดอันดับข้อมูล</div></div></section>
-   <section class="panel status-criteria-card"><header class="panel-head"><div><h3>หลักเกณฑ์การแสดงสถานะ</h3><p>ปริมาณฝนสะสม 24 ชั่วโมง</p></div></header><div class="status-criteria-list"><div class="status-criteria-row"><span>1. ปกติ</span><b class="criteria-normal">น้อยกว่า 35 มม.</b></div><div class="status-criteria-row"><span>2. เฝ้าระวัง</span><b class="criteria-watch">35–59.9 มม.</b></div><div class="status-criteria-row"><span>3. ฝนหนัก</span><b class="criteria-warning">60–89.9 มม.</b></div><div class="status-criteria-row"><span>4. วิกฤต</span><b class="criteria-critical">90 มม. ขึ้นไป</b></div></div><p class="criteria-note">ข้อมูลสำหรับการคัดกรองและสนับสนุนการเฝ้าระวังเบื้องต้น</p></section>
-  </aside>
- </div>
- <section class="panel table-panel" id="stationTable">
-  <header class="panel-head"><div><h2>ข้อมูลสถานีตรวจวัดทั่วประเทศ</h2><p>ค้นหา กรอง และเรียงตามปริมาณฝนสะสม</p></div><span id="visibleRows">0 รายการ</span></header>
-  <div class="table-tools"><input id="tableSearch" type="search" placeholder="ค้นหาชื่อสถานีหรือจังหวัด"><select id="statusFilter"><option value="all">ทุกสถานะ</option><option value="critical">วิกฤต</option><option value="warning">ฝนหนัก</option><option value="watch">เฝ้าระวัง</option><option value="normal">ปกติ</option></select></div>
-  <div class="table-scroll"><table class="weather-table"><thead><tr><th>สถานี</th><th>จังหวัด</th><th>อุณหภูมิ</th><th>ฝนล่าสุด</th><th>ฝนสะสม 24 ชม.</th><th>ความเร็วลม</th><th>ทิศทางลม</th><th>สถานะ</th></tr></thead><tbody id="stationRows"><tr><td colspan="8">กำลังโหลดข้อมูล…</td></tr></tbody></table></div>
- </section>
-
-<section class="water-intelligence" id="waterSituationReports" aria-labelledby="waterSituationReportsTitle">
-  <header class="water-intelligence-head">
-    <div>
-      <span>WATER SITUATION REPORT</span>
-      <h2 id="waterSituationReportsTitle">รายงานสถานการณ์น้ำและข้อมูลลุ่มน้ำ</h2>
-      <p>ข้อมูลประกอบการเฝ้าระวังจากคลังข้อมูลน้ำแห่งชาติและสำนักงานทรัพยากรน้ำแห่งชาติ</p>
-    </div>
-    <span class="water-report-date">รายงานอ้างอิง 15 สิงหาคม 2569</span>
-  </header>
-
-  <div class="water-summary-grid">
-    <article class="water-summary-card watch">
-      <div class="water-card-label"><i></i>เฝ้าระวัง</div>
-      <h3>น้ำท่วมฉับพลันและน้ำป่าไหลหลาก</h3>
-      <p>เฝ้าระวังพื้นที่ลาดเชิงเขา พื้นที่น้ำท่วมขังในเขตเมือง และพื้นที่ลุ่มต่ำ โดยเฉพาะภาคเหนือและภาคตะวันออกเฉียงเหนือตอนบน</p>
-    </article>
-    <article class="water-summary-card forecast">
-      <div class="water-card-label"><i></i>คาดการณ์</div>
-      <h3>ฝนตกต่อเนื่องและฝนหนักบางแห่ง</h3>
-      <p>ร่องมรสุมและลมตะวันตกเฉียงใต้ส่งผลให้ภาคเหนือ ภาคตะวันออกเฉียงเหนือ ภาคตะวันออก และภาคใต้ฝั่งตะวันตกมีความเสี่ยงฝนหนัก</p>
-    </article>
-    <article class="water-summary-card current">
-      <div class="water-card-label"><i></i>สถานการณ์ปัจจุบัน</div>
-      <h3>ติดตามระดับน้ำในแม่น้ำสายหลัก</h3>
-      <p>รายงานพบจุดน้ำล้นตลิ่งในแม่น้ำเลย แม่น้ำสงคราม ลำน้ำก่ำ ห้วยแคน และห้วยบังอี่</p>
-    </article>
-  </div>
-
-  <div class="water-data-layout">
-    <article class="water-kpi-panel">
-      <div class="water-panel-title">
-        <div><span>ภาพรวมจากรายงานประจำวัน</span><h3>ตัวเลขสถานการณ์สำคัญ</h3></div>
-        <a href="https://twa.thaiwater.net/th/report/daily/%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%AA%E0%B8%96%E0%B8%B2%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%88%E0%B8%B3%E0%B8%A7%E0%B8%B1%E0%B8%99-15-%E0%B8%AA%E0%B8%B4%E0%B8%87%E0%B8%AB%E0%B8%B2%E0%B8%84%E0%B8%A1-2569#%E0%B9%80%E0%B8%9D%E0%B9%89%E0%B8%B2%E0%B8%A3%E0%B8%B0%E0%B8%A7%E0%B8%B1%E0%B8%87" target="_blank" rel="noopener">อ่านรายงานฉบับเต็ม ↗</a>
-      </div>
-      <div class="water-kpis">
-        <div><small>ฝนสูงสุด</small><strong>113</strong><span>มม. · กาญจนบุรี</span></div>
-        <div><small>น้ำในอ่างใหญ่ 35 แห่ง</small><strong>60%</strong><span>42,680 ล้าน ลบ.ม.</span></div>
-        <div><small>น้ำใช้การ</small><strong>19,130</strong><span>ล้าน ลบ.ม.</span></div>
-        <div><small>พื้นที่พบล้นตลิ่ง</small><strong>5</strong><span>ลำน้ำ/แม่น้ำสำคัญ</span></div>
-      </div>
-      <p class="water-source-note">ตัวเลขข้างต้นอ้างอิงรายงานสถานการณ์น้ำประจำวันที่ 15 สิงหาคม 2569 ไม่ใช่ข้อมูลเรียลไทม์ กรุณาเปิดรายงานต้นทางเพื่อตรวจสอบฉบับล่าสุดก่อนนำไปใช้ตัดสินใจ</p>
-    </article>
-
-    <article class="basin-access-card">
-      <span class="basin-kicker">ONWR BASIN MONITORING</span>
-      <h3>สถานการณ์ลุ่มน้ำโขงเหนือ</h3>
-      <p>เปิดระบบติดตามข้อมูลลุ่มน้ำของสำนักงานทรัพยากรน้ำแห่งชาติ เพื่อดูสถานการณ์และรายละเอียดพื้นที่จากแหล่งข้อมูลโดยตรง</p>
-      <div class="basin-features">
-        <span>ข้อมูลระดับลุ่มน้ำ</span>
-        <span>สถานการณ์เชิงพื้นที่</span>
-        <span>แหล่งข้อมูลทางการ</span>
-      </div>
-      <a href="https://wapt.onwr.go.th/info/basin/khongn" target="_blank" rel="noopener">เปิดระบบข้อมูลลุ่มน้ำ ↗</a>
-    </article>
-  </div>
-</section>
-
- <section class="news-section" id="relatedNews" aria-labelledby="relatedNewsTitle">
-  <header class="news-heading">
-   <div><h2 id="relatedNewsTitle">ข่าวสารและประกาศล่าสุด</h2><p>ข้อมูลสภาพอากาศ สิ่งแวดล้อม และภัยพิบัติจากหน่วยงานทางการ</p></div>
-   <a href="./daily-situation.html">ดูข่าวทั้งหมด →</a>
-  </header>
-  <div class="tmd-grid" id="tmdWeatherInformation">
-   <section class="panel tmd-panel" aria-labelledby="tmdWarningTitle">
-    <header class="panel-head"><div><h2 id="tmdWarningTitle">ข่าวแจ้งเตือนกรมอุตุนิยมวิทยา</h2><p>ประกาศเตือนภัยล่าสุดจากกรมอุตุนิยมวิทยา</p></div><a href="https://www.tmd.go.th/warning-and-events/warning-storm" target="_blank" rel="noopener">ดูประกาศทั้งหมด ↗</a></header>
-    <a class="tmd-pdf-button" href="https://tmd.go.th/media/forecast/daily-forecast/2026-09_15_05_warning_th.pdf" target="_blank" rel="noopener" download>ดาวน์โหลด/อ่านประกาศฉบับเต็ม (PDF)</a>
-    <div class="warning-content" id="tmdWarningList"><div class="load-state">กำลังโหลดข่าวแจ้งเตือนล่าสุด…</div></div>
-   </section>
-   <section class="panel tmd-panel" aria-labelledby="tmdForecastTitle">
-    <header class="panel-head"><div><h2 id="tmdForecastTitle">พยากรณ์อากาศ 7 วันข้างหน้า</h2><p>ข้อมูลพยากรณ์จากกรมอุตุนิยมวิทยา</p></div><a href="https://www.tmd.go.th/forecast/sevenday" target="_blank" rel="noopener">เปิดหน้าพยากรณ์ ↗</a></header>
-    <div class="forecast-summary-list"><a href="https://www.tmd.go.th/forecast/sevenday" target="_blank" rel="noopener"><span>1. ภาคเหนือ</span><b>7 วัน</b></a><a href="https://www.tmd.go.th/forecast/sevenday" target="_blank" rel="noopener"><span>2. ภาคตะวันออกเฉียงเหนือ</span><b>7 วัน</b></a><a href="https://www.tmd.go.th/forecast/sevenday" target="_blank" rel="noopener"><span>3. ภาคกลางและกรุงเทพฯ</span><b>7 วัน</b></a><a href="https://www.tmd.go.th/forecast/sevenday" target="_blank" rel="noopener"><span>4. ภาคตะวันออก</span><b>7 วัน</b></a><a href="https://www.tmd.go.th/forecast/sevenday" target="_blank" rel="noopener"><span>5. ภาคใต้</span><b>7 วัน</b></a></div>
-    <div class="forecast-note">เลือกภูมิภาคเพื่ออ่านรายละเอียดพยากรณ์จากกรมอุตุนิยมวิทยา</div>
-   </section>
-  </div>
-  <div class="news-tabs" id="weatherNewsTabs"><button class="active" data-category="ทั้งหมด">ข่าวทั้งหมด</button></div>
-  <article class="news-featured" id="weatherFeaturedNews"><div class="news-empty">กำลังโหลดข่าวล่าสุด…</div></article>
-  <div class="news-grid" id="weatherNewsGrid"><div class="news-empty">กำลังรวบรวมข่าวและประกาศ…</div></div>
- </section>
-
-</main>
-<footer class="footer"><strong>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย กนอ.</strong><span>ข้อมูลสภาพอากาศอัปเดตจากแหล่งต้นทาง · <a href="#overview">กลับด้านบน</a> · <a href="./hub.html">หน้า Hub</a></span></footer>
-</div>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+.report-view[hidden]{display:none}.report-view{position:fixed;inset:0;z-index:100;background:#f3f5f8;overflow:auto;padding:22px}.report-top{display:flex;align-items:center;justify-content:space-between;gap:15px;max-width:1200px;margin:0 auto 18px}.report-top h2{margin:0}.report-pages{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.report-card{background:#fff;border-radius:14px;padding:16px;box-shadow:0 3px 18px #2a3a4b18}.report-card h3{margin:0 0 10px;color:#263444}.report-card p{color:#627080;font-size:14px}.report-image{position:relative;background:#e8ecf2;min-height:250px;overflow:hidden}.report-image img{display:block;width:100%;height:auto}.report-pins{position:absolute;inset:0;pointer-events:none}.report-pin{position:absolute;transform:translate(-50%,-100%);background:#fff;color:#176437;border:1px solid #176437;border-radius:10px;padding:2px 5px;font-size:11px;white-space:nowrap;max-width:135px;overflow:hidden;text-overflow:ellipsis}.report-card button{margin:7px 6px 0 0}.report-national img{max-height:none;object-fit:contain}.report-national .report-pins{position:absolute;inset:0;pointer-events:none}.report-national .report-pin-icon{position:absolute;width:17px;height:17px;transform:translate(-50%,-100%);filter:drop-shadow(0 1px 2px #fff);pointer-events:auto;margin:0;padding:0;border:0;background:transparent;box-shadow:none}.report-national .report-pin-icon svg{width:100%;height:100%}.report-national .report-cluster{position:absolute;width:24px;height:24px;transform:translate(-50%,-50%);display:grid;place-items:center;border-radius:50%;border:2px solid #fff;background:#52057f;color:#fff;font-size:11px;font-weight:700;padding:0;pointer-events:auto;box-shadow:0 1px 5px #21112a88;margin:0}.report-national .report-cluster-detail{position:absolute;left:8px;right:8px;bottom:8px;max-height:180px;overflow:auto;background:#fffffff2;border:1px solid #52057f;border-radius:8px;padding:8px 12px;color:#52057f;font-size:12px;box-shadow:0 2px 8px #0002}.report-national .report-cluster-detail[hidden]{display:none}.report-card:first-child .report-image{min-height:0}.report-card:first-child .report-image img{width:100%;height:auto;aspect-ratio:1100/1530;object-fit:contain}.report-map-controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0 12px}.report-map-controls input{min-width:240px;flex:1;padding:8px;border:1px solid #cad4df;border-radius:8px}.report-map-controls button{margin:0}.report-card:first-child .report-image{cursor:grab;touch-action:none;user-select:none}.report-status{max-width:1200px;margin:10px auto;color:#5c346d}@media(max-width:850px){.report-pages{grid-template-columns:1fr}.report-view{padding:12px}}
+</style></head><body>
+<header><div><h1>เรดาร์ฝนระยอง × นิคมอุตสาหกรรม</h1><p>ภาพฝนจาก <a href="https://weather.tmd.go.th/rygloop.php" target="_blank" rel="noopener">TMD Rayong Loop</a> · ข้อมูลนิคมอุตสาหกรรม: กนอ.</p></div><button id="export" class="primary">ส่งออกรายงาน</button></header>
+<main class="layout"><section class="map-card"><div id="map"></div><img id="radarImage" alt="" aria-hidden="true" style="position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none"><div id="estateMarkers" aria-label="ตำแหน่งนิคมอุตสาหกรรม"></div><canvas id="radarCanvas" aria-label="ภาพฝนเรดาร์ระยอง กรองพื้นหลังออก" role="img" style="position:absolute;z-index:1;pointer-events:none;display:none"></canvas><nav class="toolbar" aria-label="แผนที่"><button id="country">ทั่วประเทศ</button><button id="east">ภาคตะวันออก</button><button id="rayong">ระยอง</button><button id="radar">ซ่อนเรดาร์</button><label style="background:white;padding:7px;border-radius:8px">ความทึบ <input id="opacity" aria-label="ความทึบเรดาร์" type="range" min="0" max="100" value="100"></label></nav><aside class="radar-legend" aria-label="คำอธิบายค่าสะท้อนเรดาร์ฝน"><strong>CMAX (dBZ)</strong><div class="legend-body"><div class="legend-gradient" aria-hidden="true"></div><div class="legend-ticks"><span>65+</span><span>50</span><span>40</span><span>30</span><span>20</span><span>10</span></div></div><small>ค่าสะท้อนเรดาร์ ยิ่งสูงสัญญาณฝนยิ่งเข้ม</small><a href="https://weather.tmd.go.th/ryg/rygloop.gif" target="_blank" rel="noopener">ดู GIF และเวลาเรดาร์จาก TMD ↗</a><div id="radarTime" aria-live="polite">กำลังตรวจภาพจาก TMD…</div></aside><div class="status" id="status" role="status">กำลังโหลดแผนที่และข้อมูลเรดาร์ระยอง…</div></section><aside class="side"><div class="side-head"><h2>จำนวนนิคมอุตสาหกรรมที่อยู่ในพื้นที่เรดาร์ <span id="count">—</span></h2><small>แสดงรายชื่อนิคมในรัศมีเรดาร์ระยอง · คลิกรายชื่อเพื่อซูม</small></div><ol class="list" id="estates"><li class="empty">กำลังโหลดข้อมูล IEAT…</li></ol><footer>รายการอ้างอิงจากฟิลด์ IEAT ของ EPP_2026_V1 · เรดาร์ระยองครอบคลุมเฉพาะพื้นที่รอบสถานี</footer></aside></main>
+<section class="report-view" id="reportView" hidden aria-label="ส่งออกรายงานเรดาร์"><div class="report-top"><h2>ส่งออกรายงานเรดาร์ฝนและนิคมอุตสาหกรรม</h2><button id="closeReport">กลับสู่แผนที่</button></div><div class="report-pages"><article class="report-card"><h3>หน้า 1 · เรดาร์ฝนระยอง</h3><div class="report-map-controls"><input id="reportEstateSearch" list="reportEstateOptions" placeholder="ค้นหาชื่อนิคมอุตสาหกรรม" aria-label="ค้นหานิคมอุตสาหกรรม"><datalist id="reportEstateOptions"></datalist><button id="reportSearchButton">ค้นหาและซูม</button><button id="reportZoomIn" aria-label="ซูมเข้า">＋</button><button id="reportZoomOut" aria-label="ซูมออก">－</button><button id="reportReset">ภาพรวมเรดาร์</button></div><div class="report-image" id="rayongReport" title="ลากเพื่อเลื่อนแผนที่ ใช้ล้อเมาส์เพื่อซูม"><img id="rayongReportImage" draggable="false" alt="แผนที่นิคมอุตสาหกรรมและภาพฝนเรดาร์ระยอง"></div><p>ลากแผนที่และใช้ล้อเมาส์เพื่อซูม หรือค้นหานิคมฯ ก่อนดาวน์โหลด</p><button data-save="rayong-png">ดาวน์โหลด PNG</button><button data-save="rayong-gif">ดาวน์โหลด GIF</button></article><article class="report-card"><h3>หน้า 2 · เรดาร์คอมโพสิททั่วประเทศ</h3><div class="report-image report-national"><img id="compositeReportImage" alt="Radar Composite QPF พร้อมตำแหน่งสำนักงานนิคมอุตสาหกรรมทั่วประเทศ"><div id="nationalReportPins" class="report-pins" aria-label="ตำแหน่งนิคมอุตสาหกรรมบนภาพเรดาร์"></div><div id="nationalClusterDetail" class="report-cluster-detail" hidden></div></div><p>ภาพ Radar Composite QPF ตามเวลาของภาพต้นทาง พร้อมตำแหน่งสำนักงานนิคมฯ บนภาพเดียวกัน · ตัวเลขในวงกลมคือจำนวนตำแหน่งใกล้กัน คลิกเพื่อดูรายชื่อ</p><button data-save="national-png">ดาวน์โหลด PNG</button><button data-save="national-gif">ดาวน์โหลด GIF</button></article></div><p class="report-status" id="reportStatus" role="status"></p></section>
 <script>
-(function(){
-"use strict";
-var DATA_URL="https://nawakonnakhonchai-wq.github.io/temp_3_hr/weather_data.geojson";
-var ESTATE_URL="https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/e_PP_2025/FeatureServer/1/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=geojson";
-var PROVINCE_URL="https://services1.arcgis.com/jSaRWj2TDlcN1zOC/arcgis/rest/services/Thailand_Province_Boundaries_view/FeatureServer/1/query?where=1%3D1&outFields=ADMIN_ID1%2CNAME1%2CNAME_ENG1&returnGeometry=true&outSR=4326&f=geojson";
-var all=[],filtered=[],markers=[],mode="rainfall_24hr",selected=null;
-var map=L.map("map",{zoomControl:true,minZoom:4}).setView([13.25,101.1],6);
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:"© OpenStreetMap contributors"}).addTo(map);
-map.createPane("provincePane");map.getPane("provincePane").style.zIndex=350;
-var markerLayer=L.layerGroup().addTo(map);
-var estateLayer=L.layerGroup().addTo(map);
-var selectedProvince=null;
-var provinceLayer=L.geoJSON(null,{
- pane:"provincePane",
- style:function(){return{pane:"provincePane",color:"#717780",weight:1,opacity:.75,fillColor:"#ffffff",fillOpacity:0}},
- onEachFeature:function(feature,layer){
-  var p=feature.properties||{},thai=p.NAME1||"ไม่ระบุชื่อจังหวัด",english=p.NAME_ENG1||"";
-  layer.bindTooltip("จังหวัด "+thai,{sticky:true});
-  layer.bindPopup('<div class="province-popup"><b>จังหวัด '+esc(thai)+'</b>'+(english?'<br><span>'+esc(english)+'</span>':"")+'</div>');
-  layer.on("click",function(){
-   if(selectedProvince)provinceLayer.resetStyle(selectedProvince);
-   selectedProvince=layer;
-   layer.setStyle({color:"#832561",weight:3,opacity:1,fillColor:"#832561",fillOpacity:.10});
-   layer.bringToFront();
-   map.fitBounds(layer.getBounds(),{padding:[28,28],maxZoom:9});
-   layer.openPopup();
+require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer','esri/geometry/Point','esri/geometry/Circle','esri/widgets/Search','esri/widgets/LayerList','esri/widgets/Legend','esri/widgets/Expand','esri/widgets/BasemapGallery','esri/layers/GraphicsLayer','esri/Graphic'],function(WebMap,EsriMap,MapView,FeatureLayer,Point,Circle,Search,LayerList,Legend,Expand,BasemapGallery,GraphicsLayer,Graphic){
+  // TMD Rayong scan: 800px square, 240 km radius, centre at pixel (410,395).
+  // Radar station: 12°38′01″N, 101°20′26″E (TMD station table).
+  const station={lat:12+38/60+1/3600,lon:101+20/60+26/3600};
+  const latPerPixel=240/111.2/399,lonPerPixel=240/(111.2*Math.cos(station.lat*Math.PI/180))/399;
+  const bounds={west:station.lon-410*lonPerPixel,east:station.lon+390*lonPerPixel,north:station.lat+395*latPerPixel,south:station.lat-405*latPerPixel};
+  const radarImage=document.getElementById('radarImage'),radarCanvas=document.getElementById('radarCanvas');
+  const radarContext=radarCanvas.getContext('2d',{willReadFrequently:true});let radarVisible=true;
+  radarCanvas.style.opacity='1';
+  let lastRadarLoaded=0,radarLoading=false,radarObjectUrl='',gifPlaybackToken=0,gifFrameTimer=0,fallbackTimer=0,activeDecoder=null,gifFrameCount=0;
+  const radarTime=document.getElementById('radarTime');
+  function thaiTime(value){return new Date(value).toLocaleString('th-TH',{timeZone:'Asia/Bangkok',dateStyle:'short',timeStyle:'short'})}
+  async function reloadRadar(){
+    if(radarLoading)return;
+    radarLoading=true;
+    try{
+      const response=await fetch('https://feature-tmd-ieat-radar-map-ieat-emonitoring-line-alert.thanawankaiyaso.workers.dev/api/rayong-radar.gif?t='+Date.now(),{cache:'no-store'});
+      if(!response.ok||!String(response.headers.get('content-type')).includes('image/gif'))throw Error('TMD ไม่ส่งภาพ GIF');
+      const modified=response.headers.get('last-modified');
+      const blob=await response.blob();
+      if(!blob.size)throw Error('ไฟล์ภาพว่าง');
+      const url=URL.createObjectURL(blob),probe=new Image();
+      await new Promise((resolve,reject)=>{probe.onload=resolve;probe.onerror=()=>reject(Error('เปิดไฟล์ GIF ไม่สำเร็จ'));probe.src=url}).catch(error=>{URL.revokeObjectURL(url);throw error});
+      const previous=radarObjectUrl;radarObjectUrl=url;radarImage.src=url;
+      if(previous)URL.revokeObjectURL(previous);
+      lastRadarLoaded=Date.now();
+      await startGifPlayback(blob);
+      const fileTime=modified&&Number.isFinite(Date.parse(modified))?' · เวลาแก้ไขไฟล์ TMD '+thaiTime(modified):' · TMD ไม่ระบุเวลาแก้ไขไฟล์';
+      radarTime.textContent='ตรวจภาพจาก TMD '+thaiTime(lastRadarLoaded)+fileTime+(gifFrameCount>1?' · GIF '+gifFrameCount+' เฟรม':'')+' (เวลาเรดาร์จริงดูในภาพต้นทาง)';
+      setStatus('');
+    }catch(error){
+      radarTime.textContent=lastRadarLoaded?'ดึงภาพใหม่ไม่สำเร็จ · แสดงภาพที่โหลดไว้เมื่อ '+thaiTime(lastRadarLoaded):'ยังโหลดภาพเรดาร์จาก TMD ไม่สำเร็จ';
+      setStatus('ดึงภาพเรดาร์ล่าสุดไม่สำเร็จ: '+error.message);
+    }finally{radarLoading=false}
+  }
+  reloadRadar();
+  setInterval(reloadRadar,120000);
+  const rainPalette=[[202,0,0],[252,0,251],[229,0,229],[198,0,199],[186,0,1],[210,0,0],[248,0,0],[254,104,1],[254,236,1],[239,0,241],[213,0,212],[184,0,184],[255,85,0],[254,122,1],[254,180,0],[254,197,1],[254,219,1],[254,253,1],[1,253,1],[1,218,1],[1,196,1],[1,140,1],[1,123,1],[1,100,1],[1,85,1],[170,0,169],[170,0,0],[234,0,1],[254,140,2],[1,236,1],[1,179,1],[254,165,2]];
+  const rainColorCache=new Map();
+  function isRainColor(r,g,b){
+    const key=(r<<16)|(g<<8)|b;
+    if(rainColorCache.has(key))return rainColorCache.get(key);
+    const match=rainPalette.some(color=>(r-color[0])**2+(g-color[1])**2+(b-color[2])**2<=100);
+    rainColorCache.set(key,match);return match;
+  }
+  function paintRadarFrame(image,width,height){
+    if(!radarVisible)return;
+    if(radarCanvas.width!==800||radarCanvas.height!==800){radarCanvas.width=800;radarCanvas.height=800}
+    radarContext.clearRect(0,0,800,800);
+    radarContext.imageSmoothingEnabled=false;
+    radarContext.drawImage(image,0,0,Math.min(800,width),Math.min(800,height),0,0,800,800);
+    const frame=radarContext.getImageData(0,0,800,800),pixels=frame.data;
+    for(let i=0;i<pixels.length;i+=4){
+      if(!isRainColor(pixels[i],pixels[i+1],pixels[i+2]))pixels[i+3]=0;
+    }
+    radarContext.putImageData(frame,0,0);
+  }
+  function renderRadarFrame(){
+    if(radarImage.complete&&radarImage.naturalWidth)
+      paintRadarFrame(radarImage,radarImage.naturalWidth,radarImage.naturalHeight);
+  }
+  async function startGifPlayback(blob){
+    const token=++gifPlaybackToken;
+    clearTimeout(gifFrameTimer);clearInterval(fallbackTimer);
+    try{
+      if(typeof ImageDecoder==='undefined'||!await ImageDecoder.isTypeSupported('image/gif'))
+        throw Error('เบราว์เซอร์ไม่รองรับตัวถอดรหัส GIF');
+      const decoder=new ImageDecoder({data:await blob.arrayBuffer(),type:'image/gif',preferAnimation:true});
+      await decoder.tracks.ready;
+      await decoder.completed;
+      const count=decoder.tracks.selectedTrack?.frameCount||0;
+      if(count<2){decoder.close();throw Error('GIF มีเฟรมเดียว')}
+      gifFrameCount=count;
+      if(token!==gifPlaybackToken){decoder.close();return}
+      if(activeDecoder)activeDecoder.close();
+      activeDecoder=decoder;
+      let frameIndex=0;
+      const next=async()=>{
+        if(token!==gifPlaybackToken)return;
+        try{
+          const result=await decoder.decode({frameIndex});
+          if(token!==gifPlaybackToken){result.image.close();return}
+          const image=result.image;
+          paintRadarFrame(image,image.displayWidth,image.displayHeight);
+          const delay=Math.max(50,Math.min(5000,(image.duration||300000)/1000));
+          image.close();
+          frameIndex=(frameIndex+1)%count;
+          gifFrameTimer=setTimeout(next,delay);
+        }catch(error){
+          if(token===gifPlaybackToken){
+            console.warn('GIF frame decoding failed',error);
+            fallbackTimer=setInterval(renderRadarFrame,120);
+          }
+        }
+      };
+      next();
+      radarTime.dataset.frames=String(count);
+    }catch(error){
+      console.warn('Using browser GIF playback',error);
+      if(token===gifPlaybackToken)fallbackTimer=setInterval(renderRadarFrame,120);
+    }
+  }
+  const sourceMap=new WebMap({portalItem:{id:'3d24287ac6ea49cd823625ddad496e01'}});
+  const map=new EsriMap({basemap:'gray-vector'});
+  const boundaryHighlight=new GraphicsLayer({title:'ขอบเขตนิคมฯ ที่เลือก',listMode:'hide'});map.add(boundaryHighlight);
+  const businesses=new FeatureLayer({url:'https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/EPP_2026_V1/FeatureServer/0',title:'ผู้ประกอบการ (IEAT)',outFields:['IEAT','mercant_name'],popupTemplate:{title:'{mercant_name}',content:'นิคมอุตสาหกรรม: {IEAT}'},renderer:{type:'simple',symbol:{type:'simple-marker',size:5,color:'#355f97',outline:{color:'#fff',width:.5}}}});
+  // Keep EPP as a query-only source for unique estate names; do not show operator points.
+  const view=new MapView({container:'map',map,center:[101,13.3],zoom:6,popupEnabled:false});
+  view.when(()=>view.ui.move('zoom','bottom-left'));
+  sourceMap.load().then(async()=>{
+    const selected=/ตำแหน่งนิคมอุตสาหกรรม|เขตประกอบการอุตสาหกรรม/;
+    const layers=sourceMap.allLayers.toArray().filter(layer=>selected.test((layer.title||'').replace(/\s+/g,'')));
+    let added=0;
+    for(const layer of layers){
+      await layer.load();
+      // Office pins are rendered once in the HTML overlay above the radar.
+      if(layer.geometryType!=='polygon')continue;
+      layer.visible=true;
+      layer.listMode='show';
+      layer.popupEnabled=false;
+      map.add(layer);
+      added++;
+    }
+    if(!added)setStatus('ไม่พบชั้นขอบเขตนิคมฯ ใน WebMap');
+  }).catch(error=>setStatus('โหลดชั้นข้อมูลนิคมฯ ไม่สำเร็จ: '+error.message));
+  const search=new Search({view,includeDefaultSources:true,allPlaceholder:'ค้นหาที่อยู่หรือสถานที่'});
+  view.ui.add(search,{position:'top-right',index:0});
+  view.ui.add(new Expand({view,content:new BasemapGallery({view}),expandIconClass:'esri-icon-basemap',expandTooltip:'เลือกแผนที่ฐาน'}),{position:'top-right',index:3});
+  const layerListContainer=document.createElement('div');
+  const layerList=new LayerList({view,container:layerListContainer});
+  const layerPanel=document.createElement('div');
+  const radarControl=document.createElement('label');radarControl.className='radar-layer-control';
+  const radarCheckbox=document.createElement('input');radarCheckbox.type='checkbox';radarCheckbox.checked=true;
+  radarControl.append(radarCheckbox,document.createTextNode('เรดาร์ฝนระยอง (TMD)'));
+  layerPanel.append(radarControl,layerListContainer);
+  view.ui.add(new Expand({view,content:layerPanel,expandIconClass:'esri-icon-layers',expandTooltip:'เปิดปิดชั้นข้อมูล'}),{position:'top-right',index:1});
+  view.ui.add(new Expand({view,content:new Legend({view}),expandIconClass:'esri-icon-legend',expandTooltip:'คำอธิบายสัญลักษณ์'}),{position:'top-right',index:2});
+  radarCheckbox.onchange=()=>setRadarVisible(radarCheckbox.checked);
+  const status=document.getElementById('status'), list=document.getElementById('estates'),count=document.getElementById('count'),markers=document.getElementById('estateMarkers');
+  const OFFICE_URL='https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/e_PP_2025/FeatureServer/1/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=geojson';
+  const PIN_SVG="<svg aria-hidden=\"true\" viewBox=\"0 0 511.999 511.999\" xmlns=\"http://www.w3.org/2000/svg\"><path fill=\"#52057f\" d=\"M405.961 62.116C323.14-20.705 188.86-20.705 106.039 62.116s-82.821 217.101 0 299.922L256 511.999l149.961-149.961c82.821-82.821 82.821-217.101 0-299.922z\"/><path fill=\"#52057f\" d=\"M130.368 337.708c-33.558-33.558-52.04-78.175-52.04-125.633s18.481-92.074 52.04-125.631C163.924 52.887 208.542 34.406 256 34.406c47.457 0 92.074 18.481 125.631 52.038s52.04 78.175 52.04 125.631c0 47.458-18.481 92.075-52.04 125.631L255.998 463.34 130.368 337.708z\"/><circle fill=\"#E6E6E6\" cx=\"256\" cy=\"212.083\" r=\"129.59\"/><path fill=\"#CCCCCC\" d=\"M298.319 299.352c-71.573 0-129.594-58.021-129.594-129.594 0-24.945 7.055-48.238 19.266-68.008-36.956 22.828-61.585 63.699-61.585 110.327 0 71.573 58.021 129.594 129.594 129.594 46.628 0 87.498-24.63 110.326-61.585-19.769 12.212-43.064 19.266-68.007 19.266z\"/><path fill=\"#52057f\" d=\"M256 354.057c-78.288 0-141.98-63.692-141.98-141.98S177.712 70.097 256 70.097s141.98 63.692 141.98 141.98S334.287 354.057 256 354.057zm0-259.187c-64.628 0-117.207 52.579-117.207 117.207S191.371 329.284 256 329.284s117.207-52.579 117.207-117.207S320.628 94.87 256 94.87z\"/><ellipse transform=\"matrix(-.7071 -.7071 .7071 -.7071 414.7711 493.1812)\" fill=\"#FFF\" cx=\"309.527\" cy=\"160.689\" rx=\"51.607\" ry=\"30.964\"/></svg>";
+  const pinImage=new Image();pinImage.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(PIN_SVG);
+  let names=[],officeRows=[],selectedMarkerName='',querySerial=0,selectedEstate='';
+  const activeMarkerRows=()=>officeRows.length?officeRows:names;
+  fetch(OFFICE_URL,{cache:'no-store'}).then(response=>{if(!response.ok)throw Error('HTTP '+response.status);return response.json()}).then(data=>{officeRows=(data.features||[]).filter(feature=>feature.geometry?.type==='Point').map(feature=>{const props=feature.properties||{},coordinates=feature.geometry.coordinates;return{name:String(props['สำนักงานนิคมฯ']||props.IEAT||'สำนักงานนิคมอุตสาหกรรม'),operation:String(props.Operations||''),point:new Point({longitude:coordinates[0],latitude:coordinates[1]})}});renderMarkers();if(!reportView.hidden){fillReportSearch();queueReportMap()}}).catch(error=>console.warn('Office markers unavailable; using estate positions',error));
+  function selectEstate(row){
+    selectedEstate=row.name;
+    for(const choice of list.querySelectorAll('.estate-choice'))choice.setAttribute('aria-pressed',String(choice.dataset.estate===selectedEstate));
+    const matching=activeMarkerRows().find(item=>item.name.includes(row.name)||row.name.includes(item.name))||activeMarkerRows().reduce((best,item)=>!best||Math.hypot(item.point.longitude-row.point.longitude,item.point.latitude-row.point.latitude)<Math.hypot(best.point.longitude-row.point.longitude,best.point.latitude-row.point.latitude)?item:best,null);
+    selectedMarkerName=matching?.name||row.name;
+    for(const marker of markers.children)marker.classList.toggle('is-selected',activeMarkerRows()[Number(marker.dataset.index)]?.name===selectedMarkerName);
+  }
+  function positionMarkers(){
+    for(const marker of markers.children){
+      const row=activeMarkerRows()[Number(marker.dataset.index)],screen=row&&view.toScreen(row.point);
+      if(!screen||screen.x<0||screen.y<0||screen.x>view.width||screen.y>view.height){marker.style.display='none';continue}
+      marker.style.display='flex';marker.style.left=screen.x+'px';marker.style.top=screen.y+'px';
+    }
+  }
+  function renderMarkers(){
+    markers.replaceChildren();
+    activeMarkerRows().forEach((row,index)=>{
+      if(!row.point)return;
+      const marker=document.createElement('button');marker.type='button';marker.className='estate-marker';marker.classList.toggle('is-selected',row.name===selectedMarkerName);marker.dataset.index=index;
+      marker.title=row.name;marker.setAttribute('aria-label',row.name);
+      const icon=document.createElement('span');icon.className='estate-marker-icon';icon.innerHTML=PIN_SVG;icon.setAttribute('aria-hidden','true');
+      const label=document.createElement('span');label.className='estate-marker-name';label.textContent='สำนักงานนิคมฯ '+row.name;
+      if(row.operation){const operation=document.createElement('span');operation.className='estate-marker-detail';operation.textContent=row.operation;label.append(operation)}
+      const detail=document.createElement('span');detail.className='estate-marker-detail';detail.textContent='พิกัด '+Number(row.point.latitude).toFixed(5)+', '+Number(row.point.longitude).toFixed(5);label.append(detail);marker.append(label,icon);
+      marker.onclick=async event=>{event.stopPropagation();selectedMarkerName=row.name;for(const button of markers.children)button.classList.toggle('is-selected',button===marker);await view.goTo({target:row.point,zoom:12});await showEstateBoundary(row.point,row.name);if(!reportView.hidden)queueReportMap()};
+      markers.append(marker);
+    });
+    positionMarkers();
+  }
+  const radarArea=new Circle({center:new Point({longitude:station.lon,latitude:station.lat}),radius:240,radiusUnit:'kilometers',geodesic:true});
+  function positionRadar(){
+    if(!view.ready||!radarImage.complete||!radarImage.naturalWidth)return;
+    const nw=view.toScreen(new Point({longitude:bounds.west,latitude:bounds.north}));
+    const se=view.toScreen(new Point({longitude:bounds.east,latitude:bounds.south}));
+    Object.assign(radarCanvas.style,{left:nw.x+'px',top:nw.y+'px',width:(se.x-nw.x)+'px',height:(se.y-nw.y)+'px',display:radarVisible?'block':'none'});
+  }
+  radarImage.onload=()=>{positionRadar();if(!activeDecoder)renderRadarFrame();setStatus('')};
+  radarImage.onerror=()=>setStatus('โหลดภาพฝนระยองไม่สำเร็จ');
+  const clean=s=>String(s||'').trim();
+  function setStatus(s){status.textContent=s;status.style.display=s?'block':'none'}
+  async function refresh(){
+    const serial=++querySerial;
+    count.textContent='…';list.replaceChildren();
+    try{
+      const q=businesses.createQuery();q.geometry=radarArea;q.spatialRelationship='intersects';q.returnGeometry=true;q.outFields=['IEAT'];q.num=1000;
+      const all=new Map();let offset=0;
+      do{
+        q.start=offset;
+        const result=await businesses.queryFeatures(q);if(serial!==querySerial)return;
+        for(const f of result.features){const name=clean(f.attributes.IEAT);if(!name||name==='—')continue;if(!all.has(name))all.set(name,{name,point:f.geometry})}
+        offset+=result.features.length;
+        if(!result.exceededTransferLimit&&result.features.length<q.num)break;
+      }while(offset<20000);
+      names=[...all.values()].sort((a,b)=>a.name.localeCompare(b.name,'th'));
+      count.textContent=names.length.toLocaleString('th-TH');renderMarkers();
+      if(!names.length){const li=document.createElement('li');li.className='empty';li.textContent='ไม่พบนิคมในพื้นที่เรดาร์';list.append(li)}
+      for(const row of names){const li=document.createElement('li'),btn=document.createElement('button');btn.type='button';btn.className='estate-choice';btn.dataset.estate=row.name;btn.setAttribute('aria-pressed',String(row.name===selectedEstate));const b=document.createElement('b');b.textContent=row.name;btn.append(b);btn.onclick=async()=>{selectEstate(row);await view.goTo({target:row.point,zoom:12});await showEstateBoundary(row.point,row.name)};li.append(btn);list.append(li)}
+      if(offset>=20000)setStatus('รายการอาจไม่ครบ (เกิน 20,000 จุด)');
+    }catch(err){if(serial!==querySerial)return;names=[];count.textContent='—';list.innerHTML='<li class="empty">โหลดรายชื่อนิคมไม่สำเร็จ</li>';setStatus('ไม่สามารถอ่านข้อมูล IEAT ได้: '+err.message)}
+  }
+  const estateKey=name=>clean(name).split(' ').join('').toLowerCase();
+  function estateName(attributes){
+    const values=Object.values(attributes||{}).filter(value=>typeof value==='string'&&value.length<180);
+    return values.find(value=>names.some(row=>estateKey(row.name)===estateKey(value)))||'';
+  }
+  async function showEstateBoundary(point,preferredName){
+    boundaryHighlight.removeAll();
+    const candidates=map.allLayers.toArray().filter(layer=>layer.type==='feature'&&layer.visible&&/ตำแหน่งนิคมอุตสาหกรรม|เขตประกอบการอุตสาหกรรม/.test(layer.title||''));
+    for(const layer of candidates){
+      try{
+        await layer.load();if(layer.geometryType!=='polygon')continue;
+        const query=layer.createQuery();query.geometry=point;query.spatialRelationship='intersects';
+        query.returnGeometry=true;query.outFields=['*'];query.num=10;
+        const response=await layer.queryFeatures(query);
+        for(const feature of response.features){
+          const name=estateName(feature.attributes);
+          if(!name||preferredName&&estateKey(name)!==estateKey(preferredName))continue;
+          boundaryHighlight.add(new Graphic({geometry:feature.geometry,symbol:{type:'simple-fill',color:[89,38,124,.12],outline:{color:[89,38,124,1],width:3}}}));
+          
+          return true;
+        }
+      }catch(error){console.warn('Boundary layer query failed',layer.title,error)}
+    }
+    return false;
+  }
+  view.on('click',async event=>{
+    const point=view.toMap({x:event.x,y:event.y});
+    if(point)await showEstateBoundary(point);
   });
- }
-}).addTo(map);
-function n(v,d){return Number(v||0).toLocaleString("th-TH",{minimumFractionDigits:d||0,maximumFractionDigits:d==null?1:d})}
-function esc(v){return String(v==null?"":v).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]})}
-function statusOf(v){v=Number(v||0);if(v>=90)return{key:"critical",label:"วิกฤต",color:"#bf033b"};if(v>=60)return{key:"warning",label:"ฝนหนัก",color:"#ff6908"};if(v>=35)return{key:"watch",label:"เฝ้าระวัง",color:"#ffc719"};return{key:"normal",label:"ปกติ",color:"#42a846"}}
-function conditionOf(p){var r=Number(p.rainfall||0),r24=Number(p.rainfall_24hr||0);if(r>=35||r24>=90)return["🌧️","ฝนตกหนักมาก"];if(r>=10||r24>=60)return["⛈️","ฝนตกหนัก"];if(r>0||r24>=35)return["🌦️","มีฝน / เฝ้าระวัง"];return["⛅","สภาพอากาศทั่วไป"]}
-function selectStation(item,zoom){selected=item;var p=item.properties,c=item.geometry.coordinates,cond=conditionOf(p),st=statusOf(p.rainfall_24hr);document.querySelector("#weatherIcon").textContent=cond[0];document.querySelector("#detailTemp").innerHTML=n(p.temp,1)+"<small>°C</small>";document.querySelector("#detailCondition").textContent=cond[1];document.querySelector("#detailCondition").style.color=st.color;document.querySelector("#detailName").textContent=p.station_name||"ไม่ระบุสถานี";document.querySelector("#detailProvince").textContent="จังหวัด"+(p.province||"–");document.querySelector("#detailRain").textContent=n(p.rainfall,1)+" มม.";document.querySelector("#detailRain24").textContent=n(p.rainfall_24hr,1)+" มม.";document.querySelector("#detailWind").textContent=n(p.wind_speed,1)+" กม./ชม.";document.querySelector("#detailDirection").textContent=p.wind_direction_label||"–";document.querySelector("#detailLat").textContent=n(c[1],3);document.querySelector("#detailLng").textContent=n(c[0],3);if(zoom)map.flyTo([c[1],c[0]],9,{duration:.8})}
-function drawMarkers(){markerLayer.clearLayers();markers=[];all.forEach(function(item){var p=item.properties,c=item.geometry&&item.geometry.coordinates;if(!c)return;var val=Number(p[mode]||0),color=mode==="temp"?(val>=35?"#bf033b":val>=30?"#ff6908":val>=25?"#ffc719":"#42a846"):statusOf(val).color;var size=mode==="temp"?12:Math.min(24,10+val/8);var marker=L.circleMarker([c[1],c[0]],{radius:size/2,color:"#fff",weight:2,fillColor:color,fillOpacity:.88}).addTo(markerLayer);marker.bindTooltip("<b>"+esc(p.station_name)+"</b><br>"+(mode==="temp"?"อุณหภูมิ "+n(p.temp,1)+" °C":"ฝน 24 ชม. "+n(p.rainfall_24hr,1)+" มม."));marker.on("click",function(){selectStation(item,false)});markers.push({item:item,marker:marker})})}
-function drawEstateOffices(features){estateLayer.clearLayers();features.forEach(function(item){var p=item.properties||{},c=item.geometry&&item.geometry.coordinates;if(!c||c.length<2)return;var name=p["สำนักงานนิคมฯ"]||p.IEAT||"สำนักงานนิคมอุตสาหกรรม",operation=p.Operations||"";var icon=L.divIcon({className:"",html:'<svg class="estate-office-marker" aria-hidden="true" viewBox="0 0 511.999 511.999" xmlns="http://www.w3.org/2000/svg"><path fill="#511378" d="M405.961 62.116C323.14-20.705 188.86-20.705 106.039 62.116s-82.821 217.101 0 299.922L256 511.999l149.961-149.961c82.821-82.821 82.821-217.101 0-299.922z"/><path fill="#7552cc" d="M130.368 337.708c-33.558-33.558-52.04-78.175-52.04-125.633s18.481-92.074 52.04-125.631C163.924 52.887 208.542 34.406 256 34.406c47.457 0 92.074 18.481 125.631 52.038s52.04 78.175 52.04 125.631c0 47.458-18.481 92.075-52.04 125.631L255.998 463.34 130.368 337.708z"/><circle fill="#E6E6E6" cx="256" cy="212.083" r="129.59"/><path fill="#CCCCCC" d="M298.319 299.352c-71.573 0-129.594-58.021-129.594-129.594 0-24.945 7.055-48.238 19.266-68.008-36.956 22.828-61.585 63.699-61.585 110.327 0 71.573 58.021 129.594 129.594 129.594 46.628 0 87.498-24.63 110.326-61.585-19.769 12.212-43.064 19.266-68.007 19.266z"/><path fill="#511378" d="M256 354.057c-78.288 0-141.98-63.692-141.98-141.98S177.712 70.097 256 70.097s141.98 63.692 141.98 141.98S334.287 354.057 256 354.057zm0-259.187c-64.628 0-117.207 52.579-117.207 117.207S191.371 329.284 256 329.284s117.207-52.579 117.207-117.207S320.628 94.87 256 94.87z"/><ellipse transform="matrix(-.7071 -.7071 .7071 -.7071 414.7711 493.1812)" fill="#FFF" cx="309.527" cy="160.689" rx="51.607" ry="30.964"/></svg>',iconSize:[34,34],iconAnchor:[17,34],popupAnchor:[0,-34]});L.marker([c[1],c[0]],{icon:icon,title:name,zIndexOffset:700}).bindTooltip("สำนักงานนิคมฯ "+esc(name),{direction:"top",offset:[0,-12]}).bindPopup('<div class="estate-popup"><b>สำนักงานนิคมฯ '+esc(name)+'</b>'+(operation?'<br><span>'+esc(operation)+'</span>':"")+'<br><span>พิกัด '+n(c[1],5)+", "+n(c[0],5)+"</span></div>").addTo(estateLayer)});document.querySelector("#estateOfficeCount").textContent=features.length.toLocaleString("th-TH")}
-function renderSummary(){var rain=[].concat(all).sort(function(a,b){return Number(b.properties.rainfall_24hr||0)-Number(a.properties.rainfall_24hr||0)}),wind=[].concat(all).sort(function(a,b){return Number(b.properties.wind_speed||0)-Number(a.properties.wind_speed||0)}),temp=[].concat(all).sort(function(a,b){return Number(b.properties.temp||0)-Number(a.properties.temp||0)}),alertCount=all.filter(function(x){return Number(x.properties.rainfall_24hr||0)>=35}).length,max=rain[0],severe=all.filter(function(x){return Number(x.properties.rainfall_24hr||0)>=60}).length;
-document.querySelector("#mapAlertCount").textContent=alertCount.toLocaleString("th-TH");document.querySelector("#stationCount").textContent=all.length.toLocaleString("th-TH")+" แห่ง";document.querySelector("#maxWind").textContent=n(wind[0].properties.wind_speed,1)+" กม./ชม.";document.querySelector("#maxRain").textContent=n(max.properties.rainfall_24hr,1)+" มม.";document.querySelector("#maxTemp").textContent=n(temp[0].properties.temp,1)+" °C";document.querySelector("#rainTotalLabel").textContent="สูงสุด "+n(max.properties.rainfall_24hr,1)+" มม.";
-var msg=severe?"พบ "+severe.toLocaleString("th-TH")+" สถานีที่มีฝนสะสม 24 ชั่วโมงตั้งแต่ 60 มม. ควรติดตามสถานการณ์อย่างใกล้ชิด":"ยังไม่พบสถานีที่เข้าเกณฑ์ฝนหนักจากข้อมูลล่าสุด";document.querySelector("#alertBox").textContent=msg;document.querySelector("#tickerText").textContent=severe?"เฝ้าระวังฝนหนักใน "+severe.toLocaleString("th-TH")+" สถานี · สูงสุดที่ "+max.properties.station_name:"สถานการณ์โดยรวมอยู่ในเกณฑ์ปกติ";
-var top=rain.slice(0,10),scale=Math.max(1,Number(top[0].properties.rainfall_24hr||0));document.querySelector("#rainBars").innerHTML=top.map(function(x){var p=x.properties,h=Math.max(3,Math.round(Number(p.rainfall_24hr||0)/scale*145));return'<div class="bar-item" title="'+esc(p.station_name)+" "+n(p.rainfall_24hr,1)+' มม."><b>'+n(p.rainfall_24hr,0)+'</b><i class="bar" style="height:'+h+'px"></i><span>'+esc(p.province)+'</span></div>'}).join("");
-document.querySelector("#ranking").innerHTML=rain.slice(0,6).map(function(x,i){var p=x.properties;return'<div class="rank-row" data-index="'+all.indexOf(x)+'"><span class="rank-no">'+(i+1)+'</span><span class="rank-name"><b>'+esc(p.station_name)+'</b><small>'+esc(p.province)+'</small></span><b class="rank-rain">'+n(p.rainfall_24hr,1)+' มม.</b></div>'}).join("");document.querySelectorAll(".rank-row").forEach(function(row){row.addEventListener("click",function(){selectStation(all[Number(row.dataset.index)],true)})});
-selectStation(max,false)}
-function renderTable(){var term=document.querySelector("#tableSearch").value.trim().toLowerCase(),status=document.querySelector("#statusFilter").value;filtered=all.filter(function(x){var p=x.properties,s=statusOf(p.rainfall_24hr);return(!term||((p.station_name||"")+" "+(p.province||"")).toLowerCase().indexOf(term)>-1)&&(status==="all"||s.key===status)}).sort(function(a,b){return Number(b.properties.rainfall_24hr||0)-Number(a.properties.rainfall_24hr||0)});document.querySelector("#visibleRows").textContent=filtered.length.toLocaleString("th-TH")+" รายการ";document.querySelector("#stationRows").innerHTML=filtered.length?filtered.map(function(x){var p=x.properties,s=statusOf(p.rainfall_24hr),idx=all.indexOf(x);return'<tr data-index="'+idx+'"><td><b>'+esc(p.station_name)+'</b></td><td>'+esc(p.province)+'</td><td>'+n(p.temp,1)+' °C</td><td>'+n(p.rainfall,1)+' มม.</td><td><b>'+n(p.rainfall_24hr,1)+' มม.</b></td><td>'+n(p.wind_speed,1)+' กม./ชม.</td><td>'+esc(p.wind_direction_label||"–")+'</td><td><span class="status-pill '+s.key+'">'+s.label+'</span></td></tr>'}).join(""):'<tr><td colspan="8">ไม่พบข้อมูลที่ตรงกับตัวกรอง</td></tr>';document.querySelectorAll("#stationRows tr[data-index]").forEach(function(row){row.addEventListener("click",function(){selectStation(all[Number(row.dataset.index)],true);document.querySelector("#mapPanel").scrollIntoView({behavior:"smooth"})})})}
-function searchGlobal(){var term=document.querySelector("#globalSearch").value.trim().toLowerCase();if(!term)return;var hit=all.find(function(x){var p=x.properties;return((p.station_name||"")+" "+(p.province||"")).toLowerCase().indexOf(term)>-1});if(hit){selectStation(hit,true);document.querySelector("#mapPanel").scrollIntoView({behavior:"smooth"})}}
-document.querySelectorAll("[data-mode]").forEach(function(btn){btn.addEventListener("click",function(){mode=btn.dataset.mode;document.querySelectorAll("[data-mode]").forEach(function(x){x.classList.toggle("active",x===btn)});drawMarkers()})});document.querySelector("#tableSearch").addEventListener("input",renderTable);document.querySelector("#statusFilter").addEventListener("change",renderTable);var searchBtn=document.querySelector("#searchBtn"),globalSearch=document.querySelector("#globalSearch");if(searchBtn)searchBtn.addEventListener("click",searchGlobal);if(globalSearch)globalSearch.addEventListener("keydown",function(e){if(e.key==="Enter")searchGlobal()});document.querySelector("#scrollTable").addEventListener("click",function(){document.querySelector("#stationTable").scrollIntoView({behavior:"smooth"})});
-function updateClock(){document.querySelector("#localTime").textContent="เวลาประเทศไทย "+new Intl.DateTimeFormat("th-TH",{hour:"2-digit",minute:"2-digit",hour12:false,timeZone:"Asia/Bangkok"}).format(new Date())+" น."}updateClock();setInterval(updateClock,60000);
-fetch(DATA_URL+"?t="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json()}).then(function(data){all=(data.features||[]).filter(function(x){return x.geometry&&x.properties});var stamp=all[0]&&all[0].properties.record_timestamp;document.querySelector("#syncState").classList.add("ok");document.querySelector("#syncText").textContent="เชื่อมโยงข้อมูลแล้ว";document.querySelector("#tickerTime").textContent=stamp?"ข้อมูล ณ "+new Intl.DateTimeFormat("th-TH",{dateStyle:"medium",timeStyle:"short",timeZone:"Asia/Bangkok"}).format(new Date(stamp+"Z")):"ข้อมูลล่าสุด";document.querySelector("#mapLoading").classList.add("hide");drawMarkers();renderSummary();renderTable();setTimeout(function(){map.invalidateSize()},100)}).catch(function(err){document.querySelector("#syncText").textContent="เชื่อมต่อไม่สำเร็จ";document.querySelector("#tickerText").textContent="ไม่สามารถเรียกข้อมูลสภาพอากาศได้ในขณะนี้";document.querySelector("#mapLoading").textContent="ไม่สามารถโหลดข้อมูล กรุณาลองใหม่อีกครั้ง";document.querySelector("#stationRows").innerHTML='<tr><td colspan="8" class="error-state">ไม่สามารถเรียกข้อมูลจากแหล่งต้นทางได้</td></tr>';console.error(err)});
-fetch(ESTATE_URL+"&t="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json()}).then(function(data){drawEstateOffices((data.features||[]).filter(function(x){return x.geometry&&x.properties}))}).catch(function(err){document.querySelector("#estateOfficeCount").textContent="–";console.error("IEAT office layer",err)});
-fetch(PROVINCE_URL+"&t="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json()}).then(function(data){provinceLayer.addData(data)}).catch(function(err){console.error("Thailand province boundary layer",err)});
-})();
-</script>
+  view.when(()=>{positionRadar();refresh();view.watch('extent',()=>{positionRadar();positionMarkers()})}).catch(e=>setStatus('เปิดแผนที่ กนอ. ไม่สำเร็จ: '+e.message));
+  document.getElementById('country').onclick=()=>view.goTo({center:[101,13.3],zoom:6});
+  document.getElementById('east').onclick=()=>view.goTo({center:[101.55,12.8],zoom:9});
+  document.getElementById('rayong').onclick=()=>view.goTo({center:[101.27,12.68],zoom:11});
+  function setRadarVisible(visible){radarVisible=visible;radarCheckbox.checked=visible;radarCanvas.style.display=visible?'block':'none';if(visible)renderRadarFrame();document.getElementById('radar').textContent=visible?'ซ่อนเรดาร์':'แสดงเรดาร์'}
+  document.getElementById('radar').onclick=()=>setRadarVisible(!radarVisible);
+  document.getElementById('opacity').oninput=e=>radarCanvas.style.opacity=Number(e.target.value)/100;
+  const reportView=document.getElementById('reportView'),reportStatus=document.getElementById('reportStatus');
+  const qpfUrl='https://feature-tmd-ieat-radar-map-ieat-emonitoring-line-alert.thanawankaiyaso.workers.dev/api/composite-qpf.gif';
+  function reportMessage(message){reportStatus.textContent=message}
+  function downloadBlob(blob,filename){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=filename;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000)}
+  function loadImage(src){return new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=()=>reject(Error('โหลดภาพต้นทางไม่สำเร็จ'));img.src=src})}
+  function drawEstatePin(ctx,x,y,scale=1){
+    if(pinImage.complete&&pinImage.naturalWidth){ctx.drawImage(pinImage,x-14*scale,y-28*scale,28*scale,28*scale);return}
+    ctx.save();ctx.translate(x,y);ctx.scale(scale,scale);ctx.shadowColor='#21112a88';ctx.shadowBlur=5;ctx.shadowOffsetY=2;
+    ctx.beginPath();ctx.moveTo(0,0);ctx.bezierCurveTo(-5,-5,-14,-15,-14,-24);ctx.arc(0,-24,14,Math.PI,0);ctx.bezierCurveTo(14,-15,5,-5,0,0);
+    ctx.fillStyle='#52057f';ctx.strokeStyle='#52057f';ctx.lineWidth=2;ctx.fill();ctx.stroke();ctx.shadowColor='transparent';
+    ctx.beginPath();ctx.arc(0,-24,7,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();ctx.restore();
+  }
+  function drawPins(ctx,rows,project){
+    ctx.textBaseline='middle';
+    const ordered=[...rows.filter(row=>row.name!==selectedMarkerName),...rows.filter(row=>row.name===selectedMarkerName)];
+    for(const row of ordered){const pos=project(row.point);if(!pos||!Number.isFinite(pos.x)||!Number.isFinite(pos.y))continue;
+      const x=pos.x,y=pos.y;if(x<0||x>ctx.canvas.width||y<0||y>ctx.canvas.height)continue;
+      const active=row.name===selectedMarkerName,scale=active?1.12:1;
+      drawEstatePin(ctx,x,y,scale);
+      if(!active)continue;
+      ctx.font='bold 16px Sarabun, sans-serif';
+      const label='สำนักงานนิคมฯ '+row.name.slice(0,38),width=Math.min(ctx.measureText(label).width+20,320);
+      const height=active?52:27,lx=Math.max(2,Math.min(ctx.canvas.width-width-2,x-width/2)),ly=Math.max(2,y-38*scale-height-3);
+      ctx.save();ctx.shadowColor='#1b173544';ctx.shadowBlur=8;ctx.shadowOffsetY=2;ctx.fillStyle='#fffffff4';ctx.fillRect(lx,ly,width,height);ctx.restore();
+      ctx.fillStyle='#52057f';ctx.fillText(label,lx+10,ly+(active?17:14),width-20);
+      if(active){ctx.font='13px Sarabun, sans-serif';ctx.fillStyle='#667382';ctx.fillText('พิกัด '+Number(row.point.latitude).toFixed(5)+', '+Number(row.point.longitude).toFixed(5),lx+10,ly+38,width-20)}
+    }
+  }
+  function drawReportLegend(ctx){
+    const x=ctx.canvas.width-210,y=ctx.canvas.height-300;
+    ctx.save();ctx.fillStyle='#fffffff0';ctx.strokeStyle='#dce2e9';ctx.lineWidth=1;
+    ctx.fillRect(x,y,196,284);ctx.strokeRect(x,y,196,284);
+    ctx.fillStyle='#27313e';ctx.font='bold 17px Sarabun, sans-serif';ctx.fillText('สัญลักษณ์เรดาร์ฝน',x+12,y+24);
+    const gradient=ctx.createLinearGradient(0,y+43,0,y+195);
+    [[0,'#fc00fb'],[.18,'#aa0000'],[.36,'#f80000'],[.52,'#ff5500'],[.69,'#fffd01'],[.78,'#01fd01'],[1,'#015501']].forEach(([stop,color])=>gradient.addColorStop(stop,color));
+    ctx.fillStyle=gradient;ctx.fillRect(x+14,y+42,23,156);
+    ctx.fillStyle='#34383f';ctx.font='13px Sarabun, sans-serif';
+    ['65+','50','40','30','20','10'].forEach((label,index)=>ctx.fillText(label+' dBZ',x+47,y+48+index*30));
+    drawEstatePin(ctx,x+25,y+245,.55);
+    ctx.fillStyle='#52057f';ctx.font='bold 14px Sarabun, sans-serif';ctx.fillText('สำนักงานนิคมฯ',x+40,y+225);
+    ctx.beginPath();ctx.arc(x+25,y+267,10,0,Math.PI*2);ctx.fillStyle='#52057f';ctx.fill();
+    ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='bold 11px Sarabun, sans-serif';ctx.fillText('2',x+25,y+267);
+    ctx.textAlign='left';ctx.fillStyle='#52057f';ctx.font='13px Sarabun, sans-serif';ctx.fillText('จุดใกล้กัน (จำนวน)',x+42,y+267);ctx.restore();
+  }
+  const rayongProject=point=>({x:(point.longitude-bounds.west)/(bounds.east-bounds.west)*800,y:(bounds.north-point.latitude)/(bounds.north-bounds.south)*800});
+  const reportSearch=document.getElementById('reportEstateSearch');
+  let reportRenderSerial=0,reportPreviewTimer=0;
+  function fillReportSearch(){
+    const options=document.getElementById('reportEstateOptions');options.replaceChildren();
+    for(const name of new Set([...activeMarkerRows(),...names].map(row=>row.name))){const option=document.createElement('option');option.value=name;options.append(option)}
+  }
+  const reportCrop={x:320,y:0,w:560,h:750},reportMapBox={x:40,y:120,w:1020,h:1366},reportSize={w:1100,h:1530},reportMapScale=2;
+  function radarPlacement(width,height){return {x:parseFloat(radarCanvas.style.left)*width/view.width,y:parseFloat(radarCanvas.style.top)*height/view.height,w:parseFloat(radarCanvas.style.width)*width/view.width,h:parseFloat(radarCanvas.style.height)*height/view.height}}
+  function drawReportLabels(ctx,rows,project){
+    const placed=[];ctx.save();ctx.font='bold 13px Sarabun, sans-serif';ctx.textBaseline='middle';
+    for(const row of rows){
+      const pos=project(row.point);if(!pos||pos.x<reportCrop.x+15||pos.x>reportCrop.x+reportCrop.w-15||pos.y<25||pos.y>730)continue;
+      const label=row.name.slice(0,25),width=Math.min(190,Math.ceil(ctx.measureText(label).width)+14),height=23;
+      const x=pos.x+9+width<reportCrop.x+reportCrop.w-5?pos.x+9:pos.x-width-9,y=pos.y-35;
+      if(x<reportCrop.x+4||y<4||placed.some(box=>x<box.x+box.w+5&&x+width+5>box.x&&y<box.y+box.h+5&&y+height+5>box.y))continue;
+      placed.push({x,y,w:width,h:height});ctx.fillStyle='#fffffff0';ctx.fillRect(x,y,width,height);
+      ctx.fillStyle='#52057f';ctx.fillText(label,x+7,y+height/2,width-14);
+    }
+    ctx.restore();
+  }
+  function drawMapPins(ctx,width,height){
+    const project=point=>{const pixel=view.toScreen(point);return pixel&&{x:pixel.x*width/view.width,y:pixel.y*height/view.height}};
+    const rows=activeMarkerRows(),selected=rows.filter(row=>row.name===selectedMarkerName);
+    if(view.zoom>10){drawPins(ctx,rows.filter(row=>row.name!==selectedMarkerName),project);drawReportLabels(ctx,rows.filter(row=>row.name!==selectedMarkerName),project);if(selected.length)drawPins(ctx,selected,project);return}
+    const cells=new Map();
+    for(const row of rows){
+      const pos=project(row.point);if(!pos||pos.x<0||pos.x>width||pos.y<0||pos.y>height)continue;
+      if(row.name===selectedMarkerName)continue;
+      const key=Math.round(pos.x/34)+','+Math.round(pos.y/34);
+      if(!cells.has(key))cells.set(key,{x:0,y:0,count:0,row});
+      const cell=cells.get(key);cell.x+=pos.x;cell.y+=pos.y;cell.count++;
+    }
+    for(const cell of cells.values()){
+      const x=cell.x/cell.count,y=cell.y/cell.count;
+      if(cell.count===1){drawEstatePin(ctx,x,y,.7);continue}
+      ctx.save();ctx.beginPath();ctx.arc(x,y,13,0,Math.PI*2);ctx.fillStyle='#52057f';ctx.fill();ctx.lineWidth=2;ctx.strokeStyle='#fff';ctx.stroke();
+      ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='bold 12px Sarabun, sans-serif';ctx.fillText(String(cell.count),x,y);ctx.restore();
+    }
+    drawReportLabels(ctx,[...cells.values()].filter(cell=>cell.count===1).map(cell=>cell.row),project);
+    if(selected.length)drawPins(ctx,selected,project);
+  }
+  async function composeRayongMap(){
+    await view.when();await pinImage.decode().catch(()=>{});const w=1200*reportMapScale,h=750*reportMapScale;
+    const shot=await view.takeScreenshot({width:w,height:h,format:'png'});
+    const base=await loadImage(shot.dataUrl),canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;const ctx=canvas.getContext('2d');ctx.drawImage(base,0,0,w,h);
+    if(radarCanvas.width&&radarVisible){const p=radarPlacement(w,h);ctx.globalAlpha=Number(radarCanvas.style.opacity);ctx.imageSmoothingEnabled=false;ctx.drawImage(radarCanvas,p.x,p.y,p.w,p.h);ctx.globalAlpha=1;ctx.imageSmoothingEnabled=true}
+    ctx.save();ctx.scale(reportMapScale,reportMapScale);drawMapPins(ctx,1200,750);ctx.restore();return canvas;
+  }
+  async function refreshReportMap(){
+    if(reportView.hidden)return;const serial=++reportRenderSerial;
+    try{const canvas=wrapRayongReport(await composeRayongMap());if(serial===reportRenderSerial)document.getElementById('rayongReportImage').src=canvas.toDataURL('image/png')}
+    catch(error){if(serial===reportRenderSerial)reportMessage('แสดงตัวอย่างแผนที่ไม่สำเร็จ: '+error.message)}
+  }
+  function queueReportMap(){clearTimeout(reportPreviewTimer);reportPreviewTimer=setTimeout(refreshReportMap,350)}
+  view.watch('stationary',stationary=>{if(stationary&&!reportView.hidden)queueReportMap()});
+  async function searchReportEstate(){
+    const query=clean(reportSearch.value).toLowerCase(),rows=[...activeMarkerRows(),...names];
+    const row=rows.find(item=>item.name.toLowerCase()===query)||rows.find(item=>item.name.toLowerCase().includes(query));
+    if(!row){reportMessage('ไม่พบนิคมฯ ตามชื่อที่ค้นหา');return}
+    const markerRow=activeMarkerRows().find(item=>item.name===row.name)||activeMarkerRows().find(item=>item.name.includes(row.name)||row.name.includes(item.name))||row;
+    selectedMarkerName=markerRow.name;reportSearch.value=row.name;
+    for(const marker of markers.children)marker.classList.toggle('is-selected',activeMarkerRows()[Number(marker.dataset.index)]?.name===markerRow.name);
+    await view.goTo({target:markerRow.point,zoom:12});await showEstateBoundary(markerRow.point,row.name);
+    await refreshReportMap();reportMessage('แสดงพื้นที่ '+row.name);
+  }
+  document.getElementById('reportSearchButton').onclick=searchReportEstate;
+  reportSearch.onkeydown=event=>{if(event.key==='Enter')searchReportEstate()};
+  document.getElementById('reportZoomIn').onclick=()=>view.goTo({zoom:Math.min(18,view.zoom+1)});
+  document.getElementById('reportZoomOut').onclick=()=>view.goTo({zoom:Math.max(4,view.zoom-1)});
+  document.getElementById('reportReset').onclick=()=>view.goTo({center:[101.27,12.68],zoom:9});
+  const preview=document.getElementById('rayongReport');
+  function reportPointer(event){
+    const rect=preview.getBoundingClientRect(),x=(event.clientX-rect.left)/rect.width*reportSize.w,y=(event.clientY-rect.top)/rect.height*reportSize.h;
+    if(x<reportMapBox.x||x>reportMapBox.x+reportMapBox.w||y<reportMapBox.y||y>reportMapBox.y+reportMapBox.h)return null;
+    return{x:(reportCrop.x+(x-reportMapBox.x)/reportMapBox.w*reportCrop.w)*view.width/1200,
+      y:(reportCrop.y+(y-reportMapBox.y)/reportMapBox.h*reportCrop.h)*view.height/750};
+  }
+  let reportDrag=null,suppressReportClick=false;
+  preview.addEventListener('pointerdown',event=>{if(event.button!==0||!reportPointer(event))return;reportDrag={x:event.clientX,y:event.clientY};preview.setPointerCapture(event.pointerId);preview.style.cursor='grabbing'});
+  preview.addEventListener('pointerup',event=>{
+    if(!reportDrag)return;
+    const dx=event.clientX-reportDrag.x,dy=event.clientY-reportDrag.y;reportDrag=null;preview.style.cursor='grab';
+    if(Math.hypot(dx,dy)<5)return;
+    suppressReportClick=true;const box=preview.getBoundingClientRect();
+    const center=view.toMap({x:view.width/2-dx/box.width*reportSize.w/reportMapBox.w*reportCrop.w*view.width/1200,
+      y:view.height/2-dy/box.height*reportSize.h/reportMapBox.h*reportCrop.h*view.height/750});
+    if(center)view.goTo({center,zoom:view.zoom},{animate:false});
+  });
+  preview.addEventListener('pointercancel',()=>{reportDrag=null;preview.style.cursor='grab'});
+  preview.onclick=event=>{if(suppressReportClick){suppressReportClick=false;return}const pixel=reportPointer(event),point=pixel&&view.toMap(pixel);if(point)view.goTo({center:point,zoom:view.zoom})};
+  preview.addEventListener('wheel',event=>{
+    const pixel=reportPointer(event);if(!pixel)return;event.preventDefault();const next=Math.max(4,Math.min(18,view.zoom+(event.deltaY<0?1:-1)));
+    if(next===view.zoom)return;
+    const {x,y}=pixel,factor=2**(next-view.zoom),center=view.toMap({x:x+(view.width/2-x)/factor,y:y+(view.height/2-y)/factor});
+    if(center)view.goTo({center,zoom:next},{animate:false});
+  },{passive:false});
+  let nationalRows=[],nationalClusters=[];
+  // Axis coordinates measured from the TMD composite image (1826 x 2316 px).
+  const compositePlot={width:1826,height:2316,x95:173,x107:1440,y22:400,y4:2157};
+  function compositePosition(point){
+    const lon=point.longitude,lat=point.latitude;
+    if(!Number.isFinite(lon)||!Number.isFinite(lat)||lon<95||lon>107||lat<4||lat>22)return null;
+    return{x:compositePlot.x95+(lon-95)*(compositePlot.x107-compositePlot.x95)/12,
+      y:compositePlot.y22+(22-lat)*(compositePlot.y4-compositePlot.y22)/18};
+  }
+  async function prepareNationalMap(){
+    if(!officeRows.length){
+      const response=await fetch(OFFICE_URL,{cache:'no-store'});if(!response.ok)throw Error('โหลดพิกัดสำนักงานนิคมฯ ไม่สำเร็จ');
+      const data=await response.json();officeRows=(data.features||[]).filter(feature=>feature.geometry?.type==='Point').map(feature=>({
+        name:String(feature.properties?.['สำนักงานนิคมฯ']||feature.properties?.IEAT||'สำนักงานนิคมอุตสาหกรรม'),
+        point:new Point({longitude:feature.geometry.coordinates[0],latitude:feature.geometry.coordinates[1]})}));
+    }
+    nationalRows=officeRows.filter(row=>compositePosition(row.point));
+    if(!nationalRows.length)throw Error('ไม่พบตำแหน่งนิคมฯ ภายในกรอบภาพเรดาร์คอมโพสิท');
+    // Group points in 32 px map cells at the 1100 px report export scale.
+    const cells=new Map();
+    for(const row of nationalRows){
+      const pos=compositePosition(row.point),x=pos.x*1100/compositePlot.width,y=pos.y*1100/compositePlot.width;
+      const key=Math.round(x/32)+','+Math.round(y/32);
+      if(!cells.has(key))cells.set(key,{x:0,y:0,rows:[]});
+      const cell=cells.get(key);cell.x+=pos.x;cell.y+=pos.y;cell.rows.push(row);
+    }
+    nationalClusters=[...cells.values()].map(cell=>({x:cell.x/cell.rows.length,y:cell.y/cell.rows.length,rows:cell.rows}));
+    const pins=document.getElementById('nationalReportPins'),detail=document.getElementById('nationalClusterDetail');pins.replaceChildren();detail.hidden=true;
+    for(const cluster of nationalClusters){
+      const pin=document.createElement('button');pin.type='button';
+      pin.className=cluster.rows.length>1?'report-cluster':'report-pin-icon';
+      pin.style.left=cluster.x/compositePlot.width*100+'%';pin.style.top=cluster.y/compositePlot.height*100+'%';
+      const title=cluster.rows.map(row=>'สำนักงานนิคมฯ '+row.name).join(' · ');
+      pin.title=title;pin.setAttribute('aria-label',title);
+      if(cluster.rows.length>1)pin.textContent=cluster.rows.length;else pin.innerHTML=PIN_SVG;
+      pin.onclick=()=>{detail.replaceChildren();const strong=document.createElement('strong');strong.textContent=cluster.rows.length+' ตำแหน่งนิคมอุตสาหกรรม';detail.append(strong);
+        const list=document.createElement('div');list.textContent=cluster.rows.map(row=>row.name).join(' · ');detail.append(list);detail.hidden=false};
+      pins.append(pin);
+    }
+  }
+  document.getElementById('closeReport').onclick=()=>{reportView.hidden=true};
+  document.getElementById('export').onclick=async()=>{
+    reportView.hidden=false;reportMessage('กำลังเตรียมภาพรายงาน…');
+    try{
+      if(!radarObjectUrl)throw Error('ภาพเรดาร์ระยองยังไม่พร้อม');
+      if(view.zoom<8&&!selectedMarkerName)await view.goTo({center:[101.27,12.68],zoom:9},{animate:false});
+      fillReportSearch();
+      await refreshReportMap();reportMessage('หน้า 1 พร้อมแล้ว · ค้นหานิคมฯ หรือซูมก่อนดาวน์โหลดได้');
+    }catch(error){reportMessage('หน้า 1: '+error.message)}
+    try{
+      const qpf=await fetch(qpfUrl,{cache:'no-store'});if(!qpf.ok)throw Error('โหลดภาพ Radar Composite QPF ไม่สำเร็จ');
+      const qpfBlob=await qpf.blob();const old=document.getElementById('compositeReportImage').dataset.url;if(old)URL.revokeObjectURL(old);
+      const qpfObjectUrl=URL.createObjectURL(qpfBlob);document.getElementById('compositeReportImage').dataset.url=qpfObjectUrl;document.getElementById('compositeReportImage').src=qpfObjectUrl;
+      await prepareNationalMap();await refreshReportMap();reportMessage('รายงานทั้งสองหน้าพร้อมบันทึก · ค้นหานิคมฯ หรือซูมก่อนดาวน์โหลดได้');
+    }catch(error){reportMessage('หน้า 1 พร้อมใช้งาน · หน้า 2: '+error.message)}
+  };
+  function drawRayongSheet(ctx,mapImage){
+    const {w,h}=reportSize,b=reportMapBox,c=reportCrop;
+    ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h);
+    ctx.textAlign='center';ctx.fillStyle='#172b3d';ctx.font='bold 29px Sarabun, sans-serif';
+    ctx.fillText('รายงานเฝ้าระวังฝนใกล้นิคมอุตสาหกรรม',w/2,44);
+    ctx.font='17px Sarabun, sans-serif';ctx.fillText('เรดาร์ฝนระยอง · '+new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok',dateStyle:'long',timeStyle:'short'}),w/2,77);
+    ctx.strokeStyle='#253444';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(40,98);ctx.lineTo(w-40,98);ctx.stroke();
+    const cropped=document.createElement('canvas');cropped.width=c.w*reportMapScale;cropped.height=c.h*reportMapScale;
+    const mapCtx=cropped.getContext('2d');mapCtx.drawImage(mapImage,c.x*reportMapScale,c.y*reportMapScale,c.w*reportMapScale,c.h*reportMapScale,0,0,cropped.width,cropped.height);
+    mapCtx.save();mapCtx.translate(cropped.width-273,cropped.height-390);mapCtx.scale(1.3,1.3);
+    mapCtx.translate(-(cropped.width-210),-(cropped.height-300));drawReportLegend(mapCtx);mapCtx.restore();
+    ctx.drawImage(cropped,b.x,b.y,b.w,b.h);ctx.strokeStyle='#dce2e9';ctx.lineWidth=1;ctx.strokeRect(b.x,b.y,b.w,b.h);
+    ctx.textAlign='left';ctx.fillStyle='#536373';ctx.font='14px Sarabun, sans-serif';ctx.fillText('แหล่งข้อมูล: กรมอุตุนิยมวิทยา / สำนักงานนิคมอุตสาหกรรม กนอ.',40,1513);
+    ctx.textAlign='right';ctx.fillText('หน้า 1 / 2',w-40,1513);ctx.textAlign='left';
+  }
+  function wrapRayongReport(mapImage){const page=document.createElement('canvas');page.width=reportSize.w;page.height=reportSize.h;drawRayongSheet(page.getContext('2d'),mapImage);return page}
+  async function composePage(kind){
+    if(kind==='rayong')return wrapRayongReport(await composeRayongMap());
+    if(!nationalRows.length)throw Error('ตำแหน่งสำนักงานนิคมฯ ยังไม่พร้อม');
+    const qpf=await loadImage(document.getElementById('compositeReportImage').src),canvas=document.createElement('canvas');
+    canvas.width=1100;canvas.height=105+Math.round(compositePlot.height*canvas.width/compositePlot.width)+35;
+    drawNationalSheet(canvas.getContext('2d'),qpf);return canvas;
+  }
+  document.querySelectorAll('[data-save]').forEach(button=>button.onclick=async()=>{
+    const [kind,format]=button.dataset.save.split('-');button.disabled=true;reportMessage('กำลังสร้างไฟล์ '+format.toUpperCase()+'…');
+    try{
+      const canvas=await composePage(kind);const filename='IEAT-radar-'+kind+'-'+new Date().toISOString().slice(0,10);
+      if(format==='png')await new Promise((resolve,reject)=>canvas.toBlob(blob=>{if(!blob)return reject(Error('สร้าง PNG ไม่สำเร็จ'));downloadBlob(blob,filename+'.png');resolve()},'image/png'));
+      else{
+        const {GIFEncoder,quantize,applyPalette}=await import('./vendor/gifenc/index.js');
+        const encoder=GIFEncoder(),ctx=canvas.getContext('2d');
+        function writeGifFrame(delay){
+          const pixels=ctx.getImageData(0,0,canvas.width,canvas.height).data;
+          // A 12-bit palette keeps the report responsive while retaining the radar colors.
+          const palette=quantize(pixels,128,{format:'rgb444'});
+          encoder.writeFrame(applyPalette(pixels,palette,'rgb444'),canvas.width,canvas.height,{palette,delay});
+        }
+        let encoded=0;
+        if(kind==='rayong'&&radarObjectUrl&&typeof ImageDecoder!=='undefined'){
+          let decoder;
+          try{
+            const w=1200*reportMapScale,h=750*reportMapScale;
+            const shot=await view.takeScreenshot({width:w,height:h,format:'png'}),base=await loadImage(shot.dataUrl);
+            decoder=new ImageDecoder({data:await (await fetch(radarObjectUrl)).arrayBuffer(),type:'image/gif',preferAnimation:true});
+            await decoder.tracks.ready;await decoder.completed;
+            const total=decoder.tracks.selectedTrack?.frameCount||0;
+            if(!total)throw Error('ไม่มีเฟรมเรดาร์');
+            const count=Math.min(total,8),step=Math.max(1,Math.ceil(total/count));
+            const rain=document.createElement('canvas');rain.width=800;rain.height=800;const rainCtx=rain.getContext('2d',{willReadFrequently:true});rainCtx.imageSmoothingEnabled=false;
+            const mapFrame=document.createElement('canvas');mapFrame.width=w;mapFrame.height=h;const mapCtx=mapFrame.getContext('2d');
+            for(let i=0;i<count;i++){
+              const frame=(await decoder.decode({frameIndex:Math.min(i*step,total-1)})).image;
+              try{
+                mapCtx.clearRect(0,0,w,h);mapCtx.drawImage(base,0,0,w,h);
+                rainCtx.clearRect(0,0,800,800);rainCtx.drawImage(frame,0,0,800,800);
+                const image=rainCtx.getImageData(0,0,800,800);
+                for(let k=0;k<image.data.length;k+=4)if(!isRainColor(image.data[k],image.data[k+1],image.data[k+2]))image.data[k+3]=0;
+                rainCtx.putImageData(image,0,0);
+                const pos=radarPlacement(w,h);mapCtx.globalAlpha=Number(radarCanvas.style.opacity);mapCtx.imageSmoothingEnabled=false;mapCtx.drawImage(rain,pos.x,pos.y,pos.w,pos.h);mapCtx.globalAlpha=1;
+                mapCtx.save();mapCtx.scale(reportMapScale,reportMapScale);drawMapPins(mapCtx,1200,750);mapCtx.restore();drawRayongSheet(ctx,mapFrame);
+                writeGifFrame(Math.max(100,Math.round((frame.duration||300000)/1000)*step));encoded++;
+                reportMessage('กำลังสร้าง GIF '+encoded+'/'+count+' เฟรม…');
+                await new Promise(resolve=>setTimeout(resolve,0));
+              }finally{frame.close()}
+            }
+          }catch(error){
+            console.warn('Animated GIF export failed; saving the report as a single-frame GIF',error);
+            if(!encoded)reportMessage('กำลังบันทึกภาพรายงานเป็น GIF…');
+          }finally{decoder?.close()}
+        }
+        if(kind==='national'&&typeof ImageDecoder!=='undefined'){
+          let decoder;
+          try{
+            const url=document.getElementById('compositeReportImage').dataset.url;
+            decoder=new ImageDecoder({data:await (await fetch(url)).arrayBuffer(),type:'image/gif',preferAnimation:true});
+            await decoder.tracks.ready;await decoder.completed;
+            const total=decoder.tracks.selectedTrack?.frameCount||0;
+            if(!total)throw Error('ไม่มีเฟรมเรดาร์คอมโพสิท');
+            const count=Math.min(total,8),step=Math.max(1,Math.ceil(total/count));
+            for(let i=0;i<count;i++){
+              const frame=(await decoder.decode({frameIndex:Math.min(i*step,total-1)})).image;
+              try{
+                drawNationalSheet(ctx,frame);
+                writeGifFrame(Math.max(100,Math.round((frame.duration||300000)/1000)*step));encoded++;
+                reportMessage('กำลังสร้าง GIF '+encoded+'/'+count+' เฟรม…');
+                await new Promise(resolve=>setTimeout(resolve,0));
+              }finally{frame.close()}
+            }
+          }catch(error){console.warn('National radar GIF animation unavailable',error)}
+          finally{decoder?.close()}
+        }
+        if(!encoded)writeGifFrame(1000);
+        encoder.finish();
+        const bytes=encoder.bytes();if(bytes.length<20)throw Error('สร้างไฟล์ GIF ไม่สำเร็จ');
+        downloadBlob(new Blob([bytes],{type:'image/gif'}),filename+'.gif');
+      }
+      reportMessage('ดาวน์โหลดไฟล์ '+format.toUpperCase()+' แล้ว');
+    }catch(error){reportMessage('บันทึกภาพไม่สำเร็จ: '+error.message)}finally{button.disabled=false}
+  });
 
-<script id="tmd-warning-feed-20260915">
-(function(){
- "use strict";
- var WARNING_URL="https://nawakonnakhonchai-wq.github.io/WeatherWarningNews/data/storm.geojson";
- var box=document.querySelector("#tmdWarningList");
- function escTmd(v){return String(v==null?"":v).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]})}
- function formatDate(v){if(!v)return"ไม่ระบุเวลา";var d=new Date(String(v).replace(" ","T")+(/Z$|[+-]\d\d:?\d\d$/.test(v)?"":"+07:00"));return isNaN(d)?v:new Intl.DateTimeFormat("th-TH",{dateStyle:"medium",timeStyle:"short",timeZone:"Asia/Bangkok"}).format(d)+" น."}
- fetch(WARNING_URL+"?t="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json()}).then(function(data){
-  var rows=(data.features||[]).filter(function(x){return x&&x.properties});
-  box.innerHTML=rows.length?rows.map(function(x){var p=x.properties||{},empty=p.status==="no_data",url=p.webUrl||"https://www.tmd.go.th/warning-and-events/warning-storm";return '<article class="warning-item"><h3>'+escTmd(p.title||"ประกาศแจ้งเตือน")+'</h3><p>'+escTmd(p.headline||p.description||"ยังไม่มีรายละเอียดประกาศ")+'</p><div class="warning-meta"><span>'+(empty?"ตรวจสอบล่าสุด ":"ออกประกาศ ")+escTmd(formatDate(p.announceDate))+'</span><a href="'+escTmd(url)+'" target="_blank" rel="noopener">อ่านประกาศฉบับเต็ม →</a></div></article>'}).join(""):'<div class="warning-empty">ไม่พบประกาศเตือนภัยในขณะนี้</div>';
- }).catch(function(){box.innerHTML='<div class="warning-empty">ไม่สามารถโหลดข่าวแจ้งเตือนได้ในขณะนี้ กรุณาเปิดดูจากเว็บไซต์กรมอุตุนิยมวิทยา</div>'});
-})();
-</script>
-
-<script id="weather-related-news-20260915">
-(function(){
- var items=[],active="ทั้งหมด";
- function escNews(v){return String(v==null?"":v).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]})}
- function category(item){if(item.category)return item.category;var text=((item.title||"")+" "+(item.summary||"")).toLowerCase();if(/ฝน|น้ำท่วม|พายุ|ลมแรง|คลื่น|อากาศ/.test(text))return"อากาศและน้ำ";if(/ไฟไหม้|ไฟป่า|สารเคมี|ฉุกเฉิน/.test(text))return"เหตุฉุกเฉิน";if(/pm2\\.5|ฝุ่น|มลพิษ|คุณภาพอากาศ|น้ำเสีย/.test(text))return"สิ่งแวดล้อม";if(/แผ่นดินไหว|สึนามิ|ดินถล่ม|ภัยพิบัติ/.test(text))return"ภัยพิบัติ";if(/นิคม|โรงงาน|อุตสาหกรรม/.test(text))return"นิคมฯ และโรงงาน";return"ข่าวและประกาศ"}
- function imageOf(item){return item.image||(((item.images||[])[0]||{}).url)||""}
- function render(){
-  var filtered=items.filter(function(x){return active==="ทั้งหมด"||category(x)===active}),featured=filtered[0],rest=filtered.slice(1,7),box=document.querySelector("#weatherFeaturedNews");
-  if(featured){var image=imageOf(featured);box.innerHTML=(image?'<a class="news-featured-image" href="'+escNews(featured.url)+'" target="_blank" rel="noopener"><img src="'+escNews(image)+'" alt="'+escNews(featured.title)+'"></a>':'<a class="news-featured-image no-image" href="'+escNews(featured.url)+'" target="_blank" rel="noopener">'+escNews(featured.source||"ข่าวล่าสุด")+'</a>')+'<div class="news-featured-copy"><span class="news-meta">'+escNews(category(featured))+' · '+escNews(featured.source||"")+'</span><h3>'+escNews(featured.title)+'</h3><p>'+escNews(featured.summary||"")+'</p><a class="news-read" href="'+escNews(featured.url)+'" target="_blank" rel="noopener">อ่านข่าวฉบับเต็ม →</a></div>'}else box.innerHTML='<div class="news-empty">ไม่พบข่าวในหมวดที่เลือก</div>';
-  document.querySelector("#weatherNewsGrid").innerHTML=rest.length?rest.map(function(item){var image=imageOf(item);return'<article class="news-card">'+(image?'<a class="news-card-image" href="'+escNews(item.url)+'" target="_blank" rel="noopener"><img src="'+escNews(image)+'" alt="'+escNews(item.title)+'" loading="lazy"></a>':'<a class="news-card-image no-image" href="'+escNews(item.url)+'" target="_blank" rel="noopener">'+escNews(item.source||"ข่าวและประกาศ")+'</a>')+'<div class="news-card-copy"><span class="news-meta">'+escNews(category(item))+'</span><small>'+escNews(item.source||"")+(item.published_date?" · "+escNews(item.published_date):"")+'</small><h3>'+escNews(item.title)+'</h3><p>'+escNews(item.summary||"")+'</p><a class="news-read" href="'+escNews(item.url)+'" target="_blank" rel="noopener">อ่านจากแหล่งข่าว →</a></div></article>'}).join(""):'<div class="news-empty">ยังไม่มีข่าวเพิ่มเติมในหมวดนี้</div>'
- }
- fetch("./daily-report.json?t="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json()}).then(function(data){items=(data.news||[]).map(function(x){x.category=category(x);return x});var cats=["ทั้งหมด"].concat(Array.from(new Set(items.map(category))));document.querySelector("#weatherNewsTabs").innerHTML=cats.map(function(cat){return'<button class="'+(cat==="ทั้งหมด"?"active":"")+'" data-category="'+escNews(cat)+'">'+(cat==="ทั้งหมด"?"ข่าวทั้งหมด":escNews(cat))+'</button>'}).join("");document.querySelectorAll("#weatherNewsTabs button").forEach(function(btn){btn.addEventListener("click",function(){active=btn.dataset.category;document.querySelectorAll("#weatherNewsTabs button").forEach(function(x){x.classList.toggle("active",x===btn)});render()})});render()}).catch(function(){document.querySelector("#weatherFeaturedNews").innerHTML='<div class="news-empty">ไม่สามารถโหลดข่าวสารได้ในขณะนี้</div>';document.querySelector("#weatherNewsGrid").innerHTML=""});
-})();
-</script>
-
-
-<script id="homepage-header-clock">
-(function(){function tick(){var now=new Date();var date=document.querySelector("#headerDate"),time=document.querySelector("#headerTime");if(date)date.textContent="ข้อมูล ณ วันที่ "+new Intl.DateTimeFormat("th-TH",{timeZone:"Asia/Bangkok",day:"numeric",month:"short",year:"numeric"}).format(now);if(time)time.textContent="เวลา "+new Intl.DateTimeFormat("th-TH",{timeZone:"Asia/Bangkok",hour:"2-digit",minute:"2-digit",hour12:false}).format(now)+" น."}tick();setInterval(tick,60000)})();
-</script>
-
-<script id="system-header-behavior-20260915">
-(function(){
- function updateHeaderClock(){var el=document.querySelector("#headerClock");if(!el)return;var now=new Date(),date=new Intl.DateTimeFormat("th-TH",{timeZone:"Asia/Bangkok",weekday:"short",day:"numeric",month:"short",year:"2-digit"}).format(now),time=new Intl.DateTimeFormat("th-TH",{timeZone:"Asia/Bangkok",hour:"2-digit",minute:"2-digit",hour12:false}).format(now);el.textContent="🌟 "+date+" "+time+" น."}
- updateHeaderClock();setInterval(updateHeaderClock,60000);
- var btn=document.querySelector("#headerMoreBtn"),menu=document.querySelector("#headerMoreMenu");
- if(btn&&menu){btn.addEventListener("click",function(e){e.stopPropagation();var open=menu.classList.toggle("open");btn.setAttribute("aria-expanded",String(open))});document.addEventListener("click",function(){menu.classList.remove("open");btn.setAttribute("aria-expanded","false")});menu.addEventListener("click",function(e){e.stopPropagation()})}
-})();
-</script>
-<link rel="stylesheet" href="./mobile-responsive.css?v=20260915-1">
-</body>
-</html>
+});
+</script></body></html>
