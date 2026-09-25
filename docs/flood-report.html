@@ -14,7 +14,7 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
   <script src="data/thaiwater_latest.js?v=20260911-1"></script>
-  <script src="flood-live-data.js?v=20260925-verified-flood-3" defer></script>
+  <script src="flood-live-data.js?v=20260925-verified-flood-4" defer></script>
   <script src="data/thaiwater-map-meta.js" defer></script>
   <script id="flood-export-inline-20260924">
 (function(){
@@ -14183,7 +14183,7 @@ html body main.container #warning .dashboard-chart-mode>.rid-table-wrap{
  function renderEstate(){
   var body=document.getElementById("estateRanks"),panel=body&&body.closest(".estate-watch-table"),target=viz(panel,"estateRankViz");if(!target)return;
   var rows=rowsOf("#estateRanks").map(function(row){var pin=row.querySelector("[data-map-lat][data-map-lon]"),lat=pin?.dataset.mapLat,lon=pin?.dataset.mapLon;return{name:row.cells[1]?.textContent.trim()||"–",count:Number(row.dataset.count)||0,distance:row.cells[3]?.textContent.trim()||"–",lat:lat,lon:lon,scale:pin?.dataset.mapScale}})
-   .sort(function(a,b){return b.count-a.count}).slice(0,5);
+   .sort(function(a,b){return b.count-a.count});
   var sig=JSON.stringify(rows);if(target.dataset.sig===sig)return;target.dataset.sig=sig;
   target.innerHTML=rows.length?'<div class="flood-estate-ranking">'+rows.map(function(x,i){
    var lat=Number(x.lat),lon=Number(x.lon),hasCoords=x.lat!=null&&x.lon!=null&&x.lat!==""&&x.lon!==""&&Number.isFinite(lat)&&Number.isFinite(lon)&&lat!==0&&lon!==0&&Math.abs(lat)<=90&&Math.abs(lon)<=180;
@@ -15781,6 +15781,7 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
 #warning .estate-watch-table .observed-flood-zoom{border:0;border-radius:999px;padding:6px 11px;background:#007b83;color:#fff;font:inherit;font-weight:600;cursor:pointer;text-align:center}
 #warning .estate-watch-table .observed-flood-zoom:hover{background:#005f68}
 #warning .estate-watch-table .observed-flood-zoom:focus-visible{outline:3px solid #f6b532;outline-offset:2px}
+#warning .estate-watch-table #estateRankViz .flood-estate-ranking{max-height:620px;overflow-y:auto;overscroll-behavior:contain}
 #warning #topFloodMap{position:relative!important;min-height:640px!important}
 #warning #topFloodMap>.operations-map{display:block!important;position:relative!important;width:100%!important;height:100%!important;min-height:640px!important;overflow:hidden!important}
 #warning #topFloodMap #overviewArcgisMap{display:block!important;width:100%!important;height:100%!important;min-height:640px!important;border:0!important}
