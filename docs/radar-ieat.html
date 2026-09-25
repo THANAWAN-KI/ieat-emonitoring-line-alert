@@ -292,7 +292,7 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
   const reportView=document.getElementById('reportView'),reportStatus=document.getElementById('reportStatus');
   const qpfUrl='/api/composite-qpf.gif';
   function reportMessage(message){reportStatus.textContent=message}
-  function downloadBlob(blob,filename){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(url),60000)}
+  function downloadBlob(blob,filename){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=filename;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000)}
   function loadImage(src){return new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=()=>reject(Error('โหลดภาพต้นทางไม่สำเร็จ'));img.src=src})}
   function drawEstatePin(ctx,x,y,scale=1){
     if(pinImage.complete&&pinImage.naturalWidth){ctx.drawImage(pinImage,x-17*scale,y-34*scale,34*scale,34*scale);return}
@@ -437,11 +437,11 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
       const canvas=await composePage(kind);const filename='IEAT-radar-'+kind+'-'+new Date().toISOString().slice(0,10);
       if(format==='png')await new Promise((resolve,reject)=>canvas.toBlob(blob=>{if(!blob)return reject(Error('สร้าง PNG ไม่สำเร็จ'));downloadBlob(blob,filename+'.png');resolve()},'image/png'));
       else{
-        const {GIFEncoder,quantize,applyPalette}=await import('https://cdn.jsdelivr.net/npm/gifenc@1.0.3/dist/gifenc.esm.js');
+        const {GIFEncoder,quantize,applyPalette}=await import('/vendor/gifenc/index.js');
         const encoder=GIFEncoder(),ctx=canvas.getContext('2d');
         if(kind==='rayong'&&typeof ImageDecoder!=='undefined'){
           const shot=await view.takeScreenshot({width:1200,height:750,format:'png'}),base=await loadImage(shot.dataUrl);
-          const decoder=new ImageDecoder({data:await (await fetch(radarObjectUrl)).arrayBuffer(),type:'image/gif'});await decoder.tracks.ready;
+          const decoder=new ImageDecoder({data:await (await fetch(radarObjectUrl)).arrayBuffer(),type:'image/gif',preferAnimation:true});await decoder.tracks.ready;await decoder.completed;
           const count=Math.min(decoder.tracks.selectedTrack?.frameCount||1,8),step=Math.max(1,Math.ceil((decoder.tracks.selectedTrack?.frameCount||1)/count));
           const rain=document.createElement('canvas');rain.width=800;rain.height=800;const rainCtx=rain.getContext('2d',{willReadFrequently:true});
           const mapFrame=document.createElement('canvas');mapFrame.width=1200;mapFrame.height=750;const mapCtx=mapFrame.getContext('2d');
