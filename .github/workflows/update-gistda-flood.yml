@@ -1,5 +1,10 @@
 name: Update GISTDA observed flood
 on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/fetch_gistda_flood.py"
+      - ".github/workflows/update-gistda-flood.yml"
   workflow_dispatch:
   schedule:
     - cron: "42 */3 * * *"
@@ -11,7 +16,7 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
