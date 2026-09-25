@@ -59,6 +59,31 @@ html body #hubInformationHeader .weather-pop{top:54px!important}
 @media(max-width:900px){html body #hubInformationHeader{height:auto!important;min-height:58px!important;padding:8px!important;flex-wrap:wrap!important}html body #hubInformationHeader .header-right{width:100%!important;justify-content:flex-end!important;flex-wrap:wrap!important}html body #hubInformationHeader .scope{display:block!important}html body #hubInformationHeader .header-actions{gap:5px!important}}
 </style>
 <style id="ieat-three-page-navigation">html body #hubInformationHeader nav.header-actions a.main-nav-link{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:35px!important;padding:7px 17px!important;border-radius:22px!important;text-decoration:none!important;white-space:nowrap!important;color:#5a626b!important;background:transparent!important;font-weight:600!important}html body #hubInformationHeader nav.header-actions a.main-nav-link.nav-active,html body #hubInformationHeader nav.header-actions a.main-nav-link.nav-active:hover{background:#598c14!important;color:#fff!important;box-shadow:none!important}@media(max-width:700px){html body #hubInformationHeader nav.header-actions a.main-nav-link{padding:6px 9px!important;font-size:12px!important}}</style>
+<style id="information-mobile-fit">
+@media(max-width:900px){
+  html,body{max-width:100%;overflow-x:hidden}
+  html body #hubInformationHeader{display:flex!important;flex-wrap:wrap!important;height:auto!important;min-height:0!important;padding:9px 10px!important;gap:6px!important}
+  html body #hubInformationHeader .brand{width:100%!important;max-width:100%!important;flex:1 1 100%!important;min-width:0!important}
+  html body #hubInformationHeader .brand h1{font-size:clamp(13px,4vw,17px)!important;white-space:normal!important}
+  html body #hubInformationHeader .header-right{width:100%!important;min-width:0!important;margin:0!important;justify-content:flex-start!important;overflow-x:auto!important;scrollbar-width:thin}
+  html body #hubInformationHeader nav.header-actions{width:max-content!important;min-width:max-content!important;flex-wrap:nowrap!important}
+  html body #hubInformationHeader nav.header-actions a.main-nav-link{flex:none!important}
+  .tabs{width:100%;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin}
+  .dashboard,.requested-overview,.gis-data-dashboard,.em-dashboard,.accident-dashboard{width:100%!important;max-width:100%!important;overflow-x:hidden!important}
+  .ieat-dashboard-grid,.gis-data-layout,.em-layout,.ac-grid{min-width:0!important;max-width:100%!important}
+  .ieat-dashboard-grid>* ,.gis-data-layout>* ,.em-layout>* ,.ac-grid>*{min-width:0!important}
+  .ieat-map-panel,.gis-main-map,.em-map,.ac-map{width:100%!important;max-width:100%!important}
+  .ieat-map-panel iframe,.gis-main-map iframe,.em-map iframe,.ac-map iframe{width:100%!important;max-width:100%!important}
+  .gis-table-wrap,.water-live-table,.ac-chart,.em-table-wrap{max-width:100%!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch}
+}
+@media(max-width:600px){
+  .ieat-kpi-row,.ieat-dashboard-side,.gis-data-kpis,.em-kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .ieat-kpi,.gis-data-kpis>*,.em-kpis>*{min-width:0!important}
+  .ieat-map-panel,.gis-main-map,.em-map,.ac-map{height:480px!important;min-height:480px!important}
+  .ieat-map-panel iframe,.gis-main-map iframe,.em-map iframe,.ac-map iframe{height:100%!important;min-height:0!important}
+  .ieat-panel>header,.gis-data-panel>header,.em-panel>header{height:auto!important;min-height:0!important;flex-wrap:wrap!important;gap:7px!important}
+}
+</style>
 </head><body>
 <header class="header" id="hubInformationHeader"><div class="brand"><img src="./assets/TH-Vertical.png" alt="กนอ."><div><h1>ระบบสารสนเทศและการเชื่อมโยงข้อมูล</h1></div></div><div class="header-right"><button class="clock" id="clock" aria-expanded="false"></button><div class="scope-wrap"><button class="scope" id="scopeBtn" aria-expanded="false">พื้นที่นิคมอุตสาหกรรมทั่วประเทศ</button><div class="estate-pop" id="estatePop"><div class="search-box"><img src="./assets/search.png" alt=""><input id="estateSearch" type="search" placeholder="ค้นหาชื่อนิคมอุตสาหกรรม"></div><div class="estate-list" id="estateList"></div></div></div><nav class="header-actions" aria-label="เมนูหลัก"><a class="main-nav-link" href="./daily-situation.html">หน้าแรก</a><a class="main-nav-link nav-active" href="./information.html#overview" aria-current="page">ข้อมูล</a><a class="main-nav-link" href="./hub.html">Disaster</a><div class="header-more-wrap"><button class="header-more" id="headerMoreBtn" type="button" aria-label="เมนูเพิ่มเติม" aria-expanded="false">⋮</button><div class="header-more-menu" id="headerMoreMenu"><button type="button" id="headerWeatherMenu">สภาพอากาศ</button></div></div></nav></div><div class="weather-pop" id="weatherPop"><div class="weather-item"><img class="weather-symbol" src="./assets/extreme-rain-fill.png" alt=""><b id="rainValue">กำลังโหลด</b><span>ปริมาณฝน</span></div><div class="weather-item"><img class="weather-symbol" src="./assets/humidity-fill.png" alt=""><b id="humidityValue">กำลังโหลด</b><span>ความชื้นสัมพัทธ์</span></div><div class="weather-item"><img class="weather-symbol" src="./assets/windsock.png" alt=""><b id="directionValue">กำลังโหลด</b><span>ทิศทางลม</span></div><div class="weather-item"><img class="weather-symbol" src="./assets/wind-onshore-fill.png" alt=""><b id="windValue">กำลังโหลด</b><span>ความเร็วลม</span></div></div></header>
 <nav class="tabs"><button class="tab active" data-tab="overview">ภาพรวม</button><button class="tab" data-tab="gis">ข้อมูลระบบ GIS</button><button class="tab" data-tab="monitor">e‑Monitoring</button><button class="tab" data-tab="water">ข้อมูลระดับน้ำ</button><button class="tab" data-tab="accident">สถิติอุบัติเหตุ</button></nav>
