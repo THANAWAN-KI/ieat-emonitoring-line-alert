@@ -43,11 +43,11 @@ button.primary{background:#59267c;border-color:#59267c}
 .radar-layer-control input{accent-color:#59267c}
 @media(max-width:800px){header{padding:10px 12px;flex-wrap:wrap}.layout{height:auto;padding:10px}.map-card{height:60vh;min-height:380px}}
 
-.report-view[hidden]{display:none}.report-view{position:fixed;inset:0;z-index:100;background:#f3f5f8;overflow:auto;padding:22px}.report-top{display:flex;align-items:center;justify-content:space-between;gap:15px;max-width:1200px;margin:0 auto 18px}.report-top h2{margin:0}.report-pages{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.report-card{background:#fff;border-radius:14px;padding:16px;box-shadow:0 3px 18px #2a3a4b18}.report-card h3{margin:0 0 10px;color:#263444}.report-card p{color:#627080;font-size:14px}.report-image{position:relative;background:#e8ecf2;min-height:250px;overflow:hidden}.report-image img{display:block;width:100%;height:auto}.report-pins{position:absolute;inset:0;pointer-events:none}.report-pin{position:absolute;transform:translate(-50%,-100%);background:#fff;color:#176437;border:1px solid #176437;border-radius:10px;padding:2px 5px;font-size:11px;white-space:nowrap;max-width:135px;overflow:hidden;text-overflow:ellipsis}.report-card button{margin:7px 6px 0 0}.report-national img{max-height:490px;object-fit:contain}.report-card:first-child{grid-column:1/-1}.report-card:first-child .report-image{min-height:530px}.report-card:first-child .report-image img{width:100%;height:auto;aspect-ratio:12/7.5;object-fit:contain}.report-map-controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0 12px}.report-map-controls input{min-width:240px;flex:1;padding:8px;border:1px solid #cad4df;border-radius:8px}.report-map-controls button{margin:0}.report-card:first-child .report-image{cursor:crosshair}.report-status{max-width:1200px;margin:10px auto;color:#5c346d}@media(max-width:850px){.report-pages{grid-template-columns:1fr}.report-view{padding:12px}}
+.report-view[hidden]{display:none}.report-view{position:fixed;inset:0;z-index:100;background:#f3f5f8;overflow:auto;padding:22px}.report-top{display:flex;align-items:center;justify-content:space-between;gap:15px;max-width:1200px;margin:0 auto 18px}.report-top h2{margin:0}.report-pages{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.report-card{background:#fff;border-radius:14px;padding:16px;box-shadow:0 3px 18px #2a3a4b18}.report-card h3{margin:0 0 10px;color:#263444}.report-card p{color:#627080;font-size:14px}.report-image{position:relative;background:#e8ecf2;min-height:250px;overflow:hidden}.report-image img{display:block;width:100%;height:auto}.report-pins{position:absolute;inset:0;pointer-events:none}.report-pin{position:absolute;transform:translate(-50%,-100%);background:#fff;color:#176437;border:1px solid #176437;border-radius:10px;padding:2px 5px;font-size:11px;white-space:nowrap;max-width:135px;overflow:hidden;text-overflow:ellipsis}.report-card button{margin:7px 6px 0 0}.report-national img{max-height:490px;object-fit:contain}.report-card:first-child{grid-column:1/-1}.report-card:first-child .report-image{min-height:530px}.report-card:first-child .report-image img{width:100%;height:auto;aspect-ratio:12/7.5;object-fit:contain}.report-map-controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0 12px}.report-map-controls input{min-width:240px;flex:1;padding:8px;border:1px solid #cad4df;border-radius:8px}.report-map-controls button{margin:0}.report-card:first-child .report-image{cursor:grab;touch-action:none;user-select:none}.report-status{max-width:1200px;margin:10px auto;color:#5c346d}@media(max-width:850px){.report-pages{grid-template-columns:1fr}.report-view{padding:12px}}
 </style></head><body>
 <header><div><h1>เรดาร์ฝนระยอง × นิคมอุตสาหกรรม</h1><p>ภาพฝนจาก <a href="https://weather.tmd.go.th/rygloop.php" target="_blank" rel="noopener">TMD Rayong Loop</a> · ข้อมูลนิคมอุตสาหกรรม: กนอ.</p></div><button id="export" class="primary">ส่งออกรายงาน</button></header>
 <main class="layout"><section class="map-card"><div id="map"></div><img id="radarImage" alt="" aria-hidden="true" style="position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none"><div id="estateMarkers" aria-label="ตำแหน่งนิคมอุตสาหกรรม"></div><canvas id="radarCanvas" aria-label="ภาพฝนเรดาร์ระยอง กรองพื้นหลังออก" role="img" style="position:absolute;z-index:1;pointer-events:none;display:none"></canvas><nav class="toolbar" aria-label="แผนที่"><button id="country">ทั่วประเทศ</button><button id="east">ภาคตะวันออก</button><button id="rayong">ระยอง</button><button id="radar">ซ่อนเรดาร์</button><label style="background:white;padding:7px;border-radius:8px">ความทึบ <input id="opacity" aria-label="ความทึบเรดาร์" type="range" min="0" max="100" value="85"></label></nav><aside class="radar-legend" aria-label="คำอธิบายค่าสะท้อนเรดาร์ฝน"><strong>CMAX (dBZ)</strong><div class="legend-body"><div class="legend-gradient" aria-hidden="true"></div><div class="legend-ticks"><span>65+</span><span>50</span><span>40</span><span>30</span><span>20</span><span>10</span></div></div><small>ค่าสะท้อนเรดาร์ ยิ่งสูงสัญญาณฝนยิ่งเข้ม</small><a href="https://weather.tmd.go.th/ryg/rygloop.gif" target="_blank" rel="noopener">ดู GIF และเวลาเรดาร์จาก TMD ↗</a><div id="radarTime" aria-live="polite">กำลังตรวจภาพจาก TMD…</div></aside><div class="status" id="status" role="status">กำลังโหลดแผนที่และข้อมูลเรดาร์ระยอง…</div></section><aside class="side"><div class="side-head"><h2>จำนวนนิคมอุตสาหกรรมที่อยู่ในพื้นที่เรดาร์ <span id="count">—</span></h2><small>แสดงรายชื่อนิคมในรัศมีเรดาร์ระยอง · คลิกรายชื่อเพื่อซูม</small></div><ol class="list" id="estates"><li class="empty">กำลังโหลดข้อมูล IEAT…</li></ol><footer>รายการอ้างอิงจากฟิลด์ IEAT ของ EPP_2026_V1 · เรดาร์ระยองครอบคลุมเฉพาะพื้นที่รอบสถานี</footer></aside></main>
-<section class="report-view" id="reportView" hidden aria-label="ส่งออกรายงานเรดาร์"><div class="report-top"><h2>ส่งออกรายงานเรดาร์ฝนและนิคมอุตสาหกรรม</h2><button id="closeReport">กลับสู่แผนที่</button></div><div class="report-pages"><article class="report-card"><h3>หน้า 1 · เรดาร์ฝนระยอง</h3><div class="report-map-controls"><input id="reportEstateSearch" list="reportEstateOptions" placeholder="ค้นหาชื่อนิคมอุตสาหกรรม" aria-label="ค้นหานิคมอุตสาหกรรม"><datalist id="reportEstateOptions"></datalist><button id="reportSearchButton">ค้นหาและซูม</button><button id="reportZoomIn" aria-label="ซูมเข้า">＋</button><button id="reportZoomOut" aria-label="ซูมออก">－</button><button id="reportReset">ภาพรวมเรดาร์</button></div><div class="report-image" id="rayongReport" title="คลิกเพื่อย้ายจุดกึ่งกลางแผนที่ หรือใช้ล้อเมาส์เพื่อซูม"><img id="rayongReportImage" alt="แผนที่นิคมอุตสาหกรรมและภาพฝนเรดาร์ระยอง"></div><p>เลือกพื้นที่หรือค้นหานิคมฯ ก่อนดาวน์โหลด · จุดและชื่อแสดงเหนือชั้นเรดาร์</p><button data-save="rayong-png">ดาวน์โหลด PNG</button><button data-save="rayong-gif">ดาวน์โหลด GIF</button></article><article class="report-card"><h3>หน้า 2 · เรดาร์คอมโพสิททั่วประเทศ</h3><div class="report-image report-national"><img id="compositeReportImage" alt="Radar Composite QPF จาก TMD"></div><div class="report-image report-national"><img id="nationalEstateMap" alt="แผนที่ตำแหน่งนิคมอุตสาหกรรมทั่วประเทศ"></div><p>ภาพ Radar Composite QPF ตามเวลาของภาพต้นทาง และแผนที่ กนอ. แสดงตำแหน่งนิคมฯ ทั่วประเทศ</p><button data-save="national-png">ดาวน์โหลด PNG</button><button data-save="national-gif">ดาวน์โหลด GIF</button></article></div><p class="report-status" id="reportStatus" role="status"></p></section>
+<section class="report-view" id="reportView" hidden aria-label="ส่งออกรายงานเรดาร์"><div class="report-top"><h2>ส่งออกรายงานเรดาร์ฝนและนิคมอุตสาหกรรม</h2><button id="closeReport">กลับสู่แผนที่</button></div><div class="report-pages"><article class="report-card"><h3>หน้า 1 · เรดาร์ฝนระยอง</h3><div class="report-map-controls"><input id="reportEstateSearch" list="reportEstateOptions" placeholder="ค้นหาชื่อนิคมอุตสาหกรรม" aria-label="ค้นหานิคมอุตสาหกรรม"><datalist id="reportEstateOptions"></datalist><button id="reportSearchButton">ค้นหาและซูม</button><button id="reportZoomIn" aria-label="ซูมเข้า">＋</button><button id="reportZoomOut" aria-label="ซูมออก">－</button><button id="reportReset">ภาพรวมเรดาร์</button></div><div class="report-image" id="rayongReport" title="ลากเพื่อเลื่อนแผนที่ ใช้ล้อเมาส์เพื่อซูม"><img id="rayongReportImage" draggable="false" alt="แผนที่นิคมอุตสาหกรรมและภาพฝนเรดาร์ระยอง"></div><p>ลากแผนที่และใช้ล้อเมาส์เพื่อซูม หรือค้นหานิคมฯ ก่อนดาวน์โหลด</p><button data-save="rayong-png">ดาวน์โหลด PNG</button><button data-save="rayong-gif">ดาวน์โหลด GIF</button></article><article class="report-card"><h3>หน้า 2 · เรดาร์คอมโพสิททั่วประเทศ</h3><div class="report-image report-national"><img id="compositeReportImage" alt="Radar Composite QPF จาก TMD"></div><div class="report-image report-national"><img id="nationalEstateMap" alt="แผนที่ตำแหน่งนิคมอุตสาหกรรมทั่วประเทศ"></div><p>ภาพ Radar Composite QPF ตามเวลาของภาพต้นทาง และแผนที่ กนอ. แสดงตำแหน่งนิคมฯ ทั่วประเทศ</p><button data-save="national-png">ดาวน์โหลด PNG</button><button data-save="national-gif">ดาวน์โหลด GIF</button></article></div><p class="report-status" id="reportStatus" role="status"></p></section>
 <script>
 require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer','esri/geometry/Point','esri/geometry/Circle','esri/widgets/Search','esri/widgets/LayerList','esri/widgets/Legend','esri/widgets/Expand','esri/widgets/BasemapGallery','esri/layers/GraphicsLayer','esri/Graphic'],function(WebMap,EsriMap,MapView,FeatureLayer,Point,Circle,Search,LayerList,Legend,Expand,BasemapGallery,GraphicsLayer,Graphic){
   // TMD Rayong scan: 800px square, 240 km radius, centre at pixel (410,395).
@@ -157,16 +157,21 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
   // Keep EPP as a query-only source for unique estate names; do not show operator points.
   const view=new MapView({container:'map',map,center:[101,13.3],zoom:6,popupEnabled:false});
   view.when(()=>view.ui.move('zoom','bottom-left'));
-  sourceMap.load().then(()=>{
+  sourceMap.load().then(async()=>{
     const selected=/ตำแหน่งนิคมอุตสาหกรรม|เขตประกอบการอุตสาหกรรม/;
     const layers=sourceMap.allLayers.toArray().filter(layer=>selected.test((layer.title||'').replace(/\s+/g,'')));
+    let added=0;
     for(const layer of layers){
+      await layer.load();
+      // Office pins are rendered once in the HTML overlay above the radar.
+      if(layer.geometryType!=='polygon')continue;
       layer.visible=true;
       layer.listMode='show';
       layer.popupEnabled=false;
       map.add(layer);
+      added++;
     }
-    if(!layers.length)setStatus('ไม่พบชั้นข้อมูลนิคมฯ และเขตประกอบการใน WebMap');
+    if(!added)setStatus('ไม่พบชั้นขอบเขตนิคมฯ ใน WebMap');
   }).catch(error=>setStatus('โหลดชั้นข้อมูลนิคมฯ ไม่สำเร็จ: '+error.message));
   const search=new Search({view,includeDefaultSources:true,allPlaceholder:'ค้นหาที่อยู่หรือสถานที่'});
   view.ui.add(search,{position:'top-right',index:0});
@@ -351,7 +356,18 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
   document.getElementById('reportZoomOut').onclick=()=>view.goTo({zoom:Math.max(4,view.zoom-1)});
   document.getElementById('reportReset').onclick=()=>view.goTo({center:[101.27,12.68],zoom:9});
   const preview=document.getElementById('rayongReport');
-  preview.onclick=event=>{const box=preview.getBoundingClientRect();const point=view.toMap({x:(event.clientX-box.left)/box.width*view.width,y:(event.clientY-box.top)/box.height*view.height});if(point)view.goTo({center:point,zoom:view.zoom})};
+  let reportDrag=null,suppressReportClick=false;
+  preview.addEventListener('pointerdown',event=>{if(event.button!==0)return;reportDrag={x:event.clientX,y:event.clientY};preview.setPointerCapture(event.pointerId);preview.style.cursor='grabbing'});
+  preview.addEventListener('pointerup',event=>{
+    if(!reportDrag)return;
+    const dx=event.clientX-reportDrag.x,dy=event.clientY-reportDrag.y;reportDrag=null;preview.style.cursor='grab';
+    if(Math.hypot(dx,dy)<5)return;
+    suppressReportClick=true;const box=preview.getBoundingClientRect();
+    const center=view.toMap({x:view.width/2-dx/box.width*view.width,y:view.height/2-dy/box.height*view.height});
+    if(center)view.goTo({center,zoom:view.zoom},{animate:false});
+  });
+  preview.addEventListener('pointercancel',()=>{reportDrag=null;preview.style.cursor='grab'});
+  preview.onclick=event=>{if(suppressReportClick){suppressReportClick=false;return}const box=preview.getBoundingClientRect();const point=view.toMap({x:(event.clientX-box.left)/box.width*view.width,y:(event.clientY-box.top)/box.height*view.height});if(point)view.goTo({center:point,zoom:view.zoom})};
   preview.addEventListener('wheel',event=>{
     event.preventDefault();const next=Math.max(4,Math.min(18,view.zoom+(event.deltaY<0?1:-1)));
     if(next===view.zoom)return;
@@ -390,10 +406,22 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
       await prepareNationalMap();await refreshReportMap();reportMessage('รายงานทั้งสองหน้าพร้อมบันทึก · ค้นหานิคมฯ หรือซูมก่อนดาวน์โหลดได้');
     }catch(error){reportMessage('หน้า 1 พร้อมใช้งาน · หน้า 2: '+error.message)}
   };
+  function drawRayongSheet(ctx,mapImage){
+    const width=ctx.canvas.width,height=ctx.canvas.height;
+    ctx.fillStyle='#fff';ctx.fillRect(0,0,width,height);
+    ctx.textAlign='center';ctx.fillStyle='#172b3d';ctx.font='bold 34px Sarabun, sans-serif';
+    ctx.fillText('รายงานเฝ้าระวังฝนใกล้นิคมอุตสาหกรรม',width/2,57);
+    ctx.font='19px Sarabun, sans-serif';ctx.fillText('แผนที่เรดาร์ฝนระยอง · '+new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok',dateStyle:'long',timeStyle:'short'}),width/2,99);
+    ctx.strokeStyle='#253444';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(40,126);ctx.lineTo(width-40,126);ctx.stroke();
+    ctx.drawImage(mapImage,40,146,1200,750);ctx.strokeStyle='#dce2e9';ctx.lineWidth=1;ctx.strokeRect(40,146,1200,750);
+    ctx.textAlign='left';ctx.fillStyle='#536373';ctx.font='16px Sarabun, sans-serif';ctx.fillText('แหล่งข้อมูล: เรดาร์ฝนกรมอุตุนิยมวิทยา / สำนักงานนิคมอุตสาหกรรม กนอ.',40,944);
+    ctx.textAlign='right';ctx.fillText('หน้า 1 / 2',width-40,944);ctx.textAlign='left';
+  }
+  function wrapRayongReport(mapImage){const page=document.createElement('canvas');page.width=1280;page.height=970;drawRayongSheet(page.getContext('2d'),mapImage);return page}
   async function composePage(kind){
     const canvas=document.createElement('canvas'),ctx=canvas.getContext('2d');
     if(kind==='rayong'){
-      return composeRayongMap();
+      return wrapRayongReport(await composeRayongMap());
     }else{
       if(!nationalMapUrl)throw Error('แผนที่นิคมฯ ยังไม่พร้อม');
       const qpf=await loadImage(document.getElementById('compositeReportImage').src),mapImg=await loadImage(nationalMapUrl);
@@ -414,15 +442,17 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
         if(kind==='rayong'&&typeof ImageDecoder!=='undefined'){
           const shot=await view.takeScreenshot({width:1200,height:750,format:'png'}),base=await loadImage(shot.dataUrl);
           const decoder=new ImageDecoder({data:await (await fetch(radarObjectUrl)).arrayBuffer(),type:'image/gif'});await decoder.tracks.ready;
-          const count=Math.min(decoder.tracks.selectedTrack?.frameCount||1,12),step=Math.max(1,Math.ceil((decoder.tracks.selectedTrack?.frameCount||1)/count));
+          const count=Math.min(decoder.tracks.selectedTrack?.frameCount||1,8),step=Math.max(1,Math.ceil((decoder.tracks.selectedTrack?.frameCount||1)/count));
           const rain=document.createElement('canvas');rain.width=800;rain.height=800;const rainCtx=rain.getContext('2d',{willReadFrequently:true});
+          const mapFrame=document.createElement('canvas');mapFrame.width=1200;mapFrame.height=750;const mapCtx=mapFrame.getContext('2d');
           for(let i=0;i<count;i++){
-            const frame=(await decoder.decode({frameIndex:i*step})).image;ctx.clearRect(0,0,1200,750);ctx.drawImage(base,0,0,1200,750);
+            const frame=(await decoder.decode({frameIndex:i*step})).image;mapCtx.clearRect(0,0,1200,750);mapCtx.drawImage(base,0,0,1200,750);
             rainCtx.clearRect(0,0,800,800);rainCtx.drawImage(frame,0,0,800,800);const image=rainCtx.getImageData(0,0,800,800);
             for(let k=0;k<image.data.length;k+=4)if(!isRainColor(image.data[k],image.data[k+1],image.data[k+2]))image.data[k+3]=0;
-            rainCtx.putImageData(image,0,0);const pos=radarPlacement(1200,750);ctx.globalAlpha=Number(radarCanvas.style.opacity);ctx.drawImage(rain,pos.x,pos.y,pos.w,pos.h);ctx.globalAlpha=1;
-            drawMapPins(ctx,1200,750);drawReportLegend(ctx);const pixels=ctx.getImageData(0,0,1200,750).data,palette=quantize(pixels,256);
-            encoder.writeFrame(applyPalette(pixels,palette),1200,750,{palette,delay:Math.max(100,Math.round((frame.duration||300000)/1000)*step)});frame.close();
+            rainCtx.putImageData(image,0,0);const pos=radarPlacement(1200,750);mapCtx.globalAlpha=Number(radarCanvas.style.opacity);mapCtx.drawImage(rain,pos.x,pos.y,pos.w,pos.h);mapCtx.globalAlpha=1;
+            drawMapPins(mapCtx,1200,750);drawReportLegend(mapCtx);drawRayongSheet(ctx,mapFrame);
+            const pixels=ctx.getImageData(0,0,canvas.width,canvas.height).data,palette=quantize(pixels,256);
+            encoder.writeFrame(applyPalette(pixels,palette),canvas.width,canvas.height,{palette,delay:Math.max(100,Math.round((frame.duration||300000)/1000)*step)});frame.close();
           }
           decoder.close();
         }else{const pixels=ctx.getImageData(0,0,canvas.width,canvas.height).data,palette=quantize(pixels,256);encoder.writeFrame(applyPalette(pixels,palette),canvas.width,canvas.height,{palette,delay:1000})}
