@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>เรดาร์ฝนและนิคมอุตสาหกรรม | กนอ.</title>
+<link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css"><script src="https://js.arcgis.com/4.30/"></script>
+<style>
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 Sarabun,'Noto Sans Thai',sans-serif;color:#27313e;background:#f4f6f9}button,input{font:inherit}header{padding:15px 22px;background:#fff;border-bottom:1px solid #dce2e9;display:flex;gap:15px;align-items:center;justify-content:space-between}h1{font-size:21px;margin:0}header p{margin:0;color:#667382;font-size:12px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:12px;padding:12px;height:calc(100vh - 79px);min-height:540px}.map-card,.side{background:#fff;border:1px solid #dce2e9;border-radius:12px;overflow:hidden}.map-card{position:relative}#map{height:100%;width:100%}.toolbar{position:absolute;top:14px;left:14px;z-index:2;display:flex;gap:6px;flex-wrap:wrap;max-width:calc(100% - 28px)}button{border:1px solid #cad4df;background:#fff;color:#245181;border-radius:8px;padding:7px 10px;cursor:pointer;box-shadow:0 2px 7px #172a3d20}button:hover{background:#eaf2fa}button.primary{background:#245181;color:#fff;border-color:#245181}.status{position:absolute;bottom:12px;left:12px;right:12px;z-index:2;background:#fffef2e8;border:1px solid #e6dbb6;border-radius:8px;padding:7px 10px;font-size:12px}.side{display:flex;flex-direction:column}.side-head{padding:14px;border-bottom:1px solid #dce2e9}.side-head h2{margin:0;font-size:17px}.side-head small{color:#667382}.list{overflow:auto;flex:1;margin:0;padding:0;list-style:none}.list li{border-bottom:1px solid #edf0f4;padding:9px 14px}.list li b{display:block;font-size:13px}.list li small{color:#667382}.empty{padding:20px;color:#667382}footer{padding:9px 14px;border-top:1px solid #dce2e9;font-size:11px;color:#667382}@media(max-width:800px){header{align-items:flex-start}.layout{height:auto;display:block}.map-card{height:60vh;min-height:380px}.side{height:330px;margin-top:12px}}
+</style></head><body>
+<header><div><h1>เรดาร์ฝน × นิคมอุตสาหกรรม</h1><p>ข้อมูลเรดาร์คอมโพสิท: กรมอุตุนิยมวิทยา · ที่ตั้งผู้ประกอบการและ IEAT: กนอ.</p></div><button id="export" class="primary">ส่งออกรายงาน PDF</button></header>
+<main class="layout"><section class="map-card"><div id="map"></div><nav class="toolbar" aria-label="แผนที่"><button id="country">ทั่วประเทศ</button><button id="east">ภาคตะวันออก</button><button id="rayong">ระยอง</button><button id="radar">ซ่อนเรดาร์</button><button id="play" disabled>เล่นภาพย้อนหลัง</button><label style="background:white;padding:7px;border-radius:8px">ภาพ <input id="frame" aria-label="ลำดับภาพเรดาร์" type="range" min="0" max="0" value="0" disabled></label><label style="background:white;padding:7px;border-radius:8px">ความทึบ <input id="opacity" aria-label="ความทึบเรดาร์" type="range" min="0" max="100" value="68"></label></nav><div class="status" id="status" role="status">กำลังโหลดแผนที่และข้อมูลเรดาร์…</div></section><aside class="side"><div class="side-head"><h2>นิคมในพื้นที่แผนที่ <span id="count">—</span></h2><small>เลื่อนหรือซูมแผนที่เพื่ออัปเดตรายการ · คลิกรายชื่อเพื่อซูม</small></div><ol class="list" id="estates"><li class="empty">กำลังโหลดข้อมูล IEAT…</li></ol><footer>รายการอ้างอิงจากฟิลด์ IEAT ของ EPP_2026_V1 · จุดบนแผนที่เป็นตำแหน่งผู้ประกอบการ</footer></aside></main>
+<script>
+require(['esri/WebMap','esri/views/MapView','esri/layers/FeatureLayer','esri/layers/MediaLayer','esri/layers/support/ImageElement','esri/geometry/Extent'],function(WebMap,MapView,FeatureLayer,MediaLayer,ImageElement,Extent){
+  const radarUrl='https://weather.tmd.go.th/composite/images/zr/00.png';
+  const radarExtent=new Extent({xmin:95,ymin:4,xmax:108,ymax:22.5,spatialReference:{wkid:4326}});
+  const map=new WebMap({portalItem:{id:'3d24287ac6ea49cd823625ddad496e01'}});
+  const radar=new MediaLayer({title:'เรดาร์คอมโพสิท TMD',opacity:.68,source:[new ImageElement({image:radarUrl,georeference:{extent:radarExtent}})]});
+  const businesses=new FeatureLayer({url:'https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/EPP_2026_V1/FeatureServer/0',title:'ผู้ประกอบการ (IEAT)',outFields:['IEAT','mercant_name'],popupTemplate:{title:'{mercant_name}',content:'นิคมอุตสาหกรรม: {IEAT}'},renderer:{type:'simple',symbol:{type:'simple-marker',size:5,color:'#355f97',outline:{color:'#fff',width:.5}}}});
+  map.add(radar);map.add(businesses);
+  const view=new MapView({container:'map',map,center:[101,13.3],zoom:6});
+  const status=document.getElementById('status'), list=document.getElementById('estates'),count=document.getElementById('count');
+  let names=[],timer=0,querySerial=0,frames=[],frameIndex=0,playTimer=0;
+  const slider=document.getElementById('frame'),play=document.getElementById('play');
+  function showFrame(index){
+    if(!frames.length)return;frameIndex=(index+frames.length)%frames.length;slider.value=frameIndex;
+    const frame=frames[frameIndex];radar.source=[new ImageElement({image:'https://weather.tmd.go.th/composite/images/'+frame.file,georeference:{extent:radarExtent}})];
+    setStatus('เรดาร์คอมโพสิท TMD · '+frame.time+' UTC · ภาพ '+(frameIndex+1)+'/'+frames.length);
+  }
+  fetch('https://weather.tmd.go.th/composite/images_composite.list',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error(r.status);return r.text()}).then(data=>{
+    frames=data.split('\n').map(line=>{const m=line.trim().match(/^(\S+)\s+"([^"]+)"\s+overlay=(.+)$/);if(!m)return null;let file=m[3].split(',').map(s=>s.trim()).find(s=>/(zr|\d{2}\.png)/i.test(s));if(file&&!file.includes('/'))file='zr/'+file;return file&&/^[\w/-]+\.png$/.test(file)?{file,time:m[2]}:null}).filter(Boolean);
+    if(!frames.length)throw Error('ไม่พบลำดับภาพ');slider.max=frames.length-1;slider.disabled=false;play.disabled=false;showFrame(frames.length-1);
+  }).catch(()=>setStatus('เปิดภาพเรดาร์ภาพเดียวได้ แต่ลำดับย้อนหลังจาก TMD ถูกจำกัดการอ่านข้ามเว็บไซต์'));
+  slider.oninput=()=>showFrame(Number(slider.value));play.onclick=()=>{if(playTimer){clearInterval(playTimer);playTimer=0;play.textContent='เล่นภาพย้อนหลัง'}else{playTimer=setInterval(()=>showFrame(frameIndex+1),800);play.textContent='หยุดภาพ'}};
+  const clean=s=>String(s||'').trim();
+  function setStatus(s){status.textContent=s}
+  async function refresh(){
+    const serial=++querySerial,extent=view.extent;if(!extent)return;
+    count.textContent='…';list.replaceChildren();
+    try{
+      const q=businesses.createQuery();q.geometry=extent;q.spatialRelationship='intersects';q.returnGeometry=true;q.outFields=['IEAT'];q.num=1000;
+      const all=new Map();let offset=0;
+      do{
+        q.start=offset;
+        const result=await businesses.queryFeatures(q);if(serial!==querySerial)return;
+        for(const f of result.features){const name=clean(f.attributes.IEAT);if(!name||name==='—')continue;if(!all.has(name))all.set(name,{name,point:f.geometry,total:0});all.get(name).total++}
+        offset+=result.features.length;
+        if(!result.exceededTransferLimit&&result.features.length<q.num)break;
+      }while(offset<20000);
+      names=[...all.values()].sort((a,b)=>a.name.localeCompare(b.name,'th'));
+      count.textContent=names.length.toLocaleString('th-TH');
+      if(!names.length){const li=document.createElement('li');li.className='empty';li.textContent='ไม่พบนิคมในกรอบแผนที่';list.append(li)}
+      for(const row of names){const li=document.createElement('li'),btn=document.createElement('button');btn.style.cssText='border:0;box-shadow:none;text-align:left;width:100%;padding:0;color:inherit';const b=document.createElement('b');b.textContent=row.name;const small=document.createElement('small');small.textContent=row.total.toLocaleString('th-TH')+' ผู้ประกอบการในกรอบแผนที่';btn.append(b,small);btn.onclick=()=>view.goTo({target:row.point,zoom:12});li.append(btn);list.append(li)}
+      if(offset>=20000)setStatus('รายการอาจไม่ครบ (เกิน 20,000 จุด)');
+    }catch(err){if(serial!==querySerial)return;names=[];count.textContent='—';list.innerHTML='<li class="empty">โหลดรายชื่อนิคมไม่สำเร็จ</li>';setStatus('ไม่สามารถอ่านข้อมูล IEAT ได้: '+err.message)}
+  }
+  view.when(()=>{refresh();view.watch('stationary',v=>{if(v){clearTimeout(timer);timer=setTimeout(refresh,350)}})}).catch(e=>setStatus('เปิดแผนที่ กนอ. ไม่สำเร็จ: '+e.message));
+  document.getElementById('country').onclick=()=>view.goTo({center:[101,13.3],zoom:6});
+  document.getElementById('east').onclick=()=>view.goTo({center:[101.55,12.8],zoom:9});
+  document.getElementById('rayong').onclick=()=>view.goTo({center:[101.27,12.68],zoom:11});
+  document.getElementById('radar').onclick=e=>{radar.visible=!radar.visible;e.currentTarget.textContent=radar.visible?'ซ่อนเรดาร์':'แสดงเรดาร์'};
+  document.getElementById('opacity').oninput=e=>radar.opacity=Number(e.target.value)/100;
+  document.getElementById('export').onclick=async()=>{
+    const btn=document.getElementById('export');btn.disabled=true;btn.textContent='กำลังสร้างรายงาน…';
+    try{
+      await view.when();const shot=await view.takeScreenshot({width:1200,height:750,format:'png'});
+      const out=window.open('','_blank');if(!out)throw Error('โปรดอนุญาตให้เปิดหน้าต่างรายงาน');
+      const doc=out.document;doc.open();doc.write('<!doctype html><html lang="th"><head><meta charset="utf-8"><title>รายงานเรดาร์และนิคม</title><style>body{font:14px Sarabun,sans-serif;margin:22px;color:#263444}h1{font-size:22px}img{width:100%;max-height:58vh;object-fit:contain}li{padding:3px}small{color:#607080}@media print{button{display:none}}</style></head><body></body></html>');doc.close();
+      const h=doc.createElement('h1');h.textContent='รายงานเรดาร์ฝนและนิคมอุตสาหกรรม';doc.body.append(h);
+      const meta=doc.createElement('p');meta.textContent='ส่งออก: '+new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'})+' · ขอบเขต: พื้นที่ที่แสดงบนแผนที่ · ที่มา: TMD / กนอ.';doc.body.append(meta);
+      const img=doc.createElement('img');img.src=shot.dataUrl;img.onload=()=>{out.focus();out.print()};doc.body.append(img);
+      const h2=doc.createElement('h2');h2.textContent='รายชื่อนิคมในกรอบแผนที่ ('+names.length+')';doc.body.append(h2);
+      const ol=doc.createElement('ol');for(const row of names){const li=doc.createElement('li');li.textContent=row.name+' — '+row.total+' ผู้ประกอบการ';ol.append(li)}doc.body.append(ol);
+      const foot=doc.createElement('small');foot.textContent='ภาพเรดาร์จาก TMD เป็นข้อมูลประกอบสถานการณ์ โปรดตรวจเวลาในต้นทาง';doc.body.append(foot);
+    }catch(e){setStatus('ส่งออกรายงานไม่สำเร็จ: '+e.message)}finally{btn.disabled=false;btn.textContent='ส่งออกรายงาน PDF'}
+  };
+  const img=new Image();img.onload=()=>{};img.onerror=()=>setStatus('โหลดภาพเรดาร์ TMD ไม่สำเร็จ กรุณาตรวจข้อมูลต้นทาง');img.src=radarUrl;
+});
+</script></body></html>
