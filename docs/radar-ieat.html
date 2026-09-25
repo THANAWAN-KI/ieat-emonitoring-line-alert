@@ -5,17 +5,18 @@
 <style>
 *{box-sizing:border-box}body{margin:0;font:15px/1.5 Sarabun,'Noto Sans Thai',sans-serif;color:#27313e;background:#f4f6f9}button,input{font:inherit}header{padding:15px 22px;background:#fff;border-bottom:1px solid #dce2e9;display:flex;gap:15px;align-items:center;justify-content:space-between}h1{font-size:21px;margin:0}header p{margin:0;color:#667382;font-size:12px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 430px;gap:12px;padding:12px;height:calc(100vh - 79px);min-height:540px}.map-card,.side{background:#fff;border:1px solid #dce2e9;border-radius:12px;overflow:hidden}.map-card{position:relative}#map{height:100%;width:100%}.toolbar{position:absolute;top:14px;left:14px;z-index:2;display:flex;gap:6px;flex-wrap:wrap;max-width:calc(100% - 28px)}button{border:1px solid #cad4df;background:#fff;color:#245181;border-radius:8px;padding:7px 10px;cursor:pointer;box-shadow:0 2px 7px #172a3d20}button:hover{background:#eaf2fa}button.primary{background:#245181;color:#fff;border-color:#245181}.status{position:absolute;bottom:12px;left:12px;right:12px;z-index:2;background:#fffef2e8;border:1px solid #e6dbb6;border-radius:8px;padding:7px 10px;font-size:12px}.side{display:flex;flex-direction:column}.side-head{padding:14px;border-bottom:1px solid #dce2e9}.side-head h2{margin:0;font-size:17px}.side-head small{color:#667382}.list{overflow:auto;flex:1;margin:0;padding:0;list-style:none}.list li{border-bottom:1px solid #edf0f4;padding:9px 14px}.list li b{display:block;font-size:13px}.list li small{color:#667382}.empty{padding:20px;color:#667382}footer{padding:9px 14px;border-top:1px solid #dce2e9;font-size:11px;color:#667382}@media(max-width:800px){header{align-items:flex-start}.layout{height:auto;display:block}.map-card{height:60vh;min-height:380px}.side{height:330px;margin-top:12px}}
 /* Radar layout */
-.radar-legend{position:absolute;right:16px;bottom:16px;z-index:12;width:193px;padding:10px 12px;background:#fffffff0;border:1px solid #e5e1e8;border-radius:9px;box-shadow:0 2px 12px #24202d24;color:#34303b;font-size:12px}
+.radar-legend{position:absolute;right:16px;bottom:16px;z-index:31;width:193px;padding:10px 12px;background:#fffffff0;border:1px solid #e5e1e8;border-radius:9px;box-shadow:0 2px 12px #24202d24;color:#34303b;font-size:12px}
 .radar-legend strong{display:block;font-size:14px}.legend-body{display:flex;gap:8px;height:144px;margin:6px 0}.legend-gradient{width:24px;background:linear-gradient(to bottom,#fc00fb 0%,#aa00a9 20%,#aa0000 22%,#f80000 39%,#ff5500 40%,#fffd01 66%,#01fd01 69%,#015501 100%)}.legend-ticks{display:flex;flex-direction:column;justify-content:space-between;font-size:11px}.radar-legend small,.radar-legend a,#radarTime{display:block;font-size:11px;line-height:1.4}.radar-legend a{color:#59267c;margin:5px 0}#radarTime{color:#63606a}
 @media(max-width:800px){.radar-legend{right:8px;bottom:8px;width:155px;padding:7px}.legend-body{height:95px}}
 /* Keep estate names and map controls above the rain image. */
-#estateMarkers{position:absolute;inset:0;z-index:5;pointer-events:none;overflow:hidden}
+#estateMarkers{position:absolute;inset:0;z-index:20;pointer-events:none;overflow:hidden}
 .estate-marker{position:absolute;display:flex;align-items:center;gap:4px;transform:translate(-50%,-100%);max-width:180px;border:0!important;border-radius:16px;background:#fffffff0!important;color:#4b176d!important;padding:3px 7px!important;box-shadow:0 2px 7px #1b173544!important;font-size:12px!important;line-height:1.2!important;white-space:nowrap;cursor:pointer;pointer-events:auto}
-.estate-marker:before{content:"●";color:#7921a7;font-size:16px}
+.estate-marker-icon{font-size:17px;line-height:1;flex:0 0 auto;filter:drop-shadow(0 1px 1px #fff)}
+.estate-marker-name{font-size:13px!important;font-weight:600;line-height:1.25}
 .estate-marker span{overflow:hidden;text-overflow:ellipsis}
 
-.map-card .esri-ui,.map-card .esri-popup{z-index:10!important}
-.map-card .toolbar{z-index:11}
+.map-card .esri-ui,.map-card .esri-popup{z-index:30!important}
+.map-card .toolbar{z-index:31}
 .side-head small{display:block;background:#f4ebfa!important;color:#4b176d!important;border-radius:8px;padding:9px 11px;margin-top:10px}
 html body,html body *,html body .esri-widget{font-family:"Sarabun","TH Sarabun New",sans-serif!important}
 body{font-size:16px;line-height:1.5;color:#34383f;background:#fbfbfc}
@@ -139,7 +140,8 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
       if(!row.point)return;
       const marker=document.createElement('button');marker.type='button';marker.className='estate-marker';marker.dataset.index=index;
       marker.title=row.name;marker.setAttribute('aria-label',row.name);
-      const label=document.createElement('span');label.textContent=row.name;marker.append(label);
+      const icon=document.createElement('span');icon.className='estate-marker-icon';icon.textContent='📍';icon.setAttribute('aria-hidden','true');
+      const label=document.createElement('span');label.className='estate-marker-name';label.textContent=row.name;marker.append(icon,label);
       marker.onclick=async event=>{event.stopPropagation();boundaryHighlight.removeAll();await showEstateBoundary(row.point,row.name)};
       markers.append(marker);
     });
