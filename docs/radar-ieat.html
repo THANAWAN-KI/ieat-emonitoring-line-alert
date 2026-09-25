@@ -194,7 +194,7 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
   const pinImage=new Image();pinImage.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(PIN_SVG);
   let names=[],officeRows=[],selectedMarkerName='',querySerial=0,selectedEstate='';
   const activeMarkerRows=()=>officeRows.length?officeRows:names;
-  fetch(OFFICE_URL,{cache:'no-store'}).then(response=>{if(!response.ok)throw Error('HTTP '+response.status);return response.json()}).then(data=>{officeRows=(data.features||[]).filter(feature=>feature.geometry?.type==='Point').map(feature=>{const props=feature.properties||{},coordinates=feature.geometry.coordinates;return{name:String(props['สำนักงานนิคมฯ']||props.IEAT||'สำนักงานนิคมอุตสาหกรรม'),operation:String(props.Operations||''),point:new Point({longitude:coordinates[0],latitude:coordinates[1]})}});renderMarkers();if(!reportView.hidden)queueReportMap()}).catch(error=>console.warn('Office markers unavailable; using estate positions',error));
+  fetch(OFFICE_URL,{cache:'no-store'}).then(response=>{if(!response.ok)throw Error('HTTP '+response.status);return response.json()}).then(data=>{officeRows=(data.features||[]).filter(feature=>feature.geometry?.type==='Point').map(feature=>{const props=feature.properties||{},coordinates=feature.geometry.coordinates;return{name:String(props['สำนักงานนิคมฯ']||props.IEAT||'สำนักงานนิคมอุตสาหกรรม'),operation:String(props.Operations||''),point:new Point({longitude:coordinates[0],latitude:coordinates[1]})}});renderMarkers();if(!reportView.hidden){fillReportSearch();queueReportMap()}}).catch(error=>console.warn('Office markers unavailable; using estate positions',error));
   function selectEstate(row){
     selectedEstate=row.name;
     for(const choice of list.querySelectorAll('.estate-choice'))choice.setAttribute('aria-pressed',String(choice.dataset.estate===selectedEstate));
@@ -338,19 +338,34 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
   const rayongProject=point=>({x:(point.longitude-bounds.west)/(bounds.east-bounds.west)*800,y:(bounds.north-point.latitude)/(bounds.north-bounds.south)*800});
   const reportSearch=document.getElementById('reportEstateSearch');
   let reportRenderSerial=0,reportPreviewTimer=0;
-  function fillReportSearch(){const options=document.getElementById('reportEstateOptions');options.replaceChildren();for(const row of names){const option=document.createElement('option');option.value=row.name;options.append(option)}}
+  function fillReportSearch(){
+    const options=document.getElementById('reportEstateOptions');options.replaceChildren();
+    for(const name of new Set([...activeMarkerRows(),...names].map(row=>row.name))){const option=document.createElement('option');option.value=name;options.append(option)}
+  }
   const reportCrop={x:320,y:0,w:560,h:750},reportMapBox={x:40,y:120,w:1020,h:1366},reportSize={w:1100,h:1530};
   function radarPlacement(width,height){return {x:parseFloat(radarCanvas.style.left)*width/view.width,y:parseFloat(radarCanvas.style.top)*height/view.height,w:parseFloat(radarCanvas.style.width)*width/view.width,h:parseFloat(radarCanvas.style.height)*height/view.height}}
+  function drawReportLabels(ctx,rows,project){
+    const placed=[];ctx.save();ctx.font='bold 13px Sarabun, sans-serif';ctx.textBaseline='middle';
+    for(const row of rows){
+      const pos=project(row.point);if(!pos||pos.x<reportCrop.x+15||pos.x>reportCrop.x+reportCrop.w-15||pos.y<25||pos.y>730)continue;
+      const label=row.name.slice(0,25),width=Math.min(190,Math.ceil(ctx.measureText(label).width)+14),height=23;
+      const x=pos.x+9+width<reportCrop.x+reportCrop.w-5?pos.x+9:pos.x-width-9,y=pos.y-35;
+      if(x<reportCrop.x+4||y<4||placed.some(box=>x<box.x+box.w+5&&x+width+5>box.x&&y<box.y+box.h+5&&y+height+5>box.y))continue;
+      placed.push({x,y,w:width,h:height});ctx.fillStyle='#fffffff0';ctx.fillRect(x,y,width,height);
+      ctx.fillStyle='#52057f';ctx.fillText(label,x+7,y+height/2,width-14);
+    }
+    ctx.restore();
+  }
   function drawMapPins(ctx,width,height){
     const project=point=>{const pixel=view.toScreen(point);return pixel&&{x:pixel.x*width/view.width,y:pixel.y*height/view.height}};
-    const rows=activeMarkerRows();
-    if(view.zoom>10){drawPins(ctx,rows,project);return}
-    const cells=new Map(),selected=[];
+    const rows=activeMarkerRows(),selected=rows.filter(row=>row.name===selectedMarkerName);
+    if(view.zoom>10){drawPins(ctx,rows.filter(row=>row.name!==selectedMarkerName),project);drawReportLabels(ctx,rows.filter(row=>row.name!==selectedMarkerName),project);if(selected.length)drawPins(ctx,selected,project);return}
+    const cells=new Map();
     for(const row of rows){
       const pos=project(row.point);if(!pos||pos.x<0||pos.x>width||pos.y<0||pos.y>height)continue;
-      if(row.name===selectedMarkerName){selected.push(row);continue}
+      if(row.name===selectedMarkerName)continue;
       const key=Math.round(pos.x/34)+','+Math.round(pos.y/34);
-      if(!cells.has(key))cells.set(key,{x:0,y:0,count:0});
+      if(!cells.has(key))cells.set(key,{x:0,y:0,count:0,row});
       const cell=cells.get(key);cell.x+=pos.x;cell.y+=pos.y;cell.count++;
     }
     for(const cell of cells.values()){
@@ -359,6 +374,7 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
       ctx.save();ctx.beginPath();ctx.arc(x,y,13,0,Math.PI*2);ctx.fillStyle='#52057f';ctx.fill();ctx.lineWidth=2;ctx.strokeStyle='#fff';ctx.stroke();
       ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='bold 12px Sarabun, sans-serif';ctx.fillText(String(cell.count),x,y);ctx.restore();
     }
+    drawReportLabels(ctx,[...cells.values()].filter(cell=>cell.count===1).map(cell=>cell.row),project);
     if(selected.length)drawPins(ctx,selected,project);
   }
   async function composeRayongMap(){
@@ -374,7 +390,16 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
   }
   function queueReportMap(){clearTimeout(reportPreviewTimer);reportPreviewTimer=setTimeout(refreshReportMap,350)}
   view.watch('stationary',stationary=>{if(stationary&&!reportView.hidden)queueReportMap()});
-  async function searchReportEstate(){const query=clean(reportSearch.value).toLowerCase(),row=names.find(item=>item.name.toLowerCase()===query)||names.find(item=>item.name.toLowerCase().includes(query));if(!row){reportMessage('ไม่พบนิคมฯ ตามชื่อที่ค้นหา');return}selectEstate(row);reportSearch.value=row.name;await view.goTo({target:row.point,zoom:12});await showEstateBoundary(row.point,row.name);await refreshReportMap();reportMessage('แสดงพื้นที่ '+row.name)}
+  async function searchReportEstate(){
+    const query=clean(reportSearch.value).toLowerCase(),rows=[...activeMarkerRows(),...names];
+    const row=rows.find(item=>item.name.toLowerCase()===query)||rows.find(item=>item.name.toLowerCase().includes(query));
+    if(!row){reportMessage('ไม่พบนิคมฯ ตามชื่อที่ค้นหา');return}
+    const markerRow=activeMarkerRows().find(item=>item.name===row.name)||activeMarkerRows().find(item=>item.name.includes(row.name)||row.name.includes(item.name))||row;
+    selectedMarkerName=markerRow.name;reportSearch.value=row.name;
+    for(const marker of markers.children)marker.classList.toggle('is-selected',activeMarkerRows()[Number(marker.dataset.index)]?.name===markerRow.name);
+    await view.goTo({target:markerRow.point,zoom:12});await showEstateBoundary(markerRow.point,row.name);
+    await refreshReportMap();reportMessage('แสดงพื้นที่ '+row.name);
+  }
   document.getElementById('reportSearchButton').onclick=searchReportEstate;
   reportSearch.onkeydown=event=>{if(event.key==='Enter')searchReportEstate()};
   document.getElementById('reportZoomIn').onclick=()=>view.goTo({zoom:Math.min(18,view.zoom+1)});
