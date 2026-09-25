@@ -10,10 +10,15 @@
     box.innerHTML='<h2>สถานะข้อมูลอัตโนมัติ</h2><div id="liveState" style="font-size:16px;line-height:1.6">กำลังตรวจสอบข้อมูล…</div><div id="liveMethod" style="margin-top:8px;color:#68717d;font-size:14px;line-height:1.55"></div><a href="https://www.thaiwater.net/new4all" target="_blank" rel="noopener" style="display:block;margin-top:8px;color:#3478f6">เปิดข้อมูล ThaiWater</a>';
     document.querySelector(".drawer-head")?.after(box);
   }
-  function renderStations(stations){
+  function renderStations(stations,summary){
     const body=$("stations");if(!body)return;body.innerHTML="";
     const selected=stations.filter(s=>s.kind==="waterlevel"&&s.distance_km<=30&&s.severity_score>=2).slice(0,12);
-    if(!selected.length){body.innerHTML='<tr><td colspan="4" style="text-align:center;color:#7b8390;padding:28px">ไม่พบสถานีระดับน้ำผิดปกติภายในรัศมี 30 กม. จากนิคมฯ</td></tr>';return}
+    if(!selected.length){
+      const reported=Number(summary?.waterlevel_alert_count)||0;
+      body.innerHTML='<tr><td colspan="4" style="text-align:center;color:#7b8390;padding:28px">'+
+        (reported?'ข้อมูลสรุประบุสถานีระดับน้ำเข้าเกณฑ์ '+reported.toLocaleString('th-TH')+' แห่ง แต่รายละเอียดสถานียังไม่พร้อมแสดง กรุณาตรวจสอบข้อมูลระดับน้ำต้นทาง':'ไม่พบสถานีระดับน้ำผิดปกติภายในรัศมี 30 กม. จากนิคมฯ')+
+        '</td></tr>';return;
+    }
     selected.forEach(s=>window.addStation?.({
       n:`${s.station} • ${s.nearest_estate}`,
       v:s.value_text||"–",s:s.status||"ไม่มีข้อมูล",trend:s.kind==="rainfall"?"ฝน 24 ชม.":"ระดับน้ำ",
@@ -79,7 +84,7 @@
     const alert=document.getElementById("nationalAlertText");
     if(alert)alert.textContent=s.warning_title||s.warning_summary||(watchProvinces.length?`พบพื้นที่เข้าเกณฑ์เฝ้าระวัง ${watchProvinces.length} จังหวัด ควรติดตามประกาศทางการและยืนยันสถานการณ์กับพื้นที่`:"ไม่พบพื้นที่เข้าเกณฑ์เฝ้าระวังอัตโนมัติจากข้อมูลล่าสุด");
     const warningLink=document.getElementById("nationalWarningLink");if(warningLink&&s.warning_url)warningLink.href=s.warning_url;
-    renderEstateRanks(watch);renderStations(stations);window.sync?.();
+    renderEstateRanks(watch);renderStations(stations,s);window.sync?.();
   }
   async function load(){
     const url=new URL("./data/thaiwater_latest.json",document.baseURI);url.searchParams.set("v",Date.now());

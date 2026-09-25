@@ -238,6 +238,17 @@ def build_estate_watch(estates: list[dict[str, Any]], stations: list[dict[str, A
     return watch
 
 
+def select_display_stations(stations: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Keep both rain and water stations visible after the dashboard size cap."""
+    selected = [row for row in stations if row["kind"] == "rainfall"][:100]
+    selected += [row for row in stations if row["kind"] == "waterlevel"][:100]
+    selected.sort(
+        key=lambda row: (row["severity_score"], row.get("rainfall_mm") or -1),
+        reverse=True,
+    )
+    return selected
+
+
 def fetch_national_warning() -> dict[str, Any]:
     """Fetch the warning-page datasets without making the core feed depend on them."""
     warning: dict[str, Any] = {
@@ -374,7 +385,7 @@ def main() -> int:
                 "status": "ok",
                 "estates": estates,
                 "estate_watch": watch,
-                "stations": stations[:100],
+                "stations": select_display_stations(stations),
                 "national_warning": national_warning,
                 "summary": {
                     "estate_total": len(estates),
