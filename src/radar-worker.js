@@ -4,7 +4,15 @@ const COMPOSITE_URL = 'https://satda.tmd.go.th/wp-content/uploads/data/radar_com
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    if (url.pathname !== '/api/rayong-radar.gif' && url.pathname !== '/api/composite-qpf.gif') return env.ASSETS.fetch(request);
+    if (url.pathname !== '/api/rayong-radar.gif' && url.pathname !== '/api/composite-qpf.gif') {
+      const asset = await env.ASSETS.fetch(request);
+      if (url.pathname === '/radar-ieat' || url.pathname === '/radar-ieat/' || url.pathname === '/radar-ieat.html') {
+        const headers = new Headers(asset.headers);
+        headers.set('Cache-Control', 'no-store, max-age=0');
+        return new Response(asset.body, { status: asset.status, headers });
+      }
+      return asset;
+    }
     if (request.method !== 'GET' && request.method !== 'HEAD') return new Response('Method not allowed', { status: 405 });
     try {
       const upstream = await fetch(url.pathname === '/api/composite-qpf.gif' ? COMPOSITE_URL : RADAR_URL, {
