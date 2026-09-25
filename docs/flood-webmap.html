@@ -95,9 +95,13 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
     fetch("./data/gistda_flood_latest.geojson?v="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw Error("feed unavailable");return r.json()}).then(function(feed){
      var retrieved=Date.parse(feed.metadata&&feed.metadata.retrieved_at||"");
      if(!Number.isFinite(retrieved)||Date.now()-retrieved>12*3600000||!Array.isArray(feed.features)||!feed.features.length)return;
-     var layer=new GeoJSONLayer({url:new URL("./data/gistda_flood_latest.geojson",location.href).href,title:"พื้นที่น้ำท่วมที่ตรวจพบ · GISTDA (ย้อนหลัง 7 วัน)",
-      renderer:{type:"simple",symbol:{type:"simple-fill",color:[0,114,221,.35],outline:{color:[0,76,170,.85],width:1}}},
-      popupTemplate:{title:"พื้นที่น้ำท่วมจาก GISTDA",content:"ตรวจสอบวันที่ภาพและรายละเอียดกับแผนที่ต้นทาง: https://disaster.gistda.or.th/flood"}});
+     var summarized=feed.metadata&&feed.metadata.display_mode==="observed_flood_centers_by_tambon";
+     var symbol=summarized?{type:"simple-marker",style:"circle",size:9,color:[0,114,221,.85],outline:{color:[255,255,255,1],width:1.5}}:
+      {type:"simple-fill",color:[0,114,221,.35],outline:{color:[0,76,170,.85],width:1}};
+     var layer=new GeoJSONLayer({url:new URL("./data/gistda_flood_latest.geojson",location.href).href,
+      title:summarized?"จุดกลางพื้นที่น้ำท่วมที่ตรวจพบตามตำบล · GISTDA":"ขอบเขตน้ำท่วมที่ตรวจพบ · GISTDA",
+      renderer:{type:"simple",symbol:symbol},
+      popupTemplate:{title:"พื้นที่น้ำท่วมจาก GISTDA",content:summarized?"จุดนี้เป็นตำแหน่งสรุปของพื้นที่ที่ตรวจพบในตำบล โปรดตรวจสอบขอบเขตจริงและวันที่ภาพที่ https://disaster.gistda.or.th/flood":"ตรวจสอบวันที่ภาพและรายละเอียดที่ https://disaster.gistda.or.th/flood"}});
      webmap.add(layer);
     }).catch(function(){/* No verified polygon feed; retain the watch map without a flood overlay. */});
     if(pending)view.goTo(pending).catch(function(){});
