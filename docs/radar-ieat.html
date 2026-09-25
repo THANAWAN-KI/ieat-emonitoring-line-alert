@@ -3,7 +3,7 @@
 <title>เรดาร์ฝนและนิคมอุตสาหกรรม | กนอ.</title>
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css"><script src="https://js.arcgis.com/4.30/"></script>
 <style>
-*{box-sizing:border-box}body{margin:0;font:15px/1.5 Sarabun,'Noto Sans Thai',sans-serif;color:#27313e;background:#f4f6f9}button,input{font:inherit}header{padding:15px 22px;background:#fff;border-bottom:1px solid #dce2e9;display:flex;gap:15px;align-items:center;justify-content:space-between}h1{font-size:21px;margin:0}header p{margin:0;color:#667382;font-size:12px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:12px;padding:12px;height:calc(100vh - 79px);min-height:540px}.map-card,.side{background:#fff;border:1px solid #dce2e9;border-radius:12px;overflow:hidden}.map-card{position:relative}#map{height:100%;width:100%}.toolbar{position:absolute;top:14px;left:14px;z-index:2;display:flex;gap:6px;flex-wrap:wrap;max-width:calc(100% - 28px)}button{border:1px solid #cad4df;background:#fff;color:#245181;border-radius:8px;padding:7px 10px;cursor:pointer;box-shadow:0 2px 7px #172a3d20}button:hover{background:#eaf2fa}button.primary{background:#245181;color:#fff;border-color:#245181}.status{position:absolute;bottom:12px;left:12px;right:12px;z-index:2;background:#fffef2e8;border:1px solid #e6dbb6;border-radius:8px;padding:7px 10px;font-size:12px}.side{display:flex;flex-direction:column}.side-head{padding:14px;border-bottom:1px solid #dce2e9}.side-head h2{margin:0;font-size:17px}.side-head small{color:#667382}.list{overflow:auto;flex:1;margin:0;padding:0;list-style:none}.list li{border-bottom:1px solid #edf0f4;padding:9px 14px}.list li b{display:block;font-size:13px}.list li small{color:#667382}.empty{padding:20px;color:#667382}footer{padding:9px 14px;border-top:1px solid #dce2e9;font-size:11px;color:#667382}@media(max-width:800px){header{align-items:flex-start}.layout{height:auto;display:block}.map-card{height:60vh;min-height:380px}.side{height:330px;margin-top:12px}}
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 Sarabun,'Noto Sans Thai',sans-serif;color:#27313e;background:#f4f6f9}button,input{font:inherit}header{padding:15px 22px;background:#fff;border-bottom:1px solid #dce2e9;display:flex;gap:15px;align-items:center;justify-content:space-between}h1{font-size:21px;margin:0}header p{margin:0;color:#667382;font-size:12px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 430px;gap:12px;padding:12px;height:calc(100vh - 79px);min-height:540px}.map-card,.side{background:#fff;border:1px solid #dce2e9;border-radius:12px;overflow:hidden}.map-card{position:relative}#map{height:100%;width:100%}.toolbar{position:absolute;top:14px;left:14px;z-index:2;display:flex;gap:6px;flex-wrap:wrap;max-width:calc(100% - 28px)}button{border:1px solid #cad4df;background:#fff;color:#245181;border-radius:8px;padding:7px 10px;cursor:pointer;box-shadow:0 2px 7px #172a3d20}button:hover{background:#eaf2fa}button.primary{background:#245181;color:#fff;border-color:#245181}.status{position:absolute;bottom:12px;left:12px;right:12px;z-index:2;background:#fffef2e8;border:1px solid #e6dbb6;border-radius:8px;padding:7px 10px;font-size:12px}.side{display:flex;flex-direction:column}.side-head{padding:14px;border-bottom:1px solid #dce2e9}.side-head h2{margin:0;font-size:17px}.side-head small{color:#667382}.list{overflow:auto;flex:1;margin:0;padding:0;list-style:none}.list li{border-bottom:1px solid #edf0f4;padding:9px 14px}.list li b{display:block;font-size:13px}.list li small{color:#667382}.empty{padding:20px;color:#667382}footer{padding:9px 14px;border-top:1px solid #dce2e9;font-size:11px;color:#667382}@media(max-width:800px){header{align-items:flex-start}.layout{height:auto;display:block}.map-card{height:60vh;min-height:380px}.side{height:330px;margin-top:12px}}
 /* Radar layout */
 /* Controls stay above the radar canvas and range rings. */
 .map-card .esri-ui,.map-card .esri-popup{z-index:10!important}
@@ -28,7 +28,7 @@ button.primary{background:#59267c;border-color:#59267c}
 <header><div><h1>เรดาร์ฝนระยอง × นิคมอุตสาหกรรม</h1><p>ภาพฝนจาก <a href="https://weather.tmd.go.th/rygloop.php" target="_blank" rel="noopener">TMD Rayong Loop</a> · ข้อมูลนิคมอุตสาหกรรม: กนอ.</p></div><button id="export" class="primary">ส่งออกรายงาน PDF</button></header>
 <main class="layout"><section class="map-card"><div id="map"></div><img id="radarImage" alt="" aria-hidden="true" style="display:none"><canvas id="radarCanvas" aria-label="ภาพฝนเรดาร์ระยอง กรองพื้นหลังออก" role="img" style="position:absolute;z-index:1;pointer-events:none;display:none"></canvas><svg id="radarRings" viewBox="0 0 800 800" aria-label="วงระยะเรดาร์ 50 100 150 200 และ 240 กิโลเมตร" role="img" style="position:absolute;z-index:2;pointer-events:none;display:none;overflow:visible"><g fill="none" stroke="#171717" stroke-width="1.4" opacity=".9"><circle cx="410" cy="395" r="83"/><circle cx="410" cy="395" r="166"/><circle cx="410" cy="395" r="249"/><circle cx="410" cy="395" r="332"/><circle cx="410" cy="395" r="399"/></g><g fill="#111" font-size="14" font-weight="600" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="3"><text x="410" y="314">50 km</text><text x="410" y="563">100 km</text><text x="410" y="646">150 km</text><text x="410" y="729">200 km</text><text x="410" y="789">240 km</text></g></svg><nav class="toolbar" aria-label="แผนที่"><button id="country">ทั่วประเทศ</button><button id="east">ภาคตะวันออก</button><button id="rayong">ระยอง</button><button id="radar">ซ่อนเรดาร์</button><label style="background:white;padding:7px;border-radius:8px">ความทึบ <input id="opacity" aria-label="ความทึบเรดาร์" type="range" min="0" max="100" value="85"></label></nav><div class="status" id="status" role="status">กำลังโหลดแผนที่และข้อมูลเรดาร์ระยอง…</div></section><aside class="side"><div class="side-head"><h2>จำนวนนิคมอุตสาหกรรมที่อยู่ในพื้นที่เรดาร์ <span id="count">—</span></h2><small>แสดงรายชื่อนิคมในรัศมีเรดาร์ระยอง · คลิกรายชื่อเพื่อซูม</small></div><ol class="list" id="estates"><li class="empty">กำลังโหลดข้อมูล IEAT…</li></ol><footer>รายการอ้างอิงจากฟิลด์ IEAT ของ EPP_2026_V1 · เรดาร์ระยองครอบคลุมเฉพาะพื้นที่รอบสถานี</footer></aside></main>
 <script>
-require(['esri/WebMap','esri/views/MapView','esri/layers/FeatureLayer','esri/geometry/Point','esri/geometry/Circle','esri/widgets/Search','esri/widgets/LayerList','esri/widgets/Legend','esri/widgets/Expand','esri/widgets/BasemapGallery','esri/layers/GraphicsLayer','esri/Graphic'],function(WebMap,MapView,FeatureLayer,Point,Circle,Search,LayerList,Legend,Expand,BasemapGallery,GraphicsLayer,Graphic){
+require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer','esri/geometry/Point','esri/geometry/Circle','esri/widgets/Search','esri/widgets/LayerList','esri/widgets/Legend','esri/widgets/Expand','esri/widgets/BasemapGallery','esri/layers/GraphicsLayer','esri/Graphic'],function(WebMap,EsriMap,MapView,FeatureLayer,Point,Circle,Search,LayerList,Legend,Expand,BasemapGallery,GraphicsLayer,Graphic){
   // TMD Rayong scan: 800px square, 240 km radius, centre at pixel (410,395).
   // Radar station: 12°38′01″N, 101°20′26″E (TMD station table).
   const station={lat:12+38/60+1/3600,lon:101+20/60+26/3600};
@@ -64,36 +64,31 @@ require(['esri/WebMap','esri/views/MapView','esri/layers/FeatureLayer','esri/geo
     const frame=radarContext.getImageData(0,0,radarCanvas.width,radarCanvas.height),pixels=frame.data;
     for(let i=0;i<pixels.length;i+=4){
       const r=pixels[i],g=pixels[i+1],b=pixels[i+2];
-      const rainGreen=g>135&&g>r*1.35&&g>b*1.2;
-      const rainYellow=r>145&&g>115&&b<115&&r>b*1.6;
-      const rainRed=r>145&&g<115&&b<115&&r>g*1.5;
-      const rainMagenta=r>120&&b>100&&g<110&&r>g*1.5;
+      const rainGreen=g>105&&r<g*.52&&b<g*.48;
+      const rainYellow=r>150&&g>125&&b<85&&r>b*2;
+      const rainRed=r>155&&g<105&&b<105&&r>g*1.8;
+      const rainMagenta=r>145&&b>130&&g<95&&r>g*1.8;
       if(!(rainGreen||rainYellow||rainRed||rainMagenta))pixels[i+3]=0;
     }
     radarContext.putImageData(frame,0,0);
   }
   setInterval(renderRadarFrame,180);
-  const map=new WebMap({portalItem:{id:'3d24287ac6ea49cd823625ddad496e01'}});
+  const sourceMap=new WebMap({portalItem:{id:'3d24287ac6ea49cd823625ddad496e01'}});
+  const map=new EsriMap({basemap:'satellite'});
   const boundaryHighlight=new GraphicsLayer({title:'ขอบเขตนิคมฯ ที่เลือก',listMode:'hide'});map.add(boundaryHighlight);
   const businesses=new FeatureLayer({url:'https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/EPP_2026_V1/FeatureServer/0',title:'ผู้ประกอบการ (IEAT)',outFields:['IEAT','mercant_name'],popupTemplate:{title:'{mercant_name}',content:'นิคมอุตสาหกรรม: {IEAT}'},renderer:{type:'simple',symbol:{type:'simple-marker',size:5,color:'#355f97',outline:{color:'#fff',width:.5}}}});
   // Keep EPP as a query-only source for unique estate names; do not show operator points.
   const view=new MapView({container:'map',map,center:[101,13.3],zoom:6});
-  map.when(()=>{
-    map.basemap='satellite';
+  sourceMap.load().then(()=>{
     const selected=/ตำแหน่งนิคมอุตสาหกรรม|เขตประกอบการอุตสาหกรรม/;
-    map.allLayers.forEach(layer=>{
-      if(layer===boundaryHighlight)return;
-      layer.visible=false;
-      layer.listMode='hide';
-    });
-    map.allLayers.forEach(layer=>{
-      if(!selected.test((layer.title||'').replace(/\s+/g,'')))return;
+    const layers=sourceMap.allLayers.toArray().filter(layer=>selected.test((layer.title||'').replace(/\s+/g,'')));
+    for(const layer of layers){
       layer.visible=true;
       layer.listMode='show';
-      let parent=layer.parent;
-      while(parent&&parent.type==='group'){parent.visible=true;parent.listMode='show';parent=parent.parent}
-    });
-  }).catch(error=>setStatus('ตั้งค่าชั้นข้อมูลไม่สำเร็จ: '+error.message));
+      map.add(layer);
+    }
+    if(!layers.length)setStatus('ไม่พบชั้นข้อมูลนิคมฯ และเขตประกอบการใน WebMap');
+  }).catch(error=>setStatus('โหลดชั้นข้อมูลนิคมฯ ไม่สำเร็จ: '+error.message));
   const search=new Search({view,includeDefaultSources:true,allPlaceholder:'ค้นหาที่อยู่หรือสถานที่'});
   view.ui.add(search,{position:'top-right',index:0});
   view.ui.add(new Expand({view,content:new BasemapGallery({view}),expandIconClass:'esri-icon-basemap',expandTooltip:'เลือกแผนที่ฐาน'}),{position:'top-right',index:3});
