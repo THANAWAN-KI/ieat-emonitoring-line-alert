@@ -1,7 +1,10 @@
 {
   "name": "ieat-emonitoring-line-alert",
+  "main": "src/radar-worker.js",
   "compatibility_date": "2026-09-25",
   "assets": {
-    "directory": "./docs"
+    "directory": "./docs",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash"
   }
 }
