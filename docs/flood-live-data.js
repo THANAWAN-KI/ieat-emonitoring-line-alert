@@ -37,13 +37,19 @@
       const feed=await response.json(),retrieved=Date.parse(feed.metadata?.retrieved_at||"");
       if(!Number.isFinite(retrieved)||Date.now()-retrieved>12*3600000)throw new Error("feed outdated");
       const clean=s=>String(s??"–").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-      const rows=(feed.features||[]).filter(f=>f.geometry&&f.properties).slice(0,30).map((f,i)=>{
-        const p=f.properties,found=p.acquired_at||p.acquisition_date||p.image_date||p.observed_at||p.date||p.datetime;
-        const when=found&&Number.isFinite(Date.parse(found))?new Date(found).toLocaleString("th-TH"):"ไม่ระบุวันภาพ";
-        const location=p.tambon||p.district||p.amphoe||p.name||p.NAME||"พื้นที่ในภาพดาวเทียม";
-        const province=p.province||p.prov_name||p.PROVINCE||"–";
-        return `<tr><td>${i+1}</td><td>${clean(location)}</td><td>${clean(province)}</td><td>${clean(when)}</td><td>ยังไม่ยืนยันผลกระทบนิคมฯ</td><td><a href="https://disaster.gistda.or.th/flood" target="_blank" rel="noopener noreferrer">GISTDA ↗</a></td></tr>`;
+      const groups=new Map();
+      (feed.features||[]).filter(f=>f.geometry&&f.properties).forEach(f=>{
+        const p=f.properties,location=[p.tb_tn||p.tambon,p.ap_tn||p.amphoe||p.district].filter(Boolean).join(" ")||p.name||"พื้นที่ในภาพดาวเทียม";
+        const province=p.pv_tn||p.province||p.prov_name||"–";
+        const scenes=[...String(p.file_name||"").matchAll(/(?:19|20)\d{6}_\d{4}/g)].map(m=>m[0]).sort();
+        const latest=scenes.at(-1),observed=p.acquired_at||p.acquisition_date||p.image_date||p.observed_at||p.date||p.datetime;
+        const when=latest?`${Number(latest.slice(6,8))} ${["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."][Number(latest.slice(4,6))-1]} ${Number(latest.slice(0,4))+543} ${latest.slice(9,11)}:${latest.slice(11,13)} น. (ชื่อไฟล์ภาพ)`:
+          observed&&Number.isFinite(Date.parse(observed))?new Date(observed).toLocaleString("th-TH"):"ไม่ระบุวันภาพ";
+        const key=province+"|"+location;
+        if(!groups.has(key))groups.set(key,{location,province,when,count:0});
+        groups.get(key).count++;
       });
+      const rows=[...groups.values()].slice(0,30).map((g,i)=>`<tr><td>${i+1}</td><td>${clean(g.location)} <small>(${g.count} ขอบเขต)</small></td><td>${clean(g.province)}</td><td>${clean(g.when)}</td><td>ยังไม่ยืนยันผลกระทบนิคมฯ</td><td><a href="https://disaster.gistda.or.th/flood" target="_blank" rel="noopener noreferrer">GISTDA ↗</a></td></tr>`);
       body.innerHTML=rows.length?rows.join(""):'<tr><td colspan="6" class="table-empty">ไม่พบขอบเขตพื้นที่น้ำท่วมในข้อมูล GISTDA รอบ 7 วันที่ดึงล่าสุด</td></tr>';
     }catch(_error){renderEstateRanks()}
   }
