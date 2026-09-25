@@ -35,7 +35,7 @@ button.primary{background:#59267c;border-color:#59267c}
 @media(max-width:800px){header{padding:10px 12px;flex-wrap:wrap}.layout{height:auto;padding:10px}.map-card{height:60vh;min-height:380px}}
 </style></head><body>
 <header><div><h1>เรดาร์ฝนระยอง × นิคมอุตสาหกรรม</h1><p>ภาพฝนจาก <a href="https://weather.tmd.go.th/rygloop.php" target="_blank" rel="noopener">TMD Rayong Loop</a> · ข้อมูลนิคมอุตสาหกรรม: กนอ.</p></div><button id="export" class="primary">ส่งออกรายงาน PDF</button></header>
-<main class="layout"><section class="map-card"><div id="map"></div><img id="radarImage" alt="" aria-hidden="true" style="display:none"><div id="estateMarkers" aria-label="ตำแหน่งนิคมอุตสาหกรรม"></div><canvas id="radarCanvas" aria-label="ภาพฝนเรดาร์ระยอง กรองพื้นหลังออก" role="img" style="position:absolute;z-index:1;pointer-events:none;display:none"></canvas><nav class="toolbar" aria-label="แผนที่"><button id="country">ทั่วประเทศ</button><button id="east">ภาคตะวันออก</button><button id="rayong">ระยอง</button><button id="radar">ซ่อนเรดาร์</button><label style="background:white;padding:7px;border-radius:8px">ความทึบ <input id="opacity" aria-label="ความทึบเรดาร์" type="range" min="0" max="100" value="85"></label></nav><aside class="radar-legend" aria-label="คำอธิบายค่าสะท้อนเรดาร์ฝน"><strong>CMAX (dBZ)</strong><div class="legend-body"><div class="legend-gradient" aria-hidden="true"></div><div class="legend-ticks"><span>65+</span><span>50</span><span>40</span><span>30</span><span>20</span><span>10</span></div></div><small>ค่าสะท้อนเรดาร์ ยิ่งสูงสัญญาณฝนยิ่งเข้ม</small><a href="https://weather.tmd.go.th/ryg/rygloop.gif" target="_blank" rel="noopener">ดู GIF และเวลาเรดาร์จาก TMD ↗</a><div id="radarTime" aria-live="polite">กำลังตรวจภาพจาก TMD…</div></aside><div class="status" id="status" role="status">กำลังโหลดแผนที่และข้อมูลเรดาร์ระยอง…</div></section><aside class="side"><div class="side-head"><h2>จำนวนนิคมอุตสาหกรรมที่อยู่ในพื้นที่เรดาร์ <span id="count">—</span></h2><small>แสดงรายชื่อนิคมในรัศมีเรดาร์ระยอง · คลิกรายชื่อเพื่อซูม</small></div><ol class="list" id="estates"><li class="empty">กำลังโหลดข้อมูล IEAT…</li></ol><footer>รายการอ้างอิงจากฟิลด์ IEAT ของ EPP_2026_V1 · เรดาร์ระยองครอบคลุมเฉพาะพื้นที่รอบสถานี</footer></aside></main>
+<main class="layout"><section class="map-card"><div id="map"></div><img id="radarImage" alt="" aria-hidden="true" style="position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none"><div id="estateMarkers" aria-label="ตำแหน่งนิคมอุตสาหกรรม"></div><canvas id="radarCanvas" aria-label="ภาพฝนเรดาร์ระยอง กรองพื้นหลังออก" role="img" style="position:absolute;z-index:1;pointer-events:none;display:none"></canvas><nav class="toolbar" aria-label="แผนที่"><button id="country">ทั่วประเทศ</button><button id="east">ภาคตะวันออก</button><button id="rayong">ระยอง</button><button id="radar">ซ่อนเรดาร์</button><label style="background:white;padding:7px;border-radius:8px">ความทึบ <input id="opacity" aria-label="ความทึบเรดาร์" type="range" min="0" max="100" value="85"></label></nav><aside class="radar-legend" aria-label="คำอธิบายค่าสะท้อนเรดาร์ฝน"><strong>CMAX (dBZ)</strong><div class="legend-body"><div class="legend-gradient" aria-hidden="true"></div><div class="legend-ticks"><span>65+</span><span>50</span><span>40</span><span>30</span><span>20</span><span>10</span></div></div><small>ค่าสะท้อนเรดาร์ ยิ่งสูงสัญญาณฝนยิ่งเข้ม</small><a href="https://weather.tmd.go.th/ryg/rygloop.gif" target="_blank" rel="noopener">ดู GIF และเวลาเรดาร์จาก TMD ↗</a><div id="radarTime" aria-live="polite">กำลังตรวจภาพจาก TMD…</div></aside><div class="status" id="status" role="status">กำลังโหลดแผนที่และข้อมูลเรดาร์ระยอง…</div></section><aside class="side"><div class="side-head"><h2>จำนวนนิคมอุตสาหกรรมที่อยู่ในพื้นที่เรดาร์ <span id="count">—</span></h2><small>แสดงรายชื่อนิคมในรัศมีเรดาร์ระยอง · คลิกรายชื่อเพื่อซูม</small></div><ol class="list" id="estates"><li class="empty">กำลังโหลดข้อมูล IEAT…</li></ol><footer>รายการอ้างอิงจากฟิลด์ IEAT ของ EPP_2026_V1 · เรดาร์ระยองครอบคลุมเฉพาะพื้นที่รอบสถานี</footer></aside></main>
 <script>
 require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer','esri/geometry/Point','esri/geometry/Circle','esri/widgets/Search','esri/widgets/LayerList','esri/widgets/Legend','esri/widgets/Expand','esri/widgets/BasemapGallery','esri/layers/GraphicsLayer','esri/Graphic'],function(WebMap,EsriMap,MapView,FeatureLayer,Point,Circle,Search,LayerList,Legend,Expand,BasemapGallery,GraphicsLayer,Graphic){
   // TMD Rayong scan: 800px square, 240 km radius, centre at pixel (410,395).
@@ -46,7 +46,7 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
   const radarImage=document.getElementById('radarImage'),radarCanvas=document.getElementById('radarCanvas');
   const radarContext=radarCanvas.getContext('2d',{willReadFrequently:true});let radarVisible=true;
   radarCanvas.style.opacity='.85';
-  let lastRadarLoaded=0,radarLoading=false,radarObjectUrl='';
+  let lastRadarLoaded=0,radarLoading=false,radarObjectUrl='',gifPlaybackToken=0,gifFrameTimer=0,fallbackTimer=0,activeDecoder=null,gifFrameCount=0;
   const radarTime=document.getElementById('radarTime');
   function thaiTime(value){return new Date(value).toLocaleString('th-TH',{timeZone:'Asia/Bangkok',dateStyle:'short',timeStyle:'short'})}
   async function reloadRadar(){
@@ -63,8 +63,9 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
       const previous=radarObjectUrl;radarObjectUrl=url;radarImage.src=url;
       if(previous)URL.revokeObjectURL(previous);
       lastRadarLoaded=Date.now();
+      await startGifPlayback(blob);
       const fileTime=modified&&Number.isFinite(Date.parse(modified))?' · เวลาแก้ไขไฟล์ TMD '+thaiTime(modified):' · TMD ไม่ระบุเวลาแก้ไขไฟล์';
-      radarTime.textContent='ตรวจภาพจาก TMD '+thaiTime(lastRadarLoaded)+fileTime+' (เวลาเรดาร์จริงดูในภาพต้นทาง)';
+      radarTime.textContent='ตรวจภาพจาก TMD '+thaiTime(lastRadarLoaded)+fileTime+(gifFrameCount>1?' · GIF '+gifFrameCount+' เฟรม':'')+' (เวลาเรดาร์จริงดูในภาพต้นทาง)';
       setStatus('');
     }catch(error){
       radarTime.textContent=lastRadarLoaded?'ดึงภาพใหม่ไม่สำเร็จ · แสดงภาพที่โหลดไว้เมื่อ '+thaiTime(lastRadarLoaded):'ยังโหลดภาพเรดาร์จาก TMD ไม่สำเร็จ';
@@ -81,19 +82,62 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
     const match=rainPalette.some(color=>(r-color[0])**2+(g-color[1])**2+(b-color[2])**2<=100);
     rainColorCache.set(key,match);return match;
   }
-  function renderRadarFrame(){
-    if(!radarImage.complete||!radarImage.naturalWidth||!radarVisible)return;
+  function paintRadarFrame(image,width,height){
+    if(!radarVisible)return;
     if(radarCanvas.width!==800||radarCanvas.height!==800){radarCanvas.width=800;radarCanvas.height=800}
     radarContext.clearRect(0,0,800,800);
-    radarContext.drawImage(radarImage,0,0,Math.min(800,radarImage.naturalWidth),Math.min(800,radarImage.naturalHeight),0,0,800,800);
-    const frame=radarContext.getImageData(0,0,radarCanvas.width,radarCanvas.height),pixels=frame.data;
+    radarContext.drawImage(image,0,0,Math.min(800,width),Math.min(800,height),0,0,800,800);
+    const frame=radarContext.getImageData(0,0,800,800),pixels=frame.data;
     for(let i=0;i<pixels.length;i+=4){
-      const r=pixels[i],g=pixels[i+1],b=pixels[i+2];
-      if(!isRainColor(r,g,b))pixels[i+3]=0;
+      if(!isRainColor(pixels[i],pixels[i+1],pixels[i+2]))pixels[i+3]=0;
     }
     radarContext.putImageData(frame,0,0);
   }
-  setInterval(renderRadarFrame,450);
+  function renderRadarFrame(){
+    if(radarImage.complete&&radarImage.naturalWidth)
+      paintRadarFrame(radarImage,radarImage.naturalWidth,radarImage.naturalHeight);
+  }
+  async function startGifPlayback(blob){
+    const token=++gifPlaybackToken;
+    clearTimeout(gifFrameTimer);clearInterval(fallbackTimer);
+    try{
+      if(typeof ImageDecoder==='undefined'||!await ImageDecoder.isTypeSupported('image/gif'))
+        throw Error('เบราว์เซอร์ไม่รองรับตัวถอดรหัส GIF');
+      const decoder=new ImageDecoder({data:await blob.arrayBuffer(),type:'image/gif',preferAnimation:true});
+      await decoder.tracks.ready;
+      await decoder.completed;
+      const count=decoder.tracks.selectedTrack?.frameCount||0;
+      if(count<2){decoder.close();throw Error('GIF มีเฟรมเดียว')}
+      gifFrameCount=count;
+      if(token!==gifPlaybackToken){decoder.close();return}
+      if(activeDecoder)activeDecoder.close();
+      activeDecoder=decoder;
+      let frameIndex=0;
+      const next=async()=>{
+        if(token!==gifPlaybackToken)return;
+        try{
+          const result=await decoder.decode({frameIndex});
+          if(token!==gifPlaybackToken){result.image.close();return}
+          const image=result.image;
+          paintRadarFrame(image,image.displayWidth,image.displayHeight);
+          const delay=Math.max(50,Math.min(5000,(image.duration||300000)/1000));
+          image.close();
+          frameIndex=(frameIndex+1)%count;
+          gifFrameTimer=setTimeout(next,delay);
+        }catch(error){
+          if(token===gifPlaybackToken){
+            console.warn('GIF frame decoding failed',error);
+            fallbackTimer=setInterval(renderRadarFrame,120);
+          }
+        }
+      };
+      next();
+      radarTime.dataset.frames=String(count);
+    }catch(error){
+      console.warn('Using browser GIF playback',error);
+      if(token===gifPlaybackToken)fallbackTimer=setInterval(renderRadarFrame,120);
+    }
+  }
   const sourceMap=new WebMap({portalItem:{id:'3d24287ac6ea49cd823625ddad496e01'}});
   const map=new EsriMap({basemap:{portalItem:{id:'3582b744bba84668b52a16b0b6942544'}}});
   const boundaryHighlight=new GraphicsLayer({title:'ขอบเขตนิคมฯ ที่เลือก',listMode:'hide'});map.add(boundaryHighlight);
@@ -154,7 +198,7 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
     const se=view.toScreen(new Point({longitude:bounds.east,latitude:bounds.south}));
     Object.assign(radarCanvas.style,{left:nw.x+'px',top:nw.y+'px',width:(se.x-nw.x)+'px',height:(se.y-nw.y)+'px',display:radarVisible?'block':'none'});
   }
-  radarImage.onload=()=>{positionRadar();renderRadarFrame();setStatus('')};
+  radarImage.onload=()=>{positionRadar();if(!activeDecoder)renderRadarFrame();setStatus('')};
   radarImage.onerror=()=>setStatus('โหลดภาพฝนระยองไม่สำเร็จ');
   const clean=s=>String(s||'').trim();
   function setStatus(s){status.textContent=s;status.style.display=s?'block':'none'}
