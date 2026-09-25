@@ -29,6 +29,24 @@
     const body=$("estateRanks");if(!body)return;
     body.innerHTML='<tr><td colspan="6" class="table-empty" style="padding:24px;line-height:1.7">ยังไม่มีข้อมูลตำแหน่งน้ำท่วมที่ตรวจพบพร้อมวันเวลาให้แสดงในระบบนี้ ข้อมูลสถานีฝนและระดับน้ำไม่สามารถใช้ยืนยันว่าจุดใดน้ำท่วมแล้วได้<br><a href="https://disaster.gistda.or.th/flood" target="_blank" rel="noopener noreferrer">เปิดแผนที่พื้นที่น้ำท่วมของ GISTDA เพื่อตรวจสอบข้อมูลล่าสุด ↗</a></td></tr>';
   }
+  async function renderObservedFloods(){
+    const body=$("estateRanks");if(!body)return;
+    try{
+      const response=await fetch("./data/gistda_flood_latest.geojson?v="+Date.now(),{cache:"no-store"});
+      if(!response.ok)throw new Error("feed unavailable");
+      const feed=await response.json(),retrieved=Date.parse(feed.metadata?.retrieved_at||"");
+      if(!Number.isFinite(retrieved)||Date.now()-retrieved>12*3600000)throw new Error("feed outdated");
+      const clean=s=>String(s??"–").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+      const rows=(feed.features||[]).filter(f=>f.geometry&&f.properties).slice(0,30).map((f,i)=>{
+        const p=f.properties,found=p.acquired_at||p.acquisition_date||p.image_date||p.observed_at||p.date||p.datetime;
+        const when=found&&Number.isFinite(Date.parse(found))?new Date(found).toLocaleString("th-TH"):"ไม่ระบุวันภาพ";
+        const location=p.tambon||p.district||p.amphoe||p.name||p.NAME||"พื้นที่ในภาพดาวเทียม";
+        const province=p.province||p.prov_name||p.PROVINCE||"–";
+        return `<tr><td>${i+1}</td><td>${clean(location)}</td><td>${clean(province)}</td><td>${clean(when)}</td><td>ยังไม่ยืนยันผลกระทบนิคมฯ</td><td><a href="https://disaster.gistda.or.th/flood" target="_blank" rel="noopener noreferrer">GISTDA ↗</a></td></tr>`;
+      });
+      body.innerHTML=rows.length?rows.join(""):'<tr><td colspan="6" class="table-empty">ไม่พบขอบเขตพื้นที่น้ำท่วมในข้อมูล GISTDA รอบ 7 วันที่ดึงล่าสุด</td></tr>';
+    }catch(_error){renderEstateRanks()}
+  }
   function apply(data){
     window.IEAT_LIVE_DATA=data;
     window.dispatchEvent(new CustomEvent("ieat:data-ready",{detail:data}));
@@ -76,7 +94,7 @@
     const alert=document.getElementById("nationalAlertText");
     if(alert)alert.textContent=s.warning_title||s.warning_summary||(watchProvinces.length?`พบพื้นที่เข้าเกณฑ์เฝ้าระวัง ${watchProvinces.length} จังหวัด ควรติดตามประกาศทางการและยืนยันสถานการณ์กับพื้นที่`:"ไม่พบพื้นที่เข้าเกณฑ์เฝ้าระวังอัตโนมัติจากข้อมูลล่าสุด");
     const warningLink=document.getElementById("nationalWarningLink");if(warningLink&&s.warning_url)warningLink.href=s.warning_url;
-    renderEstateRanks(watch);renderStations(stations,s);window.sync?.();
+    renderEstateRanks();renderObservedFloods();renderStations(stations,s);window.sync?.();
   }
   async function load(){
     const url=new URL("./data/thaiwater_latest.json",document.baseURI);url.searchParams.set("v",Date.now());
