@@ -2772,7 +2772,20 @@ html body #hubInformationHeader .header-more-menu a:hover{background:#f5f6f7!imp
  menu.addEventListener("click",function(e){e.stopPropagation()});
  document.addEventListener("click",closeMenu);
 })();
-</script></body></html>
+</script><style id="hub-mobile-final">
+@media(max-width:700px){
+  html body #hubInformationHeader .header-right{overflow-x:auto!important;justify-content:flex-start!important;-webkit-overflow-scrolling:touch}
+  html body #hubInformationHeader nav.header-actions{flex-wrap:nowrap!important;white-space:nowrap!important}
+  html body main#captureArea.page>nav.tabs{white-space:nowrap!important;-webkit-overflow-scrolling:touch}
+  html body main#captureArea.page .fire-dashboard-grid{display:grid!important;grid-template-columns:minmax(0,1fr)!important}
+  html body main#captureArea.page .fire-dashboard-grid>*{min-width:0!important}
+  html body main#captureArea.page .fire-support-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  html body main#captureArea.page .panel,.fire-analysis-panel,.fire-support-board{max-width:100%!important;min-width:0!important}
+  html body main#captureArea.page .fire-analysis-map iframe{max-width:100%!important}
+  html body main#captureArea.page .table-scroll,html body main#captureArea.page .table-wrap{overflow-x:auto!important;-webkit-overflow-scrolling:touch}
+}
+</style>
+</body></html>
 
 <style id="hub-reference-spacing-20260914-v2">
 /* Final geometry override: match information.html full-width tabs and content gutters. */
