@@ -459,6 +459,27 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
     return{x:compositePlot.x95+(lon-95)*(compositePlot.x107-compositePlot.x95)/12,
       y:compositePlot.y22+(22-lat)*(compositePlot.y4-compositePlot.y22)/18};
   }
+  function drawNationalSheet(ctx,image){
+    const width=ctx.canvas.width,top=105,mapHeight=Math.round(compositePlot.height*width/compositePlot.width);
+    ctx.fillStyle='#fff';ctx.fillRect(0,0,width,ctx.canvas.height);
+    ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillStyle='#172b3d';
+    ctx.font='bold 29px Sarabun, sans-serif';ctx.fillText('รายงานเรดาร์คอมโพสิททั่วประเทศ',width/2,43);
+    ctx.font='17px Sarabun, sans-serif';
+    ctx.fillText('Radar Composite QPF · '+new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok',dateStyle:'long',timeStyle:'short'}),width/2,75);
+    ctx.drawImage(image,0,top,width,mapHeight);
+    const scale=width/compositePlot.width;
+    for(const cluster of nationalClusters){
+      const x=cluster.x*scale,y=top+cluster.y*scale;
+      if(cluster.rows.length===1){drawEstatePin(ctx,x,y,.8);continue}
+      ctx.beginPath();ctx.arc(x,y,15,0,Math.PI*2);ctx.fillStyle='#52057f';ctx.fill();
+      ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();
+      ctx.fillStyle='#fff';ctx.font='bold 14px Sarabun, sans-serif';ctx.textBaseline='middle';
+      ctx.fillText(String(cluster.rows.length),x,y);ctx.textBaseline='alphabetic';
+    }
+    ctx.textAlign='left';ctx.fillStyle='#536373';ctx.font='14px Sarabun, sans-serif';
+    ctx.fillText('แหล่งข้อมูล: กรมอุตุนิยมวิทยา / สำนักงานนิคมอุตสาหกรรม กนอ.',20,ctx.canvas.height-12);
+    ctx.textAlign='right';ctx.fillText('หน้า 2 / 2',width-20,ctx.canvas.height-12);
+  }
   async function prepareNationalMap(){
     if(!officeRows.length){
       const response=await fetch(OFFICE_URL,{cache:'no-store'});if(!response.ok)throw Error('โหลดพิกัดสำนักงานนิคมฯ ไม่สำเร็จ');
