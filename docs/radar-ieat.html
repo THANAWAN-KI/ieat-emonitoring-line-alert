@@ -441,24 +441,48 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
       else{
         const {GIFEncoder,quantize,applyPalette}=await import('/vendor/gifenc/index.js');
         const encoder=GIFEncoder(),ctx=canvas.getContext('2d');
-        if(kind==='rayong'&&typeof ImageDecoder!=='undefined'){
-          const shot=await view.takeScreenshot({width:1200,height:750,format:'png'}),base=await loadImage(shot.dataUrl);
-          const decoder=new ImageDecoder({data:await (await fetch(radarObjectUrl)).arrayBuffer(),type:'image/gif',preferAnimation:true});await decoder.tracks.ready;await decoder.completed;
-          const count=Math.min(decoder.tracks.selectedTrack?.frameCount||1,8),step=Math.max(1,Math.ceil((decoder.tracks.selectedTrack?.frameCount||1)/count));
-          const rain=document.createElement('canvas');rain.width=800;rain.height=800;const rainCtx=rain.getContext('2d',{willReadFrequently:true});rainCtx.imageSmoothingEnabled=false;
-          const mapFrame=document.createElement('canvas');mapFrame.width=1200;mapFrame.height=750;const mapCtx=mapFrame.getContext('2d');
-          for(let i=0;i<count;i++){
-            const frame=(await decoder.decode({frameIndex:i*step})).image;mapCtx.clearRect(0,0,1200,750);mapCtx.drawImage(base,0,0,1200,750);
-            rainCtx.clearRect(0,0,800,800);rainCtx.drawImage(frame,0,0,800,800);const image=rainCtx.getImageData(0,0,800,800);
-            for(let k=0;k<image.data.length;k+=4)if(!isRainColor(image.data[k],image.data[k+1],image.data[k+2]))image.data[k+3]=0;
-            rainCtx.putImageData(image,0,0);const pos=radarPlacement(1200,750);mapCtx.globalAlpha=Number(radarCanvas.style.opacity);mapCtx.imageSmoothingEnabled=false;mapCtx.drawImage(rain,pos.x,pos.y,pos.w,pos.h);mapCtx.globalAlpha=1;
-            drawMapPins(mapCtx,1200,750);drawReportLegend(mapCtx);drawRayongSheet(ctx,mapFrame);
-            const pixels=ctx.getImageData(0,0,canvas.width,canvas.height).data,palette=quantize(pixels,256);
-            encoder.writeFrame(applyPalette(pixels,palette),canvas.width,canvas.height,{palette,delay:Math.max(100,Math.round((frame.duration||300000)/1000)*step)});frame.close();
-          }
-          decoder.close();
-        }else{const pixels=ctx.getImageData(0,0,canvas.width,canvas.height).data,palette=quantize(pixels,256);encoder.writeFrame(applyPalette(pixels,palette),canvas.width,canvas.height,{palette,delay:1000})}
-        encoder.finish();downloadBlob(new Blob([encoder.bytes()],{type:'image/gif'}),filename+'.gif');
+        function writeGifFrame(delay){
+          const pixels=ctx.getImageData(0,0,canvas.width,canvas.height).data;
+          // A 12-bit palette keeps the report responsive while retaining the radar colors.
+          const palette=quantize(pixels,128,{format:'rgb444'});
+          encoder.writeFrame(applyPalette(pixels,palette,'rgb444'),canvas.width,canvas.height,{palette,delay});
+        }
+        let encoded=0;
+        if(kind==='rayong'&&radarObjectUrl&&typeof ImageDecoder!=='undefined'){
+          let decoder;
+          try{
+            const shot=await view.takeScreenshot({width:1200,height:750,format:'png'}),base=await loadImage(shot.dataUrl);
+            decoder=new ImageDecoder({data:await (await fetch(radarObjectUrl)).arrayBuffer(),type:'image/gif',preferAnimation:true});
+            await decoder.tracks.ready;await decoder.completed;
+            const total=decoder.tracks.selectedTrack?.frameCount||0;
+            if(!total)throw Error('ไม่มีเฟรมเรดาร์');
+            const count=Math.min(total,8),step=Math.max(1,Math.ceil(total/count));
+            const rain=document.createElement('canvas');rain.width=800;rain.height=800;const rainCtx=rain.getContext('2d',{willReadFrequently:true});rainCtx.imageSmoothingEnabled=false;
+            const mapFrame=document.createElement('canvas');mapFrame.width=1200;mapFrame.height=750;const mapCtx=mapFrame.getContext('2d');
+            for(let i=0;i<count;i++){
+              const frame=(await decoder.decode({frameIndex:Math.min(i*step,total-1)})).image;
+              try{
+                mapCtx.clearRect(0,0,1200,750);mapCtx.drawImage(base,0,0,1200,750);
+                rainCtx.clearRect(0,0,800,800);rainCtx.drawImage(frame,0,0,800,800);
+                const image=rainCtx.getImageData(0,0,800,800);
+                for(let k=0;k<image.data.length;k+=4)if(!isRainColor(image.data[k],image.data[k+1],image.data[k+2]))image.data[k+3]=0;
+                rainCtx.putImageData(image,0,0);
+                const pos=radarPlacement(1200,750);mapCtx.globalAlpha=Number(radarCanvas.style.opacity);mapCtx.imageSmoothingEnabled=false;mapCtx.drawImage(rain,pos.x,pos.y,pos.w,pos.h);mapCtx.globalAlpha=1;
+                drawMapPins(mapCtx,1200,750);drawReportLegend(mapCtx);drawRayongSheet(ctx,mapFrame);
+                writeGifFrame(Math.max(100,Math.round((frame.duration||300000)/1000)*step));encoded++;
+                reportMessage('กำลังสร้าง GIF '+encoded+'/'+count+' เฟรม…');
+                await new Promise(resolve=>setTimeout(resolve,0));
+              }finally{frame.close()}
+            }
+          }catch(error){
+            console.warn('Animated GIF export failed; saving the report as a single-frame GIF',error);
+            if(!encoded)reportMessage('กำลังบันทึกภาพรายงานเป็น GIF…');
+          }finally{decoder?.close()}
+        }
+        if(!encoded)writeGifFrame(1000);
+        encoder.finish();
+        const bytes=encoder.bytes();if(bytes.length<20)throw Error('สร้างไฟล์ GIF ไม่สำเร็จ');
+        downloadBlob(new Blob([bytes],{type:'image/gif'}),filename+'.gif');
       }
       reportMessage('ดาวน์โหลดไฟล์ '+format.toUpperCase()+' แล้ว');
     }catch(error){reportMessage('บันทึกภาพไม่สำเร็จ: '+error.message)}finally{button.disabled=false}
