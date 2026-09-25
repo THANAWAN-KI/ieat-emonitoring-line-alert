@@ -8,21 +8,27 @@
 <style>
 html,body,#viewDiv{margin:0;width:100%;height:100%;font-family:Arial,'Noto Sans Thai',sans-serif}
 .panel{position:absolute;top:15px;right:15px;z-index:4;background:#fff;padding:16px;border-radius:14px;box-shadow:0 3px 18px #0003;width:min(315px,calc(100vw - 62px));font-size:14px;line-height:1.5}
+.original{position:absolute;inset:0 350px 0 0;z-index:2;display:flex;align-items:center;justify-content:center;background:#f4f6f8;padding:14px;box-sizing:border-box}
+.original img{max-width:100%;max-height:100%;object-fit:contain;box-shadow:0 2px 12px #0002;background:white}
+.original[hidden]{display:none}
+.mode button{margin-right:5px}.mode button[aria-pressed=true]{background:#007bb8;color:#fff}
 h1{font-size:18px;margin:0 0 9px}.control{display:flex;align-items:center;gap:9px;margin:10px 0}.control label{min-width:112px}.control input[type=range]{flex:1;min-width:0}.note{font-size:12px;color:#5e6168;margin:10px 0 0}a{color:#0865a6}button{cursor:pointer;border:0;border-radius:8px;padding:8px;background:#e6f3fb;color:#034872}
 #status{font-size:12px;color:#bd3c12;margin-top:8px}
-@media(max-width:620px){.panel{top:auto;bottom:15px;right:12px;padding:12px}}
+@media(max-width:620px){.panel{top:auto;bottom:10px;right:10px;padding:12px}.original{inset:0 0 235px 0;padding:6px}}
 </style>
 </head><body>
 <div id="viewDiv"></div>
+<div id="originalPanel" class="original"><img id="originalImage" src="./data/ryg-original-preview.jpg" alt="ภาพเรดาร์ฝนระยองต้นฉบับ แสดงแผนที่ วงระยะ สเกล dBZ และเวลาบนภาพ"></div>
 <section class="panel" aria-label="ตัวควบคุมเรดาร์">
 <h1>เรดาร์ฝนระยอง · IEAT</h1>
-<div class="control"><label for="show">แสดงเรดาร์</label><input type="checkbox" id="show" checked></div>
+<div class="mode"><button type="button" id="originalMode" aria-pressed="true">ภาพเรดาร์เต็ม</button><button type="button" id="mapMode" aria-pressed="false">ซ้อนบน Web Map</button></div>
+<div class="control"><label for="show">แสดงชั้นฝน</label><input type="checkbox" id="show" checked></div>
 <div class="control"><label for="opacity">ความโปร่งใส</label><input type="range" id="opacity" min="0" max="100" value="65"><output id="opacityValue">65%</output></div>
 <div class="control"><label for="east">เลื่อนตะวันออก</label><input type="range" id="east" min="-30" max="30" value="0"><output id="eastValue">0 กม.</output></div>
 <div class="control"><label for="north">เลื่อนเหนือ</label><input type="range" id="north" min="-30" max="30" value="0"><output id="northValue">0 กม.</output></div>
 <div class="control"><label for="size">ขนาดภาพ</label><input type="range" id="size" min="85" max="115" value="100"><output id="sizeValue">100%</output></div>
 <button id="reset" type="button">คืนค่าตำแหน่ง</button>
-<p class="note">ตำแหน่งเรดาร์เทียบจากวงรัศมี 240 กม. และแผนที่ในภาพต้นฉบับ เป็นการวางโดยประมาณ โปรดใช้ <a href="https://weather.tmd.go.th/rygloop.php" target="_blank" rel="noopener">ภาพต้นฉบับ TMD</a> ตรวจเวลาและตำแหน่งก่อนใช้ตัดสินใจ</p>
+<p class="note">ภาพเต็มแสดงวงระยะ สี dBZ และเวลาที่อยู่บนภาพต้นฉบับ ส่วนชั้นฝนบน Web Map วางพิกัดโดยประมาณ โปรดตรวจ <a href="https://weather.tmd.go.th/rygloop.php" target="_blank" rel="noopener">ต้นฉบับ TMD</a> ก่อนใช้ตัดสินใจ</p>
 <div id="status" role="status"></div>
 </section>
 <script>
@@ -48,6 +54,21 @@ require(["esri/WebMap","esri/views/MapView","esri/layers/MediaLayer","esri/layer
   }
   view.when(()=>{webmap.add(radar,0);updateSource();}).catch(e=>{$("status").textContent="เปิด Web Map ไม่สำเร็จ: "+e.message;});
   $("show").onchange=e=>radar.visible=e.target.checked;
+  function setMode(isOriginal){
+    $("originalPanel").hidden=!isOriginal;
+    $("originalMode").setAttribute("aria-pressed",String(isOriginal));
+    $("mapMode").setAttribute("aria-pressed",String(!isOriginal));
+  }
+  $("originalMode").onclick=()=>setMode(true);
+  $("mapMode").onclick=()=>setMode(false);
+  const original=$("originalImage");
+  function refreshOriginal(){
+    const probe=new Image();
+    probe.onload=()=>{original.src=probe.src;};
+    probe.onerror=()=>{if(!original.src.includes('ryg-original-preview.jpg'))original.src='./data/ryg-original-preview.jpg';};
+    probe.src='./data/ryg-original.gif?v='+Math.floor(Date.now()/900000);
+  }
+  refreshOriginal();setInterval(refreshOriginal,900000);
   $("opacity").oninput=e=>{radar.opacity=e.target.value/100;$("opacityValue").textContent=e.target.value+"%";};
   for(const id of ["east","north","size"]){$(id).oninput=e=>{$(id+"Value").textContent=e.target.value+(id==="size"?"%":" กม.");updateSource();};}
   $("reset").onclick=()=>{for(const id of ["east","north","size"]){$(id).value=id==="size"?100:0;$(id+"Value").textContent=$(id).value+(id==="size"?"%":" กม.");}updateSource();};
