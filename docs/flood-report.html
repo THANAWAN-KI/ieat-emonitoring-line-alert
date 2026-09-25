@@ -14,7 +14,7 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
   <script src="data/thaiwater_latest.js?v=20260911-1"></script>
-  <script src="flood-live-data.js?v=20260925-verified-flood-2" defer></script>
+  <script src="flood-live-data.js?v=20260925-verified-flood-3" defer></script>
   <script src="data/thaiwater-map-meta.js" defer></script>
   <script id="flood-export-inline-20260924">
 (function(){
@@ -1979,7 +1979,7 @@ document.documentElement.classList.add("flood-initializing");
     function sync(){const period=`ช่วงข้อมูล ${thaiDate(value("startIn"))} ถึง ${thaiDate(value("endIn"))}`;document.querySelectorAll(".outEstate").forEach(e=>e.textContent=value("estateIn"));document.querySelectorAll(".outPeriod").forEach(e=>e.textContent=period);const map={outEstateCount:"estateCountIn",outFactory:"factoryIn",outCritical:"criticalIn",outCritical2:"criticalIn",outRouteCount:"routeCountIn",outRoute2:"routeCountIn",outRain:"rainIn",outRainWarning:"rainIn",outRoadWarning:"roadIn",outTrend:"trendIn",outNext:"nextIn",outVerify1:"verifyIn",outSummary:"summaryIn",outAction:"actionIn",infoEstate:"estateCountIn",infoFactory:"factoryIn",infoCritical:"criticalIn",infoRoute:"routeCountIn",infoLevel:"levelIn",infoSummary:"summaryIn",infoRain:"rainIn",infoTrend:"trendIn",infoRoad:"roadIn",infoAction:"actionIn",infoVerify:"verifyIn"};Object.entries(map).forEach(([o,i])=>{if($(o))$(o).textContent=value(i)});$("outLevel").textContent=value("levelIn");const num=id=>parseFloat((value(id).match(/[\d.]+/)||[0])[0]);if($("rainBar"))$("rainBar").style.width=Math.min(100,num("rainIn")/2)+"%";if($("criticalBar"))$("criticalBar").style.width=Math.min(100,num("criticalIn")*16)+"%";if($("routeBar"))$("routeBar").style.width=Math.min(100,num("routeCountIn")*18)+"%";if($("generatedAt"))$("generatedAt").textContent="จัดทำ "+new Date().toLocaleString("th-TH")}
     $("applyData").onclick=()=>{sync();$("editor").classList.remove("open")};
     window.zoomRiskMap=function(lat,lon,label){const frame=document.querySelector(".thaiwater-risk-map"),latitude=Number(lat),longitude=Number(lon);if(!frame||!Number.isFinite(latitude)||!Number.isFinite(longitude))return;const url=new URL(frame.src,document.baseURI);url.searchParams.set("center",longitude+","+latitude);url.searchParams.set("scale","75000");url.searchParams.set("_zoom",Date.now());frame.src=url.toString();frame.closest(".embedded-water-map")?.scrollIntoView({behavior:"smooth",block:"center"});const mapLabel=document.querySelector(".embedded-water-map .overview-map-label small");if(mapLabel&&label)mapLabel.textContent="กำลังแสดงตำแหน่ง: "+label};
-    document.addEventListener("click",event=>{const target=event.target.closest("[data-map-lat][data-map-lon]");if(target)window.zoomRiskMap(target.dataset.mapLat,target.dataset.mapLon,target.dataset.mapLabel||target.textContent.trim())});
+    document.addEventListener("click",event=>{const target=event.target.closest("[data-map-lat][data-map-lon]");if(target)window.zoomRiskMap(target.dataset.mapLat,target.dataset.mapLon,target.dataset.mapLabel||target.textContent.trim(),target.dataset.mapScale)});
     const sclass=t=>{t=String(t||"");return /เพิ่ม|วิกฤต|ล้น|สูงมาก/.test(t)?"critical":/ลด|ปกติ/.test(t)?"normal":/คงที่|ทรงตัว|เฝ้าระวัง|เตือน/.test(t)?"warning":"warning"};
     function addStation(d={n:"ระบุชื่อสถานี",v:"–",s:"เฝ้าระวัง",trend:"ทรงตัว",t:"–",agency:"ThaiWater",lat:null,lon:null}){const r=document.createElement("tr"),parts=String(d.n||"").split(" • "),level=sclass(d.s)==="critical"?"critical":sclass(d.s)==="normal"?"normal":"warning",estate=parts.length>1?'<small class="station-estate">ใกล้ '+parts.slice(1).join(" • ")+'</small>':"",attrs=Number.isFinite(Number(d.lat))&&Number.isFinite(Number(d.lon))?' data-map-lat="'+d.lat+'" data-map-lon="'+d.lon+'" data-map-label="'+(parts[0]||"สถานีตรวจวัด")+'"':"";r.innerHTML='<td contenteditable><span class="station-name">'+(parts[0]||"–")+'</span>'+estate+'</td><td contenteditable>'+d.v+'</td><td><button type="button" class="water-status-cell map-cell-zoom '+level+'"'+attrs+'>'+d.s+'</button></td><td contenteditable>'+d.t+'</td>';$("stations").appendChild(r)}window.addStation=addStation;
     function renderMapLayerControls(map){
@@ -14182,13 +14182,13 @@ html body main.container #warning .dashboard-chart-mode>.rid-table-wrap{
  }
  function renderEstate(){
   var body=document.getElementById("estateRanks"),panel=body&&body.closest(".estate-watch-table"),target=viz(panel,"estateRankViz");if(!target)return;
-  var rows=rowsOf("#estateRanks").map(function(row){var pin=row.cells[5]?.querySelector("[data-map-lat][data-map-lon]"),lat=pin?.dataset.mapLat,lon=pin?.dataset.mapLon;return{name:row.cells[1]?.textContent.trim()||"–",count:number(row.cells[2]?.textContent),distance:row.cells[3]?.textContent.trim()||"–",lat:lat,lon:lon}})
+  var rows=rowsOf("#estateRanks").map(function(row){var pin=row.querySelector("[data-map-lat][data-map-lon]"),lat=pin?.dataset.mapLat,lon=pin?.dataset.mapLon;return{name:row.cells[1]?.textContent.trim()||"–",count:Number(row.dataset.count)||0,distance:row.cells[3]?.textContent.trim()||"–",lat:lat,lon:lon,scale:pin?.dataset.mapScale}})
    .sort(function(a,b){return b.count-a.count}).slice(0,5);
   var sig=JSON.stringify(rows);if(target.dataset.sig===sig)return;target.dataset.sig=sig;
   target.innerHTML=rows.length?'<div class="flood-estate-ranking">'+rows.map(function(x,i){
    var lat=Number(x.lat),lon=Number(x.lon),hasCoords=x.lat!=null&&x.lon!=null&&x.lat!==""&&x.lon!==""&&Number.isFinite(lat)&&Number.isFinite(lon)&&lat!==0&&lon!==0&&Math.abs(lat)<=90&&Math.abs(lon)<=180;
-   var open=hasCoords?'<button type="button" class="flood-estate-rank flood-map-zoom-row" data-map-lat="'+lat+'" data-map-lon="'+lon+'" data-map-label="'+esc(x.name)+'" aria-label="ซูมแผนที่ไปที่ '+esc(x.name)+'">':'<div class="flood-estate-rank">';
-   return open+'<span class="flood-estate-name" title="'+esc(x.name)+'">'+(i+1)+'. '+esc(x.name)+'</span><strong title="ระยะทางถึงสถานีผิดปกติใกล้ที่สุด">'+esc(x.distance)+'</strong>'+(hasCoords?'</button>':'</div>');
+   var open=hasCoords?'<button type="button" class="flood-estate-rank flood-map-zoom-row" data-map-lat="'+lat+'" data-map-lon="'+lon+'" data-map-scale="'+esc(x.scale||75000)+'" data-map-label="'+esc(x.name)+'" aria-label="ซูมแผนที่ไปที่พื้นที่น้ำท่วม '+esc(x.name)+'">':'<div class="flood-estate-rank">';
+   return open+'<span class="flood-estate-name" title="'+esc(x.name)+'">'+(i+1)+'. '+esc(x.name)+'</span><strong title="วันที่ภาพถ่ายล่าสุด">'+esc(x.distance)+'</strong>'+(hasCoords?'</button>':'</div>');
   }).join("")+'</div>':'<div class="dashboard-viz-empty">ยังไม่มีข้อมูลพิกัดพื้นที่น้ำท่วมที่ตรวจพบพร้อมวันที่ในระบบนี้<br><a href="https://disaster.gistda.or.th/flood" target="_blank" rel="noopener noreferrer">ตรวจสอบแผนที่ GISTDA ↗</a></div>';
  }
  function state(text){text=String(text||"");return /ล้น|วิกฤต|สูง|เพิ่ม/.test(text)?"critical":/ปกติ|ลด/.test(text)?"normal":/เฝ้าระวัง|เตือน|คงที่|ทรงตัว/.test(text)?"warning":"unknown"}
@@ -15778,6 +15778,9 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
 </style>
 
 <style id="flood-map-authoritative-20260923">
+#warning .estate-watch-table .observed-flood-zoom{border:0;border-radius:999px;padding:6px 11px;background:#007b83;color:#fff;font:inherit;font-weight:600;cursor:pointer;text-align:center}
+#warning .estate-watch-table .observed-flood-zoom:hover{background:#005f68}
+#warning .estate-watch-table .observed-flood-zoom:focus-visible{outline:3px solid #f6b532;outline-offset:2px}
 #warning #topFloodMap{position:relative!important;min-height:640px!important}
 #warning #topFloodMap>.operations-map{display:block!important;position:relative!important;width:100%!important;height:100%!important;min-height:640px!important;overflow:hidden!important}
 #warning #topFloodMap #overviewArcgisMap{display:block!important;width:100%!important;height:100%!important;min-height:640px!important;border:0!important}
@@ -15813,9 +15816,9 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
   if(frame.dataset.ready==="1")frame.contentWindow.postMessage(command,location.origin);
   else frame.pendingFocus=command;
  }
- window.zoomRiskMap=function(lat,lon,label){
+ window.zoomRiskMap=function(lat,lon,label,scale){
   var a=Number(lat),b=Number(lon);
-  if(Number.isFinite(a)&&Number.isFinite(b))focus(a,b,75000);
+  if(Number.isFinite(a)&&Number.isFinite(b))focus(a,b,Number(scale)||75000);
  };
  window.resetFloodDashboardMap=function(){focus(null,null,null)};
  function start(){
