@@ -15781,6 +15781,9 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
 #warning #topFloodMap{position:relative!important;min-height:640px!important}
 #warning #topFloodMap>.operations-map{display:block!important;position:relative!important;width:100%!important;height:100%!important;min-height:640px!important;overflow:hidden!important}
 #warning #topFloodMap #overviewArcgisMap{display:block!important;width:100%!important;height:100%!important;min-height:640px!important;border:0!important}
+#warning #topFloodMap .observed-flood-source{position:absolute;z-index:3;left:12px;bottom:12px;max-width:min(440px,calc(100% - 24px));padding:10px 12px;border-radius:9px;background:rgba(255,255,255,.96);box-shadow:0 2px 12px #14223a33;color:#173047;font:13px/1.5 Arial,"Sarabun",sans-serif}
+#warning #topFloodMap .observed-flood-source strong{display:block;font-size:14px}
+#warning #topFloodMap .observed-flood-source a{display:inline-block;margin-top:5px;color:#075da5;font-weight:600;text-decoration:underline}
 </style>
 <script id="flood-map-authoritative-20260923-script">
 (function(){
@@ -15795,6 +15798,9 @@ html body main.container #warning .flood-map-zoom-row:focus-visible{
    frame.title="แผนที่แสดงข้อมูลน้ำท่วม";frame.loading="eager";
    frame.addEventListener("load",function(){frame.dataset.ready="1";if(frame.pendingFocus){frame.contentWindow.postMessage(frame.pendingFocus,location.origin);frame.pendingFocus=null}});
    frame.src=mapUrl;card.appendChild(frame);
+   var source=document.createElement("aside");source.className="observed-flood-source";
+   source.innerHTML='<strong>ตรวจสอบพื้นที่น้ำท่วมที่ตรวจพบ</strong><span>เปิดแผนที่ดาวเทียม GISTDA เพื่อดูขอบเขตน้ำท่วมและวันที่ภาพล่าสุด ข้อมูลฝนและระดับน้ำบนแผนที่นี้เป็นเกณฑ์เฝ้าระวัง ยังไม่ยืนยันว่านิคมฯ น้ำท่วม</span><br><a href="https://disaster.gistda.or.th/flood" target="_blank" rel="noopener noreferrer">เปิดแผนที่น้ำท่วม GISTDA ↗</a>';
+   card.appendChild(source);
   }
   if(card.parentElement!==target||target.children.length!==1||target.firstElementChild!==card)target.replaceChildren(card);
  }
