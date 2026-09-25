@@ -1100,5 +1100,20 @@ html body main.wrap .dashboard-kpis .kpi-icon>img.drought-card-icon{
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();
 </script>
+<style id="drought-mobile-final">
+@media(max-width:800px){
+  html,body{max-width:100%;overflow-x:hidden}
+  html body main.wrap{width:100%!important;max-width:100%!important;padding-left:10px!important;padding-right:10px!important;overflow-x:hidden}
+  html body main.wrap .dashboard-head{width:100%!important;min-width:0!important;flex-wrap:wrap!important;gap:9px!important}
+  html body main.wrap .head-meta{width:100%!important;display:flex!important;flex-wrap:wrap!important;justify-content:flex-start!important;white-space:normal!important}
+  html body main.wrap .dashboard-kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  html body main.wrap .charts-grid,html body main.wrap .main-grid,html body main.wrap .two-col{display:grid!important;grid-template-columns:minmax(0,1fr)!important}
+  html body main.wrap .charts-grid>*,html body main.wrap .main-grid>*,html body main.wrap .two-col>*{min-width:0!important;max-width:100%!important}
+  html body main.wrap .map-panel,html body main.wrap .map-panel #viewDiv{width:100%!important;max-width:100%!important;height:500px!important;min-height:500px!important}
+  html body main.wrap .section-head{height:auto!important;flex-wrap:wrap!important;gap:8px!important}
+  html body main.wrap .table-wrap{display:block!important;width:100%!important;max-width:100%!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch}
+  html body main.wrap .table-wrap table{width:max-content!important;min-width:980px!important;max-width:none!important}
+}
+</style>
 </body>
 </html>
