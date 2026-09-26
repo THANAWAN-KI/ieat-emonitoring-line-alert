@@ -1811,7 +1811,7 @@ document.documentElement.classList.add("flood-initializing");
     })();
   </script>
 <link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css">
-</head>
+<style id="gistda-report-sheet-style">#infographic .gistda-report-sheet{padding:0!important;gap:0!important;background:#fff!important}#infographic .gistda-report-sheet img{display:block;width:100%;height:100%;object-fit:contain}#infographic .gistda-report-sheet::after{content:none!important}</style></head>
 <body>
   <main class="container">
     <section class="view active" id="warning">
@@ -1898,7 +1898,7 @@ document.documentElement.classList.add("flood-initializing");
       <div class="report-export-workspace">
         <div class="multi-report-toolbar">
           <div class="report-toolbar-copy"><h1>รายงานการประเมินสถานการณ์และพื้นที่เสี่ยงน้ำท่วมฉับพลัน</h1><div class="report-edit-links"><a href="https://twa.thaiwater.net/th/map/basic/overall/overall/0?ds=rr%2Csc&amp;p=hide&amp;c=104.14958%2C12.63781%2C3.114z" target="_blank" rel="noopener">เปิดแผนที่ ThaiWater สำหรับจัดทำภาพ</a><a href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=3d24287ac6ea49cd823625ddad496e01" target="_blank" rel="noopener">เปิดแผนที่ กนอ. สำหรับตรวจสอบตำแหน่ง</a></div></div>
-          <div class="multi-report-actions"><label class="map-upload-button">ภาพหน้า 1<input id="reportMapUpload" type="file" accept="image/*" hidden></label><label class="map-upload-button">ภาพ 24 ชม.<input id="forecast24Upload" type="file" accept="image/*" hidden></label><label class="map-upload-button">ภาพ 48 ชม.<input id="forecast48Upload" type="file" accept="image/*" hidden></label></div>
+          <div class="multi-report-actions"><a class="map-upload-button" href="https://disaster.gistda.or.th/" target="_blank" rel="noopener">ข้อมูลน้ำท่วม GISTDA</a><label class="map-upload-button">เปลี่ยนภาพ GISTDA<input id="gistdaReportUpload" type="file" accept="image/*" hidden></label><label class="map-upload-button">ภาพหน้า 1<input id="reportMapUpload" type="file" accept="image/*" hidden></label><label class="map-upload-button">ภาพ 24 ชม.<input id="forecast24Upload" type="file" accept="image/*" hidden></label><label class="map-upload-button">ภาพ 48 ชม.<input id="forecast48Upload" type="file" accept="image/*" hidden></label></div>
         </div>
 
         <div class="report-pages">
@@ -1963,6 +1963,9 @@ document.documentElement.classList.add("flood-initializing");
 <table class="export-data-table"><thead><tr><th>จังหวัด</th><th>อำเภอ</th><th>ตำบล</th><th>ฝนสะสม</th><th>นิคมฯ ใกล้ที่สุด</th></tr></thead><tbody id="exportForecastRows48"><tr><td colspan="5">กำลังโหลดข้อมูล…</td></tr></tbody></table>
 </section>
 <footer class="sheet-footer"><span>แหล่งข้อมูล: ThaiWater · ข้อมูลเฝ้าระวัง 48 ชั่วโมง</span><span>หน้า 5 / 6</span></footer>
+</section>
+<section class="export-sheet gistda-report-sheet" id="reportPage6" data-report-page="6" aria-label="รายงานแผนที่น้ำท่วมจากดาวเทียม GISTDA วันที่ 26 กันยายน 2569">
+<img id="gistdaReportImage" src="assets/gistda-flood-20260926.jpg" alt="แผนที่น้ำท่วมจากภาพถ่ายดาวเทียม GISTDA วันที่ 26 กันยายน 2569 พร้อมคำอธิบายแผนที่และสถานการณ์" crossorigin="anonymous">
 </section>
         </div>
 
@@ -13605,5 +13608,5 @@ html body main.container #warning #ridBasinOverview .rid-basin-actions #floodRep
 }
 @media(max-width:430px){#warning .grid.kpis,#warning .national-cards-dashboard{grid-template-columns:minmax(0,1fr)!important}}
 </style>
-</body>
+<script id="gistda-report-upload-script">document.addEventListener("DOMContentLoaded",()=>{const input=document.getElementById("gistdaReportUpload"),image=document.getElementById("gistdaReportImage");input?.addEventListener("change",()=>{const file=input.files?.[0];if(!file||!file.type.startsWith("image/"))return;const reader=new FileReader();reader.onload=()=>{image.src=reader.result};reader.readAsDataURL(file)})});</script></body>
 </html>
