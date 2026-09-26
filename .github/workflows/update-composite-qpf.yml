@@ -3,9 +3,10 @@ name: Update nationwide radar at 13:00 Thailand time
 on:
   workflow_dispatch:
   schedule:
-    # 06:00 UTC = 13:00 Thailand. Retry if TMD publishes the image later.
-    - cron: "15,35,55 6 * * *"
-    - cron: "20 7 * * *"
+    # 06:00 UTC = 13:00 Thailand. Check promptly, then retry while TMD publishes.
+    - cron: "0,10,20,35,50 6 * * *"
+    - cron: "10,40 7 * * *"
+    - cron: "10,40 8 * * *"
 
 permissions:
   contents: write
@@ -27,4 +28,5 @@ jobs:
           git add docs/assets/composite-qpf-1300.gif docs/data/composite-qpf.json
           if git diff --cached --quiet; then exit 0; fi
           git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m "Update nationwide radar image at 13:00 Thailand time"
+          git pull --rebase
           git push
