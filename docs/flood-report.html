@@ -271,7 +271,7 @@
       const src=frame.getAttribute("src")||"";
       if(!src.includes("flood-webmap.html"))return reject(new Error("แผนที่รายงานยังไม่พร้อม กรุณารอให้แผนที่โหลดแล้วลองอีกครั้ง"));
       const id="report-map-"+Date.now()+"-"+Math.random().toString(36).slice(2);
-      const timer=setTimeout(()=>finish(new Error("หมดเวลารอภาพแผนที่ กรุณาลองอีกครั้ง")),20000);
+      const timer=setTimeout(()=>finish(new Error("หมดเวลารอภาพแผนที่")),12000);
       function finish(error,dataUrl){
         clearTimeout(timer);window.removeEventListener("message",receive);
         if(error)reject(error);else resolve(dataUrl);
@@ -302,13 +302,23 @@
     // Capture the map at its current extent before cloning the report.
     // html2canvas cannot read pixels inside an iframe.
     const liveFrames=[...sheet.querySelectorAll("iframe")];
-    const mapImages=await Promise.all(liveFrames.map(captureCurrentMap));
+    const mapImages=await Promise.all(liveFrames.map(frame=>captureCurrentMap(frame).catch(error=>{
+      console.warn("ใช้ข้อความแทนแผนที่ในภาพรายงาน",error);
+      return null;
+    })));
     clone.querySelectorAll("iframe").forEach((frame,index)=>{
-      const image=document.createElement("img");
-      image.alt="ภาพแผนที่ ณ มุมมองปัจจุบัน";
-      image.src=mapImages[index];
-      image.style.cssText="display:block;width:100%;height:100%;object-fit:fill;background:#fff";
-      frame.replaceWith(image);
+      if(mapImages[index]){
+        const image=document.createElement("img");
+        image.alt="ภาพแผนที่ ณ มุมมองปัจจุบัน";
+        image.src=mapImages[index];
+        image.style.cssText="display:block;width:100%;height:100%;object-fit:fill;background:#fff";
+        frame.replaceWith(image);
+      }else{
+        const placeholder=document.createElement("div");
+        placeholder.textContent="ภาพแผนที่ยังไม่พร้อม ณ เวลาส่งออก กรุณาดูแผนที่บนหน้าเว็บ";
+        placeholder.style.cssText="display:grid;place-items:center;width:100%;height:100%;min-height:220px;background:#f1f5f6;color:#405564;text-align:center;padding:20px;box-sizing:border-box";
+        frame.replaceWith(placeholder);
+      }
     });
 
     renderRoot.setAttribute("aria-hidden","true");
