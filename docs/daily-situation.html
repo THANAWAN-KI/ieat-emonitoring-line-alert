@@ -368,7 +368,7 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
     activeStation=key;radarArea=new Circle({center:new Point({longitude:item.lon,latitude:item.lat}),radius:240,radiusUnit:'kilometers',geodesic:true});
     document.querySelectorAll('[data-station]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.station===key)));
     radarControlText.textContent='เรดาร์ฝน'+item.name+' (TMD)';
-    radarTime.textContent=key==='ryg'?'เรดาร์ระยอง · เวลาเรดาร์จริงดูในภาพต้นทาง':'เรดาร์'+item.name+' · ภาพชั้นฝนชุดวันที่ 26 ก.ย. 2569 (ยังไม่อัปเดตอัตโนมัติ) · เวลาเรดาร์จริงดูในภาพต้นทาง';
+    radarTime.textContent=key==='ryg'?'เรดาร์ระยอง · เวลาเรดาร์จริงดูในภาพต้นทาง':'เรดาร์'+item.name+' · ภาพชั้นฝนชุดวันที่ 26 ก.ย. 2569 · ตำแหน่งซ้อนทับโดยประมาณ · เวลาเรดาร์จริงดูในภาพต้นทาง';
     const source=document.querySelector('.radar-legend a');source.href=item.page;source.textContent='ดู GIF และเวลาเรดาร์จาก TMD ↗';
     radarCanvas.style.display=key==='ryg'&&radarVisible?'block':'none';
     regionalOverlay.style.display=key!=='ryg'&&radarVisible?'block':'none';
