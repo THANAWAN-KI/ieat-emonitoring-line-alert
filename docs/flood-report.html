@@ -293,6 +293,18 @@
     // Render an exact duplicate of the visible report. Do not resize the live
     // page or its parent: changing zoom/width here makes Thai text reflow and
     // produces a PNG that is different from the preview.
+    if(sheet.classList.contains("gistda-report-sheet")){
+      const image=sheet.querySelector("img");
+      if(!image?.complete||!image.naturalWidth)throw new Error("ภาพ GISTDA ยังโหลดไม่เสร็จ");
+      const response=await fetch(image.currentSrc||image.src);
+      if(!response.ok)throw new Error("ไม่สามารถอ่านภาพ GISTDA ได้");
+      return response.blob();
+    }
+    if(!sheet.querySelector("iframe")){
+      await document.fonts?.ready;
+      const canvas=await html2canvas(sheet,{scale:1.25,backgroundColor:"#fff",useCORS:true,logging:false,imageTimeout:3000});
+      return new Promise((resolve,reject)=>canvas.toBlob(blob=>blob?resolve(blob):reject(new Error("ไม่สามารถสร้าง PNG ได้")),"image/png"));
+    }
     await waitForSheetAssets(sheet);
     const rect=sheet.getBoundingClientRect();
     const renderWidth=Math.max(1,Math.round(sheet.offsetWidth||rect.width));
@@ -374,12 +386,13 @@
     const button=pageNumber?document.querySelector('[data-export-page="'+pageNumber+'"]'):$("downloadPng");
     const old=button?.textContent;
     try{
-      if(button){button.disabled=true;button.textContent="กำลังสร้างภาพ…"}
+      if(button){button.disabled=true;button.textContent="กำลังบันทึก…"}
       syncEditableText();
       if(document.fonts?.ready)await document.fonts.ready;
       const sheets=pageNumber?[document.querySelector('[data-report-page="'+pageNumber+'"]')]:[...document.querySelectorAll("[data-report-page]")];
       const stamp=new Date().toISOString().slice(0,10),items=[];
       for(const sheet of sheets){
+        if(!sheet)throw new Error("ไม่พบหน้ารายงาน");
         const page=sheet.dataset.reportPage,blob=await captureSheet(sheet);
         items.push({url:URL.createObjectURL(blob),name:"IEAT-Flood-Report-"+stamp+"-page-"+page+".png",label:"รายงานหน้า "+page});
       }
@@ -417,12 +430,13 @@
   }
   window.addEventListener("ieat:data-ready",event=>renderExportData(event.detail));
   window.addEventListener("DOMContentLoaded",()=>{
-    document.querySelectorAll("[data-report-page]").forEach(sheet=>{const button=document.createElement("button");button.type="button";button.className="report-save-image";button.textContent="บันทึกภาพรายงานหน้านี้";button.addEventListener("click",()=>exportPages(sheet.dataset.reportPage,true));button.style.cssText="display:block;margin:16px 0 8px auto;padding:10px 18px;border:0;border-radius:10px;background:#1769c2;color:#fff;cursor:pointer";sheet.before(button)});
+    document.querySelectorAll("[data-report-page]").forEach(sheet=>{const button=document.createElement("button");button.type="button";button.className="report-save-image";button.dataset.exportPage=sheet.dataset.reportPage;button.textContent="บันทึก PNG";button.addEventListener("click",()=>exportPages(sheet.dataset.reportPage,true));button.style.cssText="display:inline-block;width:auto;justify-self:end;align-self:end;margin:6px 0 4px auto;padding:5px 10px;border:0;border-radius:6px;background:#1769c2;color:#fff;font-size:12px;line-height:1.25;cursor:pointer";sheet.before(button)});
     $("reportPeriodTitle")?.addEventListener("input",syncEditableText);
     setupMapUpload();
     refreshLatest();
     if(window.IEAT_LIVE_DATA)renderExportData(window.IEAT_LIVE_DATA);
   });
+  window.downloadReportPage=page=>exportPages(page,true);
   window.downloadPage=()=>exportPages();
 })();
 </script>
@@ -1964,7 +1978,7 @@ document.documentElement.classList.add("flood-initializing");
 </section>
 <footer class="sheet-footer"><span>แหล่งข้อมูล: ThaiWater · ข้อมูลเฝ้าระวัง 48 ชั่วโมง</span><span>หน้า 5 / 6</span></footer>
 </section>
-<section class="export-sheet gistda-report-sheet" id="reportPage6" data-report-page="6" aria-label="รายงานแผนที่น้ำท่วมจากดาวเทียม GISTDA วันที่ 26 กันยายน 2569">
+<section class="export-sheet gistda-report-sheet" id="reportPage7" data-report-page="7" aria-label="รายงานแผนที่น้ำท่วมจากดาวเทียม GISTDA วันที่ 26 กันยายน 2569">
 <img id="gistdaReportImage" src="assets/gistda-flood-20260926.jpg" alt="แผนที่น้ำท่วมจากภาพถ่ายดาวเทียม GISTDA วันที่ 26 กันยายน 2569 พร้อมคำอธิบายแผนที่และสถานการณ์" crossorigin="anonymous">
 </section>
         </div>
@@ -11111,10 +11125,11 @@ html body main.container #infographic #reportPage5 .export-rid-trend.steady{back
   if(!page){
    page=document.createElement("section");page.id="reportPage6";
    page.className="export-sheet landscape-sheet";page.dataset.reportPage="6";
-   page.innerHTML='<header class="sheet-header compact"><h2>สถานีตรวจวัดระดับน้ำที่เกี่ยวข้องกับนิคมฯ</h2><p class="shared-report-period">ข้อมูลเรียลไทม์จากกรมชลประทานและสถานีภายในรัศมี 120 กิโลเมตรจากนิคมอุตสาหกรรม</p></header>'+
+   page.innerHTML='<header class="sheet-header compact"><h2>สถานีตรวจวัดระดับน้ำที่เกี่ยวข้องกับนิคมฯ</h2><p id="ridReportPeriod" contenteditable="true" spellcheck="false">วันที่ 25 พ.ย. 2568 เวลา 07:00 น. ถึง 26 พ.ย. 2568 เวลา 07:00 น. (เวลากรุงเทพฯ)</p></header>'+
     '<section class="export-table-block"><table class="export-data-table"><thead><tr><th>สถานี</th><th>จังหวัด</th><th>นิคมฯ ที่ใกล้ที่สุด</th><th>ระยะห่าง</th><th>ระดับน้ำเทียบตลิ่ง (%)</th><th>ระดับน้ำปัจจุบัน</th><th>แนวโน้ม</th><th>ข้อมูลล่าสุด</th></tr></thead><tbody id="exportRidStationRows"><tr><td colspan="8">กำลังโหลดข้อมูลล่าสุด…</td></tr></tbody></table></section>'+
     '<footer class="sheet-footer"><span>แหล่งข้อมูล: กรมชลประทาน (RID) · ตรวจสอบข้อมูลล่าสุดทุก 1 นาที</span><span>หน้า 6 / 6</span></footer>';
-   pages.appendChild(page);
+   pages.insertBefore(page,document.getElementById("reportPage7"));
+   var save=document.createElement("button");save.type="button";save.className="report-save-image";save.dataset.exportPage="6";save.textContent="บันทึก PNG";save.addEventListener("click",function(){window.downloadReportPage(6)});page.before(save);
   }
   return page;
  }
@@ -11140,7 +11155,7 @@ html body main.container #infographic #reportPage5 .export-rid-trend.steady{back
   document.querySelectorAll("#infographic [data-report-page]").forEach(function(page){
    var number=page.getAttribute("data-report-page");
    var target=page.querySelector(".sheet-footer span:last-child");
-   if(target)target.textContent="หน้า "+number+" / 6";
+   if(target)target.textContent="หน้า "+number+" / 7";
   });
  }
  function apply(){
