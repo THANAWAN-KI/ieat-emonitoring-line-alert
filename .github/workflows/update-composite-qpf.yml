@@ -2,6 +2,11 @@ name: Update nationwide radar at 13:00 Thailand time
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/update-composite-qpf.yml"
+      - "scripts/update_composite_qpf.py"
   schedule:
     # 06:00 UTC = 13:00 Thailand. Check promptly, then retry while TMD publishes.
     - cron: "0,10,20,35,50 6 * * *"
