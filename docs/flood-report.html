@@ -300,11 +300,6 @@
       canvas.getContext("2d").drawImage(image,0,0);
       return new Promise((resolve,reject)=>canvas.toBlob(blob=>blob?resolve(blob):reject(new Error("ไม่สามารถสร้าง PNG ได้")),"image/png"));
     }
-    if(!sheet.querySelector("iframe")){
-      await document.fonts?.ready;
-      const canvas=await html2canvas(sheet,{scale:1.25,backgroundColor:"#fff",useCORS:true,logging:false,imageTimeout:3000});
-      return new Promise((resolve,reject)=>canvas.toBlob(blob=>blob?resolve(blob):reject(new Error("ไม่สามารถสร้าง PNG ได้")),"image/png"));
-    }
     await waitForSheetAssets(sheet);
     const rect=sheet.getBoundingClientRect();
     const renderWidth=Math.max(1,Math.round(sheet.offsetWidth||rect.width));
@@ -361,7 +356,7 @@
 
     try{
       await waitForSheetAssets(clone);
-      const scale=1.5;
+      const scale=sheet.id==="reportPage6"?1:1.5;
       const canvas=await html2canvas(clone,{
         scale,
         backgroundColor:"#ffffff",
