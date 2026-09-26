@@ -1978,7 +1978,7 @@ document.documentElement.classList.add("flood-initializing");
 </section>
 <footer class="sheet-footer"><span>แหล่งข้อมูล: ThaiWater · ข้อมูลเฝ้าระวัง 48 ชั่วโมง</span><span>หน้า 5 / 6</span></footer>
 </section>
-<section class="export-sheet gistda-report-sheet" id="reportPage7" data-report-page="7" aria-label="รายงานแผนที่น้ำท่วมจากดาวเทียม GISTDA วันที่ 26 กันยายน 2569">
+<section class="export-sheet gistda-report-sheet" id="reportPage7" data-report-page="6" aria-label="รายงานแผนที่น้ำท่วมจากดาวเทียม GISTDA วันที่ 26 กันยายน 2569">
 <img id="gistdaReportImage" src="assets/gistda-flood-20260926.jpg" alt="แผนที่น้ำท่วมจากภาพถ่ายดาวเทียม GISTDA วันที่ 26 กันยายน 2569 พร้อมคำอธิบายแผนที่และสถานการณ์" crossorigin="anonymous">
 </section>
         </div>
@@ -11119,20 +11119,7 @@ html body main.container #infographic #reportPage5 .export-rid-trend.steady{back
   if(getComputedStyle(document.getElementById("infographic")).display==="none"){exportMap.dataset.src=src;exportMap.removeAttribute("src")}
   else if(exportMap.src!==src){exportMap.src=src;delete exportMap.dataset.src}
  }
- function ensurePage(){
-  var pages=document.querySelector("#infographic .report-pages");if(!pages)return null;
-  var page=document.getElementById("reportPage6");
-  if(!page){
-   page=document.createElement("section");page.id="reportPage6";
-   page.className="export-sheet landscape-sheet";page.dataset.reportPage="6";
-   page.innerHTML='<header class="sheet-header compact"><h2>สถานีตรวจวัดระดับน้ำที่เกี่ยวข้องกับนิคมฯ</h2><p id="ridReportPeriod" contenteditable="true" spellcheck="false">วันที่ 25 พ.ย. 2568 เวลา 07:00 น. ถึง 26 พ.ย. 2568 เวลา 07:00 น. (เวลากรุงเทพฯ)</p></header>'+
-    '<section class="export-table-block"><table class="export-data-table"><thead><tr><th>สถานี</th><th>จังหวัด</th><th>นิคมฯ ที่ใกล้ที่สุด</th><th>ระยะห่าง</th><th>ระดับน้ำเทียบตลิ่ง (%)</th><th>ระดับน้ำปัจจุบัน</th><th>แนวโน้ม</th><th>ข้อมูลล่าสุด</th></tr></thead><tbody id="exportRidStationRows"><tr><td colspan="8">กำลังโหลดข้อมูลล่าสุด…</td></tr></tbody></table></section>'+
-    '<footer class="sheet-footer"><span>แหล่งข้อมูล: กรมชลประทาน (RID) · ตรวจสอบข้อมูลล่าสุดทุก 1 นาที</span><span>หน้า 6 / 6</span></footer>';
-   pages.insertBefore(page,document.getElementById("reportPage7"));
-   var save=document.createElement("button");save.type="button";save.className="report-save-image";save.dataset.exportPage="6";save.textContent="บันทึก PNG";save.addEventListener("click",function(){window.downloadReportPage(6)});page.before(save);
-  }
-  return page;
- }
+ function ensurePage(){return null;}
  function copyRows(){
   var target=document.getElementById("exportRidStationRows");
   var source=document.getElementById("ridStationRows");
@@ -11155,7 +11142,7 @@ html body main.container #infographic #reportPage5 .export-rid-trend.steady{back
   document.querySelectorAll("#infographic [data-report-page]").forEach(function(page){
    var number=page.getAttribute("data-report-page");
    var target=page.querySelector(".sheet-footer span:last-child");
-   if(target)target.textContent="หน้า "+number+" / 7";
+   if(target)target.textContent="หน้า "+number+" / 6";
   });
  }
  function apply(){
