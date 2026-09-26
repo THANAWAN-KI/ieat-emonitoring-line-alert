@@ -430,7 +430,7 @@
   }
   window.addEventListener("ieat:data-ready",event=>renderExportData(event.detail));
   window.addEventListener("DOMContentLoaded",()=>{
-    document.querySelectorAll("[data-report-page]").forEach(sheet=>{const button=document.createElement("button");button.type="button";button.className="report-save-image";button.dataset.exportPage=sheet.dataset.reportPage;button.textContent="บันทึก PNG";button.addEventListener("click",()=>exportPages(sheet.dataset.reportPage,true));button.style.cssText="display:inline-block;width:auto;justify-self:end;align-self:end;margin:6px 0 4px auto;padding:5px 10px;border:0;border-radius:6px;background:#1769c2;color:#fff;font-size:12px;line-height:1.25;cursor:pointer";sheet.before(button)});
+    document.querySelectorAll("[data-report-page]").forEach(sheet=>{const button=document.createElement("button");button.type="button";button.className="report-save-image";button.dataset.exportPage=sheet.dataset.reportPage;button.textContent="บันทึก PNG";button.addEventListener("click",()=>exportPages(sheet.dataset.reportPage,true));button.style.cssText="display:inline-block;width:auto;justify-self:end;align-self:end;margin:6px 0 4px auto;padding:5px 10px;border:0;border-radius:6px;background:#1769c2;color:#fff;font-size:12px;line-height:1.25;cursor:pointer";const card=document.createElement("div");card.className="report-card";sheet.before(card);card.append(button,sheet)});
     $("reportPeriodTitle")?.addEventListener("input",syncEditableText);
     setupMapUpload();
     refreshLatest();
@@ -11125,8 +11125,8 @@ html body main.container #infographic #reportPage5 .export-rid-trend.steady{back
    page.innerHTML='<header class="sheet-header compact"><h2>สถานีตรวจวัดระดับน้ำที่เกี่ยวข้องกับนิคมฯ</h2><p id="ridReportPeriod" contenteditable="true" spellcheck="false">วันที่ 25 พ.ย. 2568 เวลา 07:00 น. ถึง 26 พ.ย. 2568 เวลา 07:00 น. (เวลากรุงเทพฯ)</p></header>'+
     '<section class="export-table-block"><table class="export-data-table"><thead><tr><th>สถานี</th><th>จังหวัด</th><th>นิคมฯ ที่ใกล้ที่สุด</th><th>ระยะห่าง</th><th>ระดับน้ำเทียบตลิ่ง (%)</th><th>ระดับน้ำปัจจุบัน</th><th>แนวโน้ม</th><th>ข้อมูลล่าสุด</th></tr></thead><tbody id="exportRidStationRows"><tr><td colspan="8">กำลังโหลดข้อมูลล่าสุด…</td></tr></tbody></table></section>'+
     '<footer class="sheet-footer"><span>แหล่งข้อมูล: กรมชลประทาน (RID) · ตรวจสอบข้อมูลล่าสุดทุก 1 นาที</span><span>หน้า 6 / 6</span></footer>';
-   pages.appendChild(page);
-   var save=document.createElement("button");save.type="button";save.className="report-save-image";save.dataset.exportPage="6";save.textContent="บันทึก PNG";save.addEventListener("click",function(){window.downloadReportPage(6)});page.before(save);
+   var card=document.createElement("div");card.className="report-card";pages.appendChild(card);card.appendChild(page);
+   var save=document.createElement("button");save.type="button";save.className="report-save-image";save.dataset.exportPage="6";save.textContent="บันทึก PNG";save.addEventListener("click",function(){window.downloadReportPage(6)});card.prepend(save);
   }
   return page;
  }
@@ -13620,5 +13620,5 @@ html body main.container #warning #ridBasinOverview .rid-basin-actions #floodRep
 }
 @media(max-width:430px){#warning .grid.kpis,#warning .national-cards-dashboard{grid-template-columns:minmax(0,1fr)!important}}
 </style>
-</body>
+<style id="report-card-compact-layout-20260926">html body main.container #infographic .report-pages{display:grid!important;grid-template-columns:repeat(2,minmax(0,794px))!important;justify-content:center!important;gap:22px!important;align-items:start!important}html body main.container #infographic .report-pages>.report-card{display:flex!important;flex-direction:column!important;align-items:stretch!important;grid-column:auto!important;min-width:0!important;width:100%!important;max-width:794px!important;margin:0!important}html body main.container #infographic .report-card>.report-save-image{display:inline-block!important;align-self:flex-end!important;flex:none!important;width:fit-content!important;max-width:max-content!important;min-width:0!important;padding:6px 12px!important;margin:0 0 8px!important;border-radius:6px!important;background:#1769c2!important;color:#fff!important;font:600 12px/1.25 "Sarabun",sans-serif!important;text-align:center!important;box-shadow:none!important}html body main.container #infographic .report-card>.export-sheet{margin:0!important;max-width:100%!important}html body main.container #infographic .report-card>.export-sheet.landscape-sheet{zoom:.7}@media(max-width:1050px){html body main.container #infographic .report-pages{grid-template-columns:minmax(0,794px)!important}}</style></body>
 </html>
