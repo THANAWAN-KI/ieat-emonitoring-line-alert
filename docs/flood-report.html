@@ -306,6 +306,7 @@
     const renderHeight=Math.max(1,Math.round(sheet.offsetHeight||rect.height));
     const renderRoot=document.createElement("div");
     const clone=sheet.cloneNode(true);
+    clone.classList.add("report-render-clone","report-exporting");
     // Capture the map at its current extent before cloning the report.
     // html2canvas cannot read pixels inside an iframe.
     const liveFrames=[...sheet.querySelectorAll("iframe")];
