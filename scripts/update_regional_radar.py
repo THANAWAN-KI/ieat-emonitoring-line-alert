@@ -12,6 +12,9 @@ RADARS = {
     'lmp': ('https://weather.tmd.go.th/lmp/lmploop.gif', 410, 393),
     'skm': ('https://weather.tmd.go.th/skm/skmloop.gif', 437, 393),
     'hyi': ('https://weather.tmd.go.th/hyi/hyiLoop.gif', 414, 393),
+    'svp': ('https://weather.tmd.go.th/svp/svploop.gif', 400, 398),
+    'phs': ('https://weather.tmd.go.th/phs/phsloop.gif', 437, 393),
+    'kkn': ('https://weather.tmd.go.th/kkn/kknloop.gif', 436, 393),
 }
 PALETTE = [
     (202, 0, 0), (252, 0, 251), (229, 0, 229), (198, 0, 199),
@@ -32,12 +35,16 @@ def make_overlay(name, url, cx, cy):
     if len(data) > 15_000_000:
         raise ValueError('GIF exceeds size limit')
     source = Image.open(io.BytesIO(data))
-    if source.size != (800, 800) or source.n_frames < 2:
+    if source.size != ((936, 797) if name == 'svp' else (800, 800)) or source.n_frames < 2:
         raise ValueError('Unexpected TMD radar image')
     frames, durations = [], []
     for i in range(source.n_frames):
         source.seek(i)
         frame = source.convert('RGB')
+        if name == 'svp':
+            cropped = frame.crop((68, 0, 868, 797))
+            frame = Image.new('RGB', (800, 800))
+            frame.paste(cropped, (0, 0))
         # Match the discrete echo palette, excluding terrain, sea, labels, and legend.
         colors = frame.getcolors(640000) or []
         lookup = {
