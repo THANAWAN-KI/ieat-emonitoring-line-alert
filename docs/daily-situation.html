@@ -86,39 +86,11 @@ html body .radar-site-actions #export:hover{background:#51792d}
 }
 @media(max-width:360px){.radar-site-brand strong{font-size:12px}html body .radar-site-actions a,html body .radar-site-actions #export{font-size:11px!important;padding:5px!important}}
 </style>
-<style id="regional-radar-style">
-.regional-radar-panel{position:absolute;z-index:32;top:65px;left:14px;width:min(520px,calc(100% - 28px));max-height:calc(100% - 80px);overflow:auto;background:#fff;border:1px solid #dce2e9;border-radius:12px;box-shadow:0 8px 28px #172a3d42;padding:12px}
-.regional-radar-panel[hidden]{display:none}.regional-radar-panel h2{margin:0 0 8px;font-size:17px;color:#27313e}.regional-radar-options{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
-.regional-radar-options button[aria-pressed="true"]{background:#598c14;color:#fff;border-color:#598c14}.regional-radar-panel img{display:block;width:100%;max-height:min(58vh,600px);object-fit:contain;background:#f6f7f8}
-.regional-radar-panel p{margin:8px 0 0;font-size:12px;color:#555}.regional-radar-panel a{color:#245181}.regional-radar-panel .regional-radar-error{color:#b42318}
-@media(max-width:800px){.regional-radar-panel{top:58px;left:8px;width:calc(100% - 16px);max-height:calc(100% - 68px);padding:9px}.regional-radar-panel img{max-height:42vh}}
-</style>
+<style id="regional-radar-style">.radar-station-buttons{display:flex;gap:5px;flex-wrap:wrap}.radar-station-buttons button[aria-pressed="true"]{background:#598c14;color:white;border-color:#598c14}@media(max-width:800px){.radar-station-buttons{flex-wrap:nowrap}}</style>
 </head><body>
 <header class="radar-site-header"><a class="radar-site-brand" href="./daily-situation.html" aria-label="ไปหน้าแรก"><img src="./assets/TH-Vertical.png" alt="กนอ."><span><strong>ระบบสารสนเทศและการเชื่อมโยงข้อมูล</strong><small>เรดาร์ฝนระยองและนิคมอุตสาหกรรม</small></span></a><div class="radar-site-actions"><span id="radarClock" class="radar-site-clock"></span><a class="nav-active" href="./daily-situation.html" aria-current="page">หน้าแรก</a><a href="./information.html#overview">ข้อมูล</a><a href="./hub.html">Disaster</a><button id="export" class="primary">ส่งออกรายงาน</button></div></header><script>(function(){const clock=document.getElementById('radarClock');function tick(){clock.textContent='🌟'+new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok',weekday:'short',day:'2-digit',month:'short',year:'2-digit',hour:'2-digit',minute:'2-digit'})+' น.'}tick();setInterval(tick,30000)})();</script>
-<main class="layout"><section class="map-card"><div id="map"></div><img id="radarImage" alt="" aria-hidden="true" style="position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none"><div id="estateMarkers" aria-label="ตำแหน่งนิคมอุตสาหกรรม"></div><canvas id="radarCanvas" aria-label="ภาพฝนเรดาร์ระยอง กรองพื้นหลังออก" role="img" style="position:absolute;z-index:1;pointer-events:none;display:none"></canvas><nav class="toolbar" aria-label="แผนที่"><button id="country">ทั่วประเทศ</button><button id="east">ภาคตะวันออก</button><button id="rayong">ระยอง</button><button id="regionalRadarToggle" type="button" aria-controls="regionalRadarPanel" aria-expanded="false">เรดาร์ฝนอื่น ๆ</button><button id="radar">ซ่อนเรดาร์</button><label style="background:white;padding:7px;border-radius:8px">ความทึบ <input id="opacity" aria-label="ความทึบเรดาร์" type="range" min="0" max="100" value="100"></label></nav><section class="regional-radar-panel" id="regionalRadarPanel" aria-label="เรดาร์ฝนภูมิภาค" hidden><h2>เรดาร์ฝนใกล้พื้นที่นิคมอุตสาหกรรม</h2><div class="regional-radar-options" role="group" aria-label="เลือกสถานีเรดาร์"><button type="button" data-regional-radar="mhs" aria-pressed="false">แม่ฮ่องสอน</button><button type="button" data-regional-radar="lmp" aria-pressed="false">ลำพูน</button><button type="button" data-regional-radar="skm" aria-pressed="false">สมุทรสงคราม</button><button type="button" data-regional-radar="hyi" aria-pressed="false">หาดใหญ่</button></div><img id="regionalRadarImage" alt="" hidden><p id="regionalRadarMessage" role="status">เลือกสถานีเพื่อดูภาพเรดาร์ฝนเคลื่อนไหวจากกรมอุตุนิยมวิทยา</p><p><a id="regionalRadarSource" href="#" target="_blank" rel="noopener" hidden>เปิดหน้าต้นทางกรมอุตุนิยมวิทยา ↗</a></p></section><aside class="radar-legend" aria-label="คำอธิบายค่าสะท้อนเรดาร์ฝน"><strong>CMAX (dBZ)</strong><div class="legend-body"><div class="legend-gradient" aria-hidden="true"></div><div class="legend-ticks"><span>65+</span><span>50</span><span>40</span><span>30</span><span>20</span><span>10</span></div></div><small>ค่าสะท้อนเรดาร์ ยิ่งสูงสัญญาณฝนยิ่งเข้ม</small><a href="https://weather.tmd.go.th/ryg/rygloop.gif" target="_blank" rel="noopener">ดู GIF และเวลาเรดาร์จาก TMD ↗</a><div id="radarTime" aria-live="polite">กำลังตรวจภาพจาก TMD…</div></aside><div class="status" id="status" role="status">กำลังโหลดแผนที่และข้อมูลเรดาร์ระยอง…</div></section><aside class="side"><div class="side-head"><h2>จำนวนนิคมอุตสาหกรรมที่อยู่ในพื้นที่เรดาร์ <span id="count">—</span></h2><small>แสดงรายชื่อนิคมในรัศมีเรดาร์ระยอง · คลิกรายชื่อเพื่อซูม</small></div><ol class="list" id="estates"><li class="empty">กำลังโหลดข้อมูล IEAT…</li></ol><footer>รายการอ้างอิงจากฟิลด์ IEAT ของ EPP_2026_V1 · เรดาร์ระยองครอบคลุมเฉพาะพื้นที่รอบสถานี</footer></aside></main>
-<script id="regional-radar-controls">
-(()=>{
-  const sources={
-    mhs:{name:'แม่ฮ่องสอน',page:'https://weather.tmd.go.th/mhsloop.php',image:'https://weather.tmd.go.th/mhs/mhsloop.gif'},
-    lmp:{name:'ลำพูน',page:'https://weather.tmd.go.th/lmploop.php',image:'https://weather.tmd.go.th/lmp/lmploop.gif'},
-    skm:{name:'สมุทรสงคราม',page:'https://weather.tmd.go.th/skm240loop.php',image:'https://weather.tmd.go.th/skm/skmloop.gif'},
-    hyi:{name:'หาดใหญ่',page:'https://weather.tmd.go.th/hyiloop.php',image:'https://weather.tmd.go.th/hyi/hyiLoop.gif'}
-  };
-  const toggle=document.getElementById('regionalRadarToggle'),panel=document.getElementById('regionalRadarPanel');
-  const image=document.getElementById('regionalRadarImage'),message=document.getElementById('regionalRadarMessage'),link=document.getElementById('regionalRadarSource');
-  toggle.onclick=()=>{panel.hidden=!panel.hidden;toggle.setAttribute('aria-expanded',String(!panel.hidden));if(!panel.hidden&&!image.src)panel.querySelector('[data-regional-radar="mhs"]').click()};
-  panel.querySelectorAll('[data-regional-radar]').forEach(button=>button.onclick=()=>{
-    const source=sources[button.dataset.regionalRadar];
-    panel.querySelectorAll('[data-regional-radar]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
-    image.hidden=true;image.alt='ภาพเรดาร์ฝนเคลื่อนไหว '+source.name+' จากกรมอุตุนิยมวิทยา';
-    message.classList.remove('regional-radar-error');message.textContent='กำลังโหลดภาพเรดาร์ฝน'+source.name+'…';
-    link.href=source.page;link.hidden=false;
-    image.onload=()=>{image.hidden=false;message.textContent='ภาพเคลื่อนไหวจากกรมอุตุนิยมวิทยา · เวลาเรดาร์อ่านได้จากภาพต้นทาง'};
-    image.onerror=()=>{image.hidden=true;message.classList.add('regional-radar-error');message.textContent='โหลดภาพไม่สำเร็จ กรุณาเปิดหน้าต้นทางกรมอุตุนิยมวิทยา'};
-    image.src=source.image+'?t='+Date.now();
-  });
-})();
-</script>
+<main class="layout"><section class="map-card"><div id="map"></div><img id="radarImage" alt="" aria-hidden="true" style="position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none"><div id="estateMarkers" aria-label="ตำแหน่งนิคมอุตสาหกรรม"></div><img id="regionalRadarOverlay" alt="" aria-hidden="true" style="position:absolute;z-index:10;pointer-events:none;display:none"><canvas id="radarCanvas" aria-label="ภาพฝนเรดาร์ระยอง กรองพื้นหลังออก" role="img" style="position:absolute;z-index:1;pointer-events:none;display:none"></canvas><nav class="toolbar" aria-label="แผนที่"><button id="country">ทั่วประเทศ</button><button id="east">ภาคตะวันออก</button><span class="radar-station-buttons" role="group" aria-label="เลือกสถานีเรดาร์"><button type="button" data-station="ryg" aria-pressed="true">ระยอง</button><button type="button" data-station="mhs" aria-pressed="false">แม่ฮ่องสอน</button><button type="button" data-station="lmp" aria-pressed="false">ลำพูน</button><button type="button" data-station="skm" aria-pressed="false">สมุทรสงคราม</button><button type="button" data-station="hyi" aria-pressed="false">หาดใหญ่</button></span><button id="radar">ซ่อนเรดาร์</button><label style="background:white;padding:7px;border-radius:8px">ความทึบ <input id="opacity" aria-label="ความทึบเรดาร์" type="range" min="0" max="100" value="100"></label></nav><aside class="radar-legend" aria-label="คำอธิบายค่าสะท้อนเรดาร์ฝน"><strong>CMAX (dBZ)</strong><div class="legend-body"><div class="legend-gradient" aria-hidden="true"></div><div class="legend-ticks"><span>65+</span><span>50</span><span>40</span><span>30</span><span>20</span><span>10</span></div></div><small>ค่าสะท้อนเรดาร์ ยิ่งสูงสัญญาณฝนยิ่งเข้ม</small><a href="https://weather.tmd.go.th/ryg/rygloop.gif" target="_blank" rel="noopener">ดู GIF และเวลาเรดาร์จาก TMD ↗</a><div id="radarTime" aria-live="polite">กำลังตรวจภาพจาก TMD…</div></aside><div class="status" id="status" role="status">กำลังโหลดแผนที่และข้อมูลเรดาร์ระยอง…</div></section><aside class="side"><div class="side-head"><h2>จำนวนนิคมอุตสาหกรรมที่อยู่ในพื้นที่เรดาร์ <span id="count">—</span></h2><small>แสดงรายชื่อนิคมในรัศมีเรดาร์ระยอง · คลิกรายชื่อเพื่อซูม</small></div><ol class="list" id="estates"><li class="empty">กำลังโหลดข้อมูล IEAT…</li></ol><footer>รายการอ้างอิงจากฟิลด์ IEAT ของ EPP_2026_V1 · เรดาร์ระยองครอบคลุมเฉพาะพื้นที่รอบสถานี</footer></aside></main>
+
 <section class="report-view" id="reportView" hidden aria-label="ส่งออกรายงานเรดาร์"><div class="report-top"><h2>ส่งออกรายงานเรดาร์ฝนและนิคมอุตสาหกรรม</h2><button id="closeReport">กลับสู่แผนที่</button></div><div class="report-pages"><article class="report-card"><h3>หน้า 1 · เรดาร์ฝนระยอง</h3><div class="report-map-controls"><input id="reportEstateSearch" list="reportEstateOptions" placeholder="ค้นหาชื่อนิคมอุตสาหกรรม" aria-label="ค้นหานิคมอุตสาหกรรม"><datalist id="reportEstateOptions"></datalist><button id="reportSearchButton">ค้นหาและซูม</button><button id="reportZoomIn" aria-label="ซูมเข้า">＋</button><button id="reportZoomOut" aria-label="ซูมออก">－</button><button id="reportReset">ภาพรวมเรดาร์</button></div><div class="report-image" id="rayongReport" title="ลากเพื่อเลื่อนแผนที่ ใช้ล้อเมาส์เพื่อซูม"><img id="rayongReportImage" draggable="false" alt="แผนที่นิคมอุตสาหกรรมและภาพฝนเรดาร์ระยอง"></div><p>ลากแผนที่และใช้ล้อเมาส์เพื่อซูม หรือค้นหานิคมฯ ก่อนดาวน์โหลด</p><button data-save="rayong-png">ดาวน์โหลด PNG</button><button data-save="rayong-gif">ดาวน์โหลด GIF</button></article><article class="report-card"><h3>หน้า 2 · เรดาร์คอมโพสิททั่วประเทศ</h3><div class="report-image report-national"><img id="compositeReportImage" alt="Radar Composite QPF พร้อมตำแหน่งสำนักงานนิคมอุตสาหกรรมทั่วประเทศ"><div id="nationalReportPins" class="report-pins" aria-label="ตำแหน่งนิคมอุตสาหกรรมบนภาพเรดาร์"></div><div id="nationalClusterDetail" class="report-cluster-detail" hidden></div></div><p>ภาพ Radar Composite QPF พร้อมตำแหน่งสำนักงานนิคมฯ · ตัวเลขในวงกลมคือจำนวนตำแหน่งใกล้กัน คลิกเพื่อดูรายชื่อ</p><p id="compositeImageTime" aria-live="polite">กำลังตรวจวันเวลาของภาพ…</p><button data-save="national-png">ดาวน์โหลด PNG</button><button data-save="national-gif">ดาวน์โหลด GIF</button></article></div><p class="report-status" id="reportStatus" role="status"></p></section>
 <script>
 require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer','esri/geometry/Point','esri/geometry/Circle','esri/widgets/Search','esri/widgets/LayerList','esri/widgets/Legend','esri/widgets/Expand','esri/widgets/BasemapGallery','esri/layers/GraphicsLayer','esri/Graphic'],function(WebMap,EsriMap,MapView,FeatureLayer,Point,Circle,Search,LayerList,Legend,Expand,BasemapGallery,GraphicsLayer,Graphic){
@@ -127,6 +99,19 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
   const station={lat:12+38/60+1/3600,lon:101+20/60+26/3600};
   const latPerPixel=240/111.2/399,lonPerPixel=240/(111.2*Math.cos(station.lat*Math.PI/180))/399;
   const bounds={west:station.lon-410*lonPerPixel,east:station.lon+390*lonPerPixel,north:station.lat+395*latPerPixel,south:station.lat-405*latPerPixel};
+  const radarStations={
+    ryg:{name:'ระยอง',lat:station.lat,lon:station.lon,centerX:410,centerY:395,page:'https://weather.tmd.go.th/rygloop.php'},
+    mhs:{name:'แม่ฮ่องสอน',lat:19.30,lon:97.97,centerX:415,centerY:393,page:'https://weather.tmd.go.th/mhsloop.php'},
+    lmp:{name:'ลำพูน',lat:18.57,lon:99.039,centerX:410,centerY:393,page:'https://weather.tmd.go.th/lmploop.php'},
+    skm:{name:'สมุทรสงคราม',lat:13.40,lon:100.00,centerX:437,centerY:393,page:'https://weather.tmd.go.th/skm240loop.php'},
+    hyi:{name:'หาดใหญ่',lat:7.00,lon:100.46,centerX:414,centerY:393,page:'https://weather.tmd.go.th/hyiloop.php'}
+  };
+  const regionalOverlay=document.getElementById('regionalRadarOverlay');
+  let activeStation='ryg';
+  function stationBounds(item){
+    const latitude=240/111.2/390,longitude=240/(111.2*Math.cos(item.lat*Math.PI/180))/390;
+    return {west:item.lon-item.centerX*longitude,east:item.lon+(800-item.centerX)*longitude,north:item.lat+item.centerY*latitude,south:item.lat-(800-item.centerY)*latitude};
+  }
   const radarImage=document.getElementById('radarImage'),radarCanvas=document.getElementById('radarCanvas');
   const radarContext=radarCanvas.getContext('2d',{willReadFrequently:true});let radarVisible=true;
   radarCanvas.style.opacity='1';
@@ -149,10 +134,10 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
       lastRadarLoaded=Date.now();
       await startGifPlayback(blob);
       const fileTime=modified&&Number.isFinite(Date.parse(modified))?' · เวลาแก้ไขไฟล์ TMD '+thaiTime(modified):' · TMD ไม่ระบุเวลาแก้ไขไฟล์';
-      radarTime.textContent='ตรวจภาพจาก TMD '+thaiTime(lastRadarLoaded)+fileTime+(gifFrameCount>1?' · GIF '+gifFrameCount+' เฟรม':'')+' (เวลาเรดาร์จริงดูในภาพต้นทาง)';
+      if(activeStation==='ryg')radarTime.textContent='ตรวจภาพจาก TMD '+thaiTime(lastRadarLoaded)+fileTime+(gifFrameCount>1?' · GIF '+gifFrameCount+' เฟรม':'')+' (เวลาเรดาร์จริงดูในภาพต้นทาง)';
       setStatus('');
     }catch(error){
-      radarTime.textContent=lastRadarLoaded?'ดึงภาพใหม่ไม่สำเร็จ · แสดงภาพที่โหลดไว้เมื่อ '+thaiTime(lastRadarLoaded):'ยังโหลดภาพเรดาร์จาก TMD ไม่สำเร็จ';
+      if(activeStation==='ryg')radarTime.textContent=lastRadarLoaded?'ดึงภาพใหม่ไม่สำเร็จ · แสดงภาพที่โหลดไว้เมื่อ '+thaiTime(lastRadarLoaded):'ยังโหลดภาพเรดาร์จาก TMD ไม่สำเร็จ';
       setStatus('ดึงภาพเรดาร์ล่าสุดไม่สำเร็จ: '+error.message);
     }finally{radarLoading=false}
   }
@@ -271,7 +256,8 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
   const layerPanel=document.createElement('div');
   const radarControl=document.createElement('label');radarControl.className='radar-layer-control';
   const radarCheckbox=document.createElement('input');radarCheckbox.type='checkbox';radarCheckbox.checked=true;
-  radarControl.append(radarCheckbox,document.createTextNode('เรดาร์ฝนระยอง (TMD)'));
+  const radarControlText=document.createTextNode('เรดาร์ฝนระยอง (TMD)');
+  radarControl.append(radarCheckbox,radarControlText);
   layerPanel.append(radarControl,layerListContainer);
   view.ui.add(new Expand({view,content:layerPanel,expandIconClass:'esri-icon-layers',expandTooltip:'เปิดปิดชั้นข้อมูล'}),{position:'top-right',index:1});
   view.ui.add(new Expand({view,content:new Legend({view}),expandIconClass:'esri-icon-legend',expandTooltip:'คำอธิบายสัญลักษณ์'}),{position:'top-right',index:2});
@@ -312,12 +298,14 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
     });
     positionMarkers();
   }
-  const radarArea=new Circle({center:new Point({longitude:station.lon,latitude:station.lat}),radius:240,radiusUnit:'kilometers',geodesic:true});
+  let radarArea=new Circle({center:new Point({longitude:station.lon,latitude:station.lat}),radius:240,radiusUnit:'kilometers',geodesic:true});
   function positionRadar(){
-    if(!view.ready||!radarImage.complete||!radarImage.naturalWidth)return;
-    const nw=view.toScreen(new Point({longitude:bounds.west,latitude:bounds.north}));
-    const se=view.toScreen(new Point({longitude:bounds.east,latitude:bounds.south}));
-    Object.assign(radarCanvas.style,{left:nw.x+'px',top:nw.y+'px',width:(se.x-nw.x)+'px',height:(se.y-nw.y)+'px',display:radarVisible?'block':'none'});
+    if(!view.ready)return;
+    const area=activeStation==='ryg'?bounds:stationBounds(radarStations[activeStation]);
+    const nw=view.toScreen(new Point({longitude:area.west,latitude:area.north}));
+    const se=view.toScreen(new Point({longitude:area.east,latitude:area.south}));
+    const target=activeStation==='ryg'?radarCanvas:regionalOverlay;
+    Object.assign(target.style,{left:nw.x+'px',top:nw.y+'px',width:(se.x-nw.x)+'px',height:(se.y-nw.y)+'px',display:radarVisible?'block':'none'});
   }
   radarImage.onload=()=>{positionRadar();if(!activeDecoder)renderRadarFrame();setStatus('')};
   radarImage.onerror=()=>setStatus('โหลดภาพฝนระยองไม่สำเร็จ');
@@ -375,8 +363,23 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
   view.when(()=>{positionRadar();refresh();view.watch('extent',()=>{positionRadar();positionMarkers()})}).catch(e=>setStatus('เปิดแผนที่ กนอ. ไม่สำเร็จ: '+e.message));
   document.getElementById('country').onclick=()=>view.goTo({center:[101,13.3],zoom:6});
   document.getElementById('east').onclick=()=>view.goTo({center:[101.55,12.8],zoom:9});
-  document.getElementById('rayong').onclick=()=>view.goTo({center:[101.27,12.68],zoom:11});
-  function setRadarVisible(visible){radarVisible=visible;radarCheckbox.checked=visible;radarCanvas.style.display=visible?'block':'none';if(visible)renderRadarFrame();document.getElementById('radar').textContent=visible?'ซ่อนเรดาร์':'แสดงเรดาร์'}
+  function selectRadar(key){
+    const item=radarStations[key];if(!item)return;
+    activeStation=key;radarArea=new Circle({center:new Point({longitude:item.lon,latitude:item.lat}),radius:240,radiusUnit:'kilometers',geodesic:true});
+    document.querySelectorAll('[data-station]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.station===key)));
+    radarControlText.textContent='เรดาร์ฝน'+item.name+' (TMD)';
+    radarTime.textContent=key==='ryg'?'เรดาร์ระยอง · เวลาเรดาร์จริงดูในภาพต้นทาง':'เรดาร์'+item.name+' · ภาพชั้นฝนชุดวันที่ 26 ก.ย. 2569 (ยังไม่อัปเดตอัตโนมัติ) · เวลาเรดาร์จริงดูในภาพต้นทาง';
+    const source=document.querySelector('.radar-legend a');source.href=item.page;source.textContent='ดู GIF และเวลาเรดาร์จาก TMD ↗';
+    radarCanvas.style.display=key==='ryg'&&radarVisible?'block':'none';
+    regionalOverlay.style.display=key!=='ryg'&&radarVisible?'block':'none';
+    regionalOverlay.src=key==='ryg'?'':`./data/${key}-rain-overlay.gif?t=${Date.now()}`;
+    document.querySelector('.side-head small').textContent='แสดงรายชื่อนิคมในรัศมีเรดาร์'+item.name+' · คลิกรายชื่อเพื่อซูม';
+    positionRadar();refresh();view.goTo({center:[item.lon,item.lat],zoom:8}).catch(()=>{});
+  }
+  document.querySelectorAll('[data-station]').forEach(button=>button.onclick=()=>selectRadar(button.dataset.station));
+  regionalOverlay.onerror=()=>{if(activeStation!=='ryg')setStatus('ยังโหลดชั้นภาพเรดาร์'+radarStations[activeStation].name+'ไม่ได้ โปรดเปิดภาพต้นทางจากลิงก์ TMD')};
+  regionalOverlay.onload=()=>{if(activeStation!=='ryg')setStatus('')};
+  function setRadarVisible(visible){radarVisible=visible;radarCheckbox.checked=visible;radarCanvas.style.display=visible&&activeStation==='ryg'?'block':'none';regionalOverlay.style.display=visible&&activeStation!=='ryg'?'block':'none';if(visible&&activeStation==='ryg')renderRadarFrame();document.getElementById('radar').textContent=visible?'ซ่อนเรดาร์':'แสดงเรดาร์'}
   document.getElementById('radar').onclick=()=>setRadarVisible(!radarVisible);
   document.getElementById('opacity').oninput=e=>radarCanvas.style.opacity=Number(e.target.value)/100;
   const reportView=document.getElementById('reportView'),reportStatus=document.getElementById('reportStatus');
