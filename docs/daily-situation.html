@@ -189,8 +189,25 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
       next();
       radarTime.dataset.frames=String(count);
     }catch(error){
-      console.warn('Using browser GIF playback',error);
-      if(token===gifPlaybackToken)fallbackTimer=setInterval(renderRadarFrame,120);
+      console.warn('Using mobile-compatible GIF playback',error);
+      try{
+        const {createGifPlayer}=await import('./vendor/radar-gif-decoder.js');
+        const player=createGifPlayer(await blob.arrayBuffer());
+        if(token!==gifPlaybackToken)return;
+        gifFrameCount=player.frameCount;
+        radarTime.dataset.frames=String(player.frameCount);
+        if(player.frameCount<2)throw Error('GIF has only one frame');
+        const next=()=>{
+          if(token!==gifPlaybackToken)return;
+          const frame=player.next();
+          paintRadarFrame(frame.image,player.width,player.height);
+          gifFrameTimer=setTimeout(next,Math.max(50,Math.min(5000,frame.delay)));
+        };
+        next();
+      }catch(fallbackError){
+        console.warn('Mobile GIF decoding failed',fallbackError);
+        if(token===gifPlaybackToken)renderRadarFrame();
+      }
     }
   }
   const sourceMap=new WebMap({portalItem:{id:'3d24287ac6ea49cd823625ddad496e01'}});
