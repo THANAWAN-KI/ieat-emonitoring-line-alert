@@ -334,20 +334,31 @@ require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer
   document.getElementById('opacity').oninput=e=>radarCanvas.style.opacity=Number(e.target.value)/100;
   const reportView=document.getElementById('reportView'),reportStatus=document.getElementById('reportStatus');
   const qpfUrl='https://feature-tmd-ieat-radar-map-ieat-emonitoring-line-alert.thanawankaiyaso.workers.dev/api/composite-qpf.gif';
-  let nationalRadarLabel='ไม่ทราบวันเวลาภาพต้นทาง';
+  let nationalRadarLabel='ไม่ทราบวันเวลาภาพต้นทาง',nationalRadarCapture='';
   async function nationalRadarSource(){
     try{
       const response=await fetch('./data/composite-qpf.json?t='+Date.now(),{cache:'no-store'});
       if(!response.ok)throw Error('ยังไม่มีภาพรายวัน');
       const meta=await response.json();
-      if(!/^\d{4}-\d{2}-\d{2}T13:00:00\+07:00$/.test(meta.captured_at)||meta.image!=='assets/composite-qpf-1300.gif')throw Error('ข้อมูลวันเวลาภาพไม่ถูกต้อง');
-      nationalRadarLabel='ภาพวันที่ '+new Date(meta.captured_at).toLocaleDateString('th-TH',{timeZone:'Asia/Bangkok',dateStyle:'long'})+' เวลา 13:00 น. (ประเทศไทย)';
+      if(!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:00\+07:00$/.test(meta.captured_at)||meta.image!=='assets/composite-qpf-1300.gif')throw Error('ข้อมูลวันเวลาภาพไม่ถูกต้อง');
+      nationalRadarCapture=meta.captured_at;
+      nationalRadarLabel='ภาพวันที่ '+new Date(meta.captured_at).toLocaleString('th-TH',{timeZone:'Asia/Bangkok',dateStyle:'long',timeStyle:'short'})+' น. (ประเทศไทย)';
       return './'+meta.image+'?v='+encodeURIComponent(meta.captured_at);
     }catch(error){
       nationalRadarLabel='ภาพสำรองจากต้นทาง · ยังไม่สามารถยืนยันวันเวลาภาพได้';
       return qpfUrl+'?t='+Date.now();
     }
   }
+  // Refresh an open report when the daily publication arrives.
+  setInterval(async()=>{
+    if(reportView.hidden)return;
+    try{
+      const response=await fetch('./data/composite-qpf.json?t='+Date.now(),{cache:'no-store'});
+      if(!response.ok)return;
+      const meta=await response.json();
+      if(meta.captured_at&&meta.captured_at!==nationalRadarCapture)document.getElementById('export').click();
+    }catch(error){console.warn('ยังตรวจภาพเรดาร์รอบใหม่ไม่ได้',error)}
+  },180000);
   function reportMessage(message){reportStatus.textContent=message}
   function downloadBlob(blob,filename){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=filename;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000)}
   function loadImage(src){return new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=()=>reject(Error('โหลดภาพต้นทางไม่สำเร็จ'));img.src=src})}
