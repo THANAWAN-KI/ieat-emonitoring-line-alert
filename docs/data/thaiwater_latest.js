@@ -1,7 +1,7 @@
 window.IEAT_THAIWATER_DATA = {
   "schema_version": 2,
   "status": "ok",
-  "generated_at": "2026-09-26T05:22:49+07:00",
+  "generated_at": "2026-09-26T08:35:42+07:00",
   "methodology": {
     "watch_radius_km": 30.0,
     "display_radius_km": 50.0,
@@ -548,54 +548,9 @@ window.IEAT_THAIWATER_DATA = {
       "alert_station_count": 3,
       "rain_alert_count": 2,
       "water_alert_count": 1,
-      "max_rainfall_mm": 273.5,
+      "max_rainfall_mm": 313.0,
       "nearest_alert_km": 1.8,
-      "latest_observed_at": "2026-09-26 05:10"
-    },
-    {
-      "id": 31,
-      "name": "นิคมอุตสาหกรรมปิ่นทอง (โครงการ 2)",
-      "lat": 13.118954,
-      "lon": 101.033398,
-      "operations": "สายปฎิบัติการ2",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "alert_station_count": 3,
-      "rain_alert_count": 3,
-      "water_alert_count": 0,
-      "max_rainfall_mm": 261.2,
-      "nearest_alert_km": 5.5,
-      "latest_observed_at": "2026-09-26 05:00"
-    },
-    {
-      "id": 24,
-      "name": "นิคมอุตสาหกรรมบางพลี",
-      "lat": 13.565582,
-      "lon": 100.794583,
-      "operations": "สายปฎิบัติการ1",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "alert_station_count": 1,
-      "rain_alert_count": 1,
-      "water_alert_count": 0,
-      "max_rainfall_mm": 213.3,
-      "nearest_alert_km": 6.5,
-      "latest_observed_at": "2026-09-26 04:00"
-    },
-    {
-      "id": 1,
-      "name": "นิคมอุตสาหกรรมหนองแค",
-      "lat": 14.3863882,
-      "lon": 100.9035767,
-      "operations": "สายปฎิบัติการ1",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "alert_station_count": 6,
-      "rain_alert_count": 5,
-      "water_alert_count": 1,
-      "max_rainfall_mm": 205.5,
-      "nearest_alert_km": 10.4,
-      "latest_observed_at": "2026-09-26 05:10"
+      "latest_observed_at": "2026-09-26 08:20"
     },
     {
       "id": 42,
@@ -608,9 +563,39 @@ window.IEAT_THAIWATER_DATA = {
       "alert_station_count": 38,
       "rain_alert_count": 33,
       "water_alert_count": 5,
-      "max_rainfall_mm": 204.8,
+      "max_rainfall_mm": 233.8,
       "nearest_alert_km": 2.1,
-      "latest_observed_at": "2026-09-26 05:10"
+      "latest_observed_at": "2026-09-26 08:20"
+    },
+    {
+      "id": 31,
+      "name": "นิคมอุตสาหกรรมปิ่นทอง (โครงการ 2)",
+      "lat": 13.118954,
+      "lon": 101.033398,
+      "operations": "สายปฎิบัติการ2",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "alert_station_count": 3,
+      "rain_alert_count": 3,
+      "water_alert_count": 0,
+      "max_rainfall_mm": 221.2,
+      "nearest_alert_km": 5.5,
+      "latest_observed_at": "2026-09-26 08:00"
+    },
+    {
+      "id": 1,
+      "name": "นิคมอุตสาหกรรมหนองแค",
+      "lat": 14.3863882,
+      "lon": 100.9035767,
+      "operations": "สายปฎิบัติการ1",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "alert_station_count": 7,
+      "rain_alert_count": 6,
+      "water_alert_count": 1,
+      "max_rainfall_mm": 216.5,
+      "nearest_alert_km": 7.4,
+      "latest_observed_at": "2026-09-26 08:20"
     },
     {
       "id": 17,
@@ -623,9 +608,9 @@ window.IEAT_THAIWATER_DATA = {
       "alert_station_count": 7,
       "rain_alert_count": 5,
       "water_alert_count": 2,
-      "max_rainfall_mm": 204.2,
+      "max_rainfall_mm": 211.0,
       "nearest_alert_km": 7.7,
-      "latest_observed_at": "2026-09-26 05:10"
+      "latest_observed_at": "2026-09-26 08:20"
     },
     {
       "id": 4,
@@ -638,9 +623,24 @@ window.IEAT_THAIWATER_DATA = {
       "alert_station_count": 10,
       "rain_alert_count": 10,
       "water_alert_count": 0,
-      "max_rainfall_mm": 201.0,
+      "max_rainfall_mm": 200.6,
       "nearest_alert_km": 3.7,
-      "latest_observed_at": "2026-09-26 04:00"
+      "latest_observed_at": "2026-09-26 07:00"
+    },
+    {
+      "id": 24,
+      "name": "นิคมอุตสาหกรรมบางพลี",
+      "lat": 13.565582,
+      "lon": 100.794583,
+      "operations": "สายปฎิบัติการ1",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "alert_station_count": 1,
+      "rain_alert_count": 1,
+      "water_alert_count": 0,
+      "max_rainfall_mm": 199.4,
+      "nearest_alert_km": 6.5,
+      "latest_observed_at": "2026-09-26 07:00"
     },
     {
       "id": 18,
@@ -653,9 +653,9 @@ window.IEAT_THAIWATER_DATA = {
       "alert_station_count": 4,
       "rain_alert_count": 3,
       "water_alert_count": 1,
-      "max_rainfall_mm": 200.6,
+      "max_rainfall_mm": 193.8,
       "nearest_alert_km": 8.0,
-      "latest_observed_at": "2026-09-26 05:10"
+      "latest_observed_at": "2026-09-26 08:20"
     },
     {
       "id": 11,
@@ -668,9 +668,9 @@ window.IEAT_THAIWATER_DATA = {
       "alert_station_count": 11,
       "rain_alert_count": 7,
       "water_alert_count": 4,
-      "max_rainfall_mm": 193.2,
+      "max_rainfall_mm": 190.2,
       "nearest_alert_km": 2.4,
-      "latest_observed_at": "2026-09-26 05:10"
+      "latest_observed_at": "2026-09-26 08:20"
     },
     {
       "id": 3,
@@ -685,7 +685,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 3,
       "max_rainfall_mm": 186.5,
       "nearest_alert_km": 0.7,
-      "latest_observed_at": "2026-09-26 05:10"
+      "latest_observed_at": "2026-09-26 08:20"
     },
     {
       "id": 2,
@@ -698,9 +698,9 @@ window.IEAT_THAIWATER_DATA = {
       "alert_station_count": 16,
       "rain_alert_count": 14,
       "water_alert_count": 2,
-      "max_rainfall_mm": 178.6,
+      "max_rainfall_mm": 178.8,
       "nearest_alert_km": 2.0,
-      "latest_observed_at": "2026-09-26 05:10"
+      "latest_observed_at": "2026-09-26 08:20"
     },
     {
       "id": 9,
@@ -715,22 +715,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 2,
       "max_rainfall_mm": 159.6,
       "nearest_alert_km": 4.6,
-      "latest_observed_at": "2026-09-26 05:10"
-    },
-    {
-      "id": 32,
-      "name": "นิคมอุตสาหกรรมปิ่นทอง",
-      "lat": 13.12134595,
-      "lon": 100.9904306,
-      "operations": "สายปฎิบัติการ2",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "alert_station_count": 1,
-      "rain_alert_count": 1,
-      "water_alert_count": 0,
-      "max_rainfall_mm": 158.2,
-      "nearest_alert_km": 10.7,
-      "latest_observed_at": "2026-09-26 05:00"
+      "latest_observed_at": "2026-09-26 08:20"
     },
     {
       "id": 29,
@@ -743,24 +728,9 @@ window.IEAT_THAIWATER_DATA = {
       "alert_station_count": 2,
       "rain_alert_count": 2,
       "water_alert_count": 0,
-      "max_rainfall_mm": 149.8,
+      "max_rainfall_mm": 155.0,
       "nearest_alert_km": 6.4,
-      "latest_observed_at": "2026-09-26 04:00"
-    },
-    {
-      "id": 30,
-      "name": "นิคมอุตสาหกรรมอมตะซิตี้ ระยอง",
-      "lat": 13.024547,
-      "lon": 101.072437,
-      "operations": "สายปฎิบัติการ2",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "alert_station_count": 1,
-      "rain_alert_count": 1,
-      "water_alert_count": 0,
-      "max_rainfall_mm": 139.2,
-      "nearest_alert_km": 4.4,
-      "latest_observed_at": "2026-09-26 05:00"
+      "latest_observed_at": "2026-09-26 07:00"
     },
     {
       "id": 43,
@@ -773,24 +743,9 @@ window.IEAT_THAIWATER_DATA = {
       "alert_station_count": 57,
       "rain_alert_count": 53,
       "water_alert_count": 4,
-      "max_rainfall_mm": 138.2,
+      "max_rainfall_mm": 152.0,
       "nearest_alert_km": 2.6,
-      "latest_observed_at": "2026-09-26 05:10"
-    },
-    {
-      "id": 26,
-      "name": "นิคมอุตสาหกรรมแพรกษา",
-      "lat": 13.56903519,
-      "lon": 100.6528202,
-      "operations": "สายปฎิบัติการ1",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "alert_station_count": 5,
-      "rain_alert_count": 4,
-      "water_alert_count": 1,
-      "max_rainfall_mm": 137.0,
-      "nearest_alert_km": 10.8,
-      "latest_observed_at": "2026-09-26 05:00"
+      "latest_observed_at": "2026-09-26 08:20"
     },
     {
       "id": 21,
@@ -803,9 +758,9 @@ window.IEAT_THAIWATER_DATA = {
       "alert_station_count": 24,
       "rain_alert_count": 14,
       "water_alert_count": 10,
-      "max_rainfall_mm": 136.6,
+      "max_rainfall_mm": 142.4,
       "nearest_alert_km": 10.4,
-      "latest_observed_at": "2026-09-26 05:10"
+      "latest_observed_at": "2026-09-26 08:20"
     },
     {
       "id": 34,
@@ -818,24 +773,24 @@ window.IEAT_THAIWATER_DATA = {
       "alert_station_count": 5,
       "rain_alert_count": 5,
       "water_alert_count": 0,
-      "max_rainfall_mm": 134.0,
+      "max_rainfall_mm": 135.8,
       "nearest_alert_km": 3.8,
-      "latest_observed_at": "2026-09-26 04:50"
+      "latest_observed_at": "2026-09-26 07:50"
     },
     {
-      "id": 22,
-      "name": "นิคมอุตสาหกรรมหลักชัยเมืองยาง",
-      "lat": 12.72735973,
-      "lon": 101.455931,
-      "operations": "สายปฎิบัติการ3",
+      "id": 26,
+      "name": "นิคมอุตสาหกรรมแพรกษา",
+      "lat": 13.56903519,
+      "lon": 100.6528202,
+      "operations": "สายปฎิบัติการ1",
       "status": "วิกฤต",
       "severity_score": 4,
-      "alert_station_count": 12,
-      "rain_alert_count": 10,
-      "water_alert_count": 2,
-      "max_rainfall_mm": 133.0,
-      "nearest_alert_km": 3.0,
-      "latest_observed_at": "2026-09-26 05:10"
+      "alert_station_count": 5,
+      "rain_alert_count": 4,
+      "water_alert_count": 1,
+      "max_rainfall_mm": 131.2,
+      "nearest_alert_km": 10.8,
+      "latest_observed_at": "2026-09-26 08:00"
     },
     {
       "id": 8,
@@ -848,39 +803,39 @@ window.IEAT_THAIWATER_DATA = {
       "alert_station_count": 6,
       "rain_alert_count": 3,
       "water_alert_count": 3,
-      "max_rainfall_mm": 130.8,
+      "max_rainfall_mm": 129.0,
       "nearest_alert_km": 4.7,
-      "latest_observed_at": "2026-09-26 05:10"
+      "latest_observed_at": "2026-09-26 08:20"
     },
     {
-      "id": 85,
-      "name": "นิคมอุตสาหกรรมดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 5",
-      "lat": 12.844575469624841,
-      "lon": 101.23635660462234,
-      "operations": "",
+      "id": 22,
+      "name": "นิคมอุตสาหกรรมหลักชัยเมืองยาง",
+      "lat": 12.72735973,
+      "lon": 101.455931,
+      "operations": "สายปฎิบัติการ3",
       "status": "วิกฤต",
       "severity_score": 4,
-      "alert_station_count": 2,
-      "rain_alert_count": 1,
-      "water_alert_count": 1,
-      "max_rainfall_mm": 118.5,
-      "nearest_alert_km": 7.1,
-      "latest_observed_at": "2026-09-26 05:10"
+      "alert_station_count": 12,
+      "rain_alert_count": 10,
+      "water_alert_count": 2,
+      "max_rainfall_mm": 128.5,
+      "nearest_alert_km": 3.0,
+      "latest_observed_at": "2026-09-26 08:10"
     },
     {
-      "id": 27,
-      "name": "นิคมอุตสาหกรรมอีสเทิร์นซีบอร์ด (ระยอง)",
-      "lat": 13.0044858,
-      "lon": 101.1626075,
+      "id": 32,
+      "name": "นิคมอุตสาหกรรมปิ่นทอง",
+      "lat": 13.12134595,
+      "lon": 100.9904306,
       "operations": "สายปฎิบัติการ2",
       "status": "วิกฤต",
       "severity_score": 4,
       "alert_station_count": 1,
       "rain_alert_count": 1,
       "water_alert_count": 0,
-      "max_rainfall_mm": 113.6,
-      "nearest_alert_km": 5.9,
-      "latest_observed_at": "2026-09-26 05:00"
+      "max_rainfall_mm": 117.8,
+      "nearest_alert_km": 10.7,
+      "latest_observed_at": "2026-09-26 08:00"
     },
     {
       "id": 33,
@@ -893,69 +848,24 @@ window.IEAT_THAIWATER_DATA = {
       "alert_station_count": 1,
       "rain_alert_count": 1,
       "water_alert_count": 0,
-      "max_rainfall_mm": 113.0,
+      "max_rainfall_mm": 115.6,
       "nearest_alert_km": 14.8,
-      "latest_observed_at": "2026-09-26 05:00"
+      "latest_observed_at": "2026-09-26 08:00"
     },
     {
-      "id": 5,
-      "name": "นิคมอุตสาหกรรมนครหลวง",
-      "lat": 14.4893393,
-      "lon": 100.5957211,
-      "operations": "สายปฎิบัติการ1",
+      "id": 30,
+      "name": "นิคมอุตสาหกรรมอมตะซิตี้ ระยอง",
+      "lat": 13.024547,
+      "lon": 101.072437,
+      "operations": "สายปฎิบัติการ2",
       "status": "วิกฤต",
       "severity_score": 4,
-      "alert_station_count": 40,
-      "rain_alert_count": 21,
-      "water_alert_count": 19,
-      "max_rainfall_mm": 105.0,
-      "nearest_alert_km": 8.1,
-      "latest_observed_at": "2026-09-26 05:10"
-    },
-    {
-      "id": 84,
-      "name": "นิคมอุตสาหกรรมเฮอร์มีส",
-      "lat": 12.939485747704445,
-      "lon": 101.04139943537544,
-      "operations": "",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "alert_station_count": 2,
-      "rain_alert_count": 2,
+      "alert_station_count": 1,
+      "rain_alert_count": 1,
       "water_alert_count": 0,
-      "max_rainfall_mm": 101.0,
-      "nearest_alert_km": 7.6,
-      "latest_observed_at": "2026-09-26 04:00"
-    },
-    {
-      "id": 7,
-      "name": "นิคมอุตสาหกรรมบ้านหว้า",
-      "lat": 14.246309,
-      "lon": 100.610012,
-      "operations": "สายปฎิบัติการ1",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "alert_station_count": 15,
-      "rain_alert_count": 9,
-      "water_alert_count": 6,
-      "max_rainfall_mm": 99.0,
-      "nearest_alert_km": 4.7,
-      "latest_observed_at": "2026-09-26 05:10"
-    },
-    {
-      "id": 38,
-      "name": "นิคมอุตสาหกรรมเอเชีย",
-      "lat": 12.716494,
-      "lon": 101.105913,
-      "operations": "สายปฎิบัติการ3",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "alert_station_count": 3,
-      "rain_alert_count": 3,
-      "water_alert_count": 0,
-      "max_rainfall_mm": 98.4,
-      "nearest_alert_km": 13.8,
-      "latest_observed_at": "2026-09-26 05:00"
+      "max_rainfall_mm": 115.2,
+      "nearest_alert_km": 4.4,
+      "latest_observed_at": "2026-09-26 08:00"
     },
     {
       "id": 6,
@@ -968,9 +878,54 @@ window.IEAT_THAIWATER_DATA = {
       "alert_station_count": 5,
       "rain_alert_count": 4,
       "water_alert_count": 1,
-      "max_rainfall_mm": 95.6,
+      "max_rainfall_mm": 114.4,
       "nearest_alert_km": 7.9,
-      "latest_observed_at": "2026-09-26 05:10"
+      "latest_observed_at": "2026-09-26 08:20"
+    },
+    {
+      "id": 85,
+      "name": "นิคมอุตสาหกรรมดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 5",
+      "lat": 12.844575469624841,
+      "lon": 101.23635660462234,
+      "operations": "",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "alert_station_count": 2,
+      "rain_alert_count": 1,
+      "water_alert_count": 1,
+      "max_rainfall_mm": 110.5,
+      "nearest_alert_km": 7.1,
+      "latest_observed_at": "2026-09-26 08:20"
+    },
+    {
+      "id": 7,
+      "name": "นิคมอุตสาหกรรมบ้านหว้า",
+      "lat": 14.246309,
+      "lon": 100.610012,
+      "operations": "สายปฎิบัติการ1",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "alert_station_count": 15,
+      "rain_alert_count": 9,
+      "water_alert_count": 6,
+      "max_rainfall_mm": 93.4,
+      "nearest_alert_km": 4.7,
+      "latest_observed_at": "2026-09-26 08:20"
+    },
+    {
+      "id": 5,
+      "name": "นิคมอุตสาหกรรมนครหลวง",
+      "lat": 14.4893393,
+      "lon": 100.5957211,
+      "operations": "สายปฎิบัติการ1",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "alert_station_count": 39,
+      "rain_alert_count": 20,
+      "water_alert_count": 19,
+      "max_rainfall_mm": 74.6,
+      "nearest_alert_km": 8.1,
+      "latest_observed_at": "2026-09-26 08:20"
     },
     {
       "id": 20,
@@ -980,42 +935,57 @@ window.IEAT_THAIWATER_DATA = {
       "operations": "สายปฎิบัติการ2",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
-      "alert_station_count": 6,
-      "rain_alert_count": 5,
+      "alert_station_count": 2,
+      "rain_alert_count": 1,
       "water_alert_count": 1,
-      "max_rainfall_mm": 54.6,
-      "nearest_alert_km": 6.7,
-      "latest_observed_at": "2026-09-26 05:10"
+      "max_rainfall_mm": 38.6,
+      "nearest_alert_km": 8.1,
+      "latest_observed_at": "2026-09-26 08:00"
     },
     {
-      "id": 41,
-      "name": "นิคมอุตสาหกรรมสมาร์ท ปาร์ค",
-      "lat": 12.75079527,
-      "lon": 101.1226103,
-      "operations": "สายปฎิบัติการ3",
+      "id": 84,
+      "name": "นิคมอุตสาหกรรมเฮอร์มีส",
+      "lat": 12.939485747704445,
+      "lon": 101.04139943537544,
+      "operations": "",
       "status": "เสี่ยงสูง",
       "severity_score": 3,
-      "alert_station_count": 3,
-      "rain_alert_count": 3,
+      "alert_station_count": 2,
+      "rain_alert_count": 2,
       "water_alert_count": 0,
-      "max_rainfall_mm": 76.0,
-      "nearest_alert_km": 2.2,
-      "latest_observed_at": "2026-09-26 05:00"
+      "max_rainfall_mm": 85.0,
+      "nearest_alert_km": 7.6,
+      "latest_observed_at": "2026-09-26 07:00"
     },
     {
-      "id": 64,
-      "name": "นิคมอุตสาหกรรมแก่งคอย",
-      "lat": 14.624646,
-      "lon": 101.008107,
-      "operations": "สายปฎิบัติการ1",
-      "status": "วิกฤต",
+      "id": 27,
+      "name": "นิคมอุตสาหกรรมอีสเทิร์นซีบอร์ด (ระยอง)",
+      "lat": 13.0044858,
+      "lon": 101.1626075,
+      "operations": "สายปฎิบัติการ2",
+      "status": "เสี่ยงสูง",
       "severity_score": 3,
-      "alert_station_count": 9,
-      "rain_alert_count": 5,
-      "water_alert_count": 4,
-      "max_rainfall_mm": 55.5,
-      "nearest_alert_km": 0.8,
-      "latest_observed_at": "2026-09-26 05:10"
+      "alert_station_count": 1,
+      "rain_alert_count": 1,
+      "water_alert_count": 0,
+      "max_rainfall_mm": 84.2,
+      "nearest_alert_km": 5.9,
+      "latest_observed_at": "2026-09-26 08:00"
+    },
+    {
+      "id": 10,
+      "name": "นิคมอุตสาหกรรมราชบุรี",
+      "lat": 13.63729443,
+      "lon": 99.85002164,
+      "operations": "สายปฎิบัติการ1",
+      "status": "เสี่ยงสูง",
+      "severity_score": 3,
+      "alert_station_count": 7,
+      "rain_alert_count": 4,
+      "water_alert_count": 3,
+      "max_rainfall_mm": 72.0,
+      "nearest_alert_km": 3.7,
+      "latest_observed_at": "2026-09-26 08:20"
     },
     {
       "id": 39,
@@ -1028,9 +998,24 @@ window.IEAT_THAIWATER_DATA = {
       "alert_station_count": 2,
       "rain_alert_count": 1,
       "water_alert_count": 1,
-      "max_rainfall_mm": 48.6,
+      "max_rainfall_mm": 46.0,
       "nearest_alert_km": 7.2,
-      "latest_observed_at": "2026-09-26 05:00"
+      "latest_observed_at": "2026-09-26 08:00"
+    },
+    {
+      "id": 64,
+      "name": "นิคมอุตสาหกรรมแก่งคอย",
+      "lat": 14.624646,
+      "lon": 101.008107,
+      "operations": "สายปฎิบัติการ1",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "alert_station_count": 7,
+      "rain_alert_count": 3,
+      "water_alert_count": 4,
+      "max_rainfall_mm": 42.5,
+      "nearest_alert_km": 0.8,
+      "latest_observed_at": "2026-09-26 08:20"
     },
     {
       "id": 13,
@@ -1045,7 +1030,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 10,
       "max_rainfall_mm": null,
       "nearest_alert_km": 9.6,
-      "latest_observed_at": "2026-09-26 05:10"
+      "latest_observed_at": "2026-09-26 08:20"
     },
     {
       "id": 14,
@@ -1060,22 +1045,37 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 8,
       "max_rainfall_mm": null,
       "nearest_alert_km": 10.9,
-      "latest_observed_at": "2026-09-26 05:10"
+      "latest_observed_at": "2026-09-26 08:20"
     },
     {
-      "id": 10,
-      "name": "นิคมอุตสาหกรรมราชบุรี",
-      "lat": 13.63729443,
-      "lon": 99.85002164,
-      "operations": "สายปฎิบัติการ1",
+      "id": 41,
+      "name": "นิคมอุตสาหกรรมสมาร์ท ปาร์ค",
+      "lat": 12.75079527,
+      "lon": 101.1226103,
+      "operations": "สายปฎิบัติการ3",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
-      "alert_station_count": 7,
-      "rain_alert_count": 4,
-      "water_alert_count": 3,
-      "max_rainfall_mm": 69.0,
-      "nearest_alert_km": 3.7,
-      "latest_observed_at": "2026-09-26 05:10"
+      "alert_station_count": 3,
+      "rain_alert_count": 3,
+      "water_alert_count": 0,
+      "max_rainfall_mm": 69.4,
+      "nearest_alert_km": 2.2,
+      "latest_observed_at": "2026-09-26 08:00"
+    },
+    {
+      "id": 38,
+      "name": "นิคมอุตสาหกรรมเอเชีย",
+      "lat": 12.716494,
+      "lon": 101.105913,
+      "operations": "สายปฎิบัติการ3",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "alert_station_count": 3,
+      "rain_alert_count": 3,
+      "water_alert_count": 0,
+      "max_rainfall_mm": 64.4,
+      "nearest_alert_km": 13.8,
+      "latest_observed_at": "2026-09-26 08:00"
     },
     {
       "id": 86,
@@ -1085,12 +1085,12 @@ window.IEAT_THAIWATER_DATA = {
       "operations": "",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
-      "alert_station_count": 4,
-      "rain_alert_count": 4,
+      "alert_station_count": 3,
+      "rain_alert_count": 3,
       "water_alert_count": 0,
-      "max_rainfall_mm": 61.0,
+      "max_rainfall_mm": 51.6,
       "nearest_alert_km": 10.0,
-      "latest_observed_at": "2026-09-26 05:00"
+      "latest_observed_at": "2026-09-26 08:00"
     },
     {
       "id": 23,
@@ -1103,9 +1103,9 @@ window.IEAT_THAIWATER_DATA = {
       "alert_station_count": 1,
       "rain_alert_count": 1,
       "water_alert_count": 0,
-      "max_rainfall_mm": 59.6,
+      "max_rainfall_mm": 44.0,
       "nearest_alert_km": 20.7,
-      "latest_observed_at": "2026-09-25 19:00"
+      "latest_observed_at": "2026-09-26 07:00"
     },
     {
       "id": 12,
@@ -1115,12 +1115,12 @@ window.IEAT_THAIWATER_DATA = {
       "operations": "สายปฎิบัติการ1",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
-      "alert_station_count": 11,
+      "alert_station_count": 10,
       "rain_alert_count": 0,
-      "water_alert_count": 11,
+      "water_alert_count": 10,
       "max_rainfall_mm": null,
       "nearest_alert_km": 7.2,
-      "latest_observed_at": "2026-09-26 05:10"
+      "latest_observed_at": "2026-09-26 08:20"
     }
   ],
   "stations": [
@@ -1132,14 +1132,31 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บ้านโพธิ์",
       "lat": 13.58335,
       "lon": 101.070917,
-      "rainfall_mm": 273.5,
-      "value_text": "273.5 มม.",
-      "observed_at": "2026-09-26 04:00",
+      "rainfall_mm": 313.0,
+      "value_text": "313 มม.",
+      "observed_at": "2026-09-26 07:00",
       "status": "วิกฤต",
       "severity_score": 4,
       "distance_km": 8.5,
       "nearest_estate": "นิคมอุตสาหกรรมทีเอฟดี 1",
       "agency": "ชป."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บางปะกง",
+      "station_code": "BPK001",
+      "province": "ฉะเชิงเทรา",
+      "district": "บางปะกง",
+      "lat": 13.54901,
+      "lon": 101.00111,
+      "rainfall_mm": 282.6,
+      "value_text": "282.6 มม.",
+      "observed_at": "2026-09-26 08:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 1.8,
+      "nearest_estate": "นิคมอุตสาหกรรมทีเอฟดี 1",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -1149,13 +1166,30 @@ window.IEAT_THAIWATER_DATA = {
       "district": "เมืองนครนายก",
       "lat": 14.07064,
       "lon": 101.13746,
-      "rainfall_mm": 266.4,
-      "value_text": "266.4 มม.",
-      "observed_at": "2026-09-26 05:00",
+      "rainfall_mm": 281.6,
+      "value_text": "281.6 มม.",
+      "observed_at": "2026-09-26 08:00",
       "status": "วิกฤต",
       "severity_score": 4,
       "distance_km": 43.2,
       "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "คลองลาดพร้าว วัดบางบัว",
+      "station_code": "BKK021",
+      "province": "กรุงเทพมหานคร",
+      "district": "บางเขน",
+      "lat": 13.85402,
+      "lon": 100.58746,
+      "rainfall_mm": 233.8,
+      "value_text": "233.8 มม.",
+      "observed_at": "2026-09-26 08:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 7.0,
+      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก A",
       "agency": "สสน."
     },
     {
@@ -1166,48 +1200,14 @@ window.IEAT_THAIWATER_DATA = {
       "district": "ศรีราชา",
       "lat": 13.240835,
       "lon": 101.04208,
-      "rainfall_mm": 261.2,
-      "value_text": "261.2 มม.",
-      "observed_at": "2026-09-26 05:00",
+      "rainfall_mm": 221.2,
+      "value_text": "221.2 มม.",
+      "observed_at": "2026-09-26 08:00",
       "status": "วิกฤต",
       "severity_score": 4,
       "distance_km": 13.6,
       "nearest_estate": "นิคมอุตสาหกรรมปิ่นทอง (โครงการ 2)",
       "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "บางปะกง",
-      "station_code": "BPK001",
-      "province": "ฉะเชิงเทรา",
-      "district": "บางปะกง",
-      "lat": 13.54901,
-      "lon": 101.00111,
-      "rainfall_mm": 237.0,
-      "value_text": "237 มม.",
-      "observed_at": "2026-09-26 05:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 1.8,
-      "nearest_estate": "นิคมอุตสาหกรรมทีเอฟดี 1",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "สมุทรปราการ สกษ.",
-      "station_code": "48420",
-      "province": "สมุทรปราการ",
-      "district": "เมืองสมุทรปราการ",
-      "lat": 13.51667,
-      "lon": 100.76167,
-      "rainfall_mm": 213.3,
-      "value_text": "213.3 มม.",
-      "observed_at": "2026-09-26 04:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 6.5,
-      "nearest_estate": "นิคมอุตสาหกรรมบางพลี",
-      "agency": "อต."
     },
     {
       "kind": "rainfall",
@@ -1217,9 +1217,9 @@ window.IEAT_THAIWATER_DATA = {
       "district": "องครักษ์",
       "lat": 14.212921,
       "lon": 100.942453,
-      "rainfall_mm": 205.5,
-      "value_text": "205.5 มม.",
-      "observed_at": "2026-09-26 04:00",
+      "rainfall_mm": 216.5,
+      "value_text": "216.5 มม.",
+      "observed_at": "2026-09-26 07:00",
       "status": "วิกฤต",
       "severity_score": 4,
       "distance_km": 19.7,
@@ -1228,20 +1228,20 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "คลองลาดพร้าว วัดบางบัว",
-      "station_code": "BKK021",
-      "province": "กรุงเทพมหานคร",
-      "district": "บางเขน",
-      "lat": 13.85402,
-      "lon": 100.58746,
-      "rainfall_mm": 204.8,
-      "value_text": "204.8 มม.",
-      "observed_at": "2026-09-26 05:00",
+      "station": "บ้านโคกเขื่อน",
+      "station_code": "STN1976",
+      "province": "ปราจีนบุรี",
+      "district": "ประจันตคาม",
+      "lat": 14.159991,
+      "lon": 101.521952,
+      "rainfall_mm": 213.0,
+      "value_text": "213 มม.",
+      "observed_at": "2026-09-26 07:00",
       "status": "วิกฤต",
       "severity_score": 4,
-      "distance_km": 7.0,
-      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก A",
-      "agency": "สสน."
+      "distance_km": 31.6,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
+      "agency": "ทน."
     },
     {
       "kind": "rainfall",
@@ -1251,9 +1251,9 @@ window.IEAT_THAIWATER_DATA = {
       "district": "พนมสารคาม",
       "lat": 13.68338,
       "lon": 101.32512,
-      "rainfall_mm": 204.2,
-      "value_text": "204.2 มม.",
-      "observed_at": "2026-09-26 05:00",
+      "rainfall_mm": 211.0,
+      "value_text": "211 มม.",
+      "observed_at": "2026-09-26 08:00",
       "status": "วิกฤต",
       "severity_score": 4,
       "distance_km": 7.7,
@@ -1268,14 +1268,48 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บางนา",
       "lat": 13.66639,
       "lon": 100.60611,
-      "rainfall_mm": 201.0,
-      "value_text": "201 มม.",
-      "observed_at": "2026-09-26 04:00",
+      "rainfall_mm": 200.6,
+      "value_text": "200.6 มม.",
+      "observed_at": "2026-09-26 07:00",
       "status": "วิกฤต",
       "severity_score": 4,
       "distance_km": 11.2,
       "nearest_estate": "นิคมอุตสาหกรรมอัญธานี",
       "agency": "อต."
+    },
+    {
+      "kind": "rainfall",
+      "station": "สมุทรปราการ สกษ.",
+      "station_code": "48420",
+      "province": "สมุทรปราการ",
+      "district": "เมืองสมุทรปราการ",
+      "lat": 13.51667,
+      "lon": 100.76167,
+      "rainfall_mm": 199.4,
+      "value_text": "199.4 มม.",
+      "observed_at": "2026-09-26 07:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 6.5,
+      "nearest_estate": "นิคมอุตสาหกรรมบางพลี",
+      "agency": "อต."
+    },
+    {
+      "kind": "rainfall",
+      "station": "คลองแสนแสบ บางกะปิ",
+      "station_code": "BKK008",
+      "province": "กรุงเทพมหานคร",
+      "district": "บางกะปิ",
+      "lat": 13.76131,
+      "lon": 100.61601,
+      "rainfall_mm": 198.2,
+      "value_text": "198.2 มม.",
+      "observed_at": "2026-09-26 08:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 7.3,
+      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก A",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -1285,9 +1319,9 @@ window.IEAT_THAIWATER_DATA = {
       "district": "เมืองฉะเชิงเทรา",
       "lat": 13.74984,
       "lon": 101.07751,
-      "rainfall_mm": 200.6,
-      "value_text": "200.6 มม.",
-      "observed_at": "2026-09-26 05:00",
+      "rainfall_mm": 193.8,
+      "value_text": "193.8 มม.",
+      "observed_at": "2026-09-26 08:00",
       "status": "วิกฤต",
       "severity_score": 4,
       "distance_km": 20.5,
@@ -1302,13 +1336,30 @@ window.IEAT_THAIWATER_DATA = {
       "district": "นครชัยศรี",
       "lat": 13.79217,
       "lon": 100.19817,
-      "rainfall_mm": 193.2,
-      "value_text": "193.2 มม.",
-      "observed_at": "2026-09-26 05:00",
+      "rainfall_mm": 190.2,
+      "value_text": "190.2 มม.",
+      "observed_at": "2026-09-26 08:00",
       "status": "วิกฤต",
       "severity_score": 4,
       "distance_km": 27.8,
       "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "พนมสารคาม",
+      "station_code": "BPK004",
+      "province": "ฉะเชิงเทรา",
+      "district": "พนมสารคาม",
+      "lat": 13.72662,
+      "lon": 101.35298,
+      "rainfall_mm": 189.0,
+      "value_text": "189 มม.",
+      "observed_at": "2026-09-26 08:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 12.7,
+      "nearest_estate": "นิคมอุตสาหกรรมเกตเวย์ ซิตี้",
       "agency": "สสน."
     },
     {
@@ -1319,47 +1370,13 @@ window.IEAT_THAIWATER_DATA = {
       "district": "นครชัยศรี",
       "lat": 13.79036,
       "lon": 100.19051,
-      "rainfall_mm": 190.2,
-      "value_text": "190.2 มม.",
-      "observed_at": "2026-09-26 05:00",
+      "rainfall_mm": 187.8,
+      "value_text": "187.8 มม.",
+      "observed_at": "2026-09-26 08:00",
       "status": "วิกฤต",
       "severity_score": 4,
       "distance_km": 27.6,
       "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "หน่วยพิทักษ์ป่าอ่างช้างน้ำ",
-      "station_code": "MOU468",
-      "province": "ชลบุรี",
-      "district": "บ้านบึง",
-      "lat": 13.2743,
-      "lon": 101.082,
-      "rainfall_mm": 190.2,
-      "value_text": "190.2 มม.",
-      "observed_at": "2026-09-26 05:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 18.1,
-      "nearest_estate": "นิคมอุตสาหกรรมปิ่นทอง (โครงการ 2)",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "คลองแสนแสบ บางกะปิ",
-      "station_code": "BKK008",
-      "province": "กรุงเทพมหานคร",
-      "district": "บางกะปิ",
-      "lat": 13.76131,
-      "lon": 100.61601,
-      "rainfall_mm": 188.4,
-      "value_text": "188.4 มม.",
-      "observed_at": "2026-09-26 05:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 7.3,
-      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก A",
       "agency": "สสน."
     },
     {
@@ -1381,20 +1398,37 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "พนมสารคาม",
-      "station_code": "BPK004",
-      "province": "ฉะเชิงเทรา",
-      "district": "พนมสารคาม",
-      "lat": 13.72662,
-      "lon": 101.35298,
-      "rainfall_mm": 179.4,
-      "value_text": "179.4 มม.",
-      "observed_at": "2026-09-26 05:00",
+      "station": "อาคารเลขที่ ๙๐๑",
+      "station_code": "HII001",
+      "province": "กรุงเทพมหานคร",
+      "district": "จตุจักร",
+      "lat": 13.85604,
+      "lon": 100.57558,
+      "rainfall_mm": 181.0,
+      "value_text": "181 มม.",
+      "observed_at": "2026-09-26 08:00",
       "status": "วิกฤต",
       "severity_score": 4,
-      "distance_km": 12.7,
-      "nearest_estate": "นิคมอุตสาหกรรมเกตเวย์ ซิตี้",
+      "distance_km": 6.7,
+      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก A",
       "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "หน่วยพิทักษ์ป่าอ่างช้างน้ำ",
+      "station_code": "MOU468",
+      "province": "ชลบุรี",
+      "district": "บ้านบึง",
+      "lat": 13.2743,
+      "lon": 101.082,
+      "rainfall_mm": 180.4,
+      "value_text": "180.4 มม.",
+      "observed_at": "2026-09-26 08:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 18.1,
+      "nearest_estate": "นิคมอุตสาหกรรมปิ่นทอง (โครงการ 2)",
+      "agency": "พพภ"
     },
     {
       "kind": "rainfall",
@@ -1404,9 +1438,9 @@ window.IEAT_THAIWATER_DATA = {
       "district": "ลาดกระบัง",
       "lat": 13.7407,
       "lon": 100.79468,
-      "rainfall_mm": 178.6,
-      "value_text": "178.6 มม.",
-      "observed_at": "2026-09-26 05:00",
+      "rainfall_mm": 178.8,
+      "value_text": "178.8 มม.",
+      "observed_at": "2026-09-26 08:00",
       "status": "วิกฤต",
       "severity_score": 4,
       "distance_km": 2.0,
@@ -1421,14 +1455,48 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บางเสาธง",
       "lat": 13.67777,
       "lon": 100.7945,
-      "rainfall_mm": 175.8,
-      "value_text": "175.8 มม.",
-      "observed_at": "2026-09-26 05:00",
+      "rainfall_mm": 178.2,
+      "value_text": "178.2 มม.",
+      "observed_at": "2026-09-26 08:00",
       "status": "วิกฤต",
       "severity_score": 4,
       "distance_km": 9.0,
       "nearest_estate": "นิคมอุตสาหกรรมลาดกระบัง",
       "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "กรุงเทพฯ ท่าเรือคลองเตย",
+      "station_code": "48454",
+      "province": "กรุงเทพมหานคร",
+      "district": "คลองเตย",
+      "lat": 13.70694,
+      "lon": 100.56805,
+      "rainfall_mm": 176.4,
+      "value_text": "176.4 มม.",
+      "observed_at": "2026-09-26 07:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 10.1,
+      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก A",
+      "agency": "อต."
+    },
+    {
+      "kind": "rainfall",
+      "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ขญ.๑๐ (ประจันตคาม)",
+      "station_code": "MOU115",
+      "province": "ปราจีนบุรี",
+      "district": "ประจันตคาม",
+      "lat": 14.181167,
+      "lon": 101.592064,
+      "rainfall_mm": 174.8,
+      "value_text": "174.8 มม.",
+      "observed_at": "2026-09-26 08:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 31.3,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
+      "agency": "พพภ"
     },
     {
       "kind": "rainfall",
@@ -1438,9 +1506,9 @@ window.IEAT_THAIWATER_DATA = {
       "district": "คลองเตย",
       "lat": 13.72639,
       "lon": 100.56,
-      "rainfall_mm": 168.3,
-      "value_text": "168.3 มม.",
-      "observed_at": "2026-09-26 04:00",
+      "rainfall_mm": 169.4,
+      "value_text": "169.4 มม.",
+      "observed_at": "2026-09-26 07:00",
       "status": "วิกฤต",
       "severity_score": 4,
       "distance_km": 7.9,
@@ -1449,36 +1517,19 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "ฉะเชิงเทรา",
-      "station_code": "48458",
+      "station": "อบต.ดอนฉิมพลี",
+      "station_code": "DKLG",
       "province": "ฉะเชิงเทรา",
-      "district": "สนามชัยเขต",
-      "lat": 13.51556,
-      "lon": 101.45833,
-      "rainfall_mm": 166.2,
-      "value_text": "166.2 มม.",
-      "observed_at": "2026-09-26 04:00",
+      "district": "บางน้ำเปรี้ยว",
+      "lat": 13.90535,
+      "lon": 100.97028,
+      "rainfall_mm": 165.6,
+      "value_text": "165.6 มม.",
+      "observed_at": "2026-09-26 08:00",
       "status": "วิกฤต",
       "severity_score": 4,
-      "distance_km": 17.8,
-      "nearest_estate": "นิคมอุตสาหกรรมเกตเวย์ ซิตี้",
-      "agency": "อต."
-    },
-    {
-      "kind": "rainfall",
-      "station": "อาคารเลขที่ ๙๐๑",
-      "station_code": "HII001",
-      "province": "กรุงเทพมหานคร",
-      "district": "จตุจักร",
-      "lat": 13.85604,
-      "lon": 100.57558,
-      "rainfall_mm": 165.0,
-      "value_text": "165 มม.",
-      "observed_at": "2026-09-26 05:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 6.7,
-      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก A",
+      "distance_km": 25.5,
+      "nearest_estate": "นิคมอุตสาหกรรมลาดกระบัง",
       "agency": "สสน."
     },
     {
@@ -1517,6 +1568,23 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
+      "station": "คลองจระเข้ใหญ่ บางเสาธง (วัดศรีวารีน้อย)",
+      "station_code": "BKK017",
+      "province": "สมุทรปราการ",
+      "district": "บางเสาธง",
+      "lat": 13.66949,
+      "lon": 100.80058,
+      "rainfall_mm": 160.6,
+      "value_text": "160.6 มม.",
+      "observed_at": "2026-09-26 08:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 9.9,
+      "nearest_estate": "นิคมอุตสาหกรรมลาดกระบัง",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
       "station": "คลองภาษีเจริญ เพชรเกษม69",
       "station_code": "BKK005",
       "province": "กรุงเทพมหานคร",
@@ -1534,36 +1602,19 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "คลองจระเข้ใหญ่ บางเสาธง (วัดศรีวารีน้อย)",
-      "station_code": "BKK017",
-      "province": "สมุทรปราการ",
-      "district": "บางเสาธง",
-      "lat": 13.66949,
-      "lon": 100.80058,
-      "rainfall_mm": 158.6,
-      "value_text": "158.6 มม.",
-      "observed_at": "2026-09-26 05:00",
+      "station": "อบต.บุพราหมณ์",
+      "station_code": "TLAN",
+      "province": "ปราจีนบุรี",
+      "district": "นาดี",
+      "lat": 14.20791,
+      "lon": 101.90556,
+      "rainfall_mm": 159.2,
+      "value_text": "159.2 มม.",
+      "observed_at": "2026-09-26 08:00",
       "status": "วิกฤต",
       "severity_score": 4,
-      "distance_km": 9.9,
-      "nearest_estate": "นิคมอุตสาหกรรมลาดกระบัง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "สถานีวิจัยประมงศรีราชา",
-      "station_code": "GOT001",
-      "province": "ชลบุรี",
-      "district": "ศรีราชา",
-      "lat": 13.185876,
-      "lon": 100.916916,
-      "rainfall_mm": 158.2,
-      "value_text": "158.2 มม.",
-      "observed_at": "2026-09-26 05:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 10.7,
-      "nearest_estate": "นิคมอุตสาหกรรมปิ่นทอง",
+      "distance_km": 43.2,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
       "agency": "สสน."
     },
     {
@@ -1585,37 +1636,37 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "สนามบินสุวรรณภูมิ",
-      "station_code": "48429",
-      "province": "สมุทรปราการ",
-      "district": "บางพลี",
-      "lat": 13.68639,
-      "lon": 100.7675,
-      "rainfall_mm": 156.6,
-      "value_text": "156.6 มม.",
-      "observed_at": "2026-09-26 04:00",
+      "station": "ฉะเชิงเทรา",
+      "station_code": "48458",
+      "province": "ฉะเชิงเทรา",
+      "district": "สนามชัยเขต",
+      "lat": 13.51556,
+      "lon": 101.45833,
+      "rainfall_mm": 156.7,
+      "value_text": "156.7 มม.",
+      "observed_at": "2026-09-26 07:00",
       "status": "วิกฤต",
       "severity_score": 4,
-      "distance_km": 6.5,
-      "nearest_estate": "นิคมอุตสาหกรรมอัญธานี",
+      "distance_km": 17.8,
+      "nearest_estate": "นิคมอุตสาหกรรมเกตเวย์ ซิตี้",
       "agency": "อต."
     },
     {
       "kind": "rainfall",
-      "station": "อบต.บุพราหมณ์",
-      "station_code": "TLAN",
-      "province": "ปราจีนบุรี",
-      "district": "นาดี",
-      "lat": 14.20791,
-      "lon": 101.90556,
-      "rainfall_mm": 156.4,
-      "value_text": "156.4 มม.",
-      "observed_at": "2026-09-26 05:00",
+      "station": "ปากแม่น้ำบางปะกง",
+      "station_code": "ridtele_TKgt54",
+      "province": "ฉะเชิงเทรา",
+      "district": "บางปะกง",
+      "lat": 13.474833,
+      "lon": 100.98196,
+      "rainfall_mm": 155.0,
+      "value_text": "155 มม.",
+      "observed_at": "2026-09-26 07:00",
       "status": "วิกฤต",
       "severity_score": 4,
-      "distance_km": 43.2,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
-      "agency": "สสน."
+      "distance_km": 6.4,
+      "nearest_estate": "นิคมอุตสาหกรรมอมตะซิตี้ ชลบุรี",
+      "agency": "ชป."
     },
     {
       "kind": "rainfall",
@@ -1636,23 +1687,6 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "โรงเรียนบ้านหินเทิน",
-      "station_code": "ONE071",
-      "province": "ปราจีนบุรี",
-      "district": "นาดี",
-      "lat": 14.064819,
-      "lon": 102.01052,
-      "rainfall_mm": 154.6,
-      "value_text": "154.6 มม.",
-      "observed_at": "2026-09-26 05:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 42.4,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
       "station": "สนข.สะพานสูง",
       "station_code": "RF.SPS.01",
       "province": "กรุงเทพมหานคร",
@@ -1667,6 +1701,74 @@ window.IEAT_THAIWATER_DATA = {
       "distance_km": 4.4,
       "nearest_estate": "นิคมอุตสาหกรรมบางชัน",
       "agency": "สนน กทม."
+    },
+    {
+      "kind": "rainfall",
+      "station": "คลองลาดพร้าว ปากคลอง2สายใต้",
+      "station_code": "BKK020",
+      "province": "กรุงเทพมหานคร",
+      "district": "ลาดพร้าว",
+      "lat": 13.93183,
+      "lon": 100.63952,
+      "rainfall_mm": 152.6,
+      "value_text": "152.6 มม.",
+      "observed_at": "2026-09-26 08:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 15.9,
+      "nearest_estate": "นิคมอุตสาหกรรมบางชัน",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "สนามบินสุวรรณภูมิ",
+      "station_code": "48429",
+      "province": "สมุทรปราการ",
+      "district": "บางพลี",
+      "lat": 13.68639,
+      "lon": 100.7675,
+      "rainfall_mm": 152.4,
+      "value_text": "152.4 มม.",
+      "observed_at": "2026-09-26 07:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 6.5,
+      "nearest_estate": "นิคมอุตสาหกรรมอัญธานี",
+      "agency": "อต."
+    },
+    {
+      "kind": "rainfall",
+      "station": "สมบูรณ์",
+      "station_code": "ridtele_TNy9",
+      "province": "นครนายก",
+      "district": "องครักษ์",
+      "lat": 13.970389,
+      "lon": 101.138699,
+      "rainfall_mm": 152.0,
+      "value_text": "152 มม.",
+      "observed_at": "2026-09-26 07:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 42.4,
+      "nearest_estate": "นิคมอุตสาหกรรมเอเซีย (สุวรรณภูมิ)",
+      "agency": "ชป."
+    },
+    {
+      "kind": "rainfall",
+      "station": "สะพานนวลฉวี",
+      "station_code": "CPY014",
+      "province": "นนทบุรี",
+      "district": "ปากเกร็ด",
+      "lat": 13.94749,
+      "lon": 100.53507,
+      "rainfall_mm": 152.0,
+      "value_text": "152 มม.",
+      "observed_at": "2026-09-26 08:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 16.9,
+      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก B",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -1687,6 +1789,23 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
+      "station": "ปราจีนบุรี",
+      "station_code": "48430",
+      "province": "ปราจีนบุรี",
+      "district": "เมืองปราจีนบุรี",
+      "lat": 14.05842,
+      "lon": 101.3693,
+      "rainfall_mm": 151.3,
+      "value_text": "151.3 มม.",
+      "observed_at": "2026-09-26 07:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 35.0,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
+      "agency": "อต."
+    },
+    {
+      "kind": "rainfall",
       "station": "ปตร.คลองแสนแสบ-บางชัน",
       "station_code": "RF.SPS.02",
       "province": "กรุงเทพมหานคร",
@@ -1704,20 +1823,54 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "ชลบุรี",
-      "station_code": "48459",
-      "province": "ชลบุรี",
-      "district": "เมืองชลบุรี",
-      "lat": 13.36667,
-      "lon": 100.98333,
-      "rainfall_mm": 149.8,
-      "value_text": "149.8 มม.",
-      "observed_at": "2026-09-25 22:00",
+      "station": "บ้านตะเภาลาย",
+      "station_code": "ridtele_TKgt53",
+      "province": "ปราจีนบุรี",
+      "district": "บ้านสร้าง",
+      "lat": 14.012733,
+      "lon": 101.265193,
+      "rainfall_mm": 148.5,
+      "value_text": "148.5 มม.",
+      "observed_at": "2026-09-26 07:00",
       "status": "วิกฤต",
       "severity_score": 4,
-      "distance_km": 6.5,
-      "nearest_estate": "นิคมอุตสาหกรรมอมตะซิตี้ ชลบุรี",
-      "agency": "อต."
+      "distance_km": 43.5,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
+      "agency": "ชป."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านท่ามะปราง",
+      "station_code": "STN1584",
+      "province": "นครนายก",
+      "district": "ปากพลี",
+      "lat": 14.222935,
+      "lon": 101.356088,
+      "rainfall_mm": 148.5,
+      "value_text": "148.5 มม.",
+      "observed_at": "2026-09-26 07:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 47.6,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "วัดห้วยเกษียร",
+      "station_code": "ONE076",
+      "province": "ปราจีนบุรี",
+      "district": "เมืองปราจีนบุรี",
+      "lat": 14.181127,
+      "lon": 101.413635,
+      "rainfall_mm": 147.6,
+      "value_text": "147.6 มม.",
+      "observed_at": "2026-09-26 08:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 40.0,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -1735,23 +1888,6 @@ window.IEAT_THAIWATER_DATA = {
       "distance_km": 4.7,
       "nearest_estate": "นิคมอุตสาหกรรมลาดกระบัง",
       "agency": "สนน กทม."
-    },
-    {
-      "kind": "rainfall",
-      "station": "คลองลาดพร้าว ปากคลอง2สายใต้",
-      "station_code": "BKK020",
-      "province": "กรุงเทพมหานคร",
-      "district": "ลาดพร้าว",
-      "lat": 13.93183,
-      "lon": 100.63952,
-      "rainfall_mm": 146.4,
-      "value_text": "146.4 มม.",
-      "observed_at": "2026-09-26 05:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 15.9,
-      "nearest_estate": "นิคมอุตสาหกรรมบางชัน",
-      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -1789,6 +1925,23 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
+      "station": "อบต.นาแขม",
+      "station_code": "VLGE50",
+      "province": "ปราจีนบุรี",
+      "district": "กบินทร์บุรี",
+      "lat": 14.04255,
+      "lon": 101.72051,
+      "rainfall_mm": 142.4,
+      "value_text": "142.4 มม.",
+      "observed_at": "2026-09-26 08:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 16.8,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
       "station": "ส.คลองเจ้าคุณสิงห์",
       "station_code": "RF.WTL.03",
       "province": "กรุงเทพมหานคร",
@@ -1803,6 +1956,23 @@ window.IEAT_THAIWATER_DATA = {
       "distance_km": 7.2,
       "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก A",
       "agency": "สนน กทม."
+    },
+    {
+      "kind": "rainfall",
+      "station": "คลองลาดพร้าว ท้ายปตร.คลอง2",
+      "station_code": "BKK001",
+      "province": "กรุงเทพมหานคร",
+      "district": "สายไหม",
+      "lat": 13.92245,
+      "lon": 100.63438,
+      "rainfall_mm": 140.8,
+      "value_text": "140.8 มม.",
+      "observed_at": "2026-09-26 08:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 15.2,
+      "nearest_estate": "นิคมอุตสาหกรรมบางชัน",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -1823,40 +1993,6 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "อบต.ดอนฉิมพลี",
-      "station_code": "DKLG",
-      "province": "ฉะเชิงเทรา",
-      "district": "บางน้ำเปรี้ยว",
-      "lat": 13.90535,
-      "lon": 100.97028,
-      "rainfall_mm": 140.0,
-      "value_text": "140 มม.",
-      "observed_at": "2026-09-26 05:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 25.5,
-      "nearest_estate": "นิคมอุตสาหกรรมลาดกระบัง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "รพสต.บ่อวิน",
-      "station_code": "SWNG",
-      "province": "ชลบุรี",
-      "district": "ศรีราชา",
-      "lat": 13.05505,
-      "lon": 101.09782,
-      "rainfall_mm": 139.2,
-      "value_text": "139.2 มม.",
-      "observed_at": "2026-09-26 05:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 4.4,
-      "nearest_estate": "นิคมอุตสาหกรรมอมตะซิตี้ ระยอง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
       "station": "จุดวัด ค.ลำชะล่า-ถ.นวมินทร์",
       "station_code": "RF.KNY.02",
       "province": "กรุงเทพมหานคร",
@@ -1874,19 +2010,19 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "สะพานนวลฉวี",
-      "station_code": "CPY014",
-      "province": "นนทบุรี",
-      "district": "ปากเกร็ด",
-      "lat": 13.94749,
-      "lon": 100.53507,
+      "station": "อบต.นาหินลาด",
+      "station_code": "BHUN",
+      "province": "นครนายก",
+      "district": "ปากพลี",
+      "lat": 14.20724,
+      "lon": 101.35025,
       "rainfall_mm": 138.2,
       "value_text": "138.2 มม.",
-      "observed_at": "2026-09-26 05:00",
+      "observed_at": "2026-09-26 08:00",
       "status": "วิกฤต",
       "severity_score": 4,
-      "distance_km": 16.9,
-      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก B",
+      "distance_km": 46.8,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
       "agency": "สสน."
     },
     {
@@ -1908,40 +2044,6 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "คลองลาดพร้าว ท้ายปตร.คลอง2",
-      "station_code": "BKK001",
-      "province": "กรุงเทพมหานคร",
-      "district": "สายไหม",
-      "lat": 13.92245,
-      "lon": 100.63438,
-      "rainfall_mm": 137.4,
-      "value_text": "137.4 มม.",
-      "observed_at": "2026-09-26 05:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 15.2,
-      "nearest_estate": "นิคมอุตสาหกรรมบางชัน",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "อบต.แหลมฟ้าผ่า",
-      "station_code": "PPCH",
-      "province": "สมุทรปราการ",
-      "district": "พระสมุทรเจดีย์",
-      "lat": 13.54701,
-      "lon": 100.53756,
-      "rainfall_mm": 137.0,
-      "value_text": "137 มม.",
-      "observed_at": "2026-09-26 05:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 12.7,
-      "nearest_estate": "นิคมอุตสาหกรรมแพรกษา",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
       "station": "ปากคลองตลาด",
       "station_code": "RF.PNK.03",
       "province": "กรุงเทพมหานคร",
@@ -1956,40 +2058,6 @@ window.IEAT_THAIWATER_DATA = {
       "distance_km": 9.3,
       "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก B",
       "agency": "สนน กทม."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ทต.กรอกสมบูรณ์",
-      "station_code": "RBPI",
-      "province": "ปราจีนบุรี",
-      "district": "ศรีมหาโพธิ",
-      "lat": 13.77716,
-      "lon": 101.65875,
-      "rainfall_mm": 136.6,
-      "value_text": "136.6 มม.",
-      "observed_at": "2026-09-26 05:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 14.4,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "สำนักสงฆ์โสธรรมนิมิตร",
-      "station_code": "ONE064",
-      "province": "ชลบุรี",
-      "district": "ศรีราชา",
-      "lat": 13.168441,
-      "lon": 101.03034,
-      "rainfall_mm": 136.6,
-      "value_text": "136.6 มม.",
-      "observed_at": "2026-09-26 05:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 5.5,
-      "nearest_estate": "นิคมอุตสาหกรรมปิ่นทอง (โครงการ 2)",
-      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -2027,6 +2095,23 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
+      "station": "เกาะสีชัง",
+      "station_code": "48460",
+      "province": "ชลบุรี",
+      "district": "เกาะสีชัง",
+      "lat": 13.16167,
+      "lon": 100.80194,
+      "rainfall_mm": 135.8,
+      "value_text": "135.8 มม.",
+      "observed_at": "2026-09-26 07:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 15.0,
+      "nearest_estate": "นิคมอุตสาหกรรมแหลมฉบัง",
+      "agency": "อต."
+    },
+    {
+      "kind": "rainfall",
       "station": "สนข.พญาไท",
       "station_code": "RF.PYT.01",
       "province": "กรุงเทพมหานคร",
@@ -2061,88 +2146,37 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "สมบูรณ์",
-      "station_code": "ridtele_TNy9",
-      "province": "นครนายก",
-      "district": "องครักษ์",
-      "lat": 13.970389,
-      "lon": 101.138699,
-      "rainfall_mm": 134.5,
-      "value_text": "134.5 มม.",
-      "observed_at": "2026-09-26 04:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 42.4,
-      "nearest_estate": "นิคมอุตสาหกรรมเอเซีย (สุวรรณภูมิ)",
-      "agency": "ชป."
-    },
-    {
-      "kind": "rainfall",
-      "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ขญ.๑๐ (ประจันตคาม)",
-      "station_code": "MOU115",
+      "station": "ทต.กรอกสมบูรณ์",
+      "station_code": "RBPI",
       "province": "ปราจีนบุรี",
-      "district": "ประจันตคาม",
-      "lat": 14.181167,
-      "lon": 101.592064,
-      "rainfall_mm": 134.4,
-      "value_text": "134.4 มม.",
-      "observed_at": "2026-09-26 05:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 31.3,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "สนามบินดอนเมือง",
-      "station_code": "48456",
-      "province": "กรุงเทพมหานคร",
-      "district": "ดอนเมือง",
-      "lat": 13.91917,
-      "lon": 100.605,
-      "rainfall_mm": 134.2,
-      "value_text": "134.2 มม.",
-      "observed_at": "2026-09-26 04:00",
+      "district": "ศรีมหาโพธิ",
+      "lat": 13.77716,
+      "lon": 101.65875,
+      "rainfall_mm": 135.4,
+      "value_text": "135.4 มม.",
+      "observed_at": "2026-09-26 08:00",
       "status": "วิกฤต",
       "severity_score": 4,
       "distance_km": 14.4,
-      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก A",
-      "agency": "อต."
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
-      "station": "เกาะสีชัง",
-      "station_code": "48460",
+      "station": "ชลบุรี",
+      "station_code": "48459",
       "province": "ชลบุรี",
-      "district": "เกาะสีชัง",
-      "lat": 13.16167,
-      "lon": 100.80194,
+      "district": "เมืองชลบุรี",
+      "lat": 13.36667,
+      "lon": 100.98333,
       "rainfall_mm": 134.0,
       "value_text": "134 มม.",
-      "observed_at": "2026-09-26 04:00",
+      "observed_at": "2026-09-26 07:00",
       "status": "วิกฤต",
       "severity_score": 4,
-      "distance_km": 15.0,
-      "nearest_estate": "นิคมอุตสาหกรรมแหลมฉบัง",
+      "distance_km": 6.5,
+      "nearest_estate": "นิคมอุตสาหกรรมอมตะซิตี้ ชลบุรี",
       "agency": "อต."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านยุบตาเหน่ง",
-      "station_code": "STN1664",
-      "province": "ระยอง",
-      "district": "วังจันทร์",
-      "lat": 12.967637,
-      "lon": 101.466628,
-      "rainfall_mm": 133.0,
-      "value_text": "133 มม.",
-      "observed_at": "2026-09-26 04:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 26.7,
-      "nearest_estate": "นิคมอุตสาหกรรมหลักชัยเมืองยาง",
-      "agency": "ทน."
     },
     {
       "kind": "rainfall",
@@ -2180,36 +2214,36 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "บ้านโคกเขื่อน",
-      "station_code": "STN1976",
-      "province": "ปราจีนบุรี",
-      "district": "ประจันตคาม",
-      "lat": 14.159991,
-      "lon": 101.521952,
-      "rainfall_mm": 132.0,
-      "value_text": "132 มม.",
-      "observed_at": "2026-09-26 04:00",
+      "station": "อบต.แหลมฟ้าผ่า",
+      "station_code": "PPCH",
+      "province": "สมุทรปราการ",
+      "district": "พระสมุทรเจดีย์",
+      "lat": 13.54701,
+      "lon": 100.53756,
+      "rainfall_mm": 131.2,
+      "value_text": "131.2 มม.",
+      "observed_at": "2026-09-26 08:00",
       "status": "วิกฤต",
       "severity_score": 4,
-      "distance_km": 31.6,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
-      "agency": "ทน."
+      "distance_km": 12.7,
+      "nearest_estate": "นิคมอุตสาหกรรมแพรกษา",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
-      "station": "เมืองสมุทรสาคร",
-      "station_code": "THA009",
-      "province": "สมุทรสาคร",
-      "district": "เมืองสมุทรสาคร",
-      "lat": 13.58598,
-      "lon": 100.23048,
+      "station": "โรงเรียนบ้านหินเทิน",
+      "station_code": "ONE071",
+      "province": "ปราจีนบุรี",
+      "district": "นาดี",
+      "lat": 14.064819,
+      "lon": 102.01052,
       "rainfall_mm": 130.8,
       "value_text": "130.8 มม.",
-      "observed_at": "2026-09-26 05:00",
+      "observed_at": "2026-09-26 08:00",
       "status": "วิกฤต",
       "severity_score": 4,
-      "distance_km": 4.7,
-      "nearest_estate": "นิคมอุตสาหกรรมสมุทรสาคร",
+      "distance_km": 42.4,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
       "agency": "สสน."
     },
     {
@@ -2228,6 +2262,108 @@ window.IEAT_THAIWATER_DATA = {
       "distance_km": 10.8,
       "nearest_estate": "นิคมอุตสาหกรรมแพรกษา",
       "agency": "สนน กทม."
+    },
+    {
+      "kind": "rainfall",
+      "station": "สนามบินดอนเมือง",
+      "station_code": "48456",
+      "province": "กรุงเทพมหานคร",
+      "district": "ดอนเมือง",
+      "lat": 13.91917,
+      "lon": 100.605,
+      "rainfall_mm": 130.0,
+      "value_text": "130 มม.",
+      "observed_at": "2026-09-26 07:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 14.4,
+      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก A",
+      "agency": "อต."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ประจันตคาม (KGT7A)",
+      "station_code": "PRC004",
+      "province": "ปราจีนบุรี",
+      "district": "ประจันตคาม",
+      "lat": 14.070941,
+      "lon": 101.51893,
+      "rainfall_mm": 129.8,
+      "value_text": "129.8 มม.",
+      "observed_at": "2026-09-26 08:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 23.3,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ฝายท่าลาด",
+      "station_code": "ridtele_TKgt59",
+      "province": "ฉะเชิงเทรา",
+      "district": "พนมสารคาม",
+      "lat": 13.707719,
+      "lon": 101.401415,
+      "rainfall_mm": 129.5,
+      "value_text": "129.5 มม.",
+      "observed_at": "2026-09-26 07:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 12.9,
+      "nearest_estate": "นิคมอุตสาหกรรมเกตเวย์ ซิตี้",
+      "agency": "ชป."
+    },
+    {
+      "kind": "rainfall",
+      "station": "เมืองสมุทรสาคร",
+      "station_code": "THA009",
+      "province": "สมุทรสาคร",
+      "district": "เมืองสมุทรสาคร",
+      "lat": 13.58598,
+      "lon": 100.23048,
+      "rainfall_mm": 129.0,
+      "value_text": "129 มม.",
+      "observed_at": "2026-09-26 08:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 4.7,
+      "nearest_estate": "นิคมอุตสาหกรรมสมุทรสาคร",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านยุบตาเหน่ง",
+      "station_code": "STN1664",
+      "province": "ระยอง",
+      "district": "วังจันทร์",
+      "lat": 12.967637,
+      "lon": 101.466628,
+      "rainfall_mm": 128.5,
+      "value_text": "128.5 มม.",
+      "observed_at": "2026-09-26 07:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 26.7,
+      "nearest_estate": "นิคมอุตสาหกรรมหลักชัยเมืองยาง",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "องครักษ์",
+      "station_code": "NYK000",
+      "province": "นครนายก",
+      "district": "องครักษ์",
+      "lat": 14.113633,
+      "lon": 101.01952,
+      "rainfall_mm": 127.8,
+      "value_text": "127.8 มม.",
+      "observed_at": "2026-09-26 08:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 32.8,
+      "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -2282,6 +2418,23 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
+      "station": "เขื่อนนายก",
+      "station_code": "ridtele_TNy11",
+      "province": "นครนายก",
+      "district": "เมืองนครนายก",
+      "lat": 14.18205,
+      "lon": 101.162164,
+      "rainfall_mm": 126.5,
+      "value_text": "126.5 มม.",
+      "observed_at": "2026-09-26 07:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 36.0,
+      "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
+      "agency": "ชป."
+    },
+    {
+      "kind": "rainfall",
       "station": "ส.คลองเตย",
       "station_code": "RF.KTY.04",
       "province": "กรุงเทพมหานคร",
@@ -2296,40 +2449,6 @@ window.IEAT_THAIWATER_DATA = {
       "distance_km": 10.5,
       "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก A",
       "agency": "สนน กทม."
-    },
-    {
-      "kind": "rainfall",
-      "station": "กรุงเทพฯ ท่าเรือคลองเตย",
-      "station_code": "48454",
-      "province": "กรุงเทพมหานคร",
-      "district": "คลองเตย",
-      "lat": 13.70694,
-      "lon": 100.56805,
-      "rainfall_mm": 126.0,
-      "value_text": "126 มม.",
-      "observed_at": "2026-09-25 19:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 10.1,
-      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก A",
-      "agency": "อต."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านตะเภาลาย",
-      "station_code": "ridtele_TKgt53",
-      "province": "ปราจีนบุรี",
-      "district": "บ้านสร้าง",
-      "lat": 14.012733,
-      "lon": 101.265193,
-      "rainfall_mm": 125.5,
-      "value_text": "125.5 มม.",
-      "observed_at": "2026-09-26 04:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 43.5,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
-      "agency": "ชป."
     },
     {
       "kind": "rainfall",
@@ -2401,37 +2520,20 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "ปราจีนบุรี",
-      "station_code": "48430",
-      "province": "ปราจีนบุรี",
-      "district": "เมืองปราจีนบุรี",
-      "lat": 14.05842,
-      "lon": 101.3693,
-      "rainfall_mm": 124.4,
-      "value_text": "124.4 มม.",
-      "observed_at": "2026-09-26 04:00",
+      "station": "ปตร.จุฬาลงกรณ์",
+      "station_code": "ATG101",
+      "province": "ปทุมธานี",
+      "district": "ธัญบุรี",
+      "lat": 13.98135,
+      "lon": 100.6057,
+      "rainfall_mm": 123.4,
+      "value_text": "123.4 มม.",
+      "observed_at": "2026-09-26 08:00",
       "status": "วิกฤต",
       "severity_score": 4,
-      "distance_km": 35.0,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
-      "agency": "อต."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ฝายท่าลาด",
-      "station_code": "ridtele_TKgt59",
-      "province": "ฉะเชิงเทรา",
-      "district": "พนมสารคาม",
-      "lat": 13.707719,
-      "lon": 101.401415,
-      "rainfall_mm": 123.0,
-      "value_text": "123 มม.",
-      "observed_at": "2026-09-26 04:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 12.9,
-      "nearest_estate": "นิคมอุตสาหกรรมเกตเวย์ ซิตี้",
-      "agency": "ชป."
+      "distance_km": 21.1,
+      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก A",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -2452,23 +2554,6 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "ปากแม่น้ำบางปะกง",
-      "station_code": "ridtele_TKgt54",
-      "province": "ฉะเชิงเทรา",
-      "district": "บางปะกง",
-      "lat": 13.474833,
-      "lon": 100.98196,
-      "rainfall_mm": 122.0,
-      "value_text": "122 มม.",
-      "observed_at": "2026-09-26 04:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 6.4,
-      "nearest_estate": "นิคมอุตสาหกรรมอมตะซิตี้ ชลบุรี",
-      "agency": "ชป."
-    },
-    {
-      "kind": "rainfall",
       "station": "จุดวัด ถ.เทศบาลสงเคราะห์",
       "station_code": "RF.CTC.03",
       "province": "กรุงเทพมหานคร",
@@ -2486,37 +2571,20 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "อบต.นาแขม",
-      "station_code": "VLGE50",
+      "station": "ประจันตคาม",
+      "station_code": "ridtele_TKgt51",
       "province": "ปราจีนบุรี",
-      "district": "กบินทร์บุรี",
-      "lat": 14.04255,
-      "lon": 101.72051,
-      "rainfall_mm": 121.6,
-      "value_text": "121.6 มม.",
-      "observed_at": "2026-09-26 05:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 16.8,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "สนข.บางรัก",
-      "station_code": "RF.BRK.01",
-      "province": "กรุงเทพมหานคร",
-      "district": "บางรัก",
-      "lat": 13.73067,
-      "lon": 100.52382,
+      "district": "ประจันตคาม",
+      "lat": 14.069966,
+      "lon": 101.518579,
       "rainfall_mm": 121.5,
       "value_text": "121.5 มม.",
-      "observed_at": "2026-09-25 20:00",
+      "observed_at": "2026-09-26 07:00",
       "status": "วิกฤต",
       "severity_score": 4,
-      "distance_km": 8.3,
-      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก B",
-      "agency": "สนน กทม."
+      "distance_km": 23.3,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
+      "agency": "ชป."
     },
     {
       "kind": "rainfall",
@@ -2537,19 +2605,36 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "องครักษ์",
-      "station_code": "NYK000",
-      "province": "นครนายก",
-      "district": "องครักษ์",
-      "lat": 14.113633,
-      "lon": 101.01952,
-      "rainfall_mm": 120.0,
-      "value_text": "120 มม.",
-      "observed_at": "2026-09-26 05:00",
+      "station": "สนข.บางรัก",
+      "station_code": "RF.BRK.01",
+      "province": "กรุงเทพมหานคร",
+      "district": "บางรัก",
+      "lat": 13.73067,
+      "lon": 100.52382,
+      "rainfall_mm": 121.5,
+      "value_text": "121.5 มม.",
+      "observed_at": "2026-09-25 20:00",
       "status": "วิกฤต",
       "severity_score": 4,
-      "distance_km": 32.8,
-      "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
+      "distance_km": 8.3,
+      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก B",
+      "agency": "สนน กทม."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ปากคลองพระองค์เจ้าฯ (บางน้ำเปรี้ยว)",
+      "station_code": "BKK016",
+      "province": "ฉะเชิงเทรา",
+      "district": "บางน้ำเปรี้ยว",
+      "lat": 13.83819,
+      "lon": 100.9666,
+      "rainfall_mm": 120.0,
+      "value_text": "120 มม.",
+      "observed_at": "2026-09-26 08:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 20.7,
+      "nearest_estate": "นิคมอุตสาหกรรมเอเซีย (สุวรรณภูมิ)",
       "agency": "สสน."
     },
     {
@@ -2622,20 +2707,20 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "โรงเรียนบ้านสีระมัน",
-      "station_code": "ONE089",
-      "province": "ระยอง",
-      "district": "เขาชะเมา",
-      "lat": 13.038727,
-      "lon": 101.66171,
-      "rainfall_mm": 118.8,
-      "value_text": "118.8 มม.",
-      "observed_at": "2026-09-26 05:00",
+      "station": "ส.รัชดา-วิภาวดี",
+      "station_code": "RF.CTC.02",
+      "province": "กรุงเทพมหานคร",
+      "district": "จตุจักร",
+      "lat": 13.83022,
+      "lon": 100.55723,
+      "rainfall_mm": 118.5,
+      "value_text": "118.5 มม.",
+      "observed_at": "2026-09-25 20:00",
       "status": "วิกฤต",
       "severity_score": 4,
-      "distance_km": 41.2,
-      "nearest_estate": "นิคมอุตสาหกรรมหลักชัยเมืองยาง",
-      "agency": "สสน."
+      "distance_km": 3.7,
+      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก B",
+      "agency": "สนน กทม."
     },
     {
       "kind": "rainfall",
@@ -2656,37 +2741,20 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "ส.รัชดา-วิภาวดี",
-      "station_code": "RF.CTC.02",
-      "province": "กรุงเทพมหานคร",
-      "district": "จตุจักร",
-      "lat": 13.83022,
-      "lon": 100.55723,
-      "rainfall_mm": 118.5,
-      "value_text": "118.5 มม.",
-      "observed_at": "2026-09-25 20:00",
+      "station": "สถานีวิจัยประมงศรีราชา",
+      "station_code": "GOT001",
+      "province": "ชลบุรี",
+      "district": "ศรีราชา",
+      "lat": 13.185876,
+      "lon": 100.916916,
+      "rainfall_mm": 117.8,
+      "value_text": "117.8 มม.",
+      "observed_at": "2026-09-26 08:00",
       "status": "วิกฤต",
       "severity_score": 4,
-      "distance_km": 3.7,
-      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก B",
-      "agency": "สนน กทม."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านคลองขนุน",
-      "station_code": "STN0138",
-      "province": "ระยอง",
-      "district": "บ้านค่าย",
-      "lat": 12.894996,
-      "lon": 101.370717,
-      "rainfall_mm": 118.5,
-      "value_text": "118.5 มม.",
-      "observed_at": "2026-09-26 04:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 15.6,
-      "nearest_estate": "นิคมอุตสาหกรรมดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 5",
-      "agency": "ทน."
+      "distance_km": 10.7,
+      "nearest_estate": "นิคมอุตสาหกรรมปิ่นทอง",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -2707,18 +2775,35 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "ปตร. คลองลัดบางยอ 1",
-      "station_code": "BKC003",
-      "province": "สมุทรปราการ",
-      "district": "พระประแดง",
-      "lat": 13.676162,
-      "lon": 100.553085,
-      "rainfall_mm": 116.6,
-      "value_text": "116.6 มม.",
-      "observed_at": "2026-09-26 05:00",
+      "station": "ท้ายปตร.พระธรรมราชา",
+      "station_code": "ATG082",
+      "province": "ปทุมธานี",
+      "district": "ธัญบุรี",
+      "lat": 14.07636,
+      "lon": 100.89392,
+      "rainfall_mm": 117.4,
+      "value_text": "117.4 มม.",
+      "observed_at": "2026-09-26 08:00",
       "status": "วิกฤต",
       "severity_score": 4,
-      "distance_km": 13.5,
+      "distance_km": 34.5,
+      "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "คลองเปรมประชากร หลักหก",
+      "station_code": "BKK002",
+      "province": "ปทุมธานี",
+      "district": "เมืองปทุมธานี",
+      "lat": 13.96562,
+      "lon": 100.60262,
+      "rainfall_mm": 116.6,
+      "value_text": "116.6 มม.",
+      "observed_at": "2026-09-26 08:00",
+      "status": "วิกฤต",
+      "severity_score": 4,
+      "distance_km": 19.3,
       "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก A",
       "agency": "สสน."
     },
@@ -2738,105 +2823,20 @@ window.IEAT_THAIWATER_DATA = {
       "distance_km": 7.4,
       "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก A",
       "agency": "สนน กทม."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ปตร.จุฬาลงกรณ์",
-      "station_code": "ATG101",
-      "province": "ปทุมธานี",
-      "district": "ธัญบุรี",
-      "lat": 13.98135,
-      "lon": 100.6057,
-      "rainfall_mm": 116.0,
-      "value_text": "116 มม.",
-      "observed_at": "2026-09-26 05:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 21.1,
-      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก A",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ส.คลองเจ็ก",
-      "station_code": "RF.PKN.02",
-      "province": "กรุงเทพมหานคร",
-      "district": "พระโขนง",
-      "lat": 13.69223,
-      "lon": 100.58991,
-      "rainfall_mm": 115.5,
-      "value_text": "115.5 มม.",
-      "observed_at": "2026-09-25 20:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 12.1,
-      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก A",
-      "agency": "สนน กทม."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ปตร.คลองลาดพร้าว",
-      "station_code": "RF.WTL.02",
-      "province": "กรุงเทพมหานคร",
-      "district": "วังทองหลาง",
-      "lat": 13.79432,
-      "lon": 100.58933,
-      "rainfall_mm": 115.5,
-      "value_text": "115.5 มม.",
-      "observed_at": "2026-09-25 20:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 3.2,
-      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก A",
-      "agency": "สนน กทม."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ศูนย์ฯ (ดินแดง)",
-      "station_code": "RF.DDG.02",
-      "province": "กรุงเทพมหานคร",
-      "district": "ดินแดง",
-      "lat": 13.76902,
-      "lon": 100.55452,
-      "rainfall_mm": 115.0,
-      "value_text": "115 มม.",
-      "observed_at": "2026-09-25 20:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 3.2,
-      "nearest_estate": "นิคมอุตสาหกรรมสำนักงานใหญ่ (วิภาวดี) ตึก B",
-      "agency": "สนน กทม."
-    },
-    {
-      "kind": "rainfall",
-      "station": "อบต.ปลวกแดง",
-      "station_code": "ONE091",
-      "province": "ระยอง",
-      "district": "ปลวกแดง",
-      "lat": 12.970066,
-      "lon": 101.20457,
-      "rainfall_mm": 113.6,
-      "value_text": "113.6 มม.",
-      "observed_at": "2026-09-26 05:00",
-      "status": "วิกฤต",
-      "severity_score": 4,
-      "distance_km": 5.9,
-      "nearest_estate": "นิคมอุตสาหกรรมอีสเทิร์นซีบอร์ด (ระยอง)",
-      "agency": "สสน."
     }
   ],
   "summary": {
     "estate_total": 72,
     "estate_count": 39,
-    "station_count": 960,
-    "alert_station_count": 380,
-    "heavy_rain_estate_count": 30,
+    "station_count": 961,
+    "alert_station_count": 372,
+    "heavy_rain_estate_count": 29,
     "water_alert_estate_count": 25,
-    "critical_count": 282,
-    "rain_station_count": 774,
-    "waterlevel_station_count": 186,
-    "waterlevel_alert_count": 106,
-    "max_rainfall_mm": 273.5,
+    "critical_count": 274,
+    "rain_station_count": 773,
+    "waterlevel_station_count": 188,
+    "waterlevel_alert_count": 105,
+    "max_rainfall_mm": 313.0,
     "risk_level": "วิกฤต",
     "storm_count": 0,
     "storm_names": [],
@@ -2846,22 +2846,17 @@ window.IEAT_THAIWATER_DATA = {
       "จ.จันทบุรี",
       "จ.ฉะเชิงเทรา",
       "จ.ชลบุรี",
-      "จ.ชัยนาท",
+      "จ.ตราด",
       "จ.นครนายก",
-      "จ.นครปฐม",
-      "จ.นครสวรรค์",
       "จ.นนทบุรี",
-      "จ.นราธิวาส",
       "จ.ปทุมธานี",
       "จ.ปราจีนบุรี",
       "จ.สมุทรปราการ",
-      "จ.สมุทรสงคราม",
-      "จ.สมุทรสาคร",
-      "จ.อุทัยธานี"
+      "จ.สมุทรสาคร"
     ],
-    "flood_watch_province_count": 17,
-    "flash_flood_24h_area_count": 59,
-    "flash_flood_48h_area_count": 222,
+    "flood_watch_province_count": 12,
+    "flash_flood_24h_area_count": 55,
+    "flash_flood_48h_area_count": 241,
     "warning_title": "",
     "warning_summary": "",
     "warning_url": "https://tmd.go.th/warning-and-events/warning-storm"
@@ -2871,7 +2866,7 @@ window.IEAT_THAIWATER_DATA = {
     "24h": {
       "period": "24h",
       "date": "2026-09-26",
-      "time": "05:00:00",
+      "time": "08:00:00",
       "type": "แผนที่แสดงพื้นที่เสี่ยงน้ำท่วมฉับพลัน (รายตำบล)ใน 24 ชม. ข้างหน้า จากปริมาณฝนสะสมที่สถานีโทรมาตร",
       "areas": [
         {
@@ -2884,8 +2879,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.คลองขลุง",
           "latitude": 16.20864,
           "longitude": 99.70895,
-          "sum_rainfall_mm": 241.00000000000006,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 241.00000000000003,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -3175,8 +3170,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองวังหิน",
           "latitude": 16.229583,
           "longitude": 99.696722,
-          "sum_rainfall_mm": 230.0,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 217.5,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -3339,7 +3334,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 16.151548,
           "longitude": 99.527517,
           "sum_rainfall_mm": 203.5,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -3594,7 +3589,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 16.039022,
           "longitude": 99.233345,
           "sum_rainfall_mm": 225.8,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -4719,898 +4714,527 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
-          "geocode": "180201",
-          "tambon": "ต.คุ้งสำเภา",
-          "amphoe": "อ.มโนรมย์",
-          "province": "จ.ชัยนาท",
+          "geocode": "260207",
+          "tambon": "ต.นาหินลาด",
+          "amphoe": "อ.ปากพลี",
+          "province": "จ.นครนายก",
           "region_id": "1",
           "region_name": "ภาคกลาง",
-          "station": "ทต.คุ้งสำเภา",
-          "latitude": 15.31006,
-          "longitude": 100.08173,
-          "sum_rainfall_mm": 228.4,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "station": "อบต.นาหินลาด",
+          "latitude": 14.20724,
+          "longitude": 101.35025,
+          "sum_rainfall_mm": 287.6,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
                 [
-                  100.12603,
-                  15.30418
+                  101.43222,
+                  14.38957
                 ],
                 [
-                  100.12854,
-                  15.30228
+                  101.45083,
+                  14.38142
                 ],
                 [
-                  100.12514,
-                  15.29405
+                  101.47519,
+                  14.36541
                 ],
                 [
-                  100.12965,
-                  15.29371
+                  101.47655,
+                  14.36012
                 ],
                 [
-                  100.13059,
-                  15.28908
+                  101.48117,
+                  14.35214
                 ],
                 [
-                  100.12464,
-                  15.28855
+                  101.48312,
+                  14.34591
                 ],
                 [
-                  100.12049,
-                  15.29112
+                  101.49032,
+                  14.33904
                 ],
                 [
-                  100.11394,
-                  15.28581
+                  101.49305,
+                  14.33809
                 ],
                 [
-                  100.10763,
-                  15.27491
+                  101.49704,
+                  14.33439
                 ],
                 [
-                  100.09732,
-                  15.27456
+                  101.49765,
+                  14.33223
                 ],
                 [
-                  100.09441,
-                  15.27255
+                  101.49464,
+                  14.32357
                 ],
                 [
-                  100.08229,
-                  15.27252
+                  101.49621,
+                  14.31677
                 ],
                 [
-                  100.07699,
-                  15.2666
+                  101.49937,
+                  14.31295
                 ],
                 [
-                  100.07014,
-                  15.26414
+                  101.50541,
+                  14.30898
                 ],
                 [
-                  100.05684,
-                  15.26849
+                  101.50489,
+                  14.30684
                 ],
                 [
-                  100.0581,
-                  15.27727
+                  101.4987,
+                  14.29843
                 ],
                 [
-                  100.06185,
-                  15.28445
+                  101.49869,
+                  14.2679
                 ],
                 [
-                  100.07463,
-                  15.29191
+                  101.49126,
+                  14.26152
                 ],
                 [
-                  100.07843,
-                  15.2956
+                  101.48441,
+                  14.26401
                 ],
                 [
-                  100.08072,
-                  15.30888
+                  101.48063,
+                  14.26762
                 ],
                 [
-                  100.07803,
-                  15.31612
+                  101.47275,
+                  14.26183
                 ],
                 [
-                  100.08152,
-                  15.32127
+                  101.46292,
+                  14.26267
                 ],
                 [
-                  100.08361,
-                  15.31921
+                  101.45877,
+                  14.25879
                 ],
                 [
-                  100.09984,
-                  15.31456
+                  101.4509,
+                  14.25483
                 ],
                 [
-                  100.11111,
-                  15.30766
+                  101.44579,
+                  14.25633
                 ],
                 [
-                  100.12044,
-                  15.29979
+                  101.44027,
+                  14.2543
                 ],
                 [
-                  100.12603,
-                  15.30418
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "180202",
-          "tambon": "ต.วัดโคก",
-          "amphoe": "อ.มโนรมย์",
-          "province": "จ.ชัยนาท",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "ปตร.มโนรมย์",
-          "latitude": 15.3277,
-          "longitude": 100.10913,
-          "sum_rainfall_mm": 281.6,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  100.18317,
-                  15.33882
-                ],
-                [
-                  100.18376,
-                  15.33116
-                ],
-                [
-                  100.18529,
-                  15.32784
-                ],
-                [
-                  100.18166,
-                  15.3166
-                ],
-                [
-                  100.18095,
-                  15.31098
-                ],
-                [
-                  100.17609,
-                  15.3049
-                ],
-                [
-                  100.17042,
-                  15.30273
-                ],
-                [
-                  100.16324,
-                  15.30764
-                ],
-                [
-                  100.14871,
-                  15.30546
-                ],
-                [
-                  100.14751,
-                  15.30824
-                ],
-                [
-                  100.12972,
-                  15.30906
-                ],
-                [
-                  100.12603,
-                  15.30418
-                ],
-                [
-                  100.12044,
-                  15.29979
-                ],
-                [
-                  100.11111,
-                  15.30766
-                ],
-                [
-                  100.09984,
-                  15.31456
-                ],
-                [
-                  100.08361,
-                  15.31921
-                ],
-                [
-                  100.08152,
-                  15.32127
-                ],
-                [
-                  100.08507,
-                  15.32409
-                ],
-                [
-                  100.09228,
-                  15.32707
-                ],
-                [
-                  100.0963,
-                  15.33081
-                ],
-                [
-                  100.10002,
-                  15.33613
-                ],
-                [
-                  100.10092,
-                  15.34211
-                ],
-                [
-                  100.11582,
-                  15.34304
-                ],
-                [
-                  100.12008,
-                  15.34165
-                ],
-                [
-                  100.12694,
-                  15.34202
-                ],
-                [
-                  100.13283,
-                  15.34069
-                ],
-                [
-                  100.13354,
-                  15.33798
-                ],
-                [
-                  100.13616,
-                  15.33651
-                ],
-                [
-                  100.13671,
-                  15.33429
-                ],
-                [
-                  100.14455,
-                  15.33633
-                ],
-                [
-                  100.17161,
-                  15.32958
-                ],
-                [
-                  100.1762,
-                  15.33031
-                ],
-                [
-                  100.17813,
-                  15.33235
-                ],
-                [
-                  100.17888,
-                  15.34067
-                ],
-                [
-                  100.18161,
-                  15.3472
-                ],
-                [
-                  100.1837,
-                  15.34443
-                ],
-                [
-                  100.18317,
-                  15.33882
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "180107",
-          "tambon": "ต.ธรรมามูล",
-          "amphoe": "อ.เมืองชัยนาท",
-          "province": "จ.ชัยนาท",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "สะพานธรรมจักร(วัดธรรมามูล)",
-          "latitude": 15.25029,
-          "longitude": 100.08347,
-          "sum_rainfall_mm": 214.8,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  100.13059,
-                  15.28908
-                ],
-                [
-                  100.13242,
-                  15.28176
-                ],
-                [
-                  100.14221,
-                  15.27971
-                ],
-                [
-                  100.14439,
-                  15.27612
-                ],
-                [
-                  100.14828,
-                  15.2741
-                ],
-                [
-                  100.15366,
-                  15.26588
-                ],
-                [
-                  100.15803,
-                  15.26309
-                ],
-                [
-                  100.15899,
-                  15.25738
-                ],
-                [
-                  100.15512,
-                  15.25246
-                ],
-                [
-                  100.15464,
-                  15.24618
-                ],
-                [
-                  100.13631,
-                  15.24535
-                ],
-                [
-                  100.13042,
-                  15.2461
-                ],
-                [
-                  100.12573,
-                  15.24509
-                ],
-                [
-                  100.10959,
-                  15.24796
-                ],
-                [
-                  100.10508,
-                  15.24753
-                ],
-                [
-                  100.10165,
-                  15.24575
-                ],
-                [
-                  100.11139,
-                  15.22511
-                ],
-                [
-                  100.108,
-                  15.22261
-                ],
-                [
-                  100.10519,
-                  15.22389
-                ],
-                [
-                  100.10074,
-                  15.22286
-                ],
-                [
-                  100.08917,
-                  15.22296
-                ],
-                [
-                  100.07954,
-                  15.22786
+                  101.43034,
+                  14.25663
                 ],
                 [
-                  100.07668,
-                  15.23174
+                  101.41414,
+                  14.25335
                 ],
                 [
-                  100.07629,
-                  15.23704
+                  101.41212,
+                  14.25442
                 ],
                 [
-                  100.07868,
-                  15.24363
+                  101.39514,
+                  14.27367
                 ],
                 [
-                  100.08378,
-                  15.25198
+                  101.3929,
+                  14.27444
                 ],
                 [
-                  100.08455,
-                  15.25162
+                  101.38972,
+                  14.27335
                 ],
                 [
-                  100.08315,
-                  15.25603
+                  101.38322,
+                  14.27366
                 ],
                 [
-                  100.08065,
-                  15.25691
+                  101.38108,
+                  14.27138
                 ],
                 [
-                  100.06849,
-                  15.25544
+                  101.38391,
+                  14.26586
                 ],
                 [
-                  100.06416,
-                  15.25698
+                  101.38066,
+                  14.25809
                 ],
                 [
-                  100.0584,
-                  15.26375
+                  101.37846,
+                  14.25748
                 ],
                 [
-                  100.05684,
-                  15.26849
+                  101.38244,
+                  14.24938
                 ],
                 [
-                  100.06858,
-                  15.26407
+                  101.37831,
+                  14.23813
                 ],
                 [
-                  100.07247,
-                  15.26461
+                  101.37993,
+                  14.23561
                 ],
                 [
-                  100.07699,
-                  15.2666
+                  101.38193,
+                  14.23523
                 ],
                 [
-                  100.08229,
-                  15.27252
+                  101.3839,
+                  14.23315
                 ],
                 [
-                  100.09441,
-                  15.27255
+                  101.38323,
+                  14.2298
                 ],
                 [
-                  100.09732,
-                  15.27456
+                  101.38605,
+                  14.2252
                 ],
                 [
-                  100.10763,
-                  15.27491
+                  101.38444,
+                  14.21617
                 ],
                 [
-                  100.11394,
-                  15.28581
+                  101.38074,
+                  14.21272
                 ],
                 [
-                  100.12049,
-                  15.29112
+                  101.38226,
+                  14.2105
                 ],
                 [
-                  100.12464,
-                  15.28855
+                  101.37914,
+                  14.21031
                 ],
                 [
-                  100.13059,
-                  15.28908
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "180106",
-          "tambon": "ต.หาดท่าเสา",
-          "amphoe": "อ.เมืองชัยนาท",
-          "province": "จ.ชัยนาท",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "สะพานคง-ศุข ศรีสวัสดิ์",
-          "latitude": 15.225,
-          "longitude": 100.07824,
-          "sum_rainfall_mm": 254.60000000000002,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  100.08378,
-                  15.25198
-                ],
-                [
-                  100.07747,
-                  15.24148
-                ],
-                [
-                  100.07629,
-                  15.23704
-                ],
-                [
-                  100.07668,
-                  15.23174
-                ],
-                [
-                  100.08013,
-                  15.22741
-                ],
-                [
-                  100.09411,
-                  15.21945
-                ],
-                [
-                  100.10115,
-                  15.20631
-                ],
-                [
-                  100.10409,
-                  15.2041
+                  101.3779,
+                  14.21155
                 ],
                 [
-                  100.10372,
-                  15.19694
+                  101.37491,
+                  14.21023
                 ],
                 [
-                  100.10203,
-                  15.19333
+                  101.37282,
+                  14.20544
                 ],
                 [
-                  100.08909,
-                  15.18406
+                  101.36645,
+                  14.20182
                 ],
                 [
-                  100.08145,
-                  15.16966
+                  101.36428,
+                  14.20231
                 ],
                 [
-                  100.07634,
-                  15.17563
+                  101.36333,
+                  14.20139
                 ],
                 [
-                  100.0721,
-                  15.17605
+                  101.36237,
+                  14.20275
                 ],
                 [
-                  100.05845,
-                  15.181
+                  101.35904,
+                  14.20277
                 ],
                 [
-                  100.05501,
-                  15.17949
+                  101.35077,
+                  14.19989
                 ],
                 [
-                  100.05429,
-                  15.18222
+                  101.34975,
+                  14.19789
                 ],
                 [
-                  100.05486,
-                  15.18872
+                  101.34583,
+                  14.19741
                 ],
                 [
-                  100.05678,
-                  15.19388
+                  101.34495,
+                  14.19395
                 ],
                 [
-                  100.06144,
-                  15.19452
+                  101.34261,
+                  14.19252
                 ],
                 [
-                  100.06385,
-                  15.20023
+                  101.33968,
+                  14.18832
                 ],
                 [
-                  100.06825,
-                  15.20207
+                  101.33651,
+                  14.18722
                 ],
                 [
-                  100.06784,
-                  15.20584
+                  101.33411,
+                  14.18386
                 ],
                 [
-                  100.06934,
-                  15.20829
+                  101.33211,
+                  14.18793
                 ],
                 [
-                  100.06803,
-                  15.21157
+                  101.32709,
+                  14.19114
                 ],
                 [
-                  100.07187,
-                  15.21364
+                  101.32762,
+                  14.19495
                 ],
                 [
-                  100.07543,
-                  15.22182
+                  101.32865,
+                  14.19765
                 ],
                 [
-                  100.06398,
-                  15.23429
+                  101.33526,
+                  14.20052
                 ],
                 [
-                  100.05924,
-                  15.24421
+                  101.33532,
+                  14.20937
                 ],
                 [
-                  100.05794,
-                  15.25184
+                  101.33928,
+                  14.21356
                 ],
                 [
-                  100.06538,
-                  15.25656
+                  101.33923,
+                  14.21494
                 ],
                 [
-                  100.06916,
-                  15.25544
+                  101.33486,
+                  14.21954
                 ],
                 [
-                  100.08065,
-                  15.25691
+                  101.33158,
+                  14.21902
                 ],
                 [
-                  100.08315,
-                  15.25603
+                  101.33141,
+                  14.21655
                 ],
                 [
-                  100.08455,
-                  15.25162
+                  101.32986,
+                  14.21534
                 ],
                 [
-                  100.08378,
-                  15.25198
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "180302",
-          "tambon": "ต.มะขามเฒ่า",
-          "amphoe": "อ.วัดสิงห์",
-          "province": "จ.ชัยนาท",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "ท้ายปตร.มะขามเฒ่า-อู่ทอง",
-          "latitude": 15.22229,
-          "longitude": 100.06236,
-          "sum_rainfall_mm": 289.4,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  100.0584,
-                  15.26375
+                  101.32216,
+                  14.21839
                 ],
                 [
-                  100.06268,
-                  15.25821
+                  101.32159,
+                  14.22103
                 ],
                 [
-                  100.06538,
-                  15.25656
+                  101.319,
+                  14.22184
                 ],
                 [
-                  100.05794,
-                  15.25184
+                  101.31895,
+                  14.22597
                 ],
                 [
-                  100.05798,
-                  15.2481
+                  101.31722,
+                  14.22976
                 ],
                 [
-                  100.06031,
-                  15.24134
+                  101.31705,
+                  14.23723
                 ],
                 [
-                  100.06541,
-                  15.23201
+                  101.31854,
+                  14.2401
                 ],
                 [
-                  100.07543,
-                  15.22182
+                  101.31287,
+                  14.24336
                 ],
                 [
-                  100.07187,
-                  15.21364
+                  101.31608,
+                  14.24611
                 ],
                 [
-                  100.06803,
-                  15.21157
+                  101.32045,
+                  14.24709
                 ],
                 [
-                  100.06934,
-                  15.20829
+                  101.32256,
+                  14.25177
                 ],
                 [
-                  100.06784,
-                  15.20584
+                  101.32085,
+                  14.25656
                 ],
                 [
-                  100.06825,
-                  15.20207
+                  101.33891,
+                  14.26908
                 ],
                 [
-                  100.06385,
-                  15.20023
+                  101.34227,
+                  14.27336
                 ],
                 [
-                  100.06144,
-                  15.19452
+                  101.34385,
+                  14.27842
                 ],
                 [
-                  100.05694,
-                  15.19411
+                  101.34349,
+                  14.28268
                 ],
                 [
-                  100.05486,
-                  15.18872
+                  101.33679,
+                  14.2974
                 ],
                 [
-                  100.05444,
-                  15.18366
+                  101.3317,
+                  14.30389
                 ],
                 [
-                  100.0445,
-                  15.18318
+                  101.33085,
+                  14.30799
                 ],
                 [
-                  100.03811,
-                  15.19776
+                  101.3269,
+                  14.30791
                 ],
                 [
-                  100.03342,
-                  15.20128
+                  101.32066,
+                  14.31148
                 ],
                 [
-                  100.02295,
-                  15.21573
+                  101.31463,
+                  14.31174
                 ],
                 [
-                  100.02074,
-                  15.21365
+                  101.31257,
+                  14.31367
                 ],
                 [
-                  100.01835,
-                  15.21325
+                  101.31385,
+                  14.31747
                 ],
                 [
-                  100.00699,
-                  15.21904
+                  101.31665,
+                  14.31992
                 ],
                 [
-                  100.0141,
-                  15.2195
+                  101.3171,
+                  14.32316
                 ],
                 [
-                  100.00545,
-                  15.22108
+                  101.31948,
+                  14.32554
                 ],
                 [
-                  100.00037,
-                  15.2235
+                  101.32058,
+                  14.33272
                 ],
                 [
-                  99.99845,
-                  15.23338
+                  101.32372,
+                  14.33606
                 ],
                 [
-                  100.00412,
-                  15.24509
+                  101.32409,
+                  14.3428
                 ],
                 [
-                  100.02238,
-                  15.24314
+                  101.32779,
+                  14.34617
                 ],
                 [
-                  100.02003,
-                  15.25097
+                  101.32501,
+                  14.35318
                 ],
                 [
-                  100.02042,
-                  15.25341
+                  101.32623,
+                  14.3546
                 ],
                 [
-                  100.02584,
-                  15.25999
+                  101.33189,
+                  14.35488
                 ],
                 [
-                  100.0351,
-                  15.26278
+                  101.33327,
+                  14.3582
                 ],
                 [
-                  100.03759,
-                  15.25827
+                  101.34148,
+                  14.3572
                 ],
                 [
-                  100.04144,
-                  15.2557
+                  101.34574,
+                  14.36087
                 ],
                 [
-                  100.04541,
-                  15.25693
+                  101.35063,
+                  14.36235
                 ],
                 [
-                  100.04488,
-                  15.2617
+                  101.35305,
+                  14.36012
                 ],
                 [
-                  100.04693,
-                  15.2645
+                  101.35813,
+                  14.36016
                 ],
                 [
-                  100.05185,
-                  15.26329
+                  101.36526,
+                  14.35542
                 ],
-                [
-                  100.0584,
-                  15.26375
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "180301",
-          "tambon": "ต.วัดสิงห์",
-          "amphoe": "อ.วัดสิงห์",
-          "province": "จ.ชัยนาท",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "ทต.วัดสิงห์",
-          "latitude": 15.2584,
-          "longitude": 100.04493,
-          "sum_rainfall_mm": 183.2,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
                 [
-                  100.04806,
-                  15.26481
+                  101.36634,
+                  14.35276
                 ],
                 [
-                  100.04497,
-                  15.26203
+                  101.37496,
+                  14.35467
                 ],
                 [
-                  100.04541,
-                  15.25693
+                  101.384,
+                  14.3596
                 ],
                 [
-                  100.04186,
-                  15.25576
+                  101.40236,
+                  14.36575
                 ],
                 [
-                  100.03782,
-                  15.25801
+                  101.40695,
+                  14.3713
                 ],
                 [
-                  100.03514,
-                  15.26246
+                  101.41301,
+                  14.37418
                 ],
                 [
-                  100.03667,
-                  15.26719
+                  101.42241,
+                  14.38324
                 ],
                 [
-                  100.03871,
-                  15.26807
+                  101.42602,
+                  14.38952
                 ],
                 [
-                  100.04593,
-                  15.26853
+                  101.42811,
+                  14.39025
                 ],
                 [
-                  100.04806,
-                  15.26481
+                  101.43222,
+                  14.38957
                 ]
               ]
             ]
@@ -5626,8 +5250,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เขื่อนนายก",
           "latitude": 14.18205,
           "longitude": 101.162164,
-          "sum_rainfall_mm": 214.5,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 238.0,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -5865,8 +5489,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ศรีจุฬา",
           "latitude": 14.07064,
           "longitude": 101.13746,
-          "sum_rainfall_mm": 410.4,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 419.0,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -6104,8 +5728,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สมบูรณ์",
           "latitude": 13.970389,
           "longitude": 101.138699,
-          "sum_rainfall_mm": 272.5,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 296.5,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -6327,8 +5951,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองแม่น้ำใน(โพธิ์แทน)",
           "latitude": 14.212921,
           "longitude": 100.942453,
-          "sum_rainfall_mm": 299.0,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 311.0,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -6422,8 +6046,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "องครักษ์",
           "latitude": 14.113633,
           "longitude": 101.01952,
-          "sum_rainfall_mm": 188.2,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 189.4,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -6576,1080 +6200,6 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
-          "geocode": "600201",
-          "tambon": "ต.โกรกพระ",
-          "amphoe": "อ.โกรกพระ",
-          "province": "จ.นครสวรรค์",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "ทต.โกรกพระ",
-          "latitude": 15.55312,
-          "longitude": 100.0709,
-          "sum_rainfall_mm": 176.6,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  100.06666,
-                  15.59244
-                ],
-                [
-                  100.06606,
-                  15.58374
-                ],
-                [
-                  100.07086,
-                  15.57904
-                ],
-                [
-                  100.0755,
-                  15.57663
-                ],
-                [
-                  100.0806,
-                  15.57643
-                ],
-                [
-                  100.08881,
-                  15.57941
-                ],
-                [
-                  100.09393,
-                  15.57916
-                ],
-                [
-                  100.08628,
-                  15.57165
-                ],
-                [
-                  100.08002,
-                  15.55766
-                ],
-                [
-                  100.07906,
-                  15.55359
-                ],
-                [
-                  100.08001,
-                  15.55134
-                ],
-                [
-                  100.09485,
-                  15.55478
-                ],
-                [
-                  100.10186,
-                  15.55909
-                ],
-                [
-                  100.10767,
-                  15.55887
-                ],
-                [
-                  100.11387,
-                  15.5558
-                ],
-                [
-                  100.1052,
-                  15.55382
-                ],
-                [
-                  100.10316,
-                  15.54768
-                ],
-                [
-                  100.09396,
-                  15.53926
-                ],
-                [
-                  100.09179,
-                  15.53907
-                ],
-                [
-                  100.08511,
-                  15.54223
-                ],
-                [
-                  100.08088,
-                  15.54217
-                ],
-                [
-                  100.05914,
-                  15.53423
-                ],
-                [
-                  100.05491,
-                  15.5342
-                ],
-                [
-                  100.04625,
-                  15.52637
-                ],
-                [
-                  100.04173,
-                  15.53296
-                ],
-                [
-                  100.04276,
-                  15.53649
-                ],
-                [
-                  100.0378,
-                  15.55834
-                ],
-                [
-                  100.03647,
-                  15.5739
-                ],
-                [
-                  100.0402,
-                  15.57645
-                ],
-                [
-                  100.04355,
-                  15.5767
-                ],
-                [
-                  100.04971,
-                  15.58107
-                ],
-                [
-                  100.05678,
-                  15.58317
-                ],
-                [
-                  100.05904,
-                  15.5855
-                ],
-                [
-                  100.06034,
-                  15.59108
-                ],
-                [
-                  100.06329,
-                  15.59272
-                ],
-                [
-                  100.06666,
-                  15.59244
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "750101",
-          "tambon": "ต.แม่กลอง",
-          "amphoe": "อ.เมืองสมุทรสงคราม",
-          "province": "จ.สมุทรสงคราม",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "พระรามสอง",
-          "latitude": 13.38362,
-          "longitude": 99.9836,
-          "sum_rainfall_mm": 184.2,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.99557,
-                  13.41809
-                ],
-                [
-                  99.99707,
-                  13.41662
-                ],
-                [
-                  100.00209,
-                  13.42027
-                ],
-                [
-                  100.00706,
-                  13.41871
-                ],
-                [
-                  100.00438,
-                  13.41173
-                ],
-                [
-                  100.00542,
-                  13.40788
-                ],
-                [
-                  100.00319,
-                  13.39631
-                ],
-                [
-                  100.00353,
-                  13.39234
-                ],
-                [
-                  99.99784,
-                  13.38492
-                ],
-                [
-                  99.99778,
-                  13.38308
-                ],
-                [
-                  99.99375,
-                  13.37915
-                ],
-                [
-                  99.99039,
-                  13.37969
-                ],
-                [
-                  99.99029,
-                  13.37753
-                ],
-                [
-                  99.98511,
-                  13.38088
-                ],
-                [
-                  99.98084,
-                  13.37834
-                ],
-                [
-                  99.97731,
-                  13.37902
-                ],
-                [
-                  99.98917,
-                  13.4076
-                ],
-                [
-                  99.98716,
-                  13.41403
-                ],
-                [
-                  99.99061,
-                  13.42426
-                ],
-                [
-                  99.99485,
-                  13.4204
-                ],
-                [
-                  99.99557,
-                  13.41809
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "610205",
-          "tambon": "ต.โคกหม้อ",
-          "amphoe": "อ.ทัพทัน",
-          "province": "จ.อุทัยธานี",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "วัดโคกหม้อ",
-          "latitude": 15.534278,
-          "longitude": 99.899083,
-          "sum_rainfall_mm": 192.0,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.93768,
-                  15.60017
-                ],
-                [
-                  99.93725,
-                  15.59552
-                ],
-                [
-                  99.93857,
-                  15.58592
-                ],
-                [
-                  99.94223,
-                  15.57171
-                ],
-                [
-                  99.94009,
-                  15.55946
-                ],
-                [
-                  99.94016,
-                  15.53487
-                ],
-                [
-                  99.94108,
-                  15.53071
-                ],
-                [
-                  99.94373,
-                  15.52734
-                ],
-                [
-                  99.94369,
-                  15.52095
-                ],
-                [
-                  99.94699,
-                  15.51388
-                ],
-                [
-                  99.94523,
-                  15.50546
-                ],
-                [
-                  99.9459,
-                  15.50293
-                ],
-                [
-                  99.9479,
-                  15.50157
-                ],
-                [
-                  99.94485,
-                  15.49884
-                ],
-                [
-                  99.94135,
-                  15.4976
-                ],
-                [
-                  99.93366,
-                  15.50207
-                ],
-                [
-                  99.92888,
-                  15.50329
-                ],
-                [
-                  99.92641,
-                  15.50247
-                ],
-                [
-                  99.92449,
-                  15.5045
-                ],
-                [
-                  99.92218,
-                  15.50097
-                ],
-                [
-                  99.92082,
-                  15.5009
-                ],
-                [
-                  99.92089,
-                  15.50518
-                ],
-                [
-                  99.91949,
-                  15.50726
-                ],
-                [
-                  99.918,
-                  15.50724
-                ],
-                [
-                  99.9163,
-                  15.50943
-                ],
-                [
-                  99.9141,
-                  15.50896
-                ],
-                [
-                  99.91362,
-                  15.51131
-                ],
-                [
-                  99.91454,
-                  15.51317
-                ],
-                [
-                  99.91024,
-                  15.51456
-                ],
-                [
-                  99.90791,
-                  15.51778
-                ],
-                [
-                  99.90758,
-                  15.52095
-                ],
-                [
-                  99.90618,
-                  15.52222
-                ],
-                [
-                  99.90686,
-                  15.52465
-                ],
-                [
-                  99.90567,
-                  15.52495
-                ],
-                [
-                  99.90325,
-                  15.52281
-                ],
-                [
-                  99.90336,
-                  15.52611
-                ],
-                [
-                  99.90126,
-                  15.52799
-                ],
-                [
-                  99.90207,
-                  15.52958
-                ],
-                [
-                  99.89839,
-                  15.5291
-                ],
-                [
-                  99.89824,
-                  15.53344
-                ],
-                [
-                  99.89636,
-                  15.53422
-                ],
-                [
-                  99.89706,
-                  15.53673
-                ],
-                [
-                  99.89381,
-                  15.53627
-                ],
-                [
-                  99.89419,
-                  15.54052
-                ],
-                [
-                  99.8907,
-                  15.53923
-                ],
-                [
-                  99.89189,
-                  15.54216
-                ],
-                [
-                  99.89036,
-                  15.54341
-                ],
-                [
-                  99.8904,
-                  15.54637
-                ],
-                [
-                  99.88623,
-                  15.55837
-                ],
-                [
-                  99.88247,
-                  15.5622
-                ],
-                [
-                  99.8817,
-                  15.56455
-                ],
-                [
-                  99.88618,
-                  15.57789
-                ],
-                [
-                  99.90144,
-                  15.5825
-                ],
-                [
-                  99.9035,
-                  15.58637
-                ],
-                [
-                  99.91558,
-                  15.59064
-                ],
-                [
-                  99.92629,
-                  15.59753
-                ],
-                [
-                  99.93768,
-                  15.60017
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "610101",
-          "tambon": "ต.อุทัยใหม่",
-          "amphoe": "อ.เมืองอุทัยธานี",
-          "province": "จ.อุทัยธานี",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "เมืองอุทัยธานี",
-          "latitude": 15.35869,
-          "longitude": 100.05164,
-          "sum_rainfall_mm": 157.2,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  100.01955,
-                  15.40469
-                ],
-                [
-                  100.0229,
-                  15.40227
-                ],
-                [
-                  100.01887,
-                  15.38775
-                ],
-                [
-                  100.02501,
-                  15.39702
-                ],
-                [
-                  100.02813,
-                  15.39575
-                ],
-                [
-                  100.02826,
-                  15.38862
-                ],
-                [
-                  100.03072,
-                  15.3913
-                ],
-                [
-                  100.03403,
-                  15.38763
-                ],
-                [
-                  100.03096,
-                  15.38575
-                ],
-                [
-                  100.0311,
-                  15.38325
-                ],
-                [
-                  100.04211,
-                  15.37334
-                ],
-                [
-                  100.05264,
-                  15.36605
-                ],
-                [
-                  100.04882,
-                  15.36121
-                ],
-                [
-                  100.04312,
-                  15.36703
-                ],
-                [
-                  100.03161,
-                  15.36732
-                ],
-                [
-                  100.02652,
-                  15.36613
-                ],
-                [
-                  100.02528,
-                  15.36705
-                ],
-                [
-                  100.02205,
-                  15.36655
-                ],
-                [
-                  100.0159,
-                  15.36774
-                ],
-                [
-                  100.0144,
-                  15.36898
-                ],
-                [
-                  100.02094,
-                  15.37497
-                ],
-                [
-                  100.01999,
-                  15.37708
-                ],
-                [
-                  100.01639,
-                  15.37622
-                ],
-                [
-                  100.00975,
-                  15.38364
-                ],
-                [
-                  100.01129,
-                  15.40265
-                ],
-                [
-                  100.01632,
-                  15.40971
-                ],
-                [
-                  100.01771,
-                  15.40894
-                ],
-                [
-                  100.01797,
-                  15.40626
-                ],
-                [
-                  100.01955,
-                  15.40469
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "610301",
-          "tambon": "ต.สว่างอารมณ์",
-          "amphoe": "อ.สว่างอารมณ์",
-          "province": "จ.อุทัยธานี",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "อบต.สว่างแจ้งสบายใจ",
-          "latitude": 15.559001,
-          "longitude": 99.864809,
-          "sum_rainfall_mm": 127.0,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.85073,
-                  15.62
-                ],
-                [
-                  99.86256,
-                  15.61753
-                ],
-                [
-                  99.86408,
-                  15.61456
-                ],
-                [
-                  99.86605,
-                  15.61399
-                ],
-                [
-                  99.86696,
-                  15.60752
-                ],
-                [
-                  99.86561,
-                  15.60598
-                ],
-                [
-                  99.86835,
-                  15.60501
-                ],
-                [
-                  99.86734,
-                  15.60208
-                ],
-                [
-                  99.86917,
-                  15.60092
-                ],
-                [
-                  99.86682,
-                  15.59903
-                ],
-                [
-                  99.8684,
-                  15.59714
-                ],
-                [
-                  99.86719,
-                  15.59606
-                ],
-                [
-                  99.86853,
-                  15.59534
-                ],
-                [
-                  99.86585,
-                  15.59434
-                ],
-                [
-                  99.86865,
-                  15.59254
-                ],
-                [
-                  99.86867,
-                  15.59092
-                ],
-                [
-                  99.86728,
-                  15.58985
-                ],
-                [
-                  99.86832,
-                  15.58765
-                ],
-                [
-                  99.86569,
-                  15.58651
-                ],
-                [
-                  99.86553,
-                  15.58531
-                ],
-                [
-                  99.86738,
-                  15.58317
-                ],
-                [
-                  99.86579,
-                  15.58252
-                ],
-                [
-                  99.86965,
-                  15.57941
-                ],
-                [
-                  99.86632,
-                  15.57881
-                ],
-                [
-                  99.86919,
-                  15.57762
-                ],
-                [
-                  99.86868,
-                  15.57458
-                ],
-                [
-                  99.87044,
-                  15.57326
-                ],
-                [
-                  99.86938,
-                  15.57158
-                ],
-                [
-                  99.8705,
-                  15.56805
-                ],
-                [
-                  99.86823,
-                  15.56717
-                ],
-                [
-                  99.8714,
-                  15.56517
-                ],
-                [
-                  99.87079,
-                  15.56378
-                ],
-                [
-                  99.87269,
-                  15.56103
-                ],
-                [
-                  99.87623,
-                  15.55916
-                ],
-                [
-                  99.87577,
-                  15.55664
-                ],
-                [
-                  99.87753,
-                  15.55431
-                ],
-                [
-                  99.87418,
-                  15.5547
-                ],
-                [
-                  99.87257,
-                  15.55335
-                ],
-                [
-                  99.87117,
-                  15.55597
-                ],
-                [
-                  99.86649,
-                  15.55843
-                ],
-                [
-                  99.86395,
-                  15.55756
-                ],
-                [
-                  99.86398,
-                  15.54705
-                ],
-                [
-                  99.86225,
-                  15.54445
-                ],
-                [
-                  99.86303,
-                  15.54313
-                ],
-                [
-                  99.85919,
-                  15.53787
-                ],
-                [
-                  99.85825,
-                  15.53382
-                ],
-                [
-                  99.84792,
-                  15.53167
-                ],
-                [
-                  99.84648,
-                  15.52912
-                ],
-                [
-                  99.84391,
-                  15.52875
-                ],
-                [
-                  99.84172,
-                  15.52578
-                ],
-                [
-                  99.8379,
-                  15.52457
-                ],
-                [
-                  99.83611,
-                  15.52215
-                ],
-                [
-                  99.83259,
-                  15.52058
-                ],
-                [
-                  99.82704,
-                  15.5226
-                ],
-                [
-                  99.82057,
-                  15.52811
-                ],
-                [
-                  99.81577,
-                  15.52992
-                ],
-                [
-                  99.81421,
-                  15.53169
-                ],
-                [
-                  99.8128,
-                  15.53555
-                ],
-                [
-                  99.81352,
-                  15.54049
-                ],
-                [
-                  99.81076,
-                  15.54391
-                ],
-                [
-                  99.81022,
-                  15.54647
-                ],
-                [
-                  99.81283,
-                  15.55518
-                ],
-                [
-                  99.82067,
-                  15.56647
-                ],
-                [
-                  99.82734,
-                  15.56769
-                ],
-                [
-                  99.83225,
-                  15.56516
-                ],
-                [
-                  99.84132,
-                  15.56441
-                ],
-                [
-                  99.84374,
-                  15.56641
-                ],
-                [
-                  99.84483,
-                  15.56569
-                ],
-                [
-                  99.84716,
-                  15.56656
-                ],
-                [
-                  99.83838,
-                  15.5733
-                ],
-                [
-                  99.83776,
-                  15.58185
-                ],
-                [
-                  99.83913,
-                  15.58755
-                ],
-                [
-                  99.8386,
-                  15.59548
-                ],
-                [
-                  99.84029,
-                  15.60614
-                ],
-                [
-                  99.84769,
-                  15.61863
-                ],
-                [
-                  99.85073,
-                  15.62
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "610401",
-          "tambon": "ต.หนองฉาง",
-          "amphoe": "อ.หนองฉาง",
-          "province": "จ.อุทัยธานี",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "ทต.หนองฉาง",
-          "latitude": 15.38896,
-          "longitude": 99.84505,
-          "sum_rainfall_mm": 223.20000000000002,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.88969,
-                  15.3982
-                ],
-                [
-                  99.89179,
-                  15.39512
-                ],
-                [
-                  99.88973,
-                  15.38657
-                ],
-                [
-                  99.88957,
-                  15.37963
-                ],
-                [
-                  99.89365,
-                  15.37225
-                ],
-                [
-                  99.89403,
-                  15.3635
-                ],
-                [
-                  99.87919,
-                  15.37205
-                ],
-                [
-                  99.86526,
-                  15.37507
-                ],
-                [
-                  99.84799,
-                  15.38325
-                ],
-                [
-                  99.84514,
-                  15.38596
-                ],
-                [
-                  99.84022,
-                  15.38292
-                ],
-                [
-                  99.8412,
-                  15.40003
-                ],
-                [
-                  99.84369,
-                  15.40943
-                ],
-                [
-                  99.84937,
-                  15.41061
-                ],
-                [
-                  99.8609,
-                  15.41664
-                ],
-                [
-                  99.86386,
-                  15.41637
-                ],
-                [
-                  99.86682,
-                  15.40688
-                ],
-                [
-                  99.86984,
-                  15.40537
-                ],
-                [
-                  99.87688,
-                  15.40695
-                ],
-                [
-                  99.88653,
-                  15.40173
-                ],
-                [
-                  99.88969,
-                  15.3982
-                ]
-              ]
-            ]
-          }
-        },
-        {
           "geocode": "220901",
           "tambon": "ต.นายายอาม",
           "amphoe": "อ.นายายอาม",
@@ -7659,8 +6209,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.นายายอาม",
           "latitude": 12.77083,
           "longitude": 101.85303,
-          "sum_rainfall_mm": 268.0,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 267.6,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -8010,8 +6560,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.ปัถวี",
           "latitude": 12.74261,
           "longitude": 102.23263,
-          "sum_rainfall_mm": 210.2,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 225.8,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -8529,8 +7079,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดโคกตะพง (แกลง)",
           "latitude": 12.78168,
           "longitude": 102.17328,
-          "sum_rainfall_mm": 238.39999999999998,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 244.4,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -8744,8 +7294,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ดอนฉิมพลี",
           "latitude": 13.90535,
           "longitude": 100.97028,
-          "sum_rainfall_mm": 264.59999999999997,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 296.4,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -8839,8 +7389,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ปากแม่น้ำบางปะกง",
           "latitude": 13.474833,
           "longitude": 100.98196,
-          "sum_rainfall_mm": 229.5,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 271.5,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -9014,8 +7564,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บางปะกง",
           "latitude": 13.54901,
           "longitude": 101.00111,
-          "sum_rainfall_mm": 311.0,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 352.40000000000003,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -9161,8 +7711,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านโพธิ์",
           "latitude": 13.58335,
           "longitude": 101.070917,
-          "sum_rainfall_mm": 409.5,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 460.0,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -9280,8 +7830,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "พนมสารคาม",
           "latitude": 13.72662,
           "longitude": 101.35298,
-          "sum_rainfall_mm": 361.2,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 392.79999999999995,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -9467,8 +8017,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.หนองแหน",
           "latitude": 13.68338,
           "longitude": 101.32512,
-          "sum_rainfall_mm": 389.4,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 419.59999999999997,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -9678,8 +8228,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.บางขวัญ",
           "latitude": 13.74984,
           "longitude": 101.07751,
-          "sum_rainfall_mm": 389.4,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 404.0,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -9920,6 +8470,401 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
+          "geocode": "200202",
+          "tambon": "ต.คลองกิ่ว",
+          "amphoe": "อ.บ้านบึง",
+          "province": "จ.ชลบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "โรงเรียนวัดหนองน้ำเขียว",
+          "latitude": 13.234701,
+          "longitude": 101.11684,
+          "sum_rainfall_mm": 247.60000000000002,
+          "observed_at": "2026-09-25T20:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  101.16626,
+                  13.25896
+                ],
+                [
+                  101.16162,
+                  13.25345
+                ],
+                [
+                  101.17732,
+                  13.24914
+                ],
+                [
+                  101.17903,
+                  13.24696
+                ],
+                [
+                  101.18676,
+                  13.2467
+                ],
+                [
+                  101.18804,
+                  13.24464
+                ],
+                [
+                  101.18791,
+                  13.23003
+                ],
+                [
+                  101.18098,
+                  13.22684
+                ],
+                [
+                  101.19108,
+                  13.21506
+                ],
+                [
+                  101.20391,
+                  13.21182
+                ],
+                [
+                  101.21001,
+                  13.20827
+                ],
+                [
+                  101.2203,
+                  13.19438
+                ],
+                [
+                  101.23098,
+                  13.18567
+                ],
+                [
+                  101.23242,
+                  13.18718
+                ],
+                [
+                  101.23877,
+                  13.17404
+                ],
+                [
+                  101.24874,
+                  13.17861
+                ],
+                [
+                  101.24789,
+                  13.17041
+                ],
+                [
+                  101.25079,
+                  13.16393
+                ],
+                [
+                  101.25066,
+                  13.14884
+                ],
+                [
+                  101.25158,
+                  13.14672
+                ],
+                [
+                  101.24903,
+                  13.14001
+                ],
+                [
+                  101.24907,
+                  13.13562
+                ],
+                [
+                  101.24769,
+                  13.13438
+                ],
+                [
+                  101.24762,
+                  13.13069
+                ],
+                [
+                  101.25046,
+                  13.12903
+                ],
+                [
+                  101.25142,
+                  13.12694
+                ],
+                [
+                  101.2492,
+                  13.12135
+                ],
+                [
+                  101.2489,
+                  13.10873
+                ],
+                [
+                  101.25565,
+                  13.09397
+                ],
+                [
+                  101.22698,
+                  13.0918
+                ],
+                [
+                  101.2117,
+                  13.09174
+                ],
+                [
+                  101.20601,
+                  13.09811
+                ],
+                [
+                  101.20302,
+                  13.09562
+                ],
+                [
+                  101.20018,
+                  13.09998
+                ],
+                [
+                  101.19714,
+                  13.10078
+                ],
+                [
+                  101.19233,
+                  13.10541
+                ],
+                [
+                  101.19169,
+                  13.10801
+                ],
+                [
+                  101.19337,
+                  13.11008
+                ],
+                [
+                  101.19283,
+                  13.11096
+                ],
+                [
+                  101.17751,
+                  13.12178
+                ],
+                [
+                  101.17184,
+                  13.12195
+                ],
+                [
+                  101.16784,
+                  13.12331
+                ],
+                [
+                  101.16592,
+                  13.12508
+                ],
+                [
+                  101.16521,
+                  13.12924
+                ],
+                [
+                  101.15916,
+                  13.13183
+                ],
+                [
+                  101.15617,
+                  13.13179
+                ],
+                [
+                  101.15116,
+                  13.13567
+                ],
+                [
+                  101.1449,
+                  13.14699
+                ],
+                [
+                  101.14313,
+                  13.16302
+                ],
+                [
+                  101.14125,
+                  13.16521
+                ],
+                [
+                  101.1367,
+                  13.16704
+                ],
+                [
+                  101.13454,
+                  13.17239
+                ],
+                [
+                  101.13045,
+                  13.17417
+                ],
+                [
+                  101.12786,
+                  13.17967
+                ],
+                [
+                  101.1187,
+                  13.18109
+                ],
+                [
+                  101.11004,
+                  13.18062
+                ],
+                [
+                  101.10352,
+                  13.18309
+                ],
+                [
+                  101.09467,
+                  13.18226
+                ],
+                [
+                  101.088,
+                  13.18472
+                ],
+                [
+                  101.08068,
+                  13.19249
+                ],
+                [
+                  101.07651,
+                  13.1999
+                ],
+                [
+                  101.07059,
+                  13.20246
+                ],
+                [
+                  101.06988,
+                  13.20735
+                ],
+                [
+                  101.07487,
+                  13.21335
+                ],
+                [
+                  101.0749,
+                  13.21783
+                ],
+                [
+                  101.07424,
+                  13.21863
+                ],
+                [
+                  101.06855,
+                  13.21846
+                ],
+                [
+                  101.06311,
+                  13.22174
+                ],
+                [
+                  101.05901,
+                  13.23612
+                ],
+                [
+                  101.0598,
+                  13.23761
+                ],
+                [
+                  101.06262,
+                  13.23792
+                ],
+                [
+                  101.06036,
+                  13.24642
+                ],
+                [
+                  101.06202,
+                  13.25281
+                ],
+                [
+                  101.05864,
+                  13.2545
+                ],
+                [
+                  101.05675,
+                  13.25922
+                ],
+                [
+                  101.07318,
+                  13.25664
+                ],
+                [
+                  101.08972,
+                  13.25676
+                ],
+                [
+                  101.10345,
+                  13.26889
+                ],
+                [
+                  101.11258,
+                  13.27049
+                ],
+                [
+                  101.1197,
+                  13.27541
+                ],
+                [
+                  101.12459,
+                  13.27425
+                ],
+                [
+                  101.12533,
+                  13.27123
+                ],
+                [
+                  101.1291,
+                  13.27064
+                ],
+                [
+                  101.13405,
+                  13.27858
+                ],
+                [
+                  101.13352,
+                  13.28354
+                ],
+                [
+                  101.13673,
+                  13.28658
+                ],
+                [
+                  101.13892,
+                  13.28382
+                ],
+                [
+                  101.14061,
+                  13.27713
+                ],
+                [
+                  101.14867,
+                  13.2742
+                ],
+                [
+                  101.15398,
+                  13.27528
+                ],
+                [
+                  101.15714,
+                  13.27105
+                ],
+                [
+                  101.16191,
+                  13.2698
+                ],
+                [
+                  101.16037,
+                  13.26532
+                ],
+                [
+                  101.16626,
+                  13.25896
+                ]
+              ]
+            ]
+          }
+        },
+        {
           "geocode": "200204",
           "tambon": "ต.หนองซ้ำซาก",
           "amphoe": "อ.บ้านบึง",
@@ -9929,8 +8874,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์ป่าอ่างช้างน้ำ",
           "latitude": 13.2743,
           "longitude": 101.082,
-          "sum_rainfall_mm": 259.6,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 270.80000000000007,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -10128,8 +9073,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ที่ทำการเขตรักษาพันธุ์สัตว์ป่าเขาเขียว-เขาชมภู่",
           "latitude": 13.240835,
           "longitude": 101.04208,
-          "sum_rainfall_mm": 364.6,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 375.0,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -10430,6 +9375,2508 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
+          "geocode": "230701",
+          "tambon": "ต.เกาะช้าง",
+          "amphoe": "อ.เกาะช้าง",
+          "province": "จ.ตราด",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "ที่ทำการอุทยานแห่งชาติเกาะช้าง",
+          "latitude": 12.12542,
+          "longitude": 102.26843,
+          "sum_rainfall_mm": 212.80000000000004,
+          "observed_at": "2026-09-25T20:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  102.29535,
+                  12.14254
+                ],
+                [
+                  102.29783,
+                  12.14349
+                ],
+                [
+                  102.30038,
+                  12.14183
+                ],
+                [
+                  102.30315,
+                  12.14257
+                ],
+                [
+                  102.30766,
+                  12.13972
+                ],
+                [
+                  102.31103,
+                  12.13958
+                ],
+                [
+                  102.31451,
+                  12.1376
+                ],
+                [
+                  102.31778,
+                  12.13779
+                ],
+                [
+                  102.32075,
+                  12.13594
+                ],
+                [
+                  102.32235,
+                  12.13639
+                ],
+                [
+                  102.32656,
+                  12.13384
+                ],
+                [
+                  102.33044,
+                  12.12724
+                ],
+                [
+                  102.33801,
+                  12.12323
+                ],
+                [
+                  102.34128,
+                  12.11891
+                ],
+                [
+                  102.34776,
+                  12.1187
+                ],
+                [
+                  102.35622,
+                  12.1127
+                ],
+                [
+                  102.35903,
+                  12.10701
+                ],
+                [
+                  102.35906,
+                  12.10166
+                ],
+                [
+                  102.36231,
+                  12.09853
+                ],
+                [
+                  102.36467,
+                  12.09371
+                ],
+                [
+                  102.36552,
+                  12.08876
+                ],
+                [
+                  102.36996,
+                  12.08309
+                ],
+                [
+                  102.37272,
+                  12.07681
+                ],
+                [
+                  102.37685,
+                  12.07201
+                ],
+                [
+                  102.3831,
+                  12.06844
+                ],
+                [
+                  102.38307,
+                  12.06633
+                ],
+                [
+                  102.38156,
+                  12.06433
+                ],
+                [
+                  102.38428,
+                  12.06058
+                ],
+                [
+                  102.384,
+                  12.05619
+                ],
+                [
+                  102.38662,
+                  12.05399
+                ],
+                [
+                  102.39333,
+                  12.05215
+                ],
+                [
+                  102.38945,
+                  12.05038
+                ],
+                [
+                  102.38549,
+                  12.04637
+                ],
+                [
+                  102.38236,
+                  12.04013
+                ],
+                [
+                  102.37963,
+                  12.03799
+                ],
+                [
+                  102.37696,
+                  12.03845
+                ],
+                [
+                  102.37553,
+                  12.04006
+                ],
+                [
+                  102.37483,
+                  12.04799
+                ],
+                [
+                  102.36652,
+                  12.0531
+                ],
+                [
+                  102.36092,
+                  12.05158
+                ],
+                [
+                  102.35604,
+                  12.0466
+                ],
+                [
+                  102.3517,
+                  12.04594
+                ],
+                [
+                  102.34271,
+                  12.04226
+                ],
+                [
+                  102.33704,
+                  12.04211
+                ],
+                [
+                  102.33709,
+                  12.03819
+                ],
+                [
+                  102.34058,
+                  12.03026
+                ],
+                [
+                  102.34053,
+                  12.02431
+                ],
+                [
+                  102.33357,
+                  12.02018
+                ],
+                [
+                  102.32592,
+                  12.01346
+                ],
+                [
+                  102.32011,
+                  12.00433
+                ],
+                [
+                  102.31233,
+                  12.01054
+                ],
+                [
+                  102.30712,
+                  12.00517
+                ],
+                [
+                  102.3009,
+                  12.00853
+                ],
+                [
+                  102.29771,
+                  12.00312
+                ],
+                [
+                  102.29528,
+                  12.00225
+                ],
+                [
+                  102.29325,
+                  12.00325
+                ],
+                [
+                  102.29006,
+                  12.008
+                ],
+                [
+                  102.28716,
+                  12.01479
+                ],
+                [
+                  102.28444,
+                  12.01462
+                ],
+                [
+                  102.28149,
+                  12.01727
+                ],
+                [
+                  102.2814,
+                  12.02018
+                ],
+                [
+                  102.28363,
+                  12.02264
+                ],
+                [
+                  102.28857,
+                  12.02099
+                ],
+                [
+                  102.29043,
+                  12.02426
+                ],
+                [
+                  102.28863,
+                  12.03098
+                ],
+                [
+                  102.29043,
+                  12.0353
+                ],
+                [
+                  102.29204,
+                  12.04515
+                ],
+                [
+                  102.28517,
+                  12.06216
+                ],
+                [
+                  102.28233,
+                  12.06543
+                ],
+                [
+                  102.2789,
+                  12.06438
+                ],
+                [
+                  102.27891,
+                  12.06558
+                ],
+                [
+                  102.27736,
+                  12.06636
+                ],
+                [
+                  102.27733,
+                  12.06901
+                ],
+                [
+                  102.2745,
+                  12.07277
+                ],
+                [
+                  102.27682,
+                  12.07677
+                ],
+                [
+                  102.27549,
+                  12.08283
+                ],
+                [
+                  102.27694,
+                  12.08592
+                ],
+                [
+                  102.2754,
+                  12.09461
+                ],
+                [
+                  102.2736,
+                  12.09652
+                ],
+                [
+                  102.26987,
+                  12.10561
+                ],
+                [
+                  102.26466,
+                  12.11039
+                ],
+                [
+                  102.2652,
+                  12.11492
+                ],
+                [
+                  102.26196,
+                  12.11901
+                ],
+                [
+                  102.26029,
+                  12.12371
+                ],
+                [
+                  102.25392,
+                  12.12912
+                ],
+                [
+                  102.25226,
+                  12.13403
+                ],
+                [
+                  102.2497,
+                  12.13695
+                ],
+                [
+                  102.25088,
+                  12.1376
+                ],
+                [
+                  102.25911,
+                  12.13551
+                ],
+                [
+                  102.26391,
+                  12.13755
+                ],
+                [
+                  102.26457,
+                  12.13896
+                ],
+                [
+                  102.2639,
+                  12.14336
+                ],
+                [
+                  102.25087,
+                  12.15393
+                ],
+                [
+                  102.25091,
+                  12.15736
+                ],
+                [
+                  102.25299,
+                  12.15761
+                ],
+                [
+                  102.25762,
+                  12.15566
+                ],
+                [
+                  102.27013,
+                  12.14535
+                ],
+                [
+                  102.27788,
+                  12.14769
+                ],
+                [
+                  102.27886,
+                  12.14676
+                ],
+                [
+                  102.27694,
+                  12.14509
+                ],
+                [
+                  102.27685,
+                  12.14304
+                ],
+                [
+                  102.27902,
+                  12.14164
+                ],
+                [
+                  102.28405,
+                  12.14143
+                ],
+                [
+                  102.2863,
+                  12.14332
+                ],
+                [
+                  102.2924,
+                  12.14415
+                ],
+                [
+                  102.29535,
+                  12.14254
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "230307",
+          "tambon": "ต.เทพนิมิต",
+          "amphoe": "อ.เขาสมิง",
+          "province": "จ.ตราด",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "วัดเทพนิมิต",
+          "latitude": 12.433914,
+          "longitude": 102.433072,
+          "sum_rainfall_mm": 143.0,
+          "observed_at": "2026-09-25T20:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  102.42092,
+                  12.50181
+                ],
+                [
+                  102.42446,
+                  12.49823
+                ],
+                [
+                  102.43516,
+                  12.4968
+                ],
+                [
+                  102.43848,
+                  12.49451
+                ],
+                [
+                  102.43967,
+                  12.49195
+                ],
+                [
+                  102.4442,
+                  12.49002
+                ],
+                [
+                  102.44739,
+                  12.49185
+                ],
+                [
+                  102.44958,
+                  12.49559
+                ],
+                [
+                  102.45475,
+                  12.49455
+                ],
+                [
+                  102.46757,
+                  12.50203
+                ],
+                [
+                  102.47036,
+                  12.50008
+                ],
+                [
+                  102.48306,
+                  12.49844
+                ],
+                [
+                  102.48409,
+                  12.4968
+                ],
+                [
+                  102.48333,
+                  12.4929
+                ],
+                [
+                  102.48112,
+                  12.49197
+                ],
+                [
+                  102.48075,
+                  12.49011
+                ],
+                [
+                  102.48584,
+                  12.48934
+                ],
+                [
+                  102.48611,
+                  12.48475
+                ],
+                [
+                  102.48837,
+                  12.48246
+                ],
+                [
+                  102.47792,
+                  12.47601
+                ],
+                [
+                  102.47714,
+                  12.4746
+                ],
+                [
+                  102.47737,
+                  12.46961
+                ],
+                [
+                  102.47558,
+                  12.46751
+                ],
+                [
+                  102.48038,
+                  12.45634
+                ],
+                [
+                  102.47774,
+                  12.4556
+                ],
+                [
+                  102.47353,
+                  12.45687
+                ],
+                [
+                  102.47258,
+                  12.45246
+                ],
+                [
+                  102.46917,
+                  12.45336
+                ],
+                [
+                  102.46976,
+                  12.44978
+                ],
+                [
+                  102.46527,
+                  12.44825
+                ],
+                [
+                  102.46096,
+                  12.44386
+                ],
+                [
+                  102.45868,
+                  12.44454
+                ],
+                [
+                  102.45552,
+                  12.43926
+                ],
+                [
+                  102.45249,
+                  12.44429
+                ],
+                [
+                  102.44838,
+                  12.43854
+                ],
+                [
+                  102.44413,
+                  12.44364
+                ],
+                [
+                  102.43885,
+                  12.44422
+                ],
+                [
+                  102.4356,
+                  12.44317
+                ],
+                [
+                  102.43553,
+                  12.44099
+                ],
+                [
+                  102.44052,
+                  12.43846
+                ],
+                [
+                  102.43364,
+                  12.43404
+                ],
+                [
+                  102.43544,
+                  12.42335
+                ],
+                [
+                  102.43884,
+                  12.42394
+                ],
+                [
+                  102.44025,
+                  12.42237
+                ],
+                [
+                  102.43624,
+                  12.41953
+                ],
+                [
+                  102.4342,
+                  12.42123
+                ],
+                [
+                  102.42937,
+                  12.41936
+                ],
+                [
+                  102.42606,
+                  12.42185
+                ],
+                [
+                  102.42736,
+                  12.42536
+                ],
+                [
+                  102.42393,
+                  12.4278
+                ],
+                [
+                  102.4244,
+                  12.4317
+                ],
+                [
+                  102.42122,
+                  12.43617
+                ],
+                [
+                  102.42379,
+                  12.44267
+                ],
+                [
+                  102.41978,
+                  12.44454
+                ],
+                [
+                  102.41355,
+                  12.4411
+                ],
+                [
+                  102.40618,
+                  12.44932
+                ],
+                [
+                  102.39946,
+                  12.44694
+                ],
+                [
+                  102.3937,
+                  12.44824
+                ],
+                [
+                  102.388,
+                  12.45554
+                ],
+                [
+                  102.3813,
+                  12.4601
+                ],
+                [
+                  102.38224,
+                  12.4626
+                ],
+                [
+                  102.38848,
+                  12.46596
+                ],
+                [
+                  102.39067,
+                  12.46861
+                ],
+                [
+                  102.39733,
+                  12.49494
+                ],
+                [
+                  102.39933,
+                  12.49816
+                ],
+                [
+                  102.40495,
+                  12.5009
+                ],
+                [
+                  102.41203,
+                  12.50018
+                ],
+                [
+                  102.41622,
+                  12.5037
+                ],
+                [
+                  102.42092,
+                  12.50181
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "230303",
+          "tambon": "ต.วังตะเคียน",
+          "amphoe": "อ.เขาสมิง",
+          "province": "จ.ตราด",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "คลองโสน",
+          "latitude": 12.513374,
+          "longitude": 102.50484,
+          "sum_rainfall_mm": 328.40000000000003,
+          "observed_at": "2026-09-25T20:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  102.55166,
+                  12.50206
+                ],
+                [
+                  102.55605,
+                  12.49277
+                ],
+                [
+                  102.55643,
+                  12.48535
+                ],
+                [
+                  102.56063,
+                  12.48417
+                ],
+                [
+                  102.5627,
+                  12.48031
+                ],
+                [
+                  102.56253,
+                  12.47809
+                ],
+                [
+                  102.55946,
+                  12.4749
+                ],
+                [
+                  102.55324,
+                  12.47324
+                ],
+                [
+                  102.5534,
+                  12.46784
+                ],
+                [
+                  102.55059,
+                  12.46521
+                ],
+                [
+                  102.55151,
+                  12.46285
+                ],
+                [
+                  102.54887,
+                  12.46242
+                ],
+                [
+                  102.54972,
+                  12.45822
+                ],
+                [
+                  102.5469,
+                  12.45767
+                ],
+                [
+                  102.53976,
+                  12.45043
+                ],
+                [
+                  102.53715,
+                  12.45028
+                ],
+                [
+                  102.53694,
+                  12.44805
+                ],
+                [
+                  102.53851,
+                  12.44568
+                ],
+                [
+                  102.53649,
+                  12.44473
+                ],
+                [
+                  102.53573,
+                  12.44294
+                ],
+                [
+                  102.53378,
+                  12.44352
+                ],
+                [
+                  102.5293,
+                  12.44131
+                ],
+                [
+                  102.52773,
+                  12.44217
+                ],
+                [
+                  102.52803,
+                  12.43839
+                ],
+                [
+                  102.52706,
+                  12.43817
+                ],
+                [
+                  102.52583,
+                  12.44041
+                ],
+                [
+                  102.52348,
+                  12.43619
+                ],
+                [
+                  102.52195,
+                  12.43754
+                ],
+                [
+                  102.52297,
+                  12.43314
+                ],
+                [
+                  102.51828,
+                  12.4332
+                ],
+                [
+                  102.50733,
+                  12.42565
+                ],
+                [
+                  102.50382,
+                  12.42835
+                ],
+                [
+                  102.49678,
+                  12.42732
+                ],
+                [
+                  102.49354,
+                  12.42214
+                ],
+                [
+                  102.4855,
+                  12.41691
+                ],
+                [
+                  102.48187,
+                  12.41297
+                ],
+                [
+                  102.47929,
+                  12.4122
+                ],
+                [
+                  102.47408,
+                  12.40721
+                ],
+                [
+                  102.46965,
+                  12.40518
+                ],
+                [
+                  102.46196,
+                  12.40665
+                ],
+                [
+                  102.46383,
+                  12.41178
+                ],
+                [
+                  102.45709,
+                  12.42106
+                ],
+                [
+                  102.45281,
+                  12.42454
+                ],
+                [
+                  102.45053,
+                  12.42467
+                ],
+                [
+                  102.44731,
+                  12.4231
+                ],
+                [
+                  102.44369,
+                  12.41937
+                ],
+                [
+                  102.44163,
+                  12.42017
+                ],
+                [
+                  102.43918,
+                  12.4238
+                ],
+                [
+                  102.43544,
+                  12.42335
+                ],
+                [
+                  102.43364,
+                  12.43404
+                ],
+                [
+                  102.44052,
+                  12.43846
+                ],
+                [
+                  102.43553,
+                  12.44099
+                ],
+                [
+                  102.4361,
+                  12.44358
+                ],
+                [
+                  102.44413,
+                  12.44364
+                ],
+                [
+                  102.44838,
+                  12.43854
+                ],
+                [
+                  102.45249,
+                  12.44429
+                ],
+                [
+                  102.45552,
+                  12.43926
+                ],
+                [
+                  102.45868,
+                  12.44454
+                ],
+                [
+                  102.46096,
+                  12.44386
+                ],
+                [
+                  102.46527,
+                  12.44825
+                ],
+                [
+                  102.46976,
+                  12.44978
+                ],
+                [
+                  102.46917,
+                  12.45336
+                ],
+                [
+                  102.47258,
+                  12.45246
+                ],
+                [
+                  102.47353,
+                  12.45687
+                ],
+                [
+                  102.47774,
+                  12.4556
+                ],
+                [
+                  102.48069,
+                  12.45659
+                ],
+                [
+                  102.47558,
+                  12.46751
+                ],
+                [
+                  102.47737,
+                  12.46961
+                ],
+                [
+                  102.47714,
+                  12.4746
+                ],
+                [
+                  102.47792,
+                  12.47601
+                ],
+                [
+                  102.48842,
+                  12.48211
+                ],
+                [
+                  102.48611,
+                  12.48475
+                ],
+                [
+                  102.48584,
+                  12.48934
+                ],
+                [
+                  102.48161,
+                  12.48946
+                ],
+                [
+                  102.48068,
+                  12.49119
+                ],
+                [
+                  102.48418,
+                  12.49317
+                ],
+                [
+                  102.48647,
+                  12.49805
+                ],
+                [
+                  102.49022,
+                  12.499
+                ],
+                [
+                  102.49051,
+                  12.50211
+                ],
+                [
+                  102.49314,
+                  12.50337
+                ],
+                [
+                  102.49522,
+                  12.50627
+                ],
+                [
+                  102.49543,
+                  12.51116
+                ],
+                [
+                  102.49904,
+                  12.51258
+                ],
+                [
+                  102.50304,
+                  12.51176
+                ],
+                [
+                  102.50649,
+                  12.51534
+                ],
+                [
+                  102.50647,
+                  12.51152
+                ],
+                [
+                  102.50865,
+                  12.51239
+                ],
+                [
+                  102.51044,
+                  12.51057
+                ],
+                [
+                  102.5127,
+                  12.51035
+                ],
+                [
+                  102.51415,
+                  12.51341
+                ],
+                [
+                  102.51933,
+                  12.51082
+                ],
+                [
+                  102.52188,
+                  12.51296
+                ],
+                [
+                  102.52317,
+                  12.51267
+                ],
+                [
+                  102.52313,
+                  12.5142
+                ],
+                [
+                  102.52609,
+                  12.5127
+                ],
+                [
+                  102.52833,
+                  12.5162
+                ],
+                [
+                  102.529,
+                  12.51307
+                ],
+                [
+                  102.53158,
+                  12.51453
+                ],
+                [
+                  102.53512,
+                  12.51133
+                ],
+                [
+                  102.53711,
+                  12.51253
+                ],
+                [
+                  102.53981,
+                  12.51087
+                ],
+                [
+                  102.54184,
+                  12.51223
+                ],
+                [
+                  102.54462,
+                  12.51129
+                ],
+                [
+                  102.54479,
+                  12.50881
+                ],
+                [
+                  102.54736,
+                  12.50872
+                ],
+                [
+                  102.54804,
+                  12.50628
+                ],
+                [
+                  102.55054,
+                  12.5053
+                ],
+                [
+                  102.55166,
+                  12.50206
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "230405",
+          "tambon": "ต.นนทรีย์",
+          "amphoe": "อ.บ่อไร่",
+          "province": "จ.ตราด",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "วัดทุ่งตอง",
+          "latitude": 12.515793,
+          "longitude": 102.59027,
+          "sum_rainfall_mm": 275.0,
+          "observed_at": "2026-09-25T20:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  102.64766,
+                  12.60233
+                ],
+                [
+                  102.64733,
+                  12.59604
+                ],
+                [
+                  102.64434,
+                  12.59481
+                ],
+                [
+                  102.6456,
+                  12.59012
+                ],
+                [
+                  102.64457,
+                  12.58492
+                ],
+                [
+                  102.6488,
+                  12.5839
+                ],
+                [
+                  102.65154,
+                  12.58187
+                ],
+                [
+                  102.65409,
+                  12.58286
+                ],
+                [
+                  102.65766,
+                  12.58149
+                ],
+                [
+                  102.66192,
+                  12.58249
+                ],
+                [
+                  102.66712,
+                  12.57336
+                ],
+                [
+                  102.66778,
+                  12.56274
+                ],
+                [
+                  102.67562,
+                  12.55911
+                ],
+                [
+                  102.68504,
+                  12.54798
+                ],
+                [
+                  102.6778,
+                  12.54239
+                ],
+                [
+                  102.67764,
+                  12.53871
+                ],
+                [
+                  102.67938,
+                  12.53718
+                ],
+                [
+                  102.68446,
+                  12.53717
+                ],
+                [
+                  102.69237,
+                  12.53194
+                ],
+                [
+                  102.69387,
+                  12.52885
+                ],
+                [
+                  102.69692,
+                  12.52634
+                ],
+                [
+                  102.69534,
+                  12.52335
+                ],
+                [
+                  102.69579,
+                  12.51922
+                ],
+                [
+                  102.68102,
+                  12.5247
+                ],
+                [
+                  102.66668,
+                  12.5254
+                ],
+                [
+                  102.66241,
+                  12.52304
+                ],
+                [
+                  102.65961,
+                  12.52431
+                ],
+                [
+                  102.65809,
+                  12.5238
+                ],
+                [
+                  102.65549,
+                  12.52652
+                ],
+                [
+                  102.65431,
+                  12.53273
+                ],
+                [
+                  102.64929,
+                  12.53263
+                ],
+                [
+                  102.64575,
+                  12.53514
+                ],
+                [
+                  102.64487,
+                  12.53887
+                ],
+                [
+                  102.639,
+                  12.54179
+                ],
+                [
+                  102.6375,
+                  12.53392
+                ],
+                [
+                  102.63877,
+                  12.53175
+                ],
+                [
+                  102.63858,
+                  12.5242
+                ],
+                [
+                  102.63718,
+                  12.52287
+                ],
+                [
+                  102.63467,
+                  12.5228
+                ],
+                [
+                  102.63411,
+                  12.51966
+                ],
+                [
+                  102.63069,
+                  12.51934
+                ],
+                [
+                  102.63257,
+                  12.51542
+                ],
+                [
+                  102.62763,
+                  12.51851
+                ],
+                [
+                  102.62366,
+                  12.51884
+                ],
+                [
+                  102.61579,
+                  12.51267
+                ],
+                [
+                  102.61286,
+                  12.51511
+                ],
+                [
+                  102.6113,
+                  12.51487
+                ],
+                [
+                  102.607,
+                  12.5099
+                ],
+                [
+                  102.60459,
+                  12.50223
+                ],
+                [
+                  102.60102,
+                  12.50013
+                ],
+                [
+                  102.6005,
+                  12.49857
+                ],
+                [
+                  102.59553,
+                  12.50041
+                ],
+                [
+                  102.59112,
+                  12.49884
+                ],
+                [
+                  102.58606,
+                  12.49952
+                ],
+                [
+                  102.58129,
+                  12.50417
+                ],
+                [
+                  102.58101,
+                  12.50574
+                ],
+                [
+                  102.57821,
+                  12.50417
+                ],
+                [
+                  102.57617,
+                  12.5005
+                ],
+                [
+                  102.57407,
+                  12.49922
+                ],
+                [
+                  102.57164,
+                  12.49992
+                ],
+                [
+                  102.56743,
+                  12.50384
+                ],
+                [
+                  102.56357,
+                  12.50495
+                ],
+                [
+                  102.55687,
+                  12.50364
+                ],
+                [
+                  102.55471,
+                  12.50444
+                ],
+                [
+                  102.55166,
+                  12.50206
+                ],
+                [
+                  102.55054,
+                  12.5053
+                ],
+                [
+                  102.54804,
+                  12.50628
+                ],
+                [
+                  102.54736,
+                  12.50872
+                ],
+                [
+                  102.54479,
+                  12.50881
+                ],
+                [
+                  102.54462,
+                  12.51129
+                ],
+                [
+                  102.54184,
+                  12.51223
+                ],
+                [
+                  102.53981,
+                  12.51087
+                ],
+                [
+                  102.53711,
+                  12.51253
+                ],
+                [
+                  102.53512,
+                  12.51133
+                ],
+                [
+                  102.53158,
+                  12.51453
+                ],
+                [
+                  102.529,
+                  12.51307
+                ],
+                [
+                  102.52833,
+                  12.5162
+                ],
+                [
+                  102.52609,
+                  12.5127
+                ],
+                [
+                  102.52313,
+                  12.5142
+                ],
+                [
+                  102.52317,
+                  12.51267
+                ],
+                [
+                  102.52188,
+                  12.51296
+                ],
+                [
+                  102.51933,
+                  12.51082
+                ],
+                [
+                  102.51415,
+                  12.51341
+                ],
+                [
+                  102.5127,
+                  12.51035
+                ],
+                [
+                  102.51044,
+                  12.51057
+                ],
+                [
+                  102.50865,
+                  12.51239
+                ],
+                [
+                  102.50647,
+                  12.51152
+                ],
+                [
+                  102.50649,
+                  12.51534
+                ],
+                [
+                  102.50374,
+                  12.51221
+                ],
+                [
+                  102.50155,
+                  12.51193
+                ],
+                [
+                  102.50335,
+                  12.51562
+                ],
+                [
+                  102.51027,
+                  12.51687
+                ],
+                [
+                  102.51023,
+                  12.52042
+                ],
+                [
+                  102.51438,
+                  12.52249
+                ],
+                [
+                  102.51586,
+                  12.52688
+                ],
+                [
+                  102.52056,
+                  12.53143
+                ],
+                [
+                  102.52286,
+                  12.53542
+                ],
+                [
+                  102.52704,
+                  12.53878
+                ],
+                [
+                  102.53159,
+                  12.539
+                ],
+                [
+                  102.5331,
+                  12.54012
+                ],
+                [
+                  102.53464,
+                  12.5378
+                ],
+                [
+                  102.53654,
+                  12.53846
+                ],
+                [
+                  102.53925,
+                  12.53634
+                ],
+                [
+                  102.54135,
+                  12.53874
+                ],
+                [
+                  102.54496,
+                  12.53713
+                ],
+                [
+                  102.55165,
+                  12.54042
+                ],
+                [
+                  102.55275,
+                  12.54224
+                ],
+                [
+                  102.55315,
+                  12.5516
+                ],
+                [
+                  102.56583,
+                  12.55931
+                ],
+                [
+                  102.56704,
+                  12.56497
+                ],
+                [
+                  102.57149,
+                  12.56649
+                ],
+                [
+                  102.57662,
+                  12.56653
+                ],
+                [
+                  102.57772,
+                  12.57065
+                ],
+                [
+                  102.57932,
+                  12.57237
+                ],
+                [
+                  102.59596,
+                  12.5784
+                ],
+                [
+                  102.59578,
+                  12.58922
+                ],
+                [
+                  102.60621,
+                  12.58713
+                ],
+                [
+                  102.6114,
+                  12.58317
+                ],
+                [
+                  102.61772,
+                  12.584
+                ],
+                [
+                  102.62554,
+                  12.58927
+                ],
+                [
+                  102.62873,
+                  12.5929
+                ],
+                [
+                  102.63562,
+                  12.59533
+                ],
+                [
+                  102.63851,
+                  12.59511
+                ],
+                [
+                  102.64625,
+                  12.59726
+                ],
+                [
+                  102.64685,
+                  12.59873
+                ],
+                [
+                  102.64552,
+                  12.60563
+                ],
+                [
+                  102.64661,
+                  12.60888
+                ],
+                [
+                  102.64766,
+                  12.60233
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "230401",
+          "tambon": "ต.บ่อพลอย",
+          "amphoe": "อ.บ่อไร่",
+          "province": "จ.ตราด",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์คลองสะตอ",
+          "latitude": 12.5973,
+          "longitude": 102.608,
+          "sum_rainfall_mm": 241.60000000000002,
+          "observed_at": "2026-09-25T20:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  102.58749,
+                  12.63992
+                ],
+                [
+                  102.59142,
+                  12.63827
+                ],
+                [
+                  102.59374,
+                  12.63449
+                ],
+                [
+                  102.59905,
+                  12.62981
+                ],
+                [
+                  102.60559,
+                  12.62745
+                ],
+                [
+                  102.60785,
+                  12.62399
+                ],
+                [
+                  102.61709,
+                  12.6155
+                ],
+                [
+                  102.6269,
+                  12.61448
+                ],
+                [
+                  102.62923,
+                  12.61249
+                ],
+                [
+                  102.62974,
+                  12.6095
+                ],
+                [
+                  102.64521,
+                  12.61086
+                ],
+                [
+                  102.64661,
+                  12.60888
+                ],
+                [
+                  102.64552,
+                  12.60563
+                ],
+                [
+                  102.64648,
+                  12.59749
+                ],
+                [
+                  102.62873,
+                  12.5929
+                ],
+                [
+                  102.61935,
+                  12.5846
+                ],
+                [
+                  102.61414,
+                  12.58316
+                ],
+                [
+                  102.60967,
+                  12.58382
+                ],
+                [
+                  102.60621,
+                  12.58713
+                ],
+                [
+                  102.59578,
+                  12.58922
+                ],
+                [
+                  102.59596,
+                  12.5784
+                ],
+                [
+                  102.57932,
+                  12.57237
+                ],
+                [
+                  102.57772,
+                  12.57065
+                ],
+                [
+                  102.57662,
+                  12.56653
+                ],
+                [
+                  102.57149,
+                  12.56649
+                ],
+                [
+                  102.56704,
+                  12.56497
+                ],
+                [
+                  102.56583,
+                  12.55931
+                ],
+                [
+                  102.55315,
+                  12.5516
+                ],
+                [
+                  102.55275,
+                  12.54224
+                ],
+                [
+                  102.55165,
+                  12.54042
+                ],
+                [
+                  102.54496,
+                  12.53713
+                ],
+                [
+                  102.54135,
+                  12.53874
+                ],
+                [
+                  102.53925,
+                  12.53634
+                ],
+                [
+                  102.53654,
+                  12.53846
+                ],
+                [
+                  102.53464,
+                  12.5378
+                ],
+                [
+                  102.5331,
+                  12.54012
+                ],
+                [
+                  102.53159,
+                  12.539
+                ],
+                [
+                  102.5268,
+                  12.53864
+                ],
+                [
+                  102.51586,
+                  12.52688
+                ],
+                [
+                  102.51438,
+                  12.52249
+                ],
+                [
+                  102.51023,
+                  12.52042
+                ],
+                [
+                  102.51,
+                  12.51663
+                ],
+                [
+                  102.50335,
+                  12.51562
+                ],
+                [
+                  102.5018,
+                  12.51205
+                ],
+                [
+                  102.49868,
+                  12.51253
+                ],
+                [
+                  102.49521,
+                  12.51094
+                ],
+                [
+                  102.49562,
+                  12.50742
+                ],
+                [
+                  102.4938,
+                  12.50412
+                ],
+                [
+                  102.49051,
+                  12.50211
+                ],
+                [
+                  102.49022,
+                  12.499
+                ],
+                [
+                  102.48647,
+                  12.49805
+                ],
+                [
+                  102.48418,
+                  12.49317
+                ],
+                [
+                  102.48303,
+                  12.4931
+                ],
+                [
+                  102.48369,
+                  12.49809
+                ],
+                [
+                  102.47852,
+                  12.49842
+                ],
+                [
+                  102.47617,
+                  12.5
+                ],
+                [
+                  102.48078,
+                  12.50023
+                ],
+                [
+                  102.48368,
+                  12.50367
+                ],
+                [
+                  102.48497,
+                  12.51031
+                ],
+                [
+                  102.48414,
+                  12.52297
+                ],
+                [
+                  102.47874,
+                  12.53783
+                ],
+                [
+                  102.47451,
+                  12.54331
+                ],
+                [
+                  102.46979,
+                  12.54662
+                ],
+                [
+                  102.47346,
+                  12.5519
+                ],
+                [
+                  102.48511,
+                  12.56152
+                ],
+                [
+                  102.49214,
+                  12.56376
+                ],
+                [
+                  102.49796,
+                  12.56312
+                ],
+                [
+                  102.50342,
+                  12.56106
+                ],
+                [
+                  102.50711,
+                  12.56728
+                ],
+                [
+                  102.50443,
+                  12.57054
+                ],
+                [
+                  102.50527,
+                  12.57452
+                ],
+                [
+                  102.50403,
+                  12.57806
+                ],
+                [
+                  102.50445,
+                  12.58244
+                ],
+                [
+                  102.50143,
+                  12.58468
+                ],
+                [
+                  102.50118,
+                  12.58713
+                ],
+                [
+                  102.4972,
+                  12.58946
+                ],
+                [
+                  102.4954,
+                  12.59246
+                ],
+                [
+                  102.49516,
+                  12.59535
+                ],
+                [
+                  102.49686,
+                  12.59952
+                ],
+                [
+                  102.50076,
+                  12.60315
+                ],
+                [
+                  102.50222,
+                  12.60752
+                ],
+                [
+                  102.50734,
+                  12.61544
+                ],
+                [
+                  102.50354,
+                  12.62142
+                ],
+                [
+                  102.5046,
+                  12.62908
+                ],
+                [
+                  102.50719,
+                  12.63184
+                ],
+                [
+                  102.50838,
+                  12.63561
+                ],
+                [
+                  102.50643,
+                  12.6443
+                ],
+                [
+                  102.50896,
+                  12.65236
+                ],
+                [
+                  102.51615,
+                  12.65729
+                ],
+                [
+                  102.51843,
+                  12.66285
+                ],
+                [
+                  102.53195,
+                  12.65313
+                ],
+                [
+                  102.53929,
+                  12.65132
+                ],
+                [
+                  102.54438,
+                  12.65599
+                ],
+                [
+                  102.5503,
+                  12.65547
+                ],
+                [
+                  102.55222,
+                  12.65259
+                ],
+                [
+                  102.55497,
+                  12.65196
+                ],
+                [
+                  102.56762,
+                  12.65764
+                ],
+                [
+                  102.57135,
+                  12.65346
+                ],
+                [
+                  102.58001,
+                  12.65281
+                ],
+                [
+                  102.58193,
+                  12.64506
+                ],
+                [
+                  102.5852,
+                  12.64349
+                ],
+                [
+                  102.58749,
+                  12.63992
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "250212",
+          "tambon": "ต.นาแขม",
+          "amphoe": "อ.กบินทร์บุรี",
+          "province": "จ.ปราจีนบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "อบต.นาแขม",
+          "latitude": 14.04255,
+          "longitude": 101.72051,
+          "sum_rainfall_mm": 307.8,
+          "observed_at": "2026-09-25T20:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  101.74243,
+                  14.08799
+                ],
+                [
+                  101.75045,
+                  14.08732
+                ],
+                [
+                  101.752,
+                  14.08622
+                ],
+                [
+                  101.74909,
+                  14.08183
+                ],
+                [
+                  101.74417,
+                  14.08216
+                ],
+                [
+                  101.7441,
+                  14.07705
+                ],
+                [
+                  101.74737,
+                  14.07319
+                ],
+                [
+                  101.75476,
+                  14.06877
+                ],
+                [
+                  101.75509,
+                  14.0666
+                ],
+                [
+                  101.75334,
+                  14.06437
+                ],
+                [
+                  101.74732,
+                  14.06426
+                ],
+                [
+                  101.74881,
+                  14.05861
+                ],
+                [
+                  101.74778,
+                  14.05792
+                ],
+                [
+                  101.74427,
+                  14.05948
+                ],
+                [
+                  101.74321,
+                  14.05385
+                ],
+                [
+                  101.74471,
+                  14.04759
+                ],
+                [
+                  101.74817,
+                  14.04519
+                ],
+                [
+                  101.75013,
+                  14.0465
+                ],
+                [
+                  101.75351,
+                  14.04224
+                ],
+                [
+                  101.75058,
+                  14.04028
+                ],
+                [
+                  101.75349,
+                  14.03761
+                ],
+                [
+                  101.7532,
+                  14.03509
+                ],
+                [
+                  101.75565,
+                  14.03494
+                ],
+                [
+                  101.75582,
+                  14.0379
+                ],
+                [
+                  101.75662,
+                  14.03576
+                ],
+                [
+                  101.75907,
+                  14.03397
+                ],
+                [
+                  101.75658,
+                  14.03031
+                ],
+                [
+                  101.75905,
+                  14.02677
+                ],
+                [
+                  101.75513,
+                  14.02516
+                ],
+                [
+                  101.75266,
+                  14.02215
+                ],
+                [
+                  101.74777,
+                  14.02181
+                ],
+                [
+                  101.74716,
+                  14.02031
+                ],
+                [
+                  101.74941,
+                  14.01632
+                ],
+                [
+                  101.74926,
+                  14.01391
+                ],
+                [
+                  101.74576,
+                  14.01111
+                ],
+                [
+                  101.74562,
+                  14.01403
+                ],
+                [
+                  101.74434,
+                  14.0145
+                ],
+                [
+                  101.74201,
+                  14.00918
+                ],
+                [
+                  101.73743,
+                  14.00903
+                ],
+                [
+                  101.73895,
+                  14.00587
+                ],
+                [
+                  101.73821,
+                  14.0044
+                ],
+                [
+                  101.73343,
+                  14.00512
+                ],
+                [
+                  101.73049,
+                  14.0036
+                ],
+                [
+                  101.7284,
+                  14.00404
+                ],
+                [
+                  101.72736,
+                  14.00113
+                ],
+                [
+                  101.72399,
+                  14.00015
+                ],
+                [
+                  101.72466,
+                  13.99563
+                ],
+                [
+                  101.72226,
+                  13.99217
+                ],
+                [
+                  101.72055,
+                  13.99221
+                ],
+                [
+                  101.71889,
+                  13.99566
+                ],
+                [
+                  101.71429,
+                  13.99904
+                ],
+                [
+                  101.71436,
+                  13.9941
+                ],
+                [
+                  101.71309,
+                  13.99403
+                ],
+                [
+                  101.70895,
+                  13.99885
+                ],
+                [
+                  101.71313,
+                  14.00526
+                ],
+                [
+                  101.71066,
+                  14.02529
+                ],
+                [
+                  101.71431,
+                  14.03779
+                ],
+                [
+                  101.71733,
+                  14.04082
+                ],
+                [
+                  101.71232,
+                  14.04222
+                ],
+                [
+                  101.70811,
+                  14.04488
+                ],
+                [
+                  101.70671,
+                  14.05166
+                ],
+                [
+                  101.70146,
+                  14.05671
+                ],
+                [
+                  101.70254,
+                  14.05982
+                ],
+                [
+                  101.6976,
+                  14.06006
+                ],
+                [
+                  101.69187,
+                  14.0669
+                ],
+                [
+                  101.68791,
+                  14.07855
+                ],
+                [
+                  101.68301,
+                  14.08573
+                ],
+                [
+                  101.68309,
+                  14.09457
+                ],
+                [
+                  101.68439,
+                  14.09677
+                ],
+                [
+                  101.68769,
+                  14.09852
+                ],
+                [
+                  101.6913,
+                  14.09951
+                ],
+                [
+                  101.69548,
+                  14.09902
+                ],
+                [
+                  101.69843,
+                  14.10181
+                ],
+                [
+                  101.70174,
+                  14.1022
+                ],
+                [
+                  101.704,
+                  14.10118
+                ],
+                [
+                  101.70475,
+                  14.09713
+                ],
+                [
+                  101.70742,
+                  14.09395
+                ],
+                [
+                  101.71514,
+                  14.09261
+                ],
+                [
+                  101.72069,
+                  14.08911
+                ],
+                [
+                  101.72063,
+                  14.0848
+                ],
+                [
+                  101.72304,
+                  14.08176
+                ],
+                [
+                  101.72589,
+                  14.08042
+                ],
+                [
+                  101.73568,
+                  14.08251
+                ],
+                [
+                  101.74243,
+                  14.08799
+                ]
+              ]
+            ]
+          }
+        },
+        {
           "geocode": "250305",
           "tambon": "ต.แก่งดินสอ",
           "amphoe": "อ.นาดี",
@@ -10439,8 +11886,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "โรงเรียนบ้านหินเทิน",
           "latitude": 14.064819,
           "longitude": 102.01052,
-          "sum_rainfall_mm": 380.20000000000005,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 364.2,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -10847,11 +12294,11 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.ปราจีนบุรี",
           "region_id": "2",
           "region_name": "ภาคตะวันออก",
-          "station": "อบต.บุพราหมณ์",
-          "latitude": 14.20791,
-          "longitude": 101.90556,
-          "sum_rainfall_mm": 316.6,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์คลองยาง",
+          "latitude": 14.324904,
+          "longitude": 101.84176,
+          "sum_rainfall_mm": 177.0,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -11489,8 +12936,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หอทอง",
           "latitude": 13.960857,
           "longitude": 101.216475,
-          "sum_rainfall_mm": 236.5,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 247.0,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -11720,8 +13167,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านตะเภาลาย",
           "latitude": 14.012733,
           "longitude": 101.265193,
-          "sum_rainfall_mm": 234.0,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 261.0,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -12067,8 +13514,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ขญ.๑๐ (ประจันตคาม)",
           "latitude": 14.181167,
           "longitude": 101.592064,
-          "sum_rainfall_mm": 231.80000000000004,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 274.6,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -12813,6 +14260,2038 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
+          "geocode": "250701",
+          "tambon": "ต.ประจันตคาม",
+          "amphoe": "อ.ประจันตคาม",
+          "province": "จ.ปราจีนบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "ประจันตคาม (KGT7A)",
+          "latitude": 14.070941,
+          "longitude": 101.51893,
+          "sum_rainfall_mm": 287.8,
+          "observed_at": "2026-09-25T20:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  101.53603,
+                  14.08232
+                ],
+                [
+                  101.53824,
+                  14.08259
+                ],
+                [
+                  101.5469,
+                  14.0753
+                ],
+                [
+                  101.54324,
+                  14.07112
+                ],
+                [
+                  101.5442,
+                  14.06691
+                ],
+                [
+                  101.54551,
+                  14.06715
+                ],
+                [
+                  101.5455,
+                  14.06579
+                ],
+                [
+                  101.54077,
+                  14.05968
+                ],
+                [
+                  101.54635,
+                  14.05785
+                ],
+                [
+                  101.54871,
+                  14.05497
+                ],
+                [
+                  101.54921,
+                  14.04791
+                ],
+                [
+                  101.54799,
+                  14.04499
+                ],
+                [
+                  101.53976,
+                  14.04976
+                ],
+                [
+                  101.53169,
+                  14.05025
+                ],
+                [
+                  101.52409,
+                  14.05264
+                ],
+                [
+                  101.52319,
+                  14.05185
+                ],
+                [
+                  101.52396,
+                  14.04877
+                ],
+                [
+                  101.52282,
+                  14.04626
+                ],
+                [
+                  101.52596,
+                  14.04405
+                ],
+                [
+                  101.52473,
+                  14.04199
+                ],
+                [
+                  101.51659,
+                  14.04278
+                ],
+                [
+                  101.50763,
+                  14.0456
+                ],
+                [
+                  101.49836,
+                  14.04092
+                ],
+                [
+                  101.49456,
+                  14.04424
+                ],
+                [
+                  101.49078,
+                  14.04472
+                ],
+                [
+                  101.4893,
+                  14.04329
+                ],
+                [
+                  101.48908,
+                  14.03969
+                ],
+                [
+                  101.48342,
+                  14.0399
+                ],
+                [
+                  101.48059,
+                  14.03509
+                ],
+                [
+                  101.48081,
+                  14.02988
+                ],
+                [
+                  101.48447,
+                  14.02407
+                ],
+                [
+                  101.48618,
+                  14.01766
+                ],
+                [
+                  101.48457,
+                  14.01677
+                ],
+                [
+                  101.47858,
+                  14.01735
+                ],
+                [
+                  101.4726,
+                  14.01188
+                ],
+                [
+                  101.46347,
+                  14.0091
+                ],
+                [
+                  101.46141,
+                  14.00971
+                ],
+                [
+                  101.4548,
+                  14.01555
+                ],
+                [
+                  101.45413,
+                  14.02088
+                ],
+                [
+                  101.45538,
+                  14.02356
+                ],
+                [
+                  101.44915,
+                  14.02864
+                ],
+                [
+                  101.44536,
+                  14.03493
+                ],
+                [
+                  101.44747,
+                  14.03783
+                ],
+                [
+                  101.44856,
+                  14.03438
+                ],
+                [
+                  101.45159,
+                  14.03625
+                ],
+                [
+                  101.45442,
+                  14.03323
+                ],
+                [
+                  101.45705,
+                  14.03315
+                ],
+                [
+                  101.45578,
+                  14.0383
+                ],
+                [
+                  101.4522,
+                  14.03861
+                ],
+                [
+                  101.457,
+                  14.03992
+                ],
+                [
+                  101.45782,
+                  14.04229
+                ],
+                [
+                  101.45456,
+                  14.04398
+                ],
+                [
+                  101.45482,
+                  14.04489
+                ],
+                [
+                  101.46024,
+                  14.04547
+                ],
+                [
+                  101.45961,
+                  14.04712
+                ],
+                [
+                  101.45748,
+                  14.04681
+                ],
+                [
+                  101.4572,
+                  14.04977
+                ],
+                [
+                  101.45895,
+                  14.05016
+                ],
+                [
+                  101.45693,
+                  14.05193
+                ],
+                [
+                  101.45814,
+                  14.0537
+                ],
+                [
+                  101.46156,
+                  14.0538
+                ],
+                [
+                  101.46246,
+                  14.05665
+                ],
+                [
+                  101.4634,
+                  14.05668
+                ],
+                [
+                  101.46574,
+                  14.05129
+                ],
+                [
+                  101.4669,
+                  14.05296
+                ],
+                [
+                  101.46714,
+                  14.05726
+                ],
+                [
+                  101.46969,
+                  14.05771
+                ],
+                [
+                  101.46829,
+                  14.05421
+                ],
+                [
+                  101.47139,
+                  14.05586
+                ],
+                [
+                  101.47443,
+                  14.05559
+                ],
+                [
+                  101.47547,
+                  14.05695
+                ],
+                [
+                  101.47522,
+                  14.05914
+                ],
+                [
+                  101.47736,
+                  14.05857
+                ],
+                [
+                  101.47886,
+                  14.05624
+                ],
+                [
+                  101.4808,
+                  14.05678
+                ],
+                [
+                  101.47844,
+                  14.05856
+                ],
+                [
+                  101.47879,
+                  14.05928
+                ],
+                [
+                  101.48303,
+                  14.05667
+                ],
+                [
+                  101.48325,
+                  14.05805
+                ],
+                [
+                  101.48138,
+                  14.05887
+                ],
+                [
+                  101.48292,
+                  14.0612
+                ],
+                [
+                  101.48397,
+                  14.05944
+                ],
+                [
+                  101.48826,
+                  14.05835
+                ],
+                [
+                  101.48539,
+                  14.06236
+                ],
+                [
+                  101.48702,
+                  14.06453
+                ],
+                [
+                  101.4873,
+                  14.06753
+                ],
+                [
+                  101.48996,
+                  14.06661
+                ],
+                [
+                  101.4912,
+                  14.06892
+                ],
+                [
+                  101.4949,
+                  14.06894
+                ],
+                [
+                  101.51776,
+                  14.06333
+                ],
+                [
+                  101.52036,
+                  14.06784
+                ],
+                [
+                  101.51888,
+                  14.07055
+                ],
+                [
+                  101.52082,
+                  14.07212
+                ],
+                [
+                  101.51964,
+                  14.07372
+                ],
+                [
+                  101.52025,
+                  14.07951
+                ],
+                [
+                  101.52324,
+                  14.07872
+                ],
+                [
+                  101.52521,
+                  14.08061
+                ],
+                [
+                  101.52494,
+                  14.0837
+                ],
+                [
+                  101.52994,
+                  14.08361
+                ],
+                [
+                  101.53447,
+                  14.08163
+                ],
+                [
+                  101.53603,
+                  14.08232
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "250709",
+          "tambon": "ต.โพธิ์งาม",
+          "amphoe": "อ.ประจันตคาม",
+          "province": "จ.ปราจีนบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "ประจันตคาม",
+          "latitude": 14.069966,
+          "longitude": 101.518579,
+          "sum_rainfall_mm": 277.5,
+          "observed_at": "2026-09-25T20:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  101.49659,
+                  14.44756
+                ],
+                [
+                  101.50219,
+                  14.4398
+                ],
+                [
+                  101.50762,
+                  14.43558
+                ],
+                [
+                  101.5339,
+                  14.42491
+                ],
+                [
+                  101.54137,
+                  14.42575
+                ],
+                [
+                  101.54653,
+                  14.43594
+                ],
+                [
+                  101.56849,
+                  14.4346
+                ],
+                [
+                  101.58446,
+                  14.43822
+                ],
+                [
+                  101.58392,
+                  14.43224
+                ],
+                [
+                  101.58594,
+                  14.42771
+                ],
+                [
+                  101.58643,
+                  14.42134
+                ],
+                [
+                  101.58787,
+                  14.41809
+                ],
+                [
+                  101.58692,
+                  14.41553
+                ],
+                [
+                  101.58723,
+                  14.41135
+                ],
+                [
+                  101.58493,
+                  14.4104
+                ],
+                [
+                  101.58021,
+                  14.41138
+                ],
+                [
+                  101.57778,
+                  14.40883
+                ],
+                [
+                  101.57416,
+                  14.40746
+                ],
+                [
+                  101.57384,
+                  14.40581
+                ],
+                [
+                  101.57473,
+                  14.40268
+                ],
+                [
+                  101.57967,
+                  14.40002
+                ],
+                [
+                  101.57955,
+                  14.39725
+                ],
+                [
+                  101.58111,
+                  14.39499
+                ],
+                [
+                  101.58503,
+                  14.3941
+                ],
+                [
+                  101.59441,
+                  14.38725
+                ],
+                [
+                  101.59354,
+                  14.38574
+                ],
+                [
+                  101.58417,
+                  14.3836
+                ],
+                [
+                  101.58275,
+                  14.38184
+                ],
+                [
+                  101.58592,
+                  14.37375
+                ],
+                [
+                  101.5896,
+                  14.37264
+                ],
+                [
+                  101.59006,
+                  14.36973
+                ],
+                [
+                  101.58914,
+                  14.36765
+                ],
+                [
+                  101.58723,
+                  14.36926
+                ],
+                [
+                  101.58362,
+                  14.36835
+                ],
+                [
+                  101.582,
+                  14.36632
+                ],
+                [
+                  101.57571,
+                  14.36568
+                ],
+                [
+                  101.56206,
+                  14.37234
+                ],
+                [
+                  101.56017,
+                  14.37178
+                ],
+                [
+                  101.55432,
+                  14.3609
+                ],
+                [
+                  101.54943,
+                  14.36002
+                ],
+                [
+                  101.54819,
+                  14.35837
+                ],
+                [
+                  101.54457,
+                  14.34973
+                ],
+                [
+                  101.54514,
+                  14.34702
+                ],
+                [
+                  101.53481,
+                  14.33505
+                ],
+                [
+                  101.53283,
+                  14.33
+                ],
+                [
+                  101.52847,
+                  14.3237
+                ],
+                [
+                  101.52758,
+                  14.32024
+                ],
+                [
+                  101.52218,
+                  14.31582
+                ],
+                [
+                  101.52289,
+                  14.30969
+                ],
+                [
+                  101.52908,
+                  14.30725
+                ],
+                [
+                  101.5298,
+                  14.30435
+                ],
+                [
+                  101.52728,
+                  14.28085
+                ],
+                [
+                  101.52405,
+                  14.27849
+                ],
+                [
+                  101.52322,
+                  14.27367
+                ],
+                [
+                  101.51895,
+                  14.26587
+                ],
+                [
+                  101.52315,
+                  14.2594
+                ],
+                [
+                  101.52284,
+                  14.25629
+                ],
+                [
+                  101.52797,
+                  14.25306
+                ],
+                [
+                  101.5275,
+                  14.25122
+                ],
+                [
+                  101.52929,
+                  14.247
+                ],
+                [
+                  101.53511,
+                  14.24587
+                ],
+                [
+                  101.53946,
+                  14.24187
+                ],
+                [
+                  101.54152,
+                  14.23788
+                ],
+                [
+                  101.54884,
+                  14.23312
+                ],
+                [
+                  101.54631,
+                  14.22593
+                ],
+                [
+                  101.54603,
+                  14.22107
+                ],
+                [
+                  101.54892,
+                  14.22013
+                ],
+                [
+                  101.54941,
+                  14.21667
+                ],
+                [
+                  101.55473,
+                  14.20899
+                ],
+                [
+                  101.54952,
+                  14.20495
+                ],
+                [
+                  101.54691,
+                  14.19953
+                ],
+                [
+                  101.53624,
+                  14.20013
+                ],
+                [
+                  101.53026,
+                  14.19851
+                ],
+                [
+                  101.53074,
+                  14.19056
+                ],
+                [
+                  101.52599,
+                  14.18637
+                ],
+                [
+                  101.52425,
+                  14.18242
+                ],
+                [
+                  101.5225,
+                  14.18222
+                ],
+                [
+                  101.52235,
+                  14.18022
+                ],
+                [
+                  101.51937,
+                  14.17857
+                ],
+                [
+                  101.51593,
+                  14.17871
+                ],
+                [
+                  101.51492,
+                  14.17737
+                ],
+                [
+                  101.51544,
+                  14.17413
+                ],
+                [
+                  101.51368,
+                  14.17464
+                ],
+                [
+                  101.51431,
+                  14.16949
+                ],
+                [
+                  101.51783,
+                  14.1658
+                ],
+                [
+                  101.51907,
+                  14.16113
+                ],
+                [
+                  101.52212,
+                  14.16027
+                ],
+                [
+                  101.5204,
+                  14.15924
+                ],
+                [
+                  101.52045,
+                  14.15645
+                ],
+                [
+                  101.51699,
+                  14.15614
+                ],
+                [
+                  101.51657,
+                  14.15436
+                ],
+                [
+                  101.51268,
+                  14.15443
+                ],
+                [
+                  101.51063,
+                  14.15249
+                ],
+                [
+                  101.51109,
+                  14.14417
+                ],
+                [
+                  101.51751,
+                  14.13636
+                ],
+                [
+                  101.51955,
+                  14.1367
+                ],
+                [
+                  101.52311,
+                  14.13481
+                ],
+                [
+                  101.52411,
+                  14.13117
+                ],
+                [
+                  101.5277,
+                  14.12833
+                ],
+                [
+                  101.5284,
+                  14.12241
+                ],
+                [
+                  101.52739,
+                  14.12088
+                ],
+                [
+                  101.5304,
+                  14.11799
+                ],
+                [
+                  101.53073,
+                  14.11176
+                ],
+                [
+                  101.52773,
+                  14.10659
+                ],
+                [
+                  101.52715,
+                  14.09786
+                ],
+                [
+                  101.52489,
+                  14.09648
+                ],
+                [
+                  101.52383,
+                  14.09344
+                ],
+                [
+                  101.52104,
+                  14.09122
+                ],
+                [
+                  101.52178,
+                  14.0892
+                ],
+                [
+                  101.51945,
+                  14.07636
+                ],
+                [
+                  101.52082,
+                  14.07212
+                ],
+                [
+                  101.51888,
+                  14.07055
+                ],
+                [
+                  101.52036,
+                  14.06784
+                ],
+                [
+                  101.51904,
+                  14.06434
+                ],
+                [
+                  101.51745,
+                  14.0633
+                ],
+                [
+                  101.4949,
+                  14.06894
+                ],
+                [
+                  101.49071,
+                  14.06878
+                ],
+                [
+                  101.49063,
+                  14.07318
+                ],
+                [
+                  101.48452,
+                  14.07891
+                ],
+                [
+                  101.48504,
+                  14.08197
+                ],
+                [
+                  101.48887,
+                  14.08612
+                ],
+                [
+                  101.49024,
+                  14.09231
+                ],
+                [
+                  101.49284,
+                  14.09439
+                ],
+                [
+                  101.49274,
+                  14.09618
+                ],
+                [
+                  101.49503,
+                  14.09858
+                ],
+                [
+                  101.49467,
+                  14.10086
+                ],
+                [
+                  101.49256,
+                  14.10229
+                ],
+                [
+                  101.4928,
+                  14.10714
+                ],
+                [
+                  101.48959,
+                  14.1129
+                ],
+                [
+                  101.49002,
+                  14.12141
+                ],
+                [
+                  101.48841,
+                  14.12348
+                ],
+                [
+                  101.48224,
+                  14.12409
+                ],
+                [
+                  101.48077,
+                  14.12801
+                ],
+                [
+                  101.4691,
+                  14.13157
+                ],
+                [
+                  101.47074,
+                  14.13833
+                ],
+                [
+                  101.46941,
+                  14.14585
+                ],
+                [
+                  101.46999,
+                  14.15942
+                ],
+                [
+                  101.46768,
+                  14.16037
+                ],
+                [
+                  101.46776,
+                  14.16148
+                ],
+                [
+                  101.46625,
+                  14.16138
+                ],
+                [
+                  101.46692,
+                  14.16292
+                ],
+                [
+                  101.46347,
+                  14.16573
+                ],
+                [
+                  101.46232,
+                  14.17075
+                ],
+                [
+                  101.46291,
+                  14.17532
+                ],
+                [
+                  101.46106,
+                  14.17734
+                ],
+                [
+                  101.45981,
+                  14.18164
+                ],
+                [
+                  101.45713,
+                  14.18459
+                ],
+                [
+                  101.45647,
+                  14.18828
+                ],
+                [
+                  101.45189,
+                  14.19342
+                ],
+                [
+                  101.44544,
+                  14.19321
+                ],
+                [
+                  101.44179,
+                  14.19731
+                ],
+                [
+                  101.42966,
+                  14.1988
+                ],
+                [
+                  101.42448,
+                  14.20111
+                ],
+                [
+                  101.42324,
+                  14.20331
+                ],
+                [
+                  101.42606,
+                  14.21753
+                ],
+                [
+                  101.42741,
+                  14.21905
+                ],
+                [
+                  101.43079,
+                  14.21948
+                ],
+                [
+                  101.43225,
+                  14.22235
+                ],
+                [
+                  101.43795,
+                  14.22789
+                ],
+                [
+                  101.43676,
+                  14.23447
+                ],
+                [
+                  101.43841,
+                  14.23978
+                ],
+                [
+                  101.43678,
+                  14.24548
+                ],
+                [
+                  101.44004,
+                  14.24993
+                ],
+                [
+                  101.43994,
+                  14.25439
+                ],
+                [
+                  101.44579,
+                  14.25633
+                ],
+                [
+                  101.45121,
+                  14.25493
+                ],
+                [
+                  101.45877,
+                  14.25879
+                ],
+                [
+                  101.46389,
+                  14.26302
+                ],
+                [
+                  101.47275,
+                  14.26183
+                ],
+                [
+                  101.48063,
+                  14.26762
+                ],
+                [
+                  101.48441,
+                  14.26401
+                ],
+                [
+                  101.49126,
+                  14.26152
+                ],
+                [
+                  101.49853,
+                  14.26762
+                ],
+                [
+                  101.4987,
+                  14.29843
+                ],
+                [
+                  101.5054,
+                  14.30845
+                ],
+                [
+                  101.49937,
+                  14.31295
+                ],
+                [
+                  101.49621,
+                  14.31677
+                ],
+                [
+                  101.49464,
+                  14.32357
+                ],
+                [
+                  101.49765,
+                  14.33223
+                ],
+                [
+                  101.49704,
+                  14.33439
+                ],
+                [
+                  101.49305,
+                  14.33809
+                ],
+                [
+                  101.49032,
+                  14.33904
+                ],
+                [
+                  101.48312,
+                  14.34591
+                ],
+                [
+                  101.48117,
+                  14.35214
+                ],
+                [
+                  101.47635,
+                  14.36063
+                ],
+                [
+                  101.47593,
+                  14.36471
+                ],
+                [
+                  101.45083,
+                  14.38142
+                ],
+                [
+                  101.43222,
+                  14.38957
+                ],
+                [
+                  101.43336,
+                  14.3943
+                ],
+                [
+                  101.43954,
+                  14.4027
+                ],
+                [
+                  101.43901,
+                  14.40721
+                ],
+                [
+                  101.4421,
+                  14.41684
+                ],
+                [
+                  101.44695,
+                  14.42005
+                ],
+                [
+                  101.44747,
+                  14.42186
+                ],
+                [
+                  101.44545,
+                  14.4265
+                ],
+                [
+                  101.44189,
+                  14.42745
+                ],
+                [
+                  101.43672,
+                  14.43682
+                ],
+                [
+                  101.4357,
+                  14.43998
+                ],
+                [
+                  101.43762,
+                  14.44285
+                ],
+                [
+                  101.43597,
+                  14.44558
+                ],
+                [
+                  101.46025,
+                  14.45707
+                ],
+                [
+                  101.47,
+                  14.45963
+                ],
+                [
+                  101.47419,
+                  14.45843
+                ],
+                [
+                  101.47757,
+                  14.46115
+                ],
+                [
+                  101.48251,
+                  14.46279
+                ],
+                [
+                  101.4873,
+                  14.46185
+                ],
+                [
+                  101.48757,
+                  14.45895
+                ],
+                [
+                  101.49037,
+                  14.45581
+                ],
+                [
+                  101.49142,
+                  14.45241
+                ],
+                [
+                  101.49659,
+                  14.44756
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "250708",
+          "tambon": "ต.หนองแก้ว",
+          "amphoe": "อ.ประจันตคาม",
+          "province": "จ.ปราจีนบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "บ้านโคกเขื่อน",
+          "latitude": 14.159991,
+          "longitude": 101.521952,
+          "sum_rainfall_mm": 168.5,
+          "observed_at": "2026-09-25T20:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  101.54691,
+                  14.19953
+                ],
+                [
+                  101.54472,
+                  14.19074
+                ],
+                [
+                  101.54551,
+                  14.17561
+                ],
+                [
+                  101.54446,
+                  14.17044
+                ],
+                [
+                  101.54149,
+                  14.16473
+                ],
+                [
+                  101.54185,
+                  14.16057
+                ],
+                [
+                  101.53869,
+                  14.1515
+                ],
+                [
+                  101.53804,
+                  14.14583
+                ],
+                [
+                  101.53798,
+                  14.13936
+                ],
+                [
+                  101.54029,
+                  14.13752
+                ],
+                [
+                  101.53906,
+                  14.13357
+                ],
+                [
+                  101.54068,
+                  14.13218
+                ],
+                [
+                  101.53832,
+                  14.13027
+                ],
+                [
+                  101.53779,
+                  14.12814
+                ],
+                [
+                  101.54024,
+                  14.1268
+                ],
+                [
+                  101.54922,
+                  14.1271
+                ],
+                [
+                  101.55236,
+                  14.1262
+                ],
+                [
+                  101.55303,
+                  14.12429
+                ],
+                [
+                  101.55171,
+                  14.12318
+                ],
+                [
+                  101.55268,
+                  14.11693
+                ],
+                [
+                  101.55204,
+                  14.11491
+                ],
+                [
+                  101.55975,
+                  14.11052
+                ],
+                [
+                  101.56032,
+                  14.10848
+                ],
+                [
+                  101.56034,
+                  14.09033
+                ],
+                [
+                  101.54891,
+                  14.09584
+                ],
+                [
+                  101.54031,
+                  14.09437
+                ],
+                [
+                  101.53748,
+                  14.09296
+                ],
+                [
+                  101.53646,
+                  14.08954
+                ],
+                [
+                  101.53942,
+                  14.08714
+                ],
+                [
+                  101.53603,
+                  14.08232
+                ],
+                [
+                  101.53447,
+                  14.08163
+                ],
+                [
+                  101.52994,
+                  14.08361
+                ],
+                [
+                  101.52494,
+                  14.0837
+                ],
+                [
+                  101.52521,
+                  14.08061
+                ],
+                [
+                  101.52236,
+                  14.07828
+                ],
+                [
+                  101.52009,
+                  14.08054
+                ],
+                [
+                  101.52178,
+                  14.0892
+                ],
+                [
+                  101.52104,
+                  14.09122
+                ],
+                [
+                  101.52383,
+                  14.09344
+                ],
+                [
+                  101.52489,
+                  14.09648
+                ],
+                [
+                  101.52715,
+                  14.09786
+                ],
+                [
+                  101.52773,
+                  14.10659
+                ],
+                [
+                  101.53072,
+                  14.11128
+                ],
+                [
+                  101.53049,
+                  14.11749
+                ],
+                [
+                  101.52739,
+                  14.12088
+                ],
+                [
+                  101.5284,
+                  14.12241
+                ],
+                [
+                  101.5277,
+                  14.12833
+                ],
+                [
+                  101.52411,
+                  14.13117
+                ],
+                [
+                  101.52311,
+                  14.13481
+                ],
+                [
+                  101.51955,
+                  14.1367
+                ],
+                [
+                  101.51751,
+                  14.13636
+                ],
+                [
+                  101.51109,
+                  14.14417
+                ],
+                [
+                  101.51063,
+                  14.15249
+                ],
+                [
+                  101.51268,
+                  14.15443
+                ],
+                [
+                  101.51657,
+                  14.15436
+                ],
+                [
+                  101.51699,
+                  14.15614
+                ],
+                [
+                  101.52045,
+                  14.15645
+                ],
+                [
+                  101.5204,
+                  14.15924
+                ],
+                [
+                  101.52212,
+                  14.16027
+                ],
+                [
+                  101.51907,
+                  14.16113
+                ],
+                [
+                  101.51783,
+                  14.1658
+                ],
+                [
+                  101.51431,
+                  14.16949
+                ],
+                [
+                  101.51368,
+                  14.17464
+                ],
+                [
+                  101.51544,
+                  14.17413
+                ],
+                [
+                  101.51492,
+                  14.17737
+                ],
+                [
+                  101.51593,
+                  14.17871
+                ],
+                [
+                  101.51937,
+                  14.17857
+                ],
+                [
+                  101.52235,
+                  14.18022
+                ],
+                [
+                  101.5225,
+                  14.18222
+                ],
+                [
+                  101.52425,
+                  14.18242
+                ],
+                [
+                  101.52599,
+                  14.18637
+                ],
+                [
+                  101.53074,
+                  14.19056
+                ],
+                [
+                  101.53026,
+                  14.19851
+                ],
+                [
+                  101.53624,
+                  14.20013
+                ],
+                [
+                  101.54691,
+                  14.19953
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "250112",
+          "tambon": "ต.เนินหอม",
+          "amphoe": "อ.เมืองปราจีนบุรี",
+          "province": "จ.ปราจีนบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "วัดห้วยเกษียร",
+          "latitude": 14.181127,
+          "longitude": 101.413635,
+          "sum_rainfall_mm": 310.8,
+          "observed_at": "2026-09-25T20:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  101.43994,
+                  14.25439
+                ],
+                [
+                  101.44004,
+                  14.24993
+                ],
+                [
+                  101.43678,
+                  14.24548
+                ],
+                [
+                  101.43841,
+                  14.23978
+                ],
+                [
+                  101.43676,
+                  14.23447
+                ],
+                [
+                  101.43795,
+                  14.22789
+                ],
+                [
+                  101.43225,
+                  14.22235
+                ],
+                [
+                  101.43079,
+                  14.21948
+                ],
+                [
+                  101.42741,
+                  14.21905
+                ],
+                [
+                  101.42606,
+                  14.21753
+                ],
+                [
+                  101.42502,
+                  14.20895
+                ],
+                [
+                  101.42315,
+                  14.2055
+                ],
+                [
+                  101.42379,
+                  14.20168
+                ],
+                [
+                  101.42966,
+                  14.1988
+                ],
+                [
+                  101.43466,
+                  14.19819
+                ],
+                [
+                  101.43954,
+                  14.19299
+                ],
+                [
+                  101.44223,
+                  14.18821
+                ],
+                [
+                  101.44246,
+                  14.1792
+                ],
+                [
+                  101.43288,
+                  14.16757
+                ],
+                [
+                  101.43307,
+                  14.16603
+                ],
+                [
+                  101.43679,
+                  14.16203
+                ],
+                [
+                  101.4348,
+                  14.16051
+                ],
+                [
+                  101.43441,
+                  14.15785
+                ],
+                [
+                  101.4315,
+                  14.15379
+                ],
+                [
+                  101.42861,
+                  14.15735
+                ],
+                [
+                  101.42411,
+                  14.15699
+                ],
+                [
+                  101.42143,
+                  14.16204
+                ],
+                [
+                  101.41785,
+                  14.16274
+                ],
+                [
+                  101.4154,
+                  14.15948
+                ],
+                [
+                  101.40843,
+                  14.15588
+                ],
+                [
+                  101.40743,
+                  14.15318
+                ],
+                [
+                  101.4047,
+                  14.15115
+                ],
+                [
+                  101.40554,
+                  14.14783
+                ],
+                [
+                  101.40147,
+                  14.14761
+                ],
+                [
+                  101.39425,
+                  14.15017
+                ],
+                [
+                  101.39121,
+                  14.15015
+                ],
+                [
+                  101.38603,
+                  14.15379
+                ],
+                [
+                  101.38295,
+                  14.15387
+                ],
+                [
+                  101.37824,
+                  14.15161
+                ],
+                [
+                  101.37293,
+                  14.14594
+                ],
+                [
+                  101.36748,
+                  14.14345
+                ],
+                [
+                  101.36145,
+                  14.14449
+                ],
+                [
+                  101.35785,
+                  14.14668
+                ],
+                [
+                  101.35738,
+                  14.1488
+                ],
+                [
+                  101.35324,
+                  14.14886
+                ],
+                [
+                  101.347,
+                  14.14701
+                ],
+                [
+                  101.34211,
+                  14.139
+                ],
+                [
+                  101.34066,
+                  14.14089
+                ],
+                [
+                  101.3365,
+                  14.14088
+                ],
+                [
+                  101.33514,
+                  14.14578
+                ],
+                [
+                  101.33558,
+                  14.14866
+                ],
+                [
+                  101.33388,
+                  14.15072
+                ],
+                [
+                  101.33475,
+                  14.15986
+                ],
+                [
+                  101.32904,
+                  14.16502
+                ],
+                [
+                  101.31279,
+                  14.17132
+                ],
+                [
+                  101.31506,
+                  14.17321
+                ],
+                [
+                  101.31675,
+                  14.17265
+                ],
+                [
+                  101.31789,
+                  14.17451
+                ],
+                [
+                  101.32006,
+                  14.17415
+                ],
+                [
+                  101.32368,
+                  14.17602
+                ],
+                [
+                  101.32695,
+                  14.17511
+                ],
+                [
+                  101.33044,
+                  14.17671
+                ],
+                [
+                  101.32888,
+                  14.17974
+                ],
+                [
+                  101.32995,
+                  14.1823
+                ],
+                [
+                  101.33413,
+                  14.18356
+                ],
+                [
+                  101.33651,
+                  14.18722
+                ],
+                [
+                  101.3411,
+                  14.18953
+                ],
+                [
+                  101.34261,
+                  14.19252
+                ],
+                [
+                  101.34521,
+                  14.19435
+                ],
+                [
+                  101.34583,
+                  14.19741
+                ],
+                [
+                  101.34975,
+                  14.19789
+                ],
+                [
+                  101.35077,
+                  14.19989
+                ],
+                [
+                  101.35904,
+                  14.20277
+                ],
+                [
+                  101.36237,
+                  14.20275
+                ],
+                [
+                  101.36333,
+                  14.20139
+                ],
+                [
+                  101.36428,
+                  14.20231
+                ],
+                [
+                  101.36645,
+                  14.20182
+                ],
+                [
+                  101.37282,
+                  14.20544
+                ],
+                [
+                  101.37491,
+                  14.21023
+                ],
+                [
+                  101.3779,
+                  14.21155
+                ],
+                [
+                  101.37914,
+                  14.21031
+                ],
+                [
+                  101.38226,
+                  14.2105
+                ],
+                [
+                  101.38074,
+                  14.21272
+                ],
+                [
+                  101.38444,
+                  14.21617
+                ],
+                [
+                  101.38605,
+                  14.2252
+                ],
+                [
+                  101.38323,
+                  14.2298
+                ],
+                [
+                  101.3839,
+                  14.23315
+                ],
+                [
+                  101.38193,
+                  14.23523
+                ],
+                [
+                  101.37993,
+                  14.23561
+                ],
+                [
+                  101.37826,
+                  14.23845
+                ],
+                [
+                  101.38244,
+                  14.24938
+                ],
+                [
+                  101.37846,
+                  14.25748
+                ],
+                [
+                  101.38066,
+                  14.25809
+                ],
+                [
+                  101.38391,
+                  14.26586
+                ],
+                [
+                  101.38119,
+                  14.27101
+                ],
+                [
+                  101.38159,
+                  14.27258
+                ],
+                [
+                  101.38353,
+                  14.27375
+                ],
+                [
+                  101.38972,
+                  14.27335
+                ],
+                [
+                  101.3929,
+                  14.27444
+                ],
+                [
+                  101.39514,
+                  14.27367
+                ],
+                [
+                  101.41324,
+                  14.25352
+                ],
+                [
+                  101.43034,
+                  14.25663
+                ],
+                [
+                  101.43994,
+                  14.25439
+                ]
+              ]
+            ]
+          }
+        },
+        {
           "geocode": "250106",
           "tambon": "ต.บางบริบูรณ์",
           "amphoe": "อ.เมืองปราจีนบุรี",
@@ -12822,8 +16301,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดสง่างาม",
           "latitude": 14.031635,
           "longitude": 101.42646,
-          "sum_rainfall_mm": 204.5,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 242.5,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -13076,255 +16555,419 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
-          "geocode": "960601",
-          "tambon": "ต.รือเสาะ",
-          "amphoe": "อ.รือเสาะ",
-          "province": "จ.นราธิวาส",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "สวนสาธารณะ ทต.รือเสาะ",
-          "latitude": 6.38792,
-          "longitude": 101.51716,
-          "sum_rainfall_mm": 116.8,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "geocode": "250801",
+          "tambon": "ต.ศรีมหาโพธิ์",
+          "amphoe": "อ.ศรีมหาโพธิ",
+          "province": "จ.ปราจีนบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "ศรีมหาโพธิ์",
+          "latitude": 13.973075,
+          "longitude": 101.512525,
+          "sum_rainfall_mm": 206.5,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
                 [
-                  101.49667,
-                  6.41836
+                  101.4966,
+                  13.98271
                 ],
                 [
-                  101.50766,
-                  6.41647
+                  101.50493,
+                  13.97519
                 ],
                 [
-                  101.51009,
-                  6.41471
+                  101.51845,
+                  13.97403
                 ],
                 [
-                  101.51277,
-                  6.39732
+                  101.51889,
+                  13.97284
                 ],
                 [
-                  101.53322,
-                  6.369
+                  101.51749,
+                  13.96992
                 ],
                 [
-                  101.54674,
-                  6.37011
+                  101.51928,
+                  13.9681
                 ],
                 [
-                  101.54938,
-                  6.36757
+                  101.52639,
+                  13.96587
                 ],
                 [
-                  101.54966,
-                  6.35439
+                  101.53093,
+                  13.96607
                 ],
                 [
-                  101.54671,
-                  6.33575
+                  101.53529,
+                  13.95922
                 ],
                 [
-                  101.54852,
-                  6.33069
+                  101.53426,
+                  13.95512
                 ],
                 [
-                  101.54802,
-                  6.32856
+                  101.53675,
+                  13.95247
                 ],
                 [
-                  101.54576,
-                  6.32803
+                  101.53614,
+                  13.94799
                 ],
                 [
-                  101.54367,
-                  6.32511
+                  101.53235,
+                  13.94108
                 ],
                 [
-                  101.54038,
-                  6.326
+                  101.53443,
+                  13.93726
                 ],
                 [
-                  101.54036,
-                  6.32367
+                  101.53541,
+                  13.92955
                 ],
                 [
-                  101.53871,
-                  6.32392
+                  101.53971,
+                  13.9265
                 ],
                 [
-                  101.53732,
-                  6.32142
+                  101.54129,
+                  13.92384
                 ],
                 [
-                  101.53289,
-                  6.31925
+                  101.53921,
+                  13.91939
                 ],
                 [
-                  101.53173,
-                  6.31405
+                  101.53795,
+                  13.91152
                 ],
                 [
-                  101.52711,
-                  6.31543
+                  101.54461,
+                  13.90338
                 ],
                 [
-                  101.52389,
-                  6.31354
+                  101.55568,
+                  13.8968
                 ],
                 [
-                  101.52051,
-                  6.31391
+                  101.55616,
+                  13.89276
                 ],
                 [
-                  101.51866,
-                  6.31163
+                  101.55452,
+                  13.88986
                 ],
                 [
-                  101.51304,
-                  6.31346
+                  101.55506,
+                  13.88835
                 ],
                 [
-                  101.51255,
-                  6.31448
+                  101.5664,
+                  13.88473
                 ],
                 [
-                  101.51353,
-                  6.31569
+                  101.56228,
+                  13.87838
                 ],
                 [
-                  101.51215,
-                  6.31756
+                  101.56149,
+                  13.87263
                 ],
                 [
-                  101.51099,
-                  6.3169
+                  101.56521,
+                  13.86998
                 ],
                 [
-                  101.51046,
-                  6.31921
+                  101.57037,
+                  13.86834
                 ],
                 [
-                  101.50648,
-                  6.32172
+                  101.56792,
+                  13.86492
                 ],
                 [
-                  101.50714,
-                  6.32316
+                  101.56824,
+                  13.86256
                 ],
                 [
-                  101.50502,
-                  6.32389
+                  101.57996,
+                  13.85526
                 ],
                 [
-                  101.50393,
-                  6.32722
+                  101.57947,
+                  13.84932
                 ],
                 [
-                  101.50009,
-                  6.32974
+                  101.58816,
+                  13.84405
                 ],
                 [
-                  101.49378,
-                  6.33699
+                  101.59603,
+                  13.82885
                 ],
                 [
-                  101.48917,
-                  6.34052
+                  101.59943,
+                  13.82651
                 ],
                 [
-                  101.49002,
-                  6.34562
+                  101.60742,
+                  13.82395
                 ],
                 [
-                  101.49497,
-                  6.349
+                  101.62284,
+                  13.80269
                 ],
                 [
-                  101.49469,
-                  6.35128
+                  101.63343,
+                  13.79578
                 ],
                 [
-                  101.49073,
-                  6.35344
+                  101.63332,
+                  13.78675
                 ],
                 [
-                  101.48638,
-                  6.35187
+                  101.6454,
+                  13.77801
                 ],
                 [
-                  101.48416,
-                  6.35287
+                  101.64534,
+                  13.76953
                 ],
                 [
-                  101.48237,
-                  6.35571
+                  101.64084,
+                  13.75942
                 ],
                 [
-                  101.48182,
-                  6.36277
+                  101.64128,
+                  13.75577
                 ],
                 [
-                  101.47712,
-                  6.36978
+                  101.63903,
+                  13.74723
                 ],
                 [
-                  101.47637,
-                  6.37449
+                  101.63343,
+                  13.74703
                 ],
                 [
-                  101.46806,
-                  6.38114
+                  101.61994,
+                  13.74033
                 ],
                 [
-                  101.4688,
-                  6.38389
+                  101.61938,
+                  13.74871
                 ],
                 [
-                  101.47199,
-                  6.38598
+                  101.61503,
+                  13.75031
                 ],
                 [
-                  101.47229,
-                  6.38884
+                  101.60635,
+                  13.75128
                 ],
                 [
-                  101.47151,
-                  6.39124
+                  101.60566,
+                  13.75612
                 ],
                 [
-                  101.46791,
-                  6.39454
+                  101.5974,
+                  13.76059
                 ],
                 [
-                  101.4659,
-                  6.40281
+                  101.59735,
+                  13.76433
                 ],
                 [
-                  101.46702,
-                  6.40475
+                  101.60073,
+                  13.76496
                 ],
                 [
-                  101.47309,
-                  6.40843
+                  101.60091,
+                  13.76875
                 ],
                 [
-                  101.47389,
-                  6.41356
+                  101.60629,
+                  13.77334
                 ],
                 [
-                  101.47774,
-                  6.42023
+                  101.60841,
+                  13.77906
                 ],
                 [
-                  101.4874,
-                  6.42047
+                  101.60543,
+                  13.78929
                 ],
                 [
-                  101.49667,
-                  6.41836
+                  101.59241,
+                  13.80681
+                ],
+                [
+                  101.58741,
+                  13.81819
+                ],
+                [
+                  101.58225,
+                  13.82247
+                ],
+                [
+                  101.57403,
+                  13.82283
+                ],
+                [
+                  101.57135,
+                  13.82571
+                ],
+                [
+                  101.56601,
+                  13.8286
+                ],
+                [
+                  101.56206,
+                  13.8331
+                ],
+                [
+                  101.56231,
+                  13.83541
+                ],
+                [
+                  101.55869,
+                  13.84163
+                ],
+                [
+                  101.55835,
+                  13.8456
+                ],
+                [
+                  101.55994,
+                  13.84895
+                ],
+                [
+                  101.55802,
+                  13.85637
+                ],
+                [
+                  101.55856,
+                  13.8614
+                ],
+                [
+                  101.55716,
+                  13.8642
+                ],
+                [
+                  101.55403,
+                  13.86558
+                ],
+                [
+                  101.55388,
+                  13.8717
+                ],
+                [
+                  101.54383,
+                  13.87959
+                ],
+                [
+                  101.53352,
+                  13.89615
+                ],
+                [
+                  101.53427,
+                  13.89971
+                ],
+                [
+                  101.53168,
+                  13.903
+                ],
+                [
+                  101.52272,
+                  13.90721
+                ],
+                [
+                  101.52157,
+                  13.9088
+                ],
+                [
+                  101.52259,
+                  13.91412
+                ],
+                [
+                  101.52763,
+                  13.92423
+                ],
+                [
+                  101.52209,
+                  13.92605
+                ],
+                [
+                  101.52065,
+                  13.92824
+                ],
+                [
+                  101.52086,
+                  13.93036
+                ],
+                [
+                  101.52476,
+                  13.93297
+                ],
+                [
+                  101.5248,
+                  13.93498
+                ],
+                [
+                  101.51292,
+                  13.94104
+                ],
+                [
+                  101.50757,
+                  13.95083
+                ],
+                [
+                  101.50854,
+                  13.95741
+                ],
+                [
+                  101.50759,
+                  13.9589
+                ],
+                [
+                  101.50375,
+                  13.96039
+                ],
+                [
+                  101.49621,
+                  13.95836
+                ],
+                [
+                  101.48928,
+                  13.9592
+                ],
+                [
+                  101.49138,
+                  13.96296
+                ],
+                [
+                  101.49295,
+                  13.97531
+                ],
+                [
+                  101.49471,
+                  13.97811
+                ],
+                [
+                  101.49281,
+                  13.98319
+                ],
+                [
+                  101.49482,
+                  13.98565
+                ],
+                [
+                  101.4966,
+                  13.98271
                 ]
               ]
             ]
@@ -13340,8 +16983,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อาคารเลขที่ ๙๐๑",
           "latitude": 13.85604,
           "longitude": 100.57558,
-          "sum_rainfall_mm": 238.0,
-          "observed_at": "2026-09-25T17:00:00+07:00"
+          "sum_rainfall_mm": 264.0,
+          "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
           "geocode": "100203",
@@ -13353,8 +16996,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อุทยานเฉลิมพระเกียรติพระบาทสมเด็จพระบรมชนกาธิเบศร มหาภูมิพลอดุลยเดชมหาราช บรมนาถบพิตร",
           "latitude": 13.76138,
           "longitude": 100.52066,
-          "sum_rainfall_mm": 213.0,
-          "observed_at": "2026-09-25T17:00:00+07:00"
+          "sum_rainfall_mm": 224.00000000000003,
+          "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
           "geocode": "100608",
@@ -13366,8 +17009,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองแสนแสบ บางกะปิ",
           "latitude": 13.76131,
           "longitude": 100.61601,
-          "sum_rainfall_mm": 302.2,
-          "observed_at": "2026-09-25T17:00:00+07:00"
+          "sum_rainfall_mm": 316.0,
+          "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
           "geocode": "100502",
@@ -13379,8 +17022,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองลาดพร้าว วัดบางบัว",
           "latitude": 13.85402,
           "longitude": 100.58746,
-          "sum_rainfall_mm": 211.0,
-          "observed_at": "2026-09-25T17:00:00+07:00"
+          "sum_rainfall_mm": 237.20000000000005,
+          "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
           "geocode": "104004",
@@ -13392,8 +17035,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองภาษีเจริญ เพชรเกษม69",
           "latitude": 13.69158,
           "longitude": 100.38127,
-          "sum_rainfall_mm": 237.39999999999998,
-          "observed_at": "2026-09-25T17:00:00+07:00"
+          "sum_rainfall_mm": 226.80000000000004,
+          "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
           "geocode": "101101",
@@ -13405,8 +17048,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองลำปลาทิว ลาดกระบัง",
           "latitude": 13.7407,
           "longitude": 100.79468,
-          "sum_rainfall_mm": 383.40000000000003,
-          "observed_at": "2026-09-25T17:00:00+07:00"
+          "sum_rainfall_mm": 392.2,
+          "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
           "geocode": "103801",
@@ -13418,8 +17061,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองลาดพร้าว ปากคลอง2สายใต้",
           "latitude": 13.93183,
           "longitude": 100.63952,
-          "sum_rainfall_mm": 235.2,
-          "observed_at": "2026-09-25T17:00:00+07:00"
+          "sum_rainfall_mm": 251.6,
+          "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
           "geocode": "104201",
@@ -13431,158 +17074,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองลาดพร้าว ท้ายปตร.คลอง2",
           "latitude": 13.92245,
           "longitude": 100.63438,
-          "sum_rainfall_mm": 217.20000000000002,
-          "observed_at": "2026-09-25T17:00:00+07:00"
-        },
-        {
-          "geocode": "730324",
-          "tambon": "ต.ไทยาวาส",
-          "amphoe": "อ.นครชัยศรี",
-          "province": "จ.นครปฐม",
-          "region_id": "7",
-          "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "สะพานนครชัยศรี",
-          "latitude": 13.79217,
-          "longitude": 100.19817,
-          "sum_rainfall_mm": 223.20000000000002,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  100.23671,
-                  13.80508
-                ],
-                [
-                  100.23673,
-                  13.80279
-                ],
-                [
-                  100.24374,
-                  13.80275
-                ],
-                [
-                  100.24046,
-                  13.80062
-                ],
-                [
-                  100.23706,
-                  13.79605
-                ],
-                [
-                  100.23747,
-                  13.79061
-                ],
-                [
-                  100.23377,
-                  13.79292
-                ],
-                [
-                  100.22932,
-                  13.7934
-                ],
-                [
-                  100.22519,
-                  13.78715
-                ],
-                [
-                  100.21103,
-                  13.78278
-                ],
-                [
-                  100.20627,
-                  13.78426
-                ],
-                [
-                  100.2021,
-                  13.78732
-                ],
-                [
-                  100.18814,
-                  13.80183
-                ],
-                [
-                  100.18603,
-                  13.80783
-                ],
-                [
-                  100.20634,
-                  13.80643
-                ],
-                [
-                  100.20633,
-                  13.80455
-                ],
-                [
-                  100.22211,
-                  13.80113
-                ],
-                [
-                  100.22846,
-                  13.80372
-                ],
-                [
-                  100.23671,
-                  13.80508
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "730301",
-          "tambon": "ต.นครชัยศรี",
-          "amphoe": "อ.นครชัยศรี",
-          "province": "จ.นครปฐม",
-          "region_id": "7",
-          "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "อบต.นครชัยศรี",
-          "latitude": 13.79036,
-          "longitude": 100.19051,
-          "sum_rainfall_mm": 227.2,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  100.18685,
-                  13.80404
-                ],
-                [
-                  100.20112,
-                  13.78832
-                ],
-                [
-                  100.19658,
-                  13.78381
-                ],
-                [
-                  100.19475,
-                  13.77298
-                ],
-                [
-                  100.19161,
-                  13.76388
-                ],
-                [
-                  100.18746,
-                  13.79051
-                ],
-                [
-                  100.19162,
-                  13.79269
-                ],
-                [
-                  100.18139,
-                  13.80476
-                ],
-                [
-                  100.18685,
-                  13.80404
-                ]
-              ]
-            ]
-          }
+          "sum_rainfall_mm": 229.2,
+          "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
           "geocode": "120603",
@@ -13594,7 +17087,7 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานนวลฉวี",
           "latitude": 13.94749,
           "longitude": 100.53507,
-          "sum_rainfall_mm": 177.60000000000002,
+          "sum_rainfall_mm": 194.6,
           "observed_at": "2026-09-25T17:00:00+07:00",
           "geometry": {
             "rings": [
@@ -13709,8 +17202,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เหนือปตร.พระธรรมราชา",
           "latitude": 14.07771,
           "longitude": 100.89208,
-          "sum_rainfall_mm": 271.0,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 280.0,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -13743,6 +17236,65 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
+          "geocode": "130114",
+          "tambon": "ต.หลักหก",
+          "amphoe": "อ.เมืองปทุมธานี",
+          "province": "จ.ปทุมธานี",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "คลองเปรมประชากร หลักหก",
+          "latitude": 13.96562,
+          "longitude": 100.60262,
+          "sum_rainfall_mm": 190.20000000000005,
+          "observed_at": "2026-09-25T20:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.60576,
+                  13.96472
+                ],
+                [
+                  100.60821,
+                  13.94254
+                ],
+                [
+                  100.58914,
+                  13.95126
+                ],
+                [
+                  100.57658,
+                  13.95455
+                ],
+                [
+                  100.57377,
+                  13.95453
+                ],
+                [
+                  100.5678,
+                  13.95125
+                ],
+                [
+                  100.57237,
+                  13.97115
+                ],
+                [
+                  100.57192,
+                  13.9729
+                ],
+                [
+                  100.60364,
+                  13.98067
+                ],
+                [
+                  100.60576,
+                  13.96472
+                ]
+              ]
+            ]
+          }
+        },
+        {
           "geocode": "110602",
           "tambon": "ต.ศีรษะจรเข้น้อย",
           "amphoe": "อ.บางเสาธง",
@@ -13752,8 +17304,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ศีรษะจรเข้น้อย",
           "latitude": 13.67777,
           "longitude": 100.7945,
-          "sum_rainfall_mm": 338.20000000000005,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 348.0,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -13867,8 +17419,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองจระเข้ใหญ่ บางเสาธง (วัดศรีวารีน้อย)",
           "latitude": 13.66949,
           "longitude": 100.80058,
-          "sum_rainfall_mm": 314.8,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 324.0,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -14025,128 +17577,6 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
-          "geocode": "110409",
-          "tambon": "ต.บางกระเจ้า",
-          "amphoe": "อ.พระประแดง",
-          "province": "จ.สมุทรปราการ",
-          "region_id": "7",
-          "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "ปตร.วัดบางกระเจ้านอก",
-          "latitude": 13.689612,
-          "longitude": 100.554886,
-          "sum_rainfall_mm": 215.4,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  100.57164,
-                  13.70439
-                ],
-                [
-                  100.56587,
-                  13.68654
-                ],
-                [
-                  100.56269,
-                  13.68678
-                ],
-                [
-                  100.55796,
-                  13.69046
-                ],
-                [
-                  100.55246,
-                  13.69075
-                ],
-                [
-                  100.55066,
-                  13.70132
-                ],
-                [
-                  100.55212,
-                  13.70523
-                ],
-                [
-                  100.5542,
-                  13.7072
-                ],
-                [
-                  100.55764,
-                  13.70826
-                ],
-                [
-                  100.56163,
-                  13.70793
-                ],
-                [
-                  100.57164,
-                  13.70439
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "110408",
-          "tambon": "ต.บางยอ",
-          "amphoe": "อ.พระประแดง",
-          "province": "จ.สมุทรปราการ",
-          "region_id": "7",
-          "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "ปตร. คลองลัดบางยอ 1",
-          "latitude": 13.676162,
-          "longitude": 100.553085,
-          "sum_rainfall_mm": 190.0,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  100.56587,
-                  13.68654
-                ],
-                [
-                  100.57115,
-                  13.68523
-                ],
-                [
-                  100.56726,
-                  13.68051
-                ],
-                [
-                  100.55513,
-                  13.67019
-                ],
-                [
-                  100.54627,
-                  13.67421
-                ],
-                [
-                  100.55127,
-                  13.68124
-                ],
-                [
-                  100.55265,
-                  13.69095
-                ],
-                [
-                  100.55796,
-                  13.69046
-                ],
-                [
-                  100.56269,
-                  13.68678
-                ],
-                [
-                  100.56587,
-                  13.68654
-                ]
-              ]
-            ]
-          }
-        },
-        {
           "geocode": "110503",
           "tambon": "ต.แหลมฟ้าผ่า",
           "amphoe": "อ.พระสมุทรเจดีย์",
@@ -14156,8 +17586,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.แหลมฟ้าผ่า",
           "latitude": 13.54701,
           "longitude": 100.53756,
-          "sum_rainfall_mm": 228.6,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 227.20000000000002,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -14335,8 +17765,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เมืองสมุทรสาคร",
           "latitude": 13.58598,
           "longitude": 100.23048,
-          "sum_rainfall_mm": 193.8,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 195.20000000000005,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -14415,185 +17845,6 @@ window.IEAT_THAIWATER_DATA = {
                 [
                   100.27156,
                   13.56008
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "740116",
-          "tambon": "ต.บางกระเจ้า",
-          "amphoe": "อ.เมืองสมุทรสาคร",
-          "province": "จ.สมุทรสาคร",
-          "region_id": "7",
-          "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "อบต.บางกระเจ้า",
-          "latitude": 13.52146,
-          "longitude": 100.19283,
-          "sum_rainfall_mm": 207.8,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  100.2378,
-                  13.54378
-                ],
-                [
-                  100.23603,
-                  13.54039
-                ],
-                [
-                  100.23659,
-                  13.539
-                ],
-                [
-                  100.23471,
-                  13.53313
-                ],
-                [
-                  100.23169,
-                  13.51298
-                ],
-                [
-                  100.23393,
-                  13.50551
-                ],
-                [
-                  100.23298,
-                  13.50027
-                ],
-                [
-                  100.23402,
-                  13.49526
-                ],
-                [
-                  100.23301,
-                  13.49346
-                ],
-                [
-                  100.23339,
-                  13.48908
-                ],
-                [
-                  100.23208,
-                  13.4881
-                ],
-                [
-                  100.23349,
-                  13.48431
-                ],
-                [
-                  100.23095,
-                  13.47625
-                ],
-                [
-                  100.23177,
-                  13.47338
-                ],
-                [
-                  100.23056,
-                  13.47212
-                ],
-                [
-                  100.23195,
-                  13.46901
-                ],
-                [
-                  100.21927,
-                  13.46488
-                ],
-                [
-                  100.21812,
-                  13.46843
-                ],
-                [
-                  100.21504,
-                  13.46863
-                ],
-                [
-                  100.21353,
-                  13.47039
-                ],
-                [
-                  100.20637,
-                  13.48729
-                ],
-                [
-                  100.20281,
-                  13.49129
-                ],
-                [
-                  100.19798,
-                  13.50141
-                ],
-                [
-                  100.19665,
-                  13.50205
-                ],
-                [
-                  100.19491,
-                  13.50728
-                ],
-                [
-                  100.18836,
-                  13.51646
-                ],
-                [
-                  100.18864,
-                  13.52249
-                ],
-                [
-                  100.18704,
-                  13.52646
-                ],
-                [
-                  100.18946,
-                  13.5285
-                ],
-                [
-                  100.18991,
-                  13.53154
-                ],
-                [
-                  100.19312,
-                  13.53766
-                ],
-                [
-                  100.19531,
-                  13.53912
-                ],
-                [
-                  100.19385,
-                  13.54493
-                ],
-                [
-                  100.19465,
-                  13.54762
-                ],
-                [
-                  100.19936,
-                  13.54892
-                ],
-                [
-                  100.19867,
-                  13.54688
-                ],
-                [
-                  100.20275,
-                  13.54309
-                ],
-                [
-                  100.21565,
-                  13.5429
-                ],
-                [
-                  100.23031,
-                  13.54543
-                ],
-                [
-                  100.2378,
-                  13.54378
                 ]
               ]
             ]
@@ -14611,8 +17862,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.คลองขลุง",
           "latitude": 16.20864,
           "longitude": 99.70895,
-          "sum_rainfall_mm": 241.00000000000006,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 241.00000000000003,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -14902,8 +18153,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองวังหิน",
           "latitude": 16.229583,
           "longitude": 99.696722,
-          "sum_rainfall_mm": 230.0,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 217.5,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -15066,7 +18317,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 16.151548,
           "longitude": 99.527517,
           "sum_rainfall_mm": 203.5,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -15321,7 +18572,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 16.039022,
           "longitude": 99.233345,
           "sum_rainfall_mm": 225.8,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -16446,898 +19697,527 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
-          "geocode": "180201",
-          "tambon": "ต.คุ้งสำเภา",
-          "amphoe": "อ.มโนรมย์",
-          "province": "จ.ชัยนาท",
+          "geocode": "260207",
+          "tambon": "ต.นาหินลาด",
+          "amphoe": "อ.ปากพลี",
+          "province": "จ.นครนายก",
           "region_id": "1",
           "region_name": "ภาคกลาง",
-          "station": "ทต.คุ้งสำเภา",
-          "latitude": 15.31006,
-          "longitude": 100.08173,
-          "sum_rainfall_mm": 228.4,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "station": "อบต.นาหินลาด",
+          "latitude": 14.20724,
+          "longitude": 101.35025,
+          "sum_rainfall_mm": 287.6,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
                 [
-                  100.12603,
-                  15.30418
+                  101.43222,
+                  14.38957
                 ],
                 [
-                  100.12854,
-                  15.30228
+                  101.45083,
+                  14.38142
                 ],
                 [
-                  100.12514,
-                  15.29405
+                  101.47519,
+                  14.36541
                 ],
                 [
-                  100.12965,
-                  15.29371
+                  101.47655,
+                  14.36012
                 ],
                 [
-                  100.13059,
-                  15.28908
+                  101.48117,
+                  14.35214
                 ],
                 [
-                  100.12464,
-                  15.28855
+                  101.48312,
+                  14.34591
                 ],
                 [
-                  100.12049,
-                  15.29112
+                  101.49032,
+                  14.33904
                 ],
                 [
-                  100.11394,
-                  15.28581
+                  101.49305,
+                  14.33809
                 ],
                 [
-                  100.10763,
-                  15.27491
+                  101.49704,
+                  14.33439
                 ],
                 [
-                  100.09732,
-                  15.27456
+                  101.49765,
+                  14.33223
                 ],
                 [
-                  100.09441,
-                  15.27255
+                  101.49464,
+                  14.32357
                 ],
                 [
-                  100.08229,
-                  15.27252
+                  101.49621,
+                  14.31677
                 ],
                 [
-                  100.07699,
-                  15.2666
+                  101.49937,
+                  14.31295
                 ],
                 [
-                  100.07014,
-                  15.26414
+                  101.50541,
+                  14.30898
                 ],
                 [
-                  100.05684,
-                  15.26849
+                  101.50489,
+                  14.30684
                 ],
                 [
-                  100.0581,
-                  15.27727
+                  101.4987,
+                  14.29843
                 ],
                 [
-                  100.06185,
-                  15.28445
+                  101.49869,
+                  14.2679
                 ],
                 [
-                  100.07463,
-                  15.29191
+                  101.49126,
+                  14.26152
                 ],
                 [
-                  100.07843,
-                  15.2956
+                  101.48441,
+                  14.26401
                 ],
                 [
-                  100.08072,
-                  15.30888
+                  101.48063,
+                  14.26762
                 ],
                 [
-                  100.07803,
-                  15.31612
+                  101.47275,
+                  14.26183
                 ],
                 [
-                  100.08152,
-                  15.32127
+                  101.46292,
+                  14.26267
                 ],
                 [
-                  100.08361,
-                  15.31921
+                  101.45877,
+                  14.25879
                 ],
                 [
-                  100.09984,
-                  15.31456
+                  101.4509,
+                  14.25483
                 ],
                 [
-                  100.11111,
-                  15.30766
+                  101.44579,
+                  14.25633
                 ],
                 [
-                  100.12044,
-                  15.29979
+                  101.44027,
+                  14.2543
                 ],
                 [
-                  100.12603,
-                  15.30418
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "180202",
-          "tambon": "ต.วัดโคก",
-          "amphoe": "อ.มโนรมย์",
-          "province": "จ.ชัยนาท",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "ปตร.มโนรมย์",
-          "latitude": 15.3277,
-          "longitude": 100.10913,
-          "sum_rainfall_mm": 281.6,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  100.18317,
-                  15.33882
-                ],
-                [
-                  100.18376,
-                  15.33116
-                ],
-                [
-                  100.18529,
-                  15.32784
-                ],
-                [
-                  100.18166,
-                  15.3166
-                ],
-                [
-                  100.18095,
-                  15.31098
-                ],
-                [
-                  100.17609,
-                  15.3049
-                ],
-                [
-                  100.17042,
-                  15.30273
-                ],
-                [
-                  100.16324,
-                  15.30764
-                ],
-                [
-                  100.14871,
-                  15.30546
-                ],
-                [
-                  100.14751,
-                  15.30824
-                ],
-                [
-                  100.12972,
-                  15.30906
-                ],
-                [
-                  100.12603,
-                  15.30418
-                ],
-                [
-                  100.12044,
-                  15.29979
-                ],
-                [
-                  100.11111,
-                  15.30766
-                ],
-                [
-                  100.09984,
-                  15.31456
-                ],
-                [
-                  100.08361,
-                  15.31921
-                ],
-                [
-                  100.08152,
-                  15.32127
-                ],
-                [
-                  100.08507,
-                  15.32409
-                ],
-                [
-                  100.09228,
-                  15.32707
-                ],
-                [
-                  100.0963,
-                  15.33081
-                ],
-                [
-                  100.10002,
-                  15.33613
-                ],
-                [
-                  100.10092,
-                  15.34211
-                ],
-                [
-                  100.11582,
-                  15.34304
-                ],
-                [
-                  100.12008,
-                  15.34165
-                ],
-                [
-                  100.12694,
-                  15.34202
-                ],
-                [
-                  100.13283,
-                  15.34069
-                ],
-                [
-                  100.13354,
-                  15.33798
-                ],
-                [
-                  100.13616,
-                  15.33651
-                ],
-                [
-                  100.13671,
-                  15.33429
-                ],
-                [
-                  100.14455,
-                  15.33633
-                ],
-                [
-                  100.17161,
-                  15.32958
-                ],
-                [
-                  100.1762,
-                  15.33031
-                ],
-                [
-                  100.17813,
-                  15.33235
-                ],
-                [
-                  100.17888,
-                  15.34067
-                ],
-                [
-                  100.18161,
-                  15.3472
-                ],
-                [
-                  100.1837,
-                  15.34443
-                ],
-                [
-                  100.18317,
-                  15.33882
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "180107",
-          "tambon": "ต.ธรรมามูล",
-          "amphoe": "อ.เมืองชัยนาท",
-          "province": "จ.ชัยนาท",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "สะพานธรรมจักร(วัดธรรมามูล)",
-          "latitude": 15.25029,
-          "longitude": 100.08347,
-          "sum_rainfall_mm": 214.8,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  100.13059,
-                  15.28908
-                ],
-                [
-                  100.13242,
-                  15.28176
-                ],
-                [
-                  100.14221,
-                  15.27971
-                ],
-                [
-                  100.14439,
-                  15.27612
-                ],
-                [
-                  100.14828,
-                  15.2741
-                ],
-                [
-                  100.15366,
-                  15.26588
-                ],
-                [
-                  100.15803,
-                  15.26309
-                ],
-                [
-                  100.15899,
-                  15.25738
-                ],
-                [
-                  100.15512,
-                  15.25246
-                ],
-                [
-                  100.15464,
-                  15.24618
-                ],
-                [
-                  100.13631,
-                  15.24535
-                ],
-                [
-                  100.13042,
-                  15.2461
-                ],
-                [
-                  100.12573,
-                  15.24509
-                ],
-                [
-                  100.10959,
-                  15.24796
-                ],
-                [
-                  100.10508,
-                  15.24753
-                ],
-                [
-                  100.10165,
-                  15.24575
-                ],
-                [
-                  100.11139,
-                  15.22511
-                ],
-                [
-                  100.108,
-                  15.22261
-                ],
-                [
-                  100.10519,
-                  15.22389
-                ],
-                [
-                  100.10074,
-                  15.22286
-                ],
-                [
-                  100.08917,
-                  15.22296
-                ],
-                [
-                  100.07954,
-                  15.22786
+                  101.43034,
+                  14.25663
                 ],
                 [
-                  100.07668,
-                  15.23174
+                  101.41414,
+                  14.25335
                 ],
                 [
-                  100.07629,
-                  15.23704
+                  101.41212,
+                  14.25442
                 ],
                 [
-                  100.07868,
-                  15.24363
+                  101.39514,
+                  14.27367
                 ],
                 [
-                  100.08378,
-                  15.25198
+                  101.3929,
+                  14.27444
                 ],
                 [
-                  100.08455,
-                  15.25162
+                  101.38972,
+                  14.27335
                 ],
                 [
-                  100.08315,
-                  15.25603
+                  101.38322,
+                  14.27366
                 ],
                 [
-                  100.08065,
-                  15.25691
+                  101.38108,
+                  14.27138
                 ],
                 [
-                  100.06849,
-                  15.25544
+                  101.38391,
+                  14.26586
                 ],
                 [
-                  100.06416,
-                  15.25698
+                  101.38066,
+                  14.25809
                 ],
                 [
-                  100.0584,
-                  15.26375
+                  101.37846,
+                  14.25748
                 ],
                 [
-                  100.05684,
-                  15.26849
+                  101.38244,
+                  14.24938
                 ],
                 [
-                  100.06858,
-                  15.26407
+                  101.37831,
+                  14.23813
                 ],
                 [
-                  100.07247,
-                  15.26461
+                  101.37993,
+                  14.23561
                 ],
                 [
-                  100.07699,
-                  15.2666
+                  101.38193,
+                  14.23523
                 ],
                 [
-                  100.08229,
-                  15.27252
+                  101.3839,
+                  14.23315
                 ],
                 [
-                  100.09441,
-                  15.27255
+                  101.38323,
+                  14.2298
                 ],
                 [
-                  100.09732,
-                  15.27456
+                  101.38605,
+                  14.2252
                 ],
                 [
-                  100.10763,
-                  15.27491
+                  101.38444,
+                  14.21617
                 ],
                 [
-                  100.11394,
-                  15.28581
+                  101.38074,
+                  14.21272
                 ],
                 [
-                  100.12049,
-                  15.29112
+                  101.38226,
+                  14.2105
                 ],
                 [
-                  100.12464,
-                  15.28855
+                  101.37914,
+                  14.21031
                 ],
                 [
-                  100.13059,
-                  15.28908
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "180106",
-          "tambon": "ต.หาดท่าเสา",
-          "amphoe": "อ.เมืองชัยนาท",
-          "province": "จ.ชัยนาท",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "สะพานคง-ศุข ศรีสวัสดิ์",
-          "latitude": 15.225,
-          "longitude": 100.07824,
-          "sum_rainfall_mm": 254.60000000000002,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  100.08378,
-                  15.25198
-                ],
-                [
-                  100.07747,
-                  15.24148
-                ],
-                [
-                  100.07629,
-                  15.23704
-                ],
-                [
-                  100.07668,
-                  15.23174
-                ],
-                [
-                  100.08013,
-                  15.22741
-                ],
-                [
-                  100.09411,
-                  15.21945
-                ],
-                [
-                  100.10115,
-                  15.20631
-                ],
-                [
-                  100.10409,
-                  15.2041
+                  101.3779,
+                  14.21155
                 ],
                 [
-                  100.10372,
-                  15.19694
+                  101.37491,
+                  14.21023
                 ],
                 [
-                  100.10203,
-                  15.19333
+                  101.37282,
+                  14.20544
                 ],
                 [
-                  100.08909,
-                  15.18406
+                  101.36645,
+                  14.20182
                 ],
                 [
-                  100.08145,
-                  15.16966
+                  101.36428,
+                  14.20231
                 ],
                 [
-                  100.07634,
-                  15.17563
+                  101.36333,
+                  14.20139
                 ],
                 [
-                  100.0721,
-                  15.17605
+                  101.36237,
+                  14.20275
                 ],
                 [
-                  100.05845,
-                  15.181
+                  101.35904,
+                  14.20277
                 ],
                 [
-                  100.05501,
-                  15.17949
+                  101.35077,
+                  14.19989
                 ],
                 [
-                  100.05429,
-                  15.18222
+                  101.34975,
+                  14.19789
                 ],
                 [
-                  100.05486,
-                  15.18872
+                  101.34583,
+                  14.19741
                 ],
                 [
-                  100.05678,
-                  15.19388
+                  101.34495,
+                  14.19395
                 ],
                 [
-                  100.06144,
-                  15.19452
+                  101.34261,
+                  14.19252
                 ],
                 [
-                  100.06385,
-                  15.20023
+                  101.33968,
+                  14.18832
                 ],
                 [
-                  100.06825,
-                  15.20207
+                  101.33651,
+                  14.18722
                 ],
                 [
-                  100.06784,
-                  15.20584
+                  101.33411,
+                  14.18386
                 ],
                 [
-                  100.06934,
-                  15.20829
+                  101.33211,
+                  14.18793
                 ],
                 [
-                  100.06803,
-                  15.21157
+                  101.32709,
+                  14.19114
                 ],
                 [
-                  100.07187,
-                  15.21364
+                  101.32762,
+                  14.19495
                 ],
                 [
-                  100.07543,
-                  15.22182
+                  101.32865,
+                  14.19765
                 ],
                 [
-                  100.06398,
-                  15.23429
+                  101.33526,
+                  14.20052
                 ],
                 [
-                  100.05924,
-                  15.24421
+                  101.33532,
+                  14.20937
                 ],
                 [
-                  100.05794,
-                  15.25184
+                  101.33928,
+                  14.21356
                 ],
                 [
-                  100.06538,
-                  15.25656
+                  101.33923,
+                  14.21494
                 ],
                 [
-                  100.06916,
-                  15.25544
+                  101.33486,
+                  14.21954
                 ],
                 [
-                  100.08065,
-                  15.25691
+                  101.33158,
+                  14.21902
                 ],
                 [
-                  100.08315,
-                  15.25603
+                  101.33141,
+                  14.21655
                 ],
                 [
-                  100.08455,
-                  15.25162
+                  101.32986,
+                  14.21534
                 ],
                 [
-                  100.08378,
-                  15.25198
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "180302",
-          "tambon": "ต.มะขามเฒ่า",
-          "amphoe": "อ.วัดสิงห์",
-          "province": "จ.ชัยนาท",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "ท้ายปตร.มะขามเฒ่า-อู่ทอง",
-          "latitude": 15.22229,
-          "longitude": 100.06236,
-          "sum_rainfall_mm": 289.4,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  100.0584,
-                  15.26375
+                  101.32216,
+                  14.21839
                 ],
                 [
-                  100.06268,
-                  15.25821
+                  101.32159,
+                  14.22103
                 ],
                 [
-                  100.06538,
-                  15.25656
+                  101.319,
+                  14.22184
                 ],
                 [
-                  100.05794,
-                  15.25184
+                  101.31895,
+                  14.22597
                 ],
                 [
-                  100.05798,
-                  15.2481
+                  101.31722,
+                  14.22976
                 ],
                 [
-                  100.06031,
-                  15.24134
+                  101.31705,
+                  14.23723
                 ],
                 [
-                  100.06541,
-                  15.23201
+                  101.31854,
+                  14.2401
                 ],
                 [
-                  100.07543,
-                  15.22182
+                  101.31287,
+                  14.24336
                 ],
                 [
-                  100.07187,
-                  15.21364
+                  101.31608,
+                  14.24611
                 ],
                 [
-                  100.06803,
-                  15.21157
+                  101.32045,
+                  14.24709
                 ],
                 [
-                  100.06934,
-                  15.20829
+                  101.32256,
+                  14.25177
                 ],
                 [
-                  100.06784,
-                  15.20584
+                  101.32085,
+                  14.25656
                 ],
                 [
-                  100.06825,
-                  15.20207
+                  101.33891,
+                  14.26908
                 ],
                 [
-                  100.06385,
-                  15.20023
+                  101.34227,
+                  14.27336
                 ],
                 [
-                  100.06144,
-                  15.19452
+                  101.34385,
+                  14.27842
                 ],
                 [
-                  100.05694,
-                  15.19411
+                  101.34349,
+                  14.28268
                 ],
                 [
-                  100.05486,
-                  15.18872
+                  101.33679,
+                  14.2974
                 ],
                 [
-                  100.05444,
-                  15.18366
+                  101.3317,
+                  14.30389
                 ],
                 [
-                  100.0445,
-                  15.18318
+                  101.33085,
+                  14.30799
                 ],
                 [
-                  100.03811,
-                  15.19776
+                  101.3269,
+                  14.30791
                 ],
                 [
-                  100.03342,
-                  15.20128
+                  101.32066,
+                  14.31148
                 ],
                 [
-                  100.02295,
-                  15.21573
+                  101.31463,
+                  14.31174
                 ],
                 [
-                  100.02074,
-                  15.21365
+                  101.31257,
+                  14.31367
                 ],
                 [
-                  100.01835,
-                  15.21325
+                  101.31385,
+                  14.31747
                 ],
                 [
-                  100.00699,
-                  15.21904
+                  101.31665,
+                  14.31992
                 ],
                 [
-                  100.0141,
-                  15.2195
+                  101.3171,
+                  14.32316
                 ],
                 [
-                  100.00545,
-                  15.22108
+                  101.31948,
+                  14.32554
                 ],
                 [
-                  100.00037,
-                  15.2235
+                  101.32058,
+                  14.33272
                 ],
                 [
-                  99.99845,
-                  15.23338
+                  101.32372,
+                  14.33606
                 ],
                 [
-                  100.00412,
-                  15.24509
+                  101.32409,
+                  14.3428
                 ],
                 [
-                  100.02238,
-                  15.24314
+                  101.32779,
+                  14.34617
                 ],
                 [
-                  100.02003,
-                  15.25097
+                  101.32501,
+                  14.35318
                 ],
                 [
-                  100.02042,
-                  15.25341
+                  101.32623,
+                  14.3546
                 ],
                 [
-                  100.02584,
-                  15.25999
+                  101.33189,
+                  14.35488
                 ],
                 [
-                  100.0351,
-                  15.26278
+                  101.33327,
+                  14.3582
                 ],
                 [
-                  100.03759,
-                  15.25827
+                  101.34148,
+                  14.3572
                 ],
                 [
-                  100.04144,
-                  15.2557
+                  101.34574,
+                  14.36087
                 ],
                 [
-                  100.04541,
-                  15.25693
+                  101.35063,
+                  14.36235
                 ],
                 [
-                  100.04488,
-                  15.2617
+                  101.35305,
+                  14.36012
                 ],
                 [
-                  100.04693,
-                  15.2645
+                  101.35813,
+                  14.36016
                 ],
                 [
-                  100.05185,
-                  15.26329
+                  101.36526,
+                  14.35542
                 ],
-                [
-                  100.0584,
-                  15.26375
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "180301",
-          "tambon": "ต.วัดสิงห์",
-          "amphoe": "อ.วัดสิงห์",
-          "province": "จ.ชัยนาท",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "ทต.วัดสิงห์",
-          "latitude": 15.2584,
-          "longitude": 100.04493,
-          "sum_rainfall_mm": 183.2,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
                 [
-                  100.04806,
-                  15.26481
+                  101.36634,
+                  14.35276
                 ],
                 [
-                  100.04497,
-                  15.26203
+                  101.37496,
+                  14.35467
                 ],
                 [
-                  100.04541,
-                  15.25693
+                  101.384,
+                  14.3596
                 ],
                 [
-                  100.04186,
-                  15.25576
+                  101.40236,
+                  14.36575
                 ],
                 [
-                  100.03782,
-                  15.25801
+                  101.40695,
+                  14.3713
                 ],
                 [
-                  100.03514,
-                  15.26246
+                  101.41301,
+                  14.37418
                 ],
                 [
-                  100.03667,
-                  15.26719
+                  101.42241,
+                  14.38324
                 ],
                 [
-                  100.03871,
-                  15.26807
+                  101.42602,
+                  14.38952
                 ],
                 [
-                  100.04593,
-                  15.26853
+                  101.42811,
+                  14.39025
                 ],
                 [
-                  100.04806,
-                  15.26481
+                  101.43222,
+                  14.38957
                 ]
               ]
             ]
@@ -17353,8 +20233,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เขื่อนนายก",
           "latitude": 14.18205,
           "longitude": 101.162164,
-          "sum_rainfall_mm": 214.5,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 238.0,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -17592,8 +20472,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ศรีจุฬา",
           "latitude": 14.07064,
           "longitude": 101.13746,
-          "sum_rainfall_mm": 410.4,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 419.0,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -17831,8 +20711,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สมบูรณ์",
           "latitude": 13.970389,
           "longitude": 101.138699,
-          "sum_rainfall_mm": 272.5,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 296.5,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -18054,8 +20934,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองแม่น้ำใน(โพธิ์แทน)",
           "latitude": 14.212921,
           "longitude": 100.942453,
-          "sum_rainfall_mm": 299.0,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 311.0,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -18149,8 +21029,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "องครักษ์",
           "latitude": 14.113633,
           "longitude": 101.01952,
-          "sum_rainfall_mm": 188.2,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 189.4,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -18303,1080 +21183,6 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
-          "geocode": "600201",
-          "tambon": "ต.โกรกพระ",
-          "amphoe": "อ.โกรกพระ",
-          "province": "จ.นครสวรรค์",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "ทต.โกรกพระ",
-          "latitude": 15.55312,
-          "longitude": 100.0709,
-          "sum_rainfall_mm": 176.6,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  100.06666,
-                  15.59244
-                ],
-                [
-                  100.06606,
-                  15.58374
-                ],
-                [
-                  100.07086,
-                  15.57904
-                ],
-                [
-                  100.0755,
-                  15.57663
-                ],
-                [
-                  100.0806,
-                  15.57643
-                ],
-                [
-                  100.08881,
-                  15.57941
-                ],
-                [
-                  100.09393,
-                  15.57916
-                ],
-                [
-                  100.08628,
-                  15.57165
-                ],
-                [
-                  100.08002,
-                  15.55766
-                ],
-                [
-                  100.07906,
-                  15.55359
-                ],
-                [
-                  100.08001,
-                  15.55134
-                ],
-                [
-                  100.09485,
-                  15.55478
-                ],
-                [
-                  100.10186,
-                  15.55909
-                ],
-                [
-                  100.10767,
-                  15.55887
-                ],
-                [
-                  100.11387,
-                  15.5558
-                ],
-                [
-                  100.1052,
-                  15.55382
-                ],
-                [
-                  100.10316,
-                  15.54768
-                ],
-                [
-                  100.09396,
-                  15.53926
-                ],
-                [
-                  100.09179,
-                  15.53907
-                ],
-                [
-                  100.08511,
-                  15.54223
-                ],
-                [
-                  100.08088,
-                  15.54217
-                ],
-                [
-                  100.05914,
-                  15.53423
-                ],
-                [
-                  100.05491,
-                  15.5342
-                ],
-                [
-                  100.04625,
-                  15.52637
-                ],
-                [
-                  100.04173,
-                  15.53296
-                ],
-                [
-                  100.04276,
-                  15.53649
-                ],
-                [
-                  100.0378,
-                  15.55834
-                ],
-                [
-                  100.03647,
-                  15.5739
-                ],
-                [
-                  100.0402,
-                  15.57645
-                ],
-                [
-                  100.04355,
-                  15.5767
-                ],
-                [
-                  100.04971,
-                  15.58107
-                ],
-                [
-                  100.05678,
-                  15.58317
-                ],
-                [
-                  100.05904,
-                  15.5855
-                ],
-                [
-                  100.06034,
-                  15.59108
-                ],
-                [
-                  100.06329,
-                  15.59272
-                ],
-                [
-                  100.06666,
-                  15.59244
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "750101",
-          "tambon": "ต.แม่กลอง",
-          "amphoe": "อ.เมืองสมุทรสงคราม",
-          "province": "จ.สมุทรสงคราม",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "พระรามสอง",
-          "latitude": 13.38362,
-          "longitude": 99.9836,
-          "sum_rainfall_mm": 184.2,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.99557,
-                  13.41809
-                ],
-                [
-                  99.99707,
-                  13.41662
-                ],
-                [
-                  100.00209,
-                  13.42027
-                ],
-                [
-                  100.00706,
-                  13.41871
-                ],
-                [
-                  100.00438,
-                  13.41173
-                ],
-                [
-                  100.00542,
-                  13.40788
-                ],
-                [
-                  100.00319,
-                  13.39631
-                ],
-                [
-                  100.00353,
-                  13.39234
-                ],
-                [
-                  99.99784,
-                  13.38492
-                ],
-                [
-                  99.99778,
-                  13.38308
-                ],
-                [
-                  99.99375,
-                  13.37915
-                ],
-                [
-                  99.99039,
-                  13.37969
-                ],
-                [
-                  99.99029,
-                  13.37753
-                ],
-                [
-                  99.98511,
-                  13.38088
-                ],
-                [
-                  99.98084,
-                  13.37834
-                ],
-                [
-                  99.97731,
-                  13.37902
-                ],
-                [
-                  99.98917,
-                  13.4076
-                ],
-                [
-                  99.98716,
-                  13.41403
-                ],
-                [
-                  99.99061,
-                  13.42426
-                ],
-                [
-                  99.99485,
-                  13.4204
-                ],
-                [
-                  99.99557,
-                  13.41809
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "610205",
-          "tambon": "ต.โคกหม้อ",
-          "amphoe": "อ.ทัพทัน",
-          "province": "จ.อุทัยธานี",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "วัดโคกหม้อ",
-          "latitude": 15.534278,
-          "longitude": 99.899083,
-          "sum_rainfall_mm": 192.0,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.93768,
-                  15.60017
-                ],
-                [
-                  99.93725,
-                  15.59552
-                ],
-                [
-                  99.93857,
-                  15.58592
-                ],
-                [
-                  99.94223,
-                  15.57171
-                ],
-                [
-                  99.94009,
-                  15.55946
-                ],
-                [
-                  99.94016,
-                  15.53487
-                ],
-                [
-                  99.94108,
-                  15.53071
-                ],
-                [
-                  99.94373,
-                  15.52734
-                ],
-                [
-                  99.94369,
-                  15.52095
-                ],
-                [
-                  99.94699,
-                  15.51388
-                ],
-                [
-                  99.94523,
-                  15.50546
-                ],
-                [
-                  99.9459,
-                  15.50293
-                ],
-                [
-                  99.9479,
-                  15.50157
-                ],
-                [
-                  99.94485,
-                  15.49884
-                ],
-                [
-                  99.94135,
-                  15.4976
-                ],
-                [
-                  99.93366,
-                  15.50207
-                ],
-                [
-                  99.92888,
-                  15.50329
-                ],
-                [
-                  99.92641,
-                  15.50247
-                ],
-                [
-                  99.92449,
-                  15.5045
-                ],
-                [
-                  99.92218,
-                  15.50097
-                ],
-                [
-                  99.92082,
-                  15.5009
-                ],
-                [
-                  99.92089,
-                  15.50518
-                ],
-                [
-                  99.91949,
-                  15.50726
-                ],
-                [
-                  99.918,
-                  15.50724
-                ],
-                [
-                  99.9163,
-                  15.50943
-                ],
-                [
-                  99.9141,
-                  15.50896
-                ],
-                [
-                  99.91362,
-                  15.51131
-                ],
-                [
-                  99.91454,
-                  15.51317
-                ],
-                [
-                  99.91024,
-                  15.51456
-                ],
-                [
-                  99.90791,
-                  15.51778
-                ],
-                [
-                  99.90758,
-                  15.52095
-                ],
-                [
-                  99.90618,
-                  15.52222
-                ],
-                [
-                  99.90686,
-                  15.52465
-                ],
-                [
-                  99.90567,
-                  15.52495
-                ],
-                [
-                  99.90325,
-                  15.52281
-                ],
-                [
-                  99.90336,
-                  15.52611
-                ],
-                [
-                  99.90126,
-                  15.52799
-                ],
-                [
-                  99.90207,
-                  15.52958
-                ],
-                [
-                  99.89839,
-                  15.5291
-                ],
-                [
-                  99.89824,
-                  15.53344
-                ],
-                [
-                  99.89636,
-                  15.53422
-                ],
-                [
-                  99.89706,
-                  15.53673
-                ],
-                [
-                  99.89381,
-                  15.53627
-                ],
-                [
-                  99.89419,
-                  15.54052
-                ],
-                [
-                  99.8907,
-                  15.53923
-                ],
-                [
-                  99.89189,
-                  15.54216
-                ],
-                [
-                  99.89036,
-                  15.54341
-                ],
-                [
-                  99.8904,
-                  15.54637
-                ],
-                [
-                  99.88623,
-                  15.55837
-                ],
-                [
-                  99.88247,
-                  15.5622
-                ],
-                [
-                  99.8817,
-                  15.56455
-                ],
-                [
-                  99.88618,
-                  15.57789
-                ],
-                [
-                  99.90144,
-                  15.5825
-                ],
-                [
-                  99.9035,
-                  15.58637
-                ],
-                [
-                  99.91558,
-                  15.59064
-                ],
-                [
-                  99.92629,
-                  15.59753
-                ],
-                [
-                  99.93768,
-                  15.60017
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "610101",
-          "tambon": "ต.อุทัยใหม่",
-          "amphoe": "อ.เมืองอุทัยธานี",
-          "province": "จ.อุทัยธานี",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "เมืองอุทัยธานี",
-          "latitude": 15.35869,
-          "longitude": 100.05164,
-          "sum_rainfall_mm": 157.2,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  100.01955,
-                  15.40469
-                ],
-                [
-                  100.0229,
-                  15.40227
-                ],
-                [
-                  100.01887,
-                  15.38775
-                ],
-                [
-                  100.02501,
-                  15.39702
-                ],
-                [
-                  100.02813,
-                  15.39575
-                ],
-                [
-                  100.02826,
-                  15.38862
-                ],
-                [
-                  100.03072,
-                  15.3913
-                ],
-                [
-                  100.03403,
-                  15.38763
-                ],
-                [
-                  100.03096,
-                  15.38575
-                ],
-                [
-                  100.0311,
-                  15.38325
-                ],
-                [
-                  100.04211,
-                  15.37334
-                ],
-                [
-                  100.05264,
-                  15.36605
-                ],
-                [
-                  100.04882,
-                  15.36121
-                ],
-                [
-                  100.04312,
-                  15.36703
-                ],
-                [
-                  100.03161,
-                  15.36732
-                ],
-                [
-                  100.02652,
-                  15.36613
-                ],
-                [
-                  100.02528,
-                  15.36705
-                ],
-                [
-                  100.02205,
-                  15.36655
-                ],
-                [
-                  100.0159,
-                  15.36774
-                ],
-                [
-                  100.0144,
-                  15.36898
-                ],
-                [
-                  100.02094,
-                  15.37497
-                ],
-                [
-                  100.01999,
-                  15.37708
-                ],
-                [
-                  100.01639,
-                  15.37622
-                ],
-                [
-                  100.00975,
-                  15.38364
-                ],
-                [
-                  100.01129,
-                  15.40265
-                ],
-                [
-                  100.01632,
-                  15.40971
-                ],
-                [
-                  100.01771,
-                  15.40894
-                ],
-                [
-                  100.01797,
-                  15.40626
-                ],
-                [
-                  100.01955,
-                  15.40469
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "610301",
-          "tambon": "ต.สว่างอารมณ์",
-          "amphoe": "อ.สว่างอารมณ์",
-          "province": "จ.อุทัยธานี",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "อบต.สว่างแจ้งสบายใจ",
-          "latitude": 15.559001,
-          "longitude": 99.864809,
-          "sum_rainfall_mm": 127.0,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.85073,
-                  15.62
-                ],
-                [
-                  99.86256,
-                  15.61753
-                ],
-                [
-                  99.86408,
-                  15.61456
-                ],
-                [
-                  99.86605,
-                  15.61399
-                ],
-                [
-                  99.86696,
-                  15.60752
-                ],
-                [
-                  99.86561,
-                  15.60598
-                ],
-                [
-                  99.86835,
-                  15.60501
-                ],
-                [
-                  99.86734,
-                  15.60208
-                ],
-                [
-                  99.86917,
-                  15.60092
-                ],
-                [
-                  99.86682,
-                  15.59903
-                ],
-                [
-                  99.8684,
-                  15.59714
-                ],
-                [
-                  99.86719,
-                  15.59606
-                ],
-                [
-                  99.86853,
-                  15.59534
-                ],
-                [
-                  99.86585,
-                  15.59434
-                ],
-                [
-                  99.86865,
-                  15.59254
-                ],
-                [
-                  99.86867,
-                  15.59092
-                ],
-                [
-                  99.86728,
-                  15.58985
-                ],
-                [
-                  99.86832,
-                  15.58765
-                ],
-                [
-                  99.86569,
-                  15.58651
-                ],
-                [
-                  99.86553,
-                  15.58531
-                ],
-                [
-                  99.86738,
-                  15.58317
-                ],
-                [
-                  99.86579,
-                  15.58252
-                ],
-                [
-                  99.86965,
-                  15.57941
-                ],
-                [
-                  99.86632,
-                  15.57881
-                ],
-                [
-                  99.86919,
-                  15.57762
-                ],
-                [
-                  99.86868,
-                  15.57458
-                ],
-                [
-                  99.87044,
-                  15.57326
-                ],
-                [
-                  99.86938,
-                  15.57158
-                ],
-                [
-                  99.8705,
-                  15.56805
-                ],
-                [
-                  99.86823,
-                  15.56717
-                ],
-                [
-                  99.8714,
-                  15.56517
-                ],
-                [
-                  99.87079,
-                  15.56378
-                ],
-                [
-                  99.87269,
-                  15.56103
-                ],
-                [
-                  99.87623,
-                  15.55916
-                ],
-                [
-                  99.87577,
-                  15.55664
-                ],
-                [
-                  99.87753,
-                  15.55431
-                ],
-                [
-                  99.87418,
-                  15.5547
-                ],
-                [
-                  99.87257,
-                  15.55335
-                ],
-                [
-                  99.87117,
-                  15.55597
-                ],
-                [
-                  99.86649,
-                  15.55843
-                ],
-                [
-                  99.86395,
-                  15.55756
-                ],
-                [
-                  99.86398,
-                  15.54705
-                ],
-                [
-                  99.86225,
-                  15.54445
-                ],
-                [
-                  99.86303,
-                  15.54313
-                ],
-                [
-                  99.85919,
-                  15.53787
-                ],
-                [
-                  99.85825,
-                  15.53382
-                ],
-                [
-                  99.84792,
-                  15.53167
-                ],
-                [
-                  99.84648,
-                  15.52912
-                ],
-                [
-                  99.84391,
-                  15.52875
-                ],
-                [
-                  99.84172,
-                  15.52578
-                ],
-                [
-                  99.8379,
-                  15.52457
-                ],
-                [
-                  99.83611,
-                  15.52215
-                ],
-                [
-                  99.83259,
-                  15.52058
-                ],
-                [
-                  99.82704,
-                  15.5226
-                ],
-                [
-                  99.82057,
-                  15.52811
-                ],
-                [
-                  99.81577,
-                  15.52992
-                ],
-                [
-                  99.81421,
-                  15.53169
-                ],
-                [
-                  99.8128,
-                  15.53555
-                ],
-                [
-                  99.81352,
-                  15.54049
-                ],
-                [
-                  99.81076,
-                  15.54391
-                ],
-                [
-                  99.81022,
-                  15.54647
-                ],
-                [
-                  99.81283,
-                  15.55518
-                ],
-                [
-                  99.82067,
-                  15.56647
-                ],
-                [
-                  99.82734,
-                  15.56769
-                ],
-                [
-                  99.83225,
-                  15.56516
-                ],
-                [
-                  99.84132,
-                  15.56441
-                ],
-                [
-                  99.84374,
-                  15.56641
-                ],
-                [
-                  99.84483,
-                  15.56569
-                ],
-                [
-                  99.84716,
-                  15.56656
-                ],
-                [
-                  99.83838,
-                  15.5733
-                ],
-                [
-                  99.83776,
-                  15.58185
-                ],
-                [
-                  99.83913,
-                  15.58755
-                ],
-                [
-                  99.8386,
-                  15.59548
-                ],
-                [
-                  99.84029,
-                  15.60614
-                ],
-                [
-                  99.84769,
-                  15.61863
-                ],
-                [
-                  99.85073,
-                  15.62
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "610401",
-          "tambon": "ต.หนองฉาง",
-          "amphoe": "อ.หนองฉาง",
-          "province": "จ.อุทัยธานี",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "ทต.หนองฉาง",
-          "latitude": 15.38896,
-          "longitude": 99.84505,
-          "sum_rainfall_mm": 223.20000000000002,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.88969,
-                  15.3982
-                ],
-                [
-                  99.89179,
-                  15.39512
-                ],
-                [
-                  99.88973,
-                  15.38657
-                ],
-                [
-                  99.88957,
-                  15.37963
-                ],
-                [
-                  99.89365,
-                  15.37225
-                ],
-                [
-                  99.89403,
-                  15.3635
-                ],
-                [
-                  99.87919,
-                  15.37205
-                ],
-                [
-                  99.86526,
-                  15.37507
-                ],
-                [
-                  99.84799,
-                  15.38325
-                ],
-                [
-                  99.84514,
-                  15.38596
-                ],
-                [
-                  99.84022,
-                  15.38292
-                ],
-                [
-                  99.8412,
-                  15.40003
-                ],
-                [
-                  99.84369,
-                  15.40943
-                ],
-                [
-                  99.84937,
-                  15.41061
-                ],
-                [
-                  99.8609,
-                  15.41664
-                ],
-                [
-                  99.86386,
-                  15.41637
-                ],
-                [
-                  99.86682,
-                  15.40688
-                ],
-                [
-                  99.86984,
-                  15.40537
-                ],
-                [
-                  99.87688,
-                  15.40695
-                ],
-                [
-                  99.88653,
-                  15.40173
-                ],
-                [
-                  99.88969,
-                  15.3982
-                ]
-              ]
-            ]
-          }
-        },
-        {
           "geocode": "220901",
           "tambon": "ต.นายายอาม",
           "amphoe": "อ.นายายอาม",
@@ -19386,8 +21192,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.นายายอาม",
           "latitude": 12.77083,
           "longitude": 101.85303,
-          "sum_rainfall_mm": 268.0,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 267.6,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -19737,8 +21543,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.ปัถวี",
           "latitude": 12.74261,
           "longitude": 102.23263,
-          "sum_rainfall_mm": 210.2,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 225.8,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -20256,8 +22062,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดโคกตะพง (แกลง)",
           "latitude": 12.78168,
           "longitude": 102.17328,
-          "sum_rainfall_mm": 238.39999999999998,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 244.4,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -20471,8 +22277,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ดอนฉิมพลี",
           "latitude": 13.90535,
           "longitude": 100.97028,
-          "sum_rainfall_mm": 264.59999999999997,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 296.4,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -20566,8 +22372,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ปากแม่น้ำบางปะกง",
           "latitude": 13.474833,
           "longitude": 100.98196,
-          "sum_rainfall_mm": 229.5,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 271.5,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -20741,8 +22547,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บางปะกง",
           "latitude": 13.54901,
           "longitude": 101.00111,
-          "sum_rainfall_mm": 311.0,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 352.40000000000003,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -20888,8 +22694,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านโพธิ์",
           "latitude": 13.58335,
           "longitude": 101.070917,
-          "sum_rainfall_mm": 409.5,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 460.0,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -21007,8 +22813,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "พนมสารคาม",
           "latitude": 13.72662,
           "longitude": 101.35298,
-          "sum_rainfall_mm": 361.2,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 392.79999999999995,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -21194,8 +23000,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.หนองแหน",
           "latitude": 13.68338,
           "longitude": 101.32512,
-          "sum_rainfall_mm": 389.4,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 419.59999999999997,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -21405,8 +23211,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.บางขวัญ",
           "latitude": 13.74984,
           "longitude": 101.07751,
-          "sum_rainfall_mm": 389.4,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 404.0,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -21647,6 +23453,401 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
+          "geocode": "200202",
+          "tambon": "ต.คลองกิ่ว",
+          "amphoe": "อ.บ้านบึง",
+          "province": "จ.ชลบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "โรงเรียนวัดหนองน้ำเขียว",
+          "latitude": 13.234701,
+          "longitude": 101.11684,
+          "sum_rainfall_mm": 247.60000000000002,
+          "observed_at": "2026-09-25T20:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  101.16626,
+                  13.25896
+                ],
+                [
+                  101.16162,
+                  13.25345
+                ],
+                [
+                  101.17732,
+                  13.24914
+                ],
+                [
+                  101.17903,
+                  13.24696
+                ],
+                [
+                  101.18676,
+                  13.2467
+                ],
+                [
+                  101.18804,
+                  13.24464
+                ],
+                [
+                  101.18791,
+                  13.23003
+                ],
+                [
+                  101.18098,
+                  13.22684
+                ],
+                [
+                  101.19108,
+                  13.21506
+                ],
+                [
+                  101.20391,
+                  13.21182
+                ],
+                [
+                  101.21001,
+                  13.20827
+                ],
+                [
+                  101.2203,
+                  13.19438
+                ],
+                [
+                  101.23098,
+                  13.18567
+                ],
+                [
+                  101.23242,
+                  13.18718
+                ],
+                [
+                  101.23877,
+                  13.17404
+                ],
+                [
+                  101.24874,
+                  13.17861
+                ],
+                [
+                  101.24789,
+                  13.17041
+                ],
+                [
+                  101.25079,
+                  13.16393
+                ],
+                [
+                  101.25066,
+                  13.14884
+                ],
+                [
+                  101.25158,
+                  13.14672
+                ],
+                [
+                  101.24903,
+                  13.14001
+                ],
+                [
+                  101.24907,
+                  13.13562
+                ],
+                [
+                  101.24769,
+                  13.13438
+                ],
+                [
+                  101.24762,
+                  13.13069
+                ],
+                [
+                  101.25046,
+                  13.12903
+                ],
+                [
+                  101.25142,
+                  13.12694
+                ],
+                [
+                  101.2492,
+                  13.12135
+                ],
+                [
+                  101.2489,
+                  13.10873
+                ],
+                [
+                  101.25565,
+                  13.09397
+                ],
+                [
+                  101.22698,
+                  13.0918
+                ],
+                [
+                  101.2117,
+                  13.09174
+                ],
+                [
+                  101.20601,
+                  13.09811
+                ],
+                [
+                  101.20302,
+                  13.09562
+                ],
+                [
+                  101.20018,
+                  13.09998
+                ],
+                [
+                  101.19714,
+                  13.10078
+                ],
+                [
+                  101.19233,
+                  13.10541
+                ],
+                [
+                  101.19169,
+                  13.10801
+                ],
+                [
+                  101.19337,
+                  13.11008
+                ],
+                [
+                  101.19283,
+                  13.11096
+                ],
+                [
+                  101.17751,
+                  13.12178
+                ],
+                [
+                  101.17184,
+                  13.12195
+                ],
+                [
+                  101.16784,
+                  13.12331
+                ],
+                [
+                  101.16592,
+                  13.12508
+                ],
+                [
+                  101.16521,
+                  13.12924
+                ],
+                [
+                  101.15916,
+                  13.13183
+                ],
+                [
+                  101.15617,
+                  13.13179
+                ],
+                [
+                  101.15116,
+                  13.13567
+                ],
+                [
+                  101.1449,
+                  13.14699
+                ],
+                [
+                  101.14313,
+                  13.16302
+                ],
+                [
+                  101.14125,
+                  13.16521
+                ],
+                [
+                  101.1367,
+                  13.16704
+                ],
+                [
+                  101.13454,
+                  13.17239
+                ],
+                [
+                  101.13045,
+                  13.17417
+                ],
+                [
+                  101.12786,
+                  13.17967
+                ],
+                [
+                  101.1187,
+                  13.18109
+                ],
+                [
+                  101.11004,
+                  13.18062
+                ],
+                [
+                  101.10352,
+                  13.18309
+                ],
+                [
+                  101.09467,
+                  13.18226
+                ],
+                [
+                  101.088,
+                  13.18472
+                ],
+                [
+                  101.08068,
+                  13.19249
+                ],
+                [
+                  101.07651,
+                  13.1999
+                ],
+                [
+                  101.07059,
+                  13.20246
+                ],
+                [
+                  101.06988,
+                  13.20735
+                ],
+                [
+                  101.07487,
+                  13.21335
+                ],
+                [
+                  101.0749,
+                  13.21783
+                ],
+                [
+                  101.07424,
+                  13.21863
+                ],
+                [
+                  101.06855,
+                  13.21846
+                ],
+                [
+                  101.06311,
+                  13.22174
+                ],
+                [
+                  101.05901,
+                  13.23612
+                ],
+                [
+                  101.0598,
+                  13.23761
+                ],
+                [
+                  101.06262,
+                  13.23792
+                ],
+                [
+                  101.06036,
+                  13.24642
+                ],
+                [
+                  101.06202,
+                  13.25281
+                ],
+                [
+                  101.05864,
+                  13.2545
+                ],
+                [
+                  101.05675,
+                  13.25922
+                ],
+                [
+                  101.07318,
+                  13.25664
+                ],
+                [
+                  101.08972,
+                  13.25676
+                ],
+                [
+                  101.10345,
+                  13.26889
+                ],
+                [
+                  101.11258,
+                  13.27049
+                ],
+                [
+                  101.1197,
+                  13.27541
+                ],
+                [
+                  101.12459,
+                  13.27425
+                ],
+                [
+                  101.12533,
+                  13.27123
+                ],
+                [
+                  101.1291,
+                  13.27064
+                ],
+                [
+                  101.13405,
+                  13.27858
+                ],
+                [
+                  101.13352,
+                  13.28354
+                ],
+                [
+                  101.13673,
+                  13.28658
+                ],
+                [
+                  101.13892,
+                  13.28382
+                ],
+                [
+                  101.14061,
+                  13.27713
+                ],
+                [
+                  101.14867,
+                  13.2742
+                ],
+                [
+                  101.15398,
+                  13.27528
+                ],
+                [
+                  101.15714,
+                  13.27105
+                ],
+                [
+                  101.16191,
+                  13.2698
+                ],
+                [
+                  101.16037,
+                  13.26532
+                ],
+                [
+                  101.16626,
+                  13.25896
+                ]
+              ]
+            ]
+          }
+        },
+        {
           "geocode": "200204",
           "tambon": "ต.หนองซ้ำซาก",
           "amphoe": "อ.บ้านบึง",
@@ -21656,8 +23857,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์ป่าอ่างช้างน้ำ",
           "latitude": 13.2743,
           "longitude": 101.082,
-          "sum_rainfall_mm": 259.6,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 270.80000000000007,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -21855,8 +24056,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ที่ทำการเขตรักษาพันธุ์สัตว์ป่าเขาเขียว-เขาชมภู่",
           "latitude": 13.240835,
           "longitude": 101.04208,
-          "sum_rainfall_mm": 364.6,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 375.0,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -22157,6 +24358,2508 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
+          "geocode": "230701",
+          "tambon": "ต.เกาะช้าง",
+          "amphoe": "อ.เกาะช้าง",
+          "province": "จ.ตราด",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "ที่ทำการอุทยานแห่งชาติเกาะช้าง",
+          "latitude": 12.12542,
+          "longitude": 102.26843,
+          "sum_rainfall_mm": 212.80000000000004,
+          "observed_at": "2026-09-25T20:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  102.29535,
+                  12.14254
+                ],
+                [
+                  102.29783,
+                  12.14349
+                ],
+                [
+                  102.30038,
+                  12.14183
+                ],
+                [
+                  102.30315,
+                  12.14257
+                ],
+                [
+                  102.30766,
+                  12.13972
+                ],
+                [
+                  102.31103,
+                  12.13958
+                ],
+                [
+                  102.31451,
+                  12.1376
+                ],
+                [
+                  102.31778,
+                  12.13779
+                ],
+                [
+                  102.32075,
+                  12.13594
+                ],
+                [
+                  102.32235,
+                  12.13639
+                ],
+                [
+                  102.32656,
+                  12.13384
+                ],
+                [
+                  102.33044,
+                  12.12724
+                ],
+                [
+                  102.33801,
+                  12.12323
+                ],
+                [
+                  102.34128,
+                  12.11891
+                ],
+                [
+                  102.34776,
+                  12.1187
+                ],
+                [
+                  102.35622,
+                  12.1127
+                ],
+                [
+                  102.35903,
+                  12.10701
+                ],
+                [
+                  102.35906,
+                  12.10166
+                ],
+                [
+                  102.36231,
+                  12.09853
+                ],
+                [
+                  102.36467,
+                  12.09371
+                ],
+                [
+                  102.36552,
+                  12.08876
+                ],
+                [
+                  102.36996,
+                  12.08309
+                ],
+                [
+                  102.37272,
+                  12.07681
+                ],
+                [
+                  102.37685,
+                  12.07201
+                ],
+                [
+                  102.3831,
+                  12.06844
+                ],
+                [
+                  102.38307,
+                  12.06633
+                ],
+                [
+                  102.38156,
+                  12.06433
+                ],
+                [
+                  102.38428,
+                  12.06058
+                ],
+                [
+                  102.384,
+                  12.05619
+                ],
+                [
+                  102.38662,
+                  12.05399
+                ],
+                [
+                  102.39333,
+                  12.05215
+                ],
+                [
+                  102.38945,
+                  12.05038
+                ],
+                [
+                  102.38549,
+                  12.04637
+                ],
+                [
+                  102.38236,
+                  12.04013
+                ],
+                [
+                  102.37963,
+                  12.03799
+                ],
+                [
+                  102.37696,
+                  12.03845
+                ],
+                [
+                  102.37553,
+                  12.04006
+                ],
+                [
+                  102.37483,
+                  12.04799
+                ],
+                [
+                  102.36652,
+                  12.0531
+                ],
+                [
+                  102.36092,
+                  12.05158
+                ],
+                [
+                  102.35604,
+                  12.0466
+                ],
+                [
+                  102.3517,
+                  12.04594
+                ],
+                [
+                  102.34271,
+                  12.04226
+                ],
+                [
+                  102.33704,
+                  12.04211
+                ],
+                [
+                  102.33709,
+                  12.03819
+                ],
+                [
+                  102.34058,
+                  12.03026
+                ],
+                [
+                  102.34053,
+                  12.02431
+                ],
+                [
+                  102.33357,
+                  12.02018
+                ],
+                [
+                  102.32592,
+                  12.01346
+                ],
+                [
+                  102.32011,
+                  12.00433
+                ],
+                [
+                  102.31233,
+                  12.01054
+                ],
+                [
+                  102.30712,
+                  12.00517
+                ],
+                [
+                  102.3009,
+                  12.00853
+                ],
+                [
+                  102.29771,
+                  12.00312
+                ],
+                [
+                  102.29528,
+                  12.00225
+                ],
+                [
+                  102.29325,
+                  12.00325
+                ],
+                [
+                  102.29006,
+                  12.008
+                ],
+                [
+                  102.28716,
+                  12.01479
+                ],
+                [
+                  102.28444,
+                  12.01462
+                ],
+                [
+                  102.28149,
+                  12.01727
+                ],
+                [
+                  102.2814,
+                  12.02018
+                ],
+                [
+                  102.28363,
+                  12.02264
+                ],
+                [
+                  102.28857,
+                  12.02099
+                ],
+                [
+                  102.29043,
+                  12.02426
+                ],
+                [
+                  102.28863,
+                  12.03098
+                ],
+                [
+                  102.29043,
+                  12.0353
+                ],
+                [
+                  102.29204,
+                  12.04515
+                ],
+                [
+                  102.28517,
+                  12.06216
+                ],
+                [
+                  102.28233,
+                  12.06543
+                ],
+                [
+                  102.2789,
+                  12.06438
+                ],
+                [
+                  102.27891,
+                  12.06558
+                ],
+                [
+                  102.27736,
+                  12.06636
+                ],
+                [
+                  102.27733,
+                  12.06901
+                ],
+                [
+                  102.2745,
+                  12.07277
+                ],
+                [
+                  102.27682,
+                  12.07677
+                ],
+                [
+                  102.27549,
+                  12.08283
+                ],
+                [
+                  102.27694,
+                  12.08592
+                ],
+                [
+                  102.2754,
+                  12.09461
+                ],
+                [
+                  102.2736,
+                  12.09652
+                ],
+                [
+                  102.26987,
+                  12.10561
+                ],
+                [
+                  102.26466,
+                  12.11039
+                ],
+                [
+                  102.2652,
+                  12.11492
+                ],
+                [
+                  102.26196,
+                  12.11901
+                ],
+                [
+                  102.26029,
+                  12.12371
+                ],
+                [
+                  102.25392,
+                  12.12912
+                ],
+                [
+                  102.25226,
+                  12.13403
+                ],
+                [
+                  102.2497,
+                  12.13695
+                ],
+                [
+                  102.25088,
+                  12.1376
+                ],
+                [
+                  102.25911,
+                  12.13551
+                ],
+                [
+                  102.26391,
+                  12.13755
+                ],
+                [
+                  102.26457,
+                  12.13896
+                ],
+                [
+                  102.2639,
+                  12.14336
+                ],
+                [
+                  102.25087,
+                  12.15393
+                ],
+                [
+                  102.25091,
+                  12.15736
+                ],
+                [
+                  102.25299,
+                  12.15761
+                ],
+                [
+                  102.25762,
+                  12.15566
+                ],
+                [
+                  102.27013,
+                  12.14535
+                ],
+                [
+                  102.27788,
+                  12.14769
+                ],
+                [
+                  102.27886,
+                  12.14676
+                ],
+                [
+                  102.27694,
+                  12.14509
+                ],
+                [
+                  102.27685,
+                  12.14304
+                ],
+                [
+                  102.27902,
+                  12.14164
+                ],
+                [
+                  102.28405,
+                  12.14143
+                ],
+                [
+                  102.2863,
+                  12.14332
+                ],
+                [
+                  102.2924,
+                  12.14415
+                ],
+                [
+                  102.29535,
+                  12.14254
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "230307",
+          "tambon": "ต.เทพนิมิต",
+          "amphoe": "อ.เขาสมิง",
+          "province": "จ.ตราด",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "วัดเทพนิมิต",
+          "latitude": 12.433914,
+          "longitude": 102.433072,
+          "sum_rainfall_mm": 143.0,
+          "observed_at": "2026-09-25T20:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  102.42092,
+                  12.50181
+                ],
+                [
+                  102.42446,
+                  12.49823
+                ],
+                [
+                  102.43516,
+                  12.4968
+                ],
+                [
+                  102.43848,
+                  12.49451
+                ],
+                [
+                  102.43967,
+                  12.49195
+                ],
+                [
+                  102.4442,
+                  12.49002
+                ],
+                [
+                  102.44739,
+                  12.49185
+                ],
+                [
+                  102.44958,
+                  12.49559
+                ],
+                [
+                  102.45475,
+                  12.49455
+                ],
+                [
+                  102.46757,
+                  12.50203
+                ],
+                [
+                  102.47036,
+                  12.50008
+                ],
+                [
+                  102.48306,
+                  12.49844
+                ],
+                [
+                  102.48409,
+                  12.4968
+                ],
+                [
+                  102.48333,
+                  12.4929
+                ],
+                [
+                  102.48112,
+                  12.49197
+                ],
+                [
+                  102.48075,
+                  12.49011
+                ],
+                [
+                  102.48584,
+                  12.48934
+                ],
+                [
+                  102.48611,
+                  12.48475
+                ],
+                [
+                  102.48837,
+                  12.48246
+                ],
+                [
+                  102.47792,
+                  12.47601
+                ],
+                [
+                  102.47714,
+                  12.4746
+                ],
+                [
+                  102.47737,
+                  12.46961
+                ],
+                [
+                  102.47558,
+                  12.46751
+                ],
+                [
+                  102.48038,
+                  12.45634
+                ],
+                [
+                  102.47774,
+                  12.4556
+                ],
+                [
+                  102.47353,
+                  12.45687
+                ],
+                [
+                  102.47258,
+                  12.45246
+                ],
+                [
+                  102.46917,
+                  12.45336
+                ],
+                [
+                  102.46976,
+                  12.44978
+                ],
+                [
+                  102.46527,
+                  12.44825
+                ],
+                [
+                  102.46096,
+                  12.44386
+                ],
+                [
+                  102.45868,
+                  12.44454
+                ],
+                [
+                  102.45552,
+                  12.43926
+                ],
+                [
+                  102.45249,
+                  12.44429
+                ],
+                [
+                  102.44838,
+                  12.43854
+                ],
+                [
+                  102.44413,
+                  12.44364
+                ],
+                [
+                  102.43885,
+                  12.44422
+                ],
+                [
+                  102.4356,
+                  12.44317
+                ],
+                [
+                  102.43553,
+                  12.44099
+                ],
+                [
+                  102.44052,
+                  12.43846
+                ],
+                [
+                  102.43364,
+                  12.43404
+                ],
+                [
+                  102.43544,
+                  12.42335
+                ],
+                [
+                  102.43884,
+                  12.42394
+                ],
+                [
+                  102.44025,
+                  12.42237
+                ],
+                [
+                  102.43624,
+                  12.41953
+                ],
+                [
+                  102.4342,
+                  12.42123
+                ],
+                [
+                  102.42937,
+                  12.41936
+                ],
+                [
+                  102.42606,
+                  12.42185
+                ],
+                [
+                  102.42736,
+                  12.42536
+                ],
+                [
+                  102.42393,
+                  12.4278
+                ],
+                [
+                  102.4244,
+                  12.4317
+                ],
+                [
+                  102.42122,
+                  12.43617
+                ],
+                [
+                  102.42379,
+                  12.44267
+                ],
+                [
+                  102.41978,
+                  12.44454
+                ],
+                [
+                  102.41355,
+                  12.4411
+                ],
+                [
+                  102.40618,
+                  12.44932
+                ],
+                [
+                  102.39946,
+                  12.44694
+                ],
+                [
+                  102.3937,
+                  12.44824
+                ],
+                [
+                  102.388,
+                  12.45554
+                ],
+                [
+                  102.3813,
+                  12.4601
+                ],
+                [
+                  102.38224,
+                  12.4626
+                ],
+                [
+                  102.38848,
+                  12.46596
+                ],
+                [
+                  102.39067,
+                  12.46861
+                ],
+                [
+                  102.39733,
+                  12.49494
+                ],
+                [
+                  102.39933,
+                  12.49816
+                ],
+                [
+                  102.40495,
+                  12.5009
+                ],
+                [
+                  102.41203,
+                  12.50018
+                ],
+                [
+                  102.41622,
+                  12.5037
+                ],
+                [
+                  102.42092,
+                  12.50181
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "230303",
+          "tambon": "ต.วังตะเคียน",
+          "amphoe": "อ.เขาสมิง",
+          "province": "จ.ตราด",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "คลองโสน",
+          "latitude": 12.513374,
+          "longitude": 102.50484,
+          "sum_rainfall_mm": 328.40000000000003,
+          "observed_at": "2026-09-25T20:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  102.55166,
+                  12.50206
+                ],
+                [
+                  102.55605,
+                  12.49277
+                ],
+                [
+                  102.55643,
+                  12.48535
+                ],
+                [
+                  102.56063,
+                  12.48417
+                ],
+                [
+                  102.5627,
+                  12.48031
+                ],
+                [
+                  102.56253,
+                  12.47809
+                ],
+                [
+                  102.55946,
+                  12.4749
+                ],
+                [
+                  102.55324,
+                  12.47324
+                ],
+                [
+                  102.5534,
+                  12.46784
+                ],
+                [
+                  102.55059,
+                  12.46521
+                ],
+                [
+                  102.55151,
+                  12.46285
+                ],
+                [
+                  102.54887,
+                  12.46242
+                ],
+                [
+                  102.54972,
+                  12.45822
+                ],
+                [
+                  102.5469,
+                  12.45767
+                ],
+                [
+                  102.53976,
+                  12.45043
+                ],
+                [
+                  102.53715,
+                  12.45028
+                ],
+                [
+                  102.53694,
+                  12.44805
+                ],
+                [
+                  102.53851,
+                  12.44568
+                ],
+                [
+                  102.53649,
+                  12.44473
+                ],
+                [
+                  102.53573,
+                  12.44294
+                ],
+                [
+                  102.53378,
+                  12.44352
+                ],
+                [
+                  102.5293,
+                  12.44131
+                ],
+                [
+                  102.52773,
+                  12.44217
+                ],
+                [
+                  102.52803,
+                  12.43839
+                ],
+                [
+                  102.52706,
+                  12.43817
+                ],
+                [
+                  102.52583,
+                  12.44041
+                ],
+                [
+                  102.52348,
+                  12.43619
+                ],
+                [
+                  102.52195,
+                  12.43754
+                ],
+                [
+                  102.52297,
+                  12.43314
+                ],
+                [
+                  102.51828,
+                  12.4332
+                ],
+                [
+                  102.50733,
+                  12.42565
+                ],
+                [
+                  102.50382,
+                  12.42835
+                ],
+                [
+                  102.49678,
+                  12.42732
+                ],
+                [
+                  102.49354,
+                  12.42214
+                ],
+                [
+                  102.4855,
+                  12.41691
+                ],
+                [
+                  102.48187,
+                  12.41297
+                ],
+                [
+                  102.47929,
+                  12.4122
+                ],
+                [
+                  102.47408,
+                  12.40721
+                ],
+                [
+                  102.46965,
+                  12.40518
+                ],
+                [
+                  102.46196,
+                  12.40665
+                ],
+                [
+                  102.46383,
+                  12.41178
+                ],
+                [
+                  102.45709,
+                  12.42106
+                ],
+                [
+                  102.45281,
+                  12.42454
+                ],
+                [
+                  102.45053,
+                  12.42467
+                ],
+                [
+                  102.44731,
+                  12.4231
+                ],
+                [
+                  102.44369,
+                  12.41937
+                ],
+                [
+                  102.44163,
+                  12.42017
+                ],
+                [
+                  102.43918,
+                  12.4238
+                ],
+                [
+                  102.43544,
+                  12.42335
+                ],
+                [
+                  102.43364,
+                  12.43404
+                ],
+                [
+                  102.44052,
+                  12.43846
+                ],
+                [
+                  102.43553,
+                  12.44099
+                ],
+                [
+                  102.4361,
+                  12.44358
+                ],
+                [
+                  102.44413,
+                  12.44364
+                ],
+                [
+                  102.44838,
+                  12.43854
+                ],
+                [
+                  102.45249,
+                  12.44429
+                ],
+                [
+                  102.45552,
+                  12.43926
+                ],
+                [
+                  102.45868,
+                  12.44454
+                ],
+                [
+                  102.46096,
+                  12.44386
+                ],
+                [
+                  102.46527,
+                  12.44825
+                ],
+                [
+                  102.46976,
+                  12.44978
+                ],
+                [
+                  102.46917,
+                  12.45336
+                ],
+                [
+                  102.47258,
+                  12.45246
+                ],
+                [
+                  102.47353,
+                  12.45687
+                ],
+                [
+                  102.47774,
+                  12.4556
+                ],
+                [
+                  102.48069,
+                  12.45659
+                ],
+                [
+                  102.47558,
+                  12.46751
+                ],
+                [
+                  102.47737,
+                  12.46961
+                ],
+                [
+                  102.47714,
+                  12.4746
+                ],
+                [
+                  102.47792,
+                  12.47601
+                ],
+                [
+                  102.48842,
+                  12.48211
+                ],
+                [
+                  102.48611,
+                  12.48475
+                ],
+                [
+                  102.48584,
+                  12.48934
+                ],
+                [
+                  102.48161,
+                  12.48946
+                ],
+                [
+                  102.48068,
+                  12.49119
+                ],
+                [
+                  102.48418,
+                  12.49317
+                ],
+                [
+                  102.48647,
+                  12.49805
+                ],
+                [
+                  102.49022,
+                  12.499
+                ],
+                [
+                  102.49051,
+                  12.50211
+                ],
+                [
+                  102.49314,
+                  12.50337
+                ],
+                [
+                  102.49522,
+                  12.50627
+                ],
+                [
+                  102.49543,
+                  12.51116
+                ],
+                [
+                  102.49904,
+                  12.51258
+                ],
+                [
+                  102.50304,
+                  12.51176
+                ],
+                [
+                  102.50649,
+                  12.51534
+                ],
+                [
+                  102.50647,
+                  12.51152
+                ],
+                [
+                  102.50865,
+                  12.51239
+                ],
+                [
+                  102.51044,
+                  12.51057
+                ],
+                [
+                  102.5127,
+                  12.51035
+                ],
+                [
+                  102.51415,
+                  12.51341
+                ],
+                [
+                  102.51933,
+                  12.51082
+                ],
+                [
+                  102.52188,
+                  12.51296
+                ],
+                [
+                  102.52317,
+                  12.51267
+                ],
+                [
+                  102.52313,
+                  12.5142
+                ],
+                [
+                  102.52609,
+                  12.5127
+                ],
+                [
+                  102.52833,
+                  12.5162
+                ],
+                [
+                  102.529,
+                  12.51307
+                ],
+                [
+                  102.53158,
+                  12.51453
+                ],
+                [
+                  102.53512,
+                  12.51133
+                ],
+                [
+                  102.53711,
+                  12.51253
+                ],
+                [
+                  102.53981,
+                  12.51087
+                ],
+                [
+                  102.54184,
+                  12.51223
+                ],
+                [
+                  102.54462,
+                  12.51129
+                ],
+                [
+                  102.54479,
+                  12.50881
+                ],
+                [
+                  102.54736,
+                  12.50872
+                ],
+                [
+                  102.54804,
+                  12.50628
+                ],
+                [
+                  102.55054,
+                  12.5053
+                ],
+                [
+                  102.55166,
+                  12.50206
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "230405",
+          "tambon": "ต.นนทรีย์",
+          "amphoe": "อ.บ่อไร่",
+          "province": "จ.ตราด",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "วัดทุ่งตอง",
+          "latitude": 12.515793,
+          "longitude": 102.59027,
+          "sum_rainfall_mm": 275.0,
+          "observed_at": "2026-09-25T20:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  102.64766,
+                  12.60233
+                ],
+                [
+                  102.64733,
+                  12.59604
+                ],
+                [
+                  102.64434,
+                  12.59481
+                ],
+                [
+                  102.6456,
+                  12.59012
+                ],
+                [
+                  102.64457,
+                  12.58492
+                ],
+                [
+                  102.6488,
+                  12.5839
+                ],
+                [
+                  102.65154,
+                  12.58187
+                ],
+                [
+                  102.65409,
+                  12.58286
+                ],
+                [
+                  102.65766,
+                  12.58149
+                ],
+                [
+                  102.66192,
+                  12.58249
+                ],
+                [
+                  102.66712,
+                  12.57336
+                ],
+                [
+                  102.66778,
+                  12.56274
+                ],
+                [
+                  102.67562,
+                  12.55911
+                ],
+                [
+                  102.68504,
+                  12.54798
+                ],
+                [
+                  102.6778,
+                  12.54239
+                ],
+                [
+                  102.67764,
+                  12.53871
+                ],
+                [
+                  102.67938,
+                  12.53718
+                ],
+                [
+                  102.68446,
+                  12.53717
+                ],
+                [
+                  102.69237,
+                  12.53194
+                ],
+                [
+                  102.69387,
+                  12.52885
+                ],
+                [
+                  102.69692,
+                  12.52634
+                ],
+                [
+                  102.69534,
+                  12.52335
+                ],
+                [
+                  102.69579,
+                  12.51922
+                ],
+                [
+                  102.68102,
+                  12.5247
+                ],
+                [
+                  102.66668,
+                  12.5254
+                ],
+                [
+                  102.66241,
+                  12.52304
+                ],
+                [
+                  102.65961,
+                  12.52431
+                ],
+                [
+                  102.65809,
+                  12.5238
+                ],
+                [
+                  102.65549,
+                  12.52652
+                ],
+                [
+                  102.65431,
+                  12.53273
+                ],
+                [
+                  102.64929,
+                  12.53263
+                ],
+                [
+                  102.64575,
+                  12.53514
+                ],
+                [
+                  102.64487,
+                  12.53887
+                ],
+                [
+                  102.639,
+                  12.54179
+                ],
+                [
+                  102.6375,
+                  12.53392
+                ],
+                [
+                  102.63877,
+                  12.53175
+                ],
+                [
+                  102.63858,
+                  12.5242
+                ],
+                [
+                  102.63718,
+                  12.52287
+                ],
+                [
+                  102.63467,
+                  12.5228
+                ],
+                [
+                  102.63411,
+                  12.51966
+                ],
+                [
+                  102.63069,
+                  12.51934
+                ],
+                [
+                  102.63257,
+                  12.51542
+                ],
+                [
+                  102.62763,
+                  12.51851
+                ],
+                [
+                  102.62366,
+                  12.51884
+                ],
+                [
+                  102.61579,
+                  12.51267
+                ],
+                [
+                  102.61286,
+                  12.51511
+                ],
+                [
+                  102.6113,
+                  12.51487
+                ],
+                [
+                  102.607,
+                  12.5099
+                ],
+                [
+                  102.60459,
+                  12.50223
+                ],
+                [
+                  102.60102,
+                  12.50013
+                ],
+                [
+                  102.6005,
+                  12.49857
+                ],
+                [
+                  102.59553,
+                  12.50041
+                ],
+                [
+                  102.59112,
+                  12.49884
+                ],
+                [
+                  102.58606,
+                  12.49952
+                ],
+                [
+                  102.58129,
+                  12.50417
+                ],
+                [
+                  102.58101,
+                  12.50574
+                ],
+                [
+                  102.57821,
+                  12.50417
+                ],
+                [
+                  102.57617,
+                  12.5005
+                ],
+                [
+                  102.57407,
+                  12.49922
+                ],
+                [
+                  102.57164,
+                  12.49992
+                ],
+                [
+                  102.56743,
+                  12.50384
+                ],
+                [
+                  102.56357,
+                  12.50495
+                ],
+                [
+                  102.55687,
+                  12.50364
+                ],
+                [
+                  102.55471,
+                  12.50444
+                ],
+                [
+                  102.55166,
+                  12.50206
+                ],
+                [
+                  102.55054,
+                  12.5053
+                ],
+                [
+                  102.54804,
+                  12.50628
+                ],
+                [
+                  102.54736,
+                  12.50872
+                ],
+                [
+                  102.54479,
+                  12.50881
+                ],
+                [
+                  102.54462,
+                  12.51129
+                ],
+                [
+                  102.54184,
+                  12.51223
+                ],
+                [
+                  102.53981,
+                  12.51087
+                ],
+                [
+                  102.53711,
+                  12.51253
+                ],
+                [
+                  102.53512,
+                  12.51133
+                ],
+                [
+                  102.53158,
+                  12.51453
+                ],
+                [
+                  102.529,
+                  12.51307
+                ],
+                [
+                  102.52833,
+                  12.5162
+                ],
+                [
+                  102.52609,
+                  12.5127
+                ],
+                [
+                  102.52313,
+                  12.5142
+                ],
+                [
+                  102.52317,
+                  12.51267
+                ],
+                [
+                  102.52188,
+                  12.51296
+                ],
+                [
+                  102.51933,
+                  12.51082
+                ],
+                [
+                  102.51415,
+                  12.51341
+                ],
+                [
+                  102.5127,
+                  12.51035
+                ],
+                [
+                  102.51044,
+                  12.51057
+                ],
+                [
+                  102.50865,
+                  12.51239
+                ],
+                [
+                  102.50647,
+                  12.51152
+                ],
+                [
+                  102.50649,
+                  12.51534
+                ],
+                [
+                  102.50374,
+                  12.51221
+                ],
+                [
+                  102.50155,
+                  12.51193
+                ],
+                [
+                  102.50335,
+                  12.51562
+                ],
+                [
+                  102.51027,
+                  12.51687
+                ],
+                [
+                  102.51023,
+                  12.52042
+                ],
+                [
+                  102.51438,
+                  12.52249
+                ],
+                [
+                  102.51586,
+                  12.52688
+                ],
+                [
+                  102.52056,
+                  12.53143
+                ],
+                [
+                  102.52286,
+                  12.53542
+                ],
+                [
+                  102.52704,
+                  12.53878
+                ],
+                [
+                  102.53159,
+                  12.539
+                ],
+                [
+                  102.5331,
+                  12.54012
+                ],
+                [
+                  102.53464,
+                  12.5378
+                ],
+                [
+                  102.53654,
+                  12.53846
+                ],
+                [
+                  102.53925,
+                  12.53634
+                ],
+                [
+                  102.54135,
+                  12.53874
+                ],
+                [
+                  102.54496,
+                  12.53713
+                ],
+                [
+                  102.55165,
+                  12.54042
+                ],
+                [
+                  102.55275,
+                  12.54224
+                ],
+                [
+                  102.55315,
+                  12.5516
+                ],
+                [
+                  102.56583,
+                  12.55931
+                ],
+                [
+                  102.56704,
+                  12.56497
+                ],
+                [
+                  102.57149,
+                  12.56649
+                ],
+                [
+                  102.57662,
+                  12.56653
+                ],
+                [
+                  102.57772,
+                  12.57065
+                ],
+                [
+                  102.57932,
+                  12.57237
+                ],
+                [
+                  102.59596,
+                  12.5784
+                ],
+                [
+                  102.59578,
+                  12.58922
+                ],
+                [
+                  102.60621,
+                  12.58713
+                ],
+                [
+                  102.6114,
+                  12.58317
+                ],
+                [
+                  102.61772,
+                  12.584
+                ],
+                [
+                  102.62554,
+                  12.58927
+                ],
+                [
+                  102.62873,
+                  12.5929
+                ],
+                [
+                  102.63562,
+                  12.59533
+                ],
+                [
+                  102.63851,
+                  12.59511
+                ],
+                [
+                  102.64625,
+                  12.59726
+                ],
+                [
+                  102.64685,
+                  12.59873
+                ],
+                [
+                  102.64552,
+                  12.60563
+                ],
+                [
+                  102.64661,
+                  12.60888
+                ],
+                [
+                  102.64766,
+                  12.60233
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "230401",
+          "tambon": "ต.บ่อพลอย",
+          "amphoe": "อ.บ่อไร่",
+          "province": "จ.ตราด",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์คลองสะตอ",
+          "latitude": 12.5973,
+          "longitude": 102.608,
+          "sum_rainfall_mm": 241.60000000000002,
+          "observed_at": "2026-09-25T20:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  102.58749,
+                  12.63992
+                ],
+                [
+                  102.59142,
+                  12.63827
+                ],
+                [
+                  102.59374,
+                  12.63449
+                ],
+                [
+                  102.59905,
+                  12.62981
+                ],
+                [
+                  102.60559,
+                  12.62745
+                ],
+                [
+                  102.60785,
+                  12.62399
+                ],
+                [
+                  102.61709,
+                  12.6155
+                ],
+                [
+                  102.6269,
+                  12.61448
+                ],
+                [
+                  102.62923,
+                  12.61249
+                ],
+                [
+                  102.62974,
+                  12.6095
+                ],
+                [
+                  102.64521,
+                  12.61086
+                ],
+                [
+                  102.64661,
+                  12.60888
+                ],
+                [
+                  102.64552,
+                  12.60563
+                ],
+                [
+                  102.64648,
+                  12.59749
+                ],
+                [
+                  102.62873,
+                  12.5929
+                ],
+                [
+                  102.61935,
+                  12.5846
+                ],
+                [
+                  102.61414,
+                  12.58316
+                ],
+                [
+                  102.60967,
+                  12.58382
+                ],
+                [
+                  102.60621,
+                  12.58713
+                ],
+                [
+                  102.59578,
+                  12.58922
+                ],
+                [
+                  102.59596,
+                  12.5784
+                ],
+                [
+                  102.57932,
+                  12.57237
+                ],
+                [
+                  102.57772,
+                  12.57065
+                ],
+                [
+                  102.57662,
+                  12.56653
+                ],
+                [
+                  102.57149,
+                  12.56649
+                ],
+                [
+                  102.56704,
+                  12.56497
+                ],
+                [
+                  102.56583,
+                  12.55931
+                ],
+                [
+                  102.55315,
+                  12.5516
+                ],
+                [
+                  102.55275,
+                  12.54224
+                ],
+                [
+                  102.55165,
+                  12.54042
+                ],
+                [
+                  102.54496,
+                  12.53713
+                ],
+                [
+                  102.54135,
+                  12.53874
+                ],
+                [
+                  102.53925,
+                  12.53634
+                ],
+                [
+                  102.53654,
+                  12.53846
+                ],
+                [
+                  102.53464,
+                  12.5378
+                ],
+                [
+                  102.5331,
+                  12.54012
+                ],
+                [
+                  102.53159,
+                  12.539
+                ],
+                [
+                  102.5268,
+                  12.53864
+                ],
+                [
+                  102.51586,
+                  12.52688
+                ],
+                [
+                  102.51438,
+                  12.52249
+                ],
+                [
+                  102.51023,
+                  12.52042
+                ],
+                [
+                  102.51,
+                  12.51663
+                ],
+                [
+                  102.50335,
+                  12.51562
+                ],
+                [
+                  102.5018,
+                  12.51205
+                ],
+                [
+                  102.49868,
+                  12.51253
+                ],
+                [
+                  102.49521,
+                  12.51094
+                ],
+                [
+                  102.49562,
+                  12.50742
+                ],
+                [
+                  102.4938,
+                  12.50412
+                ],
+                [
+                  102.49051,
+                  12.50211
+                ],
+                [
+                  102.49022,
+                  12.499
+                ],
+                [
+                  102.48647,
+                  12.49805
+                ],
+                [
+                  102.48418,
+                  12.49317
+                ],
+                [
+                  102.48303,
+                  12.4931
+                ],
+                [
+                  102.48369,
+                  12.49809
+                ],
+                [
+                  102.47852,
+                  12.49842
+                ],
+                [
+                  102.47617,
+                  12.5
+                ],
+                [
+                  102.48078,
+                  12.50023
+                ],
+                [
+                  102.48368,
+                  12.50367
+                ],
+                [
+                  102.48497,
+                  12.51031
+                ],
+                [
+                  102.48414,
+                  12.52297
+                ],
+                [
+                  102.47874,
+                  12.53783
+                ],
+                [
+                  102.47451,
+                  12.54331
+                ],
+                [
+                  102.46979,
+                  12.54662
+                ],
+                [
+                  102.47346,
+                  12.5519
+                ],
+                [
+                  102.48511,
+                  12.56152
+                ],
+                [
+                  102.49214,
+                  12.56376
+                ],
+                [
+                  102.49796,
+                  12.56312
+                ],
+                [
+                  102.50342,
+                  12.56106
+                ],
+                [
+                  102.50711,
+                  12.56728
+                ],
+                [
+                  102.50443,
+                  12.57054
+                ],
+                [
+                  102.50527,
+                  12.57452
+                ],
+                [
+                  102.50403,
+                  12.57806
+                ],
+                [
+                  102.50445,
+                  12.58244
+                ],
+                [
+                  102.50143,
+                  12.58468
+                ],
+                [
+                  102.50118,
+                  12.58713
+                ],
+                [
+                  102.4972,
+                  12.58946
+                ],
+                [
+                  102.4954,
+                  12.59246
+                ],
+                [
+                  102.49516,
+                  12.59535
+                ],
+                [
+                  102.49686,
+                  12.59952
+                ],
+                [
+                  102.50076,
+                  12.60315
+                ],
+                [
+                  102.50222,
+                  12.60752
+                ],
+                [
+                  102.50734,
+                  12.61544
+                ],
+                [
+                  102.50354,
+                  12.62142
+                ],
+                [
+                  102.5046,
+                  12.62908
+                ],
+                [
+                  102.50719,
+                  12.63184
+                ],
+                [
+                  102.50838,
+                  12.63561
+                ],
+                [
+                  102.50643,
+                  12.6443
+                ],
+                [
+                  102.50896,
+                  12.65236
+                ],
+                [
+                  102.51615,
+                  12.65729
+                ],
+                [
+                  102.51843,
+                  12.66285
+                ],
+                [
+                  102.53195,
+                  12.65313
+                ],
+                [
+                  102.53929,
+                  12.65132
+                ],
+                [
+                  102.54438,
+                  12.65599
+                ],
+                [
+                  102.5503,
+                  12.65547
+                ],
+                [
+                  102.55222,
+                  12.65259
+                ],
+                [
+                  102.55497,
+                  12.65196
+                ],
+                [
+                  102.56762,
+                  12.65764
+                ],
+                [
+                  102.57135,
+                  12.65346
+                ],
+                [
+                  102.58001,
+                  12.65281
+                ],
+                [
+                  102.58193,
+                  12.64506
+                ],
+                [
+                  102.5852,
+                  12.64349
+                ],
+                [
+                  102.58749,
+                  12.63992
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "250212",
+          "tambon": "ต.นาแขม",
+          "amphoe": "อ.กบินทร์บุรี",
+          "province": "จ.ปราจีนบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "อบต.นาแขม",
+          "latitude": 14.04255,
+          "longitude": 101.72051,
+          "sum_rainfall_mm": 307.8,
+          "observed_at": "2026-09-25T20:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  101.74243,
+                  14.08799
+                ],
+                [
+                  101.75045,
+                  14.08732
+                ],
+                [
+                  101.752,
+                  14.08622
+                ],
+                [
+                  101.74909,
+                  14.08183
+                ],
+                [
+                  101.74417,
+                  14.08216
+                ],
+                [
+                  101.7441,
+                  14.07705
+                ],
+                [
+                  101.74737,
+                  14.07319
+                ],
+                [
+                  101.75476,
+                  14.06877
+                ],
+                [
+                  101.75509,
+                  14.0666
+                ],
+                [
+                  101.75334,
+                  14.06437
+                ],
+                [
+                  101.74732,
+                  14.06426
+                ],
+                [
+                  101.74881,
+                  14.05861
+                ],
+                [
+                  101.74778,
+                  14.05792
+                ],
+                [
+                  101.74427,
+                  14.05948
+                ],
+                [
+                  101.74321,
+                  14.05385
+                ],
+                [
+                  101.74471,
+                  14.04759
+                ],
+                [
+                  101.74817,
+                  14.04519
+                ],
+                [
+                  101.75013,
+                  14.0465
+                ],
+                [
+                  101.75351,
+                  14.04224
+                ],
+                [
+                  101.75058,
+                  14.04028
+                ],
+                [
+                  101.75349,
+                  14.03761
+                ],
+                [
+                  101.7532,
+                  14.03509
+                ],
+                [
+                  101.75565,
+                  14.03494
+                ],
+                [
+                  101.75582,
+                  14.0379
+                ],
+                [
+                  101.75662,
+                  14.03576
+                ],
+                [
+                  101.75907,
+                  14.03397
+                ],
+                [
+                  101.75658,
+                  14.03031
+                ],
+                [
+                  101.75905,
+                  14.02677
+                ],
+                [
+                  101.75513,
+                  14.02516
+                ],
+                [
+                  101.75266,
+                  14.02215
+                ],
+                [
+                  101.74777,
+                  14.02181
+                ],
+                [
+                  101.74716,
+                  14.02031
+                ],
+                [
+                  101.74941,
+                  14.01632
+                ],
+                [
+                  101.74926,
+                  14.01391
+                ],
+                [
+                  101.74576,
+                  14.01111
+                ],
+                [
+                  101.74562,
+                  14.01403
+                ],
+                [
+                  101.74434,
+                  14.0145
+                ],
+                [
+                  101.74201,
+                  14.00918
+                ],
+                [
+                  101.73743,
+                  14.00903
+                ],
+                [
+                  101.73895,
+                  14.00587
+                ],
+                [
+                  101.73821,
+                  14.0044
+                ],
+                [
+                  101.73343,
+                  14.00512
+                ],
+                [
+                  101.73049,
+                  14.0036
+                ],
+                [
+                  101.7284,
+                  14.00404
+                ],
+                [
+                  101.72736,
+                  14.00113
+                ],
+                [
+                  101.72399,
+                  14.00015
+                ],
+                [
+                  101.72466,
+                  13.99563
+                ],
+                [
+                  101.72226,
+                  13.99217
+                ],
+                [
+                  101.72055,
+                  13.99221
+                ],
+                [
+                  101.71889,
+                  13.99566
+                ],
+                [
+                  101.71429,
+                  13.99904
+                ],
+                [
+                  101.71436,
+                  13.9941
+                ],
+                [
+                  101.71309,
+                  13.99403
+                ],
+                [
+                  101.70895,
+                  13.99885
+                ],
+                [
+                  101.71313,
+                  14.00526
+                ],
+                [
+                  101.71066,
+                  14.02529
+                ],
+                [
+                  101.71431,
+                  14.03779
+                ],
+                [
+                  101.71733,
+                  14.04082
+                ],
+                [
+                  101.71232,
+                  14.04222
+                ],
+                [
+                  101.70811,
+                  14.04488
+                ],
+                [
+                  101.70671,
+                  14.05166
+                ],
+                [
+                  101.70146,
+                  14.05671
+                ],
+                [
+                  101.70254,
+                  14.05982
+                ],
+                [
+                  101.6976,
+                  14.06006
+                ],
+                [
+                  101.69187,
+                  14.0669
+                ],
+                [
+                  101.68791,
+                  14.07855
+                ],
+                [
+                  101.68301,
+                  14.08573
+                ],
+                [
+                  101.68309,
+                  14.09457
+                ],
+                [
+                  101.68439,
+                  14.09677
+                ],
+                [
+                  101.68769,
+                  14.09852
+                ],
+                [
+                  101.6913,
+                  14.09951
+                ],
+                [
+                  101.69548,
+                  14.09902
+                ],
+                [
+                  101.69843,
+                  14.10181
+                ],
+                [
+                  101.70174,
+                  14.1022
+                ],
+                [
+                  101.704,
+                  14.10118
+                ],
+                [
+                  101.70475,
+                  14.09713
+                ],
+                [
+                  101.70742,
+                  14.09395
+                ],
+                [
+                  101.71514,
+                  14.09261
+                ],
+                [
+                  101.72069,
+                  14.08911
+                ],
+                [
+                  101.72063,
+                  14.0848
+                ],
+                [
+                  101.72304,
+                  14.08176
+                ],
+                [
+                  101.72589,
+                  14.08042
+                ],
+                [
+                  101.73568,
+                  14.08251
+                ],
+                [
+                  101.74243,
+                  14.08799
+                ]
+              ]
+            ]
+          }
+        },
+        {
           "geocode": "250305",
           "tambon": "ต.แก่งดินสอ",
           "amphoe": "อ.นาดี",
@@ -22166,8 +26869,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "โรงเรียนบ้านหินเทิน",
           "latitude": 14.064819,
           "longitude": 102.01052,
-          "sum_rainfall_mm": 380.20000000000005,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 364.2,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -22574,11 +27277,11 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.ปราจีนบุรี",
           "region_id": "2",
           "region_name": "ภาคตะวันออก",
-          "station": "อบต.บุพราหมณ์",
-          "latitude": 14.20791,
-          "longitude": 101.90556,
-          "sum_rainfall_mm": 316.6,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์คลองยาง",
+          "latitude": 14.324904,
+          "longitude": 101.84176,
+          "sum_rainfall_mm": 177.0,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -23216,8 +27919,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หอทอง",
           "latitude": 13.960857,
           "longitude": 101.216475,
-          "sum_rainfall_mm": 236.5,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 247.0,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -23447,8 +28150,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านตะเภาลาย",
           "latitude": 14.012733,
           "longitude": 101.265193,
-          "sum_rainfall_mm": 234.0,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 261.0,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -23794,8 +28497,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ขญ.๑๐ (ประจันตคาม)",
           "latitude": 14.181167,
           "longitude": 101.592064,
-          "sum_rainfall_mm": 231.80000000000004,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 274.6,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -24540,6 +29243,2038 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
+          "geocode": "250701",
+          "tambon": "ต.ประจันตคาม",
+          "amphoe": "อ.ประจันตคาม",
+          "province": "จ.ปราจีนบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "ประจันตคาม (KGT7A)",
+          "latitude": 14.070941,
+          "longitude": 101.51893,
+          "sum_rainfall_mm": 287.8,
+          "observed_at": "2026-09-25T20:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  101.53603,
+                  14.08232
+                ],
+                [
+                  101.53824,
+                  14.08259
+                ],
+                [
+                  101.5469,
+                  14.0753
+                ],
+                [
+                  101.54324,
+                  14.07112
+                ],
+                [
+                  101.5442,
+                  14.06691
+                ],
+                [
+                  101.54551,
+                  14.06715
+                ],
+                [
+                  101.5455,
+                  14.06579
+                ],
+                [
+                  101.54077,
+                  14.05968
+                ],
+                [
+                  101.54635,
+                  14.05785
+                ],
+                [
+                  101.54871,
+                  14.05497
+                ],
+                [
+                  101.54921,
+                  14.04791
+                ],
+                [
+                  101.54799,
+                  14.04499
+                ],
+                [
+                  101.53976,
+                  14.04976
+                ],
+                [
+                  101.53169,
+                  14.05025
+                ],
+                [
+                  101.52409,
+                  14.05264
+                ],
+                [
+                  101.52319,
+                  14.05185
+                ],
+                [
+                  101.52396,
+                  14.04877
+                ],
+                [
+                  101.52282,
+                  14.04626
+                ],
+                [
+                  101.52596,
+                  14.04405
+                ],
+                [
+                  101.52473,
+                  14.04199
+                ],
+                [
+                  101.51659,
+                  14.04278
+                ],
+                [
+                  101.50763,
+                  14.0456
+                ],
+                [
+                  101.49836,
+                  14.04092
+                ],
+                [
+                  101.49456,
+                  14.04424
+                ],
+                [
+                  101.49078,
+                  14.04472
+                ],
+                [
+                  101.4893,
+                  14.04329
+                ],
+                [
+                  101.48908,
+                  14.03969
+                ],
+                [
+                  101.48342,
+                  14.0399
+                ],
+                [
+                  101.48059,
+                  14.03509
+                ],
+                [
+                  101.48081,
+                  14.02988
+                ],
+                [
+                  101.48447,
+                  14.02407
+                ],
+                [
+                  101.48618,
+                  14.01766
+                ],
+                [
+                  101.48457,
+                  14.01677
+                ],
+                [
+                  101.47858,
+                  14.01735
+                ],
+                [
+                  101.4726,
+                  14.01188
+                ],
+                [
+                  101.46347,
+                  14.0091
+                ],
+                [
+                  101.46141,
+                  14.00971
+                ],
+                [
+                  101.4548,
+                  14.01555
+                ],
+                [
+                  101.45413,
+                  14.02088
+                ],
+                [
+                  101.45538,
+                  14.02356
+                ],
+                [
+                  101.44915,
+                  14.02864
+                ],
+                [
+                  101.44536,
+                  14.03493
+                ],
+                [
+                  101.44747,
+                  14.03783
+                ],
+                [
+                  101.44856,
+                  14.03438
+                ],
+                [
+                  101.45159,
+                  14.03625
+                ],
+                [
+                  101.45442,
+                  14.03323
+                ],
+                [
+                  101.45705,
+                  14.03315
+                ],
+                [
+                  101.45578,
+                  14.0383
+                ],
+                [
+                  101.4522,
+                  14.03861
+                ],
+                [
+                  101.457,
+                  14.03992
+                ],
+                [
+                  101.45782,
+                  14.04229
+                ],
+                [
+                  101.45456,
+                  14.04398
+                ],
+                [
+                  101.45482,
+                  14.04489
+                ],
+                [
+                  101.46024,
+                  14.04547
+                ],
+                [
+                  101.45961,
+                  14.04712
+                ],
+                [
+                  101.45748,
+                  14.04681
+                ],
+                [
+                  101.4572,
+                  14.04977
+                ],
+                [
+                  101.45895,
+                  14.05016
+                ],
+                [
+                  101.45693,
+                  14.05193
+                ],
+                [
+                  101.45814,
+                  14.0537
+                ],
+                [
+                  101.46156,
+                  14.0538
+                ],
+                [
+                  101.46246,
+                  14.05665
+                ],
+                [
+                  101.4634,
+                  14.05668
+                ],
+                [
+                  101.46574,
+                  14.05129
+                ],
+                [
+                  101.4669,
+                  14.05296
+                ],
+                [
+                  101.46714,
+                  14.05726
+                ],
+                [
+                  101.46969,
+                  14.05771
+                ],
+                [
+                  101.46829,
+                  14.05421
+                ],
+                [
+                  101.47139,
+                  14.05586
+                ],
+                [
+                  101.47443,
+                  14.05559
+                ],
+                [
+                  101.47547,
+                  14.05695
+                ],
+                [
+                  101.47522,
+                  14.05914
+                ],
+                [
+                  101.47736,
+                  14.05857
+                ],
+                [
+                  101.47886,
+                  14.05624
+                ],
+                [
+                  101.4808,
+                  14.05678
+                ],
+                [
+                  101.47844,
+                  14.05856
+                ],
+                [
+                  101.47879,
+                  14.05928
+                ],
+                [
+                  101.48303,
+                  14.05667
+                ],
+                [
+                  101.48325,
+                  14.05805
+                ],
+                [
+                  101.48138,
+                  14.05887
+                ],
+                [
+                  101.48292,
+                  14.0612
+                ],
+                [
+                  101.48397,
+                  14.05944
+                ],
+                [
+                  101.48826,
+                  14.05835
+                ],
+                [
+                  101.48539,
+                  14.06236
+                ],
+                [
+                  101.48702,
+                  14.06453
+                ],
+                [
+                  101.4873,
+                  14.06753
+                ],
+                [
+                  101.48996,
+                  14.06661
+                ],
+                [
+                  101.4912,
+                  14.06892
+                ],
+                [
+                  101.4949,
+                  14.06894
+                ],
+                [
+                  101.51776,
+                  14.06333
+                ],
+                [
+                  101.52036,
+                  14.06784
+                ],
+                [
+                  101.51888,
+                  14.07055
+                ],
+                [
+                  101.52082,
+                  14.07212
+                ],
+                [
+                  101.51964,
+                  14.07372
+                ],
+                [
+                  101.52025,
+                  14.07951
+                ],
+                [
+                  101.52324,
+                  14.07872
+                ],
+                [
+                  101.52521,
+                  14.08061
+                ],
+                [
+                  101.52494,
+                  14.0837
+                ],
+                [
+                  101.52994,
+                  14.08361
+                ],
+                [
+                  101.53447,
+                  14.08163
+                ],
+                [
+                  101.53603,
+                  14.08232
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "250709",
+          "tambon": "ต.โพธิ์งาม",
+          "amphoe": "อ.ประจันตคาม",
+          "province": "จ.ปราจีนบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "ประจันตคาม",
+          "latitude": 14.069966,
+          "longitude": 101.518579,
+          "sum_rainfall_mm": 277.5,
+          "observed_at": "2026-09-25T20:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  101.49659,
+                  14.44756
+                ],
+                [
+                  101.50219,
+                  14.4398
+                ],
+                [
+                  101.50762,
+                  14.43558
+                ],
+                [
+                  101.5339,
+                  14.42491
+                ],
+                [
+                  101.54137,
+                  14.42575
+                ],
+                [
+                  101.54653,
+                  14.43594
+                ],
+                [
+                  101.56849,
+                  14.4346
+                ],
+                [
+                  101.58446,
+                  14.43822
+                ],
+                [
+                  101.58392,
+                  14.43224
+                ],
+                [
+                  101.58594,
+                  14.42771
+                ],
+                [
+                  101.58643,
+                  14.42134
+                ],
+                [
+                  101.58787,
+                  14.41809
+                ],
+                [
+                  101.58692,
+                  14.41553
+                ],
+                [
+                  101.58723,
+                  14.41135
+                ],
+                [
+                  101.58493,
+                  14.4104
+                ],
+                [
+                  101.58021,
+                  14.41138
+                ],
+                [
+                  101.57778,
+                  14.40883
+                ],
+                [
+                  101.57416,
+                  14.40746
+                ],
+                [
+                  101.57384,
+                  14.40581
+                ],
+                [
+                  101.57473,
+                  14.40268
+                ],
+                [
+                  101.57967,
+                  14.40002
+                ],
+                [
+                  101.57955,
+                  14.39725
+                ],
+                [
+                  101.58111,
+                  14.39499
+                ],
+                [
+                  101.58503,
+                  14.3941
+                ],
+                [
+                  101.59441,
+                  14.38725
+                ],
+                [
+                  101.59354,
+                  14.38574
+                ],
+                [
+                  101.58417,
+                  14.3836
+                ],
+                [
+                  101.58275,
+                  14.38184
+                ],
+                [
+                  101.58592,
+                  14.37375
+                ],
+                [
+                  101.5896,
+                  14.37264
+                ],
+                [
+                  101.59006,
+                  14.36973
+                ],
+                [
+                  101.58914,
+                  14.36765
+                ],
+                [
+                  101.58723,
+                  14.36926
+                ],
+                [
+                  101.58362,
+                  14.36835
+                ],
+                [
+                  101.582,
+                  14.36632
+                ],
+                [
+                  101.57571,
+                  14.36568
+                ],
+                [
+                  101.56206,
+                  14.37234
+                ],
+                [
+                  101.56017,
+                  14.37178
+                ],
+                [
+                  101.55432,
+                  14.3609
+                ],
+                [
+                  101.54943,
+                  14.36002
+                ],
+                [
+                  101.54819,
+                  14.35837
+                ],
+                [
+                  101.54457,
+                  14.34973
+                ],
+                [
+                  101.54514,
+                  14.34702
+                ],
+                [
+                  101.53481,
+                  14.33505
+                ],
+                [
+                  101.53283,
+                  14.33
+                ],
+                [
+                  101.52847,
+                  14.3237
+                ],
+                [
+                  101.52758,
+                  14.32024
+                ],
+                [
+                  101.52218,
+                  14.31582
+                ],
+                [
+                  101.52289,
+                  14.30969
+                ],
+                [
+                  101.52908,
+                  14.30725
+                ],
+                [
+                  101.5298,
+                  14.30435
+                ],
+                [
+                  101.52728,
+                  14.28085
+                ],
+                [
+                  101.52405,
+                  14.27849
+                ],
+                [
+                  101.52322,
+                  14.27367
+                ],
+                [
+                  101.51895,
+                  14.26587
+                ],
+                [
+                  101.52315,
+                  14.2594
+                ],
+                [
+                  101.52284,
+                  14.25629
+                ],
+                [
+                  101.52797,
+                  14.25306
+                ],
+                [
+                  101.5275,
+                  14.25122
+                ],
+                [
+                  101.52929,
+                  14.247
+                ],
+                [
+                  101.53511,
+                  14.24587
+                ],
+                [
+                  101.53946,
+                  14.24187
+                ],
+                [
+                  101.54152,
+                  14.23788
+                ],
+                [
+                  101.54884,
+                  14.23312
+                ],
+                [
+                  101.54631,
+                  14.22593
+                ],
+                [
+                  101.54603,
+                  14.22107
+                ],
+                [
+                  101.54892,
+                  14.22013
+                ],
+                [
+                  101.54941,
+                  14.21667
+                ],
+                [
+                  101.55473,
+                  14.20899
+                ],
+                [
+                  101.54952,
+                  14.20495
+                ],
+                [
+                  101.54691,
+                  14.19953
+                ],
+                [
+                  101.53624,
+                  14.20013
+                ],
+                [
+                  101.53026,
+                  14.19851
+                ],
+                [
+                  101.53074,
+                  14.19056
+                ],
+                [
+                  101.52599,
+                  14.18637
+                ],
+                [
+                  101.52425,
+                  14.18242
+                ],
+                [
+                  101.5225,
+                  14.18222
+                ],
+                [
+                  101.52235,
+                  14.18022
+                ],
+                [
+                  101.51937,
+                  14.17857
+                ],
+                [
+                  101.51593,
+                  14.17871
+                ],
+                [
+                  101.51492,
+                  14.17737
+                ],
+                [
+                  101.51544,
+                  14.17413
+                ],
+                [
+                  101.51368,
+                  14.17464
+                ],
+                [
+                  101.51431,
+                  14.16949
+                ],
+                [
+                  101.51783,
+                  14.1658
+                ],
+                [
+                  101.51907,
+                  14.16113
+                ],
+                [
+                  101.52212,
+                  14.16027
+                ],
+                [
+                  101.5204,
+                  14.15924
+                ],
+                [
+                  101.52045,
+                  14.15645
+                ],
+                [
+                  101.51699,
+                  14.15614
+                ],
+                [
+                  101.51657,
+                  14.15436
+                ],
+                [
+                  101.51268,
+                  14.15443
+                ],
+                [
+                  101.51063,
+                  14.15249
+                ],
+                [
+                  101.51109,
+                  14.14417
+                ],
+                [
+                  101.51751,
+                  14.13636
+                ],
+                [
+                  101.51955,
+                  14.1367
+                ],
+                [
+                  101.52311,
+                  14.13481
+                ],
+                [
+                  101.52411,
+                  14.13117
+                ],
+                [
+                  101.5277,
+                  14.12833
+                ],
+                [
+                  101.5284,
+                  14.12241
+                ],
+                [
+                  101.52739,
+                  14.12088
+                ],
+                [
+                  101.5304,
+                  14.11799
+                ],
+                [
+                  101.53073,
+                  14.11176
+                ],
+                [
+                  101.52773,
+                  14.10659
+                ],
+                [
+                  101.52715,
+                  14.09786
+                ],
+                [
+                  101.52489,
+                  14.09648
+                ],
+                [
+                  101.52383,
+                  14.09344
+                ],
+                [
+                  101.52104,
+                  14.09122
+                ],
+                [
+                  101.52178,
+                  14.0892
+                ],
+                [
+                  101.51945,
+                  14.07636
+                ],
+                [
+                  101.52082,
+                  14.07212
+                ],
+                [
+                  101.51888,
+                  14.07055
+                ],
+                [
+                  101.52036,
+                  14.06784
+                ],
+                [
+                  101.51904,
+                  14.06434
+                ],
+                [
+                  101.51745,
+                  14.0633
+                ],
+                [
+                  101.4949,
+                  14.06894
+                ],
+                [
+                  101.49071,
+                  14.06878
+                ],
+                [
+                  101.49063,
+                  14.07318
+                ],
+                [
+                  101.48452,
+                  14.07891
+                ],
+                [
+                  101.48504,
+                  14.08197
+                ],
+                [
+                  101.48887,
+                  14.08612
+                ],
+                [
+                  101.49024,
+                  14.09231
+                ],
+                [
+                  101.49284,
+                  14.09439
+                ],
+                [
+                  101.49274,
+                  14.09618
+                ],
+                [
+                  101.49503,
+                  14.09858
+                ],
+                [
+                  101.49467,
+                  14.10086
+                ],
+                [
+                  101.49256,
+                  14.10229
+                ],
+                [
+                  101.4928,
+                  14.10714
+                ],
+                [
+                  101.48959,
+                  14.1129
+                ],
+                [
+                  101.49002,
+                  14.12141
+                ],
+                [
+                  101.48841,
+                  14.12348
+                ],
+                [
+                  101.48224,
+                  14.12409
+                ],
+                [
+                  101.48077,
+                  14.12801
+                ],
+                [
+                  101.4691,
+                  14.13157
+                ],
+                [
+                  101.47074,
+                  14.13833
+                ],
+                [
+                  101.46941,
+                  14.14585
+                ],
+                [
+                  101.46999,
+                  14.15942
+                ],
+                [
+                  101.46768,
+                  14.16037
+                ],
+                [
+                  101.46776,
+                  14.16148
+                ],
+                [
+                  101.46625,
+                  14.16138
+                ],
+                [
+                  101.46692,
+                  14.16292
+                ],
+                [
+                  101.46347,
+                  14.16573
+                ],
+                [
+                  101.46232,
+                  14.17075
+                ],
+                [
+                  101.46291,
+                  14.17532
+                ],
+                [
+                  101.46106,
+                  14.17734
+                ],
+                [
+                  101.45981,
+                  14.18164
+                ],
+                [
+                  101.45713,
+                  14.18459
+                ],
+                [
+                  101.45647,
+                  14.18828
+                ],
+                [
+                  101.45189,
+                  14.19342
+                ],
+                [
+                  101.44544,
+                  14.19321
+                ],
+                [
+                  101.44179,
+                  14.19731
+                ],
+                [
+                  101.42966,
+                  14.1988
+                ],
+                [
+                  101.42448,
+                  14.20111
+                ],
+                [
+                  101.42324,
+                  14.20331
+                ],
+                [
+                  101.42606,
+                  14.21753
+                ],
+                [
+                  101.42741,
+                  14.21905
+                ],
+                [
+                  101.43079,
+                  14.21948
+                ],
+                [
+                  101.43225,
+                  14.22235
+                ],
+                [
+                  101.43795,
+                  14.22789
+                ],
+                [
+                  101.43676,
+                  14.23447
+                ],
+                [
+                  101.43841,
+                  14.23978
+                ],
+                [
+                  101.43678,
+                  14.24548
+                ],
+                [
+                  101.44004,
+                  14.24993
+                ],
+                [
+                  101.43994,
+                  14.25439
+                ],
+                [
+                  101.44579,
+                  14.25633
+                ],
+                [
+                  101.45121,
+                  14.25493
+                ],
+                [
+                  101.45877,
+                  14.25879
+                ],
+                [
+                  101.46389,
+                  14.26302
+                ],
+                [
+                  101.47275,
+                  14.26183
+                ],
+                [
+                  101.48063,
+                  14.26762
+                ],
+                [
+                  101.48441,
+                  14.26401
+                ],
+                [
+                  101.49126,
+                  14.26152
+                ],
+                [
+                  101.49853,
+                  14.26762
+                ],
+                [
+                  101.4987,
+                  14.29843
+                ],
+                [
+                  101.5054,
+                  14.30845
+                ],
+                [
+                  101.49937,
+                  14.31295
+                ],
+                [
+                  101.49621,
+                  14.31677
+                ],
+                [
+                  101.49464,
+                  14.32357
+                ],
+                [
+                  101.49765,
+                  14.33223
+                ],
+                [
+                  101.49704,
+                  14.33439
+                ],
+                [
+                  101.49305,
+                  14.33809
+                ],
+                [
+                  101.49032,
+                  14.33904
+                ],
+                [
+                  101.48312,
+                  14.34591
+                ],
+                [
+                  101.48117,
+                  14.35214
+                ],
+                [
+                  101.47635,
+                  14.36063
+                ],
+                [
+                  101.47593,
+                  14.36471
+                ],
+                [
+                  101.45083,
+                  14.38142
+                ],
+                [
+                  101.43222,
+                  14.38957
+                ],
+                [
+                  101.43336,
+                  14.3943
+                ],
+                [
+                  101.43954,
+                  14.4027
+                ],
+                [
+                  101.43901,
+                  14.40721
+                ],
+                [
+                  101.4421,
+                  14.41684
+                ],
+                [
+                  101.44695,
+                  14.42005
+                ],
+                [
+                  101.44747,
+                  14.42186
+                ],
+                [
+                  101.44545,
+                  14.4265
+                ],
+                [
+                  101.44189,
+                  14.42745
+                ],
+                [
+                  101.43672,
+                  14.43682
+                ],
+                [
+                  101.4357,
+                  14.43998
+                ],
+                [
+                  101.43762,
+                  14.44285
+                ],
+                [
+                  101.43597,
+                  14.44558
+                ],
+                [
+                  101.46025,
+                  14.45707
+                ],
+                [
+                  101.47,
+                  14.45963
+                ],
+                [
+                  101.47419,
+                  14.45843
+                ],
+                [
+                  101.47757,
+                  14.46115
+                ],
+                [
+                  101.48251,
+                  14.46279
+                ],
+                [
+                  101.4873,
+                  14.46185
+                ],
+                [
+                  101.48757,
+                  14.45895
+                ],
+                [
+                  101.49037,
+                  14.45581
+                ],
+                [
+                  101.49142,
+                  14.45241
+                ],
+                [
+                  101.49659,
+                  14.44756
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "250708",
+          "tambon": "ต.หนองแก้ว",
+          "amphoe": "อ.ประจันตคาม",
+          "province": "จ.ปราจีนบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "บ้านโคกเขื่อน",
+          "latitude": 14.159991,
+          "longitude": 101.521952,
+          "sum_rainfall_mm": 168.5,
+          "observed_at": "2026-09-25T20:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  101.54691,
+                  14.19953
+                ],
+                [
+                  101.54472,
+                  14.19074
+                ],
+                [
+                  101.54551,
+                  14.17561
+                ],
+                [
+                  101.54446,
+                  14.17044
+                ],
+                [
+                  101.54149,
+                  14.16473
+                ],
+                [
+                  101.54185,
+                  14.16057
+                ],
+                [
+                  101.53869,
+                  14.1515
+                ],
+                [
+                  101.53804,
+                  14.14583
+                ],
+                [
+                  101.53798,
+                  14.13936
+                ],
+                [
+                  101.54029,
+                  14.13752
+                ],
+                [
+                  101.53906,
+                  14.13357
+                ],
+                [
+                  101.54068,
+                  14.13218
+                ],
+                [
+                  101.53832,
+                  14.13027
+                ],
+                [
+                  101.53779,
+                  14.12814
+                ],
+                [
+                  101.54024,
+                  14.1268
+                ],
+                [
+                  101.54922,
+                  14.1271
+                ],
+                [
+                  101.55236,
+                  14.1262
+                ],
+                [
+                  101.55303,
+                  14.12429
+                ],
+                [
+                  101.55171,
+                  14.12318
+                ],
+                [
+                  101.55268,
+                  14.11693
+                ],
+                [
+                  101.55204,
+                  14.11491
+                ],
+                [
+                  101.55975,
+                  14.11052
+                ],
+                [
+                  101.56032,
+                  14.10848
+                ],
+                [
+                  101.56034,
+                  14.09033
+                ],
+                [
+                  101.54891,
+                  14.09584
+                ],
+                [
+                  101.54031,
+                  14.09437
+                ],
+                [
+                  101.53748,
+                  14.09296
+                ],
+                [
+                  101.53646,
+                  14.08954
+                ],
+                [
+                  101.53942,
+                  14.08714
+                ],
+                [
+                  101.53603,
+                  14.08232
+                ],
+                [
+                  101.53447,
+                  14.08163
+                ],
+                [
+                  101.52994,
+                  14.08361
+                ],
+                [
+                  101.52494,
+                  14.0837
+                ],
+                [
+                  101.52521,
+                  14.08061
+                ],
+                [
+                  101.52236,
+                  14.07828
+                ],
+                [
+                  101.52009,
+                  14.08054
+                ],
+                [
+                  101.52178,
+                  14.0892
+                ],
+                [
+                  101.52104,
+                  14.09122
+                ],
+                [
+                  101.52383,
+                  14.09344
+                ],
+                [
+                  101.52489,
+                  14.09648
+                ],
+                [
+                  101.52715,
+                  14.09786
+                ],
+                [
+                  101.52773,
+                  14.10659
+                ],
+                [
+                  101.53072,
+                  14.11128
+                ],
+                [
+                  101.53049,
+                  14.11749
+                ],
+                [
+                  101.52739,
+                  14.12088
+                ],
+                [
+                  101.5284,
+                  14.12241
+                ],
+                [
+                  101.5277,
+                  14.12833
+                ],
+                [
+                  101.52411,
+                  14.13117
+                ],
+                [
+                  101.52311,
+                  14.13481
+                ],
+                [
+                  101.51955,
+                  14.1367
+                ],
+                [
+                  101.51751,
+                  14.13636
+                ],
+                [
+                  101.51109,
+                  14.14417
+                ],
+                [
+                  101.51063,
+                  14.15249
+                ],
+                [
+                  101.51268,
+                  14.15443
+                ],
+                [
+                  101.51657,
+                  14.15436
+                ],
+                [
+                  101.51699,
+                  14.15614
+                ],
+                [
+                  101.52045,
+                  14.15645
+                ],
+                [
+                  101.5204,
+                  14.15924
+                ],
+                [
+                  101.52212,
+                  14.16027
+                ],
+                [
+                  101.51907,
+                  14.16113
+                ],
+                [
+                  101.51783,
+                  14.1658
+                ],
+                [
+                  101.51431,
+                  14.16949
+                ],
+                [
+                  101.51368,
+                  14.17464
+                ],
+                [
+                  101.51544,
+                  14.17413
+                ],
+                [
+                  101.51492,
+                  14.17737
+                ],
+                [
+                  101.51593,
+                  14.17871
+                ],
+                [
+                  101.51937,
+                  14.17857
+                ],
+                [
+                  101.52235,
+                  14.18022
+                ],
+                [
+                  101.5225,
+                  14.18222
+                ],
+                [
+                  101.52425,
+                  14.18242
+                ],
+                [
+                  101.52599,
+                  14.18637
+                ],
+                [
+                  101.53074,
+                  14.19056
+                ],
+                [
+                  101.53026,
+                  14.19851
+                ],
+                [
+                  101.53624,
+                  14.20013
+                ],
+                [
+                  101.54691,
+                  14.19953
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "geocode": "250112",
+          "tambon": "ต.เนินหอม",
+          "amphoe": "อ.เมืองปราจีนบุรี",
+          "province": "จ.ปราจีนบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "วัดห้วยเกษียร",
+          "latitude": 14.181127,
+          "longitude": 101.413635,
+          "sum_rainfall_mm": 310.8,
+          "observed_at": "2026-09-25T20:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  101.43994,
+                  14.25439
+                ],
+                [
+                  101.44004,
+                  14.24993
+                ],
+                [
+                  101.43678,
+                  14.24548
+                ],
+                [
+                  101.43841,
+                  14.23978
+                ],
+                [
+                  101.43676,
+                  14.23447
+                ],
+                [
+                  101.43795,
+                  14.22789
+                ],
+                [
+                  101.43225,
+                  14.22235
+                ],
+                [
+                  101.43079,
+                  14.21948
+                ],
+                [
+                  101.42741,
+                  14.21905
+                ],
+                [
+                  101.42606,
+                  14.21753
+                ],
+                [
+                  101.42502,
+                  14.20895
+                ],
+                [
+                  101.42315,
+                  14.2055
+                ],
+                [
+                  101.42379,
+                  14.20168
+                ],
+                [
+                  101.42966,
+                  14.1988
+                ],
+                [
+                  101.43466,
+                  14.19819
+                ],
+                [
+                  101.43954,
+                  14.19299
+                ],
+                [
+                  101.44223,
+                  14.18821
+                ],
+                [
+                  101.44246,
+                  14.1792
+                ],
+                [
+                  101.43288,
+                  14.16757
+                ],
+                [
+                  101.43307,
+                  14.16603
+                ],
+                [
+                  101.43679,
+                  14.16203
+                ],
+                [
+                  101.4348,
+                  14.16051
+                ],
+                [
+                  101.43441,
+                  14.15785
+                ],
+                [
+                  101.4315,
+                  14.15379
+                ],
+                [
+                  101.42861,
+                  14.15735
+                ],
+                [
+                  101.42411,
+                  14.15699
+                ],
+                [
+                  101.42143,
+                  14.16204
+                ],
+                [
+                  101.41785,
+                  14.16274
+                ],
+                [
+                  101.4154,
+                  14.15948
+                ],
+                [
+                  101.40843,
+                  14.15588
+                ],
+                [
+                  101.40743,
+                  14.15318
+                ],
+                [
+                  101.4047,
+                  14.15115
+                ],
+                [
+                  101.40554,
+                  14.14783
+                ],
+                [
+                  101.40147,
+                  14.14761
+                ],
+                [
+                  101.39425,
+                  14.15017
+                ],
+                [
+                  101.39121,
+                  14.15015
+                ],
+                [
+                  101.38603,
+                  14.15379
+                ],
+                [
+                  101.38295,
+                  14.15387
+                ],
+                [
+                  101.37824,
+                  14.15161
+                ],
+                [
+                  101.37293,
+                  14.14594
+                ],
+                [
+                  101.36748,
+                  14.14345
+                ],
+                [
+                  101.36145,
+                  14.14449
+                ],
+                [
+                  101.35785,
+                  14.14668
+                ],
+                [
+                  101.35738,
+                  14.1488
+                ],
+                [
+                  101.35324,
+                  14.14886
+                ],
+                [
+                  101.347,
+                  14.14701
+                ],
+                [
+                  101.34211,
+                  14.139
+                ],
+                [
+                  101.34066,
+                  14.14089
+                ],
+                [
+                  101.3365,
+                  14.14088
+                ],
+                [
+                  101.33514,
+                  14.14578
+                ],
+                [
+                  101.33558,
+                  14.14866
+                ],
+                [
+                  101.33388,
+                  14.15072
+                ],
+                [
+                  101.33475,
+                  14.15986
+                ],
+                [
+                  101.32904,
+                  14.16502
+                ],
+                [
+                  101.31279,
+                  14.17132
+                ],
+                [
+                  101.31506,
+                  14.17321
+                ],
+                [
+                  101.31675,
+                  14.17265
+                ],
+                [
+                  101.31789,
+                  14.17451
+                ],
+                [
+                  101.32006,
+                  14.17415
+                ],
+                [
+                  101.32368,
+                  14.17602
+                ],
+                [
+                  101.32695,
+                  14.17511
+                ],
+                [
+                  101.33044,
+                  14.17671
+                ],
+                [
+                  101.32888,
+                  14.17974
+                ],
+                [
+                  101.32995,
+                  14.1823
+                ],
+                [
+                  101.33413,
+                  14.18356
+                ],
+                [
+                  101.33651,
+                  14.18722
+                ],
+                [
+                  101.3411,
+                  14.18953
+                ],
+                [
+                  101.34261,
+                  14.19252
+                ],
+                [
+                  101.34521,
+                  14.19435
+                ],
+                [
+                  101.34583,
+                  14.19741
+                ],
+                [
+                  101.34975,
+                  14.19789
+                ],
+                [
+                  101.35077,
+                  14.19989
+                ],
+                [
+                  101.35904,
+                  14.20277
+                ],
+                [
+                  101.36237,
+                  14.20275
+                ],
+                [
+                  101.36333,
+                  14.20139
+                ],
+                [
+                  101.36428,
+                  14.20231
+                ],
+                [
+                  101.36645,
+                  14.20182
+                ],
+                [
+                  101.37282,
+                  14.20544
+                ],
+                [
+                  101.37491,
+                  14.21023
+                ],
+                [
+                  101.3779,
+                  14.21155
+                ],
+                [
+                  101.37914,
+                  14.21031
+                ],
+                [
+                  101.38226,
+                  14.2105
+                ],
+                [
+                  101.38074,
+                  14.21272
+                ],
+                [
+                  101.38444,
+                  14.21617
+                ],
+                [
+                  101.38605,
+                  14.2252
+                ],
+                [
+                  101.38323,
+                  14.2298
+                ],
+                [
+                  101.3839,
+                  14.23315
+                ],
+                [
+                  101.38193,
+                  14.23523
+                ],
+                [
+                  101.37993,
+                  14.23561
+                ],
+                [
+                  101.37826,
+                  14.23845
+                ],
+                [
+                  101.38244,
+                  14.24938
+                ],
+                [
+                  101.37846,
+                  14.25748
+                ],
+                [
+                  101.38066,
+                  14.25809
+                ],
+                [
+                  101.38391,
+                  14.26586
+                ],
+                [
+                  101.38119,
+                  14.27101
+                ],
+                [
+                  101.38159,
+                  14.27258
+                ],
+                [
+                  101.38353,
+                  14.27375
+                ],
+                [
+                  101.38972,
+                  14.27335
+                ],
+                [
+                  101.3929,
+                  14.27444
+                ],
+                [
+                  101.39514,
+                  14.27367
+                ],
+                [
+                  101.41324,
+                  14.25352
+                ],
+                [
+                  101.43034,
+                  14.25663
+                ],
+                [
+                  101.43994,
+                  14.25439
+                ]
+              ]
+            ]
+          }
+        },
+        {
           "geocode": "250106",
           "tambon": "ต.บางบริบูรณ์",
           "amphoe": "อ.เมืองปราจีนบุรี",
@@ -24549,8 +31284,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดสง่างาม",
           "latitude": 14.031635,
           "longitude": 101.42646,
-          "sum_rainfall_mm": 204.5,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 242.5,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -24803,255 +31538,419 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
-          "geocode": "960601",
-          "tambon": "ต.รือเสาะ",
-          "amphoe": "อ.รือเสาะ",
-          "province": "จ.นราธิวาส",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "สวนสาธารณะ ทต.รือเสาะ",
-          "latitude": 6.38792,
-          "longitude": 101.51716,
-          "sum_rainfall_mm": 116.8,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "geocode": "250801",
+          "tambon": "ต.ศรีมหาโพธิ์",
+          "amphoe": "อ.ศรีมหาโพธิ",
+          "province": "จ.ปราจีนบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "ศรีมหาโพธิ์",
+          "latitude": 13.973075,
+          "longitude": 101.512525,
+          "sum_rainfall_mm": 206.5,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
                 [
-                  101.49667,
-                  6.41836
+                  101.4966,
+                  13.98271
                 ],
                 [
-                  101.50766,
-                  6.41647
+                  101.50493,
+                  13.97519
                 ],
                 [
-                  101.51009,
-                  6.41471
+                  101.51845,
+                  13.97403
                 ],
                 [
-                  101.51277,
-                  6.39732
+                  101.51889,
+                  13.97284
                 ],
                 [
-                  101.53322,
-                  6.369
+                  101.51749,
+                  13.96992
                 ],
                 [
-                  101.54674,
-                  6.37011
+                  101.51928,
+                  13.9681
                 ],
                 [
-                  101.54938,
-                  6.36757
+                  101.52639,
+                  13.96587
                 ],
                 [
-                  101.54966,
-                  6.35439
+                  101.53093,
+                  13.96607
                 ],
                 [
-                  101.54671,
-                  6.33575
+                  101.53529,
+                  13.95922
                 ],
                 [
-                  101.54852,
-                  6.33069
+                  101.53426,
+                  13.95512
                 ],
                 [
-                  101.54802,
-                  6.32856
+                  101.53675,
+                  13.95247
                 ],
                 [
-                  101.54576,
-                  6.32803
+                  101.53614,
+                  13.94799
                 ],
                 [
-                  101.54367,
-                  6.32511
+                  101.53235,
+                  13.94108
                 ],
                 [
-                  101.54038,
-                  6.326
+                  101.53443,
+                  13.93726
                 ],
                 [
-                  101.54036,
-                  6.32367
+                  101.53541,
+                  13.92955
                 ],
                 [
-                  101.53871,
-                  6.32392
+                  101.53971,
+                  13.9265
                 ],
                 [
-                  101.53732,
-                  6.32142
+                  101.54129,
+                  13.92384
                 ],
                 [
-                  101.53289,
-                  6.31925
+                  101.53921,
+                  13.91939
                 ],
                 [
-                  101.53173,
-                  6.31405
+                  101.53795,
+                  13.91152
                 ],
                 [
-                  101.52711,
-                  6.31543
+                  101.54461,
+                  13.90338
                 ],
                 [
-                  101.52389,
-                  6.31354
+                  101.55568,
+                  13.8968
                 ],
                 [
-                  101.52051,
-                  6.31391
+                  101.55616,
+                  13.89276
                 ],
                 [
-                  101.51866,
-                  6.31163
+                  101.55452,
+                  13.88986
                 ],
                 [
-                  101.51304,
-                  6.31346
+                  101.55506,
+                  13.88835
                 ],
                 [
-                  101.51255,
-                  6.31448
+                  101.5664,
+                  13.88473
                 ],
                 [
-                  101.51353,
-                  6.31569
+                  101.56228,
+                  13.87838
                 ],
                 [
-                  101.51215,
-                  6.31756
+                  101.56149,
+                  13.87263
                 ],
                 [
-                  101.51099,
-                  6.3169
+                  101.56521,
+                  13.86998
                 ],
                 [
-                  101.51046,
-                  6.31921
+                  101.57037,
+                  13.86834
                 ],
                 [
-                  101.50648,
-                  6.32172
+                  101.56792,
+                  13.86492
                 ],
                 [
-                  101.50714,
-                  6.32316
+                  101.56824,
+                  13.86256
                 ],
                 [
-                  101.50502,
-                  6.32389
+                  101.57996,
+                  13.85526
                 ],
                 [
-                  101.50393,
-                  6.32722
+                  101.57947,
+                  13.84932
                 ],
                 [
-                  101.50009,
-                  6.32974
+                  101.58816,
+                  13.84405
                 ],
                 [
-                  101.49378,
-                  6.33699
+                  101.59603,
+                  13.82885
                 ],
                 [
-                  101.48917,
-                  6.34052
+                  101.59943,
+                  13.82651
                 ],
                 [
-                  101.49002,
-                  6.34562
+                  101.60742,
+                  13.82395
                 ],
                 [
-                  101.49497,
-                  6.349
+                  101.62284,
+                  13.80269
                 ],
                 [
-                  101.49469,
-                  6.35128
+                  101.63343,
+                  13.79578
                 ],
                 [
-                  101.49073,
-                  6.35344
+                  101.63332,
+                  13.78675
                 ],
                 [
-                  101.48638,
-                  6.35187
+                  101.6454,
+                  13.77801
                 ],
                 [
-                  101.48416,
-                  6.35287
+                  101.64534,
+                  13.76953
                 ],
                 [
-                  101.48237,
-                  6.35571
+                  101.64084,
+                  13.75942
                 ],
                 [
-                  101.48182,
-                  6.36277
+                  101.64128,
+                  13.75577
                 ],
                 [
-                  101.47712,
-                  6.36978
+                  101.63903,
+                  13.74723
                 ],
                 [
-                  101.47637,
-                  6.37449
+                  101.63343,
+                  13.74703
                 ],
                 [
-                  101.46806,
-                  6.38114
+                  101.61994,
+                  13.74033
                 ],
                 [
-                  101.4688,
-                  6.38389
+                  101.61938,
+                  13.74871
                 ],
                 [
-                  101.47199,
-                  6.38598
+                  101.61503,
+                  13.75031
                 ],
                 [
-                  101.47229,
-                  6.38884
+                  101.60635,
+                  13.75128
                 ],
                 [
-                  101.47151,
-                  6.39124
+                  101.60566,
+                  13.75612
                 ],
                 [
-                  101.46791,
-                  6.39454
+                  101.5974,
+                  13.76059
                 ],
                 [
-                  101.4659,
-                  6.40281
+                  101.59735,
+                  13.76433
                 ],
                 [
-                  101.46702,
-                  6.40475
+                  101.60073,
+                  13.76496
                 ],
                 [
-                  101.47309,
-                  6.40843
+                  101.60091,
+                  13.76875
                 ],
                 [
-                  101.47389,
-                  6.41356
+                  101.60629,
+                  13.77334
                 ],
                 [
-                  101.47774,
-                  6.42023
+                  101.60841,
+                  13.77906
                 ],
                 [
-                  101.4874,
-                  6.42047
+                  101.60543,
+                  13.78929
                 ],
                 [
-                  101.49667,
-                  6.41836
+                  101.59241,
+                  13.80681
+                ],
+                [
+                  101.58741,
+                  13.81819
+                ],
+                [
+                  101.58225,
+                  13.82247
+                ],
+                [
+                  101.57403,
+                  13.82283
+                ],
+                [
+                  101.57135,
+                  13.82571
+                ],
+                [
+                  101.56601,
+                  13.8286
+                ],
+                [
+                  101.56206,
+                  13.8331
+                ],
+                [
+                  101.56231,
+                  13.83541
+                ],
+                [
+                  101.55869,
+                  13.84163
+                ],
+                [
+                  101.55835,
+                  13.8456
+                ],
+                [
+                  101.55994,
+                  13.84895
+                ],
+                [
+                  101.55802,
+                  13.85637
+                ],
+                [
+                  101.55856,
+                  13.8614
+                ],
+                [
+                  101.55716,
+                  13.8642
+                ],
+                [
+                  101.55403,
+                  13.86558
+                ],
+                [
+                  101.55388,
+                  13.8717
+                ],
+                [
+                  101.54383,
+                  13.87959
+                ],
+                [
+                  101.53352,
+                  13.89615
+                ],
+                [
+                  101.53427,
+                  13.89971
+                ],
+                [
+                  101.53168,
+                  13.903
+                ],
+                [
+                  101.52272,
+                  13.90721
+                ],
+                [
+                  101.52157,
+                  13.9088
+                ],
+                [
+                  101.52259,
+                  13.91412
+                ],
+                [
+                  101.52763,
+                  13.92423
+                ],
+                [
+                  101.52209,
+                  13.92605
+                ],
+                [
+                  101.52065,
+                  13.92824
+                ],
+                [
+                  101.52086,
+                  13.93036
+                ],
+                [
+                  101.52476,
+                  13.93297
+                ],
+                [
+                  101.5248,
+                  13.93498
+                ],
+                [
+                  101.51292,
+                  13.94104
+                ],
+                [
+                  101.50757,
+                  13.95083
+                ],
+                [
+                  101.50854,
+                  13.95741
+                ],
+                [
+                  101.50759,
+                  13.9589
+                ],
+                [
+                  101.50375,
+                  13.96039
+                ],
+                [
+                  101.49621,
+                  13.95836
+                ],
+                [
+                  101.48928,
+                  13.9592
+                ],
+                [
+                  101.49138,
+                  13.96296
+                ],
+                [
+                  101.49295,
+                  13.97531
+                ],
+                [
+                  101.49471,
+                  13.97811
+                ],
+                [
+                  101.49281,
+                  13.98319
+                ],
+                [
+                  101.49482,
+                  13.98565
+                ],
+                [
+                  101.4966,
+                  13.98271
                 ]
               ]
             ]
@@ -25067,8 +31966,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อาคารเลขที่ ๙๐๑",
           "latitude": 13.85604,
           "longitude": 100.57558,
-          "sum_rainfall_mm": 238.0,
-          "observed_at": "2026-09-25T17:00:00+07:00"
+          "sum_rainfall_mm": 264.0,
+          "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
           "geocode": "100203",
@@ -25080,8 +31979,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อุทยานเฉลิมพระเกียรติพระบาทสมเด็จพระบรมชนกาธิเบศร มหาภูมิพลอดุลยเดชมหาราช บรมนาถบพิตร",
           "latitude": 13.76138,
           "longitude": 100.52066,
-          "sum_rainfall_mm": 213.0,
-          "observed_at": "2026-09-25T17:00:00+07:00"
+          "sum_rainfall_mm": 224.00000000000003,
+          "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
           "geocode": "100608",
@@ -25093,8 +31992,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองแสนแสบ บางกะปิ",
           "latitude": 13.76131,
           "longitude": 100.61601,
-          "sum_rainfall_mm": 302.2,
-          "observed_at": "2026-09-25T17:00:00+07:00"
+          "sum_rainfall_mm": 316.0,
+          "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
           "geocode": "100502",
@@ -25106,8 +32005,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองลาดพร้าว วัดบางบัว",
           "latitude": 13.85402,
           "longitude": 100.58746,
-          "sum_rainfall_mm": 211.0,
-          "observed_at": "2026-09-25T17:00:00+07:00"
+          "sum_rainfall_mm": 237.20000000000005,
+          "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
           "geocode": "104004",
@@ -25119,8 +32018,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองภาษีเจริญ เพชรเกษม69",
           "latitude": 13.69158,
           "longitude": 100.38127,
-          "sum_rainfall_mm": 237.39999999999998,
-          "observed_at": "2026-09-25T17:00:00+07:00"
+          "sum_rainfall_mm": 226.80000000000004,
+          "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
           "geocode": "101101",
@@ -25132,8 +32031,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองลำปลาทิว ลาดกระบัง",
           "latitude": 13.7407,
           "longitude": 100.79468,
-          "sum_rainfall_mm": 383.40000000000003,
-          "observed_at": "2026-09-25T17:00:00+07:00"
+          "sum_rainfall_mm": 392.2,
+          "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
           "geocode": "103801",
@@ -25145,8 +32044,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองลาดพร้าว ปากคลอง2สายใต้",
           "latitude": 13.93183,
           "longitude": 100.63952,
-          "sum_rainfall_mm": 235.2,
-          "observed_at": "2026-09-25T17:00:00+07:00"
+          "sum_rainfall_mm": 251.6,
+          "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
           "geocode": "104201",
@@ -25158,158 +32057,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองลาดพร้าว ท้ายปตร.คลอง2",
           "latitude": 13.92245,
           "longitude": 100.63438,
-          "sum_rainfall_mm": 217.20000000000002,
-          "observed_at": "2026-09-25T17:00:00+07:00"
-        },
-        {
-          "geocode": "730324",
-          "tambon": "ต.ไทยาวาส",
-          "amphoe": "อ.นครชัยศรี",
-          "province": "จ.นครปฐม",
-          "region_id": "7",
-          "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "สะพานนครชัยศรี",
-          "latitude": 13.79217,
-          "longitude": 100.19817,
-          "sum_rainfall_mm": 223.20000000000002,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  100.23671,
-                  13.80508
-                ],
-                [
-                  100.23673,
-                  13.80279
-                ],
-                [
-                  100.24374,
-                  13.80275
-                ],
-                [
-                  100.24046,
-                  13.80062
-                ],
-                [
-                  100.23706,
-                  13.79605
-                ],
-                [
-                  100.23747,
-                  13.79061
-                ],
-                [
-                  100.23377,
-                  13.79292
-                ],
-                [
-                  100.22932,
-                  13.7934
-                ],
-                [
-                  100.22519,
-                  13.78715
-                ],
-                [
-                  100.21103,
-                  13.78278
-                ],
-                [
-                  100.20627,
-                  13.78426
-                ],
-                [
-                  100.2021,
-                  13.78732
-                ],
-                [
-                  100.18814,
-                  13.80183
-                ],
-                [
-                  100.18603,
-                  13.80783
-                ],
-                [
-                  100.20634,
-                  13.80643
-                ],
-                [
-                  100.20633,
-                  13.80455
-                ],
-                [
-                  100.22211,
-                  13.80113
-                ],
-                [
-                  100.22846,
-                  13.80372
-                ],
-                [
-                  100.23671,
-                  13.80508
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "730301",
-          "tambon": "ต.นครชัยศรี",
-          "amphoe": "อ.นครชัยศรี",
-          "province": "จ.นครปฐม",
-          "region_id": "7",
-          "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "อบต.นครชัยศรี",
-          "latitude": 13.79036,
-          "longitude": 100.19051,
-          "sum_rainfall_mm": 227.2,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  100.18685,
-                  13.80404
-                ],
-                [
-                  100.20112,
-                  13.78832
-                ],
-                [
-                  100.19658,
-                  13.78381
-                ],
-                [
-                  100.19475,
-                  13.77298
-                ],
-                [
-                  100.19161,
-                  13.76388
-                ],
-                [
-                  100.18746,
-                  13.79051
-                ],
-                [
-                  100.19162,
-                  13.79269
-                ],
-                [
-                  100.18139,
-                  13.80476
-                ],
-                [
-                  100.18685,
-                  13.80404
-                ]
-              ]
-            ]
-          }
+          "sum_rainfall_mm": 229.2,
+          "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
           "geocode": "120603",
@@ -25321,7 +32070,7 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานนวลฉวี",
           "latitude": 13.94749,
           "longitude": 100.53507,
-          "sum_rainfall_mm": 177.60000000000002,
+          "sum_rainfall_mm": 194.6,
           "observed_at": "2026-09-25T17:00:00+07:00",
           "geometry": {
             "rings": [
@@ -25436,8 +32185,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เหนือปตร.พระธรรมราชา",
           "latitude": 14.07771,
           "longitude": 100.89208,
-          "sum_rainfall_mm": 271.0,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 280.0,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -25470,6 +32219,65 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
+          "geocode": "130114",
+          "tambon": "ต.หลักหก",
+          "amphoe": "อ.เมืองปทุมธานี",
+          "province": "จ.ปทุมธานี",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "คลองเปรมประชากร หลักหก",
+          "latitude": 13.96562,
+          "longitude": 100.60262,
+          "sum_rainfall_mm": 190.20000000000005,
+          "observed_at": "2026-09-25T20:00:00+07:00",
+          "geometry": {
+            "rings": [
+              [
+                [
+                  100.60576,
+                  13.96472
+                ],
+                [
+                  100.60821,
+                  13.94254
+                ],
+                [
+                  100.58914,
+                  13.95126
+                ],
+                [
+                  100.57658,
+                  13.95455
+                ],
+                [
+                  100.57377,
+                  13.95453
+                ],
+                [
+                  100.5678,
+                  13.95125
+                ],
+                [
+                  100.57237,
+                  13.97115
+                ],
+                [
+                  100.57192,
+                  13.9729
+                ],
+                [
+                  100.60364,
+                  13.98067
+                ],
+                [
+                  100.60576,
+                  13.96472
+                ]
+              ]
+            ]
+          }
+        },
+        {
           "geocode": "110602",
           "tambon": "ต.ศีรษะจรเข้น้อย",
           "amphoe": "อ.บางเสาธง",
@@ -25479,8 +32287,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ศีรษะจรเข้น้อย",
           "latitude": 13.67777,
           "longitude": 100.7945,
-          "sum_rainfall_mm": 338.20000000000005,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 348.0,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -25594,8 +32402,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองจระเข้ใหญ่ บางเสาธง (วัดศรีวารีน้อย)",
           "latitude": 13.66949,
           "longitude": 100.80058,
-          "sum_rainfall_mm": 314.8,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 324.0,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -25752,128 +32560,6 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
-          "geocode": "110409",
-          "tambon": "ต.บางกระเจ้า",
-          "amphoe": "อ.พระประแดง",
-          "province": "จ.สมุทรปราการ",
-          "region_id": "7",
-          "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "ปตร.วัดบางกระเจ้านอก",
-          "latitude": 13.689612,
-          "longitude": 100.554886,
-          "sum_rainfall_mm": 215.4,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  100.57164,
-                  13.70439
-                ],
-                [
-                  100.56587,
-                  13.68654
-                ],
-                [
-                  100.56269,
-                  13.68678
-                ],
-                [
-                  100.55796,
-                  13.69046
-                ],
-                [
-                  100.55246,
-                  13.69075
-                ],
-                [
-                  100.55066,
-                  13.70132
-                ],
-                [
-                  100.55212,
-                  13.70523
-                ],
-                [
-                  100.5542,
-                  13.7072
-                ],
-                [
-                  100.55764,
-                  13.70826
-                ],
-                [
-                  100.56163,
-                  13.70793
-                ],
-                [
-                  100.57164,
-                  13.70439
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "110408",
-          "tambon": "ต.บางยอ",
-          "amphoe": "อ.พระประแดง",
-          "province": "จ.สมุทรปราการ",
-          "region_id": "7",
-          "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "ปตร. คลองลัดบางยอ 1",
-          "latitude": 13.676162,
-          "longitude": 100.553085,
-          "sum_rainfall_mm": 190.0,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  100.56587,
-                  13.68654
-                ],
-                [
-                  100.57115,
-                  13.68523
-                ],
-                [
-                  100.56726,
-                  13.68051
-                ],
-                [
-                  100.55513,
-                  13.67019
-                ],
-                [
-                  100.54627,
-                  13.67421
-                ],
-                [
-                  100.55127,
-                  13.68124
-                ],
-                [
-                  100.55265,
-                  13.69095
-                ],
-                [
-                  100.55796,
-                  13.69046
-                ],
-                [
-                  100.56269,
-                  13.68678
-                ],
-                [
-                  100.56587,
-                  13.68654
-                ]
-              ]
-            ]
-          }
-        },
-        {
           "geocode": "110503",
           "tambon": "ต.แหลมฟ้าผ่า",
           "amphoe": "อ.พระสมุทรเจดีย์",
@@ -25883,8 +32569,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.แหลมฟ้าผ่า",
           "latitude": 13.54701,
           "longitude": 100.53756,
-          "sum_rainfall_mm": 228.6,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 227.20000000000002,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -26062,8 +32748,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เมืองสมุทรสาคร",
           "latitude": 13.58598,
           "longitude": 100.23048,
-          "sum_rainfall_mm": 193.8,
-          "observed_at": "2026-09-25T17:00:00+07:00",
+          "sum_rainfall_mm": 195.20000000000005,
+          "observed_at": "2026-09-25T20:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -26146,194 +32832,15 @@ window.IEAT_THAIWATER_DATA = {
               ]
             ]
           }
-        },
-        {
-          "geocode": "740116",
-          "tambon": "ต.บางกระเจ้า",
-          "amphoe": "อ.เมืองสมุทรสาคร",
-          "province": "จ.สมุทรสาคร",
-          "region_id": "7",
-          "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "อบต.บางกระเจ้า",
-          "latitude": 13.52146,
-          "longitude": 100.19283,
-          "sum_rainfall_mm": 207.8,
-          "observed_at": "2026-09-25T17:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  100.2378,
-                  13.54378
-                ],
-                [
-                  100.23603,
-                  13.54039
-                ],
-                [
-                  100.23659,
-                  13.539
-                ],
-                [
-                  100.23471,
-                  13.53313
-                ],
-                [
-                  100.23169,
-                  13.51298
-                ],
-                [
-                  100.23393,
-                  13.50551
-                ],
-                [
-                  100.23298,
-                  13.50027
-                ],
-                [
-                  100.23402,
-                  13.49526
-                ],
-                [
-                  100.23301,
-                  13.49346
-                ],
-                [
-                  100.23339,
-                  13.48908
-                ],
-                [
-                  100.23208,
-                  13.4881
-                ],
-                [
-                  100.23349,
-                  13.48431
-                ],
-                [
-                  100.23095,
-                  13.47625
-                ],
-                [
-                  100.23177,
-                  13.47338
-                ],
-                [
-                  100.23056,
-                  13.47212
-                ],
-                [
-                  100.23195,
-                  13.46901
-                ],
-                [
-                  100.21927,
-                  13.46488
-                ],
-                [
-                  100.21812,
-                  13.46843
-                ],
-                [
-                  100.21504,
-                  13.46863
-                ],
-                [
-                  100.21353,
-                  13.47039
-                ],
-                [
-                  100.20637,
-                  13.48729
-                ],
-                [
-                  100.20281,
-                  13.49129
-                ],
-                [
-                  100.19798,
-                  13.50141
-                ],
-                [
-                  100.19665,
-                  13.50205
-                ],
-                [
-                  100.19491,
-                  13.50728
-                ],
-                [
-                  100.18836,
-                  13.51646
-                ],
-                [
-                  100.18864,
-                  13.52249
-                ],
-                [
-                  100.18704,
-                  13.52646
-                ],
-                [
-                  100.18946,
-                  13.5285
-                ],
-                [
-                  100.18991,
-                  13.53154
-                ],
-                [
-                  100.19312,
-                  13.53766
-                ],
-                [
-                  100.19531,
-                  13.53912
-                ],
-                [
-                  100.19385,
-                  13.54493
-                ],
-                [
-                  100.19465,
-                  13.54762
-                ],
-                [
-                  100.19936,
-                  13.54892
-                ],
-                [
-                  100.19867,
-                  13.54688
-                ],
-                [
-                  100.20275,
-                  13.54309
-                ],
-                [
-                  100.21565,
-                  13.5429
-                ],
-                [
-                  100.23031,
-                  13.54543
-                ],
-                [
-                  100.2378,
-                  13.54378
-                ]
-              ]
-            ]
-          }
         }
       ],
-      "risk_map": "https://api.hii.or.th/v2/proxy-image/3days_riskmap_25_09_2026.png?1790374025",
+      "risk_map": "https://api.hii.or.th/v2/proxy-image/3days_riskmap_25_09_2026.png?1790384822",
       "source_url": "https://api.hii.or.th/v2/4UQaYnf0Bx4fXPYyCdDRbqHyXH9Ixvd2nVUjaN1cLBY=/warning/flashflood-24h"
     },
     "48h": {
       "period": "48h",
       "date": "2026-09-26",
-      "time": "05:00:00",
+      "time": "08:00:00",
       "type": "พื้นที่เฝ้าระวังพิเศษ ล่วงหน้า 48 ชม. เสี่ยงน้ำท่วมจากฝนตกสะสม",
       "areas": [
         {
@@ -26347,7 +32854,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 16.135833,
           "longitude": 99.784167,
           "sum_rainfall_mm": 109.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "620411",
@@ -26359,8 +32866,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานต้นน้ำ (เกาะแก้ว-ตลิ่งสูง)",
           "latitude": 15.91465,
           "longitude": 99.4194,
-          "sum_rainfall_mm": 126.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 100.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "620404",
@@ -26372,8 +32879,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ขาณุวรลักษบุรี",
           "latitude": 16.06475,
           "longitude": 99.8603,
-          "sum_rainfall_mm": 110.00000000000001,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 103.80000000000001,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "620406",
@@ -26385,8 +32892,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.สลกบาตร",
           "latitude": 15.97907,
           "longitude": 99.82462,
-          "sum_rainfall_mm": 106.60000000000001,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 100.19999999999999,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "620501",
@@ -26399,7 +32906,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 16.20864,
           "longitude": 99.70895,
           "sum_rainfall_mm": 179.20000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "620504",
@@ -26411,8 +32918,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองวังหิน",
           "latitude": 16.229583,
           "longitude": 99.696722,
-          "sum_rainfall_mm": 198.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 197.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "620509",
@@ -26424,8 +32931,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สำนักสงฆ์มอหินเพลิง",
           "latitude": 16.151548,
           "longitude": 99.527517,
-          "sum_rainfall_mm": 150.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 146.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "620303",
@@ -26437,8 +32944,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.คลองลานพัฒนา",
           "latitude": 16.12253,
           "longitude": 99.32932,
-          "sum_rainfall_mm": 125.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 120.80000000000001,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "620903",
@@ -26450,7 +32957,7 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ที่ทำการอุทยานแห่งชาติแม่วงก์",
           "latitude": 16.039022,
           "longitude": 99.233345,
-          "sum_rainfall_mm": 157.8,
+          "sum_rainfall_mm": 156.4,
           "observed_at": "2026-09-26T01:00:00+07:00"
         },
         {
@@ -26463,8 +32970,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.คุ้งสำเภา",
           "latitude": 15.31006,
           "longitude": 100.08173,
-          "sum_rainfall_mm": 154.39999999999998,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 154.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "180202",
@@ -26476,8 +32983,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ปตร.มโนรมย์",
           "latitude": 15.3277,
           "longitude": 100.10913,
-          "sum_rainfall_mm": 151.00000000000003,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 151.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "180104",
@@ -26489,8 +32996,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "T.ปตร.บรมธาตุ",
           "latitude": 15.15713,
           "longitude": 100.152981,
-          "sum_rainfall_mm": 172.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 173.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "180107",
@@ -26502,8 +33009,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานธรรมจักร(วัดธรรมามูล)",
           "latitude": 15.25029,
           "longitude": 100.08347,
-          "sum_rainfall_mm": 157.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 157.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "180102",
@@ -26515,8 +33022,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เหนือปตร.มหาราช",
           "latitude": 15.15892,
           "longitude": 100.17329,
-          "sum_rainfall_mm": 202.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 201.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "180106",
@@ -26528,8 +33035,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "T.ปตร.พลเทพ",
           "latitude": 15.214294,
           "longitude": 100.073325,
-          "sum_rainfall_mm": 165.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 168.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "180302",
@@ -26541,8 +33048,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "T.ปตร.มะขามเฒ่า",
           "latitude": 15.222455,
           "longitude": 100.062221,
-          "sum_rainfall_mm": 162.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 163.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "180301",
@@ -26554,8 +33061,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.วัดสิงห์",
           "latitude": 15.2584,
           "longitude": 100.04493,
-          "sum_rainfall_mm": 145.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 146.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "180405",
@@ -26567,8 +33074,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สรรพยา",
           "latitude": 15.10907,
           "longitude": 100.26785,
-          "sum_rainfall_mm": 158.39999999999998,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 159.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "180401",
@@ -26580,8 +33087,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.สรรพยา",
           "latitude": 15.13217,
           "longitude": 100.25129,
-          "sum_rainfall_mm": 182.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 182.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "180611",
@@ -26594,7 +33101,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 15.05395,
           "longitude": 100.01206,
           "sum_rainfall_mm": 108.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "180601",
@@ -26606,8 +33113,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.หันคา",
           "latitude": 14.96964,
           "longitude": 100.01039,
-          "sum_rainfall_mm": 128.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 128.39999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "260310",
@@ -26619,8 +33126,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ศรีกะอาง",
           "latitude": 14.27798,
           "longitude": 101.12879,
-          "sum_rainfall_mm": 103.19999999999999,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 112.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "260207",
@@ -26632,8 +33139,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.นาหินลาด",
           "latitude": 14.20724,
           "longitude": 101.35025,
-          "sum_rainfall_mm": 135.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 173.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "260102",
@@ -26645,8 +33152,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เขื่อนนายก",
           "latitude": 14.18205,
           "longitude": 101.162164,
-          "sum_rainfall_mm": 144.5,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 168.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "260107",
@@ -26658,8 +33165,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ศรีจุฬา",
           "latitude": 14.07064,
           "longitude": 101.13746,
-          "sum_rainfall_mm": 300.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 311.20000000000005,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "260405",
@@ -26671,8 +33178,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สมบูรณ์",
           "latitude": 13.970389,
           "longitude": 101.138699,
-          "sum_rainfall_mm": 166.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 190.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "260404",
@@ -26684,8 +33191,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองแม่น้ำใน(โพธิ์แทน)",
           "latitude": 14.212921,
           "longitude": 100.942453,
-          "sum_rainfall_mm": 257.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 269.5,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "260409",
@@ -26697,8 +33204,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "องครักษ์",
           "latitude": 14.113633,
           "longitude": 101.01952,
-          "sum_rainfall_mm": 142.00000000000003,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 145.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "600605",
@@ -26710,8 +33217,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เก้าเลี้ยว",
           "latitude": 15.85051,
           "longitude": 100.05206,
-          "sum_rainfall_mm": 101.20000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 102.19999999999999,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "600201",
@@ -26723,8 +33230,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.โกรกพระ",
           "latitude": 15.55312,
           "longitude": 100.0709,
-          "sum_rainfall_mm": 162.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 162.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "600702",
@@ -26736,8 +33243,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เขาวง",
           "latitude": 15.181689,
           "longitude": 100.41453,
-          "sum_rainfall_mm": 145.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 146.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "600701",
@@ -26749,8 +33256,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ตาคลี",
           "latitude": 15.29119,
           "longitude": 100.38288,
-          "sum_rainfall_mm": 141.59999999999997,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 140.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "600710",
@@ -26759,11 +33266,11 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.นครสวรรค์",
           "region_id": "1",
           "region_name": "ภาคกลาง",
-          "station": "เหนือปตร.ช่องแค",
-          "latitude": 15.14624,
-          "longitude": 100.41298,
-          "sum_rainfall_mm": 161.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "station": "T.ปตร.ช่องแค",
+          "latitude": 15.145483,
+          "longitude": 100.411717,
+          "sum_rainfall_mm": 101.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "600805",
@@ -26775,8 +33282,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "TC.60",
           "latitude": 15.67,
           "longitude": 100.334167,
-          "sum_rainfall_mm": 134.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 135.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "601007",
@@ -26788,8 +33295,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.เขาทอง",
           "latitude": 15.5707,
           "longitude": 100.18319,
-          "sum_rainfall_mm": 109.19999999999999,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 111.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "601008",
@@ -26801,8 +33308,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "พยุหะคีรี",
           "latitude": 15.42655,
           "longitude": 100.13471,
-          "sum_rainfall_mm": 113.80000000000001,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 114.19999999999999,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "600908",
@@ -26814,8 +33321,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.ไพศาลี",
           "latitude": 15.60012,
           "longitude": 100.6572,
-          "sum_rainfall_mm": 140.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 141.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140201",
@@ -26827,8 +33334,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ท่าเรือ",
           "latitude": 14.56014,
           "longitude": 100.71987,
-          "sum_rainfall_mm": 185.60000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 186.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140203",
@@ -26840,8 +33347,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เหนือปตร.พระนารายน์",
           "latitude": 14.5583,
           "longitude": 100.76205,
-          "sum_rainfall_mm": 204.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 205.00000000000003,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140303",
@@ -26853,8 +33360,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "นครหลวง",
           "latitude": 14.40269,
           "longitude": 100.5864,
-          "sum_rainfall_mm": 127.19999999999999,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 144.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140503",
@@ -26866,8 +33373,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองบางบาล",
           "latitude": 14.42303,
           "longitude": 100.48186,
-          "sum_rainfall_mm": 162.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 175.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140513",
@@ -26879,8 +33386,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองบางหลวง",
           "latitude": 14.4158,
           "longitude": 100.44071,
-          "sum_rainfall_mm": 132.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 144.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140702",
@@ -26892,8 +33399,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดจอมเกษ",
           "latitude": 14.414349,
           "longitude": 100.55782,
-          "sum_rainfall_mm": 141.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 142.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140714",
@@ -26905,8 +33412,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บางปะหัน",
           "latitude": 14.42731,
           "longitude": 100.55605,
-          "sum_rainfall_mm": 144.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 151.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140618",
@@ -26918,8 +33425,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บางปะอิน",
           "latitude": 14.30455,
           "longitude": 100.56645,
-          "sum_rainfall_mm": 111.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 134.39999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "140604",
+          "tambon": "ต.บ้านกรด",
+          "amphoe": "อ.บางปะอิน",
+          "province": "จ.พระนครศรีอยุธยา",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "วัดขนอนใต้",
+          "latitude": 14.288251,
+          "longitude": 100.61132,
+          "sum_rainfall_mm": 116.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140812",
@@ -26931,8 +33451,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ปตร.ลาดชิด (ทุ่งผักไห่)",
           "latitude": 14.44056,
           "longitude": 100.35738,
-          "sum_rainfall_mm": 101.99999999999999,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 118.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140805",
@@ -26944,8 +33464,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ปตร.บางแก้ว (ทุ่งผักไห่)",
           "latitude": 14.436604,
           "longitude": 100.37149,
-          "sum_rainfall_mm": 123.39999999999999,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 141.39999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140806",
@@ -26957,8 +33477,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ปตร กุฎิ (ทุ่งป่าโมก)",
           "latitude": 14.412405,
           "longitude": 100.40116,
-          "sum_rainfall_mm": 122.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 138.79999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140816",
@@ -26970,8 +33490,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "T.ปตร.ผักไห่",
           "latitude": 14.43626,
           "longitude": 100.375495,
-          "sum_rainfall_mm": 128.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 134.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140814",
@@ -26983,8 +33503,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ที่ทำการกำนันตำบลลาดชิด",
           "latitude": 14.44142,
           "longitude": 100.35564,
-          "sum_rainfall_mm": 132.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 149.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140815",
@@ -26996,8 +33516,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานข้ามแม่น้ำน้อย (ทุ่งผักไห่)",
           "latitude": 14.498449,
           "longitude": 100.36825,
-          "sum_rainfall_mm": 115.00000000000001,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 124.60000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "140802",
+          "tambon": "ต.อมฤต",
+          "amphoe": "อ.ผักไห่",
+          "province": "จ.พระนครศรีอยุธยา",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "ปตร.ลาดชะโด (ทุ่งผักไห่)",
+          "latitude": 14.464386,
+          "longitude": 100.366005,
+          "sum_rainfall_mm": 109.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140108",
@@ -27009,8 +33542,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "พระนครศรีอยุธยา",
           "latitude": 14.36913,
           "longitude": 100.52861,
-          "sum_rainfall_mm": 114.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 128.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140113",
@@ -27022,8 +33555,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ปตร.กลางคลองข้าวเม่า (วัดกระสังข์)",
           "latitude": 14.357306,
           "longitude": 100.60569,
-          "sum_rainfall_mm": 101.60000000000001,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 117.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "140104",
+          "tambon": "ต.หัวรอ",
+          "amphoe": "อ.พระนครศรีอยุธยา",
+          "province": "จ.พระนครศรีอยุธยา",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "ปตร.กระมัง (ปากคลองข้าวเม่า)",
+          "latitude": 14.355055,
+          "longitude": 100.58354,
+          "sum_rainfall_mm": 104.80000000000001,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "141003",
@@ -27035,8 +33581,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองพระยาบรรลือ",
           "latitude": 14.16476,
           "longitude": 100.30725,
-          "sum_rainfall_mm": 125.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 138.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "141106",
@@ -27048,8 +33594,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ท้ายปตร.พระอินทราชา",
           "latitude": 14.14378,
           "longitude": 100.62075,
-          "sum_rainfall_mm": 143.20000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 185.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "141103",
@@ -27061,8 +33607,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เหนือปตร.พระอินทราชา",
           "latitude": 14.14407,
           "longitude": 100.62136,
-          "sum_rainfall_mm": 143.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 188.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "141217",
@@ -27074,8 +33620,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เสนา",
           "latitude": 14.31976,
           "longitude": 100.37952,
-          "sum_rainfall_mm": 138.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 156.39999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "141201",
@@ -27087,8 +33633,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เสนา (ทุ่งบางบาล-บ้านแพน)",
           "latitude": 14.327773,
           "longitude": 100.405464,
-          "sum_rainfall_mm": 156.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 182.39999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "141406",
@@ -27100,8 +33646,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองช่องสะเดา",
           "latitude": 14.344762,
           "longitude": 100.670105,
-          "sum_rainfall_mm": 132.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 135.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "670601",
@@ -27114,7 +33660,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 15.43789,
           "longitude": 101.16249,
           "sum_rainfall_mm": 107.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "160903",
@@ -27126,8 +33672,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.หนองมะค่า",
           "latitude": 15.4321,
           "longitude": 100.9245,
-          "sum_rainfall_mm": 147.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 150.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "160414",
@@ -27139,8 +33685,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ท่ามะนาว",
           "latitude": 15.19934,
           "longitude": 101.16389,
-          "sum_rainfall_mm": 121.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 122.19999999999999,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "160406",
@@ -27152,8 +33698,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานคลองลำสนธิ",
           "latitude": 15.246861,
           "longitude": 101.19566,
-          "sum_rainfall_mm": 133.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 135.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "160621",
@@ -27165,8 +33711,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สถานีสูบน้ำปากคลองสายห้วยแก้ว (ทุ่งซ้ายคลองชัยนาท)",
           "latitude": 15.082755,
           "longitude": 100.554504,
-          "sum_rainfall_mm": 102.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 105.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "160201",
@@ -27178,8 +33724,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองส้ม",
           "latitude": 14.822028,
           "longitude": 101.014594,
-          "sum_rainfall_mm": 121.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 122.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "160207",
@@ -27191,8 +33737,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เหนือเขื่อนป่าสัก",
           "latitude": 14.848254,
           "longitude": 101.090205,
-          "sum_rainfall_mm": 105.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 108.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "160117",
@@ -27204,8 +33750,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทรบ. ปากคลองห้าวา (ทุ่งท่าวุ้ง)",
           "latitude": 14.818599,
           "longitude": 100.576515,
-          "sum_rainfall_mm": 108.80000000000001,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 110.00000000000001,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "160122",
@@ -27217,8 +33763,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เมืองลพบุรี",
           "latitude": 14.76049,
           "longitude": 100.5996,
-          "sum_rainfall_mm": 128.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 128.59999999999997,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "161106",
@@ -27230,8 +33776,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ชอนสารเดช",
           "latitude": 15.18496,
           "longitude": 100.68131,
-          "sum_rainfall_mm": 138.20000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 140.39999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "750205",
@@ -27243,8 +33789,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดบางคนฑีใน",
           "latitude": 13.4913,
           "longitude": 99.9445,
-          "sum_rainfall_mm": 112.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 113.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "750109",
@@ -27256,8 +33802,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": " สะพานข้ามคลองโคน",
           "latitude": 13.3319,
           "longitude": 99.96896,
-          "sum_rainfall_mm": 112.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 116.80000000000001,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "750111",
@@ -27269,8 +33815,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดศรัทธาธรรม",
           "latitude": 13.3773,
           "longitude": 99.993,
-          "sum_rainfall_mm": 113.5,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 114.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "750101",
@@ -27282,8 +33828,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "พระรามสอง",
           "latitude": 13.38362,
           "longitude": 99.9836,
-          "sum_rainfall_mm": 134.60000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 135.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "190603",
@@ -27295,8 +33841,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานคลองส่งน้ำชลประทาน บ้านสร่างโศก",
           "latitude": 14.650794,
           "longitude": 100.742775,
-          "sum_rainfall_mm": 122.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 122.99999999999999,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "191203",
@@ -27308,8 +33854,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ฝายคลองสุคต",
           "latitude": 14.863621,
           "longitude": 101.119957,
-          "sum_rainfall_mm": 133.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 134.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "190301",
@@ -27321,8 +33867,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ท้ายปตร.พระศรีศิลป์",
           "latitude": 14.32729,
           "longitude": 100.87117,
-          "sum_rainfall_mm": 134.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 151.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "170504",
@@ -27334,8 +33880,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เหนือปตร.ยางมณี",
           "latitude": 14.751,
           "longitude": 100.41463,
-          "sum_rainfall_mm": 145.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 146.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "170203",
@@ -27347,8 +33893,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ท้ายปตร.บางระจัน",
           "latitude": 14.92539,
           "longitude": 100.27912,
-          "sum_rainfall_mm": 114.80000000000001,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 117.20000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "170402",
@@ -27360,8 +33906,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "พรหมบุรี",
           "latitude": 14.79091,
           "longitude": 100.45184,
-          "sum_rainfall_mm": 127.19999999999999,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 128.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "170106",
@@ -27373,8 +33919,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานอนุสรณ์ 100 ปีสิงห์บุรี (สะพานหลวงพ่อแพ 89)",
           "latitude": 14.870205,
           "longitude": 100.408585,
-          "sum_rainfall_mm": 105.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 106.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "170605",
@@ -27386,8 +33932,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สถานีสูบน้ำคลองระบายชัยนาท-ป่าสัก 2 (ทุ่งเชียงราก)",
           "latitude": 15.05502,
           "longitude": 100.32081,
-          "sum_rainfall_mm": 137.39999999999998,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 137.60000000000002,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "170601",
@@ -27399,8 +33945,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อินทร์บุรี",
           "latitude": 15.00602,
           "longitude": 100.33088,
-          "sum_rainfall_mm": 127.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 128.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "720307",
+          "tambon": "ต.วังยาว",
+          "amphoe": "อ.ด่านช้าง",
+          "province": "จ.สุพรรณบุรี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์พุเตย",
+          "latitude": 15.0219,
+          "longitude": 99.3923,
+          "sum_rainfall_mm": 102.3,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "720803",
@@ -27412,8 +33971,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สามชุก",
           "latitude": 14.75138,
           "longitude": 100.09592,
-          "sum_rainfall_mm": 104.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 112.60000000000001,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "150302",
@@ -27425,8 +33984,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานป่าโมก",
           "latitude": 14.498074,
           "longitude": 100.44962,
-          "sum_rainfall_mm": 138.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 149.79999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "610205",
@@ -27438,8 +33997,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดโคกหม้อ",
           "latitude": 15.534278,
           "longitude": 99.899083,
-          "sum_rainfall_mm": 168.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 173.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "610201",
@@ -27451,8 +34010,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.ทัพทัน",
           "latitude": 15.45764,
           "longitude": 99.89484,
-          "sum_rainfall_mm": 146.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 156.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "610607",
@@ -27464,8 +34023,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "รพสต.แก่นมะกรูด",
           "latitude": 15.16183,
           "longitude": 99.28896,
-          "sum_rainfall_mm": 103.39999999999999,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 109.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "610701",
+          "tambon": "ต.ลานสัก",
+          "amphoe": "อ.ลานสัก",
+          "province": "จ.อุทัยธานี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "อบต.ลานสัก",
+          "latitude": 15.47279,
+          "longitude": 99.53976,
+          "sum_rainfall_mm": 125.60000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "610301",
@@ -27477,8 +34049,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.สว่างแจ้งสบายใจ",
           "latitude": 15.559001,
           "longitude": 99.864809,
-          "sum_rainfall_mm": 114.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 118.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "610501",
@@ -27490,8 +34062,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.หนองขาหย่าง",
           "latitude": 15.36227,
           "longitude": 99.93845,
-          "sum_rainfall_mm": 135.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 135.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "610410",
@@ -27503,8 +34075,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ฝายทับเสลา",
           "latitude": 15.407623,
           "longitude": 99.714458,
-          "sum_rainfall_mm": 111.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 140.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "610401",
@@ -27516,8 +34088,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.หนองฉาง",
           "latitude": 15.38896,
           "longitude": 99.84505,
-          "sum_rainfall_mm": 142.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 151.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "610801",
+          "tambon": "ต.สุขฤทัย",
+          "amphoe": "อ.ห้วยคต",
+          "province": "จ.อุทัยธานี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านกกงิ้ว",
+          "latitude": 15.304712,
+          "longitude": 99.648582,
+          "sum_rainfall_mm": 110.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "610803",
@@ -27529,8 +34114,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ห้วยคต",
           "latitude": 15.30362,
           "longitude": 99.60969,
-          "sum_rainfall_mm": 108.19999999999999,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 129.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "221005",
@@ -27542,8 +34127,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานคลองจันทเขลม",
           "latitude": 13.003336,
           "longitude": 102.04864,
-          "sum_rainfall_mm": 165.40000000000003,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 166.60000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "221003",
@@ -27555,8 +34140,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.ตะเคียนทอง",
           "latitude": 12.9131,
           "longitude": 102.0815,
-          "sum_rainfall_mm": 228.20000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 243.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "220901",
@@ -27568,8 +34153,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.นายายอาม",
           "latitude": 12.77083,
           "longitude": 101.85303,
-          "sum_rainfall_mm": 168.20000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 170.39999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "220401",
+          "tambon": "ต.ทับไทร",
+          "amphoe": "อ.โป่งน้ำร้อน",
+          "province": "จ.จันทบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "บ้านคลองตานี",
+          "latitude": 12.896003,
+          "longitude": 102.271006,
+          "sum_rainfall_mm": 161.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "220402",
@@ -27581,8 +34179,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.โป่งน้ำร้อน",
           "latitude": 12.90515,
           "longitude": 102.26646,
-          "sum_rainfall_mm": 172.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 170.60000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "220503",
@@ -27594,8 +34192,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.ปัถวี",
           "latitude": 12.74261,
           "longitude": 102.23263,
-          "sum_rainfall_mm": 191.39999999999998,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 206.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "220504",
@@ -27607,8 +34205,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดโคกตะพง (แกลง)",
           "latitude": 12.78168,
           "longitude": 102.17328,
-          "sum_rainfall_mm": 226.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 231.79999999999995,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "241002",
@@ -27620,8 +34218,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ภูไท",
           "latitude": 13.417764,
           "longitude": 101.883095,
-          "sum_rainfall_mm": 163.00000000000003,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 162.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "240308",
@@ -27633,8 +34231,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ดอนฉิมพลี",
           "latitude": 13.90535,
           "longitude": 100.97028,
-          "sum_rainfall_mm": 168.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 201.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "240301",
@@ -27646,8 +34244,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ปากคลองพระองค์เจ้าฯ (บางน้ำเปรี้ยว)",
           "latitude": 13.83819,
           "longitude": 100.9666,
-          "sum_rainfall_mm": 152.40000000000003,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 164.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "240410",
+          "tambon": "ต.ท่าข้าม",
+          "amphoe": "อ.บางปะกง",
+          "province": "จ.ฉะเชิงเทรา",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "ปากแม่น้ำบางปะกง",
+          "latitude": 13.474833,
+          "longitude": 100.98196,
+          "sum_rainfall_mm": 189.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "240402",
@@ -27659,8 +34270,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บางปะกง",
           "latitude": 13.54901,
           "longitude": 101.00111,
-          "sum_rainfall_mm": 242.40000000000003,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 283.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "240501",
@@ -27672,8 +34283,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านโพธิ์",
           "latitude": 13.58335,
           "longitude": 101.070917,
-          "sum_rainfall_mm": 293.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 343.5,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "240601",
@@ -27685,8 +34296,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ฝายท่าลาด",
           "latitude": 13.707719,
           "longitude": 101.401415,
-          "sum_rainfall_mm": 183.5,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 205.5,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "240607",
@@ -27698,8 +34309,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.หนองแหน",
           "latitude": 13.68338,
           "longitude": 101.32512,
-          "sum_rainfall_mm": 264.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 294.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "240109",
@@ -27711,8 +34322,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.บางขวัญ",
           "latitude": 13.74984,
           "longitude": 101.07751,
-          "sum_rainfall_mm": 212.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 226.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "200204",
@@ -27724,8 +34335,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์ป่าอ่างช้างน้ำ",
           "latitude": 13.2743,
           "longitude": 101.082,
-          "sum_rainfall_mm": 203.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 212.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "200707",
@@ -27737,8 +34348,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ที่ทำการเขตรักษาพันธุ์สัตว์ป่าเขาเขียว-เขาชมภู่",
           "latitude": 13.240835,
           "longitude": 101.04208,
-          "sum_rainfall_mm": 294.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 303.20000000000005,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "200701",
@@ -27750,8 +34361,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สถานีวิจัยประมงศรีราชา",
           "latitude": 13.185876,
           "longitude": 100.916916,
-          "sum_rainfall_mm": 182.20000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 186.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "200903",
@@ -27763,8 +34374,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.พลูตาหลวง",
           "latitude": 12.69861,
           "longitude": 100.9762,
-          "sum_rainfall_mm": 166.60000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 163.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "230701",
+          "tambon": "ต.เกาะช้าง",
+          "amphoe": "อ.เกาะช้าง",
+          "province": "จ.ตราด",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "ที่ทำการอุทยานแห่งชาติเกาะช้าง",
+          "latitude": 12.12542,
+          "longitude": 102.26843,
+          "sum_rainfall_mm": 180.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "230306",
@@ -27776,8 +34400,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองประณีต บ.ตลุง",
           "latitude": 12.511324,
           "longitude": 102.37168,
-          "sum_rainfall_mm": 155.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 167.4,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "230303",
@@ -27789,8 +34413,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองโสน",
           "latitude": 12.513374,
           "longitude": 102.50484,
-          "sum_rainfall_mm": 170.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 232.40000000000003,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "230305",
@@ -27802,8 +34426,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.สะตอ",
           "latitude": 12.53639,
           "longitude": 102.44429,
-          "sum_rainfall_mm": 204.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 226.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "230403",
@@ -27815,8 +34439,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ คก. ๓ (เขาพลู)",
           "latitude": 12.4193,
           "longitude": 102.744,
-          "sum_rainfall_mm": 157.79999999999998,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 177.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "230405",
@@ -27825,11 +34449,11 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.ตราด",
           "region_id": "2",
           "region_name": "ภาคตะวันออก",
-          "station": "วัดทุ่งตอง",
-          "latitude": 12.515793,
-          "longitude": 102.59027,
-          "sum_rainfall_mm": 201.20000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "station": "บ้านมะม่วง",
+          "latitude": 12.549057,
+          "longitude": 102.57967,
+          "sum_rainfall_mm": 167.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "230401",
@@ -27838,11 +34462,11 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.ตราด",
           "region_id": "2",
           "region_name": "ภาคตะวันออก",
-          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์คลองสะตอ",
-          "latitude": 12.5973,
-          "longitude": 102.608,
-          "sum_rainfall_mm": 183.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "station": "บ้านหมื่นด่าน",
+          "latitude": 12.595746,
+          "longitude": 102.578773,
+          "sum_rainfall_mm": 161.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "230404",
@@ -27854,8 +34478,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานคลองสะตอ",
           "latitude": 12.7065,
           "longitude": 102.415,
-          "sum_rainfall_mm": 170.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 184.2,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "230111",
@@ -27867,8 +34491,73 @@ window.IEAT_THAIWATER_DATA = {
           "station": "รพ.สต.บ้านคลองขวาง",
           "latitude": 12.344451,
           "longitude": 102.64169,
-          "sum_rainfall_mm": 158.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 204.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "230109",
+          "tambon": "ต.เนินทราย",
+          "amphoe": "อ.เมืองตราด",
+          "province": "จ.ตราด",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "ทต.ท่าพริกเนินทราย",
+          "latitude": 12.25512,
+          "longitude": 102.55822,
+          "sum_rainfall_mm": 180.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "230107",
+          "tambon": "ต.วังกระแจะ",
+          "amphoe": "อ.เมืองตราด",
+          "province": "จ.ตราด",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "บ้านปลายคลอง",
+          "latitude": 12.260545,
+          "longitude": 102.46482,
+          "sum_rainfall_mm": 158.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "230105",
+          "tambon": "ต.ห้วงน้ำขาว",
+          "amphoe": "อ.เมืองตราด",
+          "province": "จ.ตราด",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "เปร็ดใน",
+          "latitude": 12.14203,
+          "longitude": 102.52977,
+          "sum_rainfall_mm": 170.00000000000003,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "230108",
+          "tambon": "ต.ห้วยแร้ง",
+          "amphoe": "อ.เมืองตราด",
+          "province": "จ.ตราด",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "วัดคลองขุด",
+          "latitude": 12.360417,
+          "longitude": 102.549297,
+          "sum_rainfall_mm": 176.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "230503",
+          "tambon": "ต.บางปิด",
+          "amphoe": "อ.แหลมงอบ",
+          "province": "จ.ตราด",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "อบต.บางปิด",
+          "latitude": 12.21718,
+          "longitude": 102.30766,
+          "sum_rainfall_mm": 175.60000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250212",
@@ -27880,8 +34569,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.นาแขม",
           "latitude": 14.04255,
           "longitude": 101.72051,
-          "sum_rainfall_mm": 150.39999999999998,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 202.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250214",
@@ -27893,8 +34582,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านเนินหินกอง",
           "latitude": 13.782015,
           "longitude": 101.900566,
-          "sum_rainfall_mm": 170.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 165.5,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250305",
@@ -27906,8 +34595,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "โรงเรียนบ้านหินเทิน",
           "latitude": 14.064819,
           "longitude": 102.01052,
-          "sum_rainfall_mm": 197.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 194.79999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250306",
@@ -27919,8 +34608,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.บุพราหมณ์",
           "latitude": 14.20791,
           "longitude": 101.90556,
-          "sum_rainfall_mm": 186.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 191.60000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250606",
@@ -27932,8 +34621,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านตะเภาลาย",
           "latitude": 14.012733,
           "longitude": 101.265193,
-          "sum_rainfall_mm": 158.5,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 186.5,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250707",
@@ -27945,8 +34634,60 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ขญ.๑๐ (ประจันตคาม)",
           "latitude": 14.181167,
           "longitude": 101.592064,
-          "sum_rainfall_mm": 174.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 218.20000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "250701",
+          "tambon": "ต.ประจันตคาม",
+          "amphoe": "อ.ประจันตคาม",
+          "province": "จ.ปราจีนบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "ประจันตคาม (KGT7A)",
+          "latitude": 14.070941,
+          "longitude": 101.51893,
+          "sum_rainfall_mm": 184.79999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "250709",
+          "tambon": "ต.โพธิ์งาม",
+          "amphoe": "อ.ประจันตคาม",
+          "province": "จ.ปราจีนบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "ประจันตคาม",
+          "latitude": 14.069966,
+          "longitude": 101.518579,
+          "sum_rainfall_mm": 176.5,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "250112",
+          "tambon": "ต.เนินหอม",
+          "amphoe": "อ.เมืองปราจีนบุรี",
+          "province": "จ.ปราจีนบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "วัดห้วยเกษียร",
+          "latitude": 14.181127,
+          "longitude": 101.413635,
+          "sum_rainfall_mm": 176.99999999999997,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "250106",
+          "tambon": "ต.บางบริบูรณ์",
+          "amphoe": "อ.เมืองปราจีนบุรี",
+          "province": "จ.ปราจีนบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "วัดสง่างาม",
+          "latitude": 14.031635,
+          "longitude": 101.42646,
+          "sum_rainfall_mm": 162.5,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250810",
@@ -27958,8 +34699,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.กรอกสมบูรณ์",
           "latitude": 13.77716,
           "longitude": 101.65875,
-          "sum_rainfall_mm": 178.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 193.39999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "210701",
@@ -27971,8 +34712,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ที่ทำการอุทยานแห่งชาติเขาชะเมา-เขาวง",
           "latitude": 12.912333,
           "longitude": 101.72454,
-          "sum_rainfall_mm": 171.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 171.39999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "210702",
@@ -27984,8 +34725,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "โรงเรียนบ้านสีระมัน",
           "latitude": 13.038727,
           "longitude": 101.66171,
-          "sum_rainfall_mm": 187.60000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 188.00000000000003,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "270502",
@@ -27997,8 +34738,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ท่าเกวียน",
           "latitude": 13.68734,
           "longitude": 102.28413,
-          "sum_rainfall_mm": 179.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 170.40000000000003,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "361305",
@@ -28010,8 +34751,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ทุ่งลุยลาย",
           "latitude": 16.499163,
           "longitude": 101.67309,
-          "sum_rainfall_mm": 147.00000000000003,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 154.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "302501",
@@ -28023,21 +34764,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.วังน้ำเขียว",
           "latitude": 14.37476,
           "longitude": 101.86537,
-          "sum_rainfall_mm": 126.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
-        },
-        {
-          "geocode": "312003",
-          "tambon": "ต.ลำนางรอง",
-          "amphoe": "อ.โนนดินแดง",
-          "province": "จ.บุรีรัมย์",
-          "region_id": "3",
-          "region_name": "ภาคตะวันออกเฉียงเหนือ",
-          "station": "อบต.ลำนางรอง",
-          "latitude": 14.1899,
-          "longitude": 102.68618,
-          "sum_rainfall_mm": 144.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 136.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "310808",
@@ -28049,8 +34777,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "โรงเรียนบ้านสายโท ๔ ใต้",
           "latitude": 14.370019,
           "longitude": 103.14561,
-          "sum_rainfall_mm": 208.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 192.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "310601",
@@ -28062,8 +34790,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ละหานทราย",
           "latitude": 14.39567,
           "longitude": 102.84726,
-          "sum_rainfall_mm": 144.60000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 137.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "711104",
@@ -28075,8 +34803,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดหินแท่น (K.62)",
           "latitude": 13.78093,
           "longitude": 99.42085,
-          "sum_rainfall_mm": 110.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 114.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "710701",
@@ -28088,8 +34816,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดท่าขนุน",
           "latitude": 14.742605,
           "longitude": 98.635243,
-          "sum_rainfall_mm": 120.5,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 121.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "710305",
+          "tambon": "ต.หลุมรัง",
+          "amphoe": "อ.บ่อพลอย",
+          "province": "จ.กาญจนบุรี",
+          "region_id": "5",
+          "region_name": "ภาคตะวันตก",
+          "station": "ฝายทดน้ำลำเหย",
+          "latitude": 14.4678,
+          "longitude": 99.4973,
+          "sum_rainfall_mm": 101.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "710108",
@@ -28101,8 +34842,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านท่ามะนาว",
           "latitude": 14.1647,
           "longitude": 99.2754,
-          "sum_rainfall_mm": 106.5,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 106.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "710404",
@@ -28114,8 +34855,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สำนักงานประปา  อบต.ท่ากระดาน สาขาแก่งแคบ",
           "latitude": 14.365097,
           "longitude": 99.154023,
-          "sum_rainfall_mm": 133.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 130.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "710401",
@@ -28127,8 +34868,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์ป่าแม่ปลาสร้อย",
           "latitude": 14.6054,
           "longitude": 99.1704,
-          "sum_rainfall_mm": 136.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 139.10000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "700514",
@@ -28140,8 +34881,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านโป่ง",
           "latitude": 13.81866,
           "longitude": 99.86508,
-          "sum_rainfall_mm": 112.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 107.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "103302",
@@ -28257,8 +34998,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อาคารเลขที่ ๙๐๑",
           "latitude": 13.85604,
           "longitude": 100.57558,
-          "sum_rainfall_mm": 212.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 241.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "103002",
@@ -28322,8 +35063,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อุทยานเฉลิมพระเกียรติพระบาทสมเด็จพระบรมชนกาธิเบศร มหาภูมิพลอดุลยเดชมหาราช บรมนาถบพิตร",
           "latitude": 13.76138,
           "longitude": 100.52066,
-          "sum_rainfall_mm": 213.00000000000003,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 224.00000000000003,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "101902",
@@ -28335,8 +35076,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองมหาสวัสดิ บางกรวย-สวนผัก",
           "latitude": 13.79965,
           "longitude": 100.43863,
-          "sum_rainfall_mm": 137.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 144.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "101601",
@@ -28361,8 +35102,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองแสนแสบ บางกะปิ",
           "latitude": 13.76131,
           "longitude": 100.61601,
-          "sum_rainfall_mm": 239.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 260.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "102107",
@@ -28387,8 +35128,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองลาดพร้าว วัดบางบัว",
           "latitude": 13.85402,
           "longitude": 100.58746,
-          "sum_rainfall_mm": 205.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 231.39999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "104002",
@@ -28413,8 +35154,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองภาษีเจริญ เพชรเกษม69",
           "latitude": 13.69158,
           "longitude": 100.38127,
-          "sum_rainfall_mm": 201.20000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 201.2,
+          "observed_at": "2026-09-26T05:00:00+07:00"
         },
         {
           "geocode": "102901",
@@ -28530,7 +35271,7 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สนข.ประเวศ",
           "latitude": 13.71701,
           "longitude": 100.69472,
-          "sum_rainfall_mm": 125.0,
+          "sum_rainfall_mm": 124.5,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -28543,7 +35284,7 @@ window.IEAT_THAIWATER_DATA = {
           "station": "จุดวัดบึงหนองบอน",
           "latitude": 13.69529,
           "longitude": 100.65375,
-          "sum_rainfall_mm": 145.0,
+          "sum_rainfall_mm": 144.5,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -28621,7 +35362,7 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สนข.มีนบุรี",
           "latitude": 13.8136,
           "longitude": 100.73122,
-          "sum_rainfall_mm": 153.0,
+          "sum_rainfall_mm": 152.5,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -28673,7 +35414,7 @@ window.IEAT_THAIWATER_DATA = {
           "station": "จุดวัด ค.ประเวศฯ-ถ.ร่วมพัฒนา",
           "latitude": 13.70097,
           "longitude": 100.85106,
-          "sum_rainfall_mm": 113.5,
+          "sum_rainfall_mm": 112.5,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -28686,8 +35427,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองลำปลาทิว ลาดกระบัง",
           "latitude": 13.7407,
           "longitude": 100.79468,
-          "sum_rainfall_mm": 278.20000000000005,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 286.40000000000003,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "103801",
@@ -28699,8 +35440,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองลาดพร้าว ปากคลอง2สายใต้",
           "latitude": 13.93183,
           "longitude": 100.63952,
-          "sum_rainfall_mm": 206.00000000000003,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 232.59999999999997,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "104501",
@@ -28738,8 +35479,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อโศก",
           "latitude": 13.74325,
           "longitude": 100.562164,
-          "sum_rainfall_mm": 128.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 130.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "103401",
@@ -28855,7 +35596,7 @@ window.IEAT_THAIWATER_DATA = {
           "station": "จุดวัด ค.ลำผักชี-รร.ลำผักชี",
           "latitude": 13.79205,
           "longitude": 100.83524,
-          "sum_rainfall_mm": 109.5,
+          "sum_rainfall_mm": 109.0,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -28868,7 +35609,7 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ปตร.คลองสิบสาม",
           "latitude": 13.85859,
           "longitude": 100.86754,
-          "sum_rainfall_mm": 101.5,
+          "sum_rainfall_mm": 101.0,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -28907,8 +35648,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.กำแพงแสน",
           "latitude": 14.00326,
           "longitude": 99.98091,
-          "sum_rainfall_mm": 114.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 118.79999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "730324",
@@ -28920,8 +35661,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานนครชัยศรี",
           "latitude": 13.79217,
           "longitude": 100.19817,
-          "sum_rainfall_mm": 197.39999999999998,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 198.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "730301",
@@ -28933,8 +35674,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.นครชัยศรี",
           "latitude": 13.79036,
           "longitude": 100.19051,
-          "sum_rainfall_mm": 194.79999999999998,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 195.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "730513",
@@ -28946,8 +35687,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองนราภิรมย์ (บางเลน)",
           "latitude": 13.88207,
           "longitude": 100.29086,
-          "sum_rainfall_mm": 111.60000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 118.60000000000001,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "730703",
@@ -28959,8 +35700,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ศาลาดิน",
           "latitude": 13.80777,
           "longitude": 100.27417,
-          "sum_rainfall_mm": 124.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 127.39999999999999,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "120501",
@@ -28972,8 +35713,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองพระพิมล (ไทรน้อย)",
           "latitude": 13.97396,
           "longitude": 100.31901,
-          "sum_rainfall_mm": 119.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 126.19999999999999,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "120502",
@@ -28985,8 +35726,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ราษฎร์นิยม",
           "latitude": 14.10388,
           "longitude": 100.32209,
-          "sum_rainfall_mm": 115.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 120.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "120603",
@@ -28998,8 +35739,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานนวลฉวี",
           "latitude": 13.94749,
           "longitude": 100.53507,
-          "sum_rainfall_mm": 156.60000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 188.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "130207",
@@ -29011,8 +35752,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "รร.วัดอู่ข้าว",
           "latitude": 14.19111,
           "longitude": 100.75421,
-          "sum_rainfall_mm": 126.80000000000001,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 159.40000000000003,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "130306",
@@ -29024,8 +35765,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เหนือปตร.พระธรรมราชา",
           "latitude": 14.07771,
           "longitude": 100.89208,
-          "sum_rainfall_mm": 139.39999999999998,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 155.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "130301",
@@ -29037,8 +35778,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ปตร.จุฬาลงกรณ์",
           "latitude": 13.98135,
           "longitude": 100.6057,
-          "sum_rainfall_mm": 162.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 192.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "130114",
@@ -29050,8 +35791,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองเปรมประชากร หลักหก",
           "latitude": 13.96562,
           "longitude": 100.60262,
-          "sum_rainfall_mm": 151.20000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 180.60000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "130604",
@@ -29063,8 +35804,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองหกวา ลำลูกกา คลอง8",
           "latitude": 13.9416,
           "longitude": 100.77499,
-          "sum_rainfall_mm": 126.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 162.99999999999997,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "130407",
@@ -29076,8 +35817,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองระพีพัฒน์แยกใต้ หนองเสือ",
           "latitude": 14.2206,
           "longitude": 100.89168,
-          "sum_rainfall_mm": 104.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 115.19999999999999,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "130404",
@@ -29089,8 +35830,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านน้อยสว่าง",
           "latitude": 14.1652,
           "longitude": 100.77855,
-          "sum_rainfall_mm": 178.40000000000003,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 192.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "110602",
@@ -29102,8 +35843,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ศีรษะจรเข้น้อย",
           "latitude": 13.67777,
           "longitude": 100.7945,
-          "sum_rainfall_mm": 261.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 270.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "110603",
@@ -29115,8 +35856,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองจระเข้ใหญ่ บางเสาธง (วัดศรีวารีน้อย)",
           "latitude": 13.66949,
           "longitude": 100.80058,
-          "sum_rainfall_mm": 242.39999999999998,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 251.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "110409",
@@ -29128,8 +35869,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ปตร.วัดบางกระเจ้านอก",
           "latitude": 13.689612,
           "longitude": 100.554886,
-          "sum_rainfall_mm": 131.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 134.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "110410",
@@ -29141,8 +35882,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ตลาดน้ำบางน้ำผึ้ง",
           "latitude": 13.678656,
           "longitude": 100.57356,
-          "sum_rainfall_mm": 104.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 107.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "110408",
@@ -29154,8 +35895,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ปตร. คลองลัดบางยอ 1",
           "latitude": 13.676162,
           "longitude": 100.553085,
-          "sum_rainfall_mm": 134.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 136.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "110503",
@@ -29167,8 +35908,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.แหลมฟ้าผ่า",
           "latitude": 13.54701,
           "longitude": 100.53756,
-          "sum_rainfall_mm": 150.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 155.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "110115",
@@ -29206,8 +35947,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เมืองสมุทรสาคร",
           "latitude": 13.58598,
           "longitude": 100.23048,
-          "sum_rainfall_mm": 136.39999999999998,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 137.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "740116",
+          "tambon": "ต.บางกระเจ้า",
+          "amphoe": "อ.เมืองสมุทรสาคร",
+          "province": "จ.สมุทรสาคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "อบต.บางกระเจ้า",
+          "latitude": 13.52146,
+          "longitude": 100.19283,
+          "sum_rainfall_mm": 100.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "740113",
@@ -29219,8 +35973,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองมหาชัย วัดพันท้ายนรสิงห์",
           "latitude": 13.58184,
           "longitude": 100.36587,
-          "sum_rainfall_mm": 123.80000000000001,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 124.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         }
       ],
       "area_nearby": [
@@ -29235,7 +35989,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 16.135833,
           "longitude": 99.784167,
           "sum_rainfall_mm": 109.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "620411",
@@ -29247,8 +36001,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานต้นน้ำ (เกาะแก้ว-ตลิ่งสูง)",
           "latitude": 15.91465,
           "longitude": 99.4194,
-          "sum_rainfall_mm": 126.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 100.19999999999999,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "620411",
@@ -29261,7 +36015,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 15.90176,
           "longitude": 99.4704,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "620404",
@@ -29273,8 +36027,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ขาณุวรลักษบุรี",
           "latitude": 16.06475,
           "longitude": 99.8603,
-          "sum_rainfall_mm": 110.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 103.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "620406",
@@ -29286,8 +36040,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.สลกบาตร",
           "latitude": 15.97907,
           "longitude": 99.82462,
-          "sum_rainfall_mm": 106.60000000000001,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 100.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "620501",
@@ -29299,8 +36053,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.คลองขลุง",
           "latitude": 16.20864,
           "longitude": 99.70895,
-          "sum_rainfall_mm": 179.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 179.20000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "620504",
@@ -29312,8 +36066,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองวังหิน",
           "latitude": 16.229583,
           "longitude": 99.696722,
-          "sum_rainfall_mm": 198.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 197.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "620509",
@@ -29325,8 +36079,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สำนักสงฆ์มอหินเพลิง",
           "latitude": 16.151548,
           "longitude": 99.527517,
-          "sum_rainfall_mm": 150.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 146.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "620301",
@@ -29338,8 +36092,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านรวงผึ้งพัฒนา",
           "latitude": 16.197635,
           "longitude": 99.291834,
-          "sum_rainfall_mm": 35.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 31.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "620301",
@@ -29352,7 +36106,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 16.097857,
           "longitude": 99.11591,
           "sum_rainfall_mm": 1.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "620303",
@@ -29364,8 +36118,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านกะเหรี่ยงน้ำตก",
           "latitude": 16.126938,
           "longitude": 99.306881,
-          "sum_rainfall_mm": 27.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 24.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "620303",
@@ -29377,8 +36131,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.คลองลานพัฒนา",
           "latitude": 16.12253,
           "longitude": 99.32932,
-          "sum_rainfall_mm": 125.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 120.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "620302",
@@ -29390,21 +36144,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ฝายคลองสวนหมาก",
           "latitude": 16.330917,
           "longitude": 99.26475,
-          "sum_rainfall_mm": 29.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
-        },
-        {
-          "geocode": "620302",
-          "tambon": "ต.โป่งน้ำร้อน",
-          "amphoe": "อ.คลองลาน",
-          "province": "จ.กำแพงเพชร",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านโป่งน้ำร้อน",
-          "latitude": 16.328463,
-          "longitude": 99.298103,
-          "sum_rainfall_mm": 21.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 26.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "620302",
@@ -29416,8 +36157,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านคลองมดแดง",
           "latitude": 16.406402,
           "longitude": 99.237542,
-          "sum_rainfall_mm": 25.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 24.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "620302",
+          "tambon": "ต.โป่งน้ำร้อน",
+          "amphoe": "อ.คลองลาน",
+          "province": "จ.กำแพงเพชร",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านโป่งน้ำร้อน",
+          "latitude": 16.328463,
+          "longitude": 99.298103,
+          "sum_rainfall_mm": 21.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "620302",
@@ -29429,8 +36183,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ คล.4 (คลองสวนหมาก)",
           "latitude": 16.3287,
           "longitude": 99.2576,
-          "sum_rainfall_mm": 41.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 41.800000000000004,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "620304",
@@ -29442,34 +36196,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านเพชรนิยม",
           "latitude": 16.289125,
           "longitude": 99.274877,
-          "sum_rainfall_mm": 20.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
-        },
-        {
-          "geocode": "620903",
-          "tambon": "ต.ปางตาไว",
-          "amphoe": "อ.ปางศิลาทอง",
-          "province": "จ.กำแพงเพชร",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านไพรสวรรค์",
-          "latitude": 16.060747,
-          "longitude": 99.384051,
-          "sum_rainfall_mm": 41.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
-        },
-        {
-          "geocode": "620903",
-          "tambon": "ต.ปางตาไว",
-          "amphoe": "อ.ปางศิลาทอง",
-          "province": "จ.กำแพงเพชร",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านปางเหนือ",
-          "latitude": 16.062207,
-          "longitude": 99.314654,
-          "sum_rainfall_mm": 57.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 19.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "620903",
@@ -29481,8 +36209,34 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านตากฟ้าพัฒนา",
           "latitude": 15.974194,
           "longitude": 99.37996,
-          "sum_rainfall_mm": 16.5,
-          "observed_at": "2026-09-26T01:00:00+07:00"
+          "sum_rainfall_mm": 14.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "620903",
+          "tambon": "ต.ปางตาไว",
+          "amphoe": "อ.ปางศิลาทอง",
+          "province": "จ.กำแพงเพชร",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านไพรสวรรค์",
+          "latitude": 16.060747,
+          "longitude": 99.384051,
+          "sum_rainfall_mm": 39.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "620903",
+          "tambon": "ต.ปางตาไว",
+          "amphoe": "อ.ปางศิลาทอง",
+          "province": "จ.กำแพงเพชร",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านปางเหนือ",
+          "latitude": 16.062207,
+          "longitude": 99.314654,
+          "sum_rainfall_mm": 49.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "620903",
@@ -29494,7 +36248,7 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ที่ทำการอุทยานแห่งชาติแม่วงก์",
           "latitude": 16.039022,
           "longitude": 99.233345,
-          "sum_rainfall_mm": 157.8,
+          "sum_rainfall_mm": 156.4,
           "observed_at": "2026-09-26T01:00:00+07:00"
         },
         {
@@ -29507,8 +36261,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.คุ้งสำเภา",
           "latitude": 15.31006,
           "longitude": 100.08173,
-          "sum_rainfall_mm": 154.39999999999998,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 154.79999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "180202",
@@ -29520,8 +36274,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ปตร.มโนรมย์",
           "latitude": 15.3277,
           "longitude": 100.10913,
-          "sum_rainfall_mm": 151.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 151.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "180202",
@@ -29533,8 +36287,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เหนือ ปตร.มโนรมย์",
           "latitude": 15.33046,
           "longitude": 100.10331,
-          "sum_rainfall_mm": 145.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 145.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "180104",
@@ -29546,21 +36300,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "T.ปตร.บรมธาตุ",
           "latitude": 15.15713,
           "longitude": 100.152981,
-          "sum_rainfall_mm": 172.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
-        },
-        {
-          "geocode": "180104",
-          "tambon": "ต.ชัยนาท",
-          "amphoe": "อ.เมืองชัยนาท",
-          "province": "จ.ชัยนาท",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "ท้ายปตร.บรมธาตุ",
-          "latitude": 15.15785,
-          "longitude": 100.15282,
-          "sum_rainfall_mm": 204.79999999999998,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 173.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "180104",
@@ -29572,8 +36313,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เหนือปตร.บรมธาตุ",
           "latitude": 15.15816,
           "longitude": 100.15352,
-          "sum_rainfall_mm": 208.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 208.20000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "180104",
+          "tambon": "ต.ชัยนาท",
+          "amphoe": "อ.เมืองชัยนาท",
+          "province": "จ.ชัยนาท",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "ท้ายปตร.บรมธาตุ",
+          "latitude": 15.15785,
+          "longitude": 100.15282,
+          "sum_rainfall_mm": 204.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "180107",
@@ -29585,8 +36339,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานธรรมจักร(วัดธรรมามูล)",
           "latitude": 15.25029,
           "longitude": 100.08347,
-          "sum_rainfall_mm": 157.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 157.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "180102",
@@ -29598,8 +36352,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ท้ายปตร.มหาราช",
           "latitude": 15.16144,
           "longitude": 100.17268,
-          "sum_rainfall_mm": 211.99999999999997,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 211.60000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "180102",
@@ -29611,8 +36365,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เหนือปตร.มหาราช",
           "latitude": 15.15892,
           "longitude": 100.17329,
-          "sum_rainfall_mm": 201.99999999999997,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 201.39999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "180106",
@@ -29624,8 +36378,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "T.ปตร.พลเทพ",
           "latitude": 15.214294,
           "longitude": 100.073325,
-          "sum_rainfall_mm": 165.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 168.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "180106",
@@ -29651,7 +36405,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 15.225,
           "longitude": 100.07824,
           "sum_rainfall_mm": 166.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "180302",
@@ -29663,8 +36417,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "T.ปตร.มะขามเฒ่า",
           "latitude": 15.222455,
           "longitude": 100.062221,
-          "sum_rainfall_mm": 162.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 163.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "180302",
@@ -29677,7 +36431,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 15.22229,
           "longitude": 100.06236,
           "sum_rainfall_mm": 180.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "180301",
@@ -29689,8 +36443,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.วัดสิงห์",
           "latitude": 15.2584,
           "longitude": 100.04493,
-          "sum_rainfall_mm": 145.60000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 146.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "180405",
@@ -29702,8 +36456,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สรรพยา",
           "latitude": 15.10907,
           "longitude": 100.26785,
-          "sum_rainfall_mm": 158.40000000000003,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 159.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "180401",
@@ -29715,8 +36469,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.สรรพยา",
           "latitude": 15.13217,
           "longitude": 100.25129,
-          "sum_rainfall_mm": 182.60000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 182.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "180611",
@@ -29729,7 +36483,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 15.05395,
           "longitude": 100.01206,
           "sum_rainfall_mm": 108.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "180611",
@@ -29742,7 +36496,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 15.05349,
           "longitude": 100.01175,
           "sum_rainfall_mm": 142.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "180601",
@@ -29754,8 +36508,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.หันคา",
           "latitude": 14.96964,
           "longitude": 100.01039,
-          "sum_rainfall_mm": 128.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 128.39999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "260309",
@@ -29768,7 +36522,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 14.364806,
           "longitude": 101.09028,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "260310",
@@ -29780,8 +36534,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ศรีกะอาง",
           "latitude": 14.27798,
           "longitude": 101.12879,
-          "sum_rainfall_mm": 103.19999999999999,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 112.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "260207",
@@ -29793,8 +36547,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านท่ามะปราง",
           "latitude": 14.222935,
           "longitude": 101.356088,
-          "sum_rainfall_mm": 68.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 85.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "260207",
@@ -29806,7 +36560,7 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ขญ.20 (น้ำตกเหวนรก)",
           "latitude": 14.28622,
           "longitude": 101.39359,
-          "sum_rainfall_mm": 8.4,
+          "sum_rainfall_mm": 8.2,
           "observed_at": "2026-09-25T15:00:00+07:00"
         },
         {
@@ -29819,8 +36573,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.นาหินลาด",
           "latitude": 14.20724,
           "longitude": 101.35025,
-          "sum_rainfall_mm": 135.60000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 173.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "260112",
@@ -29833,7 +36587,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 14.333768,
           "longitude": 101.195938,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "260102",
@@ -29845,8 +36599,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เขื่อนนายก",
           "latitude": 14.18205,
           "longitude": 101.162164,
-          "sum_rainfall_mm": 144.5,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 168.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "260107",
@@ -29858,8 +36612,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ศรีจุฬา",
           "latitude": 14.07064,
           "longitude": 101.13746,
-          "sum_rainfall_mm": 300.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 311.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "260109",
@@ -29872,7 +36626,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 14.245718,
           "longitude": 101.27481,
           "sum_rainfall_mm": 37.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "260110",
@@ -29884,8 +36638,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านดง",
           "latitude": 14.321565,
           "longitude": 101.306075,
-          "sum_rainfall_mm": 52.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 54.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "260110",
@@ -29897,8 +36651,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานคลองวังตะไคร้",
           "latitude": 14.321305,
           "longitude": 101.30604,
-          "sum_rainfall_mm": 89.80000000000001,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 91.6,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "260110",
@@ -29911,7 +36665,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 14.3693,
           "longitude": 101.2712,
           "sum_rainfall_mm": 0.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "260111",
@@ -29923,8 +36677,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ที่ทำการน้ำตกนางรอง",
           "latitude": 14.333356,
           "longitude": 101.320856,
-          "sum_rainfall_mm": 62.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 65.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "260111",
@@ -29936,8 +36690,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานคลองนางรอง",
           "latitude": 14.315195,
           "longitude": 101.312836,
-          "sum_rainfall_mm": 95.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 98.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "260405",
@@ -29949,8 +36703,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สมบูรณ์",
           "latitude": 13.970389,
           "longitude": 101.138699,
-          "sum_rainfall_mm": 166.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 190.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "260404",
@@ -29962,8 +36716,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองแม่น้ำใน(โพธิ์แทน)",
           "latitude": 14.212921,
           "longitude": 100.942453,
-          "sum_rainfall_mm": 257.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 269.5,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "260409",
@@ -29975,8 +36729,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "องครักษ์",
           "latitude": 14.113633,
           "longitude": 101.01952,
-          "sum_rainfall_mm": 142.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 145.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "600605",
@@ -29988,8 +36742,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เก้าเลี้ยว",
           "latitude": 15.85051,
           "longitude": 100.05206,
-          "sum_rainfall_mm": 101.20000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 102.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "600201",
@@ -30001,21 +36755,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.โกรกพระ",
           "latitude": 15.55312,
           "longitude": 100.0709,
-          "sum_rainfall_mm": 162.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
-        },
-        {
-          "geocode": "600702",
-          "tambon": "ต.ช่องแค",
-          "amphoe": "อ.ตาคลี",
-          "province": "จ.นครสวรรค์",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "เขาวง",
-          "latitude": 15.181689,
-          "longitude": 100.41453,
-          "sum_rainfall_mm": 145.40000000000003,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 162.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "600702",
@@ -30028,7 +36769,20 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 15.169044,
           "longitude": 100.41471,
           "sum_rainfall_mm": 93.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "600702",
+          "tambon": "ต.ช่องแค",
+          "amphoe": "อ.ตาคลี",
+          "province": "จ.นครสวรรค์",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "เขาวง",
+          "latitude": 15.181689,
+          "longitude": 100.41453,
+          "sum_rainfall_mm": 146.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "600701",
@@ -30040,8 +36794,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ตาคลี",
           "latitude": 15.29119,
           "longitude": 100.38288,
-          "sum_rainfall_mm": 141.60000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 140.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "600710",
@@ -30053,8 +36807,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "T.ปตร.ช่องแค",
           "latitude": 15.145483,
           "longitude": 100.411717,
-          "sum_rainfall_mm": 98.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 101.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "600710",
@@ -30066,8 +36820,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เหนือปตร.ช่องแค",
           "latitude": 15.14624,
           "longitude": 100.41298,
-          "sum_rainfall_mm": 161.60000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 163.60000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "600710",
@@ -30079,8 +36833,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ท้ายปตร.ช่องแค",
           "latitude": 15.14554,
           "longitude": 100.41321,
-          "sum_rainfall_mm": 158.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 160.20000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "600801",
@@ -30092,8 +36846,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.ท่าตะโก",
           "latitude": 15.63248,
           "longitude": 100.47483,
-          "sum_rainfall_mm": 5.6000000000000005,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 5.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "600805",
@@ -30105,8 +36859,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "TC.60",
           "latitude": 15.67,
           "longitude": 100.334167,
-          "sum_rainfall_mm": 134.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 135.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "601007",
@@ -30118,8 +36872,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.เขาทอง",
           "latitude": 15.5707,
           "longitude": 100.18319,
-          "sum_rainfall_mm": 109.19999999999999,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 111.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "601008",
@@ -30131,8 +36885,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "พยุหะคีรี",
           "latitude": 15.42655,
           "longitude": 100.13471,
-          "sum_rainfall_mm": 113.79999999999998,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 114.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "600908",
@@ -30144,21 +36898,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.ไพศาลี",
           "latitude": 15.60012,
           "longitude": 100.6572,
-          "sum_rainfall_mm": 140.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
-        },
-        {
-          "geocode": "600906",
-          "tambon": "ต.วังข่อย",
-          "amphoe": "อ.ไพศาลี",
-          "province": "จ.นครสวรรค์",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านหัวพุ",
-          "latitude": 15.564188,
-          "longitude": 100.705829,
-          "sum_rainfall_mm": 60.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 141.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "600906",
@@ -30170,8 +36911,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านซับสมบูรณ์",
           "latitude": 15.566287,
           "longitude": 100.778566,
-          "sum_rainfall_mm": 54.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 55.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "600906",
+          "tambon": "ต.วังข่อย",
+          "amphoe": "อ.ไพศาลี",
+          "province": "จ.นครสวรรค์",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านหัวพุ",
+          "latitude": 15.564188,
+          "longitude": 100.705829,
+          "sum_rainfall_mm": 61.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "140201",
@@ -30183,8 +36937,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ท่าเรือ",
           "latitude": 14.56014,
           "longitude": 100.71987,
-          "sum_rainfall_mm": 185.59999999999997,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 186.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140203",
@@ -30196,8 +36950,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เหนือปตร.พระนารายน์",
           "latitude": 14.5583,
           "longitude": 100.76205,
-          "sum_rainfall_mm": 204.20000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 205.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140203",
@@ -30209,8 +36963,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ท้ายปตร.พระนารายน์",
           "latitude": 14.55667,
           "longitude": 100.76201,
-          "sum_rainfall_mm": 216.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 217.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140303",
@@ -30222,8 +36976,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "นครหลวง",
           "latitude": 14.40269,
           "longitude": 100.5864,
-          "sum_rainfall_mm": 127.20000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 144.20000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140503",
@@ -30235,8 +36989,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองบางบาล",
           "latitude": 14.42303,
           "longitude": 100.48186,
-          "sum_rainfall_mm": 162.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 175.40000000000003,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140513",
@@ -30248,8 +37002,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองบางหลวง",
           "latitude": 14.4158,
           "longitude": 100.44071,
-          "sum_rainfall_mm": 132.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 144.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140702",
@@ -30261,8 +37015,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดจอมเกษ",
           "latitude": 14.414349,
           "longitude": 100.55782,
-          "sum_rainfall_mm": 141.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 142.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140714",
@@ -30274,8 +37028,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บางปะหัน",
           "latitude": 14.42731,
           "longitude": 100.55605,
-          "sum_rainfall_mm": 144.20000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 151.60000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140618",
@@ -30287,8 +37041,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บางปะอิน",
           "latitude": 14.30455,
           "longitude": 100.56645,
-          "sum_rainfall_mm": 111.19999999999999,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 134.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140604",
@@ -30300,8 +37054,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดขนอนใต้",
           "latitude": 14.288251,
           "longitude": 100.61132,
-          "sum_rainfall_mm": 91.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 116.60000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140812",
@@ -30313,8 +37067,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ปตร.ลาดชิด (ทุ่งผักไห่)",
           "latitude": 14.44056,
           "longitude": 100.35738,
-          "sum_rainfall_mm": 101.99999999999999,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 118.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140805",
@@ -30326,8 +37080,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ปตร.บางแก้ว (ทุ่งผักไห่)",
           "latitude": 14.436604,
           "longitude": 100.37149,
-          "sum_rainfall_mm": 123.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 141.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140806",
@@ -30339,8 +37093,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ปตร กุฎิ (ทุ่งป่าโมก)",
           "latitude": 14.412405,
           "longitude": 100.40116,
-          "sum_rainfall_mm": 122.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 138.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140816",
@@ -30352,8 +37106,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "T.ปตร.ผักไห่",
           "latitude": 14.43626,
           "longitude": 100.375495,
-          "sum_rainfall_mm": 128.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 134.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140816",
@@ -30365,8 +37119,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เหนือปตร.ผักไห่-เจ้าเจ็ด",
           "latitude": 14.43643,
           "longitude": 100.37562,
-          "sum_rainfall_mm": 138.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 157.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140814",
@@ -30378,8 +37132,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ที่ทำการกำนันตำบลลาดชิด",
           "latitude": 14.44142,
           "longitude": 100.35564,
-          "sum_rainfall_mm": 132.60000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 149.20000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140815",
@@ -30391,8 +37145,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานข้ามแม่น้ำน้อย (ทุ่งผักไห่)",
           "latitude": 14.498449,
           "longitude": 100.36825,
-          "sum_rainfall_mm": 115.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 124.60000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140802",
@@ -30404,8 +37158,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ปตร.ลาดชะโด (ทุ่งผักไห่)",
           "latitude": 14.464386,
           "longitude": 100.366005,
-          "sum_rainfall_mm": 98.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 109.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140116",
@@ -30417,8 +37171,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ปตร.หันตรา",
           "latitude": 14.37456,
           "longitude": 100.58441,
-          "sum_rainfall_mm": 75.79999999999998,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 90.00000000000001,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140108",
@@ -30430,8 +37184,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "พระนครศรีอยุธยา",
           "latitude": 14.36913,
           "longitude": 100.52861,
-          "sum_rainfall_mm": 114.60000000000001,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 128.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140113",
@@ -30443,8 +37197,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ปตร.กลางคลองข้าวเม่า (วัดกระสังข์)",
           "latitude": 14.357306,
           "longitude": 100.60569,
-          "sum_rainfall_mm": 101.60000000000001,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 117.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "140104",
@@ -30456,8 +37210,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ปตร.กระมัง (ปากคลองข้าวเม่า)",
           "latitude": 14.355055,
           "longitude": 100.58354,
-          "sum_rainfall_mm": 88.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 104.79999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "141003",
@@ -30469,8 +37223,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองพระยาบรรลือ",
           "latitude": 14.16476,
           "longitude": 100.30725,
-          "sum_rainfall_mm": 125.79999999999998,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 138.79999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "141106",
@@ -30482,8 +37236,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ท้ายปตร.พระอินทราชา",
           "latitude": 14.14378,
           "longitude": 100.62075,
-          "sum_rainfall_mm": 143.20000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 185.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "141103",
@@ -30495,8 +37249,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เหนือปตร.พระอินทราชา",
           "latitude": 14.14407,
           "longitude": 100.62136,
-          "sum_rainfall_mm": 143.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 188.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "141217",
@@ -30508,8 +37262,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เสนา",
           "latitude": 14.31976,
           "longitude": 100.37952,
-          "sum_rainfall_mm": 138.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 156.40000000000003,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "141201",
@@ -30521,8 +37275,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เสนา (ทุ่งบางบาล-บ้านแพน)",
           "latitude": 14.327773,
           "longitude": 100.405464,
-          "sum_rainfall_mm": 156.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 182.39999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "141406",
@@ -30534,8 +37288,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองช่องสะเดา",
           "latitude": 14.344762,
           "longitude": 100.670105,
-          "sum_rainfall_mm": 132.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 135.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "670601",
@@ -30547,8 +37301,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ศรีเทพ",
           "latitude": 15.43789,
           "longitude": 101.16249,
-          "sum_rainfall_mm": 107.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 107.39999999999999,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "160905",
@@ -30561,7 +37315,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 15.336768,
           "longitude": 100.831599,
           "sum_rainfall_mm": 10.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "160902",
@@ -30574,7 +37328,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 15.337537,
           "longitude": 100.960186,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "160903",
@@ -30586,8 +37340,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านเขาขุยพัฒนา",
           "latitude": 15.528146,
           "longitude": 100.843028,
-          "sum_rainfall_mm": 35.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 37.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "160903",
@@ -30599,8 +37353,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.หนองมะค่า",
           "latitude": 15.4321,
           "longitude": 100.9245,
-          "sum_rainfall_mm": 147.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 150.39999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "160422",
@@ -30613,7 +37367,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 15.080861,
           "longitude": 100.965868,
           "sum_rainfall_mm": 37.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "160414",
@@ -30625,8 +37379,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ท่ามะนาว",
           "latitude": 15.19934,
           "longitude": 101.16389,
-          "sum_rainfall_mm": 121.60000000000001,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 122.19999999999999,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "160410",
@@ -30638,8 +37392,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เขตห้ามล่าสัตว์ป่าเขาสมโภชน์",
           "latitude": 15.181677,
           "longitude": 101.29398,
-          "sum_rainfall_mm": 61.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 61.8,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "160406",
@@ -30651,8 +37405,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานคลองลำสนธิ",
           "latitude": 15.246861,
           "longitude": 101.19566,
-          "sum_rainfall_mm": 133.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 135.20000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "160606",
@@ -30665,7 +37419,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 14.940779,
           "longitude": 100.59284,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "160621",
@@ -30677,8 +37431,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สถานีสูบน้ำปากคลองสายห้วยแก้ว (ทุ่งซ้ายคลองชัยนาท)",
           "latitude": 15.082755,
           "longitude": 100.554504,
-          "sum_rainfall_mm": 102.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 104.99999999999999,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "160201",
@@ -30690,8 +37444,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองส้ม",
           "latitude": 14.822028,
           "longitude": 101.014594,
-          "sum_rainfall_mm": 121.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 122.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "160207",
@@ -30703,8 +37457,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เหนือเขื่อนป่าสัก",
           "latitude": 14.848254,
           "longitude": 101.090205,
-          "sum_rainfall_mm": 105.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 108.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "160106",
@@ -30716,8 +37470,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ชุมชนเขาสามยอด (บ้านน้ำจั้น หมู่ 2)",
           "latitude": 14.825584,
           "longitude": 100.69195,
-          "sum_rainfall_mm": 55.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 56.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "160109",
@@ -30729,8 +37483,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อ่างเก็บน้ำห้วยซับเหล็ก",
           "latitude": 14.814826,
           "longitude": 100.77581,
-          "sum_rainfall_mm": 70.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 70.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "160109",
@@ -30742,8 +37496,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อ่างเก็บน้ำห้วยส้ม",
           "latitude": 14.865248,
           "longitude": 100.861244,
-          "sum_rainfall_mm": 11.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 11.400000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "160117",
@@ -30755,8 +37509,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทรบ. ปากคลองห้าวา (ทุ่งท่าวุ้ง)",
           "latitude": 14.818599,
           "longitude": 100.576515,
-          "sum_rainfall_mm": 108.80000000000001,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 110.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "160122",
@@ -30768,8 +37522,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เมืองลพบุรี",
           "latitude": 14.76049,
           "longitude": 100.5996,
-          "sum_rainfall_mm": 128.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 128.59999999999997,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "161106",
@@ -30781,8 +37535,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ชอนสารเดช",
           "latitude": 15.18496,
           "longitude": 100.68131,
-          "sum_rainfall_mm": 138.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 140.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "750205",
@@ -30794,8 +37548,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดบางคนฑีใน",
           "latitude": 13.4913,
           "longitude": 99.9445,
-          "sum_rainfall_mm": 112.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 113.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "750109",
@@ -30807,8 +37561,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": " สะพานข้ามคลองโคน",
           "latitude": 13.3319,
           "longitude": 99.96896,
-          "sum_rainfall_mm": 112.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 116.80000000000001,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "750111",
@@ -30820,8 +37574,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดศรัทธาธรรม",
           "latitude": 13.3773,
           "longitude": 99.993,
-          "sum_rainfall_mm": 113.5,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 114.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "750101",
@@ -30833,8 +37587,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "พระรามสอง",
           "latitude": 13.38362,
           "longitude": 99.9836,
-          "sum_rainfall_mm": 134.60000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 135.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "750103",
@@ -30847,7 +37601,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 13.482,
           "longitude": 100.044,
           "sum_rainfall_mm": 95.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "190603",
@@ -30859,8 +37613,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานคลองส่งน้ำชลประทาน บ้านสร่างโศก",
           "latitude": 14.650794,
           "longitude": 100.742775,
-          "sum_rainfall_mm": 122.39999999999999,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 123.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "191203",
@@ -30872,8 +37626,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ฝายคลองสุคต",
           "latitude": 14.863621,
           "longitude": 101.119957,
-          "sum_rainfall_mm": 133.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 134.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "191203",
@@ -30885,8 +37639,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.วังม่วง",
           "latitude": 14.84867,
           "longitude": 101.14549,
-          "sum_rainfall_mm": 141.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 143.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "190301",
@@ -30898,21 +37652,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ท้ายปตร.พระศรีศิลป์",
           "latitude": 14.32729,
           "longitude": 100.87117,
-          "sum_rainfall_mm": 134.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
-        },
-        {
-          "geocode": "170504",
-          "tambon": "ต.พิกุลทอง",
-          "amphoe": "อ.ท่าช้าง",
-          "province": "จ.สิงห์บุรี",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "ท้ายปตร.ยางมณี",
-          "latitude": 14.75033,
-          "longitude": 100.41498,
-          "sum_rainfall_mm": 132.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 151.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "170504",
@@ -30924,8 +37665,34 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เหนือปตร.ยางมณี",
           "latitude": 14.751,
           "longitude": 100.41463,
-          "sum_rainfall_mm": 145.79999999999998,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 146.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "170504",
+          "tambon": "ต.พิกุลทอง",
+          "amphoe": "อ.ท่าช้าง",
+          "province": "จ.สิงห์บุรี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "ท้ายปตร.ยางมณี",
+          "latitude": 14.75033,
+          "longitude": 100.41498,
+          "sum_rainfall_mm": 132.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "170203",
+          "tambon": "ต.เชิงกลัด",
+          "amphoe": "อ.บางระจัน",
+          "province": "จ.สิงห์บุรี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "ท้ายปตร.บางระจัน",
+          "latitude": 14.92539,
+          "longitude": 100.27912,
+          "sum_rainfall_mm": 117.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "170203",
@@ -30938,20 +37705,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 14.92594,
           "longitude": 100.27585,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
-        },
-        {
-          "geocode": "170203",
-          "tambon": "ต.เชิงกลัด",
-          "amphoe": "อ.บางระจัน",
-          "province": "จ.สิงห์บุรี",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "ท้ายปตร.บางระจัน",
-          "latitude": 14.92539,
-          "longitude": 100.27912,
-          "sum_rainfall_mm": 114.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "170402",
@@ -30963,8 +37717,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "พรหมบุรี",
           "latitude": 14.79091,
           "longitude": 100.45184,
-          "sum_rainfall_mm": 127.19999999999999,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 127.99999999999999,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "170106",
@@ -30976,8 +37730,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานอนุสรณ์ 100 ปีสิงห์บุรี (สะพานหลวงพ่อแพ 89)",
           "latitude": 14.870205,
           "longitude": 100.408585,
-          "sum_rainfall_mm": 105.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 106.80000000000001,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "170605",
@@ -30989,8 +37743,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สถานีสูบน้ำคลองระบายชัยนาท-ป่าสัก 2 (ทุ่งเชียงราก)",
           "latitude": 15.05502,
           "longitude": 100.32081,
-          "sum_rainfall_mm": 137.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 137.6,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "170610",
@@ -31002,8 +37756,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.โพธิ์ชัย",
           "latitude": 14.9972,
           "longitude": 100.42356,
-          "sum_rainfall_mm": 4.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 4.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "170601",
@@ -31015,8 +37769,164 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อินทร์บุรี",
           "latitude": 15.00602,
           "longitude": 100.33088,
-          "sum_rainfall_mm": 127.00000000000001,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 128.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "720302",
+          "tambon": "ต.ด่านช้าง",
+          "amphoe": "อ.ด่านช้าง",
+          "province": "จ.สุพรรณบุรี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านหนองผือ",
+          "latitude": 14.728561,
+          "longitude": 99.488429,
+          "sum_rainfall_mm": 19.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "720302",
+          "tambon": "ต.ด่านช้าง",
+          "amphoe": "อ.ด่านช้าง",
+          "province": "จ.สุพรรณบุรี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านโป่งคอม",
+          "latitude": 14.764333,
+          "longitude": 99.565738,
+          "sum_rainfall_mm": 52.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "720302",
+          "tambon": "ต.ด่านช้าง",
+          "amphoe": "อ.ด่านช้าง",
+          "province": "จ.สุพรรณบุรี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "ด่านช้าง",
+          "latitude": 14.83506,
+          "longitude": 99.66543,
+          "sum_rainfall_mm": 0.6000000000000001,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "720306",
+          "tambon": "ต.นิคมกระเสียว",
+          "amphoe": "อ.ด่านช้าง",
+          "province": "จ.สุพรรณบุรี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านท่าเดื่อ",
+          "latitude": 14.872319,
+          "longitude": 99.568946,
+          "sum_rainfall_mm": 37.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "720306",
+          "tambon": "ต.นิคมกระเสียว",
+          "amphoe": "อ.ด่านช้าง",
+          "province": "จ.สุพรรณบุรี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "อบต.นิคมกระเสียว",
+          "latitude": 14.85733,
+          "longitude": 99.57508,
+          "sum_rainfall_mm": 89.60000000000001,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "720307",
+          "tambon": "ต.วังยาว",
+          "amphoe": "อ.ด่านช้าง",
+          "province": "จ.สุพรรณบุรี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์พุเตย",
+          "latitude": 15.0219,
+          "longitude": 99.3923,
+          "sum_rainfall_mm": 102.3,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "720307",
+          "tambon": "ต.วังยาว",
+          "amphoe": "อ.ด่านช้าง",
+          "province": "จ.สุพรรณบุรี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "อบต.วังยาว",
+          "latitude": 14.89012,
+          "longitude": 99.37758,
+          "sum_rainfall_mm": 71.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "720303",
+          "tambon": "ต.ห้วยขมิ้น",
+          "amphoe": "อ.ด่านช้าง",
+          "province": "จ.สุพรรณบุรี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านกกเชียง",
+          "latitude": 14.927231,
+          "longitude": 99.50882,
+          "sum_rainfall_mm": 46.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "720303",
+          "tambon": "ต.ห้วยขมิ้น",
+          "amphoe": "อ.ด่านช้าง",
+          "province": "จ.สุพรรณบุรี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านป่าขี",
+          "latitude": 14.962566,
+          "longitude": 99.515459,
+          "sum_rainfall_mm": 37.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "720303",
+          "tambon": "ต.ห้วยขมิ้น",
+          "amphoe": "อ.ด่านช้าง",
+          "province": "จ.สุพรรณบุรี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านกกเต็น",
+          "latitude": 14.944708,
+          "longitude": 99.594671,
+          "sum_rainfall_mm": 54.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "720304",
+          "tambon": "ต.องค์พระ",
+          "amphoe": "อ.ด่านช้าง",
+          "province": "จ.สุพรรณบุรี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านวังโหรา",
+          "latitude": 14.804954,
+          "longitude": 99.441428,
+          "sum_rainfall_mm": 25.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "720304",
+          "tambon": "ต.องค์พระ",
+          "amphoe": "อ.ด่านช้าง",
+          "province": "จ.สุพรรณบุรี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านเขาธง",
+          "latitude": 14.827652,
+          "longitude": 99.330791,
+          "sum_rainfall_mm": 23.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "720803",
@@ -31029,33 +37939,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 14.772463,
           "longitude": 100.088281,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
-        },
-        {
-          "geocode": "720803",
-          "tambon": "ต.สามชุก",
-          "amphoe": "อ.สามชุก",
-          "province": "จ.สุพรรณบุรี",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "สามชุก",
-          "latitude": 14.75138,
-          "longitude": 100.09592,
-          "sum_rainfall_mm": 104.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
-        },
-        {
-          "geocode": "720803",
-          "tambon": "ต.สามชุก",
-          "amphoe": "อ.สามชุก",
-          "province": "จ.สุพรรณบุรี",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "เหนือปตร.ชลมาร์คพิจารณ์",
-          "latitude": 14.77118,
-          "longitude": 100.0884,
-          "sum_rainfall_mm": 106.19999999999999,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "720803",
@@ -31067,8 +37951,34 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ท้ายปตร.ชลมาร์คพิจารณ์",
           "latitude": 14.7706,
           "longitude": 100.08824,
-          "sum_rainfall_mm": 110.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 121.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "720803",
+          "tambon": "ต.สามชุก",
+          "amphoe": "อ.สามชุก",
+          "province": "จ.สุพรรณบุรี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "เหนือปตร.ชลมาร์คพิจารณ์",
+          "latitude": 14.77118,
+          "longitude": 100.0884,
+          "sum_rainfall_mm": 116.20000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "720803",
+          "tambon": "ต.สามชุก",
+          "amphoe": "อ.สามชุก",
+          "province": "จ.สุพรรณบุรี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "สามชุก",
+          "latitude": 14.75138,
+          "longitude": 100.09592,
+          "sum_rainfall_mm": 112.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "150302",
@@ -31080,8 +37990,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานป่าโมก",
           "latitude": 14.498074,
           "longitude": 100.44962,
-          "sum_rainfall_mm": 137.99999999999997,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 149.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "610205",
@@ -31093,8 +38003,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดโคกหม้อ",
           "latitude": 15.534278,
           "longitude": 99.899083,
-          "sum_rainfall_mm": 168.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 173.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "610201",
@@ -31106,8 +38016,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.ทัพทัน",
           "latitude": 15.45764,
           "longitude": 99.89484,
-          "sum_rainfall_mm": 146.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 156.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "610607",
@@ -31119,8 +38029,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านใหม่คลองอังวะ",
           "latitude": 15.161769,
           "longitude": 99.28896,
-          "sum_rainfall_mm": 72.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 73.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "610607",
@@ -31133,7 +38043,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 15.27736,
           "longitude": 99.15219,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "610607",
@@ -31145,21 +38055,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "รพสต.แก่นมะกรูด",
           "latitude": 15.16183,
           "longitude": 99.28896,
-          "sum_rainfall_mm": 103.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
-        },
-        {
-          "geocode": "610604",
-          "tambon": "ต.คอกควาย",
-          "amphoe": "อ.บ้านไร่",
-          "province": "จ.อุทัยธานี",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านไร่ใหม่",
-          "latitude": 15.230766,
-          "longitude": 99.463888,
-          "sum_rainfall_mm": 43.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 109.79999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "610604",
@@ -31171,8 +38068,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านกระแหน่",
           "latitude": 15.294661,
           "longitude": 99.43493,
-          "sum_rainfall_mm": 19.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 21.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "610604",
+          "tambon": "ต.คอกควาย",
+          "amphoe": "อ.บ้านไร่",
+          "province": "จ.อุทัยธานี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านไร่ใหม่",
+          "latitude": 15.230766,
+          "longitude": 99.463888,
+          "sum_rainfall_mm": 47.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "610604",
@@ -31184,8 +38094,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านห้วยลึก",
           "latitude": 15.218677,
           "longitude": 99.50252,
-          "sum_rainfall_mm": 18.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 22.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "610604",
@@ -31197,8 +38107,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านปางสวรรค์",
           "latitude": 15.203169,
           "longitude": 99.420237,
-          "sum_rainfall_mm": 31.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 37.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "610604",
@@ -31210,21 +38120,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์ป่าเขาปันโส",
           "latitude": 15.23958,
           "longitude": 99.40895,
-          "sum_rainfall_mm": 80.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
-        },
-        {
-          "geocode": "610614",
-          "tambon": "ต.เจ้าวัด",
-          "amphoe": "อ.บ้านไร่",
-          "province": "จ.อุทัยธานี",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านบุ่ง",
-          "latitude": 15.12854,
-          "longitude": 99.464856,
-          "sum_rainfall_mm": 51.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 95.39999999999999,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "610614",
@@ -31237,7 +38134,20 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 15.17196,
           "longitude": 99.48342,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "610614",
+          "tambon": "ต.เจ้าวัด",
+          "amphoe": "อ.บ้านไร่",
+          "province": "จ.อุทัยธานี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านบุ่ง",
+          "latitude": 15.12854,
+          "longitude": 99.464856,
+          "sum_rainfall_mm": 55.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "610611",
@@ -31249,8 +38159,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านไร่พริก",
           "latitude": 14.991398,
           "longitude": 99.564953,
-          "sum_rainfall_mm": 37.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 46.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "610611",
@@ -31262,8 +38172,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหน้าฝาย",
           "latitude": 15.067142,
           "longitude": 99.542776,
-          "sum_rainfall_mm": 48.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 59.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "610601",
@@ -31275,8 +38185,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหินตุ้ม",
           "latitude": 15.046578,
           "longitude": 99.476521,
-          "sum_rainfall_mm": 19.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 28.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "610601",
@@ -31288,8 +38198,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านพุบอน",
           "latitude": 15.07572,
           "longitude": 99.419734,
-          "sum_rainfall_mm": 5.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 5.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "610601",
@@ -31301,8 +38211,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ศูนย์อปพร. อบต.บ้านไร่",
           "latitude": 15.08265,
           "longitude": 99.51935,
-          "sum_rainfall_mm": 80.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 95.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "610603",
@@ -31314,8 +38224,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านผาทั่ง",
           "latitude": 15.1054,
           "longitude": 99.5358,
-          "sum_rainfall_mm": 56.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 65.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "610603",
@@ -31327,8 +38237,73 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านนาทุ่งเชือก",
           "latitude": 15.160483,
           "longitude": 99.544922,
-          "sum_rainfall_mm": 14.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 13.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "610703",
+          "tambon": "ต.ป่าอ้อ",
+          "amphoe": "อ.ลานสัก",
+          "province": "จ.อุทัยธานี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านซับป่าพลู",
+          "latitude": 15.417764,
+          "longitude": 99.509529,
+          "sum_rainfall_mm": 53.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "610704",
+          "tambon": "ต.ระบำ",
+          "amphoe": "อ.ลานสัก",
+          "province": "จ.อุทัยธานี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "เขื่อนทับเสลา",
+          "latitude": 15.543873,
+          "longitude": 99.447679,
+          "sum_rainfall_mm": 71.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "610704",
+          "tambon": "ต.ระบำ",
+          "amphoe": "อ.ลานสัก",
+          "province": "จ.อุทัยธานี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านโป่งสามสิบ",
+          "latitude": 15.44668,
+          "longitude": 99.453534,
+          "sum_rainfall_mm": 50.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "610704",
+          "tambon": "ต.ระบำ",
+          "amphoe": "อ.ลานสัก",
+          "province": "จ.อุทัยธานี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์สะแกกรัง",
+          "latitude": 15.502394,
+          "longitude": 99.46196,
+          "sum_rainfall_mm": 86.20000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "610701",
+          "tambon": "ต.ลานสัก",
+          "amphoe": "อ.ลานสัก",
+          "province": "จ.อุทัยธานี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "อบต.ลานสัก",
+          "latitude": 15.47279,
+          "longitude": 99.53976,
+          "sum_rainfall_mm": 125.60000000000001,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "610301",
@@ -31340,8 +38315,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.สว่างแจ้งสบายใจ",
           "latitude": 15.559001,
           "longitude": 99.864809,
-          "sum_rainfall_mm": 114.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 118.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "610301",
@@ -31353,8 +38328,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.สว่างอารมณ์",
           "latitude": 15.58538,
           "longitude": 99.86514,
-          "sum_rainfall_mm": 136.60000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 155.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "610501",
@@ -31366,8 +38341,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.หนองขาหย่าง",
           "latitude": 15.36227,
           "longitude": 99.93845,
-          "sum_rainfall_mm": 135.00000000000003,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 135.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "610410",
@@ -31379,8 +38354,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ฝายทับเสลา",
           "latitude": 15.407623,
           "longitude": 99.714458,
-          "sum_rainfall_mm": 111.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 140.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "610410",
@@ -31392,8 +38367,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านสนามบิน",
           "latitude": 15.396463,
           "longitude": 99.661082,
-          "sum_rainfall_mm": 72.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 89.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "610401",
@@ -31405,8 +38380,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.หนองฉาง",
           "latitude": 15.38896,
           "longitude": 99.84505,
-          "sum_rainfall_mm": 142.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 151.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "610801",
@@ -31418,8 +38393,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านกกงิ้ว",
           "latitude": 15.304712,
           "longitude": 99.648582,
-          "sum_rainfall_mm": 98.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 110.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "610801",
@@ -31431,34 +38406,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านวังบ่าง",
           "latitude": 15.312792,
           "longitude": 99.658732,
-          "sum_rainfall_mm": 40.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
-        },
-        {
-          "geocode": "610803",
-          "tambon": "ต.ห้วยคต",
-          "amphoe": "อ.ห้วยคต",
-          "province": "จ.อุทัยธานี",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านหินโหง่น",
-          "latitude": 15.234026,
-          "longitude": 99.588856,
-          "sum_rainfall_mm": 54.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
-        },
-        {
-          "geocode": "610803",
-          "tambon": "ต.ห้วยคต",
-          "amphoe": "อ.ห้วยคต",
-          "province": "จ.อุทัยธานี",
-          "region_id": "1",
-          "region_name": "ภาคกลาง",
-          "station": "บ้านกลาง",
-          "latitude": 15.313404,
-          "longitude": 99.58156,
-          "sum_rainfall_mm": 62.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 48.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "610803",
@@ -31470,8 +38419,34 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหนองจอก",
           "latitude": 15.277273,
           "longitude": 99.554759,
-          "sum_rainfall_mm": 47.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 55.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "610803",
+          "tambon": "ต.ห้วยคต",
+          "amphoe": "อ.ห้วยคต",
+          "province": "จ.อุทัยธานี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านหินโหง่น",
+          "latitude": 15.234026,
+          "longitude": 99.588856,
+          "sum_rainfall_mm": 69.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "610803",
+          "tambon": "ต.ห้วยคต",
+          "amphoe": "อ.ห้วยคต",
+          "province": "จ.อุทัยธานี",
+          "region_id": "1",
+          "region_name": "ภาคกลาง",
+          "station": "บ้านกลาง",
+          "latitude": 15.313404,
+          "longitude": 99.58156,
+          "sum_rainfall_mm": 72.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "610803",
@@ -31483,8 +38458,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ห้วยคต",
           "latitude": 15.30362,
           "longitude": 99.60969,
-          "sum_rainfall_mm": 108.19999999999999,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 129.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "221004",
@@ -31497,7 +38472,20 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 12.92717,
           "longitude": 102.015565,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "221005",
+          "tambon": "ต.จันทเขลม",
+          "amphoe": "อ.เขาคิชฌกูฏ",
+          "province": "จ.จันทบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "บ้านคลองใหญ่",
+          "latitude": 12.972159,
+          "longitude": 102.057715,
+          "sum_rainfall_mm": 108.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "221005",
@@ -31519,24 +38507,11 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.จันทบุรี",
           "region_id": "2",
           "region_name": "ภาคตะวันออก",
-          "station": "บ้านคลองใหญ่",
-          "latitude": 12.972159,
-          "longitude": 102.057715,
-          "sum_rainfall_mm": 107.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
-        },
-        {
-          "geocode": "221005",
-          "tambon": "ต.จันทเขลม",
-          "amphoe": "อ.เขาคิชฌกูฏ",
-          "province": "จ.จันทบุรี",
-          "region_id": "2",
-          "region_name": "ภาคตะวันออก",
           "station": "สะพานคลองจันทเขลม",
           "latitude": 13.003336,
           "longitude": 102.04864,
-          "sum_rainfall_mm": 165.40000000000003,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 166.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "221003",
@@ -31548,8 +38523,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.ตะเคียนทอง",
           "latitude": 12.9131,
           "longitude": 102.0815,
-          "sum_rainfall_mm": 228.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 242.99999999999997,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "220901",
@@ -31561,8 +38536,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.นายายอาม",
           "latitude": 12.77083,
           "longitude": 101.85303,
-          "sum_rainfall_mm": 168.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 170.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "220906",
@@ -31575,7 +38550,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 12.722433,
           "longitude": 101.95606,
           "sum_rainfall_mm": 0.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "220401",
@@ -31587,8 +38562,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านคลองตานี",
           "latitude": 12.896003,
           "longitude": 102.271006,
-          "sum_rainfall_mm": 146.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 161.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "220401",
@@ -31600,8 +38575,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านวังกระแพร่",
           "latitude": 12.971751,
           "longitude": 102.285409,
-          "sum_rainfall_mm": 91.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 89.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "220401",
@@ -31614,20 +38589,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 12.85727,
           "longitude": 102.306321,
           "sum_rainfall_mm": 117.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
-        },
-        {
-          "geocode": "220401",
-          "tambon": "ต.ทับไทร",
-          "amphoe": "อ.โป่งน้ำร้อน",
-          "province": "จ.จันทบุรี",
-          "region_id": "2",
-          "region_name": "ภาคตะวันออก",
-          "station": "บ้านดงจิก",
-          "latitude": 12.992358,
-          "longitude": 102.304401,
-          "sum_rainfall_mm": 52.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "220401",
@@ -31640,7 +38602,20 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 13.016522,
           "longitude": 102.270633,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "220401",
+          "tambon": "ต.ทับไทร",
+          "amphoe": "อ.โป่งน้ำร้อน",
+          "province": "จ.จันทบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "บ้านดงจิก",
+          "latitude": 12.992358,
+          "longitude": 102.304401,
+          "sum_rainfall_mm": 40.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "220409",
@@ -31652,8 +38627,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.เทพนิมิต",
           "latitude": 13.04028,
           "longitude": 102.44956,
-          "sum_rainfall_mm": 68.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 57.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "220402",
@@ -31665,8 +38640,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านเครือหวาย",
           "latitude": 12.902447,
           "longitude": 102.406244,
-          "sum_rainfall_mm": 66.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 54.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "220402",
@@ -31678,8 +38653,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.โป่งน้ำร้อน",
           "latitude": 12.90515,
           "longitude": 102.26646,
-          "sum_rainfall_mm": 172.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 170.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "220506",
@@ -31691,8 +38666,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านตะบกเตี้ย",
           "latitude": 12.822394,
           "longitude": 102.233618,
-          "sum_rainfall_mm": 60.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 63.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "220503",
@@ -31704,8 +38679,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.ปัถวี",
           "latitude": 12.74261,
           "longitude": 102.23263,
-          "sum_rainfall_mm": 191.39999999999998,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 206.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "220504",
@@ -31717,8 +38692,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดโคกตะพง (แกลง)",
           "latitude": 12.78168,
           "longitude": 102.17328,
-          "sum_rainfall_mm": 226.60000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 231.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "241002",
@@ -31731,7 +38706,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 13.323691,
           "longitude": 101.675214,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "241002",
@@ -31743,8 +38718,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ภูไท",
           "latitude": 13.417764,
           "longitude": 101.883095,
-          "sum_rainfall_mm": 163.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 162.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "241002",
@@ -31756,8 +38731,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.คลองตะเกรา",
           "latitude": 13.41823,
           "longitude": 101.64146,
-          "sum_rainfall_mm": 143.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 154.00000000000003,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "240308",
@@ -31769,8 +38744,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ดอนฉิมพลี",
           "latitude": 13.90535,
           "longitude": 100.97028,
-          "sum_rainfall_mm": 168.40000000000003,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 201.60000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "240302",
@@ -31782,8 +38757,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บางขนาก",
           "latitude": 13.874795,
           "longitude": 101.141647,
-          "sum_rainfall_mm": 110.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 119.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "240302",
@@ -31795,8 +38770,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บางน้ำเปรี้ยว",
           "latitude": 13.87032,
           "longitude": 101.14574,
-          "sum_rainfall_mm": 117.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 134.79999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "240301",
@@ -31808,8 +38783,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ปากคลองพระองค์เจ้าฯ (บางน้ำเปรี้ยว)",
           "latitude": 13.83819,
           "longitude": 100.9666,
-          "sum_rainfall_mm": 152.39999999999998,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 164.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "240309",
@@ -31821,7 +38796,7 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ปตร.คลองหลวงแพ่ง",
           "latitude": 13.81321,
           "longitude": 100.93742,
-          "sum_rainfall_mm": 137.5,
+          "sum_rainfall_mm": 136.5,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -31834,8 +38809,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ปากแม่น้ำบางปะกง",
           "latitude": 13.474833,
           "longitude": 100.98196,
-          "sum_rainfall_mm": 147.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 189.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "240402",
@@ -31847,8 +38822,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บางปะกง",
           "latitude": 13.54901,
           "longitude": 101.00111,
-          "sum_rainfall_mm": 242.39999999999998,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 283.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "240501",
@@ -31860,8 +38835,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านโพธิ์",
           "latitude": 13.58335,
           "longitude": 101.070917,
-          "sum_rainfall_mm": 293.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 343.5,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "240601",
@@ -31873,8 +38848,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ฝายท่าลาด",
           "latitude": 13.707719,
           "longitude": 101.401415,
-          "sum_rainfall_mm": 183.5,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 205.5,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "240601",
@@ -31886,8 +38861,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "พนมสารคาม",
           "latitude": 13.72662,
           "longitude": 101.35298,
-          "sum_rainfall_mm": 249.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 280.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "240607",
@@ -31899,8 +38874,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.หนองแหน",
           "latitude": 13.68338,
           "longitude": 101.32512,
-          "sum_rainfall_mm": 264.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 294.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "240108",
@@ -31913,7 +38888,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 13.706797,
           "longitude": 101.136945,
           "sum_rainfall_mm": 0.5,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "240109",
@@ -31925,8 +38900,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.บางขวัญ",
           "latitude": 13.74984,
           "longitude": 101.07751,
-          "sum_rainfall_mm": 212.40000000000003,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 226.79999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "200202",
@@ -31939,7 +38914,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 13.164513,
           "longitude": 101.15418,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "200202",
@@ -31951,8 +38926,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "โรงเรียนวัดหนองน้ำเขียว",
           "latitude": 13.234701,
           "longitude": 101.11684,
-          "sum_rainfall_mm": 136.60000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 150.00000000000003,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "200204",
@@ -31964,8 +38939,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์ป่าอ่างช้างน้ำ",
           "latitude": 13.2743,
           "longitude": 101.082,
-          "sum_rainfall_mm": 203.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 212.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "200706",
@@ -31978,7 +38953,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 13.11583,
           "longitude": 101.167548,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "200706",
@@ -31990,8 +38965,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์ป่าเขาช่องลม",
           "latitude": 13.157225,
           "longitude": 101.11463,
-          "sum_rainfall_mm": 44.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 44.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "200707",
@@ -32003,8 +38978,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ที่ทำการเขตรักษาพันธุ์สัตว์ป่าเขาเขียว-เขาชมภู่",
           "latitude": 13.240835,
           "longitude": 101.04208,
-          "sum_rainfall_mm": 294.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 303.20000000000005,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "200707",
@@ -32016,8 +38991,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สำนักสงฆ์โสธรรมนิมิตร",
           "latitude": 13.168441,
           "longitude": 101.03034,
-          "sum_rainfall_mm": 160.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 164.39999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "200701",
@@ -32029,8 +39004,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สถานีวิจัยประมงศรีราชา",
           "latitude": 13.185876,
           "longitude": 100.916916,
-          "sum_rainfall_mm": 182.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 186.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "200902",
@@ -32042,8 +39017,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เขตห้ามล่าสัตว์ป่าเขาชีโอน",
           "latitude": 12.768159,
           "longitude": 100.97308,
-          "sum_rainfall_mm": 82.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 80.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "200903",
@@ -32055,8 +39030,60 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.พลูตาหลวง",
           "latitude": 12.69861,
           "longitude": 100.9762,
-          "sum_rainfall_mm": 166.60000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 163.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "230701",
+          "tambon": "ต.เกาะช้าง",
+          "amphoe": "อ.เกาะช้าง",
+          "province": "จ.ตราด",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "บ้านคลองพร้าว",
+          "latitude": 12.060854,
+          "longitude": 102.307228,
+          "sum_rainfall_mm": 81.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "230701",
+          "tambon": "ต.เกาะช้าง",
+          "amphoe": "อ.เกาะช้าง",
+          "province": "จ.ตราด",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "บ้านคลองสน",
+          "latitude": 12.131568,
+          "longitude": 102.277121,
+          "sum_rainfall_mm": 0.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "230701",
+          "tambon": "ต.เกาะช้าง",
+          "amphoe": "อ.เกาะช้าง",
+          "province": "จ.ตราด",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "ที่ทำการอุทยานแห่งชาติเกาะช้าง",
+          "latitude": 12.12542,
+          "longitude": 102.26843,
+          "sum_rainfall_mm": 180.20000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "230702",
+          "tambon": "ต.เกาะช้างใต้",
+          "amphoe": "อ.เกาะช้าง",
+          "province": "จ.ตราด",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "บ้านสลักเพชรเหนือ",
+          "latitude": 12.009583,
+          "longitude": 102.366823,
+          "sum_rainfall_mm": 40.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "230308",
@@ -32081,8 +39108,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดเทพนิมิต",
           "latitude": 12.433914,
           "longitude": 102.433072,
-          "sum_rainfall_mm": 106.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 130.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "230306",
@@ -32094,8 +39121,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองประณีต บ.ตลุง",
           "latitude": 12.511324,
           "longitude": 102.37168,
-          "sum_rainfall_mm": 155.60000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 167.4,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "230303",
@@ -32107,8 +39134,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองโสน",
           "latitude": 12.513374,
           "longitude": 102.50484,
-          "sum_rainfall_mm": 170.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 232.40000000000003,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "230305",
@@ -32120,8 +39147,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.สะตอ",
           "latitude": 12.53639,
           "longitude": 102.44429,
-          "sum_rainfall_mm": 204.40000000000003,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 226.60000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "230403",
@@ -32133,8 +39160,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ คก. ๓ (เขาพลู)",
           "latitude": 12.4193,
           "longitude": 102.744,
-          "sum_rainfall_mm": 157.79999999999998,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 177.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "230405",
@@ -32146,8 +39173,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านมะม่วง",
           "latitude": 12.549057,
           "longitude": 102.57967,
-          "sum_rainfall_mm": 128.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 167.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "230405",
@@ -32159,8 +39186,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดทุ่งตอง",
           "latitude": 12.515793,
           "longitude": 102.59027,
-          "sum_rainfall_mm": 201.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 253.39999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "230401",
@@ -32172,8 +39199,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหมื่นด่าน",
           "latitude": 12.595746,
           "longitude": 102.578773,
-          "sum_rainfall_mm": 125.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 161.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "230401",
@@ -32185,8 +39212,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านตาบาด",
           "latitude": 12.60122,
           "longitude": 102.567709,
-          "sum_rainfall_mm": 107.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 135.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "230401",
@@ -32198,8 +39225,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์คลองสะตอ",
           "latitude": 12.5973,
           "longitude": 102.608,
-          "sum_rainfall_mm": 183.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 212.60000000000002,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "230404",
@@ -32211,8 +39238,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหนองบอน",
           "latitude": 12.681499,
           "longitude": 102.466076,
-          "sum_rainfall_mm": 141.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 146.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "230404",
@@ -32224,8 +39251,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานคลองสะตอ",
           "latitude": 12.7065,
           "longitude": 102.415,
-          "sum_rainfall_mm": 170.60000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 184.2,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "230404",
@@ -32237,8 +39264,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.หนองบอน",
           "latitude": 12.67735,
           "longitude": 102.45936,
-          "sum_rainfall_mm": 244.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 284.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "230111",
@@ -32250,8 +39277,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดวุรุณดิตถาราม",
           "latitude": 12.282,
           "longitude": 102.615378,
-          "sum_rainfall_mm": 103.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 141.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "230111",
@@ -32264,7 +39291,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 12.29452,
           "longitude": 102.615646,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "230111",
@@ -32276,8 +39303,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "รพ.สต.บ้านคลองขวาง",
           "latitude": 12.344451,
           "longitude": 102.64169,
-          "sum_rainfall_mm": 158.20000000000005,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 204.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "230109",
@@ -32289,8 +39316,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านไร่ป่า",
           "latitude": 12.287519,
           "longitude": 102.524556,
-          "sum_rainfall_mm": 124.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 149.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "230109",
@@ -32302,8 +39329,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.ท่าพริกเนินทราย",
           "latitude": 12.25512,
           "longitude": 102.55822,
-          "sum_rainfall_mm": 140.19999999999996,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 180.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "230107",
@@ -32328,21 +39355,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านปลายคลอง",
           "latitude": 12.260545,
           "longitude": 102.46482,
-          "sum_rainfall_mm": 125.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
-        },
-        {
-          "geocode": "230107",
-          "tambon": "ต.วังกระแจะ",
-          "amphoe": "อ.เมืองตราด",
-          "province": "จ.ตราด",
-          "region_id": "2",
-          "region_name": "ภาคตะวันออก",
-          "station": "วังกระแจะ",
-          "latitude": 12.262445,
-          "longitude": 102.52681,
-          "sum_rainfall_mm": 94.19999999999999,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 158.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "230107",
@@ -32354,8 +39368,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองเขาระกำ",
           "latitude": 12.25058,
           "longitude": 102.475716,
-          "sum_rainfall_mm": 136.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 136.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "230107",
+          "tambon": "ต.วังกระแจะ",
+          "amphoe": "อ.เมืองตราด",
+          "province": "จ.ตราด",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "วังกระแจะ",
+          "latitude": 12.262445,
+          "longitude": 102.52681,
+          "sum_rainfall_mm": 119.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "230102",
@@ -32367,8 +39394,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ชลประทานตราด",
           "latitude": 12.243311,
           "longitude": 102.506553,
-          "sum_rainfall_mm": 120.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 142.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "230105",
@@ -32380,8 +39407,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เปร็ดใน",
           "latitude": 12.14203,
           "longitude": 102.52977,
-          "sum_rainfall_mm": 133.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 170.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "230108",
@@ -32393,8 +39420,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดคลองขุด",
           "latitude": 12.360417,
           "longitude": 102.549297,
-          "sum_rainfall_mm": 147.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 176.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "230108",
@@ -32406,8 +39433,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ห้วยแร้ง",
           "latitude": 12.369261,
           "longitude": 102.54332,
-          "sum_rainfall_mm": 123.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 137.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "230108",
@@ -32419,8 +39446,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เมืองตราด",
           "latitude": 12.325195,
           "longitude": 102.5005,
-          "sum_rainfall_mm": 101.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 116.59999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "230503",
+          "tambon": "ต.บางปิด",
+          "amphoe": "อ.แหลมงอบ",
+          "province": "จ.ตราด",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "อบต.บางปิด",
+          "latitude": 12.21718,
+          "longitude": 102.30766,
+          "sum_rainfall_mm": 175.60000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250201",
@@ -32432,8 +39472,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "กบินทร์บุรี",
           "latitude": 13.986616,
           "longitude": 101.70547,
-          "sum_rainfall_mm": 111.39999999999998,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 144.60000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250212",
@@ -32445,8 +39485,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.นาแขม",
           "latitude": 14.04255,
           "longitude": 101.72051,
-          "sum_rainfall_mm": 150.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 202.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250214",
@@ -32458,8 +39498,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านเนินหินกอง",
           "latitude": 13.782015,
           "longitude": 101.900566,
-          "sum_rainfall_mm": 170.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 165.5,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250214",
@@ -32471,8 +39511,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.วังท่าช้าง",
           "latitude": 13.75941,
           "longitude": 101.88693,
-          "sum_rainfall_mm": 156.39999999999998,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 162.60000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250211",
@@ -32484,8 +39524,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เขตอุตสาหกรรมกบินทร์บุรี",
           "latitude": 14.072372,
           "longitude": 101.837494,
-          "sum_rainfall_mm": 132.20000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 141.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250211",
@@ -32497,8 +39537,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "รพสต.บ้านโคกอุดม",
           "latitude": 14.06948,
           "longitude": 101.80991,
-          "sum_rainfall_mm": 115.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 128.39999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250305",
@@ -32510,8 +39550,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "โรงเรียนบ้านหินเทิน",
           "latitude": 14.064819,
           "longitude": 102.01052,
-          "sum_rainfall_mm": 197.00000000000003,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 194.79999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250304",
@@ -32523,8 +39563,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองห้วยยาง",
           "latitude": 14.136408,
           "longitude": 101.857475,
-          "sum_rainfall_mm": 140.60000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 144.40000000000003,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250306",
@@ -32536,8 +39576,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านวังหิน",
           "latitude": 14.263495,
           "longitude": 101.891589,
-          "sum_rainfall_mm": 51.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 52.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "250306",
@@ -32549,8 +39589,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้าน กม.80",
           "latitude": 14.317818,
           "longitude": 101.837874,
-          "sum_rainfall_mm": 56.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 64.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "250306",
@@ -32562,8 +39602,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานคลองลำพญาธาร",
           "latitude": 14.26568,
           "longitude": 101.89133,
-          "sum_rainfall_mm": 104.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 105.19999999999999,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250306",
@@ -32575,8 +39615,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์คลองยาง",
           "latitude": 14.324904,
           "longitude": 101.84176,
-          "sum_rainfall_mm": 115.00000000000001,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 134.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250306",
@@ -32588,8 +39628,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.บุพราหมณ์",
           "latitude": 14.20791,
           "longitude": 101.90556,
-          "sum_rainfall_mm": 186.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 191.60000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250303",
@@ -32601,8 +39641,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "นาดี",
           "latitude": 14.133605,
           "longitude": 101.72767,
-          "sum_rainfall_mm": 87.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 130.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250302",
@@ -32614,8 +39654,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานเจริญราษฎร์รังสรรค์",
           "latitude": 14.067594,
           "longitude": 101.75532,
-          "sum_rainfall_mm": 92.39999999999999,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 123.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250602",
@@ -32627,8 +39667,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หอทอง",
           "latitude": 13.960857,
           "longitude": 101.216475,
-          "sum_rainfall_mm": 119.5,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 131.5,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250603",
@@ -32640,8 +39680,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานโยธกา",
           "latitude": 13.974951,
           "longitude": 101.14307,
-          "sum_rainfall_mm": 106.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 123.19999999999999,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250605",
@@ -32654,7 +39694,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 13.902437,
           "longitude": 101.168,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250606",
@@ -32666,8 +39706,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านตะเภาลาย",
           "latitude": 14.012733,
           "longitude": 101.265193,
-          "sum_rainfall_mm": 158.5,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 186.5,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250707",
@@ -32679,8 +39719,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ขญ.๑๐ (ประจันตคาม)",
           "latitude": 14.181167,
           "longitude": 101.592064,
-          "sum_rainfall_mm": 174.20000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 218.20000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250701",
@@ -32692,8 +39732,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ประจันตคาม (KGT7A)",
           "latitude": 14.070941,
           "longitude": 101.51893,
-          "sum_rainfall_mm": 116.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 184.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250709",
@@ -32705,8 +39745,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ประจันตคาม",
           "latitude": 14.069966,
           "longitude": 101.518579,
-          "sum_rainfall_mm": 120.5,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 176.5,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250708",
@@ -32718,8 +39758,73 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านโคกเขื่อน",
           "latitude": 14.159991,
           "longitude": 101.521952,
-          "sum_rainfall_mm": 62.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 101.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "250112",
+          "tambon": "ต.เนินหอม",
+          "amphoe": "อ.เมืองปราจีนบุรี",
+          "province": "จ.ปราจีนบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "บ้านหัวบุ่ง",
+          "latitude": 14.199403,
+          "longitude": 101.402909,
+          "sum_rainfall_mm": 51.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "250112",
+          "tambon": "ต.เนินหอม",
+          "amphoe": "อ.เมืองปราจีนบุรี",
+          "province": "จ.ปราจีนบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์เนินหอม",
+          "latitude": 14.174927,
+          "longitude": 101.43875,
+          "sum_rainfall_mm": 0.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "250112",
+          "tambon": "ต.เนินหอม",
+          "amphoe": "อ.เมืองปราจีนบุรี",
+          "province": "จ.ปราจีนบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "วัดห้วยเกษียร",
+          "latitude": 14.181127,
+          "longitude": 101.413635,
+          "sum_rainfall_mm": 177.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "250106",
+          "tambon": "ต.บางบริบูรณ์",
+          "amphoe": "อ.เมืองปราจีนบุรี",
+          "province": "จ.ปราจีนบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "วัดสง่างาม",
+          "latitude": 14.031635,
+          "longitude": 101.42646,
+          "sum_rainfall_mm": 162.5,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "250101",
+          "tambon": "ต.หน้าเมือง",
+          "amphoe": "อ.เมืองปราจีนบุรี",
+          "province": "จ.ปราจีนบุรี",
+          "region_id": "2",
+          "region_name": "ภาคตะวันออก",
+          "station": "เมืองปราจีนบุรี",
+          "latitude": 14.053554,
+          "longitude": 101.38684,
+          "sum_rainfall_mm": 0.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250810",
@@ -32731,8 +39836,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.กรอกสมบูรณ์",
           "latitude": 13.77716,
           "longitude": 101.65875,
-          "sum_rainfall_mm": 178.20000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 193.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250803",
@@ -32744,8 +39849,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ศรีมหาโพธิ (KGT6)",
           "latitude": 13.97348,
           "longitude": 101.51751,
-          "sum_rainfall_mm": 80.19999999999999,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 107.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "250801",
@@ -32757,8 +39862,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ศรีมหาโพธิ์",
           "latitude": 13.973075,
           "longitude": 101.512525,
-          "sum_rainfall_mm": 116.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 149.5,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "210701",
@@ -32771,7 +39876,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 12.912333,
           "longitude": 101.72454,
           "sum_rainfall_mm": 171.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "210701",
@@ -32783,8 +39888,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "โรงเรียนบ้านเหมืองแร่",
           "latitude": 12.880652,
           "longitude": 101.784584,
-          "sum_rainfall_mm": 3.4000000000000004,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 3.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "210702",
@@ -32796,8 +39901,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "โรงเรียนบ้านสีระมัน",
           "latitude": 13.038727,
           "longitude": 101.66171,
-          "sum_rainfall_mm": 187.60000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 188.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "270506",
@@ -32809,8 +39914,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดบ้านห้วยชัน",
           "latitude": 13.98736,
           "longitude": 102.43794,
-          "sum_rainfall_mm": 109.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 81.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "270508",
@@ -32822,8 +39927,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านซับสมบูรณ์",
           "latitude": 13.950064,
           "longitude": 102.556857,
-          "sum_rainfall_mm": 97.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 62.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "270508",
@@ -32835,8 +39940,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านแผ่นดินเย็น",
           "latitude": 13.960406,
           "longitude": 102.505896,
-          "sum_rainfall_mm": 104.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 71.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "270502",
@@ -32848,8 +39953,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านคลองมะนาว",
           "latitude": 13.635338,
           "longitude": 102.280666,
-          "sum_rainfall_mm": 69.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 59.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "270502",
@@ -32861,8 +39966,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ท่าเกวียน",
           "latitude": 13.68734,
           "longitude": 102.28413,
-          "sum_rainfall_mm": 179.20000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 170.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "270510",
@@ -32874,8 +39979,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดคลองคันโท",
           "latitude": 13.94595,
           "longitude": 102.28505,
-          "sum_rainfall_mm": 121.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 111.60000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "270505",
@@ -32887,8 +39992,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหนองน้ำใส",
           "latitude": 13.85454,
           "longitude": 102.377483,
-          "sum_rainfall_mm": 97.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 75.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "270505",
@@ -32900,8 +40005,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านซับแม็ก",
           "latitude": 13.874664,
           "longitude": 102.42264,
-          "sum_rainfall_mm": 104.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 69.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "270509",
@@ -32913,8 +40018,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านใหม่ศรีจำปา",
           "latitude": 13.907834,
           "longitude": 102.377541,
-          "sum_rainfall_mm": 36.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 27.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "361302",
@@ -32927,7 +40032,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 16.639903,
           "longitude": 101.892638,
           "sum_rainfall_mm": 24.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "361302",
@@ -32939,8 +40044,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ลำเชิญ",
           "latitude": 16.660492,
           "longitude": 101.73749,
-          "sum_rainfall_mm": 35.199999999999996,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 36.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "361305",
@@ -32953,7 +40058,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 16.515036,
           "longitude": 101.823138,
           "sum_rainfall_mm": 67.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "361305",
@@ -32966,7 +40071,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 16.534794,
           "longitude": 101.649035,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "361305",
@@ -32978,8 +40083,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เขื่อนจุฬาภรณ์",
           "latitude": 16.535683,
           "longitude": 101.644386,
-          "sum_rainfall_mm": 38.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 41.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "361305",
@@ -32991,8 +40096,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ทุ่งลุยลาย",
           "latitude": 16.499163,
           "longitude": 101.67309,
-          "sum_rainfall_mm": 147.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 154.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "302505",
@@ -33004,34 +40109,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ทล.๑๑ (ไทยสามัคคี)",
           "latitude": 14.322821,
           "longitude": 101.93274,
-          "sum_rainfall_mm": 106.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
-        },
-        {
-          "geocode": "302503",
-          "tambon": "ต.ระเริง",
-          "amphoe": "อ.วังน้ำเขียว",
-          "province": "จ.นครราชสีมา",
-          "region_id": "3",
-          "region_name": "ภาคตะวันออกเฉียงเหนือ",
-          "station": "บ้านวังขอน",
-          "latitude": 14.514877,
-          "longitude": 101.761444,
-          "sum_rainfall_mm": 35.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
-        },
-        {
-          "geocode": "302503",
-          "tambon": "ต.ระเริง",
-          "amphoe": "อ.วังน้ำเขียว",
-          "province": "จ.นครราชสีมา",
-          "region_id": "3",
-          "region_name": "ภาคตะวันออกเฉียงเหนือ",
-          "station": "บ้านระเริง",
-          "latitude": 14.581153,
-          "longitude": 101.710822,
-          "sum_rainfall_mm": 44.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 107.19999999999999,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "302503",
@@ -33044,7 +40123,33 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 14.621957,
           "longitude": 101.72213,
           "sum_rainfall_mm": 24.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "302503",
+          "tambon": "ต.ระเริง",
+          "amphoe": "อ.วังน้ำเขียว",
+          "province": "จ.นครราชสีมา",
+          "region_id": "3",
+          "region_name": "ภาคตะวันออกเฉียงเหนือ",
+          "station": "บ้านระเริง",
+          "latitude": 14.581153,
+          "longitude": 101.710822,
+          "sum_rainfall_mm": 46.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "302503",
+          "tambon": "ต.ระเริง",
+          "amphoe": "อ.วังน้ำเขียว",
+          "province": "จ.นครราชสีมา",
+          "region_id": "3",
+          "region_name": "ภาคตะวันออกเฉียงเหนือ",
+          "station": "บ้านวังขอน",
+          "latitude": 14.514877,
+          "longitude": 101.761444,
+          "sum_rainfall_mm": 36.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "302503",
@@ -33056,34 +40161,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์คลองสอง",
           "latitude": 14.595323,
           "longitude": 101.73728,
-          "sum_rainfall_mm": 103.80000000000001,
-          "observed_at": "2026-09-26T04:00:00+07:00"
-        },
-        {
-          "geocode": "302501",
-          "tambon": "ต.วังน้ำเขียว",
-          "amphoe": "อ.วังน้ำเขียว",
-          "province": "จ.นครราชสีมา",
-          "region_id": "3",
-          "region_name": "ภาคตะวันออกเฉียงเหนือ",
-          "station": "บ้านคลองทราย",
-          "latitude": 14.364402,
-          "longitude": 101.757113,
-          "sum_rainfall_mm": 39.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
-        },
-        {
-          "geocode": "302501",
-          "tambon": "ต.วังน้ำเขียว",
-          "amphoe": "อ.วังน้ำเขียว",
-          "province": "จ.นครราชสีมา",
-          "region_id": "3",
-          "region_name": "ภาคตะวันออกเฉียงเหนือ",
-          "station": "บ้านคลองสอง",
-          "latitude": 14.37957,
-          "longitude": 101.849891,
-          "sum_rainfall_mm": 44.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 104.80000000000001,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "302501",
@@ -33095,8 +40174,34 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านซับไทรทอง",
           "latitude": 14.503397,
           "longitude": 101.81842,
-          "sum_rainfall_mm": 44.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 45.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "302501",
+          "tambon": "ต.วังน้ำเขียว",
+          "amphoe": "อ.วังน้ำเขียว",
+          "province": "จ.นครราชสีมา",
+          "region_id": "3",
+          "region_name": "ภาคตะวันออกเฉียงเหนือ",
+          "station": "บ้านคลองทราย",
+          "latitude": 14.364402,
+          "longitude": 101.757113,
+          "sum_rainfall_mm": 42.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "302501",
+          "tambon": "ต.วังน้ำเขียว",
+          "amphoe": "อ.วังน้ำเขียว",
+          "province": "จ.นครราชสีมา",
+          "region_id": "3",
+          "region_name": "ภาคตะวันออกเฉียงเหนือ",
+          "station": "บ้านคลองสอง",
+          "latitude": 14.37957,
+          "longitude": 101.849891,
+          "sum_rainfall_mm": 46.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "302501",
@@ -33108,21 +40213,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.วังน้ำเขียว",
           "latitude": 14.37476,
           "longitude": 101.86537,
-          "sum_rainfall_mm": 126.60000000000001,
-          "observed_at": "2026-09-26T04:00:00+07:00"
-        },
-        {
-          "geocode": "302502",
-          "tambon": "ต.วังหมี",
-          "amphoe": "อ.วังน้ำเขียว",
-          "province": "จ.นครราชสีมา",
-          "region_id": "3",
-          "region_name": "ภาคตะวันออกเฉียงเหนือ",
-          "station": "บ้านคลองสะท้อน",
-          "latitude": 14.407495,
-          "longitude": 101.685106,
-          "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 136.20000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "302502",
@@ -33144,11 +40236,24 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.นครราชสีมา",
           "region_id": "3",
           "region_name": "ภาคตะวันออกเฉียงเหนือ",
+          "station": "บ้านคลองสะท้อน",
+          "latitude": 14.407495,
+          "longitude": 101.685106,
+          "sum_rainfall_mm": 0.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "302502",
+          "tambon": "ต.วังหมี",
+          "amphoe": "อ.วังน้ำเขียว",
+          "province": "จ.นครราชสีมา",
+          "region_id": "3",
+          "region_name": "ภาคตะวันออกเฉียงเหนือ",
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ขญ.๔ (คลองปลากั้ง)",
           "latitude": 14.356375,
           "longitude": 101.72591,
-          "sum_rainfall_mm": 60.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 61.8,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "302502",
@@ -33160,8 +40265,34 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.วังหมี",
           "latitude": 14.4157,
           "longitude": 101.68403,
-          "sum_rainfall_mm": 116.60000000000001,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 122.19999999999999,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "302504",
+          "tambon": "ต.อุดมทรัพย์",
+          "amphoe": "อ.วังน้ำเขียว",
+          "province": "จ.นครราชสีมา",
+          "region_id": "3",
+          "region_name": "ภาคตะวันออกเฉียงเหนือ",
+          "station": "บ้านซับเต่า",
+          "latitude": 14.460456,
+          "longitude": 101.986167,
+          "sum_rainfall_mm": 43.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "302504",
+          "tambon": "ต.อุดมทรัพย์",
+          "amphoe": "อ.วังน้ำเขียว",
+          "province": "จ.นครราชสีมา",
+          "region_id": "3",
+          "region_name": "ภาคตะวันออกเฉียงเหนือ",
+          "station": "บ้านห้วยน้ำเค็ม",
+          "latitude": 14.464046,
+          "longitude": 101.905837,
+          "sum_rainfall_mm": 77.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "302504",
@@ -33174,33 +40305,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 14.533591,
           "longitude": 101.971095,
           "sum_rainfall_mm": 32.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
-        },
-        {
-          "geocode": "302504",
-          "tambon": "ต.อุดมทรัพย์",
-          "amphoe": "อ.วังน้ำเขียว",
-          "province": "จ.นครราชสีมา",
-          "region_id": "3",
-          "region_name": "ภาคตะวันออกเฉียงเหนือ",
-          "station": "บ้านห้วยน้ำเค็ม",
-          "latitude": 14.464046,
-          "longitude": 101.905837,
-          "sum_rainfall_mm": 77.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
-        },
-        {
-          "geocode": "302504",
-          "tambon": "ต.อุดมทรัพย์",
-          "amphoe": "อ.วังน้ำเขียว",
-          "province": "จ.นครราชสีมา",
-          "region_id": "3",
-          "region_name": "ภาคตะวันออกเฉียงเหนือ",
-          "station": "บ้านซับเต่า",
-          "latitude": 14.460456,
-          "longitude": 101.986167,
-          "sum_rainfall_mm": 41.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "302504",
@@ -33212,34 +40317,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.อุดมทรัพย์",
           "latitude": 14.55706,
           "longitude": 101.97418,
-          "sum_rainfall_mm": 105.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
-        },
-        {
-          "geocode": "312001",
-          "tambon": "ต.โนนดินแดง",
-          "amphoe": "อ.โนนดินแดง",
-          "province": "จ.บุรีรัมย์",
-          "region_id": "3",
-          "region_name": "ภาคตะวันออกเฉียงเหนือ",
-          "station": "ที่ทำการเขตรักษาพันธุ์สัตว์ป่าดงใหญ่",
-          "latitude": 14.29667,
-          "longitude": 102.73718,
-          "sum_rainfall_mm": 60.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
-        },
-        {
-          "geocode": "312003",
-          "tambon": "ต.ลำนางรอง",
-          "amphoe": "อ.โนนดินแดง",
-          "province": "จ.บุรีรัมย์",
-          "region_id": "3",
-          "region_name": "ภาคตะวันออกเฉียงเหนือ",
-          "station": "อบต.ลำนางรอง",
-          "latitude": 14.1899,
-          "longitude": 102.68618,
-          "sum_rainfall_mm": 144.39999999999998,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 107.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "310808",
@@ -33251,8 +40330,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "โรงเรียนบ้านสายโท ๔ ใต้",
           "latitude": 14.370019,
           "longitude": 103.14561,
-          "sum_rainfall_mm": 208.00000000000003,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 192.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "310601",
@@ -33264,8 +40343,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ละหานทราย",
           "latitude": 14.39567,
           "longitude": 102.84726,
-          "sum_rainfall_mm": 144.60000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 137.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "310607",
@@ -33277,8 +40356,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ตย.๕ (บาระแนะ)",
           "latitude": 14.249989,
           "longitude": 102.97801,
-          "sum_rainfall_mm": 115.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 95.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "711102",
@@ -33290,8 +40369,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดยางเกาะ",
           "latitude": 13.901244,
           "longitude": 99.462219,
-          "sum_rainfall_mm": 91.5,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 92.5,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "711102",
@@ -33303,8 +40382,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านวังเย็น (K.37)",
           "latitude": 13.9382,
           "longitude": 99.41518,
-          "sum_rainfall_mm": 57.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 59.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "711103",
@@ -33317,7 +40396,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 13.82329,
           "longitude": 99.28462,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "711101",
@@ -33329,21 +40408,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดท่าแย้",
           "latitude": 13.8126,
           "longitude": 99.4007,
-          "sum_rainfall_mm": 9.5,
-          "observed_at": "2026-09-26T04:00:00+07:00"
-        },
-        {
-          "geocode": "711101",
-          "tambon": "ต.ด่านมะขามเตี้ย",
-          "amphoe": "อ.ด่านมะขามเตี้ย",
-          "province": "จ.กาญจนบุรี",
-          "region_id": "5",
-          "region_name": "ภาคตะวันตก",
-          "station": "บ้านท่าพลับ",
-          "latitude": 13.855671,
-          "longitude": 99.380479,
-          "sum_rainfall_mm": 27.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 10.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "711101",
@@ -33355,8 +40421,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านโป่งนก",
           "latitude": 13.786399,
           "longitude": 99.310888,
-          "sum_rainfall_mm": 37.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 40.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "711101",
+          "tambon": "ต.ด่านมะขามเตี้ย",
+          "amphoe": "อ.ด่านมะขามเตี้ย",
+          "province": "จ.กาญจนบุรี",
+          "region_id": "5",
+          "region_name": "ภาคตะวันตก",
+          "station": "บ้านท่าพลับ",
+          "latitude": 13.855671,
+          "longitude": 99.380479,
+          "sum_rainfall_mm": 29.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "711104",
@@ -33368,8 +40447,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหินแด้น",
           "latitude": 13.780584,
           "longitude": 99.420933,
-          "sum_rainfall_mm": 37.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 38.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "711104",
@@ -33381,8 +40460,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดหินแท่น (K.62)",
           "latitude": 13.78093,
           "longitude": 99.42085,
-          "sum_rainfall_mm": 110.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 114.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "710705",
@@ -33394,8 +40473,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์คลิตี้",
           "latitude": 14.9616,
           "longitude": 98.8889,
-          "sum_rainfall_mm": 58.5,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 55.5,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "710705",
@@ -33407,8 +40486,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์คลองงู",
           "latitude": 14.849774,
           "longitude": 98.824,
-          "sum_rainfall_mm": 83.60000000000001,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 75.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "710701",
@@ -33420,8 +40499,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดท่าขนุน",
           "latitude": 14.742605,
           "longitude": 98.635243,
-          "sum_rainfall_mm": 120.5,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 121.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "710701",
@@ -33433,8 +40512,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อ.ทองผาภูมิ",
           "latitude": 14.73758,
           "longitude": 98.63576,
-          "sum_rainfall_mm": 105.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 120.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "710701",
@@ -33446,21 +40525,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "น้ำฝนเขื่อนวชิราลงกรณ",
           "latitude": 14.79865,
           "longitude": 98.5966,
-          "sum_rainfall_mm": 76.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
-        },
-        {
-          "geocode": "710701",
-          "tambon": "ต.ท่าขนุน",
-          "amphoe": "อ.ทองผาภูมิ",
-          "province": "จ.กาญจนบุรี",
-          "region_id": "5",
-          "region_name": "ภาคตะวันตก",
-          "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ลง.7 (องธิ)",
-          "latitude": 14.735226,
-          "longitude": 98.69861,
-          "sum_rainfall_mm": 80.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 101.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "710701",
@@ -33472,8 +40538,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ทต.ท่าขนุน",
           "latitude": 14.74405,
           "longitude": 98.64233,
-          "sum_rainfall_mm": 126.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 126.39999999999999,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "710701",
+          "tambon": "ต.ท่าขนุน",
+          "amphoe": "อ.ทองผาภูมิ",
+          "province": "จ.กาญจนบุรี",
+          "region_id": "5",
+          "region_name": "ภาคตะวันตก",
+          "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ลง.7 (องธิ)",
+          "latitude": 14.735226,
+          "longitude": 98.69861,
+          "sum_rainfall_mm": 81.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "710702",
@@ -33498,8 +40577,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ปิล๊อก",
           "latitude": 14.6659,
           "longitude": 98.3811,
-          "sum_rainfall_mm": 54.300000000000004,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 66.89999999999999,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "710704",
@@ -33512,7 +40591,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 14.5613,
           "longitude": 98.7925,
           "sum_rainfall_mm": 77.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "710704",
@@ -33524,8 +40603,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหนองบาง",
           "latitude": 14.576704,
           "longitude": 98.820788,
-          "sum_rainfall_mm": 3.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 3.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "710704",
@@ -33538,7 +40617,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 14.53566,
           "longitude": 98.78764,
           "sum_rainfall_mm": 56.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "710704",
@@ -33550,8 +40629,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สถานีวิจัยต้นน้ำแม่กลอง",
           "latitude": 14.576,
           "longitude": 98.8406,
-          "sum_rainfall_mm": 75.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 75.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "710707",
@@ -33563,8 +40642,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านสะพานลาว",
           "latitude": 14.725793,
           "longitude": 98.783443,
-          "sum_rainfall_mm": 24.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 23.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "710707",
@@ -33576,21 +40655,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ศร.11 (เนินสวรรค์)",
           "latitude": 14.74058,
           "longitude": 98.81722,
-          "sum_rainfall_mm": 51.79999999999999,
-          "observed_at": "2026-09-26T04:00:00+07:00"
-        },
-        {
-          "geocode": "710706",
-          "tambon": "ต.ห้วยเขย่ง",
-          "amphoe": "อ.ทองผาภูมิ",
-          "province": "จ.กาญจนบุรี",
-          "region_id": "5",
-          "region_name": "ภาคตะวันตก",
-          "station": "บ้านประจำไม้",
-          "latitude": 14.589914,
-          "longitude": 98.586428,
-          "sum_rainfall_mm": 30.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 49.599999999999994,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "710706",
@@ -33602,8 +40668,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านไร่",
           "latitude": 14.707321,
           "longitude": 98.527799,
-          "sum_rainfall_mm": 24.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 35.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "710706",
+          "tambon": "ต.ห้วยเขย่ง",
+          "amphoe": "อ.ทองผาภูมิ",
+          "province": "จ.กาญจนบุรี",
+          "region_id": "5",
+          "region_name": "ภาคตะวันตก",
+          "station": "บ้านประจำไม้",
+          "latitude": 14.589914,
+          "longitude": 98.586428,
+          "sum_rainfall_mm": 41.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "710703",
@@ -33615,8 +40694,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านดงโคร่ง",
           "latitude": 14.625644,
           "longitude": 98.759389,
-          "sum_rainfall_mm": 13.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 14.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "710703",
@@ -33628,8 +40707,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหินดาด",
           "latitude": 14.59539,
           "longitude": 98.72946,
-          "sum_rainfall_mm": 43.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 44.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "710703",
@@ -33641,8 +40720,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ศร.4 (ผาตาด)",
           "latitude": 14.64951,
           "longitude": 98.77478,
-          "sum_rainfall_mm": 50.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 50.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "710703",
@@ -33654,8 +40733,73 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.หินดาด",
           "latitude": 14.61504,
           "longitude": 98.72972,
-          "sum_rainfall_mm": 55.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 55.60000000000001,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "710302",
+          "tambon": "ต.หนองกุ่ม",
+          "amphoe": "อ.บ่อพลอย",
+          "province": "จ.กาญจนบุรี",
+          "region_id": "5",
+          "region_name": "ภาคตะวันตก",
+          "station": "บ้านพุพรหม",
+          "latitude": 14.281274,
+          "longitude": 99.398094,
+          "sum_rainfall_mm": 34.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "710303",
+          "tambon": "ต.หนองรี",
+          "amphoe": "อ.บ่อพลอย",
+          "province": "จ.กาญจนบุรี",
+          "region_id": "5",
+          "region_name": "ภาคตะวันตก",
+          "station": "ห้วยลำอีซู",
+          "latitude": 14.542453,
+          "longitude": 99.378211,
+          "sum_rainfall_mm": 66.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "710303",
+          "tambon": "ต.หนองรี",
+          "amphoe": "อ.บ่อพลอย",
+          "province": "จ.กาญจนบุรี",
+          "region_id": "5",
+          "region_name": "ภาคตะวันตก",
+          "station": "บ้านโป่งรี",
+          "latitude": 14.489789,
+          "longitude": 99.39322,
+          "sum_rainfall_mm": 36.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "710303",
+          "tambon": "ต.หนองรี",
+          "amphoe": "อ.บ่อพลอย",
+          "province": "จ.กาญจนบุรี",
+          "region_id": "5",
+          "region_name": "ภาคตะวันตก",
+          "station": "บ้านหินดาดทอง",
+          "latitude": 14.586722,
+          "longitude": 99.398312,
+          "sum_rainfall_mm": 24.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "710305",
+          "tambon": "ต.หลุมรัง",
+          "amphoe": "อ.บ่อพลอย",
+          "province": "จ.กาญจนบุรี",
+          "region_id": "5",
+          "region_name": "ภาคตะวันตก",
+          "station": "ฝายทดน้ำลำเหย",
+          "latitude": 14.4678,
+          "longitude": 99.4973,
+          "sum_rainfall_mm": 101.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "710111",
@@ -33667,8 +40811,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.เกาะสำโรง",
           "latitude": 13.94239,
           "longitude": 99.49628,
-          "sum_rainfall_mm": 70.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 71.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "710105",
@@ -33680,21 +40824,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เมืองกาญจนบุรี",
           "latitude": 14.06047,
           "longitude": 99.48325,
-          "sum_rainfall_mm": 77.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
-        },
-        {
-          "geocode": "710109",
-          "tambon": "ต.ช่องสะเดา",
-          "amphoe": "อ.เมืองกาญจนบุรี",
-          "province": "จ.กาญจนบุรี",
-          "region_id": "5",
-          "region_name": "ภาคตะวันตก",
-          "station": "บ้านเขาน้อย",
-          "latitude": 14.236784,
-          "longitude": 99.310197,
-          "sum_rainfall_mm": 37.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 76.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "710109",
@@ -33706,8 +40837,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านทับศิลา",
           "latitude": 14.233617,
           "longitude": 99.155551,
-          "sum_rainfall_mm": 55.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 45.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "710109",
+          "tambon": "ต.ช่องสะเดา",
+          "amphoe": "อ.เมืองกาญจนบุรี",
+          "province": "จ.กาญจนบุรี",
+          "region_id": "5",
+          "region_name": "ภาคตะวันตก",
+          "station": "บ้านเขาน้อย",
+          "latitude": 14.236784,
+          "longitude": 99.310197,
+          "sum_rainfall_mm": 36.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "710109",
@@ -33719,8 +40863,34 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เขื่อนท่าทุ่งนา",
           "latitude": 14.233779,
           "longitude": 99.235022,
-          "sum_rainfall_mm": 46.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 49.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "710113",
+          "tambon": "ต.บ้านเก่า",
+          "amphoe": "อ.เมืองกาญจนบุรี",
+          "province": "จ.กาญจนบุรี",
+          "region_id": "5",
+          "region_name": "ภาคตะวันตก",
+          "station": "บ้านพุน้ำร้อน",
+          "latitude": 13.931164,
+          "longitude": 99.082945,
+          "sum_rainfall_mm": 2.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
+        },
+        {
+          "geocode": "710113",
+          "tambon": "ต.บ้านเก่า",
+          "amphoe": "อ.เมืองกาญจนบุรี",
+          "province": "จ.กาญจนบุรี",
+          "region_id": "5",
+          "region_name": "ภาคตะวันตก",
+          "station": "บ้านห้วยน้ำขาว",
+          "latitude": 13.897841,
+          "longitude": 99.146975,
+          "sum_rainfall_mm": 27.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "710113",
@@ -33732,8 +40902,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านลำทหาร",
           "latitude": 13.921088,
           "longitude": 99.238976,
-          "sum_rainfall_mm": 29.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 31.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "710113",
@@ -33746,33 +40916,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 13.812958,
           "longitude": 99.169915,
           "sum_rainfall_mm": 36.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
-        },
-        {
-          "geocode": "710113",
-          "tambon": "ต.บ้านเก่า",
-          "amphoe": "อ.เมืองกาญจนบุรี",
-          "province": "จ.กาญจนบุรี",
-          "region_id": "5",
-          "region_name": "ภาคตะวันตก",
-          "station": "บ้านพุน้ำร้อน",
-          "latitude": 13.931164,
-          "longitude": 99.082945,
-          "sum_rainfall_mm": 1.5,
-          "observed_at": "2026-09-26T03:00:00+07:00"
-        },
-        {
-          "geocode": "710113",
-          "tambon": "ต.บ้านเก่า",
-          "amphoe": "อ.เมืองกาญจนบุรี",
-          "province": "จ.กาญจนบุรี",
-          "region_id": "5",
-          "region_name": "ภาคตะวันตก",
-          "station": "บ้านห้วยน้ำขาว",
-          "latitude": 13.897841,
-          "longitude": 99.146975,
-          "sum_rainfall_mm": 27.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "710107",
@@ -33784,8 +40928,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านพุน้อย",
           "latitude": 14.0091,
           "longitude": 99.352283,
-          "sum_rainfall_mm": 40.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 40.5,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "710107",
@@ -33797,8 +40941,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "โรงเรียนบ้านทุ่งนานางหรอก",
           "latitude": 14.17509,
           "longitude": 99.43382,
-          "sum_rainfall_mm": 21.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 20.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "710108",
@@ -33810,8 +40954,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านท่ามะนาว",
           "latitude": 14.1647,
           "longitude": 99.2754,
-          "sum_rainfall_mm": 106.5,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 106.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "710106",
@@ -33823,8 +40967,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านหนองบัว (K.35A)",
           "latitude": 14.06024,
           "longitude": 99.44414,
-          "sum_rainfall_mm": 73.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 72.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "710110",
@@ -33837,7 +40981,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 14.01615,
           "longitude": 99.53029,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "710405",
@@ -33849,21 +40993,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดปากลำขาแข้ง",
           "latitude": 14.92634,
           "longitude": 99.12273,
-          "sum_rainfall_mm": 65.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
-        },
-        {
-          "geocode": "710405",
-          "tambon": "ต.เขาโจด",
-          "amphoe": "อ.ศรีสวัสดิ์",
-          "province": "จ.กาญจนบุรี",
-          "region_id": "5",
-          "region_name": "ภาคตะวันตก",
-          "station": "ที่ทำการอุทยานแห่งชาติเฉลิมรัตนโกสินทร์",
-          "latitude": 14.66122,
-          "longitude": 99.30444,
-          "sum_rainfall_mm": 70.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 64.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "710405",
@@ -33875,8 +41006,21 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ศร.9 (ไกรเกรียง)",
           "latitude": 15.0256,
           "longitude": 99.1902,
-          "sum_rainfall_mm": 94.7,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 98.89999999999999,
+          "observed_at": "2026-09-26T07:00:00+07:00"
+        },
+        {
+          "geocode": "710405",
+          "tambon": "ต.เขาโจด",
+          "amphoe": "อ.ศรีสวัสดิ์",
+          "province": "จ.กาญจนบุรี",
+          "region_id": "5",
+          "region_name": "ภาคตะวันตก",
+          "station": "ที่ทำการอุทยานแห่งชาติเฉลิมรัตนโกสินทร์",
+          "latitude": 14.66122,
+          "longitude": 99.30444,
+          "sum_rainfall_mm": 76.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "710402",
@@ -33888,8 +41032,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ที่ทำการอุทยานแห่งชาติเขื่อนศรีนครินทร์",
           "latitude": 14.6359,
           "longitude": 98.9916,
-          "sum_rainfall_mm": 80.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 82.80000000000001,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "710404",
@@ -33901,8 +41045,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สำนักงานประปา  อบต.ท่ากระดาน สาขาแก่งแคบ",
           "latitude": 14.365097,
           "longitude": 99.154023,
-          "sum_rainfall_mm": 133.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 130.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "710404",
@@ -33915,7 +41059,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 14.345543,
           "longitude": 99.18332,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "710404",
@@ -33927,8 +41071,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เขื่อนศรีนครินทร์",
           "latitude": 14.40552,
           "longitude": 99.12831,
-          "sum_rainfall_mm": 114.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 120.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "710404",
@@ -33940,8 +41084,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ที่ทำการอุทยานแห่งชาติเอราวัณ",
           "latitude": 14.37565,
           "longitude": 99.11301,
-          "sum_rainfall_mm": 162.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 148.7,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "710401",
@@ -33953,8 +41097,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "วัดวังผาแดง",
           "latitude": 14.72684,
           "longitude": 99.06556,
-          "sum_rainfall_mm": 53.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "sum_rainfall_mm": 51.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "710401",
@@ -33966,8 +41110,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "หน่วยพิทักษ์ป่าแม่ปลาสร้อย",
           "latitude": 14.6054,
           "longitude": 99.1704,
-          "sum_rainfall_mm": 136.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 139.10000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "710401",
@@ -33979,8 +41123,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.นาสวน",
           "latitude": 14.61133,
           "longitude": 99.12579,
-          "sum_rainfall_mm": 121.39999999999998,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 121.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "700514",
@@ -33992,8 +41136,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านโป่ง",
           "latitude": 13.81866,
           "longitude": 99.86508,
-          "sum_rainfall_mm": 112.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 107.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "103302",
@@ -34015,10 +41159,10 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.กรุงเทพมหานคร",
           "region_id": "7",
           "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "สนข.คลองเตย",
-          "latitude": 13.70791,
-          "longitude": 100.58363,
-          "sum_rainfall_mm": 107.5,
+          "station": "ส.พระราม 4",
+          "latitude": 13.7087,
+          "longitude": 100.55457,
+          "sum_rainfall_mm": 101.0,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -34028,10 +41172,10 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.กรุงเทพมหานคร",
           "region_id": "7",
           "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "ส.พระราม 4",
-          "latitude": 13.7087,
-          "longitude": 100.55457,
-          "sum_rainfall_mm": 101.0,
+          "station": "สนข.คลองเตย",
+          "latitude": 13.70791,
+          "longitude": 100.58363,
+          "sum_rainfall_mm": 107.5,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -34080,10 +41224,10 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.กรุงเทพมหานคร",
           "region_id": "7",
           "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "ปตร.คลองสามวา",
-          "latitude": 13.85954,
-          "longitude": 100.72909,
-          "sum_rainfall_mm": 188.0,
+          "station": "สนข.คลองสามวา",
+          "latitude": 13.8599,
+          "longitude": 100.70424,
+          "sum_rainfall_mm": 138.0,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -34093,10 +41237,10 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.กรุงเทพมหานคร",
           "region_id": "7",
           "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "สนข.คลองสามวา",
-          "latitude": 13.8599,
-          "longitude": 100.70424,
-          "sum_rainfall_mm": 138.0,
+          "station": "ปตร.คลองสามวา",
+          "latitude": 13.85954,
+          "longitude": 100.72909,
+          "sum_rainfall_mm": 188.0,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -34109,7 +41253,7 @@ window.IEAT_THAIWATER_DATA = {
           "station": "จุดวัด ค.เก้า-วัดศรีสุขฯ",
           "latitude": 13.92046,
           "longitude": 100.79228,
-          "sum_rainfall_mm": 13.0,
+          "sum_rainfall_mm": 5.0,
           "observed_at": "2026-09-25T08:00:00+07:00"
         },
         {
@@ -34161,8 +41305,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อาคารเลขที่ ๙๐๑",
           "latitude": 13.85604,
           "longitude": 100.57558,
-          "sum_rainfall_mm": 212.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 241.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "103001",
@@ -34236,10 +41380,10 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.กรุงเทพมหานคร",
           "region_id": "7",
           "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "ส.สามเสน",
-          "latitude": 13.78483,
-          "longitude": 100.50825,
-          "sum_rainfall_mm": 116.0,
+          "station": "ส.คลองบางซื่อ",
+          "latitude": 13.80023,
+          "longitude": 100.51848,
+          "sum_rainfall_mm": 142.0,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -34249,10 +41393,10 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.กรุงเทพมหานคร",
           "region_id": "7",
           "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "ส.คลองบางซื่อ",
-          "latitude": 13.80023,
-          "longitude": 100.51848,
-          "sum_rainfall_mm": 142.0,
+          "station": "ส.สามเสน",
+          "latitude": 13.78483,
+          "longitude": 100.50825,
+          "sum_rainfall_mm": 116.0,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -34265,21 +41409,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อุทยานเฉลิมพระเกียรติพระบาทสมเด็จพระบรมชนกาธิเบศร มหาภูมิพลอดุลยเดชมหาราช บรมนาถบพิตร",
           "latitude": 13.76138,
           "longitude": 100.52066,
-          "sum_rainfall_mm": 213.00000000000003,
-          "observed_at": "2026-09-26T04:00:00+07:00"
-        },
-        {
-          "geocode": "101901",
-          "tambon": "ต.คลองชักพระ",
-          "amphoe": "อ.ตลิ่งชัน",
-          "province": "จ.กรุงเทพมหานคร",
-          "region_id": "7",
-          "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "ส.คลองชักพระ",
-          "latitude": 13.77892,
-          "longitude": 100.465,
-          "sum_rainfall_mm": 87.0,
-          "observed_at": "2026-09-25T20:00:00+07:00"
+          "sum_rainfall_mm": 223.99999999999997,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "101901",
@@ -34291,7 +41422,20 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สนข.ตลิ่งชัน",
           "latitude": 13.77663,
           "longitude": 100.45653,
-          "sum_rainfall_mm": 91.5,
+          "sum_rainfall_mm": 91.0,
+          "observed_at": "2026-09-25T20:00:00+07:00"
+        },
+        {
+          "geocode": "101901",
+          "tambon": "ต.คลองชักพระ",
+          "amphoe": "อ.ตลิ่งชัน",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "ส.คลองชักพระ",
+          "latitude": 13.77892,
+          "longitude": 100.465,
+          "sum_rainfall_mm": 86.5,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -34317,8 +41461,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองมหาสวัสดิ บางกรวย-สวนผัก",
           "latitude": 13.79965,
           "longitude": 100.43863,
-          "sum_rainfall_mm": 137.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 144.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "101602",
@@ -34369,8 +41513,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองแสนแสบ บางกะปิ",
           "latitude": 13.76131,
           "longitude": 100.61601,
-          "sum_rainfall_mm": 238.99999999999997,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 260.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "100608",
@@ -34395,7 +41539,7 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ส.คลองสนามชัย",
           "latitude": 13.63802,
           "longitude": 100.44763,
-          "sum_rainfall_mm": 81.0,
+          "sum_rainfall_mm": 79.5,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -34405,10 +41549,23 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.กรุงเทพมหานคร",
           "region_id": "7",
           "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "สนข.บางขุนเทียน",
-          "latitude": 13.66083,
-          "longitude": 100.43531,
+          "station": "ส.คลองเลนเปน",
+          "latitude": 13.607,
+          "longitude": 100.41311,
           "sum_rainfall_mm": 90.5,
+          "observed_at": "2026-09-25T20:00:00+07:00"
+        },
+        {
+          "geocode": "102107",
+          "tambon": "ต.แสมดำ",
+          "amphoe": "อ.บางขุนเทียน",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "ส.คลองราชมนตรี",
+          "latitude": 13.62782,
+          "longitude": 100.4394,
+          "sum_rainfall_mm": 77.0,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -34431,10 +41588,10 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.กรุงเทพมหานคร",
           "region_id": "7",
           "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "ส.คลองราชมนตรี",
-          "latitude": 13.62782,
-          "longitude": 100.4394,
-          "sum_rainfall_mm": 78.0,
+          "station": "สนข.บางขุนเทียน",
+          "latitude": 13.66083,
+          "longitude": 100.43531,
+          "sum_rainfall_mm": 90.5,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -34447,20 +41604,7 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ส.คลองสี่บาท",
           "latitude": 13.67325,
           "longitude": 100.44615,
-          "sum_rainfall_mm": 78.0,
-          "observed_at": "2026-09-25T20:00:00+07:00"
-        },
-        {
-          "geocode": "102107",
-          "tambon": "ต.แสมดำ",
-          "amphoe": "อ.บางขุนเทียน",
-          "province": "จ.กรุงเทพมหานคร",
-          "region_id": "7",
-          "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "ส.คลองเลนเปน",
-          "latitude": 13.607,
-          "longitude": 100.41311,
-          "sum_rainfall_mm": 90.5,
+          "sum_rainfall_mm": 77.5,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -34473,8 +41617,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองลาดพร้าว วัดบางบัว",
           "latitude": 13.85402,
           "longitude": 100.58746,
-          "sum_rainfall_mm": 205.40000000000003,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 231.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "100502",
@@ -34512,20 +41656,7 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ค.ราชมนตรี-ภาษีเจริญ",
           "latitude": 13.70754,
           "longitude": 100.42622,
-          "sum_rainfall_mm": 76.0,
-          "observed_at": "2026-09-25T20:00:00+07:00"
-        },
-        {
-          "geocode": "104002",
-          "tambon": "ต.บางแคเหนือ",
-          "amphoe": "อ.บางแค",
-          "province": "จ.กรุงเทพมหานคร",
-          "region_id": "7",
-          "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "ส.คลองบางจาก",
-          "latitude": 13.71471,
-          "longitude": 100.39555,
-          "sum_rainfall_mm": 123.0,
+          "sum_rainfall_mm": 75.5,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -34539,6 +41670,19 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 13.72167,
           "longitude": 100.37676,
           "sum_rainfall_mm": 106.0,
+          "observed_at": "2026-09-25T20:00:00+07:00"
+        },
+        {
+          "geocode": "104002",
+          "tambon": "ต.บางแคเหนือ",
+          "amphoe": "อ.บางแค",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "ส.คลองบางจาก",
+          "latitude": 13.71471,
+          "longitude": 100.39555,
+          "sum_rainfall_mm": 123.0,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -34564,21 +41708,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองภาษีเจริญ เพชรเกษม69",
           "latitude": 13.69158,
           "longitude": 100.38127,
-          "sum_rainfall_mm": 201.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
-        },
-        {
-          "geocode": "102901",
-          "tambon": "ต.บางซื่อ",
-          "amphoe": "อ.บางซื่อ",
-          "province": "จ.กรุงเทพมหานคร",
-          "region_id": "7",
-          "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "สนข.บางซื่อ",
-          "latitude": 13.80973,
-          "longitude": 100.53723,
-          "sum_rainfall_mm": 99.0,
-          "observed_at": "2026-09-25T20:00:00+07:00"
+          "sum_rainfall_mm": 201.20000000000002,
+          "observed_at": "2026-09-26T05:00:00+07:00"
         },
         {
           "geocode": "102901",
@@ -34594,16 +41725,16 @@ window.IEAT_THAIWATER_DATA = {
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
-          "geocode": "104701",
-          "tambon": "ต.บางนา",
-          "amphoe": "อ.บางนา",
+          "geocode": "102901",
+          "tambon": "ต.บางซื่อ",
+          "amphoe": "อ.บางซื่อ",
           "province": "จ.กรุงเทพมหานคร",
           "region_id": "7",
           "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "ส.บางนา",
-          "latitude": 13.67493,
-          "longitude": 100.58757,
-          "sum_rainfall_mm": 133.0,
+          "station": "สนข.บางซื่อ",
+          "latitude": 13.80973,
+          "longitude": 100.53723,
+          "sum_rainfall_mm": 99.0,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -34620,16 +41751,16 @@ window.IEAT_THAIWATER_DATA = {
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
-          "geocode": "105001",
-          "tambon": "ต.บางบอน",
-          "amphoe": "อ.บางบอน",
+          "geocode": "104701",
+          "tambon": "ต.บางนา",
+          "amphoe": "อ.บางนา",
           "province": "จ.กรุงเทพมหานคร",
           "region_id": "7",
           "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "สนข.บางบอน",
-          "latitude": 13.63392,
-          "longitude": 100.36884,
-          "sum_rainfall_mm": 84.5,
+          "station": "ส.บางนา",
+          "latitude": 13.67493,
+          "longitude": 100.58757,
+          "sum_rainfall_mm": 133.0,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -34643,6 +41774,19 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 13.64255,
           "longitude": 100.37952,
           "sum_rainfall_mm": 108.0,
+          "observed_at": "2026-09-25T20:00:00+07:00"
+        },
+        {
+          "geocode": "105001",
+          "tambon": "ต.บางบอน",
+          "amphoe": "อ.บางบอน",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "สนข.บางบอน",
+          "latitude": 13.63392,
+          "longitude": 100.36884,
+          "sum_rainfall_mm": 84.0,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -34730,10 +41874,10 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.กรุงเทพมหานคร",
           "region_id": "7",
           "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "สนข.ประเวศ",
-          "latitude": 13.71701,
-          "longitude": 100.69472,
-          "sum_rainfall_mm": 125.0,
+          "station": "ปตร.วัดกระทุ่มฯ",
+          "latitude": 13.7241,
+          "longitude": 100.68957,
+          "sum_rainfall_mm": 109.0,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -34743,10 +41887,10 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.กรุงเทพมหานคร",
           "region_id": "7",
           "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "ปตร.วัดกระทุ่มฯ",
-          "latitude": 13.7241,
-          "longitude": 100.68957,
-          "sum_rainfall_mm": 109.5,
+          "station": "สนข.ประเวศ",
+          "latitude": 13.71701,
+          "longitude": 100.69472,
+          "sum_rainfall_mm": 124.5,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -34759,7 +41903,7 @@ window.IEAT_THAIWATER_DATA = {
           "station": "จุดวัดบึงหนองบอน",
           "latitude": 13.69529,
           "longitude": 100.65375,
-          "sum_rainfall_mm": 145.0,
+          "sum_rainfall_mm": 144.5,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -34786,7 +41930,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 13.785535,
           "longitude": 100.53908,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-26T03:00:00+07:00"
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "101401",
@@ -34808,10 +41952,10 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.กรุงเทพมหานคร",
           "region_id": "7",
           "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "ส.บางอ้อ",
-          "latitude": 13.68212,
-          "longitude": 100.59254,
-          "sum_rainfall_mm": 108.0,
+          "station": "ส.บางจาก",
+          "latitude": 13.6891,
+          "longitude": 100.59068,
+          "sum_rainfall_mm": 95.0,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -34834,10 +41978,10 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.กรุงเทพมหานคร",
           "region_id": "7",
           "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "สนข.พระโขนง",
-          "latitude": 13.70233,
-          "longitude": 100.60197,
-          "sum_rainfall_mm": 141.0,
+          "station": "ส.บางอ้อ",
+          "latitude": 13.68212,
+          "longitude": 100.59254,
+          "sum_rainfall_mm": 108.0,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -34847,10 +41991,10 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.กรุงเทพมหานคร",
           "region_id": "7",
           "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "ส.บางจาก",
-          "latitude": 13.6891,
-          "longitude": 100.59068,
-          "sum_rainfall_mm": 95.0,
+          "station": "สนข.พระโขนง",
+          "latitude": 13.70233,
+          "longitude": 100.60197,
+          "sum_rainfall_mm": 141.0,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -34873,10 +42017,10 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.กรุงเทพมหานคร",
           "region_id": "7",
           "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "สนข.พระนคร",
-          "latitude": 13.7649,
-          "longitude": 100.49872,
-          "sum_rainfall_mm": 117.0,
+          "station": "ส.เทเวศร์",
+          "latitude": 13.77191,
+          "longitude": 100.5011,
+          "sum_rainfall_mm": 136.5,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -34886,10 +42030,10 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.กรุงเทพมหานคร",
           "region_id": "7",
           "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "ส.เทเวศร์",
-          "latitude": 13.77191,
-          "longitude": 100.5011,
-          "sum_rainfall_mm": 136.5,
+          "station": "สนข.พระนคร",
+          "latitude": 13.7649,
+          "longitude": 100.49872,
+          "sum_rainfall_mm": 117.0,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -34902,7 +42046,33 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สนข.มีนบุรี",
           "latitude": 13.8136,
           "longitude": 100.73122,
-          "sum_rainfall_mm": 153.0,
+          "sum_rainfall_mm": 152.5,
+          "observed_at": "2026-09-25T20:00:00+07:00"
+        },
+        {
+          "geocode": "101002",
+          "tambon": "ต.แสนแสบ",
+          "amphoe": "อ.มีนบุรี",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "ปตร.บึงขวาง",
+          "latitude": 13.79988,
+          "longitude": 100.74482,
+          "sum_rainfall_mm": 157.0,
+          "observed_at": "2026-09-25T20:00:00+07:00"
+        },
+        {
+          "geocode": "101002",
+          "tambon": "ต.แสนแสบ",
+          "amphoe": "อ.มีนบุรี",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "จุดวัด ค.แสนแสบ-วัดทรัพย์ฯ",
+          "latitude": 13.8515,
+          "longitude": 100.80361,
+          "sum_rainfall_mm": 125.5,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -34925,49 +42095,10 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.กรุงเทพมหานคร",
           "region_id": "7",
           "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "จุดวัด ค.แสนแสบ-วัดทรัพย์ฯ",
-          "latitude": 13.8515,
-          "longitude": 100.80361,
-          "sum_rainfall_mm": 126.0,
-          "observed_at": "2026-09-25T20:00:00+07:00"
-        },
-        {
-          "geocode": "101002",
-          "tambon": "ต.แสนแสบ",
-          "amphoe": "อ.มีนบุรี",
-          "province": "จ.กรุงเทพมหานคร",
-          "region_id": "7",
-          "region_name": "กรุงเทพมหานครและปริมณฑล",
           "station": "ปตร.ประชาร่วมใจ",
           "latitude": 13.8212,
           "longitude": 100.74717,
           "sum_rainfall_mm": 164.5,
-          "observed_at": "2026-09-25T20:00:00+07:00"
-        },
-        {
-          "geocode": "101002",
-          "tambon": "ต.แสนแสบ",
-          "amphoe": "อ.มีนบุรี",
-          "province": "จ.กรุงเทพมหานคร",
-          "region_id": "7",
-          "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "ปตร.บึงขวาง",
-          "latitude": 13.79988,
-          "longitude": 100.74482,
-          "sum_rainfall_mm": 157.5,
-          "observed_at": "2026-09-25T20:00:00+07:00"
-        },
-        {
-          "geocode": "101203",
-          "tambon": "ต.ช่องนนทรี",
-          "amphoe": "อ.ยานนาวา",
-          "province": "จ.กรุงเทพมหานคร",
-          "region_id": "7",
-          "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "สนข.ยานนาวา",
-          "latitude": 13.69627,
-          "longitude": 100.54222,
-          "sum_rainfall_mm": 121.5,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -34981,6 +42112,19 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 13.69493,
           "longitude": 100.54874,
           "sum_rainfall_mm": 85.5,
+          "observed_at": "2026-09-25T20:00:00+07:00"
+        },
+        {
+          "geocode": "101203",
+          "tambon": "ต.ช่องนนทรี",
+          "amphoe": "อ.ยานนาวา",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "สนข.ยานนาวา",
+          "latitude": 13.69627,
+          "longitude": 100.54222,
+          "sum_rainfall_mm": 121.5,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -35019,7 +42163,7 @@ window.IEAT_THAIWATER_DATA = {
           "station": "จุดวัด ค.ประเวศฯ-ถ.ร่วมพัฒนา",
           "latitude": 13.70097,
           "longitude": 100.85106,
-          "sum_rainfall_mm": 113.5,
+          "sum_rainfall_mm": 112.5,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -35032,21 +42176,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองลำปลาทิว ลาดกระบัง",
           "latitude": 13.7407,
           "longitude": 100.79468,
-          "sum_rainfall_mm": 278.20000000000005,
-          "observed_at": "2026-09-26T04:00:00+07:00"
-        },
-        {
-          "geocode": "101101",
-          "tambon": "ต.ลาดกระบัง",
-          "amphoe": "อ.ลาดกระบัง",
-          "province": "จ.กรุงเทพมหานคร",
-          "region_id": "7",
-          "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "ค.ประเวศฯ-รพ.ลาดกระบัง",
-          "latitude": 13.72398,
-          "longitude": 100.78407,
-          "sum_rainfall_mm": 137.5,
-          "observed_at": "2026-09-25T20:00:00+07:00"
+          "sum_rainfall_mm": 286.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "101101",
@@ -35058,7 +42189,20 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ปตร.คลองประเวศฯ-ลาดกระบัง",
           "latitude": 13.72386,
           "longitude": 100.74979,
-          "sum_rainfall_mm": 161.0,
+          "sum_rainfall_mm": 160.0,
+          "observed_at": "2026-09-25T20:00:00+07:00"
+        },
+        {
+          "geocode": "101101",
+          "tambon": "ต.ลาดกระบัง",
+          "amphoe": "อ.ลาดกระบัง",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "ค.ประเวศฯ-รพ.ลาดกระบัง",
+          "latitude": 13.72398,
+          "longitude": 100.78407,
+          "sum_rainfall_mm": 137.0,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -35071,8 +42215,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองลาดพร้าว ปากคลอง2สายใต้",
           "latitude": 13.93183,
           "longitude": 100.63952,
-          "sum_rainfall_mm": 206.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 232.60000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "103801",
@@ -35094,10 +42238,10 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.กรุงเทพมหานคร",
           "region_id": "7",
           "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "ปตร.คลองลาดพร้าว",
-          "latitude": 13.79432,
-          "longitude": 100.58933,
-          "sum_rainfall_mm": 118.5,
+          "station": "สนข.วังทองหลาง",
+          "latitude": 13.76435,
+          "longitude": 100.60553,
+          "sum_rainfall_mm": 126.0,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -35120,10 +42264,10 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.กรุงเทพมหานคร",
           "region_id": "7",
           "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "สนข.วังทองหลาง",
-          "latitude": 13.76435,
-          "longitude": 100.60553,
-          "sum_rainfall_mm": 126.0,
+          "station": "ปตร.คลองลาดพร้าว",
+          "latitude": 13.79432,
+          "longitude": 100.58933,
+          "sum_rainfall_mm": 118.5,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -35149,8 +42293,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อโศก",
           "latitude": 13.74325,
           "longitude": 100.562164,
-          "sum_rainfall_mm": 128.79999999999998,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 130.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "103401",
@@ -35175,7 +42319,7 @@ window.IEAT_THAIWATER_DATA = {
           "station": "จุดวัด ค.ประเวศฯ-วัดขจรศิริ",
           "latitude": 13.71545,
           "longitude": 100.6415,
-          "sum_rainfall_mm": 133.0,
+          "sum_rainfall_mm": 132.5,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -35263,10 +42407,10 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.กรุงเทพมหานคร",
           "region_id": "7",
           "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "ปตร.พระยาสุเรนทร์",
-          "latitude": 13.92126,
-          "longitude": 100.68741,
-          "sum_rainfall_mm": 157.0,
+          "station": "จุดวัด ซ.แอนเน็กซ์",
+          "latitude": 13.93786,
+          "longitude": 100.62661,
+          "sum_rainfall_mm": 155.5,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -35276,10 +42420,10 @@ window.IEAT_THAIWATER_DATA = {
           "province": "จ.กรุงเทพมหานคร",
           "region_id": "7",
           "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "จุดวัด ซ.แอนเน็กซ์",
-          "latitude": 13.93786,
-          "longitude": 100.62661,
-          "sum_rainfall_mm": 155.5,
+          "station": "ปตร.พระยาสุเรนทร์",
+          "latitude": 13.92126,
+          "longitude": 100.68741,
+          "sum_rainfall_mm": 157.0,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -35344,7 +42488,7 @@ window.IEAT_THAIWATER_DATA = {
           "station": "จุดวัด ค.สิบสอง-ถ.ประชาสำราญ",
           "latitude": 13.91368,
           "longitude": 100.86244,
-          "sum_rainfall_mm": 92.0,
+          "sum_rainfall_mm": 91.5,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -35357,20 +42501,7 @@ window.IEAT_THAIWATER_DATA = {
           "station": "จุดวัด ค.ลำผักชี-รร.ลำผักชี",
           "latitude": 13.79205,
           "longitude": 100.83524,
-          "sum_rainfall_mm": 109.5,
-          "observed_at": "2026-09-25T20:00:00+07:00"
-        },
-        {
-          "geocode": "100302",
-          "tambon": "ต.หนองจอก",
-          "amphoe": "อ.หนองจอก",
-          "province": "จ.กรุงเทพมหานคร",
-          "region_id": "7",
-          "region_name": "กรุงเทพมหานครและปริมณฑล",
-          "station": "ปตร.คลองสิบสาม",
-          "latitude": 13.85859,
-          "longitude": 100.86754,
-          "sum_rainfall_mm": 101.5,
+          "sum_rainfall_mm": 109.0,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -35383,7 +42514,20 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ปตร.คลองแสนแสบ",
           "latitude": 13.85516,
           "longitude": 100.87292,
-          "sum_rainfall_mm": 97.5,
+          "sum_rainfall_mm": 97.0,
+          "observed_at": "2026-09-25T20:00:00+07:00"
+        },
+        {
+          "geocode": "100302",
+          "tambon": "ต.หนองจอก",
+          "amphoe": "อ.หนองจอก",
+          "province": "จ.กรุงเทพมหานคร",
+          "region_id": "7",
+          "region_name": "กรุงเทพมหานครและปริมณฑล",
+          "station": "ปตร.คลองสิบสาม",
+          "latitude": 13.85859,
+          "longitude": 100.86754,
+          "sum_rainfall_mm": 101.0,
           "observed_at": "2026-09-25T20:00:00+07:00"
         },
         {
@@ -35448,8 +42592,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.กำแพงแสน",
           "latitude": 14.00326,
           "longitude": 99.98091,
-          "sum_rainfall_mm": 114.80000000000001,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 118.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "730324",
@@ -35461,8 +42605,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานนครชัยศรี",
           "latitude": 13.79217,
           "longitude": 100.19817,
-          "sum_rainfall_mm": 197.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 198.39999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "730301",
@@ -35474,8 +42618,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.นครชัยศรี",
           "latitude": 13.79036,
           "longitude": 100.19051,
-          "sum_rainfall_mm": 194.79999999999998,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 195.20000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "730513",
@@ -35487,8 +42631,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองนราภิรมย์ (บางเลน)",
           "latitude": 13.88207,
           "longitude": 100.29086,
-          "sum_rainfall_mm": 111.60000000000001,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 118.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "730502",
@@ -35501,7 +42645,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 13.983198,
           "longitude": 100.179057,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "730501",
@@ -35513,8 +42657,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บางเลน",
           "latitude": 14.01636,
           "longitude": 100.17979,
-          "sum_rainfall_mm": 74.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 76.80000000000001,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "730703",
@@ -35526,8 +42670,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ศาลาดิน",
           "latitude": 13.80777,
           "longitude": 100.27417,
-          "sum_rainfall_mm": 124.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 127.39999999999999,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "730701",
@@ -35552,8 +42696,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองพระพิมล (ไทรน้อย)",
           "latitude": 13.97396,
           "longitude": 100.31901,
-          "sum_rainfall_mm": 119.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 126.20000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "120502",
@@ -35565,8 +42709,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ราษฎร์นิยม",
           "latitude": 14.10388,
           "longitude": 100.32209,
-          "sum_rainfall_mm": 115.39999999999999,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 120.6,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "120603",
@@ -35578,8 +42722,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานนวลฉวี",
           "latitude": 13.94749,
           "longitude": 100.53507,
-          "sum_rainfall_mm": 156.60000000000002,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 188.0,
+          "observed_at": "2026-09-26T06:00:00+07:00"
         },
         {
           "geocode": "130207",
@@ -35591,8 +42735,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "รร.วัดอู่ข้าว",
           "latitude": 14.19111,
           "longitude": 100.75421,
-          "sum_rainfall_mm": 126.80000000000001,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 159.4,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "130207",
@@ -35604,8 +42748,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองระพีพัฒน์แยกตก",
           "latitude": 14.20612,
           "longitude": 100.74476,
-          "sum_rainfall_mm": 117.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 158.60000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "130306",
@@ -35617,8 +42761,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เหนือปตร.พระธรรมราชา",
           "latitude": 14.07771,
           "longitude": 100.89208,
-          "sum_rainfall_mm": 139.39999999999998,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 155.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "130306",
@@ -35643,8 +42787,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ท้ายปตร.พระธรรมราชา",
           "latitude": 14.07636,
           "longitude": 100.89392,
-          "sum_rainfall_mm": 141.19999999999996,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 156.79999999999998,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "130301",
@@ -35656,8 +42800,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ปตร.จุฬาลงกรณ์",
           "latitude": 13.98135,
           "longitude": 100.6057,
-          "sum_rainfall_mm": 162.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 192.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "130114",
@@ -35669,8 +42813,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองเปรมประชากร หลักหก",
           "latitude": 13.96562,
           "longitude": 100.60262,
-          "sum_rainfall_mm": 151.2,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 180.60000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "130604",
@@ -35682,8 +42826,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองหกวา ลำลูกกา คลอง8",
           "latitude": 13.9416,
           "longitude": 100.77499,
-          "sum_rainfall_mm": 125.99999999999999,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 163.0,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "130407",
@@ -35695,8 +42839,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองระพีพัฒน์แยกใต้ หนองเสือ",
           "latitude": 14.2206,
           "longitude": 100.89168,
-          "sum_rainfall_mm": 104.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 115.19999999999999,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "130404",
@@ -35708,8 +42852,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านน้อยสว่าง",
           "latitude": 14.1652,
           "longitude": 100.77855,
-          "sum_rainfall_mm": 178.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 192.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "110602",
@@ -35721,8 +42865,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.ศีรษะจรเข้น้อย",
           "latitude": 13.67777,
           "longitude": 100.7945,
-          "sum_rainfall_mm": 261.40000000000003,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 270.8,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "110603",
@@ -35734,8 +42878,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองจระเข้ใหญ่ บางเสาธง (วัดศรีวารีน้อย)",
           "latitude": 13.66949,
           "longitude": 100.80058,
-          "sum_rainfall_mm": 242.39999999999998,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 251.2,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "110413",
@@ -35760,8 +42904,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ปตร.วัดบางกระเจ้านอก",
           "latitude": 13.689612,
           "longitude": 100.554886,
-          "sum_rainfall_mm": 131.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 134.40000000000003,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "110411",
@@ -35786,8 +42930,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ตลาดน้ำบางน้ำผึ้ง",
           "latitude": 13.678656,
           "longitude": 100.57356,
-          "sum_rainfall_mm": 104.6,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 107.80000000000001,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "110402",
@@ -35812,8 +42956,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "ปตร. คลองลัดบางยอ 1",
           "latitude": 13.676162,
           "longitude": 100.553085,
-          "sum_rainfall_mm": 134.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 136.60000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "110503",
@@ -35825,8 +42969,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.แหลมฟ้าผ่า",
           "latitude": 13.54701,
           "longitude": 100.53756,
-          "sum_rainfall_mm": 150.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 155.20000000000002,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "110115",
@@ -35864,8 +43008,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เมืองสมุทรสาคร",
           "latitude": 13.58598,
           "longitude": 100.23048,
-          "sum_rainfall_mm": 136.4,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 137.00000000000003,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "740116",
@@ -35877,8 +43021,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "อบต.บางกระเจ้า",
           "latitude": 13.52146,
           "longitude": 100.19283,
-          "sum_rainfall_mm": 99.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 100.39999999999999,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "740117",
@@ -35891,7 +43035,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 13.5178,
           "longitude": 100.27499,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "observed_at": "2026-09-26T07:00:00+07:00"
         },
         {
           "geocode": "740113",
@@ -35903,11 +43047,11 @@ window.IEAT_THAIWATER_DATA = {
           "station": "คลองมหาชัย วัดพันท้ายนรสิงห์",
           "latitude": 13.58184,
           "longitude": 100.36587,
-          "sum_rainfall_mm": 123.8,
-          "observed_at": "2026-09-26T04:00:00+07:00"
+          "sum_rainfall_mm": 124.80000000000001,
+          "observed_at": "2026-09-26T07:00:00+07:00"
         }
       ],
-      "risk_map": "https://api.hii.or.th/v2/proxy-image/3days_riskmap_25_09_2026.png?1790374034",
+      "risk_map": "https://api.hii.or.th/v2/proxy-image/3days_riskmap_25_09_2026.png?1790384822",
       "source_url": "https://api.hii.or.th/v2/4UQaYnf0Bx4fXPYyCdDRbqHyXH9Ixvd2nVUjaN1cLBY=/warning/flashflood-48h"
     }
   }
