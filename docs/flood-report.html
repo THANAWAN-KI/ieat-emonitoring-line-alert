@@ -296,9 +296,9 @@
     if(sheet.classList.contains("gistda-report-sheet")){
       const image=sheet.querySelector("img");
       if(!image?.complete||!image.naturalWidth)throw new Error("ภาพ GISTDA ยังโหลดไม่เสร็จ");
-      const response=await fetch(image.currentSrc||image.src);
-      if(!response.ok)throw new Error("ไม่สามารถอ่านภาพ GISTDA ได้");
-      return response.blob();
+      const canvas=document.createElement("canvas");canvas.width=image.naturalWidth;canvas.height=image.naturalHeight;
+      canvas.getContext("2d").drawImage(image,0,0);
+      return new Promise((resolve,reject)=>canvas.toBlob(blob=>blob?resolve(blob):reject(new Error("ไม่สามารถสร้าง PNG ได้")),"image/png"));
     }
     if(!sheet.querySelector("iframe")){
       await document.fonts?.ready;
