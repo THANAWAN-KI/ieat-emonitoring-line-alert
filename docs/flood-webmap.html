@@ -8,6 +8,8 @@
 <style>
 html,body,#viewDiv{width:100%;height:100%;margin:0}
 body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
+#trafficStatus{position:absolute;z-index:6;left:12px;bottom:12px;max-width:min(350px,calc(100% - 24px));padding:9px 12px;background:#fffffff0;border-radius:9px;box-shadow:0 2px 10px #0003;color:#34495e;font-size:12px}
+#trafficStatus a{color:#1769c2}
 #viewDiv{position:absolute;inset:0}
 #message{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:5;padding:12px 16px;border-radius:8px;background:#fff;box-shadow:0 2px 12px #1b334433;color:#36495a;text-align:center}
 #fallback{display:none;position:absolute;inset:0;width:100%;height:100%;border:0}
@@ -18,6 +20,7 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
 </head>
 <body>
 <div id="viewDiv" aria-label="แผนที่สถานการณ์น้ำท่วม"></div>
+<div id="trafficStatus" role="status">Longdo: กำลังโหลดเหตุการณ์จราจร…</div>
 <div id="message" role="status">กำลังโหลดแผนที่…</div>
 <iframe id="fallback" title="แผนที่สถานการณ์น้ำท่วมจาก ArcGIS Map Viewer" loading="eager" allow="fullscreen; geolocation"></iframe>
 <a id="fallbackLink" target="_blank" rel="noopener" href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=3d24287ac6ea49cd823625ddad496e01">เปิดแผนที่ใน ArcGIS</a>
@@ -27,6 +30,9 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
  var itemId="3d24287ac6ea49cd823625ddad496e01";
  var viewerUrl="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap="+itemId+"&theme=light&legend=true&information=true&scroll=false&basemaps=true";
  var view=null, pending=null, ready=false, fallback=false;
+ var trafficStatus=document.getElementById("trafficStatus");
+ function trafficText(value){trafficStatus.textContent=value}
+ function escapeHtml(value){return String(value==null?"":value).replace(/[&<>"']/g,function(ch){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]})}
  var captureMode=new URLSearchParams(location.search).get("capture")==="1";
  var initialCenter=new URLSearchParams(location.search).get("center");
  var initialScale=Number(new URLSearchParams(location.search).get("scale"));
@@ -78,12 +84,41 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
  });
  var timer=setTimeout(showFallback,25000);
  if(window.arcgisScriptFailed||typeof window.require!=="function"){clearTimeout(timer);showFallback();return}
- require(["esri/WebMap","esri/views/MapView","esri/widgets/Home","esri/widgets/Search","esri/widgets/LayerList","esri/widgets/Legend","esri/widgets/Expand","esri/widgets/BasemapGallery","esri/layers/GeoJSONLayer"],
- function(WebMap,MapView,Home,Search,LayerList,Legend,Expand,BasemapGallery,GeoJSONLayer){
+ require(["esri/WebMap","esri/views/MapView","esri/widgets/Home","esri/widgets/Search","esri/widgets/LayerList","esri/widgets/Legend","esri/widgets/Expand","esri/widgets/BasemapGallery","esri/layers/GeoJSONLayer","esri/layers/GraphicsLayer","esri/Graphic"],
+ function(WebMap,MapView,Home,Search,LayerList,Legend,Expand,BasemapGallery,GeoJSONLayer,GraphicsLayer,Graphic){
   var webmap=new WebMap({portalItem:{id:itemId}});
   webmap.load().then(function(){
    if(fallback)return;
    webmap.basemap="osm";
+   var trafficLayer=new GraphicsLayer({title:"เหตุการณ์จราจร · Longdo",visible:true});
+   webmap.add(trafficLayer);
+   async function loadTraffic(){
+    try{
+     var response=await fetch("https://event.longdo.com/feed/json",{cache:"no-store"});
+     if(!response.ok)throw Error("HTTP "+response.status);
+     var events=await response.json();
+     if(!Array.isArray(events))throw Error("ข้อมูลไม่ใช่รายการเหตุการณ์");
+     var now=Date.now(),graphics=[];
+     events.forEach(function(e){
+      var lon=Number(e.longitude),lat=Number(e.latitude),start=Date.parse(String(e.start||"").replace(" ","T")+"+07:00"),stop=Date.parse(String(e.stop||"").replace(" ","T")+"+07:00");
+      if(!Number.isFinite(lon)||!Number.isFinite(lat)||Math.abs(lon)>180||Math.abs(lat)>90||Number.isFinite(stop)&&stop<now||Number.isFinite(start)&&start>now+3600000)return;
+      var flood=e.icon==="flood",fire=e.icon==="fire",color=flood?[0,116,220,.95]:fire?[225,69,54,.95]:[240,148,25,.95];
+      graphics.push(new Graphic({geometry:{type:"point",longitude:lon,latitude:lat},
+       symbol:{type:"simple-marker",style:"circle",size:11,color:color,outline:{color:"white",width:1.5}},
+       attributes:{eid:String(e.eid||""),title:String(e.title||"เหตุการณ์จราจร"),description:String(e.description||""),start:String(e.start||""),stop:String(e.stop||"")},
+       popupTemplate:{title:"{title}",content:function(event){
+        var a=event.graphic.attributes;
+        return "<div style='white-space:pre-wrap'>"+escapeHtml(a.description)+"</div><p>แจ้ง "+escapeHtml(a.start)+" · สิ้นสุดตามฟีด "+escapeHtml(a.stop)+"</p><a target='_blank' rel='noopener' href='https://event.longdo.com/'>ที่มา: Longdo Traffic</a>";
+       }}}));
+     });
+     trafficLayer.removeAll();trafficLayer.addMany(graphics);
+     trafficText("Longdo Traffic · "+graphics.length+" เหตุการณ์ที่ยังอยู่ในช่วงเวลาของฟีด · ตรวจล่าสุด "+new Date().toLocaleTimeString("th-TH",{timeZone:"Asia/Bangkok",hour:"2-digit",minute:"2-digit"})+" น.");
+    }catch(error){
+     trafficLayer.removeAll();
+     trafficStatus.innerHTML='โหลดเหตุการณ์ Longdo ไม่สำเร็จ · <a href="https://traffic.longdo.com/main/" target="_blank" rel="noopener">ดูข้อมูลต้นทาง</a>';
+    }
+   }
+   loadTraffic();setInterval(loadTraffic,5*60*1000);
    view=new MapView({container:"viewDiv",map:webmap});
    view.when(function(){
     if(fallback)return;
