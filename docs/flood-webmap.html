@@ -23,9 +23,9 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
 .esri-popup__header{min-height:24px!important}.esri-popup__header-title{display:none!important}
 .esri-popup__button--dock,.esri-popup__button--collapse{display:none!important}
 .esri-popup__content{margin:0!important;padding:5px 18px 18px!important}.esri-popup__content .map-popup{font-family:Arial,"Sarabun",sans-serif;color:#243044;min-width:245px;padding:4px 2px 8px}
-.map-popup-head{display:flex;align-items:center;gap:9px;margin-bottom:13px}.map-popup-head img{width:37px;height:45px;object-fit:contain}.map-popup-head strong{font-size:15px}.map-popup-head small{display:block;color:#8895a5;font-size:12px;margin-top:3px}
+.map-popup-head{display:flex;align-items:center;gap:9px;margin-bottom:13px}.map-popup-head img{width:37px;height:45px;object-fit:contain}.map-popup-head strong{font-size:15px}.map-popup-head small{display:block;width:max-content;color:#d93632;background:#fde8e7;border-radius:999px;padding:3px 9px;font-size:12px;font-weight:700;margin-top:3px}
 .map-popup-title{font-size:16px;font-weight:700;line-height:1.5;margin:8px 0}.map-popup-sub{font-size:12px;color:#8895a5}.map-popup-rule{border:0;border-top:1px solid #e8edf2;margin:13px 0}
-.map-popup-row{display:flex;justify-content:space-between;gap:14px;margin:7px 0;font-size:13px}.map-popup-row span{color:#7a8798}.map-popup-row b{text-align:right}.map-popup-source{color:#639ec0;font-size:12px;margin-top:14px}.map-popup p{line-height:1.55;white-space:pre-wrap;font-size:13px}.map-popup a{color:#1769c2}
+.map-popup-row{display:flex;justify-content:space-between;gap:14px;margin:7px 0;font-size:13px}.map-popup-row span{color:#7a8798}.map-popup-row b{text-align:right}.map-popup-source{color:#639ec0;font-size:12px;margin-top:14px}.map-popup-source a{font-weight:700}.map-popup-note{display:block;color:#9ba6b3;font-size:11px;margin-top:5px}.map-popup p{line-height:1.55;white-space:pre-wrap;font-size:13px}.map-popup a{color:#1769c2}
 </style>
 <script src="https://js.arcgis.com/4.30/" onerror="window.arcgisScriptFailed=true"></script>
 </head>
@@ -123,6 +123,12 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
    var icons={flood:"./assets/map-flood-point.svg",waterAlert:"./assets/map-water-alert.svg",waterWatch:"./assets/map-water-watch.svg",camera:"./assets/map-camera-point.svg",traffic:"./assets/map-traffic-point.svg"};
    function iconSymbol(kind){return {type:"picture-marker",url:new URL(icons[kind],location.href).href,width:"31px",height:"37px",yoffset:"18px"}}
    function popupHead(kind,label,subtitle){return "<div class='map-popup-head'><img src='"+icons[kind]+"' alt=''><div><strong>"+escapeHtml(label)+"</strong><small>"+escapeHtml(subtitle)+"</small></div></div>"}
+   function thaiTime(value){
+    var match=String(value||"").match(/^(\\d{4})-(\\d{2})-(\\d{2})[ T](\\d{2}):(\\d{2})/);
+    if(!match)return String(value||"–");
+    var month=["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."][Number(match[2])-1];
+    return Number(match[3])+" "+month+" "+match[4]+":"+match[5];
+   }
    function popupRow(label,value){return "<div class='map-popup-row'><span>"+escapeHtml(label)+"</span><b>"+escapeHtml(value)+"</b></div>"}
    function point(lon,lat){return Number.isFinite(lon)&&Number.isFinite(lat)&&lon>=97&&lon<=106&&lat>=5&&lat<=21}
    function marker(lon,lat,icon,attributes,popup){
@@ -174,12 +180,13 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
       var score=Number(row.severity_score)||0;
       var icon=score>=4?"waterAlert":"waterWatch";
       graphics.push(marker(lon,lat,icon,
-       {title:String(row.station||"สถานีระดับน้ำ"),level:String(row.value_text||"–"),status:String(row.status||"–"),time:String(row.observed_at||"–"),agency:String(row.agency||"ThaiWater"),percent:row.storage_percent==null?"–":String(row.storage_percent)+"%",province:String(row.province||"")},
+       {title:String(row.station||"สถานีระดับน้ำ"),level:String(row.value_text||"–"),status:String(row.status||"–"),time:thaiTime(row.observed_at),bankfull:row.bankfull_msl==null?"":String(row.bankfull_msl)+" ม.รทก.",agency:String(row.agency||"ThaiWater"),percent:row.storage_percent==null?"–":String(row.storage_percent)+"%",province:String(row.province||"")},
        function(event){var a=event.graphic.attributes;
         return "<div class='map-popup'>"+popupHead(icon,"ระดับน้ำ",a.status)+
          "<div class='map-popup-title'>"+escapeHtml(a.title)+"</div><div class='map-popup-sub'>"+escapeHtml(a.province)+"</div>"+
-         "<hr class='map-popup-rule'>"+popupRow("ระดับน้ำ",a.level)+popupRow("ความจุลำน้ำ",a.percent)+popupRow("เวลาที่วัด",a.time)+
-         "<div class='map-popup-source'>ที่มา: <a target='_blank' rel='noopener' href='https://www.thaiwater.net/water/wl'>ThaiWater</a> · "+escapeHtml(a.agency)+"</div></div>";
+         "<hr class='map-popup-rule'>"+popupRow("ระดับน้ำ",a.level)+(a.bankfull?popupRow("ระดับตลิ่ง",a.bankfull):"")+popupRow("ความจุลำน้ำ",a.percent)+popupRow("เวลาที่วัด",a.time)+
+         "<div class='map-popup-source'>ที่มา: <a target='_blank' rel='noopener' href='https://www.thaiwater.net/water/wl'>คลังข้อมูลน้ำแห่งชาติ (ThaiWater)</a> · "+escapeHtml(a.agency)+"</div>"+
+         "<span class='map-popup-note'>สถานีของ "+escapeHtml(a.agency)+"</span></div>";
        }));
      });
      waterLayer.removeAll();waterLayer.addMany(graphics);
