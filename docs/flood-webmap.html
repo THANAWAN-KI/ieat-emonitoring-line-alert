@@ -71,13 +71,13 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
  }
  function popupRow(label,value){return "<div class='map-popup-row'><span>"+escapeHtml(label)+"</span><b>"+escapeHtml(value)+"</b></div>"}
  function thaiTime(value){
-  var match=String(value||"").match(/^(\\d{4})-(\\d{2})-(\\d{2})[ T](\\d{2}):(\\d{2})/);
+  var match=String(value||"").match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})/);
   if(!match)return String(value||"–");
   var month=["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."][Number(match[2])-1];
   return Number(match[3])+" "+month+" "+match[4]+":"+match[5];
  }
- function leafletPopup(icon,label,subtitle,title,rows,description,source){
-  return "<div class='map-popup'>"+popupHead(icon,label,subtitle)+"<div class='map-popup-title'>"+escapeHtml(title)+"</div>"+
+ function leafletPopup(icon,label,subtitle,title,rows,description,source,subline){
+  return "<div class='map-popup'>"+popupHead(icon,label,subtitle)+"<div class='map-popup-title'>"+escapeHtml(title)+"</div>"+(subline?"<div class='map-popup-sub'>"+escapeHtml(subline)+"</div>":"")+
    "<hr class='map-popup-rule'>"+rows.map(function(row){return popupRow(row[0],row[1])}).join("")+
    (description?"<p>"+escapeHtml(description)+"</p>":"")+
    "<div class='map-popup-source'>"+source+"</div></div>";
@@ -100,7 +100,7 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
     if(row.bankfull_msl!=null)rows.push(["ระดับตลิ่ง",row.bankfull_msl+" ม.รทก."]);
     rows.push(["ความจุลำน้ำ",row.storage_percent==null?"–":row.storage_percent+"%"],["เวลาที่วัด",thaiTime(row.observed_at)]);
     L.marker([lat,lon],{icon:leafletIcon(icon)}).bindPopup(leafletPopup(icon,"ระดับน้ำ",row.status||"–",row.station||"สถานีระดับน้ำ",rows,"",
-     "ที่มา: <a target='_blank' rel='noopener' href='https://www.thaiwater.net/water/wl'>คลังข้อมูลน้ำแห่งชาติ (ThaiWater)</a> · "+escapeHtml(row.agency||"ThaiWater"))).addTo(groups.water);
+     "ที่มา: <a target='_blank' rel='noopener' href='https://www.thaiwater.net/water/wl'>คลังข้อมูลน้ำแห่งชาติ (ThaiWater)</a> · "+escapeHtml(row.agency||"ThaiWater"),(row.district?"อ."+row.district+" ":"")+"จ."+String(row.province||""))).addTo(groups.water);
     count++;
    });reportSource("water",count+" สถานี");
   }catch(error){console.error("Leaflet water",error);reportSource("water","โหลดไม่สำเร็จ")}
