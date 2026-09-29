@@ -19,6 +19,10 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
 #fallback{display:none;position:absolute;inset:0;width:100%;height:100%;border:0}
 #fallbackLink{display:none;position:absolute;right:12px;bottom:12px;z-index:6;padding:9px 12px;border-radius:7px;background:#fff;color:#1769c2;box-shadow:0 2px 10px #0003;text-decoration:none;font-size:13px}
 .esri-ui .esri-widget{font-family:Arial,"Sarabun",sans-serif}
+.esri-popup__content{margin:0!important}.esri-popup__content .map-popup{font-family:Arial,"Sarabun",sans-serif;color:#243044;min-width:245px;padding:4px 2px 8px}
+.map-popup-head{display:flex;align-items:center;gap:9px;margin-bottom:13px}.map-popup-head img{width:37px;height:45px;object-fit:contain}.map-popup-head strong{font-size:15px}.map-popup-head small{display:block;color:#8895a5;font-size:12px;margin-top:3px}
+.map-popup-title{font-size:16px;font-weight:700;line-height:1.5;margin:8px 0}.map-popup-sub{font-size:12px;color:#8895a5}.map-popup-rule{border:0;border-top:1px solid #e8edf2;margin:13px 0}
+.map-popup-row{display:flex;justify-content:space-between;gap:14px;margin:7px 0;font-size:13px}.map-popup-row span{color:#7a8798}.map-popup-row b{text-align:right}.map-popup-source{color:#639ec0;font-size:12px;margin-top:14px}.map-popup p{line-height:1.55;white-space:pre-wrap;font-size:13px}.map-popup a{color:#1769c2}
 </style>
 <script src="https://js.arcgis.com/4.30/" onerror="window.arcgisScriptFailed=true"></script>
 </head>
@@ -112,11 +116,15 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
    document.querySelectorAll("#dataControls input[data-layer]").forEach(function(input){
     input.addEventListener("change",function(){layers[input.dataset.layer].visible=input.checked});
    });
+   var icons={flood:"./assets/map-flood-point.svg",waterAlert:"./assets/map-water-alert.svg",waterWatch:"./assets/map-water-watch.svg",camera:"./assets/map-camera-point.svg",traffic:"./assets/map-traffic-point.svg"};
+   function iconSymbol(kind){return {type:"picture-marker",url:new URL(icons[kind],location.href).href,width:"31px",height:"37px",yoffset:"18px"}}
+   function popupHead(kind,label,subtitle){return "<div class='map-popup-head'><img src='"+icons[kind]+"' alt=''><div><strong>"+escapeHtml(label)+"</strong><small>"+escapeHtml(subtitle)+"</small></div></div>"}
+   function popupRow(label,value){return "<div class='map-popup-row'><span>"+escapeHtml(label)+"</span><b>"+escapeHtml(value)+"</b></div>"}
    function point(lon,lat){return Number.isFinite(lon)&&Number.isFinite(lat)&&lon>=97&&lon<=106&&lat>=5&&lat<=21}
-   function marker(lon,lat,color,attributes,popup){
+   function marker(lon,lat,icon,attributes,popup){
     return new Graphic({geometry:{type:"point",longitude:lon,latitude:lat},
-     symbol:{type:"simple-marker",style:"circle",size:12,color:color,outline:{color:"white",width:1.5}},
-     attributes:attributes,popupTemplate:{title:"{title}",content:popup}});
+     symbol:iconSymbol(icon),
+     attributes:attributes,popupTemplate:{title:" ",content:popup}});
    }
    async function loadTraffic(){
     try{
@@ -132,9 +140,12 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
       if(!point(lon,lat)||(Number.isFinite(stop)&&stop<now)||(Number.isFinite(start)&&start>now+3600000))return;
       var isFlood=String(e.icon||"").toLowerCase()==="flood";
       var attrs={title:String(e.title||"เหตุการณ์"),description:String(e.description||""),start:String(e.start||""),stop:String(e.stop||"")};
-      (isFlood?floods:others).push(marker(lon,lat,isFlood?[29,151,208,.95]:[240,148,25,.95],attrs,function(event){
+      (isFlood?floods:others).push(marker(lon,lat,isFlood?"flood":"traffic",attrs,function(event){
        var a=event.graphic.attributes;
-       return "<p style='white-space:pre-wrap'>"+escapeHtml(a.description)+"</p><p>รายงาน "+escapeHtml(a.start)+" · สิ้นสุดตามฟีด "+escapeHtml(a.stop)+"</p><a target='_blank' rel='noopener' href='https://traffic.longdo.com/main/'>ที่มา: Longdo Traffic</a>";
+       return "<div class='map-popup'>"+popupHead(isFlood?"flood":"traffic",isFlood?"จุดน้ำท่วม":"เหตุการณ์จราจร",a.start)+
+        "<div class='map-popup-title'>"+escapeHtml(a.title)+"</div><hr class='map-popup-rule'>"+
+        "<p>"+escapeHtml(a.description)+"</p>"+popupRow("สิ้นสุดตามฟีด",a.stop)+
+        "<div class='map-popup-source'>ที่มา: <a target='_blank' rel='noopener' href='https://traffic.longdo.com/main/'>Longdo Traffic</a></div></div>";
       }));
      });
      floodLayer.removeAll();floodLayer.addMany(floods);
@@ -157,9 +168,15 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
       var lon=Number(row.lon),lat=Number(row.lat);
       if(!point(lon,lat))return;
       var score=Number(row.severity_score)||0;
-      graphics.push(marker(lon,lat,score>=4?[237,59,33,.95]:score>=3?[255,138,0,.95]:[16,157,192,.95],
-       {title:String(row.station||"สถานีระดับน้ำ"),level:String(row.value_text||"–"),status:String(row.status||"–"),time:String(row.observed_at||"–"),agency:String(row.agency||"ThaiWater"),percent:row.storage_percent==null?"–":String(row.storage_percent)+"%"},
-       function(event){var a=event.graphic.attributes;return "<p><b>ระดับน้ำ:</b> "+escapeHtml(a.level)+"</p><p><b>สถานะ:</b> "+escapeHtml(a.status)+" · เทียบตลิ่ง "+escapeHtml(a.percent)+"</p><p>ตรวจวัด "+escapeHtml(a.time)+" · "+escapeHtml(a.agency)+"</p><a target='_blank' rel='noopener' href='https://www.thaiwater.net/water/wl'>ที่มา: ThaiWater</a>"}));
+      var icon=score>=4?"waterAlert":"waterWatch";
+      graphics.push(marker(lon,lat,icon,
+       {title:String(row.station||"สถานีระดับน้ำ"),level:String(row.value_text||"–"),status:String(row.status||"–"),time:String(row.observed_at||"–"),agency:String(row.agency||"ThaiWater"),percent:row.storage_percent==null?"–":String(row.storage_percent)+"%",province:String(row.province||"")},
+       function(event){var a=event.graphic.attributes;
+        return "<div class='map-popup'>"+popupHead(icon,"ระดับน้ำ",a.status)+
+         "<div class='map-popup-title'>"+escapeHtml(a.title)+"</div><div class='map-popup-sub'>"+escapeHtml(a.province)+"</div>"+
+         "<hr class='map-popup-rule'>"+popupRow("ระดับน้ำ",a.level)+popupRow("ความจุลำน้ำ",a.percent)+popupRow("เวลาที่วัด",a.time)+
+         "<div class='map-popup-source'>ที่มา: <a target='_blank' rel='noopener' href='https://www.thaiwater.net/water/wl'>ThaiWater</a> · "+escapeHtml(a.agency)+"</div></div>";
+       }));
      });
      waterLayer.removeAll();waterLayer.addMany(graphics);
      reportSource("water",graphics.length+" สถานี");
@@ -177,8 +194,15 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
       if(!point(lon,lat))return;
       var href=String(row.link||"");
       if(!/^https?:\/\//i.test(href))href="https://traffic.longdo.com/main/";
-      graphics.push(marker(lon,lat,[73,91,166,.95],{title:String(row.title||"กล้อง CCTV"),updated:String(row.lastupdate||"–"),url:href},
-       function(event){var a=event.graphic.attributes;return "<p>ภาพล่าสุด "+escapeHtml(a.updated)+"</p><a href='"+escapeHtml(a.url)+"' target='_blank' rel='noopener'>เปิดภาพจาก Longdo Traffic ↗</a>"}));
+      var imageUrl=String(row.imgurl||"");if(!/^https:\/\//i.test(imageUrl))imageUrl="";
+      graphics.push(marker(lon,lat,"camera",{title:String(row.title||"กล้อง CCTV"),updated:String(row.lastupdate||"–"),url:href,image:imageUrl},
+       function(event){var a=event.graphic.attributes;
+        return "<div class='map-popup'>"+popupHead("camera","กล้อง CCTV",a.updated)+
+         "<div class='map-popup-title'>"+escapeHtml(a.title)+"</div><hr class='map-popup-rule'>"+
+         (a.image?"<img loading='lazy' src='"+escapeHtml(a.image)+"' alt='ภาพจากกล้อง' style='max-width:100%;border-radius:7px'>":"")+
+         "<p><a href='"+escapeHtml(a.url)+"' target='_blank' rel='noopener'>ดูภาพล่าสุดจาก Longdo Traffic ↗</a></p>"+
+         "<div class='map-popup-source'>ที่มา: Longdo Traffic</div></div>";
+       }));
      });
      cameraLayer.removeAll();cameraLayer.addMany(graphics);
      reportSource("cameras",graphics.length+" กล้อง");
