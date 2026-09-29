@@ -32,6 +32,7 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
 .map-popup-row{display:flex;justify-content:space-between;gap:14px;margin:7px 0;font-size:13px}.map-popup-row span{color:#7a8798}.map-popup-row b{text-align:right}.map-popup-source{color:#639ec0;font-size:12px;margin-top:14px}.map-popup-source a{font-weight:700}.map-popup-note{display:block;color:#9ba6b3;font-size:11px;margin-top:5px}.map-popup p{line-height:1.55;white-space:pre-wrap;font-size:13px}.map-popup a{color:#1769c2}
 </style>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>window.FloodLeaflet=window.L;</script>
 <script src="https://js.arcgis.com/4.30/" onerror="window.arcgisScriptFailed=true"></script>
 </head>
 <body>
@@ -51,6 +52,7 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
 <script>
 (function(){
  "use strict";
+ var L=window.FloodLeaflet;
  var itemId="3d24287ac6ea49cd823625ddad496e01";
  var viewerUrl="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap="+itemId+"&theme=light&legend=true&information=true&scroll=false&basemaps=true";
  var view=null, pending=null, ready=false, fallback=false, leafletMap=null, leafletGroups=null;
