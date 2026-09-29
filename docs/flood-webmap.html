@@ -103,7 +103,7 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
      "ที่มา: <a target='_blank' rel='noopener' href='https://www.thaiwater.net/water/wl'>คลังข้อมูลน้ำแห่งชาติ (ThaiWater)</a> · "+escapeHtml(row.agency||"ThaiWater"))).addTo(groups.water);
     count++;
    });reportSource("water",count+" สถานี");
-  }catch(error){reportSource("water","โหลดไม่สำเร็จ")}
+  }catch(error){console.error("Leaflet water",error);reportSource("water","โหลดไม่สำเร็จ")}
   try{
    var response=await fetch("https://event.longdo.com/feed/json",{cache:"no-store"});
    if(!response.ok)throw Error("Longdo HTTP "+response.status);
@@ -130,7 +130,7 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
     L.marker([lat,lon],{icon:leafletIcon("camera")}).bindPopup(leafletPopup("camera","กล้อง CCTV",thaiTime(row.lastupdate),row.title||"กล้อง CCTV",[],"",
      "<a target='_blank' rel='noopener' href='"+escapeHtml(url)+"'>เปิดภาพจาก Longdo Traffic ↗</a>")).addTo(groups.cameras);count++;
    });reportSource("cameras",count+" กล้อง");
-  }catch(error){reportSource("cameras","โหลดไม่สำเร็จ")}
+  }catch(error){console.error("Leaflet cameras",error);reportSource("cameras","โหลดไม่สำเร็จ")}
   try{
    var response=await fetch("./data/gistda_flood_latest.geojson?v="+Date.now(),{cache:"no-store"});
    if(response.ok){
