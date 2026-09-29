@@ -65,6 +65,17 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
  var initialCenter=new URLSearchParams(location.search).get("center");
  var initialScale=Number(new URLSearchParams(location.search).get("scale"));
  var message=document.getElementById("message"),frame=document.getElementById("fallback");
+ function popupHead(kind,label,subtitle){
+  var icon={flood:"./assets/map-flood-point.svg",waterAlert:"./assets/map-water-alert.svg",waterWatch:"./assets/map-water-watch.svg",camera:"./assets/map-camera-point.svg",traffic:"./assets/map-traffic-point.svg"}[kind];
+  return "<div class='map-popup-head'><img src='"+icon+"' alt=''><div><strong>"+escapeHtml(label)+"</strong><small>"+escapeHtml(subtitle)+"</small></div></div>";
+ }
+ function popupRow(label,value){return "<div class='map-popup-row'><span>"+escapeHtml(label)+"</span><b>"+escapeHtml(value)+"</b></div>"}
+ function thaiTime(value){
+  var match=String(value||"").match(/^(\\d{4})-(\\d{2})-(\\d{2})[ T](\\d{2}):(\\d{2})/);
+  if(!match)return String(value||"–");
+  var month=["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."][Number(match[2])-1];
+  return Number(match[3])+" "+month+" "+match[4]+":"+match[5];
+ }
  function leafletPopup(icon,label,subtitle,title,rows,description,source){
   return "<div class='map-popup'>"+popupHead(icon,label,subtitle)+"<div class='map-popup-title'>"+escapeHtml(title)+"</div>"+
    "<hr class='map-popup-rule'>"+rows.map(function(row){return popupRow(row[0],row[1])}).join("")+
