@@ -35,6 +35,21 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
 #gistdaStatus a{color:#1769c2}
 #trafficStatus{max-width:calc(100% - 90px);font-size:11px;max-height:45px;overflow:auto}
 @media(max-width:600px){#dataControls label{padding:5px;font-size:11px}#gistdaStatus{bottom:76px;font-size:11px}.leaflet-popup-content{min-width:180px}}
+
+.map-popup{max-width:340px;overflow-wrap:anywhere}
+.map-popup-head{padding:12px;background:#eff6ff;border-radius:12px;align-items:center}
+.map-popup-head small{color:#075985;background:#dff2fc;font-weight:600}
+.map-popup-head img{width:40px;height:48px}
+.map-popup-title{font-size:18px;color:#17334b;margin:14px 0 8px}
+.map-popup-sub,.map-popup-row span{color:#536779}
+.map-popup-row{padding:9px 0;margin:0;border-bottom:1px solid #edf2f7;align-items:flex-start}
+.map-popup-row b{color:#243b53;font-weight:600;max-width:65%;overflow-wrap:anywhere}
+.map-popup-source{color:#465c6c;padding-top:8px}
+.map-popup-note{color:#536779;font-size:12px;line-height:1.7;background:#f5f8fb;padding:10px;border-radius:10px}
+.map-popup p{font-size:14px;color:#344c5e}
+.esri-popup__main-container{max-width:calc(100vw - 24px)!important}
+.leaflet-popup-content{min-width:0;width:min(300px,calc(100vw - 70px))!important}
+
 </style>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>window.FloodLeaflet=window.L;</script>
@@ -167,13 +182,17 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
     input.addEventListener("change",function(){if(layers[input.dataset.layer])layers[input.dataset.layer].visible=input.checked});
    });
    var icons={flood:"./assets/map-flood-point.svg",waterAlert:"./assets/map-water-alert.svg",waterWatch:"./assets/map-water-watch.svg",camera:"./assets/map-camera-point.svg",traffic:"./assets/map-traffic-point.svg"};
-   function iconSymbol(kind){return {type:"picture-marker",url:new URL(icons[kind],location.href).href,width:"31px",height:"37px",yoffset:"18px"}}
+   function customPin(color,art){return "data:image/svg+xml;charset=UTF-8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="48" height="58" viewBox="0 0 48 58"><path d="M24 56L9 36C-3 20 6 2 24 2S51 20 39 36Z" fill="'+color+'" stroke="white" stroke-width="3"/><circle cx="24" cy="23" r="16" fill="white" fill-opacity=".16"/><g fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">'+art+'</g></svg>')}
+   icons.flood=customPin("#007b9e",'<path d="M24 10c-3 5-7 9-7 13a7 7 0 0 0 14 0c0-4-4-8-7-13Z"/><path d="M12 33q3-3 6 0t6 0t6 0t6 0"/>');
+   icons.traffic=customPin("#b45309",'<path d="m24 11 13 23H11Z"/><path d="M24 19v7"/><path d="M24 30h.01"/>');
+   icons.camera=customPin("#475569",'<rect x="12" y="16" width="24" height="16" rx="3"/><circle cx="24" cy="24" r="5"/><path d="M16 16l2-4h12l2 4"/>');
+   function iconSymbol(kind){return {type:"picture-marker",url:new URL(icons[kind],location.href).href,width:kind==="flood"||kind==="traffic"||kind==="camera"?"36px":"31px",height:kind==="flood"||kind==="traffic"||kind==="camera"?"44px":"37px",yoffset:kind==="flood"||kind==="traffic"||kind==="camera"?"22px":"18px"}}
    function popupHead(kind,label,subtitle){return "<div class='map-popup-head'><img src='"+icons[kind]+"' alt=''><div><strong>"+escapeHtml(label)+"</strong><small>"+escapeHtml(subtitle)+"</small></div></div>"}
    function thaiTime(value){
     var match=String(value||"").match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})/);
     if(!match)return String(value||"–");
     var month=["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."][Number(match[2])-1];
-    return Number(match[3])+" "+month+" "+match[4]+":"+match[5];
+    return Number(match[3])+" "+month+" "+(Number(match[1])+543)+" · "+match[4]+":"+match[5]+" น.";
    }
    function popupRow(label,value){return "<div class='map-popup-row'><span>"+escapeHtml(label)+"</span><b>"+escapeHtml(value)+"</b></div>"}
    function point(lon,lat){return Number.isFinite(lon)&&Number.isFinite(lat)&&lon>=97&&lon<=106&&lat>=5&&lat<=21}
@@ -195,13 +214,13 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
       var stop=Date.parse(String(e.stop||"").replace(" ","T")+"+07:00");
       if(!point(lon,lat)||(Number.isFinite(stop)&&stop<now)||(Number.isFinite(start)&&start>now+3600000))return;
       var isFlood=String(e.icon||"").toLowerCase()==="flood";
-      var attrs={title:String(e.title||"เหตุการณ์"),description:String(e.description||""),start:String(e.start||""),stop:String(e.stop||"")};
+      var attrs={title:String(e.title||"เหตุการณ์"),description:String(e.description||""),start:String(e.start||""),stop:String(e.stop||""),coordinates:lat.toFixed(5)+", "+lon.toFixed(5)};
       (isFlood?floods:others).push(marker(lon,lat,isFlood?"flood":"traffic",attrs,function(event){
        var a=event.graphic.attributes;
-       return "<div class='map-popup'>"+popupHead(isFlood?"flood":"traffic",isFlood?"จุดน้ำท่วม":"เหตุการณ์จราจร",a.start)+
+       return "<div class='map-popup'>"+popupHead(isFlood?"flood":"traffic",isFlood?"จุดรายงานน้ำท่วม":"เหตุการณ์จราจร","รายงานจาก Longdo")+
         "<div class='map-popup-title'>"+escapeHtml(a.title)+"</div><hr class='map-popup-rule'>"+
-        "<p>"+escapeHtml(a.description)+"</p>"+popupRow("สิ้นสุดตามฟีด",a.stop)+
-        "<div class='map-popup-source'>ที่มา: <a target='_blank' rel='noopener' href='https://traffic.longdo.com/main/'>Longdo Traffic</a></div></div>";
+        "<p>"+escapeHtml(a.description||"ต้นทางไม่ได้ระบุรายละเอียดเพิ่มเติม")+"</p>"+popupRow("เริ่มตามข้อมูลต้นทาง",thaiTime(a.start))+popupRow("สิ้นสุดตามข้อมูลต้นทาง",thaiTime(a.stop))+popupRow("พิกัด (ละติจูด, ลองจิจูด)",a.coordinates)+
+        "<div class='map-popup-source'>ที่มา: <a target='_blank' rel='noopener' href='https://traffic.longdo.com/main/'>Longdo Traffic ↗</a></div><span class='map-popup-note'>"+(isFlood?"จุดรายงานเหตุการณ์ ไม่ใช่ขอบเขตน้ำท่วม และยังไม่ยืนยันผลกระทบภายในนิคมฯ":"เวลาเริ่มและสิ้นสุดเป็นข้อมูลจากต้นทาง")+" </span></div>";
       }));
      });
      floodLayer.removeAll();floodLayer.addMany(floods);
