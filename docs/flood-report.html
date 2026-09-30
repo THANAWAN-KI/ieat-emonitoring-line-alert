@@ -14,8 +14,8 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
   <script src="data/thaiwater_latest.js?v=20260911-1"></script>
-  <script src="flood-live-data.js?v=20260925-polygons" defer></script>
-  <script src="flood-rain-estate-watch.js?v=20260925-d" defer></script>
+  <script src="flood-live-data.js?v=20260930-estate-focus" defer></script>
+  
   <script src="data/thaiwater-map-meta.js" defer></script>
   <script id="flood-export-inline-20260924">
 (function(){
@@ -1823,6 +1823,7 @@ document.documentElement.classList.add("flood-initializing");
     })();
   </script>
 <link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css">
+<script src="flood-estate-dashboard.js?v=20260930-1" defer></script>
 </head>
 <body>
   <main class="container">
@@ -9295,7 +9296,7 @@ html body main.container #warning .nearby-flood-risk-card #nearestWaterStationDi
   catch(error){var status=document.getElementById("nearbyRiskLiveStatus");if(status)status.textContent="ไม่สามารถโหลดข้อมูลล่าสุดได้";console.error("โหลด flashflood.geojson ไม่สำเร็จ",error)}
   finally{loading=false}
  }
- function start(){mount();refresh();setInterval(refresh,60000);document.addEventListener("visibilitychange",function(){if(!document.hidden)refresh()});window.addEventListener("focus",refresh)}
+ function start(){if(window.IEAT_FOCUSED_DASHBOARD)return;mount();refresh();setInterval(refresh,60000);document.addEventListener("visibilitychange",function(){if(!document.hidden)refresh()});window.addEventListener("focus",refresh)}
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();
 </script>
@@ -9451,7 +9452,7 @@ function render(rows){
  if(status)status.textContent="แสดง "+rows.length.toLocaleString("th-TH")+" สถานี"+(stamps.length?" • ข้อมูลต้นทางล่าสุด "+new Date(stamps[stamps.length-1]).toLocaleString("th-TH",{dateStyle:"medium",timeStyle:"short"}):"")+" • อัปเดตอัตโนมัติทุก 1 นาที";
 }
 async function refresh(){if(busy)return;busy=true;mount();try{var res=await fetch(URL+"?_="+Date.now(),{cache:"no-store"});if(!res.ok)throw Error("HTTP "+res.status);render(normalize(await res.json()))}catch(e){var s=document.getElementById("ridLiveStatus");if(s)s.textContent="ไม่สามารถโหลดข้อมูลกรมชลประทานล่าสุดได้";["dailyStations","outRoute2","outRouteCount"].forEach(function(id){var el=document.getElementById(id);if(el&&(/กำลังโหลด/.test(el.textContent)||el.textContent.trim()==="–"))el.textContent="ไม่พร้อมใช้งาน"});console.error(e)}finally{busy=false}}
-function start(){mount();refresh();setInterval(refresh,60000);document.addEventListener("visibilitychange",function(){if(!document.hidden)refresh()});window.addEventListener("focus",refresh)}
+function start(){if(window.IEAT_FOCUSED_DASHBOARD)return;mount();refresh();setInterval(refresh,60000);document.addEventListener("visibilitychange",function(){if(!document.hidden)refresh()});window.addEventListener("focus",refresh)}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();
 </script>
