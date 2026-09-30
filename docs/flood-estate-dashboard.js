@@ -93,6 +93,15 @@
    .ef-status-legend{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0;font-size:12px;line-height:1.6}
    .ef-status-key{padding:5px 9px;border-radius:6px;font-weight:600}
 
+
+   .ef-table{width:100%;max-width:100%;overflow-x:auto}
+   .ef-table table{width:100%;min-width:0;table-layout:fixed}
+   .ef-table th:nth-child(1){width:25%}.ef-table th:nth-child(2){width:15%}.ef-table th:nth-child(3){width:15%}.ef-table th:nth-child(4){width:27%}.ef-table th:nth-child(5){width:18%}
+   .ef-table td,.ef-table th{padding:9px 8px;white-space:normal;overflow-wrap:anywhere;word-break:normal;line-height:1.65}
+   .ef-table button{display:inline;max-width:100%;white-space:normal;overflow-wrap:anywhere;line-height:inherit}
+   .ef-table .ef-status-cell{min-width:0}
+   @media(max-width:600px){.ef-table table{font-size:12px}.ef-table td,.ef-table th{padding:8px 5px}.ef-panel:has(.ef-table){padding:12px}}
+
   `;document.head.appendChild(style);
   const host=document.createElement('section');host.id='estateFocusDashboard';
   const metrics=[['efWatch','นิคมฯ เข้าเกณฑ์เฝ้าระวัง','ผลคัดกรองจากสถานีใกล้นิคมฯ'],['efWaterWatch','ใกล้ระดับน้ำเข้าเกณฑ์','สถานีระดับน้ำภายใน 30 กม.'],['efRainWatch','ใกล้ฝนเข้าเกณฑ์','ฝนสะสมมากกว่า 35 มม. ภายใน 30 กม.'],['efTotal','นิคมฯ / ท่าเรือในชุดข้อมูล','ตำแหน่งที่ใช้ประเมินจากข้อมูล กนอ.'],['ef24','ตำบลเฝ้าระวัง 24 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ'],['ef48','ตำบลเฝ้าระวัง 48 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ']];
