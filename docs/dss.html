@@ -122,6 +122,8 @@ body{background:#fff}
 }
 </style>
 
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body><div class="loading" id="loading">กำลังจัดทำรายงาน PNG…</div>
 <header class="top"><div><h1>IEAT DSS — จัดทำรายงานเหตุฉุกเฉิน</h1><span>แก้ไขข้อมูลด้านซ้าย ผลลัพธ์ในรายงานจะเปลี่ยนทันที</span></div><div class="top-actions"><button class="secondary" id="resetBtn">ล้างข้อมูล</button><button class="primary" id="pngBtn">ดาวน์โหลด PNG</button></div></header>
@@ -129,8 +131,9 @@ body{background:#fff}
 <div class="report-header"><h1 data-out="title"></h1><p data-out="unit"></p></div>
 <div class="meta-grid"><div class="meta"><small>เลขที่รายงาน</small><b data-out="reportNo"></b></div><div class="meta"><small>วันและเวลาจัดทำ</small><b data-out="date"></b></div><div class="meta"><small>สถานะเอกสาร</small><b data-out="status"></b></div></div>
 <div class="section-title">ข้อมูลสถานประกอบการ / พื้นที่เกิดเหตุ</div><div class="company"><div class="row"><b>ชื่อสถานประกอบการ</b><span data-out="company"></span></div><div class="row"><b>เลขทะเบียน</b><span data-out="registration"></span></div><div class="row"><b>นิคมอุตสาหกรรม</b><span data-out="estate"></span></div><div class="row"><b>ที่อยู่ / จุดเกิดเหตุ</b><span data-out="address"></span></div><div class="row"><b>สารเคมี / วัตถุอันตราย</b><span data-out="chemical"></span></div><div class="row"><b>ข้อมูลการระงับเหตุ</b><span data-out="response"></span></div></div>
+<div id="factoryDetailsSection" hidden><div class="section-title">ข้อมูลโรงงานจากฐานข้อมูล กนอ.</div><div class="company" id="factoryDetails"></div></div>
 <div class="event-grid"><div class="event-card"><small>ประเภทเหตุ</small><b data-out="event"></b></div><div class="event-card"><small>ระดับเหตุการณ์</small><b data-out="level"></b></div><div class="event-card"><small>พิกัด</small><b><span data-out="lat"></span>, <span data-out="lng"></span></b></div></div>
-<div class="section-title">แผนที่และสภาพอากาศบริเวณเกิดเหตุ</div><div class="map-weather"><div class="mapbox"><div id="map" class="map"><iframe class="incident-analysis-frame" title="แผนที่วิเคราะห์บริเวณเกิดเหตุ" src="https://experience.arcgis.com/experience/7cbfbc4231fc4a44b6891e84dc1e07db" loading="lazy" allow="geolocation" allowfullscreen></iframe></div><div class="map-caption">แผนที่วิเคราะห์บริเวณเกิดเหตุ · <a href="https://experience.arcgis.com/experience/7cbfbc4231fc4a44b6891e84dc1e07db" target="_blank" rel="noopener noreferrer">เปิดแผนที่เต็มหน้า ↗</a><span id="incidentCoordinates"></span></div></div><div class="weather"><div class="temp"><span data-out="temp"></span>°C</div><p><b data-out="weather"></b></p><p>ความชื้น <span data-out="humidity"></span>%</p><p>ลม <b><span data-out="windSpeed"></span> กม./ชม.</b></p><p>พัดมาจาก <b data-out="windDir"></b> (<span data-out="windDeg"></span>°)</p><div class="wind-arrow" id="windArrow">➜</div><p data-out="weatherTime"></p></div></div>
+<div class="section-title">แผนที่และสภาพอากาศบริเวณเกิดเหตุ</div><div class="map-weather"><div class="mapbox"><div id="map" class="map"></div><div class="map-caption">แผนที่ตำแหน่งโรงงานและรัศมีวิเคราะห์<span id="incidentCoordinates"></span></div></div><div class="weather"><div class="temp"><span data-out="temp"></span>°C</div><p><b data-out="weather"></b></p><p>ความชื้น <span data-out="humidity"></span>%</p><p>ลม <b><span data-out="windSpeed"></span> กม./ชม.</b></p><p>พัดมาจาก <b data-out="windDir"></b> (<span data-out="windDeg"></span>°)</p><div class="wind-arrow" id="windArrow">➜</div><p data-out="weatherTime"></p></div></div>
 <div class="section-title">ข้อมูลสนับสนุนที่ใกล้เคียง</div><div class="support-grid" id="supportGrid"></div>
 <div class="note"><b>หมายเหตุ:</b> <span data-out="note"></span><br><b>แหล่งข้อมูล:</b> <span data-out="source"></span></div>
 </section></div></main>
@@ -139,7 +142,7 @@ body{background:#fff}
 const defaults={title:'รายงานข้อมูลสนับสนุนการรับมือเหตุฉุกเฉิน',unit:'ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย กนอ.',reportNo:'EMCC-'+new Date().toISOString().slice(0,10).replaceAll('-','')+'-001',date:new Date().toLocaleString('th-TH'),status:'ข้อมูลสนับสนุนเบื้องต้น',company:'บริษัท / โรงงานที่เกิดเหตุ',registration:'—',estate:'—',address:'—',chemical:'—',response:'ตรวจสอบเอกสาร SDS และยืนยันข้อมูลกับผู้รับผิดชอบก่อนเข้าปฏิบัติการ',event:'เหตุเพลิงไหม้',level:'เฝ้าระวัง',lat:'13.7563',lng:'100.5018',temp:'—',weather:'รอดึงข้อมูลสภาพอากาศ',humidity:'—',windSpeed:'—',windDir:'—',windDeg:'0',weatherTime:'',hospitalName:'โรงพยาบาลใกล้ที่สุด',hospitalDistance:'— กม.',fireName:'สถานีดับเพลิงใกล้ที่สุด',fireDistance:'— กม.',policeName:'สถานีตำรวจใกล้ที่สุด',policeDistance:'— กม.',hydrantName:'หัวจ่ายน้ำดับเพลิง',hydrantDistance:'— เมตร',communityName:'ชุมชนในรัศมี 3 กม.',communityDistance:'— แห่ง',cctvName:'กล้อง CCTV ใกล้เคียง',cctvDistance:'— จุด',note:'ข้อมูลนี้ใช้สนับสนุนการประสานงานเบื้องต้น โปรดตรวจสอบความถูกต้องกับหน่วยงานเจ้าของข้อมูลก่อนนำไปใช้อ้างอิง',source:'คลังข้อมูล DSS กนอ., ArcGIS Risk Map และ Open-Meteo',bufferKm:3};
 const groups=[['ข้อมูลเอกสาร',[['title','ชื่อรายงาน'],['unit','หน่วยงาน'],['reportNo','เลขที่รายงาน'],['date','วันและเวลาจัดทำ'],['status','สถานะเอกสาร']]],['สถานประกอบการและเหตุการณ์',[['company','ชื่อสถานประกอบการ'],['registration','เลขทะเบียน'],['estate','นิคมอุตสาหกรรม'],['address','ที่อยู่ / จุดเกิดเหตุ'],['event','ประเภทเหตุ'],['level','ระดับเหตุการณ์'],['chemical','สารเคมี / วัตถุอันตราย','textarea'],['response','ข้อมูลสนับสนุนการระงับเหตุ','textarea']]],['ตำแหน่งและอากาศ',[['lat','ละติจูด'],['lng','ลองจิจูด'],['temp','อุณหภูมิ °C'],['weather','สภาพอากาศ'],['humidity','ความชื้น %'],['windSpeed','ความเร็วลม กม./ชม.'],['windDir','ทิศที่ลมพัดมา'],['windDeg','องศาทิศทางลม']]],['ข้อมูลใกล้เคียง',[['hospitalName','ชื่อโรงพยาบาล'],['hospitalDistance','ระยะโรงพยาบาล'],['fireName','ชื่อสถานีดับเพลิง'],['fireDistance','ระยะสถานีดับเพลิง'],['policeName','ชื่อสถานีตำรวจ'],['policeDistance','ระยะสถานีตำรวจ'],['hydrantName','หัวจ่ายน้ำ'],['hydrantDistance','ระยะหัวจ่ายน้ำ'],['communityName','ชุมชน'],['communityDistance','จำนวน / ระยะชุมชน'],['cctvName','กล้อง CCTV'],['cctvDistance','จำนวน / ระยะ CCTV']]],['หมายเหตุ',[['note','หมายเหตุ','textarea'],['source','แหล่งข้อมูล','textarea']]]];
 let state=JSON.parse(localStorage.getItem('dss-report')||'null')||{...defaults};state.bufferKm=Number(state.bufferKm)||3;document.getElementById('bufferKm').value=state.bufferKm;const form=document.getElementById('form');form.innerHTML=groups.map(([name,fields])=>`<section class="group"><h3>${name}</h3><div class="${name==='ตำแหน่งและอากาศ'?'grid2':''}">${fields.map(([key,label,type])=>`<div class="field"><label for="${key}">${label}</label>${type==='textarea'?`<textarea id="${key}" data-key="${key}"></textarea>`:`<input id="${key}" data-key="${key}">`}</div>`).join('')}</div>${name==='ตำแหน่งและอากาศ'?'<div class="mini-actions"><button class="secondary" id="mapBtn" type="button">อัปเดตแผนที่</button><button class="primary" id="weatherBtn" type="button">ดึงสภาพอากาศ</button></div><p class="hint">แก้พิกัดด้านบนแล้วกดอัปเดตแผนที่เพื่อใช้ในข้อมูลอากาศและไฟล์ PNG</p>':''}</section>`).join('');
-const supportKeys=[['hospitalName','hospitalDistance'],['fireName','fireDistance'],['policeName','policeDistance'],['hydrantName','hydrantDistance'],['communityName','communityDistance'],['cctvName','cctvDistance']];function render(){document.querySelectorAll('[data-key]').forEach(el=>{if(document.activeElement!==el)el.value=state[el.dataset.key]??''});document.querySelectorAll('[data-out]').forEach(el=>el.textContent=state[el.dataset.out]||'—');supportGrid.innerHTML=supportKeys.map(([a,b])=>`<article class="support"><b>${state[a]||'—'}</b><strong>${state[b]||'—'}</strong><span>ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</span></article>`).join('');windArrow.style.transform=`rotate(${Number(state.windDeg)||0}deg)`;localStorage.setItem('dss-report',JSON.stringify(state))}form.addEventListener('input',e=>{if(e.target.dataset.key){state[e.target.dataset.key]=e.target.value;render()}});
+const supportKeys=[['hospitalName','hospitalDistance'],['fireName','fireDistance'],['policeName','policeDistance'],['hydrantName','hydrantDistance'],['communityName','communityDistance'],['cctvName','cctvDistance']];function render(){document.querySelectorAll('[data-key]').forEach(el=>{if(document.activeElement!==el)el.value=state[el.dataset.key]??''});document.querySelectorAll('[data-out]').forEach(el=>el.textContent=state[el.dataset.out]||'—');supportGrid.replaceChildren();supportKeys.forEach(([a,b])=>{const card=document.createElement('article');card.className='support';const name=document.createElement('b'),distance=document.createElement('strong'),caption=document.createElement('span');name.textContent=state[a]||'—';distance.textContent=state[b]||'—';caption.textContent='ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ';card.append(name,distance,caption);supportGrid.appendChild(card)});windArrow.style.transform=`rotate(${Number(state.windDeg)||0}deg)`;if(typeof renderFactoryDetails==='function')renderFactoryDetails();localStorage.setItem('dss-report',JSON.stringify(state))}form.addEventListener('input',e=>{if(e.target.dataset.key){state[e.target.dataset.key]=e.target.value;render()}});
 const mapNode=document.getElementById('map');
 mapNode.style.position='relative';
 const mapImage=document.createElement('img');mapImage.alt='ภาพแผนที่บริเวณเกิดเหตุ';
@@ -154,14 +157,16 @@ function updateMap(){
   const lat=Number(state.lat),lng=Number(state.lng);
   if(!Number.isFinite(lat)||!Number.isFinite(lng))return;
   const radius=Math.min(50,Math.max(.1,Number(state.bufferKm)||3));
-  const spanKm=Math.max(radius*1.5,3),spanLat=spanKm/111.2,spanLng=spanLat*800/560/Math.cos(lat*Math.PI/180);
+  const width=mapNode.clientWidth||800,height=mapNode.clientHeight||560;
+  const spanKm=Math.max(radius*1.5,3),spanLat=spanKm/111.2,spanLng=spanLat*width/height/Math.cos(lat*Math.PI/180);
   const bbox=[lng-spanLng,lat-spanLat,lng+spanLng,lat+spanLat].map(n=>n.toFixed(6)).join(',');
   mapLoadPromise=new Promise(resolve=>{mapImage.onload=resolve;mapImage.onerror=resolve});
-  mapImage.src='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export?bbox='+bbox+'&bboxSR=4326&imageSR=4326&size=800,560&format=png32&f=image';
+  mapImage.src='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export?bbox='+bbox+'&bboxSR=4326&imageSR=4326&size='+Math.round(width)+','+Math.round(height)+'&format=png32&f=image';
   const diameter=Math.min(95,radius/spanKm*100);
   
   requestAnimationFrame(()=>{const side=mapNode.clientHeight*radius/spanKm;bufferOverlay.style.width=side+'px';bufferOverlay.style.height=side+'px'});
-  document.getElementById('incidentCoordinates').textContent=' · พิกัด '+lat.toFixed(5)+', '+lng.toFixed(5)+' · Buffer '+radius+' กม. (ใช้ใน PNG)';
+  document.getElementById('incidentCoordinates').textContent=' · พิกัด '+lat.toFixed(5)+', '+lng.toFixed(5)+' · Buffer '+radius+' กม.';
+  if(window.dssSyncLiveMap)window.dssSyncLiveMap(lat,lng,radius);
 }
 mapNode.addEventListener('click',function(e){
   if(e.target!==mapImage&&e.target!==mapNode)return;
@@ -503,6 +508,48 @@ html body #report .report-header h1 *{
 <script id="dss-static-map-and-export">
 const factoryLookup=document.getElementById('factoryLookup'),factoryLookupStatus=document.getElementById('factoryLookupStatus');
 
+
+function renderFactoryDetails(){
+  const section=document.getElementById('factoryDetailsSection'),details=document.getElementById('factoryDetails');
+  if(!section||!details)return;
+  section.hidden=!(state.factoryDetails||[]).length;details.replaceChildren();
+  (state.factoryDetails||[]).forEach(item=>{const row=document.createElement('div');row.className='row';const label=document.createElement('b'),value=document.createElement('span');label.textContent=item.label;value.textContent=item.value;row.append(label,value);details.appendChild(row)});
+}
+let dssMetadataPromise;
+async function getDssFieldMetadata(){
+  if(!dssMetadataPromise)dssMetadataPromise=fetch(dssService+'?f=json',{signal:AbortSignal.timeout(8000)}).then(r=>r.json()).then(data=>data.fields||[]).catch(()=>{dssMetadataPromise=null;return []});
+  return dssMetadataPromise;
+}
+let nearbySequence=0;
+async function loadDssNearby(lat,lng){
+  const sequence=++nearbySequence,radius=Number(state.bufferKm)||3;
+  const base='https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/';
+  const sources=[['hospital','Hospital_Locations/FeatureServer/0','โรงพยาบาล'],['fire','Risk_Map_WFL1/FeatureServer/3','Name'],['police','Risk_Map_WFL1/FeatureServer/5','Name'],['hydrant','Risk_Map_WFL1/FeatureServer/4','Name'],['community','Map/FeatureServer/1','Name'],['cctv','ตำแหน่งกล้องCCTV/FeatureServer/7','Name']];
+  await Promise.all(sources.map(async([type,path,nameField])=>{
+    try{
+      const countOnly=type==='community'||type==='cctv';
+      const params=new URLSearchParams({where:'1=1',geometry:JSON.stringify({x:lng,y:lat,spatialReference:{wkid:4326}}),geometryType:'esriGeometryPoint',inSR:'4326',spatialRel:'esriSpatialRelIntersects',distance:String(countOnly?radius:50),units:'esriSRUnit_Kilometer',outFields:'*',returnGeometry:'true',outSR:'4326',f:'json',...(countOnly?{returnCountOnly:'true'}:{resultRecordCount:'2000'})});
+      const response=await fetch(base+path+'/query?'+params,{signal:AbortSignal.timeout(12000)});if(!response.ok)throw Error('HTTP '+response.status);
+      const data=await response.json();if(data.error)throw Error(data.error.message);
+      if(sequence!==nearbySequence||Number(state.lat)!==Number(lat.toFixed(6))||Number(state.lng)!==Number(lng.toFixed(6)))return;
+      if(countOnly){
+        state[type+'Name']=(type==='community'?'ชุมชน':'กล้อง CCTV')+' ในรัศมี '+radius+' กม.';state[type+'Distance']=Number(data.count).toLocaleString('th-TH')+(type==='community'?' แห่ง':' จุด');
+      }else{
+        const candidates=(data.features||[]).map(feature=>{
+          const g=feature.geometry||{},a=feature.attributes||{};let x=g.x,y=g.y;
+          if(g.rings?.[0]?.length){const p=g.rings[0];x=p.reduce((s,v)=>s+v[0],0)/p.length;y=p.reduce((s,v)=>s+v[1],0)/p.length}
+          const rad=Math.PI/180,dLat=(y-lat)*rad,dLng=(x-lng)*rad;
+          const h=Math.sin(dLat/2)**2+Math.cos(lat*rad)*Math.cos(y*rad)*Math.sin(dLng/2)**2;
+          return {name:a[nameField]||a.PopupInfo||defaults[type+'Name'],distance:6371*2*Math.asin(Math.min(1,Math.sqrt(h)))};
+        }).filter(item=>Number.isFinite(item.distance)).sort((a,b)=>a.distance-b.distance);
+        state[type+'Name']=candidates[0]?.name||'ไม่พบข้อมูลในรัศมี 50 กม.';
+        state[type+'Distance']=candidates[0]?(type==='hydrant'?Math.round(candidates[0].distance*1000).toLocaleString('th-TH')+' เมตร':candidates[0].distance.toFixed(2)+' กม.'):'—';
+      }
+    }catch(error){if(sequence===nearbySequence&&Number(state.lat)===Number(lat.toFixed(6))&&Number(state.lng)===Number(lng.toFixed(6))){state[type+'Name']='โหลดข้อมูลไม่สำเร็จ';state[type+'Distance']='—'}console.warn('DSS nearby '+type,error)}
+  }));
+  if(sequence===nearbySequence&&Number(state.lat)===Number(lat.toFixed(6))&&Number(state.lng)===Number(lng.toFixed(6)))render();
+}
+
 const dssEstates=[{"name":"นิคมอุตสาหกรรมหนองแค","lat":14.3863882,"lng":100.9035767},{"name":"นิคมอุตสาหกรรมลาดกระบัง","lat":13.7582559,"lng":100.7893183},{"name":"นิคมอุตสาหกรรมบางชัน","lat":13.803881,"lng":100.704757},{"name":"นิคมอุตสาหกรรมอัญธานี","lat":13.686102,"lng":100.707712},{"name":"นิคมอุตสาหกรรมนครหลวง","lat":14.4893393,"lng":100.5957211},{"name":"นิคมอุตสาหกรรมบางปะอิน","lat":14.2077497,"lng":100.5896748},{"name":"นิคมอุตสาหกรรมบ้านหว้า","lat":14.246309,"lng":100.610012},{"name":"นิคมอุตสาหกรรมสมุทรสาคร","lat":13.5440008,"lng":100.232856},{"name":"นิคมอุตสาหกรรมสินสาคร","lat":13.54653659,"lng":100.3436175},{"name":"นิคมอุตสาหกรรมราชบุรี","lat":13.63729443,"lng":99.85002164},{"name":"นิคมอุตสาหกรรมมหาราชนคร","lat":13.54202903,"lng":100.1988542},{"name":"นิคมอุตสาหกรรมภาคเหนือ","lat":18.591755,"lng":99.044877},{"name":"นิคมอุตสาหกรรมพิจิตร","lat":16.5753627,"lng":100.1489452},{"name":"นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา","lat":7.0082598,"lng":100.3598057},{"name":"นิคมอุตสาหกรรมสงขลา","lat":6.54184983,"lng":100.4136034},{"name":"นิคมอุตสาหกรรมเวลโกรว์","lat":13.570618,"lng":100.92248},{"name":"นิคมอุตสาหกรรมเกตเวย์ ซิตี้","lat":13.614694,"lng":101.329567},{"name":"นิคมอุตสาหกรรมเอเซีย (สุวรรณภูมิ)","lat":13.6599038,"lng":100.9114833},{"name":"นิคมอุตสาหกรรมทีเอฟดี 1","lat":13.56379732,"lng":100.9949185},{"name":"นิคมอุตสาหกรรมสระแก้ว","lat":13.72389768,"lng":102.5546324},{"name":"นิคมอุตสาหกรรมไฮเทค กบินทร์","lat":13.90617863,"lng":101.6529182},{"name":"นิคมอุตสาหกรรมหลักชัยเมืองยาง","lat":12.72735973,"lng":101.455931},{"name":"นิคมอุตสาหกรรมบางปู","lat":13.551394,"lng":100.668278},{"name":"นิคมอุตสาหกรรมบางพลี","lat":13.565582,"lng":100.794583},{"name":"นิคมอุตสาหกรรมบางปู (เหนือ)","lat":13.551394,"lng":100.668278},{"name":"นิคมอุตสาหกรรมแพรกษา","lat":13.56903519,"lng":100.6528202},{"name":"นิคมอุตสาหกรรมอีสเทิร์นซีบอร์ด (ระยอง)","lat":13.0044858,"lng":101.1626075},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ ชลบุรี 1","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมอมตะซิตี้ ชลบุรี","lat":13.4214885,"lng":101.0041244},{"name":"นิคมอุตสาหกรรมอมตะซิตี้ ระยอง","lat":13.024547,"lng":101.072437},{"name":"นิคมอุตสาหกรรมปิ่นทอง","lat":13.118954,"lng":101.033398},{"name":"นิคมอุตสาหกรรมปิ่นทอง (แหลมฉบัง)","lat":13.12134595,"lng":100.9904306},{"name":"นิคมอุตสาหกรรมปิ่นทอง (โครงการ 3)","lat":13.11034826,"lng":101.0669158},{"name":"นิคมอุตสาหกรรมแหลมฉบัง","lat":13.076561,"lng":100.909175},{"name":"ท่าเรืออุตสาหกรรมมาบตาพุด","lat":12.665224,"lng":101.133049},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ ตะวันออก (มาบตาพุด)","lat":12.7030632,"lng":101.1263119},{"name":"นิคมอุตสาหกรรมผาแดง","lat":12.690742,"lng":101.132469},{"name":"นิคมอุตสาหกรรมเอเชีย","lat":12.716494,"lng":101.105913},{"name":"นิคมอุตสาหกรรมอาร์ ไอ แอล","lat":12.757945,"lng":101.165319},{"name":"นิคมอุตสาหกรรมมาบตาพุด","lat":12.678688,"lng":101.131806},{"name":"นิคมอุตสาหกรรมสมาร์ท ปาร์ค","lat":12.75079527,"lng":101.1226103},{"name":"สำนักงานใหญ่ (วิภาวดี) ตึก A","lat":13.7972954,"lng":100.5599994},{"name":"สำนักงานใหญ่ (วิภาวดี) ตึก B","lat":13.7973442,"lng":100.5592795},{"name":"นิคมอุตสาหกรรมทีเอฟดี 2","lat":13.56379732,"lng":100.9949185},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ ชลบุรี 2","lat":13.095811,"lng":101.113907},{"name":"สำนักงานท่าเรืออุตสาหกรรมมาบตาพุด","lat":12.665224,"lng":101.133049},{"name":"นิคมอุตสาหกรรมซีพีจีซี","lat":12.757945,"lng":101.165319},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ อินดัสเตรียล เอสเตท ระยอง","lat":12.757945,"lng":101.165319},{"name":"นิคมอุตสาหกรรมปิ่นทอง (โครงการ 6)","lat":12.757945,"lng":101.165319},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 4","lat":12.757945,"lng":101.165319},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ ระยอง 36","lat":12.757945,"lng":101.165319},{"name":"นิคมอุตสาหกรรมโรจนะชลบุรี 2 (เขาคันทรง)","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 2","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมปิ่นทอง (โครงการ 5)","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมยามาโตะ อินดัสทรีส์","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 3","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมโรจนะหนองใหญ่ จังหวัดชลบุรี","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมบ้านบึง","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมเอเซีย คลีน ชลบุรี","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมแก่งคอย","lat":14.624646,"lng":101.008107},{"name":"นิคมอุตสาหกรรมปิ่นทอง (โครงการ 4)","lat":13.11034826,"lng":101.0669158},{"name":"นิคมอุตสาหกรรมโรจนะแหลมฉบัง","lat":13.024547,"lng":101.072437},{"name":"นิคมอุตสาหกรรมฉะเชิงเทรา บลูเทค ซิตี้","lat":13.56379732,"lng":100.9949185},{"name":"นิคมอุตสาหกรรมอุดรธานี","lat":16.5753627,"lng":100.1489452},{"name":"นิคมอุตสาหกรรมบ่อทอง 33","lat":13.90617863,"lng":101.6529182},{"name":"นิคมอุตสาหกรรมเอ็กโก ระยอง","lat":12.757945,"lng":101.165319},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 1","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมเวิลด์ (ลำพูน)","lat":18.591755,"lng":99.044877},{"name":"นิคมอุตสาหกรรมเฮอร์มีส","lat":12.9395143470535,"lng":101.041255357775},{"name":"นิคมอุตสาหกรรมแอลพีพี นครสวรรค์","lat":15.6538546700978,"lng":100.582877576763},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 5","lat":12.8445660258234,"lng":101.236671470166},{"name":"นิคมอุตสาหกรรมอมตะซิตี้ ชลบุรี 2","lat":13.2831784287344,"lng":101.222933672217},{"name":"นิคมอุตสาหกรรมอมตะซิตี้ สมาร์ทซิตี้ ชลบุรี","lat":13.4933471967599,"lng":101.052449316628},{"name":"นิคมอุตสาหกรรม304 อินดัสเตรียล ปาร์ค","lat":13.9154531406087,"lng":101.573873553363}];
 const dssService='https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/EPP_2026_V1/FeatureServer/0';
 const lookupResults=document.createElement('div');
@@ -534,7 +581,9 @@ async function searchFactory(){
     const response=await fetch(dssService+'/query?'+params,{signal:controller.signal});
     if(!response.ok)throw new Error('HTTP '+response.status);
     const data=await response.json();if(data.error)throw new Error(data.error.message||'ArcGIS query error');
-    factories=(data.features||[]).filter(feature=>feature.attributes.mercant_name).map(feature=>({type:'factory',feature,name:feature.attributes.mercant_name}));
+    const metadata=await getDssFieldMetadata();
+    factories=[];
+    factories=(data.features||[]).filter(feature=>feature.attributes.mercant_name).map(feature=>({type:'factory',feature,fields:metadata,name:feature.attributes.mercant_name}));
     if(data.exceededTransferLimit)errorText='แสดงผู้ประกอบการ 50 รายการแรก กรุณาพิมพ์ชื่อให้เจาะจงขึ้น';
   }catch(error){if(sequence!==lookupSequence)return;console.warn('DSS lookup',error);errorText='เชื่อมต่อข้อมูลผู้ประกอบการไม่สำเร็จ กรุณาลองค้นหาอีกครั้ง'}
   finally{clearTimeout(timeout)}
@@ -561,11 +610,11 @@ function selectDssLookup(item){
   }
   if(!Number.isFinite(lat)||!Number.isFinite(lng)||lat<5||lat>22||lng<97||lng>106){factoryLookupStatus.textContent='พบข้อมูล แต่ไม่มีพิกัดที่ถูกต้อง กรุณาเลือกพื้นที่อื่น';return}
   const nearby={};['hospital','fire','police','hydrant','community','cctv'].forEach(type=>{nearby[type+'Name']=defaults[type+'Name'];nearby[type+'Distance']=defaults[type+'Distance']});
-  state={...state,...nearby,company:item.name,estate:item.type==='estate'?item.name:(attrs.IEAT||'—'),registration:attrs.fid14n||'—',address:item.type==='estate'?item.name:[attrs.FactoryAddressGeneral,attrs.FactoryAddressTambonName,attrs.FactoryAddressDistrictName,attrs.FactoryAddressProvinceName].filter(Boolean).join(' ')||'—',chemical:'—',lat:lat.toFixed(6),lng:lng.toFixed(6)};
+  state={...state,...nearby,company:item.name,estate:item.type==='estate'?item.name:(attrs.IEAT||'—'),registration:attrs.fid14n||'—',address:item.type==='estate'?item.name:[attrs.FactoryAddressGeneral,attrs.FactoryAddressMoo?'หมู่ '+attrs.FactoryAddressMoo:'',attrs.FactoryAddressSoi?'ซอย '+attrs.FactoryAddressSoi:'',attrs.FactoryAddressRoad?'ถนน '+attrs.FactoryAddressRoad:'',attrs.FactoryAddressTambonName,attrs.FactoryAddressDistrictName,attrs.FactoryAddressProvinceName,attrs.FactoryAPostCode].filter(Boolean).join(' ')||'—',chemical:'—',factoryDetails:Object.entries(attrs).filter(([key,value])=>value!==null&&value!==undefined&&String(value).trim()!=='').map(([key,value])=>{const field=(item.fields||[]).find(f=>f.name===key);return {label:field?.alias||key,value:field?.type==='esriFieldTypeDate'?new Date(Number(value)).toLocaleString('th-TH'):String(value)}}),lat:lat.toFixed(6),lng:lng.toFixed(6)};
   factoryLookup.value=item.name;render();updateMap();lookupResults.replaceChildren();
   factoryLookupStatus.textContent='เลือก '+item.name+' และเติมข้อมูลในรายงานแล้ว';
-  if(window.parent!==window&&item.type==='factory')window.parent.postMessage({type:'dss-factory-search',query:attrs.fid14n||item.name},location.origin);
-  loadWeather();
+  document.getElementById('map').scrollIntoView({behavior:'smooth',block:'center'});
+  loadDssNearby(lat,lng);loadWeather();
 }
 
 document.getElementById('factoryLookupBtn').addEventListener('click',searchFactory);
@@ -573,7 +622,7 @@ factoryLookup.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefaul
 document.getElementById('bufferKm').addEventListener('change',function(){
   const value=Number(this.value);
   if(!Number.isFinite(value)||value<.1||value>50){this.value=state.bufferKm;return}
-  state.bufferKm=value;render();updateMap();
+  state.bufferKm=value;render();updateMap();loadDssNearby(Number(state.lat),Number(state.lng));
 });
 window.addEventListener('message',async event=>{
   if(event.origin!==location.origin||event.source!==window.parent||!event.data)return;
@@ -605,9 +654,11 @@ async function downloadReportPng(){
       onclone(clonedDocument){
         const clonedMap=clonedDocument.querySelector('#report #map');
         if(!clonedMap)return;
+        const liveMap=clonedMap.querySelector('#dssLiveMap');if(liveMap)liveMap.remove();
         const experience=clonedMap.querySelector('iframe');
         if(experience)experience.style.setProperty('display','none','important');
         clonedMap.querySelectorAll(':scope > img,:scope > div').forEach(el=>{
+          el.style.setProperty('display','block','important');
           el.style.setProperty('visibility','visible','important');
         });
         const caption=clonedDocument.querySelector('#report .map-caption a');
@@ -624,4 +675,32 @@ async function downloadReportPng(){
 </script>
 <style id="dss-arcgis-analysis-embed">.report .map .incident-analysis-frame{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:2;background:#eef1f4}.report .map>img,.report .map>div{visibility:hidden}.report .map-caption a{color:#59267c;text-decoration:underline}</style>
 <style id="dss-unified-buffer-map">.report .map{height:420px!important;display:block!important}.editor #factoryLookup{flex:1;min-width:180px}.editor #factoryLookupBtn{white-space:nowrap}</style>
+
+<style id="dss-factory-live-map">
+.report .map>img,.report .map>div{visibility:visible}
+.report .map #dssLiveMap{position:absolute;inset:0;z-index:3;visibility:visible}
+.report .map.dss-live-ready>img,.report .map.dss-live-ready>div:not(#dssLiveMap){display:none}
+#factoryDetails .row{grid-template-columns:220px minmax(0,1fr)}
+#factoryDetails .row span{overflow-wrap:anywhere}
+</style>
+<script id="dss-factory-live-map-script">
+(function(){
+ if(!window.L){render();updateMap();return}
+ const node=document.createElement('div');node.id='dssLiveMap';mapNode.appendChild(node);
+ const live=L.map(node,{scrollWheelZoom:false}).setView([Number(state.lat),Number(state.lng)],14);
+ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,attribution:'Tiles © Esri'}).addTo(live);
+ const circle=L.circle([Number(state.lat),Number(state.lng)],{radius:(Number(state.bufferKm)||3)*1000,color:'#d9273f',fillOpacity:.10}).addTo(live);
+ const pin=L.circleMarker([Number(state.lat),Number(state.lng)],{radius:8,color:'#fff',weight:2,fillColor:'#d9273f',fillOpacity:1}).addTo(live);
+ window.dssSyncLiveMap=function(lat,lng,radius){
+   circle.setLatLng([lat,lng]).setRadius(radius*1000);pin.setLatLng([lat,lng]);
+   const label=document.createElement('span');label.textContent=state.company||state.estate||'จุดเกิดเหตุ';
+   pin.unbindTooltip().bindTooltip(label,{permanent:true,direction:'top'});
+   live.invalidateSize();live.fitBounds(circle.getBounds(),{padding:[24,24],maxZoom:16});
+ };
+ mapNode.classList.add('dss-live-ready');
+ if(window.ResizeObserver)new ResizeObserver(()=>live.invalidateSize()).observe(mapNode);
+ updateMap();render();
+})();
+</script>
+
 </body></html>
