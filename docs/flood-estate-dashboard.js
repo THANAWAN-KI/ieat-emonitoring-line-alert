@@ -43,7 +43,7 @@
   return {estates,complete,usable,age,stale:!Number.isFinite(age)||age< -300000||age>MAX_AGE||data.status==='stale',near,watch,rain:near.filter(r=>r.kind==='rainfall'&&num(r.rainfall_mm)!==null),water:near.filter(r=>r.kind==='waterlevel'&&num(r.waterlevel_msl)!==null),warning24:warning('24h'),warning48:warning('48h'),excluded:(data.stations||[]).length-stations.length};
  }
  window.IEAT_ESTATE_DASHBOARD_MODEL=model;
- let current=null,selected='',busy=false;
+ let current=null,selected=new URLSearchParams(location.search).get('estate')||'',busy=false;
  function set(id,text){if($(id))$(id).textContent=text}
  function zoom(lat,lon){const f=$('estateFocusMap');if(f?.contentWindow)f.contentWindow.postMessage({type:'flood-map-focus',lat:Number(lat),lon:Number(lon),scale:75000},location.origin)}
  function mount(){
@@ -106,12 +106,26 @@
    #estateFocusDashboard,#estateFocusDashboard *{color:#000!important}
    #estateFocusDashboard svg text{fill:#000!important}
    #estateFocusDashboard input::placeholder{color:#000;opacity:1}
+
+   #estateFocusDashboard.ef-estate-mode .ef-charts,#estateFocusDashboard.ef-estate-mode .ef-metrics{display:none}
+   .ef-brief-title{font-size:24px;margin:0 0 10px;line-height:1.5}
+   .ef-brief-note{background:#fff5df;border-left:4px solid #d97706;padding:12px;border-radius:8px;font-size:14px;line-height:1.7}
+   .ef-brief-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:16px 0}
+   .ef-brief-value{background:#eff6f8;border:1px solid #d5e3e8;border-radius:12px;padding:14px;font-size:14px;line-height:1.6}
+   .ef-brief-value strong{display:block;font-size:24px;margin:6px 0}
+   .ef-gap-list{margin:14px 0;padding:0;list-style:none;font-size:14px;line-height:1.8}
+   .ef-gap-list li{padding:12px 0;border-bottom:1px solid #e3e9ed}.ef-gap-list b{display:block}
+   .ef-brief-links{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+   .ef-brief-links a{padding:9px 12px;border:1px solid #b9ccd8;border-radius:8px;text-decoration:none;font-size:14px}
+   @media(max-width:600px){.ef-brief-title{font-size:21px}.ef-brief-grid{grid-template-columns:1fr}}
+
   `;document.head.appendChild(style);
   const host=document.createElement('section');host.id='estateFocusDashboard';
   const metrics=[['efWatch','นิคมฯ เข้าเกณฑ์เฝ้าระวัง','ผลคัดกรองจากสถานีใกล้นิคมฯ'],['efWaterWatch','ใกล้ระดับน้ำเข้าเกณฑ์','สถานีระดับน้ำภายใน 30 กม.'],['efRainWatch','ใกล้ฝนเข้าเกณฑ์','ฝนสะสมมากกว่า 35 มม. ภายใน 30 กม.'],['efTotal','นิคมฯ / ท่าเรือในชุดข้อมูล','ตำแหน่งที่ใช้ประเมินจากข้อมูล กนอ.'],['ef24','ตำบลเฝ้าระวัง 24 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ'],['ef48','ตำบลเฝ้าระวัง 48 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ']];
   host.innerHTML=`<div class="ef-workspace"><div class="ef-data-column">
    <div class="ef-toolbar"><div><h1>สถานการณ์น้ำในพื้นที่นิคมอุตสาหกรรม</h1><p>เฝ้าระวังจากข้อมูลสถานี · รัศมี 30 กิโลเมตร</p></div><div class="ef-actions"><button id="efRefresh" type="button">อัปเดต</button><button id="efReport" type="button">จัดทำรายงาน ↗</button></div></div>
    <div class="ef-status" id="efStatus" role="status">กำลังตรวจสอบข้อมูล…</div>
+   <section id="efEstateBrief" class="ef-panel" hidden aria-label="สรุป GIS รายนิคม"></section>
    <div class="ef-charts"><article class="ef-chart"><h2>นิคมฯ เข้าเกณฑ์เฝ้าระวัง</h2><div class="ef-gauge" id="efGauge"></div><p>เทียบกับนิคมฯ / ท่าเรือทั้งหมดในชุดข้อมูล ไม่ใช่จำนวนนิคมฯ ที่ยืนยันน้ำท่วม</p></article><article class="ef-chart"><h2>สัดส่วนการคัดกรองนิคมฯ</h2><div id="efComposition"></div></article><article class="ef-chart"><h2>5 นิคมฯ ใกล้สถานีฝนสะสมสูงสุด</h2><div id="efRainRank"></div><p>ฝนสะสม 24 ชม. สูงสุดจากสถานีในรัศมี 30 กม. · หน่วย มม.</p></article></div>
    <div class="ef-metrics" aria-label="การ์ดข้อมูลเฝ้าระวัง">${metrics.map(([id,title,note])=>`<article class="ef-metric" role="button" tabindex="0" data-ef-card="${id}"><h2>${title}</h2><div class="ef-metric-value"><strong id="${id}">–</strong><span class="ef-unit">${['ef24','ef48'].includes(id)?'ตำบล':'แห่ง'}</span></div><small>${note}</small></article>`).join('')}</div>
    <section class="ef-panel"><h2>ติดตามนิคมฯ / ท่าเรือ</h2><div class="ef-tools"><input id="efSearch" type="search" aria-label="ค้นหาชื่อนิคมฯ / ท่าเรือ" placeholder="ค้นหาชื่อนิคมฯ / ท่าเรือ"><select id="efFilter" aria-label="กรองข้อมูลนิคมฯ"><option value="watch">เข้าเกณฑ์เฝ้าระวัง</option><option value="water">ใกล้ระดับน้ำเข้าเกณฑ์</option><option value="rain">ใกล้ฝนเข้าเกณฑ์</option><option value="all">ทุกนิคมฯ / ท่าเรือ</option></select></div><p id="efResultCount" class="ef-count"></p><div class="ef-selection" id="efSelection" hidden></div><div id="efEstates" class="ef-estates"></div></section>
@@ -141,6 +155,7 @@
   document.addEventListener('fullscreenchange',syncFullscreen);
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&mapPanel.classList.contains('ef-map-expanded'))closeExpanded()});
 
+  $('estateFocusMap').addEventListener('load',()=>{if(selected&&current){const estate=model(current).estates.find(e=>String(e.id)===selected);if(estate)zoom(estate.lat,estate.lon)}});
   $('efRefresh').onclick=load;
   $('efReport').onclick=()=>window.open('flood-report-editor.html#infographic','_blank','noopener');
   $('efSearch').oninput=()=>renderEstates();$('efFilter').onchange=()=>renderEstates();
@@ -191,6 +206,33 @@
   set('ef24',m.warning24.available?fmt(m.warning24.rows.length):'ไม่มีข้อมูล');set('ef48',m.warning48.available?fmt(m.warning48.rows.length):'ไม่มีข้อมูล');
   renderEstates();renderCharts(m);
   const chosen=m.estates.find(e=>String(e.id)===selected);
+
+  const brief=$('efEstateBrief');brief.hidden=!chosen;
+  $('estateFocusDashboard').classList.toggle('ef-estate-mode',!!chosen);
+  if(chosen){
+   const local=m.near.map(r=>({...r,distance:km(chosen,r)})).filter(r=>r.distance<=RADIUS);
+   const rains=local.filter(r=>r.kind==='rainfall'&&num(r.rainfall_mm)!==null),waters=local.filter(r=>r.kind==='waterlevel'&&num(r.waterlevel_msl)!==null);
+   const watch=m.watch.find(e=>String(e.id)===selected),maxRain=rains.length?Math.max(...rains.map(r=>Number(r.rainfall_mm))):null;
+   const status=m.usable?(watch?'พบสถานีใกล้นิคมฯ เข้าเกณฑ์เฝ้าระวัง':'ไม่พบสถานีใกล้นิคมฯ เข้าเกณฑ์ในชุดข้อมูลนี้'):'ข้อมูลยังไม่พร้อมประเมิน';
+   brief.innerHTML=`<h2 class="ef-brief-title">สรุป GIS · ${esc(chosen.name)}</h2>
+    <p>รอบข้อมูล ${esc(time(data.generated_at))} · คัดกรองสถานีภายใน 30 กม. จากจุดตำแหน่งนิคมฯ</p>
+    <div class="ef-brief-note"><b>${status}</b><br>สถานะนี้เป็นผลคัดกรองจากสถานี ยังไม่ใช่การยืนยันว่าน้ำท่วมภายในนิคมฯ</div>
+    <div class="ef-brief-grid">
+     <div class="ef-brief-value">ฝนสะสม 24 ชม. สูงสุดใกล้นิคมฯ<strong>${m.usable&&maxRain!==null?fmt(maxRain)+' มม.':'ยังไม่มีข้อมูลที่ใช้สรุปได้'}</strong>จาก ${rains.length} สถานีที่มีค่าตรวจวัดล่าสุด</div>
+     <div class="ef-brief-value">สถานีระดับน้ำเข้าเกณฑ์เฝ้าระวัง<strong>${m.usable?fmt(watch?.water.length||0)+' สถานี':'ยังสรุปไม่ได้'}</strong>จาก ${waters.length} สถานีระดับน้ำที่มีค่าล่าสุด</div>
+    </div>
+    <h2>ข้อมูลผลกระทบที่ต้องยืนยันจากพื้นที่</h2>
+    <ul class="ef-gap-list">
+     <li><b>ขอบเขตและความลึกน้ำท่วม</b>ยังไม่มีชั้นข้อมูลยืนยันปัจจุบันในระบบ · ต้องระบุพิกัด ความลึกน้ำ รูปถ่าย และเวลาสำรวจ</li>
+     <li><b>โรงงานที่ได้รับผลกระทบ</b>ยังไม่มีรายชื่อยืนยัน · ต้องซ้อนขอบเขตน้ำท่วมที่ตรวจสอบแล้วกับตำแหน่งโรงงาน และยืนยันกับนิคมฯ</li>
+     <li><b>ถนนปิดและทางเข้า–ออก</b>ยังไม่มีเส้นทางที่พื้นที่ยืนยัน · จุด Longdo และ CCTV ใช้ประกอบการตรวจสอบ ไม่ยืนยันว่าเส้นทางผ่านได้</li>
+     <li><b>จุดสูบน้ำและจุดช่วยเหลือ</b>ยังไม่มีตำแหน่งและสถานะยืนยัน · ต้องรับข้อมูลจากเจ้าหน้าที่นิคมฯ</li>
+    </ul>
+    <div class="ef-brief-links"><a href="https://disaster.gistda.or.th/flood" target="_blank" rel="noopener">ตรวจวันที่ภาพ GISTDA ↗</a><a href="https://ieat.go.th/th/ieat-news/9711" target="_blank" rel="noopener">ข่าวสถานการณ์จาก กนอ. ↗</a></div>
+    <p>ดูตำแหน่งในแผนที่ด้านข้าง และตรวจค่าตรวจวัดจริงพร้อมเวลาที่ตารางสถานีด้านล่าง · ข้อมูลที่ยังไม่ยืนยันไม่ได้หมายความว่าไม่มีผลกระทบ</p>`;
+   zoom(chosen.lat,chosen.lon);
+  }
+
   const selection=$('efSelection');selection.hidden=!chosen;
   if(chosen){const w=m.watch.find(e=>String(e.id)===selected);selection.innerHTML='<b>'+esc(chosen.name)+'</b><br>'+(m.usable?(w?'ฝนเข้าเกณฑ์ '+w.rain.length+' สถานี · ระดับน้ำเข้าเกณฑ์ '+w.water.length+' สถานี':'ไม่พบสถานีเข้าเกณฑ์ในชุดข้อมูลนี้'):'ข้อมูลยังไม่พร้อมสรุป')+'<br>ตารางด้านล่างแสดงเฉพาะสถานีภายใน 30 กม. จากนิคมฯ ที่เลือก'}
   set('efStationNote',m.complete?`แสดง ${m.near.length} สถานีในรัศมี 30 กม. · เวลาตรวจวัดภายใน 24 ชั่วโมง · ไม่ใช้ ${m.excluded} รายการที่พิกัดหรือเวลาไม่ผ่านเกณฑ์ · คลิกสถานีเพื่อซูม`:'รายการสถานีชุดเดิมมีไม่ครบ จึงยังใช้ตรวจสอบยอดไม่ได้ รอข้อมูลที่แก้ไขแล้ว');
