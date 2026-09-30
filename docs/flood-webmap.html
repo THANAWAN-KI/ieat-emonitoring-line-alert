@@ -104,7 +104,6 @@ body,body *{color:#000!important}body svg text{fill:#000!important}input::placeh
 <a href="https://traffic.longdo.com/main/" target="_blank" rel="noopener" style="background:#fff;padding:7px 9px;border-radius:7px;box-shadow:0 2px 8px #0003;font-size:14px">เส้นจราจร ↗</a>
 </div>
 <aside id="roadLegend" role="status"><b>เส้นจราจร · Longdo</b><span><i style="background:#67bf35"></i>คล่องตัว</span> · <span><i style="background:#eabc18"></i>ชะลอตัว</span> · <span><i style="background:#ed4545"></i>ติดขัด</span><small id="roadStatus">กำลังโหลด · ซูมเข้าเพื่อดูเส้นถนน</small></aside>
-<aside id="gistdaStatus" role="status">กำลังตรวจสอบข้อมูล GISTDA…</aside>
 <div id="trafficStatus" role="status">กำลังโหลดจุดน้ำท่วม ระดับน้ำ และกล้อง…</div>
 <div id="message" role="status">กำลังโหลดแผนที่…</div>
 <iframe id="fallback" title="แผนที่สถานการณ์น้ำท่วมจาก ArcGIS Map Viewer" loading="eager" allow="fullscreen; geolocation"></iframe>
@@ -126,6 +125,7 @@ body,body *{color:#000!important}body svg text{fill:#000!important}input::placeh
 
  var gistdaStatus=document.getElementById("gistdaStatus");
  function gistdaText(text){
+  if(!gistdaStatus)return;
   gistdaStatus.innerHTML=escapeHtml(text)+"<br><a href='https://disaster.gistda.or.th/flood' target='_blank' rel='noopener'>ตรวจสอบภาพและวันที่จาก GISTDA ↗</a>";
  }
 
