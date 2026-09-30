@@ -77,15 +77,49 @@
    @media(max-width:1250px){.ef-workspace{grid-template-columns:minmax(0,1.2fr) minmax(330px,1fr)}.ef-chart{padding:14px 10px}.ef-donut{width:110px;height:110px}.ef-donut:before{inset:20px}.ef-chart h2{font-size:12px}.ef-toolbar h1{font-size:18px}}
    @media(max-width:950px){#estateFocusDashboard{height:auto}.ef-workspace{grid-template-columns:1fr;height:auto}.ef-map-column{grid-row:1;height:480px}.ef-data-column{overflow:visible;padding:0}.ef-charts{grid-template-columns:repeat(3,minmax(0,1fr))}}
    @media(max-width:600px){.ef-charts{grid-template-columns:1fr}.ef-chart{min-height:0;padding:20px}.ef-gauge svg{max-width:220px;margin:15px auto}.ef-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.ef-estates,.ef-warning{grid-template-columns:1fr}.ef-map-column{height:420px}.ef-toolbar h1{font-size:17px}.ef-chart-legend{max-width:240px;margin:auto}.ef-donut{width:135px;height:135px}.ef-donut:before{inset:24px}}
+
+   /* Readable dashboard: larger text, stronger contrast, explicit screening labels. */
+   #estateFocusDashboard{color:#172b3a}
+   .ef-workspace{grid-template-columns:minmax(0,1fr) minmax(420px,1fr)}
+   .ef-toolbar h1{font-size:26px;line-height:1.45}.ef-toolbar p{font-size:15px;color:#465c6c}
+   .ef-actions button,.ef-actions a{font-size:14px;color:#244656;border-color:#a9bdc9;background:#fff;padding:10px 16px;min-height:44px}
+   .ef-status{font-size:14px;color:#234b50;background:#e6f3f3;border:1px solid #b6d6d7;line-height:1.8}
+   .ef-panel,.ef-chart,.ef-metric{border-color:#cbd7e0;border-radius:16px;box-shadow:none}
+   .ef-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+   .ef-metric{min-height:145px;padding:20px;border-left:5px solid #087f85}
+   .ef-metric h2{font-size:16px;color:#243f50;font-weight:600}
+   .ef-metric strong{font-size:38px;color:#08686e}.ef-unit{font-size:14px;color:#465c6c}.ef-metric small{font-size:13px;color:#465c6c}
+   .ef-metric[data-ef-card="efWatch"]{background:#fff4e7;border-left-color:#b45309}.ef-metric[data-ef-card="efWatch"] strong{color:#92400e}
+   .ef-charts{grid-template-columns:repeat(2,minmax(0,1fr))}
+   .ef-chart{padding:20px;min-height:0}.ef-chart:last-child{grid-column:1/-1}
+   .ef-chart h2{font-size:17px;color:#20384a;font-weight:700}.ef-chart p{font-size:13px;color:#465c6c}
+   .ef-gauge svg{max-width:280px;margin:20px auto 12px}
+   .ef-donut{width:150px;height:150px}.ef-donut:before{inset:28px}.ef-donut b{font-size:28px;color:#243b53}
+   .ef-chart-legend{font-size:14px;color:#344c5e;gap:12px}.ef-chart-legend strong{font-size:16px;color:#172b3a}.ef-chart-legend i{width:12px;height:12px}
+   .ef-rank-row{margin:16px 0;color:#20384a}.ef-rank-row span{font-size:15px;white-space:normal;line-height:1.6}
+   .ef-rank-track{height:28px;background:#e6edf2}.ef-rank-track b{font-size:15px;background:#efc137;color:#302700;padding:3px 8px;min-width:55px}
+   .ef-panel h2{font-size:20px}.ef-panel p,.ef-count{font-size:14px;color:#465c6c}.ef-panel summary{font-size:16px;color:#243f50}
+   .ef-tools input,.ef-tools select{font-size:15px;color:#243f50;border-color:#a9bdc9;min-height:46px}
+   .ef-estates{grid-template-columns:1fr;max-height:420px}.ef-estate{font-size:16px;color:#243f50;background:#f5f8fb;border-color:#c6d3df;padding:16px}
+   .ef-estate small{font-size:13px;color:#465c6c}.ef-estate[aria-pressed="true"]{border:2px solid #247449;background:#edf8f0;color:#14532d}
+   .ef-selection{font-size:15px;color:#14532d}.ef-table table{font-size:14px}.ef-table td,.ef-table th{color:#344c5e;border-color:#d6e0e8;padding:12px}
+   .ef-table th{font-weight:700;background:#eaf0f5}.ef-table button,.ef-risk button,.ef-sources a{color:#076878;font-weight:600}
+   .ef-risk,.ef-sources,.ef-empty{font-size:14px;color:#465c6c}
+   .ef-map-head h2{font-size:20px}.ef-map-head small,.ef-map-foot{font-size:13px;color:#465c6c}
+   .ef-data-column{scrollbar-width:auto;scrollbar-color:#73899b #e7eef3}
+   @media(max-width:1250px){.ef-workspace{grid-template-columns:minmax(0,1fr) minmax(360px,1fr)}.ef-toolbar h1{font-size:23px}}
+   @media(max-width:950px){.ef-workspace{grid-template-columns:1fr}.ef-map-column{grid-row:auto;height:520px}.ef-charts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+   @media(max-width:600px){.ef-toolbar h1{font-size:22px}.ef-charts{grid-template-columns:1fr}.ef-chart:last-child{grid-column:auto}.ef-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.ef-metric{padding:14px;min-height:150px}.ef-metric h2{font-size:14px}.ef-metric strong{font-size:32px}.ef-warning{grid-template-columns:1fr}.ef-map-head h2{font-size:17px}.ef-map-column{height:460px}}
+
   `;document.head.appendChild(style);
   const host=document.createElement('section');host.id='estateFocusDashboard';
-  const metrics=[['efWatch','นิคมฯ เข้าเกณฑ์เฝ้าระวัง','ผลคัดกรองจากสถานีใกล้นิคมฯ'],['efWaterWatch','ใกล้ระดับน้ำเข้าเกณฑ์','สถานีระดับน้ำภายใน 30 กม.'],['efRainWatch','ใกล้ฝนเข้าเกณฑ์','ฝนสะสมมากกว่า 35 มม. ภายใน 30 กม.'],['efTotal','นิคมฯ / ท่าเรือในชุดข้อมูล','ตำแหน่งที่ใช้ประเมินจากข้อมูล กนอ.'],['ef24','ตำบลเฝ้าระวัง 24 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ'],['ef48','ตำบลเฝ้าระวัง 48 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ']];
+  const metrics=[['efWatch','นิคมฯ เข้าเกณฑ์เฝ้าระวัง','ผลคัดกรองจากสถานีใกล้นิคมฯ'],['efWaterWatch','นิคมฯ ใกล้สถานีระดับน้ำเฝ้าระวัง','สถานีระดับน้ำภายใน 30 กม.'],['efRainWatch','นิคมฯ ใกล้สถานีฝนหนัก','ฝนสะสมมากกว่า 35 มม. ภายใน 30 กม.'],['efTotal','นิคมฯ / ท่าเรือในชุดข้อมูล','ตำแหน่งที่ใช้ประเมินจากข้อมูล กนอ.'],['ef24','ตำบลเฝ้าระวัง 24 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ'],['ef48','ตำบลเฝ้าระวัง 48 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ']];
   host.innerHTML=`<div class="ef-workspace"><div class="ef-data-column">
-   <div class="ef-toolbar"><div><h1>สถานการณ์น้ำในพื้นที่นิคมอุตสาหกรรม</h1><p>เฝ้าระวังจากข้อมูลสถานี · รัศมี 30 กิโลเมตร</p></div><div class="ef-actions"><button id="efRefresh" type="button">อัปเดต</button><button id="efReport" type="button">จัดทำรายงาน ↗</button></div></div>
+   <div class="ef-toolbar"><div><h1>สถานการณ์น้ำในพื้นที่นิคมอุตสาหกรรม</h1><p>คัดกรองจากสถานีในรัศมี 30 กม. · ตัวเลขเฝ้าระวังยังไม่ยืนยันว่านิคมฯ น้ำท่วม</p></div><div class="ef-actions"><button id="efRefresh" type="button">อัปเดต</button><button id="efReport" type="button">จัดทำรายงาน ↗</button></div></div>
    <div class="ef-status" id="efStatus" role="status">กำลังตรวจสอบข้อมูล…</div>
-   <div class="ef-charts"><article class="ef-chart"><h2>นิคมฯ เข้าเกณฑ์เฝ้าระวัง</h2><div class="ef-gauge" id="efGauge"></div><p>เทียบกับนิคมฯ / ท่าเรือทั้งหมดในชุดข้อมูล ไม่ใช่จำนวนนิคมฯ ที่ยืนยันน้ำท่วม</p></article><article class="ef-chart"><h2>สัดส่วนการคัดกรองนิคมฯ</h2><div id="efComposition"></div></article><article class="ef-chart"><h2>5 นิคมฯ ใกล้สถานีฝนสะสมสูงสุด</h2><div id="efRainRank"></div><p>ฝนสะสม 24 ชม. สูงสุดจากสถานีในรัศมี 30 กม. · หน่วย มม.</p></article></div>
    <div class="ef-metrics" aria-label="การ์ดข้อมูลเฝ้าระวัง">${metrics.map(([id,title,note])=>`<article class="ef-metric" role="button" tabindex="0" data-ef-card="${id}"><h2>${title}</h2><div class="ef-metric-value"><strong id="${id}">–</strong><span class="ef-unit">${['ef24','ef48'].includes(id)?'ตำบล':'แห่ง'}</span></div><small>${note}</small></article>`).join('')}</div>
-   <section class="ef-panel"><h2>ติดตามนิคมฯ / ท่าเรือ</h2><div class="ef-tools"><input id="efSearch" type="search" aria-label="ค้นหาชื่อนิคมฯ / ท่าเรือ" placeholder="ค้นหาชื่อนิคมฯ / ท่าเรือ"><select id="efFilter" aria-label="กรองข้อมูลนิคมฯ"><option value="watch">เข้าเกณฑ์เฝ้าระวัง</option><option value="water">ใกล้ระดับน้ำเข้าเกณฑ์</option><option value="rain">ใกล้ฝนเข้าเกณฑ์</option><option value="all">ทุกนิคมฯ / ท่าเรือ</option></select></div><p id="efResultCount" class="ef-count"></p><div class="ef-selection" id="efSelection" hidden></div><div id="efEstates" class="ef-estates"></div></section>
+   <div class="ef-charts"><article class="ef-chart"><h2>นิคมฯ เข้าเกณฑ์เฝ้าระวัง</h2><div class="ef-gauge" id="efGauge"></div><p>เทียบกับนิคมฯ / ท่าเรือทั้งหมดในชุดข้อมูล ไม่ใช่จำนวนนิคมฯ ที่ยืนยันน้ำท่วม</p></article><article class="ef-chart"><h2>สัดส่วนการคัดกรองนิคมฯ</h2><div id="efComposition"></div></article><article class="ef-chart"><h2>5 นิคมฯ ใกล้สถานีฝนสะสมสูงสุด</h2><div id="efRainRank"></div><p>ฝนสะสม 24 ชม. สูงสุดจากสถานีในรัศมี 30 กม. · หน่วย มม.</p></article></div>
+   <section class="ef-panel"><h2>ติดตามนิคมฯ / ท่าเรือ</h2><div class="ef-tools"><input id="efSearch" type="search" aria-label="ค้นหาชื่อนิคมฯ / ท่าเรือ" placeholder="ค้นหาชื่อนิคมฯ / ท่าเรือ"><select id="efFilter" aria-label="กรองข้อมูลนิคมฯ"><option value="watch">เข้าเกณฑ์เฝ้าระวัง</option><option value="water">นิคมฯ ใกล้สถานีระดับน้ำเฝ้าระวัง</option><option value="rain">นิคมฯ ใกล้สถานีฝนหนัก</option><option value="all">ทุกนิคมฯ / ท่าเรือ</option></select></div><p id="efResultCount" class="ef-count"></p><div class="ef-selection" id="efSelection" hidden></div><div id="efEstates" class="ef-estates"></div></section>
    <section class="ef-panel"><div class="ef-toolbar"><h2>สถานีที่ใช้ติดตาม</h2><div class="ef-actions"><button id="efClear" type="button">กลับภาพรวม</button></div></div><p id="efStationNote"></p><div class="ef-table"><table><thead><tr><th>สถานี / ที่มา</th><th>ค่าตรวจวัด</th><th>สถานะสถานี</th><th>นิคมฯ / ระยะ</th><th>เวลาตรวจวัด</th></tr></thead><tbody id="efStations"></tbody></table></div></section>
    <div class="ef-warning"><details class="ef-panel" id="efDetails24"><summary>พื้นที่เฝ้าระวัง 24 ชั่วโมง</summary><div id="efWarning24"></div></details><details class="ef-panel" id="efDetails48"><summary>พื้นที่เฝ้าระวัง 48 ชั่วโมง</summary><div id="efWarning48"></div></details></div>
    <details class="ef-panel ef-sources"><summary>แหล่งข้อมูลและเกณฑ์ประเมิน</summary><div id="efSources"></div><p>คัดกรองทุกนิคมฯ กับทุกสถานีภายใน 30 กม. ใช้ค่าฝนมากกว่า 35 มม. หรือสถานะระดับน้ำเฝ้าระวังขึ้นไปจาก ThaiWater และเวลาสถานีภายใน 24 ชั่วโมง ระยะเป็นเส้นตรงจากจุดตำแหน่งนิคมฯ ไม่ใช่ขอบเขตนิคมฯ หนึ่งนิคมฯ อาจเข้าเกณฑ์ทั้งฝนและระดับน้ำ</p><p>การเข้าเกณฑ์เฝ้าระวังไม่ยืนยันน้ำท่วมภายในนิคมฯ ต้องตรวจวันที่ภาพดาวเทียม ขอบเขตน้ำท่วม และข้อมูลจากพื้นที่</p><a href="https://disaster.gistda.or.th/flood" target="_blank" rel="noopener">GISTDA ↗</a> · <a href="https://www.thaiwater.net/new4all/warning" target="_blank" rel="noopener">ThaiWater ↗</a></details>
@@ -104,9 +138,9 @@
  function renderCharts(m){
   if(!m.usable){['efGauge','efComposition','efRainRank'].forEach(id=>$(id).innerHTML='<div class="ef-empty">ข้อมูลยังไม่ครบหรือยังไม่พร้อมประเมิน</div>');return}
   const total=m.estates.length,count=m.watch.length,pct=total?count/total*100:0;
-  $('efGauge').innerHTML=`<svg viewBox="0 0 200 130" role="img" aria-label="นิคมฯ เข้าเกณฑ์ ${count} จาก ${total} แห่ง"><path d="M20 100 A80 80 0 0 1 180 100" fill="none" stroke="#eef1f4" stroke-width="22" pathLength="100"/><path d="M20 100 A80 80 0 0 1 180 100" fill="none" stroke="#f96961" stroke-width="22" pathLength="100" stroke-dasharray="${pct} 100"/><text x="100" y="101" text-anchor="middle" fill="#3f51aa" font-size="17" font-weight="600">${count} แห่ง</text><text x="100" y="122" text-anchor="middle" fill="#92a0ac" font-size="10">จาก ${total} แห่งในชุดข้อมูล</text></svg>`;
+  $('efGauge').innerHTML=`<svg viewBox="0 0 200 130" role="img" aria-label="นิคมฯ เข้าเกณฑ์ ${count} จาก ${total} แห่ง"><path d="M20 100 A80 80 0 0 1 180 100" fill="none" stroke="#eef1f4" stroke-width="22" pathLength="100"/><path d="M20 100 A80 80 0 0 1 180 100" fill="none" stroke="#f96961" stroke-width="22" pathLength="100" stroke-dasharray="${pct} 100"/><text x="100" y="101" text-anchor="middle" fill="#243b53" font-size="21" font-weight="600">${count} แห่ง</text><text x="100" y="122" text-anchor="middle" fill="#465c6c" font-size="12">จาก ${total} แห่งในชุดข้อมูล</text></svg>`;
   const both=m.watch.filter(e=>e.rain.length&&e.water.length).length,rainOnly=m.watch.filter(e=>e.rain.length&&!e.water.length).length,waterOnly=m.watch.filter(e=>e.water.length&&!e.rain.length).length;
-  const parts=[['ใกล้ระดับน้ำเข้าเกณฑ์','#62c948',waterOnly],['ใกล้ฝนเข้าเกณฑ์','#ffda31',rainOnly],['เข้าเกณฑ์ทั้งสองแบบ','#db62e8',both],['ไม่พบสถานีเข้าเกณฑ์','#b8bdc3',total-count]];let start=0;
+  const parts=[['ระดับน้ำอย่างเดียว','#0369a1',waterOnly],['ฝนหนักอย่างเดียว','#b45309',rainOnly],['เข้าเกณฑ์ทั้งสองแบบ','#7e22ce',both],['ไม่พบสถานีเข้าเกณฑ์','#64748b',total-count]];let start=0;
   const stops=parts.map(([,color,n])=>{const end=start+n/total*100,s=`${color} ${start}% ${end}%`;start=end;return s}).join(',');
   $('efComposition').innerHTML=`<div class="ef-donut" role="img" aria-label="สัดส่วน ${parts.map(([label,,n])=>label+' '+n+' แห่ง').join(', ')}" style="background:conic-gradient(${stops})"><b>${total}</b></div><div class="ef-chart-legend">${parts.map(([label,color,n])=>`<div><i style="background:${color}"></i><span>${label}</span><strong>${n}</strong></div>`).join('')}</div>`;
   const rank=m.estates.map(e=>{const values=m.rain.filter(r=>km(e,r)<=RADIUS).map(r=>Number(r.rainfall_mm));return {...e,rain:values.length?Math.max(...values):null}}).filter(e=>e.rain!==null).sort((a,b)=>b.rain-a.rain).slice(0,5),max=rank[0]?.rain||1;
