@@ -30,6 +30,11 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
 .map-popup-head{display:flex;align-items:center;gap:9px;margin-bottom:13px}.map-popup-head img{width:37px;height:45px;object-fit:contain}.map-popup-head strong{font-size:15px}.map-popup-head small{display:block;width:max-content;color:#d93632;background:#fde8e7;border-radius:999px;padding:3px 9px;font-size:12px;font-weight:700;margin-top:3px}
 .map-popup-title{font-size:16px;font-weight:700;line-height:1.5;margin:8px 0}.map-popup-sub{font-size:12px;color:#8895a5}.map-popup-rule{border:0;border-top:1px solid #e8edf2;margin:13px 0}
 .map-popup-row{display:flex;justify-content:space-between;gap:14px;margin:7px 0;font-size:13px}.map-popup-row span{color:#7a8798}.map-popup-row b{text-align:right}.map-popup-source{color:#639ec0;font-size:12px;margin-top:14px}.map-popup-source a{font-weight:700}.map-popup-note{display:block;color:#9ba6b3;font-size:11px;margin-top:5px}.map-popup p{line-height:1.55;white-space:pre-wrap;font-size:13px}.map-popup a{color:#1769c2}
+#dataControls{left:12px;right:58px;max-width:none}
+#gistdaStatus{position:absolute;z-index:6;left:12px;bottom:70px;max-width:min(430px,calc(100% - 90px));background:#fff;padding:10px 12px;border-radius:9px;color:#34495e;font-size:12px;line-height:1.5;box-shadow:0 2px 10px #0002}
+#gistdaStatus a{color:#1769c2}
+#trafficStatus{max-width:calc(100% - 90px);font-size:11px;max-height:45px;overflow:auto}
+@media(max-width:600px){#dataControls label{padding:5px;font-size:11px}#gistdaStatus{bottom:76px;font-size:11px}.leaflet-popup-content{min-width:180px}}
 </style>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>window.FloodLeaflet=window.L;</script>
@@ -39,12 +44,14 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
 <div id="viewDiv" aria-label="แผนที่สถานการณ์น้ำท่วม"></div>
 <div id="leafletMap" aria-label="แผนที่ข้อมูลน้ำท่วมสำรอง"></div>
 <div id="dataControls" aria-label="ชั้นข้อมูลน้ำท่วมและจราจร">
-<label><input type="checkbox" data-layer="flood" checked> จุดน้ำท่วม</label>
+<label><input type="checkbox" data-layer="gistda" checked> พื้นที่ GISTDA</label>
+<label><input type="checkbox" data-layer="flood" checked> จุดรายงาน · Longdo</label>
 <label><input type="checkbox" data-layer="water" checked> ระดับน้ำ</label>
 <label><input type="checkbox" data-layer="events"> เหตุการณ์จราจร</label>
 <label><input type="checkbox" data-layer="cameras"> CCTV</label>
 <a href="https://traffic.longdo.com/main/" target="_blank" rel="noopener" style="background:#fff;padding:7px 9px;border-radius:7px;box-shadow:0 2px 8px #0003;font-size:12px">เส้นจราจร ↗</a>
 </div>
+<aside id="gistdaStatus" role="status">กำลังตรวจสอบข้อมูล GISTDA…</aside>
 <div id="trafficStatus" role="status">กำลังโหลดจุดน้ำท่วม ระดับน้ำ และกล้อง…</div>
 <div id="message" role="status">กำลังโหลดแผนที่…</div>
 <iframe id="fallback" title="แผนที่สถานการณ์น้ำท่วมจาก ArcGIS Map Viewer" loading="eager" allow="fullscreen; geolocation"></iframe>
@@ -58,88 +65,18 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
  var view=null, pending=null, ready=false, fallback=false, leafletMap=null, leafletGroups=null;
  var trafficStatus=document.getElementById("trafficStatus");
  var sourceState={flood:"กำลังโหลด",water:"กำลังโหลด",events:"กำลังโหลด",cameras:"กำลังโหลด"};
- function reportSource(name,text){sourceState[name]=text;trafficText("จุดน้ำท่วม "+sourceState.flood+" · ระดับน้ำ "+sourceState.water+" · เหตุการณ์ "+sourceState.events+" · CCTV "+sourceState.cameras)}
+ function reportSource(name,text){sourceState[name]=text;trafficText("จุดรายงาน Longdo "+sourceState.flood+" · ระดับน้ำ "+sourceState.water+" · เหตุการณ์ "+sourceState.events+" · CCTV "+sourceState.cameras)}
  function trafficText(value){trafficStatus.textContent=value}
  function escapeHtml(value){return String(value==null?"":value).replace(/[&<>"']/g,function(ch){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]})}
- var captureMode=new URLSearchParams(location.search).get("capture")==="1";
- var initialCenter=new URLSearchParams(location.search).get("center");
- var initialScale=Number(new URLSearchParams(location.search).get("scale"));
- var message=document.getElementById("message"),frame=document.getElementById("fallback");
- function popupHead(kind,label,subtitle){
-  var icon={flood:"./assets/map-flood-point.svg",waterAlert:"./assets/map-water-alert.svg",waterWatch:"./assets/map-water-watch.svg",camera:"./assets/map-camera-point.svg",traffic:"./assets/map-traffic-point.svg"}[kind];
-  return "<div class='map-popup-head'><img src='"+icon+"' alt=''><div><strong>"+escapeHtml(label)+"</strong><small>"+escapeHtml(subtitle)+"</small></div></div>";
+
+ var gistdaStatus=document.getElementById("gistdaStatus");
+ function gistdaText(text){
+  gistdaStatus.innerHTML=escapeHtml(text)+"<br><a href='https://disaster.gistda.or.th/flood' target='_blank' rel='noopener'>ตรวจสอบภาพและวันที่จาก GISTDA ↗</a>";
  }
- function popupRow(label,value){return "<div class='map-popup-row'><span>"+escapeHtml(label)+"</span><b>"+escapeHtml(value)+"</b></div>"}
- function thaiTime(value){
-  var match=String(value||"").match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})/);
-  if(!match)return String(value||"–");
-  var month=["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."][Number(match[2])-1];
-  return Number(match[3])+" "+month+" "+match[4]+":"+match[5];
- }
- function leafletPopup(icon,label,subtitle,title,rows,description,source,subline){
-  return "<div class='map-popup'>"+popupHead(icon,label,subtitle)+"<div class='map-popup-title'>"+escapeHtml(title)+"</div>"+(subline?"<div class='map-popup-sub'>"+escapeHtml(subline)+"</div>":"")+
-   "<hr class='map-popup-rule'>"+rows.map(function(row){return popupRow(row[0],row[1])}).join("")+
-   (description?"<p>"+escapeHtml(description)+"</p>":"")+
-   "<div class='map-popup-source'>"+source+"</div></div>";
- }
- function leafletIcon(kind){
-  return L.icon({iconUrl:new URL({flood:"./assets/map-flood-point.svg",waterAlert:"./assets/map-water-alert.svg",waterWatch:"./assets/map-water-watch.svg",camera:"./assets/map-camera-point.svg",traffic:"./assets/map-traffic-point.svg"}[kind],location.href).href,
-   iconSize:[31,37],iconAnchor:[15,37],popupAnchor:[0,-30]});
- }
- async function loadLeafletLayers(){
-  var groups=leafletGroups;
-  try{
-   var response=await fetch("./data/thaiwater_latest.json?v="+Date.now(),{cache:"no-store"});
-   if(!response.ok)throw Error("ThaiWater HTTP "+response.status);
-   var data=await response.json(),count=0;
-   (data.stations||[]).forEach(function(row){
-    if(row.kind!=="waterlevel")return;
-    var lat=Number(row.lat),lon=Number(row.lon);if(!Number.isFinite(lat)||!Number.isFinite(lon))return;
-    var icon=Number(row.severity_score)>=4?"waterAlert":"waterWatch";
-    var rows=[["ระดับน้ำ",row.value_text||"–"]];
-    if(row.bankfull_msl!=null)rows.push(["ระดับตลิ่ง",row.bankfull_msl+" ม.รทก."]);
-    rows.push(["ความจุลำน้ำ",row.storage_percent==null?"–":row.storage_percent+"%"],["เวลาที่วัด",thaiTime(row.observed_at)]);
-    L.marker([lat,lon],{icon:leafletIcon(icon)}).bindPopup(leafletPopup(icon,"ระดับน้ำ",row.status||"–",row.station||"สถานีระดับน้ำ",rows,"",
-     "ที่มา: <a target='_blank' rel='noopener' href='https://www.thaiwater.net/water/wl'>คลังข้อมูลน้ำแห่งชาติ (ThaiWater)</a> · "+escapeHtml(row.agency||"ThaiWater"),(row.district?"อ."+row.district+" ":"")+"จ."+String(row.province||""))).addTo(groups.water);
-    count++;
-   });reportSource("water",count+" สถานี");
-  }catch(error){console.error("Leaflet water",error);reportSource("water","โหลดไม่สำเร็จ")}
-  try{
-   var response=await fetch("https://event.longdo.com/feed/json",{cache:"no-store"});
-   if(!response.ok)throw Error("Longdo HTTP "+response.status);
-   var events=await response.json(),now=Date.now(),floodCount=0,eventCount=0;
-   if(!Array.isArray(events))throw Error("รูปแบบฟีดไม่ถูกต้อง");
-   events.forEach(function(row){
-    var lat=Number(row.latitude),lon=Number(row.longitude);
-    var start=Date.parse(String(row.start||"").replace(" ","T")+"+07:00");
-    var stop=Date.parse(String(row.stop||"").replace(" ","T")+"+07:00");
-    if(!Number.isFinite(lat)||!Number.isFinite(lon)||Number.isFinite(stop)&&stop<now||Number.isFinite(start)&&start>now+3600000)return;
-    var flood=String(row.icon||"").toLowerCase()==="flood",kind=flood?"flood":"traffic",group=flood?groups.flood:groups.events;
-    L.marker([lat,lon],{icon:leafletIcon(kind)}).bindPopup(leafletPopup(kind,flood?"จุดน้ำท่วม":"เหตุการณ์จราจร",thaiTime(row.start),row.title||"เหตุการณ์",
-     [["สิ้นสุดตามฟีด",thaiTime(row.stop)]],row.description||"","ที่มา: <a target='_blank' rel='noopener' href='https://traffic.longdo.com/main/'>Longdo Traffic</a>")).addTo(group);
-    if(flood)floodCount++;else eventCount++;
-   });reportSource("flood",floodCount+" จุด");reportSource("events",eventCount+" จุด");
-  }catch(error){reportSource("flood","โหลดไม่สำเร็จ");reportSource("events","โหลดไม่สำเร็จ")}
-  try{
-   var response=await fetch("https://camera.longdo.com/feed/?command=json",{cache:"no-store"});
-   if(!response.ok)throw Error("CCTV HTTP "+response.status);
-   var data=await response.json(),rows=Array.isArray(data)?data:Array.isArray(data.data)?data.data:Array.isArray(data.cameras)?data.cameras:[],count=0;
-   rows.forEach(function(row){
-    var lat=Number(row.latitude),lon=Number(row.longitude);if(!Number.isFinite(lat)||!Number.isFinite(lon))return;
-    var url=String(row.link||"");if(!/^https?:\/\//i.test(url))url="https://traffic.longdo.com/main/";
-    L.marker([lat,lon],{icon:leafletIcon("camera")}).bindPopup(leafletPopup("camera","กล้อง CCTV",thaiTime(row.lastupdate),row.title||"กล้อง CCTV",[],"",
-     "<a target='_blank' rel='noopener' href='"+escapeHtml(url)+"'>เปิดภาพจาก Longdo Traffic ↗</a>")).addTo(groups.cameras);count++;
-   });reportSource("cameras",count+" กล้อง");
-  }catch(error){console.error("Leaflet cameras",error);reportSource("cameras","โหลดไม่สำเร็จ")}
-  try{
-   var response=await fetch("./data/gistda_flood_latest.geojson?v="+Date.now(),{cache:"no-store"});
-   if(response.ok){
-    var geo=await response.json(),retrieved=Date.parse(geo.metadata&&geo.metadata.retrieved_at||"");
-    if(Date.now()-retrieved<12*3600000)L.geoJSON(geo,{style:{color:"#0076ca",weight:2,fillOpacity:.22},pointToLayer:function(feature,latlng){
-     return L.circleMarker(latlng,{radius:5,color:"#0076ca",fillOpacity:.8})
-    }}).addTo(leafletMap);
-   }
-  }catch(error){}
+ async function verifiedGistda(){
+  var verified=await verifiedGistda();
+  groups.gistda.clearLayers();
+  if(verified)L.geoJSON(verified.feed,{style:{color:"#0076ca",weight:2,fillOpacity:.22},pointToLayer:function(feature,latlng){return L.circleMarker(latlng,{radius:5,color:"#0076ca",fillOpacity:.8})},onEachFeature:function(feature,layer){layer.bindPopup(verified.summarized?"จุดสรุประดับตำบล · ไม่ใช่ขอบเขตน้ำท่วม":"ขอบเขตน้ำท่วม · ตรวจสอบวันที่ภาพที่ GISTDA")}}).addTo(groups.gistda);
  }
  function startLeaflet(){
   if(typeof L==="undefined")return false;
@@ -149,7 +86,8 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
   var zoom=Number.isFinite(initialScale)&&initialScale>0?Math.max(5,Math.min(15,Math.round(Math.log2(591657527/initialScale)))):7;
   leafletMap=L.map("leafletMap",{scrollWheelZoom:false,maxZoom:15}).setView([coords[1],coords[0]],zoom);
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:15,attribution:'&copy; OpenStreetMap contributors'}).addTo(leafletMap);
-  leafletGroups={flood:L.layerGroup().addTo(leafletMap),water:L.layerGroup().addTo(leafletMap),events:L.layerGroup(),cameras:L.layerGroup()};
+  leafletMap.zoomControl.setPosition("bottomright");
+  leafletGroups={gistda:L.layerGroup().addTo(leafletMap),flood:L.layerGroup().addTo(leafletMap),water:L.layerGroup().addTo(leafletMap),events:L.layerGroup(),cameras:L.layerGroup()};
   document.querySelectorAll("#dataControls input[data-layer]").forEach(function(input){
    input.addEventListener("change",function(){
     var group=leafletGroups[input.dataset.layer];if(input.checked)group.addTo(leafletMap);else leafletMap.removeLayer(group)
@@ -211,7 +149,7 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
    else pending={center:[101,13.2],scale:4622324};
   }else navigate(Number(d.lon),Number(d.lat),Number(d.scale)||75000);
  });
- var timer=setTimeout(showFallback,90000);
+ var timer=setTimeout(showFallback,20000);
  if(window.arcgisScriptFailed||typeof window.require!=="function"){clearTimeout(timer);showFallback();return}
  require(["esri/WebMap","esri/views/MapView","esri/widgets/Home","esri/widgets/Search","esri/widgets/LayerList","esri/widgets/Legend","esri/widgets/Expand","esri/widgets/BasemapGallery","esri/layers/GeoJSONLayer","esri/layers/GraphicsLayer","esri/Graphic"],
  function(WebMap,MapView,Home,Search,LayerList,Legend,Expand,BasemapGallery,GeoJSONLayer,GraphicsLayer,Graphic){
@@ -224,15 +162,15 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
    var trafficLayer=new GraphicsLayer({title:"เหตุการณ์จราจร · Longdo Traffic",visible:false});
    var cameraLayer=new GraphicsLayer({title:"กล้อง CCTV · Longdo Traffic",visible:false});
    webmap.addMany([floodLayer,waterLayer,trafficLayer,cameraLayer]);
-   var layers={flood:floodLayer,water:waterLayer,events:trafficLayer,cameras:cameraLayer};
+   var layers={gistda:new GraphicsLayer({title:"ข้อมูล GISTDA",visible:true}),flood:floodLayer,water:waterLayer,events:trafficLayer,cameras:cameraLayer};
    document.querySelectorAll("#dataControls input[data-layer]").forEach(function(input){
-    input.addEventListener("change",function(){layers[input.dataset.layer].visible=input.checked});
+    input.addEventListener("change",function(){if(layers[input.dataset.layer])layers[input.dataset.layer].visible=input.checked});
    });
    var icons={flood:"./assets/map-flood-point.svg",waterAlert:"./assets/map-water-alert.svg",waterWatch:"./assets/map-water-watch.svg",camera:"./assets/map-camera-point.svg",traffic:"./assets/map-traffic-point.svg"};
    function iconSymbol(kind){return {type:"picture-marker",url:new URL(icons[kind],location.href).href,width:"31px",height:"37px",yoffset:"18px"}}
    function popupHead(kind,label,subtitle){return "<div class='map-popup-head'><img src='"+icons[kind]+"' alt=''><div><strong>"+escapeHtml(label)+"</strong><small>"+escapeHtml(subtitle)+"</small></div></div>"}
    function thaiTime(value){
-    var match=String(value||"").match(/^(\\d{4})-(\\d{2})-(\\d{2})[ T](\\d{2}):(\\d{2})/);
+    var match=String(value||"").match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})/);
     if(!match)return String(value||"–");
     var month=["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."][Number(match[2])-1];
     return Number(match[3])+" "+month+" "+match[4]+":"+match[5];
@@ -333,23 +271,28 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
    view.when(function(){
     if(fallback)return;
     ready=true;clearTimeout(timer);message.style.display="none";
-    view.ui.add(new Home({view:view}),"top-left");
+    view.ui.move("zoom","bottom-right");
+    view.ui.add(new Home({view:view}),"bottom-right");
     view.ui.add(new Search({view:view}),"top-right");
     view.ui.add(new Expand({view:view,content:new LayerList({view:view}),group:"map-tools",expandTooltip:"ชั้นข้อมูล"}),"top-right");
     view.ui.add(new Expand({view:view,content:new Legend({view:view}),group:"map-tools",expandTooltip:"คำอธิบายสัญลักษณ์"}),"top-right");
     view.ui.add(new Expand({view:view,content:new BasemapGallery({view:view}),group:"map-tools",expandTooltip:"เลือกแผนที่ฐาน"}),"top-right");
-    fetch("./data/gistda_flood_latest.geojson?v="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw Error("feed unavailable");return r.json()}).then(function(feed){
-     var retrieved=Date.parse(feed.metadata&&feed.metadata.retrieved_at||"");
-     if(!Number.isFinite(retrieved)||Date.now()-retrieved>12*3600000||!Array.isArray(feed.features)||!feed.features.length)return;
-     var summarized=feed.metadata&&feed.metadata.display_mode==="observed_flood_centers_by_tambon";
-     var symbol=summarized?{type:"simple-marker",style:"circle",size:9,color:[0,114,221,.85],outline:{color:[255,255,255,1],width:1.5}}:
-      {type:"simple-fill",color:[0,114,221,.35],outline:{color:[0,76,170,.85],width:1}};
-     var layer=new GeoJSONLayer({url:new URL("./data/gistda_flood_latest.geojson",location.href).href,
-      title:summarized?"จุดกลางพื้นที่น้ำท่วมที่ตรวจพบตามตำบล · GISTDA":"ขอบเขตน้ำท่วมที่ตรวจพบ · GISTDA",
-      renderer:{type:"simple",symbol:symbol},
-      popupTemplate:{title:"พื้นที่น้ำท่วมจาก GISTDA",content:summarized?"จุดนี้เป็นตำแหน่งสรุปของพื้นที่ที่ตรวจพบในตำบล โปรดตรวจสอบขอบเขตจริงและวันที่ภาพที่ https://disaster.gistda.or.th/flood":"ตรวจสอบวันที่ภาพและรายละเอียดที่ https://disaster.gistda.or.th/flood"}});
-     webmap.add(layer);
-    }).catch(function(){/* No verified polygon feed; retain the watch map without a flood overlay. */});
+    var gistdaObjectUrl=null;
+    async function loadGistda(){
+     var verified=await verifiedGistda();
+     if(fallback)return;
+     if(layers.gistda&&webmap.layers.includes(layers.gistda)){webmap.remove(layers.gistda);layers.gistda.destroy()}
+     if(gistdaObjectUrl){URL.revokeObjectURL(gistdaObjectUrl);gistdaObjectUrl=null}
+     if(!verified)return;
+     gistdaObjectUrl=URL.createObjectURL(new Blob([JSON.stringify(verified.feed)],{type:"application/geo+json"}));
+     var layer=new GeoJSONLayer({url:gistdaObjectUrl,visible:document.querySelector('[data-layer="gistda"]').checked,
+      title:verified.summarized?"จุดสรุปน้ำท่วมระดับตำบล · GISTDA":"ขอบเขตน้ำท่วม · GISTDA",
+      renderer:{type:"simple",symbol:verified.summarized?{type:"simple-marker",style:"circle",size:9,color:[0,114,221,.85],outline:{color:"white",width:1.5}}:{type:"simple-fill",color:[0,114,221,.25],outline:{color:[0,76,170,.85],width:1}}},
+      popupTemplate:{title:"ข้อมูลน้ำท่วม GISTDA · {tb_tn}",content:(verified.summarized?"จุดสรุประดับตำบล ไม่ใช่ขอบเขตน้ำท่วม":"ขอบเขตน้ำท่วมจากไฟล์ข้อมูล")+"<br>จังหวัด: {pv_tn}<br>อำเภอ: {ap_tn}<br>ตำบล: {tb_tn}<br>รหัสไฟล์ภาพต้นทาง: {file_name}<br>ข้อมูลย้อนหลังไม่ได้ยืนยันสถานการณ์ปัจจุบัน<br>ตรวจสอบวันที่ถ่ายภาพและรายละเอียดที่ <a href='https://disaster.gistda.or.th/flood' target='_blank' rel='noopener'>GISTDA</a>"}});
+     layers.gistda=layer;webmap.add(layer,0);
+     layer.load().catch(function(){webmap.remove(layer);gistdaText("ชั้นข้อมูล GISTDA แสดงไม่สำเร็จ · กรุณาตรวจสอบต้นทาง")});
+    }
+    loadGistda();setInterval(loadGistda,10*60*1000);
     if(pending)view.goTo(pending).catch(function(){});
     else if(initialCenter){var coords=initialCenter.split(",").map(Number);if(coords.length===2&&coords.every(Number.isFinite))view.goTo({center:coords,scale:Number.isFinite(initialScale)&&initialScale>0?initialScale:75000}).catch(function(){})}
    }).catch(showFallback);
