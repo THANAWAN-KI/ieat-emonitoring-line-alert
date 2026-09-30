@@ -104,6 +104,8 @@ body,body *{color:#000!important}body svg text{fill:#000!important}input::placeh
 (function(){
  "use strict";
  var L=window.FloodLeaflet;
+ var params=new URLSearchParams(location.search),initialCenter=params.get("center"),initialScale=Number(params.get("scale")),captureMode=params.get("capture")==="1";
+ var message=document.getElementById("message"),frame=document.getElementById("fallback");
  var itemId="3d24287ac6ea49cd823625ddad496e01";
  var viewerUrl="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap="+itemId+"&theme=light&legend=true&information=true&scroll=false&basemaps=true";
  var view=null, pending=null, ready=false, fallback=false, leafletMap=null, leafletGroups=null;
@@ -117,10 +119,36 @@ body,body *{color:#000!important}body svg text{fill:#000!important}input::placeh
  function gistdaText(text){
   gistdaStatus.innerHTML=escapeHtml(text)+"<br><a href='https://disaster.gistda.or.th/flood' target='_blank' rel='noopener'>ตรวจสอบภาพและวันที่จาก GISTDA ↗</a>";
  }
+
+ var gistdaLoading=null;
  async function verifiedGistda(){
-  var verified=await verifiedGistda();
-  groups.gistda.clearLayers();
-  if(verified)L.geoJSON(verified.feed,{style:{color:"#0076ca",weight:2,fillOpacity:.22},pointToLayer:function(feature,latlng){return L.circleMarker(latlng,{radius:5,color:"#0076ca",fillOpacity:.8})},onEachFeature:function(feature,layer){layer.bindPopup(verified.summarized?"จุดสรุประดับตำบล · ไม่ใช่ขอบเขตน้ำท่วม":"ขอบเขตน้ำท่วม · ตรวจสอบวันที่ภาพที่ GISTDA")}}).addTo(groups.gistda);
+  if(gistdaLoading)return gistdaLoading;
+  gistdaLoading=(async function(){
+   try{
+    var response=await fetch("./data/gistda_flood_latest.geojson?v="+Math.floor(Date.now()/600000),{cache:"no-store"});
+    if(!response.ok)throw Error("HTTP "+response.status);
+    var feed=await response.json();
+    if(feed.type!=="FeatureCollection"||!Array.isArray(feed.features))throw Error("รูปแบบข้อมูลไม่ถูกต้อง");
+    var features=feed.features.filter(function(feature){return feature&&feature.geometry});
+    if(!features.length){gistdaText("ไฟล์ GISTDA ไม่มีรายการพื้นที่ · ยังยืนยันสถานการณ์วันนี้ไม่ได้");return null}
+    var dates=new Set();
+    features.forEach(function(feature){
+     var p=feature.properties||{},value=String(p.file_name||"");
+     var matches=value.match(/20\d{6}/g)||[];
+     matches.forEach(function(date){
+      var y=date.slice(0,4),m=date.slice(4,6),d=date.slice(6,8),iso=y+"-"+m+"-"+d;
+      if(Number(m)>=1&&Number(m)<=12&&Number(d)>=1&&Number(d)<=31)dates.add(iso);
+     });
+    });
+    var dateList=Array.from(dates).sort(),latest=dateList[dateList.length-1];
+    var today=new Date().toLocaleDateString("en-CA",{timeZone:"Asia/Bangkok"});
+    var summarized=features.every(function(feature){return /^(Multi)?Point$/.test(feature.geometry.type)});
+    var label=summarized?"จุดสรุป GISTDA · ไม่ใช่ขอบเขตน้ำท่วม":"ขอบเขตจากไฟล์ GISTDA";
+    gistdaText(label+" · "+(latest?"วันที่ในชื่อไฟล์ภาพล่าสุด "+latest+(latest===today?" · ตรวจสอบช่วงพื้นที่ครอบคลุมที่ต้นทาง":" · ข้อมูลย้อนหลัง ยังไม่ยืนยันสถานการณ์วันนี้"):"ไม่พบวันที่ภาพที่ตรวจสอบได้ · ยังไม่ยืนยันสถานการณ์วันนี้"));
+    return {feed:{...feed,features:features},summarized:summarized};
+   }catch(error){gistdaText("โหลดข้อมูล GISTDA ไม่สำเร็จ · ไม่ใช่การยืนยันว่าไม่มีน้ำท่วม");return null}
+  })();
+  try{return await gistdaLoading}finally{gistdaLoading=null}
  }
  function startLeaflet(){
   if(typeof L==="undefined")return false;
