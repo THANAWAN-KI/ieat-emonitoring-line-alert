@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "period": "24h",
-  "date": "2026-09-30",
-  "time": "20:00:00",
+  "date": "2026-10-01",
+  "time": "02:00:00",
   "type": "แผนที่แสดงพื้นที่เสี่ยงน้ำท่วมฉับพลัน (รายตำบล)ใน 24 ชม. ข้างหน้า จากปริมาณฝนสะสมที่สถานีโทรมาตร",
   "source_url": "https://api.hii.or.th/v2/4UQaYnf0Bx4fXPYyCdDRbqHyXH9Ixvd2nVUjaN1cLBY=/warning/flashflood-24h",
   "area_count": 3,
@@ -18,8 +18,8 @@
       "station": "คลองชะอวด",
       "latitude": 7.96636,
       "longitude": 99.99436,
-      "sum_rainfall_mm": 105.6,
-      "observed_at": "2026-09-30T08:00:00+07:00",
+      "sum_rainfall_mm": 106.6,
+      "observed_at": "2026-09-30T14:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -285,8 +285,8 @@
       "station": "รร.ผังปาล์ม 4",
       "latitude": 7.02235,
       "longitude": 99.93085,
-      "sum_rainfall_mm": 141.0,
-      "observed_at": "2026-09-30T08:00:00+07:00",
+      "sum_rainfall_mm": 128.0,
+      "observed_at": "2026-09-30T14:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -645,7 +645,7 @@
       "latitude": 9.314687,
       "longitude": 98.889885,
       "sum_rainfall_mm": 103.8,
-      "observed_at": "2026-09-30T08:00:00+07:00",
+      "observed_at": "2026-09-30T14:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -1501,8 +1501,8 @@
       "station": "คลองชะอวด",
       "latitude": 7.96636,
       "longitude": 99.99436,
-      "sum_rainfall_mm": 105.6,
-      "observed_at": "2026-09-30T08:00:00+07:00",
+      "sum_rainfall_mm": 106.6,
+      "observed_at": "2026-09-30T14:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -1768,8 +1768,8 @@
       "station": "รร.ผังปาล์ม 4",
       "latitude": 7.02235,
       "longitude": 99.93085,
-      "sum_rainfall_mm": 141.0,
-      "observed_at": "2026-09-30T08:00:00+07:00",
+      "sum_rainfall_mm": 128.0,
+      "observed_at": "2026-09-30T14:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -2128,7 +2128,7 @@
       "latitude": 9.314687,
       "longitude": 98.889885,
       "sum_rainfall_mm": 103.8,
-      "observed_at": "2026-09-30T08:00:00+07:00",
+      "observed_at": "2026-09-30T14:00:00+07:00",
       "geometry": {
         "rings": [
           [
