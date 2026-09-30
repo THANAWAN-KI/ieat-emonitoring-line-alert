@@ -127,7 +127,7 @@ body{background:#fff}
 </head>
 <body><div class="loading" id="loading">กำลังจัดทำรายงาน PNG…</div>
 <header class="top"><div><h1>IEAT DSS — จัดทำรายงานเหตุฉุกเฉิน</h1><span>แก้ไขข้อมูลด้านซ้าย ผลลัพธ์ในรายงานจะเปลี่ยนทันที</span></div><div class="top-actions"><button class="secondary" id="resetBtn">ล้างข้อมูล</button><button class="primary" id="pngBtn">ดาวน์โหลด PNG</button></div></header>
-<main class="workspace"><aside class="editor"><h2>แก้ไขข้อมูลรายงาน</h2><div class="field"><label for="factoryLookup">ค้นหานิคมอุตสาหกรรม / บริษัท / เลขทะเบียน (เดิม–ใหม่)</label><div class="mini-actions"><input id="factoryLookup" list="factoryLookupOptions" placeholder="พิมพ์ชื่อบางส่วน เช่น บาง หรือเลขทะเบียน"><button class="primary" id="factoryLookupBtn" type="button">ค้นหาและวิเคราะห์</button></div><datalist id="factoryLookupOptions"></datalist><p id="factoryLookupStatus" class="hint" role="status"></p></div><div class="field"><label for="bufferKm">รัศมี Buffer (กม.)</label><input id="bufferKm" type="number" min="0.1" max="50" step="0.1" value="3"><p class="hint">แสดงวงรอบจุดเกิดเหตุในแผนที่และไฟล์ PNG</p></div><div id="form"></div></aside><div class="report-wrap"><section class="report" id="report">
+<main class="workspace"><aside class="editor"><h2>แก้ไขข้อมูลรายงาน</h2><div class="field"><label for="factoryLookup">ค้นหานิคมอุตสาหกรรม / บริษัท / เลขทะเบียน (เดิม–ใหม่)</label><div class="mini-actions"><input id="factoryLookup" list="factoryLookupOptions" placeholder="พิมพ์ชื่อบางส่วน เช่น บาง หรือเลขทะเบียน"><button class="primary" id="factoryLookupBtn" type="button">ค้นหาและวิเคราะห์</button></div><datalist id="factoryLookupOptions"></datalist><p id="factoryLookupStatus" class="hint" role="status"></p></div><div class="field"><label for="bufferKm">รัศมี Buffer (กม.)</label><div class="grid2"><div><label for="bufferKm1">วงที่ 1 (กม.)</label><input id="bufferKm1" type="number" min="0.1" max="50" step="0.1" value="1"></div><div><label for="bufferKm2">วงที่ 2 (กม.)</label><input id="bufferKm2" type="number" min="0.1" max="50" step="0.1" value="2"></div><div><label for="bufferKm">วงที่ 3 (กม.)</label><input id="bufferKm" type="number" min="0.1" max="50" step="0.1" value="3"></div></div><button type="button" class="secondary" id="zoomIncidentBtn">ซูมจุดเกิดเหตุ</button><p class="hint">วงซ้อน 3 สี พร้อมป้ายระยะในแผนที่และไฟล์ PNG</p></div><div id="form"></div></aside><div class="report-wrap"><section class="report" id="report">
 <div class="report-header"><h1 data-out="title"></h1><p data-out="unit"></p></div>
 <div class="meta-grid"><div class="meta"><small>เลขที่รายงาน</small><b data-out="reportNo"></b></div><div class="meta"><small>วันและเวลาจัดทำ</small><b data-out="date"></b></div><div class="meta"><small>สถานะเอกสาร</small><b data-out="status"></b></div></div>
 <div class="section-title">ข้อมูลสถานประกอบการ / พื้นที่เกิดเหตุ</div><div class="company"><div class="row"><b>ชื่อสถานประกอบการ</b><span data-out="company"></span></div><div class="row"><b>เลขทะเบียน</b><span data-out="registration"></span></div><div class="row"><b>นิคมอุตสาหกรรม</b><span data-out="estate"></span></div><div class="row"><b>ที่อยู่ / จุดเกิดเหตุ</b><span data-out="address"></span></div><div class="row"><b>สารเคมี / วัตถุอันตราย</b><span data-out="chemical"></span></div><div class="row"><b>ข้อมูลการระงับเหตุ</b><span data-out="response"></span></div></div>
@@ -140,7 +140,7 @@ body{background:#fff}
 <script>
 const defaults={title:'รายงานข้อมูลสนับสนุนการรับมือเหตุฉุกเฉิน',unit:'ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย กนอ.',reportNo:'EMCC-'+new Date().toISOString().slice(0,10).replaceAll('-','')+'-001',date:new Date().toLocaleString('th-TH'),status:'ข้อมูลสนับสนุนเบื้องต้น',company:'บริษัท / โรงงานที่เกิดเหตุ',registration:'—',estate:'—',address:'—',chemical:'—',response:'ตรวจสอบเอกสาร SDS และยืนยันข้อมูลกับผู้รับผิดชอบก่อนเข้าปฏิบัติการ',event:'เหตุเพลิงไหม้',level:'เฝ้าระวัง',lat:'13.7563',lng:'100.5018',temp:'—',weather:'รอดึงข้อมูลสภาพอากาศ',humidity:'—',windSpeed:'—',windDir:'—',windDeg:'0',weatherTime:'',hospitalName:'โรงพยาบาลใกล้ที่สุด',hospitalDistance:'— กม.',fireName:'สถานีดับเพลิงใกล้ที่สุด',fireDistance:'— กม.',policeName:'สถานีตำรวจใกล้ที่สุด',policeDistance:'— กม.',hydrantName:'หัวจ่ายน้ำดับเพลิง',hydrantDistance:'— เมตร',communityName:'ชุมชนในรัศมี 3 กม.',communityDistance:'— แห่ง',cctvName:'กล้อง CCTV ใกล้เคียง',cctvDistance:'— จุด',note:'ข้อมูลนี้ใช้สนับสนุนการประสานงานเบื้องต้น โปรดตรวจสอบความถูกต้องกับหน่วยงานเจ้าของข้อมูลก่อนนำไปใช้อ้างอิง',source:'คลังข้อมูล DSS กนอ., ArcGIS Risk Map และ Open-Meteo',bufferKm:3};
 const groups=[['ข้อมูลเอกสาร',[['title','ชื่อรายงาน'],['unit','หน่วยงาน'],['reportNo','เลขที่รายงาน'],['date','วันและเวลาจัดทำ'],['status','สถานะเอกสาร']]],['สถานประกอบการและเหตุการณ์',[['company','ชื่อสถานประกอบการ'],['registration','เลขทะเบียน'],['estate','นิคมอุตสาหกรรม'],['address','ที่อยู่ / จุดเกิดเหตุ'],['event','ประเภทเหตุ'],['level','ระดับเหตุการณ์'],['chemical','สารเคมี / วัตถุอันตราย','textarea'],['response','ข้อมูลสนับสนุนการระงับเหตุ','textarea']]],['ตำแหน่งและอากาศ',[['lat','ละติจูด'],['lng','ลองจิจูด'],['temp','อุณหภูมิ °C'],['weather','สภาพอากาศ'],['humidity','ความชื้น %'],['windSpeed','ความเร็วลม กม./ชม.'],['windDir','ทิศที่ลมพัดมา'],['windDeg','องศาทิศทางลม']]],['ข้อมูลใกล้เคียง',[['hospitalName','ชื่อโรงพยาบาล'],['hospitalDistance','ระยะโรงพยาบาล'],['fireName','ชื่อสถานีดับเพลิง'],['fireDistance','ระยะสถานีดับเพลิง'],['policeName','ชื่อสถานีตำรวจ'],['policeDistance','ระยะสถานีตำรวจ'],['hydrantName','หัวจ่ายน้ำ'],['hydrantDistance','ระยะหัวจ่ายน้ำ'],['communityName','ชุมชน'],['communityDistance','จำนวน / ระยะชุมชน'],['cctvName','กล้อง CCTV'],['cctvDistance','จำนวน / ระยะ CCTV']]],['หมายเหตุ',[['note','หมายเหตุ','textarea'],['source','แหล่งข้อมูล','textarea']]]];
-let state=JSON.parse(localStorage.getItem('dss-report')||'null')||{...defaults};state.bufferKm=Number(state.bufferKm)||3;document.getElementById('bufferKm').value=state.bufferKm;const form=document.getElementById('form');form.innerHTML=groups.map(([name,fields])=>`<section class="group"><h3>${name}</h3><div class="${name==='ตำแหน่งและอากาศ'?'grid2':''}">${fields.map(([key,label,type])=>`<div class="field"><label for="${key}">${label}</label>${type==='textarea'?`<textarea id="${key}" data-key="${key}"></textarea>`:`<input id="${key}" data-key="${key}">`}</div>`).join('')}</div>${name==='ตำแหน่งและอากาศ'?'<div class="mini-actions"><button class="secondary" id="mapBtn" type="button">อัปเดตแผนที่</button><button class="primary" id="weatherBtn" type="button">ดึงสภาพอากาศ</button></div><p class="hint">แก้พิกัดด้านบนแล้วกดอัปเดตแผนที่เพื่อใช้ในข้อมูลอากาศและไฟล์ PNG</p>':''}</section>`).join('');
+let state=JSON.parse(localStorage.getItem('dss-report')||'null')||{...defaults};state.bufferKm=Number(state.bufferKm)||3;state.bufferRadii=Array.isArray(state.bufferRadii)&&state.bufferRadii.length===3?state.bufferRadii:[1,2,3];state.bufferKm=Math.max(...state.bufferRadii);['bufferKm1','bufferKm2','bufferKm'].forEach((id,i)=>document.getElementById(id).value=state.bufferRadii[i]);const form=document.getElementById('form');form.innerHTML=groups.map(([name,fields])=>`<section class="group"><h3>${name}</h3><div class="${name==='ตำแหน่งและอากาศ'?'grid2':''}">${fields.map(([key,label,type])=>`<div class="field"><label for="${key}">${label}</label>${type==='textarea'?`<textarea id="${key}" data-key="${key}"></textarea>`:`<input id="${key}" data-key="${key}">`}</div>`).join('')}</div>${name==='ตำแหน่งและอากาศ'?'<div class="mini-actions"><button class="secondary" id="mapBtn" type="button">อัปเดตแผนที่</button><button class="primary" id="weatherBtn" type="button">ดึงสภาพอากาศ</button></div><p class="hint">แก้พิกัดด้านบนแล้วกดอัปเดตแผนที่เพื่อใช้ในข้อมูลอากาศและไฟล์ PNG</p>':''}</section>`).join('');
 const supportKeys=[['hospitalName','hospitalDistance'],['fireName','fireDistance'],['policeName','policeDistance'],['hydrantName','hydrantDistance'],['communityName','communityDistance'],['cctvName','cctvDistance']];function render(){document.querySelectorAll('[data-key]').forEach(el=>{if(document.activeElement!==el)el.value=state[el.dataset.key]??''});document.querySelectorAll('[data-out]').forEach(el=>el.textContent=state[el.dataset.out]||'—');supportGrid.replaceChildren();supportKeys.forEach(([a,b])=>{const card=document.createElement('article');card.className='support';const name=document.createElement('b'),distance=document.createElement('strong'),caption=document.createElement('span');name.textContent=state[a]||'—';distance.textContent=state[b]||'—';caption.textContent='ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ';card.append(name,distance,caption);supportGrid.appendChild(card)});windArrow.style.transform=`rotate(${Number(state.windDeg)||0}deg)`;if(typeof renderFactoryDetails==='function')renderFactoryDetails();localStorage.setItem('dss-report',JSON.stringify(state))}form.addEventListener('input',e=>{if(e.target.dataset.key){state[e.target.dataset.key]=e.target.value;render()}});
 const mapNode=document.getElementById('map');
 mapNode.style.position='relative';
@@ -152,19 +152,27 @@ const locationPin=document.createElement('div');
 locationPin.style.cssText='position:absolute;left:50%;top:50%;width:14px;height:14px;border:2px solid white;border-radius:50%;background:#d9273f;transform:translate(-50%,-50%);box-shadow:0 1px 5px #222;pointer-events:none';
 mapNode.append(mapImage,bufferOverlay,locationPin);
 let mapLoadPromise=Promise.resolve();
+function getBufferRadii(){return (state.bufferRadii||[1,2,3]).map(Number).sort((a,b)=>a-b)}
 function updateMap(){
   const lat=Number(state.lat),lng=Number(state.lng);
   if(!Number.isFinite(lat)||!Number.isFinite(lng))return;
-  const radius=Math.min(50,Math.max(.1,Number(state.bufferKm)||3));
+  const radii=getBufferRadii(),radius=Math.max(...radii);
   const width=mapNode.clientWidth||800,height=mapNode.clientHeight||560;
-  const spanKm=.55,spanLat=spanKm/111.2,spanLng=spanLat*width/height/Math.cos(lat*Math.PI/180);
+  const spanKm=radius*1.35,spanLat=spanKm/111.2,spanLng=spanLat*width/height/Math.cos(lat*Math.PI/180);
   const bbox=[lng-spanLng,lat-spanLat,lng+spanLng,lat+spanLat].map(n=>n.toFixed(6)).join(',');
   mapLoadPromise=new Promise(resolve=>{mapImage.onload=resolve;mapImage.onerror=resolve});
   mapImage.src='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export?bbox='+bbox+'&bboxSR=4326&imageSR=4326&size='+Math.round(width)+','+Math.round(height)+'&format=png32&f=image';
-  const diameter=Math.min(95,radius/spanKm*100);
-  
-  requestAnimationFrame(()=>{const side=mapNode.clientHeight*radius/spanKm;bufferOverlay.style.width=side+'px';bufferOverlay.style.height=side+'px'});
-  document.getElementById('incidentCoordinates').textContent=' · พิกัด '+lat.toFixed(5)+', '+lng.toFixed(5)+' · Buffer '+radius+' กม.';
+  bufferOverlay.style.cssText='position:absolute;inset:0;pointer-events:none';
+  bufferOverlay.replaceChildren();
+  const colors=['#d32f2f','#ed8b00','#1976d2'];
+  radii.forEach((km,i)=>{
+    const ring=document.createElement('div'),label=document.createElement('span');
+    ring.style.cssText='position:absolute;left:50%;top:50%;border:3px solid '+colors[i]+';border-radius:50%;transform:translate(-50%,-50%);box-sizing:border-box';
+    label.textContent=km+' Km';label.style.cssText='position:absolute;left:50%;top:0;transform:translate(-50%,-50%);padding:2px 7px;background:white;border:1px solid '+colors[i]+';border-radius:4px;color:'+colors[i]+';font-size:13px;font-weight:700;white-space:nowrap';
+    ring.appendChild(label);bufferOverlay.appendChild(ring);
+    requestAnimationFrame(()=>{const side=mapNode.clientHeight*km/spanKm;ring.style.width=side+'px';ring.style.height=side+'px'});
+  });
+  document.getElementById('incidentCoordinates').textContent=' · พิกัด '+lat.toFixed(5)+', '+lng.toFixed(5)+' · Buffer '+radii.join(' / ')+' กม.';
   if(window.dssSyncLiveMap)window.dssSyncLiveMap(lat,lng,radius);
 }
 mapNode.addEventListener('click',function(e){
@@ -772,11 +780,14 @@ async function selectDssLookup(item){
 
 document.getElementById('factoryLookupBtn').addEventListener('click',searchFactory);
 factoryLookup.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();searchFactory()}});
-document.getElementById('bufferKm').addEventListener('change',function(){
-  const value=Number(this.value);
-  if(!Number.isFinite(value)||value<.1||value>50){this.value=state.bufferKm;return}
-  state.bufferKm=value;render();updateMap();loadDssNearby(Number(state.lat),Number(state.lng));
-});
+['bufferKm1','bufferKm2','bufferKm'].forEach(id=>document.getElementById(id).addEventListener('change',function(){
+ const values=['bufferKm1','bufferKm2','bufferKm'].map(key=>Number(document.getElementById(key).value));
+ if(values.some(v=>!Number.isFinite(v)||v<.1||v>50)||new Set(values).size!==3){factoryLookupStatus.textContent='กรอก 3 ระยะที่ต่างกัน ระหว่าง 0.1–50 กม.';return}
+ state.bufferRadii=values.sort((a,b)=>a-b);state.bufferKm=Math.max(...values);
+ ['bufferKm1','bufferKm2','bufferKm'].forEach((key,i)=>document.getElementById(key).value=state.bufferRadii[i]);
+ render();updateMap();loadDssNearby(Number(state.lat),Number(state.lng));
+}));
+document.getElementById('zoomIncidentBtn').addEventListener('click',()=>{if(window.dssZoomIncident)window.dssZoomIncident()});
 window.addEventListener('message',async event=>{
   if(event.origin!==location.origin||event.source!==window.parent||!event.data)return;
   if(event.data.type==='dss-factory-options'){
@@ -842,14 +853,22 @@ async function downloadReportPng(){
  const node=document.createElement('div');node.id='dssLiveMap';mapNode.appendChild(node);
  const live=L.map(node,{scrollWheelZoom:false}).setView([Number(state.lat),Number(state.lng)],14);
  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,attribution:'Tiles © Esri'}).addTo(live);
- const circle=L.circle([Number(state.lat),Number(state.lng)],{radius:(Number(state.bufferKm)||3)*1000,color:'#d9273f',fillOpacity:.10}).addTo(live);
+ const colors=['#d32f2f','#ed8b00','#1976d2'];
+ const circles=colors.map(color=>L.circle([Number(state.lat),Number(state.lng)],{radius:1000,color,weight:3,fillOpacity:0}).addTo(live));
+ const distanceLabels=colors.map(()=>L.marker([Number(state.lat),Number(state.lng)],{interactive:false}).addTo(live));
  const pin=L.marker([Number(state.lat),Number(state.lng)],{icon:L.divIcon({className:'dss-incident-marker',html:'<div class="dss-incident-pin"></div>',iconSize:[32,42],iconAnchor:[16,42],tooltipAnchor:[0,-42]}),draggable:true,zIndexOffset:1000}).addTo(live);
  window.dssSyncLiveMap=function(lat,lng,radius){
-   circle.setLatLng([lat,lng]).setRadius(radius*1000);pin.setLatLng([lat,lng]);
+   const radii=getBufferRadii();
+   circles.forEach((circle,i)=>{
+     circle.setLatLng([lat,lng]).setRadius(radii[i]*1000);
+     distanceLabels[i].setLatLng([lat+radii[i]/111.2,lng]).setIcon(L.divIcon({className:'dss-buffer-distance',html:'<span style="color:'+colors[i]+';border-color:'+colors[i]+'">'+radii[i]+' Km</span>',iconSize:[70,24],iconAnchor:[35,12]}));
+   });
+   pin.setLatLng([lat,lng]);
    const label=document.createElement('span');label.textContent=state.company||state.estate||'จุดเกิดเหตุ';
    pin.unbindTooltip().bindTooltip(label,{permanent:true,direction:'top',offset:[0,-6],className:'dss-company-tooltip'});
-   live.invalidateSize();live.setView([lat,lng],16,{animate:false});
+   live.invalidateSize();live.fitBounds(circles[2].getBounds(),{padding:[42,42],animate:false});
  };
+ window.dssZoomIncident=()=>live.setView(pin.getLatLng(),16,{animate:false});
  pin.on('dragend',function(){
    const point=pin.getLatLng();state.lat=point.lat.toFixed(6);state.lng=point.lng.toFixed(6);render();updateMap();
    factoryLookupStatus.textContent='ปรับหมุดจุดเกิดเหตุแล้ว · '+state.lat+', '+state.lng;
@@ -871,4 +890,4 @@ async function downloadReportPng(){
 #report .company .row>span{min-width:0;white-space:pre-line;overflow-wrap:break-word}
 .dss-company-tooltip span{display:block;width:100%;white-space:normal;word-break:normal}
 #factoryLookupResults button{white-space:normal;line-height:1.5}
-</style></body></html>
+</style><style>.dss-buffer-distance{background:transparent;border:0;white-space:nowrap}.dss-buffer-distance span{display:inline-block;padding:2px 7px;background:#fff;border:2px solid;border-radius:5px;font-size:13px;font-weight:700;box-shadow:0 1px 4px #0003}</style></body></html>
