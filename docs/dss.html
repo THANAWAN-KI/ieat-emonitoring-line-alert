@@ -158,7 +158,7 @@ function updateMap(){
   if(!Number.isFinite(lat)||!Number.isFinite(lng))return;
   const radius=Math.min(50,Math.max(.1,Number(state.bufferKm)||3));
   const width=mapNode.clientWidth||800,height=mapNode.clientHeight||560;
-  const spanKm=Math.max(radius*1.5,3),spanLat=spanKm/111.2,spanLng=spanLat*width/height/Math.cos(lat*Math.PI/180);
+  const spanKm=.55,spanLat=spanKm/111.2,spanLng=spanLat*width/height/Math.cos(lat*Math.PI/180);
   const bbox=[lng-spanLng,lat-spanLat,lng+spanLng,lat+spanLat].map(n=>n.toFixed(6)).join(',');
   mapLoadPromise=new Promise(resolve=>{mapImage.onload=resolve;mapImage.onerror=resolve});
   mapImage.src='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export?bbox='+bbox+'&bboxSR=4326&imageSR=4326&size='+Math.round(width)+','+Math.round(height)+'&format=png32&f=image';
@@ -725,12 +725,12 @@ async function downloadReportPng(){
  const live=L.map(node,{scrollWheelZoom:false}).setView([Number(state.lat),Number(state.lng)],14);
  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,attribution:'Tiles © Esri'}).addTo(live);
  const circle=L.circle([Number(state.lat),Number(state.lng)],{radius:(Number(state.bufferKm)||3)*1000,color:'#d9273f',fillOpacity:.10}).addTo(live);
- const pin=L.circleMarker([Number(state.lat),Number(state.lng)],{radius:8,color:'#fff',weight:2,fillColor:'#d9273f',fillOpacity:1}).addTo(live);
+ const pin=L.marker([Number(state.lat),Number(state.lng)],{icon:L.divIcon({className:'dss-incident-marker',html:'<div class="dss-incident-pin"></div>',iconSize:[32,42],iconAnchor:[16,42],tooltipAnchor:[0,-42]}),zIndexOffset:1000}).addTo(live);
  window.dssSyncLiveMap=function(lat,lng,radius){
    circle.setLatLng([lat,lng]).setRadius(radius*1000);pin.setLatLng([lat,lng]);
    const label=document.createElement('span');label.textContent=state.company||state.estate||'จุดเกิดเหตุ';
-   pin.unbindTooltip().bindTooltip(label,{permanent:true,direction:'top'});
-   live.invalidateSize();live.fitBounds(circle.getBounds(),{padding:[24,24],maxZoom:16});
+   pin.unbindTooltip().bindTooltip(label,{permanent:true,direction:'top',offset:[0,-6],className:'dss-company-tooltip'});
+   live.invalidateSize();live.setView([lat,lng],16,{animate:false});
  };
  mapNode.classList.add('dss-live-ready');
  if(window.ResizeObserver)new ResizeObserver(()=>live.invalidateSize()).observe(mapNode);
@@ -738,4 +738,9 @@ async function downloadReportPng(){
 })();
 </script>
 
-</body></html>
+<style id="dss-incident-pin-label">
+.dss-incident-marker{background:transparent;border:0}
+.dss-incident-pin{width:32px;height:32px;background:#d20962;border:3px solid white;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 2px 7px #0008;position:relative}
+.dss-incident-pin:after{content:'';position:absolute;width:10px;height:10px;left:8px;top:8px;border-radius:50%;background:white}
+.dss-company-tooltip{background:white!important;border:2px solid #d20962!important;color:#25232a!important;font-weight:700!important;font-size:14px!important;white-space:normal!important;max-width:230px;text-align:center;box-shadow:0 2px 7px #0004}
+</style></body></html>
