@@ -840,8 +840,9 @@ function reportText(ctx,text,x,y,maxWidth,lineHeight){
 async function downloadReportPng(){
   loading.classList.add('show');
   try{
+    let bufferExportImage=null;
     const liveMapReady=typeof window.dssWaitMapReady==='function';
-    if(liveMapReady){await window.dssWaitMapReady()}
+    if(liveMapReady){await window.dssWaitMapReady();if(window.dssExportBufferOverlay)bufferExportImage=window.dssExportBufferOverlay()}
     else{
       await Promise.race([mapLoadPromise,new Promise(resolve=>setTimeout(resolve,8000))]);
       if(!mapImage.complete||!mapImage.naturalWidth)throw new Error('ภาพแผนที่ยังไม่พร้อม');
@@ -857,6 +858,12 @@ async function downloadReportPng(){
         if(!clonedMap)return;
         const liveMap=clonedMap.querySelector('#dssLiveMap');
         if(liveMap){
+          if(bufferExportImage){
+            liveMap.querySelectorAll('.leaflet-overlay-pane svg').forEach(svg=>svg.style.setProperty('display','none','important'));
+            const overlay=clonedDocument.createElement('img');overlay.src=bufferExportImage;
+            overlay.style.cssText='position:absolute;inset:0;width:100%;height:100%;z-index:450;pointer-events:none';
+            liveMap.appendChild(overlay);
+          }
           // Keep Leaflet's current panes, transforms, markers, circles and labels.
           clonedMap.querySelectorAll(':scope > img,:scope > div').forEach(el=>{
             if(el===liveMap){el.style.setProperty('display','block','important');el.style.setProperty('visibility','visible','important')}
@@ -938,6 +945,24 @@ async function downloadReportPng(){
    live.invalidateSize();live.fitBounds(circles[radii.length-1].getBounds(),{padding:[42,42],animate:false});
  };
  window.dssSyncSupportMarkers();
+
+ window.dssExportBufferOverlay=function(){
+  const size=live.getSize(),scale=2,canvas=document.createElement('canvas');canvas.width=size.x*scale;canvas.height=size.y*scale;
+  const ctx=canvas.getContext('2d');ctx.scale(scale,scale);
+  circles.forEach(circle=>{
+   if(!live.hasLayer(circle))return;
+   const point=circle.getLatLng(),center=live.latLngToContainerPoint(point),bounds=circle.getBounds();
+   const west=live.latLngToContainerPoint([point.lat,bounds.getWest()]),east=live.latLngToContainerPoint([point.lat,bounds.getEast()]);
+   const north=live.latLngToContainerPoint([bounds.getNorth(),point.lng]),south=live.latLngToContainerPoint([bounds.getSouth(),point.lng]);
+   const rx=Math.abs(east.x-west.x)/2,ry=Math.abs(south.y-north.y)/2;
+   if(!Number.isFinite(rx)||!Number.isFinite(ry)||rx<=0||ry<=0)return;
+   ctx.beginPath();ctx.ellipse(center.x,center.y,rx,ry,0,0,Math.PI*2);
+   ctx.fillStyle=circle.options.fillColor||circle.options.color;ctx.globalAlpha=circle.options.fillOpacity;ctx.fill();
+   ctx.globalAlpha=circle.options.opacity;ctx.strokeStyle=circle.options.color;ctx.lineWidth=circle.options.weight;ctx.stroke();ctx.globalAlpha=1;
+  });
+  return canvas.toDataURL('image/png');
+ };
+
  window.dssZoomIncident=()=>live.setView(pin.getLatLng(),16,{animate:false});
  pin.on('dragend',function(){
    const point=pin.getLatLng();state.lat=point.lat.toFixed(6);state.lng=point.lng.toFixed(6);render();updateMap();
