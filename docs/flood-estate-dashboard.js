@@ -77,6 +77,10 @@
    @media(max-width:1250px){.ef-workspace{grid-template-columns:minmax(0,1.2fr) minmax(330px,1fr)}.ef-chart{padding:14px 10px}.ef-donut{width:110px;height:110px}.ef-donut:before{inset:20px}.ef-chart h2{font-size:12px}.ef-toolbar h1{font-size:18px}}
    @media(max-width:950px){#estateFocusDashboard{height:auto}.ef-workspace{grid-template-columns:1fr;height:auto}.ef-map-column{grid-row:1;height:480px}.ef-data-column{overflow:visible;padding:0}.ef-charts{grid-template-columns:repeat(3,minmax(0,1fr))}}
    @media(max-width:600px){.ef-charts{grid-template-columns:1fr}.ef-chart{min-height:0;padding:20px}.ef-gauge svg{max-width:220px;margin:15px auto}.ef-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.ef-estates,.ef-warning{grid-template-columns:1fr}.ef-map-column{height:420px}.ef-toolbar h1{font-size:17px}.ef-chart-legend{max-width:240px;margin:auto}.ef-donut{width:135px;height:135px}.ef-donut:before{inset:24px}}
+
+   .ef-map-column:fullscreen{width:100vw;height:100dvh;border-radius:0;border:0;background:#fff}
+   .ef-map-column.ef-map-expanded{position:fixed;inset:0;z-index:9999;height:100dvh;width:100%;border-radius:0;background:white}
+   .ef-map-column:fullscreen .ef-map-frame,.ef-map-column.ef-map-expanded .ef-map-frame{flex:1;min-height:0}
   `;document.head.appendChild(style);
   const host=document.createElement('section');host.id='estateFocusDashboard';
   const metrics=[['efWatch','นิคมฯ เข้าเกณฑ์เฝ้าระวัง','ผลคัดกรองจากสถานีใกล้นิคมฯ'],['efWaterWatch','ใกล้ระดับน้ำเข้าเกณฑ์','สถานีระดับน้ำภายใน 30 กม.'],['efRainWatch','ใกล้ฝนเข้าเกณฑ์','ฝนสะสมมากกว่า 35 มม. ภายใน 30 กม.'],['efTotal','นิคมฯ / ท่าเรือในชุดข้อมูล','ตำแหน่งที่ใช้ประเมินจากข้อมูล กนอ.'],['ef24','ตำบลเฝ้าระวัง 24 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ'],['ef48','ตำบลเฝ้าระวัง 48 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ']];
@@ -89,9 +93,29 @@
    <section class="ef-panel"><div class="ef-toolbar"><h2>สถานีที่ใช้ติดตาม</h2><div class="ef-actions"><button id="efClear" type="button">กลับภาพรวม</button></div></div><p id="efStationNote"></p><div class="ef-table"><table><thead><tr><th>สถานี / ที่มา</th><th>ค่าตรวจวัด</th><th>สถานะสถานี</th><th>นิคมฯ / ระยะ</th><th>เวลาตรวจวัด</th></tr></thead><tbody id="efStations"></tbody></table></div></section>
    <div class="ef-warning"><details class="ef-panel" id="efDetails24"><summary>พื้นที่เฝ้าระวัง 24 ชั่วโมง</summary><div id="efWarning24"></div></details><details class="ef-panel" id="efDetails48"><summary>พื้นที่เฝ้าระวัง 48 ชั่วโมง</summary><div id="efWarning48"></div></details></div>
    <details class="ef-panel ef-sources"><summary>แหล่งข้อมูลและเกณฑ์ประเมิน</summary><div id="efSources"></div><p>คัดกรองทุกนิคมฯ กับทุกสถานีภายใน 30 กม. ใช้ค่าฝนมากกว่า 35 มม. หรือสถานะระดับน้ำเฝ้าระวังขึ้นไปจาก ThaiWater และเวลาสถานีภายใน 24 ชั่วโมง ระยะเป็นเส้นตรงจากจุดตำแหน่งนิคมฯ ไม่ใช่ขอบเขตนิคมฯ หนึ่งนิคมฯ อาจเข้าเกณฑ์ทั้งฝนและระดับน้ำ</p><p>การเข้าเกณฑ์เฝ้าระวังไม่ยืนยันน้ำท่วมภายในนิคมฯ ต้องตรวจวันที่ภาพดาวเทียม ขอบเขตน้ำท่วม และข้อมูลจากพื้นที่</p><a href="https://disaster.gistda.or.th/flood" target="_blank" rel="noopener">GISTDA ↗</a> · <a href="https://www.thaiwater.net/new4all/warning" target="_blank" rel="noopener">ThaiWater ↗</a></details>
-   </div><section class="ef-map-column"><header class="ef-map-head"><div><h2>แผนที่เฝ้าระวังนิคมอุตสาหกรรม</h2><small>เลือกนิคมฯ หรือสถานีทางซ้ายเพื่อซูม</small></div><div class="ef-actions"><button type="button" id="efMapReset">ดูภาพรวม</button></div></header><div class="ef-map-frame"><iframe id="estateFocusMap" title="แผนที่สถานการณ์น้ำและนิคมอุตสาหกรรม" src="flood-webmap.html?v=20260930-single-map&amp;center=101,13&amp;scale=9244648" loading="eager"></iframe></div><footer class="ef-map-foot">GISTDA: พื้นที่ตรวจพบตามวันที่ภาพ · Longdo: จุดรายงานเหตุการณ์ · ThaiWater: สถานีระดับน้ำ</footer></section></div>`;
+   </div><section class="ef-map-column"><header class="ef-map-head"><div><h2>แผนที่เฝ้าระวังนิคมอุตสาหกรรม</h2><small>เลือกนิคมฯ หรือสถานีทางซ้ายเพื่อซูม</small></div><div class="ef-actions"><button type="button" id="efMapFullscreen" aria-pressed="false">เต็มหน้าจอ ↗</button><button type="button" id="efMapReset">ดูภาพรวม</button></div></header><div class="ef-map-frame"><iframe id="estateFocusMap" title="แผนที่สถานการณ์น้ำและนิคมอุตสาหกรรม" src="flood-webmap.html?v=20260930-single-map&amp;center=101,13&amp;scale=9244648" loading="eager"></iframe></div><footer class="ef-map-foot">GISTDA: พื้นที่ตรวจพบตามวันที่ภาพ · Longdo: จุดรายงานเหตุการณ์ · ThaiWater: สถานีระดับน้ำ</footer></section></div>`;
   warning.prepend(host);
   const loading=$('dashboardLoading');if(loading)loading.remove();
+
+  const mapPanel=host.querySelector('.ef-map-column'),fullButton=$('efMapFullscreen');
+  let previousOverflow='';
+  function syncFullscreen(){
+   const expanded=document.fullscreenElement===mapPanel||mapPanel.classList.contains('ef-map-expanded');
+   fullButton.textContent=expanded?'ย่อแผนที่ ↙':'เต็มหน้าจอ ↗';
+   fullButton.setAttribute('aria-pressed',String(expanded));
+  }
+  function closeExpanded(){
+   mapPanel.classList.remove('ef-map-expanded');document.body.style.overflow=previousOverflow;syncFullscreen();
+  }
+  fullButton.onclick=async()=>{
+   if(document.fullscreenElement===mapPanel){await document.exitFullscreen();return}
+   if(mapPanel.classList.contains('ef-map-expanded')){closeExpanded();return}
+   if(mapPanel.requestFullscreen){try{await mapPanel.requestFullscreen();return}catch(error){}}
+   previousOverflow=document.body.style.overflow;mapPanel.classList.add('ef-map-expanded');document.body.style.overflow='hidden';syncFullscreen();
+  };
+  document.addEventListener('fullscreenchange',syncFullscreen);
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&mapPanel.classList.contains('ef-map-expanded'))closeExpanded()});
+
   $('efRefresh').onclick=load;
   $('efReport').onclick=()=>window.open('flood-report-editor.html#infographic','_blank','noopener');
   $('efSearch').oninput=()=>renderEstates();$('efFilter').onchange=()=>renderEstates();
