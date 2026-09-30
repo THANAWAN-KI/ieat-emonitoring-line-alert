@@ -50,6 +50,17 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
 .esri-popup__main-container{max-width:calc(100vw - 24px)!important}
 .leaflet-popup-content{min-width:0;width:min(300px,calc(100vw - 70px))!important}
 
+
+.cctv-popup{font-family:Arial,"Sarabun",sans-serif;width:100%;color:#263c39}
+.cctv-popup h3{font-size:18px;line-height:1.5;margin:0 28px 16px 0}
+.cctv-photo{width:100%;display:block;aspect-ratio:16/9;object-fit:contain;background:#eef2f5}
+.cctv-image-note{font-size:12px;color:#52666c;padding:8px 0;line-height:1.6}
+.cctv-unavailable{padding:40px 20px;text-align:center;background:#f1f5f7;color:#536779;line-height:1.8}
+.cctv-footer{border-bottom:3px solid transparent;border-image:linear-gradient(90deg,#f6b31b,#4eae57,#cf60ac,#187ed7) 1;padding:16px 0;display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:13px}
+.cctv-footer a{color:#126d87;text-decoration:none;font-weight:600}
+.cctv-share{display:flex;gap:10px;align-items:center;background:white;border:0;font:inherit;font-size:16px;color:#304c49;padding:14px 0;cursor:pointer}
+.esri-popup__main-container:has(.cctv-popup){width:520px!important;border-radius:8px!important}
+.esri-popup__main-container:has(.cctv-popup) .esri-popup__content{max-height:70dvh}
 </style>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>window.FloodLeaflet=window.L;</script>
@@ -258,6 +269,26 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
      reportSource("water",graphics.length+" สถานี");
     }catch(error){waterLayer.removeAll();reportSource("water","โหลดไม่สำเร็จ")}
    }
+
+   function cameraPopup(a){
+    var root=document.createElement("section");root.className="cctv-popup";
+    var title=document.createElement("h3");title.textContent=a.title;root.appendChild(title);
+    var unavailable=document.createElement("div");unavailable.className="cctv-unavailable";unavailable.textContent="ไม่สามารถแสดงภาพจากกล้องนี้ได้ · เปิดดูจากต้นทางด้านล่าง";unavailable.hidden=!!a.image;
+    if(a.image){var image=document.createElement("img");image.className="cctv-photo";image.alt="ภาพจากกล้อง "+a.title;image.referrerPolicy="no-referrer";image.src=a.image;image.onerror=function(){image.remove();unavailable.hidden=false};root.appendChild(image)}
+    root.appendChild(unavailable);
+    var note=document.createElement("div");note.className="cctv-image-note";note.textContent="ภาพล่าสุดที่ต้นทางให้บริการ";
+    var date=Date.parse(String(a.updated).replace(" ","T")+"+07:00");
+    if(Number.isFinite(date)&&date<=Date.now()+300000)note.textContent+=" · "+thaiTime(a.updated);
+    root.appendChild(note);
+    var footer=document.createElement("div");footer.className="cctv-footer";
+    var source=document.createElement("span");source.textContent="CCTV · Longdo Traffic";
+    var link=document.createElement("a");link.href=a.url;link.target="_blank";link.rel="noopener";link.textContent="เปิดกล้องต้นทาง ↗";
+    footer.appendChild(source);footer.appendChild(link);root.appendChild(footer);
+    var share=document.createElement("button");share.type="button";share.className="cctv-share";share.textContent="↗ แชร์กล้อง";
+    share.onclick=async function(){try{if(navigator.share)await navigator.share({title:a.title,url:a.url});else{await navigator.clipboard.writeText(a.url);share.textContent="คัดลอกลิงก์แล้ว"}}catch(error){if(error.name!=="AbortError"){share.textContent="เปิดลิงก์ต้นทางเพื่อแชร์"}}};
+    root.appendChild(share);return root;
+   }
+
    async function loadCameras(){
     try{
      var response=await fetch("https://camera.longdo.com/feed/?command=json",{cache:"no-store"});
@@ -270,15 +301,12 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
       if(!point(lon,lat))return;
       var href=String(row.link||"");
       if(!/^https?:\/\//i.test(href))href="https://traffic.longdo.com/main/";
-      var imageUrl=String(row.imgurl||"");if(!/^https:\/\//i.test(imageUrl))imageUrl="";
+      var imageUrl=String(row.imgurl||"").trim();
+      if(imageUrl.startsWith("//"))imageUrl="https:"+imageUrl;
+      if(/^http:\/\//i.test(imageUrl))imageUrl=imageUrl.replace(/^http:/i,"https:");
+      if(!/^https:\/\//i.test(imageUrl))imageUrl="";
       graphics.push(marker(lon,lat,"camera",{title:String(row.title||"กล้อง CCTV"),updated:String(row.lastupdate||"–"),url:href,image:imageUrl},
-       function(event){var a=event.graphic.attributes;
-        return "<div class='map-popup'>"+popupHead("camera","กล้อง CCTV",a.updated)+
-         "<div class='map-popup-title'>"+escapeHtml(a.title)+"</div><hr class='map-popup-rule'>"+
-         (a.image?"<img loading='lazy' src='"+escapeHtml(a.image)+"' alt='ภาพจากกล้อง' style='max-width:100%;border-radius:7px'>":"")+
-         "<p><a href='"+escapeHtml(a.url)+"' target='_blank' rel='noopener'>ดูภาพล่าสุดจาก Longdo Traffic ↗</a></p>"+
-         "<div class='map-popup-source'>ที่มา: Longdo Traffic</div></div>";
-       }));
+       function(event){return cameraPopup(event.graphic.attributes)}));
      });
      cameraLayer.removeAll();cameraLayer.addMany(graphics);
      reportSource("cameras",graphics.length+" กล้อง");
