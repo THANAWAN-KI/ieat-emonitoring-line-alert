@@ -81,6 +81,18 @@
    .ef-map-column:fullscreen{width:100vw;height:100dvh;border-radius:0;border:0;background:#fff}
    .ef-map-column.ef-map-expanded{position:fixed;inset:0;z-index:9999;height:100dvh;width:100%;border-radius:0;background:white}
    .ef-map-column:fullscreen .ef-map-frame,.ef-map-column.ef-map-expanded .ef-map-frame{flex:1;min-height:0}
+
+   .ef-table table{font-size:14px}.ef-table td,.ef-table th{color:#213547;padding:12px;line-height:1.7}.ef-table th{font-weight:700;background:#edf3f8}
+   .ef-table .ef-status-cell{min-width:115px;font-weight:700;text-align:center;vertical-align:middle;border:1px solid #d7e2e9;color:#111}
+   .ef-status-cell[data-severity="normal"],.ef-status-key[data-severity="normal"]{background:#dcfce7;color:#14532d}
+   .ef-status-cell[data-severity="moderate"],.ef-status-key[data-severity="moderate"]{background:#dbeafe;color:#1e3a8a}
+   .ef-status-cell[data-severity="watch"],.ef-status-key[data-severity="watch"]{background:#fef08a;color:#713f12}
+   .ef-status-cell[data-severity="high"],.ef-status-key[data-severity="high"]{background:#fed7aa;color:#7c2d12}
+   .ef-status-cell[data-severity="danger"],.ef-status-key[data-severity="danger"]{background:#fecaca;color:#7f1d1d}
+   .ef-status-cell[data-severity="unknown"],.ef-status-key[data-severity="unknown"]{background:#e5e7eb;color:#374151}
+   .ef-status-legend{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0;font-size:12px;line-height:1.6}
+   .ef-status-key{padding:5px 9px;border-radius:6px;font-weight:600}
+
   `;document.head.appendChild(style);
   const host=document.createElement('section');host.id='estateFocusDashboard';
   const metrics=[['efWatch','นิคมฯ เข้าเกณฑ์เฝ้าระวัง','ผลคัดกรองจากสถานีใกล้นิคมฯ'],['efWaterWatch','ใกล้ระดับน้ำเข้าเกณฑ์','สถานีระดับน้ำภายใน 30 กม.'],['efRainWatch','ใกล้ฝนเข้าเกณฑ์','ฝนสะสมมากกว่า 35 มม. ภายใน 30 กม.'],['efTotal','นิคมฯ / ท่าเรือในชุดข้อมูล','ตำแหน่งที่ใช้ประเมินจากข้อมูล กนอ.'],['ef24','ตำบลเฝ้าระวัง 24 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ'],['ef48','ตำบลเฝ้าระวัง 48 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ']];
@@ -90,7 +102,7 @@
    <div class="ef-charts"><article class="ef-chart"><h2>นิคมฯ เข้าเกณฑ์เฝ้าระวัง</h2><div class="ef-gauge" id="efGauge"></div><p>เทียบกับนิคมฯ / ท่าเรือทั้งหมดในชุดข้อมูล ไม่ใช่จำนวนนิคมฯ ที่ยืนยันน้ำท่วม</p></article><article class="ef-chart"><h2>สัดส่วนการคัดกรองนิคมฯ</h2><div id="efComposition"></div></article><article class="ef-chart"><h2>5 นิคมฯ ใกล้สถานีฝนสะสมสูงสุด</h2><div id="efRainRank"></div><p>ฝนสะสม 24 ชม. สูงสุดจากสถานีในรัศมี 30 กม. · หน่วย มม.</p></article></div>
    <div class="ef-metrics" aria-label="การ์ดข้อมูลเฝ้าระวัง">${metrics.map(([id,title,note])=>`<article class="ef-metric" role="button" tabindex="0" data-ef-card="${id}"><h2>${title}</h2><div class="ef-metric-value"><strong id="${id}">–</strong><span class="ef-unit">${['ef24','ef48'].includes(id)?'ตำบล':'แห่ง'}</span></div><small>${note}</small></article>`).join('')}</div>
    <section class="ef-panel"><h2>ติดตามนิคมฯ / ท่าเรือ</h2><div class="ef-tools"><input id="efSearch" type="search" aria-label="ค้นหาชื่อนิคมฯ / ท่าเรือ" placeholder="ค้นหาชื่อนิคมฯ / ท่าเรือ"><select id="efFilter" aria-label="กรองข้อมูลนิคมฯ"><option value="watch">เข้าเกณฑ์เฝ้าระวัง</option><option value="water">ใกล้ระดับน้ำเข้าเกณฑ์</option><option value="rain">ใกล้ฝนเข้าเกณฑ์</option><option value="all">ทุกนิคมฯ / ท่าเรือ</option></select></div><p id="efResultCount" class="ef-count"></p><div class="ef-selection" id="efSelection" hidden></div><div id="efEstates" class="ef-estates"></div></section>
-   <section class="ef-panel"><div class="ef-toolbar"><h2>สถานีที่ใช้ติดตาม</h2><div class="ef-actions"><button id="efClear" type="button">กลับภาพรวม</button></div></div><p id="efStationNote"></p><div class="ef-table"><table><thead><tr><th>สถานี / ที่มา</th><th>ค่าตรวจวัด</th><th>สถานะสถานี</th><th>นิคมฯ / ระยะ</th><th>เวลาตรวจวัด</th></tr></thead><tbody id="efStations"></tbody></table></div></section>
+   <section class="ef-panel"><div class="ef-toolbar"><h2>สถานีที่ใช้ติดตาม</h2><div class="ef-actions"><button id="efClear" type="button">กลับภาพรวม</button></div></div><p id="efStationNote"></p><div class="ef-status-legend" aria-label="สีสถานะตามข้อมูลสถานี"><span class="ef-status-key" data-severity="normal">ปกติ</span><span class="ef-status-key" data-severity="moderate">ฝนปานกลาง</span><span class="ef-status-key" data-severity="watch">เฝ้าระวัง</span><span class="ef-status-key" data-severity="high">วิกฤต / เสี่ยงสูง</span><span class="ef-status-key" data-severity="danger">ล้นตลิ่ง</span><span class="ef-status-key" data-severity="unknown">ไม่มีข้อมูล / ไม่ระบุ</span></div><div class="ef-table"><table><thead><tr><th>สถานี / ที่มา</th><th>ค่าตรวจวัด</th><th>สถานะสถานี</th><th>นิคมฯ / ระยะ</th><th>เวลาตรวจวัด</th></tr></thead><tbody id="efStations"></tbody></table></div></section>
    <div class="ef-warning"><details class="ef-panel" id="efDetails24"><summary>พื้นที่เฝ้าระวัง 24 ชั่วโมง</summary><div id="efWarning24"></div></details><details class="ef-panel" id="efDetails48"><summary>พื้นที่เฝ้าระวัง 48 ชั่วโมง</summary><div id="efWarning48"></div></details></div>
    <details class="ef-panel ef-sources"><summary>แหล่งข้อมูลและเกณฑ์ประเมิน</summary><div id="efSources"></div><p>คัดกรองทุกนิคมฯ กับทุกสถานีภายใน 30 กม. ใช้ค่าฝนมากกว่า 35 มม. หรือสถานะระดับน้ำเฝ้าระวังขึ้นไปจาก ThaiWater และเวลาสถานีภายใน 24 ชั่วโมง ระยะเป็นเส้นตรงจากจุดตำแหน่งนิคมฯ ไม่ใช่ขอบเขตนิคมฯ หนึ่งนิคมฯ อาจเข้าเกณฑ์ทั้งฝนและระดับน้ำ</p><p>การเข้าเกณฑ์เฝ้าระวังไม่ยืนยันน้ำท่วมภายในนิคมฯ ต้องตรวจวันที่ภาพดาวเทียม ขอบเขตน้ำท่วม และข้อมูลจากพื้นที่</p><a href="https://disaster.gistda.or.th/flood" target="_blank" rel="noopener">GISTDA ↗</a> · <a href="https://www.thaiwater.net/new4all/warning" target="_blank" rel="noopener">ThaiWater ↗</a></details>
    </div><section class="ef-map-column"><header class="ef-map-head"><div><h2>แผนที่เฝ้าระวังนิคมอุตสาหกรรม</h2><small>เลือกนิคมฯ หรือสถานีทางซ้ายเพื่อซูม</small></div><div class="ef-actions"><button type="button" id="efMapFullscreen" aria-pressed="false">เต็มหน้าจอ ↗</button><button type="button" id="efMapReset">ดูภาพรวม</button></div></header><div class="ef-map-frame"><iframe id="estateFocusMap" title="แผนที่สถานการณ์น้ำและนิคมอุตสาหกรรม" src="flood-webmap.html?v=20260930-single-map&amp;center=101,13&amp;scale=9244648" loading="eager"></iframe></div><footer class="ef-map-foot">GISTDA: พื้นที่ตรวจพบตามวันที่ภาพ · Longdo: จุดรายงานเหตุการณ์ · ThaiWater: สถานีระดับน้ำ</footer></section></div>`;
@@ -145,6 +157,18 @@
   set('efResultCount',`แสดง ${rows.length} แห่ง · นิคลมฯ/ท่าเรือในชุดข้อมูล ${m.estates.length} แห่ง`.replace('นิคลมฯ','นิคมฯ'));
   $('efEstates').innerHTML=rows.length?rows.map(e=>`<button type="button" class="ef-estate" aria-pressed="${selected===String(e.id)}" data-ef-estate="${esc(e.id)}" data-ef-lat="${e.lat}" data-ef-lon="${e.lon}"><b>${esc(e.name)}</b><small>สถานีฝนเข้าเกณฑ์ ${e.rain.length} · ระดับน้ำเข้าเกณฑ์ ${e.water.length}<br>${e.alerts.length?'สถานีเข้าเกณฑ์ใกล้ที่สุด '+fmt(e.nearest)+' กม.':'ไม่พบสถานีเข้าเกณฑ์ในชุดข้อมูลล่าสุด · ยังไม่ใช่การยืนยันว่าปลอดภัย'}${e.maxRain!==null?' · ฝนสูงสุด '+fmt(e.maxRain)+' มม.':''}</small></button>`).join(''):`<p class="ef-empty">${q?'ไม่พบชื่อนิคมฯ ที่ค้นหา':'ไม่พบนิคมฯ เข้าเกณฑ์จากสถานีที่มีเวลาตรวจวัดภายใน 24 ชม. ในชุดข้อมูลนี้'}${m.stale?' · ชุดข้อมูลย้อนหลัง':''}</p>`;
  }
+
+ function stationStatusClass(r){
+  const label=String(r.status||'').trim(),score=num(r.severity_score);
+  if(!label||/ไม่มีข้อมูล|ไม่ระบุ|ไม่พร้อม/.test(label))return 'unknown';
+  if(/ล้นตลิ่ง/.test(label)||score===4)return 'danger';
+  if(/วิกฤต|เสี่ยงสูง/.test(label)||score===3)return 'high';
+  if(/เฝ้าระวัง/.test(label)||score===2)return 'watch';
+  if(/ปานกลาง/.test(label)||score===1)return 'moderate';
+  if(label==='ปกติ')return 'normal';
+  return 'unknown';
+ }
+
  function render(data){
   mount();if(!$('estateFocusDashboard'))return;current=data;const m=model(data);
   $('efStatus').dataset.state=m.complete&&!m.stale&&data.status==='ok'?'ready':'incomplete';
@@ -160,7 +184,7 @@
   const scoped=chosen?m.near.map(r=>({...r,distance:km(chosen,r),nearest:chosen})).filter(r=>r.distance<=RADIUS):m.near;
   const rows=m.complete?scoped.slice().sort((a,b)=>(Number(b.severity_score)||0)-(Number(a.severity_score)||0)):[];
   if(chosen)set('efStationNote',`${chosen.name} · แสดง ${rows.length} สถานีที่มีเวลาตรวจวัดภายใน 24 ชม. และอยู่ในรัศมี 30 กม. · ระยะห่างวัดจากนิคมฯ ที่เลือก`);
-  $('efStations').innerHTML=rows.length?rows.map(r=>`<tr><td><button type="button" data-ef-lat="${r.lat}" data-ef-lon="${r.lon}">${esc(r.station)}</button><br>${esc(r.agency||'ThaiWater')} · ${esc(r.province)}</td><td>${esc(r.value_text||'ไม่มีค่า')}</td><td>${esc(r.status||'ไม่ระบุ')}</td><td>${esc(r.nearest?.name)}<br>${fmt(r.distance)} กม.</td><td>${esc(time(r.observed_at))}</td></tr>`).join(''):'<tr><td colspan="5">ยังไม่มีรายการที่แสดงได้ · ไม่ใช้การไม่มีข้อมูลยืนยันว่าพื้นที่ปลอดภัย</td></tr>';
+  $('efStations').innerHTML=rows.length?rows.map(r=>`<tr><td><button type="button" data-ef-lat="${r.lat}" data-ef-lon="${r.lon}">${esc(r.station)}</button><br>${esc(r.agency||'ThaiWater')} · ${esc(r.province)}</td><td>${esc(r.value_text||'ไม่มีค่า')}</td><td class="ef-status-cell" data-severity="${stationStatusClass(r)}">${esc(r.status||'ไม่ระบุ')}</td><td>${esc(r.nearest?.name)}<br>${fmt(r.distance)} กม.</td><td>${esc(time(r.observed_at))}</td></tr>`).join(''):'<tr><td colspan="5">ยังไม่มีรายการที่แสดงได้ · ไม่ใช้การไม่มีข้อมูลยืนยันว่าพื้นที่ปลอดภัย</td></tr>';
   for(const [id,ds] of [['efWarning24',m.warning24],['efWarning48',m.warning48]]){
    $(id).innerHTML=!ds.available?'<p class="ef-empty">ข้อมูลประกาศหรือพิกัดนิคมฯ ไม่พร้อม / เกินช่วง 24 ชั่วโมง จึงยังสรุปจำนวนไม่ได้</p>':`<p>รอบประกาศ ${esc(time(new Date(ds.issued).toISOString()))}${ds.unlocated?' · มี '+ds.unlocated+' รายการที่ไม่มีพิกัด จึงไม่รวมในการคำนวณ':''}</p>`+(ds.rows.length?ds.rows.map(r=>`<div class="ef-risk"><button data-ef-lat="${r.lat}" data-ef-lon="${r.lon}">${esc([r.tambon,r.amphoe,r.province].join(' '))}</button><br>ใกล้ ${esc(r.estate.name)} ${fmt(r.distance)} กม.<br>ฝนสะสมตามช่วงประกาศ ${fmt(r.sum_rainfall_mm)} มม. · เวลาสถานี ${esc(time(r.observed_at))}</div>`).join(''):'<p class="ef-empty">ไม่พบตำบลในรายการเฝ้าระวังที่จุดสถานีประเมินอยู่ภายใน 30 กม. จากนิคมฯ ในชุดข้อมูลนี้</p>');
   }
