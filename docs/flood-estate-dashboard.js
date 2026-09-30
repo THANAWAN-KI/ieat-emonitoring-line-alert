@@ -158,7 +158,7 @@
   $('estateFocusMap').addEventListener('load',()=>{if(selected&&current){const estate=model(current).estates.find(e=>String(e.id)===selected);if(estate)zoom(estate.lat,estate.lon)}});
   $('efExportCsv').onclick=exportStationsCsv;$('efExportMap').onclick=exportStationsMap;
   $('efRefresh').onclick=load;
-  $('efReport').onclick=()=>window.open('flood-report-editor.html#infographic','_blank','noopener');
+  $('efReport').onclick=()=>window.open('flood-gis-report.html?estate='+encodeURIComponent(selected||'29'),'_blank','noopener');
   $('efSearch').oninput=()=>renderEstates();$('efFilter').onchange=()=>renderEstates();
   function reset(){selected='';if(current)render(current);$('estateFocusMap')?.contentWindow?.postMessage({type:'flood-map-focus',lat:13,lon:101,scale:9244648},location.origin)}
   $('efClear').onclick=reset;$('efMapReset').onclick=reset;
