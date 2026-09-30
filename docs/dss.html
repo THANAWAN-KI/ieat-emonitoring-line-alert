@@ -182,7 +182,7 @@ function updateMap(){
   const spanKm=radius*1.35,spanLat=spanKm/111.2,spanLng=spanLat*width/height/Math.cos(lat*Math.PI/180);
   const bbox=[lng-spanLng,lat-spanLat,lng+spanLng,lat+spanLat].map(n=>n.toFixed(6)).join(',');
   mapLoadPromise=new Promise(resolve=>{mapImage.onload=resolve;mapImage.onerror=resolve});
-  mapImage.src='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export?bbox='+bbox+'&bboxSR=4326&imageSR=4326&size='+Math.round(width)+','+Math.round(height)+'&format=png32&f=image';
+  mapImage.src='https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/export?bbox='+bbox+'&bboxSR=4326&imageSR=4326&size='+Math.round(width)+','+Math.round(height)+'&format=png32&f=image';
   bufferOverlay.style.cssText='position:absolute;inset:0;pointer-events:none';
   bufferOverlay.replaceChildren();
   const colors=['#bf3562','#b87913','#118491'];
@@ -834,9 +834,12 @@ function reportText(ctx,text,x,y,maxWidth,lineHeight){
 async function downloadReportPng(){
   loading.classList.add('show');
   try{
-    updateMap();
-    await Promise.race([mapLoadPromise,new Promise(resolve=>setTimeout(resolve,8000))]);
-    if(!mapImage.complete||!mapImage.naturalWidth)throw new Error('ภาพแผนที่ยังไม่พร้อม');
+    const liveMapReady=typeof window.dssWaitMapReady==='function';
+    if(liveMapReady){await window.dssWaitMapReady()}
+    else{
+      await Promise.race([mapLoadPromise,new Promise(resolve=>setTimeout(resolve,8000))]);
+      if(!mapImage.complete||!mapImage.naturalWidth)throw new Error('ภาพแผนที่ยังไม่พร้อม');
+    }
     await document.fonts.ready;
     if(typeof html2canvas!=='function')throw new Error('ไม่สามารถโหลดเครื่องมือบันทึกภาพได้');
     const report=document.getElementById('report');
@@ -846,13 +849,18 @@ async function downloadReportPng(){
       onclone(clonedDocument){
         const clonedMap=clonedDocument.querySelector('#report #map');
         if(!clonedMap)return;
-        const liveMap=clonedMap.querySelector('#dssLiveMap');if(liveMap)liveMap.remove();
-        const experience=clonedMap.querySelector('iframe');
-        if(experience)experience.style.setProperty('display','none','important');
-        clonedMap.querySelectorAll(':scope > img,:scope > div').forEach(el=>{
-          el.style.setProperty('display','block','important');
-          el.style.setProperty('visibility','visible','important');
-        });
+        const liveMap=clonedMap.querySelector('#dssLiveMap');
+        if(liveMap){
+          // Keep Leaflet's current panes, transforms, markers, circles and labels.
+          clonedMap.querySelectorAll(':scope > img,:scope > div').forEach(el=>{
+            if(el===liveMap){el.style.setProperty('display','block','important');el.style.setProperty('visibility','visible','important')}
+            else el.style.setProperty('display','none','important');
+          });
+        }else{
+          clonedMap.querySelectorAll(':scope > img,:scope > div').forEach(el=>{
+            el.style.setProperty('display','block','important');el.style.setProperty('visibility','visible','important');
+          });
+        }
         const caption=clonedDocument.querySelector('#report .map-caption a');
         if(caption)caption.style.setProperty('display','none','important');
       }
@@ -880,7 +888,17 @@ async function downloadReportPng(){
  if(!window.L){render();updateMap();return}
  const node=document.createElement('div');node.id='dssLiveMap';mapNode.appendChild(node);
  const live=L.map(node,{scrollWheelZoom:false}).setView([Number(state.lat),Number(state.lng)],14);
- L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,attribution:'Tiles © Esri'}).addTo(live);
+ const basemap=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,crossOrigin:true,attribution:'Tiles © Esri'}).addTo(live);
+ window.dssWaitMapReady=async function(){
+   if(basemap.isLoading())await new Promise((resolve,reject)=>{
+     const loaded=()=>{clearTimeout(timer);basemap.off('load',loaded);resolve()};
+     const timer=setTimeout(()=>{basemap.off('load',loaded);reject(Error('ภาพแผนที่ยังโหลดไม่ครบ กรุณาลองใหม่'))},10000);
+     basemap.on('load',loaded);if(!basemap.isLoading())loaded();
+   });
+   await Promise.all(Array.from(node.querySelectorAll('img')).map(img=>img.decode?img.decode().catch(()=>{}):Promise.resolve()));
+   await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+ };
+
  const colors=['#bf3562','#b87913','#118491'];
  const circles=colors.map(color=>L.circle([Number(state.lat),Number(state.lng)],{radius:1000,color,weight:2,opacity:.9,fillColor:color,fillOpacity:.025}).addTo(live));
  const distanceLabels=colors.map(()=>L.marker([Number(state.lat),Number(state.lng)],{interactive:false}).addTo(live));
