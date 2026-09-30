@@ -1823,7 +1823,12 @@ document.documentElement.classList.add("flood-initializing");
     })();
   </script>
 <link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css">
-<script src="flood-estate-dashboard.js?v=20260930-2" defer></script>
+<script src="flood-estate-dashboard.js?v=20260930-3" defer></script>
+<style id="estate-dashboard-loading-guard">
+html body main.container #warning > :not(#estateFocusDashboard){display:none!important}
+html body main.container #warning:not(:has(#estateFocusDashboard))::before{content:"กำลังโหลด dashboard นิคมอุตสาหกรรมที่ปรับปรุงแล้ว…";display:block;padding:24px;border-radius:12px;background:#f5f9fc;color:#34495e;font:16px Sarabun,sans-serif}
+</style>
+<script>window.IEAT_FOCUSED_DASHBOARD=true;</script>
 </head>
 <body>
   <main class="container">
