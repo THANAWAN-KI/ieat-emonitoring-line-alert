@@ -187,7 +187,7 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
    icons.traffic=customPin("#b45309",'<path d="m24 11 13 23H11Z"/><path d="M24 19v7"/><path d="M24 30h.01"/>');
    icons.camera=customPin("#475569",'<rect x="12" y="16" width="24" height="16" rx="3"/><circle cx="24" cy="24" r="5"/><path d="M16 16l2-4h12l2 4"/>');
    function iconSymbol(kind){return {type:"picture-marker",url:new URL(icons[kind],location.href).href,width:kind==="flood"||kind==="traffic"||kind==="camera"?"36px":"31px",height:kind==="flood"||kind==="traffic"||kind==="camera"?"44px":"37px",yoffset:kind==="flood"||kind==="traffic"||kind==="camera"?"22px":"18px"}}
-   function popupHead(kind,label,subtitle){return "<div class='map-popup-head'><img src='"+icons[kind]+"' alt=''><div><strong>"+escapeHtml(label)+"</strong><small>"+escapeHtml(subtitle)+"</small></div></div>"}
+   function popupHead(kind,label,subtitle){return "<div class='map-popup-head'><div><strong>"+escapeHtml(label)+"</strong><small>"+escapeHtml(subtitle)+"</small></div></div>"}
    function thaiTime(value){
     var match=String(value||"").match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})/);
     if(!match)return String(value||"–");
