@@ -565,13 +565,18 @@ dssLookupChoices();
 
 
 let dssSourcePromise;
-function dssIdentity(value){return normalizeSearchTerm(value).replace(/^(บริษัท|นิคมอุตสาหกรรม|ท่าเรืออุตสาหกรรม)/,'')}
+function dssIdentity(value){return normalizeSearchTerm(value).replace(/^(บริษัท|นิคมอุตสาหกรรม|ท่าเรืออุตสาหกรรม|company)/,'').replace(/(จำกัดมหาชน|จำกัด|coltd|companylimited|limited)$/,'')}
 function loadDssSource(){
  if(!dssSourcePromise)dssSourcePromise=fetch('./dss-data.json',{signal:AbortSignal.timeout(20000)}).then(r=>{if(!r.ok)throw Error('DSS unavailable');return r.json()}).then(data=>data.features||[]).catch(error=>{dssSourcePromise=null;console.warn(error);return []});
  return dssSourcePromise;
 }
 const dssIdentityIndexes=new WeakMap();
-function matchingDssFeature(features,name,estate){
+function matchingDssFeature(features,name,estate,reference={}){
+ const ref=reference.properties||reference;
+ const uid=String(ref.comp_uid||''),user=String(ref.comp_user||''),numbers=[ref.comp_no,ref.fid14n,ref.FactoryID].filter(Boolean).map(normalizeSearchTerm);
+ const idMatches=features.filter(f=>{const p=f.properties||{};return uid&&String(p.comp_uid)===uid||user&&String(p.comp_user)===user||numbers.includes(normalizeSearchTerm(p.comp_no))});
+ if(idMatches.length===1)return idMatches[0];
+ if(idMatches.length>1){const active=idMatches.filter(f=>f.properties.doc_active===true);if(active.length===1)return active[0];return null}
  let index=dssIdentityIndexes.get(features);
  if(!index){index=new Map();features.forEach(feature=>{const key=dssIdentity(feature.properties.comp_name);if(!index.has(key))index.set(key,[]);index.get(key).push(feature)});dssIdentityIndexes.set(features,index)}
  const matches=(index.get(dssIdentity(name))||[]).filter(f=>!estate||estate==='—'||dssIdentity(f.properties.comp_zone)===dssIdentity(estate));
@@ -589,6 +594,38 @@ function dssHazardReport(feature){
   if(p[prefix+'chemical'])responses.push(name+' — สารดับเพลิงที่ระบุ: '+p[prefix+'chemical']);
  }
  return {chemical:chemicals.join('\n')||'ไม่มีรายการสารเคมีที่ระบุในคลัง DSS ของโรงงานนี้',response:responses.join('\n')||'ไม่มีข้อมูลสารดับเพลิงหรือการระงับเหตุที่ระบุในคลัง DSS ของโรงงานนี้'};
+}
+
+
+let dssEquipmentPromise;
+function normalizeEquipmentData(data){
+ if(data.features)return data.features;
+ return (data.data||[]).map(row=>({type:'Feature',properties:row.properties||row,geometry:row.__geometry||row.geometry}));
+}
+async function loadDssEquipment(){
+ if(!dssEquipmentPromise)dssEquipmentPromise=(async()=>{
+  for(const url of ['./data/equipment_latest.json','https://emonitor.ieat.go.th/envisys/gis/file/equimentPQbOLMB5TIGSziiCggBx77R8ITBd2aCRPaybDRoqZBejLTEQ4SICTxC1Vay15xIG.json']){
+   try{const response=await fetch(url,{signal:AbortSignal.timeout(15000)});if(!response.ok)throw Error('HTTP '+response.status);return normalizeEquipmentData(await response.json())}catch(error){console.warn('DSS equipment',error)}
+  }
+  dssEquipmentPromise=null;return null;
+ })();
+ return dssEquipmentPromise;
+}
+function dssEquipmentReport(feature,unavailable){
+ if(unavailable)return 'ยังโหลดข้อมูลอุปกรณ์ระงับเหตุไม่ได้ กรุณาเลือกโรงงานอีกครั้ง';
+ if(!feature)return 'ยังจับคู่โรงงานกับข้อมูลอุปกรณ์ระงับเหตุไม่ได้';
+ const p=feature.properties||{},lines=[];
+ const keys=Object.keys(p).filter(key=>/^equipment\d+_name$/.test(key)).sort((a,b)=>Number(a.match(/\d+/)[0])-Number(b.match(/\d+/)[0]));
+ keys.forEach(key=>{
+  if(!p[key])return;const prefix=key.replace(/name$/,'');
+  const details=[p[prefix+'type'],p[prefix+'amount']!==null&&p[prefix+'amount']!==undefined?'จำนวน '+p[prefix+'amount']+' '+(p[prefix+'amountUnit']||''):'',p[prefix+'volume']!==null&&p[prefix+'volume']!==undefined?'ขนาด/ปริมาตร '+p[prefix+'volume']+' '+(p[prefix+'volumeUnit']||''):''].filter(value=>value!==undefined&&value!==null&&String(value).trim()!=='');
+  lines.push(p[key]+(details.length?' · '+details.join(' · '):''));
+ });
+ return lines.join('\n')||'โรงงานนี้ไม่มีรายการอุปกรณ์ระงับเหตุในไฟล์ข้อมูล';
+}
+function incidentSourceReport(item){
+ const hazard=dssHazardReport(item.dssFeature);
+ return {chemical:item.dssFeature?hazard.chemical:'ยังจับคู่โรงงานกับข้อมูลสารเคมีไม่ได้',response:dssEquipmentReport(item.equipmentFeature,item.equipmentUnavailable)};
 }
 
 let factoryNameIndex=[],factoryNameIndexPromise;
@@ -710,7 +747,10 @@ async function selectDssLookup(item){
     if(data.features?.length)item={...item,feature:data.features[0],fields:await getDssFieldMetadata()};
     else if(item.dssFeature)item={...item,feature:{attributes:{...attrs},geometry:{x:item.dssFeature.geometry.coordinates[0],y:item.dssFeature.geometry.coordinates[1]}}};
     else throw Error('ไม่พบโรงงาน');
-    if(!item.dssFeature)item.dssFeature=matchingDssFeature(await loadDssSource(),item.name,item.feature.attributes.IEAT);
+    if(!item.dssFeature)item.dssFeature=matchingDssFeature(await loadDssSource(),item.name,item.feature.attributes.IEAT,item.feature.attributes);
+    const equipment=await loadDssEquipment();
+    item.equipmentUnavailable=equipment===null;
+    item.equipmentFeature=equipment?matchingDssFeature(equipment,item.name,item.feature.attributes.IEAT,item.dssFeature||item.feature.attributes):null;
   }
   const attrs=item.feature?.attributes||{},geometry=item.feature?.geometry;
   let lat=item.lat,lng=item.lng;
@@ -723,7 +763,7 @@ async function selectDssLookup(item){
   }
   if(!Number.isFinite(lat)||!Number.isFinite(lng)||lat<5||lat>22||lng<97||lng>106){factoryLookupStatus.textContent='พบข้อมูล แต่ไม่มีพิกัดที่ถูกต้อง กรุณาเลือกพื้นที่อื่น';return}
   const nearby={};['hospital','fire','police','hydrant','community','cctv'].forEach(type=>{nearby[type+'Name']=defaults[type+'Name'];nearby[type+'Distance']=defaults[type+'Distance']});
-  state={...state,...nearby,company:item.name,estate:item.type==='estate'?item.name:(attrs.IEAT||'—'),registration:[attrs.fid14n,item.dssFeature?.properties.comp_no||attrs.FactoryID].filter(Boolean).join(' / ')||'—',address:item.type==='estate'?item.name:[attrs.FactoryAddressGeneral,attrs.FactoryAddressMoo?'หมู่ '+attrs.FactoryAddressMoo:'',attrs.FactoryAddressSoi?'ซอย '+attrs.FactoryAddressSoi:'',attrs.FactoryAddressRoad?'ถนน '+attrs.FactoryAddressRoad:'',attrs.FactoryAddressTambonName,attrs.FactoryAddressDistrictName,attrs.FactoryAddressProvinceName,attrs.FactoryAPostCode].filter(Boolean).join(' ')||['จุดเกิดเหตุในนิคมฯ '+(attrs.IEAT||'—'),attrs.Name_Parcel?'แปลง '+attrs.Name_Parcel:'','พิกัด '+lat.toFixed(6)+', '+lng.toFixed(6)].filter(Boolean).join(' · '),...dssHazardReport(item.dssFeature),lat:lat.toFixed(6),lng:lng.toFixed(6)};
+  state={...state,...nearby,company:item.name,estate:item.type==='estate'?item.name:(attrs.IEAT||'—'),registration:[attrs.fid14n,item.dssFeature?.properties.comp_no||attrs.FactoryID].filter(Boolean).join(' / ')||'—',address:item.type==='estate'?item.name:[attrs.FactoryAddressGeneral,attrs.FactoryAddressMoo?'หมู่ '+attrs.FactoryAddressMoo:'',attrs.FactoryAddressSoi?'ซอย '+attrs.FactoryAddressSoi:'',attrs.FactoryAddressRoad?'ถนน '+attrs.FactoryAddressRoad:'',attrs.FactoryAddressTambonName,attrs.FactoryAddressDistrictName,attrs.FactoryAddressProvinceName,attrs.FactoryAPostCode].filter(Boolean).join(' ')||['จุดเกิดเหตุในนิคมฯ '+(attrs.IEAT||'—'),attrs.Name_Parcel?'แปลง '+attrs.Name_Parcel:'','พิกัด '+lat.toFixed(6)+', '+lng.toFixed(6)].filter(Boolean).join(' · '),...incidentSourceReport(item),lat:lat.toFixed(6),lng:lng.toFixed(6)};
   factoryLookup.value=item.name;render();updateMap();lookupResults.replaceChildren();
   factoryLookupStatus.textContent='เลือก '+item.name+' และเติมข้อมูลในรายงานแล้ว';
   document.getElementById('map').scrollIntoView({behavior:'smooth',block:'center'});
