@@ -57,7 +57,8 @@ def get_json(url: str, params: dict[str, str] | None = None) -> dict[str, Any]:
 
 def number(value: Any) -> float | None:
     try:
-        return float(value)
+        parsed = float(value)
+        return parsed if math.isfinite(parsed) else None
     except (TypeError, ValueError):
         return None
 
@@ -74,7 +75,7 @@ def distance_km(a: dict[str, Any], b: dict[str, Any]) -> float:
     dp = p2 - p1
     dl = math.radians(b["lon"] - a["lon"])
     h = math.sin(dp / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dl / 2) ** 2
-    return 2 * radius * math.asin(math.sqrt(h))
+    return 2 * radius * math.asin(math.sqrt(min(1.0, max(0.0, h))))
 
 
 def rain_status(value: float | None) -> tuple[str, int]:
@@ -149,6 +150,8 @@ def fetch_flash_flood_warning(period: str) -> dict[str, Any]:
                     "observed_at": str(item.get("latest_rainfall_datetime") or ""),
                 })
             return rows
+        if not isinstance(payload.get("area"), list) or not payload.get("date"):
+            raise RuntimeError("Warning source has no verified area list or date")
         areas = clean(payload.get("area"))
         nearby = clean(payload.get("area_nearby"))
         # Keep the boundary geometry with the hourly feed. Rendering it locally
@@ -181,6 +184,7 @@ def fetch_flash_flood_warning(period: str) -> dict[str, Any]:
                 row["geometry"] = geometries[row["geocode"]]
         return {
             "period": period,
+            "status": "ok",
             "date": str(payload.get("date") or ""),
             "time": str(payload.get("time") or ""),
             "type": str(payload.get("type") or ""),
@@ -191,7 +195,7 @@ def fetch_flash_flood_warning(period: str) -> dict[str, Any]:
         }
     except Exception as exc:
         print(f"Flash-flood {period} refresh skipped: {type(exc).__name__}: {exc}")
-        return {"period": period, "areas": [], "area_nearby": [], "source_url": url}
+        return {"period": period, "status": "unavailable", "error": str(exc), "areas": [], "area_nearby": [], "source_url": url}
 
 
 def fetch_tmd_warning() -> dict[str, str]:
@@ -232,17 +236,23 @@ def fetch_estates() -> list[dict[str, Any]]:
             "f": "json",
         },
     )
+    if payload.get("error") or payload.get("exceededTransferLimit"):
+        raise RuntimeError("IEAT estate response is incomplete")
     estates = []
     for feature in payload.get("features", []):
         attrs, geometry = feature.get("attributes", {}), feature.get("geometry", {})
-        lat = number(attrs.get("ละติจูด")) or number(geometry.get("y"))
-        lon = number(attrs.get("ลองติจูด")) or number(geometry.get("x"))
+        lat = number(geometry.get("y"))
+        if lat is None:
+            lat = number(attrs.get("ละติจูด"))
+        lon = number(geometry.get("x"))
+        if lon is None:
+            lon = number(attrs.get("ลองติจูด"))
         name = str(attrs.get("สำนักงานนิคมฯ") or "").strip()
-        if name and lat is not None and lon is not None:
+        if name and not name.startswith(("สำนักงานใหญ่", "สำนักงานท่าเรือ")) and lat is not None and lon is not None and 5 <= lat <= 21 and 97 <= lon <= 106:
             estates.append(
                 {
                     "id": attrs.get("OBJECTID"),
-                    "name": name if "นิคม" in name else f"นิคมอุตสาหกรรม{name}",
+                    "name": name if "นิคม" in name or "ท่าเรือ" in name else f"นิคมอุตสาหกรรม{name}",
                     "lat": lat,
                     "lon": lon,
                     "operations": attrs.get("Operations") or "",
@@ -262,6 +272,8 @@ def nearest(point: dict[str, Any], estates: list[dict[str, Any]]) -> tuple[float
 
 def fetch_rain(estates: list[dict[str, Any]]) -> list[dict[str, Any]]:
     payload = get_json(RAIN_URL)
+    if not isinstance(payload.get("data"), list) or not payload["data"]:
+        raise RuntimeError("Rain source returned no verified station list")
     rows = []
     for item in payload.get("data", []):
         station, geocode = item.get("station", {}), item.get("geocode", {})
@@ -287,7 +299,7 @@ def fetch_rain(estates: list[dict[str, Any]]) -> list[dict[str, Any]]:
                     "observed_at": item.get("rainfall_datetime") or "",
                     "status": status,
                     "severity_score": score,
-                    "distance_km": round(dist, 1),
+                    "distance_km": dist,
                     "nearest_estate": estate["name"],
                     "agency": th(item.get("agency", {}).get("agency_shortname")),
                 }
@@ -298,6 +310,8 @@ def fetch_rain(estates: list[dict[str, Any]]) -> list[dict[str, Any]]:
 def fetch_water(estates: list[dict[str, Any]]) -> list[dict[str, Any]]:
     payload = get_json(WATER_URL)
     data = payload.get("waterlevel_data", {}).get("data", [])
+    if not isinstance(data, list) or not data:
+        raise RuntimeError("Water source returned no verified station list")
     rows = []
     for item in data:
         station, geocode = item.get("station", {}), item.get("geocode", {})
@@ -322,11 +336,12 @@ def fetch_water(estates: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "lon": lon,
                 "waterlevel_msl": level,
                 "storage_percent": number(item.get("storage_percent")),
+                "bankfull_msl": number(station.get("tele_station_bankfull")),
                 "value_text": "ไม่มีข้อมูล" if level is None else f"{level:g} ม.รทก.",
                 "observed_at": item.get("waterlevel_datetime") or "",
                 "status": status,
                 "severity_score": score,
-                "distance_km": round(dist, 1),
+                "distance_km": dist,
                 "nearest_estate": estate["name"],
                 "agency": th(item.get("agency", {}).get("agency_shortname")),
             }
@@ -334,33 +349,35 @@ def fetch_water(estates: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return rows
 
 
+def station_fresh(row: dict[str, Any]) -> bool:
+    try:
+        stamp = datetime.fromisoformat(str(row.get("observed_at", "")).replace(" ", "T"))
+        if stamp.tzinfo is None:
+            stamp = stamp.replace(tzinfo=ZoneInfo("Asia/Bangkok"))
+        age = (datetime.now(timezone.utc) - stamp).total_seconds()
+        return -300 <= age <= 24 * 3600
+    except (TypeError, ValueError):
+        return False
+
+
 def build_estate_watch(estates: list[dict[str, Any]], stations: list[dict[str, Any]]) -> list[dict[str, Any]]:
     watch = []
     for estate in estates:
-        nearby = [
-            station
-            for station in stations
-            if station["nearest_estate"] == estate["name"]
-            and station["distance_km"] <= WATCH_RADIUS_KM
-        ]
-        alerts = [station for station in nearby if station["severity_score"] >= 2]
+        alerts = [{**station, "estate_distance_km": distance_km(station, estate)}
+                  for station in stations if station_fresh(station) and station["severity_score"] >= 2
+                  and distance_km(station, estate) <= WATCH_RADIUS_KM]
         if not alerts:
             continue
         alerts.sort(key=lambda row: (row["severity_score"], row.get("rainfall_mm") or -1), reverse=True)
         rain_values = [row["rainfall_mm"] for row in alerts if row.get("rainfall_mm") is not None]
-        watch.append(
-            {
-                **estate,
-                "status": alerts[0]["status"],
-                "severity_score": alerts[0]["severity_score"],
-                "alert_station_count": len(alerts),
-                "rain_alert_count": sum(row["kind"] == "rainfall" for row in alerts),
-                "water_alert_count": sum(row["kind"] == "waterlevel" for row in alerts),
-                "max_rainfall_mm": max(rain_values, default=None),
-                "nearest_alert_km": min(row["distance_km"] for row in alerts),
-                "latest_observed_at": max((row["observed_at"] for row in alerts), default=""),
-            }
-        )
+        watch.append({**estate, "status": alerts[0]["status"], "severity_score": alerts[0]["severity_score"],
+                      "alert_station_count": len(alerts),
+                      "rain_alert_count": sum(row["kind"] == "rainfall" for row in alerts),
+                      "heavy_rain_alert_count": sum(row["kind"] == "rainfall" and (row.get("rainfall_mm") or 0) > 70 for row in alerts),
+                      "water_alert_count": sum(row["kind"] == "waterlevel" for row in alerts),
+                      "max_rainfall_mm": max(rain_values, default=None),
+                      "nearest_alert_km": min(row["estate_distance_km"] for row in alerts),
+                      "latest_observed_at": max((row["observed_at"] for row in alerts), default="")})
     watch.sort(key=lambda row: (row["severity_score"], row["max_rainfall_mm"] or -1), reverse=True)
     return watch
 
@@ -446,14 +463,15 @@ def main() -> int:
     except Exception:
         pass
     result: dict[str, Any] = {
-        "schema_version": 2,
+        "schema_version": 3,
         "status": "unavailable",
         "generated_at": now,
         "methodology": {
             "watch_radius_km": WATCH_RADIUS_KM,
             "display_radius_km": DISPLAY_RADIUS_KM,
             "rain_threshold_mm": 35,
-            "note": "นับนิคมฯ เมื่อพบฝนมากกว่า 35 มม. หรือระดับน้ำเฝ้าระวังขึ้นไปภายใน 30 กม.",
+            "station_max_age_hours": 24,
+            "note": "คัดกรองทุกนิคมฯ/ท่าเรือกับทุกสถานีในรัศมี 30 กม. ใช้ค่าฝนมากกว่า 35 มม. หรือสถานะระดับน้ำเฝ้าระวังขึ้นไป และเวลาสถานีไม่เกิน 24 ชั่วโมง ไม่ใช่การยืนยันน้ำท่วมในนิคมฯ",
         },
         "sources": [
             {"name": "ThaiWater ฝนสะสม 24 ชั่วโมง", "url": RAIN_URL},
@@ -488,45 +506,34 @@ def main() -> int:
         related_alerts = [
             row
             for row in stations
-            if row["severity_score"] >= 2 and row["distance_km"] <= WATCH_RADIUS_KM
+            if station_fresh(row) and row["severity_score"] >= 2 and row["distance_km"] <= WATCH_RADIUS_KM
         ]
         max_rain = max(
             (
                 row["rainfall_mm"]
                 for row in rain
                 if row.get("rainfall_mm") is not None
-                and row["distance_km"] <= WATCH_RADIUS_KM
+                and row["distance_km"] <= WATCH_RADIUS_KM and station_fresh(row)
             ),
             default=None,
         )
         risk_level = watch[0]["status"] if watch else "ปกติ"
         result.update(
             {
-                "status": "ok",
+                "status": "partial" if any(ds.get("status") != "ok" for ds in (flash_flood_24h, flash_flood_48h)) else "ok",
                 "estates": estates,
                 "estate_watch": watch,
-                "stations": stations[:100],
+                "stations": stations,
+                "coverage": {"stations_complete": True, "station_count": len(stations), "estate_location_source": "ArcGIS geometry in EPSG:4326"},
                 "flash_flood": {"24h": flash_flood_24h, "48h": flash_flood_48h},
                 "summary": {
                     "estate_total": len(estates),
                     "estate_count": len(watch),
                     "station_count": len(stations),
                     "alert_station_count": len(related_alerts),
-                    "heavy_rain_estate_count": len(
-                        {
-                            row["nearest_estate"]
-                            for row in related_alerts
-                            if row["kind"] == "rainfall"
-                            and (row.get("rainfall_mm") or 0) > 70
-                        }
-                    ),
-                    "water_alert_estate_count": len(
-                        {
-                            row["nearest_estate"]
-                            for row in related_alerts
-                            if row["kind"] == "waterlevel"
-                        }
-                    ),
+                    "heavy_rain_estate_count": sum(row["heavy_rain_alert_count"] > 0 for row in watch),
+                    "rain_alert_estate_count": sum(row["rain_alert_count"] > 0 for row in watch),
+                    "water_alert_estate_count": sum(row["water_alert_count"] > 0 for row in watch),
                     "critical_count": sum(row["severity_score"] >= 3 for row in related_alerts),
                     "rain_station_count": len(rain),
                     "waterlevel_station_count": len(water),
@@ -550,12 +557,14 @@ def main() -> int:
         )
     except Exception as exc:
         result["errors"].append(f"{type(exc).__name__}: {exc}")
-        if previous and previous.get("status") == "ok":
+        if previous and previous.get("status") in ("ok", "partial", "stale"):
             # Keep the last verified figures at the top level. A temporary API
             # failure must not turn every dashboard KPI into "pending".
             result.update(
                 {
                     "status": "stale",
+                    "schema_version": previous.get("schema_version", 2),
+                    "coverage": previous.get("coverage", {}),
                     "generated_at": previous.get("generated_at", now),
                     "last_attempt_at": now,
                     "estates": previous.get("estates", []),
@@ -587,3 +596,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
