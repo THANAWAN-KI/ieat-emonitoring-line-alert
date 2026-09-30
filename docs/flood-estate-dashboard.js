@@ -17,7 +17,9 @@
   const fresh=r=>{const age=now-timestamp(r.observed_at);return Number.isFinite(age)&&age>=-300000&&age<=MAX_AGE};
   const stations=(data.stations||[]).filter(r=>point(r)&&fresh(r));
   const near=stations.map(r=>{let nearest=null,distance=Infinity;estates.forEach(e=>{const d=km(r,e);if(d<distance){distance=d;nearest=e}});return {...r,distance,nearest}}).filter(r=>r.distance<=RADIUS);
-  const watch=complete?estates.map(e=>{
+  const stationValues=near.filter(r=>(r.kind==='rainfall'&&num(r.rainfall_mm)!==null)||(r.kind==='waterlevel'&&num(r.waterlevel_msl)!==null));
+  const usable=complete&&Number.isFinite(age)&&age>=-300000&&age<=MAX_AGE&&stationValues.length>0&&data.status!=='stale';
+  const watch=usable?estates.map(e=>{
    const nearby=stations.map(r=>({...r,distance:km(e,r)})).filter(r=>r.distance<=RADIUS);
    const rain=nearby.filter(r=>r.kind==='rainfall'&&num(r.rainfall_mm)!==null&&Number(r.rainfall_mm)>35);
    const water=nearby.filter(r=>r.kind==='waterlevel'&&num(r.waterlevel_msl)!==null&&Number(r.severity_score)>=2);
@@ -38,7 +40,7 @@
    });
    return {available:complete,rows:[...groups.values()],issued,unlocated};
   }
-  return {estates,complete,age,stale:!Number.isFinite(age)||age< -300000||age>MAX_AGE||data.status==='stale',near,watch,rain:near.filter(r=>r.kind==='rainfall'&&num(r.rainfall_mm)!==null),water:near.filter(r=>r.kind==='waterlevel'&&num(r.waterlevel_msl)!==null),warning24:warning('24h'),warning48:warning('48h'),excluded:(data.stations||[]).length-stations.length};
+  return {estates,complete,usable,age,stale:!Number.isFinite(age)||age< -300000||age>MAX_AGE||data.status==='stale',near,watch,rain:near.filter(r=>r.kind==='rainfall'&&num(r.rainfall_mm)!==null),water:near.filter(r=>r.kind==='waterlevel'&&num(r.waterlevel_msl)!==null),warning24:warning('24h'),warning48:warning('48h'),excluded:(data.stations||[]).length-stations.length};
  }
  window.IEAT_ESTATE_DASHBOARD_MODEL=model;
  let current=null,selected='',busy=false;
@@ -86,7 +88,7 @@
  }
  function renderEstates(){
   if(!current)return;const m=model(current),q=$('efSearch').value.trim();
-  if(!m.complete){$('efEstates').innerHTML='<p class="ef-empty">รอชุดข้อมูลที่คำนวณด้วยเกณฑ์ใหม่และมีรายการสถานีครบ จึงยังไม่แสดงยอดนิคมฯ</p>';return}
+  if(!m.usable){$('efEstates').innerHTML='<p class="ef-empty">ชุดข้อมูลยังไม่ครบ / ข้อมูลย้อนหลัง / ไม่มีค่าสถานีล่าสุด จึงยังไม่สรุปยอดนิคมฯ ที่เข้าเกณฑ์</p>';return}
   const rows=m.watch.filter(e=>e.name.includes(q));
   $('efEstates').innerHTML=rows.length?rows.map(e=>`<button type="button" class="ef-estate" aria-pressed="${selected===String(e.id)}" data-ef-estate="${esc(e.id)}" data-ef-lat="${e.lat}" data-ef-lon="${e.lon}"><b>${esc(e.name)}</b><small>สถานีฝนเข้าเกณฑ์ ${e.rain.length} · ระดับน้ำเข้าเกณฑ์ ${e.water.length}<br>สถานีเข้าเกณฑ์ใกล้ที่สุด ${fmt(e.nearest)} กม.${e.maxRain!==null?' · ฝนสูงสุด '+fmt(e.maxRain)+' มม.':''}</small></button>`).join(''):`<p class="ef-empty">${q?'ไม่พบชื่อนิคมฯ ที่ค้นหา':'ไม่พบนิคมฯ เข้าเกณฑ์จากสถานีที่มีเวลาตรวจวัดภายใน 24 ชม. ในชุดข้อมูลนี้'}${m.stale?' · ชุดข้อมูลย้อนหลัง':''}</p>`;
  }
@@ -95,7 +97,7 @@
   $('efStatus').dataset.state=m.complete&&!m.stale&&data.status==='ok'?'ready':'incomplete';
   $('efStatus').textContent=(m.complete?(m.stale?'ข้อมูลย้อนหลัง':data.status==='partial'?'ข้อมูลบางแหล่งไม่พร้อม':'ใช้ชุดข้อมูลครบสำหรับคัดกรองนิคมฯ'):'ข้อมูลยังไม่ครบสำหรับคำนวณยอดนิคมฯ')+' · จัดทำชุดข้อมูล '+time(data.generated_at)+' · ตรวจไฟล์ใหม่ทุก 5 นาที (ต้นทางอัปเดตตามรอบของแต่ละแหล่ง)';
   set('efTotal',m.complete?fmt(m.estates.length):'รอตรวจสอบ');
-  [['efWatch',m.watch.length],['efRainWatch',m.watch.filter(e=>e.rain.length).length],['efWaterWatch',m.watch.filter(e=>e.water.length).length]].forEach(([id,n])=>set(id,m.complete?fmt(n):'ข้อมูลไม่ครบ'));
+  [['efWatch',m.watch.length],['efRainWatch',m.watch.filter(e=>e.rain.length).length],['efWaterWatch',m.watch.filter(e=>e.water.length).length]].forEach(([id,n])=>set(id,m.usable?fmt(n):m.stale?'ข้อมูลย้อนหลัง':'ข้อมูลไม่ครบ'));
   set('ef24',m.warning24.available?fmt(m.warning24.rows.length):'ไม่มีข้อมูล');set('ef48',m.warning48.available?fmt(m.warning48.rows.length):'ไม่มีข้อมูล');
   renderEstates();
   set('efStationNote',m.complete?`แสดง ${m.near.length} สถานีในรัศมี 30 กม. · เวลาตรวจวัดภายใน 24 ชั่วโมง · ไม่ใช้ ${m.excluded} รายการที่พิกัดหรือเวลาไม่ผ่านเกณฑ์ · คลิกสถานีเพื่อซูม`:'รายการสถานีชุดเดิมมีไม่ครบ จึงยังใช้ตรวจสอบยอดไม่ได้ รอข้อมูลที่แก้ไขแล้ว');
