@@ -48,7 +48,9 @@ def main():
         write(LATEST, {"data": rows})
         write(META, {"status": "ok", "source_url": SOURCE, "checked_at": checked,
                      "fetched_at": checked, "source_last_modified": last_modified,
-                     "record_count": len(rows), "availability_verified": False})
+                     "record_count": len(rows), "availability_verified": False,
+                     "sample_records": rows[:3],
+                     "flood_sample_records": [row for row in rows if any(word in json.dumps(row, ensure_ascii=False).lower() for word in ("สูบน้ำ", "เรือ", "กระสอบทราย", "เสื้อชูชีพ", "water pump", "boat"))][:12]})
         print(f"Saved {len(rows)} equipment records")
     except (URLError, ValueError, OSError) as error:
         write(META, {**prior, "status": "stale" if LATEST.exists() else "unavailable",
