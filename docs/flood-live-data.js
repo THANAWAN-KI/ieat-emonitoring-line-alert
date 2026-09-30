@@ -30,7 +30,7 @@
     body.innerHTML='<tr><td colspan="6" class="table-empty" style="padding:24px;line-height:1.7">ยังไม่มีข้อมูลตำแหน่งน้ำท่วมที่ตรวจพบพร้อมวันเวลาให้แสดงในระบบนี้ ข้อมูลสถานีฝนและระดับน้ำไม่สามารถใช้ยืนยันว่าจุดใดน้ำท่วมแล้วได้<br><a href="https://disaster.gistda.or.th/flood" target="_blank" rel="noopener noreferrer">เปิดแผนที่พื้นที่น้ำท่วมของ GISTDA เพื่อตรวจสอบข้อมูลล่าสุด ↗</a></td></tr>';
   }
   async function renderObservedFloods(){
-    const body=$("estateRanks");if(!body)return;
+    const body=$("estateRanks");if(!body||window.IEAT_FOCUSED_DASHBOARD)return;
     try{
       const response=await fetch("./data/gistda_flood_latest.geojson?v="+Date.now(),{cache:"no-store"});
       if(!response.ok)throw new Error("feed unavailable");
