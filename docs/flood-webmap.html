@@ -293,10 +293,11 @@ body,body *{color:#000!important}body svg text{fill:#000!important}input::placeh
     var root=document.createElement("section");root.className="flood-event-popup";
     var icon=document.createElement("img");icon.src=icons.flood;icon.alt="จุดรายงานน้ำท่วม";root.appendChild(icon);
     var title=document.createElement("h3");title.textContent=a.title;root.appendChild(title);
-    var when=document.createElement("div");when.className="event-time";when.textContent="รายงานเมื่อ "+thaiTime(a.start);root.appendChild(when);
+    var when=document.createElement("div");when.className="event-time";when.textContent="เวลาเริ่มเหตุการณ์ตามต้นทาง "+thaiTime(a.start);root.appendChild(when);
     var description=document.createElement("div");description.className="event-description";description.textContent=a.description||"ต้นทางไม่ได้ระบุรายละเอียดเพิ่มเติม";root.appendChild(description);
     var source=document.createElement("div");source.className="event-source";
     var link=document.createElement("a");link.href="https://traffic.longdo.com/main/";link.target="_blank";link.rel="noopener";link.textContent="ที่มา: Longdo Traffic";source.appendChild(link);root.appendChild(source);
+    var note=document.createElement("p");note.className="map-popup-note";note.textContent="เวลาเริ่มเหตุการณ์ไม่ใช่เวลายืนยันสถานการณ์ล่าสุด การโหลดข้อมูลใหม่ไม่ยืนยันว่าจุดนี้ยังมีน้ำท่วม";root.appendChild(note);
     return root;
    }
 
@@ -325,7 +326,7 @@ body,body *{color:#000!important}body svg text{fill:#000!important}input::placeh
      });
      floodLayer.removeAll();floodLayer.addMany(floods);
      trafficLayer.removeAll();trafficLayer.addMany(others);
-     reportSource("flood",floods.length+" จุด");
+     reportSource("flood",floods.length+" จุด · ดึงข้อมูล "+new Date().toLocaleTimeString("th-TH",{timeZone:"Asia/Bangkok",hour:"2-digit",minute:"2-digit"})+" น.");
      reportSource("events",others.length+" จุด");
     }catch(error){
      floodLayer.removeAll();trafficLayer.removeAll();
