@@ -64,6 +64,15 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
 
 #roadLegend{position:absolute;right:12px;bottom:100px;z-index:6;background:#fffffff2;border-radius:10px;padding:10px 12px;box-shadow:0 2px 8px #0002;font-size:12px;color:#34495e;max-width:240px;line-height:1.7}
 #roadLegend b{display:block}#roadLegend i{display:inline-block;width:16px;height:4px;vertical-align:middle;margin-right:4px}#roadLegend small{display:block;color:#536779}
+
+.flood-event-popup{font-family:Arial,"Sarabun",sans-serif;color:#2d3547;padding:4px 0 8px;width:100%;line-height:1.65}
+.flood-event-popup img{display:block;width:52px;height:52px;margin:0 0 14px;filter:drop-shadow(0 3px 4px #203c4d33)}
+.flood-event-popup h3{font-size:20px;line-height:1.5;font-weight:700;margin:0 0 8px;padding-right:16px}
+.flood-event-popup .event-time{font-size:14px;color:#748196;margin-bottom:18px}
+.flood-event-popup .event-description{border-top:1px solid #e7ebf0;padding-top:18px;font-size:16px;color:#596779;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.8}
+.flood-event-popup .event-source{font-size:13px;color:#8793a3;margin-top:24px}.flood-event-popup .event-source a{color:inherit;text-decoration:none}
+.esri-popup__main-container:has(.flood-event-popup){width:400px!important;border-radius:22px!important}
+.esri-popup__main-container:has(.flood-event-popup) .esri-popup__content{max-height:65dvh;padding:0 22px 18px!important}
 </style>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>window.FloodLeaflet=window.L;</script>
@@ -211,10 +220,10 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
    });
    var icons={flood:"./assets/map-flood-point.svg",waterAlert:"./assets/map-water-alert.svg",waterWatch:"./assets/map-water-watch.svg",camera:"./assets/map-camera-point.svg",traffic:"./assets/map-traffic-point.svg"};
    function customPin(color,art){return "data:image/svg+xml;charset=UTF-8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="48" height="58" viewBox="0 0 48 58"><path d="M24 56L9 36C-3 20 6 2 24 2S51 20 39 36Z" fill="'+color+'" stroke="white" stroke-width="3"/><circle cx="24" cy="23" r="16" fill="white" fill-opacity=".16"/><g fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">'+art+'</g></svg>')}
-   icons.flood=customPin("#007b9e",'<path d="M24 10c-3 5-7 9-7 13a7 7 0 0 0 14 0c0-4-4-8-7-13Z"/><path d="M12 33q3-3 6 0t6 0t6 0t6 0"/>');
+   icons.flood="data:image/svg+xml;charset=UTF-8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" width="56" height="56"><path d="M25 4a4 4 0 0 1 6 0l21 21a4 4 0 0 1 0 6L31 52a4 4 0 0 1-6 0L4 31a4 4 0 0 1 0-6Z" fill="#59b9e6" stroke="#167aa9" stroke-width="2.5"/><g fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M14 22q3-4 7 0t7 0t7 0t7 0M14 28q3-4 7 0t7 0t7 0t7 0M14 34q3-4 7 0t7 0t7 0t7 0"/></g></svg>');
    icons.traffic=customPin("#b45309",'<path d="m24 11 13 23H11Z"/><path d="M24 19v7"/><path d="M24 30h.01"/>');
    icons.camera=customPin("#475569",'<rect x="12" y="16" width="24" height="16" rx="3"/><circle cx="24" cy="24" r="5"/><path d="M16 16l2-4h12l2 4"/>');
-   function iconSymbol(kind){return {type:"picture-marker",url:new URL(icons[kind],location.href).href,width:kind==="flood"||kind==="traffic"||kind==="camera"?"36px":"31px",height:kind==="flood"||kind==="traffic"||kind==="camera"?"44px":"37px",yoffset:kind==="flood"||kind==="traffic"||kind==="camera"?"22px":"18px"}}
+   function iconSymbol(kind){return {type:"picture-marker",url:new URL(icons[kind],location.href).href,width:kind==="flood"?"30px":kind==="traffic"||kind==="camera"?"36px":"31px",height:kind==="flood"?"30px":kind==="traffic"||kind==="camera"?"44px":"37px",yoffset:kind==="flood"?"0px":kind==="traffic"||kind==="camera"?"22px":"18px"}}
    function popupHead(kind,label,subtitle){return "<div class='map-popup-head'><div><strong>"+escapeHtml(label)+"</strong><small>"+escapeHtml(subtitle)+"</small></div></div>"}
    function thaiTime(value){
     var match=String(value||"").match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})/);
@@ -229,6 +238,18 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
      symbol:iconSymbol(icon),
      attributes:attributes,popupTemplate:{title:" ",content:popup}});
    }
+
+   function floodEventPopup(a){
+    var root=document.createElement("section");root.className="flood-event-popup";
+    var icon=document.createElement("img");icon.src=icons.flood;icon.alt="จุดรายงานน้ำท่วม";root.appendChild(icon);
+    var title=document.createElement("h3");title.textContent=a.title;root.appendChild(title);
+    var when=document.createElement("div");when.className="event-time";when.textContent="รายงานเมื่อ "+thaiTime(a.start);root.appendChild(when);
+    var description=document.createElement("div");description.className="event-description";description.textContent=a.description||"ต้นทางไม่ได้ระบุรายละเอียดเพิ่มเติม";root.appendChild(description);
+    var source=document.createElement("div");source.className="event-source";
+    var link=document.createElement("a");link.href="https://traffic.longdo.com/main/";link.target="_blank";link.rel="noopener";link.textContent="ที่มา: Longdo Traffic";source.appendChild(link);root.appendChild(source);
+    return root;
+   }
+
    async function loadTraffic(){
     try{
      var response=await fetch("https://event.longdo.com/feed/json",{cache:"no-store"});
@@ -245,6 +266,7 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
       var attrs={title:String(e.title||"เหตุการณ์"),description:String(e.description||""),start:String(e.start||""),stop:String(e.stop||""),coordinates:lat.toFixed(5)+", "+lon.toFixed(5)};
       (isFlood?floods:others).push(marker(lon,lat,isFlood?"flood":"traffic",attrs,function(event){
        var a=event.graphic.attributes;
+       if(isFlood)return floodEventPopup(a);
        return "<div class='map-popup'>"+popupHead(isFlood?"flood":"traffic",isFlood?"จุดรายงานน้ำท่วม":"เหตุการณ์จราจร","รายงานจาก Longdo")+
         "<div class='map-popup-title'>"+escapeHtml(a.title)+"</div><hr class='map-popup-rule'>"+
         "<p>"+escapeHtml(a.description||"ต้นทางไม่ได้ระบุรายละเอียดเพิ่มเติม")+"</p>"+popupRow("เริ่มตามข้อมูลต้นทาง",thaiTime(a.start))+popupRow("สิ้นสุดตามข้อมูลต้นทาง",thaiTime(a.stop))+popupRow("พิกัด (ละติจูด, ลองจิจูด)",a.coordinates)+
