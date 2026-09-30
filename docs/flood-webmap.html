@@ -62,8 +62,6 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
 .esri-popup__main-container:has(.cctv-popup){width:520px!important;border-radius:8px!important}
 .esri-popup__main-container:has(.cctv-popup) .esri-popup__content{max-height:70dvh}
 
-#roadLegend{position:absolute;right:12px;bottom:100px;z-index:6;background:#fffffff2;border-radius:10px;padding:10px 12px;box-shadow:0 2px 8px #0002;font-size:14px;color:#34495e;max-width:240px;line-height:1.7}
-#roadLegend b{display:block}#roadLegend i{display:inline-block;width:16px;height:4px;vertical-align:middle;margin-right:4px}#roadLegend small{display:block;color:#536779}
 
 .flood-event-popup{font-family:Arial,"Sarabun",sans-serif;color:#2d3547;padding:4px 0 8px;width:100%;line-height:1.65}
 .flood-event-popup img{display:block;width:52px;height:52px;margin:0 0 14px;filter:drop-shadow(0 3px 4px #203c4d33)}
@@ -103,7 +101,6 @@ body,body *{color:#000!important}body svg text{fill:#000!important}input::placeh
 <label><input type="checkbox" data-layer="cameras"> CCTV</label>
 <a href="https://traffic.longdo.com/main/" target="_blank" rel="noopener" style="background:#fff;padding:7px 9px;border-radius:7px;box-shadow:0 2px 8px #0003;font-size:14px">เส้นจราจร ↗</a>
 </div>
-<aside id="roadLegend" role="status"><b>เส้นจราจร · Longdo</b><span><i style="background:#67bf35"></i>คล่องตัว</span> · <span><i style="background:#eabc18"></i>ชะลอตัว</span> · <span><i style="background:#ed4545"></i>ติดขัด</span><small id="roadStatus">กำลังโหลด · ซูมเข้าเพื่อดูเส้นถนน</small></aside>
 <div id="trafficStatus" role="status">กำลังโหลดจุดน้ำท่วม ระดับน้ำ และกล้อง…</div>
 <div id="message" role="status">กำลังโหลดแผนที่…</div>
 <iframe id="fallback" title="แผนที่สถานการณ์น้ำท่วมจาก ArcGIS Map Viewer" loading="eager" allow="fullscreen; geolocation"></iframe>
@@ -118,6 +115,16 @@ body,body *{color:#000!important}body svg text{fill:#000!important}input::placeh
  var viewerUrl="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap="+itemId+"&theme=light&legend=true&information=true&scroll=false&basemaps=true";
  var view=null, pending=null, ready=false, fallback=false, leafletMap=null, leafletGroups=null;
  var trafficStatus=document.getElementById("trafficStatus");
+ function roadText(text){var node=document.getElementById("roadStatus");if(node)node.textContent=text}
+ var selectedPointLayer=null,GraphicCtor=null,selectedLocation=null,selectedLeafletMarker=null;
+ function highlightLocation(lon,lat,label){
+  if(!Number.isFinite(lon)||!Number.isFinite(lat)||Math.abs(lat)>90||Math.abs(lon)>180)return;
+  selectedLocation={lon:lon,lat:lat,label:String(label)};
+  if(leafletMap){if(selectedLeafletMarker)leafletMap.removeLayer(selectedLeafletMarker);selectedLeafletMarker=L.circleMarker([lat,lon],{radius:9,color:"#ffffff",weight:3,fillColor:"#0f766e",fillOpacity:1}).addTo(leafletMap).bindTooltip(escapeHtml(label),{permanent:true,direction:"top"});return}
+  if(!selectedPointLayer||!GraphicCtor)return;
+  selectedPointLayer.removeAll();selectedPointLayer.add(new GraphicCtor({geometry:{type:"point",longitude:lon,latitude:lat},symbol:{type:"simple-marker",size:18,color:"#0f766e",outline:{color:"#ffffff",width:3}},attributes:{label:String(label)},popupTemplate:{title:"ตำแหน่งที่เลือก",content:escapeHtml(label)}}));
+ }
+
  var sourceState={flood:"กำลังโหลด",water:"กำลังโหลด",events:"กำลังโหลด",cameras:"กำลังโหลด"};
  function reportSource(name,text){sourceState[name]=text;trafficText("จุดรายงาน Longdo "+sourceState.flood+" · ระดับน้ำ "+sourceState.water+" · เหตุการณ์ "+sourceState.events+" · CCTV "+sourceState.cameras)}
  function trafficText(value){trafficStatus.textContent=value}
@@ -228,7 +235,7 @@ body,body *{color:#000!important}body svg text{fill:#000!important}input::placeh
    else if(fallback)frame.src=viewerUrl;
    else if(view&&ready)view.goTo({center:[101,13.2],scale:4622324}).catch(function(){});
    else pending={center:[101,13.2],scale:4622324};
-  }else navigate(Number(d.lon),Number(d.lat),Number(d.scale)||75000);
+  }else {navigate(Number(d.lon),Number(d.lat),Number(d.scale)||75000);if(d.label)highlightLocation(Number(d.lon),Number(d.lat),d.label)}
  });
  var timer=setTimeout(showFallback,20000);
  if(window.arcgisScriptFailed||typeof window.require!=="function"){clearTimeout(timer);showFallback();return}
@@ -253,11 +260,13 @@ body,body *{color:#000!important}body svg text{fill:#000!important}input::placeh
    });
    var roadLayer=new RoadTrafficLayer({title:"เส้นสีสภาพจราจร · Longdo",visible:true,refreshInterval:3,minScale:1200000,opacity:.95,copyright:"Longdo Traffic / iTIC"});
    webmap.add(roadLayer);
-   roadLayer.on("layerview-create-error",function(){document.getElementById("roadStatus").textContent="โหลดเส้นจราจรไม่สำเร็จ · ตรวจสอบที่ Longdo Traffic"});
-   webmap.addMany([floodLayer,waterLayer,trafficLayer,cameraLayer]);
+   roadLayer.on("layerview-create-error",function(){roadText("โหลดเส้นจราจรไม่สำเร็จ · ตรวจสอบที่ Longdo Traffic")});
+   GraphicCtor=Graphic;selectedPointLayer=new GraphicsLayer({title:"ตำแหน่งที่เลือกจากรายงาน",listMode:"hide"});
+   webmap.addMany([floodLayer,waterLayer,trafficLayer,cameraLayer,selectedPointLayer]);
+   if(selectedLocation)highlightLocation(selectedLocation.lon,selectedLocation.lat,selectedLocation.label);
    var layers={roads:roadLayer,gistda:new GraphicsLayer({title:"ข้อมูล GISTDA",visible:true}),flood:floodLayer,water:waterLayer,events:trafficLayer,cameras:cameraLayer};
    document.querySelectorAll("#dataControls input[data-layer]").forEach(function(input){
-    input.addEventListener("change",function(){if(layers[input.dataset.layer])layers[input.dataset.layer].visible=input.checked;if(input.dataset.layer==="roads")document.getElementById("roadLegend").hidden=!input.checked});
+    input.addEventListener("change",function(){if(layers[input.dataset.layer])layers[input.dataset.layer].visible=input.checked;});
    });
    var icons={flood:"./assets/map-flood-point.svg",waterAlert:"./assets/map-water-alert.svg",waterWatch:"./assets/map-water-watch.svg",camera:"./assets/map-camera-point.svg",traffic:"./assets/map-traffic-point.svg"};
    function customPin(color,art){return "data:image/svg+xml;charset=UTF-8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="48" height="58" viewBox="0 0 48 58"><path d="M24 56L9 36C-3 20 6 2 24 2S51 20 39 36Z" fill="'+color+'" stroke="white" stroke-width="3"/><circle cx="24" cy="23" r="16" fill="white" fill-opacity=".16"/><g fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">'+art+'</g></svg>')}
@@ -400,10 +409,10 @@ body,body *{color:#000!important}body svg text{fill:#000!important}input::placeh
     ready=true;clearTimeout(timer);message.style.display="none";
     view.whenLayerView(roadLayer).then(function(layerView){
      var updateStatus=function(){
-      document.getElementById("roadStatus").textContent=view.scale>1200000?"ซูมเข้าเพื่อดูเส้นถนน · อัปเดตทุก 3 นาที":layerView.updating?"กำลังโหลดเส้นจราจร…":"ข้อมูลจาก Longdo · อัปเดตทุก 3 นาที · ถนนที่ไม่มีสีอาจไม่มีข้อมูล";
+      roadText(view.scale>1200000?"ซูมเข้าเพื่อดูเส้นถนน · อัปเดตทุก 3 นาที":layerView.updating?"กำลังโหลดเส้นจราจร…":"ข้อมูลจาก Longdo · อัปเดตทุก 3 นาที · ถนนที่ไม่มีสีอาจไม่มีข้อมูล");
      };
      layerView.watch("updating",updateStatus);view.watch("scale",updateStatus);updateStatus();
-    }).catch(function(){document.getElementById("roadStatus").textContent="เส้นจราจรยังไม่พร้อม · เปิด Longdo Traffic เพื่อตรวจสอบ"});
+    }).catch(function(){roadText("เส้นจราจรยังไม่พร้อม · เปิด Longdo Traffic เพื่อตรวจสอบ")});
     view.ui.move("zoom","bottom-right");
     view.ui.add(new Home({view:view}),"bottom-right");
     view.ui.add(new Search({view:view}),"top-right");
