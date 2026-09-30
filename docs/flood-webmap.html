@@ -9,10 +9,10 @@
 <style>
 html,body,#viewDiv{width:100%;height:100%;margin:0}
 body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
-#trafficStatus{position:absolute;z-index:6;left:12px;bottom:12px;max-width:min(430px,calc(100% - 24px));padding:9px 12px;background:#fffffff0;border-radius:9px;box-shadow:0 2px 10px #0003;color:#34495e;font-size:12px;line-height:1.5}
+#trafficStatus{position:absolute;z-index:6;left:12px;bottom:12px;max-width:min(430px,calc(100% - 24px));padding:9px 12px;background:#fffffff0;border-radius:9px;box-shadow:0 2px 10px #0003;color:#34495e;font-size:14px;line-height:1.5}
 #trafficStatus a{color:#1769c2}
 #dataControls{position:absolute;z-index:6;left:12px;top:12px;display:flex;flex-wrap:wrap;gap:5px;max-width:min(510px,calc(100% - 90px))}
-#dataControls label{display:flex;align-items:center;gap:5px;background:#fff;padding:7px 9px;border-radius:7px;box-shadow:0 2px 8px #0003;font-size:12px;cursor:pointer}
+#dataControls label{display:flex;align-items:center;gap:5px;background:#fff;padding:7px 9px;border-radius:7px;box-shadow:0 2px 8px #0003;font-size:14px;cursor:pointer}
 #dataControls input{accent-color:#1769c2}
 #trafficStatus a{color:#1769c2}
 #viewDiv{position:absolute;inset:0}
@@ -21,56 +21,56 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
 #leafletMap{display:none;position:absolute;inset:0;width:100%;height:100%;z-index:1}
 .leaflet-popup-content-wrapper{border-radius:20px;box-shadow:0 8px 30px #172b4650}.leaflet-popup-content{margin:15px 18px;min-width:255px}
 .leaflet-popup-content .map-popup p{margin:8px 0}.leaflet-container{font-family:Arial,"Sarabun",sans-serif}
-#fallbackLink{display:none;position:absolute;right:12px;bottom:12px;z-index:6;padding:9px 12px;border-radius:7px;background:#fff;color:#1769c2;box-shadow:0 2px 10px #0003;text-decoration:none;font-size:13px}
+#fallbackLink{display:none;position:absolute;right:12px;bottom:12px;z-index:6;padding:9px 12px;border-radius:7px;background:#fff;color:#1769c2;box-shadow:0 2px 10px #0003;text-decoration:none;font-size:15px}
 .esri-ui .esri-widget{font-family:Arial,"Sarabun",sans-serif}
 .esri-popup__main-container{border-radius:20px!important;overflow:hidden!important;box-shadow:0 8px 30px #172b4650!important}
 .esri-popup__header{min-height:24px!important}.esri-popup__header-title{display:none!important}
 .esri-popup__button--dock,.esri-popup__button--collapse{display:none!important}
 .esri-popup__content{margin:0!important;padding:5px 18px 18px!important}.esri-popup__content .map-popup{font-family:Arial,"Sarabun",sans-serif;color:#243044;min-width:245px;padding:4px 2px 8px}
-.map-popup-head{display:flex;align-items:center;gap:9px;margin-bottom:13px}.map-popup-head img{width:37px;height:45px;object-fit:contain}.map-popup-head strong{font-size:15px}.map-popup-head small{display:block;width:max-content;color:#d93632;background:#fde8e7;border-radius:999px;padding:3px 9px;font-size:12px;font-weight:700;margin-top:3px}
-.map-popup-title{font-size:16px;font-weight:700;line-height:1.5;margin:8px 0}.map-popup-sub{font-size:12px;color:#8895a5}.map-popup-rule{border:0;border-top:1px solid #e8edf2;margin:13px 0}
-.map-popup-row{display:flex;justify-content:space-between;gap:14px;margin:7px 0;font-size:13px}.map-popup-row span{color:#7a8798}.map-popup-row b{text-align:right}.map-popup-source{color:#639ec0;font-size:12px;margin-top:14px}.map-popup-source a{font-weight:700}.map-popup-note{display:block;color:#9ba6b3;font-size:11px;margin-top:5px}.map-popup p{line-height:1.55;white-space:pre-wrap;font-size:13px}.map-popup a{color:#1769c2}
+.map-popup-head{display:flex;align-items:center;gap:9px;margin-bottom:13px}.map-popup-head img{width:37px;height:45px;object-fit:contain}.map-popup-head strong{font-size:17px}.map-popup-head small{display:block;width:max-content;color:#d93632;background:#fde8e7;border-radius:999px;padding:3px 9px;font-size:14px;font-weight:700;margin-top:3px}
+.map-popup-title{font-size:18px;font-weight:700;line-height:1.5;margin:8px 0}.map-popup-sub{font-size:14px;color:#8895a5}.map-popup-rule{border:0;border-top:1px solid #e8edf2;margin:13px 0}
+.map-popup-row{display:flex;justify-content:space-between;gap:14px;margin:7px 0;font-size:15px}.map-popup-row span{color:#7a8798}.map-popup-row b{text-align:right}.map-popup-source{color:#639ec0;font-size:14px;margin-top:14px}.map-popup-source a{font-weight:700}.map-popup-note{display:block;color:#9ba6b3;font-size:13px;margin-top:5px}.map-popup p{line-height:1.55;white-space:pre-wrap;font-size:15px}.map-popup a{color:#1769c2}
 #dataControls{left:12px;right:58px;max-width:none}
-#gistdaStatus{position:absolute;z-index:6;left:12px;bottom:70px;max-width:min(430px,calc(100% - 90px));background:#fff;padding:10px 12px;border-radius:9px;color:#34495e;font-size:12px;line-height:1.5;box-shadow:0 2px 10px #0002}
+#gistdaStatus{position:absolute;z-index:6;left:12px;bottom:70px;max-width:min(430px,calc(100% - 90px));background:#fff;padding:10px 12px;border-radius:9px;color:#34495e;font-size:14px;line-height:1.5;box-shadow:0 2px 10px #0002}
 #gistdaStatus a{color:#1769c2}
-#trafficStatus{max-width:calc(100% - 90px);font-size:11px;max-height:45px;overflow:auto}
-@media(max-width:600px){#dataControls label{padding:5px;font-size:11px}#gistdaStatus{bottom:76px;font-size:11px}.leaflet-popup-content{min-width:180px}}
+#trafficStatus{max-width:calc(100% - 90px);font-size:13px;max-height:45px;overflow:auto}
+@media(max-width:600px){#dataControls label{padding:5px;font-size:13px}#gistdaStatus{bottom:76px;font-size:13px}.leaflet-popup-content{min-width:180px}}
 
 .map-popup{max-width:340px;overflow-wrap:anywhere}
 .map-popup-head{padding:12px;background:#eff6ff;border-radius:12px;align-items:center}
 .map-popup-head small{color:#075985;background:#dff2fc;font-weight:600}
 .map-popup-head img{width:40px;height:48px}
-.map-popup-title{font-size:18px;color:#17334b;margin:14px 0 8px}
+.map-popup-title{font-size:20px;color:#17334b;margin:14px 0 8px}
 .map-popup-sub,.map-popup-row span{color:#536779}
 .map-popup-row{padding:9px 0;margin:0;border-bottom:1px solid #edf2f7;align-items:flex-start}
 .map-popup-row b{color:#243b53;font-weight:600;max-width:65%;overflow-wrap:anywhere}
 .map-popup-source{color:#465c6c;padding-top:8px}
-.map-popup-note{color:#536779;font-size:12px;line-height:1.7;background:#f5f8fb;padding:10px;border-radius:10px}
-.map-popup p{font-size:14px;color:#344c5e}
+.map-popup-note{color:#536779;font-size:14px;line-height:1.7;background:#f5f8fb;padding:10px;border-radius:10px}
+.map-popup p{font-size:16px;color:#344c5e}
 .esri-popup__main-container{max-width:calc(100vw - 24px)!important}
 .leaflet-popup-content{min-width:0;width:min(300px,calc(100vw - 70px))!important}
 
 
 .cctv-popup{font-family:Arial,"Sarabun",sans-serif;width:100%;color:#263c39}
-.cctv-popup h3{font-size:18px;line-height:1.5;margin:0 28px 16px 0}
+.cctv-popup h3{font-size:20px;line-height:1.5;margin:0 28px 16px 0}
 .cctv-photo{width:100%;display:block;aspect-ratio:16/9;object-fit:contain;background:#eef2f5}
-.cctv-image-note{font-size:12px;color:#52666c;padding:8px 0;line-height:1.6}
+.cctv-image-note{font-size:14px;color:#52666c;padding:8px 0;line-height:1.6}
 .cctv-unavailable{padding:40px 20px;text-align:center;background:#f1f5f7;color:#536779;line-height:1.8}
-.cctv-footer{border-bottom:3px solid transparent;border-image:linear-gradient(90deg,#f6b31b,#4eae57,#cf60ac,#187ed7) 1;padding:16px 0;display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:13px}
+.cctv-footer{border-bottom:3px solid transparent;border-image:linear-gradient(90deg,#f6b31b,#4eae57,#cf60ac,#187ed7) 1;padding:16px 0;display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:15px}
 .cctv-footer a{color:#126d87;text-decoration:none;font-weight:600}
-.cctv-share{display:flex;gap:10px;align-items:center;background:white;border:0;font:inherit;font-size:16px;color:#304c49;padding:14px 0;cursor:pointer}
+.cctv-share{display:flex;gap:10px;align-items:center;background:white;border:0;font:inherit;font-size:18px;color:#304c49;padding:14px 0;cursor:pointer}
 .esri-popup__main-container:has(.cctv-popup){width:520px!important;border-radius:8px!important}
 .esri-popup__main-container:has(.cctv-popup) .esri-popup__content{max-height:70dvh}
 
-#roadLegend{position:absolute;right:12px;bottom:100px;z-index:6;background:#fffffff2;border-radius:10px;padding:10px 12px;box-shadow:0 2px 8px #0002;font-size:12px;color:#34495e;max-width:240px;line-height:1.7}
+#roadLegend{position:absolute;right:12px;bottom:100px;z-index:6;background:#fffffff2;border-radius:10px;padding:10px 12px;box-shadow:0 2px 8px #0002;font-size:14px;color:#34495e;max-width:240px;line-height:1.7}
 #roadLegend b{display:block}#roadLegend i{display:inline-block;width:16px;height:4px;vertical-align:middle;margin-right:4px}#roadLegend small{display:block;color:#536779}
 
 .flood-event-popup{font-family:Arial,"Sarabun",sans-serif;color:#2d3547;padding:4px 0 8px;width:100%;line-height:1.65}
 .flood-event-popup img{display:block;width:52px;height:52px;margin:0 0 14px;filter:drop-shadow(0 3px 4px #203c4d33)}
-.flood-event-popup h3{font-size:20px;line-height:1.5;font-weight:700;margin:0 0 8px;padding-right:16px}
-.flood-event-popup .event-time{font-size:14px;color:#748196;margin-bottom:18px}
-.flood-event-popup .event-description{border-top:1px solid #e7ebf0;padding-top:18px;font-size:16px;color:#596779;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.8}
-.flood-event-popup .event-source{font-size:13px;color:#8793a3;margin-top:24px}.flood-event-popup .event-source a{color:inherit;text-decoration:none}
+.flood-event-popup h3{font-size:22px;line-height:1.5;font-weight:700;margin:0 0 8px;padding-right:16px}
+.flood-event-popup .event-time{font-size:16px;color:#748196;margin-bottom:18px}
+.flood-event-popup .event-description{border-top:1px solid #e7ebf0;padding-top:18px;font-size:18px;color:#596779;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.8}
+.flood-event-popup .event-source{font-size:15px;color:#8793a3;margin-top:24px}.flood-event-popup .event-source a{color:inherit;text-decoration:none}
 .esri-popup__main-container:has(.flood-event-popup){width:400px!important;border-radius:22px!important}
 .esri-popup__main-container:has(.flood-event-popup) .esri-popup__content{max-height:65dvh;padding:0 22px 18px!important}
 
@@ -79,13 +79,13 @@ body{font-family:Arial,"Sarabun",sans-serif;background:#f4f7fa}
 body,body *{color:#000!important}body svg text{fill:#000!important}input::placeholder{color:#000;opacity:1}
 
 /* Larger CCTV popup typography */
-.cctv-popup h3{font-size:24px;line-height:1.5;margin-bottom:18px}
-.cctv-image-note{font-size:16px;line-height:1.7;padding:10px 0}
-.cctv-unavailable{font-size:17px;line-height:1.8}
-.cctv-footer{font-size:16px;line-height:1.7;flex-wrap:wrap}
-.cctv-footer a{font-size:17px}
-.cctv-share{font-size:19px;min-height:48px}
-@media(max-width:600px){.cctv-popup h3{font-size:21px}.cctv-footer,.cctv-image-note{font-size:15px}.cctv-footer a{font-size:16px}}
+.cctv-popup h3{font-size:26px;line-height:1.5;margin-bottom:18px}
+.cctv-image-note{font-size:18px;line-height:1.7;padding:10px 0}
+.cctv-unavailable{font-size:19px;line-height:1.8}
+.cctv-footer{font-size:18px;line-height:1.7;flex-wrap:wrap}
+.cctv-footer a{font-size:19px}
+.cctv-share{font-size:21px;min-height:48px}
+@media(max-width:600px){.cctv-popup h3{font-size:23px}.cctv-footer,.cctv-image-note{font-size:17px}.cctv-footer a{font-size:18px}}
 </style>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>window.FloodLeaflet=window.L;</script>
@@ -101,7 +101,7 @@ body,body *{color:#000!important}body svg text{fill:#000!important}input::placeh
 <label><input type="checkbox" data-layer="roads" checked> เส้นสีจราจร</label>
 <label><input type="checkbox" data-layer="events"> เหตุการณ์จราจร</label>
 <label><input type="checkbox" data-layer="cameras"> CCTV</label>
-<a href="https://traffic.longdo.com/main/" target="_blank" rel="noopener" style="background:#fff;padding:7px 9px;border-radius:7px;box-shadow:0 2px 8px #0003;font-size:12px">เส้นจราจร ↗</a>
+<a href="https://traffic.longdo.com/main/" target="_blank" rel="noopener" style="background:#fff;padding:7px 9px;border-radius:7px;box-shadow:0 2px 8px #0003;font-size:14px">เส้นจราจร ↗</a>
 </div>
 <aside id="roadLegend" role="status"><b>เส้นจราจร · Longdo</b><span><i style="background:#67bf35"></i>คล่องตัว</span> · <span><i style="background:#eabc18"></i>ชะลอตัว</span> · <span><i style="background:#ed4545"></i>ติดขัด</span><small id="roadStatus">กำลังโหลด · ซูมเข้าเพื่อดูเส้นถนน</small></aside>
 <aside id="gistdaStatus" role="status">กำลังตรวจสอบข้อมูล GISTDA…</aside>
