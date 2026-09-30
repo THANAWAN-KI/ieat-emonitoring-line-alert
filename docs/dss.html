@@ -563,6 +563,29 @@ function dssLookupChoices(){
   dssEstates.forEach(item=>{if(Array.from(list.options).some(option=>option.value===item.name))return;const option=document.createElement('option');option.value=item.name;list.appendChild(option)});
 }
 dssLookupChoices();
+
+let factoryNameIndex=[],factoryNameIndexPromise;
+function loadFactoryNameIndex(){
+  if(!factoryNameIndexPromise)factoryNameIndexPromise=fetch('./factory-search-index.json?v=20260930',{signal:AbortSignal.timeout(12000)}).then(response=>{if(!response.ok)throw Error('รายชื่อโรงงานไม่พร้อม');return response.json()}).then(data=>{
+    factoryNameIndex=(data.factories||[]).map(row=>({OBJECTID:row[0],mercant_name:row[1],fid14n:row[2],IEAT:row[3]}));return factoryNameIndex;
+  }).catch(error=>{factoryNameIndexPromise=null;console.warn('Factory name index',error);return []});
+  return factoryNameIndexPromise;
+}
+function matchFactoryNames(query){
+  const parts=String(query).split(' — '),key=normalizeLookup(parts[0]).replace(/[().,\-]/g,'');
+  return factoryNameIndex.filter(attrs=>normalizeLookup(attrs.mercant_name).replace(/[().,\-]/g,'').includes(key)||normalizeLookup(attrs.fid14n).includes(key));
+}
+async function showFactorySuggestions(){
+  await loadFactoryNameIndex();
+  const list=document.getElementById('factoryLookupOptions');list.replaceChildren();dssLookupChoices();
+  const query=factoryLookup.value.trim(),matches=query?matchFactoryNames(query):factoryNameIndex;
+  const seen=new Set();
+  matches.slice(0,100).forEach(attrs=>{if(seen.has(attrs.mercant_name))return;seen.add(attrs.mercant_name);const option=document.createElement('option');option.value=attrs.mercant_name;option.label=(attrs.IEAT||'')+' · '+(attrs.fid14n||'');list.appendChild(option)});
+}
+let suggestionTimer;
+factoryLookup.addEventListener('input',()=>{clearTimeout(suggestionTimer);suggestionTimer=setTimeout(showFactorySuggestions,150)});
+loadFactoryNameIndex().then(showFactorySuggestions);
+
 let lookupSequence=0,lookupController;
 async function searchFactory(){
   const query=factoryLookup.value.trim(),sequence=++lookupSequence;
@@ -572,20 +595,23 @@ async function searchFactory(){
   factoryLookupStatus.textContent='กำลังค้นหานิคมฯ และผู้ประกอบการ…';
   const key=estateLookupKey(query);
   const estates=key?dssEstates.filter(item=>estateLookupKey(item.name).includes(key)):[];
-  let factories=[],errorText='';
+  await loadFactoryNameIndex();if(sequence!==lookupSequence)return;
+  const indexed=matchFactoryNames(query).slice(0,50);
+  let factories=indexed.map(attrs=>({type:'factory',feature:{attributes:attrs},name:attrs.mercant_name})),errorText='';
   const controller=new AbortController();lookupController=controller;
   const timeout=setTimeout(()=>controller.abort(),15000);
   try{
-    const escaped=query.replace(/'/g,"''").replace(/[%_]/g,'');
-    const params=new URLSearchParams({where:"mercant_name IS NOT NULL AND (mercant_name LIKE '%"+escaped+"%' OR fid14n LIKE '%"+escaped+"%' OR IEAT LIKE '%"+escaped+"%')",outFields:'*',returnGeometry:'true',outSR:'4326',resultRecordCount:'50',f:'json'});
+    if(!indexed.length){
+    const escaped=query.split(' — ')[0].replace(/'/g,"''").replace(/[%_]/g,'');
+    const params=new URLSearchParams({where:"mercant_name IS NOT NULL AND (mercant_name LIKE '%"+escaped+"%' OR fid14n LIKE '%"+escaped+"%' OR IEAT LIKE '%"+escaped+"%')",outFields:'*',returnGeometry:'false',outSR:'4326',resultRecordCount:'50',f:'json'});
     const response=await fetch(dssService+'/query?'+params,{signal:controller.signal});
     if(!response.ok)throw new Error('HTTP '+response.status);
     const data=await response.json();if(data.error)throw new Error(data.error.message||'ArcGIS query error');
-    const metadata=await getDssFieldMetadata();
-    factories=[];
-    factories=(data.features||[]).filter(feature=>feature.attributes.mercant_name).map(feature=>({type:'factory',feature,fields:metadata,name:feature.attributes.mercant_name}));
+    const server=(data.features||[]).filter(feature=>feature.attributes.mercant_name).map(feature=>({type:'factory',feature,name:feature.attributes.mercant_name}));
+    const unique=new Map();factories.concat(server).forEach(item=>unique.set(item.feature.attributes.OBJECTID,item));factories=Array.from(unique.values()).slice(0,50);
     if(data.exceededTransferLimit)errorText='แสดงผู้ประกอบการ 50 รายการแรก กรุณาพิมพ์ชื่อให้เจาะจงขึ้น';
-  }catch(error){if(sequence!==lookupSequence)return;console.warn('DSS lookup',error);errorText='เชื่อมต่อข้อมูลผู้ประกอบการไม่สำเร็จ กรุณาลองค้นหาอีกครั้ง'}
+    }else if(matchFactoryNames(query).length>50){errorText='แสดงโรงงาน 50 รายการแรก กรุณาพิมพ์ชื่อให้เจาะจงขึ้น'}
+  }catch(error){if(sequence!==lookupSequence)return;console.warn('DSS lookup',error);errorText=factories.length?'แสดงรายชื่อสำรอง กดเลือกโรงงานเพื่อดึงข้อมูลล่าสุด':'เชื่อมต่อข้อมูลผู้ประกอบการไม่สำเร็จ กรุณาลองค้นหาอีกครั้ง'}
   finally{clearTimeout(timeout)}
   if(sequence!==lookupSequence)return;
   const choices=estates.map(item=>({...item,type:'estate'})).concat(factories);
@@ -595,10 +621,19 @@ async function searchFactory(){
     const button=document.createElement('button');button.type='button';button.className='secondary';button.style.cssText='text-align:left;width:100%;font-size:14px';
     const attrs=item.feature?.attributes||{};
     button.textContent=item.type==='estate'?'นิคมฯ · '+item.name:'ผู้ประกอบการ · '+item.name+' · '+(attrs.IEAT||'—')+' · '+(attrs.fid14n||'—');
-    button.addEventListener('click',()=>selectDssLookup(item));lookupResults.appendChild(button);
+    button.addEventListener('click',()=>{selectDssLookup(item).catch(error=>{console.warn(error);factoryLookupStatus.textContent='ดึงรายละเอียดโรงงานไม่สำเร็จ กรุณาลองเลือกอีกครั้ง'})});lookupResults.appendChild(button);
   });
 }
-function selectDssLookup(item){
+async function selectDssLookup(item){
+  if(item.type==='factory'){
+    factoryLookupStatus.textContent='กำลังดึงข้อมูลโรงงานและตำแหน่งล่าสุด…';
+    const attrs=item.feature.attributes||{};
+    const params=new URLSearchParams({where:'OBJECTID='+Number(attrs.OBJECTID),outFields:'*',returnGeometry:'true',outSR:'4326',f:'json'});
+    const response=await fetch(dssService+'/query?'+params,{signal:AbortSignal.timeout(15000)});
+    if(!response.ok)throw Error('HTTP '+response.status);
+    const data=await response.json();if(data.error||!data.features?.length)throw Error(data.error?.message||'ไม่พบโรงงาน');
+    item={...item,feature:data.features[0],fields:await getDssFieldMetadata()};
+  }
   const attrs=item.feature?.attributes||{},geometry=item.feature?.geometry;
   let lat=item.lat,lng=item.lng;
   if(item.type==='factory'){
