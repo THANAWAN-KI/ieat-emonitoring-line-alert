@@ -125,7 +125,7 @@ body{background:#fff}
 </head>
 <body><div class="loading" id="loading">กำลังจัดทำรายงาน PNG…</div>
 <header class="top"><div><h1>IEAT DSS — จัดทำรายงานเหตุฉุกเฉิน</h1><span>แก้ไขข้อมูลด้านซ้าย ผลลัพธ์ในรายงานจะเปลี่ยนทันที</span></div><div class="top-actions"><button class="secondary" id="resetBtn">ล้างข้อมูล</button><button class="primary" id="pngBtn">ดาวน์โหลด PNG</button></div></header>
-<main class="workspace"><aside class="editor"><h2>แก้ไขข้อมูลรายงาน</h2><div class="field"><label for="factoryLookup">ค้นหาชื่อผู้ประกอบการหรือเลขทะเบียนโรงงาน</label><div class="mini-actions"><input id="factoryLookup" list="factoryLookupOptions" placeholder="ชื่อผู้ประกอบการ / เลขทะเบียน"><button class="primary" id="factoryLookupBtn" type="button">ค้นหาและวิเคราะห์</button></div><datalist id="factoryLookupOptions"></datalist><p id="factoryLookupStatus" class="hint" role="status"></p></div><div class="field"><label for="bufferKm">รัศมี Buffer (กม.)</label><input id="bufferKm" type="number" min="0.1" max="50" step="0.1" value="3"><p class="hint">แสดงวงรอบจุดเกิดเหตุในแผนที่และไฟล์ PNG</p></div><div id="form"></div></aside><div class="report-wrap"><section class="report" id="report">
+<main class="workspace"><aside class="editor"><h2>แก้ไขข้อมูลรายงาน</h2><div class="field"><label for="factoryLookup">ค้นหานิคมอุตสาหกรรม / ผู้ประกอบการ / เลขทะเบียน</label><div class="mini-actions"><input id="factoryLookup" list="factoryLookupOptions" placeholder="ชื่อนิคมฯ / ชื่อผู้ประกอบการ / เลขทะเบียน"><button class="primary" id="factoryLookupBtn" type="button">ค้นหาและวิเคราะห์</button></div><datalist id="factoryLookupOptions"></datalist><p id="factoryLookupStatus" class="hint" role="status"></p></div><div class="field"><label for="bufferKm">รัศมี Buffer (กม.)</label><input id="bufferKm" type="number" min="0.1" max="50" step="0.1" value="3"><p class="hint">แสดงวงรอบจุดเกิดเหตุในแผนที่และไฟล์ PNG</p></div><div id="form"></div></aside><div class="report-wrap"><section class="report" id="report">
 <div class="report-header"><h1 data-out="title"></h1><p data-out="unit"></p></div>
 <div class="meta-grid"><div class="meta"><small>เลขที่รายงาน</small><b data-out="reportNo"></b></div><div class="meta"><small>วันและเวลาจัดทำ</small><b data-out="date"></b></div><div class="meta"><small>สถานะเอกสาร</small><b data-out="status"></b></div></div>
 <div class="section-title">ข้อมูลสถานประกอบการ / พื้นที่เกิดเหตุ</div><div class="company"><div class="row"><b>ชื่อสถานประกอบการ</b><span data-out="company"></span></div><div class="row"><b>เลขทะเบียน</b><span data-out="registration"></span></div><div class="row"><b>นิคมอุตสาหกรรม</b><span data-out="estate"></span></div><div class="row"><b>ที่อยู่ / จุดเกิดเหตุ</b><span data-out="address"></span></div><div class="row"><b>สารเคมี / วัตถุอันตราย</b><span data-out="chemical"></span></div><div class="row"><b>ข้อมูลการระงับเหตุ</b><span data-out="response"></span></div></div>
@@ -502,13 +502,72 @@ html body #report .report-header h1 *{
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script id="dss-static-map-and-export">
 const factoryLookup=document.getElementById('factoryLookup'),factoryLookupStatus=document.getElementById('factoryLookupStatus');
-function searchFactory(){
-  const query=factoryLookup.value.trim();
-  if(!query){factoryLookupStatus.textContent='กรุณากรอกชื่อหรือเลขทะเบียนโรงงาน';return}
-  factoryLookupStatus.textContent='กำลังค้นหาและวิเคราะห์พื้นที่…';
-  if(window.parent===window){factoryLookupStatus.textContent='เปิดหน้าไฟไหม้เพื่อค้นหาจากฐานข้อมูลโรงงาน';return}
-  window.parent.postMessage({type:'dss-factory-search',query},location.origin);
+
+const dssEstates=[{"name":"นิคมอุตสาหกรรมหนองแค","lat":14.3863882,"lng":100.9035767},{"name":"นิคมอุตสาหกรรมลาดกระบัง","lat":13.7582559,"lng":100.7893183},{"name":"นิคมอุตสาหกรรมบางชัน","lat":13.803881,"lng":100.704757},{"name":"นิคมอุตสาหกรรมอัญธานี","lat":13.686102,"lng":100.707712},{"name":"นิคมอุตสาหกรรมนครหลวง","lat":14.4893393,"lng":100.5957211},{"name":"นิคมอุตสาหกรรมบางปะอิน","lat":14.2077497,"lng":100.5896748},{"name":"นิคมอุตสาหกรรมบ้านหว้า","lat":14.246309,"lng":100.610012},{"name":"นิคมอุตสาหกรรมสมุทรสาคร","lat":13.5440008,"lng":100.232856},{"name":"นิคมอุตสาหกรรมสินสาคร","lat":13.54653659,"lng":100.3436175},{"name":"นิคมอุตสาหกรรมราชบุรี","lat":13.63729443,"lng":99.85002164},{"name":"นิคมอุตสาหกรรมมหาราชนคร","lat":13.54202903,"lng":100.1988542},{"name":"นิคมอุตสาหกรรมภาคเหนือ","lat":18.591755,"lng":99.044877},{"name":"นิคมอุตสาหกรรมพิจิตร","lat":16.5753627,"lng":100.1489452},{"name":"นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา","lat":7.0082598,"lng":100.3598057},{"name":"นิคมอุตสาหกรรมสงขลา","lat":6.54184983,"lng":100.4136034},{"name":"นิคมอุตสาหกรรมเวลโกรว์","lat":13.570618,"lng":100.92248},{"name":"นิคมอุตสาหกรรมเกตเวย์ ซิตี้","lat":13.614694,"lng":101.329567},{"name":"นิคมอุตสาหกรรมเอเซีย (สุวรรณภูมิ)","lat":13.6599038,"lng":100.9114833},{"name":"นิคมอุตสาหกรรมทีเอฟดี 1","lat":13.56379732,"lng":100.9949185},{"name":"นิคมอุตสาหกรรมสระแก้ว","lat":13.72389768,"lng":102.5546324},{"name":"นิคมอุตสาหกรรมไฮเทค กบินทร์","lat":13.90617863,"lng":101.6529182},{"name":"นิคมอุตสาหกรรมหลักชัยเมืองยาง","lat":12.72735973,"lng":101.455931},{"name":"นิคมอุตสาหกรรมบางปู","lat":13.551394,"lng":100.668278},{"name":"นิคมอุตสาหกรรมบางพลี","lat":13.565582,"lng":100.794583},{"name":"นิคมอุตสาหกรรมบางปู (เหนือ)","lat":13.551394,"lng":100.668278},{"name":"นิคมอุตสาหกรรมแพรกษา","lat":13.56903519,"lng":100.6528202},{"name":"นิคมอุตสาหกรรมอีสเทิร์นซีบอร์ด (ระยอง)","lat":13.0044858,"lng":101.1626075},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ ชลบุรี 1","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมอมตะซิตี้ ชลบุรี","lat":13.4214885,"lng":101.0041244},{"name":"นิคมอุตสาหกรรมอมตะซิตี้ ระยอง","lat":13.024547,"lng":101.072437},{"name":"นิคมอุตสาหกรรมปิ่นทอง","lat":13.118954,"lng":101.033398},{"name":"นิคมอุตสาหกรรมปิ่นทอง (แหลมฉบัง)","lat":13.12134595,"lng":100.9904306},{"name":"นิคมอุตสาหกรรมปิ่นทอง (โครงการ 3)","lat":13.11034826,"lng":101.0669158},{"name":"นิคมอุตสาหกรรมแหลมฉบัง","lat":13.076561,"lng":100.909175},{"name":"ท่าเรืออุตสาหกรรมมาบตาพุด","lat":12.665224,"lng":101.133049},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ ตะวันออก (มาบตาพุด)","lat":12.7030632,"lng":101.1263119},{"name":"นิคมอุตสาหกรรมผาแดง","lat":12.690742,"lng":101.132469},{"name":"นิคมอุตสาหกรรมเอเชีย","lat":12.716494,"lng":101.105913},{"name":"นิคมอุตสาหกรรมอาร์ ไอ แอล","lat":12.757945,"lng":101.165319},{"name":"นิคมอุตสาหกรรมมาบตาพุด","lat":12.678688,"lng":101.131806},{"name":"นิคมอุตสาหกรรมสมาร์ท ปาร์ค","lat":12.75079527,"lng":101.1226103},{"name":"สำนักงานใหญ่ (วิภาวดี) ตึก A","lat":13.7972954,"lng":100.5599994},{"name":"สำนักงานใหญ่ (วิภาวดี) ตึก B","lat":13.7973442,"lng":100.5592795},{"name":"นิคมอุตสาหกรรมทีเอฟดี 2","lat":13.56379732,"lng":100.9949185},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ ชลบุรี 2","lat":13.095811,"lng":101.113907},{"name":"สำนักงานท่าเรืออุตสาหกรรมมาบตาพุด","lat":12.665224,"lng":101.133049},{"name":"นิคมอุตสาหกรรมซีพีจีซี","lat":12.757945,"lng":101.165319},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ อินดัสเตรียล เอสเตท ระยอง","lat":12.757945,"lng":101.165319},{"name":"นิคมอุตสาหกรรมปิ่นทอง (โครงการ 6)","lat":12.757945,"lng":101.165319},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 4","lat":12.757945,"lng":101.165319},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ ระยอง 36","lat":12.757945,"lng":101.165319},{"name":"นิคมอุตสาหกรรมโรจนะชลบุรี 2 (เขาคันทรง)","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 2","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมปิ่นทอง (โครงการ 5)","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมยามาโตะ อินดัสทรีส์","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 3","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมโรจนะหนองใหญ่ จังหวัดชลบุรี","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมบ้านบึง","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมเอเซีย คลีน ชลบุรี","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมแก่งคอย","lat":14.624646,"lng":101.008107},{"name":"นิคมอุตสาหกรรมปิ่นทอง (โครงการ 4)","lat":13.11034826,"lng":101.0669158},{"name":"นิคมอุตสาหกรรมโรจนะแหลมฉบัง","lat":13.024547,"lng":101.072437},{"name":"นิคมอุตสาหกรรมฉะเชิงเทรา บลูเทค ซิตี้","lat":13.56379732,"lng":100.9949185},{"name":"นิคมอุตสาหกรรมอุดรธานี","lat":16.5753627,"lng":100.1489452},{"name":"นิคมอุตสาหกรรมบ่อทอง 33","lat":13.90617863,"lng":101.6529182},{"name":"นิคมอุตสาหกรรมเอ็กโก ระยอง","lat":12.757945,"lng":101.165319},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 1","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมเวิลด์ (ลำพูน)","lat":18.591755,"lng":99.044877},{"name":"นิคมอุตสาหกรรมเฮอร์มีส","lat":12.9395143470535,"lng":101.041255357775},{"name":"นิคมอุตสาหกรรมแอลพีพี นครสวรรค์","lat":15.6538546700978,"lng":100.582877576763},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 5","lat":12.8445660258234,"lng":101.236671470166},{"name":"นิคมอุตสาหกรรมอมตะซิตี้ ชลบุรี 2","lat":13.2831784287344,"lng":101.222933672217},{"name":"นิคมอุตสาหกรรมอมตะซิตี้ สมาร์ทซิตี้ ชลบุรี","lat":13.4933471967599,"lng":101.052449316628},{"name":"นิคมอุตสาหกรรม304 อินดัสเตรียล ปาร์ค","lat":13.9154531406087,"lng":101.573873553363}];
+const dssService='https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/EPP_2026_V1/FeatureServer/0';
+const lookupResults=document.createElement('div');
+lookupResults.id='factoryLookupResults';
+lookupResults.style.cssText='display:grid;gap:6px;max-height:280px;overflow:auto';
+factoryLookupStatus.after(lookupResults);
+function normalizeLookup(value){return String(value||'').normalize('NFKC').toLowerCase().replace(/[\s\u200b-\u200d]/g,'')}
+function estateLookupKey(value){return normalizeLookup(value).replace(/^(นิคมอุตสาหกรรม|ท่าเรืออุตสาหกรรม)/,'')}
+function dssLookupChoices(){
+  const list=document.getElementById('factoryLookupOptions');
+  dssEstates.forEach(item=>{if(Array.from(list.options).some(option=>option.value===item.name))return;const option=document.createElement('option');option.value=item.name;list.appendChild(option)});
 }
+dssLookupChoices();
+let lookupSequence=0,lookupController;
+async function searchFactory(){
+  const query=factoryLookup.value.trim(),sequence=++lookupSequence;
+  if(lookupController)lookupController.abort();
+  lookupResults.replaceChildren();
+  if(!query){factoryLookupStatus.textContent='กรุณากรอกชื่อนิคมฯ ชื่อผู้ประกอบการ หรือเลขทะเบียนโรงงาน';return}
+  factoryLookupStatus.textContent='กำลังค้นหานิคมฯ และผู้ประกอบการ…';
+  const key=estateLookupKey(query);
+  const estates=key?dssEstates.filter(item=>estateLookupKey(item.name).includes(key)):[];
+  let factories=[],errorText='';
+  const controller=new AbortController();lookupController=controller;
+  const timeout=setTimeout(()=>controller.abort(),15000);
+  try{
+    const escaped=query.replace(/'/g,"''").replace(/[%_]/g,'');
+    const params=new URLSearchParams({where:"mercant_name IS NOT NULL AND (mercant_name LIKE '%"+escaped+"%' OR fid14n LIKE '%"+escaped+"%' OR IEAT LIKE '%"+escaped+"%')",outFields:'*',returnGeometry:'true',outSR:'4326',resultRecordCount:'50',f:'json'});
+    const response=await fetch(dssService+'/query?'+params,{signal:controller.signal});
+    if(!response.ok)throw new Error('HTTP '+response.status);
+    const data=await response.json();if(data.error)throw new Error(data.error.message||'ArcGIS query error');
+    factories=(data.features||[]).filter(feature=>feature.attributes.mercant_name).map(feature=>({type:'factory',feature,name:feature.attributes.mercant_name}));
+    if(data.exceededTransferLimit)errorText='แสดงผู้ประกอบการ 50 รายการแรก กรุณาพิมพ์ชื่อให้เจาะจงขึ้น';
+  }catch(error){if(sequence!==lookupSequence)return;console.warn('DSS lookup',error);errorText='เชื่อมต่อข้อมูลผู้ประกอบการไม่สำเร็จ กรุณาลองค้นหาอีกครั้ง'}
+  finally{clearTimeout(timeout)}
+  if(sequence!==lookupSequence)return;
+  const choices=estates.map(item=>({...item,type:'estate'})).concat(factories);
+  if(!choices.length){factoryLookupStatus.textContent=errorText||'ไม่พบข้อมูล ลองพิมพ์ชื่อบางส่วน เช่น อมตะ หรือชื่อผู้ประกอบการ';return}
+  factoryLookupStatus.textContent='พบ '+choices.length+' รายการ เลือกพื้นที่หรือผู้ประกอบการที่ต้องการ'+(errorText?' · '+errorText:'');
+  choices.forEach(item=>{
+    const button=document.createElement('button');button.type='button';button.className='secondary';button.style.cssText='text-align:left;width:100%;font-size:14px';
+    const attrs=item.feature?.attributes||{};
+    button.textContent=item.type==='estate'?'นิคมฯ · '+item.name:'ผู้ประกอบการ · '+item.name+' · '+(attrs.IEAT||'—')+' · '+(attrs.fid14n||'—');
+    button.addEventListener('click',()=>selectDssLookup(item));lookupResults.appendChild(button);
+  });
+}
+function selectDssLookup(item){
+  const attrs=item.feature?.attributes||{},geometry=item.feature?.geometry;
+  let lat=item.lat,lng=item.lng;
+  if(item.type==='factory'){
+    lat=Number(attrs.latitude);lng=Number(attrs.longitude);
+    if(!(lat>=5&&lat<=22&&lng>=97&&lng<=106)){
+      if(geometry?.rings){const points=geometry.rings[0]||[];lng=points.reduce((sum,p)=>sum+p[0],0)/points.length;lat=points.reduce((sum,p)=>sum+p[1],0)/points.length}
+      else{lat=geometry?.y;lng=geometry?.x}
+    }
+  }
+  if(!Number.isFinite(lat)||!Number.isFinite(lng)||lat<5||lat>22||lng<97||lng>106){factoryLookupStatus.textContent='พบข้อมูล แต่ไม่มีพิกัดที่ถูกต้อง กรุณาเลือกพื้นที่อื่น';return}
+  const nearby={};['hospital','fire','police','hydrant','community','cctv'].forEach(type=>{nearby[type+'Name']=defaults[type+'Name'];nearby[type+'Distance']=defaults[type+'Distance']});
+  state={...state,...nearby,company:item.name,estate:item.type==='estate'?item.name:(attrs.IEAT||'—'),registration:attrs.fid14n||'—',address:item.type==='estate'?item.name:[attrs.FactoryAddressGeneral,attrs.FactoryAddressTambonName,attrs.FactoryAddressDistrictName,attrs.FactoryAddressProvinceName].filter(Boolean).join(' ')||'—',chemical:'—',lat:lat.toFixed(6),lng:lng.toFixed(6)};
+  factoryLookup.value=item.name;render();updateMap();lookupResults.replaceChildren();
+  factoryLookupStatus.textContent='เลือก '+item.name+' และเติมข้อมูลในรายงานแล้ว';
+  if(window.parent!==window&&item.type==='factory')window.parent.postMessage({type:'dss-factory-search',query:attrs.fid14n||item.name},location.origin);
+  loadWeather();
+}
+
 document.getElementById('factoryLookupBtn').addEventListener('click',searchFactory);
 factoryLookup.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();searchFactory()}});
 document.getElementById('bufferKm').addEventListener('change',function(){
@@ -520,7 +579,7 @@ window.addEventListener('message',async event=>{
   if(event.origin!==location.origin||event.source!==window.parent||!event.data)return;
   if(event.data.type==='dss-factory-options'){
     const list=document.getElementById('factoryLookupOptions');list.replaceChildren();
-    event.data.options.forEach(value=>{const option=document.createElement('option');option.value=value;list.appendChild(option)});
+    (event.data.options||[]).forEach(value=>{const option=document.createElement('option');option.value=value;list.appendChild(option)});dssLookupChoices();
   }
   if(event.data.type==='dss-factory-status')factoryLookupStatus.textContent=event.data.text||'';
   if(event.data.type!=='dss-autofill')return;
