@@ -13,10 +13,17 @@
 .status-legend{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0;font-size:13px}.status-key{padding:4px 8px;border-radius:6px}
 .png-export-root *{color:#000}.png-export-root .panel{break-before:auto}
 .map-focus-button{border:0;background:transparent;padding:3px 0;border-radius:3px;text-align:left;text-decoration:underline;text-underline-offset:4px;font:inherit;font-weight:600}.map-focus-button:hover{background:#e0f2fe}.map-focus-button:focus-visible{outline:3px solid #0284c7;outline-offset:3px}#mapSelection{padding:0 18px 12px;margin:0;font-size:14px}
+
+.png-page{width:1240px;height:1754px;padding:40px;background:#fff;display:flex;flex-direction:column;gap:16px;color:#000;font-size:16px;line-height:1.5}
+.png-page header{flex-shrink:0;display:block;padding:0 0 12px;border-bottom:2px solid #dce5ed}.png-page h1{font-size:24px}.png-page header p{margin:4px 0;font-size:15px}
+.png-page-content{flex:1;min-height:0;overflow:hidden}.png-page footer{height:32px;flex-shrink:0;font-size:13px;border-top:1px solid #dce5ed;padding-top:10px}
+.png-page .panel{padding:14px;margin:0 0 12px;border-radius:10px}.png-page h2{font-size:20px;margin:0 0 8px}.png-page h3{font-size:16px;margin:8px 0}.png-page p{margin:7px 0}.png-page small{font-size:12px}.png-page table{font-size:14px}.png-page td,.png-page th{padding:6px 8px;line-height:1.5}.png-page .table-wrap{overflow:visible}
+.png-overview{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:12px}.png-overview .map-panel{height:auto;border-radius:10px}.png-overview .map-panel h2{padding:12px}.png-overview .map-panel p{display:none}.png-overview .map-panel small{padding:6px 12px;order:2}.png-map-image{width:100%;height:300px;object-fit:contain;background:#f5f8fb}.png-page .card strong{font-size:25px}.png-page .status-legend{font-size:12px;margin:6px 0}.png-page .map-focus-button{text-decoration:none;padding:0}.png-response-columns{display:grid;grid-template-columns:1fr 1fr;gap:4px 20px}.png-response-columns ol{margin:5px 0;padding-left:20px}
+.png-preview{width:min(960px,95vw);max-height:92dvh;padding:18px;border:0;border-radius:14px;background:#edf3f8}.png-preview::backdrop{background:#0008}.preview-bar{display:flex;justify-content:space-between;align-items:center;position:sticky;top:-18px;background:#edf3f8;padding:12px 0;z-index:1}.png-preview section{padding:14px;margin:12px 0;background:#fff;border-radius:10px}.png-preview img{display:block;width:100%;height:auto;margin-top:14px;border:1px solid #dce5ed}.png-preview a.action{display:inline-block}
 </style><script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script></head><body><header><h1>รายงาน GIS สถานการณ์น้ำรายนิคมฯ</h1><div class="screen-actions"><a class="action" href="flood-report.html">กลับ dashboard</a><button id="printButton">ส่งออก PNG</button></div></header><main class="workspace"><div class="report"><section class="panel"><h2 id="estateTitle">กำลังโหลดข้อมูลนิคมฯ</h2><p id="dataTime"></p><div id="waterSummary" class="notice">กำลังตรวจสอบข้อมูลสถานี…</div><div class="cards" style="margin-top:14px"><div class="card">ฝนสะสม 24 ชม. สูงสุด<strong id="rainMax">–</strong><small id="rainCount"></small></div><div class="card">สถานีระดับน้ำเข้าเกณฑ์<strong id="waterWatch">–</strong><small id="waterCount"></small></div></div><div class="print-only" id="mapPrint"><p>ภาพแผนที่ยังไม่ได้จัดเตรียม</p></div><h3>สถานีที่ใช้ติดตามในรัศมี 30 กม.</h3><div class="status-legend"><span class="status-key" data-level="normal">ปกติ</span><span class="status-key" data-level="moderate">ฝนปานกลาง</span><span class="status-key" data-level="watch">เฝ้าระวัง</span><span class="status-key" data-level="high">วิกฤต / เสี่ยงสูง</span><span class="status-key" data-level="danger">ล้นตลิ่ง</span><span class="status-key" data-level="unknown">ไม่มีข้อมูล</span></div><div class="table-wrap"><table><thead><tr><th>สถานี</th><th>ค่าตรวจวัด</th><th>สถานะ</th><th>ระยะ กม.</th><th>เวลาตรวจวัด</th></tr></thead><tbody id="stationRows"></tbody></table></div><p><small>การคัดกรองสถานีไม่ยืนยันว่าน้ำท่วมภายในนิคมฯ ระยะเป็นเส้นตรงจากจุดนิคมฯ โปรดตรวจวันที่ภาพ GISTDA และรายงานจากพื้นที่</small></p></section>
 <section class="panel"><h2>ผู้ประกอบการที่ได้รับผลกระทบ</h2><p id="damageSummary">ยังไม่มีจำนวนและรายชื่อโรงงานเสียหายที่ยืนยัน ไม่หมายความว่าไม่มีความเสียหาย</p><div class="input-only"><label>รายชื่อและรายละเอียดผลกระทบที่ได้รับจากพื้นที่ หนึ่งโรงงานต่อหนึ่งบรรทัด<textarea id="damageNames" placeholder="ชื่อโรงงาน — ผลกระทบ — วันที่และเวลายืนยัน"></textarea></label><label><input id="damageConfirmed" type="checkbox"> รายการนี้ได้รับการยืนยันจากพื้นที่แล้ว</label><small>รายการนี้ใช้เฉพาะรายงานที่เปิดอยู่ ไม่บันทึกลงฐานข้อมูลกลาง</small></div><ol id="damageList"></ol></section>
 <section class="panel page-two"><h2>การรับมือและช่วยเหลือ</h2><div id="responseText"></div><div class="input-only"><label>เพิ่มเติมมาตรการหรือสถานะการดำเนินการ<textarea id="responseExtra" placeholder="ระบุรายละเอียดและเวลาอัปเดต"></textarea></label></div><p id="responseExtraPrint"></p></section>
-<section class="panel"><h2>ค้นหาอุปกรณ์สนับสนุนการช่วยเหลือ</h2><p>รายการจากโรงงานใช้ค้นหาทรัพยากรเพื่อประสานขอสนับสนุน ต้องยืนยันความพร้อม จำนวน และผู้ประสานงานก่อนนำไปใช้ ไม่ถือว่าทุกรายการพร้อมให้ยืม</p><div class="input-only screen-actions"><button id="equipmentLoad">โหลดข้อมูลอุปกรณ์</button><label style="margin:0">หรือเลือกไฟล์ JSON <input id="equipmentFile" type="file" accept=".json,application/json"></label></div><div class="input-only"><input id="equipmentSearch" type="text" placeholder="ค้นหาชื่อโรงงาน หรืออุปกรณ์น้ำท่วมที่ผ่านการกรอง"><label><select id="equipmentFilter"><option value="near" selected>โรงงานที่มีพิกัดภายใน 30 กม.</option><option value="all">อุปกรณ์น้ำท่วมจากโรงงานทุกพื้นที่</option></select></label></div><p id="equipmentStatus">ยังไม่ได้โหลดข้อมูลอุปกรณ์</p><div id="equipmentRows"></div><div class="screen-actions input-only"><button id="equipmentMore" hidden>แสดงเพิ่มเติม</button></div><small>รายการที่ไม่มีพิกัดจะไม่ถูกนำมาคำนวณระยะ รายงานพิมพ์แสดงรายการอุปกรณ์ที่แสดงอยู่เท่านั้น หากมีรายชื่อจำนวนมากรายงานอาจเกิน 2 หน้า</small></section></div><section class="map-panel"><h2>แผนที่เฝ้าระวังนิคมอุตสาหกรรม</h2><p id="mapSelection" aria-live="polite">คลิกชื่อสถานีหรือโรงงานเพื่อดูตำแหน่งบนแผนที่</p><iframe id="reportMap" title="แผนที่เฝ้าระวังรายนิคมฯ" src="flood-webmap.html?v=20260930-click-focus"></iframe><small>แผนที่ประกอบการตรวจสอบสถานการณ์ · รายชื่อผู้ประกอบการที่เสียหายต้องยืนยันจากพื้นที่</small></section></main>
+<section class="panel"><h2>ค้นหาอุปกรณ์สนับสนุนการช่วยเหลือ</h2><p>รายการจากโรงงานใช้ค้นหาทรัพยากรเพื่อประสานขอสนับสนุน ต้องยืนยันความพร้อม จำนวน และผู้ประสานงานก่อนนำไปใช้ ไม่ถือว่าทุกรายการพร้อมให้ยืม</p><div class="input-only screen-actions"><button id="equipmentLoad">โหลดข้อมูลอุปกรณ์</button><label style="margin:0">หรือเลือกไฟล์ JSON <input id="equipmentFile" type="file" accept=".json,application/json"></label></div><div class="input-only"><input id="equipmentSearch" type="text" placeholder="ค้นหาชื่อโรงงาน หรืออุปกรณ์น้ำท่วมที่ผ่านการกรอง"><label><select id="equipmentFilter"><option value="near" selected>โรงงานที่มีพิกัดภายใน 30 กม.</option><option value="all">อุปกรณ์น้ำท่วมจากโรงงานทุกพื้นที่</option></select></label></div><p id="equipmentStatus">ยังไม่ได้โหลดข้อมูลอุปกรณ์</p><div id="equipmentRows"></div><div class="screen-actions input-only"><button id="equipmentMore" hidden>แสดงเพิ่มเติม</button></div><small>รายการที่ไม่มีพิกัดจะไม่ถูกนำมาคำนวณระยะ รายงานพิมพ์แสดงรายการอุปกรณ์ที่แสดงอยู่เท่านั้น หากมีรายชื่อจำนวนมากรายงานอาจเกิน 2 หน้า</small></section></div><section class="map-panel"><h2>แผนที่เฝ้าระวังนิคมอุตสาหกรรม</h2><p id="mapSelection" aria-live="polite">คลิกชื่อสถานีหรือโรงงานเพื่อดูตำแหน่งบนแผนที่</p><iframe id="reportMap" title="แผนที่เฝ้าระวังรายนิคมฯ" src="flood-webmap.html?v=20260930-event-time"></iframe><small>แผนที่ประกอบการตรวจสอบสถานการณ์ · รายชื่อผู้ประกอบการที่เสียหายต้องยืนยันจากพื้นที่</small></section></main>
 <script>
 (()=>{'use strict';const $=id=>document.getElementById(id),esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),estateId=new URLSearchParams(location.search).get('estate')||'29';let estate=null,equipment=[],shown=10;
 const source='./data/equipment_latest.json';let equipmentMeta=null;
@@ -42,33 +49,85 @@ async function mapSnapshot(){
   window.addEventListener('message',receive);$('reportMap').contentWindow?.postMessage({type:'flood-map-snapshot',id},location.origin);
  });
 }
+
+function cleanExport(node){const copy=node.cloneNode(true);copy.querySelectorAll('.screen-actions,.input-only,.no-print,.print-only').forEach(e=>e.remove());copy.querySelectorAll('[id]').forEach(e=>e.removeAttribute('id'));return copy}
+function exportPreview(images){
+ let dialog=document.getElementById('pngPreview');if(dialog)dialog.remove();
+ dialog=document.createElement('dialog');dialog.id='pngPreview';dialog.className='png-preview';
+ const bar=document.createElement('div');bar.className='preview-bar';const title=document.createElement('strong');title.textContent='รายงาน PNG · '+images.length+' หน้า';const close=document.createElement('button');close.textContent='ปิด';close.onclick=()=>dialog.close();bar.append(title,close);dialog.append(bar);
+ images.forEach((url,i)=>{const card=document.createElement('section'),link=document.createElement('a'),img=document.createElement('img');link.className='action';link.href=url;link.download='flood-gis-report-'+estateId+'-page-'+(i+1)+'.png';link.textContent='ดาวน์โหลด PNG หน้า '+(i+1);img.src=url;img.alt='ตัวอย่างรายงานหน้า '+(i+1);card.append(link,img);dialog.append(card)});
+ dialog.addEventListener('close',()=>{images.forEach(url=>URL.revokeObjectURL(url));dialog.remove()},{once:true});document.body.append(dialog);dialog.showModal();
+}
 $('printButton').onclick=async()=>{
- const button=$('printButton');button.disabled=true;let exportRoot=null;
+ const button=$('printButton');button.disabled=true;let exportRoot=null;const imageUrls=[];
  try{
   if(typeof html2canvas!=='function')throw Error('โหลดเครื่องมือส่งออกภาพไม่สำเร็จ กรุณารีเฟรชหน้า');
   button.textContent='กำลังเตรียมแผนที่…';let snapshot=null,mapError='';
   try{snapshot=await mapSnapshot()}catch(error){mapError=error.message}
-  button.textContent='กำลังสร้าง PNG…';
-  exportRoot=document.createElement('div');exportRoot.className='png-export-root';
-  exportRoot.style.cssText='position:absolute;left:-100000px;top:0;width:1440px;background:#f5f8fb;padding:20px;z-index:-1';
-  const header=document.querySelector('header').cloneNode(true),workspace=document.querySelector('.workspace').cloneNode(true);
-  exportRoot.appendChild(header);exportRoot.appendChild(workspace);
-  exportRoot.querySelectorAll('.screen-actions,.input-only,.no-print,.print-only').forEach(e=>e.remove());
-  workspace.style.cssText='display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);align-items:start;height:auto;padding:20px 0;gap:20px';
-  const report=workspace.querySelector('.report');report.style.cssText='overflow:visible;height:auto;padding:0';
-  const mapPanel=workspace.querySelector('.map-panel');mapPanel.style.cssText='display:flex;flex-direction:column;height:auto;min-height:0';
-  const frame=mapPanel.querySelector('iframe');
-  if(snapshot){const img=document.createElement('img');img.src=snapshot;img.alt='ภาพแผนที่ ณ เวลาส่งออก';img.style.cssText='display:block;width:100%;height:auto';frame.replaceWith(img);await img.decode()}
-  else{const note=document.createElement('p');note.textContent='ไม่สามารถแนบภาพแผนที่ได้: '+mapError;note.style.padding='18px';frame.replaceWith(note)}
-  exportRoot.querySelectorAll('.table-wrap').forEach(e=>e.style.overflow='visible');
-  document.body.appendChild(exportRoot);
+  exportRoot=document.createElement('div');exportRoot.className='png-pages-root';exportRoot.style.cssText='position:absolute;left:-100000px;top:0;width:1240px;background:white';
+  document.body.append(exportRoot);
   if(document.fonts?.ready)await Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,5000))]);
-  const height=Math.ceil(exportRoot.scrollHeight);if(height>16000)throw Error('รายงานยาวเกินขนาดภาพ กรุณาลดรายการอุปกรณ์ที่แสดงแล้วส่งออกอีกครั้ง');
-  const scale=height>8000?1:1.5;
-  const canvas=await html2canvas(exportRoot,{backgroundColor:'#f5f8fb',scale,useCORS:true,logging:false,width:1440,height,windowWidth:1440,windowHeight:height,scrollX:0,scrollY:0});
-  const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));if(!blob)throw Error('สร้างไฟล์ PNG ไม่สำเร็จ');
-  const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='flood-gis-report-'+estateId+'.png';document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);
- }catch(error){alert('ส่งออก PNG ไม่สำเร็จ: '+error.message)}
+  const pages=[];let content;
+  function newPage(){
+   const page=document.createElement('section');page.className='png-page';
+   const header=document.createElement('header');const title=document.createElement('h1');title.textContent='รายงาน GIS สถานการณ์น้ำ · '+($('estateTitle').textContent||'');const date=document.createElement('p');date.textContent=$('dataTime').textContent;header.append(title,date);
+   content=document.createElement('div');content.className='png-page-content';const footer=document.createElement('footer');page.append(header,content,footer);exportRoot.append(page);pages.push(page);
+  }
+  function fits(){return content.scrollHeight<=content.clientHeight}
+  function appendBlock(block){
+   content.append(block);
+   if(fits())return;
+   block.remove();if(content.children.length)newPage();content.append(block);
+   if(fits())return;
+   block.remove();
+   // Split tables at row boundaries and repeat column headings on every page.
+   const table=block.querySelector('table');
+   if(table&&table.tBodies[0]){
+    const rows=Array.from(table.tBodies[0].rows);let fragment;
+    const nextTable=()=>{fragment=block.cloneNode(true);fragment.querySelector('tbody').replaceChildren();content.append(fragment)};
+    nextTable();
+    rows.forEach(row=>{let body=fragment.querySelector('tbody');body.append(row.cloneNode(true));if(!fits()){body.lastElementChild.remove();if(!body.children.length)fragment.remove();newPage();nextTable();fragment.querySelector('tbody').append(row.cloneNode(true));if(!fits())throw Error('รายการข้อมูลหนึ่งแถวยาวเกินหน้า กรุณาย่อรายละเอียดก่อนส่งออก')}});
+    return;
+   }
+   // Keep prose and list items readable instead of shrinking the entire report.
+   const children=Array.from(block.children);let fragment=block.cloneNode(false);content.append(fragment);
+   for(const child of children){fragment.append(child.cloneNode(true));if(!fits()){fragment.lastElementChild.remove();if(!fragment.children.length)fragment.remove();newPage();fragment=block.cloneNode(false);content.append(fragment);fragment.append(child.cloneNode(true));if(!fits())throw Error('รายละเอียดส่วนหนึ่งยาวเกินหน้า กรุณาย่อข้อความก่อนส่งออก')}}
+  }
+  newPage();
+  const panels=document.querySelectorAll('.report > .panel'),overview=cleanExport(panels[0]);
+  const stationTitle=overview.querySelector('h3'),legend=overview.querySelector('.status-legend'),stationTable=overview.querySelector('.table-wrap'),stationNote=overview.lastElementChild;
+  const stationPanel=document.createElement('section');stationPanel.className='panel';
+  [stationTitle,legend,stationTable,stationNote].forEach(node=>{if(node)stationPanel.append(node)});
+  const top=document.createElement('div');top.className='png-overview';top.append(overview);
+  const map=cleanExport(document.querySelector('.map-panel'));map.querySelector('iframe')?.remove();map.querySelector('#mapSelection')?.remove();
+  if(snapshot){const img=document.createElement('img');img.src=snapshot;img.alt='ภาพแผนที่ ณ เวลาส่งออก';img.className='png-map-image';map.append(img);await img.decode()}
+  else{const note=document.createElement('p');note.textContent='ไม่สามารถแนบภาพแผนที่ได้: '+mapError;map.append(note)}
+  top.append(map);appendBlock(top);appendBlock(stationPanel);
+  appendBlock(cleanExport(panels[1]));
+  const response=cleanExport(panels[2]),responseBody=response.querySelector('div');if(responseBody){
+   const columns=document.createElement('div');columns.className='png-response-columns';let group=null;
+   Array.from(responseBody.children).forEach(child=>{if(child.tagName==='H3'){group=document.createElement('div');columns.append(group)}if(group&&child.tagName!=='P')group.append(child);else if(child.tagName==='P')response.append(child)});
+   responseBody.replaceWith(columns);
+  }appendBlock(response);
+  if(equipment.length){
+   const equipmentPanel=document.createElement('section');equipmentPanel.className='panel';
+   const heading=document.createElement('h2');heading.textContent='อุปกรณ์สนับสนุนการช่วยเหลือ';const info=document.createElement('p');info.textContent=$('equipmentStatus').textContent+' · แสดงเฉพาะรายการที่เปิดอยู่';equipmentPanel.append(heading,info);
+   const table=document.createElement('table');table.innerHTML='<thead><tr><th style="width:29%">โรงงาน / พื้นที่ / ระยะ</th><th>อุปกรณ์</th><th>จำนวน</th><th>รายละเอียด</th><th>ใช้สนับสนุน</th></tr></thead><tbody></tbody>';const body=table.querySelector('tbody');
+   document.querySelectorAll('#equipmentRows .equipment-item').forEach(item=>{
+    const company=item.querySelector('h3').textContent,details=item.querySelector('p').textContent;
+    item.querySelectorAll('tbody tr').forEach(row=>{const tr=document.createElement('tr'),factory=document.createElement('td'),name=document.createElement('strong'),note=document.createElement('small');name.textContent=company;note.textContent=details;factory.append(name,document.createElement('br'),note);tr.append(factory);Array.from(row.cells).forEach(cell=>tr.append(cell.cloneNode(true)));body.append(tr)});
+   });
+   equipmentPanel.append(table);const note=document.createElement('p');note.textContent='ข้อมูลอุปกรณ์ที่โรงงานรายงาน ยังไม่ยืนยันความพร้อมให้ยืมหรือเคลื่อนย้าย ต้องประสานโรงงานก่อนขอใช้';equipmentPanel.append(note);
+   if(body.children.length){newPage();appendBlock(equipmentPanel)}
+  }
+  pages.forEach((page,i)=>page.querySelector('footer').textContent='หน้า '+(i+1)+' / '+pages.length+' · ข้อมูลสถานีและภาพแผนที่ไม่ใช่การยืนยันน้ำท่วมภายในนิคมฯ');
+  for(let i=0;i<pages.length;i++){
+   button.textContent='กำลังสร้าง PNG '+(i+1)+' / '+pages.length;
+   const canvas=await html2canvas(pages[i],{backgroundColor:'#ffffff',scale:1.5,useCORS:true,logging:false,width:1240,height:1754,windowWidth:1240,windowHeight:1754,scrollX:0,scrollY:0});
+   const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));if(!blob)throw Error('สร้างไฟล์ PNG ไม่สำเร็จ');imageUrls.push(URL.createObjectURL(blob));
+  }
+  exportPreview(imageUrls);
+ }catch(error){imageUrls.forEach(url=>URL.revokeObjectURL(url));alert('ส่งออก PNG ไม่สำเร็จ: '+error.message)}
  finally{exportRoot?.remove();button.disabled=false;button.textContent='ส่งออก PNG'}
 };
 function damage(){const names=$('damageNames').value.split(/\n/).map(s=>s.trim()).filter(Boolean),confirmed=$('damageConfirmed').checked;$('damageSummary').textContent=names.length?(confirmed?'รายการผลกระทบที่ผู้จัดทำระบุว่ายืนยันแล้ว '+names.length+' รายการ':'รายการจากผู้จัดทำ '+names.length+' รายการ ยังไม่ยืนยัน จึงยังไม่สรุปจำนวนโรงงานเสียหาย'):'ยังไม่มีจำนวนและรายชื่อโรงงานเสียหายที่ยืนยัน ไม่หมายความว่าไม่มีความเสียหาย';$('damageList').innerHTML=names.map(s=>'<li>'+esc(s)+'</li>').join('')}$('damageNames').oninput=damage;$('damageConfirmed').onchange=damage;$('responseExtra').oninput=()=>{$('responseExtraPrint').textContent=$('responseExtra').value};
