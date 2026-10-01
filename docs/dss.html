@@ -1190,8 +1190,28 @@ const enabled=/สารเคมี/.test(state.event||'');editor.hidden=!enabl
 <script id="dss-dispersion-import">
 (function(){
  const box=document.createElement('section');box.id='dispersionEditor';box.className='group';
- box.innerHTML='<h3>ผลแบบจำลองการกระจายตัว</h3><p class="chemical-mode-help">นำเข้าไฟล์ KML หรือ GeoJSON ที่มีพื้นที่ผลแบบจำลองและพิกัดจริง เว็บไซต์แสดงผลที่นำเข้า ไม่ได้คำนวณการแพร่กระจายเอง</p><div class="field"><label for="dispersionFile">ไฟล์ผลแบบจำลอง (.kml / .geojson / .json)</label><input id="dispersionFile" type="file" accept=".kml,.geojson,.json"></div><div class="field"><label for="dispersionChemical">สารที่ใช้ในแบบจำลอง</label><input id="dispersionChemical" data-key="dispersionChemical"></div><div class="field"><label for="dispersionModel">ชื่อแบบจำลอง / รุ่น</label><input id="dispersionModel" data-key="dispersionModel"></div><div class="field"><label for="dispersionTime">เวลา / รอบผลแบบจำลอง</label><input id="dispersionTime" data-key="dispersionTime" placeholder="ระบุเวลาและเขตเวลา"></div><div class="field"><label for="dispersionScenario">ข้อมูลสถานการณ์ / อัตรารั่ว / สภาพอากาศที่ใช้</label><textarea id="dispersionScenario" data-key="dispersionScenario"></textarea></div><div class="mini-actions"><button type="button" id="dispersionZoom" class="secondary">ซูมผลแบบจำลอง</button><button type="button" id="dispersionClear" class="secondary">ล้างผลแบบจำลอง</button></div><p id="dispersionStatus" class="hint" role="status"></p>';
+ box.innerHTML='<h3>ตำแหน่งเหตุสารเคมีรั่วไหล</h3><div class="field"><label for="leakPasteCoordinates">วางละติจูด, ลองจิจูด</label><input id="leakPasteCoordinates" placeholder="12.687296, 101.084995"><p class="hint">ใช้พิกัดระบุจุดเกิดเหตุ ไม่ใช่ผลคำนวณการกระจายตัว</p><button type="button" id="leakApplyCoordinates" class="secondary">ใช้พิกัดนี้</button><p id="leakCoordinatesStatus" class="hint" role="status"></p></div><details><summary>เพิ่มเติม: นำเข้าผลแบบจำลองที่คำนวณไว้แล้ว</summary><p class="chemical-mode-help">นำเข้าไฟล์ KML หรือ GeoJSON ที่มีพื้นที่ผลแบบจำลองและพิกัดจริง เว็บไซต์แสดงผลที่นำเข้า ไม่ได้คำนวณการแพร่กระจายเอง</p><div class="field"><label for="dispersionFile">ไฟล์ผลแบบจำลอง (.kml / .geojson / .json)</label><input id="dispersionFile" type="file" accept=".kml,.geojson,.json"></div><div class="field"><label for="dispersionChemical">สารที่ใช้ในแบบจำลอง</label><input id="dispersionChemical" data-key="dispersionChemical"></div><div class="field"><label for="dispersionModel">ชื่อแบบจำลอง / รุ่น</label><input id="dispersionModel" data-key="dispersionModel"></div><div class="field"><label for="dispersionTime">เวลา / รอบผลแบบจำลอง</label><input id="dispersionTime" data-key="dispersionTime" placeholder="ระบุเวลาและเขตเวลา"></div><div class="field"><label for="dispersionScenario">ข้อมูลสถานการณ์ / อัตรารั่ว / สภาพอากาศที่ใช้</label><textarea id="dispersionScenario" data-key="dispersionScenario"></textarea></div><div class="mini-actions"><button type="button" id="dispersionZoom" class="secondary">ซูมผลแบบจำลอง</button><button type="button" id="dispersionClear" class="secondary">ล้างผลแบบจำลอง</button></div><p id="dispersionStatus" class="hint" role="status"></p></details>';
  document.getElementById('chemicalIncidentEditor').after(box);
+ function parsePasteCoordinates(value){
+  const parts=String(value).trim().replace(/[()]/g,'').split(/[,;\s]+/).filter(Boolean);
+  if(parts.length!==2)throw Error('วางละติจูดและลองจิจูด 2 ค่า เช่น 12.687296, 101.084995');
+  const lat=Number(parts[0]),lng=Number(parts[1]);
+  if(!Number.isFinite(lat)||!Number.isFinite(lng)||lat<5||lat>22||lng<97||lng>106)throw Error('กรุณาวางละติจูดก่อนลองจิจูด และใช้พิกัดในประเทศไทย');
+  return {lat,lng};
+ }
+ window.dssParsePastedCoordinates=parsePasteCoordinates;
+ document.getElementById('leakApplyCoordinates').onclick=()=>{
+  const feedback=document.getElementById('leakCoordinatesStatus');
+  try{
+   const p=parsePasteCoordinates(document.getElementById('leakPasteCoordinates').value);
+   weatherSequence++;nearbySequence++;state.lat=p.lat.toFixed(6);state.lng=p.lng.toFixed(6);state.positionConfirmed=false;
+   state.supportLocations=[];['temp','humidity','windSpeed','windDir'].forEach(k=>state[k]='—');state.weather='รอดึงข้อมูลตำแหน่งใหม่';state.weatherTime='';
+   render();updateMap();window.dssSyncSupportMarkers?.();loadDssNearby(p.lat,p.lng);loadWeather();
+   feedback.textContent='ใช้พิกัด '+state.lat+', '+state.lng+' แล้ว กรุณาตรวจสอบและยืนยันตำแหน่งบนแผนที่';
+   mapNode.scrollIntoView({behavior:'smooth',block:'center'});
+  }catch(error){feedback.textContent=error.message}
+ };
+
  const output=document.createElement('section');output.id='dispersionReport';
  output.innerHTML='<div class="section-title">ผลแบบจำลองการกระจายตัวที่นำเข้า</div><div class="company"><div class="row"><b>สาร / แบบจำลอง</b><span id="dispersionReportModel"></span></div><div class="row"><b>เวลา / สถานการณ์</b><span id="dispersionReportScenario"></span></div></div><table class="dispersion-table"><thead><tr><th>พื้นที่ / เกณฑ์จากไฟล์</th><th>ข้อมูลสนับสนุนที่อยู่ในพื้นที่</th></tr></thead><tbody id="dispersionRows"></tbody></table><p class="hint" id="dispersionReportNote"></p>';
  document.querySelector('.map-weather').after(output);
