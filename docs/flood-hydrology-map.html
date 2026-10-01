@@ -106,7 +106,7 @@ function vectorStart(){
   vector.on('click','points',e=>{const p=e.features[0];new maplibregl.Popup({maxWidth:'330px'}).setLngLat(p.geometry.coordinates).setHTML(content(p.properties,p.properties.kind)).addTo(vector)});
   vector.on('mouseenter','points',()=>vector.getCanvas().style.cursor='pointer');vector.on('mouseleave','points',()=>vector.getCanvas().style.cursor='');
   ready=true;render();if(pending){focus(pending);pending=null}parent.postMessage({type:'flood-water-ready'},location.origin);
-  if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let phase=0;animation=setInterval(()=>{if(vector?.getLayer('overflow-alert'))vector.setPaintProperty('overflow-alert','circle-stroke-opacity',phase%2?.15:1);if(!document.hidden&&vector?.getLayer('river-flow')&&flags.flow)vector.setPaintProperty('river-flow','line-dasharray',phase++%2?[1,4]:[0,2,1,2])},500)}
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let phase=0;animation=setInterval(()=>{phase++;if(vector?.getLayer('overflow-alert'))vector.setPaintProperty('overflow-alert','circle-stroke-opacity',phase%2?.15:1);if(!document.hidden&&vector?.getLayer('river-flow')&&flags.flow)vector.setPaintProperty('river-flow','line-dasharray',phase%2?[1,4]:[0,2,1,2])},500)}
   if(gistda)addGistda();
  });
  }catch(e){rasterStart()}
