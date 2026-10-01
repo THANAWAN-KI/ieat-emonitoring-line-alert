@@ -854,8 +854,9 @@ async function downloadReportPng(){
   try{
     if(!validPoint())throw Error('กรุณายืนยันพิกัดที่ถูกต้อง');if(!state.positionConfirmed)throw Error('กรุณายืนยันตำแหน่งเกิดเหตุก่อนดาวน์โหลด');
     pngBtn.disabled=true;let bufferExportImage=null;
+    const sceneExportImage=window.dss3DActive&&window.dssCapture3D?await window.dssCapture3D():null;
     const liveMapReady=typeof window.dssWaitMapReady==='function';
-    if(liveMapReady){await window.dssWaitMapReady();if(window.dssExportBufferOverlay)bufferExportImage=window.dssExportBufferOverlay()}
+    if(sceneExportImage){}else if(liveMapReady){await window.dssWaitMapReady();if(window.dssExportBufferOverlay)bufferExportImage=window.dssExportBufferOverlay()}
     else{
       await Promise.race([mapLoadPromise,new Promise(resolve=>setTimeout(resolve,8000))]);
       if(!mapImage.complete||!mapImage.naturalWidth)throw new Error('ภาพแผนที่ยังไม่พร้อม');
@@ -871,6 +872,7 @@ async function downloadReportPng(){
         clonedDocument.querySelectorAll('#supportList,[data-export-exclude]').forEach(element=>element.remove());
         const clonedMap=clonedDocument.querySelector('#report #map');
         if(!clonedMap)return;
+        if(sceneExportImage){clonedMap.replaceChildren();const img=clonedDocument.createElement('img');img.src=sceneExportImage;img.style.cssText='display:block;width:100%;height:100%;object-fit:contain;visibility:visible';clonedMap.append(img);return;}
         const liveMap=clonedMap.querySelector('#dssLiveMap');
         if(liveMap){
           if(bufferExportImage){
@@ -1130,5 +1132,95 @@ html body #report .dss-support-symbol{box-shadow:0 0 0 1px #fff,0 1px 3px #0004!
 <style id="dss-vivid-buffer-labels">
 html body #report .dss-buffer-distance span{border-width:2px!important;background:#fff!important;font-weight:700!important;font-size:13px!important;box-shadow:0 1px 4px #0005!important}
 </style>
+
+<style id="dss-three-dimensional">
+#dssSceneMap{position:absolute!important;inset:0!important;z-index:5!important;display:none!important;visibility:visible!important}
+#map.dss-show-3d #dssSceneMap{display:block!important}
+#map.dss-show-3d #dssLiveMap{visibility:hidden!important}
+.dss-map-modes{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin:8px 0}
+.dss-map-modes button{padding:6px 12px;font-size:13px}
+.dss-map-modes button[aria-pressed=true]{background:#511378;color:#fff}
+#dssSceneStatus{font-size:12px;color:#615267}
+</style>
+<script id="dss-scene-workflow">
+(function(){
+ let sdkPromise,sceneView,graphics,buildings,modules;
+ window.dss3DActive=false;
+ const sceneNode=document.createElement('div');sceneNode.id='dssSceneMap';mapNode.append(sceneNode);
+ const toolbar=document.createElement('div');toolbar.className='dss-map-modes';toolbar.setAttribute('data-export-exclude','');
+ toolbar.innerHTML='<button type="button" id="dssMode2D" class="secondary" aria-pressed="true">2D</button><button type="button" id="dssMode3D" class="secondary" aria-pressed="false">3D</button><button type="button" id="dssSceneHome" class="secondary">มุมมองจุดเกิดเหตุ</button><label class="hint"><input type="checkbox" id="dssBuildings" checked> อาคาร 3D</label><span id="dssSceneStatus" role="status">3D: หมุนและเอียงดูพื้นที่ · อาคารแสดงตามข้อมูลที่มี</span>';
+ document.querySelector('.mapbox').before(toolbar);
+ const status=document.getElementById('dssSceneStatus');
+ function loadSdk(){
+  if(sdkPromise)return sdkPromise;
+  sdkPromise=new Promise((resolve,reject)=>{
+   const css=document.createElement('link');css.rel='stylesheet';css.href='https://js.arcgis.com/4.34/esri/themes/light/main.css';document.head.append(css);
+   const script=document.createElement('script');script.src='https://js.arcgis.com/4.34/';
+   const timer=setTimeout(()=>reject(Error('โหลดระบบ 3D ไม่สำเร็จ กรุณาลองใหม่')),20000);
+   script.onerror=()=>{clearTimeout(timer);reject(Error('ไม่สามารถโหลด ArcGIS 3D'))};
+   script.onload=()=>{window.require(['esri/Map','esri/Basemap','esri/layers/TileLayer','esri/views/SceneView','esri/layers/GraphicsLayer','esri/layers/SceneLayer','esri/Graphic','esri/geometry/Circle'],(...args)=>{clearTimeout(timer);resolve(args)},error=>{clearTimeout(timer);reject(error)})};
+   document.head.append(script);
+  }).catch(error=>{sdkPromise=null;throw error});return sdkPromise;
+ }
+ function point(lat,lng){return {type:'point',latitude:lat,longitude:lng,spatialReference:{wkid:4326}}}
+ function redraw(){
+  if(!sceneView||!validPoint())return;
+  const Graphic=modules[6],Circle=modules[7],lat=Number(state.lat),lng=Number(state.lng);
+  graphics.removeAll();
+  const radii=getBufferRadii(),colors=getBufferColors();
+  radii.slice().reverse().forEach(km=>{const i=radii.indexOf(km),geometry=new Circle({center:[lng,lat],radius:km*1000,geodesic:true,numberOfPoints:180});
+   graphics.add(new Graphic({geometry,symbol:{type:'simple-fill',color:colors[i]+'24',outline:{color:colors[i],width:3}}}));
+   const p=bufferLabelPoint(lat,lng,km);
+   graphics.add(new Graphic({geometry:point(p[0],p[1]),symbol:{type:'text',text:km+' กม.',color:colors[i],haloColor:'white',haloSize:2,font:{size:11,weight:'bold'}}}));
+  });
+  (state.supportLocations||[]).forEach(item=>{
+   const type=supportMapTypes()[item.type];if(!type)return;
+   graphics.add(new Graphic({geometry:point(item.lat,item.lng),attributes:{name:item.name},symbol:{type:'point-3d',symbolLayers:[{type:'icon',size:18,resource:{href:dssStandardIconPng[item.type]}}]},popupTemplate:{title:'{name}',content:type.label+' · '+item.distance.toFixed(2)+' กม. จากจุดเกิดเหตุ'}}));
+  });
+  graphics.add(new Graphic({geometry:point(lat,lng),symbol:{type:'simple-marker',style:'diamond',color:'#681a98',size:14,outline:{color:'white',width:2}}}));
+  graphics.add(new Graphic({geometry:point(lat,lng),symbol:{type:'text',text:state.company||'จุดเกิดเหตุ',color:'#511378',haloColor:'white',haloSize:2,yoffset:20,font:{size:11,weight:'bold'}}}));
+ }
+ function home(){
+  if(sceneView&&validPoint())return sceneView.goTo({target:point(Number(state.lat),Number(state.lng)),zoom:Math.max(11,16-Math.log2(Math.max(...getBufferRadii()))),tilt:60,heading:15},{animate:false});
+ }
+ async function initialize(){
+  if(sceneView)return;
+  modules=await loadSdk();const [Map,Basemap,TileLayer,SceneView,GraphicsLayer,SceneLayer]=modules;
+  graphics=new GraphicsLayer({elevationInfo:{mode:'on-the-ground'}});
+  buildings=new SceneLayer({url:'https://basemaps3d.arcgis.com/arcgis/rest/services/OpenStreetMap3D_Buildings_v1/SceneServer/layers/0',title:'อาคาร OpenStreetMap 3D',visible:document.getElementById('dssBuildings').checked,popupEnabled:false});
+  const map=new Map({basemap:new Basemap({baseLayers:[new TileLayer({url:'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer'})]}),ground:'world-elevation',layers:[buildings,graphics]});
+  sceneView=new SceneView({container:sceneNode,map,qualityProfile:'medium',center:[Number(state.lng),Number(state.lat)],zoom:14,environment:{lighting:{directShadowsEnabled:true}}});
+  await Promise.race([sceneView.when(),new Promise((_,reject)=>setTimeout(()=>reject(Error('โหลดแผนที่ 3D เกินเวลา')),25000))]);redraw();await home();
+  buildings.load().catch(()=>{status.textContent='ภูมิประเทศ 3D พร้อม · ชั้นอาคารโหลดไม่ได้ ใช้ข้อมูลพื้นที่และวงรัศมีได้'});
+ }
+ function setMode(active){
+  window.dss3DActive=active;mapNode.classList.toggle('dss-show-3d',active);
+  document.getElementById('dssMode2D').setAttribute('aria-pressed',String(!active));
+  document.getElementById('dssMode3D').setAttribute('aria-pressed',String(active));
+ }
+ document.getElementById('dssMode3D').onclick=async function(){
+  this.disabled=true;setMode(true);status.textContent='กำลังโหลดแผนที่ 3D…';
+  try{await initialize();status.textContent='3D พร้อม · คลิกขวาลากเพื่อหมุน/เอียง · อาคารแสดงเฉพาะพื้นที่ที่มีข้อมูล'}
+  catch(error){sceneView?.destroy();sceneView=null;setMode(false);status.textContent='เปิด 3D ไม่สำเร็จ: '+error.message+' · ใช้แผนที่ 2D ได้ตามปกติ'}
+  finally{this.disabled=false}
+ };
+ document.getElementById('dssMode2D').onclick=()=>setMode(false);
+ document.getElementById('dssSceneHome').onclick=()=>{if(window.dss3DActive)home();else window.dssZoomIncident?.()};
+ document.getElementById('dssBuildings').onchange=e=>{if(buildings)buildings.visible=e.target.checked};
+ const sync=window.dssSyncLiveMap;window.dssSyncLiveMap=function(...args){sync?.(...args);redraw();if(window.dss3DActive)home()};
+ const supports=window.dssSyncSupportMarkers;window.dssSyncSupportMarkers=function(...args){supports?.(...args);redraw()};
+ const zoomSupport=window.dssZoomSupport;window.dssZoomSupport=function(type,id){
+  if(!window.dss3DActive)return zoomSupport?.(type,id);
+  const item=(state.supportLocations||[]).filter(p=>p.type===type&&(id===undefined||p.id===id)).sort((a,b)=>a.distance-b.distance)[0];
+  if(item)sceneView.goTo({target:point(item.lat,item.lng),zoom:17,tilt:60},{animate:false});
+ };
+ window.dssCapture3D=async function(){
+  if(!sceneView||!window.dss3DActive)throw Error('แผนที่ 3D ยังไม่พร้อม');
+  await sceneView.when();
+  await new Promise((resolve,reject)=>{const begin=Date.now();function check(){if(!sceneView.updating)return resolve();if(Date.now()-begin>15000)return reject(Error('แผนที่ 3D ยังโหลดไม่ครบ กรุณาลองใหม่'));setTimeout(check,150)}check()});
+  return (await sceneView.takeScreenshot({width:sceneView.width*2,height:sceneView.height*2,format:'png'})).dataUrl;
+ };
+})();
+</script>
 </body></html>
 
