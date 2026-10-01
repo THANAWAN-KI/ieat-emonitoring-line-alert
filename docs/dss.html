@@ -187,7 +187,7 @@ function renderStaticSupportPoints(lat,lng,spanLat,spanLng){
 
 function getBufferRadii(){return (state.bufferRadii||[1,3,5]).filter((_,i)=>(state.bufferEnabled||[true,true,true])[i]).map(Number).sort((a,b)=>a-b)}
 function getBufferOpacities(){const palette=[1,1,1];return getBufferRadii().map(km=>palette[(state.bufferRadii||[1,3,5]).indexOf(km)]??.7)}
-function getBufferColors(){const palette=['#00804d','#ffbb00','#ff1100'];return getBufferRadii().map(km=>palette[(state.bufferRadii||[1,3,5]).indexOf(km)]||palette[0])}
+function getBufferColors(){const palette=['#ff1100','#ffbb00','#00804d'];return getBufferRadii().map(km=>palette[(state.bufferRadii||[1,3,5]).indexOf(km)]||palette[0])}
 function updateMap(){
   const lat=Number(state.lat),lng=Number(state.lng);
   if(!validPoint())return;
@@ -935,7 +935,7 @@ async function downloadReportPng(){
    await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
  };
 
- const colors=['#00804d','#ffbb00','#ff1100'];
+ const colors=['#ff1100','#ffbb00','#00804d'];
  const ringOutlines=colors.map(()=>L.circle([Number(state.lat),Number(state.lng)],{radius:1000,color:'#34303a',weight:6,opacity:.8,fill:false,interactive:false}).addTo(live));
  const circles=colors.map(color=>L.circle([Number(state.lat),Number(state.lng)],{radius:1000,color,weight:4,opacity:1,fillColor:color,fillOpacity:.08}).addTo(live));
  const distanceLabels=colors.map(()=>L.marker([Number(state.lat),Number(state.lng)],{interactive:false}).addTo(live));
