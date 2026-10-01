@@ -13,7 +13,7 @@
 .popup{font:14px Sarabun,sans-serif;color:#193b43;min-width:225px;max-width:300px;line-height:1.6}.popup h3{font-size:18px;margin:0 22px 5px 0}.popup small{color:#5a7178}.value{font-size:27px;font-weight:700;margin:12px 0 4px}.badge{padding:5px 9px;border-radius:7px;background:#eef5f6;font-weight:600;display:inline-block}.popup p{margin:8px 0}.popup a{color:#116e85}.popup img{max-width:100%;border-radius:7px}.meter{height:8px;background:#e1eaed;border-radius:99px;overflow:hidden;margin-top:8px}.meter i{height:100%;display:block;background:#218fa4}.maplibregl-popup-content,.leaflet-popup-content-wrapper{border-radius:15px!important;box-shadow:0 6px 24px #173a4330!important}.leaflet-popup-content{margin:15px!important}.maplibregl-popup-content{padding:17px!important}
 .marker-icon{display:grid;place-items:center;background:#137b88;color:white;border:2px solid white;border-radius:8px;width:26px;height:26px;box-shadow:0 2px 5px #173a4338}.marker-icon svg{width:17px;height:17px}
 @media(max-width:500px){.controls{left:8px;top:8px}.toggles label{font-size:12px;padding:6px}.search select,.search input{font-size:13px;padding:8px}.legend{width:245px}.status{left:8px;font-size:11px;max-height:58px}}
-@media(prefers-reduced-motion:no-preference){.water-critical{animation:pulse 2s infinite}@keyframes pulse{50%{stroke-opacity:.3}}}
+@media(prefers-reduced-motion:no-preference){.water-critical{animation:pulse 1.4s ease-in-out infinite}@keyframes pulse{50%{stroke-opacity:.15;fill-opacity:.04}}}
 </style>
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script></head>
 <body><div id="map" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div><div id="raster" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div>
@@ -21,7 +21,7 @@
 <div class="toggles" aria-label="ชั้นข้อมูล">
 <label><input data-layer="water" type="checkbox" checked>ระดับน้ำ</label><label><input data-layer="rings" type="checkbox" checked>ปริมาณน้ำไหล</label><label><input data-layer="flow" type="checkbox" checked>แนวสายน้ำ</label>
 <label><input data-layer="canal" type="checkbox" checked>คลอง กทม.</label><label><input data-layer="dam" type="checkbox" checked>เขื่อน</label><label><input data-layer="road" type="checkbox" checked>น้ำท่วมถนน</label><label><input data-layer="camera" type="checkbox">กล้อง</label><label><input data-layer="estate" type="checkbox" checked>นิคมฯ</label><label><input data-layer="gistda" type="checkbox">GISTDA</label>
-</div><details class="legend"><summary>คำอธิบายแผนที่</summary><div class="keys"><span><i class="dot" style="background:#d9364d"></i>ล้นตลิ่ง</span><span><i class="dot" style="background:#dd9c20"></i>ใกล้ตลิ่ง</span><span><i class="dot" style="background:#169b8f"></i>ต่ำกว่าตลิ่ง</span><span><i class="dot" style="background:#82959b"></i>ข้อมูลเก่า / ไม่มีค่า</span></div><p>วงสีน้ำเงิน: ยิ่งใหญ่ ปริมาณน้ำไหลผ่านยิ่งมาก<br>จุดขนาดใหญ่: เขื่อน · สีม่วง: นิคมฯ / กล้อง<br>สีสถานีใช้ค่าจุดวัด ไม่ใช่ขอบเขตน้ำท่วม</p><p>เส้นเคลื่อนไหวแสดงแนวสายน้ำตามแผนที่ฐาน ไม่ใช่ทิศทางหรือความเร็วที่ตรวจวัด</p></details></div>
+</div><details class="legend"><summary>คำอธิบายแผนที่</summary><div class="keys"><span><i class="dot" style="background:#d9364d"></i>ล้นตลิ่ง</span><span><i class="dot" style="background:#dd9c20"></i>ใกล้ตลิ่ง</span><span><i class="dot" style="background:#169b8f"></i>ต่ำกว่าตลิ่ง</span><span><i class="dot" style="background:#82959b"></i>ข้อมูลเก่า / ไม่มีค่า</span></div><p>วงแดงกระพริบ: สถานีล้นตลิ่ง (ข้อมูลล่าสุด)<br>วงสีน้ำเงิน: ปริมาณน้ำไหลผ่านของสถานีอื่น<br>จุดขนาดใหญ่: เขื่อน · สีม่วง: นิคมฯ / กล้อง<br>สีสถานีใช้ค่าจุดวัด ไม่ใช่ขอบเขตน้ำท่วม</p><p>เส้นเคลื่อนไหวแสดงแนวสายน้ำตามแผนที่ฐาน ไม่ใช่ทิศทางหรือความเร็วที่ตรวจวัด</p></details></div>
 <div class="status" id="status" role="status">กำลังโหลดแผนที่และสถานี…</div>
 <script>
 (function(){
@@ -56,7 +56,8 @@ function render(){
  }else if(raster){
   Object.values(groups).forEach(g=>g.clearLayers());
   list.forEach(f=>{const r=f.properties,k=r.kind;
-   if(k==='water'&&flags.rings&&r.discharge!=null&&r.discharge>0&&!r.stale)L.circleMarker([r.lat,r.lng],{radius:Math.min(34,5+Math.sqrt(r.discharge)*.4),color:'#319bd0',weight:2,fillColor:'#69b9df',fillOpacity:.12,interactive:false}).addTo(groups.rings);
+   if(k==='water'&&flags.rings&&r.discharge!=null&&r.discharge>0&&!r.stale)L.circleMarker([r.lat,r.lng],{radius:Math.min(34,5+Math.sqrt(r.discharge)*.4),color:r.diff>=0?'#dc2626':'#319bd0',weight:2,fillColor:r.diff>=0?'#ef4444':'#69b9df',className:r.diff>=0?'water-critical':'',fillOpacity:.12,interactive:false}).addTo(groups.rings);
+   if(k==='water'&&r.diff>=0&&!r.stale&&(!flags.rings||!(r.discharge>0)))L.circleMarker([r.lat,r.lng],{radius:14,color:'#dc2626',weight:2.5,fillColor:'#ef4444',fillOpacity:.1,interactive:false,className:'water-critical'}).addTo(groups.rings);
    const marker=k==='dam'?L.marker([r.lat,r.lng],{icon:L.divIcon({className:'',iconSize:[26,26],html:'<span class="marker-icon" style="background:'+r.color+'"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 4h4l5 16H11Z"/><path d="M3 8h5M3 13h5M3 18h5"/></svg></span>'})}):L.circleMarker([r.lat,r.lng],{radius:k==='dam'?9:k==='estate'?5:6,color:'#fff',weight:1.8,fillColor:r.color,fillOpacity:.95,className:r.color==='#d9364d'?'water-critical':''});
    marker.bindTooltip(esc(r.name)).bindPopup(content(r,k)).addTo(groups.points);
   });
@@ -79,7 +80,7 @@ function rasterStart(){
  if(raster)return;if(vector){vector.remove();vector=null}if(animation)clearInterval(animation);
  $('map').style.display='none';$('raster').style.display='block';
  if(!window.L){$('status').textContent='โหลดแผนที่ไม่สำเร็จ กรุณาเปิดใหม่';return}
- raster=L.map('raster',{zoomControl:false,preferCanvas:true}).setView([14,101],6);
+ raster=L.map('raster',{zoomControl:false,preferCanvas:false}).setView([14,101],6);
  L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',{attribution:'Tiles © Esri, HERE, Garmin, OpenStreetMap contributors',maxZoom:18,maxNativeZoom:16,crossOrigin:true}).addTo(raster);
  L.control.zoom({position:'bottomright'}).addTo(raster);L.control.scale({imperial:false,position:'bottomleft'}).addTo(raster);
  groups={points:L.layerGroup().addTo(raster),rings:L.layerGroup().addTo(raster),gistda:L.layerGroup().addTo(raster)};
@@ -98,13 +99,14 @@ function vectorStart(){
   if(vector.getLayer('waterway')){vector.setPaintProperty('waterway','line-color','#5aa7d3');vector.setPaintProperty('waterway','line-width',['interpolate',['linear'],['zoom'],5,1,9,2.5,13,6])}
   if(vector.getSource('openmaptiles'))vector.addLayer({id:'river-flow',type:'line',source:'openmaptiles','source-layer':'waterway',filter:['match',['get','class'],['river','canal'],true,false],paint:{'line-color':'#f8fbfc','line-width':1.4,'line-opacity':.85,'line-dasharray':[1,4]}});
   vector.addSource('sensors',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
-  vector.addLayer({id:'discharge-ring',type:'circle',source:'sensors',filter:['all',['==',['get','kind'],'water'],['>', ['coalesce',['get','discharge'],0],0],['==',['get','stale'],false]],paint:{'circle-radius':['interpolate',['linear'],['sqrt',['get','discharge']],0,4,60,30],'circle-color':'#69b9df','circle-opacity':.13,'circle-stroke-color':'#319bd0','circle-stroke-width':1.4}});
+  vector.addLayer({id:'discharge-ring',type:'circle',source:'sensors',filter:['all',['==',['get','kind'],'water'],['>', ['coalesce',['get','discharge'],0],0],['==',['get','stale'],false]],paint:{'circle-radius':['interpolate',['linear'],['sqrt',['get','discharge']],0,4,60,30],'circle-color':['case',['>=',['coalesce',['get','diff'],-999],0],'#ef4444','#69b9df'],'circle-opacity':.13,'circle-stroke-color':['case',['>=',['coalesce',['get','diff'],-999],0],'#dc2626','#319bd0'],'circle-stroke-width':1.4}});
+  vector.addLayer({id:'overflow-alert',type:'circle',source:'sensors',filter:['all',['==',['get','kind'],'water'],['>=',['coalesce',['get','diff'],-999],0],['==',['get','stale'],false]],paint:{'circle-radius':14,'circle-color':'#ef4444','circle-opacity':.1,'circle-stroke-color':'#dc2626','circle-stroke-width':2.5,'circle-stroke-opacity':1}});
   vector.addLayer({id:'points',type:'circle',source:'sensors',paint:{'circle-radius':['match',['get','kind'],'dam',9,'estate',5,6],'circle-color':['get','color'],'circle-stroke-color':'#fff','circle-stroke-width':1.8}});
   vector.addLayer({id:'labels',type:'symbol',source:'sensors',minzoom:9,layout:{'text-field':['coalesce',['get','code'],['get','name']],'text-size':12,'text-offset':[0,1.4],'text-anchor':'top'},paint:{'text-color':'#1f4f53','text-halo-color':'#fff','text-halo-width':1.5}});
   vector.on('click','points',e=>{const p=e.features[0];new maplibregl.Popup({maxWidth:'330px'}).setLngLat(p.geometry.coordinates).setHTML(content(p.properties,p.properties.kind)).addTo(vector)});
   vector.on('mouseenter','points',()=>vector.getCanvas().style.cursor='pointer');vector.on('mouseleave','points',()=>vector.getCanvas().style.cursor='');
   ready=true;render();if(pending){focus(pending);pending=null}parent.postMessage({type:'flood-water-ready'},location.origin);
-  if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let phase=0;animation=setInterval(()=>{if(!document.hidden&&vector?.getLayer('river-flow')&&flags.flow)vector.setPaintProperty('river-flow','line-dasharray',phase++%2?[1,4]:[0,2,1,2])},500)}
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let phase=0;animation=setInterval(()=>{if(vector?.getLayer('overflow-alert'))vector.setPaintProperty('overflow-alert','circle-stroke-opacity',phase%2?.15:1);if(!document.hidden&&vector?.getLayer('river-flow')&&flags.flow)vector.setPaintProperty('river-flow','line-dasharray',phase++%2?[1,4]:[0,2,1,2])},500)}
   if(gistda)addGistda();
  });
  }catch(e){rasterStart()}
