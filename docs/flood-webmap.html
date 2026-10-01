@@ -166,6 +166,47 @@ body,body *{color:#000!important}body svg text{fill:#000!important}input::placeh
   })();
   try{return await gistdaLoading}finally{gistdaLoading=null}
  }
+
+ var unifiedRows=[],unifiedKind='canal',unifiedLayer=null;
+ function unifiedPopup(r){
+  var road=unifiedKind==='road',v=road?r.depth:r.wl;
+  return "<div class='map-popup'><div class='map-popup-title'>"+escapeHtml(r.name)+"</div>"+(r.stale?"<p>ข้อมูลเก่า / ไม่อัปเดต</p>":"")+ "<p>"+(v==null?"ไม่มีค่า":escapeHtml((road&&r.grp===2&&v>=20?"อย่างน้อย ":"")+v)+(road?" ซม.":" ม.รทก."))+"</p><p>เวลาตรวจวัด (ไทย): "+escapeHtml(r.measured_at||"ไม่ระบุ")+"</p><p>ข้อมูล: กทม. / สสน. ผ่าน <a href='https://flood.pop.in.th/' target='_blank' rel='noopener'>POPNIX Flood</a></p></div>";
+ }
+ function renderUnified(){
+  if(unifiedLayer)unifiedLayer.removeAll();
+  if(leafletGroups?.popnix)leafletGroups.popnix.clearLayers();
+  unifiedRows.forEach(function(r){
+   if(r.lat==null||r.lng==null)return;var lat=Number(r.lat),lon=Number(r.lng);if(!Number.isFinite(lat)||!Number.isFinite(lon))return;
+   var color=r.stale?"#64748b":({crit:"#dc2626",warn:"#d97706",flood:"#dc2626",slight:"#d97706",ok:"#15803d",dry:"#15803d"}[r.level]||"#0369a1");
+   if(leafletMap&&leafletGroups.popnix)L.circleMarker([lat,lon],{radius:7,color:"#fff",weight:2,fillColor:color,fillOpacity:.95}).bindPopup(unifiedPopup(r)).bindTooltip(escapeHtml(r.name)).addTo(leafletGroups.popnix);
+   else if(unifiedLayer&&GraphicCtor)unifiedLayer.add(new GraphicCtor({geometry:{type:"point",longitude:lon,latitude:lat},symbol:{type:"simple-marker",size:12,color:color,outline:{color:"#fff",width:1.5}},popupTemplate:{title:" ",content:unifiedPopup(r)}}));
+  });
+ }
+ window.addEventListener("message",function(event){
+  if(event.origin!==location.origin||event.source!==parent||event.data?.type!=="flood-water-feed"||!Array.isArray(event.data.rows))return;
+  unifiedRows=event.data.rows;unifiedKind=event.data.kind;renderUnified();
+ });
+ function requestUnified(){parent.postMessage({type:"flood-water-ready"},location.origin)}
+ async function loadLeafletLayers(){
+  async function json(url){var r=await fetch(url,{signal:AbortSignal.timeout(15000)});if(!r.ok)throw Error(r.status);return r.json()}
+  var results=await Promise.allSettled([json("./data/thaiwater_latest.json"),json("https://event.longdo.com/feed/json"),verifiedGistda()]);
+  if(results[0].status==="fulfilled"){
+   var data=results[0].value;
+   (data.estates||[]).forEach(function(r){if(r.lat==null||r.lon==null)return;L.circleMarker([r.lat,r.lon],{radius:6,color:"#581c87",fillColor:"#f3e8ff",fillOpacity:1}).bindTooltip(escapeHtml(r.name)).addTo(leafletGroups.estates)});
+   (data.stations||[]).filter(function(r){return r.kind==="waterlevel"&&r.lat!=null&&r.lon!=null}).forEach(function(r){L.circleMarker([r.lat,r.lon],{radius:6,color:"#2563eb",fillOpacity:.8}).bindPopup("<b>"+escapeHtml(r.station)+"</b><p>"+escapeHtml(r.value_text)+"</p><p>"+escapeHtml(r.observed_at)+" (เวลาไทย)</p>").addTo(leafletGroups.water)});
+  }
+  if(results[1].status==="fulfilled"&&Array.isArray(results[1].value)){
+   results[1].value.forEach(function(r){
+    if(r.latitude==null||r.longitude==null)return;
+    var stop=Date.parse(String(r.stop||"").replace(" ","T")+"+07:00");if(Number.isFinite(stop)&&stop<Date.now())return;
+    var group=r.icon==="flood"?leafletGroups.flood:leafletGroups.events;
+    L.circleMarker([Number(r.latitude),Number(r.longitude)],{radius:7,color:r.icon==="flood"?"#0284c7":"#b45309",fillOpacity:.8}).bindPopup("<b>"+escapeHtml(r.title)+"</b><p>"+escapeHtml(r.description)+"</p><p>รายงาน Longdo · เวลาเริ่มเหตุการณ์ "+escapeHtml(r.start)+" ไม่ใช่เวลายืนยันล่าสุด</p>").addTo(group);
+   });
+  }
+  if(results[2].status==="fulfilled"&&results[2].value)L.geoJSON(results[2].value.feed,{style:{color:"#0369a1",weight:1,fillOpacity:.2},onEachFeature:function(f,l){l.bindPopup("GISTDA · "+escapeHtml(f.properties?.file_name||"ไม่ระบุวันที่ภาพ")+"<br>ตรวจวันที่ภาพจากต้นทาง")}}).addTo(leafletGroups.gistda);
+  renderUnified();trafficText("แผนที่สำรอง · นิคมฯ / สถานี ThaiWater / จุด Longdo / POPNIX · เลือกจุดเพื่อดูที่มาและเวลา");
+ }
+
  function startLeaflet(){
   if(typeof L==="undefined")return false;
   document.getElementById("viewDiv").style.display="none";
@@ -175,13 +216,13 @@ body,body *{color:#000!important}body svg text{fill:#000!important}input::placeh
   leafletMap=L.map("leafletMap",{scrollWheelZoom:false,maxZoom:15}).setView([coords[1],coords[0]],zoom);
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:15,attribution:'&copy; OpenStreetMap contributors'}).addTo(leafletMap);
   leafletMap.zoomControl.setPosition("bottomright");
-  leafletGroups={gistda:L.layerGroup().addTo(leafletMap),flood:L.layerGroup().addTo(leafletMap),water:L.layerGroup().addTo(leafletMap),events:L.layerGroup(),cameras:L.layerGroup()};
+  leafletGroups={popnix:L.layerGroup().addTo(leafletMap),estates:L.layerGroup().addTo(leafletMap),gistda:L.layerGroup().addTo(leafletMap),flood:L.layerGroup().addTo(leafletMap),water:L.layerGroup().addTo(leafletMap),events:L.layerGroup(),cameras:L.layerGroup()};
   document.querySelectorAll("#dataControls input[data-layer]").forEach(function(input){
    input.addEventListener("change",function(){
     var group=leafletGroups[input.dataset.layer];if(input.checked)group.addTo(leafletMap);else leafletMap.removeLayer(group)
    });
   });
-  loadLeafletLayers();setInterval(function(){
+  requestUnified();loadLeafletLayers();setInterval(function(){
    Object.values(leafletGroups).forEach(function(g){g.clearLayers()});loadLeafletLayers()
   },10*60*1000);
   message.style.display="none";document.getElementById("fallbackLink").style.display="block";
@@ -262,6 +303,7 @@ body,body *{color:#000!important}body svg text{fill:#000!important}input::placeh
    webmap.add(roadLayer);
    roadLayer.on("layerview-create-error",function(){roadText("โหลดเส้นจราจรไม่สำเร็จ · ตรวจสอบที่ Longdo Traffic")});
    GraphicCtor=Graphic;selectedPointLayer=new GraphicsLayer({title:"ตำแหน่งที่เลือกจากรายงาน",listMode:"hide"});
+   unifiedLayer=new GraphicsLayer({title:"ระดับน้ำคลอง / ถนน / แม่น้ำ · POPNIX"});webmap.add(unifiedLayer);requestUnified();renderUnified();
    webmap.addMany([floodLayer,waterLayer,trafficLayer,cameraLayer,selectedPointLayer]);
    if(selectedLocation)highlightLocation(selectedLocation.lon,selectedLocation.lat,selectedLocation.label);
    var layers={roads:roadLayer,gistda:new GraphicsLayer({title:"ข้อมูล GISTDA",visible:true}),flood:floodLayer,water:waterLayer,events:trafficLayer,cameras:cameraLayer};
