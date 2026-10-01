@@ -186,7 +186,7 @@ function renderStaticSupportPoints(lat,lng,spanLat,spanLng){
 }
 
 function getBufferRadii(){return (state.bufferRadii||[1,2,3]).filter((_,i)=>(state.bufferEnabled||[true,true,true])[i]).map(Number).sort((a,b)=>a-b)}
-function getBufferColors(){const palette=['#bf3562','#b87913','#118491'];return getBufferRadii().map(km=>palette[(state.bufferRadii||[1,2,3]).indexOf(km)]||palette[0])}
+function getBufferColors(){const palette=['#FF007F','#FF8500','#00BFFF'];return getBufferRadii().map(km=>palette[(state.bufferRadii||[1,2,3]).indexOf(km)]||palette[0])}
 function updateMap(){
   const lat=Number(state.lat),lng=Number(state.lng);
   if(!validPoint())return;
@@ -201,7 +201,7 @@ function updateMap(){
   const colors=getBufferColors();
   radii.forEach((km,i)=>{
     const ring=document.createElement('div'),label=document.createElement('span');
-    ring.style.cssText='position:absolute;left:50%;top:50%;border:3px solid '+colors[i]+';border-radius:50%;transform:translate(-50%,-50%);box-sizing:border-box';
+    ring.style.cssText='position:absolute;left:50%;top:50%;border:4px solid '+colors[i]+';background:'+colors[i]+'24;border-radius:50%;transform:translate(-50%,-50%);box-sizing:border-box';
     label.textContent=km+' Km';label.style.cssText='position:absolute;left:85.355%;top:14.645%;transform:translate(-50%,-50%);padding:3px 9px;background:white;border:1px solid '+colors[i]+';border-radius:14px;color:'+colors[i]+';font-size:13px;font-weight:700;white-space:nowrap';
     ring.appendChild(label);bufferOverlay.appendChild(ring);
     requestAnimationFrame(()=>{const side=mapNode.clientHeight*km/spanKm;ring.style.width=side+'px';ring.style.height=side+'px'});
@@ -934,8 +934,8 @@ async function downloadReportPng(){
    await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
  };
 
- const colors=['#bf3562','#b87913','#118491'];
- const circles=colors.map(color=>L.circle([Number(state.lat),Number(state.lng)],{radius:1000,color,weight:2,opacity:.9,fillColor:color,fillOpacity:.10}).addTo(live));
+ const colors=['#FF007F','#FF8500','#00BFFF'];
+ const circles=colors.map(color=>L.circle([Number(state.lat),Number(state.lng)],{radius:1000,color,weight:4,opacity:1,fillColor:color,fillOpacity:.14}).addTo(live));
  const distanceLabels=colors.map(()=>L.marker([Number(state.lat),Number(state.lng)],{interactive:false}).addTo(live));
  const supportLayers=L.layerGroup().addTo(live);
  const supportMarkers=new Map();
@@ -1126,6 +1126,9 @@ html body #report .meta,html body #report .event-card{background:#f3edf7!importa
 html body #report .note{background:#f1e9f6!important;border-left:4px solid #511378!important}
 html body #report .map-caption{border-top:1px solid #a797b3!important}
 html body #report .dss-support-symbol{box-shadow:0 0 0 1px #fff,0 1px 3px #0004!important}
+</style>
+<style id="dss-vivid-buffer-labels">
+html body #report .dss-buffer-distance span{border-width:2px!important;background:#fff!important;font-weight:700!important;font-size:13px!important;box-shadow:0 1px 4px #0005!important}
 </style>
 </body></html>
 
