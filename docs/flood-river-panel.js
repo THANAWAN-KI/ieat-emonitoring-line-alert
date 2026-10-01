@@ -10,7 +10,7 @@
  function gap(r){return n(r.wl)!==null&&n(r.bank)!==null?r.wl-r.bank:null}
  function status(r){if(!fresh(r)||n(r.wl)===null)return ['#899b9e','ข้อมูลย้อนหลัง / ไม่มีค่า'];const g=gap(r);return g!==null&&g>=0?['#ef4444','ถึง / เกินตลิ่ง']:Number(r.situation)===4?['#2563eb','เฝ้าระวัง']:['#22a06b','ปกติ']}
  function gapText(r){const g=gap(r);return g===null?'ไม่มีระดับตลิ่ง':(g>=0?'สูงกว่าตลิ่ง ':'ต่ำกว่าตลิ่ง ')+fmt(Math.abs(g))+' ม.'}
- function focus(r){if(n(r.lat)===null||n(r.lng)===null)return;$('estateFocusMap')?.contentWindow?.postMessage({type:'flood-map-focus',lat:Number(r.lat),lon:Number(r.lng),label:r.name,scale:75000},location.origin)}
+ function focus(r){if(n(r.lat)===null||n(r.lng)===null)return;$('estateFocusMap')?.contentWindow?.postMessage({type:'flood-map-focus',lat:Number(r.lat),lon:Number(r.lng),label:r.name,scale:75000,station:{...r,discharge:r.flow,source_name:'POPNIX / ThaiWater'}},location.origin)}
  function trend(r){return n(r.delta)===null?'ไม่มีค่าเปลี่ยนแปลงย้อนหลัง':(r.delta>0?'▲ เพิ่ม ':r.delta<0?'▼ ลด ':'• คงที่ ')+fmt(Math.abs(r.delta))+' ม. เทียบค่าก่อนหน้า'}
  function spark(r){const a=(r.spark||[]).map(n),v=a.filter(x=>x!==null);if(v.length<2)return '<small>ไม่มีกราฟย้อนหลังในชุดข้อมูลนี้</small>';const lo=Math.min(...v),range=Math.max(.01,Math.max(...v)-lo);let paths=[],p='';a.forEach((y,i)=>{if(y===null){if(p)paths.push(p);p='';return}p+=(p?' L':'M')+(i*280/(a.length-1)).toFixed(1)+' '+(42-(y-lo)/range*34).toFixed(1)});if(p)paths.push(p);return '<svg viewBox="0 0 280 48" role="img" aria-label="ระดับน้ำย้อนหลัง 24 ชั่วโมง">'+paths.map(d=>'<path d="'+d+'" fill="none" stroke="#2588a0" stroke-width="2"/>').join('')+'</svg>'}
  function byCode(c){return rows.find(r=>r.oldcode===c)}
