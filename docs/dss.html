@@ -1274,5 +1274,28 @@ const enabled=/สารเคมี/.test(state.event||'');editor.hidden=!enabl
  render();
 })();
 </script>
+
+<style id="dss-spacious-editor">
+@media(min-width:1201px){html body .workspace{max-width:1780px!important;grid-template-columns:minmax(440px,500px) minmax(0,1fr)!important;gap:24px!important}}
+html body .editor{padding:22px!important;border-color:#c9bccf!important}
+html body .editor .group{margin-top:20px;padding-top:16px;border-top:1px solid #d8cddd}
+html body .editor .field{margin-bottom:13px}
+html body .editor .field label{font-size:15px;line-height:1.5;margin-bottom:6px}
+html body .editor .field input,html body .editor .field select,html body .editor .field textarea{padding:10px 12px;border-color:#b8aabd;border-radius:6px}
+#dssIncidentMode{background:#a91e2c;color:#fff;padding:16px;border-radius:9px;margin:0 0 18px;box-shadow:0 2px 6px #71132020}
+html body .editor #dssIncidentMode label{color:#fff!important;font-weight:700;font-size:17px}
+html body .editor #dssIncidentMode select{background:#fff;color:#721523;font-weight:600;border:2px solid #fff}
+html body .editor #dssIncidentMode .hint{color:#fff;font-size:13px;line-height:1.6;margin:9px 0 0}
+@media(max-width:600px){html body .editor{padding:16px!important}}
+</style>
+<script id="dss-prominent-incident-selector">
+(function(){
+ const select=document.getElementById('event');if(!select)return;
+ const field=select.closest('.field');field.id='dssIncidentMode';
+ const editor=document.querySelector('.editor'),heading=editor.querySelector('h2');
+ heading.after(field);
+ field.addEventListener('input',event=>{if(event.target===select){state.event=select.value;render()}});
+})();
+</script>
 </body></html>
 
