@@ -31,7 +31,8 @@ def normalize(key, payload):
         g = r.get("geocode") or {}
         item = {"id": s.get("id"), "name": text(s.get("dam_name" if key == "dam" else "tele_station_name")), "code": s.get("dam_oldcode" if key == "dam" else "tele_station_oldcode", ""), "province": text(g.get("province_name")), "province_code": str(g.get("province_code") or ""), "district": text(g.get("amphoe_name")), "basin": text((r.get("basin") or {}).get("basin_name")), "basin_id": (r.get("basin") or {}).get("id"), "agency": text((r.get("agency") or {}).get("agency_shortname")), "lat": number(s.get("dam_lat" if key == "dam" else "tele_station_lat")), "lng": number(s.get("dam_long" if key == "dam" else "tele_station_long"))}
         if key == "water":
-            item.update(wl=number(r.get("waterlevel_msl")), bank=number(s.get("min_bank")), diff=number(r.get("diff_wl_bank")), discharge=number(r.get("discharge")), previous=number(r.get("waterlevel_msl_previous")), measured_at=r.get("waterlevel_datetime"), river=text(r.get("river_name")))
+            item.update(wl=number(r.get("waterlevel_msl")), bank=number(s.get("min_bank")), diff=None, situation_level=number(r.get("situation_level")), ground=number(s.get("ground_level")), discharge=number(r.get("discharge")), previous=number(r.get("waterlevel_msl_previous")), measured_at=r.get("waterlevel_datetime"), river=text(r.get("river_name")))
+            item["diff"] = round(item["wl"] - item["bank"], 2) if item["wl"] is not None and item["bank"] is not None else None
         elif key == "rain":
             item.update(rain=number(r.get("rain_24h")), measured_at=r.get("rainfall_datetime"))
         else:
