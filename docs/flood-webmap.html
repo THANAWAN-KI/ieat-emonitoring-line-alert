@@ -170,6 +170,7 @@ body,body *{color:#000!important}body svg text{fill:#000!important}input::placeh
  var unifiedRows=[],unifiedKind='canal',unifiedLayer=null;
  function unifiedPopup(r){
   var road=unifiedKind==='road',v=road?r.depth:r.wl;
+  if(r.value_text)return "<div class='map-popup'><div class='map-popup-title'>"+escapeHtml(r.name)+"</div><p>"+escapeHtml(r.value_text)+"</p><p>"+(r.stale?"ข้อมูลเก่า / เวลาไม่ผ่านเกณฑ์":"")+" "+escapeHtml(r.measured_at||"ไม่ระบุเวลา")+" (ไทย)</p><p>ข้อมูล: "+escapeHtml(r.source_text||"ThaiWater")+" · <a href='https://www.thaiwater.net/' target='_blank' rel='noopener'>เปิดต้นทาง</a></p></div>";
   return "<div class='map-popup'><div class='map-popup-title'>"+escapeHtml(r.name)+"</div>"+(r.stale?"<p>ข้อมูลเก่า / ไม่อัปเดต</p>":"")+ "<p>"+(v==null?"ไม่มีค่า":escapeHtml((road&&r.grp===2&&v>=20?"อย่างน้อย ":"")+v)+(road?" ซม.":" ม.รทก."))+"</p><p>เวลาตรวจวัด (ไทย): "+escapeHtml(r.measured_at||"ไม่ระบุ")+"</p><p>ข้อมูล: กทม. / สสน. ผ่าน <a href='https://flood.pop.in.th/' target='_blank' rel='noopener'>POPNIX Flood</a></p></div>";
  }
  function renderUnified(){

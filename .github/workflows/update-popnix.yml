@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "scripts/fetch_popnix.py"
+      - "scripts/fetch_provincial_water.py"
       - ".github/workflows/update-popnix.yml"
   schedule:
     - cron: "*/10 * * * *"
@@ -23,9 +24,10 @@ jobs:
         with:
           python-version: "3.12"
       - run: python scripts/fetch_popnix.py
+      - run: python scripts/fetch_provincial_water.py
       - name: Save dated public feeds
         run: |
-          git add docs/data/popnix_latest.json
+          git add docs/data/popnix_latest.json docs/data/provincial_water_latest.json
           if git diff --cached --quiet; then exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
