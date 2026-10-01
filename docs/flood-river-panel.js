@@ -28,9 +28,9 @@
 
 
  function riverProfile(list){
-  const stations=list.filter(r=>n(r.wl)!==null),W=1000,H=310,left=48,right=960,top=55,bottom=275;
+  const stations=list.filter(r=>n(r.wl)!==null).sort((a,b)=>river==='แม่น้ำเจ้าพระยา'&&n(a.lat)!==null&&n(b.lat)!==null?Number(b.lat)-Number(a.lat):0),W=1000,H=310,left=48,right=960,top=55,bottom=275;
   if(stations.length<2)return '<p>มีค่าระดับน้ำน้อยกว่า 2 สถานี ยังแสดงกราฟตามแนวแม่น้ำไม่ได้</p>';
-  const vals=stations.flatMap(r=>[n(r.wl),n(r.bank)]).filter(v=>v!==null),low=Math.min(0,...vals),high=Math.max(5,...vals);
+  const vals=stations.flatMap(r=>[n(r.wl),n(r.bank)]).filter(v=>v!==null),low=Math.min(0,...vals),high=Math.ceil(Math.max(5,...vals)/5)*5;
   const scale=v=>Math.asinh(v/3),span=scale(high)-scale(low)||1;
   const y=v=>bottom-(scale(v)-scale(low))/span*(bottom-top),x=i=>left+i*(right-left)/(stations.length-1);
   const path=stations.map((r,i)=>(i?'L':'M')+x(i).toFixed(1)+' '+y(n(r.wl)).toFixed(1)).join(' ');
