@@ -21,11 +21,11 @@ function sendMap(){if(active)$('estateFocusMap')?.contentWindow?.postMessage({ty
 function render(){
  if(!data)return;
  const kind=$('pwKind').value,water=scoped('water'),rain=scoped('rain'),dams=scoped('dam');
- const fresh=water.filter(r=>!stale(r,'water')&&!sourceOld('water')&&r.wl!=null),over=fresh.filter(r=>r.diff!=null&&r.diff>=0),near=fresh.filter(r=>r.diff!=null&&r.diff<0&&r.diff>-.5);
+ const fresh=water.filter(r=>!stale(r,'water')&&!sourceOld('water')&&r.wl!=null),over=fresh.filter(r=>r.diff!=null&&r.diff>=0),near=fresh.filter(r=>r.situation_level!=null?r.situation_level===4:r.diff!=null&&r.diff<0&&r.diff>-.5);
  const recentRain=rain.filter(r=>!stale(r,'rain')&&!sourceOld('rain')&&r.rain!=null);
  const flows=fresh.filter(r=>r.discharge!=null).sort((a,b)=>b.discharge-a.discharge);
  const maxRain=recentRain.slice().sort((a,b)=>b.rain-a.rain)[0];
- $('pwMetrics').innerHTML=[['สถานีล้นตลิ่ง',sourceOld('water')?'ยังสรุปไม่ได้':over.length+' จุด'],['ต่ำกว่าตลิ่งไม่ถึง 0.5 ม.',sourceOld('water')?'ยังสรุปไม่ได้':near.length+' จุด'],['ฝน 24 ชม. สูงสุด',maxRain?fmt(maxRain.rain)+' มม.':'ไม่มีค่าล่าสุด'],['น้ำไหลผ่านสูงสุด',flows.length?fmt(flows[0].discharge)+' ลบ.ม./วินาที':'ไม่มีค่าจากสถานี']].map(([title,v])=>'<div class="pw-metric"><span>'+esc(title)+'</span><strong>'+esc(v)+'</strong></div>').join('');
+ $('pwMetrics').innerHTML=[['สถานีล้นตลิ่ง',sourceOld('water')?'ยังสรุปไม่ได้':over.length+' จุด'],['สถานีเฝ้าระวัง (เกณฑ์ต้นทาง)',sourceOld('water')?'ยังสรุปไม่ได้':near.length+' จุด'],['ฝน 24 ชม. สูงสุด',maxRain?fmt(maxRain.rain)+' มม.':'ไม่มีค่าล่าสุด'],['น้ำไหลผ่านสูงสุด',flows.length?fmt(flows[0].discharge)+' ลบ.ม./วินาที':'ไม่มีค่าจากสถานี']].map(([title,v])=>'<div class="pw-metric"><span>'+esc(title)+'</span><strong>'+esc(v)+'</strong></div>').join('');
  $('pwSummary').textContent='ข้อมูลระดับน้ำล่าสุด '+fresh.length+' / '+water.length+' จุด · '+(maxRain?'ฝนสูงสุดที่ '+maxRain.name:'ไม่มีค่าฝนล่าสุดในตัวกรอง')+' · เขื่อนในจังหวัด / ลุ่มน้ำที่เกี่ยวข้อง '+dams.length+' แห่ง';
  visible=scoped(kind).sort((a,b)=>kind==='water'?(b.diff??-999)-(a.diff??-999):kind==='rain'?(b.rain??-999)-(a.rain??-999):(b.percent??-999)-(a.percent??-999));
  if($('pwFresh').checked)visible=visible.filter(r=>!stale(r,kind)&&!sourceOld(kind));
@@ -44,7 +44,7 @@ function render(){
 async function load(){
  if(busy)return;busy=true;
  try{
-  let response;try{response=await fetch('https://raw.githubusercontent.com/THANAWAN-KI/ieat-emonitoring-line-alert/main/docs/data/provincial_water_latest.json?v='+Math.floor(Date.now()/300000),{signal:AbortSignal.timeout(7000)});if(!response.ok)throw Error('raw')}catch(e){response=await fetch('./data/provincial_water_latest.json?v='+Math.floor(Date.now()/300000),{signal:AbortSignal.timeout(7000)})}
+  let response;try{response=await fetch('https://raw.githubusercontent.com/THANAWAN-KI/ieat-emonitoring-line-alert/main/docs/data/provincial_water_latest.json?v='+('bankfix-'+Math.floor(Date.now()/60000)),{signal:AbortSignal.timeout(7000)});if(!response.ok)throw Error('raw')}catch(e){response=await fetch('./data/provincial_water_latest.json?v='+Math.floor(Date.now()/300000),{signal:AbortSignal.timeout(7000)})}
   if(!response.ok)throw Error(response.status);const next=await response.json();if(!next.feeds)throw Error('schema');next.feeds.water?.rows?.forEach(r=>{r.diff=r.wl!=null&&r.bank!=null?Math.round((r.wl-r.bank)*100)/100:null});data=next;
   const selected=$('pwProvince').value,provinces=[...new Set(['water','rain','dam'].flatMap(k=>rows(k).map(r=>r.province)).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'th'));
   $('pwProvince').innerHTML='<option value="">ทั่วประเทศ</option>'+provinces.map(p=>'<option value="'+esc(p)+'">'+esc(p)+'</option>').join('');
