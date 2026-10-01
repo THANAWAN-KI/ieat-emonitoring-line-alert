@@ -186,7 +186,7 @@ function renderStaticSupportPoints(lat,lng,spanLat,spanLng){
 }
 
 function getBufferRadii(){return (state.bufferRadii||[1,3,5]).filter((_,i)=>(state.bufferEnabled||[true,true,true])[i]).map(Number).sort((a,b)=>a-b)}
-function getBufferOpacities(){const palette=[.7,.5,.3];return getBufferRadii().map(km=>palette[(state.bufferRadii||[1,3,5]).indexOf(km)]??.7)}
+function getBufferOpacities(){const palette=[1,1,1];return getBufferRadii().map(km=>palette[(state.bufferRadii||[1,3,5]).indexOf(km)]??.7)}
 function getBufferColors(){const palette=['#d73027','#fdae61','#fee08b'];return getBufferRadii().map(km=>palette[(state.bufferRadii||[1,3,5]).indexOf(km)]||palette[0])}
 function updateMap(){
   const lat=Number(state.lat),lng=Number(state.lng);
@@ -936,7 +936,8 @@ async function downloadReportPng(){
  };
 
  const colors=['#d73027','#fdae61','#fee08b'];
- const circles=colors.map(color=>L.circle([Number(state.lat),Number(state.lng)],{radius:1000,color,weight:3,opacity:1,fillColor:color,fillOpacity:.08}).addTo(live));
+ const ringOutlines=colors.map(()=>L.circle([Number(state.lat),Number(state.lng)],{radius:1000,color:'#34303a',weight:6,opacity:.8,fill:false,interactive:false}).addTo(live));
+ const circles=colors.map(color=>L.circle([Number(state.lat),Number(state.lng)],{radius:1000,color,weight:4,opacity:1,fillColor:color,fillOpacity:.08}).addTo(live));
  const distanceLabels=colors.map(()=>L.marker([Number(state.lat),Number(state.lng)],{interactive:false}).addTo(live));
  const supportLayers=L.layerGroup().addTo(live);
  const supportMarkers=new Map();
@@ -957,9 +958,9 @@ async function downloadReportPng(){
  window.dssSyncLiveMap=function(lat,lng,radius){
    const radii=getBufferRadii(),activeColors=getBufferColors(),activeOpacities=getBufferOpacities();
    circles.forEach((circle,i)=>{
-     if(i>=radii.length){live.removeLayer(circle);live.removeLayer(distanceLabels[i]);return}
-     if(!live.hasLayer(circle))circle.addTo(live);if(!live.hasLayer(distanceLabels[i]))distanceLabels[i].addTo(live);
-     circle.setStyle({color:activeColors[i],opacity:activeOpacities[i],fillColor:activeColors[i]});circle.setLatLng([lat,lng]).setRadius(radii[i]*1000);
+     if(i>=radii.length){live.removeLayer(ringOutlines[i]);live.removeLayer(circle);live.removeLayer(distanceLabels[i]);return}
+     if(!live.hasLayer(ringOutlines[i]))ringOutlines[i].addTo(live);ringOutlines[i].setLatLng([lat,lng]).setRadius(radii[i]*1000);ringOutlines[i].bringToBack();if(!live.hasLayer(circle))circle.addTo(live);if(!live.hasLayer(distanceLabels[i]))distanceLabels[i].addTo(live);
+     circle.setStyle({color:activeColors[i],opacity:activeOpacities[i],fillColor:activeColors[i]});circle.setLatLng([lat,lng]).setRadius(radii[i]*1000);circle.bringToFront();
      distanceLabels[i].setLatLng(bufferLabelPoint(lat,lng,radii[i])).setIcon(L.divIcon({className:'dss-buffer-distance',html:'<span style="color:'+activeColors[i]+';border-color:'+activeColors[i]+'">'+radii[i]+' Km</span>',iconSize:[70,24],iconAnchor:[35,12]}));
    });
    pin.setLatLng([lat,lng]);
@@ -981,7 +982,7 @@ async function downloadReportPng(){
    if(!Number.isFinite(rx)||!Number.isFinite(ry)||rx<=0||ry<=0)return;
    ctx.beginPath();ctx.ellipse(center.x,center.y,rx,ry,0,0,Math.PI*2);
    ctx.fillStyle=circle.options.fillColor||circle.options.color;ctx.globalAlpha=circle.options.fillOpacity;ctx.fill();
-   ctx.globalAlpha=circle.options.opacity;ctx.strokeStyle=circle.options.color;ctx.lineWidth=circle.options.weight;ctx.stroke();ctx.globalAlpha=1;
+   ctx.globalAlpha=.8;ctx.strokeStyle='#34303a';ctx.lineWidth=circle.options.weight+2;ctx.stroke();ctx.globalAlpha=circle.options.opacity;ctx.strokeStyle=circle.options.color;ctx.lineWidth=circle.options.weight;ctx.stroke();ctx.globalAlpha=1;
   });
   return canvas.toDataURL('image/png');
  };
