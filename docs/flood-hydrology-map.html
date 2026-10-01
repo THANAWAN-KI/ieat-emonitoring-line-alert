@@ -167,7 +167,7 @@ async function loadCameraImage(r,force=false){
  const m=/\/(\d{4})\/(\d{1,2})\/(\d{1,2})\/(\d{1,2})_(\d{1,2})\.jpe?g$/i.exec(data.value);const pad=n=>String(n).padStart(2,'0');const at=m?m[1]+'-'+pad(m[2])+'-'+pad(m[3])+' '+pad(m[4])+':'+pad(m[5]):null;
  if(cached)URL.revokeObjectURL(cached.url);cached={url:URL.createObjectURL(await file.blob()),at,loaded:Date.now()};cameraImages.set(r.id,cached)}
  if(!box.isConnected)return;img.src=cached.url;img.style.display='block';time.textContent=cached.at?'เวลาภาพ '+cached.at+' (ไทย)':'ต้นทางไม่ระบุเวลาของภาพ';
- const age=cached.at?Date.now()-date(cached.at):null;state.textContent=age!=null&&age>5400000?'ภาพเก่ากว่า 90 นาที · โปรดตรวจต้นทาง':'ภาพนิ่งจากกรมทรัพยากรน้ำ';img.onload=()=>{if(raster)raster.eachLayer(l=>{if(l instanceof L.Popup)l.update()})};
+ const age=cached.at?Date.now()-date(cached.at):null;state.textContent=age!=null&&age>5400000?'ภาพเก่ากว่า 90 นาที · โปรดตรวจต้นทาง':'ภาพนิ่งจากกรมทรัพยากรน้ำ';img.onload=()=>{if(raster)raster.eachLayer(l=>{if(l instanceof L.Popup)l.setContent(box.closest('.popup'))})};
  }catch(e){img.style.display='none';time.textContent='โหลดภาพล่าสุดไม่สำเร็จ';state.textContent='ต้นทางอาจไม่มีภาพหรือไม่ตอบสนอง · เปิดต้นทางด้านล่างเพื่อตรวจสอบ'}
 }
 document.addEventListener('click',e=>{const b=e.target.closest('[data-camera-refresh]');if(!b)return;const r=features.find(f=>f.properties.kind==='camera'&&String(f.properties.id)===b.dataset.cameraRefresh)?.properties;if(r)loadCameraImage(r,true)});
