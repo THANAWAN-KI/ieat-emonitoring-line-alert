@@ -46,7 +46,7 @@ function content(r,k){
 }
 function scoped(){
  const province=$('province').value,q=$('search').value.trim().toLowerCase();
- return features.filter(f=>flags[f.properties.kind]&&(!province||f.properties.province===province)&&[f.properties.name,f.properties.code,f.properties.river,f.properties.district].join(' ').toLowerCase().includes(q));
+ return features.filter(f=>flags[f.properties.kind]&&(!province||f.properties.kind==='estate'||f.properties.province===province)&&[f.properties.name,f.properties.code,f.properties.river,f.properties.district].join(' ').toLowerCase().includes(q));
 }
 function render(){
  if(!ready)return;const list=scoped();
@@ -69,7 +69,7 @@ function render(){
  const count=list.filter(f=>f.properties.kind==='water').length;const fresh=list.filter(f=>f.properties.kind==='water'&&!f.properties.stale).length;
  $('status').textContent='ระดับน้ำ '+count+' จุด · ข้อมูลไม่เกิน 6 ชม. '+fresh+' จุด · คลิกจุดเพื่อดูค่าตรวจวัดและเวลา'+(raster?' · แผนที่แบบ 2 มิติ':'');if(autoFit&&features.length){autoFit=false;fit()}
 }
-function fit(){const list=scoped().filter(f=>f.properties.kind!=='camera');if(!list.length)return;const points=list.map(f=>f.geometry.coordinates);if(vector){const b=new maplibregl.LngLatBounds();points.forEach(p=>b.extend(p));vector.fitBounds(b,{padding:65,maxZoom:11,duration:500})}else raster.fitBounds(points.map(p=>[p[1],p[0]]),{padding:[35,35],maxZoom:11})}
+function fit(){const list=scoped().filter(f=>f.properties.kind!=='camera'&&(!$('province').value||f.properties.kind!=='estate'));if(!list.length)return;const points=list.map(f=>f.geometry.coordinates);if(vector){const b=new maplibregl.LngLatBounds();points.forEach(p=>b.extend(p));vector.fitBounds(b,{padding:65,maxZoom:11,duration:500})}else raster.fitBounds(points.map(p=>[p[1],p[0]]),{padding:[35,35],maxZoom:11})}
 function focus(d){
  if(!ready){pending=d;return}
  if(d.reset){$('province').value='';$('search').value='';render();if(vector)vector.flyTo({center:[101,14],zoom:6});else raster.setView([14,101],6);return}
