@@ -1,4 +1,4 @@
-:root{--ink:#000;--line:#e5e8ee;--bg:#fff;--blue:#0072cf}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#fff;color:#000;font-family:"Noto Sans Thai","Segoe UI",Tahoma,sans-serif;font-size:16px;line-height:1.5}button,input,select,table{font:inherit}button,a,input,select{outline-offset:3px}a{text-decoration:none;color:inherit}button{cursor:pointer}[hidden]{display:none!important}
+:root{--ink:#000;--line:#e5e8ee;--bg:#fff;--blue:#0072cf}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#fff;color:#000;font-family:"Sarabun","TH Sarabun New",sans-serif;font-size:16px;line-height:1.5}button,input,select,table{font:inherit}button,a,input,select{outline-offset:3px}a{text-decoration:none;color:inherit}button{cursor:pointer}[hidden]{display:none!important}
 .site-header{min-height:70px;display:flex;align-items:center;justify-content:space-between;padding:12px 28px;background:#fff;border-bottom:1px solid var(--line);gap:18px}.brand{display:flex;align-items:center;gap:12px}.brand img{width:42px;height:44px;object-fit:contain}.brand strong{display:block;font-size:20px}.brand small{display:block;font-size:13px}.header-nav{display:flex;gap:22px;font-size:13px}.nav-tabs{display:flex;padding:0 28px;gap:28px;background:#fff;border-bottom:1px solid var(--line);overflow:auto}.nav-tab{font-size:14px;border:0;border-bottom:3px solid transparent;background:none;color:#000;padding:16px 0;white-space:nowrap}.nav-tab.active{border-bottom-color:#0072cf;font-weight:600}.page{max-width:1800px;margin:auto;padding:20px 28px 32px}footer{text-align:center;padding:20px;font-size:12px;color:#000}.other-frame{width:100%;height:calc(100vh - 160px);min-height:700px;border:0;background:#fff}
 #riskDashboard .filter-bar{display:flex;align-items:end;gap:10px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:#fff;margin-bottom:20px;flex-wrap:wrap}
 #riskDashboard .filter-bar label{display:grid;gap:5px;font-size:12px;font-weight:600;flex:1;min-width:150px}#riskDashboard .filter-bar select{font-size:13px;border:1px solid #dce1e7;border-radius:8px;padding:10px;background:#fff;width:100%;color:#000;min-height:42px}#riskDashboard .filter-bar button{font-size:12px;border:1px solid #dce1e7;border-radius:8px;padding:10px 13px;min-height:42px;background:#f7f8fa;color:#000}
@@ -75,7 +75,7 @@
 #riskDashboard .directory-item.active .directory-icon{background:#d0ecd9}
 #riskDashboard .source-note{font-size:11px;line-height:1.65;margin-top:18px}
 #riskDashboard .empty{font-size:12px;padding:18px}
-#riskDashboard .esri-widget,#riskDashboard .leaflet-popup-content{font-family:"Noto Sans Thai","Segoe UI",Tahoma,sans-serif;font-size:12px}
+#riskDashboard .esri-widget,#riskDashboard .leaflet-popup-content{font-family:"Sarabun","TH Sarabun New",sans-serif;font-size:12px}
 #riskDashboard .leaflet-control-zoom{border:1px solid #d8e0e7;border-radius:10px;overflow:hidden;box-shadow:0 3px 12px #24344b16}
 #riskDashboard .leaflet-control-zoom a{color:#0a2239}
 #riskDashboard .leaflet-control-layers{border:1px solid #d8e0e7;border-radius:10px;box-shadow:0 3px 12px #24344b16}
@@ -83,3 +83,20 @@
 @media(max-width:1100px){#riskDashboard .analytics-top{grid-template-columns:1fr 1fr}#riskDashboard .analytics-top>.panel:first-child{grid-column:1/-1}#riskDashboard .analytics-bottom{grid-template-columns:1fr}#riskDashboard .map-grid{grid-template-columns:minmax(0,1fr) 330px}#riskDashboard .report-button{flex:1}.page{padding:18px}.header-nav{gap:14px}}
 @media(max-width:760px){.site-header{padding:10px 14px}.brand strong{font-size:19px}.brand small{font-size:12px}.header-nav{font-size:12px}.nav-tabs{padding:0 14px;gap:20px}.page{padding:16px 10px}#riskDashboard .filter-bar{gap:10px;padding:12px}#riskDashboard .filter-bar label{min-width:calc(50% - 10px)}#riskDashboard .report-button{flex-basis:100%}#riskDashboard .inventory{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}#riskDashboard .inventory-card{padding:14px;min-height:154px}#riskDashboard .analytics-top{grid-template-columns:1fr}#riskDashboard .analytics-top>.panel:first-child{grid-column:auto}#riskDashboard .map-grid{grid-template-columns:1fr}#riskDashboard #map{height:480px}#riskDashboard #directory{height:420px}#riskDashboard .donut-layout{gap:22px}#riskDashboard .donut{width:150px;height:150px;padding:25px}#riskDashboard .map-controls{flex-wrap:wrap}#riskDashboard .bar-row{grid-template-columns:120px minmax(0,1fr)}}
 @media(max-width:420px){.brand small{max-width:185px}.brand img{width:33px}.header-nav{gap:10px}#riskDashboard .filter-bar label{min-width:100%}#riskDashboard .inventory-card strong{font-size:25px}#riskDashboard .card-art{width:40px;height:44px}#riskDashboard .card-value{gap:8px}#riskDashboard .donut-layout{flex-wrap:wrap}.nav-tab{font-size:13px}}
+
+/* Match the live drought page's computed typography, including weight. */
+#riskDashboard,#riskDashboard *{font-family:"Sarabun","TH Sarabun New",sans-serif}
+#riskDashboard .card-label{font-size:14px;font-weight:400;line-height:1.45}
+#riskDashboard .inventory-card strong{font-size:24px;font-weight:600;line-height:1.2}
+#riskDashboard .inventory-card small{font-size:14px;font-weight:400;line-height:1.45}
+#riskDashboard .filter-bar label{font-size:12px;font-weight:600;line-height:1.6}
+#riskDashboard .filter-bar select{font-size:13px;font-weight:400}
+#riskDashboard .filter-bar button{font-size:12px;font-weight:400;line-height:1.4}
+#riskDashboard .panel-title{font-size:18px;font-weight:500;line-height:1.5}
+#riskDashboard .panel-note,#riskDashboard .source-note{font-size:14px;font-weight:400;line-height:1.5}
+#riskDashboard .risk-table,#riskDashboard .matrix{font-size:12px;line-height:1.4}
+#riskDashboard .map-section-heading h2,#riskDashboard .directory-head h3{font-size:16px;font-weight:500;line-height:1.45}
+#riskDashboard .map-section-heading p{font-size:14px;line-height:1.5}
+#riskDashboard .map-controls span{font-size:12px;font-weight:500;line-height:1.6}
+#riskDashboard .directory-text b{font-weight:500}
+#riskDashboard .estate-map-label{border:0;background:rgba(255,255,255,.92);color:#5a1230;font-size:12px;padding:3px 7px;border-radius:5px;box-shadow:0 1px 4px #0002}
