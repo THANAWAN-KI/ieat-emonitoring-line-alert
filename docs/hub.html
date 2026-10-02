@@ -7,7 +7,7 @@
 <link rel="icon" type="image/svg+xml" sizes="any" href="./emcc-gis-rabbit-20261002.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css">
-<link rel="stylesheet" href="./risk-dashboard-20261002.css?v=23">
+<link rel="stylesheet" href="./risk-dashboard-20261002.css?v=24">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://js.arcgis.com/4.30/"></script>
@@ -57,7 +57,7 @@
     otherPage.hidden = true;
     reportPage.hidden = false;
     document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.toggle('active', tab === riskTab));
-    if (!reportFrame.getAttribute('src')) reportFrame.src = './dss.html?embedded=risk&v=20261002-return-fix';
+    if (!reportFrame.getAttribute('src')) reportFrame.src = './dss.html?embedded=risk&v=20261002-button-colors';
   });
   document.querySelectorAll('.nav-tab').forEach(tab => tab.addEventListener('click', function () {
     reportPage.hidden = true;
