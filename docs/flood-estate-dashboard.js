@@ -187,6 +187,13 @@
 #estateFocusDashboard .ef-estate-stats{background:#eaf2fc}
 #estateFocusDashboard .ef-estate-stats strong{font-size:22px}
 #estateFocusDashboard #efDetails24,#estateFocusDashboard #efDetails48{border-color:#abc9e5}
+
+#estateFocusDashboard .ef-workspace{height:auto;min-height:100dvh;align-items:start}
+#estateFocusDashboard .ef-map-column{height:calc(100dvh + 240px);min-height:1000px}
+#estateFocusDashboard .ef-data-column{height:100dvh;position:sticky;top:0}
+#estateFocusDashboard .ef-map-column:fullscreen,#estateFocusDashboard .ef-map-column.ef-map-expanded{height:100dvh;min-height:0}
+@media(max-width:950px){#estateFocusDashboard .ef-map-column{height:860px;min-height:0}#estateFocusDashboard .ef-data-column{height:auto;position:static}}
+@media(max-width:600px){#estateFocusDashboard .ef-map-column{height:760px}}
 `;document.head.appendChild(style);
   const host=document.createElement('section');host.id='estateFocusDashboard';
   const metrics=[['efWatch','นิคมฯ เข้าเกณฑ์เฝ้าระวัง','ผลคัดกรองจากสถานีใกล้นิคมฯ'],['efWaterWatch','ใกล้ระดับน้ำเข้าเกณฑ์','สถานีระดับน้ำภายใน 30 กม.'],['efRainWatch','ใกล้ฝนเข้าเกณฑ์','ฝนสะสมมากกว่า 35 มม. ภายใน 30 กม.'],['efTotal','นิคมฯ / ท่าเรือในชุดข้อมูล','ตำแหน่งที่ใช้ประเมินจากข้อมูล กนอ.'],['ef24','ตำบลเฝ้าระวัง 24 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ'],['ef48','ตำบลเฝ้าระวัง 48 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ']];
