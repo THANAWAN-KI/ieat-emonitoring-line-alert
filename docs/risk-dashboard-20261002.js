@@ -2,16 +2,16 @@
  'use strict';
  const base='https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/';
  const datasets=[
- {id:'estate',label:'ตำแหน่งนิคมฯ',path:'e_PP_2025/FeatureServer/1',names:['สำนักงานนิคมฯ'],estates:['สำนักงานนิคมฯ'],color:'#087e8b'},
- {id:'hospital',label:'โรงพยาบาล',path:'Hospital_Locations/FeatureServer/0',names:['โรงพยาบาล'],estates:['นิคมอุตสาหกรรม'],color:'#00796f'},
- {id:'fire',label:'สถานีดับเพลิง',path:'Risk_Map_WFL1/FeatureServer/3',names:['Name'],estates:['IEAT'],color:'#de501e'},
- {id:'police',label:'สถานีตำรวจ',path:'Risk_Map_WFL1/FeatureServer/5',names:['Name'],estates:['IEAT'],color:'#215bc1'},
- {id:'community',label:'ชุมชน',path:'Map/FeatureServer/1',names:['Name'],estates:['IEAT'],color:'#4f8d16'},
- {id:'hydrant',label:'หัวจ่ายน้ำ',path:'Risk_Map_WFL1/FeatureServer/4',names:['Name'],estates:['IEAT'],color:'#b77c00'},
- {id:'cctv',label:'CCTV',path:'ตำแหน่งกล้องCCTV/FeatureServer/7',names:['Name'],estates:['IEAT'],color:'#7040ad'},
- {id:'business',label:'ผู้ประกอบการ',path:'ข้อมูลผู้ประกอบการ_e_PP/FeatureServer/0',names:['ชื่อบริษัทภาษาไทย','ชื่อบริษัทภาษาไทย_สั้','ชื่อบริษัทภาษาอังกฤษ','Name_Parcel_1'],estates:['นิคมอุตสาหกรรม'],color:'#175ca4'}
+ {id:'estate',label:'ตำแหน่งนิคมฯ',path:'e_PP_2025/FeatureServer/1',names:['สำนักงานนิคมฯ'],estates:['สำนักงานนิคมฯ'],color:'#00b1c1'},
+ {id:'hospital',label:'โรงพยาบาล',path:'Hospital_Locations/FeatureServer/0',names:['โรงพยาบาล'],estates:['นิคมอุตสาหกรรม'],color:'#d6083b'},
+ {id:'fire',label:'สถานีดับเพลิง',path:'Risk_Map_WFL1/FeatureServer/3',names:['Name'],estates:['IEAT'],color:'#ea7125'},
+ {id:'police',label:'สถานีตำรวจ',path:'Risk_Map_WFL1/FeatureServer/5',names:['Name'],estates:['IEAT'],color:'#0072cf'},
+ {id:'community',label:'ชุมชน',path:'Map/FeatureServer/1',names:['Name'],estates:['IEAT'],color:'#55a51c'},
+ {id:'hydrant',label:'หัวจ่ายน้ำ',path:'Risk_Map_WFL1/FeatureServer/4',names:['Name'],estates:['IEAT'],color:'#00b1c1'},
+ {id:'cctv',label:'CCTV',path:'ตำแหน่งกล้องCCTV/FeatureServer/7',names:['Name'],estates:['IEAT'],color:'#8f2bbc'},
+ {id:'business',label:'ผู้ประกอบการ',path:'ข้อมูลผู้ประกอบการ_e_PP/FeatureServer/0',names:['ชื่อบริษัทภาษาไทย','ชื่อบริษัทภาษาไทย_สั้','ชื่อบริษัทภาษาอังกฤษ','Name_Parcel_1'],estates:['นิคมอุตสาหกรรม'],color:'#0072cf'}
  ].map(d=>({...d,rows:[],status:'loading',total:null}));
- const riskFields=[{field:'ความเสี่ยง_12_ประเภท',label:'ความเสี่ยงสูง 12 ประเภท',short:'12 ประเภท',color:'#175ca4'},{field:'อัคคีภัยสูง',label:'ความเสี่ยงอัคคีภัยสูง',short:'อัคคีภัยสูง',color:'#de501e'},{field:'PSM',label:'โรงงาน PSM',short:'PSM',color:'#00846d'}];
+ const riskFields=[{field:'ความเสี่ยง_12_ประเภท',label:'ความเสี่ยงสูง 12 ประเภท',short:'12 ประเภท',color:'#0072cf'},{field:'อัคคีภัยสูง',label:'ความเสี่ยงอัคคีภัยสูง',short:'อัคคีภัยสูง',color:'#ea7125'},{field:'PSM',label:'โรงงาน PSM',short:'PSM',color:'#8f2bbc'}];
  const $=id=>document.getElementById(id),number=n=>Number(n).toLocaleString('th-TH'),normalize=s=>String(s||'').toLowerCase().replace(/นิคมอุตสาหกรรม|นิคมฯ|สำนักงานนิคมฯ|\s+/g,'').trim();
  const pick=(a,fields)=>fields.map(f=>a[f]).find(v=>v!=null&&String(v).trim())||'—';
  const flagged=v=>String(v||'').trim()==='เข้าข่าย';
@@ -25,12 +25,12 @@
   const business=datasets.find(d=>d.id==='business'),rows=visibleRows(business),riskCounts=riskFields.map(f=>rows.filter(r=>flagged(r.attrs[f.field])).length),any=rows.filter(r=>riskFields.some(f=>flagged(r.attrs[f.field]))).length;
   $('riskTableBody').replaceChildren();riskFields.forEach((f,i)=>{const tr=el('tr');tr.append(el('td',f.label),el('td',business.status==='loading'?'…':business.status==='error'?'—':number(riskCounts[i])),el('td','เข้าข่าย','risk-pill'));tr.onclick=()=>{$('risk').value=selected.risk===f.field?'':f.field;changed()};$('riskTableBody').append(tr)});
   $('riskTotal').textContent=business.status==='loading'?'…':business.status==='error'?'—':number(any);$('riskUnmarked').textContent=business.status==='loading'?'…':business.status==='error'?'—':number(rows.length-any);
-  donut('riskDonut',[{label:'ระบุเข้าข่ายอย่างน้อย 1 กลุ่ม',count:any,color:'#175ca4'},{label:'ไม่ได้ระบุเข้าข่าย',count:rows.length-any,color:'#4f8d16'}],'รายการ');
+  donut('riskDonut',[{label:'ระบุเข้าข่ายอย่างน้อย 1 กลุ่ม',count:any,color:'#0072cf'},{label:'ไม่ได้ระบุเข้าข่าย',count:rows.length-any,color:'#55a51c'}],'รายการ');
   const supports=datasets.filter(d=>!['business','estate'].includes(d.id));donut('supportDonut',supports.map(d=>({label:d.label,count:visibleRows(d).length,color:d.color})),'จุดสนับสนุน');
   const byEstate=new Map();rows.forEach(r=>{const key=normalize(r.estate);if(!byEstate.has(key))byEstate.set(key,{name:r.estate,total:0,counts:[0,0,0]});const e=byEstate.get(key);e.total++;riskFields.forEach((f,i)=>{if(flagged(r.attrs[f.field]))e.counts[i]++})});
   const ranked=[...byEstate.values()].sort((a,b)=>Math.max(...b.counts)-Math.max(...a.counts)).slice(0,8),max=Math.max(1,...ranked.flatMap(e=>e.counts));$('riskBars').replaceChildren();$('matrixBody').replaceChildren();
   ranked.forEach(e=>{const row=el('div',null,'bar-row');row.append(el('span',e.name));const bars=el('div',null,'bar-tracks');riskFields.forEach((f,i)=>{const line=el('div',null,'bar-line'),track=el('div',null,'bar-track'),fill=el('i');fill.style.width=e.counts[i]/max*100+'%';fill.style.background=f.color;track.append(fill);line.append(track,el('small',number(e.counts[i])));bars.append(line)});row.append(bars);$('riskBars').append(row);
-   const tr=el('tr');tr.append(el('th',e.name));e.counts.forEach(n=>{const td=el('td',number(n));td.style.background='rgba(23,92,164,'+(0.12+0.35*n/max)+')';td.style.color='#000';tr.append(td)});tr.append(el('td',number(e.total)));$('matrixBody').append(tr)});
+   const tr=el('tr');tr.append(el('th',e.name));e.counts.forEach(n=>{const td=el('td',number(n));td.style.background='rgba(0,114,207,'+(0.12+0.35*n/max)+')';td.style.color='#000';tr.append(td)});tr.append(el('td',number(e.total)));$('matrixBody').append(tr)});
   if(!ranked.length){$('riskBars').append(el('p',business.status==='loading'?'กำลังโหลดข้อมูลผู้ประกอบการ…':'ไม่มีข้อมูลตามตัวกรอง','empty'));}
   const items=datasets.flatMap(d=>visibleRows(d).map(r=>({d,r})));$('directory').replaceChildren();items.slice(0,150).forEach(({d,r})=>{const b=el('button',null,'directory-item');b.type='button';const dot=el('i');dot.style.background=d.color;b.append(dot,el('b',r.name),el('small',d.label+' · '+r.estate));b.onclick=()=>zoomRow(d,r,b);$('directory').append(b)});
   $('listCount').textContent=number(items.length)+' รายการ'+(items.length>150?' · แสดง 150 รายการแรก':'');if(!items.length)$('directory').append(el('p','ไม่พบข้อมูลตามตัวกรอง','empty'));
