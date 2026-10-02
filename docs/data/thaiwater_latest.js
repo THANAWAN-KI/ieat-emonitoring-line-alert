@@ -1,6 +1,6 @@
 window.IEAT_THAIWATER_DATA = {
   "schema_version": 3,
-  "status": "ok",
+  "status": "stale",
   "generated_at": "2026-10-03T01:26:11+07:00",
   "methodology": {
     "watch_radius_km": 30.0,
@@ -18527,12 +18527,15 @@ window.IEAT_THAIWATER_DATA = {
     "warning_summary": "",
     "warning_url": "https://tmd.go.th/warning-and-events/warning-storm"
   },
-  "errors": [],
+  "errors": [
+    "RuntimeError: Rain source returned no verified station list"
+  ],
   "coverage": {
     "stations_complete": true,
     "station_count": 969,
     "estate_location_source": "ArcGIS geometry in EPSG:4326"
   },
+  "last_attempt_at": "2026-10-03T05:59:20+07:00",
   "flash_flood": {
     "24h": {
       "period": "24h",
