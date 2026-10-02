@@ -190,3 +190,9 @@
 /* Risk labels share the chart palette; shadow beneath the navigation */
 #riskDashboard #riskTableBody tr td:first-child,#riskDashboard #riskTableBody tr td:nth-child(2){color:var(--risk-color)}
 .portal-header .nav-tabs{position:relative;z-index:1;box-shadow:0 4px 6px rgba(38,22,51,.24)}
+
+/* Bordered operator risk table and solid criteria cells */
+#riskDashboard .risk-table{border-collapse:collapse;border:1px solid #ddd8e5}
+#riskDashboard .risk-table th,#riskDashboard .risk-table td{border:1px solid #ddd8e5}
+#riskDashboard #riskTableBody tr td:last-child{background:var(--risk-color);color:#fff;text-align:center}
+#riskDashboard #riskTableBody tr[data-risk="PSM"] td:last-child{color:#402300}
