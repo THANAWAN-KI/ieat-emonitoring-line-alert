@@ -16,3 +16,22 @@ body{font-size:18px;line-height:1.55}
 .filter-bar label{font-weight:600}.filter-bar select{padding:11px;background:#fff;border-color:#aebdce}.filter-bar button{background:#e3edfb;border-color:#aebdce}
 .bar-track{height:9px;background:#d9e0e9}.bar-tracks{gap:5px}.bar-line small{width:36px}.legend-row{grid-template-columns:10px minmax(0,1fr) auto}.legend-row i{width:9px;height:9px}.donut-layout{flex-wrap:wrap;gap:18px;min-height:230px}.chart-legend{font-size:14px}.panel-note,.source-note{font-size:14px}.matrix tbody td{padding:10px 12px}
 @media(max-width:700px){.dashboard-actions{justify-content:stretch}.report-button{width:100%;font-size:16px;padding:12px}.brand small{font-size:12px}.brand strong{font-size:19px}.filter-bar label{min-width:100%}.panel-content{padding:14px}.donut-layout{gap:16px}.chart-legend{font-size:14px}.panel-title{font-size:18px}.bar-row{grid-template-columns:115px minmax(0,1fr)}.source-note{font-size:13px}}
+
+/* Risk Map palette: scoped to this dashboard only */
+:root{--bg:#fff}body{background:#fff}
+#riskDashboard{--blue:#0072cf;--green:#55a51c}
+#riskDashboard .panel,#riskDashboard .filter-bar{background:#fff;box-shadow:none;border:1px solid #dce1e7}
+#riskDashboard .report-button{background:#e5f3ff;border:1px solid #0072cf;box-shadow:none}
+#riskDashboard .report-button:hover{background:#d2eaff;transform:none}
+#riskDashboard .panel-title{background:#f7f9fb;border-bottom:1px solid #dce1e7}
+#riskDashboard .panel-icon{background:#e1f1ff;color:#0072cf!important}
+#riskDashboard .panel-icon.green{background:#edf6e5;color:#55a51c!important}
+#riskDashboard .risk-table th{background:#d9edfc}
+#riskDashboard .filter-bar button{background:#f2f7fc;border-color:#c3cfdb}
+#riskDashboard .inventory{gap:14px;padding-bottom:6px}
+#riskDashboard .inventory-card{background:linear-gradient(135deg,#fff 45%,color-mix(in srgb,var(--accent) 9%,white));border:1px solid color-mix(in srgb,var(--accent) 30%,white);border-top-width:1px;box-shadow:0 5px 0 color-mix(in srgb,var(--accent) 18%,white),0 10px 20px #172d451c;transition:transform .18s,box-shadow .18s}
+#riskDashboard .inventory-card:hover{transform:translateY(-3px);box-shadow:0 7px 0 color-mix(in srgb,var(--accent) 24%,white),0 14px 24px #172d4529}
+#riskDashboard .inventory-card.active{background:color-mix(in srgb,var(--accent) 14%,white);border:2px solid var(--accent)}
+#riskDashboard .bar-track{background:#edf0f4}
+#riskDashboard .directory-item:hover,#riskDashboard .directory-item.active{background:#e5f3ff}
+.nav-tab[data-page="risk"].active{border-bottom-color:#0072cf}
