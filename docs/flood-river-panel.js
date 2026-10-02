@@ -178,7 +178,7 @@
 #estateFocusDashboard #riverSidePanel{border-color:#b9cddd;box-shadow:0 3px 12px #234b6a0b;background:#fff}
 #estateFocusDashboard #riverSidePanel>h2{background:#e9f1fc;border-radius:9px;padding:12px 14px;margin:0 0 12px}
 #estateFocusDashboard #rpGraph{background:linear-gradient(180deg,#f0f9fc,#fff);border-color:#b6d3e2}
-#estateFocusDashboard #rpGraph .rp-flow{max-height:720px}
+#estateFocusDashboard #rpGraph{max-height:720px;overflow:auto;scrollbar-width:thin}
 #estateFocusDashboard #riverSidePanel .rp-counts{background:#edf4fc;border:1px solid #c5d7e9;border-radius:9px;padding:10px;font-size:13px;font-weight:600}
 #estateFocusDashboard #riverSidePanel .rp-extra-panel,#estateFocusDashboard #rpSummary{border-color:#bdcfdf;box-shadow:0 3px 10px #234b6a0b}
 #estateFocusDashboard #riverSidePanel .rp-flow-header,#estateFocusDashboard #riverSidePanel .rp-history-head{background:#edf4fc;border-radius:10px;padding:14px}
