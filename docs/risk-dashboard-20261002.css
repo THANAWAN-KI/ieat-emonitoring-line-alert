@@ -171,3 +171,12 @@
 .portal-header .nav-tab,.portal-header .nav-tab.active{font-weight:300;font-size:17px}
 .portal-top .header-nav,.portal-top .header-nav a{font-size:17px;font-weight:300;line-height:1.5}
 @media(max-width:760px){.portal-header .nav-tabs{padding-left:0;padding-right:0}.portal-header .nav-tab,.portal-header .nav-tab.active,.portal-top .header-nav,.portal-top .header-nav a{font-size:16px;font-weight:300}}
+
+/* Match white header and purple navigation row heights */
+.portal-header{grid-template-rows:46px 46px}
+.portal-header .brand{height:46px;min-height:0;padding:0 26px;align-items:center}
+.portal-header .brand img{width:40px;height:40px}
+.portal-top{height:46px;min-height:0;padding:0 26px;align-items:center}
+.portal-top .header-nav a{padding:4px 14px}
+.portal-header .nav-tabs{height:46px;min-height:46px}
+@media(max-width:760px){.portal-header{grid-template-rows:42px 42px}.portal-header .brand{height:42px;padding:0 10px;gap:7px}.portal-header .brand img{width:32px;height:36px}.portal-header .brand strong{font-size:13px;line-height:1.2}.portal-top{height:42px;padding:0 8px}.portal-top .header-nav{gap:5px}.portal-top .header-nav a{padding:3px 6px}.portal-header .nav-tabs{height:42px;min-height:42px}}
