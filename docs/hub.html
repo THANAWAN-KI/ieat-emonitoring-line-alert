@@ -44,13 +44,20 @@
   const riskDashboard = document.getElementById('riskDashboard');
   const otherPage = document.getElementById('otherPage');
   const riskTab = document.querySelector('.nav-tab[data-page="risk"]');
+  window.returnToRiskDashboard = function () {
+    reportPage.hidden = true;
+    otherPage.hidden = true;
+    riskDashboard.hidden = false;
+    document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.toggle('active', tab === riskTab));
+    window.dispatchEvent(new Event('resize'));
+  };
   document.getElementById('openEmergencyReport').addEventListener('click', function (event) {
     event.preventDefault();
     riskDashboard.hidden = true;
     otherPage.hidden = true;
     reportPage.hidden = false;
     document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.toggle('active', tab === riskTab));
-    if (!reportFrame.getAttribute('src')) reportFrame.src = './dss.html?embedded=risk';
+    if (!reportFrame.getAttribute('src')) reportFrame.src = './dss.html?embedded=risk&v=20261002-return-fix';
   });
   document.querySelectorAll('.nav-tab').forEach(tab => tab.addEventListener('click', function () {
     reportPage.hidden = true;
@@ -58,7 +65,7 @@
   window.addEventListener('message', function (event) {
     if (event.origin !== window.location.origin || event.source !== reportFrame.contentWindow ||
         event.data?.type !== 'dss:return-risk-dashboard') return;
-    riskTab.click();
+    window.returnToRiskDashboard();
   });
 })();
 </script>
