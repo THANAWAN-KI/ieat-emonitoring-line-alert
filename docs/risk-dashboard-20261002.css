@@ -188,7 +188,7 @@
 @media(max-width:760px){.portal-header{grid-template-rows:52px 42px}.portal-header .brand,.portal-top{height:52px}.portal-header .brand img{width:36px;height:42px}}
 
 /* Risk labels share the chart palette; shadow beneath the navigation */
-#riskDashboard #riskTableBody tr td:first-child,#riskDashboard #riskTableBody tr td:nth-child(2){color:var(--risk-color)}
+#riskDashboard #riskTableBody tr td:first-child,#riskDashboard #riskTableBody tr td:nth-child(2){color:#000}
 .portal-header .nav-tabs{position:relative;z-index:1;box-shadow:0 4px 6px rgba(38,22,51,.24)}
 
 /* Bordered operator risk table and solid criteria cells */
