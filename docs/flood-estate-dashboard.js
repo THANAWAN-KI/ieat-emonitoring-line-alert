@@ -129,7 +129,7 @@
   const host=document.createElement('section');host.id='estateFocusDashboard';
   const metrics=[['efWatch','นิคมฯ เข้าเกณฑ์เฝ้าระวัง','ผลคัดกรองจากสถานีใกล้นิคมฯ'],['efWaterWatch','ใกล้ระดับน้ำเข้าเกณฑ์','สถานีระดับน้ำภายใน 30 กม.'],['efRainWatch','ใกล้ฝนเข้าเกณฑ์','ฝนสะสมมากกว่า 35 มม. ภายใน 30 กม.'],['efTotal','นิคมฯ / ท่าเรือในชุดข้อมูล','ตำแหน่งที่ใช้ประเมินจากข้อมูล กนอ.'],['ef24','ตำบลเฝ้าระวัง 24 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ'],['ef48','ตำบลเฝ้าระวัง 48 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ']];
   host.innerHTML=`<div class="ef-workspace"><div class="ef-data-column">
-   <div class="ef-toolbar"><div><h1>สถานการณ์น้ำในพื้นที่นิคมอุตสาหกรรม</h1><p>เฝ้าระวังจากข้อมูลสถานี · รัศมี 30 กิโลเมตร</p></div><div class="ef-actions"><button id="efRefresh" type="button">อัปเดต</button><button id="efReport" type="button">จัดทำรายงาน ↗</button></div></div>
+   <div class="ef-toolbar"><div class="ef-actions"><button id="efRefresh" type="button">อัปเดต</button><button id="efReport" type="button">จัดทำรายงาน ↗</button></div></div>
    <div class="ef-status" id="efStatus" role="status">กำลังตรวจสอบข้อมูล…</div>
    <section id="efEstateBrief" class="ef-panel" hidden aria-label="สรุป GIS รายนิคม"></section>
    <div class="ef-charts"><article class="ef-chart"><h2>นิคมฯ เข้าเกณฑ์เฝ้าระวัง</h2><div class="ef-gauge" id="efGauge"></div><p>เทียบกับนิคมฯ / ท่าเรือทั้งหมดในชุดข้อมูล ไม่ใช่จำนวนนิคมฯ ที่ยืนยันน้ำท่วม</p></article><article class="ef-chart"><h2>สัดส่วนการคัดกรองนิคมฯ</h2><div id="efComposition"></div></article><article class="ef-chart"><h2>5 นิคมฯ ใกล้สถานีฝนสะสมสูงสุด</h2><div id="efRainRank"></div><p>ฝนสะสม 24 ชม. สูงสุดจากสถานีในรัศมี 30 กม. · หน่วย มม.</p></article></div>
