@@ -125,8 +125,10 @@
 @keyframes rpProfileMove{to{stroke-dashoffset:-16}}
 @media(prefers-reduced-motion:reduce){.rp-profile-motion{animation:none}}
 
-#estateFocusDashboard #rpSummary .rp-visual-card{grid-template-columns:minmax(0,1.25fr) minmax(180px,1fr)}
-#estateFocusDashboard #rpSummary .rp-scene{height:100%;min-height:260px;aspect-ratio:auto;object-fit:cover}
+#estateFocusDashboard #riverSidePanel{container-type:inline-size}
+#estateFocusDashboard #rpSummary .rp-visual-card{grid-template-columns:1fr}
+#estateFocusDashboard #rpSummary .rp-scene{height:auto;min-height:0;aspect-ratio:640/340}
+@container(min-width:700px){#estateFocusDashboard #rpSummary .rp-visual-card{grid-template-columns:1.5fr 1fr}#estateFocusDashboard #rpSummary .rp-scene{height:100%;min-height:260px}}
 #estateFocusDashboard #rpSummary .rp-visual-values{padding:18px 14px;background:#fff}
 #estateFocusDashboard #rpSummary .rp-visual-art{background:#e6f5fa}
 #estateFocusDashboard #rpSummary .rp-big-level{font-size:36px;margin:12px 0}
