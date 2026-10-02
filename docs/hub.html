@@ -2827,3 +2827,78 @@ html body #hubInformationHeader .header-more-menu a:hover{background:#f5f6f7!imp
   #fireReportView #fireAnalysisMap iframe{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;border:0!important}
 }
 </style>
+
+<style id="risk-dashboard-20261002">
+#fireReportView .fire-dashboard-grid{grid-template-columns:minmax(300px,.7fr) minmax(0,1.6fr)!important;align-items:stretch!important}
+#fireReportView .fire-support-board{padding:20px!important}
+#fireReportView .risk-intro h2{margin:0 0 6px;color:#59267c}
+#fireReportView .risk-intro p{margin:0 0 18px;color:#68717c;font-size:14px!important}
+#fireReportView .risk-controls{display:grid;gap:10px}
+#fireReportView .risk-controls input,#fireReportView .risk-controls select{width:100%;padding:11px;border:1px solid #dfe3e8;border-radius:9px;background:#fff}
+#fireReportView .risk-controls button{padding:11px;border:0;border-radius:9px;background:#59267c;color:#fff;cursor:pointer}
+#fireReportView .risk-controls button:disabled{opacity:.45;cursor:default}
+#fireReportView #riskSelection{padding:12px;background:#f5f2f9;border-radius:9px;font-size:14px;white-space:pre-line}
+#fireReportView #riskCounts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:15px 0}
+#fireReportView .risk-count{padding:12px;border:1px solid #e8e4ee;border-radius:10px;background:#fff;text-align:left;cursor:pointer}
+#fireReportView .risk-count strong{display:block;color:#59267c;font-size:25px}
+#fireReportView .risk-count span{color:#626773;font-size:13px}
+#fireReportView #riskCountNote{font-size:12px;color:#68717c}
+#fireReportView #fireAnalysisMap{height:640px!important;min-height:640px!important;position:relative!important}
+#fireReportView #riskMap{height:100%!important;width:100%!important}
+#fireReportView .risk-report-heading{padding:18px;border-bottom:1px solid #e5e1e8}
+#fireReportView .risk-report-heading h2{margin:0;color:#59267c;font-size:20px}
+#fireReportView .risk-report-heading p{margin:4px 0 0;color:#68717c;font-size:14px}
+@media(max-width:1000px){#fireReportView .fire-dashboard-grid{grid-template-columns:minmax(0,1fr)!important}#fireReportView #fireAnalysisMap{height:500px!important;min-height:500px!important}}
+</style>
+<script id="risk-dashboard-script-20261002">
+(function(){
+ var root=document.getElementById('fireReportView'),board=root&&root.querySelector('.fire-support-board'),host=document.getElementById('fireAnalysisMap');
+ if(!board||!host)return;
+ board.innerHTML='<div class="risk-intro"><h2>Risk Map Dashboard</h2><p>ภาพรวมข้อมูลความเสี่ยงและทรัพยากรสนับสนุนในพื้นที่นิคมอุตสาหกรรม</p></div><div class="risk-controls"><label for="fireEstateSearch">ค้นหานิคมอุตสาหกรรม / ผู้ประกอบการ</label><input id="fireEstateSearch" list="fireEstateOptions" placeholder="พิมพ์ชื่อพื้นที่หรือผู้ประกอบการ" autocomplete="off"><datalist id="fireEstateOptions"></datalist><button id="riskSearch" type="button">ดูพื้นที่บน Risk Map</button><label for="riskScope">ขอบเขตสรุปข้อมูล</label><select id="riskScope"><option value="all">ข้อมูลทั้งหมดที่โหลดได้</option><option value="near">รอบตำแหน่งที่เลือก 3 กม.</option></select><div id="riskSelection" role="status">ยังไม่ได้เลือกพื้นที่</div><button id="riskToDss" type="button" disabled>ใช้ตำแหน่งนี้จัดทำรายงาน</button><button id="riskReset" type="button">ดูภาพรวมทั้งหมด</button></div><div id="riskCounts"></div><p id="riskCountNote">กำลังเชื่อมต่อข้อมูล Risk Map…</p>';
+ var mapNode=document.getElementById('riskMap');host.replaceChildren();if(mapNode)host.appendChild(mapNode);
+ var head=root.querySelector('.fire-map-head');if(head){head.querySelector('h2').textContent='แผนที่ความเสี่ยงและข้อมูลสนับสนุน';head.querySelector('p').textContent='เลือกชั้นข้อมูล คลิกตำแหน่ง หรือค้นหาพื้นที่ก่อนจัดทำรายงาน';var link=head.querySelector('a');link.href='https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=9c25f3f77ba5481cb481b402177884c2';}
+ var report=root.querySelector('.fire-dss-head');if(report){report.classList.add('risk-report-heading');report.innerHTML='<div><h2>จัดทำรายงานข้อมูลสนับสนุนการรับมือเหตุฉุกเฉิน</h2><p>เลือกตำแหน่งจาก Dashboard ด้านบน แล้วตรวจสอบรายละเอียดใน IEAT DSS</p></div>';}
+ var tab=document.querySelector('.tab[data-type="fire"]');if(tab)tab.textContent='Risk Map / เหตุฉุกเฉิน';
+ var selected=null,GraphicClass=null,lastSignature='',mapBound=false;
+ var input=document.getElementById('fireEstateSearch'),scope=document.getElementById('riskScope'),status=document.getElementById('riskSelection'),send=document.getElementById('riskToDss');
+ function setStatus(text){if(status.textContent!==text)status.textContent=text;}
+ function choose(item){selected=item;scope.value='near';send.disabled=false;setStatus(item.name+'\nพิกัด '+item.origin.lat.toFixed(6)+', '+item.origin.lng.toFixed(6)+(item.approximate?'\nตำแหน่งภาพรวมจากศูนย์กลางข้อมูลผู้ประกอบการ โปรดตรวจสอบก่อนใช้ในรายงาน':''));fireSyncAnalysisMap(item.origin);render();}
+ fireSyncAnalysisMap=function(origin){
+  if(view){view.goTo({center:[origin.lng,origin.lat],zoom:14}).catch(function(){});if(GraphicClass){view.graphics.removeAll();view.graphics.add(new GraphicClass({geometry:{type:'point',latitude:origin.lat,longitude:origin.lng},symbol:{type:'simple-marker',color:'#59267c',size:13,outline:{color:'#fff',width:2}}}));}}
+ };
+ function render(){
+  var available=records||[],near=scope.value==='near'&&selected,items=near?available.filter(function(r){var p=firePoint(r);return p&&fireDistanceKm(selected.origin,p)<=3}):available;
+  var values=configs.map(function(c){return {label:c.label,id:c.id,count:items.filter(function(r){return r.config.id===c.id}).length}});
+  var signature=JSON.stringify(values)+(near?'near':'all');if(signature===lastSignature)return;lastSignature=signature;
+  var counts=document.getElementById('riskCounts');counts.replaceChildren();
+  values.forEach(function(c){var b=document.createElement('button');b.className='risk-count';b.type='button';var n=document.createElement('strong'),label=document.createElement('span');n.textContent=c.count.toLocaleString('th-TH');label.textContent=c.label;b.append(n,label);b.onclick=function(){if(!view)return;var layers=view.map.allLayers.toArray();layers.forEach(function(l){if(l.url&&configs.some(function(conf){return l.url.replace(/\/$/,'')===conf.url.replace(/\/$/,'')}))l.visible=l.url.replace(/\/$/,'')===configs.find(function(conf){return conf.id===c.id}).url.replace(/\/$/,'');});};counts.appendChild(b);});
+  document.getElementById('riskCountNote').textContent=(near?'จำนวนจุด / พื้นที่ที่มีตำแหน่งอยู่ในรัศมี 3 กม.':'จำนวนรายการที่โหลดได้จากฐานข้อมูล')+' · ไม่ใช่คะแนนหรือระดับความเสี่ยง'+(available.length?'':' · กำลังโหลดข้อมูล');
+ }
+ function search(){
+  var q=fireNormalize(input.value);if(!q){setStatus('กรุณาพิมพ์หรือเลือกชื่อพื้นที่');return}
+  var business=fireFactoryRecords(),matches=business.filter(function(r){return fireNormalize(r.name)===q||fireNormalize(r.registration)===q});
+  if(!matches.length)matches=business.filter(function(r){return fireNormalize(r.name).includes(q)});
+  if(matches.length===1){var r=matches[0];choose({name:r.name,estate:r.estate,registration:r.registration,origin:firePoint(r),company:r.name});return}
+  var names=fireEstateNames(),name=names.find(function(n){return fireNormalize(n)===q});if(!name){var candidates=names.filter(function(n){return fireNormalize(n).includes(q)});if(candidates.length===1)name=candidates[0];}
+  if(name){var points=business.filter(function(r){return fireNormalize(r.estate)===fireNormalize(name)}).map(firePoint).filter(Boolean);if(points.length){choose({name:name,estate:name,company:'บริษัท / โรงงานที่เกิดเหตุ',origin:{lat:points.reduce(function(s,p){return s+p.lat},0)/points.length,lng:points.reduce(function(s,p){return s+p.lng},0)/points.length},approximate:true});return}}
+  setStatus(matches.length>1?'พบหลายรายการ กรุณาระบุชื่อเต็มหรือเลือกตำแหน่งบนแผนที่':'ไม่พบข้อมูลที่ตรงกัน หรือข้อมูลยังโหลดไม่ครบ กรุณาลองอีกครั้ง');
+ }
+ fireApplyEstate=search;
+ document.getElementById('riskSearch').onclick=search;input.onkeydown=function(e){if(e.key==='Enter'){e.preventDefault();search();}};scope.onchange=render;
+ document.getElementById('riskReset').onclick=function(){selected=null;scope.value='all';send.disabled=true;input.value='';setStatus('แสดงภาพรวมข้อมูลทั้งหมด');if(view){view.graphics.removeAll();view.map.allLayers.forEach(function(l){if(l.url&&configs.some(function(c){return c.url===l.url}))l.visible=true;});view.goTo({center:[101.1,12.93],zoom:9}).catch(function(){});}render();};
+ send.onclick=function(){
+  if(!selected)return;var previous={};try{previous=JSON.parse(localStorage.getItem('dss-report')||'{}')}catch(e){}
+  var payload=Object.assign({},previous,{company:selected.company||'บริษัท / โรงงานที่เกิดเหตุ',estate:selected.estate||'—',registration:selected.registration||'—',address:selected.name,lat:selected.origin.lat.toFixed(6),lng:selected.origin.lng.toFixed(6),source:'ArcGIS Risk Map และฐานข้อมูลผู้ประกอบการ กนอ.'});
+  localStorage.setItem('dss-report',JSON.stringify(payload));var frame=document.getElementById('fireDssFrame');
+  function deliver(){if(frame&&frame.contentWindow)frame.contentWindow.postMessage({type:'dss-autofill',payload:payload},location.origin);}
+  if(frame){frame.addEventListener('load',deliver,{once:true});deliver();root.querySelector('.fire-dss-panel').scrollIntoView({behavior:'smooth',block:'start'});}
+ };
+ function bindMap(){
+  if(!view||mapBound)return;mapBound=true;
+  require(['esri/Graphic','esri/widgets/LayerList','esri/widgets/Legend'],function(Graphic,LayerList,Legend){GraphicClass=Graphic;view.when(function(){view.ui.add(new LayerList({view:view}),'top-right');view.ui.add(new Legend({view:view}),'bottom-left');if(selected)fireSyncAnalysisMap(selected.origin);}).catch(function(){});});
+  view.on('click',function(event){view.hitTest(event).then(function(result){var hit=result.results.find(function(r){return r.graphic&&r.graphic.attributes});if(hit){var attrs=hit.graphic.attributes,config=configs.find(function(c){return hit.graphic.layer&&hit.graphic.layer.url===c.url}),r={feature:hit.graphic};var origin=firePoint(r);if(origin){choose({name:val(attrs,config?config.name:['mercant_name','Name','IEAT']),company:config&&config.id==='business'?val(attrs,config.name):'บริษัท / โรงงานที่เกิดเหตุ',estate:val(attrs,['IEAT','นิคมอุตสาหกรรม']),registration:val(attrs,['fid14n']),origin:origin});return}}if(event.mapPoint)choose({name:'ตำแหน่งที่เลือกบน Risk Map',origin:{lat:event.mapPoint.latitude,lng:event.mapPoint.longitude}});}).catch(function(){});});
+ }
+ var timer=setInterval(function(){bindMap();render();},1500);window.addEventListener('pagehide',function(){clearInterval(timer);});
+ bindMap();render();syncFireEstateOptions();
+})();
+</script>
