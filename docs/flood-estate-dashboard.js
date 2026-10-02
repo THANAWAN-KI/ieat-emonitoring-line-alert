@@ -152,17 +152,34 @@
    #estateFocusDashboard .ef-estate-map-label{display:block;text-align:right;color:#532E7C!important;font-size:11px;font-weight:600;margin-top:10px}
    #estateFocusDashboard .ef-estate-rain{font-size:11px}
    @media(max-width:520px){.ef-estate-title{flex-wrap:wrap}}
+
+#estateFocusDashboard .ef-map-head{flex-wrap:wrap}#estateFocusDashboard .ef-map-head .ef-actions{flex-wrap:wrap}
+#estateFocusDashboard #efReport{background:#e8f4fc;color:#0072cf!important;border-color:#b8dbf5}
+#efMapControls{padding:10px 16px;border-bottom:1px solid #e5e8ee;background:white;max-height:260px;overflow:auto;flex:none}
+#efMapControls .controls{position:static;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+#efMapControls .search{display:flex;gap:8px;width:100%;margin:0}
+#efMapControls .search select,#efMapControls .search input,#efMapControls .dam-select{font:13px "Sarabun",sans-serif;min-width:0;padding:8px;border:1px solid #dce1e7;border-radius:8px;background:#fff;flex:1}
+#efMapControls .toggles{display:flex;flex-wrap:wrap;gap:6px;width:100%}
+#efMapControls .toggles label{font-size:11px;display:flex;align-items:center;gap:4px;background:#f7fafc;padding:5px 7px;border-radius:6px;border:1px solid #e5e8ee;cursor:pointer}
+#efMapControls input[type=checkbox]{accent-color:#0072cf}#efMapControls .legend{width:100%;font-size:11px}#efMapControls .legend p{margin:8px 0}#efMapControls .keys{display:flex;gap:10px;flex-wrap:wrap}#efMapControls .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px}
+#estateFocusDashboard .ef-charts{grid-template-columns:1fr}
+#estateFocusDashboard .ef-estate-panel h2{color:#00387B!important}
+#estateFocusDashboard #efDetails24,#estateFocusDashboard #efDetails48{background:#eaf4fc;border-color:#c6dff1}
+#estateFocusDashboard #efDetails24 summary,#estateFocusDashboard #efDetails48 summary{color:#00387B!important}
+#estateFocusDashboard .ef-estate{border:1px solid #dce7ef;border-radius:12px;padding:14px;background:#fff;position:relative;border-left:4px solid #109dc0}
+#estateFocusDashboard .ef-estate[aria-pressed=true]{background:#eef7fd;border-color:#0072cf;outline:1px solid #0072cf}
+#estateFocusDashboard .ef-estate-title b{color:#00387B!important}
+#estateFocusDashboard .ef-estate-stats{border:0;margin-top:8px;padding:10px;background:#f4f8fb;border-radius:8px}
+#estateFocusDashboard .ef-estate-stats strong{font-size:18px;color:#0072cf!important}
+#estateFocusDashboard .ef-estate-map-label{color:#0072cf!important}
   `;document.head.appendChild(style);
   const host=document.createElement('section');host.id='estateFocusDashboard';
   const metrics=[['efWatch','นิคมฯ เข้าเกณฑ์เฝ้าระวัง','ผลคัดกรองจากสถานีใกล้นิคมฯ'],['efWaterWatch','ใกล้ระดับน้ำเข้าเกณฑ์','สถานีระดับน้ำภายใน 30 กม.'],['efRainWatch','ใกล้ฝนเข้าเกณฑ์','ฝนสะสมมากกว่า 35 มม. ภายใน 30 กม.'],['efTotal','นิคมฯ / ท่าเรือในชุดข้อมูล','ตำแหน่งที่ใช้ประเมินจากข้อมูล กนอ.'],['ef24','ตำบลเฝ้าระวัง 24 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ'],['ef48','ตำบลเฝ้าระวัง 48 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ']];
   host.innerHTML=`<div class="ef-workspace"><div class="ef-data-column">
-   <div class="ef-toolbar"><div class="ef-actions"><button id="efRefresh" type="button">อัปเดต</button><button id="efReport" type="button">จัดทำรายงาน ↗</button></div></div>
-   <div class="ef-status" id="efStatus" role="status">กำลังตรวจสอบข้อมูล…</div>
-   <div class="ef-charts"><article class="ef-chart"><h2>นิคมฯ เข้าเกณฑ์เฝ้าระวัง</h2><div class="ef-gauge" id="efGauge"></div><p>เทียบกับนิคมฯ / ท่าเรือทั้งหมดในชุดข้อมูล ไม่ใช่จำนวนนิคมฯ ที่ยืนยันน้ำท่วม</p></article><article class="ef-chart"><h2>สัดส่วนการคัดกรองนิคมฯ</h2><div id="efComposition"></div></article><article class="ef-chart"><h2>5 นิคมฯ ใกล้สถานีฝนสะสมสูงสุด</h2><div id="efRainRank"></div><p>ฝนสะสม 24 ชม. สูงสุดจากสถานีในรัศมี 30 กม. · หน่วย มม.</p></article></div>
-   <div class="ef-metrics" aria-label="การ์ดข้อมูลเฝ้าระวัง">${metrics.map(([id,title,note])=>`<article class="ef-metric" role="button" tabindex="0" data-ef-card="${id}"><h2>${title}</h2><div class="ef-metric-value"><strong id="${id}">–</strong><span class="ef-unit">${['ef24','ef48'].includes(id)?'ตำบล':'แห่ง'}</span></div><small>${note}</small></article>`).join('')}</div>
+   <div class="ef-charts"><article class="ef-chart"><h2>5 นิคมฯ ใกล้สถานีฝนสะสมสูงสุด</h2><div id="efRainRank"></div><p>ฝนสะสม 24 ชม. สูงสุดจากสถานีในรัศมี 30 กม. · หน่วย มม.</p></article></div>
    <section class="ef-panel ef-estate-panel"><h2>ติดตามนิคมฯ / ท่าเรือ</h2><div class="ef-tools"><input id="efSearch" type="search" aria-label="ค้นหาชื่อนิคมฯ / ท่าเรือ" placeholder="ค้นหาชื่อนิคมฯ / ท่าเรือ"><select id="efFilter" aria-label="กรองข้อมูลนิคมฯ"><option value="watch">เข้าเกณฑ์เฝ้าระวัง</option><option value="water">ใกล้ระดับน้ำเข้าเกณฑ์</option><option value="rain">ใกล้ฝนเข้าเกณฑ์</option><option value="all">ทุกนิคมฯ / ท่าเรือ</option></select></div><p id="efResultCount" class="ef-count"></p><div class="ef-selection" id="efSelection" hidden></div><div id="efEstates" class="ef-estates"></div></section>
    <div class="ef-warning"><details class="ef-panel" id="efDetails24"><summary>พื้นที่เฝ้าระวัง 24 ชั่วโมง</summary><div id="efWarning24"></div></details><details class="ef-panel" id="efDetails48"><summary>พื้นที่เฝ้าระวัง 48 ชั่วโมง</summary><div id="efWarning48"></div></details></div>
-   </div><section class="ef-map-column"><header class="ef-map-head"><div><h2>แผนที่เฝ้าระวังนิคมอุตสาหกรรม</h2><small>เลือกนิคมฯ หรือสถานีเพื่อซูม</small></div><div class="ef-actions"><button type="button" id="efMapFullscreen" aria-pressed="false">เต็มหน้าจอ ↗</button><button type="button" id="efMapReset">ดูภาพรวม</button></div></header><div class="ef-map-frame"><iframe id="estateFocusMap" title="แผนที่สถานการณ์น้ำและนิคมอุตสาหกรรม" src="flood-hydrology-map.html?v=20261001-water-popup-2&amp;center=101,13&amp;scale=9244648" loading="eager"></iframe></div><footer class="ef-map-foot">GISTDA: พื้นที่ตรวจพบตามวันที่ภาพ · Longdo: จุดรายงานเหตุการณ์ · ThaiWater: สถานีระดับน้ำ</footer></section></div>`;
+   </div><section class="ef-map-column"><header class="ef-map-head"><div><h2>แผนที่เฝ้าระวังนิคมอุตสาหกรรม</h2><small>เลือกนิคมฯ หรือสถานีเพื่อซูม</small></div><div class="ef-actions"><button type="button" id="efMapFullscreen" aria-pressed="false">เต็มหน้าจอ ↗</button><button type="button" id="efMapReset">ดูภาพรวม</button><button id="efReport" type="button">จัดทำรายงาน ↗</button></div></header><div id="efMapControls" aria-label="ตัวควบคุมแผนที่"></div><div class="ef-map-frame"><iframe id="estateFocusMap" title="แผนที่สถานการณ์น้ำและนิคมอุตสาหกรรม" src="flood-hydrology-map.html?v=20261002-map-controls-5&amp;center=101,13&amp;scale=9244648" loading="eager"></iframe></div><footer class="ef-map-foot">GISTDA: พื้นที่ตรวจพบตามวันที่ภาพ · Longdo: จุดรายงานเหตุการณ์ · ThaiWater: สถานีระดับน้ำ</footer></section></div>`;
   warning.prepend(host);
   const loading=$('dashboardLoading');if(loading)loading.remove();
 
@@ -185,8 +202,11 @@
   document.addEventListener('fullscreenchange',syncFullscreen);
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&mapPanel.classList.contains('ef-map-expanded'))closeExpanded()});
 
-  $('estateFocusMap').addEventListener('load',()=>{if(selected&&current){const estate=model(current).estates.find(e=>String(e.id)===selected);if(estate)zoom(estate.lat,estate.lon)}});
-  $('efRefresh').onclick=load;
+  $('estateFocusMap').addEventListener('load',()=>{
+   const frame=$('estateFocusMap');try{const controls=frame.contentDocument.querySelector('.controls');if(controls)$('efMapControls').replaceChildren(controls)}catch(e){console.error('Map controls could not be moved',e)}
+   frame.contentWindow?.postMessage({type:'flood-map-resize'},location.origin);
+   if(selected&&current){const estate=model(current).estates.find(e=>String(e.id)===selected);if(estate)zoom(estate.lat,estate.lon)}
+  });
   $('efReport').onclick=()=>window.open('flood-gis-report.html?estate='+encodeURIComponent(selected||'29'),'_blank','noopener');
   $('efSearch').oninput=()=>renderEstates();$('efFilter').onchange=()=>renderEstates();
   function reset(){selected='';if(current)render(current);$('estateFocusMap')?.contentWindow?.postMessage({type:'flood-map-focus',lat:13,lon:101,scale:9244648},location.origin)}
@@ -196,13 +216,7 @@
   host.addEventListener('click',e=>{const card=e.target.closest('[data-ef-card]');if(card){openCard(card.dataset.efCard);return}const button=e.target.closest('[data-ef-lat]');if(!button)return;zoom(button.dataset.efLat,button.dataset.efLon);if(button.dataset.efEstate){selected=button.dataset.efEstate;render(current)}});
  }
  function renderCharts(m){
-  if(!m.usable){['efGauge','efComposition','efRainRank'].forEach(id=>$(id).innerHTML='<div class="ef-empty">ข้อมูลยังไม่ครบหรือยังไม่พร้อมประเมิน</div>');return}
-  const total=m.estates.length,count=m.watch.length,pct=total?count/total*100:0;
-  $('efGauge').innerHTML=`<svg viewBox="0 0 200 130" role="img" aria-label="นิคมฯ เข้าเกณฑ์ ${count} จาก ${total} แห่ง"><path d="M20 100 A80 80 0 0 1 180 100" fill="none" stroke="#eef1f4" stroke-width="22" pathLength="100"/><path d="M20 100 A80 80 0 0 1 180 100" fill="none" stroke="#f96961" stroke-width="22" pathLength="100" stroke-dasharray="${pct} 100"/><text x="100" y="101" text-anchor="middle" fill="#3f51aa" font-size="19" font-weight="600">${count} แห่ง</text><text x="100" y="122" text-anchor="middle" fill="#92a0ac" font-size="12">จาก ${total} แห่งในชุดข้อมูล</text></svg>`;
-  const both=m.watch.filter(e=>e.rain.length&&e.water.length).length,rainOnly=m.watch.filter(e=>e.rain.length&&!e.water.length).length,waterOnly=m.watch.filter(e=>e.water.length&&!e.rain.length).length;
-  const parts=[['ใกล้ระดับน้ำเข้าเกณฑ์','#62c948',waterOnly],['ใกล้ฝนเข้าเกณฑ์','#ffda31',rainOnly],['เข้าเกณฑ์ทั้งสองแบบ','#db62e8',both],['ไม่พบสถานีเข้าเกณฑ์','#b8bdc3',total-count]];let start=0;
-  const stops=parts.map(([,color,n])=>{const end=start+n/total*100,s=`${color} ${start}% ${end}%`;start=end;return s}).join(',');
-  $('efComposition').innerHTML=`<div class="ef-donut" role="img" aria-label="สัดส่วน ${parts.map(([label,,n])=>label+' '+n+' แห่ง').join(', ')}" style="background:conic-gradient(${stops})"><b>${total}</b></div><div class="ef-chart-legend">${parts.map(([label,color,n])=>`<div><i style="background:${color}"></i><span>${label}</span><strong>${n}</strong></div>`).join('')}</div>`;
+  if(!m.usable){$('efRainRank').innerHTML='<div class="ef-empty">ข้อมูลยังไม่ครบหรือยังไม่พร้อมประเมิน</div>';return}
   const rank=m.estates.map(e=>{const values=m.rain.filter(r=>km(e,r)<=RADIUS).map(r=>Number(r.rainfall_mm));return {...e,rain:values.length?Math.max(...values):null}}).filter(e=>e.rain!==null).sort((a,b)=>b.rain-a.rain).slice(0,5),max=rank[0]?.rain||1;
   $('efRainRank').innerHTML=rank.length?rank.map(e=>`<button class="ef-rank-row" type="button" data-ef-estate="${esc(e.id)}" data-ef-lat="${e.lat}" data-ef-lon="${e.lon}" title="${esc(e.name)}: ${fmt(e.rain)} มม."><span>${esc(e.name.replace(/^นิคมอุตสาหกรรม/,''))}</span><div class="ef-rank-track"><b style="width:${Math.max(12,e.rain/max*100)}%">${fmt(e.rain)}</b></div></button>`).join(''):'<div class="ef-empty">ไม่มีค่าฝนล่าสุดที่ใช้จัดอันดับได้</div>';
  }
@@ -265,8 +279,6 @@
 
  function render(data){
   mount();if(!$('estateFocusDashboard'))return;current=data;const m=model(data);
-  $('efStatus').dataset.state=m.complete&&!m.stale&&data.status==='ok'?'ready':'incomplete';
-  $('efStatus').textContent=(m.complete?(m.stale?'ข้อมูลย้อนหลัง':data.status==='partial'?'ข้อมูลบางแหล่งไม่พร้อม':'ใช้ชุดข้อมูลครบสำหรับคัดกรองนิคมฯ'):'ข้อมูลยังไม่ครบสำหรับคำนวณยอดนิคมฯ')+' · จัดทำชุดข้อมูล '+time(data.generated_at)+' · ตรวจไฟล์ใหม่ทุก 5 นาที (ต้นทางอัปเดตตามรอบของแต่ละแหล่ง)';
   set('efTotal',m.complete?fmt(m.estates.length):'รอตรวจสอบ');
   [['efWatch',m.watch.length],['efRainWatch',m.watch.filter(e=>e.rain.length).length],['efWaterWatch',m.watch.filter(e=>e.water.length).length]].forEach(([id,n])=>set(id,m.usable?fmt(n):m.stale?'ข้อมูลย้อนหลัง':'ข้อมูลไม่ครบ'));
   set('ef24',m.warning24.available?fmt(m.warning24.rows.length):'ไม่มีข้อมูล');set('ef48',m.warning48.available?fmt(m.warning48.rows.length):'ไม่มีข้อมูล');
@@ -285,7 +297,7 @@
  async function load(){
   if(busy)return;busy=true;if($('efRefresh'))$('efRefresh').disabled=true;
   try{const res=await fetch('./data/thaiwater_latest.json?v='+Date.now(),{cache:'no-store'});if(!res.ok)throw Error('HTTP '+res.status);const data=await res.json();if(!data.summary||!Array.isArray(data.estates))throw Error('รูปแบบข้อมูลไม่ครบ');render(data)}
-  catch(e){if(current){render({...current,status:'stale'});$('efStatus').textContent+=' · โหลดรอบใหม่ไม่สำเร็จ'}else{set('efStatus','โหลดข้อมูลไม่สำเร็จ ยังไม่สามารถสรุปสถานการณ์ได้');$('efStatus').dataset.state='incomplete'}}
+  catch(e){if(current){render({...current,status:'stale'});set('efResultCount','โหลดรอบใหม่ไม่สำเร็จ · แสดงข้อมูลเดิม')}else{set('efResultCount','โหลดข้อมูลไม่สำเร็จ ยังไม่สามารถสรุปสถานการณ์ได้')}}
   finally{busy=false;if($('efRefresh'))$('efRefresh').disabled=false}
  }
  function start(){mount();if(window.IEAT_THAIWATER_DATA)render(window.IEAT_THAIWATER_DATA);load();setInterval(load,300000)}
