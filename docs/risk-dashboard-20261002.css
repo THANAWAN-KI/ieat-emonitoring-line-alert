@@ -164,3 +164,10 @@
 /* Equal tab dimensions and regular weight */
 .portal-header .nav-tab,.portal-header .nav-tab.active{width:120px;min-width:120px;flex:0 0 120px;height:46px;min-height:46px;padding:0 12px;border:0;font-weight:400;font-size:17px;line-height:1.5}
 @media(max-width:760px){.portal-header .nav-tab,.portal-header .nav-tab.active{width:104px;min-width:104px;flex-basis:104px;height:42px;min-height:42px;font-size:16px;padding:0 8px}}
+
+/* Align header rows and use light navigation type */
+.portal-header{width:100%;margin:0;padding:0}
+.portal-header .nav-tabs{grid-column:1/-1;width:100%;margin:0;padding-left:0;padding-right:0;gap:0}
+.portal-header .nav-tab,.portal-header .nav-tab.active{font-weight:300;font-size:17px}
+.portal-top .header-nav,.portal-top .header-nav a{font-size:17px;font-weight:300;line-height:1.5}
+@media(max-width:760px){.portal-header .nav-tabs{padding-left:0;padding-right:0}.portal-header .nav-tab,.portal-header .nav-tab.active,.portal-top .header-nav,.portal-top .header-nav a{font-size:16px;font-weight:300}}
