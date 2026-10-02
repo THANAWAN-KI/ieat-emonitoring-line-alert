@@ -221,6 +221,29 @@ body>.workspace{max-width:1100px;display:flex;flex-direction:column;gap:28px}
 @media print{table,td,th{border:1px solid #000!important}}
 @media screen and (max-width:600px){.workspace>.report,.workspace>.map-panel{padding:14px}.workspace>.map-panel iframe{height:520px;min-height:0}}
 
+
+/* Display the two report pages together on desktop. */
+@media screen{
+body>.workspace{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);max-width:1900px;width:100%;gap:20px;padding:20px;align-items:start}
+.workspace>.report,.workspace>.map-panel{width:100%;min-width:0;height:calc(100dvh - 140px);min-height:560px;overflow:auto;scrollbar-width:thin;border:1px solid #000;padding:20px}
+.workspace>.report{position:relative}
+.workspace>.map-panel{position:sticky;top:20px;display:flex;flex-direction:column;overflow:hidden}
+.workspace>.report::before{content:"หน้า 1 · ข้อมูลสถานการณ์น้ำ";display:block;color:#263d6e;font-size:14px;font-weight:700;border-bottom:1px solid #000;padding-bottom:10px;margin-bottom:16px}
+.workspace>.map-panel::before{content:"หน้า 2 · แผนที่เฝ้าระวัง";display:block;color:#263d6e;font-size:14px;font-weight:700;border-bottom:1px solid #000;padding-bottom:10px;margin-bottom:12px;flex:none}
+.workspace>.map-panel iframe{height:auto;min-height:300px;flex:1}
+.workspace>.map-panel h2{font-size:22px;flex:none}
+.workspace>.map-panel #mapSelection,.workspace>.map-panel small{flex:none}
+.flood-document-head>strong{font-size:23px}
+.flood-document-meta{grid-template-columns:1fr}
+.workspace .flood-estate-details{min-width:0}
+}
+@media screen and (max-width:950px){
+body>.workspace{display:flex;flex-direction:column;padding:14px}
+.workspace>.report{height:auto;min-height:0;overflow:visible}
+.workspace>.map-panel{position:static;height:700px;min-height:0}
+}
+@media screen and (max-width:600px){.workspace>.report,.workspace>.map-panel{padding:14px}.workspace>.map-panel{height:560px}.workspace>.map-panel h2{font-size:20px}}
+
 </style><script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script></head><body><header><div class="report-brand"><span class="report-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 12h8M8 16h8M8 19h5"/></svg></span><div><span class="report-eyebrow">IEAT e-MONITORING · FLOOD REPORT</span><h1>จัดทำรายงานสถานการณ์น้ำ</h1><p class="report-subtitle">ข้อมูลเฝ้าระวัง ผลกระทบ และการช่วยเหลือรายนิคมอุตสาหกรรม</p></div></div><div class="screen-actions"><a class="action" href="flood-report.html">กลับหน้าสถานการณ์น้ำ</a><button id="printButton">ส่งออก PNG</button></div></header><main class="workspace"><div class="report"><section class="panel flood-overview"><div class="flood-document-head"><strong>รายงานสถานการณ์น้ำในพื้นที่นิคมอุตสาหกรรม</strong><p>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย</p></div><div class="flood-document-meta"><div><span>พื้นที่รายงาน</span><strong id="reportEstateName">กำลังโหลดข้อมูลนิคมฯ</strong></div><div><span>รอบข้อมูลสถานี</span><strong id="reportDataRound">–</strong></div><div><span>สถานะเอกสาร</span><strong>ข้อมูลสนับสนุนเบื้องต้น</strong></div></div><h2 id="estateTitle">กำลังโหลดข้อมูลนิคมฯ</h2><p id="dataTime"></p><table class="flood-estate-details" aria-label="ข้อมูลพื้นที่รายงาน"><tbody><tr><th scope="row">นิคมอุตสาหกรรม</th><td id="reportEstateDetail">–</td></tr><tr><th scope="row">พิกัดอ้างอิง</th><td id="reportEstateCoordinates">–</td></tr><tr><th scope="row">ขอบเขตติดตาม</th><td>สถานีฝนและระดับน้ำภายในรัศมี 30 กม. จากจุดนิคมฯ</td></tr><tr><th scope="row">การประเมินสถานการณ์</th><td>คัดกรองจากข้อมูลสถานี ต้องตรวจสอบร่วมกับข้อมูลจากพื้นที่</td></tr></tbody></table><div id="waterSummary" class="notice">กำลังตรวจสอบข้อมูลสถานี…</div><div class="cards" style="margin-top:14px"><div class="card">ฝนสะสม 24 ชม. สูงสุด<strong id="rainMax">–</strong><small id="rainCount"></small></div><div class="card">สถานีระดับน้ำเข้าเกณฑ์<strong id="waterWatch">–</strong><small id="waterCount"></small></div></div><div class="print-only" id="mapPrint"><p>ภาพแผนที่ยังไม่ได้จัดเตรียม</p></div><h3>สถานีที่ใช้ติดตามในรัศมี 30 กม.</h3><div class="status-legend"><span class="status-key" data-level="normal">ปกติ</span><span class="status-key" data-level="moderate">ฝนปานกลาง</span><span class="status-key" data-level="watch">เฝ้าระวัง</span><span class="status-key" data-level="high">วิกฤต / เสี่ยงสูง</span><span class="status-key" data-level="danger">ล้นตลิ่ง</span><span class="status-key" data-level="unknown">ไม่มีข้อมูล</span></div><div class="table-wrap"><table><thead><tr><th>สถานี</th><th>ค่าตรวจวัด</th><th>สถานะ</th><th>ระยะ กม.</th><th>เวลาตรวจวัด</th></tr></thead><tbody id="stationRows"></tbody></table></div><p><small>การคัดกรองสถานีไม่ยืนยันว่าน้ำท่วมภายในนิคมฯ ระยะเป็นเส้นตรงจากจุดนิคมฯ โปรดตรวจวันที่ภาพ GISTDA และรายงานจากพื้นที่</small></p></section>
 <section class="panel flood-affected"><h2><span class="section-number" aria-hidden="true">02</span>ผู้ประกอบการที่ได้รับผลกระทบ</h2><p id="damageSummary">ยังไม่มีจำนวนและรายชื่อโรงงานเสียหายที่ยืนยัน ไม่หมายความว่าไม่มีความเสียหาย</p><div class="input-only"><label>รายชื่อและรายละเอียดผลกระทบที่ได้รับจากพื้นที่ หนึ่งโรงงานต่อหนึ่งบรรทัด<textarea id="damageNames" placeholder="ชื่อโรงงาน — ผลกระทบ — วันที่และเวลายืนยัน"></textarea></label><label><input id="damageConfirmed" type="checkbox"> รายการนี้ได้รับการยืนยันจากพื้นที่แล้ว</label><small>รายการนี้ใช้เฉพาะรายงานที่เปิดอยู่ ไม่บันทึกลงฐานข้อมูลกลาง</small></div><ol id="damageList"></ol></section>
 <section class="panel page-two"><h2><span class="section-number" aria-hidden="true">03</span>การรับมือและช่วยเหลือ</h2><div id="responseText"></div><div class="input-only"><label>เพิ่มเติมมาตรการหรือสถานะการดำเนินการ<textarea id="responseExtra" placeholder="ระบุรายละเอียดและเวลาอัปเดต"></textarea></label></div><p id="responseExtraPrint"></p></section>
