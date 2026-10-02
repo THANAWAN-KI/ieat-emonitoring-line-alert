@@ -32,7 +32,7 @@
 <section class="map-grid"><article class="panel"><div class="map-controls"><span>Risk Map · Web Map กนอ.</span><select id="basemap" aria-label="แผนที่พื้นฐาน"><option value="gray-vector">แผนที่สีเทา</option><option value="streets-vector">แผนที่ถนน</option><option value="satellite" selected>ภาพถ่ายดาวเทียม</option><option value="topo-vector">ภูมิประเทศ</option></select></div><div id="map" role="region" aria-label="แผนที่ Risk Map"></div><div id="mapStatus" class="map-footer" role="status">กำลังโหลดแผนที่…</div></article><aside class="panel"><div class="directory-head"><div class="directory-title-row"><h3>รายการข้อมูลในพื้นที่</h3><span id="listCount" class="directory-count" role="status">… รายการ</span></div><small id="listLimit"></small><p class="directory-hint">เลือกข้อมูลเพื่อซูมไปยังตำแหน่งบนแผนที่</p></div><div id="directory"></div></aside></section>
 <p class="source-note">แหล่งข้อมูล: ตำแหน่งนิคมฯ e_PP_2025, ข้อมูลผู้ประกอบการ_e_PP, Hospital_Locations, Risk_Map_WFL1, Map และตำแหน่งกล้องCCTV · ตัวเลขนับตามรายการ / แปลงในแต่ละชั้นข้อมูล อาจมีผู้ประกอบการที่มีหลายแปลง · ระหว่างโหลดจะแสดงข้อมูลเท่าที่ได้รับ</p>
 </section>
-<section id="emergencyReportPage" hidden><iframe id="emergencyReportFrame" class="other-frame" title="จัดทำรายงานเหตุฉุกเฉิน"></iframe></section>
+<section id="emergencyReportPage" hidden><div class="emergency-report-actions" style="display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin-bottom:12px"><button id="returnRiskDashboard" type="button" style="background:#f1e5f8;color:#532e7c;border:1px solid #ddc1eb;border-radius:9px;padding:10px 16px;font:inherit;cursor:pointer">← กลับไป Dashboard Riskmap</button><button id="resetEmergencyReport" type="button" style="background:#511378;color:#fff;border:0;border-radius:9px;padding:10px 16px;font:inherit;cursor:pointer">ล้างข้อมูล</button><button id="downloadEmergencyReport" type="button" style="background:#511378;color:#fff;border:0;border-radius:9px;padding:10px 16px;font:inherit;cursor:pointer">ดาวน์โหลด PNG</button></div><iframe id="emergencyReportFrame" class="other-frame" title="จัดทำรายงานเหตุฉุกเฉิน"></iframe></section>
 <section id="otherPage" hidden><iframe id="otherFrame" class="other-frame" title="ข้อมูลสถานการณ์ภัย" loading="lazy"></iframe></section>
 </main>
 <footer>ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย กนอ. · EMCC GIS</footer>
@@ -51,6 +51,13 @@
     document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.toggle('active', tab === riskTab));
     window.dispatchEvent(new Event('resize'));
   };
+  document.getElementById('returnRiskDashboard').addEventListener('click', window.returnToRiskDashboard);
+  document.getElementById('resetEmergencyReport').addEventListener('click', function () {
+    reportFrame.contentDocument?.getElementById('resetBtn')?.click();
+  });
+  document.getElementById('downloadEmergencyReport').addEventListener('click', function () {
+    reportFrame.contentDocument?.getElementById('pngBtn')?.click();
+  });
   reportFrame.addEventListener('load', function () {
     const reportDocument = reportFrame.contentDocument;
     if (!reportDocument) return;
@@ -68,7 +75,7 @@
     otherPage.hidden = true;
     reportPage.hidden = false;
     document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.toggle('active', tab === riskTab));
-    if (!reportFrame.getAttribute('src')) reportFrame.src = './dss.html?embedded=risk&v=20261002-parent-target-7';
+    if (!reportFrame.getAttribute('src')) reportFrame.src = './dss.html?embedded=risk&v=20261002-parent-controls-8';
   });
   document.querySelectorAll('.nav-tab').forEach(tab => tab.addEventListener('click', function () {
     reportPage.hidden = true;
