@@ -145,3 +145,14 @@
 .portal-top{background:#fff;color:#532e7c;min-height:0;padding:8px 26px}
 .portal-header .nav-tabs{width:100%;padding-left:28px;background:linear-gradient(100deg,#b9a8ca 0%,#886aa4 30%,#61417e 64%,#42275d 100%)}
 @media(max-width:760px){.portal-header{grid-template-columns:1fr auto;grid-template-areas:"brand tools" "nav nav"}.portal-header .brand{padding:10px 12px;gap:8px}.portal-header .brand img{width:32px;height:40px}.portal-header .brand strong{font-size:15px}.portal-top{padding:6px 10px}.portal-top .header-nav{gap:10px;font-size:11px}.portal-header .nav-tabs{padding-left:12px}}
+
+/* Header logo, links and current page */
+.portal-header .brand img{width:66px;height:68px}
+.portal-header .brand strong{color:#532e7c}
+.portal-top .header-nav a{display:inline-flex;align-items:center;justify-content:center;background:#e6f4eb;color:#17663f;border-radius:7px;padding:7px 15px}
+.portal-top .header-nav a:hover{background:#d4ebde}
+.portal-top .header-nav{gap:10px}
+.portal-header .nav-tabs{align-items:stretch;padding-top:0;padding-bottom:0}
+.portal-header .nav-tab{display:flex;align-items:center;justify-content:center;min-height:46px}
+.portal-header .nav-tab.active,.portal-header .nav-tab.active:hover{background:#158f63;color:#fff;border-bottom:0;box-shadow:none}
+@media(max-width:760px){.portal-header .brand img{width:48px;height:54px}.portal-top .header-nav a{padding:6px 8px}.portal-header .nav-tab{min-height:42px}}
