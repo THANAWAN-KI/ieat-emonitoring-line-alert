@@ -7,18 +7,18 @@
 <link rel="icon" type="image/svg+xml" sizes="any" href="./emcc-gis-rabbit-20261002.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css">
-<link rel="stylesheet" href="./risk-dashboard-20261002.css?v=3">
+<link rel="stylesheet" href="./risk-dashboard-20261002.css?v=5">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://js.arcgis.com/4.30/"></script>
 </head>
 <body>
-<header class="site-header"><a class="brand" href="./hub.html"><img src="./assets/TH-Vertical.png" alt="กนอ."><span><strong>EMCC GIS</strong><small>ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย</small></span></a><nav class="header-nav" aria-label="เมนูหลัก"><a href="./daily-situation.html">หน้าแรก</a><a href="./information.html#overview">ข้อมูล</a></nav><a class="report-button" href="./dss.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h6"/></svg>เปิดหน้าจัดทำรายงานเหตุฉุกเฉิน ↗</a></header>
+<header class="site-header"><a class="brand" href="./hub.html"><img src="./assets/TH-Vertical.png" alt="กนอ."><span><strong>EMCC GIS</strong><small>ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย</small></span></a><nav class="header-nav" aria-label="เมนูหลัก"><a href="./daily-situation.html">หน้าแรก</a><a href="./information.html#overview">ข้อมูล</a></nav></header>
 <nav class="nav-tabs" aria-label="สถานการณ์ภัย"><button class="nav-tab active" data-page="risk" type="button">Risk Map Dashboard</button><button class="nav-tab" data-page="flood" type="button">น้ำท่วม</button><button class="nav-tab" data-page="drought" type="button">ภัยแล้ง</button><button class="nav-tab" data-page="pm25" type="button">ฝุ่น PM2.5</button></nav>
 <main class="page">
 <section id="riskDashboard">
-<header class="dashboard-heading"><div><span class="eyebrow">INDUSTRIAL ESTATE RISK OVERVIEW</span><h1>Risk Map Dashboard</h1><p>ภาพรวมข้อมูลความเสี่ยงของผู้ประกอบการ และทรัพยากรสนับสนุนในพื้นที่นิคมอุตสาหกรรม</p></div><div class="heading-status"><span id="dataStatus" role="status">กำลังเชื่อมต่อ 8 ชั้นข้อมูล</span><span id="updated">ข้อมูลจาก ArcGIS กนอ.</span></div></header>
-<section class="filter-bar" aria-label="ตัวกรอง Dashboard"><label>นิคมอุตสาหกรรม<select id="estate"><option value="">ทุกนิคมอุตสาหกรรม</option></select></label><label>ประเภทข้อมูล<select id="type"><option value="">ข้อมูลทุกประเภท</option></select></label><label>กลุ่มความเสี่ยง<select id="risk"><option value="">ทุกกลุ่ม</option><option value="ความเสี่ยง_12_ประเภท">ความเสี่ยงสูง 12 ประเภท</option><option value="อัคคีภัยสูง">อัคคีภัยสูง</option><option value="PSM">โรงงาน PSM</option></select></label><label>ค้นหาชื่อ / เลขทะเบียน<input id="search" placeholder="พิมพ์ชื่อหรือเลขทะเบียน"></label><button id="reset" type="button">ล้างตัวกรอง</button><button id="refresh" type="button" aria-label="โหลดข้อมูลใหม่">↻</button></section>
+<div class="dashboard-actions"><a class="report-button" href="./dss.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h6"/></svg>เปิดหน้าจัดทำรายงานเหตุฉุกเฉิน ↗</a></div>
+<section class="filter-bar" aria-label="ตัวกรอง Dashboard"><label>นิคมอุตสาหกรรม<select id="estate"><option value="">ทุกนิคมอุตสาหกรรม</option></select></label><label>ประเภทข้อมูล<select id="type"><option value="">ข้อมูลทุกประเภท</option></select></label><label>กลุ่มความเสี่ยง<select id="risk"><option value="">ทุกกลุ่ม</option><option value="ความเสี่ยง_12_ประเภท">ความเสี่ยงสูง 12 ประเภท</option><option value="อัคคีภัยสูง">อัคคีภัยสูง</option><option value="PSM">โรงงาน PSM</option></select></label><button id="reset" type="button">ล้างตัวกรอง</button><button id="refresh" type="button" aria-label="โหลดข้อมูลใหม่">↻</button></section>
 <section id="inventory" class="inventory" aria-label="จำนวนข้อมูลทั้ง 8 ประเภท"></section>
 <section class="analytics-top">
 <article class="panel"><div class="panel-title"><span class="panel-icon">▦</span>ข้อมูลความเสี่ยงผู้ประกอบการ</div><div class="panel-content"><table class="risk-table"><thead><tr><th>กลุ่มความเสี่ยง</th><th>รายการ</th><th>เกณฑ์ต้นทาง</th></tr></thead><tbody id="riskTableBody"></tbody></table><div class="risk-summary"><span><strong id="riskTotal">…</strong>เข้าข่ายอย่างน้อย 1 กลุ่ม</span><span><strong id="riskUnmarked">…</strong>ไม่ได้ระบุเข้าข่าย</span></div><p class="panel-note">แต่ละกลุ่มอาจมีรายการซ้ำกัน นับตามฟิลด์ที่ระบุ “เข้าข่าย” ในฐานข้อมูลผู้ประกอบการ</p></div></article>
@@ -26,7 +26,7 @@
 <article class="panel"><div class="panel-title"><span class="panel-icon green">✚</span>ทรัพยากรสนับสนุนในพื้นที่</div><div class="panel-content"><div id="supportDonut"></div><p class="panel-note">สัดส่วนจำนวนจุดโรงพยาบาล ดับเพลิง ตำรวจ ชุมชน หัวจ่ายน้ำ และ CCTV ตามตัวกรอง</p></div></article>
 </section>
 <section class="analytics-bottom">
-<article class="panel"><div class="panel-title"><span class="panel-icon">▥</span>จำนวนรายการเข้าข่าย แยกตามนิคมฯ</div><div class="panel-content"><div class="bar-legend"><span style="--c:#175ca4">12 ประเภท</span><span style="--c:#ee8755">อัคคีภัยสูง</span><span style="--c:#24b996">PSM</span></div><div id="riskBars"></div><p class="panel-note">แสดง 8 พื้นที่แรก เรียงตามจำนวนเข้าข่ายสูงสุดในกลุ่มใดกลุ่มหนึ่ง</p></div></article>
+<article class="panel"><div class="panel-title"><span class="panel-icon">▥</span>จำนวนรายการเข้าข่าย แยกตามนิคมฯ</div><div class="panel-content"><div class="bar-legend"><span style="--c:#175ca4">12 ประเภท</span><span style="--c:#de501e">อัคคีภัยสูง</span><span style="--c:#00846d">PSM</span></div><div id="riskBars"></div><p class="panel-note">แสดง 8 พื้นที่แรก เรียงตามจำนวนเข้าข่ายสูงสุดในกลุ่มใดกลุ่มหนึ่ง</p></div></article>
 <article class="panel"><div class="panel-title"><span class="panel-icon green">▦</span>ตารางความเสี่ยงรายนิคมฯ</div><div class="panel-content"><div class="matrix-scroll"><table class="matrix"><thead><tr><th>นิคมอุตสาหกรรม</th><th>12 ประเภท</th><th>อัคคีภัยสูง</th><th>PSM</th><th>รายการทั้งหมด</th></tr></thead><tbody id="matrixBody"></tbody></table></div><p class="panel-note">ความเข้มของสีแสดงจำนวนรายการ ไม่ใช่ระดับโอกาสเกิดเหตุหรือความรุนแรง</p></div></article>
 </section>
 <header class="map-section-heading"><div><h2>แผนที่และรายละเอียดข้อมูล</h2><p>คลิกรายการเพื่อดูตำแหน่งและรายละเอียดบนแผนที่</p></div></header>
@@ -36,5 +36,5 @@
 <section id="otherPage" hidden><iframe id="otherFrame" class="other-frame" title="ข้อมูลสถานการณ์ภัย" loading="lazy"></iframe></section>
 </main>
 <footer>ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย กนอ. · EMCC GIS</footer>
-<script src="./risk-dashboard-20261002.js?v=4"></script>
+<script src="./risk-dashboard-20261002.js?v=5"></script>
 </body></html>
