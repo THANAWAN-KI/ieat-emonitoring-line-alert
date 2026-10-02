@@ -211,6 +211,10 @@
 #estateFocusDashboard .ef-map-column:fullscreen,#estateFocusDashboard .ef-map-column.ef-map-expanded{height:100dvh;min-height:0}
 @media(max-width:950px){#estateFocusDashboard .ef-map-column{height:860px;min-height:0}#estateFocusDashboard .ef-data-column{height:auto;position:static}}
 @media(max-width:600px){#estateFocusDashboard .ef-map-column{height:760px}}
+
+#estateFocusDashboard .ef-map-column,#estateFocusDashboard .ef-chart,#estateFocusDashboard .ef-panel{border:0}
+#estateFocusDashboard .ef-map-head,#estateFocusDashboard #efMapControls{border-bottom:0}
+#estateFocusDashboard #efDetails24,#estateFocusDashboard #efDetails48{border:0}
 `;document.head.appendChild(style);
   const host=document.createElement('section');host.id='estateFocusDashboard';
   const metrics=[['efWatch','นิคมฯ เข้าเกณฑ์เฝ้าระวัง','ผลคัดกรองจากสถานีใกล้นิคมฯ'],['efWaterWatch','ใกล้ระดับน้ำเข้าเกณฑ์','สถานีระดับน้ำภายใน 30 กม.'],['efRainWatch','ใกล้ฝนเข้าเกณฑ์','ฝนสะสมมากกว่า 35 มม. ภายใน 30 กม.'],['efTotal','นิคมฯ / ท่าเรือในชุดข้อมูล','ตำแหน่งที่ใช้ประเมินจากข้อมูล กนอ.'],['ef24','ตำบลเฝ้าระวัง 24 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ'],['ef48','ตำบลเฝ้าระวัง 48 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ']];
