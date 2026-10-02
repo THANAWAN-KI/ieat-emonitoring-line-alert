@@ -100,7 +100,7 @@
   $('rpProfile').innerHTML=riverProfile(list);flowChart();historyChart();
   $('rpSummary').innerHTML=r?stationSummary(r):'ไม่มีข้อมูลสถานี';
   $('rpCards').innerHTML=list.map(stationCard).join('');
-  document.dispatchEvent(new CustomEvent('ieat-river-scope',{detail:{river,stations:list.map(v=>({code:v.code,oldcode:v.oldcode,lat:n(v.lat),lon:n(v.lon)}))}}));
+  document.dispatchEvent(new CustomEvent('ieat-river-scope',{detail:{river,stations:list.map(v=>({code:v.code,oldcode:v.oldcode,lat:n(v.lat),lon:n(v.lng??v.lon)}))}}));
   $('rpFocus')?.addEventListener('click',()=>focus(r));
  }
  async function refresh(){if(busy)return;busy=true;if($('rpRefresh'))$('rpRefresh').disabled=true;try{const [p,w]=await Promise.all([fetch('./data/popnix_latest.json?v='+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()}),fetch('./data/provincial_water_latest.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null)]);if(!Array.isArray(p.feeds?.river?.stations))throw Error('schema');history=Array.isArray(p.history)?p.history:[];rows=p.feeds.river.stations.map(r=>({...r}));for(const v of w?.feeds?.water?.rows||[]){if(!['S.26','S.5'].includes(v.code))continue;rows.push({...v,code:String(v.id),oldcode:v.code,flow:v.discharge,delta:null,situation:v.situation_level})}error=Boolean(p.failures?.river);render()}catch(e){error=true;render();if(!rows.length)$('rpUpdated').textContent='โหลดข้อมูลสายน้ำไม่สำเร็จ กรุณาอัปเดตอีกครั้ง'}finally{busy=false;if($('rpRefresh'))$('rpRefresh').disabled=false}}
