@@ -12,68 +12,13 @@
 *{box-sizing:border-box}html,body{height:100%;margin:0}body{font-family:"Sarabun",sans-serif;background:#f8fafc;color:#000}
 main.container{height:100dvh;padding:18px 20px 20px;min-height:0;width:100%;max-width:none}#warning{height:100%;min-height:0}.dashboard-loading{padding:24px;color:#000;text-align:center;border-radius:20px;background:white}
 @media(max-width:950px){html,body{height:auto}main.container{height:auto;padding:14px}#warning{height:auto}}
-#uwRefresh{font:inherit;background:#0f766e;color:white;border:0;border-radius:8px;padding:9px 14px;cursor:pointer;margin:0 0 12px}#uwRefresh:disabled{opacity:.5}#unifiedWater h2{font-size:21px}#unifiedWater .ef-actions{margin-bottom:12px}
 </style>
-<script src="flood-estate-dashboard.js?v=20261001-water-popup-2" defer></script>
-<script src="flood-provincial.js?v=20261001-cctv-map-2" defer></script>
+<script src="flood-estate-dashboard.js?v=20261002-remove-water-sections-1" defer></script>
 <script src="flood-river-panel.js?v=20261001-river-history-2" defer></script>
 </head>
 <body>
 <main class="container"><section id="warning" aria-label="Dashboard สถานการณ์น้ำ"><div id="dashboardLoading" class="dashboard-loading" role="status">กำลังโหลดข้อมูลสถานการณ์น้ำ…</div><noscript>กรุณาเปิด JavaScript เพื่อใช้งาน dashboard</noscript></section></main>
 
-<script>
-document.addEventListener('DOMContentLoaded',()=>{
- const panel=document.createElement('section');panel.className='ef-panel';panel.id='unifiedWater';
- panel.innerHTML='<h2>ศูนย์รวมข้อมูลน้ำ</h2><p>ระดับน้ำคลองและน้ำท่วมถนน กทม. · ตรวจข้อมูลทุก 5 นาที · รอบเก็บข้อมูลประมาณ 10 นาที</p><div class="ef-actions"><a href="https://world.tehx.dyndns.info/flood" target="_blank" rel="noopener">World Flood · เปิดต้นทาง</a><a href="https://flood.pop.in.th/" target="_blank" rel="noopener">POPNIX Flood · เปิดต้นทาง</a><a href="https://faonam.com/" target="_blank" rel="noopener">เฝ้าน้ำ · เปิดต้นทาง</a></div><p>World Flood และเฝ้าน้ำ: เปิดดูที่ต้นทาง ยังไม่ได้เชื่อมข้อมูลเข้าสู่แผนที่นี้</p><div class="ef-tools"><input id="uwSearch" type="search" placeholder="ค้นหาสถานี คลอง ถนน หรือเขต" aria-label="ค้นหาข้อมูลน้ำ กทม."><select id="uwType" aria-label="ประเภทข้อมูลน้ำ"><option value="canal">ระดับน้ำคลอง</option><option value="road">น้ำท่วมถนน</option><option value="river">แม่น้ำเจ้าพระยา</option></select><select id="uwFilter" aria-label="สถานะข้อมูลน้ำ"><option value="all">ทุกสถานะ</option><option value="risk">เข้าเกณฑ์เฝ้าระวัง / น้ำท่วม</option></select></div><p id="uwStatus" role="status">กำลังโหลดข้อมูล…</p><button type="button" id="uwRefresh">อัปเดตข้อมูล กทม.</button><div class="ef-table"><table><thead><tr><th>สถานี / ถนน</th><th>ค่าตรวจวัด</th><th>สถานะ</th><th>แนวโน้ม / เขต</th><th>เวลาตรวจวัด (ไทย)</th></tr></thead><tbody id="uwRows"></tbody></table></div><p>ข้อมูล: สำนักการระบายน้ำ กรุงเทพมหานคร และสถาบันสารสนเทศทรัพยากรน้ำ (สสน.) ผ่าน <a href="https://flood.pop.in.th/" target="_blank" rel="noopener">POPNIX Flood (flood.pop.in.th)</a> · ข้อมูลประกอบการติดตาม ไม่ใช่ประกาศเตือนภัยทางการ</p><p>ระดับน้ำคลองเป็น ม.รทก. น้ำบนถนนเป็นความลึก ณ จุดวัด หน่วยซม. การไม่มีข้อมูลไม่ได้ยืนยันว่าไม่มีน้ำท่วม</p>';
- const column=document.querySelector('.ef-data-column');if(!column)return;column.insertBefore(panel,column.querySelector('.ef-charts'));
- const $=id=>document.getElementById(id),escape=v=>String(v??'–').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- let datasets={},busy=false,last=0,visible=[];
- const labels={crit:'วิกฤต',warn:'เฝ้าระวัง',ok:'ต่ำกว่าเกณฑ์',unk:'ไม่มีเกณฑ์เทียบ',none:'ไม่มีค่า',flood:'น้ำท่วม >10 ซม.',slight:'น้ำ 5–10 ซม.',dry:'ไม่เกิน 5 ซม.',off:'ขัดข้อง / ไม่ส่งค่า'};
- function aged(r,road){const t=Date.parse(String(r.measured_at||'').replace(' ','T')+'+07:00');return !Number.isFinite(t)||Date.now()-t>(road?30:180)*60000||t>Date.now()+300000}
- function render(){
-  const kind=$('uwType').value,road=kind==='road',data=datasets[kind];
-  if(!data){$('uwRows').innerHTML='<tr><td colspan="5">ยังไม่มีข้อมูลที่แสดงได้</td></tr>';$('uwStatus').textContent='โหลดข้อมูลชุดนี้ไม่สำเร็จ กรุณาลองอัปเดตหรือเปิดต้นทาง';return}
-  const q=$('uwSearch').value.trim().toLowerCase();
-  visible=(road?data.roads:data.stations).map(r=>kind==='river'?{...r,level:r.diff==null?'unk':r.diff>=0?'crit':r.warn!=null&&r.wl!=null&&r.wl>=r.warn?'warn':'unk'}:r).filter(r=>[r.name,r.river,r.district].join(' ').toLowerCase().includes(q)).filter(r=>$('uwFilter').value!=='risk'||(!aged(r,road)&&!data._cache_old&&!data.summary.stale&&['crit','warn','flood','slight'].includes(r.level)));
-  $('uwStatus').textContent='เวลาข้อมูลล่าสุด '+(data.summary.latest||'ไม่ระบุ')+' (เวลาไทย) · '+visible.length+' รายการ'+(data.summary.stale?' · ข้อมูลเก่า':'')+(data._cache_old?' · รอบสำรองเกิน 20 นาที':'')+(data._fetch_failed?' · ดึงรอบใหม่ไม่สำเร็จ':'')+(data.summary.scrape_failing?' · ต้นทางอัปเดตไม่สำเร็จ':'');
-  $('uwRows').innerHTML=visible.map((r,i)=>{
-   const v=road?r.depth:r.wl,old=aged(r,road)||data.summary.stale||data._cache_old;
-   const severity=old?'unknown':({crit:'high',warn:'watch',ok:'normal',flood:'danger',slight:'watch',dry:'normal'}[r.level]||'unknown');
-   const value=v==null?'ไม่มีค่า':(road&&r.grp===2&&v>=20?'อย่างน้อย ':'')+escape(v)+(road?' ซม.':' ม.รทก.');
-   return '<tr><td><button type="button" data-water-index="'+i+'">'+escape(r.name)+'</button></td><td>'+value+'</td><td class="ef-status-cell" data-severity="'+severity+'">'+escape(old?'ข้อมูลเก่า / ไม่อัปเดต':kind==='river'&&r.diff!=null?(r.diff>=0?'ล้นตลิ่ง '+r.diff+' ม.':'ต่ำกว่าตลิ่ง '+Math.abs(r.diff)+' ม.'):labels[r.level]||'ไม่ระบุ')+'</td><td>'+escape(road?r.district:({up:'เพิ่มขึ้น',down:'ลดลง',flat:'ทรงตัว'}[r.trend]||'ไม่มีค่าเทียบ'))+'</td><td>'+escape(r.measured_at||'ไม่ระบุ')+'</td></tr>';
-  }).join('')||'<tr><td colspan="5">ไม่พบรายการตามตัวกรอง</td></tr>';
-  $('estateFocusMap')?.contentWindow?.postMessage({type:'flood-water-feed',kind,rows:visible.map(r=>({...r,stale:aged(r,road)||data.summary.stale||data._cache_old}))},location.origin);
- }
- async function refresh(){
-  if(busy||Date.now()-last<60000)return;busy=true;last=Date.now();$('uwRefresh').disabled=true;
 
-  try{
-   let response;
-   try{response=await fetch('https://raw.githubusercontent.com/THANAWAN-KI/ieat-emonitoring-line-alert/main/docs/data/popnix_latest.json?v='+Math.floor(Date.now()/300000),{signal:AbortSignal.timeout(7000),cache:'no-cache'});if(!response.ok)throw Error('raw unavailable')}catch(e){response=await fetch('./data/popnix_latest.json?v='+Math.floor(Date.now()/300000),{signal:AbortSignal.timeout(7000),cache:'no-cache'})}
-   if(!response.ok)throw Error('cache unavailable');
-   const snapshot=await response.json();
-   if(!snapshot.feeds)throw Error('cache schema');
-   ['canal','road','river'].forEach(key=>{
-    const d=snapshot.feeds[key];datasets[key]=d&&d.summary&&Array.isArray(key==='road'?d.roads:d.stations)?d:null;
-    if(datasets[key]){const t=Date.parse(d._fetched_at||snapshot.fetched_at);d._cache_old=!Number.isFinite(t)||Date.now()-t>1200000;d._fetch_failed=Boolean(snapshot.failures?.[key]);}
-   });
-  }catch(error){
-   const result=await Promise.allSettled(['api_overview.php','api_roads.php','api_river.php'].map(async path=>{
-    const response=await fetch('https://flood.pop.in.th/'+path,{signal:AbortSignal.timeout(12000),credentials:'omit'});if(!response.ok)throw Error(response.status);const d=await response.json();if(!d.summary||!Array.isArray(path==='api_roads.php'?d.roads:d.stations))throw Error('schema');return d;
-   }));
-   ['canal','road','river'].forEach((key,i)=>{if(result[i].status==='fulfilled')datasets[key]=result[i].value;else if(datasets[key]){datasets[key]._cache_old=true;datasets[key]._fetch_failed=true;}});
-  }
-  busy=false;$('uwRefresh').disabled=false;render();
- }
- $('uwSearch').addEventListener('input',render);$('uwType').addEventListener('change',render);$('uwFilter').addEventListener('change',render);$('uwRefresh').addEventListener('click',refresh);
- $('uwRows').addEventListener('click',event=>{
-  const button=event.target.closest('[data-water-index]');if(!button)return;const r=visible[Number(button.dataset.waterIndex)],lat=Number(r.lat),lon=Number(r.lng);
-  if(r.lat==null||r.lng==null||!Number.isFinite(lat)||!Number.isFinite(lon))return;
-  const map=$('estateFocusMap');map?.contentWindow?.postMessage({type:'flood-map-focus',lat,lon,label:r.name,scale:75000},location.origin);if(innerWidth<951)map?.scrollIntoView({behavior:'smooth',block:'center'});
- });
- window.addEventListener('message',event=>{if(event.origin===location.origin&&event.source===$('estateFocusMap')?.contentWindow&&event.data?.type==='flood-water-ready')render()});
- refresh();setInterval(()=>{if(!document.hidden)refresh()},300000);
-});
-</script>
 </body>
 </html>
