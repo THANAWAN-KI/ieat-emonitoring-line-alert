@@ -51,24 +51,13 @@
     document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.toggle('active', tab === riskTab));
     window.dispatchEvent(new Event('resize'));
   };
-  reportFrame.addEventListener('load', function () {
-    const reportDocument = reportFrame.contentDocument;
-    if (!reportDocument) return;
-    reportDocument.addEventListener('click', function (event) {
-      const backButton = event.target.closest?.('#backToRiskmapBtn');
-      if (!backButton) return;
-      event.preventDefault();
-      event.stopImmediatePropagation();
-      window.returnToRiskDashboard();
-    }, true);
-  });
   document.getElementById('openEmergencyReport').addEventListener('click', function (event) {
     event.preventDefault();
     riskDashboard.hidden = true;
     otherPage.hidden = true;
     reportPage.hidden = false;
     document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.toggle('active', tab === riskTab));
-    if (!reportFrame.getAttribute('src')) reportFrame.src = './dss.html?embedded=risk&v=20261002-button-return-9';
+    if (!reportFrame.getAttribute('src')) reportFrame.src = './dss.html?embedded=risk&v=20261002-direct-link-10';
   });
   document.querySelectorAll('.nav-tab').forEach(tab => tab.addEventListener('click', function () {
     reportPage.hidden = true;
