@@ -48,7 +48,7 @@
  function zoom(lat,lon){const f=$('estateFocusMap');if(f?.contentWindow)f.contentWindow.postMessage({type:'flood-map-focus',lat:Number(lat),lon:Number(lon),scale:75000},location.origin)}
  function mount(){
   const warning=$('warning');if(!warning||$('estateFocusDashboard'))return;
-  const style=document.createElement('style');style.textContent=`
+  const style=document.createElement('style');style.textContent=`#estateFocusDashboard .ef-map-head h2{font-size:20px!important}#estateFocusDashboard .ef-chart h2{color:#004a91!important}
    #estateFocusDashboard{font-family:"Sarabun",sans-serif;color:#253346;height:100%;min-height:0}
    #estateFocusDashboard *{box-sizing:border-box}
    .ef-workspace{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(360px,1fr);height:100%;gap:18px}
@@ -166,7 +166,7 @@
 #estateFocusDashboard .ef-estate-panel h2{color:#00387B!important}
 #estateFocusDashboard #efDetails24,#estateFocusDashboard #efDetails48{background:#eaf4fc;border-color:#c6dff1}
 #estateFocusDashboard #efDetails24 summary,#estateFocusDashboard #efDetails48 summary{color:#00387B!important}
-#estateFocusDashboard .ef-estate{border:1px solid #dce7ef;border-radius:12px;padding:14px;background:#fff;position:relative;border-left:4px solid #109dc0}
+#estateFocusDashboard .ef-estate{border:1px solid #dce7ef;border-radius:12px;padding:14px;background:#fff;position:relative;border-left:1px solid #dce7ef}
 #estateFocusDashboard .ef-estate[aria-pressed=true]{background:#eef7fd;border-color:#0072cf;outline:1px solid #0072cf}
 #estateFocusDashboard .ef-estate-title b{color:#00387B!important}
 #estateFocusDashboard .ef-estate-stats{border:0;margin-top:8px;padding:10px;background:#f4f8fb;border-radius:8px}
@@ -179,7 +179,7 @@
    <div class="ef-charts"><article class="ef-chart"><h2>5 นิคมฯ ใกล้สถานีฝนสะสมสูงสุด</h2><div id="efRainRank"></div><p>ฝนสะสม 24 ชม. สูงสุดจากสถานีในรัศมี 30 กม. · หน่วย มม.</p></article></div>
    <section class="ef-panel ef-estate-panel"><h2>ติดตามนิคมฯ / ท่าเรือ</h2><div class="ef-tools"><input id="efSearch" type="search" aria-label="ค้นหาชื่อนิคมฯ / ท่าเรือ" placeholder="ค้นหาชื่อนิคมฯ / ท่าเรือ"><select id="efFilter" aria-label="กรองข้อมูลนิคมฯ"><option value="watch">เข้าเกณฑ์เฝ้าระวัง</option><option value="water">ใกล้ระดับน้ำเข้าเกณฑ์</option><option value="rain">ใกล้ฝนเข้าเกณฑ์</option><option value="all">ทุกนิคมฯ / ท่าเรือ</option></select></div><p id="efResultCount" class="ef-count"></p><div class="ef-selection" id="efSelection" hidden></div><div id="efEstates" class="ef-estates"></div></section>
    <div class="ef-warning"><details class="ef-panel" id="efDetails24"><summary>พื้นที่เฝ้าระวัง 24 ชั่วโมง</summary><div id="efWarning24"></div></details><details class="ef-panel" id="efDetails48"><summary>พื้นที่เฝ้าระวัง 48 ชั่วโมง</summary><div id="efWarning48"></div></details></div>
-   </div><section class="ef-map-column"><header class="ef-map-head"><div><h2>แผนที่เฝ้าระวังนิคมอุตสาหกรรม</h2><small>เลือกนิคมฯ หรือสถานีเพื่อซูม</small></div><div class="ef-actions"><button type="button" id="efMapFullscreen" aria-pressed="false">เต็มหน้าจอ ↗</button><button type="button" id="efMapReset">ดูภาพรวม</button><button id="efReport" type="button">จัดทำรายงาน ↗</button></div></header><div id="efMapControls" aria-label="ตัวควบคุมแผนที่"></div><div class="ef-map-frame"><iframe id="estateFocusMap" title="แผนที่สถานการณ์น้ำและนิคมอุตสาหกรรม" src="flood-hydrology-map.html?v=20261002-map-controls-5&amp;center=101,13&amp;scale=9244648" loading="eager"></iframe></div><footer class="ef-map-foot">GISTDA: พื้นที่ตรวจพบตามวันที่ภาพ · Longdo: จุดรายงานเหตุการณ์ · ThaiWater: สถานีระดับน้ำ</footer></section></div>`;
+   </div><section class="ef-map-column"><header class="ef-map-head"><div><h2>แผนที่เฝ้าระวังนิคมอุตสาหกรรม</h2><small>เลือกนิคมฯ หรือสถานีเพื่อซูม</small></div><div class="ef-actions"><button type="button" id="efMapFullscreen" aria-pressed="false">เต็มหน้าจอ ↗</button><button type="button" id="efMapReset">ดูภาพรวม</button><button id="efReport" type="button">จัดทำรายงาน ↗</button></div></header><div id="efMapControls" aria-label="ตัวควบคุมแผนที่"></div><div class="ef-map-frame"><iframe id="estateFocusMap" title="แผนที่สถานการณ์น้ำและนิคมอุตสาหกรรม" src="flood-hydrology-map.html?v=20261002-river-scope-6&amp;center=101,13&amp;scale=9244648" loading="eager"></iframe></div><footer class="ef-map-foot">GISTDA: พื้นที่ตรวจพบตามวันที่ภาพ · Longdo: จุดรายงานเหตุการณ์ · ThaiWater: สถานีระดับน้ำ</footer></section></div>`;
   warning.prepend(host);
   const loading=$('dashboardLoading');if(loading)loading.remove();
 
@@ -218,7 +218,7 @@
  function renderCharts(m){
   if(!m.usable){$('efRainRank').innerHTML='<div class="ef-empty">ข้อมูลยังไม่ครบหรือยังไม่พร้อมประเมิน</div>';return}
   const rank=m.estates.map(e=>{const values=m.rain.filter(r=>km(e,r)<=RADIUS).map(r=>Number(r.rainfall_mm));return {...e,rain:values.length?Math.max(...values):null}}).filter(e=>e.rain!==null).sort((a,b)=>b.rain-a.rain).slice(0,5),max=rank[0]?.rain||1;
-  $('efRainRank').innerHTML=rank.length?rank.map(e=>`<button class="ef-rank-row" type="button" data-ef-estate="${esc(e.id)}" data-ef-lat="${e.lat}" data-ef-lon="${e.lon}" title="${esc(e.name)}: ${fmt(e.rain)} มม."><span>${esc(e.name.replace(/^นิคมอุตสาหกรรม/,''))}</span><div class="ef-rank-track"><b style="width:${Math.max(12,e.rain/max*100)}%">${fmt(e.rain)}</b></div></button>`).join(''):'<div class="ef-empty">ไม่มีค่าฝนล่าสุดที่ใช้จัดอันดับได้</div>';
+  $('efRainRank').innerHTML=rank.length?rank.map((e,i)=>`<button class="ef-rank-row" type="button" data-ef-estate="${esc(e.id)}" data-ef-lat="${e.lat}" data-ef-lon="${e.lon}" title="${esc(e.name)}: ${fmt(e.rain)} มม."><span>${esc(e.name.replace(/^นิคมอุตสาหกรรม/,''))}</span><div class="ef-rank-track"><b style="background:${['#6138f5','#008558','#ffaa00','#e64f00','#e6004d'][i]};width:${Math.max(12,e.rain/max*100)}%">${fmt(e.rain)}</b></div></button>`).join(''):'<div class="ef-empty">ไม่มีค่าฝนล่าสุดที่ใช้จัดอันดับได้</div>';
  }
  function renderEstates(){
   if(!current)return;const m=model(current),q=$('efSearch').value.trim();
