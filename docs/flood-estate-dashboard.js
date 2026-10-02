@@ -172,7 +172,22 @@
 #estateFocusDashboard .ef-estate-stats{border:0;margin-top:8px;padding:10px;background:#f4f8fb;border-radius:8px}
 #estateFocusDashboard .ef-estate-stats strong{font-size:18px;color:#0072cf!important}
 #estateFocusDashboard .ef-estate-map-label{color:#0072cf!important}
-  `;document.head.appendChild(style);
+  
+#estateFocusDashboard .ef-workspace{gap:10px;width:100%}
+#estateFocusDashboard .ef-data-column{padding:0 4px 8px 0}
+#estateFocusDashboard .ef-map-column{border-color:#bbccdf;border-radius:10px}
+#estateFocusDashboard .ef-map-head{background:#f2eafa;border-bottom:1px solid #d9c7ed;padding:14px 16px}
+#estateFocusDashboard #efMapControls{background:#f5f8fd;border-bottom:1px solid #c9d8e9}
+#estateFocusDashboard .ef-chart,#estateFocusDashboard .ef-panel{border-color:#bbccdf;box-shadow:0 3px 10px #234b6a0b}
+#estateFocusDashboard .ef-chart h2,#estateFocusDashboard .ef-estate-panel h2{background:#eaf2fd;border-radius:8px;padding:12px;font-size:18px}
+#estateFocusDashboard .ef-rank-track{height:28px;background:#e9eef6}
+#estateFocusDashboard .ef-rank-track b{color:#fff!important;font-size:15px;padding:3px 8px;line-height:22px;text-shadow:0 1px 2px #0005}
+#estateFocusDashboard .ef-rank-row>span{font-size:14px;font-weight:600}
+#estateFocusDashboard .ef-estate-title b{font-size:15px}
+#estateFocusDashboard .ef-estate-stats{background:#eaf2fc}
+#estateFocusDashboard .ef-estate-stats strong{font-size:22px}
+#estateFocusDashboard #efDetails24,#estateFocusDashboard #efDetails48{border-color:#abc9e5}
+`;document.head.appendChild(style);
   const host=document.createElement('section');host.id='estateFocusDashboard';
   const metrics=[['efWatch','นิคมฯ เข้าเกณฑ์เฝ้าระวัง','ผลคัดกรองจากสถานีใกล้นิคมฯ'],['efWaterWatch','ใกล้ระดับน้ำเข้าเกณฑ์','สถานีระดับน้ำภายใน 30 กม.'],['efRainWatch','ใกล้ฝนเข้าเกณฑ์','ฝนสะสมมากกว่า 35 มม. ภายใน 30 กม.'],['efTotal','นิคมฯ / ท่าเรือในชุดข้อมูล','ตำแหน่งที่ใช้ประเมินจากข้อมูล กนอ.'],['ef24','ตำบลเฝ้าระวัง 24 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ'],['ef48','ตำบลเฝ้าระวัง 48 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ']];
   host.innerHTML=`<div class="ef-workspace"><div class="ef-data-column">
