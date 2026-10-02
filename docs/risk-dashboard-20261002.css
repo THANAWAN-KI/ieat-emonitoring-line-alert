@@ -156,3 +156,7 @@
 .portal-header .nav-tab{display:flex;align-items:center;justify-content:center;min-height:46px}
 .portal-header .nav-tab.active,.portal-header .nav-tab.active:hover{background:#158f63;color:#fff;border-bottom:0;box-shadow:none}
 @media(max-width:760px){.portal-header .brand img{width:48px;height:54px}.portal-top .header-nav a{padding:6px 8px}.portal-header .nav-tab{min-height:42px}}
+
+#riskDashboard .matrix thead th:nth-child(2){background:#00a3e2;color:#000}
+#riskDashboard .matrix thead th:nth-child(3){background:#e41b13;color:#fff}
+#riskDashboard .matrix thead th:nth-child(4){background:#fdc800;color:#000}
