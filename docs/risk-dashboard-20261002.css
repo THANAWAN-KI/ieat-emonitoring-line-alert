@@ -180,3 +180,9 @@
 .portal-top .header-nav a{padding:4px 14px}
 .portal-header .nav-tabs{height:46px;min-height:46px}
 @media(max-width:760px){.portal-header{grid-template-rows:42px 42px}.portal-header .brand{height:42px;padding:0 10px;gap:7px}.portal-header .brand img{width:32px;height:36px}.portal-header .brand strong{font-size:13px;line-height:1.2}.portal-top{height:42px;padding:0 8px}.portal-top .header-nav{gap:5px}.portal-top .header-nav a{padding:3px 6px}.portal-header .nav-tabs{height:42px;min-height:42px}}
+
+/* Slightly roomier white header */
+.portal-header{grid-template-rows:58px 46px}
+.portal-header .brand,.portal-top{height:58px}
+.portal-header .brand img{width:46px;height:48px}
+@media(max-width:760px){.portal-header{grid-template-rows:52px 42px}.portal-header .brand,.portal-top{height:52px}.portal-header .brand img{width:36px;height:42px}}
