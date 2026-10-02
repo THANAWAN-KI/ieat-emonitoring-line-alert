@@ -1,5 +1,6 @@
 (() => {
  'use strict';
+ const webmapId='9c25f3f77ba5481cb481b402177884c2',portalUrl='https://ieat.maps.arcgis.com';
  const base='https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/';
  const datasets=[
  {id:'estate',label:'นิคมอุตสาหกรรม / ท่าเรือฯ',path:'e_PP_2025/FeatureServer/1',names:['สำนักงานนิคมฯ'],estates:['สำนักงานนิคมฯ'],color:'#00b1c1'},
@@ -17,7 +18,7 @@
  const $=id=>document.getElementById(id),number=n=>Number(n).toLocaleString('th-TH'),normalize=s=>String(s||'').toLowerCase().replace(/นิคมอุตสาหกรรม|นิคมฯ|สำนักงานนิคมฯ|\s+/g,'').trim();
  const pick=(a,fields)=>fields.map(f=>a[f]).find(v=>v!=null&&String(v).trim())||'—';
  const flagged=v=>String(v||'').trim()==='เข้าข่าย';
- const selected={estate:'',type:'',risk:'',query:''};let view,map,layerViews={},renderTimer,active=null,selectedItem=null,fallbackView=null,fallbackHighlight=null;
+ const selected={estate:'',type:'',risk:'',query:''};let view,map,layerViews={},renderTimer,active=null,selectedItem=null,fallbackView=null,fallbackHighlight=null,initialViewpoint=null,fallbackInitialBounds=null;
  function el(tag,text,cls){const n=document.createElement(tag);if(text!=null)n.textContent=text;if(cls)n.className=cls;return n;}
  function filterRow(r,d,includeType=true){return (!selected.estate||normalize(r.estate)===selected.estate)&&(!includeType||!selected.type||d.id===selected.type)&&(!selected.risk||(d.id==='business'&&flagged(r.attrs[selected.risk])))&&(!selected.query||normalize(r.name+' '+r.estate+' '+r.registration).includes(selected.query));}
  function visibleRows(d,includeType=true){return d.rows.filter(r=>filterRow(r,d,includeType));}
@@ -40,7 +41,7 @@
   applyMapFilters();
  }
  function schedule(){clearTimeout(renderTimer);renderTimer=setTimeout(render,120)}
- function applyMapFilters(){if(fallbackView&&fallbackView.refreshData)fallbackView.refreshData();datasets.forEach(d=>{if(!d.layer)return;d.layer.visible=!selected.type||selected.type===d.id;if(selected.risk&&d.id!=='business')d.layer.visible=false;const lv=layerViews[d.id];if(lv){lv.filter=(selected.estate||selected.query||selected.risk)?{objectIds:visibleRows(d).map(r=>r.id).concat([-1])}:null;}});}
+ function applyMapFilters(){if(fallbackView&&fallbackView.refreshData)fallbackView.refreshData();datasets.forEach(d=>{if(!d.layer)return;d.layer.visible=selected.type?selected.type===d.id:d.defaultVisibility!==false;if(selected.risk&&d.id!=='business')d.layer.visible=false;const lv=layerViews[d.id];if(lv){lv.filter=(selected.estate||selected.query||selected.risk)?{objectIds:visibleRows(d).map(r=>r.id).concat([-1])}:null;}});}
  function changed(){selected.estate=$('estate').value;selected.type=$('type').value;selected.risk=$('risk').value;selected.query='';render();}
  async function zoomRow(d,r,button){selectedItem=d.id+':'+r.id;document.querySelectorAll('.directory-item').forEach(b=>{const chosen=b===button;b.classList.toggle('active',chosen);b.setAttribute('aria-pressed',String(chosen))});active=button;if(fallbackView){try{const result=await json(base+encodeURI(d.path)+'/query',new URLSearchParams({f:'geojson',objectIds:String(r.id),outFields:(d.fields||[d.oid]).join(','),outSR:'4326',returnGeometry:'true'}));if(fallbackHighlight)fallbackView.removeLayer(fallbackHighlight);const feature=L.geoJSON(result,{style:{color:'#176a42',weight:3,fillColor:'#01b287',fillOpacity:.2},pointToLayer:(f,latlng)=>L.circleMarker(latlng,{radius:9,color:'#fff',weight:3,fillColor:'#176a42',fillOpacity:1}),onEachFeature:(f,layer)=>{const box=el('div');box.append(el('b',r.name),el('p',d.label+' · '+r.estate));layer.bindPopup(box)}}).addTo(fallbackView);fallbackHighlight=feature;if(feature.getBounds().isValid())fallbackView.fitBounds(feature.getBounds(),{maxZoom:16,padding:[45,45]});feature.openPopup();}catch(e){$('mapStatus').textContent='ไม่สามารถโหลดตำแหน่งนี้ได้';}return;}if(!view||!d.layer)return;try{const result=await d.layer.queryFeatures({objectIds:[r.id],outFields:['*'],returnGeometry:true,outSpatialReference:{wkid:4326}});const f=result.features[0];if(!f||!f.geometry)throw Error('ไม่มีพิกัด');await view.goTo(f.geometry,{duration:600});if(view.zoom<14)view.zoom=14;view.openPopup({features:[f],location:f.geometry.type==='point'?f.geometry:f.geometry.extent.center});}catch(e){$('mapStatus').textContent='ไม่สามารถเปิดตำแหน่ง '+r.name+' ได้ กรุณาลองอีกครั้ง';}}
  async function json(url,body){let last;for(let attempt=0;attempt<3;attempt++){try{const response=await fetch(url,{signal:AbortSignal.timeout(30000),...(body?{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:String(body)}:{})});if(!response.ok)throw Error('HTTP '+response.status);const value=await response.json();if(value.error)throw Error(value.error.message);return value;}catch(error){last=error;if(attempt<2)await new Promise(resolve=>setTimeout(resolve,600*(attempt+1)));}}throw last;}
@@ -52,40 +53,95 @@
   }catch(e){d.status=d.rows.length?'partial':'error';d.error=e.message;console.warn('Risk Map: '+d.label,e);schedule();}
  }
  datasets.forEach(d=>$('type').add(new Option(d.label,d.id)));$('estate').onchange=changed;$('type').onchange=changed;$('risk').onchange=changed;
- $('reset').onclick=()=>{selectedItem=null;if(fallbackHighlight&&fallbackView){fallbackView.removeLayer(fallbackHighlight);fallbackHighlight=null;}['estate','type','risk'].forEach(id=>$(id).value='');changed();if(fallbackView)fallbackView.setView([14,101],6);else if(view)view.goTo({center:[101,14],zoom:6}).catch(()=>{});};
+ $('reset').onclick=()=>{selectedItem=null;if(fallbackHighlight&&fallbackView){fallbackView.removeLayer(fallbackHighlight);fallbackHighlight=null;}['estate','type','risk'].forEach(id=>$(id).value='');changed();if(fallbackView){if(fallbackInitialBounds)fallbackView.fitBounds(fallbackInitialBounds);else fallbackView.setView([14,101],6);}else if(view)view.goTo(initialViewpoint||{center:[101,14],zoom:6}).catch(()=>{});};
  $('refresh').onclick=()=>location.reload();$('basemap').onchange=()=>{if(map)map.basemap=$('basemap').value};
  document.querySelectorAll('.nav-tab').forEach(button=>button.onclick=()=>{document.querySelectorAll('.nav-tab').forEach(b=>b.classList.toggle('active',b===button));const page=button.dataset.page;$('riskDashboard').hidden=page!=='risk';$('otherPage').hidden=page==='risk';if(page!=='risk'){const paths={flood:'./flood-report.html',drought:'./drought.html',pm25:'./pm25.html'};if($('otherFrame').getAttribute('src')!==paths[page])$('otherFrame').src=paths[page];}});
  render();(async()=>{let next=0;async function worker(){while(next<datasets.length)await load(datasets[next++]);}await Promise.allSettled([worker(),worker(),worker()]);})();
 
+
+ function symbolStyle(def,attributes){
+  const renderer=def.layerDefinition?.drawingInfo?.renderer||{};
+  let symbol=renderer.symbol||renderer.defaultSymbol;
+  if(renderer.type==='uniqueValue'){
+   const val=String(attributes[renderer.field1]??'');
+   symbol=(renderer.uniqueValueInfos||[]).find(i=>String(i.value)===val)?.symbol||symbol;
+   for(const group of renderer.uniqueValueGroups||[])for(const item of group.classes||[])if((item.values||[]).some(v=>String(v[0])===val))symbol=item.symbol;
+  }
+  const rgba=a=>Array.isArray(a)?'rgb('+a.slice(0,3).join(',')+')':'#854c9e';
+  const parts=symbol?.symbol?.symbolLayers||[],stroke=parts.find(s=>s.type==='CIMSolidStroke'),fill=parts.find(s=>s.type==='CIMSolidFill');
+  return {symbol,color:rgba(stroke?.color||symbol?.outline?.color||symbol?.color),weight:Math.max(1,(stroke?.width||symbol?.outline?.width||1)*1.33),fillColor:rgba(fill?.color||symbol?.color),fillOpacity:((fill?.color||symbol?.color||[0,0,0,80])[3]??80)/255};
+ }
+ function mapPoint(def,feature,latlng){
+  const style=symbolStyle(def,feature.properties||{}),s=style.symbol;
+  if(s?.type==='esriPMS'&&s.imageData){
+   const width=Math.min(38,(s.width||20)*1.33),height=Math.min(38,(s.height||20)*1.33);
+   return L.marker(latlng,{icon:L.icon({iconUrl:'data:'+(s.contentType||'image/png')+';base64,'+s.imageData,iconSize:[width,height],iconAnchor:[width/2,height/2]})});
+  }
+  if(s?.type==='CIMSymbolReference'){
+   const marker=s.symbol?.symbolLayers?.find(v=>v.type==='CIMVectorMarker'),frame=marker?.frame;
+   if(marker&&frame){const w=frame.xmax-frame.xmin,h=frame.ymax-frame.ymin,paths=[];
+    for(const graphic of marker.markerGraphics||[]){const paint=graphic.symbol?.symbolLayers?.find(v=>v.type==='CIMSolidFill')?.color||[210,9,98,255];const d=(graphic.geometry?.rings||graphic.geometry?.paths||[]).map(r=>'M'+r.map(p=>(p[0]-frame.xmin)+','+(frame.ymax-p[1])).join('L')+'Z').join('');paths.push('<path fill="rgb('+paint.slice(0,3).join(',')+')" fill-rule="evenodd" d="'+d+'"/>');}
+    const svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+w+' '+h+'">'+paths.join('')+'</svg>',size=Math.min(34,(marker.size||18)*1.33);
+    return L.marker(latlng,{icon:L.icon({iconUrl:'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg),iconSize:[size,size],iconAnchor:[size/2,size]})});
+   }
+  }
+  return L.circleMarker(latlng,{radius:5,color:'#fff',weight:1,fillColor:style.fillColor,fillOpacity:1});
+ }
  async function fallbackMap(){
-  if(fallbackView)return;try{
+  if(fallbackView)return;
+  try{
    try{view.destroy()}catch(e){}$('map').replaceChildren();
-   const css=document.createElement('link');css.rel='stylesheet';css.href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';document.head.append(css);
-   if(!window.L)await new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';script.onload=resolve;script.onerror=reject;document.head.append(script)});
+   if(!window.L)throw Error('Leaflet unavailable');
+   const data=await json(portalUrl+'/sharing/rest/content/items/'+webmapId+'/data?f=json');
    fallbackView=L.map('map',{zoomControl:false}).setView([14,101],6);L.control.zoom({position:'bottomright'}).addTo(fallbackView);
-   const gray=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Tiles © Esri',maxZoom:18}).addTo(fallbackView);
-   const groups={};datasets.forEach(d=>groups[d.label]=L.layerGroup().addTo(fallbackView));L.control.layers({'แผนที่ถนน':gray},groups).addTo(fallbackView);
-   let busy=false,pending=false;
-   async function draw(){if(busy){pending=true;return}busy=true;pending=false;const bounds=fallbackView.getBounds();
-    for(const d of datasets){if(!d.meta)continue;const group=groups[d.label];group.clearLayers();if(selected.type&&selected.type!==d.id)continue;if(selected.risk&&d.id!=='business')continue;
-     const matched=visibleRows(d).map(r=>r.id);if((selected.estate||selected.query||selected.risk)&&!matched.length)continue;
-     const params=new URLSearchParams({f:'geojson',where:'1=1',outFields:(d.fields||[d.oid]).join(','),returnGeometry:'true',outSR:'4326',geometry:JSON.stringify({xmin:bounds.getWest(),ymin:bounds.getSouth(),xmax:bounds.getEast(),ymax:bounds.getNorth(),spatialReference:{wkid:4326}}),geometryType:'esriGeometryEnvelope',inSR:'4326',spatialRel:'esriSpatialRelIntersects',resultRecordCount:'300'});
-     if(selected.estate||selected.query||selected.risk)params.set('objectIds',matched.join(','));
-     try{const result=await json(base+encodeURI(d.path)+'/query',params);L.geoJSON(result,{style:{color:d.color,weight:1,fillOpacity:.25},pointToLayer:(feature,latlng)=>L.circleMarker(latlng,{radius:5,color:'#fff',weight:1,fillColor:d.color,fillOpacity:.9}),onEachFeature:(feature,layer)=>{const a=feature.properties||{},box=el('div');box.append(el('b',String(pick(a,d.names))),el('p',d.label+' · '+pick(a,d.estates)));riskFields.forEach(f=>{if(flagged(a[f.field]))box.append(el('p',f.label+' · เข้าข่าย'))});layer.bindPopup(box)}}).addTo(group);}catch(e){console.warn('Risk Map fallback '+d.label,e)}
-    }busy=false;$('mapStatus').textContent='แผนที่รองรับอุปกรณ์ที่ไม่มี WebGL · แสดงสูงสุด 300 รายการต่อชั้นในมุมมองนี้ ซูมเพื่อดูพื้นที่ย่อย';if(pending)draw();
+   const tileUrl=data.baseMap?.baseMapLayers?.find(l=>l.url&&/MapServer/.test(l.url))?.url||'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer';
+   const tiles=L.tileLayer(tileUrl+'/tile/{z}/{y}/{x}',{attribution:'Tiles © Esri',maxZoom:19}).addTo(fallbackView);
+   const extent=data.initialState?.viewpoint?.targetGeometry;
+   if(extent?.xmin!=null){const project=(x,y)=>[Math.atan(Math.sinh(y/6378137))*180/Math.PI,x/6378137*180/Math.PI];fallbackInitialBounds=extent.spatialReference?.wkid===4326?[[extent.ymin,extent.xmin],[extent.ymax,extent.xmax]]:[project(extent.xmin,extent.ymin),project(extent.xmax,extent.ymax)];fallbackView.fitBounds(fallbackInitialBounds);}
+   const definitions=[];function collect(layers,parentVisible=true){for(const def of layers||[]){const shown=parentVisible&&def.visibility!==false;if(def.layers)collect(def.layers,shown);else if(def.url&&['ArcGISFeatureLayer','GeoJSON'].includes(def.layerType))definitions.push({...def,shown});}}collect(data.operationalLayers);
+   const groups={},canonical=u=>decodeURI(u||'').replace(/\/$/,'').toLowerCase();
+   for(const def of definitions){def.group=L.layerGroup();groups[def.title]=def.group;if(def.shown)def.group.addTo(fallbackView);def.dataset=datasets.find(d=>canonical(base+encodeURI(d.path))===canonical(def.url));}
+   L.control.layers({'ภาพถ่ายดาวเทียม':tiles},groups,{collapsed:true}).addTo(fallbackView);
+   let busy=false,pending=false;const lastErrors=new Set();
+   async function draw(){
+    if(busy){pending=true;return}busy=true;pending=false;const bounds=fallbackView.getBounds();
+    for(const def of definitions){const group=def.group;if(!fallbackView.hasLayer(group))continue;group.clearLayers();const d=def.dataset;
+     if(selected.type&&(!d||selected.type!==d.id))continue;if(selected.risk&&d?.id!=='business')continue;
+     const filtered=selected.estate||selected.query||selected.risk;
+     if(filtered&&!d)continue;
+     const ids=d?visibleRows(d).map(r=>r.id):[];if(filtered&&!ids.length)continue;
+     try{
+      let result;
+      if(def.layerType==='GeoJSON'){result=await json(def.url);}
+      else{
+       const params=new URLSearchParams({f:'geojson',where:def.layerDefinition?.definitionExpression||'1=1',outFields:'*',returnGeometry:'true',outSR:'4326',geometry:JSON.stringify({xmin:bounds.getWest(),ymin:bounds.getSouth(),xmax:bounds.getEast(),ymax:bounds.getNorth(),spatialReference:{wkid:4326}}),geometryType:'esriGeometryEnvelope',inSR:'4326',spatialRel:'esriSpatialRelIntersects',resultRecordCount:'300'});
+       if(filtered)params.set('objectIds',ids.join(','));
+       result=await json(def.url+'/query',params);
+      }
+      L.geoJSON(result,{style:f=>symbolStyle(def,f.properties||{}),pointToLayer:(f,ll)=>mapPoint(def,f,ll),onEachFeature:(feature,layer)=>{
+       const a=feature.properties||{},name=d?String(pick(a,d.names)):String(pick(a,['Name','Name_Parcel','mercant_na','ชื่อผู้ประกอบการ','name'])),box=el('div');
+       box.append(el('b',name),el('p',def.title));if(d)box.append(el('p',String(pick(a,d.estates))));riskFields.forEach(f=>{if(flagged(a[f.field]))box.append(el('p',f.label+' · เข้าข่าย'))});layer.bindPopup(box);
+       if(d?.id==='estate'&&fallbackView.getZoom()>=10)layer.bindTooltip(name,{permanent:true,direction:'top',className:'estate-map-label'});
+      }}).addTo(group);
+     }catch(e){lastErrors.add(def.title);console.warn('Web Map: '+def.title,e.message);}
+    }
+    busy=false;$('mapStatus').textContent='Web Map กนอ. · แสดงสูงสุด 300 รายการต่อชั้นในมุมมองนี้'+(lastErrors.size?' · บางชั้นข้อมูลยังโหลดไม่ได้':'');if(pending)draw();
    }
    let debounce;fallbackView.refreshData=()=>{clearTimeout(debounce);debounce=setTimeout(draw,500)};
-   $('basemap').onchange=()=>{const names={'gray-vector':'World_Light_Gray_Base','streets-vector':'World_Street_Map','satellite':'World_Imagery','topo-vector':'World_Topo_Map'};gray.setUrl('https://server.arcgisonline.com/ArcGIS/rest/services/'+names[$('basemap').value]+'/MapServer/tile/{z}/{y}/{x}');};
-   fallbackView.on('moveend',()=>{clearTimeout(debounce);debounce=setTimeout(draw,400)});
-   const timer=setInterval(()=>{if(datasets.every(d=>d.status!=='loading')){clearInterval(timer);draw();}},1000);draw();
-   document.querySelectorAll('#estate,#type,#risk,#search,#reset').forEach(control=>control.addEventListener(control.id==='search'?'input':'change',()=>{clearTimeout(debounce);debounce=setTimeout(draw,500)}));$('reset').addEventListener('click',draw);
-  }catch(e){$('mapStatus').textContent='โหลดแผนที่ไม่สำเร็จ กรุณารีเฟรช';}
+   $('basemap').onchange=()=>{const names={'gray-vector':'World_Light_Gray_Base','streets-vector':'World_Street_Map','satellite':'World_Imagery','topo-vector':'World_Topo_Map'};tiles.setUrl('https://server.arcgisonline.com/ArcGIS/rest/services/'+names[$('basemap').value]+'/MapServer/tile/{z}/{y}/{x}');};
+   fallbackView.on('moveend overlayadd overlayremove',()=>{clearTimeout(debounce);debounce=setTimeout(draw,400)});
+   draw();
+  }catch(e){$('mapStatus').textContent='ไม่สามารถโหลด Web Map กนอ. ได้ กรุณาลองรีเฟรช';console.warn(e);}
  }
-
- require(['esri/Map','esri/views/MapView','esri/layers/FeatureLayer','esri/widgets/LayerList','esri/widgets/Legend','esri/widgets/Expand'],(Map,MapView,FeatureLayer,LayerList,Legend,Expand)=>{
-  map=new Map({basemap:'streets-vector'});view=new MapView({container:'map',map,center:[101,14],zoom:6,popup:{dockEnabled:true,dockOptions:{position:'bottom-right',buttonEnabled:false}}});
-  datasets.forEach(d=>{d.layer=new FeatureLayer({url:base+encodeURI(d.path),title:d.label,outFields:['*']});map.add(d.layer);view.whenLayerView(d.layer).then(lv=>{layerViews[d.id]=lv;applyMapFilters()}).catch(()=>{});});
-  view.ui.add(new Expand({view,content:new LayerList({view}),expandTooltip:'ชั้นข้อมูล'}),'top-right');view.ui.add(new Expand({view,content:new Legend({view}),expandTooltip:'คำอธิบายสัญลักษณ์'}),'bottom-left');
-  view.when(()=>$('mapStatus').textContent='แผนที่จาก 8 ชั้นข้อมูล Risk Map กนอ.').catch(()=>fallbackMap());
+ require(['esri/WebMap','esri/views/MapView','esri/widgets/LayerList','esri/widgets/Legend','esri/widgets/Expand'],(WebMap,MapView,LayerList,Legend,Expand)=>{
+  map=new WebMap({portalItem:{id:webmapId,portal:{url:portalUrl}}});
+  view=new MapView({container:'map',map,popup:{dockEnabled:true,dockOptions:{position:'bottom-right',buttonEnabled:false}}});
+  const canonical=u=>decodeURI(u||'').replace(/\/$/,'').toLowerCase();
+  map.load().then(()=>{
+   datasets.forEach(d=>{d.layer=map.allLayers.find(l=>canonical(l.url)===canonical(base+encodeURI(d.path)));if(d.layer){d.defaultVisibility=d.layer.visible;view.whenLayerView(d.layer).then(lv=>{layerViews[d.id]=lv;applyMapFilters()}).catch(()=>{});}});
+  }).catch(e=>console.warn('Web Map load',e));
+  view.ui.add(new Expand({view,content:new LayerList({view}),expandTooltip:'ชั้นข้อมูล'}),'top-right');
+  view.ui.add(new Expand({view,content:new Legend({view}),expandTooltip:'คำอธิบายสัญลักษณ์'}),'bottom-left');
+  view.when(()=>{initialViewpoint=view.viewpoint.clone();$('mapStatus').textContent='Web Map กนอ. · 9c25f3f77ba5481cb481b402177884c2';}).catch(()=>fallbackMap());
  });
 })();
