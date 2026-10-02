@@ -16,9 +16,20 @@
 @media(prefers-reduced-motion:no-preference){.water-critical{animation:pulse 1.4s ease-in-out infinite}@keyframes pulse{50%{stroke-opacity:.15;fill-opacity:.04}}}
 .water-popup{width:290px;max-width:calc(100vw - 90px);max-height:calc(100vh - 100px);overflow:auto}.water-gauge-layout{display:grid;grid-template-columns:95px minmax(0,1fr);gap:8px;align-items:center}.water-gauge-layout svg{width:95px;height:235px}.water-gap{font-size:25px;font-weight:700;line-height:1.35}.water-level{font-size:22px;font-weight:700;margin-top:12px}.water-gauge-layout p{font-size:12px}.water-popup h3{padding-right:10px}
 .river-motion{animation:riverTravel 2s linear infinite}@keyframes riverTravel{to{stroke-dashoffset:-28}}@media(prefers-reduced-motion:reduce){.river-motion{animation:none}}
+
+#mapStage{position:absolute;inset:0}
+body.toolbar-above{display:flex;flex-direction:column;overflow:hidden}
+body.toolbar-above #mapStage{position:relative;order:2;flex:1;min-height:0;width:100%}
+body.toolbar-above .controls{position:relative;inset:auto;order:1;flex:none;width:100%;padding:12px;background:#fff;border-bottom:1px solid #c9dadd;pointer-events:auto;max-height:45vh;overflow:auto}
+body.toolbar-above .search{max-width:none}
+body.toolbar-above .toggles{max-width:none}
+body.toolbar-above .dam-select{width:calc(50% - 5px)}
+body.toolbar-above .legend{width:100%;box-shadow:none}
+body.toolbar-above:has(.leaflet-popup) .controls,body.toolbar-above:has(.maplibregl-popup) .controls{visibility:visible}
+
 </style>
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script></head>
-<body><div id="map" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div><div id="raster" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div>
+<body><div id="mapStage"><div id="map" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div><div id="raster" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div></div>
 <div class="controls"><div class="search"><select id="province" aria-label="เลือกจังหวัดในแผนที่"><option value="">ทั่วประเทศ</option></select><input id="search" aria-label="ค้นหาสถานีในแผนที่" placeholder="ค้นหาสถานี / สายน้ำ"></div>
 <div class="toggles" aria-label="ชั้นข้อมูล">
 <label><input data-layer="water" type="checkbox" checked>ระดับน้ำ</label><label><input data-layer="rings" type="checkbox" checked>ปริมาณน้ำไหล</label><label><input data-layer="flow" type="checkbox" checked>ลูกศรทิศทางน้ำ</label>
@@ -28,11 +39,13 @@
 <script>
 (function(){
 'use strict';
+if(new URLSearchParams(location.search).get('toolbar')==='top')document.body.classList.add('toolbar-above');
 const $=id=>document.getElementById(id)||(parent!==window&&location.origin===parent.location.origin?parent.document.getElementById(id):null),esc=v=>String(v??'–').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),fmt=v=>v==null?'ไม่มีค่า':Number(v).toLocaleString('th-TH',{maximumFractionDigits:2});
 const estateSvg="<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\"><path fill=\"#7d3f98\" stroke=\"#000\" stroke-width=\"16.96\" stroke-linejoin=\"round\" d=\"M256.001 8.48c-86.358 0-156.365 70.007-156.365 156.365 0 78.568 60.886 227.415 156.365 338.675 95.479-111.259 156.365-260.107 156.365-338.675C412.365 78.487 342.358 8.48 256.001 8.48z\"/><path opacity=\".1\" d=\"M171.116 130.181c15.214-61.943 65.389-106.106 124.373-116.667-12.615-3.282-25.846-5.034-39.489-5.034-86.358 0-156.365 70.007-156.365 156.365 0 71.273 50.108 200.382 130.69 306.8C173.225 346.072 153.542 201.731 171.116 130.181z\"/><circle fill=\"#fff\" stroke=\"#000\" stroke-width=\"16.96\" cx=\"256\" cy=\"164.83\" r=\"71.56\"/></svg>";
 const damSvg="<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"white\" stroke-width=\"2\"><path d=\"M12 4h4l5 16H11Z\"/><path d=\"M3 8h5M3 13h5M3 18h5\"/></svg>";
 const cameraSvg="<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"white\" stroke-width=\"2\"><rect x=\"3\" y=\"7\" width=\"13\" height=\"11\" rx=\"2\"/><path d=\"m16 10 5-3v11l-5-3M6 7l2-3h4l2 3\"/><circle cx=\"9.5\" cy=\"12.5\" r=\"2.5\"/></svg>";let cameraMarkers=[];
 let damMarkers=[];let estateMarkers=[];let waterways=null;
+new ResizeObserver(()=>{if(vector)vector.resize();if(raster)raster.invalidateSize()}).observe(document.getElementById('mapStage'));
 let vector=null,raster=null,ready=false,features=[],groups={},selectedMarker=null,pending=null,national=null,extras=[],gistda=null,animation=null,autoFit=true,populated=false;
 const flags={water:true,rings:true,flow:true,canal:true,dam:true,road:true,camera:true,estate:true,gistda:false};
 function date(v){let s=String(v||'').replace(' ','T');if(/^\d{4}-\d{2}-\d{2}$/.test(s))s+='T00:00:00';if(s&&!/(Z|[+-]\d{2}:?\d{2})$/.test(s))s+='+07:00';return Date.parse(s)}
