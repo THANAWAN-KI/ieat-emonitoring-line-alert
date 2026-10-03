@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>เรดาร์ฝนและนิคมอุตสาหกรรม | กนอ.</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css"><script src="https://js.arcgis.com/4.30/"></script>
+<style>
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 Sarabun,'Noto Sans Thai',sans-serif;color:#27313e;background:#f4f6f9}button,input{font:inherit}header{padding:15px 22px;background:#fff;border-bottom:1px solid #dce2e9;display:flex;gap:15px;align-items:center;justify-content:space-between}h1{font-size:21px;margin:0}header p{margin:0;color:#667382;font-size:12px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 430px;gap:12px;padding:12px;height:calc(100vh - 79px);min-height:540px}.map-card,.side{background:#fff;border:1px solid #dce2e9;border-radius:12px;overflow:hidden}.map-card{position:relative}#map{height:100%;width:100%}.toolbar{position:absolute;top:14px;left:14px;z-index:2;display:flex;gap:6px;flex-wrap:wrap;max-width:calc(100% - 28px)}button{border:1px solid #cad4df;background:#fff;color:#245181;border-radius:8px;padding:7px 10px;cursor:pointer;box-shadow:0 2px 7px #172a3d20}button:hover{background:#eaf2fa}button.primary{background:#245181;color:#fff;border-color:#245181}.status{position:absolute;bottom:12px;left:12px;right:12px;z-index:2;background:#fffef2e8;border:1px solid #e6dbb6;border-radius:8px;padding:7px 10px;font-size:12px}.side{display:flex;flex-direction:column}.side-head{padding:14px;border-bottom:1px solid #dce2e9}.side-head h2{margin:0;font-size:17px}.side-head small{color:#667382}.list{overflow:auto;flex:1;margin:0;padding:0;list-style:none}.list li{border-bottom:1px solid #edf0f4;padding:9px 14px}.list li b{display:block;font-size:13px}.list li small{color:#667382}.empty{padding:20px;color:#667382}footer{padding:9px 14px;border-top:1px solid #dce2e9;font-size:11px;color:#667382}@media(max-width:800px){header{align-items:flex-start}.layout{height:auto;display:block}.map-card{height:60vh;min-height:380px}.side{height:330px;margin-top:12px}}
+/* Radar layout */
+.radar-legend{position:absolute;right:16px;bottom:16px;z-index:31;width:193px;padding:10px 12px;background:#fffffff0;border:1px solid #e5e1e8;border-radius:9px;box-shadow:0 2px 12px #24202d24;color:#34303b;font-size:12px}
+.radar-legend strong{display:block;font-size:14px}.legend-body{display:flex;gap:8px;height:144px;margin:6px 0}.legend-gradient{width:24px;background:linear-gradient(to bottom,#fc00fb 0%,#aa00a9 20%,#aa0000 22%,#f80000 39%,#ff5500 40%,#fffd01 66%,#01fd01 69%,#015501 100%)}.legend-ticks{display:flex;flex-direction:column;justify-content:space-between;font-size:11px}.radar-legend small,.radar-legend a,#radarTime{display:block;font-size:11px;line-height:1.4}.radar-legend a{color:#59267c;margin:5px 0}#radarTime{color:#63606a}
+@media(max-width:800px){.radar-legend{right:8px;bottom:8px;width:155px;padding:7px}.legend-body{height:95px}}
+/* Keep estate names and map controls above the rain image. */
+#estateMarkers{position:absolute;inset:0;z-index:20;pointer-events:none;overflow:hidden}
+.map-card #radarCanvas{z-index:10!important}
+.map-card #radarCanvas{image-rendering:pixelated}
+.map-card #estateMarkers{z-index:21}
+.estate-marker{position:absolute;display:flex;flex-direction:column;align-items:center;gap:2px;transform:translate(-50%,-100%);max-width:205px;border:0!important;background:transparent!important;color:#52057f!important;padding:0!important;box-shadow:none!important;font-size:12px!important;line-height:1.2!important;cursor:pointer;pointer-events:auto}
+.list li:has(.estate-choice[aria-pressed="true"]){background:#e4f5e8}
+.list .estate-choice{display:block;width:100%;padding:3px 5px;text-align:left;border:0;box-shadow:none;background:transparent;color:inherit}
+.list .estate-choice[aria-pressed="true"],.list .estate-choice[aria-pressed="true"] b{color:#176437!important;font-weight:700}
+.list .estate-choice:hover{background:#edf7ef}
+.estate-marker-icon{display:block;order:2;width:28px;height:28px;overflow:visible!important;filter:drop-shadow(0 2px 3px #21112a88)}
+.estate-marker-icon svg{display:block;width:28px;height:28px}
+.estate-marker-name{display:none;order:1;max-width:205px;background:#fffffff5;border-radius:10px;padding:5px 8px;box-shadow:0 3px 10px #1b173544;font-size:13px!important;font-weight:600;line-height:1.25;white-space:normal;text-align:center}
+.estate-marker:hover .estate-marker-name,.estate-marker.is-selected .estate-marker-name{display:block}.estate-marker.is-selected{z-index:3}.estate-marker.is-selected .estate-marker-name{padding:8px 11px;color:#52057f!important;font-size:15px!important}
+.estate-marker-detail{display:none;color:#667382;font-size:12px;font-weight:400}.estate-marker.is-selected .estate-marker-detail{display:block;margin-top:3px}
+.estate-marker span{overflow:hidden;text-overflow:ellipsis}
+
+.map-card .esri-ui,.map-card .esri-popup{z-index:30!important}
+.map-card .toolbar{z-index:31}
+.side-head small{display:block;background:#f4ebfa!important;color:#4b176d!important;border-radius:8px;padding:9px 11px;margin-top:10px}
+html body,html body *,html body .esri-widget{font-family:"Sarabun","TH Sarabun New",sans-serif!important}
+body{font-size:16px;line-height:1.5;color:#34383f;background:#fbfbfc}
+header{min-height:64px;padding:10px 28px;border-bottom:1px solid #e5e7eb;box-shadow:0 2px 7px #1e242c17}
+h1{font-size:21px;font-weight:600;line-height:1.3}header p{font-size:14px;line-height:1.45;color:#8a8e94}
+.layout{height:calc(100vh - 80px);padding:16px 28px;gap:14px}
+.map-card,.side{border:0;border-radius:14px;box-shadow:0 3px 18px #2a3a4b12}
+.side-head{border-bottom:1px solid #eff1f4}.side-head h2{font-size:20px;font-weight:500;line-height:1.4}.side-head small{font-size:14px;line-height:1.45;color:#89919a}
+.list li b{font-size:16px;font-weight:400;line-height:1.55}
+button{font-size:16px;border-color:#dfe4e9;color:#59267c;box-shadow:none}
+button.primary{background:#59267c;border-color:#59267c}
+.status,footer{font-size:14px;line-height:1.45}
+.esri-widget,.esri-layer-list__item-title,.esri-legend__layer-caption{font-size:16px}
+.radar-layer-control{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid #eff1f4;font-size:16px;cursor:pointer}
+.radar-layer-control input{accent-color:#59267c}
+@media(max-width:800px){header{padding:10px 12px;flex-wrap:wrap}.layout{height:auto;padding:10px}.map-card{height:60vh;min-height:380px}}
+
+.report-view[hidden]{display:none}.report-view{position:fixed;inset:0;z-index:100;background:#f3f5f8;overflow:auto;padding:22px}.report-top{display:flex;align-items:center;justify-content:space-between;gap:15px;max-width:1200px;margin:0 auto 18px}.report-top h2{margin:0}.report-pages{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.report-card{background:#fff;border-radius:14px;padding:16px;box-shadow:0 3px 18px #2a3a4b18}.report-card h3{margin:0 0 10px;color:#263444}.report-card p{color:#627080;font-size:14px}.report-image{position:relative;background:#e8ecf2;min-height:250px;overflow:hidden}.report-image img{display:block;width:100%;height:auto}.report-pins{position:absolute;inset:0;pointer-events:none}.report-pin{position:absolute;transform:translate(-50%,-100%);background:#fff;color:#176437;border:1px solid #176437;border-radius:10px;padding:2px 5px;font-size:11px;white-space:nowrap;max-width:135px;overflow:hidden;text-overflow:ellipsis}.report-card button{margin:7px 6px 0 0}.report-national img{max-height:none;object-fit:contain}.report-national .report-pins{position:absolute;inset:0;pointer-events:none}.report-national .report-pin-icon{position:absolute;width:17px;height:17px;transform:translate(-50%,-100%);filter:drop-shadow(0 1px 2px #fff);pointer-events:auto;margin:0;padding:0;border:0;background:transparent;box-shadow:none}.report-national .report-pin-icon svg{width:100%;height:100%}.report-national .report-cluster{position:absolute;width:24px;height:24px;transform:translate(-50%,-50%);display:grid;place-items:center;border-radius:50%;border:2px solid #fff;background:#52057f;color:#fff;font-size:11px;font-weight:700;padding:0;pointer-events:auto;box-shadow:0 1px 5px #21112a88;margin:0}.report-national .report-cluster-detail{position:absolute;left:8px;right:8px;bottom:8px;max-height:180px;overflow:auto;background:#fffffff2;border:1px solid #52057f;border-radius:8px;padding:8px 12px;color:#52057f;font-size:12px;box-shadow:0 2px 8px #0002}.report-national .report-cluster-detail[hidden]{display:none}.report-card:first-child .report-image{min-height:0}.report-card:first-child .report-image img{width:100%;height:auto;aspect-ratio:1100/1530;object-fit:contain}.report-map-controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0 12px}.report-map-controls input{min-width:240px;flex:1;padding:8px;border:1px solid #cad4df;border-radius:8px}.report-map-controls button{margin:0}.report-card:first-child .report-image{cursor:grab;touch-action:none;user-select:none}.report-status{max-width:1200px;margin:10px auto;color:#5c346d}@media(max-width:850px){.report-pages{grid-template-columns:1fr}.report-view{padding:12px}}
+</style></head><body>
+<header><div><h1>เรดาร์ฝนระยอง × นิคมอุตสาหกรรม</h1><p>ภาพฝนจาก <a href="https://weather.tmd.go.th/rygloop.php" target="_blank" rel="noopener">TMD Rayong Loop</a> · ข้อมูลนิคมอุตสาหกรรม: กนอ.</p></div><button id="export" class="primary">ส่งออกรายงาน</button></header>
+<main class="layout"><section class="map-card"><div id="map"></div><img id="radarImage" alt="" aria-hidden="true" style="position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none"><div id="estateMarkers" aria-label="ตำแหน่งนิคมอุตสาหกรรม"></div><canvas id="radarCanvas" aria-label="ภาพฝนเรดาร์ระยอง กรองพื้นหลังออก" role="img" style="position:absolute;z-index:1;pointer-events:none;display:none"></canvas><nav class="toolbar" aria-label="แผนที่"><button id="country">ทั่วประเทศ</button><button id="east">ภาคตะวันออก</button><button id="rayong">ระยอง</button><button id="radar">ซ่อนเรดาร์</button><label style="background:white;padding:7px;border-radius:8px">ความทึบ <input id="opacity" aria-label="ความทึบเรดาร์" type="range" min="0" max="100" value="100"></label></nav><aside class="radar-legend" aria-label="คำอธิบายค่าสะท้อนเรดาร์ฝน"><strong>CMAX (dBZ)</strong><div class="legend-body"><div class="legend-gradient" aria-hidden="true"></div><div class="legend-ticks"><span>65+</span><span>50</span><span>40</span><span>30</span><span>20</span><span>10</span></div></div><small>ค่าสะท้อนเรดาร์ ยิ่งสูงสัญญาณฝนยิ่งเข้ม</small><a href="https://weather.tmd.go.th/ryg/rygloop.gif" target="_blank" rel="noopener">ดู GIF และเวลาเรดาร์จาก TMD ↗</a><div id="radarTime" aria-live="polite">กำลังตรวจภาพจาก TMD…</div></aside><div class="status" id="status" role="status">กำลังโหลดแผนที่และข้อมูลเรดาร์ระยอง…</div></section><aside class="side"><div class="side-head"><h2>จำนวนนิคมอุตสาหกรรมที่อยู่ในพื้นที่เรดาร์ <span id="count">—</span></h2><small>แสดงรายชื่อนิคมในรัศมีเรดาร์ระยอง · คลิกรายชื่อเพื่อซูม</small></div><ol class="list" id="estates"><li class="empty">กำลังโหลดข้อมูล IEAT…</li></ol><footer>รายการอ้างอิงจากฟิลด์ IEAT ของ EPP_2026_V1 · เรดาร์ระยองครอบคลุมเฉพาะพื้นที่รอบสถานี</footer></aside></main>
+<section class="report-view" id="reportView" hidden aria-label="ส่งออกรายงานเรดาร์"><div class="report-top"><h2>ส่งออกรายงานเรดาร์ฝนและนิคมอุตสาหกรรม</h2><button id="closeReport">กลับสู่แผนที่</button></div><div class="report-pages"><article class="report-card"><h3>หน้า 1 · เรดาร์ฝนระยอง</h3><div class="report-map-controls"><input id="reportEstateSearch" list="reportEstateOptions" placeholder="ค้นหาชื่อนิคมอุตสาหกรรม" aria-label="ค้นหานิคมอุตสาหกรรม"><datalist id="reportEstateOptions"></datalist><button id="reportSearchButton">ค้นหาและซูม</button><button id="reportZoomIn" aria-label="ซูมเข้า">＋</button><button id="reportZoomOut" aria-label="ซูมออก">－</button><button id="reportReset">ภาพรวมเรดาร์</button></div><div class="report-image" id="rayongReport" title="ลากเพื่อเลื่อนแผนที่ ใช้ล้อเมาส์เพื่อซูม"><img id="rayongReportImage" draggable="false" alt="แผนที่นิคมอุตสาหกรรมและภาพฝนเรดาร์ระยอง"></div><p>ลากแผนที่และใช้ล้อเมาส์เพื่อซูม หรือค้นหานิคมฯ ก่อนดาวน์โหลด</p><button data-save="rayong-png">ดาวน์โหลด PNG</button><button data-save="rayong-gif">ดาวน์โหลด GIF</button></article><article class="report-card"><h3>หน้า 2 · เรดาร์คอมโพสิททั่วประเทศ</h3><div class="report-image report-national"><img id="compositeReportImage" alt="Radar Composite QPF พร้อมตำแหน่งสำนักงานนิคมอุตสาหกรรมทั่วประเทศ"><div id="nationalReportPins" class="report-pins" aria-label="ตำแหน่งนิคมอุตสาหกรรมบนภาพเรดาร์"></div><div id="nationalClusterDetail" class="report-cluster-detail" hidden></div></div><p>ภาพ Radar Composite QPF ตามเวลาของภาพต้นทาง พร้อมตำแหน่งสำนักงานนิคมฯ บนภาพเดียวกัน · ตัวเลขในวงกลมคือจำนวนตำแหน่งใกล้กัน คลิกเพื่อดูรายชื่อ</p><button data-save="national-png">ดาวน์โหลด PNG</button><button data-save="national-gif">ดาวน์โหลด GIF</button></article></div><p class="report-status" id="reportStatus" role="status"></p></section>
+<script>
+require(['esri/WebMap','esri/Map','esri/views/MapView','esri/layers/FeatureLayer','esri/geometry/Point','esri/geometry/Circle','esri/widgets/Search','esri/widgets/LayerList','esri/widgets/Legend','esri/widgets/Expand','esri/widgets/BasemapGallery','esri/layers/GraphicsLayer','esri/Graphic'],function(WebMap,EsriMap,MapView,FeatureLayer,Point,Circle,Search,LayerList,Legend,Expand,BasemapGallery,GraphicsLayer,Graphic){
+  // TMD Rayong scan: 800px square, 240 km radius, centre at pixel (410,395).
+  // Radar station: 12°38′01″N, 101°20′26″E (TMD station table).
+  const station={lat:12+38/60+1/3600,lon:101+20/60+26/3600};
+  const latPerPixel=240/111.2/399,lonPerPixel=240/(111.2*Math.cos(station.lat*Math.PI/180))/399;
+  const bounds={west:station.lon-410*lonPerPixel,east:station.lon+390*lonPerPixel,north:station.lat+395*latPerPixel,south:station.lat-405*latPerPixel};
+  const radarImage=document.getElementById('radarImage'),radarCanvas=document.getElementById('radarCanvas');
+  const radarContext=radarCanvas.getContext('2d',{willReadFrequently:true});let radarVisible=true;
+  radarCanvas.style.opacity='1';
+  let lastRadarLoaded=0,radarLoading=false,radarObjectUrl='',gifPlaybackToken=0,gifFrameTimer=0,fallbackTimer=0,activeDecoder=null,gifFrameCount=0;
+  const radarTime=document.getElementById('radarTime');
+  function thaiTime(value){return new Date(value).toLocaleString('th-TH',{timeZone:'Asia/Bangkok',dateStyle:'short',timeStyle:'short'})}
+  async function reloadRadar(){
+    if(radarLoading)return;
+    radarLoading=true;
+    try{
+      const response=await fetch('/api/rayong-radar.gif?t='+Date.now(),{cache:'no-store'});
+      if(!response.ok||!String(response.headers.get('content-type')).includes('image/gif'))throw Error('TMD ไม่ส่งภาพ GIF');
+      const modified=response.headers.get('last-modified');
+      const blob=await response.blob();
+      if(!blob.size)throw Error('ไฟล์ภาพว่าง');
+      const url=URL.createObjectURL(blob),probe=new Image();
+      await new Promise((resolve,reject)=>{probe.onload=resolve;probe.onerror=()=>reject(Error('เปิดไฟล์ GIF ไม่สำเร็จ'));probe.src=url}).catch(error=>{URL.revokeObjectURL(url);throw error});
+      const previous=radarObjectUrl;radarObjectUrl=url;radarImage.src=url;
+      if(previous)URL.revokeObjectURL(previous);
+      lastRadarLoaded=Date.now();
+      await startGifPlayback(blob);
+      const fileTime=modified&&Number.isFinite(Date.parse(modified))?' · เวลาแก้ไขไฟล์ TMD '+thaiTime(modified):' · TMD ไม่ระบุเวลาแก้ไขไฟล์';
+      radarTime.textContent='ตรวจภาพจาก TMD '+thaiTime(lastRadarLoaded)+fileTime+(gifFrameCount>1?' · GIF '+gifFrameCount+' เฟรม':'')+' (เวลาเรดาร์จริงดูในภาพต้นทาง)';
+      setStatus('');
+    }catch(error){
+      radarTime.textContent=lastRadarLoaded?'ดึงภาพใหม่ไม่สำเร็จ · แสดงภาพที่โหลดไว้เมื่อ '+thaiTime(lastRadarLoaded):'ยังโหลดภาพเรดาร์จาก TMD ไม่สำเร็จ';
+      setStatus('ดึงภาพเรดาร์ล่าสุดไม่สำเร็จ: '+error.message);
+    }finally{radarLoading=false}
+  }
+  reloadRadar();
+  setInterval(reloadRadar,120000);
+  const rainPalette=[[202,0,0],[252,0,251],[229,0,229],[198,0,199],[186,0,1],[210,0,0],[248,0,0],[254,104,1],[254,236,1],[239,0,241],[213,0,212],[184,0,184],[255,85,0],[254,122,1],[254,180,0],[254,197,1],[254,219,1],[254,253,1],[1,253,1],[1,218,1],[1,196,1],[1,140,1],[1,123,1],[1,100,1],[1,85,1],[170,0,169],[170,0,0],[234,0,1],[254,140,2],[1,236,1],[1,179,1],[254,165,2]];
+  const rainColorCache=new Map();
+  function isRainColor(r,g,b){
+    const key=(r<<16)|(g<<8)|b;
+    if(rainColorCache.has(key))return rainColorCache.get(key);
+    const match=rainPalette.some(color=>(r-color[0])**2+(g-color[1])**2+(b-color[2])**2<=100);
+    rainColorCache.set(key,match);return match;
+  }
+  function paintRadarFrame(image,width,height){
+    if(!radarVisible)return;
+    if(radarCanvas.width!==800||radarCanvas.height!==800){radarCanvas.width=800;radarCanvas.height=800}
+    radarContext.clearRect(0,0,800,800);
+    radarContext.imageSmoothingEnabled=false;
+    radarContext.drawImage(image,0,0,Math.min(800,width),Math.min(800,height),0,0,800,800);
+    const frame=radarContext.getImageData(0,0,800,800),pixels=frame.data;
+    for(let i=0;i<pixels.length;i+=4){
+      if(!isRainColor(pixels[i],pixels[i+1],pixels[i+2]))pixels[i+3]=0;
+    }
+    radarContext.putImageData(frame,0,0);
+  }
+  function renderRadarFrame(){
+    if(radarImage.complete&&radarImage.naturalWidth)
+      paintRadarFrame(radarImage,radarImage.naturalWidth,radarImage.naturalHeight);
+  }
+  async function startGifPlayback(blob){
+    const token=++gifPlaybackToken;
+    clearTimeout(gifFrameTimer);clearInterval(fallbackTimer);
+    try{
+      if(typeof ImageDecoder==='undefined'||!await ImageDecoder.isTypeSupported('image/gif'))
+        throw Error('เบราว์เซอร์ไม่รองรับตัวถอดรหัส GIF');
+      const decoder=new ImageDecoder({data:await blob.arrayBuffer(),type:'image/gif',preferAnimation:true});
+      await decoder.tracks.ready;
+      await decoder.completed;
+      const count=decoder.tracks.selectedTrack?.frameCount||0;
+      if(count<2){decoder.close();throw Error('GIF มีเฟรมเดียว')}
+      gifFrameCount=count;
+      if(token!==gifPlaybackToken){decoder.close();return}
+      if(activeDecoder)activeDecoder.close();
+      activeDecoder=decoder;
+      let frameIndex=0;
+      const next=async()=>{
+        if(token!==gifPlaybackToken)return;
+        try{
+          const result=await decoder.decode({frameIndex});
+          if(token!==gifPlaybackToken){result.image.close();return}
+          const image=result.image;
+          paintRadarFrame(image,image.displayWidth,image.displayHeight);
+          const delay=Math.max(50,Math.min(5000,(image.duration||300000)/1000));
+          image.close();
+          frameIndex=(frameIndex+1)%count;
+          gifFrameTimer=setTimeout(next,delay);
+        }catch(error){
+          if(token===gifPlaybackToken){
+            console.warn('GIF frame decoding failed',error);
+            fallbackTimer=setInterval(renderRadarFrame,120);
+          }
+        }
+      };
+      next();
+      radarTime.dataset.frames=String(count);
+    }catch(error){
+      console.warn('Using browser GIF playback',error);
+      if(token===gifPlaybackToken)fallbackTimer=setInterval(renderRadarFrame,120);
+    }
+  }
+  const sourceMap=new WebMap({portalItem:{id:'3d24287ac6ea49cd823625ddad496e01'}});
+  const map=new EsriMap({basemap:'gray-vector'});
+  const boundaryHighlight=new GraphicsLayer({title:'ขอบเขตนิคมฯ ที่เลือก',listMode:'hide'});map.add(boundaryHighlight);
+  const businesses=new FeatureLayer({url:'https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/EPP_2026_V1/FeatureServer/0',title:'ผู้ประกอบการ (IEAT)',outFields:['IEAT','mercant_name'],popupTemplate:{title:'{mercant_name}',content:'นิคมอุตสาหกรรม: {IEAT}'},renderer:{type:'simple',symbol:{type:'simple-marker',size:5,color:'#355f97',outline:{color:'#fff',width:.5}}}});
+  // Keep EPP as a query-only source for unique estate names; do not show operator points.
+  const view=new MapView({container:'map',map,center:[101,13.3],zoom:6,popupEnabled:false});
+  view.when(()=>view.ui.move('zoom','bottom-left'));
+  sourceMap.load().then(async()=>{
+    const selected=/ตำแหน่งนิคมอุตสาหกรรม|เขตประกอบการอุตสาหกรรม/;
+    const layers=sourceMap.allLayers.toArray().filter(layer=>selected.test((layer.title||'').replace(/\s+/g,'')));
+    let added=0;
+    for(const layer of layers){
+      await layer.load();
+      // Office pins are rendered once in the HTML overlay above the radar.
+      if(layer.geometryType!=='polygon')continue;
+      layer.visible=true;
+      layer.listMode='show';
+      layer.popupEnabled=false;
+      map.add(layer);
+      added++;
+    }
+    if(!added)setStatus('ไม่พบชั้นขอบเขตนิคมฯ ใน WebMap');
+  }).catch(error=>setStatus('โหลดชั้นข้อมูลนิคมฯ ไม่สำเร็จ: '+error.message));
+  const search=new Search({view,includeDefaultSources:true,allPlaceholder:'ค้นหาที่อยู่หรือสถานที่'});
+  view.ui.add(search,{position:'top-right',index:0});
+  view.ui.add(new Expand({view,content:new BasemapGallery({view}),expandIconClass:'esri-icon-basemap',expandTooltip:'เลือกแผนที่ฐาน'}),{position:'top-right',index:3});
+  const layerListContainer=document.createElement('div');
+  const layerList=new LayerList({view,container:layerListContainer});
+  const layerPanel=document.createElement('div');
+  const radarControl=document.createElement('label');radarControl.className='radar-layer-control';
+  const radarCheckbox=document.createElement('input');radarCheckbox.type='checkbox';radarCheckbox.checked=true;
+  radarControl.append(radarCheckbox,document.createTextNode('เรดาร์ฝนระยอง (TMD)'));
+  layerPanel.append(radarControl,layerListContainer);
+  view.ui.add(new Expand({view,content:layerPanel,expandIconClass:'esri-icon-layers',expandTooltip:'เปิดปิดชั้นข้อมูล'}),{position:'top-right',index:1});
+  view.ui.add(new Expand({view,content:new Legend({view}),expandIconClass:'esri-icon-legend',expandTooltip:'คำอธิบายสัญลักษณ์'}),{position:'top-right',index:2});
+  radarCheckbox.onchange=()=>setRadarVisible(radarCheckbox.checked);
+  const status=document.getElementById('status'), list=document.getElementById('estates'),count=document.getElementById('count'),markers=document.getElementById('estateMarkers');
+  const OFFICE_URL='https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/e_PP_2025/FeatureServer/1/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=geojson';
+  const PIN_SVG="<svg aria-hidden=\"true\" viewBox=\"0 0 511.999 511.999\" xmlns=\"http://www.w3.org/2000/svg\"><path fill=\"#52057f\" d=\"M405.961 62.116C323.14-20.705 188.86-20.705 106.039 62.116s-82.821 217.101 0 299.922L256 511.999l149.961-149.961c82.821-82.821 82.821-217.101 0-299.922z\"/><path fill=\"#52057f\" d=\"M130.368 337.708c-33.558-33.558-52.04-78.175-52.04-125.633s18.481-92.074 52.04-125.631C163.924 52.887 208.542 34.406 256 34.406c47.457 0 92.074 18.481 125.631 52.038s52.04 78.175 52.04 125.631c0 47.458-18.481 92.075-52.04 125.631L255.998 463.34 130.368 337.708z\"/><circle fill=\"#E6E6E6\" cx=\"256\" cy=\"212.083\" r=\"129.59\"/><path fill=\"#CCCCCC\" d=\"M298.319 299.352c-71.573 0-129.594-58.021-129.594-129.594 0-24.945 7.055-48.238 19.266-68.008-36.956 22.828-61.585 63.699-61.585 110.327 0 71.573 58.021 129.594 129.594 129.594 46.628 0 87.498-24.63 110.326-61.585-19.769 12.212-43.064 19.266-68.007 19.266z\"/><path fill=\"#52057f\" d=\"M256 354.057c-78.288 0-141.98-63.692-141.98-141.98S177.712 70.097 256 70.097s141.98 63.692 141.98 141.98S334.287 354.057 256 354.057zm0-259.187c-64.628 0-117.207 52.579-117.207 117.207S191.371 329.284 256 329.284s117.207-52.579 117.207-117.207S320.628 94.87 256 94.87z\"/><ellipse transform=\"matrix(-.7071 -.7071 .7071 -.7071 414.7711 493.1812)\" fill=\"#FFF\" cx=\"309.527\" cy=\"160.689\" rx=\"51.607\" ry=\"30.964\"/></svg>";
+  const pinImage=new Image();pinImage.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(PIN_SVG);
+  let names=[],officeRows=[],selectedMarkerName='',querySerial=0,selectedEstate='';
+  const activeMarkerRows=()=>officeRows.length?officeRows:names;
+  fetch(OFFICE_URL,{cache:'no-store'}).then(response=>{if(!response.ok)throw Error('HTTP '+response.status);return response.json()}).then(data=>{officeRows=(data.features||[]).filter(feature=>feature.geometry?.type==='Point').map(feature=>{const props=feature.properties||{},coordinates=feature.geometry.coordinates;return{name:String(props['สำนักงานนิคมฯ']||props.IEAT||'สำนักงานนิคมอุตสาหกรรม'),operation:String(props.Operations||''),point:new Point({longitude:coordinates[0],latitude:coordinates[1]})}});renderMarkers();if(!reportView.hidden){fillReportSearch();queueReportMap()}}).catch(error=>console.warn('Office markers unavailable; using estate positions',error));
+  function selectEstate(row){
+    selectedEstate=row.name;
+    for(const choice of list.querySelectorAll('.estate-choice'))choice.setAttribute('aria-pressed',String(choice.dataset.estate===selectedEstate));
+    const matching=activeMarkerRows().find(item=>item.name.includes(row.name)||row.name.includes(item.name))||activeMarkerRows().reduce((best,item)=>!best||Math.hypot(item.point.longitude-row.point.longitude,item.point.latitude-row.point.latitude)<Math.hypot(best.point.longitude-row.point.longitude,best.point.latitude-row.point.latitude)?item:best,null);
+    selectedMarkerName=matching?.name||row.name;
+    for(const marker of markers.children)marker.classList.toggle('is-selected',activeMarkerRows()[Number(marker.dataset.index)]?.name===selectedMarkerName);
+  }
+  function positionMarkers(){
+    for(const marker of markers.children){
+      const row=activeMarkerRows()[Number(marker.dataset.index)],screen=row&&view.toScreen(row.point);
+      if(!screen||screen.x<0||screen.y<0||screen.x>view.width||screen.y>view.height){marker.style.display='none';continue}
+      marker.style.display='flex';marker.style.left=screen.x+'px';marker.style.top=screen.y+'px';
+    }
+  }
+  function renderMarkers(){
+    markers.replaceChildren();
+    activeMarkerRows().forEach((row,index)=>{
+      if(!row.point)return;
+      const marker=document.createElement('button');marker.type='button';marker.className='estate-marker';marker.classList.toggle('is-selected',row.name===selectedMarkerName);marker.dataset.index=index;
+      marker.title=row.name;marker.setAttribute('aria-label',row.name);
+      const icon=document.createElement('span');icon.className='estate-marker-icon';icon.innerHTML=PIN_SVG;icon.setAttribute('aria-hidden','true');
+      const label=document.createElement('span');label.className='estate-marker-name';label.textContent='สำนักงานนิคมฯ '+row.name;
+      if(row.operation){const operation=document.createElement('span');operation.className='estate-marker-detail';operation.textContent=row.operation;label.append(operation)}
+      const detail=document.createElement('span');detail.className='estate-marker-detail';detail.textContent='พิกัด '+Number(row.point.latitude).toFixed(5)+', '+Number(row.point.longitude).toFixed(5);label.append(detail);marker.append(label,icon);
+      marker.onclick=async event=>{event.stopPropagation();selectedMarkerName=row.name;for(const button of markers.children)button.classList.toggle('is-selected',button===marker);await view.goTo({target:row.point,zoom:12});await showEstateBoundary(row.point,row.name);if(!reportView.hidden)queueReportMap()};
+      markers.append(marker);
+    });
+    positionMarkers();
+  }
+  const radarArea=new Circle({center:new Point({longitude:station.lon,latitude:station.lat}),radius:240,radiusUnit:'kilometers',geodesic:true});
+  function positionRadar(){
+    if(!view.ready||!radarImage.complete||!radarImage.naturalWidth)return;
+    const nw=view.toScreen(new Point({longitude:bounds.west,latitude:bounds.north}));
+    const se=view.toScreen(new Point({longitude:bounds.east,latitude:bounds.south}));
+    Object.assign(radarCanvas.style,{left:nw.x+'px',top:nw.y+'px',width:(se.x-nw.x)+'px',height:(se.y-nw.y)+'px',display:radarVisible?'block':'none'});
+  }
+  radarImage.onload=()=>{positionRadar();if(!activeDecoder)renderRadarFrame();setStatus('')};
+  radarImage.onerror=()=>setStatus('โหลดภาพฝนระยองไม่สำเร็จ');
+  const clean=s=>String(s||'').trim();
+  function setStatus(s){status.textContent=s;status.style.display=s?'block':'none'}
+  async function refresh(){
+    const serial=++querySerial;
+    count.textContent='…';list.replaceChildren();
+    try{
+      const q=businesses.createQuery();q.geometry=radarArea;q.spatialRelationship='intersects';q.returnGeometry=true;q.outFields=['IEAT'];q.num=1000;
+      const all=new Map();let offset=0;
+      do{
+        q.start=offset;
+        const result=await businesses.queryFeatures(q);if(serial!==querySerial)return;
+        for(const f of result.features){const name=clean(f.attributes.IEAT);if(!name||name==='—')continue;if(!all.has(name))all.set(name,{name,point:f.geometry})}
+        offset+=result.features.length;
+        if(!result.exceededTransferLimit&&result.features.length<q.num)break;
+      }while(offset<20000);
+      names=[...all.values()].sort((a,b)=>a.name.localeCompare(b.name,'th'));
+      count.textContent=names.length.toLocaleString('th-TH');renderMarkers();
+      if(!names.length){const li=document.createElement('li');li.className='empty';li.textContent='ไม่พบนิคมในพื้นที่เรดาร์';list.append(li)}
+      for(const row of names){const li=document.createElement('li'),btn=document.createElement('button');btn.type='button';btn.className='estate-choice';btn.dataset.estate=row.name;btn.setAttribute('aria-pressed',String(row.name===selectedEstate));const b=document.createElement('b');b.textContent=row.name;btn.append(b);btn.onclick=async()=>{selectEstate(row);await view.goTo({target:row.point,zoom:12});await showEstateBoundary(row.point,row.name)};li.append(btn);list.append(li)}
+      if(offset>=20000)setStatus('รายการอาจไม่ครบ (เกิน 20,000 จุด)');
+    }catch(err){if(serial!==querySerial)return;names=[];count.textContent='—';list.innerHTML='<li class="empty">โหลดรายชื่อนิคมไม่สำเร็จ</li>';setStatus('ไม่สามารถอ่านข้อมูล IEAT ได้: '+err.message)}
+  }
+  const estateKey=name=>clean(name).split(' ').join('').toLowerCase();
+  function estateName(attributes){
+    const values=Object.values(attributes||{}).filter(value=>typeof value==='string'&&value.length<180);
+    return values.find(value=>names.some(row=>estateKey(row.name)===estateKey(value)))||'';
+  }
+  async function showEstateBoundary(point,preferredName){
+    boundaryHighlight.removeAll();
+    const candidates=map.allLayers.toArray().filter(layer=>layer.type==='feature'&&layer.visible&&/ตำแหน่งนิคมอุตสาหกรรม|เขตประกอบการอุตสาหกรรม/.test(layer.title||''));
+    for(const layer of candidates){
+      try{
+        await layer.load();if(layer.geometryType!=='polygon')continue;
+        const query=layer.createQuery();query.geometry=point;query.spatialRelationship='intersects';
+        query.returnGeometry=true;query.outFields=['*'];query.num=10;
+        const response=await layer.queryFeatures(query);
+        for(const feature of response.features){
+          const name=estateName(feature.attributes);
+          if(!name||preferredName&&estateKey(name)!==estateKey(preferredName))continue;
+          boundaryHighlight.add(new Graphic({geometry:feature.geometry,symbol:{type:'simple-fill',color:[89,38,124,.12],outline:{color:[89,38,124,1],width:3}}}));
+          
+          return true;
+        }
+      }catch(error){console.warn('Boundary layer query failed',layer.title,error)}
+    }
+    return false;
+  }
+  view.on('click',async event=>{
+    const point=view.toMap({x:event.x,y:event.y});
+    if(point)await showEstateBoundary(point);
+  });
+  view.when(()=>{positionRadar();refresh();view.watch('extent',()=>{positionRadar();positionMarkers()})}).catch(e=>setStatus('เปิดแผนที่ กนอ. ไม่สำเร็จ: '+e.message));
+  document.getElementById('country').onclick=()=>view.goTo({center:[101,13.3],zoom:6});
+  document.getElementById('east').onclick=()=>view.goTo({center:[101.55,12.8],zoom:9});
+  document.getElementById('rayong').onclick=()=>view.goTo({center:[101.27,12.68],zoom:11});
+  function setRadarVisible(visible){radarVisible=visible;radarCheckbox.checked=visible;radarCanvas.style.display=visible?'block':'none';if(visible)renderRadarFrame();document.getElementById('radar').textContent=visible?'ซ่อนเรดาร์':'แสดงเรดาร์'}
+  document.getElementById('radar').onclick=()=>setRadarVisible(!radarVisible);
+  document.getElementById('opacity').oninput=e=>radarCanvas.style.opacity=Number(e.target.value)/100;
+  const reportView=document.getElementById('reportView'),reportStatus=document.getElementById('reportStatus');
+  const qpfUrl='/api/composite-qpf.gif';
+  function reportMessage(message){reportStatus.textContent=message}
+  function downloadBlob(blob,filename){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=filename;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000)}
+  function loadImage(src){return new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=()=>reject(Error('โหลดภาพต้นทางไม่สำเร็จ'));img.src=src})}
+  function drawEstatePin(ctx,x,y,scale=1){
+    if(pinImage.complete&&pinImage.naturalWidth){ctx.drawImage(pinImage,x-14*scale,y-28*scale,28*scale,28*scale);return}
+    ctx.save();ctx.translate(x,y);ctx.scale(scale,scale);ctx.shadowColor='#21112a88';ctx.shadowBlur=5;ctx.shadowOffsetY=2;
+    ctx.beginPath();ctx.moveTo(0,0);ctx.bezierCurveTo(-5,-5,-14,-15,-14,-24);ctx.arc(0,-24,14,Math.PI,0);ctx.bezierCurveTo(14,-15,5,-5,0,0);
+    ctx.fillStyle='#52057f';ctx.strokeStyle='#52057f';ctx.lineWidth=2;ctx.fill();ctx.stroke();ctx.shadowColor='transparent';
+    ctx.beginPath();ctx.arc(0,-24,7,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();ctx.restore();
+  }
+  function drawPins(ctx,rows,project){
+    ctx.textBaseline='middle';
+    const ordered=[...rows.filter(row=>row.name!==selectedMarkerName),...rows.filter(row=>row.name===selectedMarkerName)];
+    for(const row of ordered){const pos=project(row.point);if(!pos||!Number.isFinite(pos.x)||!Number.isFinite(pos.y))continue;
+      const x=pos.x,y=pos.y;if(x<0||x>ctx.canvas.width||y<0||y>ctx.canvas.height)continue;
+      const active=row.name===selectedMarkerName,scale=active?1.12:1;
+      drawEstatePin(ctx,x,y,scale);
+      if(!active)continue;
+      ctx.font='bold 16px Sarabun, sans-serif';
+      const label='สำนักงานนิคมฯ '+row.name.slice(0,38),width=Math.min(ctx.measureText(label).width+20,320);
+      const height=active?52:27,lx=Math.max(2,Math.min(ctx.canvas.width-width-2,x-width/2)),ly=Math.max(2,y-38*scale-height-3);
+      ctx.save();ctx.shadowColor='#1b173544';ctx.shadowBlur=8;ctx.shadowOffsetY=2;ctx.fillStyle='#fffffff4';ctx.fillRect(lx,ly,width,height);ctx.restore();
+      ctx.fillStyle='#52057f';ctx.fillText(label,lx+10,ly+(active?17:14),width-20);
+      if(active){ctx.font='13px Sarabun, sans-serif';ctx.fillStyle='#667382';ctx.fillText('พิกัด '+Number(row.point.latitude).toFixed(5)+', '+Number(row.point.longitude).toFixed(5),lx+10,ly+38,width-20)}
+    }
+  }
+  function drawReportLegend(ctx){
+    const x=ctx.canvas.width-210,y=ctx.canvas.height-300;
+    ctx.save();ctx.fillStyle='#fffffff0';ctx.strokeStyle='#dce2e9';ctx.lineWidth=1;
+    ctx.fillRect(x,y,196,284);ctx.strokeRect(x,y,196,284);
+    ctx.fillStyle='#27313e';ctx.font='bold 17px Sarabun, sans-serif';ctx.fillText('สัญลักษณ์เรดาร์ฝน',x+12,y+24);
+    const gradient=ctx.createLinearGradient(0,y+43,0,y+195);
+    [[0,'#fc00fb'],[.18,'#aa0000'],[.36,'#f80000'],[.52,'#ff5500'],[.69,'#fffd01'],[.78,'#01fd01'],[1,'#015501']].forEach(([stop,color])=>gradient.addColorStop(stop,color));
+    ctx.fillStyle=gradient;ctx.fillRect(x+14,y+42,23,156);
+    ctx.fillStyle='#34383f';ctx.font='13px Sarabun, sans-serif';
+    ['65+','50','40','30','20','10'].forEach((label,index)=>ctx.fillText(label+' dBZ',x+47,y+48+index*30));
+    drawEstatePin(ctx,x+25,y+245,.55);
+    ctx.fillStyle='#52057f';ctx.font='bold 14px Sarabun, sans-serif';ctx.fillText('สำนักงานนิคมฯ',x+40,y+225);
+    ctx.beginPath();ctx.arc(x+25,y+267,10,0,Math.PI*2);ctx.fillStyle='#52057f';ctx.fill();
+    ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='bold 11px Sarabun, sans-serif';ctx.fillText('2',x+25,y+267);
+    ctx.textAlign='left';ctx.fillStyle='#52057f';ctx.font='13px Sarabun, sans-serif';ctx.fillText('จุดใกล้กัน (จำนวน)',x+42,y+267);ctx.restore();
+  }
+  const rayongProject=point=>({x:(point.longitude-bounds.west)/(bounds.east-bounds.west)*800,y:(bounds.north-point.latitude)/(bounds.north-bounds.south)*800});
+  const reportSearch=document.getElementById('reportEstateSearch');
+  let reportRenderSerial=0,reportPreviewTimer=0;
+  function fillReportSearch(){
+    const options=document.getElementById('reportEstateOptions');options.replaceChildren();
+    for(const name of new Set([...activeMarkerRows(),...names].map(row=>row.name))){const option=document.createElement('option');option.value=name;options.append(option)}
+  }
+  const reportCrop={x:320,y:0,w:560,h:750},reportMapBox={x:40,y:120,w:1020,h:1366},reportSize={w:1100,h:1530},reportMapScale=2;
+  function radarPlacement(width,height){return {x:parseFloat(radarCanvas.style.left)*width/view.width,y:parseFloat(radarCanvas.style.top)*height/view.height,w:parseFloat(radarCanvas.style.width)*width/view.width,h:parseFloat(radarCanvas.style.height)*height/view.height}}
+  function drawReportLabels(ctx,rows,project){
+    const placed=[];ctx.save();ctx.font='bold 13px Sarabun, sans-serif';ctx.textBaseline='middle';
+    for(const row of rows){
+      const pos=project(row.point);if(!pos||pos.x<reportCrop.x+15||pos.x>reportCrop.x+reportCrop.w-15||pos.y<25||pos.y>730)continue;
+      const label=row.name.slice(0,25),width=Math.min(190,Math.ceil(ctx.measureText(label).width)+14),height=23;
+      const x=pos.x+9+width<reportCrop.x+reportCrop.w-5?pos.x+9:pos.x-width-9,y=pos.y-35;
+      if(x<reportCrop.x+4||y<4||placed.some(box=>x<box.x+box.w+5&&x+width+5>box.x&&y<box.y+box.h+5&&y+height+5>box.y))continue;
+      placed.push({x,y,w:width,h:height});ctx.fillStyle='#fffffff0';ctx.fillRect(x,y,width,height);
+      ctx.fillStyle='#52057f';ctx.fillText(label,x+7,y+height/2,width-14);
+    }
+    ctx.restore();
+  }
+  function drawMapPins(ctx,width,height){
+    const project=point=>{const pixel=view.toScreen(point);return pixel&&{x:pixel.x*width/view.width,y:pixel.y*height/view.height}};
+    const rows=activeMarkerRows(),selected=rows.filter(row=>row.name===selectedMarkerName);
+    if(view.zoom>10){drawPins(ctx,rows.filter(row=>row.name!==selectedMarkerName),project);drawReportLabels(ctx,rows.filter(row=>row.name!==selectedMarkerName),project);if(selected.length)drawPins(ctx,selected,project);return}
+    const cells=new Map();
+    for(const row of rows){
+      const pos=project(row.point);if(!pos||pos.x<0||pos.x>width||pos.y<0||pos.y>height)continue;
+      if(row.name===selectedMarkerName)continue;
+      const key=Math.round(pos.x/34)+','+Math.round(pos.y/34);
+      if(!cells.has(key))cells.set(key,{x:0,y:0,count:0,row});
+      const cell=cells.get(key);cell.x+=pos.x;cell.y+=pos.y;cell.count++;
+    }
+    for(const cell of cells.values()){
+      const x=cell.x/cell.count,y=cell.y/cell.count;
+      if(cell.count===1){drawEstatePin(ctx,x,y,.7);continue}
+      ctx.save();ctx.beginPath();ctx.arc(x,y,13,0,Math.PI*2);ctx.fillStyle='#52057f';ctx.fill();ctx.lineWidth=2;ctx.strokeStyle='#fff';ctx.stroke();
+      ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='bold 12px Sarabun, sans-serif';ctx.fillText(String(cell.count),x,y);ctx.restore();
+    }
+    drawReportLabels(ctx,[...cells.values()].filter(cell=>cell.count===1).map(cell=>cell.row),project);
+    if(selected.length)drawPins(ctx,selected,project);
+  }
+  async function composeRayongMap(){
+    await view.when();await pinImage.decode().catch(()=>{});const w=1200*reportMapScale,h=750*reportMapScale;
+    const shot=await view.takeScreenshot({width:w,height:h,format:'png'});
+    const base=await loadImage(shot.dataUrl),canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;const ctx=canvas.getContext('2d');ctx.drawImage(base,0,0,w,h);
+    if(radarCanvas.width&&radarVisible){const p=radarPlacement(w,h);ctx.globalAlpha=Number(radarCanvas.style.opacity);ctx.imageSmoothingEnabled=false;ctx.drawImage(radarCanvas,p.x,p.y,p.w,p.h);ctx.globalAlpha=1;ctx.imageSmoothingEnabled=true}
+    ctx.save();ctx.scale(reportMapScale,reportMapScale);drawMapPins(ctx,1200,750);ctx.restore();return canvas;
+  }
+  async function refreshReportMap(){
+    if(reportView.hidden)return;const serial=++reportRenderSerial;
+    try{const canvas=wrapRayongReport(await composeRayongMap());if(serial===reportRenderSerial)document.getElementById('rayongReportImage').src=canvas.toDataURL('image/png')}
+    catch(error){if(serial===reportRenderSerial)reportMessage('แสดงตัวอย่างแผนที่ไม่สำเร็จ: '+error.message)}
+  }
+  function queueReportMap(){clearTimeout(reportPreviewTimer);reportPreviewTimer=setTimeout(refreshReportMap,350)}
+  view.watch('stationary',stationary=>{if(stationary&&!reportView.hidden)queueReportMap()});
+  async function searchReportEstate(){
+    const query=clean(reportSearch.value).toLowerCase(),rows=[...activeMarkerRows(),...names];
+    const row=rows.find(item=>item.name.toLowerCase()===query)||rows.find(item=>item.name.toLowerCase().includes(query));
+    if(!row){reportMessage('ไม่พบนิคมฯ ตามชื่อที่ค้นหา');return}
+    const markerRow=activeMarkerRows().find(item=>item.name===row.name)||activeMarkerRows().find(item=>item.name.includes(row.name)||row.name.includes(item.name))||row;
+    selectedMarkerName=markerRow.name;reportSearch.value=row.name;
+    for(const marker of markers.children)marker.classList.toggle('is-selected',activeMarkerRows()[Number(marker.dataset.index)]?.name===markerRow.name);
+    await view.goTo({target:markerRow.point,zoom:12});await showEstateBoundary(markerRow.point,row.name);
+    await refreshReportMap();reportMessage('แสดงพื้นที่ '+row.name);
+  }
+  document.getElementById('reportSearchButton').onclick=searchReportEstate;
+  reportSearch.onkeydown=event=>{if(event.key==='Enter')searchReportEstate()};
+  document.getElementById('reportZoomIn').onclick=()=>view.goTo({zoom:Math.min(18,view.zoom+1)});
+  document.getElementById('reportZoomOut').onclick=()=>view.goTo({zoom:Math.max(4,view.zoom-1)});
+  document.getElementById('reportReset').onclick=()=>view.goTo({center:[101.27,12.68],zoom:9});
+  const preview=document.getElementById('rayongReport');
+  function reportPointer(event){
+    const rect=preview.getBoundingClientRect(),x=(event.clientX-rect.left)/rect.width*reportSize.w,y=(event.clientY-rect.top)/rect.height*reportSize.h;
+    if(x<reportMapBox.x||x>reportMapBox.x+reportMapBox.w||y<reportMapBox.y||y>reportMapBox.y+reportMapBox.h)return null;
+    return{x:(reportCrop.x+(x-reportMapBox.x)/reportMapBox.w*reportCrop.w)*view.width/1200,
+      y:(reportCrop.y+(y-reportMapBox.y)/reportMapBox.h*reportCrop.h)*view.height/750};
+  }
+  let reportDrag=null,suppressReportClick=false;
+  preview.addEventListener('pointerdown',event=>{if(event.button!==0||!reportPointer(event))return;reportDrag={x:event.clientX,y:event.clientY};preview.setPointerCapture(event.pointerId);preview.style.cursor='grabbing'});
+  preview.addEventListener('pointerup',event=>{
+    if(!reportDrag)return;
+    const dx=event.clientX-reportDrag.x,dy=event.clientY-reportDrag.y;reportDrag=null;preview.style.cursor='grab';
+    if(Math.hypot(dx,dy)<5)return;
+    suppressReportClick=true;const box=preview.getBoundingClientRect();
+    const center=view.toMap({x:view.width/2-dx/box.width*reportSize.w/reportMapBox.w*reportCrop.w*view.width/1200,
+      y:view.height/2-dy/box.height*reportSize.h/reportMapBox.h*reportCrop.h*view.height/750});
+    if(center)view.goTo({center,zoom:view.zoom},{animate:false});
+  });
+  preview.addEventListener('pointercancel',()=>{reportDrag=null;preview.style.cursor='grab'});
+  preview.onclick=event=>{if(suppressReportClick){suppressReportClick=false;return}const pixel=reportPointer(event),point=pixel&&view.toMap(pixel);if(point)view.goTo({center:point,zoom:view.zoom})};
+  preview.addEventListener('wheel',event=>{
+    const pixel=reportPointer(event);if(!pixel)return;event.preventDefault();const next=Math.max(4,Math.min(18,view.zoom+(event.deltaY<0?1:-1)));
+    if(next===view.zoom)return;
+    const {x,y}=pixel,factor=2**(next-view.zoom),center=view.toMap({x:x+(view.width/2-x)/factor,y:y+(view.height/2-y)/factor});
+    if(center)view.goTo({center,zoom:next},{animate:false});
+  },{passive:false});
+  let nationalRows=[],nationalClusters=[];
+  // Axis coordinates measured from the TMD composite image (1826 x 2316 px).
+  const compositePlot={width:1826,height:2316,x95:173,x107:1440,y22:400,y4:2157};
+  function compositePosition(point){
+    const lon=point.longitude,lat=point.latitude;
+    if(!Number.isFinite(lon)||!Number.isFinite(lat)||lon<95||lon>107||lat<4||lat>22)return null;
+    return{x:compositePlot.x95+(lon-95)*(compositePlot.x107-compositePlot.x95)/12,
+      y:compositePlot.y22+(22-lat)*(compositePlot.y4-compositePlot.y22)/18};
+  }
+  async function prepareNationalMap(){
+    if(!officeRows.length){
+      const response=await fetch(OFFICE_URL,{cache:'no-store'});if(!response.ok)throw Error('โหลดพิกัดสำนักงานนิคมฯ ไม่สำเร็จ');
+      const data=await response.json();officeRows=(data.features||[]).filter(feature=>feature.geometry?.type==='Point').map(feature=>({
+        name:String(feature.properties?.['สำนักงานนิคมฯ']||feature.properties?.IEAT||'สำนักงานนิคมอุตสาหกรรม'),
+        point:new Point({longitude:feature.geometry.coordinates[0],latitude:feature.geometry.coordinates[1]})}));
+    }
+    nationalRows=officeRows.filter(row=>compositePosition(row.point));
+    if(!nationalRows.length)throw Error('ไม่พบตำแหน่งนิคมฯ ภายในกรอบภาพเรดาร์คอมโพสิท');
+    // Group points in 32 px map cells at the 1100 px report export scale.
+    const cells=new Map();
+    for(const row of nationalRows){
+      const pos=compositePosition(row.point),x=pos.x*1100/compositePlot.width,y=pos.y*1100/compositePlot.width;
+      const key=Math.round(x/32)+','+Math.round(y/32);
+      if(!cells.has(key))cells.set(key,{x:0,y:0,rows:[]});
+      const cell=cells.get(key);cell.x+=pos.x;cell.y+=pos.y;cell.rows.push(row);
+    }
+    nationalClusters=[...cells.values()].map(cell=>({x:cell.x/cell.rows.length,y:cell.y/cell.rows.length,rows:cell.rows}));
+    const pins=document.getElementById('nationalReportPins'),detail=document.getElementById('nationalClusterDetail');pins.replaceChildren();detail.hidden=true;
+    for(const cluster of nationalClusters){
+      const pin=document.createElement('button');pin.type='button';
+      pin.className=cluster.rows.length>1?'report-cluster':'report-pin-icon';
+      pin.style.left=cluster.x/compositePlot.width*100+'%';pin.style.top=cluster.y/compositePlot.height*100+'%';
+      const title=cluster.rows.map(row=>'สำนักงานนิคมฯ '+row.name).join(' · ');
+      pin.title=title;pin.setAttribute('aria-label',title);
+      if(cluster.rows.length>1)pin.textContent=cluster.rows.length;else pin.innerHTML=PIN_SVG;
+      pin.onclick=()=>{detail.replaceChildren();const strong=document.createElement('strong');strong.textContent=cluster.rows.length+' ตำแหน่งนิคมอุตสาหกรรม';detail.append(strong);
+        const list=document.createElement('div');list.textContent=cluster.rows.map(row=>row.name).join(' · ');detail.append(list);detail.hidden=false};
+      pins.append(pin);
+    }
+  }
+  document.getElementById('closeReport').onclick=()=>{reportView.hidden=true};
+  document.getElementById('export').onclick=async()=>{
+    reportView.hidden=false;reportMessage('กำลังเตรียมภาพรายงาน…');
+    try{
+      if(!radarObjectUrl)throw Error('ภาพเรดาร์ระยองยังไม่พร้อม');
+      if(view.zoom<8&&!selectedMarkerName)await view.goTo({center:[101.27,12.68],zoom:9},{animate:false});
+      fillReportSearch();
+      await refreshReportMap();reportMessage('หน้า 1 พร้อมแล้ว · ค้นหานิคมฯ หรือซูมก่อนดาวน์โหลดได้');
+    }catch(error){reportMessage('หน้า 1: '+error.message)}
+    try{
+      const qpf=await fetch(qpfUrl,{cache:'no-store'});if(!qpf.ok)throw Error('โหลดภาพ Radar Composite QPF ไม่สำเร็จ');
+      const qpfBlob=await qpf.blob();const old=document.getElementById('compositeReportImage').dataset.url;if(old)URL.revokeObjectURL(old);
+      const qpfObjectUrl=URL.createObjectURL(qpfBlob);document.getElementById('compositeReportImage').dataset.url=qpfObjectUrl;document.getElementById('compositeReportImage').src=qpfObjectUrl;
+      await prepareNationalMap();await refreshReportMap();reportMessage('รายงานทั้งสองหน้าพร้อมบันทึก · ค้นหานิคมฯ หรือซูมก่อนดาวน์โหลดได้');
+    }catch(error){reportMessage('หน้า 1 พร้อมใช้งาน · หน้า 2: '+error.message)}
+  };
+  function drawRayongSheet(ctx,mapImage){
+    const {w,h}=reportSize,b=reportMapBox,c=reportCrop;
+    ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h);
+    ctx.textAlign='center';ctx.fillStyle='#172b3d';ctx.font='bold 29px Sarabun, sans-serif';
+    ctx.fillText('รายงานเฝ้าระวังฝนใกล้นิคมอุตสาหกรรม',w/2,44);
+    ctx.font='17px Sarabun, sans-serif';ctx.fillText('เรดาร์ฝนระยอง · '+new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok',dateStyle:'long',timeStyle:'short'}),w/2,77);
+    ctx.strokeStyle='#253444';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(40,98);ctx.lineTo(w-40,98);ctx.stroke();
+    const cropped=document.createElement('canvas');cropped.width=c.w*reportMapScale;cropped.height=c.h*reportMapScale;
+    const mapCtx=cropped.getContext('2d');mapCtx.drawImage(mapImage,c.x*reportMapScale,c.y*reportMapScale,c.w*reportMapScale,c.h*reportMapScale,0,0,cropped.width,cropped.height);
+    mapCtx.save();mapCtx.translate(cropped.width-273,cropped.height-390);mapCtx.scale(1.3,1.3);
+    mapCtx.translate(-(cropped.width-210),-(cropped.height-300));drawReportLegend(mapCtx);mapCtx.restore();
+    ctx.drawImage(cropped,b.x,b.y,b.w,b.h);ctx.strokeStyle='#dce2e9';ctx.lineWidth=1;ctx.strokeRect(b.x,b.y,b.w,b.h);
+    ctx.textAlign='left';ctx.fillStyle='#536373';ctx.font='14px Sarabun, sans-serif';ctx.fillText('แหล่งข้อมูล: กรมอุตุนิยมวิทยา / สำนักงานนิคมอุตสาหกรรม กนอ.',40,1513);
+    ctx.textAlign='right';ctx.fillText('หน้า 1 / 2',w-40,1513);ctx.textAlign='left';
+  }
+  function wrapRayongReport(mapImage){const page=document.createElement('canvas');page.width=reportSize.w;page.height=reportSize.h;drawRayongSheet(page.getContext('2d'),mapImage);return page}
+  async function composePage(kind){
+    if(kind==='rayong')return wrapRayongReport(await composeRayongMap());
+    if(!nationalRows.length)throw Error('ตำแหน่งสำนักงานนิคมฯ ยังไม่พร้อม');
+    const qpf=await loadImage(document.getElementById('compositeReportImage').src),canvas=document.createElement('canvas');
+    canvas.width=1100;canvas.height=105+Math.round(compositePlot.height*canvas.width/compositePlot.width)+35;
+    drawNationalSheet(canvas.getContext('2d'),qpf);return canvas;
+  }
+  document.querySelectorAll('[data-save]').forEach(button=>button.onclick=async()=>{
+    const [kind,format]=button.dataset.save.split('-');button.disabled=true;reportMessage('กำลังสร้างไฟล์ '+format.toUpperCase()+'…');
+    try{
+      const canvas=await composePage(kind);const filename='IEAT-radar-'+kind+'-'+new Date().toISOString().slice(0,10);
+      if(format==='png')await new Promise((resolve,reject)=>canvas.toBlob(blob=>{if(!blob)return reject(Error('สร้าง PNG ไม่สำเร็จ'));downloadBlob(blob,filename+'.png');resolve()},'image/png'));
+      else{
+        const {GIFEncoder,quantize,applyPalette}=await import('/vendor/gifenc/index.js');
+        const encoder=GIFEncoder(),ctx=canvas.getContext('2d');
+        function writeGifFrame(delay){
+          const pixels=ctx.getImageData(0,0,canvas.width,canvas.height).data;
+          // A 12-bit palette keeps the report responsive while retaining the radar colors.
+          const palette=quantize(pixels,128,{format:'rgb444'});
+          encoder.writeFrame(applyPalette(pixels,palette,'rgb444'),canvas.width,canvas.height,{palette,delay});
+        }
+        let encoded=0;
+        if(kind==='rayong'&&radarObjectUrl&&typeof ImageDecoder!=='undefined'){
+          let decoder;
+          try{
+            const w=1200*reportMapScale,h=750*reportMapScale;
+            const shot=await view.takeScreenshot({width:w,height:h,format:'png'}),base=await loadImage(shot.dataUrl);
+            decoder=new ImageDecoder({data:await (await fetch(radarObjectUrl)).arrayBuffer(),type:'image/gif',preferAnimation:true});
+            await decoder.tracks.ready;await decoder.completed;
+            const total=decoder.tracks.selectedTrack?.frameCount||0;
+            if(!total)throw Error('ไม่มีเฟรมเรดาร์');
+            const count=Math.min(total,8),step=Math.max(1,Math.ceil(total/count));
+            const rain=document.createElement('canvas');rain.width=800;rain.height=800;const rainCtx=rain.getContext('2d',{willReadFrequently:true});rainCtx.imageSmoothingEnabled=false;
+            const mapFrame=document.createElement('canvas');mapFrame.width=w;mapFrame.height=h;const mapCtx=mapFrame.getContext('2d');
+            for(let i=0;i<count;i++){
+              const frame=(await decoder.decode({frameIndex:Math.min(i*step,total-1)})).image;
+              try{
+                mapCtx.clearRect(0,0,w,h);mapCtx.drawImage(base,0,0,w,h);
+                rainCtx.clearRect(0,0,800,800);rainCtx.drawImage(frame,0,0,800,800);
+                const image=rainCtx.getImageData(0,0,800,800);
+                for(let k=0;k<image.data.length;k+=4)if(!isRainColor(image.data[k],image.data[k+1],image.data[k+2]))image.data[k+3]=0;
+                rainCtx.putImageData(image,0,0);
+                const pos=radarPlacement(w,h);mapCtx.globalAlpha=Number(radarCanvas.style.opacity);mapCtx.imageSmoothingEnabled=false;mapCtx.drawImage(rain,pos.x,pos.y,pos.w,pos.h);mapCtx.globalAlpha=1;
+                mapCtx.save();mapCtx.scale(reportMapScale,reportMapScale);drawMapPins(mapCtx,1200,750);mapCtx.restore();drawRayongSheet(ctx,mapFrame);
+                writeGifFrame(Math.max(100,Math.round((frame.duration||300000)/1000)*step));encoded++;
+                reportMessage('กำลังสร้าง GIF '+encoded+'/'+count+' เฟรม…');
+                await new Promise(resolve=>setTimeout(resolve,0));
+              }finally{frame.close()}
+            }
+          }catch(error){
+            console.warn('Animated GIF export failed; saving the report as a single-frame GIF',error);
+            if(!encoded)reportMessage('กำลังบันทึกภาพรายงานเป็น GIF…');
+          }finally{decoder?.close()}
+        }
+        if(kind==='national'&&typeof ImageDecoder!=='undefined'){
+          let decoder;
+          try{
+            const url=document.getElementById('compositeReportImage').dataset.url;
+            decoder=new ImageDecoder({data:await (await fetch(url)).arrayBuffer(),type:'image/gif',preferAnimation:true});
+            await decoder.tracks.ready;await decoder.completed;
+            const total=decoder.tracks.selectedTrack?.frameCount||0;
+            if(!total)throw Error('ไม่มีเฟรมเรดาร์คอมโพสิท');
+            const count=Math.min(total,8),step=Math.max(1,Math.ceil(total/count));
+            for(let i=0;i<count;i++){
+              const frame=(await decoder.decode({frameIndex:Math.min(i*step,total-1)})).image;
+              try{
+                drawNationalSheet(ctx,frame);
+                writeGifFrame(Math.max(100,Math.round((frame.duration||300000)/1000)*step));encoded++;
+                reportMessage('กำลังสร้าง GIF '+encoded+'/'+count+' เฟรม…');
+                await new Promise(resolve=>setTimeout(resolve,0));
+              }finally{frame.close()}
+            }
+          }catch(error){console.warn('National radar GIF animation unavailable',error)}
+          finally{decoder?.close()}
+        }
+        if(!encoded)writeGifFrame(1000);
+        encoder.finish();
+        const bytes=encoder.bytes();if(bytes.length<20)throw Error('สร้างไฟล์ GIF ไม่สำเร็จ');
+        downloadBlob(new Blob([bytes],{type:'image/gif'}),filename+'.gif');
+      }
+      reportMessage('ดาวน์โหลดไฟล์ '+format.toUpperCase()+' แล้ว');
+    }catch(error){reportMessage('บันทึกภาพไม่สำเร็จ: '+error.message)}finally{button.disabled=false}
+  });
+
+});
+</script></body></html>
