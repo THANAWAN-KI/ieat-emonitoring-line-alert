@@ -1305,8 +1305,8 @@ function normalizeHazardData(data){
 }
 function loadDssSource(){
  if(!dssSourcePromise)dssSourcePromise=(async()=>{
-  for(const url of [dssHazardUrl,'./dss-data.json']){
-   try{const response=await fetch(url,{signal:AbortSignal.timeout(url===dssHazardUrl?10000:15000)});if(!response.ok)throw Error('HTTP '+response.status);const features=normalizeHazardData(await response.json());if(!features.length)throw Error('ไม่มีข้อมูล');dssHazardOrigin=url===dssHazardUrl?'ระบบ DSS กนอ. (ต้นทาง)':'สำเนาข้อมูล DSS ในเว็บไซต์';dssHazardRetrievedAt=new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'});return features}catch(error){console.warn('DSS chemicals',error)}
+  for(const url of ['./dss-data.json',dssHazardUrl]){
+   try{const response=await fetch(url,{signal:AbortSignal.timeout(url===dssHazardUrl?60000:45000)});if(!response.ok)throw Error('HTTP '+response.status);const features=normalizeHazardData(await response.json());if(!features.length)throw Error('ไม่มีข้อมูล');dssHazardOrigin=url===dssHazardUrl?'ระบบ DSS กนอ. (ต้นทาง)':'สำเนาข้อมูล DSS ในเว็บไซต์';dssHazardRetrievedAt=new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'});return features}catch(error){console.warn('DSS chemicals',error)}
   }
   dssSourcePromise=null;return [];
  })();
@@ -1340,10 +1340,7 @@ function dssHazardReport(feature){
 
 
 let dssEquipmentPromise;
-function normalizeEquipmentData(data){
- if(data.features)return data.features;
- return (data.data||[]).map(row=>({type:'Feature',properties:row.properties||row,geometry:row.__geometry||row.geometry}));
-}
+function normalizeEquipmentData(data){return normalizeHazardData(data)}
 async function loadDssEquipment(){
  if(!dssEquipmentPromise)dssEquipmentPromise=(async()=>{
   for(const url of ['./data/equipment_latest.json','https://emonitor.ieat.go.th/envisys/gis/file/equimentPQbOLMB5TIGSziiCggBx77R8ITBd2aCRPaybDRoqZBejLTEQ4SICTxC1Vay15xIG.json']){
@@ -1373,21 +1370,42 @@ function incidentSourceReport(item){
 }
 
 let factoryNameIndex=[],factoryNameIndexPromise;
+function dssSearchContent(attrs){
+ const p=attrs.dssFeature?.properties||{};
+ return [attrs.mercant_name,attrs.IEAT,attrs.fid14n,attrs.FactoryID,...Object.entries(p).filter(([key])=>/^hazard\d+_(name|casNo|unNo)$/.test(key)).map(([,value])=>value)].map(value=>normalizeSearchTerm(value||'')).join('|');
+}
 function loadFactoryNameIndex(){
-  if(!factoryNameIndexPromise)factoryNameIndexPromise=fetch('./factory-search-index.json?v=20260930',{signal:AbortSignal.timeout(12000)}).then(response=>{if(!response.ok)throw Error('รายชื่อโรงงานไม่พร้อม');return response.json()}).then(async data=>{
-    factoryNameIndex=(data.factories||[]).map(row=>({OBJECTID:row[0],mercant_name:row[1],fid14n:row[2],IEAT:row[3],FactoryID:row[4]||''}));
-    const features=await loadDssSource(),matched=new Set();
-    factoryNameIndex.forEach(attrs=>{const feature=matchingDssFeature(features,attrs.mercant_name,attrs.IEAT);if(feature){attrs.FactoryID=feature.properties.comp_no||attrs.FactoryID;attrs.dssFeature=feature;matched.add(feature)}});
-    features.forEach(feature=>{if(matched.has(feature))return;const p=feature.properties;if(p.comp_name)factoryNameIndex.push({OBJECTID:null,mercant_name:p.comp_name,fid14n:'',FactoryID:p.comp_no||'',IEAT:p.comp_zone||'',dssFeature:feature})});return factoryNameIndex;
-  }).catch(error=>{factoryNameIndexPromise=null;console.warn('Factory name index',error);return []});
-  return factoryNameIndexPromise;
+ if(!factoryNameIndexPromise)factoryNameIndexPromise=(async()=>{
+  const [indexResult,sourceResult]=await Promise.allSettled([
+   fetch('./factory-search-index.json?v=20260930',{signal:AbortSignal.timeout(20000)}).then(r=>{if(!r.ok)throw Error('รายชื่อโรงงานไม่พร้อม');return r.json()}),
+   loadDssSource()
+  ]);
+  const data=indexResult.status==='fulfilled'?indexResult.value:{factories:[]};
+  const features=sourceResult.status==='fulfilled'?sourceResult.value:[],matched=new Set();
+  factoryNameIndex=(data.factories||[]).map(row=>({OBJECTID:row[0],mercant_name:row[1],fid14n:row[2],IEAT:row[3],FactoryID:row[4]||''}));
+  for(let i=0;i<factoryNameIndex.length;i++){
+   const attrs=factoryNameIndex[i],feature=matchingDssFeature(features,attrs.mercant_name,attrs.IEAT);
+   if(feature){attrs.FactoryID=feature.properties.comp_no||attrs.FactoryID;attrs.dssFeature=feature;matched.add(feature)}
+   attrs.dssSearch=dssSearchContent(attrs);
+   if(i%250===249)await new Promise(resolve=>setTimeout(resolve,0));
+  }
+  features.forEach(feature=>{
+   if(matched.has(feature)||feature.properties.doc_active===false)return;
+   const p=feature.properties;if(!p.comp_name)return;
+   const attrs={OBJECTID:null,mercant_name:p.comp_name,fid14n:'',FactoryID:p.comp_no||'',IEAT:p.comp_zone||'',dssFeature:feature};
+   attrs.dssSearch=dssSearchContent(attrs);factoryNameIndex.push(attrs);
+  });
+  if(!factoryNameIndex.length){factoryNameIndexPromise=null;throw Error('โหลดข้อมูลโรงงานและสารเคมีไม่สำเร็จ')}
+  return factoryNameIndex;
+ })().catch(error=>{factoryNameIndexPromise=null;console.warn('Factory name index',error);factoryLookupStatus.textContent='โหลดข้อมูลค้นหาไม่สำเร็จ กรุณาลองใหม่';return []});
+ return factoryNameIndexPromise;
 }
 
 function normalizeSearchTerm(value){return normalizeLookup(value).replace(/[().,\-\/]/g,'').replace(/[๐-๙]/g,char=>String('๐๑๒๓๔๕๖๗๘๙'.indexOf(char)))}
 function matchFactoryNames(query){
   const key=normalizeSearchTerm(String(query).split(' — ')[0]);
   if(!key)return [];
-  return factoryNameIndex.filter(attrs=>[attrs.mercant_name,attrs.IEAT,attrs.fid14n,attrs.FactoryID].some(value=>normalizeSearchTerm(value).includes(key)));
+  return factoryNameIndex.filter(attrs=>(attrs.dssSearch||dssSearchContent(attrs)).includes(key));
 }
 function renderLookupChoices(choices){
   lookupResults.replaceChildren();
@@ -1416,6 +1434,7 @@ async function showFactorySuggestions(){
 }
 let suggestionTimer;
 factoryLookup.addEventListener('input',()=>{clearTimeout(suggestionTimer);suggestionTimer=setTimeout(showFactorySuggestions,150)});
+factoryLookup.placeholder='ค้นหาบริษัท / สารเคมี / CAS / UN / นิคมฯ';
 factoryLookup.addEventListener('focus',()=>{loadFactoryNameIndex().then(showFactorySuggestions)},{once:true});
 
 let lookupSequence=0,lookupController;
@@ -1485,12 +1504,17 @@ async function selectDssLookup(item){
     item={...item,dssFeature:attrs.dssFeature||item.dssFeature};
     const where=attrs.OBJECTID?'OBJECTID='+Number(attrs.OBJECTID):"mercant_name='"+String(attrs.mercant_name).replace(/'/g,"''")+"' AND IEAT='"+String(attrs.IEAT).replace(/'/g,"''")+"'";
     const params=new URLSearchParams({where,outFields:'*',returnGeometry:'true',outSR:'4326',f:'json'});
-    const response=await fetch(dssService+'/query?'+params,{signal:AbortSignal.timeout(15000)});
-    if(!response.ok)throw Error('HTTP '+response.status);
-    const data=await response.json();if(data.error)throw Error(data.error.message);
-    if(data.features?.length)item={...item,feature:data.features[0],fields:await getDssFieldMetadata()};
-    else if(item.dssFeature)item={...item,feature:{attributes:{...attrs},geometry:{x:item.dssFeature.geometry.coordinates[0],y:item.dssFeature.geometry.coordinates[1]}}};
-    else throw Error('ไม่พบโรงงาน');
+    try{
+     const response=await fetch(dssService+'/query?'+params,{signal:AbortSignal.timeout(10000)});
+     if(!response.ok)throw Error('HTTP '+response.status);
+     const data=await response.json();if(data.error)throw Error(data.error.message);
+     if(data.features?.length)item={...item,feature:data.features[0],fields:await getDssFieldMetadata()};
+    }catch(error){console.warn('Factory map lookup; using DSS point if available',error)}
+    if(!item.feature?.geometry&&item.dssFeature?.geometry?.coordinates){
+     const coordinates=item.dssFeature.geometry.coordinates;
+     item={...item,feature:{attributes:{...attrs},geometry:{x:Number(coordinates[0]),y:Number(coordinates[1])}}};
+    }
+    if(!item.feature?.geometry&&!item.dssFeature)throw Error('ไม่พบข้อมูลตำแหน่งโรงงาน');
     if(!item.dssFeature)item.dssFeature=matchingDssFeature(await loadDssSource(),item.name,item.feature.attributes.IEAT,item.feature.attributes);
     const equipment=await loadDssEquipment();
     item.equipmentUnavailable=equipment===null;
