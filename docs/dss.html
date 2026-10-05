@@ -1675,6 +1675,7 @@ async function downloadReportPng(){
   live.setView([item.lat,item.lng],16,{animate:false});supportMarkers.get(item.type+':'+item.id)?.openPopup();
  };
  const pin=L.marker([Number(state.lat),Number(state.lng)],{icon:L.divIcon({className:'dss-incident-marker',html:'<div class="dss-incident-pin"></div>',iconSize:[22,30],iconAnchor:[11,30],tooltipAnchor:[0,-30]}),draggable:true,zIndexOffset:1000}).addTo(live);
+ window.dssPlaceIncidentPoint=function(lat,lng){pin.setLatLng([lat,lng]);if(!live.hasLayer(pin))pin.addTo(live);pin.setZIndexOffset(2000);live.invalidateSize();live.setView([lat,lng],Math.max(live.getZoom(),14),{animate:false});};
  window.dssSyncLiveMap=function(lat,lng,radius){
    const radii=getBufferRadii(),activeColors=getBufferColors(),activeOpacities=getBufferOpacities();
    circles.forEach((circle,i)=>{
@@ -2017,20 +2018,28 @@ html body .top-actions #backToRiskmapBtn:focus {
 
 <script id="dss-manual-coordinate-pin">
 (()=>{
- let timer=null;
- const coordinates=new Set(['lat','lng']);
- function place(){
+ let timer;
+ const latInput=document.getElementById('lat'),lngInput=document.getElementById('lng');
+ if(!latInput||!lngInput)return;
+ const button=document.createElement('button');button.type='button';button.className='primary';button.textContent='ปักหมุดจุดเกิดเหตุตามพิกัด';
+ const status=document.createElement('p');status.className='hint';status.setAttribute('aria-live','polite');
+ lngInput.closest('.field').after(button,status);
+ function place(manual=false){
   clearTimeout(timer);
-  if(!validPoint())return;
-  updateMap();
+  state.lat=latInput.value.trim();state.lng=lngInput.value.trim();
+  if(!validPoint()){if(manual)status.textContent='กรุณากรอกละติจูดและลองจิจูดให้ครบและถูกต้อง';return}
+  const lat=Number(state.lat),lng=Number(state.lng);
+  state.positionConfirmed=false;
+  window.dssPlaceIncidentPoint?.(lat,lng);
+  try{updateMap()}catch(error){console.warn('Coordinate map refresh',error)}
+  status.textContent='หมุดจุดเกิดเหตุ: '+lat.toFixed(6)+', '+lng.toFixed(6);
+  render();
+  if(manual)document.getElementById('map').scrollIntoView({behavior:'smooth',block:'center'});
  }
- form.addEventListener('input',event=>{
-  if(!coordinates.has(event.target.dataset.key))return;
-  clearTimeout(timer);
-  if(validPoint())timer=setTimeout(place,350);
- });
- form.addEventListener('change',event=>{
-  if(coordinates.has(event.target.dataset.key))place();
+ button.onclick=()=>place(true);
+ [latInput,lngInput].forEach(input=>{
+  input.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(()=>place(),400)});
+  input.addEventListener('change',()=>place());
  });
 })();
 </script>
