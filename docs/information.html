@@ -1481,5 +1481,17 @@ body.monitor-mode .em-system-row>article>span.wq{color:var(--em-green)!important
 #emPmMap .esri-ui{isolation:isolate}
 .em-map{isolation:isolate}
 </style>
+
+<style id="monitor-map-match-content-height">
+/* Keep the map beside the entire measurement column and match its height. */
+.em-layout{grid-template-columns:minmax(0,1.55fr) minmax(360px,1fr);align-items:stretch}
+.em-content{width:100%;min-width:0}
+.em-content>.em-pm-chart,.em-content>.em-two-charts,.em-content>.em-station-row{width:100%;min-width:0;box-sizing:border-box}
+.em-two-charts{grid-template-columns:repeat(2,minmax(0,1fr))}
+.em-layout>.em-map{position:relative;top:auto;align-self:stretch;height:auto!important;min-height:720px;min-width:0}
+.em-layout>.em-map:fullscreen{height:100vh!important;width:100vw}
+@media(max-width:1350px) and (min-width:851px){.em-layout{grid-template-columns:minmax(0,1.55fr) minmax(340px,1fr)}}
+@media(max-width:850px){.em-layout{grid-template-columns:1fr}.em-layout>.em-map{height:620px!important;min-height:620px}.em-two-charts{grid-template-columns:1fr}}
+</style>
 </body></html>
 
