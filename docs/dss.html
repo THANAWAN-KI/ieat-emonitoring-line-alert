@@ -2014,5 +2014,25 @@ html body .top-actions #backToRiskmapBtn:focus {
   pointer-events:auto!important;
 }
 </style>
+
+<script id="dss-manual-coordinate-pin">
+(()=>{
+ let timer=null;
+ const coordinates=new Set(['lat','lng']);
+ function place(){
+  clearTimeout(timer);
+  if(!validPoint())return;
+  updateMap();
+ }
+ form.addEventListener('input',event=>{
+  if(!coordinates.has(event.target.dataset.key))return;
+  clearTimeout(timer);
+  if(validPoint())timer=setTimeout(place,350);
+ });
+ form.addEventListener('change',event=>{
+  if(coordinates.has(event.target.dataset.key))place();
+ });
+})();
+</script>
 </body></html>
 
