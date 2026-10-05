@@ -215,6 +215,23 @@
 #estateFocusDashboard .ef-map-column,#estateFocusDashboard .ef-chart,#estateFocusDashboard .ef-panel{border:0}
 #estateFocusDashboard .ef-map-head,#estateFocusDashboard #efMapControls{border-bottom:0}
 #estateFocusDashboard #efDetails24,#estateFocusDashboard #efDetails48{border:0}
+
+@media(max-width:950px){
+ #estateFocusDashboard{height:auto;min-width:0}
+ #estateFocusDashboard .ef-workspace{min-height:0;grid-template-columns:minmax(0,1fr)}
+ #estateFocusDashboard .ef-data-column{grid-row:1;grid-column:1;width:100%;min-width:0;overflow:visible;height:auto;position:static;padding:0}
+ #estateFocusDashboard .ef-map-column{grid-row:2;grid-column:1;width:100%;height:680px;min-height:0}
+ #estateFocusDashboard .ef-map-head{flex-wrap:wrap;padding:12px}
+ #estateFocusDashboard .ef-actions{width:100%}#estateFocusDashboard .ef-actions button{min-height:44px;flex:1 1 110px;white-space:normal}
+ #estateFocusDashboard .ef-estate-title b,#estateFocusDashboard .ef-map-head h2{overflow-wrap:anywhere}
+}
+@media(max-width:600px){
+ #estateFocusDashboard .ef-estate-stats{grid-template-columns:minmax(0,1fr);gap:6px}
+ #estateFocusDashboard .ef-tools{flex-direction:column}#estateFocusDashboard .ef-tools input,#estateFocusDashboard .ef-tools select{flex:auto;width:100%;font-size:16px;min-height:44px}
+ #estateFocusDashboard .ef-panel{padding:12px}#estateFocusDashboard .ef-estate{padding:12px}
+ #estateFocusDashboard #efMapControls{max-height:240px;padding:10px}
+ #efMapControls .search{flex-wrap:wrap}#efMapControls .search input,#efMapControls .search select{flex:1 1 100%;font-size:16px}
+}
 `;document.head.appendChild(style);
   const host=document.createElement('section');host.id='estateFocusDashboard';
   const metrics=[['efWatch','นิคมฯ เข้าเกณฑ์เฝ้าระวัง','ผลคัดกรองจากสถานีใกล้นิคมฯ'],['efWaterWatch','ใกล้ระดับน้ำเข้าเกณฑ์','สถานีระดับน้ำภายใน 30 กม.'],['efRainWatch','ใกล้ฝนเข้าเกณฑ์','ฝนสะสมมากกว่า 35 มม. ภายใน 30 กม.'],['efTotal','นิคมฯ / ท่าเรือในชุดข้อมูล','ตำแหน่งที่ใช้ประเมินจากข้อมูล กนอ.'],['ef24','ตำบลเฝ้าระวัง 24 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ'],['ef48','ตำบลเฝ้าระวัง 48 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ']];
@@ -347,4 +364,5 @@
  function start(){mount();if(window.IEAT_THAIWATER_DATA)render(window.IEAT_THAIWATER_DATA);load();setInterval(load,300000)}
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
+
 
