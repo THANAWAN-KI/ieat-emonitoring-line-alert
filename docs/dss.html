@@ -1316,7 +1316,7 @@ const dssIdentityIndexes=new WeakMap();
 function matchingDssFeature(features,name,estate,reference={}){
  const ref=reference.properties||reference;
  const uid=String(ref.comp_uid||''),user=String(ref.comp_user||''),numbers=[ref.comp_no,ref.fid14n,ref.FactoryID].filter(Boolean).map(normalizeSearchTerm);
- const idMatches=features.filter(f=>{const p=f.properties||{};return uid&&String(p.comp_uid)===uid||user&&String(p.comp_user)===user||numbers.includes(normalizeSearchTerm(p.comp_no))});
+ const idMatches=(uid||user||numbers.length)?features.filter(f=>{const p=f.properties||{};return uid&&String(p.comp_uid)===uid||user&&String(p.comp_user)===user||numbers.includes(normalizeSearchTerm(p.comp_no))}):[];
  if(idMatches.length===1)return idMatches[0];
  if(idMatches.length>1){const active=idMatches.filter(f=>f.properties.doc_active===true);if(active.length===1)return active[0];return null}
  let index=dssIdentityIndexes.get(features);
@@ -1416,7 +1416,7 @@ async function showFactorySuggestions(){
 }
 let suggestionTimer;
 factoryLookup.addEventListener('input',()=>{clearTimeout(suggestionTimer);suggestionTimer=setTimeout(showFactorySuggestions,150)});
-loadFactoryNameIndex().then(showFactorySuggestions);
+factoryLookup.addEventListener('focus',()=>{loadFactoryNameIndex().then(showFactorySuggestions)},{once:true});
 
 let lookupSequence=0,lookupController;
 async function searchFactory(){
