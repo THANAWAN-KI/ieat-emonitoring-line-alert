@@ -1335,7 +1335,7 @@ function dssHazardReport(feature){
   chemicals.push(name+(details.length?' · '+details.join(' · '):''));
   if(p[prefix+'chemical'])responses.push(name+' — สารดับเพลิงที่ระบุ: '+p[prefix+'chemical']);
  }
- return {chemical:chemicals.join('\n')||'ไม่มีรายการสารเคมีที่ระบุในคลัง DSS ของโรงงานนี้',response:responses.join('\n')||'ไม่มีข้อมูลสารดับเพลิงหรือการระงับเหตุที่ระบุในคลัง DSS ของโรงงานนี้'};
+ return {chemical:chemicals.join('\n')||(p.doc_active===false?'รายการโรงงานนี้ใน DSS ไม่ active และไม่มีรายละเอียดสารเคมีในไฟล์ต้นทาง':'ไม่มีรายการสารเคมีที่ระบุในคลัง DSS ของโรงงานนี้'),response:responses.join('\n')||'ไม่มีข้อมูลสารดับเพลิงหรือการระงับเหตุที่ระบุในคลัง DSS ของโรงงานนี้'};
 }
 
 
@@ -1353,6 +1353,7 @@ async function loadDssEquipment(){
 function dssEquipmentReport(feature,unavailable){
  if(unavailable)return 'ยังโหลดข้อมูลอุปกรณ์ระงับเหตุไม่ได้ กรุณาเลือกโรงงานอีกครั้ง';
  if(!feature)return 'ยังจับคู่โรงงานกับข้อมูลอุปกรณ์ระงับเหตุไม่ได้';
+ if(feature.properties?.doc_active===false&&!Object.keys(feature.properties).some(k=>/^equipment\\d+_name$/.test(k)&&feature.properties[k]))return 'รายการโรงงานนี้ใน DSS ไม่ active และไม่มีรายละเอียดอุปกรณ์ระงับเหตุในไฟล์ต้นทาง';
  const p=feature.properties||{},lines=[];
  const keys=Object.keys(p).filter(key=>/^equipment\d+_name$/.test(key)).sort((a,b)=>Number(a.match(/\d+/)[0])-Number(b.match(/\d+/)[0]));
  keys.forEach(key=>{
@@ -1390,7 +1391,7 @@ function loadFactoryNameIndex(){
    if(i%250===249)await new Promise(resolve=>setTimeout(resolve,0));
   }
   features.forEach(feature=>{
-   if(matched.has(feature)||feature.properties.doc_active===false)return;
+   if(matched.has(feature))return;
    const p=feature.properties;if(!p.comp_name)return;
    const attrs={OBJECTID:null,mercant_name:p.comp_name,fid14n:'',FactoryID:p.comp_no||'',IEAT:p.comp_zone||'',dssFeature:feature};
    attrs.dssSearch=dssSearchContent(attrs);factoryNameIndex.push(attrs);
@@ -1403,16 +1404,23 @@ function loadFactoryNameIndex(){
 
 function normalizeSearchTerm(value){return normalizeLookup(value).replace(/[().,\-\/]/g,'').replace(/[๐-๙]/g,char=>String('๐๑๒๓๔๕๖๗๘๙'.indexOf(char)))}
 function matchFactoryNames(query){
-  const key=normalizeSearchTerm(String(query).split(' — ')[0]);
-  if(!key)return [];
-  return factoryNameIndex.filter(attrs=>(attrs.dssSearch||dssSearchContent(attrs)).includes(key));
+ const raw=String(query).split(' — ')[0],key=normalizeSearchTerm(raw);
+ if(!key)return [];
+ const direct=factoryNameIndex.filter(attrs=>(attrs.dssSearch||dssSearchContent(attrs)).includes(key));
+ if(direct.length)return direct;
+ const cleaned=raw.replace(/บริษัท|จำกัด|มหาชน|นิคมอุตสาหกรรม|[()]/g,' ').replace(/โรง(?:งาน)?\s*(?:ที่)?\s*[0-9๐-๙]+/g,' ');
+ const tokens=cleaned.split(/\s+/).map(normalizeSearchTerm).filter(Boolean);
+ if(!tokens.length)return [];
+ return factoryNameIndex.filter(attrs=>{const searchable=attrs.dssSearch||dssSearchContent(attrs);return tokens.every(token=>searchable.includes(token))});
 }
 function renderLookupChoices(choices){
   lookupResults.replaceChildren();
   choices.forEach(item=>{
     const button=document.createElement('button');button.type='button';button.className='secondary';button.style.cssText='text-align:left;width:100%;font-size:14px';
     const attrs=item.feature?.attributes||{},numbers=[attrs.fid14n,attrs.FactoryID].filter(Boolean);
-    button.textContent=item.type==='estate'?'นิคมฯ · '+item.name:'บริษัท · '+item.name+' · '+(attrs.IEAT||'—')+' · '+(numbers.join(' / ')||'ไม่มีเลขทะเบียน');
+    const source=attrs.dssFeature||item.dssFeature;
+    const activeLabel=source?.properties.doc_active===false?' · รายการ DSS ไม่ active':source?' · มีรายการ DSS':'';
+    button.textContent=item.type==='estate'?'นิคมฯ · '+item.name:'บริษัท · '+item.name+' · '+(attrs.IEAT||'—')+' · '+(numbers.join(' / ')||'ไม่มีเลขทะเบียน')+activeLabel;
     button.addEventListener('click',()=>{selectDssLookup(item).catch(error=>{console.warn(error);factoryLookupStatus.textContent='ดึงรายละเอียดโรงงานไม่สำเร็จ กรุณาลองเลือกอีกครั้ง'})});lookupResults.appendChild(button);
   });
 }
