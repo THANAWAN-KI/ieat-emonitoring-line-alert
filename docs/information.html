@@ -672,7 +672,34 @@ body.monitor-mode .em-system-row article>strong{color:#00387b!important}
  function setStrong(nodes,index,value){if(nodes[index])nodes[index].textContent=value}
  function reading(station,param){const raw=text(station.values[param+'_txt']);if(!raw||/Cail|Defective/i.test(raw))return null;const m=raw.match(/^(-?\d[\d,]*(?:\.\d+)?)(?:\s|$)/);if(!m)return null;const value=Number(m[1].replace(/,/g,''));if(!Number.isFinite(value)||value<0||value===9999)return null;return{value,unit:raw.slice(m[0].length).replace(/\(STD[^)]*\)/gi,'').trim()};}
  function aggregate(rows,param){const values=rows.filter(isOnline).map(s=>reading(s,param)).filter(Boolean);if(!values.length)return null;const units=new Set(values.map(v=>v.unit.toLowerCase()));if(units.size>1)return {mixed:true,count:values.length};return{value:values.reduce((a,v)=>a+v.value,0)/values.length,unit:values[0].unit,count:values.length};}
- function renderMeasurementCharts(rows,name){const wq=rows.filter(s=>s.type==='WQMs'),ce=rows.filter(s=>s.type==='CEMs');const format=v=>!v?'ไม่มีข้อมูล':v.mixed?'หลายหน่วย':v.value.toLocaleString('th-TH',{maximumFractionDigits:2});document.querySelectorAll('.em-water-bars>div').forEach((el,i)=>{const v=aggregate(wq,['BOD','COD','TSS','DO','pH'][i]);el.querySelector('em').textContent=format(v);el.querySelector('i').style.height='0%';el.querySelector('small').textContent=v&&!v.mixed?v.unit:'—'});document.querySelectorAll('.em-emission-list>span').forEach((el,i)=>{const v=aggregate(ce,['SO2','NOx','CO','O2','Opacity'][i]);el.querySelector('em').style.width='0%';el.querySelector('strong').textContent=format(v)+(v&&!v.mixed?' '+v.unit:'')});document.getElementById('emWqArea').textContent='WQMs • '+name+' • เฉลี่ยค่าที่มีข้อมูลจากสถานี Online';document.getElementById('emCeArea').textContent='CEMs • '+name+' • เฉลี่ยเฉพาะชื่อพารามิเตอร์และหน่วยเดียวกัน';}
+ function measurementGroups(rows,param){
+  const groups=new Map();
+  rows.filter(isOnline).forEach(station=>{
+   const value=reading(station,param);
+   if(!value)return;
+   const key=value.unit.toLowerCase()||'ไม่ระบุหน่วย';
+   if(!groups.has(key))groups.set(key,{unit:value.unit||'ไม่ระบุหน่วย',values:[]});
+   groups.get(key).values.push(value.value);
+  });
+  return [...groups.values()].map(g=>({unit:g.unit,value:g.values.reduce((a,b)=>a+b,0)/g.values.length,max:Math.max(...g.values),count:g.values.length}));
+ }
+ function renderMeasurementCharts(rows,name){
+  const number=v=>v.toLocaleString('th-TH',{maximumFractionDigits:2});
+  function render(container,stations,params){
+   container.innerHTML=params.map(param=>{
+    const groups=measurementGroups(stations,param);
+    if(!groups.length)return '<article class="em-measurement-row"><b>'+esc(param)+'</b><strong>ไม่มีข้อมูล</strong><small>ไม่มีค่าที่ใช้งานได้จากสถานี Online</small></article>';
+    return groups.map(g=>{
+     const width=g.max>0?g.value/g.max*100:0;
+     return '<article class="em-measurement-row"><b>'+esc(param)+'</b><strong>'+number(g.value)+' <small>'+esc(g.unit)+'</small></strong><i title="เฉลี่ย '+number(g.value)+' / สูงสุด '+number(g.max)+' '+esc(g.unit)+'"><em style="width:'+width+'%"></em></i><small>เฉลี่ย '+g.count+' สถานี • สูงสุด '+number(g.max)+' '+esc(g.unit)+'</small></article>';
+    }).join('');
+   }).join('');
+  }
+  render(document.querySelector('.em-water-bars'),rows.filter(s=>s.type==='WQMs'),['BOD','COD','TSS','DO','pH']);
+  render(document.querySelector('.em-emission-list'),rows.filter(s=>s.type==='CEMs'),['SO2','NOx','CO','O2','Opacity']);
+  document.getElementById('emWqArea').textContent='WQMs • '+name+' • เฉลี่ยสถานี Online แยกตามหน่วย';
+  document.getElementById('emCeArea').textContent='CEMs • '+name+' • เฉลี่ยสถานี Online แยกตามหน่วย';
+ }
  async function loadExternalPm(estate,token){if(window.refreshPm25Dashboard)await window.refreshPm25Dashboard();}
  function zoomMonitoringMap(lat,lon,name){
   if(!Number.isFinite(lat)||!Number.isFinite(lon))return;window.zoomMonitoringStation?.(lat,lon);document.querySelector('.em-map')?.scrollIntoView({behavior:'smooth',block:'center'});const sub=document.getElementById('emMapSubtitle');if(sub)sub.textContent='ซูมตำแหน่ง • '+name;
@@ -1508,6 +1535,18 @@ body.monitor-mode .em-system-row>article>span.wq{color:var(--em-green)!important
 .em-map-column>.em-map{position:relative;top:auto;height:auto!important;min-height:620px;align-self:stretch}
 .em-map-column>.em-map:fullscreen{height:100vh!important;width:100vw}
 @media(max-width:850px){.em-map-column{grid-template-rows:auto 620px}.em-map-column>.em-map{height:620px!important}}
+</style>
+<style id="monitor-real-measurement-bars">
+.em-water-bars,.em-emission-list{display:grid;height:auto;min-height:225px;padding:16px;gap:12px;background:none;align-content:start}
+.em-measurement-row{display:grid;grid-template-columns:64px minmax(0,1fr);gap:4px 10px;align-items:center;padding:8px 0;border-bottom:1px solid #e5eaf0}
+.em-measurement-row:last-child{border-bottom:0}
+.em-measurement-row b{grid-column:1;grid-row:1/3;margin:0;font-size:12px!important;color:#00387b!important}
+.em-measurement-row strong{font-size:13px!important;color:#00387b!important;text-align:right;overflow-wrap:anywhere}
+.em-measurement-row small{font-size:10px!important;color:#465564!important;line-height:1.5}
+.em-measurement-row>small{grid-column:2;text-align:right}
+.em-water-bars .em-measurement-row i,.em-emission-list .em-measurement-row i{display:block;grid-column:2;height:8px!important;min-height:0;width:100%;margin:0;border-radius:4px;background:#edf0f3;overflow:hidden}
+.em-water-bars .em-measurement-row i em,.em-emission-list .em-measurement-row i em{display:block;height:100%;margin:0;background:#237f52}
+.em-emission-list .em-measurement-row i em{background:#f67828}
 </style>
 </body></html>
 
