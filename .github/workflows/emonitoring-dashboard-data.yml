@@ -1,0 +1,40 @@
+name: Refresh e-Monitoring dashboard data
+on:
+  schedule:
+    - cron: '7,22,37,52 * * * *'
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/update_emonitoring_snapshot.py'
+      - '.github/workflows/emonitoring-dashboard-data.yml'
+permissions:
+  contents: write
+concurrency:
+  group: emonitoring-dashboard-data
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Fetch official station feed
+        run: python scripts/update_emonitoring_snapshot.py
+      - name: Publish dashboard snapshot
+        run: |
+          cp docs/emonitoring-stations.json /tmp/emonitoring-stations.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/emonitoring-stations.json docs/emonitoring-stations.json
+            git add docs/emonitoring-stations.json
+            git diff --cached --quiet && exit 0
+            git commit -m "Refresh official e-Monitoring dashboard snapshot"
+            if git push origin HEAD:main; then exit 0; fi
+          done
+          exit 1

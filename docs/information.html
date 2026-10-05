@@ -598,7 +598,7 @@ body.monitor-mode .em-system-row article>strong{color:#0091cd!important}
 </style>
 <script id="information-emonitoring-dashboard-v2-script">
 (function(){
- const stationUrl="https://emonitor.ieat.go.th/call_feed/geog/GeoData/station_all.json";
+ const stationUrl="./emonitoring-stations.json";
  const mapBase="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=43f93c5608a74dd19a48b0ffc6bd639d&theme=light&bookmarks=true&legend=true&information=true&share=true&scroll=true&basemaps=true";
  let stationCache=null,loadingPromise=null,renderToken=0;
 
@@ -642,7 +642,10 @@ body.monitor-mode .em-system-row article>strong{color:#0091cd!important}
   if(stationCache)return stationCache;
   if(loadingPromise)return loadingPromise;
   loadingPromise=(async function(){
-   stationCache=rowsFromJson(await fetchJson(stationUrl));
+   const snapshot=await fetchJson(stationUrl);
+   stationCache=rowsFromJson(snapshot);
+   const label=document.querySelector(".em-alert-summary>header>p");
+   if(label)label.textContent="ดึงจาก e-Monitoring ล่าสุด "+new Date(snapshot.fetched_at).toLocaleString("th-TH")+" • อัปเดตอัตโนมัติประมาณทุก 15 นาที";
    if(!stationCache.length)throw new Error("Empty station feed");
    return stationCache;
   })().finally(function(){loadingPromise=null});
