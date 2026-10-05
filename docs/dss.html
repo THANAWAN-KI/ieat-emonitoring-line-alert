@@ -2051,5 +2051,101 @@ html body .top-actions #backToRiskmapBtn:focus {
  });
 })();
 </script>
+
+<style id="dss-source-catalog-search-style">
+.dss-source-tool{margin:10px 0;padding:12px;border:1px solid #d8c9e3;border-radius:8px;background:#faf7fc}
+.dss-source-tool h4{margin:0 0 7px;font-size:15px;color:#511378}
+.dss-source-tool input,.dss-source-tool select{width:100%;margin:5px 0}
+.dss-source-tool button{font-size:13px;padding:7px 10px;margin:5px 4px 5px 0}
+.dss-equipment-choices{max-height:230px;overflow:auto}
+.dss-equipment-choices label{display:flex;gap:7px;padding:6px 0;border-bottom:1px solid #eee;font-size:12px;line-height:1.5}
+.dss-equipment-choices input{width:auto;flex:none;margin:3px 0}
+</style>
+<script id="dss-source-catalog-search">
+(()=>{
+ const chemicalEditor=document.getElementById('chemicalIncidentEditor');
+ const responseInput=document.getElementById('response');
+ if(!chemicalEditor||!responseInput)return;
+ let equipmentItems=[];
+ function sourceTerms(feature){
+  const p=feature.properties||{};
+  return normalizeSearchTerm([p.comp_name,p.comp_no,p.comp_zone,p.comp_uid].filter(Boolean).join(' '));
+ }
+ function searchRows(features,query){
+  const raw=query.replace(/บริษัท|จำกัด|มหาชน|[()]/g,' ').replace(/โรง(?:งาน)?\s*(?:ที่)?\s*[0-9๐-๙]+/g,' ');
+  const tokens=raw.split(/\s+/).map(normalizeSearchTerm).filter(Boolean),key=normalizeSearchTerm(query);
+  return features.filter(f=>{const text=sourceTerms(f);return text.includes(key)||(tokens.length&&tokens.every(t=>text.includes(t)))}).sort((a,b)=>Number(b.properties.doc_active===true)-Number(a.properties.doc_active===true));
+ }
+ function equipmentEntries(feature){
+  if(!feature)return [];
+  const p=feature.properties||{};
+  return Object.keys(p).filter(k=>/^equipment\d+_name$/.test(k)&&p[k]).sort((a,b)=>Number(a.match(/\d+/)[0])-Number(b.match(/\d+/)[0])).map(key=>{
+   const prefix=key.replace(/name$/,'');
+   return [p[key],p[prefix+'type'],p[prefix+'amount']!=null?'จำนวน '+p[prefix+'amount']+' '+(p[prefix+'amountUnit']||''):'',p[prefix+'volume']!=null?'ขนาด '+p[prefix+'volume']+' '+(p[prefix+'volumeUnit']||''):''].filter(Boolean).join(' · ');
+  });
+ }
+ async function chooseFactory(feature){
+  const [hazards,equipment]=await Promise.all([loadDssSource(),loadDssEquipment()]);
+  const p=feature.properties||{};
+  const hazard=matchingDssFeature(hazards,p.comp_name,p.comp_zone,feature);
+  const equip=equipment?matchingDssFeature(equipment,p.comp_name,p.comp_zone,feature):null;
+  const changed=state.company!==p.comp_name||state.registration!==p.comp_no;
+  if(changed){state.leakChemical='';state.leakCAS='';state.leakUN='';state.leakState=''}
+  state={...state,company:p.comp_name||'—',estate:p.comp_zone||'—',registration:p.comp_no||'—',...incidentSourceReport({dssFeature:hazard,equipmentFeature:equip,equipmentUnavailable:equipment===null})};
+  const point=feature.geometry?.coordinates;
+  if(point&&Number.isFinite(Number(point[0]))&&Number.isFinite(Number(point[1]))){state.lng=String(point[0]);state.lat=String(point[1]);state.positionConfirmed=false}
+  equipmentItems=equipmentEntries(equip);
+  render();
+  if(validPoint())updateMap();
+  factoryLookup.value=p.comp_name||'';
+  const choiceList=equipmentTool.details;
+  choiceList.replaceChildren();
+  equipmentItems.forEach((line,i)=>{
+   const label=document.createElement('label'),checkbox=document.createElement('input'),text=document.createElement('span');
+   checkbox.type='checkbox';checkbox.checked=true;checkbox.value=String(i);text.textContent=line;label.append(checkbox,text);choiceList.append(label);
+  });
+  const summary=(p.comp_name||'')+' • '+(p.comp_no||'ไม่มีเลขทะเบียน')+' • สารเคมี '+(state.hazardCatalog||[]).length+' รายการ • อุปกรณ์ '+equipmentItems.length+' รายการ'+(p.doc_active===false?' • รายการ DSS ไม่ active':'');
+  chemicalTool.status.textContent=summary;equipmentTool.status.textContent=summary;
+ }
+ function tool(title,mode,parent){
+  const box=document.createElement('div');box.className='dss-source-tool';
+  const h=document.createElement('h4');h.textContent=title;
+  const input=document.createElement('input');input.placeholder='ชื่อโรงงาน หรือเลขทะเบียนโรงงาน';input.setAttribute('aria-label',title);
+  const search=document.createElement('button');search.type='button';search.className='secondary';search.textContent='ค้นหาจากฐานข้อมูล DSS';
+  const status=document.createElement('p');status.className='hint';status.setAttribute('aria-live','polite');status.textContent='ค้นหาจากโรงงานทั้งหมดในระบบ รวมรายการที่ไม่ active';
+  const choices=document.createElement('select');choices.hidden=true;choices.setAttribute('aria-label','เลือกโรงงานจากผลค้นหา');
+  const use=document.createElement('button');use.type='button';use.className='primary';use.textContent='เลือกโรงงานนี้';use.hidden=true;
+  const details=document.createElement('div');details.className='dss-equipment-choices';
+  let matches=[],sequence=0;
+  search.onclick=async()=>{
+   const query=input.value.trim();if(!query){status.textContent='กรุณากรอกชื่อโรงงานหรือเลขทะเบียน';return}
+   const current=++sequence;search.disabled=true;status.textContent='กำลังค้นหาข้อมูลโรงงาน…';
+   try{
+    const features=mode==='hazard'?await loadDssSource():await loadDssEquipment();
+    if(current!==sequence)return;
+    if(!features?.length)throw Error('โหลดฐานข้อมูลไม่สำเร็จ กรุณาลองใหม่');
+    matches=searchRows(features,query);
+    choices.replaceChildren();
+    matches.slice(0,100).forEach((f,i)=>{const p=f.properties;choices.add(new Option((p.comp_name||'')+' • '+(p.comp_no||'ไม่มีเลขทะเบียน')+' • '+(p.comp_zone||'')+(p.doc_active===false?' • ไม่ active':''),String(i)))});
+    choices.hidden=use.hidden=!matches.length;
+    status.textContent=matches.length?'พบ '+matches.length+' รายการ'+(matches.length>100?' แสดง 100 รายการแรก กรุณาค้นหาให้เจาะจงขึ้น':''):'ไม่พบโรงงานในข้อมูลชุดนี้';
+   }catch(error){status.textContent=error.message}finally{search.disabled=false}
+  };
+  use.onclick=async()=>{const feature=matches[Number(choices.value)];if(!feature)return;use.disabled=true;status.textContent='กำลังแสดงสารเคมีและอุปกรณ์ของโรงงาน…';try{await chooseFactory(feature)}catch(error){status.textContent='โหลดรายละเอียดไม่สำเร็จ: '+error.message}finally{use.disabled=false}};
+  input.addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();search.click()}});
+  box.append(h,input,search,status,choices,use,details);parent(box);
+  return {box,input,status,details};
+ }
+ const chemicalTool=tool('ค้นหาโรงงานและรายการสารเคมีในคลัง','hazard',box=>chemicalEditor.querySelector('h3').after(box));
+ const equipmentTool=tool('ค้นหาโรงงานและอุปกรณ์ระงับเหตุ','equipment',box=>responseInput.closest('.field').before(box));
+ const applyEquipment=document.createElement('button');applyEquipment.type='button';applyEquipment.className='secondary';applyEquipment.textContent='ใช้ข้อมูลอุปกรณ์ที่เลือก';
+ applyEquipment.onclick=()=>{
+  const selected=[...equipmentTool.details.querySelectorAll('input:checked')].map(el=>equipmentItems[Number(el.value)]);
+  if(!selected.length){equipmentTool.status.textContent='กรุณาเลือกอุปกรณ์อย่างน้อย 1 รายการ';return}
+  state.response=selected.join('\n');render();equipmentTool.status.textContent='ใส่ข้อมูลอุปกรณ์ที่เลือก '+selected.length+' รายการแล้ว';
+ };
+ equipmentTool.box.append(applyEquipment);
+})();
+</script>
 </body></html>
 
