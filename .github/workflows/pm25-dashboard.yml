@@ -1,0 +1,39 @@
+name: Update PM2.5 map and actual observation history
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/update_pm25.py'
+      - '.github/workflows/pm25-dashboard.yml'
+permissions:
+  contents: write
+concurrency:
+  group: pm25-dashboard
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python scripts/update_pm25.py
+      - name: Publish current values and retained observations
+        run: |
+          cp docs/pm25-data.json /tmp/pm25-data.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/pm25-data.json docs/pm25-data.json
+            git add docs/pm25-data.json
+            git diff --cached --quiet && exit 0
+            git commit -m "Update Air4Thai PM2.5 values and observation history"
+            if git push origin HEAD:main; then exit 0; fi
+          done
+          exit 1
