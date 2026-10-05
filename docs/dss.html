@@ -1909,7 +1909,7 @@ const enabled=/สารเคมี/.test(state.event||'');editor.hidden=!enabl
  box.innerHTML='<h3>ผลแบบจำลองการกระจายตัว</h3><p class="chemical-mode-help">นำเข้าไฟล์ KML หรือ GeoJSON ที่มีพื้นที่ผลแบบจำลองและพิกัดจริง เว็บไซต์แสดงผลที่นำเข้า ไม่ได้คำนวณการแพร่กระจายเอง</p><div class="field"><label for="dispersionFile">ไฟล์ผลแบบจำลอง (.kml / .geojson / .json)</label><input id="dispersionFile" type="file" accept=".kml,.geojson,.json"></div><div class="field"><label for="dispersionChemical">สารที่ใช้ในแบบจำลอง</label><input id="dispersionChemical" data-key="dispersionChemical"></div><div class="field"><label for="dispersionModel">ชื่อแบบจำลอง / รุ่น</label><input id="dispersionModel" data-key="dispersionModel"></div><div class="field"><label for="dispersionTime">เวลา / รอบผลแบบจำลอง</label><input id="dispersionTime" data-key="dispersionTime" placeholder="ระบุเวลาและเขตเวลา"></div><div class="field"><label for="dispersionScenario">ข้อมูลสถานการณ์ / อัตรารั่ว / สภาพอากาศที่ใช้</label><textarea id="dispersionScenario" data-key="dispersionScenario"></textarea></div><div class="mini-actions"><button type="button" id="dispersionZoom" class="secondary">ซูมผลแบบจำลอง</button><button type="button" id="dispersionClear" class="secondary">ล้างผลแบบจำลอง</button></div><p id="dispersionStatus" class="hint" role="status"></p>';
  document.getElementById('chemicalIncidentEditor').after(box);
  const output=document.createElement('section');output.id='dispersionReport';
- output.innerHTML='<div class="section-title">ผลแบบจำลองการกระจายตัวที่นำเข้า</div><div class="company"><div class="row"><b>สาร / แบบจำลอง</b><span id="dispersionReportModel"></span></div><div class="row"><b>เวลา / สถานการณ์</b><span id="dispersionReportScenario"></span></div></div><table class="dispersion-table"><thead><tr><th>พื้นที่ / เกณฑ์จากไฟล์</th><th>ข้อมูลสนับสนุนที่อยู่ในพื้นที่</th></tr></thead><tbody id="dispersionRows"></tbody></table><p class="hint" id="dispersionReportNote"></p>';
+ output.innerHTML='<div class="section-title">ผลแบบจำลองการกระจายตัวที่นำเข้า</div><div class="company"><div class="row"><b>สาร / แบบจำลอง</b><span id="dispersionReportModel"></span></div><div class="row"><b>เวลา / สถานการณ์</b><span id="dispersionReportScenario"></span></div></div><table class="dispersion-table"><thead><tr><th>ข้อมูลสนับสนุนที่อยู่ในพื้นที่</th></tr></thead><tbody id="dispersionRows"></tbody></table><p class="hint" id="dispersionReportNote"></p>';
  document.querySelector('.map-weather').after(output);
  let layer,modelVisible=false;
  const map=window.dssLeafletMap;
@@ -1960,12 +1960,11 @@ const enabled=/สารเคมี/.test(state.event||'');editor.hidden=!enabl
   document.getElementById('dispersionReportScenario').textContent=(state.dispersionTime||'ยังไม่ระบุเวลา')+' · '+(state.dispersionScenario||'ยังไม่ระบุรายละเอียดสถานการณ์');
   const rows=document.getElementById('dispersionRows');rows.replaceChildren();
   data.geojson.features.forEach(feature=>{
-   const tr=document.createElement('tr'),zone=document.createElement('td'),locations=document.createElement('td');
-   zone.textContent=feature.properties.name+' · '+feature.properties.description;
+   const tr=document.createElement('tr'),locations=document.createElement('td');
    const matches=(state.supportLocations||[]).filter(item=>contains([item.lng,item.lat],feature.geometry));
    locations.textContent=matches.length?matches.slice(0,30).map(item=>supportMapTypes()[item.type]?.label+' · '+item.name).join('\n'):'ไม่พบตำแหน่งจากชุดข้อมูลสนับสนุนที่โหลดไว้';locations.style.whiteSpace='pre-line';
    if(matches.length>30)locations.textContent+='\nแสดง 30 จาก '+matches.length+' ตำแหน่ง';
-   tr.append(zone,locations);rows.append(tr);
+   tr.append(locations);rows.append(tr);
   });
   document.getElementById('dispersionReportNote').textContent='ไฟล์: '+data.fileName+' · นำเข้าเมื่อ '+data.importedAt+' · ผลประมาณการตามสถานการณ์ของแบบจำลอง ไม่ใช่การตรวจวัดจริง · ตรวจเฉพาะตำแหน่งสนับสนุนที่โหลดไว้ จึงไม่ใช่รายชื่อผู้ได้รับผลกระทบทั้งหมด';
   message('นำเข้า '+data.geojson.features.length+' พื้นที่ · '+data.fileName);
