@@ -2147,5 +2147,91 @@ html body .top-actions #backToRiskmapBtn:focus {
  equipmentTool.box.append(applyEquipment);
 })();
 </script>
+
+<style id="dss-independent-assessment-style">
+#independentChemicalAssessment{border:2px solid #00387b;border-radius:9px;padding:12px;background:#f5f8fc;margin:12px 0}
+#independentChemicalAssessment h4{margin:0 0 8px;color:#00387b}
+#independentChemicalAssessment input,#independentChemicalAssessment select{width:100%;margin:5px 0}
+#independentChemicalAssessment button{font-size:13px;padding:8px 10px;margin:4px}
+#independentChemicalAssessment .assessment-result{white-space:pre-wrap;font-size:13px;line-height:1.6;padding:10px;background:white;border:1px solid #dce3ed}
+#independentAssessmentReport{margin-top:12px;padding-top:12px;border-top:1px solid #d8c9e3}
+#independentAssessmentReport pre{font:inherit;font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.5;margin:6px 0}
+</style>
+<script id="dss-independent-assessment">
+(()=>{
+ const editor=document.getElementById('chemicalIncidentEditor'),report=document.getElementById('chemicalIncidentReport');
+ if(!editor||!report)return;
+ const profiles=[{"name":"คลอรีน (Chlorine)","aliases":["คลอรีน","chlorine","molecular chlorine"],"cas":"7782-50-5","un":"1017","phase":"ก๊าซ","source":"https://www.cdc.gov/niosh/npg/npgd0115.html","extraSource":"https://cameochemicals.noaa.gov/chemical/2862","hazard":"ก๊าซพิษต่อระบบหายใจ เป็นสารออกซิไดซ์ ไม่ติดไฟเอง และมีความหนาแน่นมากกว่าอากาศ จึงอาจสะสมในพื้นที่ต่ำ","incompatible":"แอมโมเนีย ไฮโดรเจน และสารไวไฟหลายชนิดอาจเกิดปฏิกิริยารุนแรง","response":"ให้ทีม HazMat ประเมินจุดรั่วและผลตรวจวัด อยู่เหนือลมและหลีกเลี่ยงพื้นที่ต่ำ การเข้าพื้นที่ที่ไม่ทราบความเข้มข้นต้องใช้ SCBA แบบแรงดันบวกและชุดป้องกันที่เหมาะสมโดยเจ้าหน้าที่ฝึกอบรม","limitation":"ใช้ SDS ของสารและคู่มือ ERG 124/ตาราง UN 1017 ประกอบการกำหนดพื้นที่ตามสถานการณ์จริง ไม่ใช้วงรัศมีทั่วไปแทนระยะอพยพ"},{"name":"แอมโมเนียไร้น้ำ (Anhydrous ammonia)","aliases":["แอมโมเนีย","ammonia","anhydrous ammonia"],"cas":"7664-41-7","un":"1005","phase":"ก๊าซ","source":"https://www.cdc.gov/niosh/npg/npgd0028.html","hazard":"ระคายเคืองและทำอันตรายต่อดวงตา ผิวหนัง และระบบหายใจ ต้องพิจารณาอันตรายจากการติดไฟด้วย","incompatible":"กรด สารออกซิไดซ์แรง และฮาโลเจน","response":"ให้ทีม HazMat ตรวจความเข้มข้นและประเมินชนิดสาร/ความเข้มข้นของผลิตภัณฑ์ การเข้าพื้นที่ไม่ทราบความเข้มข้นต้องใช้ SCBA แบบแรงดันบวกโดยเจ้าหน้าที่ฝึกอบรม","limitation":"UN 1005 ใช้สำหรับแอมโมเนียไร้น้ำ; สารละลายมี UN ต่างกันตามความเข้มข้น ต้องตรวจ SDS"},{"name":"อะซิโตน (Acetone)","aliases":["อะซิโตน","acetone","2-propanone"],"cas":"67-64-1","un":"1090","phase":"ของเหลว","source":"https://www.cdc.gov/niosh/npg/npgd0004.html","hazard":"ของเหลวไวไฟ ระคายเคืองดวงตาและทางเดินหายใจ และอาจมีผลต่อระบบประสาทส่วนกลาง","incompatible":"สารออกซิไดซ์และกรด","response":"ให้เจ้าหน้าที่ประเมินแหล่งจุดติดไฟและตรวจไอสารก่อนเข้าพื้นที่ การเลือกเครื่องช่วยหายใจและชุดป้องกันต้องตรงกับความเข้มข้นและ SDS","limitation":"ต้องทราบปริมาณ พื้นที่หกรั่ว และสภาพอากาศก่อนประเมินไอสารและพื้นที่ผลกระทบ"},{"name":"กรดซัลฟูริก (Sulfuric acid)","aliases":["กรดซัลฟูริก","กรดกำมะถัน","sulfuric acid","sulphuric acid"],"cas":"7664-93-9","un":"1830","phase":"ของเหลว","source":"https://www.cdc.gov/niosh/npg/npgd0577.html","hazard":"กัดกร่อนและทำอันตรายต่อผิวหนัง ดวงตา และทางเดินหายใจ; สัมผัสน้ำอาจเกิดปฏิกิริยารุนแรงและความร้อน","incompatible":"น้ำ โลหะผง และสารอินทรีย์หลายชนิด","response":"ให้เจ้าหน้าที่ประเมินการหกรั่วและการกระเด็น เลือกชุดป้องกันตามความเข้มข้นและ SDS; ไม่แนะนำการผสมหรือทำให้เป็นกลางอัตโนมัติ","limitation":"UN และมาตรการขึ้นกับความเข้มข้นของผลิตภัณฑ์ ต้องตรวจ SDS ก่อนใช้"}];
+ let catalog=profiles.map(p=>({...p,verified:true})),catalogLoaded=false,lastAssessment=null;
+ const normalize=x=>normalizeSearchTerm(x);
+ function findProfile(item){const cas=normalize(item.cas),un=normalize(item.un).replace(/^un/,'');const meaningful=v=>v&&!['0','na','none'].includes(v);return profiles.find(p=>(meaningful(cas)?normalize(p.cas)===cas:p.aliases.some(a=>normalize(a)===normalize(item.name)))&&(!meaningful(un)||normalize(p.un)===un))}
+ const box=document.createElement('section');box.id='independentChemicalAssessment';
+ box.innerHTML='<h4>อีกทางเลือก: วิเคราะห์สารเคมีเมื่อโรงงานไม่มีข้อมูล DSS</h4><p class="hint">ค้นชื่อสาร / CAS / UN แล้วประเมินเบื้องต้นจากข้อมูลอ้างอิง ไม่ต้องเลือกโรงงาน</p><input id="independentChemicalSearch" placeholder="เช่น คลอรีน, Chlorine, 7782-50-5 หรือ UN 1017" aria-label="ค้นสารเคมีโดยไม่อิงโรงงาน"><button type="button" class="secondary" id="independentChemicalFind">ค้นหาสาร</button><button type="button" class="secondary" id="independentChemicalExpand">เพิ่มรายการสารทั้งหมดจาก DSS</button><select id="independentChemicalChoices" aria-label="เลือกสารเพื่อวิเคราะห์"></select><label for="independentSdsSource">แหล่ง SDS / เอกสารของสารที่ผู้ใช้ตรวจสอบ (ถ้ามี)</label><input id="independentSdsSource" placeholder="ชื่อเอกสาร / URL / รุ่นและวันที่"><button type="button" class="primary" id="independentChemicalAnalyze">ประเมินเบื้องต้น</button><button type="button" class="secondary" id="independentChemicalApply" disabled>ใช้สารและผลประเมินในรายงาน</button><p id="independentChemicalStatus" class="hint" aria-live="polite"></p><div class="assessment-result" id="independentChemicalResult" hidden></div><div id="independentChemicalSources"></div>';
+ editor.querySelector('h3').after(box);
+ const access=document.createElement('button');access.type='button';access.className='secondary';access.textContent='วิเคราะห์สารเคมี (ไม่มีข้อมูลโรงงานใน DSS)';
+ form.prepend(access);access.onclick=()=>{state.event='เหตุสารเคมีรั่วไหล';render();box.scrollIntoView({behavior:'smooth',block:'start'});document.getElementById('independentChemicalSearch').focus()};
+ const $=id=>document.getElementById(id),query=$('independentChemicalSearch'),choices=$('independentChemicalChoices'),status=$('independentChemicalStatus'),result=$('independentChemicalResult');
+ function refresh(){
+  const key=normalize(query.value).replace(/^un/,'');
+  const matches=catalog.filter(item=>!key||[item.name,item.cas,item.un,...(item.aliases||[])].some(v=>normalize(v).includes(key))).slice(0,150);
+  choices.replaceChildren();
+  matches.forEach(item=>choices.add(new Option(item.name+' • CAS '+(item.cas||'—')+' • UN '+(item.un||'—')+(item.verified?' • มีข้อมูลอ้างอิง':' • รายชื่อจาก DSS'),String(catalog.indexOf(item)))));
+  status.textContent=matches.length?'พบ '+matches.length+' รายการ เลือกชนิดสารและตรวจสอบกับ SDS':'ไม่พบสาร ลองค้น CAS / UN หรือเพิ่มรายการจาก DSS';
+  lastAssessment=null;$('independentChemicalApply').disabled=true;result.hidden=true;
+ }
+ query.addEventListener('input',refresh);choices.addEventListener('change',()=>{lastAssessment=null;$('independentChemicalApply').disabled=true;result.hidden=true});
+ $('independentChemicalFind').onclick=refresh;
+ $('independentChemicalExpand').onclick=async()=>{
+  if(catalogLoaded){refresh();return}
+  const button=$('independentChemicalExpand');button.disabled=true;status.textContent='กำลังเพิ่มรายชื่อสารจาก DSS…';
+  try{
+   const features=await loadDssSource();if(!features.length)throw Error('โหลดข้อมูล DSS ไม่สำเร็จ');
+   const seen=new Set(catalog.map(p=>normalize(p.name)+'|'+normalize(p.cas)+'|'+normalize(p.un)));
+   features.forEach(f=>{const p=f.properties||{};for(let i=1;i<=20;i++){const prefix='hazard'+i+'_';if(!p[prefix+'name'])continue;const item={name:String(p[prefix+'name']),cas:String(p[prefix+'casNo']||''),un:String(p[prefix+'unNo']||''),phase:String(p[prefix+'state']||''),verified:false};const key=normalize(item.name)+'|'+normalize(item.cas)+'|'+normalize(item.un);if(!seen.has(key)){seen.add(key);const profile=findProfile(item);catalog.push(profile?{...profile,verified:true}:item)}}});
+   catalogLoaded=true;refresh();
+  }catch(error){status.textContent=error.message}finally{button.disabled=false}
+ };
+ function snapshot(){return JSON.stringify([state.company,state.estate,state.lat,state.lng,state.leakTime,state.leakQuantity,state.leakSource,state.leakStatus,state.leakDetails,$('independentSdsSource').value,state.windDeg,state.windSpeed,state.weatherTime])}
+ function assess(item){
+  const profile=item.verified?item:findProfile(item),missing=[];
+  if(!validPoint())missing.push('พิกัดจุดเกิดเหตุที่ถูกต้อง');
+  if(!state.leakTime)missing.push('เวลาเริ่มรั่ว');
+  if(!state.leakQuantity)missing.push('ปริมาณ/อัตราการรั่วและหน่วย');
+  if(!state.leakSource)missing.push('จุดรั่วและลักษณะภาชนะ');
+  if(!state.leakStatus)missing.push('สถานะการรั่ว');
+  const hasWind=state.weatherTime&&String(state.windDeg).trim()!==''&&String(state.windSpeed).trim()!==''&&Number.isFinite(Number(state.windDeg))&&Number.isFinite(Number(state.windSpeed))&&Number(state.windSpeed)>0;
+  if(!hasWind)missing.push('ทิศลม ความเร็วลม และเวลาของข้อมูล');
+  const lines=['ผลประเมินเบื้องต้นจากข้อมูลอ้างอิง (ไม่มีข้อมูลคลังโรงงานรองรับ)','สาร: '+item.name+' | CAS '+(item.cas||'—')+' | UN '+(item.un||'—'),'บริษัท/พื้นที่ตามผู้ใช้ระบุ: '+(state.company||'—')+' / '+(state.estate||'—'),'พิกัดตามผู้ใช้ระบุ: '+state.lat+', '+state.lng];
+  if(profile)lines.push('อันตรายสำคัญ: '+profile.hazard,'สารที่เข้ากันไม่ได้: '+profile.incompatible,'ข้อมูลช่วยรับมือ: '+profile.response,'เงื่อนไข: '+profile.limitation);
+  else lines.push('ยังไม่มีข้อมูลคุณสมบัติและแนวทางรับมือที่ตรวจสอบแล้วสำหรับสารนี้ ต้องตรวจ SDS/เอกสารอ้างอิงก่อนให้คำแนะนำเฉพาะสาร');
+  if(hasWind){const from=((Number(state.windDeg)%360)+360)%360,to=(from+180)%360;lines.push('ลมตามข้อมูล '+state.weatherTime+': พัดจาก '+from.toFixed(0)+'° ไปทาง '+to.toFixed(0)+'° (ทิศทางเพื่อวางแผนตรวจสอบ ไม่ใช่แนวขอบเขตเมฆสาร)')}
+  else lines.push('ยังไม่ประเมินทิศทางการพัดพา เพราะข้อมูลลมยังไม่ครบ/ไม่มีความเร็วลมที่ใช้ได้');
+  lines.push(missing.length?'ข้อมูลเหตุที่ยังขาด: '+missing.join(' / '):'มีข้อมูลพื้นฐานของเหตุแล้ว ยังต้องตรวจอัตราการรั่ว สภาวะการปล่อย และผลตรวจความเข้มข้นเพื่อใช้แบบจำลอง');
+  lines.push('ระยะผลกระทบ/อพยพ: ยังไม่ได้คำนวณ วง Buffer บนแผนที่เป็นรัศมีที่ผู้ใช้กำหนด ไม่ใช่ผลแบบจำลอง','ไม่ยืนยันว่ามีสารนี้ในคลังของโรงงาน หรือยืนยันชนิดสารที่รั่วจากการค้นพบชื่อสาร');
+  const sds=$('independentSdsSource').value.trim();if(sds)lines.push('SDS/เอกสารที่ผู้ใช้ระบุ (ยังไม่ได้ตรวจสอบโดยระบบ): '+sds);
+  if(profile)lines.push('แหล่งอ้างอิง: '+profile.source+(profile.extraSource?' / '+profile.extraSource:''),'ตรวจข้อมูลอ้างอิง: 5 ต.ค. 2569');
+  return {item,profile,text:lines.join('\n'),createdAt:new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'}),snapshot:snapshot()};
+ }
+ $('independentChemicalAnalyze').onclick=()=>{
+  const item=catalog[Number(choices.value)];if(!item||!choices.options.length){status.textContent='กรุณาเลือกสารก่อน';return}
+  lastAssessment=assess(item);result.textContent=lastAssessment.text;result.hidden=false;$('independentChemicalApply').disabled=false;
+  const sources=$('independentChemicalSources');sources.replaceChildren();
+  for(const url of [lastAssessment.profile?.source,lastAssessment.profile?.extraSource].filter(Boolean)){const link=document.createElement('a');link.href=url;link.target='_blank';link.rel='noopener';link.textContent='เปิดแหล่งอ้างอิง '+new URL(url).hostname;link.style.display='block';sources.append(link)}
+  status.textContent='ประเมินเบื้องต้นแล้ว • '+lastAssessment.createdAt;
+ };
+ const reportBox=document.createElement('section');reportBox.id='independentAssessmentReport';reportBox.hidden=true;
+ const reportTitle=document.createElement('h3');reportTitle.textContent='ผลประเมินสารเคมีจากฐานอ้างอิงภายนอก DSS';
+ const reportText=document.createElement('pre');reportBox.append(reportTitle,reportText);report.append(reportBox);
+ $('independentChemicalApply').onclick=()=>{
+  if(!lastAssessment)return;
+  if(lastAssessment.snapshot!==snapshot()){status.textContent='ข้อมูลเหตุเปลี่ยนแล้ว กรุณากดประเมินเบื้องต้นใหม่';return}
+  const item=lastAssessment.item;state.leakChemical=item.name;state.leakCAS=item.cas;state.leakUN=item.un;state.leakState=lastAssessment.profile?.phase||item.phase||'ยังไม่ทราบ';state.event='เหตุสารเคมีรั่วไหล';
+  state.independentChemicalAssessment={text:lastAssessment.text,createdAt:lastAssessment.createdAt,context:JSON.stringify([state.company,state.estate,state.lat,state.lng,state.leakTime,state.leakQuantity,state.leakSource,state.leakStatus,state.leakDetails,state.windDeg,state.windSpeed,state.weatherTime]),chemical:item.name};
+  render();status.textContent='นำสารและผลประเมินใส่รายงานแล้ว • ไม่ได้เพิ่มสารในคลังโรงงาน';
+ };
+ const previous=render;render=function(){previous();const assessment=state.independentChemicalAssessment;reportBox.hidden=!assessment;if(assessment){const context=JSON.stringify([state.company,state.estate,state.lat,state.lng,state.leakTime,state.leakQuantity,state.leakSource,state.leakStatus,state.leakDetails,state.windDeg,state.windSpeed,state.weatherTime]);const stale=context!==assessment.context||state.leakChemical!==assessment.chemical;reportText.textContent=(stale?'ข้อมูลเหตุเปลี่ยนจากรอบประเมินนี้ ต้องประเมินใหม่\n':'')+'รอบประเมิน: '+assessment.createdAt+'\n'+assessment.text}};
+ refresh();render();
+})();
+</script>
 </body></html>
 
