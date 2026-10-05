@@ -1,0 +1,698 @@
+{
+  "schema_version": 1,
+  "source": "แผนรับมือเหตุที่ผู้จัดทำแนบ",
+  "source_year": 2569,
+  "note": "ข้อมูลตามเอกสาร ไม่ใช่จำนวนคงเหลือหรือความพร้อมปัจจุบัน; page คือเลขหน้า PDF เริ่มจาก 1",
+  "records": [
+    {
+      "estate_id": "5",
+      "zone": "นิคมอุตสาหกรรมนครหลวง",
+      "company": "แผนรับมือเหตุ · นครหลวง",
+      "source_file": "ERP-นครหลวง 69.pdf",
+      "source_year": 2569,
+      "source_kind": "plan",
+      "items": [
+        {
+          "name": "รถกระบะ",
+          "amount": "1",
+          "unit": "คัน",
+          "type": "",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 110,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "รถดับเพลิง",
+          "amount": "1",
+          "unit": "คัน",
+          "type": "มีน้ำและโฟม (รายการเดียวกับตารางระงับเหตุ)",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 110,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "รถยนต์ 6 ล้อ",
+          "amount": "1",
+          "unit": "คัน",
+          "type": "",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 110,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "รถไถนา",
+          "amount": "1",
+          "unit": "คัน",
+          "type": "",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 110,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "รถ JCB",
+          "amount": "1",
+          "unit": "คัน",
+          "type": "",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 110,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "เรือเร็ว",
+          "amount": "1",
+          "unit": "ลำ",
+          "type": "",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 110,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "เครื่องสูบระบายน้ำฝน",
+          "amount": "3",
+          "unit": "เครื่อง",
+          "type": "ขนาด 1.5 ลบ.ม./วินาที ตามตารางภาคผนวก; เป็นระบบประจำนิคมฯ",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 110,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "กระสอบทราย",
+          "amount": "2,000",
+          "unit": "กระสอบ",
+          "type": "ต้นทางพิมพ์ว่า กระสอบทราบ",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 110,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "Big bag",
+          "amount": "8,000",
+          "unit": "กระสอบ",
+          "type": "",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 110,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "ทราย",
+          "amount": "9,000",
+          "unit": "ลบ.ม.",
+          "type": "",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 110,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "แผ่นเหล็ก",
+          "amount": "10",
+          "unit": "แผ่น",
+          "type": "",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 110,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "น้ำมันเชื้อเพลิง",
+          "amount": "5,000",
+          "unit": "ลิตร",
+          "type": "ตามตารางอุปกรณ์; ไม่รวมยอด 200 ในตารางระงับเหตุที่หน่วยไม่ชัดเจน",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 110,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "น้ำดับเพลิง",
+          "amount": "ไม่ระบุจำนวน",
+          "unit": "",
+          "type": "ระบบน้ำประปานิคมฯ",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 110,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "รถกู้ภัยฉุกเฉิน",
+          "amount": "1",
+          "unit": "คัน",
+          "type": "ต้องติดต่อหน่วยงาน",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 110,
+          "record_kind": "inventory"
+        }
+      ]
+    },
+    {
+      "estate_id": "6",
+      "zone": "นิคมอุตสาหกรรมบางปะอิน",
+      "company": "แผนรับมือเหตุ · บางปะอิน",
+      "source_file": "ERP-บางปะอิน 69.pdf",
+      "source_year": 2569,
+      "source_kind": "plan",
+      "items": [
+        {
+          "name": "น้ำดับเพลิง / FIRE HYDRANT",
+          "amount": "102",
+          "unit": "หัว",
+          "type": "น้ำ 8,000 ลบ.ม.; ทุก 200 เมตร",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 129,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "รถดับเพลิงบรรทุกน้ำ",
+          "amount": "1",
+          "unit": "คัน",
+          "type": "ความจุ 4,000 ลิตร",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 129,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "รถบรรทุกน้ำ",
+          "amount": "1",
+          "unit": "คัน",
+          "type": "ความจุ 12,000 ลิตร; บมจ. ช.การช่าง",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 129,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "โฟม LIGHT WATER AFFFF",
+          "amount": "4",
+          "unit": "ถัง",
+          "type": "ถังละ 5 แกลลอน",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 129,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "หัวฉีด PROTEK รุ่น 369",
+          "amount": "2",
+          "unit": "หัว",
+          "type": "ปรับม่านน้ำได้",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 129,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "กระบอกหัวฉีดน้ำลำตรง",
+          "amount": "2",
+          "unit": "อัน",
+          "type": "เปลี่ยนหัวฉีด 6 หัว",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 129,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "หัวฉีดน้ำยาโฟม",
+          "amount": "1",
+          "unit": "หัว",
+          "type": "สำหรับฉีดน้ำยาโฟมฟองกล",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 129,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "ข้อต่อหัว FIRE HYDRANT",
+          "amount": "1",
+          "unit": "หัว",
+          "type": "เกลียวในทางส่งชนิดสวมเร็ว",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 129,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "สายส่งน้ำดับเพลิง",
+          "amount": "5",
+          "unit": "เส้น",
+          "type": "ขนาด 2 นิ้วครึ่ง",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 129,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "เครื่องสูบน้ำเสียเคลื่อนย้าย",
+          "amount": "1",
+          "unit": "ชุด",
+          "type": "คูโบต้า",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 129,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "ชุดผจญเพลิง",
+          "amount": "5",
+          "unit": "ชุด",
+          "type": "หมวก เสื้อ รองเท้า",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 129,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "ถังดับเพลิงชนิดมือถือ",
+          "amount": "5",
+          "unit": "ถัง",
+          "type": "ผงเคมีแห้ง",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 129,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "รถกระบะ",
+          "amount": "4",
+          "unit": "คัน",
+          "type": "สนับสนุน",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 129,
+          "record_kind": "inventory"
+        }
+      ]
+    },
+    {
+      "estate_id": "6",
+      "zone": "นิคมอุตสาหกรรมบางปะอิน",
+      "company": "แผนรับมือเหตุ · บางปะอิน",
+      "source_file": "ERP-บางปะอิน 69.pdf",
+      "source_year": 2569,
+      "source_kind": "plan",
+      "items": [
+        {
+          "name": "ทราย",
+          "amount": "80",
+          "unit": "ตัน",
+          "type": "วัสดุซ่อมคันป้องกันน้ำท่วมตามแผน",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 67,
+          "record_kind": "preparation"
+        },
+        {
+          "name": "หินคลุก",
+          "amount": "40",
+          "unit": "ตัน",
+          "type": "วัสดุซ่อมคันป้องกันน้ำท่วมตามแผน",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 67,
+          "record_kind": "preparation"
+        },
+        {
+          "name": "กระสอบทราย",
+          "amount": "3,000",
+          "unit": "ใบ",
+          "type": "จัดเตรียมตามแผน",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 67,
+          "record_kind": "preparation"
+        },
+        {
+          "name": "แบริเออร์",
+          "amount": "25",
+          "unit": "ท่อน",
+          "type": "จัดเตรียมตามแผน",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 67,
+          "record_kind": "preparation"
+        },
+        {
+          "name": "น้ำมันเชื้อเพลิงสำหรับเครื่องสูบน้ำสำรอง",
+          "amount": "10,000",
+          "unit": "ลิตร",
+          "type": "แผนระบุการใช้น้ำมันเชื้อเพลิง ไม่ใช่ปริมาณคงเหลือ",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 67,
+          "record_kind": "preparation"
+        }
+      ]
+    },
+    {
+      "estate_id": "7",
+      "zone": "นิคมอุตสาหกรรมบ้านหว้า",
+      "company": "แผนรับมือเหตุ · บ้านหว้า",
+      "source_file": "ERP-บ้านหว้า 69.pdf",
+      "source_year": 2569,
+      "source_kind": "plan",
+      "items": [
+        {
+          "name": "โทรศัพท์มือถือ",
+          "amount": "10",
+          "unit": "เครื่อง",
+          "type": "สน.บว. กนอ. / บจก.ไทยอินดัสเตรียล เอสเตท",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 119,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "รถตักดินแบ็คโฮ / แทรกเตอร์",
+          "amount": "อย่างละ 1",
+          "unit": "คัน",
+          "type": "แหล่งสนับสนุน: ต.พระอินทร์วัสดุก่อสร้าง",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 119,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "รถขนดิน (ดั๊มเปอร์)",
+          "amount": "1",
+          "unit": "คัน",
+          "type": "บจก.ไทยอินดัสเตรียล เอสเตท",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 119,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "รถบรรทุก 4 ล้อ",
+          "amount": "1",
+          "unit": "คัน",
+          "type": "บจก.ไทยอินดัสเตรียล เอสเตท",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 119,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "รถบรรทุกน้ำ 6 ล้อ",
+          "amount": "1",
+          "unit": "คัน",
+          "type": "บจก.ไทยอินดัสเตรียล เอสเตท",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 119,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "รถกระบะปิกอัพ",
+          "amount": "2",
+          "unit": "คัน",
+          "type": "บจก.ไทยอินดัสเตรียล เอสเตท",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 119,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "ปั๊มสูบน้ำเคลื่อนที่",
+          "amount": "3",
+          "unit": "เครื่อง",
+          "type": "ขนาด 10 นิ้ว; บจก.ไทยอินดัสเตรียล เอสเตท",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 119,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "ทราย",
+          "amount": "ไม่จำกัดปริมาณตามแผน",
+          "unit": "",
+          "type": "แหล่งจัดซื้อ: ต.พระอินทร์ฯ / ร้านมิตรเจริญ; ต้องสั่งซื้อและยืนยันจำนวน",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 119,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "กระสอบทราย",
+          "amount": "ไม่จำกัดปริมาณตามแผน",
+          "unit": "",
+          "type": "แหล่งจัดซื้อ: มิตรเจริญ / สำนักงานใหญ่ บ.ไทยอินดัสเตรียลฯ",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 119,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "พลาสติกกันน้ำ",
+          "amount": "ไม่จำกัดปริมาณตามแผน",
+          "unit": "",
+          "type": "แหล่งจัดซื้อ: มิตรเจริญ / สำนักงานใหญ่ บ.ไทยอินดัสเตรียลฯ",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 119,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "วัสดุอุปกรณ์ต่าง ๆ",
+          "amount": "ไม่จำกัดปริมาณตามแผน",
+          "unit": "",
+          "type": "แหล่งจัดซื้อ: มิตรเจริญ / สำนักงานใหญ่ บ.ไทยอินดัสเตรียลฯ",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 119,
+          "record_kind": "inventory"
+        }
+      ]
+    },
+    {
+      "estate_id": "8",
+      "zone": "นิคมอุตสาหกรรมสมุทรสาคร",
+      "company": "แผนรับมือเหตุ · สมุทรสาคร",
+      "source_file": "ERP-สมุทรสาคร 69.pdf",
+      "source_year": 2569,
+      "source_kind": "plan",
+      "items": [
+        {
+          "name": "หัวจ่ายน้ำดับเพลิง FIRE HYDRANT",
+          "amount": "82",
+          "unit": "หัว",
+          "type": "",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 117,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "รถบรรทุกน้ำพร้อมดับเพลิง",
+          "amount": "1",
+          "unit": "คัน",
+          "type": "ความจุ 6,000 ลิตร",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 117,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "หัวฉีด PROTEK รุ่น 369",
+          "amount": "1",
+          "unit": "หัว",
+          "type": "ปรับม่านน้ำได้",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 117,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "กระบอกหัวฉีดน้ำลำตรง",
+          "amount": "2",
+          "unit": "อัน",
+          "type": "เปลี่ยนหัวฉีด 6 หัว",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 117,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "ข้อต่อหัว FIRE HYDRANT",
+          "amount": "1",
+          "unit": "หัว",
+          "type": "เกลียวในทางส่งชนิดสวมเร็ว",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 117,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "สายส่งน้ำดับเพลิง",
+          "amount": "3",
+          "unit": "เส้น",
+          "type": "ขนาด 2 นิ้วครึ่ง",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 117,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "เครื่องสูบน้ำเสียเคลื่อนย้าย",
+          "amount": "1",
+          "unit": "ชุด",
+          "type": "คูโบต้า",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 117,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "ชุดผจญเพลิง",
+          "amount": "4",
+          "unit": "ชุด",
+          "type": "หมวก เสื้อ รองเท้า",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 117,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "ถังดับเพลิงชนิดมือถือ",
+          "amount": "5",
+          "unit": "ถัง",
+          "type": "ผงเคมีแห้ง",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 117,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "รถกระบะ",
+          "amount": "4",
+          "unit": "คัน",
+          "type": "สนับสนุน",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 117,
+          "record_kind": "inventory"
+        }
+      ]
+    },
+    {
+      "estate_id": "64",
+      "zone": "นิคมอุตสาหกรรมแก่งคอย",
+      "company": "แผนรับมือเหตุ · แก่งคอย",
+      "source_file": "ERP-แก่งคอย 69.pdf",
+      "source_year": 2569,
+      "source_kind": "plan",
+      "items": [
+        {
+          "name": "หัวดับเพลิง",
+          "amount": "13",
+          "unit": "จุด",
+          "type": "ใช้สำหรับดับเพลิง",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 97,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "รถบรรทุกน้ำของ สนก.",
+          "amount": "1",
+          "unit": "คัน",
+          "type": "6,000 ลิตร; ใช้รดน้ำต้นไม้",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 97,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "รถบรรทุกน้ำของ บมจ.เอิร์ธ เท็คฯ",
+          "amount": "1",
+          "unit": "คัน",
+          "type": "6,000 ลิตร; ใช้ดับเพลิง",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 97,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "รถบรรทุกน้ำและดับเพลิงของ อบต.ท่าตูม",
+          "amount": "1",
+          "unit": "คัน",
+          "type": "5,000 ลิตร; ต้องประสานหน่วยงานภายนอก",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 97,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "รถบรรทุกน้ำและดับเพลิง เทศบาลเมืองแก่งคอย (6 คิว)",
+          "amount": "1",
+          "unit": "คัน",
+          "type": "6 ล้อ; ต้องประสานหน่วยงานภายนอก",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 97,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "รถบรรทุกน้ำและดับเพลิง เทศบาลเมืองแก่งคอย (12 คิว)",
+          "amount": "1",
+          "unit": "คัน",
+          "type": "10 ล้อ; ต้องประสานหน่วยงานภายนอก",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 97,
+          "record_kind": "inventory"
+        },
+        {
+          "name": "รถบรรทุกน้ำและดับเพลิง เทศบาลเมืองแก่งคอย (4 คิว)",
+          "amount": "3",
+          "unit": "คัน",
+          "type": "6 ล้อ; ต้องประสานหน่วยงานภายนอก",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 97,
+          "record_kind": "inventory"
+        }
+      ]
+    },
+    {
+      "estate_id": "10",
+      "zone": "นิคมอุตสาหกรรมราชบุรี",
+      "company": "แผนรับมือเหตุ · ราชบุรี",
+      "source_file": "ERP-ราชบุรี 69.pdf",
+      "source_year": 2569,
+      "source_kind": "plan",
+      "items": [
+        {
+          "name": "เครื่องสูบน้ำ",
+          "amount": "ไม่ระบุจำนวน",
+          "unit": "",
+          "type": "แผนระบุให้จัดเตรียมและบำรุงรักษา ไม่พบตารางจำนวนคงเหลือ",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 62,
+          "record_kind": "preparation"
+        },
+        {
+          "name": "กระสอบทราย",
+          "amount": "ไม่ระบุจำนวน",
+          "unit": "",
+          "type": "แผนระบุให้จัดเตรียม ไม่พบตารางจำนวนคงเหลือ",
+          "capacity": "",
+          "category": "สนับสนุนการช่วยเหลือ",
+          "page": 62,
+          "record_kind": "preparation"
+        }
+      ]
+    }
+  ]
+}
