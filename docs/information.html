@@ -241,17 +241,17 @@ html body #hubInformationHeader .weather-pop{top:54px!important}
      <header><div><h2>สถานะสถานีตรวจวัด</h2><p>สถานะการเชื่อมต่อและเวลารับข้อมูลล่าสุด</p></div><span id="emTableArea">ทุกพื้นที่นิคมฯ</span></header>
      <div class="em-status-summary"><div><i class="green"></i><b>Online</b><strong>0</strong></div><div><i class="gray"></i><b>Offline</b><strong>0</strong></div><div><i class="amber"></i><b>มีรายการแจ้งเตือน</b><strong>0</strong></div><div><i class="red"></i><b>ไม่ระบุสถานะ</b><strong>0</strong></div></div>
      <div class="em-table-wrap" role="region" aria-label="สถานะสถานีตรวจวัด เลื่อนดูรายการเพิ่มเติม" tabindex="0"><table><colgroup><col style="width:29%"><col style="width:9%"><col style="width:20%"><col style="width:18%"><col style="width:24%"></colgroup><thead><tr><th scope="col">สถานี</th><th scope="col">ระบบ</th><th scope="col">นิคมอุตสาหกรรม</th><th scope="col">สถานะ</th><th scope="col">ข้อมูลล่าสุด</th></tr></thead><tbody><tr><td colspan="5">ไม่มีข้อมูลสถานีสำหรับพื้นที่ที่เลือก</td></tr></tbody></table></div>
-    </article><article class="em-panel em-alert-summary">
+    </article></div>
+   </main>
+
+   <div class="em-map-column"><article class="em-panel em-alert-summary">
      <header><div><h2>สรุปผลการตรวจวัดและการแจ้งเตือน</h2><p>ตัวชี้วัดที่ต้องเฝ้าระวังจากทั้ง 3 ระบบ</p></div><span>อัปเดตตามข้อมูลล่าสุด</span></header>
      <div><article><b>ไม่มีรายการแจ้งเตือน</b><strong>0</strong><small>สถานี</small></article><article><b>มีรายการแจ้งเตือน</b><strong>0</strong><small>สถานี</small></article><article><b>Offline</b><strong>0</strong><small>สถานี</small></article><article><b>ไม่มีค่าตรวจวัด</b><strong>0</strong><small>สถานี</small></article></div>
 
     
-    </article></div>
-   </main>
-
-   <aside class="em-panel em-map">
+    </article><aside class="em-panel em-map">
     <header><div><h2>แผนที่สถานี e‑Monitoring</h2><p id="emMapSubtitle">AQMs • WQMs • CEMs</p></div><button id="emFullMap" type="button">เปิดเต็มหน้าจอ ↗</button></header>
-   </aside>
+   </aside></div>
   </div>
  </div>
 </section><main class="dashboard"><section class="left"><div class="summary" id="summary"></div><article class="card chart-card"><div class="chart-head"><h2 id="chartTitle"></h2><span class="filter" id="chartFilter"></span></div><div class="bar-chart" id="bars"></div></article><article class="card lower"><div class="lower-title"><b id="lowerTitle"></b><span class="filter">⌁ เลือกมุมมอง　⌄</span></div><div class="legend"><span><i></i>ข้อมูลหลัก</span><span><i class="alt"></i>ข้อมูลสนับสนุน</span></div><div class="spark"><svg viewBox="0 0 600 110" preserveAspectRatio="none"><path d="M0 92 C70 80,95 88,145 62 S230 20,280 55 S370 90,430 42 S520 32,600 12" fill="none" stroke="#2868ef" stroke-width="4"/><path d="M0 101 C80 94,130 64,190 82 S290 93,350 70 S470 77,600 49" fill="none" stroke="#631a9d" stroke-width="3"/></svg></div></article></section>
@@ -1498,6 +1498,16 @@ body.monitor-mode .em-system-row>article>span.wq{color:var(--em-green)!important
 .em-station-row>.em-status,.em-station-row>.em-alert-summary{width:100%;min-width:0;box-sizing:border-box}
 .em-station-row .em-alert-summary>div{grid-template-columns:repeat(4,minmax(0,1fr))}
 @media(max-width:520px){.em-station-row .em-alert-summary>div{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+<style id="monitor-alert-above-map">
+.em-map-column{display:grid;grid-template-rows:auto minmax(620px,1fr);gap:14px;min-width:0;align-self:stretch}
+.em-map-column>.em-alert-summary{width:100%;box-sizing:border-box}
+.em-map-column>.em-alert-summary>div{grid-template-columns:repeat(2,minmax(0,1fr))}
+.em-map-column>.em-alert-summary header{flex-wrap:wrap}
+.em-map-column>.em-alert-summary h2{font-size:18px!important}
+.em-map-column>.em-map{position:relative;top:auto;height:auto!important;min-height:620px;align-self:stretch}
+.em-map-column>.em-map:fullscreen{height:100vh!important;width:100vw}
+@media(max-width:850px){.em-map-column{grid-template-rows:auto 620px}.em-map-column>.em-map{height:620px!important}}
 </style>
 </body></html>
 
