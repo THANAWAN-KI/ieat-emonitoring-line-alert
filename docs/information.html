@@ -1493,5 +1493,11 @@ body.monitor-mode .em-system-row>article>span.wq{color:var(--em-green)!important
 @media(max-width:1350px) and (min-width:851px){.em-layout{grid-template-columns:minmax(0,1.55fr) minmax(340px,1fr)}}
 @media(max-width:850px){.em-layout{grid-template-columns:1fr}.em-layout>.em-map{height:620px!important;min-height:620px}.em-two-charts{grid-template-columns:1fr}}
 </style>
+<style id="monitor-full-width-station-table">
+.em-content>.em-station-row{grid-template-columns:minmax(0,1fr)}
+.em-station-row>.em-status,.em-station-row>.em-alert-summary{width:100%;min-width:0;box-sizing:border-box}
+.em-station-row .em-alert-summary>div{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:520px){.em-station-row .em-alert-summary>div{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
 </body></html>
 
