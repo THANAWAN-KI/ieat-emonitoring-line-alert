@@ -1263,7 +1263,7 @@ async function loadDssNearby(lat,lng){
         const rad=Math.PI/180,h=Math.sin((y-lat)*rad/2)**2+Math.cos(lat*rad)*Math.cos(y*rad)*Math.sin((x-lng)*rad/2)**2;
         return {id:a.OBJECTID||a.FID||index,type,name:String(a[nameField]||a.PopupInfo||supportMapTypes()[type].label),lng:x,lat:y,distance:6371*2*Math.asin(Math.min(1,Math.sqrt(h)))};
       }).filter(item=>Number.isFinite(item.distance)&&item.lng>=97&&item.lng<=106&&item.lat>=5&&item.lat<=22).sort((a,b)=>a.distance-b.distance);
-      if(sequence!==nearbySequence||Number(state.lat)!==Number(lat.toFixed(6))||Number(state.lng)!==Number(lng.toFixed(6)))return;
+      if(sequence!==nearbySequence||Number(state.lat)!==Number(lat)||Number(state.lng)!==Number(lng))return;
       state.supportLocations.push(...(countOnly?mapCandidates:mapCandidates.filter((item,index)=>index===0||item.distance<=radius)));
       if(countOnly){
         state[type+'Name']=(type==='community'?'ชุมชน':'กล้อง CCTV')+' ในรัศมี '+radius+' กม.';state[type+'Distance']=Number(total).toLocaleString('th-TH')+(type==='community'?' แห่ง':' จุด');
@@ -1272,9 +1272,9 @@ async function loadDssNearby(lat,lng){
         state[type+'Name']=candidates[0]?.name||'ไม่พบข้อมูลในรัศมี 50 กม.';
         state[type+'Distance']=candidates[0]?(type==='hydrant'?Math.round(candidates[0].distance*1000).toLocaleString('th-TH')+' เมตร':candidates[0].distance.toFixed(2)+' กม.'):'—';
       }
-    }catch(error){if(sequence===nearbySequence&&Number(state.lat)===Number(lat.toFixed(6))&&Number(state.lng)===Number(lng.toFixed(6))){state[type+'Name']='โหลดข้อมูลไม่สำเร็จ';state[type+'Distance']='—'}console.warn('DSS nearby '+type,error)}
+    }catch(error){if(sequence===nearbySequence&&Number(state.lat)===Number(lat)&&Number(state.lng)===Number(lng)){state[type+'Name']='โหลดข้อมูลไม่สำเร็จ';state[type+'Distance']='—'}console.warn('DSS nearby '+type,error)}
   }));
-  if(sequence===nearbySequence&&Number(state.lat)===Number(lat.toFixed(6))&&Number(state.lng)===Number(lng.toFixed(6))){state.nearbyTime='ค้นหาข้อมูล ณ '+new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'})+' (เวลาไทย) · โรงพยาบาล/ดับเพลิง/ตำรวจ/หัวจ่ายน้ำ: ค้นหาใกล้ที่สุดภายใน 50 กม. · ชุมชน/CCTV: รัศมีที่เลือก';render();if(window.dssSyncSupportMarkers)window.dssSyncSupportMarkers();
+  if(sequence===nearbySequence&&Number(state.lat)===Number(lat)&&Number(state.lng)===Number(lng)){state.nearbyTime='ค้นหาข้อมูล ณ '+new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'})+' (เวลาไทย) · โรงพยาบาล/ดับเพลิง/ตำรวจ/หัวจ่ายน้ำ: ค้นหาใกล้ที่สุดภายใน 50 กม. · ชุมชน/CCTV: รัศมีที่เลือก';render();if(window.dssSyncSupportMarkers)window.dssSyncSupportMarkers();
     const radius=Math.max(...getBufferRadii()),spanLat=radius*1.35/111.2,spanLng=spanLat*(mapNode.clientWidth||800)/(mapNode.clientHeight||560)/Math.cos(lat*Math.PI/180);renderStaticSupportPoints(lat,lng,spanLat,spanLng);
   }
 }
@@ -1319,6 +1319,7 @@ function matchingDssFeature(features,name,estate,reference={}){
  const idMatches=(uid||user||numbers.length)?features.filter(f=>{const p=f.properties||{};return uid&&String(p.comp_uid)===uid||user&&String(p.comp_user)===user||numbers.includes(normalizeSearchTerm(p.comp_no))}):[];
  if(idMatches.length===1)return idMatches[0];
  if(idMatches.length>1){const active=idMatches.filter(f=>f.properties.doc_active===true);if(active.length===1)return active[0];return null}
+ if(uid||user||numbers.length)return null;
  let index=dssIdentityIndexes.get(features);
  if(!index){index=new Map();features.forEach(feature=>{const key=dssIdentity(feature.properties.comp_name);if(!index.has(key))index.set(key,[]);index.get(key).push(feature)});dssIdentityIndexes.set(features,index)}
  const matches=(index.get(dssIdentity(name))||[]).filter(f=>!estate||estate==='—'||dssIdentity(f.properties.comp_zone)===dssIdentity(estate));
@@ -1385,7 +1386,7 @@ function loadFactoryNameIndex(){
   const features=sourceResult.status==='fulfilled'?sourceResult.value:[],matched=new Set();
   factoryNameIndex=(data.factories||[]).map(row=>({OBJECTID:row[0],mercant_name:row[1],fid14n:row[2],IEAT:row[3],FactoryID:row[4]||''}));
   for(let i=0;i<factoryNameIndex.length;i++){
-   const attrs=factoryNameIndex[i],feature=matchingDssFeature(features,attrs.mercant_name,attrs.IEAT);
+   const attrs=factoryNameIndex[i],feature=matchingDssFeature(features,attrs.mercant_name,attrs.IEAT,attrs);
    if(feature){attrs.FactoryID=feature.properties.comp_no||attrs.FactoryID;attrs.dssFeature=feature;matched.add(feature)}
    attrs.dssSearch=dssSearchContent(attrs);
    if(i%250===249)await new Promise(resolve=>setTimeout(resolve,0));
@@ -1537,12 +1538,14 @@ async function selectDssLookup(item){
     else{lat=Number(attrs.latitude);lng=Number(attrs.longitude)}
 
   }
+  const keepIncidentPoint=state.positionSource==='manual'&&state.keepManualPosition!==false&&validPoint();
+  if(keepIncidentPoint){lat=Number(state.lat);lng=Number(state.lng)}
   if(!Number.isFinite(lat)||!Number.isFinite(lng)||lat<5||lat>22||lng<97||lng>106){factoryLookupStatus.textContent='พบข้อมูล แต่ไม่มีพิกัดที่ถูกต้อง กรุณาเลือกพื้นที่อื่น';return}
   const nearby={};['hospital','fire','police','hydrant','community','cctv'].forEach(type=>{nearby[type+'Name']=defaults[type+'Name'];nearby[type+'Distance']=defaults[type+'Distance']});
   if(state.company!==item.name){state.leakChemical='';state.leakCAS='';state.leakUN='';state.leakState='';state.leakTime='';state.leakQuantity='';state.leakSource='';state.leakStatus='';state.leakDetails='';state.leakReporter='';state.leakConfirmedAt='';state.leakWater='';state.leakSupport='';}
-  state={...state,...nearby,temp:'—',humidity:'—',windSpeed:'—',windDir:'—',weather:'รอดึงข้อมูลตำแหน่งใหม่',weatherTime:'',positionConfirmed:false,company:item.name,estate:item.type==='estate'?item.name:(attrs.IEAT||'—'),registration:[attrs.fid14n,item.dssFeature?.properties.comp_no||attrs.FactoryID].filter(Boolean).join(' / ')||'—',address:item.type==='estate'?item.name:[attrs.FactoryAddressGeneral,attrs.FactoryAddressMoo?'หมู่ '+attrs.FactoryAddressMoo:'',attrs.FactoryAddressSoi?'ซอย '+attrs.FactoryAddressSoi:'',attrs.FactoryAddressRoad?'ถนน '+attrs.FactoryAddressRoad:'',attrs.FactoryAddressTambonName,attrs.FactoryAddressDistrictName,attrs.FactoryAddressProvinceName,attrs.FactoryAPostCode].filter(Boolean).join(' ')||['จุดเกิดเหตุในนิคมฯ '+(attrs.IEAT||'—'),attrs.Name_Parcel?'แปลง '+attrs.Name_Parcel:'','พิกัด '+lat.toFixed(6)+', '+lng.toFixed(6)].filter(Boolean).join(' · '),...incidentSourceReport(item),lat:lat.toFixed(6),lng:lng.toFixed(6)};
+  state={...state,...nearby,temp:'—',humidity:'—',windSpeed:'—',windDir:'—',weather:'รอดึงข้อมูลตำแหน่งใหม่',weatherTime:'',positionConfirmed:false,company:item.name,estate:item.type==='estate'?item.name:(attrs.IEAT||'—'),registration:[attrs.fid14n,item.dssFeature?.properties.comp_no||attrs.FactoryID].filter(Boolean).join(' / ')||'—',address:item.type==='estate'?item.name:[attrs.FactoryAddressGeneral,attrs.FactoryAddressMoo?'หมู่ '+attrs.FactoryAddressMoo:'',attrs.FactoryAddressSoi?'ซอย '+attrs.FactoryAddressSoi:'',attrs.FactoryAddressRoad?'ถนน '+attrs.FactoryAddressRoad:'',attrs.FactoryAddressTambonName,attrs.FactoryAddressDistrictName,attrs.FactoryAddressProvinceName,attrs.FactoryAPostCode].filter(Boolean).join(' ')||['จุดเกิดเหตุในนิคมฯ '+(attrs.IEAT||'—'),attrs.Name_Parcel?'แปลง '+attrs.Name_Parcel:'','พิกัด '+lat.toFixed(6)+', '+lng.toFixed(6)].filter(Boolean).join(' · '),...incidentSourceReport(item),lat:String(lat),lng:String(lng),positionSource:keepIncidentPoint?'manual':'factory'};
   factoryLookup.value=item.name;render();updateMap();lookupResults.replaceChildren();
-  factoryLookupStatus.textContent='เลือก '+item.name+' และเติมข้อมูลในรายงานแล้ว';
+  factoryLookupStatus.textContent='เลือก '+item.name+' และเติมข้อมูลในรายงานแล้ว'+(keepIncidentPoint?' · คงพิกัดจุดเกิดเหตุที่กรอกเอง':' · ใช้ตำแหน่งโรงงานจากฐานข้อมูล โปรดตรวจสอบจุดเกิดเหตุ');
   document.getElementById('map').scrollIntoView({behavior:'smooth',block:'center'});
   loadDssNearby(lat,lng);loadWeather();
 }
@@ -2031,17 +2034,18 @@ html body .top-actions #backToRiskmapBtn:focus {
  if(!latInput||!lngInput)return;
  const button=document.createElement('button');button.type='button';button.className='primary';button.textContent='ปักหมุดจุดเกิดเหตุตามพิกัด';
  const status=document.createElement('p');status.className='hint';status.setAttribute('aria-live','polite');
- lngInput.closest('.field').after(button,status);
+ const keepLabel=document.createElement('label'),keep=document.createElement('input');keep.type='checkbox';keep.checked=state.keepManualPosition!==false;keep.style.width='auto';keep.onchange=()=>{state.keepManualPosition=keep.checked;saveDraft()};keepLabel.append(keep,document.createTextNode(' คงพิกัดที่กรอกเองเมื่อเลือกโรงงาน'));keepLabel.style.display='block';
+ lngInput.closest('.field').after(button,keepLabel,status);
  function place(manual=false){
   clearTimeout(timer);
   state.lat=latInput.value.trim();state.lng=lngInput.value.trim();
   if(!validPoint()){if(manual)status.textContent='กรุณากรอกละติจูดและลองจิจูดให้ครบและถูกต้อง';return}
   const lat=Number(state.lat),lng=Number(state.lng);
-  state.positionConfirmed=false;
+  state.positionConfirmed=false;state.positionSource='manual';state.keepManualPosition=keep.checked;
   window.dssPlaceIncidentPoint?.(lat,lng);
   try{updateMap()}catch(error){console.warn('Coordinate map refresh',error)}
   status.textContent='หมุดจุดเกิดเหตุ: '+lat.toFixed(6)+', '+lng.toFixed(6);
-  render();
+  render();loadDssNearby(lat,lng);loadWeather();
   if(manual)document.getElementById('map').scrollIntoView({behavior:'smooth',block:'center'});
  }
  button.onclick=()=>place(true);
@@ -2093,10 +2097,10 @@ html body .top-actions #backToRiskmapBtn:focus {
   if(changed){state.leakChemical='';state.leakCAS='';state.leakUN='';state.leakState=''}
   state={...state,company:p.comp_name||'—',estate:p.comp_zone||'—',registration:p.comp_no||'—',...incidentSourceReport({dssFeature:hazard,equipmentFeature:equip,equipmentUnavailable:equipment===null})};
   const point=feature.geometry?.coordinates;
-  if(point&&Number.isFinite(Number(point[0]))&&Number.isFinite(Number(point[1]))){state.lng=String(point[0]);state.lat=String(point[1]);state.positionConfirmed=false}
+  if(!(state.positionSource==='manual'&&state.keepManualPosition!==false&&validPoint())&&point&&Number.isFinite(Number(point[0]))&&Number.isFinite(Number(point[1]))){state.lng=String(point[0]);state.lat=String(point[1]);state.positionConfirmed=false;state.positionSource='factory'}
   equipmentItems=equipmentEntries(equip);
   render();
-  if(validPoint())updateMap();
+  if(validPoint()){updateMap();loadDssNearby(Number(state.lat),Number(state.lng));loadWeather()}
   factoryLookup.value=p.comp_name||'';
   const choiceList=equipmentTool.details;
   choiceList.replaceChildren();
