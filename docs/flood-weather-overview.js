@@ -35,7 +35,7 @@ async function loadWarnings(){
  }catch{host.textContent='โหลดข่าวเตือนไม่ได้ในขณะนี้ · เปิดต้นฉบับจากกรมอุตุนิยมวิทยาได้ที่ปุ่มด้านบน';}
 }
 document.addEventListener('ieat-flood-estate-scope',event=>{weatherScope=event.detail;source.value=weatherScope?.active?weatherScope.name||'':'';loadWeather();});
-loadWeather();loadWarnings();setInterval(()=>{loadWeather();loadWarnings()},600000);
+loadWeather();loadWarnings();setInterval(()=>{loadWeather();loadWarnings()},3600000);
 })();
 
 }mount();})();
