@@ -61,7 +61,7 @@
  }
  document.addEventListener('ieat-river-scope',event=>{
   riverScope={river:event.detail.river,stations:event.detail.stations};
-  if(current){const m=scopedModel(model(current));if(!headerEstate&&!m.estates.some(e=>String(e.id)===selected))selected='';renderEstates();renderCharts(model(current));}
+  if(current){const m=scopedModel(model(current));if(!headerEstate&&!m.estates.some(e=>String(e.id)===selected))selected='';renderEstates();}
  });
 
 
@@ -84,6 +84,16 @@
  function mount(){
   const warning=$('warning');if(!warning||$('estateFocusDashboard'))return;
   const style=document.createElement('style');style.textContent=`#estateFocusDashboard .ef-map-head h2{font-size:20px!important}#estateFocusDashboard .ef-chart h2{color:#004a91!important}
+
+#estateFocusDashboard .ef-reservoir-panel h2{font-size:20px}
+#efReservoirProvince{width:100%;font:inherit;border:1px solid #cadcde;border-radius:8px;padding:8px;margin:8px 0 12px;background:white}
+#efReservoirList{display:grid;gap:8px;max-height:360px;overflow:auto}
+.ef-reservoir-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;text-align:left;border:1px solid #cadcde;border-radius:12px;background:#f9fcfc;padding:12px;font:inherit;width:100%;cursor:pointer}
+.ef-reservoir-row b{font-size:15px}.ef-reservoir-row small{display:block;font-size:12px}
+.ef-reservoir-percent{text-align:right;font-weight:700;font-size:22px}.ef-reservoir-percent span{display:block;font-size:11px;color:white!important;padding:3px 9px;border-radius:20px;margin-top:4px}
+.ef-reservoir-bar{grid-column:1/-1;height:6px;background:#cbd8d7;border-radius:6px;overflow:hidden}.ef-reservoir-bar i{display:block;height:100%;border-radius:6px}
+#efReservoirTime{display:block;font-size:11px;margin-top:10px;line-height:1.7}
+
    #estateFocusDashboard{font-family:"Sarabun",sans-serif;color:#253346;height:100%;min-height:0}
    #estateFocusDashboard *{box-sizing:border-box}
    .ef-workspace{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(360px,1fr);height:100%;gap:18px}
@@ -260,7 +270,7 @@
   const host=document.createElement('section');host.id='estateFocusDashboard';
   const metrics=[['efWatch','นิคมฯ เข้าเกณฑ์เฝ้าระวัง','ผลคัดกรองจากสถานีใกล้นิคมฯ'],['efWaterWatch','ใกล้ระดับน้ำเข้าเกณฑ์','สถานีระดับน้ำภายใน 30 กม.'],['efRainWatch','ใกล้ฝนเข้าเกณฑ์','ฝนสะสมมากกว่า 35 มม. ภายใน 30 กม.'],['efTotal','นิคมฯ / ท่าเรือในชุดข้อมูล','ตำแหน่งที่ใช้ประเมินจากข้อมูล กนอ.'],['ef24','ตำบลเฝ้าระวัง 24 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ'],['ef48','ตำบลเฝ้าระวัง 48 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ']];
   host.innerHTML=`<div class="ef-workspace"><div class="ef-data-column">
-   <div class="ef-charts"><article class="ef-chart"><h2>5 นิคมฯ ใกล้สถานีฝนสะสมสูงสุด</h2><div id="efRainRank"></div><p id="efRiverScopeNote">กำลังโหลดขอบเขตสายน้ำที่เลือก</p></article></div>
+   <section class="ef-panel ef-reservoir-panel"><h2>อ่างเก็บน้ำขนาดกลางในจังหวัด</h2><select id="efReservoirProvince" aria-label="เลือกจังหวัดอ่างเก็บน้ำ"><option value="กาญจนบุรี">กาญจนบุรี</option></select><div id="efReservoirList" role="status">กำลังโหลดข้อมูลอ่างเก็บน้ำ…</div><small id="efReservoirTime"></small></section>
    <section class="ef-panel ef-estate-panel"><h2>ติดตามนิคมฯ / ท่าเรือ</h2><div class="ef-tools"><input id="efSearch" list="efEstateOptions" type="search" aria-label="ค้นหาชื่อนิคมฯ / ท่าเรือ" placeholder="ค้นหาชื่อนิคมฯ / ท่าเรือ"><datalist id="efEstateOptions"></datalist><select id="efFilter" aria-label="กรองข้อมูลนิคมฯ"><option value="watch">เข้าเกณฑ์เฝ้าระวัง</option><option value="water">ใกล้ระดับน้ำเข้าเกณฑ์</option><option value="rain">ใกล้ฝนเข้าเกณฑ์</option><option value="all">ทุกนิคมฯ / ท่าเรือ</option></select></div><p id="efResultCount" class="ef-count"></p><div class="ef-selection" id="efSelection" hidden></div><div id="efEstates" class="ef-estates"></div></section>
    <div class="ef-warning"><details class="ef-panel" id="efDetails24"><summary>พื้นที่เฝ้าระวัง 24 ชั่วโมง</summary><div id="efWarning24"></div></details><details class="ef-panel" id="efDetails48"><summary>พื้นที่เฝ้าระวัง 48 ชั่วโมง</summary><div id="efWarning48"></div></details></div>
    </div><section class="ef-map-column"><button type="button" id="efMapExitFullscreen" aria-label="ออกจากแผนที่เต็มหน้าจอ">ย่อแผนที่ ↙</button><div class="ef-map-frame"><iframe id="estateFocusMap" title="แผนที่สถานการณ์น้ำและนิคมอุตสาหกรรม" src="flood-hydrology-map.html?v=20261006-local-feeds-35&amp;center=101,13&amp;scale=9244648" loading="eager"></iframe></div><footer class="ef-map-foot"><button type="button" id="efMapFullscreen" aria-pressed="false">เต็มหน้าจอ ↗</button><span>GISTDA ผ่าน Faonam: พื้นที่น้ำท่วมตามวันที่ภาพ · กรมอุตุฯ: เรดาร์คอมโพสิท พร้อมแหล่งสำรอง Faonam · RID GeoJSON: สถานีระดับน้ำ</span></footer></section></div>`;
@@ -315,12 +325,6 @@ $('efFilter').onchange=()=>renderEstates();
   function openCard(id){const filters={efWatch:'watch',efWaterWatch:'water',efRainWatch:'rain',efTotal:'all'};if(filters[id]){$('efFilter').value=filters[id];$('efSearch').value='';renderEstates();$('efSearch').scrollIntoView?.({behavior:'smooth',block:'center'});$('efSearch').focus?.()}else{const panel=$(id==='ef24'?'efDetails24':'efDetails48');if(panel){panel.open=true;panel.scrollIntoView?.({behavior:'smooth',block:'start'})}}}
   host.addEventListener('keydown',e=>{const card=e.target.closest('[data-ef-card]');if(card&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openCard(card.dataset.efCard)}});
   host.addEventListener('click',e=>{const card=e.target.closest('[data-ef-card]');if(card){openCard(card.dataset.efCard);return}const button=e.target.closest('[data-ef-lat]');if(!button)return;zoom(button.dataset.efLat,button.dataset.efLon);if(button.dataset.efEstate){const estate=(current.estates||[]).find(e=>String(e.id)===button.dataset.efEstate);if(estate){$('efSearch').value=estate.name;applyHeaderEstate(estate.name,true)}}});
- }
- function renderCharts(m){
-  m=scopedModel(m);set('efRiverScopeNote',headerEstate?'ฝนสะสมภายใน 30 กม. จาก '+headerEstate+' · หน่วย มม.':riverScope?'นิคมฯ ภายใน 30 กม. จากสถานีใน '+riverScope.river+' · ฝนสะสม 24 ชม. · หน่วย มม.':'กำลังโหลดขอบเขตสายน้ำที่เลือก');
-  if(!m.usable){$('efRainRank').innerHTML='<div class="ef-empty">ข้อมูลยังไม่ครบหรือยังไม่พร้อมประเมิน</div>';return}
-  const rank=m.estates.map(e=>{const values=m.rain.filter(r=>km(e,r)<=RADIUS).map(r=>Number(r.rainfall_mm));return {...e,rain:values.length?Math.max(...values):null}}).filter(e=>e.rain!==null).sort((a,b)=>b.rain-a.rain).slice(0,5),max=rank[0]?.rain||1;
-  $('efRainRank').innerHTML=rank.length?rank.map((e,i)=>`<button class="ef-rank-row" type="button" data-ef-estate="${esc(e.id)}" data-ef-lat="${e.lat}" data-ef-lon="${e.lon}" title="${esc(e.name)}: ${fmt(e.rain)} มม."><span>${esc(e.name.replace(/^นิคมอุตสาหกรรม/,''))}</span><div class="ef-rank-track"><b style="background:${['#6138f5','#008558','#ffaa00','#e64f00','#e6004d'][i]};width:${Math.max(12,e.rain/max*100)}%">${fmt(e.rain)}</b></div></button>`).join(''):'<div class="ef-empty">ไม่มีค่าฝนล่าสุดที่ใช้จัดอันดับได้</div>';
  }
  function renderEstates(){
   if(!current)return;const m=scopedModel(model(current)),q=$('efSearch').value.trim();
@@ -388,7 +392,7 @@ $('efFilter').onchange=()=>renderEstates();
   set('efTotal',m.complete?fmt(m.estates.length):'รอตรวจสอบ');
   [['efWatch',m.watch.length],['efRainWatch',m.watch.filter(e=>e.rain.length).length],['efWaterWatch',m.watch.filter(e=>e.water.length).length]].forEach(([id,n])=>set(id,m.usable?fmt(n):m.stale?'ข้อมูลย้อนหลัง':'ข้อมูลไม่ครบ'));
   set('ef24',m.warning24.available?fmt(m.warning24.rows.length):'ไม่มีข้อมูล');set('ef48',m.warning48.available?fmt(m.warning48.rows.length):'ไม่มีข้อมูล');
-  renderEstates();renderCharts(m);
+  renderEstates();
   const chosen=m.estates.find(e=>String(e.id)===selected);
 
   if(chosen)zoom(chosen.lat,chosen.lon);
@@ -408,7 +412,29 @@ $('efFilter').onchange=()=>renderEstates();
   catch(e){if(current){render({...current,status:'stale'});set('efResultCount','โหลดรอบใหม่ไม่สำเร็จ · แสดงข้อมูลเดิม')}else{set('efResultCount','โหลดข้อมูลไม่สำเร็จ ยังไม่สามารถสรุปสถานการณ์ได้')}}
   finally{busy=false;if($('efRefresh'))$('efRefresh').disabled=false}
  }
- function start(){mount();if(window.IEAT_THAIWATER_DATA)render(window.IEAT_THAIWATER_DATA);load();setInterval(load,3600000)}
+
+ let reservoirs=[],reservoirStamp='',reservoirBusy=false,reservoirError='';
+ function renderReservoirs(){
+  const select=$('efReservoirProvince'),list=$('efReservoirList');if(!select||!list)return;
+  const province=select.value;
+  const latest=reservoirs.filter(r=>num(r.percent)!==null&&Date.now()-timestamp(r.measured_at+'T00:00:00')<=72*3600000&&timestamp(r.measured_at+'T00:00:00')<=Date.now()+300000);
+  const provinces=[...new Set(latest.map(r=>r.province).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'th'));
+  select.innerHTML='<option value="">ทุกจังหวัด</option>'+provinces.map(p=>'<option value="'+esc(p)+'">'+esc(p)+'</option>').join('');
+  select.value=provinces.includes(province)?province:'';
+  const rows=latest.filter(r=>!select.value||r.province===select.value).sort((a,b)=>Number(b.percent)-Number(a.percent));
+  list.innerHTML=rows.length?rows.map(r=>{const p=Number(r.percent),color=p>=100?'#bd0824':p>=80?'#e07820':p>=30?'#215ddd':'#b88412',label=p>=100?'เกินความจุ':p>=80?'น้ำมาก':p>=30?'น้ำปานกลาง':'น้ำน้อย';return '<button type="button" class="ef-reservoir-row" data-reservoir-id="'+esc(r.id)+'" '+(r.lat==null||r.lng==null?'disabled':'')+'><div><b>'+esc(r.name)+'</b><small>จ.'+esc(r.province)+' · อ.'+esc(r.district)+'</small></div><div class="ef-reservoir-percent">'+Math.round(p)+'%<span style="background:'+color+'">'+label+'</span></div><div class="ef-reservoir-bar"><i style="width:'+Math.min(100,Math.max(0,p))+'%;background:'+color+'"></i></div><small>ข้อมูล '+esc(r.measured_at)+'</small></button>'}).join(''):'<p>ไม่พบข้อมูลอ่างเก็บน้ำล่าสุดในจังหวัดนี้</p>';
+  $('efReservoirTime').textContent='ข้อมูลรายวัน · สัดส่วนน้ำต่อความจุปกติ · ThaiWater / กรมชลประทาน · โหลดใหม่ทุก 1 ชั่วโมง'+(reservoirError?' · โหลดรอบใหม่ไม่สำเร็จ แสดงค่าครั้งก่อน':'');
+ }
+ async function loadReservoirs(){
+  if(reservoirBusy)return;reservoirBusy=true;
+  try{const r=await fetch('./data/medium_reservoirs_latest.json?v='+Math.floor(Date.now()/3600000),{cache:'no-store',signal:AbortSignal.timeout(15000)});if(!r.ok)throw Error(r.status);const d=await r.json();if(!Array.isArray(d.rows))throw Error('รูปแบบข้อมูลไม่ถูกต้อง');reservoirs=d.rows;reservoirStamp=d.fetched_at;reservoirError='';renderReservoirs();}
+  catch(e){reservoirError=e.message;if(reservoirs.length)renderReservoirs();else if($('efReservoirList'))$('efReservoirList').textContent='โหลดข้อมูลอ่างเก็บน้ำไม่สำเร็จ';}
+  finally{reservoirBusy=false;}
+ }
+ document.addEventListener('change',event=>{if(event.target.id==='efReservoirProvince')renderReservoirs()});
+ document.addEventListener('click',event=>{const b=event.target.closest('[data-reservoir-id]');if(!b)return;const r=reservoirs.find(r=>String(r.id)===b.dataset.reservoirId);if(r&&r.lat!=null&&r.lng!=null){zoom(r.lat,r.lng);}});
+
+ function start(){mount();loadReservoirs();setInterval(loadReservoirs,3600000);if(window.IEAT_THAIWATER_DATA)render(window.IEAT_THAIWATER_DATA);load();setInterval(load,3600000)}
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
 
