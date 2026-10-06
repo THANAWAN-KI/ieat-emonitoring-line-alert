@@ -340,7 +340,7 @@
   const metrics=[['efWatch','นิคมฯ เข้าเกณฑ์เฝ้าระวัง','ผลคัดกรองจากสถานีใกล้นิคมฯ'],['efWaterWatch','ใกล้ระดับน้ำเข้าเกณฑ์','สถานีระดับน้ำภายใน 30 กม.'],['efRainWatch','ใกล้ฝนเข้าเกณฑ์','ฝนสะสมมากกว่า 35 มม. ภายใน 30 กม.'],['efTotal','นิคมฯ / ท่าเรือในชุดข้อมูล','ตำแหน่งที่ใช้ประเมินจากข้อมูล กนอ.'],['ef24','ตำบลเฝ้าระวัง 24 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ'],['ef48','ตำบลเฝ้าระวัง 48 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ']];
   host.innerHTML=`<div class="ef-workspace"><div class="ef-data-column"><p id="efProvinceScopeNote" role="status" style="padding:12px;background:#eaf2f9;color:#003666;border-radius:10px">ข้อมูลทั่วประเทศ</p>
    <section class="ef-panel ef-related-dams"><h2>เขื่อนที่เกี่ยวข้อง</h2><div id="efRelatedDams" role="status">กำลังโหลดข้อมูลเขื่อน…</div></section><section class="ef-panel ef-reservoir-panel"><h2>อ่างเก็บน้ำขนาดกลางในจังหวัด</h2><select id="efReservoirProvince" aria-label="เลือกจังหวัดอ่างเก็บน้ำ" hidden style="display:none"><option value="กาญจนบุรี">กาญจนบุรี</option></select><div id="efReservoirList" role="status">กำลังโหลดข้อมูลอ่างเก็บน้ำ…</div><small id="efReservoirTime"></small></section>
-   <section class="ef-panel ef-estate-panel"><h2>ติดตามนิคมฯ / ท่าเรือ</h2><div class="ef-tools"><input id="efSearch" list="efEstateOptions" type="search" aria-label="ค้นหาชื่อนิคมฯ / ท่าเรือ" placeholder="ค้นหาชื่อนิคมฯ / ท่าเรือ"><datalist id="efEstateOptions"></datalist><select id="efFilter" aria-label="กรองข้อมูลนิคมฯ"><option value="watch">เข้าเกณฑ์เฝ้าระวัง</option><option value="water">ใกล้ระดับน้ำเข้าเกณฑ์</option><option value="rain">ใกล้ฝนเข้าเกณฑ์</option><option value="all">ทุกนิคมฯ / ท่าเรือ</option></select></div><p id="efResultCount" class="ef-count"></p><div class="ef-selection" id="efSelection" hidden></div><div id="efEstates" class="ef-estates"></div></section>
+   <section class="ef-panel ef-canal-panel" hidden><h2>คลอง กทม.</h2><div id="efCanalList"></div><small id="efCanalTime"></small></section><section class="ef-panel ef-estate-panel"><h2>ติดตามนิคมฯ / ท่าเรือ</h2><div class="ef-tools"><input id="efSearch" list="efEstateOptions" type="search" aria-label="ค้นหาชื่อนิคมฯ / ท่าเรือ" placeholder="ค้นหาชื่อนิคมฯ / ท่าเรือ"><datalist id="efEstateOptions"></datalist><select id="efFilter" aria-label="กรองข้อมูลนิคมฯ"><option value="watch">เข้าเกณฑ์เฝ้าระวัง</option><option value="water">ใกล้ระดับน้ำเข้าเกณฑ์</option><option value="rain">ใกล้ฝนเข้าเกณฑ์</option><option value="all">ทุกนิคมฯ / ท่าเรือ</option></select></div><p id="efResultCount" class="ef-count"></p><div class="ef-selection" id="efSelection" hidden></div><div id="efEstates" class="ef-estates"></div></section>
    <div class="ef-warning"><details class="ef-panel" id="efDetails24"><summary>พื้นที่เฝ้าระวัง 24 ชั่วโมง</summary><div id="efWarning24"></div></details><details class="ef-panel" id="efDetails48"><summary>พื้นที่เฝ้าระวัง 48 ชั่วโมง</summary><div id="efWarning48"></div></details></div>
    </div><section class="ef-map-column"><button type="button" id="efMapExitFullscreen" aria-label="ออกจากแผนที่เต็มหน้าจอ">ย่อแผนที่ ↙</button><div class="ef-map-frame"><iframe id="estateFocusMap" title="แผนที่สถานการณ์น้ำและนิคมอุตสาหกรรม" src="flood-hydrology-map.html?v=20261006-province-scope-45&amp;center=101,13&amp;scale=9244648" loading="eager"></iframe></div><footer class="ef-map-foot"><button type="button" id="efMapFullscreen" aria-pressed="false">เต็มหน้าจอ ↗</button><span>GISTDA ผ่าน Faonam: พื้นที่น้ำท่วมตามวันที่ภาพ · กรมอุตุฯ: เรดาร์คอมโพสิท พร้อมแหล่งสำรอง Faonam · RID GeoJSON: สถานีระดับน้ำ</span></footer></section></div>`;
   warning.prepend(host);
@@ -531,7 +531,33 @@ $('efFilter').onchange=()=>renderEstates();
  document.addEventListener('click',event=>{const b=event.target.closest('[data-related-dam]');if(!b)return;const r=relatedDams.find(r=>String(r.id)===b.dataset.relatedDam);if(r&&r.lat!=null&&r.lng!=null)zoom(r.lat,r.lng)});
  document.addEventListener('error',event=>{if(event.target.matches?.('[data-dam-camera]')){event.target.hidden=true;const text=document.createElement('small');text.textContent='กล้องต้นทางไม่ส่งภาพในขณะนี้';event.target.after(text)}},true);
 
- function start(){mount();loadRelatedDams();setInterval(loadRelatedDams,3600000);loadReservoirs();setInterval(loadReservoirs,3600000);if(window.IEAT_THAIWATER_DATA)render(window.IEAT_THAIWATER_DATA);load();setInterval(load,3600000)}
+
+ let canalRows=[],canalBusy=false,canalError='';
+ const canalText=v=>typeof v==='object'&&v!==null?String(v.th||v.en||''):String(v||'');
+ function renderCanals(){
+  const host=$('efCanalList');if(!host)return;
+  const rows=filterWaterScope(canalRows).filter(r=>num(r.wl)!==null&&Date.now()-timestamp(r.measured_at)<=86400000&&timestamp(r.measured_at)<=Date.now()+300000).sort((a,b)=>(scopeDistance(a)??Infinity)-(scopeDistance(b)??Infinity));
+  host.closest('.ef-canal-panel').hidden=!rows.length;
+  host.innerHTML=rows.map(r=>{
+   const overflow=r.bank!==null&&r.wl>=r.bank,critical=r.critical!==null&&r.wl>=r.critical,warning=r.warning!==null&&r.wl>=r.warning;
+   const color=overflow||critical?'#d9364d':warning?'#dd9c20':'#169b8f',label=overflow?'ล้นตลิ่ง':critical?'ถึงเกณฑ์วิกฤต':warning?'ถึงเกณฑ์เตือน':'ต่ำกว่าเกณฑ์เตือน';
+   return '<button type="button" class="ef-canal-card" data-canal-id="'+esc(r.id)+'"><b>'+esc(r.code)+' · '+esc(r.name)+'</b><span class="ef-canal-status" style="background:'+color+'">'+label+'</span><small>'+esc(r.district)+' · กรุงเทพมหานคร</small><strong style="color:'+color+'">ระดับน้ำ '+fmt(r.wl)+' ม.รทก.</strong><small>เกณฑ์เตือน '+fmt(r.warning)+' · วิกฤต '+fmt(r.critical)+' · ตลิ่ง '+fmt(r.bank)+' ม.รทก.</small>'+(r.outer!==null?'<small>ระดับน้ำด้านนอก '+fmt(r.outer)+' ม.รทก.</small>':'')+distanceLabel(r)+'<small>อัปเดต '+esc(time(r.measured_at))+'</small></button>';
+  }).join('');
+  $('efCanalTime').textContent='สำนักการระบายน้ำ กรุงเทพมหานคร ผ่าน Faonam · โหลดใหม่ทุก 1 ชั่วโมง'+(canalError?' · โหลดรอบใหม่ไม่สำเร็จ แสดงข้อมูลครั้งก่อน':'');
+ }
+ async function loadCanalsPanel(){
+  if(canalBusy)return;canalBusy=true;
+  try{
+   const response=await fetch('./data/bma_canal_latest.json?v='+Math.floor(Date.now()/3600000),{cache:'no-store',signal:AbortSignal.timeout(15000)});
+   if(!response.ok)throw Error('HTTP '+response.status);const data=await response.json();if(!Array.isArray(data.data))throw Error('รูปแบบข้อมูลคลองไม่ถูกต้อง');
+   canalRows=data.data.map(r=>{const t=r.station||{},g=r.geocode||{};return {id:t.id,code:t.canal_oldcode,name:canalText(t.canal_name),district:canalText(g.amphoe_name),province:canalText(g.province_name),lat:num(t.canal_lat),lng:num(t.canal_long),wl:num(r.canal_value),outer:num(r.canal_out),bank:num(t.bank),warning:num(t.warning_level),critical:num(t.critical_level),measured_at:r.canal_datetime}});
+   canalError='';renderCanals();
+  }catch(error){canalError=error.message;renderCanals()}finally{canalBusy=false}
+ }
+ document.addEventListener('ieat-flood-estate-scope',renderCanals);
+ document.addEventListener('click',event=>{const button=event.target.closest('[data-canal-id]');if(!button)return;const row=canalRows.find(r=>String(r.id)===button.dataset.canalId);if(row&&row.lat!==null&&row.lng!==null)zoom(row.lat,row.lng)});
+
+ function start(){mount();loadCanalsPanel();setInterval(loadCanalsPanel,3600000);loadRelatedDams();setInterval(loadRelatedDams,3600000);loadReservoirs();setInterval(loadReservoirs,3600000);if(window.IEAT_THAIWATER_DATA)render(window.IEAT_THAIWATER_DATA);load();setInterval(load,3600000)}
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
 
