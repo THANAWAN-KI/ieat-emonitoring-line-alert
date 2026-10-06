@@ -42,9 +42,35 @@ html,body,main.container,#warning,#estateFocusDashboard{height:100dvh!important;
 #estateFocusDashboard .ef-data-column{height:100%!important;max-height:100%!important;position:static!important;overflow-y:auto!important}
 #estateFocusDashboard .ef-map-column{height:100%!important;min-height:0!important}
 }
+
+/* Readable flood dashboard typography and the four-color water theme. */
+#estateFocusDashboard{font-size:17px!important}
+#estateFocusDashboard .ef-panel>h2,#estateFocusDashboard #riverSidePanel h3,#estateFocusDashboard .rp-stations-title{font-size:19px!important}
+#estateFocusDashboard .ef-panel p,#estateFocusDashboard .ef-panel small,#estateFocusDashboard #riverSidePanel p,#estateFocusDashboard #riverSidePanel small{font-size:13px!important;line-height:1.7}
+#estateFocusDashboard #riverSidePanel .rp-station-top b{font-size:18px!important}
+#estateFocusDashboard #riverSidePanel .rp-station-content strong{font-size:19px!important}
+#estateFocusDashboard .rp-stations-title,#estateFocusDashboard #rpCards .rp-station-content,#estateFocusDashboard #rpCards .rp-station-content :not(em){color:#003666!important}
+#estateFocusDashboard .rp-stations-title{background:#eaf2f9!important}
+#estateFocusDashboard .ef-dam-card,#estateFocusDashboard .ef-reservoir-row{--water-bg:#edf5fc;--water-ink:#003666;background:var(--water-bg)!important;border:1px solid var(--water-accent)!important;border-left:4px solid var(--water-accent)!important}
+#estateFocusDashboard [data-water-theme="red"]{--water-bg:#fff0f1;--water-ink:#8b1117}
+#estateFocusDashboard [data-water-theme="yellow"]{--water-bg:#fff9e5;--water-ink:#715300}
+#estateFocusDashboard [data-water-theme="orange"]{--water-bg:#fff2e7;--water-ink:#873c00}
+#estateFocusDashboard [data-water-theme="unknown"]{--water-bg:#f2f5f8;--water-ink:#405466}
+#estateFocusDashboard .ef-dam-card,#estateFocusDashboard .ef-dam-card h3,#estateFocusDashboard .ef-dam-card p,#estateFocusDashboard .ef-dam-card small,#estateFocusDashboard .ef-dam-card b,#estateFocusDashboard .ef-dam-card .ef-dam-value,#estateFocusDashboard .ef-reservoir-row,#estateFocusDashboard .ef-reservoir-row *{color:var(--water-ink)!important}
+#estateFocusDashboard .ef-dam-card h3,#estateFocusDashboard .ef-reservoir-row b{font-size:17px!important}
+#estateFocusDashboard .ef-dam-value{font-size:30px!important}
+#estateFocusDashboard .ef-dam-flows div,#estateFocusDashboard .ef-dam-change{background:#ffffffa6!important}
+#estateFocusDashboard .ef-dam-flows b{font-size:20px!important}
+#estateFocusDashboard .ef-dam-card button{background:var(--water-accent)!important;color:var(--water-ink)!important;font-size:13px!important}
+#estateFocusDashboard .ef-dam-card[data-water-theme="blue"] button,#estateFocusDashboard .ef-dam-card[data-water-theme="red"] button,#estateFocusDashboard .ef-dam-card[data-water-theme="orange"] button{color:#fff!important}
+#estateFocusDashboard .ef-reservoir-percent span{background:var(--water-accent)!important;color:#fff!important}
+#estateFocusDashboard .ef-reservoir-row[data-water-theme="yellow"] .ef-reservoir-percent span{color:#715300!important}
+#estateFocusDashboard .ef-reservoir-bar{background:#ffffffb3!important}
+#estateFocusDashboard .ef-reservoir-bar i{background:var(--water-accent)!important}
+#estateFocusDashboard #floodWeatherOverview .forecast-card{font-size:14px}
 </style>
 <script src="flood-rid-source.js?v=20261006-rid-17" defer></script>
-<script src="flood-estate-dashboard.js?v=20261006-all-water-cards-41" defer></script>
+<script src="flood-estate-dashboard.js?v=20261006-water-theme-42" defer></script>
 <script src="flood-river-panel.js?v=20261006-stations-open-40" defer></script>
 <script src="flood-weather-overview.js?v=20261006-svg-weather-37" defer></script>
 </head>
