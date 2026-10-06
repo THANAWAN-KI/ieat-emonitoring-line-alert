@@ -72,6 +72,18 @@ html,body,main.container,#warning,#estateFocusDashboard{height:100dvh!important;
 /* Bank-gap values follow the supplied water-level legend. */
 #estateFocusDashboard #riverSidePanel #rpCards .rp-station-content strong{color:var(--rp-status-color)!important}
 #estateFocusDashboard #riverSidePanel #rpCards .rp-station-top em{color:#fff!important}
+
+/* White dam cards, soft map buttons, and pale reservoir status cards. */
+#estateFocusDashboard #efRelatedDams .ef-dam-card{background:#fff!important}
+#estateFocusDashboard #efRelatedDams .ef-dam-card button,
+#estateFocusDashboard #efRelatedDams .ef-dam-card[data-water-theme] button{background:var(--water-bg)!important;color:var(--water-ink)!important;border:1px solid var(--water-accent)!important}
+#estateFocusDashboard #efReservoirList .ef-reservoir-row,
+#estateFocusDashboard #efReservoirList .ef-reservoir-row[data-high],
+#estateFocusDashboard #efReservoirList .ef-reservoir-row[data-water-theme]{background:var(--water-bg)!important;border-color:var(--water-accent)!important;color:var(--water-ink)!important}
+#estateFocusDashboard #efReservoirList .ef-reservoir-row *{color:var(--water-ink)!important}
+#estateFocusDashboard #efReservoirList .ef-reservoir-percent span{background:#ffffffaa!important;color:var(--water-ink)!important;border:1px solid var(--water-accent)}
+#estateFocusDashboard #efReservoirList .ef-reservoir-bar{background:#dce5ed!important;height:8px}
+#estateFocusDashboard #efReservoirList .ef-reservoir-bar i{background:var(--water-accent)!important}
 </style>
 <script src="flood-rid-source.js?v=20261006-rid-17" defer></script>
 <script src="flood-estate-dashboard.js?v=20261006-water-theme-42" defer></script>
