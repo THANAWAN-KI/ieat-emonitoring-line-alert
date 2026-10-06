@@ -1,0 +1,30 @@
+name: Refresh Faonam river stations
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: faonam-river-feed
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Refresh named river stations
+        run: python scripts/refresh_faonam_rivers.py
+      - name: Commit updated feed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data/faonam_rivers_latest.json
+          if ! git diff --cached --quiet; then
+            git commit -m "data: refresh Faonam river stations"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
