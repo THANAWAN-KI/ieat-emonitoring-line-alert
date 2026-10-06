@@ -95,7 +95,7 @@
  tick();setInterval(tick,60000);
  function close(){pop.hidden=true;button.setAttribute('aria-expanded','false')}
  function render(){
-  const options=Array.from(source.options),term=search.value.trim().toLocaleLowerCase('th');
+  const options=Array.from(source.options).filter(o=>!/ข้อมูลจาก\s*e[\s_-]*portal/i.test(o.textContent)),term=search.value.trim().toLocaleLowerCase('th');
   get('disasterScopeLabel').textContent=source.value?(options.find(o=>o.value===source.value)?.textContent||'พื้นที่นิคมอุตสาหกรรมทั่วประเทศ'):'พื้นที่นิคมอุตสาหกรรมทั่วประเทศ';
   list.replaceChildren();
   options.filter(o=>!o.value||o.textContent.toLocaleLowerCase('th').includes(term)).forEach(o=>{
