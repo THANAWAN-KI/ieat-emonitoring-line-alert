@@ -60,6 +60,13 @@ body.toolbar-above:has(.leaflet-popup) .controls,body.toolbar-above:has(.maplibr
 #mapCompass svg{width:22px;height:24px;transition:transform .15s}#mapCompass:hover{background:#f6f1fa}#mapCompass:focus-visible{outline:3px solid #854c9e}
 .water-map-label{background:transparent;border:0;box-shadow:none;color:#193b43;text-shadow:-1px -1px 0 white,1px -1px 0 white,-1px 1px 0 white,1px 1px 0 white,0 0 4px white;font:700 11px/1.15 Sarabun,sans-serif;text-align:center;padding:0}.water-map-label:before{display:none}
 .sensor-marker{width:24px;height:24px;border:2px solid white;border-radius:50%;box-shadow:0 1px 5px #193b4355;display:grid;place-items:center}.sensor-marker svg{width:17px;height:17px;display:block}.sensor-marker:focus-visible{outline:3px solid #0072cf}.sensor-marker .estate-name{top:27px}.sensor-marker:hover .estate-name,.sensor-marker:focus-visible .estate-name{display:block}
+.water-history-open{width:100%;margin:12px 0 4px;border:0;border-radius:10px;background:#eaf2fd;color:#00387b;padding:10px 12px;font:700 13px Sarabun,sans-serif;cursor:pointer}.water-history-open:hover{background:#dceafd}.water-history-open:focus-visible{outline:3px solid #0072cf;outline-offset:2px}
+#waterHistoryPanel{position:absolute;right:12px;bottom:12px;z-index:1600;width:min(540px,calc(100vw - 24px));max-height:min(78vh,720px);overflow:auto;background:#fff;border:1px solid #cbd9e6;border-radius:18px;box-shadow:0 12px 40px #173a4340;padding:16px;color:#163844}#waterHistoryPanel[hidden]{display:none}
+.wh-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;position:sticky;top:-16px;background:#fff;padding:2px 0 10px;z-index:2}.wh-head h3{font-size:18px;margin:0;color:#00387b}.wh-head small{display:block;margin-top:3px;color:#607d91}.wh-close{border:0;background:#eef3f7;border-radius:50%;width:38px;height:38px;cursor:pointer;font:700 20px Sarabun,sans-serif;flex:none}
+.wh-years{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:8px 0 12px}.wh-years button{border:1px solid #c7d8e7;background:#f7fafc;border-radius:9px;padding:9px 4px;font:600 13px Sarabun,sans-serif;cursor:pointer}.wh-years button[aria-pressed="true"]{background:#0072cf;color:#fff;border-color:#0072cf}
+.wh-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:10px 0}.wh-stat{background:#f3f7fa;border-radius:10px;padding:9px;min-width:0}.wh-stat small{display:block;font-size:10px;color:#66808f}.wh-stat b{display:block;font-size:16px;margin-top:3px;overflow-wrap:anywhere}
+.wh-chart{border:1px solid #dbe5ed;border-radius:12px;background:#fbfdff;padding:8px;overflow:hidden}.wh-chart svg{width:100%;height:auto;display:block}.wh-chart text{font-family:Sarabun,sans-serif;fill:#607d91;font-size:10px}.wh-note{font-size:11px;line-height:1.65;color:#607d91;margin:10px 0}.wh-actions{display:flex;gap:8px;flex-wrap:wrap}.wh-actions button{border:1px solid #bdd0df;background:#f5f9fc;border-radius:9px;padding:9px 11px;font:600 12px Sarabun,sans-serif;cursor:pointer}.wh-empty{padding:28px 12px;text-align:center;line-height:1.7;color:#607d91}
+@media(max-width:600px){#waterHistoryPanel{left:6px;right:6px;bottom:6px;width:auto;max-height:72vh;border-radius:15px;padding:12px}.wh-head{top:-12px}.wh-years{gap:4px}.wh-years button{font-size:12px;padding:8px 2px}.wh-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.wh-stat b{font-size:15px}}
 </style>
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script></head>
 <body><div id="mapStage"><div id="map" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div><div id="raster" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div></div>
@@ -69,6 +76,11 @@ body.toolbar-above:has(.leaflet-popup) .controls,body.toolbar-above:has(.maplibr
 <label><input data-layer="dam" type="checkbox" checked>เขื่อน<span class="layer-swatch" style="background:#169b8f" aria-hidden="true"></span></label><label><input data-layer="camera" type="checkbox" checked>CCTV ริมน้ำ<span class="layer-swatch" style="background:#475569" aria-hidden="true"></span></label><label><input data-layer="boundary" type="checkbox" checked>ขอบเขตนิคมฯ<span class="layer-swatch" style="background:#754bad" aria-hidden="true"></span></label><label><input data-layer="estate" type="checkbox" checked>นิคมฯ<span class="layer-swatch" style="background:#754bad" aria-hidden="true"></span></label><label><input data-layer="satellite" type="checkbox" checked>น้ำท่วมจากดาวเทียม<span class="layer-swatch" style="background:#268fbf" aria-hidden="true"></span></label><label><input data-layer="radar" type="checkbox" checked>ฝนจากเรดาร์ (กรมอุตุฯ)<span class="layer-swatch" style="background:#54a431" aria-hidden="true"></span></label>
 <p style="font-size:11px;color:#536576;margin:10px 0 0">ระดับน้ำมีป้ายรหัสสถานีและระยะเทียบตลิ่ง · ซูมเข้าเพื่อแยกจุดที่อยู่ใกล้กัน</p></div></div></details><details class="legend" id="mapLegend"><summary>คำอธิบายสัญลักษณ์</summary><div class="legend-body"><p id="boundaryInfo" aria-live="polite">ขอบเขตนิคมฯ: กนอ. · กำลังโหลด</p><div id="mapDataAudit" style="font-size:12px;line-height:1.7;margin:6px 0" aria-live="polite">กำลังตรวจรอบข้อมูล…</div><div id="remoteOverlayInfo" style="font-size:12px;background:#fff;padding:6px;border-radius:6px;max-width:510px" aria-live="polite"></div><div class="keys"><span><i class="dot" style="background:#d9364d"></i>ล้นตลิ่ง</span><span><i class="dot" style="background:#dd9c20"></i>ใกล้ตลิ่ง</span><span><i class="dot" style="background:#169b8f"></i>ต่ำกว่าตลิ่ง</span></div><div id="tmdRadarKey" class="radar-key" hidden>ความเข้มฝนจากเรดาร์คอมโพสิท (มม./ชม.)<div class="radar-key-bar"><i style="background:#54A431"></i><i style="background:#5EB738"></i><i style="background:#66C43C"></i><i style="background:#66C43C"></i><i style="background:#69CB5A"></i><i style="background:#73DE45"></i><i style="background:#7BEC4B"></i><i style="background:#F3F453"></i><i style="background:#DEDF4B"></i><i style="background:#D6D648"></i><i style="background:#F1C946"></i><i style="background:#D79C37"></i><i style="background:#D79C37"></i><i style="background:#E3622A"></i><i style="background:#D43320"></i><i style="background:#CA325D"></i><i style="background:#B72D54"></i><i style="background:#B72D54"></i><i style="background:#E345F5"></i><i style="background:#EA8CF8"></i><i style="background:#F3CBFA"></i><i style="background:#EFE6F1"></i><i style="background:#EFE6F1"></i></div><div class="radar-key-labels"><span>0.2</span><span>2.1</span><span>12.5</span><span>52.2</span><span>218</span><span>&gt;636</span></div></div><p>วงแดงกระพริบ: สถานีล้นตลิ่ง (ข้อมูลล่าสุด)<br>วงสีน้ำเงิน: ปริมาณน้ำไหลผ่านของสถานีอื่น<br>พื้นที่สีฟ้า: น้ำท่วมจากดาวเทียม GISTDA ตามวันที่ภาพ ไม่ใช่สถานการณ์สดทุกจุด<br>เรดาร์: ความเข้มฝนขณะตรวจวัด (มม./ชม.) ไม่ใช่ฝนสะสม · <a href="https://weather.tmd.go.th/composite/index_composite.html" target="_blank" rel="noopener">กรมอุตุฯ</a><br>หมุดม่วง: นิคมฯ · ไอคอนกล้องสีเทา: CCTV<br>ไอคอนเขื่อน: สีแสดงสัดส่วนน้ำเก็บกัก<br>ชี้หรือคลิกหมุดเพื่อดูชื่อและรายละเอียด<br>สีสถานีใช้ค่าจุดวัด ไม่ใช่ขอบเขตน้ำท่วม</p><p>ลูกศร → แสดงทิศปลายน้ำตามแนวแม่น้ำที่บันทึกใน OpenStreetMap ไม่ใช่กระแสสดหรือความเร็วที่ตรวจวัด ครอบคลุมแม่น้ำหลักที่มีข้อมูล · เส้นที่ระบุว่าไหลกลับได้ไม่แสดงลูกศร<br><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors · ODbL</a></p></div></details></div>
 <div style="position:absolute;bottom:105px;left:12px;z-index:999;background:#fffffff0;padding:4px 8px;border-radius:6px;font-size:11px;pointer-events:none">→ ทิศปลายน้ำตามแผนที่ OSM · ไม่ใช่กระแสสด</div><div class="status" id="status" role="status">กำลังโหลดแผนที่และสถานี…</div>
+<aside id="waterHistoryPanel" hidden aria-live="polite" aria-label="กราฟระดับน้ำย้อนหลัง">
+  <div class="wh-head"><div><h3 id="whTitle">ระดับน้ำย้อนหลัง</h3><small id="whSubtitle">ThaiWater / HII</small></div><button class="wh-close" id="whClose" type="button" aria-label="ปิดกราฟย้อนหลัง">×</button></div>
+  <div class="wh-years" id="whYears"></div>
+  <div id="whBody"><div class="wh-empty">เลือกสถานีบนแผนที่เพื่อดูข้อมูลย้อนหลัง</div></div>
+</aside>
 <script src="flood-rid-source.js?v=20261006-rid-17"></script>
 <script>
 (function(){
@@ -96,12 +108,76 @@ function date(v){let s=String(v||'').replace(' ','T');if(/^\d{4}-\d{2}-\d{2}$/.t
 function old(r,k){if(k==='estate'||k==='camera')return false;const a=Date.now()-date(r.measured_at);return !Number.isFinite(a)||a< -300000||a>(k==='dam'?72:6)*3600000||Boolean(r.stale)}
 function color(r,k){if(k==='camera')return r.reported_online===false?'#82959b':'#475569';if(k==='estate')return '#754bad';if(old(r,k))return '#82959b';if(k==='canal')return r.wl==null?'#82959b':r.bank!=null&&r.wl>=r.bank||r.critical!=null&&r.wl>=r.critical?'#d62839':r.warning!=null&&r.wl>=r.warning?'#1f5fd1':'#2e9e5b';if(k==='water'&&r.source_name==='RID GeoJSON')return r.status==='ล้นตลิ่ง'?'#d9364d':r.status==='ใกล้ตลิ่ง'?'#dd9c20':'#169b8f';if(k==='water')return r.wl==null||r.diff==null?'#82959b':r.diff>=0?'#d9364d':(r.situation_level!=null?[3,4].includes(Number(r.situation_level)):r.diff>-.5)?'#dd9c20':'#169b8f';if(k==='dam')return r.percent==null?'#82959b':r.percent>=100?'#d9364d':r.percent>=80?'#dd9c20':'#169b8f';return k==='estate'?'#754bad':k==='camera'?'#754bad':'#248fb3'}
 function valid(r){return r.lat!=null&&r.lng!=null&&Number.isFinite(Number(r.lat))&&Number.isFinite(Number(r.lng))&&r.lat>=5&&r.lat<=21&&r.lng>=97&&r.lng<=106}
+
+const waterHistory={index:null,years:new Map(),code:'',year:2026};
+const whVersion='20261006-history-1';
+const whCode=v=>String(v||'').trim();
+async function loadHistoryIndex(){
+ if(waterHistory.index)return waterHistory.index;
+ const r=await fetch('./data/water-history/index.json?v='+whVersion,{cache:'no-store',signal:AbortSignal.timeout(15000)});
+ if(!r.ok)throw Error('โหลดทะเบียนสถานีไม่สำเร็จ');
+ waterHistory.index=await r.json();return waterHistory.index;
+}
+async function loadHistoryYear(year){
+ if(waterHistory.years.has(year))return waterHistory.years.get(year);
+ const r=await fetch('./data/water-history/waterlevel_'+year+'.json?v='+whVersion,{cache:'no-store',signal:AbortSignal.timeout(25000)});
+ if(!r.ok)throw Error('โหลดข้อมูลปี '+year+' ไม่สำเร็จ');
+ const data=await r.json();waterHistory.years.set(year,data);return data;
+}
+function whFmt(v,d=2){return v==null||!Number.isFinite(Number(v))?'–':Number(v).toLocaleString('th-TH',{maximumFractionDigits:d})}
+function whEscapeCsv(v){const s=String(v??'');return '"'+s.replace(/"/g,'""')+'"'}
+function whDownload(code,year,station){
+ const rows=[['date','daily_min_m_msl','daily_max_m_msl','daily_avg_m_msl','raw_values']];
+ (station.days||[]).forEach(d=>rows.push(d));
+ const csv='\uFEFF'+rows.map(r=>r.map(whEscapeCsv).join(',')).join('\r\n');
+ const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+ a.href=url;a.download='thaiwater_'+code+'_'+year+'_daily.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);
+}
+function whChart(station,year){
+ const days=station.days||[];if(!days.length)return '<div class="wh-empty">ไม่มีค่าระดับน้ำที่ ThaiWater ส่งกลับสำหรับปี '+year+'</div>';
+ const W=720,H=300,L=48,R=704,T=20,B=252;
+ const vals=days.flatMap(d=>[Number(d[1]),Number(d[2]),Number(d[3])]).filter(Number.isFinite);
+ let lo=Math.min(...vals),hi=Math.max(...vals);if(hi===lo){hi+=.5;lo-=.5}const pad=Math.max(.08,(hi-lo)*.08);lo-=pad;hi+=pad;
+ const start=Date.parse(year+'-01-01T00:00:00+07:00'),end=Date.parse(year+'-12-31T23:59:59+07:00'),span=end-start;
+ const x=d=>L+(Date.parse(d+'T12:00:00+07:00')-start)/span*(R-L),y=v=>B-(v-lo)/(hi-lo)*(B-T);
+ const ticks=Array.from({length:5},(_,i)=>lo+(hi-lo)*i/4);
+ const monthTicks=Array.from({length:12},(_,i)=>({x:L+i/11*(R-L),label:['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'][i]}));
+ const groups=[];let group=[];let previous=null;
+ days.forEach(d=>{const at=Date.parse(d[0]+'T12:00:00+07:00');if(previous!==null&&at-previous>4*86400000){if(group.length)groups.push(group);group=[]}group.push(d);previous=at});if(group.length)groups.push(group);
+ const bands=groups.map(g=>{const top=g.map((d,i)=>(i?'L':'M')+x(d[0]).toFixed(1)+' '+y(Number(d[2])).toFixed(1)).join(' '),bottom=g.slice().reverse().map(d=>'L'+x(d[0]).toFixed(1)+' '+y(Number(d[1])).toFixed(1)).join(' ');return '<path d="'+top+' '+bottom+' Z" fill="#9cc9ee" opacity=".34"/>'}).join('');
+ const lines=groups.map(g=>'<path d="'+g.map((d,i)=>(i?'L':'M')+x(d[0]).toFixed(1)+' '+y(Number(d[3])).toFixed(1)).join(' ')+'" fill="none" stroke="#0072cf" stroke-width="2"/>').join('');
+ return '<div class="wh-chart"><svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="กราฟระดับน้ำรายวัน '+year+'">'+ticks.map(v=>'<path d="M'+L+' '+y(v)+'H'+R+'" stroke="#e2e9ef"/><text x="'+(L-6)+'" y="'+(y(v)+4)+'" text-anchor="end">'+whFmt(v,1)+'</text>').join('')+monthTicks.map(m=>'<text x="'+m.x+'" y="276" text-anchor="middle">'+m.label+'</text>').join('')+bands+lines+'<text x="8" y="12">ม.รทก.</text></svg></div>';
+}
+async function renderWaterHistory(){
+ const panel=$('waterHistoryPanel'),body=$('whBody'),years=$('whYears');if(!panel||!body||!years)return;
+ const code=waterHistory.code,year=waterHistory.year;panel.hidden=false;
+ years.innerHTML=[2023,2024,2025,2026].map(y=>'<button type="button" data-wh-year="'+y+'" aria-pressed="'+(y===year)+'">'+y+'</button>').join('');
+ body.innerHTML='<div class="wh-empty">กำลังโหลดข้อมูลย้อนหลัง '+esc(code)+' ปี '+year+'…</div>';
+ try{
+  const index=await loadHistoryIndex(),meta=index.stations?.[code];
+  $('whTitle').textContent='ระดับน้ำย้อนหลัง '+code;
+  $('whSubtitle').textContent=meta?.name?[meta.name,meta.province].filter(Boolean).join(' · '):'ThaiWater / HII';
+  if(!meta||meta.station_id==null){body.innerHTML='<div class="wh-empty">สถานี '+esc(code)+' ยังไม่มี station_id ใน catalogue ปัจจุบันของ ThaiWater จึงยังไม่มีข้อมูลย้อนหลังในชุดนี้</div>';return}
+  const data=await loadHistoryYear(year),st=data.stations?.[code];
+  if(!st||!st.days?.length){body.innerHTML='<div class="wh-empty">ไม่พบข้อมูลย้อนหลังของ '+esc(code)+' ในปี '+year+'</div>';return}
+  body.innerHTML='<div class="wh-stats"><div class="wh-stat"><small>ต่ำสุด</small><b>'+whFmt(st.min)+' ม.</b></div><div class="wh-stat"><small>สูงสุด</small><b>'+whFmt(st.max)+' ม.</b></div><div class="wh-stat"><small>เฉลี่ย</small><b>'+whFmt(st.avg)+' ม.</b></div><div class="wh-stat"><small>ค่าดิบ</small><b>'+Number(st.count||0).toLocaleString('th-TH')+' จุด</b></div></div>'+whChart(st,year)+'<p class="wh-note">เส้นสีน้ำเงิน = ค่าเฉลี่ยรายวัน · พื้นที่สีฟ้า = ช่วงต่ำสุด–สูงสุดของวัน · สถิติด้านบนคำนวณจากค่าดิบทั้งหมดที่ ThaiWater ส่งกลับในปีนั้น · ช่องว่างหมายถึงไม่มีค่าที่ใช้ได้ในชุดข้อมูล</p><div class="wh-actions"><button type="button" data-wh-download>ดาวน์โหลดสรุปรายวัน CSV</button></div>';
+ }catch(e){body.innerHTML='<div class="wh-empty">โหลดข้อมูลย้อนหลังไม่สำเร็จ<br><small>'+esc(e.message)+'</small></div>'}
+}
+async function openWaterHistory(code){waterHistory.code=whCode(code);waterHistory.year=2026;await renderWaterHistory()}
+$('whClose').onclick=()=>{$('waterHistoryPanel').hidden=true};
+document.addEventListener('click',e=>{
+ const open=e.target.closest('[data-water-history-code]');if(open){e.preventDefault();openWaterHistory(open.dataset.waterHistoryCode);return}
+ const y=e.target.closest('[data-wh-year]');if(y){waterHistory.year=Number(y.dataset.whYear);renderWaterHistory();return}
+ const d=e.target.closest('[data-wh-download]');if(d){const data=waterHistory.years.get(waterHistory.year),st=data?.stations?.[waterHistory.code];if(st)whDownload(waterHistory.code,waterHistory.year,st)}
+});
+
 function waterPopup(r){
  const wl=r.wl==null?null:Number(r.wl),bank=r.bank==null?null:Number(r.bank),has=wl!==null&&bank!==null&&Number.isFinite(wl)&&Number.isFinite(bank),diff=has?wl-bank:null,overflow=has&&diff>=0,c=overflow?'#de233b':r.status==='ใกล้ตลิ่ง'?'#dd9c20':'#16849a';
  const lo=has?Math.floor(Math.min(wl,bank))-1:0,hi=has?Math.ceil(Math.max(wl,bank))+1:1,y=v=>230-(v-lo)/(hi-lo)*200;
  const gauge=has?'<svg viewBox="0 0 105 258" role="img" aria-label="ระดับน้ำ '+esc(fmt(wl))+' เทียบตลิ่ง '+esc(fmt(bank))+' เมตร รทก."><rect x="30" y="30" width="42" height="200" rx="2" fill="#ecf5f5" stroke="#153d43" stroke-width="1.5"/><rect x="31" y="'+y(wl).toFixed(1)+'" width="40" height="'+(230-y(wl)).toFixed(1)+'" fill="'+c+'" opacity=".85"/>'+Array.from({length:11},(_,i)=>{const v=lo+(hi-lo)*i/10,yy=y(v);return '<path d="M'+(i%5===0?44:56)+' '+yy.toFixed(1)+' H71" stroke="'+c+'" stroke-width="1"/>'+(i%5===0?'<text x="24" y="'+(yy+4).toFixed(1)+'" text-anchor="end" font-size="10" fill="#153d43">'+fmt(v)+'</text>':'')}).join('')+'<path d="M15 '+y(bank).toFixed(1)+' H85" stroke="#de233b" stroke-width="3"/><text x="78" y="'+(y(bank)-5).toFixed(1)+'" font-size="9" fill="#de233b">ตลิ่ง</text><text x="50" y="249" text-anchor="middle" font-size="9">ม.รทก.</text></svg>':'<p>ไม่มีระดับตลิ่งให้เทียบ</p>';
  const delta=r.delta==null?null:Number(r.delta),trend=r.trend_text?({'เพิ่มขึ้น':'▲ เพิ่มขึ้น','ลดลง':'▼ ลดลง','คงที่':'→ ทรงตัว'}[r.trend_text]||esc(r.trend_text)):Number.isFinite(delta)?(delta>0?'▲ เพิ่มขึ้น ':delta<0?'▼ ลดลง ':'→ ทรงตัว ')+fmt(Math.abs(delta))+' ม. เทียบค่าก่อนหน้า':r.previous!=null&&Number.isFinite(wl)?(wl>Number(r.previous)?'▲ เพิ่มขึ้น ':wl<Number(r.previous)?'▼ ลดลง ':'→ ทรงตัว ')+fmt(Math.abs(wl-Number(r.previous)))+' ม. เทียบค่าก่อนหน้า':'ไม่มีค่าแนวโน้ม';
- return '<div class="popup water-popup"><h3>'+esc((r.oldcode||r.code||'')+' · '+r.name)+'</h3><small>'+esc([r.province,r.district,r.river].filter(Boolean).join(' · '))+'</small><p><b>ระดับปัจจุบัน '+(Number.isFinite(wl)?fmt(wl)+' ม.รทก.':'ไม่มีค่า')+'</b></p><div class="water-gauge-layout">'+gauge+'<div><div class="water-gap" style="color:'+c+'">'+esc(has?(overflow?'ล้นตลิ่ง ':c==='#dd9c20'?'ใกล้ตลิ่ง ':'ต่ำกว่าตลิ่ง ')+fmt(Math.abs(diff))+' ม.':'ไม่มีระดับตลิ่ง')+'</div><div class="water-level">'+(Number.isFinite(wl)?fmt(wl)+' <small>ม.รทก.</small>':'ไม่มีค่า')+'</div><p>'+esc(trend)+'</p><small>ตลิ่ง '+(Number.isFinite(bank)?fmt(bank)+' ม.รทก.':'ไม่มีค่า')+'</small><p>'+esc(r.measured_at?new Date(date(r.measured_at)).toLocaleString('th-TH',{timeZone:'Asia/Bangkok',dateStyle:'short',timeStyle:'short'}):'ไม่ระบุเวลา')+' (ไทย)<br>'+esc(old(r,'water')||r.stale?'ข้อมูลย้อนหลัง / รอบข้อมูลไม่พร้อม':'เวลาตรวจวัดล่าสุดในชุดข้อมูล')+'</p></div></div><p>น้ำไหลผ่าน '+(r.discharge==null?'ไม่มีค่าตรวจวัด':fmt(r.discharge)+' ลบ.ม./วินาที')+'</p><small>ข้อมูล: '+esc(r.source_name||'RID GeoJSON')+' · <a href="'+esc(r.source_url||window.IEAT_RID.url)+'" target="_blank" rel="noopener">ข้อมูลต้นทาง</a>'+(r.bank_derived?'<br>ระดับตลิ่งคำนวณจากระดับน้ำ − ระยะจากตลิ่ง':'')+'</small></div>';
+ const historyCode=whCode(r.oldcode||r.code||'');
+ return '<div class="popup water-popup"><h3>'+esc((r.oldcode||r.code||'')+' · '+r.name)+'</h3><small>'+esc([r.province,r.district,r.river].filter(Boolean).join(' · '))+'</small><p><b>ระดับปัจจุบัน '+(Number.isFinite(wl)?fmt(wl)+' ม.รทก.':'ไม่มีค่า')+'</b></p><div class="water-gauge-layout">'+gauge+'<div><div class="water-gap" style="color:'+c+'">'+esc(has?(overflow?'ล้นตลิ่ง ':c==='#dd9c20'?'ใกล้ตลิ่ง ':'ต่ำกว่าตลิ่ง ')+fmt(Math.abs(diff))+' ม.':'ไม่มีระดับตลิ่ง')+'</div><div class="water-level">'+(Number.isFinite(wl)?fmt(wl)+' <small>ม.รทก.</small>':'ไม่มีค่า')+'</div><p>'+esc(trend)+'</p><small>ตลิ่ง '+(Number.isFinite(bank)?fmt(bank)+' ม.รทก.':'ไม่มีค่า')+'</small><p>'+esc(r.measured_at?new Date(date(r.measured_at)).toLocaleString('th-TH',{timeZone:'Asia/Bangkok',dateStyle:'short',timeStyle:'short'}):'ไม่ระบุเวลา')+' (ไทย)<br>'+esc(old(r,'water')||r.stale?'ข้อมูลย้อนหลัง / รอบข้อมูลไม่พร้อม':'เวลาตรวจวัดล่าสุดในชุดข้อมูล')+'</p></div></div><p>น้ำไหลผ่าน '+(r.discharge==null?'ไม่มีค่าตรวจวัด':fmt(r.discharge)+' ลบ.ม./วินาที')+'</p><button type="button" class="water-history-open" data-water-history-code="'+esc(historyCode)+'">ดูระดับน้ำย้อนหลัง 2023–2026 📈</button><small>ข้อมูล: '+esc(r.source_name||'RID GeoJSON')+' · <a href="'+esc(r.source_url||window.IEAT_RID.url)+'" target="_blank" rel="noopener">ข้อมูลต้นทาง</a>'+(r.bank_derived?'<br>ระดับตลิ่งคำนวณจากระดับน้ำ − ระยะจากตลิ่ง':'')+'</small></div>';
 }
 function content(r,k){
  if(k==='canal')return canalPopup(r);if(k==='water')return waterPopup(r);
