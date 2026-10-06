@@ -198,20 +198,20 @@
   const codes=mainCodes[mainRiver]||[];
   const chain=riverRows.filter(r=>stationRiver(r)===mainRiver).sort((a,b)=>mainRiver==='แม่น้ำเจ้าพระยา'?chainOrder(a,b):(n(b.wl)??n(b.bank)??-Infinity)-(n(a.wl)??n(a.bank)??-Infinity));
   const saved=river;river=mainRiver;$('rpMainGraph').innerHTML=graph(chain);river=saved;if(note)note.textContent+=' · '+rivers.length+' สายน้ำ · '+chain.length+' สถานี'+(faonamError?' · '+faonamError:'');
-  const charts=forecastStations.filter(r=>r[3]===mainRiver);
-  $('rpForecastCards').innerHTML=charts.map(r=>{const url='https://faonam.com/api/rid/ann/'+r[0]+'.jpg?v='+Math.floor(Date.now()/3600000);return '<article class="rp-forecast-card"><h4>'+esc(r[1])+'</h4><small>'+esc(r[3])+' · จังหวัด'+esc(r[2])+'</small><a href="'+url+'" target="_blank" rel="noopener"><img src="'+url+'" alt="กราฟคาดการณ์ ANNs '+esc(r[1])+'" loading="lazy"></a><small>กรมชลประทาน · คาดการณ์ใช้ตามวันที่ที่ระบุในกราฟ · คลิกภาพเพื่อขยาย</small></article>'}).join('')||'<p>'+esc(mainRiver?'ต้นทางยังไม่มีกราฟคาดการณ์ ANNs ของ'+mainRiver+' ในชุดข้อมูลนี้':'เลือกสายน้ำหลักก่อนดูคาดการณ์')+'</p>';
+  const charts=forecastStations.filter(r=>r[3]===mainRiver),displayCharts=estateScope.active?charts:charts.slice(0,6);
+  $('rpForecastCards').innerHTML=displayCharts.map(r=>{const url='https://faonam.com/api/rid/ann/'+r[0]+'.jpg?v='+Math.floor(Date.now()/3600000);return '<article class="rp-forecast-card"><h4>'+esc(r[1])+'</h4><small>'+esc(r[3])+' · จังหวัด'+esc(r[2])+'</small><a href="'+url+'" target="_blank" rel="noopener"><img src="'+url+'" alt="กราฟคาดการณ์ ANNs '+esc(r[1])+'" loading="lazy"></a><small>กรมชลประทาน · คาดการณ์ใช้ตามวันที่ที่ระบุในกราฟ · คลิกภาพเพื่อขยาย</small></article>'}).join('')||'<p>'+esc(mainRiver?'ต้นทางยังไม่มีกราฟคาดการณ์ ANNs ของ'+mainRiver+' ในชุดข้อมูลนี้':'เลือกสายน้ำหลักก่อนดูคาดการณ์')+'</p>';
  }
  document.addEventListener('ieat-dam-flow-data',event=>{rankedDams=event.detail||[];renderWaterExtras()});
 
  function render(){
-  if(!$('riverSidePanel'))return;rows=rows.filter(r=>fresh(r));const list=rows.filter(r=>inEstateScope(r)&&(estateScope.active||r.river===river)).sort((a,b)=>estateScope.active?stationDistance(a)-stationDistance(b):(n(a.order)||999)-(n(b.order)||999)),r=list.find(r=>String(r.code)===selected)||list[0];if(r)selected=String(r.code);
+  if(!$('riverSidePanel'))return;rows=rows.filter(r=>fresh(r));const list=rows.filter(r=>inEstateScope(r)&&(estateScope.active||r.river===river)).sort((a,b)=>estateScope.active?stationDistance(a)-stationDistance(b):(n(a.order)||999)-(n(b.order)||999)),displayList=estateScope.active?list:list.slice(0,6),r=list.find(r=>String(r.code)===selected)||list[0];if(r)selected=String(r.code);
   $('rpRiver').innerHTML=[...new Set(rows.filter(inEstateScope).map(r=>r.river).filter(Boolean))].map(v=>`<option ${v===river?'selected':''}>${esc(v)}</option>`).join('');
   $('rpStation').innerHTML=list.map(v=>`<option value="${esc(v.code)}" ${String(v.code)===selected?'selected':''}>${esc(v.oldcode)} · ${esc(v.name)}</option>`).join('');
   $('rpUpdated').textContent=error?'โหลดรอบใหม่ไม่สำเร็จ · แสดงชุดข้อมูลเดิม':estateScope.active&&!list.length?'ไม่พบสถานี RID ที่มีพิกัดภายใน 30 กม. จาก '+estateScope.name:`ข้อมูล ${time(list.reduce((a,r)=>stamp(r.measured_at)>stamp(a)?r.measured_at:a,list[0]?.measured_at))} · คลิกจุดหรือการ์ดเพื่อดูในแผนที่`;
   const overflow=list.filter(v=>gap(v)>=0).length,near=list.filter(v=>gap(v)<0&&nearBank(v)).length;
   flowChart();$('rpHistoryPanel').hidden=true;renderWaterExtras();
   $('rpSummary').innerHTML=r?stationSummary(r):'ไม่พบข้อมูลสถานีในพื้นที่ที่เลือก';
-  $('rpCards').innerHTML=list.length?list.map(stationCard).join(''):'<p>ไม่พบสถานีระดับน้ำล่าสุดในจังหวัดที่เลือก</p>';
+  $('rpCards').innerHTML=displayList.length?displayList.map(stationCard).join(''):'<p>ไม่พบสถานีระดับน้ำล่าสุดในจังหวัดที่เลือก</p>';
   document.dispatchEvent(new CustomEvent('ieat-river-scope',{detail:{river,stations:list.map(v=>({code:v.code,oldcode:v.oldcode,lat:n(v.lat),lon:n(v.lng??v.lon)}))}}));
   $('rpFocus')?.addEventListener('click',()=>focus(r));
  }
