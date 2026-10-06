@@ -29,6 +29,7 @@ jobs:
             echo "No changes"
           else
             git commit -m "Build ThaiWater map history data"
+            git pull --rebase origin main
             git push
           fi
 
