@@ -131,6 +131,7 @@ async function loadBoundaries(){
  }catch(e){if(e.name==='AbortError')return;$('boundaryInfo').textContent='โหลดขอบเขตนิคมฯ ไม่สำเร็จ · เลื่อนแผนที่หรือเปิดเลเยอร์เพื่อลองใหม่';}
 }
 let waterLabelFrame=null;
+let renderTimer=null;function queueRender(){clearTimeout(renderTimer);renderTimer=setTimeout(render,80)}
 function queueWaterLabels(){if(!raster)return;cancelAnimationFrame(waterLabelFrame);waterLabelFrame=requestAnimationFrame(()=>{const boxes=[];document.querySelectorAll('.water-map-label').forEach(el=>{el.style.visibility='visible';const b=el.getBoundingClientRect();if(b.right<0||b.bottom<0||b.left>innerWidth||b.top>innerHeight||boxes.some(a=>!(b.right+4<a.left||b.left-4>a.right||b.bottom+3<a.top||b.top-3>a.bottom))){el.style.visibility='hidden'}else boxes.push(b)});});}
 document.querySelector('[data-layer="boundary"]').addEventListener('change',()=>{flags.boundary=document.querySelector('[data-layer="boundary"]').checked;syncBoundaries();queueBoundaries()});
 
@@ -178,7 +179,7 @@ function rasterStart(){
  if(raster)return;if(vector){vector.remove();vector=null}if(animation)clearInterval(animation);
  $('map').style.display='none';$('raster').style.display='block';
  if(!window.L){$('status').textContent='โหลดแผนที่ไม่สำเร็จ กรุณาเปิดใหม่';return}
- raster=L.map('raster',{zoomControl:false,preferCanvas:false}).setView([14,101],6);
+ raster=L.map('raster',{preferCanvas:true,zoomControl:false,preferCanvas:false}).setView([14,101],6);
  L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',{attribution:'Tiles © Esri, HERE, Garmin, OpenStreetMap contributors',maxZoom:18,maxNativeZoom:16,crossOrigin:true}).addTo(raster);
  L.control.zoom({position:'bottomright'}).addTo(raster);L.control.scale({imperial:false,position:'bottomleft'}).addTo(raster);
  groups={points:L.layerGroup().addTo(raster),rings:L.layerGroup().addTo(raster),gistda:L.layerGroup().addTo(raster),flow:L.layerGroup().addTo(raster)};raster.on('moveend zoomend',()=>{drawFlow();queueWaterLabels();queueBoundaries()});
@@ -234,7 +235,11 @@ function drawFlow(){
  }}}
 
 function addGistda(){if(!vector||!ready||vector.getSource('gistda'))return;vector.addSource('gistda',{type:'geojson',data:gistda});vector.addLayer({id:'gistda',type:'fill',source:'gistda',filter:['==',['geometry-type'],'Polygon'],layout:{visibility:flags.gistda?'visible':'none'},paint:{'fill-color':'#218cc3','fill-opacity':.2}},'discharge-ring');vector.addLayer({id:'gistda-points',type:'circle',source:'gistda',filter:['==',['geometry-type'],'Point'],layout:{visibility:flags.gistda?'visible':'none'},paint:{'circle-color':'#218cc3','circle-radius':5}},'discharge-ring')}
-async function feed(name){const file=name+'.json',token='water-audit-'+Math.floor(Date.now()/60000);let r;try{r=await fetch('https://raw.githubusercontent.com/THANAWAN-KI/ieat-emonitoring-line-alert/main/docs/data/'+file+'?v='+token,{cache:'no-store',signal:AbortSignal.timeout(10000)});if(!r.ok)throw Error(r.status)}catch(e){r=await fetch('./data/'+file+'?v='+token,{signal:AbortSignal.timeout(7000)})}if(!r.ok)throw Error(r.status);return r.json()}
+async function feed(name){
+ const file=name+'.json',token=Math.floor(Date.now()/3600000);
+ const urls=['./data/'+file+'?v='+token,'https://raw.githubusercontent.com/THANAWAN-KI/ieat-emonitoring-line-alert/main/docs/data/'+file+'?v='+token];
+ let error;for(const url of urls){try{const r=await fetch(url,{cache:'no-store',signal:AbortSignal.timeout(10000)});if(!r.ok)throw Error('HTTP '+r.status);return await r.json()}catch(e){error=e}}throw error;
+}
 
 const numeric=v=>v==null||String(v).trim()===''?null:Number.isFinite(Number(v))?Number(v):null;
 function normalizeCanals(data){
@@ -248,8 +253,11 @@ function canalPopup(r){
  return '<div class="popup canal-popup" style="display:flex;gap:10px;min-width:235px">'+gauge+'<div><b>'+esc((r.code||'')+' · '+r.name)+'</b><br>ในคลอง '+fmt(r.wl)+' ม. รทก.<br>ฝั่งนอก '+fmt(r.outer)+' ม. รทก.<br>'+esc('เขต'+r.district)+' · '+(old(r,'canal')?'ข้อมูลย้อนหลัง':'อัปเดต')+' '+esc(new Date(date(r.measured_at)).toLocaleString('th-TH',{timeZone:'Asia/Bangkok',dateStyle:'short',timeStyle:'short'}))+'<br><small>ตลิ่ง '+fmt(r.bank)+' ม. รทก.</small><br><a href="'+esc(r.source_url)+'" target="_blank" rel="noopener">ดูข้อมูลสถานีคลอง ↗</a></div></div>';
 }
 async function loadCanals(){
- try{const response=await fetch('https://faonam.com/api/bma/canal_waterlevel',{signal:AbortSignal.timeout(20000)});if(!response.ok)throw Error(response.status);const rows=normalizeCanals(await response.json());extras=extras.filter(x=>x.kind!=='canal');extras.push({kind:'canal',rows});delete sourceErrors['คลอง กทม.'];build();}
- catch(e){sourceErrors['คลอง กทม.']=e.message;updateDataAudit();}
+ let loaded=false;
+ function apply(data){const rows=normalizeCanals(data);if(!rows.length)throw Error('ไม่มีค่าคลองใน 24 ชั่วโมง');extras=extras.filter(x=>x.kind!=='canal');extras.push({kind:'canal',rows});loaded=true;delete sourceErrors['คลอง กทม.'];build();}
+ try{apply(await feed('bma_canal_latest'))}catch(e){sourceErrors['คลอง กทม.']=e.message;}
+ try{const response=await fetch('https://faonam.com/api/bma/canal_waterlevel',{signal:AbortSignal.timeout(15000)});if(!response.ok)throw Error('HTTP '+response.status);apply(await response.json());}
+ catch(e){sourceErrors['คลอง กทม.']=loaded?'ใช้ไฟล์สำรอง · '+e.message:e.message;updateDataAudit();}
 }
 
 function build(){
@@ -257,7 +265,7 @@ function build(){
  if(national){['dam','water'].forEach(k=>{const f=national.feeds[k],age=Date.now()-Date.parse(f?.fetched_at||'');add(f?.rows?.map(r=>({...r,source_name:'ThaiWater / '+(r.agency||'สสน.'),source_url:f.source_url})),k,Boolean(national.failures[k]))})}
  add(ridRows,'water',ridFailed);extras.forEach(x=>add(x.rows,x.kind,x.stale));const unique=new Map();for(const f of values){const p=f.properties,key=p.kind+':'+(p.code||p.id||p.name)+':'+(p.kind==='water'?'':p.source_name||'');const previous=unique.get(key);if(!previous||date(p.measured_at)>=date(previous.properties.measured_at)||!Number.isFinite(date(previous.properties.measured_at)))unique.set(key,f)}features=[...unique.values()];
  updateDataAudit();const selected=$('province').value||'',provinces=[...new Set(features.map(f=>f.properties.province).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'th'));
- $('province').innerHTML='<option value="">ทั่วประเทศ</option>'+provinces.map(p=>'<option value="'+esc(p)+'">'+esc(p)+'</option>').join('');$('province').value=selected;populated=true;render();
+ $('province').innerHTML='<option value="">ทั่วประเทศ</option>'+provinces.map(p=>'<option value="'+esc(p)+'">'+esc(p)+'</option>').join('');$('province').value=selected;populated=true;queueRender();
 }
 let loadBusy=false,lastWaterCheck=null;
 const sourceErrors={};
