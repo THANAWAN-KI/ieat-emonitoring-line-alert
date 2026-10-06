@@ -26,7 +26,7 @@
  function fresh(r){const a=Date.now()-stamp(r.measured_at);return Number.isFinite(a)&&a>=-300000&&a<=21600000}
  function gap(r){return n(r.wl)!==null&&n(r.bank)!==null?r.wl-r.bank:null}
  function nearBank(r){return n(r.percent)!==null&&Number(r.percent)>=90}
- function status(r){const g=gap(r);return g!==null&&g>=0?['#e6004d','ล้นตลิ่ง']:nearBank(r)?['#ffaa00','ใกล้ตลิ่ง']:['#008558','ต่ำกว่าตลิ่ง']}
+ function status(r){const g=gap(r);return g!==null&&g>=0?['#d9364d','ล้นตลิ่ง']:nearBank(r)?['#dd9c20','ใกล้ตลิ่ง']:['#169b8f','ต่ำกว่าตลิ่ง']}
  function gapText(r){const g=gap(r);return g===null?'ไม่มีระดับตลิ่ง':(g>=0?'สูงกว่าตลิ่ง ':'ต่ำกว่าตลิ่ง ')+fmt(Math.abs(g))+' ม.'}
  function focus(r){if(n(r.lat)===null||n(r.lng)===null)return;$('estateFocusMap')?.contentWindow?.postMessage({type:'flood-map-focus',lat:Number(r.lat),lon:Number(r.lng),label:r.name,scale:75000,station:{...r,discharge:r.flow,source_name:'RID GeoJSON'}},location.origin)}
  function trend(r){return r.trend_text?({'เพิ่มขึ้น':'▲ เพิ่มขึ้น','ลดลง':'▼ ลดลง','คงที่':'• คงที่'}[r.trend_text]||r.trend_text):'ไม่ระบุแนวโน้ม'}
@@ -48,7 +48,7 @@
  }
  function stationCard(r){
   const [color,label]=status(r),location=[r.amphoe,r.province].filter(Boolean).join(' · ');
-  return `<button type="button" class="rp-card rp-station-row" data-rp-id="${esc(r.code)}" aria-pressed="${String(r.code)===selected}">${stationGauge(r)}<div class="rp-station-content"><div class="rp-station-top"><b>${esc(r.oldcode)} · ${esc(r.name)}</b><em style="background:${color}">${label}</em></div>${location?`<small class="rp-location">${esc(location)}</small>`:''}<strong>${esc(gapText(r))}</strong><div class="rp-row-trend">${esc(trend(r))}</div><small>ระดับ ${fmt(r.wl)} ม.รทก.${n(r.flow)!==null?' · '+fmt(r.flow,0)+' ลบ.ม./วิ':''}</small><small class="rp-row-time">อัปเดต ${esc(time(r.measured_at))} · ${esc(r.agency||'ThaiWater')}</small></div></button>`;
+  return `<button type="button" class="rp-card rp-station-row" style="--rp-status-color:${color}" data-rp-id="${esc(r.code)}" aria-pressed="${String(r.code)===selected}">${stationGauge(r)}<div class="rp-station-content"><div class="rp-station-top"><b>${esc(r.oldcode)} · ${esc(r.name)}</b><em style="background:${color}">${label}</em></div>${location?`<small class="rp-location">${esc(location)}</small>`:''}<strong>${esc(gapText(r))}</strong><div class="rp-row-trend">${esc(trend(r))}</div><small>ระดับ ${fmt(r.wl)} ม.รทก.${n(r.flow)!==null?' · '+fmt(r.flow,0)+' ลบ.ม./วิ':''}</small><small class="rp-row-time">อัปเดต ${esc(time(r.measured_at))} · ${esc(r.agency||'ThaiWater')}</small></div></button>`;
  }
  function stationSummary(r){
   const g=gap(r),delta=n(r.delta),valid=fresh(r)&&n(r.wl)!==null;
@@ -173,7 +173,7 @@
 @media(max-width:520px){#estateFocusDashboard #rpSummary .rp-visual-card{grid-template-columns:1fr}#estateFocusDashboard #rpSummary .rp-scene{min-height:0;height:auto;aspect-ratio:640/340}.rp-station-top{flex-wrap:wrap}}
 @media(prefers-reduced-motion:reduce){.rp-wave-front,.rp-wave-back,.rp-water-ripples{animation:none}}
 
-#estateFocusDashboard #riverSidePanel .rp-station-top em[style*="#ffaa00"]{color:#000!important}
+#estateFocusDashboard #riverSidePanel .rp-station-top em[style*="#dd9c20"]{color:#000!important}
 #estateFocusDashboard #riverSidePanel>h2{color:#00387B!important;font-size:20px}
 #estateFocusDashboard #rpFlowPanel h3,#estateFocusDashboard #rpHistoryPanel h3{font-size:21px}
 #estateFocusDashboard #rpFlowPanel p,#estateFocusDashboard #rpHistoryPanel p{font-size:13px}
