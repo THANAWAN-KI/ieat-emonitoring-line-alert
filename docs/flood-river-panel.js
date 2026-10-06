@@ -25,7 +25,7 @@
  function fresh(r){const a=Date.now()-stamp(r.measured_at);return Number.isFinite(a)&&a>=-300000&&a<=21600000}
  function gap(r){return n(r.wl)!==null&&n(r.bank)!==null?r.wl-r.bank:null}
  function nearBank(r){return n(r.percent)!==null&&Number(r.percent)>=90}
- function status(r){const g=gap(r);return g!==null&&g>=0?['#d9364d','ล้นตลิ่ง']:nearBank(r)?['#dd9c20','ใกล้ตลิ่ง']:['#169b8f','ต่ำกว่าตลิ่ง']}
+ function status(r){if(!fresh(r)||n(r.wl)===null)return ['#899b9e','ไม่มีค่าล่าสุด'];const g=gap(r);return g!==null&&g>=0?['#d9364d','ล้นตลิ่ง']:nearBank(r)?['#dd9c20','ใกล้ตลิ่ง']:['#169b8f','ต่ำกว่าตลิ่ง']}
  function gapText(r){const g=gap(r);return g===null?'ไม่มีระดับตลิ่ง':(g>=0?'สูงกว่าตลิ่ง ':'ต่ำกว่าตลิ่ง ')+fmt(Math.abs(g))+' ม.'}
  function focus(r){if(n(r.lat)===null||n(r.lng)===null)return;$('estateFocusMap')?.contentWindow?.postMessage({type:'flood-map-focus',lat:Number(r.lat),lon:Number(r.lng),label:r.name,scale:75000,station:{...r,discharge:r.flow,source_name:r.source_name||'RID GeoJSON'}},location.origin)}
  function trend(r){return r.trend_text?({'เพิ่มขึ้น':'▲ เพิ่มขึ้น','ลดลง':'▼ ลดลง','คงที่':'• คงที่'}[r.trend_text]||r.trend_text):'ไม่ระบุแนวโน้ม'}
@@ -99,7 +99,7 @@
  }
 
  function byCode(c){return rows.find(r=>inEstateScope(r)&&(estateScope.active||r.river===river)&&r.oldcode===c)}
- function node(r,x,y,label){const color=r?status(r)[0]:'#899b9e';return `<g ${r?`data-rp-id="${esc(r.code)}" role="button" tabindex="0" aria-label="ดู ${esc(r.name)} บนแผนที่"`:''} class="rp-node"><circle cx="${x}" cy="${y}" r="8" fill="${color}" stroke="white" stroke-width="2"/><text x="${x+17}" y="${y-2}" font-size="11" font-weight="600">${esc(label||r?.oldcode)} ${esc(r?.name||'')}</text><text x="${x+17}" y="${y+15}" font-size="14" font-weight="700">${r&&n(r.flow)!==null?fmt(r.flow,0)+' ลบ.ม./วิ':r?esc(gapText(r)):'ไม่มีสถานีในชุดข้อมูล'}</text><text x="${x+17}" y="${y+31}" font-size="10">${r&&n(r.flow)!==null?esc(gapText(r)):r?'ระดับ '+fmt(r.wl)+' ม.รทก.':''}</text></g>`}
+ function node(r,x,y,label){const color=r?status(r)[0]:'#899b9e';return `<g ${r?`data-rp-id="${esc(r.code)}" role="button" tabindex="0" aria-label="ดู ${esc(r.name)} บนแผนที่"`:''} class="rp-node"><circle cx="${x}" cy="${y}" r="8" fill="${color}" stroke="white" stroke-width="2"/><text x="${x+17}" y="${y-2}" font-size="11" font-weight="600">${esc(label||r?.oldcode)} ${esc(r?.name||'')}</text><text x="${x+17}" y="${y+15}" font-size="14" font-weight="700">${r&&n(r.flow)!==null?fmt(r.flow,0)+' ลบ.ม./วิ':r?esc(gapText(r)) :'ไม่มีสถานีในชุดข้อมูล'}</text><text x="${x+17}" y="${y+31}" font-size="10">${r&&n(r.flow)!==null?esc(gapText(r)):r?'ระดับ '+fmt(r.wl)+' ม.รทก.':''}</text><text x="${x+17}" y="${y+47}" font-size="10" fill="#607487">${r?esc(time(r.measured_at))+(fresh(r)?'':' · ข้อมูลเกิน 6 ชม.') : ''}</text></g>`}
  function graph(list){
   const stations=list;
   if(!stations.length)return '<p>ไม่มีสถานีในสายน้ำที่เลือก</p>';
