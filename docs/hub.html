@@ -170,5 +170,16 @@ html body .portal-disaster-tabs .nav-tab.active{background:#158f63;color:#fff}
 html body .portal-disaster-tabs .nav-tab:hover{background:#ffffff20}
 html body .portal-disaster-tabs .nav-tab.active:hover{background:#158f63}
 @media(max-width:760px){html body .portal-disaster-tabs{min-height:42px!important}html body .portal-disaster-tabs .nav-tab{flex-basis:104px;min-width:104px;min-height:42px;font-size:16px}}
-</style></body></html>
+</style><script id="flood-header-estate-bridge">
+(function(){
+ const source=document.getElementById('estate'),frame=document.getElementById('otherFrame');
+ if(!source||!frame)return;
+ function send(){
+  if(!frame.contentWindow)return;
+  frame.contentWindow.postMessage({type:'ieat-flood-estate',name:source.value?(source.selectedOptions[0]?.textContent||source.value):''},location.origin);
+ }
+ source.addEventListener('change',send);source.addEventListener('input',send);frame.addEventListener('load',send);
+ window.addEventListener('message',event=>{if(event.origin===location.origin&&event.source===frame.contentWindow&&event.data?.type==='ieat-flood-ready')send()});
+})();
+</script></body></html>
 
