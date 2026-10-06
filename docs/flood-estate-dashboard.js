@@ -34,7 +34,7 @@
   try{
    let province=provinceCache.get(String(estate.id))||provinceKey(estate.province||'');
    if(!province){
-    const q=new URLSearchParams({location:estate.lon+','+estate.lat,f:'json',langCode:'TH',featureTypes:'Locality'});
+    const q=new URLSearchParams({location:estate.lon+','+estate.lat,f:'json',langCode:'TH'});
     const response=await fetch('https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?'+q,{signal:AbortSignal.timeout(15000)});
     if(!response.ok)throw Error('HTTP '+response.status);const data=await response.json();
     province=provinceKey(data.address?.Region);if(!province)throw Error('ไม่พบจังหวัด');
