@@ -137,9 +137,14 @@ function queueWaterLabels(){if(!raster)return;cancelAnimationFrame(waterLabelFra
 document.querySelector('[data-layer="boundary"]').addEventListener('change',()=>{flags.boundary=document.querySelector('[data-layer="boundary"]').checked;syncBoundaries();queueBoundaries()});
 
 let estateProvinceScope=null;
+function nearbyEstate(f){
+ const e=estateProvinceScope?.estate;if(!e)return false;
+ const [lon,lat]=f.geometry.coordinates,rad=Math.PI/180,dy=(lat-Number(e.lat))*rad,dx=(lon-Number(e.lon))*rad,h=Math.sin(dy/2)**2+Math.cos(Number(e.lat)*rad)*Math.cos(lat*rad)*Math.sin(dx/2)**2;
+ return 12742*Math.asin(Math.sqrt(Math.min(1,h)))<=(estateProvinceScope.radiusKm||30);
+}
 function scoped(){
- const province=estateProvinceScope?.active?estateProvinceScope.province:$('province').value,q='';
- return features.filter(f=>flags[f.properties.kind]&&(estateProvinceScope?.active?(!!province&&(f.properties.province===province||(f.properties.kind==='estate'&&f.properties.name===estateProvinceScope.name))):(!province||['estate','dam'].includes(f.properties.kind)||f.properties.province===province))&&[f.properties.name,f.properties.code,f.properties.river,f.properties.district].join(' ').toLowerCase().includes(q));
+ const province=$('province').value;
+ return features.filter(f=>flags[f.properties.kind]&&(estateProvinceScope?.active?(f.properties.kind==='estate'?f.properties.name===estateProvinceScope.name:nearbyEstate(f)):(!province||['estate','dam'].includes(f.properties.kind)||f.properties.province===province)));
 }
 
 function sensorSvg(kind){return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+(kind==='water'?'<path d="M6 3h7v15H6Z M10 6h3M9 10h4M10 14h3M3 20q3-3 6 0t6 0t6 0"/>':'<path d="M3 5h18M5 5v10M19 5v10M10 5v9M14 5v9M3 18q3-3 6 0t6 0t6 0M3 22q3-3 6 0t6 0t6 0"/>')+'</svg>';}
@@ -178,7 +183,7 @@ function focus(d){
  if(d.lat==null||d.lon==null||!Number.isFinite(Number(d.lat))||!Number.isFinite(Number(d.lon)))return;
  $('province').value='';render();
  const zoom=d.scale?Math.max(5,Math.min(15,Math.log2(591657527/Number(d.scale)))):12;
- const station=d.station&&typeof d.station==='object'?d.station:null;const popupHtml=station?content({...station,lat:Number(d.lat),lng:Number(d.lon)},'water'):null;
+ const station=d.station&&typeof d.station==='object'?d.station:null;const popupHtml=station?content({...station,lat:Number(d.lat),lng:Number(d.lon)},d.kind==='canal'?'canal':'water'):null;
  if(vector){vector.flyTo({center:[Number(d.lon),Number(d.lat)],zoom,offset:popupHtml?[0,120]:[0,0]});if(selectedMarker)selectedMarker.remove();const el=document.createElement('div');el.className='marker-icon';el.textContent='●';selectedMarker=new maplibregl.Marker(el).setLngLat([d.lon,d.lat]).setPopup(new maplibregl.Popup().setHTML('<div class="popup"><h3>'+esc(d.label||'ตำแหน่งที่เลือก')+'</h3></div>')).addTo(vector);if(popupHtml){selectedMarker.setPopup(new maplibregl.Popup({maxWidth:'350px'}).setHTML(popupHtml));selectedMarker.togglePopup()}}
  else{raster.setView([d.lat,d.lon],zoom,{animate:false});if(selectedMarker)raster.removeLayer(selectedMarker);selectedMarker=L.circleMarker([d.lat,d.lon],{radius:10,color:'#fff',weight:3,fillColor:'#083b50',fillOpacity:1}).bindTooltip(esc(d.label||'ตำแหน่งที่เลือก'),{permanent:true,direction:'top'}).addTo(raster);if(popupHtml)selectedMarker.bindPopup(popupHtml,{maxWidth:350}).openPopup()}
 }
