@@ -139,14 +139,50 @@ outline:2px solid #0066b2!important;outline-offset:2px;
 #estateFocusDashboard .rp-forecast-card img{width:100%;height:auto;margin:10px 0;display:block}
 </style>
 <script src="flood-rid-source.js?v=20261006-rid-17" defer></script>
-<script src="flood-estate-dashboard.js?v=20261006-flow-rank-51" defer></script>
-<script src="flood-river-panel.js?v=20261006-flow-rank-52" defer></script>
+<script src="flood-estate-dashboard.js?v=20261006-nearby-53" defer></script>
+<script src="flood-river-panel.js?v=20261006-nearby-53" defer></script>
 <script src="flood-weather-overview.js?v=20261006-svg-weather-37" defer></script>
 </head>
 <body>
 <main class="container"><section id="warning" aria-label="Dashboard สถานการณ์น้ำ"><div id="dashboardLoading" class="dashboard-loading" role="status">กำลังโหลดข้อมูลสถานการณ์น้ำ…</div><noscript>กรุณาเปิด JavaScript เพื่อใช้งาน dashboard</noscript></section></main>
 
 
+<style>
+#estateFocusDashboard #rpCards,#estateFocusDashboard #efRelatedDams,#estateFocusDashboard #efCanalList{
+ overflow-y:auto!important;overflow-x:hidden!important;max-height:650px!important;scrollbar-width:thin;scrollbar-color:#b9ccdd transparent;padding:3px 6px 3px 3px;overscroll-behavior:contain;
+}
+.ef-scroll-caption{font-size:13px;color:#003666;margin:6px 0 10px}
+</style>
+<script>
+(function(){
+ const ids=['rpCards','efRelatedDams','efCanalList'];
+ let scheduled=false;
+ function resizeLists(){
+  scheduled=false;
+  ids.forEach(id=>{
+   const host=document.getElementById(id);if(!host)return;
+   const cards=[...host.children].filter(el=>el.matches('.rp-card,.ef-dam-card,.ef-canal-card'));
+   if(!cards.length){host.style.removeProperty('max-height');return}
+   const bounds=host.getBoundingClientRect(),tops=[];
+   for(const card of cards){const top=Math.round(card.offsetTop);if(!tops.includes(top))tops.push(top);if(tops.length===4)break}
+   if(tops.length>3){
+    const bottom=Math.max(...cards.filter(c=>Math.round(c.offsetTop)<tops[3]).map(c=>c.getBoundingClientRect().bottom));
+    host.style.setProperty('max-height',Math.ceil(bottom-bounds.top+8)+'px','important');
+   }else host.style.setProperty('max-height','none','important');
+   let caption=host.previousElementSibling;
+   if(!caption?.classList.contains('ef-scroll-caption')){caption=document.createElement('p');caption.className='ef-scroll-caption';host.before(caption)}
+   caption.textContent=cards.length+' รายการ'+(tops.length>3?' · แสดง 3 แถว เลื่อนดูรายการเพิ่มเติม':'');
+  });
+ }
+ function schedule(){if(!scheduled){scheduled=true;requestAnimationFrame(resizeLists)}}
+ function start(){
+  ids.forEach(id=>{const host=document.getElementById(id);if(host)new MutationObserver(schedule).observe(host,{childList:true})});
+  document.querySelector('.ef-data-column')?.addEventListener('load',schedule,true);
+  window.addEventListener('resize',schedule);schedule();
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(start,200));else setTimeout(start,200);
+})();
+</script>
 </body>
 </html>
 
