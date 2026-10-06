@@ -146,10 +146,24 @@
   const records=new Map();for(const r of [...rows,...faonamRows]){if(!r.code)continue;records.set(String(r.code),r)}return [...records.values()];
  }
  function findStation(code){return rows.find(r=>String(r.code)===String(code))||faonamRows.find(r=>String(r.code)===String(code))}
+ function normalizeFaonamFeed(raw){
+  const text=value=>typeof value==='object'&&value!==null?String(value.th||''):String(value||'');
+  const data=raw.waterlevel_data?.data;if(!Array.isArray(data)||!data.length)throw Error('ไม่มีข้อมูลสายน้ำจากต้นทาง');
+  const records=data.map(r=>{const t=r.station||{},g=r.geocode||{},wl=n(r.waterlevel_msl),bank=n(t.min_bank),previous=n(r.waterlevel_msl_previous),diff=wl!==null&&bank!==null?Math.round((wl-bank)*100)/100:null;return {id:t.id,code:t.tele_station_oldcode,oldcode:t.tele_station_oldcode,name:text(t.tele_station_name),river:text(r.river_name).trim(),province:text(g.province_name),district:text(g.amphoe_name),lat:n(t.tele_station_lat),lng:n(t.tele_station_long),wl,bank,diff,flow:n(r.discharge),delta:wl!==null&&previous!==null?Math.round((wl-previous)*100)/100:null,measured_at:r.waterlevel_datetime,source_name:'ThaiWater / '+text(r.agency?.agency_shortname),source_url:'https://faonam.com/rivers',status:diff!==null&&diff>=0?'ล้นตลิ่ง':r.situation_level===4?'ใกล้ตลิ่ง':'ต่ำกว่าตลิ่ง'};}).filter(r=>r.river&&r.code);
+  const counts=new Map();records.forEach(r=>counts.set(r.river,(counts.get(r.river)||0)+1));
+  return {rows:records,rivers:[...counts].filter(([name,count])=>count>=3).map(([name,stations])=>({name,stations}))};
+ }
  async function loadFaonamRivers(){
   if(faonamBusy)return;faonamBusy=true;
-  try{const response=await fetch('./data/faonam_rivers_latest.json?v='+Math.floor(Date.now()/3600000),{cache:'no-store',signal:AbortSignal.timeout(20000)});if(!response.ok)throw Error('HTTP '+response.status);const data=await response.json();if(!Array.isArray(data.rows)||!Array.isArray(data.rivers))throw Error('รูปแบบสายน้ำไม่ถูกต้อง');faonamRows=data.rows;faonamRivers=data.rivers;faonamError='';renderWaterExtras()}
-  catch(error){faonamError='โหลดรายการ Faonam รอบล่าสุดไม่สำเร็จ';renderWaterExtras()}finally{faonamBusy=false}
+  const apply=data=>{if(!Array.isArray(data.rows)||!Array.isArray(data.rivers))throw Error('รูปแบบสายน้ำไม่ถูกต้อง');faonamRows=data.rows;faonamRivers=data.rivers;faonamError='';renderWaterExtras()};
+  try{
+   try{const response=await fetch('./data/faonam_rivers_latest.json?v='+Math.floor(Date.now()/3600000),{cache:'no-store',signal:AbortSignal.timeout(15000)});if(!response.ok)throw Error(response.status);apply(await response.json())}catch(error){faonamError='โหลดไฟล์สำรองไม่สำเร็จ'}
+   let live=false;
+   for(const url of ['https://api-v3.thaiwater.net/api/v1/thaiwater30/public/waterlevel_load','https://faonam.com/api/tw/public/waterlevel_load']){
+    try{const response=await fetch(url,{signal:AbortSignal.timeout(15000)});if(!response.ok)throw Error(response.status);apply(normalizeFaonamFeed(await response.json()));live=true;break}catch(error){}
+   }
+   if(!live){faonamError='ใช้ชุดข้อมูลสำรอง · ตรวจเวลาของแต่ละสถานี';renderWaterExtras()}
+  }finally{faonamBusy=false}
  }
  
  function rankRow(r,value,note,attribute){
