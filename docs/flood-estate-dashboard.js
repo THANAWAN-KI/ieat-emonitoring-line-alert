@@ -10,8 +10,10 @@
  function time(v){const n=timestamp(v);return Number.isFinite(n)?new Date(n).toLocaleString('th-TH',{timeZone:'Asia/Bangkok',dateStyle:'medium',timeStyle:'short'}):'ไม่ระบุเวลา'}
  function point(r){return num(r.lat)!==null&&num(r.lon)!==null&&Number(r.lat)>=5&&Number(r.lat)<=21&&Number(r.lon)>=97&&Number(r.lon)<=106}
  function km(a,b){const rad=Math.PI/180,dy=(b.lat-a.lat)*rad,dx=(b.lon-a.lon)*rad,h=Math.sin(dy/2)**2+Math.cos(a.lat*rad)*Math.cos(b.lat*rad)*Math.sin(dx/2)**2;return 12742*Math.asin(Math.sqrt(Math.min(1,h)))}
+ let headerEstate='';
+ const estateKey=v=>String(v||'').replace(/นิคมอุตสาหกรรม|สำนักงานนิคมฯ|นิคมฯ|\s/g,'').normalize('NFKC').toLowerCase();
  function model(data,now=Date.now()){
-  const estates=(data.estates||[]).filter(point);
+  const estates=(data.estates||[]).filter(point).filter(e=>!headerEstate||estateKey(e.name)===estateKey(headerEstate));
   const complete=Number(data.schema_version)>=3&&data.coverage?.stations_complete===true&&Array.isArray(data.stations)&&data.stations.length===Number(data.summary?.station_count)&&['ok','partial','stale'].includes(data.status);
   const generated=timestamp(data.generated_at),age=now-generated;
   const fresh=r=>{const age=now-timestamp(r.observed_at);return Number.isFinite(age)&&age>=-300000&&age<=MAX_AGE};
@@ -47,6 +49,7 @@
  let current=null,selected=new URLSearchParams(location.search).get('estate')||'',busy=false;
 
  function scopedModel(m){
+  if(headerEstate)return m;
   if(!riverScope)return {...m,estates:[],watch:[]};
   const stations=riverScope.stations.filter(point),estates=m.estates.map(e=>({...e,riverDistance:stations.length?Math.min(...stations.map(r=>km(e,r))):Infinity})).filter(e=>e.riverDistance<=RADIUS);
   const ids=new Set(estates.map(e=>String(e.id))),distance=new Map(estates.map(e=>[String(e.id),e.riverDistance]));
@@ -58,8 +61,23 @@
  }
  document.addEventListener('ieat-river-scope',event=>{
   riverScope={river:event.detail.river,stations:event.detail.stations};
-  if(current){const m=scopedModel(model(current));if(!m.estates.some(e=>String(e.id)===selected))selected='';renderEstates();renderCharts(model(current));}
+  if(current){const m=scopedModel(model(current));if(!headerEstate&&!m.estates.some(e=>String(e.id)===selected))selected='';renderEstates();renderCharts(model(current));}
  });
+
+
+ function applyHeaderEstate(name){
+  headerEstate=String(name||'');selected='';
+  if(current){const estate=model(current).estates[0];if(headerEstate&&estate)selected=String(estate.id);}
+  if($('efSearch'))$('efSearch').value='';
+  if($('efFilter'))$('efFilter').value=headerEstate?'all':'watch';
+  if(current)render(current);
+  if(!headerEstate)$('estateFocusMap')?.contentWindow?.postMessage({type:'flood-map-focus',lat:13,lon:101,scale:9244648},location.origin);
+ }
+ window.addEventListener('message',event=>{
+  if(event.origin!==location.origin||event.source!==window.parent||event.data?.type!=='ieat-flood-estate')return;
+  applyHeaderEstate(event.data.name);
+ });
+ if(window.parent!==window)window.parent.postMessage({type:'ieat-flood-ready'},location.origin);
 
  function set(id,text){if($(id))$(id).textContent=text}
  function zoom(lat,lon){const f=$('estateFocusMap');if(f?.contentWindow)f.contentWindow.postMessage({type:'flood-map-focus',lat:Number(lat),lon:Number(lon),scale:75000},location.origin)}
@@ -269,14 +287,14 @@
   });
   $('efReport').onclick=()=>window.open('flood-gis-report.html?estate='+encodeURIComponent(selected||'29'),'_blank','noopener');
   $('efSearch').oninput=()=>renderEstates();$('efFilter').onchange=()=>renderEstates();
-  function reset(){selected='';if(current)render(current);$('estateFocusMap')?.contentWindow?.postMessage({type:'flood-map-focus',lat:13,lon:101,scale:9244648},location.origin)}
+  function reset(){if(headerEstate){applyHeaderEstate(headerEstate);return}selected='';if(current)render(current);$('estateFocusMap')?.contentWindow?.postMessage({type:'flood-map-focus',lat:13,lon:101,scale:9244648},location.origin)}
   $('efMapReset').onclick=reset;
   function openCard(id){const filters={efWatch:'watch',efWaterWatch:'water',efRainWatch:'rain',efTotal:'all'};if(filters[id]){$('efFilter').value=filters[id];$('efSearch').value='';renderEstates();$('efSearch').scrollIntoView?.({behavior:'smooth',block:'center'});$('efSearch').focus?.()}else{const panel=$(id==='ef24'?'efDetails24':'efDetails48');if(panel){panel.open=true;panel.scrollIntoView?.({behavior:'smooth',block:'start'})}}}
   host.addEventListener('keydown',e=>{const card=e.target.closest('[data-ef-card]');if(card&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openCard(card.dataset.efCard)}});
   host.addEventListener('click',e=>{const card=e.target.closest('[data-ef-card]');if(card){openCard(card.dataset.efCard);return}const button=e.target.closest('[data-ef-lat]');if(!button)return;zoom(button.dataset.efLat,button.dataset.efLon);if(button.dataset.efEstate){selected=button.dataset.efEstate;render(current)}});
  }
  function renderCharts(m){
-  m=scopedModel(m);set('efRiverScopeNote',riverScope?'นิคมฯ ภายใน 30 กม. จากสถานีใน '+riverScope.river+' · ฝนสะสม 24 ชม. · หน่วย มม.':'กำลังโหลดขอบเขตสายน้ำที่เลือก');
+  m=scopedModel(m);set('efRiverScopeNote',headerEstate?'ฝนสะสมภายใน 30 กม. จาก '+headerEstate+' · หน่วย มม.':riverScope?'นิคมฯ ภายใน 30 กม. จากสถานีใน '+riverScope.river+' · ฝนสะสม 24 ชม. · หน่วย มม.':'กำลังโหลดขอบเขตสายน้ำที่เลือก');
   if(!m.usable){$('efRainRank').innerHTML='<div class="ef-empty">ข้อมูลยังไม่ครบหรือยังไม่พร้อมประเมิน</div>';return}
   const rank=m.estates.map(e=>{const values=m.rain.filter(r=>km(e,r)<=RADIUS).map(r=>Number(r.rainfall_mm));return {...e,rain:values.length?Math.max(...values):null}}).filter(e=>e.rain!==null).sort((a,b)=>b.rain-a.rain).slice(0,5),max=rank[0]?.rain||1;
   $('efRainRank').innerHTML=rank.length?rank.map((e,i)=>`<button class="ef-rank-row" type="button" data-ef-estate="${esc(e.id)}" data-ef-lat="${e.lat}" data-ef-lon="${e.lon}" title="${esc(e.name)}: ${fmt(e.rain)} มม."><span>${esc(e.name.replace(/^นิคมอุตสาหกรรม/,''))}</span><div class="ef-rank-track"><b style="background:${['#6138f5','#008558','#ffaa00','#e64f00','#e6004d'][i]};width:${Math.max(12,e.rain/max*100)}%">${fmt(e.rain)}</b></div></button>`).join(''):'<div class="ef-empty">ไม่มีค่าฝนล่าสุดที่ใช้จัดอันดับได้</div>';
@@ -287,8 +305,8 @@
   const filter=$('efFilter').value||'watch';
   const assessments=m.estates.map(e=>m.watch.find(w=>String(w.id)===String(e.id))||{...e,rain:[],water:[],alerts:[],nearest:null,maxRain:null});
   const rows=(filter==='all'?assessments:m.watch).filter(e=>e.name.includes(q)&&(filter!=='water'||e.water.length)&&(filter!=='rain'||e.rain.length));
-  set('efResultCount',`แสดง ${rows.length} แห่ง · ใกล้${riverScope?.river||'สายน้ำที่เลือก'} ${m.estates.length} แห่ง · ภายใน 30 กม. จากสถานี · คัดกรองเบื้องต้น`);
-  $('efEstates').innerHTML=rows.length?rows.map(e=>`<button type="button" class="ef-estate" aria-pressed="${selected===String(e.id)}" data-ef-estate="${esc(e.id)}" data-ef-lat="${e.lat}" data-ef-lon="${e.lon}"><div class="ef-estate-title"><b>${esc(e.name)}</b><span class="ef-estate-badge" data-watch="${e.alerts.length>0}">${e.alerts.length?'เข้าเกณฑ์เฝ้าระวัง':'ไม่พบสถานีเข้าเกณฑ์'}</span></div><div class="ef-estate-stats"><div><strong>${e.water.length}</strong><small>สถานีระดับน้ำ</small></div><div><strong>${e.rain.length}</strong><small>สถานีฝน</small></div><div><strong>${e.nearest!==null?fmt(e.nearest)+' กม.':'–'}</strong><small>สถานีเข้าเกณฑ์ใกล้ที่สุด</small></div></div>${e.maxRain!==null?`<small class="ef-estate-rain">ฝนสูงสุดใกล้นิคมฯ ${fmt(e.maxRain)} มม.</small>`:''}<small class="ef-estate-river-distance">ใกล้สถานีใน${esc(riverScope?.river||'สายน้ำที่เลือก')} ${fmt(e.riverDistance)} กม.</small><span class="ef-estate-map-label">ดูตำแหน่งบนแผนที่ →</span></button>`).join(''):`<p class="ef-empty">${q?'ไม่พบชื่อนิคมฯ ที่ค้นหา':'ไม่พบนิคมฯ เข้าเกณฑ์จากสถานีที่มีเวลาตรวจวัดภายใน 24 ชม. ในชุดข้อมูลนี้'}${m.stale?' · ชุดข้อมูลย้อนหลัง':''}</p>`;
+  set('efResultCount',`แสดง ${rows.length} แห่ง · ${headerEstate?'พื้นที่ '+headerEstate:'ใกล้'+(riverScope?.river||'สายน้ำที่เลือก')} ${m.estates.length} แห่ง · ภายใน 30 กม. จากสถานี · คัดกรองเบื้องต้น`);
+  $('efEstates').innerHTML=rows.length?rows.map(e=>`<button type="button" class="ef-estate" aria-pressed="${selected===String(e.id)}" data-ef-estate="${esc(e.id)}" data-ef-lat="${e.lat}" data-ef-lon="${e.lon}"><div class="ef-estate-title"><b>${esc(e.name)}</b><span class="ef-estate-badge" data-watch="${e.alerts.length>0}">${e.alerts.length?'เข้าเกณฑ์เฝ้าระวัง':'ไม่พบสถานีเข้าเกณฑ์'}</span></div><div class="ef-estate-stats"><div><strong>${e.water.length}</strong><small>สถานีระดับน้ำ</small></div><div><strong>${e.rain.length}</strong><small>สถานีฝน</small></div><div><strong>${e.nearest!==null?fmt(e.nearest)+' กม.':'–'}</strong><small>สถานีเข้าเกณฑ์ใกล้ที่สุด</small></div></div>${e.maxRain!==null?`<small class="ef-estate-rain">ฝนสูงสุดใกล้นิคมฯ ${fmt(e.maxRain)} มม.</small>`:''}<small class="ef-estate-river-distance">ใกล้สถานีใน${esc(riverScope?.river||'สายน้ำที่เลือก')} ${headerEstate?'ข้อมูลสถานีภายในรัศมี 30 กม.':fmt(e.riverDistance)+' กม.'}</small><span class="ef-estate-map-label">ดูตำแหน่งบนแผนที่ →</span></button>`).join(''):`<p class="ef-empty">${q?'ไม่พบชื่อนิคมฯ ที่ค้นหา':'ไม่พบนิคมฯ เข้าเกณฑ์จากสถานีที่มีเวลาตรวจวัดภายใน 24 ชม. ในชุดข้อมูลนี้'}${m.stale?' · ชุดข้อมูลย้อนหลัง':''}</p>`;
  }
 
 
@@ -340,6 +358,8 @@
 
  function render(data){
   mount();if(!$('estateFocusDashboard'))return;current=data;const m=model(data);
+  if(headerEstate&&m.estates[0])selected=String(m.estates[0].id);
+  document.dispatchEvent(new CustomEvent('ieat-flood-estate-scope',{detail:{active:!!headerEstate,name:headerEstate,estate:headerEstate?m.estates[0]||null:null}}));
   set('efTotal',m.complete?fmt(m.estates.length):'รอตรวจสอบ');
   [['efWatch',m.watch.length],['efRainWatch',m.watch.filter(e=>e.rain.length).length],['efWaterWatch',m.watch.filter(e=>e.water.length).length]].forEach(([id,n])=>set(id,m.usable?fmt(n):m.stale?'ข้อมูลย้อนหลัง':'ข้อมูลไม่ครบ'));
   set('ef24',m.warning24.available?fmt(m.warning24.rows.length):'ไม่มีข้อมูล');set('ef48',m.warning48.available?fmt(m.warning48.rows.length):'ไม่มีข้อมูล');
