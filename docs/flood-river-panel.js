@@ -6,6 +6,23 @@
  const stamp=v=>Date.parse(/(Z|[+-]\d\d:?\d\d)$/.test(String(v))?v:String(v||'').replace(' ','T')+'+07:00');
  const time=v=>Number.isFinite(stamp(v))?new Date(stamp(v)).toLocaleString('th-TH',{timeZone:'Asia/Bangkok',dateStyle:'short',timeStyle:'short'}):'ไม่ระบุเวลา';
  let rows=[],busy=false,selected='49',river='แม่น้ำเจ้าพระยา',error=false,history=[],historyDays=1;
+
+ let estateScope={active:false,estate:null,name:''};
+ function inEstateScope(r){
+  if(!estateScope.active)return true;
+  const e=estateScope.estate,lat=n(r.lat),lon=n(r.lng??r.lon);
+  if(!e||lat===null||lon===null)return false;
+  const rad=Math.PI/180,dy=(lat-Number(e.lat))*rad,dx=(lon-Number(e.lon))*rad,h=Math.sin(dy/2)**2+Math.cos(Number(e.lat)*rad)*Math.cos(lat*rad)*Math.sin(dx/2)**2;
+  return 12742*Math.asin(Math.sqrt(Math.min(1,h)))<=30;
+ }
+ document.addEventListener('ieat-flood-estate-scope',event=>{
+  const next=event.detail;
+  if(JSON.stringify(next)===JSON.stringify(estateScope))return;
+  estateScope=next;selected='';
+  const local=rows.filter(inEstateScope);
+  if(local.length&&!local.some(r=>r.river===river))river=local[0].river;
+  render();
+ });
  function fresh(r){const a=Date.now()-stamp(r.measured_at);return Number.isFinite(a)&&a>=-300000&&a<=21600000}
  function gap(r){return n(r.wl)!==null&&n(r.bank)!==null?r.wl-r.bank:null}
  function status(r){if(!fresh(r)||n(r.wl)===null)return ['#7a7e85','ข้อมูลย้อนหลัง / ไม่มีค่า'];const g=gap(r);return g!==null&&g>=0?['#e6004d','ถึง / เกินตลิ่ง']:n(r.critical)!==null&&Number(r.wl)>=Number(r.critical)?['#e64f00','วิกฤต']:Number(r.situation)===4||(n(r.warn)!==null&&Number(r.wl)>=Number(r.warn))?['#ffaa00','เฝ้าระวัง']:['#008558','ปกติ']}
@@ -53,11 +70,11 @@
 
 
  function historyChart(){
-  const cutoff=Date.now()-historyDays*86400000,entries=history.filter(s=>stamp(s.time)>=cutoff).map(s=>({time:s.time,stations:s.stations.filter(r=>r.river===river)})).filter(s=>s.stations.length),points=[];
+  const cutoff=Date.now()-historyDays*86400000,entries=history.filter(s=>stamp(s.time)>=cutoff).map(s=>({time:s.time,stations:s.stations.filter(r=>r.river===river&&(!estateScope.active||rows.some(v=>inEstateScope(v)&&String(v.code)===String(r.code))))})).filter(s=>s.stations.length),points=[];
   entries.forEach(s=>{const values=s.stations.filter(r=>n(r.wl)!==null),mean=values.reduce((a,r)=>a+Number(r.wl),0)/values.length;if(!values.length)return;points.push({label:time(s.time),at:stamp(s.time),mean,warn:values.filter(r=>!(gap(r)!==null&&gap(r)>=0)&&(n(r.warn)!==null?Number(r.wl)>=Number(r.warn):Number(r.situation)===4)).length,crit:values.filter(r=>gap(r)!==null&&gap(r)>=0).length})});
   let approximate=false;
   if(points.length<2&&historyDays===1){
-   approximate=true;points.length=0;const stations=rows.filter(r=>r.river===river&&Array.isArray(r.spark)),count=Math.max(0,...stations.map(r=>r.spark.length));
+   approximate=true;points.length=0;const stations=rows.filter(r=>inEstateScope(r)&&r.river===river&&Array.isArray(r.spark)),count=Math.max(0,...stations.map(r=>r.spark.length));
    for(let i=0;i<count;i++){const valid=stations.map(r=>({...r,wl:n(r.spark[i])})).filter(r=>r.wl!==null);if(!valid.length){points.push(null);continue}points.push({label:'ตัวอย่าง '+(i+1),mean:valid.reduce((a,r)=>a+r.wl,0)/valid.length,warn:valid.filter(r=>n(r.warn)!==null&&r.wl>=r.warn&&!(gap(r)!==null&&gap(r)>=0)).length,crit:valid.filter(r=>gap(r)!==null&&gap(r)>=0).length})}
   }
   const usable=points.filter(Boolean);
@@ -69,19 +86,19 @@
   $('rpHistoryRows').innerHTML=usable.map(p=>`<tr><td>${esc(p.label)}</td><td>${fmt(p.mean)}</td><td>${p.warn}</td><td>${p.crit}</td></tr>`).join('');
  }
  function flowChart(){
-  const list=rows.filter(v=>v.river===river),r=(river==='แม่น้ำเจ้าพระยา'?byCode('C.13'):river==='แม่น้ำป่าสัก'?byCode('S.26'):list.find(v=>n(v.flow)!==null))||null,title=river==='แม่น้ำเจ้าพระยา'?'น้ำที่เขื่อนเจ้าพระยาระบาย':river==='แม่น้ำป่าสัก'?'น้ำที่ท้ายเขื่อนพระรามหก':'อัตราการไหล · '+river; $('rpFlowTitle').textContent=title; const today=new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Bangkok'}),days=Array.from({length:14},(_,i)=>new Date(Date.parse(today+'T12:00:00+07:00')-(13-i)*86400000).toLocaleDateString('en-CA',{timeZone:'Asia/Bangkok'})),daily=new Map();
+  const list=rows.filter(v=>inEstateScope(v)&&v.river===river),r=(estateScope.active?list.find(v=>n(v.flow)!==null):river==='แม่น้ำเจ้าพระยา'?byCode('C.13'):river==='แม่น้ำป่าสัก'?byCode('S.26'):list.find(v=>n(v.flow)!==null))||null,title=estateScope.active?'อัตราการไหลในพื้นที่ · '+estateScope.name:river==='แม่น้ำเจ้าพระยา'?'น้ำที่เขื่อนเจ้าพระยาระบาย':river==='แม่น้ำป่าสัก'?'น้ำที่ท้ายเขื่อนพระรามหก':'อัตราการไหล · '+river; $('rpFlowTitle').textContent=title; const today=new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Bangkok'}),days=Array.from({length:14},(_,i)=>new Date(Date.parse(today+'T12:00:00+07:00')-(13-i)*86400000).toLocaleDateString('en-CA',{timeZone:'Asia/Bangkok'})),daily=new Map();
   const refCode=r?.oldcode;history.forEach(s=>{const sample=s.stations.find(v=>v.river===river&&refCode&&v.oldcode===refCode);if(!sample||n(sample.flow_max??sample.flow)===null)return;const r=sample;const d=new Date(stamp(s.time)).toLocaleDateString('en-CA',{timeZone:'Asia/Bangkok'});if(!daily.has(d)||daily.get(d).value<Number(r.flow_max??r.flow))daily.set(d,{value:Number(r.flow_max??r.flow),time:r.measured_at})});
   if(r&&n(r.flow)!==null){const d=new Date(stamp(r.measured_at)).toLocaleDateString('en-CA',{timeZone:'Asia/Bangkok'});if(!daily.has(d)||daily.get(d).value<Number(r.flow))daily.set(d,{value:Number(r.flow),time:r.measured_at})}
   const prior=new Date(Date.parse(today+'T12:00:00+07:00')-86400000).toLocaleDateString('en-CA',{timeZone:'Asia/Bangkok'}),now=daily.get(today),prev=daily.get(prior),diff=now&&prev?now.value-prev.value:null;
   $('rpFlowValue').innerHTML=(r&&n(r.flow)!==null?fmt(r.flow,0):'ไม่มีค่า')+' <small>ลบ.ม./วินาที</small>';
   $('rpFlowChange').textContent=diff===null?'ยังไม่มีค่าเทียบวันก่อน':(diff>0?'+':'')+fmt(diff,0)+' จากวันก่อน';
-  const bangkok=river==='แม่น้ำเจ้าพระยา'?byCode('C.12'):list.slice().reverse().find(v=>n(v.flow)!==null);$('rpDownstreamLabel').textContent=river==='แม่น้ำเจ้าพระยา'?'อัตราการไหลผ่านกรุงเทพฯ':'อัตราการไหล · '+(bangkok?.name||river);$('rpBangkokFlow').textContent=bangkok&&n(bangkok.flow)!==null?fmt(bangkok.flow,0)+' ลบ.ม./วินาที · '+time(bangkok.measured_at):'ไม่มีข้อมูลอัตราการไหลของสายน้ำที่เลือก';
+  const bangkok=!estateScope.active&&river==='แม่น้ำเจ้าพระยา'?byCode('C.12'):list.slice().reverse().find(v=>n(v.flow)!==null);$('rpDownstreamLabel').textContent=river==='แม่น้ำเจ้าพระยา'?'อัตราการไหลผ่านกรุงเทพฯ':'อัตราการไหล · '+(bangkok?.name||river);$('rpBangkokFlow').textContent=bangkok&&n(bangkok.flow)!==null?fmt(bangkok.flow,0)+' ลบ.ม./วินาที · '+time(bangkok.measured_at):'ไม่มีข้อมูลอัตราการไหลของสายน้ำที่เลือก';
   const max=Math.max(1,...[...daily.values()].map(v=>v.value)),W=1000,H=285,L=18,B=240,bw=54,step=69;
   $('rpFlowPlot').innerHTML=`<svg class="rp-history-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(title)} 14 วันย้อนหลัง">${days.map((d,i)=>{const v=daily.get(d),previous=daily.get(days[i-1]),delta=v&&previous?v.value-previous.value:null,x=L+i*step,h=v?v.value/max*165:0;return `<g><title>${d}: ${v?fmt(v.value,0)+' ลบ.ม./วินาที':'ไม่มีข้อมูล'}</title>${v?`<rect x="${x}" y="${B-h}" width="${bw}" height="${h}" rx="7" fill="${delta>0?'#ffaa00':'#008558'}"/><text x="${x+bw/2}" y="${B-h-8}" text-anchor="middle" font-size="12" font-weight="700" fill="#e6004d">${fmt(v.value,0)}</text>${delta===null?'':`<text x="${x+bw/2}" y="${B-h-25}" text-anchor="middle" font-size="11" fill="#e6004d">${delta>0?'+':''}${fmt(delta,0)}</text>`}`:`<path d="M${x} ${B}h${bw}" stroke="#d6e3e9" stroke-width="2"/><text x="${x+bw/2}" y="${B-10}" text-anchor="middle" font-size="10" fill="#8ca1af">ไม่มีข้อมูล</text>`}<text x="${x+bw/2}" y="265" text-anchor="middle" font-size="11" fill="#607d91">${new Date(d+'T12:00:00+07:00').toLocaleDateString('th-TH',{timeZone:'Asia/Bangkok',day:'numeric',month:'short'})}</text></g>`}).join('')}</svg>`;
   $('rpFlowNote').textContent=(r?'สถานี '+r.oldcode+' '+r.name:'ไม่มีสถานีอัตราการไหลใน '+river)+' · '+(r?time(r.measured_at):'ไม่มีเวลาตรวจวัด')+' · แท่งแสดงค่าสูงสุดจากรอบที่เก็บได้ของแต่ละวัน · วันที่ไม่มีข้อมูลเว้นไว้';
  }
 
- function byCode(c){return rows.find(r=>r.river===river&&r.oldcode===c)}
+ function byCode(c){return rows.find(r=>inEstateScope(r)&&r.river===river&&r.oldcode===c)}
  function node(r,x,y,label){const color=r?status(r)[0]:'#899b9e';return `<g ${r?`data-rp-id="${esc(r.code)}" role="button" tabindex="0" aria-label="ดู ${esc(r.name)} บนแผนที่"`:''} class="rp-node"><circle cx="${x}" cy="${y}" r="8" fill="${color}" stroke="white" stroke-width="2"/><text x="${x+17}" y="${y-2}" font-size="11" font-weight="600">${esc(label||r?.oldcode)} ${esc(r?.name||'')}</text><text x="${x+17}" y="${y+15}" font-size="14" font-weight="700">${r&&n(r.flow)!==null?fmt(r.flow,0)+' ลบ.ม./วิ':r?esc(gapText(r)):'ไม่มีสถานีในชุดข้อมูล'}</text><text x="${x+17}" y="${y+31}" font-size="10">${r&&n(r.flow)!==null?esc(gapText(r)):r?'ระดับ '+fmt(r.wl)+' ม.รทก.':''}</text></g>`}
  function graph(list){
   const stations=river==='แม่น้ำเจ้าพระยา'?list.slice().sort((a,b)=>(n(b.lat)||0)-(n(a.lat)||0)):list;
@@ -90,15 +107,15 @@
   return `<svg viewBox="0 0 500 ${H}" class="rp-flow" aria-label="ผังสถานี ${esc(river)}"><text x="20" y="22" font-size="14" font-weight="700">${esc(river)}</text><path d="M30 44 L30 ${last+24}" stroke="#579cba" stroke-width="10" fill="none"/><path d="M30 44 L30 ${last+24}" class="rp-motion" stroke="white" stroke-width="2" fill="none" stroke-dasharray="2 14"/>${stations.map((r,i)=>node(r,30,55+i*86,r.oldcode)).join('')}</svg>`;
  }
  function render(){
-  if(!$('riverSidePanel'))return;const list=rows.filter(r=>r.river===river).sort((a,b)=>(n(a.order)||999)-(n(b.order)||999)),r=list.find(r=>String(r.code)===selected)||list[0];if(r)selected=String(r.code);
-  $('rpRiver').innerHTML=[...new Set(rows.map(r=>r.river).filter(Boolean))].map(v=>`<option ${v===river?'selected':''}>${esc(v)}</option>`).join('');
+  if(!$('riverSidePanel'))return;const list=rows.filter(r=>inEstateScope(r)&&r.river===river).sort((a,b)=>(n(a.order)||999)-(n(b.order)||999)),r=list.find(r=>String(r.code)===selected)||list[0];if(r)selected=String(r.code);
+  $('rpRiver').innerHTML=[...new Set(rows.filter(inEstateScope).map(r=>r.river).filter(Boolean))].map(v=>`<option ${v===river?'selected':''}>${esc(v)}</option>`).join('');
   $('rpStation').innerHTML=list.map(v=>`<option value="${esc(v.code)}" ${String(v.code)===selected?'selected':''}>${esc(v.oldcode)} · ${esc(v.name)}</option>`).join('');
-  $('rpUpdated').textContent=error?'โหลดรอบใหม่ไม่สำเร็จ · แสดงชุดข้อมูลเดิม':`ข้อมูล ${time(list.reduce((a,r)=>stamp(r.measured_at)>stamp(a)?r.measured_at:a,list[0]?.measured_at))} · คลิกจุดหรือการ์ดเพื่อดูในแผนที่`;
+  $('rpUpdated').textContent=error?'โหลดรอบใหม่ไม่สำเร็จ · แสดงชุดข้อมูลเดิม':estateScope.active&&!list.length?'ไม่พบสถานีสายน้ำที่มีพิกัดภายใน 30 กม. จาก '+estateScope.name:`ข้อมูล ${time(list.reduce((a,r)=>stamp(r.measured_at)>stamp(a)?r.measured_at:a,list[0]?.measured_at))} · คลิกจุดหรือการ์ดเพื่อดูในแผนที่`;
   $('rpGraph').innerHTML=graph(list);
   const usable=list.filter(fresh),overflow=usable.filter(v=>gap(v)!==null&&gap(v)>=0).length;
   $('rpCounts').innerHTML=`<span>${list.length} สถานี</span><span>ถึง / เกินตลิ่ง ${overflow}</span><span>ย้อนหลัง / ไม่มีค่า ${list.filter(v=>!fresh(v)||n(v.wl)===null).length}</span>`;
   $('rpProfile').innerHTML=riverProfile(list);flowChart();historyChart();
-  $('rpSummary').innerHTML=r?stationSummary(r):'ไม่มีข้อมูลสถานี';
+  $('rpSummary').innerHTML=r?stationSummary(r):'ไม่พบข้อมูลสถานีในพื้นที่ที่เลือก';
   $('rpCards').innerHTML=list.map(stationCard).join('');
   document.dispatchEvent(new CustomEvent('ieat-river-scope',{detail:{river,stations:list.map(v=>({code:v.code,oldcode:v.oldcode,lat:n(v.lat),lon:n(v.lng??v.lon)}))}}));
   $('rpFocus')?.addEventListener('click',()=>focus(r));
