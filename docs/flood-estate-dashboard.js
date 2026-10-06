@@ -501,6 +501,7 @@ $('efFilter').onchange=()=>renderEstates();
   const list=$('efReservoirList');if(!list)return;
   const latest=reservoirs;
   const rows=filterWaterScope(latest).sort((a,b)=>Number(b.percent)-Number(a.percent));
+  const panel=list.closest('.ef-reservoir-panel');if(panel)panel.hidden=rows.length===0;
   list.innerHTML=rows.length?rows.map(r=>{const p=num(r.percent),theme=waterCardTheme(p),color=theme.color,label=p===null?'ไม่มีค่าล่าสุด':p>=100?'เกินความจุ':p>=80?'น้ำมาก':p>=30?'น้ำปานกลาง':'น้ำน้อย';return '<button type="button" class="ef-reservoir-row" data-water-theme="'+theme.key+'" style="--water-accent:'+color+'" data-high="'+(p>=80)+'" data-reservoir-id="'+esc(r.id)+'" '+(r.lat==null||r.lng==null?'disabled':'')+'><div><b>'+esc(r.name)+'</b><small>จ.'+esc(r.province)+' · อ.'+esc(r.district)+'</small></div><div class="ef-reservoir-percent">'+(p===null?'—':Math.round(p)+'%')+'<span style="background:'+color+'">'+label+'</span></div><div class="ef-reservoir-bar"><i style="width:'+Math.min(100,Math.max(0,p))+'%;background:'+color+'"></i></div><small>ข้อมูล '+esc(r.measured_at)+'</small>'+distanceLabel(r)+'</button>'}).join(''):'<p>'+'ไม่พบข้อมูลอ่างเก็บน้ำในชุดข้อมูลต้นทาง'+'</p>';
   $('efReservoirTime').textContent='แสดงทุกจังหวัด · แต่ละรายการระบุวันที่ตรวจวัด · ข้อมูลรายวัน · สัดส่วนน้ำต่อความจุปกติ · ThaiWater / กรมชลประทาน · โหลดใหม่ทุก 1 ชั่วโมง'+(reservoirError?' · โหลดรอบใหม่ไม่สำเร็จ แสดงค่าครั้งก่อน':'');
  }
