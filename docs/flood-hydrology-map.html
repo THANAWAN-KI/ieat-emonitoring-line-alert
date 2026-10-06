@@ -136,9 +136,10 @@ let renderTimer=null;function queueRender(){clearTimeout(renderTimer);renderTime
 function queueWaterLabels(){if(!raster)return;cancelAnimationFrame(waterLabelFrame);waterLabelFrame=requestAnimationFrame(()=>{const boxes=[];document.querySelectorAll('.water-map-label').forEach(el=>{el.style.visibility='visible';const b=el.getBoundingClientRect();if(b.right<0||b.bottom<0||b.left>innerWidth||b.top>innerHeight||boxes.some(a=>!(b.right+4<a.left||b.left-4>a.right||b.bottom+3<a.top||b.top-3>a.bottom))){el.style.visibility='hidden'}else boxes.push(b)});});}
 document.querySelector('[data-layer="boundary"]').addEventListener('change',()=>{flags.boundary=document.querySelector('[data-layer="boundary"]').checked;syncBoundaries();queueBoundaries()});
 
+let estateProvinceScope=null;
 function scoped(){
- const province=$('province').value,q='';
- return features.filter(f=>flags[f.properties.kind]&&(!province||['estate','dam'].includes(f.properties.kind)||f.properties.province===province)&&[f.properties.name,f.properties.code,f.properties.river,f.properties.district].join(' ').toLowerCase().includes(q));
+ const province=estateProvinceScope?.active?estateProvinceScope.province:$('province').value,q='';
+ return features.filter(f=>flags[f.properties.kind]&&(estateProvinceScope?.active?(!!province&&(f.properties.province===province||(f.properties.kind==='estate'&&f.properties.name===estateProvinceScope.name))):(!province||['estate','dam'].includes(f.properties.kind)||f.properties.province===province))&&[f.properties.name,f.properties.code,f.properties.river,f.properties.district].join(' ').toLowerCase().includes(q));
 }
 
 function sensorSvg(kind){return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+(kind==='water'?'<path d="M6 3h7v15H6Z M10 6h3M9 10h4M10 14h3M3 20q3-3 6 0t6 0t6 0"/>':'<path d="M3 5h18M5 5v10M19 5v10M10 5v9M14 5v9M3 18q3-3 6 0t6 0t6 0M3 22q3-3 6 0t6 0t6 0"/>')+'</svg>';}
@@ -314,6 +315,7 @@ document.addEventListener('keydown',event=>{if(event.key==='Escape')document.que
 document.querySelectorAll('[data-layer]').forEach(input=>input.addEventListener('change',()=>{flags[input.dataset.layer]=input.checked;if(input.dataset.layer==='camera'&&input.checked)cameras();render()}));
 window.addEventListener('message',async event=>{
  if(event.origin!==location.origin||event.source!==parent||!event.data)return;const d=event.data;
+ if(d.type==='flood-province-scope'){estateProvinceScope=d;render();if(d.active&&d.estate)focus({lat:d.estate.lat,lon:d.estate.lon,label:d.name,scale:150000});return}
  if(d.type==='flood-map-resize'){if(vector)vector.resize();if(raster)raster.invalidateSize();return}
  if(d.type==='flood-map-focus'){focus(d);return}
  if(d.type==='flood-water-feed'&&Array.isArray(d.rows)){
