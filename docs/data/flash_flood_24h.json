@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "period": "24h",
-  "date": "2026-10-06",
-  "time": "17:00:00",
+  "date": "2026-10-07",
+  "time": "00:00:00",
   "type": "แผนที่แสดงพื้นที่เสี่ยงน้ำท่วมฉับพลัน (รายตำบล)ใน 24 ชม. ข้างหน้า จากปริมาณฝนสะสมที่สถานีโทรมาตร",
   "source_url": "https://api.hii.or.th/v2/4UQaYnf0Bx4fXPYyCdDRbqHyXH9Ixvd2nVUjaN1cLBY=/warning/flashflood-24h",
   "area_count": 2,
@@ -18,8 +18,8 @@
       "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์น้ำหมาวหมอก",
       "latitude": 19.061718,
       "longitude": 101.10231,
-      "sum_rainfall_mm": 140.6,
-      "observed_at": "2026-10-06T05:00:00+07:00",
+      "sum_rainfall_mm": 141.2,
+      "observed_at": "2026-10-06T11:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -841,8 +841,8 @@
       "station": "ศูนย์พัฒนาเด็กเล็ก อบต.ท่านา",
       "latitude": 8.67848,
       "longitude": 98.41658,
-      "sum_rainfall_mm": 141.0,
-      "observed_at": "2026-10-06T05:00:00+07:00",
+      "sum_rainfall_mm": 143.60000000000002,
+      "observed_at": "2026-10-06T11:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -1186,8 +1186,8 @@
       "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์น้ำหมาวหมอก",
       "latitude": 19.061718,
       "longitude": 101.10231,
-      "sum_rainfall_mm": 140.6,
-      "observed_at": "2026-10-06T05:00:00+07:00",
+      "sum_rainfall_mm": 141.2,
+      "observed_at": "2026-10-06T11:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -2009,8 +2009,8 @@
       "station": "ศูนย์พัฒนาเด็กเล็ก อบต.ท่านา",
       "latitude": 8.67848,
       "longitude": 98.41658,
-      "sum_rainfall_mm": 141.0,
-      "observed_at": "2026-10-06T05:00:00+07:00",
+      "sum_rainfall_mm": 143.6,
+      "observed_at": "2026-10-06T11:00:00+07:00",
       "geometry": {
         "rings": [
           [
