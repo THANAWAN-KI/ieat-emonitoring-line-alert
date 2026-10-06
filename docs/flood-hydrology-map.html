@@ -266,7 +266,7 @@ function updateDataAudit(){
  const water=features.filter(f=>f.properties.kind==='water'),canal=features.filter(f=>f.properties.kind==='canal');
  const recent=water.filter(f=>!f.properties.stale).length,at=water.map(f=>date(f.properties.measured_at)).filter(Number.isFinite);
  const format=t=>new Date(t).toLocaleString('th-TH',{timeZone:'Asia/Bangkok',dateStyle:'short',timeStyle:'short'});
- box.textContent='โหลดใหม่ทุก 5 นาที · ตรวจล่าสุด '+(lastWaterCheck?format(lastWaterCheck):'กำลังโหลด')+' · ระดับน้ำ '+water.length+' จุด (ไม่เกิน 6 ชม. '+recent+' จุด) · คลอง กทม. '+canal.length+' จุด'+(at.length?' · ค่าระดับน้ำล่าสุด '+format(Math.max(...at)):'')+' · สีเทา = ค่าตรวจวัดเก่า/ไม่ระบุเวลา'+(Object.keys(sourceErrors).length?' · โหลดรอบใหม่ไม่สำเร็จ: '+Object.keys(sourceErrors).join(', ')+' (คงค่าครั้งก่อนและเวลาจริง)':'');
+ box.textContent='โหลดใหม่ทุก 1 ชั่วโมง · ตรวจล่าสุด '+(lastWaterCheck?format(lastWaterCheck):'กำลังโหลด')+' · ระดับน้ำ '+water.length+' จุด (ไม่เกิน 6 ชม. '+recent+' จุด) · คลอง กทม. '+canal.length+' จุด'+(at.length?' · ค่าระดับน้ำล่าสุด '+format(Math.max(...at)):'')+' · สีเทา = ค่าตรวจวัดเก่า/ไม่ระบุเวลา'+(Object.keys(sourceErrors).length?' · โหลดรอบใหม่ไม่สำเร็จ: '+Object.keys(sourceErrors).join(', ')+' (คงค่าครั้งก่อนและเวลาจริง)':'');
 }
 async function load(){
  if(loadBusy)return;loadBusy=true;
@@ -311,7 +311,7 @@ window.addEventListener('message',async event=>{
  if(d.type==='flood-map-snapshot'){try{let dataUrl;if(vector&&ready){await new Promise(resolve=>{vector.once('render',resolve);vector.triggerRepaint()});dataUrl=vector.getCanvas().toDataURL('image/png')}else if(raster&&window.html2canvas){const canvas=await html2canvas($('raster'),{useCORS:true,backgroundColor:'#eaf1f2',logging:false});dataUrl=canvas.toDataURL('image/png')}else throw Error('แผนที่ยังไม่พร้อม');event.source.postMessage({type:'flood-map-snapshot-result',id:d.id,dataUrl},event.origin)}catch(e){event.source.postMessage({type:'flood-map-snapshot-result',id:d.id,error:e.message},event.origin)}}
 });
 fetch('./data/water_flow_major.geojson?v=20261001',{signal:AbortSignal.timeout(20000)}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()}).then(d=>{waterways=d;addFlow();drawFlow()}).catch(()=>{$('status').textContent+=' · โหลดแนวลูกศรไม่สำเร็จ'});
-vectorStart();load();loadCanals();cameras();setInterval(()=>{if(!document.hidden)loadCanals()},300000);setInterval(()=>{if(!document.hidden)load()},300000);
+vectorStart();load();loadCanals();cameras();setInterval(()=>{if(!document.hidden)loadCanals()},3600000);setInterval(()=>{if(!document.hidden)load()},3600000);
 function remoteInfo(){
  const lines=[];
  if(flags.satellite)lines.push(satelliteFeed?'น้ำท่วมจากดาวเทียม GISTDA · วันที่ภาพ '+satelliteFeed.passes.map(p=>p.date).filter((v,i,a)=>a.indexOf(v)===i).join(', ')+' · ภาพตามรอบดาวเทียม':satelliteError||'กำลังโหลดภาพดาวเทียม…');
@@ -365,8 +365,8 @@ async function loadRadar(){
  radarLoading=false;syncRemoteOverlays();
 }
 document.querySelector('[data-layer="radar"]').addEventListener('change',loadRadar);
-loadSatellite();loadRadar();setInterval(()=>{loadSatellite();loadRadar();},300000);
-document.addEventListener('visibilitychange',()=>{if(!document.hidden){load();loadCanals();loadSatellite();loadRadar();if(!camerasLoaded)cameras();}});
+loadSatellite();loadRadar();setInterval(()=>{loadSatellite();loadRadar();},3600000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&(!lastWaterCheck||Date.now()-lastWaterCheck>=3600000)){load();loadCanals();loadSatellite();loadRadar();if(!camerasLoaded)cameras();}});
 
 })();
 </script></body></html>
