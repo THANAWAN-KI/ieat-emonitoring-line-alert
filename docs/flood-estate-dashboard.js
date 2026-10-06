@@ -250,19 +250,20 @@
  #estateFocusDashboard #efMapControls{max-height:240px;padding:10px}
  #efMapControls .search{flex-wrap:wrap}#efMapControls .search input,#efMapControls .search select{flex:1 1 100%;font-size:16px}
 }
+.ef-map-foot{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.ef-map-foot span{flex:1;min-width:180px}
 #efFullscreenSlot{display:flex;justify-content:flex-end;margin-bottom:8px}
-#estateFocusDashboard #efMapFullscreen,#efMapExitFullscreen{font:600 13px Sarabun,sans-serif;background:#f3e7f8;color:#52057f;border:1px solid #dcc7e9;padding:9px 14px;border-radius:20px;cursor:pointer;white-space:nowrap}
+#estateFocusDashboard #efMapFullscreen,#efMapExitFullscreen{font:600 13px Sarabun,sans-serif;background:#e5f4e9;color:#24633d!important;border:1px solid #b8d9c1;padding:9px 14px;border-radius:20px;cursor:pointer;white-space:nowrap}
 #efMapExitFullscreen{display:none;position:absolute;top:12px;left:12px;z-index:1500}
 .ef-map-column:fullscreen #efMapExitFullscreen,.ef-map-column.ef-map-expanded #efMapExitFullscreen{display:block}
 .ef-map-column{position:relative}
 `;document.head.appendChild(style);
   const host=document.createElement('section');host.id='estateFocusDashboard';
   const metrics=[['efWatch','นิคมฯ เข้าเกณฑ์เฝ้าระวัง','ผลคัดกรองจากสถานีใกล้นิคมฯ'],['efWaterWatch','ใกล้ระดับน้ำเข้าเกณฑ์','สถานีระดับน้ำภายใน 30 กม.'],['efRainWatch','ใกล้ฝนเข้าเกณฑ์','ฝนสะสมมากกว่า 35 มม. ภายใน 30 กม.'],['efTotal','นิคมฯ / ท่าเรือในชุดข้อมูล','ตำแหน่งที่ใช้ประเมินจากข้อมูล กนอ.'],['ef24','ตำบลเฝ้าระวัง 24 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ'],['ef48','ตำบลเฝ้าระวัง 48 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ']];
-  host.innerHTML=`<div class="ef-workspace"><div class="ef-data-column"><div id="efFullscreenSlot"><button type="button" id="efMapFullscreen" aria-pressed="false">เต็มหน้าจอ ↗</button></div>
+  host.innerHTML=`<div class="ef-workspace"><div class="ef-data-column">
    <div class="ef-charts"><article class="ef-chart"><h2>5 นิคมฯ ใกล้สถานีฝนสะสมสูงสุด</h2><div id="efRainRank"></div><p id="efRiverScopeNote">กำลังโหลดขอบเขตสายน้ำที่เลือก</p></article></div>
    <section class="ef-panel ef-estate-panel"><h2>ติดตามนิคมฯ / ท่าเรือ</h2><div class="ef-tools"><input id="efSearch" list="efEstateOptions" type="search" aria-label="ค้นหาชื่อนิคมฯ / ท่าเรือ" placeholder="ค้นหาชื่อนิคมฯ / ท่าเรือ"><datalist id="efEstateOptions"></datalist><select id="efFilter" aria-label="กรองข้อมูลนิคมฯ"><option value="watch">เข้าเกณฑ์เฝ้าระวัง</option><option value="water">ใกล้ระดับน้ำเข้าเกณฑ์</option><option value="rain">ใกล้ฝนเข้าเกณฑ์</option><option value="all">ทุกนิคมฯ / ท่าเรือ</option></select></div><p id="efResultCount" class="ef-count"></p><div class="ef-selection" id="efSelection" hidden></div><div id="efEstates" class="ef-estates"></div></section>
    <div class="ef-warning"><details class="ef-panel" id="efDetails24"><summary>พื้นที่เฝ้าระวัง 24 ชั่วโมง</summary><div id="efWarning24"></div></details><details class="ef-panel" id="efDetails48"><summary>พื้นที่เฝ้าระวัง 48 ชั่วโมง</summary><div id="efWarning48"></div></details></div>
-   </div><section class="ef-map-column"><button type="button" id="efMapExitFullscreen" aria-label="ออกจากแผนที่เต็มหน้าจอ">ย่อแผนที่ ↙</button><div class="ef-map-frame"><iframe id="estateFocusMap" title="แผนที่สถานการณ์น้ำและนิคมอุตสาหกรรม" src="flood-hydrology-map.html?v=20261006-map-style-26&amp;center=101,13&amp;scale=9244648" loading="eager"></iframe></div><footer class="ef-map-foot">GISTDA ผ่าน Faonam: พื้นที่น้ำท่วมตามวันที่ภาพ · กรมอุตุฯ: เรดาร์คอมโพสิท พร้อมแหล่งสำรอง Faonam · RID GeoJSON: สถานีระดับน้ำ</footer></section></div>`;
+   </div><section class="ef-map-column"><button type="button" id="efMapExitFullscreen" aria-label="ออกจากแผนที่เต็มหน้าจอ">ย่อแผนที่ ↙</button><div class="ef-map-frame"><iframe id="estateFocusMap" title="แผนที่สถานการณ์น้ำและนิคมอุตสาหกรรม" src="flood-hydrology-map.html?v=20261006-map-boundary-27&amp;center=101,13&amp;scale=9244648" loading="eager"></iframe></div><footer class="ef-map-foot"><button type="button" id="efMapFullscreen" aria-pressed="false">เต็มหน้าจอ ↗</button><span>GISTDA ผ่าน Faonam: พื้นที่น้ำท่วมตามวันที่ภาพ · กรมอุตุฯ: เรดาร์คอมโพสิท พร้อมแหล่งสำรอง Faonam · RID GeoJSON: สถานีระดับน้ำ</span></footer></section></div>`;
   warning.prepend(host);
   const loading=$('dashboardLoading');if(loading)loading.remove();
 
@@ -410,6 +411,7 @@ $('efFilter').onchange=()=>renderEstates();
  function start(){mount();if(window.IEAT_THAIWATER_DATA)render(window.IEAT_THAIWATER_DATA);load();setInterval(load,300000)}
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
+
 
 
 
