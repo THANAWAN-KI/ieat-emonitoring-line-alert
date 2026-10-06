@@ -7,6 +7,7 @@ on:
       - "scripts/fetch_thaiwater_open_data.py"
       - "scripts/fetch_bma_canals.py"
       - "scripts/fetch_medium_reservoirs.py"
+      - "scripts/fetch_related_dams.py"
       - ".github/workflows/update-thaiwater-open-data.yml"
   workflow_dispatch:
   schedule:
@@ -33,14 +34,15 @@ jobs:
           python scripts/fetch_thaiwater_open_data.py
           python scripts/fetch_bma_canals.py
           python scripts/fetch_medium_reservoirs.py
+          python scripts/fetch_related_dams.py
       - name: Commit refreshed feed
         run: |
-          if [[ -z "$(git status --porcelain -- docs/data/thaiwater_latest.json docs/data/thaiwater_latest.js docs/data/flash_flood_24h.json docs/data/flash_flood_48h.json docs/data/flash_flood_24h.geojson docs/data/flash_flood_48h.geojson docs/data/radar_latest.gif docs/data/bma_canal_latest.json docs/data/medium_reservoirs_latest.json)" ]]; then
+          if [[ -z "$(git status --porcelain -- docs/data/thaiwater_latest.json docs/data/thaiwater_latest.js docs/data/flash_flood_24h.json docs/data/flash_flood_48h.json docs/data/flash_flood_24h.geojson docs/data/flash_flood_48h.geojson docs/data/radar_latest.gif docs/data/bma_canal_latest.json docs/data/medium_reservoirs_latest.json docs/data/related_dams_latest.json)" ]]; then
             echo "No ThaiWater feed changes"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- docs/data/thaiwater_latest.json docs/data/thaiwater_latest.js docs/data/flash_flood_24h.json docs/data/flash_flood_48h.json docs/data/flash_flood_24h.geojson docs/data/flash_flood_48h.geojson docs/data/radar_latest.gif docs/data/bma_canal_latest.json docs/data/medium_reservoirs_latest.json
+          git add -- docs/data/thaiwater_latest.json docs/data/thaiwater_latest.js docs/data/flash_flood_24h.json docs/data/flash_flood_48h.json docs/data/flash_flood_24h.geojson docs/data/flash_flood_48h.geojson docs/data/radar_latest.gif docs/data/bma_canal_latest.json docs/data/medium_reservoirs_latest.json docs/data/related_dams_latest.json
           git commit -m "Update ThaiWater open data [skip ci]"
           git push
