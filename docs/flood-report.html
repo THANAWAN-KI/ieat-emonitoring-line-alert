@@ -203,6 +203,350 @@ outline:2px solid #0066b2!important;outline-offset:2px;
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(start,200));else setTimeout(start,200);
 })();
 </script>
+
+<!-- mobile-responsive-20261006 -->
+<style>
+@media (max-width:950px){
+  html,body{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    height:auto!important;
+    overflow-x:hidden!important;
+    -webkit-text-size-adjust:100%;
+  }
+  body{background:#f8fafc!important}
+  main.container,#warning,#estateFocusDashboard,
+  #estateFocusDashboard .ef-workspace,
+  #estateFocusDashboard .ef-data-column,
+  #estateFocusDashboard .ef-map-column{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+  }
+  main.container{padding:0!important;overflow:visible!important}
+  #warning{padding:0!important;overflow:visible!important}
+  #estateFocusDashboard{
+    height:auto!important;
+    min-height:0!important;
+    overflow:visible!important;
+    padding:0!important;
+  }
+  #estateFocusDashboard .ef-workspace{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-template-rows:auto auto!important;
+    gap:10px!important;
+    height:auto!important;
+    min-height:0!important;
+    align-items:start!important;
+    overflow:visible!important;
+  }
+  #estateFocusDashboard .ef-data-column{
+    grid-column:1!important;
+    grid-row:1!important;
+    height:auto!important;
+    max-height:none!important;
+    position:static!important;
+    top:auto!important;
+    overflow:visible!important;
+    padding:8px!important;
+  }
+  #estateFocusDashboard .ef-map-column{
+    grid-column:1!important;
+    grid-row:2!important;
+    position:relative!important;
+    height:min(72dvh,680px)!important;
+    min-height:460px!important;
+    max-height:680px!important;
+    border-radius:14px!important;
+    overflow:hidden!important;
+    margin:0 8px 10px!important;
+    width:calc(100% - 16px)!important;
+  }
+  #estateFocusDashboard .ef-map-column:fullscreen,
+  #estateFocusDashboard .ef-map-column.ef-map-expanded{
+    width:100%!important;
+    height:100dvh!important;
+    min-height:0!important;
+    max-height:none!important;
+    margin:0!important;
+    border-radius:0!important;
+    position:fixed!important;
+    inset:0!important;
+  }
+  #estateFocusDashboard .ef-map-frame{
+    min-height:0!important;
+    width:100%!important;
+    overflow:hidden!important;
+  }
+  #estateFocusDashboard #estateFocusMap{
+    width:100%!important;
+    height:100%!important;
+    min-width:0!important;
+    display:block!important;
+  }
+  #estateFocusDashboard .ef-map-head{
+    padding:10px 12px!important;
+    gap:8px!important;
+    align-items:flex-start!important;
+  }
+  #estateFocusDashboard .ef-map-head h2{
+    font-size:17px!important;
+    line-height:1.45!important;
+  }
+  #estateFocusDashboard .ef-map-head small{
+    font-size:12px!important;
+    overflow-wrap:anywhere!important;
+  }
+  #estateFocusDashboard .ef-map-head .ef-actions{
+    width:100%!important;
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:8px!important;
+  }
+  #estateFocusDashboard .ef-map-head .ef-actions button,
+  #estateFocusDashboard .ef-map-head .ef-actions a{
+    width:100%!important;
+    min-width:0!important;
+    min-height:44px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    text-align:center!important;
+    white-space:normal!important;
+  }
+  #estateFocusDashboard #efMapControls{
+    max-height:220px!important;
+    overflow:auto!important;
+    padding:9px!important;
+    -webkit-overflow-scrolling:touch;
+  }
+  #efMapControls .controls,
+  #efMapControls .search,
+  #efMapControls .toggles{
+    width:100%!important;
+    min-width:0!important;
+  }
+  #efMapControls .search{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:8px!important;
+  }
+  #efMapControls .search input,
+  #efMapControls .search select,
+  #efMapControls .dam-select{
+    width:100%!important;
+    min-width:0!important;
+    min-height:44px!important;
+    font-size:16px!important;
+  }
+  #estateFocusDashboard .ef-map-foot{
+    padding:8px 10px!important;
+    gap:8px!important;
+    font-size:11px!important;
+    line-height:1.5!important;
+  }
+  #estateFocusDashboard .ef-map-foot span{
+    min-width:0!important;
+    flex:1 1 100%!important;
+    overflow-wrap:anywhere!important;
+  }
+  #estateFocusDashboard #efMapFullscreen{
+    min-height:42px!important;
+    width:100%!important;
+  }
+
+  #estateFocusDashboard .ef-panel,
+  #estateFocusDashboard #riverSidePanel,
+  #estateFocusDashboard .rp-new-section,
+  #estateFocusDashboard #rpRankingsAfterWarning .rp-new-section,
+  #estateFocusDashboard .rp-extra-panel,
+  #estateFocusDashboard .rp-profile{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    margin-left:0!important;
+    margin-right:0!important;
+    overflow:hidden!important;
+  }
+  #estateFocusDashboard .ef-panel,
+  #estateFocusDashboard #riverSidePanel{
+    padding:12px!important;
+    border-radius:14px!important;
+  }
+  #estateFocusDashboard .ef-warning{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:8px!important;
+  }
+  #estateFocusDashboard #efRelatedDams,
+  #estateFocusDashboard #efReservoirList,
+  #estateFocusDashboard #efCanalList{
+    grid-template-columns:1fr!important;
+    max-height:none!important;
+    overflow:visible!important;
+    padding-right:0!important;
+  }
+  #estateFocusDashboard #rpCards{
+    max-height:none!important;
+    overflow:visible!important;
+    padding-right:0!important;
+  }
+  #estateFocusDashboard .ef-scroll-caption{
+    margin:5px 0 8px!important;
+    font-size:12px!important;
+  }
+
+  #estateFocusDashboard .rp-titlebar,
+  #estateFocusDashboard .rp-flow-header,
+  #estateFocusDashboard .rp-history-head{
+    align-items:flex-start!important;
+  }
+  #estateFocusDashboard .rp-controls{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:8px!important;
+  }
+  #estateFocusDashboard .rp-controls select,
+  #estateFocusDashboard #rpRefresh,
+  #estateFocusDashboard #rpFocus,
+  #estateFocusDashboard #rpMainRiver{
+    width:100%!important;
+    min-width:0!important;
+    min-height:44px!important;
+    font-size:16px!important;
+  }
+  #estateFocusDashboard .rp-rank-card{
+    grid-template-columns:94px minmax(0,1fr)!important;
+    min-width:0!important;
+  }
+  #estateFocusDashboard .rp-rank-card>div:last-child,
+  #estateFocusDashboard #rpRankingsAfterWarning .rp-rank-card>div:last-child{
+    min-width:0!important;
+    overflow-wrap:anywhere!important;
+  }
+  #estateFocusDashboard .rp-station-row{
+    grid-template-columns:38px minmax(0,1fr)!important;
+    gap:9px!important;
+    padding:10px!important;
+  }
+  #estateFocusDashboard .rp-station-content,
+  #estateFocusDashboard .rp-station-top{
+    min-width:0!important;
+  }
+  #estateFocusDashboard .rp-station-top{
+    gap:6px!important;
+    flex-wrap:wrap!important;
+  }
+  #estateFocusDashboard .rp-station-top b{
+    overflow-wrap:anywhere!important;
+  }
+  #estateFocusDashboard .rp-profile-scroll,
+  #estateFocusDashboard .rp-extra-scroll,
+  #estateFocusDashboard #rpMainGraph{
+    max-width:100%!important;
+    overflow-x:auto!important;
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior-x:contain;
+  }
+  #estateFocusDashboard .rp-profile-svg{
+    min-width:760px!important;
+  }
+  #estateFocusDashboard #rpHistoryPanel table{
+    min-width:620px!important;
+  }
+  #estateFocusDashboard .ef-table{
+    width:100%!important;
+    max-width:100%!important;
+    overflow-x:auto!important;
+    -webkit-overflow-scrolling:touch;
+  }
+  #estateFocusDashboard .ef-table table{
+    min-width:680px!important;
+    width:680px!important;
+    table-layout:auto!important;
+  }
+  #estateFocusDashboard .ef-table td,
+  #estateFocusDashboard .ef-table th{
+    white-space:normal!important;
+    overflow-wrap:normal!important;
+    word-break:normal!important;
+  }
+  #estateFocusDashboard img,
+  #estateFocusDashboard svg{
+    max-width:100%;
+  }
+  #estateFocusDashboard .rp-forecast-card img{
+    width:100%!important;
+    height:auto!important;
+  }
+}
+@media (max-width:560px){
+  #estateFocusDashboard .ef-data-column{padding:6px!important}
+  #estateFocusDashboard .ef-map-column{
+    height:62dvh!important;
+    min-height:430px!important;
+    max-height:560px!important;
+    margin:0 6px 8px!important;
+    width:calc(100% - 12px)!important;
+  }
+  #estateFocusDashboard .ef-warning{
+    grid-template-columns:1fr!important;
+  }
+  #estateFocusDashboard .ef-map-head .ef-actions{
+    grid-template-columns:1fr!important;
+  }
+  #estateFocusDashboard #rpRankingsAfterWarning .rp-rank-card,
+  #estateFocusDashboard .rp-rank-card{
+    grid-template-columns:82px minmax(0,1fr)!important;
+  }
+  #estateFocusDashboard #rpRankingsAfterWarning .rp-rank-card strong,
+  #estateFocusDashboard .rp-rank-card strong{
+    font-size:20px!important;
+  }
+  #estateFocusDashboard .ef-dam-card,
+  #estateFocusDashboard .ef-reservoir-row,
+  #estateFocusDashboard .ef-canal-card{
+    padding:12px!important;
+  }
+  #estateFocusDashboard .ef-dam-flows{
+    grid-template-columns:1fr!important;
+  }
+  #estateFocusDashboard .ef-canal-body{
+    grid-template-columns:62px minmax(0,1fr)!important;
+  }
+  #estateFocusDashboard .ef-canal-gauge svg{
+    width:62px!important;
+    height:auto!important;
+  }
+  #estateFocusDashboard #rpSummary .rp-big-level{
+    font-size:32px!important;
+  }
+  #estateFocusDashboard #rpSummary .rp-bank-gap{
+    font-size:17px!important;
+  }
+  #estateFocusDashboard .rp-profile-svg{
+    min-width:680px!important;
+  }
+}
+@media (max-width:390px){
+  #estateFocusDashboard .ef-map-column{
+    min-height:400px!important;
+  }
+  #estateFocusDashboard .rp-rank-card,
+  #estateFocusDashboard #rpRankingsAfterWarning .rp-rank-card{
+    grid-template-columns:74px minmax(0,1fr)!important;
+  }
+  #estateFocusDashboard .rp-station-row{
+    grid-template-columns:34px minmax(0,1fr)!important;
+    gap:7px!important;
+  }
+  #estateFocusDashboard .ef-map-foot{
+    font-size:10px!important;
+  }
+}
+</style>
+
 </body>
 </html>
 
