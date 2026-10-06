@@ -13,7 +13,7 @@
   const rad=Math.PI/180,dy=(lat-Number(e.lat))*rad,dx=(lon-Number(e.lon))*rad,h=Math.sin(dy/2)**2+Math.cos(Number(e.lat)*rad)*Math.cos(lat*rad)*Math.sin(dx/2)**2;
   return 12742*Math.asin(Math.sqrt(Math.min(1,h)));
  }
- function inEstateScope(r){return !estateScope.active||!!estateScope.province&&String(r.province||'').replace(/^จังหวัด|^จ\./,'').trim()===estateScope.province;}
+ function inEstateScope(r){if(!estateScope.active)return true;const distance=stationDistance(r);return distance!==null&&distance<=(estateScope.radiusKm||30);}
  document.addEventListener('ieat-flood-estate-scope',event=>{
   const next=event.detail;
   if(JSON.stringify(next)===JSON.stringify(estateScope))return;
@@ -133,7 +133,7 @@
  document.addEventListener('ieat-dam-flow-data',event=>{rankedDams=event.detail||[];renderWaterExtras()});
 
  function render(){
-  if(!$('riverSidePanel'))return;rows=rows.filter(r=>fresh(r));const list=rows.filter(r=>inEstateScope(r)&&(estateScope.active||r.river===river)).sort((a,b)=>(n(a.order)||999)-(n(b.order)||999)),r=list.find(r=>String(r.code)===selected)||list[0];if(r)selected=String(r.code);
+  if(!$('riverSidePanel'))return;rows=rows.filter(r=>fresh(r));const list=rows.filter(r=>inEstateScope(r)&&(estateScope.active||r.river===river)).sort((a,b)=>estateScope.active?stationDistance(a)-stationDistance(b):(n(a.order)||999)-(n(b.order)||999)),r=list.find(r=>String(r.code)===selected)||list[0];if(r)selected=String(r.code);
   $('rpRiver').innerHTML=[...new Set(rows.filter(inEstateScope).map(r=>r.river).filter(Boolean))].map(v=>`<option ${v===river?'selected':''}>${esc(v)}</option>`).join('');
   $('rpStation').innerHTML=list.map(v=>`<option value="${esc(v.code)}" ${String(v.code)===selected?'selected':''}>${esc(v.oldcode)} · ${esc(v.name)}</option>`).join('');
   $('rpUpdated').textContent=error?'โหลดรอบใหม่ไม่สำเร็จ · แสดงชุดข้อมูลเดิม':estateScope.active&&!list.length?'ไม่พบสถานี RID ที่มีพิกัดภายใน 30 กม. จาก '+estateScope.name:`ข้อมูล ${time(list.reduce((a,r)=>stamp(r.measured_at)>stamp(a)?r.measured_at:a,list[0]?.measured_at))} · คลิกจุดหรือการ์ดเพื่อดูในแผนที่`;
