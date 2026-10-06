@@ -91,6 +91,22 @@ html,body,main.container,#warning,#estateFocusDashboard{height:100dvh!important;
 #estateFocusDashboard #efRelatedDams .ef-dam-card[data-water-theme] button,
 #estateFocusDashboard #efReservoirList .ef-reservoir-row[data-water-theme],
 #estateFocusDashboard #efReservoirList .ef-reservoir-percent span{border:0!important;outline:none}
+
+/* Fine blue borders and rounded corners match the supplied station card. */
+#estateFocusDashboard #efRelatedDams .ef-dam-card,
+#estateFocusDashboard #efReservoirList .ef-reservoir-row[data-water-theme]{
+border:1px solid #b9ccdd!important;border-radius:14px!important;
+box-shadow:0 3px 9px #234b6a0b!important;padding:16px!important;
+}
+#estateFocusDashboard #efRelatedDams .ef-dam-card:hover,
+#estateFocusDashboard #efReservoirList .ef-reservoir-row[data-water-theme]:hover{
+border-color:#8daecb!important;box-shadow:0 5px 14px #234b6a12!important;
+}
+#estateFocusDashboard #efRelatedDams .ef-dam-card h3,
+#estateFocusDashboard #efReservoirList .ef-reservoir-row b{line-height:1.6;margin-bottom:6px}
+#estateFocusDashboard #efReservoirList .ef-reservoir-row:focus-visible{
+outline:2px solid #0066b2!important;outline-offset:2px;
+}
 </style>
 <script src="flood-rid-source.js?v=20261006-rid-17" defer></script>
 <script src="flood-estate-dashboard.js?v=20261006-water-theme-42" defer></script>
