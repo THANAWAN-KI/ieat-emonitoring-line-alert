@@ -113,6 +113,22 @@
 #estateFocusDashboard .ef-reservoir-row,#estateFocusDashboard .ef-reservoir-row *{color:#fff!important}
 #estateFocusDashboard .ef-reservoir-bar{background:#ffffff66}
 #estateFocusDashboard .ef-reservoir-bar i{background:#fff!important}
+
+#estateFocusDashboard .ef-related-dams,#estateFocusDashboard .ef-reservoir-panel{padding:16px;background:#fff;border:1px solid #e3e9f0;border-radius:18px;box-shadow:0 3px 12px #26334608}
+#estateFocusDashboard .ef-related-dams>h2,#estateFocusDashboard .ef-reservoir-panel>h2{background:#e9f1fc;color:#00387b!important;border-radius:10px;padding:12px;font-size:18px;margin:0 0 12px}
+#estateFocusDashboard #efRelatedDams,#estateFocusDashboard #efReservoirList{max-height:none;overflow:visible;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#estateFocusDashboard .ef-dam-card{background:#fff;border:1px solid #b9ccdd;border-radius:12px;padding:12px;box-shadow:0 3px 9px #234b6a0b}
+#estateFocusDashboard .ef-dam-card h3{font-size:16px!important;color:#244653!important}
+#estateFocusDashboard .ef-dam-value{font-size:28px;color:#007cc0!important}
+#estateFocusDashboard .ef-dam-flows div{background:#eef5fb}
+#estateFocusDashboard .ef-dam-flows b{font-size:18px}
+#estateFocusDashboard .ef-dam-change{background:#f3f5f8}
+#estateFocusDashboard .ef-dam-card button{background:#007cc0;border:0;color:#fff!important;width:100%;padding:10px;border-radius:8px}
+#estateFocusDashboard .ef-reservoir-row{border-radius:12px;padding:12px;align-content:start}
+#estateFocusDashboard .ef-reservoir-row b{font-size:14px}
+#estateFocusDashboard .ef-reservoir-percent{font-size:23px}
+@media(max-width:600px){#estateFocusDashboard #efRelatedDams,#estateFocusDashboard #efReservoirList{grid-template-columns:1fr}}
+
    #estateFocusDashboard{font-family:"Sarabun",sans-serif;color:#253346;height:100%;min-height:0}
    #estateFocusDashboard *{box-sizing:border-box}
    .ef-workspace{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(360px,1fr);height:100%;gap:18px}
@@ -434,13 +450,7 @@ $('efFilter').onchange=()=>renderEstates();
 
 
  let selectedWaterProvince=null;
- function filterWaterScope(rows){
-  if(headerEstate&&current){
-   const estate=model(current).estates[0];if(!estate)return [];
-   return rows.filter(r=>r.lat!=null&&r.lng!=null&&km(estate,{lat:r.lat,lon:r.lng})<=100);
-  }
-  return selectedWaterProvince!==null?rows.filter(r=>!selectedWaterProvince||r.province===selectedWaterProvince):[];
- }
+ function filterWaterScope(rows){return rows;}
  document.addEventListener('ieat-flood-estate-scope',()=>{renderReservoirs();renderRelatedDams()});
  window.addEventListener('message',event=>{
   if(event.origin!==location.origin||event.source!==$('estateFocusMap')?.contentWindow||event.data?.type!=='flood-map-province')return;
@@ -450,10 +460,10 @@ $('efFilter').onchange=()=>renderEstates();
  let reservoirs=[],reservoirStamp='',reservoirBusy=false,reservoirError='';
  function renderReservoirs(){
   const list=$('efReservoirList');if(!list)return;
-  const latest=reservoirs.filter(r=>num(r.percent)!==null&&Date.now()-timestamp(r.measured_at+'T00:00:00')<=72*3600000&&timestamp(r.measured_at+'T00:00:00')<=Date.now()+300000);
+  const latest=reservoirs;
   const rows=filterWaterScope(latest).sort((a,b)=>Number(b.percent)-Number(a.percent));
-  list.innerHTML=rows.length?rows.map(r=>{const p=Number(r.percent),color=p>=80?'#ce181e':'#007cc0',label=p>=100?'เกินความจุ':p>=80?'น้ำมาก':p>=30?'น้ำปานกลาง':'น้ำน้อย';return '<button type="button" class="ef-reservoir-row" data-high="'+(p>=80)+'" data-reservoir-id="'+esc(r.id)+'" '+(r.lat==null||r.lng==null?'disabled':'')+'><div><b>'+esc(r.name)+'</b><small>จ.'+esc(r.province)+' · อ.'+esc(r.district)+'</small></div><div class="ef-reservoir-percent">'+Math.round(p)+'%<span style="background:'+color+'">'+label+'</span></div><div class="ef-reservoir-bar"><i style="width:'+Math.min(100,Math.max(0,p))+'%;background:'+color+'"></i></div><small>ข้อมูล '+esc(r.measured_at)+'</small></button>'}).join(''):'<p>'+(!headerEstate&&!selectedWaterProvince?'เลือกพื้นที่จากด้านบนเพื่อดูอ่างเก็บน้ำที่เกี่ยวข้อง':'ไม่พบอ่างเก็บน้ำล่าสุดในพื้นที่ที่เลือก')+'</p>';
-  $('efReservoirTime').textContent=(headerEstate?'ภายใน 100 กม. จาก '+headerEstate+' · ':'')+'ข้อมูลรายวัน · สัดส่วนน้ำต่อความจุปกติ · ThaiWater / กรมชลประทาน · โหลดใหม่ทุก 1 ชั่วโมง'+(reservoirError?' · โหลดรอบใหม่ไม่สำเร็จ แสดงค่าครั้งก่อน':'');
+  list.innerHTML=rows.length?rows.map(r=>{const p=num(r.percent),color=p>=80?'#ce181e':'#007cc0',label=p===null?'ไม่มีค่าล่าสุด':p>=100?'เกินความจุ':p>=80?'น้ำมาก':p>=30?'น้ำปานกลาง':'น้ำน้อย';return '<button type="button" class="ef-reservoir-row" data-high="'+(p>=80)+'" data-reservoir-id="'+esc(r.id)+'" '+(r.lat==null||r.lng==null?'disabled':'')+'><div><b>'+esc(r.name)+'</b><small>จ.'+esc(r.province)+' · อ.'+esc(r.district)+'</small></div><div class="ef-reservoir-percent">'+(p===null?'—':Math.round(p)+'%')+'<span style="background:'+color+'">'+label+'</span></div><div class="ef-reservoir-bar"><i style="width:'+Math.min(100,Math.max(0,p))+'%;background:'+color+'"></i></div><small>ข้อมูล '+esc(r.measured_at)+'</small></button>'}).join(''):'<p>'+'ไม่พบข้อมูลอ่างเก็บน้ำในชุดข้อมูลต้นทาง'+'</p>';
+  $('efReservoirTime').textContent='แสดงทุกจังหวัด · แต่ละรายการระบุวันที่ตรวจวัด · ข้อมูลรายวัน · สัดส่วนน้ำต่อความจุปกติ · ThaiWater / กรมชลประทาน · โหลดใหม่ทุก 1 ชั่วโมง'+(reservoirError?' · โหลดรอบใหม่ไม่สำเร็จ แสดงค่าครั้งก่อน':'');
  }
  async function loadReservoirs(){
   if(reservoirBusy)return;reservoirBusy=true;
@@ -468,8 +478,8 @@ $('efFilter').onchange=()=>renderEstates();
  let relatedDams=[],relatedDamBusy=false;
  function renderRelatedDams(){
   const host=$('efRelatedDams');if(!host)return;
-  const rows=filterWaterScope(relatedDams).filter(r=>num(r.percent)!==null&&Date.now()-timestamp(r.measured_at+'T00:00:00')<=72*3600000);
-  host.innerHTML=rows.length?rows.map(r=>{const p=Number(r.percent),delta=num(r.release_change),c=p>=80?'#df2945':'#208f78';const camera=r.camera_url&&/^https:\/\//.test(r.camera_url)?'<img data-dam-camera src="'+esc(r.camera_url)+'?v='+Math.floor(Date.now()/3600000)+'" alt="ภาพกล้อง '+esc(r.camera_title||r.name)+'" loading="lazy"><small>ภาพนิ่งจากกล้องต้นทาง · ตรวจเวลาภาพที่ประทับในภาพ</small>':'<small>ต้นทางไม่มีภาพกล้องในชุดข้อมูลนี้</small>';return '<article class="ef-dam-card"><small>'+esc(r.province)+' · '+esc(r.basin)+'</small><h3>'+esc(r.name)+'</h3><div class="ef-dam-value">'+p.toFixed(1)+'%</div><div class="ef-dam-bar"><i style="background:'+c+';width:'+Math.min(100,Math.max(0,p))+'%"></i></div><small>ของระดับเก็บกักปกติ</small><p>กักเก็บ '+fmt(r.storage)+' ล้าน ลบ.ม. · ความจุปกติ '+fmt(r.capacity)+' ล้าน ลบ.ม.</p><div class="ef-dam-flows"><div><small>น้ำไหลเข้า</small><b>'+fmt(r.inflow)+'</b></div><div><small>ระบายออก</small><b>'+fmt(r.released)+'</b><small>≈ '+(num(r.released)===null?'—':fmt(r.released*1000000/86400))+' ลบ.ม./วินาที</small></div></div><div class="ef-dam-change">'+(delta===null?'ยังไม่มีค่าเปรียบเทียบการระบายกับวันก่อน':delta>0?'▲ ระบายเพิ่มจากเมื่อวาน '+fmt(delta)+' ล้าน ลบ.ม.':delta<0?'▼ ระบายลดจากเมื่อวาน '+fmt(Math.abs(delta))+' ล้าน ลบ.ม.':'ระบายเท่ากับเมื่อวาน')+'</div><small>ล้าน ลบ.ม./วัน · ข้อมูลวันที่ '+esc(r.measured_at)+'</small>'+camera+'<button type="button" data-related-dam="'+esc(r.id)+'">ดูตำแหน่งเขื่อนบนแผนที่ ↗</button></article>'}).join(''):'<p>'+(!headerEstate&&!selectedWaterProvince?'เลือกพื้นที่จากด้านบนเพื่อดูเขื่อนที่เกี่ยวข้อง':'ไม่พบข้อมูลเขื่อนล่าสุดในพื้นที่ที่เลือก')+'</p>';
+  const rows=relatedDams;
+  host.innerHTML=rows.length?rows.map(r=>{const p=num(r.percent),delta=num(r.release_change),c=p>=80?'#ce181e':'#007cc0';const camera=r.camera_url&&/^https:\/\//.test(r.camera_url)?'<img data-dam-camera src="'+esc(r.camera_url)+'?v='+Math.floor(Date.now()/3600000)+'" alt="ภาพกล้อง '+esc(r.camera_title||r.name)+'" loading="lazy"><small>ภาพนิ่งจากกล้องต้นทาง · ตรวจเวลาภาพที่ประทับในภาพ</small>':'<small>ต้นทางไม่มีภาพกล้องในชุดข้อมูลนี้</small>';return '<article class="ef-dam-card"><small>'+esc(r.province)+' · '+esc(r.basin)+'</small><h3>'+esc(r.name)+'</h3><div class="ef-dam-value">'+(p===null?'—':p.toFixed(1)+'%')+'</div><div class="ef-dam-bar"><i style="background:'+c+';width:'+Math.min(100,Math.max(0,p))+'%"></i></div><small>ของระดับเก็บกักปกติ</small><p>กักเก็บ '+fmt(r.storage)+' ล้าน ลบ.ม. · ความจุปกติ '+fmt(r.capacity)+' ล้าน ลบ.ม.</p><div class="ef-dam-flows"><div><small>น้ำไหลเข้า</small><b>'+fmt(r.inflow)+'</b></div><div><small>ระบายออก</small><b>'+fmt(r.released)+'</b><small>≈ '+(num(r.released)===null?'—':fmt(r.released*1000000/86400))+' ลบ.ม./วินาที</small></div></div><div class="ef-dam-change">'+(delta===null?'ยังไม่มีค่าเปรียบเทียบการระบายกับวันก่อน':delta>0?'▲ ระบายเพิ่มจากเมื่อวาน '+fmt(delta)+' ล้าน ลบ.ม.':delta<0?'▼ ระบายลดจากเมื่อวาน '+fmt(Math.abs(delta))+' ล้าน ลบ.ม.':'ระบายเท่ากับเมื่อวาน')+'</div><small>ล้าน ลบ.ม./วัน · ข้อมูลวันที่ '+esc(r.measured_at)+'</small>'+camera+'<button type="button" data-related-dam="'+esc(r.id)+'">ดูตำแหน่งเขื่อนบนแผนที่ ↗</button></article>'}).join(''):'<p>'+'ไม่พบข้อมูลเขื่อนในชุดข้อมูลต้นทาง'+'</p>';
  }
  async function loadRelatedDams(){
   if(relatedDamBusy)return;relatedDamBusy=true;
