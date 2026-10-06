@@ -8,13 +8,12 @@
  let rows=[],busy=false,selected='49',river='แม่น้ำเจ้าพระยา',error=false,history=[],historyDays=1;
 
  let estateScope={active:false,estate:null,name:''};
- function inEstateScope(r){
-  if(!estateScope.active)return true;
-  const e=estateScope.estate,lat=n(r.lat),lon=n(r.lng??r.lon);
-  if(!e||lat===null||lon===null)return false;
+ function stationDistance(r){
+  const e=estateScope.estate,lat=n(r.lat),lon=n(r.lng??r.lon);if(!e||lat===null||lon===null)return null;
   const rad=Math.PI/180,dy=(lat-Number(e.lat))*rad,dx=(lon-Number(e.lon))*rad,h=Math.sin(dy/2)**2+Math.cos(Number(e.lat)*rad)*Math.cos(lat*rad)*Math.sin(dx/2)**2;
-  return 12742*Math.asin(Math.sqrt(Math.min(1,h)))<=30;
+  return 12742*Math.asin(Math.sqrt(Math.min(1,h)));
  }
+ function inEstateScope(r){return !estateScope.active||!!estateScope.province&&String(r.province||'').replace(/^จังหวัด|^จ\./,'').trim()===estateScope.province;}
  document.addEventListener('ieat-flood-estate-scope',event=>{
   const next=event.detail;
   if(JSON.stringify(next)===JSON.stringify(estateScope))return;
@@ -48,7 +47,7 @@
  }
  function stationCard(r){
   const [color,label]=status(r),location=[r.amphoe,r.province].filter(Boolean).join(' · ');
-  return `<button type="button" class="rp-card rp-station-row" style="--rp-status-color:${color}" data-rp-id="${esc(r.code)}" aria-pressed="${String(r.code)===selected}">${stationGauge(r)}<div class="rp-station-content"><div class="rp-station-top"><b>${esc(r.oldcode)} · ${esc(r.name)}</b><em style="background:${color}">${label}</em></div>${location?`<small class="rp-location">${esc(location)}</small>`:''}<strong>${esc(gapText(r))}</strong><div class="rp-row-trend">${esc(trend(r))}</div><small>ระดับ ${fmt(r.wl)} ม.รทก.${n(r.flow)!==null?' · '+fmt(r.flow,0)+' ลบ.ม./วิ':''}</small><small class="rp-row-time">อัปเดต ${esc(time(r.measured_at))} · ${esc(r.agency||'ThaiWater')}</small></div></button>`;
+  return `<button type="button" class="rp-card rp-station-row" style="--rp-status-color:${color}" data-rp-id="${esc(r.code)}" aria-pressed="${String(r.code)===selected}">${stationGauge(r)}<div class="rp-station-content"><div class="rp-station-top"><b>${esc(r.oldcode)} · ${esc(r.name)}</b><em style="background:${color}">${label}</em></div>${estateScope.active?`<small>ห่างจาก ${esc(estateScope.name)} ${stationDistance(r)===null?'ไม่ทราบระยะ':fmt(stationDistance(r),1)+' กม. (ระยะเส้นตรง)'}</small>`:''}${location?`<small class="rp-location">${esc(location)}</small>`:''}<strong>${esc(gapText(r))}</strong><div class="rp-row-trend">${esc(trend(r))}</div><small>ระดับ ${fmt(r.wl)} ม.รทก.${n(r.flow)!==null?' · '+fmt(r.flow,0)+' ลบ.ม./วิ':''}</small><small class="rp-row-time">อัปเดต ${esc(time(r.measured_at))} · ${esc(r.agency||'ThaiWater')}</small></div></button>`;
  }
  function stationSummary(r){
   const g=gap(r),delta=n(r.delta),valid=fresh(r)&&n(r.wl)!==null;
@@ -75,7 +74,7 @@
   entries.forEach(s=>{const values=s.stations.filter(r=>n(r.wl)!==null),mean=values.reduce((a,r)=>a+Number(r.wl),0)/values.length;if(!values.length)return;points.push({label:time(s.time),at:stamp(s.time),mean,warn:values.filter(r=>!(gap(r)!==null&&gap(r)>=0)&&(n(r.warn)!==null?Number(r.wl)>=Number(r.warn):Number(r.situation)===4)).length,crit:values.filter(r=>gap(r)!==null&&gap(r)>=0).length})});
   let approximate=false;
   if(points.length<2&&historyDays===1){
-   approximate=true;points.length=0;const stations=rows.filter(r=>inEstateScope(r)&&r.river===river&&Array.isArray(r.spark)),count=Math.max(0,...stations.map(r=>r.spark.length));
+   approximate=true;points.length=0;const stations=rows.filter(r=>inEstateScope(r)&&(estateScope.active||r.river===river)&&Array.isArray(r.spark)),count=Math.max(0,...stations.map(r=>r.spark.length));
    for(let i=0;i<count;i++){const valid=stations.map(r=>({...r,wl:n(r.spark[i])})).filter(r=>r.wl!==null);if(!valid.length){points.push(null);continue}points.push({label:'ตัวอย่าง '+(i+1),mean:valid.reduce((a,r)=>a+r.wl,0)/valid.length,warn:valid.filter(r=>n(r.warn)!==null&&r.wl>=r.warn&&!(gap(r)!==null&&gap(r)>=0)).length,crit:valid.filter(r=>gap(r)!==null&&gap(r)>=0).length})}
   }
   const usable=points.filter(Boolean);
@@ -115,7 +114,7 @@
   const overflow=list.filter(v=>gap(v)>=0).length,near=list.filter(v=>gap(v)<0&&nearBank(v)).length;
   flowChart();$('rpHistoryPanel').hidden=true;
   $('rpSummary').innerHTML=r?stationSummary(r):'ไม่พบข้อมูลสถานีในพื้นที่ที่เลือก';
-  $('rpCards').innerHTML=list.map(stationCard).join('');
+  $('rpCards').innerHTML=list.length?list.map(stationCard).join(''):'<p>ไม่พบสถานีระดับน้ำล่าสุดในจังหวัดที่เลือก</p>';
   document.dispatchEvent(new CustomEvent('ieat-river-scope',{detail:{river,stations:list.map(v=>({code:v.code,oldcode:v.oldcode,lat:n(v.lat),lon:n(v.lng??v.lon)}))}}));
   $('rpFocus')?.addEventListener('click',()=>focus(r));
  }
