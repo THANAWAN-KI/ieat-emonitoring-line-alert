@@ -128,6 +128,87 @@
 .ef-reservoir-bar{grid-column:1/-1;height:6px;background:#cbd8d7;border-radius:6px;overflow:hidden}.ef-reservoir-bar i{display:block;height:100%;border-radius:6px}
 #efReservoirTime{display:block;font-size:11px;margin-top:10px;line-height:1.7}
 
+/* Canal panel: keep source note and station cards in normal document flow. */
+#estateFocusDashboard .ef-canal-panel{overflow:visible!important}
+#estateFocusDashboard #efCanalList{
+ display:grid!important;
+ grid-template-columns:minmax(0,1fr)!important;
+ gap:12px!important;
+ width:100%!important;
+ margin:12px 0 0!important;
+ position:static!important;
+ clear:both!important;
+}
+#estateFocusDashboard .ef-canal-card{
+ display:block!important;
+ width:100%!important;
+ min-width:0!important;
+ position:relative!important;
+ float:none!important;
+ clear:both!important;
+ margin:0!important;
+ padding:14px!important;
+ text-align:left!important;
+ font:inherit!important;
+ color:#253346!important;
+ background:#fff!important;
+ border:1px solid #cbdbe5!important;
+ border-radius:12px!important;
+ box-shadow:0 2px 8px #2633460a!important;
+ overflow:visible!important;
+}
+#estateFocusDashboard .ef-canal-card>b{
+ display:block!important;
+ position:static!important;
+ margin:0 0 10px!important;
+ padding:0!important;
+ font-size:16px!important;
+ line-height:1.5!important;
+ white-space:normal!important;
+ overflow-wrap:anywhere!important;
+ text-align:left!important;
+}
+#estateFocusDashboard .ef-canal-body{
+ display:grid!important;
+ grid-template-columns:80px minmax(0,1fr)!important;
+ gap:12px!important;
+ align-items:start!important;
+ position:static!important;
+}
+#estateFocusDashboard .ef-canal-gauge{width:80px;min-width:80px}
+#estateFocusDashboard .ef-canal-gauge svg{display:block;width:80px;height:auto}
+#estateFocusDashboard .ef-canal-content{
+ display:flex!important;
+ flex-direction:column!important;
+ gap:5px!important;
+ min-width:0!important;
+ position:static!important;
+}
+#estateFocusDashboard .ef-canal-content small,
+#estateFocusDashboard .ef-canal-content strong{display:block!important;line-height:1.5!important}
+#estateFocusDashboard #efCanalTime{
+ display:block!important;
+ position:static!important;
+ float:none!important;
+ clear:both!important;
+ width:100%!important;
+ margin:14px 0 0!important;
+ padding:10px 0 0!important;
+ border-top:1px solid #e2e8ef!important;
+ font-size:11px!important;
+ line-height:1.7!important;
+ white-space:normal!important;
+ overflow-wrap:anywhere!important;
+ color:#607382!important;
+}
+@media(max-width:560px){
+ #estateFocusDashboard .ef-canal-card{padding:12px!important}
+ #estateFocusDashboard .ef-canal-card>b{font-size:15px!important;margin-bottom:8px!important}
+ #estateFocusDashboard .ef-canal-body{grid-template-columns:66px minmax(0,1fr)!important;gap:9px!important}
+ #estateFocusDashboard .ef-canal-gauge{width:66px;min-width:66px}
+ #estateFocusDashboard .ef-canal-gauge svg{width:66px}
+}
+
 
 #efRelatedDams{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-height:800px;overflow:auto;margin-top:12px}
 .ef-dam-card{border:1px solid #c9dcdf;border-top:4px solid #328693;border-radius:12px;padding:14px;background:#fbfdfd;min-width:0}
