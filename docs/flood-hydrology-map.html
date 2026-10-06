@@ -33,8 +33,8 @@ body.toolbar-above:has(.leaflet-popup) .controls,body.toolbar-above:has(.maplibr
 <div class="controls"><div class="search"><select id="province" aria-label="เลือกจังหวัดในแผนที่"><option value="">ทั่วประเทศ</option></select><input id="search" aria-label="ค้นหาสถานีในแผนที่" placeholder="ค้นหาสถานี / สายน้ำ"></div>
 <div class="toggles" aria-label="ชั้นข้อมูล">
 <label><input data-layer="water" type="checkbox" checked>ระดับน้ำ</label><label><input data-layer="rings" type="checkbox" checked>ปริมาณน้ำไหล</label><label><input data-layer="flow" type="checkbox" checked>ลูกศรทิศทางน้ำ</label>
-<label><input data-layer="dam" type="checkbox" checked>เขื่อน</label><label><input data-layer="camera" type="checkbox" checked>CCTV ริมน้ำ</label><label><input data-layer="estate" type="checkbox" checked>นิคมฯ</label><label><input data-layer="gistda" type="checkbox">GISTDA</label>
-</div><select id="damSelect" class="dam-select" aria-label="ค้นหาและซูมไปยังเขื่อน"><option value="">ค้นหาเขื่อน / อ่างเก็บน้ำ…</option></select><select id="cameraSelect" class="dam-select" aria-label="ค้นหาและซูมไปยังกล้อง CCTV"><option value="">ค้นหากล้อง CCTV ริมน้ำ…</option></select><details class="legend"><summary>คำอธิบายแผนที่</summary><div class="keys"><span><i class="dot" style="background:#d9364d"></i>ล้นตลิ่ง</span><span><i class="dot" style="background:#dd9c20"></i>ใกล้ตลิ่ง</span><span><i class="dot" style="background:#169b8f"></i>ต่ำกว่าตลิ่ง</span></div><p>วงแดงกระพริบ: สถานีล้นตลิ่ง (ข้อมูลล่าสุด)<br>วงสีน้ำเงิน: ปริมาณน้ำไหลผ่านของสถานีอื่น<br>จุดขนาดใหญ่: เขื่อน · สีม่วง: นิคมฯ / กล้อง<br>สีสถานีใช้ค่าจุดวัด ไม่ใช่ขอบเขตน้ำท่วม</p><p>ลูกศร → แสดงทิศปลายน้ำตามแนวแม่น้ำที่บันทึกใน OpenStreetMap ไม่ใช่กระแสสดหรือความเร็วที่ตรวจวัด ครอบคลุมแม่น้ำหลักที่มีข้อมูล · เส้นที่ระบุว่าไหลกลับได้ไม่แสดงลูกศร<br><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors · ODbL</a></p></details></div>
+<label><input data-layer="dam" type="checkbox" checked>เขื่อน</label><label><input data-layer="camera" type="checkbox" checked>CCTV ริมน้ำ</label><label><input data-layer="estate" type="checkbox" checked>นิคมฯ</label><label><input data-layer="satellite" type="checkbox" checked>น้ำท่วมจากดาวเทียม</label><label><input data-layer="radar" type="checkbox">ฝนจากเรดาร์ (กรมอุตุฯ)</label>
+</div><div id="remoteOverlayInfo" style="font-size:12px;background:#fff;padding:6px;border-radius:6px;max-width:510px" aria-live="polite"></div><select id="damSelect" class="dam-select" aria-label="ค้นหาและซูมไปยังเขื่อน"><option value="">ค้นหาเขื่อน / อ่างเก็บน้ำ…</option></select><select id="cameraSelect" class="dam-select" aria-label="ค้นหาและซูมไปยังกล้อง CCTV"><option value="">ค้นหากล้อง CCTV ริมน้ำ…</option></select><details class="legend"><summary>คำอธิบายแผนที่</summary><div class="keys"><span><i class="dot" style="background:#d9364d"></i>ล้นตลิ่ง</span><span><i class="dot" style="background:#dd9c20"></i>ใกล้ตลิ่ง</span><span><i class="dot" style="background:#169b8f"></i>ต่ำกว่าตลิ่ง</span></div><p>วงแดงกระพริบ: สถานีล้นตลิ่ง (ข้อมูลล่าสุด)<br>วงสีน้ำเงิน: ปริมาณน้ำไหลผ่านของสถานีอื่น<br>พื้นที่สีฟ้า: น้ำท่วมจากดาวเทียม GISTDA ตามวันที่ภาพ ไม่ใช่สถานการณ์สดทุกจุด<br>เรดาร์: อัตราฝนขณะตรวจวัด (มม./ชม.) ไม่ใช่ฝนสะสม · <a href="https://radargis.tmd.go.th/" target="_blank" rel="noopener">กรมอุตุฯ</a><br>จุดขนาดใหญ่: เขื่อน · สีม่วง: นิคมฯ / กล้อง<br>สีสถานีใช้ค่าจุดวัด ไม่ใช่ขอบเขตน้ำท่วม</p><p>ลูกศร → แสดงทิศปลายน้ำตามแนวแม่น้ำที่บันทึกใน OpenStreetMap ไม่ใช่กระแสสดหรือความเร็วที่ตรวจวัด ครอบคลุมแม่น้ำหลักที่มีข้อมูล · เส้นที่ระบุว่าไหลกลับได้ไม่แสดงลูกศร<br><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors · ODbL</a></p></details></div>
 <div style="position:absolute;bottom:105px;left:12px;z-index:999;background:#fffffff0;padding:4px 8px;border-radius:6px;font-size:11px;pointer-events:none">→ ทิศปลายน้ำตามแผนที่ OSM · ไม่ใช่กระแสสด</div><div class="status" id="status" role="status">กำลังโหลดแผนที่และสถานี…</div>
 <script src="flood-rid-source.js?v=20261006-rid-17"></script>
 <script>
@@ -48,7 +48,15 @@ const cameraSvg="<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"white\" strok
 let damMarkers=[];let estateMarkers=[];let waterways=null;
 new ResizeObserver(()=>{if(vector)vector.resize();if(raster)raster.invalidateSize()}).observe(document.getElementById('mapStage'));
 let ridRows=[],ridFailed=false;let vector=null,raster=null,ready=false,features=[],groups={},selectedMarker=null,pending=null,national=null,extras=[],gistda=null,animation=null,autoFit=true,populated=false;
-const flags={water:true,rings:true,flow:true,dam:true,camera:true,estate:true,gistda:false};
+
+/* Public Faonam feeds: retain imagery dates; failures never imply no rain/flood. */
+let satelliteFeed=null,radarFeed=null,satelliteLayer=null,radarLayer=null;
+let satelliteError='',radarError='',radarLoading=false;
+const faonamBase='https://faonam.com';
+const overlayTime=v=>new Date(v).toLocaleString('th-TH',{timeZone:'Asia/Bangkok'});
+function safeOverlayUrl(v){const u=new URL(v,faonamBase);if(u.origin!==faonamBase)throw Error('แหล่งภาพไม่ตรงกับ Faonam');return u.href.replace(/%7B/gi,'{').replace(/%7D/gi,'}');}
+
+const flags={water:true,rings:true,flow:true,dam:true,camera:true,estate:true,gistda:false,satellite:true,radar:false};
 function date(v){let s=String(v||'').replace(' ','T');if(/^\d{4}-\d{2}-\d{2}$/.test(s))s+='T00:00:00';if(s&&!/(Z|[+-]\d{2}:?\d{2})$/.test(s))s+='+07:00';return Date.parse(s)}
 function old(r,k){const a=Date.now()-date(r.measured_at);return !Number.isFinite(a)||a< -300000||a>(k==='dam'?72:6)*3600000||Boolean(r.stale)}
 function color(r,k){if(k==='camera')return r.reported_online===false?'#82959b':'#754bad';if(old(r,k))return '#82959b';if(k==='water'&&r.source_name==='RID GeoJSON')return r.status==='ล้นตลิ่ง'?'#d9364d':r.status==='ใกล้ตลิ่ง'?'#dd9c20':'#169b8f';if(k==='water')return r.wl==null||r.diff==null?'#82959b':r.diff>=0?'#d9364d':(r.situation_level!=null?[3,4].includes(Number(r.situation_level)):r.diff>-.5)?'#dd9c20':'#169b8f';if(k==='dam')return r.percent==null?'#82959b':r.percent>=100?'#d9364d':r.percent>=80?'#dd9c20':'#169b8f';return k==='estate'?'#754bad':k==='camera'?'#754bad':'#248fb3'}
@@ -75,6 +83,7 @@ function scoped(){
  return features.filter(f=>flags[f.properties.kind]&&(!province||['estate','dam'].includes(f.properties.kind)||f.properties.province===province)&&[f.properties.name,f.properties.code,f.properties.river,f.properties.district].join(' ').toLowerCase().includes(q));
 }
 function render(){
+ syncRemoteOverlays();
  if(!ready)return;const list=scoped();
  if(vector){
   cameraMarkers.forEach(m=>m.remove());cameraMarkers=[];list.filter(f=>f.properties.kind==='camera').forEach(f=>{const r=f.properties,el=document.createElement('div');el.className='marker-icon';el.style.background=r.color;el.innerHTML=cameraSvg;const popup=new maplibregl.Popup({maxWidth:'350px'}).setHTML(content(r,'camera'));popup.on('open',()=>loadCameraImage(r));cameraMarkers.push(new maplibregl.Marker({element:el}).setLngLat(f.geometry.coordinates).setPopup(popup).addTo(vector))});
@@ -217,6 +226,45 @@ window.addEventListener('message',async event=>{
 });
 fetch('./data/water_flow_major.geojson?v=20261001',{signal:AbortSignal.timeout(20000)}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()}).then(d=>{waterways=d;addFlow();drawFlow()}).catch(()=>{$('status').textContent+=' · โหลดแนวลูกศรไม่สำเร็จ'});
 vectorStart();load();cameras();setInterval(()=>{if(!document.hidden)load()},300000);
-fetch('./data/gistda_flood_latest.geojson',{signal:AbortSignal.timeout(15000)}).then(r=>r.json()).then(d=>{if(d.type==='FeatureCollection'){gistda=d;addGistda();render()}}).catch(()=>{});
+function remoteInfo(){
+ const lines=[];
+ if(flags.satellite)lines.push(satelliteFeed?'น้ำท่วมจากดาวเทียม GISTDA · วันที่ภาพ '+satelliteFeed.passes.map(p=>p.date).filter((v,i,a)=>a.indexOf(v)===i).join(', ')+' · ภาพตามรอบดาวเทียม':satelliteError||'กำลังโหลดภาพดาวเทียม…');
+ const f=radarFeed?.frames.filter(f=>f.kind==='observed').at(-1);
+ if(flags.radar)lines.push(f?'เรดาร์กรมอุตุฯ · ตรวจวัด '+overlayTime(f.at)+(Date.now()-Date.parse(f.at)>45*60000?' · ภาพเก่า ยังไม่มีภาพใหม่':''):radarError||'กำลังโหลดเรดาร์…');
+ $('remoteOverlayInfo').textContent=lines.join(' | ');$('remoteOverlayInfo').hidden=!lines.length;
+}
+function syncRemoteOverlays(){
+ remoteInfo();if(!ready)return;const frame=radarFeed?.frames.filter(f=>f.kind==='observed').at(-1);
+ if(vector){
+  function layer(id,source,show,opacity){
+   if(!vector.getSource(id)){vector.addSource(id,source);vector.addLayer({id,type:'raster',source:id,paint:{'raster-opacity':opacity,'raster-fade-duration':0}},'discharge-ring');}
+   else if(source.type==='image')vector.getSource(id).updateImage({url:source.url,coordinates:source.coordinates});
+   vector.setLayoutProperty(id,'visibility',show?'visible':'none');
+  }
+  if(satelliteFeed)layer('satellite-live',{type:'raster',tiles:[satelliteFeed.tiles],tileSize:512,maxzoom:14,bounds:[97.3,5.6,105.7,20.5],attribution:'<a href="https://disaster.gistda.or.th/">GISTDA</a> ผ่าน <a href="https://faonam.com/">Faonam</a>'},flags.satellite,.65);
+  if(frame){const [w,s,e,n]=radarFeed.bounds;layer('radar-live',{type:'image',url:frame.url,coordinates:[[w,n],[e,n],[e,s],[w,s]]},flags.radar,.7);}
+ }else if(raster){
+  if(satelliteFeed){if(!satelliteLayer||satelliteLayer._url!==satelliteFeed.tiles){if(satelliteLayer)raster.removeLayer(satelliteLayer);satelliteLayer=L.tileLayer(satelliteFeed.tiles,{tileSize:512,zoomOffset:-1,maxNativeZoom:13,opacity:.65,attribution:'GISTDA ผ่าน Faonam'});}if(flags.satellite)satelliteLayer.addTo(raster);else raster.removeLayer(satelliteLayer);}
+  if(frame){const [w,s,e,n]=radarFeed.bounds;if(!radarLayer)radarLayer=L.imageOverlay(frame.url,[[s,w],[n,e]],{opacity:.7,interactive:false});else radarLayer.setUrl(frame.url);if(flags.radar)radarLayer.addTo(raster);else raster.removeLayer(radarLayer);}
+ }
+}
+async function remoteFeed(path){const r=await fetch(faonamBase+path,{cache:'no-store',signal:AbortSignal.timeout(25000)});if(!r.ok)throw Error('HTTP '+r.status);return r.json();}
+async function loadSatellite(){
+ try{const d=await remoteFeed('/api/gistda/flood');if(!Array.isArray(d.passes)||!d.passes.length||!d.tiles)throw Error('ไม่มีวันที่ภาพ');const next={...d,tiles:safeOverlayUrl(d.tiles)};
+ if(vector?.getSource('satellite-live')&&satelliteFeed?.tiles!==next.tiles){vector.removeLayer('satellite-live');vector.removeSource('satellite-live');}satelliteFeed=next;satelliteError='';
+ }catch(e){satelliteError='โหลดดาวเทียมไม่สำเร็จ ('+e.message+')';}
+ syncRemoteOverlays();
+}
+async function loadRadar(){
+ if(radarLoading||!flags.radar)return;radarLoading=true;
+ try{const d=await remoteFeed('/api/tmd/radar');if(!Array.isArray(d.bounds)||d.bounds.length!==4||!d.bounds.every(Number.isFinite)||!Array.isArray(d.frames))throw Error('รูปแบบข้อมูลไม่ถูกต้อง');
+ const frames=d.frames.filter(f=>f.kind==='observed'&&Number.isFinite(Date.parse(f.at))).map(f=>({...f,url:safeOverlayUrl(f.url)}));if(!frames.length)throw Error('ไม่มีภาพตรวจวัด');radarFeed={...d,frames};radarError='';
+ }catch(e){radarError='โหลดเรดาร์ไม่สำเร็จ ('+e.message+') · จะลองใหม่อัตโนมัติ';}
+ radarLoading=false;syncRemoteOverlays();
+}
+document.querySelector('[data-layer="radar"]').addEventListener('change',loadRadar);
+loadSatellite();setInterval(()=>{loadSatellite();loadRadar();},300000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden){loadSatellite();loadRadar();}});
+
 })();
 </script></body></html>
