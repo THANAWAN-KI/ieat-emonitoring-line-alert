@@ -131,7 +131,7 @@
  document.addEventListener('ieat-dam-flow-data',event=>{rankedDams=event.detail||[];renderWaterExtras()});
 
  function render(){
-  if(!$('riverSidePanel'))return;rows=rows.filter(r=>fresh(r)&&gap(r)!==null);const list=rows.filter(r=>inEstateScope(r)&&r.river===river).sort((a,b)=>(n(a.order)||999)-(n(b.order)||999)),r=list.find(r=>String(r.code)===selected)||list[0];if(r)selected=String(r.code);
+  if(!$('riverSidePanel'))return;rows=rows.filter(r=>fresh(r));const list=rows.filter(r=>inEstateScope(r)&&r.river===river).sort((a,b)=>(n(a.order)||999)-(n(b.order)||999)),r=list.find(r=>String(r.code)===selected)||list[0];if(r)selected=String(r.code);
   $('rpRiver').innerHTML=[...new Set(rows.filter(inEstateScope).map(r=>r.river).filter(Boolean))].map(v=>`<option ${v===river?'selected':''}>${esc(v)}</option>`).join('');
   $('rpStation').innerHTML=list.map(v=>`<option value="${esc(v.code)}" ${String(v.code)===selected?'selected':''}>${esc(v.oldcode)} · ${esc(v.name)}</option>`).join('');
   $('rpUpdated').textContent=error?'โหลดรอบใหม่ไม่สำเร็จ · แสดงชุดข้อมูลเดิม':estateScope.active&&!list.length?'ไม่พบสถานี RID ที่มีพิกัดภายใน 30 กม. จาก '+estateScope.name:`ข้อมูล ${time(list.reduce((a,r)=>stamp(r.measured_at)>stamp(a)?r.measured_at:a,list[0]?.measured_at))} · คลิกจุดหรือการ์ดเพื่อดูในแผนที่`;
