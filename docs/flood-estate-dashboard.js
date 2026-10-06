@@ -536,14 +536,15 @@ $('efFilter').onchange=()=>renderEstates();
  const canalText=v=>typeof v==='object'&&v!==null?String(v.th||v.en||''):String(v||'');
  function renderCanals(){
   const host=$('efCanalList');if(!host)return;
-  const rows=filterWaterScope(canalRows).filter(r=>num(r.wl)!==null&&Date.now()-timestamp(r.measured_at)<=86400000&&timestamp(r.measured_at)<=Date.now()+300000).sort((a,b)=>(scopeDistance(a)??Infinity)-(scopeDistance(b)??Infinity));
-  host.closest('.ef-canal-panel').hidden=!rows.length;
+  const rows=canalRows.filter(r=>num(r.wl)!==null&&Date.now()-timestamp(r.measured_at)<=86400000&&timestamp(r.measured_at)<=Date.now()+300000).sort((a,b)=>(scopeDistance(a)??Infinity)-(scopeDistance(b)??Infinity));
+  host.closest('.ef-canal-panel').hidden=false;
   host.innerHTML=rows.map(r=>{
    const overflow=r.bank!==null&&r.wl>=r.bank,critical=r.critical!==null&&r.wl>=r.critical,warning=r.warning!==null&&r.wl>=r.warning;
    const color=overflow||critical?'#d9364d':warning?'#dd9c20':'#169b8f',label=overflow?'ล้นตลิ่ง':critical?'ถึงเกณฑ์วิกฤต':warning?'ถึงเกณฑ์เตือน':'ต่ำกว่าเกณฑ์เตือน';
    return '<button type="button" class="ef-canal-card" data-canal-id="'+esc(r.id)+'"><b>'+esc(r.code)+' · '+esc(r.name)+'</b><span class="ef-canal-status" style="background:'+color+'">'+label+'</span><small>'+esc(r.district)+' · กรุงเทพมหานคร</small><strong style="color:'+color+'">ระดับน้ำ '+fmt(r.wl)+' ม.รทก.</strong><small>เกณฑ์เตือน '+fmt(r.warning)+' · วิกฤต '+fmt(r.critical)+' · ตลิ่ง '+fmt(r.bank)+' ม.รทก.</small>'+(r.outer!==null?'<small>ระดับน้ำด้านนอก '+fmt(r.outer)+' ม.รทก.</small>':'')+distanceLabel(r)+'<small>อัปเดต '+esc(time(r.measured_at))+'</small></button>';
   }).join('');
-  $('efCanalTime').textContent='สำนักการระบายน้ำ กรุงเทพมหานคร ผ่าน Faonam · โหลดใหม่ทุก 1 ชั่วโมง'+(canalError?' · โหลดรอบใหม่ไม่สำเร็จ แสดงข้อมูลครั้งก่อน':'');
+  if(!rows.length)host.innerHTML='<p>ยังไม่มีข้อมูลคลองล่าสุด'+(canalError?' · โหลดข้อมูลไม่สำเร็จ':'')+'</p>';
+  $('efCanalTime').textContent=(provinceScope.active?'คลองในกรุงเทพมหานคร · เรียงตามระยะห่างจากนิคมฯ ที่เลือก · ':'')+'สำนักการระบายน้ำ กรุงเทพมหานคร ผ่าน Faonam · โหลดใหม่ทุก 1 ชั่วโมง'+(canalError?' · โหลดรอบใหม่ไม่สำเร็จ แสดงข้อมูลครั้งก่อน':'');
  }
  async function loadCanalsPanel(){
   if(canalBusy)return;canalBusy=true;
