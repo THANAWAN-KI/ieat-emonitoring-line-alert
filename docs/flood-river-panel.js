@@ -28,7 +28,7 @@
  function nearBank(r){return n(r.percent)!==null&&Number(r.percent)>=90}
  function status(r){const g=gap(r);return g!==null&&g>=0?['#e6004d','ล้นตลิ่ง']:nearBank(r)?['#ffaa00','ใกล้ตลิ่ง']:['#008558','ต่ำกว่าตลิ่ง']}
  function gapText(r){const g=gap(r);return g===null?'ไม่มีระดับตลิ่ง':(g>=0?'สูงกว่าตลิ่ง ':'ต่ำกว่าตลิ่ง ')+fmt(Math.abs(g))+' ม.'}
- function focus(r){if(n(r.lat)===null||n(r.lng)===null)return;$('estateFocusMap')?.contentWindow?.postMessage({type:'flood-map-focus',lat:Number(r.lat),lon:Number(r.lng),label:r.name,scale:75000,station:{...r,discharge:r.flow,source_name:'POPNIX / ThaiWater'}},location.origin)}
+ function focus(r){if(n(r.lat)===null||n(r.lng)===null)return;$('estateFocusMap')?.contentWindow?.postMessage({type:'flood-map-focus',lat:Number(r.lat),lon:Number(r.lng),label:r.name,scale:75000,station:{...r,discharge:r.flow,source_name:'RID GeoJSON'}},location.origin)}
  function trend(r){return r.trend_text?({'เพิ่มขึ้น':'▲ เพิ่มขึ้น','ลดลง':'▼ ลดลง','คงที่':'• คงที่'}[r.trend_text]||r.trend_text):'ไม่ระบุแนวโน้ม'}
  function spark(r){const a=(r.spark||[]).map(n),v=a.filter(x=>x!==null);if(v.length<2)return '<small>ไม่มีกราฟย้อนหลังในชุดข้อมูลนี้</small>';const lo=Math.min(...v),range=Math.max(.01,Math.max(...v)-lo);let paths=[],p='';a.forEach((y,i)=>{if(y===null){if(p)paths.push(p);p='';return}p+=(p?' L':'M')+(i*280/(a.length-1)).toFixed(1)+' '+(42-(y-lo)/range*34).toFixed(1)});if(p)paths.push(p);return '<svg viewBox="0 0 280 48" role="img" aria-label="ระดับน้ำย้อนหลัง 24 ชั่วโมง">'+paths.map(d=>'<path d="'+d+'" fill="none" stroke="#2588a0" stroke-width="2"/>').join('')+'</svg>'}
 
@@ -111,11 +111,11 @@
   if(!$('riverSidePanel'))return;rows=rows.filter(r=>fresh(r)&&gap(r)!==null);const list=rows.filter(r=>inEstateScope(r)&&r.river===river).sort((a,b)=>(n(a.order)||999)-(n(b.order)||999)),r=list.find(r=>String(r.code)===selected)||list[0];if(r)selected=String(r.code);
   $('rpRiver').innerHTML=[...new Set(rows.filter(inEstateScope).map(r=>r.river).filter(Boolean))].map(v=>`<option ${v===river?'selected':''}>${esc(v)}</option>`).join('');
   $('rpStation').innerHTML=list.map(v=>`<option value="${esc(v.code)}" ${String(v.code)===selected?'selected':''}>${esc(v.oldcode)} · ${esc(v.name)}</option>`).join('');
-  $('rpUpdated').textContent=error?'โหลดรอบใหม่ไม่สำเร็จ · แสดงชุดข้อมูลเดิม':estateScope.active&&!list.length?'ไม่พบสถานีสายน้ำที่มีพิกัดภายใน 30 กม. จาก '+estateScope.name:`ข้อมูล ${time(list.reduce((a,r)=>stamp(r.measured_at)>stamp(a)?r.measured_at:a,list[0]?.measured_at))} · คลิกจุดหรือการ์ดเพื่อดูในแผนที่`;
+  $('rpUpdated').textContent=error?'โหลดรอบใหม่ไม่สำเร็จ · แสดงชุดข้อมูลเดิม':estateScope.active&&!list.length?'ไม่พบสถานี RID ที่มีพิกัดภายใน 30 กม. จาก '+estateScope.name:`ข้อมูล ${time(list.reduce((a,r)=>stamp(r.measured_at)>stamp(a)?r.measured_at:a,list[0]?.measured_at))} · คลิกจุดหรือการ์ดเพื่อดูในแผนที่`;
   $('rpGraph').innerHTML='';
   const overflow=list.filter(v=>gap(v)>=0).length,near=list.filter(v=>gap(v)<0&&nearBank(v)).length;
   $('rpCounts').innerHTML=`<span>${list.length} สถานี</span><span>ล้นตลิ่ง ${overflow}</span><span>ใกล้ตลิ่ง ${near}</span><span>ต่ำกว่าตลิ่ง ${list.length-overflow-near}</span>`;
-  $('rpProfile').innerHTML='';flowChart();historyChart();
+  $('rpProfile').innerHTML='';flowChart();$('rpHistoryPanel').hidden=true;
   $('rpSummary').innerHTML=r?stationSummary(r):'ไม่พบข้อมูลสถานีในพื้นที่ที่เลือก';
   $('rpCards').innerHTML=list.map(stationCard).join('');
   document.dispatchEvent(new CustomEvent('ieat-river-scope',{detail:{river,stations:list.map(v=>({code:v.code,oldcode:v.oldcode,lat:n(v.lat),lon:n(v.lng??v.lon)}))}}));
