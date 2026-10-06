@@ -11,6 +11,39 @@
  function point(r){return num(r.lat)!==null&&num(r.lon)!==null&&Number(r.lat)>=5&&Number(r.lat)<=21&&Number(r.lon)>=97&&Number(r.lon)<=106}
  function km(a,b){const rad=Math.PI/180,dy=(b.lat-a.lat)*rad,dx=(b.lon-a.lon)*rad,h=Math.sin(dy/2)**2+Math.cos(a.lat*rad)*Math.cos(b.lat*rad)*Math.sin(dx/2)**2;return 12742*Math.asin(Math.sqrt(Math.min(1,h)))}
  let headerEstate='';
+
+ let provinceScope={active:false,province:'',estate:null,name:''},provinceRequest=0;
+ const provinceCache=new Map();
+ const provinceKey=v=>String(v||'').replace(/^จังหวัด|^จ\./,'').trim();
+ function scopeDistance(r){
+  const e=provinceScope.estate,lat=num(r.lat),lon=num(r.lng??r.lon);
+  return e&&lat!==null&&lon!==null?km(e,{lat,lon}):null;
+ }
+ function distanceLabel(r){if(!provinceScope.active)return '';const distance=scopeDistance(r);return '<small>ห่างจาก '+esc(provinceScope.name)+' '+(distance===null?'ไม่ทราบระยะ (ไม่มีพิกัด)':fmt(distance)+' กม. (ระยะเส้นตรง)')+'</small>';}
+ async function publishProvinceScope(estate){
+  const token=++provinceRequest,name=headerEstate;
+  provinceScope={active:!!name,province:'',estate:estate||null,name};
+  function publish(){
+   window.IEAT_FLOOD_PROVINCE_SCOPE=provinceScope;
+   document.dispatchEvent(new CustomEvent('ieat-flood-estate-scope',{detail:provinceScope}));
+   $('estateFocusMap')?.contentWindow?.postMessage({type:'flood-province-scope',...provinceScope},location.origin);
+   const note=$('efProvinceScopeNote');if(note)note.textContent=!name?'ข้อมูลทั่วประเทศ':provinceScope.province?name+' · จ.'+provinceScope.province+' · ระยะห่างเป็นระยะเส้นตรง':'กำลังตรวจสอบจังหวัดของ '+name;
+  }
+  publish();if(!name||!estate)return;
+  try{
+   let province=provinceCache.get(String(estate.id))||provinceKey(estate.province||'');
+   if(!province){
+    const q=new URLSearchParams({location:estate.lon+','+estate.lat,f:'json',langCode:'TH',featureTypes:'Locality'});
+    const response=await fetch('https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?'+q,{signal:AbortSignal.timeout(15000)});
+    if(!response.ok)throw Error('HTTP '+response.status);const data=await response.json();
+    province=provinceKey(data.address?.Region);if(!province)throw Error('ไม่พบจังหวัด');
+    provinceCache.set(String(estate.id),province);
+   }
+   if(token!==provinceRequest||name!==headerEstate)return;
+   provinceScope={active:true,province,estate,name};publish();
+  }catch(error){if(token!==provinceRequest)return;const note=$('efProvinceScopeNote');if(note)note.textContent='ตรวจสอบจังหวัดไม่สำเร็จ กรุณาเลือกนิคมฯ อีกครั้ง';}
+ }
+
  const estateKey=v=>String(v||'').replace(/นิคมอุตสาหกรรม|สำนักงานนิคมฯ|นิคมฯ|\s/g,'').normalize('NFKC').toLowerCase();
  function model(data,now=Date.now()){
   const estates=(data.estates||[]).filter(point).filter(e=>!headerEstate||estateKey(e.name)===estateKey(headerEstate));
@@ -304,7 +337,7 @@
 `;document.head.appendChild(style);
   const host=document.createElement('section');host.id='estateFocusDashboard';
   const metrics=[['efWatch','นิคมฯ เข้าเกณฑ์เฝ้าระวัง','ผลคัดกรองจากสถานีใกล้นิคมฯ'],['efWaterWatch','ใกล้ระดับน้ำเข้าเกณฑ์','สถานีระดับน้ำภายใน 30 กม.'],['efRainWatch','ใกล้ฝนเข้าเกณฑ์','ฝนสะสมมากกว่า 35 มม. ภายใน 30 กม.'],['efTotal','นิคมฯ / ท่าเรือในชุดข้อมูล','ตำแหน่งที่ใช้ประเมินจากข้อมูล กนอ.'],['ef24','ตำบลเฝ้าระวัง 24 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ'],['ef48','ตำบลเฝ้าระวัง 48 ชั่วโมง','ระยะจากจุดสถานีประเมินถึงนิคมฯ']];
-  host.innerHTML=`<div class="ef-workspace"><div class="ef-data-column">
+  host.innerHTML=`<div class="ef-workspace"><div class="ef-data-column"><p id="efProvinceScopeNote" role="status" style="padding:12px;background:#eaf2f9;color:#003666;border-radius:10px">ข้อมูลทั่วประเทศ</p>
    <section class="ef-panel ef-related-dams"><h2>เขื่อนที่เกี่ยวข้อง</h2><div id="efRelatedDams" role="status">กำลังโหลดข้อมูลเขื่อน…</div></section><section class="ef-panel ef-reservoir-panel"><h2>อ่างเก็บน้ำขนาดกลางในจังหวัด</h2><select id="efReservoirProvince" aria-label="เลือกจังหวัดอ่างเก็บน้ำ" hidden style="display:none"><option value="กาญจนบุรี">กาญจนบุรี</option></select><div id="efReservoirList" role="status">กำลังโหลดข้อมูลอ่างเก็บน้ำ…</div><small id="efReservoirTime"></small></section>
    <section class="ef-panel ef-estate-panel"><h2>ติดตามนิคมฯ / ท่าเรือ</h2><div class="ef-tools"><input id="efSearch" list="efEstateOptions" type="search" aria-label="ค้นหาชื่อนิคมฯ / ท่าเรือ" placeholder="ค้นหาชื่อนิคมฯ / ท่าเรือ"><datalist id="efEstateOptions"></datalist><select id="efFilter" aria-label="กรองข้อมูลนิคมฯ"><option value="watch">เข้าเกณฑ์เฝ้าระวัง</option><option value="water">ใกล้ระดับน้ำเข้าเกณฑ์</option><option value="rain">ใกล้ฝนเข้าเกณฑ์</option><option value="all">ทุกนิคมฯ / ท่าเรือ</option></select></div><p id="efResultCount" class="ef-count"></p><div class="ef-selection" id="efSelection" hidden></div><div id="efEstates" class="ef-estates"></div></section>
    <div class="ef-warning"><details class="ef-panel" id="efDetails24"><summary>พื้นที่เฝ้าระวัง 24 ชั่วโมง</summary><div id="efWarning24"></div></details><details class="ef-panel" id="efDetails48"><summary>พื้นที่เฝ้าระวัง 48 ชั่วโมง</summary><div id="efWarning48"></div></details></div>
@@ -334,6 +367,7 @@
 
   $('estateFocusMap').addEventListener('load',()=>{
    const frame=$('estateFocusMap');
+   frame.contentWindow?.postMessage({type:'flood-province-scope',...provinceScope},location.origin);
    frame.contentWindow?.postMessage({type:'flood-map-resize'},location.origin);
    if(selected&&current){const estate=model(current).estates.find(e=>String(e.id)===selected);if(estate)zoom(estate.lat,estate.lon)}
   });
@@ -423,7 +457,7 @@ $('efFilter').onchange=()=>renderEstates();
   if($('efEstateOptions'))$('efEstateOptions').innerHTML=(data.estates||[]).filter(point).map(e=>'<option value="'+esc(e.name)+'"></option>').join('');
   const m=model(data);
   if(headerEstate&&m.estates[0])selected=String(m.estates[0].id);
-  document.dispatchEvent(new CustomEvent('ieat-flood-estate-scope',{detail:{active:!!headerEstate,name:headerEstate,estate:headerEstate?m.estates[0]||null:null}}));
+  publishProvinceScope(headerEstate?m.estates[0]||null:null);
   set('efTotal',m.complete?fmt(m.estates.length):'รอตรวจสอบ');
   [['efWatch',m.watch.length],['efRainWatch',m.watch.filter(e=>e.rain.length).length],['efWaterWatch',m.watch.filter(e=>e.water.length).length]].forEach(([id,n])=>set(id,m.usable?fmt(n):m.stale?'ข้อมูลย้อนหลัง':'ข้อมูลไม่ครบ'));
   set('ef24',m.warning24.available?fmt(m.warning24.rows.length):'ไม่มีข้อมูล');set('ef48',m.warning48.available?fmt(m.warning48.rows.length):'ไม่มีข้อมูล');
@@ -450,7 +484,7 @@ $('efFilter').onchange=()=>renderEstates();
 
 
  let selectedWaterProvince=null;
- function filterWaterScope(rows){return rows;}
+ function filterWaterScope(rows){return !provinceScope.active?rows:rows.filter(r=>provinceScope.province&&provinceKey(r.province)===provinceScope.province);}
  document.addEventListener('ieat-flood-estate-scope',()=>{renderReservoirs();renderRelatedDams()});
  window.addEventListener('message',event=>{
   if(event.origin!==location.origin||event.source!==$('estateFocusMap')?.contentWindow||event.data?.type!=='flood-map-province')return;
@@ -466,7 +500,7 @@ $('efFilter').onchange=()=>renderEstates();
   const list=$('efReservoirList');if(!list)return;
   const latest=reservoirs;
   const rows=filterWaterScope(latest).sort((a,b)=>Number(b.percent)-Number(a.percent));
-  list.innerHTML=rows.length?rows.map(r=>{const p=num(r.percent),theme=waterCardTheme(p),color=theme.color,label=p===null?'ไม่มีค่าล่าสุด':p>=100?'เกินความจุ':p>=80?'น้ำมาก':p>=30?'น้ำปานกลาง':'น้ำน้อย';return '<button type="button" class="ef-reservoir-row" data-water-theme="'+theme.key+'" style="--water-accent:'+color+'" data-high="'+(p>=80)+'" data-reservoir-id="'+esc(r.id)+'" '+(r.lat==null||r.lng==null?'disabled':'')+'><div><b>'+esc(r.name)+'</b><small>จ.'+esc(r.province)+' · อ.'+esc(r.district)+'</small></div><div class="ef-reservoir-percent">'+(p===null?'—':Math.round(p)+'%')+'<span style="background:'+color+'">'+label+'</span></div><div class="ef-reservoir-bar"><i style="width:'+Math.min(100,Math.max(0,p))+'%;background:'+color+'"></i></div><small>ข้อมูล '+esc(r.measured_at)+'</small></button>'}).join(''):'<p>'+'ไม่พบข้อมูลอ่างเก็บน้ำในชุดข้อมูลต้นทาง'+'</p>';
+  list.innerHTML=rows.length?rows.map(r=>{const p=num(r.percent),theme=waterCardTheme(p),color=theme.color,label=p===null?'ไม่มีค่าล่าสุด':p>=100?'เกินความจุ':p>=80?'น้ำมาก':p>=30?'น้ำปานกลาง':'น้ำน้อย';return '<button type="button" class="ef-reservoir-row" data-water-theme="'+theme.key+'" style="--water-accent:'+color+'" data-high="'+(p>=80)+'" data-reservoir-id="'+esc(r.id)+'" '+(r.lat==null||r.lng==null?'disabled':'')+'><div><b>'+esc(r.name)+'</b><small>จ.'+esc(r.province)+' · อ.'+esc(r.district)+'</small></div><div class="ef-reservoir-percent">'+(p===null?'—':Math.round(p)+'%')+'<span style="background:'+color+'">'+label+'</span></div><div class="ef-reservoir-bar"><i style="width:'+Math.min(100,Math.max(0,p))+'%;background:'+color+'"></i></div><small>ข้อมูล '+esc(r.measured_at)+'</small>'+distanceLabel(r)+'</button>'}).join(''):'<p>'+'ไม่พบข้อมูลอ่างเก็บน้ำในชุดข้อมูลต้นทาง'+'</p>';
   $('efReservoirTime').textContent='แสดงทุกจังหวัด · แต่ละรายการระบุวันที่ตรวจวัด · ข้อมูลรายวัน · สัดส่วนน้ำต่อความจุปกติ · ThaiWater / กรมชลประทาน · โหลดใหม่ทุก 1 ชั่วโมง'+(reservoirError?' · โหลดรอบใหม่ไม่สำเร็จ แสดงค่าครั้งก่อน':'');
  }
  async function loadReservoirs(){
@@ -482,8 +516,8 @@ $('efFilter').onchange=()=>renderEstates();
  let relatedDams=[],relatedDamBusy=false;
  function renderRelatedDams(){
   const host=$('efRelatedDams');if(!host)return;
-  const rows=relatedDams;
-  host.innerHTML=rows.length?rows.map(r=>{const p=num(r.percent),delta=num(r.release_change),theme=waterCardTheme(p),c=theme.color;const camera=r.camera_url&&/^https:\/\//.test(r.camera_url)?'<img data-dam-camera src="'+esc(r.camera_url)+'?v='+Math.floor(Date.now()/3600000)+'" alt="ภาพกล้อง '+esc(r.camera_title||r.name)+'" loading="lazy"><small>ภาพนิ่งจากกล้องต้นทาง · ตรวจเวลาภาพที่ประทับในภาพ</small>':'<small>ต้นทางไม่มีภาพกล้องในชุดข้อมูลนี้</small>';return '<article class="ef-dam-card" data-water-theme="'+theme.key+'" style="--water-accent:'+c+'"><small>'+esc(r.province)+' · '+esc(r.basin)+'</small><h3>'+esc(r.name)+'</h3><div class="ef-dam-value">'+(p===null?'—':p.toFixed(1)+'%')+'</div><div class="ef-dam-bar"><i style="background:'+c+';width:'+Math.min(100,Math.max(0,p))+'%"></i></div><small>ของระดับเก็บกักปกติ</small><p>กักเก็บ '+fmt(r.storage)+' ล้าน ลบ.ม. · ความจุปกติ '+fmt(r.capacity)+' ล้าน ลบ.ม.</p><div class="ef-dam-flows"><div><small>น้ำไหลเข้า</small><b>'+fmt(r.inflow)+'</b></div><div><small>ระบายออก</small><b>'+fmt(r.released)+'</b><small>≈ '+(num(r.released)===null?'—':fmt(r.released*1000000/86400))+' ลบ.ม./วินาที</small></div></div><div class="ef-dam-change">'+(delta===null?'ยังไม่มีค่าเปรียบเทียบการระบายกับวันก่อน':delta>0?'▲ ระบายเพิ่มจากเมื่อวาน '+fmt(delta)+' ล้าน ลบ.ม.':delta<0?'▼ ระบายลดจากเมื่อวาน '+fmt(Math.abs(delta))+' ล้าน ลบ.ม.':'ระบายเท่ากับเมื่อวาน')+'</div><small>ล้าน ลบ.ม./วัน · ข้อมูลวันที่ '+esc(r.measured_at)+'</small>'+camera+'<button type="button" data-related-dam="'+esc(r.id)+'">ดูตำแหน่งเขื่อนบนแผนที่ ↗</button></article>'}).join(''):'<p>'+'ไม่พบข้อมูลเขื่อนในชุดข้อมูลต้นทาง'+'</p>';
+  const rows=filterWaterScope(relatedDams);
+  host.innerHTML=rows.length?rows.map(r=>{const p=num(r.percent),delta=num(r.release_change),theme=waterCardTheme(p),c=theme.color;const camera=r.camera_url&&/^https:\/\//.test(r.camera_url)?'<img data-dam-camera src="'+esc(r.camera_url)+'?v='+Math.floor(Date.now()/3600000)+'" alt="ภาพกล้อง '+esc(r.camera_title||r.name)+'" loading="lazy"><small>ภาพนิ่งจากกล้องต้นทาง · ตรวจเวลาภาพที่ประทับในภาพ</small>':'<small>ต้นทางไม่มีภาพกล้องในชุดข้อมูลนี้</small>';return '<article class="ef-dam-card" data-water-theme="'+theme.key+'" style="--water-accent:'+c+'"><small>'+esc(r.province)+' · '+esc(r.basin)+'</small>'+distanceLabel(r)+'<h3>'+esc(r.name)+'</h3><div class="ef-dam-value">'+(p===null?'—':p.toFixed(1)+'%')+'</div><div class="ef-dam-bar"><i style="background:'+c+';width:'+Math.min(100,Math.max(0,p))+'%"></i></div><small>ของระดับเก็บกักปกติ</small><p>กักเก็บ '+fmt(r.storage)+' ล้าน ลบ.ม. · ความจุปกติ '+fmt(r.capacity)+' ล้าน ลบ.ม.</p><div class="ef-dam-flows"><div><small>น้ำไหลเข้า</small><b>'+fmt(r.inflow)+'</b></div><div><small>ระบายออก</small><b>'+fmt(r.released)+'</b><small>≈ '+(num(r.released)===null?'—':fmt(r.released*1000000/86400))+' ลบ.ม./วินาที</small></div></div><div class="ef-dam-change">'+(delta===null?'ยังไม่มีค่าเปรียบเทียบการระบายกับวันก่อน':delta>0?'▲ ระบายเพิ่มจากเมื่อวาน '+fmt(delta)+' ล้าน ลบ.ม.':delta<0?'▼ ระบายลดจากเมื่อวาน '+fmt(Math.abs(delta))+' ล้าน ลบ.ม.':'ระบายเท่ากับเมื่อวาน')+'</div><small>ล้าน ลบ.ม./วัน · ข้อมูลวันที่ '+esc(r.measured_at)+'</small>'+camera+'<button type="button" data-related-dam="'+esc(r.id)+'">ดูตำแหน่งเขื่อนบนแผนที่ ↗</button></article>'}).join(''):'<p>'+'ไม่พบข้อมูลเขื่อนในชุดข้อมูลต้นทาง'+'</p>';
  }
  async function loadRelatedDams(){
   if(relatedDamBusy)return;relatedDamBusy=true;
