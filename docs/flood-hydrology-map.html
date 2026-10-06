@@ -199,13 +199,13 @@ function addFlow(){
 function drawFlow(){
  if(!raster||!groups.flow)return;groups.flow.clearLayers();if(!flags.flow||!waterways)return;
  const fs=waterways.features.filter(f=>f.properties.direction==='downstream');
- L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#69c5e4',weight:4,opacity:.85},interactive:false}).addTo(groups.flow);
- L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#fff',weight:2,opacity:.9,dashArray:'10 18',className:'river-motion'},interactive:false}).addTo(groups.flow);
+ L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#69c5e4',weight:2.5,opacity:.7},interactive:false}).addTo(groups.flow);
+ L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#fff',weight:1,opacity:.65,dashArray:'10 18',className:'river-motion'},interactive:false}).addTo(groups.flow);
  if(raster.getZoom()<7)return;
  const bounds=raster.getBounds().pad(.15);let count=0;
- for(const f of fs){const cs=f.geometry.coordinates;let remaining=45;
+ for(const f of fs){const cs=f.geometry.coordinates;let remaining=90;
  for(let i=1;i<cs.length;i++){const a=L.latLng(cs[i-1][1],cs[i-1][0]),b=L.latLng(cs[i][1],cs[i][0]);const p=raster.latLngToLayerPoint(a),q=raster.latLngToLayerPoint(b),len=p.distanceTo(q);if(!len)continue;
- let d=remaining;while(d<len){const t=d/len,lat=a.lat+(b.lat-a.lat)*t,lng=a.lng+(b.lng-a.lng)*t;if(bounds.contains([lat,lng])&&count<700){const angle=Math.atan2(q.y-p.y,q.x-p.x)*180/Math.PI;L.marker([lat,lng],{interactive:false,keyboard:false,icon:L.divIcon({className:'flow-arrow',iconSize:[28,18],iconAnchor:[14,9],html:'<svg width="28" height="18" viewBox="0 0 28 18" style="transform:rotate('+angle+'deg)"><path d="M2 6H16V2L26 9 16 16V12H2Z" fill="white" stroke="#075777" stroke-width="1.5" stroke-linejoin="round"/></svg>'})}).addTo(groups.flow);count++}d+=90}remaining=d-len;
+ let d=remaining;while(d<len){const t=d/len,lat=a.lat+(b.lat-a.lat)*t,lng=a.lng+(b.lng-a.lng)*t;if(bounds.contains([lat,lng])&&count<700){const angle=Math.atan2(q.y-p.y,q.x-p.x)*180/Math.PI;L.marker([lat,lng],{interactive:false,keyboard:false,icon:L.divIcon({className:'flow-arrow',iconSize:[20,14],iconAnchor:[10,7],html:'<svg width="20" height="14" viewBox="0 0 28 18" style="transform:rotate('+angle+'deg)"><path d="M2 6H16V2L26 9 16 16V12H2Z" fill="white" stroke="#075777" stroke-width="1.5" stroke-linejoin="round"/></svg>'})}).addTo(groups.flow);count++}d+=180}remaining=d-len;
  }}}
 
 function addGistda(){if(!vector||!ready||vector.getSource('gistda'))return;vector.addSource('gistda',{type:'geojson',data:gistda});vector.addLayer({id:'gistda',type:'fill',source:'gistda',filter:['==',['geometry-type'],'Polygon'],layout:{visibility:flags.gistda?'visible':'none'},paint:{'fill-color':'#218cc3','fill-opacity':.2}},'discharge-ring');vector.addLayer({id:'gistda-points',type:'circle',source:'gistda',filter:['==',['geometry-type'],'Point'],layout:{visibility:flags.gistda?'visible':'none'},paint:{'circle-color':'#218cc3','circle-radius':5}},'discharge-ring')}
@@ -274,11 +274,11 @@ function syncRemoteOverlays(){
    else if(source.type==='image'&&vector.getSource(id).url!==source.url)vector.getSource(id).updateImage({url:source.url,coordinates:source.coordinates});
    vector.setLayoutProperty(id,'visibility',show?'visible':'none');
   }
-  if(satelliteFeed)layer('satellite-live',{type:'raster',tiles:[satelliteFeed.tiles],tileSize:512,maxzoom:14,bounds:[97.3,5.6,105.7,20.5],attribution:'<a href="https://disaster.gistda.or.th/">GISTDA</a> ผ่าน <a href="https://faonam.com/">Faonam</a>'},flags.satellite,.65);
-  if(frame){const [w,s,e,n]=radarFeed.bounds;layer('radar-live',{type:'image',url:frame.url,coordinates:[[w,n],[e,n],[e,s],[w,s]]},flags.radar,.7);}
+  if(satelliteFeed)layer('satellite-live',{type:'raster',tiles:[satelliteFeed.tiles],tileSize:512,maxzoom:14,bounds:[97.3,5.6,105.7,20.5],attribution:'<a href="https://disaster.gistda.or.th/">GISTDA</a> ผ่าน <a href="https://faonam.com/">Faonam</a>'},flags.satellite,.38);
+  if(frame){const [w,s,e,n]=radarFeed.bounds;layer('radar-live',{type:'image',url:frame.url,coordinates:[[w,n],[e,n],[e,s],[w,s]]},flags.radar,.55);}
  }else if(raster){
-  if(satelliteFeed){if(!satelliteLayer||satelliteLayer._url!==satelliteFeed.tiles){if(satelliteLayer)raster.removeLayer(satelliteLayer);satelliteLayer=L.tileLayer(satelliteFeed.tiles,{tileSize:512,zoomOffset:-1,maxNativeZoom:13,opacity:.65,attribution:'GISTDA ผ่าน Faonam'});}if(flags.satellite)satelliteLayer.addTo(raster);else raster.removeLayer(satelliteLayer);}
-  if(frame){const [w,s,e,n]=radarFeed.bounds;if(!radarLayer)radarLayer=L.imageOverlay(frame.url,[[s,w],[n,e]],{opacity:.7,interactive:false});else if(radarLayer._url!==frame.url)radarLayer.setUrl(frame.url);if(flags.radar)radarLayer.addTo(raster);else raster.removeLayer(radarLayer);}
+  if(satelliteFeed){if(!satelliteLayer||satelliteLayer._url!==satelliteFeed.tiles){if(satelliteLayer)raster.removeLayer(satelliteLayer);satelliteLayer=L.tileLayer(satelliteFeed.tiles,{tileSize:512,zoomOffset:-1,maxNativeZoom:13,opacity:.38,attribution:'GISTDA ผ่าน Faonam'});}if(flags.satellite)satelliteLayer.addTo(raster);else raster.removeLayer(satelliteLayer);}
+  if(frame){const [w,s,e,n]=radarFeed.bounds;if(!radarLayer)radarLayer=L.imageOverlay(frame.url,[[s,w],[n,e]],{opacity:.55,interactive:false});else if(radarLayer._url!==frame.url)radarLayer.setUrl(frame.url);if(flags.radar)radarLayer.addTo(raster);else raster.removeLayer(radarLayer);}
  }
 }
 async function remoteFeed(path){const r=await fetch(faonamBase+path,{cache:'no-store',signal:AbortSignal.timeout(path==='/api/tmd/radar'?8000:25000)});if(!r.ok)throw Error('HTTP '+r.status);return r.json();}
