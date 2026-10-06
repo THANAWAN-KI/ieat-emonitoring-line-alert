@@ -31,3 +31,5 @@ jobs:
             git commit -m "Build ThaiWater map history data"
             git push
           fi
+
+# rerun after Python fix
