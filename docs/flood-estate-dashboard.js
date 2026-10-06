@@ -26,6 +26,7 @@
   function publish(){
    window.IEAT_FLOOD_PROVINCE_SCOPE=provinceScope;
    document.dispatchEvent(new CustomEvent('ieat-flood-estate-scope',{detail:provinceScope}));
+   if(current&&provinceScope.active){const m=model(current);for(const [id,ds] of [['efWarning24',m.warning24],['efWarning48',m.warning48]]){const host=$(id);if(host)host.innerHTML=!ds.available?'<p>ข้อมูลประกาศยังไม่พร้อม</p>':ds.rows.length?ds.rows.map(r=>'<div class="ef-risk"><button data-ef-lat="'+r.lat+'" data-ef-lon="'+r.lon+'">'+esc([r.tambon,r.amphoe,r.province].join(' '))+'</button><br>ห่างจาก '+esc(provinceScope.name)+' '+fmt(r.distance)+' กม. (ระยะเส้นตรง)<br>ฝนสะสม '+fmt(r.sum_rainfall_mm)+' มม.</div>').join(''):'<p>ไม่พบพื้นที่เฝ้าระวังในจังหวัดที่เลือก</p>';}}
    $('estateFocusMap')?.contentWindow?.postMessage({type:'flood-province-scope',...provinceScope},location.origin);
    const note=$('efProvinceScopeNote');if(note)note.textContent=!name?'ข้อมูลทั่วประเทศ':provinceScope.province?name+' · จ.'+provinceScope.province+' · ระยะห่างเป็นระยะเส้นตรง':'กำลังตรวจสอบจังหวัดของ '+name;
   }
@@ -69,7 +70,7 @@
    ds.areas.forEach(r=>{
     const p={lat:num(r.latitude),lon:num(r.longitude)};if(p.lat===null||p.lon===null||!point(p)){unlocated++;return}
     let distance=Infinity,estate=null;estates.forEach(e=>{const d=km(e,p);if(d<distance){distance=d;estate=e}});
-    if(distance>RADIUS)return;
+    if(provinceScope.active?(!provinceScope.province||provinceKey(r.province)!==provinceScope.province):distance>RADIUS)return;
     const key=r.geocode||[r.province,r.amphoe,r.tambon].join('|');const prior=groups.get(key);
     if(!prior||distance<prior.distance)groups.set(key,{...r,...p,distance,estate});
    });
