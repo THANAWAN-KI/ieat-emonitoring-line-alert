@@ -107,9 +107,21 @@ border-color:#8daecb!important;box-shadow:0 5px 14px #234b6a12!important;
 #estateFocusDashboard #efReservoirList .ef-reservoir-row:focus-visible{
 outline:2px solid #0066b2!important;outline-offset:2px;
 }
+
+#estateFocusDashboard .ef-canal-panel{background:#fff;border:0;border-radius:18px;padding:16px;margin-bottom:16px}
+#estateFocusDashboard .ef-canal-panel>h2{background:#e9f1fc;color:#003666!important;padding:12px;border-radius:10px;font-size:19px!important;margin:0 0 12px}
+#estateFocusDashboard #efCanalList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#estateFocusDashboard .ef-canal-card{display:flex;flex-direction:column;gap:8px;text-align:left;background:#fff;border:1px solid #b9ccdd;border-radius:14px;padding:16px;color:#003666;font:inherit;cursor:pointer;min-width:0;box-shadow:0 3px 9px #234b6a0b}
+#estateFocusDashboard .ef-canal-card b{font-size:17px;color:#003666!important;line-height:1.6}
+#estateFocusDashboard .ef-canal-card strong{font-size:20px!important}
+#estateFocusDashboard .ef-canal-card small,#estateFocusDashboard #efCanalTime{font-size:13px!important;color:#003666!important;line-height:1.7}
+#estateFocusDashboard .ef-canal-status{align-self:flex-start;font-size:12px;padding:4px 10px;border-radius:20px;color:#fff!important}
+#estateFocusDashboard #efCanalTime{display:block;margin-top:12px}
+#estateFocusDashboard .ef-canal-panel[hidden]{display:none!important}
+@media(max-width:600px){#estateFocusDashboard #efCanalList{grid-template-columns:1fr}}
 </style>
 <script src="flood-rid-source.js?v=20261006-rid-17" defer></script>
-<script src="flood-estate-dashboard.js?v=20261006-reservoir-values-47" defer></script>
+<script src="flood-estate-dashboard.js?v=20261006-bma-cards-48" defer></script>
 <script src="flood-river-panel.js?v=20261006-province-scope-45" defer></script>
 <script src="flood-weather-overview.js?v=20261006-svg-weather-37" defer></script>
 </head>
