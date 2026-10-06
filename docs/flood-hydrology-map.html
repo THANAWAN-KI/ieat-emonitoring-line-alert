@@ -308,7 +308,7 @@ async function loadCameraImage(r,force=false){
  }catch(e){img.style.display='none';time.textContent='โหลดภาพล่าสุดไม่สำเร็จ';state.textContent='ต้นทางอาจไม่มีภาพหรือไม่ตอบสนอง · เปิดต้นทางด้านล่างเพื่อตรวจสอบ'}
 }
 document.addEventListener('click',e=>{const b=e.target.closest('[data-camera-refresh]');if(!b)return;const r=features.find(f=>f.properties.kind==='camera'&&String(f.properties.id)===b.dataset.cameraRefresh)?.properties;if(r)loadCameraImage(r,true)});
-$('province').addEventListener('change',()=>{render();fit()});
+$('province').addEventListener('change',()=>{render();fit();parent.postMessage({type:'flood-map-province',province:$('province').value},location.origin)});
 document.querySelectorAll('.controls details').forEach(menu=>menu.addEventListener('toggle',()=>{if(menu.open)document.querySelectorAll('.controls details').forEach(other=>{if(other!==menu)other.open=false;});}));
 document.addEventListener('keydown',event=>{if(event.key==='Escape')document.querySelectorAll('.controls details').forEach(menu=>{menu.open=false;});});
 document.querySelectorAll('[data-layer]').forEach(input=>input.addEventListener('change',()=>{flags[input.dataset.layer]=input.checked;if(input.dataset.layer==='camera'&&input.checked)cameras();render()}));
