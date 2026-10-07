@@ -78,8 +78,43 @@ body.toolbar-above:has(.leaflet-popup) .controls,body.toolbar-above:has(.maplibr
 .sensor-marker.canal-sensor{border-radius:9px}
 .sensor-marker .estate-name{top:35px}
 .estate-flood-plan{margin-top:12px;padding-top:10px;border-top:1px solid #d5e6ed}.estate-flood-plan h4{margin:12px 0 6px;color:#003666;font-size:15px}.estate-flood-plan ul{padding-left:20px;margin:8px 0}.estate-flood-plan li{margin:5px 0}.estate-flood-plan .plan-location-note{background:#fff7df;padding:9px;border-radius:8px;font-size:12px}.maplibregl-popup-content:has(.estate-flood-plan),.leaflet-popup-content:has(.estate-flood-plan){max-height:65vh;overflow-y:auto}
+
+/* Readable estate preparedness cards */
+.maplibregl-popup:has(.estate-flood-plan){max-width:min(390px,calc(100vw - 36px))!important}
+.maplibregl-popup-content:has(.estate-flood-plan){padding:16px;border-radius:16px}
+.leaflet-popup-content-wrapper:has(.estate-flood-plan){border-radius:16px}
+.leaflet-popup-content:has(.estate-flood-plan){width:350px!important;max-width:calc(100vw - 70px);margin:16px}
+.popup:has(.estate-flood-plan){width:350px;min-width:0;max-width:100%;font-size:14px;line-height:1.65}
+.maplibregl-popup-content:has(.estate-flood-plan),.leaflet-popup-content:has(.estate-flood-plan){max-height:min(70vh,600px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.estate-flood-plan{margin-top:14px;padding-top:14px;border-top:1px solid #dbe5ef;color:#20374c}
+.plan-heading{position:relative;margin-bottom:12px}
+.plan-eyebrow{display:block;color:#087e83;font-size:12px;font-weight:700;letter-spacing:.2px}
+.estate-flood-plan .plan-heading h4{font-size:19px;line-height:1.4;margin:5px 0 0;color:#123c60}
+.plan-year{position:absolute;right:0;top:0;background:#e8f2fa;color:#23577d;border-radius:20px;padding:3px 9px;font-size:12px}
+.plan-draft{display:inline-block;margin-top:6px;color:#8a5b0b;background:#fff1ce;border-radius:6px;padding:2px 8px;font-size:12px}
+.plan-card-list{display:grid;gap:10px}
+.plan-card{padding:12px;background:#f5f8fc;border:1px solid #e1e9f2;border-radius:12px}
+.plan-card-title{display:flex;align-items:center;gap:8px}
+.plan-card-icon{display:flex;align-items:center;justify-content:center;flex:0 0 30px;width:30px;height:30px;background:#e1edf7;color:#24618c;border-radius:9px}
+.plan-card-icon svg{width:21px;height:21px}
+.estate-flood-plan .plan-card h4{margin:0;font-size:15px;line-height:1.4;color:#163f60}
+.estate-flood-plan .plan-facts{padding-left:18px;margin:9px 0 0}
+.estate-flood-plan .plan-facts li{margin:5px 0;padding-left:2px}
+.plan-facts li::marker{color:#6993b1}
+.plan-facts strong{font-weight:700;color:#123c60}
+.plan-reference{margin-top:9px;padding-top:7px;border-top:1px solid #e0e8f0;font-size:11px;color:#63778a}
+.plan-assembly{background:#ecf8f5;border-color:#cde7df}
+.plan-assembly .plan-card-icon{background:#d3ede5;color:#11745c}
+.estate-flood-plan .plan-assembly-place{font-weight:600;color:#155d4c;margin:9px 0 0;font-size:15px}
+.estate-flood-plan .plan-location-note{background:#fff7e8;border:1px solid #f0dfbc;color:#775b25;padding:10px 12px;border-radius:10px;font-size:12px;line-height:1.6;margin:12px 0}
+.plan-empty{padding:12px;background:#f5f8fc;border-radius:10px;color:#53697b}
+.plan-sources{font-size:12px;color:#627789;border-top:1px solid #e1e9f0;padding-top:10px}
+.plan-sources summary{cursor:pointer;color:#38637f;font-weight:600;padding:4px 0}
+.plan-sources li{overflow-wrap:anywhere}
+@media(max-width:480px){.popup:has(.estate-flood-plan){width:calc(100vw - 72px)}.estate-flood-plan .plan-heading h4{font-size:18px}.plan-card{padding:10px}}
+
 </style>
-<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script><script src="flood-estate-plans-2569.js?v=20261007-35-estates"></script></head>
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script><script src="flood-estate-plans-2569.js?v=20261007-popup-cards"></script></head>
 <body><div id="mapStage"><div id="map" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div><div id="raster" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div></div>
 <button id="mapCompass" type="button" aria-label="ปรับแผนที่ให้ทิศเหนืออยู่ด้านบน" title="ปรับทิศเหนือและมุมมองให้ตรง"><span>N</span><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M12 2 20 25 12 20 4 25Z" fill="#52057f"/><path d="M12 2V20L4 25Z" fill="#b79aca"/></svg></button><div class="controls"><details class="layer-menu" id="mapLayers"><summary>เลเยอร์</summary><div class="layer-body"><div class="search"><select id="province" aria-label="เลือกจังหวัดในแผนที่"><option value="">ทั่วประเทศ</option></select></div>
 <div class="toggles" aria-label="ชั้นข้อมูล">
@@ -199,8 +234,7 @@ function waterPopup(r){
 }
 
 function estateFloodPlan(name){
- if(!String(name||'').includes('แหลมฉบัง')||String(name||'').includes('ปิ่นทอง'))return window.ieatEstatePlanPopup?.(name)||'';
- return '<section class="estate-flood-plan"><h4>อุปกรณ์และแผนรับมือน้ำท่วม · 2569</h4><p class="plan-location-note">ข้อมูลระดับนิคมฯ — หมุดนี้ไม่ใช่ตำแหน่งติดตั้งเครื่องสูบ อุปกรณ์และความพร้อมปัจจุบันต้องตรวจสอบกับนิคมฯ</p><h4>เครื่องสูบน้ำพญานาค</h4><p><b>2 เครื่อง · 1,000 ลบ.ม./ชม./เครื่อง</b><br>สำหรับเร่งระบายน้ำในเขตประกอบการเสรี 1–2<br><small>ERP หน้า 55–56 · ยังไม่ระบุพิกัดรายเครื่อง</small></p><h4>จุดตรวจระดับน้ำตามแผน</h4><ul><li>เหนือ: คลองสายเหนือ ข้าง บจก. เจ แม็ค อินดัสตรี</li><li>ใต้: คลองสายใต้ ข้างสำนักงานนิคมฯ</li><li>ตะวันออก: คลองสายใต้ ข้าง บจก. ไมย์เออร์ อินดัสตรีส์</li><li>ตะวันตก: คลองสายเหนือ หน้าโรงบำบัดน้ำเสีย</li></ul><small>ERP หน้า 59 · ตำแหน่งอ้างอิง ยังไม่ยืนยันพิกัดจุดตรวจ</small><h4>มาตรการป้องกันและเตรียมพร้อม</h4><p>ขุดลอกรางและคลองสายเหนือ–ใต้ · เตรียมกระสอบทรายป้องกันน้ำทะเลหนุน · เตรียมเครื่องสูบสำรองใช้น้ำมันและเครื่องกำเนิดไฟฟ้า · เฝ้าระวังระดับน้ำตลอด 24 ชม.</p><small>ERP หน้า 55, 57–58</small><h4>จุดรวมพลกรณีน้ำท่วม</h4><p>อาคารสำนักงานนิคมอุตสาหกรรมแหลมฉบัง<br><small>BCP หน้าไฟล์ 15 (เลขหน้าเอกสาร 12) · ไม่ใช่การยืนยันสถานะศูนย์พักพิงปัจจุบัน</small></p><small>แหล่งข้อมูล: ERP-แหลมฉบัง 69.pdf และ BCP-แหลมฉบัง 69.pdf ที่ผู้ใช้ให้มา · ข้อมูลตามแผน ไม่ใช่สถานะสด</small></section>';
+ return window.ieatEstatePlanPopup?.(name)||'';
 }
 
 function content(r,k){
