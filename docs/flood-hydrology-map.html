@@ -244,7 +244,7 @@ function render(){
   estateMarkers.forEach(m=>m.remove());estateMarkers=[];list.filter(f=>f.properties.kind==='estate').forEach(f=>{const el=document.createElement('div');el.className='estate-pin';el.tabIndex=0;el.setAttribute('aria-label',f.properties.name);el.innerHTML=estateSvg+'<span class="estate-name">'+esc(f.properties.name)+'</span>';estateMarkers.push(new maplibregl.Marker({element:el,anchor:'bottom'}).setLngLat(f.geometry.coordinates).setPopup(new maplibregl.Popup({maxWidth:'330px'}).setHTML(content(f.properties,'estate'))).addTo(vector))});
   vector.getSource('sensors')?.setData({type:'FeatureCollection',features:list});
   vector.setLayoutProperty('discharge-ring','visibility',flags.rings?'visible':'none');
-  ['mapped-waterways','mapped-water-motion','flow-arrows'].forEach(id=>{if(vector.getLayer(id))vector.setLayoutProperty(id,'visibility',flags.flow?'visible':'none')});
+  ['mapped-waterway-casing','mapped-waterways','mapped-water-motion','flow-arrows'].forEach(id=>{if(vector.getLayer(id))vector.setLayoutProperty(id,'visibility',flags.flow?'visible':'none')});
   if(vector.getLayer('gistda'))vector.setLayoutProperty('gistda','visibility',flags.gistda?'visible':'none');if(vector.getLayer('gistda-points'))vector.setLayoutProperty('gistda-points','visibility',flags.gistda?'visible':'none');
  }else if(raster){
   Object.values(groups).forEach(g=>g.clearLayers());
@@ -293,7 +293,7 @@ function vectorStart(){
  vector.on('load',()=>{
   if(!vector)return;clearTimeout(timeout);
   if(vector.getLayer('water'))vector.setPaintProperty('water','fill-color','#a9d4ea');
-  if(vector.getLayer('waterway')){vector.setPaintProperty('waterway','line-color','#5aa7d3');vector.setPaintProperty('waterway','line-width',['interpolate',['linear'],['zoom'],5,1,9,2.5,13,6])}
+  if(vector.getLayer('waterway')){vector.setPaintProperty('waterway','line-color','#0072cf');vector.setPaintProperty('waterway','line-width',['interpolate',['linear'],['zoom'],5,2.5,9,4.5,13,8])}
 
   vector.addSource('sensors',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
   vector.addLayer({id:'discharge-ring',type:'circle',source:'sensors',filter:['all',['==',['get','kind'],'water'],['>', ['coalesce',['get','discharge'],0],0],['==',['get','stale'],false]],paint:{'circle-radius':['interpolate',['linear'],['sqrt',['get','discharge']],0,4,60,22],'circle-color':['case',['>=',['coalesce',['get','diff'],-999],0],'#ef4444','#69b9df'],'circle-opacity':.13,'circle-stroke-color':['case',['>=',['coalesce',['get','diff'],-999],0],'#dc2626','#319bd0'],'circle-stroke-width':1.4}});
@@ -316,22 +316,25 @@ function vectorStart(){
 function addFlow(){
  if(!vector||!ready||!waterways||vector.getSource('mapped-flow'))return;
  vector.addSource('mapped-flow',{type:'geojson',data:{...waterways,features:waterways.features.filter(f=>f.properties.direction==='downstream')}});
- vector.addLayer({id:'mapped-waterways',type:'line',source:'mapped-flow',layout:{visibility:flags.flow?'visible':'none'},paint:{'line-color':'#238dc0','line-width':['interpolate',['linear'],['zoom'],5,1,9,2.5,13,5],'line-opacity':.75}},'discharge-ring');
- vector.addLayer({id:'mapped-water-motion',type:'line',source:'mapped-flow',layout:{visibility:flags.flow?'visible':'none'},paint:{'line-color':'#ffffff','line-width':2,'line-dasharray':[0,4,3],'line-opacity':.9}},'discharge-ring');
+ vector.addLayer({id:'mapped-waterway-casing',type:'line',source:'mapped-flow',layout:{visibility:flags.flow?'visible':'none','line-cap':'round','line-join':'round'},paint:{'line-color':'#ffffff','line-width':['interpolate',['linear'],['zoom'],5,7,9,10,13,14],'line-opacity':.95}},'discharge-ring');
+ vector.addLayer({id:'mapped-waterways',type:'line',source:'mapped-flow',layout:{visibility:flags.flow?'visible':'none'},paint:{'line-color':'#0072cf','line-width':['interpolate',['linear'],['zoom'],5,4,9,7,13,11],'line-opacity':1}},'discharge-ring');
+ vector.addLayer({id:'mapped-water-motion',type:'line',source:'mapped-flow',layout:{visibility:flags.flow?'visible':'none'},paint:{'line-color':'#ffffff','line-width':2.5,'line-dasharray':[0,4,3],'line-opacity':.9}},'discharge-ring');
  if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let phase=0;setInterval(()=>{if(document.hidden||!flags.flow||!vector?.getLayer('mapped-water-motion'))return;phase=(phase+.3)%7;vector.setPaintProperty('mapped-water-motion','line-dasharray',phase<3?[phase,4,3-phase]:[0,phase-3,3,7-phase])},120)}
- const img=new Image(28,18);img.onload=()=>{if(!vector)return;vector.addImage('flow-arrow',img);vector.addLayer({id:'flow-arrows',type:'symbol',source:'mapped-flow',minzoom:7,layout:{visibility:flags.flow?'visible':'none','symbol-placement':'line','symbol-spacing':180,'icon-image':'flow-arrow','icon-size':.75,'icon-keep-upright':false,'icon-allow-overlap':true,'icon-ignore-placement':true}})};
+ const img=new Image(28,18);img.onload=()=>{if(!vector)return;vector.addImage('flow-arrow',img);vector.addLayer({id:'flow-arrows',type:'symbol',source:'mapped-flow',minzoom:5,layout:{visibility:flags.flow?'visible':'none','symbol-placement':'line','symbol-spacing':140,'icon-image':'flow-arrow','icon-size':1,'icon-keep-upright':false,'icon-allow-overlap':true,'icon-ignore-placement':true}})};
  img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="28" height="18" viewBox="0 0 28 18"><path d="M2 6H16V2L26 9 16 16V12H2Z" fill="white" stroke="#075777" stroke-width="1.5" stroke-linejoin="round"/></svg>');
 }
 function drawFlow(){
  if(!raster||!groups.flow)return;groups.flow.clearLayers();if(!flags.flow||!waterways)return;
  const fs=waterways.features.filter(f=>f.properties.direction==='downstream');
- L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#69c5e4',weight:2.5,opacity:.7},interactive:false}).addTo(groups.flow);
- L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#fff',weight:1,opacity:.65,dashArray:'10 18',className:'river-motion'},interactive:false}).addTo(groups.flow);
+ const flowWidth=raster.getZoom()<9?4:raster.getZoom()<13?7:11;
+ L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#fff',weight:flowWidth+3,opacity:.95,lineCap:'round',lineJoin:'round'},interactive:false}).addTo(groups.flow);
+ L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#0072cf',weight:flowWidth,opacity:1,lineCap:'round',lineJoin:'round'},interactive:false}).addTo(groups.flow);
+ L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#fff',weight:2.5,opacity:.9,dashArray:'10 18',className:'river-motion'},interactive:false}).addTo(groups.flow);
  if(raster.getZoom()<7)return;
  const bounds=raster.getBounds().pad(.15);let count=0;
  for(const f of fs){const cs=f.geometry.coordinates;let remaining=90;
  for(let i=1;i<cs.length;i++){const a=L.latLng(cs[i-1][1],cs[i-1][0]),b=L.latLng(cs[i][1],cs[i][0]);const p=raster.latLngToLayerPoint(a),q=raster.latLngToLayerPoint(b),len=p.distanceTo(q);if(!len)continue;
- let d=remaining;while(d<len){const t=d/len,lat=a.lat+(b.lat-a.lat)*t,lng=a.lng+(b.lng-a.lng)*t;if(bounds.contains([lat,lng])&&count<700){const angle=Math.atan2(q.y-p.y,q.x-p.x)*180/Math.PI;L.marker([lat,lng],{interactive:false,keyboard:false,icon:L.divIcon({className:'flow-arrow',iconSize:[20,14],iconAnchor:[10,7],html:'<svg width="20" height="14" viewBox="0 0 28 18" style="transform:rotate('+angle+'deg)"><path d="M2 6H16V2L26 9 16 16V12H2Z" fill="white" stroke="#075777" stroke-width="1.5" stroke-linejoin="round"/></svg>'})}).addTo(groups.flow);count++}d+=180}remaining=d-len;
+ let d=remaining;while(d<len){const t=d/len,lat=a.lat+(b.lat-a.lat)*t,lng=a.lng+(b.lng-a.lng)*t;if(bounds.contains([lat,lng])&&count<700){const angle=Math.atan2(q.y-p.y,q.x-p.x)*180/Math.PI;L.marker([lat,lng],{interactive:false,keyboard:false,icon:L.divIcon({className:'flow-arrow',iconSize:[28,18],iconAnchor:[14,9],html:'<svg width="28" height="18" viewBox="0 0 28 18" style="transform:rotate('+angle+'deg)"><path d="M2 6H16V2L26 9 16 16V12H2Z" fill="white" stroke="#075777" stroke-width="1.5" stroke-linejoin="round"/></svg>'})}).addTo(groups.flow);count++}d+=140}remaining=d-len;
  }}}
 
 function addGistda(){if(!vector||!ready||vector.getSource('gistda'))return;vector.addSource('gistda',{type:'geojson',data:gistda});vector.addLayer({id:'gistda',type:'fill',source:'gistda',filter:['==',['geometry-type'],'Polygon'],layout:{visibility:flags.gistda?'visible':'none'},paint:{'fill-color':'#218cc3','fill-opacity':.2}},'discharge-ring');vector.addLayer({id:'gistda-points',type:'circle',source:'gistda',filter:['==',['geometry-type'],'Point'],layout:{visibility:flags.gistda?'visible':'none'},paint:{'circle-color':'#218cc3','circle-radius':5}},'discharge-ring')}
