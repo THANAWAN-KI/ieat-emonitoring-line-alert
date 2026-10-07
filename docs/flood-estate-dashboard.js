@@ -556,7 +556,6 @@ $('efFilter').onchange=()=>renderEstates();
 
  function render(data){
   mount();if(!$('estateFocusDashboard'))return;current=data;
-  window.IEAT_FLOOD_EXECUTIVE_DATA=data;document.dispatchEvent(new CustomEvent('ieat-flood-executive-data',{detail:data}));
   if($('efEstateOptions'))$('efEstateOptions').innerHTML=(data.estates||[]).filter(point).map(e=>'<option value="'+esc(e.name)+'"></option>').join('');
   const m=model(data);
   if(headerEstate&&m.estates[0])selected=String(m.estates[0].id);
