@@ -26,7 +26,7 @@
   function publish(){
    window.IEAT_FLOOD_PROVINCE_SCOPE=provinceScope;
    document.dispatchEvent(new CustomEvent('ieat-flood-estate-scope',{detail:provinceScope}));
-   if(current&&provinceScope.active){const m=model(current);for(const [id,ds] of [['efWarning24',m.warning24],['efWarning48',m.warning48]]){const host=$(id);if(host)host.innerHTML=!ds.available?'<p>ข้อมูลประกาศยังไม่พร้อม</p>':ds.rows.length?ds.rows.map(r=>'<div class="ef-risk"><button data-ef-lat="'+r.lat+'" data-ef-lon="'+r.lon+'">'+esc([r.tambon,r.amphoe,r.province].join(' '))+'</button><br>ห่างจาก '+esc(provinceScope.name)+' '+fmt(r.distance)+' กม. (ระยะเส้นตรง)<br>ฝนสะสม '+fmt(r.sum_rainfall_mm)+' มม.</div>').join(''):'<p>ไม่พบพื้นที่เฝ้าระวังในจังหวัดที่เลือก</p>';}}
+   if(current&&provinceScope.active){const m=model(current);for(const [id,ds] of [['efWarning24',m.warning24],['efWarning48',m.warning48]]){const host=$(id);if(host)host.innerHTML=!ds.available?'<p>ข้อมูลประกาศยังไม่พร้อม</p>':ds.rows.length?ds.rows.map(r=>warningCard(r,id==='efWarning24'?24:48,true)).join(''):'<p>ไม่พบพื้นที่เฝ้าระวังในจังหวัดที่เลือก</p>';}}
    $('estateFocusMap')?.contentWindow?.postMessage({type:'flood-province-scope',...provinceScope},location.origin);
    const note=$('efProvinceScopeNote');if(note)note.textContent=!name?'ข้อมูลทั่วประเทศ · แสดงตัวอย่างสูงสุด 6 รายการต่อส่วน กรุณาเลือกนิคมฯ เพื่อดูข้อมูลเฉพาะพื้นที่':provinceScope.province?name+' · ข้อมูลภายใน '+RADIUS+' กม. · เรียงใกล้ที่สุดก่อน · ระยะเส้นตรง':'กำลังตรวจสอบจังหวัดของ '+name;
   }
@@ -114,6 +114,13 @@
  if(window.parent!==window)window.parent.postMessage({type:'ieat-flood-ready'},location.origin);
 
  function set(id,text){if($(id))$(id).textContent=text}
+
+ function warningCard(r,hours,province=false){
+  const label=[r.tambon,r.amphoe,r.province].filter(Boolean).join(' ');
+  const near=province?'ห่างจาก '+provinceScope.name+' '+fmt(r.distance)+' กม. (ระยะเส้นตรง)':r.estate?'ใกล้ '+r.estate.name+' '+fmt(r.distance)+' กม.':'';
+  return '<button type="button" class="ef-risk ef-warning-location" aria-pressed="false" data-ef-warning="'+hours+'" data-ef-label="'+esc(label)+'" data-ef-rain="'+esc(r.sum_rainfall_mm??'')+'" data-ef-observed="'+esc(time(r.observed_at))+'" data-ef-lat="'+r.lat+'" data-ef-lon="'+r.lon+'"><strong>'+esc(label)+'</strong><span>'+esc(near)+'</span><span>ฝนสะสมตามช่วงประกาศ '+fmt(r.sum_rainfall_mm)+' มม.</span><span>เวลาสถานี '+esc(time(r.observed_at))+'</span><span class="ef-warning-map-action">ดูตำแหน่งบนแผนที่ ↗</span></button>';
+ }
+
  function zoom(lat,lon){const f=$('estateFocusMap');if(f?.contentWindow)f.contentWindow.postMessage({type:'flood-map-focus',lat:Number(lat),lon:Number(lon),scale:75000},location.origin)}
  function mount(){
   const warning=$('warning');if(!warning||$('estateFocusDashboard'))return;
@@ -268,6 +275,14 @@
    .ef-tools{display:flex;gap:8px;flex-wrap:wrap}.ef-tools input,.ef-tools select{border:1px solid #e4eaf0;background:#f8fafb;border-radius:999px;padding:9px 12px;color:#607382;font:inherit;font-size:14px;min-width:0}.ef-tools input{flex:1 1 160px}.ef-tools select{flex:1 1 190px}
    .ef-count{font-size:12px;color:#9aa6b0}.ef-estates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-height:300px;overflow:auto;scrollbar-width:thin;padding:3px}.ef-estate{width:100%;border:1px solid #e9edf2;border-radius:12px;background:#f7f8fb;color:#576179;text-align:left;padding:11px;font:inherit;font-size:14px;cursor:pointer}.ef-estate small{display:block;margin-top:5px;font-size:12px;line-height:1.6;color:#84929d}.ef-estate[aria-pressed="true"]{background:#f0f8f2;border-color:#80b391;color:#286f40}.ef-estate:focus-visible{outline:3px solid #138b90}.ef-selection{background:#eef8f2;border-radius:12px;color:#337650;font-size:14px;line-height:1.7;padding:12px;margin:12px 0}
    .ef-table{overflow:auto;max-height:370px;scrollbar-width:thin}.ef-table table{border-collapse:collapse;width:100%;min-width:590px;font-size:13px}.ef-table td,.ef-table th{padding:10px;border:1px solid #eef1f4;text-align:left;vertical-align:top;color:#687b89;line-height:1.7}.ef-table th{position:sticky;top:0;background:#f5f8fb;z-index:1;color:#4f6475;font-weight:500}.ef-table button{background:none;border:0;color:#2f8ea0;padding:0;text-align:left;font:inherit;text-decoration:underline;cursor:pointer}
+
+ #estateFocusDashboard button.ef-warning-location{display:block;width:100%;margin:8px 0;padding:12px 14px;text-align:left;border:1px solid #d2e4f1;border-radius:12px;background:#f5faff;color:#24465f!important;cursor:pointer;font:14px Sarabun,sans-serif;line-height:1.65;transition:background .15s,border-color .15s}
+ #estateFocusDashboard .ef-warning-location strong,#estateFocusDashboard .ef-warning-location span{display:block}
+ #estateFocusDashboard .ef-warning-location strong{font-size:15px;color:#00387b}
+ #estateFocusDashboard .ef-warning-location:hover,#estateFocusDashboard .ef-warning-location[aria-pressed="true"]{background:#e5f4ee;border-color:#65b398}
+ #estateFocusDashboard .ef-warning-location:focus-visible{outline:3px solid #0072cf;outline-offset:2px}
+ #estateFocusDashboard .ef-warning-map-action{margin-top:7px;font-weight:600;color:#117055}
+
    .ef-warning{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.ef-risk{padding:10px 0;border-bottom:1px solid #edf1f4;font-size:13px;color:#80909c;line-height:1.7}.ef-risk button{border:0;background:none;color:#2f8ea0;padding:0;text-align:left;font:inherit;cursor:pointer}.ef-sources{font-size:13px;line-height:1.9}.ef-sources a{color:#338da0}.ef-empty{padding:15px;color:#8b98a5;font-size:14px;line-height:1.7;grid-column:1/-1}
    @media(max-width:1250px){.ef-workspace{grid-template-columns:minmax(0,1.2fr) minmax(330px,1fr)}.ef-chart{padding:14px 10px}.ef-donut{width:110px;height:110px}.ef-donut:before{inset:20px}.ef-chart h2{font-size:14px}.ef-toolbar h1{font-size:20px}}
    @media(max-width:950px){#estateFocusDashboard{height:auto}.ef-workspace{grid-template-columns:1fr;height:auto}.ef-map-column{grid-row:1;height:480px}.ef-data-column{overflow:visible;padding:0}.ef-charts{grid-template-columns:repeat(3,minmax(0,1fr))}}
@@ -423,7 +438,7 @@
    <section class="ef-panel ef-related-dams"><h2>เขื่อนที่เกี่ยวข้อง</h2><div id="efRelatedDams" role="status">กำลังโหลดข้อมูลเขื่อน…</div></section><section class="ef-panel ef-canal-panel" hidden><h2>คลอง กทม.</h2><div id="efCanalList"></div><small id="efCanalTime"></small></section><section class="ef-panel ef-reservoir-panel"><h2>อ่างเก็บน้ำขนาดกลางในจังหวัด</h2><select id="efReservoirProvince" aria-label="เลือกจังหวัดอ่างเก็บน้ำ" hidden style="display:none"><option value="กาญจนบุรี">กาญจนบุรี</option></select><div id="efReservoirList" role="status">กำลังโหลดข้อมูลอ่างเก็บน้ำ…</div><small id="efReservoirTime"></small></section>
    <section class="ef-panel ef-estate-panel"><h2>ติดตามนิคมฯ / ท่าเรือ</h2><div class="ef-tools"><input id="efSearch" list="efEstateOptions" type="search" aria-label="ค้นหาชื่อนิคมฯ / ท่าเรือ" placeholder="ค้นหาชื่อนิคมฯ / ท่าเรือ"><datalist id="efEstateOptions"></datalist><select id="efFilter" aria-label="กรองข้อมูลนิคมฯ"><option value="watch">เข้าเกณฑ์เฝ้าระวัง</option><option value="water">ใกล้ระดับน้ำเข้าเกณฑ์</option><option value="rain">ใกล้ฝนเข้าเกณฑ์</option><option value="all">ทุกนิคมฯ / ท่าเรือ</option></select></div><p id="efResultCount" class="ef-count"></p><div class="ef-selection" id="efSelection" hidden></div><div id="efEstates" class="ef-estates"></div></section>
    <div class="ef-warning"><details class="ef-panel" id="efDetails24"><summary>พื้นที่เฝ้าระวัง 24 ชั่วโมง</summary><div id="efWarning24"></div></details><details class="ef-panel" id="efDetails48"><summary>พื้นที่เฝ้าระวัง 48 ชั่วโมง</summary><div id="efWarning48"></div></details></div>
-   </div><section class="ef-map-column"><button type="button" id="efMapExitFullscreen" aria-label="ออกจากแผนที่เต็มหน้าจอ">ย่อแผนที่ ↙</button><div class="ef-map-frame"><iframe id="estateFocusMap" title="แผนที่สถานการณ์น้ำและนิคมอุตสาหกรรม" src="flood-hydrology-map.html?v=20261007-popup-cards&amp;center=101,13&amp;scale=9244648" loading="eager"></iframe></div><footer class="ef-map-foot"><button type="button" id="efMapFullscreen" aria-pressed="false">เต็มหน้าจอ ↗</button><span>GISTDA ผ่าน Faonam: พื้นที่น้ำท่วมตามวันที่ภาพ · กรมอุตุฯ: เรดาร์คอมโพสิท พร้อมแหล่งสำรอง Faonam · RID GeoJSON: สถานีระดับน้ำ</span></footer></section></div>`;
+   </div><section class="ef-map-column"><button type="button" id="efMapExitFullscreen" aria-label="ออกจากแผนที่เต็มหน้าจอ">ย่อแผนที่ ↙</button><div class="ef-map-frame"><iframe id="estateFocusMap" title="แผนที่สถานการณ์น้ำและนิคมอุตสาหกรรม" src="flood-hydrology-map.html?v=20261007-warning-focus&amp;center=101,13&amp;scale=9244648" loading="eager"></iframe></div><footer class="ef-map-foot"><button type="button" id="efMapFullscreen" aria-pressed="false">เต็มหน้าจอ ↗</button><span>GISTDA ผ่าน Faonam: พื้นที่น้ำท่วมตามวันที่ภาพ · กรมอุตุฯ: เรดาร์คอมโพสิท พร้อมแหล่งสำรอง Faonam · RID GeoJSON: สถานีระดับน้ำ</span></footer></section></div>`;
   warning.prepend(host);
   const loading=$('dashboardLoading');if(loading)loading.remove();
 
@@ -475,7 +490,12 @@ $('efFilter').onchange=()=>renderEstates();
 
   function openCard(id){const filters={efWatch:'watch',efWaterWatch:'water',efRainWatch:'rain',efTotal:'all'};if(filters[id]){$('efFilter').value=filters[id];$('efSearch').value='';renderEstates();$('efSearch').scrollIntoView?.({behavior:'smooth',block:'center'});$('efSearch').focus?.()}else{const panel=$(id==='ef24'?'efDetails24':'efDetails48');if(panel){panel.open=true;panel.scrollIntoView?.({behavior:'smooth',block:'start'})}}}
   host.addEventListener('keydown',e=>{const card=e.target.closest('[data-ef-card]');if(card&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openCard(card.dataset.efCard)}});
-  host.addEventListener('click',e=>{const card=e.target.closest('[data-ef-card]');if(card){openCard(card.dataset.efCard);return}const button=e.target.closest('[data-ef-lat]');if(!button)return;zoom(button.dataset.efLat,button.dataset.efLon);if(button.dataset.efEstate){const estate=(current.estates||[]).find(e=>String(e.id)===button.dataset.efEstate);if(estate){$('efSearch').value=estate.name;applyHeaderEstate(estate.name,true)}}});
+  host.addEventListener('click',e=>{const card=e.target.closest('[data-ef-card]');if(card){openCard(card.dataset.efCard);return}const button=e.target.closest('[data-ef-lat]');if(!button)return;if(button.dataset.efWarning){
+ const lat=Number(button.dataset.efLat),lon=Number(button.dataset.efLon);if(!Number.isFinite(lat)||!Number.isFinite(lon))return;
+ host.querySelectorAll('.ef-warning-location[aria-pressed="true"]').forEach(b=>b.setAttribute('aria-pressed','false'));button.setAttribute('aria-pressed','true');
+ $('estateFocusMap')?.contentWindow?.postMessage({type:'flood-map-focus',lat,lon,scale:75000,label:button.dataset.efLabel,warning:{hours:Number(button.dataset.efWarning),rain:button.dataset.efRain,observed:button.dataset.efObserved}},location.origin);
+ $('estateFocusMap')?.scrollIntoView?.({behavior:'smooth',block:'center'});return;
+ }zoom(button.dataset.efLat,button.dataset.efLon);if(button.dataset.efEstate){const estate=(current.estates||[]).find(e=>String(e.id)===button.dataset.efEstate);if(estate){$('efSearch').value=estate.name;applyHeaderEstate(estate.name,true)}}});
  }
  function renderEstates(){
   if(!current)return;const m=scopedModel(model(current)),q=$('efSearch').value.trim();
@@ -551,7 +571,7 @@ $('efFilter').onchange=()=>renderEstates();
   const selection=$('efSelection');selection.hidden=!chosen;
   if(chosen){const w=m.watch.find(e=>String(e.id)===selected);selection.innerHTML='<b>'+esc(chosen.name)+'</b><br>'+(m.usable?(w?'ฝนเข้าเกณฑ์ '+w.rain.length+' สถานี · ระดับน้ำเข้าเกณฑ์ '+w.water.length+' สถานี':'ไม่พบสถานีเข้าเกณฑ์ในชุดข้อมูลนี้'):'ข้อมูลยังไม่พร้อมสรุป')+'<br>แผนที่แสดงตำแหน่งนิคมฯ ที่เลือก'}
   for(const [id,ds] of [['efWarning24',m.warning24],['efWarning48',m.warning48]]){
-   $(id).innerHTML=!ds.available?'<p class="ef-empty">ข้อมูลประกาศหรือพิกัดนิคมฯ ไม่พร้อม / เกินช่วง 24 ชั่วโมง จึงยังสรุปจำนวนไม่ได้</p>':`<p>รอบประกาศ ${esc(time(new Date(ds.issued).toISOString()))}${ds.unlocated?' · มี '+ds.unlocated+' รายการที่ไม่มีพิกัด จึงไม่รวมในการคำนวณ':''}</p>`+(ds.rows.length?ds.rows.map(r=>`<div class="ef-risk"><button data-ef-lat="${r.lat}" data-ef-lon="${r.lon}">${esc([r.tambon,r.amphoe,r.province].join(' '))}</button><br>ใกล้ ${esc(r.estate.name)} ${fmt(r.distance)} กม.<br>ฝนสะสมตามช่วงประกาศ ${fmt(r.sum_rainfall_mm)} มม. · เวลาสถานี ${esc(time(r.observed_at))}</div>`).join(''):'<p class="ef-empty">ไม่พบตำบลในรายการเฝ้าระวังที่จุดสถานีประเมินอยู่ภายใน 30 กม. จากนิคมฯ ในชุดข้อมูลนี้</p>');
+   $(id).innerHTML=!ds.available?'<p class="ef-empty">ข้อมูลประกาศหรือพิกัดนิคมฯ ไม่พร้อม / เกินช่วง 24 ชั่วโมง จึงยังสรุปจำนวนไม่ได้</p>':`<p>รอบประกาศ ${esc(time(new Date(ds.issued).toISOString()))}${ds.unlocated?' · มี '+ds.unlocated+' รายการที่ไม่มีพิกัด จึงไม่รวมในการคำนวณ':''}</p>`+(ds.rows.length?ds.rows.map(r=>warningCard(r,id==='efWarning24'?24:48)).join(''):'<p class="ef-empty">ไม่พบตำบลในรายการเฝ้าระวังที่จุดสถานีประเมินอยู่ภายใน 30 กม. จากนิคมฯ ในชุดข้อมูลนี้</p>');
   }
 
  }
