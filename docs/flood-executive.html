@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>สรุปนิคมฯ เฝ้าระวัง · emcc - GIS</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box}body{margin:0;font-family:Sarabun,sans-serif;background:#f3f7fa;color:#003666}header.page-head{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;padding:16px 24px;background:#fff;border-bottom:1px solid #dce6ef}header h1{font-size:21px;margin:0}header p{font-size:13px;color:#62778a;margin:5px 0 0}.page-actions{display:flex;gap:8px;flex-wrap:wrap}.page-actions a,.page-actions button{font:600 13px Sarabun,sans-serif;padding:9px 12px;border:1px solid #c8dddf;border-radius:8px;background:#e6f3ed;color:#145a46;cursor:pointer;text-decoration:none}.page-actions button:disabled{opacity:.5}main{padding:18px;max-width:1900px;margin:auto}.executive-layout{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(340px,.8fr);gap:16px;align-items:start}.ef-data-column{min-width:0}.executive-map{position:sticky;top:16px;min-width:0;background:white;border:1px solid #d5e3ec;border-radius:16px;overflow:hidden}.executive-map h2{font-size:17px;margin:0;padding:13px 16px}.executive-map iframe{display:block;width:100%;height:calc(100dvh - 220px);min-height:450px;border:0}.executive-map p{font-size:12px;color:#647a8e;padding:0 15px 12px;line-height:1.6}#executiveLoadStatus{font-size:13px;line-height:1.6;margin:0 0 12px;color:#557085}#efExecutive>.ex-toggle{display:none!important}#efExecutive{margin:0!important}#efExecutive .ex-table-wrap{max-height:calc(100dvh - 430px);min-height:240px}@media(max-width:1000px){.executive-layout{grid-template-columns:1fr}.executive-map{position:static}.executive-map iframe{height:65dvh;min-height:430px}#efExecutive .ex-table-wrap{max-height:450px}}@media(max-width:600px){main{padding:10px}header.page-head{padding:12px}header h1{font-size:18px}.executive-map iframe{height:60dvh;min-height:400px}}</style>
+<script src="flood-rid-source.js?v=20261006-rid-17" defer></script>
+<script src="flood-executive-overview.js?v=20261007-standalone-summary" defer></script>
+</head><body data-executive-standalone="true"><header class="page-head"><div><h1>สรุปนิคมฯ และสถานการณ์น้ำ</h1><p>ใกล้สายน้ำ · ใกล้เขื่อน / อ่างเก็บน้ำ · เข้าเกณฑ์เฝ้าระวัง</p></div><div class="page-actions"><a href="./hub.html">หน้าหลัก ↗</a><a href="./flood-report.html">สถานการณ์น้ำแบบเดิม ↗</a><button id="executiveRefresh" type="button">โหลดข้อมูลใหม่</button></div></header>
+<main><p id="executiveLoadStatus" role="status">กำลังโหลดชุดข้อมูลสถานการณ์น้ำ</p><div id="estateFocusDashboard" class="executive-layout"><div class="ef-data-column"></div><section class="executive-map"><h2>ตำแหน่งนิคมฯ และข้อมูลที่เกี่ยวข้อง</h2><iframe id="estateFocusMap" title="แผนที่สรุปนิคมและสถานการณ์น้ำ" src="flood-hydrology-map.html?v=20261007-executive-overview&amp;center=101,13&amp;scale=9244648"></iframe><p>เลือกรายการ “ดูบนแผนที่” จากตาราง · เส้นประแสดงระยะเส้นตรง</p></section></div></main>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+ let busy=false,last=null;
+ const status=document.getElementById('executiveLoadStatus'),button=document.getElementById('executiveRefresh');
+ async function load(){
+  if(busy)return;busy=true;button.disabled=true;status.textContent='กำลังโหลดข้อมูลสถานีและประกาศเฝ้าระวัง';
+  try{
+   const response=await fetch('./data/thaiwater_latest.json?v='+Date.now(),{cache:'no-store',signal:AbortSignal.timeout(30000)});
+   if(!response.ok)throw Error('HTTP '+response.status);const data=await response.json();if(!Array.isArray(data.estates)||!Array.isArray(data.stations))throw Error('ข้อมูลไม่ครบ');
+   try{
+    const rid=await window.IEAT_RID.load();if(!Array.isArray(rid)||!rid.length)throw Error('RID ไม่มีข้อมูล');
+    const water=rid.map(r=>({...r,kind:'waterlevel',station:r.name,lon:r.lng,observed_at:r.measured_at,waterlevel_msl:r.wl,bankfull_msl:r.bank,severity_score:r.status==='ล้นตลิ่ง'?4:r.status==='ใกล้ตลิ่ง'?2:0}));
+    data.stations=[...data.stations.filter(r=>r.kind!=='waterlevel'),...water];data.summary={...data.summary,station_count:data.stations.length};
+    status.textContent='ข้อมูลทั่วประเทศ · ปรับปรุงอัตโนมัติทุก 1 ชั่วโมง';
+   }catch(error){status.textContent='โหลดระดับน้ำ RID ไม่สำเร็จ · ใช้ค่าจากชุดข้อมูลเดิมเฉพาะที่ผ่านเกณฑ์เวลา';}
+   last=data;window.IEAT_FLOOD_EXECUTIVE_DATA=data;document.dispatchEvent(new CustomEvent('ieat-flood-executive-data',{detail:data}));
+  }catch(error){
+   status.textContent='โหลดข้อมูลรอบใหม่ไม่สำเร็จ'+(last?' · ข้อมูลสถานีเดิมถูกระบุเป็นข้อมูลย้อนหลัง':' · กรุณากดโหลดข้อมูลใหม่');
+   if(last)document.dispatchEvent(new CustomEvent('ieat-flood-executive-data',{detail:{...last,status:'stale'}}));
+  }finally{busy=false;button.disabled=false;}
+ }
+ button.addEventListener('click',load);load();setInterval(load,3600000);
+});
+</script></body></html>
