@@ -1,4 +1,4 @@
-// Summaries from user-provided ERP/BCP. Estate references are not equipment coordinates.
+// Estate-level summaries from user-provided ERP/BCP documents.
 window.IEAT_ESTATE_FLOOD_PLANS=[
   {
     "key": "esie-rayong",
@@ -750,14 +750,48 @@ window.IEAT_ESTATE_FLOOD_PLANS=[
     ],
     "assembly": "อาคารสำนักงานนิคมอุตสาหกรรมเกตเวย์ ซิตี้",
     "bcpPage": 15
+  },
+  {
+    "key": "laem-chabang",
+    "names": [
+      "แหลมฉบัง"
+    ],
+    "erp": "ERP-แหลมฉบัง 69.pdf",
+    "bcp": "BCP-แหลมฉบัง 69.pdf",
+    "items": [
+      [
+        "เครื่องสูบน้ำพญานาค",
+        "2 เครื่อง · กำลังสูบเครื่องละ 1,000 ลบ.ม./ชม. · เร่งระบายน้ำในเขตประกอบการเสรี 1–2 · ยังไม่ระบุพิกัดรายเครื่อง",
+        "55–56"
+      ],
+      [
+        "จุดตรวจระดับน้ำ",
+        "เหนือ: คลองสายเหนือ ข้าง บจก. เจ แม็ค อินดัสตรี · ใต้: คลองสายใต้ ข้างสำนักงานนิคมฯ · ตะวันออก: คลองสายใต้ ข้าง บจก. ไมย์เออร์ อินดัสตรีส์ · ตะวันตก: คลองสายเหนือ หน้าโรงบำบัดน้ำเสีย · ยังไม่ยืนยันพิกัดจุดตรวจ",
+        59
+      ],
+      [
+        "มาตรการเตรียมพร้อม",
+        "ขุดลอกรางและคลองสายเหนือ–ใต้ · เตรียมกระสอบทรายป้องกันน้ำทะเลหนุน · เตรียมเครื่องสูบสำรองใช้น้ำมันและเครื่องกำเนิดไฟฟ้า · เฝ้าระวังระดับน้ำตลอด 24 ชั่วโมง",
+        "55, 57–58"
+      ]
+    ],
+    "assembly": "อาคารสำนักงานนิคมอุตสาหกรรมแหลมฉบัง",
+    "bcpPage": 15
   }
 ];
 
 window.ieatEstatePlanPopup=function(name){
  const norm=v=>String(v||'').normalize('NFC').replace(/นิคมอุตสาหกรรม|นิคมฯ|\s|[()]/g,'').toLowerCase();
- const key=norm(name),row=window.IEAT_ESTATE_FLOOD_PLANS.find(r=>r.names.some(n=>norm(n)===key));
+ const row=window.IEAT_ESTATE_FLOOD_PLANS.find(r=>r.names.some(n=>norm(n)===norm(name)));
  if(!row)return '';
  const escape=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const icon=kind=>'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">'+(kind==='assembly'?'<path d="M3 21h18M5 21V9l7-6 7 6v12M9 21v-7h6v7M8 10h2m4 0h2"/>':kind==='water'?'<path d="M12 3c-3 4-6 7-6 11a6 6 0 0012 0c0-4-3-7-6-11Z"/><path d="M9 14a3 3 0 003 3"/>':'<path d="M9 3h6l1 4 4 2v6l-4 2-1 4H9l-1-4-4-2V9l4-2 1-4Z"/><circle cx="12" cy="12" r="3"/>')+'</svg>';
+ const body=detail=>'<ul class="plan-facts">'+String(detail).split(/\s*·\s*/).filter(Boolean).map(t=>'<li>'+t.split(/(\d[\d,]*(?:\.\d+)?)/g).map((part,i)=>i%2?'<strong>'+escape(part)+'</strong>':escape(part)).join('')+'</li>').join('')+'</ul>';
+ const cards=row.items.map(([title,detail,page])=>{
+ const kind=/บ่อ|ระบาย|ระดับ|เฝ้าระวัง/.test(title)?'water':'equipment';
+ return '<article class="plan-card"><div class="plan-card-title"><span class="plan-card-icon">'+icon(kind)+'</span><h4>'+escape(title)+'</h4></div>'+body(detail)+'<div class="plan-reference">อ้างอิง ERP · หน้าไฟล์ '+escape(page)+'</div></article>';
+ }).join('');
+ const assembly=row.assembly?'<article class="plan-card plan-assembly"><div class="plan-card-title"><span class="plan-card-icon">'+icon('assembly')+'</span><h4>จุดรวมพลเมื่อเกิดน้ำท่วม</h4></div><p class="plan-assembly-place">'+escape(row.assembly)+'</p><div class="plan-reference">อ้างอิง BCP · หน้าไฟล์ '+escape(row.bcpPage)+'</div></article>':'';
  const sources=[row.erp,row.bcp].filter(Boolean).filter((v,i,a)=>a.indexOf(v)===i);
- return '<section class="estate-flood-plan"><h4>ข้อมูลรับมือน้ำท่วมตามแผน · '+escape(row.year||'2569')+(row.draft?' · ฉบับร่าง':'')+'</h4><p class="plan-location-note">ข้อมูลระดับนิคมฯ หมุดนี้ไม่ใช่จุดติดตั้งอุปกรณ์ · ข้อมูลตามเอกสาร ไม่ใช่สถานะพร้อมใช้งานปัจจุบัน</p>'+row.items.map(([title,detail,page])=>'<h4>'+escape(title)+'</h4><p>'+escape(detail)+'</p><small>ส่วน ERP หน้าไฟล์ '+escape(page)+'</small>').join('')+(row.assembly?'<h4>จุดรวมพลกรณีน้ำท่วมตาม BCP</h4><p>'+escape(row.assembly)+'</p><small>ส่วน BCP หน้าไฟล์ '+escape(row.bcpPage)+' · ยังไม่ยืนยันพิกัดและสถานะใช้งานปัจจุบัน</small>':'')+(!row.erp?'<p class="plan-location-note">มีข้อมูล BCP · ยังไม่มีบัญชีเครื่องสูบน้ำจาก ERP</p>':'')+'<p><small>ต้นทาง: '+sources.map(escape).join(' · ')+'</small></p></section>';
+ return '<section class="estate-flood-plan"><header class="plan-heading"><span class="plan-eyebrow">การรับมือน้ำท่วม</span><span class="plan-year">แผน '+escape(row.year||'2569')+'</span><h4>อุปกรณ์และจุดรวมพล</h4>'+(row.draft?'<span class="plan-draft">เอกสารฉบับร่าง</span>':'')+'</header><div class="plan-card-list">'+cards+assembly+'</div>'+(!row.erp?'<p class="plan-empty">มีข้อมูลจุดรวมพลจาก BCP<br>ยังไม่มีบัญชีเครื่องสูบน้ำจาก ERP</p>':'')+'<p class="plan-location-note"><b>ตำแหน่งหมุด: นิคมอุตสาหกรรม</b><br>ยังไม่ยืนยันพิกัดอุปกรณ์และจุดรวมพล<br>ข้อมูลตามแผน กรุณาตรวจสอบความพร้อมก่อนใช้งาน</p><details class="plan-sources"><summary>แหล่งข้อมูลและเอกสารอ้างอิง</summary><ul>'+sources.map(s=>'<li>'+escape(s)+'</li>').join('')+'</ul><p>ERP: แผนป้องกันและบรรเทาภัย<br>BCP: แผนความต่อเนื่องทางธุรกิจ</p></details></section>';
 };
