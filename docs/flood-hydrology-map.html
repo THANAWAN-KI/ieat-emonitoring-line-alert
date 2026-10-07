@@ -15,7 +15,7 @@
 @media(max-width:500px){.controls{left:8px;top:8px}.toggles label{font-size:12px;padding:6px}.search select,.search input{font-size:13px;padding:8px}.legend{width:245px}.status{left:8px;font-size:11px;max-height:58px}}
 @media(prefers-reduced-motion:no-preference){.water-critical{animation:pulse 1.4s ease-in-out infinite}@keyframes pulse{50%{stroke-opacity:.15;fill-opacity:.04}}}
 .water-popup{width:290px;max-width:calc(100vw - 90px);max-height:calc(100vh - 100px);overflow:auto}.water-gauge-layout{display:grid;grid-template-columns:95px minmax(0,1fr);gap:8px;align-items:center}.water-gauge-layout svg{width:95px;height:235px}.water-gap{font-size:25px;font-weight:700;line-height:1.35}.water-level{font-size:22px;font-weight:700;margin-top:12px}.water-gauge-layout p{font-size:12px}.water-popup h3{padding-right:10px}
-.river-motion{animation:riverTravel 2s linear infinite}@keyframes riverTravel{to{stroke-dashoffset:-24}}@media(prefers-reduced-motion:reduce){.river-motion{animation:none}}
+.river-motion{animation:riverTravel 2s linear infinite}@keyframes riverTravel{to{stroke-dashoffset:-24}}
 
 #mapStage{position:absolute;inset:0}
 body.toolbar-above{display:flex;flex-direction:column;overflow:hidden}
@@ -146,6 +146,7 @@ const estateSvg="<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512
 const damSvg="<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"white\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 3h13l3 14H4Z M8 3v12M12 3v12M16 3l2 12M2 20q2-2 4 0t4 0t4 0t4 0t4 0\"/></svg>";
 const cameraSvg="<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"white\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m3 5 15 3-3 8-13-4Z M17 9l4 1-2 5-3-1M8 14v5h8M16 17v4M4 8l9 2\"/></svg>";let cameraMarkers=[];
 let waterMarkers=[];let damMarkers=[];let estateMarkers=[];let waterways=null;
+let riverSvgRenderer=null;
 let ridRows=[],ridFailed=false;let vector=null,raster=null,ready=false,features=[],groups={},selectedMarker=null,pending=null,national=null,extras=[],gistda=null,animation=null,autoFit=true,populated=false;
 
 new ResizeObserver(()=>{if(vector)vector.resize();if(raster)raster.invalidateSize()}).observe(document.getElementById('mapStage'));
@@ -373,6 +374,7 @@ function rasterStart(){
  $('map').style.display='none';$('raster').style.display='block';
  if(!window.L){$('status').textContent='โหลดแผนที่ไม่สำเร็จ กรุณาเปิดใหม่';return}
  raster=L.map('raster',{preferCanvas:true,zoomControl:false}).setView([14,101],6);
+ riverSvgRenderer=L.svg({padding:.5});
  L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',{attribution:'Tiles © Esri, HERE, Garmin, OpenStreetMap contributors',maxZoom:18,maxNativeZoom:16,crossOrigin:true}).addTo(raster);
  L.control.zoom({position:'bottomright'}).addTo(raster);L.control.scale({imperial:false,position:'bottomleft'}).addTo(raster);
  groups={points:L.layerGroup().addTo(raster),rings:L.layerGroup().addTo(raster),gistda:L.layerGroup().addTo(raster),flow:L.layerGroup().addTo(raster)};raster.on('moveend zoomend',()=>{drawFlow();queueWaterLabels();queueBoundaries()});
@@ -416,7 +418,7 @@ function addFlow(){
  vector.addLayer({id:'mapped-waterway-casing',type:'line',source:'mapped-flow',layout:{visibility:flags.flow?'visible':'none','line-cap':'round','line-join':'round'},paint:{'line-color':'#ffffff','line-width':['interpolate',['linear'],['zoom'],5,7,9,10,13,14],'line-opacity':.95}},'discharge-ring');
  vector.addLayer({id:'mapped-waterways',type:'line',source:'mapped-flow',layout:{visibility:flags.flow?'visible':'none'},paint:{'line-color':'#579fb7','line-width':['interpolate',['linear'],['zoom'],5,4,9,7,13,11],'line-opacity':1}},'discharge-ring');
  vector.addLayer({id:'mapped-water-motion',type:'line',source:'mapped-flow',layout:{visibility:flags.flow?'visible':'none'},paint:{'line-color':'#ffffff','line-width':3,'line-dasharray':[.8,7.2],'line-opacity':1}},'discharge-ring');
- if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let phase=0;setInterval(()=>{if(document.hidden||!flags.flow||!vector?.getLayer('mapped-water-motion'))return;phase=(phase+.2)%8;vector.setPaintProperty('mapped-water-motion','line-dasharray',phase<.8?[phase,7.2,.8-phase,0]:[0,phase-.8,.8,8-phase])},120)}
+ {let phase=0;setInterval(()=>{if(document.hidden||!flags.flow||!vector?.getLayer('mapped-water-motion'))return;phase=(phase+.1)%8;vector.setPaintProperty('mapped-water-motion','line-dasharray',phase<.8?[phase,7.2,.8-phase,0]:[0,phase-.8,.8,8-phase])},60)}
  const img=new Image(28,18);img.onload=()=>{if(!vector)return;vector.addImage('flow-arrow',img);vector.addLayer({id:'flow-arrows',type:'symbol',source:'mapped-flow',minzoom:5,layout:{visibility:flags.flow?'visible':'none','symbol-placement':'line','symbol-spacing':140,'icon-image':'flow-arrow','icon-size':1,'icon-keep-upright':false,'icon-allow-overlap':true,'icon-ignore-placement':true}})};
  img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="28" height="18" viewBox="0 0 28 18"><path d="M2 6H16V2L26 9 16 16V12H2Z" fill="white" stroke="#075777" stroke-width="1.5" stroke-linejoin="round"/></svg>');
 }
@@ -426,7 +428,7 @@ function drawFlow(){
  const flowWidth=raster.getZoom()<9?4:raster.getZoom()<13?7:11;
  L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#fff',weight:flowWidth+3,opacity:.95,lineCap:'round',lineJoin:'round'},interactive:false}).addTo(groups.flow);
  L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#579fb7',weight:flowWidth,opacity:1,lineCap:'round',lineJoin:'round'},interactive:false}).addTo(groups.flow);
- L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#fff',weight:3,opacity:1,lineCap:'butt',dashArray:'3 21',className:'river-motion'},interactive:false}).addTo(groups.flow);
+ L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#fff',weight:3,opacity:1,lineCap:'butt',dashArray:'3 21',className:'river-motion',renderer:riverSvgRenderer},interactive:false}).addTo(groups.flow);
  if(raster.getZoom()<7)return;
  const bounds=raster.getBounds().pad(.15);let count=0;
  for(const f of fs){const cs=f.geometry.coordinates;let remaining=90;
