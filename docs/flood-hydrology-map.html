@@ -113,10 +113,19 @@ body.toolbar-above:has(.leaflet-popup) .controls,body.toolbar-above:has(.maplibr
 .plan-sources li{overflow-wrap:anywhere}
 @media(max-width:480px){.popup:has(.estate-flood-plan){width:calc(100vw - 72px)}.estate-flood-plan .plan-heading h4{font-size:18px}.plan-card{padding:10px}}
 
+
+.station-search-label{font-size:12px;font-weight:600;color:#003666;margin-top:3px}
+.controls .search #waterStationSearch{width:100%;font-size:13px;padding:9px;background:white}
+.station-search-results{display:grid;gap:5px;max-height:220px;overflow:auto}
+.station-search-result{display:block!important;width:100%;text-align:left;padding:9px!important;border:1px solid #cddfea!important;background:white!important;border-radius:8px!important;font:13px Sarabun,sans-serif!important;color:#003666!important}
+.station-search-result b,.station-search-result small{display:block}
+.station-search-result small{color:#57748a;font-size:11px;line-height:1.5}
+.station-search-result:hover,.station-search-result:focus-visible{background:#e6f4ee!important;outline:2px solid #159d98}
+.station-search-status{font-size:11px;color:#60798e;line-height:1.5}
 </style>
-<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script><script src="flood-estate-plans-2569.js?v=20261007-popup-cards"></script></head>
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script><script src="flood-estate-plans-2569.js?v=20261007-samutsakhon-plan"></script></head>
 <body><div id="mapStage"><div id="map" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div><div id="raster" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div></div>
-<button id="mapCompass" type="button" aria-label="ปรับแผนที่ให้ทิศเหนืออยู่ด้านบน" title="ปรับทิศเหนือและมุมมองให้ตรง"><span>N</span><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M12 2 20 25 12 20 4 25Z" fill="#52057f"/><path d="M12 2V20L4 25Z" fill="#b79aca"/></svg></button><div class="controls"><details class="layer-menu" id="mapLayers"><summary>เลเยอร์</summary><div class="layer-body"><div class="search"><select id="province" aria-label="เลือกจังหวัดในแผนที่"><option value="">ทั่วประเทศ</option></select></div>
+<button id="mapCompass" type="button" aria-label="ปรับแผนที่ให้ทิศเหนืออยู่ด้านบน" title="ปรับทิศเหนือและมุมมองให้ตรง"><span>N</span><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M12 2 20 25 12 20 4 25Z" fill="#52057f"/><path d="M12 2V20L4 25Z" fill="#b79aca"/></svg></button><div class="controls"><details class="layer-menu" id="mapLayers"><summary>เลเยอร์</summary><div class="layer-body"><div class="search"><select id="province" aria-label="เลือกจังหวัดในแผนที่"><option value="">ทั่วประเทศ</option></select><label for="waterStationSearch" class="station-search-label">ค้นหาสถานีระดับน้ำทั่วประเทศ</label><input id="waterStationSearch" type="search" placeholder="ชื่อสถานี / รหัสสถานี / จังหวัด" autocomplete="off" aria-controls="waterStationResults"><div id="waterStationResults" class="station-search-results" aria-label="ผลค้นหาสถานี"></div><small id="waterStationSearchStatus" class="station-search-status">ค้นหาจากสถานีทั่วประเทศ</small></div>
 <div class="toggles" aria-label="ชั้นข้อมูล">
 <label><input data-layer="canal" type="checkbox" checked>คลอง กทม.<span class="layer-swatch" style="background:#d62839" aria-hidden="true"></span></label><label><input data-layer="water" type="checkbox" checked>ระดับน้ำ<span class="layer-swatch" style="background:#d9364d" aria-hidden="true"></span></label><label class="history-only-label"><input id="historyOnly" type="checkbox">แสดงเฉพาะสถานีที่มีข้อมูลย้อนหลัง 2023–2026<span class="layer-swatch" style="background:#0072cf" aria-hidden="true"></span></label><label><input data-layer="rings" type="checkbox" checked>ปริมาณน้ำไหล<span class="layer-swatch" style="background:#319bd0" aria-hidden="true"></span></label><label><input data-layer="flow" type="checkbox" checked>ลูกศรทิศทางน้ำ<span class="layer-swatch" style="background:#238dc0" aria-hidden="true"></span></label>
 <label><input data-layer="dam" type="checkbox" checked>เขื่อน<span class="layer-swatch" style="background:#169b8f" aria-hidden="true"></span></label><label><input data-layer="camera" type="checkbox" checked>CCTV ริมน้ำ<span class="layer-swatch" style="background:#475569" aria-hidden="true"></span></label><label><input data-layer="boundary" type="checkbox" checked>ขอบเขตนิคมฯ<span class="layer-swatch" style="background:#754bad" aria-hidden="true"></span></label><label><input data-layer="estate" type="checkbox" checked>นิคมฯ<span class="layer-swatch" style="background:#754bad" aria-hidden="true"></span></label><label><input data-layer="satellite" type="checkbox" checked>น้ำท่วมจากดาวเทียม<span class="layer-swatch" style="background:#268fbf" aria-hidden="true"></span></label><label><input data-layer="radar" type="checkbox" checked>ฝนจากเรดาร์ (กรมอุตุฯ)<span class="layer-swatch" style="background:#54a431" aria-hidden="true"></span></label>
@@ -334,11 +343,11 @@ function showExecutiveFocus(d){
    vector.addLayer({id:'executive-river',type:'line',source:'executive-links',filter:['==',['get','kind'],'river'],paint:{'line-color':'#0072cf','line-width':8}});
   }else vector.getSource('executive-links').setData(collection);
   targets.slice(1).forEach(p=>{const el=document.createElement('div');el.className='marker-icon';el.style.background='#087f87';el.style.position='absolute';el.innerHTML=(p.kind==='dam'?damSvg:sensorSvg('water'))+'<span class="estate-name" style="color:#075777;border-color:#9ac9cf">'+esc(p.label||'จุดที่เกี่ยวข้อง')+'</span>';executiveMarkers.push(new maplibregl.Marker({element:el}).setLngLat([Number(p.lon),Number(p.lat)]).addTo(vector));});
-  const bounds=new maplibregl.LngLatBounds();bounds.extend(origin);targets.forEach(p=>bounds.extend([Number(p.lon),Number(p.lat)]));vector.fitBounds(bounds,{padding:{top:180,bottom:80,left:65,right:65},maxZoom:13,duration:800});
+  const bounds=new maplibregl.LngLatBounds();bounds.extend(origin);targets.forEach(p=>bounds.extend([Number(p.lon),Number(p.lat)]));if(!d.estateZoom)vector.fitBounds(bounds,{padding:{top:180,bottom:80,left:65,right:65},maxZoom:13,duration:800});
  }else if(raster){
   executiveRasterLayer=L.layerGroup().addTo(raster);L.geoJSON(collection,{style:f=>f.properties.kind==='river'?{color:'#0072cf',weight:8}:{color:'#b57724',weight:3,dashArray:'6 6'}}).addTo(executiveRasterLayer);
   targets.slice(1).forEach(p=>L.circleMarker([p.lat,p.lon],{radius:9,color:'#fff',weight:2,fillColor:'#087f87',fillOpacity:1}).bindTooltip(esc(p.label||'จุดที่เกี่ยวข้อง'),{permanent:true,direction:'top'}).addTo(executiveRasterLayer));
-  raster.fitBounds([origin.slice().reverse(),...targets.map(p=>[p.lat,p.lon])],{paddingTopLeft:[60,180],paddingBottomRight:[60,80],maxZoom:13});
+  if(!d.estateZoom)raster.fitBounds([origin.slice().reverse(),...targets.map(p=>[p.lat,p.lon])],{paddingTopLeft:[60,180],paddingBottomRight:[60,80],maxZoom:13});
  }
 }
 function executivePopup(d){
@@ -349,6 +358,7 @@ function executivePopup(d){
 function focus(d){
  if(!ready){pending=d;return}
  clearExecutiveFocus();
+ if(d.nationalSearch)estateProvinceScope=null;
  if(d.reset){$('province').value='';render();if(vector)vector.flyTo({center:[101,14],zoom:6});else raster.setView([14,101],6);return}
  if(d.lat==null||d.lon==null||!Number.isFinite(Number(d.lat))||!Number.isFinite(Number(d.lon)))return;
  $('province').value='';render();
@@ -473,10 +483,33 @@ function build(){
   const previous=unique.get(key);
   if(!previous||date(f.properties.measured_at)>=date(previous.properties.measured_at)||!Number.isFinite(date(previous.properties.measured_at)))unique.set(key,f);
  }
- features=[...unique.values()];
+ features=[...unique.values()];refreshWaterSearchIndex();
  updateDataAudit();const selected=$('province').value||'',provinces=[...new Set(features.map(f=>f.properties.province).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'th'));
  $('province').innerHTML='<option value="">ทั่วประเทศ</option>'+provinces.map(p=>'<option value="'+esc(p)+'">'+esc(p)+'</option>').join('');$('province').value=selected;populated=true;queueRender();
 }
+
+let waterSearchIndex=[];
+function refreshWaterSearchIndex(){
+ const index=new Map(),add=r=>{if(!valid(r))return;const key=String(r.code||r.oldcode||r.id||r.name);if(!index.has(key))index.set(key,r)};
+ features.filter(f=>f.properties.kind==='water').forEach(f=>add(f.properties));
+ (national?.feeds?.water?.rows||[]).forEach(r=>add({...r,kind:'water',source_name:'ThaiWater / '+(r.agency||'สสน.'),source_url:national.feeds.water.source_url}));
+ ridRows.forEach(r=>add({...r,kind:'water'}));waterSearchIndex=[...index.values()];renderWaterSearch();
+}
+function renderWaterSearch(){
+ const input=$('waterStationSearch'),host=$('waterStationResults'),status=$('waterStationSearchStatus');if(!input||!host)return;
+ const norm=v=>String(v||'').normalize('NFKC').replace(/\s/g,'').toLowerCase(),q=norm(input.value);
+ if(!q){host.replaceChildren();status.textContent='ค้นหาจากสถานีทั่วประเทศ '+waterSearchIndex.length+' สถานี';return}
+ const matches=waterSearchIndex.filter(r=>norm([r.name,r.code,r.oldcode,r.province,r.district,r.river].join(' ')).includes(q));
+ host.replaceChildren();matches.slice(0,30).forEach(r=>{
+  const b=document.createElement('button');b.type='button';b.className='station-search-result';
+  b.innerHTML='<b>'+esc([r.code||r.oldcode,r.name].filter(Boolean).join(' · '))+'</b><small>'+esc([r.province,r.district,r.river].filter(Boolean).join(' · '))+'</small>';
+  b.addEventListener('click',()=>{input.value=[r.code||r.oldcode,r.name].filter(Boolean).join(' · ');host.replaceChildren();status.textContent='แสดงตำแหน่ง '+r.name;flags.water=true;document.querySelector('[data-layer="water"]').checked=true;focus({lat:r.lat,lon:r.lng,label:r.name,scale:75000,station:r,nationalSearch:true});});
+  host.appendChild(b);
+ });status.textContent=matches.length?'พบ '+matches.length+' สถานี'+(matches.length>30?' · แสดง 30 รายการแรก กรุณาพิมพ์เพิ่ม':''):'ไม่พบสถานีที่ค้นหา';
+}
+$('waterStationSearch').addEventListener('input',renderWaterSearch);
+$('waterStationSearch').addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();$('waterStationResults').querySelector('button')?.click()}if(event.key==='ArrowDown'){event.preventDefault();$('waterStationResults').querySelector('button')?.focus()}});
+
 let loadBusy=false,lastWaterCheck=null;
 const sourceErrors={};
 function updateDataAudit(){

@@ -573,10 +573,41 @@ window.IEAT_ESTATE_FLOOD_PLANS=[
         "ระบบระบายน้ำฝน",
         "บ่อกักเก็บน้ำ 6 บ่อ · ปั๊มดีเซลเคลื่อนย้าย 4 ชุด · สูบลดระดับน้ำในบ่อช่วงฤดูฝน",
         54
+      ],
+      [
+        "ระบบสูบตามผังบริหารจัดการอุทกภัย",
+        "6 สถานี · เครื่องสูบไฟฟ้า 13 เครื่อง · กำลังรวมตามผัง 21,300 ลบ.ม./ชม.",
+        "ผัง PPT สไลด์ 1"
+      ],
+      [
+        "สถานี FP1–FP3",
+        "FP1: 3 เครื่อง กำลังรวม 4,500 ลบ.ม./ชม. · FP2: 2 เครื่อง 3,000 ลบ.ม./ชม. · FP3: 2 เครื่อง 3,000 ลบ.ม./ชม.",
+        "ผัง PPT สไลด์ 1"
+      ],
+      [
+        "สถานี FP4–FP6",
+        "FP4: 3 เครื่อง กำลังรวม 6,300 ลบ.ม./ชม. · FP5: 2 เครื่อง 3,000 ลบ.ม./ชม. · FP6: 1 เครื่อง 1,500 ลบ.ม./ชม.",
+        "ผัง PPT สไลด์ 1"
+      ],
+      [
+        "เครื่องสูบพญานาคเพิ่มเติม",
+        "3 เครื่อง · ผังสรุประบุกำลังสูบรวม 3,600 ลบ.ม. และหมายเหตุระบุ 3,600 ลบ.ม./ชม. · ต้องยืนยันกำลังรวมและกำลังต่อเครื่อง ไม่รวมซ้ำกับเครื่องสูบชุดอื่น",
+        "ผัง PPT สไลด์ 1"
+      ],
+      [
+        "พื้นที่รับน้ำและแนวป้องกัน",
+        "บ่อรับน้ำฝน 6 บ่อ ความจุรวม 70,000 ลบ.ม. · รองรับฝนตามผังสูงสุด 60 มม./ชม. · เขื่อน คสล. ยาว 14.5 กม. · HESCO 164 พาเลท ยาว 12.5 กม. ตามที่ผังระบุ · ระดับแนวป้องกันเฉลี่ย +2.85 ม.รทก.",
+        "ผัง PPT สไลด์ 1"
+      ],
+      [
+        "ตำแหน่งตามผัง",
+        "ผังแสดง FP1–FP6 และคลองบางไผ่เตี้ย ต้นไทร ปีกนก สวนชี สิบสองชั่ง · ยังไม่มีพิกัดภูมิศาสตร์ที่ยืนยันแล้ว",
+        "ผัง PPT สไลด์ 1"
       ]
     ],
     "assembly": "หน้าอาคารสำนักงานนิคมอุตสาหกรรมสมุทรสาคร",
-    "bcpPage": 13
+    "bcpPage": 13,
+    "supplement": "ผังบริหารจัดการอุทกภัย สนส.pptx"
   },
   {
     "key": "sinsakhon",
@@ -779,7 +810,6 @@ window.IEAT_ESTATE_FLOOD_PLANS=[
     "bcpPage": 15
   }
 ];
-
 window.ieatEstatePlanPopup=function(name){
  const norm=v=>String(v||'').normalize('NFC').replace(/นิคมอุตสาหกรรม|นิคมฯ|\s|[()]/g,'').toLowerCase();
  const row=window.IEAT_ESTATE_FLOOD_PLANS.find(r=>r.names.some(n=>norm(n)===norm(name)));
@@ -789,9 +819,9 @@ window.ieatEstatePlanPopup=function(name){
  const body=detail=>'<ul class="plan-facts">'+String(detail).split(/\s*·\s*/).filter(Boolean).map(t=>'<li>'+t.split(/(\d[\d,]*(?:\.\d+)?)/g).map((part,i)=>i%2?'<strong>'+escape(part)+'</strong>':escape(part)).join('')+'</li>').join('')+'</ul>';
  const cards=row.items.map(([title,detail,page])=>{
  const kind=/บ่อ|ระบาย|ระดับ|เฝ้าระวัง/.test(title)?'water':'equipment';
- return '<article class="plan-card"><div class="plan-card-title"><span class="plan-card-icon">'+icon(kind)+'</span><h4>'+escape(title)+'</h4></div>'+body(detail)+'<div class="plan-reference">อ้างอิง ERP · หน้าไฟล์ '+escape(page)+'</div></article>';
+ return '<article class="plan-card"><div class="plan-card-title"><span class="plan-card-icon">'+icon(kind)+'</span><h4>'+escape(title)+'</h4></div>'+body(detail)+'<div class="plan-reference">'+(String(page).startsWith('ผัง PPT')?escape(page):'อ้างอิง ERP · หน้าไฟล์ '+escape(page))+'</div></article>';
  }).join('');
  const assembly=row.assembly?'<article class="plan-card plan-assembly"><div class="plan-card-title"><span class="plan-card-icon">'+icon('assembly')+'</span><h4>จุดรวมพลเมื่อเกิดน้ำท่วม</h4></div><p class="plan-assembly-place">'+escape(row.assembly)+'</p><div class="plan-reference">อ้างอิง BCP · หน้าไฟล์ '+escape(row.bcpPage)+'</div></article>':'';
- const sources=[row.erp,row.bcp].filter(Boolean).filter((v,i,a)=>a.indexOf(v)===i);
+ const sources=[row.erp,row.bcp,row.supplement].filter(Boolean).filter((v,i,a)=>a.indexOf(v)===i);
  return '<section class="estate-flood-plan"><header class="plan-heading"><span class="plan-eyebrow">การรับมือน้ำท่วม</span><span class="plan-year">แผน '+escape(row.year||'2569')+'</span><h4>อุปกรณ์และจุดรวมพล</h4>'+(row.draft?'<span class="plan-draft">เอกสารฉบับร่าง</span>':'')+'</header><div class="plan-card-list">'+cards+assembly+'</div>'+(!row.erp?'<p class="plan-empty">มีข้อมูลจุดรวมพลจาก BCP<br>ยังไม่มีบัญชีเครื่องสูบน้ำจาก ERP</p>':'')+'<p class="plan-location-note"><b>ตำแหน่งหมุด: นิคมอุตสาหกรรม</b><br>ยังไม่ยืนยันพิกัดอุปกรณ์และจุดรวมพล<br>ข้อมูลตามแผน กรุณาตรวจสอบความพร้อมก่อนใช้งาน</p><details class="plan-sources"><summary>แหล่งข้อมูลและเอกสารอ้างอิง</summary><ul>'+sources.map(s=>'<li>'+escape(s)+'</li>').join('')+'</ul><p>ERP: แผนป้องกันและบรรเทาภัย<br>BCP: แผนความต่อเนื่องทางธุรกิจ</p></details></section>';
 };
