@@ -1,0 +1,68 @@
+/* Mobile layouts shared by the disaster hub, flood report and embedded map. */
+@media(max-width:950px){
+ html{ -webkit-text-size-adjust:100%; }
+ body{min-width:0}
+ .page,#riskDashboard,.panel,.panel-content{min-width:0;max-width:100%}
+ .portal-header .brand strong{white-space:normal;overflow-wrap:anywhere}
+ .portal-top,.disaster-header-tools{min-width:0;max-width:100%}
+ .disaster-header-tools{flex-wrap:wrap}
+ .disaster-scope-wrap{flex:1 1 100%;min-width:0}
+ .disaster-scope{width:100%;max-width:none;min-height:44px}
+ .disaster-estate-pop{position:fixed;top:170px;left:12px;right:12px;width:auto;max-height:calc(100dvh - 190px);overflow:auto}
+ .disaster-estate-pop input,.filter-bar input,.filter-bar select{font-size:16px!important;min-height:44px}
+ .disaster-estate-list button,.disaster-executive-link,.header-nav a{min-height:44px}
+ .header-nav a{display:inline-flex;align-items:center}
+ #otherPage .other-frame,#emergencyReportPage .other-frame{height:calc(100dvh - 230px);min-height:560px;display:block}
+ #estateFocusDashboard .ef-map-column{grid-row:1!important;min-height:380px!important;height:70dvh!important;max-height:620px!important}
+ #estateFocusDashboard .ef-data-column{grid-row:2!important}
+ #estateFocusDashboard .ef-map-head{flex-wrap:wrap!important}
+ #estateFocusDashboard .ef-map-foot{flex-wrap:wrap!important}
+ #estateFocusDashboard button,#estateFocusDashboard select{min-height:44px}
+}
+@media(max-width:600px){
+ .page{padding:12px 8px}
+ .portal-top{flex-wrap:wrap;gap:8px}
+ .disaster-header-tools{width:100%;gap:8px}
+ .disaster-clock{flex:1;white-space:normal}
+ .disaster-executive-link{white-space:normal;text-align:center}
+ .portal-header .brand strong{font-size:15px;line-height:1.5}
+ html body .portal-disaster-tabs .nav-tab{flex:1 0 82px;min-width:82px;min-height:44px;font-size:14px;padding:8px}
+ #riskDashboard .filter-bar label{flex:1 1 100%;min-width:0}
+ #riskDashboard .report-button{white-space:normal;text-align:center}
+ #riskDashboard .panel-content{padding:12px}
+ #riskDashboard .risk-summary{flex-wrap:wrap;gap:12px}
+ #riskDashboard .risk-table{font-size:12px;table-layout:fixed;overflow-wrap:anywhere}
+ #riskDashboard .matrix{min-width:480px}
+ #riskDashboard .matrix-scroll{overscroll-behavior-x:contain}
+ #riskDashboard .bar-row{grid-template-columns:95px minmax(0,1fr);gap:8px}
+ #riskDashboard .map-controls select{width:100%;min-height:44px;font-size:16px}
+ #riskDashboard #map{height:65dvh;min-height:360px;max-height:520px}
+ #riskDashboard .directory-item{min-height:60px}
+ #estateFocusDashboard .ef-map-column{height:68dvh!important;min-height:360px!important;max-height:560px!important}
+ .controls{right:48px!important;top:8px!important;width:calc(100% - 64px)!important}
+ .controls summary,.controls .toggles label{min-height:44px;white-space:normal}
+ .controls input[type=checkbox]{width:18px;height:18px;flex:none}
+ .controls .search select,.controls .search input{font-size:16px;min-height:44px}
+ .layer-body,.legend-body{max-height:calc(100dvh - 150px)!important}
+ .layer-menu[open]~.legend{display:none}
+ .leaflet-popup-content{max-width:calc(100vw - 64px)!important;margin:12px!important}
+ .popup,.water-popup,.fp-estate{min-width:0!important;max-width:calc(100vw - 64px)!important}
+ .popup:has(.fp-estate){width:calc(100vw - 64px)!important;max-height:calc(100dvh - 85px)!important;overflow:auto}
+ .fp-open{width:100%;min-height:44px;white-space:normal}
+ .fp-dialog{width:calc(100vw - 12px)!important;max-width:calc(100vw - 12px)!important;height:calc(100dvh - 12px)!important;max-height:calc(100dvh - 12px)!important;margin:6px!important;border-radius:12px!important}
+ .fp-head{padding:8px!important;gap:8px!important;flex-wrap:wrap}
+ .fp-head h2{font-size:16px!important}
+ .fp-head button,.fp-select,.fp-point-list button{min-height:44px!important}
+ .fp-select{font-size:16px!important;max-width:100%!important;width:100%!important;order:3}
+ .fp-note{padding:6px 10px!important;font-size:11px!important}
+ .fp-layout{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:minmax(0,1fr) minmax(120px,30%)!important;min-height:0!important}
+ .fp-canvas{min-height:0!important}
+ .fp-aside{padding:10px!important;overflow:auto!important;border-top:1px solid #d6e3eb}
+ .fp-table{font-size:12px!important}
+ .fp-table td,.fp-table th{padding:6px!important}
+}
+@media(max-height:500px) and (max-width:950px){
+ .fp-dialog{height:calc(100dvh - 12px)!important;max-height:calc(100dvh - 12px)!important}
+ .fp-layout{grid-template-columns:minmax(0,1fr) 38%!important;grid-template-rows:minmax(0,1fr)!important}
+ .fp-canvas{min-height:0!important}
+}
