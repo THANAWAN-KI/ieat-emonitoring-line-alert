@@ -555,67 +555,103 @@ outline:2px solid #0066b2!important;outline-offset:2px;
 </style>
 
 
-<style id="flood-report-water-theme">
-/* Water dashboard palette; status colors retain their data meaning. */
-body,#warning,#estateFocusDashboard{background:#f3f7fa!important}
-#estateFocusDashboard .ef-data-column{background:#f3f7fa!important;scrollbar-color:#b6cbd7 transparent}
-#estateFocusDashboard .ef-panel,
-#estateFocusDashboard #riverSidePanel,
-#estateFocusDashboard .ef-canal-panel,
-#estateFocusDashboard .ef-related-dams,
-#estateFocusDashboard .ef-reservoir-panel,
-#estateFocusDashboard #rpRankingsAfterWarning .rp-new-section,
-#estateFocusDashboard .rp-new-section,
-#estateFocusDashboard .today-panel{
- background:#fff!important;border:1px solid #dce7ed!important;border-radius:18px!important;
- box-shadow:0 4px 16px #00366608!important;
+
+<style id="flood-report-refined-20261007">
+/* Presentation only: scoped specificity keeps the theme consistent with dynamically mounted panels. */
+body,#warning{background:#eef3f7!important}
+#warning #estateFocusDashboard{background:#eef3f7!important;color:#172f43;font-size:16px!important}
+#warning #estateFocusDashboard .ef-workspace{gap:16px!important}
+#warning #estateFocusDashboard .ef-data-column{background:transparent!important;padding:0 8px 20px 0!important;scrollbar-width:thin;scrollbar-color:#b7c8d5 transparent}
+#warning #estateFocusDashboard :is(.ef-panel,.ef-related-dams,.ef-reservoir-panel,.ef-canal-panel,.today-panel,.rp-new-section){
+background:#fff!important;border:0!important;border-radius:18px!important;box-shadow:0 3px 16px #183b5608!important;padding:20px!important;margin-bottom:18px}
+#warning #estateFocusDashboard #riverSidePanel{background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important}
+#warning #estateFocusDashboard :is(.ef-panel,.ef-related-dams,.ef-reservoir-panel,.ef-canal-panel)>h2,
+#warning #estateFocusDashboard :is(.rp-new-section>h3,.rp-stations-title),
+#warning #estateFocusDashboard #rpRankingsAfterWarning h3{
+background:transparent!important;border:0!important;border-radius:0!important;color:#123b56!important;padding:0 0 12px!important;margin:0 0 16px!important;font-size:19px!important;font-weight:700;line-height:1.6;border-bottom:1px solid #e9eff3!important}
+#warning #estateFocusDashboard #floodWeatherOverview .today-panel h2{color:#123b56!important;font-size:19px!important}
+#warning #estateFocusDashboard .today-panel-heading{border-bottom:1px solid #e9eff3;padding-bottom:12px}
+#warning #estateFocusDashboard .today-panel-heading h2{border:0;padding-left:0}
+#warning #estateFocusDashboard .ef-map-column{background:#fff;border:0!important;border-radius:20px!important;box-shadow:0 6px 28px #173a5610!important}
+#warning #estateFocusDashboard .ef-map-head{background:#fff!important;border-bottom:1px solid #e6eef3;padding:18px 20px!important}
+#warning #estateFocusDashboard .ef-map-head h2{color:#123b56!important}
+#warning #estateFocusDashboard .ef-map-foot{background:#fff!important;color:#526b7c!important;border-top:1px solid #e6eef3;padding:12px 16px!important;font-size:12px!important}
+#warning #estateFocusDashboard #efMapFullscreen,
+#warning #estateFocusDashboard .ef-map-head .ef-actions :is(button,a){
+background:#e6f4f2!important;color:#086b65!important;border:0!important;border-radius:10px!important;padding:10px 15px;min-height:42px;font-weight:600}
+#warning #estateFocusDashboard #floodWeatherOverview .today-metrics{gap:12px!important}
+#warning #estateFocusDashboard #floodWeatherOverview .today-metrics article{
+--weather-accent:#2374ad;--weather-fill:#f0f7fc;
+background:var(--weather-fill)!important;border:0!important;border-radius:16px!important;box-shadow:none!important;padding:20px 76px 18px 18px!important;min-height:142px!important;overflow:hidden}
+#warning #estateFocusDashboard #floodWeatherOverview .today-metrics article:nth-child(2){--weather-accent:#168da8;--weather-fill:#eef9fc}
+#warning #estateFocusDashboard #floodWeatherOverview .today-metrics article:nth-child(3){--weather-accent:#13866b;--weather-fill:#eff9f5}
+#warning #estateFocusDashboard #floodWeatherOverview .today-metrics article:nth-child(4){--weather-accent:#b87519;--weather-fill:#fff8ed}
+#warning #estateFocusDashboard #floodWeatherOverview .today-metrics article:before{content:"";position:absolute;left:0;top:20px;bottom:20px;width:3px;border-radius:4px;background:var(--weather-accent)}
+#warning #estateFocusDashboard #floodWeatherOverview .today-metrics article strong{color:var(--weather-accent)!important;font-size:29px!important;letter-spacing:-.5px;font-variant-numeric:tabular-nums;margin:10px 0}
+#warning #estateFocusDashboard #floodWeatherOverview .today-metrics article span{font-size:15px;color:#243e51;font-weight:600}
+#warning #estateFocusDashboard #floodWeatherOverview .today-metrics article small{font-size:12px!important;color:#536b7b;line-height:1.7}
+#warning #estateFocusDashboard #floodWeatherOverview .today-card-icon{width:46px!important;height:46px!important;right:16px!important}
+#warning #estateFocusDashboard .today-day{background:#f7fafc!important;border:0!important;border-radius:12px;padding:16px 10px}
+#warning #estateFocusDashboard .today-forecast{gap:10px;scrollbar-width:thin;scrollbar-color:#bccdda transparent}
+#warning #estateFocusDashboard :is(#rpMainRiver,#efReservoirProvince,.ef-tools input,.ef-tools select){
+background:#f6f9fb!important;border:1px solid #d9e5ec!important;border-radius:12px!important;color:#173d56!important;padding:12px 14px!important;font:inherit;font-size:15px!important;min-height:46px}
+#warning #estateFocusDashboard .rp-forecast-toggle,
+#warning #estateFocusDashboard #riverSidePanel details>summary{
+background:#f1f7fa!important;border:0!important;border-radius:12px!important;color:#123b56!important;padding:14px 16px!important;font-size:17px!important}
+#warning #estateFocusDashboard :is(.ef-dam-card,.ef-canal-card,.ef-reservoir-row,.rp-station-row){
+border:1px solid #e2ebf1!important;border-radius:14px!important;box-shadow:none!important}
+#warning #estateFocusDashboard #efRelatedDams .ef-dam-card{background:#fff!important;padding:16px!important;border-top:3px solid var(--water-accent,#0066b2)!important}
+#warning #estateFocusDashboard #efRelatedDams .ef-dam-card h3{color:#173d56!important;font-size:17px!important;line-height:1.6}
+#warning #estateFocusDashboard #efRelatedDams .ef-dam-value{color:var(--water-ink,#003666)!important;font-size:32px!important;font-variant-numeric:tabular-nums}
+#warning #estateFocusDashboard .ef-dam-flows div{background:#f4f8fb!important;padding:12px!important;border-radius:10px}
+#warning #estateFocusDashboard .ef-dam-change{background:#f6f9fb!important;border-radius:10px;line-height:1.7}
+#warning #estateFocusDashboard #efRelatedDams .ef-dam-card[data-water-theme] button{
+background:#eaf4f8!important;color:#174e6b!important;border:0!important;border-radius:10px!important;min-height:42px;font-weight:600}
+#warning #estateFocusDashboard #efReservoirList .ef-reservoir-row[data-water-theme]{
+background:var(--water-bg)!important;padding:16px!important;border:0!important;border-left:3px solid var(--water-accent)!important}
+#warning #estateFocusDashboard .ef-canal-card{padding:16px!important;background:#fff!important}
+#warning #estateFocusDashboard #riverSidePanel .rp-station-row{background:#fff!important;padding:16px 12px!important;grid-template-columns:74px minmax(0,1fr)!important;align-items:center}
+#warning #estateFocusDashboard #riverSidePanel .rp-station-top b{color:#173d56!important;font-size:16px!important;line-height:1.6}
+#warning #estateFocusDashboard #riverSidePanel .rp-station-content strong{font-size:20px!important;font-variant-numeric:tabular-nums}
+#warning #estateFocusDashboard #riverSidePanel .rp-station-content small{font-size:12px!important;color:#526c7d!important;line-height:1.75}
+#warning #estateFocusDashboard #riverSidePanel .rp-station-top em{font-style:normal;padding:5px 10px;font-size:12px;border-radius:8px}
+#warning #estateFocusDashboard #rpRankingsAfterWarning{gap:0!important}
+#warning #estateFocusDashboard #rpRankingsAfterWarning .rp-new-section{border:0!important;padding:20px!important}
+#warning #estateFocusDashboard #rpRankingsAfterWarning .rp-rank-card{border:0!important;background:#f6f9fb!important;box-shadow:none!important;border-radius:12px}
+#warning #estateFocusDashboard #rpRankingsAfterWarning .rp-rank-card>div:first-child{padding:18px 10px}
+#warning #estateFocusDashboard #rpRankingsAfterWarning .rp-rank-card>div:last-child{padding:16px}
+#warning #estateFocusDashboard .ef-warning>.ef-panel{background:#fff!important;box-shadow:none!important;border:1px solid #e2ebf1!important;padding:16px!important}
+#warning #estateFocusDashboard .ef-warning summary{font-size:17px!important;color:#123b56!important}
+#warning #estateFocusDashboard .ef-warning-location{background:#f6fafc!important;border:0!important}
+#warning #estateFocusDashboard .rp-overview-card{border:0!important;box-shadow:none!important;background:#fff!important;border-radius:16px;padding:20px!important}
+#warning #estateFocusDashboard .rp-overview-note{background:#edf6f8!important;border-left:3px solid #168d96!important;color:#244d61}
+#warning #estateFocusDashboard .ef-scroll-caption{color:#667e8e!important;font-size:12px!important;margin:0 0 12px!important}
+#warning #estateFocusDashboard :is(button,a,input,select,summary):focus-visible{outline:3px solid #168d96!important;outline-offset:3px}
+#warning #estateFocusDashboard :is(.rp-station-row,.ef-canal-card,.ef-dam-card,.ef-reservoir-row):hover{border-color:#8dbcc7!important;box-shadow:0 4px 14px #183b5610!important}
+#warning #estateFocusDashboard #riverSidePanel .rp-station-row[aria-pressed=true]{background:#eef8f7!important;border-color:#168d96!important;outline:2px solid #168d96}
+@media(min-width:951px){
+#warning #estateFocusDashboard{padding:16px!important}
+#warning #estateFocusDashboard .ef-workspace{grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr)!important;height:100%!important;min-height:0!important}
 }
-#estateFocusDashboard .ef-panel>h2,
-#estateFocusDashboard .ef-canal-panel>h2,
-#estateFocusDashboard .ef-related-dams>h2,
-#estateFocusDashboard .ef-reservoir-panel>h2,
-#estateFocusDashboard #riverSidePanel .rp-new-section>h3,
-#estateFocusDashboard .rp-stations-title,
-#estateFocusDashboard #rpRankingsAfterWarning h3{
- background:#eaf3f8!important;color:#003666!important;border:0!important;
- border-left:4px solid #159d98!important;border-radius:8px!important;
- padding:10px 12px!important;margin:0 0 14px!important;font-weight:700;line-height:1.6;
+@media(max-width:950px){
+#warning #estateFocusDashboard .ef-data-column{padding:12px!important}
+#warning #estateFocusDashboard .ef-map-column{margin:0 12px 12px!important;width:calc(100% - 24px)!important}
+#warning #estateFocusDashboard :is(.ef-panel,.ef-related-dams,.ef-reservoir-panel,.ef-canal-panel,.today-panel,.rp-new-section){padding:16px!important;margin-bottom:14px}
+#warning #estateFocusDashboard #rpCards{grid-template-columns:repeat(2,minmax(0,1fr))}
+#warning #estateFocusDashboard .ef-map-column:is(:fullscreen,.ef-map-expanded){margin:0!important;width:100%!important;border-radius:0!important}
 }
-#estateFocusDashboard .today-panel h2,
-#estateFocusDashboard .ef-toolbar h1{color:#003666!important}
-#estateFocusDashboard .today-panel-heading{padding-bottom:12px;border-bottom:1px solid #e4edf2}
-#estateFocusDashboard .today-panel-heading h2{border-left:4px solid #159d98;padding-left:10px}
-#estateFocusDashboard #floodWeatherOverview .today-metrics article{
- background:#fff!important;border-color:#dce7ed!important;border-radius:16px!important;
- box-shadow:0 4px 14px #00366608!important;
+@media(max-width:600px){
+#warning #estateFocusDashboard #rpCards{grid-template-columns:1fr!important}
+#warning #estateFocusDashboard #floodWeatherOverview .today-metrics article{padding:16px 14px!important;min-height:158px!important}
+#warning #estateFocusDashboard #floodWeatherOverview .today-card-icon{position:static!important;transform:none!important;float:right;width:36px!important;height:36px!important}
+#warning #estateFocusDashboard #floodWeatherOverview .today-metrics article strong{font-size:26px!important}
+#warning #estateFocusDashboard #floodWeatherOverview .today-metrics article span{font-size:14px}
+#warning #estateFocusDashboard .ef-data-column{padding:10px!important}
+#warning #estateFocusDashboard #riverSidePanel .rp-gauge{width:74px!important;height:175px!important}
 }
-#estateFocusDashboard #floodWeatherOverview .today-metrics article:first-child strong{color:#003666!important}
-#estateFocusDashboard .today-day{background:#f7fbfd!important;border-color:#e0eaf0!important;border-radius:12px}
-#estateFocusDashboard .ef-map-column{border:1px solid #d4e3eb!important;border-radius:18px!important;box-shadow:0 5px 20px #0036660c}
-#estateFocusDashboard .ef-map-foot{background:#f7fbfd!important;color:#42667c!important;border-top:1px solid #e0eaf0}
-#estateFocusDashboard .ef-map-head h2{color:#003666!important}
-#estateFocusDashboard #efMapFullscreen,
-#estateFocusDashboard .ef-map-head .ef-actions button,
-#estateFocusDashboard #efRelatedDams .ef-dam-card[data-water-theme] button{
- background:#e4f4f1!important;color:#126c68!important;border:1px solid #c5e5df!important;
- border-radius:10px!important;font-weight:700;
-}
-#estateFocusDashboard #efMapFullscreen:hover,
-#estateFocusDashboard #efRelatedDams .ef-dam-card[data-water-theme] button:hover{background:#d3eee7!important}
-#estateFocusDashboard .rp-forecast-toggle{background:#eaf3f8!important;color:#003666!important;border-radius:10px;border-left:4px solid #159d98}
-#estateFocusDashboard #rpMainRiver{
- background:#eaf3f8!important;color:#003666!important;border:1px solid #a4c8de!important;
- border-left:4px solid #159d98!important;border-radius:10px;font-weight:600;padding:12px;
-}
-#estateFocusDashboard #rpMainRiver:focus-visible{outline:3px solid #159d9866;outline-offset:2px}
-#estateFocusDashboard #efRelatedDams .ef-dam-card,
-#estateFocusDashboard .ef-canal-card{background:#fff!important;border-color:#d5e3eb!important;box-shadow:0 3px 10px #00366606!important}
-#estateFocusDashboard #efRelatedDams .ef-dam-card:hover,
-#estateFocusDashboard .ef-canal-card:hover{border-color:#88bbb9!important;box-shadow:0 5px 14px #00366610!important}
-#estateFocusDashboard .ef-warning>.ef-panel{background:#f7fbfd!important}
-#estateFocusDashboard .ef-warning summary{color:#003666!important}
-@media(max-width:950px){body{background:#f3f7fa!important}}
+@media(prefers-reduced-motion:reduce){#warning #estateFocusDashboard :is(button,a){transition:none!important}}
 </style>
+
 
 </body>
 </html>
