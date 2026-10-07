@@ -55,14 +55,15 @@
  .fp-head button,.fp-select,.fp-point-list button{min-height:44px!important}
  .fp-select{font-size:16px!important;max-width:100%!important;width:100%!important;order:3}
  .fp-note{padding:6px 10px!important;font-size:11px!important}
- .fp-layout{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:minmax(0,1fr) minmax(120px,30%)!important;min-height:0!important}
- .fp-canvas{min-height:0!important}
- .fp-aside{padding:10px!important;overflow:auto!important;border-top:1px solid #d6e3eb}
+ .fp-layout{display:block!important;overflow-y:auto!important;min-height:0!important;overscroll-behavior:contain}
+ .fp-canvas{min-height:0!important;height:clamp(200px,45dvh,420px)!important}
+ .fp-aside{padding:10px!important;overflow:visible!important;border-top:1px solid #d6e3eb}
+ .fp-dialog .leaflet-popup-content{max-height:clamp(110px,28dvh,220px)!important;overflow:auto!important}
  .fp-table{font-size:12px!important}
  .fp-table td,.fp-table th{padding:6px!important}
 }
-@media(max-height:500px) and (max-width:950px){
+@media(max-height:500px) and (min-width:601px) and (max-width:950px){
  .fp-dialog{height:calc(100dvh - 12px)!important;max-height:calc(100dvh - 12px)!important}
- .fp-layout{grid-template-columns:minmax(0,1fr) 38%!important;grid-template-rows:minmax(0,1fr)!important}
- .fp-canvas{min-height:0!important}
+ .fp-layout{display:grid!important;overflow:hidden!important;grid-template-columns:minmax(0,1fr) 38%!important;grid-template-rows:minmax(0,1fr)!important}
+ .fp-canvas{min-height:0!important;height:100%!important}.fp-aside{overflow:auto!important}
 }
