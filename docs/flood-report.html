@@ -162,7 +162,14 @@ outline:2px solid #0066b2!important;outline-offset:2px;
 #estateFocusDashboard #rpRankingsAfterWarning .rp-rank-card:focus-visible{outline:3px solid #007cc0;outline-offset:3px}
 #estateFocusDashboard #rpRankingsAfterWarning .rp-new-section>small{display:block;color:#607487;font-size:12px;line-height:1.7}
 @media(max-width:480px){#estateFocusDashboard .ef-warning{grid-template-columns:1fr}#estateFocusDashboard #rpRankingsAfterWarning .rp-rank-card{grid-template-columns:90px minmax(0,1fr)}}
-</style></head>
+</style>
+<style>
+/* Remove requested captions while retaining river selection and forecast data. */
+#estateFocusDashboard #sevenDayForecast>.today-source,
+#estateFocusDashboard #rpMainRiverContext,
+#estateFocusDashboard label[for="rpMainRiver"]{display:none!important}
+</style>
+</head>
 <body>
 <main class="container"><section id="warning" aria-label="Dashboard สถานการณ์น้ำ"><div id="dashboardLoading" class="dashboard-loading" role="status">กำลังโหลดข้อมูลสถานการณ์น้ำ…</div><noscript>กรุณาเปิด JavaScript เพื่อใช้งาน dashboard</noscript></section></main>
 
