@@ -80,6 +80,7 @@
  }
  window.IEAT_ESTATE_DASHBOARD_MODEL=model;
  let riverScope=null;
+ let executiveFocus=null;
  let current=null,selected=new URLSearchParams(location.search).get('estate')||'',busy=false;
 
  function scopedModel(m){
@@ -107,9 +108,20 @@
   if(current)render(current);
   if(!headerEstate)$('estateFocusMap')?.contentWindow?.postMessage({type:'flood-map-focus',lat:13,lon:101,scale:9244648},location.origin);
  }
+ function deliverExecutiveFocus(){
+  if(!executiveFocus)return;const frame=$('estateFocusMap');
+  frame?.contentWindow?.postMessage(executiveFocus,location.origin);
+  frame?.scrollIntoView?.({behavior:'smooth',block:'center'});
+ }
  window.addEventListener('message',event=>{
-  if(event.origin!==location.origin||event.source!==window.parent||event.data?.type!=='ieat-flood-estate')return;
-  applyHeaderEstate(event.data.name);
+  if(event.origin!==location.origin)return;
+  if(event.source===$('estateFocusMap')?.contentWindow&&event.data?.type==='flood-water-ready'){deliverExecutiveFocus();return}
+  if(event.source!==window.parent)return;
+  if(event.data?.type==='ieat-flood-estate'){executiveFocus=null;applyHeaderEstate(event.data.name);return}
+  if(event.data?.type==='ieat-executive-map-focus'){
+   const focus=event.data.focus;if(focus?.type!=='flood-map-focus'||!Number.isFinite(Number(focus.lat))||!Number.isFinite(Number(focus.lon)))return;
+   executiveFocus=focus;deliverExecutiveFocus();
+  }
  });
  if(window.parent!==window)window.parent.postMessage({type:'ieat-flood-ready'},location.origin);
 
@@ -573,7 +585,7 @@ $('efFilter').onchange=()=>renderEstates();
   for(const [id,ds] of [['efWarning24',m.warning24],['efWarning48',m.warning48]]){
    $(id).innerHTML=!ds.available?'<p class="ef-empty">ข้อมูลประกาศหรือพิกัดนิคมฯ ไม่พร้อม / เกินช่วง 24 ชั่วโมง จึงยังสรุปจำนวนไม่ได้</p>':`<p>รอบประกาศ ${esc(time(new Date(ds.issued).toISOString()))}${ds.unlocated?' · มี '+ds.unlocated+' รายการที่ไม่มีพิกัด จึงไม่รวมในการคำนวณ':''}</p>`+(ds.rows.length?ds.rows.map(r=>warningCard(r,id==='efWarning24'?24:48)).join(''):'<p class="ef-empty">ไม่พบตำบลในรายการเฝ้าระวังที่จุดสถานีประเมินอยู่ภายใน 30 กม. จากนิคมฯ ในชุดข้อมูลนี้</p>');
   }
-
+  deliverExecutiveFocus();
  }
  async function load(){
   if(busy)return;busy=true;if($('efRefresh'))$('efRefresh').disabled=true;

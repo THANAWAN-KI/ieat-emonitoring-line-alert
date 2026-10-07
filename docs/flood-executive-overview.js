@@ -42,9 +42,29 @@
   return {rows,stationReady,announcementReady:announcements.some(a=>a.ready),generated:data?.generated_at};
  }
  window.IEAT_EXECUTIVE_FLOOD={distance,closestSegment,lineSegments,nearestRiver,assess};
- let data=null,segments=null,dams=null,geoState='loading',damState='loading',tab='watch',radius=30,search='',selected='',relations=new Map(),relationKey='',lastModel=null;
+ let scopeEstate='',data=null,segments=null,dams=null,geoState='loading',damState='loading',tab='watch',radius=30,search='',selected='',relations=new Map(),relationKey='',lastModel=null;
  const style=document.createElement('style');style.textContent=`
  #efExecutive{margin:0 0 16px;padding:20px;background:#fff;border:1px solid #d9e5ef;border-radius:16px;color:#173b59;font:14px Sarabun,sans-serif;box-shadow:0 4px 20px #163a5910}
+
+ #efExecutive{border-color:#eddfd7;box-shadow:none;color:#452f25}
+ #efExecutive h2,#efExecutive .ex-place{color:#452f25}
+ #efExecutive .ex-card[data-tab="watch"]{background:#fff0f2;border-color:#e2142d;color:#8e0c20!important}
+ #efExecutive .ex-card[data-tab="watch"] strong{color:#e2142d}
+ #efExecutive .ex-card[data-tab="river"]{background:#eef8e9;border-color:#4bad31;color:#245c17!important}
+ #efExecutive .ex-card[data-tab="river"] strong{color:#4bad31}
+ #efExecutive .ex-card[data-tab="dam"]{background:#fffde0;border-color:#f5dc00;color:#665c00!important}
+ #efExecutive .ex-card[data-tab="dam"] strong{color:#746700}
+ #efExecutive .ex-card[aria-pressed="true"]{outline-color:#e95814}
+ #efExecutive th{background:#fff0e7;color:#873809}
+ #efExecutive .ex-status{background:#e2142d;color:white}
+ #efExecutive .ex-status.unknown{background:#f3efe9;color:#6a6052}
+ #efExecutive .ex-map{background:#eef8e9;border-color:#4bad31;color:#245c17!important}
+ #efExecutive .ex-map:hover{background:#daf0cf}
+ #efExecutive .ex-distance{color:#9a420d}
+ #efExecutive .ex-notice{background:#fffbe1;color:#6d6100;border-left:4px solid #f5dc00}
+ #efExecutive tbody tr[data-selected="true"]{background:#fff1e8}
+ #efExecutive .ex-stamp{background:#fff0e7;color:#873809}
+
  #efExecutive .ex-toggle{display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;font-weight:700;color:#003666;font-size:16px;list-style:none}#efExecutive .ex-toggle::-webkit-details-marker{display:none}#efExecutive .ex-toggle span{font-size:12px;color:#117055;font-weight:500}#efExecutive[open]>.ex-toggle{padding-bottom:14px;border-bottom:1px solid #dce6ef;margin-bottom:14px}#efExecutive:not([open]){padding:12px 14px;margin-bottom:12px}#efExecutive .ex-body{min-width:0}
  #efExecutive .ex-head{display:flex;justify-content:space-between;gap:12px;align-items:start;flex-wrap:wrap}#efExecutive h2{margin:0;font-size:23px;color:#003666}#efExecutive .ex-sub{margin:5px 0 12px;color:#557087;line-height:1.6}
  #efExecutive .ex-stamp{font-size:12px;background:#edf5fb;padding:7px 10px;border-radius:8px;color:#456b89}
@@ -63,8 +83,8 @@
   host.addEventListener('click',e=>{const card=e.target.closest('[data-tab]');if(card){tab=card.dataset.tab;host.querySelector('#exTab').value=tab;render();return;}const b=e.target.closest('[data-ex-estate]');if(b)focus(b.dataset.exEstate);});return host;
  }
  function buildRelations(){if(!data)return;const estates=(data.estates||[]).filter(valid),key=estates.map(e=>[e.id,e.lat,e.lon].join(',')).join('|');if(key===relationKey)return;relationKey=key;relations=new Map();for(const e of estates){const river=segments?nearestRiver(e,segments):null;let dam=null;if(dams)for(const d of dams){const v=distance(e,d);if(!dam||v<dam.distance)dam={...d,distance:v};}relations.set(String(e.id),{river,dam});}}
- function render(){const host=mount();if(!host||!data)return;lastModel=assess(data);const rows=lastModel.rows.map(e=>({...e,...relations.get(String(e.id))}));const count=k=>rows.filter(e=>k==='watch'?e.reasons.length:k==='river'?e.river&&e.river.distance<=radius:e.dam&&e.dam.distance<=radius).length;
-  host.querySelector('#exWatch').textContent=lastModel.stationReady||lastModel.announcementReady?fmt(count('watch')):'–';host.querySelector('#exRiver').textContent=geoState==='ready'?fmt(count('river')):'–';host.querySelector('#exDam').textContent=damState==='ready'?fmt(count('dam')):'–';host.querySelector('#exStamp').textContent='ชุดสถานี '+time(data.generated_at);
+ function render(){const host=mount();if(!host||!data)return;lastModel=assess(data);const norm=v=>String(v||'').normalize('NFKC').replace(/นิคมอุตสาหกรรม|สำนักงานนิคมฯ|นิคมฯ|\s|[()]/g,'').toLowerCase();const rows=lastModel.rows.filter(e=>!scopeEstate||norm(e.name)===norm(scopeEstate)).map(e=>({...e,...relations.get(String(e.id))}));const count=k=>rows.filter(e=>k==='watch'?e.reasons.length:k==='river'?e.river&&e.river.distance<=radius:e.dam&&e.dam.distance<=radius).length;
+  host.querySelector('#exWatch').textContent=lastModel.stationReady||lastModel.announcementReady?fmt(count('watch')):'–';host.querySelector('#exRiver').textContent=geoState==='ready'?fmt(count('river')):'–';host.querySelector('#exDam').textContent=damState==='ready'?fmt(count('dam')):'–';host.querySelector('#exStamp').textContent='ชุดสถานี '+time(data.generated_at);host.querySelector('.ex-sub').textContent=scopeEstate?'ข้อมูลเฉพาะ '+scopeEstate:'ภาพรวมพื้นที่นิคมอุตสาหกรรมทั่วประเทศ';
   host.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.tab===tab)));
   const notices=[];if(!lastModel.stationReady)notices.push('ข้อมูลสถานียังไม่ครบหรือเป็นข้อมูลย้อนหลัง จึงไม่ใช้สรุปสถานีที่ต้องเฝ้าระวังตอนนี้');if(!lastModel.announcementReady)notices.push('ประกาศเฝ้าระวัง 24/48 ชั่วโมงยังไม่พร้อมหรือเกินช่วงเวลา');if(geoState==='error')notices.push('โหลดแนวสายน้ำไม่สำเร็จ');if(damState==='partial')notices.push('ข้อมูลเขื่อน/อ่างโหลดได้บางส่วน จำนวนใกล้เขื่อนยังสรุปไม่ได้');if(damState==='error')notices.push('โหลดพิกัดเขื่อน/อ่างไม่สำเร็จ');host.querySelector('#exNotice').innerHTML=notices.map(n=>'<div class="ex-notice">'+esc(n)+'</div>').join('');
   const shown=rows.filter(e=>String(e.name).includes(search)&&(tab==='all'||tab==='watch'&&e.reasons.length||tab==='river'&&e.river&&e.river.distance<=radius||tab==='dam'&&e.dam&&e.dam.distance<=radius)).sort((a,b)=>tab==='river'?a.river.distance-b.river.distance:tab==='dam'?a.dam.distance-b.dam.distance:b.reasons.length-a.reasons.length||String(a.name).localeCompare(String(b.name),'th'));
@@ -77,13 +97,14 @@
   else if(tab==='dam'&&rel.dam)targets.push({lat:rel.dam.lat,lon:rel.dam.lon,label:rel.dam.name,kind:'dam'});
   else if(tab==='watch')targets.push(...e.targets.slice(0,5));
   else {if(rel.river&&rel.river.distance<=radius){targets.push({lat:rel.river.lat,lon:rel.river.lon,label:rel.river.name,kind:'river'});line=rel.river.line;}if(rel.dam&&rel.dam.distance<=radius)targets.push({lat:rel.dam.lat,lon:rel.dam.lon,label:rel.dam.name,kind:'dam'});}
-  const frame=document.getElementById('estateFocusMap');frame?.contentWindow?.postMessage({type:'flood-map-focus',lat:e.lat,lon:e.lon,label:e.name,executive:{targets,line,river:rel.river?rel.river.name+' · '+fmt(rel.river.distance)+' กม.':null,dam:rel.dam?rel.dam.name+' · '+fmt(rel.dam.distance)+' กม.':null,reasons:e.reasons.slice(0,5).map(r=>r.text+' · '+time(r.at)),reasonCount:e.reasons.length}},location.origin);render();frame?.scrollIntoView({behavior:'smooth',block:'center'});
+  const frame=document.getElementById('estateFocusMap');const message={type:'flood-map-focus',lat:e.lat,lon:e.lon,label:e.name,executive:{targets,line,river:rel.river?rel.river.name+' · '+fmt(rel.river.distance)+' กม.':null,dam:rel.dam?rel.dam.name+' · '+fmt(rel.dam.distance)+' กม.':null,reasons:e.reasons.slice(0,5).map(r=>r.text+' · '+time(r.at)),reasonCount:e.reasons.length}};if(document.body.dataset.executiveEmbedded==='true'){window.parent.postMessage({type:'ieat-executive-open-map',focus:message},location.origin);}else{frame?.contentWindow?.postMessage(message,location.origin);frame?.scrollIntoView({behavior:'smooth',block:'center'});}render();
  }
  async function loadGeography(){const paths=['water_flow_major.geojson','related_dams_latest.json','medium_reservoirs_latest.json'];const rs=await Promise.allSettled(paths.map(async path=>{const r=await fetch('./data/'+path+'?v='+Math.floor(Date.now()/HOUR),{signal:AbortSignal.timeout(25000)});if(!r.ok)throw Error('HTTP '+r.status);const d=await r.json();if(path.endsWith('geojson')?!Array.isArray(d.features):!Array.isArray(d.rows))throw Error('Invalid data');return d;}));
   if(rs[0].status==='fulfilled'){segments=lineSegments(rs[0].value);geoState=segments.length?'ready':'error';}else geoState='error';
   const available=rs.slice(1).filter(r=>r.status==='fulfilled');damState=available.length===2?'ready':available.length?'partial':'error';const unique=new Map();for(const r of available)for(const d of r.value.rows){const p={...d,lat:num(d.lat),lon:num(d.lng??d.lon)};if(valid(p))unique.set(p.name+'|'+p.lat+'|'+p.lon,p);}dams=[...unique.values()];if(!dams.length)damState='error';relationKey='';buildRelations();render();
  }
+ window.addEventListener('message',event=>{if(event.origin!==location.origin||event.source!==window.parent||event.data?.type!=='ieat-executive-estate')return;scopeEstate=String(event.data.name||'');search='';const input=document.getElementById('exSearch');if(input)input.value='';render();});
  document.addEventListener('ieat-flood-executive-data',e=>{data=e.detail;buildRelations();render();});
- function start(){mount();if(window.IEAT_FLOOD_EXECUTIVE_DATA){data=window.IEAT_FLOOD_EXECUTIVE_DATA;render();}loadGeography();setInterval(()=>{render();loadGeography();},HOUR);}
+ function start(){mount();if(window.parent!==window)window.parent.postMessage({type:'ieat-executive-ready'},location.origin);if(window.IEAT_FLOOD_EXECUTIVE_DATA){data=window.IEAT_FLOOD_EXECUTIVE_DATA;render();}loadGeography();setInterval(()=>{render();loadGeography();},HOUR);}
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
