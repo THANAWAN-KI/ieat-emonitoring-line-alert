@@ -13,11 +13,11 @@
  .disaster-estate-list button,.disaster-executive-link,.header-nav a{min-height:44px}
  .header-nav a{display:inline-flex;align-items:center}
  #otherPage .other-frame,#emergencyReportPage .other-frame{height:calc(100dvh - 230px);min-height:560px;display:block}
- #estateFocusDashboard .ef-map-column{grid-row:1!important;min-height:380px!important;height:70dvh!important;max-height:620px!important}
- #estateFocusDashboard .ef-data-column{grid-row:2!important}
- #estateFocusDashboard .ef-map-head{flex-wrap:wrap!important}
- #estateFocusDashboard .ef-map-foot{flex-wrap:wrap!important}
- #estateFocusDashboard button,#estateFocusDashboard select{min-height:44px}
+ html body #estateFocusDashboard .ef-map-column{grid-row:1!important;min-height:380px!important;height:70dvh!important;max-height:620px!important}
+ html body #estateFocusDashboard .ef-data-column{grid-row:2!important}
+ html body #estateFocusDashboard .ef-map-head{flex-wrap:wrap!important}
+ html body #estateFocusDashboard .ef-map-foot{flex-wrap:wrap!important}
+ html body #estateFocusDashboard button,html body #estateFocusDashboard select{min-height:44px}
 }
 @media(max-width:600px){
  .page{padding:12px 8px}
@@ -26,7 +26,7 @@
  .disaster-clock{flex:1;white-space:normal}
  .disaster-executive-link{white-space:normal;text-align:center}
  .portal-header .brand strong{font-size:15px;line-height:1.5}
- html body .portal-disaster-tabs .nav-tab{flex:1 0 82px;min-width:82px;min-height:44px;font-size:14px;padding:8px}
+ html body nav.portal-disaster-tabs .nav-tab{flex:1 0 82px;min-width:82px;min-height:44px;font-size:14px;padding:8px}
  #riskDashboard .filter-bar label{flex:1 1 100%;min-width:0}
  #riskDashboard .report-button{white-space:normal;text-align:center}
  #riskDashboard .panel-content{padding:12px}
@@ -38,7 +38,7 @@
  #riskDashboard .map-controls select{width:100%;min-height:44px;font-size:16px}
  #riskDashboard #map{height:65dvh;min-height:360px;max-height:520px}
  #riskDashboard .directory-item{min-height:60px}
- #estateFocusDashboard .ef-map-column{height:68dvh!important;min-height:360px!important;max-height:560px!important}
+ html body #estateFocusDashboard .ef-map-column{height:68dvh!important;min-height:360px!important;max-height:560px!important}
  .controls{right:48px!important;top:8px!important;width:calc(100% - 64px)!important}
  .controls summary,.controls .toggles label{min-height:44px;white-space:normal}
  .controls input[type=checkbox]{width:18px;height:18px;flex:none}
