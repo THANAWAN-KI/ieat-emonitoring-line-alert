@@ -2234,5 +2234,76 @@ html body .top-actions #backToRiskmapBtn:focus {
  refresh();render();
 })();
 </script>
+
+<style id="dss-easy-wizard-css">
+.dss-easy-intro{background:#f8f3fd;border:1px solid #e3d6ef;padding:12px;margin:10px 0 14px}
+.dss-easy-intro strong{display:block;color:#532284;font-size:19px}
+.dss-easy-intro p{margin:3px 0;font-size:14px}
+.dss-easy-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin:10px 0}
+.dss-easy-step{border:1px solid #d8cbe4!important;background:#fff!important;color:#502279!important;border-radius:7px!important;padding:8px 4px!important;font-size:12px!important;white-space:normal;line-height:1.45}
+.dss-easy-step[aria-current="step"]{background:#64249b!important;color:#fff!important;border-color:#64249b!important}
+.dss-easy-select{padding:12px;border:1px solid #dfd5e6;background:#fff;margin:0 0 12px}
+.dss-easy-select label{font-weight:700;color:#502279;font-size:15px;display:block;margin-bottom:5px}
+.dss-easy-select select{width:100%;padding:9px;border:1px solid #b8adc5;background:#fff;font:inherit}
+.dss-easy-actions{display:flex;gap:8px;margin-top:16px;border-top:1px solid #e6dce9;padding-top:14px}
+.dss-easy-actions button{flex:1;background:#64249b!important;color:white!important;padding:10px!important;border-radius:8px!important}
+.dss-easy-actions button:disabled{background:#c8b7d5!important}
+.editor [data-easy-stage]:not(.dss-easy-show){display:none!important}
+.dss-easy-complete{padding:10px;background:#f1f8f4;border-left:3px solid #197448;font-size:14px}
+@media(max-width:520px){.dss-easy-step{font-size:11px!important}.dss-easy-steps{gap:3px}}
+</style>
+<script id="dss-easy-wizard-js">
+(function(){
+ const editor=document.querySelector('.editor'),form=document.getElementById('form');
+ if(!editor||!form||document.getElementById('dssEasyWizard'))return;
+ const searchField=document.getElementById('factoryLookup')?.closest('.field');
+ const bufferField=document.getElementById('bufferKm')?.closest('.field');
+ const names=['เลือกเหตุและค้นหา','ข้อมูลเหตุการณ์','ตำแหน่งและอากาศ','ข้อมูลสนับสนุน'];
+ const box=document.createElement('div');box.id='dssEasyWizard';
+ box.innerHTML='<div class="dss-easy-intro"><strong id="dssEasyTitle">ขั้นตอนที่ 1 · เลือกเหตุและค้นหา</strong><p id="dssEasyText">เลือกประเภทเหตุ แล้วค้นหาบริษัทหรือนิคมอุตสาหกรรม</p></div><nav class="dss-easy-steps" aria-label="ขั้นตอนทำรายงาน"></nav><div class="dss-easy-select"><label for="dssEasyEvent">1. เลือกประเภทเหตุการณ์</label><select id="dssEasyEvent"><option value="เหตุเพลิงไหม้">เหตุเพลิงไหม้</option><option value="สารเคมีรั่วไหล">สารเคมีรั่วไหล</option><option value="เหตุเพลิงไหม้ร่วมกับสารเคมีรั่วไหล">เพลิงไหม้ร่วมกับสารเคมีรั่วไหล</option></select><p class="hint">เมื่อเลือกประเภทเหตุ ระบบจะปรับข้อมูลประกอบให้เหมาะสม</p></div>';
+ const steps=box.querySelector('nav');
+ names.forEach((name,i)=>{const b=document.createElement('button');b.type='button';b.className='dss-easy-step';b.textContent=(i+1)+'. '+name;b.onclick=()=>show(i);steps.append(b)});
+ const buttons=document.createElement('div');buttons.className='dss-easy-actions';
+ buttons.innerHTML='<button type="button" id="dssEasyBack">← ย้อนกลับ</button><button type="button" id="dssEasyNext">ถัดไป →</button>';
+ const finish=document.createElement('p');finish.className='dss-easy-complete';finish.textContent='ตรวจสอบรายงานทางด้านขวา แล้วกด “ดาวน์โหลด PNG” ที่แถบด้านบน';finish.hidden=true;
+ editor.querySelector('h2')?.after(box);
+ editor.append(buttons,finish);
+ searchField?.setAttribute('data-easy-stage','0');
+ bufferField?.setAttribute('data-easy-stage','2');
+ Array.from(form.children).forEach(child=>{
+  if(child.classList.contains('group')){
+   const heading=child.querySelector('h3')?.textContent||'';
+   const stage=heading.includes('ข้อมูลเอกสาร')||heading.includes('สถานประกอบการและเหตุการณ์')?1:heading.includes('ตำแหน่งและอากาศ')?2:3;
+   child.setAttribute('data-easy-stage',String(stage));
+  }else child.setAttribute('data-easy-stage','3');
+ });
+ const selector=document.getElementById('dssEasyEvent');
+ const actual=document.getElementById('event');
+ function syncSelector(){if(actual&&selector.value!==actual.value){
+   if([...selector.options].some(o=>o.value===actual.value))selector.value=actual.value;
+ }}
+ selector.addEventListener('change',()=>{if(actual){actual.value=selector.value;actual.dispatchEvent(new Event('input',{bubbles:true}));actual.dispatchEvent(new Event('change',{bubbles:true}))}});
+ actual?.addEventListener('change',syncSelector);
+ const hints=['เลือกประเภทเหตุ แล้วพิมพ์ชื่อบริษัท/นิคมฯ หรือเลขทะเบียน และกดค้นหาและวิเคราะห์','ตรวจสอบชื่อสถานประกอบการ ระบุวันเวลาและรายละเอียดเหตุการณ์','ตรวจสอบพิกัด กำหนดรัศมี แล้วกดอัปเดตแผนที่และดึงสภาพอากาศ','ตรวจสอบข้อมูลสนับสนุนและข้อมูลสารเคมี (ถ้ามี) ก่อนดาวน์โหลดรายงาน'];
+ let index=0;
+ function show(next){
+  index=Math.max(0,Math.min(3,next));
+  document.querySelectorAll('.editor [data-easy-stage]').forEach(el=>el.classList.toggle('dss-easy-show',Number(el.getAttribute('data-easy-stage'))===index));
+  box.querySelector('.dss-easy-select').hidden=index!==0;
+  box.querySelector('#dssEasyTitle').textContent='ขั้นตอนที่ '+(index+1)+' · '+names[index];
+  box.querySelector('#dssEasyText').textContent=hints[index];
+  [...steps.children].forEach((b,i)=>b.setAttribute('aria-current',i===index?'step':'false'));
+  document.getElementById('dssEasyBack').disabled=index===0;
+  document.getElementById('dssEasyNext').textContent=index===3?'ตรวจสอบรายงาน ✓':'ถัดไป →';
+  finish.hidden=index!==3;
+  editor.scrollIntoView({behavior:'smooth',block:'start'});
+ }
+ document.getElementById('dssEasyBack').onclick=()=>show(index-1);
+ document.getElementById('dssEasyNext').onclick=()=>{if(index===3){document.getElementById('report')?.scrollIntoView({behavior:'smooth',block:'start'});return}show(index+1)};
+ syncSelector();
+ show(0);
+})();
+</script>
+
 </body></html>
 
