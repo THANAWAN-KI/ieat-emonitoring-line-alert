@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "period": "24h",
-  "date": "2026-10-08",
-  "time": "23:00:00",
+  "date": "2026-10-09",
+  "time": "04:00:00",
   "type": "แผนที่แสดงพื้นที่เสี่ยงน้ำท่วมฉับพลัน (รายตำบล)ใน 24 ชม. ข้างหน้า จากปริมาณฝนสะสมที่สถานีโทรมาตร",
   "source_url": "https://api.hii.or.th/v2/4UQaYnf0Bx4fXPYyCdDRbqHyXH9Ixvd2nVUjaN1cLBY=/warning/flashflood-24h",
   "area_count": 0,
