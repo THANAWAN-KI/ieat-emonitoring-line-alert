@@ -884,7 +884,7 @@ function updateMap(){
   const spanKm=radius*1.35,spanLat=spanKm/111.2,spanLng=spanLat*width/height/Math.cos(lat*Math.PI/180);
   const bbox=[lng-spanLng,lat-spanLat,lng+spanLng,lat+spanLat].map(n=>n.toFixed(6)).join(',');
   mapLoadPromise=new Promise(resolve=>{mapImage.onload=resolve;mapImage.onerror=resolve});
-  mapImage.src='https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/export?bbox='+bbox+'&bboxSR=4326&imageSR=4326&size='+Math.round(width)+','+Math.round(height)+'&format=png32&f=image';
+  mapImage.src='https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/export?bbox='+bbox+'&bboxSR=4326&imageSR=4326&size='+Math.round(width)+','+Math.round(height)+'&format=png32&f=image';
   clearTimeout(mapImage.dssLoadTimeout);
   const requestedMapImage=mapImage.src;
   mapImage.dssLoadTimeout=setTimeout(()=>{if(!mapImage.complete&&mapImage.src===requestedMapImage)mapImage.removeAttribute('src');},12000);
@@ -1598,9 +1598,10 @@ async function downloadReportPng(){
  const tileOptions={maxZoom:19,crossOrigin:true,attribution:'Tiles © Esri'};
  window.dssLeafletMap=live;
  const basemap=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',tileOptions);
- const terrain=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',tileOptions).addTo(live);
- let activeBasemap=terrain;
- const layerControl=L.control.layers({'ภาพถ่ายดาวเทียม':basemap,'ภูมิประเทศ':terrain},{},{position:'topright'}).addTo(live);
+ const terrain=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',tileOptions);
+ const light=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',{...tileOptions,maxNativeZoom:16}).addTo(live);
+ let activeBasemap=light;
+ const layerControl=L.control.layers({'พื้นหลังเทาอ่อน':light,'ภูมิประเทศ':terrain,'ภาพถ่ายดาวเทียม':basemap},{},{position:'topright'}).addTo(live);
  live.on('baselayerchange',event=>{activeBasemap=event.layer});
 
  window.dssWaitMapReady=async function(){
@@ -2252,5 +2253,13 @@ html body #report .map-caption,html body #report .dss-support-legend{background:
 html body #supportList button{background:#fff!important;border-color:#e3e3de!important}
 html body #dssNearbyPanel{background:#fff!important;border-color:#e3e3de!important}
 html body #report #supportGrid .row:hover,html body #report #supportGrid .row:focus{background:#faf4f3!important;outline-color:#cb202d!important}
+</style><style id="dss-close-balanced-columns">
+html body .workspace{grid-template-columns:minmax(360px,420px) minmax(0,1fr)!important;max-width:1600px!important;gap:10px!important;padding:0 12px!important}
+html body .report-wrap{margin-top:0!important}
+html body #report{max-width:none!important;margin:0!important}
+html body .editor #dssIncidentMode{padding:18px 16px!important}
+html body .editor #factoryLookup{min-width:0!important;width:100%!important;flex:1 1 220px!important}
+@media(max-width:1000px){html body .workspace{grid-template-columns:320px minmax(0,1fr)!important}}
+@media(max-width:850px){html body .workspace{grid-template-columns:minmax(0,1fr)!important;gap:12px!important}}
 </style></body></html>
 
