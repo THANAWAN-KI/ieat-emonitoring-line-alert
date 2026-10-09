@@ -1636,7 +1636,7 @@ async function downloadReportPng(){
  };
  window.dssZoomSupport=function(type,id){
   const item=(state.supportLocations||[]).filter(p=>p.type===type&&(id===undefined||p.id===id)).sort((a,b)=>a.distance-b.distance)[0];if(!item)return;
-  live.setView([item.lat,item.lng],16,{animate:false});supportMarkers.get(item.type+':'+item.id)?.openPopup();
+  const box=node.getBoundingClientRect();if(box.top<0||box.bottom>window.innerHeight)node.scrollIntoView({block:'center',behavior:'smooth'});live.setView([item.lat,item.lng],16,{animate:false});supportMarkers.get(item.type+':'+item.id)?.openPopup();
  };
  const pin=L.marker([Number(state.lat),Number(state.lng)],{icon:L.divIcon({className:'dss-incident-marker',html:'<div class="dss-incident-pin"></div>',iconSize:[22,30],iconAnchor:[11,30],tooltipAnchor:[0,-30]}),draggable:true,zIndexOffset:1000}).addTo(live);
  window.dssPlaceIncidentPoint=function(lat,lng){pin.setLatLng([lat,lng]);if(!live.hasLayer(pin))pin.addTo(live);pin.setZIndexOffset(2000);live.invalidateSize();live.setView([lat,lng],Math.max(live.getZoom(),14),{animate:false});};
@@ -2148,7 +2148,7 @@ html body #report .note{background:#f7f9fb!important;border:1px solid #d4dce5!im
 html body #report .note b{color:#17324f!important;-webkit-text-fill-color:#17324f!important;font-weight:600!important}
 @media print{html body #report{box-shadow:none!important}}
 </style><style id="dss-three-column-workspace">
-html body .workspace{display:grid!important;grid-template-columns:minmax(240px,290px) minmax(0,1fr) minmax(220px,270px)!important;max-width:1900px!important;padding:0 16px!important;gap:16px!important;align-items:start!important}
+html body .workspace{display:grid!important;grid-template-columns:minmax(320px,360px) minmax(0,1fr) minmax(220px,270px)!important;max-width:2100px!important;padding:0 16px!important;gap:16px!important;align-items:start!important}
 html body .report-wrap{width:100%!important;min-width:0!important;overflow:visible!important}
 html body #report{width:100%!important;max-width:none!important;min-width:0!important;padding:28px 26px!important}
 html body .editor{min-width:0!important}
@@ -2158,11 +2158,26 @@ html body #supportList{margin:0;gap:7px}
 html body #supportList .hint{font-size:13px;color:#526176;line-height:1.6;margin:0 0 6px}
 html body #supportList button{width:100%;font-size:14px;line-height:1.6;padding:9px 10px;text-align:left;white-space:normal;overflow-wrap:anywhere;background:#f7f9fb;color:#253449;border:1px solid #d4dce5;border-radius:6px}
 html body #supportList button:hover,html body #supportList button:focus-visible{background:#edf4f8;border-color:#537f99}
-@media(max-width:1250px){html body .workspace{grid-template-columns:240px minmax(0,1fr)!important}html body #dssNearbyPanel{grid-column:2;position:static;max-height:480px}html body #report{padding:24px 20px!important}}
+@media(max-width:1250px){html body .workspace{grid-template-columns:320px minmax(0,1fr)!important}html body #dssNearbyPanel{grid-column:2;position:static;max-height:480px}html body #report{padding:24px 20px!important}}
 @media(max-width:850px){html body .workspace{display:grid!important;grid-template-columns:minmax(0,1fr)!important}html body .editor{position:static;max-height:none}html body #dssNearbyPanel{grid-column:auto;position:static}html body #report .company .row{grid-template-columns:150px minmax(0,1fr)!important}}
 @media print{html body .workspace{display:block!important}html body #dssNearbyPanel{display:none!important}}
 </style>
 <script id="dss-three-column-map-resize">
 (function(){const map=document.getElementById('dssLiveMap');if(map&&window.ResizeObserver){new ResizeObserver(()=>{window.dssLeafletMap?.invalidateSize({pan:false})}).observe(map)}})();
+</script><style id="dss-nearby-map-alignment">
+html body #dssNearbyPanel{margin-top:var(--dss-map-offset,0px);max-height:var(--dss-map-panel-height,520px)}
+html body .editor h2{font-size:19px;line-height:1.5}
+@media(max-width:1250px){html body #dssNearbyPanel{margin-top:0;max-height:480px}}
+</style>
+<script id="dss-nearby-map-alignment-script">
+(function(){
+ const workspace=document.querySelector('.workspace'),report=document.getElementById('report'),panel=document.getElementById('dssNearbyPanel'),map=document.querySelector('#report .mapbox');
+ if(!workspace||!report||!panel||!map)return;
+ let pending=false;
+ function align(){pending=false;if(window.innerWidth<=1250){panel.style.removeProperty('--dss-map-offset');return}const offset=Math.max(0,map.getBoundingClientRect().top-workspace.getBoundingClientRect().top);panel.style.setProperty('--dss-map-offset',offset+'px');panel.style.setProperty('--dss-map-panel-height',Math.max(320,map.getBoundingClientRect().height)+'px')}
+ function schedule(){if(!pending){pending=true;requestAnimationFrame(align)}}
+ if(window.ResizeObserver){const observer=new ResizeObserver(schedule);observer.observe(report);observer.observe(map)}
+ window.addEventListener('resize',schedule);document.fonts?.ready.then(schedule);schedule();
+})();
 </script></body></html>
 
