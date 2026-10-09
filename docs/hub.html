@@ -43,7 +43,9 @@
 </style>
 <style id="hide-header-weather-clock">#disasterWeatherButton{display:none!important}</style>
 <link rel="stylesheet" href="./disaster-mobile.css?v=20261007-plans54-mobile3">
-</head>
+<style id="dss-status-cards-style">
+#riskDashboard #dssStatusSection{margin:8px 0 24px}#riskDashboard .dss-status-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}#riskDashboard .dss-status-heading h2{font-size:18px;font-weight:500;color:#52057f;margin:0}#riskDashboard .dss-status-heading a{font-size:12px;color:#335238;background:#dbeede;padding:8px 12px;border-radius:8px;text-decoration:none}#riskDashboard .dss-status-cards{grid-template-columns:repeat(4,minmax(0,1fr));margin:14px 0 10px}#riskDashboard .dss-status-cards .inventory-card{cursor:default}#riskDashboard .dss-status-icon{display:flex;justify-content:center;align-items:center;width:44px;height:44px;border-radius:12px;background:#f4f2f6;color:var(--accent);font-size:28px;font-style:normal}#riskDashboard #dssStatusNote{font-size:12px;line-height:1.6;margin-top:10px}#riskDashboard #dssStatusScope{font-size:12px;margin-top:6px}@media(max-width:760px){#riskDashboard .dss-status-cards{grid-template-columns:repeat(2,minmax(0,1fr))}#riskDashboard .dss-status-heading{flex-wrap:wrap}}@media(max-width:360px){#riskDashboard .dss-status-cards .inventory-card{padding:10px}#riskDashboard .dss-status-icon{width:32px;height:32px}}
+</style></head>
 <body>
 <header class="portal-header" id="ieatPortalHeader"><a class="brand" href="./hub.html"><img src="./assets/TH-Vertical.png" alt="กนอ."><span><strong>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย</strong></span></a><div class="portal-top"><div class="disaster-header-tools"><button type="button" id="disasterExecutiveButton" class="disaster-executive-link" aria-expanded="false" aria-controls="disasterExecutivePop">สรุปนิคมฯ เฝ้าระวัง ▾</button><div class="disaster-scope-wrap"><button type="button" id="disasterScope" class="disaster-scope" aria-expanded="false" aria-controls="disasterEstatePop"><span id="disasterScopeLabel">พื้นที่นิคมอุตสาหกรรมทั่วประเทศ</span><span aria-hidden="true">⌄</span></button><div id="disasterEstatePop" class="disaster-estate-pop" hidden><input id="disasterEstateSearch" type="search" placeholder="ค้นหาชื่อนิคมอุตสาหกรรม" aria-label="ค้นหาชื่อนิคมอุตสาหกรรม"><div id="disasterEstateList" class="disaster-estate-list"></div></div></div></div><nav class="header-nav" aria-label="เมนูหลัก"><a href="./daily-situation.html">หน้าแรก</a><a href="./information.html#overview">ข้อมูล</a><a class="nav-active" aria-current="page" href="./hub.html">ภัยพิบัติ</a></nav></div><section id="disasterWeatherPop" class="disaster-weather-pop" aria-label="สภาพอากาศในพื้นที่" hidden><div class="disaster-weather-grid"><article><img src="./assets/extreme-rain-fill.png" alt=""><b id="disasterWeather-rain">กำลังโหลด</b><span>ปริมาณฝน</span></article><article><img src="./assets/humidity-fill.png" alt=""><b id="disasterWeather-humidity">กำลังโหลด</b><span>ความชื้นสัมพัทธ์</span></article><article><img src="./assets/windsock.png" alt=""><b id="disasterWeather-direction">กำลังโหลด</b><span>ทิศทางลม</span></article><article><img src="./assets/wind-onshore-fill.png" alt=""><b id="disasterWeather-wind">กำลังโหลด</b><span>ความเร็วลม</span></article></div><p id="disasterWeatherNote" role="status"></p><a href="https://open-meteo.com/" target="_blank" rel="noopener">ข้อมูลอากาศจาก Open-Meteo</a></section></header>
 <div id="disasterExecutivePop" class="disaster-executive-pop" role="dialog" aria-label="สรุปนิคมฯ และสถานการณ์น้ำ" hidden><iframe id="disasterExecutiveFrame" title="สรุปนิคมตามพื้นที่ที่เลือก"></iframe></div>
@@ -53,6 +55,17 @@
 
 <section class="filter-bar" aria-label="ตัวกรอง Dashboard"><label>นิคมอุตสาหกรรม<select id="estate"><option value="">ทุกนิคมอุตสาหกรรม</option></select></label><label>ประเภทข้อมูล<select id="type"><option value="">ข้อมูลทุกประเภท</option></select></label><label>กลุ่มความเสี่ยง<select id="risk"><option value="">ทุกกลุ่ม</option><option value="ความเสี่ยง_12_ประเภท">ความเสี่ยงสูง 12 ประเภท</option><option value="อัคคีภัยสูง">อัคคีภัยสูง</option><option value="PSM">โรงงาน PSM</option></select></label><label class="map-search">ค้นหาข้อมูลบนแผนที่<input id="search" placeholder="ชื่อนิคมฯ ผู้ประกอบการ หรือสถานที่" autocomplete="off"></label><button id="searchButton" type="button">ค้นหา</button><button id="reset" type="button">ล้างตัวกรอง</button><button id="refresh" type="button" aria-label="โหลดข้อมูลใหม่">↻</button><a class="report-button" id="openEmergencyReport" href="./dss.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h6"/></svg>เปิดหน้าจัดทำรายงานเหตุฉุกเฉิน</a></section>
 <section id="inventory" class="inventory" aria-label="จำนวนข้อมูลทั้ง 8 ประเภท"></section>
+
+<section id="dssStatusSection" aria-labelledby="dssStatusTitle">
+<div class="dss-status-heading"><h2 id="dssStatusTitle">สถานะชุดข้อมูล DSS</h2><a id="dssStatusSource" target="_blank" rel="noopener">เปิดรายงานต้นทาง ↗</a></div>
+<p id="dssStatusScope" class="panel-note">รายงานวันที่ 1–31 ตุลาคม 2569 · ทุกนิคมอุตสาหกรรม</p>
+<div class="inventory dss-status-cards">
+<article class="inventory-card" style="--accent:#598c14"><span class="card-label">อนุมัติแล้ว</span><div class="card-value"><i class="dss-status-icon" aria-hidden="true">✓</i><strong id="dssApproved">…</strong></div><small>รายการ</small></article>
+<article class="inventory-card" style="--accent:#4a8594"><span class="card-label">อยู่ระหว่างการตรวจสอบ</span><div class="card-value"><i class="dss-status-icon" aria-hidden="true">⌕</i><strong id="dssReview">…</strong></div><small>รายการ</small></article>
+<article class="inventory-card" style="--accent:#ff6908"><span class="card-label">อยู่ระหว่างการจัดทำ</span><div class="card-value"><i class="dss-status-icon" aria-hidden="true">✎</i><strong id="dssDraft">…</strong></div><small>รายการ</small></article>
+<article class="inventory-card" style="--accent:#f00a36"><span class="card-label">ไม่มีชุดข้อมูล</span><div class="card-value"><i class="dss-status-icon" aria-hidden="true">—</i><strong id="dssNone">…</strong></div><small>รายการในช่วงวันที่รายงาน</small></article>
+</div><p id="dssStatusNote" class="panel-note" role="status">กำลังโหลดสถานะจากรายงาน DSS…</p>
+</section>
 <section class="analytics-top">
 <article class="panel"><div class="panel-title">ข้อมูลความเสี่ยงผู้ประกอบการ</div><div class="panel-content"><table class="risk-table"><thead><tr><th>กลุ่มความเสี่ยง</th><th>รายการ</th><th>เกณฑ์ต้นทาง</th></tr></thead><tbody id="riskTableBody"></tbody></table><div class="risk-summary"><span><strong id="riskTotal">…</strong>เข้าข่ายอย่างน้อย 1 กลุ่ม</span><span><strong id="riskUnmarked">…</strong>ไม่ได้ระบุเข้าข่าย</span></div><p class="panel-note">แต่ละกลุ่มอาจมีรายการซ้ำกัน นับตามฟิลด์ที่ระบุ “เข้าข่าย” ในฐานข้อมูลผู้ประกอบการ</p></div></article>
 <article class="panel"><div class="panel-title">สัดส่วนการระบุความเสี่ยง</div><div class="panel-content"><div id="riskDonut"></div><p class="panel-note">การไม่ได้ระบุเข้าข่ายไม่ใช่การยืนยันว่าโรงงานมีความเสี่ยงต่ำ</p></div></article>
@@ -231,5 +244,28 @@ html body .portal-disaster-tabs .nav-tab.active:hover{background:#158f63}
  });
 })();
 </script>
+<script id="dss-status-cards-script">(() => {
+'use strict';
+const get=id=>document.getElementById(id),source=get('estate'),number=n=>Number(n).toLocaleString('th-TH');
+const fields={approved:'dssApproved',review:'dssReview',draft:'dssDraft',none:'dssNone'};
+const normalize=value=>String(value||'').normalize('NFKC').toLowerCase().replace(/นิคมอุตสาหกรรม|นิคมฯ|สำนักงานนิคมฯ|[\s\u200b-\u200d]/g,'').trim();
+let data=null,error='';
+function render(){
+ const label=source.value?(source.selectedOptions[0]?.textContent||source.value):'ทุกนิคมอุตสาหกรรม';
+ get('dssStatusScope').textContent='รายงานวันที่ 1–31 ตุลาคม 2569 · '+label;
+ const matches=data?.estates.filter(e=>normalize(e.name)===normalize(label))||[];
+ const counts=data?(source.value?(matches.length===1?matches[0]:null):data.counts):null;
+ Object.entries(fields).forEach(([key,id])=>get(id).textContent=counts?number(counts[key]):data||error?'—':'…');
+ if(error){get('dssStatusNote').textContent='โหลดสถานะ DSS ไม่สำเร็จ กรุณารีเฟรชหน้า';return;}
+ if(!data)return;
+ if(!counts){get('dssStatusNote').textContent='ไม่พบชื่อพื้นที่ที่ตรงกันในรายงาน DSS จึงยังไม่แสดงยอดของพื้นที่นี้';return;}
+ const updated=new Date(data.retrievedAt).toLocaleString('th-TH',{timeZone:'Asia/Bangkok',day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+ get('dssStatusNote').textContent='รวม '+number(counts.total)+' รายการ · ขอข้อมูลเพิ่ม '+number(counts.more)+' รายการ (แสดงแยกจาก 4 การ์ด) · ดึงรายงานเมื่อ '+updated+' น. · “ไม่มีชุดข้อมูล” หมายถึงไม่มีชุดข้อมูลในช่วงวันที่รายงาน ไม่ใช่การยืนยันว่าไม่เคยมีข้อมูล DSS';
+}
+source.addEventListener('change',render);source.addEventListener('input',render);new MutationObserver(render).observe(source,{childList:true,subtree:true});
+(async()=>{try{const response=await fetch('./data/dss-report-status.json',{cache:'no-store',signal:AbortSignal.timeout(20000)});if(!response.ok)throw Error('HTTP '+response.status);const result=await response.json();if(result.schemaVersion!==1||result.period!=='2026-10'||!Array.isArray(result.estates)||!result.sourceUrl||!result.retrievedAt)throw Error('Invalid DSS snapshot');const valid=c=>['approved','review','draft','none','more','total'].every(k=>Number.isInteger(c[k])&&c[k]>=0)&&c.approved+c.review+c.draft+c.none+c.more===c.total;if(!valid(result.counts)||!result.estates.every(valid)||result.estates.reduce((sum,e)=>sum+e.total,0)!==result.counts.total)throw Error('DSS counts mismatch');data=result;get('dssStatusSource').href=result.sourceUrl;}catch(e){error=e.message;console.warn('DSS status report',e);}render();})();
+})();
+</script>
 </body></html>
+
 
