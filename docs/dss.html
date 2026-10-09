@@ -1266,41 +1266,143 @@ async function getDssFieldMetadata(){
   return dssMetadataPromise;
 }
 let nearbySequence=0;
-async function loadDssNearby(lat,lng){
-  if(!validPoint())return;const sequence=++nearbySequence,radius=Number(state.bufferKm)||3;
-  state.nearbyLocationKey=lat.toFixed(5)+','+lng.toFixed(5);state.nearbyTime='กำลังปรับปรุงข้อมูล';state.supportLocations=[];['hospital','fire','police','hydrant','community','cctv'].forEach(type=>{state[type+'Name']='กำลังค้นหาข้อมูล…';state[type+'Distance']='—'});render();if(window.dssSyncSupportMarkers)window.dssSyncSupportMarkers();
-  const base='https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/';
-  const sources=[['hospital','Hospital_Locations/FeatureServer/0','โรงพยาบาล'],['fire','Risk_Map_WFL1/FeatureServer/3','Name'],['police','Risk_Map_WFL1/FeatureServer/5','Name'],['hydrant','Risk_Map_WFL1/FeatureServer/4','Name'],['community','Map/FeatureServer/1','Name'],['cctv','ตำแหน่งกล้องCCTV/FeatureServer/7','Name']];
-  await Promise.all(sources.map(async([type,path,nameField])=>{
-    try{
-      const countOnly=type==='community'||type==='cctv';
-      const params=new URLSearchParams({where:'1=1',geometry:JSON.stringify({x:lng,y:lat,spatialReference:{wkid:4326}}),geometryType:'esriGeometryPoint',inSR:'4326',spatialRel:'esriSpatialRelIntersects',distance:String(countOnly?radius:50),units:'esriSRUnit_Kilometer',outFields:'*',returnGeometry:'true',outSR:'4326',f:'json',resultRecordCount:'2000'});
-      const response=await fetch(base+path+'/query?'+params,{signal:AbortSignal.timeout(12000)});if(!response.ok)throw Error('HTTP '+response.status);
-      const data=await response.json();if(data.error)throw Error(data.error.message);
-      let total=(data.features||[]).length;
-      if(countOnly&&data.exceededTransferLimit){const countParams=new URLSearchParams(params);countParams.set('returnCountOnly','true');const countResponse=await fetch(base+path+'/query?'+countParams,{signal:AbortSignal.timeout(12000)});const countData=await countResponse.json();if(countData.error||!Number.isFinite(countData.count))throw Error('count unavailable');total=countData.count}
-      const mapCandidates=(data.features||[]).map((feature,index)=>{
-        const g=feature.geometry||{},a=feature.attributes||{};let x=g.x,y=g.y;
-        if(g.rings){const p=factoryGeometryPoint(g);if(p)[x,y]=p}
-        const rad=Math.PI/180,h=Math.sin((y-lat)*rad/2)**2+Math.cos(lat*rad)*Math.cos(y*rad)*Math.sin((x-lng)*rad/2)**2;
-        const contactField=['เบอร์โทรศัพท์','เบอร์ติดต่อ','โทรศัพท์','เบอร์โทร','Phone','PHONE','phone','Tel','tel','TEL'].find(key=>a[key]&&String(a[key]).trim());
-        const phone=contactField?String(a[contactField]).trim():'';
-        return {id:a.OBJECTID||a.FID||index,type,name:String(a[nameField]||a.Name||a.NAME||a.ชื่อ||a.PopupInfo||supportMapTypes()[type].label),lng:x,lat:y,distance:6371*2*Math.asin(Math.min(1,Math.sqrt(h))),phone:/^[\d+()\s.-]{8,25}$/.test(phone)?phone:'',detail:String(a['ที่อยู่']||a.Address||'').slice(0,140)};
-      }).filter(item=>Number.isFinite(item.distance)&&item.lng>=97&&item.lng<=106&&item.lat>=5&&item.lat<=22).sort((a,b)=>a.distance-b.distance);
-      if(sequence!==nearbySequence||Number(state.lat)!==Number(lat)||Number(state.lng)!==Number(lng))return;
-      state.supportLocations.push(...(countOnly?mapCandidates:mapCandidates.filter((item,index)=>index===0||item.distance<=radius)));
-      if(countOnly){
-        state[type+'Name']=(type==='community'?'ชุมชน':'กล้อง CCTV')+' ในรัศมี '+radius+' กม.';state[type+'Distance']=Number(total).toLocaleString('th-TH')+(type==='community'?' แห่ง':' จุด');
-      }else{
-        const candidates=mapCandidates;
-        state[type+'Name']=candidates[0]?.name||'ไม่พบข้อมูลในรัศมี 50 กม.';
-        state[type+'Distance']=candidates[0]?(type==='hydrant'?Math.round(candidates[0].distance*1000).toLocaleString('th-TH')+' เมตร':candidates[0].distance.toFixed(2)+' กม.'):'—';
-      }
-    }catch(error){if(sequence===nearbySequence&&Number(state.lat)===Number(lat)&&Number(state.lng)===Number(lng)){state[type+'Name']='โหลดข้อมูลไม่สำเร็จ';state[type+'Distance']='—'}console.warn('DSS nearby '+type,error)}
+const dssSupportBase='https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/';
+const dssSupportRoots=[
+ {path:'Hospital_Locations/FeatureServer',types:['hospital']},
+ {path:'Risk_Map_WFL1/FeatureServer',types:['fire','police','hydrant','community']},
+ {path:'ตำแหน่งกล้องCCTV/FeatureServer',types:['cctv']}
+];
+const dssSupportPatterns={
+ hospital:/hospital|โรงพยาบาล|สถานพยาบาล/i,
+ fire:/fire.?station|fire.?brigade|ดับเพลิง|สถานีดับเพลิง|สถานีป้องกัน/i,
+ police:/police|ตำรวจ|สถานีตำรวจ/i,
+ hydrant:/hydrant|fire.?hydrant|หัวจ่ายน้ำ|หัวดับเพลิง|ประปาหัวแดง/i,
+ community:/community|communities|ชุมชน|หมู่บ้าน/i,
+ cctv:/cctv|camera|กล้อง/i
+};
+let dssSupportCatalogPromise=null;
+async function dssSupportJSON(url,timeout=12000){
+ const response=await fetch(url,{signal:AbortSignal.timeout(timeout)});
+ if(!response.ok)throw Error('HTTP '+response.status);
+ const data=await response.json();
+ if(data.error)throw Error(data.error.message||'ArcGIS returned an error');
+ return data;
+}
+async function dssSupportCatalog(){
+ if(!dssSupportCatalogPromise)dssSupportCatalogPromise=(async()=>{
+  const groups=await Promise.all(dssSupportRoots.map(async root=>{
+   const service=await dssSupportJSON(dssSupportBase+root.path+'?f=json');
+   return (service.layers||[]).filter(layer=>!layer.subLayerIds?.length).map(layer=>({
+     path:root.path+'/'+layer.id,title:String(layer.name||''),root:root.path,types:root.types
+   }));
   }));
-  if(sequence===nearbySequence&&Number(state.lat)===Number(lat)&&Number(state.lng)===Number(lng)){state.nearbyTime='ค้นหาข้อมูล ณ '+new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'})+' (เวลาไทย) · โรงพยาบาล/ดับเพลิง/ตำรวจ/หัวจ่ายน้ำ: ค้นหาใกล้ที่สุดภายใน 50 กม. · ชุมชน/CCTV: รัศมีที่เลือก';render();if(window.dssSyncSupportMarkers)window.dssSyncSupportMarkers();
-    const radius=Math.max(...getBufferRadii()),spanLat=radius*1.35/111.2,spanLng=spanLat*(mapNode.clientWidth||800)/(mapNode.clientHeight||560)/Math.cos(lat*Math.PI/180);renderStaticSupportPoints(lat,lng,spanLat,spanLng);
+  const layers=groups.flat();
+  if(!layers.length)throw Error('FeatureServer ไม่ส่งรายชื่อชั้นข้อมูล');
+  return layers;
+ })().catch(error=>{dssSupportCatalogPromise=null;throw error});
+ return dssSupportCatalogPromise;
+}
+function dssSupportTypeMatch(type,layer){
+ const name=layer.title+' '+(layer.description||'');
+ return layer.types.includes(type)&&dssSupportPatterns[type].test(name);
+}
+function dssSupportName(attrs,type,displayField){
+ const preferred=[displayField,'Name','NAME','name','ชื่อ','ชื่อสถานี','ชื่อโรงพยาบาล','ชื่อหน่วยงาน','สถานที่','Station_Name','station_name','PopupInfo'];
+ for(const key of preferred){if(key&&attrs[key]!==null&&attrs[key]!==undefined&&String(attrs[key]).trim())return String(attrs[key]).trim().slice(0,200)}
+ return supportMapTypes()[type]?.label||type;
+}
+function dssSupportPoint(geometry){
+ if(!geometry)return null;
+ if(Number.isFinite(Number(geometry.x))&&Number.isFinite(Number(geometry.y)))return [Number(geometry.x),Number(geometry.y)];
+ const groups=geometry.rings||geometry.paths||geometry.points;
+ if(!Array.isArray(groups)||!groups.length)return null;
+ const coordinates=geometry.points?groups:groups.flat();
+ const valid=coordinates.filter(p=>Array.isArray(p)&&Number.isFinite(Number(p[0]))&&Number.isFinite(Number(p[1])));
+ if(!valid.length)return null;
+ return [valid.reduce((sum,p)=>sum+Number(p[0]),0)/valid.length,valid.reduce((sum,p)=>sum+Number(p[1]),0)/valid.length];
+}
+function dssSupportDistanceKm(lat,lng,y,x){
+ const dLat=(y-lat)*Math.PI/180,dLng=(x-lng)*Math.PI/180;
+ const h=Math.sin(dLat/2)**2+Math.cos(lat*Math.PI/180)*Math.cos(y*Math.PI/180)*Math.sin(dLng/2)**2;
+ return 6371*2*Math.asin(Math.min(1,Math.sqrt(h)));
+}
+async function dssSupportQuery(layer,type,lat,lng,radius){
+ const bboxKm=type==='community'||type==='cctv'?radius:50;
+ const dLat=bboxKm/110.7,dLng=bboxKm/(111.32*Math.max(.2,Math.cos(lat*Math.PI/180)));
+ const rect={xmin:lng-dLng,ymin:lat-dLat,xmax:lng+dLng,ymax:lat+dLat,spatialReference:{wkid:4326}};
+ const params=new URLSearchParams({where:'1=1',geometry:JSON.stringify(rect),geometryType:'esriGeometryEnvelope',inSR:'4326',spatialRel:'esriSpatialRelIntersects',outFields:'*',returnGeometry:'true',outSR:'4326',resultRecordCount:'2000',f:'json'});
+ const data=await dssSupportJSON(dssSupportBase+layer.path+'/query?'+params,15000);
+ const features=Array.isArray(data.features)?data.features:[];
+ const candidates=features.map((feature,index)=>{
+  const a=feature.attributes||{},p=dssSupportPoint(feature.geometry);
+  if(!p)return null;
+  const [x,y]=p;if(x<97||x>106||y<5||y>22)return null;
+  const distance=dssSupportDistanceKm(lat,lng,y,x);
+  if(distance>bboxKm)return null;
+  const phoneKeys=['เบอร์โทรศัพท์','เบอร์ติดต่อ','หมายเลขโทรศัพท์','โทรศัพท์','Phone','PHONE','phone','Tel','tel','TEL','Telephone','contact'];
+  const raw=phoneKeys.map(k=>a[k]).find(v=>v!==null&&v!==undefined&&String(v).trim());
+  const phone=raw?String(raw).trim():'';
+  const more=a['ที่อยู่']||a.Address||a.address||a.Description||'';
+  return {id:a.OBJECTID??a.FID??a.objectid??index,type,name:dssSupportName(a,type,layer.displayField),lng:x,lat:y,distance,phone:/^[+()\d\s./-]{8,25}$/.test(phone)?phone:'',detail:String(more).slice(0,180),source:layer.path};
+ }).filter(Boolean).sort((a,b)=>a.distance-b.distance);
+ return {candidates,partial:!!data.exceededTransferLimit};
+}
+async function loadDssNearby(lat,lng){
+ if(!validPoint())return;
+ const sequence=++nearbySequence,radius=Number(state.bufferKm)||3;
+ state.nearbyTime='กำลังค้นหาข้อมูลสนับสนุนจาก ArcGIS…';
+ state.supportLocations=[];
+ for(const type of ['hospital','fire','police','hydrant','community','cctv']){
+  state[type+'Name']='กำลังค้นหาข้อมูล…';state[type+'Distance']='—';
+ }
+ render();window.dssSyncSupportMarkers?.();
+ const stillCurrent=()=>sequence===nearbySequence&&Number(state.lat)===Number(lat)&&Number(state.lng)===Number(lng);
+ let layers;
+ try{layers=await dssSupportCatalog()}
+ catch(error){
+  if(stillCurrent()){state.nearbyTime='เชื่อมต่อ FeatureServer ไม่สำเร็จ โปรดตรวจสอบการเข้าถึงบริการ';for(const type of ['hospital','fire','police','hydrant','community','cctv'])state[type+'Name']='โหลดข้อมูลไม่สำเร็จ';render()}
+  console.warn('DSS FeatureServer catalog unavailable',error);return;
+ }
+ const missing=[];
+ await Promise.all(['hospital','fire','police','hydrant','community','cctv'].map(async type=>{
+  const options=layers.filter(layer=>dssSupportTypeMatch(type,layer));
+  if(!options.length){
+   missing.push(type);
+   if(stillCurrent()){state[type+'Name']='ไม่พบชั้นข้อมูลประเภทนี้ใน FeatureServer';state[type+'Distance']='—';render()}
+   return;
   }
+  let results=[],partial=false,success=false;
+  for(const layer of options){
+   try{
+    // Read layer metadata for an accurate display field and verify geometry.
+    const info=await dssSupportJSON(dssSupportBase+layer.path+'?f=json',9000);
+    if(info.type==='Table'||info.geometryType&&!/Point|Polyline|Polygon|Multipoint/i.test(info.geometryType))continue;
+    const found=await dssSupportQuery({...layer,displayField:info.displayField||info.nameField},type,lat,lng,radius);
+    results.push(...found.candidates);partial=partial||found.partial;success=true;
+   }catch(error){console.warn('DSS nearby layer',layer.path,error)}
+  }
+  if(!stillCurrent())return;
+  const seen=new Set();
+  results=results.sort((a,b)=>a.distance-b.distance).filter(item=>{
+   const key=item.source+':'+item.id;if(seen.has(key))return false;seen.add(key);return true;
+  });
+  // Keep actual locations so report cards and the map use the same features.
+  state.supportLocations.push(...results.slice(0,type==='cctv'||type==='community'?300:100));
+  if(type==='cctv'||type==='community'){
+   state[type+'Name']=(type==='cctv'?'กล้อง CCTV':'ชุมชน')+' ในรัศมี '+radius+' กม.';
+   state[type+'Distance']=results.length.toLocaleString('th-TH')+(type==='cctv'?' จุด':' แห่ง')+(partial?' (อย่างน้อย)':'');
+  }else{
+   const nearest=results[0];
+   state[type+'Name']=nearest?nearest.name:(success?'ไม่พบข้อมูลในรัศมี 50 กม.':'โหลดข้อมูลไม่สำเร็จ');
+   state[type+'Distance']=nearest?(type==='hydrant'?Math.round(nearest.distance*1000).toLocaleString('th-TH')+' เมตร':nearest.distance.toFixed(2)+' กม.'):'—';
+  }
+  render();window.dssSyncSupportMarkers?.();
+ }));
+ if(!stillCurrent())return;
+ state.nearbyTime='สืบค้นเมื่อ '+new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'})+' (เวลาไทย) · แหล่งข้อมูล: Hospital_Locations, Risk_Map_WFL1, CCTV'+(missing.length?' · ไม่พบชั้นข้อมูลบางประเภท':'');
+ render();window.dssSyncSupportMarkers?.();
+ const extent=Math.max(...getBufferRadii()),spanLat=extent*1.35/111.2,spanLng=spanLat*(mapNode.clientWidth||800)/(mapNode.clientHeight||560)/Math.cos(lat*Math.PI/180);
+ renderStaticSupportPoints(lat,lng,spanLat,spanLng);
 }
 
 const dssEstates=[{"name":"นิคมอุตสาหกรรมหนองแค","lat":14.3863882,"lng":100.9035767},{"name":"นิคมอุตสาหกรรมลาดกระบัง","lat":13.7582559,"lng":100.7893183},{"name":"นิคมอุตสาหกรรมบางชัน","lat":13.803881,"lng":100.704757},{"name":"นิคมอุตสาหกรรมอัญธานี","lat":13.686102,"lng":100.707712},{"name":"นิคมอุตสาหกรรมนครหลวง","lat":14.4893393,"lng":100.5957211},{"name":"นิคมอุตสาหกรรมบางปะอิน","lat":14.2077497,"lng":100.5896748},{"name":"นิคมอุตสาหกรรมบ้านหว้า","lat":14.246309,"lng":100.610012},{"name":"นิคมอุตสาหกรรมสมุทรสาคร","lat":13.5440008,"lng":100.232856},{"name":"นิคมอุตสาหกรรมสินสาคร","lat":13.54653659,"lng":100.3436175},{"name":"นิคมอุตสาหกรรมราชบุรี","lat":13.63729443,"lng":99.85002164},{"name":"นิคมอุตสาหกรรมมหาราชนคร","lat":13.54202903,"lng":100.1988542},{"name":"นิคมอุตสาหกรรมภาคเหนือ","lat":18.591755,"lng":99.044877},{"name":"นิคมอุตสาหกรรมพิจิตร","lat":16.5753627,"lng":100.1489452},{"name":"นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา","lat":7.0082598,"lng":100.3598057},{"name":"นิคมอุตสาหกรรมสงขลา","lat":6.54184983,"lng":100.4136034},{"name":"นิคมอุตสาหกรรมเวลโกรว์","lat":13.570618,"lng":100.92248},{"name":"นิคมอุตสาหกรรมเกตเวย์ ซิตี้","lat":13.614694,"lng":101.329567},{"name":"นิคมอุตสาหกรรมเอเซีย (สุวรรณภูมิ)","lat":13.6599038,"lng":100.9114833},{"name":"นิคมอุตสาหกรรมทีเอฟดี 1","lat":13.56379732,"lng":100.9949185},{"name":"นิคมอุตสาหกรรมสระแก้ว","lat":13.72389768,"lng":102.5546324},{"name":"นิคมอุตสาหกรรมไฮเทค กบินทร์","lat":13.90617863,"lng":101.6529182},{"name":"นิคมอุตสาหกรรมหลักชัยเมืองยาง","lat":12.72735973,"lng":101.455931},{"name":"นิคมอุตสาหกรรมบางปู","lat":13.551394,"lng":100.668278},{"name":"นิคมอุตสาหกรรมบางพลี","lat":13.565582,"lng":100.794583},{"name":"นิคมอุตสาหกรรมบางปู (เหนือ)","lat":13.551394,"lng":100.668278},{"name":"นิคมอุตสาหกรรมแพรกษา","lat":13.56903519,"lng":100.6528202},{"name":"นิคมอุตสาหกรรมอีสเทิร์นซีบอร์ด (ระยอง)","lat":13.0044858,"lng":101.1626075},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ ชลบุรี 1","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมอมตะซิตี้ ชลบุรี","lat":13.4214885,"lng":101.0041244},{"name":"นิคมอุตสาหกรรมอมตะซิตี้ ระยอง","lat":13.024547,"lng":101.072437},{"name":"นิคมอุตสาหกรรมปิ่นทอง","lat":13.118954,"lng":101.033398},{"name":"นิคมอุตสาหกรรมปิ่นทอง (แหลมฉบัง)","lat":13.12134595,"lng":100.9904306},{"name":"นิคมอุตสาหกรรมปิ่นทอง (โครงการ 3)","lat":13.11034826,"lng":101.0669158},{"name":"นิคมอุตสาหกรรมแหลมฉบัง","lat":13.076561,"lng":100.909175},{"name":"ท่าเรืออุตสาหกรรมมาบตาพุด","lat":12.665224,"lng":101.133049},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ ตะวันออก (มาบตาพุด)","lat":12.7030632,"lng":101.1263119},{"name":"นิคมอุตสาหกรรมผาแดง","lat":12.690742,"lng":101.132469},{"name":"นิคมอุตสาหกรรมเอเชีย","lat":12.716494,"lng":101.105913},{"name":"นิคมอุตสาหกรรมอาร์ ไอ แอล","lat":12.757945,"lng":101.165319},{"name":"นิคมอุตสาหกรรมมาบตาพุด","lat":12.678688,"lng":101.131806},{"name":"นิคมอุตสาหกรรมสมาร์ท ปาร์ค","lat":12.75079527,"lng":101.1226103},{"name":"สำนักงานใหญ่ (วิภาวดี) ตึก A","lat":13.7972954,"lng":100.5599994},{"name":"สำนักงานใหญ่ (วิภาวดี) ตึก B","lat":13.7973442,"lng":100.5592795},{"name":"นิคมอุตสาหกรรมทีเอฟดี 2","lat":13.56379732,"lng":100.9949185},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ ชลบุรี 2","lat":13.095811,"lng":101.113907},{"name":"สำนักงานท่าเรืออุตสาหกรรมมาบตาพุด","lat":12.665224,"lng":101.133049},{"name":"นิคมอุตสาหกรรมซีพีจีซี","lat":12.757945,"lng":101.165319},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ อินดัสเตรียล เอสเตท ระยอง","lat":12.757945,"lng":101.165319},{"name":"นิคมอุตสาหกรรมปิ่นทอง (โครงการ 6)","lat":12.757945,"lng":101.165319},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 4","lat":12.757945,"lng":101.165319},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ ระยอง 36","lat":12.757945,"lng":101.165319},{"name":"นิคมอุตสาหกรรมโรจนะชลบุรี 2 (เขาคันทรง)","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 2","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมปิ่นทอง (โครงการ 5)","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมยามาโตะ อินดัสทรีส์","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 3","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมโรจนะหนองใหญ่ จังหวัดชลบุรี","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมบ้านบึง","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมเอเซีย คลีน ชลบุรี","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมแก่งคอย","lat":14.624646,"lng":101.008107},{"name":"นิคมอุตสาหกรรมปิ่นทอง (โครงการ 4)","lat":13.11034826,"lng":101.0669158},{"name":"นิคมอุตสาหกรรมโรจนะแหลมฉบัง","lat":13.024547,"lng":101.072437},{"name":"นิคมอุตสาหกรรมฉะเชิงเทรา บลูเทค ซิตี้","lat":13.56379732,"lng":100.9949185},{"name":"นิคมอุตสาหกรรมอุดรธานี","lat":16.5753627,"lng":100.1489452},{"name":"นิคมอุตสาหกรรมบ่อทอง 33","lat":13.90617863,"lng":101.6529182},{"name":"นิคมอุตสาหกรรมเอ็กโก ระยอง","lat":12.757945,"lng":101.165319},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 1","lat":13.095811,"lng":101.113907},{"name":"นิคมอุตสาหกรรมเวิลด์ (ลำพูน)","lat":18.591755,"lng":99.044877},{"name":"นิคมอุตสาหกรรมเฮอร์มีส","lat":12.9395143470535,"lng":101.041255357775},{"name":"นิคมอุตสาหกรรมแอลพีพี นครสวรรค์","lat":15.6538546700978,"lng":100.582877576763},{"name":"นิคมอุตสาหกรรมดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 5","lat":12.8445660258234,"lng":101.236671470166},{"name":"นิคมอุตสาหกรรมอมตะซิตี้ ชลบุรี 2","lat":13.2831784287344,"lng":101.222933672217},{"name":"นิคมอุตสาหกรรมอมตะซิตี้ สมาร์ทซิตี้ ชลบุรี","lat":13.4933471967599,"lng":101.052449316628},{"name":"นิคมอุตสาหกรรม304 อินดัสเตรียล ปาร์ค","lat":13.9154531406087,"lng":101.573873553363}];
