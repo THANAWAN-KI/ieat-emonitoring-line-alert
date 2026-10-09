@@ -2395,5 +2395,79 @@ html body .workspace .report-wrap #report{width:1050px!important;margin:0!import
  rail.style.display='flex';
 })();
 </script>
+
+<style id="dss-three-column-fluid-v1">
+/* Three balanced columns. Use all available space without clipping on desktop. */
+@media screen and (min-width:1201px) {
+  html body .workspace:has(#dssNearbyRail) {
+    display:grid!important;
+    box-sizing:border-box!important;
+    max-width:none!important;
+    width:100%!important;
+    margin:10px auto!important;
+    padding:0 12px!important;
+    grid-template-columns:minmax(315px,22fr) minmax(0,61fr) minmax(255px,17fr)!important;
+    gap:12px!important;
+    align-items:start!important;
+  }
+  html body .workspace>.editor {
+    grid-column:1!important;grid-row:1!important;
+    min-width:0!important;width:100%!important;
+    padding:14px!important;
+  }
+  html body .workspace>.report-wrap {
+    grid-column:2!important;grid-row:1!important;
+    box-sizing:border-box!important;width:100%!important;
+    min-width:0!important;max-width:100%!important;
+    margin:0!important;padding:0!important;
+    overflow-x:hidden!important;
+  }
+  html body .workspace>#dssNearbyRail {
+    grid-column:3!important;grid-row:1!important;
+    box-sizing:border-box!important;min-width:0!important;
+    width:100%!important;max-width:100%!important;
+    margin:0!important;flex:none!important;
+  }
+}
+/* Keep the report readable within its own column. */
+@media screen {
+  html body .workspace .report-wrap.dss-with-nearby {display:block!important;width:100%!important;min-width:0!important;max-width:100%!important;overflow-x:hidden!important}
+  html body .workspace .report-wrap #report {
+    box-sizing:border-box!important;
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    padding:clamp(14px,2.3vw,38px)!important;
+    margin:0!important;
+    overflow-wrap:anywhere;
+  }
+  html body .workspace #report .row {grid-template-columns:minmax(140px,25%) minmax(0,1fr)!important}
+  html body .workspace #report .row>span {min-width:0!important;overflow-wrap:anywhere}
+  html body .workspace #report .map-weather {min-width:0!important}
+  html body .workspace #report .map-weather>*{min-width:0!important}
+  html body .workspace #dssEasyWizard{min-width:0!important;width:100%!important;margin:8px 0!important;padding:12px!important}
+  html body .workspace #dssEasyWizard .mini-actions{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:8px!important}
+  html body .workspace #dssEasyWizard .mini-actions #factoryLookup,
+  html body .workspace #dssEasyWizard .mini-actions #factoryLookupBtn {
+    box-sizing:border-box!important;width:100%!important;max-width:100%!important;min-width:0!important;
+    flex:none!important;display:block!important;
+  }
+  html body .workspace #dssEasyWizard .mini-actions #factoryLookupBtn{white-space:normal!important}
+  html body .workspace #dssNearbyRail #supportList{overflow-y:auto!important;flex:1 1 auto!important;min-height:0!important}
+}
+@media screen and (max-width:1200px) {
+  html body .workspace .report-wrap {overflow-x:auto!important}
+  html body .workspace .report-wrap #report {padding:clamp(14px,3vw,32px)!important}
+  html body .workspace .report-wrap #report .row {grid-template-columns:minmax(115px,27%) minmax(0,1fr)!important}
+}
+@media screen and (max-width:650px) {
+  html body .workspace #report .report-header h1{font-size:24px!important}
+  html body .workspace #report .section-title{font-size:19px!important}
+  html body .workspace #report .row{grid-template-columns:minmax(110px,35%) minmax(0,1fr)!important}
+  html body .workspace #report .row b,html body .workspace #report .row span{padding:7px!important;font-size:13px!important}
+  html body .workspace #report .map-weather{grid-template-columns:1fr!important}
+}
+</style>
+
 </body></html>
 
