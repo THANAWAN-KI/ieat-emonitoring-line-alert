@@ -1901,99 +1901,7 @@ const enabled=/สารเคมี/.test(state.event||'');editor.hidden=!enabl
 })();
 </script>
 
-<style id="dss-dispersion-style">
-#dispersionEditor[hidden],#dispersionReport[hidden]{display:none!important}
-#dispersionEditor{border-top:2px solid #725293;margin-top:16px;padding-top:12px}
-.dispersion-table{width:100%;border-collapse:collapse;font-size:14px}
-.dispersion-table th,.dispersion-table td{border:1px solid #8b7999;padding:7px;text-align:left;vertical-align:top}
-.dispersion-table th{background:#e7daef}
-</style>
-<script id="dss-dispersion-import">
-(function(){
- const box=document.createElement('section');box.id='dispersionEditor';box.className='group';
- box.innerHTML='<h3>ผลแบบจำลองการกระจายตัว</h3><p class="chemical-mode-help">นำเข้าไฟล์ KML หรือ GeoJSON ที่มีพื้นที่ผลแบบจำลองและพิกัดจริง เว็บไซต์แสดงผลที่นำเข้า ไม่ได้คำนวณการแพร่กระจายเอง</p><div class="field"><label for="dispersionFile">ไฟล์ผลแบบจำลอง (.kml / .geojson / .json)</label><input id="dispersionFile" type="file" accept=".kml,.geojson,.json"></div><div class="field"><label for="dispersionChemical">สารที่ใช้ในแบบจำลอง</label><input id="dispersionChemical" data-key="dispersionChemical"></div><div class="field"><label for="dispersionModel">ชื่อแบบจำลอง / รุ่น</label><input id="dispersionModel" data-key="dispersionModel"></div><div class="field"><label for="dispersionTime">เวลา / รอบผลแบบจำลอง</label><input id="dispersionTime" data-key="dispersionTime" placeholder="ระบุเวลาและเขตเวลา"></div><div class="field"><label for="dispersionScenario">ข้อมูลสถานการณ์ / อัตรารั่ว / สภาพอากาศที่ใช้</label><textarea id="dispersionScenario" data-key="dispersionScenario"></textarea></div><div class="mini-actions"><button type="button" id="dispersionZoom" class="secondary">ซูมผลแบบจำลอง</button><button type="button" id="dispersionClear" class="secondary">ล้างผลแบบจำลอง</button></div><p id="dispersionStatus" class="hint" role="status"></p>';
- document.getElementById('chemicalIncidentEditor').after(box);
- const output=document.createElement('section');output.id='dispersionReport';
- output.innerHTML='<div class="section-title">ผลแบบจำลองการกระจายตัวที่นำเข้า</div><div class="company"><div class="row"><b>สาร / แบบจำลอง</b><span id="dispersionReportModel"></span></div><div class="row"><b>เวลา / สถานการณ์</b><span id="dispersionReportScenario"></span></div></div><table class="dispersion-table"><thead><tr><th>ข้อมูลสนับสนุนที่อยู่ในพื้นที่</th></tr></thead><tbody id="dispersionRows"></tbody></table><p class="hint" id="dispersionReportNote"></p>';
- document.querySelector('.map-weather').after(output);
- let layer,modelVisible=false;
- const map=window.dssLeafletMap;
- function message(text){document.getElementById('dispersionStatus').textContent=text}
- function plain(value){const doc=new DOMParser().parseFromString(String(value||''),'text/html');return doc.body.textContent.trim().slice(0,1000)}
- function ringValid(ring){return Array.isArray(ring)&&ring.length>=4&&ring.every(p=>Array.isArray(p)&&p.length>=2&&Number.isFinite(p[0])&&Number.isFinite(p[1])&&Math.abs(p[0])<=180&&Math.abs(p[1])<=90)&&ring[0][0]===ring[ring.length-1][0]&&ring[0][1]===ring[ring.length-1][1]}
- function validGeometry(g){return g&&((g.type==='Polygon'&&Array.isArray(g.coordinates)&&g.coordinates.length&&g.coordinates.every(ringValid))||(g.type==='MultiPolygon'&&Array.isArray(g.coordinates)&&g.coordinates.length&&g.coordinates.every(p=>p.length&&p.every(ringValid))))}
- function kmlFeatures(text){
-  const doc=new DOMParser().parseFromString(text,'application/xml');
-  if(doc.querySelector('parsererror'))throw Error('ไฟล์ KML ไม่ถูกต้อง');
-  const find=(node,name)=>Array.from(node.getElementsByTagName('*')).filter(el=>el.localName===name);
-  const result=[];
-  find(doc,'Placemark').forEach(mark=>{
-   const polygons=find(mark,'Polygon').map(poly=>{
-    const outer=find(poly,'outerBoundaryIs')[0];if(!outer)return null;
-    const boundaries=[outer,...find(poly,'innerBoundaryIs')];
-    return boundaries.map(boundary=>{const coords=find(boundary,'coordinates')[0]?.textContent||'';return coords.trim().split(/\s+/).filter(Boolean).map(v=>v.split(',').slice(0,2).map(Number))});
-   }).filter(Boolean);
-   if(!polygons.length)return;
-   const name=find(mark,'name')[0]?.textContent||'พื้นที่ผลแบบจำลอง',description=plain(find(mark,'description')[0]?.textContent||'');
-   result.push({type:'Feature',properties:{name,description},geometry:polygons.length===1?{type:'Polygon',coordinates:polygons[0]}:{type:'MultiPolygon',coordinates:polygons}});
-  });return result;
- }
- function normalize(text,fileName){
-  let features;
-  if(/\.kml$/i.test(fileName)||text.trim().startsWith('<'))features=kmlFeatures(text);
-  else{const value=JSON.parse(text);features=value.type==='FeatureCollection'?value.features:value.type==='Feature'?[value]:[{type:'Feature',geometry:value,properties:{}}]}
-  if(!Array.isArray(features))throw Error('ไฟล์ไม่มีพื้นที่ผลแบบจำลอง');
-  const polygons=features.filter(f=>['Polygon','MultiPolygon'].includes(f.geometry?.type));
-  if(!polygons.length||polygons.length>100)throw Error('ต้องมีพื้นที่ Polygon / MultiPolygon 1–100 รายการ');
-  let count=0;
-  const cleaned=polygons.map((f,i)=>{if(!validGeometry(f.geometry))throw Error('พิกัดพื้นที่ไม่ถูกต้อง หรือวงขอบเขตไม่ปิด');count+=JSON.stringify(f.geometry.coordinates).length;if(count>2000000)throw Error('พื้นที่ซับซ้อนเกินไป');const p=f.properties||{};return {type:'Feature',geometry:f.geometry,properties:{name:plain(p.name||p.Name||p.zone||'พื้นที่ '+(i+1)),description:plain(p.description||p.Description||p.threshold||p.level||'ไม่ได้ระบุเกณฑ์ความเข้มข้นในไฟล์')}}});
-  return {type:'FeatureCollection',features:cleaned};
- }
- function inRing(p,ring){let inside=false;for(let i=0,j=ring.length-1;i<ring.length;j=i++){const a=ring[i],b=ring[j];if((a[1]>p[1])!==(b[1]>p[1])&&p[0]<(b[0]-a[0])*(p[1]-a[1])/(b[1]-a[1])+a[0])inside=!inside}return inside}
- function contains(point,g){const polys=g.type==='Polygon'?[g.coordinates]:g.coordinates;return polys.some(rings=>inRing(point,rings[0])&&!rings.slice(1).some(ring=>inRing(point,ring)))}
- function color(feature,i){const t=(feature.properties.name+' '+feature.properties.description).toLowerCase();if(/erpg[- ]?3|aegl[- ]?3|red|แดง/.test(t))return '#ff1100';if(/erpg[- ]?2|aegl[- ]?2|orange|ส้ม/.test(t))return '#ff8b00';if(/erpg[- ]?1|aegl[- ]?1|yellow|เหลือง/.test(t))return '#ffcc00';return ['#ff1100','#ff8b00','#ffcc00'][i%3]}
- function refresh(){
-  const active=/สารเคมี/.test(state.event||'');box.hidden=!active;
-  const data=state.dispersion;
-  const anchored=data&&Number(data.lat)===Number(state.lat)&&Number(data.lng)===Number(state.lng);
-  modelVisible=active&&anchored&&Array.isArray(data?.geojson?.features);
-  output.hidden=!modelVisible;
-  if(layer&&map){map.removeLayer(layer);layer=null}
-  if(!modelVisible){if(data&&!anchored)message('ตำแหน่งเกิดเหตุเปลี่ยนแล้ว กรุณานำเข้าผลที่ตรงกับสถานการณ์นี้ใหม่');else if(!data)message('ยังไม่มีผลแบบจำลองที่นำเข้า');return}
-  if(map&&window.L){layer=L.geoJSON(data.geojson,{style:f=>({color:color(f,data.geojson.features.indexOf(f)),weight:3,opacity:1,fillOpacity:.18})}).addTo(map);layer.eachLayer(item=>{const p=document.createElement('div');p.textContent=item.feature.properties.name+' · '+item.feature.properties.description;item.bindPopup(p)})}
-  document.getElementById('dispersionReportModel').textContent=(state.dispersionChemical||'ยังไม่ระบุสาร')+' · '+(state.dispersionModel||'ยังไม่ระบุแบบจำลอง');
-  document.getElementById('dispersionReportScenario').textContent=(state.dispersionTime||'ยังไม่ระบุเวลา')+' · '+(state.dispersionScenario||'ยังไม่ระบุรายละเอียดสถานการณ์');
-  const rows=document.getElementById('dispersionRows');rows.replaceChildren();
-  data.geojson.features.forEach(feature=>{
-   const tr=document.createElement('tr'),locations=document.createElement('td');
-   const matches=(state.supportLocations||[]).filter(item=>contains([item.lng,item.lat],feature.geometry));
-   locations.textContent=matches.length?matches.slice(0,30).map(item=>supportMapTypes()[item.type]?.label+' · '+item.name).join('\n'):'ไม่พบตำแหน่งจากชุดข้อมูลสนับสนุนที่โหลดไว้';locations.style.whiteSpace='pre-line';
-   if(matches.length>30)locations.textContent+='\nแสดง 30 จาก '+matches.length+' ตำแหน่ง';
-   tr.append(locations);rows.append(tr);
-  });
-  document.getElementById('dispersionReportNote').textContent='ไฟล์: '+data.fileName+' · นำเข้าเมื่อ '+data.importedAt+' · ผลประมาณการตามสถานการณ์ของแบบจำลอง ไม่ใช่การตรวจวัดจริง · ตรวจเฉพาะตำแหน่งสนับสนุนที่โหลดไว้ จึงไม่ใช่รายชื่อผู้ได้รับผลกระทบทั้งหมด';
-  message('นำเข้า '+data.geojson.features.length+' พื้นที่ · '+data.fileName);
- }
- const previous=render;render=function(){previous();refresh()};
- document.getElementById('dispersionFile').onchange=async function(){
-  const file=this.files[0];if(!file)return;
-  try{if(file.size>3*1024*1024)throw Error('ไฟล์ต้องไม่เกิน 3 MB');if(!validPoint())throw Error('กรุณาระบุจุดเกิดเหตุให้ถูกต้อง');const geojson=normalize(await file.text(),file.name);state.dispersion={geojson,fileName:file.name,lat:Number(state.lat),lng:Number(state.lng),importedAt:new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'})};render();if(layer)map.fitBounds(layer.getBounds(),{padding:[30,30]})}
-  catch(error){message('นำเข้าไม่สำเร็จ: '+error.message)}finally{this.value=''}
- };
- document.getElementById('dispersionZoom').onclick=()=>{if(layer)map.fitBounds(layer.getBounds(),{padding:[30,30]})};
- document.getElementById('dispersionClear').onclick=()=>{state.dispersion=null;render()};
- window.dssDrawDispersionExport=function(ctx,live){
-  if(!modelVisible)return;
-  state.dispersion.geojson.features.forEach((f,i)=>{
-   ctx.beginPath();const polygons=f.geometry.type==='Polygon'?[f.geometry.coordinates]:f.geometry.coordinates;
-   polygons.forEach(rings=>rings.forEach(ring=>ring.forEach((p,j)=>{const q=live.latLngToContainerPoint([p[1],p[0]]);if(j===0)ctx.moveTo(q.x,q.y);else ctx.lineTo(q.x,q.y);if(j===ring.length-1)ctx.closePath()})));
-   ctx.fillStyle=color(f,i);ctx.globalAlpha=.18;ctx.fill('evenodd');ctx.globalAlpha=1;ctx.strokeStyle=color(f,i);ctx.lineWidth=3;ctx.stroke();
-  });
- };
- window.dssDispersionParser={normalize,contains};
- render();
-})();
-</script>
+
 
 <style id="dss-spacious-editor">
 @media(min-width:1201px){html body .workspace{max-width:1780px!important;grid-template-columns:minmax(440px,500px) minmax(0,1fr)!important;gap:24px!important}}
@@ -2267,7 +2175,6 @@ html body .top-actions #backToRiskmapBtn:focus {
 .editor #dssSimpleChemical p{font-size:13px;line-height:1.6}
 .editor #dssSimpleChemical select,.editor #dssSimpleChemical input,.editor #dssSimpleChemical textarea{width:100%;font:inherit;margin:4px 0 10px;min-height:36px}
 .editor #dssSimpleChemical button{padding:9px!important}
-#dispersionEditor{display:none!important}
 #report .note{display:none!important}
 @media(max-width:580px){#dssEasyWizard .mini-actions{display:block}#dssEasyWizard .mini-actions button{width:100%;margin-top:7px}}
 </style>
@@ -2486,6 +2393,6 @@ html body .workspace .report-wrap #report{width:1050px!important;margin:0!import
 #report #supportGrid{display:none!important}
 @media(max-width:650px){#dssNearbyReportTable .row{grid-template-columns:minmax(115px,37%) minmax(0,1fr)!important}}
 </style>
-<style id="dss-hide-unused-dispersion-report">#dispersionReport,#dispersionEditor{display:none!important}</style>
+
 </body></html>
 
