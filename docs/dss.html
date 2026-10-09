@@ -1410,12 +1410,13 @@ async function loadDssNearby(lat,lng){
  }
  render();window.dssSyncSupportMarkers?.();
  const stillCurrent=()=>sequence===nearbySequence&&Number(state.lat)===Number(lat)&&Number(state.lng)===Number(lng);
- let layers;
+ let layers=[];
  try{layers=await dssSupportCatalog()}
  catch(error){
-  if(stillCurrent()){state.nearbyTime='เชื่อมต่อ FeatureServer ไม่สำเร็จ โปรดตรวจสอบการเข้าถึงบริการ';for(const type of ['hospital','fire','police','hydrant','community','cctv'])state[type+'Name']='โหลดข้อมูลไม่สำเร็จ';render()}
-  console.warn('DSS FeatureServer catalog unavailable',error);return;
+  // Do not abandon public fallback when ArcGIS metadata is down.
+  console.warn('DSS FeatureServer catalog unavailable; using independent fallback',error);
  }
+ if(!stillCurrent())return;
  const missing=[];
  await Promise.all(['hospital','fire','police','hydrant','community','cctv'].map(async type=>{
   const options=layers.filter(layer=>dssSupportTypeMatch(type,layer));
@@ -1455,7 +1456,7 @@ async function loadDssNearby(lat,lng){
   render();window.dssSyncSupportMarkers?.();
  }));
  if(!stillCurrent())return;
- state.nearbyTime='สืบค้นเมื่อ '+new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'})+' (เวลาไทย) · ข้อมูลที่ดึงได้จาก IEAT ArcGIS และ/หรือ OpenStreetMap (แต่ละจุดระบุแหล่งที่มา)'+(missing.length?' · ArcGIS ไม่พบชั้นข้อมูลบางประเภท':'');
+ state.nearbyTime='สืบค้นเมื่อ '+new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'})+' (เวลาไทย) · จุดสนับสนุนที่แสดง '+(state.supportLocations||[]).length+' จุด จาก IEAT ArcGIS / OpenStreetMap ตามที่เชื่อมต่อได้'+(missing.length?' · ArcGIS ไม่พบชั้นข้อมูลบางประเภท':'');
  render();window.dssSyncSupportMarkers?.();
  const extent=Math.max(...getBufferRadii()),spanLat=extent*1.35/111.2,spanLng=spanLat*(mapNode.clientWidth||800)/(mapNode.clientHeight||560)/Math.cos(lat*Math.PI/180);
  renderStaticSupportPoints(lat,lng,spanLat,spanLng);
