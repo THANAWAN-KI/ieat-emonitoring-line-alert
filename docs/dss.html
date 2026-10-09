@@ -1542,11 +1542,23 @@ async function downloadReportPng(){
     await document.fonts.ready;
     if(typeof html2canvas!=='function')throw new Error('ไม่สามารถโหลดเครื่องมือบันทึกภาพได้');
     const report=document.getElementById('report');
+    const exportIconSelector='.dss-support-symbol svg,.dss-support-cluster svg';
+    const exportIcons=await Promise.all(Array.from(report.querySelectorAll(exportIconSelector)).map(async svg=>{
+      const bounds=svg.getBoundingClientRect(),width=Math.max(1,bounds.width||14),height=Math.max(1,bounds.height||14);
+      const copy=svg.cloneNode(true),color=getComputedStyle(svg).color;
+      copy.setAttribute('xmlns','http://www.w3.org/2000/svg');copy.setAttribute('width',String(width));copy.setAttribute('height',String(height));
+      const markup=new XMLSerializer().serializeToString(copy).replace(/currentColor/g,color);
+      const img=new Image();img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(markup);await img.decode();
+      const iconCanvas=document.createElement('canvas');iconCanvas.width=Math.ceil(width*3);iconCanvas.height=Math.ceil(height*3);
+      iconCanvas.getContext('2d').drawImage(img,0,0,iconCanvas.width,iconCanvas.height);
+      return {src:iconCanvas.toDataURL('image/png'),width,height};
+    }));
     const canvas=await html2canvas(report,{
       backgroundColor:'#fff',scale:2,useCORS:true,allowTaint:false,logging:false,
       width:report.scrollWidth,
       ignoreElements:element=>element.id==='supportList'||element.hasAttribute('data-export-exclude'),
       onclone(clonedDocument){
+        clonedDocument.querySelectorAll('#report '+exportIconSelector.split(',').join(',#report ')).forEach((svg,index)=>{const icon=exportIcons[index];if(!icon)return;const img=clonedDocument.createElement('img');img.src=icon.src;img.alt='';img.style.setProperty('width',icon.width+'px','important');img.style.setProperty('height',icon.height+'px','important');img.style.setProperty('display','block','important');img.style.setProperty('flex','none','important');svg.replaceWith(img)});
         clonedDocument.querySelectorAll('#supportList,[data-export-exclude]').forEach(element=>element.remove());
         const clonedMap=clonedDocument.querySelector('#report #map');
         if(!clonedMap)return;
@@ -2272,6 +2284,6 @@ html body .editor #dssNearbyPanel h2{padding-bottom:10px!important;border-bottom
 html body #report .dss-support-legend > span{color:#2d2d2d!important;-webkit-text-fill-color:#2d2d2d!important;display:inline-flex;align-items:center;gap:5px}
 </style>
 <script id="dss-sync-legend-colors">
-(function(){const legend=document.querySelector('.dss-support-legend');if(!legend)return;const types=Object.values(supportMapTypes());legend.querySelectorAll('.dss-support-symbol').forEach((icon,index)=>{const type=types[index];if(type){icon.style.setProperty('--symbol-bg',type.color);icon.innerHTML=type.symbol}})();
+(function(){const legend=document.querySelector('.dss-support-legend');if(!legend)return;const types=Object.values(supportMapTypes());legend.querySelectorAll('.dss-support-symbol').forEach((icon,index)=>{const type=types[index];if(type){icon.style.setProperty('--symbol-bg',type.color);icon.innerHTML=type.symbol}});})();
 </script></body></html>
 
