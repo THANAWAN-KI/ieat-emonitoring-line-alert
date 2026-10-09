@@ -2179,5 +2179,14 @@ html body .editor h2{font-size:19px;line-height:1.5}
  if(window.ResizeObserver){const observer=new ResizeObserver(schedule);observer.observe(report);observer.observe(map)}
  window.addEventListener('resize',schedule);document.fonts?.ready.then(schedule);schedule();
 })();
+</script><script id="dss-remove-search-introduction">
+(function(){
+ const editor=document.querySelector('.editor'),panel=document.getElementById('dssSimplePanel');
+ editor?.querySelector(':scope > h2')?.remove();
+ if(!panel)return;
+ panel.querySelector('#title')?.closest('.field')?.remove();
+ panel.querySelector(':scope > h3')?.remove();
+ panel.querySelectorAll(':scope > p').forEach(p=>{if(p.id==='dssAutoStatus'){p.hidden=true;p.style.setProperty('display','none','important')}else p.remove()});
+})();
 </script></body></html>
 
