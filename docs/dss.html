@@ -1311,7 +1311,11 @@ async function loadDssNearby(lat,lng){
   await Promise.all(sources.map(async([type,path,nameField])=>{
     try{
       const countOnly=type==='community'||type==='cctv';
-      const params=new URLSearchParams({where:'1=1',geometry:JSON.stringify({x:lng,y:lat,spatialReference:{wkid:4326}}),geometryType:'esriGeometryPoint',inSR:'4326',spatialRel:'esriSpatialRelIntersects',distance:String(countOnly?radius:50),units:'esriSRUnit_Kilometer',outFields:'*',returnGeometry:'true',outSR:'4326',f:'json',resultRecordCount:'2000'});
+      // Envelope spatial search works on ArcGIS layers that do not support point-distance queries.
+      const searchKm=countOnly?radius:50;
+      const dLat=searchKm/110.7,dLng=searchKm/(111.32*Math.max(.2,Math.cos(lat*Math.PI/180)));
+      const bounds={xmin:lng-dLng,ymin:lat-dLat,xmax:lng+dLng,ymax:lat+dLat,spatialReference:{wkid:4326}};
+      const params=new URLSearchParams({where:'1=1',geometry:JSON.stringify(bounds),geometryType:'esriGeometryEnvelope',inSR:'4326',spatialRel:'esriSpatialRelIntersects',outFields:'*',returnGeometry:'true',outSR:'4326',f:'json',resultRecordCount:'2000'});
       let data,selectedPath=path,primaryError=null;
       try{data=await requestNearbyLayer(path,params)}
       catch(e){primaryError=e}
@@ -1328,7 +1332,7 @@ async function loadDssNearby(lat,lng){
         if(!data)throw primaryError||Error('No accessible layer');
       }
       let total=(data.features||[]).length;
-      if(countOnly&&data.exceededTransferLimit){const countParams=new URLSearchParams(params);countParams.set('returnCountOnly','true');const countResponse=await fetch(base+selectedPath+'/query?'+countParams,{signal:AbortSignal.timeout(12000)});const countData=await countResponse.json();if(countData.error||!Number.isFinite(countData.count))throw Error('count unavailable');total=countData.count}
+      if(countOnly&&data.exceededTransferLimit){console.warn('DSS nearby '+type+' results truncated at layer limit; counts approximate')}
       const mapCandidates=(data.features||[]).map((feature,index)=>{
         const g=feature.geometry||{},a=feature.attributes||{};let x=g.x,y=g.y;
         if(g.rings){const p=factoryGeometryPoint(g);if(p)[x,y]=p}
@@ -1342,11 +1346,11 @@ async function loadDssNearby(lat,lng){
         const extraKeys=['ที่อยู่','สถานที่ตั้ง','address','Address','รายละเอียด','Description','description','ตำบล','อำเภอ','จังหวัด'];
         const extra=extraKeys.map(key=>a[key]).find(value=>value!==undefined&&value!==null&&String(value).trim()!=='');
         return {id:a.OBJECTID||a.FID||index,type,name:String(a[nameField]||a.Name||a.NAME||a.name||a.ชื่อ||a['ชื่อสถานี']||a['ชื่อโรงพยาบาล']||a.PopupInfo||supportMapTypes()[type].label),lng:x,lat:y,distance:6371*2*Math.asin(Math.min(1,Math.sqrt(h))),phone:phoneValid?phone:'',detail:extra?String(extra).slice(0,180):''};
-      }).filter(item=>Number.isFinite(item.distance)&&item.lng>=97&&item.lng<=106&&item.lat>=5&&item.lat<=22).sort((a,b)=>a.distance-b.distance);
+      }).filter(item=>Number.isFinite(item.distance)&&item.distance<=(countOnly?radius:50)&&item.lng>=97&&item.lng<=106&&item.lat>=5&&item.lat<=22).sort((a,b)=>a.distance-b.distance);
       if(sequence!==nearbySequence||Number(state.lat)!==Number(lat)||Number(state.lng)!==Number(lng))return;
       state.supportLocations.push(...(countOnly?mapCandidates:mapCandidates.filter((item,index)=>index===0||item.distance<=radius)));
       if(countOnly){
-        state[type+'Name']=(type==='community'?'ชุมชน':'กล้อง CCTV')+' ในรัศมี '+radius+' กม.';state[type+'Distance']=Number(total).toLocaleString('th-TH')+(type==='community'?' แห่ง':' จุด');
+        state[type+'Name']=(type==='community'?'ชุมชน':'กล้อง CCTV')+' ในรัศมี '+radius+' กม.';state[type+'Distance']=Number(mapCandidates.length).toLocaleString('th-TH')+(type==='community'?' แห่ง':' จุด')+(data.exceededTransferLimit?' (อย่างน้อย)':'');
       }else{
         const candidates=mapCandidates;
         state[type+'Name']=candidates[0]?.name||'ไม่พบข้อมูลในรัศมี 50 กม.';
