@@ -2325,7 +2325,11 @@ html body #report .dss-wind-context{display:block;margin-top:4px;font-size:12px!
   else if(value!==''&&item){state.leakChemical=item.name;state.leakCAS=item.cas;state.leakUN=item.un;state.leakState=item.state}
   render();
  });
- const previous=render;render=function(){previous();const enabled=/สารเคมี/.test(state.event||'');editor.hidden=!enabled;editor.classList.remove('dss-easy-advanced');const items=Array.isArray(state.hazardCatalog)?state.hazardCatalog:[];status.textContent=items.length?'พบสารเคมีในระบบ DSS '+items.length+' รายการ · เลือกสารที่ได้รับแจ้งว่ารั่วไหล ปริมาณรั่วให้กรอกตามเหตุจริง':'ไม่มีข้อมูลในระบบ DSS';const matched=items.findIndex(item=>item.name===state.leakChemical);catalog.value=state.leakChemical==='ยังไม่ทราบชนิดสาร'?'unknown':matched>=0?String(matched):'';};
+ const previous=render;render=function(){previous();const enabled=/สารเคมี/.test(state.event||'');editor.hidden=!enabled;editor.classList.remove('dss-easy-advanced');const items=Array.isArray(state.hazardCatalog)?state.hazardCatalog:[];status.textContent=items.length?'พบสารเคมีในระบบ DSS '+items.length+' รายการ · เลือกสารที่ได้รับแจ้งว่ารั่วไหล ปริมาณรั่วให้กรอกตามเหตุจริง':'ไม่มีข้อมูลในระบบ DSS';const matched=items.findIndex(item=>item.name===state.leakChemical);
+ catalog.replaceChildren();
+ if(items.length){items.forEach((item,index)=>catalog.add(new Option(item.name+(item.cas?' · CAS '+item.cas:''),String(index))));catalog.add(new Option('ยังไม่ทราบชนิดสาร','unknown'));catalog.size=Math.min(7,Math.max(3,items.length+1));catalog.selectedIndex=-1}
+ else{catalog.add(new Option('ไม่มีข้อมูลในระบบ DSS',''));catalog.add(new Option('ยังไม่ทราบชนิดสาร','unknown'));catalog.size=2}
+ if(state.leakChemical==='ยังไม่ทราบชนิดสาร')catalog.value='unknown';else if(matched>=0)catalog.value=String(matched);};
  render();
 })();
 </script>
@@ -2333,5 +2337,5 @@ html body #report .dss-wind-context{display:block;margin-top:4px;font-size:12px!
 html body #chemicalIncidentEditor:not([hidden]){display:block!important}
 html body #dssNotifiedChemicalChoice{display:block!important;margin:12px 0!important;padding:12px!important;background:#eef2f6;border:1px solid #d9e0e7;border-radius:7px}
 html body #leakCatalog{display:block!important;width:100%!important;min-width:0!important;padding:9px!important;background:#fff;color:#17324f;border:1px solid #c8d2dc;border-radius:5px;font:15px "Sarabun",sans-serif}
-</style></body></html>
+</style><style id="dss-company-chemical-list">html body #leakCatalog{height:auto!important;min-height:80px!important;white-space:normal!important}html body #leakCatalog option{padding:8px 6px;font-size:14px;line-height:1.6}</style></body></html>
 
