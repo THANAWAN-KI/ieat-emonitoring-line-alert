@@ -811,7 +811,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 <div class="section-title">ข้อมูลสนับสนุนที่ใกล้เคียง</div><div class="company" id="dssWeatherRows">
 <div class="row"><b>สภาพอากาศบริเวณเกิดเหตุ</b><span data-out="weather"></span></div>
 <div class="row"><b>อุณหภูมิ / ความชื้น</b><span><span data-out="temp"></span> °C · <span data-out="humidity"></span> %</span></div>
-<div class="row"><b>ลมบริเวณเกิดเหตุ</b><span><span data-out="windSpeed"></span> กม./ชม. · พัดมาจาก <span data-out="windDir"></span> (<span data-out="windDeg"></span>°) <i class="wind-arrow" id="windArrow">➜</i></span></div>
+<div class="row dss-wind-highlight"><b>ลมบริเวณเกิดเหตุ</b><span><strong class="dss-wind-reading"><span data-out="windSpeed"></span> กม./ชม. · พัดมาจาก <span data-out="windDir"></span> (<span data-out="windDeg"></span>°) <i class="wind-arrow" id="windArrow">➜</i></strong><small class="dss-wind-context"><span data-out="weatherTime"></span> · ข้อมูลประมาณการจากแบบจำลอง Open-Meteo</small></span></div>
 <div class="row"><b>เวลาข้อมูลอากาศ</b><span data-out="weatherTime"></span></div></div><div class="company" id="supportGrid"></div><p class="hint" data-out="nearbyTime"></p>
 
 </section></div></main>
@@ -2303,5 +2303,11 @@ html body #report .company,html body #report .company .row,html body #report .ma
 html body #report .map-caption,html body #report .dss-support-legend{background:#f5f7f9!important;color:#526176!important;border-color:#d9e0e7!important}
 html body #report #supportGrid .row:hover,html body #report #supportGrid .row:focus{background:#eef2f6!important;outline-color:#17324f!important}
 html body #supportList button:hover,html body #supportList button:focus-visible{background:#eef2f6!important;border-color:#17324f!important}
+</style><style id="dss-important-wind-reading">
+html body #report #dssWeatherRows .dss-wind-highlight{border-left:4px solid #315f89!important}
+html body #report #dssWeatherRows .dss-wind-highlight > b,html body #report #dssWeatherRows .dss-wind-highlight > span{background:#edf5fc!important;color:#17324f!important;-webkit-text-fill-color:#17324f!important}
+html body #report #dssWeatherRows .dss-wind-highlight > b{font-weight:600!important}
+html body #report .dss-wind-reading{display:block;font-size:17px!important;font-weight:700!important;line-height:1.7!important;color:#17324f!important;-webkit-text-fill-color:#17324f!important}
+html body #report .dss-wind-context{display:block;margin-top:4px;font-size:12px!important;font-weight:400!important;line-height:1.6!important;color:#526176!important;-webkit-text-fill-color:#526176!important}
 </style></body></html>
 
