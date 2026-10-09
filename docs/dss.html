@@ -2353,5 +2353,17 @@ wrap.appendChild(rail);
 })();
 </script>
 
+<style id="dss-nearby-fixed-layout">
+/* Use the real workspace grid: report remains unchanged, list gets its own column. */
+html body .workspace:has(#dssNearbyRail){max-width:1900px!important;grid-template-columns:minmax(300px,380px) minmax(0,1fr) 270px!important;align-items:start!important}
+html body .workspace:has(#dssNearbyRail) .report-wrap.dss-with-nearby{display:block!important;min-width:0!important;width:100%!important;overflow-x:auto!important}
+html body .workspace:has(#dssNearbyRail) .report-wrap #report{width:1050px!important}
+html body .workspace > #dssNearbyRail{position:sticky!important;top:12px!important;width:270px!important;max-height:78vh!important}
+@media(max-width:1250px){html body .workspace:has(#dssNearbyRail){display:flex!important;flex-wrap:wrap!important}html body .workspace > #dssNearbyRail{position:static!important;flex:1 1 250px!important}}
+@media print{html body .workspace > #dssNearbyRail{display:none!important}}
+</style>
+<script id="dss-nearby-fixed-layout-script">
+(function(){const rail=document.getElementById('dssNearbyRail'),workspace=document.querySelector('.workspace');if(rail&&workspace)workspace.appendChild(rail)})();
+</script>
 </body></html>
 
