@@ -921,7 +921,9 @@ mapNode.addEventListener('click',function(e){
   state.lng=(lng+((e.clientX-box.left)/box.width-0.5)*2*spanLng).toFixed(6);
   render();updateMap();loadDssNearby(Number(state.lat),Number(state.lng));loadWeather();
 });
-const dirs=['เหนือ','ตะวันออกเฉียงเหนือ','ตะวันออก','ตะวันออกเฉียงใต้','ใต้','ตะวันตกเฉียงใต้','ตะวันตก','ตะวันตกเฉียงเหนือ'];let weatherSequence=0;async function loadWeather(){const lat=Number(state.lat),lng=Number(state.lng);if(!validPoint())return alert('กรุณากรอกพิกัดให้ถูกต้อง');const sequence=++weatherSequence;state.weather='กำลังดึงข้อมูลสภาพอากาศ…';state.weatherTime='';render();const weatherButton=document.getElementById('weatherBtn');if(weatherButton)weatherButton.textContent='กำลังดึงข้อมูล…';try{const u=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,wind_direction_10m&timezone=Asia%2FBangkok`;const r=await fetch(u,{signal:AbortSignal.timeout(12000)});if(!r.ok)throw Error('weather');const c=(await r.json()).current;if(sequence!==weatherSequence||lat!==Number(state.lat)||lng!==Number(state.lng))return;const desc={0:'ท้องฟ้าแจ่มใส',1:'ท้องฟ้าโปร่ง',2:'มีเมฆบางส่วน',3:'เมฆมาก',45:'มีหมอก',48:'หมอกจัด',51:'ฝนปรอยเล็กน้อย',53:'ฝนปรอย',55:'ฝนปรอยหนัก',61:'ฝนเล็กน้อย',63:'ฝนปานกลาง',65:'ฝนหนัก',80:'ฝนซู่เล็กน้อย',81:'ฝนซู่ปานกลาง',82:'ฝนซู่หนัก',95:'พายุฝนฟ้าคะนอง'};state.temp=c.temperature_2m;state.humidity=c.relative_humidity_2m;state.windSpeed=c.wind_speed_10m;state.windDeg=c.wind_direction_10m;state.windDir=dirs[Math.round(c.wind_direction_10m/45)%8];state.weather=desc[c.weather_code]||'สภาพอากาศทั่วไป';state.weatherTime='ข้อมูล ณ '+new Date(c.time+'+07:00').toLocaleString('th-TH',{timeZone:'Asia/Bangkok'})+' (เวลาไทย)';render()}catch(e){if(sequence!==weatherSequence||lat!==Number(state.lat)||lng!==Number(state.lng))return;state.weather='โหลดข้อมูลอากาศไม่สำเร็จ';state.weatherTime='';render();console.warn('IEAT DSS weather fetch failed',e)}finally{if(weatherButton)weatherButton.textContent='ดึงสภาพอากาศ'}}
+const dirs=['เหนือ','ตะวันออกเฉียงเหนือ','ตะวันออก','ตะวันออกเฉียงใต้','ใต้','ตะวันตกเฉียงใต้','ตะวันตก','ตะวันตกเฉียงเหนือ'];let weatherSequence=0;async function loadWeather(){const lat=Number(state.lat),lng=Number(state.lng);if(!validPoint())return alert('กรุณากรอกพิกัดให้ถูกต้อง');const sequence=++weatherSequence;const previousWeather={weather:state.weather,weatherTime:state.weatherTime,temp:state.temp,humidity:state.humidity,windSpeed:state.windSpeed,windDir:state.windDir,windDeg:state.windDeg};
+  const oldValid=Number.isFinite(Number(state.temp))&&state.weatherTime&&Number(state.temp)>-100;
+  if(!oldValid){state.weather='กำลังดึงข้อมูลสภาพอากาศ…';state.weatherTime='';render()}const weatherButton=document.getElementById('weatherBtn');if(weatherButton)weatherButton.textContent='กำลังดึงข้อมูล…';try{const u=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,wind_direction_10m&timezone=Asia%2FBangkok`;const r=await fetch(u,{signal:AbortSignal.timeout(12000)});if(!r.ok)throw Error('weather');const c=(await r.json()).current;if(sequence!==weatherSequence||lat!==Number(state.lat)||lng!==Number(state.lng))return;const desc={0:'ท้องฟ้าแจ่มใส',1:'ท้องฟ้าโปร่ง',2:'มีเมฆบางส่วน',3:'เมฆมาก',45:'มีหมอก',48:'หมอกจัด',51:'ฝนปรอยเล็กน้อย',53:'ฝนปรอย',55:'ฝนปรอยหนัก',61:'ฝนเล็กน้อย',63:'ฝนปานกลาง',65:'ฝนหนัก',80:'ฝนซู่เล็กน้อย',81:'ฝนซู่ปานกลาง',82:'ฝนซู่หนัก',95:'พายุฝนฟ้าคะนอง'};state.temp=c.temperature_2m;state.humidity=c.relative_humidity_2m;state.windSpeed=c.wind_speed_10m;state.windDeg=c.wind_direction_10m;state.windDir=dirs[Math.round(c.wind_direction_10m/45)%8];state.weather=desc[c.weather_code]||'สภาพอากาศทั่วไป';state.weatherTime='ข้อมูล ณ '+new Date(c.time+'+07:00').toLocaleString('th-TH',{timeZone:'Asia/Bangkok'})+' (เวลาไทย)';render()}catch(e){if(sequence!==weatherSequence||lat!==Number(state.lat)||lng!==Number(state.lng))return;if(oldValid){Object.assign(state,previousWeather);state.weatherTime=previousWeather.weatherTime+' · อัปเดตล่าสุดไม่สำเร็จ'}else{state.weather='โหลดข้อมูลอากาศไม่สำเร็จ';state.weatherTime=''}render();console.warn('IEAT DSS weather fetch failed',e)}finally{if(weatherButton)weatherButton.textContent='ดึงสภาพอากาศ'}}
 document.getElementById('mapBtn').onclick=()=>{if(!validPoint())return alert('กรุณากรอกพิกัดในประเทศไทยให้ถูกต้อง');updateMap();loadDssNearby(Number(state.lat),Number(state.lng));loadWeather()};document.getElementById('weatherBtn').onclick=loadWeather;resetBtn.onclick=()=>{if(confirm('ล้างข้อมูลที่แก้ไขและกลับเป็นค่าเริ่มต้นหรือไม่?')){weatherSequence++;nearbySequence++;state={...defaults,bufferRadii:[1,3,5],bufferEnabled:[true,true,true],supportLocations:[]};syncBufferControls();factoryLookup.value='';lookupResults.replaceChildren();render();updateMap();window.dssSyncSupportMarkers?.()}};
 pngBtn.onclick=()=>downloadReportPng();render();updateMap();
 </script>
@@ -1268,7 +1270,11 @@ async function getDssFieldMetadata(){
 let nearbySequence=0;
 async function loadDssNearby(lat,lng){
   if(!validPoint())return;const sequence=++nearbySequence,radius=Number(state.bufferKm)||3;
-  state.nearbyTime='กำลังปรับปรุงข้อมูล';state.supportLocations=[];['hospital','fire','police','hydrant','community','cctv'].forEach(type=>{state[type+'Name']='กำลังค้นหาข้อมูล…';state[type+'Distance']='—'});render();if(window.dssSyncSupportMarkers)window.dssSyncSupportMarkers();
+  state.nearbyTime='กำลังปรับปรุงข้อมูล';
+  // Do not erase a valid result before its replacement arrives.
+  const hasPrevious=Array.isArray(state.supportLocations)&&state.supportLocations.length;
+  if(!hasPrevious){state.supportLocations=[];['hospital','fire','police','hydrant','community','cctv'].forEach(type=>{state[type+'Name']='กำลังค้นหาข้อมูล…';state[type+'Distance']='—'})}
+  render();if(window.dssSyncSupportMarkers)window.dssSyncSupportMarkers();
   const base='https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/';
   const sources=[['hospital','Hospital_Locations/FeatureServer/0','โรงพยาบาล'],['fire','Risk_Map_WFL1/FeatureServer/3','Name'],['police','Risk_Map_WFL1/FeatureServer/5','Name'],['hydrant','Risk_Map_WFL1/FeatureServer/4','Name'],['community','Map/FeatureServer/1','Name'],['cctv','ตำแหน่งกล้องCCTV/FeatureServer/7','Name']];
   const labels={hospital:/hospital|โรงพยาบาล/i,fire:/fire|ดับเพลิง|fire.station|สถานีดับเพลิง/i,police:/police|ตำรวจ/i,hydrant:/hydrant|หัวจ่ายน้ำ|หัวดับเพลิง/i,community:/community|ชุมชน/i,cctv:/cctv|กล้อง/i};
@@ -1303,17 +1309,25 @@ async function loadDssNearby(lat,lng){
       const searchKm=countOnly?radius:50;
       const dLat=searchKm/110.7,dLng=searchKm/(111.32*Math.max(.2,Math.cos(lat*Math.PI/180)));
       const bounds={xmin:lng-dLng,ymin:lat-dLat,xmax:lng+dLng,ymax:lat+dLat,spatialReference:{wkid:4326}};
-      const params=new URLSearchParams({where:'1=1',geometry:JSON.stringify(bounds),geometryType:'esriGeometryEnvelope',inSR:'4326',spatialRel:'esriSpatialRelIntersects',outFields:'*',returnGeometry:'true',outSR:'4326',f:'json',resultRecordCount:'2000'});
+      const params=new URLSearchParams({where:'1=1',geometry:JSON.stringify({x:lng,y:lat,spatialReference:{wkid:4326}}),geometryType:'esriGeometryPoint',inSR:'4326',spatialRel:'esriSpatialRelIntersects',distance:String(searchKm),units:'esriSRUnit_Kilometer',outFields:'*',returnGeometry:'true',outSR:'4326',f:'json',resultRecordCount:'2000'});
+      const envelopeParams=new URLSearchParams(params);
+      envelopeParams.set('geometry',JSON.stringify(bounds));
+      envelopeParams.set('geometryType','esriGeometryEnvelope');
+      envelopeParams.delete('distance');envelopeParams.delete('units');
       let data,selectedPath=path,primaryError=null;
       try{data=await requestNearbyLayer(path,params)}
       catch(e){primaryError=e}
-      // Some older saved layer numbers point to a valid but unrelated or empty layer.
+      if(primaryError || !(data?.features||[]).length){
+        try{const fallback=await requestNearbyLayer(path,envelopeParams);if((fallback.features||[]).length){data=fallback;primaryError=null}}
+        catch(e){console.warn('DSS envelope fallback',type,e)}
+      }
       if(primaryError || !(data?.features||[]).length){
         const alternatives=await findAlternativeLayer(type);
         for(const candidate of alternatives){
           if(candidate.path===path)continue;
           try{
-            const alternative=await requestNearbyLayer(candidate.path,params);
+            let alternative=await requestNearbyLayer(candidate.path,params);
+            if(!(alternative.features||[]).length)alternative=await requestNearbyLayer(candidate.path,envelopeParams);
             if((alternative.features||[]).length){data=alternative;selectedPath=candidate.path;primaryError=null;break}
           }catch(e){console.warn('Nearby alternative',type,candidate.path,e)}
         }
@@ -1336,6 +1350,7 @@ async function loadDssNearby(lat,lng){
         return {id:a.OBJECTID||a.FID||index,type,name:String(a[nameField]||a.Name||a.NAME||a.name||a.ชื่อ||a['ชื่อสถานี']||a['ชื่อโรงพยาบาล']||a.PopupInfo||supportMapTypes()[type].label),lng:x,lat:y,distance:6371*2*Math.asin(Math.min(1,Math.sqrt(h))),phone:phoneValid?phone:'',detail:extra?String(extra).slice(0,180):''};
       }).filter(item=>Number.isFinite(item.distance)&&item.distance<=(countOnly?radius:50)&&item.lng>=97&&item.lng<=106&&item.lat>=5&&item.lat<=22).sort((a,b)=>a.distance-b.distance);
       if(sequence!==nearbySequence||Number(state.lat)!==Number(lat)||Number(state.lng)!==Number(lng))return;
+      state.supportLocations=state.supportLocations.filter(item=>item.type!==type);
       state.supportLocations.push(...(countOnly?mapCandidates:mapCandidates.filter((item,index)=>index===0||item.distance<=radius)));
       if(countOnly){
         state[type+'Name']=(type==='community'?'ชุมชน':'กล้อง CCTV')+' ในรัศมี '+radius+' กม.';state[type+'Distance']=Number(mapCandidates.length).toLocaleString('th-TH')+(type==='community'?' แห่ง':' จุด')+(data.exceededTransferLimit?' (อย่างน้อย)':'');
@@ -1344,7 +1359,7 @@ async function loadDssNearby(lat,lng){
         state[type+'Name']=candidates[0]?.name||'ไม่พบข้อมูลในรัศมี 50 กม.';
         state[type+'Distance']=candidates[0]?(type==='hydrant'?Math.round(candidates[0].distance*1000).toLocaleString('th-TH')+' เมตร':candidates[0].distance.toFixed(2)+' กม.'):'—';
       }
-    }catch(error){if(sequence===nearbySequence&&Number(state.lat)===Number(lat)&&Number(state.lng)===Number(lng)){state[type+'Name']='โหลดข้อมูลไม่สำเร็จ';state[type+'Distance']='—'}console.warn('DSS nearby '+type,error)}finally{if(sequence===nearbySequence&&Number(state.lat)===Number(lat)&&Number(state.lng)===Number(lng)){render();window.dssSyncSupportMarkers?.()}}
+    }catch(error){if(sequence===nearbySequence&&Number(state.lat)===Number(lat)&&Number(state.lng)===Number(lng)){if(!hasPrevious || !(state.supportLocations||[]).some(item=>item.type===type)){state[type+'Name']='โหลดข้อมูลไม่สำเร็จ';state[type+'Distance']='—'}else{state.nearbyTime='แสดงข้อมูลที่โหลดไว้ก่อนหน้า · อัปเดตล่าสุดไม่สำเร็จ'}}console.warn('DSS nearby '+type,error)}finally{if(sequence===nearbySequence&&Number(state.lat)===Number(lat)&&Number(state.lng)===Number(lng)){render();window.dssSyncSupportMarkers?.()}}
   }));
   if(sequence===nearbySequence&&Number(state.lat)===Number(lat)&&Number(state.lng)===Number(lng)){state.nearbyTime='ค้นหาข้อมูล ณ '+new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'})+' (เวลาไทย) · โรงพยาบาล/ดับเพลิง/ตำรวจ/หัวจ่ายน้ำ: ค้นหาใกล้ที่สุดภายใน 50 กม. · ชุมชน/CCTV: รัศมีที่เลือก';render();if(window.dssSyncSupportMarkers)window.dssSyncSupportMarkers();
     const radius=Math.max(...getBufferRadii()),spanLat=radius*1.35/111.2,spanLng=spanLat*(mapNode.clientWidth||800)/(mapNode.clientHeight||560)/Math.cos(lat*Math.PI/180);renderStaticSupportPoints(lat,lng,spanLat,spanLng);
