@@ -1628,7 +1628,7 @@ async function selectDssLookup(item){
   factoryLookup.value=item.name;render();updateMap();lookupResults.replaceChildren();
   factoryLookupStatus.textContent='เลือก '+item.name+' และเติมข้อมูลในรายงานแล้ว · พิกัดเป็นตำแหน่งอ้างอิงจากฐานข้อมูล (ยังไม่ใช่การยืนยันจุดเกิดเหตุจริง)';
   document.getElementById('map').scrollIntoView({behavior:'smooth',block:'center'});
-  loadDssNearby(lat,lng);loadWeather();
+  window.dssDataLoading=Promise.allSettled([loadDssNearby(lat,lng),loadWeather()]);
 }
 
 document.getElementById('factoryLookupBtn').addEventListener('click',searchFactory);
@@ -1674,6 +1674,8 @@ async function downloadReportPng(){
       await Promise.race([mapLoadPromise,new Promise(resolve=>setTimeout(resolve,8000))]);
       if(!mapImage.complete||!mapImage.naturalWidth)throw new Error('ภาพแผนที่ยังไม่พร้อม');
     }
+    if(window.dssDataLoading){await Promise.race([window.dssDataLoading,new Promise(resolve=>setTimeout(resolve,28000))]);}
+    if(['fire','police','hydrant','hospital'].some(type=>state[type+'Name']==='กำลังค้นหาข้อมูล…')||state.weather==='กำลังดึงข้อมูลสภาพอากาศ…')throw Error('ข้อมูลสนับสนุนหรือสภาพอากาศยังโหลดไม่เสร็จ กรุณารอสักครู่แล้วดาวน์โหลดอีกครั้ง');
     await document.fonts.ready;
     if(typeof html2canvas!=='function')throw new Error('ไม่สามารถโหลดเครื่องมือบันทึกภาพได้');
     const report=document.getElementById('report');
@@ -2528,10 +2530,11 @@ html body .workspace .report-wrap #report{width:1050px!important;margin:0!import
    if(!canRefresh()){const p=document.createElement('p');p.className='hint';p.textContent='กรุณาค้นหาและเลือกโรงงานหรือนิคมฯ ก่อนดึงข้อมูลสนับสนุน';list.replaceChildren(p);return}
    button.disabled=true;button.textContent='กำลังอัปเดตข้อมูล…';
    try{
-     await Promise.allSettled([
+     window.dssDataLoading=Promise.allSettled([
        loadDssNearby(Number(state.lat),Number(state.lng)),
        loadWeather()
      ]);
+     await window.dssDataLoading;
    }finally{button.disabled=false;button.textContent='↻ อัปเดตตำแหน่งและสภาพอากาศ'}
  }
  button.addEventListener('click',refresh);
