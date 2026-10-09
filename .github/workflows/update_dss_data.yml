@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - ".github/workflows/update_dss_data.yml"
+      - "scripts/fetch_dss_report_status.py"
   schedule:
     - cron: "15 0 * * *"
   workflow_dispatch:
@@ -51,10 +52,13 @@ jobs:
           PY
           fi
           rm -f docs/dss-data.tmp.json
+      - name: Update validated DSS status report for October 2026
+        run: |
+          python scripts/fetch_dss_report_status.py 2026-10 || echo "Keeping previous validated DSS status report"
       - name: Commit valid DSS data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
-          git add docs/dss-data.json
+          git add docs/dss-data.json docs/data/dss-report-status.json
           git diff --cached --quiet || git commit -m "Update valid DSS search data"
           git push
