@@ -1,0 +1,466 @@
+{
+  "schemaVersion": 1,
+  "period": "2026-10",
+  "retrievedAt": "2026-10-09T09:07:30.100349+00:00",
+  "sourceUrl": "https://dss.ieat.go.th/extension/dssreportAdmin/index.php?daterange=2026-10-01+00%3A00+TO+2026-10-31+23%3A59&checkBox1%5B%5D=22&checkBox1%5B%5D=17&checkBox1%5B%5D=1&checkBox1%5B%5D=13&checkBox1%5B%5D=12&checkBox1%5B%5D=20&checkBox1%5B%5D=5&checkBox1%5B%5D=21&checkBox1%5B%5D=35&checkBox1%5B%5D=26&checkBox1%5B%5D=3&checkBox1%5B%5D=10&checkBox1%5B%5D=29&checkBox1%5B%5D=18&checkBox1%5B%5D=16&checkBox1%5B%5D=15&checkBox1%5B%5D=9&checkBox1%5B%5D=39&checkBox1%5B%5D=6&checkBox1%5B%5D=8&checkBox1%5B%5D=41&checkBox1%5B%5D=40&checkBox1%5B%5D=30&checkBox1%5B%5D=45&checkBox1%5B%5D=50&checkBox1%5B%5D=36&checkBox1%5B%5D=2&checkBox1%5B%5D=46&checkBox1%5B%5D=4&checkBox1%5B%5D=24&checkBox1%5B%5D=34&checkBox1%5B%5D=37&checkBox1%5B%5D=11&checkBox1%5B%5D=25&checkBox1%5B%5D=23&checkBox1%5B%5D=44&checkBox1%5B%5D=7&checkBox1%5B%5D=14&checkBox1%5B%5D=28&checkBox1%5B%5D=64&checkBox1%5B%5D=32&checkBox1%5B%5D=19",
+  "counts": {
+    "approved": 3,
+    "review": 1,
+    "draft": 3,
+    "none": 6932,
+    "more": 2,
+    "total": 6941
+  },
+  "estates": [
+    {
+      "name": "ดับบลิวเอชเอ ชลบุรี",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 50,
+      "more": 0,
+      "total": 50
+    },
+    {
+      "name": "ดับบลิวเอชเอ ชลบุรี 1",
+      "approved": 1,
+      "review": 0,
+      "draft": 0,
+      "none": 142,
+      "more": 0,
+      "total": 143
+    },
+    {
+      "name": "ดับบลิวเอชเอ ชลบุรี 2",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 24,
+      "more": 0,
+      "total": 24
+    },
+    {
+      "name": "ดับบลิวเอชเอ อีสเทิร์นซีบอดร์ด 3",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 1,
+      "more": 0,
+      "total": 1
+    },
+    {
+      "name": "ดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 1",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 261,
+      "more": 0,
+      "total": 261
+    },
+    {
+      "name": "ดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 2",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 109,
+      "more": 0,
+      "total": 109
+    },
+    {
+      "name": "ดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 3",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 34,
+      "more": 0,
+      "total": 34
+    },
+    {
+      "name": "ดับบลิวเอชเอ อีสเทิร์นนซีบอร์ด 2",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 1,
+      "more": 0,
+      "total": 1
+    },
+    {
+      "name": "ดับบลิวเอชเอตะวันออก (มาบตาพุด)",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 82,
+      "more": 0,
+      "total": 82
+    },
+    {
+      "name": "ทีเอฟดี",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 47,
+      "more": 0,
+      "total": 47
+    },
+    {
+      "name": "นครหลวง",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 65,
+      "more": 0,
+      "total": 65
+    },
+    {
+      "name": "บางชัน",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 104,
+      "more": 0,
+      "total": 104
+    },
+    {
+      "name": "บางปะอิน",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 123,
+      "more": 0,
+      "total": 123
+    },
+    {
+      "name": "บางปู",
+      "approved": 1,
+      "review": 0,
+      "draft": 0,
+      "none": 598,
+      "more": 1,
+      "total": 600
+    },
+    {
+      "name": "บางปู (เหนือ)",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 57,
+      "more": 0,
+      "total": 57
+    },
+    {
+      "name": "บางพลี",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 183,
+      "more": 0,
+      "total": 183
+    },
+    {
+      "name": "บ้านหว้า",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 205,
+      "more": 1,
+      "total": 206
+    },
+    {
+      "name": "ปิ่นทอง",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 237,
+      "more": 0,
+      "total": 237
+    },
+    {
+      "name": "ปิ่นทอง (แหลมฉบัง)",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 119,
+      "more": 0,
+      "total": 119
+    },
+    {
+      "name": "ปิ่นทอง (โครงการ 3)",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 105,
+      "more": 0,
+      "total": 105
+    },
+    {
+      "name": "ผาแดง",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 6,
+      "more": 0,
+      "total": 6
+    },
+    {
+      "name": "พิจิตร",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 18,
+      "more": 0,
+      "total": 18
+    },
+    {
+      "name": "ภาคเหนือ",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 104,
+      "more": 0,
+      "total": 104
+    },
+    {
+      "name": "ภาคใต้จังหวัดสงขลา",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 55,
+      "more": 0,
+      "total": 55
+    },
+    {
+      "name": "มหาราชนคร",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 2,
+      "more": 0,
+      "total": 2
+    },
+    {
+      "name": "มาบตาพุด",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 116,
+      "more": 0,
+      "total": 116
+    },
+    {
+      "name": "ราชบุรี",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 45,
+      "more": 0,
+      "total": 45
+    },
+    {
+      "name": "ลาดกระบัง",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 305,
+      "more": 0,
+      "total": 305
+    },
+    {
+      "name": "สงขลา",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 1,
+      "more": 0,
+      "total": 1
+    },
+    {
+      "name": "สมุทรสาคร",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 152,
+      "more": 0,
+      "total": 152
+    },
+    {
+      "name": "สหรัตนนคร",
+      "approved": 0,
+      "review": 0,
+      "draft": 1,
+      "none": 4,
+      "more": 0,
+      "total": 5
+    },
+    {
+      "name": "สำนักงานท่าเรืออุตสาหกรรมมาบตาพุด",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 14,
+      "more": 0,
+      "total": 14
+    },
+    {
+      "name": "สินสาคร",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 139,
+      "more": 0,
+      "total": 139
+    },
+    {
+      "name": "หนองแค",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 60,
+      "more": 0,
+      "total": 60
+    },
+    {
+      "name": "หลักชัยเมืองยาง",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 21,
+      "more": 0,
+      "total": 21
+    },
+    {
+      "name": "อมตะซิตี้ ชลบุรี",
+      "approved": 1,
+      "review": 0,
+      "draft": 1,
+      "none": 1148,
+      "more": 0,
+      "total": 1150
+    },
+    {
+      "name": "อมตะซิตี้ ระยอง",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 787,
+      "more": 0,
+      "total": 787
+    },
+    {
+      "name": "อัญธานี",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 262,
+      "more": 0,
+      "total": 262
+    },
+    {
+      "name": "อาร์ ไอ แอล",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 18,
+      "more": 0,
+      "total": 18
+    },
+    {
+      "name": "อีสเทิร์นซีบอร์ด (ระยอง)",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 418,
+      "more": 0,
+      "total": 418
+    },
+    {
+      "name": "เกตเวย์ ซิตี้",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 37,
+      "more": 0,
+      "total": 37
+    },
+    {
+      "name": "เกตเวย์ซิตี้",
+      "approved": 0,
+      "review": 1,
+      "draft": 0,
+      "none": 159,
+      "more": 0,
+      "total": 160
+    },
+    {
+      "name": "เวลโกรว์",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 219,
+      "more": 0,
+      "total": 219
+    },
+    {
+      "name": "เหมราชชลบุรี แห่งที่ 2",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 1,
+      "more": 0,
+      "total": 1
+    },
+    {
+      "name": "เอเซีย",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 28,
+      "more": 0,
+      "total": 28
+    },
+    {
+      "name": "เอเซีย (สุวรรณภูมิ)",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 87,
+      "more": 0,
+      "total": 87
+    },
+    {
+      "name": "แก่งคอย",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 4,
+      "more": 0,
+      "total": 4
+    },
+    {
+      "name": "แหลมฉบัง",
+      "approved": 0,
+      "review": 0,
+      "draft": 1,
+      "none": 160,
+      "more": 0,
+      "total": 161
+    },
+    {
+      "name": "ไฮเทค กบินทร์",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 6,
+      "more": 0,
+      "total": 6
+    },
+    {
+      "name": "ไฮเทคกบินทร์",
+      "approved": 0,
+      "review": 0,
+      "draft": 0,
+      "none": 9,
+      "more": 0,
+      "total": 9
+    }
+  ]
+}
