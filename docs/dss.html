@@ -1550,7 +1550,7 @@ async function selectDssLookup(item){
   if(state.company!==item.name){state.leakChemical='';state.leakCAS='';state.leakUN='';state.leakState='';state.leakTime='';state.leakQuantity='';state.leakSource='';state.leakStatus='';state.leakDetails='';state.leakReporter='';state.leakConfirmedAt='';state.leakWater='';state.leakSupport='';}
   state={...state,...nearby,temp:'—',humidity:'—',windSpeed:'—',windDir:'—',weather:'รอดึงข้อมูลตำแหน่งใหม่',weatherTime:'',positionConfirmed:false,company:item.name,estate:item.type==='estate'?item.name:(attrs.IEAT||'—'),registration:[attrs.fid14n,item.dssFeature?.properties.comp_no||attrs.FactoryID].filter(Boolean).join(' / ')||'—',address:item.type==='estate'?item.name:[attrs.FactoryAddressGeneral,attrs.FactoryAddressMoo?'หมู่ '+attrs.FactoryAddressMoo:'',attrs.FactoryAddressSoi?'ซอย '+attrs.FactoryAddressSoi:'',attrs.FactoryAddressRoad?'ถนน '+attrs.FactoryAddressRoad:'',attrs.FactoryAddressTambonName,attrs.FactoryAddressDistrictName,attrs.FactoryAddressProvinceName,attrs.FactoryAPostCode].filter(Boolean).join(' ')||['จุดเกิดเหตุในนิคมฯ '+(attrs.IEAT||'—'),attrs.Name_Parcel?'แปลง '+attrs.Name_Parcel:'','พิกัด '+lat.toFixed(6)+', '+lng.toFixed(6)].filter(Boolean).join(' · '),...incidentSourceReport(item),lat:String(lat),lng:String(lng),positionSource:keepIncidentPoint?'manual':'factory'};
   factoryLookup.value=item.name;render();updateMap();lookupResults.replaceChildren();
-  factoryLookupStatus.textContent='เลือก '+item.name+' และเติมข้อมูลในรายงานแล้ว'+(keepIncidentPoint?' · คงพิกัดจุดเกิดเหตุที่กรอกเอง':' · ใช้ตำแหน่งโรงงานจากฐานข้อมูล โปรดตรวจสอบจุดเกิดเหตุ');
+  factoryLookupStatus.textContent='เลือก '+item.name+' และเติมข้อมูลในรายงานแล้ว · พิกัดเป็นตำแหน่งอ้างอิงจากฐานข้อมูล (ยังไม่ใช่การยืนยันจุดเกิดเหตุจริง)';
   document.getElementById('map').scrollIntoView({behavior:'smooth',block:'center'});
   loadDssNearby(lat,lng);loadWeather();
 }
@@ -1588,7 +1588,9 @@ function reportText(ctx,text,x,y,maxWidth,lineHeight){
 async function downloadReportPng(){
   loading.classList.add('show');
   try{
-    if(!validPoint())throw Error('กรุณายืนยันพิกัดที่ถูกต้อง');if(!state.positionConfirmed)throw Error('กรุณายืนยันตำแหน่งเกิดเหตุก่อนดาวน์โหลด');
+    if(!validPoint())throw Error('ยังไม่พบพิกัดที่ถูกต้อง กรุณาค้นหาและเลือกโรงงานหรือนิคมอุตสาหกรรมก่อนดาวน์โหลด');
+    const hasSelectedLocation=state.positionSource==='factory'&&state.company&&state.company!=='บริษัท / โรงงานที่เกิดเหตุ';
+    if(!state.positionConfirmed&&!hasSelectedLocation)throw Error('กรุณาเลือกสถานประกอบการจากผลการค้นหา หรือยืนยันตำแหน่งเกิดเหตุก่อนดาวน์โหลด');
     pngBtn.disabled=true;let bufferExportImage=null;
     const liveMapReady=typeof window.dssWaitMapReady==='function';
     if(liveMapReady){await window.dssWaitMapReady();if(window.dssExportBufferOverlay)bufferExportImage=window.dssExportBufferOverlay()}
@@ -1810,7 +1812,7 @@ const eventInput=document.getElementById('event');const eventSelect=document.cre
 ['เหตุเพลิงไหม้','สารเคมีรั่วไหล','เหตุเพลิงไหม้ร่วมกับสารเคมีรั่วไหล'].forEach(value=>{const option=new Option(value,value);eventSelect.add(option)});if(!Array.from(eventSelect.options).some(o=>o.value===state.event))eventSelect.add(new Option(state.event,state.event));eventInput.replaceWith(eventSelect);const modeHint=document.createElement('p');modeHint.className='hint';modeHint.textContent='ค่าเริ่มต้นเป็นไฟไหม้ทั่วไป หากเป็นเหตุสารเคมีรั่วไหล ให้เปลี่ยนประเภทเหตุเพื่อเปิดข้อมูลเฉพาะสารเคมี';eventSelect.after(modeHint);
 const checks=document.createElement('div');checks.id='incidentChecks';checks.innerHTML='<label><input id="confirmPosition" type="checkbox"> ตรวจสอบและยืนยันตำแหน่งเกิดเหตุแล้ว</label><p id="readiness" role="status"></p><button id="refreshAnalysis" class="secondary" type="button">อัปเดตข้อมูลรอบจุดเกิดเหตุ</button>';document.getElementById('zoomIncidentBtn').after(checks);
 const list=document.createElement('div');list.id='supportList';list.setAttribute('data-export-exclude','');list.setAttribute('aria-label','รายการสำหรับคลิกดูตำแหน่งบนแผนที่');document.getElementById('report').after(list);
-const previousRender=render;render=function(){previousRender();document.getElementById('confirmPosition').checked=!!state.positionConfirmed;document.getElementById('readiness').textContent=!validPoint()?'พิกัดไม่ถูกต้อง':!state.positionConfirmed?'รอยืนยันตำแหน่งเกิดเหตุ':'ยืนยันตำแหน่งแล้ว · ตรวจวันเวลาและรายละเอียดก่อนส่งรายงาน';list.replaceChildren();if((state.supportLocations||[]).length>100){const summary=document.createElement('p');summary.className='hint';summary.textContent='แสดงรายการใกล้ที่สุด 100 ตำแหน่ง จาก '+state.supportLocations.length+' ตำแหน่งที่โหลดได้';list.append(summary)}(state.supportLocations||[]).slice().sort((a,b)=>a.distance-b.distance).slice(0,100).forEach(item=>{const b=document.createElement('button');b.type='button';b.textContent=supportMapTypes()[item.type].label+' · '+item.name+' · '+item.distance.toFixed(2)+' กม.';b.onclick=()=>window.dssZoomSupport?.(item.type,item.id);list.append(b)})};
+const previousRender=render;render=function(){previousRender();document.getElementById('confirmPosition').checked=!!state.positionConfirmed;document.getElementById('readiness').textContent=!validPoint()?'พิกัดไม่ถูกต้อง':!state.positionConfirmed?'รอยืนยันตำแหน่งเกิดเหตุ':'ยืนยันตำแหน่งแล้ว · ตรวจวันเวลาและรายละเอียดก่อนส่งรายงาน';list.replaceChildren();if(!(state.supportLocations||[]).length){const empty=document.createElement('p');empty.className='hint';empty.textContent=state.nearbyTime==='กำลังปรับปรุงข้อมูล'?'กำลังค้นหาตำแหน่งสนับสนุนใกล้เคียง…':state.nearbyTime?'ยังไม่มีจุดสนับสนุนที่ดึงได้จากแหล่งข้อมูล โปรดตรวจสอบการเชื่อมต่อหรือกดค้นหาใหม่':'ค้นหาและเลือกโรงงานเพื่อแสดงตำแหน่งสนับสนุนใกล้เคียง';list.append(empty)}if((state.supportLocations||[]).length>100){const summary=document.createElement('p');summary.className='hint';summary.textContent='แสดงรายการใกล้ที่สุด 100 ตำแหน่ง จาก '+state.supportLocations.length+' ตำแหน่งที่โหลดได้';list.append(summary)}(state.supportLocations||[]).slice().sort((a,b)=>a.distance-b.distance).slice(0,100).forEach(item=>{const b=document.createElement('button');b.type='button';b.textContent=(supportMapTypes()[item.type]?.label||item.type)+' · '+item.name+' · '+item.distance.toFixed(2)+' กม.';b.onclick=()=>window.dssZoomSupport?.(item.type,item.id);list.append(b)})};
 document.getElementById('confirmPosition').onchange=e=>{state.positionConfirmed=e.target.checked&&validPoint();render()};document.getElementById('refreshAnalysis').onclick=()=>{if(!validPoint())return alert('กรุณากรอกพิกัดให้ถูกต้อง');updateMap();loadDssNearby(Number(state.lat),Number(state.lng));loadWeather()};
 form.addEventListener('input',e=>{if(['lat','lng'].includes(e.target.dataset.key)){state.positionConfirmed=false;weatherSequence++;nearbySequence++;state.supportLocations=[];['hospital','fire','police','hydrant','community','cctv'].forEach(type=>{state[type+'Name']='รอวิเคราะห์ตำแหน่งใหม่';state[type+'Distance']='—'});['temp','humidity','windSpeed','windDir'].forEach(k=>state[k]='—');state.weather='รอดึงข้อมูลตำแหน่งใหม่';state.weatherTime='';window.dssSyncSupportMarkers?.();render()}});
 render();
@@ -2394,5 +2396,9 @@ html body .workspace .report-wrap #report{width:1050px!important;margin:0!import
 @media(max-width:650px){#dssNearbyReportTable .row{grid-template-columns:minmax(115px,37%) minmax(0,1fr)!important}}
 </style>
 
+<style id="dss-auto-data-status-fix">
+#dssNearbyRail #supportList:empty:before{content:'ค้นหาและเลือกสถานประกอบการเพื่อโหลดจุดสนับสนุนใกล้เคียง';padding:12px;line-height:1.5;color:#666}
+#dssNearbyRail #supportList .hint{font-size:14px;line-height:1.65;white-space:normal}
+</style>
 </body></html>
 
