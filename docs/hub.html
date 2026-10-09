@@ -254,7 +254,7 @@ function render(){
  const label=source.value?(source.selectedOptions[0]?.textContent||source.value):'ทุกนิคมอุตสาหกรรม';
  get('dssStatusScope').textContent='รายงานวันที่ 1–31 ตุลาคม 2569 · '+label;
  const matches=data?.estates.filter(e=>normalize(e.name)===normalize(label))||[];
- const counts=data?(source.value?(matches.length===1?matches[0]:null):data.counts):null;
+ const counts=data?(source.value?(matches.length?matches.reduce((sum,e)=>{Object.keys(sum).forEach(k=>sum[k]+=e[k]);return sum;},{approved:0,review:0,draft:0,none:0,more:0,total:0}):null):data.counts):null;
  Object.entries(fields).forEach(([key,id])=>get(id).textContent=counts?number(counts[key]):data||error?'—':'…');
  if(error){get('dssStatusNote').textContent='โหลดสถานะ DSS ไม่สำเร็จ กรุณารีเฟรชหน้า';return;}
  if(!data)return;
