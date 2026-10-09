@@ -1679,7 +1679,20 @@ async function downloadReportPng(){
     await document.fonts.ready;
     if(typeof html2canvas!=='function')throw new Error('ไม่สามารถโหลดเครื่องมือบันทึกภาพได้');
     const report=document.getElementById('report');
-    const canvas=await html2canvas(report,{
+    // Export independently of the narrower browser preview column.
+    const oldReportWidth=report.style.getPropertyValue('width');
+    const oldReportPriority=report.style.getPropertyPriority('width');
+    const oldReportMinHeight=report.style.getPropertyValue('min-height');
+    const oldReportMinHeightPriority=report.style.getPropertyPriority('min-height');
+    const oldReportPadding=report.style.getPropertyValue('padding');
+    const oldReportPaddingPriority=report.style.getPropertyPriority('padding');
+    let canvas;
+    try{
+      report.style.setProperty('width','1050px','important');
+      report.style.setProperty('min-height','0','important');
+      report.style.setProperty('padding','34px 45px','important');
+      await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+      canvas=await html2canvas(report,{
       backgroundColor:'#fff',scale:2,useCORS:true,allowTaint:false,logging:false,
       width:report.scrollWidth,
       ignoreElements:element=>element.id==='supportList'||element.hasAttribute('data-export-exclude'),
@@ -1709,27 +1722,42 @@ async function downloadReportPng(){
         if(caption)caption.style.setProperty('display','none','important');
       }
     });
-    // A4 portrait export: preserve every row, and split long reports into page-sized segments.
-    const pageWidth=1240,pageHeight=1754,margin=42,usableWidth=pageWidth-margin*2,usableHeight=pageHeight-margin*2;
-    const ratio=usableWidth/canvas.width,segmentHeight=usableHeight/ratio;
-    const boundaries=[0,canvas.height];
-    const reportBounds=report.getBoundingClientRect();
-    report.querySelectorAll('.row,.section-title,.map-weather,.report-header,.dss-data-line,#dssChemicalText,#dssEquipmentText').forEach(el=>{
-      const rect=el.getBoundingClientRect();
-      const px=(rect.top-reportBounds.top)*canvas.height/Math.max(1,reportBounds.height);
-      if(px>0&&px<canvas.height)boundaries.push(px);
-    });
-    boundaries.sort((a,b)=>a-b);
-    const cuts=[0];let pos=0;
-    while(pos<canvas.height-1){
-      const desired=Math.min(canvas.height,pos+segmentHeight);
-      if(desired>=canvas.height-1){cuts.push(canvas.height);break}
-      const possible=boundaries.filter(v=>v>pos+segmentHeight*.68&&v<=desired-4);
-      const next=possible.length?possible[possible.length-1]:desired;
-      if(next<=pos+5)break;
-      cuts.push(next);pos=next;
+    }finally{
+      if(oldReportWidth)report.style.setProperty('width',oldReportWidth,oldReportPriority);else report.style.removeProperty('width');
+      if(oldReportMinHeight)report.style.setProperty('min-height',oldReportMinHeight,oldReportMinHeightPriority);else report.style.removeProperty('min-height');
+      if(oldReportPadding)report.style.setProperty('padding',oldReportPadding,oldReportPaddingPriority);else report.style.removeProperty('padding');
     }
-    if(cuts[cuts.length-1]<canvas.height)cuts.push(canvas.height);
+    // A4 portrait export: divide at a section boundary whenever possible.
+    const pageWidth=1240,pageHeight=1754,margin=40,usableWidth=pageWidth-margin*2,usableHeight=pageHeight-margin*2;
+    const ratio=usableWidth/canvas.width,segmentHeight=usableHeight/ratio;
+    const reportBounds=report.getBoundingClientRect();
+    const pixelScale=canvas.height/Math.max(1,reportBounds.height);
+    const supportHeading=report.querySelector('#dssNearbyReportHeading');
+    const supportCut=supportHeading?(supportHeading.getBoundingClientRect().top-reportBounds.top)*pixelScale:0;
+    const cuts=[0];
+    // Keep "ข้อมูลสนับสนุนที่ใกล้เคียง" and the map together when they fit on the next A4 page.
+    if(supportCut>segmentHeight*.40 && supportCut<segmentHeight*.99 && canvas.height-supportCut<=segmentHeight*.99){
+      cuts.push(Math.round(supportCut));
+      cuts.push(canvas.height);
+    }else{
+      const boundaries=[0,canvas.height];
+      report.querySelectorAll('.row,.section-title,.map-weather,.report-header,.dss-data-line').forEach(el=>{
+        const rect=el.getBoundingClientRect();
+        const px=(rect.top-reportBounds.top)*pixelScale;
+        if(px>0&&px<canvas.height)boundaries.push(px);
+      });
+      boundaries.sort((a,b)=>a-b);
+      let pos=0;
+      while(pos<canvas.height-1){
+        const desired=Math.min(canvas.height,pos+segmentHeight);
+        if(desired>=canvas.height-1){cuts.push(canvas.height);break}
+        const possible=boundaries.filter(v=>v>pos+segmentHeight*.30&&v<=desired-6);
+        const next=possible.length?possible[possible.length-1]:desired;
+        if(next<=pos+5)break;
+        cuts.push(Math.round(next));pos=next;
+      }
+      if(cuts[cuts.length-1]<canvas.height)cuts.push(canvas.height);
+    }
     const pages=cuts.length-1;
     const finalCanvas=document.createElement('canvas');finalCanvas.width=pageWidth;finalCanvas.height=pageHeight*pages;
     const context=finalCanvas.getContext('2d');
@@ -2572,6 +2600,17 @@ html body .workspace .report-wrap #report{width:1050px!important;margin:0!import
 #report .company{border-radius:0!important}
 #report .section-title{font-size:19px!important;line-height:1.4!important;margin-top:16px!important}
 #report .hint{font-size:11.5px!important;line-height:1.45!important}
+</style>
+<style id="dss-fix-export-list-clarity">
+#report #dssChemicalText,#report #dssEquipmentText{font-size:15px!important;line-height:1.55!important;word-break:normal!important}
+#report .dss-data-line{display:grid!important;grid-template-columns:28px minmax(0,1fr)!important;align-items:start!important;gap:8px!important;padding:5px 2px!important;break-inside:avoid!important}
+#report .dss-data-line .dss-line-index{display:block!important;width:28px!important;min-width:28px!important;white-space:nowrap!important;word-break:keep-all!important;overflow-wrap:normal!important;font-size:14px!important;text-align:right!important}
+#report .dss-data-line>span:last-child{display:block!important;min-width:0!important;white-space:normal!important;word-break:normal!important;overflow-wrap:break-word!important}
+#report .company .row>b{font-size:16px!important}
+#report .company .row>span{font-size:15px!important}
+#report .section-title{font-size:21px!important}
+#report .report-header h1{font-size:26px!important}
+#report .hint{font-size:13px!important}
 </style>
 </body></html>
 
