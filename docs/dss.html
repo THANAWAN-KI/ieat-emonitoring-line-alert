@@ -2164,22 +2164,8 @@ html body #supportList button:hover,html body #supportList button:focus-visible{
 </style>
 <script id="dss-three-column-map-resize">
 (function(){const map=document.getElementById('dssLiveMap');if(map&&window.ResizeObserver){new ResizeObserver(()=>{window.dssLeafletMap?.invalidateSize({pan:false})}).observe(map)}})();
-</script><style id="dss-nearby-map-alignment">
-html body #dssNearbyPanel{margin-top:var(--dss-map-offset,0px);max-height:var(--dss-map-panel-height,520px)}
-html body .editor h2{font-size:19px;line-height:1.5}
-@media(max-width:1250px){html body #dssNearbyPanel{margin-top:0;max-height:480px}}
-</style>
-<script id="dss-nearby-map-alignment-script">
-(function(){
- const workspace=document.querySelector('.workspace'),report=document.getElementById('report'),panel=document.getElementById('dssNearbyPanel'),map=document.querySelector('#report .mapbox');
- if(!workspace||!report||!panel||!map)return;
- let pending=false;
- function align(){pending=false;if(window.innerWidth<=1250){panel.style.removeProperty('--dss-map-offset');return}const offset=Math.max(0,map.getBoundingClientRect().top-workspace.getBoundingClientRect().top);panel.style.setProperty('--dss-map-offset',offset+'px');panel.style.setProperty('--dss-map-panel-height',Math.max(320,map.getBoundingClientRect().height)+'px')}
- function schedule(){if(!pending){pending=true;requestAnimationFrame(align)}}
- if(window.ResizeObserver){const observer=new ResizeObserver(schedule);observer.observe(report);observer.observe(map)}
- window.addEventListener('resize',schedule);document.fonts?.ready.then(schedule);schedule();
-})();
-</script><script id="dss-remove-search-introduction">
+</script>
+<script id="dss-remove-search-introduction">
 (function(){
  const editor=document.querySelector('.editor'),panel=document.getElementById('dssSimplePanel');
  editor?.querySelector(':scope > h2')?.remove();
@@ -2188,5 +2174,12 @@ html body .editor h2{font-size:19px;line-height:1.5}
  panel.querySelector(':scope > h3')?.remove();
  panel.querySelectorAll(':scope > p').forEach(p=>{if(p.id==='dssAutoStatus'){p.hidden=true;p.style.setProperty('display','none','important')}else p.remove()});
 })();
+</script><style id="dss-left-support-layout">
+html body .workspace{grid-template-columns:minmax(320px,360px) minmax(0,1fr)!important;max-width:1750px!important}
+html body .editor #dssNearbyPanel{position:static!important;margin-top:18px!important;max-height:480px!important;padding:12px!important;grid-column:auto!important}
+@media(max-width:850px){html body .workspace{grid-template-columns:minmax(0,1fr)!important}}
+</style>
+<script id="dss-left-support-layout-script">
+(function(){const editor=document.querySelector('.editor'),panel=document.getElementById('dssNearbyPanel');if(editor&&panel){editor.append(panel);window.dssLeafletMap?.invalidateSize({pan:false})}})();
 </script></body></html>
 
