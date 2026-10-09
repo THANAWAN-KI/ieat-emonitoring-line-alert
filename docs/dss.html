@@ -1254,7 +1254,7 @@ function normalizeHazardData(data){
 }
 function loadDssSource(){
  if(!dssSourcePromise)dssSourcePromise=(async()=>{
-  for(const url of ['./dss-data.json',dssHazardUrl]){
+  for(const url of ['./dss-data.json?v=restored-20261009',dssHazardUrl]){
    try{const response=await fetch(url,{signal:AbortSignal.timeout(url===dssHazardUrl?60000:45000)});if(!response.ok)throw Error('HTTP '+response.status);const features=normalizeHazardData(await response.json());if(!features.length)throw Error('ไม่มีข้อมูล');dssHazardOrigin=url===dssHazardUrl?'ระบบ DSS กนอ. (ต้นทาง)':'สำเนาข้อมูล DSS ในเว็บไซต์';dssHazardRetrievedAt=new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'});return features}catch(error){console.warn('DSS chemicals',error)}
   }
   dssSourcePromise=null;return [];
