@@ -1,5 +1,4 @@
 name: Update DSS Search Data
-
 on:
   push:
     paths:
@@ -7,28 +6,55 @@ on:
   schedule:
     - cron: "15 0 * * *"
   workflow_dispatch:
-
 permissions:
   contents: write
-
 jobs:
   update:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download DSS source data
+        with:
+          fetch-depth: 0
+      - name: Restore last valid DSS data if current copy is invalid
         run: |
-          mkdir -p docs
-          curl --fail --location --retry 4 --retry-delay 10 --connect-timeout 30 --max-time 300 \
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          p=Path('docs/dss-data.json')
+          def valid(text):
+              try:
+                  data=json.loads(text)
+                  rows=data if isinstance(data,list) else data.get('features',data.get('data',data.get('records',[]))) if isinstance(data,dict) else []
+                  return isinstance(rows,list) and len(rows)>0
+              except Exception: return False
+          if not valid(p.read_text()):
+              text=subprocess.check_output(['git','show','6e061fbed338710d29342bebd122841000737ace:docs/dss-data.json']).decode()
+              if not valid(text): raise RuntimeError('Backup DSS data invalid')
+              p.write_text(text)
+          PY
+      - name: Download and validate DSS source
+        run: |
+          if curl --fail --location --retry 2 --connect-timeout 20 --max-time 90 \
             --user-agent "Mozilla/5.0 IEAT-EMCC-DSS/1.0" \
             "https://emonitor.ieat.go.th/envisys/gis/file/hazardous8H8j51DukSmv9Opd4Z6dCVbuB5saueSIz2ErixyZp7lOdfcZX1t44oIdouDxWESk.json" \
-            --output docs/dss-data.tmp.json
-          python -m json.tool docs/dss-data.tmp.json > docs/dss-data.json
-          rm docs/dss-data.tmp.json
-      - name: Commit updated search data
+            --output docs/dss-data.tmp.json; then
+            python - <<'PY'
+          import json
+          from pathlib import Path
+          try:
+              data=json.loads(Path('docs/dss-data.tmp.json').read_text())
+              rows=data if isinstance(data,list) else data.get('features',data.get('data',data.get('records',[]))) if isinstance(data,dict) else []
+              if not isinstance(rows,list) or not rows: raise ValueError('Empty DSS source')
+              Path('docs/dss-data.json').write_text(json.dumps(data,ensure_ascii=False))
+          except Exception as e:
+              print('Keeping last valid DSS data:',e)
+          PY
+          fi
+          rm -f docs/dss-data.tmp.json
+      - name: Commit valid DSS data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
           git add docs/dss-data.json
-          git diff --cached --quiet || git commit -m "Update DSS search data"
+          git diff --cached --quiet || git commit -m "Update valid DSS search data"
           git push
