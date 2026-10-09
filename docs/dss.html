@@ -1268,7 +1268,7 @@ async function getDssFieldMetadata(){
 let nearbySequence=0;
 async function loadDssNearby(lat,lng){
   if(!validPoint())return;const sequence=++nearbySequence,radius=Number(state.bufferKm)||3;
-  state.nearbyLocationKey=lat.toFixed(5)+','+lng.toFixed(5);state.nearbyTime='กำลังปรับปรงข้อมูล';state.supportLocations=[];['hospital','fire','police','hydrant','community','cctv'].forEach(type=>{state[type+'Name']='กำลังค้นหาข้อมูล…';state[type+'Distance']='—'});render();if(window.dssSyncSupportMarkers)window.dssSyncSupportMarkers();
+  state.nearbyLocationKey=lat.toFixed(5)+','+lng.toFixed(5);state.nearbyTime='กำลังปรับปรุงข้อมูล';state.supportLocations=[];['hospital','fire','police','hydrant','community','cctv'].forEach(type=>{state[type+'Name']='กำลังค้นหาข้อมูล…';state[type+'Distance']='—'});render();if(window.dssSyncSupportMarkers)window.dssSyncSupportMarkers();
   const base='https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/';
   const sources=[['hospital','Hospital_Locations/FeatureServer/0','โรงพยาบาล'],['fire','Risk_Map_WFL1/FeatureServer/3','Name'],['police','Risk_Map_WFL1/FeatureServer/5','Name'],['hydrant','Risk_Map_WFL1/FeatureServer/4','Name'],['community','Map/FeatureServer/1','Name'],['cctv','ตำแหน่งกล้องCCTV/FeatureServer/7','Name']];
   await Promise.all(sources.map(async([type,path,nameField])=>{
