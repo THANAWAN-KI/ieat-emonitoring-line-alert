@@ -1308,7 +1308,11 @@ async function dssSupportCatalog(){
   const layers=groups.flat();
   // Known layer endpoints are a fallback when the service root metadata is unavailable
   // or uses generic layer names. We still query and validate each endpoint.
-  for(const layer of dssKnownSupportLayers)if(!layers.some(found=>found.path===layer.path))layers.push(layer);
+  for(const known of dssKnownSupportLayers){
+    const existing=layers.find(found=>found.path===known.path);
+    if(existing){existing.types=[...new Set([...existing.types,...known.types])];existing.fallback=true}
+    else layers.push({...known});
+  }
   return layers;
  })().catch(error=>{dssSupportCatalogPromise=null;throw error});
  return dssSupportCatalogPromise;
