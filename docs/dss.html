@@ -2186,5 +2186,18 @@ html body .editor #dssNearbyPanel{position:static!important;margin-top:18px!impo
 </style>
 <script id="dss-left-support-layout-script">
 (function(){const editor=document.querySelector('.editor'),panel=document.getElementById('dssNearbyPanel');if(editor&&panel){editor.append(panel);window.dssLeafletMap?.invalidateSize({pan:false})}})();
-</script></body></html>
+</script><style id="dss-fit-incident-and-report">
+html body .workspace{grid-template-columns:minmax(300px,340px) minmax(0,1fr)!important;max-width:1500px!important;gap:20px!important}
+html body .editor{padding:16px!important}
+html body .editor #dssIncidentMode{width:100%!important;min-width:0!important;margin:0 0 14px!important;padding:12px 14px!important;background:#17324f!important;box-shadow:none!important;border-radius:8px!important}
+html body .editor #dssIncidentMode label{display:block!important;font-size:15px!important;line-height:1.5!important;margin:0 0 6px!important}
+html body .editor #dssIncidentMode select{display:block!important;width:100%!important;max-width:100%!important;min-width:0!important;height:42px!important;padding:7px 10px!important;font-size:16px!important;line-height:1.5!important;color:#253449!important;border:1px solid #d4dce5!important;box-sizing:border-box!important}
+html body .editor #dssIncidentMode .hint{font-size:12px!important;margin-top:7px!important;line-height:1.6!important}
+html body .report-wrap{width:100%!important;min-width:0!important}
+html body #report{width:100%!important;max-width:1050px!important;min-height:0!important;margin:0 auto!important;padding:28px!important;box-sizing:border-box!important}
+html body #report .report-header h1{font-size:clamp(18px,1.6vw,22px)!important;line-height:1.5!important;overflow-wrap:anywhere}
+html body #report .company .row{grid-template-columns:minmax(140px,190px) minmax(0,1fr)!important}
+@media(max-width:850px){html body .workspace{grid-template-columns:minmax(0,1fr)!important;gap:16px!important}html body #report{padding:18px!important}html body #report .company .row{grid-template-columns:140px minmax(0,1fr)!important}}
+@media(max-width:480px){html body .workspace{padding:0 8px!important}html body #report{padding:14px!important}html body #report .company .row{grid-template-columns:115px minmax(0,1fr)!important}html body #report .company .row > b,html body #report .company .row > span{padding:9px 10px!important}}
+</style></body></html>
 
