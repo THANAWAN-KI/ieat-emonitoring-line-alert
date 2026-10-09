@@ -1274,7 +1274,7 @@ const dssSupportRoots=[
 ];
 const dssSupportPatterns={
  hospital:/hospital|โรงพยาบาล|สถานพยาบาล/i,
- fire:/fire.?station|fire.?brigade|ดับเพลิง|สถานีดับเพลิง|สถานีป้องกัน/i,
+ fire:/fire|fire.?station|fire.?brigade|ดับเพลิง|สถานีดับเพลิง|สถานีป้องกัน/i,
  police:/police|ตำรวจ|สถานีตำรวจ/i,
  hydrant:/hydrant|fire.?hydrant|หัวจ่ายน้ำ|หัวดับเพลิง|ประปาหัวแดง/i,
  community:/community|communities|ชุมชน|หมู่บ้าน/i,
@@ -1291,10 +1291,12 @@ async function dssSupportJSON(url,timeout=12000){
 async function dssSupportCatalog(){
  if(!dssSupportCatalogPromise)dssSupportCatalogPromise=(async()=>{
   const groups=await Promise.all(dssSupportRoots.map(async root=>{
-   const service=await dssSupportJSON(dssSupportBase+root.path+'?f=json');
-   return (service.layers||[]).filter(layer=>!layer.subLayerIds?.length).map(layer=>({
-     path:root.path+'/'+layer.id,title:String(layer.name||''),root:root.path,types:root.types
-   }));
+   try{
+     const service=await dssSupportJSON(dssSupportBase+root.path+'?f=json');
+     return (service.layers||[]).filter(layer=>!layer.subLayerIds?.length).map(layer=>({
+       path:root.path+'/'+layer.id,title:String(layer.name||''),description:String(layer.description||''),root:root.path,types:root.types
+     }));
+   }catch(error){console.warn('DSS FeatureServer unavailable',root.path,error);return []}
   }));
   const layers=groups.flat();
   if(!layers.length)throw Error('FeatureServer ไม่ส่งรายชื่อชั้นข้อมูล');
