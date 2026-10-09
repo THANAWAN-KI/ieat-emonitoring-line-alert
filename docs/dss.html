@@ -1536,8 +1536,7 @@ async function selectDssLookup(item){
     else{lat=Number(attrs.latitude);lng=Number(attrs.longitude)}
 
   }
-  const keepIncidentPoint=state.positionSource==='manual'&&state.keepManualPosition!==false&&validPoint();
-  if(keepIncidentPoint){lat=Number(state.lat);lng=Number(state.lng)}
+  const keepIncidentPoint=false; // Always use the location returned for the selected factory/estate.
   if(!Number.isFinite(lat)||!Number.isFinite(lng)||lat<5||lat>22||lng<97||lng>106){factoryLookupStatus.textContent='พบข้อมูล แต่ไม่มีพิกัดที่ถูกต้อง กรุณาเลือกพื้นที่อื่น';return}
   const nearby={};['hospital','fire','police','hydrant','community','cctv'].forEach(type=>{nearby[type+'Name']=defaults[type+'Name'];nearby[type+'Distance']=defaults[type+'Distance']});
   if(state.company!==item.name){state.leakChemical='';state.leakCAS='';state.leakUN='';state.leakState='';state.leakTime='';state.leakQuantity='';state.leakSource='';state.leakStatus='';state.leakDetails='';state.leakReporter='';state.leakConfirmedAt='';state.leakWater='';state.leakSupport='';}
@@ -2236,85 +2235,93 @@ html body .top-actions #backToRiskmapBtn:focus {
 </script>
 
 <style id="dss-easy-wizard-css">
-.dss-easy-intro{background:#f8f3fd;border-left:4px solid #64249b;padding:12px;margin:10px 0 14px}
-.dss-easy-intro strong{display:block;color:#532284;font-size:20px}
-.dss-easy-intro p{margin:4px 0;font-size:15px}
-.dss-easy-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin:10px 0}
-.dss-easy-step{border:1px solid #d8cbe4!important;background:#fff!important;color:#502279!important;border-radius:7px!important;padding:9px 4px!important;font-size:13px!important;line-height:1.5}
-.dss-easy-step[aria-current="step"]{background:#64249b!important;color:#fff!important;border-color:#64249b!important}
-.dss-easy-select{padding:12px;border:1px solid #dfd5e6;background:white;margin-bottom:12px}
-.dss-easy-select[hidden]{display:none!important}
-.dss-easy-select label{display:block;font-weight:700;color:#502279;font-size:16px;margin-bottom:6px}
-.dss-easy-select select{width:100%;padding:10px;border:1px solid #b8adc5;font:inherit}
-.dss-easy-actions{display:flex;gap:8px;margin-top:16px;border-top:1px solid #e6dce9;padding-top:14px}
-.dss-easy-actions button{flex:1;background:#64249b!important;color:#fff!important;border-radius:8px!important;padding:11px!important}
-.dss-easy-actions button:disabled{opacity:.45}
-.editor [data-easy-stage]:not(.dss-easy-show){display:none!important}
-.editor .dss-easy-advanced:not(.dss-easy-open){display:none!important}
-.dss-easy-more{width:100%;margin:12px 0!important;background:#f5effb!important;color:#59288c!important;border:1px solid #d9c6e8!important;font-size:15px!important}
-.dss-easy-end{background:#eff9f2;padding:12px;border-left:3px solid #18794e;margin-top:8px}
-@media(max-width:520px){.dss-easy-step{font-size:11px!important}}
+/* Simplified entry: one search, automatic data, optional incident facts only. */
+.editor{font-size:15px}
+#dssEasyWizard{background:#fff;border:1px solid #ded6e8;border-radius:12px;padding:14px;margin:12px 0}
+#dssEasyWizard .simple-title{font-size:21px;font-weight:800;color:#55227c;line-height:1.4}
+#dssEasyWizard .simple-help{font-size:14px;color:#655b6a;margin:4px 0 16px;line-height:1.6}
+#dssEasyWizard .simple-field{margin:0 0 16px}
+#dssEasyWizard .simple-field>label{display:block;font-weight:700;margin-bottom:7px;color:#33263e}
+#dssEasyWizard select,#dssEasyWizard input{font-size:16px!important;width:100%;min-height:42px}
+#dssEasyWizard .mini-actions{display:flex;gap:6px}
+#dssEasyWizard .mini-actions #factoryLookup{min-width:0;flex:1}
+#dssEasyWizard .mini-actions button{white-space:normal;padding:9px!important;flex:0 0 auto}
+#dssEasyWizard .simple-summary{background:#f6f1fa;border-left:4px solid #64249b;padding:10px;font-size:14px;line-height:1.65;margin:12px 0;white-space:pre-line}
+#dssEasyWizard .simple-summary[data-state="warning"]{border-color:#bc7920;background:#fff8ec}
+#dssEasyWizard .simple-primary{width:100%;padding:12px!important;background:#64249b!important;color:white!important;border-radius:8px!important}
+#dssEasyWizard .simple-more{width:100%;margin-top:8px!important;background:#faf7fc!important;color:#52257d!important;border:1px solid #cbb9dc!important;font-size:14px!important}
+#dssEasyWizard #factoryLookupStatus{font-size:13px}
+.editor >.field,.editor >.hint,.editor >#draftStatus,.editor >#form,.editor >.dss-easy-actions,.editor >.dss-easy-complete{display:none!important}
+.editor #dssSimpleExtras[hidden],.editor #dssSimpleChemical[hidden]{display:none!important}
+.editor #dssSimpleExtras{padding:10px 0}
+.editor #dssSimpleExtras .field{margin:0 0 10px}
+.editor #dssSimpleChemical{background:#f9f6fc;border:1px solid #e4d8ef;padding:12px;border-radius:8px;margin:8px 0 14px}
+.editor #dssSimpleChemical p{font-size:13px;line-height:1.6}
+.editor #dssSimpleChemical select,.editor #dssSimpleChemical input,.editor #dssSimpleChemical textarea{width:100%;font:inherit;margin:4px 0 10px;min-height:36px}
+.editor #dssSimpleChemical button{padding:9px!important}
+#dispersionEditor{display:none!important}
+#report .note{display:none!important}
+@media(max-width:580px){#dssEasyWizard .mini-actions{display:block}#dssEasyWizard .mini-actions button{width:100%;margin-top:7px}}
 </style>
 <script id="dss-easy-wizard-js">
 (function(){
- const editor=document.querySelector('.editor'),form=document.getElementById('form');
- if(!editor||!form||document.getElementById('dssEasyWizard'))return;
- const searchField=document.getElementById('factoryLookup')?.closest('.field');
- const bufferField=document.getElementById('bufferKm')?.closest('.field');
- const names=['เลือกเหตุและบริษัท','บันทึกเหตุการณ์','ตรวจสอบรายงาน'];
- const descriptions=['เลือกประเภทเหตุ แล้วค้นหาชื่อบริษัทหรือนิคมฯ','กรอกเฉพาะรายละเอียดเหตุการณ์ที่ทราบ','ตรวจสอบตำแหน่งและรายงานด้านขวา จากนั้นดาวน์โหลด PNG'];
- const box=document.createElement('div');box.id='dssEasyWizard';
- box.innerHTML='<div class="dss-easy-intro"><strong id="dssEasyTitle"></strong><p id="dssEasyText"></p></div><nav class="dss-easy-steps" aria-label="ขั้นตอนทำรายงาน"></nav><div class="dss-easy-select"><label for="dssEasyEvent">ประเภทเหตุการณ์</label><select id="dssEasyEvent"><option value="เหตุเพลิงไหม้">เหตุเพลิงไหม้</option><option value="สารเคมีรั่วไหล">สารเคมีรั่วไหล</option><option value="เหตุเพลิงไหม้ร่วมกับสารเคมีรั่วไหล">เพลิงไหม้ร่วมกับสารเคมีรั่วไหล</option></select></div>';
+ const editor=document.querySelector('.editor'),form=document.getElementById('form'),lookup=document.getElementById('factoryLookup');
+ if(!editor||!form||!lookup||document.getElementById('dssEasyWizard'))return;
+ const original=lookup.closest('.field');
+ const box=document.createElement('section');box.id='dssEasyWizard';
+ box.innerHTML='<div class="simple-title">สร้างรายงานเหตุฉุกเฉิน</div><p class="simple-help">เลือกประเภทเหตุ ค้นหาโรงงานเพียงครั้งเดียว แล้วระบบจะเติมข้อมูลบริษัท สารเคมี อุปกรณ์สนับสนุน ตำแหน่ง และอากาศให้อัตโนมัติเมื่อมีข้อมูล</p><div class="simple-field"><label for="dssEasyEvent">1. ประเภทเหตุการณ์</label><select id="dssEasyEvent"><option value="เหตุเพลิงไหม้">ไฟไหม้</option><option value="สารเคมีรั่วไหล">สารเคมีรั่วไหล</option><option value="เหตุเพลิงไหม้ร่วมกับสารเคมีรั่วไหล">ไฟไหม้และสารเคมีรั่วไหล</option></select></div><div class="simple-field" id="dssSimpleLookup"><label for="factoryLookup">2. ค้นหานิคมอุตสาหกรรม / บริษัท / เลขทะเบียน</label></div><div class="simple-summary" id="dssSimpleStatus" data-state="warning" role="status">ยังไม่ได้เลือกโรงงาน กรุณาพิมพ์ค้นหา แล้วเลือกรายการที่ตรงกับจุดเกิดเหตุ</div><div id="dssSimpleChemical" hidden><strong>สารเคมีที่เกี่ยวข้องกับเหตุครั้งนี้ (ถ้าทราบ)</strong><p>สารเคมีในคลังโรงงานไม่ใช่การยืนยันชนิดหรือปริมาณที่รั่ว เลือกจากรายการแล้วตรวจสอบกับผู้แจ้งเหตุ</p><div id="dssSimpleChemFields"></div></div><button type="button" class="simple-primary" id="dssSimpleView">ดูรายงานและแผนที่ →</button><button type="button" class="simple-more" id="dssSimpleToggle">รายละเอียดเพิ่มเติม (ไม่จำเป็นต้องกรอก) ▾</button><div id="dssSimpleExtras" hidden></div>';
  editor.querySelector('h2')?.after(box);
- const nav=box.querySelector('nav');
- names.forEach((v,i)=>{const b=document.createElement('button');b.type='button';b.className='dss-easy-step';b.textContent=(i+1)+'. '+v;b.onclick=()=>show(i);nav.append(b)});
- searchField?.setAttribute('data-easy-stage','0');
- bufferField?.setAttribute('data-easy-stage','2');
- // Keep all underlying fields and handlers; hide optional inputs only in the simple view.
- const essential=new Set(['incidentDetails','occurredAt','notifiedAt','level','lat','lng']);
- Array.from(form.children).forEach(child=>{
-  if(child.classList.contains('group')){
-   const heading=child.querySelector('h3')?.textContent||'';
-   const stage=heading.includes('ข้อมูลเอกสาร')||heading.includes('สถานประกอบการและเหตุการณ์')?1:2;
-   child.dataset.easyStage=String(stage);
-   child.querySelectorAll('.field').forEach(field=>{
-    const control=field.querySelector('[data-key]');
-    if(control&&!essential.has(control.dataset.key))field.classList.add('dss-easy-advanced');
-   });
-   if(heading.includes('ข้อมูลเอกสาร')||heading.includes('ข้อมูลเหตุสารเคมี')||heading.includes('ข้อมูลใกล้เคียง')||heading.includes('หมายเหตุ'))child.classList.add('dss-easy-advanced');
-  }else{child.dataset.easyStage='2';}
+ const host=box.querySelector('#dssSimpleLookup');
+ if(original){while(original.firstChild){let child=original.firstChild;if(child.tagName==='LABEL'){child.remove();continue}host.appendChild(child)}original.remove()}
+ const selector=box.querySelector('#dssEasyEvent'),actual=document.getElementById('event');
+ if(actual&&Array.from(selector.options).some(o=>o.value===actual.value))selector.value=actual.value;
+ selector.addEventListener('change',()=>{
+  if(actual){actual.value=selector.value;actual.dispatchEvent(new Event('input',{bubbles:true}));actual.dispatchEvent(new Event('change',{bubbles:true}))}
+  updateChemical();
  });
- // Some core incident input controls are dynamically injected by the existing DSS scripts.
- const actionWrap=document.createElement('div');
- actionWrap.innerHTML='<button type="button" id="dssEasyMore" class="dss-easy-more">แสดงช่องข้อมูลเพิ่มเติม ▾</button><div class="dss-easy-actions"><button id="dssEasyBack" type="button">← ย้อนกลับ</button><button id="dssEasyNext" type="button">ถัดไป →</button></div><p id="dssEasyFinish" class="dss-easy-end" hidden>ตรวจสอบข้อมูลบนรายงานด้านขวา แล้วกดปุ่ม “ดาวน์โหลด PNG” ด้านบน</p>';
- editor.append(actionWrap);
- let index=0,advanced=false;
- const actual=document.getElementById('event'),selector=document.getElementById('dssEasyEvent');
- if(actual&&[...selector.options].some(o=>o.value===actual.value))selector.value=actual.value;
- selector.onchange=()=>{if(!actual)return;actual.value=selector.value;actual.dispatchEvent(new Event('input',{bubbles:true}));actual.dispatchEvent(new Event('change',{bubbles:true}))};
- actual?.addEventListener('change',()=>{if([...selector.options].some(o=>o.value===actual.value))selector.value=actual.value});
- function refreshAdvanced(){
-  editor.querySelectorAll('.dss-easy-advanced').forEach(el=>el.classList.toggle('dss-easy-open',advanced));
-  document.getElementById('dssEasyMore').textContent=advanced?'ซ่อนช่องข้อมูลเพิ่มเติม ▴':'แสดงช่องข้อมูลเพิ่มเติม ▾';
+ actual?.addEventListener('change',()=>{if(Array.from(selector.options).some(o=>o.value===actual.value))selector.value=actual.value;updateChemical()});
+ const chem=box.querySelector('#dssSimpleChemical'),chemFields=box.querySelector('#dssSimpleChemFields');
+ const originalChem=document.getElementById('chemicalIncidentEditor');
+ if(originalChem){
+   const help=originalChem.querySelector('.chemical-mode-help');
+   if(help)chemFields.append(help);
+   for(const key of ['leakChemical','leakQuantity','leakStatus']){
+     const input=document.getElementById(key),field=input?.closest('.field');
+     if(field)chemFields.append(field);
+   }
  }
- document.getElementById('dssEasyMore').onclick=()=>{advanced=!advanced;refreshAdvanced()};
- function show(step){
-  index=Math.max(0,Math.min(2,step));advanced=false;
-  editor.querySelectorAll('[data-easy-stage]').forEach(el=>el.classList.toggle('dss-easy-show',Number(el.dataset.easyStage)===index));
-  box.querySelector('.dss-easy-select').hidden=index!==0;
-  document.getElementById('dssEasyTitle').textContent='ขั้นตอนที่ '+(index+1)+' · '+names[index];
-  document.getElementById('dssEasyText').textContent=descriptions[index];
-  [...nav.children].forEach((b,i)=>b.setAttribute('aria-current',i===index?'step':'false'));
-  document.getElementById('dssEasyBack').disabled=index===0;
-  document.getElementById('dssEasyNext').textContent=index===2?'ดูรายงาน →':'ถัดไป →';
-  document.getElementById('dssEasyFinish').hidden=index!==2;
-  document.getElementById('dssEasyMore').hidden=index===0;
-  refreshAdvanced();
-  if(step!==0)editor.scrollIntoView({behavior:'smooth',block:'start'});
+ function updateChemical(){chem.hidden=selector.value==='เหตุเพลิงไหม้'}
+ updateChemical();
+ const extras=box.querySelector('#dssSimpleExtras');
+ const custom=document.createElement('div');custom.innerHTML='<p style="font-size:13px">ข้อมูลจากฐานข้อมูลจะแสดงในรายงานอัตโนมัติ หากจำเป็นจึงแก้รายละเอียดเหตุด้านล่าง</p>';
+ extras.append(custom);
+ for(const key of ['level','leakTime','leakDetails','leakSource']){
+   const el=document.getElementById(key),field=el?.closest('.field');
+   if(field){if(key.startsWith('leak'))field.dataset.chemOnly='true';extras.append(field)}
  }
- document.getElementById('dssEasyBack').onclick=()=>show(index-1);
- document.getElementById('dssEasyNext').onclick=()=>{if(index===2){document.getElementById('report')?.scrollIntoView({behavior:'smooth',block:'start'});return}show(index+1)};
- show(0);
+ const toggle=box.querySelector('#dssSimpleToggle');
+ toggle.addEventListener('click',()=>{extras.hidden=!extras.hidden;toggle.textContent=extras.hidden?'รายละเอียดเพิ่มเติม (ไม่จำเป็นต้องกรอก) ▾':'ซ่อนรายละเอียดเพิ่มเติม ▴'});
+ const status=box.querySelector('#dssSimpleStatus'),lookupStatus=document.getElementById('factoryLookupStatus');
+ function updateStatus(){
+   const company=document.querySelector('#report [data-out="company"]')?.textContent?.trim()||'';
+   const selected=company&&!/^บริษัท \/ โรงงานที่เกิดเหตุ$/.test(company)&&company!=='—';
+   const text=lookupStatus?.textContent||'';
+   if(selected&&lookup.value.trim()===company){
+     status.dataset.state='ok';
+     status.textContent='✓ เลือก: '+company+'\nระบบดึงข้อมูลจากฐานข้อมูลให้แล้ว ตรวจสอบตำแหน่งบนแผนที่และความครบถ้วนของข้อมูลก่อนส่งออก\n'+text;
+   }else{status.dataset.state='warning';status.textContent='ค้นหาชื่อบริษัทหรือนิคมฯ แล้วเลือกรายการที่ตรงกับจุดเกิดเหตุ\n'+text}
+ }
+ lookup.addEventListener('input',updateStatus);
+ const observer=new MutationObserver(updateStatus);
+ if(lookupStatus)observer.observe(lookupStatus,{childList:true,subtree:true,characterData:true});
+ const companyOut=document.querySelector('#report [data-out="company"]');
+ if(companyOut)observer.observe(companyOut,{childList:true,characterData:true});
+ box.querySelector('#dssSimpleView').addEventListener('click',()=>{
+   updateStatus();
+   if(status.dataset.state!=='ok'){lookup.focus();status.textContent='กรุณาเลือกรายการโรงงานหรือนิคมฯ จากผลการค้นหาก่อนตรวจรายงาน';return}
+   document.getElementById('report')?.scrollIntoView({behavior:'smooth',block:'start'});
+ });
+ updateStatus();
 })();
 </script>
 
