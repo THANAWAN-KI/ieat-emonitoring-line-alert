@@ -2400,5 +2400,39 @@ html body .workspace .report-wrap #report{width:1050px!important;margin:0!import
 #dssNearbyRail #supportList:empty:before{content:'ค้นหาและเลือกสถานประกอบการเพื่อโหลดจุดสนับสนุนใกล้เคียง';padding:12px;line-height:1.5;color:#666}
 #dssNearbyRail #supportList .hint{font-size:14px;line-height:1.65;white-space:normal}
 </style>
+<style id="dss-refresh-data-style">
+#dssNearbyRefresh{display:block;width:calc(100% - 20px);margin:8px 10px;border:1px solid #69279d;background:#fff;color:#592283;padding:10px;font-size:14px;border-radius:8px;flex-shrink:0}
+#dssNearbyRefresh:disabled{opacity:.6}
+#dssNearbyRail .dss-nearby-caption{line-height:1.55;overflow-wrap:anywhere}
+#dssNearbyRail #supportList{flex:1 1 auto;overflow-y:auto!important}
+</style>
+<script id="dss-refresh-data-script">
+(function(){
+ const rail=document.getElementById('dssNearbyRail');
+ const list=document.getElementById('supportList');
+ if(!rail||!list||document.getElementById('dssNearbyRefresh'))return;
+ const button=document.createElement('button');button.id='dssNearbyRefresh';button.type='button';button.textContent='↻ อัปเดตตำแหน่งและสภาพอากาศ';
+ const caption=rail.querySelector('.dss-nearby-caption');
+ if(caption)caption.after(button);else rail.prepend(button);
+ const canRefresh=()=>typeof validPoint==='function'&&validPoint()&&typeof state==='object'&&state.company&&state.company!=='บริษัท / โรงงานที่เกิดเหตุ';
+ async function refresh(){
+   if(!canRefresh()){const p=document.createElement('p');p.className='hint';p.textContent='กรุณาค้นหาและเลือกโรงงานหรือนิคมฯ ก่อนดึงข้อมูลสนับสนุน';list.replaceChildren(p);return}
+   button.disabled=true;button.textContent='กำลังอัปเดตข้อมูล…';
+   try{
+     await Promise.allSettled([
+       loadDssNearby(Number(state.lat),Number(state.lng)),
+       loadWeather()
+     ]);
+   }finally{button.disabled=false;button.textContent='↻ อัปเดตตำแหน่งและสภาพอากาศ'}
+ }
+ button.addEventListener('click',refresh);
+ const previous=rail.querySelector('h3');
+ if(previous)previous.textContent='📍 ตำแหน่งสนับสนุนใกล้เคียง';
+ // Re-fetch on page reload only when a factory/estate has already been selected.
+ if(canRefresh() && (!Array.isArray(state.supportLocations)||!state.supportLocations.length || !state.weatherTime)){
+   refresh();
+ }
+})();
+</script>
 </body></html>
 
