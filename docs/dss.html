@@ -1467,7 +1467,7 @@ async function selectDssLookup(item){
      if(data.features?.length)item={...item,feature:normalizeEppFeature(data.features[0]),fields:await getDssFieldMetadata()};
     }catch(error){console.warn('Factory map lookup; using DSS point if available',error)}
     const [hazards,equipment]=await Promise.all([loadDssSource(),loadDssEquipment()]);
-    item.dssFeature=matchingDssFeature(hazards,item.name,item.feature.attributes.IEAT,item.dssFeature||item.feature.attributes)||item.dssFeature;
+    item.dssFeature=matchingDssFeature(hazards,item.name,item.feature.attributes.IEAT,item.dssFeature||item.feature.attributes)||item.dssFeature||matchingDssFeature(hazards,item.name,item.feature.attributes.IEAT,{});
     if(!item.feature?.geometry&&item.dssFeature?.geometry?.coordinates){
      const coordinates=item.dssFeature.geometry.coordinates;
      item={...item,feature:{attributes:{...attrs},geometry:{x:Number(coordinates[0]),y:Number(coordinates[1])}}};
@@ -1848,7 +1848,8 @@ html body #report .dss-buffer-distance span{border-width:2px!important;backgroun
  async function reloadCompanyChemicals(){
  const features=await loadDssSource();
  const reference={fid14n:String(state.registration||'').split(' / ')[0]};
- const matched=matchingDssFeature(features,state.company,state.estate,reference);
+ const matched=matchingDssFeature(features,state.company,state.estate,reference)||matchingDssFeature(features,state.company,state.estate,{});
+ if(!matched&&(state.hazardCatalog||[]).length){render();return}
  const data=incidentSourceReport({dssFeature:matched});
  state.hazardCatalog=data.hazardCatalog;state.chemical=data.chemical;state.chemicalDataSource=data.chemicalDataSource||'ไม่สามารถดึงข้อมูลสารเคมีได้';state.chemicalDataTime=data.chemicalDataTime||'—';render();
 }
