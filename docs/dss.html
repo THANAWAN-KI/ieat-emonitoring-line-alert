@@ -1703,9 +1703,42 @@ async function downloadReportPng(){
         if(caption)caption.style.setProperty('display','none','important');
       }
     });
+    // A4 portrait export: preserve every row, and split long reports into page-sized segments.
+    const pageWidth=1240,pageHeight=1754,margin=42,usableWidth=pageWidth-margin*2,usableHeight=pageHeight-margin*2;
+    const ratio=usableWidth/canvas.width,segmentHeight=usableHeight/ratio;
+    const boundaries=[0,canvas.height];
+    const reportBounds=report.getBoundingClientRect();
+    report.querySelectorAll('.row,.section-title,.map-weather,.report-header,.dss-data-line,#dssChemicalText,#dssEquipmentText').forEach(el=>{
+      const rect=el.getBoundingClientRect();
+      const px=(rect.top-reportBounds.top)*canvas.height/Math.max(1,reportBounds.height);
+      if(px>0&&px<canvas.height)boundaries.push(px);
+    });
+    boundaries.sort((a,b)=>a-b);
+    const cuts=[0];let pos=0;
+    while(pos<canvas.height-1){
+      const desired=Math.min(canvas.height,pos+segmentHeight);
+      if(desired>=canvas.height-1){cuts.push(canvas.height);break}
+      const possible=boundaries.filter(v=>v>pos+segmentHeight*.68&&v<=desired-4);
+      const next=possible.length?possible[possible.length-1]:desired;
+      if(next<=pos+5)break;
+      cuts.push(next);pos=next;
+    }
+    if(cuts[cuts.length-1]<canvas.height)cuts.push(canvas.height);
+    const pages=cuts.length-1;
+    const finalCanvas=document.createElement('canvas');finalCanvas.width=pageWidth;finalCanvas.height=pageHeight*pages;
+    const context=finalCanvas.getContext('2d');
+    context.fillStyle='#fff';context.fillRect(0,0,finalCanvas.width,finalCanvas.height);
+    for(let i=0;i<pages;i++){
+      const start=cuts[i],height=cuts[i+1]-cuts[i],scaledHeight=height*ratio;
+      context.drawImage(canvas,0,start,canvas.width,height,margin,i*pageHeight+margin,usableWidth,scaledHeight);
+      context.strokeStyle='#e8e0ee';context.lineWidth=1;
+      context.strokeRect(1,i*pageHeight+1,pageWidth-2,pageHeight-2);
+      context.fillStyle='#777';context.font='18px Sarabun,sans-serif';
+      context.textAlign='right';context.fillText('IEAT DSS · A4 · '+(i+1)+' / '+pages,pageWidth-margin,(i+1)*pageHeight-18);
+    }
     const a=document.createElement('a');
-    a.download='IEAT-DSS-'+(state.reportNo||Date.now())+'.png';
-    a.href=canvas.toDataURL('image/png');
+    a.download='IEAT-DSS-A4-'+(state.reportNo||Date.now())+'.png';
+    a.href=finalCanvas.toDataURL('image/png');
     a.click();
   }catch(error){console.error(error);alert('ดาวน์โหลด PNG ไม่สำเร็จ: '+error.message)}
   finally{loading.classList.remove('show');pngBtn.disabled=false}
