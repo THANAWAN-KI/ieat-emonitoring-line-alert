@@ -1359,7 +1359,7 @@ function dssHazardReport(feature){
   chemicals.push(name+(details.length?' · '+details.join(' · '):''));
   if(p[prefix+'chemical'])responses.push(name+' — สารดับเพลิงที่ระบุ: '+p[prefix+'chemical']);
  }
- return {chemical:chemicals.join('\n')||(p.doc_active===false?'รายการโรงงานนี้ใน DSS ไม่ active และไม่มีรายละเอียดสารเคมีในไฟล์ต้นทาง':'ไม่มีรายการสารเคมีที่ระบุในคลัง DSS ของโรงงานนี้'),response:responses.join('\n')||'ไม่มีข้อมูลสารดับเพลิงหรือการระงับเหตุที่ระบุในคลัง DSS ของโรงงานนี้'};
+ return {chemical:chemicals.join('\n')||(p.doc_active===false?'ไม่มีข้อมูลในระบบ DSS':'ไม่มีข้อมูลในระบบ DSS'),response:responses.join('\n')||'ไม่มีข้อมูลในระบบ DSS'};
 }
 
 
@@ -1375,9 +1375,9 @@ async function loadDssEquipment(){
  return dssEquipmentPromise;
 }
 function dssEquipmentReport(feature,unavailable){
- if(unavailable)return 'ยังโหลดข้อมูลอุปกรณ์ระงับเหตุไม่ได้ กรุณาเลือกโรงงานอีกครั้ง';
- if(!feature)return 'ยังจับคู่โรงงานกับข้อมูลอุปกรณ์ระงับเหตุไม่ได้';
- if(feature.properties?.doc_active===false&&!Object.keys(feature.properties).some(k=>/^equipment\\d+_name$/.test(k)&&feature.properties[k]))return 'รายการโรงงานนี้ใน DSS ไม่ active และไม่มีรายละเอียดอุปกรณ์ระงับเหตุในไฟล์ต้นทาง';
+ if(unavailable)return 'โหลดข้อมูลระบบ DSS ไม่สำเร็จ';
+ if(!feature)return 'ไม่มีข้อมูลในระบบ DSS';
+ if(feature.properties?.doc_active===false&&!Object.keys(feature.properties).some(k=>/^equipment\\d+_name$/.test(k)&&feature.properties[k]))return 'ไม่มีข้อมูลในระบบ DSS';
  const p=feature.properties||{},lines=[];
  const keys=Object.keys(p).filter(key=>/^equipment\d+_name$/.test(key)).sort((a,b)=>Number(a.match(/\d+/)[0])-Number(b.match(/\d+/)[0]));
  keys.forEach(key=>{
@@ -1385,13 +1385,13 @@ function dssEquipmentReport(feature,unavailable){
   const details=[p[prefix+'type'],p[prefix+'amount']!==null&&p[prefix+'amount']!==undefined?'จำนวน '+p[prefix+'amount']+' '+(p[prefix+'amountUnit']||''):'',p[prefix+'volume']!==null&&p[prefix+'volume']!==undefined?'ขนาด/ปริมาตร '+p[prefix+'volume']+' '+(p[prefix+'volumeUnit']||''):''].filter(value=>value!==undefined&&value!==null&&String(value).trim()!=='');
   lines.push(p[key]+(details.length?' · '+details.join(' · '):''));
  });
- return lines.join('\n')||'โรงงานนี้ไม่มีรายการอุปกรณ์ระงับเหตุในไฟล์ข้อมูล';
+ return lines.join('\n')||'ไม่มีข้อมูลในระบบ DSS';
 }
 function incidentSourceReport(item){
  const hazard=dssHazardReport(item.dssFeature);
  const p=item.dssFeature?.properties||{},hazardCatalog=[];
  for(let i=1;i<=20;i++){const prefix='hazard'+i+'_';if(p[prefix+'name'])hazardCatalog.push({name:String(p[prefix+'name']),cas:String(p[prefix+'casNo']||''),un:String(p[prefix+'unNo']||''),state:String(p[prefix+'state']||''),volume:String(p[prefix+'volume']||''),unit:String(p[prefix+'storageUnit']||''),container:String(p[prefix+'container']||''),response:String(p[prefix+'chemical']||'')})}
- return {hazardCatalog,chemicalDataSource:dssHazardOrigin,chemicalDataTime:dssHazardRetrievedAt,chemical:item.dssFeature?hazard.chemical:'ยังจับคู่โรงงานกับข้อมูลสารเคมีไม่ได้',response:dssEquipmentReport(item.equipmentFeature,item.equipmentUnavailable)};
+ return {hazardCatalog,chemicalDataSource:dssHazardOrigin,chemicalDataTime:dssHazardRetrievedAt,chemical:item.dssFeature?hazard.chemical:'ไม่มีข้อมูลในระบบ DSS',response:dssEquipmentReport(item.equipmentFeature,item.equipmentUnavailable)};
 }
 
 let factoryNameIndex=[],factoryNameIndexPromise;
@@ -1825,10 +1825,10 @@ button:disabled{opacity:.6;cursor:wait}input[type=checkbox]{width:auto!important
 (function(){
 const eventInput=document.getElementById('event');const eventSelect=document.createElement('select');eventSelect.id='event';eventSelect.dataset.key='event';
 ['เหตุเพลิงไหม้','สารเคมีรั่วไหล','เหตุเพลิงไหม้ร่วมกับสารเคมีรั่วไหล'].forEach(value=>{const option=new Option(value,value);eventSelect.add(option)});if(!Array.from(eventSelect.options).some(o=>o.value===state.event))eventSelect.add(new Option(state.event,state.event));eventInput.replaceWith(eventSelect);const modeHint=document.createElement('p');modeHint.className='hint';modeHint.textContent='ค่าเริ่มต้นเป็นไฟไหม้ทั่วไป หากเป็นเหตุสารเคมีรั่วไหล ให้เปลี่ยนประเภทเหตุเพื่อเปิดข้อมูลเฉพาะสารเคมี';eventSelect.after(modeHint);
-const checks=document.createElement('div');checks.id='incidentChecks';checks.innerHTML='<label><input id="confirmPosition" type="checkbox"> ตรวจสอบและยืนยันตำแหน่งเกิดเหตุแล้ว</label><p id="readiness" role="status"></p><button id="refreshAnalysis" class="secondary" type="button">อัปเดตข้อมูลรอบจุดเกิดเหตุ</button>';document.getElementById('zoomIncidentBtn').after(checks);
+const checks=document.createElement('div');checks.id='incidentChecks';checks.innerHTML='<button id="refreshAnalysis" class="secondary" type="button">อัปเดตข้อมูลรอบจุดเกิดเหตุ</button>';document.getElementById('zoomIncidentBtn').after(checks);
 const list=document.createElement('div');list.id='supportList';list.setAttribute('data-export-exclude','');list.setAttribute('aria-label','รายการสำหรับคลิกดูตำแหน่งบนแผนที่');document.getElementById('report').after(list);
-const previousRender=render;render=function(){previousRender();document.getElementById('confirmPosition').checked=!!state.positionConfirmed;document.getElementById('readiness').textContent=!validPoint()?'พิกัดไม่ถูกต้อง':!state.positionConfirmed?'รอยืนยันตำแหน่งเกิดเหตุ':'ยืนยันตำแหน่งแล้ว · ตรวจวันเวลาและรายละเอียดก่อนส่งรายงาน';list.replaceChildren();if((state.supportLocations||[]).length>100){const summary=document.createElement('p');summary.className='hint';summary.textContent='แสดงรายการใกล้ที่สุด 100 ตำแหน่ง จาก '+state.supportLocations.length+' ตำแหน่งที่โหลดได้';list.append(summary)}(state.supportLocations||[]).slice().sort((a,b)=>a.distance-b.distance).slice(0,100).forEach(item=>{const b=document.createElement('button');b.type='button';b.textContent=supportMapTypes()[item.type].label+' · '+item.name+' · '+item.distance.toFixed(2)+' กม.';b.onclick=()=>window.dssZoomSupport?.(item.type,item.id);list.append(b)})};
-document.getElementById('confirmPosition').onchange=e=>{state.positionConfirmed=e.target.checked&&validPoint();render()};document.getElementById('refreshAnalysis').onclick=()=>{if(!validPoint())return alert('กรุณากรอกพิกัดให้ถูกต้อง');updateMap();loadDssNearby(Number(state.lat),Number(state.lng));loadWeather()};
+const previousRender=render;render=function(){previousRender();list.replaceChildren();if((state.supportLocations||[]).length>100){const summary=document.createElement('p');summary.className='hint';summary.textContent='แสดงรายการใกล้ที่สุด 100 ตำแหน่ง จาก '+state.supportLocations.length+' ตำแหน่งที่โหลดได้';list.append(summary)}(state.supportLocations||[]).slice().sort((a,b)=>a.distance-b.distance).slice(0,100).forEach(item=>{const b=document.createElement('button');b.type='button';b.textContent=supportMapTypes()[item.type].label+' · '+item.name+' · '+item.distance.toFixed(2)+' กม.';b.onclick=()=>window.dssZoomSupport?.(item.type,item.id);list.append(b)})};
+document.getElementById('refreshAnalysis').onclick=()=>{if(!validPoint())return alert('กรุณากรอกพิกัดให้ถูกต้อง');updateMap();loadDssNearby(Number(state.lat),Number(state.lng));loadWeather()};
 form.addEventListener('input',e=>{if(['lat','lng'].includes(e.target.dataset.key)){state.positionConfirmed=false;weatherSequence++;nearbySequence++;state.supportLocations=[];['hospital','fire','police','hydrant','community','cctv'].forEach(type=>{state[type+'Name']='รอวิเคราะห์ตำแหน่งใหม่';state[type+'Distance']='—'});['temp','humidity','windSpeed','windDir'].forEach(k=>state[k]='—');state.weather='รอดึงข้อมูลตำแหน่งใหม่';state.weatherTime='';window.dssSyncSupportMarkers?.();render()}});
 render();
 })();
@@ -1905,7 +1905,7 @@ html body #report .dss-buffer-distance span{border-width:2px!important;backgroun
  render=function(){previous();
  const inventory=document.getElementById('dssChemicalInventory');inventory.replaceChildren();
  const catalog=Array.isArray(state.hazardCatalog)?state.hazardCatalog:[];
- if(!catalog.length){const p=document.createElement('p');p.className='hint';p.textContent='ไม่มีรายการสารเคมีที่จับคู่ได้จากข้อมูล DSS ของบริษัทนี้';inventory.append(p)}
+ if(!catalog.length){const p=document.createElement('p');p.className='hint';p.textContent='ไม่มีข้อมูลในระบบ DSS';inventory.append(p)}
  catalog.forEach(item=>{const row=document.createElement('div');row.className='row';const name=document.createElement('b'),value=document.createElement('span');name.textContent=item.name;value.textContent=[item.cas?'CAS '+item.cas:'',item.un?'UN '+item.un:'',item.state,item.volume?'ปริมาณจัดเก็บ '+item.volume+' '+(item.unit||''):'',item.container?'ภาชนะ '+item.container:'',item.response?'ข้อมูลสารดับเพลิงใน DSS: '+item.response:''].filter(Boolean).join(' · ')||'ไม่มีรายละเอียดเพิ่มเติม';row.append(name,value);inventory.append(row)});
 const enabled=/สารเคมี/.test(state.event||'');editor.hidden=!enabled;document.getElementById('chemicalIncidentReport').hidden=!enabled;['leakTime','leakConfirmedAt'].forEach(key=>{const value=state[key];const output=document.querySelector('[data-out="'+key+'"]');if(output)output.textContent=value?value.replace('T',' ')+' น. (เวลาไทย)':'—'});const choice=document.getElementById('leakCatalog'),selected=choice.value;choice.replaceChildren(new Option('เลือกสารจากคลังโรงงาน',''),new Option('ยังไม่ทราบชนิดสาร','unknown'));(Array.isArray(state.hazardCatalog)?state.hazardCatalog:[]).forEach((item,i)=>choice.add(new Option(item.name,String(i))));if(Array.from(choice.options).some(o=>o.value===selected))choice.value=selected;};
  document.getElementById('leakUseChemical').onclick=()=>{
@@ -1925,92 +1925,7 @@ const enabled=/สารเคมี/.test(state.event||'');editor.hidden=!enabl
 .dispersion-table th,.dispersion-table td{border:1px solid #8b7999;padding:7px;text-align:left;vertical-align:top}
 .dispersion-table th{background:#e7daef}
 </style>
-<script id="dss-dispersion-import">
-(function(){
- const box=document.createElement('section');box.id='dispersionEditor';box.className='group';
- box.innerHTML='<h3>ผลแบบจำลองการกระจายตัว</h3><p class="chemical-mode-help">นำเข้าไฟล์ KML หรือ GeoJSON ที่มีพื้นที่ผลแบบจำลองและพิกัดจริง เว็บไซต์แสดงผลที่นำเข้า ไม่ได้คำนวณการแพร่กระจายเอง</p><div class="field"><label for="dispersionFile">ไฟล์ผลแบบจำลอง (.kml / .geojson / .json)</label><input id="dispersionFile" type="file" accept=".kml,.geojson,.json"></div><div class="field"><label for="dispersionChemical">สารที่ใช้ในแบบจำลอง</label><input id="dispersionChemical" data-key="dispersionChemical"></div><div class="field"><label for="dispersionModel">ชื่อแบบจำลอง / รุ่น</label><input id="dispersionModel" data-key="dispersionModel"></div><div class="field"><label for="dispersionTime">เวลา / รอบผลแบบจำลอง</label><input id="dispersionTime" data-key="dispersionTime" placeholder="ระบุเวลาและเขตเวลา"></div><div class="field"><label for="dispersionScenario">ข้อมูลสถานการณ์ / อัตรารั่ว / สภาพอากาศที่ใช้</label><textarea id="dispersionScenario" data-key="dispersionScenario"></textarea></div><div class="mini-actions"><button type="button" id="dispersionZoom" class="secondary">ซูมผลแบบจำลอง</button><button type="button" id="dispersionClear" class="secondary">ล้างผลแบบจำลอง</button></div><p id="dispersionStatus" class="hint" role="status"></p>';
- document.getElementById('chemicalIncidentEditor').after(box);
- const output=document.createElement('section');output.id='dispersionReport';
- output.innerHTML='<div class="section-title">ผลแบบจำลองการกระจายตัวที่นำเข้า</div><div class="company"><div class="row"><b>สาร / แบบจำลอง</b><span id="dispersionReportModel"></span></div><div class="row"><b>เวลา / สถานการณ์</b><span id="dispersionReportScenario"></span></div></div><table class="dispersion-table"><thead><tr><th>ข้อมูลสนับสนุนที่อยู่ในพื้นที่</th></tr></thead><tbody id="dispersionRows"></tbody></table><p class="hint" id="dispersionReportNote"></p>';
- document.querySelector('.map-weather').after(output);
- let layer,modelVisible=false;
- const map=window.dssLeafletMap;
- function message(text){document.getElementById('dispersionStatus').textContent=text}
- function plain(value){const doc=new DOMParser().parseFromString(String(value||''),'text/html');return doc.body.textContent.trim().slice(0,1000)}
- function ringValid(ring){return Array.isArray(ring)&&ring.length>=4&&ring.every(p=>Array.isArray(p)&&p.length>=2&&Number.isFinite(p[0])&&Number.isFinite(p[1])&&Math.abs(p[0])<=180&&Math.abs(p[1])<=90)&&ring[0][0]===ring[ring.length-1][0]&&ring[0][1]===ring[ring.length-1][1]}
- function validGeometry(g){return g&&((g.type==='Polygon'&&Array.isArray(g.coordinates)&&g.coordinates.length&&g.coordinates.every(ringValid))||(g.type==='MultiPolygon'&&Array.isArray(g.coordinates)&&g.coordinates.length&&g.coordinates.every(p=>p.length&&p.every(ringValid))))}
- function kmlFeatures(text){
-  const doc=new DOMParser().parseFromString(text,'application/xml');
-  if(doc.querySelector('parsererror'))throw Error('ไฟล์ KML ไม่ถูกต้อง');
-  const find=(node,name)=>Array.from(node.getElementsByTagName('*')).filter(el=>el.localName===name);
-  const result=[];
-  find(doc,'Placemark').forEach(mark=>{
-   const polygons=find(mark,'Polygon').map(poly=>{
-    const outer=find(poly,'outerBoundaryIs')[0];if(!outer)return null;
-    const boundaries=[outer,...find(poly,'innerBoundaryIs')];
-    return boundaries.map(boundary=>{const coords=find(boundary,'coordinates')[0]?.textContent||'';return coords.trim().split(/\s+/).filter(Boolean).map(v=>v.split(',').slice(0,2).map(Number))});
-   }).filter(Boolean);
-   if(!polygons.length)return;
-   const name=find(mark,'name')[0]?.textContent||'พื้นที่ผลแบบจำลอง',description=plain(find(mark,'description')[0]?.textContent||'');
-   result.push({type:'Feature',properties:{name,description},geometry:polygons.length===1?{type:'Polygon',coordinates:polygons[0]}:{type:'MultiPolygon',coordinates:polygons}});
-  });return result;
- }
- function normalize(text,fileName){
-  let features;
-  if(/\.kml$/i.test(fileName)||text.trim().startsWith('<'))features=kmlFeatures(text);
-  else{const value=JSON.parse(text);features=value.type==='FeatureCollection'?value.features:value.type==='Feature'?[value]:[{type:'Feature',geometry:value,properties:{}}]}
-  if(!Array.isArray(features))throw Error('ไฟล์ไม่มีพื้นที่ผลแบบจำลอง');
-  const polygons=features.filter(f=>['Polygon','MultiPolygon'].includes(f.geometry?.type));
-  if(!polygons.length||polygons.length>100)throw Error('ต้องมีพื้นที่ Polygon / MultiPolygon 1–100 รายการ');
-  let count=0;
-  const cleaned=polygons.map((f,i)=>{if(!validGeometry(f.geometry))throw Error('พิกัดพื้นที่ไม่ถูกต้อง หรือวงขอบเขตไม่ปิด');count+=JSON.stringify(f.geometry.coordinates).length;if(count>2000000)throw Error('พื้นที่ซับซ้อนเกินไป');const p=f.properties||{};return {type:'Feature',geometry:f.geometry,properties:{name:plain(p.name||p.Name||p.zone||'พื้นที่ '+(i+1)),description:plain(p.description||p.Description||p.threshold||p.level||'ไม่ได้ระบุเกณฑ์ความเข้มข้นในไฟล์')}}});
-  return {type:'FeatureCollection',features:cleaned};
- }
- function inRing(p,ring){let inside=false;for(let i=0,j=ring.length-1;i<ring.length;j=i++){const a=ring[i],b=ring[j];if((a[1]>p[1])!==(b[1]>p[1])&&p[0]<(b[0]-a[0])*(p[1]-a[1])/(b[1]-a[1])+a[0])inside=!inside}return inside}
- function contains(point,g){const polys=g.type==='Polygon'?[g.coordinates]:g.coordinates;return polys.some(rings=>inRing(point,rings[0])&&!rings.slice(1).some(ring=>inRing(point,ring)))}
- function color(feature,i){const t=(feature.properties.name+' '+feature.properties.description).toLowerCase();if(/erpg[- ]?3|aegl[- ]?3|red|แดง/.test(t))return '#ff1100';if(/erpg[- ]?2|aegl[- ]?2|orange|ส้ม/.test(t))return '#ff8b00';if(/erpg[- ]?1|aegl[- ]?1|yellow|เหลือง/.test(t))return '#ffcc00';return ['#ff1100','#ff8b00','#ffcc00'][i%3]}
- function refresh(){
-  const active=/สารเคมี/.test(state.event||'');box.hidden=!active;
-  const data=state.dispersion;
-  const anchored=data&&Number(data.lat)===Number(state.lat)&&Number(data.lng)===Number(state.lng);
-  modelVisible=active&&anchored&&Array.isArray(data?.geojson?.features);
-  output.hidden=!modelVisible;
-  if(layer&&map){map.removeLayer(layer);layer=null}
-  if(!modelVisible){if(data&&!anchored)message('ตำแหน่งเกิดเหตุเปลี่ยนแล้ว กรุณานำเข้าผลที่ตรงกับสถานการณ์นี้ใหม่');else if(!data)message('ยังไม่มีผลแบบจำลองที่นำเข้า');return}
-  if(map&&window.L){layer=L.geoJSON(data.geojson,{style:f=>({color:color(f,data.geojson.features.indexOf(f)),weight:3,opacity:1,fillOpacity:.18})}).addTo(map);layer.eachLayer(item=>{const p=document.createElement('div');p.textContent=item.feature.properties.name+' · '+item.feature.properties.description;item.bindPopup(p)})}
-  document.getElementById('dispersionReportModel').textContent=(state.dispersionChemical||'ยังไม่ระบุสาร')+' · '+(state.dispersionModel||'ยังไม่ระบุแบบจำลอง');
-  document.getElementById('dispersionReportScenario').textContent=(state.dispersionTime||'ยังไม่ระบุเวลา')+' · '+(state.dispersionScenario||'ยังไม่ระบุรายละเอียดสถานการณ์');
-  const rows=document.getElementById('dispersionRows');rows.replaceChildren();
-  data.geojson.features.forEach(feature=>{
-   const tr=document.createElement('tr'),locations=document.createElement('td');
-   const matches=(state.supportLocations||[]).filter(item=>contains([item.lng,item.lat],feature.geometry));
-   locations.textContent=matches.length?matches.slice(0,30).map(item=>supportMapTypes()[item.type]?.label+' · '+item.name).join('\n'):'ไม่พบตำแหน่งจากชุดข้อมูลสนับสนุนที่โหลดไว้';locations.style.whiteSpace='pre-line';
-   if(matches.length>30)locations.textContent+='\nแสดง 30 จาก '+matches.length+' ตำแหน่ง';
-   tr.append(locations);rows.append(tr);
-  });
-  document.getElementById('dispersionReportNote').textContent='ไฟล์: '+data.fileName+' · นำเข้าเมื่อ '+data.importedAt+' · ผลประมาณการตามสถานการณ์ของแบบจำลอง ไม่ใช่การตรวจวัดจริง · ตรวจเฉพาะตำแหน่งสนับสนุนที่โหลดไว้ จึงไม่ใช่รายชื่อผู้ได้รับผลกระทบทั้งหมด';
-  message('นำเข้า '+data.geojson.features.length+' พื้นที่ · '+data.fileName);
- }
- const previous=render;render=function(){previous();refresh()};
- document.getElementById('dispersionFile').onchange=async function(){
-  const file=this.files[0];if(!file)return;
-  try{if(file.size>3*1024*1024)throw Error('ไฟล์ต้องไม่เกิน 3 MB');if(!validPoint())throw Error('กรุณาระบุจุดเกิดเหตุให้ถูกต้อง');const geojson=normalize(await file.text(),file.name);state.dispersion={geojson,fileName:file.name,lat:Number(state.lat),lng:Number(state.lng),importedAt:new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'})};render();if(layer)map.fitBounds(layer.getBounds(),{padding:[30,30]})}
-  catch(error){message('นำเข้าไม่สำเร็จ: '+error.message)}finally{this.value=''}
- };
- document.getElementById('dispersionZoom').onclick=()=>{if(layer)map.fitBounds(layer.getBounds(),{padding:[30,30]})};
- document.getElementById('dispersionClear').onclick=()=>{state.dispersion=null;render()};
- window.dssDrawDispersionExport=function(ctx,live){
-  if(!modelVisible)return;
-  state.dispersion.geojson.features.forEach((f,i)=>{
-   ctx.beginPath();const polygons=f.geometry.type==='Polygon'?[f.geometry.coordinates]:f.geometry.coordinates;
-   polygons.forEach(rings=>rings.forEach(ring=>ring.forEach((p,j)=>{const q=live.latLngToContainerPoint([p[1],p[0]]);if(j===0)ctx.moveTo(q.x,q.y);else ctx.lineTo(q.x,q.y);if(j===ring.length-1)ctx.closePath()})));
-   ctx.fillStyle=color(f,i);ctx.globalAlpha=.18;ctx.fill('evenodd');ctx.globalAlpha=1;ctx.strokeStyle=color(f,i);ctx.lineWidth=3;ctx.stroke();
-  });
- };
- window.dssDispersionParser={normalize,contains};
- render();
-})();
-</script>
+
 
 <style id="dss-spacious-editor">
 @media(min-width:1201px){html body .workspace{max-width:1780px!important;grid-template-columns:minmax(440px,500px) minmax(0,1fr)!important;gap:24px!important}}
@@ -2182,82 +2097,7 @@ html body .top-actions #backToRiskmapBtn:focus {
 #independentAssessmentReport{margin-top:12px;padding-top:12px;border-top:1px solid #d8c9e3}
 #independentAssessmentReport pre{font:inherit;font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.5;margin:6px 0}
 </style>
-<script id="dss-independent-assessment">
-(()=>{
- const editor=document.getElementById('chemicalIncidentEditor'),report=document.getElementById('chemicalIncidentReport');
- if(!editor||!report)return;
- const profiles=[{"name":"คลอรีน (Chlorine)","aliases":["คลอรีน","chlorine","molecular chlorine"],"cas":"7782-50-5","un":"1017","phase":"ก๊าซ","source":"https://www.cdc.gov/niosh/npg/npgd0115.html","extraSource":"https://cameochemicals.noaa.gov/chemical/2862","hazard":"ก๊าซพิษต่อระบบหายใจ เป็นสารออกซิไดซ์ ไม่ติดไฟเอง และมีความหนาแน่นมากกว่าอากาศ จึงอาจสะสมในพื้นที่ต่ำ","incompatible":"แอมโมเนีย ไฮโดรเจน และสารไวไฟหลายชนิดอาจเกิดปฏิกิริยารุนแรง","response":"ให้ทีม HazMat ประเมินจุดรั่วและผลตรวจวัด อยู่เหนือลมและหลีกเลี่ยงพื้นที่ต่ำ การเข้าพื้นที่ที่ไม่ทราบความเข้มข้นต้องใช้ SCBA แบบแรงดันบวกและชุดป้องกันที่เหมาะสมโดยเจ้าหน้าที่ฝึกอบรม","limitation":"ใช้ SDS ของสารและคู่มือ ERG 124/ตาราง UN 1017 ประกอบการกำหนดพื้นที่ตามสถานการณ์จริง ไม่ใช้วงรัศมีทั่วไปแทนระยะอพยพ"},{"name":"แอมโมเนียไร้น้ำ (Anhydrous ammonia)","aliases":["แอมโมเนีย","ammonia","anhydrous ammonia"],"cas":"7664-41-7","un":"1005","phase":"ก๊าซ","source":"https://www.cdc.gov/niosh/npg/npgd0028.html","hazard":"ระคายเคืองและทำอันตรายต่อดวงตา ผิวหนัง และระบบหายใจ ต้องพิจารณาอันตรายจากการติดไฟด้วย","incompatible":"กรด สารออกซิไดซ์แรง และฮาโลเจน","response":"ให้ทีม HazMat ตรวจความเข้มข้นและประเมินชนิดสาร/ความเข้มข้นของผลิตภัณฑ์ การเข้าพื้นที่ไม่ทราบความเข้มข้นต้องใช้ SCBA แบบแรงดันบวกโดยเจ้าหน้าที่ฝึกอบรม","limitation":"UN 1005 ใช้สำหรับแอมโมเนียไร้น้ำ; สารละลายมี UN ต่างกันตามความเข้มข้น ต้องตรวจ SDS"},{"name":"อะซิโตน (Acetone)","aliases":["อะซิโตน","acetone","2-propanone"],"cas":"67-64-1","un":"1090","phase":"ของเหลว","source":"https://www.cdc.gov/niosh/npg/npgd0004.html","hazard":"ของเหลวไวไฟ ระคายเคืองดวงตาและทางเดินหายใจ และอาจมีผลต่อระบบประสาทส่วนกลาง","incompatible":"สารออกซิไดซ์และกรด","response":"ให้เจ้าหน้าที่ประเมินแหล่งจุดติดไฟและตรวจไอสารก่อนเข้าพื้นที่ การเลือกเครื่องช่วยหายใจและชุดป้องกันต้องตรงกับความเข้มข้นและ SDS","limitation":"ต้องทราบปริมาณ พื้นที่หกรั่ว และสภาพอากาศก่อนประเมินไอสารและพื้นที่ผลกระทบ"},{"name":"กรดซัลฟูริก (Sulfuric acid)","aliases":["กรดซัลฟูริก","กรดกำมะถัน","sulfuric acid","sulphuric acid"],"cas":"7664-93-9","un":"1830","phase":"ของเหลว","source":"https://www.cdc.gov/niosh/npg/npgd0577.html","hazard":"กัดกร่อนและทำอันตรายต่อผิวหนัง ดวงตา และทางเดินหายใจ; สัมผัสน้ำอาจเกิดปฏิกิริยารุนแรงและความร้อน","incompatible":"น้ำ โลหะผง และสารอินทรีย์หลายชนิด","response":"ให้เจ้าหน้าที่ประเมินการหกรั่วและการกระเด็น เลือกชุดป้องกันตามความเข้มข้นและ SDS; ไม่แนะนำการผสมหรือทำให้เป็นกลางอัตโนมัติ","limitation":"UN และมาตรการขึ้นกับความเข้มข้นของผลิตภัณฑ์ ต้องตรวจ SDS ก่อนใช้"}];
- let catalog=profiles.map(p=>({...p,verified:true})),catalogLoaded=false,lastAssessment=null;
- const normalize=x=>normalizeSearchTerm(x);
- function findProfile(item){const cas=normalize(item.cas),un=normalize(item.un).replace(/^un/,'');const meaningful=v=>v&&!['0','na','none'].includes(v);return profiles.find(p=>(meaningful(cas)?normalize(p.cas)===cas:p.aliases.some(a=>normalize(a)===normalize(item.name)))&&(!meaningful(un)||normalize(p.un)===un))}
- const box=document.createElement('section');box.id='independentChemicalAssessment';
- box.innerHTML='<h4>อีกทางเลือก: วิเคราะห์สารเคมีเมื่อโรงงานไม่มีข้อมูล DSS</h4><p class="hint">ค้นชื่อสาร / CAS / UN แล้วประเมินเบื้องต้นจากข้อมูลอ้างอิง ไม่ต้องเลือกโรงงาน</p><input id="independentChemicalSearch" placeholder="เช่น คลอรีน, Chlorine, 7782-50-5 หรือ UN 1017" aria-label="ค้นสารเคมีโดยไม่อิงโรงงาน"><button type="button" class="secondary" id="independentChemicalFind">ค้นหาสาร</button><button type="button" class="secondary" id="independentChemicalExpand">เพิ่มรายการสารทั้งหมดจาก DSS</button><select id="independentChemicalChoices" aria-label="เลือกสารเพื่อวิเคราะห์"></select><label for="independentSdsSource">แหล่ง SDS / เอกสารของสารที่ผู้ใช้ตรวจสอบ (ถ้ามี)</label><input id="independentSdsSource" placeholder="ชื่อเอกสาร / URL / รุ่นและวันที่"><button type="button" class="primary" id="independentChemicalAnalyze">ประเมินเบื้องต้น</button><button type="button" class="secondary" id="independentChemicalApply" disabled>ใช้สารและผลประเมินในรายงาน</button><p id="independentChemicalStatus" class="hint" aria-live="polite"></p><div class="assessment-result" id="independentChemicalResult" hidden></div><div id="independentChemicalSources"></div>';
- editor.querySelector('h3').after(box);
- const access=document.createElement('button');access.type='button';access.className='secondary';access.textContent='วิเคราะห์สารเคมี (ไม่มีข้อมูลโรงงานใน DSS)';
- form.prepend(access);access.onclick=()=>{state.event='เหตุสารเคมีรั่วไหล';render();box.scrollIntoView({behavior:'smooth',block:'start'});document.getElementById('independentChemicalSearch').focus()};
- const $=id=>document.getElementById(id),query=$('independentChemicalSearch'),choices=$('independentChemicalChoices'),status=$('independentChemicalStatus'),result=$('independentChemicalResult');
- function refresh(){
-  const key=normalize(query.value).replace(/^un/,'');
-  const matches=catalog.filter(item=>!key||[item.name,item.cas,item.un,...(item.aliases||[])].some(v=>normalize(v).includes(key))).slice(0,150);
-  choices.replaceChildren();
-  matches.forEach(item=>choices.add(new Option(item.name+' • CAS '+(item.cas||'—')+' • UN '+(item.un||'—')+(item.verified?' • มีข้อมูลอ้างอิง':' • รายชื่อจาก DSS'),String(catalog.indexOf(item)))));
-  status.textContent=matches.length?'พบ '+matches.length+' รายการ เลือกชนิดสารและตรวจสอบกับ SDS':'ไม่พบสาร ลองค้น CAS / UN หรือเพิ่มรายการจาก DSS';
-  lastAssessment=null;$('independentChemicalApply').disabled=true;result.hidden=true;
- }
- query.addEventListener('input',refresh);choices.addEventListener('change',()=>{lastAssessment=null;$('independentChemicalApply').disabled=true;result.hidden=true});
- $('independentChemicalFind').onclick=refresh;
- $('independentChemicalExpand').onclick=async()=>{
-  if(catalogLoaded){refresh();return}
-  const button=$('independentChemicalExpand');button.disabled=true;status.textContent='กำลังเพิ่มรายชื่อสารจาก DSS…';
-  try{
-   const features=await loadDssSource();if(!features.length)throw Error('โหลดข้อมูล DSS ไม่สำเร็จ');
-   const seen=new Set(catalog.map(p=>normalize(p.name)+'|'+normalize(p.cas)+'|'+normalize(p.un)));
-   features.forEach(f=>{const p=f.properties||{};for(let i=1;i<=20;i++){const prefix='hazard'+i+'_';if(!p[prefix+'name'])continue;const item={name:String(p[prefix+'name']),cas:String(p[prefix+'casNo']||''),un:String(p[prefix+'unNo']||''),phase:String(p[prefix+'state']||''),verified:false};const key=normalize(item.name)+'|'+normalize(item.cas)+'|'+normalize(item.un);if(!seen.has(key)){seen.add(key);const profile=findProfile(item);catalog.push(profile?{...profile,verified:true}:item)}}});
-   catalogLoaded=true;refresh();
-  }catch(error){status.textContent=error.message}finally{button.disabled=false}
- };
- function snapshot(){return JSON.stringify([state.company,state.estate,state.lat,state.lng,state.leakTime,state.leakQuantity,state.leakSource,state.leakStatus,state.leakDetails,$('independentSdsSource').value,state.windDeg,state.windSpeed,state.weatherTime])}
- function assess(item){
-  const profile=item.verified?item:findProfile(item),missing=[];
-  if(!validPoint())missing.push('พิกัดจุดเกิดเหตุที่ถูกต้อง');
-  if(!state.leakTime)missing.push('เวลาเริ่มรั่ว');
-  if(!state.leakQuantity)missing.push('ปริมาณ/อัตราการรั่วและหน่วย');
-  if(!state.leakSource)missing.push('จุดรั่วและลักษณะภาชนะ');
-  if(!state.leakStatus)missing.push('สถานะการรั่ว');
-  const hasWind=state.weatherTime&&String(state.windDeg).trim()!==''&&String(state.windSpeed).trim()!==''&&Number.isFinite(Number(state.windDeg))&&Number.isFinite(Number(state.windSpeed))&&Number(state.windSpeed)>0;
-  if(!hasWind)missing.push('ทิศลม ความเร็วลม และเวลาของข้อมูล');
-  const lines=['ผลประเมินเบื้องต้นจากข้อมูลอ้างอิง (ไม่มีข้อมูลคลังโรงงานรองรับ)','สาร: '+item.name+' | CAS '+(item.cas||'—')+' | UN '+(item.un||'—'),'บริษัท/พื้นที่ตามผู้ใช้ระบุ: '+(state.company||'—')+' / '+(state.estate||'—'),'พิกัดตามผู้ใช้ระบุ: '+state.lat+', '+state.lng];
-  if(profile)lines.push('อันตรายสำคัญ: '+profile.hazard,'สารที่เข้ากันไม่ได้: '+profile.incompatible,'ข้อมูลช่วยรับมือ: '+profile.response,'เงื่อนไข: '+profile.limitation);
-  else lines.push('ยังไม่มีข้อมูลคุณสมบัติและแนวทางรับมือที่ตรวจสอบแล้วสำหรับสารนี้ ต้องตรวจ SDS/เอกสารอ้างอิงก่อนให้คำแนะนำเฉพาะสาร');
-  if(hasWind){const from=((Number(state.windDeg)%360)+360)%360,to=(from+180)%360;lines.push('ลมตามข้อมูล '+state.weatherTime+': พัดจาก '+from.toFixed(0)+'° ไปทาง '+to.toFixed(0)+'° (ทิศทางเพื่อวางแผนตรวจสอบ ไม่ใช่แนวขอบเขตเมฆสาร)')}
-  else lines.push('ยังไม่ประเมินทิศทางการพัดพา เพราะข้อมูลลมยังไม่ครบ/ไม่มีความเร็วลมที่ใช้ได้');
-  lines.push(missing.length?'ข้อมูลเหตุที่ยังขาด: '+missing.join(' / '):'มีข้อมูลพื้นฐานของเหตุแล้ว ยังต้องตรวจอัตราการรั่ว สภาวะการปล่อย และผลตรวจความเข้มข้นเพื่อใช้แบบจำลอง');
-  lines.push('ระยะผลกระทบ/อพยพ: ยังไม่ได้คำนวณ วง Buffer บนแผนที่เป็นรัศมีที่ผู้ใช้กำหนด ไม่ใช่ผลแบบจำลอง','ไม่ยืนยันว่ามีสารนี้ในคลังของโรงงาน หรือยืนยันชนิดสารที่รั่วจากการค้นพบชื่อสาร');
-  const sds=$('independentSdsSource').value.trim();if(sds)lines.push('SDS/เอกสารที่ผู้ใช้ระบุ (ยังไม่ได้ตรวจสอบโดยระบบ): '+sds);
-  if(profile)lines.push('แหล่งอ้างอิง: '+profile.source+(profile.extraSource?' / '+profile.extraSource:''),'ตรวจข้อมูลอ้างอิง: 5 ต.ค. 2569');
-  return {item,profile,text:lines.join('\n'),createdAt:new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'}),snapshot:snapshot()};
- }
- $('independentChemicalAnalyze').onclick=()=>{
-  const item=catalog[Number(choices.value)];if(!item||!choices.options.length){status.textContent='กรุณาเลือกสารก่อน';return}
-  lastAssessment=assess(item);result.textContent=lastAssessment.text;result.hidden=false;$('independentChemicalApply').disabled=false;
-  const sources=$('independentChemicalSources');sources.replaceChildren();
-  for(const url of [lastAssessment.profile?.source,lastAssessment.profile?.extraSource].filter(Boolean)){const link=document.createElement('a');link.href=url;link.target='_blank';link.rel='noopener';link.textContent='เปิดแหล่งอ้างอิง '+new URL(url).hostname;link.style.display='block';sources.append(link)}
-  status.textContent='ประเมินเบื้องต้นแล้ว • '+lastAssessment.createdAt;
- };
- const reportBox=document.createElement('section');reportBox.id='independentAssessmentReport';reportBox.hidden=true;
- const reportTitle=document.createElement('h3');reportTitle.textContent='ผลประเมินสารเคมีจากฐานอ้างอิงภายนอก DSS';
- const reportText=document.createElement('pre');reportBox.append(reportTitle,reportText);report.append(reportBox);
- $('independentChemicalApply').onclick=()=>{
-  if(!lastAssessment)return;
-  if(lastAssessment.snapshot!==snapshot()){status.textContent='ข้อมูลเหตุเปลี่ยนแล้ว กรุณากดประเมินเบื้องต้นใหม่';return}
-  const item=lastAssessment.item;state.leakChemical=item.name;state.leakCAS=item.cas;state.leakUN=item.un;state.leakState=lastAssessment.profile?.phase||item.phase||'ยังไม่ทราบ';state.event='เหตุสารเคมีรั่วไหล';
-  state.independentChemicalAssessment={text:lastAssessment.text,createdAt:lastAssessment.createdAt,context:JSON.stringify([state.company,state.estate,state.lat,state.lng,state.leakTime,state.leakQuantity,state.leakSource,state.leakStatus,state.leakDetails,state.windDeg,state.windSpeed,state.weatherTime]),chemical:item.name};
-  render();status.textContent='นำสารและผลประเมินใส่รายงานแล้ว • ไม่ได้เพิ่มสารในคลังโรงงาน';
- };
- const previous=render;render=function(){previous();const assessment=state.independentChemicalAssessment;reportBox.hidden=!assessment;if(assessment){const context=JSON.stringify([state.company,state.estate,state.lat,state.lng,state.leakTime,state.leakQuantity,state.leakSource,state.leakStatus,state.leakDetails,state.windDeg,state.windSpeed,state.weatherTime]);const stale=context!==assessment.context||state.leakChemical!==assessment.chemical;reportText.textContent=(stale?'ข้อมูลเหตุเปลี่ยนจากรอบประเมินนี้ ต้องประเมินใหม่\n':'')+'รอบประเมิน: '+assessment.createdAt+'\n'+assessment.text}};
- refresh();render();
-})();
-</script>
+
 
 <style id="dss-easy-wizard-css">
 .dss-easy-intro{background:#f8f3fd;border-left:4px solid #64249b;padding:12px;margin:10px 0 14px}
@@ -2298,7 +2138,7 @@ html body .top-actions #backToRiskmapBtn:focus {
  essential.addEventListener('input',event=>{const key=event.target.dataset.key;if(key){state[key]=event.target.value;render()}});
  ['occurredAt','incidentDetails','incidentStatus','reporter','contact'].forEach(id=>{const field=document.getElementById(id)?.closest('.field');if(field)essential.append(field)});
  const chemical=document.getElementById('chemicalIncidentEditor');
- if(chemical){essential.append(chemical);chemical.querySelector('h3').textContent='ข้อมูลเหตุสารเคมีที่ได้รับแจ้ง';const more=document.createElement('details');more.innerHTML='<summary>รายละเอียดสารเคมีเพิ่มเติม (ถ้ามี)</summary>';chemical.append(more);const independent=document.getElementById('independentChemicalAssessment');if(independent)more.append(independent);chemical.querySelectorAll('.field').forEach(field=>{if(!['leakChemical','leakQuantity','leakStatus'].includes(field.querySelector('[data-key]')?.dataset.key))more.append(field)});}
+ if(chemical){essential.append(chemical);chemical.querySelector('h3').textContent='ข้อมูลเหตุสารเคมีที่ได้รับแจ้ง';chemical.querySelectorAll('.field').forEach(field=>{if(!['leakChemical','leakQuantity','leakStatus'].includes(field.querySelector('[data-key]')?.dataset.key))field.remove()});}
  editor.querySelectorAll('.dss-source-tool').forEach(el=>el.remove());
  document.getElementById('factoryLookupStatus').setAttribute('aria-live','polite');
  document.getElementById('pngBtn').textContent='ดาวน์โหลดรายงาน PNG';
