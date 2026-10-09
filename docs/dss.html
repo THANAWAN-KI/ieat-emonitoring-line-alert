@@ -1686,7 +1686,7 @@ async function downloadReportPng(){
     const oldReportMinHeightPriority=report.style.getPropertyPriority('min-height');
     const oldReportPadding=report.style.getPropertyValue('padding');
     const oldReportPaddingPriority=report.style.getPropertyPriority('padding');
-    let canvas;
+    let canvas,capturedBoundaries=[],capturedSupportCut=0;
     try{
       report.style.setProperty('width','1050px','important');
       report.style.setProperty('min-height','0','important');
@@ -1722,6 +1722,16 @@ async function downloadReportPng(){
         if(caption)caption.style.setProperty('display','none','important');
       }
     });
+      const bounds=report.getBoundingClientRect();
+      const scale=canvas.height/Math.max(1,bounds.height);
+      capturedBoundaries=[0,canvas.height];
+      report.querySelectorAll('.row,.section-title,.map-weather,.report-header,.dss-data-line').forEach(el=>{
+        const rect=el.getBoundingClientRect();
+        const px=(rect.top-bounds.top)*scale;
+        if(px>0&&px<canvas.height)capturedBoundaries.push(px);
+      });
+      const supportHeading=report.querySelector('#dssNearbyReportHeading');
+      capturedSupportCut=supportHeading?(supportHeading.getBoundingClientRect().top-bounds.top)*scale:0;
     }finally{
       if(oldReportWidth)report.style.setProperty('width',oldReportWidth,oldReportPriority);else report.style.removeProperty('width');
       if(oldReportMinHeight)report.style.setProperty('min-height',oldReportMinHeight,oldReportMinHeightPriority);else report.style.removeProperty('min-height');
@@ -1730,23 +1740,14 @@ async function downloadReportPng(){
     // A4 portrait export: divide at a section boundary whenever possible.
     const pageWidth=1240,pageHeight=1754,margin=40,usableWidth=pageWidth-margin*2,usableHeight=pageHeight-margin*2;
     const ratio=usableWidth/canvas.width,segmentHeight=usableHeight/ratio;
-    const reportBounds=report.getBoundingClientRect();
-    const pixelScale=canvas.height/Math.max(1,reportBounds.height);
-    const supportHeading=report.querySelector('#dssNearbyReportHeading');
-    const supportCut=supportHeading?(supportHeading.getBoundingClientRect().top-reportBounds.top)*pixelScale:0;
+    const supportCut=capturedSupportCut;
     const cuts=[0];
     // Keep "ข้อมูลสนับสนุนที่ใกล้เคียง" and the map together when they fit on the next A4 page.
     if(supportCut>segmentHeight*.40 && supportCut<segmentHeight*.99 && canvas.height-supportCut<=segmentHeight*.99){
       cuts.push(Math.round(supportCut));
       cuts.push(canvas.height);
     }else{
-      const boundaries=[0,canvas.height];
-      report.querySelectorAll('.row,.section-title,.map-weather,.report-header,.dss-data-line').forEach(el=>{
-        const rect=el.getBoundingClientRect();
-        const px=(rect.top-reportBounds.top)*pixelScale;
-        if(px>0&&px<canvas.height)boundaries.push(px);
-      });
-      boundaries.sort((a,b)=>a-b);
+      const boundaries=capturedBoundaries.sort((a,b)=>a-b);
       let pos=0;
       while(pos<canvas.height-1){
         const desired=Math.min(canvas.height,pos+segmentHeight);
