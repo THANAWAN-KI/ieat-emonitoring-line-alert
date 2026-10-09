@@ -1286,23 +1286,28 @@ async function loadDssNearby(lat,lng){
     try{
       const countOnly=type==='community'||type==='cctv';
       const params=new URLSearchParams({where:'1=1',geometry:JSON.stringify({x:lng,y:lat,spatialReference:{wkid:4326}}),geometryType:'esriGeometryPoint',inSR:'4326',spatialRel:'esriSpatialRelIntersects',distance:String(countOnly?radius:50),units:'esriSRUnit_Kilometer',outFields:'*',returnGeometry:'true',outSR:'4326',f:'json',resultRecordCount:'2000'});
-      let data;
+      let data,selectedPath=path,primaryError=null;
       try{data=await requestNearbyLayer(path,params)}
-      catch(primaryError){
+      catch(e){primaryError=e}
+      // Some older saved layer numbers point to a valid but unrelated or empty layer.
+      if(primaryError || !(data?.features||[]).length){
         const alternatives=await findAlternativeLayer(type);
-        let recovered=false;
         for(const candidate of alternatives){
           if(candidate.path===path)continue;
-          try{data=await requestNearbyLayer(candidate.path,params);recovered=true;break}
-          catch(e){console.warn('Nearby alternative',type,candidate.path,e)}
+          try{
+            const alternative=await requestNearbyLayer(candidate.path,params);
+            if((alternative.features||[]).length){data=alternative;selectedPath=candidate.path;primaryError=null;break}
+          }catch(e){console.warn('Nearby alternative',type,candidate.path,e)}
         }
-        if(!recovered)throw primaryError;
+        if(!data)throw primaryError||Error('No accessible layer');
       }
       let total=(data.features||[]).length;
-      if(countOnly&&data.exceededTransferLimit){const countParams=new URLSearchParams(params);countParams.set('returnCountOnly','true');const countResponse=await fetch(base+path+'/query?'+countParams,{signal:AbortSignal.timeout(12000)});const countData=await countResponse.json();if(countData.error||!Number.isFinite(countData.count))throw Error('count unavailable');total=countData.count}
+      if(countOnly&&data.exceededTransferLimit){const countParams=new URLSearchParams(params);countParams.set('returnCountOnly','true');const countResponse=await fetch(base+selectedPath+'/query?'+countParams,{signal:AbortSignal.timeout(12000)});const countData=await countResponse.json();if(countData.error||!Number.isFinite(countData.count))throw Error('count unavailable');total=countData.count}
       const mapCandidates=(data.features||[]).map((feature,index)=>{
         const g=feature.geometry||{},a=feature.attributes||{};let x=g.x,y=g.y;
         if(g.rings){const p=factoryGeometryPoint(g);if(p)[x,y]=p}
+        if((!Number.isFinite(Number(x))||!Number.isFinite(Number(y)))&&Array.isArray(g.paths)){const p=g.paths.flat().find(point=>Array.isArray(point)&&point.length>=2);if(p)[x,y]=p}
+        if((!Number.isFinite(Number(x))||!Number.isFinite(Number(y)))&&Array.isArray(g.points)){const p=g.points[0];if(p)[x,y]=p}
         const rad=Math.PI/180,h=Math.sin((y-lat)*rad/2)**2+Math.cos(lat*rad)*Math.cos(y*rad)*Math.sin((x-lng)*rad/2)**2;
         return {id:a.OBJECTID||a.FID||index,type,name:String(a[nameField]||a.Name||a.NAME||a.name||a.ชื่อ||a['ชื่อสถานี']||a['ชื่อโรงพยาบาล']||a.PopupInfo||supportMapTypes()[type].label),lng:x,lat:y,distance:6371*2*Math.asin(Math.min(1,Math.sqrt(h)))};
       }).filter(item=>Number.isFinite(item.distance)&&item.lng>=97&&item.lng<=106&&item.lat>=5&&item.lat<=22).sort((a,b)=>a.distance-b.distance);
