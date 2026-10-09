@@ -1280,6 +1280,13 @@ const dssSupportPatterns={
  community:/community|communities|ชุมชน|หมู่บ้าน/i,
  cctv:/cctv|camera|กล้อง/i
 };
+const dssKnownSupportLayers=[
+ {path:'Hospital_Locations/FeatureServer/0',title:'โรงพยาบาล',types:['hospital'],fallback:true},
+ {path:'Risk_Map_WFL1/FeatureServer/3',title:'สถานีดับเพลิง',types:['fire'],fallback:true},
+ {path:'Risk_Map_WFL1/FeatureServer/4',title:'หัวจ่ายน้ำดับเพลิง',types:['hydrant'],fallback:true},
+ {path:'Risk_Map_WFL1/FeatureServer/5',title:'สถานีตำรวจ',types:['police'],fallback:true},
+ {path:'ตำแหน่งกล้องCCTV/FeatureServer/7',title:'กล้อง CCTV',types:['cctv'],fallback:true}
+];
 let dssSupportCatalogPromise=null;
 async function dssSupportJSON(url,timeout=12000){
  const response=await fetch(url,{signal:AbortSignal.timeout(timeout)});
@@ -1299,14 +1306,16 @@ async function dssSupportCatalog(){
    }catch(error){console.warn('DSS FeatureServer unavailable',root.path,error);return []}
   }));
   const layers=groups.flat();
-  if(!layers.length)throw Error('FeatureServer ไม่ส่งรายชื่อชั้นข้อมูล');
+  // Known layer endpoints are a fallback when the service root metadata is unavailable
+  // or uses generic layer names. We still query and validate each endpoint.
+  for(const layer of dssKnownSupportLayers)if(!layers.some(found=>found.path===layer.path))layers.push(layer);
   return layers;
  })().catch(error=>{dssSupportCatalogPromise=null;throw error});
  return dssSupportCatalogPromise;
 }
 function dssSupportTypeMatch(type,layer){
  const name=layer.title+' '+(layer.description||'');
- return layer.types.includes(type)&&dssSupportPatterns[type].test(name);
+ return layer.types.includes(type)&&(layer.fallback===true||dssSupportPatterns[type].test(name));
 }
 function dssSupportName(attrs,type,displayField){
  const preferred=[displayField,'Name','NAME','name','ชื่อ','ชื่อสถานี','ชื่อโรงพยาบาล','ชื่อหน่วยงาน','สถานที่','Station_Name','station_name','PopupInfo'];
@@ -1377,7 +1386,9 @@ async function loadDssNearby(lat,lng){
   for(const layer of options){
    try{
     // Read layer metadata for an accurate display field and verify geometry.
-    const info=await dssSupportJSON(dssSupportBase+layer.path+'?f=json',9000);
+    let info={};
+    try{info=await dssSupportJSON(dssSupportBase+layer.path+'?f=json',7000)}
+    catch(error){console.warn('DSS support layer metadata unavailable; try query',layer.path,error)}
     if(info.type==='Table'||info.geometryType&&!/Point|Polyline|Polygon|Multipoint/i.test(info.geometryType))continue;
     const found=await dssSupportQuery({...layer,displayField:info.displayField||info.nameField},type,lat,lng,radius);
     results.push(...found.candidates);partial=partial||found.partial;success=true;
@@ -2690,6 +2701,11 @@ html body #report .note{display:block!important;background:#eee4f4!important;bor
 html body #report .map-weather{margin-top:0!important}
 html body #report .dss-restored-plain{white-space:pre-line!important;word-break:normal!important;overflow-wrap:break-word!important;line-height:1.6!important}
 @media(max-width:650px){html body #report #supportGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+</style>
+<style id="dss-gis-data-status-20261009">
+#report #supportGrid{display:grid!important}
+#report #supportGrid>.support{min-width:0;overflow-wrap:break-word}
+#dssNearbyRail #supportList{min-height:120px}
 </style>
 </body></html>
 
