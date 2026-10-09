@@ -1536,7 +1536,7 @@ function reportText(ctx,text,x,y,maxWidth,lineHeight){
 async function downloadReportPng(){
   loading.classList.add('show');
   try{
-    if(!validPoint())throw Error('กรุณายืนยันพิกัดที่ถูกต้อง');if(!state.positionConfirmed)throw Error('กรุณายืนยันตำแหน่งเกิดเหตุก่อนดาวน์โหลด');
+    if(!validPoint())throw Error('กรุณาระบุพิกัดที่ถูกต้องก่อนดาวน์โหลด');
     pngBtn.disabled=true;let bufferExportImage=null;
     const liveMapReady=typeof window.dssWaitMapReady==='function';
     if(liveMapReady){await window.dssWaitMapReady();if(window.dssExportBufferOverlay)bufferExportImage=window.dssExportBufferOverlay()}
