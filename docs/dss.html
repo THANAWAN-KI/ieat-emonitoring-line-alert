@@ -1584,10 +1584,31 @@ async function downloadReportPng(){
         if(caption)caption.style.setProperty('display','none','important');
       }
     });
-    const a=document.createElement('a');
-    a.download='IEAT-DSS-'+(state.reportNo||Date.now())+'.png';
-    a.href=canvas.toDataURL('image/png');
-    a.click();
+    const baseName='IEAT-DSS-'+(state.reportNo||Date.now());
+    const ratio=canvas.height/canvas.width;
+    let split=0;
+    if(ratio>1.65){
+      const rect=report.getBoundingClientRect(),scaleY=canvas.height/report.scrollHeight;
+      const blocks=Array.from(report.querySelectorAll('.section-title,.company .row,#dssChemicalInventory > *, .mapbox,#supportGrid .row,#dssWeatherRows .row'));
+      const protectedBlocks=Array.from(report.querySelectorAll('.company .row,#dssChemicalInventory > *, .mapbox,#supportGrid .row,#dssWeatherRows .row'));
+      const safe=y=>!protectedBlocks.some(el=>{const r=el.getBoundingClientRect();return y>r.top-rect.top+1&&y<r.bottom-rect.top-1});
+      const candidates=blocks.map(el=>el.getBoundingClientRect().top-rect.top).filter(y=>y>report.scrollHeight*.25&&y<report.scrollHeight*.75&&safe(y));
+      if(candidates.length)split=Math.round(candidates.reduce((best,y)=>Math.abs(y-report.scrollHeight/2)<Math.abs(best-report.scrollHeight/2)?y:best)*scaleY);
+    }
+    const ranges=split?[[0,split],[split,canvas.height]]:[[0,canvas.height]];
+    for(let index=0;index<ranges.length;index++){
+      let output=canvas;
+      if(split){
+        const [top,bottom]=ranges[index],padding=32;
+        output=document.createElement('canvas');output.width=canvas.width;output.height=bottom-top+padding*2+40;
+        const ctx=output.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,output.width,output.height);
+        ctx.drawImage(canvas,0,top,canvas.width,bottom-top,0,padding,canvas.width,bottom-top);
+        ctx.fillStyle='#526176';ctx.font='24px Sarabun, sans-serif';ctx.textAlign='right';
+        ctx.fillText('หน้า '+(index+1)+' / 2',output.width-32,output.height-16);
+      }
+      const a=document.createElement('a');a.download=baseName+(split?'-page-'+(index+1):'')+'.png';a.href=output.toDataURL('image/png');a.click();
+      if(index<ranges.length-1)await new Promise(resolve=>setTimeout(resolve,350));
+    }
   }catch(error){console.error(error);alert('ดาวน์โหลด PNG ไม่สำเร็จ: '+error.message)}
   finally{loading.classList.remove('show');pngBtn.disabled=false}
 }
@@ -2317,7 +2338,9 @@ html body #report .dss-wind-context{display:block;margin-top:4px;font-size:12px!
  const field=document.createElement('div');field.className='field';field.id='dssNotifiedChemicalChoice';
  const label=document.createElement('label');label.htmlFor='leakCatalog';label.textContent='สารเคมีในระบบ DSS ของบริษัทที่เลือก';
  const status=document.createElement('p');status.className='hint';status.id='dssChemicalChoiceStatus';
- field.append(label,catalog,status);editor.querySelector('h3').after(field);
+ const searchLabel=document.createElement('label');searchLabel.htmlFor='dssChemicalSearch';searchLabel.textContent='ค้นหาสารเคมี';
+ const search=document.createElement('input');search.type='search';search.id='dssChemicalSearch';search.placeholder='ชื่อสารเคมี / CAS / UN';search.autocomplete='off';
+ field.append(label,searchLabel,search,catalog,status);editor.querySelector('h3').after(field);
  editor.querySelector('.chemical-mode-help')?.remove();
  catalog.addEventListener('change',()=>{
   const value=catalog.value,item=state.hazardCatalog?.[Number(value)];
@@ -2325,11 +2348,22 @@ html body #report .dss-wind-context{display:block;margin-top:4px;font-size:12px!
   else if(value!==''&&item){state.leakChemical=item.name;state.leakCAS=item.cas;state.leakUN=item.un;state.leakState=item.state}
   render();
  });
- const previous=render;render=function(){previous();const enabled=/สารเคมี/.test(state.event||'');editor.hidden=!enabled;editor.classList.remove('dss-easy-advanced');const items=Array.isArray(state.hazardCatalog)?state.hazardCatalog:[];status.textContent=items.length?'พบสารเคมีในระบบ DSS '+items.length+' รายการ · เลือกสารที่ได้รับแจ้งว่ารั่วไหล ปริมาณรั่วให้กรอกตามเหตุจริง':'ไม่มีข้อมูลในระบบ DSS';const matched=items.findIndex(item=>item.name===state.leakChemical);
- catalog.replaceChildren();
- if(items.length){items.forEach((item,index)=>catalog.add(new Option(item.name+(item.cas?' · CAS '+item.cas:''),String(index))));catalog.add(new Option('ยังไม่ทราบชนิดสาร','unknown'));catalog.size=Math.min(7,Math.max(3,items.length+1));catalog.selectedIndex=-1}
- else{catalog.add(new Option('ไม่มีข้อมูลในระบบ DSS',''));catalog.add(new Option('ยังไม่ทราบชนิดสาร','unknown'));catalog.size=2}
- if(state.leakChemical==='ยังไม่ทราบชนิดสาร')catalog.value='unknown';else if(matched>=0)catalog.value=String(matched);};
+ let companyKey='';
+ function refreshChoices(){
+  const items=Array.isArray(state.hazardCatalog)?state.hazardCatalog:[],query=search.value.trim().toLocaleLowerCase();
+  const matches=items.map((item,index)=>({item,index})).filter(({item})=>[item.name,item.cas,item.un].join(' ').toLocaleLowerCase().includes(query));
+  catalog.replaceChildren();
+  matches.forEach(({item,index})=>catalog.add(new Option(item.name+(item.cas?' · CAS '+item.cas:''),String(index))));
+  if(!matches.length)catalog.add(new Option(items.length?'ไม่พบสารเคมีที่ค้นหา':'ไม่มีข้อมูลในระบบ DSS',''));
+  catalog.add(new Option('ยังไม่ทราบชนิดสาร','unknown'));catalog.size=Math.min(7,Math.max(2,matches.length+1));catalog.selectedIndex=-1;
+  const matched=items.findIndex(item=>item.name===state.leakChemical);
+  if(state.leakChemical==='ยังไม่ทราบชนิดสาร')catalog.value='unknown';else if(matches.some(entry=>entry.index===matched))catalog.value=String(matched);
+  status.textContent=items.length?(query?'พบ '+matches.length+' จาก '+items.length+' รายการ':'พบสารเคมีในระบบ DSS '+items.length+' รายการ')+' · เลือกสารที่ได้รับแจ้งว่ารั่วไหล ปริมาณรั่วให้กรอกตามเหตุจริง':'ไม่มีข้อมูลในระบบ DSS';
+ }
+ search.addEventListener('input',refreshChoices);
+ const previous=render;render=function(){previous();const enabled=/สารเคมี/.test(state.event||'');editor.hidden=!enabled;editor.classList.remove('dss-easy-advanced');
+  const key=(state.hazardCatalog||[]).map(item=>[item.name,item.cas,item.un].join('|')).join(';');if(key!==companyKey){search.value='';companyKey=key}refreshChoices();
+ };
  render();
 })();
 </script>
@@ -2337,5 +2371,5 @@ html body #report .dss-wind-context{display:block;margin-top:4px;font-size:12px!
 html body #chemicalIncidentEditor:not([hidden]){display:block!important}
 html body #dssNotifiedChemicalChoice{display:block!important;margin:12px 0!important;padding:12px!important;background:#eef2f6;border:1px solid #d9e0e7;border-radius:7px}
 html body #leakCatalog{display:block!important;width:100%!important;min-width:0!important;padding:9px!important;background:#fff;color:#17324f;border:1px solid #c8d2dc;border-radius:5px;font:15px "Sarabun",sans-serif}
-</style><style id="dss-company-chemical-list">html body #leakCatalog{height:auto!important;min-height:80px!important;white-space:normal!important}html body #leakCatalog option{padding:8px 6px;font-size:14px;line-height:1.6}</style></body></html>
+</style><style id="dss-company-chemical-list">html body #leakCatalog{height:auto!important;min-height:80px!important;white-space:normal!important}html body #leakCatalog option{padding:8px 6px;font-size:14px;line-height:1.6}</style><style>#dssChemicalSearch{display:block;width:100%;box-sizing:border-box;margin:5px 0 10px;padding:10px;border:1px solid #c8d2dc;border-radius:5px;font:14px "Sarabun",sans-serif;color:#17324f;background:#fff}</style></body></html>
 
