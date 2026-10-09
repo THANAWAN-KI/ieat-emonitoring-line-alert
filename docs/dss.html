@@ -2116,7 +2116,7 @@ html body .top-actions #backToRiskmapBtn:focus {
  };
  // Choosing the notified chemical fills CAS / UN without another search or apply button.
  const catalog=document.getElementById('leakCatalog'),apply=document.getElementById('leakUseChemical');
- if(catalog&&apply){catalog.addEventListener('change',()=>apply.click());apply.hidden=true;}
+ if(catalog&&apply){catalog.addEventListener('change',()=>{if(apply.isConnected)apply.click()});apply.hidden=true;}
  document.querySelectorAll('.chemical-mode-help button').forEach(el=>{if(el!==apply)el.hidden=true});
 })();
 </script>
@@ -2309,5 +2309,28 @@ html body #report #dssWeatherRows .dss-wind-highlight > b,html body #report #dss
 html body #report #dssWeatherRows .dss-wind-highlight > b{font-weight:600!important}
 html body #report .dss-wind-reading{display:block;font-size:17px!important;font-weight:700!important;line-height:1.7!important;color:#17324f!important;-webkit-text-fill-color:#17324f!important}
 html body #report .dss-wind-context{display:block;margin-top:4px;font-size:12px!important;font-weight:400!important;line-height:1.6!important;color:#526176!important;-webkit-text-fill-color:#526176!important}
+</style><script id="dss-chemical-catalog-visible">
+(function(){
+ const editor=document.getElementById('chemicalIncidentEditor'),catalog=document.getElementById('leakCatalog');
+ if(!editor||!catalog)return;
+ const field=document.createElement('div');field.className='field';field.id='dssNotifiedChemicalChoice';
+ const label=document.createElement('label');label.htmlFor='leakCatalog';label.textContent='สารเคมีในระบบ DSS ของบริษัทที่เลือก';
+ const status=document.createElement('p');status.className='hint';status.id='dssChemicalChoiceStatus';
+ field.append(label,catalog,status);editor.querySelector('h3').after(field);
+ editor.querySelector('.chemical-mode-help')?.remove();
+ catalog.addEventListener('change',()=>{
+  const value=catalog.value,item=state.hazardCatalog?.[Number(value)];
+  if(value==='unknown'){state.leakChemical='ยังไม่ทราบชนิดสาร';state.leakCAS='';state.leakUN='';state.leakState='ยังไม่ทราบ'}
+  else if(value!==''&&item){state.leakChemical=item.name;state.leakCAS=item.cas;state.leakUN=item.un;state.leakState=item.state}
+  render();
+ });
+ const previous=render;render=function(){previous();const enabled=/สารเคมี/.test(state.event||'');editor.hidden=!enabled;editor.classList.remove('dss-easy-advanced');const items=Array.isArray(state.hazardCatalog)?state.hazardCatalog:[];status.textContent=items.length?'พบสารเคมีในระบบ DSS '+items.length+' รายการ · เลือกสารที่ได้รับแจ้งว่ารั่วไหล ปริมาณรั่วให้กรอกตามเหตุจริง':'ไม่มีข้อมูลในระบบ DSS';const matched=items.findIndex(item=>item.name===state.leakChemical);catalog.value=state.leakChemical==='ยังไม่ทราบชนิดสาร'?'unknown':matched>=0?String(matched):'';};
+ render();
+})();
+</script>
+<style id="dss-chemical-catalog-visible-style">
+html body #chemicalIncidentEditor:not([hidden]){display:block!important}
+html body #dssNotifiedChemicalChoice{display:block!important;margin:12px 0!important;padding:12px!important;background:#eef2f6;border:1px solid #d9e0e7;border-radius:7px}
+html body #leakCatalog{display:block!important;width:100%!important;min-width:0!important;padding:9px!important;background:#fff;color:#17324f;border:1px solid #c8d2dc;border-radius:5px;font:15px "Sarabun",sans-serif}
 </style></body></html>
 
