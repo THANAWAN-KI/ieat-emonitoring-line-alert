@@ -2318,5 +2318,40 @@ html body .top-actions #backToRiskmapBtn:focus {
 })();
 </script>
 
+
+<style id="dss-nearby-sidepanel-style">
+/* Nearby locations are a scrollable workspace panel, not part of the PNG report. */
+.report-wrap.dss-with-nearby{display:flex!important;align-items:flex-start!important;gap:14px!important;overflow-x:auto!important;max-width:100%!important}
+.report-wrap.dss-with-nearby #report{flex:0 0 1050px!important;width:1050px!important;margin:0!important}
+#dssNearbyRail{flex:0 0 268px;width:268px;max-height:min(78vh,850px);position:sticky;top:10px;align-self:flex-start;background:#fff;border:1px solid #dcd4e5;border-radius:10px;display:flex;flex-direction:column;overflow:hidden}
+#dssNearbyRail h3{margin:0;padding:12px;background:#f5effa;color:#4c267b;font-size:17px;line-height:1.5}
+#dssNearbyRail .dss-nearby-caption{padding:8px 11px;font-size:13px;color:#555;border-bottom:1px solid #e6dce9}
+#dssNearbyRail #supportList{display:flex!important;flex-direction:column;overflow-y:auto!important;min-height:0;max-height:calc(min(78vh,850px) - 102px);padding:8px!important;gap:6px}
+#dssNearbyRail #supportList button{flex-shrink:0;text-align:left!important;white-space:normal!important;word-break:break-word}
+#dssNearbyRail #supportList p{margin:5px!important}
+@media(max-width:1180px){#dssNearbyRail{flex-basis:248px;width:248px;position:static}}
+@media print{#dssNearbyRail{display:none!important}.report-wrap.dss-with-nearby{display:block!important;overflow:visible!important}}
+</style>
+<script id="dss-nearby-sidepanel-script">
+(function(){
+const report=document.getElementById('report');
+const list=document.getElementById('supportList');
+const wrap=report?.parentElement;
+if(!report||!list||!wrap||document.getElementById('dssNearbyRail'))return;
+wrap.classList.add('dss-with-nearby');
+const rail=document.createElement('aside');
+rail.id='dssNearbyRail';
+rail.setAttribute('aria-label','รายการตำแหน่งข้อมูลสนับสนุนใกล้เคียง');
+rail.setAttribute('data-export-exclude','');
+const title=document.createElement('h3');
+title.textContent='📍 ตำแหน่งสนับสนุนใกล้เคียง';
+const caption=document.createElement('div');
+caption.className='dss-nearby-caption';
+caption.textContent='คลิกรายการเพื่อดูตำแหน่งบนแผนที่ • เลื่อนดูรายการด้านล่าง';
+rail.append(title,caption,list);
+wrap.appendChild(rail);
+})();
+</script>
+
 </body></html>
 
