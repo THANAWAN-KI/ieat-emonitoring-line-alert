@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "period": "24h",
-  "date": "2026-10-09",
-  "time": "23:00:00",
+  "date": "2026-10-10",
+  "time": "03:00:00",
   "type": "แผนที่แสดงพื้นที่เสี่ยงน้ำท่วมฉับพลัน (รายตำบล)ใน 24 ชม. ข้างหน้า จากปริมาณฝนสะสมที่สถานีโทรมาตร",
   "source_url": "https://api.hii.or.th/v2/4UQaYnf0Bx4fXPYyCdDRbqHyXH9Ixvd2nVUjaN1cLBY=/warning/flashflood-24h",
   "area_count": 4,
@@ -19,7 +19,7 @@
       "latitude": 8.16269,
       "longitude": 99.75916,
       "sum_rainfall_mm": 123.0,
-      "observed_at": "2026-10-09T11:00:00+07:00",
+      "observed_at": "2026-10-09T15:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -414,7 +414,7 @@
       "latitude": 8.166437,
       "longitude": 99.704285,
       "sum_rainfall_mm": 116.0,
-      "observed_at": "2026-10-09T11:00:00+07:00",
+      "observed_at": "2026-10-09T15:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -545,7 +545,7 @@
       "latitude": 10.407905,
       "longitude": 98.778235,
       "sum_rainfall_mm": 128.5,
-      "observed_at": "2026-10-09T11:00:00+07:00",
+      "observed_at": "2026-10-09T15:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -903,8 +903,8 @@
       "station": "จะนะ",
       "latitude": 6.916742,
       "longitude": 100.72962,
-      "sum_rainfall_mm": 106.8,
-      "observed_at": "2026-10-09T11:00:00+07:00",
+      "sum_rainfall_mm": 115.8,
+      "observed_at": "2026-10-09T15:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -1133,7 +1133,7 @@
       "latitude": 8.16269,
       "longitude": 99.75916,
       "sum_rainfall_mm": 123.0,
-      "observed_at": "2026-10-09T11:00:00+07:00",
+      "observed_at": "2026-10-09T15:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -1528,7 +1528,7 @@
       "latitude": 8.166437,
       "longitude": 99.704285,
       "sum_rainfall_mm": 116.0,
-      "observed_at": "2026-10-09T11:00:00+07:00",
+      "observed_at": "2026-10-09T15:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -1659,7 +1659,7 @@
       "latitude": 10.407905,
       "longitude": 98.778235,
       "sum_rainfall_mm": 128.5,
-      "observed_at": "2026-10-09T11:00:00+07:00",
+      "observed_at": "2026-10-09T15:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -2017,8 +2017,8 @@
       "station": "จะนะ",
       "latitude": 6.916742,
       "longitude": 100.72962,
-      "sum_rainfall_mm": 106.8,
-      "observed_at": "2026-10-09T11:00:00+07:00",
+      "sum_rainfall_mm": 115.8,
+      "observed_at": "2026-10-09T15:00:00+07:00",
       "geometry": {
         "rings": [
           [
