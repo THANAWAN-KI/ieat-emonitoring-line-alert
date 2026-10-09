@@ -2354,16 +2354,39 @@ wrap.appendChild(rail);
 </script>
 
 <style id="dss-nearby-fixed-layout">
-/* Use the real workspace grid: report remains unchanged, list gets its own column. */
-html body .workspace:has(#dssNearbyRail){max-width:1900px!important;grid-template-columns:minmax(300px,380px) minmax(0,1fr) 270px!important;align-items:start!important}
-html body .workspace:has(#dssNearbyRail) .report-wrap.dss-with-nearby{display:block!important;min-width:0!important;width:100%!important;overflow-x:auto!important}
-html body .workspace:has(#dssNearbyRail) .report-wrap #report{width:1050px!important}
-html body .workspace > #dssNearbyRail{position:sticky!important;top:12px!important;width:270px!important;max-height:78vh!important}
-@media(max-width:1250px){html body .workspace:has(#dssNearbyRail){display:flex!important;flex-wrap:wrap!important}html body .workspace > #dssNearbyRail{position:static!important;flex:1 1 250px!important}}
+/* Wide screens: 3 columns with the nearby panel at the right of the report. */
+@media screen and (min-width:1201px){
+html body .workspace:has(#dssNearbyRail){display:grid!important;max-width:1950px!important;grid-template-columns:minmax(280px,370px) minmax(0,1fr) 270px!important;gap:14px!important;align-items:start!important}
+html body .workspace > .editor{grid-column:1!important}
+html body .workspace > .report-wrap{grid-column:2!important;grid-row:1!important;min-width:0!important}
+html body .workspace > #dssNearbyRail{grid-column:3!important;grid-row:1!important;position:sticky!important;top:12px!important;width:270px!important;margin:0!important}
+}
+/* Smaller screens: show the nearby locations BEFORE the long report. */
+@media screen and (max-width:1200px){
+html body .workspace:has(#dssNearbyRail){display:flex!important;flex-direction:column!important;max-width:100%!important;gap:10px!important}
+html body .workspace > .editor{order:0;width:100%!important}
+html body .workspace > #dssNearbyRail{order:1;position:static!important;flex:none!important;width:100%!important;max-height:310px!important;margin:0!important;align-self:stretch!important}
+html body .workspace > #dssNearbyRail #supportList{max-height:225px!important;overflow-y:auto!important}
+html body .workspace > .report-wrap{order:2;width:100%!important;min-width:0!important;overflow-x:auto!important}
+}
+html body .workspace .report-wrap.dss-with-nearby{display:block!important;min-width:0!important;overflow-x:auto!important}
+html body .workspace .report-wrap #report{width:1050px!important;margin:0!important}
 @media print{html body .workspace > #dssNearbyRail{display:none!important}}
 </style>
 <script id="dss-nearby-fixed-layout-script">
-(function(){const rail=document.getElementById('dssNearbyRail'),workspace=document.querySelector('.workspace');if(rail&&workspace)workspace.appendChild(rail)})();
+(function(){
+ const workspace=document.querySelector('.workspace'),report=document.getElementById('report'),list=document.getElementById('supportList');
+ if(!workspace||!report||!list)return;
+ let rail=document.getElementById('dssNearbyRail');
+ if(!rail){
+ rail=document.createElement('aside');rail.id='dssNearbyRail';rail.setAttribute('data-export-exclude','');
+ const heading=document.createElement('h3');heading.textContent='📍 ตำแหน่งสนับสนุนใกล้เคียง';
+ const intro=document.createElement('div');intro.className='dss-nearby-caption';intro.textContent='คลิกตำแหน่งเพื่อดูบนแผนที่ • เลื่อนรายการภายในแผง';
+ rail.append(heading,intro,list);
+ }
+ workspace.append(rail);
+ rail.style.display='flex';
+})();
 </script>
 </body></html>
 
