@@ -1751,7 +1751,7 @@ button:disabled{opacity:.6;cursor:wait}input[type=checkbox]{width:auto!important
 const eventInput=document.getElementById('event');const eventSelect=document.createElement('select');eventSelect.id='event';eventSelect.dataset.key='event';
 ['เหตุเพลิงไหม้','สารเคมีรั่วไหล','เหตุเพลิงไหม้ร่วมกับสารเคมีรั่วไหล'].forEach(value=>{const option=new Option(value,value);eventSelect.add(option)});if(!Array.from(eventSelect.options).some(o=>o.value===state.event))eventSelect.add(new Option(state.event,state.event));eventInput.replaceWith(eventSelect);const modeHint=document.createElement('p');modeHint.className='hint';modeHint.textContent='ค่าเริ่มต้นเป็นไฟไหม้ทั่วไป หากเป็นเหตุสารเคมีรั่วไหล ให้เปลี่ยนประเภทเหตุเพื่อเปิดข้อมูลเฉพาะสารเคมี';eventSelect.after(modeHint);
 const checks=document.createElement('div');checks.id='incidentChecks';checks.innerHTML='<button id="refreshAnalysis" class="secondary" type="button">อัปเดตข้อมูลรอบจุดเกิดเหตุ</button>';document.getElementById('zoomIncidentBtn').after(checks);
-const list=document.createElement('div');list.id='supportList';list.setAttribute('data-export-exclude','');list.setAttribute('aria-label','รายการสำหรับคลิกดูตำแหน่งบนแผนที่');document.getElementById('report').after(list);
+const list=document.createElement('div');list.id='supportList';list.setAttribute('data-export-exclude','');list.setAttribute('aria-label','รายการสำหรับคลิกดูตำแหน่งบนแผนที่');const panel=document.createElement('aside');panel.id='dssNearbyPanel';panel.setAttribute('data-export-exclude','');panel.setAttribute('aria-label','ตำแหน่งสนับสนุนใกล้เคียง');const heading=document.createElement('h2');heading.textContent='ตำแหน่งสนับสนุนใกล้เคียง';panel.append(heading,list);document.querySelector('.workspace').append(panel);
 const previousRender=render;render=function(){previousRender();list.replaceChildren();if((state.supportLocations||[]).length>100){const summary=document.createElement('p');summary.className='hint';summary.textContent='แสดงรายการใกล้ที่สุด 100 ตำแหน่ง จาก '+state.supportLocations.length+' ตำแหน่งที่โหลดได้';list.append(summary)}(state.supportLocations||[]).slice().sort((a,b)=>a.distance-b.distance).slice(0,100).forEach(item=>{const b=document.createElement('button');b.type='button';b.textContent=supportMapTypes()[item.type].label+' · '+item.name+' · '+item.distance.toFixed(2)+' กม.';b.onclick=()=>window.dssZoomSupport?.(item.type,item.id);list.append(b)})};
 document.getElementById('refreshAnalysis').onclick=()=>{if(!validPoint())return alert('กรุณากรอกพิกัดให้ถูกต้อง');updateMap();loadDssNearby(Number(state.lat),Number(state.lng));loadWeather()};
 form.addEventListener('input',e=>{if(['lat','lng'].includes(e.target.dataset.key)){state.positionConfirmed=false;weatherSequence++;nearbySequence++;state.supportLocations=[];['hospital','fire','police','hydrant','community','cctv'].forEach(type=>{state[type+'Name']='รอวิเคราะห์ตำแหน่งใหม่';state[type+'Distance']='—'});['temp','humidity','windSpeed','windDir'].forEach(k=>state[k]='—');state.weather='รอดึงข้อมูลตำแหน่งใหม่';state.weatherTime='';window.dssSyncSupportMarkers?.();render()}});
@@ -2147,5 +2147,22 @@ html body #report .hint{font-size:12px!important;line-height:1.7!important;color
 html body #report .note{background:#f7f9fb!important;border:1px solid #d4dce5!important;border-left:3px solid #537f99!important;padding:14px!important;color:#526176!important;-webkit-text-fill-color:#526176!important;font-size:12px!important;line-height:1.8!important;margin-top:24px!important}
 html body #report .note b{color:#17324f!important;-webkit-text-fill-color:#17324f!important;font-weight:600!important}
 @media print{html body #report{box-shadow:none!important}}
-</style></body></html>
+</style><style id="dss-three-column-workspace">
+html body .workspace{display:grid!important;grid-template-columns:minmax(240px,290px) minmax(0,1fr) minmax(220px,270px)!important;max-width:1900px!important;padding:0 16px!important;gap:16px!important;align-items:start!important}
+html body .report-wrap{width:100%!important;min-width:0!important;overflow:visible!important}
+html body #report{width:100%!important;max-width:none!important;min-width:0!important;padding:28px 26px!important}
+html body .editor{min-width:0!important}
+html body #dssNearbyPanel{background:#fff;border:1px solid #d4dce5;border-radius:12px;padding:14px;min-width:0;position:sticky;top:82px;max-height:calc(100vh - 100px);overflow:auto}
+html body #dssNearbyPanel h2{font-size:18px;color:#17324f;margin:0 0 10px;line-height:1.5}
+html body #supportList{margin:0;gap:7px}
+html body #supportList .hint{font-size:13px;color:#526176;line-height:1.6;margin:0 0 6px}
+html body #supportList button{width:100%;font-size:14px;line-height:1.6;padding:9px 10px;text-align:left;white-space:normal;overflow-wrap:anywhere;background:#f7f9fb;color:#253449;border:1px solid #d4dce5;border-radius:6px}
+html body #supportList button:hover,html body #supportList button:focus-visible{background:#edf4f8;border-color:#537f99}
+@media(max-width:1250px){html body .workspace{grid-template-columns:240px minmax(0,1fr)!important}html body #dssNearbyPanel{grid-column:2;position:static;max-height:480px}html body #report{padding:24px 20px!important}}
+@media(max-width:850px){html body .workspace{display:grid!important;grid-template-columns:minmax(0,1fr)!important}html body .editor{position:static;max-height:none}html body #dssNearbyPanel{grid-column:auto;position:static}html body #report .company .row{grid-template-columns:150px minmax(0,1fr)!important}}
+@media print{html body .workspace{display:block!important}html body #dssNearbyPanel{display:none!important}}
+</style>
+<script id="dss-three-column-map-resize">
+(function(){const map=document.getElementById('dssLiveMap');if(map&&window.ResizeObserver){new ResizeObserver(()=>{window.dssLeafletMap?.invalidateSize({pan:false})}).observe(map)}})();
+</script></body></html>
 
