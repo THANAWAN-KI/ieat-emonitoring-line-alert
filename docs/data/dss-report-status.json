@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "period": "2026-10",
-  "retrievedAt": "2026-10-09T09:11:33.102872+00:00",
+  "retrievedAt": "2026-10-10T05:48:09.349970+00:00",
   "sourceUrl": "https://dss.ieat.go.th/extension/dssreportAdmin/index.php?daterange=2026-10-01+00%3A00+TO+2026-10-31+23%3A59&checkBox1%5B%5D=22&checkBox1%5B%5D=17&checkBox1%5B%5D=1&checkBox1%5B%5D=13&checkBox1%5B%5D=12&checkBox1%5B%5D=20&checkBox1%5B%5D=5&checkBox1%5B%5D=21&checkBox1%5B%5D=35&checkBox1%5B%5D=26&checkBox1%5B%5D=3&checkBox1%5B%5D=10&checkBox1%5B%5D=29&checkBox1%5B%5D=18&checkBox1%5B%5D=16&checkBox1%5B%5D=15&checkBox1%5B%5D=9&checkBox1%5B%5D=39&checkBox1%5B%5D=6&checkBox1%5B%5D=8&checkBox1%5B%5D=41&checkBox1%5B%5D=40&checkBox1%5B%5D=30&checkBox1%5B%5D=45&checkBox1%5B%5D=50&checkBox1%5B%5D=36&checkBox1%5B%5D=2&checkBox1%5B%5D=46&checkBox1%5B%5D=4&checkBox1%5B%5D=24&checkBox1%5B%5D=34&checkBox1%5B%5D=37&checkBox1%5B%5D=11&checkBox1%5B%5D=25&checkBox1%5B%5D=23&checkBox1%5B%5D=44&checkBox1%5B%5D=7&checkBox1%5B%5D=14&checkBox1%5B%5D=28&checkBox1%5B%5D=64&checkBox1%5B%5D=32&checkBox1%5B%5D=19",
   "counts": {
-    "approved": 3,
-    "review": 1,
+    "approved": 4,
+    "review": 0,
     "draft": 3,
     "none": 6932,
     "more": 2,
@@ -383,8 +383,8 @@
     },
     {
       "name": "เกตเวย์ซิตี้",
-      "approved": 0,
-      "review": 1,
+      "approved": 1,
+      "review": 0,
       "draft": 0,
       "none": 159,
       "more": 0,
