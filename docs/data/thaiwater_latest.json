@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "status": "ok",
+  "status": "stale",
   "generated_at": "2026-10-10T20:44:58+07:00",
   "methodology": {
     "watch_radius_km": 30.0,
@@ -18232,12 +18232,15 @@
     "warning_summary": "",
     "warning_url": "https://tmd.go.th/warning-and-events/warning-storm"
   },
-  "errors": [],
+  "errors": [
+    "RuntimeError: Rain source returned no verified station list"
+  ],
   "coverage": {
     "stations_complete": true,
     "station_count": 965,
     "estate_location_source": "ArcGIS geometry in EPSG:4326"
   },
+  "last_attempt_at": "2026-10-11T01:38:09+07:00",
   "flash_flood": {
     "24h": {
       "period": "24h",
