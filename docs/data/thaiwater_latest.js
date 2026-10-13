@@ -1,7 +1,7 @@
 window.IEAT_THAIWATER_DATA = {
   "schema_version": 3,
   "status": "ok",
-  "generated_at": "2026-10-13T23:01:24+07:00",
+  "generated_at": "2026-10-14T04:17:09+07:00",
   "methodology": {
     "watch_radius_km": 30.0,
     "display_radius_km": 50.0,
@@ -538,7 +538,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 10,
       "max_rainfall_mm": null,
       "nearest_alert_km": 2.0362140416044405,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 3,
@@ -554,7 +554,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 17,
       "max_rainfall_mm": null,
       "nearest_alert_km": 11.986228512238855,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 4,
@@ -570,7 +570,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 12,
       "max_rainfall_mm": null,
       "nearest_alert_km": 10.202214564103116,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 5,
@@ -586,7 +586,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 25,
       "max_rainfall_mm": null,
       "nearest_alert_km": 8.11290468175869,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 6,
@@ -602,7 +602,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 18,
       "max_rainfall_mm": null,
       "nearest_alert_km": 9.25031772245073,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 7,
@@ -618,7 +618,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 17,
       "max_rainfall_mm": null,
       "nearest_alert_km": 4.665867272460714,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 8,
@@ -628,13 +628,13 @@ window.IEAT_THAIWATER_DATA = {
       "operations": "สายปฎิบัติการ1",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
-      "alert_station_count": 7,
+      "alert_station_count": 8,
       "rain_alert_count": 0,
       "heavy_rain_alert_count": 0,
-      "water_alert_count": 7,
+      "water_alert_count": 8,
       "max_rainfall_mm": null,
       "nearest_alert_km": 4.674934171316372,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 9,
@@ -644,13 +644,13 @@ window.IEAT_THAIWATER_DATA = {
       "operations": "สายปฎิบัติการ1",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
-      "alert_station_count": 10,
+      "alert_station_count": 11,
       "rain_alert_count": 0,
       "heavy_rain_alert_count": 0,
-      "water_alert_count": 10,
+      "water_alert_count": 11,
       "max_rainfall_mm": null,
       "nearest_alert_km": 4.60388187720373,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 11,
@@ -660,13 +660,13 @@ window.IEAT_THAIWATER_DATA = {
       "operations": "สายปฎิบัติการ1",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
-      "alert_station_count": 7,
+      "alert_station_count": 8,
       "rain_alert_count": 0,
       "heavy_rain_alert_count": 0,
-      "water_alert_count": 7,
+      "water_alert_count": 8,
       "max_rainfall_mm": null,
       "nearest_alert_km": 5.96409557705208,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 23,
@@ -682,7 +682,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 8,
       "max_rainfall_mm": null,
       "nearest_alert_km": 10.49470424209022,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 24,
@@ -698,7 +698,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 7,
       "max_rainfall_mm": null,
       "nearest_alert_km": 10.518375340120038,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 25,
@@ -714,7 +714,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 8,
       "max_rainfall_mm": null,
       "nearest_alert_km": 10.49470424209022,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 26,
@@ -730,7 +730,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 9,
       "max_rainfall_mm": null,
       "nearest_alert_km": 8.540324535327358,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 14,
@@ -740,13 +740,29 @@ window.IEAT_THAIWATER_DATA = {
       "operations": "สายปฎิบัติการ1",
       "status": "วิกฤต",
       "severity_score": 3,
-      "alert_station_count": 14,
-      "rain_alert_count": 4,
+      "alert_station_count": 16,
+      "rain_alert_count": 6,
       "heavy_rain_alert_count": 0,
       "water_alert_count": 10,
       "max_rainfall_mm": 59.6,
       "nearest_alert_km": 10.64480235683347,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
+    },
+    {
+      "id": 10,
+      "name": "นิคมอุตสาหกรรมราชบุรี",
+      "lat": 13.637294430000056,
+      "lon": 99.85002164000008,
+      "operations": "สายปฎิบัติการ1",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "alert_station_count": 5,
+      "rain_alert_count": 1,
+      "heavy_rain_alert_count": 0,
+      "water_alert_count": 4,
+      "max_rainfall_mm": 37.6,
+      "nearest_alert_km": 3.6632876362743403,
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 1,
@@ -762,23 +778,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 8,
       "max_rainfall_mm": null,
       "nearest_alert_km": 17.91918472481892,
-      "latest_observed_at": "2026-10-13 22:50"
-    },
-    {
-      "id": 10,
-      "name": "นิคมอุตสาหกรรมราชบุรี",
-      "lat": 13.637294430000056,
-      "lon": 99.85002164000008,
-      "operations": "สายปฎิบัติการ1",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "alert_station_count": 4,
-      "rain_alert_count": 0,
-      "heavy_rain_alert_count": 0,
-      "water_alert_count": 4,
-      "max_rainfall_mm": null,
-      "nearest_alert_km": 3.6632876362743403,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 13,
@@ -794,7 +794,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 9,
       "max_rainfall_mm": null,
       "nearest_alert_km": 9.570134034587971,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 16,
@@ -810,7 +810,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 3,
       "max_rainfall_mm": null,
       "nearest_alert_km": 8.832622883882104,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 17,
@@ -826,7 +826,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 2,
       "max_rainfall_mm": null,
       "nearest_alert_km": 12.70008602758719,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 18,
@@ -842,7 +842,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 4,
       "max_rainfall_mm": null,
       "nearest_alert_km": 12.030145507083846,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 19,
@@ -858,7 +858,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 3,
       "max_rainfall_mm": null,
       "nearest_alert_km": 1.7752687912394733,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 21,
@@ -874,7 +874,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 7,
       "max_rainfall_mm": null,
       "nearest_alert_km": 10.591098779288023,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 22,
@@ -890,7 +890,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 5,
       "max_rainfall_mm": null,
       "nearest_alert_km": 17.02824288279466,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 29,
@@ -906,7 +906,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 1,
       "max_rainfall_mm": null,
       "nearest_alert_km": 14.183489533396038,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 44,
@@ -922,7 +922,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 4,
       "max_rainfall_mm": null,
       "nearest_alert_km": 3.0979043867166878,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 67,
@@ -938,7 +938,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 2,
       "max_rainfall_mm": null,
       "nearest_alert_km": 2.7582426638140114,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 69,
@@ -954,7 +954,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 10,
       "max_rainfall_mm": null,
       "nearest_alert_km": 6.91451213461515,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 82,
@@ -970,7 +970,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 2,
       "max_rainfall_mm": null,
       "nearest_alert_km": 8.186112995160817,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 83,
@@ -986,7 +986,23 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 3,
       "max_rainfall_mm": null,
       "nearest_alert_km": 12.29672311989434,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
+    },
+    {
+      "id": 86,
+      "name": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
+      "lat": 15.6539432754888,
+      "lon": 100.5827344418788,
+      "operations": "",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "alert_station_count": 1,
+      "rain_alert_count": 1,
+      "heavy_rain_alert_count": 0,
+      "water_alert_count": 0,
+      "max_rainfall_mm": 36.0,
+      "nearest_alert_km": 26.67303898721316,
+      "latest_observed_at": "2026-10-14 03:00"
     },
     {
       "id": 12,
@@ -1002,7 +1018,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 10,
       "max_rainfall_mm": null,
       "nearest_alert_km": 7.15377827813516,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 15,
@@ -1018,7 +1034,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 3,
       "max_rainfall_mm": null,
       "nearest_alert_km": 10.599631491585654,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 27,
@@ -1034,7 +1050,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 1,
       "max_rainfall_mm": null,
       "nearest_alert_km": 22.896520903983966,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 35,
@@ -1050,7 +1066,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 3,
       "max_rainfall_mm": null,
       "nearest_alert_km": 13.129941880333812,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 36,
@@ -1066,7 +1082,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 3,
       "max_rainfall_mm": null,
       "nearest_alert_km": 11.733378129477195,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 37,
@@ -1082,7 +1098,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 3,
       "max_rainfall_mm": null,
       "nearest_alert_km": 11.655168787830641,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 38,
@@ -1098,7 +1114,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 3,
       "max_rainfall_mm": null,
       "nearest_alert_km": 13.498117147569559,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 39,
@@ -1114,7 +1130,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 3,
       "max_rainfall_mm": null,
       "nearest_alert_km": 7.193355299520884,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 40,
@@ -1130,7 +1146,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 3,
       "max_rainfall_mm": null,
       "nearest_alert_km": 12.378253895015913,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 41,
@@ -1146,7 +1162,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 3,
       "max_rainfall_mm": null,
       "nearest_alert_km": 11.454188213708944,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 49,
@@ -1162,7 +1178,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 3,
       "max_rainfall_mm": null,
       "nearest_alert_km": 7.317869330076649,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 50,
@@ -1178,7 +1194,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 4,
       "max_rainfall_mm": null,
       "nearest_alert_km": 6.807575134903321,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 51,
@@ -1194,7 +1210,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 3,
       "max_rainfall_mm": null,
       "nearest_alert_km": 9.098279075215103,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 52,
@@ -1210,7 +1226,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 3,
       "max_rainfall_mm": null,
       "nearest_alert_km": 5.6523093721227236,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 53,
@@ -1226,7 +1242,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 3,
       "max_rainfall_mm": null,
       "nearest_alert_km": 19.775135848211736,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 60,
@@ -1242,7 +1258,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 1,
       "max_rainfall_mm": null,
       "nearest_alert_km": 27.539102019134173,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 61,
@@ -1258,7 +1274,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 1,
       "max_rainfall_mm": null,
       "nearest_alert_km": 26.224095262127022,
-      "latest_observed_at": "2026-10-13 22:00"
+      "latest_observed_at": "2026-10-14 03:00"
     },
     {
       "id": 62,
@@ -1274,7 +1290,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 1,
       "max_rainfall_mm": null,
       "nearest_alert_km": 14.94248989029333,
-      "latest_observed_at": "2026-10-13 22:00"
+      "latest_observed_at": "2026-10-14 03:00"
     },
     {
       "id": 63,
@@ -1290,7 +1306,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 1,
       "max_rainfall_mm": null,
       "nearest_alert_km": 19.574406661880516,
-      "latest_observed_at": "2026-10-13 22:00"
+      "latest_observed_at": "2026-10-14 03:00"
     },
     {
       "id": 64,
@@ -1306,7 +1322,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 5,
       "max_rainfall_mm": null,
       "nearest_alert_km": 0.8464884712603398,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 68,
@@ -1322,7 +1338,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 1,
       "max_rainfall_mm": null,
       "nearest_alert_km": 21.725608707789945,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 70,
@@ -1338,7 +1354,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 3,
       "max_rainfall_mm": null,
       "nearest_alert_km": 8.325573579588061,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 71,
@@ -1354,7 +1370,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 1,
       "max_rainfall_mm": null,
       "nearest_alert_km": 27.39688878611207,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 72,
@@ -1370,7 +1386,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 10,
       "max_rainfall_mm": null,
       "nearest_alert_km": 6.384441677806887,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 84,
@@ -1386,7 +1402,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 1,
       "max_rainfall_mm": null,
       "nearest_alert_km": 29.914156745530203,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     },
     {
       "id": 85,
@@ -1402,7 +1418,7 @@ window.IEAT_THAIWATER_DATA = {
       "water_alert_count": 3,
       "max_rainfall_mm": null,
       "nearest_alert_km": 7.06507776964934,
-      "latest_observed_at": "2026-10-13 22:50"
+      "latest_observed_at": "2026-10-14 04:00"
     }
   ],
   "stations": [
@@ -1414,11 +1430,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "เสนา",
       "lat": 14.36851,
       "lon": 100.414391,
-      "waterlevel_msl": 5.09,
-      "storage_percent": 125.08,
+      "waterlevel_msl": 5.08,
+      "storage_percent": 124.97,
       "bankfull_msl": null,
-      "value_text": "5.09 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "5.08 ม.รทก.",
+      "observed_at": "2026-10-14 02:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
       "distance_km": 23.702718586020712,
@@ -1433,11 +1449,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บางบาล",
       "lat": 14.4158,
       "lon": 100.44071,
-      "waterlevel_msl": 5.97,
-      "storage_percent": 119.03,
+      "waterlevel_msl": 5.95,
+      "storage_percent": 118.87,
       "bankfull_msl": null,
-      "value_text": "5.97 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "5.95 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
       "distance_km": 18.586439945291232,
@@ -1452,11 +1468,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บางบาล",
       "lat": 14.41588,
       "lon": 100.440804,
-      "waterlevel_msl": 6.01,
-      "storage_percent": 116.68,
+      "waterlevel_msl": 6.0,
+      "storage_percent": 116.59,
       "bankfull_msl": null,
-      "value_text": "6.01 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "6 ม.รทก.",
+      "observed_at": "2026-10-14 02:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
       "distance_km": 18.573434572085226,
@@ -1471,11 +1487,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บางบาล",
       "lat": 14.42303,
       "lon": 100.48186,
-      "waterlevel_msl": 6.71,
-      "storage_percent": 112.44,
+      "waterlevel_msl": 6.7,
+      "storage_percent": 112.27,
       "bankfull_msl": null,
-      "value_text": "6.71 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "6.7 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
       "distance_km": 14.306312776039722,
@@ -1490,11 +1506,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บางน้ำเปรี้ยว",
       "lat": 13.87032,
       "lon": 101.14574,
-      "waterlevel_msl": 2.75,
-      "storage_percent": 110.28,
+      "waterlevel_msl": 2.74,
+      "storage_percent": 110.22,
       "bankfull_msl": null,
-      "value_text": "2.75 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "2.74 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
       "distance_km": 34.46042027634919,
@@ -1513,7 +1529,7 @@ window.IEAT_THAIWATER_DATA = {
       "storage_percent": 109.95,
       "bankfull_msl": null,
       "value_text": "2.55 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-13 23:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
       "distance_km": 47.9341684991966,
@@ -1529,10 +1545,10 @@ window.IEAT_THAIWATER_DATA = {
       "lat": 16.8586,
       "lon": 100.05965,
       "waterlevel_msl": 41.24,
-      "storage_percent": 108.59,
+      "storage_percent": 108.64,
       "bankfull_msl": null,
       "value_text": "41.24 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "observed_at": "2026-10-14 04:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
       "distance_km": 32.89890323153971,
@@ -1566,11 +1582,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "นครชัยศรี",
       "lat": 13.80096,
       "lon": 100.188026,
-      "waterlevel_msl": 2.22,
-      "storage_percent": 106.79,
+      "waterlevel_msl": 2.24,
+      "storage_percent": 106.98,
       "bankfull_msl": null,
-      "value_text": "2.22 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "2.24 ม.รทก.",
+      "observed_at": "2026-10-13 23:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
       "distance_km": 28.81556976693581,
@@ -1589,7 +1605,7 @@ window.IEAT_THAIWATER_DATA = {
       "storage_percent": 106.51,
       "bankfull_msl": null,
       "value_text": "2.83 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "observed_at": "2026-10-14 04:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
       "distance_km": 4.665867272460714,
@@ -1605,10 +1621,10 @@ window.IEAT_THAIWATER_DATA = {
       "lat": 14.01636,
       "lon": 100.17979,
       "waterlevel_msl": 2.75,
-      "storage_percent": 105.61,
+      "storage_percent": 105.63,
       "bankfull_msl": null,
       "value_text": "2.75 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "observed_at": "2026-10-14 04:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
       "distance_km": 49.05798711025778,
@@ -1623,11 +1639,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บางปะหัน",
       "lat": 14.42731,
       "lon": 100.55605,
-      "waterlevel_msl": 5.19,
-      "storage_percent": 105.47,
+      "waterlevel_msl": 5.16,
+      "storage_percent": 105.17,
       "bankfull_msl": null,
-      "value_text": "5.19 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "5.16 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
       "distance_km": 8.11290468175869,
@@ -1642,11 +1658,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บางปะอิน",
       "lat": 14.30455,
       "lon": 100.56645,
-      "waterlevel_msl": 3.19,
-      "storage_percent": 105.13,
+      "waterlevel_msl": 3.15,
+      "storage_percent": 104.74,
       "bankfull_msl": null,
-      "value_text": "3.19 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "3.15 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
       "distance_km": 7.998524231584936,
@@ -1665,7 +1681,7 @@ window.IEAT_THAIWATER_DATA = {
       "storage_percent": 104.19,
       "bankfull_msl": null,
       "value_text": "4.92 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
       "distance_km": 15.192004169383056,
@@ -1680,15 +1696,34 @@ window.IEAT_THAIWATER_DATA = {
       "district": "เมืองปราจีนบุรี",
       "lat": 14.05144,
       "lon": 101.367378,
-      "waterlevel_msl": 4.34,
-      "storage_percent": 102.05,
+      "waterlevel_msl": 4.32,
+      "storage_percent": 101.86,
       "bankfull_msl": null,
-      "value_text": "4.34 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "4.32 ม.รทก.",
+      "observed_at": "2026-10-14 03:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
       "distance_km": 34.78754763248004,
       "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "บ้านบางบาล",
+      "station_code": "C.37",
+      "province": "พระนครศรีอยุธยา",
+      "district": "บางบาล",
+      "lat": 14.36319,
+      "lon": 100.484833,
+      "waterlevel_msl": 4.15,
+      "storage_percent": 100.14,
+      "bankfull_msl": null,
+      "value_text": "4.15 ม.รทก.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ล้นตลิ่ง",
+      "severity_score": 4,
+      "distance_km": 18.42168601144319,
+      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
       "agency": "ชป."
     },
     {
@@ -1699,53 +1734,15 @@ window.IEAT_THAIWATER_DATA = {
       "district": "สามพราน",
       "lat": 13.72411,
       "lon": 100.215683,
-      "waterlevel_msl": 1.63,
-      "storage_percent": 101.27,
+      "waterlevel_msl": 1.51,
+      "storage_percent": 100.1,
       "bankfull_msl": null,
-      "value_text": "1.63 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "1.51 ม.รทก.",
+      "observed_at": "2026-10-13 23:00",
       "status": "ล้นตลิ่ง",
       "severity_score": 4,
       "distance_km": 20.11302278215949,
       "nearest_estate": "นิคมอุตสาหกรรมสมุทรสาคร",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สะพานนครชัยศรี",
-      "station_code": "THA008",
-      "province": "นครปฐม",
-      "district": "นครชัยศรี",
-      "lat": 13.79217,
-      "lon": 100.19817,
-      "waterlevel_msl": 2.05,
-      "storage_percent": 101.04,
-      "bankfull_msl": null,
-      "value_text": "2.05 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 27.81450504933709,
-      "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "บ้านบางบาล",
-      "station_code": "C.37",
-      "province": "พระนครศรีอยุธยา",
-      "district": "บางบาล",
-      "lat": 14.36319,
-      "lon": 100.484833,
-      "waterlevel_msl": 4.16,
-      "storage_percent": 100.28,
-      "bankfull_msl": null,
-      "value_text": "4.16 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ล้นตลิ่ง",
-      "severity_score": 4,
-      "distance_km": 18.42168601144319,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
       "agency": "ชป."
     },
     {
@@ -1756,9 +1753,9 @@ window.IEAT_THAIWATER_DATA = {
       "district": "สะบ้าย้อย",
       "lat": 6.485849,
       "lon": 100.779058,
-      "rainfall_mm": 86.5,
-      "value_text": "86.5 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "rainfall_mm": 84.5,
+      "value_text": "84.5 มม.",
+      "observed_at": "2026-10-14 02:00",
       "status": "เสี่ยงสูง",
       "severity_score": 3,
       "distance_km": 40.85174212688185,
@@ -1775,7 +1772,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.694815,
       "rainfall_mm": 84.0,
       "value_text": "84 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "เสี่ยงสูง",
       "severity_score": 3,
       "distance_km": 38.16943500258247,
@@ -1790,9 +1787,9 @@ window.IEAT_THAIWATER_DATA = {
       "district": "สะบ้าย้อย",
       "lat": 6.483326,
       "lon": 100.779366,
-      "rainfall_mm": 74.8,
-      "value_text": "74.8 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "rainfall_mm": 75.0,
+      "value_text": "75 มม.",
+      "observed_at": "2026-10-14 04:00",
       "status": "เสี่ยงสูง",
       "severity_score": 3,
       "distance_km": 40.92913921048899,
@@ -1801,21 +1798,21 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "สะพานนวลฉวี",
-      "station_code": "CPY014",
-      "province": "นนทบุรี",
-      "district": "ปากเกร็ด",
-      "lat": 13.94749,
-      "lon": 100.53507,
-      "waterlevel_msl": 2.41,
-      "storage_percent": 99.43,
+      "station": "สะพานนครชัยศรี",
+      "station_code": "THA008",
+      "province": "นครปฐม",
+      "district": "นครชัยศรี",
+      "lat": 13.79217,
+      "lon": 100.19817,
+      "waterlevel_msl": 1.92,
+      "storage_percent": 99.75,
       "bankfull_msl": null,
-      "value_text": "2.41 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "1.92 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
-      "distance_km": 24.300920472922257,
-      "nearest_estate": "นิคมอุตสาหกรรมบางชัน",
+      "distance_km": 27.81450504933709,
+      "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
       "agency": "สสน."
     },
     {
@@ -1826,11 +1823,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "นครหลวง",
       "lat": 14.40269,
       "lon": 100.5864,
-      "waterlevel_msl": 3.8,
-      "storage_percent": 99.08,
+      "waterlevel_msl": 3.77,
+      "storage_percent": 98.78,
       "bankfull_msl": null,
-      "value_text": "3.8 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "3.77 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 9.687099448793155,
@@ -1845,35 +1842,16 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บางระกำ",
       "lat": 16.757919,
       "lon": 100.115578,
-      "waterlevel_msl": 38.79,
-      "storage_percent": 98.27,
+      "waterlevel_msl": 38.78,
+      "storage_percent": 98.15,
       "bankfull_msl": null,
-      "value_text": "38.79 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "38.78 ม.รทก.",
+      "observed_at": "2026-10-14 02:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 20.608170192807048,
       "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
       "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "พนมสารคาม",
-      "station_code": "BPK004",
-      "province": "ฉะเชิงเทรา",
-      "district": "พนมสารคาม",
-      "lat": 13.72662,
-      "lon": 101.35298,
-      "waterlevel_msl": 5.24,
-      "storage_percent": 97.83,
-      "bankfull_msl": null,
-      "value_text": "5.24 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 12.70008602758719,
-      "nearest_estate": "นิคมอุตสาหกรรมเกตเวย์ ซิตี้",
-      "agency": "สสน."
     },
     {
       "kind": "waterlevel",
@@ -1883,11 +1861,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "ศรีมหาโพธิ",
       "lat": 13.97341,
       "lon": 101.517448,
-      "waterlevel_msl": 6.31,
-      "storage_percent": 97.8,
+      "waterlevel_msl": 6.24,
+      "storage_percent": 97.28,
       "bankfull_msl": null,
-      "value_text": "6.31 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "6.24 ม.รทก.",
+      "observed_at": "2026-10-14 03:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 16.420438261300376,
@@ -1896,20 +1874,20 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "คลองมหาสวัสดิ บางกรวย-สวนผัก",
-      "station_code": "BKK003",
-      "province": "กรุงเทพมหานคร",
-      "district": "ตลิ่งชัน",
-      "lat": 13.79965,
-      "lon": 100.43863,
-      "waterlevel_msl": 1.91,
-      "storage_percent": 96.85,
+      "station": "สะพานนวลฉวี",
+      "station_code": "CPY014",
+      "province": "นนทบุรี",
+      "district": "ปากเกร็ด",
+      "lat": 13.94749,
+      "lon": 100.53507,
+      "waterlevel_msl": 2.02,
+      "storage_percent": 96.96,
       "bankfull_msl": null,
-      "value_text": "1.91 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "2.02 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
-      "distance_km": 28.741410424380156,
+      "distance_km": 24.300920472922257,
       "nearest_estate": "นิคมอุตสาหกรรมบางชัน",
       "agency": "สสน."
     },
@@ -1921,11 +1899,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "เมืองลพบุรี",
       "lat": 14.76049,
       "lon": 100.5996,
-      "waterlevel_msl": 6.29,
-      "storage_percent": 96.78,
+      "waterlevel_msl": 6.28,
+      "storage_percent": 96.75,
       "bankfull_msl": null,
-      "value_text": "6.29 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "6.28 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 30.153470420161305,
@@ -1934,22 +1912,22 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "กรมชลประทานสามเสน",
-      "station_code": "C.12",
-      "province": "กรุงเทพมหานคร",
-      "district": "ดุสิต",
-      "lat": 13.78815,
-      "lon": 100.509148,
-      "waterlevel_msl": 1.7,
-      "storage_percent": 96.66,
+      "station": "พนมสารคาม",
+      "station_code": "BPK004",
+      "province": "ฉะเชิงเทรา",
+      "district": "พนมสารคาม",
+      "lat": 13.72662,
+      "lon": 101.35298,
+      "waterlevel_msl": 5.14,
+      "storage_percent": 96.34,
       "bankfull_msl": null,
-      "value_text": "1.7 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "5.14 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
-      "distance_km": 21.195539924978746,
-      "nearest_estate": "นิคมอุตสาหกรรมบางชัน",
-      "agency": "ชป."
+      "distance_km": 12.70008602758719,
+      "nearest_estate": "นิคมอุตสาหกรรมเกตเวย์ ซิตี้",
+      "agency": "สสน."
     },
     {
       "kind": "waterlevel",
@@ -1959,14 +1937,33 @@ window.IEAT_THAIWATER_DATA = {
       "district": "ท่าเรือ",
       "lat": 14.56014,
       "lon": 100.71987,
-      "waterlevel_msl": 5.7,
-      "storage_percent": 96.29,
+      "waterlevel_msl": 5.67,
+      "storage_percent": 96.1,
       "bankfull_msl": null,
-      "value_text": "5.7 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "5.67 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 15.510084795335397,
+      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "พระนครศรีอยุธยา",
+      "station_code": "CPY011",
+      "province": "พระนครศรีอยุธยา",
+      "district": "พระนครศรีอยุธยา",
+      "lat": 14.36913,
+      "lon": 100.52861,
+      "waterlevel_msl": 4.65,
+      "storage_percent": 96.07,
+      "bankfull_msl": null,
+      "value_text": "4.65 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "distance_km": 15.195312328999318,
       "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
       "agency": "สสน."
     },
@@ -1978,35 +1975,16 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บางระกำ",
       "lat": 16.762119,
       "lon": 100.121201,
-      "waterlevel_msl": 38.6,
-      "storage_percent": 96.19,
+      "waterlevel_msl": 38.59,
+      "storage_percent": 96.06,
       "bankfull_msl": null,
-      "value_text": "38.6 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "38.59 ม.รทก.",
+      "observed_at": "2026-10-14 02:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 20.97559718239193,
       "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
       "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "พระนครศรีอยุธยา",
-      "station_code": "CPY011",
-      "province": "พระนครศรีอยุธยา",
-      "district": "พระนครศรีอยุธยา",
-      "lat": 14.36913,
-      "lon": 100.52861,
-      "waterlevel_msl": 4.65,
-      "storage_percent": 96.12,
-      "bankfull_msl": null,
-      "value_text": "4.65 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 15.195312328999318,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "สสน."
     },
     {
       "kind": "waterlevel",
@@ -2016,11 +1994,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "ประจันตคาม",
       "lat": 14.070941,
       "lon": 101.51893,
-      "waterlevel_msl": 6.43,
-      "storage_percent": 95.96,
+      "waterlevel_msl": 6.41,
+      "storage_percent": 95.61,
       "bankfull_msl": null,
-      "value_text": "6.43 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "6.41 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 23.337808011616087,
@@ -2035,34 +2013,15 @@ window.IEAT_THAIWATER_DATA = {
       "district": "ศรีมหาโพธิ",
       "lat": 13.97348,
       "lon": 101.51751,
-      "waterlevel_msl": 7.16,
-      "storage_percent": 95.85,
+      "waterlevel_msl": 7.09,
+      "storage_percent": 95.16,
       "bankfull_msl": null,
-      "value_text": "7.16 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "7.09 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 16.418025616363693,
       "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "องครักษ์",
-      "station_code": "NYK000",
-      "province": "นครนายก",
-      "district": "องครักษ์",
-      "lat": 14.113633,
-      "lon": 101.01952,
-      "waterlevel_msl": 2.25,
-      "storage_percent": 94.31,
-      "bankfull_msl": null,
-      "value_text": "2.25 ม.รทก.",
-      "observed_at": "2026-10-06 07:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 32.80225767760791,
-      "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
       "agency": "สสน."
     },
     {
@@ -2077,7 +2036,7 @@ window.IEAT_THAIWATER_DATA = {
       "storage_percent": 93.91,
       "bankfull_msl": null,
       "value_text": "3.89 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 12.898946508897676,
@@ -2096,11 +2055,30 @@ window.IEAT_THAIWATER_DATA = {
       "storage_percent": 93.68,
       "bankfull_msl": null,
       "value_text": "2.85 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 12.71905854693515,
       "nearest_estate": "นิคมอุตสาหกรรมบ้านหว้า",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "ปากรอ",
+      "station_code": "SLA005",
+      "province": "สงขลา",
+      "district": "สิงหนคร",
+      "lat": 7.261514,
+      "lon": 100.42447,
+      "waterlevel_msl": 0.51,
+      "storage_percent": 93.64,
+      "bankfull_msl": null,
+      "value_text": "0.51 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "distance_km": 29.050330940229774,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "สสน."
     },
     {
@@ -2112,15 +2090,34 @@ window.IEAT_THAIWATER_DATA = {
       "lat": 14.31976,
       "lon": 100.37952,
       "waterlevel_msl": 3.25,
-      "storage_percent": 93.64,
+      "storage_percent": 93.5,
       "bankfull_msl": null,
       "value_text": "3.25 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 25.846600860267063,
       "nearest_estate": "นิคมอุตสาหกรรมบางปะอิน",
       "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "กรมชลประทานสามเสน",
+      "station_code": "C.12",
+      "province": "กรุงเทพมหานคร",
+      "district": "ดุสิต",
+      "lat": 13.78815,
+      "lon": 100.509148,
+      "waterlevel_msl": 1.06,
+      "storage_percent": 92.85,
+      "bankfull_msl": null,
+      "value_text": "1.06 ม.รทก.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "distance_km": 21.195539924978746,
+      "nearest_estate": "นิคมอุตสาหกรรมบางชัน",
+      "agency": "ชป."
     },
     {
       "kind": "waterlevel",
@@ -2130,11 +2127,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "ลาดกระบัง",
       "lat": 13.7407,
       "lon": 100.79468,
-      "waterlevel_msl": 0.36,
-      "storage_percent": 93.1,
+      "waterlevel_msl": 0.35,
+      "storage_percent": 92.76,
       "bankfull_msl": null,
-      "value_text": "0.36 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "0.35 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 2.0362140416044405,
@@ -2143,59 +2140,21 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "ปากรอ",
-      "station_code": "SLA005",
+      "station": "สะพานข้ามคลองอู่ตะเภา",
+      "station_code": "ONE037",
       "province": "สงขลา",
-      "district": "สิงหนคร",
-      "lat": 7.261514,
-      "lon": 100.42447,
-      "waterlevel_msl": 0.46,
-      "storage_percent": 92.96,
+      "district": "หาดใหญ่",
+      "lat": 7.134997,
+      "lon": 100.45321,
+      "waterlevel_msl": 0.35,
+      "storage_percent": 90.92,
       "bankfull_msl": null,
-      "value_text": "0.46 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "0.35 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
-      "distance_km": 29.050330940229774,
+      "distance_km": 17.45953341454558,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สะพานกรุงเทพ",
-      "station_code": "CPY015",
-      "province": "กรุงเทพมหานคร",
-      "district": "ธนบุรี",
-      "lat": 13.700301,
-      "lon": 100.49277,
-      "waterlevel_msl": 0.72,
-      "storage_percent": 91.93,
-      "bankfull_msl": null,
-      "value_text": "0.72 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 22.631190161803122,
-      "nearest_estate": "นิคมอุตสาหกรรมแพรกษา",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "คลองอ้อมนนท์ บางใหญ่ (ถนนบางกรวย-ไทรน้อย)",
-      "station_code": "BKK007",
-      "province": "นนทบุรี",
-      "district": "บางใหญ่",
-      "lat": 13.87089,
-      "lon": 100.43626,
-      "waterlevel_msl": 1.44,
-      "storage_percent": 91.07,
-      "bankfull_msl": null,
-      "value_text": "1.44 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 29.93130739016791,
-      "nearest_estate": "นิคมอุตสาหกรรมบางชัน",
       "agency": "สสน."
     },
     {
@@ -2206,11 +2165,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "เมืองอ่างทอง",
       "lat": 14.5765,
       "lon": 100.44852,
-      "waterlevel_msl": 7.55,
-      "storage_percent": 90.69,
+      "waterlevel_msl": 7.54,
+      "storage_percent": 90.58,
       "bankfull_msl": null,
-      "value_text": "7.55 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "7.54 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 18.573455402215103,
@@ -2225,72 +2184,15 @@ window.IEAT_THAIWATER_DATA = {
       "district": "ท่าเรือ",
       "lat": 14.56012,
       "lon": 100.71994,
-      "waterlevel_msl": 6.05,
-      "storage_percent": 90.44,
+      "waterlevel_msl": 6.03,
+      "storage_percent": 90.27,
       "bankfull_msl": null,
-      "value_text": "6.05 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "6.03 ม.รทก.",
+      "observed_at": "2026-10-14 02:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 15.515449625154027,
       "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สะพานข้ามคลองอู่ตะเภา",
-      "station_code": "ONE037",
-      "province": "สงขลา",
-      "district": "หาดใหญ่",
-      "lat": 7.134997,
-      "lon": 100.45321,
-      "waterlevel_msl": 0.29,
-      "storage_percent": 89.8,
-      "bankfull_msl": null,
-      "value_text": "0.29 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 17.45953341454558,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "คลองจระเข้ใหญ่ บางเสาธง (วัดศรีวารีน้อย)",
-      "station_code": "BKK017",
-      "province": "สมุทรปราการ",
-      "district": "บางเสาธง",
-      "lat": 13.66949,
-      "lon": 100.80058,
-      "waterlevel_msl": 0.16,
-      "storage_percent": 89.71,
-      "bankfull_msl": null,
-      "value_text": "0.16 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 9.945006421763477,
-      "nearest_estate": "นิคมอุตสาหกรรมลาดกระบัง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "บ้านวังขนาย",
-      "station_code": "K.11A",
-      "province": "กาญจนบุรี",
-      "district": "ท่าม่วง",
-      "lat": 13.95094,
-      "lon": 99.645477,
-      "waterlevel_msl": 15.12,
-      "storage_percent": 89.7,
-      "bankfull_msl": null,
-      "value_text": "15.12 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 41.282138683426645,
-      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
       "agency": "ชป."
     },
     {
@@ -2301,15 +2203,53 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บ้านแพ้ว",
       "lat": 13.57563,
       "lon": 100.07884,
-      "waterlevel_msl": 0.6,
-      "storage_percent": 89.06,
+      "waterlevel_msl": 0.63,
+      "storage_percent": 89.86,
       "bankfull_msl": null,
-      "value_text": "0.6 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "0.63 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 13.50034924008027,
       "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "บ้านวังขนาย",
+      "station_code": "K.11A",
+      "province": "กาญจนบุรี",
+      "district": "ท่าม่วง",
+      "lat": 13.95094,
+      "lon": 99.645477,
+      "waterlevel_msl": 15.09,
+      "storage_percent": 89.3,
+      "bankfull_msl": null,
+      "value_text": "15.09 ม.รทก.",
+      "observed_at": "2026-10-13 23:00",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "distance_km": 41.282138683426645,
+      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "คลองจระเข้ใหญ่ บางเสาธง (วัดศรีวารีน้อย)",
+      "station_code": "BKK017",
+      "province": "สมุทรปราการ",
+      "district": "บางเสาธง",
+      "lat": 13.66949,
+      "lon": 100.80058,
+      "waterlevel_msl": 0.14,
+      "storage_percent": 88.79,
+      "bankfull_msl": null,
+      "value_text": "0.14 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "distance_km": 9.945006421763477,
+      "nearest_estate": "นิคมอุตสาหกรรมลาดกระบัง",
       "agency": "สสน."
     },
     {
@@ -2320,11 +2260,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "เมืองลพบุรี",
       "lat": 14.818599,
       "lon": 100.576515,
-      "waterlevel_msl": 7.11,
-      "storage_percent": 88.88,
+      "waterlevel_msl": 7.09,
+      "storage_percent": 88.62,
       "bankfull_msl": null,
-      "value_text": "7.11 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "7.09 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 36.67026197358812,
@@ -2333,21 +2273,21 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "สะพานอนุสรณ์ 100 ปีสิงห์บุรี (สะพานหลวงพ่อแพ 89)",
-      "station_code": "HDA006",
-      "province": "สิงห์บุรี",
-      "district": "เมืองสิงห์บุรี",
-      "lat": 14.870205,
-      "lon": 100.408585,
-      "waterlevel_msl": 10.77,
-      "storage_percent": 88.64,
+      "station": "คลองอ้อมนนท์ บางใหญ่ (ถนนบางกรวย-ไทรน้อย)",
+      "station_code": "BKK007",
+      "province": "นนทบุรี",
+      "district": "บางใหญ่",
+      "lat": 13.87089,
+      "lon": 100.43626,
+      "waterlevel_msl": 1.33,
+      "storage_percent": 88.51,
       "bankfull_msl": null,
-      "value_text": "10.77 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "1.33 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
-      "distance_km": 46.8907144661931,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
+      "distance_km": 29.93130739016791,
+      "nearest_estate": "นิคมอุตสาหกรรมบางชัน",
       "agency": "สสน."
     },
     {
@@ -2358,11 +2298,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "เมืองอ่างทอง",
       "lat": 14.59044,
       "lon": 100.453293,
-      "waterlevel_msl": 7.98,
-      "storage_percent": 88.45,
+      "waterlevel_msl": 7.97,
+      "storage_percent": 88.39,
       "bankfull_msl": null,
-      "value_text": "7.98 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "7.97 ม.รทก.",
+      "observed_at": "2026-10-14 02:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 19.01027944909514,
@@ -2378,14 +2318,52 @@ window.IEAT_THAIWATER_DATA = {
       "lat": 14.79091,
       "lon": 100.45184,
       "waterlevel_msl": 9.51,
-      "storage_percent": 88.42,
+      "storage_percent": 88.38,
       "bankfull_msl": null,
       "value_text": "9.51 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 36.93348365136987,
       "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "สะพานอนุสรณ์ 100 ปีสิงห์บุรี (สะพานหลวงพ่อแพ 89)",
+      "station_code": "HDA006",
+      "province": "สิงห์บุรี",
+      "district": "เมืองสิงห์บุรี",
+      "lat": 14.870205,
+      "lon": 100.408585,
+      "waterlevel_msl": 10.73,
+      "storage_percent": 88.31,
+      "bankfull_msl": null,
+      "value_text": "10.73 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "distance_km": 46.8907144661931,
+      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "สะพานกรุงเทพ",
+      "station_code": "CPY015",
+      "province": "กรุงเทพมหานคร",
+      "district": "ธนบุรี",
+      "lat": 13.700301,
+      "lon": 100.49277,
+      "waterlevel_msl": 0.05,
+      "storage_percent": 88.18,
+      "bankfull_msl": null,
+      "value_text": "0.05 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "distance_km": 22.631190161803122,
+      "nearest_estate": "นิคมอุตสาหกรรมแพรกษา",
       "agency": "สสน."
     },
     {
@@ -2397,10 +2375,10 @@ window.IEAT_THAIWATER_DATA = {
       "lat": 13.83819,
       "lon": 100.9666,
       "waterlevel_msl": 0.8,
-      "storage_percent": 88.03,
+      "storage_percent": 88.11,
       "bankfull_msl": null,
       "value_text": "0.8 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 20.69905378335247,
@@ -2415,11 +2393,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "ป่าโมก",
       "lat": 14.498074,
       "lon": 100.44962,
-      "waterlevel_msl": 6.78,
-      "storage_percent": 87.16,
+      "waterlevel_msl": 6.76,
+      "storage_percent": 86.94,
       "bankfull_msl": null,
-      "value_text": "6.78 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "6.76 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 15.758642782654789,
@@ -2434,35 +2412,16 @@ window.IEAT_THAIWATER_DATA = {
       "district": "ลาดพร้าว",
       "lat": 13.93183,
       "lon": 100.63952,
-      "waterlevel_msl": 1.59,
-      "storage_percent": 87.11,
+      "waterlevel_msl": 1.56,
+      "storage_percent": 86.31,
       "bankfull_msl": null,
-      "value_text": "1.59 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "1.56 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 15.87492828233833,
       "nearest_estate": "นิคมอุตสาหกรรมบางชัน",
       "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สะพานต้นน้ำบางปะกง",
-      "station_code": "Kgt.3",
-      "province": "ปราจีนบุรี",
-      "district": "กบินทร์บุรี",
-      "lat": 13.98666,
-      "lon": 101.705406,
-      "waterlevel_msl": 7.44,
-      "storage_percent": 86.36,
-      "bankfull_msl": null,
-      "value_text": "7.44 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 10.591098779288023,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
-      "agency": "ชป."
     },
     {
       "kind": "waterlevel",
@@ -2472,11 +2431,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "รัตภูมิ",
       "lat": 7.10502,
       "lon": 100.193932,
-      "waterlevel_msl": 33.81,
-      "storage_percent": 85.15,
+      "waterlevel_msl": 33.82,
+      "storage_percent": 85.17,
       "bankfull_msl": null,
-      "value_text": "33.81 ม.รทก.",
-      "observed_at": "2026-10-13 21:00",
+      "value_text": "33.82 ม.รทก.",
+      "observed_at": "2026-10-13 23:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 21.232514608114705,
@@ -2485,21 +2444,40 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "บางปะกง",
-      "station_code": "BPK001",
-      "province": "ฉะเชิงเทรา",
-      "district": "บางปะกง",
-      "lat": 13.54901,
-      "lon": 101.00111,
-      "waterlevel_msl": -0.33,
-      "storage_percent": 85.05,
+      "station": "สะพานต้นน้ำบางปะกง",
+      "station_code": "Kgt.3",
+      "province": "ปราจีนบุรี",
+      "district": "กบินทร์บุรี",
+      "lat": 13.98666,
+      "lon": 101.705406,
+      "waterlevel_msl": 7.32,
+      "storage_percent": 85.15,
       "bankfull_msl": null,
-      "value_text": "-0.33 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "7.32 ม.รทก.",
+      "observed_at": "2026-10-14 03:00",
       "status": "วิกฤต",
       "severity_score": 3,
-      "distance_km": 1.7752687912394733,
-      "nearest_estate": "นิคมอุตสาหกรรมทีเอฟดี 1",
+      "distance_km": 10.591098779288023,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "คลองมหาสวัสดิ บางกรวย-สวนผัก",
+      "station_code": "BKK003",
+      "province": "กรุงเทพมหานคร",
+      "district": "ตลิ่งชัน",
+      "lat": 13.79965,
+      "lon": 100.43863,
+      "waterlevel_msl": 1.3,
+      "storage_percent": 85.15,
+      "bankfull_msl": null,
+      "value_text": "1.3 ม.รทก.",
+      "observed_at": "2026-10-14 03:50",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "distance_km": 28.741410424380156,
+      "nearest_estate": "นิคมอุตสาหกรรมบางชัน",
       "agency": "สสน."
     },
     {
@@ -2510,11 +2488,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "เมืองสมุทรสงคราม",
       "lat": 13.38362,
       "lon": 99.9836,
-      "waterlevel_msl": -0.2,
-      "storage_percent": 84.19,
+      "waterlevel_msl": -0.14,
+      "storage_percent": 84.62,
       "bankfull_msl": null,
-      "value_text": "-0.2 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "-0.14 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 29.19079991757201,
@@ -2530,10 +2508,10 @@ window.IEAT_THAIWATER_DATA = {
       "lat": 13.9416,
       "lon": 100.77499,
       "waterlevel_msl": 1.88,
-      "storage_percent": 84.15,
+      "storage_percent": 84.0,
       "bankfull_msl": null,
       "value_text": "1.88 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 17.087742962577927,
@@ -2548,15 +2526,34 @@ window.IEAT_THAIWATER_DATA = {
       "district": "แกลง",
       "lat": 12.802991,
       "lon": 101.65024,
-      "waterlevel_msl": 2.94,
-      "storage_percent": 84.0,
+      "waterlevel_msl": 2.88,
+      "storage_percent": 83.06,
       "bankfull_msl": null,
-      "value_text": "2.94 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "2.88 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 22.688334160220514,
       "nearest_estate": "นิคมอุตสาหกรรมหลักชัยเมืองยาง",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "บางปะกง",
+      "station_code": "BPK001",
+      "province": "ฉะเชิงเทรา",
+      "district": "บางปะกง",
+      "lat": 13.54901,
+      "lon": 101.00111,
+      "waterlevel_msl": -0.59,
+      "storage_percent": 83.04,
+      "bankfull_msl": null,
+      "value_text": "-0.59 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "distance_km": 1.7752687912394733,
+      "nearest_estate": "นิคมอุตสาหกรรมทีเอฟดี 1",
       "agency": "สสน."
     },
     {
@@ -2567,34 +2564,15 @@ window.IEAT_THAIWATER_DATA = {
       "district": "คลองหลวง",
       "lat": 14.20612,
       "lon": 100.74476,
-      "waterlevel_msl": 3.69,
-      "storage_percent": 83.33,
+      "waterlevel_msl": 3.66,
+      "storage_percent": 82.64,
       "bankfull_msl": null,
-      "value_text": "3.69 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "3.66 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 15.195758700698022,
       "nearest_estate": "นิคมอุตสาหกรรมบ้านหว้า",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "ปตร กุฎิ (ทุ่งป่าโมก)",
-      "station_code": "TCP006",
-      "province": "พระนครศรีอยุธยา",
-      "district": "ผักไห่",
-      "lat": 14.412405,
-      "lon": 100.40116,
-      "waterlevel_msl": 5.79,
-      "storage_percent": 81.38,
-      "bankfull_msl": null,
-      "value_text": "5.79 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 22.629065557313126,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
       "agency": "สสน."
     },
     {
@@ -2609,10 +2587,29 @@ window.IEAT_THAIWATER_DATA = {
       "storage_percent": 81.38,
       "bankfull_msl": null,
       "value_text": "3.92 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 24.887388401638866,
+      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "ปตร กุฎิ (ทุ่งป่าโมก)",
+      "station_code": "TCP006",
+      "province": "พระนครศรีอยุธยา",
+      "district": "ผักไห่",
+      "lat": 14.412405,
+      "lon": 100.40116,
+      "waterlevel_msl": 5.77,
+      "storage_percent": 81.08,
+      "bankfull_msl": null,
+      "value_text": "5.77 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "distance_km": 22.629065557313126,
       "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
       "agency": "สสน."
     },
@@ -2624,71 +2621,14 @@ window.IEAT_THAIWATER_DATA = {
       "district": "ค่ายบางระจัน",
       "lat": 14.815288,
       "lon": 100.36448,
-      "waterlevel_msl": 8.31,
-      "storage_percent": 81.0,
+      "waterlevel_msl": 8.29,
+      "storage_percent": 80.74,
       "bankfull_msl": null,
-      "value_text": "8.31 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "8.29 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 43.95975694360689,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "ปตร.วัดบางกระเจ้านอก",
-      "station_code": "BKC002",
-      "province": "สมุทรปราการ",
-      "district": "พระประแดง",
-      "lat": 13.689612,
-      "lon": 100.554886,
-      "waterlevel_msl": 0.75,
-      "storage_percent": 80.9,
-      "bankfull_msl": null,
-      "value_text": "0.75 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 16.515461215669056,
-      "nearest_estate": "นิคมอุตสาหกรรมอัญธานี",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "คลองระพีพัฒน์แยกใต้ หนองเสือ",
-      "station_code": "BKK013",
-      "province": "ปทุมธานี",
-      "district": "หนองเสือ",
-      "lat": 14.2206,
-      "lon": 100.89168,
-      "waterlevel_msl": 3.09,
-      "storage_percent": 80.84,
-      "bankfull_msl": null,
-      "value_text": "3.09 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 18.479318846322684,
-      "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สะพานคลองส่งน้ำชลประทาน บ้านตลาดใหม่",
-      "station_code": "HDA008",
-      "province": "อ่างทอง",
-      "district": "วิเศษชัยชาญ",
-      "lat": 14.553573,
-      "lon": 100.316765,
-      "waterlevel_msl": 4.16,
-      "storage_percent": 80.76,
-      "bankfull_msl": null,
-      "value_text": "4.16 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 30.86535432381292,
       "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
       "agency": "สสน."
     },
@@ -2704,12 +2644,50 @@ window.IEAT_THAIWATER_DATA = {
       "storage_percent": 80.7,
       "bankfull_msl": null,
       "value_text": "7.17 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-13 23:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 18.86801957595799,
       "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
       "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "สะพานข้ามคลองบางม่วง",
+      "station_code": "ONE024",
+      "province": "พัทลุง",
+      "district": "ปากพะยูน",
+      "lat": 7.365284,
+      "lon": 100.27959,
+      "waterlevel_msl": 0.36,
+      "storage_percent": 80.61,
+      "bankfull_msl": null,
+      "value_text": "0.36 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "distance_km": 40.67365550525883,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "สะพานคลองส่งน้ำชลประทาน บ้านตลาดใหม่",
+      "station_code": "HDA008",
+      "province": "อ่างทอง",
+      "district": "วิเศษชัยชาญ",
+      "lat": 14.553573,
+      "lon": 100.316765,
+      "waterlevel_msl": 4.15,
+      "storage_percent": 80.52,
+      "bankfull_msl": null,
+      "value_text": "4.15 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "distance_km": 30.86535432381292,
+      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
+      "agency": "สสน."
     },
     {
       "kind": "waterlevel",
@@ -2719,11 +2697,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "เมืองปทุมธานี",
       "lat": 13.96562,
       "lon": 100.60262,
-      "waterlevel_msl": 0.76,
-      "storage_percent": 80.18,
+      "waterlevel_msl": 0.77,
+      "storage_percent": 80.48,
       "bankfull_msl": null,
-      "value_text": "0.76 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "0.77 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 21.095038483394372,
@@ -2732,40 +2710,21 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "สะพานหน้าจวนผู้ว่าฯ",
-      "station_code": "Ny.7",
-      "province": "นครนายก",
-      "district": "เมืองนครนายก",
-      "lat": 14.20048,
-      "lon": 101.219307,
-      "waterlevel_msl": 6.21,
-      "storage_percent": 79.84,
+      "station": "คลองระพีพัฒน์แยกใต้ หนองเสือ",
+      "station_code": "BKK013",
+      "province": "ปทุมธานี",
+      "district": "หนองเสือ",
+      "lat": 14.2206,
+      "lon": 100.89168,
+      "waterlevel_msl": 3.06,
+      "storage_percent": 80.24,
       "bankfull_msl": null,
-      "value_text": "6.21 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "3.06 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
-      "distance_km": 39.80889634653896,
+      "distance_km": 18.479318846322684,
       "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "แม่น้ำลี้ บ้านโฮ่ง",
-      "station_code": "PIN009",
-      "province": "ลำพูน",
-      "district": "บ้านโฮ่ง",
-      "lat": 18.310793,
-      "lon": 98.82355,
-      "waterlevel_msl": 309.92,
-      "storage_percent": 79.78,
-      "bankfull_msl": null,
-      "value_text": "309.92 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 39.00045685599943,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
       "agency": "สสน."
     },
     {
@@ -2777,10 +2736,10 @@ window.IEAT_THAIWATER_DATA = {
       "lat": 16.92732,
       "lon": 99.95933,
       "waterlevel_msl": 42.54,
-      "storage_percent": 79.73,
+      "storage_percent": 79.72,
       "bankfull_msl": null,
       "value_text": "42.54 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 44.0367060718405,
@@ -2789,21 +2748,59 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "สะพานข้ามคลองบางม่วง",
-      "station_code": "ONE024",
-      "province": "พัทลุง",
-      "district": "ปากพะยูน",
-      "lat": 7.365284,
-      "lon": 100.27959,
-      "waterlevel_msl": 0.31,
-      "storage_percent": 79.4,
+      "station": "แม่น้ำลี้ บ้านโฮ่ง",
+      "station_code": "PIN009",
+      "province": "ลำพูน",
+      "district": "บ้านโฮ่ง",
+      "lat": 18.310793,
+      "lon": 98.82355,
+      "waterlevel_msl": 309.91,
+      "storage_percent": 79.56,
       "bankfull_msl": null,
-      "value_text": "0.31 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "309.91 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
-      "distance_km": 40.67365550525883,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "distance_km": 39.00045685599943,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "สะพานหน้าจวนผู้ว่าฯ",
+      "station_code": "Ny.7",
+      "province": "นครนายก",
+      "district": "เมืองนครนายก",
+      "lat": 14.20048,
+      "lon": 101.219307,
+      "waterlevel_msl": 6.12,
+      "storage_percent": 78.93,
+      "bankfull_msl": null,
+      "value_text": "6.12 ม.รทก.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "distance_km": 39.80889634653896,
+      "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "คลองพระยาบรรลือ",
+      "station_code": "CPY016",
+      "province": "พระนครศรีอยุธยา",
+      "district": "ลาดบัวหลวง",
+      "lat": 14.16476,
+      "lon": 100.30725,
+      "waterlevel_msl": 2.45,
+      "storage_percent": 78.73,
+      "bankfull_msl": null,
+      "value_text": "2.45 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "distance_km": 30.819479632166193,
+      "nearest_estate": "นิคมอุตสาหกรรมบางปะอิน",
       "agency": "สสน."
     },
     {
@@ -2814,35 +2811,16 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บางกระทุ่ม",
       "lat": 16.670555,
       "lon": 100.32789,
-      "waterlevel_msl": 37.3,
-      "storage_percent": 79.01,
+      "waterlevel_msl": 37.27,
+      "storage_percent": 78.6,
       "bankfull_msl": null,
-      "value_text": "37.3 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "37.27 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 21.807326663586515,
       "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
       "agency": "พพภ"
-    },
-    {
-      "kind": "waterlevel",
-      "station": "คลองพระยาบรรลือ",
-      "station_code": "CPY016",
-      "province": "พระนครศรีอยุธยา",
-      "district": "ลาดบัวหลวง",
-      "lat": 14.16476,
-      "lon": 100.30725,
-      "waterlevel_msl": 2.44,
-      "storage_percent": 78.57,
-      "bankfull_msl": null,
-      "value_text": "2.44 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 30.819479632166193,
-      "nearest_estate": "นิคมอุตสาหกรรมบางปะอิน",
-      "agency": "สสน."
     },
     {
       "kind": "waterlevel",
@@ -2852,11 +2830,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "ชุมแสง",
       "lat": 15.86918,
       "lon": 100.264732,
-      "waterlevel_msl": 24.83,
-      "storage_percent": 78.43,
+      "waterlevel_msl": 24.79,
+      "storage_percent": 78.17,
       "bankfull_msl": null,
-      "value_text": "24.83 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "24.79 ม.รทก.",
+      "observed_at": "2026-10-14 02:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 41.6039437628434,
@@ -2875,10 +2853,29 @@ window.IEAT_THAIWATER_DATA = {
       "storage_percent": 77.8,
       "bankfull_msl": null,
       "value_text": "3.89 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 26.22916357558414,
+      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "ปตร.บางแก้ว (ทุ่งผักไห่)",
+      "station_code": "TCP005",
+      "province": "พระนครศรีอยุธยา",
+      "district": "ผักไห่",
+      "lat": 14.436604,
+      "lon": 100.37149,
+      "waterlevel_msl": 3.88,
+      "storage_percent": 77.6,
+      "bankfull_msl": null,
+      "value_text": "3.88 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "distance_km": 24.845110037519646,
       "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
       "agency": "สสน."
     },
@@ -2894,7 +2891,7 @@ window.IEAT_THAIWATER_DATA = {
       "storage_percent": 77.15,
       "bankfull_msl": null,
       "value_text": "42.83 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 44.043927864496574,
@@ -2909,53 +2906,15 @@ window.IEAT_THAIWATER_DATA = {
       "district": "โพธาราม",
       "lat": 13.63308,
       "lon": 99.8164,
-      "waterlevel_msl": 3.84,
-      "storage_percent": 76.93,
+      "waterlevel_msl": 3.83,
+      "storage_percent": 76.85,
       "bankfull_msl": null,
-      "value_text": "3.84 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "3.83 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 3.6632876362743403,
       "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "ปตร.บางแก้ว (ทุ่งผักไห่)",
-      "station_code": "TCP005",
-      "province": "พระนครศรีอยุธยา",
-      "district": "ผักไห่",
-      "lat": 14.436604,
-      "lon": 100.37149,
-      "waterlevel_msl": 3.84,
-      "storage_percent": 76.8,
-      "bankfull_msl": null,
-      "value_text": "3.84 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 24.845110037519646,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "เมืองสมุทรสาคร",
-      "station_code": "THA009",
-      "province": "สมุทรสาคร",
-      "district": "เมืองสมุทรสาคร",
-      "lat": 13.58598,
-      "lon": 100.23048,
-      "waterlevel_msl": -0.13,
-      "storage_percent": 76.8,
-      "bankfull_msl": null,
-      "value_text": "-0.13 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 4.674934171316372,
-      "nearest_estate": "นิคมอุตสาหกรรมสมุทรสาคร",
       "agency": "สสน."
     },
     {
@@ -2966,53 +2925,15 @@ window.IEAT_THAIWATER_DATA = {
       "district": "เมืองนครสวรรค์",
       "lat": 15.68849,
       "lon": 100.12381,
-      "waterlevel_msl": 21.78,
-      "storage_percent": 76.47,
+      "waterlevel_msl": 21.74,
+      "storage_percent": 76.24,
       "bankfull_msl": null,
-      "value_text": "21.78 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "21.74 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 49.28308700895721,
       "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "บ้านโป่ง",
-      "station_code": "RAJ002",
-      "province": "ราชบุรี",
-      "district": "บ้านโป่ง",
-      "lat": 13.81866,
-      "lon": 99.86508,
-      "waterlevel_msl": 7.07,
-      "storage_percent": 73.6,
-      "bankfull_msl": null,
-      "value_text": "7.07 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 20.232421477602117,
-      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "คลองมหาชัย วัดพันท้ายนรสิงห์",
-      "station_code": "BKK006",
-      "province": "สมุทรสาคร",
-      "district": "เมืองสมุทรสาคร",
-      "lat": 13.58184,
-      "lon": 100.36587,
-      "waterlevel_msl": 0.21,
-      "storage_percent": 72.65,
-      "bankfull_msl": null,
-      "value_text": "0.21 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 4.60388187720373,
-      "nearest_estate": "นิคมอุตสาหกรรมสินสาคร",
       "agency": "สสน."
     },
     {
@@ -3023,11 +2944,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บ้านแหลม",
       "lat": 13.26553,
       "lon": 99.9418,
-      "waterlevel_msl": -0.09,
-      "storage_percent": 72.17,
+      "waterlevel_msl": 0.09,
+      "storage_percent": 74.43,
       "bankfull_msl": null,
-      "value_text": "-0.09 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "0.09 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 41.45314445360332,
@@ -3036,21 +2957,59 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "สะพานสวนเฉลิมพระเกียรติ 72 พรรษามหาราชินี",
-      "station_code": "ONE038",
-      "province": "สงขลา",
-      "district": "สิงหนคร",
-      "lat": 7.182746,
-      "lon": 100.59448,
-      "waterlevel_msl": 0.41,
-      "storage_percent": 71.16,
+      "station": "บ้านโป่ง",
+      "station_code": "RAJ002",
+      "province": "ราชบุรี",
+      "district": "บ้านโป่ง",
+      "lat": 13.81866,
+      "lon": 99.86508,
+      "waterlevel_msl": 7.09,
+      "storage_percent": 73.82,
       "bankfull_msl": null,
-      "value_text": "0.41 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "7.09 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
-      "distance_km": 32.35698288447142,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "distance_km": 20.232421477602117,
+      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "เมืองสมุทรสาคร",
+      "station_code": "THA009",
+      "province": "สมุทรสาคร",
+      "district": "เมืองสมุทรสาคร",
+      "lat": 13.58598,
+      "lon": 100.23048,
+      "waterlevel_msl": -0.47,
+      "storage_percent": 72.95,
+      "bankfull_msl": null,
+      "value_text": "-0.47 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "distance_km": 4.674934171316372,
+      "nearest_estate": "นิคมอุตสาหกรรมสมุทรสาคร",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "เมืองสตูล",
+      "station_code": "STU001",
+      "province": "สตูล",
+      "district": "เมืองสตูล",
+      "lat": 6.726527,
+      "lon": 100.06259,
+      "waterlevel_msl": 14.19,
+      "storage_percent": 70.94,
+      "bankfull_msl": null,
+      "value_text": "14.19 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "วิกฤต",
+      "severity_score": 3,
+      "distance_km": 43.87220334815228,
+      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
       "agency": "สสน."
     },
     {
@@ -3062,10 +3021,10 @@ window.IEAT_THAIWATER_DATA = {
       "lat": 13.85402,
       "lon": 100.58746,
       "waterlevel_msl": 1.45,
-      "storage_percent": 70.51,
+      "storage_percent": 70.16,
       "bankfull_msl": null,
       "value_text": "1.45 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "observed_at": "2026-10-14 04:00",
       "status": "วิกฤต",
       "severity_score": 3,
       "distance_km": 13.837600556856398,
@@ -3073,23 +3032,21 @@ window.IEAT_THAIWATER_DATA = {
       "agency": "สสน."
     },
     {
-      "kind": "waterlevel",
-      "station": "เมืองสตูล",
-      "station_code": "STU001",
-      "province": "สตูล",
-      "district": "เมืองสตูล",
-      "lat": 6.726527,
-      "lon": 100.06259,
-      "waterlevel_msl": 14.16,
-      "storage_percent": 70.14,
-      "bankfull_msl": null,
-      "value_text": "14.16 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "วิกฤต",
-      "severity_score": 3,
-      "distance_km": 43.87220334815228,
+      "kind": "rainfall",
+      "station": "บ้านทุ่งไพล",
+      "station_code": "STN1715",
+      "province": "สงขลา",
+      "district": "สะบ้าย้อย",
+      "lat": 6.547668,
+      "lon": 100.836957,
+      "rainfall_mm": 62.5,
+      "value_text": "62.5 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 46.77246490226134,
       "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
-      "agency": "สสน."
+      "agency": "ทน."
     },
     {
       "kind": "rainfall",
@@ -3101,28 +3058,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.07791,
       "rainfall_mm": 61.0,
       "value_text": "61 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 38.74499309017716,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านทุ่งไพล",
-      "station_code": "STN1715",
-      "province": "สงขลา",
-      "district": "สะบ้าย้อย",
-      "lat": 6.547668,
-      "lon": 100.836957,
-      "rainfall_mm": 60.5,
-      "value_text": "60.5 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "เฝ้าระวัง",
-      "severity_score": 2,
-      "distance_km": 46.77246490226134,
-      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
       "agency": "ทน."
     },
     {
@@ -3135,12 +3075,29 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.274,
       "rainfall_mm": 59.6,
       "value_text": "59.6 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 27.10163327261954,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "สะพานข้ามลำภาชี",
+      "station_code": "ridtele_TK.68",
+      "province": "ราชบุรี",
+      "district": "จอมบึง",
+      "lat": 13.7521,
+      "lon": 99.4374,
+      "rainfall_mm": 59.0,
+      "value_text": "59 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 46.3689507943451,
+      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
+      "agency": "ชป."
     },
     {
       "kind": "rainfall",
@@ -3152,7 +3109,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.935987,
       "rainfall_mm": 58.0,
       "value_text": "58 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 47.62145726325911,
@@ -3169,7 +3126,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.69319,
       "rainfall_mm": 57.8,
       "value_text": "57.8 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 37.8139582811628,
@@ -3184,9 +3141,9 @@ window.IEAT_THAIWATER_DATA = {
       "district": "ควนกาหลง",
       "lat": 6.881952,
       "lon": 99.997221,
-      "rainfall_mm": 57.0,
-      "value_text": "57 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "rainfall_mm": 56.5,
+      "value_text": "56.5 มม.",
+      "observed_at": "2026-10-14 01:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 42.41456729138937,
@@ -3203,29 +3160,12 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.149164,
       "rainfall_mm": 50.5,
       "value_text": "50.5 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 36.598535167828565,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ควนกาหลง",
-      "station_code": "STU004",
-      "province": "สตูล",
-      "district": "ควนกาหลง",
-      "lat": 6.928349,
-      "lon": 99.936035,
-      "rainfall_mm": 46.0,
-      "value_text": "46 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "เฝ้าระวัง",
-      "severity_score": 2,
-      "distance_km": 47.6096254577221,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -3237,12 +3177,29 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.031146,
       "rainfall_mm": 46.0,
       "value_text": "46 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 39.89815350010758,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ควนกาหลง",
+      "station_code": "STU004",
+      "province": "สตูล",
+      "district": "ควนกาหลง",
+      "lat": 6.928349,
+      "lon": 99.936035,
+      "rainfall_mm": 45.8,
+      "value_text": "45.8 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 47.6096254577221,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -3254,7 +3211,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.16574,
       "rainfall_mm": 45.0,
       "value_text": "45 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 21.93811292443077,
@@ -3271,12 +3228,29 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.21246,
       "rainfall_mm": 45.0,
       "value_text": "45 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 39.51811631842439,
       "nearest_estate": "นิคมอุตสาหกรรมสมุทรสาคร",
       "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ปากรอ",
+      "station_code": "SLA005",
+      "province": "สงขลา",
+      "district": "สิงหนคร",
+      "lat": 7.261514,
+      "lon": 100.42447,
+      "rainfall_mm": 43.0,
+      "value_text": "43 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 29.050330940229774,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -3288,7 +3262,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.43985,
       "rainfall_mm": 41.6,
       "value_text": "41.6 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 12.304873258948597,
@@ -3305,7 +3279,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.112546,
       "rainfall_mm": 41.5,
       "value_text": "41.5 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 35.810369515188974,
@@ -3322,12 +3296,29 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.553952,
       "rainfall_mm": 41.0,
       "value_text": "41 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 30.138215549802513,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "ชป."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ปากรอ",
+      "station_code": "G09006-TA200307",
+      "province": "สงขลา",
+      "district": "สิงหนคร",
+      "lat": 7.262618,
+      "lon": 100.42497,
+      "rainfall_mm": 40.0,
+      "value_text": "40 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 29.1828862580458,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ทน."
     },
     {
       "kind": "rainfall",
@@ -3339,7 +3330,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.46322,
       "rainfall_mm": 38.8,
       "value_text": "38.8 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 11.834415195032278,
@@ -3356,12 +3347,46 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.625724,
       "rainfall_mm": 38.0,
       "value_text": "38 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 36.10524516319903,
       "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
       "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านทุ่งปรือ",
+      "station_code": "STN1621",
+      "province": "สงขลา",
+      "district": "หาดใหญ่",
+      "lat": 6.815911,
+      "lon": 100.554191,
+      "rainfall_mm": 38.0,
+      "value_text": "38 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 30.296569538044483,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านหนองตาจอน",
+      "station_code": "VLGE30",
+      "province": "ราชบุรี",
+      "district": "ปากท่อ",
+      "lat": 13.43388,
+      "lon": 99.67017,
+      "rainfall_mm": 37.6,
+      "value_text": "37.6 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 29.82680048251451,
+      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -3373,12 +3398,46 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.734004,
       "rainfall_mm": 37.5,
       "value_text": "37.5 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 35.3995193108718,
       "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
       "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านน้ำเชี่ยว",
+      "station_code": "STN1687",
+      "province": "สงขลา",
+      "district": "สะบ้าย้อย",
+      "lat": 6.466831,
+      "lon": 100.833499,
+      "rainfall_mm": 37.5,
+      "value_text": "37.5 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 47.13375242742401,
+      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "TC.60",
+      "station_code": "ridtele_TC.60",
+      "province": "นครสวรรค์",
+      "district": "ท่าตะโก",
+      "lat": 15.67,
+      "lon": 100.334167,
+      "rainfall_mm": 36.0,
+      "value_text": "36 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 26.67303898721316,
+      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
+      "agency": "ชป."
     },
     {
       "kind": "waterlevel",
@@ -3388,73 +3447,16 @@ window.IEAT_THAIWATER_DATA = {
       "district": "สามง่าม",
       "lat": 16.507441,
       "lon": 100.204086,
-      "waterlevel_msl": 35.77,
-      "storage_percent": 69.83,
+      "waterlevel_msl": 35.76,
+      "storage_percent": 69.71,
       "bankfull_msl": null,
-      "value_text": "35.77 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "35.76 ม.รทก.",
+      "observed_at": "2026-10-14 02:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 9.570134034587971,
       "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
       "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สะพานคลองส่งน้ำชลประทาน บ้านสร่างโศก",
-      "station_code": "HDA011",
-      "province": "สระบุรี",
-      "district": "บ้านหมอ",
-      "lat": 14.650794,
-      "lon": 100.742775,
-      "waterlevel_msl": 9.1,
-      "storage_percent": 69.18,
-      "bankfull_msl": null,
-      "value_text": "9.1 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "เฝ้าระวัง",
-      "severity_score": 2,
-      "distance_km": 23.932480429893243,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "เสนา (ทุ่งบางบาล-บ้านแพน)",
-      "station_code": "TCP012",
-      "province": "พระนครศรีอยุธยา",
-      "district": "เสนา",
-      "lat": 14.327773,
-      "lon": 100.405464,
-      "waterlevel_msl": 2.05,
-      "storage_percent": 68.33,
-      "bankfull_msl": null,
-      "value_text": "2.05 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "เฝ้าระวัง",
-      "severity_score": 2,
-      "distance_km": 23.830034274183255,
-      "nearest_estate": "นิคมอุตสาหกรรมบ้านหว้า",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "ชุมแสง",
-      "station_code": "NAN008",
-      "province": "นครสวรรค์",
-      "district": "ชุมแสง",
-      "lat": 15.86923,
-      "lon": 100.26481,
-      "waterlevel_msl": 24.25,
-      "storage_percent": 68.33,
-      "bankfull_msl": null,
-      "value_text": "24.25 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "เฝ้าระวัง",
-      "severity_score": 2,
-      "distance_km": 41.6003120453232,
-      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
-      "agency": "สสน."
     },
     {
       "kind": "waterlevel",
@@ -3464,15 +3466,34 @@ window.IEAT_THAIWATER_DATA = {
       "district": "สันทราย",
       "lat": 18.88353,
       "lon": 99.08182,
-      "waterlevel_msl": 321.12,
-      "storage_percent": 68.31,
+      "waterlevel_msl": 321.17,
+      "storage_percent": 69.51,
       "bankfull_msl": null,
-      "value_text": "321.12 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "321.17 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 31.649037474678174,
       "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "สะพานคลองส่งน้ำชลประทาน บ้านสร่างโศก",
+      "station_code": "HDA011",
+      "province": "สระบุรี",
+      "district": "บ้านหมอ",
+      "lat": 14.650794,
+      "lon": 100.742775,
+      "waterlevel_msl": 9.07,
+      "storage_percent": 68.79,
+      "bankfull_msl": null,
+      "value_text": "9.07 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 23.932480429893243,
+      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
       "agency": "สสน."
     },
     {
@@ -3484,10 +3505,10 @@ window.IEAT_THAIWATER_DATA = {
       "lat": 13.97396,
       "lon": 100.31901,
       "waterlevel_msl": 2.12,
-      "storage_percent": 68.26,
+      "storage_percent": 68.24,
       "bankfull_msl": null,
       "value_text": "2.12 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 39.08855794765454,
@@ -3496,40 +3517,40 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "บ้านค่าย",
-      "station_code": "RAY004",
-      "province": "ระยอง",
-      "district": "บ้านค่าย",
-      "lat": 12.706861,
-      "lon": 101.300354,
-      "waterlevel_msl": 2.31,
-      "storage_percent": 68.06,
+      "station": "ชุมแสง",
+      "station_code": "NAN008",
+      "province": "นครสวรรค์",
+      "district": "ชุมแสง",
+      "lat": 15.86923,
+      "lon": 100.26481,
+      "waterlevel_msl": 24.2,
+      "storage_percent": 67.96,
       "bankfull_msl": null,
-      "value_text": "2.31 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "24.2 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
-      "distance_km": 13.250183047104377,
-      "nearest_estate": "นิคมอุตสาหกรรมซีพีจีซี",
+      "distance_km": 41.6003120453232,
+      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
       "agency": "สสน."
     },
     {
       "kind": "waterlevel",
-      "station": "ปตร. คลองลัดบางยอ 1",
-      "station_code": "BKC003",
-      "province": "สมุทรปราการ",
-      "district": "พระประแดง",
-      "lat": 13.676162,
-      "lon": 100.553085,
-      "waterlevel_msl": 0.74,
-      "storage_percent": 68.06,
+      "station": "เสนา (ทุ่งบางบาล-บ้านแพน)",
+      "station_code": "TCP012",
+      "province": "พระนครศรีอยุธยา",
+      "district": "เสนา",
+      "lat": 14.327773,
+      "lon": 100.405464,
+      "waterlevel_msl": 2.03,
+      "storage_percent": 67.67,
       "bankfull_msl": null,
-      "value_text": "0.74 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "2.03 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
-      "distance_km": 16.06428903072714,
-      "nearest_estate": "นิคมอุตสาหกรรมแพรกษา",
+      "distance_km": 23.830034274183255,
+      "nearest_estate": "นิคมอุตสาหกรรมบ้านหว้า",
       "agency": "สสน."
     },
     {
@@ -3540,11 +3561,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "โพธิ์ประทับช้าง",
       "lat": 16.31077,
       "lon": 100.27173,
-      "waterlevel_msl": 31.98,
-      "storage_percent": 67.41,
+      "waterlevel_msl": 31.96,
+      "storage_percent": 67.21,
       "bankfull_msl": null,
-      "value_text": "31.98 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "31.96 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 32.2038263788759,
@@ -3559,15 +3580,53 @@ window.IEAT_THAIWATER_DATA = {
       "district": "เมืองสระบุรี",
       "lat": 14.546983,
       "lon": 100.88976,
-      "waterlevel_msl": 8.37,
-      "storage_percent": 66.96,
+      "waterlevel_msl": 8.33,
+      "storage_percent": 66.53,
       "bankfull_msl": null,
-      "value_text": "8.37 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "8.33 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 15.387270610268398,
       "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "สถานีแพดับเพลิง",
+      "station_code": "S.32",
+      "province": "สระบุรี",
+      "district": "เมืองสระบุรี",
+      "lat": 14.55752,
+      "lon": 100.924217,
+      "waterlevel_msl": 8.77,
+      "storage_percent": 64.77,
+      "bankfull_msl": null,
+      "value_text": "8.77 ม.รทก.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 11.713427738015856,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "บ้านค่าย",
+      "station_code": "RAY004",
+      "province": "ระยอง",
+      "district": "บ้านค่าย",
+      "lat": 12.706861,
+      "lon": 101.300354,
+      "waterlevel_msl": 2.2,
+      "storage_percent": 64.63,
+      "bankfull_msl": null,
+      "value_text": "2.2 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 13.250183047104377,
+      "nearest_estate": "นิคมอุตสาหกรรมซีพีจีซี",
       "agency": "สสน."
     },
     {
@@ -3578,34 +3637,15 @@ window.IEAT_THAIWATER_DATA = {
       "district": "กบินทร์บุรี",
       "lat": 14.02174,
       "lon": 101.750664,
-      "waterlevel_msl": 8.54,
-      "storage_percent": 65.92,
+      "waterlevel_msl": 8.4,
+      "storage_percent": 64.63,
       "bankfull_msl": null,
-      "value_text": "8.54 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "8.4 ม.รทก.",
+      "observed_at": "2026-10-14 03:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 15.03117019647864,
       "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สถานีแพดับเพลิง",
-      "station_code": "S.32",
-      "province": "สระบุรี",
-      "district": "เมืองสระบุรี",
-      "lat": 14.55752,
-      "lon": 100.924217,
-      "waterlevel_msl": 8.8,
-      "storage_percent": 65.03,
-      "bankfull_msl": null,
-      "value_text": "8.8 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "เฝ้าระวัง",
-      "severity_score": 2,
-      "distance_km": 11.713427738015856,
-      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
       "agency": "ชป."
     },
     {
@@ -3616,11 +3656,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "พุทธมณฑล",
       "lat": 13.80777,
       "lon": 100.27417,
-      "waterlevel_msl": 0.79,
-      "storage_percent": 64.88,
+      "waterlevel_msl": 0.77,
+      "storage_percent": 64.44,
       "bankfull_msl": null,
-      "value_text": "0.79 ม.รทก.",
-      "observed_at": "2026-10-13 22:30",
+      "value_text": "0.77 ม.รทก.",
+      "observed_at": "2026-10-14 03:50",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 29.667511489847108,
@@ -3636,109 +3676,14 @@ window.IEAT_THAIWATER_DATA = {
       "lat": 13.88207,
       "lon": 100.29086,
       "waterlevel_msl": 1.85,
-      "storage_percent": 62.04,
+      "storage_percent": 61.91,
       "bankfull_msl": null,
       "value_text": "1.85 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 37.742377106873434,
       "nearest_estate": "นิคมอุตสาหกรรมสินสาคร",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "วัดหินแท่น (K.62)",
-      "station_code": "MKVKD09",
-      "province": "กาญจนบุรี",
-      "district": "ด่านมะขามเตี้ย",
-      "lat": 13.78093,
-      "lon": 99.42085,
-      "waterlevel_msl": 52.5,
-      "storage_percent": 61.41,
-      "bankfull_msl": null,
-      "value_text": "52.5 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "เฝ้าระวัง",
-      "severity_score": 2,
-      "distance_km": 49.03611661451666,
-      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
-      "agency": "กฟผ."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "ลำพะเนียง อ.เมือง",
-      "station_code": "URTU03",
-      "province": "หนองบัวลำภู",
-      "district": "เมืองหนองบัวลำภู",
-      "lat": 17.182448,
-      "lon": 102.431941,
-      "waterlevel_msl": 207.38,
-      "storage_percent": 60.27,
-      "bankfull_msl": null,
-      "value_text": "207.38 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "เฝ้าระวัง",
-      "severity_score": 2,
-      "distance_km": 48.77565416025865,
-      "nearest_estate": "นิคมอุตสาหกรรมอุดรธานี",
-      "agency": "กฟผ."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "บ้านเขาโบสถ์",
-      "station_code": "Z.38",
-      "province": "ระยอง",
-      "district": "เมืองระยอง",
-      "lat": 12.73796,
-      "lon": 101.228401,
-      "waterlevel_msl": 9.18,
-      "storage_percent": 60.18,
-      "bankfull_msl": null,
-      "value_text": "9.18 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "เฝ้าระวัง",
-      "severity_score": 2,
-      "distance_km": 7.193355299520884,
-      "nearest_estate": "นิคมอุตสาหกรรมอาร์ ไอ แอล",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "ลำน้ำกวงสะพานศรีดอนชัย",
-      "station_code": "FOP015",
-      "province": "ลำพูน",
-      "district": "บ้านธิ",
-      "lat": 18.653353,
-      "lon": 99.06447,
-      "waterlevel_msl": 291.74,
-      "storage_percent": 60.1,
-      "bankfull_msl": null,
-      "value_text": "291.74 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "เฝ้าระวัง",
-      "severity_score": 2,
-      "distance_km": 6.384441677806887,
-      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "waterlevel",
-      "station": "อโศก",
-      "station_code": "AIT001",
-      "province": "กรุงเทพมหานคร",
-      "district": "วัฒนา",
-      "lat": 13.74325,
-      "lon": 100.562164,
-      "waterlevel_msl": 1.63,
-      "storage_percent": 59.79,
-      "bankfull_msl": null,
-      "value_text": "1.63 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "เฝ้าระวัง",
-      "severity_score": 2,
-      "distance_km": 16.810791452117027,
-      "nearest_estate": "นิคมอุตสาหกรรมบางชัน",
       "agency": "สสน."
     },
     {
@@ -3749,16 +3694,73 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บางกล่ำ",
       "lat": 7.079418,
       "lon": 100.42788,
-      "waterlevel_msl": 0.23,
-      "storage_percent": 59.11,
+      "waterlevel_msl": 0.32,
+      "storage_percent": 61.81,
       "bankfull_msl": null,
-      "value_text": "0.23 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "0.32 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 10.910660310627168,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "ลำพะเนียง อ.เมือง",
+      "station_code": "URTU03",
+      "province": "หนองบัวลำภู",
+      "district": "เมืองหนองบัวลำภู",
+      "lat": 17.182448,
+      "lon": 102.431941,
+      "waterlevel_msl": 207.43,
+      "storage_percent": 60.91,
+      "bankfull_msl": null,
+      "value_text": "207.43 ม.รทก.",
+      "observed_at": "2026-10-14 00:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 48.77565416025865,
+      "nearest_estate": "นิคมอุตสาหกรรมอุดรธานี",
+      "agency": "กฟผ."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "ลำน้ำกวงสะพานศรีดอนชัย",
+      "station_code": "FOP015",
+      "province": "ลำพูน",
+      "district": "บ้านธิ",
+      "lat": 18.653353,
+      "lon": 99.06447,
+      "waterlevel_msl": 291.73,
+      "storage_percent": 59.95,
+      "bankfull_msl": null,
+      "value_text": "291.73 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 6.384441677806887,
+      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
+      "agency": "พพภ"
+    },
+    {
+      "kind": "waterlevel",
+      "station": "บ้านเขาโบสถ์",
+      "station_code": "Z.38",
+      "province": "ระยอง",
+      "district": "เมืองระยอง",
+      "lat": 12.73796,
+      "lon": 101.228401,
+      "waterlevel_msl": 9.16,
+      "storage_percent": 59.62,
+      "bankfull_msl": null,
+      "value_text": "9.16 ม.รทก.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 7.193355299520884,
+      "nearest_estate": "นิคมอุตสาหกรรมอาร์ ไอ แอล",
+      "agency": "ชป."
     },
     {
       "kind": "waterlevel",
@@ -3768,15 +3770,72 @@ window.IEAT_THAIWATER_DATA = {
       "district": "แม่ทา",
       "lat": 18.546852,
       "lon": 99.25007,
-      "waterlevel_msl": 440.0,
-      "storage_percent": 59.03,
+      "waterlevel_msl": 440.01,
+      "storage_percent": 59.29,
       "bankfull_msl": null,
-      "value_text": "440 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "440.01 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 22.197415007222318,
       "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "วัดหินแท่น (K.62)",
+      "station_code": "MKVKD09",
+      "province": "กาญจนบุรี",
+      "district": "ด่านมะขามเตี้ย",
+      "lat": 13.78093,
+      "lon": 99.42085,
+      "waterlevel_msl": 52.34,
+      "storage_percent": 59.02,
+      "bankfull_msl": null,
+      "value_text": "52.34 ม.รทก.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 49.03611661451666,
+      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
+      "agency": "กฟผ."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "อโศก",
+      "station_code": "AIT001",
+      "province": "กรุงเทพมหานคร",
+      "district": "วัฒนา",
+      "lat": 13.74325,
+      "lon": 100.562164,
+      "waterlevel_msl": 1.59,
+      "storage_percent": 57.67,
+      "bankfull_msl": null,
+      "value_text": "1.59 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 16.810791452117027,
+      "nearest_estate": "นิคมอุตสาหกรรมบางชัน",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "คลองมหาชัย วัดพันท้ายนรสิงห์",
+      "station_code": "BKK006",
+      "province": "สมุทรสาคร",
+      "district": "เมืองสมุทรสาคร",
+      "lat": 13.58184,
+      "lon": 100.36587,
+      "waterlevel_msl": -0.39,
+      "storage_percent": 57.46,
+      "bankfull_msl": null,
+      "value_text": "-0.39 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 4.60388187720373,
+      "nearest_estate": "นิคมอุตสาหกรรมสินสาคร",
       "agency": "สสน."
     },
     {
@@ -3787,11 +3846,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "ด่านมะขามเตี้ย",
       "lat": 13.78092,
       "lon": 99.420921,
-      "waterlevel_msl": 52.22,
-      "storage_percent": 58.05,
+      "waterlevel_msl": 52.18,
+      "storage_percent": 57.4,
       "bankfull_msl": null,
-      "value_text": "52.22 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "52.18 ม.รทก.",
+      "observed_at": "2026-10-13 23:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 49.02850371868432,
@@ -3806,15 +3865,53 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บางกระทุ่ม",
       "lat": 16.60887,
       "lon": 100.36977,
-      "waterlevel_msl": 34.17,
-      "storage_percent": 57.37,
+      "waterlevel_msl": 34.16,
+      "storage_percent": 57.24,
       "bankfull_msl": null,
-      "value_text": "34.17 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "34.16 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 23.82531823296878,
       "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "สะพานสวนเฉลิมพระเกียรติ 72 พรรษามหาราชินี",
+      "station_code": "ONE038",
+      "province": "สงขลา",
+      "district": "สิงหนคร",
+      "lat": 7.182746,
+      "lon": 100.59448,
+      "waterlevel_msl": 0.17,
+      "storage_percent": 57.09,
+      "bankfull_msl": null,
+      "value_text": "0.17 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 32.35698288447142,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "ปตร.วัดบางกระเจ้านอก",
+      "station_code": "BKC002",
+      "province": "สมุทรปราการ",
+      "district": "พระประแดง",
+      "lat": 13.689612,
+      "lon": 100.554886,
+      "waterlevel_msl": 0.11,
+      "storage_percent": 56.93,
+      "bankfull_msl": null,
+      "value_text": "0.11 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 16.515461215669056,
+      "nearest_estate": "นิคมอุตสาหกรรมอัญธานี",
       "agency": "สสน."
     },
     {
@@ -3825,11 +3922,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "เมืองสระแก้ว",
       "lat": 13.809611,
       "lon": 102.05431,
-      "waterlevel_msl": 30.23,
-      "storage_percent": 56.75,
+      "waterlevel_msl": 30.22,
+      "storage_percent": 56.65,
       "bankfull_msl": null,
-      "value_text": "30.23 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "30.22 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 25.640208181648024,
@@ -3844,11 +3941,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "เมืองพิจิตร",
       "lat": 16.4695,
       "lon": 100.330872,
-      "waterlevel_msl": 30.31,
-      "storage_percent": 56.32,
+      "waterlevel_msl": 30.25,
+      "storage_percent": 55.85,
       "bankfull_msl": null,
-      "value_text": "30.31 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "30.25 ม.รทก.",
+      "observed_at": "2026-10-14 02:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 22.686873952200855,
@@ -3863,35 +3960,16 @@ window.IEAT_THAIWATER_DATA = {
       "district": "ตะพานหิน",
       "lat": 16.27034,
       "lon": 100.41396,
-      "waterlevel_msl": 28.68,
-      "storage_percent": 56.03,
+      "waterlevel_msl": 28.61,
+      "storage_percent": 55.51,
       "bankfull_msl": null,
-      "value_text": "28.68 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "28.61 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 44.15118819719544,
       "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
       "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "บ้านเขาวังไทร",
-      "station_code": "Z.11",
-      "province": "ระยอง",
-      "district": "แกลง",
-      "lat": 12.85783,
-      "lon": 101.615738,
-      "waterlevel_msl": 6.51,
-      "storage_percent": 55.74,
-      "bankfull_msl": null,
-      "value_text": "6.51 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "เฝ้าระวัง",
-      "severity_score": 2,
-      "distance_km": 22.599850450622228,
-      "nearest_estate": "นิคมอุตสาหกรรมหลักชัยเมืองยาง",
-      "agency": "ชป."
     },
     {
       "kind": "waterlevel",
@@ -3901,15 +3979,34 @@ window.IEAT_THAIWATER_DATA = {
       "district": "สะเดา",
       "lat": 6.79663,
       "lon": 100.442337,
-      "waterlevel_msl": 10.61,
-      "storage_percent": 55.42,
+      "waterlevel_msl": 10.56,
+      "storage_percent": 55.02,
       "bankfull_msl": null,
-      "value_text": "10.61 ม.รทก.",
-      "observed_at": "2026-10-13 21:00",
+      "value_text": "10.56 ม.รทก.",
+      "observed_at": "2026-10-13 23:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 25.23419412493915,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "บ้านเขาวังไทร",
+      "station_code": "Z.11",
+      "province": "ระยอง",
+      "district": "แกลง",
+      "lat": 12.85783,
+      "lon": 101.615738,
+      "waterlevel_msl": 6.45,
+      "storage_percent": 54.74,
+      "bankfull_msl": null,
+      "value_text": "6.45 ม.รทก.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 22.599850450622228,
+      "nearest_estate": "นิคมอุตสาหกรรมหลักชัยเมืองยาง",
       "agency": "ชป."
     },
     {
@@ -3921,10 +4018,10 @@ window.IEAT_THAIWATER_DATA = {
       "lat": 16.95387,
       "lon": 100.12127,
       "waterlevel_msl": 40.83,
-      "storage_percent": 54.66,
+      "storage_percent": 54.63,
       "bankfull_msl": null,
       "value_text": "40.83 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 42.19110745038412,
@@ -3939,11 +4036,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "หาดใหญ่",
       "lat": 6.98637,
       "lon": 100.481857,
-      "waterlevel_msl": 4.76,
-      "storage_percent": 53.6,
+      "waterlevel_msl": 4.75,
+      "storage_percent": 53.49,
       "bankfull_msl": null,
-      "value_text": "4.76 ม.รทก.",
-      "observed_at": "2026-10-13 21:00",
+      "value_text": "4.75 ม.รทก.",
+      "observed_at": "2026-10-13 23:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 13.688545576793311,
@@ -3958,11 +4055,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "เมืองเชียงใหม่",
       "lat": 18.786961,
       "lon": 99.005089,
-      "waterlevel_msl": 301.84,
-      "storage_percent": 52.32,
+      "waterlevel_msl": 301.85,
+      "storage_percent": 52.53,
       "bankfull_msl": null,
-      "value_text": "301.84 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "301.85 ม.รทก.",
+      "observed_at": "2026-10-13 23:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 20.8389479818548,
@@ -3977,11 +4074,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "เมืองสระแก้ว",
       "lat": 13.8096,
       "lon": 102.054382,
-      "waterlevel_msl": 29.89,
-      "storage_percent": 51.48,
+      "waterlevel_msl": 29.88,
+      "storage_percent": 51.39,
       "bankfull_msl": null,
-      "value_text": "29.89 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "29.88 ม.รทก.",
+      "observed_at": "2026-10-14 03:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 25.646875796659856,
@@ -3996,11 +4093,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บ้านค่าย",
       "lat": 12.849195,
       "lon": 101.301346,
-      "waterlevel_msl": 12.36,
-      "storage_percent": 51.24,
+      "waterlevel_msl": 12.34,
+      "storage_percent": 50.97,
       "bankfull_msl": null,
-      "value_text": "12.36 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "12.34 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 5.6523093721227236,
@@ -4028,40 +4125,40 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "บ้านแก้ง",
-      "station_code": "Kgt.12A",
-      "province": "สระแก้ว",
-      "district": "เมืองสระแก้ว",
-      "lat": 13.93635,
-      "lon": 101.972321,
-      "waterlevel_msl": 16.76,
-      "storage_percent": 50.06,
-      "bankfull_msl": null,
-      "value_text": "16.76 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "เฝ้าระวัง",
-      "severity_score": 2,
-      "distance_km": 10.843297933527834,
-      "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
       "station": "ท้ายเขื่อนป่าสักชลสิทธิ์",
       "station_code": "S.28",
       "province": "ลพบุรี",
       "district": "พัฒนานิคม",
       "lat": 14.83464,
       "lon": 101.084297,
-      "waterlevel_msl": 23.26,
-      "storage_percent": 50.03,
+      "waterlevel_msl": 23.27,
+      "storage_percent": 50.09,
       "bankfull_msl": null,
-      "value_text": "23.26 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "23.27 ม.รทก.",
+      "observed_at": "2026-10-14 02:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 24.74608468709011,
       "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "บ้านแก้ง",
+      "station_code": "Kgt.12A",
+      "province": "สระแก้ว",
+      "district": "เมืองสระแก้ว",
+      "lat": 13.93635,
+      "lon": 101.972321,
+      "waterlevel_msl": 16.74,
+      "storage_percent": 49.83,
+      "bankfull_msl": null,
+      "value_text": "16.74 ม.รทก.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 10.843297933527834,
+      "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
       "agency": "ชป."
     },
     {
@@ -4072,15 +4169,34 @@ window.IEAT_THAIWATER_DATA = {
       "district": "แก่งคอย",
       "lat": 14.62918,
       "lon": 101.014427,
-      "waterlevel_msl": 12.61,
-      "storage_percent": 49.62,
+      "waterlevel_msl": 12.54,
+      "storage_percent": 49.14,
       "bankfull_msl": null,
-      "value_text": "12.61 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "12.54 ม.รทก.",
+      "observed_at": "2026-10-14 02:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 0.8464884712603398,
       "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "บ้านแม่แต",
+      "station_code": "P.67",
+      "province": "เชียงใหม่",
+      "district": "แม่ริม",
+      "lat": 19.00985,
+      "lon": 98.95974,
+      "waterlevel_msl": 315.58,
+      "storage_percent": 47.74,
+      "bankfull_msl": null,
+      "value_text": "315.58 ม.รทก.",
+      "observed_at": "2026-10-13 23:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 46.074034078099054,
+      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
       "agency": "ชป."
     },
     {
@@ -4091,35 +4207,16 @@ window.IEAT_THAIWATER_DATA = {
       "district": "วังทอง",
       "lat": 16.8222,
       "lon": 100.43159,
-      "waterlevel_msl": 43.64,
-      "storage_percent": 48.5,
+      "waterlevel_msl": 43.55,
+      "storage_percent": 47.7,
       "bankfull_msl": null,
-      "value_text": "43.64 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "43.55 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 40.73752831943657,
       "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
       "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "บ้านแม่แต",
-      "station_code": "P.67",
-      "province": "เชียงใหม่",
-      "district": "แม่ริม",
-      "lat": 19.00985,
-      "lon": 98.95974,
-      "waterlevel_msl": 315.57,
-      "storage_percent": 47.58,
-      "bankfull_msl": null,
-      "value_text": "315.57 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "เฝ้าระวัง",
-      "severity_score": 2,
-      "distance_km": 46.074034078099054,
-      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
-      "agency": "ชป."
     },
     {
       "kind": "waterlevel",
@@ -4129,11 +4226,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "วังทอง",
       "lat": 16.84712,
       "lon": 100.512093,
-      "waterlevel_msl": 46.29,
-      "storage_percent": 46.44,
+      "waterlevel_msl": 46.23,
+      "storage_percent": 45.9,
       "bankfull_msl": null,
-      "value_text": "46.29 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "46.23 ม.รทก.",
+      "observed_at": "2026-10-14 02:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 49.08018070636455,
@@ -4148,16 +4245,35 @@ window.IEAT_THAIWATER_DATA = {
       "district": "นาดี",
       "lat": 14.10461,
       "lon": 101.744179,
-      "waterlevel_msl": 5.93,
-      "storage_percent": 45.62,
+      "waterlevel_msl": 5.92,
+      "storage_percent": 45.52,
       "bankfull_msl": null,
-      "value_text": "5.93 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "5.92 ม.รทก.",
+      "observed_at": "2026-10-14 03:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 21.322455362116656,
       "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
       "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "คลองภาษีเจริญ เพชรเกษม69",
+      "station_code": "BKK005",
+      "province": "กรุงเทพมหานคร",
+      "district": "บางแค",
+      "lat": 13.69158,
+      "lon": 100.38127,
+      "waterlevel_msl": -3.02,
+      "storage_percent": 44.69,
+      "bankfull_msl": null,
+      "value_text": "-3.02 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 16.633474059900415,
+      "nearest_estate": "นิคมอุตสาหกรรมสินสาคร",
+      "agency": "สสน."
     },
     {
       "kind": "waterlevel",
@@ -4171,7 +4287,7 @@ window.IEAT_THAIWATER_DATA = {
       "storage_percent": 44.06,
       "bankfull_msl": null,
       "value_text": "320.91 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-13 23:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 37.611997774933826,
@@ -4186,11 +4302,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "ควนโดน",
       "lat": 6.77741,
       "lon": 100.071487,
-      "waterlevel_msl": 20.17,
-      "storage_percent": 43.09,
+      "waterlevel_msl": 20.19,
+      "storage_percent": 43.46,
       "bankfull_msl": null,
-      "value_text": "20.17 ม.รทก.",
-      "observed_at": "2026-10-13 21:00",
+      "value_text": "20.19 ม.รทก.",
+      "observed_at": "2026-10-13 23:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 40.88918727950312,
@@ -4205,16 +4321,35 @@ window.IEAT_THAIWATER_DATA = {
       "district": "ท่าคันโท",
       "lat": 16.95174,
       "lon": 103.168053,
-      "waterlevel_msl": 162.51,
-      "storage_percent": 42.41,
+      "waterlevel_msl": 162.5,
+      "storage_percent": 42.24,
       "bankfull_msl": null,
-      "value_text": "162.51 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "162.5 ม.รทก.",
+      "observed_at": "2026-10-14 03:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 49.86838939842491,
       "nearest_estate": "นิคมอุตสาหกรรมอุดรธานี",
       "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "ป้อมพระจุลจอมเกล้า",
+      "station_code": "GLF001",
+      "province": "สมุทรปราการ",
+      "district": "พระสมุทรเจดีย์",
+      "lat": 13.57378,
+      "lon": 100.57396,
+      "waterlevel_msl": -0.13,
+      "storage_percent": 42.17,
+      "bankfull_msl": null,
+      "value_text": "-0.13 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 8.540324535327358,
+      "nearest_estate": "นิคมอุตสาหกรรมแพรกษา",
+      "agency": "สสน."
     },
     {
       "kind": "waterlevel",
@@ -4228,7 +4363,7 @@ window.IEAT_THAIWATER_DATA = {
       "storage_percent": 42.12,
       "bankfull_msl": null,
       "value_text": "401.43 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-13 23:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 37.50040396407909,
@@ -4244,10 +4379,10 @@ window.IEAT_THAIWATER_DATA = {
       "lat": 18.57391,
       "lon": 98.86222,
       "waterlevel_msl": 290.4,
-      "storage_percent": 41.31,
+      "storage_percent": 41.47,
       "bankfull_msl": null,
       "value_text": "290.4 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 18.71260178716996,
@@ -4256,22 +4391,22 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "บ้านโนนสุขภูมิ",
-      "station_code": "Kgt.13A",
-      "province": "ปราจีนบุรี",
-      "district": "กบินทร์บุรี",
-      "lat": 13.91009,
-      "lon": 101.838211,
-      "waterlevel_msl": 9.69,
-      "storage_percent": 41.19,
+      "station": "ปตร. คลองลัดบางยอ 1",
+      "station_code": "BKC003",
+      "province": "สมุทรปราการ",
+      "district": "พระประแดง",
+      "lat": 13.676162,
+      "lon": 100.553085,
+      "waterlevel_msl": 0.09,
+      "storage_percent": 41.2,
       "bankfull_msl": null,
-      "value_text": "9.69 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "0.09 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
-      "distance_km": 6.91451213461515,
-      "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
-      "agency": "ชป."
+      "distance_km": 16.06428903072714,
+      "nearest_estate": "นิคมอุตสาหกรรมแพรกษา",
+      "agency": "สสน."
     },
     {
       "kind": "waterlevel",
@@ -4285,7 +4420,7 @@ window.IEAT_THAIWATER_DATA = {
       "storage_percent": 41.12,
       "bankfull_msl": null,
       "value_text": "290.09 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-13 23:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 38.14916869631099,
@@ -4300,11 +4435,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "นาดี",
       "lat": 14.136408,
       "lon": 101.857475,
-      "waterlevel_msl": 31.52,
-      "storage_percent": 41.11,
+      "waterlevel_msl": 31.51,
+      "storage_percent": 41.01,
       "bankfull_msl": null,
-      "value_text": "31.52 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "31.51 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 19.603460352265568,
@@ -4323,7 +4458,7 @@ window.IEAT_THAIWATER_DATA = {
       "storage_percent": 40.97,
       "bankfull_msl": null,
       "value_text": "303.89 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 16.36387841872487,
@@ -4338,11 +4473,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "เขาฉกรรจ์",
       "lat": 13.66804,
       "lon": 102.0756,
-      "waterlevel_msl": 43.36,
-      "storage_percent": 40.72,
+      "waterlevel_msl": 43.33,
+      "storage_percent": 40.44,
       "bankfull_msl": null,
-      "value_text": "43.36 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "43.33 ม.รทก.",
+      "observed_at": "2026-10-14 03:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 39.10879394408661,
@@ -4351,39 +4486,20 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "นาทวี",
-      "station_code": "JNA002",
-      "province": "สงขลา",
-      "district": "นาทวี",
-      "lat": 6.738124,
-      "lon": 100.69319,
-      "waterlevel_msl": 19.68,
-      "storage_percent": 38.94,
-      "bankfull_msl": null,
-      "value_text": "19.68 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "เฝ้าระวัง",
-      "severity_score": 2,
-      "distance_km": 37.8139582811628,
-      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "บ้านทุ่งแฝก",
-      "station_code": "Kgt.14A",
+      "station": "บ้านโนนสุขภูมิ",
+      "station_code": "Kgt.13A",
       "province": "ปราจีนบุรี",
-      "district": "นาดี",
-      "lat": 14.16131,
-      "lon": 101.883057,
-      "waterlevel_msl": 36.2,
-      "storage_percent": 38.72,
+      "district": "กบินทร์บุรี",
+      "lat": 13.91009,
+      "lon": 101.838211,
+      "waterlevel_msl": 9.54,
+      "storage_percent": 39.83,
       "bankfull_msl": null,
-      "value_text": "36.2 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "9.54 ม.รทก.",
+      "observed_at": "2026-10-14 03:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
-      "distance_km": 22.296714406834624,
+      "distance_km": 6.91451213461515,
       "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
       "agency": "ชป."
     },
@@ -4395,16 +4511,54 @@ window.IEAT_THAIWATER_DATA = {
       "district": "เมืองสตูล",
       "lat": 6.72662,
       "lon": 100.062737,
-      "waterlevel_msl": 14.15,
-      "storage_percent": 38.6,
+      "waterlevel_msl": 14.17,
+      "storage_percent": 39.2,
       "bankfull_msl": null,
-      "value_text": "14.15 ม.รทก.",
-      "observed_at": "2026-10-13 21:00",
+      "value_text": "14.17 ม.รทก.",
+      "observed_at": "2026-10-13 23:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 43.86269583770013,
       "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
       "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "บ้านทุ่งแฝก",
+      "station_code": "Kgt.14A",
+      "province": "ปราจีนบุรี",
+      "district": "นาดี",
+      "lat": 14.16131,
+      "lon": 101.883057,
+      "waterlevel_msl": 36.19,
+      "storage_percent": 38.53,
+      "bankfull_msl": null,
+      "value_text": "36.19 ม.รทก.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 22.296714406834624,
+      "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "คลองผันน้ำยม-น่าน4",
+      "station_code": "DIV004",
+      "province": "พิษณุโลก",
+      "district": "เมืองพิษณุโลก",
+      "lat": 16.67167,
+      "lon": 100.24581,
+      "waterlevel_msl": 37.77,
+      "storage_percent": 38.22,
+      "bankfull_msl": null,
+      "value_text": "37.77 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 14.872698547385934,
+      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
+      "agency": "สสน."
     },
     {
       "kind": "waterlevel",
@@ -4414,11 +4568,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "นาดี",
       "lat": 14.06587,
       "lon": 101.922638,
-      "waterlevel_msl": 15.6,
-      "storage_percent": 37.74,
+      "waterlevel_msl": 15.59,
+      "storage_percent": 37.6,
       "bankfull_msl": null,
-      "value_text": "15.6 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "15.59 ม.รทก.",
+      "observed_at": "2026-10-14 03:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 12.745614593827344,
@@ -4437,7 +4591,7 @@ window.IEAT_THAIWATER_DATA = {
       "storage_percent": 37.28,
       "bankfull_msl": null,
       "value_text": "204.13 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 30.15878108274017,
@@ -4452,11 +4606,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "เกาะจันทร์",
       "lat": 13.40472,
       "lon": 101.281776,
-      "waterlevel_msl": 15.23,
-      "storage_percent": 37.28,
+      "waterlevel_msl": 15.22,
+      "storage_percent": 37.08,
       "bankfull_msl": null,
-      "value_text": "15.23 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "15.22 ม.รทก.",
+      "observed_at": "2026-10-14 03:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 14.94248989029333,
@@ -4465,22 +4619,22 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "คลองผันน้ำยม-น่าน4",
-      "station_code": "DIV004",
-      "province": "พิษณุโลก",
-      "district": "เมืองพิษณุโลก",
-      "lat": 16.67167,
-      "lon": 100.24581,
-      "waterlevel_msl": 37.67,
-      "storage_percent": 37.06,
+      "station": "บ้านทุ่งปราบ",
+      "station_code": "X.113",
+      "province": "สงขลา",
+      "district": "สะเดา",
+      "lat": 6.63504,
+      "lon": 100.39341,
+      "waterlevel_msl": 33.24,
+      "storage_percent": 37.08,
       "bankfull_msl": null,
-      "value_text": "37.67 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "33.24 ม.รทก.",
+      "observed_at": "2026-10-13 23:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
-      "distance_km": 14.872698547385934,
-      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
-      "agency": "สสน."
+      "distance_km": 10.599631491585654,
+      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
+      "agency": "ชป."
     },
     {
       "kind": "waterlevel",
@@ -4490,53 +4644,15 @@ window.IEAT_THAIWATER_DATA = {
       "district": "คีรีมาศ",
       "lat": 16.81476,
       "lon": 99.80374,
-      "waterlevel_msl": 45.62,
-      "storage_percent": 36.72,
+      "waterlevel_msl": 45.6,
+      "storage_percent": 36.18,
       "bankfull_msl": null,
-      "value_text": "45.62 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "45.6 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 45.3918896494035,
       "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "บ้านบางศาลา",
-      "station_code": "X.90",
-      "province": "สงขลา",
-      "district": "หาดใหญ่",
-      "lat": 6.93124,
-      "lon": 100.439857,
-      "waterlevel_msl": 2.82,
-      "storage_percent": 36.21,
-      "bankfull_msl": null,
-      "value_text": "2.82 ม.รทก.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "เฝ้าระวัง",
-      "severity_score": 2,
-      "distance_km": 12.304963599540951,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "ควนกาหลง",
-      "station_code": "STU004",
-      "province": "สตูล",
-      "district": "ควนกาหลง",
-      "lat": 6.928349,
-      "lon": 99.936035,
-      "waterlevel_msl": 21.95,
-      "storage_percent": 36.19,
-      "bankfull_msl": null,
-      "value_text": "21.95 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "เฝ้าระวัง",
-      "severity_score": 2,
-      "distance_km": 47.6096254577221,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "สสน."
     },
     {
@@ -4547,11 +4663,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "สันป่าตอง",
       "lat": 18.54735,
       "lon": 98.862282,
-      "waterlevel_msl": 284.91,
-      "storage_percent": 35.98,
+      "waterlevel_msl": 284.92,
+      "storage_percent": 36.17,
       "bankfull_msl": null,
-      "value_text": "284.91 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "284.92 ม.รทก.",
+      "observed_at": "2026-10-13 23:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 19.421019936194998,
@@ -4560,21 +4676,59 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "ปตร.ปลายคลองบางซอ (ทุ่งเจ้าเจ็ด)",
-      "station_code": "TCP002",
-      "province": "สุพรรณบุรี",
-      "district": "สองพี่น้อง",
-      "lat": 14.194874,
-      "lon": 100.13267,
-      "waterlevel_msl": 1.58,
-      "storage_percent": 35.91,
+      "station": "บ้านบางศาลา",
+      "station_code": "X.90",
+      "province": "สงขลา",
+      "district": "หาดใหญ่",
+      "lat": 6.93124,
+      "lon": 100.439857,
+      "waterlevel_msl": 2.8,
+      "storage_percent": 36.01,
       "bankfull_msl": null,
-      "value_text": "1.58 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "2.8 ม.รทก.",
+      "observed_at": "2026-10-13 23:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
-      "distance_km": 49.28443791048643,
-      "nearest_estate": "นิคมอุตสาหกรรมบางปะอิน",
+      "distance_km": 12.304963599540951,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "นาทวี",
+      "station_code": "JNA002",
+      "province": "สงขลา",
+      "district": "นาทวี",
+      "lat": 6.738124,
+      "lon": 100.69319,
+      "waterlevel_msl": 19.53,
+      "storage_percent": 35.92,
+      "bankfull_msl": null,
+      "value_text": "19.53 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 37.8139582811628,
+      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "เมืองอุดรธานี",
+      "station_code": "KON004",
+      "province": "อุดรธานี",
+      "district": "เมืองอุดรธานี",
+      "lat": 17.482368,
+      "lon": 102.79713,
+      "waterlevel_msl": 167.37,
+      "storage_percent": 35.91,
+      "bankfull_msl": null,
+      "value_text": "167.37 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 21.725608707789945,
+      "nearest_estate": "นิคมอุตสาหกรรมอุดรธานี",
       "agency": "สสน."
     },
     {
@@ -4589,50 +4743,12 @@ window.IEAT_THAIWATER_DATA = {
       "storage_percent": 35.62,
       "bankfull_msl": null,
       "value_text": "302.9 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-13 23:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 30.0578075597904,
       "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
       "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "คลองหอยโข่ง",
-      "station_code": "SLA002",
-      "province": "สงขลา",
-      "district": "คลองหอยโข่ง",
-      "lat": 6.931234,
-      "lon": 100.43985,
-      "waterlevel_msl": 2.66,
-      "storage_percent": 35.48,
-      "bankfull_msl": null,
-      "value_text": "2.66 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "เฝ้าระวัง",
-      "severity_score": 2,
-      "distance_km": 12.304873258948597,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "เมืองอุดรธานี",
-      "station_code": "KON004",
-      "province": "อุดรธานี",
-      "district": "เมืองอุดรธานี",
-      "lat": 17.482368,
-      "lon": 102.79713,
-      "waterlevel_msl": 167.33,
-      "storage_percent": 35.29,
-      "bankfull_msl": null,
-      "value_text": "167.33 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "เฝ้าระวัง",
-      "severity_score": 2,
-      "distance_km": 21.725608707789945,
-      "nearest_estate": "นิคมอุตสาหกรรมอุดรธานี",
-      "agency": "สสน."
     },
     {
       "kind": "waterlevel",
@@ -4642,16 +4758,54 @@ window.IEAT_THAIWATER_DATA = {
       "district": "เมืองสมุทรสงคราม",
       "lat": 13.3319,
       "lon": 99.96896,
-      "waterlevel_msl": -0.47,
-      "storage_percent": 35.12,
+      "waterlevel_msl": -0.46,
+      "storage_percent": 35.39,
       "bankfull_msl": null,
-      "value_text": "-0.47 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "-0.46 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 34.11919849605185,
       "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
       "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "คลองหอยโข่ง",
+      "station_code": "SLA002",
+      "province": "สงขลา",
+      "district": "คลองหอยโข่ง",
+      "lat": 6.931234,
+      "lon": 100.43985,
+      "waterlevel_msl": 2.59,
+      "storage_percent": 34.8,
+      "bankfull_msl": null,
+      "value_text": "2.59 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 12.304873258948597,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "สะพานสุพรรณกัลยา ",
+      "station_code": "N.5A",
+      "province": "พิษณุโลก",
+      "district": "เมืองพิษณุโลก",
+      "lat": 16.80608,
+      "lon": 100.245827,
+      "waterlevel_msl": 35.9,
+      "storage_percent": 34.72,
+      "bankfull_msl": null,
+      "value_text": "35.9 ม.รทก.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "เฝ้าระวัง",
+      "severity_score": 2,
+      "distance_km": 27.65208157617353,
+      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
+      "agency": "ชป."
     },
     {
       "kind": "waterlevel",
@@ -4665,7 +4819,7 @@ window.IEAT_THAIWATER_DATA = {
       "storage_percent": 34.62,
       "bankfull_msl": null,
       "value_text": "366.91 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-13 23:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 18.126606895413076,
@@ -4684,31 +4838,12 @@ window.IEAT_THAIWATER_DATA = {
       "storage_percent": 34.55,
       "bankfull_msl": null,
       "value_text": "429.66 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 40.927600919337834,
       "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
       "agency": "พพภ"
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สะพานสุพรรณกัลยา ",
-      "station_code": "N.5A",
-      "province": "พิษณุโลก",
-      "district": "เมืองพิษณุโลก",
-      "lat": 16.80608,
-      "lon": 100.245827,
-      "waterlevel_msl": 35.84,
-      "storage_percent": 34.28,
-      "bankfull_msl": null,
-      "value_text": "35.84 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "เฝ้าระวัง",
-      "severity_score": 2,
-      "distance_km": 27.65208157617353,
-      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
-      "agency": "ชป."
     },
     {
       "kind": "waterlevel",
@@ -4718,11 +4853,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "สะเดา",
       "lat": 6.796687,
       "lon": 100.44239,
-      "waterlevel_msl": 12.67,
-      "storage_percent": 34.17,
+      "waterlevel_msl": 12.64,
+      "storage_percent": 33.66,
       "bankfull_msl": null,
-      "value_text": "12.67 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "12.64 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 25.230396811100928,
@@ -4731,22 +4866,22 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "บ้านทุ่งปราบ",
-      "station_code": "X.113",
-      "province": "สงขลา",
-      "district": "สะเดา",
-      "lat": 6.63504,
-      "lon": 100.39341,
-      "waterlevel_msl": 33.08,
-      "storage_percent": 33.97,
+      "station": "ควนกาหลง",
+      "station_code": "STU004",
+      "province": "สตูล",
+      "district": "ควนกาหลง",
+      "lat": 6.928349,
+      "lon": 99.936035,
+      "waterlevel_msl": 21.74,
+      "storage_percent": 32.91,
       "bankfull_msl": null,
-      "value_text": "33.08 ม.รทก.",
-      "observed_at": "2026-10-13 21:00",
+      "value_text": "21.74 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
-      "distance_km": 10.599631491585654,
-      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
-      "agency": "ชป."
+      "distance_km": 47.6096254577221,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "สสน."
     },
     {
       "kind": "waterlevel",
@@ -4756,11 +4891,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "หาดใหญ่",
       "lat": 7.00218,
       "lon": 100.456062,
-      "waterlevel_msl": 0.9,
-      "storage_percent": 33.18,
+      "waterlevel_msl": 0.86,
+      "storage_percent": 32.76,
       "bankfull_msl": null,
-      "value_text": "0.9 ม.รทก.",
-      "observed_at": "2026-10-13 21:00",
+      "value_text": "0.86 ม.รทก.",
+      "observed_at": "2026-10-13 23:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 10.64480235683347,
@@ -4779,7 +4914,7 @@ window.IEAT_THAIWATER_DATA = {
       "storage_percent": 32.33,
       "bankfull_msl": null,
       "value_text": "289.22 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-13 23:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 13.49732805181853,
@@ -4788,22 +4923,22 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "บ้านเขานางบวช",
-      "station_code": "Ny.1B",
-      "province": "นครนายก",
-      "district": "เมืองนครนายก",
-      "lat": 14.24582,
-      "lon": 101.274246,
-      "waterlevel_msl": 4.65,
-      "storage_percent": 31.91,
+      "station": "เมืองพิษณุโลก",
+      "station_code": "NAN012",
+      "province": "พิษณุโลก",
+      "district": "เมืองพิษณุโลก",
+      "lat": 16.86469,
+      "lon": 100.24476,
+      "waterlevel_msl": 36.56,
+      "storage_percent": 31.34,
       "bankfull_msl": null,
-      "value_text": "4.65 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "36.56 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
-      "distance_km": 42.88640558131459,
-      "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
-      "agency": "ชป."
+      "distance_km": 33.75107369201308,
+      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
+      "agency": "สสน."
     },
     {
       "kind": "waterlevel",
@@ -4813,11 +4948,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "ปากช่อง",
       "lat": 14.69785,
       "lon": 101.415154,
-      "waterlevel_msl": 293.26,
-      "storage_percent": 31.34,
+      "waterlevel_msl": 293.25,
+      "storage_percent": 31.18,
       "bankfull_msl": null,
-      "value_text": "293.26 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "293.25 ม.รทก.",
+      "observed_at": "2026-10-14 01:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 44.537954498051086,
@@ -4832,11 +4967,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "หางดง",
       "lat": 18.771976,
       "lon": 98.862595,
-      "waterlevel_msl": 379.59,
-      "storage_percent": 31.28,
+      "waterlevel_msl": 379.58,
+      "storage_percent": 31.11,
       "bankfull_msl": null,
-      "value_text": "379.59 ม.รทก.",
-      "observed_at": "2026-10-13 22:30",
+      "value_text": "379.58 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 26.3732617114831,
@@ -4851,11 +4986,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บางระกำ",
       "lat": 16.70818,
       "lon": 100.17179,
-      "waterlevel_msl": 33.07,
-      "storage_percent": 31.12,
+      "waterlevel_msl": 33.05,
+      "storage_percent": 30.94,
       "bankfull_msl": null,
-      "value_text": "33.07 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "33.05 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 14.967810300867315,
@@ -4870,11 +5005,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "เมืองลำพูน",
       "lat": 18.511826,
       "lon": 99.07731,
-      "waterlevel_msl": 318.09,
-      "storage_percent": 30.88,
+      "waterlevel_msl": 318.08,
+      "storage_percent": 30.76,
       "bankfull_msl": null,
-      "value_text": "318.09 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "318.08 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
       "distance_km": 9.52263887180247,
@@ -4883,94 +5018,56 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "ป้อมพระจุลจอมเกล้า",
-      "station_code": "GLF001",
-      "province": "สมุทรปราการ",
-      "district": "พระสมุทรเจดีย์",
-      "lat": 13.57378,
-      "lon": 100.57396,
-      "waterlevel_msl": -0.52,
-      "storage_percent": 30.85,
+      "station": "ปตร.ปลายคลองบางซอ (ทุ่งเจ้าเจ็ด)",
+      "station_code": "TCP002",
+      "province": "สุพรรณบุรี",
+      "district": "สองพี่น้อง",
+      "lat": 14.194874,
+      "lon": 100.13267,
+      "waterlevel_msl": 1.33,
+      "storage_percent": 30.23,
       "bankfull_msl": null,
-      "value_text": "-0.52 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "1.33 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "เฝ้าระวัง",
       "severity_score": 2,
-      "distance_km": 8.540324535327358,
-      "nearest_estate": "นิคมอุตสาหกรรมแพรกษา",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "เมืองพิษณุโลก",
-      "station_code": "NAN012",
-      "province": "พิษณุโลก",
-      "district": "เมืองพิษณุโลก",
-      "lat": 16.86469,
-      "lon": 100.24476,
-      "waterlevel_msl": 36.48,
-      "storage_percent": 30.73,
-      "bankfull_msl": null,
-      "value_text": "36.48 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "เฝ้าระวัง",
-      "severity_score": 2,
-      "distance_km": 33.75107369201308,
-      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สะพานเขานางบวช",
-      "station_code": "NYK008",
-      "province": "นครนายก",
-      "district": "เมืองนครนายก",
-      "lat": 14.245718,
-      "lon": 101.27481,
-      "waterlevel_msl": 4.53,
-      "storage_percent": 30.14,
-      "bankfull_msl": null,
-      "value_text": "4.53 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "เฝ้าระวัง",
-      "severity_score": 2,
-      "distance_km": 42.94713605347155,
-      "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
+      "distance_km": 49.28443791048643,
+      "nearest_estate": "นิคมอุตสาหกรรมบางปะอิน",
       "agency": "สสน."
     },
     {
       "kind": "rainfall",
-      "station": "บ้านน้ำเชี่ยว",
-      "station_code": "STN1687",
-      "province": "สงขลา",
-      "district": "สะบ้าย้อย",
-      "lat": 6.466831,
-      "lon": 100.833499,
-      "rainfall_mm": 35.0,
-      "value_text": "35 มม.",
-      "observed_at": "2026-10-13 20:00",
+      "station": "บ้านแก้มอ้น",
+      "station_code": "STN1791",
+      "province": "ราชบุรี",
+      "district": "จอมบึง",
+      "lat": 13.745911,
+      "lon": 99.464418,
+      "rainfall_mm": 33.5,
+      "value_text": "33.5 มม.",
+      "observed_at": "2026-10-14 02:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
-      "distance_km": 47.13375242742401,
-      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
+      "distance_km": 43.37418896744573,
+      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
       "agency": "ทน."
     },
     {
       "kind": "rainfall",
-      "station": "บ้านทุ่งปรือ",
-      "station_code": "STN1621",
-      "province": "สงขลา",
-      "district": "หาดใหญ่",
-      "lat": 6.815911,
-      "lon": 100.554191,
-      "rainfall_mm": 34.0,
-      "value_text": "34 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ทจ.1 (ห้วยต้นห้าง)",
+      "station_code": "MOU453",
+      "province": "ราชบุรี",
+      "district": "ปากท่อ",
+      "lat": 13.4169,
+      "lon": 99.555,
+      "rainfall_mm": 31.0,
+      "value_text": "31 มม.",
+      "observed_at": "2026-10-14 04:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
-      "distance_km": 30.296569538044483,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "ทน."
+      "distance_km": 40.22265938238649,
+      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
+      "agency": "พพภ"
     },
     {
       "kind": "rainfall",
@@ -4982,12 +5079,46 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.08452,
       "rainfall_mm": 29.8,
       "value_text": "29.8 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
       "distance_km": 34.867398487093766,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "พพภ"
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านโป่ง",
+      "station_code": "RAJ002",
+      "province": "ราชบุรี",
+      "district": "บ้านโป่ง",
+      "lat": 13.81866,
+      "lon": 99.86508,
+      "rainfall_mm": 29.8,
+      "value_text": "29.8 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ฝนปานกลาง",
+      "severity_score": 1,
+      "distance_km": 20.232421477602117,
+      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านคูนายสังข์",
+      "station_code": "STN0220",
+      "province": "สงขลา",
+      "district": "จะนะ",
+      "lat": 6.833787,
+      "lon": 100.617833,
+      "rainfall_mm": 28.5,
+      "value_text": "28.5 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ฝนปานกลาง",
+      "severity_score": 1,
+      "distance_km": 34.46182522235307,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ทน."
     },
     {
       "kind": "rainfall",
@@ -4999,12 +5130,63 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.43333,
       "rainfall_mm": 28.4,
       "value_text": "28.4 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
       "distance_km": 13.022193259139728,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "อต."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านวังพา",
+      "station_code": "STN0155",
+      "province": "สงขลา",
+      "district": "หาดใหญ่",
+      "lat": 6.898464,
+      "lon": 100.262261,
+      "rainfall_mm": 27.5,
+      "value_text": "27.5 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ฝนปานกลาง",
+      "severity_score": 1,
+      "distance_km": 16.27805357743103,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "วัดบางคนฑีใน",
+      "station_code": "ridtele_TK.72",
+      "province": "สมุทรสงคราม",
+      "district": "บางคนที",
+      "lat": 13.4913,
+      "lon": 99.9445,
+      "rainfall_mm": 27.0,
+      "value_text": "27 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ฝนปานกลาง",
+      "severity_score": 1,
+      "distance_km": 19.178957036570175,
+      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
+      "agency": "ชป."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านหัวควน",
+      "station_code": "STN1605",
+      "province": "สงขลา",
+      "district": "สะเดา",
+      "lat": 6.526957,
+      "lon": 100.512131,
+      "rainfall_mm": 27.0,
+      "value_text": "27 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ฝนปานกลาง",
+      "severity_score": 1,
+      "distance_km": 11.009850932620274,
+      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
+      "agency": "ทน."
     },
     {
       "kind": "rainfall",
@@ -5016,7 +5198,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.462205,
       "rainfall_mm": 27.0,
       "value_text": "27 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
       "distance_km": 11.527643673342766,
@@ -5031,47 +5213,13 @@ window.IEAT_THAIWATER_DATA = {
       "district": "ละงู",
       "lat": 7.13571,
       "lon": 99.93736,
-      "rainfall_mm": 26.4,
-      "value_text": "26.4 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "rainfall_mm": 26.6,
+      "value_text": "26.6 มม.",
+      "observed_at": "2026-10-14 03:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
       "distance_km": 48.7230236681225,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านหัวควน",
-      "station_code": "STN1605",
-      "province": "สงขลา",
-      "district": "สะเดา",
-      "lat": 6.526957,
-      "lon": 100.512131,
-      "rainfall_mm": 26.0,
-      "value_text": "26 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ฝนปานกลาง",
-      "severity_score": 1,
-      "distance_km": 11.009850932620274,
-      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านโป่ง",
-      "station_code": "RAJ002",
-      "province": "ราชบุรี",
-      "district": "บ้านโป่ง",
-      "lat": 13.81866,
-      "lon": 99.86508,
-      "rainfall_mm": 24.6,
-      "value_text": "24.6 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ฝนปานกลาง",
-      "severity_score": 1,
-      "distance_km": 20.232421477602117,
-      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
       "agency": "สสน."
     },
     {
@@ -5084,7 +5232,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.42479,
       "rainfall_mm": 24.6,
       "value_text": "24.6 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
       "distance_km": 10.803452650452002,
@@ -5093,20 +5241,20 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "วัดบางคนฑีใน",
-      "station_code": "ridtele_TK.72",
-      "province": "สมุทรสงคราม",
-      "district": "บางคนที",
-      "lat": 13.4913,
-      "lon": 99.9445,
-      "rainfall_mm": 24.0,
-      "value_text": "24 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "station": "คลองนราภิรมย์ (บางเลน)",
+      "station_code": "BKK019",
+      "province": "นครปฐม",
+      "district": "บางเลน",
+      "lat": 13.88207,
+      "lon": 100.29086,
+      "rainfall_mm": 23.8,
+      "value_text": "23.8 มม.",
+      "observed_at": "2026-10-14 03:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
-      "distance_km": 19.178957036570175,
-      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
-      "agency": "ชป."
+      "distance_km": 37.742377106873434,
+      "nearest_estate": "นิคมอุตสาหกรรมสินสาคร",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -5118,7 +5266,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.019556,
       "rainfall_mm": 23.5,
       "value_text": "23.5 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
       "distance_km": 37.66249817066509,
@@ -5127,20 +5275,20 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "บ้านวังพา",
-      "station_code": "STN0155",
-      "province": "สงขลา",
-      "district": "หาดใหญ่",
-      "lat": 6.898464,
-      "lon": 100.262261,
-      "rainfall_mm": 23.5,
-      "value_text": "23.5 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "station": "อบต.หนองมะค่า",
+      "station_code": "NMKH",
+      "province": "ลพบุรี",
+      "district": "โคกเจริญ",
+      "lat": 15.4321,
+      "lon": 100.9245,
+      "rainfall_mm": 23.0,
+      "value_text": "23 มม.",
+      "observed_at": "2026-10-14 03:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
-      "distance_km": 16.27805357743103,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "ทน."
+      "distance_km": 44.147470169810376,
+      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -5152,7 +5300,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.474043,
       "rainfall_mm": 23.0,
       "value_text": "23 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
       "distance_km": 12.82134403938696,
@@ -5161,19 +5309,70 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "บ้านคูนายสังข์",
-      "station_code": "STN0220",
+      "station": "ชุมชนวัดเกาะ",
+      "station_code": "STN2212",
       "province": "สงขลา",
-      "district": "จะนะ",
-      "lat": 6.833787,
-      "lon": 100.617833,
+      "district": "หาดใหญ่",
+      "lat": 6.974349,
+      "lon": 100.397919,
       "rainfall_mm": 22.5,
       "value_text": "22.5 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
-      "distance_km": 34.46182522235307,
+      "distance_km": 5.649145159681108,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "พรหมบุรี",
+      "station_code": "CPY007",
+      "province": "สิงห์บุรี",
+      "district": "พรหมบุรี",
+      "lat": 14.79091,
+      "lon": 100.45184,
+      "rainfall_mm": 21.6,
+      "value_text": "21.6 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ฝนปานกลาง",
+      "severity_score": 1,
+      "distance_km": 36.93348365136987,
+      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "หน่วยพิทักษ์ป่ามาบลำบิด",
+      "station_code": "MOU119",
+      "province": "ชลบุรี",
+      "district": "บ้านบึง",
+      "lat": 13.164513,
+      "lon": 101.15418,
+      "rainfall_mm": 21.6,
+      "value_text": "21.6 มม.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "ฝนปานกลาง",
+      "severity_score": 1,
+      "distance_km": 4.210559976461311,
+      "nearest_estate": "นิคมอุตสาหกรรมดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 2",
+      "agency": "พพภ"
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านสองพี่น้อง",
+      "station_code": "STN1800",
+      "province": "สงขลา",
+      "district": "สะเดา",
+      "lat": 6.77487,
+      "lon": 100.422722,
+      "rainfall_mm": 21.5,
+      "value_text": "21.5 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ฝนปานกลาง",
+      "severity_score": 1,
+      "distance_km": 25.930225487273518,
+      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
       "agency": "ทน."
     },
     {
@@ -5186,44 +5385,10 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.813667,
       "rainfall_mm": 21.5,
       "value_text": "21.5 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
       "distance_km": 44.51430061148113,
-      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านหนองตาจอน",
-      "station_code": "VLGE30",
-      "province": "ราชบุรี",
-      "district": "ปากท่อ",
-      "lat": 13.43388,
-      "lon": 99.67017,
-      "rainfall_mm": 21.2,
-      "value_text": "21.2 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ฝนปานกลาง",
-      "severity_score": 1,
-      "distance_km": 29.82680048251451,
-      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านสองพี่น้อง",
-      "station_code": "STN1800",
-      "province": "สงขลา",
-      "district": "สะเดา",
-      "lat": 6.77487,
-      "lon": 100.422722,
-      "rainfall_mm": 21.0,
-      "value_text": "21 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ฝนปานกลาง",
-      "severity_score": 1,
-      "distance_km": 25.930225487273518,
       "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
       "agency": "ทน."
     },
@@ -5237,7 +5402,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.05648,
       "rainfall_mm": 21.0,
       "value_text": "21 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
       "distance_km": 12.883250416535583,
@@ -5254,11 +5419,45 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.093935,
       "rainfall_mm": 21.0,
       "value_text": "21 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
       "distance_km": 31.728187231816047,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "สะพานค่ายบางระจัน",
+      "station_code": "HDA007",
+      "province": "สิงห์บุรี",
+      "district": "ค่ายบางระจัน",
+      "lat": 14.815288,
+      "lon": 100.36448,
+      "rainfall_mm": 20.8,
+      "value_text": "20.8 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ฝนปานกลาง",
+      "severity_score": 1,
+      "distance_km": 43.95975694360689,
+      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านหนองโก",
+      "station_code": "STN0693",
+      "province": "ราชบุรี",
+      "district": "บ้านคา",
+      "lat": 13.427751,
+      "lon": 99.49674,
+      "rainfall_mm": 20.5,
+      "value_text": "20.5 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ฝนปานกลาง",
+      "severity_score": 1,
+      "distance_km": 44.738842906492124,
+      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
       "agency": "ทน."
     },
     {
@@ -5271,7 +5470,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.06077,
       "rainfall_mm": 20.0,
       "value_text": "20 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
       "distance_km": 40.248179796434606,
@@ -5280,54 +5479,54 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "ชุมชนวัดเกาะ",
-      "station_code": "STN2212",
-      "province": "สงขลา",
-      "district": "หาดใหญ่",
-      "lat": 6.974349,
-      "lon": 100.397919,
+      "station": "อบต.ยางหัก",
+      "station_code": "G09006-TA180302",
+      "province": "ราชบุรี",
+      "district": "ปากท่อ",
+      "lat": 13.267599,
+      "lon": 99.593249,
       "rainfall_mm": 20.0,
       "value_text": "20 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
-      "distance_km": 5.649145159681108,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "distance_km": 49.60818730085655,
+      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
       "agency": "ทน."
     },
     {
       "kind": "rainfall",
-      "station": "หน่วยพิทักษ์ป่ามาบลำบิด",
-      "station_code": "MOU119",
-      "province": "ชลบุรี",
-      "district": "บ้านบึง",
-      "lat": 13.164513,
-      "lon": 101.15418,
+      "station": "อบต.บางกระเจ้า",
+      "station_code": "BKJO",
+      "province": "สมุทรสาคร",
+      "district": "เมืองสมุทรสาคร",
+      "lat": 13.52146,
+      "lon": 100.19283,
       "rainfall_mm": 19.8,
       "value_text": "19.8 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
-      "distance_km": 4.210559976461311,
-      "nearest_estate": "นิคมอุตสาหกรรมดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 2",
-      "agency": "พพภ"
+      "distance_km": 2.3780877670010234,
+      "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
-      "station": "คลองอู่ตะเภาตอนล่าง",
-      "station_code": "G09006-TA200304",
-      "province": "สงขลา",
-      "district": "หาดใหญ่",
-      "lat": 7.00208,
-      "lon": 100.45587,
-      "rainfall_mm": 19.5,
-      "value_text": "19.5 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "station": " สะพานข้ามคลองโคน",
+      "station_code": "PTTEP1",
+      "province": "สมุทรสงคราม",
+      "district": "เมืองสมุทรสงคราม",
+      "lat": 13.3319,
+      "lon": 99.96896,
+      "rainfall_mm": 19.6,
+      "value_text": "19.6 มม.",
+      "observed_at": "2026-10-14 03:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
-      "distance_km": 10.62436969158755,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "ทน."
+      "distance_km": 34.11919849605185,
+      "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -5339,12 +5538,46 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.917802,
       "rainfall_mm": 19.5,
       "value_text": "19.5 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
       "distance_km": 49.801458400015285,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "คลองอู่ตะเภาตอนล่าง",
+      "station_code": "G09006-TA200304",
+      "province": "สงขลา",
+      "district": "หาดใหญ่",
+      "lat": 7.00208,
+      "lon": 100.45587,
+      "rainfall_mm": 19.5,
+      "value_text": "19.5 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ฝนปานกลาง",
+      "severity_score": 1,
+      "distance_km": 10.62436969158755,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "อบต.บ้านพราน",
+      "station_code": "SWH1",
+      "province": "อ่างทอง",
+      "district": "แสวงหา",
+      "lat": 14.70217,
+      "lon": 100.29819,
+      "rainfall_mm": 19.2,
+      "value_text": "19.2 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ฝนปานกลาง",
+      "severity_score": 1,
+      "distance_km": 39.81336861580222,
+      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -5354,14 +5587,82 @@ window.IEAT_THAIWATER_DATA = {
       "district": "รัตภูมิ",
       "lat": 7.07915,
       "lon": 100.19008,
-      "rainfall_mm": 18.4,
-      "value_text": "18.4 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "rainfall_mm": 18.6,
+      "value_text": "18.6 มม.",
+      "observed_at": "2026-10-14 03:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
       "distance_km": 20.321326804014046,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านคลองกั่ว",
+      "station_code": "STN0227",
+      "province": "สงขลา",
+      "district": "รัตภูมิ",
+      "lat": 6.94136,
+      "lon": 100.133067,
+      "rainfall_mm": 18.5,
+      "value_text": "18.5 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ฝนปานกลาง",
+      "severity_score": 1,
+      "distance_km": 26.10782949240627,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "โรงเรียนบ้านหนองมะค่า",
+      "station_code": "G09006-TA120601",
+      "province": "ลพบุรี",
+      "district": "โคกเจริญ",
+      "lat": 15.434756,
+      "lon": 100.919267,
+      "rainfall_mm": 18.5,
+      "value_text": "18.5 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ฝนปานกลาง",
+      "severity_score": 1,
+      "distance_km": 43.51738681892557,
+      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ชุมชนบ้านท่าหรั่ง",
+      "station_code": "STN2059",
+      "province": "สงขลา",
+      "district": "รัตภูมิ",
+      "lat": 7.107131,
+      "lon": 100.198006,
+      "rainfall_mm": 17.5,
+      "value_text": "17.5 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ฝนปานกลาง",
+      "severity_score": 1,
+      "distance_km": 20.96825900252832,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านหินแด้น",
+      "station_code": "STN0053",
+      "province": "กาญจนบุรี",
+      "district": "ด่านมะขามเตี้ย",
+      "lat": 13.780584,
+      "lon": 99.420933,
+      "rainfall_mm": 17.5,
+      "value_text": "17.5 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ฝนปานกลาง",
+      "severity_score": 1,
+      "distance_km": 49.01515188945304,
+      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
+      "agency": "ทน."
     },
     {
       "kind": "rainfall",
@@ -5373,29 +5674,12 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.08333,
       "rainfall_mm": 17.2,
       "value_text": "17.2 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
       "distance_km": 38.41260863393544,
       "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
       "agency": "อต."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ชุมชนบ้านท่าหรั่ง",
-      "station_code": "STN2059",
-      "province": "สงขลา",
-      "district": "รัตภูมิ",
-      "lat": 7.107131,
-      "lon": 100.198006,
-      "rainfall_mm": 17.0,
-      "value_text": "17 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ฝนปานกลาง",
-      "severity_score": 1,
-      "distance_km": 20.96825900252832,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "ทน."
     },
     {
       "kind": "rainfall",
@@ -5407,7 +5691,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.38278,
       "rainfall_mm": 17.0,
       "value_text": "17 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
       "distance_km": 3.183177745060809,
@@ -5416,20 +5700,71 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "บ้านคลองกั่ว",
-      "station_code": "STN0227",
+      "station": "บ้านพรุพร้อ",
+      "station_code": "ridtele_TX69",
       "province": "สงขลา",
       "district": "รัตภูมิ",
-      "lat": 6.94136,
-      "lon": 100.133067,
-      "rainfall_mm": 16.0,
-      "value_text": "16 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "lat": 7.19253,
+      "lon": 100.221,
+      "rainfall_mm": 17.0,
+      "value_text": "17 มม.",
+      "observed_at": "2026-10-14 03:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
-      "distance_km": 26.10782949240627,
+      "distance_km": 25.581632172415926,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ชป."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านพุบอนบน",
+      "station_code": "STN0791",
+      "province": "ราชบุรี",
+      "district": "บ้านคา",
+      "lat": 13.390971,
+      "lon": 99.499611,
+      "rainfall_mm": 16.5,
+      "value_text": "16.5 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ฝนปานกลาง",
+      "severity_score": 1,
+      "distance_km": 46.74914784453526,
+      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านชายคลอง",
+      "station_code": "STN2062",
+      "province": "สงขลา",
+      "district": "หาดใหญ่",
+      "lat": 6.963151,
+      "lon": 100.458623,
+      "rainfall_mm": 16.0,
+      "value_text": "16 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ฝนปานกลาง",
+      "severity_score": 1,
+      "distance_km": 12.004532299603285,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "สะพานอนุสรณ์ 100 ปีสิงห์บุรี (สะพานหลวงพ่อแพ 89)",
+      "station_code": "HDA006",
+      "province": "สิงห์บุรี",
+      "district": "เมืองสิงห์บุรี",
+      "lat": 14.870205,
+      "lon": 100.408585,
+      "rainfall_mm": 15.0,
+      "value_text": "15 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ฝนปานกลาง",
+      "severity_score": 1,
+      "distance_km": 46.8907144661931,
+      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -5441,12 +5776,29 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.442098,
       "rainfall_mm": 15.0,
       "value_text": "15 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
       "distance_km": 9.082132755141009,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "ชป."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านวัด",
+      "station_code": "STN0292",
+      "province": "สงขลา",
+      "district": "นาทวี",
+      "lat": 6.487867,
+      "lon": 100.672471,
+      "rainfall_mm": 14.5,
+      "value_text": "14.5 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ฝนปานกลาง",
+      "severity_score": 1,
+      "distance_km": 29.22203897485744,
+      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
+      "agency": "ทน."
     },
     {
       "kind": "rainfall",
@@ -5458,12 +5810,29 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.911013,
       "rainfall_mm": 14.5,
       "value_text": "14.5 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
       "distance_km": 49.54217177724728,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "ชป."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านควนจง",
+      "station_code": "STN2213",
+      "province": "สงขลา",
+      "district": "นาหม่อม",
+      "lat": 6.968613,
+      "lon": 100.51886,
+      "rainfall_mm": 14.0,
+      "value_text": "14 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ฝนปานกลาง",
+      "severity_score": 1,
+      "distance_km": 18.099733015190356,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ทน."
     },
     {
       "kind": "rainfall",
@@ -5475,7 +5844,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.22465,
       "rainfall_mm": 13.8,
       "value_text": "13.8 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
       "distance_km": 36.987083635646336,
@@ -5484,37 +5853,37 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "บ้านชายคลอง",
-      "station_code": "STN2062",
-      "province": "สงขลา",
-      "district": "หาดใหญ่",
-      "lat": 6.963151,
-      "lon": 100.458623,
-      "rainfall_mm": 13.5,
-      "value_text": "13.5 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "station": "วัดวังปลาช่อน",
+      "station_code": "ONE078",
+      "province": "ราชบุรี",
+      "district": "ปากท่อ",
+      "lat": 13.242124,
+      "lon": 99.65333,
+      "rainfall_mm": 12.8,
+      "value_text": "12.8 มม.",
+      "observed_at": "2026-10-14 03:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
-      "distance_km": 12.004532299603285,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "ทน."
+      "distance_km": 48.81915636894548,
+      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
-      "station": "บ้านควนจง",
-      "station_code": "STN2213",
-      "province": "สงขลา",
-      "district": "นาหม่อม",
-      "lat": 6.968613,
-      "lon": 100.51886,
-      "rainfall_mm": 13.0,
-      "value_text": "13 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "station": "พระรามสอง",
+      "station_code": "MKG006",
+      "province": "สมุทรสงคราม",
+      "district": "เมืองสมุทรสงคราม",
+      "lat": 13.38362,
+      "lon": 99.9836,
+      "rainfall_mm": 12.6,
+      "value_text": "12.6 มม.",
+      "observed_at": "2026-10-14 03:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
-      "distance_km": 18.099733015190356,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "ทน."
+      "distance_km": 29.19079991757201,
+      "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -5526,7 +5895,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.007778,
       "rainfall_mm": 12.5,
       "value_text": "12.5 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
       "distance_km": 41.22878128002875,
@@ -5535,18 +5904,18 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "บ้านแก้มอ้น",
-      "station_code": "STN1791",
+      "station": "บ้านหนองธง",
+      "station_code": "STN0223",
       "province": "ราชบุรี",
-      "district": "จอมบึง",
-      "lat": 13.745911,
-      "lon": 99.464418,
-      "rainfall_mm": 12.5,
-      "value_text": "12.5 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "district": "บ้านคา",
+      "lat": 13.45973,
+      "lon": 99.439887,
+      "rainfall_mm": 12.0,
+      "value_text": "12 มม.",
+      "observed_at": "2026-10-14 02:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
-      "distance_km": 43.37418896744573,
+      "distance_km": 48.533455547425596,
       "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
       "agency": "ทน."
     },
@@ -5560,29 +5929,12 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.93085,
       "rainfall_mm": 12.0,
       "value_text": "12 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
       "distance_km": 47.3665291807886,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านพรุพร้อ",
-      "station_code": "ridtele_TX69",
-      "province": "สงขลา",
-      "district": "รัตภูมิ",
-      "lat": 7.19253,
-      "lon": 100.221,
-      "rainfall_mm": 12.0,
-      "value_text": "12 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ฝนปานกลาง",
-      "severity_score": 1,
-      "distance_km": 25.581632172415926,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "ชป."
     },
     {
       "kind": "rainfall",
@@ -5592,9 +5944,9 @@ window.IEAT_THAIWATER_DATA = {
       "district": "สะบ้าย้อย",
       "lat": 6.48154,
       "lon": 100.82659,
-      "rainfall_mm": 11.6,
-      "value_text": "11.6 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "rainfall_mm": 11.8,
+      "value_text": "11.8 มม.",
+      "observed_at": "2026-10-14 04:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
       "distance_km": 46.11596259561385,
@@ -5603,20 +5955,20 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "บ้านวัด",
-      "station_code": "STN0292",
-      "province": "สงขลา",
-      "district": "นาทวี",
-      "lat": 6.487867,
-      "lon": 100.672471,
-      "rainfall_mm": 11.5,
-      "value_text": "11.5 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "station": "อบต.ดอนชะเอม",
+      "station_code": "DNCM",
+      "province": "กาญจนบุรี",
+      "district": "ท่ามะกา",
+      "lat": 13.96196,
+      "lon": 99.80394,
+      "rainfall_mm": 11.2,
+      "value_text": "11.2 มม.",
+      "observed_at": "2026-10-14 03:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
-      "distance_km": 29.22203897485744,
-      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
-      "agency": "ทน."
+      "distance_km": 36.4425024286866,
+      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -5628,7 +5980,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.558293,
       "rainfall_mm": 11.0,
       "value_text": "11 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
       "distance_km": 22.329694424387654,
@@ -5645,12 +5997,46 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.20137,
       "rainfall_mm": 11.0,
       "value_text": "11 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
       "distance_km": 37.23419610209725,
       "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
       "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "วัดศรัทธาธรรม",
+      "station_code": "ridtele_TMK01",
+      "province": "สมุทรสงคราม",
+      "district": "เมืองสมุทรสงคราม",
+      "lat": 13.3773,
+      "lon": 99.993,
+      "rainfall_mm": 11.0,
+      "value_text": "11 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ฝนปานกลาง",
+      "severity_score": 1,
+      "distance_km": 28.82839589804128,
+      "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
+      "agency": "ชป."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ทต.ไพศาลี",
+      "station_code": "PSLI",
+      "province": "นครสวรรค์",
+      "district": "ไพศาลี",
+      "lat": 15.60012,
+      "lon": 100.6572,
+      "rainfall_mm": 10.8,
+      "value_text": "10.8 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ฝนปานกลาง",
+      "severity_score": 1,
+      "distance_km": 9.970221220850517,
+      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -5660,13 +6046,30 @@ window.IEAT_THAIWATER_DATA = {
       "district": "สะเดา",
       "lat": 6.79806,
       "lon": 100.39056,
-      "rainfall_mm": 10.4,
-      "value_text": "10.4 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "rainfall_mm": 10.6,
+      "value_text": "10.6 มม.",
+      "observed_at": "2026-10-14 01:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
       "distance_km": 23.618419732349793,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "อต."
+    },
+    {
+      "kind": "rainfall",
+      "station": "สุพรรณบุรี",
+      "station_code": "48425",
+      "province": "สุพรรณบุรี",
+      "district": "เมืองสุพรรณบุรี",
+      "lat": 14.47444,
+      "lon": 100.13889,
+      "rainfall_mm": 10.2,
+      "value_text": "10.2 มม.",
+      "observed_at": "2026-10-14 01:00",
+      "status": "ฝนปานกลาง",
+      "severity_score": 1,
+      "distance_km": 49.2111914571275,
+      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
       "agency": "อต."
     },
     {
@@ -5679,29 +6082,12 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.06259,
       "rainfall_mm": 10.2,
       "value_text": "10.2 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ฝนปานกลาง",
       "severity_score": 1,
       "distance_km": 43.87220334815228,
       "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
       "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ฝายท่าเชียด",
-      "station_code": "ridtele_TX21A",
-      "province": "พัทลุง",
-      "district": "บางแก้ว",
-      "lat": 7.361018,
-      "lon": 100.1085,
-      "rainfall_mm": 10.0,
-      "value_text": "10 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 48.03374283041742,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "ชป."
     },
     {
       "kind": "rainfall",
@@ -5713,7 +6099,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.980648,
       "rainfall_mm": 9.5,
       "value_text": "9.5 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 42.766895211963295,
@@ -5730,11 +6116,62 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.721861,
       "rainfall_mm": 9.5,
       "value_text": "9.5 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 48.13113552273412,
       "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ท้ายปตร.ยางมณี",
+      "station_code": "ATG162",
+      "province": "สิงห์บุรี",
+      "district": "ท่าช้าง",
+      "lat": 14.75033,
+      "lon": 100.41498,
+      "rainfall_mm": 9.4,
+      "value_text": "9.4 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 34.934015748296225,
+      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "เหนือปตร.ยางมณี",
+      "station_code": "ATG161",
+      "province": "สิงห์บุรี",
+      "district": "ท่าช้าง",
+      "lat": 14.751,
+      "lon": 100.41463,
+      "rainfall_mm": 9.2,
+      "value_text": "9.2 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 35.016853910614486,
+      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านบาโรย",
+      "station_code": "STN0152",
+      "province": "สงขลา",
+      "district": "สะเดา",
+      "lat": 6.774554,
+      "lon": 100.230542,
+      "rainfall_mm": 9.0,
+      "value_text": "9 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 29.64693605816949,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "ทน."
     },
     {
@@ -5747,7 +6184,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.134958,
       "rainfall_mm": 9.0,
       "value_text": "9 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 24.81516132713832,
@@ -5756,20 +6193,20 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "สะพานข้ามลำภาชี",
-      "station_code": "ridtele_TK.68",
-      "province": "ราชบุรี",
-      "district": "จอมบึง",
-      "lat": 13.7521,
-      "lon": 99.4374,
+      "station": "บ้านน้ำลัด",
+      "station_code": "STN2060",
+      "province": "สงขลา",
+      "district": "สะเดา",
+      "lat": 6.62954,
+      "lon": 100.442957,
       "rainfall_mm": 9.0,
       "value_text": "9 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 46.3689507943451,
-      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
-      "agency": "ชป."
+      "distance_km": 10.275678327210088,
+      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
+      "agency": "ทน."
     },
     {
       "kind": "rainfall",
@@ -5781,7 +6218,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.36767,
       "rainfall_mm": 9.0,
       "value_text": "9 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 3.7516262325205503,
@@ -5790,18 +6227,52 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "บ้านบาโรย",
-      "station_code": "STN0152",
-      "province": "สงขลา",
-      "district": "สะเดา",
-      "lat": 6.774554,
-      "lon": 100.230542,
-      "rainfall_mm": 8.0,
-      "value_text": "8 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "station": "อ่างเก็บน้ำห้วยซับเหล็ก",
+      "station_code": "TBW034",
+      "province": "ลพบุรี",
+      "district": "เมืองลพบุรี",
+      "lat": 14.814826,
+      "lon": 100.77581,
+      "rainfall_mm": 9.0,
+      "value_text": "9 มม.",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 29.64693605816949,
+      "distance_km": 32.73106564587656,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านคลองต่อ",
+      "station_code": "STN0063",
+      "province": "สงขลา",
+      "district": "รัตภูมิ",
+      "lat": 7.018751,
+      "lon": 100.260772,
+      "rainfall_mm": 8.5,
+      "value_text": "8.5 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 10.991726336523053,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านปากช่อง",
+      "station_code": "STN0709",
+      "province": "สงขลา",
+      "district": "จะนะ",
+      "lat": 6.985409,
+      "lon": 100.644548,
+      "rainfall_mm": 8.0,
+      "value_text": "8 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 31.5286606078379,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "ทน."
     },
@@ -5815,7 +6286,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.233553,
       "rainfall_mm": 7.5,
       "value_text": "7.5 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 44.63343831896001,
@@ -5824,71 +6295,37 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ทจ.1 (ห้วยต้นห้าง)",
-      "station_code": "MOU453",
-      "province": "ราชบุรี",
-      "district": "ปากท่อ",
-      "lat": 13.4169,
-      "lon": 99.555,
-      "rainfall_mm": 7.2,
-      "value_text": "7.2 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "station": "บ้านหัวพุ",
+      "station_code": "STN1249",
+      "province": "นครสวรรค์",
+      "district": "ไพศาลี",
+      "lat": 15.564188,
+      "lon": 100.705829,
+      "rainfall_mm": 7.5,
+      "value_text": "7.5 มม.",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 40.22265938238649,
-      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านปากช่อง",
-      "station_code": "STN0709",
-      "province": "สงขลา",
-      "district": "จะนะ",
-      "lat": 6.985409,
-      "lon": 100.644548,
-      "rainfall_mm": 7.0,
-      "value_text": "7 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 31.5286606078379,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "distance_km": 16.53452242216833,
+      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
       "agency": "ทน."
     },
     {
       "kind": "rainfall",
-      "station": "สถานี X.112",
-      "station_code": "ridtele_STN11",
-      "province": "สงขลา",
-      "district": "สะเดา",
-      "lat": 6.705239,
-      "lon": 100.433266,
-      "rainfall_mm": 7.0,
-      "value_text": "7 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "station": "อบต.ตากฟ้า",
+      "station_code": "TKFA",
+      "province": "นครสวรรค์",
+      "district": "ตากฟ้า",
+      "lat": 15.2965,
+      "lon": 100.50282,
+      "rainfall_mm": 7.4,
+      "value_text": "7.4 มม.",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 18.29739283152536,
-      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
-      "agency": "ชป."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านพุบอนบน",
-      "station_code": "STN0791",
-      "province": "ราชบุรี",
-      "district": "บ้านคา",
-      "lat": 13.390971,
-      "lon": 99.499611,
-      "rainfall_mm": 7.0,
-      "value_text": "7 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 46.74914784453526,
-      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
-      "agency": "ทน."
+      "distance_km": 40.65802972934656,
+      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -5900,7 +6337,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.06116,
       "rainfall_mm": 7.0,
       "value_text": "7 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 40.020120844913755,
@@ -5917,7 +6354,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.515863,
       "rainfall_mm": 7.0,
       "value_text": "7 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 17.740743742646153,
@@ -5926,20 +6363,20 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "อบต.ตากฟ้า",
-      "station_code": "TKFA",
-      "province": "นครสวรรค์",
-      "district": "ตากฟ้า",
-      "lat": 15.2965,
-      "lon": 100.50282,
+      "station": "สถานี X.112",
+      "station_code": "ridtele_STN11",
+      "province": "สงขลา",
+      "district": "สะเดา",
+      "lat": 6.705239,
+      "lon": 100.433266,
       "rainfall_mm": 7.0,
       "value_text": "7 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 40.65802972934656,
-      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
-      "agency": "สสน."
+      "distance_km": 18.29739283152536,
+      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
+      "agency": "ชป."
     },
     {
       "kind": "rainfall",
@@ -5951,12 +6388,29 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.2407,
       "rainfall_mm": 6.8,
       "value_text": "6.8 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 45.75334189255487,
       "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
       "agency": "พพภ"
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านวังใหญ่",
+      "station_code": "STN1684",
+      "province": "สงขลา",
+      "district": "นาทวี",
+      "lat": 6.705379,
+      "lon": 100.742996,
+      "rainfall_mm": 6.5,
+      "value_text": "6.5 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 40.67327840570694,
+      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
+      "agency": "ทน."
     },
     {
       "kind": "rainfall",
@@ -5968,7 +6422,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.250435,
       "rainfall_mm": 6.4,
       "value_text": "6.4 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 14.04845477137316,
@@ -5983,9 +6437,9 @@ window.IEAT_THAIWATER_DATA = {
       "district": "ตาคลี",
       "lat": 15.29119,
       "lon": 100.38288,
-      "rainfall_mm": 5.8,
-      "value_text": "5.8 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "rainfall_mm": 6.2,
+      "value_text": "6.2 มม.",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 45.6697105917741,
@@ -5994,37 +6448,173 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "บ้านน้ำลัด",
-      "station_code": "STN2060",
-      "province": "สงขลา",
-      "district": "สะเดา",
-      "lat": 6.62954,
-      "lon": 100.442957,
-      "rainfall_mm": 5.5,
-      "value_text": "5.5 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "station": "ทม.ทับกวาง",
+      "station_code": "CMKK",
+      "province": "สระบุรี",
+      "district": "แก่งคอย",
+      "lat": 14.60885,
+      "lon": 101.07645,
+      "rainfall_mm": 6.2,
+      "value_text": "6.2 มม.",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 10.275678327210088,
-      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
+      "distance_km": 7.560304216545661,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "โรงเรียนซอย12 สาย 4 ซ้าย",
+      "station_code": "G09006-TA121101",
+      "province": "ลพบุรี",
+      "district": "พัฒนานิคม",
+      "lat": 14.882131,
+      "lon": 100.905748,
+      "rainfall_mm": 6.0,
+      "value_text": "6 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 30.673760835829963,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
       "agency": "ทน."
     },
     {
       "kind": "rainfall",
-      "station": "อบต.ดอนชะเอม",
-      "station_code": "DNCM",
-      "province": "กาญจนบุรี",
-      "district": "ท่ามะกา",
-      "lat": 13.96196,
-      "lon": 99.80394,
-      "rainfall_mm": 5.4,
-      "value_text": "5.4 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "station": "บ้านปาล์มไทย (บ้านส้านแดง)",
+      "station_code": "STN1916",
+      "province": "สตูล",
+      "district": "ควนกาหลง",
+      "lat": 7.046194,
+      "lon": 100.030196,
+      "rainfall_mm": 6.0,
+      "value_text": "6 มม.",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 36.4425024286866,
+      "distance_km": 36.619354672165436,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านทับกฤช",
+      "station_code": "G09006-TA092305",
+      "province": "นครสวรรค์",
+      "district": "ชุมแสง",
+      "lat": 15.749707,
+      "lon": 100.24618,
+      "rainfall_mm": 6.0,
+      "value_text": "6 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 37.56736377859444,
+      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "โรงเรียนกำแพงแสนวิทยา",
+      "station_code": "G09006-TA130212",
+      "province": "นครปฐม",
+      "district": "กำแพงแสน",
+      "lat": 13.983065,
+      "lon": 99.997337,
+      "rainfall_mm": 6.0,
+      "value_text": "6 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 41.608667133478676,
       "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
-      "agency": "สสน."
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านบ่อต้นแซะ",
+      "station_code": "STN2058",
+      "province": "สงขลา",
+      "district": "จะนะ",
+      "lat": 6.897362,
+      "lon": 100.77132,
+      "rainfall_mm": 6.0,
+      "value_text": "6 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 47.06590911252587,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "โรงเรียนบ้านลาดใหญ่สามัคคี",
+      "station_code": "ridtele_TK.74",
+      "province": "สมุทรสงคราม",
+      "district": "เมืองสมุทรสงคราม",
+      "lat": 13.482,
+      "lon": 100.044,
+      "rainfall_mm": 6.0,
+      "value_text": "6 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 18.023939117114256,
+      "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
+      "agency": "ชป."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านเขาขุยพัฒนา",
+      "station_code": "STN1185",
+      "province": "ลพบุรี",
+      "district": "โคกเจริญ",
+      "lat": 15.528146,
+      "lon": 100.843028,
+      "rainfall_mm": 5.5,
+      "value_text": "5.5 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 31.190801822103584,
+      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านหินสี",
+      "station_code": "STN0479",
+      "province": "ราชบุรี",
+      "district": "ปากท่อ",
+      "lat": 13.324017,
+      "lon": 99.558695,
+      "rainfall_mm": 5.5,
+      "value_text": "5.5 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 46.96607177882031,
+      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ราชบุรี",
+      "station_code": "48464",
+      "province": "ราชบุรี",
+      "district": "เมืองราชบุรี",
+      "lat": 13.48931,
+      "lon": 99.79239,
+      "rainfall_mm": 5.3,
+      "value_text": "5.3 มม.",
+      "observed_at": "2026-10-14 01:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 17.594860632472948,
+      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
+      "agency": "อต."
     },
     {
       "kind": "rainfall",
@@ -6036,7 +6626,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.963794,
       "rainfall_mm": 5.0,
       "value_text": "5 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 49.31667259650628,
@@ -6045,53 +6635,36 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "คลองตะโหมด (ท่าเชียด)",
-      "station_code": "G09006-TA200206",
-      "province": "พัทลุง",
-      "district": "ตะโหมด",
-      "lat": 7.338375,
-      "lon": 100.10986,
-      "rainfall_mm": 5.0,
-      "value_text": "5 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "station": "บ้านพุม่วง",
+      "station_code": "STN1524",
+      "province": "ลพบุรี",
+      "district": "โคกสำโรง",
+      "lat": 15.015938,
+      "lon": 100.863294,
+      "rainfall_mm": 4.5,
+      "value_text": "4.5 มม.",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 45.91079372313541,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "distance_km": 46.210566343383235,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
       "agency": "ทน."
     },
     {
       "kind": "rainfall",
-      "station": "บ้านปาล์มไทย (บ้านส้านแดง)",
-      "station_code": "STN1916",
-      "province": "สตูล",
-      "district": "ควนกาหลง",
-      "lat": 7.046194,
-      "lon": 100.030196,
-      "rainfall_mm": 5.0,
-      "value_text": "5 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "station": "บ้านโคกแสมสาร",
+      "station_code": "STN0675",
+      "province": "ลพบุรี",
+      "district": "โคกเจริญ",
+      "lat": 15.336768,
+      "lon": 100.831599,
+      "rainfall_mm": 4.5,
+      "value_text": "4.5 มม.",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 36.619354672165436,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านวังใหญ่",
-      "station_code": "STN1684",
-      "province": "สงขลา",
-      "district": "นาทวี",
-      "lat": 6.705379,
-      "lon": 100.742996,
-      "rainfall_mm": 5.0,
-      "value_text": "5 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 40.67327840570694,
-      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
+      "distance_km": 44.21491903883384,
+      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
       "agency": "ทน."
     },
     {
@@ -6104,7 +6677,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.78661,
       "rainfall_mm": 4.2,
       "value_text": "4.2 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 00:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 37.107596883298854,
@@ -6113,71 +6686,37 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "สุพรรณบุรี",
-      "station_code": "48425",
-      "province": "สุพรรณบุรี",
-      "district": "เมืองสุพรรณบุรี",
-      "lat": 14.47444,
-      "lon": 100.13889,
+      "station": "ทรบ. ปากคลองห้าวา (ทุ่งท่าวุ้ง)",
+      "station_code": "TCP010",
+      "province": "ลพบุรี",
+      "district": "เมืองลพบุรี",
+      "lat": 14.818599,
+      "lon": 100.576515,
       "rainfall_mm": 4.2,
       "value_text": "4.2 มม.",
-      "observed_at": "2026-10-13 19:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 49.2111914571275,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "อต."
-    },
-    {
-      "kind": "rainfall",
-      "station": "พรหมบุรี",
-      "station_code": "CPY007",
-      "province": "สิงห์บุรี",
-      "district": "พรหมบุรี",
-      "lat": 14.79091,
-      "lon": 100.45184,
-      "rainfall_mm": 4.2,
-      "value_text": "4.2 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 36.93348365136987,
+      "distance_km": 36.67026197358812,
       "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
       "agency": "สสน."
     },
     {
       "kind": "rainfall",
-      "station": "ราชบุรี",
-      "station_code": "48464",
-      "province": "ราชบุรี",
-      "district": "เมืองราชบุรี",
-      "lat": 13.48931,
-      "lon": 99.79239,
-      "rainfall_mm": 3.6,
-      "value_text": "3.6 มม.",
-      "observed_at": "2026-10-13 19:00",
+      "station": "วัดหินแท่น (K.62)",
+      "station_code": "MKVKD09",
+      "province": "กาญจนบุรี",
+      "district": "ด่านมะขามเตี้ย",
+      "lat": 13.78093,
+      "lon": 99.42085,
+      "rainfall_mm": 4.0,
+      "value_text": "4 มม.",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 17.594860632472948,
+      "distance_km": 49.03611661451666,
       "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
-      "agency": "อต."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านควนเนียง",
-      "station_code": "STN1799",
-      "province": "สงขลา",
-      "district": "หาดใหญ่",
-      "lat": 6.835284,
-      "lon": 100.498648,
-      "rainfall_mm": 3.5,
-      "value_text": "3.5 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 24.593397363992267,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "ทน."
+      "agency": "กฟผ."
     },
     {
       "kind": "rainfall",
@@ -6187,13 +6726,132 @@ window.IEAT_THAIWATER_DATA = {
       "district": "วัฒนานคร",
       "lat": 13.907834,
       "lon": 102.377541,
-      "rainfall_mm": 3.0,
-      "value_text": "3 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "rainfall_mm": 4.0,
+      "value_text": "4 มม.",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 27.99937521772513,
       "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านควนเนียง",
+      "station_code": "STN1799",
+      "province": "สงขลา",
+      "district": "หาดใหญ่",
+      "lat": 6.835284,
+      "lon": 100.498648,
+      "rainfall_mm": 4.0,
+      "value_text": "4 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 24.593397363992267,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ประจันตคาม (KGT7A)",
+      "station_code": "PRC004",
+      "province": "ปราจีนบุรี",
+      "district": "ประจันตคาม",
+      "lat": 14.070941,
+      "lon": 101.51893,
+      "rainfall_mm": 3.8,
+      "value_text": "3.8 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 23.337808011616087,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "คลองพระปรง",
+      "station_code": "SKE001",
+      "province": "สระแก้ว",
+      "district": "เมืองสระแก้ว",
+      "lat": 13.937376,
+      "lon": 101.922035,
+      "rainfall_mm": 3.6,
+      "value_text": "3.6 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 5.703677802963367,
+      "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านคอก-วังไทร",
+      "station_code": "STN0507",
+      "province": "สงขลา",
+      "district": "นาทวี",
+      "lat": 6.585939,
+      "lon": 100.672797,
+      "rainfall_mm": 3.5,
+      "value_text": "3.5 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 29.048769895702318,
+      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ประจันตคาม",
+      "station_code": "ridtele_TKgt51",
+      "province": "ปราจีนบุรี",
+      "district": "ประจันตคาม",
+      "lat": 14.069966,
+      "lon": 101.518579,
+      "rainfall_mm": 3.5,
+      "value_text": "3.5 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 23.27638078151886,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
+      "agency": "ชป."
+    },
+    {
+      "kind": "rainfall",
+      "station": "เมืองสมุทรสาคร",
+      "station_code": "THA009",
+      "province": "สมุทรสาคร",
+      "district": "เมืองสมุทรสาคร",
+      "lat": 13.58598,
+      "lon": 100.23048,
+      "rainfall_mm": 3.0,
+      "value_text": "3 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 4.674934171316372,
+      "nearest_estate": "นิคมอุตสาหกรรมสมุทรสาคร",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านหูแร่",
+      "station_code": "STN1025",
+      "province": "สงขลา",
+      "district": "หาดใหญ่",
+      "lat": 6.982842,
+      "lon": 100.328587,
+      "rainfall_mm": 3.0,
+      "value_text": "3 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 4.456427249901711,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "ทน."
     },
     {
@@ -6206,7 +6864,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.862595,
       "rainfall_mm": 3.0,
       "value_text": "3 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 26.3732617114831,
@@ -6215,88 +6873,122 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "บ้านคลองต่อ",
-      "station_code": "STN0063",
-      "province": "สงขลา",
-      "district": "รัตภูมิ",
-      "lat": 7.018751,
-      "lon": 100.260772,
-      "rainfall_mm": 3.0,
-      "value_text": "3 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 10.991726336523053,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ทต.ทุ่งทราย",
-      "station_code": "STWN",
-      "province": "กำแพงเพชร",
-      "district": "ทรายทองวัฒนา",
-      "lat": 16.29505,
-      "lon": 99.80898,
+      "station": "อบต.ราษฎร์นิยม",
+      "station_code": "BKNH",
+      "province": "นนทบุรี",
+      "district": "ไทรน้อย",
+      "lat": 14.10388,
+      "lon": 100.32209,
       "rainfall_mm": 2.8,
       "value_text": "2.8 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 47.81373867868995,
-      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
+      "distance_km": 31.076556482399493,
+      "nearest_estate": "นิคมอุตสาหกรรมบางปะอิน",
       "agency": "สสน."
     },
     {
       "kind": "rainfall",
-      "station": "อบต.บ้านพราน",
-      "station_code": "SWH1",
-      "province": "อ่างทอง",
-      "district": "แสวงหา",
-      "lat": 14.70217,
-      "lon": 100.29819,
-      "rainfall_mm": 2.6,
-      "value_text": "2.6 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "station": "เมืองลพบุรี",
+      "station_code": "LBI002",
+      "province": "ลพบุรี",
+      "district": "เมืองลพบุรี",
+      "lat": 14.76049,
+      "lon": 100.5996,
+      "rainfall_mm": 2.8,
+      "value_text": "2.8 มม.",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 39.81336861580222,
+      "distance_km": 30.153470420161305,
       "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
       "agency": "สสน."
     },
     {
       "kind": "rainfall",
-      "station": "บ้านโกรกอีดก",
-      "station_code": "ONWR01",
-      "province": "สระบุรี",
-      "district": "แก่งคอย",
-      "lat": 14.4417,
-      "lon": 101.17281,
-      "rainfall_mm": 2.4,
-      "value_text": "2.4 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "station": "ที่ทำการอุทยานแห่งชาติเขาน้ำค้าง",
+      "station_code": "MOU138",
+      "province": "สงขลา",
+      "district": "สะเดา",
+      "lat": 6.600056,
+      "lon": 100.58906,
+      "rainfall_mm": 2.6,
+      "value_text": "2.6 มม.",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 26.983521249057052,
-      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
-      "agency": "สสน."
+      "distance_km": 20.43381666900714,
+      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
+      "agency": "พพภ"
     },
     {
       "kind": "rainfall",
-      "station": "คลองพระปรง",
-      "station_code": "SKE001",
-      "province": "สระแก้ว",
-      "district": "เมืองสระแก้ว",
-      "lat": 13.937376,
-      "lon": 101.922035,
-      "rainfall_mm": 2.2,
-      "value_text": "2.2 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "station": "แม่น้ำท่าจีนที่สะพานข้ามแม่น้ำท่าจีน 3",
+      "station_code": "G09006-TA130203",
+      "province": "สมุทรสาคร",
+      "district": "เมืองสมุทรสาคร",
+      "lat": 13.5859,
+      "lon": 100.23125,
+      "rainfall_mm": 2.5,
+      "value_text": "2.5 มม.",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 5.703677802963367,
-      "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
-      "agency": "สสน."
+      "distance_km": 4.6622115448354835,
+      "nearest_estate": "นิคมอุตสาหกรรมสมุทรสาคร",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "แม่น้ำท่าจีนที่สะพานข้ามบางแม่หม้าย-บางเลน",
+      "station_code": "G09006-TA130209",
+      "province": "สุพรรณบุรี",
+      "district": "บางปลาม้า",
+      "lat": 14.296477,
+      "lon": 100.13867,
+      "rainfall_mm": 2.5,
+      "value_text": "2.5 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 49.59712003999628,
+      "nearest_estate": "นิคมอุตสาหกรรมบางปะอิน",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านนกเขาเปล้า",
+      "station_code": "STN1202",
+      "province": "ลพบุรี",
+      "district": "โคกสำโรง",
+      "lat": 15.017018,
+      "lon": 100.793065,
+      "rainfall_mm": 2.5,
+      "value_text": "2.5 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 49.37516196567731,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านเหล้า",
+      "station_code": "STN0707",
+      "province": "สงขลา",
+      "district": "เมืองสงขลา",
+      "lat": 7.129909,
+      "lon": 100.625486,
+      "rainfall_mm": 2.5,
+      "value_text": "2.5 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 32.287812728862335,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ทน."
     },
     {
       "kind": "rainfall",
@@ -6306,46 +6998,12 @@ window.IEAT_THAIWATER_DATA = {
       "district": "สะเดา",
       "lat": 6.756746,
       "lon": 100.533575,
-      "rainfall_mm": 2.0,
-      "value_text": "2 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "rainfall_mm": 2.5,
+      "value_text": "2.5 มม.",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 27.323322558783495,
-      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "เทศบาลตำบลหอไกร",
-      "station_code": "BMNK",
-      "province": "พิจิตร",
-      "district": "บางมูลนาก",
-      "lat": 16.04947,
-      "lon": 100.37354,
-      "rainfall_mm": 2.0,
-      "value_text": "2 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 49.34579668119612,
-      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านคอก-วังไทร",
-      "station_code": "STN0507",
-      "province": "สงขลา",
-      "district": "นาทวี",
-      "lat": 6.585939,
-      "lon": 100.672797,
-      "rainfall_mm": 2.0,
-      "value_text": "2 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 29.048769895702318,
       "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
       "agency": "ทน."
     },
@@ -6357,14 +7015,150 @@ window.IEAT_THAIWATER_DATA = {
       "district": "หาดใหญ่",
       "lat": 6.961809,
       "lon": 100.317857,
-      "rainfall_mm": 2.0,
-      "value_text": "2 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "rainfall_mm": 2.5,
+      "value_text": "2.5 มม.",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 6.9364122713410525,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านโคกทัง",
+      "station_code": "STN0134",
+      "province": "สงขลา",
+      "district": "นาหม่อม",
+      "lat": 6.981245,
+      "lon": 100.592958,
+      "rainfall_mm": 2.5,
+      "value_text": "2.5 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 25.90713751571804,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "อบต.เขาทอง",
+      "station_code": "BKDN",
+      "province": "นครสวรรค์",
+      "district": "พยุหะคีรี",
+      "lat": 15.5707,
+      "lon": 100.18319,
+      "rainfall_mm": 2.4,
+      "value_text": "2.4 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 43.77788461109181,
+      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ศาลาเอนกประสงค์ หมู่ 7",
+      "station_code": "TD99",
+      "province": "ราชบุรี",
+      "district": "บ้านคา",
+      "lat": 13.45788,
+      "lon": 99.44012,
+      "rainfall_mm": 2.4,
+      "value_text": "2.4 มม.",
+      "observed_at": "2026-10-14 02:50",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 48.59469414361081,
+      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
+      "agency": "ปภ."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านโกรกอีดก",
+      "station_code": "ONWR01",
+      "province": "สระบุรี",
+      "district": "แก่งคอย",
+      "lat": 14.4417,
+      "lon": 101.17281,
+      "rainfall_mm": 2.0,
+      "value_text": "2 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 26.983521249057052,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ชุมชนย่านยาวออก",
+      "station_code": "STN2211",
+      "province": "สงขลา",
+      "district": "หาดใหญ่",
+      "lat": 6.868006,
+      "lon": 100.456304,
+      "rainfall_mm": 2.0,
+      "value_text": "2 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 18.885850429897452,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านควนไม้ไผ่",
+      "station_code": "STN0212",
+      "province": "สงขลา",
+      "district": "จะนะ",
+      "lat": 6.919856,
+      "lon": 100.643306,
+      "rainfall_mm": 2.0,
+      "value_text": "2 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 32.798940702128306,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "สะพานสวนเฉลิมพระเกียรติ 72 พรรษามหาราชินี",
+      "station_code": "ONE038",
+      "province": "สงขลา",
+      "district": "สิงหนคร",
+      "lat": 7.182746,
+      "lon": 100.59448,
+      "rainfall_mm": 1.8,
+      "value_text": "1.8 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 32.35698288447142,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ลำตะคอง",
+      "station_code": "MOU263",
+      "province": "นครราชสีมา",
+      "district": "ปากช่อง",
+      "lat": 14.735245,
+      "lon": 101.3785,
+      "rainfall_mm": 1.8,
+      "value_text": "1.8 มม.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 41.696235786638894,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "พพภ"
     },
     {
       "kind": "rainfall",
@@ -6376,7 +7170,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.13227,
       "rainfall_mm": 1.8,
       "value_text": "1.8 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 30.878858104936317,
@@ -6385,19 +7179,121 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "บ้านควนไม้ไผ่",
-      "station_code": "STN0212",
-      "province": "สงขลา",
-      "district": "จะนะ",
-      "lat": 6.919856,
-      "lon": 100.643306,
-      "rainfall_mm": 1.5,
-      "value_text": "1.5 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "station": "สะพานคลองส่งน้ำชลประทาน บ้านตลาดใหม่",
+      "station_code": "HDA008",
+      "province": "อ่างทอง",
+      "district": "วิเศษชัยชาญ",
+      "lat": 14.553573,
+      "lon": 100.316765,
+      "rainfall_mm": 1.8,
+      "value_text": "1.8 มม.",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 32.798940702128306,
+      "distance_km": 30.86535432381292,
+      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "อบต.บึงสามพัน",
+      "station_code": "BSMP",
+      "province": "เพชรบูรณ์",
+      "district": "บึงสามพัน",
+      "lat": 15.77805,
+      "lon": 101.02094,
+      "rainfall_mm": 1.6,
+      "value_text": "1.6 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 48.89260098235917,
+      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ทต.ทุ่งทราย",
+      "station_code": "STWN",
+      "province": "กำแพงเพชร",
+      "district": "ทรายทองวัฒนา",
+      "lat": 16.29505,
+      "lon": 99.80898,
+      "rainfall_mm": 1.6,
+      "value_text": "1.6 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 47.81373867868995,
+      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "สะพานข้ามคลองบางม่วง",
+      "station_code": "ONE024",
+      "province": "พัทลุง",
+      "district": "ปากพะยูน",
+      "lat": 7.365284,
+      "lon": 100.27959,
+      "rainfall_mm": 1.6,
+      "value_text": "1.6 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 40.67365550525883,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "อบต.นาแขม",
+      "station_code": "VLGE50",
+      "province": "ปราจีนบุรี",
+      "district": "กบินทร์บุรี",
+      "lat": 14.04255,
+      "lon": 101.72051,
+      "rainfall_mm": 1.6,
+      "value_text": "1.6 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 16.82661524391665,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านซับสมบูรณ์",
+      "station_code": "STN1526",
+      "province": "นครสวรรค์",
+      "district": "ไพศาลี",
+      "lat": 15.566287,
+      "lon": 100.778566,
+      "rainfall_mm": 1.5,
+      "value_text": "1.5 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 23.12659666215714,
+      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ชุมชนเขาสามยอด (บ้านน้ำจั้น หมู่ 2)",
+      "station_code": "STN0674",
+      "province": "ลพบุรี",
+      "district": "เมืองลพบุรี",
+      "lat": 14.825584,
+      "lon": 100.69195,
+      "rainfall_mm": 1.5,
+      "value_text": "1.5 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 38.79532822696729,
+      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
       "agency": "ทน."
     },
     {
@@ -6410,28 +7306,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 103.22793,
       "rainfall_mm": 1.5,
       "value_text": "1.5 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 37.6138502228682,
       "nearest_estate": "นิคมอุตสาหกรรมอุดรธานี",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านบ่อต้นแซะ",
-      "station_code": "STN2058",
-      "province": "สงขลา",
-      "district": "จะนะ",
-      "lat": 6.897362,
-      "lon": 100.77132,
-      "rainfall_mm": 1.5,
-      "value_text": "1.5 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 47.06590911252587,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "ทน."
     },
     {
@@ -6444,11 +7323,28 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.95975,
       "rainfall_mm": 1.4,
       "value_text": "1.4 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 46.06728169191569,
       "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "อบต.บางครก",
+      "station_code": "BNPK",
+      "province": "เพชรบุรี",
+      "district": "บ้านแหลม",
+      "lat": 13.19867,
+      "lon": 99.95052,
+      "rainfall_mm": 1.2,
+      "value_text": "1.2 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 46.68430691375189,
+      "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
       "agency": "สสน."
     },
     {
@@ -6461,7 +7357,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 103.02154,
       "rainfall_mm": 1.2,
       "value_text": "1.2 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 29.466774895498872,
@@ -6470,54 +7366,20 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "หน่วยพิทักษ์ป่าเขาช่องลม",
-      "station_code": "MOU120",
-      "province": "ชลบุรี",
-      "district": "ศรีราชา",
-      "lat": 13.157225,
-      "lon": 101.11463,
-      "rainfall_mm": 1.2,
-      "value_text": "1.2 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "station": "คลองส้ม",
+      "station_code": "ridtele_TS.23",
+      "province": "ลพบุรี",
+      "district": "พัฒนานิคม",
+      "lat": 14.822028,
+      "lon": 101.014594,
+      "rainfall_mm": 1.0,
+      "value_text": "1 มม.",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 5.8525868457705155,
-      "nearest_estate": "นิคมอุตสาหกรรมดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 2",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "ที่ทำการอุทยานแห่งชาติเขาน้ำค้าง",
-      "station_code": "MOU138",
-      "province": "สงขลา",
-      "district": "สะเดา",
-      "lat": 6.600056,
-      "lon": 100.58906,
-      "rainfall_mm": 1.2,
-      "value_text": "1.2 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 20.43381666900714,
-      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "อบต.บางครก",
-      "station_code": "BNPK",
-      "province": "เพชรบุรี",
-      "district": "บ้านแหลม",
-      "lat": 13.19867,
-      "lon": 99.95052,
-      "rainfall_mm": 1.2,
-      "value_text": "1.2 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 46.68430691375189,
-      "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
-      "agency": "สสน."
+      "distance_km": 21.958961752754117,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "ชป."
     },
     {
       "kind": "rainfall",
@@ -6529,7 +7391,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.27105,
       "rainfall_mm": 1.0,
       "value_text": "1 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 8.434061928226125,
@@ -6538,20 +7400,207 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "บ้านคลองบน",
-      "station_code": "STN1187",
-      "province": "เพชรบูรณ์",
-      "district": "ชนแดน",
-      "lat": 15.931117,
-      "lon": 100.829141,
+      "station": "หน่วยพิทักษ์ป่าเขาช่องลม",
+      "station_code": "MOU120",
+      "province": "ชลบุรี",
+      "district": "ศรีราชา",
+      "lat": 13.157225,
+      "lon": 101.11463,
       "rainfall_mm": 1.0,
       "value_text": "1 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 40.55859634773667,
-      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
+      "distance_km": 5.8525868457705155,
+      "nearest_estate": "นิคมอุตสาหกรรมดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 2",
+      "agency": "พพภ"
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านปาดังเบซาร์",
+      "station_code": "STN0581",
+      "province": "สงขลา",
+      "district": "สะเดา",
+      "lat": 6.665852,
+      "lon": 100.318786,
+      "rainfall_mm": 1.0,
+      "value_text": "1 มม.",
+      "observed_at": "2026-10-14 01:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 17.31500625009662,
+      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
       "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "อบต.กำแพงแสน",
+      "station_code": "KSKP",
+      "province": "นครปฐม",
+      "district": "กำแพงแสน",
+      "lat": 14.00326,
+      "lon": 99.98091,
+      "rainfall_mm": 1.0,
+      "value_text": "1 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 43.07779839285101,
+      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านหนองเอี่ยวใน",
+      "station_code": "STN0947",
+      "province": "สระบุรี",
+      "district": "มวกเหล็ก",
+      "lat": 14.900096,
+      "lon": 101.321716,
+      "rainfall_mm": 1.0,
+      "value_text": "1 มม.",
+      "observed_at": "2026-10-14 01:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 45.55428562754781,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "หน่วยพิทักษ์ป่าอ่าวท่ายาง",
+      "station_code": "MOU135",
+      "province": "พัทลุง",
+      "district": "ปากพะยูน",
+      "lat": 7.42019,
+      "lon": 100.33263,
+      "rainfall_mm": 1.0,
+      "value_text": "1 มม.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 45.90254768279872,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "พพภ"
+    },
+    {
+      "kind": "rainfall",
+      "station": "ศรีมหาโพธิ์",
+      "station_code": "ridtele_TKgt62",
+      "province": "ปราจีนบุรี",
+      "district": "ศรีมหาโพธิ",
+      "lat": 13.973075,
+      "lon": 101.512525,
+      "rainfall_mm": 1.0,
+      "value_text": "1 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 16.878766058468745,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
+      "agency": "ชป."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านเขาเลื่อมใต้",
+      "station_code": "STN0998",
+      "province": "สระแก้ว",
+      "district": "คลองหาด",
+      "lat": 13.406297,
+      "lon": 102.304654,
+      "rainfall_mm": 1.0,
+      "value_text": "1 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 44.467051064439985,
+      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "คลองตะโหมด (ท่าเชียด)",
+      "station_code": "G09006-TA200206",
+      "province": "พัทลุง",
+      "district": "ตะโหมด",
+      "lat": 7.338375,
+      "lon": 100.10986,
+      "rainfall_mm": 1.0,
+      "value_text": "1 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 45.91079372313541,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ศรีมหาโพธิ (KGT6)",
+      "station_code": "PRC005",
+      "province": "ปราจีนบุรี",
+      "district": "ศรีมหาโพธิ",
+      "lat": 13.97348,
+      "lon": 101.51751,
+      "rainfall_mm": 1.0,
+      "value_text": "1 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 16.418025616363693,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "สะพานข้ามคลองโพล้ที่เขาชะเมา",
+      "station_code": "G09006-TA170403",
+      "province": "ระยอง",
+      "district": "เขาชะเมา",
+      "lat": 12.98786,
+      "lon": 101.66553,
+      "rainfall_mm": 1.0,
+      "value_text": "1 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 33.869063022073256,
+      "nearest_estate": "นิคมอุตสาหกรรมยามาโตะ อินดัสทรีส์",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "เขตอุตสาหกรรมกบินทร์บุรี",
+      "station_code": "KIZ001",
+      "province": "ปราจีนบุรี",
+      "district": "กบินทร์บุรี",
+      "lat": 14.072372,
+      "lon": 101.837494,
+      "rainfall_mm": 1.0,
+      "value_text": "1 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 13.03761805796871,
+      "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ฝายท่าเชียด",
+      "station_code": "ridtele_TX21A",
+      "province": "พัทลุง",
+      "district": "บางแก้ว",
+      "lat": 7.361018,
+      "lon": 100.1085,
+      "rainfall_mm": 1.0,
+      "value_text": "1 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 48.03374283041742,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ชป."
     },
     {
       "kind": "rainfall",
@@ -6563,7 +7612,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.377483,
       "rainfall_mm": 1.0,
       "value_text": "1 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 24.020798806607928,
@@ -6580,165 +7629,12 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.501103,
       "rainfall_mm": 1.0,
       "value_text": "1 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 7.282739229159408,
       "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
       "agency": "ชป."
-    },
-    {
-      "kind": "rainfall",
-      "station": "โรงเรียนบ้านลาดใหญ่สามัคคี",
-      "station_code": "ridtele_TK.74",
-      "province": "สมุทรสงคราม",
-      "district": "เมืองสมุทรสงคราม",
-      "lat": 13.482,
-      "lon": 100.044,
-      "rainfall_mm": 1.0,
-      "value_text": "1 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 18.023939117114256,
-      "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
-      "agency": "ชป."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านหินแด้น",
-      "station_code": "STN0053",
-      "province": "กาญจนบุรี",
-      "district": "ด่านมะขามเตี้ย",
-      "lat": 13.780584,
-      "lon": 99.420933,
-      "rainfall_mm": 1.0,
-      "value_text": "1 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 49.01515188945304,
-      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านปาดังเบซาร์",
-      "station_code": "STN0581",
-      "province": "สงขลา",
-      "district": "สะเดา",
-      "lat": 6.665852,
-      "lon": 100.318786,
-      "rainfall_mm": 1.0,
-      "value_text": "1 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 17.31500625009662,
-      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านหูแร่",
-      "station_code": "STN1025",
-      "province": "สงขลา",
-      "district": "หาดใหญ่",
-      "lat": 6.982842,
-      "lon": 100.328587,
-      "rainfall_mm": 1.0,
-      "value_text": "1 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 4.456427249901711,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านโคกทัง",
-      "station_code": "STN0134",
-      "province": "สงขลา",
-      "district": "นาหม่อม",
-      "lat": 6.981245,
-      "lon": 100.592958,
-      "rainfall_mm": 1.0,
-      "value_text": "1 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 25.90713751571804,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "สะพานข้ามคลองโพล้ที่เขาชะเมา",
-      "station_code": "G09006-TA170403",
-      "province": "ระยอง",
-      "district": "เขาชะเมา",
-      "lat": 12.98786,
-      "lon": 101.66553,
-      "rainfall_mm": 1.0,
-      "value_text": "1 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 33.869063022073256,
-      "nearest_estate": "นิคมอุตสาหกรรมยามาโตะ อินดัสทรีส์",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านเขาเลื่อมใต้",
-      "station_code": "STN0998",
-      "province": "สระแก้ว",
-      "district": "คลองหาด",
-      "lat": 13.406297,
-      "lon": 102.304654,
-      "rainfall_mm": 1.0,
-      "value_text": "1 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 44.467051064439985,
-      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "สะพานเฉลิมพระเกียรติ ร.9 72 พรรษา",
-      "station_code": "G09006-TA092306",
-      "province": "พิจิตร",
-      "district": "บางมูลนาก",
-      "lat": 16.009518,
-      "lon": 100.368865,
-      "rainfall_mm": 1.0,
-      "value_text": "1 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 45.68055542967016,
-      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "โรงเรียนกำแพงแสนวิทยา",
-      "station_code": "G09006-TA130212",
-      "province": "นครปฐม",
-      "district": "กำแพงแสน",
-      "lat": 13.983065,
-      "lon": 99.997337,
-      "rainfall_mm": 1.0,
-      "value_text": "1 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 41.608667133478676,
-      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
-      "agency": "ทน."
     },
     {
       "kind": "rainfall",
@@ -6748,9 +7644,9 @@ window.IEAT_THAIWATER_DATA = {
       "district": "หนองบัว",
       "lat": 15.87077,
       "lon": 100.59734,
-      "rainfall_mm": 1.0,
-      "value_text": "1 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "rainfall_mm": 0.8,
+      "value_text": "0.8 มม.",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 24.160641045515042,
@@ -6767,28 +7663,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.66171,
       "rainfall_mm": 0.8,
       "value_text": "0.8 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 30.90814625497235,
       "nearest_estate": "นิคมอุตสาหกรรมยามาโตะ อินดัสทรีส์",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "อบต.กำแพงแสน",
-      "station_code": "KSKP",
-      "province": "นครปฐม",
-      "district": "กำแพงแสน",
-      "lat": 14.00326,
-      "lon": 99.98091,
-      "rainfall_mm": 0.8,
-      "value_text": "0.8 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 43.07779839285101,
-      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
       "agency": "สสน."
     },
     {
@@ -6801,12 +7680,29 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.21149,
       "rainfall_mm": 0.8,
       "value_text": "0.8 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 44.95593032816644,
       "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
       "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "สะพานเจริญราษฎร์รังสรรค์",
+      "station_code": "MOU463",
+      "province": "ปราจีนบุรี",
+      "district": "นาดี",
+      "lat": 14.067594,
+      "lon": 101.75532,
+      "rainfall_mm": 0.8,
+      "value_text": "0.8 มม.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 17.53868284110217,
+      "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
+      "agency": "พพภ"
     },
     {
       "kind": "rainfall",
@@ -6818,7 +7714,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.72454,
       "rainfall_mm": 0.8,
       "value_text": "0.8 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 35.65416268665123,
@@ -6827,54 +7723,37 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "สะพานคลองส่งน้ำชลประทาน บ้านตลาดใหม่",
-      "station_code": "HDA008",
-      "province": "อ่างทอง",
-      "district": "วิเศษชัยชาญ",
-      "lat": 14.553573,
-      "lon": 100.316765,
-      "rainfall_mm": 0.6,
-      "value_text": "0.6 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "station": "หน่วยพิทักษ์ป่าแม่ทา",
+      "station_code": "MOU260",
+      "province": "ลำพูน",
+      "district": "แม่ทา",
+      "lat": 18.43999,
+      "lon": 99.14778,
+      "rainfall_mm": 0.8,
+      "value_text": "0.8 มม.",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 30.86535432381292,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "คลองพรหมโหด",
-      "station_code": "SKE003",
-      "province": "สระแก้ว",
-      "district": "อรัญประเทศ",
-      "lat": 13.705864,
-      "lon": 102.48168,
-      "rainfall_mm": 0.6,
-      "value_text": "0.6 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 8.131766068445735,
-      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ห้วยหลวง",
-      "station_code": "MOU092",
-      "province": "อุดรธานี",
-      "district": "หนองวัวซอ",
-      "lat": 17.078602,
-      "lon": 102.56056,
-      "rainfall_mm": 0.6,
-      "value_text": "0.6 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 41.49910624458178,
-      "nearest_estate": "นิคมอุตสาหกรรมอุดรธานี",
+      "distance_km": 20.062517576185186,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
       "agency": "พพภ"
+    },
+    {
+      "kind": "rainfall",
+      "station": "นครปฐม",
+      "station_code": "48451",
+      "province": "นครปฐม",
+      "district": "กำแพงแสน",
+      "lat": 14.01167,
+      "lon": 99.97,
+      "rainfall_mm": 0.6,
+      "value_text": "0.6 มม.",
+      "observed_at": "2026-10-14 01:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 43.5977605723089,
+      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
+      "agency": "อต."
     },
     {
       "kind": "rainfall",
@@ -6886,7 +7765,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 103.00368,
       "rainfall_mm": 0.6,
       "value_text": "0.6 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 17.05224532059065,
@@ -6903,12 +7782,148 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.50417,
       "rainfall_mm": 0.6,
       "value_text": "0.6 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 6.711485933246703,
       "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
       "agency": "อต."
+    },
+    {
+      "kind": "rainfall",
+      "station": "คลองพรหมโหด",
+      "station_code": "SKE003",
+      "province": "สระแก้ว",
+      "district": "อรัญประเทศ",
+      "lat": 13.705864,
+      "lon": 102.48168,
+      "rainfall_mm": 0.6,
+      "value_text": "0.6 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 8.131766068445735,
+      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ห้วยหลวง",
+      "station_code": "MOU092",
+      "province": "อุดรธานี",
+      "district": "หนองวัวซอ",
+      "lat": 17.078602,
+      "lon": 102.56056,
+      "rainfall_mm": 0.6,
+      "value_text": "0.6 มม.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 41.49910624458178,
+      "nearest_estate": "นิคมอุตสาหกรรมอุดรธานี",
+      "agency": "พพภ"
+    },
+    {
+      "kind": "rainfall",
+      "station": "สะพานน้ำลำตะคอง",
+      "station_code": "MOU246",
+      "province": "นครราชสีมา",
+      "district": "ปากช่อง",
+      "lat": 14.550208,
+      "lon": 101.459465,
+      "rainfall_mm": 0.6,
+      "value_text": "0.6 มม.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 49.271067024949225,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "พพภ"
+    },
+    {
+      "kind": "rainfall",
+      "station": "สะพานน้ำลพบุรี บ้านโพธิ์เก้าต้น",
+      "station_code": "HDA010",
+      "province": "ลพบุรี",
+      "district": "เมืองลพบุรี",
+      "lat": 14.794374,
+      "lon": 100.60633,
+      "rainfall_mm": 0.6,
+      "value_text": "0.6 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 33.9375086711988,
+      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "คลองภาษีเจริญ เพชรเกษม69",
+      "station_code": "BKK005",
+      "province": "กรุงเทพมหานคร",
+      "district": "บางแค",
+      "lat": 13.69158,
+      "lon": 100.38127,
+      "rainfall_mm": 0.6,
+      "value_text": "0.6 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 16.633474059900415,
+      "nearest_estate": "นิคมอุตสาหกรรมสินสาคร",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "โรงเรียนบ้านหินเทิน",
+      "station_code": "ONE071",
+      "province": "ปราจีนบุรี",
+      "district": "นาดี",
+      "lat": 14.064819,
+      "lon": 102.01052,
+      "rainfall_mm": 0.6,
+      "value_text": "0.6 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 18.625413383813196,
+      "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "รพสต.บ้านโคกอุดม",
+      "station_code": "MKKB",
+      "province": "ปราจีนบุรี",
+      "district": "กบินทร์บุรี",
+      "lat": 14.06948,
+      "lon": 101.80991,
+      "rainfall_mm": 0.6,
+      "value_text": "0.6 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 13.968176524129444,
+      "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "อบต.วังม่วง",
+      "station_code": "WGYG",
+      "province": "สระบุรี",
+      "district": "วังม่วง",
+      "lat": 14.84867,
+      "lon": 101.14549,
+      "rainfall_mm": 0.6,
+      "value_text": "0.6 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 28.961853274234922,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -6920,80 +7935,12 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.13795,
       "rainfall_mm": 0.6,
       "value_text": "0.6 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 40.381114432933025,
       "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
       "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "ชุมชนย่านยาวออก",
-      "station_code": "STN2211",
-      "province": "สงขลา",
-      "district": "หาดใหญ่",
-      "lat": 6.868006,
-      "lon": 100.456304,
-      "rainfall_mm": 0.5,
-      "value_text": "0.5 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 18.885850429897452,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านหนองโก",
-      "station_code": "STN0693",
-      "province": "ราชบุรี",
-      "district": "บ้านคา",
-      "lat": 13.427751,
-      "lon": 99.49674,
-      "rainfall_mm": 0.5,
-      "value_text": "0.5 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 44.738842906492124,
-      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "สะพานข้ามแม่น้ำเพชรบุรีที่ อบต.บางครก",
-      "station_code": "G09006-TA180308",
-      "province": "เพชรบุรี",
-      "district": "บ้านแหลม",
-      "lat": 13.183788,
-      "lon": 99.949989,
-      "rainfall_mm": 0.5,
-      "value_text": "0.5 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 48.07969627879459,
-      "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านท่าโปร่ง",
-      "station_code": "STN2036",
-      "province": "พิษณุโลก",
-      "district": "วังทอง",
-      "lat": 16.835209,
-      "lon": 100.460953,
-      "rainfall_mm": 0.5,
-      "value_text": "0.5 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 44.0344717749169,
-      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
-      "agency": "ทน."
     },
     {
       "kind": "rainfall",
@@ -7005,96 +7952,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.465027,
       "rainfall_mm": 0.5,
       "value_text": "0.5 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 9.682767693819189,
       "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "สะพานข้ามคลองประแสร์ที่กระแสบน",
-      "station_code": "G09006-TA170404",
-      "province": "ระยอง",
-      "district": "แกลง",
-      "lat": 12.85044,
-      "lon": 101.63364,
-      "rainfall_mm": 0.5,
-      "value_text": "0.5 มม.",
-      "observed_at": "2026-10-13 18:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 23.635600815855664,
-      "nearest_estate": "นิคมอุตสาหกรรมหลักชัยเมืองยาง",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านคลองมะนาว",
-      "station_code": "STN1586",
-      "province": "สระแก้ว",
-      "district": "วัฒนานคร",
-      "lat": 13.635338,
-      "lon": 102.280666,
-      "rainfall_mm": 0.5,
-      "value_text": "0.5 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 31.194588131796827,
-      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านพรุเตาะนอก",
-      "station_code": "STN0580",
-      "province": "สงขลา",
-      "district": "หาดใหญ่",
-      "lat": 7.040102,
-      "lon": 100.536696,
-      "rainfall_mm": 0.5,
-      "value_text": "0.5 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 19.84017165230821,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านนาวัง",
-      "station_code": "STN1654",
-      "province": "ชลบุรี",
-      "district": "บางละมุง",
-      "lat": 12.998358,
-      "lon": 101.005843,
-      "rainfall_mm": 0.5,
-      "value_text": "0.5 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 4.582213245492624,
-      "nearest_estate": "นิคมอุตสาหกรรมโรจนะแหลมฉบัง",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านทับไฮ",
-      "station_code": "STN1899",
-      "province": "อุดรธานี",
-      "district": "หนองแสง",
-      "lat": 17.108731,
-      "lon": 102.771099,
-      "rainfall_mm": 0.5,
-      "value_text": "0.5 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 24.043260588859773,
-      "nearest_estate": "นิคมอุตสาหกรรมอุดรธานี",
       "agency": "ทน."
     },
     {
@@ -7107,11 +7969,130 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.533205,
       "rainfall_mm": 0.5,
       "value_text": "0.5 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 36.926963502623934,
       "nearest_estate": "นิคมอุตสาหกรรมอุดรธานี",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านทับไฮ",
+      "station_code": "STN1899",
+      "province": "อุดรธานี",
+      "district": "หนองแสง",
+      "lat": 17.108731,
+      "lon": 102.771099,
+      "rainfall_mm": 0.5,
+      "value_text": "0.5 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 24.043260588859773,
+      "nearest_estate": "นิคมอุตสาหกรรมอุดรธานี",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านพรุเตาะนอก",
+      "station_code": "STN0580",
+      "province": "สงขลา",
+      "district": "หาดใหญ่",
+      "lat": 7.040102,
+      "lon": 100.536696,
+      "rainfall_mm": 0.5,
+      "value_text": "0.5 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 19.84017165230821,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านตะเภาลาย",
+      "station_code": "ridtele_TKgt53",
+      "province": "ปราจีนบุรี",
+      "district": "บ้านสร้าง",
+      "lat": 14.012733,
+      "lon": 101.265193,
+      "rainfall_mm": 0.5,
+      "value_text": "0.5 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 43.48505998336849,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
+      "agency": "ชป."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านคลองมะนาว",
+      "station_code": "STN1586",
+      "province": "สระแก้ว",
+      "district": "วัฒนานคร",
+      "lat": 13.635338,
+      "lon": 102.280666,
+      "rainfall_mm": 0.5,
+      "value_text": "0.5 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 31.194588131796827,
+      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านควนเสม็ด",
+      "station_code": "STN1595",
+      "province": "สงขลา",
+      "district": "สะเดา",
+      "lat": 6.695564,
+      "lon": 100.521218,
+      "rainfall_mm": 0.5,
+      "value_text": "0.5 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 20.819030100615226,
+      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ชุมชนวังปาตอง",
+      "station_code": "STN2205",
+      "province": "สระแก้ว",
+      "district": "อรัญประเทศ",
+      "lat": 13.682056,
+      "lon": 102.504417,
+      "rainfall_mm": 0.5,
+      "value_text": "0.5 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 7.146651614165659,
+      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านนาวัง",
+      "station_code": "STN1654",
+      "province": "ชลบุรี",
+      "district": "บางละมุง",
+      "lat": 12.998358,
+      "lon": 101.005843,
+      "rainfall_mm": 0.5,
+      "value_text": "0.5 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 4.582213245492624,
+      "nearest_estate": "นิคมอุตสาหกรรมโรจนะแหลมฉบัง",
       "agency": "ทน."
     },
     {
@@ -7124,45 +8105,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.734254,
       "rainfall_mm": 0.5,
       "value_text": "0.5 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 37.219863971960265,
       "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านเขาขุยพัฒนา",
-      "station_code": "STN1185",
-      "province": "ลพบุรี",
-      "district": "โคกเจริญ",
-      "lat": 15.528146,
-      "lon": 100.843028,
-      "rainfall_mm": 0.5,
-      "value_text": "0.5 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 31.190801822103584,
-      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "โรงเรียนบ้านวังอีแอ่น",
-      "station_code": "G09006-TA170601",
-      "province": "จันทบุรี",
-      "district": "แก่งหางแมว",
-      "lat": 13.06033,
-      "lon": 101.82522,
-      "rainfall_mm": 0.5,
-      "value_text": "0.5 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 47.174176487414485,
-      "nearest_estate": "นิคมอุตสาหกรรมยามาโตะ อินดัสทรีส์",
       "agency": "ทน."
     },
     {
@@ -7175,10 +8122,44 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.726321,
       "rainfall_mm": 0.5,
       "value_text": "0.5 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 30.05298427696326,
+      "nearest_estate": "นิคมอุตสาหกรรมหลักชัยเมืองยาง",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "สะพานข้ามแม่น้ำเพชรบุรีที่ อบต.บางครก",
+      "station_code": "G09006-TA180308",
+      "province": "เพชรบุรี",
+      "district": "บ้านแหลม",
+      "lat": 13.183788,
+      "lon": 99.949989,
+      "rainfall_mm": 0.5,
+      "value_text": "0.5 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 48.07969627879459,
+      "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "สะพานข้ามคลองประแสร์ที่กระแสบน",
+      "station_code": "G09006-TA170404",
+      "province": "ระยอง",
+      "district": "แกลง",
+      "lat": 12.85044,
+      "lon": 101.63364,
+      "rainfall_mm": 0.5,
+      "value_text": "0.5 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 23.635600815855664,
       "nearest_estate": "นิคมอุตสาหกรรมหลักชัยเมืองยาง",
       "agency": "ทน."
     },
@@ -7192,7 +8173,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.10499,
       "rainfall_mm": 0.5,
       "value_text": "0.5 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 21.820722626583926,
@@ -7201,36 +8182,53 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "ชุมชนวังปาตอง",
-      "station_code": "STN2205",
-      "province": "สระแก้ว",
-      "district": "อรัญประเทศ",
-      "lat": 13.682056,
-      "lon": 102.504417,
+      "station": "โรงเรียนบ้านวังอีแอ่น",
+      "station_code": "G09006-TA170601",
+      "province": "จันทบุรี",
+      "district": "แก่งหางแมว",
+      "lat": 13.06033,
+      "lon": 101.82522,
       "rainfall_mm": 0.5,
       "value_text": "0.5 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 7.146651614165659,
-      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
+      "distance_km": 47.174176487414485,
+      "nearest_estate": "นิคมอุตสาหกรรมยามาโตะ อินดัสทรีส์",
       "agency": "ทน."
     },
     {
       "kind": "rainfall",
-      "station": "รพ.สต.บ้านชากหมาก",
-      "station_code": "ONE090",
-      "province": "ระยอง",
-      "district": "บ้านฉาง",
-      "lat": 12.796795,
-      "lon": 101.027664,
+      "station": "อบต.ขนงพระ",
+      "station_code": "TLPC",
+      "province": "นครราชสีมา",
+      "district": "ปากช่อง",
+      "lat": 14.60689,
+      "lon": 101.45632,
       "rainfall_mm": 0.4,
       "value_text": "0.4 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 12.106499164490682,
-      "nearest_estate": "นิคมอุตสาหกรรมสมาร์ท ปาร์ค",
+      "distance_km": 48.26659989385583,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ชุมแสง",
+      "station_code": "NAN008",
+      "province": "นครสวรรค์",
+      "district": "ชุมแสง",
+      "lat": 15.86923,
+      "lon": 100.26481,
+      "rainfall_mm": 0.4,
+      "value_text": "0.4 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 41.6003120453232,
+      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
       "agency": "สสน."
     },
     {
@@ -7243,63 +8241,12 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.94509,
       "rainfall_mm": 0.4,
       "value_text": "0.4 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 26.711193739908897,
       "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
       "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "อบต.นายายอาม",
-      "station_code": "MMNY",
-      "province": "จันทบุรี",
-      "district": "นายายอาม",
-      "lat": 12.77083,
-      "lon": 101.85303,
-      "rainfall_mm": 0.4,
-      "value_text": "0.4 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 43.337182080568624,
-      "nearest_estate": "นิคมอุตสาหกรรมหลักชัยเมืองยาง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ป่าต้นน้ำคลองมะเดื่อ อช.เขาใหญ่ (นางรอง)",
-      "station_code": "ONWR02",
-      "province": "นครนายก",
-      "district": "เมืองนครนายก",
-      "lat": 14.3693,
-      "lon": 101.2712,
-      "rainfall_mm": 0.4,
-      "value_text": "0.4 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 39.64308020943391,
-      "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "หน่วยพิทักษ์ป่าแม่ทา",
-      "station_code": "MOU260",
-      "province": "ลำพูน",
-      "district": "แม่ทา",
-      "lat": 18.43999,
-      "lon": 99.14778,
-      "rainfall_mm": 0.4,
-      "value_text": "0.4 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 20.062517576185186,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
-      "agency": "พพภ"
     },
     {
       "kind": "rainfall",
@@ -7311,12 +8258,63 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.69399,
       "rainfall_mm": 0.4,
       "value_text": "0.4 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 24.86109395066772,
       "nearest_estate": "นิคมอุตสาหกรรมอุดรธานี",
       "agency": "พพภ"
+    },
+    {
+      "kind": "rainfall",
+      "station": "สมุทรสงคราม",
+      "station_code": "48438",
+      "province": "สมุทรสงคราม",
+      "district": "เมืองสมุทรสงคราม",
+      "lat": 13.40778,
+      "lon": 100.03222,
+      "rainfall_mm": 0.4,
+      "value_text": "0.4 มม.",
+      "observed_at": "2026-10-14 01:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 23.39908310017906,
+      "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
+      "agency": "อต."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ตะพานหิน",
+      "station_code": "NAN007",
+      "province": "พิจิตร",
+      "district": "ตะพานหิน",
+      "lat": 16.27034,
+      "lon": 100.41396,
+      "rainfall_mm": 0.4,
+      "value_text": "0.4 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 44.15118819719544,
+      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ปตร.ปลายคลองบางซอ (ทุ่งเจ้าเจ็ด)",
+      "station_code": "TCP002",
+      "province": "สุพรรณบุรี",
+      "district": "สองพี่น้อง",
+      "lat": 14.194874,
+      "lon": 100.13267,
+      "rainfall_mm": 0.4,
+      "value_text": "0.4 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 49.28443791048643,
+      "nearest_estate": "นิคมอุตสาหกรรมบางปะอิน",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -7328,7 +8326,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.97308,
       "rainfall_mm": 0.4,
       "value_text": "0.4 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 15.509787632138606,
@@ -7337,53 +8335,121 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "ตะพานหิน",
-      "station_code": "NAN007",
-      "province": "พิจิตร",
-      "district": "ตะพานหิน",
-      "lat": 16.27034,
-      "lon": 100.41396,
+      "station": "รพ.สต.บ้านชากหมาก",
+      "station_code": "ONE090",
+      "province": "ระยอง",
+      "district": "บ้านฉาง",
+      "lat": 12.796795,
+      "lon": 101.027664,
       "rainfall_mm": 0.2,
       "value_text": "0.2 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 44.15118819719544,
-      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
+      "distance_km": 12.106499164490682,
+      "nearest_estate": "นิคมอุตสาหกรรมสมาร์ท ปาร์ค",
       "agency": "สสน."
     },
     {
       "kind": "rainfall",
-      "station": "สะพานเดชาติวงศ์",
-      "station_code": "CPY001",
-      "province": "นครสวรรค์",
-      "district": "เมืองนครสวรรค์",
-      "lat": 15.68849,
-      "lon": 100.12381,
+      "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ทล.๑๑ (ไทยสามัคคี)",
+      "station_code": "MOU112",
+      "province": "นครราชสีมา",
+      "district": "วังน้ำเขียว",
+      "lat": 14.322821,
+      "lon": 101.93274,
       "rainfall_mm": 0.2,
       "value_text": "0.2 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 49.28308700895721,
+      "distance_km": 40.71665998706693,
+      "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
+      "agency": "พพภ"
+    },
+    {
+      "kind": "rainfall",
+      "station": "อบต.นายายอาม",
+      "station_code": "MMNY",
+      "province": "จันทบุรี",
+      "district": "นายายอาม",
+      "lat": 12.77083,
+      "lon": 101.85303,
+      "rainfall_mm": 0.2,
+      "value_text": "0.2 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 43.337182080568624,
+      "nearest_estate": "นิคมอุตสาหกรรมหลักชัยเมืองยาง",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "พิจิตร สกษ.",
+      "station_code": "48386",
+      "province": "พิจิตร",
+      "district": "เมืองพิจิตร",
+      "lat": 16.43806,
+      "lon": 100.2925,
+      "rainfall_mm": 0.2,
+      "value_text": "0.2 มม.",
+      "observed_at": "2026-10-14 01:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 21.617720214020938,
+      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
+      "agency": "อต."
+    },
+    {
+      "kind": "rainfall",
+      "station": "เทศบาลตำบลหอไกร",
+      "station_code": "BMNK",
+      "province": "พิจิตร",
+      "district": "บางมูลนาก",
+      "lat": 16.04947,
+      "lon": 100.37354,
+      "rainfall_mm": 0.2,
+      "value_text": "0.2 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 49.34579668119612,
       "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
       "agency": "สสน."
     },
     {
       "kind": "rainfall",
-      "station": "อบต.ปลวกแดง",
-      "station_code": "ONE091",
-      "province": "ระยอง",
-      "district": "ปลวกแดง",
-      "lat": 12.970066,
-      "lon": 101.20457,
+      "station": "จะนะ",
+      "station_code": "JNA001",
+      "province": "สงขลา",
+      "district": "จะนะ",
+      "lat": 6.916742,
+      "lon": 100.72962,
       "rainfall_mm": 0.2,
       "value_text": "0.2 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 5.943096814769784,
-      "nearest_estate": "นิคมอุตสาหกรรมอีสเทิร์นซีบอร์ด (ระยอง)",
+      "distance_km": 42.06762398773943,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "โพธิ์ประทับช้าง",
+      "station_code": "YOM009",
+      "province": "พิจิตร",
+      "district": "โพธิ์ประทับช้าง",
+      "lat": 16.31077,
+      "lon": 100.27173,
+      "rainfall_mm": 0.2,
+      "value_text": "0.2 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 32.2038263788759,
+      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
       "agency": "สสน."
     },
     {
@@ -7396,114 +8462,12 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.79713,
       "rainfall_mm": 0.2,
       "value_text": "0.2 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 21.725608707789945,
       "nearest_estate": "นิคมอุตสาหกรรมอุดรธานี",
       "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "อ่างเก็บน้ำห้วยไคร้",
-      "station_code": "RES012",
-      "province": "ลำพูน",
-      "district": "แม่ทา",
-      "lat": 18.50746,
-      "lon": 99.22739,
-      "rainfall_mm": 0.2,
-      "value_text": "0.2 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 21.40189804493517,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ทรบ. ปากคลองห้าวา (ทุ่งท่าวุ้ง)",
-      "station_code": "TCP010",
-      "province": "ลพบุรี",
-      "district": "เมืองลพบุรี",
-      "lat": 14.818599,
-      "lon": 100.576515,
-      "rainfall_mm": 0.2,
-      "value_text": "0.2 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 36.67026197358812,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "สำนักสงฆ์โสธรรมนิมิตร",
-      "station_code": "ONE064",
-      "province": "ชลบุรี",
-      "district": "ศรีราชา",
-      "lat": 13.168441,
-      "lon": 101.03034,
-      "rainfall_mm": 0.2,
-      "value_text": "0.2 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 5.512657119107435,
-      "nearest_estate": "นิคมอุตสาหกรรมปิ่นทอง (โครงการ 2)",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "สมุทรสงคราม",
-      "station_code": "48438",
-      "province": "สมุทรสงคราม",
-      "district": "เมืองสมุทรสงคราม",
-      "lat": 13.40778,
-      "lon": 100.03222,
-      "rainfall_mm": 0.2,
-      "value_text": "0.2 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 23.39908310017906,
-      "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
-      "agency": "อต."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บางตะบูนและบางตะบูนออก",
-      "station_code": "GLF003",
-      "province": "เพชรบุรี",
-      "district": "บ้านแหลม",
-      "lat": 13.26553,
-      "lon": 99.9418,
-      "rainfall_mm": 0.2,
-      "value_text": "0.2 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 41.45314445360332,
-      "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "สระแก้ว",
-      "station_code": "48440",
-      "province": "สระแก้ว",
-      "district": "เมืองสระแก้ว",
-      "lat": 13.78889,
-      "lon": 102.03472,
-      "rainfall_mm": 0.2,
-      "value_text": "0.2 มม.",
-      "observed_at": "2026-10-13 19:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 25.74777170386582,
-      "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
-      "agency": "อต."
     },
     {
       "kind": "rainfall",
@@ -7515,7 +8479,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.06447,
       "rainfall_mm": 0.2,
       "value_text": "0.2 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 6.384441677806887,
@@ -7532,7 +8496,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.57162,
       "rainfall_mm": 0.2,
       "value_text": "0.2 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 23.488954741504234,
@@ -7541,36 +8505,206 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์คลองครก",
-      "station_code": "MOU480",
-      "province": "จันทบุรี",
-      "district": "แก่งหางแมว",
-      "lat": 13.1851,
-      "lon": 101.801,
+      "station": "บางตะบูนและบางตะบูนออก",
+      "station_code": "GLF003",
+      "province": "เพชรบุรี",
+      "district": "บ้านแหลม",
+      "lat": 13.26553,
+      "lon": 99.9418,
       "rainfall_mm": 0.2,
       "value_text": "0.2 มม.",
-      "observed_at": "2026-10-13 17:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 43.75867825012914,
-      "nearest_estate": "นิคมอุตสาหกรรมยามาโตะ อินดัสทรีส์",
+      "distance_km": 41.45314445360332,
+      "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "อ่างเก็บน้ำห้วยไคร้",
+      "station_code": "RES012",
+      "province": "ลำพูน",
+      "district": "แม่ทา",
+      "lat": 18.50746,
+      "lon": 99.22739,
+      "rainfall_mm": 0.2,
+      "value_text": "0.2 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 21.40189804493517,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "คลองมหาชัย วัดพันท้ายนรสิงห์",
+      "station_code": "BKK006",
+      "province": "สมุทรสาคร",
+      "district": "เมืองสมุทรสาคร",
+      "lat": 13.58184,
+      "lon": 100.36587,
+      "rainfall_mm": 0.2,
+      "value_text": "0.2 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 4.60388187720373,
+      "nearest_estate": "นิคมอุตสาหกรรมสินสาคร",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ศาลาดิน",
+      "station_code": "VLGE20",
+      "province": "นครปฐม",
+      "district": "พุทธมณฑล",
+      "lat": 13.80777,
+      "lon": 100.27417,
+      "rainfall_mm": 0.2,
+      "value_text": "0.2 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 29.667511489847108,
+      "nearest_estate": "นิคมอุตสาหกรรมสมุทรสาคร",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "สงขลา",
+      "station_code": "48568",
+      "province": "สงขลา",
+      "district": "เมืองสงขลา",
+      "lat": 7.18211,
+      "lon": 100.60769,
+      "rainfall_mm": 0.2,
+      "value_text": "0.2 มม.",
+      "observed_at": "2026-10-14 01:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 33.49404463391094,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "อต."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ชุมชนแม่ตาลน้อย",
+      "station_code": "VLGE28",
+      "province": "ลำปาง",
+      "district": "ห้างฉัตร",
+      "lat": 18.41521,
+      "lon": 99.26469,
+      "rainfall_mm": 0.2,
+      "value_text": "0.2 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 30.374606073549067,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ที่ทำการเขตรักษาพันธุ์สัตว์ป่าเขาเขียว-เขาชมภู่",
+      "station_code": "MOU482",
+      "province": "ชลบุรี",
+      "district": "ศรีราชา",
+      "lat": 13.240835,
+      "lon": 101.04208,
+      "rainfall_mm": 0.2,
+      "value_text": "0.2 มม.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 13.585106331078295,
+      "nearest_estate": "นิคมอุตสาหกรรมปิ่นทอง (โครงการ 2)",
       "agency": "พพภ"
     },
     {
       "kind": "rainfall",
-      "station": "คลองลาดพร้าว วัดบางบัว",
-      "station_code": "BKK021",
-      "province": "กรุงเทพมหานคร",
-      "district": "บางเขน",
-      "lat": 13.85402,
-      "lon": 100.58746,
+      "station": "สระแก้ว",
+      "station_code": "48440",
+      "province": "สระแก้ว",
+      "district": "เมืองสระแก้ว",
+      "lat": 13.78889,
+      "lon": 102.03472,
       "rainfall_mm": 0.2,
       "value_text": "0.2 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 13.837600556856398,
-      "nearest_estate": "นิคมอุตสาหกรรมบางชัน",
+      "distance_km": 25.74777170386582,
+      "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
+      "agency": "อต."
+    },
+    {
+      "kind": "rainfall",
+      "station": "อบต.ปลวกแดง",
+      "station_code": "ONE091",
+      "province": "ระยอง",
+      "district": "ปลวกแดง",
+      "lat": 12.970066,
+      "lon": 101.20457,
+      "rainfall_mm": 0.2,
+      "value_text": "0.2 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 5.943096814769784,
+      "nearest_estate": "นิคมอุตสาหกรรมอีสเทิร์นซีบอร์ด (ระยอง)",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "สนามบินสุวรรณภูมิ",
+      "station_code": "48429",
+      "province": "สมุทรปราการ",
+      "district": "บางพลี",
+      "lat": 13.68639,
+      "lon": 100.7675,
+      "rainfall_mm": 0.2,
+      "value_text": "0.2 มม.",
+      "observed_at": "2026-10-14 01:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 6.459434496401541,
+      "nearest_estate": "นิคมอุตสาหกรรมอัญธานี",
+      "agency": "อต."
+    },
+    {
+      "kind": "rainfall",
+      "station": "สะพานข้ามคลองบ้านท่าวัง",
+      "station_code": "PLG001",
+      "province": "พัทลุง",
+      "district": "บางแก้ว",
+      "lat": 7.37654,
+      "lon": 100.10043,
+      "rainfall_mm": 0.2,
+      "value_text": "0.2 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 49.95749858969102,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ปตร. คลองบางน้ำผึ้ง",
+      "station_code": "BKC006",
+      "province": "สมุทรปราการ",
+      "district": "พระประแดง",
+      "lat": 13.676648,
+      "lon": 100.58207,
+      "rainfall_mm": 0.2,
+      "value_text": "0.2 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 13.614992020981914,
+      "nearest_estate": "นิคมอุตสาหกรรมอัญธานี",
       "agency": "สสน."
     },
     {
@@ -7592,172 +8726,70 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "ชุมชนแม่ตาลน้อย",
-      "station_code": "VLGE28",
-      "province": "ลำปาง",
-      "district": "ห้างฉัตร",
-      "lat": 18.41521,
-      "lon": 99.26469,
+      "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์คลองครก",
+      "station_code": "MOU480",
+      "province": "จันทบุรี",
+      "district": "แก่งหางแมว",
+      "lat": 13.1851,
+      "lon": 101.801,
       "rainfall_mm": 0.2,
       "value_text": "0.2 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-13 17:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 30.374606073549067,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ปตร. คลองบางน้ำผึ้ง",
-      "station_code": "BKC006",
-      "province": "สมุทรปราการ",
-      "district": "พระประแดง",
-      "lat": 13.676648,
-      "lon": 100.58207,
-      "rainfall_mm": 0.2,
-      "value_text": "0.2 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 13.614992020981914,
-      "nearest_estate": "นิคมอุตสาหกรรมอัญธานี",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ที่ทำการเขตรักษาพันธุ์สัตว์ป่าเขาเขียว-เขาชมภู่",
-      "station_code": "MOU482",
-      "province": "ชลบุรี",
-      "district": "ศรีราชา",
-      "lat": 13.240835,
-      "lon": 101.04208,
-      "rainfall_mm": 0.2,
-      "value_text": "0.2 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 13.585106331078295,
-      "nearest_estate": "นิคมอุตสาหกรรมปิ่นทอง (โครงการ 2)",
+      "distance_km": 43.75867825012914,
+      "nearest_estate": "นิคมอุตสาหกรรมยามาโตะ อินดัสทรีส์",
       "agency": "พพภ"
     },
     {
       "kind": "rainfall",
-      "station": "หน่วยพิทักษ์ป่าอ่างช้างน้ำ",
-      "station_code": "MOU468",
-      "province": "ชลบุรี",
-      "district": "บ้านบึง",
-      "lat": 13.2743,
-      "lon": 101.082,
+      "station": "สะพานเดชาติวงศ์",
+      "station_code": "CPY001",
+      "province": "นครสวรรค์",
+      "district": "เมืองนครสวรรค์",
+      "lat": 15.68849,
+      "lon": 100.12381,
       "rainfall_mm": 0.2,
       "value_text": "0.2 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 17.65685867509546,
-      "nearest_estate": "นิคมอุตสาหกรรมบ้านบึง",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "พิจิตร สกษ.",
-      "station_code": "48386",
-      "province": "พิจิตร",
-      "district": "เมืองพิจิตร",
-      "lat": 16.43806,
-      "lon": 100.2925,
-      "rainfall_mm": 0.2,
-      "value_text": "0.2 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 21.617720214020938,
-      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
-      "agency": "อต."
-    },
-    {
-      "kind": "rainfall",
-      "station": "สะเดา",
-      "station_code": "SLA003",
-      "province": "สงขลา",
-      "district": "สะเดา",
-      "lat": 6.796687,
-      "lon": 100.44239,
-      "rainfall_mm": 0.2,
-      "value_text": "0.2 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 25.230396811100928,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "distance_km": 49.28308700895721,
+      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
       "agency": "สสน."
     },
     {
       "kind": "rainfall",
-      "station": "จะนะ",
-      "station_code": "JNA001",
-      "province": "สงขลา",
-      "district": "จะนะ",
-      "lat": 6.916742,
-      "lon": 100.72962,
+      "station": "อ่างเก็บน้ำห้วยส้ม",
+      "station_code": "TBW035",
+      "province": "ลพบุรี",
+      "district": "เมืองลพบุรี",
+      "lat": 14.865248,
+      "lon": 100.861244,
       "rainfall_mm": 0.2,
       "value_text": "0.2 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 42.06762398773943,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "distance_km": 31.067160264056348,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
       "agency": "สสน."
     },
     {
       "kind": "rainfall",
-      "station": "สะพานข้ามคลองบ้านท่าวัง",
-      "station_code": "PLG001",
-      "province": "พัทลุง",
-      "district": "บางแก้ว",
-      "lat": 7.37654,
-      "lon": 100.10043,
-      "rainfall_mm": 0.2,
-      "value_text": "0.2 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 49.95749858969102,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ศาลาเอนกประสงค์ หมู่ 7",
-      "station_code": "TD99",
-      "province": "ราชบุรี",
-      "district": "บ้านคา",
-      "lat": 13.45788,
-      "lon": 99.44012,
+      "station": "ที่ทำการ อบต. ป่าขะ",
+      "station_code": "CG02",
+      "province": "นครนายก",
+      "district": "บ้านนา",
+      "lat": 14.301295,
+      "lon": 101.07008,
       "rainfall_mm": 0.1,
       "value_text": "0.1 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 48.59469414361081,
-      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
-      "agency": "ปภ."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ศูนย์สื่อสารจราจร",
-      "station_code": "TH73",
-      "province": "เชียงใหม่",
-      "district": "เมืองเชียงใหม่",
-      "lat": 18.7887,
-      "lon": 99.00316,
-      "rainfall_mm": 0.1,
-      "value_text": "0.1 มม.",
-      "observed_at": "2026-10-13 21:50",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 21.063463003458864,
-      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
+      "distance_km": 20.27979204659398,
+      "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
       "agency": "ปภ."
     },
     {
@@ -7770,7 +8802,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.23879,
       "rainfall_mm": 0.1,
       "value_text": "0.1 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 43.781185552109186,
@@ -7779,19 +8811,19 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "ที่ทำการ อบต. ป่าขะ",
-      "station_code": "CG02",
-      "province": "นครนายก",
-      "district": "บ้านนา",
-      "lat": 14.301295,
-      "lon": 101.07008,
+      "station": "ศูนย์สื่อสารจราจร",
+      "station_code": "TH73",
+      "province": "เชียงใหม่",
+      "district": "เมืองเชียงใหม่",
+      "lat": 18.7887,
+      "lon": 99.00316,
       "rainfall_mm": 0.1,
       "value_text": "0.1 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 20.27979204659398,
-      "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
+      "distance_km": 21.063463003458864,
+      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
       "agency": "ปภ."
     },
     {
@@ -7804,11 +8836,28 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.24249,
       "rainfall_mm": 0.1,
       "value_text": "0.1 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 21.79034979844632,
       "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
+      "agency": "ปภ."
+    },
+    {
+      "kind": "rainfall",
+      "station": "รพ. ส่งเสริมสุขภาพ บ้าน น้ำปาด",
+      "station_code": "TD53",
+      "province": "พิษณุโลก",
+      "district": "เนินมะปราง",
+      "lat": 16.70876,
+      "lon": 100.57362,
+      "rainfall_mm": 0.1,
+      "value_text": "0.1 มม.",
+      "observed_at": "2026-10-14 02:50",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 47.613132823947964,
+      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
       "agency": "ปภ."
     },
     {
@@ -7821,28 +8870,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.42944,
       "rainfall_mm": 0.01,
       "value_text": "0.01 มม.",
-      "observed_at": "2026-10-13 19:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 47.82618430363889,
       "nearest_estate": "นิคมอุตสาหกรรมอุดรธานี",
-      "agency": "อต."
-    },
-    {
-      "kind": "rainfall",
-      "station": "สงขลา",
-      "station_code": "48568",
-      "province": "สงขลา",
-      "district": "เมืองสงขลา",
-      "lat": 7.18211,
-      "lon": 100.60769,
-      "rainfall_mm": 0.01,
-      "value_text": "0.01 มม.",
-      "observed_at": "2026-10-13 19:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 33.49404463391094,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "อต."
     },
     {
@@ -7855,1066 +8887,12 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.8,
       "rainfall_mm": 0.01,
       "value_text": "0.01 มม.",
-      "observed_at": "2026-10-13 19:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 12.040709798417693,
       "nearest_estate": "นิคมอุตสาหกรรมอุดรธานี",
       "agency": "อต."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านหล่ายทุ่ง",
-      "station_code": "STN1268",
-      "province": "ลำปาง",
-      "district": "ห้างฉัตร",
-      "lat": 18.396999,
-      "lon": 99.352307,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 38.98690670650098,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านแม่เตี๊ยะใต้",
-      "station_code": "STN1291",
-      "province": "เชียงใหม่",
-      "district": "จอมทอง",
-      "lat": 18.393421,
-      "lon": 98.651069,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 46.868608430478346,
-      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านแม่หอย",
-      "station_code": "STN1292",
-      "province": "เชียงใหม่",
-      "district": "จอมทอง",
-      "lat": 18.485818,
-      "lon": 98.668225,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 40.995717215663674,
-      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านถ้ำน้ำพุ",
-      "station_code": "STN1300",
-      "province": "สระบุรี",
-      "district": "แก่งคอย",
-      "lat": 14.578354,
-      "lon": 101.138945,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 14.990137882011231,
-      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านหนองสองห้อง",
-      "station_code": "STN1301",
-      "province": "สระบุรี",
-      "district": "แก่งคอย",
-      "lat": 14.45968,
-      "lon": 101.037522,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 16.567648024216368,
-      "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านถ้ำเต่า",
-      "station_code": "STN1303",
-      "province": "สระบุรี",
-      "district": "แก่งคอย",
-      "lat": 14.704059,
-      "lon": 100.967959,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 9.829898907434359,
-      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านทาทุ่งหลวง",
-      "station_code": "STN1430",
-      "province": "ลำพูน",
-      "district": "แม่ทา",
-      "lat": 18.421024,
-      "lon": 99.009942,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 19.338510512529137,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านหนองยาง",
-      "station_code": "STN1478",
-      "province": "นครราชสีมา",
-      "district": "ปากช่อง",
-      "lat": 14.607045,
-      "lon": 101.207572,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 21.550807101848743,
-      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านซับใต้",
-      "station_code": "STN1479",
-      "province": "นครราชสีมา",
-      "district": "ปากช่อง",
-      "lat": 14.542774,
-      "lon": 101.243758,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 26.94354132561136,
-      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านคลองเดื่อ",
-      "station_code": "STN1481",
-      "province": "นครราชสีมา",
-      "district": "ปากช่อง",
-      "lat": 14.514054,
-      "lon": 101.442372,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 48.32608351092006,
-      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านเหวปลากั้ง",
-      "station_code": "STN1482",
-      "province": "นครราชสีมา",
-      "district": "ปากช่อง",
-      "lat": 14.55014,
-      "lon": 101.313189,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 33.85921844276008,
-      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านดอนทราย",
-      "station_code": "STN1498",
-      "province": "เชียงใหม่",
-      "district": "แม่ออน",
-      "lat": 18.783243,
-      "lon": 99.259893,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 30.91590554305922,
-      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านพุม่วง",
-      "station_code": "STN1524",
-      "province": "ลพบุรี",
-      "district": "โคกสำโรง",
-      "lat": 15.015938,
-      "lon": 100.863294,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 46.210566343383235,
-      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านซับสมบูรณ์",
-      "station_code": "STN1526",
-      "province": "นครสวรรค์",
-      "district": "ไพศาลี",
-      "lat": 15.566287,
-      "lon": 100.778566,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 23.12659666215714,
-      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านทาทุ่งไผ่",
-      "station_code": "STN1535",
-      "province": "ลำพูน",
-      "district": "แม่ทา",
-      "lat": 18.528099,
-      "lon": 99.234264,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 21.18130339852194,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านสามพวง 1",
-      "station_code": "STN1536",
-      "province": "สุโขทัย",
-      "district": "คีรีมาศ",
-      "lat": 16.79757,
-      "lon": 99.787305,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 45.76274395790002,
-      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านใหม่ปางเติม",
-      "station_code": "STN1557",
-      "province": "เชียงใหม่",
-      "district": "แม่วาง",
-      "lat": 18.614812,
-      "lon": 98.767551,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 28.458776686692346,
-      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "หน่วยศึกษาการพัฒนาการอนุรักษ์ต้นน้ำปิงส่วนที่ 2 จังหวัดเชียงใหม่",
-      "station_code": "MOU001",
-      "province": "เชียงใหม่",
-      "district": "แม่ริม",
-      "lat": 18.875978,
-      "lon": 98.79428,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 39.78040063937346,
-      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่สา",
-      "station_code": "MOU002",
-      "province": "เชียงใหม่",
-      "district": "แม่ริม",
-      "lat": 18.900038,
-      "lon": 98.84829,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 38.6505840052055,
-      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "ปตร.วัดบางกระเจ้านอก",
-      "station_code": "BKC002",
-      "province": "สมุทรปราการ",
-      "district": "พระประแดง",
-      "lat": 13.689612,
-      "lon": 100.554886,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 16.515461215669056,
-      "nearest_estate": "นิคมอุตสาหกรรมอัญธานี",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ปตร. คลองลัดบางยอ 1",
-      "station_code": "BKC003",
-      "province": "สมุทรปราการ",
-      "district": "พระประแดง",
-      "lat": 13.676162,
-      "lon": 100.553085,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 16.06428903072714,
-      "nearest_estate": "นิคมอุตสาหกรรมแพรกษา",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ปตร. คลองแพ",
-      "station_code": "BKC007",
-      "province": "สมุทรปราการ",
-      "district": "พระประแดง",
-      "lat": 13.694974,
-      "lon": 100.58231,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 13.583760714839544,
-      "nearest_estate": "นิคมอุตสาหกรรมอัญธานี",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ตลาดน้ำบางน้ำผึ้ง",
-      "station_code": "BKC008",
-      "province": "สมุทรปราการ",
-      "district": "พระประแดง",
-      "lat": 13.678656,
-      "lon": 100.57356,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 14.51733445065366,
-      "nearest_estate": "นิคมอุตสาหกรรมอัญธานี",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ที่ทำการอุทยานแห่งชาติออบขาน",
-      "station_code": "MOU004",
-      "province": "เชียงใหม่",
-      "district": "หางดง",
-      "lat": 18.72412,
-      "lon": 98.82089,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 26.53044041204005,
-      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่ลาน",
-      "station_code": "MOU005",
-      "province": "เชียงใหม่",
-      "district": "สะเมิง",
-      "lat": 18.773909,
-      "lon": 98.69296,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 40.99370365700199,
-      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "หน่วยป้องกันรักษาป่าที่ ชม. ๑๓ (สันป่าตอง)",
-      "station_code": "MOU006",
-      "province": "เชียงใหม่",
-      "district": "แม่วาง",
-      "lat": 18.632383,
-      "lon": 98.70691,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 34.97506055308093,
-      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่นาไทร",
-      "station_code": "MOU007",
-      "province": "เชียงใหม่",
-      "district": "หางดง",
-      "lat": 18.794664,
-      "lon": 98.832344,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 15:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 30.407156077101288,
-      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "สะพานน้ำแม่สา",
-      "station_code": "MOU009",
-      "province": "เชียงใหม่",
-      "district": "แม่ริม",
-      "lat": 18.885838,
-      "lon": 98.826904,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 38.55447608245622,
-      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "ที่ทำการอุทยานแห่งชาติดอยขุนตาล",
-      "station_code": "MOU052",
-      "province": "ลำพูน",
-      "district": "แม่ทา",
-      "lat": 18.495703,
-      "lon": 99.27011,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 26.035988870280494,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "ลำน้ำสานบ้านทุ่งยาวเหนือ",
-      "station_code": "FOP016",
-      "province": "ลำพูน",
-      "district": "เมืองลำพูน",
-      "lat": 18.511826,
-      "lon": 99.07731,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 9.52263887180247,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "เขื่อนแม่กลอง",
-      "station_code": "MKSND04",
-      "province": "กาญจนบุรี",
-      "district": "ท่าม่วง",
-      "lat": 13.95678,
-      "lon": 99.61505,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 43.656212216313946,
-      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
-      "agency": "กฟผ."
-    },
-    {
-      "kind": "rainfall",
-      "station": "วัดหินแท่น (K.62)",
-      "station_code": "MKVKD09",
-      "province": "กาญจนบุรี",
-      "district": "ด่านมะขามเตี้ย",
-      "lat": 13.78093,
-      "lon": 99.42085,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 49.03611661451666,
-      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
-      "agency": "กฟผ."
-    },
-    {
-      "kind": "rainfall",
-      "station": "สะพานวัดมงคลร่วมใจ (บ้านวังสาร)",
-      "station_code": "FOP022",
-      "province": "พิษณุโลก",
-      "district": "บางกระทุ่ม",
-      "lat": 16.670555,
-      "lon": 100.32789,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 21.807326663586515,
-      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "อโศก",
-      "station_code": "AIT001",
-      "province": "กรุงเทพมหานคร",
-      "district": "วัฒนา",
-      "lat": 13.74325,
-      "lon": 100.562164,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 16.810791452117027,
-      "nearest_estate": "นิคมอุตสาหกรรมบางชัน",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ศูนย์ศึกษาการพัฒนาการอนุรักษ์ต้นน้ำลุ่มน้ำชี",
-      "station_code": "MOU093",
-      "province": "ขอนแก่น",
-      "district": "อุบลรัตน์",
-      "lat": 16.931898,
-      "lon": 102.70161,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 44.97780435600504,
-      "nearest_estate": "นิคมอุตสาหกรรมอุดรธานี",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ขญ.๑๗ (กลางดง)",
-      "station_code": "MOU106",
-      "province": "นครราชสีมา",
-      "district": "ปากช่อง",
-      "lat": 14.549575,
-      "lon": 101.26519,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 28.89681274800726,
-      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ขญ.๔ (คลองปลากั้ง)",
-      "station_code": "MOU111",
-      "province": "นครราชสีมา",
-      "district": "วังน้ำเขียว",
-      "lat": 14.356375,
-      "lon": 101.72591,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 46.819754870491224,
-      "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ทล.๑๑ (ไทยสามัคคี)",
-      "station_code": "MOU112",
-      "province": "นครราชสีมา",
-      "district": "วังน้ำเขียว",
-      "lat": 14.322821,
-      "lon": 101.93274,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 40.71665998706693,
-      "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "อุทยานแห่งชาติเขาใหญ่",
-      "station_code": "MOU114",
-      "province": "นครนายก",
-      "district": "เมืองนครนายก",
-      "lat": 14.434425,
-      "lon": 101.372604,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 44.57235873708247,
-      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์เนินหอม",
-      "station_code": "MOU116",
-      "province": "ปราจีนบุรี",
-      "district": "เมืองปราจีนบุรี",
-      "lat": 14.174927,
-      "lon": 101.43875,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 37.772552410745256,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "หน่วยพิทักษ์ป่าอ่าวท่ายาง",
-      "station_code": "MOU135",
-      "province": "พัทลุง",
-      "district": "ปากพะยูน",
-      "lat": 7.42019,
-      "lon": 100.33263,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 45.90254768279872,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "ที่ทำการอุทยานแห่งชาติทะเลบัน",
-      "station_code": "MOU137",
-      "province": "สตูล",
-      "district": "ควนโดน",
-      "lat": 6.709046,
-      "lon": 100.16905,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 32.79114215034916,
-      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านใหม่ไทยถาวร",
-      "station_code": "STN1579",
-      "province": "สระแก้ว",
-      "district": "ตาพระยา",
-      "lat": 14.094721,
-      "lon": 102.694658,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 43.91622759029636,
-      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านหนองขาหยั่ง",
-      "station_code": "STN1581",
-      "province": "ฉะเชิงเทรา",
-      "district": "ท่าตะเกียบ",
-      "lat": 13.323691,
-      "lon": 101.675214,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 35.810771135849365,
-      "nearest_estate": "นิคมอุตสาหกรรมยามาโตะ อินดัสทรีส์",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านหัวบุ่ง",
-      "station_code": "STN1582",
-      "province": "ปราจีนบุรี",
-      "district": "เมืองปราจีนบุรี",
-      "lat": 14.199403,
-      "lon": 101.402909,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 42.3125162204715,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านท่ามะปราง",
-      "station_code": "STN1584",
-      "province": "นครนายก",
-      "district": "ปากพลี",
-      "lat": 14.222935,
-      "lon": 101.356088,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 47.59859365427491,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านกระบกเตี้ย",
-      "station_code": "STN1585",
-      "province": "ฉะเชิงเทรา",
-      "district": "สนามชัยเขต",
-      "lat": 13.682595,
-      "lon": 101.528919,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 22.825842039437443,
-      "nearest_estate": "นิคมอุตสาหกรรมเกตเวย์ ซิตี้",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านหนองผักแว่น",
-      "station_code": "STN1589",
-      "province": "สระแก้ว",
-      "district": "ตาพระยา",
-      "lat": 14.040789,
-      "lon": 102.577395,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 35.322275019675324,
-      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านแผ่นดินเย็น",
-      "station_code": "STN1591",
-      "province": "สระแก้ว",
-      "district": "วัฒนานคร",
-      "lat": 13.960406,
-      "lon": 102.505896,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 26.819760116104607,
-      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้าน กม.80",
-      "station_code": "STN1592",
-      "province": "ปราจีนบุรี",
-      "district": "นาดี",
-      "lat": 14.317818,
-      "lon": 101.837874,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 39.88540679282871,
-      "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านวังรี",
-      "station_code": "STN1593",
-      "province": "นครนายก",
-      "district": "เมืองนครนายก",
-      "lat": 14.333768,
-      "lon": 101.195938,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 32.032304015443806,
-      "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านควนเสม็ด",
-      "station_code": "STN1595",
-      "province": "สงขลา",
-      "district": "สะเดา",
-      "lat": 6.695564,
-      "lon": 100.521218,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 20.819030100615226,
-      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านเขาคันทรง",
-      "station_code": "STN1653",
-      "province": "ชลบุรี",
-      "district": "ศรีราชา",
-      "lat": 13.11583,
-      "lon": 101.167548,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 1.5535112929361043,
-      "nearest_estate": "นิคมอุตสาหกรรมดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 2",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านหนองผักกูด",
-      "station_code": "STN1655",
-      "province": "ชลบุรี",
-      "district": "บางละมุง",
-      "lat": 12.818632,
-      "lon": 101.038965,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 12.462268614614038,
-      "nearest_estate": "นิคมอุตสาหกรรมดับบลิวเอชเอ ระยอง 36",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านเขาหวาย",
-      "station_code": "STN1656",
-      "province": "ระยอง",
-      "district": "บ้านค่าย",
-      "lat": 12.874416,
-      "lon": 101.470981,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 20:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 11.95358932850628,
-      "nearest_estate": "นิคมอุตสาหกรรมดับบลิวเอชเอ อินดัสเตรียล เอสเตท ระยอง",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านมาบตอง",
-      "station_code": "STN1657",
-      "province": "ระยอง",
-      "district": "บ้านค่าย",
-      "lat": 12.805375,
-      "lon": 101.23584,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 0.7363282289368601,
-      "nearest_estate": "นิคมอุตสาหกรรมซีพีจีซี",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านธรรมสถิตย์",
-      "station_code": "STN1659",
-      "province": "ระยอง",
-      "district": "เมืองระยอง",
-      "lat": 12.702964,
-      "lon": 101.444685,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 2.9743283114886534,
-      "nearest_estate": "นิคมอุตสาหกรรมหลักชัยเมืองยาง",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านยุบตาเหน่ง",
-      "station_code": "STN1664",
-      "province": "ระยอง",
-      "district": "วังจันทร์",
-      "lat": 12.967637,
-      "lon": 101.466628,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 15.886330492754643,
-      "nearest_estate": "นิคมอุตสาหกรรมดับบลิวเอชเอ อินดัสเตรียล เอสเตท ระยอง",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านดอยปุย",
-      "station_code": "STN1670",
-      "province": "เชียงใหม่",
-      "district": "เมืองเชียงใหม่",
-      "lat": 18.81661,
-      "lon": 98.8835,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 28.83554483458552,
-      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านปลายคลอง",
-      "station_code": "STN1692",
-      "province": "สงขลา",
-      "district": "นาทวี",
-      "lat": 6.696497,
-      "lon": 100.586443,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 25.69356603018849,
-      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านคลองไข่มุก",
-      "station_code": "STN1714",
-      "province": "สงขลา",
-      "district": "นาทวี",
-      "lat": 6.640181,
-      "lon": 100.619208,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 25.206033075933966,
-      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านดง",
-      "station_code": "STN1790",
-      "province": "นครนายก",
-      "district": "เมืองนครนายก",
-      "lat": 14.321565,
-      "lon": 101.306075,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 43.95365547083031,
-      "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
-      "agency": "ทน."
     },
     {
       "kind": "rainfall",
@@ -8926,7 +8904,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.78802,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 21.690468831113463,
@@ -8943,7 +8921,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.76807,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 23.661566990988423,
@@ -8960,7 +8938,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.92182,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 8.884259043741018,
@@ -8977,7 +8955,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.8214,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-13 23:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 13.727372111208721,
@@ -8994,27 +8972,10 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.80699,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 13.511528792919691,
-      "nearest_estate": "นิคมอุตสาหกรรมแหลมฉบัง",
-      "agency": "ปภ."
-    },
-    {
-      "kind": "rainfall",
-      "station": "สนามฟุตบอล ม.1",
-      "station_code": "TJ04",
-      "province": "ชลบุรี",
-      "district": "เกาะสีชัง",
-      "lat": 13.16044,
-      "lon": 100.80563,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 15:50",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 14.5851746337789,
       "nearest_estate": "นิคมอุตสาหกรรมแหลมฉบัง",
       "agency": "ปภ."
     },
@@ -9028,7 +8989,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.07687,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 19.871180193723266,
@@ -9045,7 +9006,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.35369,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 48.732431417798544,
@@ -9062,7 +9023,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.289112,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 42.24370758413663,
@@ -9130,7 +9091,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.37094,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 40.34477948813859,
@@ -9147,7 +9108,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.4128,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 45.378957321579485,
@@ -9164,7 +9125,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.94108,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 43.5318997064484,
@@ -9190,23 +9151,6 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "รพ. ส่งเสริมสุขภาพ บ้าน น้ำปาด",
-      "station_code": "TD53",
-      "province": "พิษณุโลก",
-      "district": "เนินมะปราง",
-      "lat": 16.70876,
-      "lon": 100.57362,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 47.613132823947964,
-      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
-      "agency": "ปภ."
-    },
-    {
-      "kind": "rainfall",
       "station": "เทศบาลเมืองมาบตาพุด",
       "station_code": "TJ23",
       "province": "ระยอง",
@@ -9215,7 +9159,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.12732,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 1.7683030605670476,
@@ -9232,7 +9176,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.44951,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-13 23:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 49.297411549262385,
@@ -9249,7 +9193,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.47343,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 46.20449128619521,
@@ -9266,7 +9210,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.47241,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 45.45840553015746,
@@ -9283,7 +9227,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.48497,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-13 23:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 48.150260325485704,
@@ -9300,27 +9244,10 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.21359,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 00:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 19.873111363604046,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
-      "agency": "ปภ."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ประปาหมู่บ้าน หมู่ 13",
-      "station_code": "TE43",
-      "province": "ลำพูน",
-      "district": "แม่ทา",
-      "lat": 18.53599,
-      "lon": 99.25123,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 15:50",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 22.61811695343895,
       "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
       "agency": "ปภ."
     },
@@ -9334,7 +9261,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.01306,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 19.19909326804081,
@@ -9351,7 +9278,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.80005,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-13 23:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 49.14720510943621,
@@ -9372,23 +9299,6 @@ window.IEAT_THAIWATER_DATA = {
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 10.809877143401716,
-      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
-      "agency": "ปภ."
-    },
-    {
-      "kind": "rainfall",
-      "station": "มัสยิดนูรุสซอละ (บ้านม่วง)  หมู่ 3",
-      "station_code": "TF45",
-      "province": "สงขลา",
-      "district": "สะเดา",
-      "lat": 6.624953,
-      "lon": 100.47444,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 15:40",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 11.425828817146817,
       "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
       "agency": "ปภ."
     },
@@ -9419,7 +9329,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.58728,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 33.94079121983301,
@@ -9436,28 +9346,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.57745,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 35.362732155627924,
       "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
-      "agency": "ปภ."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านใหม่พัฒนา หมู่ 10",
-      "station_code": "TE79",
-      "province": "สระแก้ว",
-      "district": "เขาฉกรรจ์",
-      "lat": 13.541551,
-      "lon": 101.95172,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 15:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 47.362706902722444,
-      "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
       "agency": "ปภ."
     },
     {
@@ -9470,7 +9363,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.880561,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 46.67781827632225,
@@ -9487,7 +9380,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.86265,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 45.327016176383665,
@@ -9504,7 +9397,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.99888,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 21.82755324608657,
@@ -9521,7 +9414,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.98863,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 22.660253033333774,
@@ -9538,7 +9431,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.00098,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 22.330839147941596,
@@ -9555,7 +9448,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.9824,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 21.474802589147924,
@@ -9572,7 +9465,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.981712,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-13 23:20",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 22.89211755848204,
@@ -9589,7 +9482,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.9799,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 20.037579683999095,
@@ -9606,7 +9499,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.98772,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 19.881989836942026,
@@ -9623,7 +9516,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.04932,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 48.88203537235225,
@@ -9640,28 +9533,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.40116,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 22.629065557313126,
       "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ปตร.ปลายคลองบางซอ (ทุ่งเจ้าเจ็ด)",
-      "station_code": "TCP002",
-      "province": "สุพรรณบุรี",
-      "district": "สองพี่น้อง",
-      "lat": 14.194874,
-      "lon": 100.13267,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 49.28443791048643,
-      "nearest_estate": "นิคมอุตสาหกรรมบางปะอิน",
       "agency": "สสน."
     },
     {
@@ -9674,7 +9550,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.366005,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 24.887388401638866,
@@ -9691,7 +9567,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.35738,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 26.22916357558414,
@@ -9708,7 +9584,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.37149,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 24.845110037519646,
@@ -9725,7 +9601,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.405464,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 23.830034274183255,
@@ -9742,28 +9618,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.36825,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 24.509585135609612,
       "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "สะพานข้ามคลองบางม่วง",
-      "station_code": "ONE024",
-      "province": "พัทลุง",
-      "district": "ปากพะยูน",
-      "lat": 7.365284,
-      "lon": 100.27959,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 40.67365550525883,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "สสน."
     },
     {
@@ -9776,27 +9635,10 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.45321,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 17.45953341454558,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "สะพานสวนเฉลิมพระเกียรติ 72 พรรษามหาราชินี",
-      "station_code": "ONE038",
-      "province": "สงขลา",
-      "district": "สิงหนคร",
-      "lat": 7.182746,
-      "lon": 100.59448,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 32.35698288447142,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "สสน."
     },
@@ -9810,7 +9652,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.36016,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 8.817571825599366,
@@ -9827,7 +9669,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.99091,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 5.493648713330077,
@@ -9844,7 +9686,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.11684,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 12.817839662436686,
@@ -9853,19 +9695,19 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "โรงเรียนบ้านหินเทิน",
-      "station_code": "ONE071",
-      "province": "ปราจีนบุรี",
-      "district": "นาดี",
-      "lat": 14.064819,
-      "lon": 102.01052,
+      "station": "สำนักสงฆ์โสธรรมนิมิตร",
+      "station_code": "ONE064",
+      "province": "ชลบุรี",
+      "district": "ศรีราชา",
+      "lat": 13.168441,
+      "lon": 101.03034,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 18.625413383813196,
-      "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
+      "distance_km": 5.512657119107435,
+      "nearest_estate": "นิคมอุตสาหกรรมปิ่นทอง (โครงการ 2)",
       "agency": "สสน."
     },
     {
@@ -9878,7 +9720,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.413635,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 40.01185573221601,
@@ -9895,28 +9737,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.43794,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 31.889603296860976,
       "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "วัดวังปลาช่อน",
-      "station_code": "ONE078",
-      "province": "ราชบุรี",
-      "district": "ปากท่อ",
-      "lat": 13.242124,
-      "lon": 99.65333,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 48.81915636894548,
-      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
       "agency": "สสน."
     },
     {
@@ -9929,7 +9754,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.784584,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 39.50258179986661,
@@ -9946,7 +9771,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.28505,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 38.16856990409531,
@@ -9963,7 +9788,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.60082,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 29.65472762753163,
@@ -9980,7 +9805,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.62484,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 39.223225531528975,
@@ -9997,7 +9822,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.916916,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 10.716709510122786,
@@ -10014,7 +9839,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.88441,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 13.475414165455161,
@@ -10031,7 +9856,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.293798,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 42.628650685880636,
@@ -10048,44 +9873,10 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.17208,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 4.349139542633666,
-      "nearest_estate": "ท่าเรืออุตสาหกรรมมาบตาพุด",
-      "agency": "ปภ."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บริเวณศาลาร่วมใจพัฒนาเฉลิมพระเกียรติ ชุมชนสองพี่น้อง",
-      "station_code": "TJ18",
-      "province": "ระยอง",
-      "district": "เมืองระยอง",
-      "lat": 12.667611,
-      "lon": 101.290426,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 12:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 16.529741882433985,
-      "nearest_estate": "นิคมอุตสาหกรรมซีพีจีซี",
-      "agency": "ปภ."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ศาลาโขดปอสามัคคี ชุมชนเนินพระ",
-      "station_code": "TJ17",
-      "province": "ระยอง",
-      "district": "เมืองระยอง",
-      "lat": 12.674546,
-      "lon": 101.244718,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 12:10",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 12.15893541405464,
       "nearest_estate": "ท่าเรืออุตสาหกรรมมาบตาพุด",
       "agency": "ปภ."
     },
@@ -10116,7 +9907,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.26722,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 29.82685133752198,
@@ -10133,7 +9924,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.02984,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 18.987801807227864,
@@ -10167,7 +9958,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.54531,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 6.240545830645339,
@@ -10184,7 +9975,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.412673,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:50",
+      "observed_at": "2026-10-14 02:50",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 46.221752281247326,
@@ -10235,11 +10026,28 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.49938,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 47.973657272477844,
       "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
+      "agency": "พพภ"
+    },
+    {
+      "kind": "rainfall",
+      "station": "หน่วยพิทักษ์ป่าอ่างช้างน้ำ",
+      "station_code": "MOU468",
+      "province": "ชลบุรี",
+      "district": "บ้านบึง",
+      "lat": 13.2743,
+      "lon": 101.082,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 17.65685867509546,
+      "nearest_estate": "นิคมอุตสาหกรรมบ้านบึง",
       "agency": "พพภ"
     },
     {
@@ -10252,7 +10060,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.66912,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 43.24698576206503,
@@ -10269,7 +10077,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.729318,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 36.41808696338698,
@@ -10286,7 +10094,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.47278,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 43.36126923138884,
@@ -10303,7 +10111,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.631423,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 36.4696895239987,
@@ -10320,7 +10128,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.420603,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 45.2052987960418,
@@ -10337,7 +10145,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.92304,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 10.472632961201965,
@@ -10354,7 +10162,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.91541,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 12.310005487503117,
@@ -10371,7 +10179,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.521952,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 31.561407857762894,
@@ -10388,7 +10196,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.672086,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 40.49289673374737,
@@ -10405,7 +10213,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.82618,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 23.262733753883648,
@@ -10422,7 +10230,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.071511,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 13.596880131666625,
@@ -10439,7 +10247,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.47465,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 45.76805679540487,
@@ -10456,11 +10264,28 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.483582,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 47.76035745632954,
       "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านท่าโปร่ง",
+      "station_code": "STN2036",
+      "province": "พิษณุโลก",
+      "district": "วังทอง",
+      "lat": 16.835209,
+      "lon": 100.460953,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 44.0344717749169,
+      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
       "agency": "ทน."
     },
     {
@@ -10473,7 +10298,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.60559,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 29.05288345425053,
@@ -10490,7 +10315,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.57558,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 15.105235156555995,
@@ -10516,23 +10341,6 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "เขตอุตสาหกรรมกบินทร์บุรี",
-      "station_code": "KIZ001",
-      "province": "ปราจีนบุรี",
-      "district": "กบินทร์บุรี",
-      "lat": 14.072372,
-      "lon": 101.837494,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 13.03761805796871,
-      "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
       "station": "คลองห้วยยาง",
       "station_code": "KIZ003",
       "province": "ปราจีนบุรี",
@@ -10541,7 +10349,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.857475,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 19.603460352265568,
@@ -10558,7 +10366,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.25007,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 22.197415007222318,
@@ -10575,7 +10383,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.95513,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 16.36387841872487,
@@ -10592,46 +10400,12 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.82355,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 39.00045685599943,
       "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
       "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บริเวณวัดศรีโพธิ์ทอง (วัดบ้านกระเดียง)",
-      "station_code": "CP03",
-      "province": "ปราจีนบุรี",
-      "district": "นาดี",
-      "lat": 14.123532,
-      "lon": 101.841568,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 13:20",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 18.43748229741365,
-      "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
-      "agency": "ปภ."
-    },
-    {
-      "kind": "rainfall",
-      "station": "TC.60",
-      "station_code": "ridtele_TC.60",
-      "province": "นครสวรรค์",
-      "district": "ท่าตะโก",
-      "lat": 15.67,
-      "lon": 100.334167,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 26.67303898721316,
-      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
-      "agency": "ชป."
     },
     {
       "kind": "rainfall",
@@ -10643,7 +10417,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.375495,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 24.435510867872697,
@@ -10660,7 +10434,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.090205,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 26.384962279972882,
@@ -10677,27 +10451,10 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.119957,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 29.16809110290915,
-      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
-      "agency": "ชป."
-    },
-    {
-      "kind": "rainfall",
-      "station": "คลองส้ม",
-      "station_code": "ridtele_TS.23",
-      "province": "ลพบุรี",
-      "district": "พัฒนานิคม",
-      "lat": 14.822028,
-      "lon": 101.014594,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 21.958961752754117,
       "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
       "agency": "ชป."
     },
@@ -10711,7 +10468,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.55782,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 9.283656836824175,
@@ -10728,7 +10485,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.902161,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 16.60868138155647,
@@ -10745,7 +10502,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.127708,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 37.64000523472821,
@@ -10762,7 +10519,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.987948,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 11.170325905245045,
@@ -10779,7 +10536,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.959762,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 23.94734582105726,
@@ -10796,7 +10553,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.466838,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 44.62214506278063,
@@ -10813,7 +10570,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.326625,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 38.708831039853074,
@@ -10830,7 +10587,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.316761,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 48.39494078518871,
@@ -10847,7 +10604,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.271461,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 32.23801708576194,
@@ -10864,7 +10621,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.247163,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 46.1772366654261,
@@ -10881,7 +10638,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.02551,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 35.6529638557236,
@@ -10898,7 +10655,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.890301,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 47.7324180155879,
@@ -10915,7 +10672,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.8438,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 49.77735864308142,
@@ -10932,7 +10689,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.98196,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 6.39764781236248,
@@ -10949,7 +10706,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.070917,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 8.413886475651438,
@@ -10966,7 +10723,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.136945,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 22.09939112273897,
@@ -10983,7 +10740,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.401415,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 12.932995220382105,
@@ -11000,28 +10757,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.216475,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 40.38261214685205,
       "nearest_estate": "นิคมอุตสาหกรรมเกตเวย์ ซิตี้",
-      "agency": "ชป."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ศรีมหาโพธิ์",
-      "station_code": "ridtele_TKgt62",
-      "province": "ปราจีนบุรี",
-      "district": "ศรีมหาโพธิ",
-      "lat": 13.973075,
-      "lon": 101.512525,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 16.878766058468745,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
       "agency": "ชป."
     },
     {
@@ -11034,7 +10774,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.138699,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 42.3540411127709,
@@ -11051,7 +10791,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.942453,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 19.73828437653031,
@@ -11068,28 +10808,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.162164,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 35.95410833234516,
       "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
-      "agency": "ชป."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านตะเภาลาย",
-      "station_code": "ridtele_TKgt53",
-      "province": "ปราจีนบุรี",
-      "district": "บ้านสร้าง",
-      "lat": 14.012733,
-      "lon": 101.265193,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 43.48505998336849,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
       "agency": "ชป."
     },
     {
@@ -11102,27 +10825,10 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.42646,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 28.137859157261943,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
-      "agency": "ชป."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ประจันตคาม",
-      "station_code": "ridtele_TKgt51",
-      "province": "ปราจีนบุรี",
-      "district": "ประจันตคาม",
-      "lat": 14.069966,
-      "lon": 101.518579,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 23.27638078151886,
       "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
       "agency": "ชป."
     },
@@ -11136,7 +10842,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.900566,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 20.084732908100303,
@@ -11153,7 +10859,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.982754,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 43.438133353034026,
@@ -11170,7 +10876,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.153,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 48.76802923053133,
@@ -11187,7 +10893,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.179057,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 49.10232557437147,
@@ -11204,28 +10910,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.223332,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 13.166988830996637,
       "nearest_estate": "นิคมอุตสาหกรรมสมุทรสาคร",
-      "agency": "ชป."
-    },
-    {
-      "kind": "rainfall",
-      "station": "วัดศรัทธาธรรม",
-      "station_code": "ridtele_TMK01",
-      "province": "สมุทรสงคราม",
-      "district": "เมืองสมุทรสงคราม",
-      "lat": 13.3773,
-      "lon": 99.993,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 28.82839589804128,
-      "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
       "agency": "ชป."
     },
     {
@@ -11238,7 +10927,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.543788,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 35.144952484662454,
@@ -11255,7 +10944,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 103.098806,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 44.42692268951202,
@@ -11272,7 +10961,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.958432,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 29.07690450503529,
@@ -11289,7 +10978,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.599133,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 30.312998761667174,
@@ -11306,7 +10995,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 103.0233,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 29.628593181156308,
@@ -11323,7 +11012,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.454271,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 11.923906869186597,
@@ -11340,7 +11029,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.399158,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 24.457064560132796,
@@ -11357,7 +11046,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.587907,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 33.007849785401035,
@@ -11374,7 +11063,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.433274,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 15.581715399865779,
@@ -11391,7 +11080,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.094388,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 41.18610578740122,
@@ -11408,7 +11097,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.471146,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 21.57347033053051,
@@ -11425,46 +11114,12 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.644844,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 33.629371981357586,
       "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
       "agency": "ชป."
-    },
-    {
-      "kind": "rainfall",
-      "station": "สะพานอนุสรณ์ 100 ปีสิงห์บุรี (สะพานหลวงพ่อแพ 89)",
-      "station_code": "HDA006",
-      "province": "สิงห์บุรี",
-      "district": "เมืองสิงห์บุรี",
-      "lat": 14.870205,
-      "lon": 100.408585,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 46.8907144661931,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "สะพานค่ายบางระจัน",
-      "station_code": "HDA007",
-      "province": "สิงห์บุรี",
-      "district": "ค่ายบางระจัน",
-      "lat": 14.815288,
-      "lon": 100.36448,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 43.95975694360689,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -11476,27 +11131,10 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.44962,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 15.758642782654789,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "สะพานน้ำลพบุรี บ้านโพธิ์เก้าต้น",
-      "station_code": "HDA010",
-      "province": "ลพบุรี",
-      "district": "เมืองลพบุรี",
-      "lat": 14.794374,
-      "lon": 100.60633,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 33.9375086711988,
       "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
       "agency": "สสน."
     },
@@ -11510,7 +11148,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.742775,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 23.932480429893243,
@@ -11527,28 +11165,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.88976,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 15.387270610268398,
       "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": " สะพานข้ามคลองโคน",
-      "station_code": "PTTEP1",
-      "province": "สมุทรสงคราม",
-      "district": "เมืองสมุทรสงคราม",
-      "lat": 13.3319,
-      "lon": 99.96896,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 34.11919849605185,
-      "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
       "agency": "สสน."
     },
     {
@@ -11561,27 +11182,10 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.0983,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 13.221869640809718,
-      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "สะพานน้ำลำตะคอง",
-      "station_code": "MOU246",
-      "province": "นครราชสีมา",
-      "district": "ปากช่อง",
-      "lat": 14.550208,
-      "lon": 101.459465,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 49.271067024949225,
       "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
       "agency": "พพภ"
     },
@@ -11595,7 +11199,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.404884,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 6.455301106484008,
@@ -11612,28 +11216,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.97773,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 8.505517398800027,
       "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "สะพานเจริญราษฎร์รังสรรค์",
-      "station_code": "MOU463",
-      "province": "ปราจีนบุรี",
-      "district": "นาดี",
-      "lat": 14.067594,
-      "lon": 101.75532,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 17.53868284110217,
-      "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
       "agency": "พพภ"
     },
     {
@@ -11646,7 +11233,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.84176,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 40.6302054783819,
@@ -11663,27 +11250,10 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.33372,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 36.66529735667747,
-      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
-      "agency": "พพภ"
-    },
-    {
-      "kind": "rainfall",
-      "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์ลำตะคอง",
-      "station_code": "MOU263",
-      "province": "นครราชสีมา",
-      "district": "ปากช่อง",
-      "lat": 14.735245,
-      "lon": 101.3785,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 41.696235786638894,
       "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
       "agency": "พพภ"
     },
@@ -11697,7 +11267,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.89133,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 33.930789681787886,
@@ -11714,7 +11284,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.312836,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 44.79263454648103,
@@ -11731,7 +11301,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.30604,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 43.95471174698642,
@@ -11748,7 +11318,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.740107,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 36.409006009977226,
@@ -11765,7 +11335,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.862174,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 19.433888566535728,
@@ -11782,7 +11352,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.661228,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 40.11277293382128,
@@ -11799,7 +11369,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.640097,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 45.02413326233396,
@@ -11816,7 +11386,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.593349,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 47.26669642873633,
@@ -11833,7 +11403,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.039334,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 13.68105996458992,
@@ -11850,7 +11420,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.430923,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 46.64241403638004,
@@ -11867,7 +11437,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.4683,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 7.954084799469323,
@@ -11884,7 +11454,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.08232,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 41.72229243790302,
@@ -11901,7 +11471,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.376721,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 17.00462535610129,
@@ -11918,7 +11488,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.229454,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 37.604002556626014,
@@ -11935,7 +11505,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.31434,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 41.47203362888489,
@@ -11952,7 +11522,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.2937,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 27.882094431002088,
@@ -11969,7 +11539,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.7307,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 38.79867579046488,
@@ -11986,7 +11556,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.66203,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 40.927600919337834,
@@ -12003,7 +11573,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.46628,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 46.30543843174566,
@@ -12020,7 +11590,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.978264,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 31.833813912894552,
@@ -12037,7 +11607,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.9833,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 49.16459754740818,
@@ -12054,7 +11624,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.367165,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 44.78256897832434,
@@ -12071,7 +11641,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.43958,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 41.6626087034943,
@@ -12088,7 +11658,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.18275,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 49.129143527401745,
@@ -12105,7 +11675,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.23496,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 31.84323641894764,
@@ -12122,7 +11692,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.24858,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 21.6247820990615,
@@ -12156,7 +11726,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.8642,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 28.865798450815927,
@@ -12173,7 +11743,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.93681,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 30.224238503714474,
@@ -12190,7 +11760,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.93266,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 35.49442256097453,
@@ -12207,7 +11777,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.86272,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 38.495226581811686,
@@ -12224,7 +11794,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.84405,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 42.979005262634885,
@@ -12241,7 +11811,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.51817,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 38.71187816567904,
@@ -12258,7 +11828,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.312121,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 49.98628638355026,
@@ -12275,62 +11845,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.017,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 3.0190674410159057,
       "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "โรงเรียนบ้านหนองมะค่า",
-      "station_code": "G09006-TA120601",
-      "province": "ลพบุรี",
-      "district": "โคกเจริญ",
-      "lat": 15.434756,
-      "lon": 100.919267,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 43.51738681892557,
-      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "โรงเรียนซอย12 สาย 4 ซ้าย",
-      "station_code": "G09006-TA121101",
-      "province": "ลพบุรี",
-      "district": "พัฒนานิคม",
-      "lat": 14.882131,
-      "lon": 100.905748,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 30.673760835829963,
-      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "อบต.ยางหัก",
-      "station_code": "G09006-TA180302",
-      "province": "ราชบุรี",
-      "district": "ปากท่อ",
-      "lat": 13.267599,
-      "lon": 99.593249,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 49.60818730085655,
-      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
       "agency": "ทน."
     },
     {
@@ -12343,7 +11862,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.200369,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 21.940476440880083,
@@ -12360,7 +11879,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.443861,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 48.29184989107765,
@@ -12377,28 +11896,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.58076,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 12.13433599204265,
       "nearest_estate": "นิคมอุตสาหกรรมบ้านหว้า",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "แม่น้ำท่าจีนที่สะพานข้ามแม่น้ำท่าจีน 3",
-      "station_code": "G09006-TA130203",
-      "province": "สมุทรสาคร",
-      "district": "เมืองสมุทรสาคร",
-      "lat": 13.5859,
-      "lon": 100.23125,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 4.6622115448354835,
-      "nearest_estate": "นิคมอุตสาหกรรมสมุทรสาคร",
       "agency": "ทน."
     },
     {
@@ -12411,7 +11913,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.26536,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 3.8143768504040896,
@@ -12428,7 +11930,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.53942,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 21.02450990357153,
@@ -12445,7 +11947,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.12078,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 20.906580555275607,
@@ -12462,7 +11964,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.4151,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 33.54057651989991,
@@ -12479,7 +11981,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.216,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 20.04200996299588,
@@ -12496,7 +11998,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.59622,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 6.914153079374797,
@@ -12513,11 +12015,28 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.46416,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 20.434904950589534,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "สะพานเฉลิมพระเกียรติ ร.9 72 พรรษา",
+      "station_code": "G09006-TA092306",
+      "province": "พิจิตร",
+      "district": "บางมูลนาก",
+      "lat": 16.009518,
+      "lon": 100.368865,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 45.68055542967016,
+      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
       "agency": "ทน."
     },
     {
@@ -12530,7 +12049,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.49633,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 23.57161312341853,
@@ -12547,7 +12066,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.60588,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 33.94091618227815,
@@ -12564,7 +12083,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.851049,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 19.655445733073538,
@@ -12581,7 +12100,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.97523,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 38.7583665264384,
@@ -12598,7 +12117,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.260306,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 30.47138534234249,
@@ -12615,7 +12134,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.30275,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 31.170338608166176,
@@ -12632,7 +12151,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.274306,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 37.714745580455975,
@@ -12649,7 +12168,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.24548,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 27.707264951876684,
@@ -12666,28 +12185,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.939556,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 37.79943736744236,
       "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านทับกฤช",
-      "station_code": "G09006-TA092305",
-      "province": "นครสวรรค์",
-      "district": "ชุมแสง",
-      "lat": 15.749707,
-      "lon": 100.24618,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 37.56736377859444,
-      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
       "agency": "ทน."
     },
     {
@@ -12700,7 +12202,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.78463,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 43.45212305189674,
@@ -12717,7 +12219,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.79682,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 21.72274791433398,
@@ -12734,7 +12236,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.65397,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 22.36258324067517,
@@ -12751,7 +12253,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.18,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 49.05533971858623,
@@ -12768,7 +12270,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.29278,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 20:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 15.390519237485664,
@@ -12785,7 +12287,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.45375,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 18.943009467906187,
@@ -12802,7 +12304,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.30841,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 18.240453355318603,
@@ -12819,7 +12321,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.9112,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 11.192582855631537,
@@ -12836,7 +12338,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.52908,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 15.244249844311737,
@@ -12853,7 +12355,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.1234,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 49.33443367389998,
@@ -12870,28 +12372,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.602,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 25.987587498802952,
       "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "แม่น้ำท่าจีนที่สะพานข้ามบางแม่หม้าย-บางเลน",
-      "station_code": "G09006-TA130209",
-      "province": "สุพรรณบุรี",
-      "district": "บางปลาม้า",
-      "lat": 14.296477,
-      "lon": 100.13867,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 49.59712003999628,
-      "nearest_estate": "นิคมอุตสาหกรรมบางปะอิน",
       "agency": "ทน."
     },
     {
@@ -12904,7 +12389,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.40504,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 35.16529646122387,
@@ -12921,7 +12406,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.37741,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 2.5866704856555467,
@@ -12938,7 +12423,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.7926,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 8.655061795164144,
@@ -12955,7 +12440,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 103.10598,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 25.437027211687226,
@@ -12989,28 +12474,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.88831,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 22.47059700154594,
       "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ปากรอ",
-      "station_code": "G09006-TA200307",
-      "province": "สงขลา",
-      "district": "สิงหนคร",
-      "lat": 7.262618,
-      "lon": 100.42497,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 29.1828862580458,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "ทน."
     },
     {
@@ -13023,7 +12491,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.53333,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 18.227222955269863,
@@ -13040,7 +12508,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.60749,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 36.90462052459155,
@@ -13057,7 +12525,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.22458,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 43.48249399829695,
@@ -13074,7 +12542,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.95387,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 46.94785621046127,
@@ -13091,7 +12559,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.44114,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 31.6615978917213,
@@ -13108,7 +12576,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.04428,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 22.53886851790903,
@@ -13125,7 +12593,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.59204,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 31.54323463971771,
@@ -13142,7 +12610,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.48041,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 19:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 4.985545056386992,
@@ -13159,7 +12627,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.21218,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 6.644455037549361,
@@ -13176,12 +12644,29 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.05024,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 20:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 6.4068586969810815,
       "nearest_estate": "นิคมอุตสาหกรรมเอเชีย",
       "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "คลองลาดพร้าว วัดบางบัว",
+      "station_code": "BKK021",
+      "province": "กรุงเทพมหานคร",
+      "district": "บางเขน",
+      "lat": 13.85402,
+      "lon": 100.58746,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 13.837600556856398,
+      "nearest_estate": "นิคมอุตสาหกรรมบางชัน",
+      "agency": "สสน."
     },
     {
       "kind": "rainfall",
@@ -13193,7 +12678,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.61601,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 10.689352461252378,
@@ -13210,7 +12695,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.79468,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 2.0362140416044405,
@@ -13227,7 +12712,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.49277,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 22.631190161803122,
@@ -13244,7 +12729,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.43863,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 28.741410424380156,
@@ -13261,28 +12746,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.63952,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 15.87492828233833,
       "nearest_estate": "นิคมอุตสาหกรรมบางชัน",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "คลองภาษีเจริญ เพชรเกษม69",
-      "station_code": "BKK005",
-      "province": "กรุงเทพมหานคร",
-      "district": "บางแค",
-      "lat": 13.69158,
-      "lon": 100.38127,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 16.633474059900415,
-      "nearest_estate": "นิคมอุตสาหกรรมสินสาคร",
       "agency": "สสน."
     },
     {
@@ -13295,7 +12763,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.57396,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 8.540324535327358,
@@ -13312,7 +12780,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.7945,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 8.967110872590503,
@@ -13329,7 +12797,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.80058,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 9.945006421763477,
@@ -13346,7 +12814,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.43626,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 29.93130739016791,
@@ -13363,27 +12831,10 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.31901,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 39.08855794765454,
-      "nearest_estate": "นิคมอุตสาหกรรมบางปะอิน",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "อบต.ราษฎร์นิยม",
-      "station_code": "BKNH",
-      "province": "นนทบุรี",
-      "district": "ไทรน้อย",
-      "lat": 14.10388,
-      "lon": 100.32209,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 31.076556482399493,
       "nearest_estate": "นิคมอุตสาหกรรมบางปะอิน",
       "agency": "สสน."
     },
@@ -13397,7 +12848,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.53507,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 24.300920472922257,
@@ -13414,7 +12865,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.60262,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 21.095038483394372,
@@ -13431,7 +12882,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.75421,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 16.710907497810883,
@@ -13448,7 +12899,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.74476,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 15.195758700698022,
@@ -13482,7 +12933,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.77855,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 20.28296324638516,
@@ -13499,7 +12950,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.89168,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 18.479318846322684,
@@ -13516,7 +12967,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.77499,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 17.087742962577927,
@@ -13533,7 +12984,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.52861,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 15.195312328999318,
@@ -13550,7 +13001,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.71987,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 15.510084795335397,
@@ -13567,7 +13018,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.5864,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 9.687099448793155,
@@ -13584,7 +13035,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.48186,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 14.306312776039722,
@@ -13601,7 +13052,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.44071,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 18.586439945291232,
@@ -13618,7 +13069,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.56645,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 7.998524231584936,
@@ -13635,7 +13086,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.55605,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 8.11290468175869,
@@ -13652,7 +13103,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.35564,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 26.392967489256403,
@@ -13669,7 +13120,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.30725,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 30.819479632166193,
@@ -13686,7 +13137,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.37952,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 25.846600860267063,
@@ -13703,62 +13154,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.44852,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 18.573455402215103,
       "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "เมืองลพบุรี",
-      "station_code": "LBI002",
-      "province": "ลพบุรี",
-      "district": "เมืองลพบุรี",
-      "lat": 14.76049,
-      "lon": 100.5996,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 30.153470420161305,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "อบต.หนองมะค่า",
-      "station_code": "NMKH",
-      "province": "ลพบุรี",
-      "district": "โคกเจริญ",
-      "lat": 15.4321,
-      "lon": 100.9245,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 44.147470169810376,
-      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ทม.ทับกวาง",
-      "station_code": "CMKK",
-      "province": "สระบุรี",
-      "district": "แก่งคอย",
-      "lat": 14.60885,
-      "lon": 101.07645,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 7.560304216545661,
-      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
       "agency": "สสน."
     },
     {
@@ -13771,28 +13171,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.94521,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 10.432445197289608,
       "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "อบต.วังม่วง",
-      "station_code": "WGYG",
-      "province": "สระบุรี",
-      "district": "วังม่วง",
-      "lat": 14.84867,
-      "lon": 101.14549,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 28.961853274234922,
-      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
       "agency": "สสน."
     },
     {
@@ -13805,7 +13188,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.09782,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 0.8374957992377094,
@@ -13822,7 +13205,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.9762,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 14.209969273856109,
@@ -13839,7 +13222,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.65024,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 22.688334160220514,
@@ -13856,7 +13239,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.704124,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 26.947742929730865,
@@ -13873,7 +13256,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.300354,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 13.250183047104377,
@@ -13890,7 +13273,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.301346,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 5.6523093721227236,
@@ -13907,7 +13290,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.07751,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 20.535304371354172,
@@ -13924,7 +13307,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.9666,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 20.69905378335247,
@@ -13941,7 +13324,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.14574,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 34.46042027634919,
@@ -13958,7 +13341,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.97028,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 25.480895715006135,
@@ -13975,7 +13358,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.00111,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 1.7752687912394733,
@@ -13992,7 +13375,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.35298,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 12.70008602758719,
@@ -14009,28 +13392,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.32512,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 7.652635856761577,
       "nearest_estate": "นิคมอุตสาหกรรมเกตเวย์ ซิตี้",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "รพสต.บ้านโคกอุดม",
-      "station_code": "MKKB",
-      "province": "ปราจีนบุรี",
-      "district": "กบินทร์บุรี",
-      "lat": 14.06948,
-      "lon": 101.80991,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 13.968176524129444,
-      "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
       "agency": "สสน."
     },
     {
@@ -14043,7 +13409,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.88693,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 22.445528831027715,
@@ -14060,7 +13426,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.72767,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 24.92980239014854,
@@ -14077,7 +13443,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.90556,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 27.657768692287558,
@@ -14094,45 +13460,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.14307,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 43.04088797676839,
       "nearest_estate": "นิคมอุตสาหกรรมเอเซีย (สุวรรณภูมิ)",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ประจันตคาม (KGT7A)",
-      "station_code": "PRC004",
-      "province": "ปราจีนบุรี",
-      "district": "ประจันตคาม",
-      "lat": 14.070941,
-      "lon": 101.51893,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 23.337808011616087,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ศรีมหาโพธิ (KGT6)",
-      "station_code": "PRC005",
-      "province": "ปราจีนบุรี",
-      "district": "ศรีมหาโพธิ",
-      "lat": 13.97348,
-      "lon": 101.51751,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 16.418025616363693,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
       "agency": "สสน."
     },
     {
@@ -14145,7 +13477,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.65875,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 14.360027355574916,
@@ -14162,7 +13494,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.13746,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 43.22230027714344,
@@ -14179,7 +13511,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.27481,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 42.94713605347155,
@@ -14196,7 +13528,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.12879,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 27.092634302063587,
@@ -14213,7 +13545,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.35025,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 46.76029248076602,
@@ -14230,7 +13562,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.09028,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 20.253111123603006,
@@ -14247,7 +13579,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.01952,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 32.80225767760791,
@@ -14264,7 +13596,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.05431,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 25.640208181648024,
@@ -14281,7 +13613,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.65064,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 31.46333033604034,
@@ -14298,7 +13630,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.18437,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 47.11645205473142,
@@ -14315,7 +13647,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.28413,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 29.503418956657505,
@@ -14332,28 +13664,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.57487,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 10.925507314908446,
       "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "อบต.ขนงพระ",
-      "station_code": "TLPC",
-      "province": "นครราชสีมา",
-      "district": "ปากช่อง",
-      "lat": 14.60689,
-      "lon": 101.45632,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 48.26659989385583,
-      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
       "agency": "สสน."
     },
     {
@@ -14366,7 +13681,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.86537,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 46.02662947022679,
@@ -14383,7 +13698,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.59124,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 43.37359449364129,
@@ -14400,7 +13715,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.78866,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 15.369207077956524,
@@ -14417,7 +13732,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.96992,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 24.197406162559915,
@@ -14434,7 +13749,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.65094,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 43.68344096468531,
@@ -14451,7 +13766,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.12811,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 44.46776780508681,
@@ -14468,7 +13783,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.86222,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 18.71260178716996,
@@ -14485,7 +13800,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.12771,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 19.28974776627312,
@@ -14502,7 +13817,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.05691,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 26.320357859744572,
@@ -14519,7 +13834,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.77524,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 27.638225132016643,
@@ -14536,7 +13851,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.01955,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 2.547808122729683,
@@ -14553,7 +13868,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.93948,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 13.798881544360018,
@@ -14570,28 +13885,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.39992,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 47.005244861689754,
       "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ชุมแสง",
-      "station_code": "NAN008",
-      "province": "นครสวรรค์",
-      "district": "ชุมแสง",
-      "lat": 15.86923,
-      "lon": 100.26481,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 41.6003120453232,
-      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
       "agency": "สสน."
     },
     {
@@ -14604,44 +13902,10 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.47483,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 11.797913859926771,
-      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ทต.ไพศาลี",
-      "station_code": "PSLI",
-      "province": "นครสวรรค์",
-      "district": "ไพศาลี",
-      "lat": 15.60012,
-      "lon": 100.6572,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 9.970221220850517,
-      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "อบต.เขาทอง",
-      "station_code": "BKDN",
-      "province": "นครสวรรค์",
-      "district": "พยุหะคีรี",
-      "lat": 15.5707,
-      "lon": 100.18319,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 43.77788461109181,
       "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
       "agency": "สสน."
     },
@@ -14655,7 +13919,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.88005,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 29.04478714963737,
@@ -14672,7 +13936,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.80269,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 46.74965940394183,
@@ -14689,7 +13953,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.95933,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 44.0367060718405,
@@ -14706,7 +13970,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.25992,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 29.152293848641293,
@@ -14723,7 +13987,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.24476,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 33.75107369201308,
@@ -14740,7 +14004,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.24581,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 14.872698547385934,
@@ -14757,7 +14021,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.17179,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 14.967810300867315,
@@ -14774,7 +14038,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.05965,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 32.89890323153971,
@@ -14791,7 +14055,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.23858,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 9.569436005387221,
@@ -14808,7 +14072,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.36977,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 23.82531823296878,
@@ -14825,7 +14089,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.19216,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 49.83875240754259,
@@ -14842,7 +14106,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.12127,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 42.19110745038412,
@@ -14859,7 +14123,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.33734,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 47.05130379751956,
@@ -14876,7 +14140,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.43159,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 40.73752831943657,
@@ -14893,7 +14157,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.33195,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 25.112979181278362,
@@ -14910,27 +14174,10 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.53869,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 45.61576896150359,
-      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "โพธิ์ประทับช้าง",
-      "station_code": "YOM009",
-      "province": "พิจิตร",
-      "district": "โพธิ์ประทับช้าง",
-      "lat": 16.31077,
-      "lon": 100.27173,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 32.2038263788759,
       "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
       "agency": "สสน."
     },
@@ -14944,7 +14191,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.05419,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 22.34532511144996,
@@ -14961,27 +14208,10 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.73281,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 43.30160634817812,
-      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "อบต.บึงสามพัน",
-      "station_code": "BSMP",
-      "province": "เพชรบูรณ์",
-      "district": "บึงสามพัน",
-      "lat": 15.77805,
-      "lon": 101.02094,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 48.89260098235917,
       "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
       "agency": "สสน."
     },
@@ -14995,7 +14225,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.8164,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 3.6632876362743403,
@@ -15012,7 +14242,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.19051,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 27.627858011376595,
@@ -15029,28 +14259,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.17979,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 49.05798711025778,
       "nearest_estate": "นิคมอุตสาหกรรมบางปะอิน",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "คลองนราภิรมย์ (บางเลน)",
-      "station_code": "BKK019",
-      "province": "นครปฐม",
-      "district": "บางเลน",
-      "lat": 13.88207,
-      "lon": 100.29086,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 37.742377106873434,
-      "nearest_estate": "นิคมอุตสาหกรรมสินสาคร",
       "agency": "สสน."
     },
     {
@@ -15063,78 +14276,10 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.19817,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 27.81450504933709,
-      "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ศาลาดิน",
-      "station_code": "VLGE20",
-      "province": "นครปฐม",
-      "district": "พุทธมณฑล",
-      "lat": 13.80777,
-      "lon": 100.27417,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 29.667511489847108,
-      "nearest_estate": "นิคมอุตสาหกรรมสมุทรสาคร",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "เมืองสมุทรสาคร",
-      "station_code": "THA009",
-      "province": "สมุทรสาคร",
-      "district": "เมืองสมุทรสาคร",
-      "lat": 13.58598,
-      "lon": 100.23048,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 4.674934171316372,
-      "nearest_estate": "นิคมอุตสาหกรรมสมุทรสาคร",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "คลองมหาชัย วัดพันท้ายนรสิงห์",
-      "station_code": "BKK006",
-      "province": "สมุทรสาคร",
-      "district": "เมืองสมุทรสาคร",
-      "lat": 13.58184,
-      "lon": 100.36587,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 4.60388187720373,
-      "nearest_estate": "นิคมอุตสาหกรรมสินสาคร",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "อบต.บางกระเจ้า",
-      "station_code": "BKJO",
-      "province": "สมุทรสาคร",
-      "district": "เมืองสมุทรสาคร",
-      "lat": 13.52146,
-      "lon": 100.19283,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 2.3780877670010234,
       "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
       "agency": "สสน."
     },
@@ -15148,7 +14293,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.27499,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 5.407063059099814,
@@ -15165,7 +14310,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.07884,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 13.50034924008027,
@@ -15174,19 +14319,19 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "พระรามสอง",
-      "station_code": "MKG006",
-      "province": "สมุทรสงคราม",
-      "district": "เมืองสมุทรสงคราม",
-      "lat": 13.38362,
-      "lon": 99.9836,
+      "station": "สะเดา",
+      "station_code": "SLA003",
+      "province": "สงขลา",
+      "district": "สะเดา",
+      "lat": 6.796687,
+      "lon": 100.44239,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 29.19079991757201,
-      "nearest_estate": "นิคมอุตสาหกรรมมหาราชนคร",
+      "distance_km": 25.230396811100928,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "สสน."
     },
     {
@@ -15199,63 +14344,12 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.42788,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 10.910660310627168,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ปากรอ",
-      "station_code": "SLA005",
-      "province": "สงขลา",
-      "district": "สิงหนคร",
-      "lat": 7.261514,
-      "lon": 100.42447,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 29.050330940229774,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ชุมชนเขาสามยอด (บ้านน้ำจั้น หมู่ 2)",
-      "station_code": "STN0674",
-      "province": "ลพบุรี",
-      "district": "เมืองลพบุรี",
-      "lat": 14.825584,
-      "lon": 100.69195,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 38.79532822696729,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านโคกแสมสาร",
-      "station_code": "STN0675",
-      "province": "ลพบุรี",
-      "district": "โคกเจริญ",
-      "lat": 15.336768,
-      "lon": 100.831599,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 44.21491903883384,
-      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
-      "agency": "ทน."
     },
     {
       "kind": "rainfall",
@@ -15267,7 +14361,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.040808,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 15.332532128777713,
@@ -15284,7 +14378,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.135569,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 20.17227616803731,
@@ -15301,7 +14395,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.846683,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 18.367553202960405,
@@ -15318,7 +14412,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.784861,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 25.202805151690335,
@@ -15335,27 +14429,10 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.126529,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 13.810230158371521,
-      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านหนองเอี่ยวใน",
-      "station_code": "STN0947",
-      "province": "สระบุรี",
-      "district": "มวกเหล็ก",
-      "lat": 14.900096,
-      "lon": 101.321716,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 45.55428562754781,
       "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
       "agency": "ทน."
     },
@@ -15369,7 +14446,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.381608,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 5.538902464418241,
@@ -15386,7 +14463,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.370717,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 3.110870573297016,
@@ -15403,7 +14480,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.3988,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 8.338041526084151,
@@ -15420,7 +14497,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.399368,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 12.900892575962452,
@@ -15437,7 +14514,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.891589,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 33.68961903666013,
@@ -15454,7 +14531,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.257092,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 35.357636704948185,
@@ -15471,7 +14548,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.42264,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 22.004598414131543,
@@ -15488,7 +14565,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.393412,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 19.83949113726908,
@@ -15505,7 +14582,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.049221,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 43.51203972700152,
@@ -15522,7 +14599,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.556857,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 25.149694302703274,
@@ -15539,7 +14616,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.377397,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 15:00",
+      "observed_at": "2026-10-13 23:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 41.52514315465291,
@@ -15556,7 +14633,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.454595,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 49.00326202136592,
@@ -15573,7 +14650,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.443977,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 46.90200011806768,
@@ -15590,7 +14667,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.757113,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 46.631223481902786,
@@ -15607,7 +14684,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.849891,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 46.62875175543822,
@@ -15624,7 +14701,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.734217,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 33.21630688212356,
@@ -15641,7 +14718,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.609275,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 47.553046178242994,
@@ -15658,7 +14735,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.880501,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 48.936440902782635,
@@ -15675,7 +14752,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.882083,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 36.95258634488175,
@@ -15692,7 +14769,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.809246,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 37.344812903403486,
@@ -15709,7 +14786,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.830684,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 32.234807897344204,
@@ -15726,7 +14803,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.792621,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 33.89283428146734,
@@ -15743,7 +14820,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.873346,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 24.963610408910807,
@@ -15760,7 +14837,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.639008,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 42.54383835472897,
@@ -15777,7 +14854,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.713952,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 38.18333738835385,
@@ -15794,7 +14871,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.607522,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 45.2891962640767,
@@ -15811,7 +14888,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.815361,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 25.671061081165224,
@@ -15828,7 +14905,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.352648,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 44.31348022005833,
@@ -15845,7 +14922,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.264784,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 39.265462842626405,
@@ -15862,7 +14939,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.274436,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 24.22136732051762,
@@ -15879,7 +14956,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.259631,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 22.656128530441595,
@@ -15896,7 +14973,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.300301,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 27.790887330336005,
@@ -15913,7 +14990,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.301806,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 30.450437870816923,
@@ -15930,7 +15007,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.265204,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 25.339556195558867,
@@ -15947,7 +15024,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.080985,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 20.043784776286916,
@@ -15964,7 +15041,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.960082,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 39.601379042586075,
@@ -15998,7 +15075,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.91515,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 40.30608381966317,
@@ -16015,7 +15092,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.466456,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 00:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 46.32557009291526,
@@ -16032,7 +15109,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.387656,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 39.972358863302844,
@@ -16049,7 +15126,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.418201,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 40.401074024916895,
@@ -16066,7 +15143,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.165629,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 47.48851735893484,
@@ -16083,7 +15160,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.216639,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 41.69943626602246,
@@ -16100,7 +15177,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.266721,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 29.664184881715943,
@@ -16117,7 +15194,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.249899,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 36.01883074973619,
@@ -16134,7 +15211,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.459417,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 47.956700247083184,
@@ -16151,7 +15228,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.471365,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 46.134987561246035,
@@ -16168,7 +15245,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.475075,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 45.42992494503993,
@@ -16185,7 +15262,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.459658,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 43.82903602115875,
@@ -16202,62 +15279,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.384523,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 44.00521210240413,
       "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านหินสี",
-      "station_code": "STN0479",
-      "province": "ราชบุรี",
-      "district": "ปากท่อ",
-      "lat": 13.324017,
-      "lon": 99.558695,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 46.96607177882031,
-      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านหนองธง",
-      "station_code": "STN0223",
-      "province": "ราชบุรี",
-      "district": "บ้านคา",
-      "lat": 13.45973,
-      "lon": 99.439887,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 48.533455547425596,
-      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านเหล้า",
-      "station_code": "STN0707",
-      "province": "สงขลา",
-      "district": "เมืองสงขลา",
-      "lat": 7.129909,
-      "lon": 100.625486,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 32.287812728862335,
-      "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
       "agency": "ทน."
     },
     {
@@ -16270,7 +15296,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.629514,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 30.08095907800218,
@@ -16287,7 +15313,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.800317,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 20:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 47.6828614219267,
@@ -16304,7 +15330,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.537102,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 21.922082679996798,
@@ -16321,7 +15347,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.574471,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 26.429097174626868,
@@ -16338,7 +15364,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.053089,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 45.210666100402584,
@@ -16355,7 +15381,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 102.431941,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 19:00",
+      "observed_at": "2026-10-14 00:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 48.77565416025865,
@@ -16372,7 +15398,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.97694,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 21.84401032739771,
@@ -16389,7 +15415,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.03389,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 19:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 2.963768572718923,
@@ -16406,7 +15432,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.28333,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 39.600694785677696,
@@ -16423,7 +15449,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.2793,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 19:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 28.07506465402116,
@@ -16440,7 +15466,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.13236,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 48.260739188317785,
@@ -16457,7 +15483,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.53028,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 19:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 34.322537154648934,
@@ -16474,7 +15500,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.725,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 14.80312968515648,
@@ -16491,7 +15517,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.61667,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 12.329689656172745,
@@ -16508,7 +15534,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.76167,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 7.415115576731975,
@@ -16525,28 +15551,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.645,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 34.91757270504817,
       "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "อต."
-    },
-    {
-      "kind": "rainfall",
-      "station": "สนามบินสุวรรณภูมิ",
-      "station_code": "48429",
-      "province": "สมุทรปราการ",
-      "district": "บางพลี",
-      "lat": 13.68639,
-      "lon": 100.7675,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 19:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 6.459434496401541,
-      "nearest_estate": "นิคมอุตสาหกรรมอัญธานี",
       "agency": "อต."
     },
     {
@@ -16559,7 +15568,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.33194,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 34.90605207349294,
@@ -16576,28 +15585,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.70722,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 10.389305560510971,
       "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
-      "agency": "อต."
-    },
-    {
-      "kind": "rainfall",
-      "station": "นครปฐม",
-      "station_code": "48451",
-      "province": "นครปฐม",
-      "district": "กำแพงแสน",
-      "lat": 14.01167,
-      "lon": 99.97,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 19:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 43.5977605723089,
-      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
       "agency": "อต."
     },
     {
@@ -16610,7 +15602,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.60611,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 19:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 11.193998319993636,
@@ -16644,7 +15636,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.56,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 16.574010437654685,
@@ -16661,7 +15653,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.605,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 16.74280568227024,
@@ -16695,7 +15687,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.45833,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 17.754779544208294,
@@ -16712,7 +15704,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.98333,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 19:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 6.497316424856503,
@@ -16729,7 +15721,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.80194,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 19:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 14.980585146406192,
@@ -16746,7 +15738,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.86944,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 19:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 17.933208442922655,
@@ -16780,7 +15772,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.98333,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 13.799008781419568,
@@ -16797,7 +15789,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.34075,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 16.26694804483545,
@@ -16814,7 +15806,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.135,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 1.4276244076373317,
@@ -16831,7 +15823,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.5,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 19:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 15.499796057973093,
@@ -16848,7 +15840,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.02687,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 37.07076184699975,
@@ -16865,7 +15857,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.08182,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 31.649037474678174,
@@ -16882,7 +15874,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.3252,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 42.97260499143264,
@@ -16899,11 +15891,28 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.168,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 36.44469256455542,
       "nearest_estate": "นิคมอุตสาหกรรมเกตเวย์ ซิตี้",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ป่าต้นน้ำคลองมะเดื่อ อช.เขาใหญ่ (นางรอง)",
+      "station_code": "ONWR02",
+      "province": "นครนายก",
+      "district": "เมืองนครนายก",
+      "lat": 14.3693,
+      "lon": 101.2712,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 39.64308020943391,
+      "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
       "agency": "สสน."
     },
     {
@@ -16916,28 +15925,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.02351,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 47.38686527973776,
       "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "อบต.นาแขม",
-      "station_code": "VLGE50",
-      "province": "ปราจีนบุรี",
-      "district": "กบินทร์บุรี",
-      "lat": 14.04255,
-      "lon": 101.72051,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 16.82661524391665,
-      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
       "agency": "สสน."
     },
     {
@@ -16950,7 +15942,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.670105,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 12.71905854693515,
@@ -16967,45 +15959,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.61132,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 4.665867272460714,
       "nearest_estate": "นิคมอุตสาหกรรมบ้านหว้า",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "อ่างเก็บน้ำห้วยซับเหล็ก",
-      "station_code": "TBW034",
-      "province": "ลพบุรี",
-      "district": "เมืองลพบุรี",
-      "lat": 14.814826,
-      "lon": 100.77581,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 32.73106564587656,
-      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "อ่างเก็บน้ำห้วยส้ม",
-      "station_code": "TBW035",
-      "province": "ลพบุรี",
-      "district": "เมืองลพบุรี",
-      "lat": 14.865248,
-      "lon": 100.861244,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 31.067160264056348,
-      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
       "agency": "สสน."
     },
     {
@@ -17018,7 +15976,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.6057,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 22.444263793568823,
@@ -17035,7 +15993,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.58441,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 12.820867390641911,
@@ -17052,7 +16010,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.58354,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 12.423863607482492,
@@ -17069,7 +16027,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.60569,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 12.351085674133945,
@@ -17086,7 +16044,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.76205,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 19.47688068231695,
@@ -17103,7 +16061,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.76201,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 19.402327011407195,
@@ -17120,7 +16078,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.87117,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 7.441110103352378,
@@ -17137,7 +16095,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.89208,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 34.345810037612154,
@@ -17154,7 +16112,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.89392,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 34.48927154769707,
@@ -17171,7 +16129,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.62136,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 7.861758952956861,
@@ -17188,45 +16146,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.62075,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 7.862570238737058,
       "nearest_estate": "นิคมอุตสาหกรรมบางปะอิน",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "เหนือปตร.ยางมณี",
-      "station_code": "ATG161",
-      "province": "สิงห์บุรี",
-      "district": "ท่าช้าง",
-      "lat": 14.751,
-      "lon": 100.41463,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 35.016853910614486,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
-      "agency": "สสน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "ท้ายปตร.ยางมณี",
-      "station_code": "ATG162",
-      "province": "สิงห์บุรี",
-      "district": "ท่าช้าง",
-      "lat": 14.75033,
-      "lon": 100.41498,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 34.934015748296225,
-      "nearest_estate": "นิคมอุตสาหกรรมนครหลวง",
       "agency": "สสน."
     },
     {
@@ -17239,7 +16163,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.37562,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 24.417880489980817,
@@ -17256,7 +16180,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.198163,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 21.661901207133553,
@@ -17273,7 +16197,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.364047,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 39.67264192258456,
@@ -17290,7 +16214,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 101.341215,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 39.65081543882089,
@@ -17307,7 +16231,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.96111,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 25.549117341880127,
@@ -17324,7 +16248,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.157814,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 14.122328135077066,
@@ -17341,7 +16265,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.862353,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 43.563895350759694,
@@ -17358,7 +16282,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.127441,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 44.070399192579984,
@@ -17375,7 +16299,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.190144,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 19.888501123471872,
@@ -17392,7 +16316,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.746881,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 49.75880191684221,
@@ -17409,7 +16333,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.227606,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 30.367044303627125,
@@ -17426,7 +16350,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.68158,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 49.18300787538574,
@@ -17443,7 +16367,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.918348,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 33.44331786385233,
@@ -17452,19 +16376,19 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "rainfall",
-      "station": "บ้านนกเขาเปล้า",
-      "station_code": "STN1202",
-      "province": "ลพบุรี",
-      "district": "โคกสำโรง",
-      "lat": 15.017018,
-      "lon": 100.793065,
+      "station": "บ้านคลองบน",
+      "station_code": "STN1187",
+      "province": "เพชรบูรณ์",
+      "district": "ชนแดน",
+      "lat": 15.931117,
+      "lon": 100.829141,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 49.37516196567731,
-      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "distance_km": 40.55859634773667,
+      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
       "agency": "ทน."
     },
     {
@@ -17477,7 +16401,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.848355,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 36.86122806015871,
@@ -17494,7 +16418,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 100.826486,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 49.828931996174894,
@@ -17511,28 +16435,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.399912,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 47.00329403647779,
       "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
-      "agency": "ทน."
-    },
-    {
-      "kind": "rainfall",
-      "station": "บ้านหัวพุ",
-      "station_code": "STN1249",
-      "province": "นครสวรรค์",
-      "district": "ไพศาลี",
-      "lat": 15.564188,
-      "lon": 100.705829,
-      "rainfall_mm": 0.0,
-      "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 16.53452242216833,
-      "nearest_estate": "นิคมอุตสาหกรรมแอลพีพี นครสวรรค์",
       "agency": "ทน."
     },
     {
@@ -17545,11 +16452,946 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.316658,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 21:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 48.170721745745965,
       "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านหล่ายทุ่ง",
+      "station_code": "STN1268",
+      "province": "ลำปาง",
+      "district": "ห้างฉัตร",
+      "lat": 18.396999,
+      "lon": 99.352307,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 38.98690670650098,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านแม่เตี๊ยะใต้",
+      "station_code": "STN1291",
+      "province": "เชียงใหม่",
+      "district": "จอมทอง",
+      "lat": 18.393421,
+      "lon": 98.651069,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 46.868608430478346,
+      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านแม่หอย",
+      "station_code": "STN1292",
+      "province": "เชียงใหม่",
+      "district": "จอมทอง",
+      "lat": 18.485818,
+      "lon": 98.668225,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 40.995717215663674,
+      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านถ้ำน้ำพุ",
+      "station_code": "STN1300",
+      "province": "สระบุรี",
+      "district": "แก่งคอย",
+      "lat": 14.578354,
+      "lon": 101.138945,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 14.990137882011231,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านหนองสองห้อง",
+      "station_code": "STN1301",
+      "province": "สระบุรี",
+      "district": "แก่งคอย",
+      "lat": 14.45968,
+      "lon": 101.037522,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 01:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 16.567648024216368,
+      "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านถ้ำเต่า",
+      "station_code": "STN1303",
+      "province": "สระบุรี",
+      "district": "แก่งคอย",
+      "lat": 14.704059,
+      "lon": 100.967959,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 9.829898907434359,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านทาทุ่งหลวง",
+      "station_code": "STN1430",
+      "province": "ลำพูน",
+      "district": "แม่ทา",
+      "lat": 18.421024,
+      "lon": 99.009942,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 19.338510512529137,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านหนองยาง",
+      "station_code": "STN1478",
+      "province": "นครราชสีมา",
+      "district": "ปากช่อง",
+      "lat": 14.607045,
+      "lon": 101.207572,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 21.550807101848743,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านซับใต้",
+      "station_code": "STN1479",
+      "province": "นครราชสีมา",
+      "district": "ปากช่อง",
+      "lat": 14.542774,
+      "lon": 101.243758,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 26.94354132561136,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านคลองเดื่อ",
+      "station_code": "STN1481",
+      "province": "นครราชสีมา",
+      "district": "ปากช่อง",
+      "lat": 14.514054,
+      "lon": 101.442372,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 48.32608351092006,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านเหวปลากั้ง",
+      "station_code": "STN1482",
+      "province": "นครราชสีมา",
+      "district": "ปากช่อง",
+      "lat": 14.55014,
+      "lon": 101.313189,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 33.85921844276008,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านดอนทราย",
+      "station_code": "STN1498",
+      "province": "เชียงใหม่",
+      "district": "แม่ออน",
+      "lat": 18.783243,
+      "lon": 99.259893,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 30.91590554305922,
+      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านทาทุ่งไผ่",
+      "station_code": "STN1535",
+      "province": "ลำพูน",
+      "district": "แม่ทา",
+      "lat": 18.528099,
+      "lon": 99.234264,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 21.18130339852194,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านสามพวง 1",
+      "station_code": "STN1536",
+      "province": "สุโขทัย",
+      "district": "คีรีมาศ",
+      "lat": 16.79757,
+      "lon": 99.787305,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 45.76274395790002,
+      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านใหม่ปางเติม",
+      "station_code": "STN1557",
+      "province": "เชียงใหม่",
+      "district": "แม่วาง",
+      "lat": 18.614812,
+      "lon": 98.767551,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 28.458776686692346,
+      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "หน่วยศึกษาการพัฒนาการอนุรักษ์ต้นน้ำปิงส่วนที่ 2 จังหวัดเชียงใหม่",
+      "station_code": "MOU001",
+      "province": "เชียงใหม่",
+      "district": "แม่ริม",
+      "lat": 18.875978,
+      "lon": 98.79428,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 39.78040063937346,
+      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
+      "agency": "พพภ"
+    },
+    {
+      "kind": "rainfall",
+      "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่สา",
+      "station_code": "MOU002",
+      "province": "เชียงใหม่",
+      "district": "แม่ริม",
+      "lat": 18.900038,
+      "lon": 98.84829,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 38.6505840052055,
+      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
+      "agency": "พพภ"
+    },
+    {
+      "kind": "rainfall",
+      "station": "ปตร.วัดบางกระเจ้านอก",
+      "station_code": "BKC002",
+      "province": "สมุทรปราการ",
+      "district": "พระประแดง",
+      "lat": 13.689612,
+      "lon": 100.554886,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 16.515461215669056,
+      "nearest_estate": "นิคมอุตสาหกรรมอัญธานี",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ปตร. คลองลัดบางยอ 1",
+      "station_code": "BKC003",
+      "province": "สมุทรปราการ",
+      "district": "พระประแดง",
+      "lat": 13.676162,
+      "lon": 100.553085,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 16.06428903072714,
+      "nearest_estate": "นิคมอุตสาหกรรมแพรกษา",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ปตร. คลองแพ",
+      "station_code": "BKC007",
+      "province": "สมุทรปราการ",
+      "district": "พระประแดง",
+      "lat": 13.694974,
+      "lon": 100.58231,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 13.583760714839544,
+      "nearest_estate": "นิคมอุตสาหกรรมอัญธานี",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ตลาดน้ำบางน้ำผึ้ง",
+      "station_code": "BKC008",
+      "province": "สมุทรปราการ",
+      "district": "พระประแดง",
+      "lat": 13.678656,
+      "lon": 100.57356,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 14.51733445065366,
+      "nearest_estate": "นิคมอุตสาหกรรมอัญธานี",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ที่ทำการอุทยานแห่งชาติออบขาน",
+      "station_code": "MOU004",
+      "province": "เชียงใหม่",
+      "district": "หางดง",
+      "lat": 18.72412,
+      "lon": 98.82089,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 26.53044041204005,
+      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
+      "agency": "พพภ"
+    },
+    {
+      "kind": "rainfall",
+      "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์แม่ลาน",
+      "station_code": "MOU005",
+      "province": "เชียงใหม่",
+      "district": "สะเมิง",
+      "lat": 18.773909,
+      "lon": 98.69296,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 40.99370365700199,
+      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
+      "agency": "พพภ"
+    },
+    {
+      "kind": "rainfall",
+      "station": "หน่วยป้องกันรักษาป่าที่ ชม. ๑๓ (สันป่าตอง)",
+      "station_code": "MOU006",
+      "province": "เชียงใหม่",
+      "district": "แม่วาง",
+      "lat": 18.632383,
+      "lon": 98.70691,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 34.97506055308093,
+      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
+      "agency": "พพภ"
+    },
+    {
+      "kind": "rainfall",
+      "station": "สะพานน้ำแม่สา",
+      "station_code": "MOU009",
+      "province": "เชียงใหม่",
+      "district": "แม่ริม",
+      "lat": 18.885838,
+      "lon": 98.826904,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 38.55447608245622,
+      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
+      "agency": "พพภ"
+    },
+    {
+      "kind": "rainfall",
+      "station": "ที่ทำการอุทยานแห่งชาติดอยขุนตาล",
+      "station_code": "MOU052",
+      "province": "ลำพูน",
+      "district": "แม่ทา",
+      "lat": 18.495703,
+      "lon": 99.27011,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 26.035988870280494,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
+      "agency": "พพภ"
+    },
+    {
+      "kind": "rainfall",
+      "station": "ลำน้ำสานบ้านทุ่งยาวเหนือ",
+      "station_code": "FOP016",
+      "province": "ลำพูน",
+      "district": "เมืองลำพูน",
+      "lat": 18.511826,
+      "lon": 99.07731,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 9.52263887180247,
+      "nearest_estate": "นิคมอุตสาหกรรมภาคเหนือ",
+      "agency": "พพภ"
+    },
+    {
+      "kind": "rainfall",
+      "station": "เขื่อนแม่กลอง",
+      "station_code": "MKSND04",
+      "province": "กาญจนบุรี",
+      "district": "ท่าม่วง",
+      "lat": 13.95678,
+      "lon": 99.61505,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 43.656212216313946,
+      "nearest_estate": "นิคมอุตสาหกรรมราชบุรี",
+      "agency": "กฟผ."
+    },
+    {
+      "kind": "rainfall",
+      "station": "สะพานวัดมงคลร่วมใจ (บ้านวังสาร)",
+      "station_code": "FOP022",
+      "province": "พิษณุโลก",
+      "district": "บางกระทุ่ม",
+      "lat": 16.670555,
+      "lon": 100.32789,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 21.807326663586515,
+      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
+      "agency": "พพภ"
+    },
+    {
+      "kind": "rainfall",
+      "station": "อโศก",
+      "station_code": "AIT001",
+      "province": "กรุงเทพมหานคร",
+      "district": "วัฒนา",
+      "lat": 13.74325,
+      "lon": 100.562164,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 16.810791452117027,
+      "nearest_estate": "นิคมอุตสาหกรรมบางชัน",
+      "agency": "สสน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "ศูนย์ศึกษาการพัฒนาการอนุรักษ์ต้นน้ำลุ่มน้ำชี",
+      "station_code": "MOU093",
+      "province": "ขอนแก่น",
+      "district": "อุบลรัตน์",
+      "lat": 16.931898,
+      "lon": 102.70161,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 44.97780435600504,
+      "nearest_estate": "นิคมอุตสาหกรรมอุดรธานี",
+      "agency": "พพภ"
+    },
+    {
+      "kind": "rainfall",
+      "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ขญ.๑๗ (กลางดง)",
+      "station_code": "MOU106",
+      "province": "นครราชสีมา",
+      "district": "ปากช่อง",
+      "lat": 14.549575,
+      "lon": 101.26519,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 28.89681274800726,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "พพภ"
+    },
+    {
+      "kind": "rainfall",
+      "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ขญ.๔ (คลองปลากั้ง)",
+      "station_code": "MOU111",
+      "province": "นครราชสีมา",
+      "district": "วังน้ำเขียว",
+      "lat": 14.356375,
+      "lon": 101.72591,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 46.819754870491224,
+      "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
+      "agency": "พพภ"
+    },
+    {
+      "kind": "rainfall",
+      "station": "อุทยานแห่งชาติเขาใหญ่",
+      "station_code": "MOU114",
+      "province": "นครนายก",
+      "district": "เมืองนครนายก",
+      "lat": 14.434425,
+      "lon": 101.372604,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 44.57235873708247,
+      "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
+      "agency": "พพภ"
+    },
+    {
+      "kind": "rainfall",
+      "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์เนินหอม",
+      "station_code": "MOU116",
+      "province": "ปราจีนบุรี",
+      "district": "เมืองปราจีนบุรี",
+      "lat": 14.174927,
+      "lon": 101.43875,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 37.772552410745256,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
+      "agency": "พพภ"
+    },
+    {
+      "kind": "rainfall",
+      "station": "ที่ทำการอุทยานแห่งชาติทะเลบัน",
+      "station_code": "MOU137",
+      "province": "สตูล",
+      "district": "ควนโดน",
+      "lat": 6.709046,
+      "lon": 100.16905,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 32.79114215034916,
+      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
+      "agency": "พพภ"
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านใหม่ไทยถาวร",
+      "station_code": "STN1579",
+      "province": "สระแก้ว",
+      "district": "ตาพระยา",
+      "lat": 14.094721,
+      "lon": 102.694658,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 43.91622759029636,
+      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านหนองขาหยั่ง",
+      "station_code": "STN1581",
+      "province": "ฉะเชิงเทรา",
+      "district": "ท่าตะเกียบ",
+      "lat": 13.323691,
+      "lon": 101.675214,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 35.810771135849365,
+      "nearest_estate": "นิคมอุตสาหกรรมยามาโตะ อินดัสทรีส์",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านหัวบุ่ง",
+      "station_code": "STN1582",
+      "province": "ปราจีนบุรี",
+      "district": "เมืองปราจีนบุรี",
+      "lat": 14.199403,
+      "lon": 101.402909,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 42.3125162204715,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านท่ามะปราง",
+      "station_code": "STN1584",
+      "province": "นครนายก",
+      "district": "ปากพลี",
+      "lat": 14.222935,
+      "lon": 101.356088,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 47.59859365427491,
+      "nearest_estate": "นิคมอุตสาหกรรมไฮเทค กบินทร์",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านกระบกเตี้ย",
+      "station_code": "STN1585",
+      "province": "ฉะเชิงเทรา",
+      "district": "สนามชัยเขต",
+      "lat": 13.682595,
+      "lon": 101.528919,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 22.825842039437443,
+      "nearest_estate": "นิคมอุตสาหกรรมเกตเวย์ ซิตี้",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านหนองผักแว่น",
+      "station_code": "STN1589",
+      "province": "สระแก้ว",
+      "district": "ตาพระยา",
+      "lat": 14.040789,
+      "lon": 102.577395,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 35.322275019675324,
+      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านแผ่นดินเย็น",
+      "station_code": "STN1591",
+      "province": "สระแก้ว",
+      "district": "วัฒนานคร",
+      "lat": 13.960406,
+      "lon": 102.505896,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 26.819760116104607,
+      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้าน กม.80",
+      "station_code": "STN1592",
+      "province": "ปราจีนบุรี",
+      "district": "นาดี",
+      "lat": 14.317818,
+      "lon": 101.837874,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 39.88540679282871,
+      "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านวังรี",
+      "station_code": "STN1593",
+      "province": "นครนายก",
+      "district": "เมืองนครนายก",
+      "lat": 14.333768,
+      "lon": 101.195938,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 32.032304015443806,
+      "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านเขาคันทรง",
+      "station_code": "STN1653",
+      "province": "ชลบุรี",
+      "district": "ศรีราชา",
+      "lat": 13.11583,
+      "lon": 101.167548,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 1.5535112929361043,
+      "nearest_estate": "นิคมอุตสาหกรรมดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 2",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านหนองผักกูด",
+      "station_code": "STN1655",
+      "province": "ชลบุรี",
+      "district": "บางละมุง",
+      "lat": 12.818632,
+      "lon": 101.038965,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 12.462268614614038,
+      "nearest_estate": "นิคมอุตสาหกรรมดับบลิวเอชเอ ระยอง 36",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านเขาหวาย",
+      "station_code": "STN1656",
+      "province": "ระยอง",
+      "district": "บ้านค่าย",
+      "lat": 12.874416,
+      "lon": 101.470981,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 11.95358932850628,
+      "nearest_estate": "นิคมอุตสาหกรรมดับบลิวเอชเอ อินดัสเตรียล เอสเตท ระยอง",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านมาบตอง",
+      "station_code": "STN1657",
+      "province": "ระยอง",
+      "district": "บ้านค่าย",
+      "lat": 12.805375,
+      "lon": 101.23584,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 0.7363282289368601,
+      "nearest_estate": "นิคมอุตสาหกรรมซีพีจีซี",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านธรรมสถิตย์",
+      "station_code": "STN1659",
+      "province": "ระยอง",
+      "district": "เมืองระยอง",
+      "lat": 12.702964,
+      "lon": 101.444685,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 2.9743283114886534,
+      "nearest_estate": "นิคมอุตสาหกรรมหลักชัยเมืองยาง",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านยุบตาเหน่ง",
+      "station_code": "STN1664",
+      "province": "ระยอง",
+      "district": "วังจันทร์",
+      "lat": 12.967637,
+      "lon": 101.466628,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 15.886330492754643,
+      "nearest_estate": "นิคมอุตสาหกรรมดับบลิวเอชเอ อินดัสเตรียล เอสเตท ระยอง",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านดอยปุย",
+      "station_code": "STN1670",
+      "province": "เชียงใหม่",
+      "district": "เมืองเชียงใหม่",
+      "lat": 18.81661,
+      "lon": 98.8835,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 28.83554483458552,
+      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านปลายคลอง",
+      "station_code": "STN1692",
+      "province": "สงขลา",
+      "district": "นาทวี",
+      "lat": 6.696497,
+      "lon": 100.586443,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 25.69356603018849,
+      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านคลองไข่มุก",
+      "station_code": "STN1714",
+      "province": "สงขลา",
+      "district": "นาทวี",
+      "lat": 6.640181,
+      "lon": 100.619208,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 25.206033075933966,
+      "nearest_estate": "นิคมอุตสาหกรรมสงขลา",
+      "agency": "ทน."
+    },
+    {
+      "kind": "rainfall",
+      "station": "บ้านดง",
+      "station_code": "STN1790",
+      "province": "นครนายก",
+      "district": "เมืองนครนายก",
+      "lat": 14.321565,
+      "lon": 101.306075,
+      "rainfall_mm": 0.0,
+      "value_text": "0 มม.",
+      "observed_at": "2026-10-14 02:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 43.95365547083031,
+      "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
       "agency": "ทน."
     },
     {
@@ -17562,7 +17404,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 98.89448,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 29.065979758135356,
@@ -17579,7 +17421,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.35545,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 37.515074180699685,
@@ -17596,7 +17438,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 99.80374,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 45.3918896494035,
@@ -17613,7 +17455,7 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 103.08734,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 24.660308412072265,
@@ -17630,30 +17472,11 @@ window.IEAT_THAIWATER_DATA = {
       "lon": 103.30043,
       "rainfall_mm": 0.0,
       "value_text": "0 มม.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 46.45760158424925,
       "nearest_estate": "นิคมอุตสาหกรรมอุดรธานี",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "คลองพระปรง",
-      "station_code": "SKE001",
-      "province": "สระแก้ว",
-      "district": "เมืองสระแก้ว",
-      "lat": 13.937376,
-      "lon": 101.922035,
-      "waterlevel_msl": 13.02,
-      "storage_percent": 30.0,
-      "bankfull_msl": null,
-      "value_text": "13.02 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 5.703677802963367,
-      "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
       "agency": "สสน."
     },
     {
@@ -17664,15 +17487,53 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บางแก้ว",
       "lat": 7.37654,
       "lon": 100.10043,
-      "waterlevel_msl": 16.17,
-      "storage_percent": 28.56,
+      "waterlevel_msl": 16.28,
+      "storage_percent": 29.82,
       "bankfull_msl": null,
-      "value_text": "16.17 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "16.28 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 49.95749858969102,
       "nearest_estate": "นิคมอุตสาหกรรมภาคใต้จังหวัดสงขลา",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "บ้านเขานางบวช",
+      "station_code": "Ny.1B",
+      "province": "นครนายก",
+      "district": "เมืองนครนายก",
+      "lat": 14.24582,
+      "lon": 101.274246,
+      "waterlevel_msl": 4.52,
+      "storage_percent": 29.79,
+      "bankfull_msl": null,
+      "value_text": "4.52 ม.รทก.",
+      "observed_at": "2026-10-14 03:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 42.88640558131459,
+      "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "คลองพระปรง",
+      "station_code": "SKE001",
+      "province": "สระแก้ว",
+      "district": "เมืองสระแก้ว",
+      "lat": 13.937376,
+      "lon": 101.922035,
+      "waterlevel_msl": 12.91,
+      "storage_percent": 28.83,
+      "bankfull_msl": null,
+      "value_text": "12.91 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 5.703677802963367,
+      "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
       "agency": "สสน."
     },
     {
@@ -17696,60 +17557,41 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
+      "station": "สะพานเขานางบวช",
+      "station_code": "NYK008",
+      "province": "นครนายก",
+      "district": "เมืองนครนายก",
+      "lat": 14.245718,
+      "lon": 101.27481,
+      "waterlevel_msl": 4.4,
+      "storage_percent": 28.06,
+      "bankfull_msl": null,
+      "value_text": "4.4 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 42.94713605347155,
+      "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
       "station": "นาดี",
       "station_code": "PRC003",
       "province": "ปราจีนบุรี",
       "district": "นาดี",
       "lat": 14.133605,
       "lon": 101.72767,
-      "waterlevel_msl": 10.02,
-      "storage_percent": 27.37,
+      "waterlevel_msl": 10.0,
+      "storage_percent": 27.15,
       "bankfull_msl": null,
-      "value_text": "10.02 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "10 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 24.92980239014854,
       "nearest_estate": "นิคมอุตสาหกรรมบ่อทอง 33",
       "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "บางกระทุ่ม",
-      "station_code": "NAN006",
-      "province": "พิษณุโลก",
-      "district": "บางกระทุ่ม",
-      "lat": 16.58046,
-      "lon": 100.23858,
-      "waterlevel_msl": 31.99,
-      "storage_percent": 26.58,
-      "bankfull_msl": null,
-      "value_text": "31.99 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 9.569436005387221,
-      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
-      "agency": "สสน."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "บ้านโป่ง",
-      "station_code": "P.81",
-      "province": "เชียงใหม่",
-      "district": "สารภี",
-      "lat": 18.69521,
-      "lon": 99.078751,
-      "waterlevel_msl": 291.62,
-      "storage_percent": 26.39,
-      "bankfull_msl": null,
-      "value_text": "291.62 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 11.24338873778254,
-      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
-      "agency": "ชป."
     },
     {
       "kind": "waterlevel",
@@ -17772,17 +17614,55 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
+      "station": "บางกระทุ่ม",
+      "station_code": "NAN006",
+      "province": "พิษณุโลก",
+      "district": "บางกระทุ่ม",
+      "lat": 16.58046,
+      "lon": 100.23858,
+      "waterlevel_msl": 31.95,
+      "storage_percent": 26.21,
+      "bankfull_msl": null,
+      "value_text": "31.95 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 9.569436005387221,
+      "nearest_estate": "นิคมอุตสาหกรรมพิจิตร",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "บ้านโป่ง",
+      "station_code": "P.81",
+      "province": "เชียงใหม่",
+      "district": "สารภี",
+      "lat": 18.69521,
+      "lon": 99.078751,
+      "waterlevel_msl": 291.61,
+      "storage_percent": 26.21,
+      "bankfull_msl": null,
+      "value_text": "291.61 ม.รทก.",
+      "observed_at": "2026-10-13 23:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 11.24338873778254,
+      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
+      "agency": "ชป."
+    },
+    {
+      "kind": "waterlevel",
       "station": "สะพานน้ำลำตะคอง",
       "station_code": "MOU246",
       "province": "นครราชสีมา",
       "district": "ปากช่อง",
       "lat": 14.550208,
       "lon": 101.459465,
-      "waterlevel_msl": 345.29,
-      "storage_percent": 26.2,
+      "waterlevel_msl": 345.28,
+      "storage_percent": 25.97,
       "bankfull_msl": null,
-      "value_text": "345.29 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "345.28 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 49.271067024949225,
@@ -17801,7 +17681,7 @@ window.IEAT_THAIWATER_DATA = {
       "storage_percent": 25.82,
       "bankfull_msl": null,
       "value_text": "372.7 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 01:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 41.97170823213221,
@@ -17816,11 +17696,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "ดอยหล่อ",
       "lat": 18.435266,
       "lon": 98.740107,
-      "waterlevel_msl": 272.65,
-      "storage_percent": 24.32,
+      "waterlevel_msl": 272.71,
+      "storage_percent": 24.94,
       "bankfull_msl": null,
-      "value_text": "272.65 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "272.71 ม.รทก.",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 36.409006009977226,
@@ -17835,11 +17715,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "แม่วาง",
       "lat": 18.59133,
       "lon": 98.796623,
-      "waterlevel_msl": 304.08,
-      "storage_percent": 23.49,
+      "waterlevel_msl": 304.07,
+      "storage_percent": 23.24,
       "bankfull_msl": null,
-      "value_text": "304.08 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "304.07 ม.รทก.",
+      "observed_at": "2026-10-13 23:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 25.389433523569583,
@@ -17858,31 +17738,12 @@ window.IEAT_THAIWATER_DATA = {
       "storage_percent": 22.34,
       "bankfull_msl": null,
       "value_text": "43.42 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-14 02:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 21.753226281537014,
       "nearest_estate": "นิคมอุตสาหกรรมแก่งคอย",
       "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "คลองพรหมโหด",
-      "station_code": "SKE003",
-      "province": "สระแก้ว",
-      "district": "อรัญประเทศ",
-      "lat": 13.705864,
-      "lon": 102.48168,
-      "waterlevel_msl": 41.49,
-      "storage_percent": 21.99,
-      "bankfull_msl": null,
-      "value_text": "41.49 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 8.131766068445735,
-      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
-      "agency": "สสน."
     },
     {
       "kind": "waterlevel",
@@ -17896,12 +17757,50 @@ window.IEAT_THAIWATER_DATA = {
       "storage_percent": 21.69,
       "bankfull_msl": null,
       "value_text": "23.53 ม.รทก.",
-      "observed_at": "2026-10-13 22:40",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 44.79263454648103,
       "nearest_estate": "นิคมอุตสาหกรรมหนองแค",
       "agency": "พพภ"
+    },
+    {
+      "kind": "waterlevel",
+      "station": "คลองพรหมโหด",
+      "station_code": "SKE003",
+      "province": "สระแก้ว",
+      "district": "อรัญประเทศ",
+      "lat": 13.705864,
+      "lon": 102.48168,
+      "waterlevel_msl": 41.47,
+      "storage_percent": 21.43,
+      "bankfull_msl": null,
+      "value_text": "41.47 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 8.131766068445735,
+      "nearest_estate": "นิคมอุตสาหกรรมสระแก้ว",
+      "agency": "สสน."
+    },
+    {
+      "kind": "waterlevel",
+      "station": "สันทราย",
+      "station_code": "CHM001",
+      "province": "เชียงใหม่",
+      "district": "สันทราย",
+      "lat": 19.00979,
+      "lon": 98.95975,
+      "waterlevel_msl": 314.64,
+      "storage_percent": 18.82,
+      "bankfull_msl": null,
+      "value_text": "314.64 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
+      "status": "ปกติ",
+      "severity_score": 0,
+      "distance_km": 46.06728169191569,
+      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
+      "agency": "สสน."
     },
     {
       "kind": "waterlevel",
@@ -17915,7 +17814,7 @@ window.IEAT_THAIWATER_DATA = {
       "storage_percent": 18.7,
       "bankfull_msl": null,
       "value_text": "26.69 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 43.95471174698642,
@@ -17934,31 +17833,12 @@ window.IEAT_THAIWATER_DATA = {
       "storage_percent": 18.6,
       "bankfull_msl": null,
       "value_text": "442.65 ม.รทก.",
-      "observed_at": "2026-10-13 20:00",
+      "observed_at": "2026-10-13 23:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 45.46351091466168,
       "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
       "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สันทราย",
-      "station_code": "CHM001",
-      "province": "เชียงใหม่",
-      "district": "สันทราย",
-      "lat": 19.00979,
-      "lon": 98.95975,
-      "waterlevel_msl": 314.57,
-      "storage_percent": 17.95,
-      "bankfull_msl": null,
-      "value_text": "314.57 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 46.06728169191569,
-      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
-      "agency": "สสน."
     },
     {
       "kind": "waterlevel",
@@ -17972,7 +17852,7 @@ window.IEAT_THAIWATER_DATA = {
       "storage_percent": 15.63,
       "bankfull_msl": null,
       "value_text": "341 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "observed_at": "2026-10-13 23:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 24.47590252766334,
@@ -17987,11 +17867,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "หาดใหญ่",
       "lat": 6.98306,
       "lon": 100.328331,
-      "waterlevel_msl": 17.74,
-      "storage_percent": 13.98,
+      "waterlevel_msl": 17.73,
+      "storage_percent": 13.82,
       "bankfull_msl": null,
-      "value_text": "17.74 ม.รทก.",
-      "observed_at": "2026-10-13 21:00",
+      "value_text": "17.73 ม.รทก.",
+      "observed_at": "2026-10-13 23:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 4.463048298170036,
@@ -18010,7 +17890,7 @@ window.IEAT_THAIWATER_DATA = {
       "storage_percent": 13.21,
       "bankfull_msl": null,
       "value_text": "266.21 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 46.30543843174566,
@@ -18025,11 +17905,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "นาดี",
       "lat": 14.26568,
       "lon": 101.89133,
-      "waterlevel_msl": 79.3,
-      "storage_percent": 13.05,
+      "waterlevel_msl": 79.29,
+      "storage_percent": 12.87,
       "bankfull_msl": null,
-      "value_text": "79.3 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "79.29 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 33.930789681787886,
@@ -18044,11 +17924,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "เมืองอุดรธานี",
       "lat": 17.482571,
       "lon": 102.797394,
-      "waterlevel_msl": 167.28,
-      "storage_percent": 11.97,
+      "waterlevel_msl": 167.31,
+      "storage_percent": 12.6,
       "bankfull_msl": null,
-      "value_text": "167.28 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "167.31 ม.รทก.",
+      "observed_at": "2026-10-14 03:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 21.736028811714558,
@@ -18063,35 +17943,16 @@ window.IEAT_THAIWATER_DATA = {
       "district": "ดอยสะเก็ด",
       "lat": 18.916401,
       "lon": 99.235817,
-      "waterlevel_msl": 455.47,
-      "storage_percent": 11.43,
+      "waterlevel_msl": 455.46,
+      "storage_percent": 11.15,
       "bankfull_msl": null,
-      "value_text": "455.47 ม.รทก.",
-      "observed_at": "2026-10-13 20:00",
+      "value_text": "455.46 ม.รทก.",
+      "observed_at": "2026-10-13 23:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 40.72868375605304,
       "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
       "agency": "ชป."
-    },
-    {
-      "kind": "waterlevel",
-      "station": "สะพานน้ำแม่ขาน",
-      "station_code": "MOU293",
-      "province": "เชียงใหม่",
-      "district": "สะเมิง",
-      "lat": 18.7955,
-      "lon": 98.7307,
-      "waterlevel_msl": 440.2,
-      "storage_percent": 9.86,
-      "bankfull_msl": null,
-      "value_text": "440.2 ม.รทก.",
-      "observed_at": "2026-10-13 22:30",
-      "status": "ปกติ",
-      "severity_score": 0,
-      "distance_km": 38.79867579046488,
-      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
-      "agency": "พพภ"
     },
     {
       "kind": "waterlevel",
@@ -18101,11 +17962,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "จะนะ",
       "lat": 6.916742,
       "lon": 100.72962,
-      "waterlevel_msl": 2.87,
-      "storage_percent": 8.81,
+      "waterlevel_msl": 2.91,
+      "storage_percent": 10.75,
       "bankfull_msl": null,
-      "value_text": "2.87 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "2.91 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 42.06762398773943,
@@ -18114,22 +17975,22 @@ window.IEAT_THAIWATER_DATA = {
     },
     {
       "kind": "waterlevel",
-      "station": "คลองภาษีเจริญ เพชรเกษม69",
-      "station_code": "BKK005",
-      "province": "กรุงเทพมหานคร",
-      "district": "บางแค",
-      "lat": 13.69158,
-      "lon": 100.38127,
-      "waterlevel_msl": -6.09,
-      "storage_percent": 6.37,
+      "station": "สะพานน้ำแม่ขาน",
+      "station_code": "MOU293",
+      "province": "เชียงใหม่",
+      "district": "สะเมิง",
+      "lat": 18.7955,
+      "lon": 98.7307,
+      "waterlevel_msl": 440.09,
+      "storage_percent": 8.52,
       "bankfull_msl": null,
-      "value_text": "-6.09 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "440.09 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
-      "distance_km": 16.633474059900415,
-      "nearest_estate": "นิคมอุตสาหกรรมสินสาคร",
-      "agency": "สสน."
+      "distance_km": 38.79867579046488,
+      "nearest_estate": "นิคมอุตสาหกรรมเวิลด์ (ลำพูน)",
+      "agency": "พพภ"
     },
     {
       "kind": "waterlevel",
@@ -18143,7 +18004,7 @@ window.IEAT_THAIWATER_DATA = {
       "storage_percent": 3.43,
       "bankfull_msl": null,
       "value_text": "163.9 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 46.45760158424925,
@@ -18162,7 +18023,7 @@ window.IEAT_THAIWATER_DATA = {
       "storage_percent": 2.47,
       "bankfull_msl": null,
       "value_text": "163.06 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 24.660308412072265,
@@ -18177,11 +18038,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "แม่ริม",
       "lat": 18.885838,
       "lon": 98.826904,
-      "waterlevel_msl": 735.23,
-      "storage_percent": 0.62,
+      "waterlevel_msl": 735.24,
+      "storage_percent": 0.93,
       "bankfull_msl": null,
-      "value_text": "735.23 ม.รทก.",
-      "observed_at": "2026-10-13 22:50",
+      "value_text": "735.24 ม.รทก.",
+      "observed_at": "2026-10-14 04:00",
       "status": "ปกติ",
       "severity_score": 0,
       "distance_km": 38.55447608245622,
@@ -18196,11 +18057,11 @@ window.IEAT_THAIWATER_DATA = {
       "district": "บ้านนา",
       "lat": 14.28644,
       "lon": 101.070473,
-      "waterlevel_msl": 9.22,
+      "waterlevel_msl": 9.21,
       "storage_percent": null,
       "bankfull_msl": null,
-      "value_text": "9.22 ม.รทก.",
-      "observed_at": "2026-10-13 22:00",
+      "value_text": "9.21 ม.รทก.",
+      "observed_at": "2026-10-14 03:00",
       "status": "ไม่มีข้อมูล",
       "severity_score": 0,
       "distance_km": 21.137617579600168,
@@ -18210,27 +18071,26 @@ window.IEAT_THAIWATER_DATA = {
   ],
   "summary": {
     "estate_total": 70,
-    "estate_count": 55,
-    "station_count": 965,
-    "alert_station_count": 115,
+    "estate_count": 56,
+    "station_count": 956,
+    "alert_station_count": 120,
     "heavy_rain_estate_count": 0,
-    "rain_alert_estate_count": 1,
+    "rain_alert_estate_count": 3,
     "water_alert_estate_count": 55,
-    "critical_count": 62,
-    "rain_station_count": 767,
-    "waterlevel_station_count": 198,
-    "waterlevel_alert_count": 111,
+    "critical_count": 60,
+    "rain_station_count": 759,
+    "waterlevel_station_count": 197,
+    "waterlevel_alert_count": 112,
     "max_rainfall_mm": 59.6,
     "risk_level": "ล้นตลิ่ง",
     "storm_count": 0,
     "storm_names": [],
     "flood_watch_provinces": [
       "จ.ตรัง",
-      "จ.นครศรีธรรมราช",
       "จ.สงขลา"
     ],
-    "flood_watch_province_count": 3,
-    "flash_flood_24h_area_count": 3,
+    "flood_watch_province_count": 2,
+    "flash_flood_24h_area_count": 2,
     "flash_flood_48h_area_count": 0,
     "warning_title": "กรมอุตุนิยมวิทยา | ประกาศเตือนภัยลักษณะอากาศ",
     "warning_summary": "",
@@ -18239,15 +18099,15 @@ window.IEAT_THAIWATER_DATA = {
   "errors": [],
   "coverage": {
     "stations_complete": true,
-    "station_count": 965,
+    "station_count": 956,
     "estate_location_source": "ArcGIS geometry in EPSG:4326"
   },
   "flash_flood": {
     "24h": {
       "period": "24h",
       "status": "ok",
-      "date": "2026-10-13",
-      "time": "22:00:00",
+      "date": "2026-10-14",
+      "time": "04:00:00",
       "type": "แผนที่แสดงพื้นที่เสี่ยงน้ำท่วมฉับพลัน (รายตำบล)ใน 24 ชม. ข้างหน้า จากปริมาณฝนสะสมที่สถานีโทรมาตร",
       "areas": [
         {
@@ -18261,7 +18121,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 7.70389,
           "longitude": 99.31807,
           "sum_rainfall_mm": 107.2,
-          "observed_at": "2026-10-13T10:00:00+07:00",
+          "observed_at": "2026-10-13T16:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -18654,453 +18514,6 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
-          "geocode": "800907",
-          "tambon": "ต.เขาโร",
-          "amphoe": "อ.ทุ่งสง",
-          "province": "จ.นครศรีธรรมราช",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "บ้านปากมูด",
-          "latitude": 7.978436,
-          "longitude": 99.604113,
-          "sum_rainfall_mm": 138.0,
-          "observed_at": "2026-10-13T10:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.63417,
-                  8.08788
-                ],
-                [
-                  99.63699,
-                  8.08572
-                ],
-                [
-                  99.63887,
-                  8.08565
-                ],
-                [
-                  99.64089,
-                  8.08279
-                ],
-                [
-                  99.64027,
-                  8.07691
-                ],
-                [
-                  99.64225,
-                  8.07566
-                ],
-                [
-                  99.64353,
-                  8.07271
-                ],
-                [
-                  99.6458,
-                  8.0725
-                ],
-                [
-                  99.64497,
-                  8.06976
-                ],
-                [
-                  99.64626,
-                  8.06984
-                ],
-                [
-                  99.64486,
-                  8.06623
-                ],
-                [
-                  99.64218,
-                  8.06381
-                ],
-                [
-                  99.64254,
-                  8.06214
-                ],
-                [
-                  99.64169,
-                  8.06227
-                ],
-                [
-                  99.64293,
-                  8.05639
-                ],
-                [
-                  99.64161,
-                  8.05439
-                ],
-                [
-                  99.64357,
-                  8.05221
-                ],
-                [
-                  99.64155,
-                  8.05085
-                ],
-                [
-                  99.64194,
-                  8.04819
-                ],
-                [
-                  99.64036,
-                  8.04641
-                ],
-                [
-                  99.641,
-                  8.04435
-                ],
-                [
-                  99.63947,
-                  8.04342
-                ],
-                [
-                  99.63846,
-                  8.04059
-                ],
-                [
-                  99.63297,
-                  8.0387
-                ],
-                [
-                  99.63286,
-                  8.03678
-                ],
-                [
-                  99.63548,
-                  8.03524
-                ],
-                [
-                  99.63442,
-                  8.03387
-                ],
-                [
-                  99.63567,
-                  8.0329
-                ],
-                [
-                  99.63463,
-                  8.03132
-                ],
-                [
-                  99.63319,
-                  8.03229
-                ],
-                [
-                  99.63358,
-                  8.03006
-                ],
-                [
-                  99.63142,
-                  8.02791
-                ],
-                [
-                  99.63242,
-                  8.02199
-                ],
-                [
-                  99.6292,
-                  8.02063
-                ],
-                [
-                  99.62751,
-                  8.01837
-                ],
-                [
-                  99.62367,
-                  8.0184
-                ],
-                [
-                  99.62272,
-                  8.017
-                ],
-                [
-                  99.62102,
-                  8.01811
-                ],
-                [
-                  99.61934,
-                  8.01613
-                ],
-                [
-                  99.62027,
-                  8.01441
-                ],
-                [
-                  99.61575,
-                  8.01093
-                ],
-                [
-                  99.61275,
-                  8.01042
-                ],
-                [
-                  99.61129,
-                  8.00847
-                ],
-                [
-                  99.61004,
-                  8.00956
-                ],
-                [
-                  99.60939,
-                  8.00754
-                ],
-                [
-                  99.60781,
-                  8.00731
-                ],
-                [
-                  99.60676,
-                  8.00092
-                ],
-                [
-                  99.6056,
-                  8.00045
-                ],
-                [
-                  99.60737,
-                  7.99856
-                ],
-                [
-                  99.60706,
-                  7.99707
-                ],
-                [
-                  99.60896,
-                  7.99695
-                ],
-                [
-                  99.60869,
-                  7.99546
-                ],
-                [
-                  99.61113,
-                  7.99328
-                ],
-                [
-                  99.61085,
-                  7.99214
-                ],
-                [
-                  99.60796,
-                  7.99065
-                ],
-                [
-                  99.60784,
-                  7.98881
-                ],
-                [
-                  99.60983,
-                  7.98779
-                ],
-                [
-                  99.6106,
-                  7.98953
-                ],
-                [
-                  99.61111,
-                  7.98702
-                ],
-                [
-                  99.6083,
-                  7.98537
-                ],
-                [
-                  99.60222,
-                  7.98557
-                ],
-                [
-                  99.60255,
-                  7.98371
-                ],
-                [
-                  99.60598,
-                  7.98011
-                ],
-                [
-                  99.60586,
-                  7.97862
-                ],
-                [
-                  99.60165,
-                  7.97824
-                ],
-                [
-                  99.59154,
-                  7.98071
-                ],
-                [
-                  99.5859,
-                  7.98976
-                ],
-                [
-                  99.57664,
-                  7.99977
-                ],
-                [
-                  99.57442,
-                  8.00383
-                ],
-                [
-                  99.57331,
-                  8.01128
-                ],
-                [
-                  99.57216,
-                  8.01463
-                ],
-                [
-                  99.5706,
-                  8.01528
-                ],
-                [
-                  99.56979,
-                  8.02185
-                ],
-                [
-                  99.56634,
-                  8.0319
-                ],
-                [
-                  99.55933,
-                  8.0355
-                ],
-                [
-                  99.55139,
-                  8.03453
-                ],
-                [
-                  99.55017,
-                  8.03907
-                ],
-                [
-                  99.54698,
-                  8.04078
-                ],
-                [
-                  99.54277,
-                  8.05412
-                ],
-                [
-                  99.5439,
-                  8.0626
-                ],
-                [
-                  99.54108,
-                  8.06537
-                ],
-                [
-                  99.53991,
-                  8.06933
-                ],
-                [
-                  99.54028,
-                  8.07297
-                ],
-                [
-                  99.53854,
-                  8.07426
-                ],
-                [
-                  99.54398,
-                  8.07709
-                ],
-                [
-                  99.5444,
-                  8.07877
-                ],
-                [
-                  99.54332,
-                  8.08061
-                ],
-                [
-                  99.54046,
-                  8.08096
-                ],
-                [
-                  99.53901,
-                  8.07887
-                ],
-                [
-                  99.5367,
-                  8.08193
-                ],
-                [
-                  99.54148,
-                  8.08249
-                ],
-                [
-                  99.54388,
-                  8.08565
-                ],
-                [
-                  99.54391,
-                  8.08249
-                ],
-                [
-                  99.54871,
-                  8.08297
-                ],
-                [
-                  99.55482,
-                  8.08798
-                ],
-                [
-                  99.56134,
-                  8.08922
-                ],
-                [
-                  99.56735,
-                  8.08899
-                ],
-                [
-                  99.57206,
-                  8.08416
-                ],
-                [
-                  99.58223,
-                  8.08214
-                ],
-                [
-                  99.5838,
-                  8.08321
-                ],
-                [
-                  99.5815,
-                  8.08703
-                ],
-                [
-                  99.58419,
-                  8.09028
-                ],
-                [
-                  99.5906,
-                  8.08691
-                ],
-                [
-                  99.60408,
-                  8.08455
-                ],
-                [
-                  99.62014,
-                  8.08557
-                ],
-                [
-                  99.62952,
-                  8.08422
-                ],
-                [
-                  99.63417,
-                  8.08788
-                ]
-              ]
-            ]
-          }
-        },
-        {
           "geocode": "900607",
           "tambon": "ต.เขาแดง",
           "amphoe": "อ.สะบ้าย้อย",
@@ -19110,8 +18523,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "โรงเรียน ตชด.บ้านส้านักเอาะ",
           "latitude": 6.483326,
           "longitude": 100.779366,
-          "sum_rainfall_mm": 125.0,
-          "observed_at": "2026-10-13T10:00:00+07:00",
+          "sum_rainfall_mm": 117.60000000000002,
+          "observed_at": "2026-10-13T16:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -19468,7 +18881,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 7.553843,
           "longitude": 99.494829,
           "sum_rainfall_mm": 8.0,
-          "observed_at": "2026-10-13T10:00:00+07:00",
+          "observed_at": "2026-10-13T16:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -19759,7 +19172,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 7.571998,
           "longitude": 99.331805,
           "sum_rainfall_mm": 8.5,
-          "observed_at": "2026-10-13T10:00:00+07:00",
+          "observed_at": "2026-10-13T16:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -20098,7 +19511,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 7.542418,
           "longitude": 99.397999,
           "sum_rainfall_mm": 0.0,
-          "observed_at": "2026-10-13T10:00:00+07:00",
+          "observed_at": "2026-10-13T16:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -20591,6742 +20004,6 @@ window.IEAT_THAIWATER_DATA = {
           }
         },
         {
-          "geocode": "800908",
-          "tambon": "ต.กะปาง",
-          "amphoe": "อ.ทุ่งสง",
-          "province": "จ.นครศรีธรรมราช",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "บ้านวังปราง",
-          "latitude": 8.025506,
-          "longitude": 99.631517,
-          "sum_rainfall_mm": 30.0,
-          "observed_at": "2026-10-13T10:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.75027,
-                  8.04915
-                ],
-                [
-                  99.75056,
-                  8.04441
-                ],
-                [
-                  99.74835,
-                  8.04202
-                ],
-                [
-                  99.74827,
-                  8.04029
-                ],
-                [
-                  99.75199,
-                  8.03776
-                ],
-                [
-                  99.75313,
-                  8.0348
-                ],
-                [
-                  99.75804,
-                  8.03271
-                ],
-                [
-                  99.75943,
-                  8.02825
-                ],
-                [
-                  99.75808,
-                  8.02373
-                ],
-                [
-                  99.75457,
-                  8.0229
-                ],
-                [
-                  99.75081,
-                  8.01933
-                ],
-                [
-                  99.75046,
-                  8.01401
-                ],
-                [
-                  99.75138,
-                  8.01163
-                ],
-                [
-                  99.74644,
-                  8.00226
-                ],
-                [
-                  99.74457,
-                  8.0024
-                ],
-                [
-                  99.74164,
-                  8.00669
-                ],
-                [
-                  99.73444,
-                  8.00396
-                ],
-                [
-                  99.73191,
-                  8.0021
-                ],
-                [
-                  99.73307,
-                  8.00224
-                ],
-                [
-                  99.73235,
-                  8.00113
-                ],
-                [
-                  99.71484,
-                  7.99218
-                ],
-                [
-                  99.70679,
-                  7.99186
-                ],
-                [
-                  99.7034,
-                  7.99053
-                ],
-                [
-                  99.70367,
-                  7.99181
-                ],
-                [
-                  99.69699,
-                  7.99271
-                ],
-                [
-                  99.69323,
-                  7.99631
-                ],
-                [
-                  99.68783,
-                  7.99615
-                ],
-                [
-                  99.68476,
-                  7.99896
-                ],
-                [
-                  99.68216,
-                  7.99843
-                ],
-                [
-                  99.68084,
-                  7.99996
-                ],
-                [
-                  99.67866,
-                  8.00028
-                ],
-                [
-                  99.67551,
-                  8.00423
-                ],
-                [
-                  99.67635,
-                  8.00724
-                ],
-                [
-                  99.67407,
-                  8.00715
-                ],
-                [
-                  99.67335,
-                  8.00862
-                ],
-                [
-                  99.67199,
-                  8.0067
-                ],
-                [
-                  99.671,
-                  8.0089
-                ],
-                [
-                  99.66697,
-                  8.00727
-                ],
-                [
-                  99.66547,
-                  8.00912
-                ],
-                [
-                  99.66427,
-                  8.0086
-                ],
-                [
-                  99.66291,
-                  8.01126
-                ],
-                [
-                  99.65901,
-                  8.01132
-                ],
-                [
-                  99.65715,
-                  8.01302
-                ],
-                [
-                  99.65511,
-                  8.01149
-                ],
-                [
-                  99.65224,
-                  8.012
-                ],
-                [
-                  99.65234,
-                  8.01092
-                ],
-                [
-                  99.65116,
-                  8.01052
-                ],
-                [
-                  99.6477,
-                  8.01149
-                ],
-                [
-                  99.64602,
-                  8.01091
-                ],
-                [
-                  99.64452,
-                  8.01218
-                ],
-                [
-                  99.64059,
-                  8.01107
-                ],
-                [
-                  99.63797,
-                  8.00864
-                ],
-                [
-                  99.63462,
-                  8.01047
-                ],
-                [
-                  99.63105,
-                  8.0096
-                ],
-                [
-                  99.62659,
-                  8.005
-                ],
-                [
-                  99.62625,
-                  8.0031
-                ],
-                [
-                  99.62351,
-                  8.00288
-                ],
-                [
-                  99.62467,
-                  8.00063
-                ],
-                [
-                  99.62224,
-                  8.00047
-                ],
-                [
-                  99.62186,
-                  7.99699
-                ],
-                [
-                  99.61709,
-                  7.99152
-                ],
-                [
-                  99.61585,
-                  7.99183
-                ],
-                [
-                  99.61659,
-                  7.98878
-                ],
-                [
-                  99.61521,
-                  7.98788
-                ],
-                [
-                  99.61211,
-                  7.98963
-                ],
-                [
-                  99.61215,
-                  7.98793
-                ],
-                [
-                  99.6106,
-                  7.98953
-                ],
-                [
-                  99.60983,
-                  7.98779
-                ],
-                [
-                  99.60784,
-                  7.98881
-                ],
-                [
-                  99.60827,
-                  7.99105
-                ],
-                [
-                  99.61122,
-                  7.99288
-                ],
-                [
-                  99.60869,
-                  7.99546
-                ],
-                [
-                  99.60896,
-                  7.99695
-                ],
-                [
-                  99.60706,
-                  7.99707
-                ],
-                [
-                  99.60737,
-                  7.99856
-                ],
-                [
-                  99.6056,
-                  8.00045
-                ],
-                [
-                  99.60676,
-                  8.00092
-                ],
-                [
-                  99.60781,
-                  8.00731
-                ],
-                [
-                  99.60939,
-                  8.00754
-                ],
-                [
-                  99.61004,
-                  8.00956
-                ],
-                [
-                  99.61129,
-                  8.00847
-                ],
-                [
-                  99.61275,
-                  8.01042
-                ],
-                [
-                  99.61575,
-                  8.01093
-                ],
-                [
-                  99.62027,
-                  8.01441
-                ],
-                [
-                  99.61934,
-                  8.01613
-                ],
-                [
-                  99.62102,
-                  8.01811
-                ],
-                [
-                  99.62272,
-                  8.017
-                ],
-                [
-                  99.62367,
-                  8.0184
-                ],
-                [
-                  99.6272,
-                  8.01827
-                ],
-                [
-                  99.6292,
-                  8.02063
-                ],
-                [
-                  99.63222,
-                  8.0216
-                ],
-                [
-                  99.63142,
-                  8.02791
-                ],
-                [
-                  99.63358,
-                  8.03006
-                ],
-                [
-                  99.63319,
-                  8.03229
-                ],
-                [
-                  99.63463,
-                  8.03132
-                ],
-                [
-                  99.63567,
-                  8.0329
-                ],
-                [
-                  99.63442,
-                  8.03387
-                ],
-                [
-                  99.63548,
-                  8.03524
-                ],
-                [
-                  99.63286,
-                  8.03678
-                ],
-                [
-                  99.63297,
-                  8.0387
-                ],
-                [
-                  99.63846,
-                  8.04059
-                ],
-                [
-                  99.63947,
-                  8.04342
-                ],
-                [
-                  99.6411,
-                  8.04462
-                ],
-                [
-                  99.64036,
-                  8.04641
-                ],
-                [
-                  99.64194,
-                  8.04819
-                ],
-                [
-                  99.64155,
-                  8.05085
-                ],
-                [
-                  99.6435,
-                  8.05187
-                ],
-                [
-                  99.64309,
-                  8.05313
-                ],
-                [
-                  99.64759,
-                  8.05104
-                ],
-                [
-                  99.64972,
-                  8.05989
-                ],
-                [
-                  99.65135,
-                  8.06189
-                ],
-                [
-                  99.65546,
-                  8.06323
-                ],
-                [
-                  99.65853,
-                  8.06259
-                ],
-                [
-                  99.66223,
-                  8.06453
-                ],
-                [
-                  99.66538,
-                  8.06419
-                ],
-                [
-                  99.67048,
-                  8.06816
-                ],
-                [
-                  99.67273,
-                  8.06763
-                ],
-                [
-                  99.67579,
-                  8.06904
-                ],
-                [
-                  99.67673,
-                  8.06427
-                ],
-                [
-                  99.68249,
-                  8.0576
-                ],
-                [
-                  99.68669,
-                  8.05807
-                ],
-                [
-                  99.68868,
-                  8.06081
-                ],
-                [
-                  99.70089,
-                  8.06091
-                ],
-                [
-                  99.7138,
-                  8.05229
-                ],
-                [
-                  99.72018,
-                  8.0551
-                ],
-                [
-                  99.72218,
-                  8.05466
-                ],
-                [
-                  99.72309,
-                  8.05298
-                ],
-                [
-                  99.71994,
-                  8.05107
-                ],
-                [
-                  99.72042,
-                  8.05041
-                ],
-                [
-                  99.72438,
-                  8.05038
-                ],
-                [
-                  99.72719,
-                  8.0522
-                ],
-                [
-                  99.72914,
-                  8.05113
-                ],
-                [
-                  99.73785,
-                  8.05147
-                ],
-                [
-                  99.74467,
-                  8.0494
-                ],
-                [
-                  99.75027,
-                  8.04915
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "800908",
-          "tambon": "ต.กะปาง",
-          "amphoe": "อ.ทุ่งสง",
-          "province": "จ.นครศรีธรรมราช",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "รร.บ้านพูน",
-          "latitude": 8.03829,
-          "longitude": 99.6431,
-          "sum_rainfall_mm": 53.0,
-          "observed_at": "2026-10-13T10:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.75027,
-                  8.04915
-                ],
-                [
-                  99.75056,
-                  8.04441
-                ],
-                [
-                  99.74835,
-                  8.04202
-                ],
-                [
-                  99.74827,
-                  8.04029
-                ],
-                [
-                  99.75199,
-                  8.03776
-                ],
-                [
-                  99.75313,
-                  8.0348
-                ],
-                [
-                  99.75804,
-                  8.03271
-                ],
-                [
-                  99.75943,
-                  8.02825
-                ],
-                [
-                  99.75808,
-                  8.02373
-                ],
-                [
-                  99.75457,
-                  8.0229
-                ],
-                [
-                  99.75081,
-                  8.01933
-                ],
-                [
-                  99.75046,
-                  8.01401
-                ],
-                [
-                  99.75138,
-                  8.01163
-                ],
-                [
-                  99.74644,
-                  8.00226
-                ],
-                [
-                  99.74457,
-                  8.0024
-                ],
-                [
-                  99.74164,
-                  8.00669
-                ],
-                [
-                  99.73444,
-                  8.00396
-                ],
-                [
-                  99.73191,
-                  8.0021
-                ],
-                [
-                  99.73307,
-                  8.00224
-                ],
-                [
-                  99.73235,
-                  8.00113
-                ],
-                [
-                  99.71484,
-                  7.99218
-                ],
-                [
-                  99.70679,
-                  7.99186
-                ],
-                [
-                  99.7034,
-                  7.99053
-                ],
-                [
-                  99.70367,
-                  7.99181
-                ],
-                [
-                  99.69699,
-                  7.99271
-                ],
-                [
-                  99.69323,
-                  7.99631
-                ],
-                [
-                  99.68783,
-                  7.99615
-                ],
-                [
-                  99.68476,
-                  7.99896
-                ],
-                [
-                  99.68216,
-                  7.99843
-                ],
-                [
-                  99.68084,
-                  7.99996
-                ],
-                [
-                  99.67866,
-                  8.00028
-                ],
-                [
-                  99.67551,
-                  8.00423
-                ],
-                [
-                  99.67635,
-                  8.00724
-                ],
-                [
-                  99.67407,
-                  8.00715
-                ],
-                [
-                  99.67335,
-                  8.00862
-                ],
-                [
-                  99.67199,
-                  8.0067
-                ],
-                [
-                  99.671,
-                  8.0089
-                ],
-                [
-                  99.66697,
-                  8.00727
-                ],
-                [
-                  99.66547,
-                  8.00912
-                ],
-                [
-                  99.66427,
-                  8.0086
-                ],
-                [
-                  99.66291,
-                  8.01126
-                ],
-                [
-                  99.65901,
-                  8.01132
-                ],
-                [
-                  99.65715,
-                  8.01302
-                ],
-                [
-                  99.65511,
-                  8.01149
-                ],
-                [
-                  99.65224,
-                  8.012
-                ],
-                [
-                  99.65234,
-                  8.01092
-                ],
-                [
-                  99.65116,
-                  8.01052
-                ],
-                [
-                  99.6477,
-                  8.01149
-                ],
-                [
-                  99.64602,
-                  8.01091
-                ],
-                [
-                  99.64452,
-                  8.01218
-                ],
-                [
-                  99.64059,
-                  8.01107
-                ],
-                [
-                  99.63797,
-                  8.00864
-                ],
-                [
-                  99.63462,
-                  8.01047
-                ],
-                [
-                  99.63105,
-                  8.0096
-                ],
-                [
-                  99.62659,
-                  8.005
-                ],
-                [
-                  99.62625,
-                  8.0031
-                ],
-                [
-                  99.62351,
-                  8.00288
-                ],
-                [
-                  99.62467,
-                  8.00063
-                ],
-                [
-                  99.62224,
-                  8.00047
-                ],
-                [
-                  99.62186,
-                  7.99699
-                ],
-                [
-                  99.61709,
-                  7.99152
-                ],
-                [
-                  99.61585,
-                  7.99183
-                ],
-                [
-                  99.61659,
-                  7.98878
-                ],
-                [
-                  99.61521,
-                  7.98788
-                ],
-                [
-                  99.61211,
-                  7.98963
-                ],
-                [
-                  99.61215,
-                  7.98793
-                ],
-                [
-                  99.6106,
-                  7.98953
-                ],
-                [
-                  99.60983,
-                  7.98779
-                ],
-                [
-                  99.60784,
-                  7.98881
-                ],
-                [
-                  99.60827,
-                  7.99105
-                ],
-                [
-                  99.61122,
-                  7.99288
-                ],
-                [
-                  99.60869,
-                  7.99546
-                ],
-                [
-                  99.60896,
-                  7.99695
-                ],
-                [
-                  99.60706,
-                  7.99707
-                ],
-                [
-                  99.60737,
-                  7.99856
-                ],
-                [
-                  99.6056,
-                  8.00045
-                ],
-                [
-                  99.60676,
-                  8.00092
-                ],
-                [
-                  99.60781,
-                  8.00731
-                ],
-                [
-                  99.60939,
-                  8.00754
-                ],
-                [
-                  99.61004,
-                  8.00956
-                ],
-                [
-                  99.61129,
-                  8.00847
-                ],
-                [
-                  99.61275,
-                  8.01042
-                ],
-                [
-                  99.61575,
-                  8.01093
-                ],
-                [
-                  99.62027,
-                  8.01441
-                ],
-                [
-                  99.61934,
-                  8.01613
-                ],
-                [
-                  99.62102,
-                  8.01811
-                ],
-                [
-                  99.62272,
-                  8.017
-                ],
-                [
-                  99.62367,
-                  8.0184
-                ],
-                [
-                  99.6272,
-                  8.01827
-                ],
-                [
-                  99.6292,
-                  8.02063
-                ],
-                [
-                  99.63222,
-                  8.0216
-                ],
-                [
-                  99.63142,
-                  8.02791
-                ],
-                [
-                  99.63358,
-                  8.03006
-                ],
-                [
-                  99.63319,
-                  8.03229
-                ],
-                [
-                  99.63463,
-                  8.03132
-                ],
-                [
-                  99.63567,
-                  8.0329
-                ],
-                [
-                  99.63442,
-                  8.03387
-                ],
-                [
-                  99.63548,
-                  8.03524
-                ],
-                [
-                  99.63286,
-                  8.03678
-                ],
-                [
-                  99.63297,
-                  8.0387
-                ],
-                [
-                  99.63846,
-                  8.04059
-                ],
-                [
-                  99.63947,
-                  8.04342
-                ],
-                [
-                  99.6411,
-                  8.04462
-                ],
-                [
-                  99.64036,
-                  8.04641
-                ],
-                [
-                  99.64194,
-                  8.04819
-                ],
-                [
-                  99.64155,
-                  8.05085
-                ],
-                [
-                  99.6435,
-                  8.05187
-                ],
-                [
-                  99.64309,
-                  8.05313
-                ],
-                [
-                  99.64759,
-                  8.05104
-                ],
-                [
-                  99.64972,
-                  8.05989
-                ],
-                [
-                  99.65135,
-                  8.06189
-                ],
-                [
-                  99.65546,
-                  8.06323
-                ],
-                [
-                  99.65853,
-                  8.06259
-                ],
-                [
-                  99.66223,
-                  8.06453
-                ],
-                [
-                  99.66538,
-                  8.06419
-                ],
-                [
-                  99.67048,
-                  8.06816
-                ],
-                [
-                  99.67273,
-                  8.06763
-                ],
-                [
-                  99.67579,
-                  8.06904
-                ],
-                [
-                  99.67673,
-                  8.06427
-                ],
-                [
-                  99.68249,
-                  8.0576
-                ],
-                [
-                  99.68669,
-                  8.05807
-                ],
-                [
-                  99.68868,
-                  8.06081
-                ],
-                [
-                  99.70089,
-                  8.06091
-                ],
-                [
-                  99.7138,
-                  8.05229
-                ],
-                [
-                  99.72018,
-                  8.0551
-                ],
-                [
-                  99.72218,
-                  8.05466
-                ],
-                [
-                  99.72309,
-                  8.05298
-                ],
-                [
-                  99.71994,
-                  8.05107
-                ],
-                [
-                  99.72042,
-                  8.05041
-                ],
-                [
-                  99.72438,
-                  8.05038
-                ],
-                [
-                  99.72719,
-                  8.0522
-                ],
-                [
-                  99.72914,
-                  8.05113
-                ],
-                [
-                  99.73785,
-                  8.05147
-                ],
-                [
-                  99.74467,
-                  8.0494
-                ],
-                [
-                  99.75027,
-                  8.04915
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "800913",
-          "tambon": "ต.เขาขาว",
-          "amphoe": "อ.ทุ่งสง",
-          "province": "จ.นครศรีธรรมราช",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "บ้านหินราว",
-          "latitude": 8.181668,
-          "longitude": 99.470944,
-          "sum_rainfall_mm": 42.0,
-          "observed_at": "2026-10-13T10:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.52496,
-                  8.23055
-                ],
-                [
-                  99.53009,
-                  8.23162
-                ],
-                [
-                  99.53149,
-                  8.23082
-                ],
-                [
-                  99.53189,
-                  8.22802
-                ],
-                [
-                  99.53948,
-                  8.22802
-                ],
-                [
-                  99.54137,
-                  8.22693
-                ],
-                [
-                  99.54107,
-                  8.22483
-                ],
-                [
-                  99.54334,
-                  8.2246
-                ],
-                [
-                  99.54295,
-                  8.21947
-                ],
-                [
-                  99.54473,
-                  8.21546
-                ],
-                [
-                  99.5504,
-                  8.20958
-                ],
-                [
-                  99.55781,
-                  8.20548
-                ],
-                [
-                  99.56006,
-                  8.20043
-                ],
-                [
-                  99.55804,
-                  8.19869
-                ],
-                [
-                  99.55939,
-                  8.19695
-                ],
-                [
-                  99.55832,
-                  8.19346
-                ],
-                [
-                  99.56135,
-                  8.19122
-                ],
-                [
-                  99.56057,
-                  8.18852
-                ],
-                [
-                  99.56394,
-                  8.18538
-                ],
-                [
-                  99.56478,
-                  8.17892
-                ],
-                [
-                  99.56664,
-                  8.17751
-                ],
-                [
-                  99.56619,
-                  8.17414
-                ],
-                [
-                  99.56497,
-                  8.17401
-                ],
-                [
-                  99.55172,
-                  8.17925
-                ],
-                [
-                  99.55382,
-                  8.16929
-                ],
-                [
-                  99.55094,
-                  8.15437
-                ],
-                [
-                  99.54797,
-                  8.14701
-                ],
-                [
-                  99.54774,
-                  8.14263
-                ],
-                [
-                  99.54567,
-                  8.1388
-                ],
-                [
-                  99.54667,
-                  8.13147
-                ],
-                [
-                  99.54341,
-                  8.12264
-                ],
-                [
-                  99.53862,
-                  8.12249
-                ],
-                [
-                  99.53083,
-                  8.12436
-                ],
-                [
-                  99.52941,
-                  8.12204
-                ],
-                [
-                  99.52185,
-                  8.12376
-                ],
-                [
-                  99.52182,
-                  8.13421
-                ],
-                [
-                  99.52019,
-                  8.14454
-                ],
-                [
-                  99.51159,
-                  8.1478
-                ],
-                [
-                  99.50772,
-                  8.14679
-                ],
-                [
-                  99.50356,
-                  8.14241
-                ],
-                [
-                  99.5012,
-                  8.13084
-                ],
-                [
-                  99.50258,
-                  8.12426
-                ],
-                [
-                  99.49764,
-                  8.12524
-                ],
-                [
-                  99.49682,
-                  8.12698
-                ],
-                [
-                  99.49255,
-                  8.12833
-                ],
-                [
-                  99.48679,
-                  8.14166
-                ],
-                [
-                  99.4793,
-                  8.13978
-                ],
-                [
-                  99.47795,
-                  8.14293
-                ],
-                [
-                  99.4757,
-                  8.14375
-                ],
-                [
-                  99.47361,
-                  8.14315
-                ],
-                [
-                  99.46694,
-                  8.13754
-                ],
-                [
-                  99.4638,
-                  8.13349
-                ],
-                [
-                  99.46035,
-                  8.13312
-                ],
-                [
-                  99.45968,
-                  8.13207
-                ],
-                [
-                  99.45855,
-                  8.1275
-                ],
-                [
-                  99.46372,
-                  8.12256
-                ],
-                [
-                  99.4638,
-                  8.12121
-                ],
-                [
-                  99.45563,
-                  8.12114
-                ],
-                [
-                  99.45279,
-                  8.12286
-                ],
-                [
-                  99.44785,
-                  8.11926
-                ],
-                [
-                  99.44897,
-                  8.12166
-                ],
-                [
-                  99.44665,
-                  8.12248
-                ],
-                [
-                  99.4459,
-                  8.12466
-                ],
-                [
-                  99.44253,
-                  8.12548
-                ],
-                [
-                  99.43796,
-                  8.12383
-                ],
-                [
-                  99.43468,
-                  8.11894
-                ],
-                [
-                  99.43315,
-                  8.13177
-                ],
-                [
-                  99.43159,
-                  8.13409
-                ],
-                [
-                  99.42791,
-                  8.13582
-                ],
-                [
-                  99.42599,
-                  8.14179
-                ],
-                [
-                  99.42817,
-                  8.15168
-                ],
-                [
-                  99.43095,
-                  8.15829
-                ],
-                [
-                  99.43351,
-                  8.15881
-                ],
-                [
-                  99.43489,
-                  8.16063
-                ],
-                [
-                  99.43854,
-                  8.16046
-                ],
-                [
-                  99.4388,
-                  8.16555
-                ],
-                [
-                  99.44235,
-                  8.17708
-                ],
-                [
-                  99.44589,
-                  8.18126
-                ],
-                [
-                  99.4455,
-                  8.18782
-                ],
-                [
-                  99.47035,
-                  8.19551
-                ],
-                [
-                  99.47202,
-                  8.19772
-                ],
-                [
-                  99.46995,
-                  8.2013
-                ],
-                [
-                  99.47153,
-                  8.20813
-                ],
-                [
-                  99.4785,
-                  8.21398
-                ],
-                [
-                  99.48494,
-                  8.21809
-                ],
-                [
-                  99.48629,
-                  8.21794
-                ],
-                [
-                  99.4907,
-                  8.22416
-                ],
-                [
-                  99.49725,
-                  8.22755
-                ],
-                [
-                  99.50137,
-                  8.23177
-                ],
-                [
-                  99.50525,
-                  8.2316
-                ],
-                [
-                  99.50806,
-                  8.23474
-                ],
-                [
-                  99.51362,
-                  8.23705
-                ],
-                [
-                  99.51648,
-                  8.23699
-                ],
-                [
-                  99.51901,
-                  8.2339
-                ],
-                [
-                  99.52496,
-                  8.23055
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "800902",
-          "tambon": "ต.ชะมาย",
-          "amphoe": "อ.ทุ่งสง",
-          "province": "จ.นครศรีธรรมราช",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "บ้านนานอก",
-          "latitude": 8.155845,
-          "longitude": 99.680396,
-          "sum_rainfall_mm": 45.0,
-          "observed_at": "2026-10-13T10:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.66084,
-                  8.20566
-                ],
-                [
-                  99.66209,
-                  8.20458
-                ],
-                [
-                  99.66137,
-                  8.2018
-                ],
-                [
-                  99.66337,
-                  8.19881
-                ],
-                [
-                  99.66577,
-                  8.1978
-                ],
-                [
-                  99.67024,
-                  8.2014
-                ],
-                [
-                  99.67757,
-                  8.18923
-                ],
-                [
-                  99.6801,
-                  8.18902
-                ],
-                [
-                  99.68017,
-                  8.18554
-                ],
-                [
-                  99.67542,
-                  8.1752
-                ],
-                [
-                  99.67515,
-                  8.16842
-                ],
-                [
-                  99.67113,
-                  8.16627
-                ],
-                [
-                  99.67101,
-                  8.16422
-                ],
-                [
-                  99.6734,
-                  8.16416
-                ],
-                [
-                  99.67331,
-                  8.15982
-                ],
-                [
-                  99.67879,
-                  8.15877
-                ],
-                [
-                  99.68448,
-                  8.15426
-                ],
-                [
-                  99.68734,
-                  8.15334
-                ],
-                [
-                  99.68822,
-                  8.15122
-                ],
-                [
-                  99.69227,
-                  8.15053
-                ],
-                [
-                  99.69416,
-                  8.14896
-                ],
-                [
-                  99.69766,
-                  8.14407
-                ],
-                [
-                  99.69838,
-                  8.13952
-                ],
-                [
-                  99.70324,
-                  8.12967
-                ],
-                [
-                  99.67483,
-                  8.12965
-                ],
-                [
-                  99.67511,
-                  8.13153
-                ],
-                [
-                  99.66163,
-                  8.12979
-                ],
-                [
-                  99.66055,
-                  8.1399
-                ],
-                [
-                  99.656,
-                  8.145
-                ],
-                [
-                  99.65693,
-                  8.15254
-                ],
-                [
-                  99.65347,
-                  8.16067
-                ],
-                [
-                  99.64977,
-                  8.16332
-                ],
-                [
-                  99.6509,
-                  8.1672
-                ],
-                [
-                  99.6496,
-                  8.17507
-                ],
-                [
-                  99.65225,
-                  8.1787
-                ],
-                [
-                  99.65406,
-                  8.18384
-                ],
-                [
-                  99.65748,
-                  8.18224
-                ],
-                [
-                  99.65773,
-                  8.18354
-                ],
-                [
-                  99.65444,
-                  8.18868
-                ],
-                [
-                  99.65646,
-                  8.18843
-                ],
-                [
-                  99.65735,
-                  8.19327
-                ],
-                [
-                  99.65402,
-                  8.19331
-                ],
-                [
-                  99.65373,
-                  8.19449
-                ],
-                [
-                  99.65722,
-                  8.19491
-                ],
-                [
-                  99.65773,
-                  8.19757
-                ],
-                [
-                  99.65499,
-                  8.19972
-                ],
-                [
-                  99.65528,
-                  8.20309
-                ],
-                [
-                  99.66042,
-                  8.20351
-                ],
-                [
-                  99.66084,
-                  8.20566
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "800902",
-          "tambon": "ต.ชะมาย",
-          "amphoe": "อ.ทุ่งสง",
-          "province": "จ.นครศรีธรรมราช",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "บ้านวังหีบ",
-          "latitude": 8.194613,
-          "longitude": 99.657666,
-          "sum_rainfall_mm": 24.0,
-          "observed_at": "2026-10-13T10:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.66084,
-                  8.20566
-                ],
-                [
-                  99.66209,
-                  8.20458
-                ],
-                [
-                  99.66137,
-                  8.2018
-                ],
-                [
-                  99.66337,
-                  8.19881
-                ],
-                [
-                  99.66577,
-                  8.1978
-                ],
-                [
-                  99.67024,
-                  8.2014
-                ],
-                [
-                  99.67757,
-                  8.18923
-                ],
-                [
-                  99.6801,
-                  8.18902
-                ],
-                [
-                  99.68017,
-                  8.18554
-                ],
-                [
-                  99.67542,
-                  8.1752
-                ],
-                [
-                  99.67515,
-                  8.16842
-                ],
-                [
-                  99.67113,
-                  8.16627
-                ],
-                [
-                  99.67101,
-                  8.16422
-                ],
-                [
-                  99.6734,
-                  8.16416
-                ],
-                [
-                  99.67331,
-                  8.15982
-                ],
-                [
-                  99.67879,
-                  8.15877
-                ],
-                [
-                  99.68448,
-                  8.15426
-                ],
-                [
-                  99.68734,
-                  8.15334
-                ],
-                [
-                  99.68822,
-                  8.15122
-                ],
-                [
-                  99.69227,
-                  8.15053
-                ],
-                [
-                  99.69416,
-                  8.14896
-                ],
-                [
-                  99.69766,
-                  8.14407
-                ],
-                [
-                  99.69838,
-                  8.13952
-                ],
-                [
-                  99.70324,
-                  8.12967
-                ],
-                [
-                  99.67483,
-                  8.12965
-                ],
-                [
-                  99.67511,
-                  8.13153
-                ],
-                [
-                  99.66163,
-                  8.12979
-                ],
-                [
-                  99.66055,
-                  8.1399
-                ],
-                [
-                  99.656,
-                  8.145
-                ],
-                [
-                  99.65693,
-                  8.15254
-                ],
-                [
-                  99.65347,
-                  8.16067
-                ],
-                [
-                  99.64977,
-                  8.16332
-                ],
-                [
-                  99.6509,
-                  8.1672
-                ],
-                [
-                  99.6496,
-                  8.17507
-                ],
-                [
-                  99.65225,
-                  8.1787
-                ],
-                [
-                  99.65406,
-                  8.18384
-                ],
-                [
-                  99.65748,
-                  8.18224
-                ],
-                [
-                  99.65773,
-                  8.18354
-                ],
-                [
-                  99.65444,
-                  8.18868
-                ],
-                [
-                  99.65646,
-                  8.18843
-                ],
-                [
-                  99.65735,
-                  8.19327
-                ],
-                [
-                  99.65402,
-                  8.19331
-                ],
-                [
-                  99.65373,
-                  8.19449
-                ],
-                [
-                  99.65722,
-                  8.19491
-                ],
-                [
-                  99.65773,
-                  8.19757
-                ],
-                [
-                  99.65499,
-                  8.19972
-                ],
-                [
-                  99.65528,
-                  8.20309
-                ],
-                [
-                  99.66042,
-                  8.20351
-                ],
-                [
-                  99.66084,
-                  8.20566
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "800911",
-          "tambon": "ต.ถ้ำใหญ่",
-          "amphoe": "อ.ทุ่งสง",
-          "province": "จ.นครศรีธรรมราช",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "บ้านไสใหญ่เหนือ",
-          "latitude": 8.17327,
-          "longitude": 99.719523,
-          "sum_rainfall_mm": 28.0,
-          "observed_at": "2026-10-13T10:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.78831,
-                  8.23173
-                ],
-                [
-                  99.78367,
-                  8.22448
-                ],
-                [
-                  99.78319,
-                  8.21574
-                ],
-                [
-                  99.78056,
-                  8.21238
-                ],
-                [
-                  99.77709,
-                  8.21154
-                ],
-                [
-                  99.78676,
-                  8.20421
-                ],
-                [
-                  99.78809,
-                  8.20131
-                ],
-                [
-                  99.79086,
-                  8.20024
-                ],
-                [
-                  99.79867,
-                  8.20138
-                ],
-                [
-                  99.80267,
-                  8.20031
-                ],
-                [
-                  99.8026,
-                  8.19482
-                ],
-                [
-                  99.79775,
-                  8.1876
-                ],
-                [
-                  99.7936,
-                  8.18692
-                ],
-                [
-                  99.78778,
-                  8.18236
-                ],
-                [
-                  99.7878,
-                  8.17753
-                ],
-                [
-                  99.79018,
-                  8.17155
-                ],
-                [
-                  99.78906,
-                  8.16959
-                ],
-                [
-                  99.78535,
-                  8.16609
-                ],
-                [
-                  99.77526,
-                  8.16158
-                ],
-                [
-                  99.77388,
-                  8.15958
-                ],
-                [
-                  99.77448,
-                  8.15761
-                ],
-                [
-                  99.77306,
-                  8.15324
-                ],
-                [
-                  99.77426,
-                  8.14993
-                ],
-                [
-                  99.76816,
-                  8.14399
-                ],
-                [
-                  99.77462,
-                  8.13877
-                ],
-                [
-                  99.77832,
-                  8.12829
-                ],
-                [
-                  99.77186,
-                  8.11564
-                ],
-                [
-                  99.76977,
-                  8.11668
-                ],
-                [
-                  99.76176,
-                  8.11602
-                ],
-                [
-                  99.74675,
-                  8.11187
-                ],
-                [
-                  99.7472,
-                  8.10433
-                ],
-                [
-                  99.74334,
-                  8.10164
-                ],
-                [
-                  99.74248,
-                  8.09904
-                ],
-                [
-                  99.73811,
-                  8.09362
-                ],
-                [
-                  99.73907,
-                  8.08764
-                ],
-                [
-                  99.73757,
-                  8.08231
-                ],
-                [
-                  99.72913,
-                  8.08382
-                ],
-                [
-                  99.72231,
-                  8.08668
-                ],
-                [
-                  99.71374,
-                  8.08496
-                ],
-                [
-                  99.70659,
-                  8.08722
-                ],
-                [
-                  99.70361,
-                  8.09079
-                ],
-                [
-                  99.69621,
-                  8.09478
-                ],
-                [
-                  99.6933,
-                  8.09759
-                ],
-                [
-                  99.69329,
-                  8.10269
-                ],
-                [
-                  99.69558,
-                  8.10697
-                ],
-                [
-                  99.69487,
-                  8.10868
-                ],
-                [
-                  99.69106,
-                  8.11105
-                ],
-                [
-                  99.69094,
-                  8.11281
-                ],
-                [
-                  99.69517,
-                  8.11996
-                ],
-                [
-                  99.69736,
-                  8.12659
-                ],
-                [
-                  99.70324,
-                  8.12967
-                ],
-                [
-                  99.69838,
-                  8.13952
-                ],
-                [
-                  99.69766,
-                  8.14407
-                ],
-                [
-                  99.69227,
-                  8.15053
-                ],
-                [
-                  99.69677,
-                  8.15515
-                ],
-                [
-                  99.69749,
-                  8.15782
-                ],
-                [
-                  99.70007,
-                  8.15754
-                ],
-                [
-                  99.70444,
-                  8.16126
-                ],
-                [
-                  99.70286,
-                  8.16222
-                ],
-                [
-                  99.70254,
-                  8.16448
-                ],
-                [
-                  99.70385,
-                  8.16701
-                ],
-                [
-                  99.70172,
-                  8.1675
-                ],
-                [
-                  99.7027,
-                  8.17449
-                ],
-                [
-                  99.70143,
-                  8.17799
-                ],
-                [
-                  99.70359,
-                  8.17922
-                ],
-                [
-                  99.70933,
-                  8.18926
-                ],
-                [
-                  99.71285,
-                  8.19014
-                ],
-                [
-                  99.71519,
-                  8.18923
-                ],
-                [
-                  99.71648,
-                  8.19305
-                ],
-                [
-                  99.71795,
-                  8.19352
-                ],
-                [
-                  99.71909,
-                  8.19798
-                ],
-                [
-                  99.71722,
-                  8.20494
-                ],
-                [
-                  99.71938,
-                  8.20798
-                ],
-                [
-                  99.71974,
-                  8.21266
-                ],
-                [
-                  99.72093,
-                  8.21313
-                ],
-                [
-                  99.7191,
-                  8.21543
-                ],
-                [
-                  99.72017,
-                  8.2193
-                ],
-                [
-                  99.72341,
-                  8.22442
-                ],
-                [
-                  99.7266,
-                  8.22442
-                ],
-                [
-                  99.72985,
-                  8.22737
-                ],
-                [
-                  99.73562,
-                  8.23563
-                ],
-                [
-                  99.7404,
-                  8.23769
-                ],
-                [
-                  99.74455,
-                  8.24307
-                ],
-                [
-                  99.74985,
-                  8.24641
-                ],
-                [
-                  99.75279,
-                  8.25005
-                ],
-                [
-                  99.75723,
-                  8.25212
-                ],
-                [
-                  99.75574,
-                  8.25043
-                ],
-                [
-                  99.75529,
-                  8.24607
-                ],
-                [
-                  99.76406,
-                  8.23901
-                ],
-                [
-                  99.76832,
-                  8.23828
-                ],
-                [
-                  99.77102,
-                  8.24011
-                ],
-                [
-                  99.77314,
-                  8.24012
-                ],
-                [
-                  99.77836,
-                  8.23529
-                ],
-                [
-                  99.78831,
-                  8.23173
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "800911",
-          "tambon": "ต.ถ้ำใหญ่",
-          "amphoe": "อ.ทุ่งสง",
-          "province": "จ.นครศรีธรรมราช",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "ที่ทำการอุทยานแห่งชาติน้ำตกโยง",
-          "latitude": 8.172421,
-          "longitude": 99.74128,
-          "sum_rainfall_mm": 70.6,
-          "observed_at": "2026-10-13T10:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.78831,
-                  8.23173
-                ],
-                [
-                  99.78367,
-                  8.22448
-                ],
-                [
-                  99.78319,
-                  8.21574
-                ],
-                [
-                  99.78056,
-                  8.21238
-                ],
-                [
-                  99.77709,
-                  8.21154
-                ],
-                [
-                  99.78676,
-                  8.20421
-                ],
-                [
-                  99.78809,
-                  8.20131
-                ],
-                [
-                  99.79086,
-                  8.20024
-                ],
-                [
-                  99.79867,
-                  8.20138
-                ],
-                [
-                  99.80267,
-                  8.20031
-                ],
-                [
-                  99.8026,
-                  8.19482
-                ],
-                [
-                  99.79775,
-                  8.1876
-                ],
-                [
-                  99.7936,
-                  8.18692
-                ],
-                [
-                  99.78778,
-                  8.18236
-                ],
-                [
-                  99.7878,
-                  8.17753
-                ],
-                [
-                  99.79018,
-                  8.17155
-                ],
-                [
-                  99.78906,
-                  8.16959
-                ],
-                [
-                  99.78535,
-                  8.16609
-                ],
-                [
-                  99.77526,
-                  8.16158
-                ],
-                [
-                  99.77388,
-                  8.15958
-                ],
-                [
-                  99.77448,
-                  8.15761
-                ],
-                [
-                  99.77306,
-                  8.15324
-                ],
-                [
-                  99.77426,
-                  8.14993
-                ],
-                [
-                  99.76816,
-                  8.14399
-                ],
-                [
-                  99.77462,
-                  8.13877
-                ],
-                [
-                  99.77832,
-                  8.12829
-                ],
-                [
-                  99.77186,
-                  8.11564
-                ],
-                [
-                  99.76977,
-                  8.11668
-                ],
-                [
-                  99.76176,
-                  8.11602
-                ],
-                [
-                  99.74675,
-                  8.11187
-                ],
-                [
-                  99.7472,
-                  8.10433
-                ],
-                [
-                  99.74334,
-                  8.10164
-                ],
-                [
-                  99.74248,
-                  8.09904
-                ],
-                [
-                  99.73811,
-                  8.09362
-                ],
-                [
-                  99.73907,
-                  8.08764
-                ],
-                [
-                  99.73757,
-                  8.08231
-                ],
-                [
-                  99.72913,
-                  8.08382
-                ],
-                [
-                  99.72231,
-                  8.08668
-                ],
-                [
-                  99.71374,
-                  8.08496
-                ],
-                [
-                  99.70659,
-                  8.08722
-                ],
-                [
-                  99.70361,
-                  8.09079
-                ],
-                [
-                  99.69621,
-                  8.09478
-                ],
-                [
-                  99.6933,
-                  8.09759
-                ],
-                [
-                  99.69329,
-                  8.10269
-                ],
-                [
-                  99.69558,
-                  8.10697
-                ],
-                [
-                  99.69487,
-                  8.10868
-                ],
-                [
-                  99.69106,
-                  8.11105
-                ],
-                [
-                  99.69094,
-                  8.11281
-                ],
-                [
-                  99.69517,
-                  8.11996
-                ],
-                [
-                  99.69736,
-                  8.12659
-                ],
-                [
-                  99.70324,
-                  8.12967
-                ],
-                [
-                  99.69838,
-                  8.13952
-                ],
-                [
-                  99.69766,
-                  8.14407
-                ],
-                [
-                  99.69227,
-                  8.15053
-                ],
-                [
-                  99.69677,
-                  8.15515
-                ],
-                [
-                  99.69749,
-                  8.15782
-                ],
-                [
-                  99.70007,
-                  8.15754
-                ],
-                [
-                  99.70444,
-                  8.16126
-                ],
-                [
-                  99.70286,
-                  8.16222
-                ],
-                [
-                  99.70254,
-                  8.16448
-                ],
-                [
-                  99.70385,
-                  8.16701
-                ],
-                [
-                  99.70172,
-                  8.1675
-                ],
-                [
-                  99.7027,
-                  8.17449
-                ],
-                [
-                  99.70143,
-                  8.17799
-                ],
-                [
-                  99.70359,
-                  8.17922
-                ],
-                [
-                  99.70933,
-                  8.18926
-                ],
-                [
-                  99.71285,
-                  8.19014
-                ],
-                [
-                  99.71519,
-                  8.18923
-                ],
-                [
-                  99.71648,
-                  8.19305
-                ],
-                [
-                  99.71795,
-                  8.19352
-                ],
-                [
-                  99.71909,
-                  8.19798
-                ],
-                [
-                  99.71722,
-                  8.20494
-                ],
-                [
-                  99.71938,
-                  8.20798
-                ],
-                [
-                  99.71974,
-                  8.21266
-                ],
-                [
-                  99.72093,
-                  8.21313
-                ],
-                [
-                  99.7191,
-                  8.21543
-                ],
-                [
-                  99.72017,
-                  8.2193
-                ],
-                [
-                  99.72341,
-                  8.22442
-                ],
-                [
-                  99.7266,
-                  8.22442
-                ],
-                [
-                  99.72985,
-                  8.22737
-                ],
-                [
-                  99.73562,
-                  8.23563
-                ],
-                [
-                  99.7404,
-                  8.23769
-                ],
-                [
-                  99.74455,
-                  8.24307
-                ],
-                [
-                  99.74985,
-                  8.24641
-                ],
-                [
-                  99.75279,
-                  8.25005
-                ],
-                [
-                  99.75723,
-                  8.25212
-                ],
-                [
-                  99.75574,
-                  8.25043
-                ],
-                [
-                  99.75529,
-                  8.24607
-                ],
-                [
-                  99.76406,
-                  8.23901
-                ],
-                [
-                  99.76832,
-                  8.23828
-                ],
-                [
-                  99.77102,
-                  8.24011
-                ],
-                [
-                  99.77314,
-                  8.24012
-                ],
-                [
-                  99.77836,
-                  8.23529
-                ],
-                [
-                  99.78831,
-                  8.23173
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "800911",
-          "tambon": "ต.ถ้ำใหญ่",
-          "amphoe": "อ.ทุ่งสง",
-          "province": "จ.นครศรีธรรมราช",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "ฝายคลองเปิก",
-          "latitude": 8.193899,
-          "longitude": 99.73481,
-          "sum_rainfall_mm": 60.8,
-          "observed_at": "2026-10-13T10:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.78831,
-                  8.23173
-                ],
-                [
-                  99.78367,
-                  8.22448
-                ],
-                [
-                  99.78319,
-                  8.21574
-                ],
-                [
-                  99.78056,
-                  8.21238
-                ],
-                [
-                  99.77709,
-                  8.21154
-                ],
-                [
-                  99.78676,
-                  8.20421
-                ],
-                [
-                  99.78809,
-                  8.20131
-                ],
-                [
-                  99.79086,
-                  8.20024
-                ],
-                [
-                  99.79867,
-                  8.20138
-                ],
-                [
-                  99.80267,
-                  8.20031
-                ],
-                [
-                  99.8026,
-                  8.19482
-                ],
-                [
-                  99.79775,
-                  8.1876
-                ],
-                [
-                  99.7936,
-                  8.18692
-                ],
-                [
-                  99.78778,
-                  8.18236
-                ],
-                [
-                  99.7878,
-                  8.17753
-                ],
-                [
-                  99.79018,
-                  8.17155
-                ],
-                [
-                  99.78906,
-                  8.16959
-                ],
-                [
-                  99.78535,
-                  8.16609
-                ],
-                [
-                  99.77526,
-                  8.16158
-                ],
-                [
-                  99.77388,
-                  8.15958
-                ],
-                [
-                  99.77448,
-                  8.15761
-                ],
-                [
-                  99.77306,
-                  8.15324
-                ],
-                [
-                  99.77426,
-                  8.14993
-                ],
-                [
-                  99.76816,
-                  8.14399
-                ],
-                [
-                  99.77462,
-                  8.13877
-                ],
-                [
-                  99.77832,
-                  8.12829
-                ],
-                [
-                  99.77186,
-                  8.11564
-                ],
-                [
-                  99.76977,
-                  8.11668
-                ],
-                [
-                  99.76176,
-                  8.11602
-                ],
-                [
-                  99.74675,
-                  8.11187
-                ],
-                [
-                  99.7472,
-                  8.10433
-                ],
-                [
-                  99.74334,
-                  8.10164
-                ],
-                [
-                  99.74248,
-                  8.09904
-                ],
-                [
-                  99.73811,
-                  8.09362
-                ],
-                [
-                  99.73907,
-                  8.08764
-                ],
-                [
-                  99.73757,
-                  8.08231
-                ],
-                [
-                  99.72913,
-                  8.08382
-                ],
-                [
-                  99.72231,
-                  8.08668
-                ],
-                [
-                  99.71374,
-                  8.08496
-                ],
-                [
-                  99.70659,
-                  8.08722
-                ],
-                [
-                  99.70361,
-                  8.09079
-                ],
-                [
-                  99.69621,
-                  8.09478
-                ],
-                [
-                  99.6933,
-                  8.09759
-                ],
-                [
-                  99.69329,
-                  8.10269
-                ],
-                [
-                  99.69558,
-                  8.10697
-                ],
-                [
-                  99.69487,
-                  8.10868
-                ],
-                [
-                  99.69106,
-                  8.11105
-                ],
-                [
-                  99.69094,
-                  8.11281
-                ],
-                [
-                  99.69517,
-                  8.11996
-                ],
-                [
-                  99.69736,
-                  8.12659
-                ],
-                [
-                  99.70324,
-                  8.12967
-                ],
-                [
-                  99.69838,
-                  8.13952
-                ],
-                [
-                  99.69766,
-                  8.14407
-                ],
-                [
-                  99.69227,
-                  8.15053
-                ],
-                [
-                  99.69677,
-                  8.15515
-                ],
-                [
-                  99.69749,
-                  8.15782
-                ],
-                [
-                  99.70007,
-                  8.15754
-                ],
-                [
-                  99.70444,
-                  8.16126
-                ],
-                [
-                  99.70286,
-                  8.16222
-                ],
-                [
-                  99.70254,
-                  8.16448
-                ],
-                [
-                  99.70385,
-                  8.16701
-                ],
-                [
-                  99.70172,
-                  8.1675
-                ],
-                [
-                  99.7027,
-                  8.17449
-                ],
-                [
-                  99.70143,
-                  8.17799
-                ],
-                [
-                  99.70359,
-                  8.17922
-                ],
-                [
-                  99.70933,
-                  8.18926
-                ],
-                [
-                  99.71285,
-                  8.19014
-                ],
-                [
-                  99.71519,
-                  8.18923
-                ],
-                [
-                  99.71648,
-                  8.19305
-                ],
-                [
-                  99.71795,
-                  8.19352
-                ],
-                [
-                  99.71909,
-                  8.19798
-                ],
-                [
-                  99.71722,
-                  8.20494
-                ],
-                [
-                  99.71938,
-                  8.20798
-                ],
-                [
-                  99.71974,
-                  8.21266
-                ],
-                [
-                  99.72093,
-                  8.21313
-                ],
-                [
-                  99.7191,
-                  8.21543
-                ],
-                [
-                  99.72017,
-                  8.2193
-                ],
-                [
-                  99.72341,
-                  8.22442
-                ],
-                [
-                  99.7266,
-                  8.22442
-                ],
-                [
-                  99.72985,
-                  8.22737
-                ],
-                [
-                  99.73562,
-                  8.23563
-                ],
-                [
-                  99.7404,
-                  8.23769
-                ],
-                [
-                  99.74455,
-                  8.24307
-                ],
-                [
-                  99.74985,
-                  8.24641
-                ],
-                [
-                  99.75279,
-                  8.25005
-                ],
-                [
-                  99.75723,
-                  8.25212
-                ],
-                [
-                  99.75574,
-                  8.25043
-                ],
-                [
-                  99.75529,
-                  8.24607
-                ],
-                [
-                  99.76406,
-                  8.23901
-                ],
-                [
-                  99.76832,
-                  8.23828
-                ],
-                [
-                  99.77102,
-                  8.24011
-                ],
-                [
-                  99.77314,
-                  8.24012
-                ],
-                [
-                  99.77836,
-                  8.23529
-                ],
-                [
-                  99.78831,
-                  8.23173
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "800911",
-          "tambon": "ต.ถ้ำใหญ่",
-          "amphoe": "อ.ทุ่งสง",
-          "province": "จ.นครศรีธรรมราช",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "น้ำตกปลิว",
-          "latitude": 8.16269,
-          "longitude": 99.75916,
-          "sum_rainfall_mm": 136.4,
-          "observed_at": "2026-10-13T10:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.78831,
-                  8.23173
-                ],
-                [
-                  99.78367,
-                  8.22448
-                ],
-                [
-                  99.78319,
-                  8.21574
-                ],
-                [
-                  99.78056,
-                  8.21238
-                ],
-                [
-                  99.77709,
-                  8.21154
-                ],
-                [
-                  99.78676,
-                  8.20421
-                ],
-                [
-                  99.78809,
-                  8.20131
-                ],
-                [
-                  99.79086,
-                  8.20024
-                ],
-                [
-                  99.79867,
-                  8.20138
-                ],
-                [
-                  99.80267,
-                  8.20031
-                ],
-                [
-                  99.8026,
-                  8.19482
-                ],
-                [
-                  99.79775,
-                  8.1876
-                ],
-                [
-                  99.7936,
-                  8.18692
-                ],
-                [
-                  99.78778,
-                  8.18236
-                ],
-                [
-                  99.7878,
-                  8.17753
-                ],
-                [
-                  99.79018,
-                  8.17155
-                ],
-                [
-                  99.78906,
-                  8.16959
-                ],
-                [
-                  99.78535,
-                  8.16609
-                ],
-                [
-                  99.77526,
-                  8.16158
-                ],
-                [
-                  99.77388,
-                  8.15958
-                ],
-                [
-                  99.77448,
-                  8.15761
-                ],
-                [
-                  99.77306,
-                  8.15324
-                ],
-                [
-                  99.77426,
-                  8.14993
-                ],
-                [
-                  99.76816,
-                  8.14399
-                ],
-                [
-                  99.77462,
-                  8.13877
-                ],
-                [
-                  99.77832,
-                  8.12829
-                ],
-                [
-                  99.77186,
-                  8.11564
-                ],
-                [
-                  99.76977,
-                  8.11668
-                ],
-                [
-                  99.76176,
-                  8.11602
-                ],
-                [
-                  99.74675,
-                  8.11187
-                ],
-                [
-                  99.7472,
-                  8.10433
-                ],
-                [
-                  99.74334,
-                  8.10164
-                ],
-                [
-                  99.74248,
-                  8.09904
-                ],
-                [
-                  99.73811,
-                  8.09362
-                ],
-                [
-                  99.73907,
-                  8.08764
-                ],
-                [
-                  99.73757,
-                  8.08231
-                ],
-                [
-                  99.72913,
-                  8.08382
-                ],
-                [
-                  99.72231,
-                  8.08668
-                ],
-                [
-                  99.71374,
-                  8.08496
-                ],
-                [
-                  99.70659,
-                  8.08722
-                ],
-                [
-                  99.70361,
-                  8.09079
-                ],
-                [
-                  99.69621,
-                  8.09478
-                ],
-                [
-                  99.6933,
-                  8.09759
-                ],
-                [
-                  99.69329,
-                  8.10269
-                ],
-                [
-                  99.69558,
-                  8.10697
-                ],
-                [
-                  99.69487,
-                  8.10868
-                ],
-                [
-                  99.69106,
-                  8.11105
-                ],
-                [
-                  99.69094,
-                  8.11281
-                ],
-                [
-                  99.69517,
-                  8.11996
-                ],
-                [
-                  99.69736,
-                  8.12659
-                ],
-                [
-                  99.70324,
-                  8.12967
-                ],
-                [
-                  99.69838,
-                  8.13952
-                ],
-                [
-                  99.69766,
-                  8.14407
-                ],
-                [
-                  99.69227,
-                  8.15053
-                ],
-                [
-                  99.69677,
-                  8.15515
-                ],
-                [
-                  99.69749,
-                  8.15782
-                ],
-                [
-                  99.70007,
-                  8.15754
-                ],
-                [
-                  99.70444,
-                  8.16126
-                ],
-                [
-                  99.70286,
-                  8.16222
-                ],
-                [
-                  99.70254,
-                  8.16448
-                ],
-                [
-                  99.70385,
-                  8.16701
-                ],
-                [
-                  99.70172,
-                  8.1675
-                ],
-                [
-                  99.7027,
-                  8.17449
-                ],
-                [
-                  99.70143,
-                  8.17799
-                ],
-                [
-                  99.70359,
-                  8.17922
-                ],
-                [
-                  99.70933,
-                  8.18926
-                ],
-                [
-                  99.71285,
-                  8.19014
-                ],
-                [
-                  99.71519,
-                  8.18923
-                ],
-                [
-                  99.71648,
-                  8.19305
-                ],
-                [
-                  99.71795,
-                  8.19352
-                ],
-                [
-                  99.71909,
-                  8.19798
-                ],
-                [
-                  99.71722,
-                  8.20494
-                ],
-                [
-                  99.71938,
-                  8.20798
-                ],
-                [
-                  99.71974,
-                  8.21266
-                ],
-                [
-                  99.72093,
-                  8.21313
-                ],
-                [
-                  99.7191,
-                  8.21543
-                ],
-                [
-                  99.72017,
-                  8.2193
-                ],
-                [
-                  99.72341,
-                  8.22442
-                ],
-                [
-                  99.7266,
-                  8.22442
-                ],
-                [
-                  99.72985,
-                  8.22737
-                ],
-                [
-                  99.73562,
-                  8.23563
-                ],
-                [
-                  99.7404,
-                  8.23769
-                ],
-                [
-                  99.74455,
-                  8.24307
-                ],
-                [
-                  99.74985,
-                  8.24641
-                ],
-                [
-                  99.75279,
-                  8.25005
-                ],
-                [
-                  99.75723,
-                  8.25212
-                ],
-                [
-                  99.75574,
-                  8.25043
-                ],
-                [
-                  99.75529,
-                  8.24607
-                ],
-                [
-                  99.76406,
-                  8.23901
-                ],
-                [
-                  99.76832,
-                  8.23828
-                ],
-                [
-                  99.77102,
-                  8.24011
-                ],
-                [
-                  99.77314,
-                  8.24012
-                ],
-                [
-                  99.77836,
-                  8.23529
-                ],
-                [
-                  99.78831,
-                  8.23173
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "800911",
-          "tambon": "ต.ถ้ำใหญ่",
-          "amphoe": "อ.ทุ่งสง",
-          "province": "จ.นครศรีธรรมราช",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "ฝายคลองท่าโลน",
-          "latitude": 8.218343,
-          "longitude": 99.71981,
-          "sum_rainfall_mm": 52.6,
-          "observed_at": "2026-10-13T10:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.78831,
-                  8.23173
-                ],
-                [
-                  99.78367,
-                  8.22448
-                ],
-                [
-                  99.78319,
-                  8.21574
-                ],
-                [
-                  99.78056,
-                  8.21238
-                ],
-                [
-                  99.77709,
-                  8.21154
-                ],
-                [
-                  99.78676,
-                  8.20421
-                ],
-                [
-                  99.78809,
-                  8.20131
-                ],
-                [
-                  99.79086,
-                  8.20024
-                ],
-                [
-                  99.79867,
-                  8.20138
-                ],
-                [
-                  99.80267,
-                  8.20031
-                ],
-                [
-                  99.8026,
-                  8.19482
-                ],
-                [
-                  99.79775,
-                  8.1876
-                ],
-                [
-                  99.7936,
-                  8.18692
-                ],
-                [
-                  99.78778,
-                  8.18236
-                ],
-                [
-                  99.7878,
-                  8.17753
-                ],
-                [
-                  99.79018,
-                  8.17155
-                ],
-                [
-                  99.78906,
-                  8.16959
-                ],
-                [
-                  99.78535,
-                  8.16609
-                ],
-                [
-                  99.77526,
-                  8.16158
-                ],
-                [
-                  99.77388,
-                  8.15958
-                ],
-                [
-                  99.77448,
-                  8.15761
-                ],
-                [
-                  99.77306,
-                  8.15324
-                ],
-                [
-                  99.77426,
-                  8.14993
-                ],
-                [
-                  99.76816,
-                  8.14399
-                ],
-                [
-                  99.77462,
-                  8.13877
-                ],
-                [
-                  99.77832,
-                  8.12829
-                ],
-                [
-                  99.77186,
-                  8.11564
-                ],
-                [
-                  99.76977,
-                  8.11668
-                ],
-                [
-                  99.76176,
-                  8.11602
-                ],
-                [
-                  99.74675,
-                  8.11187
-                ],
-                [
-                  99.7472,
-                  8.10433
-                ],
-                [
-                  99.74334,
-                  8.10164
-                ],
-                [
-                  99.74248,
-                  8.09904
-                ],
-                [
-                  99.73811,
-                  8.09362
-                ],
-                [
-                  99.73907,
-                  8.08764
-                ],
-                [
-                  99.73757,
-                  8.08231
-                ],
-                [
-                  99.72913,
-                  8.08382
-                ],
-                [
-                  99.72231,
-                  8.08668
-                ],
-                [
-                  99.71374,
-                  8.08496
-                ],
-                [
-                  99.70659,
-                  8.08722
-                ],
-                [
-                  99.70361,
-                  8.09079
-                ],
-                [
-                  99.69621,
-                  8.09478
-                ],
-                [
-                  99.6933,
-                  8.09759
-                ],
-                [
-                  99.69329,
-                  8.10269
-                ],
-                [
-                  99.69558,
-                  8.10697
-                ],
-                [
-                  99.69487,
-                  8.10868
-                ],
-                [
-                  99.69106,
-                  8.11105
-                ],
-                [
-                  99.69094,
-                  8.11281
-                ],
-                [
-                  99.69517,
-                  8.11996
-                ],
-                [
-                  99.69736,
-                  8.12659
-                ],
-                [
-                  99.70324,
-                  8.12967
-                ],
-                [
-                  99.69838,
-                  8.13952
-                ],
-                [
-                  99.69766,
-                  8.14407
-                ],
-                [
-                  99.69227,
-                  8.15053
-                ],
-                [
-                  99.69677,
-                  8.15515
-                ],
-                [
-                  99.69749,
-                  8.15782
-                ],
-                [
-                  99.70007,
-                  8.15754
-                ],
-                [
-                  99.70444,
-                  8.16126
-                ],
-                [
-                  99.70286,
-                  8.16222
-                ],
-                [
-                  99.70254,
-                  8.16448
-                ],
-                [
-                  99.70385,
-                  8.16701
-                ],
-                [
-                  99.70172,
-                  8.1675
-                ],
-                [
-                  99.7027,
-                  8.17449
-                ],
-                [
-                  99.70143,
-                  8.17799
-                ],
-                [
-                  99.70359,
-                  8.17922
-                ],
-                [
-                  99.70933,
-                  8.18926
-                ],
-                [
-                  99.71285,
-                  8.19014
-                ],
-                [
-                  99.71519,
-                  8.18923
-                ],
-                [
-                  99.71648,
-                  8.19305
-                ],
-                [
-                  99.71795,
-                  8.19352
-                ],
-                [
-                  99.71909,
-                  8.19798
-                ],
-                [
-                  99.71722,
-                  8.20494
-                ],
-                [
-                  99.71938,
-                  8.20798
-                ],
-                [
-                  99.71974,
-                  8.21266
-                ],
-                [
-                  99.72093,
-                  8.21313
-                ],
-                [
-                  99.7191,
-                  8.21543
-                ],
-                [
-                  99.72017,
-                  8.2193
-                ],
-                [
-                  99.72341,
-                  8.22442
-                ],
-                [
-                  99.7266,
-                  8.22442
-                ],
-                [
-                  99.72985,
-                  8.22737
-                ],
-                [
-                  99.73562,
-                  8.23563
-                ],
-                [
-                  99.7404,
-                  8.23769
-                ],
-                [
-                  99.74455,
-                  8.24307
-                ],
-                [
-                  99.74985,
-                  8.24641
-                ],
-                [
-                  99.75279,
-                  8.25005
-                ],
-                [
-                  99.75723,
-                  8.25212
-                ],
-                [
-                  99.75574,
-                  8.25043
-                ],
-                [
-                  99.75529,
-                  8.24607
-                ],
-                [
-                  99.76406,
-                  8.23901
-                ],
-                [
-                  99.76832,
-                  8.23828
-                ],
-                [
-                  99.77102,
-                  8.24011
-                ],
-                [
-                  99.77314,
-                  8.24012
-                ],
-                [
-                  99.77836,
-                  8.23529
-                ],
-                [
-                  99.78831,
-                  8.23173
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "800909",
-          "tambon": "ต.ที่วัง",
-          "amphoe": "อ.ทุ่งสง",
-          "province": "จ.นครศรีธรรมราช",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "ไร่ วงศ์ ทอง เมฆ ดี",
-          "latitude": 8.090253,
-          "longitude": 99.73887,
-          "sum_rainfall_mm": 58.400000000000006,
-          "observed_at": "2026-10-13T10:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.70293,
-                  8.12963
-                ],
-                [
-                  99.69736,
-                  8.12659
-                ],
-                [
-                  99.69517,
-                  8.11996
-                ],
-                [
-                  99.69085,
-                  8.11252
-                ],
-                [
-                  99.69106,
-                  8.11105
-                ],
-                [
-                  99.69487,
-                  8.10868
-                ],
-                [
-                  99.69558,
-                  8.10697
-                ],
-                [
-                  99.69329,
-                  8.10269
-                ],
-                [
-                  99.6933,
-                  8.09759
-                ],
-                [
-                  99.69621,
-                  8.09478
-                ],
-                [
-                  99.70361,
-                  8.09079
-                ],
-                [
-                  99.70659,
-                  8.08722
-                ],
-                [
-                  99.71266,
-                  8.08509
-                ],
-                [
-                  99.72205,
-                  8.08671
-                ],
-                [
-                  99.72913,
-                  8.08382
-                ],
-                [
-                  99.73757,
-                  8.08231
-                ],
-                [
-                  99.73907,
-                  8.08764
-                ],
-                [
-                  99.73811,
-                  8.09362
-                ],
-                [
-                  99.74248,
-                  8.09904
-                ],
-                [
-                  99.74334,
-                  8.10164
-                ],
-                [
-                  99.7472,
-                  8.10433
-                ],
-                [
-                  99.74675,
-                  8.11187
-                ],
-                [
-                  99.76176,
-                  8.11602
-                ],
-                [
-                  99.76977,
-                  8.11668
-                ],
-                [
-                  99.77186,
-                  8.11564
-                ],
-                [
-                  99.76974,
-                  8.11157
-                ],
-                [
-                  99.76712,
-                  8.1002
-                ],
-                [
-                  99.76346,
-                  8.09315
-                ],
-                [
-                  99.76268,
-                  8.08728
-                ],
-                [
-                  99.7639,
-                  8.08489
-                ],
-                [
-                  99.76472,
-                  8.07453
-                ],
-                [
-                  99.7664,
-                  8.07268
-                ],
-                [
-                  99.76524,
-                  8.0673
-                ],
-                [
-                  99.77421,
-                  8.06537
-                ],
-                [
-                  99.77764,
-                  8.05987
-                ],
-                [
-                  99.77831,
-                  8.05568
-                ],
-                [
-                  99.77619,
-                  8.0472
-                ],
-                [
-                  99.76856,
-                  8.0447
-                ],
-                [
-                  99.73785,
-                  8.05147
-                ],
-                [
-                  99.72914,
-                  8.05113
-                ],
-                [
-                  99.72719,
-                  8.0522
-                ],
-                [
-                  99.72438,
-                  8.05038
-                ],
-                [
-                  99.7208,
-                  8.05033
-                ],
-                [
-                  99.71994,
-                  8.05107
-                ],
-                [
-                  99.72309,
-                  8.05298
-                ],
-                [
-                  99.72218,
-                  8.05466
-                ],
-                [
-                  99.72018,
-                  8.0551
-                ],
-                [
-                  99.7138,
-                  8.05229
-                ],
-                [
-                  99.70089,
-                  8.06091
-                ],
-                [
-                  99.68868,
-                  8.06081
-                ],
-                [
-                  99.68669,
-                  8.05807
-                ],
-                [
-                  99.68249,
-                  8.0576
-                ],
-                [
-                  99.6769,
-                  8.06397
-                ],
-                [
-                  99.67546,
-                  8.06908
-                ],
-                [
-                  99.67316,
-                  8.0677
-                ],
-                [
-                  99.67048,
-                  8.06816
-                ],
-                [
-                  99.66538,
-                  8.06419
-                ],
-                [
-                  99.66223,
-                  8.06453
-                ],
-                [
-                  99.65853,
-                  8.06259
-                ],
-                [
-                  99.65546,
-                  8.06323
-                ],
-                [
-                  99.65088,
-                  8.06163
-                ],
-                [
-                  99.64759,
-                  8.05104
-                ],
-                [
-                  99.64178,
-                  8.0541
-                ],
-                [
-                  99.64293,
-                  8.05639
-                ],
-                [
-                  99.64169,
-                  8.06227
-                ],
-                [
-                  99.64254,
-                  8.06214
-                ],
-                [
-                  99.64218,
-                  8.06381
-                ],
-                [
-                  99.64486,
-                  8.06623
-                ],
-                [
-                  99.64626,
-                  8.06984
-                ],
-                [
-                  99.64497,
-                  8.06976
-                ],
-                [
-                  99.64589,
-                  8.07215
-                ],
-                [
-                  99.64323,
-                  8.07295
-                ],
-                [
-                  99.64225,
-                  8.07566
-                ],
-                [
-                  99.64027,
-                  8.07691
-                ],
-                [
-                  99.64089,
-                  8.08279
-                ],
-                [
-                  99.63887,
-                  8.08565
-                ],
-                [
-                  99.63448,
-                  8.0873
-                ],
-                [
-                  99.6357,
-                  8.08995
-                ],
-                [
-                  99.63412,
-                  8.09012
-                ],
-                [
-                  99.63293,
-                  8.09262
-                ],
-                [
-                  99.63933,
-                  8.09582
-                ],
-                [
-                  99.64393,
-                  8.10509
-                ],
-                [
-                  99.6541,
-                  8.10661
-                ],
-                [
-                  99.65719,
-                  8.11829
-                ],
-                [
-                  99.66046,
-                  8.13811
-                ],
-                [
-                  99.66163,
-                  8.12979
-                ],
-                [
-                  99.67511,
-                  8.13153
-                ],
-                [
-                  99.67483,
-                  8.12965
-                ],
-                [
-                  99.70293,
-                  8.12963
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "800905",
-          "tambon": "ต.นาไม้ไผ่",
-          "amphoe": "อ.ทุ่งสง",
-          "province": "จ.นครศรีธรรมราช",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "บ้านหน้าเขา",
-          "latitude": 8.123834,
-          "longitude": 99.549491,
-          "sum_rainfall_mm": 20.0,
-          "observed_at": "2026-10-13T10:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.65809,
-                  8.12336
-                ],
-                [
-                  99.6541,
-                  8.10661
-                ],
-                [
-                  99.64393,
-                  8.10509
-                ],
-                [
-                  99.63933,
-                  8.09582
-                ],
-                [
-                  99.63586,
-                  8.09357
-                ],
-                [
-                  99.63337,
-                  8.09344
-                ],
-                [
-                  99.63412,
-                  8.09012
-                ],
-                [
-                  99.6357,
-                  8.08995
-                ],
-                [
-                  99.62952,
-                  8.08422
-                ],
-                [
-                  99.62014,
-                  8.08557
-                ],
-                [
-                  99.60408,
-                  8.08455
-                ],
-                [
-                  99.5906,
-                  8.08691
-                ],
-                [
-                  99.58419,
-                  8.09028
-                ],
-                [
-                  99.5815,
-                  8.08703
-                ],
-                [
-                  99.5838,
-                  8.08321
-                ],
-                [
-                  99.58223,
-                  8.08214
-                ],
-                [
-                  99.57206,
-                  8.08416
-                ],
-                [
-                  99.56858,
-                  8.08843
-                ],
-                [
-                  99.56437,
-                  8.08922
-                ],
-                [
-                  99.55482,
-                  8.08798
-                ],
-                [
-                  99.54871,
-                  8.08297
-                ],
-                [
-                  99.54391,
-                  8.08249
-                ],
-                [
-                  99.54388,
-                  8.08565
-                ],
-                [
-                  99.54148,
-                  8.08249
-                ],
-                [
-                  99.53867,
-                  8.08268
-                ],
-                [
-                  99.53108,
-                  8.08053
-                ],
-                [
-                  99.52558,
-                  8.08087
-                ],
-                [
-                  99.52305,
-                  8.08525
-                ],
-                [
-                  99.52479,
-                  8.09592
-                ],
-                [
-                  99.52446,
-                  8.10631
-                ],
-                [
-                  99.52182,
-                  8.11417
-                ],
-                [
-                  99.52185,
-                  8.12376
-                ],
-                [
-                  99.52941,
-                  8.12204
-                ],
-                [
-                  99.53083,
-                  8.12436
-                ],
-                [
-                  99.53862,
-                  8.12249
-                ],
-                [
-                  99.54341,
-                  8.12264
-                ],
-                [
-                  99.54667,
-                  8.13147
-                ],
-                [
-                  99.54573,
-                  8.13688
-                ],
-                [
-                  99.55524,
-                  8.14166
-                ],
-                [
-                  99.56168,
-                  8.14353
-                ],
-                [
-                  99.56378,
-                  8.14713
-                ],
-                [
-                  99.56692,
-                  8.14817
-                ],
-                [
-                  99.57419,
-                  8.1478
-                ],
-                [
-                  99.57905,
-                  8.14907
-                ],
-                [
-                  99.58254,
-                  8.1525
-                ],
-                [
-                  99.58395,
-                  8.15143
-                ],
-                [
-                  99.58934,
-                  8.15093
-                ],
-                [
-                  99.5972,
-                  8.14598
-                ],
-                [
-                  99.59967,
-                  8.14694
-                ],
-                [
-                  99.60518,
-                  8.14436
-                ],
-                [
-                  99.60737,
-                  8.14587
-                ],
-                [
-                  99.61051,
-                  8.14464
-                ],
-                [
-                  99.61321,
-                  8.14509
-                ],
-                [
-                  99.61366,
-                  8.14121
-                ],
-                [
-                  99.61591,
-                  8.13975
-                ],
-                [
-                  99.62253,
-                  8.13952
-                ],
-                [
-                  99.6245,
-                  8.13402
-                ],
-                [
-                  99.62573,
-                  8.13329
-                ],
-                [
-                  99.62534,
-                  8.13189
-                ],
-                [
-                  99.63686,
-                  8.1243
-                ],
-                [
-                  99.65809,
-                  8.12336
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "800906",
-          "tambon": "ต.นาหลวงเสน",
-          "amphoe": "อ.ทุ่งสง",
-          "province": "จ.นครศรีธรรมราช",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "บ้านท่าเลา",
-          "latitude": 8.195129,
-          "longitude": 99.700416,
-          "sum_rainfall_mm": 7.5,
-          "observed_at": "2026-10-13T10:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.75669,
-                  8.26006
-                ],
-                [
-                  99.75787,
-                  8.25271
-                ],
-                [
-                  99.75279,
-                  8.25005
-                ],
-                [
-                  99.74985,
-                  8.24641
-                ],
-                [
-                  99.74455,
-                  8.24307
-                ],
-                [
-                  99.7404,
-                  8.23769
-                ],
-                [
-                  99.73562,
-                  8.23563
-                ],
-                [
-                  99.72985,
-                  8.22737
-                ],
-                [
-                  99.7266,
-                  8.22442
-                ],
-                [
-                  99.72363,
-                  8.22459
-                ],
-                [
-                  99.72173,
-                  8.22202
-                ],
-                [
-                  99.7191,
-                  8.21656
-                ],
-                [
-                  99.72093,
-                  8.21313
-                ],
-                [
-                  99.71974,
-                  8.21266
-                ],
-                [
-                  99.71938,
-                  8.20798
-                ],
-                [
-                  99.71722,
-                  8.20494
-                ],
-                [
-                  99.71909,
-                  8.19798
-                ],
-                [
-                  99.71795,
-                  8.19352
-                ],
-                [
-                  99.71648,
-                  8.19305
-                ],
-                [
-                  99.71519,
-                  8.18923
-                ],
-                [
-                  99.71285,
-                  8.19014
-                ],
-                [
-                  99.70933,
-                  8.18926
-                ],
-                [
-                  99.70264,
-                  8.17851
-                ],
-                [
-                  99.70143,
-                  8.17799
-                ],
-                [
-                  99.69661,
-                  8.182
-                ],
-                [
-                  99.68966,
-                  8.18134
-                ],
-                [
-                  99.68748,
-                  8.18303
-                ],
-                [
-                  99.68428,
-                  8.18328
-                ],
-                [
-                  99.6801,
-                  8.18902
-                ],
-                [
-                  99.67757,
-                  8.18923
-                ],
-                [
-                  99.67024,
-                  8.2014
-                ],
-                [
-                  99.6655,
-                  8.1978
-                ],
-                [
-                  99.66337,
-                  8.19881
-                ],
-                [
-                  99.66137,
-                  8.2018
-                ],
-                [
-                  99.66209,
-                  8.20458
-                ],
-                [
-                  99.66084,
-                  8.20566
-                ],
-                [
-                  99.66223,
-                  8.20713
-                ],
-                [
-                  99.66232,
-                  8.20974
-                ],
-                [
-                  99.66131,
-                  8.21185
-                ],
-                [
-                  99.66148,
-                  8.21572
-                ],
-                [
-                  99.65147,
-                  8.22572
-                ],
-                [
-                  99.65959,
-                  8.23727
-                ],
-                [
-                  99.66516,
-                  8.2482
-                ],
-                [
-                  99.67347,
-                  8.25836
-                ],
-                [
-                  99.67487,
-                  8.27071
-                ],
-                [
-                  99.67397,
-                  8.27984
-                ],
-                [
-                  99.67164,
-                  8.28543
-                ],
-                [
-                  99.66352,
-                  8.29674
-                ],
-                [
-                  99.67143,
-                  8.29261
-                ],
-                [
-                  99.67369,
-                  8.29018
-                ],
-                [
-                  99.67835,
-                  8.28903
-                ],
-                [
-                  99.68044,
-                  8.29194
-                ],
-                [
-                  99.68846,
-                  8.29589
-                ],
-                [
-                  99.69494,
-                  8.29708
-                ],
-                [
-                  99.69745,
-                  8.29652
-                ],
-                [
-                  99.70161,
-                  8.2981
-                ],
-                [
-                  99.70704,
-                  8.2977
-                ],
-                [
-                  99.71057,
-                  8.3004
-                ],
-                [
-                  99.71822,
-                  8.30114
-                ],
-                [
-                  99.71962,
-                  8.30304
-                ],
-                [
-                  99.72611,
-                  8.29312
-                ],
-                [
-                  99.72545,
-                  8.29014
-                ],
-                [
-                  99.72705,
-                  8.28742
-                ],
-                [
-                  99.72674,
-                  8.28293
-                ],
-                [
-                  99.73216,
-                  8.27758
-                ],
-                [
-                  99.73443,
-                  8.2734
-                ],
-                [
-                  99.73767,
-                  8.27221
-                ],
-                [
-                  99.74681,
-                  8.27197
-                ],
-                [
-                  99.75213,
-                  8.2698
-                ],
-                [
-                  99.75419,
-                  8.26112
-                ],
-                [
-                  99.75669,
-                  8.26006
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "800906",
-          "tambon": "ต.นาหลวงเสน",
-          "amphoe": "อ.ทุ่งสง",
-          "province": "จ.นครศรีธรรมราช",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "บ้านประดู่",
-          "latitude": 8.212035,
-          "longitude": 99.703316,
-          "sum_rainfall_mm": 87.00000000000001,
-          "observed_at": "2026-10-13T10:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.75669,
-                  8.26006
-                ],
-                [
-                  99.75787,
-                  8.25271
-                ],
-                [
-                  99.75279,
-                  8.25005
-                ],
-                [
-                  99.74985,
-                  8.24641
-                ],
-                [
-                  99.74455,
-                  8.24307
-                ],
-                [
-                  99.7404,
-                  8.23769
-                ],
-                [
-                  99.73562,
-                  8.23563
-                ],
-                [
-                  99.72985,
-                  8.22737
-                ],
-                [
-                  99.7266,
-                  8.22442
-                ],
-                [
-                  99.72363,
-                  8.22459
-                ],
-                [
-                  99.72173,
-                  8.22202
-                ],
-                [
-                  99.7191,
-                  8.21656
-                ],
-                [
-                  99.72093,
-                  8.21313
-                ],
-                [
-                  99.71974,
-                  8.21266
-                ],
-                [
-                  99.71938,
-                  8.20798
-                ],
-                [
-                  99.71722,
-                  8.20494
-                ],
-                [
-                  99.71909,
-                  8.19798
-                ],
-                [
-                  99.71795,
-                  8.19352
-                ],
-                [
-                  99.71648,
-                  8.19305
-                ],
-                [
-                  99.71519,
-                  8.18923
-                ],
-                [
-                  99.71285,
-                  8.19014
-                ],
-                [
-                  99.70933,
-                  8.18926
-                ],
-                [
-                  99.70264,
-                  8.17851
-                ],
-                [
-                  99.70143,
-                  8.17799
-                ],
-                [
-                  99.69661,
-                  8.182
-                ],
-                [
-                  99.68966,
-                  8.18134
-                ],
-                [
-                  99.68748,
-                  8.18303
-                ],
-                [
-                  99.68428,
-                  8.18328
-                ],
-                [
-                  99.6801,
-                  8.18902
-                ],
-                [
-                  99.67757,
-                  8.18923
-                ],
-                [
-                  99.67024,
-                  8.2014
-                ],
-                [
-                  99.6655,
-                  8.1978
-                ],
-                [
-                  99.66337,
-                  8.19881
-                ],
-                [
-                  99.66137,
-                  8.2018
-                ],
-                [
-                  99.66209,
-                  8.20458
-                ],
-                [
-                  99.66084,
-                  8.20566
-                ],
-                [
-                  99.66223,
-                  8.20713
-                ],
-                [
-                  99.66232,
-                  8.20974
-                ],
-                [
-                  99.66131,
-                  8.21185
-                ],
-                [
-                  99.66148,
-                  8.21572
-                ],
-                [
-                  99.65147,
-                  8.22572
-                ],
-                [
-                  99.65959,
-                  8.23727
-                ],
-                [
-                  99.66516,
-                  8.2482
-                ],
-                [
-                  99.67347,
-                  8.25836
-                ],
-                [
-                  99.67487,
-                  8.27071
-                ],
-                [
-                  99.67397,
-                  8.27984
-                ],
-                [
-                  99.67164,
-                  8.28543
-                ],
-                [
-                  99.66352,
-                  8.29674
-                ],
-                [
-                  99.67143,
-                  8.29261
-                ],
-                [
-                  99.67369,
-                  8.29018
-                ],
-                [
-                  99.67835,
-                  8.28903
-                ],
-                [
-                  99.68044,
-                  8.29194
-                ],
-                [
-                  99.68846,
-                  8.29589
-                ],
-                [
-                  99.69494,
-                  8.29708
-                ],
-                [
-                  99.69745,
-                  8.29652
-                ],
-                [
-                  99.70161,
-                  8.2981
-                ],
-                [
-                  99.70704,
-                  8.2977
-                ],
-                [
-                  99.71057,
-                  8.3004
-                ],
-                [
-                  99.71822,
-                  8.30114
-                ],
-                [
-                  99.71962,
-                  8.30304
-                ],
-                [
-                  99.72611,
-                  8.29312
-                ],
-                [
-                  99.72545,
-                  8.29014
-                ],
-                [
-                  99.72705,
-                  8.28742
-                ],
-                [
-                  99.72674,
-                  8.28293
-                ],
-                [
-                  99.73216,
-                  8.27758
-                ],
-                [
-                  99.73443,
-                  8.2734
-                ],
-                [
-                  99.73767,
-                  8.27221
-                ],
-                [
-                  99.74681,
-                  8.27197
-                ],
-                [
-                  99.75213,
-                  8.2698
-                ],
-                [
-                  99.75419,
-                  8.26112
-                ],
-                [
-                  99.75669,
-                  8.26006
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "800906",
-          "tambon": "ต.นาหลวงเสน",
-          "amphoe": "อ.ทุ่งสง",
-          "province": "จ.นครศรีธรรมราช",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "บ้านใต้",
-          "latitude": 8.178368,
-          "longitude": 99.70351,
-          "sum_rainfall_mm": 78.0,
-          "observed_at": "2026-10-13T10:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.75669,
-                  8.26006
-                ],
-                [
-                  99.75787,
-                  8.25271
-                ],
-                [
-                  99.75279,
-                  8.25005
-                ],
-                [
-                  99.74985,
-                  8.24641
-                ],
-                [
-                  99.74455,
-                  8.24307
-                ],
-                [
-                  99.7404,
-                  8.23769
-                ],
-                [
-                  99.73562,
-                  8.23563
-                ],
-                [
-                  99.72985,
-                  8.22737
-                ],
-                [
-                  99.7266,
-                  8.22442
-                ],
-                [
-                  99.72363,
-                  8.22459
-                ],
-                [
-                  99.72173,
-                  8.22202
-                ],
-                [
-                  99.7191,
-                  8.21656
-                ],
-                [
-                  99.72093,
-                  8.21313
-                ],
-                [
-                  99.71974,
-                  8.21266
-                ],
-                [
-                  99.71938,
-                  8.20798
-                ],
-                [
-                  99.71722,
-                  8.20494
-                ],
-                [
-                  99.71909,
-                  8.19798
-                ],
-                [
-                  99.71795,
-                  8.19352
-                ],
-                [
-                  99.71648,
-                  8.19305
-                ],
-                [
-                  99.71519,
-                  8.18923
-                ],
-                [
-                  99.71285,
-                  8.19014
-                ],
-                [
-                  99.70933,
-                  8.18926
-                ],
-                [
-                  99.70264,
-                  8.17851
-                ],
-                [
-                  99.70143,
-                  8.17799
-                ],
-                [
-                  99.69661,
-                  8.182
-                ],
-                [
-                  99.68966,
-                  8.18134
-                ],
-                [
-                  99.68748,
-                  8.18303
-                ],
-                [
-                  99.68428,
-                  8.18328
-                ],
-                [
-                  99.6801,
-                  8.18902
-                ],
-                [
-                  99.67757,
-                  8.18923
-                ],
-                [
-                  99.67024,
-                  8.2014
-                ],
-                [
-                  99.6655,
-                  8.1978
-                ],
-                [
-                  99.66337,
-                  8.19881
-                ],
-                [
-                  99.66137,
-                  8.2018
-                ],
-                [
-                  99.66209,
-                  8.20458
-                ],
-                [
-                  99.66084,
-                  8.20566
-                ],
-                [
-                  99.66223,
-                  8.20713
-                ],
-                [
-                  99.66232,
-                  8.20974
-                ],
-                [
-                  99.66131,
-                  8.21185
-                ],
-                [
-                  99.66148,
-                  8.21572
-                ],
-                [
-                  99.65147,
-                  8.22572
-                ],
-                [
-                  99.65959,
-                  8.23727
-                ],
-                [
-                  99.66516,
-                  8.2482
-                ],
-                [
-                  99.67347,
-                  8.25836
-                ],
-                [
-                  99.67487,
-                  8.27071
-                ],
-                [
-                  99.67397,
-                  8.27984
-                ],
-                [
-                  99.67164,
-                  8.28543
-                ],
-                [
-                  99.66352,
-                  8.29674
-                ],
-                [
-                  99.67143,
-                  8.29261
-                ],
-                [
-                  99.67369,
-                  8.29018
-                ],
-                [
-                  99.67835,
-                  8.28903
-                ],
-                [
-                  99.68044,
-                  8.29194
-                ],
-                [
-                  99.68846,
-                  8.29589
-                ],
-                [
-                  99.69494,
-                  8.29708
-                ],
-                [
-                  99.69745,
-                  8.29652
-                ],
-                [
-                  99.70161,
-                  8.2981
-                ],
-                [
-                  99.70704,
-                  8.2977
-                ],
-                [
-                  99.71057,
-                  8.3004
-                ],
-                [
-                  99.71822,
-                  8.30114
-                ],
-                [
-                  99.71962,
-                  8.30304
-                ],
-                [
-                  99.72611,
-                  8.29312
-                ],
-                [
-                  99.72545,
-                  8.29014
-                ],
-                [
-                  99.72705,
-                  8.28742
-                ],
-                [
-                  99.72674,
-                  8.28293
-                ],
-                [
-                  99.73216,
-                  8.27758
-                ],
-                [
-                  99.73443,
-                  8.2734
-                ],
-                [
-                  99.73767,
-                  8.27221
-                ],
-                [
-                  99.74681,
-                  8.27197
-                ],
-                [
-                  99.75213,
-                  8.2698
-                ],
-                [
-                  99.75419,
-                  8.26112
-                ],
-                [
-                  99.75669,
-                  8.26006
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "800906",
-          "tambon": "ต.นาหลวงเสน",
-          "amphoe": "อ.ทุ่งสง",
-          "province": "จ.นครศรีธรรมราช",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "ฝายคลองท่าเลา",
-          "latitude": 8.232547,
-          "longitude": 99.70778,
-          "sum_rainfall_mm": 88.00000000000001,
-          "observed_at": "2026-10-13T10:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.75669,
-                  8.26006
-                ],
-                [
-                  99.75787,
-                  8.25271
-                ],
-                [
-                  99.75279,
-                  8.25005
-                ],
-                [
-                  99.74985,
-                  8.24641
-                ],
-                [
-                  99.74455,
-                  8.24307
-                ],
-                [
-                  99.7404,
-                  8.23769
-                ],
-                [
-                  99.73562,
-                  8.23563
-                ],
-                [
-                  99.72985,
-                  8.22737
-                ],
-                [
-                  99.7266,
-                  8.22442
-                ],
-                [
-                  99.72363,
-                  8.22459
-                ],
-                [
-                  99.72173,
-                  8.22202
-                ],
-                [
-                  99.7191,
-                  8.21656
-                ],
-                [
-                  99.72093,
-                  8.21313
-                ],
-                [
-                  99.71974,
-                  8.21266
-                ],
-                [
-                  99.71938,
-                  8.20798
-                ],
-                [
-                  99.71722,
-                  8.20494
-                ],
-                [
-                  99.71909,
-                  8.19798
-                ],
-                [
-                  99.71795,
-                  8.19352
-                ],
-                [
-                  99.71648,
-                  8.19305
-                ],
-                [
-                  99.71519,
-                  8.18923
-                ],
-                [
-                  99.71285,
-                  8.19014
-                ],
-                [
-                  99.70933,
-                  8.18926
-                ],
-                [
-                  99.70264,
-                  8.17851
-                ],
-                [
-                  99.70143,
-                  8.17799
-                ],
-                [
-                  99.69661,
-                  8.182
-                ],
-                [
-                  99.68966,
-                  8.18134
-                ],
-                [
-                  99.68748,
-                  8.18303
-                ],
-                [
-                  99.68428,
-                  8.18328
-                ],
-                [
-                  99.6801,
-                  8.18902
-                ],
-                [
-                  99.67757,
-                  8.18923
-                ],
-                [
-                  99.67024,
-                  8.2014
-                ],
-                [
-                  99.6655,
-                  8.1978
-                ],
-                [
-                  99.66337,
-                  8.19881
-                ],
-                [
-                  99.66137,
-                  8.2018
-                ],
-                [
-                  99.66209,
-                  8.20458
-                ],
-                [
-                  99.66084,
-                  8.20566
-                ],
-                [
-                  99.66223,
-                  8.20713
-                ],
-                [
-                  99.66232,
-                  8.20974
-                ],
-                [
-                  99.66131,
-                  8.21185
-                ],
-                [
-                  99.66148,
-                  8.21572
-                ],
-                [
-                  99.65147,
-                  8.22572
-                ],
-                [
-                  99.65959,
-                  8.23727
-                ],
-                [
-                  99.66516,
-                  8.2482
-                ],
-                [
-                  99.67347,
-                  8.25836
-                ],
-                [
-                  99.67487,
-                  8.27071
-                ],
-                [
-                  99.67397,
-                  8.27984
-                ],
-                [
-                  99.67164,
-                  8.28543
-                ],
-                [
-                  99.66352,
-                  8.29674
-                ],
-                [
-                  99.67143,
-                  8.29261
-                ],
-                [
-                  99.67369,
-                  8.29018
-                ],
-                [
-                  99.67835,
-                  8.28903
-                ],
-                [
-                  99.68044,
-                  8.29194
-                ],
-                [
-                  99.68846,
-                  8.29589
-                ],
-                [
-                  99.69494,
-                  8.29708
-                ],
-                [
-                  99.69745,
-                  8.29652
-                ],
-                [
-                  99.70161,
-                  8.2981
-                ],
-                [
-                  99.70704,
-                  8.2977
-                ],
-                [
-                  99.71057,
-                  8.3004
-                ],
-                [
-                  99.71822,
-                  8.30114
-                ],
-                [
-                  99.71962,
-                  8.30304
-                ],
-                [
-                  99.72611,
-                  8.29312
-                ],
-                [
-                  99.72545,
-                  8.29014
-                ],
-                [
-                  99.72705,
-                  8.28742
-                ],
-                [
-                  99.72674,
-                  8.28293
-                ],
-                [
-                  99.73216,
-                  8.27758
-                ],
-                [
-                  99.73443,
-                  8.2734
-                ],
-                [
-                  99.73767,
-                  8.27221
-                ],
-                [
-                  99.74681,
-                  8.27197
-                ],
-                [
-                  99.75213,
-                  8.2698
-                ],
-                [
-                  99.75419,
-                  8.26112
-                ],
-                [
-                  99.75669,
-                  8.26006
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "800910",
-          "tambon": "ต.น้ำตก",
-          "amphoe": "อ.ทุ่งสง",
-          "province": "จ.นครศรีธรรมราช",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "บ้านวังธน",
-          "latitude": 7.962891,
-          "longitude": 99.777735,
-          "sum_rainfall_mm": 1.0,
-          "observed_at": "2026-10-13T10:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.75157,
-                  8.04884
-                ],
-                [
-                  99.76856,
-                  8.0447
-                ],
-                [
-                  99.77619,
-                  8.0472
-                ],
-                [
-                  99.77693,
-                  8.04256
-                ],
-                [
-                  99.7796,
-                  8.03888
-                ],
-                [
-                  99.78556,
-                  8.03616
-                ],
-                [
-                  99.79187,
-                  8.02718
-                ],
-                [
-                  99.79116,
-                  8.0228
-                ],
-                [
-                  99.78882,
-                  8.02002
-                ],
-                [
-                  99.78728,
-                  8.01086
-                ],
-                [
-                  99.79003,
-                  8.00532
-                ],
-                [
-                  99.79251,
-                  8.00315
-                ],
-                [
-                  99.79314,
-                  7.99816
-                ],
-                [
-                  99.79593,
-                  7.99531
-                ],
-                [
-                  99.80524,
-                  7.99098
-                ],
-                [
-                  99.8153,
-                  7.98792
-                ],
-                [
-                  99.82541,
-                  7.98215
-                ],
-                [
-                  99.82784,
-                  7.96642
-                ],
-                [
-                  99.82527,
-                  7.96154
-                ],
-                [
-                  99.80432,
-                  7.94502
-                ],
-                [
-                  99.80549,
-                  7.93821
-                ],
-                [
-                  99.79933,
-                  7.92623
-                ],
-                [
-                  99.7975,
-                  7.91883
-                ],
-                [
-                  99.7985,
-                  7.91412
-                ],
-                [
-                  99.79631,
-                  7.90945
-                ],
-                [
-                  99.78351,
-                  7.91056
-                ],
-                [
-                  99.78178,
-                  7.90561
-                ],
-                [
-                  99.77542,
-                  7.90245
-                ],
-                [
-                  99.77312,
-                  7.90008
-                ],
-                [
-                  99.77239,
-                  7.89647
-                ],
-                [
-                  99.76065,
-                  7.88038
-                ],
-                [
-                  99.75643,
-                  7.86984
-                ],
-                [
-                  99.75098,
-                  7.86884
-                ],
-                [
-                  99.73774,
-                  7.85935
-                ],
-                [
-                  99.7338,
-                  7.86297
-                ],
-                [
-                  99.73884,
-                  7.87572
-                ],
-                [
-                  99.73501,
-                  7.87905
-                ],
-                [
-                  99.73421,
-                  7.88263
-                ],
-                [
-                  99.73128,
-                  7.88686
-                ],
-                [
-                  99.7328,
-                  7.89603
-                ],
-                [
-                  99.73108,
-                  7.90042
-                ],
-                [
-                  99.7329,
-                  7.90339
-                ],
-                [
-                  99.73491,
-                  7.91362
-                ],
-                [
-                  99.73874,
-                  7.92052
-                ],
-                [
-                  99.73899,
-                  7.9235
-                ],
-                [
-                  99.74151,
-                  7.92551
-                ],
-                [
-                  99.74242,
-                  7.92924
-                ],
-                [
-                  99.7399,
-                  7.93292
-                ],
-                [
-                  99.7399,
-                  7.93494
-                ],
-                [
-                  99.73441,
-                  7.94083
-                ],
-                [
-                  99.7333,
-                  7.94386
-                ],
-                [
-                  99.73892,
-                  7.94974
-                ],
-                [
-                  99.74259,
-                  7.95583
-                ],
-                [
-                  99.74537,
-                  7.96569
-                ],
-                [
-                  99.74143,
-                  7.96613
-                ],
-                [
-                  99.74438,
-                  7.96936
-                ],
-                [
-                  99.74689,
-                  7.969
-                ],
-                [
-                  99.74694,
-                  7.97079
-                ],
-                [
-                  99.74916,
-                  7.96904
-                ],
-                [
-                  99.75142,
-                  7.96953
-                ],
-                [
-                  99.75316,
-                  7.97844
-                ],
-                [
-                  99.75762,
-                  7.98295
-                ],
-                [
-                  99.7579,
-                  7.9846
-                ],
-                [
-                  99.75783,
-                  7.98668
-                ],
-                [
-                  99.75661,
-                  7.98753
-                ],
-                [
-                  99.75105,
-                  7.98699
-                ],
-                [
-                  99.74828,
-                  7.98275
-                ],
-                [
-                  99.74597,
-                  7.98478
-                ],
-                [
-                  99.74676,
-                  8.00243
-                ],
-                [
-                  99.75138,
-                  8.01163
-                ],
-                [
-                  99.75046,
-                  8.01401
-                ],
-                [
-                  99.75081,
-                  8.01933
-                ],
-                [
-                  99.75457,
-                  8.0229
-                ],
-                [
-                  99.75808,
-                  8.02373
-                ],
-                [
-                  99.75943,
-                  8.02825
-                ],
-                [
-                  99.75804,
-                  8.03271
-                ],
-                [
-                  99.75313,
-                  8.0348
-                ],
-                [
-                  99.75199,
-                  8.03776
-                ],
-                [
-                  99.74827,
-                  8.04029
-                ],
-                [
-                  99.74835,
-                  8.04202
-                ],
-                [
-                  99.75056,
-                  8.04441
-                ],
-                [
-                  99.75027,
-                  8.04915
-                ],
-                [
-                  99.75157,
-                  8.04884
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "800910",
-          "tambon": "ต.น้ำตก",
-          "amphoe": "อ.ทุ่งสง",
-          "province": "จ.นครศรีธรรมราช",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ขป.๔ (บ้านน้ำตก)",
-          "latitude": 7.96328,
-          "longitude": 99.76106,
-          "sum_rainfall_mm": 9.2,
-          "observed_at": "2026-10-13T10:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.75157,
-                  8.04884
-                ],
-                [
-                  99.76856,
-                  8.0447
-                ],
-                [
-                  99.77619,
-                  8.0472
-                ],
-                [
-                  99.77693,
-                  8.04256
-                ],
-                [
-                  99.7796,
-                  8.03888
-                ],
-                [
-                  99.78556,
-                  8.03616
-                ],
-                [
-                  99.79187,
-                  8.02718
-                ],
-                [
-                  99.79116,
-                  8.0228
-                ],
-                [
-                  99.78882,
-                  8.02002
-                ],
-                [
-                  99.78728,
-                  8.01086
-                ],
-                [
-                  99.79003,
-                  8.00532
-                ],
-                [
-                  99.79251,
-                  8.00315
-                ],
-                [
-                  99.79314,
-                  7.99816
-                ],
-                [
-                  99.79593,
-                  7.99531
-                ],
-                [
-                  99.80524,
-                  7.99098
-                ],
-                [
-                  99.8153,
-                  7.98792
-                ],
-                [
-                  99.82541,
-                  7.98215
-                ],
-                [
-                  99.82784,
-                  7.96642
-                ],
-                [
-                  99.82527,
-                  7.96154
-                ],
-                [
-                  99.80432,
-                  7.94502
-                ],
-                [
-                  99.80549,
-                  7.93821
-                ],
-                [
-                  99.79933,
-                  7.92623
-                ],
-                [
-                  99.7975,
-                  7.91883
-                ],
-                [
-                  99.7985,
-                  7.91412
-                ],
-                [
-                  99.79631,
-                  7.90945
-                ],
-                [
-                  99.78351,
-                  7.91056
-                ],
-                [
-                  99.78178,
-                  7.90561
-                ],
-                [
-                  99.77542,
-                  7.90245
-                ],
-                [
-                  99.77312,
-                  7.90008
-                ],
-                [
-                  99.77239,
-                  7.89647
-                ],
-                [
-                  99.76065,
-                  7.88038
-                ],
-                [
-                  99.75643,
-                  7.86984
-                ],
-                [
-                  99.75098,
-                  7.86884
-                ],
-                [
-                  99.73774,
-                  7.85935
-                ],
-                [
-                  99.7338,
-                  7.86297
-                ],
-                [
-                  99.73884,
-                  7.87572
-                ],
-                [
-                  99.73501,
-                  7.87905
-                ],
-                [
-                  99.73421,
-                  7.88263
-                ],
-                [
-                  99.73128,
-                  7.88686
-                ],
-                [
-                  99.7328,
-                  7.89603
-                ],
-                [
-                  99.73108,
-                  7.90042
-                ],
-                [
-                  99.7329,
-                  7.90339
-                ],
-                [
-                  99.73491,
-                  7.91362
-                ],
-                [
-                  99.73874,
-                  7.92052
-                ],
-                [
-                  99.73899,
-                  7.9235
-                ],
-                [
-                  99.74151,
-                  7.92551
-                ],
-                [
-                  99.74242,
-                  7.92924
-                ],
-                [
-                  99.7399,
-                  7.93292
-                ],
-                [
-                  99.7399,
-                  7.93494
-                ],
-                [
-                  99.73441,
-                  7.94083
-                ],
-                [
-                  99.7333,
-                  7.94386
-                ],
-                [
-                  99.73892,
-                  7.94974
-                ],
-                [
-                  99.74259,
-                  7.95583
-                ],
-                [
-                  99.74537,
-                  7.96569
-                ],
-                [
-                  99.74143,
-                  7.96613
-                ],
-                [
-                  99.74438,
-                  7.96936
-                ],
-                [
-                  99.74689,
-                  7.969
-                ],
-                [
-                  99.74694,
-                  7.97079
-                ],
-                [
-                  99.74916,
-                  7.96904
-                ],
-                [
-                  99.75142,
-                  7.96953
-                ],
-                [
-                  99.75316,
-                  7.97844
-                ],
-                [
-                  99.75762,
-                  7.98295
-                ],
-                [
-                  99.7579,
-                  7.9846
-                ],
-                [
-                  99.75783,
-                  7.98668
-                ],
-                [
-                  99.75661,
-                  7.98753
-                ],
-                [
-                  99.75105,
-                  7.98699
-                ],
-                [
-                  99.74828,
-                  7.98275
-                ],
-                [
-                  99.74597,
-                  7.98478
-                ],
-                [
-                  99.74676,
-                  8.00243
-                ],
-                [
-                  99.75138,
-                  8.01163
-                ],
-                [
-                  99.75046,
-                  8.01401
-                ],
-                [
-                  99.75081,
-                  8.01933
-                ],
-                [
-                  99.75457,
-                  8.0229
-                ],
-                [
-                  99.75808,
-                  8.02373
-                ],
-                [
-                  99.75943,
-                  8.02825
-                ],
-                [
-                  99.75804,
-                  8.03271
-                ],
-                [
-                  99.75313,
-                  8.0348
-                ],
-                [
-                  99.75199,
-                  8.03776
-                ],
-                [
-                  99.74827,
-                  8.04029
-                ],
-                [
-                  99.74835,
-                  8.04202
-                ],
-                [
-                  99.75056,
-                  8.04441
-                ],
-                [
-                  99.75027,
-                  8.04915
-                ],
-                [
-                  99.75157,
-                  8.04884
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "800901",
-          "tambon": "ต.ปากแพรก",
-          "amphoe": "อ.ทุ่งสง",
-          "province": "จ.นครศรีธรรมราช",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "สะพานข้ามคลองท่าแพ",
-          "latitude": 8.166437,
-          "longitude": 99.704285,
-          "sum_rainfall_mm": 120.60000000000001,
-          "observed_at": "2026-10-13T10:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.68297,
-                  8.18498
-                ],
-                [
-                  99.68428,
-                  8.18328
-                ],
-                [
-                  99.68748,
-                  8.18303
-                ],
-                [
-                  99.68934,
-                  8.18141
-                ],
-                [
-                  99.69745,
-                  8.1816
-                ],
-                [
-                  99.70143,
-                  8.17799
-                ],
-                [
-                  99.7027,
-                  8.17449
-                ],
-                [
-                  99.70172,
-                  8.1675
-                ],
-                [
-                  99.70385,
-                  8.16701
-                ],
-                [
-                  99.70254,
-                  8.16448
-                ],
-                [
-                  99.70286,
-                  8.16222
-                ],
-                [
-                  99.70444,
-                  8.16126
-                ],
-                [
-                  99.70007,
-                  8.15754
-                ],
-                [
-                  99.69749,
-                  8.15782
-                ],
-                [
-                  99.69677,
-                  8.15515
-                ],
-                [
-                  99.69227,
-                  8.15053
-                ],
-                [
-                  99.68822,
-                  8.15122
-                ],
-                [
-                  99.68734,
-                  8.15334
-                ],
-                [
-                  99.68448,
-                  8.15426
-                ],
-                [
-                  99.67879,
-                  8.15877
-                ],
-                [
-                  99.67386,
-                  8.15945
-                ],
-                [
-                  99.6734,
-                  8.16416
-                ],
-                [
-                  99.67101,
-                  8.16422
-                ],
-                [
-                  99.67156,
-                  8.16685
-                ],
-                [
-                  99.67515,
-                  8.16842
-                ],
-                [
-                  99.67542,
-                  8.1752
-                ],
-                [
-                  99.68046,
-                  8.18815
-                ],
-                [
-                  99.68297,
-                  8.18498
-                ]
-              ]
-            ]
-          }
-        },
-        {
-          "geocode": "800901",
-          "tambon": "ต.ปากแพรก",
-          "amphoe": "อ.ทุ่งสง",
-          "province": "จ.นครศรีธรรมราช",
-          "region_id": "6",
-          "region_name": "ภาคใต้",
-          "station": "ทุ่งสง",
-          "latitude": 8.174942,
-          "longitude": 99.67887,
-          "sum_rainfall_mm": 80.0,
-          "observed_at": "2026-10-13T10:00:00+07:00",
-          "geometry": {
-            "rings": [
-              [
-                [
-                  99.68297,
-                  8.18498
-                ],
-                [
-                  99.68428,
-                  8.18328
-                ],
-                [
-                  99.68748,
-                  8.18303
-                ],
-                [
-                  99.68934,
-                  8.18141
-                ],
-                [
-                  99.69745,
-                  8.1816
-                ],
-                [
-                  99.70143,
-                  8.17799
-                ],
-                [
-                  99.7027,
-                  8.17449
-                ],
-                [
-                  99.70172,
-                  8.1675
-                ],
-                [
-                  99.70385,
-                  8.16701
-                ],
-                [
-                  99.70254,
-                  8.16448
-                ],
-                [
-                  99.70286,
-                  8.16222
-                ],
-                [
-                  99.70444,
-                  8.16126
-                ],
-                [
-                  99.70007,
-                  8.15754
-                ],
-                [
-                  99.69749,
-                  8.15782
-                ],
-                [
-                  99.69677,
-                  8.15515
-                ],
-                [
-                  99.69227,
-                  8.15053
-                ],
-                [
-                  99.68822,
-                  8.15122
-                ],
-                [
-                  99.68734,
-                  8.15334
-                ],
-                [
-                  99.68448,
-                  8.15426
-                ],
-                [
-                  99.67879,
-                  8.15877
-                ],
-                [
-                  99.67386,
-                  8.15945
-                ],
-                [
-                  99.6734,
-                  8.16416
-                ],
-                [
-                  99.67101,
-                  8.16422
-                ],
-                [
-                  99.67156,
-                  8.16685
-                ],
-                [
-                  99.67515,
-                  8.16842
-                ],
-                [
-                  99.67542,
-                  8.1752
-                ],
-                [
-                  99.68046,
-                  8.18815
-                ],
-                [
-                  99.68297,
-                  8.18498
-                ]
-              ]
-            ]
-          }
-        },
-        {
           "geocode": "900607",
           "tambon": "ต.เขาแดง",
           "amphoe": "อ.สะบ้าย้อย",
@@ -27336,8 +20013,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านทุ่งไพล",
           "latitude": 6.547668,
           "longitude": 100.836957,
-          "sum_rainfall_mm": 54.5,
-          "observed_at": "2026-10-13T10:00:00+07:00",
+          "sum_rainfall_mm": 55.0,
+          "observed_at": "2026-10-13T16:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -27691,8 +20368,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านน้ำเชี่ยว",
           "latitude": 6.466831,
           "longitude": 100.833499,
-          "sum_rainfall_mm": 56.0,
-          "observed_at": "2026-10-13T10:00:00+07:00",
+          "sum_rainfall_mm": 52.0,
+          "observed_at": "2026-10-13T16:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -28046,8 +20723,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านสำนักเอาะ",
           "latitude": 6.485849,
           "longitude": 100.779058,
-          "sum_rainfall_mm": 87.0,
-          "observed_at": "2026-10-13T10:00:00+07:00",
+          "sum_rainfall_mm": 83.5,
+          "observed_at": "2026-10-13T16:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -28401,8 +21078,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "รพ.สต.น้ำเชี่ยว",
           "latitude": 6.48154,
           "longitude": 100.82659,
-          "sum_rainfall_mm": 45.0,
-          "observed_at": "2026-10-13T10:00:00+07:00",
+          "sum_rainfall_mm": 29.6,
+          "observed_at": "2026-10-13T16:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -28757,7 +21434,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 6.589842,
           "longitude": 100.813667,
           "sum_rainfall_mm": 32.5,
-          "observed_at": "2026-10-13T10:00:00+07:00",
+          "observed_at": "2026-10-13T16:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -29087,8 +21764,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานข้ามคลองเทพา",
           "latitude": 6.534085,
           "longitude": 100.963394,
-          "sum_rainfall_mm": 10.600000000000001,
-          "observed_at": "2026-10-13T10:00:00+07:00",
+          "sum_rainfall_mm": 10.999999999999998,
+          "observed_at": "2026-10-13T16:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -29326,8 +22003,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "บ้านฉลุง",
           "latitude": 6.564399,
           "longitude": 100.906046,
-          "sum_rainfall_mm": 28.0,
-          "observed_at": "2026-10-13T10:00:00+07:00",
+          "sum_rainfall_mm": 28.5,
+          "observed_at": "2026-10-13T16:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -29566,7 +22243,7 @@ window.IEAT_THAIWATER_DATA = {
           "latitude": 6.633049,
           "longitude": 101.048768,
           "sum_rainfall_mm": 35.0,
-          "observed_at": "2026-10-13T10:00:00+07:00",
+          "observed_at": "2026-10-13T16:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -29796,8 +22473,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "สะพานคลองเทพา",
           "latitude": 6.43206,
           "longitude": 100.92584,
-          "sum_rainfall_mm": 45.800000000000004,
-          "observed_at": "2026-10-13T10:00:00+07:00",
+          "sum_rainfall_mm": 46.4,
+          "observed_at": "2026-10-13T16:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -30263,8 +22940,8 @@ window.IEAT_THAIWATER_DATA = {
           "station": "เทศบาลตำบลท่าพระยา",
           "latitude": 6.624624,
           "longitude": 100.94688,
-          "sum_rainfall_mm": 57.0,
-          "observed_at": "2026-10-13T10:00:00+07:00",
+          "sum_rainfall_mm": 57.00000000000001,
+          "observed_at": "2026-10-13T16:00:00+07:00",
           "geometry": {
             "rings": [
               [
@@ -30641,18 +23318,18 @@ window.IEAT_THAIWATER_DATA = {
           }
         }
       ],
-      "risk_map": "https://api.hii.or.th/v2/proxy-image/3days_riskmap_13_10_2026.png?1791904055",
+      "risk_map": "https://api.hii.or.th/v2/proxy-image/3days_riskmap_13_10_2026.png?1791925690",
       "source_url": "https://api.hii.or.th/v2/4UQaYnf0Bx4fXPYyCdDRbqHyXH9Ixvd2nVUjaN1cLBY=/warning/flashflood-24h"
     },
     "48h": {
       "period": "48h",
       "status": "ok",
-      "date": "2026-10-13",
-      "time": "22:00:00",
+      "date": "2026-10-14",
+      "time": "04:00:00",
       "type": "พื้นที่เฝ้าระวังพิเศษ ล่วงหน้า 48 ชม. เสี่ยงน้ำท่วมจากฝนตกสะสม",
       "areas": [],
       "area_nearby": [],
-      "risk_map": "https://api.hii.or.th/v2/proxy-image/3days_riskmap_13_10_2026.png?1791904045",
+      "risk_map": "https://api.hii.or.th/v2/proxy-image/3days_riskmap_13_10_2026.png?1791925676",
       "source_url": "https://api.hii.or.th/v2/4UQaYnf0Bx4fXPYyCdDRbqHyXH9Ixvd2nVUjaN1cLBY=/warning/flashflood-48h"
     }
   }
