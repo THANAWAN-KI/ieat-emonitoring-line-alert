@@ -2691,5 +2691,63 @@ html body #report .report-document-footer{margin:24px 0 0;padding-top:12px;borde
  footer.className='report-document-footer';footer.textContent='ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย · การนิคมอุตสาหกรรมแห่งประเทศไทย';report.append(footer);
 })();
 </script>
-<style id="dss-formal-section-colors">html body #report #dssReportMap .section-title,html body #report #dssReportSupport .section-title{background:#f3f4f6!important;color:#202630!important;-webkit-text-fill-color:#202630!important}</style></body></html>
+<style id="dss-formal-section-colors">html body #report #dssReportMap .section-title,html body #report #dssReportSupport .section-title{background:#f3f4f6!important;color:#202630!important;-webkit-text-fill-color:#202630!important}</style>
+<style id="report-single-toolbar-final">
+html body.dss-inline-dashboard #backToRiskmapBtn,html body.dss-inline-dashboard .workspace>.editor{display:none!important}
+html body .top-actions{position:relative!important;gap:8px!important;align-items:center}
+html body .dss-toolbar-settings{display:block!important;position:relative;margin:0!important;padding:0!important;border:0!important;background:transparent!important}
+html body .dss-toolbar-settings > summary{list-style:none!important;display:inline-flex;align-items:center;padding:11px 14px!important;border:1px solid #dce1e8!important;border-radius:9px;background:#fff;color:#354256!important;font-size:13px!important;font-weight:500!important;cursor:pointer;white-space:nowrap}
+html body .dss-toolbar-settings > summary::-webkit-details-marker{display:none}
+html body .dss-toolbar-settings[open] > summary{background:#f0f3f7}
+html body .dss-toolbar-settings .dss-settings-content{position:absolute;right:0;top:calc(100% + 10px);width:min(650px,85vw);max-height:70vh;overflow:auto;padding:20px;border:1px solid #e1e5eb;border-radius:12px;background:#fff;box-shadow:0 12px 36px #26384f24;z-index:2147483647;color:#111}
+html body .dss-toolbar-settings .field{margin-bottom:12px}
+html body.dss-inline-dashboard .top{padding:10px 16px!important}
+html body.dss-inline-dashboard .workspace{margin-top:0!important}
+html body #report{border-radius:3px!important;border:1px solid #e1e5e9!important;padding:26px 24px!important;box-shadow:0 3px 16px #24364b08!important}
+html body #report .report-header{padding-bottom:18px!important;margin-bottom:20px!important}
+html body #report .report-header h1{font-size:20px!important;font-weight:700!important;line-height:1.5!important}
+html body #report .report-header p{font-size:12px!important}
+html body #report .section-title,html body #report #dssReportMap .section-title,html body #report #dssReportSupport .section-title{background:#f4f4f3!important;border:1px solid #e4e5e7!important;border-left:3px solid #8B1E2D!important;border-radius:0!important;font-size:15px!important;padding:10px 12px!important;margin:0!important;color:#252a32!important;-webkit-text-fill-color:#252a32!important}
+html body #report .dss-step-number{display:none!important}
+html body #report .company{border:1px solid #e4e5e7!important;border-top:0!important;border-radius:0!important;overflow:hidden!important}
+html body #report .company .row{grid-template-columns:138px minmax(0,1fr)!important;border:0!important;border-bottom:1px solid #e6e8eb!important}
+html body #report .company .row:last-child{border-bottom:0!important}
+html body #report .company .row > b{background:#fafaf9!important;font-weight:500!important;border-right:1px solid #e6e8eb!important;font-size:12px!important;color:#4b535d!important;-webkit-text-fill-color:#4b535d!important;padding:10px 12px!important;line-height:1.8!important}
+html body #report .company .row > span{font-size:13px!important;padding:10px 12px!important;line-height:1.85!important;color:#171c22!important;-webkit-text-fill-color:#171c22!important}
+html body #report #supportGrid{display:block!important;border-top:0!important}
+html body #report #supportGrid .row{display:grid!important;grid-template-columns:138px minmax(0,1fr)!important;padding:0!important;border:0!important;border-bottom:1px solid #e6e8eb!important;border-radius:0!important;background:#fff!important;box-shadow:none!important}
+html body #report #supportGrid .row > b{background:#fafaf9!important;border:0!important;border-right:1px solid #e6e8eb!important;margin:0!important;padding:10px 12px!important;color:#4b535d!important;-webkit-text-fill-color:#4b535d!important;font-size:12px!important}
+html body #report #supportGrid .row > span{padding:10px 12px!important;font-size:13px!important}
+html body #report #dssWeatherRows{margin-top:0!important}
+html body #report #dssWeatherRows .dss-wind-highlight{border-left:0!important}
+html body #report #dssWeatherRows .dss-wind-highlight > b{background:#fafaf9!important}
+html body #report #dssWeatherRows .dss-wind-highlight > span{background:#fff!important}
+html body #report .dss-report-section{margin-bottom:22px!important}
+html body #report .dss-shared-map-link{margin:10px 0!important;border-radius:3px!important}
+@media(max-width:600px){html body #report{padding:20px 14px!important}html body #report .report-header h1{font-size:18px!important}html body #report .company .row,html body #report #supportGrid .row{grid-template-columns:112px minmax(0,1fr)!important}html body .top-actions{flex-wrap:wrap!important}html body .dss-toolbar-settings .dss-settings-content{position:fixed;top:80px;left:16px;right:16px;width:auto}}
+</style>
+<script id="single-search-report-actions">
+(function(){
+ const embedded=new URLSearchParams(location.search).get('embedded')==='dashboard'&&parent!==window;
+ if(embedded){
+  const settings=document.getElementById('dssOptionalDetails'),summary=settings.querySelector('summary'),content=document.createElement('div');
+  content.className='dss-settings-content';Array.from(settings.childNodes).filter(node=>node!==summary).forEach(node=>content.append(node));
+  const facts=document.getElementById('dssIncidentFacts');if(facts){content.prepend(facts);facts.querySelector(':scope>h3')?.remove()}
+  settings.append(content);settings.classList.add('dss-toolbar-settings');summary.textContent='รายละเอียดเหตุและตั้งค่ารายงาน';
+  document.querySelector('.top-actions').insertBefore(settings,document.getElementById('resetBtn'));
+  document.getElementById('dssNearbyDetails')?.remove();
+  const weather=document.getElementById('dssWeatherRows'),support=document.getElementById('supportGrid');support.before(weather);
+  window.addEventListener('message',event=>{
+   if(event.origin!==location.origin||event.source!==parent||event.data?.type!=='dss:set-incident-type')return;
+   const value=event.data.value;if(!['เหตุเพลิงไหม้','สารเคมีรั่วไหล'].includes(value))return;
+   const select=document.getElementById('event');state.event=value;select.value=value;render();select.dispatchEvent(new Event('change',{bubbles:true}));
+  });
+  parent.postMessage({type:'dss:report-ready'},location.origin);
+ }
+ const previous=selectDssLookup;
+ selectDssLookup=async function(item){await previous(item);state.date=new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok',day:'numeric',month:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit'});if(state.registration)state.registration=[...new Set(state.registration.split(' / ').map(v=>v.trim()))].join(' / ');render()};
+ document.getElementById('pngBtn').onclick=()=>downloadReportPng();
+})();
+</script>
+</body></html>
 
