@@ -2533,7 +2533,7 @@ html body .dss-report-jump a{box-shadow:none!important;font-size:14px!important}
   try{await previous(item);if(current!==sequence)return;status.dataset.state='ready';status.textContent='จัดทำรายงาน '+item.name+' แล้ว · ตรวจข้อมูลและตำแหน่งก่อนส่งออก PNG';}
   catch(error){if(current===sequence){status.dataset.state='error';status.textContent='โหลดข้อมูลไม่ครบ: '+error.message+' · กรุณาค้นหาหรือเลือกบริษัทอีกครั้ง'}throw error;}
  };
- document.getElementById('resetBtn').addEventListener('click',()=>{queueMicrotask(()=>{status.dataset.state='';status.textContent='พร้อมจัดทำรายงาน · เลือกบริษัทเพื่อเริ่มดึงข้อมูล'})});
+ document.getElementById('resetBtn').addEventListener('click',()=>{queueMicrotask(()=>{if(state.company!==defaults.company)return;status.dataset.state='';status.textContent='พร้อมจัดทำรายงาน · เลือกบริษัทเพื่อเริ่มดึงข้อมูล'})});
  document.getElementById('event').addEventListener('change',()=>{const section=document.getElementById('chemicalIncidentEditor');if(section&&!section.hidden)section.scrollIntoView({behavior:'smooth',block:'nearest'});});
  window.dssLeafletMap?.invalidateSize({pan:false});
 })();
