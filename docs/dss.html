@@ -2647,5 +2647,49 @@ html body #dssOptionalDetails[open] > #form,html body #dssNearbyDetails[open] > 
 html body.dss-inline-dashboard #report .mapbox{position:absolute!important;left:-100000px!important;width:1100px!important;top:0!important}
 .dss-shared-map-link{display:block;width:100%;padding:12px 14px;background:#f3f7ee;border:0;border-radius:12px;color:#4F7D32;font-size:13px;text-align:left;cursor:pointer}
 </style>
+
+<style id="dss-formal-document-20261015">
+html body #dssSimplePanel > .field,html body #dssUnifiedStatus,html body .editor > #draftStatus,html body .dss-report-jump{display:none!important}
+html body #dssSimplePanel{grid-template-columns:minmax(0,1fr)!important;gap:0!important}
+html body .editor #dssIncidentMode{max-width:320px!important;width:100%!important}
+html body #dssSingleIntro{margin-bottom:14px!important}
+html body #dssSingleIntro h2{font-size:17px!important}
+html body #dssSingleIntro p{display:none!important}
+html body #dssSingleIntro > div{grid-template-columns:minmax(0,1fr)!important}
+html body #dssSingleIntro h2{grid-column:1!important}
+html body #dssSingleIntro .dss-form-icon{display:none!important}
+html body .workspace>.editor{padding:18px 20px!important;margin-bottom:18px!important;border-radius:12px!important;box-shadow:none!important;border:1px solid #e8eaee!important}
+html body .editor > #dssOptionalDetails,html body .editor > #dssNearbyDetails{padding-top:10px!important;margin-top:12px!important}
+html body .workspace{padding:0 16px!important}
+html body #report{padding:30px 26px!important;border:1px solid #e2e5ea!important;border-radius:8px!important;box-shadow:0 3px 16px #24364b06!important;background:#fff!important;color:#15191f!important}
+html body #report .report-header{align-items:center!important;gap:16px!important;padding:0 0 22px!important;margin:0 0 24px!important;border:0!important;border-bottom:2px solid #8B1E2D!important;background:#fff!important}
+html body #report .report-header h1{font-size:21px!important;line-height:1.6!important;font-weight:600!important;color:#111!important;-webkit-text-fill-color:#111!important}
+html body #report .report-header p{font-size:12px!important;line-height:1.7!important;margin:4px 0 0!important;color:#67717f!important;-webkit-text-fill-color:#67717f!important}
+html body #report .ieat-report-logo{width:40px!important;height:60px!important;flex:none}
+html body #report .dss-report-section{margin:0 0 24px!important;padding:0!important;background:#fff!important}
+html body #report .section-title{display:flex!important;align-items:center!important;gap:9px!important;padding:10px 12px!important;margin:0 0 12px!important;border:0!important;border-radius:4px!important;background:#f3f4f6!important;color:#202630!important;-webkit-text-fill-color:#202630!important;font-size:16px!important;font-weight:600!important;line-height:1.6!important}
+html body #report .dss-step-number{width:22px!important;height:22px!important;font-size:12px!important;font-style:normal!important;border-radius:4px!important;background:#8B1E2D!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
+html body #report .company{border:0!important;border-radius:0!important;overflow:visible!important}
+html body #report .company .row{grid-template-columns:145px minmax(0,1fr)!important;border:0!important;border-bottom:1px solid #edf0f3!important}
+html body #report .company .row > b{background:#fafbfc!important;border:0!important;color:#4f5967!important;-webkit-text-fill-color:#4f5967!important;font-size:13px!important;font-weight:500!important;padding:11px 12px!important;line-height:1.8!important}
+html body #report .company .row > span{background:#fff!important;color:#15191f!important;-webkit-text-fill-color:#15191f!important;font-size:13px!important;padding:11px 12px!important;line-height:1.9!important;overflow-wrap:anywhere!important}
+html body #report #supportGrid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+html body #report #supportGrid .row{border:1px solid #e8ebef!important;border-radius:6px!important;background:#fff!important;padding:14px!important;min-width:0!important}
+html body #report #supportGrid .row > b{font-size:13px!important;color:#8B1E2D!important;-webkit-text-fill-color:#8B1E2D!important;background:transparent!important;padding:0!important;margin:0 0 5px!important}
+html body #report #supportGrid .row > span{font-size:12px!important;line-height:1.8!important;background:transparent!important;padding:0!important;color:#15191f!important;-webkit-text-fill-color:#15191f!important}
+html body #report .dss-support-contact{font-size:11px!important;color:#67717f!important;-webkit-text-fill-color:#67717f!important}
+html body #report .dss-shared-map-link{background:#f6f7f9!important;border:1px solid #e7eaef!important;color:#41536a!important;padding:11px 13px!important;font-size:12px!important;border-radius:5px!important}
+html body #report #dssWeatherRows{margin-top:12px!important}
+html body #report .report-document-footer{margin:24px 0 0;padding-top:12px;border-top:1px solid #e4e8ee;font-size:10px;text-align:right;line-height:1.8;color:#77818f}
+@media(max-width:600px){html body #report{padding:22px 16px!important}html body #report .report-header h1{font-size:18px!important}html body #report .company .row{grid-template-columns:118px minmax(0,1fr)!important}html body #report #supportGrid{grid-template-columns:minmax(0,1fr)!important}}
+</style>
+<script id="dss-formal-document-labels">
+(function(){
+ document.querySelector('#dssSingleIntro h2').textContent='ประเภทเหตุและรายละเอียดรายงาน';
+ document.querySelector('.top span')?.replaceChildren(document.createTextNode('EMCC GIS · รายงานข้อมูลสนับสนุนการรับมือเหตุฉุกเฉิน'));
+ const report=document.getElementById('report'),footer=document.createElement('div');
+ footer.className='report-document-footer';footer.textContent='ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย · การนิคมอุตสาหกรรมแห่งประเทศไทย';report.append(footer);
+})();
+</script>
 </body></html>
 
