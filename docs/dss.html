@@ -2568,5 +2568,55 @@ html body .top-actions #pngBtn{background:#8B1E2D!important;border-radius:12px!i
 <script id="dss-one-png-label">
 document.getElementById('pngBtn').textContent='ดาวน์โหลด PNG ภาพเดียว';
 </script>
+
+<style id="dss-clean-command-panel-20261015">
+html body .workspace > .editor{padding:26px 28px!important;background:#fff!important;border-radius:20px!important;box-shadow:0 6px 28px #19253608!important;border:1px solid #eef0f3!important}
+html body #dssSingleIntro{display:block!important;margin:0 0 22px!important}
+html body #dssSingleIntro > div{display:grid;grid-template-columns:42px minmax(0,1fr);column-gap:12px;align-items:center}
+html body #dssSingleIntro h2{font-size:21px!important;font-weight:600!important;line-height:1.4!important;margin:0!important;grid-column:2}
+html body #dssSingleIntro p{font-size:13px!important;color:#737782!important;line-height:1.6!important;margin:4px 0 0!important;grid-column:2}
+#dssSingleIntro .dss-form-icon{grid-row:1/3;grid-column:1;display:flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:13px;background:#f9e9ec;color:#8B1E2D}
+#dssSingleIntro .dss-form-icon svg{width:23px;height:23px}
+html body #dssSingleIntro .dss-auto-badge{display:none!important}
+html body #dssSimplePanel{display:grid!important;grid-template-columns:230px minmax(0,1fr)!important;gap:20px!important;align-items:start!important}
+html body .editor #dssIncidentMode,html body #dssSimplePanel > .field{padding:0!important;margin:0!important;background:transparent!important;border:0!important;border-radius:0!important}
+html body #dssSimplePanel label,html body .editor #dssIncidentMode label{display:block!important;font-size:13px!important;color:#474b54!important;-webkit-text-fill-color:#474b54!important;font-weight:500!important;margin:0 0 8px!important;line-height:1.5!important}
+html body .editor #dssIncidentMode select,html body #dssSimplePanel #factoryLookup{height:50px!important;border-radius:12px!important;border:1px solid #e5e7ec!important;background:#fafbfc!important;box-shadow:none!important;font-size:15px!important;color:#111!important;padding:12px 14px!important}
+html body #dssSimplePanel #factoryLookup{flex:1 1 auto!important}
+html body #dssSimplePanel .mini-actions{gap:10px!important}
+html body #factoryLookupBtn{height:50px!important;min-width:136px!important;border-radius:12px!important;font-weight:500!important;font-size:15px!important;padding:12px 18px!important;box-shadow:0 4px 10px #8B1E2D17!important}
+html body #factoryLookupStatus{font-size:12px!important;color:#666d78!important;margin:9px 2px 0!important;line-height:1.6!important}
+html body #factoryLookupResults{margin-top:10px!important}
+html body #factoryLookupResults button{background:#fafbfc!important;border:1px solid #eef0f3!important;padding:13px 15px!important;border-radius:10px!important}
+html body #factoryLookupResults button:hover{background:#fff4f5!important;border-color:#eac7ce!important}
+html body #dssUnifiedStatus{margin:16px 0 0!important;padding:0!important;background:transparent!important;color:#747a84!important;font-size:12px!important;line-height:1.7!important;border-radius:0!important}
+html body #dssUnifiedStatus:before{content:'';display:inline-block;width:7px;height:7px;background:#b8bec7;border-radius:50%;margin-right:8px;vertical-align:middle}
+html body #dssUnifiedStatus[data-state="ready"]{color:#4F7D32!important}
+html body #dssUnifiedStatus[data-state="ready"]:before{background:#4F7D32}
+html body #dssUnifiedStatus[data-state="loading"]:before{background:#F5B52E}
+html body #dssUnifiedStatus[data-state="error"]{color:#D9361E!important}
+html body #dssUnifiedStatus[data-state="error"]:before{background:#D9361E}
+html body .editor > #draftStatus{font-size:11px!important;color:#9a9fa8!important;margin:4px 0 0!important}
+html body .editor > #dssOptionalDetails,html body .editor > #dssNearbyDetails{display:block!important;background:#fff!important;padding:14px 0 0!important;margin:16px 0 0!important;border-top:1px solid #f0f1f4!important;border-radius:0!important}
+html body .editor > #dssOptionalDetails:not([open]),html body .editor > #dssNearbyDetails:not([open]){display:inline-block!important;vertical-align:top;width:calc(50% - 12px)!important}
+html body .editor > #dssNearbyDetails:not([open]){margin-left:20px!important}
+html body #dssOptionalDetails summary,html body #dssNearbyDetails summary{font-size:13px!important;font-weight:400!important;color:#58606d!important;line-height:1.7}
+html body #dssOptionalDetails[open] > #form,html body #dssNearbyDetails[open] > aside{margin-top:16px!important}
+@media(max-width:750px){html body .workspace > .editor{padding:20px!important}html body #dssSimplePanel{grid-template-columns:minmax(0,1fr)!important;gap:16px!important}html body #dssSingleIntro h2{font-size:19px!important}html body #factoryLookupBtn{min-width:112px!important;padding:10px 12px!important;font-size:14px!important}html body .editor > #dssOptionalDetails:not([open]),html body .editor > #dssNearbyDetails:not([open]){display:block!important;width:100%!important;margin-left:0!important}html body #dssSingleIntro{margin-bottom:18px!important}}
+</style>
+<script id="dss-clean-command-panel-script">
+(function(){
+ const intro=document.getElementById('dssSingleIntro');if(!intro)return;
+ intro.querySelector('h2').textContent='จัดทำรายงานเหตุฉุกเฉิน';
+ intro.querySelector('p').textContent='เลือกประเภทเหตุและบริษัท เพื่อเตรียมข้อมูลประกอบรายงาน';
+ const icon=document.createElement('span');icon.className='dss-form-icon';icon.setAttribute('aria-hidden','true');
+ icon.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>';
+ intro.querySelector('div').prepend(icon);
+ document.querySelector('label[for="factoryLookup"]').textContent='ค้นหาบริษัท / นิคมอุตสาหกรรม / เลขทะเบียน';
+ document.getElementById('factoryLookupBtn').textContent='ค้นหาบริษัท';
+ document.getElementById('dssOptionalDetails').querySelector('summary').textContent='รายละเอียดเหตุและตั้งค่ารายงาน';
+ document.getElementById('dssNearbyDetails').querySelector('summary').textContent='ตำแหน่งสนับสนุนเพิ่มเติม';
+})();
+</script>
 </body></html>
 
