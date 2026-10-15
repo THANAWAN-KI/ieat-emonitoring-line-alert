@@ -72,6 +72,14 @@
 </section>
 
 
+<section class="panel chemical-details-panel" aria-labelledby="chemicalDetailHeading">
+<div class="chemical-detail-heading"><h2 id="chemicalDetailHeading">รายละเอียดข้อมูลสารเคมี</h2><span>1 ม.ค.–15 ต.ค. 2569</span></div>
+<div class="chemical-detail-filters"><label for="chemicalEstate">นิคมอุตสาหกรรม<select id="chemicalEstate" disabled><option value="">ทุกนิคมอุตสาหกรรม</option></select></label><label for="chemicalSearch">ค้นหาโรงงาน / สารเคมี / CAS No.<input id="chemicalSearch" type="search" placeholder="พิมพ์ชื่อโรงงาน สารเคมี หรือเลข CAS" disabled></label></div>
+<p id="chemicalDetailStatus" class="panel-note" role="status">กำลังโหลดรายละเอียดสารเคมี…</p>
+<div class="chemical-detail-scroll"><table class="chemical-detail-table"><thead><tr><th scope="col">ลำดับ</th><th scope="col">ชื่อโรงงาน</th><th scope="col">นิคมอุตสาหกรรม</th><th scope="col">สารเคมี</th><th scope="col">CAS No.</th><th scope="col">UN No.</th><th scope="col">ปริมาณ</th><th scope="col">หน่วย</th></tr></thead><tbody id="chemicalDetailBody"></tbody></table></div>
+<div class="chemical-detail-pages"><button id="chemicalPrev" type="button" disabled>← ก่อนหน้า</button><span id="chemicalPage" aria-live="polite"></span><button id="chemicalNext" type="button" disabled>ถัดไป →</button></div>
+<p class="panel-note">ที่มา: รายงานสารเคมี DSS · แสดงตามรายการต้นทาง อาจมีสารชื่อซ้ำกัน · ปริมาณต้องอ่านคู่กับหน่วยของแต่ละรายการ</p>
+</section>
 <header class="map-section-heading"><div><h2>แผนที่และรายละเอียดข้อมูล</h2><p>คลิกรายการเพื่อดูตำแหน่งและรายละเอียดบนแผนที่</p></div></header>
 <aside class="panel workspace-directory"><div class="directory-head"><div class="directory-title-row"><h3>รายการข้อมูลในพื้นที่</h3><span id="listCount" class="directory-count" role="status">… รายการ</span></div><small id="listLimit"></small><p class="directory-hint">เลือกข้อมูลเพื่อซูมไปยังตำแหน่งบนแผนที่</p></div><div id="directory"></div></aside>
 <p class="source-note">แหล่งข้อมูล: ตำแหน่งนิคมฯ e_PP_2025, ข้อมูลผู้ประกอบการ_e_PP, Hospital_Locations, Risk_Map_WFL1, Map และตำแหน่งกล้องCCTV · ตัวเลขนับตามรายการ / แปลงในแต่ละชั้นข้อมูล อาจมีผู้ประกอบการที่มีหลายแปลง · ระหว่างโหลดจะแสดงข้อมูลเท่าที่ได้รับ</p>
@@ -452,6 +460,28 @@ html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader .disaster-cl
 @media(max-width:760px){#riskDashboard .zone-matrix-layout{padding:14px}#riskDashboard .analytics-top{grid-template-columns:1fr}#riskDashboard #operatingZoneDonut .donut-layout{flex-wrap:wrap}#riskDashboard #operatingZoneDonut .chart-legend{min-width:150px}}
 </style>
 <style id="risk-matrix-requested-colors">#riskDashboard #dssStatusSection .dss-chemicals{background:#8B1E2D}#riskDashboard .zone-matrix-table .matrix{min-width:540px}</style>
+<style id="chemical-detail-table-style">
+#riskDashboard .chemical-details-panel{padding:20px;margin:22px 0}
+.chemical-detail-heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.chemical-detail-heading h2{margin:0;font-size:18px;color:#000}
+.chemical-detail-heading>span{font-size:12px}
+.chemical-detail-filters{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:14px;margin:18px 0}
+.chemical-detail-filters label{display:grid;gap:6px;font-size:13px}
+.chemical-detail-filters input,.chemical-detail-filters select{width:100%;min-width:0;min-height:42px;padding:9px 12px;border:1px solid #e4dbe2;border-radius:9px;background:#fff;color:#000;font:inherit}
+.chemical-detail-scroll{overflow:auto;max-height:520px;margin-top:12px;border:1px solid #e4e4e4;border-radius:12px}
+.chemical-detail-table{width:100%;min-width:1050px;border-collapse:separate;border-spacing:0;font-size:12px;color:#000}
+.chemical-detail-table th,.chemical-detail-table td{padding:12px 10px;border-right:1px solid #e4e4e4;border-bottom:1px solid #e4e4e4;text-align:left;vertical-align:top;line-height:1.7}
+.chemical-detail-table th{position:sticky;top:0;background:#f8edf0;font-weight:600}
+.chemical-detail-table td:nth-child(2),.chemical-detail-table td:nth-child(4){min-width:200px;overflow-wrap:anywhere}
+.chemical-detail-table tr:nth-child(even) td{background:#fcfafb}
+.chemical-detail-table td:nth-child(7){text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.chemical-detail-table tr>:last-child{border-right:0}
+.chemical-detail-pages{display:flex;align-items:center;justify-content:flex-end;gap:14px;flex-wrap:wrap;margin-top:14px;font-size:12px}
+.chemical-detail-pages button{padding:8px 13px;border:1px solid #e5d4da;border-radius:8px;background:#fff;color:#8B1E2D;font:inherit}
+.chemical-detail-pages button:disabled{opacity:.4;cursor:default}
+@media(max-width:760px){#riskDashboard .chemical-details-panel{padding:14px}.chemical-detail-filters{grid-template-columns:1fr}}
+</style>
+<script src="./dss-chemical-details-20261015.js?v=1"></script>
 </body></html>
 
 
