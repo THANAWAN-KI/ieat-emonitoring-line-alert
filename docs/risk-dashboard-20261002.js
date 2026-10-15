@@ -37,18 +37,6 @@
   $('matrixBody').replaceChildren();
   tableRows.forEach(e=>{const tr=el('tr');tr.append(el('th',e.name));for(const i of [0,2,1])appendMetric(tr,riskLoading?null:e.counts[i],maxima[i]);tr.append(el('td',riskLoading?'—':number(e.total)));$('matrixBody').append(tr);[e.counts[0],e.counts[2],e.counts[1],e.total].forEach((v,i)=>totals[i]+=v);});
   if(tableRows.length){const tr=el('tr',null,'matrix-total');tr.append(el('th','รวม'));totals.forEach(n=>tr.append(el('td',riskLoading?'—':number(n))));$('matrixBody').append(tr);}
-  const rankingHost=$('riskRankingCards');
-  if(rankingHost){
-   rankingHost.replaceChildren();
-   const groups=new Map();visibleRows(business,false).forEach(r=>{if(r.estate==='—')return;const k=normalize(r.estate);if(!groups.has(k))groups.set(k,{name:r.estate,counts:[0,0,0],first:[null,null,null]});const e=groups.get(k);riskFields.forEach((f,i)=>{if(flagged(r.attrs[f.field])){e.counts[i]++;if(!e.first[i])e.first[i]=r;}});});
-   const estates=datasets.find(d=>d.id==='estate'),colors=[['#D9361E','#fff'],['#F5B52E','#000'],['#FFD16A','#000'],['#4F7D32','#fff'],['#4F7D32','#fff']];
-   for(const i of [0,2,1]){
-    const card=el('article',null,'risk-ranking-card'),heading=el('h3','5 นิคมฯ ที่มีโรงงานเข้าข่าย'+(i===0?'ความเสี่ยง 12 ประเภท':i===2?' PSM':'อัคคีภัยสูง')+'มากที่สุด'),list=el('div',null,'risk-ranking-list');card.append(heading,list);
-    const top=[...groups.values()].filter(e=>e.counts[i]>0).sort((a,b)=>b.counts[i]-a.counts[i]||a.name.localeCompare(b.name,'th')).slice(0,5);
-    top.forEach((e,index)=>{const estateRow=estates.rows.find(r=>normalize(r.estate)===normalize(e.name)),target=estateRow?{d:estates,r:estateRow}:{d:business,r:e.first[i]},key=target.d.id+':'+target.r.id,button=el('button',null,'directory-item rank-row'+(selectedItem===key?' active':''));button.type='button';button.dataset.key=key;button.setAttribute('aria-pressed',String(selectedItem===key));button.setAttribute('aria-label',e.name+' '+number(e.counts[i])+' รายการ ดูตำแหน่งบนแผนที่');const badge=el('strong',number(e.counts[i]),'rank-count');badge.style.background=colors[index][0];badge.style.color=colors[index][1];button.append(el('span',(index+1)+'. '+e.name,'rank-name'),badge);button.onclick=()=>zoomRow(target.d,target.r,button);list.append(button);});
-    if(!top.length)list.append(el('p',business.status==='loading'?'กำลังโหลดข้อมูล…':business.status==='error'?'โหลดข้อมูลไม่สำเร็จ':'ไม่พบรายการเข้าข่ายในพื้นที่ที่เลือก','empty'));rankingHost.append(card);
-   }
-  }
   applyMapFilters();
  }
 
@@ -141,7 +129,8 @@ $('searchButton').onclick=()=>{clearTimeout(searchTimer);changed();zoomMatches(t
    try{view.destroy()}catch(e){}$('map').replaceChildren();
    if(!window.L)throw Error('Leaflet unavailable');
    const data=await json(portalUrl+'/sharing/rest/content/items/'+webmapId+'/data?f=json');
-   fallbackView=L.map('map',{zoomControl:false}).setView([14,101],6);L.control.zoom({position:'bottomright'}).addTo(fallbackView);
+   fallbackView=L.map('map',{zoomControl:false}).setView([14,101],6);
+   window.ieatSupportMap=fallbackView;window.dispatchEvent(new CustomEvent('ieat-support-map-ready',{detail:{map:fallbackView}}));L.control.zoom({position:'bottomright'}).addTo(fallbackView);
    const tileUrl=data.baseMap?.baseMapLayers?.find(l=>l.url&&/MapServer/.test(l.url))?.url||'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer';
    const tiles=L.tileLayer(tileUrl+'/tile/{z}/{y}/{x}',{attribution:'Tiles © Esri',maxZoom:19}).addTo(fallbackView);
    const extent=data.initialState?.viewpoint?.targetGeometry;
