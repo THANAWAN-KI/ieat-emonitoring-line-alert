@@ -208,6 +208,18 @@ $('searchButton').onclick=()=>{clearTimeout(searchTimer);changed();zoomMatches(t
        if(filtered)params.set('objectIds',ids.join(','));
        result=await json(def.url+'/query',params);
       }
+      const features=result.type==='FeatureCollection'?result.features:result.type==='Feature'?[result]:[];
+      if(features.length>40&&fallbackView.getZoom()<18){
+       const buckets=new Map(),keep=[];
+       for(const feature of features){if(feature.geometry?.type!=='Point'){keep.push(feature);continue;}const coords=feature.geometry.coordinates,p=fallbackView.latLngToLayerPoint([coords[1],coords[0]]),key=Math.floor(p.x/52)+':'+Math.floor(p.y/52);if(!buckets.has(key))buckets.set(key,[]);buckets.get(key).push(feature);}
+       const palette={hospital:'#8B1E2D',fire:'#D9361E',police:'#4C2365',community:'#4F7D32',hydrant:'#457B9D',cctv:'#8B1E2D',estate:'#7F5D99',business:'#E96A60'};
+       for(const bucket of buckets.values()){if(bucket.length===1){keep.push(bucket[0]);continue;}const lat=bucket.reduce((n,f)=>n+f.geometry.coordinates[1],0)/bucket.length,lon=bucket.reduce((n,f)=>n+f.geometry.coordinates[0],0)/bucket.length,c=palette[d?.id]||'#7F5D99',size=bucket.length>99?40:34;
+        const cluster=L.marker([lat,lon],{icon:L.divIcon({className:'dashboard-point-cluster',html:'<span style="background:'+c+'">'+bucket.length+'</span>',iconSize:[size,size],iconAnchor:[size/2,size/2]}),title:bucket.length+' '+(d?.label||def.title)+' · คลิกเพื่อซูม'}).addTo(group);
+        cluster.bindTooltip(el('span',bucket.length+' '+(d?.label||def.title)));
+        cluster.on('click',()=>{const bounds=L.latLngBounds(bucket.map(f=>[f.geometry.coordinates[1],f.geometry.coordinates[0]]));fallbackView.fitBounds(bounds,{padding:[50,50],maxZoom:18});});
+       }
+       result={type:'FeatureCollection',features:keep};
+      }
       L.geoJSON(result,{style:f=>symbolStyle(def,f.properties||{}),pointToLayer:(f,ll)=>mapPoint(def,f,ll),onEachFeature:(feature,layer)=>{
        const a=feature.properties||{},name=d?String(pick(a,d.names)):String(pick(a,['Name','Name_Parcel','mercant_na','ชื่อผู้ประกอบการ','name'])),box=el('div');
        box.append(el('b',name),el('p',def.title));if(d)box.append(el('p',String(pick(a,d.estates))));riskFields.forEach(f=>{if(flagged(a[f.field]))box.append(el('p',f.label+' · เข้าข่าย'))});layer.bindPopup(box);
