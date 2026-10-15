@@ -113,7 +113,7 @@
   if(match){const key=match.d.id+':'+match.r.id;const button=[...document.querySelectorAll('.directory-item')].find(b=>b.dataset.key===key);zoomRow(match.d,match.r,button,reveal);}
 }
 datasets.forEach(d=>$('type').add(new Option(d.label,d.id)));
-$('estate').onchange=()=>{changed();zoomMatches(true)};$('type').onchange=()=>{changed();zoomMatches(false)};$('risk').onchange=()=>{changed();zoomMatches(false)};
+$('estate').onchange=()=>{if(!$('estate').value){['type','risk','search'].forEach(id=>$(id).value='');selectedItem=null;pendingZoom=null;pendingCardZoom=null;cardZoomRequest++;changed();if(fallbackView)fallbackView.fitBounds(fallbackInitialBounds||[[5.5,97.3],[20.6,105.7]],{padding:[20,20]});}else{changed();zoomMatches(true)}};$('type').onchange=()=>{changed();zoomMatches(false)};$('risk').onchange=()=>{changed();zoomMatches(false)};
 let searchTimer;$('search').oninput=()=>{clearTimeout(searchTimer);searchTimer=setTimeout(()=>{changed();if(selected.query.length>=2)zoomMatches(false)},600)};
 $('search').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();clearTimeout(searchTimer);changed();zoomMatches(true)}};
 $('searchButton').onclick=()=>{clearTimeout(searchTimer);changed();zoomMatches(true)};
@@ -206,8 +206,7 @@ $('searchButton').onclick=()=>{clearTimeout(searchTimer);changed();zoomMatches(t
     document.addEventListener('keydown',event=>{if(event.key==='Escape'&&section.classList.contains('dashboard-map-expanded')){section.classList.remove('dashboard-map-expanded');fallbackView.invalidateSize({pan:false});}});
     L.DomEvent.disableClickPropagation(box);L.DomEvent.disableScrollPropagation(box);return box;};dashboardTools.addTo(fallbackView);
    if(window.ResizeObserver)new ResizeObserver(()=>fallbackView.invalidateSize({pan:false})).observe($('map'));
-   const extent=data.initialState?.viewpoint?.targetGeometry;
-   if(extent?.xmin!=null){const project=(x,y)=>[Math.atan(Math.sinh(y/6378137))*180/Math.PI,x/6378137*180/Math.PI];fallbackInitialBounds=extent.spatialReference?.wkid===4326?[[extent.ymin,extent.xmin],[extent.ymax,extent.xmax]]:[project(extent.xmin,extent.ymin),project(extent.xmax,extent.ymax)];fallbackView.fitBounds(fallbackInitialBounds);}
+   fallbackInitialBounds=[[5.5,97.3],[20.6,105.7]];fallbackView.fitBounds(fallbackInitialBounds,{padding:[20,20]});
    const definitions=[];function collect(layers,parentVisible=true){for(const def of layers||[]){const shown=parentVisible&&def.visibility!==false;if(def.layers)collect(def.layers,shown);else if(def.url&&['ArcGISFeatureLayer','GeoJSON'].includes(def.layerType))definitions.push({...def,shown});}}collect(data.operationalLayers);
    const groups={},canonical=u=>decodeURI(u||'').replace(/\/$/,'').toLowerCase();
    for(const def of definitions){def.group=L.layerGroup();groups[def.title]=def.group;if(def.shown)def.group.addTo(fallbackView);def.dataset=datasets.find(d=>canonical(base+encodeURI(d.path))===canonical(def.url));def.contextParcel=/\/e_pp\/featureserver\/0$/i.test(canonical(def.url));}
