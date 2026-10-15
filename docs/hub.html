@@ -51,7 +51,7 @@
 <div id="disasterExecutivePop" class="disaster-executive-pop" role="dialog" aria-label="สรุปนิคมฯ และสถานการณ์น้ำ" hidden><iframe id="disasterExecutiveFrame" title="สรุปนิคมตามพื้นที่ที่เลือก"></iframe></div>
 <nav class="nav-tabs portal-disaster-tabs" aria-label="สถานการณ์ภัย"><button class="nav-tab active" data-page="risk" type="button">ไฟไหม้</button><button class="nav-tab" data-page="flood" type="button">น้ำท่วม</button><button class="nav-tab" data-page="drought" type="button">ภัยแล้ง</button><button class="nav-tab" data-page="pm25" type="button">ฝุ่น PM2.5</button></nav>
 <main class="page">
-<section id="riskDashboard">
+<section id="riskDashboard"><div class="risk-workspace"><div class="workspace-data">
 <header class="dashboard-intro"><div><p class="dashboard-eyebrow">EMCC · GIS / INDUSTRIAL ESTATE RISK OVERVIEW</p><h1>ภาพรวมความเสี่ยงนิคมอุตสาหกรรม</h1><p class="dashboard-description">ติดตามข้อมูลความเสี่ยงและทรัพยากรสนับสนุน เพื่อเตรียมพร้อมรับมือเหตุฉุกเฉิน</p></div><div class="dashboard-actions"><a class="report-button" id="openEmergencyReport" href="./dss.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h6"/></svg>เปิดหน้าจัดทำรายงานเหตุฉุกเฉิน</a><a class="map-shortcut" href="#riskMapSection">ดูแผนที่และรายการข้อมูล ↓</a></div></header>
 <div class="dashboard-section-label"><h2>เลือกพื้นที่และข้อมูลที่ต้องการ</h2><span>ตัวกรองใช้ร่วมกับการ์ด กราฟ และแผนที่</span></div>
 
@@ -77,10 +77,10 @@
 <article class="panel"><div class="panel-title">จำนวนรายการเข้าข่าย แยกตามนิคมฯ</div><div class="panel-content"><div class="bar-legend"><span style="--c:#01b287">12 ประเภท</span><span style="--c:#e5505a">อัคคีภัยสูง</span><span style="--c:#ff9f1c">PSM</span></div><div id="riskBars"></div><p class="panel-note">แสดง 8 พื้นที่แรก เรียงตามจำนวนเข้าข่ายสูงสุดในกลุ่มใดกลุ่มหนึ่ง</p></div></article>
 <article class="panel"><div class="panel-title">ตารางความเสี่ยงรายนิคมฯ</div><div class="panel-content"><div class="matrix-scroll"><table class="matrix"><thead><tr><th>นิคมอุตสาหกรรม</th><th>12 ประเภท</th><th>อัคคีภัยสูง</th><th>PSM</th><th>รายการทั้งหมด</th></tr></thead><tbody id="matrixBody"></tbody></table></div><p class="panel-note">ความเข้มของสีแสดงจำนวนรายการ ไม่ใช่ระดับโอกาสเกิดเหตุหรือความรุนแรง</p></div></article>
 </section>
-<header id="riskMapSection" class="map-section-heading"><div><h2>แผนที่และรายละเอียดข้อมูล</h2><p>คลิกรายการเพื่อดูตำแหน่งและรายละเอียดบนแผนที่</p></div></header>
-<section class="map-grid"><article class="panel"><div class="map-controls"><span>Risk Map · Web Map กนอ.</span><select id="basemap" aria-label="แผนที่พื้นฐาน"><option value="gray-vector">แผนที่สีเทา</option><option value="streets-vector">แผนที่ถนน</option><option value="satellite" selected>ภาพถ่ายดาวเทียม</option><option value="topo-vector">ภูมิประเทศ</option></select></div><div id="map" role="region" aria-label="แผนที่ Risk Map"></div><div id="mapStatus" class="map-footer" role="status">กำลังโหลดแผนที่…</div></article><aside class="panel"><div class="directory-head"><div class="directory-title-row"><h3>รายการข้อมูลในพื้นที่</h3><span id="listCount" class="directory-count" role="status">… รายการ</span></div><small id="listLimit"></small><p class="directory-hint">เลือกข้อมูลเพื่อซูมไปยังตำแหน่งบนแผนที่</p></div><div id="directory"></div></aside></section>
+<header class="map-section-heading"><div><h2>แผนที่และรายละเอียดข้อมูล</h2><p>คลิกรายการเพื่อดูตำแหน่งและรายละเอียดบนแผนที่</p></div></header>
+<aside class="panel workspace-directory"><div class="directory-head"><div class="directory-title-row"><h3>รายการข้อมูลในพื้นที่</h3><span id="listCount" class="directory-count" role="status">… รายการ</span></div><small id="listLimit"></small><p class="directory-hint">เลือกข้อมูลเพื่อซูมไปยังตำแหน่งบนแผนที่</p></div><div id="directory"></div></aside>
 <p class="source-note">แหล่งข้อมูล: ตำแหน่งนิคมฯ e_PP_2025, ข้อมูลผู้ประกอบการ_e_PP, Hospital_Locations, Risk_Map_WFL1, Map และตำแหน่งกล้องCCTV · ตัวเลขนับตามรายการ / แปลงในแต่ละชั้นข้อมูล อาจมีผู้ประกอบการที่มีหลายแปลง · ระหว่างโหลดจะแสดงข้อมูลเท่าที่ได้รับ</p>
-</section>
+</div><div id="riskMapSection" class="workspace-map" aria-label="แผนที่ความเสี่ยง"><article class="panel"><div class="map-controls"><span>Risk Map · Web Map กนอ.</span><select id="basemap" aria-label="แผนที่พื้นฐาน"><option value="gray-vector">แผนที่สีเทา</option><option value="streets-vector">แผนที่ถนน</option><option value="satellite" selected>ภาพถ่ายดาวเทียม</option><option value="topo-vector">ภูมิประเทศ</option></select></div><div id="map" role="region" aria-label="แผนที่ Risk Map"></div><div id="mapStatus" class="map-footer" role="status">กำลังโหลดแผนที่…</div></article></div></div></section>
 <section id="emergencyReportPage" hidden><iframe id="emergencyReportFrame" class="other-frame" title="จัดทำรายงานเหตุฉุกเฉิน"></iframe></section>
 <section id="otherPage" hidden><iframe id="otherFrame" class="other-frame" title="ข้อมูลสถานการณ์ภัย" loading="lazy"></iframe></section>
 </main>
@@ -269,56 +269,72 @@ source.addEventListener('change',render);source.addEventListener('input',render)
 })();
 </script>
 
-<style id="hub-design-20261015">
-body{background:#f6f7fb;color:#000}
-.page{max-width:1720px;padding:28px 32px 40px}
-.dashboard-intro{display:flex;justify-content:space-between;align-items:center;gap:28px;margin-bottom:26px;padding:28px 30px;background:linear-gradient(110deg,#fff 35%,#f1eaf8);border:1px solid #e7dfef;border-radius:22px}
-.dashboard-eyebrow{margin:0 0 8px;font-size:12px;font-weight:700;letter-spacing:1.1px;color:#633e80}
-.dashboard-intro h1{margin:0;font-size:clamp(24px,2.2vw,34px);line-height:1.4;font-weight:700;color:#000}
-.dashboard-description{margin:10px 0 0;font-size:16px;line-height:1.7;color:#000}
-.dashboard-actions{display:flex;flex-direction:column;align-items:stretch;gap:10px;flex:none}
-#riskDashboard .dashboard-actions .report-button{padding:14px 20px;font-size:15px;border-radius:12px;background:#eadcf5;color:#522572;border-color:#d4b9e6;min-height:50px}
-.map-shortcut{text-align:center;font-size:14px;padding:8px;color:#000;border-radius:8px}
-.map-shortcut:hover{background:#e9e2f0}
-.dashboard-section-label{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:24px 0 12px}
-.dashboard-section-label h2{font-size:18px;margin:0;font-weight:700}
-.dashboard-section-label span{font-size:13px;color:#000}
-#riskDashboard .filter-bar{display:grid;grid-template-columns:1.2fr 1fr 1fr 1.5fr auto auto auto;gap:12px;padding:20px;border-radius:16px;border-color:#e6e3ec;box-shadow:0 4px 16px #29203d04}
-#riskDashboard .filter-bar label,#riskDashboard .filter-bar .map-search{min-width:0;font-size:14px}
-#riskDashboard .filter-bar input,#riskDashboard .filter-bar select{min-height:46px;font-size:14px;border-radius:9px}
-#riskDashboard .filter-bar button{min-height:46px;font-size:14px}
-#riskDashboard #searchButton{background:#e5f3ec;border-color:#bbd9c9;color:#000;font-weight:600}
-#riskDashboard .inventory{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:26px}
-#riskDashboard .inventory-card{min-height:145px;padding:18px 20px;border-radius:16px;border:1px solid #eae7ef;box-shadow:0 3px 12px #28203406}
-#riskDashboard .inventory-card.active{background:#eee4f6;box-shadow:0 6px 20px #60338520;outline:2px solid #734a91}
-#riskDashboard .card-label{font-size:15px;min-height:24px}
-#riskDashboard .card-value{margin:10px 0;justify-content:space-between}
-#riskDashboard .inventory-card strong{font-size:32px}
-#riskDashboard .inventory-card small{font-size:13px}
-#riskDashboard .panel{border-radius:16px;border-color:#e7e4ec;box-shadow:0 3px 14px #28203404}
-#riskDashboard .panel-title{padding:18px 20px 8px;font-size:17px;color:#000!important}
-#riskDashboard .panel-content{padding:16px 20px 20px}
-#riskDashboard .risk-table,#riskDashboard .matrix{font-size:13px}
-#riskDashboard .chart-legend,#riskDashboard .bar-legend{font-size:13px}
-#riskDashboard .panel-note{font-size:12px;line-height:1.75}
-#riskDashboard .analytics-top{grid-template-columns:1.1fr 1fr 1fr;gap:18px}
-#riskDashboard .analytics-bottom{gap:18px;margin-top:18px}
-#dssStatusSection{padding:22px;background:#fff;border:1px solid #e7e4ec;border-radius:18px;margin:26px 0}
-#riskDashboard #dssStatusSection .inventory{margin:18px 0 0}
-#riskDashboard .dss-status-heading h2{font-size:20px;color:#000;margin:0}
-#riskDashboard .dss-status-heading a{font-size:13px;text-decoration:underline}
-#riskDashboard .map-section-heading{scroll-margin-top:20px;margin-top:30px}
-#riskDashboard .map-section-heading h2{font-size:23px;color:#000}
-#riskDashboard .map-controls{padding:14px 18px;gap:12px;flex-wrap:wrap}
-#riskDashboard .map-controls span,#riskDashboard .directory-title-row h3{color:#000;font-weight:700}
-#riskDashboard .map-grid{gap:18px}
-#riskDashboard .directory-head{padding:18px}
-#riskDashboard .source-note{font-size:12px;line-height:1.8;padding:16px 0}
-:focus-visible{outline:3px solid #784ca0;outline-offset:3px}
-footer{background:#fff;border-top:1px solid #e7e4ec;font-size:13px}
-@media(min-width:1500px){#riskDashboard #inventory{grid-template-columns:repeat(8,minmax(0,1fr))}#riskDashboard #inventory .inventory-card{padding:16px}#riskDashboard #inventory .card-label{min-height:44px;font-size:14px}}
-@media(max-width:1200px){#riskDashboard .filter-bar{grid-template-columns:repeat(3,minmax(0,1fr))}#riskDashboard .filter-bar .map-search{grid-column:span 2}#riskDashboard .analytics-top{grid-template-columns:1fr 1fr}#riskDashboard .analytics-top>.panel:first-child{grid-column:1/-1}.dashboard-intro{align-items:flex-start}.dashboard-actions{max-width:300px}#riskDashboard .donut-layout{flex-wrap:wrap}}
-@media(max-width:760px){.page{padding:18px 14px 28px}.dashboard-intro{flex-direction:column;padding:22px 18px;gap:18px;border-radius:16px}.dashboard-actions{width:100%;max-width:none}.dashboard-eyebrow{font-size:10px;letter-spacing:.7px}.dashboard-description{font-size:14px}.dashboard-section-label{flex-direction:column;gap:5px}#riskDashboard .filter-bar{grid-template-columns:1fr 1fr;padding:16px;gap:12px}#riskDashboard .filter-bar label:first-child,#riskDashboard .filter-bar .map-search{grid-column:1/-1}#riskDashboard .inventory{grid-template-columns:1fr 1fr;gap:10px}#riskDashboard .inventory-card{padding:15px;min-height:140px}#riskDashboard .card-label{font-size:14px}#riskDashboard .inventory-card strong{font-size:29px}#riskDashboard .analytics-top,#riskDashboard .analytics-bottom{grid-template-columns:1fr}#riskDashboard .analytics-top>.panel:first-child{grid-column:auto}#dssStatusSection{padding:16px}#riskDashboard .panel-content{padding:14px}#riskDashboard .risk-table{font-size:12px}#riskDashboard .dss-status-heading{flex-wrap:wrap;gap:8px}#riskDashboard .map-grid{grid-template-columns:1fr}.dashboard-eyebrow{overflow-wrap:anywhere}}
+
+<style id="hub-reference-layout-20261015">
+body{background:#fafbfd;color:#000}
+.page{max-width:none;padding:16px 20px 20px}
+.risk-workspace{display:grid;grid-template-columns:minmax(0,58fr) minmax(0,40fr);gap:20px;align-items:start}
+.workspace-data{min-width:0;height:calc(100dvh - 140px);overflow-y:auto;overflow-x:hidden;padding:3px 9px 20px 2px;scrollbar-width:thin;scrollbar-color:#d9dce3 transparent}
+.workspace-map{position:sticky;top:16px;min-width:0;height:calc(100dvh - 140px);scroll-margin-top:16px}
+#riskDashboard .workspace-map>.panel{height:100%;display:flex;flex-direction:column;border:0;border-radius:24px;overflow:hidden;box-shadow:0 2px 14px #28384b08}
+#riskDashboard #map{height:auto;min-height:320px;flex:1}
+#riskDashboard .map-controls{padding:10px 14px;background:#fff;border:0;gap:8px;flex-wrap:wrap}
+#riskDashboard .map-controls span{font-size:13px;color:#000}
+#riskDashboard .map-controls select{border:0;border-radius:24px;background:#f4f5f7;padding:8px 14px}
+#riskDashboard .map-footer{font-size:11px;background:#fff;border:0;padding:9px 14px}
+.dashboard-intro{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 16px;padding:12px 4px}
+.dashboard-eyebrow{font-size:10px;letter-spacing:1px;color:#664582;margin:0 0 5px;font-weight:600}
+.dashboard-intro h1{font-size:22px;line-height:1.45;margin:0;color:#000}
+.dashboard-description{font-size:13px;line-height:1.6;margin:6px 0 0}
+.dashboard-actions{flex:none;max-width:240px;display:grid;gap:8px}
+#riskDashboard .dashboard-actions .report-button{font-size:12px;padding:10px 12px;border-radius:12px;white-space:normal;background:#eee5f6;color:#532e7c;border:0}
+.map-shortcut{font-size:12px;text-align:center;color:#000;padding:5px}
+.dashboard-section-label{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:18px 3px 10px}
+.dashboard-section-label h2{margin:0;font-size:16px}
+.dashboard-section-label span{font-size:11px}
+#riskDashboard .filter-bar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:16px;gap:10px;border:0;border-radius:20px;box-shadow:0 2px 16px #28384b06;margin-bottom:16px}
+#riskDashboard .filter-bar label,#riskDashboard .filter-bar .map-search{min-width:0;font-size:12px}
+#riskDashboard .filter-bar .map-search{grid-column:span 3}
+#riskDashboard .filter-bar select,#riskDashboard .filter-bar input{min-height:40px;font-size:12px;background:#f7f8fb;border:0;border-radius:10px}
+#riskDashboard .filter-bar button{font-size:12px;min-height:38px;border:0;border-radius:10px}
+#riskDashboard .inventory{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px}
+#riskDashboard .inventory-card{border:0;border-radius:20px;background:#fff;padding:16px 14px;min-height:132px;box-shadow:0 2px 14px #28384b06}
+#riskDashboard .inventory-card.active{background:#f2eaf9;outline:2px solid #936ab0;box-shadow:0 4px 18px #63378314}
+#riskDashboard .card-label{font-size:13px;min-height:38px}
+#riskDashboard .card-value{gap:8px;margin:5px 0;min-height:48px}
+#riskDashboard .card-art{width:35px;height:40px}
+#riskDashboard .inventory-card strong{font-size:27px}
+#riskDashboard .inventory-card small{font-size:11px}
+#riskDashboard .panel{border:0;border-radius:20px;box-shadow:0 2px 16px #28384b06;background:#fff}
+#riskDashboard .panel-title{font-size:15px;padding:18px 18px 4px;color:#000!important;background:transparent!important;border:0}
+#riskDashboard .panel-content{padding:16px 18px}
+#riskDashboard .analytics-top{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-bottom:16px}
+#riskDashboard .analytics-top>.panel:first-child{grid-column:1/-1}
+#riskDashboard .analytics-bottom{grid-template-columns:1fr;gap:16px}
+#riskDashboard .risk-table,#riskDashboard .matrix{font-size:12px}
+#riskDashboard .donut-layout{flex-wrap:wrap;gap:16px}
+#riskDashboard .chart-legend{font-size:12px;flex:1;min-width:125px}
+#riskDashboard .panel-note{font-size:11px;line-height:1.7}
+#riskDashboard .bar-row{grid-template-columns:130px minmax(0,1fr)}
+#riskDashboard #dssStatusSection{background:#fff;border-radius:20px;box-shadow:0 2px 16px #28384b06;margin:20px 0;padding:18px}
+#riskDashboard .dss-status-heading{flex-wrap:wrap}
+#riskDashboard .dss-status-heading h2{font-size:17px;color:#000}
+#riskDashboard #dssStatusSection .inventory{margin-bottom:6px}
+#riskDashboard #dssStatusSection .inventory-card{box-shadow:none;background:#f7f8fb;padding:12px;min-height:124px;border-radius:15px}
+#riskDashboard .dss-status-icon{width:32px;height:32px;font-size:23px}
+#riskDashboard .map-section-heading{margin:20px 3px 12px}
+#riskDashboard .map-section-heading h2{font-size:18px;color:#000;margin:0}
+#riskDashboard .map-section-heading p{font-size:12px}
+#riskDashboard .directory-head{background:#fff;padding:18px;border:0}
+#riskDashboard .directory-title-row h3{font-size:16px;color:#000}
+#riskDashboard #directory{height:360px;background:#fff}
+#riskDashboard .directory-item{border:0;background:#f7f8fb;border-radius:12px}
+#riskDashboard .source-note{font-size:11px;line-height:1.8;margin:16px 3px}
+footer{font-size:11px;padding:12px;background:#fff}
+:focus-visible{outline:3px solid #82569f;outline-offset:3px}
+@media(min-width:1600px){#riskDashboard .inventory-card strong{font-size:30px}#riskDashboard .card-label{font-size:14px}.dashboard-intro h1{font-size:25px}}
+@media(max-width:1250px){.workspace-data,.workspace-map{height:calc(100dvh - 205px)}.risk-workspace{grid-template-columns:minmax(0,55fr) minmax(0,45fr);gap:14px}.dashboard-intro{flex-direction:column;align-items:flex-start}.dashboard-actions{display:flex;max-width:none;align-items:center}#riskDashboard .inventory{grid-template-columns:repeat(2,minmax(0,1fr))}#riskDashboard .analytics-top{grid-template-columns:1fr}#riskDashboard .analytics-top>.panel:first-child{grid-column:auto}#riskDashboard .dss-status-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.page{padding:12px}.risk-workspace{display:flex;flex-direction:column;gap:16px}.workspace-data{height:auto;overflow:visible;width:100%;padding:0}.workspace-map{position:relative;top:auto;height:65dvh;min-height:420px;width:100%;order:-1}.dashboard-intro{padding:8px 3px}.dashboard-intro h1{font-size:21px}.dashboard-actions{flex-wrap:wrap}.dashboard-section-label{flex-wrap:wrap;gap:4px}#riskDashboard .filter-bar{grid-template-columns:1fr 1fr}#riskDashboard .filter-bar label:first-child,#riskDashboard .filter-bar .map-search{grid-column:1/-1}#riskDashboard .card-label{min-height:28px}#riskDashboard .inventory-card{min-height:125px}#riskDashboard .analytics-bottom{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}#riskDashboard .inventory-card{transition:none}}
 </style>
 </body></html>
