@@ -1,0 +1,45 @@
+(() => {
+'use strict';
+const get=id=>document.getElementById(id),source=get('estate'),search=get('chemicalSearch'),estate=get('chemicalEstate'),body=get('chemicalDetailBody'),status=get('chemicalDetailStatus'),prev=get('chemicalPrev'),next=get('chemicalNext'),pageLabel=get('chemicalPage');
+const normalize=v=>String(v||'').normalize('NFKC').toLowerCase().replace(/นิคมอุตสาหกรรม|นิคมฯ|สำนักงานนิคมฯ|[\s\u200b-\u200d]/g,'').trim();
+let data=null,page=0,filtered=[],scope='',timer;
+const pageSize=25,number=n=>Number(n).toLocaleString('th-TH');
+function cell(row,text){const td=document.createElement('td');td.textContent=String(text||'—');row.append(td);}
+function render(){
+ if(!data)return;
+ const term=normalize(search.value),selected=scope;
+ filtered=data.rows.filter(r=>{const c=data.companies[r[0]];return (!selected||normalize(c[2])===selected)&&(!term||normalize([c[0],c[1],c[2],data.names[r[1]],data.cas[r[2]],r[3]].join(' ')).includes(term));});
+ const pages=Math.max(1,Math.ceil(filtered.length/pageSize));page=Math.min(page,pages-1);
+ body.replaceChildren();
+ for(const [index,r] of filtered.slice(page*pageSize,(page+1)*pageSize).entries()){
+  const company=data.companies[r[0]],tr=document.createElement('tr');
+  cell(tr,page*pageSize+index+1);cell(tr,company[0]);cell(tr,company[2]);cell(tr,data.names[r[1]]);cell(tr,data.cas[r[2]]);cell(tr,r[3]);cell(tr,r[4]);cell(tr,data.units[r[5]]);body.append(tr);
+ }
+ if(!filtered.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=8;td.textContent='ไม่พบรายการสารเคมีตามตัวกรอง';tr.append(td);body.append(tr);}
+ status.textContent='พบ '+number(filtered.length)+' จาก '+number(data.rows.length)+' รายการ · แสดง '+(filtered.length?number(page*pageSize+1):'0')+'–'+number(Math.min((page+1)*pageSize,filtered.length));
+ pageLabel.textContent='หน้า '+number(page+1)+' / '+number(pages);prev.disabled=page===0;next.disabled=page>=pages-1;
+}
+function syncScope(){
+ scope=source.value?normalize(source.selectedOptions[0]?.textContent||source.value):'';
+ if(scope&&!Array.from(estate.options).some(o=>o.value===scope)){const o=new Option(source.selectedOptions[0]?.textContent||source.value,scope);estate.add(o);}
+ estate.value=scope;page=0;render();
+}
+search.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(()=>{page=0;render();},180);});
+estate.addEventListener('change',()=>{scope=estate.value;page=0;render();});
+source.addEventListener('change',syncScope);source.addEventListener('input',syncScope);
+prev.addEventListener('click',()=>{if(page>0){page--;render();}});next.addEventListener('click',()=>{if((page+1)*pageSize<filtered.length){page++;render();}});
+(async()=>{try{
+ const response=await fetch('./data/dss-chemical-details-20261015.json',{cache:'no-cache',signal:AbortSignal.timeout(30000)});
+ if(!response.ok)throw Error('HTTP '+response.status);
+ const packed=await response.json();if(packed.encoding!=='gzip-base64'||typeof DecompressionStream==='undefined')throw Error('เบราว์เซอร์ไม่รองรับข้อมูลรายงานนี้');
+ const bytes=Uint8Array.from(atob(packed.data),c=>c.charCodeAt(0));
+ const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+ const result=JSON.parse(await new Response(stream).text());
+ if(result.schemaVersion!==1||result.period!=='2026-01-01/2026-10-15'||!Array.isArray(result.rows)||!Array.isArray(result.companies)||!Array.isArray(result.names)||!Array.isArray(result.cas)||!Array.isArray(result.units))throw Error('รูปแบบรายงานไม่ถูกต้อง');
+ if(!result.rows.every(r=>Array.isArray(r)&&r.length===6&&result.companies[r[0]]&&typeof result.names[r[1]]==='string'&&typeof result.cas[r[2]]==='string'&&typeof result.units[r[5]]==='string'))throw Error('รายการรายงานไม่ถูกต้อง');
+ data=result;
+ const names=new Map();data.companies.forEach(c=>names.set(normalize(c[2]),c[2]));
+ [...names].sort((a,b)=>a[1].localeCompare(b[1],'th')).forEach(([key,name])=>estate.add(new Option(name,key)));
+ search.disabled=false;estate.disabled=false;syncScope();
+ }catch(error){status.textContent='โหลดรายละเอียดสารเคมีไม่สำเร็จ กรุณารีเฟรชหน้า';console.warn('Chemical report details',error);}})();
+})();
