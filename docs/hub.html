@@ -108,7 +108,7 @@
  const sub=document.createElement('p');sub.textContent='เลือกประเภทเหตุและค้นหาบริษัท เพื่อจัดทำรายงานในหน้านี้';
  heading.append(title,sub);section.prepend(heading);
  frame.loading='lazy';frame.style.height='1800px';
- function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261015-emergency-briefing');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
+ function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261015-report-below-search');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
  frame.src=reportUrl();
  link.addEventListener('click',event=>{event.preventDefault();const url=reportUrl();if(frame.src!==url)frame.src=url;section.scrollIntoView({behavior:'smooth',block:'start'});});
  window.returnToRiskDashboard=function(){document.getElementById('otherPage').hidden=true;dashboard.hidden=false;document.querySelectorAll('.nav-tab').forEach(tab=>tab.classList.toggle('active',tab.dataset.page==='risk'));document.getElementById('riskMapSection')?.scrollIntoView({behavior:'smooth',block:'start'});window.dispatchEvent(new Event('resize'))};
@@ -653,24 +653,20 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
 #emergencyReportFrame.other-frame{display:block;width:100%;border:0;min-height:800px;max-height:none;border-radius:0 0 18px 18px;background:#f7f8fa}
 </style>
 <style id="unified-emergency-dashboard-layout">
-#riskDashboard > #riskMapSection{position:static!important;width:100%!important;max-width:none!important;grid-column:1/-1;margin-top:24px!important}
-#riskDashboard > #riskMapSection > .panel{position:static!important;border:0!important;border-radius:22px!important;overflow:hidden;box-shadow:0 5px 24px #27394b08}
-#riskDashboard > #riskMapSection #map{height:650px!important;min-height:650px!important;border-radius:0 0 20px 20px}
-#riskDashboard .risk-workspace{grid-template-columns:minmax(0,1fr)!important}
-#riskDashboard .workspace-data{height:auto!important;overflow:visible!important;padding:0!important}
-#riskDashboard > #riskMapSection{height:auto!important}
-#riskDashboard > #riskMapSection>.panel{height:auto!important}
 #unifiedCompanyResults{display:grid;gap:8px;max-height:340px;overflow:auto;margin:10px 0 16px}
 .unified-company-status{font-size:12px;color:#657080;margin:4px}
 .unified-company-option{display:flex;flex-direction:column;gap:5px;text-align:left;border:0;background:#f4f7f1;border-radius:12px;padding:12px 14px;color:#111;font:inherit;cursor:pointer}
 .unified-company-option b{font-size:14px;font-weight:600}.unified-company-option span{font-size:12px;color:#657080;line-height:1.6}
 .unified-company-option:hover{background:#e9f1e3}
-@media(max-width:700px){#riskDashboard > #riskMapSection #map{height:440px!important;min-height:440px!important}}
+#riskDashboard .workspace-data > #emergencyReportPage{margin-top:22px;width:100%}
+#riskDashboard .workspace-data #emergencyReportFrame{width:100%;border:0}
+#riskDashboard .workspace-data .inline-report-heading{padding:16px 18px}
+#riskDashboard .workspace-data .inline-report-heading h2{font-size:18px}
 </style>
 <script id="unified-emergency-map-bridge">
 (function(){
  const dashboard=document.getElementById('riskDashboard'),mapSection=document.getElementById('riskMapSection'),frame=document.getElementById('emergencyReportFrame'),search=document.getElementById('chemicalSearch');
- dashboard.append(mapSection);
+ document.querySelector('.workspace-data').append(document.getElementById('emergencyReportPage'));
  search.placeholder='ชื่อไทย / English name / เลขทะเบียน / สารเคมี / CAS';
  let queuedCompany=null,pendingIncident=null,incidentLayer=null,focusLayer=null;
  window.addEventListener('ieat-unified-company-select',event=>{
