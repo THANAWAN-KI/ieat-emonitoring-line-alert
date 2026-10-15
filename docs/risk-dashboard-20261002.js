@@ -33,7 +33,7 @@
   const tableRows=[...byEstate.values()].sort((a,b)=>Math.max(...b.counts)-Math.max(...a.counts)||a.name.localeCompare(b.name,'th'));
   const maxima=riskFields.map((_,i)=>Math.max(1,...tableRows.map(e=>e.counts[i])));
   const totals=[0,0,0,0],riskLoading=['loading','error'].includes(business.status);
-  const appendMetric=(tr,value,maxValue)=>{const td=el('td',value==null?'—':number(value));if(value!=null)td.style.background='rgba(245,181,46,'+(value===0?.06:.12+.52*value/maxValue)+')';tr.append(td);};
+  const appendMetric=(tr,value,maxValue)=>{const td=el('td',value==null?'—':number(value));if(value!=null)td.style.background='rgba(79,125,50,'+(value===0?.06:.12+.52*value/maxValue)+')';tr.append(td);};
   $('matrixBody').replaceChildren();
   tableRows.forEach(e=>{const tr=el('tr');tr.append(el('th',e.name));for(const i of [0,2,1])appendMetric(tr,riskLoading?null:e.counts[i],maxima[i]);tr.append(el('td',riskLoading?'—':number(e.total)));$('matrixBody').append(tr);[e.counts[0],e.counts[2],e.counts[1],e.total].forEach((v,i)=>totals[i]+=v);});
   if(tableRows.length){const tr=el('tr',null,'matrix-total');tr.append(el('th','รวม'));totals.forEach(n=>tr.append(el('td',riskLoading?'—':number(n))));$('matrixBody').append(tr);}
