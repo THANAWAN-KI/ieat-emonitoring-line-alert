@@ -138,6 +138,13 @@ $('searchButton').onclick=()=>{clearTimeout(searchTimer);changed();zoomMatches(t
   return {symbol,color:rgba(stroke?.color||symbol?.outline?.color||symbol?.color),weight:Math.max(1,(stroke?.width||symbol?.outline?.width||1)*1.33),fillColor:rgba(fill?.color||symbol?.color),fillOpacity:((fill?.color||symbol?.color||[0,0,0,80])[3]??80)/255};
  }
  function mapPoint(def,feature,latlng){
+  const category=def.dataset?.id;
+  const mapGlyphs={"hospital":"<path d=\"M10 4h4v6h6v4h-6v6h-4v-6H4v-4h6z\"/>","fire":"<path d=\"M13 3c2 5-2 6 0 9 1-2 3-3 4-4 4 6 3 12-5 13C4 20 3 14 8 8c0 3 1 4 2 4-1-4 2-5 3-9Z\"/>","police":"<path d=\"m12 3 8 3v6c0 4-4 7-8 9-4-2-8-5-8-9V6z\"/><path d=\"m9 12 2 2 4-5\"/>","community":"<path d=\"m3 11 9-8 9 8M5 10v11h14V10M10 21v-7h4v7\"/>","hydrant":"<path d=\"M9 6V4h6v2M8 9h8v11H8zM6 8h12M5 12H3v4h5m8-4h5v4h-5M6 21h12\"/><circle cx=\"12\" cy=\"14\" r=\"2\"/>","cctv":"<path d=\"m3 5 16 5-3 8L1 12zM18 11l4 1-2 5-3-1M8 15l-2 6H2v-6\"/>","estate":"<path d=\"M4 21V8l6 3V6l6 4V3h4v18zM8 15v2m4-2v2m4-2v2\"/>","business":"<path d=\"M3 21V10l6 3V8l6 3V4h6v17zM7 16h2m3 0h2m3 0h2\"/>"},mapColors={"hospital":"#8B1E2D","fire":"#D9361E","police":"#4C2365","community":"#4F7D32","hydrant":"#457B9D","cctv":"#8B1E2D","estate":"#7F5D99","business":"#E96A60"};
+  if(category&&mapGlyphs[category]){
+   const svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="white" stroke="'+mapColors[category]+'" stroke-width="2"/><g transform="translate(6 6) scale(.83)" fill="none" stroke="'+mapColors[category]+'" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round">'+mapGlyphs[category]+'</g></svg>';
+   return L.marker(latlng,{icon:L.icon({iconUrl:'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg),iconSize:[29,29],iconAnchor:[14.5,14.5],popupAnchor:[0,-14],className:'dashboard-point-icon'}),title:def.dataset.label,riseOnHover:true});
+  }
+
   const style=symbolStyle(def,feature.properties||{}),s=style.symbol;
   if(s?.type==='esriPMS'&&s.imageData){
    const width=Math.min(38,(s.width||20)*1.33),height=Math.min(38,(s.height||20)*1.33);
@@ -161,14 +168,30 @@ $('searchButton').onclick=()=>{clearTimeout(searchTimer);changed();zoomMatches(t
    const data=await json(portalUrl+'/sharing/rest/content/items/'+webmapId+'/data?f=json');
    fallbackView=L.map('map',{zoomControl:false}).setView([14,101],6);
    window.ieatSupportMap=fallbackView;window.dispatchEvent(new CustomEvent('ieat-support-map-ready',{detail:{map:fallbackView}}));L.control.zoom({position:'bottomright'}).addTo(fallbackView);
-   const tileUrl=data.baseMap?.baseMapLayers?.find(l=>l.url&&/MapServer/.test(l.url))?.url||'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer';
-   const tiles=L.tileLayer(tileUrl+'/tile/{z}/{y}/{x}',{attribution:'Tiles © Esri',maxZoom:19}).addTo(fallbackView);
+   const tileRoot='https://server.arcgisonline.com/ArcGIS/rest/services/';
+   const basemaps={'gray-vector':{path:'Canvas/World_Light_Gray_Base',reference:'Canvas/World_Light_Gray_Reference',native:16},'streets-vector':{path:'World_Street_Map',native:19},satellite:{path:'World_Imagery',reference:'Reference/World_Boundaries_and_Places',native:19},'topo-vector':{path:'World_Topo_Map',native:19}};
+   const tiles=L.tileLayer('',{attribution:'Tiles © Esri',maxZoom:20}).addTo(fallbackView);
+   fallbackView.createPane('referenceLabels');fallbackView.getPane('referenceLabels').style.zIndex=350;fallbackView.getPane('referenceLabels').style.pointerEvents='none';
+   let referenceTiles=null;
+   function changeBasemap(){const config=basemaps[$('basemap').value]||basemaps['gray-vector'];tiles.options.maxNativeZoom=config.native;tiles.setUrl(tileRoot+config.path+'/MapServer/tile/{z}/{y}/{x}');if(referenceTiles){fallbackView.removeLayer(referenceTiles);referenceTiles=null;}if(config.reference)referenceTiles=L.tileLayer(tileRoot+config.reference+'/MapServer/tile/{z}/{y}/{x}',{pane:'referenceLabels',maxZoom:20,maxNativeZoom:config.native,interactive:false}).addTo(fallbackView);}
+   changeBasemap();
+   L.control.scale({position:'bottomleft',imperial:false,maxWidth:110}).addTo(fallbackView);
+   const dashboardTools=L.control({position:'topleft'});
+   dashboardTools.onAdd=()=>{const box=L.DomUtil.create('div','dashboard-map-tools leaflet-bar');
+    const home=L.DomUtil.create('button','dashboard-map-tool',box);home.type='button';home.title='กลับมุมมองเริ่มต้น';home.setAttribute('aria-label','กลับมุมมองเริ่มต้น');home.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m3 11 9-8 9 8M5 10v10h5v-6h4v6h5V10"/></svg>';home.onclick=()=>{if(fallbackInitialBounds)fallbackView.fitBounds(fallbackInitialBounds);else fallbackView.setView([14,101],6);};
+    const full=L.DomUtil.create('button','dashboard-map-tool',box);full.type='button';full.title='ขยายแผนที่เต็มจอ';full.setAttribute('aria-label','ขยายแผนที่เต็มจอ');full.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg>';
+    const section=$('riskMapSection');
+    full.onclick=async()=>{try{if(document.fullscreenElement===section)await document.exitFullscreen();else if(section.requestFullscreen)await section.requestFullscreen();else section.classList.toggle('dashboard-map-expanded');}catch(e){section.classList.toggle('dashboard-map-expanded');}fallbackView.invalidateSize({pan:false});};
+    document.addEventListener('fullscreenchange',()=>{const expanded=document.fullscreenElement===section;full.setAttribute('aria-label',expanded?'ออกจากเต็มจอ':'ขยายแผนที่เต็มจอ');full.title=expanded?'ออกจากเต็มจอ':'ขยายแผนที่เต็มจอ';fallbackView.invalidateSize({pan:false});});
+    document.addEventListener('keydown',event=>{if(event.key==='Escape'&&section.classList.contains('dashboard-map-expanded')){section.classList.remove('dashboard-map-expanded');fallbackView.invalidateSize({pan:false});}});
+    L.DomEvent.disableClickPropagation(box);L.DomEvent.disableScrollPropagation(box);return box;};dashboardTools.addTo(fallbackView);
+   if(window.ResizeObserver)new ResizeObserver(()=>fallbackView.invalidateSize({pan:false})).observe($('map'));
    const extent=data.initialState?.viewpoint?.targetGeometry;
    if(extent?.xmin!=null){const project=(x,y)=>[Math.atan(Math.sinh(y/6378137))*180/Math.PI,x/6378137*180/Math.PI];fallbackInitialBounds=extent.spatialReference?.wkid===4326?[[extent.ymin,extent.xmin],[extent.ymax,extent.xmax]]:[project(extent.xmin,extent.ymin),project(extent.xmax,extent.ymax)];fallbackView.fitBounds(fallbackInitialBounds);}
    const definitions=[];function collect(layers,parentVisible=true){for(const def of layers||[]){const shown=parentVisible&&def.visibility!==false;if(def.layers)collect(def.layers,shown);else if(def.url&&['ArcGISFeatureLayer','GeoJSON'].includes(def.layerType))definitions.push({...def,shown});}}collect(data.operationalLayers);
    const groups={},canonical=u=>decodeURI(u||'').replace(/\/$/,'').toLowerCase();
    for(const def of definitions){def.group=L.layerGroup();groups[def.title]=def.group;if(def.shown)def.group.addTo(fallbackView);def.dataset=datasets.find(d=>canonical(base+encodeURI(d.path))===canonical(def.url));}
-   L.control.layers({'ภาพถ่ายดาวเทียม':tiles},groups,{collapsed:true}).addTo(fallbackView);
+   const layerControl=L.control.layers({},groups,{collapsed:true,position:'topright'}).addTo(fallbackView);layerControl.getContainer().setAttribute('aria-label','เลือกชั้นข้อมูลบนแผนที่');layerControl.getContainer().title='เลือกชั้นข้อมูล';
    let busy=false,pending=false;const lastErrors=new Set();
    async function draw(){
     if(busy){pending=true;return}busy=true;pending=false;const bounds=fallbackView.getBounds();
@@ -195,7 +218,7 @@ $('searchButton').onclick=()=>{clearTimeout(searchTimer);changed();zoomMatches(t
     busy=false;$('mapStatus').textContent='Web Map กนอ. · แสดงสูงสุด 300 รายการต่อชั้นในมุมมองนี้'+(lastErrors.size?' · บางชั้นข้อมูลยังโหลดไม่ได้':'');if(pending)draw();
    }
    let debounce;fallbackView.refreshData=()=>{clearTimeout(debounce);debounce=setTimeout(draw,500)};
-   $('basemap').onchange=()=>{const names={'gray-vector':'World_Light_Gray_Base','streets-vector':'World_Street_Map','satellite':'World_Imagery','topo-vector':'World_Topo_Map'};tiles.setUrl('https://server.arcgisonline.com/ArcGIS/rest/services/'+names[$('basemap').value]+'/MapServer/tile/{z}/{y}/{x}');};
+   $('basemap').onchange=changeBasemap;
    fallbackView.on('moveend overlayadd overlayremove',()=>{clearTimeout(debounce);debounce=setTimeout(draw,400)});
    mapReady=true;if(pendingCardZoom){const id=pendingCardZoom;pendingCardZoom=null;zoomCardData(id);}if(pendingZoom){const p=pendingZoom;pendingZoom=null;zoomRow(p.d,p.r,p.button,p.reveal);}draw();
   }catch(e){$('mapStatus').textContent='ไม่สามารถโหลด Web Map กนอ. ได้ กรุณาลองรีเฟรช';console.warn(e);}
