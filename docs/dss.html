@@ -2846,5 +2846,47 @@ html body #report .row b{background:#f7f8fa!important;color:#4b5563!important}
 }
 </style>
 
+
+<style id="dss-toolbar-move-left-20261015">
+/* Move the complete toolbar group from the right side to the left, as marked in the screenshot. */
+html body header.top,
+html body.dss-inline-dashboard header.top{
+ display:flex!important;
+ flex-direction:row!important;
+ justify-content:flex-start!important;
+ align-items:center!important;
+ text-align:left!important;
+}
+html body header.top>.top-actions,
+html body.dss-inline-dashboard header.top>.top-actions{
+ order:0!important;
+ float:none!important;
+ margin-left:0!important;
+ margin-right:auto!important;
+ align-self:flex-start!important;
+ justify-content:flex-start!important;
+ width:max-content!important;
+ max-width:100%!important;
+ flex:0 1 auto!important;
+}
+html body header.top>div:first-child,
+html body.dss-inline-dashboard header.top>div:first-child{
+ order:1!important;
+ margin-left:auto!important;
+ margin-right:0!important;
+ flex:0 1 auto!important;
+ text-align:right!important;
+}
+html body header.top>.top-actions .dss-toolbar-settings .dss-settings-content{
+ left:0!important;
+ right:auto!important;
+}
+@media(max-width:680px){
+ html body header.top,html body.dss-inline-dashboard header.top{align-items:flex-start!important}
+ html body header.top>.top-actions,html body.dss-inline-dashboard header.top>.top-actions{width:100%!important;flex-wrap:wrap!important}
+ html body header.top>div:first-child,html body.dss-inline-dashboard header.top>div:first-child{margin-left:0!important;text-align:left!important;width:100%!important}
+}
+</style>
+
 </body></html>
 
