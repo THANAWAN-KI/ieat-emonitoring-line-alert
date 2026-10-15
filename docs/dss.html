@@ -2749,5 +2749,41 @@ html body #report .dss-shared-map-link{margin:10px 0!important;border-radius:3px
  document.getElementById('pngBtn').onclick=()=>downloadReportPng();
 })();
 </script>
+
+<style id="formal-report-cleanup-final-20261015">
+html,body{background:#f5f6f8!important;color:#202630!important}
+.top{border-bottom:1px solid #e4e7ec!important}
+html body .editor,html body .report,html body .meta,html body .company,html body .event-card,html body .mapbox,html body .weather,html body .support,html body .note{border-color:#e2e6ec!important;box-shadow:none!important}
+html body .group{border-top-color:#e6e9ee!important}
+html body .field input,html body .field textarea,html body .field select{border:1px solid #d9dee6!important;border-radius:7px!important}
+html body .row{border-bottom:1px solid #e6e9ee!important}
+html body .row b{background:#f7f8fa!important;border-right:1px solid #e6e9ee!important;color:#4b5563!important}
+html body .report-header{border-bottom:2px solid #8B1E2D!important}
+html body .section-title{background:#f2f3f5!important;border:1px solid #e2e5e9!important;border-left:3px solid #8B1E2D!important;color:#27313e!important;padding:9px 12px!important}
+html body .company{border:1px solid #e2e6ec!important}
+html body .mapbox,html body .weather,html body .support,html body .note,html body .event-card,html body .meta{border:1px solid #e2e6ec!important;border-radius:5px!important}
+html body .map-caption{border-top:1px solid #e2e6ec!important;color:#687384!important}
+html body .weather{background:#f7f9fc!important}
+html body .weather .temp,html body .wind-arrow,html body .support b,html body .report-header h1{color:#8B1E2D!important}
+html body .dss-toolbar-settings>summary{border:1px solid #dfe3e9!important;border-radius:8px!important;background:#f7f8fa!important;color:#344054!important}
+html body .dss-toolbar-settings .dss-settings-content{border:1px solid #dfe3e9!important}
+html body .report{width:min(1050px,100%)!important;min-height:0!important;padding:34px 38px!important;margin:0 auto!important;background:#fff!important}
+html body .report-wrap{overflow:visible!important}
+html body .workspace{grid-template-columns:minmax(0,1fr)!important;max-width:1200px!important}
+html body.dss-inline-dashboard .workspace{display:block!important;margin:0!important;padding:0!important}
+html body.dss-inline-dashboard .report{width:100%!important;padding:26px 24px!important}
+@media(max-width:650px){html body .report{padding:20px 14px!important}html body .row{grid-template-columns:118px minmax(0,1fr)!important}html body .map-weather{grid-template-columns:minmax(0,1fr)!important}html body .event-grid,html body .support-grid{grid-template-columns:minmax(0,1fr)!important}html body.dss-inline-dashboard .report{padding:18px 12px!important}}
+</style>
+<script id="formal-report-toolbar-placement-final">
+(function(){
+ const embedded=new URLSearchParams(location.search).get('embedded')==='dashboard'&&parent!==window;
+ if(!embedded)return;
+ const actions=document.querySelector('.top-actions'),settings=document.querySelector('.dss-toolbar-settings'),reset=document.getElementById('resetBtn');
+ if(actions&&settings&&reset&&settings.parentElement!==actions)actions.insertBefore(settings,reset);
+ document.getElementById('dssNearbyDetails')?.remove();
+ document.getElementById('backToRiskmapBtn')?.remove();
+})();
+</script>
+
 </body></html>
 
