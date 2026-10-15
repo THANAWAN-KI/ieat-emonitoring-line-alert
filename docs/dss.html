@@ -2649,7 +2649,7 @@ html body.dss-inline-dashboard #report .mapbox{position:absolute!important;left:
 </style>
 
 <style id="dss-formal-document-20261015">
-html body.dss-inline-dashboard #dssSimplePanel > .field,html body #dssUnifiedStatus,html body .editor > #draftStatus,html body .dss-report-jump{display:none!important}
+html body.dss-inline-dashboard #dssSimplePanel > .field:not(#dssIncidentMode),html body #dssUnifiedStatus,html body .editor > #draftStatus,html body .dss-report-jump{display:none!important}
 html body #dssSimplePanel{grid-template-columns:minmax(0,1fr)!important;gap:0!important}
 html body .editor #dssIncidentMode{max-width:320px!important;width:100%!important}
 html body #dssSingleIntro{margin-bottom:14px!important}
@@ -2691,5 +2691,5 @@ html body #report .report-document-footer{margin:24px 0 0;padding-top:12px;borde
  footer.className='report-document-footer';footer.textContent='ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย · การนิคมอุตสาหกรรมแห่งประเทศไทย';report.append(footer);
 })();
 </script>
-</body></html>
+<style id="dss-formal-section-colors">html body #report #dssReportMap .section-title,html body #report #dssReportSupport .section-title{background:#f3f4f6!important;color:#202630!important;-webkit-text-fill-color:#202630!important}</style></body></html>
 
