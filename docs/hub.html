@@ -710,8 +710,9 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
 #emergencyReportPage>.inline-report-heading{display:none!important}
 </style>
 <style id="single-search-incident-toolbar">
-#riskDashboard .chemical-detail-filters{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-#riskDashboard .chemical-detail-filters label[for="chemicalSearch"]{grid-column:1/-1}
+#riskDashboard .chemical-detail-filters{grid-template-columns:160px minmax(0,1fr);gap:12px}
+#riskDashboard .chemical-detail-filters label[for="chemicalEstate"]{grid-column:1/-1}
+#riskDashboard .chemical-detail-filters label[for="chemicalSearch"]{grid-column:auto}
 #riskDashboard .chemical-detail-filters .unified-incident-type select{background:#fff2f4;color:#8B1E2D;border:1px solid #ead5da;min-height:44px}
 #riskDashboard .chemical-detail-table tbody td:nth-child(2) button{background:transparent;border:0;text-align:left;padding:0;font:inherit;color:#8B1E2D;cursor:pointer}
 #riskDashboard .chemical-detail-table tbody td:nth-child(2) button:hover{text-decoration:underline}
@@ -723,6 +724,6 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
  control.addEventListener('change',sync);frame.addEventListener('load',sync);
  window.addEventListener('message',event=>{if(event.origin===location.origin&&event.source===frame.contentWindow&&event.data?.type==='dss:report-ready')sync()});
 })();
-</script></body></html>
+</script><style>@media(max-width:560px){#riskDashboard .chemical-detail-filters{grid-template-columns:minmax(0,1fr)}#riskDashboard .chemical-detail-filters label[for="chemicalEstate"]{grid-column:auto}}</style></body></html>
 
 
