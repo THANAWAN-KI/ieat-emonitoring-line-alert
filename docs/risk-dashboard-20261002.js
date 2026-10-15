@@ -30,15 +30,13 @@
   renderOperatingZones();
   const byEstate=new Map();rows.forEach(r=>{const key=normalize(r.estate);if(!byEstate.has(key))byEstate.set(key,{name:r.estate,total:0,counts:[0,0,0]});const e=byEstate.get(key);e.total++;riskFields.forEach((f,i)=>{if(flagged(r.attrs[f.field]))e.counts[i]++})});
   $('matrixBody').replaceChildren();
-  const chemicalData=window.ieatDssChemicalSummary;
-  const tableEstates=new Map([...byEstate].map(([k,e])=>[k,{...e,chemicals:null}]));
-  if(chemicalData){for(const item of chemicalData.estates){const key=normalize(item.name);if(selected.estate&&key!==selected.estate)continue;let e=tableEstates.get(key);if(!e){e={name:item.name,total:0,counts:[0,0,0],chemicals:0};tableEstates.set(key,e);}e.chemicals=(e.chemicals||0)+item.chemicals;}}
-  const tableRows=[...tableEstates.values()].sort((a,b)=>(b.chemicals||0)-(a.chemicals||0)||a.name.localeCompare(b.name,'th'));
-  const maxima=[Math.max(1,...tableRows.map(e=>e.chemicals||0)),...riskFields.map((_,i)=>Math.max(1,...tableRows.map(e=>e.counts[i])))];
-  const totals=[0,0,0,0,0];
-  const appendMetric=(tr,value,maxValue)=>{const td=el('td',value==null?'—':number(value));if(value!=null){td.style.background='rgba(255,177,66,'+(value===0?.06:.12+.52*value/maxValue)+')';}tr.append(td);};
-  tableRows.forEach(e=>{const tr=el('tr');tr.append(el('th',e.name));appendMetric(tr,e.chemicals,maxima[0]);for(const i of [0,2,1])appendMetric(tr,['loading','error'].includes(business.status)?null:e.counts[i],maxima[i+1]);tr.append(el('td',['loading','error'].includes(business.status)?'—':number(e.total)));$('matrixBody').append(tr);[e.chemicals||0,e.counts[0],e.counts[2],e.counts[1],e.total].forEach((v,i)=>totals[i]+=v);});
-  if(tableRows.length){const tr=el('tr',null,'matrix-total');tr.append(el('th','รวม'));totals.forEach((n,i)=>tr.append(el('td',(i===0&&!chemicalData)||(i>0&&['loading','error'].includes(business.status))?'—':number(n))));$('matrixBody').append(tr);}
+  const tableRows=[...byEstate.values()].sort((a,b)=>Math.max(...b.counts)-Math.max(...a.counts)||a.name.localeCompare(b.name,'th'));
+  const maxima=riskFields.map((_,i)=>Math.max(1,...tableRows.map(e=>e.counts[i])));
+  const totals=[0,0,0,0],riskLoading=['loading','error'].includes(business.status);
+  const appendMetric=(tr,value,maxValue)=>{const td=el('td',value==null?'—':number(value));if(value!=null)td.style.background='rgba(245,181,46,'+(value===0?.06:.12+.52*value/maxValue)+')';tr.append(td);};
+  $('matrixBody').replaceChildren();
+  tableRows.forEach(e=>{const tr=el('tr');tr.append(el('th',e.name));for(const i of [0,2,1])appendMetric(tr,riskLoading?null:e.counts[i],maxima[i]);tr.append(el('td',riskLoading?'—':number(e.total)));$('matrixBody').append(tr);[e.counts[0],e.counts[2],e.counts[1],e.total].forEach((v,i)=>totals[i]+=v);});
+  if(tableRows.length){const tr=el('tr',null,'matrix-total');tr.append(el('th','รวม'));totals.forEach(n=>tr.append(el('td',riskLoading?'—':number(n))));$('matrixBody').append(tr);}
   const items=datasets.flatMap(d=>visibleRows(d).map(r=>({d,r})));$('directory').replaceChildren();items.slice(0,150).forEach(({d,r})=>{const key=d.id+':'+r.id,b=el('button',null,'directory-item'+(selectedItem===key?' active':''));b.type='button';b.dataset.key=key;b.setAttribute('aria-pressed',String(selectedItem===key));const icon=el('i',null,'directory-icon');icon.innerHTML=cardIcons[d.id];icon.setAttribute('aria-hidden','true');const text=el('div',null,'directory-text');text.append(el('b',r.name),el('small',d.label+' · '+r.estate));b.append(icon,text,el('span','›','directory-arrow'));b.onclick=()=>zoomRow(d,r,b);$('directory').append(b)});
   $('listCount').textContent=number(items.length)+' รายการ';$('listLimit').textContent=items.length>150?'แสดง 150 รายการแรก':'ข้อมูลตามตัวกรอง';if(!items.length)$('directory').append(el('p','ไม่พบข้อมูลตามตัวกรอง','empty'));
   applyMapFilters();
@@ -50,7 +48,7 @@
   if(!operatingZoneRows){host.replaceChildren(el('p','กำลังโหลดเขตประกอบการ…','empty'));return;}
   const counts=new Map();
   operatingZoneRows.filter(r=>!selected.estate||normalize(r.estate)===selected.estate).forEach(r=>counts.set(r.zone,(counts.get(r.zone)||0)+r.count));
-  const colors=['#8B1E2D','#4F7D32','#F5B52E','#4C2365','#248BC1','#E96A60','#55B7A4','#CA78AD','#879A3A','#A36C44','#999999','#355980'];
+  const colors=['#7F5D99','#4F7D32','#D9361E','#457B9D'];
   const entries=[...counts].sort((a,b)=>b[1]-a[1]).map(([label,count],i)=>({label,count,color:colors[i%colors.length]}));
   if(!entries.length){host.replaceChildren(el('p','ไม่พบเขตประกอบการในพื้นที่ที่เลือก','empty'));return;}
   donut('operatingZoneDonut',entries,'รายการ');
