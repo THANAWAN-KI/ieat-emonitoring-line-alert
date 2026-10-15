@@ -82,7 +82,7 @@
 
 <section class="panel chemical-details-panel" aria-label="รายการสารเคมี">
 
-<div class="chemical-detail-filters"><label for="chemicalEstate">นิคมอุตสาหกรรม<select id="chemicalEstate" disabled><option value="">ทุกนิคมอุตสาหกรรม</option></select></label><label for="chemicalSearch">ค้นหาบริษัทไทย–อังกฤษ / ทะเบียนเดิม–ใหม่ / สารเคมี / CAS No.<input id="chemicalSearch" type="search" placeholder="พิมพ์ชื่อโรงงาน สารเคมี หรือเลข CAS" disabled></label></div>
+<div class="chemical-detail-filters"><label for="chemicalEstate">นิคมอุตสาหกรรม<select id="chemicalEstate" disabled><option value="">ทุกนิคมอุตสาหกรรม</option></select></label><label for="dashboardIncidentType" class="unified-incident-type">ประเภทเหตุ<select id="dashboardIncidentType"><option value="เหตุเพลิงไหม้">เหตุเพลิงไหม้</option><option value="สารเคมีรั่วไหล">สารเคมีรั่วไหล</option></select></label><label for="chemicalSearch">ค้นหาบริษัทไทย–อังกฤษ / ทะเบียนเดิม–ใหม่ / สารเคมี / CAS No.<input id="chemicalSearch" type="search" placeholder="พิมพ์ชื่อโรงงาน สารเคมี หรือเลข CAS" disabled></label></div>
 <p id="chemicalDetailStatus" class="panel-note" role="status">กำลังโหลดรายละเอียดสารเคมี…</p>
 <div class="chemical-detail-scroll"><table class="chemical-detail-table"><thead><tr><th scope="col">ลำดับ</th><th scope="col">ชื่อโรงงาน</th><th scope="col">นิคมอุตสาหกรรม</th><th scope="col">สารเคมี</th><th scope="col">CAS No.</th><th scope="col">UN No.</th><th scope="col">ปริมาณ</th><th scope="col">หน่วย</th></tr></thead><tbody id="chemicalDetailBody"></tbody></table></div>
 <div class="chemical-detail-pages"><button id="chemicalPrev" type="button" disabled>← ก่อนหน้า</button><span id="chemicalPage" aria-live="polite"></span><button id="chemicalNext" type="button" disabled>ถัดไป →</button></div>
@@ -108,7 +108,7 @@
  const sub=document.createElement('p');sub.textContent='เลือกประเภทเหตุและค้นหาบริษัท เพื่อจัดทำรายงานในหน้านี้';
  heading.append(title,sub);
  frame.loading='lazy';frame.style.height='1800px';
- function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261015-formal-report-v2');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
+ function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261015-unified-report-final');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
  frame.src=reportUrl();
  link.addEventListener('click',event=>{event.preventDefault();const url=reportUrl();if(frame.src!==url)frame.src=url;section.scrollIntoView({behavior:'smooth',block:'start'});});
  window.returnToRiskDashboard=function(){document.getElementById('otherPage').hidden=true;dashboard.hidden=false;document.querySelectorAll('.nav-tab').forEach(tab=>tab.classList.toggle('active',tab.dataset.page==='risk'));document.getElementById('riskMapSection')?.scrollIntoView({behavior:'smooth',block:'start'});window.dispatchEvent(new Event('resize'))};
@@ -478,7 +478,7 @@ html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader .disaster-cl
 .chemical-detail-pages button:disabled{opacity:.4;cursor:default}
 @media(max-width:760px){#riskDashboard .chemical-details-panel{padding:14px}.chemical-detail-filters{grid-template-columns:1fr}}
 </style>
-<script src="./dss-chemical-details-20261015.js?v=20261015-unified"></script>
+<script src="./dss-chemical-details-20261015.js?v=20261015-auto-report"></script>
 <style id="three-risk-ranking-cards">
 #riskDashboard .risk-ranking-section{margin:22px 0}
 #riskDashboard .risk-ranking-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
@@ -708,6 +708,21 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
 <style id="remove-duplicate-report-entry">
 #openEmergencyReport{display:none!important}
 #emergencyReportPage>.inline-report-heading{display:none!important}
-</style></body></html>
+</style>
+<style id="single-search-incident-toolbar">
+#riskDashboard .chemical-detail-filters{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#riskDashboard .chemical-detail-filters label[for="chemicalSearch"]{grid-column:1/-1}
+#riskDashboard .chemical-detail-filters .unified-incident-type select{background:#fff2f4;color:#8B1E2D;border:1px solid #ead5da;min-height:44px}
+#riskDashboard .chemical-detail-table tbody td:nth-child(2) button{background:transparent;border:0;text-align:left;padding:0;font:inherit;color:#8B1E2D;cursor:pointer}
+#riskDashboard .chemical-detail-table tbody td:nth-child(2) button:hover{text-decoration:underline}
+</style>
+<script id="unified-report-type-control">
+(function(){
+ const control=document.getElementById('dashboardIncidentType'),frame=document.getElementById('emergencyReportFrame');
+ function sync(){frame.contentWindow?.postMessage({type:'dss:set-incident-type',value:control.value},location.origin)}
+ control.addEventListener('change',sync);frame.addEventListener('load',sync);
+ window.addEventListener('message',event=>{if(event.origin===location.origin&&event.source===frame.contentWindow&&event.data?.type==='dss:report-ready')sync()});
+})();
+</script></body></html>
 
 
