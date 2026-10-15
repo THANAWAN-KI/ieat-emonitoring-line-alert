@@ -2468,5 +2468,75 @@ html body #report .dss-support-contact{font-size:12px!important}
  window.dssLeafletMap?.invalidateSize({pan:false});
 })();
 </script>
+
+<style id="dss-one-form-20261015">
+html body .workspace{display:block!important;max-width:1440px!important;margin:22px auto!important;padding:0 24px!important}
+html body .workspace > .editor{width:100%!important;max-width:none!important;position:static!important;margin-bottom:24px!important;padding:24px!important}
+html body #dssSingleIntro{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 18px}
+#dssSingleIntro h2{font-size:22px!important;color:#111!important;margin:0 0 4px!important}
+#dssSingleIntro p{font-size:14px;color:#555;margin:0}
+#dssSingleIntro .dss-auto-badge{background:#edf4e8;color:#4F7D32;border-radius:20px;padding:9px 14px;font-size:13px;white-space:nowrap}
+html body #dssSimplePanel{display:grid!important;grid-template-columns:280px minmax(0,1fr)!important;gap:20px!important;align-items:start!important}
+html body .editor #dssIncidentMode{margin:0!important;padding:14px!important}
+html body .editor #dssIncidentMode .hint{display:none!important}
+html body #dssSimplePanel > .field{margin:0!important;padding:14px!important;background:#f8f9fa;border-radius:14px}
+html body #dssSimplePanel .mini-actions{flex-wrap:nowrap!important;align-items:stretch}
+html body #dssSimplePanel #factoryLookup{height:46px!important;min-width:0!important}
+html body #factoryLookupBtn{min-width:140px;height:46px!important}
+html body #factoryLookupResults{max-height:320px!important;margin-top:12px;overflow:auto}
+html body #factoryLookupStatus:empty{display:none}
+html body #dssIncidentFacts{margin-top:16px!important}
+html body #dssIncidentFacts > h3{display:none!important}
+html body #dssIncidentFacts:empty{display:none!important}
+html body #chemicalIncidentEditor{border:0!important;background:#fff8e8!important;border-radius:14px!important;padding:18px!important;margin:0!important}
+html body #dssNotifiedChemicalChoice{background:#fff!important;border:0!important;border-radius:12px!important;margin:10px 0!important}
+html body #chemicalIncidentEditor .field{margin:10px 0!important}
+html body #dssOptionalDetails{margin-top:14px!important}
+html body .editor > #draftStatus{font-size:12px;margin-top:12px;color:#666}
+html body .editor #dssNearbyPanel{margin:0!important;max-height:420px!important}
+html body #dssNearbyDetails{margin:14px 0 0;background:#f8f9fa;border:0;border-radius:12px;padding:14px}
+html body #dssNearbyDetails summary{cursor:pointer;font-weight:600;font-size:14px;color:#111}
+html body #supportList{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+html body #supportList .hint{grid-column:1/-1}
+html body #supportList button{height:100%;margin:0!important}
+html body .report-wrap{margin:0!important}
+html body #report{max-width:none!important;padding:32px!important}
+html body .dss-report-jump{margin-bottom:16px!important}
+html body .dss-report-jump a{box-shadow:none!important;font-size:14px!important}
+#dssUnifiedStatus{margin:14px 0 0;padding:12px 16px;background:#f5f6f8;border-radius:12px;font-size:14px;color:#111}
+#dssUnifiedStatus[data-state="ready"]{background:#edf4e8;color:#254519}
+#dssUnifiedStatus[data-state="loading"]{background:#fff5d9;color:#111}
+#dssUnifiedStatus[data-state="error"]{background:#fceeea;color:#8B1E2D}
+@media(min-width:1100px){html body #dssReportIncident > .company .row{grid-template-columns:210px minmax(0,1fr)!important}html body #chemicalIncidentEditor:not([hidden]){display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 20px}#chemicalIncidentEditor > h3,#chemicalIncidentEditor > #dssNotifiedChemicalChoice{grid-column:1/-1}}
+@media(max-width:750px){html body .workspace{padding:0 10px!important;margin:12px auto!important}html body .workspace > .editor{padding:16px!important}html body #dssSimplePanel{grid-template-columns:minmax(0,1fr)!important;gap:12px!important}html body #dssSingleIntro{align-items:flex-start;flex-direction:column;gap:8px}#dssSingleIntro h2{font-size:19px!important}html body #factoryLookupBtn{min-width:110px!important;padding:8px!important;font-size:14px!important}html body #supportList{grid-template-columns:minmax(0,1fr)!important}html body #report{padding:18px!important}}
+</style>
+<script id="dss-one-form-script-20261015">
+(function(){
+ const editor=document.querySelector('.editor'),panel=document.getElementById('dssSimplePanel');
+ if(!editor||!panel)return;
+ const intro=document.createElement('div');intro.id='dssSingleIntro';
+ const text=document.createElement('div'),heading=document.createElement('h2'),description=document.createElement('p'),badge=document.createElement('span');
+ heading.textContent='จัดทำรายงานในแบบฟอร์มเดียว';
+ description.textContent='เลือกประเภทเหตุ แล้วค้นหาและเลือกบริษัท ระบบเติมข้อมูลรายงานทุกส่วนให้อัตโนมัติ';
+ badge.className='dss-auto-badge';badge.textContent='ค้นหาครั้งเดียว · ข้อมูลครบในรายงานเดียว';
+ text.append(heading,description);intro.append(text,badge);editor.prepend(intro);
+ document.getElementById('factoryLookupBtn').textContent='ค้นหาและจัดทำ';
+ document.getElementById('factoryLookup').placeholder='ชื่อบริษัท / นิคมฯ / เลขทะเบียน';
+ editor.querySelectorAll(':scope > p').forEach(el=>{if(el.textContent.includes('ค้นหาและเลือกบริษัทครั้งเดียว'))el.remove()});
+ const facts=document.getElementById('dssIncidentFacts');if(facts&&facts.children.length===1)facts.hidden=true;
+ const near=document.getElementById('dssNearbyPanel');
+ if(near){const details=document.createElement('details');details.id='dssNearbyDetails';const summary=document.createElement('summary');summary.textContent='ดูตำแหน่งสนับสนุนเพิ่มเติม';details.append(summary,near);editor.append(details)}
+ const status=document.createElement('div');status.id='dssUnifiedStatus';status.setAttribute('role','status');status.setAttribute('aria-live','polite');status.textContent='พร้อมจัดทำรายงาน · เลือกบริษัทเพื่อเริ่มดึงข้อมูล';panel.after(status);
+ const previous=selectDssLookup;let sequence=0;
+ selectDssLookup=async function(item){
+  const current=++sequence;status.dataset.state='loading';status.textContent='กำลังจัดทำรายงาน '+item.name+' · ข้อมูลโรงงาน สารเคมี อุปกรณ์ แผนที่ อากาศ และหน่วยสนับสนุน';
+  try{await previous(item);if(current!==sequence)return;status.dataset.state='ready';status.textContent='จัดทำรายงาน '+item.name+' แล้ว · ตรวจข้อมูลและตำแหน่งก่อนส่งออก PNG';}
+  catch(error){if(current===sequence){status.dataset.state='error';status.textContent='โหลดข้อมูลไม่ครบ: '+error.message+' · กรุณาค้นหาหรือเลือกบริษัทอีกครั้ง'}throw error;}
+ };
+ document.getElementById('resetBtn').addEventListener('click',()=>{queueMicrotask(()=>{status.dataset.state='';status.textContent='พร้อมจัดทำรายงาน · เลือกบริษัทเพื่อเริ่มดึงข้อมูล'})});
+ document.getElementById('event').addEventListener('change',()=>{const section=document.getElementById('chemicalIncidentEditor');if(section&&!section.hidden)section.scrollIntoView({behavior:'smooth',block:'nearest'});});
+ window.dssLeafletMap?.invalidateSize({pan:false});
+})();
+</script>
 </body></html>
 
