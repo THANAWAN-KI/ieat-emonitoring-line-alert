@@ -2730,23 +2730,45 @@ html body #report .dss-shared-map-link{margin:10px 0!important;border-radius:3px
 (function(){
  const embedded=new URLSearchParams(location.search).get('embedded')==='dashboard'&&parent!==window;
  if(embedded){
-  const settings=document.getElementById('dssOptionalDetails'),summary=settings.querySelector('summary'),content=document.createElement('div');
-  content.className='dss-settings-content';Array.from(settings.childNodes).filter(node=>node!==summary).forEach(node=>content.append(node));
-  const facts=document.getElementById('dssIncidentFacts');if(facts){content.prepend(facts);facts.querySelector(':scope>h3')?.remove()}
-  settings.append(content);settings.classList.add('dss-toolbar-settings');summary.textContent='รายละเอียดเหตุและตั้งค่ารายงาน';
-  document.querySelector('.top-actions').insertBefore(settings,document.getElementById('resetBtn'));
+  const actions=document.querySelector('.top-actions'),reset=document.getElementById('resetBtn');
+  let settings=document.getElementById('dssOptionalDetails');
+  if(!settings){
+   settings=document.createElement('details');settings.id='dssOptionalDetails';
+   const summary=document.createElement('summary');summary.textContent='รายละเอียดเหตุและตั้งค่ารายงาน';
+   const content=document.createElement('div');content.className='dss-settings-content';
+   settings.append(summary,content);
+   const facts=document.getElementById('dssIncidentFacts');if(facts){content.append(facts);facts.querySelector(':scope>h3')?.remove()}
+   const panel=document.getElementById('dssSimplePanel');
+   const mode=document.getElementById('dssIncidentMode');
+   if(mode)content.append(mode);
+   const editor=document.querySelector('.editor');
+   if(editor){Array.from(editor.children).forEach(node=>{if(node!==panel&&node.id!=='dssSingleIntro'&&node.id!=='dssUnifiedStatus'&&node.id!=='draftStatus'&&node!==facts&&!node.contains(settings)&&node.id!=='form')content.append(node)})}
+  }else{
+   let summary=settings.querySelector('summary');
+   if(!summary){summary=document.createElement('summary');settings.prepend(summary)}
+   summary.textContent='รายละเอียดเหตุและตั้งค่ารายงาน';
+   let content=settings.querySelector('.dss-settings-content');
+   if(!content){content=document.createElement('div');content.className='dss-settings-content';Array.from(settings.childNodes).filter(n=>n!==summary).forEach(n=>content.append(n));settings.append(content)}
+  }
+  settings.classList.add('dss-toolbar-settings');
+  if(actions&&reset&&settings.parentElement!==actions)actions.insertBefore(settings,reset);
   document.getElementById('dssNearbyDetails')?.remove();
-  const weather=document.getElementById('dssWeatherRows'),support=document.getElementById('supportGrid');support.before(weather);
+  document.getElementById('backToRiskmapBtn')?.remove();
+  const weather=document.getElementById('dssWeatherRows'),support=document.getElementById('supportGrid');
+  if(weather&&support&&weather.parentElement!==support.parentElement)support.before(weather);
   window.addEventListener('message',event=>{
    if(event.origin!==location.origin||event.source!==parent||event.data?.type!=='dss:set-incident-type')return;
    const value=event.data.value;if(!['เหตุเพลิงไหม้','สารเคมีรั่วไหล'].includes(value))return;
-   const select=document.getElementById('event');state.event=value;select.value=value;render();select.dispatchEvent(new Event('change',{bubbles:true}));
+   const select=document.getElementById('event');
+   if(select){state.event=value;select.value=value;render();select.dispatchEvent(new Event('change',{bubbles:true}))}
   });
   parent.postMessage({type:'dss:report-ready'},location.origin);
  }
- const previous=selectDssLookup;
- selectDssLookup=async function(item){await previous(item);state.date=new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok',day:'numeric',month:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit'});if(state.registration)state.registration=[...new Set(state.registration.split(' / ').map(v=>v.trim()))].join(' / ');render()};
- document.getElementById('pngBtn').onclick=()=>downloadReportPng();
+ if(typeof selectDssLookup==='function'){
+  const previous=selectDssLookup;
+  selectDssLookup=async function(item){await previous(item);state.date=new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok',day:'numeric',month:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit'});if(state.registration)state.registration=[...new Set(state.registration.split(' / ').map(v=>v.trim()))].join(' / ');render()};
+ }
+ const png=document.getElementById('pngBtn');if(png)png.onclick=()=>downloadReportPng();
 })();
 </script>
 
@@ -2784,6 +2806,45 @@ html body.dss-inline-dashboard .report{width:100%!important;padding:26px 24px!im
  document.getElementById('backToRiskmapBtn')?.remove();
 })();
 </script>
+
+
+<style id="dss-requested-layout-refinement-20261015">
+/* Left-align report actions as requested; keep the report canvas clean and legible. */
+html body .top{display:flex!important;flex-wrap:wrap!important;align-items:center!important;gap:12px!important}
+html body .top-actions{order:-1!important;margin-left:0!important;margin-right:10px!important;justify-content:flex-start!important;flex-wrap:wrap!important}
+html body .top>div:first-child{order:2!important;min-width:200px!important;flex:1 1 220px!important}
+html body.dss-inline-dashboard .top{justify-content:flex-start!important}
+html body .top-actions #resetBtn,html body .top-actions #pngBtn{white-space:nowrap!important}
+html body .dss-toolbar-settings{order:0!important}
+html body .dss-toolbar-settings>summary{display:inline-flex!important;align-items:center!important;gap:8px!important;padding:10px 13px!important;background:#f5f1f8!important;border:1px solid #e2d6ed!important;border-radius:8px!important;color:#4d3268!important;font-size:14px!important;font-weight:600!important}
+html body .dss-toolbar-settings>summary:before{content:"⚙";font-size:15px;color:#6d438e}
+html body .dss-toolbar-settings .dss-settings-content{right:auto!important;left:0!important;width:min(720px,90vw)!important;max-height:72vh!important;padding:18px!important;background:#fff!important;border:1px solid #e1e5eb!important;border-radius:10px!important;box-shadow:0 10px 28px #202c3a1c!important}
+html body .dss-toolbar-settings .dss-settings-content h3{font-size:16px!important;margin:0 0 10px!important;color:#293445!important}
+html body .dss-toolbar-settings .dss-settings-content .hint{color:#667085!important;font-size:13px!important;line-height:1.55!important}
+html body #dssSimplePanel{display:grid!important;grid-template-columns:minmax(180px,240px) minmax(260px,1fr)!important;gap:12px!important;align-items:end!important}
+html body #dssSimplePanel #dssIncidentMode{grid-column:1!important;max-width:none!important;width:100%!important}
+html body #dssSimplePanel .field:has(#factoryLookup),html body #dssSimplePanel:has(#factoryLookup) #factoryLookup{min-width:0!important}
+html body #dssSimplePanel #factoryLookup{width:100%!important;min-width:0!important}
+html body #dssSimplePanel #factoryLookupBtn{white-space:nowrap!important}
+html body #dssSingleIntro{margin:0 0 12px!important;padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
+html body #dssSingleIntro h2{font-size:17px!important;color:#202b3b!important;margin:0!important}
+html body #dssSingleIntro .dss-auto-badge{font-size:12px!important;background:#f0f5f2!important;color:#356b4d!important;border-radius:6px!important;padding:5px 8px!important}
+html body #report{max-width:1100px!important;margin:0 auto!important;background:#fff!important;border:1px solid #e0e4e9!important;border-radius:6px!important;box-shadow:none!important}
+html body #report .report-header{border-bottom:2px solid #8b1e2d!important}
+html body #report .dss-report-section{margin-bottom:20px!important}
+html body #report .section-title{background:#f3f4f5!important;border:1px solid #e3e6ea!important;border-left:3px solid #8b1e2d!important;color:#27313d!important}
+html body #report .row{border-bottom:1px solid #e6e9ee!important}
+html body #report .row b{background:#f7f8fa!important;color:#4b5563!important}
+@media(max-width:680px){
+ html body .top{align-items:stretch!important}
+ html body .top-actions{order:2!important;width:100%!important;margin:0!important}
+ html body .top>div:first-child{order:1!important}
+ html body #dssSimplePanel{grid-template-columns:minmax(0,1fr)!important}
+ html body #dssSimplePanel #dssIncidentMode{grid-column:1!important}
+ html body .dss-toolbar-settings .dss-settings-content{left:auto!important;right:0!important;width:min(92vw,520px)!important}
+ html body #report{padding:18px 12px!important}
+}
+</style>
 
 </body></html>
 
