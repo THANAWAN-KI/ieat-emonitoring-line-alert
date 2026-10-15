@@ -2538,5 +2538,25 @@ html body .dss-report-jump a{box-shadow:none!important;font-size:14px!important}
  window.dssLeafletMap?.invalidateSize({pan:false});
 })();
 </script>
+
+<script id="dss-inline-dashboard-20261015">
+(function(){
+ if(new URLSearchParams(location.search).get('embedded')!=='dashboard'||window.parent===window)return;
+ document.body.classList.add('dss-inline-dashboard');
+ const back=document.getElementById('backToRiskmapBtn');back.textContent='↑ กลับไปดูแผนที่';
+ back.addEventListener('click',event=>{event.preventDefault();event.stopImmediatePropagation();parent.postMessage({type:'dss:return-risk-dashboard'},location.origin)},true);
+ let lastHeight=0,scheduled=false;
+ function send(){scheduled=false;const height=Math.ceil(document.body.getBoundingClientRect().height+24);if(Math.abs(height-lastHeight)>2){lastHeight=height;parent.postMessage({type:'dss:report-height',height},location.origin)}}
+ function schedule(){if(!scheduled){scheduled=true;requestAnimationFrame(send)}}
+ new ResizeObserver(schedule).observe(document.body);
+ window.addEventListener('load',schedule);schedule();
+})();
+</script>
+<style id="dss-inline-dashboard-style">
+html body.dss-inline-dashboard{min-height:0!important}
+html body.dss-inline-dashboard .top{justify-content:flex-end!important;min-height:0!important;background:#f7f8fa!important;box-shadow:none!important;padding:12px 24px!important}
+html body.dss-inline-dashboard .top > .dss-brand-logo,html body.dss-inline-dashboard .top > div:not(.top-actions){display:none!important}
+html body.dss-inline-dashboard .workspace{margin:0 auto 20px!important}
+</style>
 </body></html>
 
