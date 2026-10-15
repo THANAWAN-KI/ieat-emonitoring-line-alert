@@ -1,79 +1,90 @@
 {
-  "schemaVersion": 1,
-  "period": "2026-10",
-  "retrievedAt": "2026-10-14T04:49:13.401000+00:00",
-  "sourceUrl": "https://dss.ieat.go.th/extension/dssreportAdmin/index.php?daterange=2026-10-01+00%3A00+TO+2026-10-31+23%3A59&checkBox1%5B%5D=22&checkBox1%5B%5D=17&checkBox1%5B%5D=1&checkBox1%5B%5D=13&checkBox1%5B%5D=12&checkBox1%5B%5D=20&checkBox1%5B%5D=5&checkBox1%5B%5D=21&checkBox1%5B%5D=35&checkBox1%5B%5D=26&checkBox1%5B%5D=3&checkBox1%5B%5D=10&checkBox1%5B%5D=29&checkBox1%5B%5D=18&checkBox1%5B%5D=16&checkBox1%5B%5D=15&checkBox1%5B%5D=9&checkBox1%5B%5D=39&checkBox1%5B%5D=6&checkBox1%5B%5D=8&checkBox1%5B%5D=41&checkBox1%5B%5D=40&checkBox1%5B%5D=30&checkBox1%5B%5D=45&checkBox1%5B%5D=50&checkBox1%5B%5D=36&checkBox1%5B%5D=2&checkBox1%5B%5D=46&checkBox1%5B%5D=4&checkBox1%5B%5D=24&checkBox1%5B%5D=34&checkBox1%5B%5D=37&checkBox1%5B%5D=11&checkBox1%5B%5D=25&checkBox1%5B%5D=23&checkBox1%5B%5D=44&checkBox1%5B%5D=7&checkBox1%5B%5D=14&checkBox1%5B%5D=28&checkBox1%5B%5D=64&checkBox1%5B%5D=32&checkBox1%5B%5D=19",
+  "schemaVersion": 2,
+  "period": "2026-01-01/2026-09-30",
+  "chemicalPeriod": "2026-01-01/2026-10-15",
+  "retrievedAt": "2026-10-15T03:48:29.718778+00:00",
+  "sourceUrl": "https://dss.ieat.go.th/extension/dssreportAdmin/index.php?daterange=2026-01-01%2000%3A00%20TO%202026-09-30%2023%3A59&checkBox1%5B%5D=22&checkBox1%5B%5D=17&checkBox1%5B%5D=1&checkBox1%5B%5D=13&checkBox1%5B%5D=12&checkBox1%5B%5D=20&checkBox1%5B%5D=5&checkBox1%5B%5D=21&checkBox1%5B%5D=35&checkBox1%5B%5D=26&checkBox1%5B%5D=3&checkBox1%5B%5D=10&checkBox1%5B%5D=29&checkBox1%5B%5D=18&checkBox1%5B%5D=16&checkBox1%5B%5D=15&checkBox1%5B%5D=9&checkBox1%5B%5D=39&checkBox1%5B%5D=6&checkBox1%5B%5D=8&checkBox1%5B%5D=41&checkBox1%5B%5D=40&checkBox1%5B%5D=30&checkBox1%5B%5D=45&checkBox1%5B%5D=50&checkBox1%5B%5D=36&checkBox1%5B%5D=2&checkBox1%5B%5D=46&checkBox1%5B%5D=4&checkBox1%5B%5D=24&checkBox1%5B%5D=34&checkBox1%5B%5D=37&checkBox1%5B%5D=11&checkBox1%5B%5D=25&checkBox1%5B%5D=23&checkBox1%5B%5D=44&checkBox1%5B%5D=7&checkBox1%5B%5D=14&checkBox1%5B%5D=28&checkBox1%5B%5D=64&checkBox1%5B%5D=32&checkBox1%5B%5D=19",
+  "chemicalSourceUrl": "https://dss.ieat.go.th/extension/dssreport_gis_chemical/index.php?daterange=2026-01-01%2000%3A00%20TO%202026-10-15%2023%3A59&checkBox1%5B%5D=22&checkBox1%5B%5D=17&checkBox1%5B%5D=1&checkBox1%5B%5D=13&checkBox1%5B%5D=12&checkBox1%5B%5D=20&checkBox1%5B%5D=5&checkBox1%5B%5D=21&checkBox1%5B%5D=35&checkBox1%5B%5D=26&checkBox1%5B%5D=3&checkBox1%5B%5D=10&checkBox1%5B%5D=29&checkBox1%5B%5D=18&checkBox1%5B%5D=16&checkBox1%5B%5D=15&checkBox1%5B%5D=9&checkBox1%5B%5D=39&checkBox1%5B%5D=6&checkBox1%5B%5D=8&checkBox1%5B%5D=41&checkBox1%5B%5D=40&checkBox1%5B%5D=30&checkBox1%5B%5D=45&checkBox1%5B%5D=50&checkBox1%5B%5D=36&checkBox1%5B%5D=2&checkBox1%5B%5D=46&checkBox1%5B%5D=4&checkBox1%5B%5D=24&checkBox1%5B%5D=34&checkBox1%5B%5D=37&checkBox1%5B%5D=11&checkBox1%5B%5D=25&checkBox1%5B%5D=23&checkBox1%5B%5D=44&checkBox1%5B%5D=7&checkBox1%5B%5D=14&checkBox1%5B%5D=28&checkBox1%5B%5D=64&checkBox1%5B%5D=32&checkBox1%5B%5D=19",
+  "chemicalCounting": "report rows, not distinct substances or companies",
   "counts": {
-    "approved": 4,
+    "approved": 597,
     "review": 0,
-    "draft": 4,
-    "none": 6931,
-    "more": 2,
-    "total": 6941
+    "draft": 83,
+    "none": 6208,
+    "more": 53,
+    "total": 6941,
+    "chemicals": 10000
   },
   "estates": [
     {
       "name": "ดับบลิวเอชเอ ชลบุรี",
-      "approved": 0,
+      "approved": 2,
       "review": 0,
       "draft": 0,
-      "none": 50,
+      "none": 48,
       "more": 0,
-      "total": 50
+      "total": 50,
+      "chemicals": 40
     },
     {
       "name": "ดับบลิวเอชเอ ชลบุรี 1",
-      "approved": 1,
+      "approved": 13,
       "review": 0,
-      "draft": 0,
-      "none": 142,
+      "draft": 1,
+      "none": 129,
       "more": 0,
-      "total": 143
+      "total": 143,
+      "chemicals": 60
     },
     {
       "name": "ดับบลิวเอชเอ ชลบุรี 2",
-      "approved": 0,
+      "approved": 1,
       "review": 0,
-      "draft": 0,
-      "none": 24,
+      "draft": 2,
+      "none": 21,
       "more": 0,
-      "total": 24
+      "total": 24,
+      "chemicals": 10
     },
     {
       "name": "ดับบลิวเอชเอ อีสเทิร์นซีบอดร์ด 3",
-      "approved": 0,
+      "approved": 1,
       "review": 0,
       "draft": 0,
-      "none": 1,
+      "none": 0,
       "more": 0,
-      "total": 1
+      "total": 1,
+      "chemicals": 17
     },
     {
       "name": "ดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 1",
-      "approved": 0,
+      "approved": 17,
       "review": 0,
-      "draft": 0,
-      "none": 261,
+      "draft": 1,
+      "none": 243,
       "more": 0,
-      "total": 261
+      "total": 261,
+      "chemicals": 333
     },
     {
       "name": "ดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 2",
-      "approved": 0,
+      "approved": 2,
       "review": 0,
-      "draft": 0,
-      "none": 109,
+      "draft": 3,
+      "none": 104,
       "more": 0,
-      "total": 109
+      "total": 109,
+      "chemicals": 12
     },
     {
       "name": "ดับบลิวเอชเอ อีสเทิร์นซีบอร์ด 3",
-      "approved": 0,
+      "approved": 2,
       "review": 0,
-      "draft": 0,
-      "none": 34,
-      "more": 0,
-      "total": 34
+      "draft": 1,
+      "none": 30,
+      "more": 1,
+      "total": 34,
+      "chemicals": 6
     },
     {
       "name": "ดับบลิวเอชเอ อีสเทิร์นนซีบอร์ด 2",
@@ -82,115 +93,128 @@
       "draft": 0,
       "none": 1,
       "more": 0,
-      "total": 1
+      "total": 1,
+      "chemicals": 0
     },
     {
       "name": "ดับบลิวเอชเอตะวันออก (มาบตาพุด)",
-      "approved": 0,
+      "approved": 17,
       "review": 0,
-      "draft": 0,
-      "none": 82,
-      "more": 0,
-      "total": 82
+      "draft": 7,
+      "none": 55,
+      "more": 3,
+      "total": 82,
+      "chemicals": 185
     },
     {
       "name": "ทีเอฟดี",
-      "approved": 0,
+      "approved": 8,
       "review": 0,
       "draft": 0,
-      "none": 47,
-      "more": 0,
-      "total": 47
+      "none": 38,
+      "more": 1,
+      "total": 47,
+      "chemicals": 73
     },
     {
       "name": "นครหลวง",
-      "approved": 0,
+      "approved": 6,
       "review": 0,
       "draft": 0,
-      "none": 65,
+      "none": 59,
       "more": 0,
-      "total": 65
+      "total": 65,
+      "chemicals": 341
     },
     {
       "name": "บางชัน",
-      "approved": 0,
+      "approved": 2,
       "review": 0,
       "draft": 0,
-      "none": 104,
-      "more": 0,
-      "total": 104
+      "none": 101,
+      "more": 1,
+      "total": 104,
+      "chemicals": 94
     },
     {
       "name": "บางปะอิน",
-      "approved": 0,
+      "approved": 18,
       "review": 0,
-      "draft": 0,
-      "none": 123,
-      "more": 0,
-      "total": 123
+      "draft": 3,
+      "none": 101,
+      "more": 1,
+      "total": 123,
+      "chemicals": 196
     },
     {
       "name": "บางปู",
-      "approved": 1,
+      "approved": 46,
       "review": 0,
-      "draft": 1,
-      "none": 597,
-      "more": 1,
-      "total": 600
+      "draft": 7,
+      "none": 543,
+      "more": 4,
+      "total": 600,
+      "chemicals": 792
     },
     {
       "name": "บางปู (เหนือ)",
-      "approved": 0,
+      "approved": 1,
       "review": 0,
       "draft": 0,
-      "none": 57,
+      "none": 56,
       "more": 0,
-      "total": 57
+      "total": 57,
+      "chemicals": 2
     },
     {
       "name": "บางพลี",
-      "approved": 0,
+      "approved": 9,
       "review": 0,
-      "draft": 0,
-      "none": 183,
-      "more": 0,
-      "total": 183
+      "draft": 2,
+      "none": 170,
+      "more": 2,
+      "total": 183,
+      "chemicals": 135
     },
     {
       "name": "บ้านหว้า",
-      "approved": 0,
+      "approved": 23,
       "review": 0,
-      "draft": 0,
-      "none": 205,
-      "more": 1,
-      "total": 206
+      "draft": 3,
+      "none": 176,
+      "more": 4,
+      "total": 206,
+      "chemicals": 570
     },
     {
       "name": "ปิ่นทอง",
-      "approved": 0,
+      "approved": 34,
       "review": 0,
-      "draft": 0,
-      "none": 237,
-      "more": 0,
-      "total": 237
+      "draft": 8,
+      "none": 193,
+      "more": 2,
+      "total": 237,
+      "chemicals": 301
     },
     {
       "name": "ปิ่นทอง (แหลมฉบัง)",
-      "approved": 0,
+      "approved": 18,
       "review": 0,
-      "draft": 0,
-      "none": 119,
-      "more": 0,
-      "total": 119
+      "draft": 2,
+      "none": 96,
+      "more": 3,
+      "total": 119,
+      "chemicals": 149
     },
     {
       "name": "ปิ่นทอง (โครงการ 3)",
-      "approved": 0,
+      "approved": 20,
       "review": 0,
-      "draft": 0,
-      "none": 105,
+      "draft": 5,
+      "none": 80,
       "more": 0,
-      "total": 105
+      "total": 105,
+      "chemicals": 157
     },
     {
       "name": "ผาแดง",
@@ -199,34 +223,38 @@
       "draft": 0,
       "none": 6,
       "more": 0,
-      "total": 6
+      "total": 6,
+      "chemicals": 0
     },
     {
       "name": "พิจิตร",
-      "approved": 0,
+      "approved": 5,
       "review": 0,
       "draft": 0,
-      "none": 18,
+      "none": 13,
       "more": 0,
-      "total": 18
+      "total": 18,
+      "chemicals": 20
     },
     {
       "name": "ภาคเหนือ",
-      "approved": 0,
+      "approved": 8,
       "review": 0,
-      "draft": 0,
-      "none": 104,
+      "draft": 1,
+      "none": 95,
       "more": 0,
-      "total": 104
+      "total": 104,
+      "chemicals": 164
     },
     {
       "name": "ภาคใต้จังหวัดสงขลา",
-      "approved": 0,
+      "approved": 5,
       "review": 0,
       "draft": 0,
-      "none": 55,
+      "none": 50,
       "more": 0,
-      "total": 55
+      "total": 55,
+      "chemicals": 40
     },
     {
       "name": "มหาราชนคร",
@@ -235,169 +263,188 @@
       "draft": 0,
       "none": 2,
       "more": 0,
-      "total": 2
+      "total": 2,
+      "chemicals": 0
     },
     {
       "name": "มาบตาพุด",
-      "approved": 0,
+      "approved": 32,
       "review": 0,
-      "draft": 0,
-      "none": 116,
-      "more": 0,
-      "total": 116
+      "draft": 3,
+      "none": 76,
+      "more": 5,
+      "total": 116,
+      "chemicals": 330
     },
     {
       "name": "ราชบุรี",
-      "approved": 0,
+      "approved": 7,
       "review": 0,
-      "draft": 0,
-      "none": 45,
+      "draft": 1,
+      "none": 37,
       "more": 0,
-      "total": 45
+      "total": 45,
+      "chemicals": 57
     },
     {
       "name": "ลาดกระบัง",
-      "approved": 0,
+      "approved": 17,
       "review": 0,
-      "draft": 0,
-      "none": 305,
+      "draft": 2,
+      "none": 286,
       "more": 0,
-      "total": 305
+      "total": 305,
+      "chemicals": 320
     },
     {
       "name": "สงขลา",
-      "approved": 0,
+      "approved": 1,
       "review": 0,
       "draft": 0,
-      "none": 1,
+      "none": 0,
       "more": 0,
-      "total": 1
+      "total": 1,
+      "chemicals": 5
     },
     {
       "name": "สมุทรสาคร",
-      "approved": 0,
+      "approved": 26,
       "review": 0,
-      "draft": 0,
-      "none": 152,
-      "more": 0,
-      "total": 152
+      "draft": 5,
+      "none": 118,
+      "more": 3,
+      "total": 152,
+      "chemicals": 205
     },
     {
       "name": "สหรัตนนคร",
-      "approved": 0,
+      "approved": 2,
       "review": 0,
-      "draft": 1,
-      "none": 4,
+      "draft": 0,
+      "none": 3,
       "more": 0,
-      "total": 5
+      "total": 5,
+      "chemicals": 34
     },
     {
       "name": "สำนักงานท่าเรืออุตสาหกรรมมาบตาพุด",
-      "approved": 0,
+      "approved": 6,
       "review": 0,
       "draft": 0,
-      "none": 14,
-      "more": 0,
-      "total": 14
+      "none": 6,
+      "more": 2,
+      "total": 14,
+      "chemicals": 114
     },
     {
       "name": "สินสาคร",
-      "approved": 0,
+      "approved": 13,
       "review": 0,
-      "draft": 0,
-      "none": 139,
-      "more": 0,
-      "total": 139
+      "draft": 1,
+      "none": 124,
+      "more": 1,
+      "total": 139,
+      "chemicals": 449
     },
     {
       "name": "หนองแค",
-      "approved": 0,
+      "approved": 7,
       "review": 0,
       "draft": 0,
-      "none": 60,
-      "more": 0,
-      "total": 60
+      "none": 52,
+      "more": 1,
+      "total": 60,
+      "chemicals": 107
     },
     {
       "name": "หลักชัยเมืองยาง",
       "approved": 0,
       "review": 0,
-      "draft": 0,
-      "none": 21,
+      "draft": 1,
+      "none": 20,
       "more": 0,
-      "total": 21
+      "total": 21,
+      "chemicals": 1
     },
     {
       "name": "อมตะซิตี้ ชลบุรี",
-      "approved": 1,
+      "approved": 66,
       "review": 0,
-      "draft": 1,
-      "none": 1148,
-      "more": 0,
-      "total": 1150
+      "draft": 9,
+      "none": 1070,
+      "more": 5,
+      "total": 1150,
+      "chemicals": 1363
     },
     {
       "name": "อมตะซิตี้ ระยอง",
-      "approved": 0,
+      "approved": 42,
       "review": 0,
-      "draft": 0,
-      "none": 787,
-      "more": 0,
-      "total": 787
+      "draft": 4,
+      "none": 738,
+      "more": 3,
+      "total": 787,
+      "chemicals": 601
     },
     {
       "name": "อัญธานี",
-      "approved": 0,
+      "approved": 9,
       "review": 0,
-      "draft": 0,
-      "none": 262,
-      "more": 0,
-      "total": 262
+      "draft": 1,
+      "none": 250,
+      "more": 2,
+      "total": 262,
+      "chemicals": 435
     },
     {
       "name": "อาร์ ไอ แอล",
-      "approved": 0,
+      "approved": 3,
       "review": 0,
       "draft": 0,
-      "none": 18,
+      "none": 15,
       "more": 0,
-      "total": 18
+      "total": 18,
+      "chemicals": 19
     },
     {
       "name": "อีสเทิร์นซีบอร์ด (ระยอง)",
-      "approved": 0,
+      "approved": 20,
       "review": 0,
-      "draft": 0,
-      "none": 418,
-      "more": 0,
-      "total": 418
+      "draft": 3,
+      "none": 392,
+      "more": 3,
+      "total": 418,
+      "chemicals": 352
     },
     {
       "name": "เกตเวย์ ซิตี้",
-      "approved": 0,
+      "approved": 6,
       "review": 0,
-      "draft": 0,
-      "none": 37,
+      "draft": 1,
+      "none": 30,
       "more": 0,
-      "total": 37
+      "total": 37,
+      "chemicals": 64
     },
     {
       "name": "เกตเวย์ซิตี้",
-      "approved": 1,
+      "approved": 11,
       "review": 0,
-      "draft": 0,
-      "none": 159,
+      "draft": 3,
+      "none": 146,
       "more": 0,
-      "total": 160
+      "total": 160,
+      "chemicals": 182
     },
     {
       "name": "เวลโกรว์",
-      "approved": 0,
+      "approved": 42,
       "review": 0,
-      "draft": 0,
-      "none": 219,
-      "more": 0,
-      "total": 219
+      "draft": 3,
+      "none": 170,
+      "more": 4,
+      "total": 219,
+      "chemicals": 824
     },
     {
       "name": "เหมราชชลบุรี แห่งที่ 2",
@@ -406,61 +453,68 @@
       "draft": 0,
       "none": 1,
       "more": 0,
-      "total": 1
+      "total": 1,
+      "chemicals": 0
     },
     {
       "name": "เอเซีย",
-      "approved": 0,
+      "approved": 7,
       "review": 0,
       "draft": 0,
-      "none": 28,
+      "none": 21,
       "more": 0,
-      "total": 28
+      "total": 28,
+      "chemicals": 55
     },
     {
       "name": "เอเซีย (สุวรรณภูมิ)",
-      "approved": 0,
+      "approved": 10,
       "review": 0,
       "draft": 0,
-      "none": 87,
+      "none": 77,
       "more": 0,
-      "total": 87
+      "total": 87,
+      "chemicals": 379
     },
     {
       "name": "แก่งคอย",
       "approved": 0,
       "review": 0,
       "draft": 0,
-      "none": 4,
-      "more": 0,
-      "total": 4
+      "none": 3,
+      "more": 1,
+      "total": 4,
+      "chemicals": 1
     },
     {
       "name": "แหลมฉบัง",
-      "approved": 0,
+      "approved": 10,
       "review": 0,
-      "draft": 1,
-      "none": 160,
-      "more": 0,
-      "total": 161
+      "draft": 0,
+      "none": 150,
+      "more": 1,
+      "total": 161,
+      "chemicals": 289
     },
     {
       "name": "ไฮเทค กบินทร์",
-      "approved": 0,
+      "approved": 1,
       "review": 0,
       "draft": 0,
-      "none": 6,
+      "none": 5,
       "more": 0,
-      "total": 6
+      "total": 6,
+      "chemicals": 14
     },
     {
       "name": "ไฮเทคกบินทร์",
-      "approved": 0,
+      "approved": 1,
       "review": 0,
       "draft": 0,
-      "none": 9,
+      "none": 8,
       "more": 0,
-      "total": 9
+      "total": 9,
+      "chemicals": 103
     }
   ]
 }
