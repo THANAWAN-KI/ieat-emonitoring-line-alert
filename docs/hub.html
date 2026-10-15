@@ -641,6 +641,21 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
 #riskDashboard .inventory-card.dss-draft strong,
 #riskDashboard .inventory-card.dss-draft small{color:#000!important;-webkit-text-fill-color:#000!important}
 </style>
+
+<script id="dss-dashboard-handoff-20261015">
+(function(){
+ const link=document.getElementById('openEmergencyReport'),estate=document.getElementById('estate');
+ if(!link||!estate)return;
+ const original=link.getAttribute('href');
+ function sync(){
+  const url=new URL(original,location.href);
+  const selected=estate.selectedOptions[0];
+  if(estate.value&&selected)url.searchParams.set('estate',selected.textContent.trim());
+  link.href=url.href;
+ }
+ estate.addEventListener('change',sync);link.addEventListener('pointerdown',sync);link.addEventListener('focus',sync);sync();
+})();
+</script>
 </body></html>
 
 
