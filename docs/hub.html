@@ -67,21 +67,22 @@
 <p id="dssStatusNote" class="panel-note" role="status">กำลังโหลดข้อมูล DSS และสารเคมี…</p>
 </section>
 <section class="panel operating-zone-section" aria-label="เขตประกอบการ สารเคมี และความเสี่ยง">
-<div class="panel-title">เขตประกอบการและความเสี่ยงรายนิคมฯ</div>
+
 <div class="zone-matrix-layout"><div class="operating-zone-chart"><h3>จำแนกตามเขตประกอบการ</h3><div id="operatingZoneDonut"></div><p class="panel-note">ที่มา: e_PP / เขตประกอบการ · นับเฉพาะรายการที่มีชื่อบริษัทภาษาไทย</p></div><div class="zone-matrix-table"><article><h3>โรงงานที่เข้าข่ายความเสี่ยงรายนิคมฯ</h3><div class="panel-content"><div class="matrix-scroll"><table class="matrix" aria-label="ความเสี่ยงแยกรายนิคมอุตสาหกรรม"><thead><tr><th rowspan="2" scope="col">นิคมอุตสาหกรรม</th><th colspan="3" scope="colgroup">กลุ่มความเสี่ยง</th><th rowspan="2" scope="col">ผู้ประกอบการ<br>(รายการ)</th></tr><tr><th scope="col">ความเสี่ยง<br>12 ประเภท</th><th scope="col">ความเสี่ยง<br>PSM</th><th scope="col">ความเสี่ยง<br>อัคคีภัยสูง</th></tr></thead><tbody id="matrixBody"></tbody></table></div><p class="panel-note">ความเสี่ยงนับจากชั้นข้อมูลผู้ประกอบการที่มีชื่อบริษัทภาษาไทย · กลุ่มความเสี่ยงอาจซ้ำกัน</p></div></article></div></div>
 </section>
 
 
-<section class="panel chemical-details-panel" aria-labelledby="chemicalDetailHeading">
-<div class="chemical-detail-heading"><h2 id="chemicalDetailHeading">รายละเอียดข้อมูลสารเคมี</h2><span>1 ม.ค.–15 ต.ค. 2569</span></div>
+<section class="panel chemical-details-panel" aria-label="รายการสารเคมี">
+
 <div class="chemical-detail-filters"><label for="chemicalEstate">นิคมอุตสาหกรรม<select id="chemicalEstate" disabled><option value="">ทุกนิคมอุตสาหกรรม</option></select></label><label for="chemicalSearch">ค้นหาโรงงาน / สารเคมี / CAS No.<input id="chemicalSearch" type="search" placeholder="พิมพ์ชื่อโรงงาน สารเคมี หรือเลข CAS" disabled></label></div>
 <p id="chemicalDetailStatus" class="panel-note" role="status">กำลังโหลดรายละเอียดสารเคมี…</p>
 <div class="chemical-detail-scroll"><table class="chemical-detail-table"><thead><tr><th scope="col">ลำดับ</th><th scope="col">ชื่อโรงงาน</th><th scope="col">นิคมอุตสาหกรรม</th><th scope="col">สารเคมี</th><th scope="col">CAS No.</th><th scope="col">UN No.</th><th scope="col">ปริมาณ</th><th scope="col">หน่วย</th></tr></thead><tbody id="chemicalDetailBody"></tbody></table></div>
 <div class="chemical-detail-pages"><button id="chemicalPrev" type="button" disabled>← ก่อนหน้า</button><span id="chemicalPage" aria-live="polite"></span><button id="chemicalNext" type="button" disabled>ถัดไป →</button></div>
-<p class="panel-note">ที่มา: รายงานสารเคมี DSS · แสดงตามรายการต้นทาง อาจมีสารชื่อซ้ำกัน · ปริมาณต้องอ่านคู่กับหน่วยของแต่ละรายการ</p>
+<p class="chemical-report-period">1 ม.ค.–15 ต.ค. 2569</p>
+
 </section>
-<section class="risk-ranking-section" aria-label="นิคมอุตสาหกรรมที่มีโรงงานเข้าข่ายความเสี่ยง"><div id="riskRankingCards" class="risk-ranking-cards"></div><p class="panel-note">หน่วย: รายการ · คลิกชื่อนิคมฯ เพื่อดูตำแหน่งบนแผนที่ · แต่ละกลุ่มอาจมีรายการซ้ำกัน · สีแยกตามลำดับจำนวน</p></section>
-<p class="source-note">แหล่งข้อมูล: ตำแหน่งนิคมฯ e_PP_2025, ข้อมูลผู้ประกอบการ_e_PP, Hospital_Locations, Risk_Map_WFL1, Map และตำแหน่งกล้องCCTV · ตัวเลขนับตามรายการ / แปลงในแต่ละชั้นข้อมูล อาจมีผู้ประกอบการที่มีหลายแปลง · ระหว่างโหลดจะแสดงข้อมูลเท่าที่ได้รับ</p>
+<section class="risk-ranking-section" aria-label="นิคมอุตสาหกรรมที่มีโรงงานเข้าข่ายความเสี่ยง"><div id="riskRankingCards" class="risk-ranking-cards"></div></section>
+
 </div><div id="riskMapSection" class="workspace-map" aria-label="แผนที่ความเสี่ยง"><article class="panel"><div class="map-controls"><div class="map-toolbar-actions"><select id="basemap" aria-label="แผนที่พื้นฐาน"><option value="gray-vector">แผนที่สีเทา</option><option value="streets-vector">แผนที่ถนน</option><option value="satellite" selected>ภาพถ่ายดาวเทียม</option><option value="topo-vector">ภูมิประเทศ</option></select><a class="report-button" id="openEmergencyReport" href="./dss.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h6"/></svg>เปิดหน้าจัดทำรายงานเหตุฉุกเฉิน</a></div></div><div id="map" role="region" aria-label="แผนที่ Risk Map"></div><div id="mapStatus" class="map-footer" role="status">กำลังโหลดแผนที่…</div></article></div></div></section>
 <section id="emergencyReportPage" hidden><iframe id="emergencyReportFrame" class="other-frame" title="จัดทำรายงานเหตุฉุกเฉิน"></iframe></section>
 <section id="otherPage" hidden><iframe id="otherFrame" class="other-frame" title="ข้อมูลสถานการณ์ภัย" loading="lazy"></iframe></section>
@@ -509,6 +510,7 @@ html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader .disaster-cl
 #riskDashboard .chemical-detail-heading>span{background:#FFD16A;color:#000;border-radius:8px;padding:5px 10px}
 #riskDashboard .map-controls{justify-content:flex-end}
 </style>
+<style id="chemical-report-period-bottom">.chemical-report-period{margin:14px 0 0;text-align:right;font-size:12px;color:#000}</style>
 </body></html>
 
 
