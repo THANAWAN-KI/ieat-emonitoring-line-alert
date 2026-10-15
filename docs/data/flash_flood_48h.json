@@ -2,7 +2,7 @@
   "schema_version": 1,
   "period": "48h",
   "date": "2026-10-15",
-  "time": "11:00:00",
+  "time": "16:00:00",
   "type": "พื้นที่เฝ้าระวังพิเศษ ล่วงหน้า 48 ชม. เสี่ยงน้ำท่วมจากฝนตกสะสม",
   "source_url": "https://api.hii.or.th/v2/4UQaYnf0Bx4fXPYyCdDRbqHyXH9Ixvd2nVUjaN1cLBY=/warning/flashflood-48h",
   "area_count": 4,
@@ -18,8 +18,8 @@
       "station": "อบต.วังยาว",
       "latitude": 14.89012,
       "longitude": 99.37758,
-      "sum_rainfall_mm": 132.2,
-      "observed_at": "2026-10-15T10:00:00+07:00",
+      "sum_rainfall_mm": 136.4,
+      "observed_at": "2026-10-15T14:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -717,8 +717,8 @@
       "station": "ทต.เจดีย์",
       "latitude": 14.38422,
       "longitude": 99.96114,
-      "sum_rainfall_mm": 125.99999999999999,
-      "observed_at": "2026-10-15T10:00:00+07:00",
+      "sum_rainfall_mm": 126.0,
+      "observed_at": "2026-10-15T14:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -880,8 +880,8 @@
       "station": "อบต.ห้วยคต",
       "latitude": 15.30362,
       "longitude": 99.60969,
-      "sum_rainfall_mm": 105.79999999999998,
-      "observed_at": "2026-10-15T10:00:00+07:00",
+      "sum_rainfall_mm": 105.80000000000001,
+      "observed_at": "2026-10-15T14:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -1108,7 +1108,7 @@
       "latitude": 14.92634,
       "longitude": 99.12273,
       "sum_rainfall_mm": 136.0,
-      "observed_at": "2026-10-15T09:00:00+07:00",
+      "observed_at": "2026-10-15T14:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -2253,11 +2253,11 @@
       "province": "จ.สุพรรณบุรี",
       "region_id": "1",
       "region_name": "ภาคกลาง",
-      "station": "บ้านหนองผือ",
-      "latitude": 14.728561,
-      "longitude": 99.488429,
-      "sum_rainfall_mm": 0.0,
-      "observed_at": "2026-10-15T09:00:00+07:00",
+      "station": "บ้านโป่งคอม",
+      "latitude": 14.764333,
+      "longitude": 99.565738,
+      "sum_rainfall_mm": 31.0,
+      "observed_at": "2026-10-15T14:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -2860,11 +2860,11 @@
       "province": "จ.สุพรรณบุรี",
       "region_id": "1",
       "region_name": "ภาคกลาง",
-      "station": "บ้านโป่งคอม",
-      "latitude": 14.764333,
-      "longitude": 99.565738,
-      "sum_rainfall_mm": 31.0,
-      "observed_at": "2026-10-15T09:00:00+07:00",
+      "station": "บ้านหนองผือ",
+      "latitude": 14.728561,
+      "longitude": 99.488429,
+      "sum_rainfall_mm": 0.0,
+      "observed_at": "2026-10-15T14:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -3470,8 +3470,8 @@
       "station": "ด่านช้าง",
       "latitude": 14.83506,
       "longitude": 99.66543,
-      "sum_rainfall_mm": 11.199999999999989,
-      "observed_at": "2026-10-15T10:00:00+07:00",
+      "sum_rainfall_mm": 11.199999999999998,
+      "observed_at": "2026-10-15T14:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -4078,7 +4078,7 @@
       "latitude": 14.872319,
       "longitude": 99.568946,
       "sum_rainfall_mm": 56.0,
-      "observed_at": "2026-10-15T09:00:00+07:00",
+      "observed_at": "2026-10-15T14:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -4328,8 +4328,8 @@
       "station": "อบต.นิคมกระเสียว",
       "latitude": 14.85733,
       "longitude": 99.57508,
-      "sum_rainfall_mm": 92.99999999999999,
-      "observed_at": "2026-10-15T10:00:00+07:00",
+      "sum_rainfall_mm": 93.0,
+      "observed_at": "2026-10-15T14:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -4579,8 +4579,8 @@
       "station": "หน่วยจัดการต้นน้ำและพัฒนาชุมชนในพื้นที่ป่าอนุรักษ์พุเตย",
       "latitude": 15.0219,
       "longitude": 99.3923,
-      "sum_rainfall_mm": 78.5,
-      "observed_at": "2026-10-15T10:00:00+07:00",
+      "sum_rainfall_mm": 78.89999999999999,
+      "observed_at": "2026-10-15T15:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -5279,7 +5279,7 @@
       "latitude": 14.944708,
       "longitude": 99.594671,
       "sum_rainfall_mm": 38.5,
-      "observed_at": "2026-10-15T09:00:00+07:00",
+      "observed_at": "2026-10-15T14:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -5694,7 +5694,7 @@
       "latitude": 14.927231,
       "longitude": 99.50882,
       "sum_rainfall_mm": 26.5,
-      "observed_at": "2026-10-15T09:00:00+07:00",
+      "observed_at": "2026-10-15T14:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -6109,7 +6109,7 @@
       "latitude": 14.962566,
       "longitude": 99.515459,
       "sum_rainfall_mm": 32.0,
-      "observed_at": "2026-10-15T09:00:00+07:00",
+      "observed_at": "2026-10-15T14:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -6524,7 +6524,7 @@
       "latitude": 14.827652,
       "longitude": 99.330791,
       "sum_rainfall_mm": 50.0,
-      "observed_at": "2026-10-15T09:00:00+07:00",
+      "observed_at": "2026-10-15T14:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -7071,7 +7071,7 @@
       "latitude": 14.804954,
       "longitude": 99.441428,
       "sum_rainfall_mm": 42.0,
-      "observed_at": "2026-10-15T09:00:00+07:00",
+      "observed_at": "2026-10-15T14:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -7614,11 +7614,11 @@
       "province": "จ.อุทัยธานี",
       "region_id": "1",
       "region_name": "ภาคกลาง",
-      "station": "บ้านวังบ่าง",
-      "latitude": 15.312792,
-      "longitude": 99.658732,
-      "sum_rainfall_mm": 46.5,
-      "observed_at": "2026-10-15T09:00:00+07:00",
+      "station": "บ้านกกงิ้ว",
+      "latitude": 15.304712,
+      "longitude": 99.648582,
+      "sum_rainfall_mm": 48.5,
+      "observed_at": "2026-10-15T14:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -7829,11 +7829,11 @@
       "province": "จ.อุทัยธานี",
       "region_id": "1",
       "region_name": "ภาคกลาง",
-      "station": "บ้านกกงิ้ว",
-      "latitude": 15.304712,
-      "longitude": 99.648582,
-      "sum_rainfall_mm": 48.5,
-      "observed_at": "2026-10-15T09:00:00+07:00",
+      "station": "บ้านวังบ่าง",
+      "latitude": 15.312792,
+      "longitude": 99.658732,
+      "sum_rainfall_mm": 46.5,
+      "observed_at": "2026-10-15T14:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -8048,7 +8048,7 @@
       "latitude": 15.313404,
       "longitude": 99.58156,
       "sum_rainfall_mm": 65.0,
-      "observed_at": "2026-10-15T09:00:00+07:00",
+      "observed_at": "2026-10-15T14:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -8275,7 +8275,7 @@
       "latitude": 15.277273,
       "longitude": 99.554759,
       "sum_rainfall_mm": 39.0,
-      "observed_at": "2026-10-15T09:00:00+07:00",
+      "observed_at": "2026-10-15T14:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -8502,7 +8502,7 @@
       "latitude": 15.234026,
       "longitude": 99.588856,
       "sum_rainfall_mm": 40.5,
-      "observed_at": "2026-10-15T09:00:00+07:00",
+      "observed_at": "2026-10-15T14:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -8728,8 +8728,8 @@
       "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ ศร.9 (ไกรเกรียง)",
       "latitude": 15.0256,
       "longitude": 99.1902,
-      "sum_rainfall_mm": 0.0,
-      "observed_at": "2026-10-15T10:00:00+07:00",
+      "sum_rainfall_mm": 1.2,
+      "observed_at": "2026-10-15T15:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -9876,7 +9876,7 @@
       "latitude": 14.365097,
       "longitude": 99.154023,
       "sum_rainfall_mm": 45.0,
-      "observed_at": "2026-10-15T10:00:00+07:00",
+      "observed_at": "2026-10-15T15:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -10627,7 +10627,7 @@
       "latitude": 14.345543,
       "longitude": 99.18332,
       "sum_rainfall_mm": 0.0,
-      "observed_at": "2026-10-15T09:00:00+07:00",
+      "observed_at": "2026-10-15T14:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -11378,7 +11378,7 @@
       "latitude": 14.40552,
       "longitude": 99.12831,
       "sum_rainfall_mm": 35.0,
-      "observed_at": "2026-10-15T09:00:00+07:00",
+      "observed_at": "2026-10-15T14:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -12128,8 +12128,8 @@
       "station": "ที่ทำการอุทยานแห่งชาติเอราวัณ",
       "latitude": 14.37565,
       "longitude": 99.11301,
-      "sum_rainfall_mm": 37.6,
-      "observed_at": "2026-10-15T10:00:00+07:00",
+      "sum_rainfall_mm": 42.8,
+      "observed_at": "2026-10-15T15:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -12880,7 +12880,7 @@
       "latitude": 14.72684,
       "longitude": 99.06556,
       "sum_rainfall_mm": 23.0,
-      "observed_at": "2026-10-15T09:00:00+07:00",
+      "observed_at": "2026-10-15T14:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -13874,8 +13874,8 @@
       "station": "หน่วยพิทักษ์ป่าแม่ปลาสร้อย",
       "latitude": 14.6054,
       "longitude": 99.1704,
-      "sum_rainfall_mm": 41.1,
-      "observed_at": "2026-10-15T10:00:00+07:00",
+      "sum_rainfall_mm": 44.699999999999996,
+      "observed_at": "2026-10-15T15:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -14870,7 +14870,7 @@
       "latitude": 14.61133,
       "longitude": 99.12579,
       "sum_rainfall_mm": 41.4,
-      "observed_at": "2026-10-15T10:00:00+07:00",
+      "observed_at": "2026-10-15T14:00:00+07:00",
       "geometry": {
         "rings": [
           [
