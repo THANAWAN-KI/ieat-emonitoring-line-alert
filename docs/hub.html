@@ -724,6 +724,27 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
  control.addEventListener('change',sync);frame.addEventListener('load',sync);
  window.addEventListener('message',event=>{if(event.origin===location.origin&&event.source===frame.contentWindow&&event.data?.type==='dss:report-ready')sync()});
 })();
-</script><style>@media(max-width:560px){#riskDashboard .chemical-detail-filters{grid-template-columns:minmax(0,1fr)}#riskDashboard .chemical-detail-filters label[for="chemicalEstate"]{grid-column:auto}}</style></body></html>
+</script><style>@media(max-width:560px){#riskDashboard .chemical-detail-filters{grid-template-columns:minmax(0,1fr)}#riskDashboard .chemical-detail-filters label[for="chemicalEstate"]{grid-column:auto}}</style>
+<style id="emcc-incident-search-layout-final">
+/* Unified incident search and report controls */
+#riskDashboard .chemical-detail-filters{display:grid!important;grid-template-columns:minmax(190px,230px) minmax(0,1fr)!important;gap:12px!important;align-items:end!important}
+#riskDashboard .chemical-detail-filters label[for="chemicalEstate"]{grid-column:1/-1!important}
+#riskDashboard .chemical-detail-filters label[for="dashboardIncidentType"],
+#riskDashboard .chemical-detail-filters .unified-incident-type{grid-column:1!important}
+#riskDashboard .chemical-detail-filters label[for="chemicalSearch"]{grid-column:2!important}
+#riskDashboard .chemical-detail-filters input,#riskDashboard .chemical-detail-filters select{min-height:44px!important}
+#riskDashboard .chemical-detail-filters .unified-incident-type select{background:#fff!important;border:1px solid #d9dfe7!important;color:#293443!important;border-radius:8px!important}
+#riskDashboard #emergencyReportPage{scroll-margin-top:20px}
+#riskDashboard #emergencyReportFrame{display:block;width:100%;min-height:1200px;border:0!important;background:#fff}
+@media(max-width:620px){
+ #riskDashboard .chemical-detail-filters{grid-template-columns:minmax(0,1fr)!important}
+ #riskDashboard .chemical-detail-filters label[for="chemicalEstate"],
+ #riskDashboard .chemical-detail-filters label[for="dashboardIncidentType"],
+ #riskDashboard .chemical-detail-filters .unified-incident-type,
+ #riskDashboard .chemical-detail-filters label[for="chemicalSearch"]{grid-column:1!important}
+}
+</style>
+
+</body></html>
 
 
