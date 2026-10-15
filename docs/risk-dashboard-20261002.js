@@ -18,6 +18,7 @@
  const $=id=>document.getElementById(id),number=n=>Number(n).toLocaleString('th-TH'),normalize=s=>String(s||'').toLowerCase().replace(/นิคมอุตสาหกรรม|นิคมฯ|สำนักงานนิคมฯ|\s+/g,'').trim();
  const pick=(a,fields)=>fields.map(f=>a[f]).find(v=>v!=null&&String(v).trim())||'—';
  const flagged=v=>String(v||'').trim()==='เข้าข่าย';
+ let operatingZoneRows=null,operatingZoneError='';
  const selected={estate:'',type:'',risk:'',query:''};let view,map,layerViews={},renderTimer,active=null,selectedItem=null,fallbackView=null,fallbackHighlight=null,initialViewpoint=null,fallbackInitialBounds=null,pendingZoom=null,mapReady=false;
  function el(tag,text,cls){const n=document.createElement(tag);if(text!=null)n.textContent=text;if(cls)n.className=cls;return n;}
  function filterRow(r,d,includeType=true){return (!selected.estate||normalize(r.estate)===selected.estate)&&(!includeType||!selected.type||d.id===selected.type)&&(!selected.risk||(d.id==='business'&&flagged(r.attrs[selected.risk])))&&(!selected.query||normalize(r.name+' '+r.estate+' '+r.registration).includes(selected.query));}
@@ -29,7 +30,7 @@
   $('riskTableBody').replaceChildren();riskFields.forEach((f,i)=>{const tr=el('tr');tr.dataset.risk=f.field;tr.style.setProperty('--risk-color',f.color);tr.append(el('td',f.label),el('td',business.status==='loading'?'…':business.status==='error'?'—':number(riskCounts[i])),el('td','เข้าข่าย','risk-pill'));tr.onclick=()=>{$('risk').value=selected.risk===f.field?'':f.field;changed()};$('riskTableBody').append(tr)});
   $('riskTotal').textContent=business.status==='loading'?'…':business.status==='error'?'—':number(any);$('riskUnmarked').textContent=business.status==='loading'?'…':business.status==='error'?'—':number(rows.length-any);
   donut('riskDonut',[{label:'ระบุเข้าข่ายอย่างน้อย 1 กลุ่ม',count:any,color:'#e5505a'},{label:'ไม่ได้ระบุเข้าข่าย',count:rows.length-any,color:'#01b287'}],'รายการ');
-  const supports=datasets.filter(d=>!['business','estate'].includes(d.id));donut('supportDonut',supports.map((d,i)=>({label:d.label,count:visibleRows(d).length,color:['#854c9e','#e5505a','#ff9f1c','#01b287','#0a2239','#854c9e'][i]})),'จุดสนับสนุน');
+  renderOperatingZones();
   const byEstate=new Map();rows.forEach(r=>{const key=normalize(r.estate);if(!byEstate.has(key))byEstate.set(key,{name:r.estate,total:0,counts:[0,0,0]});const e=byEstate.get(key);e.total++;riskFields.forEach((f,i)=>{if(flagged(r.attrs[f.field]))e.counts[i]++})});
   const ranked=[...byEstate.values()].sort((a,b)=>Math.max(...b.counts)-Math.max(...a.counts)).slice(0,8),max=Math.max(1,...ranked.flatMap(e=>e.counts));$('riskBars').replaceChildren();$('matrixBody').replaceChildren();
   ranked.forEach(e=>{const row=el('div',null,'bar-row');row.append(el('span',e.name));const bars=el('div',null,'bar-tracks');riskFields.forEach((f,i)=>{const line=el('div',null,'bar-line'),track=el('div',null,'bar-track'),fill=el('i');fill.style.width=e.counts[i]/max*100+'%';fill.style.background=f.color;track.append(fill);line.append(track,el('small',number(e.counts[i])));bars.append(line)});row.append(bars);$('riskBars').append(row);
@@ -49,6 +50,28 @@
   if(business.status==='error'){['riskDonut','riskBars'].forEach(id=>$(id).replaceChildren(el('p','ไม่สามารถโหลดข้อมูลความเสี่ยงผู้ประกอบการ กรุณาลองโหลดใหม่','empty')));}
   applyMapFilters();
  }
+
+ function renderOperatingZones(){
+  const host=$('operatingZoneDonut');if(!host)return;
+  if(operatingZoneError){host.replaceChildren(el('p','โหลดข้อมูลเขตประกอบการไม่สำเร็จ กรุณารีเฟรชหน้า','empty'));return;}
+  if(!operatingZoneRows){host.replaceChildren(el('p','กำลังโหลดเขตประกอบการ…','empty'));return;}
+  const counts=new Map();
+  operatingZoneRows.filter(r=>!selected.estate||normalize(r.estate)===selected.estate).forEach(r=>counts.set(r.zone,(counts.get(r.zone)||0)+r.count));
+  const colors=['#8B1E2D','#4F7D32','#F5B52E','#4C2365','#248BC1','#E96A60','#55B7A4','#CA78AD','#879A3A','#A36C44','#999999','#355980'];
+  const entries=[...counts].sort((a,b)=>b[1]-a[1]).map(([label,count],i)=>({label,count,color:colors[i%colors.length]}));
+  if(!entries.length){host.replaceChildren(el('p','ไม่พบเขตประกอบการในพื้นที่ที่เลือก','empty'));return;}
+  donut('operatingZoneDonut',entries,'รายการ');
+ }
+ async function loadOperatingZones(){
+  try{
+   const params=new URLSearchParams({f:'json',where:'ชื่อบริษัทภาษาไทย IS NOT NULL',groupByFieldsForStatistics:'นิคมอุตสาหกรรม,เขตประกอบการ',outStatistics:JSON.stringify([{statisticType:'count',onStatisticField:'OBJECTID',outStatisticFieldName:'record_count'}]),returnGeometry:'false',resultRecordCount:'2000'});
+   const result=await json(base+'e_PP/FeatureServer/0/query',params);
+   if(result.exceededTransferLimit||!Array.isArray(result.features))throw Error('Incomplete zone statistics');
+   operatingZoneRows=result.features.map(f=>({estate:String(f.attributes['นิคมอุตสาหกรรม']||'—'),zone:String(f.attributes['เขตประกอบการ']||'ไม่ระบุเขตประกอบการ').trim(),count:Number(f.attributes.record_count)}));
+   if(!operatingZoneRows.every(r=>Number.isInteger(r.count)&&r.count>=0))throw Error('Invalid zone counts');
+  }catch(e){operatingZoneError=e.message;console.warn('Operating zone statistics',e);}schedule();
+ }
+
  function schedule(){clearTimeout(renderTimer);renderTimer=setTimeout(render,120)}
  function applyMapFilters(){if(fallbackView&&fallbackView.refreshData)fallbackView.refreshData();datasets.forEach(d=>{if(!d.layer)return;d.layer.visible=selected.type?selected.type===d.id:d.defaultVisibility!==false;if(selected.risk&&d.id!=='business')d.layer.visible=false;const lv=layerViews[d.id];if(lv){lv.filter=(selected.estate||selected.query||selected.risk)?{objectIds:visibleRows(d).map(r=>r.id).concat([-1])}:null;}});}
  function changed(){selected.estate=$('estate').value;selected.type=$('type').value;selected.risk=$('risk').value;selected.query=normalize($('search').value);render();}
@@ -78,6 +101,7 @@ $('searchButton').onclick=()=>{clearTimeout(searchTimer);changed();zoomMatches(t
  $('reset').onclick=()=>{clearTimeout(searchTimer);pendingZoom=null;selectedItem=null;if(fallbackHighlight&&fallbackView){fallbackView.removeLayer(fallbackHighlight);fallbackHighlight=null;}['estate','type','risk','search'].forEach(id=>$(id).value='');changed();if(fallbackView){if(fallbackInitialBounds)fallbackView.fitBounds(fallbackInitialBounds);else fallbackView.setView([14,101],6);}else if(view)view.goTo(initialViewpoint||{center:[101,14],zoom:6}).catch(()=>{});};
  $('refresh').onclick=()=>location.reload();$('basemap').onchange=()=>{if(map)map.basemap=$('basemap').value};
  document.querySelectorAll('.nav-tab').forEach(button=>button.onclick=()=>{document.querySelectorAll('.nav-tab').forEach(b=>b.classList.toggle('active',b===button));const page=button.dataset.page;$('riskDashboard').hidden=page!=='risk';$('otherPage').hidden=page==='risk';if(page!=='risk'){const paths={flood:'./flood-report.html?v=20261007-plans54-mobile3',drought:'./drought.html',pm25:'./pm25.html'};if($('otherFrame').getAttribute('src')!==paths[page])$('otherFrame').src=paths[page];}});
+ loadOperatingZones();
  window.addEventListener('ieat-dss-chemical-ready',schedule);
  render();(async()=>{let next=0;async function worker(){while(next<datasets.length)await load(datasets[next++]);}await Promise.allSettled([worker(),worker(),worker()]);})();
 
