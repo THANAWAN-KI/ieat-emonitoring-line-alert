@@ -20,6 +20,7 @@
  const flagged=v=>String(v||'').trim()==='เข้าข่าย';
  let operatingZoneRows=null,operatingZoneError='';
  let pendingCardZoom=null,cardZoomRequest=0;
+ let lastMapFilterKey='';
  const selected={estate:'',type:'',risk:'',query:''};let view,map,layerViews={},renderTimer,active=null,selectedItem=null,fallbackView=null,fallbackHighlight=null,initialViewpoint=null,fallbackInitialBounds=null,pendingZoom=null,mapReady=false;
  function el(tag,text,cls){const n=document.createElement(tag);if(text!=null)n.textContent=text;if(cls)n.className=cls;return n;}
  function filterRow(r,d,includeType=true){return (!selected.estate||normalize(r.estate)===selected.estate)&&(!includeType||!selected.type||d.id===selected.type)&&(!selected.risk||(d.id==='business'&&flagged(r.attrs[selected.risk])))&&(!selected.query||normalize(r.name+' '+r.estate+' '+r.registration).includes(selected.query));}
@@ -71,7 +72,7 @@
  }
 
  function schedule(){clearTimeout(renderTimer);renderTimer=setTimeout(render,120)}
- function applyMapFilters(){if(fallbackView&&fallbackView.refreshData)fallbackView.refreshData();datasets.forEach(d=>{if(!d.layer)return;d.layer.visible=selected.type?selected.type===d.id:d.defaultVisibility!==false;if(selected.risk&&d.id!=='business')d.layer.visible=false;const lv=layerViews[d.id];if(lv){lv.filter=(selected.estate||selected.query||selected.risk)?{objectIds:visibleRows(d).map(r=>r.id).concat([-1])}:null;}});}
+ function applyMapFilters(){if(fallbackView&&fallbackView.refreshData){const key=JSON.stringify([selected.estate,selected.type,selected.risk,selected.query,(selected.estate||selected.risk||selected.query)?datasets.map(d=>[d.id,d.rows.length,d.status]):null]);if(key!==lastMapFilterKey){lastMapFilterKey=key;fallbackView.refreshData();}}datasets.forEach(d=>{if(!d.layer)return;d.layer.visible=selected.type?selected.type===d.id:d.defaultVisibility!==false;if(selected.risk&&d.id!=='business')d.layer.visible=false;const lv=layerViews[d.id];if(lv){lv.filter=(selected.estate||selected.query||selected.risk)?{objectIds:visibleRows(d).map(r=>r.id).concat([-1])}:null;}});}
 
  async function zoomCardData(id){
   const d=datasets.find(item=>item.id===id);if(!d)return;
@@ -161,25 +162,29 @@ $('searchButton').onclick=()=>{clearTimeout(searchTimer);changed();zoomMatches(t
   return L.circleMarker(latlng,{radius:5,color:'#fff',weight:1,fillColor:style.fillColor,fillOpacity:1});
  }
 
- async function queryAllMapFeatures(url,params){
+
+ async function queryAllMapFeatures(url,params,onBatch,isCurrent=()=>true){
   const idParams=new URLSearchParams(params);idParams.set('f','json');idParams.set('returnIdsOnly','true');idParams.set('returnGeometry','false');idParams.delete('outFields');idParams.delete('resultRecordCount');
-  const idData=await json(url+'/query',idParams);
+  const idData=await json(url+'/query',idParams);if(!isCurrent())throw Error('Map view changed');
   if(idData.exceededTransferLimit)throw Error('Incomplete object ID response');
   const ids=idData.objectIds||[];if(!Array.isArray(ids))throw Error('Invalid object IDs');
   const field=idData.objectIdFieldName||'OBJECTID',features=new Map();
   async function fetchBatch(batch){
+   if(!isCurrent())return;
    const page=new URLSearchParams(params);page.set('f','geojson');page.set('objectIds',batch.join(','));page.set('returnGeometry','true');page.set('resultRecordCount',String(batch.length));page.delete('returnIdsOnly');
-   const data=await json(url+'/query',page),rows=data.type==='FeatureCollection'?data.features:data.type==='Feature'?[data]:null;
+   const data=await json(url+'/query',page);if(!isCurrent())return;
+   const rows=data.type==='FeatureCollection'?data.features:data.type==='Feature'?[data]:null;
    if(!Array.isArray(rows))throw Error('Invalid feature collection');
    if(data.exceededTransferLimit||data.properties?.exceededTransferLimit||rows.length<batch.length){if(batch.length===1)throw Error('Missing feature geometry');const mid=Math.ceil(batch.length/2);await fetchBatch(batch.slice(0,mid));await fetchBatch(batch.slice(mid));return;}
-   for(const feature of rows){const id=feature.properties?.[field]??feature.id;if(id==null)throw Error('Missing feature ID');features.set(String(id),feature);}
+   const fresh=[];for(const feature of rows){const id=feature.properties?.[field]??feature.id;if(id==null)throw Error('Missing feature ID');if(!features.has(String(id))){features.set(String(id),feature);fresh.push(feature);}}
+   if(onBatch&&fresh.length)onBatch(fresh,features.size,ids.length);
   }
-  let next=0;async function worker(){while(next<ids.length){const start=next;next+=100;await fetchBatch(ids.slice(start,start+100));}}
+  let next=0;async function worker(){while(next<ids.length&&isCurrent()){const start=next;next+=100;await fetchBatch(ids.slice(start,start+100));}}
   await Promise.all([worker(),worker(),worker()]);
+  if(!isCurrent())throw Error('Map view changed');
   if(features.size!==new Set(ids.map(String)).size)throw Error('Incomplete map features');
   return {type:'FeatureCollection',features:[...features.values()]};
  }
-
  async function fallbackMap(){
   if(fallbackView)return;
   try{
@@ -211,24 +216,12 @@ $('searchButton').onclick=()=>{clearTimeout(searchTimer);changed();zoomMatches(t
    const groups={},canonical=u=>decodeURI(u||'').replace(/\/$/,'').toLowerCase();
    for(const def of definitions){def.group=L.layerGroup();groups[def.title]=def.group;if(def.shown)def.group.addTo(fallbackView);def.dataset=datasets.find(d=>canonical(base+encodeURI(d.path))===canonical(def.url));def.contextParcel=/\/e_pp\/featureserver\/0$/i.test(canonical(def.url));}
    const layerControl=L.control.layers({},groups,{collapsed:true,position:'topright'}).addTo(fallbackView);layerControl.getContainer().setAttribute('aria-label','เลือกชั้นข้อมูลบนแผนที่');layerControl.getContainer().title='เลือกชั้นข้อมูล';
-   let busy=false,pending=false;const lastErrors=new Set();
-   async function draw(){
-    if(busy){pending=true;return}busy=true;pending=false;lastErrors.clear();let displayedTotal=0;const bounds=fallbackView.getBounds();$('mapStatus').textContent='กำลังโหลดข้อมูลในขอบเขตแผนที่ให้ครบ…';
-    for(const def of definitions){const group=def.group;if(!fallbackView.hasLayer(group))continue;const d=def.dataset;
-     if(selected.type&&!def.contextParcel&&(!d||selected.type!==d.id)){group.clearLayers();continue;}if(selected.risk&&!def.contextParcel&&d?.id!=='business'){group.clearLayers();continue;}
-     const filtered=selected.estate||selected.query||selected.risk;
-     if(filtered&&!d&&!def.contextParcel){group.clearLayers();continue;}
-     const ids=d?visibleRows(d).map(r=>r.id):[];if(filtered&&d&&!ids.length){group.clearLayers();continue;}
-     try{
-      let result;
-      if(def.layerType==='GeoJSON'){result=await json(def.url);}
-      else{
-       const params=new URLSearchParams({f:'geojson',where:[def.layerDefinition?.definitionExpression,d?.where].filter(Boolean).map(clause=>'('+clause+')').join(' AND ')||'1=1',outFields:'*',returnGeometry:'true',outSR:'4326',geometry:JSON.stringify({xmin:bounds.getWest(),ymin:bounds.getSouth(),xmax:bounds.getEast(),ymax:bounds.getNorth(),spatialReference:{wkid:4326}}),geometryType:'esriGeometryEnvelope',inSR:'4326',spatialRel:'esriSpatialRelIntersects'});
-       if(filtered&&d)params.set('objectIds',ids.join(','));
-       result=await queryAllMapFeatures(def.url,params);
-      }
+
+   let busy=false,pending=false,drawGeneration=0;const lastErrors=new Set();
+   const priority=def=>def.dataset?.id==='estate'?0:def.contextParcel?1:({hospital:2,fire:3,police:4,hydrant:5,cctv:6,community:7,business:8}[def.dataset?.id]??(def.layerType==='GeoJSON'?20:10));
+   function paintMapFeatures(def,result,group,replace=true){const d=def.dataset;
       const features=result.type==='FeatureCollection'?result.features:result.type==='Feature'?[result]:[];
-      displayedTotal+=features.length;const staging=L.layerGroup();
+      const staging=L.layerGroup();
       if(features.length>40&&fallbackView.getZoom()<18){
        const buckets=new Map(),keep=[];
        for(const feature of features){if(feature.geometry?.type!=='Point'){keep.push(feature);continue;}const coords=feature.geometry.coordinates,p=fallbackView.latLngToLayerPoint([coords[1],coords[0]]),key=Math.floor(p.x/52)+':'+Math.floor(p.y/52);if(!buckets.has(key))buckets.set(key,[]);buckets.get(key).push(feature);}
@@ -245,14 +238,43 @@ $('searchButton').onclick=()=>{clearTimeout(searchTimer);changed();zoomMatches(t
        box.append(el('b',name),el('p',def.title));if(d)box.append(el('p',String(pick(a,d.estates))));riskFields.forEach(f=>{if(flagged(a[f.field]))box.append(el('p',f.label+' · เข้าข่าย'))});layer.bindPopup(box);
        if(d?.id==='estate'&&fallbackView.getZoom()>=10)layer.bindTooltip(name,{permanent:true,direction:'top',className:'estate-map-label'});
       }}).addTo(staging);
-      group.clearLayers();group.addLayer(staging);
-     }catch(e){lastErrors.add(def.title);console.warn('Web Map: '+def.title,e.message);}
-    }
-    busy=false;$('mapStatus').textContent='แสดง '+number(displayedTotal)+' รายการในขอบเขตแผนที่'+(lastErrors.size?' · โหลดไม่สำเร็จ: '+[...lastErrors].join(', '):' · โหลดครบแล้ว');if(pending)draw();
+      if(replace)group.clearLayers();group.addLayer(staging);
    }
-   let debounce;fallbackView.refreshData=()=>{clearTimeout(debounce);debounce=setTimeout(draw,500)};
+   async function draw(){
+    if(busy){pending=true;return;}busy=true;pending=false;lastErrors.clear();
+    const generation=drawGeneration,isCurrent=()=>generation===drawGeneration,bounds=fallbackView.getBounds(),loaded=new Map();
+    function status(done=false){if(!isCurrent())return;const count=[...loaded.values()].reduce((a,b)=>a+b,0);$('mapStatus').textContent=(done?'แสดง ':'กำลังโหลด · แสดงแล้ว ')+number(count)+' รายการ'+(lastErrors.size?' · บางชั้นข้อมูลเชื่อมต่อไม่ได้':'');}
+    status();
+    const ordered=[...definitions].sort((a,b)=>priority(a)-priority(b));
+    async function drawLayer(def){
+     if(!isCurrent())return;
+     const group=def.group,d=def.dataset;if(!fallbackView.hasLayer(group))return;
+     if(selected.type&&!def.contextParcel&&(!d||selected.type!==d.id)){group.clearLayers();return;}
+     if(selected.risk&&!def.contextParcel&&d?.id!=='business'){group.clearLayers();return;}
+     const filtered=selected.estate||selected.query||selected.risk;
+     if(filtered&&!d&&!def.contextParcel){group.clearLayers();return;}
+     const ids=d?visibleRows(d).map(r=>r.id):[];if(filtered&&d&&!ids.length){group.clearLayers();return;}
+     try{
+      let result;
+      if(def.layerType==='GeoJSON'){
+       const response=await fetch(def.url,{signal:AbortSignal.timeout(10000)});if(!response.ok)throw Error('HTTP '+response.status);result=await response.json();
+      }else{
+       const params=new URLSearchParams({f:'geojson',where:[def.layerDefinition?.definitionExpression,d?.where].filter(Boolean).map(clause=>'('+clause+')').join(' AND ')||'1=1',outFields:'*',returnGeometry:'true',outSR:'4326',geometry:JSON.stringify({xmin:bounds.getWest(),ymin:bounds.getSouth(),xmax:bounds.getEast(),ymax:bounds.getNorth(),spatialReference:{wkid:4326}}),geometryType:'esriGeometryEnvelope',inSR:'4326',spatialRel:'esriSpatialRelIntersects'});
+       if(filtered&&d)params.set('objectIds',ids.join(','));
+       let first=true;
+       result=await queryAllMapFeatures(def.url,params,(features,count)=>{if(!isCurrent())return;paintMapFeatures(def,{type:'FeatureCollection',features},group,first);first=false;loaded.set(def,count);status();},isCurrent);
+      }
+      if(!isCurrent()||!fallbackView.hasLayer(group))return;
+      paintMapFeatures(def,result,group,true);loaded.set(def,result.type==='FeatureCollection'?result.features.length:result.type==='Feature'?1:0);status();
+     }catch(error){if(!isCurrent())return;lastErrors.add(def.title);console.warn('Web Map: '+def.title,error.message);status();}
+    }
+    try{let next=0;async function worker(){while(next<ordered.length&&isCurrent()){const def=ordered[next++];await drawLayer(def);}}await Promise.allSettled([worker(),worker(),worker(),worker()]);}
+    finally{busy=false;status(true);if(pending||!isCurrent())draw();}
+   }
+   let debounce;
+   fallbackView.refreshData=()=>{drawGeneration++;clearTimeout(debounce);debounce=setTimeout(draw,250);};
    $('basemap').onchange=changeBasemap;
-   fallbackView.on('moveend overlayadd overlayremove',()=>{clearTimeout(debounce);debounce=setTimeout(draw,400)});
+   fallbackView.on('moveend overlayadd overlayremove',()=>{drawGeneration++;clearTimeout(debounce);debounce=setTimeout(draw,250);});
    mapReady=true;if(pendingCardZoom){const id=pendingCardZoom;pendingCardZoom=null;zoomCardData(id);}if(pendingZoom){const p=pendingZoom;pendingZoom=null;zoomRow(p.d,p.r,p.button,p.reveal);}draw();
   }catch(e){$('mapStatus').textContent='ไม่สามารถโหลด Web Map กนอ. ได้ กรุณาลองรีเฟรช';console.warn(e);}
  }
