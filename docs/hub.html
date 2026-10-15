@@ -82,7 +82,7 @@
 
 <section class="panel chemical-details-panel" aria-label="รายการสารเคมี">
 
-<div class="chemical-detail-filters"><label for="chemicalEstate">นิคมอุตสาหกรรม<select id="chemicalEstate" disabled><option value="">ทุกนิคมอุตสาหกรรม</option></select></label><label for="chemicalSearch">ค้นหาโรงงาน / สารเคมี / CAS No.<input id="chemicalSearch" type="search" placeholder="พิมพ์ชื่อโรงงาน สารเคมี หรือเลข CAS" disabled></label></div>
+<div class="chemical-detail-filters"><label for="chemicalEstate">นิคมอุตสาหกรรม<select id="chemicalEstate" disabled><option value="">ทุกนิคมอุตสาหกรรม</option></select></label><label for="chemicalSearch">ค้นหาบริษัทไทย–อังกฤษ / ทะเบียนเดิม–ใหม่ / สารเคมี / CAS No.<input id="chemicalSearch" type="search" placeholder="พิมพ์ชื่อโรงงาน สารเคมี หรือเลข CAS" disabled></label></div>
 <p id="chemicalDetailStatus" class="panel-note" role="status">กำลังโหลดรายละเอียดสารเคมี…</p>
 <div class="chemical-detail-scroll"><table class="chemical-detail-table"><thead><tr><th scope="col">ลำดับ</th><th scope="col">ชื่อโรงงาน</th><th scope="col">นิคมอุตสาหกรรม</th><th scope="col">สารเคมี</th><th scope="col">CAS No.</th><th scope="col">UN No.</th><th scope="col">ปริมาณ</th><th scope="col">หน่วย</th></tr></thead><tbody id="chemicalDetailBody"></tbody></table></div>
 <div class="chemical-detail-pages"><button id="chemicalPrev" type="button" disabled>← ก่อนหน้า</button><span id="chemicalPage" aria-live="polite"></span><button id="chemicalNext" type="button" disabled>ถัดไป →</button></div>
@@ -108,7 +108,7 @@
  const sub=document.createElement('p');sub.textContent='เลือกประเภทเหตุและค้นหาบริษัท เพื่อจัดทำรายงานในหน้านี้';
  heading.append(title,sub);section.prepend(heading);
  frame.loading='lazy';frame.style.height='1800px';
- function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261015-clean-form');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
+ function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261015-emergency-briefing');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
  frame.src=reportUrl();
  link.addEventListener('click',event=>{event.preventDefault();const url=reportUrl();if(frame.src!==url)frame.src=url;section.scrollIntoView({behavior:'smooth',block:'start'});});
  window.returnToRiskDashboard=function(){document.getElementById('otherPage').hidden=true;dashboard.hidden=false;document.querySelectorAll('.nav-tab').forEach(tab=>tab.classList.toggle('active',tab.dataset.page==='risk'));document.getElementById('riskMapSection')?.scrollIntoView({behavior:'smooth',block:'start'});window.dispatchEvent(new Event('resize'))};
@@ -478,7 +478,7 @@ html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader .disaster-cl
 .chemical-detail-pages button:disabled{opacity:.4;cursor:default}
 @media(max-width:760px){#riskDashboard .chemical-details-panel{padding:14px}.chemical-detail-filters{grid-template-columns:1fr}}
 </style>
-<script src="./dss-chemical-details-20261015.js?v=1"></script>
+<script src="./dss-chemical-details-20261015.js?v=20261015-unified"></script>
 <style id="three-risk-ranking-cards">
 #riskDashboard .risk-ranking-section{margin:22px 0}
 #riskDashboard .risk-ranking-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
@@ -651,6 +651,61 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
 .inline-report-heading h2{margin:0;font-size:21px;color:#111;font-weight:600}
 .inline-report-heading p{margin:6px 0 0;font-size:14px;color:#555}
 #emergencyReportFrame.other-frame{display:block;width:100%;border:0;min-height:800px;max-height:none;border-radius:0 0 18px 18px;background:#f7f8fa}
-</style></body></html>
+</style>
+<style id="unified-emergency-dashboard-layout">
+#riskDashboard > #riskMapSection{position:static!important;width:100%!important;max-width:none!important;grid-column:1/-1;margin-top:24px!important}
+#riskDashboard > #riskMapSection > .panel{position:static!important;border:0!important;border-radius:22px!important;overflow:hidden;box-shadow:0 5px 24px #27394b08}
+#riskDashboard > #riskMapSection #map{height:650px!important;min-height:650px!important;border-radius:0 0 20px 20px}
+#riskDashboard .workspace-grid{grid-template-columns:minmax(0,1fr)!important}
+#unifiedCompanyResults{display:grid;gap:8px;max-height:340px;overflow:auto;margin:10px 0 16px}
+.unified-company-status{font-size:12px;color:#657080;margin:4px}
+.unified-company-option{display:flex;flex-direction:column;gap:5px;text-align:left;border:0;background:#f4f7f1;border-radius:12px;padding:12px 14px;color:#111;font:inherit;cursor:pointer}
+.unified-company-option b{font-size:14px;font-weight:600}.unified-company-option span{font-size:12px;color:#657080;line-height:1.6}
+.unified-company-option:hover{background:#e9f1e3}
+@media(max-width:700px){#riskDashboard > #riskMapSection #map{height:440px!important;min-height:440px!important}}
+</style>
+<script id="unified-emergency-map-bridge">
+(function(){
+ const dashboard=document.getElementById('riskDashboard'),mapSection=document.getElementById('riskMapSection'),frame=document.getElementById('emergencyReportFrame'),search=document.getElementById('chemicalSearch');
+ dashboard.append(mapSection);
+ search.placeholder='ชื่อไทย / English name / เลขทะเบียน / สารเคมี / CAS';
+ let queuedCompany=null,pendingIncident=null,incidentLayer=null,focusLayer=null;
+ window.addEventListener('ieat-unified-company-select',event=>{
+  queuedCompany=event.detail.feature;
+  frame.contentWindow?.postMessage({type:'dss:select-epp',feature:queuedCompany},location.origin);
+  document.getElementById('emergencyReportPage').scrollIntoView({behavior:'smooth',block:'start'});
+ });
+ frame.addEventListener('load',()=>{if(queuedCompany)frame.contentWindow.postMessage({type:'dss:select-epp',feature:queuedCompany},location.origin)});
+ function showIncident(data){
+  const map=window.ieatSupportMap;if(!map||!window.L){pendingIncident=data;return}
+  if(![data.lat,data.lng].every(Number.isFinite))return;
+  if(incidentLayer)map.removeLayer(incidentLayer);incidentLayer=L.layerGroup().addTo(map);
+  const label=document.createElement('div');label.textContent=data.name;
+  L.marker([data.lat,data.lng],{zIndexOffset:2000}).bindPopup(label).addTo(incidentLayer);
+  (data.radii||[]).filter(r=>Number.isFinite(r)&&r>0&&r<=50).forEach((radius,i)=>L.circle([data.lat,data.lng],{radius:radius*1000,color:['#4F7D32','#F5B52E','#D9361E'][i%3],weight:2,fillOpacity:.035}).addTo(incidentLayer));
+  map.invalidateSize();map.setView([data.lat,data.lng],15,{animate:false});pendingIncident=null;
+ }
+ window.addEventListener('ieat-support-map-ready',()=>{if(pendingIncident)showIncident(pendingIncident)});
+ window.addEventListener('message',event=>{
+  if(event.origin!==location.origin||event.source!==frame.contentWindow)return;
+  if(event.data?.type==='dss:incident')showIncident(event.data);
+  if(event.data?.type==='dss:map-overview')mapSection.scrollIntoView({behavior:'smooth',block:'start'});
+  if(event.data?.type==='dss:support'){
+   const item=event.data.item,map=window.ieatSupportMap;if(!map||![item?.lat,item?.lng].every(Number.isFinite))return;
+   if(focusLayer)map.removeLayer(focusLayer);
+   const text=document.createElement('div');text.textContent=item.name+' · '+Number(item.distance).toFixed(2)+' กม.'+(item.phone?' · '+item.phone:'');
+   focusLayer=L.marker([item.lat,item.lng],{zIndexOffset:2500}).addTo(map).bindPopup(text).openPopup();map.setView([item.lat,item.lng],17);mapSection.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+ });
+ window.ieatCaptureReportMap=async renderer=>{
+  const map=window.ieatSupportMap;if(!map)return null;map.invalidateSize();
+  const container=document.getElementById('map');
+  await Promise.allSettled(Array.from(container.querySelectorAll('img.leaflet-tile')).filter(img=>!img.complete).map(img=>new Promise(resolve=>{img.addEventListener('load',resolve,{once:true});img.addEventListener('error',resolve,{once:true});setTimeout(resolve,3000)})));
+  const canvas=await renderer(container,{backgroundColor:'#f3f6f8',scale:2,useCORS:true,allowTaint:false,logging:false,ignoreElements:element=>element.classList?.contains('leaflet-control-container')});
+  return canvas.toDataURL('image/png');
+ };
+})();
+</script>
+</body></html>
 
 
