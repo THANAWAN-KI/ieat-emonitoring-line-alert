@@ -1542,6 +1542,7 @@ async function downloadReportPng(){
     await document.fonts.ready;
     if(typeof html2canvas!=='function')throw new Error('ไม่สามารถโหลดเครื่องมือบันทึกภาพได้');
     const report=document.getElementById('report');
+    const sharedMapImage=new URLSearchParams(location.search).get('embedded')==='dashboard'&&typeof parent.ieatCaptureReportMap==='function'?await parent.ieatCaptureReportMap(html2canvas):null;
     const exportIconSelector='.dss-support-symbol,.dss-support-cluster';
     const exportIcons=await Promise.all(Array.from(report.querySelectorAll(exportIconSelector)).map(async symbol=>{
       const cluster=symbol.classList.contains('dss-support-cluster'),bounds=symbol.getBoundingClientRect(),width=Math.max(1,bounds.width||22),height=Math.max(1,bounds.height||22);
@@ -1562,6 +1563,11 @@ async function downloadReportPng(){
         clonedDocument.querySelectorAll('#supportList,[data-export-exclude]').forEach(element=>element.remove());
         const clonedMap=clonedDocument.querySelector('#report #map');
         if(!clonedMap)return;
+        if(sharedMapImage){
+          const box=clonedMap.closest('.mapbox');box.style.setProperty('position','static','important');box.style.setProperty('left','auto','important');box.style.setProperty('width','100%','important');
+          clonedMap.style.setProperty('height','480px','important');clonedMap.replaceChildren();
+          const image=clonedDocument.createElement('img');image.src=sharedMapImage;image.style.cssText='display:block!important;width:100%!important;height:100%!important;object-fit:contain!important';clonedMap.append(image);return;
+        }
         const liveMap=clonedMap.querySelector('#dssLiveMap');
         if(liveMap){
           if(bufferExportImage){
@@ -2616,6 +2622,75 @@ html body #dssOptionalDetails[open] > #form,html body #dssNearbyDetails[open] > 
  document.getElementById('factoryLookupBtn').textContent='ค้นหาบริษัท';
  document.getElementById('dssOptionalDetails').querySelector('summary').textContent='รายละเอียดเหตุและตั้งค่ารายงาน';
  document.getElementById('dssNearbyDetails').querySelector('summary').textContent='ตำแหน่งสนับสนุนเพิ่มเติม';
+})();
+</script>
+
+<style id="dss-emergency-briefing-design">
+html body #report{background:#f7f9fc!important;padding:22px!important;box-shadow:none!important}
+html body #report .report-header{background:#fff;border:0!important;border-radius:18px;padding:22px!important;margin-bottom:18px!important}
+#emergencyBriefing{margin-bottom:22px}
+.dss-brief-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-bottom:16px}
+.dss-brief-kpi{background:#fff;border-radius:18px;padding:22px;display:flex;align-items:center;gap:14px;box-shadow:0 4px 20px #27394b04}
+.dss-brief-kpi i{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:14px;background:#edf4e8;color:#4F7D32;font-style:normal;font-size:21px;flex:none}
+.dss-brief-kpi:nth-child(2) i{background:#fff5d9;color:#a96c08}.dss-brief-kpi:nth-child(3) i{background:#fcece8;color:#D9361E}
+.dss-brief-kpi strong{font-size:27px;font-weight:600;color:#8B1E2D;display:block;line-height:1.3}
+.dss-brief-kpi small{font-size:13px;color:#727984}
+.dss-brief-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) 1.1fr;gap:16px}
+.dss-brief-list,.dss-brief-chart{background:#fff;border-radius:18px;padding:18px;min-width:0;box-shadow:0 4px 20px #27394b04}
+.dss-brief-list h3,.dss-brief-chart h3{font-size:15px;line-height:1.6;color:#252d38;margin:0 0 14px}
+.dss-brief-list button{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;border:0;border-radius:10px;background:#f7f8fc;color:#303844;text-align:left;padding:10px;margin-bottom:8px;font-size:12px;line-height:1.6}
+.dss-brief-list button span{min-width:0;overflow-wrap:anywhere}
+.dss-brief-list button b{white-space:nowrap;background:#e8f0e1;color:#3e6229;border-radius:8px;padding:3px 7px;font-size:12px;font-weight:500}
+.dss-brief-list:nth-child(2) button b{background:#fff0c8;color:#825600}.dss-brief-list:nth-child(3) button b{background:#fde5df;color:#a02d1b}
+.dss-brief-empty{font-size:12px;color:#8b929c;line-height:1.6}
+.dss-brief-donut{width:128px;height:128px;margin:12px auto 18px;border-radius:50%;display:grid;place-items:center;background:#edf0f4}
+.dss-brief-donut span{display:grid;place-items:center;width:88px;height:88px;background:#fff;border-radius:50%;font-size:24px;font-weight:600;color:#8B1E2D}
+.dss-brief-legend{display:grid;gap:7px}.dss-brief-legend div{display:flex;align-items:center;gap:6px;font-size:11px;color:#606875}.dss-brief-legend i{width:8px;height:8px;border-radius:50%;flex:none}.dss-brief-legend b{margin-left:auto;color:#202833;font-size:12px}
+html body #report .dss-report-section{background:#fff;border-radius:18px;padding:18px!important;margin-bottom:18px!important}
+html body #report .section-title{background:transparent!important;padding:0 0 14px!important;margin:0!important}
+html body #report #supportGrid{display:none!important}
+html body.dss-inline-dashboard #report .mapbox{position:absolute!important;left:-100000px!important;width:1100px!important;top:0!important}
+.dss-shared-map-link{display:block;width:100%;padding:14px 18px;background:#f3f7ee;border:0;border-radius:12px;color:#4F7D32;font-size:14px;text-align:left;cursor:pointer}
+@media(max-width:1050px){.dss-brief-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){.dss-brief-kpis{grid-template-columns:minmax(0,1fr);gap:10px}.dss-brief-kpi{padding:16px}.dss-brief-grid{grid-template-columns:minmax(0,1fr)}html body #report{padding:10px!important}}
+</style>
+<script id="dss-emergency-briefing-script">
+(function(){
+ const embedded=new URLSearchParams(location.search).get('embedded')==='dashboard'&&parent!==window;
+ const report=document.getElementById('report'),brief=document.createElement('section');brief.id='emergencyBriefing';
+ const kpis=document.createElement('div');kpis.className='dss-brief-kpis';
+ const metrics=[['▤','รายการสารเคมีในคลัง'],['⌖','หน่วยช่วยเหลือใกล้ที่สุด'],['◉','จุดสนับสนุนที่โหลดได้']];
+ const values=metrics.map(([symbol,label])=>{const card=document.createElement('article'),icon=document.createElement('i'),text=document.createElement('div'),value=document.createElement('strong'),caption=document.createElement('small');card.className='dss-brief-kpi';icon.textContent=symbol;caption.textContent=label;value.textContent='—';text.append(value,caption);card.append(icon,text);kpis.append(card);return value});
+ const grid=document.createElement('div');grid.className='dss-brief-grid';
+ const groups=[['ช่วยเหลือและระงับเหตุ',['hospital','fire','police']],['น้ำดับเพลิงและเฝ้าระวัง',['hydrant','cctv']],['ชุมชนใกล้จุดเกิดเหตุ',['community']]];
+ const lists=groups.map(([title])=>{const card=document.createElement('article'),heading=document.createElement('h3'),list=document.createElement('div');card.className='dss-brief-list';heading.textContent=title;card.append(heading,list);grid.append(card);return list});
+ const chart=document.createElement('article'),chartTitle=document.createElement('h3'),donut=document.createElement('div'),total=document.createElement('span'),legend=document.createElement('div');
+ chart.className='dss-brief-chart';chartTitle.textContent='จุดสนับสนุนแยกประเภท';donut.className='dss-brief-donut';legend.className='dss-brief-legend';donut.append(total);chart.append(chartTitle,donut,legend);grid.append(chart);brief.append(kpis,grid);report.querySelector('.report-header').after(brief);
+ const types=['hospital','fire','police','hydrant','cctv','community'],colors=['#4F7D32','#FFD16A','#F5B52E','#D9361E','#7F5D99','#457B9D'];
+ let mapSignature='';
+ function update(){
+  const selected=state.company&&state.company!==defaults.company,points=selected?(state.supportLocations||[]).slice().sort((a,b)=>a.distance-b.distance):[];
+  values[0].textContent=selected?(state.hazardCatalog||[]).length.toLocaleString('th-TH'):'—';
+  const rescue=points.filter(p=>['hospital','fire','police'].includes(p.type));values[1].textContent=rescue.length?rescue[0].distance.toFixed(2)+' กม.':'—';values[2].textContent=selected?points.length.toLocaleString('th-TH'):'—';
+  lists.forEach((list,index)=>{list.replaceChildren();const items=points.filter(p=>groups[index][1].includes(p.type)).slice(0,5);
+   if(!items.length){const p=document.createElement('p');p.className='dss-brief-empty';p.textContent=selected?'ยังไม่มีข้อมูลตำแหน่งในกลุ่มนี้':'เลือกบริษัทเพื่อแสดงข้อมูล';list.append(p)}
+   items.forEach(item=>{const b=document.createElement('button'),name=document.createElement('span'),distance=document.createElement('b');b.type='button';name.textContent=item.name;distance.textContent=item.distance<1?Math.round(item.distance*1000)+' ม.':item.distance.toFixed(2)+' กม.';b.append(name,distance);b.addEventListener('click',()=>window.dssZoomSupport?.(item.type,item.id));list.append(b)});
+  });
+  const counts=types.map(type=>points.filter(p=>p.type===type).length),sum=counts.reduce((a,b)=>a+b,0);total.textContent=selected?String(sum):'—';let angle=0;
+  const gradient=counts.map((count,index)=>{const from=angle;angle+=sum?count/sum*360:0;return colors[index]+' '+from+'deg '+angle+'deg'});donut.style.background=sum?'conic-gradient('+gradient.join(',')+')':'#edf0f4';
+  legend.replaceChildren();types.forEach((type,index)=>{const row=document.createElement('div'),dot=document.createElement('i'),name=document.createElement('span'),count=document.createElement('b');dot.style.background=colors[index];name.textContent=supportMapTypes()[type].label;count.textContent=selected?String(counts[index]):'—';row.append(dot,name,count);legend.append(row)});
+  if(embedded&&selected&&validPoint()){const signature=JSON.stringify([state.company,state.lat,state.lng,getBufferRadii()]);if(signature!==mapSignature){mapSignature=signature;parent.postMessage({type:'dss:incident',name:state.company,lat:Number(state.lat),lng:Number(state.lng),radii:getBufferRadii()},location.origin)}}
+ }
+ const previous=render;render=function(){previous();update()};update();
+ if(embedded){
+  const link=document.createElement('button');link.type='button';link.className='dss-shared-map-link';link.textContent='ดูตำแหน่งเกิดเหตุและข้อมูลสนับสนุนบนแผนที่เดียวกัน ↓';link.onclick=()=>parent.postMessage({type:'dss:map-overview'},location.origin);document.querySelector('#dssReportMap .map-weather').before(link);
+  window.dssZoomSupport=function(type,id){const item=(state.supportLocations||[]).filter(p=>p.type===type&&(id===undefined||p.id===id)).sort((a,b)=>a.distance-b.distance)[0];if(item)parent.postMessage({type:'dss:support',item},location.origin)};
+ }
+ window.addEventListener('message',event=>{
+  if(event.origin!==location.origin||event.source!==parent||event.data?.type!=='dss:select-epp')return;
+  const feature=normalizeEppFeature(event.data.feature);delete feature.attributes.OBJECTID;
+  selectDssLookup({type:'factory',feature,name:feature.attributes.mercant_name}).catch(error=>{factoryLookupStatus.textContent='โหลดข้อมูลบริษัทไม่สำเร็จ: '+error.message});
+ });
 })();
 </script>
 </body></html>
