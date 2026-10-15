@@ -37,7 +37,7 @@ async function searchEpp(){
  try{
   const escaped=term.replace(/'/g,"''").replace(/[%_]/g,'');
   const fields=['ชื่อบริษัทภาษาไทย','ชื่อบริษัทภาษาอังกฤษ','เลขทะเบียนใหม่','เลขทะเบียนเดิม'];
-  const where="ชื่อบริษัทภาษาไทย IS NOT NULL AND ("+fields.map(field=>field+" LIKE '%"+escaped+"%'").join(' OR ')+")";
+  const where="ชื่อบริษัทภาษาไทย IS NOT NULL AND ("+fields.map(field=>"UPPER("+field+") LIKE '%"+escaped.toUpperCase()+"%'").join(' OR ')+")";
   const params=new URLSearchParams({where,outFields:'*',returnGeometry:'true',outSR:'4326',orderByFields:'OBJECTID ASC',resultRecordCount:'50',f:'json'});
   const response=await fetch(eppUrl+'?'+params,{signal:controller.signal});if(!response.ok)throw Error('HTTP '+response.status);
   const result=await response.json();if(result.error)throw Error(result.error.message);
