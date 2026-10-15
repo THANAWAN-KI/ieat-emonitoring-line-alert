@@ -2,13 +2,16 @@
 'use strict';
 const get=id=>document.getElementById(id),source=get('estate'),search=get('chemicalSearch'),estate=get('chemicalEstate'),body=get('chemicalDetailBody'),status=get('chemicalDetailStatus'),prev=get('chemicalPrev'),next=get('chemicalNext'),pageLabel=get('chemicalPage');
 const normalize=v=>String(v||'').normalize('NFKC').toLowerCase().replace(/นิคมอุตสาหกรรม|นิคมฯ|สำนักงานนิคมฯ|[\s\u200b-\u200d]/g,'').trim();
-let data=null,page=0,filtered=[],scope='',timer;
+let data=null,page=0,filtered=[],scope='',timer,eppMatches=[],eppSequence=0,eppController=null;
+const eppUrl='https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/e_PP/FeatureServer/0/query';
+const companyKey=v=>normalize(v).replace(/บริษัท|จำกัด|มหาชน|company|limited|co\.?|ltd\.?|[().,\-\/]/g,'');
+const eppBox=document.createElement('div');eppBox.id='unifiedCompanyResults';search.closest('.chemical-detail-filters').after(eppBox);
 const pageSize=25,number=n=>Number(n).toLocaleString('th-TH');
 function cell(row,text){const td=document.createElement('td');td.textContent=String(text||'—');row.append(td);}
 function render(){
  if(!data)return;
  const term=normalize(search.value),selected=scope;
- filtered=data.rows.filter(r=>{const c=data.companies[r[0]];return (!selected||normalize(c[2])===selected)&&(!term||normalize([c[0],c[1],c[2],data.names[r[1]],data.cas[r[2]],r[3]].join(' ')).includes(term));});
+ filtered=data.rows.filter(r=>{const c=data.companies[r[0]];return (!selected||normalize(c[2])===selected)&&(!term||normalize([c[0],c[1],c[2],data.names[r[1]],data.cas[r[2]],r[3]].join(' ')).includes(term)||eppMatches.some(f=>{const a=f.attributes;return companyKey(c[0])===companyKey(a['ชื่อบริษัทภาษาไทย'])||[a['เลขทะเบียนเดิม'],a['เลขทะเบียนใหม่']].filter(Boolean).some(v=>normalize(c[1])===normalize(v))}));});
  const pages=Math.max(1,Math.ceil(filtered.length/pageSize));page=Math.min(page,pages-1);
  body.replaceChildren();
  for(const [index,r] of filtered.slice(page*pageSize,(page+1)*pageSize).entries()){
@@ -24,7 +27,36 @@ function syncScope(){
  if(scope&&!Array.from(estate.options).some(o=>o.value===scope)){const o=new Option(source.selectedOptions[0]?.textContent||source.value,scope);estate.add(o);}
  estate.value=scope;page=0;render();
 }
-search.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(()=>{page=0;render();},180);});
+
+async function searchEpp(){
+ const term=search.value.trim(),sequence=++eppSequence;
+ eppController?.abort();eppMatches=[];eppBox.replaceChildren();page=0;render();
+ if(term.length<2)return;
+ const message=document.createElement('p');message.className='unified-company-status';message.textContent='กำลังค้นหาบริษัทและเลขทะเบียนจาก e_PP…';eppBox.append(message);
+ eppController=new AbortController();const controller=eppController,timeout=setTimeout(()=>controller.abort(),20000);
+ try{
+  const escaped=term.replace(/'/g,"''").replace(/[%_]/g,'');
+  const fields=['ชื่อบริษัทภาษาไทย','ชื่อบริษัทภาษาอังกฤษ','เลขทะเบียนใหม่','เลขทะเบียนเดิม'];
+  const where="ชื่อบริษัทภาษาไทย IS NOT NULL AND ("+fields.map(field=>field+" LIKE '%"+escaped+"%'").join(' OR ')+")";
+  const params=new URLSearchParams({where,outFields:'*',returnGeometry:'true',outSR:'4326',orderByFields:'OBJECTID ASC',resultRecordCount:'50',f:'json'});
+  const response=await fetch(eppUrl+'?'+params,{signal:controller.signal});if(!response.ok)throw Error('HTTP '+response.status);
+  const result=await response.json();if(result.error)throw Error(result.error.message);
+  if(sequence!==eppSequence)return;
+  eppMatches=result.features||[];eppBox.replaceChildren();
+  const unique=new Map();eppMatches.forEach(f=>{const a=f.attributes,key=[a['ชื่อบริษัทภาษาไทย'],a['นิคมอุตสาหกรรม'],a['เลขทะเบียนใหม่'],a['เลขทะเบียนเดิม']].join('|');if(!unique.has(key))unique.set(key,f)});
+  message.textContent='ผู้ประกอบการ e_PP '+unique.size+' บริษัท'+(result.exceededTransferLimit?' · แสดง 50 แปลงแรก กรุณาระบุคำค้นให้เจาะจงขึ้น':'')+' · คลิกบริษัทเพื่อจัดทำรายงาน';
+  eppBox.append(message);
+  for(const feature of unique.values()){
+   const a=feature.attributes,button=document.createElement('button'),name=document.createElement('b'),detail=document.createElement('span');
+   button.type='button';button.className='unified-company-option';name.textContent=a['ชื่อบริษัทภาษาไทย'];detail.textContent=[a['ชื่อบริษัทภาษาอังกฤษ'],a['นิคมอุตสาหกรรม'],'ทะเบียนเดิม '+(a['เลขทะเบียนเดิม']||'—'),'ทะเบียนใหม่ '+(a['เลขทะเบียนใหม่']||'—')].filter(Boolean).join(' · ');
+   button.append(name,detail);button.addEventListener('click',()=>{window.dispatchEvent(new CustomEvent('ieat-unified-company-select',{detail:{feature}}))});eppBox.append(button);
+  }
+  render();
+ }catch(error){if(sequence!==eppSequence)return;message.textContent='ค้นหา e_PP ไม่สำเร็จ · ยังแสดงผลจากรายงานสารเคมีได้ กรุณาลองพิมพ์ค้นหาอีกครั้ง';}
+ finally{clearTimeout(timeout)}
+}
+search.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(searchEpp,350);});
+
 estate.addEventListener('change',()=>{scope=estate.value;page=0;render();});
 source.addEventListener('change',syncScope);source.addEventListener('input',syncScope);
 prev.addEventListener('click',()=>{if(page>0){page--;render();}});next.addEventListener('click',()=>{if((page+1)*pageSize<filtered.length){page++;render();}});
