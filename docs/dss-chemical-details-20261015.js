@@ -16,7 +16,8 @@ function render(){
  body.replaceChildren();
  for(const [index,r] of filtered.slice(page*pageSize,(page+1)*pageSize).entries()){
   const company=data.companies[r[0]],tr=document.createElement('tr');
-  cell(tr,page*pageSize+index+1);cell(tr,company[0]);cell(tr,company[2]);cell(tr,data.names[r[1]]);cell(tr,data.cas[r[2]]);cell(tr,r[3]);cell(tr,r[4]);cell(tr,data.units[r[5]]);body.append(tr);
+  cell(tr,page*pageSize+index+1);
+  const companyCell=document.createElement('td'),companyButton=document.createElement('button');companyButton.type='button';companyButton.textContent=company[0];companyButton.title='เลือกบริษัทนี้เพื่อจัดทำรายงาน';companyButton.onclick=()=>{search.value=company[0];searchEpp()};companyCell.append(companyButton);tr.append(companyCell);cell(tr,company[2]);cell(tr,data.names[r[1]]);cell(tr,data.cas[r[2]]);cell(tr,r[3]);cell(tr,r[4]);cell(tr,data.units[r[5]]);body.append(tr);
  }
  if(!filtered.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=8;td.textContent='ไม่พบรายการสารเคมีตามตัวกรอง';tr.append(td);body.append(tr);}
  status.textContent='พบ '+number(filtered.length)+' จาก '+number(data.rows.length)+' รายการ · แสดง '+(filtered.length?number(page*pageSize+1):'0')+'–'+number(Math.min((page+1)*pageSize,filtered.length));
@@ -52,6 +53,7 @@ async function searchEpp(){
    button.append(name,detail);button.addEventListener('click',()=>{window.dispatchEvent(new CustomEvent('ieat-unified-company-select',{detail:{feature}}))});eppBox.append(button);
   }
   render();
+  if(unique.size===1)window.dispatchEvent(new CustomEvent('ieat-unified-company-select',{detail:{feature:unique.values().next().value}}));
  }catch(error){if(sequence!==eppSequence)return;message.textContent='ค้นหา e_PP ไม่สำเร็จ · ยังแสดงผลจากรายงานสารเคมีได้ กรุณาลองพิมพ์ค้นหาอีกครั้ง';}
  finally{clearTimeout(timeout)}
 }
