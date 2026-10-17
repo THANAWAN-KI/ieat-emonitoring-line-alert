@@ -20,7 +20,7 @@
   if(!map||!window.L)return;
   let view=overlays.get(map);
   if(!view){
-   const wind=document.createElement('div');wind.className='field-report-wind';wind.setAttribute('aria-live','polite');
+   const wind=document.createElement('div');wind.className='field-report-wind';wind.style.cssText='right:12px;bottom:42px;left:auto;top:auto';wind.setAttribute('aria-live','polite');
    map.getContainer().append(wind);L.DomEvent.disableClickPropagation(wind);L.DomEvent.disableScrollPropagation(wind);
    view={layer:L.layerGroup().addTo(map),lines:L.layerGroup().addTo(map),markers:[],wind,key:'',fitKey:''};overlays.set(map,view);map.on('zoomend moveend',()=>layoutReferences(map,view));
   }
@@ -51,6 +51,6 @@
   }else{
    const label=document.createElement('div');label.textContent=known?'ลมสงบ (0 กม./ชม.)':'ยังไม่มีข้อมูลลม';view.wind.append(label);
   }
-  const time=document.createElement('small');time.textContent=data.weatherTime||'ยังไม่มีเวลาอากาศ';view.wind.append(time);
+  const time=document.createElement('small');time.textContent=data.weatherTime||'ยังไม่มีเวลาอากาศ';view.wind.append(time);layoutReferences(map,view);
  };
 })();
