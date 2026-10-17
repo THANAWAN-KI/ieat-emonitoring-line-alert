@@ -108,7 +108,7 @@
  const sub=document.createElement('p');sub.textContent='เลือกประเภทเหตุและค้นหาบริษัท เพื่อจัดทำรายงานในหน้านี้';
  heading.append(title,sub);
  frame.loading='lazy';frame.style.height='1800px';
- function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261017-report-settings');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
+ function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261017-report-complete');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
  frame.src=reportUrl();
  link.addEventListener('click',event=>{event.preventDefault();const url=reportUrl();if(frame.src!==url)frame.src=url;section.scrollIntoView({behavior:'smooth',block:'start'});});
  window.returnToRiskDashboard=function(){document.getElementById('otherPage').hidden=true;dashboard.hidden=false;document.querySelectorAll('.nav-tab').forEach(tab=>tab.classList.toggle('active',tab.dataset.page==='risk'));document.getElementById('riskMapSection')?.scrollIntoView({behavior:'smooth',block:'start'});window.dispatchEvent(new Event('resize'))};
@@ -684,7 +684,7 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
   (data.radii||[]).filter(r=>Number.isFinite(r)&&r>0&&r<=50).forEach((radius,i)=>L.circle([data.lat,data.lng],{radius:radius*1000,color:['#4F7D32','#F5B52E','#D9361E'][i%3],weight:2,fillOpacity:.035}).addTo(incidentLayer));
   map.invalidateSize();map.setView([data.lat,data.lng],15,{animate:false});pendingIncident=null;
  }
- window.addEventListener('ieat-support-map-ready',()=>{if(pendingIncident)showIncident(pendingIncident)});
+ window.addEventListener('ieat-support-map-ready',()=>{requestAnimationFrame(()=>{if(pendingIncident)showIncident(pendingIncident)})});
  window.addEventListener('message',event=>{
   if(event.origin!==location.origin||event.source!==frame.contentWindow)return;
   if(event.data?.type==='dss:incident')showIncident(event.data);
