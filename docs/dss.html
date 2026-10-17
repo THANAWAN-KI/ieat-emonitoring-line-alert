@@ -3073,5 +3073,15 @@ html body #report.dss-field-export #dssFieldBrief .fb-data-box{font-size:14px!im
  paint();
 })();
 </script>
-</body></html>
+<style id="dss-field-text-and-shared-map-final">
+html body #report #dssFieldBrief,html body #report #dssFieldBrief *{color:#171c22!important;-webkit-text-fill-color:#171c22!important}
+html body #report #dssFieldBrief .fb-muted{color:#596270!important;-webkit-text-fill-color:#596270!important}
+html body #report #dssFieldBrief .fb-distance,html body #report #dssFieldBrief .fb-link{color:#8B1E2D!important;-webkit-text-fill-color:#8B1E2D!important}
+html body.dss-inline-dashboard #report:not(.dss-field-export) #dssFieldBrief .fb-map-grid{grid-template-columns:1fr!important}
+html body.dss-inline-dashboard #report:not(.dss-field-export) #dssFieldBrief .fb-map{height:54px!important;background:#fff!important;border:0!important;justify-content:flex-start!important}
+html body #report.dss-field-export #dssFieldBrief .fb-map-grid{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)!important}
+html body #report.dss-field-export #dssFieldBrief .fb-map{height:600px!important;border:1px solid #e2e6ec!important}
+</style><script id="dss-field-export-binding">
+document.getElementById('pngBtn').onclick=function(){return downloadReportPng()};
+</script></body></html>
 
