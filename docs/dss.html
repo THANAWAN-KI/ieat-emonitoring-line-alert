@@ -2750,6 +2750,8 @@ html body #report .dss-shared-map-link{margin:10px 0!important;border-radius:3px
    let content=settings.querySelector('.dss-settings-content');
    if(!content){content=document.createElement('div');content.className='dss-settings-content';Array.from(settings.childNodes).filter(n=>n!==summary).forEach(n=>content.append(n));settings.append(content)}
   }
+  const incidentFacts=document.getElementById('dssIncidentFacts'),settingsContent=settings.querySelector('.dss-settings-content');
+  if(incidentFacts&&settingsContent&&!settingsContent.contains(incidentFacts)){settingsContent.prepend(incidentFacts);incidentFacts.hidden=false;incidentFacts.querySelector(':scope>h3')?.remove()}
   settings.classList.add('dss-toolbar-settings');
   if(actions&&reset&&settings.parentElement!==actions)actions.insertBefore(settings,reset);
   document.getElementById('dssNearbyDetails')?.remove();
@@ -2888,5 +2890,7 @@ html body header.top>.top-actions .dss-toolbar-settings .dss-settings-content{
 }
 </style>
 
-</body></html>
+<script id="dss-export-cleanup-20261017">
+document.querySelectorAll('.dss-shared-map-link').forEach(button=>button.setAttribute('data-export-exclude',''));
+</script></body></html>
 
