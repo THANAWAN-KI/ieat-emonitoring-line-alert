@@ -1559,6 +1559,7 @@ async function downloadReportPng(){
       width:report.scrollWidth,
       ignoreElements:element=>element.id==='supportList'||element.hasAttribute('data-export-exclude'),
       onclone(clonedDocument){
+        clonedDocument.getElementById("report")?.classList.add("dss-png-layout");
         clonedDocument.querySelectorAll('#report '+exportIconSelector.split(',').join(',#report ')).forEach((svg,index)=>{const icon=exportIcons[index];if(!icon)return;const img=clonedDocument.createElement('img');img.src=icon.src;img.alt='';img.style.setProperty('width',icon.width+'px','important');img.style.setProperty('height',icon.height+'px','important');img.style.setProperty('display','inline-block','important');img.style.setProperty('vertical-align','middle','important');img.style.setProperty('max-width','none','important');img.style.setProperty('flex','none','important');svg.replaceWith(img)});
         clonedDocument.querySelectorAll('#supportList,[data-export-exclude]').forEach(element=>element.remove());
         const clonedMap=clonedDocument.querySelector('#report #map');
@@ -2892,5 +2893,41 @@ html body header.top>.top-actions .dss-toolbar-settings .dss-settings-content{
 
 <script id="dss-export-cleanup-20261017">
 document.querySelectorAll('.dss-shared-map-link').forEach(button=>button.setAttribute('data-export-exclude',''));
-</script></body></html>
+</script>
+<style id="dss-weather-document-layout-20261017">
+html body #report #dssReportMap .map-weather{display:grid!important;grid-template-columns:minmax(0,1.6fr) minmax(210px,1fr)!important;gap:12px!important;align-items:start!important;margin-top:12px!important}
+html body.dss-inline-dashboard #report #dssReportMap .map-weather{grid-template-columns:minmax(0,1fr)!important}
+html body #report #dssWeatherRows{border:1px solid #e2e6ec!important;margin:0!important;min-width:0!important;background:#fff!important}
+html body #report #dssWeatherRows .row{display:block!important;background:#fff!important;padding:0!important;border:0!important;border-bottom:1px solid #e2e6ec!important}
+html body #report #dssWeatherRows .row:last-child{border-bottom:0!important}
+html body #report #dssWeatherRows .row>b,html body #report #dssWeatherRows .row>span{display:block!important;border:0!important;padding:9px 12px!important;margin:0!important;color:#202630!important;-webkit-text-fill-color:#202630!important;background:#fff!important}
+html body #report #dssWeatherRows .row>b{background:#f7f8fa!important;font-size:12px!important}
+html body #report #dssWeatherRows .dss-wind-reading{display:block!important;font-size:14px!important;font-weight:600!important;color:#202630!important;-webkit-text-fill-color:#202630!important;background:transparent!important}
+html body #report #dssWeatherRows .dss-wind-context{display:block!important;margin-top:8px!important;font-size:11px!important;line-height:1.65!important;color:#596270!important;-webkit-text-fill-color:#596270!important}
+html body #report #dssWeatherRows .wind-arrow{color:#8B1E2D!important}
+html body #report #supportGrid .row:nth-child(n),html body #report #supportGrid .row:nth-child(n)>span{background:#fff!important;color:#202630!important;-webkit-text-fill-color:#202630!important;box-shadow:none!important;border-left:0!important}
+html body #report #supportGrid .row:nth-child(n)>b{background:#f7f8fa!important;color:#4b535d!important;-webkit-text-fill-color:#4b535d!important}
+html body #report #supportGrid .row:nth-child(n)>span *,html body #report #supportGrid .row:nth-child(n)>b *{background:transparent!important;color:inherit!important;-webkit-text-fill-color:inherit!important}
+html body #report .dss-support-legend{display:none!important}
+html body #report .dss-duplicate-chemical[hidden]{display:none!important}
+html body #report .dss-shared-map-link{background:#f7f8fa!important;color:#4b535d!important}
+html body #report.dss-png-layout #dssReportMap .map-weather{grid-template-columns:minmax(0,1.6fr) minmax(210px,1fr)!important}
+@media(max-width:650px){html body:not(.dss-inline-dashboard) #report #dssReportMap .map-weather{grid-template-columns:minmax(0,1fr)!important}}
+</style>
+<script id="dss-weather-document-layout-script-20261017">
+(function(){
+ const weather=document.getElementById('dssWeatherRows'),mapWeather=document.querySelector('#dssReportMap .map-weather');
+ if(weather&&mapWeather)mapWeather.append(weather);
+ const chemicalRow=document.querySelector('#dssReportIncident [data-out="chemical"]')?.closest('.row');
+ if(chemicalRow)chemicalRow.classList.add('dss-duplicate-chemical');
+ function tidyReport(){
+  const details=document.getElementById('chemicalIncidentReport');
+  if(chemicalRow)chemicalRow.hidden=!!details&&!details.hidden&&!!state.hazardCatalog?.length;
+ }
+ const previousRender=render;
+ render=function(){const result=previousRender.apply(this,arguments);tidyReport();return result};
+ tidyReport();
+})();
+</script>
+</body></html>
 
