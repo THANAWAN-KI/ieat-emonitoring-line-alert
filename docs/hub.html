@@ -108,7 +108,7 @@
  const sub=document.createElement('p');sub.textContent='เลือกประเภทเหตุและค้นหาบริษัท เพื่อจัดทำรายงานในหน้านี้';
  heading.append(title,sub);
  frame.loading='lazy';frame.style.height='1800px';
- function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261017-support-no-phone');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
+ function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261017-field-brief-v1');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
  frame.src=reportUrl();
  link.addEventListener('click',event=>{event.preventDefault();const url=reportUrl();if(frame.src!==url)frame.src=url;section.scrollIntoView({behavior:'smooth',block:'start'});});
  window.returnToRiskDashboard=function(){document.getElementById('otherPage').hidden=true;dashboard.hidden=false;document.querySelectorAll('.nav-tab').forEach(tab=>tab.classList.toggle('active',tab.dataset.page==='risk'));document.getElementById('riskMapSection')?.scrollIntoView({behavior:'smooth',block:'start'});window.dispatchEvent(new Event('resize'))};
@@ -748,6 +748,17 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
 <style id="emergency-company-map-label">
 #map .emergency-company-label{background:#fff;border:1px solid #8B1E2D;border-radius:5px;padding:7px 10px;color:#8B1E2D;font:600 13px/1.5 Sarabun,sans-serif;box-shadow:0 2px 8px #0002;white-space:normal;min-width:150px;max-width:260px;text-align:center}
 #map .emergency-company-label:before{border-top-color:#8B1E2D}
-</style></body></html>
+</style><script id="field-report-link-reopen">
+(function(){
+ const params=new URLSearchParams(location.search),query=params.get('reportCompany'),frame=document.getElementById('emergencyReportFrame');
+ if(!query)return;
+ const sendView=()=>{if(params.get('reportView')==='full')frame?.contentWindow?.postMessage({type:'dss:set-report-view',value:'full'},location.origin)};
+ frame?.addEventListener('load',sendView);
+ window.addEventListener('message',event=>{if(event.origin===location.origin&&event.source===frame?.contentWindow&&event.data?.type==='dss:report-ready')sendView()});
+ const type=document.getElementById('dashboardIncidentType');if(type){type.value=params.get('incidentType')==='chemical'?'สารเคมีรั่วไหล':'เหตุเพลิงไหม้';type.dispatchEvent(new Event('change',{bubbles:true}))}
+ const search=document.getElementById('chemicalSearch');if(search){search.value=query;search.dispatchEvent(new Event('input',{bubbles:true}));search.scrollIntoView({block:'center'})}
+ sendView();
+})();
+</script></body></html>
 
 
