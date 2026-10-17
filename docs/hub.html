@@ -773,12 +773,14 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
 <script id="field-numbered-map-bridge">
 (function(){
  const frame=document.getElementById('emergencyReportFrame');let pending=null;
- function apply(){if(pending&&window.ieatSupportMap)window.ieatUpdateFieldMap?.(window.ieatSupportMap,pending)}
+ function apply(forceFit=false){if(pending&&window.ieatSupportMap)window.ieatUpdateFieldMap?.(window.ieatSupportMap,pending,{forceFit})}
  window.addEventListener('message',event=>{
-  if(event.origin!==location.origin||event.source!==frame?.contentWindow||event.data?.type!=='dss:field-map-data')return;
+  if(event.origin!==location.origin||event.source!==frame?.contentWindow)return;
+  if(event.data?.type==='dss:incident'){requestAnimationFrame(()=>apply(true));return}
+  if(event.data?.type!=='dss:field-map-data')return;
   pending=event.data;apply();
  });
- window.addEventListener('ieat-support-map-ready',()=>requestAnimationFrame(apply));
+ window.addEventListener('ieat-support-map-ready',()=>requestAnimationFrame(()=>apply()));
  function request(){frame?.contentWindow?.postMessage({type:'dss:request-field-map'},location.origin)}
  frame?.addEventListener('load',request);request();
 })();
