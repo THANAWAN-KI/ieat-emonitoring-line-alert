@@ -1566,7 +1566,7 @@ async function downloadReportPng(){
         if(!clonedMap)return;
         if(sharedMapImage){
           const box=clonedMap.closest('.mapbox');box.style.setProperty('position','static','important');box.style.setProperty('left','auto','important');box.style.setProperty('width','100%','important');
-          clonedMap.style.setProperty('height','480px','important');clonedMap.replaceChildren();
+          clonedMap.style.setProperty('height','360px','important');clonedMap.replaceChildren();
           const image=clonedDocument.createElement('img');image.src=sharedMapImage;image.style.cssText='display:block!important;width:100%!important;height:100%!important;object-fit:contain!important';clonedMap.append(image);return;
         }
         const liveMap=clonedMap.querySelector('#dssLiveMap');
@@ -2927,6 +2927,42 @@ html body #report.dss-png-layout #dssReportMap .map-weather{grid-template-column
  const previousRender=render;
  render=function(){const result=previousRender.apply(this,arguments);tidyReport();return result};
  tidyReport();
+})();
+</script>
+
+<style id="dss-compact-report-20261017">
+html body #report #chemicalIncidentReport{display:none!important}
+html body #report .dss-duplicate-chemical[hidden]{display:grid!important}
+html body #report .dss-report-section{margin-bottom:16px!important}
+html body #report .company .row>b,html body #report .company .row>span,html body #report #supportGrid .row>b,html body #report #supportGrid .row>span{padding:8px 10px!important}
+html body #report .dss-full-list{margin:8px 0 0;border-top:1px solid #e2e6ec;padding-top:6px}
+html body #report .dss-full-list summary{font-size:12px;color:#8B1E2D;cursor:pointer}
+html body #report .dss-full-list p{white-space:pre-line;font-size:12px;margin:8px 0}
+html body #report .dss-list-count{display:block;margin-top:5px;color:#596270;font-size:11px}
+</style>
+<script id="dss-compact-report-script-20261017">
+(function(){
+ function compactOutput(key){
+  const output=document.querySelector('#dssReportIncident [data-out="'+key+'"]');
+  if(!output)return;
+  const full=String(state[key]||'').trim();
+  let lines=full.split(/\n+/).map(v=>v.trim()).filter(Boolean);
+  if(key==='chemical'&&Array.isArray(state.hazardCatalog)&&state.hazardCatalog.length){
+   lines=state.hazardCatalog.map(item=>[item.name,item.cas?'CAS '+item.cas:'',item.volume?'ปริมาณจัดเก็บ '+item.volume+' '+(item.unit||''):''].filter(Boolean).join(' · '));
+  }
+  output.replaceChildren();
+  const preview=document.createElement('span');preview.style.whiteSpace='pre-line';preview.textContent=lines.slice(0,3).join('\n')||full||'ไม่มีข้อมูลในระบบ DSS';output.append(preview);
+  if(lines.length>3){
+   const count=document.createElement('small');count.className='dss-list-count';count.textContent='แสดง 3 จาก '+lines.length+' รายการ · รายงานฉบับย่อ';output.append(count);
+   const details=document.createElement('details');details.className='dss-full-list';details.setAttribute('data-export-exclude','');
+   const summary=document.createElement('summary');summary.textContent='ดูรายการทั้งหมด '+lines.length+' รายการ';
+   const content=document.createElement('p');content.textContent=full||lines.join('\n');details.append(summary,content);output.append(details);
+  }
+  const row=output.closest('.row');if(row)row.hidden=false;
+ }
+ const previous=render;
+ render=function(){const result=previous.apply(this,arguments);compactOutput('chemical');compactOutput('response');return result};
+ render();
 })();
 </script>
 </body></html>
