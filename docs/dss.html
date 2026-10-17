@@ -1538,7 +1538,7 @@ async function downloadReportPng(){
     await document.fonts.ready;
     if(typeof html2canvas!=='function')throw new Error('ไม่สามารถโหลดเครื่องมือบันทึกภาพได้');
     const report=document.getElementById('report');
-    const sharedMapImage=new URLSearchParams(location.search).get('embedded')==='dashboard'&&typeof parent.ieatCaptureReportMap==='function'?await parent.ieatCaptureReportMap(html2canvas):null;
+    const sharedMapImage=new URLSearchParams(location.search).get('embedded')==='dashboard'&&typeof parent.ieatCaptureReportMap==='function'?await parent.ieatCaptureReportMap(html2canvas):(await html2canvas(document.getElementById('map'),{backgroundColor:'#f7f8fa',scale:2,useCORS:true,allowTaint:false,logging:false})).toDataURL('image/png');
     const exportIconSelector='.dss-support-symbol,.dss-support-cluster';
     const exportIcons=await Promise.all(Array.from(report.querySelectorAll(exportIconSelector)).map(async symbol=>{
       const cluster=symbol.classList.contains('dss-support-cluster'),bounds=symbol.getBoundingClientRect(),width=Math.max(1,bounds.width||22),height=Math.max(1,bounds.height||22);
@@ -1552,9 +1552,12 @@ async function downloadReportPng(){
     }));
     const canvas=await html2canvas(report,{
       backgroundColor:'#fff',scale:2,useCORS:true,allowTaint:false,logging:false,
-      width:report.scrollWidth,
+      width:1050,height:1485,windowWidth:1200,
       ignoreElements:element=>element.id==='supportList'||element.hasAttribute('data-export-exclude'),
       onclone(clonedDocument){
+        const fieldReport=clonedDocument.getElementById("report");fieldReport.classList.remove("dss-full-view");fieldReport.classList.add("dss-field-export");
+        fieldReport.querySelectorAll(":scope > :not(#dssFieldBrief)").forEach(node=>node.remove());
+        const fieldMap=clonedDocument.getElementById("fieldBriefMap");if(fieldMap&&sharedMapImage){const image=clonedDocument.createElement("img");image.src=sharedMapImage;image.alt="แผนที่จุดเกิดเหตุ";fieldMap.replaceChildren(image)}
         clonedDocument.getElementById("report")?.classList.add("dss-png-layout");
         clonedDocument.querySelectorAll('#report '+exportIconSelector.split(',').join(',#report ')).forEach((svg,index)=>{const icon=exportIcons[index];if(!icon)return;const img=clonedDocument.createElement('img');img.src=icon.src;img.alt='';img.style.setProperty('width',icon.width+'px','important');img.style.setProperty('height',icon.height+'px','important');img.style.setProperty('display','inline-block','important');img.style.setProperty('vertical-align','middle','important');img.style.setProperty('max-width','none','important');img.style.setProperty('flex','none','important');svg.replaceWith(img)});
         clonedDocument.querySelectorAll('#supportList,[data-export-exclude]').forEach(element=>element.remove());
@@ -2959,6 +2962,115 @@ html body #report .dss-list-count{display:block;margin-top:5px;color:#596270;fon
  const previous=render;
  render=function(){const result=previous.apply(this,arguments);compactOutput('chemical');compactOutput('response');return result};
  render();
+})();
+</script>
+
+<script src="./vendor/dss-qrcode-1.4.4.min.js"></script>
+<style id="dss-field-brief-theme">
+html body #report.dss-field-document{position:relative!important;width:100%!important;min-height:0!important;padding:24px!important;color:#171c22!important;background:#fff!important}
+html body #report.dss-field-document:not(.dss-full-view)>:not(#dssFieldBrief){position:absolute!important;left:-100000px!important;top:0!important;width:1000px!important}
+html body #report.dss-full-view>#dssFieldBrief{display:none!important}
+#dssFieldBrief{font:14px/1.55 Sarabun,"Thai Sarabun PSK",sans-serif;color:#171c22}
+#dssFieldBrief *{box-sizing:border-box}
+#dssFieldBrief .fb-header{display:flex;align-items:center;gap:14px;padding-bottom:14px;border-bottom:3px solid #8B1E2D}
+#dssFieldBrief .fb-logo{width:42px;height:58px;object-fit:contain}
+#dssFieldBrief h1{font-size:22px;line-height:1.4;margin:0 0 4px;color:#171c22}
+#dssFieldBrief .fb-muted{color:#596270;font-size:11px}
+#dssFieldBrief h2{font-size:16px;margin:0 0 10px;padding:8px 10px;background:#f4f5f6;border-left:3px solid #8B1E2D}
+#dssFieldBrief .fb-section{margin-top:16px}
+#dssFieldBrief .fb-facts{display:grid;grid-template-columns:1fr 1fr;gap:8px 20px}
+#dssFieldBrief .fb-wide{grid-column:1/-1}
+#dssFieldBrief .fb-fact>small{display:block;color:#596270;font-size:11px;margin-bottom:2px}
+#dssFieldBrief .fb-fact>strong{font-size:16px;font-weight:600}
+#dssFieldBrief .fb-situation{background:#f8f9fa;border:1px solid #e2e6ec;padding:9px 12px;margin-top:10px}
+#dssFieldBrief .fb-map-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px;align-items:start}
+#dssFieldBrief .fb-map{height:440px;border:1px solid #e2e6ec;background:#f7f8fa;display:flex;align-items:center;justify-content:center;overflow:hidden;text-align:center}
+#dssFieldBrief .fb-map button{font-size:13px;color:#8B1E2D;background:#fff;border:1px solid #dedfe3}
+#dssFieldBrief .fb-map img{display:block;width:100%;height:100%;object-fit:contain}
+#dssFieldBrief .fb-weather{padding:12px;border:1px solid #e2e6ec;background:#fff;margin-bottom:12px}
+#dssFieldBrief .fb-wind{font-size:17px;font-weight:600;margin:5px 0}
+#dssFieldBrief .fb-support{width:100%;border-collapse:collapse;font-size:12px}
+#dssFieldBrief .fb-support th,#dssFieldBrief .fb-support td{padding:9px 8px;border:1px solid #e2e6ec;text-align:left;vertical-align:top;color:#171c22;background:#fff}
+#dssFieldBrief .fb-support th{width:28%;background:#f7f8fa;font-weight:500}
+#dssFieldBrief .fb-support tr{cursor:pointer}
+#dssFieldBrief .fb-distance{display:block;color:#8B1E2D;font-weight:600;margin-top:2px}
+#dssFieldBrief .fb-data-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+#dssFieldBrief .fb-data-box{padding:12px;border:1px solid #e2e6ec;font-size:13px}
+#dssFieldBrief .fb-data-box strong{display:block;margin-bottom:5px}
+#dssFieldBrief .fb-footer{display:flex;align-items:center;gap:14px;border-top:1px solid #e2e6ec;padding-top:12px;margin-top:16px}
+#dssFieldBrief .fb-qr{width:94px;height:94px;flex:none}
+#dssFieldBrief .fb-link{color:#8B1E2D;font-size:12px;text-decoration:none}
+html body #report.dss-field-export{width:1050px!important;height:1485px!important;min-height:1485px!important;padding:32px!important;border:0!important;overflow:hidden!important}
+html body #report.dss-field-export #dssFieldBrief{font-size:16px!important;line-height:1.55!important}
+html body #report.dss-field-export #dssFieldBrief h1{font-size:25px!important}
+html body #report.dss-field-export #dssFieldBrief h2{font-size:18px!important}
+html body #report.dss-field-export #dssFieldBrief .fb-map{height:600px!important}
+html body #report.dss-field-export #dssFieldBrief .fb-support{font-size:14px!important}
+html body #report.dss-field-export #dssFieldBrief .fb-support th,html body #report.dss-field-export #dssFieldBrief .fb-support td{padding:11px 9px!important}
+html body #report.dss-field-export #dssFieldBrief .fb-muted{font-size:12px!important}
+html body #report.dss-field-export #dssFieldBrief .fb-data-box{font-size:14px!important}
+@media(max-width:650px){html body #report.dss-field-document{padding:16px!important}#dssFieldBrief .fb-map-grid,#dssFieldBrief .fb-data-grid{grid-template-columns:1fr}#dssFieldBrief .fb-map{height:130px}#dssFieldBrief h1{font-size:19px}#dssFieldBrief .fb-facts{grid-template-columns:1fr}#dssFieldBrief .fb-wide{grid-column:auto}}
+</style>
+<script id="dss-field-brief-script">
+(function(){
+ const report=document.getElementById('report');if(!report)return;
+ report.classList.add('dss-field-document');
+ const brief=document.createElement('article');brief.id='dssFieldBrief';
+ brief.innerHTML='<header class="fb-header"><img class="fb-logo" alt="กนอ."><div><h1>รายงานสรุปสนับสนุนหน้างาน</h1><div class="fb-muted" id="fbDocumentMeta"></div></div></header>'+
+ '<section class="fb-section"><h2>1. ข้อมูลเหตุและพื้นที่</h2><div class="fb-facts" id="fbFacts"></div><div class="fb-situation" id="fbSituation"></div></section>'+
+ '<section class="fb-section"><h2>2. แผนที่และจุดสนับสนุนใกล้เคียง</h2><div class="fb-map-grid"><div><div class="fb-map" id="fieldBriefMap"><button type="button" data-export-exclude id="fbOpenMap">ดูจุดเกิดเหตุบนแผนที่ด้านขวา →</button></div><div class="fb-muted" id="fbMapCaption"></div></div><div><div class="fb-weather" id="fbWeather"></div><table class="fb-support"><tbody id="fbSupport"></tbody></table><div class="fb-muted" style="margin-top:7px">ระยะเส้นตรง · พบในฐานข้อมูล ยังไม่ยืนยันความพร้อม</div></div></div></section>'+
+ '<section class="fb-section"><h2>3. ข้อมูลประกอบการประสานงาน</h2><div class="fb-data-grid"><div class="fb-data-box" id="fbChemicals"></div><div class="fb-data-box" id="fbEquipment"></div></div></section>'+
+ '<footer class="fb-footer"><img class="fb-qr" id="fbQr" alt="QR เปิดรายละเอียดโรงงาน"><div><strong>รายละเอียดโรงงานและข้อมูลฉบับเต็ม</strong><div><a id="fbFullLink" class="fb-link" target="_blank" rel="noopener">สแกน QR หรือเปิดข้อมูลบนเว็บ ↗</a></div><div class="fb-muted">แหล่งข้อมูล: DSS · ArcGIS · Open-Meteo<br>EMCC GIS · การนิคมอุตสาหกรรมแห่งประเทศไทย</div></div></footer>';
+ brief.querySelector('.fb-logo').src=report.querySelector('.ieat-report-logo')?.src||'';
+ report.append(brief);
+ const short=(value,max=160)=>{const t=String(value||'').trim();return t.length>max?t.slice(0,max)+'… (ดูฉบับเต็ม)':t};
+ const text=(id,value)=>{document.getElementById(id).textContent=value};
+ const el=(tag,value,cls)=>{const n=document.createElement(tag);if(value!==undefined)n.textContent=value;if(cls)n.className=cls;return n};
+ let lastQr='';
+ function paint(){
+  text('fbDocumentMeta',(state.reportNo||'')+' · จัดทำ '+(state.date||'—')+' (เวลาไทย)');
+  const facts=document.getElementById('fbFacts');facts.replaceChildren();
+  [['โรงงาน / พื้นที่เกิดเหตุ',state.company,true],['นิคมฯ / ท่าเรือ',state.estate],['ประเภทเหตุ',state.event],['ตำแหน่ง / ที่อยู่',short(state.address,120),true]].forEach(([label,value,wide])=>{
+   const box=el('div',undefined,'fb-fact'+(wide?' fb-wide':''));box.append(el('small',label),el('strong',value||'—'));facts.append(box);
+  });
+  const summary=document.getElementById('fbSituation');summary.replaceChildren();
+  summary.append(el('strong','ข้อมูลสถานการณ์ที่ได้รับแจ้ง: '),document.createTextNode(short(state.incidentDetails)||'ยังไม่มีรายละเอียดจากหน้างาน'));
+  const status=el('div','สถานะ: '+(state.incidentStatus||'ยังไม่ยืนยัน')+(state.occurredAt?' · เวลาเกิดเหตุ '+state.occurredAt.replace('T',' '):''),'fb-muted');summary.append(status);
+  if(/สารเคมี/.test(state.event||'')){
+   summary.append(el('div','สารที่ได้รับแจ้ง: '+(state.leakChemical||'ยังไม่ยืนยันชนิดสาร')+' · ปริมาณที่แจ้ง: '+(state.leakQuantity||'ยังไม่ยืนยัน')));
+  }
+  text('fbMapCaption','พิกัด '+Number(state.lat).toFixed(5)+', '+Number(state.lng).toFixed(5)+' · รัศมีค้นหาข้อมูล '+getBufferRadii().join(' / ')+' กม. (ไม่ใช่เขตปลอดภัย)');
+  const weather=document.getElementById('fbWeather');weather.replaceChildren(el('strong','สภาพอากาศบริเวณเกิดเหตุ'));
+  weather.append(el('div','ลม '+(state.windSpeed||'—')+' กม./ชม. · พัดจาก '+(state.windDir||'—'),'fb-wind'),el('div',(state.weather||'—')+' · '+(state.temp||'—')+' °C · ความชื้น '+(state.humidity||'—')+'%'),el('div',state.weatherTime||'ยังไม่มีเวลาอากาศ','fb-muted'),el('div','Open-Meteo · ข้อมูลประมาณการจากแบบจำลอง','fb-muted'));
+  const support=document.getElementById('fbSupport');support.replaceChildren();
+  [['fire','ดับเพลิง'],['hospital','โรงพยาบาล'],['hydrant','หัวจ่ายน้ำ'],['police','ตำรวจ'],['community','ชุมชน'],['cctv','CCTV']].forEach(([key,label])=>{
+   const row=el('tr'),value=el('td');value.append(el('span',short(state[key+'Name']||'ยังไม่มีข้อมูล',80)),el('span',state[key+'Distance']||'—','fb-distance'));row.append(el('th',label),value);row.tabIndex=0;row.setAttribute('role','button');row.setAttribute('aria-label','ดูตำแหน่ง '+label);const zoom=()=>window.dssZoomSupport?.(key);row.onclick=zoom;row.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();zoom()}};support.append(row);
+  });
+  const chemicals=document.getElementById('fbChemicals');chemicals.replaceChildren(el('strong','สารเคมีในคลัง (ข้อมูล DSS)'));
+  const catalog=Array.isArray(state.hazardCatalog)?state.hazardCatalog:[];
+  chemicals.append(el('div',catalog.length?'มีข้อมูล '+catalog.length+' รายการ · รายการเต็มเปิดจาก QR':'ไม่มีข้อมูลในระบบ DSS'));
+  if(state.leakChemical){const match=catalog.find(c=>c.name===state.leakChemical);if(match)chemicals.append(el('div',[match.cas?'CAS '+match.cas:'',match.un?'UN '+match.un:''].filter(Boolean).join(' · ')))}
+  const equipment=document.getElementById('fbEquipment');equipment.replaceChildren(el('strong','อุปกรณ์ที่ยืนยันพร้อมสนับสนุน'));
+  equipment.append(el('div',short(state.fieldReadyEquipment,170)||'ยังไม่มีข้อมูลยืนยันจากหน้างาน'));
+  const sourceLines=String(state.response||'').split(/\n+/).filter(v=>v.trim()&&!/รอยืนยัน|ไม่มีข้อมูล|^—$/.test(v));
+  equipment.append(el('div',sourceLines.length?'ข้อมูลอุปกรณ์ในฐาน DSS '+sourceLines.length+' รายการ · ดูฉบับเต็ม':'ไม่มีรายการอุปกรณ์ในฐาน DSS','fb-muted'));
+  if(state.fieldAccess)summary.append(el('div','ทางเข้าออกที่ได้รับแจ้ง: '+short(state.fieldAccess,130)));
+  const url=new URL('./hub.html',location.href);
+  const query=String(state.registration||'').split(' / ')[0].trim();
+  if(state.company&&state.company!=='บริษัท / โรงงานที่เกิดเหตุ')url.searchParams.set('reportCompany',query&&query!=='—'?query:state.company);
+  url.searchParams.set('incidentType',/สารเคมี/.test(state.event||'')?'chemical':'fire');url.searchParams.set('reportView','full');
+  const link=document.getElementById('fbFullLink');link.href=url.href;
+  if(lastQr!==url.href&&typeof qrcode==='function'){try{const qr=qrcode(0,'M');qr.addData(url.href);qr.make();document.getElementById('fbQr').src=qr.createDataURL(3,8);lastQr=url.href}catch(error){document.getElementById('fbQr').alt='เปิดรายละเอียดจากลิงก์'}}
+ }
+ const previous=render;render=function(){const result=previous.apply(this,arguments);paint();return result};
+ const actions=document.querySelector('.top-actions'),button=el('button','ดูข้อมูลฉบับเต็ม');button.type='button';button.className='secondary';button.setAttribute('data-export-exclude','');
+ function setView(full){report.classList.toggle('dss-full-view',full);button.textContent=full?'กลับรายงาน 1 หน้า':'ดูข้อมูลฉบับเต็ม'}
+ button.onclick=()=>setView(!report.classList.contains('dss-full-view'));actions?.append(button);
+ const content=document.querySelector('#dssOptionalDetails .dss-settings-content')||document.getElementById('dssIncidentFacts');
+ if(content){[['fieldReadyEquipment','อุปกรณ์ที่ยืนยันพร้อมสนับสนุน (ถ้ามี)'],['fieldAccess','ประตู / เส้นทางเข้าออกที่ได้รับแจ้ง (ถ้ามี)']].forEach(([key,label])=>{const box=el('div',undefined,'field'),caption=el('label',label),input=el('textarea');input.id=key;caption.htmlFor=key;input.dataset.key=key;input.maxLength=500;input.placeholder='เว้นว่างหากยังไม่ได้รับการยืนยัน';input.oninput=()=>{state[key]=input.value;render()};box.append(caption,input);content.append(box)})}
+ document.getElementById('fbOpenMap').onclick=()=>{if(parent!==window)parent.postMessage({type:'dss:map-overview'},location.origin);else{setView(true);document.getElementById('dssReportMap')?.scrollIntoView({block:'start'})}};
+ window.addEventListener('message',event=>{if(event.origin===location.origin&&event.source===parent&&event.data?.type==='dss:set-report-view')setView(event.data.value==='full')});
+ paint();
 })();
 </script>
 </body></html>
