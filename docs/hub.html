@@ -108,7 +108,7 @@
  const sub=document.createElement('p');sub.textContent='เลือกประเภทเหตุและค้นหาบริษัท เพื่อจัดทำรายงานในหน้านี้';
  heading.append(title,sub);
  frame.loading='lazy';frame.style.height='1800px';
- function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261017-field-brief-v2');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
+ function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261017-field-numbered');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
  frame.src=reportUrl();
  link.addEventListener('click',event=>{event.preventDefault();const url=reportUrl();if(frame.src!==url)frame.src=url;section.scrollIntoView({behavior:'smooth',block:'start'});});
  window.returnToRiskDashboard=function(){document.getElementById('otherPage').hidden=true;dashboard.hidden=false;document.querySelectorAll('.nav-tab').forEach(tab=>tab.classList.toggle('active',tab.dataset.page==='risk'));document.getElementById('riskMapSection')?.scrollIntoView({behavior:'smooth',block:'start'});window.dispatchEvent(new Event('resize'))};
@@ -758,6 +758,29 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
  const type=document.getElementById('dashboardIncidentType');if(type){type.value=params.get('incidentType')==='chemical'?'สารเคมีรั่วไหล':'เหตุเพลิงไหม้';type.dispatchEvent(new Event('change',{bubbles:true}))}
  const search=document.getElementById('chemicalSearch');if(search){search.value=query;search.dispatchEvent(new Event('input',{bubbles:true}));search.scrollIntoView({block:'center'})}
  sendView();
+})();
+</script>
+<style id="field-numbered-map-style">
+.field-reference-marker{background:transparent!important;border:0!important}
+.field-reference-number{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;border:2px solid #fff;background:#8B1E2D;color:#fff!important;-webkit-text-fill-color:#fff!important;font:bold 15px/1 Arial,sans-serif;box-shadow:0 1px 5px #0006}
+.field-reference-ready{background:#4F7D32!important}
+.field-report-wind{position:absolute;left:12px;bottom:42px;z-index:800;width:190px;padding:9px 11px;border:1px solid #d7dce2;border-radius:7px;background:#fffffff2;color:#171c22;font:11px/1.5 Sarabun,sans-serif;pointer-events:none;box-shadow:0 1px 6px #0002}
+.field-report-wind strong{display:block;font-size:12px}
+.field-report-wind small{display:block;font-size:9px;color:#596270}
+.field-wind-arrow{display:block;width:38px;height:38px;margin:2px auto;font:bold 34px/38px Arial,sans-serif;color:#8B1E2D;transform-origin:center}
+</style>
+<script src="./dss-field-map-20261017.js"></script>
+<script id="field-numbered-map-bridge">
+(function(){
+ const frame=document.getElementById('emergencyReportFrame');let pending=null;
+ function apply(){if(pending&&window.ieatSupportMap)window.ieatUpdateFieldMap?.(window.ieatSupportMap,pending)}
+ window.addEventListener('message',event=>{
+  if(event.origin!==location.origin||event.source!==frame?.contentWindow||event.data?.type!=='dss:field-map-data')return;
+  pending=event.data;apply();
+ });
+ window.addEventListener('ieat-support-map-ready',()=>requestAnimationFrame(apply));
+ function request(){frame?.contentWindow?.postMessage({type:'dss:request-field-map'},location.origin)}
+ frame?.addEventListener('load',request);request();
 })();
 </script></body></html>
 
