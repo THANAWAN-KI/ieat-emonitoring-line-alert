@@ -21,7 +21,7 @@
    });
   }
   const positionKey=JSON.stringify([data.lat,data.lng,points.map(p=>[p.lat,p.lng])]);
-  if(options.fit!==false&&points.length&&view.fitKey!==positionKey&&Number.isFinite(data.lat)&&Number.isFinite(data.lng)){
+  if(options.fit!==false&&points.length&&(options.forceFit||view.fitKey!==positionKey)&&Number.isFinite(data.lat)&&Number.isFinite(data.lng)){
    view.fitKey=positionKey;map.invalidateSize();
    map.fitBounds(L.latLngBounds([[data.lat,data.lng],...points.map(p=>[p.lat,p.lng])]),{padding:[40,50],maxZoom:15,animate:false});
   }
