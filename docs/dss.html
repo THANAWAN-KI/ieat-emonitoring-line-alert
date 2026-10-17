@@ -2768,7 +2768,7 @@ html body #report .dss-shared-map-link{margin:10px 0!important;border-radius:3px
  }
  if(typeof selectDssLookup==='function'){
   const previous=selectDssLookup;
-  selectDssLookup=async function(item){await previous(item);state.date=new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok',day:'numeric',month:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit'});if(state.registration)state.registration=[...new Set(state.registration.split(' / ').map(v=>v.trim()))].join(' / ');render()};
+  selectDssLookup=async function(item){await previous(item);state.date=new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok',day:'numeric',month:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit'});if(state.registration)state.registration=[...new Set(state.registration.split(' / ').map(v=>v.trim()))].join(' / ');render();if(embedded&&validPoint())parent.postMessage({type:'dss:incident',name:state.company,lat:Number(state.lat),lng:Number(state.lng),radii:getBufferRadii()},location.origin)};
  }
  const png=document.getElementById('pngBtn');if(png)png.onclick=()=>downloadReportPng();
 })();
