@@ -2,11 +2,11 @@
   "schema_version": 1,
   "period": "48h",
   "date": "2026-10-17",
-  "time": "16:00:00",
+  "time": "20:00:00",
   "type": "พื้นที่เฝ้าระวังพิเศษ ล่วงหน้า 48 ชม. เสี่ยงน้ำท่วมจากฝนตกสะสม",
   "source_url": "https://api.hii.or.th/v2/4UQaYnf0Bx4fXPYyCdDRbqHyXH9Ixvd2nVUjaN1cLBY=/warning/flashflood-48h",
-  "area_count": 3,
-  "nearby_count": 5,
+  "area_count": 4,
+  "nearby_count": 10,
   "areas": [
     {
       "geocode": "841802",
@@ -18,8 +18,8 @@
       "station": "อบต.ชัยบุรี",
       "latitude": 8.45064,
       "longitude": 99.08304,
-      "sum_rainfall_mm": 179.6,
-      "observed_at": "2026-10-17T15:00:00+07:00",
+      "sum_rainfall_mm": 151.0,
+      "observed_at": "2026-10-17T18:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -200,6 +200,19 @@
       }
     },
     {
+      "geocode": "104004",
+      "tambon": "ต.หลักสอง",
+      "amphoe": "อ.บางแค",
+      "province": "จ.กรุงเทพมหานคร",
+      "region_id": "7",
+      "region_name": "กรุงเทพมหานครและปริมณฑล",
+      "station": "คลองภาษีเจริญ เพชรเกษม69",
+      "latitude": 13.69158,
+      "longitude": 100.38127,
+      "sum_rainfall_mm": 135.4,
+      "observed_at": "2026-10-17T18:00:00+07:00"
+    },
+    {
       "geocode": "102302",
       "tambon": "ต.หนองแขม",
       "amphoe": "อ.หนองแขม",
@@ -210,7 +223,7 @@
       "latitude": 13.69168,
       "longitude": 100.38097,
       "sum_rainfall_mm": 118.5,
-      "observed_at": "2026-10-17T15:00:00+07:00"
+      "observed_at": "2026-10-17T19:00:00+07:00"
     },
     {
       "geocode": "740205",
@@ -223,7 +236,7 @@
       "latitude": 13.662052,
       "longitude": 100.223332,
       "sum_rainfall_mm": 120.0,
-      "observed_at": "2026-10-17T15:00:00+07:00",
+      "observed_at": "2026-10-17T19:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -348,7 +361,7 @@
       "latitude": 8.472825,
       "longitude": 98.986899,
       "sum_rainfall_mm": 0.0,
-      "observed_at": "2026-10-17T14:00:00+07:00",
+      "observed_at": "2026-10-17T18:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -530,8 +543,8 @@
       "station": "บ้านหน้าเขา",
       "latitude": 8.529955,
       "longitude": 98.990604,
-      "sum_rainfall_mm": 2.0,
-      "observed_at": "2026-10-17T14:00:00+07:00",
+      "sum_rainfall_mm": 6.0,
+      "observed_at": "2026-10-17T18:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -713,8 +726,8 @@
       "station": "บ้านควนพุน",
       "latitude": 8.438118,
       "longitude": 98.987245,
-      "sum_rainfall_mm": 15.0,
-      "observed_at": "2026-10-17T14:00:00+07:00",
+      "sum_rainfall_mm": 17.5,
+      "observed_at": "2026-10-17T18:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -972,8 +985,8 @@
       "station": "บ้านในช่อง",
       "latitude": 8.491633,
       "longitude": 99.138902,
-      "sum_rainfall_mm": 22.0,
-      "observed_at": "2026-10-17T14:00:00+07:00",
+      "sum_rainfall_mm": 14.0,
+      "observed_at": "2026-10-17T18:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -1162,6 +1175,71 @@
       }
     },
     {
+      "geocode": "104001",
+      "tambon": "ต.บางแค",
+      "amphoe": "อ.บางแค",
+      "province": "จ.กรุงเทพมหานคร",
+      "region_id": "7",
+      "region_name": "กรุงเทพมหานครและปริมณฑล",
+      "station": "ค.ราชมนตรี-ภาษีเจริญ",
+      "latitude": 13.70754,
+      "longitude": 100.42622,
+      "sum_rainfall_mm": 37.5,
+      "observed_at": "2026-10-17T19:00:00+07:00"
+    },
+    {
+      "geocode": "104001",
+      "tambon": "ต.บางแค",
+      "amphoe": "อ.บางแค",
+      "province": "จ.กรุงเทพมหานคร",
+      "region_id": "7",
+      "region_name": "กรุงเทพมหานครและปริมณฑล",
+      "station": "สนข.บางแค",
+      "latitude": 13.69622,
+      "longitude": 100.40919,
+      "sum_rainfall_mm": 59.0,
+      "observed_at": "2026-10-17T19:00:00+07:00"
+    },
+    {
+      "geocode": "104002",
+      "tambon": "ต.บางแคเหนือ",
+      "amphoe": "อ.บางแค",
+      "province": "จ.กรุงเทพมหานคร",
+      "region_id": "7",
+      "region_name": "กรุงเทพมหานครและปริมณฑล",
+      "station": "ส.คลองบางจาก",
+      "latitude": 13.71471,
+      "longitude": 100.39555,
+      "sum_rainfall_mm": 74.0,
+      "observed_at": "2026-10-17T19:00:00+07:00"
+    },
+    {
+      "geocode": "104002",
+      "tambon": "ต.บางแคเหนือ",
+      "amphoe": "อ.บางแค",
+      "province": "จ.กรุงเทพมหานคร",
+      "region_id": "7",
+      "region_name": "กรุงเทพมหานครและปริมณฑล",
+      "station": "หมู่บ้านเศรษฐกิจ ซอย 26",
+      "latitude": 13.72167,
+      "longitude": 100.37676,
+      "sum_rainfall_mm": 49.5,
+      "observed_at": "2026-10-17T19:00:00+07:00"
+    },
+    {
+      "geocode": "104003",
+      "tambon": "ต.บางไผ่",
+      "amphoe": "อ.บางแค",
+      "province": "จ.กรุงเทพมหานคร",
+      "region_id": "7",
+      "region_name": "กรุงเทพมหานครและปริมณฑล",
+      "station": "จุดวัด ค.ทวีฯ-ค.บางเชือกหนัง",
+      "latitude": 13.75037,
+      "longitude": 100.35351,
+      "sum_rainfall_mm": 4.0,
+      "observed_at": "2026-10-17T19:00:00+07:00"
+    },
+    {
       "geocode": "102303",
       "tambon": "ต.หนองค้างพลู",
       "amphoe": "อ.หนองแขม",
@@ -1171,8 +1249,8 @@
       "station": "สนข.หนองแขม",
       "latitude": 13.70574,
       "longitude": 100.34931,
-      "sum_rainfall_mm": 52.0,
-      "observed_at": "2026-10-17T15:00:00+07:00"
+      "sum_rainfall_mm": 52.5,
+      "observed_at": "2026-10-17T19:00:00+07:00"
     }
   ]
 }
