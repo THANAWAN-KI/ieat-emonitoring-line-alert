@@ -3086,16 +3086,16 @@ document.getElementById('pngBtn').onclick=function(){return downloadReportPng()}
 </script>
 <style id="field-numbered-map-style">
 .field-reference-marker{background:transparent!important;border:0!important}
-.field-reference-number{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;border:2px solid #fff;background:#8B1E2D;color:#fff!important;-webkit-text-fill-color:#fff!important;font:bold 15px/1 Arial,sans-serif;box-shadow:0 1px 5px #0006}
+.field-reference-number{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:5px;border:2px solid #fff;background:#8B1E2D;color:#fff!important;-webkit-text-fill-color:#fff!important;font:bold 15px/1 Arial,sans-serif;box-shadow:0 1px 5px #0006}
 .field-reference-ready{background:#4F7D32!important}
-.field-report-wind{position:absolute;left:12px;bottom:42px;z-index:800;width:190px;padding:9px 11px;border:1px solid #d7dce2;border-radius:7px;background:#fffffff2;color:#171c22;font:11px/1.5 Sarabun,sans-serif;pointer-events:none;box-shadow:0 1px 6px #0002}
+.field-report-wind{position:absolute;right:12px;top:12px;z-index:800;width:190px;padding:9px 11px;border:1px solid #d7dce2;border-radius:7px;background:#fffffff2;color:#171c22;font:11px/1.5 Sarabun,sans-serif;pointer-events:none;box-shadow:0 1px 6px #0002}
 .field-report-wind strong{display:block;font-size:12px}
 .field-report-wind small{display:block;font-size:9px;color:#596270}
 .field-wind-arrow{display:block;width:38px;height:38px;margin:2px auto;font:bold 34px/38px Arial,sans-serif;color:#8B1E2D;transform-origin:center}
 </style>
 <script src="./dss-field-map-20261017.js"></script>
 <style id="field-coordination-report-style">
-html body #report #dssFieldBrief .fb-reference{display:inline-flex;align-items:center;justify-content:center;width:21px;height:21px;margin-right:5px;border-radius:50%;background:#8B1E2D;color:#fff!important;-webkit-text-fill-color:#fff!important;font:600 12px Arial,sans-serif}
+html body #report #dssFieldBrief .fb-reference{display:inline-flex;align-items:center;justify-content:center;width:21px;height:21px;margin-right:5px;border-radius:4px;background:#8B1E2D;color:#fff!important;-webkit-text-fill-color:#fff!important;font:600 12px Arial,sans-serif}
 html body #report #dssFieldBrief .fb-coordination{display:inline-block;margin:3px 0 0 7px;font-size:10px;line-height:1.45;color:#596270!important;-webkit-text-fill-color:#596270!important}
 html body #report #dssFieldBrief .fb-distance{display:inline-block!important}
 html body #report #dssFieldBrief .fb-support td>span:first-child{display:block}
@@ -3155,7 +3155,7 @@ html body #report.dss-field-export #dssFieldBrief .fb-support{font-size:13px!imp
    if(point)points.push({number:i+1,type,label,name:String(point.name||label),lat:Number(point.lat),lng:Number(point.lng),distance:Number(point.distance),status});
   });
   const foot=document.querySelector('#fbSupport')?.closest('.fb-map-grid')?.querySelector('table + .fb-muted');
-  if(foot)foot.textContent='ระยะเส้นตรง · สถานะบันทึกโดยผู้จัดทำ · หมายเลขชุมชน/CCTV เป็นจุดใกล้ที่สุด';
+  if(foot)foot.textContent='เลขกรอบสี่เหลี่ยมตรงกับตาราง · ระยะเส้นตรง · ชุมชน/CCTV เป็นจุดใกล้ที่สุด';
   const caption=document.getElementById('fbMapCaption');
   if(caption)caption.append(document.createTextNode(' · ชุมชน '+(state.communityDistance||'—')+' / CCTV '+(state.cctvDistance||'—')));
   const payload={type:'dss:field-map-data',lat:Number(state.lat),lng:Number(state.lng),company:state.company,points,windSpeed:String(state.windSpeed??''),windDeg:Number(state.windDeg),windDir:state.windDir,weatherTime:state.weatherTime};
