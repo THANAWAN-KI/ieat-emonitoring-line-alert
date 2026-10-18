@@ -1553,11 +1553,13 @@ async function downloadReportPng(){
     const height=brief.getBoundingClientRect().height;if(height>1421){brief.style.transform='scale('+(1421/height)+')';brief.style.transformOrigin='top left';brief.style.marginLeft=((986*(1-1421/height))/2)+'px'}
    }
   });
-  const secondNode=document.getElementById('dssPageTwo');
-  const secondHeight=Math.max(1485,Math.ceil(secondNode.scrollHeight));
-  const second=await html2canvas(secondNode,{backgroundColor:'#fff',scale:2,useCORS:true,allowTaint:false,logging:false,width:1050,height:secondHeight,windowWidth:1200,
-   onclone(doc){const node=doc.getElementById('dssPageTwo');node.classList.add('dss-page-two-export');node.style.setProperty('width','1050px','important');node.style.setProperty('height',secondHeight+'px','important')}
-  });
+  const stage=document.createElement('div');stage.style.cssText='position:absolute;left:-100000px;top:0;width:1050px;pointer-events:none';
+  const secondNode=document.getElementById('dssPageTwo').cloneNode(true);secondNode.classList.add('dss-page-two-export');secondNode.style.setProperty('width','1050px','important');stage.append(secondNode);document.body.append(stage);
+  let second;
+  try{
+   const secondHeight=Math.max(1485,Math.ceil(secondNode.scrollHeight));
+   second=await html2canvas(secondNode,{backgroundColor:'#fff',scale:2,useCORS:true,allowTaint:false,logging:false,width:1050,height:secondHeight,windowWidth:1200});
+  }finally{stage.remove()}
   const blobs=await Promise.all([first,second].map(canvas=>new Promise((resolve,reject)=>canvas.toBlob(blob=>blob?resolve(blob):reject(Error('ไม่สามารถสร้างภาพรายงานได้')),'image/png'))));
   for(let index=0;index<blobs.length;index++){
    const url=URL.createObjectURL(blobs[index]),link=document.createElement('a');link.href=url;link.download='IEAT-DSS-'+(state.reportNo||Date.now())+'-page-'+(index+1)+'.png';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
@@ -3417,7 +3419,7 @@ html body #dssPageTwo.dss-page-two-export table{font-size:13px!important}
   page.append(el('h2','2. อุปกรณ์ระงับเหตุในฐานข้อมูลโรงงาน · '+equipment.length+' รายการ'));
   const equipmentRows=selected?equipment.map((item,index)=>[index+1,item.name,item.type,item.amount,item.amountUnit,item.volume,item.volumeUnit]):[];
   if(selected&&!equipmentRows.length&&equipmentStatus!==missing)equipmentRows.push([equipmentStatus,'','','','','','']);
-  page.append(table(['ลำดับ','รายการอุปกรณ์','ประเภท','จำนวน','หน่วย','ขนาด / ความจุ','หน่วย'],equipmentRows));
+  page.append(table(['ลำดับ','รายการอุปกรณ์','ประเภท','จำนวน','หน่วย','ขนาด / ปริมาตร / แรงดัน','หน่วย'],equipmentRows));
   const availability=el('p','จำนวนและขนาดแสดงแยกตามข้อมูล DSS · ความพร้อมใช้งานยังไม่ได้รับการยืนยัน');availability.className='p2-note';page.append(availability);
   const time=el('div','เวลาสืบค้นข้อมูลสารเคมี: '+value(state.chemicalDataTime));time.className='p2-meta';page.append(time);
   const footer=el('div','แหล่งข้อมูล: รายงานสารเคมี DSS · ข้อมูลอุปกรณ์ DSS | '+(state.reportNo||'')+' | หน้า 2 / 2');footer.className='dss-page-footer';page.append(footer);
