@@ -1526,81 +1526,47 @@ function reportText(ctx,text,x,y,maxWidth,lineHeight){
   lines.push(line);lines.slice(0,3).forEach((part,i)=>ctx.fillText(part,x,y+i*lineHeight));
 }
 async function downloadReportPng(){
-  document.getElementById('dssExportError')?.remove();
-  loading.classList.add('show');
-  try{
-    if(!validPoint()||(state.company===defaults.company&&state.positionSource!=='manual'))throw Error('กรุณาเลือกโรงงานหรือจุดเกิดเหตุก่อนดาวน์โหลด');
-    pngBtn.disabled=true;state.date=new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'});render();let bufferExportImage=null;
-    const liveMapReady=typeof window.dssWaitMapReady==='function';
-    if(liveMapReady){await window.dssWaitMapReady();if(window.dssExportBufferOverlay)bufferExportImage=window.dssExportBufferOverlay()}
-    else{
-      await Promise.race([mapLoadPromise,new Promise(resolve=>setTimeout(resolve,8000))]);
-      if(!mapImage.complete||!mapImage.naturalWidth)throw new Error('ภาพแผนที่ยังไม่พร้อม');
-    }
-    await document.fonts.ready;
-    if(typeof html2canvas!=='function')throw new Error('ไม่สามารถโหลดเครื่องมือบันทึกภาพได้');
-    const report=document.getElementById('report');
-    const sharedMapImage=new URLSearchParams(location.search).get('embedded')==='dashboard'&&typeof parent.ieatCaptureReportMap==='function'?await parent.ieatCaptureReportMap(html2canvas):(await html2canvas(document.getElementById('map'),{backgroundColor:'#f7f8fa',scale:2,useCORS:true,allowTaint:false,logging:false})).toDataURL('image/png');
-    const exportIconSelector='.dss-support-symbol,.dss-support-cluster';
-    const exportIcons=await Promise.all(Array.from(report.querySelectorAll(exportIconSelector)).map(async symbol=>{
-      const cluster=symbol.classList.contains('dss-support-cluster'),bounds=symbol.getBoundingClientRect(),width=Math.max(1,bounds.width||22),height=Math.max(1,bounds.height||22);
-      const style=getComputedStyle(symbol),color=cluster?style.getPropertyValue('--cluster-color').trim():style.getPropertyValue('--symbol-bg').trim()||style.backgroundColor;
-      const iconCanvas=document.createElement('canvas');iconCanvas.width=Math.ceil(width*3);iconCanvas.height=Math.ceil(height*3);
-      const ctx=iconCanvas.getContext('2d');ctx.scale(3,3);ctx.beginPath();ctx.arc(width/2,height/2,Math.min(width,height)/2-1,0,Math.PI*2);ctx.fillStyle=cluster?'#ffffff':color;ctx.fill();ctx.strokeStyle=cluster?color:'#ffffff';ctx.lineWidth=cluster?2:1.5;ctx.stroke();
-      const svg=symbol.querySelector('svg');
-      if(svg){const copy=svg.cloneNode(true);copy.removeAttribute('style');copy.setAttribute('xmlns','http://www.w3.org/2000/svg');copy.setAttribute('width','24');copy.setAttribute('height','24');const markup=new XMLSerializer().serializeToString(copy).replace(/currentColor/g,cluster?color:'#ffffff');const img=new Image();img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(markup);await img.decode();const size=cluster?13:Math.round(width*.64);ctx.drawImage(img,cluster?5:(width-size)/2,(height-size)/2,size,size)}
-      if(cluster){ctx.fillStyle=color;ctx.font='600 12px Arial';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(symbol.querySelector('b')?.textContent||'',25,height/2)}
-      return {src:iconCanvas.toDataURL('image/png'),width,height};
-    }));
-    const canvas=await html2canvas(report,{
-      backgroundColor:'#fff',scale:2,useCORS:true,allowTaint:false,logging:false,
-      width:1050,height:1485,windowWidth:1200,
-      ignoreElements:element=>element.id==='supportList'||element.hasAttribute('data-export-exclude'),
-      onclone(clonedDocument){
-        const fieldReport=clonedDocument.getElementById("report");fieldReport.classList.remove("dss-full-view");fieldReport.classList.add("dss-field-export");
-        fieldReport.querySelectorAll(":scope > :not(#dssFieldBrief)").forEach(node=>node.remove());
-        const fieldMap=clonedDocument.getElementById("fieldBriefMap");if(fieldMap&&sharedMapImage){const image=clonedDocument.createElement("img");image.src=sharedMapImage;image.alt="แผนที่จุดเกิดเหตุ";fieldMap.replaceChildren(image)}
-        const brief=clonedDocument.getElementById("dssFieldBrief");
-        if(brief){const availableHeight=1421,contentHeight=brief.getBoundingClientRect().height;if(contentHeight>availableHeight){const scale=availableHeight/contentHeight;brief.style.transform="scale("+scale+")";brief.style.transformOrigin="top left";brief.style.marginLeft=((986*(1-scale))/2)+"px"}}
-        clonedDocument.getElementById("report")?.classList.add("dss-png-layout");
-        clonedDocument.querySelectorAll('#report '+exportIconSelector.split(',').join(',#report ')).forEach((svg,index)=>{const icon=exportIcons[index];if(!icon)return;const img=clonedDocument.createElement('img');img.src=icon.src;img.alt='';img.style.setProperty('width',icon.width+'px','important');img.style.setProperty('height',icon.height+'px','important');img.style.setProperty('display','inline-block','important');img.style.setProperty('vertical-align','middle','important');img.style.setProperty('max-width','none','important');img.style.setProperty('flex','none','important');svg.replaceWith(img)});
-        clonedDocument.querySelectorAll('#supportList,[data-export-exclude]').forEach(element=>element.remove());
-        const clonedMap=clonedDocument.querySelector('#report #map');
-        if(!clonedMap)return;
-        if(sharedMapImage){
-          const box=clonedMap.closest('.mapbox');box.style.setProperty('position','static','important');box.style.setProperty('left','auto','important');box.style.setProperty('width','100%','important');
-          clonedMap.style.setProperty('height','360px','important');clonedMap.replaceChildren();
-          const image=clonedDocument.createElement('img');image.src=sharedMapImage;image.style.cssText='display:block!important;width:100%!important;height:100%!important;object-fit:contain!important';clonedMap.append(image);return;
-        }
-        const liveMap=clonedMap.querySelector('#dssLiveMap');
-        if(liveMap){
-          if(bufferExportImage){
-            liveMap.querySelectorAll('.leaflet-overlay-pane svg').forEach(svg=>svg.style.setProperty('display','none','important'));
-            const overlay=clonedDocument.createElement('img');overlay.src=bufferExportImage;
-            overlay.style.cssText='position:absolute;inset:0;width:100%;height:100%;z-index:450;pointer-events:none';
-            liveMap.appendChild(overlay);
-          }
-          // Keep Leaflet's current panes, transforms, markers, circles and labels.
-          clonedMap.querySelectorAll(':scope > img,:scope > div').forEach(el=>{
-            if(el===liveMap){el.style.setProperty('display','block','important');el.style.setProperty('visibility','visible','important')}
-            else el.style.setProperty('display','none','important');
-          });
-        }else{
-          clonedMap.querySelectorAll(':scope > img,:scope > div').forEach(el=>{
-            el.style.setProperty('display','block','important');el.style.setProperty('visibility','visible','important');
-          });
-        }
-        const caption=clonedDocument.querySelector('#report .map-caption a');
-        if(caption)caption.style.setProperty('display','none','important');
-      }
-    });
-    const baseName='IEAT-DSS-'+(state.reportNo||Date.now());
-    const image=await new Promise((resolve,reject)=>canvas.toBlob(blob=>blob?resolve(blob):reject(new Error('ไม่สามารถสร้างภาพรายงานได้')),'image/png'));
-    const url=URL.createObjectURL(image),a=document.createElement('a');
-    a.download=baseName+'.png';a.href=url;document.body.append(a);a.click();a.remove();
-    setTimeout(()=>URL.revokeObjectURL(url),60000);
-  }catch(error){console.error(error);let status=document.getElementById('dssExportError');if(!status){status=document.createElement('p');status.id='dssExportError';status.setAttribute('role','alert');status.setAttribute('data-export-exclude','');status.style.cssText='margin:8px 16px;color:#8B1E2D;font-size:13px';document.querySelector('.top').after(status)}status.textContent='ส่งออกรายงานไม่สำเร็จ: '+error.message;alert('ดาวน์โหลด PNG ไม่สำเร็จ: '+error.message)}
-  finally{loading.classList.remove('show');pngBtn.disabled=false}
+ document.getElementById('dssExportError')?.remove();loading.classList.add('show');pngBtn.disabled=true;
+ try{
+  if(!validPoint()||(state.company===defaults.company&&state.positionSource!=='manual'))throw Error('กรุณาเลือกโรงงานก่อนดาวน์โหลด');
+  state.date=new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'});
+  if(window.dssLoadReportChemicals)await window.dssLoadReportChemicals();
+  if(window.dssRefreshPageTwo)await window.dssRefreshPageTwo();
+  render();await document.fonts.ready;
+  if(typeof html2canvas!=='function')throw Error('ไม่สามารถโหลดเครื่องมือบันทึกภาพได้');
+  let mapImage;
+  if(new URLSearchParams(location.search).get('embedded')==='dashboard'&&typeof parent.ieatCaptureReportMap==='function')mapImage=await parent.ieatCaptureReportMap(html2canvas);
+  else{
+   if(window.dssWaitMapReady)await window.dssWaitMapReady();
+   mapImage=(await html2canvas(document.getElementById('map'),{backgroundColor:'#f7f8fa',scale:2,useCORS:true,allowTaint:false,logging:false,ignoreElements:e=>e.classList?.contains('leaflet-control-container')})).toDataURL('image/png');
+  }
+  const first=await html2canvas(document.getElementById('report'),{
+   backgroundColor:'#fff',scale:2,useCORS:true,allowTaint:false,logging:false,width:1050,height:1485,windowWidth:1200,
+   ignoreElements:el=>el.hasAttribute('data-export-exclude'),
+   onclone(doc){
+    const report=doc.getElementById('report');report.classList.remove('dss-full-view');report.classList.add('dss-field-export','dss-two-page-first');
+    report.querySelectorAll(':scope > :not(#dssFieldBrief)').forEach(el=>el.remove());
+    const brief=doc.getElementById('dssFieldBrief');brief.querySelectorAll(':scope > .fb-section').forEach((section,index)=>{if(index===2)section.remove()});
+    brief.querySelector('.fb-footer')?.remove();
+    const slot=doc.getElementById('fieldBriefMap');slot.replaceChildren();const img=doc.createElement('img');img.src=mapImage;img.alt='ตำแหน่งสถานประกอบการและจุดสนับสนุน';slot.append(img);
+    const foot=doc.createElement('div');foot.className='dss-page-footer';foot.textContent='แหล่งข้อมูล: e_PP · DSS · Open-Meteo (แบบจำลอง) | '+(state.reportNo||'')+' | หน้า 1 / 2';brief.append(foot);
+    const height=brief.getBoundingClientRect().height;if(height>1421){brief.style.transform='scale('+(1421/height)+')';brief.style.transformOrigin='top left';brief.style.marginLeft=((986*(1-1421/height))/2)+'px'}
+   }
+  });
+  const secondNode=document.getElementById('dssPageTwo');
+  const secondHeight=Math.max(1485,Math.ceil(secondNode.scrollHeight));
+  const second=await html2canvas(secondNode,{backgroundColor:'#fff',scale:2,useCORS:true,allowTaint:false,logging:false,width:1050,height:secondHeight,windowWidth:1200,
+   onclone(doc){const node=doc.getElementById('dssPageTwo');node.classList.add('dss-page-two-export');node.style.setProperty('width','1050px','important');node.style.setProperty('height',secondHeight+'px','important')}
+  });
+  const blobs=await Promise.all([first,second].map(canvas=>new Promise((resolve,reject)=>canvas.toBlob(blob=>blob?resolve(blob):reject(Error('ไม่สามารถสร้างภาพรายงานได้')),'image/png'))));
+  for(let index=0;index<blobs.length;index++){
+   const url=URL.createObjectURL(blobs[index]),link=document.createElement('a');link.href=url;link.download='IEAT-DSS-'+(state.reportNo||Date.now())+'-page-'+(index+1)+'.png';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
+   if(index===0)await new Promise(resolve=>setTimeout(resolve,500));
+  }
+ }catch(error){
+  let status=document.getElementById('dssExportError');if(!status){status=document.createElement('p');status.id='dssExportError';status.setAttribute('role','alert');status.setAttribute('data-export-exclude','');document.querySelector('.top').after(status)}
+  status.textContent='ส่งออกรายงานไม่สำเร็จ: '+error.message;
+ }finally{loading.classList.remove('show');pngBtn.disabled=false}
 }
 </script>
 <style id="dss-arcgis-analysis-embed">.report .map .incident-analysis-frame{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:2;background:#eef1f4}.report .map>img,.report .map>div{visibility:hidden}.report .map-caption a{color:#511378;text-decoration:underline}</style>
@@ -3393,6 +3359,89 @@ html body #report.dss-field-export #dssFieldBrief .fb-map{height:470px!important
   try{await window.dssLoadReportChemicals()}finally{button.disabled=false}
  };
  if(state.company&&state.company!==defaults.company)window.dssLoadReportChemicals();
+})();
+</script>
+<style id="two-page-dss-report-style">
+#dssFieldBrief>.fb-section:nth-of-type(3),#dssFieldBrief>.fb-footer{display:none!important}
+html body #report.dss-two-page-first #dssFieldBrief .fb-map{height:730px!important}
+html body #report.dss-two-page-first #dssFieldBrief .fb-support td,html body #report.dss-two-page-first #dssFieldBrief .fb-support th{padding:9px 6px!important}
+.dss-page-footer{border-top:1px solid #dfe3e9;padding-top:10px;margin-top:20px;font-size:11px;color:#5f6873;text-align:right}
+#dssPageTwo{box-sizing:border-box;background:#fff;padding:28px 30px;margin-top:24px;border:1px solid #dfe3e9;color:#171c22;font:14px/1.6 Sarabun,Tahoma,sans-serif}
+#dssPageTwo *{box-sizing:border-box}
+#dssPageTwo .p2-header{display:flex;align-items:center;gap:14px;border-bottom:2px solid #8B1E2D;padding-bottom:14px;margin-bottom:16px}
+#dssPageTwo .p2-header img{width:40px;height:58px;object-fit:contain}#dssPageTwo h1{font-size:22px;line-height:1.5;margin:0}
+#dssPageTwo .p2-meta{font-size:11px;color:#5f6873}
+#dssPageTwo .p2-company{font-size:18px;font-weight:700;margin:8px 0 4px}
+#dssPageTwo .p2-facts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 20px}
+#dssPageTwo .p2-facts>div{border:1px solid #e2e6ec;padding:8px;font-size:13px}
+#dssPageTwo h2{font-size:17px;background:#f3f4f6;border-left:3px solid #8B1E2D;padding:8px 10px;margin:20px 0 10px}
+#dssPageTwo .p2-scroll{overflow-x:auto}#dssPageTwo table{width:100%;border-collapse:collapse;font-size:12px;line-height:1.5}
+#dssPageTwo th,#dssPageTwo td{padding:8px 7px;border:1px solid #dfe3e9;vertical-align:top;text-align:left;overflow-wrap:anywhere}
+#dssPageTwo thead th{background:#f4f5f7;font-weight:700}#dssPageTwo tbody tr:nth-child(even){background:#fcfcfd}
+#dssPageTwo .p2-note{font-size:11px;color:#5f6873;margin:6px 0}
+#dssPageTwo .p2-chemical-name{min-width:140px}#dssPageTwo .p2-equip-name{min-width:160px}
+html body #dssPageTwo.dss-page-two-export{margin:0!important;padding:32px!important;border:0!important;min-height:1485px!important}
+html body #dssPageTwo.dss-page-two-export .p2-scroll{overflow:visible!important}
+html body #dssPageTwo.dss-page-two-export table{font-size:13px!important}
+@media(max-width:650px){#dssPageTwo{padding:20px 14px}#dssPageTwo h1{font-size:19px}#dssPageTwo .p2-facts{grid-template-columns:1fr}#dssPageTwo table{min-width:650px}}
+</style>
+<script id="two-page-dss-report-script">
+(function(){
+ const missing='ไม่พบข้อมูล';let equipment=[],equipmentStatus='กำลังโหลดข้อมูล',request=0,lastIdentity='';
+ const page=document.createElement('article');page.id='dssPageTwo';document.querySelector('.report-wrap').append(page);
+ const el=(tag,value)=>{const node=document.createElement(tag);if(value!==undefined)node.textContent=value;return node};
+ const value=v=>v===undefined||v===null||String(v).trim()===''||/^(?:[—-]|null|undefined)$/i.test(String(v).trim())?missing:String(v);
+ function table(headers,rows){
+  const scroll=el('div');scroll.className='p2-scroll';const table=el('table'),head=el('thead'),header=el('tr');
+  headers.forEach(label=>header.append(el('th',label)));head.append(header);table.append(head);
+  const body=el('tbody');
+  if(rows.length)rows.forEach(values=>{const row=el('tr');values.forEach(v=>row.append(el('td',value(v))));body.append(row)});
+  else{const row=el('tr'),cell=el('td',missing);cell.colSpan=headers.length;row.append(cell);body.append(row)}
+  table.append(body);scroll.append(table);return scroll;
+ }
+ function draw(){
+  const selected=state.company&&state.company!==defaults.company;page.replaceChildren();
+  const header=el('header');header.className='p2-header';
+  const logo=document.querySelector('#dssFieldBrief .fb-logo')?.cloneNode();if(logo)header.append(logo);
+  const heading=el('div');heading.append(el('h1','รายละเอียดข้อมูล DSS รายโรงงาน'));
+  const meta=el('div',(state.reportNo||'')+' · จัดทำ '+(state.date||missing)+' (เวลาไทย)');meta.className='p2-meta';heading.append(meta);header.append(heading);page.append(header);
+  const company=el('div',selected?state.company:missing);company.className='p2-company';page.append(company);
+  const facts=el('div');facts.className='p2-facts';
+  [['นิคมฯ / ท่าเรือ',state.estate],['เลขทะเบียน',state.registration]].forEach(([label,v])=>{const item=el('div');item.append(el('div',label),el('strong',value(v)));facts.append(item)});page.append(facts);
+  const catalog=selected&&Array.isArray(state.hazardCatalog)?state.hazardCatalog:[];
+  page.append(el('h2','1. สารเคมีในฐานข้อมูลโรงงาน · '+catalog.length+' รายการ'));
+  const chemicalRows=catalog.map((item,index)=>[index+1,item.name,item.cas,item.un,item.volume,item.unit]);
+  if(!chemicalRows.length&&/ไม่สำเร็จ|กำลังโหลด/.test(String(state.chemical)))chemicalRows.push([/ไม่สำเร็จ/.test(state.chemical)?'เชื่อมต่อข้อมูลสารเคมีไม่สำเร็จ':'กำลังโหลดข้อมูล','','','','','']);
+  page.append(table(['ลำดับ','ชื่อสารเคมี','CAS No.','UN No.','ปริมาณ','หน่วย'],chemicalRows));
+  const note=el('p','รายงานสารเคมี DSS · 1 ม.ค.–15 ต.ค. 2569 · รายการในฐานข้อมูลโรงงาน ไม่ใช่การยืนยันสารที่เกี่ยวข้องกับเหตุ');note.className='p2-note';page.append(note);
+  page.append(el('h2','2. อุปกรณ์ระงับเหตุในฐานข้อมูลโรงงาน · '+equipment.length+' รายการ'));
+  const equipmentRows=selected?equipment.map((item,index)=>[index+1,item.name,item.type,item.amount,item.amountUnit,item.volume,item.volumeUnit]):[];
+  if(selected&&!equipmentRows.length&&equipmentStatus!==missing)equipmentRows.push([equipmentStatus,'','','','','','']);
+  page.append(table(['ลำดับ','รายการอุปกรณ์','ประเภท','จำนวน','หน่วย','ขนาด / ความจุ','หน่วย'],equipmentRows));
+  const availability=el('p','จำนวนและขนาดแสดงแยกตามข้อมูล DSS · ความพร้อมใช้งานยังไม่ได้รับการยืนยัน');availability.className='p2-note';page.append(availability);
+  const time=el('div','เวลาสืบค้นข้อมูลสารเคมี: '+value(state.chemicalDataTime));time.className='p2-meta';page.append(time);
+  const footer=el('div','แหล่งข้อมูล: รายงานสารเคมี DSS · ข้อมูลอุปกรณ์ DSS | '+(state.reportNo||'')+' | หน้า 2 / 2');footer.className='dss-page-footer';page.append(footer);
+  const button=document.getElementById('pngBtn');if(button)button.textContent='ดาวน์โหลด PNG 2 หน้า';
+ }
+ window.dssRefreshPageTwo=async function(){
+  const current=++request,identity=[state.company,state.registration,state.estate].join('|');lastIdentity=identity;equipment=[];equipmentStatus='กำลังโหลดข้อมูล';draw();
+  if(!state.company||state.company===defaults.company){equipmentStatus=missing;draw();return}
+  try{
+   const features=await loadDssEquipment();if(current!==request||identity!==[state.company,state.registration,state.estate].join('|'))return;
+   if(features===null){equipmentStatus='เชื่อมต่อข้อมูลอุปกรณ์ไม่สำเร็จ';draw();return}
+   const numbers=String(state.registration||'').split(' / ');
+   const match=matchingDssFeature(features,state.company,state.estate,{fid14n:numbers[0],FactoryID:numbers[1]})||matchingDssFeature(features,state.company,state.estate,{});
+   const p=match?.properties||{},keys=Object.keys(p).filter(key=>/^equipment\d+_name$/.test(key)&&p[key]).sort((a,b)=>Number(a.match(/\d+/)[0])-Number(b.match(/\d+/)[0]));
+   equipment=keys.map(key=>{const prefix=key.replace(/name$/,'');return {name:p[key],type:p[prefix+'type'],amount:p[prefix+'amount'],amountUnit:p[prefix+'amountUnit'],volume:p[prefix+'volume'],volumeUnit:p[prefix+'volumeUnit']}});
+   equipmentStatus=missing;
+  }catch(error){equipmentStatus='เชื่อมต่อข้อมูลอุปกรณ์ไม่สำเร็จ'}
+  draw();
+ };
+ const previousRender=render;render=function(){const result=previousRender.apply(this,arguments);draw();return result};
+ const previousSelect=selectDssLookup;selectDssLookup=async function(){await previousSelect.apply(this,arguments);await window.dssRefreshPageTwo()};
+ const full=Array.from(document.querySelectorAll('.top-actions button')).find(button=>button.textContent==='ดูข้อมูลฉบับเต็ม');
+ if(full){full.textContent='ดูหน้าที่ 2';full.onclick=()=>page.scrollIntoView({behavior:'smooth',block:'start'})}
+ window.dssRefreshPageTwo();draw();
 })();
 </script></body></html>
 
