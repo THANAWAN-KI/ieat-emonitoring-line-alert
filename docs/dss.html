@@ -3196,7 +3196,7 @@ html body #report #dssFieldBrief .fb-qr[hidden]{display:none!important}
  const types=[['fire','ดับเพลิง'],['hospital','โรงพยาบาล'],['hydrant','หัวจ่ายน้ำ'],['police','ตำรวจ'],['community','ชุมชน'],['cctv','CCTV']];
  const available=value=>{
   const text=String(value??'').trim();
-  return text!==''&&!/^(?:[—–-](?:\s*(?:กม\.|เมตร|แห่ง|จุด|°C|%))?|null|undefined|N\/A)$/i.test(text)&&!/^(?:ไม่พบข้อมูล|ไม่มีข้อมูล|ไม่มีรายการ|ไม่ระบุ|รอยืนยัน|รอดึง|รอวิเคราะห์|กำลัง|โหลดข้อมูล.*ไม่สำเร็จ)/.test(text);
+  return text!==''&&!/^(?:[—–-](?:\s*(?:กม\.|เมตร|แห่ง|จุด|°C|%))?|null|undefined|N\/A)$/i.test(text)&&!/^(?:ไม่พบข้อมูล|ไม่มีข้อมูล|ไม่มีรายการ|ไม่ระบุ|รอยืนยัน|รอดึง|รอวิเคราะห์|กำลัง(?:โหลด|ดึง|ค้นหา|ประมวลผล)|โหลดข้อมูล.*ไม่สำเร็จ)/.test(text);
  };
  const valueOf=value=>available(value)?String(value).trim():missing;
  const limit=(value,max=150)=>{const text=valueOf(value);return text.length>max?text.slice(0,max)+'…':text};
