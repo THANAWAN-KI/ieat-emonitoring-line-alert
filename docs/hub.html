@@ -108,7 +108,7 @@
  const sub=document.createElement('p');sub.textContent='เลือกประเภทเหตุและค้นหาบริษัท เพื่อจัดทำรายงานในหน้านี้';
  heading.append(title,sub);
  frame.loading='lazy';frame.style.height='1800px';
- function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261018-two-png-final');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
+ function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261018-two-png-map-final');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
  frame.src=reportUrl();
  link.addEventListener('click',event=>{event.preventDefault();const url=reportUrl();if(frame.src!==url)frame.src=url;section.scrollIntoView({behavior:'smooth',block:'start'});});
  window.returnToRiskDashboard=function(){document.getElementById('otherPage').hidden=true;dashboard.hidden=false;document.querySelectorAll('.nav-tab').forEach(tab=>tab.classList.toggle('active',tab.dataset.page==='risk'));document.getElementById('riskMapSection')?.scrollIntoView({behavior:'smooth',block:'start'});window.dispatchEvent(new Event('resize'))};
@@ -696,8 +696,14 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
    focusLayer=L.marker([item.lat,item.lng],{zIndexOffset:2500}).addTo(map).bindPopup(text).openPopup();map.setView([item.lat,item.lng],17);mapSection.scrollIntoView({behavior:'smooth',block:'center'});
   }
  });
- window.ieatCaptureReportMap=async renderer=>{
+ window.ieatCaptureReportMap=async (renderer,context)=>{
   const map=window.ieatSupportMap;if(!map)return null;map.invalidateSize();
+  if(context&&Number.isFinite(context.lat)&&Number.isFinite(context.lng)){
+   const points=(context.points||[]).filter(p=>Number.isFinite(Number(p.lat))&&Number.isFinite(Number(p.lng)));
+   if(points.length)map.fitBounds(L.latLngBounds([[context.lat,context.lng],...points.map(p=>[Number(p.lat),Number(p.lng)])]),{padding:[45,55],maxZoom:15,animate:false});
+   else map.setView([context.lat,context.lng],15,{animate:false});
+   await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+  }
   const container=document.getElementById('map');
   await Promise.allSettled(Array.from(container.querySelectorAll('img.leaflet-tile')).filter(img=>!img.complete).map(img=>new Promise(resolve=>{img.addEventListener('load',resolve,{once:true});img.addEventListener('error',resolve,{once:true});setTimeout(resolve,3000)})));
   const canvas=await renderer(container,{backgroundColor:'#f3f6f8',scale:2,useCORS:true,allowTaint:false,logging:false,ignoreElements:element=>['leaflet-control-container','dashboard-point-cluster','dashboard-point-icon'].some(name=>element.classList?.contains(name))});
