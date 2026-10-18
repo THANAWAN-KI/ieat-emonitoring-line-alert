@@ -706,6 +706,8 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
   }
   const container=document.getElementById('map');
   await Promise.allSettled(Array.from(container.querySelectorAll('img.leaflet-tile')).filter(img=>!img.complete).map(img=>new Promise(resolve=>{img.addEventListener('load',resolve,{once:true});img.addEventListener('error',resolve,{once:true});setTimeout(resolve,3000)})));
+  await Promise.all(Array.from(container.querySelectorAll('img.leaflet-tile')).map(img=>img.decode?img.decode().catch(()=>{}):Promise.resolve()));
+  await new Promise(resolve=>setTimeout(resolve,500));
   const canvas=await renderer(container,{backgroundColor:'#f3f6f8',scale:2,useCORS:true,allowTaint:false,logging:false,ignoreElements:element=>['leaflet-control-container','dashboard-point-cluster','dashboard-point-icon'].some(name=>element.classList?.contains(name))});
   return canvas.toDataURL('image/png');
  };
