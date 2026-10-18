@@ -817,7 +817,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 </section></div></main>
 
 <script>
-const defaults={dispersion:null,dispersionChemical:'',dispersionModel:'ALOHA',dispersionTime:'',dispersionScenario:'',leakChemical:'',leakCAS:'',leakUN:'',leakState:'',leakTime:'',leakQuantity:'',leakSource:'',leakStatus:'',leakDetails:'',leakReporter:'',leakConfirmedAt:'',leakWater:'',leakSupport:'',hazardCatalog:[],chemicalDataSource:'',chemicalDataTime:'',title:'รายงานข้อมูลสนับสนุนการรับมือเหตุฉุกเฉิน',unit:'ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย',reportNo:'EMCC-'+new Date().toLocaleDateString('sv-SE',{timeZone:'Asia/Bangkok'}).replaceAll('-','')+'-001',date:new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'}),incidentName:'',occurredAt:'',notifiedAt:'',incidentStatus:'อยู่ระหว่างตรวจสอบ',incidentDetails:'',reporter:'',contact:'',positionConfirmed:false,status:'ข้อมูลสนับสนุนเบื้องต้น',company:'บริษัท / โรงงานที่เกิดเหตุ',registration:'—',estate:'—',address:'—',chemical:'—',response:'รอยืนยันข้อมูลการสนับสนุนกับผู้รับผิดชอบ',event:'เหตุเพลิงไหม้',level:'เฝ้าระวัง',lat:'13.7563',lng:'100.5018',temp:'—',weather:'รอดึงข้อมูลสภาพอากาศ',humidity:'—',windSpeed:'—',windDir:'—',windDeg:'0',weatherTime:'',hospitalName:'โรงพยาบาลใกล้ที่สุด',hospitalDistance:'— กม.',fireName:'สถานีดับเพลิงใกล้ที่สุด',fireDistance:'— กม.',policeName:'สถานีตำรวจใกล้ที่สุด',policeDistance:'— กม.',hydrantName:'หัวจ่ายน้ำดับเพลิง',hydrantDistance:'— เมตร',communityName:'ชุมชนในรัศมี 3 กม.',communityDistance:'— แห่ง',cctvName:'กล้อง CCTV ใกล้เคียง',cctvDistance:'— จุด',note:'ข้อมูลนี้ใช้สนับสนุนการประสานงานเบื้องต้น โปรดตรวจสอบความถูกต้องกับหน่วยงานเจ้าของข้อมูลก่อนนำไปใช้อ้างอิง',source:'คลังข้อมูล DSS กนอ., ArcGIS Risk Map และ Open-Meteo (ข้อมูลสภาพอากาศจากแบบจำลอง)',bufferKm:5};
+const defaults={dispersion:null,dispersionChemical:'',dispersionModel:'ALOHA',dispersionTime:'',dispersionScenario:'',leakChemical:'',leakCAS:'',leakUN:'',leakState:'',leakTime:'',leakQuantity:'',leakSource:'',leakStatus:'',leakDetails:'',leakReporter:'',leakConfirmedAt:'',leakWater:'',leakSupport:'',hazardCatalog:[],chemicalDataSource:'',chemicalDataTime:'',title:'รายงานข้อมูลสนับสนุนการรับมือเหตุฉุกเฉิน',unit:'ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย',reportNo:'EMCC-'+new Date().toLocaleDateString('sv-SE',{timeZone:'Asia/Bangkok'}).replaceAll('-','')+'-001',date:new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'}),incidentName:'',occurredAt:'',notifiedAt:'',incidentStatus:'',incidentDetails:'',reporter:'',contact:'',positionConfirmed:false,status:'ข้อมูลสนับสนุนเบื้องต้น',company:'บริษัท / โรงงานที่เกิดเหตุ',registration:'—',estate:'—',address:'—',chemical:'—',response:'รอยืนยันข้อมูลการสนับสนุนกับผู้รับผิดชอบ',event:'เหตุเพลิงไหม้',level:'เฝ้าระวัง',lat:'13.7563',lng:'100.5018',temp:'—',weather:'รอดึงข้อมูลสภาพอากาศ',humidity:'—',windSpeed:'—',windDir:'—',windDeg:'0',weatherTime:'',hospitalName:'โรงพยาบาลใกล้ที่สุด',hospitalDistance:'— กม.',fireName:'สถานีดับเพลิงใกล้ที่สุด',fireDistance:'— กม.',policeName:'สถานีตำรวจใกล้ที่สุด',policeDistance:'— กม.',hydrantName:'หัวจ่ายน้ำดับเพลิง',hydrantDistance:'— เมตร',communityName:'ชุมชนในรัศมี 3 กม.',communityDistance:'— แห่ง',cctvName:'กล้อง CCTV ใกล้เคียง',cctvDistance:'— จุด',note:'ข้อมูลนี้ใช้สนับสนุนการประสานงานเบื้องต้น โปรดตรวจสอบความถูกต้องกับหน่วยงานเจ้าของข้อมูลก่อนนำไปใช้อ้างอิง',source:'คลังข้อมูล DSS กนอ., ArcGIS Risk Map และ Open-Meteo (ข้อมูลสภาพอากาศจากแบบจำลอง)',bufferKm:5};
 const groups=[['ข้อมูลเหตุสารเคมีรั่วไหล',[["leakChemical","สารที่ได้รับแจ้งว่ารั่ว"],["leakCAS","CAS (ถ้าทราบ)"],["leakUN","UN (ถ้าทราบ)"],["leakState","สถานะสาร"],["leakTime","วันเวลาเกิดเหตุ / เริ่มรั่ว (เวลาไทย)","datetime-local"],["leakQuantity","ปริมาณที่ได้รับแจ้ง พร้อมหน่วย"],["leakSource","ตำแหน่ง / อุปกรณ์ที่รั่ว"],["leakStatus","สถานะการรั่ว"],["leakDetails","ลักษณะการรั่ว / ข้อมูลที่ได้รับแจ้ง","textarea"],["leakReporter","ผู้ให้ข้อมูล / ช่องทางติดต่อ"],["leakConfirmedAt","เวลาที่ได้รับ / ยืนยันข้อมูล (เวลาไทย)","datetime-local"],["leakWater","แหล่งน้ำ / ทางระบายน้ำที่ต้องตรวจสอบ","textarea"],["leakSupport","ทรัพยากรรับมือสารเคมี / ผู้ประสานงาน","textarea"]]],['ข้อมูลเอกสาร',[['title','ชื่อรายงาน'],['unit','หน่วยงาน'],['reportNo','เลขที่รายงาน'],['date','วันและเวลาจัดทำ'],['status','สถานะเอกสาร']]],['สถานประกอบการและเหตุการณ์',[['company','ชื่อสถานประกอบการ'],['registration','เลขทะเบียน'],['estate','นิคมอุตสาหกรรม'],['address','ที่อยู่ / จุดเกิดเหตุ'],['event','ประเภทเหตุ'],['level','ระดับเหตุการณ์'],['chemical','รายการสารเคมีในคลังของโรงงาน (ไม่ใช่การยืนยันสารที่รั่ว)','textarea'],['response','ข้อมูลสนับสนุนการระงับเหตุ','textarea']]],['ตำแหน่งและอากาศ',[['lat','ละติจูด'],['lng','ลองจิจูด'],['temp','อุณหภูมิ °C'],['weather','สภาพอากาศ'],['humidity','ความชื้น %'],['windSpeed','ความเร็วลม กม./ชม.'],['windDir','ทิศที่ลมพัดมา'],['windDeg','องศาทิศทางลม']]],['ข้อมูลใกล้เคียง',[['hospitalName','ชื่อโรงพยาบาล'],['hospitalDistance','ระยะโรงพยาบาล'],['fireName','ชื่อสถานีดับเพลิง'],['fireDistance','ระยะสถานีดับเพลิง'],['policeName','ชื่อสถานีตำรวจ'],['policeDistance','ระยะสถานีตำรวจ'],['hydrantName','หัวจ่ายน้ำ'],['hydrantDistance','ระยะหัวจ่ายน้ำ'],['communityName','ชุมชน'],['communityDistance','จำนวน / ระยะชุมชน'],['cctvName','กล้อง CCTV'],['cctvDistance','จำนวน / ระยะ CCTV']]],['หมายเหตุ',[['note','หมายเหตุ','textarea'],['source','แหล่งข้อมูล','textarea']]]];
 function readDraft(){try{const value=JSON.parse(localStorage.getItem('dss-report')||'null');return value&&typeof value==='object'&&!Array.isArray(value)?value:{}}catch{return {}}}
 let state={...defaults,...readDraft(),event:'เหตุเพลิงไหม้'};if(state.unit==='ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย กนอ.')state.unit=defaults.unit;if(!validPoint()){state.lat=defaults.lat;state.lng=defaults.lng;state.positionConfirmed=false}state.bufferKm=Number(state.bufferKm)||3;state.bufferRadii=Array.isArray(state.bufferRadii)&&state.bufferRadii.length===3&&state.bufferRadii.every(v=>typeof v==='number'&&v>=.1&&v<=50)?state.bufferRadii:[1,3,5];state.bufferEnabled=Array.isArray(state.bufferEnabled)&&state.bufferEnabled.length===3&&state.bufferEnabled.every(v=>typeof v==='boolean')&&state.bufferEnabled.some(Boolean)?state.bufferEnabled:[true,false,false];if(state.bufferDisplayVersion!==1){state.bufferEnabled=[true,false,false];state.bufferDisplayVersion=1}state.bufferEnabled.forEach((enabled,i)=>document.getElementById('bufferEnabled'+i).checked=enabled);if(state.bufferRadii.join(',')==='1,2,3')state.bufferRadii=[1,3,5];state.bufferKm=Math.max(...state.bufferRadii.filter((_,i)=>state.bufferEnabled[i]));['bufferKm1','bufferKm2','bufferKm'].forEach((id,i)=>document.getElementById(id).value=state.bufferRadii[i]);const form=document.getElementById('form');form.innerHTML=groups.map(([name,fields])=>`<section class="group"><h3>${name}</h3><div class="${name==='ตำแหน่งและอากาศ'?'grid2':''}">${fields.map(([key,label,type])=>`<div class="field"><label for="${key}">${label}</label>${type==='textarea'?`<textarea id="${key}" data-key="${key}"></textarea>`:`<input type="${type||'text'}" id="${key}" data-key="${key}">`}</div>`).join('')}</div>${name==='ตำแหน่งและอากาศ'?'<div class="mini-actions"><button class="secondary" id="mapBtn" type="button">อัปเดตแผนที่</button><button class="primary" id="weatherBtn" type="button">ดึงสภาพอากาศ</button></div><p class="hint">แก้พิกัดด้านบนแล้วกดอัปเดตแผนที่เพื่อใช้ในข้อมูลอากาศและไฟล์ PNG</p>':''}</section>`).join('');
@@ -1197,7 +1197,8 @@ async function loadDssNearby(lat,lng){
   await Promise.all(sources.map(async([type,path,nameField])=>{
     try{
       const countOnly=type==='community'||type==='cctv';
-      const params=new URLSearchParams({where:'1=1',geometry:JSON.stringify({x:lng,y:lat,spatialReference:{wkid:4326}}),geometryType:'esriGeometryPoint',inSR:'4326',spatialRel:'esriSpatialRelIntersects',distance:String(countOnly?radius:50),units:'esriSRUnit_Kilometer',outFields:'*',returnGeometry:'true',outSR:'4326',f:'json',resultRecordCount:'2000'});
+      const typedWhere={fire:"TYPE IN ('Fire Station','FireStation')",police:"TYPE IN ('Police','Police Station')",hydrant:"TYPE = 'Fire Hydrant'",community:"TYPE = 'Community Areal'"};
+      const params=new URLSearchParams({where:typedWhere[type]||'1=1',geometry:JSON.stringify({x:lng,y:lat,spatialReference:{wkid:4326}}),geometryType:'esriGeometryPoint',inSR:'4326',spatialRel:'esriSpatialRelIntersects',distance:String(countOnly?radius:50),units:'esriSRUnit_Kilometer',outFields:'*',returnGeometry:'true',outSR:'4326',f:'json',resultRecordCount:'2000'});
       const response=await fetch(base+path+'/query?'+params,{signal:AbortSignal.timeout(12000)});if(!response.ok)throw Error('HTTP '+response.status);
       const data=await response.json();if(data.error)throw Error(data.error.message);
       let total=(data.features||[]).length;
@@ -1211,7 +1212,7 @@ async function loadDssNearby(lat,lng){
       if(sequence!==nearbySequence||Number(state.lat)!==Number(lat)||Number(state.lng)!==Number(lng))return;
       state.supportLocations.push(...(countOnly?mapCandidates:mapCandidates.filter((item,index)=>index===0||item.distance<=radius)));
       if(countOnly){
-        state[type+'Name']=(type==='community'?'ชุมชน':'กล้อง CCTV')+' ในรัศมี '+radius+' กม.';state[type+'Distance']=Number(total).toLocaleString('th-TH')+(type==='community'?' แห่ง':' จุด');
+        state[type+'Name']=total?(type==='community'?'ชุมชน':'กล้อง CCTV')+' ในรัศมี '+radius+' กม.':'ไม่พบข้อมูล';state[type+'Distance']=total?Number(total).toLocaleString('th-TH')+(type==='community'?' แห่ง':' จุด'):'ไม่พบข้อมูล';
       }else{
         const candidates=mapCandidates;
         state[type+'Name']=candidates[0]?.name||'ไม่พบข้อมูลในรัศมี 50 กม.';
@@ -1486,7 +1487,7 @@ async function selectDssLookup(item){
   if(keepIncidentPoint){lat=Number(state.lat);lng=Number(state.lng)}
   if(!Number.isFinite(lat)||!Number.isFinite(lng)||lat<5||lat>22||lng<97||lng>106){factoryLookupStatus.textContent='พบข้อมูล แต่ไม่มีพิกัดที่ถูกต้อง กรุณาเลือกพื้นที่อื่น';return}
   const nearby={};['hospital','fire','police','hydrant','community','cctv'].forEach(type=>{nearby[type+'Name']=defaults[type+'Name'];nearby[type+'Distance']=defaults[type+'Distance']});
-  if(state.company!==item.name){state.fieldReadyEquipment='';state.fieldAccess='';state.fieldCoordination={};state.fieldCoordinationScope='';state.leakChemical='';state.leakCAS='';state.leakUN='';state.leakState='';state.leakTime='';state.leakQuantity='';state.leakSource='';state.leakStatus='';state.leakDetails='';state.leakReporter='';state.leakConfirmedAt='';state.leakWater='';state.leakSupport='';}
+  if(state.company!==item.name){state.fieldReadyEquipment='';state.fieldAccess='';state.incidentDetails='';state.incidentStatus='';state.occurredAt='';state.fieldIncidentStatusRecorded=false;state.fieldCoordination={};state.fieldCoordinationScope='';state.leakChemical='';state.leakCAS='';state.leakUN='';state.leakState='';state.leakTime='';state.leakQuantity='';state.leakSource='';state.leakStatus='';state.leakDetails='';state.leakReporter='';state.leakConfirmedAt='';state.leakWater='';state.leakSupport='';}
   state={...state,...nearby,temp:'—',humidity:'—',windSpeed:'—',windDir:'—',weather:'รอดึงข้อมูลตำแหน่งใหม่',weatherTime:'',positionConfirmed:false,company:item.name,estate:item.type==='estate'?item.name:(attrs.IEAT||'—'),registration:[attrs.fid14n,item.dssFeature?.properties.comp_no||attrs.FactoryID].filter(Boolean).join(' / ')||'—',address:item.type==='estate'?item.name:[attrs.FactoryAddressGeneral,attrs.FactoryAddressMoo?'หมู่ '+attrs.FactoryAddressMoo:'',attrs.FactoryAddressSoi?'ซอย '+attrs.FactoryAddressSoi:'',attrs.FactoryAddressRoad?'ถนน '+attrs.FactoryAddressRoad:'',attrs.FactoryAddressTambonName,attrs.FactoryAddressDistrictName,attrs.FactoryAddressProvinceName,attrs.FactoryAPostCode].filter(Boolean).join(' ')||['จุดเกิดเหตุในนิคมฯ '+(attrs.IEAT||'—'),attrs.Name_Parcel?'แปลง '+attrs.Name_Parcel:'','พิกัด '+lat.toFixed(6)+', '+lng.toFixed(6)].filter(Boolean).join(' · '),...incidentSourceReport(item),lat:String(lat),lng:String(lng),positionSource:keepIncidentPoint?'manual':'factory'};
   factoryLookup.value=item.name;render();updateMap();lookupResults.replaceChildren();
   factoryLookupStatus.textContent='เลือก '+item.name+' และเติมข้อมูลในรายงานแล้ว'+(keepIncidentPoint?' · คงพิกัดจุดเกิดเหตุที่กรอกเอง':' · ใช้ตำแหน่งโรงงานจากฐานข้อมูล โปรดตรวจสอบจุดเกิดเหตุ');
@@ -1527,7 +1528,7 @@ function reportText(ctx,text,x,y,maxWidth,lineHeight){
 async function downloadReportPng(){
   loading.classList.add('show');
   try{
-    if(!validPoint())throw Error('กรุณาระบุพิกัดที่ถูกต้องก่อนดาวน์โหลด');
+    if(!validPoint()||(state.company===defaults.company&&state.positionSource!=='manual'))throw Error('กรุณาเลือกโรงงานหรือจุดเกิดเหตุก่อนดาวน์โหลด');
     pngBtn.disabled=true;let bufferExportImage=null;
     const liveMapReady=typeof window.dssWaitMapReady==='function';
     if(liveMapReady){await window.dssWaitMapReady();if(window.dssExportBufferOverlay)bufferExportImage=window.dssExportBufferOverlay()}
@@ -3093,7 +3094,7 @@ document.getElementById('pngBtn').onclick=function(){return downloadReportPng()}
 .field-report-wind small{display:block;font-size:9px;color:#596270}
 .field-wind-arrow{display:block;width:38px;height:38px;margin:2px auto;font:bold 34px/38px Arial,sans-serif;color:#8B1E2D;transform-origin:center}
 </style>
-<script src="./dss-field-map-20261017.js?v=20261017-refined"></script>
+<script src="./dss-field-map-20261017.js?v=20261018-formal"></script>
 <style id="field-coordination-report-style">
 html body #report #dssFieldBrief .fb-reference{display:inline-flex;align-items:center;justify-content:center;width:21px;height:21px;margin-right:5px;border-radius:4px;background:#8B1E2D;color:#fff!important;-webkit-text-fill-color:#fff!important;font:600 12px Arial,sans-serif}
 html body #report #dssFieldBrief .fb-coordination{display:inline-block;margin:3px 0 0 7px;font-size:10px;line-height:1.45;color:#596270!important;-webkit-text-fill-color:#596270!important}
@@ -3152,7 +3153,7 @@ html body #report.dss-field-export #dssFieldBrief .fb-support{font-size:13px!imp
      value.querySelector('.fb-distance').textContent=Number(point.distance).toFixed(2)+' กม.';
     }
    }
-   if(point)points.push({number:i+1,type,label,name:String(point.name||label),lat:Number(point.lat),lng:Number(point.lng),distance:Number(point.distance),status});
+   if(point)points.push({number:i+1,type,label,name:String(point.name||'ไม่พบข้อมูล'),lat:Number(point.lat),lng:Number(point.lng),distance:Number(point.distance),status});
   });
   const foot=document.querySelector('#fbSupport')?.closest('.fb-map-grid')?.querySelector('table + .fb-muted');
   if(foot)foot.textContent='เลขกรอบสี่เหลี่ยมตรงกับตาราง · ระยะเส้นตรง · ชุมชน/CCTV เป็นจุดใกล้ที่สุด';
@@ -3165,6 +3166,129 @@ html body #report.dss-field-export #dssFieldBrief .fb-support{font-size:13px!imp
  }
  const previous=render;render=function(){const result=previous.apply(this,arguments);refresh();return result};
  window.addEventListener('message',event=>{if(event.origin===location.origin&&event.source===parent&&event.data?.type==='dss:request-field-map'){lastPayload='';refresh()}});
+ render();
+})();
+</script>
+
+<style id="formal-report-fields-20261018">
+html body #report #dssFieldBrief .fb-facts{gap:6px 12px}
+html body #report #dssFieldBrief .fb-fact{padding:7px 9px;background:#fff;border:1px solid #e2e6ec}
+html body #report #dssFieldBrief .fb-fact>strong{font-size:14px!important}
+html body #report #dssFieldBrief .report-field{display:grid;grid-template-columns:88px minmax(0,1fr);gap:7px;padding:4px 0;border-bottom:1px solid #eef0f2;font-size:12px;line-height:1.45}
+html body #report #dssFieldBrief .report-field-label{font-size:11px;color:#596270!important;-webkit-text-fill-color:#596270!important}
+html body #report #dssFieldBrief .report-incident-fields{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+html body #report #dssFieldBrief .report-support-field{display:grid;grid-template-columns:67px minmax(0,1fr);gap:5px;padding:2px 0;font-size:11px;line-height:1.4}
+html body #report #dssFieldBrief .report-support-field .report-field-label{font-size:10px}
+html body #report #dssFieldBrief .fb-weather{padding:9px;margin-bottom:9px}
+html body #report.dss-field-export #dssFieldBrief .fb-support th,html body #report.dss-field-export #dssFieldBrief .fb-support td{padding:6px!important}
+html body #report.dss-field-export #dssFieldBrief .report-support-field{font-size:12px!important}
+html body #report.dss-field-export #dssFieldBrief .report-field{font-size:13px!important}
+html body #report #dssFieldBrief .report-no-point{cursor:default}
+html body #report #dssFieldBrief .fb-qr[hidden]{display:none!important}
+@media(max-width:650px){html body #report #dssFieldBrief .report-incident-fields{grid-template-columns:1fr}}
+</style>
+<script id="formal-report-fields-script-20261018">
+(function(){
+ const missing='ไม่พบข้อมูล';
+ const types=[['fire','ดับเพลิง'],['hospital','โรงพยาบาล'],['hydrant','หัวจ่ายน้ำ'],['police','ตำรวจ'],['community','ชุมชน'],['cctv','CCTV']];
+ const available=value=>{
+  const text=String(value??'').trim();
+  return text!==''&&!/^(?:[—–-](?:\s*(?:กม\.|เมตร|แห่ง|จุด|°C|%))?|null|undefined|N\/A)$/i.test(text)&&!/^(?:ไม่พบข้อมูล|ไม่มีข้อมูล|ไม่มีรายการ|ไม่ระบุ|รอยืนยัน|รอดึง|รอวิเคราะห์|กำลัง|โหลดข้อมูล.*ไม่สำเร็จ)/.test(text);
+ };
+ const valueOf=value=>available(value)?String(value).trim():missing;
+ const limit=(value,max=150)=>{const text=valueOf(value);return text.length>max?text.slice(0,max)+'…':text};
+ function element(tag,text,className){const node=document.createElement(tag);if(text!==undefined)node.textContent=text;if(className)node.className=className;return node}
+ function field(parent,label,value,support=false){
+  const row=element('div',undefined,support?'report-support-field':'report-field');
+  row.append(element('span',label,'report-field-label'),element('span',valueOf(value)));parent.append(row);
+ }
+ const pointFor=type=>(state.supportLocations||[]).filter(p=>p.type===type&&Number.isFinite(Number(p.lat))&&Number.isFinite(Number(p.lng))&&Number.isFinite(Number(p.distance))).sort((a,b)=>a.distance-b.distance)[0];
+ const pointId=point=>[point.type,point.id,point.lat,point.lng,point.name].join('|');
+ function display(){
+  const selected=available(state.company)&&state.company!==defaults.company;
+  const title=document.querySelector('#dssFieldBrief h1');if(title)title.textContent='รายงานข้อมูลสนับสนุนการรับมือเหตุฉุกเฉิน';
+  const facts=document.getElementById('fbFacts');facts.replaceChildren();
+  [['ชื่อโรงงาน',selected?state.company:'',true],['นิคมฯ / ท่าเรือ',state.estate],['ประเภทเหตุ',state.event],['ที่อยู่โรงงาน',selected?limit(state.address,120):'',true]].forEach(([label,value,wide])=>{
+   const box=element('div',undefined,'fb-fact'+(wide?' fb-wide':''));box.append(element('small',label),element('strong',valueOf(value)));facts.append(box);
+  });
+  const incident=document.getElementById('fbSituation');incident.replaceChildren(element('strong','ข้อมูลเหตุการณ์'));
+  const incidentFields=element('div',undefined,'report-incident-fields');incident.append(incidentFields);
+  field(incidentFields,'รายละเอียดเหตุ',limit(state.incidentDetails));
+  field(incidentFields,'สถานะเหตุ',state.fieldIncidentStatusRecorded?state.incidentStatus:'');
+  field(incidentFields,'เวลาเกิดเหตุ',state.occurredAt?state.occurredAt.replace('T',' '):'');
+  field(incidentFields,'ทางเข้าออก',limit(state.fieldAccess,100));
+  if(/สารเคมี/.test(state.event||'')){
+   field(incidentFields,'สารที่ได้รับแจ้ง',state.leakChemical);
+   field(incidentFields,'ปริมาณที่แจ้ง',state.leakQuantity);
+  }
+  const weather=document.getElementById('fbWeather');weather.replaceChildren(element('strong','สภาพอากาศ'));
+  field(weather,'ลักษณะอากาศ',state.weather);
+  field(weather,'อุณหภูมิ',available(state.temp)?state.temp+' °C':'');
+  field(weather,'ความชื้น',available(state.humidity)?state.humidity+' %':'');
+  field(weather,'ความเร็วลม',available(state.windSpeed)?state.windSpeed+' กม./ชม.':'');
+  field(weather,'ลมพัดจาก',available(state.windSpeed)?state.windDir:'');
+  field(weather,'เวลาอากาศ',state.weatherTime);
+  weather.append(element('small','Open-Meteo · ข้อมูลแบบจำลอง','fb-muted'));
+  const rows=Array.from(document.querySelectorAll('#fbSupport tr'));
+  types.forEach(([type,label],index)=>{
+   const row=rows[index];if(!row)return;
+   const point=pointFor(type),stored=state.fieldCoordination?.[type];
+   const record=point&&stored?.point===pointId(point)&&['contacted','ready'].includes(stored.status)?stored:null;
+   const value=row.querySelector('td');value.replaceChildren();
+   field(value,'ชื่อสถานที่',point?limit(point.name,75):'',true);
+   field(value,'ระยะเส้นตรง',point?(type==='hydrant'?Math.round(point.distance*1000).toLocaleString('th-TH')+' เมตร':Number(point.distance).toFixed(2)+' กม.'):'',true);
+   field(value,'การประสานงาน',record?(record.status==='ready'?'ยืนยันพร้อม':'ประสานแล้ว'):'',true);
+   field(value,'เวลาบันทึก',record?record.updatedAt:'',true);
+   if(!point){row.classList.add('report-no-point');row.removeAttribute('role');row.removeAttribute('tabindex');row.onclick=null;row.onkeydown=null}
+   if(!point&&/ไม่สำเร็จ/.test(String(state[type+'Name'])))field(value,'สถานะข้อมูล','เชื่อมต่อไม่สำเร็จ',true);
+  });
+  const foot=document.querySelector('#fbSupport')?.closest('.fb-map-grid')?.querySelector('table + .fb-muted');
+  if(foot)foot.textContent='';
+  const caption=document.getElementById('fbMapCaption');
+  const knownPoint=(selected||state.positionSource==='manual')&&validPoint();
+  caption.replaceChildren();
+  field(caption,'พิกัด',knownPoint?Number(state.lat).toFixed(5)+', '+Number(state.lng).toFixed(5):'');
+  field(caption,'รัศมีค้นหา',knownPoint?getBufferRadii().join(' / ')+' กม.':'');
+  field(caption,'ชุมชนในรัศมี',/^[0-9๐-๙]/.test(String(state.communityDistance||''))?state.communityDistance:'');
+  field(caption,'CCTV ในรัศมี',/^[0-9๐-๙]/.test(String(state.cctvDistance||''))?state.cctvDistance:'');
+  const chemicals=document.getElementById('fbChemicals');chemicals.replaceChildren(element('strong','ข้อมูลสารเคมี · DSS'));
+  const catalog=Array.isArray(state.hazardCatalog)?state.hazardCatalog:[];
+  field(chemicals,'จำนวนรายการ',catalog.length?catalog.length+' รายการ':'');
+  const equipment=document.getElementById('fbEquipment');equipment.replaceChildren(element('strong','ข้อมูลอุปกรณ์สนับสนุน'));
+  const sourceLines=String(state.response||'').split(/\n+/).filter(line=>available(line)&&!/ไม่สำเร็จ|รอยืนยัน/.test(line));
+  field(equipment,'รายการใน DSS',sourceLines.length?sourceLines.length+' รายการ':'');
+  if(/ไม่สำเร็จ/.test(String(state.response)))field(equipment,'สถานะข้อมูล','เชื่อมต่อไม่สำเร็จ');
+  field(equipment,'ข้อมูลเจ้าหน้าที่',limit(state.fieldReadyEquipment,140));
+  const full=document.getElementById('fbFullLink'),qr=document.getElementById('fbQr');
+  if(qr)qr.hidden=!selected;
+  if(full){full.textContent=selected?'รายละเอียดข้อมูล':'ไม่พบข้อมูลโรงงาน';if(!selected)full.removeAttribute('href')}
+  const title=document.querySelector('#dssFieldBrief .fb-footer strong');if(title)title.textContent='ข้อมูลโรงงาน';
+  const headings=document.querySelectorAll('#dssFieldBrief > .fb-section > h2');
+  ['1. ข้อมูลสถานประกอบการและเหตุการณ์','2. แผนที่ สภาพอากาศ และจุดสนับสนุน','3. ข้อมูลสารเคมีและอุปกรณ์'].forEach((text,index)=>{if(headings[index])headings[index].textContent=text});
+  document.querySelectorAll('#report [data-out]').forEach(node=>{
+   if(node.children.length)return;
+   if(!available(node.textContent))node.textContent=missing;
+  });
+  document.querySelectorAll('#report .dss-shared-map-link').forEach(node=>node.textContent='แผนที่เกิดเหตุ');
+ }
+ const host=document.querySelector('#dssOptionalDetails .dss-settings-content')||document.getElementById('dssIncidentFacts');
+ if(host){
+  [['incidentDetails','รายละเอียดเหตุ','textarea'],['incidentStatus','สถานะเหตุ','text'],['occurredAt','เวลาเกิดเหตุ','datetime-local']].forEach(([key,label,type])=>{
+   if(document.getElementById(key))return;
+   const box=element('div',undefined,'field'),caption=element('label',label),input=element(type==='textarea'?'textarea':'input');
+   input.id=key;input.dataset.key=key;if(type!=='textarea')input.type=type;input.maxLength=400;caption.htmlFor=key;input.placeholder=missing;
+   input.addEventListener('input',()=>{state[key]=input.value;if(key==='incidentStatus')state.fieldIncidentStatusRecorded=true;render()});
+   box.append(caption,input);host.prepend(box);
+  });
+ }
+ document.querySelector('label[for="fieldReadyEquipment"]')?.replaceChildren(document.createTextNode('ข้อมูลอุปกรณ์จากเจ้าหน้าที่'));
+ document.querySelector('label[for="fieldAccess"]')?.replaceChildren(document.createTextNode('ข้อมูลทางเข้าออก'));
+ if(state.supportDataSchema!=='typed-20261018'){
+  state.supportLocations=[];state.fieldCoordination={};state.supportDataSchema='typed-20261018';
+  types.forEach(([type])=>{state[type+'Name']=missing;state[type+'Distance']=missing});
+ }
+ document.querySelectorAll('.field-coordinate-settings .hint').forEach(node=>node.remove());
+ const previous=render;render=function(){const result=previous.apply(this,arguments);display();return result};
  render();
 })();
 </script>
