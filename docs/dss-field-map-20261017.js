@@ -43,14 +43,14 @@
   layoutReferences(map,view);
   view.wind.replaceChildren();
   const speed=Number(data.windSpeed),from=Number(data.windDeg),known=data.windSpeed!==''&&data.windSpeed!=='—'&&Number.isFinite(speed)&&Number.isFinite(from);
-  const title=document.createElement('strong');title.textContent='ทิศทางลม';view.wind.append(title);
+  const title=document.createElement('strong');title.textContent='ทิศทางลม (พัดไป)';view.wind.append(title);
   if(known&&speed>0){
    const to=((from+180)%360+360)%360,arrow=document.createElement('span');arrow.className='field-wind-arrow';arrow.textContent='↑';arrow.style.transform='rotate('+to+'deg)';arrow.setAttribute('aria-label','ลูกศรชี้ทิศที่ลมพัดไป');view.wind.append(arrow);
    const label=document.createElement('div');label.textContent='พัดจาก '+(data.windDir||from+'°')+' → '+['เหนือ','ตะวันออกเฉียงเหนือ','ตะวันออก','ตะวันออกเฉียงใต้','ใต้','ตะวันตกเฉียงใต้','ตะวันตก','ตะวันตกเฉียงเหนือ'][Math.round(to/45)%8];view.wind.append(label);
-   const reading=document.createElement('div');reading.textContent=speed+' กม./ชม. · ลูกศรชี้ทิศที่ลมพัดไป';view.wind.append(reading);
+   const reading=document.createElement('div');reading.textContent='ความเร็ว '+speed+' กม./ชม.';view.wind.append(reading);
   }else{
-   const label=document.createElement('div');label.textContent=known?'ลมสงบ (0 กม./ชม.)':'ยังไม่มีข้อมูลลม';view.wind.append(label);
+   const label=document.createElement('div');label.textContent=known?'ลมสงบ (0 กม./ชม.)':'ไม่พบข้อมูล';view.wind.append(label);
   }
-  const time=document.createElement('small');time.textContent=data.weatherTime||'ยังไม่มีเวลาอากาศ';view.wind.append(time);layoutReferences(map,view);
+  const time=document.createElement('small');time.textContent=data.weatherTime||'ไม่พบข้อมูล';view.wind.append(time);layoutReferences(map,view);
  };
 })();
