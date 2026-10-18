@@ -3319,7 +3319,7 @@ html body #report #dssFieldBrief .fb-qr[hidden]{display:none!important}
   input.id='notificationText';input.dataset.key='notificationText';input.maxLength=1500;input.rows=3;
   input.placeholder='วางข้อความแจ้งเหตุ หรือค้นหานิคมฯ และบริษัทเพื่อจัดทำรายงานได้เลย';
   label.htmlFor=input.id;box.append(label,input);
-  const settings=document.getElementById('dssOptionalDetails');if(settings?.parentElement===editor)settings.before(box);else editor.append(box);
+  const settings=document.getElementById('dssOptionalDetails');if(document.body.classList.contains('dss-inline-dashboard'))document.querySelector('.report-wrap')?.prepend(box);else if(settings?.parentElement===editor)settings.before(box);else editor.append(box);
   input.addEventListener('input',()=>{state.notificationText=input.value;render()});
  }
  if(state.notificationWorkflow!=='20261018-support'){
