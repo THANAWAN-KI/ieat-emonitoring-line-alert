@@ -1535,7 +1535,7 @@ async function downloadReportPng(){
   render();await document.fonts.ready;
   if(typeof html2canvas!=='function')throw Error('ไม่สามารถโหลดเครื่องมือบันทึกภาพได้');
   let mapImage;
-  if(new URLSearchParams(location.search).get('embedded')==='dashboard'&&typeof parent.ieatCaptureReportMap==='function')mapImage=await parent.ieatCaptureReportMap(html2canvas);
+  if(new URLSearchParams(location.search).get('embedded')==='dashboard'&&typeof parent.ieatCaptureReportMap==='function')mapImage=await parent.ieatCaptureReportMap(html2canvas,{lat:Number(state.lat),lng:Number(state.lng),points:['fire','hospital','hydrant','police','community','cctv'].map(type=>(state.supportLocations||[]).filter(p=>p.type===type).sort((a,b)=>a.distance-b.distance)[0]).filter(p=>p&&Number.isFinite(Number(p.distance))&&Number(p.distance)<=50)});
   else{
    if(window.dssWaitMapReady)await window.dssWaitMapReady();
    mapImage=(await html2canvas(document.getElementById('map'),{backgroundColor:'#f7f8fa',scale:2,useCORS:true,allowTaint:false,logging:false,ignoreElements:e=>e.classList?.contains('leaflet-control-container')})).toDataURL('image/png');
@@ -3379,6 +3379,9 @@ html body #report.dss-two-page-first #dssFieldBrief .fb-support td,html body #re
 #dssPageTwo h2{font-size:17px;background:#f3f4f6;border-left:3px solid #8B1E2D;padding:8px 10px;margin:20px 0 10px}
 #dssPageTwo .p2-scroll{overflow-x:auto}#dssPageTwo table{width:100%;border-collapse:collapse;font-size:12px;line-height:1.5}
 #dssPageTwo th,#dssPageTwo td{padding:8px 7px;border:1px solid #dfe3e9;vertical-align:top;text-align:left;overflow-wrap:anywhere}
+ #dssPageTwo table th:first-child,#dssPageTwo table td:first-child{width:50px;min-width:50px;white-space:nowrap}
+#dssPageTwo table th:nth-child(4){min-width:65px}
+#dssPageTwo table th:last-child{min-width:92px}
 #dssPageTwo thead th{background:#f4f5f7;font-weight:700}#dssPageTwo tbody tr:nth-child(even){background:#fcfcfd}
 #dssPageTwo .p2-note{font-size:11px;color:#5f6873;margin:6px 0}
 #dssPageTwo .p2-chemical-name{min-width:140px}#dssPageTwo .p2-equip-name{min-width:160px}
