@@ -1560,6 +1560,8 @@ async function downloadReportPng(){
         const fieldReport=clonedDocument.getElementById("report");fieldReport.classList.remove("dss-full-view");fieldReport.classList.add("dss-field-export");
         fieldReport.querySelectorAll(":scope > :not(#dssFieldBrief)").forEach(node=>node.remove());
         const fieldMap=clonedDocument.getElementById("fieldBriefMap");if(fieldMap&&sharedMapImage){const image=clonedDocument.createElement("img");image.src=sharedMapImage;image.alt="แผนที่จุดเกิดเหตุ";fieldMap.replaceChildren(image)}
+        const brief=clonedDocument.getElementById("dssFieldBrief");
+        if(brief){const availableHeight=1421,contentHeight=brief.getBoundingClientRect().height;if(contentHeight>availableHeight){const scale=availableHeight/contentHeight;brief.style.transform="scale("+scale+")";brief.style.transformOrigin="top left";brief.style.marginLeft=((986*(1-scale))/2)+"px"}}
         clonedDocument.getElementById("report")?.classList.add("dss-png-layout");
         clonedDocument.querySelectorAll('#report '+exportIconSelector.split(',').join(',#report ')).forEach((svg,index)=>{const icon=exportIcons[index];if(!icon)return;const img=clonedDocument.createElement('img');img.src=icon.src;img.alt='';img.style.setProperty('width',icon.width+'px','important');img.style.setProperty('height',icon.height+'px','important');img.style.setProperty('display','inline-block','important');img.style.setProperty('vertical-align','middle','important');img.style.setProperty('max-width','none','important');img.style.setProperty('flex','none','important');svg.replaceWith(img)});
         clonedDocument.querySelectorAll('#supportList,[data-export-exclude]').forEach(element=>element.remove());
@@ -3262,6 +3264,7 @@ html body #report #dssFieldBrief .fb-qr[hidden]{display:none!important}
   field(equipment,'ข้อมูลเจ้าหน้าที่',limit(state.fieldReadyEquipment,140));
   const full=document.getElementById('fbFullLink'),qr=document.getElementById('fbQr');
   if(qr)qr.hidden=!selected;
+  const mapButton=document.getElementById('fbOpenMap');if(mapButton)mapButton.textContent='แสดงตำแหน่งบนแผนที่';
   if(full){full.textContent=selected?'รายละเอียดข้อมูล':'ไม่พบข้อมูลโรงงาน';if(!selected)full.removeAttribute('href')}
   const title=document.querySelector('#dssFieldBrief .fb-footer strong');if(title)title.textContent='ข้อมูลโรงงาน';
   const headings=document.querySelectorAll('#dssFieldBrief > .fb-section > h2');
@@ -3293,5 +3296,19 @@ html body #report #dssFieldBrief .fb-qr[hidden]{display:none!important}
  render();
 })();
 </script>
-</body></html>
+
+<style id="formal-report-one-page-fit">
+html body #report.dss-field-export #dssFieldBrief .fb-map{height:510px!important}
+html body #report.dss-field-export #dssFieldBrief .fb-fact{padding:4px 8px!important}
+html body #report.dss-field-export #dssFieldBrief .fb-fact>small{margin:0!important;line-height:1.35!important}
+html body #report.dss-field-export #dssFieldBrief .fb-fact>strong{line-height:1.35!important}
+html body #report.dss-field-export #dssFieldBrief .fb-weather{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:3px 8px!important}
+html body #report.dss-field-export #dssFieldBrief .fb-weather>strong,html body #report.dss-field-export #dssFieldBrief .fb-weather>.fb-muted{grid-column:1/-1!important}
+html body #report.dss-field-export #dssFieldBrief .fb-weather .report-field{display:block!important;padding:2px 0!important;font-size:12px!important}
+html body #report.dss-field-export #dssFieldBrief .fb-weather .report-field>span{display:block!important}
+html body #report.dss-field-export #dssFieldBrief .fb-support th,html body #report.dss-field-export #dssFieldBrief .fb-support td{padding:4px!important}
+html body #report.dss-field-export #dssFieldBrief .report-support-field{padding:0!important;line-height:1.35!important}
+html body #report.dss-field-export #dssFieldBrief #fbMapCaption{display:grid!important;grid-template-columns:1fr 1fr!important;gap:0 12px!important}
+html body #report.dss-field-export #dssFieldBrief #fbMapCaption .report-field{font-size:11px!important;padding:3px 0!important}
+</style></body></html>
 
