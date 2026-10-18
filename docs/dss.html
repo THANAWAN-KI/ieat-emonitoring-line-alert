@@ -3401,6 +3401,7 @@ html body #report.dss-field-export #dssFieldBrief .fb-map{height:470px!important
   const button=document.getElementById('pngBtn');button.disabled=true;
   try{await window.dssLoadReportChemicals()}finally{button.disabled=false}
  };
+ if(state.company&&state.company!==defaults.company)window.dssLoadReportChemicals();
 })();
 </script></body></html>
 
