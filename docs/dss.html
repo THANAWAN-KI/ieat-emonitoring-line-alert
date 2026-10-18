@@ -3206,7 +3206,7 @@ html body #report #dssFieldBrief .fb-qr[hidden]{display:none!important}
  const pointId=point=>[point.type,point.id,point.lat,point.lng,point.name].join('|');
  function display(){
   const selected=available(state.company)&&state.company!==defaults.company;
-  const title=document.querySelector('#dssFieldBrief h1');if(title)title.textContent='รายงานข้อมูลสนับสนุนการรับมือเหตุฉุกเฉิน';
+  const documentTitle=document.querySelector('#dssFieldBrief h1');if(documentTitle)documentTitle.textContent='รายงานข้อมูลสนับสนุนการรับมือเหตุฉุกเฉิน';
   const facts=document.getElementById('fbFacts');facts.replaceChildren();
   [['ชื่อโรงงาน',selected?state.company:'',true],['นิคมฯ / ท่าเรือ',state.estate],['ประเภทเหตุ',state.event],['ที่อยู่โรงงาน',selected?limit(state.address,120):'',true]].forEach(([label,value,wide])=>{
    const box=element('div',undefined,'fb-fact'+(wide?' fb-wide':''));box.append(element('small',label),element('strong',valueOf(value)));facts.append(box);
