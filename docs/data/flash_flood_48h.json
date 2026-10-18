@@ -2,7 +2,7 @@
   "schema_version": 1,
   "period": "48h",
   "date": "2026-10-18",
-  "time": "05:00:00",
+  "time": "07:00:00",
   "type": "พื้นที่เฝ้าระวังพิเศษ ล่วงหน้า 48 ชม. เสี่ยงน้ำท่วมจากฝนตกสะสม",
   "source_url": "https://api.hii.or.th/v2/4UQaYnf0Bx4fXPYyCdDRbqHyXH9Ixvd2nVUjaN1cLBY=/warning/flashflood-48h",
   "area_count": 3,
@@ -18,8 +18,8 @@
       "station": "คลองภาษีเจริญ เพชรเกษม69",
       "latitude": 13.69158,
       "longitude": 100.38127,
-      "sum_rainfall_mm": 138.2,
-      "observed_at": "2026-10-18T04:00:00+07:00"
+      "sum_rainfall_mm": 139.0,
+      "observed_at": "2026-10-18T05:00:00+07:00"
     },
     {
       "geocode": "102302",
@@ -31,8 +31,8 @@
       "station": "จุดวัด ค.ทวีฯ-ค.ภาษีฯ",
       "latitude": 13.69168,
       "longitude": 100.38097,
-      "sum_rainfall_mm": 122.5,
-      "observed_at": "2026-10-18T04:00:00+07:00"
+      "sum_rainfall_mm": 124.0,
+      "observed_at": "2026-10-18T06:00:00+07:00"
     },
     {
       "geocode": "740205",
@@ -45,7 +45,7 @@
       "latitude": 13.662052,
       "longitude": 100.223332,
       "sum_rainfall_mm": 124.0,
-      "observed_at": "2026-10-18T04:00:00+07:00",
+      "observed_at": "2026-10-18T06:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -169,8 +169,8 @@
       "station": "ค.ราชมนตรี-ภาษีเจริญ",
       "latitude": 13.70754,
       "longitude": 100.42622,
-      "sum_rainfall_mm": 50.0,
-      "observed_at": "2026-10-18T04:00:00+07:00"
+      "sum_rainfall_mm": 51.0,
+      "observed_at": "2026-10-18T06:00:00+07:00"
     },
     {
       "geocode": "104001",
@@ -182,8 +182,8 @@
       "station": "สนข.บางแค",
       "latitude": 13.69622,
       "longitude": 100.40919,
-      "sum_rainfall_mm": 65.5,
-      "observed_at": "2026-10-18T04:00:00+07:00"
+      "sum_rainfall_mm": 66.0,
+      "observed_at": "2026-10-18T06:00:00+07:00"
     },
     {
       "geocode": "104002",
@@ -195,8 +195,8 @@
       "station": "หมู่บ้านเศรษฐกิจ ซอย 26",
       "latitude": 13.72167,
       "longitude": 100.37676,
-      "sum_rainfall_mm": 60.0,
-      "observed_at": "2026-10-18T04:00:00+07:00"
+      "sum_rainfall_mm": 62.5,
+      "observed_at": "2026-10-18T06:00:00+07:00"
     },
     {
       "geocode": "104002",
@@ -208,8 +208,8 @@
       "station": "ส.คลองบางจาก",
       "latitude": 13.71471,
       "longitude": 100.39555,
-      "sum_rainfall_mm": 85.5,
-      "observed_at": "2026-10-18T04:00:00+07:00"
+      "sum_rainfall_mm": 87.0,
+      "observed_at": "2026-10-18T06:00:00+07:00"
     },
     {
       "geocode": "104003",
@@ -221,8 +221,8 @@
       "station": "จุดวัด ค.ทวีฯ-ค.บางเชือกหนัง",
       "latitude": 13.75037,
       "longitude": 100.35351,
-      "sum_rainfall_mm": 13.0,
-      "observed_at": "2026-10-18T04:00:00+07:00"
+      "sum_rainfall_mm": 14.5,
+      "observed_at": "2026-10-18T06:00:00+07:00"
     },
     {
       "geocode": "102303",
@@ -234,8 +234,8 @@
       "station": "สนข.หนองแขม",
       "latitude": 13.70574,
       "longitude": 100.34931,
-      "sum_rainfall_mm": 58.0,
-      "observed_at": "2026-10-18T04:00:00+07:00"
+      "sum_rainfall_mm": 60.0,
+      "observed_at": "2026-10-18T06:00:00+07:00"
     }
   ]
 }
