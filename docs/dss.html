@@ -1526,6 +1526,7 @@ function reportText(ctx,text,x,y,maxWidth,lineHeight){
   lines.push(line);lines.slice(0,3).forEach((part,i)=>ctx.fillText(part,x,y+i*lineHeight));
 }
 async function downloadReportPng(){
+  document.getElementById('dssExportError')?.remove();
   loading.classList.add('show');
   try{
     if(!validPoint()||(state.company===defaults.company&&state.positionSource!=='manual'))throw Error('กรุณาเลือกโรงงานหรือจุดเกิดเหตุก่อนดาวน์โหลด');
@@ -1596,7 +1597,7 @@ async function downloadReportPng(){
     const url=URL.createObjectURL(image),a=document.createElement('a');
     a.download=baseName+'.png';a.href=url;document.body.append(a);a.click();a.remove();
     setTimeout(()=>URL.revokeObjectURL(url),60000);
-  }catch(error){console.error(error);alert('ดาวน์โหลด PNG ไม่สำเร็จ: '+error.message)}
+  }catch(error){console.error(error);let status=document.getElementById('dssExportError');if(!status){status=document.createElement('p');status.id='dssExportError';status.setAttribute('role','alert');status.setAttribute('data-export-exclude','');status.style.cssText='margin:8px 16px;color:#8B1E2D;font-size:13px';document.querySelector('.top').after(status)}status.textContent='ส่งออกรายงานไม่สำเร็จ: '+error.message;alert('ดาวน์โหลด PNG ไม่สำเร็จ: '+error.message)}
   finally{loading.classList.remove('show');pngBtn.disabled=false}
 }
 </script>
