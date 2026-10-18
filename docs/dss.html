@@ -3060,10 +3060,10 @@ html body #report.dss-field-export #dssFieldBrief .fb-data-box{font-size:14px!im
   const sourceLines=String(state.response||'').split(/\n+/).filter(v=>v.trim()&&!/รอยืนยัน|ไม่มีข้อมูล|^—$/.test(v));
   equipment.append(el('div',sourceLines.length?'ข้อมูลอุปกรณ์ในฐาน DSS '+sourceLines.length+' รายการ · ดูฉบับเต็ม':'ไม่มีรายการอุปกรณ์ในฐาน DSS','fb-muted'));
   if(state.fieldAccess)summary.append(el('div','ทางเข้าออกที่ได้รับแจ้ง: '+short(state.fieldAccess,130)));
-  const url=new URL('./hub.html',location.href);
+  const url=new URL('./dss-factory-report.html',location.href);
   const query=String(state.registration||'').split(' / ')[0].trim();
-  if(state.company&&state.company!=='บริษัท / โรงงานที่เกิดเหตุ')url.searchParams.set('reportCompany',query&&query!=='—'?query:state.company);
-  url.searchParams.set('incidentType',/สารเคมี/.test(state.event||'')?'chemical':state.event==='เหตุเพลิงไหม้'?'fire':'unknown');url.searchParams.set('reportView','full');
+  if(state.company&&state.company!=='บริษัท / โรงงานที่เกิดเหตุ')url.searchParams.set('registration',query&&query!=='—'?query:'');url.searchParams.set('company',state.company);url.searchParams.set('estate',state.estate==='—'?'':state.estate);
+  
   const link=document.getElementById('fbFullLink');link.href=url.href;
   if(lastQr!==url.href&&typeof qrcode==='function'){try{const qr=qrcode(0,'M');qr.addData(url.href);qr.make();document.getElementById('fbQr').src=qr.createDataURL(3,8);lastQr=url.href}catch(error){document.getElementById('fbQr').alt='เปิดรายละเอียดจากลิงก์'}}
  }
@@ -3216,7 +3216,7 @@ html body #report #dssFieldBrief .fb-qr[hidden]{display:none!important}
    const box=element('div',undefined,'fb-fact'+(wide?' fb-wide':''));box.append(element('small',label),element('strong',valueOf(value)));facts.append(box);
   });
   const incident=document.getElementById('fbSituation');incident.replaceChildren(element('strong','ข้อมูลที่ได้รับแจ้ง'));
-  const message=element('div',state.notificationText?.trim()||state.incidentDetails?.trim()||notNotified,'report-notification-text');incident.append(message);
+
   const incidentFields=element('div',undefined,'report-incident-fields');incident.append(incidentFields);
   const optional=[['สถานะตามที่รับแจ้ง',state.fieldIncidentStatusRecorded?state.incidentStatus:''],['เวลาเกิดเหตุ',state.occurredAt?state.occurredAt.replace('T',' '):''],['ทางเข้าออกที่รับแจ้ง',state.fieldAccess]];
   optional.filter(([,value])=>available(value)).forEach(([label,value])=>field(incidentFields,label,value));
@@ -3226,6 +3226,7 @@ html body #report #dssFieldBrief .fb-qr[hidden]{display:none!important}
    field(incidentFields,'ปริมาณที่แจ้ง',available(state.leakQuantity)?state.leakQuantity:notNotified);
    incidentFields.hidden=false;
   }
+  incident.hidden=!incidentFields.children.length;
   const weather=document.getElementById('fbWeather');weather.replaceChildren(element('strong','สภาพอากาศ'));
   field(weather,'ลักษณะอากาศ',state.weather);
   field(weather,'อุณหภูมิ',available(state.temp)?state.temp+' °C':'');
@@ -3286,8 +3287,8 @@ html body #report #dssFieldBrief .fb-qr[hidden]{display:none!important}
   const full=document.getElementById('fbFullLink'),qr=document.getElementById('fbQr');
   if(qr)qr.hidden=!selected;
   const mapButton=document.getElementById('fbOpenMap');if(mapButton)mapButton.textContent='แสดงตำแหน่งบนแผนที่';
-  if(full){full.textContent=selected?'รายละเอียดข้อมูล':'ไม่พบข้อมูลโรงงาน';if(!selected)full.removeAttribute('href')}
-  const title=document.querySelector('#dssFieldBrief .fb-footer strong');if(title)title.textContent='ข้อมูลโรงงาน';
+  if(full){full.textContent=selected?'เปิดรายงานตาราง DSS':'ไม่พบข้อมูลโรงงาน';if(!selected)full.removeAttribute('href')}
+  const title=document.querySelector('#dssFieldBrief .fb-footer strong');if(title)title.textContent='รายงานข้อมูล DSS รายโรงงาน';
   const headings=document.querySelectorAll('#dssFieldBrief > .fb-section > h2');
   ['1. สถานประกอบการและข้อมูลรับแจ้ง','2. แผนที่ สภาพอากาศ และจุดสนับสนุน','3. สารเคมีและอุปกรณ์ในฐานข้อมูล'].forEach((text,index)=>{if(headings[index])headings[index].textContent=text});
   document.querySelectorAll('#report [data-out]').forEach(node=>{
@@ -3313,16 +3314,6 @@ html body #report #dssFieldBrief .fb-qr[hidden]{display:none!important}
   types.forEach(([type])=>{state[type+'Name']=missing;state[type+'Distance']=missing});
  }
  document.querySelectorAll('.field-coordinate-settings .hint').forEach(node=>node.remove());
- const editor=document.querySelector('.editor');
- if(editor&&!document.getElementById('notificationText')){
-  const box=element('section',undefined,'notification-editor');
-  const label=element('label','ข้อความแจ้งเหตุที่ได้รับ (ถ้ามี)'),input=element('textarea');
-  input.id='notificationText';input.dataset.key='notificationText';input.maxLength=1500;input.rows=3;
-  input.placeholder='วางข้อความแจ้งเหตุ หรือค้นหานิคมฯ และบริษัทเพื่อจัดทำรายงานได้เลย';
-  label.htmlFor=input.id;box.append(label,input);
-  const settings=document.getElementById('dssOptionalDetails');if(document.body.classList.contains('dss-inline-dashboard'))document.querySelector('.report-wrap')?.prepend(box);else if(settings?.parentElement===editor)settings.before(box);else editor.append(box);
-  input.addEventListener('input',()=>{state.notificationText=input.value;render()});
- }
  if(state.notificationWorkflow!=='20261018-support'){
   state.event='ยังไม่ได้รับแจ้ง';state.notificationWorkflow='20261018-support';
  }
