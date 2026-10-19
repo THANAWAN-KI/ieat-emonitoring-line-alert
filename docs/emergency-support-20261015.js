@@ -48,8 +48,15 @@ function drawSupportMarkers(){
  if(markers)markers.remove();markers=window.L.layerGroup().addTo(map);
  selectedRows().flat().forEach(row=>{const c=color(row.distance);const m=window.L.circleMarker([row.lat,row.lon],{radius:7,color:'#fff',weight:2,fillColor:c[0],fillOpacity:1}).addTo(markers);m.bindTooltip(text('span',row.type+' · '+row.name));m.on('click',()=>{if(!selecting)focusRow(row);});});
 }
+function effectiveSupportRadius(){const checked=Array.from(document.querySelectorAll('.dashboard-buffer-tools input:checked')).map(n=>Number(n.value)).filter(Number.isFinite);return Math.min(Number(radius.value),checked.length?Math.max(...checked):Number(radius.value))}
+function publishSupport(){
+ const limit=effectiveSupportRadius();const rows=Array.from(results.values()).flat().filter(r=>r.distance<=limit*1000).sort((a,b)=>a.distance-b.distance);
+ const snapshot={origin:incident?{...incident,name:estateName}:null,radius:limit,searchRadius:Number(radius.value),rows,loading,failures:[...failures]};
+ window.ieatSupportSnapshot=snapshot;get('emergencyReportFrame')?.contentWindow?.postMessage({type:'dss:nearby-support',...snapshot},location.origin);
+}
+document.addEventListener('change',e=>{if(e.target.matches('.dashboard-buffer-tools input'))load()});
 function render(){
- host.replaceChildren();
+ publishSupport();host.replaceChildren();
  const selections=selectedRows();
  groups.forEach((g,index)=>{const card=document.createElement('article');card.className='risk-ranking-card emergency-support-card';card.append(text('h3',g.title));
   const rows=selections[index];if(!incident||!rows.length){card.append(text('p',!incident?'เลือกนิคมอุตสาหกรรมเพื่อแสดงข้อมูลสนับสนุน':loading?'กำลังค้นหาตำแหน่งใกล้เหตุ…':g.ids.some(id=>failures.includes(id))?'โหลดข้อมูลบางประเภทไม่สำเร็จ':'ไม่พบข้อมูลกลุ่มนี้ในระยะที่เลือก','support-empty'));}
@@ -77,7 +84,7 @@ async function loadSource(source,origin,limit,signal){
 async function load(){
  if(!incident)return;
  controller?.abort();controller=new AbortController();const signal=controller.signal,id=++request,origin={...incident};loading=true;results=new Map();failures=[];drawSupportMarkers();render();
- await Promise.allSettled(sources.map(async source=>{try{const rows=await loadSource(source,origin,Number(radius.value),signal);if(id!==request)return;results.set(source.id,rows);}catch(e){if(id!==request||signal.aborted)return;failures.push(source.id);console.warn('Emergency support '+source.label,e);}if(id===request){render();drawSupportMarkers();}}));
+ await Promise.allSettled(sources.map(async source=>{try{const rows=await loadSource(source,origin,effectiveSupportRadius(),signal);if(id!==request)return;results.set(source.id,rows);}catch(e){if(id!==request||signal.aborted)return;failures.push(source.id);console.warn('Emergency support '+source.label,e);}if(id===request){render();drawSupportMarkers();}}));
  if(id!==request)return;loading=false;render();drawSupportMarkers();
 }
 function setIncident(lat,lon){
