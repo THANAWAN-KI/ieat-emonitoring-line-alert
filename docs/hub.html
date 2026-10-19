@@ -91,7 +91,7 @@
 </section>
 
 
-</div><div id="riskMapSection" class="workspace-map" aria-label="แผนที่ความเสี่ยง"><article class="panel"><div class="map-controls"><div class="map-analysis-title">แผนที่วิเคราะห์พื้นที่</div><div class="map-toolbar-actions"><button id="incidentPickButton" class="incident-pick-button" type="button" disabled>กำหนดจุดเกิดเหตุ</button><select id="basemap" aria-label="แผนที่พื้นฐาน"><option value="gray-vector" selected>แผนที่สีอ่อน</option><option value="streets-vector">แผนที่ถนน</option><option value="satellite">ภาพถ่ายดาวเทียม</option><option value="topo-vector">ภูมิประเทศ</option></select><a class="report-button" id="openEmergencyReport" href="./dss.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h6"/></svg>เปิดหน้าจัดทำรายงานเหตุฉุกเฉิน</a></div></div><div id="map" role="region" aria-label="แผนที่ Risk Map"></div><div id="mapStatus" class="map-footer" role="status">กำลังโหลดแผนที่…</div></article></div></div></section>
+</div><div id="riskMapSection" class="workspace-map" aria-label="แผนที่ความเสี่ยง"><article class="panel"><div class="map-controls"><div class="map-toolbar-actions"><button id="incidentPickButton" class="incident-pick-button" type="button" disabled>กำหนดจุดเกิดเหตุ</button><select id="basemap" aria-label="แผนที่พื้นฐาน"><option value="gray-vector" selected>แผนที่สีอ่อน</option><option value="streets-vector">แผนที่ถนน</option><option value="satellite">ภาพถ่ายดาวเทียม</option><option value="topo-vector">ภูมิประเทศ</option></select><a class="report-button" id="openEmergencyReport" href="./dss.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h6"/></svg>เปิดหน้าจัดทำรายงานเหตุฉุกเฉิน</a></div></div><div id="map" role="region" aria-label="แผนที่ Risk Map"></div><div id="mapStatus" class="map-footer" role="status">กำลังโหลดแผนที่…</div></article></div></div></section>
 <section id="emergencyReportPage" hidden><iframe id="emergencyReportFrame" class="other-frame" title="จัดทำรายงานเหตุฉุกเฉิน"></iframe></section>
 <section id="otherPage" hidden><iframe id="otherFrame" class="other-frame" title="ข้อมูลสถานการณ์ภัย" loading="lazy"></iframe></section>
 </main>
@@ -108,7 +108,7 @@
  const sub=document.createElement('p');sub.textContent='เลือกประเภทเหตุและค้นหาบริษัท เพื่อจัดทำรายงานในหน้านี้';
  heading.append(title,sub);
  frame.loading='lazy';frame.style.height='1800px';
- function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261019-sharp-map-v2');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
+ function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261019-map-ratio');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
  frame.src=reportUrl();
  link.addEventListener('click',event=>{event.preventDefault();const url=reportUrl();if(frame.src!==url)frame.src=url;section.scrollIntoView({behavior:'smooth',block:'start'});});
  window.returnToRiskDashboard=function(){document.getElementById('otherPage').hidden=true;dashboard.hidden=false;document.querySelectorAll('.nav-tab').forEach(tab=>tab.classList.toggle('active',tab.dataset.page==='risk'));document.getElementById('riskMapSection')?.scrollIntoView({behavior:'smooth',block:'start'});window.dispatchEvent(new Event('resize'))};
@@ -699,10 +699,8 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
  window.ieatCaptureReportMap=async (renderer,context)=>{
   const map=window.ieatSupportMap;if(!map)return null;
   const captureNode=map.getContainer(),originalStyle=captureNode.getAttribute('style'),originalCenter=map.getCenter(),originalZoom=map.getZoom();
-  let exportTiles=null;
   try{
   captureNode.style.setProperty('width','550px','important');captureNode.style.setProperty('height','730px','important');map.invalidateSize({animate:false});
-  exportTiles=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{crossOrigin:'anonymous',maxZoom:19,opacity:1,attribution:'Tiles © Esri'}).addTo(map);exportTiles.bringToFront();
   if(context&&Number.isFinite(context.lat)&&Number.isFinite(context.lng)){
    const points=(context.points||[]).filter(p=>Number.isFinite(Number(p.lat))&&Number.isFinite(Number(p.lng)));
    if(points.length)map.fitBounds(L.latLngBounds([[context.lat,context.lng],...points.map(p=>[Number(p.lat),Number(p.lng)])]),{padding:[45,55],maxZoom:15,animate:false});
@@ -713,9 +711,9 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
   await Promise.allSettled(Array.from(container.querySelectorAll('img.leaflet-tile')).filter(img=>!img.complete).map(img=>new Promise(resolve=>{img.addEventListener('load',resolve,{once:true});img.addEventListener('error',resolve,{once:true});setTimeout(resolve,3000)})));
   await Promise.all(Array.from(container.querySelectorAll('img.leaflet-tile')).map(img=>img.decode?img.decode().catch(()=>{}):Promise.resolve()));
   await new Promise(resolve=>setTimeout(resolve,500));
-  const canvas=await renderer(container,{backgroundColor:'#f3f6f8',scale:2,width:550,height:730,windowWidth:window.innerWidth,windowHeight:window.innerHeight,useCORS:true,allowTaint:false,logging:false,ignoreElements:element=>['leaflet-control-container','dashboard-point-cluster','dashboard-point-icon'].some(name=>element.classList?.contains(name))});
+  const canvas=await renderer(container,{backgroundColor:'#f3f6f8',scale:2,useCORS:true,allowTaint:false,logging:false,ignoreElements:element=>['leaflet-control-container','dashboard-point-cluster','dashboard-point-icon'].some(name=>element.classList?.contains(name))});
   return canvas.toDataURL('image/png');
-  }finally{if(exportTiles)map.removeLayer(exportTiles);if(originalStyle===null)captureNode.removeAttribute('style');else captureNode.setAttribute('style',originalStyle);map.invalidateSize({animate:false});map.setView(originalCenter,originalZoom,{animate:false});}
+  }finally{if(originalStyle===null)captureNode.removeAttribute('style');else captureNode.setAttribute('style',originalStyle);map.invalidateSize({animate:false});map.setView(originalCenter,originalZoom,{animate:false});}
  };
 })();
 </script>
@@ -830,52 +828,6 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
  function connect(){const doc=frame.contentDocument,node=doc?.getElementById('dssOptionalDetails');if(!node)return;const style=doc.createElement('style');style.textContent='html body #dssOptionalDetails>summary{display:none!important}html body #dssOptionalDetails[open] .dss-settings-content{position:static!important;width:100%!important;max-height:none!important}';doc.head.append(style);node.addEventListener('toggle',()=>settings.setAttribute('aria-expanded',String(node.open)))}
  frame.addEventListener('load',connect);if(frame.contentDocument?.readyState==='complete')connect();
 })();
-</script><style id="dashboard-analysis-theme-20261019">
-body{background:#eaf0f6!important}
-#riskDashboard{--dash-text:#182433;--dash-accent:#8B1E2D;font-size:14px;line-height:1.6;color:var(--dash-text)}
-#riskDashboard .workspace-data{padding:4px 12px 24px 2px}
-#riskDashboard .inventory{gap:12px}
-#riskDashboard #inventory .inventory-card{border:1px solid #cbd5e1!important;border-top:4px solid #8B1E2D!important;border-radius:12px!important;background:#fff!important;min-height:130px!important;padding:14px!important;box-shadow:0 4px 12px #18334d12!important;transition:box-shadow .15s,border-color .15s}
-#riskDashboard #inventory .inventory-card:hover{border-color:#8B1E2D!important;box-shadow:0 7px 18px #8b1e2d24!important}
-#riskDashboard #inventory .inventory-card.active{background:#fff0f2!important;border:2px solid #8B1E2D!important;border-top-width:4px!important;outline:0!important;box-shadow:0 5px 16px #8b1e2d30!important}
-#riskDashboard .inventory-card .card-label{font-size:13px!important;font-weight:600!important;line-height:1.5!important;min-height:39px!important}
-#riskDashboard .inventory-card .card-value strong{font-size:28px!important;font-weight:700!important;line-height:1.15!important;letter-spacing:0!important;font-variant-numeric:tabular-nums}
-#riskDashboard .inventory-card small{font-size:12px!important;line-height:1.5!important}
-#riskDashboard .card-art{width:36px!important;height:40px!important;flex-shrink:0}
-#riskDashboard .panel,#riskDashboard #dssStatusSection,#riskDashboard .emergency-support-section{border:1px solid #cbd5e1!important;border-radius:12px!important;background:#fff!important;box-shadow:0 4px 14px #18334d10!important}
-#riskDashboard #dssStatusSection{margin:18px 0!important;padding:14px!important;background:#f7f9fc!important;border-top:4px solid #334e68!important}
-#riskDashboard #dssStatusSection .inventory-card{border-radius:10px!important;min-height:130px!important;padding:12px!important;box-shadow:none!important}
-#riskDashboard .operating-zone-section{border-top:4px solid #334e68!important}
-#riskDashboard .chemical-details-panel{border:2px solid #8B1E2D!important;padding:16px!important;margin:18px 0!important;background:#fff!important;box-shadow:0 6px 20px #8b1e2d14!important}
-#riskDashboard .chemical-detail-filters{padding:14px!important;margin:0 0 12px!important;border-radius:9px;background:#f5e9ed;border:1px solid #dfbac5}
-#riskDashboard .chemical-detail-filters label,#riskDashboard .emergency-support-tools label{font-size:13px!important;font-weight:600!important;line-height:1.5!important}
-#riskDashboard input,#riskDashboard select,#riskDashboard button:not(.inventory-card):not(.leaflet-control-zoom-in):not(.leaflet-control-zoom-out){font-size:13px!important;line-height:1.5}
-#riskDashboard .chemical-detail-filters input,#riskDashboard .chemical-detail-filters select{font-size:14px!important;min-height:44px!important;border:1px solid #aebccd!important;background:#fff!important;border-radius:7px!important;color:#182433!important}
-#riskDashboard .chemical-detail-filters input:focus,#riskDashboard .chemical-detail-filters select:focus{outline:2px solid #8B1E2D;outline-offset:2px}
-#riskDashboard h2,#riskDashboard h3,#riskDashboard .panel-title,#riskDashboard .emergency-support-heading h2,#riskDashboard .risk-ranking-card h3{font-size:16px!important;font-weight:700!important;line-height:1.5!important;color:#182433!important}
-#riskDashboard .risk-ranking-card h3{min-height:0!important}
-#riskDashboard .panel-note,#riskDashboard .source-note,#riskDashboard #dssStatusNote,#riskDashboard .support-incident-label,#riskDashboard .support-empty{font-size:12px!important;line-height:1.6!important;color:#36485a!important}
-#riskDashboard .chemical-detail-table,#riskDashboard .matrix,#riskDashboard .risk-table{font-size:13px!important;line-height:1.6!important}
-#riskDashboard .chemical-detail-table thead th{background:#334e68!important;color:#fff!important;border-color:#4a6279!important;font-weight:600!important}
-#riskDashboard .chemical-detail-table tbody tr:nth-child(even) td{background:#f0f4f9!important}
-#riskDashboard .chemical-detail-table tbody tr:hover td{background:#fce8ed!important}
-#riskDashboard #chemicalDetailStatus{background:#e8eff6;color:#263e55;padding:7px 10px;font-size:12px!important}
-#riskDashboard .emergency-support-section{padding:16px!important;border-top:4px solid #18705b!important}
-#riskDashboard .emergency-support-heading{padding-bottom:12px;border-bottom:1px solid #cbd5e1;margin-bottom:12px}
-#riskDashboard .emergency-support-card{padding:12px;border:1px solid #ccd8df;border-radius:9px;background:#f7fafb}
-#riskDashboard .emergency-support-row{background:#fff;border:1px solid #d2dce5!important;border-radius:7px}
-#riskDashboard .support-name{font-size:14px!important;font-weight:600}
-#riskDashboard .support-type,#riskDashboard .support-phone,#riskDashboard .support-address,#riskDashboard .support-distance{font-size:12px!important}
-#riskDashboard .workspace-map>.panel{border:1px solid #aabbd0!important;border-radius:12px!important;box-shadow:0 6px 20px #18334d1c!important}
-#riskDashboard .map-controls{background:#253d55!important;padding:12px!important;border-bottom:3px solid #8B1E2D!important}
-#riskDashboard .map-controls select{background:#fff!important;border-radius:7px!important;color:#182433!important;font-size:13px!important}
-#riskDashboard .map-footer{background:#f2f6fa!important;border-top:1px solid #cbd5e1!important;font-size:12px!important;color:#263e55!important}
-#riskDashboard .map-analysis-title{font-size:15px!important;font-weight:600;color:#fff;margin:0 0 9px;line-height:1.5}
-#riskDashboard #incidentSettingsToggle{background:#8B1E2D!important;color:#fff!important;border-color:#8B1E2D!important;min-height:44px}
-html body .portal-disaster-tabs.portal-disaster-tabs{background:#fff!important;border-bottom:2px solid #b5c4d4!important}
-html body .portal-disaster-tabs.portal-disaster-tabs .nav-tab{font-size:14px!important;font-weight:600!important}
-html body .portal-disaster-tabs.portal-disaster-tabs .nav-tab.active{background:#8B1E2D!important;color:#fff!important;border-bottom:0!important;border-radius:6px 6px 0 0!important}
-@media(max-width:760px){#riskDashboard .workspace-data{padding:0}#riskDashboard .chemical-details-panel{padding:10px!important}#riskDashboard .chemical-detail-filters{padding:10px!important}#riskDashboard .inventory-card .card-value strong{font-size:28px!important}}
-</style></body></html>
+</script></body></html>
 
 
