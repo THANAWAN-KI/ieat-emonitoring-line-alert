@@ -3530,27 +3530,30 @@ function paint(){
 
 }
 function showSupport(data){
- const categories=[['hospital','โรงพยาบาล'],['fire','สถานีดับเพลิง'],['police','สถานีตำรวจ'],['community','ชุมชน'],['hydrant','หัวจ่ายน้ำดับเพลิง'],['cctv','กล้อง CCTV']];
+ const categories=[['fire','ดับเพลิง'],['hospital','โรงพยาบาล'],['hydrant','หัวจ่ายน้ำ'],['police','ตำรวจ'],['community','ชุมชน'],['cctv','CCTV']];
  const allowed=new Set(categories.map(c=>c[0])),groups=new Map(),seen=new Set();
  (data.rows||[]).filter(r=>allowed.has(r.sourceId)&&Number(r.distance)<=data.radius*1000).sort((a,b)=>a.distance-b.distance).forEach(row=>{
  const key=row.sourceId,placeKey=[key,row.name,...(['hospital','fire','police'].includes(key)?[]:[Number(row.lat).toFixed(5),Number(row.lon).toFixed(5)])].join('|');
  if(seen.has(placeKey)||(groups.get(key)||[]).length>=3)return;seen.add(placeKey);if(!groups.has(key))groups.set(key,[]);groups.get(key).push(row);
  });
- nearby.replaceChildren();nearby.setAttribute('aria-label','ตารางสถานที่สนับสนุนแยกตามประเภทและระยะห่าง');
- const table=document.createElement('table');table.className='grouped-support-table';const head=document.createElement('thead'),hr=document.createElement('tr');
- ['ประเภท','ชื่อสถานที่','ระยะห่าง'].forEach(text=>{const th=document.createElement('th');th.textContent=text;th.scope='col';hr.append(th)});head.append(hr);table.append(head);const body=document.createElement('tbody'),pairs=[];
- categories.forEach(([key,label])=>{
+ nearby.replaceChildren();nearby.setAttribute('aria-label','ตารางข้อมูลสถานที่สนับสนุนแยกประเภท');
+ const table=document.createElement('table');table.className='grouped-support-table support-reference-table';const body=document.createElement('tbody');
+ categories.forEach(([key,label],index)=>{
  const rows=groups.get(key);if(!rows?.length)return;
- const tr=document.createElement('tr'),type=document.createElement('th'),names=document.createElement('td'),distances=document.createElement('td');type.scope='row';type.textContent=label;
+ const tr=document.createElement('tr'),type=document.createElement('th'),details=document.createElement('td');type.scope='row';
+ const badge=document.createElement('span'),category=document.createElement('span');badge.className='support-category-number';badge.textContent=index+1;category.textContent=label;type.append(badge,category);
  rows.forEach(row=>{
- const entry=document.createElement('div'),button=document.createElement('button');entry.className='support-group-entry';button.type='button';button.textContent=row.name;button.title=row.address||row.name;
- button.onclick=()=>parent.postMessage({type:'dss:support',item:{lat:row.lat,lng:row.lon,name:row.name,distance:row.distance/1000,phone:row.phone}},location.origin);entry.append(button);names.append(entry);
- const distance=document.createElement('div');distance.className='support-group-entry';distance.textContent=row.distance<1000?Math.round(row.distance)+' ม.':(row.distance/1000).toFixed(2)+' กม.';distances.append(distance);pairs.push([entry,distance]);
- });tr.append(type,names,distances);body.append(tr);
+ const entry=document.createElement('div');entry.className='support-place-details';
+ const nameLabel=document.createElement('span');nameLabel.className='support-detail-label';nameLabel.textContent='ชื่อสถานที่';
+ const button=document.createElement('button');button.type='button';button.textContent=row.name;button.title=row.address||row.name;
+ button.onclick=()=>parent.postMessage({type:'dss:support',item:{lat:row.lat,lng:row.lon,name:row.name,distance:row.distance/1000,phone:row.phone}},location.origin);
+ const distanceLabel=document.createElement('span');distanceLabel.className='support-detail-label';distanceLabel.textContent='ระยะเส้นตรง';
+ const distance=document.createElement('span');distance.textContent=row.distance<1000?Math.round(row.distance)+' เมตร':(row.distance/1000).toFixed(2)+' กม.';
+ entry.append(nameLabel,button,distanceLabel,distance);details.append(entry);
+ });tr.append(type,details);body.append(tr);
  });
- if(!body.children.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=3;td.textContent=data.loading?'กำลังค้นหา…':'ไม่พบจุดสนับสนุนในระยะที่เลือก';tr.append(td);body.append(tr)}
+ if(!body.children.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=2;td.textContent=data.loading?'กำลังค้นหา…':'ไม่พบจุดสนับสนุนในระยะที่เลือก';tr.append(td);body.append(tr)}
  table.append(body);nearby.append(table);
- requestAnimationFrame(()=>pairs.forEach(([name,distance])=>{const height=Math.max(name.getBoundingClientRect().height,distance.getBoundingClientRect().height);name.style.minHeight=distance.style.minHeight=Math.ceil(height)+'px'}));
  if(data.failures?.some(id=>allowed.has(id))){const p=document.createElement('p');p.className='report-nearby-note';p.textContent='บางกลุ่มเชื่อมต่อข้อมูลไม่สำเร็จ';nearby.append(p)}
 }
 
@@ -3625,4 +3628,15 @@ html body #report#report.dss-field-document #dssFieldBrief #fbWeather .report-fi
 html body #report#report.dss-field-document #dssFieldBrief #fbWeather .report-weather-arrow{display:flex!important;align-items:center!important;justify-content:center!important;width:38px!important;height:38px!important;margin:7px auto!important;background:#fff0ed!important;border-radius:50%!important}
 html body #report#report.dss-field-document #dssFieldBrief #fbWeather .report-weather-arrow svg{width:26px!important;height:26px!important}
 html body #report#report.dss-field-document #dssFieldBrief #fbWeather small{display:block!important;font-size:10px!important;margin-top:7px!important;color:#77716e!important;-webkit-text-fill-color:#77716e!important}
+</style><style id="support-reference-two-column-layout">
+html body #report#report #reportNearbySupport .support-reference-table{table-layout:fixed!important;width:100%!important}
+html body #report#report #reportNearbySupport .support-reference-table :is(th,td):nth-child(1){width:26%!important;padding:9px!important;text-align:left!important}
+html body #report#report #reportNearbySupport .support-reference-table :is(th,td):nth-child(2){width:74%!important;padding:9px!important;text-align:left!important}
+html body #report#report #reportNearbySupport .support-reference-table tbody th{background:#edf2e8!important;color:#4d4f53!important;font-weight:600!important}
+html body #report#report #reportNearbySupport .support-reference-table tbody td{background:#fff!important}
+html body #report#report #reportNearbySupport .support-reference-table .support-category-number{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:20px!important;height:20px!important;margin:0 6px 4px 0!important;background:#4f7d32!important;color:#fff!important;-webkit-text-fill-color:#fff!important;border-radius:4px!important;font:600 12px/1 Sarabun,sans-serif!important;vertical-align:top!important}
+html body #report#report #reportNearbySupport .support-reference-table .support-place-details{display:grid!important;grid-template-columns:78px minmax(0,1fr)!important;gap:2px 8px!important;padding:0!important;margin:0!important;line-height:1.6!important}
+html body #report#report #reportNearbySupport .support-reference-table .support-place-details+.support-place-details{margin-top:8px!important}
+html body #report#report #reportNearbySupport .support-reference-table .support-detail-label{color:#73776f!important;-webkit-text-fill-color:#73776f!important;font-weight:400!important}
+html body #report#report #reportNearbySupport .support-reference-table button{display:block!important;width:100%!important;text-align:left!important;align-self:start!important;line-height:1.6!important}
 </style></body></html>
