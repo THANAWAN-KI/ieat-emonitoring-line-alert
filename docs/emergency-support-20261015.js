@@ -92,10 +92,11 @@ pick.addEventListener('click',choose);localPick.addEventListener('click',choose)
 clear.addEventListener('click',()=>{controller?.abort();request++;incident=null;selecting=false;loading=false;results=new Map();failures=[];if(marker)marker.remove();if(markers)markers.remove();if(map)map.getContainer().style.cursor='';pick.textContent='กำหนดจุดเกิดเหตุ';localPick.textContent='เลือกจุดเกิดเหตุ';render();});
 window.addEventListener('ieat-support-map-ready',e=>bindMap(e.detail.map));if(window.ieatSupportMap)bindMap(window.ieatSupportMap);
 
+let companyOrigin=null;
 const estateSource=get('estate'),normEstate=v=>String(v||'').normalize('NFKC').toLowerCase().replace(/นิคมอุตสาหกรรม|ท่าเรืออุตสาหกรรม|สำนักงานนิคมฯ|นิคมฯ|[\s\u200b-\u200d]/g,'');
 function clearEstate(){controller?.abort();request++;incident=null;results=new Map();if(marker)marker.remove();if(markers)markers.remove();window.dispatchEvent(new CustomEvent('ieat-clear-support-center'));render()}
 async function selectEstate(){
- const sequence=++estateSequence;if(!estateSource?.value){estateName='';clearEstate();return}
+ const sequence=++estateSequence;if(companyOrigin){applyCompanyOrigin();return}if(!estateSource?.value){estateName='';clearEstate();return}
  const name=estateSource.selectedOptions[0]?.textContent||estateSource.value;estateName=name;if(!map){note.textContent='กำลังเตรียมแผนที่สำหรับ '+name;return}
  note.textContent='กำลังค้นหาตำแหน่งนิคมอุตสาหกรรม '+name;
  try{
@@ -108,7 +109,19 @@ async function selectEstate(){
   setIncident(g.y,g.x);window.dispatchEvent(new CustomEvent('ieat-support-center',{detail:{lat:g.y,lon:g.x,name}}));
  }catch(error){if(sequence===estateSequence){clearEstate();note.textContent='โหลดข้อมูลสนับสนุนของ '+name+' ไม่สำเร็จ: '+error.message}}
 }
-estateSource?.addEventListener('change',selectEstate);window.addEventListener('ieat-refresh-estate-support',selectEstate);window.addEventListener('ieat-support-map-ready',selectEstate);
+function applyCompanyOrigin(){
+ if(!companyOrigin||!map)return;
+ estateName=companyOrigin.name;
+ if(incident&&Math.abs(incident.lat-companyOrigin.lat)<.000001&&Math.abs(incident.lon-companyOrigin.lon)<.000001)return;
+ setIncident(companyOrigin.lat,companyOrigin.lon);
+ window.dispatchEvent(new CustomEvent('ieat-support-center',{detail:companyOrigin}));
+}
+window.addEventListener('message',event=>{
+ const frame=get('emergencyReportFrame');if(event.origin!==location.origin||event.source!==frame?.contentWindow||event.data?.type!=='dss:incident')return;
+ const lat=Number(event.data.lat),lon=Number(event.data.lng);if(!Number.isFinite(lat)||!Number.isFinite(lon)||lat<5||lat>22||lon<97||lon>106)return;
+ estateSequence++;companyOrigin={lat,lon,name:event.data.name||'สถานประกอบการที่เลือก'};applyCompanyOrigin();
+});
+estateSource?.addEventListener('change',()=>{companyOrigin=null;selectEstate()});window.addEventListener('ieat-refresh-estate-support',selectEstate);window.addEventListener('ieat-support-map-ready',selectEstate);
 clear.textContent='ล้างการเลือก';clear.addEventListener('click',()=>{estateSource.value='';estateSource.dispatchEvent(new Event('change',{bubbles:true}))});
 if(estateSource?.value&&window.ieatSupportMap)selectEstate();
 
