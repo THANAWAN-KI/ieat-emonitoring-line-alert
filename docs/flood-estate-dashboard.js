@@ -116,7 +116,7 @@
  window.addEventListener('message',event=>{
   if(event.origin!==location.origin)return;
   if(event.source===$('estateFocusMap')?.contentWindow&&event.data?.type==='flood-water-ready'){deliverExecutiveFocus();return}
-  if(event.source!==window.parent)return;
+  if(event.source!==window.parent&&event.source!==window)return;
   if(event.data?.type==='ieat-flood-estate'){executiveFocus=null;applyHeaderEstate(event.data.name);return}
   if(event.data?.type==='ieat-executive-map-focus'){
    const focus=event.data.focus;if(focus?.type!=='flood-map-focus'||!Number.isFinite(Number(focus.lat))||!Number.isFinite(Number(focus.lon)))return;
