@@ -120,7 +120,7 @@ window.addEventListener('ieat-support-map-ready',()=>requestAnimationFrame(overv
  const sub=document.createElement('p');sub.textContent='เลือกประเภทเหตุและค้นหาบริษัท เพื่อจัดทำรายงานในหน้านี้';
  heading.append(title,sub);
  frame.loading='lazy';frame.style.height='1800px';
- function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261019-mobile-dashboard');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
+ function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261019-reliable-mobile-download');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
  frame.src=reportUrl();
  link.addEventListener('click',event=>{event.preventDefault();const url=reportUrl();if(frame.src!==url)frame.src=url;section.scrollIntoView({behavior:'smooth',block:'start'});});
  window.returnToRiskDashboard=function(){document.getElementById('otherPage').hidden=true;dashboard.hidden=false;document.querySelectorAll('.nav-tab').forEach(tab=>tab.classList.toggle('active',tab.dataset.page==='risk'));document.getElementById('riskMapSection')?.scrollIntoView({behavior:'smooth',block:'start'});window.dispatchEvent(new Event('resize'))};
@@ -936,13 +936,24 @@ html body #riskDashboard .incident-search-popover .chemical-detail-filters>label
  const download=document.createElement('button');download.type='button';download.id='dashboardDownloadImage';download.className='dashboard-download-image';download.title='ดาวน์โหลดรายงาน PNG 2 หน้า';
  download.textContent='ดาวน์โหลดภาพ';
  download.addEventListener('click',async()=>{
-  window.ieatOpenDashboardPanel?.('report');
-  const frame=document.getElementById('emergencyReportFrame');let doc,png;download.disabled=true;
-  for(let attempt=0;attempt<100;attempt++){doc=frame.contentDocument;png=doc?.getElementById('pngBtn');if(png&&typeof png.onclick==='function'&&!png.disabled)break;await new Promise(resolve=>setTimeout(resolve,150))}
-  download.disabled=false;
-  if(!png||typeof png.onclick!=='function'){alert('กำลังเตรียมรายงาน กรุณารอสักครู่');return}if(png.disabled){alert('กำลังโหลดข้อมูลรายงาน กรุณารอสักครู่');return}
-  download.disabled=true;dashboard.dataset.exporting='true';const preview=doc.body.classList.contains('dss-dashboard-preview'),two=doc.body.classList.contains('dss-dashboard-preview-two');doc.body.classList.remove('dss-dashboard-preview','dss-dashboard-preview-two');
-  try{await png.onclick.call(png,new Event('click'))}finally{if(preview)doc.body.classList.add('dss-dashboard-preview');if(two)doc.body.classList.add('dss-dashboard-preview-two');delete dashboard.dataset.exporting;download.disabled=false;window.dispatchEvent(new CustomEvent('ieat-dashboard-fit-refresh'))}
+ window.ieatOpenDashboardPanel?.('report');
+ const frame=document.getElementById('emergencyReportFrame');let doc,png;
+ let feedback=document.getElementById('dashboardExportFeedback');if(!feedback){feedback=document.createElement('div');feedback.id='dashboardExportFeedback';feedback.setAttribute('role','status');feedback.setAttribute('aria-live','polite');download.closest('.report-download-toolbar').after(feedback)}
+ feedback.replaceChildren();feedback.textContent='กำลังเตรียมรายงาน…';download.disabled=true;download.textContent='กำลังสร้างภาพ…';
+ let preview=false,two=false;
+ try{
+ for(let attempt=0;attempt<100;attempt++){doc=frame.contentDocument;png=doc?.getElementById('pngBtn');if(png&&typeof png.onclick==='function'&&!png.disabled)break;await new Promise(resolve=>setTimeout(resolve,150))}
+ if(!png||typeof png.onclick!=='function'||png.disabled)throw Error('รายงานยังโหลดไม่เสร็จ กรุณารอสักครู่แล้วลองอีกครั้ง');
+ dashboard.dataset.exporting='true';preview=doc.body.classList.contains('dss-dashboard-preview');two=doc.body.classList.contains('dss-dashboard-preview-two');doc.body.classList.remove('dss-dashboard-preview','dss-dashboard-preview-two');
+ feedback.textContent='กำลังสร้างภาพรายงาน 2 หน้า กรุณารอสักครู่…';
+ await png.onclick.call(png,new Event('click'));
+ const error=doc.getElementById('dssExportError'),files=frame.contentWindow.ieatReportDownloads;
+ if(error)throw Error(error.textContent.replace(/^ส่งออกรายงานไม่สำเร็จ:\s*/,''));
+ if(!files?.length)throw Error('ยังสร้างไฟล์รายงานไม่สำเร็จ กรุณาลองอีกครั้ง');
+ feedback.replaceChildren();const note=document.createElement('p');note.textContent='สร้างรายงานสำเร็จ หากไฟล์ไม่เริ่มดาวน์โหลด ให้กดดาวน์โหลดแต่ละหน้าด้านล่าง';feedback.append(note);
+ files.forEach((file,index)=>{const link=document.createElement('a');link.href=file.url;link.download=file.name;link.textContent='ดาวน์โหลดหน้า '+(index+1)+' (PNG)';feedback.append(link)});
+ }catch(error){feedback.replaceChildren();feedback.textContent=error.message==='กรุณาเลือกโรงงานก่อนดาวน์โหลด'?'กรุณาค้นหาและเลือกโรงงานที่เกิดเหตุก่อนดาวน์โหลดรายงาน':error.message;feedback.classList.add('export-error');feedback.setAttribute('role','alert')}
+ finally{if(doc){if(preview)doc.body.classList.add('dss-dashboard-preview');if(two)doc.body.classList.add('dss-dashboard-preview-two')}delete dashboard.dataset.exporting;download.disabled=false;download.textContent='ดาวน์โหลดภาพ';window.dispatchEvent(new CustomEvent('ieat-dashboard-fit-refresh'))}
  });
  const querybar=document.createElement('div');querybar.className='dashboard-querybar';querybar.setAttribute('aria-label','ค้นหาและดาวน์โหลดข้อมูล');querybar.classList.add('direct-querybar');querybar.append(filters,download);if(results){results.classList.add('direct-query-results');querybar.append(results)}dashboard.querySelector('.workspace-data').prepend(querybar);
 })();
@@ -1637,5 +1648,11 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard
 html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard :is(.unified-company-suggestions,.unified-company-results){max-width:100%!important;box-sizing:border-box!important}
 html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard button{touch-action:manipulation}
 }
+</style><style id="report-download-feedback">
+html body #dashboardExportFeedback{padding:10px 12px;margin:0 0 10px;background:#f2f6ed;color:#4d4f53;border-radius:10px;font:13px/1.6 Sarabun,sans-serif}
+html body #dashboardExportFeedback p{margin:0 0 8px}
+html body #dashboardExportFeedback a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 14px;margin:0 8px 4px 0;background:#d9361e;color:#fff;border-radius:8px;text-decoration:none;font-weight:600}
+html body #dashboardExportFeedback.export-error{background:#fff0ed;color:#a62513}
+@media(max-width:760px){html body #dashboardExportFeedback a{display:flex;width:100%;box-sizing:border-box}}
 </style></body></html>
 
