@@ -3451,35 +3451,7 @@ html body #dssPageTwo.dss-page-two-export table{font-size:13px!important}
 </script><style id="incident-editor-type-20261019">
 html body .editor :is(label,input,select,textarea,button,p,summary,.hint){font-size:14px!important;line-height:1.5!important}
 html body .editor :is(h2,h3){font-size:18px!important;line-height:1.5!important}
-</style><script id="inline-report-editing-20261019">
-(function(){
- let selected=null,activeKey='',saved={values:{},deleted:{}};
- const groups=['#dssFieldBrief h1','#fbFacts .fb-fact>strong','#fbSituation .report-field>span:last-child','#fbWeather .report-field>span:last-child','#fbSupport .report-support-field>span:last-child','#fbMapCaption .report-field>span:last-child','#dssPageTwo .p2-company','#dssPageTwo .p2-facts strong','#dssPageTwo tbody td'];
- function scope(){return 'ieat-report-edits-v1:'+JSON.stringify([state.company,state.registration])}
- function persist(){try{localStorage.setItem(activeKey,JSON.stringify(saved))}catch{}}
- function apply(){
-  const key=scope();if(key!==activeKey){activeKey=key;selected=null;try{saved=JSON.parse(localStorage.getItem(key))||{values:{},deleted:{}}}catch{saved={values:{},deleted:{}}}}
-  groups.forEach((selector,group)=>document.querySelectorAll(selector).forEach((node,index)=>{
-   const id=group+':'+index;node.dataset.reportEditId=id;if(node.dataset.reportOriginal===undefined)node.dataset.reportOriginal=node.textContent;
-   node.contentEditable='true';node.spellcheck=false;node.setAttribute('aria-label','แก้ไขข้อมูลรายงาน');
-   if(document.activeElement!==node&&Object.prototype.hasOwnProperty.call(saved.values,id))node.textContent=saved.values[id];
-   const container=node.closest('.fb-fact,.report-field,.report-support-field,tr')||node;const removal=group===8?'table:'+Array.from(document.querySelectorAll('#dssPageTwo tbody tr')).indexOf(node.closest('tr')):id;
-   node.dataset.reportRemoveId=removal;if(saved.deleted[removal]){container.dataset.reportDeleted='true';container.style.setProperty('display','none','important')}
-   if(node.dataset.reportBound)return;node.dataset.reportBound='true';
-   node.addEventListener('focus',()=>{selected=node;document.querySelectorAll('.report-edit-selected').forEach(n=>n.classList.remove('report-edit-selected'));node.classList.add('report-edit-selected')});
-   node.addEventListener('input',()=>{saved.values[node.dataset.reportEditId]=node.textContent;persist()});
-   node.addEventListener('paste',e=>{e.preventDefault();const text=e.clipboardData.getData('text/plain');document.execCommand('insertText',false,text)});
-  }));
- }
- window.dssEnableInlineReportEditing=apply;
- window.dssDeleteSelectedReportField=()=>{if(!selected?.isConnected)return;const container=selected.closest('.fb-fact,.report-field,.report-support-field,tr')||selected;saved.deleted[selected.dataset.reportRemoveId]=true;persist();container.dataset.reportDeleted='true';container.style.setProperty('display','none','important');selected=null};
- window.dssResetReportEdits=()=>{saved={values:{},deleted:{}};persist();document.querySelectorAll('[data-report-edit-id]').forEach(n=>{if(n.dataset.reportOriginal!==undefined)n.textContent=n.dataset.reportOriginal});document.querySelectorAll('[data-report-deleted]').forEach(n=>{n.style.removeProperty('display');delete n.dataset.reportDeleted});render();apply()};
- const previous=render;render=function(){const result=previous.apply(this,arguments);apply();return result};
- const exportOriginal=downloadReportPng;downloadReportPng=async function(){document.body.classList.add('dss-edit-exporting');try{return await exportOriginal.apply(this,arguments)}finally{document.body.classList.remove('dss-edit-exporting');apply()}};
- window.addEventListener('message',e=>{if(e.origin!==location.origin||e.source!==parent||e.data?.type!=='dss:set-buffer-radii')return;const radii=(e.data.radii||[]).filter(r=>[1,3,5].includes(Number(r)));if(!radii.length)return;state.bufferRadii=[1,3,5];state.bufferEnabled=[1,3,5].map(r=>radii.includes(r));syncBufferControls();render();updateMap()});
- apply();
-})();
-</script>
+</style><script id="report-buffer-sync-20261019">window.addEventListener('message',e=>{if(e.origin!==location.origin||e.source!==parent||e.data?.type!=='dss:set-buffer-radii')return;const radii=(e.data.radii||[]).map(Number).filter(r=>[1,3,5].includes(r));state.bufferRadii=[1,3,5];state.bufferEnabled=[1,3,5].map(r=>radii.includes(r));syncBufferControls();render();updateMap()});</script>
 <style id="inline-report-editor-style-20261019">
 html body.dss-dashboard-edit:not(.dss-edit-exporting){margin:0!important;padding:0!important;min-width:0!important;background:#fff!important;overflow:auto!important}
 html body.dss-dashboard-edit.dss-inline-dashboard:not(.dss-edit-exporting)>.top,
@@ -3497,4 +3469,20 @@ html body.dss-dashboard-edit:not(.dss-edit-exporting) [contenteditable=true]{cur
 html body.dss-dashboard-edit:not(.dss-edit-exporting) [contenteditable=true]:focus{outline:2px solid #0066b2;background:#edf6ff}
 html body.dss-edit-exporting [contenteditable=true]{outline:0!important;box-shadow:none!important;background:transparent!important}
 [data-report-deleted=true]{display:none!important}
+</style>
+<style id="professional-readonly-report-20261019">
+html body #report #dssFieldBrief,html body #dssPageTwo{font-family:Sarabun,"TH Sarabun New",sans-serif!important;font-size:13px!important;line-height:1.6!important;color:#17202a!important;background:#fff!important}
+html body #report #dssFieldBrief h1,html body #dssPageTwo h1{font-size:23px!important;line-height:1.45!important;font-weight:700!important;color:#242424!important;margin:0!important}
+html body #report #dssFieldBrief h2,html body #dssPageTwo h2{font-size:17px!important;line-height:1.5!important;font-weight:700!important;color:#252525!important;padding:9px 12px!important;background:#f5f6f8!important;border:0!important;border-left:3px solid #8b1e2d!important;margin:20px 0 12px!important}
+html body #report #dssFieldBrief :is(.fb-fact,.fb-data-box,.fb-support,.report-field,.report-support-field,.report-catalog-item,.report-field-label),
+html body #dssPageTwo :is(.p2-facts>div,th,td,p,li){font-size:13px!important;line-height:1.6!important}
+html body #report #dssFieldBrief :is(.fb-fact>strong,.fb-fact:first-child>strong),html body #dssPageTwo .p2-company,html body #dssPageTwo .p2-facts strong{font-size:15px!important;line-height:1.6!important}
+html body #report #dssFieldBrief :is(.fb-muted,.fb-data-box>small),html body #dssPageTwo :is(.p2-muted,small){font-size:11px!important;line-height:1.5!important;color:#5b616b!important}
+html body #report #dssFieldBrief .fb-header,html body #dssPageTwo .p2-header{padding-bottom:16px!important;margin-bottom:18px!important;border-bottom:2px solid #8b1e2d!important}
+html body #dssPageTwo table{border-collapse:collapse!important;width:100%!important;table-layout:fixed!important}
+html body #dssPageTwo th{background:#f2f4f7!important;color:#252525!important;font-weight:600!important;padding:10px 8px!important;border:1px solid #e4e7eb!important}
+html body #dssPageTwo td{padding:9px 8px!important;border:1px solid #e4e7eb!important;vertical-align:top!important;overflow-wrap:anywhere!important}
+html body #dssPageTwo tbody tr:nth-child(even) td{background:#fafbfc!important}
+html body.dss-dashboard-edit #report,html body.dss-dashboard-edit #dssPageTwo{padding:24px!important}
+html body [contenteditable]{outline:none!important;box-shadow:none!important}
 </style></body></html>
