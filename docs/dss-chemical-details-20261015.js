@@ -35,7 +35,7 @@ async function searchEpp(){
  const term=search.value.trim(),sequence=++eppSequence;
  eppController?.abort();eppMatches=[];eppBox.replaceChildren();page=0;render();
  if(term.length<2)return;
- const message=document.createElement('p');message.className='unified-company-status';message.textContent='กำลังค้นหาบริษัทและเลขทะเบียนจาก e_PP…';eppBox.append(message);
+ const message=document.createElement('p');message.className='unified-company-status';message.textContent='กำลังค้นหาบริษัทและเลขทะเบียนจาก e_PP…';eppBox.append(message);search.setAttribute('aria-expanded','true');
  eppController=new AbortController();const controller=eppController,timeout=setTimeout(()=>controller.abort(),20000);
  try{
   const escaped=term.replace(/'/g,"''").replace(/[%_]/g,'');
@@ -59,6 +59,13 @@ async function searchEpp(){
  }catch(error){if(sequence!==eppSequence)return;message.textContent='ค้นหา e_PP ไม่สำเร็จ · ยังแสดงผลจากรายงานสารเคมีได้ กรุณาลองพิมพ์ค้นหาอีกครั้ง';}
  finally{clearTimeout(timeout)}
 }
+function dismissCompanySuggestions(){
+ clearTimeout(timer);eppSequence++;eppController?.abort();eppBox.replaceChildren();search.setAttribute('aria-expanded','false');
+}
+window.addEventListener('ieat-unified-company-select',dismissCompanySuggestions);
+document.addEventListener('pointerdown',event=>{if(!eppBox.contains(event.target)&&event.target!==search&&!event.target.closest('#companySearchSubmit'))dismissCompanySuggestions()});
+document.addEventListener('keydown',event=>{if(event.key==='Escape')dismissCompanySuggestions()});
+search.setAttribute('aria-controls',eppBox.id);search.setAttribute('aria-expanded','false');
 window.ieatRunCompanySearch=searchEpp;
 search.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(searchEpp,350);});
 
