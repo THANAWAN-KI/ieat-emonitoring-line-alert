@@ -1480,5 +1480,26 @@ window.addEventListener('ieat-support-map-ready',e=>bind(e.detail.map));if(windo
 frame.addEventListener('load',()=>{queue();if(window.ieatSupportSnapshot)frame.contentWindow.postMessage({type:'dss:nearby-support',...window.ieatSupportSnapshot},location.origin)});
 window.addEventListener('message',e=>{if(e.origin!==location.origin||e.source!==frame.contentWindow)return;if(e.data?.type==='dss:request-dashboard-map'){queue();if(window.ieatSupportSnapshot)frame.contentWindow.postMessage({type:'dss:nearby-support',...window.ieatSupportSnapshot},location.origin)}});
 })();
+</script><style id="equal-dashboard-sections">
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .risk-workspace,html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-lower-pair{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:22px!important;align-items:stretch!important;flex:none!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .risk-analysis-columns{display:block!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .risk-analysis-columns>.risk-stacked{display:block!important;width:100%!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-lower-pair{margin-top:22px!important;width:100%!important;min-width:0!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-lower-pair #emergencySupportCards{grid-column:1!important;grid-row:1!important;display:grid!important;grid-template-columns:1fr!important;grid-template-rows:repeat(3,minmax(210px,1fr))!important;height:auto!important;gap:18px!important;flex:none!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-lower-pair>.chemical-details-panel{grid-column:2!important;grid-row:1!important;display:flex!important;flex-direction:column!important;height:100%!important;min-height:666px!important;max-height:760px!important;padding:18px!important;min-width:0!important;background:#fff!important;border:0!important;border-radius:16px!important;box-shadow:0 7px 26px #34452d0c!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-lower-pair .chemical-detail-scroll{flex:1 1 auto!important;min-height:0!important;overflow:auto!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-lower-pair .chemical-detail-table{min-width:650px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-lower-pair .emergency-support-card{border:0!important;box-shadow:0 7px 26px #34452d0c!important;border-radius:16px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-lower-pair .emergency-support-row{min-height:0!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-lower-pair h3{font-size:16px!important;font-weight:500!important;color:#41483f!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .workspace-map{height:auto!important;min-height:600px!important}
+@media(max-width:760px){html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .risk-workspace,html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-lower-pair{grid-template-columns:1fr!important}html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-lower-pair>.chemical-details-panel{grid-column:1!important;grid-row:2!important;height:600px!important;min-height:600px!important}html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .workspace-map{height:520px!important;min-height:520px!important}}
+</style><script id="equal-dashboard-sections-layout">
+(function(){
+const dashboard=document.getElementById('riskDashboard'),workspace=dashboard.querySelector('.risk-workspace'),cards=document.getElementById('emergencySupportCards'),table=dashboard.querySelector('.chemical-details-panel'),report=document.getElementById('emergencyReportPage');
+if(!workspace||!cards||!table)return;
+const row=document.createElement('section');row.className='dashboard-lower-pair';row.setAttribute('aria-label','ข้อมูลสนับสนุนและตารางระบบ DSS');row.append(cards,table);workspace.after(row);row.after(report);
+window.dispatchEvent(new Event('resize'));
+})();
 </script></body></html>
 
