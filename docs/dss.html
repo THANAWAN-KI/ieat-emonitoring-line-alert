@@ -1548,7 +1548,7 @@ async function downloadReportPng(){
     report.querySelectorAll(':scope > :not(#dssFieldBrief)').forEach(el=>el.remove());
     const brief=doc.getElementById('dssFieldBrief');brief.querySelectorAll(':scope > .fb-section').forEach((section,index)=>{if(index===2)section.remove()});
     brief.querySelector('.fb-footer')?.remove();
-    const slot=doc.getElementById('fieldBriefMap');slot.replaceChildren();const img=doc.createElement('img');img.src=mapImage;img.alt='ตำแหน่งสถานประกอบการและจุดสนับสนุน';slot.append(img);
+    const slot=doc.getElementById('fieldBriefMap'),weather=doc.getElementById('fbWeather');slot.replaceChildren();const img=doc.createElement('img');img.src=mapImage;img.alt='แผนที่บริเวณสถานประกอบการ';slot.append(img);if(weather)slot.append(weather);
     const foot=doc.createElement('div');foot.className='dss-page-footer';foot.textContent='แหล่งข้อมูล: e_PP · DSS · Open-Meteo (แบบจำลอง) | '+(state.reportNo||'')+' | หน้า 1 / 2';brief.append(foot);
     const height=brief.getBoundingClientRect().height;if(height>1421){brief.style.transform='scale('+(1421/height)+')';brief.style.transformOrigin='top left';brief.style.marginLeft=((986*(1-1421/height))/2)+'px'}
    }
@@ -2991,7 +2991,7 @@ html body #report.dss-field-export #dssFieldBrief .fb-data-box{font-size:14px!im
  const brief=document.createElement('article');brief.id='dssFieldBrief';
  brief.innerHTML='<header class="fb-header"><img class="fb-logo" alt="กนอ."><div><h1>รายงานสรุปสนับสนุนหน้างาน</h1><div class="fb-muted" id="fbDocumentMeta"></div></div></header>'+
  '<section class="fb-section"><h2>1. ข้อมูลเหตุและพื้นที่</h2><div class="fb-facts" id="fbFacts"></div><div class="fb-situation" id="fbSituation"></div></section>'+
- '<section class="fb-section"><h2>2. แผนที่และจุดสนับสนุนใกล้เคียง</h2><div class="fb-map-grid"><div><div class="fb-map" id="fieldBriefMap"><button type="button" data-export-exclude id="fbOpenMap">ดูจุดเกิดเหตุบนแผนที่ด้านขวา →</button></div><div class="fb-muted" id="fbMapCaption"></div></div><div><div class="fb-weather" id="fbWeather"></div><table class="fb-support"><tbody id="fbSupport"></tbody></table><div class="fb-muted" style="margin-top:7px">ระยะเส้นตรง · พบในฐานข้อมูล ยังไม่ยืนยันความพร้อม</div></div></div></section>'+
+ '<section class="fb-section"><h2>2. แผนที่และสภาพอากาศ</h2><div class="fb-map-grid"><div><div class="fb-map" id="fieldBriefMap"><button type="button" data-export-exclude id="fbOpenMap">ดูจุดเกิดเหตุบนแผนที่ด้านขวา →</button></div><div class="fb-muted" id="fbMapCaption"></div></div><div><div class="fb-weather" id="fbWeather"></div><table class="fb-support"><tbody id="fbSupport"></tbody></table><div class="fb-muted" style="margin-top:7px">ระยะเส้นตรง · พบในฐานข้อมูล ยังไม่ยืนยันความพร้อม</div></div></div></section>'+
  '<section class="fb-section"><h2>3. ข้อมูลประกอบการประสานงาน</h2><div class="fb-data-grid"><div class="fb-data-box" id="fbChemicals"></div><div class="fb-data-box" id="fbEquipment"></div></div></section>'+
  '<footer class="fb-footer"><img class="fb-qr" id="fbQr" alt="QR เปิดรายละเอียดโรงงาน"><div><strong>รายละเอียดโรงงานและข้อมูลฉบับเต็ม</strong><div><a id="fbFullLink" class="fb-link" target="_blank" rel="noopener">สแกน QR หรือเปิดข้อมูลบนเว็บ ↗</a></div><div class="fb-muted">แหล่งข้อมูล: DSS · ArcGIS · Open-Meteo<br>EMCC GIS · การนิคมอุตสาหกรรมแห่งประเทศไทย</div></div></footer>';
  brief.querySelector('.fb-logo').src=report.querySelector('.ieat-report-logo')?.src||'';
@@ -3258,7 +3258,7 @@ html body #report #dssFieldBrief .fb-qr[hidden]{display:none!important}
   if(full){full.textContent=selected?'เปิดรายงานตาราง DSS':'ไม่พบข้อมูลโรงงาน';if(!selected)full.removeAttribute('href')}
   const title=document.querySelector('#dssFieldBrief .fb-footer strong');if(title)title.textContent='รายงานข้อมูล DSS รายโรงงาน';
   const headings=document.querySelectorAll('#dssFieldBrief > .fb-section > h2');
-  ['1. สถานประกอบการและข้อมูลรับแจ้ง','2. แผนที่ สภาพอากาศ และจุดสนับสนุน','3. สารเคมีและอุปกรณ์ในฐานข้อมูล'].forEach((text,index)=>{if(headings[index])headings[index].textContent=text});
+  ['1. สถานประกอบการและข้อมูลรับแจ้ง','2. แผนที่และสภาพอากาศ','3. สารเคมีและอุปกรณ์ในฐานข้อมูล'].forEach((text,index)=>{if(headings[index])headings[index].textContent=text});
   document.querySelectorAll('#report [data-out]').forEach(node=>{
    if(node.children.length)return;
    if(!available(node.textContent))node.textContent=missing;
@@ -3501,4 +3501,37 @@ html body #report#report #dssFieldBrief :is(h1,h2,p,small,strong,.fb-muted,.repo
 html body #report#report #dssFieldBrief .fb-header,html body #dssPageTwo#dssPageTwo .p2-header{border-bottom-color:#4f7d32!important}
 html body #report#report #dssFieldBrief h2,html body #dssPageTwo#dssPageTwo h2{border-left-color:#4f7d32!important;background:#f3f6ef!important}
 html body #dssPageTwo#dssPageTwo th{background:#edf3e8!important;color:#000!important}
-</style></body></html>
+</style><style id="centered-report-map-weather">
+html body #report#report.dss-field-document #dssFieldBrief .fb-map-grid{display:block!important;grid-template-columns:1fr!important}
+html body #report#report.dss-field-document #dssFieldBrief .fb-map-grid>div:last-child{display:none!important}
+html body #report#report.dss-field-document #dssFieldBrief #fieldBriefMap{position:relative!important;display:block!important;width:100%!important;height:640px!important;max-height:none!important;margin:0 auto!important;border:0!important;background:#f3f6f8!important;overflow:hidden!important}
+html body #report#report.dss-field-export #dssFieldBrief #fieldBriefMap{height:760px!important}
+html body #report#report.dss-field-document #dssFieldBrief #fieldBriefMap>img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;margin:0!important}
+html body #report#report.dss-field-document #dssFieldBrief #reportMapCanvas{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;z-index:0!important}
+html body #report#report.dss-field-document #dssFieldBrief #fbWeather{display:block!important;position:absolute!important;right:16px!important;bottom:16px!important;z-index:800!important;width:250px!important;max-width:42%!important;padding:12px!important;margin:0!important;box-sizing:border-box!important;border:1px solid #d5dbd0!important;border-radius:4px!important;background:#fffffff5!important;box-shadow:0 2px 10px #0002!important}
+html body #report#report.dss-field-document #dssFieldBrief #fbWeather .report-field{display:grid!important;grid-template-columns:82px 1fr!important;font-size:12px!important;padding:2px 0!important;line-height:1.5!important}
+html body #report#report.dss-field-document #dssFieldBrief #fbWeather :is(small,.report-field-label){font-size:11px!important}
+.report-weather-arrow{display:block;width:34px;height:34px;margin:6px auto;transform-origin:center}
+.report-weather-arrow svg{display:block;width:100%;height:100%}
+</style><script id="report-full-map-preview">
+(function(){
+const slot=document.getElementById('fieldBriefMap'),weather=document.getElementById('fbWeather');slot.append(weather);
+const canvas=document.createElement('div');canvas.id='reportMapCanvas';slot.prepend(canvas);
+let preview=null,markers=null,positionKey='',timer;
+function paint(){
+ const title=document.querySelectorAll('#dssFieldBrief>.fb-section>h2')[1];if(title)title.textContent='2. แผนที่และสภาพอากาศ';
+ if(weather.parentElement!==slot)slot.append(weather);
+ weather.querySelector('.report-weather-arrow')?.remove();
+ const speed=Number(state.windSpeed),deg=Number(state.windDeg);
+ if(state.windSpeed!==''&&state.windSpeed!=='—'&&Number.isFinite(speed)&&speed>0&&Number.isFinite(deg)){
+ const arrow=document.createElement('span');arrow.className='report-weather-arrow';arrow.innerHTML="<svg viewBox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><path fill=\"#D9361E\" d=\"M479.568,159.192H294.751l22.54-96.459c2.094-8.92-1.451-18.198-8.937-23.475c-7.488-5.268-17.419-5.463-25.111-0.496L10.34,235.768C3.846,240.461,0,247.987,0,256.001c0,8.013,3.846,15.539,10.34,20.232L283.243,473.24c7.692,4.965,17.623,4.771,25.111-0.506c7.486-5.267,11.021-14.546,8.937-23.465l-22.54-96.459h184.817c17.905,0,32.432-14.518,32.432-32.433V191.623C512,173.708,497.474,159.192,479.568,159.192z\"/></svg>";arrow.style.transform='rotate('+((deg+270)%360)+'deg)';weather.insertBefore(arrow,weather.children[1]||null);
+ }
+ if(!window.L||!validPoint()||!state.company||state.company===defaults.company)return;
+ if(!preview){preview=L.map(canvas,{zoomControl:false,scrollWheelZoom:false,attributionControl:true});L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Tiles © Esri',maxZoom:19}).addTo(preview);markers=L.layerGroup().addTo(preview)}
+ const key=JSON.stringify([state.lat,state.lng,state.company,getBufferRadii()]);if(key!==positionKey){positionKey=key;markers.clearLayers();const lat=Number(state.lat),lng=Number(state.lng);L.marker([lat,lng]).bindTooltip(state.company,{permanent:true,direction:'top'}).addTo(markers);getBufferRadii().forEach((km,i)=>L.circle([lat,lng],{radius:km*1000,color:['#4F7D32','#F5B52E','#D9361E'][i%3],weight:2,fillOpacity:.025}).addTo(markers));preview.invalidateSize({pan:false});const max=Math.max(...getBufferRadii(),1),delta=max/111.32,dx=delta/Math.cos(lat*Math.PI/180);preview.fitBounds([[lat-delta,lng-dx],[lat+delta,lng+dx]],{padding:[35,35],maxZoom:15,animate:false})}
+ preview.invalidateSize({pan:false});
+}
+const before=render;render=function(){const result=before.apply(this,arguments);clearTimeout(timer);timer=setTimeout(paint,100);return result};paint();
+if(window.ResizeObserver)new ResizeObserver(()=>preview?.invalidateSize({pan:false})).observe(canvas);
+})();
+</script></body></html>
