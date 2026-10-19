@@ -106,6 +106,7 @@
   }catch(e){d.status=d.rows.length?'partial':'error';d.error=e.message;console.warn('Risk Map: '+d.label,e);schedule();}
  }
  function zoomMatches(reveal=false){
+  if(selected.estate&&document.querySelector('.dashboard-buffer-tools'))return;
   if(!selected.estate&&!selected.query)return;
   let match;
   const estate=datasets.find(d=>d.id==='estate');
