@@ -67,7 +67,7 @@
 <p id="dssStatusNote" class="panel-note" role="status">กำลังโหลดข้อมูล DSS และสารเคมี…</p>
 </section>
 <section class="emergency-support-section" aria-label="ข้อมูลสนับสนุนเหตุฉุกเฉิน">
-<div class="emergency-support-heading"><h2>ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</h2><div class="emergency-support-tools"><button id="supportPickPoint" type="button" disabled>เลือกจุดเกิดเหตุ</button><label>ระยะค้นหา <select id="supportRadius" aria-label="ระยะค้นหาข้อมูลสนับสนุน"><option value="5">5 กม.</option><option value="10">10 กม.</option><option value="30" selected>30 กม.</option><option value="50">50 กม.</option></select></label><button id="supportClearPoint" type="button" disabled>ล้างจุด</button></div></div>
+<div class="emergency-support-heading"><h2>ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ</h2><div class="emergency-support-tools"><button id="supportPickPoint" type="button" disabled>เลือกจุดเกิดเหตุ</button><button id="supportClearPoint" type="button" disabled>ล้างจุด</button></div></div>
 <p id="supportIncidentLabel" class="support-incident-label">ยังไม่ได้เลือกจุดเกิดเหตุ</p>
 <div id="emergencySupportCards" class="risk-ranking-cards"></div>
 <p id="emergencySupportStatus" role="status" class="panel-note"></p>
@@ -82,7 +82,7 @@
 
 <section class="panel chemical-details-panel" aria-label="รายการสารเคมี">
 
-<div class="chemical-detail-filters"><label for="chemicalEstate">นิคมอุตสาหกรรม<select id="chemicalEstate" disabled><option value="">ทุกนิคมอุตสาหกรรม</option></select></label><label for="dashboardIncidentType" class="unified-incident-type">ประเภทเหตุ<select id="dashboardIncidentType"><option value="ยังไม่ได้รับแจ้ง">ยังไม่ได้รับแจ้ง</option><option value="เหตุเพลิงไหม้">เหตุเพลิงไหม้</option><option value="สารเคมีรั่วไหล">สารเคมีรั่วไหล</option></select></label><label for="chemicalSearch">ค้นหาบริษัทไทย–อังกฤษ / ทะเบียนเดิม–ใหม่ / สารเคมี / CAS No.<input id="chemicalSearch" type="search" placeholder="พิมพ์ชื่อโรงงาน สารเคมี หรือเลข CAS" disabled></label></div>
+<div class="chemical-detail-filters" role="group" aria-label="ค้นหาและวิเคราะห์เหตุฉุกเฉิน"><label for="supportRadius" class="incident-radius-filter">ระยะค้นหา<select id="supportRadius" aria-label="ระยะค้นหาข้อมูลสนับสนุน"><option value="5">5 กม.</option><option value="10">10 กม.</option><option value="30" selected>30 กม.</option><option value="50">50 กม.</option></select></label><label for="dashboardIncidentType" class="unified-incident-type">ประเภทเหตุ<select id="dashboardIncidentType"><option value="ยังไม่ได้รับแจ้ง">ยังไม่ได้รับแจ้ง</option><option value="เหตุเพลิงไหม้">เหตุเพลิงไหม้</option><option value="สารเคมีรั่วไหล">สารเคมีรั่วไหล</option></select></label><label for="chemicalEstate">นิคมอุตสาหกรรม<select id="chemicalEstate" disabled><option value="">ทุกนิคมอุตสาหกรรม</option></select></label><label for="chemicalSearch">ค้นหาบริษัทไทย–อังกฤษ / ทะเบียนเดิม–ใหม่ / สารเคมี / CAS No.<input id="chemicalSearch" type="search" placeholder="พิมพ์ชื่อโรงงาน สารเคมี หรือเลข CAS" disabled></label></div>
 <p id="chemicalDetailStatus" class="panel-note" role="status">กำลังโหลดรายละเอียดสารเคมี…</p>
 <div class="chemical-detail-scroll"><table class="chemical-detail-table"><thead><tr><th scope="col">ลำดับ</th><th scope="col">ชื่อโรงงาน</th><th scope="col">นิคมอุตสาหกรรม</th><th scope="col">สารเคมี</th><th scope="col">CAS No.</th><th scope="col">UN No.</th><th scope="col">ปริมาณ</th><th scope="col">หน่วย</th></tr></thead><tbody id="chemicalDetailBody"></tbody></table></div>
 <div class="chemical-detail-pages"><button id="chemicalPrev" type="button" disabled>← ก่อนหน้า</button><span id="chemicalPage" aria-live="polite"></span><button id="chemicalNext" type="button" disabled>ถัดไป →</button></div>
@@ -792,6 +792,31 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
  function request(){frame?.contentWindow?.postMessage({type:'dss:request-field-map'},location.origin)}
  frame?.addEventListener('load',request);request();
 })();
-</script></body></html>
+</script>
+<style id="incident-dashboard-controls-20261019">
+/* Keep the incident query controls together; retain existing nodes and handlers. */
+html body #riskDashboard .chemical-detail-filters{
+ display:grid!important;grid-template-columns:minmax(100px,.55fr) minmax(150px,.85fr) minmax(170px,1fr) minmax(250px,1.8fr)!important;
+ gap:12px!important;align-items:start!important;padding:16px!important;border:1px solid #e0e3e8!important;border-radius:12px!important;background:#fafbfc!important;
+}
+html body #riskDashboard .chemical-detail-filters > label{
+ grid-column:auto!important;display:flex!important;flex-direction:column!important;justify-content:flex-end!important;gap:8px!important;min-width:0!important;
+ min-height:100px!important;margin:0!important;font-size:14px!important;line-height:1.5!important;font-weight:600!important;
+}
+html body #riskDashboard .chemical-detail-filters input,html body #riskDashboard .chemical-detail-filters select{
+ width:100%!important;min-width:0!important;height:44px!important;min-height:44px!important;margin:0!important;padding:10px 12px!important;
+ font-family:inherit!important;font-size:14px!important;line-height:1.5!important;font-weight:400!important;border:1px solid #d9dfe7!important;border-radius:8px!important;background:#fff!important;color:#202b3b!important;
+}
+html body #riskDashboard :is(p,small,label,button,input,select,summary,th,td,.panel-note,.card-label,.map-footer){font-size:14px!important;line-height:1.5!important}
+html body #riskDashboard :is(h2,h3){font-size:18px!important;line-height:1.5!important}
+@media(max-width:1100px){
+ html body #riskDashboard .chemical-detail-filters{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ html body #riskDashboard .chemical-detail-filters > label{min-height:90px!important}
+}
+@media(max-width:600px){
+ html body #riskDashboard .chemical-detail-filters{grid-template-columns:minmax(0,1fr)!important;padding:12px!important}
+ html body #riskDashboard .chemical-detail-filters > label{min-height:0!important}
+}
+</style></body></html>
 
 
