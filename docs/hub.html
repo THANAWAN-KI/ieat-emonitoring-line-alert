@@ -111,7 +111,7 @@
  const sub=document.createElement('p');sub.textContent='เลือกประเภทเหตุและค้นหาบริษัท เพื่อจัดทำรายงานในหน้านี้';
  heading.append(title,sub);
  frame.loading='lazy';frame.style.height='1800px';
- function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261019-side-by-side-reports-fit');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
+ function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261019-live-dashboard-map');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
  frame.src=reportUrl();
  link.addEventListener('click',event=>{event.preventDefault();const url=reportUrl();if(frame.src!==url)frame.src=url;section.scrollIntoView({behavior:'smooth',block:'start'});});
  window.returnToRiskDashboard=function(){document.getElementById('otherPage').hidden=true;dashboard.hidden=false;document.querySelectorAll('.nav-tab').forEach(tab=>tab.classList.toggle('active',tab.dataset.page==='risk'));document.getElementById('riskMapSection')?.scrollIntoView({behavior:'smooth',block:'start'});window.dispatchEvent(new Event('resize'))};
@@ -521,7 +521,7 @@ html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader .disaster-cl
 #riskDashboard .map-toolbar-actions .incident-pick-button{min-height:38px;background:#D9361E;color:#fff;border-radius:20px;max-width:190px}
 @media(max-width:760px){.emergency-support-heading{align-items:flex-start}.emergency-support-tools{width:100%}}
 </style>
-<script src="./emergency-support-20261015.js?v=20261019-company-origin"></script>
+<script src="./emergency-support-20261015.js?v=20261019-buffer-support-linked"></script>
 <style id="inventory-numbers-and-red-matrix">
 #riskDashboard #inventory .inventory-card strong{color:#8B1E2D}
 #riskDashboard .matrix tbody tr:not(.matrix-total){cursor:pointer}
@@ -649,6 +649,7 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
  function showIncident(data){
   const map=window.ieatSupportMap;if(!map||!window.L){pendingIncident=data;return}
   if(![data.lat,data.lng].every(Number.isFinite))return;
+  const incidentKey=JSON.stringify([data.lat,data.lng,data.name]),sameIncident=frame.dataset.mapIncident===incidentKey;frame.dataset.mapIncident=incidentKey;if(sameIncident)return;
   if(incidentLayer)map.removeLayer(incidentLayer);incidentLayer=L.layerGroup().addTo(map);
   const label=document.createElement('div');label.textContent=data.name;
   L.marker([data.lat,data.lng],{zIndexOffset:2000}).bindPopup(label).bindTooltip(label.cloneNode(true),{permanent:true,direction:'top',offset:[0,-32],className:'emergency-company-label'}).addTo(incidentLayer);
@@ -667,27 +668,22 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
    focusLayer=L.marker([item.lat,item.lng],{zIndexOffset:2500}).addTo(map).bindPopup(text).openPopup();map.setView([item.lat,item.lng],17);mapSection.scrollIntoView({behavior:'smooth',block:'center'});
   }
  });
- window.ieatCaptureReportMap=async (renderer,context)=>{
- if(!window.L||!context||!Number.isFinite(context.lat)||!Number.isFinite(context.lng))throw Error('ไม่มีพิกัดสำหรับแผนที่รายงาน');
- const host=document.createElement('div');host.style.cssText='position:fixed;left:-12000px;top:0;width:986px;height:760px;background:#f3f6f8;pointer-events:none;z-index:-1';document.body.append(host);
- let exportMap;
- try{
- exportMap=L.map(host,{preferCanvas:true,zoomControl:false,attributionControl:false,scrollWheelZoom:false,fadeAnimation:false,zoomAnimation:false}).setView([context.lat,context.lng],14);
- let source;window.ieatSupportMap?.eachLayer(layer=>{if(!source&&layer instanceof L.TileLayer)source=layer});
- const tile=L.tileLayer(source?._url||'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',{...source?.options,crossOrigin:true,attribution:''}).addTo(exportMap);
- const points=(context.points||[]).filter(p=>Number.isFinite(Number(p.lat))&&Number.isFinite(Number(p.lng)));
- const label=document.createElement('span');label.textContent=document.getElementById('chemicalSearch').value||'สถานประกอบการ';
- L.marker([context.lat,context.lng]).bindTooltip(label,{permanent:true,direction:'top'}).addTo(exportMap);
- const radii=Array.from(document.querySelectorAll('.dashboard-buffer-tools input:checked')).map(n=>Number(n.value));let bounds=L.latLngBounds([[context.lat,context.lng]]);
- radii.forEach((km,i)=>{const c=L.circle([context.lat,context.lng],{radius:km*1000,color:['#4F7D32','#F5B52E','#D9361E'][i%3],weight:2,fillOpacity:.025}).addTo(exportMap);bounds.extend(c.getBounds())});
- points.forEach((p,i)=>{const badge=document.createElement('span');badge.className='field-reference-number';badge.textContent=String(i+1);L.marker([Number(p.lat),Number(p.lng)],{icon:L.divIcon({className:'field-reference-marker',html:badge.outerHTML,iconSize:[28,28],iconAnchor:[14,14]})}).addTo(exportMap);bounds.extend([Number(p.lat),Number(p.lng)])});
- exportMap.fitBounds(bounds,{padding:[65,65],maxZoom:15,animate:false});
- if(tile.isLoading())await new Promise(resolve=>{tile.once('load',resolve);setTimeout(resolve,12000)});
- await Promise.all(Array.from(host.querySelectorAll('img.leaflet-tile')).map(img=>img.decode?img.decode().catch(()=>{}):Promise.resolve()));
+ window.ieatCaptureReportMap=async (renderer)=>{
+ const map=window.ieatSupportMap,container=document.getElementById('map');if(!map||!container)throw Error('แผนที่ Dashboard ยังไม่พร้อม');
  await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
- const canvas=await renderer(host,{backgroundColor:'#f3f6f8',scale:2,useCORS:true,allowTaint:false,logging:false,width:986,height:760});
+ await Promise.allSettled(Array.from(container.querySelectorAll('img.leaflet-tile')).filter(img=>!img.complete).map(img=>new Promise(resolve=>{img.addEventListener('load',resolve,{once:true});img.addEventListener('error',resolve,{once:true});setTimeout(resolve,3000)})));
+ const svgs=Array.from(container.querySelectorAll('.leaflet-overlay-pane svg')),rasters=[];
+ for(const svg of svgs){
+ const copy=svg.cloneNode(true),originals=svg.querySelectorAll('*'),copies=copy.querySelectorAll('*');
+ originals.forEach((node,i)=>{const cs=getComputedStyle(node);['fill','fill-opacity','stroke','stroke-width','stroke-opacity','stroke-linecap','stroke-linejoin','opacity'].forEach(k=>copies[i]?.style.setProperty(k,cs.getPropertyValue(k)))});
+ const rect=svg.getBoundingClientRect(),parentRect=svg.parentElement.getBoundingClientRect();copy.style.transform='none';copy.style.position='static';copy.setAttribute('xmlns','http://www.w3.org/2000/svg');copy.setAttribute('width',rect.width);copy.setAttribute('height',rect.height);
+ const url=URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(copy)],{type:'image/svg+xml'}));
+ try{const img=new Image();await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=reject;img.src=url});const c=document.createElement('canvas');c.width=Math.ceil(rect.width);c.height=Math.ceil(rect.height);c.getContext('2d').drawImage(img,0,0,c.width,c.height);rasters.push({url:c.toDataURL('image/png'),left:rect.left-parentRect.left,top:rect.top-parentRect.top,width:rect.width,height:rect.height})}finally{URL.revokeObjectURL(url)}
+ }
+ const canvas=await renderer(container,{backgroundColor:'#f3f6f8',scale:2,useCORS:true,allowTaint:false,logging:false,width:container.clientWidth,height:container.clientHeight,ignoreElements:el=>el.classList?.contains('leaflet-control-container')||el.classList?.contains('field-report-wind'),onclone(doc){
+ Array.from(doc.querySelectorAll('#map .leaflet-overlay-pane svg')).forEach((svg,i)=>{const r=rasters[i];if(!r)return;const img=doc.createElement('img');img.src=r.url;img.style.cssText='position:absolute;left:'+r.left+'px;top:'+r.top+'px;width:'+r.width+'px;height:'+r.height+'px;max-width:none;transform:none';svg.replaceWith(img)});
+ }});
  return canvas.toDataURL('image/png');
- }finally{exportMap?.remove();host.remove()}
 
  };
 })();
@@ -1195,7 +1191,7 @@ html body #riskDashboard .dashboard-report-editor #emergencyReportFrame{display:
  function sync(){get('emergencyReportFrame').contentWindow?.postMessage({type:'dss:set-buffer-radii',radii:checks.filter(c=>c.checked).map(c=>Number(c.value))},location.origin)}
  checks.forEach(c=>c.addEventListener('change',()=>{draw(true);sync();requestAnimationFrame(()=>draw(true))}));get('emergencyReportFrame').addEventListener('load',sync);
  window.addEventListener('ieat-support-center',e=>{center=e.detail;draw(true);setTimeout(()=>draw(true),1200)});window.addEventListener('ieat-clear-support-center',()=>{center=null;if(rings)rings.remove()});
- window.addEventListener('message',e=>{if(e.origin===location.origin&&e.source===get('emergencyReportFrame').contentWindow&&e.data?.type==='dss:incident'){center={lat:Number(e.data.lat),lon:Number(e.data.lng)};draw(true);requestAnimationFrame(()=>draw(true))}});
+ window.addEventListener('message',e=>{if(e.origin===location.origin&&e.source===get('emergencyReportFrame').contentWindow&&e.data?.type==='dss:incident'){const next={lat:Number(e.data.lat),lon:Number(e.data.lng)},changed=!center||Math.abs(center.lat-next.lat)>.000001||Math.abs(center.lon-next.lon)>.000001;center=next;draw(changed);if(changed)requestAnimationFrame(()=>draw(true))}});
  function bind(m){map=m;draw(!!center);if(get('dashboardBasemapControl'))return;const box=document.createElement('details');box.id='dashboardBasemapControl';box.className='dashboard-basemap-control';const summary=document.createElement('summary');summary.setAttribute('aria-label','เลือกแผนที่พื้นฐาน');summary.title='แผนที่พื้นฐาน';summary.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3zM9 3v15M15 6v15"/></svg>';const panel=document.createElement('div');panel.className='dashboard-basemap-options';panel.append(get('basemap'));box.append(summary,panel);const control=L.control({position:'topright'});control.onAdd=()=>box;control.addTo(map);L.DomEvent.disableClickPropagation(box);L.DomEvent.disableScrollPropagation(box)}
  window.addEventListener('ieat-support-map-ready',e=>bind(e.detail.map));if(window.ieatSupportMap)bind(window.ieatSupportMap);
 })();
@@ -1461,6 +1457,28 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
  function fitReports(){const doc=frame.contentDocument;if(!doc?.body)return;const wrap=doc.querySelector('.report-wrap');if(!wrap)return;const height=Math.ceil(wrap.getBoundingClientRect().height)+30;if(height>100)holder.style.setProperty('--parallel-report-height',height+'px');}
  frame.addEventListener('load',()=>{observer?.disconnect();const wrap=frame.contentDocument?.querySelector('.report-wrap');if(wrap&&window.ResizeObserver){observer=new ResizeObserver(fitReports);observer.observe(wrap)}fitReports()});
  window.addEventListener('resize',fitReports);fitReports();
+})();
+</script><style id="left-support-sixty-forty">
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .risk-workspace{grid-template-columns:minmax(0,3fr) minmax(0,2fr)!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .risk-analysis-columns{grid-template-columns:minmax(245px,.48fr) minmax(0,1fr)!important;gap:18px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard #emergencySupportCards{grid-column:1!important;grid-row:1!important;width:100%!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .risk-analysis-columns>.risk-stacked{grid-column:2!important;grid-row:1!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .chemical-detail-table tbody td:nth-child(2) button{font-size:12px!important;line-height:1.5!important;font-weight:400!important;font-family:inherit!important}
+@media(max-width:1199px){html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .risk-workspace{grid-template-columns:minmax(0,1fr)!important}html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .risk-analysis-columns{grid-template-columns:260px minmax(0,1fr)!important}}
+@media(max-width:760px){html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .risk-analysis-columns{grid-template-columns:1fr!important}html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .risk-analysis-columns>.risk-stacked{grid-column:1!important;grid-row:2!important}}
+</style><script id="live-dashboard-report-map-bridge">
+(function(){
+const frame=document.getElementById('emergencyReportFrame');let timer,busy=false,again=false;
+async function sendMap(){
+ if(busy){again=true;return}
+ const renderer=frame.contentWindow?.html2canvas;if(!window.ieatSupportMap||!renderer)return;
+ busy=true;try{const image=await window.ieatCaptureReportMap(renderer);frame.contentWindow.postMessage({type:'dss:dashboard-map-image',image},location.origin)}catch(e){console.warn('Report map snapshot',e)}finally{busy=false;if(again){again=false;queue()}}
+}
+function queue(){clearTimeout(timer);timer=setTimeout(sendMap,600)}
+function bind(map){map.on('moveend zoomend overlayadd overlayremove layeradd layerremove',queue);queue()}
+window.addEventListener('ieat-support-map-ready',e=>bind(e.detail.map));if(window.ieatSupportMap)bind(window.ieatSupportMap);
+frame.addEventListener('load',()=>{queue();if(window.ieatSupportSnapshot)frame.contentWindow.postMessage({type:'dss:nearby-support',...window.ieatSupportSnapshot},location.origin)});
+window.addEventListener('message',e=>{if(e.origin!==location.origin||e.source!==frame.contentWindow)return;if(e.data?.type==='dss:request-dashboard-map'){queue();if(window.ieatSupportSnapshot)frame.contentWindow.postMessage({type:'dss:nearby-support',...window.ieatSupportSnapshot},location.origin)}});
 })();
 </script></body></html>
 
