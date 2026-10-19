@@ -87,14 +87,7 @@ function setIncident(lat,lon){
  marker.on('dragend',()=>{const p=marker.getLatLng();setIncident(p.lat,p.lng);});load();
 }
 function choose(){if(!map){note.textContent='กำลังเตรียมแผนที่ กรุณารอ';return;}selecting=!selecting;map.getContainer().style.cursor=selecting?'crosshair':'';pick.textContent=selecting?'คลิกจุดเกิดเหตุบนแผนที่':incident?'ย้ายจุดเกิดเหตุ':'กำหนดจุดเกิดเหตุ';note.textContent=selecting?'คลิกตำแหน่งเกิดเหตุบนแผนที่ด้านขวา':incident?'เลือกย้ายจุดเกิดเหตุได้ทุกเมื่อ':'ยังไม่ได้เลือกจุดเกิดเหตุ';if(selecting)get('map').scrollIntoView({behavior:'smooth',block:'center'});}
-let pendingCompanyPoint=null,lastCompanyPoint='';
-window.addEventListener('message',event=>{
- const frame=get('emergencyReportFrame');
- if(event.origin!==location.origin||event.source!==frame?.contentWindow||event.data?.type!=='dss:incident')return;
- const {lat,lng,name}=event.data,key=JSON.stringify([lat,lng,name]);if(!Number.isFinite(lat)||!Number.isFinite(lng)||key===lastCompanyPoint)return;
- lastCompanyPoint=key;if(map)setIncident(lat,lng);else pendingCompanyPoint={lat,lng};
-});
-function bindMap(nextMap){if(map===nextMap)return;map=nextMap;if(pendingCompanyPoint){setIncident(pendingCompanyPoint.lat,pendingCompanyPoint.lng);pendingCompanyPoint=null}pick.disabled=false;localPick.disabled=false;map.on('click',e=>{if(selecting){map.closePopup();setIncident(e.latlng.lat,e.latlng.lng);}});}
+function bindMap(nextMap){if(map===nextMap)return;map=nextMap;pick.disabled=false;localPick.disabled=false;map.on('click',e=>{if(selecting){map.closePopup();setIncident(e.latlng.lat,e.latlng.lng);}});}
 pick.addEventListener('click',choose);localPick.addEventListener('click',choose);radius.addEventListener('change',load);
 clear.addEventListener('click',()=>{controller?.abort();request++;incident=null;selecting=false;loading=false;results=new Map();failures=[];if(marker)marker.remove();if(markers)markers.remove();if(map)map.getContainer().style.cursor='';pick.textContent='กำหนดจุดเกิดเหตุ';localPick.textContent='เลือกจุดเกิดเหตุ';render();});
 window.addEventListener('ieat-support-map-ready',e=>bindMap(e.detail.map));if(window.ieatSupportMap)bindMap(window.ieatSupportMap);
