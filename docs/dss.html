@@ -3534,4 +3534,13 @@ function paint(){
 const before=render;render=function(){const result=before.apply(this,arguments);clearTimeout(timer);timer=setTimeout(paint,100);return result};paint();
 if(window.ResizeObserver)new ResizeObserver(()=>preview?.invalidateSize({pan:false})).observe(canvas);
 })();
-</script><style>#fieldBriefMap #fbOpenMap{display:none!important}</style></body></html>
+</script><style>#fieldBriefMap #fbOpenMap{display:none!important}</style><style id="parallel-dashboard-report-pages">
+html body.dss-dashboard-edit.dss-inline-dashboard{min-height:0!important;height:auto!important;overflow:hidden!important;background:#fbfcfa!important}
+html body.dss-dashboard-edit.dss-inline-dashboard .workspace{display:block!important;width:100%!important;min-width:0!important;height:auto!important;padding:0!important;margin:0!important}
+html body.dss-dashboard-edit.dss-inline-dashboard .report-wrap{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:start!important;gap:24px!important;width:100%!important;height:auto!important;padding:12px!important;box-sizing:border-box!important}
+html body.dss-dashboard-edit.dss-inline-dashboard #report#report,html body.dss-dashboard-edit.dss-inline-dashboard #dssPageTwo#dssPageTwo{width:100%!important;min-width:0!important;height:auto!important;min-height:0!important;padding:22px!important;margin:0!important;border:0!important;border-radius:14px!important;background:#fff!important;box-shadow:0 5px 22px #34452d0a!important;box-sizing:border-box!important}
+html body.dss-dashboard-edit.dss-inline-dashboard #report #dssFieldBrief{width:100%!important;min-width:0!important}
+html body #report#report #dssFieldBrief :is(h1,h2,p,small,strong,.fb-muted,.report-field-label,.report-field,.report-support-field),html body #dssPageTwo#dssPageTwo :is(h1,h2,p,small,strong,th,td,.p2-muted){color:#41483f!important;-webkit-text-fill-color:#41483f!important}
+html body #report#report #dssFieldBrief :is(h1,h2),html body #dssPageTwo#dssPageTwo :is(h1,h2){font-weight:600!important}
+@media(max-width:850px){html body.dss-dashboard-edit.dss-inline-dashboard .report-wrap{grid-template-columns:minmax(0,1fr)!important}}
+</style></body></html>
