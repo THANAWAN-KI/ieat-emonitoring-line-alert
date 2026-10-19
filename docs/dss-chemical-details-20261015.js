@@ -28,7 +28,7 @@ function render(){
 function syncScope(){
  scope=source.value?normalize(source.selectedOptions[0]?.textContent||source.value):'';
  if(scope&&!Array.from(estate.options).some(o=>o.value===scope)){const o=new Option(source.selectedOptions[0]?.textContent||source.value,scope);estate.add(o);}
- estate.value=scope;page=0;render();
+ estate.value=scope;page=0;eppMatches=[];dismissCompanySuggestions();render();search.placeholder=scope?'โรงงานใน '+(source.selectedOptions[0]?.textContent||'นิคมฯ')+' / สารเคมี / CAS':'บริษัท / ทะเบียน / สารเคมี / CAS';if(search.value.trim().length>=2)searchEpp();
 }
 
 async function searchEpp(){
@@ -40,12 +40,13 @@ async function searchEpp(){
  try{
   const escaped=term.replace(/'/g,"''").replace(/[%_]/g,'');
   const fields=['ชื่อบริษัทภาษาไทย','ชื่อบริษัทภาษาอังกฤษ','เลขทะเบียนใหม่','เลขทะเบียนเดิม'];
-  const where="ชื่อบริษัทภาษาไทย IS NOT NULL AND ("+fields.map(field=>"UPPER("+field+") LIKE '%"+escaped.toUpperCase()+"%'").join(' OR ')+")";
+  const estateTerm=source.value?String(source.selectedOptions[0]?.textContent||source.value).replace(/นิคมอุตสาหกรรม|นิคมฯ|สำนักงานนิคมฯ/g,'').trim().replace(/'/g,"''"):'';
+  const where="ชื่อบริษัทภาษาไทย IS NOT NULL AND ("+fields.map(field=>"UPPER("+field+") LIKE '%"+escaped.toUpperCase()+"%'").join(' OR ')+")"+(estateTerm?" AND นิคมอุตสาหกรรม LIKE '%"+estateTerm+"%'":"");
   const params=new URLSearchParams({where,outFields:'*',returnGeometry:'true',outSR:'4326',orderByFields:'OBJECTID ASC',resultRecordCount:'50',f:'json'});
   const response=await fetch(eppUrl+'?'+params,{signal:controller.signal});if(!response.ok)throw Error('HTTP '+response.status);
   const result=await response.json();if(result.error)throw Error(result.error.message);
   if(sequence!==eppSequence)return;
-  eppMatches=result.features||[];eppBox.replaceChildren();
+  eppMatches=(result.features||[]).filter(f=>!scope||normalize(f.attributes?.['นิคมอุตสาหกรรม'])===scope);eppBox.replaceChildren();
   const unique=new Map();eppMatches.forEach(f=>{const a=f.attributes,key=[a['ชื่อบริษัทภาษาไทย'],a['นิคมอุตสาหกรรม'],a['เลขทะเบียนใหม่'],a['เลขทะเบียนเดิม']].join('|');if(!unique.has(key))unique.set(key,f)});
   message.textContent='ผู้ประกอบการ e_PP '+unique.size+' บริษัท'+(result.exceededTransferLimit?' · แสดง 50 แปลงแรก กรุณาระบุคำค้นให้เจาะจงขึ้น':'')+' · คลิกบริษัทเพื่อจัดทำรายงาน';
   eppBox.append(message);
