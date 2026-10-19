@@ -3560,7 +3560,7 @@ function showSupport(data){
  button.onclick=()=>parent.postMessage({type:'dss:support',item:{lat:row.lat,lng:row.lon,name:row.name,distance:row.distance/1000,phone:row.phone}},location.origin);
  const distanceLabel=document.createElement('span');distanceLabel.className='support-detail-label';distanceLabel.textContent='ระยะเส้นตรง';
  const distance=document.createElement('span');distance.textContent=row.distance<1000?Math.round(row.distance)+' เมตร':(row.distance/1000).toFixed(2)+' กม.';
- entry.append(nameLabel,button,distanceLabel,distance);details.append(entry);
+ distance.className='support-place-distance';distance.setAttribute('aria-label','ระยะเส้นตรง '+distance.textContent);entry.append(button,distance);details.append(entry);
  });tr.append(type,details);body.append(tr);
  });
  if(!body.children.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=2;td.textContent=data.loading?'กำลังค้นหา…':'ไม่พบจุดสนับสนุนในระยะที่เลือก';tr.append(td);body.append(tr)}
@@ -3657,4 +3657,14 @@ html body #report#report #fieldBriefMap{overflow:hidden!important}
 html body #report#report #fieldBriefMap #dashboardReportMapImage{cursor:grab!important;touch-action:none!important;user-select:none!important;pointer-events:auto!important}
 html body #report#report #fieldBriefMap #dashboardReportMapImage.report-map-dragging{cursor:grabbing!important}
 html body #dssPageTwo#dssPageTwo .p2-chemical-table th:nth-child(4){white-space:nowrap!important}
+</style><style id="compact-nearby-support-rows">
+html body #report#report #dssFieldBrief #reportNearbySupport{margin-top:10px!important}
+html body #report#report #dssFieldBrief #reportNearbySupport>h2{margin-bottom:8px!important;padding:8px 10px!important}
+html body #report#report #reportNearbySupport .support-reference-table :is(th,td):nth-child(1){width:24%!important;padding:6px 8px!important}
+html body #report#report #reportNearbySupport .support-reference-table :is(th,td):nth-child(2){width:76%!important;padding:6px 8px!important}
+html body #report#report #reportNearbySupport .support-reference-table .support-place-details{grid-template-columns:minmax(0,1fr) auto!important;gap:8px!important;align-items:start!important;line-height:1.45!important}
+html body #report#report #reportNearbySupport .support-reference-table .support-place-details+.support-place-details{margin-top:4px!important}
+html body #report#report #reportNearbySupport .support-reference-table .support-place-details button{line-height:1.45!important;font-size:12px!important}
+html body #report#report #reportNearbySupport .support-place-distance{white-space:nowrap!important;text-align:right!important;font-variant-numeric:tabular-nums!important}
+html body #report#report #reportNearbySupport .support-reference-table .support-category-number{width:18px!important;height:18px!important;margin-bottom:0!important}
 </style></body></html>
