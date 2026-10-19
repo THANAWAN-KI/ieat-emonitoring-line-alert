@@ -111,7 +111,7 @@
  const sub=document.createElement('p');sub.textContent='เลือกประเภทเหตุและค้นหาบริษัท เพื่อจัดทำรายงานในหน้านี้';
  heading.append(title,sub);
  frame.loading='lazy';frame.style.height='1800px';
- function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261019-four-color-theme');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
+ function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261019-centered-report-map');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
  frame.src=reportUrl();
  link.addEventListener('click',event=>{event.preventDefault();const url=reportUrl();if(frame.src!==url)frame.src=url;section.scrollIntoView({behavior:'smooth',block:'start'});});
  window.returnToRiskDashboard=function(){document.getElementById('otherPage').hidden=true;dashboard.hidden=false;document.querySelectorAll('.nav-tab').forEach(tab=>tab.classList.toggle('active',tab.dataset.page==='risk'));document.getElementById('riskMapSection')?.scrollIntoView({behavior:'smooth',block:'start'});window.dispatchEvent(new Event('resize'))};
@@ -521,7 +521,7 @@ html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader .disaster-cl
 #riskDashboard .map-toolbar-actions .incident-pick-button{min-height:38px;background:#D9361E;color:#fff;border-radius:20px;max-width:190px}
 @media(max-width:760px){.emergency-support-heading{align-items:flex-start}.emergency-support-tools{width:100%}}
 </style>
-<script src="./emergency-support-20261015.js?v=20261019-estate-auto"></script>
+<script src="./emergency-support-20261015.js?v=20261019-company-origin"></script>
 <style id="inventory-numbers-and-red-matrix">
 #riskDashboard #inventory .inventory-card strong{color:#8B1E2D}
 #riskDashboard .matrix tbody tr:not(.matrix-total){cursor:pointer}
@@ -668,19 +668,24 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
   }
  });
  window.ieatCaptureReportMap=async (renderer,context)=>{
-  const map=window.ieatSupportMap;if(!map)return null;map.invalidateSize();
-  if(context&&Number.isFinite(context.lat)&&Number.isFinite(context.lng)){
-   const points=(context.points||[]).filter(p=>Number.isFinite(Number(p.lat))&&Number.isFinite(Number(p.lng)));
-   if(points.length)map.fitBounds(L.latLngBounds([[context.lat,context.lng],...points.map(p=>[Number(p.lat),Number(p.lng)])]),{padding:[45,55],maxZoom:15,animate:false});
-   else map.setView([context.lat,context.lng],15,{animate:false});
-   await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
-  }
-  const container=document.getElementById('map');
-  await Promise.allSettled(Array.from(container.querySelectorAll('img.leaflet-tile')).filter(img=>!img.complete).map(img=>new Promise(resolve=>{img.addEventListener('load',resolve,{once:true});img.addEventListener('error',resolve,{once:true});setTimeout(resolve,3000)})));
-  await Promise.all(Array.from(container.querySelectorAll('img.leaflet-tile')).map(img=>img.decode?img.decode().catch(()=>{}):Promise.resolve()));
-  await new Promise(resolve=>setTimeout(resolve,500));
-  const canvas=await renderer(container,{backgroundColor:'#f3f6f8',scale:2,useCORS:true,allowTaint:false,logging:false,ignoreElements:element=>['leaflet-control-container','dashboard-point-cluster','dashboard-point-icon'].some(name=>element.classList?.contains(name))});
-  return canvas.toDataURL('image/png');
+ const map=window.ieatSupportMap;if(!map)return null;
+ const container=document.getElementById('map'),oldStyle=container.getAttribute('style'),oldCenter=map.getCenter(),oldZoom=map.getZoom();
+ try{
+ container.style.setProperty('width','986px','important');container.style.setProperty('height','760px','important');container.style.setProperty('flex','none','important');map.invalidateSize({pan:false});
+ if(context&&Number.isFinite(context.lat)&&Number.isFinite(context.lng)){
+ const points=(context.points||[]).filter(p=>Number.isFinite(Number(p.lat))&&Number.isFinite(Number(p.lng)));
+ if(points.length)map.fitBounds(L.latLngBounds([[context.lat,context.lng],...points.map(p=>[Number(p.lat),Number(p.lng)])]),{padding:[65,65],maxZoom:15,animate:false});
+ else map.setView([context.lat,context.lng],15,{animate:false});
+ }
+ await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+ await Promise.allSettled(Array.from(container.querySelectorAll('img.leaflet-tile')).filter(img=>!img.complete).map(img=>new Promise(resolve=>{img.addEventListener('load',resolve,{once:true});img.addEventListener('error',resolve,{once:true});setTimeout(resolve,3000)})));
+ await Promise.all(Array.from(container.querySelectorAll('img.leaflet-tile')).map(img=>img.decode?img.decode().catch(()=>{}):Promise.resolve()));
+ const canvas=await renderer(container,{backgroundColor:'#f3f6f8',scale:2,useCORS:true,allowTaint:false,logging:false,width:986,height:760,ignoreElements:element=>['leaflet-control-container','field-report-wind','dashboard-point-cluster','dashboard-point-icon'].some(name=>element.classList?.contains(name))});
+ return canvas.toDataURL('image/png');
+ }finally{
+ if(oldStyle===null)container.removeAttribute('style');else container.setAttribute('style',oldStyle);map.invalidateSize({pan:false});map.setView(oldCenter,oldZoom,{animate:false});
+ }
+
  };
 })();
 </script>
@@ -920,7 +925,7 @@ html body #riskDashboard .incident-search-popover .chemical-detail-filters>label
  const dashboard=document.getElementById('riskDashboard'),filters=dashboard.querySelector('.chemical-detail-filters'),results=document.getElementById('unifiedCompanyResults');
  const duplicate=filters.querySelector('label[for="chemicalEstate"]');if(duplicate)duplicate.hidden=true;
  const download=document.createElement('button');download.type='button';download.id='dashboardDownloadImage';download.className='dashboard-download-image';download.title='ดาวน์โหลดรายงาน PNG 2 หน้า';
- download.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></svg><span>ดาวน์โหลดภาพ</span>';
+ download.textContent='ดาวน์โหลดภาพ';
  download.addEventListener('click',async()=>{
   window.ieatOpenDashboardPanel?.('report');
   const frame=document.getElementById('emergencyReportFrame');let doc,png;download.disabled=true;
