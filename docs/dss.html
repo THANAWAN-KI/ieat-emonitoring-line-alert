@@ -3537,6 +3537,7 @@ function showSupport(data){
  if(seen.has(placeKey)||(groups.get(key)||[]).length>=3)return;seen.add(placeKey);if(!groups.has(key))groups.set(key,[]);groups.get(key).push(row);
  });
  nearby.replaceChildren();nearby.setAttribute('aria-label','ตารางข้อมูลสถานที่สนับสนุนแยกประเภท');
+ const heading=document.createElement('h2');heading.textContent='3. ข้อมูลสนับสนุนใกล้เคียงจุดเกิดเหตุ';nearby.append(heading);
  const table=document.createElement('table');table.className='grouped-support-table support-reference-table';const body=document.createElement('tbody');
  categories.forEach(([key,label],index)=>{
  const rows=groups.get(key);if(!rows?.length)return;
@@ -3639,4 +3640,6 @@ html body #report#report #reportNearbySupport .support-reference-table .support-
 html body #report#report #reportNearbySupport .support-reference-table .support-place-details+.support-place-details{margin-top:8px!important}
 html body #report#report #reportNearbySupport .support-reference-table .support-detail-label{color:#73776f!important;-webkit-text-fill-color:#73776f!important;font-weight:400!important}
 html body #report#report #reportNearbySupport .support-reference-table button{display:block!important;width:100%!important;text-align:left!important;align-self:start!important;line-height:1.6!important}
+</style><style id="support-section-three-heading">
+html body #report#report #dssFieldBrief #reportNearbySupport>h2{margin:0 0 12px!important;padding:10px 12px!important;background:#f2f6ed!important;border:0!important;border-left:3px solid #4f7d32!important;border-radius:0!important;font-size:14px!important;line-height:1.5!important;font-weight:600!important;color:#41483f!important;-webkit-text-fill-color:#41483f!important}
 </style></body></html>
