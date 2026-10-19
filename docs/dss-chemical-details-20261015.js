@@ -6,8 +6,10 @@ let data=null,page=0,filtered=[],scope='',timer,eppMatches=[],eppSequence=0,eppC
 const eppUrl='https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/e_PP/FeatureServer/0/query';
 const companyKey=v=>normalize(v).replace(/บริษัท|จำกัด|มหาชน|company|limited|co\.?|ltd\.?|[().,\-\/]/g,'');
 const eppBox=document.createElement('div');eppBox.id='unifiedCompanyResults';search.closest('.chemical-detail-filters').after(eppBox);
-const pageSize=25,number=n=>Number(n).toLocaleString('th-TH');
-function cell(row,text){const td=document.createElement('td');td.textContent=String(text||'—');row.append(td);}
+let pageSize=25;
+window.addEventListener('ieat-dss-page-size',event=>{const size=Number(event.detail?.size);if(!Number.isInteger(size)||size<1||size>25||size===pageSize)return;const first=page*pageSize;pageSize=size;page=Math.floor(first/pageSize);render();});
+const number=n=>Number(n).toLocaleString('th-TH');
+function cell(row,text){const td=document.createElement('td');td.textContent=String(text||'—');td.title=td.textContent;row.append(td);}
 function render(){
  if(!data)return;
  const term=normalize(search.value),selected=scope;
