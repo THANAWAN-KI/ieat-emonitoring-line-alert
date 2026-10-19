@@ -672,7 +672,7 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
  const host=document.createElement('div');host.style.cssText='position:fixed;left:-12000px;top:0;width:986px;height:760px;background:#f3f6f8;pointer-events:none;z-index:-1';document.body.append(host);
  let exportMap;
  try{
- exportMap=L.map(host,{zoomControl:false,attributionControl:false,scrollWheelZoom:false,fadeAnimation:false,zoomAnimation:false});
+ exportMap=L.map(host,{zoomControl:false,attributionControl:false,scrollWheelZoom:false,fadeAnimation:false,zoomAnimation:false}).setView([context.lat,context.lng],14);
  let source;window.ieatSupportMap?.eachLayer(layer=>{if(!source&&layer instanceof L.TileLayer)source=layer});
  const tile=L.tileLayer(source?._url||'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',{...source?.options,crossOrigin:true,attribution:''}).addTo(exportMap);
  const points=(context.points||[]).filter(p=>Number.isFinite(Number(p.lat))&&Number.isFinite(Number(p.lng)));
