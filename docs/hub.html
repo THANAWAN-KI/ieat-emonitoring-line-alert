@@ -947,7 +947,7 @@ html body #riskDashboard .incident-search-popover .chemical-detail-filters>label
    record={page:0,bar,label,rows:[]};
    record.prev=button('ก่อนหน้า',()=>{record.page--;schedule()});record.next=button('ถัดไป',()=>{record.page++;schedule()});bar.append(record.prev,label,record.next);host.after(bar);records.set(host,record);
   }
-  const fit=dashboard.classList.contains('dashboard-fit-view');record.bar.hidden=!fit;
+  const fit=dashboard.classList.contains('dashboard-fit-view')&&!host.closest('.operating-zone-section');record.bar.hidden=!fit;
   if(!fit){rows.forEach(row=>row.classList.remove('dashboard-page-hidden'));return}
   if(record.rows.length!==rows.length||record.rows.some((row,index)=>row!==rows[index]))record.page=0;
   record.rows=rows;
@@ -1515,5 +1515,32 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
 html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-lower-pair .operating-zone-section :is(.zone-matrix-layout,.zone-matrix-table,article,.panel-content){min-height:0!important;height:100%!important;display:flex!important;flex-direction:column!important}
 html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-lower-pair .matrix-scroll{min-height:0!important;flex:1!important;overflow:auto!important}
 @media(max-width:760px){html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .risk-analysis-columns #emergencySupportCards{grid-template-columns:1fr!important;grid-template-rows:repeat(3,auto)!important;height:auto!important}html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .risk-analysis-columns .emergency-support-card{height:260px!important}html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-lower-pair .operating-zone-section{height:600px!important;min-height:600px!important;max-height:600px!important}}
-</style></body></html>
+</style><style id="compact-map-three-row-tables">
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard{gap:12px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-lower-pair{margin-top:0!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .risk-analysis-columns #emergencySupportCards,html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .risk-analysis-columns .emergency-support-card{height:220px!important;min-height:0!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .risk-analysis-columns .emergency-support-card h3{min-height:42px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .riskmap-dashboard-panel .support-summary-cards #inventory .inventory-card{height:76px!important;min-height:76px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard #inventory :is(.card-art,.card-icon,svg,img){display:none!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard #inventory .card-value{gap:0!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .workspace-map{min-height:480px!important;height:auto!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-lower-pair>.chemical-details-panel,html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-lower-pair .operating-zone-section{height:auto!important;min-height:0!important;max-height:none!important;padding:14px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-lower-pair .operating-zone-section :is(.zone-matrix-layout,.zone-matrix-table,article,.panel-content){height:auto!important;flex:0 0 auto!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-lower-pair :is(.matrix-scroll,.chemical-detail-scroll){height:var(--three-row-height,200px)!important;min-height:0!important;max-height:var(--three-row-height,200px)!important;flex:0 0 auto!important;overflow:auto!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-lower-pair .matrix-scroll+.dashboard-list-pager{display:none!important}
+</style><script id="three-row-table-viewports">
+(function(){
+const dashboard=document.getElementById('riskDashboard');
+function fit(scroll){
+const table=scroll.querySelector('table');if(!table)return;
+const rows=Array.from(table.tBodies[0]?.rows||[]).slice(0,3),head=table.tHead;
+const height=Math.ceil((head?.getBoundingClientRect().height||42)+rows.reduce((sum,row)=>sum+row.getBoundingClientRect().height,0)+2);
+if(rows.length&&height>50&&scroll.style.getPropertyValue('--three-row-height')!==height+'px')scroll.style.setProperty('--three-row-height',height+'px');
+}
+dashboard.querySelectorAll('.dashboard-lower-pair .matrix-scroll,.dashboard-lower-pair .chemical-detail-scroll').forEach(scroll=>{
+const update=()=>requestAnimationFrame(()=>fit(scroll));const table=scroll.querySelector('table');
+if(table){new MutationObserver(update).observe(table,{childList:true,subtree:true});if(window.ResizeObserver)new ResizeObserver(update).observe(table)}update();
+});
+})();
+</script></body></html>
 
