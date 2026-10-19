@@ -922,6 +922,7 @@ html body #riskDashboard .incident-search-popover .chemical-detail-filters>label
 (function(){
  const dashboard=document.getElementById('riskDashboard'),data=dashboard.querySelector('.workspace-data');
  const inventory=document.getElementById('inventory'),cards=document.getElementById('dssStatusSection');
+ document.getElementById('emergencyReportFrame').loading='eager';
  dashboard.prepend(inventory,cards);dashboard.classList.add('dashboard-fit-view','dashboard-single-page');
  document.getElementById('incidentPickButton').hidden=true;
  const tabs=document.createElement('div');tabs.className='dashboard-panel-tabs';tabs.setAttribute('role','tablist');tabs.setAttribute('aria-label','ข้อมูล Dashboard');
