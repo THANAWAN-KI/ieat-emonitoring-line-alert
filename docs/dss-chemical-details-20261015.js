@@ -59,6 +59,7 @@ async function searchEpp(){
  }catch(error){if(sequence!==eppSequence)return;message.textContent='ค้นหา e_PP ไม่สำเร็จ · ยังแสดงผลจากรายงานสารเคมีได้ กรุณาลองพิมพ์ค้นหาอีกครั้ง';}
  finally{clearTimeout(timeout)}
 }
+window.ieatRunCompanySearch=searchEpp;
 search.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(searchEpp,350);});
 
 estate.addEventListener('change',()=>{scope=estate.value;page=0;render();});
