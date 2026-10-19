@@ -936,7 +936,7 @@ html body #riskDashboard .incident-search-popover .chemical-detail-filters>label
   if(selected==='dss'){const scroll=dashboard.querySelector('.chemical-detail-scroll'),head=scroll.querySelector('thead');const space=scroll.clientHeight-(head?.getBoundingClientRect().height||48)-4;window.dispatchEvent(new CustomEvent('ieat-dss-page-size',{detail:{size:Math.max(1,Math.min(25,Math.floor(space/46)))}}))}
   window.ieatSupportMap?.invalidateSize({pan:false});window.dispatchEvent(new CustomEvent('ieat-dashboard-fit-refresh'));
  })}
- window.ieatToggleDashboardFullscreen=refresh;
+ window.ieatToggleDashboardFullscreen=refresh;window.ieatOpenDashboardPanel=choose;
  window.addEventListener('resize',refresh);document.addEventListener('fullscreenchange',refresh);
  window.addEventListener('ieat-unified-company-select',()=>choose('report'));
  window.addEventListener('message',e=>{if(e.origin===location.origin&&e.source===document.getElementById('emergencyReportFrame').contentWindow&&e.data?.type==='dss:return-risk-dashboard')choose('dss')});
@@ -960,7 +960,10 @@ html body #riskDashboard .incident-search-popover .chemical-detail-filters>label
  const download=document.createElement('button');download.type='button';download.id='dashboardDownloadImage';download.className='dashboard-download-image';download.title='ดาวน์โหลดรายงาน PNG 2 หน้า';
  download.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></svg><span>ดาวน์โหลดภาพ</span>';wrap.after(download);
  download.addEventListener('click',async()=>{
-  const frame=document.getElementById('emergencyReportFrame'),doc=frame.contentDocument,png=doc?.getElementById('pngBtn');
+  window.ieatOpenDashboardPanel?.('report');
+  const frame=document.getElementById('emergencyReportFrame');let doc,png;download.disabled=true;
+  for(let attempt=0;attempt<100;attempt++){doc=frame.contentDocument;png=doc?.getElementById('pngBtn');if(png&&typeof png.onclick==='function'&&!png.disabled)break;await new Promise(resolve=>setTimeout(resolve,150))}
+  download.disabled=false;
   if(!png||typeof png.onclick!=='function'){alert('กำลังเตรียมรายงาน กรุณารอสักครู่');return}if(png.disabled){alert('กำลังโหลดข้อมูลรายงาน กรุณารอสักครู่');return}
   download.disabled=true;dashboard.dataset.exporting='true';const preview=doc.body.classList.contains('dss-dashboard-preview'),two=doc.body.classList.contains('dss-dashboard-preview-two');doc.body.classList.remove('dss-dashboard-preview','dss-dashboard-preview-two');
   try{await png.onclick.call(png,new Event('click'))}finally{if(preview)doc.body.classList.add('dss-dashboard-preview');if(two)doc.body.classList.add('dss-dashboard-preview-two');delete dashboard.dataset.exporting;download.disabled=false;window.dispatchEvent(new CustomEvent('ieat-dashboard-fit-refresh'))}
