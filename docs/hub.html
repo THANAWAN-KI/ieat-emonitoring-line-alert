@@ -111,7 +111,7 @@
  const sub=document.createElement('p');sub.textContent='เลือกประเภทเหตุและค้นหาบริษัท เพื่อจัดทำรายงานในหน้านี้';
  heading.append(title,sub);
  frame.loading='lazy';frame.style.height='1800px';
- function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261019-formal-support-table');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
+ function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261019-report-map-zoom');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
  frame.src=reportUrl();
  link.addEventListener('click',event=>{event.preventDefault();const url=reportUrl();if(frame.src!==url)frame.src=url;section.scrollIntoView({behavior:'smooth',block:'start'});});
  window.returnToRiskDashboard=function(){document.getElementById('otherPage').hidden=true;dashboard.hidden=false;document.querySelectorAll('.nav-tab').forEach(tab=>tab.classList.toggle('active',tab.dataset.page==='risk'));document.getElementById('riskMapSection')?.scrollIntoView({behavior:'smooth',block:'start'});window.dispatchEvent(new Event('resize'))};
@@ -1544,5 +1544,14 @@ if(table){new MutationObserver(update).observe(table,{childList:true,subtree:tru
 })();
 </script><style id="remove-risk-section-captions">
 html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .support-dashboard-title,html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .operating-zone-section h3{display:none!important}
-</style></body></html>
+</style><script id="report-map-zoom-controller">
+(function(){
+const frame=document.getElementById('emergencyReportFrame');
+window.addEventListener('message',event=>{
+if(event.origin!==location.origin||event.source!==frame?.contentWindow||event.data?.type!=='dss:report-map-zoom')return;
+const map=window.ieatSupportMap;if(!map)return;
+if(event.data.delta===1)map.zoomIn();else if(event.data.delta===-1)map.zoomOut();
+});
+})();
+</script></body></html>
 
