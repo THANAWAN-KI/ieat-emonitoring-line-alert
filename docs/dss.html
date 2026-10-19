@@ -3528,11 +3528,11 @@ function paint(){
  }
  if(!window.L||!validPoint()||!state.company||state.company===defaults.company)return;
  if(!preview){preview=L.map(canvas,{zoomControl:false,scrollWheelZoom:false,attributionControl:true});L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Tiles © Esri',maxZoom:19}).addTo(preview);markers=L.layerGroup().addTo(preview)}
- const key=JSON.stringify([state.lat,state.lng,state.company,getBufferRadii()]);if(key!==positionKey){positionKey=key;markers.clearLayers();const lat=Number(state.lat),lng=Number(state.lng);L.marker([lat,lng]).bindTooltip(state.company,{permanent:true,direction:'top'}).addTo(markers);getBufferRadii().forEach((km,i)=>L.circle([lat,lng],{radius:km*1000,color:['#4F7D32','#F5B52E','#D9361E'][i%3],weight:2,fillOpacity:.025}).addTo(markers));preview.invalidateSize({pan:false});const max=Math.max(...getBufferRadii(),1),delta=max/111.32,dx=delta/Math.cos(lat*Math.PI/180);preview.fitBounds([[lat-delta,lng-dx],[lat+delta,lng+dx]],{padding:[35,35],maxZoom:15,animate:false})}
+ const key=JSON.stringify([state.lat,state.lng,state.company,getBufferRadii(),canvas.clientWidth,canvas.clientHeight]);if(key!==positionKey){positionKey=key;markers.clearLayers();const lat=Number(state.lat),lng=Number(state.lng);L.marker([lat,lng]).bindTooltip(state.company,{permanent:true,direction:'top'}).addTo(markers);getBufferRadii().forEach((km,i)=>L.circle([lat,lng],{radius:km*1000,color:['#4F7D32','#F5B52E','#D9361E'][i%3],weight:2,fillOpacity:.025}).addTo(markers));preview.invalidateSize({pan:false});const max=Math.max(...getBufferRadii(),1),delta=max/111.32,dx=delta/Math.cos(lat*Math.PI/180);preview.fitBounds([[lat-delta,lng-dx],[lat+delta,lng+dx]],{padding:[35,35],maxZoom:15,animate:false})}
  preview.invalidateSize({pan:false});
 }
 const before=render;render=function(){const result=before.apply(this,arguments);clearTimeout(timer);timer=setTimeout(paint,100);return result};paint();
-if(window.ResizeObserver)new ResizeObserver(()=>preview?.invalidateSize({pan:false})).observe(canvas);
+if(window.ResizeObserver)new ResizeObserver(()=>paint()).observe(canvas);
 })();
 </script><style>#fieldBriefMap #fbOpenMap{display:none!important}</style><style id="parallel-dashboard-report-pages">
 html body.dss-dashboard-edit.dss-inline-dashboard{min-height:0!important;height:auto!important;overflow:hidden!important;background:#fbfcfa!important}
