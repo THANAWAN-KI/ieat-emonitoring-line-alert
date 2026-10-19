@@ -3512,6 +3512,10 @@ html body #report#report.dss-field-document #dssFieldBrief #fbWeather :is(small,
 (function(){
 const slot=document.getElementById('fieldBriefMap'),weather=document.getElementById('fbWeather');slot.append(weather);
 const image=document.createElement('img');image.id='dashboardReportMapImage';image.alt='แผนที่จาก Dashboard ตามมุมมองปัจจุบัน';slot.prepend(image);
+const zoomTools=document.createElement('div');zoomTools.className='report-map-zoom-controls';zoomTools.setAttribute('role','group');zoomTools.setAttribute('aria-label','ซูมแผนที่รายงาน');
+[['+','ซูมเข้าแผนที่รายงาน',1],['−','ซูมออกแผนที่รายงาน',-1]].forEach(([text,label,delta])=>{const button=document.createElement('button');button.type='button';button.textContent=text;button.setAttribute('aria-label',label);button.title=label;button.onclick=()=>parent.postMessage({type:'dss:report-map-zoom',delta},location.origin);zoomTools.append(button)});
+if(parent!==window)slot.append(zoomTools);
+
 const nearby=document.createElement('section');nearby.id='reportNearbySupport';slot.after(nearby);
 function fitImage(){if(!image.naturalWidth)return;const height=Math.round(Math.max(280,Math.min(430,slot.clientWidth*.75)));slot.style.setProperty('height',height+'px','important')}
 image.addEventListener('load',fitImage);
@@ -3590,4 +3594,9 @@ html body #report#report #reportNearbySupport :is(th,td):first-child{width:70%!i
 html body #report#report #reportNearbySupport :is(th,td):last-child{width:30%!important;text-align:right!important;white-space:normal!important}
 html body #report#report #reportNearbySupport tbody tr:nth-child(even){background:#f8faf6!important}
 html body #report#report #reportNearbySupport button{font:inherit!important;color:inherit!important;line-height:inherit!important}
+</style><style id="report-linked-map-zoom">
+html body #report#report #fieldBriefMap .report-map-zoom-controls{position:absolute!important;top:12px!important;left:12px!important;z-index:9!important;display:flex!important;flex-direction:column!important;gap:5px!important;pointer-events:auto!important}
+html body #report#report #fieldBriefMap .report-map-zoom-controls button{display:flex!important;align-items:center!important;justify-content:center!important;width:34px!important;height:34px!important;min-height:34px!important;padding:0!important;border:0!important;border-radius:7px!important;background:#fff!important;color:#4d4f53!important;font:24px/1 sans-serif!important;box-shadow:0 2px 9px #23311d22!important;cursor:pointer!important}
+html body #report#report #fieldBriefMap .report-map-zoom-controls button:hover{background:#edf2e8!important}
+@media print{.report-map-zoom-controls{display:none!important}}
 </style></body></html>
