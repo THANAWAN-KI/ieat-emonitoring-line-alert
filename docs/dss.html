@@ -1544,7 +1544,7 @@ async function downloadReportPng(){
   const firstStage=document.createElement('div');firstStage.style.cssText='position:absolute;left:-100000px;top:0;width:1050px;pointer-events:none';
   const firstNode=document.getElementById('report').cloneNode(true);firstNode.classList.add('dss-field-export','dss-two-page-first');firstNode.style.setProperty('width','1050px','important');firstNode.style.setProperty('height','auto','important');firstNode.style.setProperty('padding','32px','important');firstNode.style.setProperty('box-sizing','border-box','important');firstNode.style.setProperty('max-height','none','important');
   firstNode.querySelectorAll(':scope > :not(#dssFieldBrief)').forEach(n=>n.remove());const brief=firstNode.querySelector('#dssFieldBrief');brief.style.setProperty('width','986px','important');brief.style.setProperty('max-width','none','important');brief.style.setProperty('transform','none','important');brief.querySelectorAll(':scope > .fb-section').forEach((n,i)=>{if(i===2)n.remove()});brief.querySelector('.fb-footer')?.remove();
-  const slot=firstNode.querySelector('#fieldBriefMap'),weather=firstNode.querySelector('#fbWeather');slot.replaceChildren();const img=document.createElement('img');img.src=mapImage;img.alt='แผนที่ Dashboard ตามมุมมองที่เลือก';slot.append(img);if(weather)slot.append(weather);slot.style.setProperty('height',Math.round(986*mapRaster.naturalHeight/mapRaster.naturalWidth)+'px','important');
+  const slot=firstNode.querySelector('#fieldBriefMap'),weather=firstNode.querySelector('#fbWeather');slot.replaceChildren();const img=document.createElement('img');img.src=mapImage;img.alt='แผนที่ Dashboard ตามมุมมองที่เลือก';slot.append(img);if(weather)slot.append(weather);slot.style.setProperty('height','720px','important');
   const footer=document.createElement('div');footer.className='dss-page-footer';footer.textContent='แหล่งข้อมูล: e_PP · DSS · Open-Meteo | '+(state.reportNo||'')+' | หน้า 1 / 2';brief.append(footer);firstStage.append(firstNode);document.body.append(firstStage);
   let first;try{const firstHeight=Math.max(1485,Math.ceil(firstNode.scrollHeight));first=await html2canvas(firstNode,{backgroundColor:'#fff',scale:2,useCORS:true,allowTaint:false,logging:false,width:1050,height:firstHeight,windowWidth:1200,ignoreElements:n=>n.hasAttribute('data-export-exclude')})}finally{firstStage.remove()}
   const stage=document.createElement('div');stage.style.cssText='position:absolute;left:-100000px;top:0;width:1050px;pointer-events:none';
@@ -3392,6 +3392,7 @@ html body #dssPageTwo.dss-page-two-export table{font-size:13px!important}
  const value=v=>v===undefined||v===null||String(v).trim()===''||/^(?:[—-]|null|undefined)$/i.test(String(v).trim())?missing:String(v);
  function table(headers,rows){
   const scroll=el('div');scroll.className='p2-scroll';const table=el('table'),head=el('thead'),header=el('tr');
+  table.className=headers.length===6?'p2-chemical-table':'p2-equipment-table';const columns=el('colgroup'),widths=headers.length===6?[7,37,16,12,16,12]:[7,30,22,8,8,17,8];widths.forEach(width=>{const col=el('col');col.style.width=width+'%';columns.append(col)});table.append(columns);
   headers.forEach(label=>header.append(el('th',label)));head.append(header);table.append(head);
   const body=el('tbody');
   if(rows.length)rows.forEach(values=>{const row=el('tr');values.forEach(v=>row.append(el('td',value(v))));body.append(row)});
@@ -3417,7 +3418,7 @@ html body #dssPageTwo.dss-page-two-export table{font-size:13px!important}
   const equipmentRows=selected?equipment.map((item,index)=>[index+1,item.name,item.type,item.amount,item.amountUnit,item.volume,item.volumeUnit]):[];
   if(selected&&!equipmentRows.length&&equipmentStatus!==missing)equipmentRows.push([equipmentStatus,'','','','','','']);
   page.append(table(['ลำดับ','รายการอุปกรณ์','ประเภท','จำนวน','หน่วย','ขนาด / ปริมาตร / แรงดัน','หน่วย'],equipmentRows));
-  const availability=el('p','จำนวนและขนาดแสดงแยกตามข้อมูล DSS · ความพร้อมใช้งานยังไม่ได้รับการยืนยัน');availability.className='p2-note';page.append(availability);
+  
   const time=el('div','เวลาสืบค้นข้อมูลสารเคมี: '+value(state.chemicalDataTime));time.className='p2-meta';page.append(time);
   const footer=el('div','แหล่งข้อมูล: รายงานสารเคมี DSS · ข้อมูลอุปกรณ์ DSS | '+(state.reportNo||'')+' | หน้า 2 / 2');footer.className='dss-page-footer';page.append(footer);
   const button=document.getElementById('pngBtn');if(button)button.textContent='ดาวน์โหลด PNG 2 หน้า';
@@ -3512,7 +3513,7 @@ html body #report#report.dss-field-document #dssFieldBrief #fbWeather :is(small,
 const slot=document.getElementById('fieldBriefMap'),weather=document.getElementById('fbWeather');slot.append(weather);
 const image=document.createElement('img');image.id='dashboardReportMapImage';image.alt='แผนที่จาก Dashboard ตามมุมมองปัจจุบัน';slot.prepend(image);
 const nearby=document.createElement('section');nearby.id='reportNearbySupport';slot.after(nearby);
-function fitImage(){if(!image.naturalWidth)return;const height=Math.round(slot.clientWidth*image.naturalHeight/image.naturalWidth);slot.style.setProperty('height',height+'px','important')}
+function fitImage(){if(!image.naturalWidth)return;const height=Math.round(Math.max(280,Math.min(430,slot.clientWidth*.75)));slot.style.setProperty('height',height+'px','important')}
 image.addEventListener('load',fitImage);
 function paint(){
  const title=document.querySelectorAll('#dssFieldBrief>.fb-section>h2')[1];if(title)title.textContent='2. แผนที่และสภาพอากาศ';
@@ -3525,18 +3526,21 @@ function paint(){
 
 }
 function showSupport(data){
+ const allowed=new Set(['hospital','fire','police','community','hydrant','cctv']);
  nearby.replaceChildren();const heading=document.createElement('h3');heading.textContent='ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ'+(data.origin?' · Buffer '+data.radius+' กม.':'');nearby.append(heading);
- const note=document.createElement('p');note.className='report-nearby-note';note.textContent=!data.origin?'เลือกโรงงานเพื่อแสดงข้อมูลสนับสนุน':data.loading?'กำลังค้นหาข้อมูลสนับสนุน…':'แสดงใกล้ที่สุดประเภทละ 3 ตำแหน่ง ภายใน '+data.radius+' กม.';nearby.append(note);
- const table=document.createElement('table'),head=document.createElement('thead'),hr=document.createElement('tr');['ประเภท','สถานที่','ระยะห่าง','โทรศัพท์'].forEach(text=>{const th=document.createElement('th');th.textContent=text;hr.append(th)});head.append(hr);table.append(head);const body=document.createElement('tbody'),counts=new Map();
- (data.rows||[]).filter(r=>Number(r.distance)<=data.radius*1000).sort((a,b)=>a.distance-b.distance).forEach(row=>{
- const key=row.sourceId||row.type;if((counts.get(key)||0)>=3)return;counts.set(key,(counts.get(key)||0)+1);
- const tr=document.createElement('tr');const type=document.createElement('td');type.textContent=row.type;const name=document.createElement('td'),button=document.createElement('button');button.type='button';button.textContent=row.name;button.title=row.address||row.name;button.setAttribute('data-export-exclude-ui','');button.onclick=()=>parent.postMessage({type:'dss:support',item:{lat:row.lat,lng:row.lon,name:row.name,distance:row.distance/1000,phone:row.phone}},location.origin);name.append(button);
- const distance=document.createElement('td');distance.textContent=row.distance<1000?Math.round(row.distance)+' ม.':(row.distance/1000).toFixed(2)+' กม.';const phone=document.createElement('td');phone.textContent=row.phone||'ไม่มีข้อมูล';tr.append(type,name,distance,phone);body.append(tr);
+ const note=document.createElement('p');note.className='report-nearby-note';note.textContent=!data.origin?'เลือกโรงงานเพื่อแสดงข้อมูลสนับสนุน':data.loading?'กำลังค้นหาข้อมูลสนับสนุน…':'ตำแหน่งใกล้ที่สุดภายใน '+data.radius+' กม.';nearby.append(note);
+ const table=document.createElement('table'),head=document.createElement('thead'),hr=document.createElement('tr');['ชื่อสถานที่','ระยะห่างจากจุดเกิดเหตุ'].forEach(text=>{const th=document.createElement('th');th.textContent=text;hr.append(th)});head.append(hr);table.append(head);const body=document.createElement('tbody'),counts=new Map(),seen=new Set();
+ (data.rows||[]).filter(r=>allowed.has(r.sourceId)&&Number(r.distance)<=data.radius*1000).sort((a,b)=>a.distance-b.distance).forEach(row=>{
+ const key=row.sourceId,placeKey=[key,row.name,...(['hospital','fire','police'].includes(key)?[]:[Number(row.lat).toFixed(5),Number(row.lon).toFixed(5)])].join('|');
+ if(seen.has(placeKey)||(counts.get(key)||0)>=3)return;seen.add(placeKey);counts.set(key,(counts.get(key)||0)+1);
+ const tr=document.createElement('tr'),name=document.createElement('td'),button=document.createElement('button');button.type='button';button.textContent=row.name;button.title=row.address||row.name;button.onclick=()=>parent.postMessage({type:'dss:support',item:{lat:row.lat,lng:row.lon,name:row.name,distance:row.distance/1000,phone:row.phone}},location.origin);name.append(button);
+ const distance=document.createElement('td');distance.textContent=row.distance<1000?Math.round(row.distance)+' ม.':(row.distance/1000).toFixed(2)+' กม.';tr.append(name,distance);body.append(tr);
  });
- if(!body.children.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=4;td.textContent=data.loading?'กำลังค้นหา…':'ไม่พบจุดสนับสนุนในระยะที่เลือก';tr.append(td);body.append(tr)}
+ if(!body.children.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=2;td.textContent=data.loading?'กำลังค้นหา…':'ไม่พบจุดสนับสนุนในระยะที่เลือก';tr.append(td);body.append(tr)}
  table.append(body);nearby.append(table);
- if(data.failures?.length){const p=document.createElement('p');p.className='report-nearby-note';p.textContent='บางประเภทเชื่อมต่อข้อมูลไม่สำเร็จ';nearby.append(p)}
+ if(data.failures?.some(id=>allowed.has(id))){const p=document.createElement('p');p.className='report-nearby-note';p.textContent='บางกลุ่มเชื่อมต่อข้อมูลไม่สำเร็จ';nearby.append(p)}
 }
+
 window.addEventListener('message',e=>{if(e.origin!==location.origin||e.source!==parent)return;if(e.data?.type==='dss:dashboard-map-image')image.src=e.data.image;if(e.data?.type==='dss:nearby-support')showSupport(e.data)});
 const before=render;render=function(){const result=before.apply(this,arguments);paint();return result};paint();
 if(window.ResizeObserver)new ResizeObserver(fitImage).observe(slot);
@@ -3565,4 +3569,17 @@ html body #report#report #reportNearbySupport th:nth-child(3){width:17%}
 html body #report#report #reportNearbySupport th:nth-child(4){width:23%}
 html body #report#report #reportNearbySupport button{border:0;background:transparent;text-align:left;padding:0;color:inherit;font:inherit;cursor:pointer}
 html body #report#report #reportNearbySupport .report-nearby-note{font-size:11px;line-height:1.5;color:#66705f;margin:5px 0 8px}
+</style><style id="balanced-dss-columns-and-compact-map">
+html body #dssPageTwo#dssPageTwo table{table-layout:fixed!important}
+html body #dssPageTwo#dssPageTwo :is(th,td){padding:8px 6px!important;line-height:1.55!important;word-break:normal!important;overflow-wrap:break-word!important}
+html body #dssPageTwo#dssPageTwo :is(th,td):first-child{padding-left:3px!important;padding-right:3px!important;text-align:center!important}
+html body #dssPageTwo#dssPageTwo .p2-chemical-table :is(th,td):nth-child(n+3){text-align:center!important}
+html body #dssPageTwo#dssPageTwo .p2-chemical-table td:nth-child(5){text-align:right!important;font-variant-numeric:tabular-nums}
+html body #dssPageTwo#dssPageTwo .p2-equipment-table :is(th,td):nth-child(n+4){text-align:center!important}
+html body #dssPageTwo#dssPageTwo .p2-equipment-table td:is(:nth-child(4),:nth-child(6)){font-variant-numeric:tabular-nums;white-space:nowrap!important}
+html body #report#report #reportNearbySupport th:nth-child(1){width:76%!important}
+html body #report#report #reportNearbySupport th:nth-child(2){width:24%!important;text-align:right!important}
+html body #report#report #reportNearbySupport td:nth-child(2){text-align:right!important;white-space:nowrap!important}
+html body #report#report.dss-field-document #dssFieldBrief #fieldBriefMap{background:#f7f9f5!important}
+html body #report#report.dss-field-document #dssFieldBrief #fieldBriefMap>img{object-fit:contain!important}
 </style></body></html>
