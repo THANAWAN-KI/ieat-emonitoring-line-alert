@@ -915,6 +915,8 @@ html body #riskDashboard.dashboard-fit-view .dashboard-report-pages{display:flex
 html body #riskDashboard.dashboard-fit-view .dashboard-report-pages button[aria-pressed=true]{background:#8B1E2D;color:#fff}
 html body #riskDashboard.dashboard-fit-view .dashboard-report-viewport{display:block;position:relative;flex:1 1 0;min-height:0;overflow:hidden}
 @media(max-width:760px){.incident-search-popover{top:130px;overflow-x:auto}.incident-search-popover .chemical-detail-filters{min-width:680px!important}html body #riskDashboard.dashboard-fit-view .incident-command-toolbar{display:flex!important;flex-wrap:wrap;overflow:visible!important}html body #riskDashboard.dashboard-fit-view .incident-command-actions{margin-top:0}html body #riskDashboard.dashboard-fit-view .incident-search-pill{width:200px}}
+/* Override earlier per-field grid placements inside the fullscreen popover. */
+html body #riskDashboard .incident-search-popover .chemical-detail-filters>label[for]{grid-column:auto!important;grid-row:auto!important;min-height:100px!important}
 </style>
 <script id="viewport-dashboard-20261019-script">
 (function(){
@@ -935,7 +937,7 @@ html body #riskDashboard.dashboard-fit-view .dashboard-report-viewport{display:b
   ['support','ข้อมูลสนับสนุน',dashboard.querySelector('.emergency-support-section')],
   ['report','จัดทำรายงาน',document.getElementById('emergencyReportPage')]
  ];
- let selected='dss',scheduled=false;
+ let selected='dss',scheduled=false,suppressBrowserFit=false;
  function isFit(){return dashboard.classList.contains('dashboard-fit-view')}
  function choose(key,focus=false){
   selected=key;
@@ -954,7 +956,9 @@ html body #riskDashboard.dashboard-fit-view .dashboard-report-viewport{display:b
   if(scheduled)return;scheduled=true;
   requestAnimationFrame(()=>{scheduled=false;
    const native=document.fullscreenElement===dashboard;
-   const browserFull=!document.fullscreenElement&&window.innerWidth>=1000&&Math.abs(window.innerHeight-screen.height)<8;
+   const browserScreen=window.innerWidth>=1000&&Math.abs(window.innerHeight-screen.height)<8;
+   if(!browserScreen)suppressBrowserFit=false;
+   const browserFull=!suppressBrowserFit&&!document.fullscreenElement&&browserScreen;
    const fit=native||browserFull||dashboard.classList.contains('dashboard-fit-fallback');
    dashboard.classList.toggle('dashboard-fit-view',fit);
    full.textContent=fit?'ออกจากเต็มจอ':'เปิด Dashboard เต็มจอ';full.setAttribute('aria-pressed',String(fit));
@@ -972,6 +976,7 @@ html body #riskDashboard.dashboard-fit-view .dashboard-report-viewport{display:b
  window.ieatToggleDashboardFullscreen=async function(){
   if(document.fullscreenElement===dashboard)await document.exitFullscreen();
   else if(dashboard.classList.contains('dashboard-fit-fallback'))dashboard.classList.remove('dashboard-fit-fallback');
+  else if(isFit()&&!document.fullscreenElement)suppressBrowserFit=true;
   else{try{if(!dashboard.requestFullscreen)throw Error('unsupported');await dashboard.requestFullscreen()}catch{dashboard.classList.add('dashboard-fit-fallback')}}
   refresh();
  };
