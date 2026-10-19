@@ -120,7 +120,7 @@ window.addEventListener('ieat-support-map-ready',()=>requestAnimationFrame(overv
  const sub=document.createElement('p');sub.textContent='เลือกประเภทเหตุและค้นหาบริษัท เพื่อจัดทำรายงานในหน้านี้';
  heading.append(title,sub);
  frame.loading='lazy';frame.style.height='1800px';
- function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261019-mouse-map-fresh-overview');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
+ function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261019-compact-support-actions');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
  frame.src=reportUrl();
  link.addEventListener('click',event=>{event.preventDefault();const url=reportUrl();if(frame.src!==url)frame.src=url;section.scrollIntoView({behavior:'smooth',block:'start'});});
  window.returnToRiskDashboard=function(){document.getElementById('otherPage').hidden=true;dashboard.hidden=false;document.querySelectorAll('.nav-tab').forEach(tab=>tab.classList.toggle('active',tab.dataset.page==='risk'));document.getElementById('riskMapSection')?.scrollIntoView({behavior:'smooth',block:'start'});window.dispatchEvent(new Event('resize'))};
@@ -1571,5 +1571,9 @@ html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHe
 html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard #emergencyReportPage{margin:0!important;padding:0!important;gap:0!important}
 html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .report-download-toolbar{padding:0 4px 4px!important;min-height:0!important;margin:0!important}
 html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-report-viewport{margin:0!important;padding:0!important}
+</style><style id="prominent-dashboard-action-buttons">
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard :is(#companySearchSubmit,#dashboardCreateReport,#dashboardDownloadImage){background:#d9361e!important;color:#fff!important;-webkit-text-fill-color:#fff!important;border:0!important;font-weight:600!important;box-shadow:0 4px 12px #d9361e35!important;transition:background .15s,box-shadow .15s,transform .15s!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard :is(#companySearchSubmit,#dashboardCreateReport,#dashboardDownloadImage):hover{background:#bd2b16!important;color:#fff!important;box-shadow:0 6px 16px #d9361e45!important;transform:translateY(-1px)}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard :is(#companySearchSubmit,#dashboardCreateReport,#dashboardDownloadImage):focus-visible{outline:3px solid #ffd16a!important;outline-offset:3px!important}
 </style></body></html>
 
