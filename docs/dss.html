@@ -3066,7 +3066,7 @@ document.getElementById('pngBtn').onclick=function(){return downloadReportPng()}
 .field-report-wind small{display:block;font-size:9px;color:#596270}
 .field-wind-arrow{display:block;width:38px;height:38px;margin:2px auto;font:bold 34px/38px Arial,sans-serif;color:#8B1E2D;transform-origin:center}
 </style>
-<script src="./dss-field-map-20261017.js?v=20261018-formal"></script>
+<script src="./dss-field-map-20261017.js?v=20261019-red-wind-svg"></script>
 <style id="field-coordination-report-style">
 html body #report #dssFieldBrief .fb-reference{display:inline-flex;align-items:center;justify-content:center;width:21px;height:21px;margin-right:5px;border-radius:4px;background:#8B1E2D;color:#fff!important;-webkit-text-fill-color:#fff!important;font:600 12px Arial,sans-serif}
 html body #report #dssFieldBrief .fb-coordination{display:inline-block;margin:3px 0 0 7px;font-size:10px;line-height:1.45;color:#596270!important;-webkit-text-fill-color:#596270!important}
@@ -3485,4 +3485,14 @@ html body #dssPageTwo td{padding:9px 8px!important;border:1px solid #e4e7eb!impo
 html body #dssPageTwo tbody tr:nth-child(even) td{background:#fafbfc!important}
 html body.dss-dashboard-edit #report,html body.dss-dashboard-edit #dssPageTwo{padding:24px!important}
 html body [contenteditable]{outline:none!important;box-shadow:none!important}
+</style><style id="consistent-report-heading-colors">
+html body #report #dssFieldBrief :is(h1,h2),html body #dssPageTwo :is(h1,h2){color:#404041!important;-webkit-text-fill-color:#404041!important;font-size:16px!important;line-height:1.5!important}
+
+.field-report-wind,.field-report-wind :is(strong,div,small){font:400 12px/1.5 Sarabun,sans-serif!important;color:#464646!important;-webkit-text-fill-color:#464646!important}
+.field-report-wind strong{font-weight:600!important}
+.field-report-wind>div{color:#cc0000!important;-webkit-text-fill-color:#cc0000!important}
+.field-report-wind .field-wind-arrow{display:block!important;width:32px!important;height:32px!important;margin:7px auto!important;color:#cc0000!important;transform-origin:center}
+.field-report-wind .field-wind-arrow svg{width:100%;height:100%;display:block}
+button[aria-label="กลับมุมมองเริ่มต้น"],button[aria-label="กลับมุมมองเริ่มต้น"] svg{color:#000!important}
+
 </style></body></html>
