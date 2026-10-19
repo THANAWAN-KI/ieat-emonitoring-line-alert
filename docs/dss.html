@@ -3472,7 +3472,7 @@ html body .editor :is(h2,h3){font-size:18px!important;line-height:1.5!important}
   }));
  }
  window.dssEnableInlineReportEditing=apply;
- window.dssDeleteSelectedReportField=()=>{if(!selected?.isConnected)return;const container=selected.closest('.fb-fact,.report-field,.report-support-field,tr')||selected;saved.deleted[selected.dataset.reportRemoveId]=true;persist();container.dataset.reportDeleted='true';container.style.setProperty('display','none','important');selected=null};
+ window.dssDeleteSelectedReportField=()=>{if(!selected?.isConnected)return false;const container=selected.closest('.fb-fact,.report-field,.report-support-field,tr')||selected;saved.deleted[selected.dataset.reportRemoveId]=true;persist();container.dataset.reportDeleted='true';container.style.setProperty('display','none','important');selected=null;return true};
  window.dssResetReportEdits=()=>{saved={values:{},deleted:{}};persist();document.querySelectorAll('[data-report-edit-id]').forEach(n=>{if(n.dataset.reportOriginal!==undefined)n.textContent=n.dataset.reportOriginal});document.querySelectorAll('[data-report-deleted]').forEach(n=>{n.style.removeProperty('display');delete n.dataset.reportDeleted});render();apply()};
  const previous=render;render=function(){const result=previous.apply(this,arguments);apply();return result};
  const exportOriginal=downloadReportPng;downloadReportPng=async function(){document.body.classList.add('dss-edit-exporting');try{return await exportOriginal.apply(this,arguments)}finally{document.body.classList.remove('dss-edit-exporting');apply()}};
@@ -3498,4 +3498,3 @@ html body.dss-dashboard-edit:not(.dss-edit-exporting) [contenteditable=true]:foc
 html body.dss-edit-exporting [contenteditable=true]{outline:0!important;box-shadow:none!important;background:transparent!important}
 [data-report-deleted=true]{display:none!important}
 </style></body></html>
-
