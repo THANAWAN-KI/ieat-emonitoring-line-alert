@@ -56,7 +56,7 @@
   if(!operatingZoneRows){host.replaceChildren(el('p','กำลังโหลดเขตประกอบการ…','empty'));return;}
   const counts=new Map();
   operatingZoneRows.filter(r=>!selected.estate||normalize(r.estate)===selected.estate).forEach(r=>counts.set(r.zone,(counts.get(r.zone)||0)+r.count));
-  const colors=['#7F5D99','#4F7D32','#D9361E','#457B9D'];
+  const colors=['#0066b2','#00a6a6','#fdbd10','#ed7902','#667ab7','#438c69','#8d68a6','#58a9d6','#9b805e','#738592','#ad7b9e','#a6b66b'];
   const entries=[...counts].sort((a,b)=>b[1]-a[1]).map(([label,count],i)=>({label,count,color:colors[i%colors.length]}));
   if(!entries.length){host.replaceChildren(el('p','ไม่พบเขตประกอบการในพื้นที่ที่เลือก','empty'));return;}
   donut('operatingZoneDonut',entries,'รายการ');
