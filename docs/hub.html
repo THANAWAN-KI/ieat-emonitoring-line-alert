@@ -111,7 +111,7 @@
  const sub=document.createElement('p');sub.textContent='เลือกประเภทเหตุและค้นหาบริษัท เพื่อจัดทำรายงานในหน้านี้';
  heading.append(title,sub);
  frame.loading='lazy';frame.style.height='1800px';
- function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261019-compact-map-and-tables');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
+ function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261019-formal-support-table');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
  frame.src=reportUrl();
  link.addEventListener('click',event=>{event.preventDefault();const url=reportUrl();if(frame.src!==url)frame.src=url;section.scrollIntoView({behavior:'smooth',block:'start'});});
  window.returnToRiskDashboard=function(){document.getElementById('otherPage').hidden=true;dashboard.hidden=false;document.querySelectorAll('.nav-tab').forEach(tab=>tab.classList.toggle('active',tab.dataset.page==='risk'));document.getElementById('riskMapSection')?.scrollIntoView({behavior:'smooth',block:'start'});window.dispatchEvent(new Event('resize'))};
@@ -1542,5 +1542,7 @@ scroll.tabIndex=0;const update=()=>requestAnimationFrame(()=>fit(scroll));const 
 if(table){new MutationObserver(update).observe(table,{childList:true,subtree:true});if(window.ResizeObserver)new ResizeObserver(update).observe(table)}update();
 });
 })();
-</script></body></html>
+</script><style id="remove-risk-section-captions">
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .support-dashboard-title,html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .operating-zone-section h3{display:none!important}
+</style></body></html>
 
