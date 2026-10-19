@@ -120,7 +120,7 @@ window.addEventListener('ieat-support-map-ready',()=>requestAnimationFrame(overv
  const sub=document.createElement('p');sub.textContent='เลือกประเภทเหตุและค้นหาบริษัท เพื่อจัดทำรายงานในหน้านี้';
  heading.append(title,sub);
  frame.loading='lazy';frame.style.height='1800px';
- function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261019-full-map-live-weather');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
+ function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261019-mobile-dashboard');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
  frame.src=reportUrl();
  link.addEventListener('click',event=>{event.preventDefault();const url=reportUrl();if(frame.src!==url)frame.src=url;section.scrollIntoView({behavior:'smooth',block:'start'});});
  window.returnToRiskDashboard=function(){document.getElementById('otherPage').hidden=true;dashboard.hidden=false;document.querySelectorAll('.nav-tab').forEach(tab=>tab.classList.toggle('active',tab.dataset.page==='risk'));document.getElementById('riskMapSection')?.scrollIntoView({behavior:'smooth',block:'start'});window.dispatchEvent(new Event('resize'))};
@@ -1580,5 +1580,62 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
 const frame=document.getElementById('emergencyReportFrame');
 window.addEventListener('ieat-support-center',event=>{if(window.ieatIncidentChosen)return;const point=event.detail;if(point)frame.contentWindow?.postMessage({type:'dss:weather-location',lat:Number(point.lat),lng:Number(point.lon),name:point.name||'นิคมอุตสาหกรรมที่เลือก'},location.origin)});
 })();
-</script></body></html>
+</script><style id="mobile-dashboard-layout">
+@media(max-width:760px){
+html,body{max-width:100%;overflow-x:hidden}
+html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader{height:auto!important;min-height:0!important;padding:10px 12px!important;gap:10px!important;flex-wrap:wrap!important;align-items:center!important}
+html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader .brand{min-width:0!important;width:100%!important;flex:1 0 100%!important;gap:8px!important}
+html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader .brand img{width:28px!important;height:34px!important;flex:none!important}
+html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader .brand strong{font-size:13px!important;line-height:1.5!important;white-space:normal!important}
+html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader .portal-top{width:100%!important;min-width:0!important;display:flex!important;flex-wrap:wrap!important;gap:10px!important}
+html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader .disaster-header-tools{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;width:100%!important;min-width:0!important;gap:8px!important}
+html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader .disaster-clock{min-width:0!important;width:100%!important;white-space:normal!important;font-size:11px!important;line-height:1.4!important;min-height:40px!important}
+html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader .header-calendar-icon,html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader .scope-search-icon{width:23px!important;height:23px!important;flex:none!important}
+html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader .disaster-scope-wrap{width:100%!important;min-width:0!important}
+html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader .disaster-scope{width:100%!important;max-width:100%!important;min-width:0!important;font-size:11px!important;padding:8px!important;min-height:40px!important}
+html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader .header-nav{width:100%!important;display:flex!important;justify-content:flex-end!important;gap:18px!important;border:0!important;padding:0!important}
+html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader .header-nav a{font-size:13px!important;min-height:32px!important;display:flex!important;align-items:center!important}
+html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader .disaster-estate-pop{position:absolute!important;left:auto!important;right:0!important;max-width:calc(100vw - 24px)!important;width:340px!important;box-sizing:border-box!important}
+html body .portal-disaster-tabs.portal-disaster-tabs{padding:0 10px!important;overflow-x:auto!important;white-space:nowrap!important;gap:0!important}
+html body .portal-disaster-tabs .nav-tab{font-size:13px!important;min-height:44px!important;padding:10px 14px!important;flex:none!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard{width:100%!important;max-width:100%!important;padding:10px!important;box-sizing:border-box!important;gap:12px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard :is(.risk-workspace,.dashboard-lower-pair){display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:12px!important;width:100%!important;min-width:0!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .workspace-data{width:100%!important;min-width:0!important;height:auto!important;padding:0!important;overflow:visible!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .direct-querybar{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(95px,.65fr)!important;gap:10px!important;padding:12px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .direct-querybar>.chemical-detail-filters{display:contents!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .direct-querybar .chemical-detail-filters>label[for="chemicalSearch"]{grid-column:1/-1!important;grid-row:1!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .direct-querybar .chemical-detail-filters>label[for="dashboardIncidentType"]{grid-column:1!important;grid-row:2!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .direct-querybar .chemical-detail-filters>label[for="supportRadius"]{grid-column:2!important;grid-row:2!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .direct-querybar .chemical-detail-filters>label[for]{font-size:12px!important;min-height:0!important;gap:5px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .direct-querybar :is(input[type="search"],select){font-size:16px!important;min-height:44px!important;height:44px!important;max-width:100%!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard #companySearchSubmit{min-height:44px!important;min-width:56px!important;font-size:13px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-buffer-tools{grid-column:1/-1!important;grid-row:3!important;display:flex!important;flex-wrap:wrap!important;align-items:center!important;gap:10px!important;padding:0!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-buffer-tools>strong{font-size:12px!important;margin:0!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-buffer-tools label{min-height:36px!important;display:inline-flex!important;align-items:center!important;font-size:12px!important;gap:5px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard #dashboardCreateReport{grid-column:1/-1!important;grid-row:4!important;width:100%!important;min-height:44px!important;font-size:14px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .support-summary-cards{padding:10px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .riskmap-dashboard-panel .support-summary-cards #inventory{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .riskmap-dashboard-panel .support-summary-cards #inventory .inventory-card{height:80px!important;min-height:80px!important;padding:10px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard #dssStatusSection .dss-status-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard #dssStatusSection .inventory-card:last-child{grid-column:1/-1!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard #dssStatusSection .inventory-card{height:auto!important;min-height:68px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .risk-analysis-columns #emergencySupportCards{grid-template-columns:1fr!important;grid-template-rows:auto!important;height:auto!important;gap:10px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .risk-analysis-columns .emergency-support-card{height:190px!important;min-height:190px!important;padding:12px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .risk-analysis-columns .emergency-support-card h3{min-height:0!important;margin:0 0 8px!important;font-size:15px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .workspace-map{grid-column:1!important;order:0!important;width:100%!important;height:420px!important;min-height:420px!important;max-height:420px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .workspace-map>.panel{height:100%!important;min-height:0!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-lower-pair>.risk-stacked{grid-column:1!important;grid-row:1!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-lower-pair>.chemical-details-panel{grid-column:1!important;grid-row:2!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-lower-pair :is(.operating-zone-section,.chemical-details-panel){min-width:0!important;min-height:0!important;height:auto!important;max-height:none!important;padding:10px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .matrix{min-width:520px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard :is(.matrix-scroll,.chemical-detail-scroll){max-width:100%!important;overflow:auto!important;overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .chemical-detail-pages{gap:8px!important;flex-wrap:wrap!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .chemical-detail-pages button{min-height:40px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .report-download-toolbar{padding:0 0 6px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard #dashboardDownloadImage{width:100%!important;min-height:44px!important;font-size:14px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-report-editor,html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard #emergencyReportFrame{width:100%!important;max-width:100%!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard :is(.unified-company-suggestions,.unified-company-results){max-width:100%!important;box-sizing:border-box!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard button{touch-action:manipulation}
+}
+</style></body></html>
 
