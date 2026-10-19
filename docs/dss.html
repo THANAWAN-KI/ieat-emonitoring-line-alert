@@ -3527,8 +3527,7 @@ function paint(){
 }
 function showSupport(data){
  const allowed=new Set(['hospital','fire','police','community','hydrant','cctv']);
- nearby.replaceChildren();const heading=document.createElement('h3');heading.textContent='ข้อมูลสนับสนุนใกล้จุดเกิดเหตุ'+(data.origin?' · Buffer '+data.radius+' กม.':'');nearby.append(heading);
- const note=document.createElement('p');note.className='report-nearby-note';note.textContent=!data.origin?'เลือกโรงงานเพื่อแสดงข้อมูลสนับสนุน':data.loading?'กำลังค้นหาข้อมูลสนับสนุน…':'ตำแหน่งใกล้ที่สุดภายใน '+data.radius+' กม.';nearby.append(note);
+ nearby.replaceChildren();nearby.setAttribute('aria-label','ตารางสถานที่สนับสนุนและระยะห่างจากจุดเกิดเหตุ');
  const table=document.createElement('table'),head=document.createElement('thead'),hr=document.createElement('tr');['ชื่อสถานที่','ระยะห่างจากจุดเกิดเหตุ'].forEach(text=>{const th=document.createElement('th');th.textContent=text;hr.append(th)});head.append(hr);table.append(head);const body=document.createElement('tbody'),counts=new Map(),seen=new Set();
  (data.rows||[]).filter(r=>allowed.has(r.sourceId)&&Number(r.distance)<=data.radius*1000).sort((a,b)=>a.distance-b.distance).forEach(row=>{
  const key=row.sourceId,placeKey=[key,row.name,...(['hospital','fire','police'].includes(key)?[]:[Number(row.lat).toFixed(5),Number(row.lon).toFixed(5)])].join('|');
@@ -3582,4 +3581,13 @@ html body #report#report #reportNearbySupport th:nth-child(2){width:24%!importan
 html body #report#report #reportNearbySupport td:nth-child(2){text-align:right!important;white-space:nowrap!important}
 html body #report#report.dss-field-document #dssFieldBrief #fieldBriefMap{background:#f7f9f5!important}
 html body #report#report.dss-field-document #dssFieldBrief #fieldBriefMap>img{object-fit:contain!important}
+</style><style id="formal-nearby-support-table">
+html body #report#report #reportNearbySupport{margin:14px 0 0!important}
+html body #report#report #reportNearbySupport table{width:100%!important;border-collapse:collapse!important;table-layout:fixed!important;font-family:Sarabun,"TH Sarabun New",sans-serif!important;font-size:13px!important;line-height:1.6!important;border:0!important}
+html body #report#report #reportNearbySupport :is(th,td){padding:9px 10px!important;vertical-align:top!important;border:0!important;border-bottom:1px solid #e5e8e2!important;color:#4d4f53!important;font-size:13px!important;line-height:1.6!important}
+html body #report#report #reportNearbySupport th{background:#edf2e8!important;font-weight:600!important}
+html body #report#report #reportNearbySupport :is(th,td):first-child{width:70%!important;text-align:left!important}
+html body #report#report #reportNearbySupport :is(th,td):last-child{width:30%!important;text-align:right!important;white-space:normal!important}
+html body #report#report #reportNearbySupport tbody tr:nth-child(even){background:#f8faf6!important}
+html body #report#report #reportNearbySupport button{font:inherit!important;color:inherit!important;line-height:inherit!important}
 </style></body></html>
