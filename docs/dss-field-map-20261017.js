@@ -45,7 +45,7 @@
   const speed=Number(data.windSpeed),from=Number(data.windDeg),known=data.windSpeed!==''&&data.windSpeed!=='—'&&Number.isFinite(speed)&&Number.isFinite(from);
   const title=document.createElement('strong');title.textContent='ทิศทางลม (พัดไป)';view.wind.append(title);
   if(known&&speed>0){
-   const to=((from+180)%360+360)%360,arrow=document.createElement('span');arrow.className='field-wind-arrow';arrow.textContent='↑';arrow.style.transform='rotate('+to+'deg)';arrow.setAttribute('aria-label','ลูกศรชี้ทิศที่ลมพัดไป');view.wind.append(arrow);
+   const to=((from+180)%360+360)%360,arrow=document.createElement('span');arrow.className='field-wind-arrow';arrow.innerHTML="<svg viewBox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><path fill=\"#cc0000\" d=\"M479.568,159.192H294.751l22.54-96.459c2.094-8.92-1.451-18.198-8.937-23.475c-7.488-5.268-17.419-5.463-25.111-0.496L10.34,235.768C3.846,240.461,0,247.987,0,256.001c0,8.013,3.846,15.539,10.34,20.232L283.243,473.24c7.692,4.965,17.623,4.771,25.111-0.506c7.486-5.267,11.021-14.546,8.937-23.465l-22.54-96.459h184.817c17.905,0,32.432-14.518,32.432-32.433V191.623C512,173.708,497.474,159.192,479.568,159.192z\"/></svg>";arrow.style.transform='rotate('+(to+90)+'deg)';arrow.setAttribute('aria-label','ลูกศรชี้ทิศที่ลมพัดไป');view.wind.append(arrow);
    const label=document.createElement('div');label.textContent='พัดจาก '+(data.windDir||from+'°')+' → '+['เหนือ','ตะวันออกเฉียงเหนือ','ตะวันออก','ตะวันออกเฉียงใต้','ใต้','ตะวันตกเฉียงใต้','ตะวันตก','ตะวันตกเฉียงเหนือ'][Math.round(to/45)%8];view.wind.append(label);
    const reading=document.createElement('div');reading.textContent='ความเร็ว '+speed+' กม./ชม.';view.wind.append(reading);
   }else{
