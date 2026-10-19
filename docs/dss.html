@@ -3451,5 +3451,51 @@ html body #dssPageTwo.dss-page-two-export table{font-size:13px!important}
 </script><style id="incident-editor-type-20261019">
 html body .editor :is(label,input,select,textarea,button,p,summary,.hint){font-size:14px!important;line-height:1.5!important}
 html body .editor :is(h2,h3){font-size:18px!important;line-height:1.5!important}
+</style><script id="inline-report-editing-20261019">
+(function(){
+ let selected=null,activeKey='',saved={values:{},deleted:{}};
+ const groups=['#dssFieldBrief h1','#fbFacts .fb-fact>strong','#fbSituation .report-field>span:last-child','#fbWeather .report-field>span:last-child','#fbSupport .report-support-field>span:last-child','#fbMapCaption .report-field>span:last-child','#dssPageTwo .p2-company','#dssPageTwo .p2-facts strong','#dssPageTwo tbody td'];
+ function scope(){return 'ieat-report-edits-v1:'+JSON.stringify([state.company,state.registration])}
+ function persist(){try{localStorage.setItem(activeKey,JSON.stringify(saved))}catch{}}
+ function apply(){
+  const key=scope();if(key!==activeKey){activeKey=key;selected=null;try{saved=JSON.parse(localStorage.getItem(key))||{values:{},deleted:{}}}catch{saved={values:{},deleted:{}}}}
+  groups.forEach((selector,group)=>document.querySelectorAll(selector).forEach((node,index)=>{
+   const id=group+':'+index;node.dataset.reportEditId=id;if(node.dataset.reportOriginal===undefined)node.dataset.reportOriginal=node.textContent;
+   node.contentEditable='true';node.spellcheck=false;node.setAttribute('aria-label','แก้ไขข้อมูลรายงาน');
+   if(document.activeElement!==node&&Object.prototype.hasOwnProperty.call(saved.values,id))node.textContent=saved.values[id];
+   const container=node.closest('.fb-fact,.report-field,.report-support-field,tr')||node;const removal=group===8?'table:'+Array.from(document.querySelectorAll('#dssPageTwo tbody tr')).indexOf(node.closest('tr')):id;
+   node.dataset.reportRemoveId=removal;if(saved.deleted[removal]){container.dataset.reportDeleted='true';container.style.setProperty('display','none','important')}
+   if(node.dataset.reportBound)return;node.dataset.reportBound='true';
+   node.addEventListener('focus',()=>{selected=node;document.querySelectorAll('.report-edit-selected').forEach(n=>n.classList.remove('report-edit-selected'));node.classList.add('report-edit-selected')});
+   node.addEventListener('input',()=>{saved.values[node.dataset.reportEditId]=node.textContent;persist()});
+   node.addEventListener('paste',e=>{e.preventDefault();const text=e.clipboardData.getData('text/plain');document.execCommand('insertText',false,text)});
+  }));
+ }
+ window.dssEnableInlineReportEditing=apply;
+ window.dssDeleteSelectedReportField=()=>{if(!selected?.isConnected)return;const container=selected.closest('.fb-fact,.report-field,.report-support-field,tr')||selected;saved.deleted[selected.dataset.reportRemoveId]=true;persist();container.dataset.reportDeleted='true';container.style.setProperty('display','none','important');selected=null};
+ window.dssResetReportEdits=()=>{saved={values:{},deleted:{}};persist();document.querySelectorAll('[data-report-edit-id]').forEach(n=>{if(n.dataset.reportOriginal!==undefined)n.textContent=n.dataset.reportOriginal});document.querySelectorAll('[data-report-deleted]').forEach(n=>{n.style.removeProperty('display');delete n.dataset.reportDeleted});render();apply()};
+ const previous=render;render=function(){const result=previous.apply(this,arguments);apply();return result};
+ const exportOriginal=downloadReportPng;downloadReportPng=async function(){document.body.classList.add('dss-edit-exporting');try{return await exportOriginal.apply(this,arguments)}finally{document.body.classList.remove('dss-edit-exporting');apply()}};
+ window.addEventListener('message',e=>{if(e.origin!==location.origin||e.source!==parent||e.data?.type!=='dss:set-buffer-radii')return;const radii=(e.data.radii||[]).filter(r=>[1,3,5].includes(Number(r)));if(!radii.length)return;state.bufferRadii=[1,3,5];state.bufferEnabled=[1,3,5].map(r=>radii.includes(r));syncBufferControls();render();updateMap()});
+ apply();
+})();
+</script>
+<style id="inline-report-editor-style-20261019">
+html body.dss-dashboard-edit:not(.dss-edit-exporting){margin:0!important;padding:0!important;min-width:0!important;background:#fff!important;overflow:auto!important}
+html body.dss-dashboard-edit.dss-inline-dashboard:not(.dss-edit-exporting)>.top,
+html body.dss-dashboard-edit.dss-inline-dashboard:not(.dss-edit-exporting) .editor{display:none!important}
+html body.dss-dashboard-edit:not(.dss-edit-exporting) .workspace,
+html body.dss-dashboard-edit:not(.dss-edit-exporting) .report-wrap{display:block!important;width:100%!important;max-width:none!important;min-width:0!important;margin:0!important;padding:0!important;overflow:visible!important}
+html body.dss-dashboard-edit:not(.dss-edit-exporting) #report,
+html body.dss-dashboard-edit:not(.dss-edit-exporting) #dssPageTwo{display:block!important;width:100%!important;min-width:0!important;min-height:0!important;margin:0!important;padding:18px!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+html body.dss-dashboard-edit:not(.dss-edit-exporting) #report #dssFieldBrief{width:100%!important;min-width:0!important}
+html body.dss-dashboard-edit:not(.dss-edit-exporting) #dssPageTwo table{min-width:0!important;table-layout:fixed!important;width:100%!important;font-size:11px!important}
+html body.dss-dashboard-edit:not(.dss-edit-exporting) #dssPageTwo td{overflow-wrap:anywhere!important}
+html body.dss-dashboard-edit:not(.dss-edit-exporting) #dssPageTwo th{min-width:0!important;width:auto!important;font-size:11px!important}
+html body.dss-dashboard-edit:not(.dss-edit-exporting) #dssPageTwo th:first-child{width:35px!important;min-width:35px!important}
+html body.dss-dashboard-edit:not(.dss-edit-exporting) [contenteditable=true]{cursor:text;border-radius:3px;outline:1px dashed #b7cddd;outline-offset:2px;min-width:12px;min-height:1em;white-space:pre-wrap}
+html body.dss-dashboard-edit:not(.dss-edit-exporting) [contenteditable=true]:focus{outline:2px solid #0066b2;background:#edf6ff}
+html body.dss-edit-exporting [contenteditable=true]{outline:0!important;box-shadow:none!important;background:transparent!important}
+[data-report-deleted=true]{display:none!important}
 </style></body></html>
 
