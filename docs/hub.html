@@ -887,7 +887,7 @@ html body #riskDashboard.dashboard-fit-view .incident-command-toolbar .disaster-
 html body #riskDashboard.dashboard-fit-view .disaster-scope svg{width:23px;height:23px;flex:0 0 23px}
 html body #riskDashboard.dashboard-fit-view #disasterScopeLabel{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 html body #riskDashboard.dashboard-fit-view .incident-command-actions{margin-left:auto;order:3}
-html body #riskDashboard.dashboard-fit-view .incident-search-popover{position:absolute;top:calc(100% + 8px);right:0}
+html body #riskDashboard.dashboard-fit-view .incident-search-popover{position:fixed!important;top:var(--incident-pop-top,205px)!important;right:16px!important;left:auto!important}
 html body #riskDashboard.dashboard-fit-view .dashboard-panel-selected:not(.chemical-details-panel){overflow:hidden!important}
 html body #riskDashboard.dashboard-fit-view .zone-matrix-layout{height:100%!important;min-height:0!important;grid-template-columns:minmax(140px,.7fr) minmax(0,1.6fr)!important;overflow:hidden}
 html body #riskDashboard.dashboard-fit-view .zone-matrix-table,html body #riskDashboard.dashboard-fit-view .zone-matrix-table article,html body #riskDashboard.dashboard-fit-view .zone-matrix-table .panel-content{display:flex!important;flex-direction:column!important;min-height:0!important;height:100%!important}
@@ -1005,7 +1005,7 @@ html body #riskDashboard .incident-search-popover .chemical-detail-filters>label
  const filters=dashboard.querySelector('.chemical-detail-filters'),results=document.getElementById('unifiedCompanyResults');
  pop.append(filters);if(results)pop.append(results);wrap.append(button,pop);scope.after(wrap);
  function close(){pop.hidden=true;button.setAttribute('aria-expanded','false')}
- button.addEventListener('click',()=>{pop.hidden=!pop.hidden;button.setAttribute('aria-expanded',String(!pop.hidden));if(!pop.hidden)document.getElementById('chemicalSearch').focus()});
+ button.addEventListener('click',()=>{pop.hidden=!pop.hidden;button.setAttribute('aria-expanded',String(!pop.hidden));if(!pop.hidden){pop.style.setProperty('--incident-pop-top',(button.getBoundingClientRect().bottom+8)+'px');document.getElementById('chemicalSearch').focus()}});
  document.addEventListener('click',event=>{if(!wrap.contains(event.target))close()});
  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!pop.hidden){close();button.focus()}});
  window.addEventListener('ieat-unified-company-select',close);
@@ -1065,7 +1065,7 @@ html body #riskDashboard .incident-search-popover .chemical-detail-filters>label
   doc.body.classList.toggle('dss-dashboard-preview-two',fit&&page===2);
   if(!doc.getElementById('dss-dashboard-preview-style')){
    const style=doc.createElement('style');style.id='dss-dashboard-preview-style';
-   style.textContent='html:has(body.dss-dashboard-preview),html body.dss-dashboard-preview{margin:0!important;padding:0!important;width:1050px!important;min-width:0!important;min-height:0!important;overflow:hidden!important;background:#fff!important}html body.dss-dashboard-preview>.top,html body.dss-dashboard-preview .editor{display:none!important}html body.dss-dashboard-preview .workspace,html body.dss-dashboard-preview .report-wrap{display:block!important;width:1050px!important;min-width:0!important;max-width:none!important;margin:0!important;padding:0!important;overflow:visible!important}html body.dss-dashboard-preview #report,html body.dss-dashboard-preview #dssPageTwo{width:1050px!important;min-height:0!important;margin:0!important;box-shadow:none!important}html body.dss-dashboard-preview .report-wrap>#dssPageTwo{display:none!important}html body.dss-dashboard-preview-two .report-wrap>#report{display:none!important}html body.dss-dashboard-preview-two .report-wrap>#dssPageTwo{display:block!important}';doc.head.append(style);
+   style.textContent='html:has(body.dss-dashboard-preview),html body.dss-dashboard-preview{margin:0!important;padding:0!important;width:1050px!important;min-width:0!important;min-height:0!important;overflow:hidden!important;background:#fff!important}html body.dss-dashboard-preview.dss-inline-dashboard>.top,html body.dss-dashboard-preview.dss-inline-dashboard .editor{display:none!important}html body.dss-dashboard-preview .workspace,html body.dss-dashboard-preview .report-wrap{display:block!important;width:1050px!important;min-width:0!important;max-width:none!important;margin:0!important;padding:0!important;overflow:visible!important}html body.dss-dashboard-preview #report,html body.dss-dashboard-preview #dssPageTwo{width:1050px!important;min-height:0!important;margin:0!important;box-shadow:none!important}html body.dss-dashboard-preview .report-wrap>#dssPageTwo{display:none!important}html body.dss-dashboard-preview-two .report-wrap>#report{display:none!important}html body.dss-dashboard-preview-two .report-wrap>#dssPageTwo{display:block!important}';doc.head.append(style);
   }
   if(!fit){frame.style.removeProperty('transform');frame.style.removeProperty('width');frame.style.removeProperty('min-height');frame.style.removeProperty('margin-left');frame.style.removeProperty('position');const original=Math.max(800,doc.body.scrollHeight);frame.style.height=original+'px';return}
   if(!panel.classList.contains('dashboard-panel-selected'))return;
