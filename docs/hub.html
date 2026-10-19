@@ -1498,8 +1498,22 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
 (function(){
 const dashboard=document.getElementById('riskDashboard'),workspace=dashboard.querySelector('.risk-workspace'),cards=document.getElementById('emergencySupportCards'),table=dashboard.querySelector('.chemical-details-panel'),report=document.getElementById('emergencyReportPage');
 if(!workspace||!cards||!table)return;
-const row=document.createElement('section');row.className='dashboard-lower-pair';row.setAttribute('aria-label','ข้อมูลสนับสนุนและตารางระบบ DSS');row.append(cards,table);workspace.after(row);row.after(report);
+const row=document.createElement('section');row.className='dashboard-lower-pair';row.setAttribute('aria-label','ข้อมูลสนับสนุนและตารางระบบ DSS');const risk=dashboard.querySelector('.risk-stacked'),analysis=dashboard.querySelector('.risk-analysis-columns');
+row.append(risk,table);analysis.append(cards);workspace.after(row);row.after(report);
 window.dispatchEvent(new Event('resize'));
 })();
-</script></body></html>
+</script><style id="support-three-blocks-and-header-tone">
+html body #ieatPortalHeader#ieatPortalHeader#ieatPortalHeader :is(a,strong,span,button){color:#4d4f53!important;-webkit-text-fill-color:#4d4f53!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .risk-analysis-columns #emergencySupportCards{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;grid-template-rows:1fr!important;gap:12px!important;height:320px!important;width:100%!important;flex:none!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .risk-analysis-columns .emergency-support-card{height:320px!important;min-height:0!important;min-width:0!important;padding:13px!important;border:0!important;border-radius:16px!important;box-shadow:0 7px 26px #34452d0c!important;display:flex!important;flex-direction:column!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .risk-analysis-columns .emergency-support-card h3{font-size:15px!important;line-height:1.5!important;min-height:45px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .risk-analysis-columns .emergency-support-row{min-height:0!important;overflow-wrap:anywhere!important;padding:8px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .risk-analysis-columns .dashboard-list-pager{gap:4px!important;font-size:11px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .risk-analysis-columns .dashboard-list-pager button{font-size:11px!important;padding:5px!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-lower-pair>.risk-stacked{display:flex!important;grid-column:1!important;grid-row:1!important;flex-direction:column!important;min-width:0!important;width:100%!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-lower-pair .operating-zone-section{display:flex!important;flex-direction:column!important;height:760px!important;min-height:760px!important;max-height:760px!important;margin:0!important;padding:18px!important;border:0!important;border-radius:16px!important;box-shadow:0 7px 26px #34452d0c!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-lower-pair .operating-zone-section :is(.zone-matrix-layout,.zone-matrix-table,article,.panel-content){min-height:0!important;height:100%!important;display:flex!important;flex-direction:column!important}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-lower-pair .matrix-scroll{min-height:0!important;flex:1!important;overflow:auto!important}
+@media(max-width:760px){html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .risk-analysis-columns #emergencySupportCards{grid-template-columns:1fr!important;grid-template-rows:repeat(3,auto)!important;height:auto!important}html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .risk-analysis-columns .emergency-support-card{height:260px!important}html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .dashboard-lower-pair .operating-zone-section{height:600px!important;min-height:600px!important;max-height:600px!important}}
+</style></body></html>
 
