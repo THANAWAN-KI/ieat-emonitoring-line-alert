@@ -139,7 +139,7 @@ outline:2px solid #0066b2!important;outline-offset:2px;
 #estateFocusDashboard .rp-forecast-card img{width:100%;height:auto;margin:10px 0;display:block}
 </style>
 <script src="flood-rid-source.js?v=20261006-rid-17" defer></script>
-<script src="flood-estate-dashboard.js?v=20261007-plans54-mobile3" defer></script>
+<script src="flood-estate-dashboard.js?v=20261019-local-summary" defer></script>
 <script src="flood-river-panel.js?v=20261006-overview6-61" defer></script>
 <script src="flood-weather-overview.js?v=20261006-svg-weather-37" defer></script>
 <style>.rp-forecast-toggle{cursor:pointer;padding:12px 16px;border-radius:10px;background:#e5effa;color:#003666;font-weight:700;font-size:16px}#rpForecastPanel[open] .rp-forecast-toggle{margin-bottom:12px}#rpRankingsAfterWarning .rp-new-section{margin:0 0 16px}</style><style>
@@ -172,6 +172,8 @@ outline:2px solid #0066b2!important;outline-offset:2px;
 <link rel="stylesheet" href="./disaster-mobile.css?v=20261007-plans54-mobile3">
 </head>
 <body>
+<div class="flood-executive-toolbar"><button type="button" id="floodExecutiveButton" aria-expanded="false" aria-controls="floodExecutivePop">สรุปนิคมฯ เฝ้าระวัง ▾</button></div>
+<div id="floodExecutivePop" class="disaster-executive-pop" role="dialog" aria-label="สรุปนิคมฯ และสถานการณ์น้ำ" hidden><iframe id="floodExecutiveFrame" title="สรุปนิคมตามพื้นที่ที่เลือก"></iframe></div>
 <main class="container"><section id="warning" aria-label="Dashboard สถานการณ์น้ำ"><div id="dashboardLoading" class="dashboard-loading" role="status">กำลังโหลดข้อมูลสถานการณ์น้ำ…</div><noscript>กรุณาเปิด JavaScript เพื่อใช้งาน dashboard</noscript></section></main>
 
 
@@ -627,7 +629,46 @@ body,#warning,#estateFocusDashboard{background:#f3f7fa!important}
 #warning #estateFocusDashboard #floodWeatherOverview .today-metrics article:before,
 #warning #estateFocusDashboard #floodWeatherOverview .today-metrics article:after{content:none!important;display:none!important}
 </style>
-</body>
+<style id="executive-summary-popover-style">
+.disaster-executive-link{background:#ffdce2!important;border-color:#e2142d!important;color:#8e0c20!important;cursor:pointer}
+.disaster-executive-link:hover,.disaster-executive-link[aria-expanded="true"]{background:#ffc5cf!important}
+.disaster-executive-pop{position:fixed;top:100px;right:18px;z-index:250;width:960px;max-width:calc(100vw - 28px);border:1px solid #edd7cf;border-radius:22px;background:#fff;box-shadow:0 8px 30px #36231630;overflow:hidden}
+.disaster-executive-pop[hidden]{display:none!important}
+.disaster-executive-pop-head{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:#fff3eb;color:#873809;font:600 15px Sarabun,sans-serif;gap:10px;border-bottom:3px solid #e95814}
+.disaster-executive-pop-head button{font:inherit;background:#fff;border:1px solid #f2cbb7;border-radius:8px;padding:6px 10px;color:#8e0c20;cursor:pointer}
+.disaster-executive-pop iframe{display:block;width:100%;height:min(72dvh,650px);border:0;background:#fff}
+@media(max-width:600px){.disaster-executive-pop{right:8px;max-width:calc(100vw - 16px);border-radius:16px}.disaster-executive-pop iframe{height:70dvh}.disaster-executive-pop-head{font-size:13px;padding:10px}}
+</style>
+<style id="flood-executive-toolbar-style">
+.flood-executive-toolbar{display:flex;justify-content:flex-end;align-items:center;padding:8px 14px;background:#fff;border-bottom:1px solid #e5e7eb}
+#floodExecutiveButton{font:400 13px Sarabun,sans-serif;padding:8px 12px;background:#ffdce3;color:#a51c32;border:0;cursor:pointer}
+#floodExecutivePop{z-index:3000;top:54px;max-height:calc(100dvh - 68px)}
+#floodExecutivePop iframe{height:min(75dvh,680px)}
+</style>
+<script id="flood-executive-summary-bridge">
+(function(){
+ const button=document.getElementById('floodExecutiveButton'),pop=document.getElementById('floodExecutivePop'),frame=document.getElementById('floodExecutiveFrame');let selected='';
+ function name(){return selected||document.getElementById('efSearch')?.value||''}
+ function scope(){frame.contentWindow?.postMessage({type:'ieat-executive-estate',name:name()},location.origin)}
+ function close(){pop.hidden=true;button.setAttribute('aria-expanded','false')}
+ button.addEventListener('click',()=>{if(!pop.hidden){close();return}pop.hidden=false;button.setAttribute('aria-expanded','true');if(!frame.getAttribute('src'))frame.src='./flood-executive.html?embed=1&v=20261019-flood-summary';else scope()});
+ frame.addEventListener('load',scope);
+ document.addEventListener('input',event=>{if(event.target.id==='efSearch'){selected=event.target.value;scope()}});
+ document.addEventListener('change',event=>{if(event.target.id==='efSearch'){selected=event.target.value;scope()}});
+ document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!pop.hidden){close();button.focus()}});
+ document.addEventListener('click',event=>{if(!pop.hidden&&!pop.contains(event.target)&&!button.contains(event.target))close()});
+ window.addEventListener('message',event=>{
+  if(event.origin!==location.origin)return;
+  if(event.source===window.parent&&event.data?.type==='ieat-flood-estate'){selected=event.data.name||'';scope();return}
+  if(event.source!==frame.contentWindow)return;
+  if(event.data?.type==='ieat-executive-ready'){scope();return}
+  if(event.data?.type==='ieat-executive-close'){close();button.focus();return}
+  if(event.data?.type!=='ieat-executive-open-map')return;
+  const focus=event.data.focus;if(focus?.type!=='flood-map-focus'||!Number.isFinite(Number(focus.lat))||!Number.isFinite(Number(focus.lon)))return;
+  close();window.postMessage({type:'ieat-executive-map-focus',focus},location.origin);
+ });
+})();
+</script></body>
 </html>
 
 
