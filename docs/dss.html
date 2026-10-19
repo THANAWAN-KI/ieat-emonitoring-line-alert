@@ -1540,6 +1540,7 @@ async function downloadReportPng(){
    if(window.dssWaitMapReady)await window.dssWaitMapReady();
    mapImage=(await html2canvas(document.getElementById('map'),{backgroundColor:'#f7f8fa',scale:2,useCORS:true,allowTaint:false,logging:false,ignoreElements:e=>e.classList?.contains('leaflet-control-container')})).toDataURL('image/png');
   }
+  const mapRaster=new Image();mapRaster.src=mapImage;await mapRaster.decode();if(!mapRaster.naturalWidth)throw Error('ไม่สามารถสร้างภาพแผนที่ได้');
   const first=await html2canvas(document.getElementById('report'),{
    backgroundColor:'#fff',scale:2,useCORS:true,allowTaint:false,logging:false,width:1050,height:1485,windowWidth:1200,
    ignoreElements:el=>el.hasAttribute('data-export-exclude'),
@@ -1548,7 +1549,7 @@ async function downloadReportPng(){
     report.querySelectorAll(':scope > :not(#dssFieldBrief)').forEach(el=>el.remove());
     const brief=doc.getElementById('dssFieldBrief');brief.querySelectorAll(':scope > .fb-section').forEach((section,index)=>{if(index===2)section.remove()});
     brief.querySelector('.fb-footer')?.remove();
-    const slot=doc.getElementById('fieldBriefMap');slot.replaceChildren();const img=doc.createElement('img');img.src=mapImage;img.alt='ตำแหน่งสถานประกอบการและจุดสนับสนุน';img.style.cssText='display:block;width:100%;height:100%;object-fit:contain';slot.append(img);
+    const slot=doc.getElementById('fieldBriefMap');slot.replaceChildren();const img=doc.createElement('img');img.src=mapImage;img.alt='ตำแหน่งสถานประกอบการและจุดสนับสนุน';slot.append(img);const box=slot.getBoundingClientRect(),fit=Math.min(box.width/mapRaster.width,box.height/mapRaster.height);img.width=Math.round(mapRaster.width*fit);img.height=Math.round(mapRaster.height*fit);img.style.cssText='display:block;flex:none;max-width:none!important;max-height:none!important;width:'+img.width+'px!important;height:'+img.height+'px!important;object-fit:unset';
     const foot=doc.createElement('div');foot.className='dss-page-footer';foot.textContent='แหล่งข้อมูล: e_PP · DSS · Open-Meteo (แบบจำลอง) | '+(state.reportNo||'')+' | หน้า 1 / 2';brief.append(foot);
     const height=brief.getBoundingClientRect().height;if(height>1421){brief.style.transform='scale('+(1421/height)+')';brief.style.transformOrigin='top left';brief.style.marginLeft=((986*(1-1421/height))/2)+'px'}
    }
