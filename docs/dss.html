@@ -3531,7 +3531,7 @@ function fitImage(){if(!image.naturalWidth)return;const height=Math.round(slot.c
 image.addEventListener('load',fitImage);
 function paint(){
  const title=document.querySelectorAll('#dssFieldBrief>.fb-section>h2')[1];if(title)title.textContent='2. แผนที่และสภาพอากาศ';
- if(weather.parentElement!==slot)slot.append(weather);
+ if(matchMedia('(max-width:760px)').matches){slot.after(weather)}else if(weather.parentElement!==slot)slot.append(weather);
  weather.querySelector('.report-weather-arrow')?.remove();
  const speed=Number(state.windSpeed),deg=Number(state.windDeg);
  if(state.windSpeed!==''&&state.windSpeed!=='—'&&Number.isFinite(speed)&&speed>0&&Number.isFinite(deg)){
@@ -3571,6 +3571,7 @@ function showSupport(data){
 window.addEventListener('message',e=>{if(e.origin!==location.origin||e.source!==parent)return;if(e.data?.type==='dss:dashboard-map-image')image.src=e.data.image;if(e.data?.type==='dss:nearby-support')showSupport(e.data)});
 const before=render;render=function(){const result=before.apply(this,arguments);paint();return result};paint();
 if(window.ResizeObserver)new ResizeObserver(fitImage).observe(slot);
+matchMedia('(max-width:760px)').addEventListener('change',paint);
 parent.postMessage({type:'dss:request-dashboard-map'},location.origin);
 })();
 </script><style>#fieldBriefMap #fbOpenMap{display:none!important}</style><style id="parallel-dashboard-report-pages">
