@@ -909,7 +909,7 @@ html body #riskDashboard .incident-search-popover .chemical-detail-filters>label
  function refresh(){if(scheduled)return;scheduled=true;requestAnimationFrame(()=>{scheduled=false;
   const header=document.querySelector('.portal-disaster-tabs')||document.getElementById('ieatPortalHeader');
   dashboard.style.setProperty('--dashboard-top',Math.max(0,header?.getBoundingClientRect().bottom||0)+'px');
-  if(selected==='support'){const scroll=dashboard.querySelector('.chemical-detail-scroll'),head=scroll.querySelector('thead');const space=scroll.clientHeight-(head?.getBoundingClientRect().height||48)-4;window.dispatchEvent(new CustomEvent('ieat-dss-page-size',{detail:{size:Math.max(1,Math.min(25,Math.floor(space/36)))}}))}
+  if(selected==='support'){const scroll=dashboard.querySelector('.chemical-detail-scroll'),head=scroll.querySelector('thead');const space=scroll.clientHeight-(head?.getBoundingClientRect().height||48)-4;window.dispatchEvent(new CustomEvent('ieat-dss-page-size',{detail:{size:25}}))}
   window.ieatSupportMap?.invalidateSize({pan:false});window.dispatchEvent(new CustomEvent('ieat-dashboard-fit-refresh'));
  })}
  window.ieatToggleDashboardFullscreen=refresh;window.ieatOpenDashboardPanel=choose;
@@ -1538,7 +1538,7 @@ const height=Math.ceil((head?.getBoundingClientRect().height||42)+rows.reduce((s
 if(rows.length&&height>50&&scroll.style.getPropertyValue('--three-row-height')!==height+'px')scroll.style.setProperty('--three-row-height',height+'px');
 }
 dashboard.querySelectorAll('.dashboard-lower-pair .matrix-scroll,.dashboard-lower-pair .chemical-detail-scroll').forEach(scroll=>{
-const update=()=>requestAnimationFrame(()=>fit(scroll));const table=scroll.querySelector('table');
+scroll.tabIndex=0;const update=()=>requestAnimationFrame(()=>fit(scroll));const table=scroll.querySelector('table');
 if(table){new MutationObserver(update).observe(table,{childList:true,subtree:true});if(window.ResizeObserver)new ResizeObserver(update).observe(table)}update();
 });
 })();
