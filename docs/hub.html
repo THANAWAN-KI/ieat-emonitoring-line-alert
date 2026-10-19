@@ -905,7 +905,7 @@ html body #riskDashboard .incident-search-popover .chemical-detail-filters>label
  function refresh(){if(scheduled)return;scheduled=true;requestAnimationFrame(()=>{scheduled=false;
   const header=document.querySelector('.portal-disaster-tabs')||document.getElementById('ieatPortalHeader');
   dashboard.style.setProperty('--dashboard-top',Math.max(0,header?.getBoundingClientRect().bottom||0)+'px');
-  if(selected==='support'){const scroll=dashboard.querySelector('.chemical-detail-scroll'),head=scroll.querySelector('thead');const space=scroll.clientHeight-(head?.getBoundingClientRect().height||48)-4;window.dispatchEvent(new CustomEvent('ieat-dss-page-size',{detail:{size:Math.max(1,Math.min(25,Math.floor(space/46)))}}))}
+  if(selected==='support'){const scroll=dashboard.querySelector('.chemical-detail-scroll'),head=scroll.querySelector('thead');const space=scroll.clientHeight-(head?.getBoundingClientRect().height||48)-4;window.dispatchEvent(new CustomEvent('ieat-dss-page-size',{detail:{size:Math.max(1,Math.min(25,Math.floor(space/36)))}}))}
   window.ieatSupportMap?.invalidateSize({pan:false});window.dispatchEvent(new CustomEvent('ieat-dashboard-fit-refresh'));
  })}
  window.ieatToggleDashboardFullscreen=refresh;window.ieatOpenDashboardPanel=choose;
@@ -1164,6 +1164,20 @@ html body #riskDashboard.dashboard-single-page .riskmap-dashboard-panel .emergen
 html body #riskDashboard.dashboard-single-page .riskmap-dashboard-panel .emergency-support-row{height:74px!important;max-height:74px!important;font-size:11px!important;gap:0!important;margin-bottom:4px!important}
 html body #riskDashboard.dashboard-single-page .riskmap-dashboard-panel .support-empty{font-size:11px!important;margin:5px 0!important}
 @media(max-width:760px){html body #riskDashboard.dashboard-single-page .riskmap-dashboard-panel .support-summary-cards #inventory{grid-template-columns:repeat(4,minmax(0,1fr))!important}html body #riskDashboard.dashboard-single-page #dashboardPanel-support.riskmap-dashboard-panel.dashboard-panel-selected{grid-template-rows:auto minmax(180px,2fr) auto auto minmax(90px,1fr) auto!important}}
+</style><style id="riskmap-merged-fit-correction">
+html body #riskDashboard.dashboard-single-page #dashboardPanel-support.riskmap-dashboard-panel.dashboard-panel-selected{grid-template-rows:auto minmax(285px,1fr) auto auto 110px auto!important}
+html body #riskDashboard.dashboard-single-page .riskmap-dashboard-panel>.risk-stacked{grid-template-rows:minmax(150px,1.08fr) minmax(135px,1fr)!important}
+html body #riskDashboard.dashboard-single-page .riskmap-dashboard-panel #inventory .card-value{min-height:22px!important;height:22px!important;margin:0!important;gap:4px!important}
+html body #riskDashboard.dashboard-single-page .riskmap-dashboard-panel #inventory .card-art,
+html body #riskDashboard.dashboard-single-page .riskmap-dashboard-panel #inventory .card-art svg{width:20px!important;height:20px!important;min-width:20px!important}
+html body #riskDashboard.dashboard-single-page .riskmap-dashboard-panel #inventory small{display:none!important}
+html body #riskDashboard.dashboard-single-page .riskmap-dashboard-panel #dssStatusSection .card-value{min-height:20px!important;height:20px!important;margin:0!important}
+html body #riskDashboard.dashboard-single-page .riskmap-dashboard-panel .dashboard-list-pager{height:24px!important;min-height:24px!important;max-height:24px!important;flex-basis:24px!important;font-size:10px!important}
+html body #riskDashboard.dashboard-single-page .riskmap-dashboard-panel .dashboard-list-pager button{padding:2px 6px!important;font-size:10px!important;line-height:16px!important}
+html body #riskDashboard.dashboard-single-page .riskmap-dashboard-panel .chemical-detail-table tbody tr,
+html body #riskDashboard.dashboard-single-page .riskmap-dashboard-panel .chemical-detail-table tbody td{height:36px!important;max-height:36px!important;line-height:18px!important;padding:5px!important}
+html body #riskDashboard.dashboard-single-page .riskmap-dashboard-panel .emergency-support-row{height:50px!important;max-height:50px!important}
+html body #riskDashboard.dashboard-single-page .riskmap-dashboard-panel .support-address{display:none!important}
 </style></body></html>
 
 
