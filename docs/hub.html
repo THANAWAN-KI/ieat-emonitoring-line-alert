@@ -108,7 +108,7 @@
  const sub=document.createElement('p');sub.textContent='เลือกประเภทเหตุและค้นหาบริษัท เพื่อจัดทำรายงานในหน้านี้';
  heading.append(title,sub);
  frame.loading='lazy';frame.style.height='1800px';
- function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261019-map-ratio');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
+ function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261018-two-png-map-final');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
  frame.src=reportUrl();
  link.addEventListener('click',event=>{event.preventDefault();const url=reportUrl();if(frame.src!==url)frame.src=url;section.scrollIntoView({behavior:'smooth',block:'start'});});
  window.returnToRiskDashboard=function(){document.getElementById('otherPage').hidden=true;dashboard.hidden=false;document.querySelectorAll('.nav-tab').forEach(tab=>tab.classList.toggle('active',tab.dataset.page==='risk'));document.getElementById('riskMapSection')?.scrollIntoView({behavior:'smooth',block:'start'});window.dispatchEvent(new Event('resize'))};
@@ -550,7 +550,7 @@ html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader .disaster-cl
 #riskDashboard .map-toolbar-actions .incident-pick-button{min-height:38px;background:#D9361E;color:#fff;border-radius:20px;max-width:190px}
 @media(max-width:760px){.emergency-support-heading{align-items:flex-start}.emergency-support-tools{width:100%}}
 </style>
-<script src="./emergency-support-20261015.js?v=20261019-linked-search"></script>
+<script src="./emergency-support-20261015.js?v=2"></script>
 <style id="inventory-numbers-and-red-matrix">
 #riskDashboard #inventory .inventory-card strong{color:#8B1E2D}
 #riskDashboard .matrix tbody tr:not(.matrix-total){cursor:pointer}
@@ -697,10 +697,7 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
   }
  });
  window.ieatCaptureReportMap=async (renderer,context)=>{
-  const map=window.ieatSupportMap;if(!map)return null;
-  const captureNode=map.getContainer(),originalStyle=captureNode.getAttribute('style'),originalCenter=map.getCenter(),originalZoom=map.getZoom();
-  try{
-  captureNode.style.setProperty('width','550px','important');captureNode.style.setProperty('height','730px','important');map.invalidateSize({animate:false});
+  const map=window.ieatSupportMap;if(!map)return null;map.invalidateSize();
   if(context&&Number.isFinite(context.lat)&&Number.isFinite(context.lng)){
    const points=(context.points||[]).filter(p=>Number.isFinite(Number(p.lat))&&Number.isFinite(Number(p.lng)));
    if(points.length)map.fitBounds(L.latLngBounds([[context.lat,context.lng],...points.map(p=>[Number(p.lat),Number(p.lng)])]),{padding:[45,55],maxZoom:15,animate:false});
@@ -713,7 +710,6 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
   await new Promise(resolve=>setTimeout(resolve,500));
   const canvas=await renderer(container,{backgroundColor:'#f3f6f8',scale:2,useCORS:true,allowTaint:false,logging:false,ignoreElements:element=>['leaflet-control-container','dashboard-point-cluster','dashboard-point-icon'].some(name=>element.classList?.contains(name))});
   return canvas.toDataURL('image/png');
-  }finally{if(originalStyle===null)captureNode.removeAttribute('style');else captureNode.setAttribute('style',originalStyle);map.invalidateSize({animate:false});map.setView(originalCenter,originalZoom,{animate:false});}
  };
 })();
 </script>
@@ -795,38 +791,6 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
  window.addEventListener('ieat-support-map-ready',()=>requestAnimationFrame(()=>apply()));
  function request(){frame?.contentWindow?.postMessage({type:'dss:request-field-map'},location.origin)}
  frame?.addEventListener('load',request);request();
-})();
-</script><style id="incident-search-row-20261019">
-#riskDashboard .chemical-detail-filters{display:grid!important;grid-template-columns:minmax(120px,1fr) minmax(180px,1.8fr) 100px!important;gap:10px!important;align-items:end!important}
-#riskDashboard .chemical-detail-filters label[for="chemicalEstate"]{grid-column:1!important;grid-row:1!important}
-#riskDashboard .chemical-detail-filters label[for="chemicalSearch"]{grid-column:2!important;grid-row:1!important}
-#riskDashboard .chemical-detail-filters label[for="supportRadius"]{grid-column:3!important;grid-row:1!important}
-#riskDashboard .chemical-detail-filters .unified-incident-type{grid-column:1!important;grid-row:2!important}
-#incidentSettingsToggle{grid-column:2/4;grid-row:2;padding:11px 13px;border:1px solid #e2d6ed;border-radius:8px;background:#f5f1f8;color:#4d3268;font:600 14px Sarabun,sans-serif;cursor:pointer;justify-self:start}
-#riskDashboard .emergency-support-section{margin:14px 0}
-@media(max-width:560px){
- #riskDashboard .chemical-detail-filters{grid-template-columns:minmax(0,1fr) 95px!important}
- #riskDashboard .chemical-detail-filters label[for="chemicalEstate"]{grid-column:1/3!important;grid-row:1!important}
- #riskDashboard .chemical-detail-filters label[for="chemicalSearch"]{grid-column:1!important;grid-row:2!important}
- #riskDashboard .chemical-detail-filters label[for="supportRadius"]{grid-column:2!important;grid-row:2!important}
- #riskDashboard .chemical-detail-filters .unified-incident-type{grid-column:1/3!important;grid-row:3!important}
- #incidentSettingsToggle{grid-column:1/3;grid-row:4}
-}
-</style>
-<script id="incident-search-row-20261019">
-(function(){
- const page=document.getElementById('emergencyReportPage'),frame=document.getElementById('emergencyReportFrame');
- const panel=document.querySelector('.chemical-details-panel'),filters=panel.querySelector('.chemical-detail-filters'),support=document.querySelector('.emergency-support-section');
- const search=document.querySelector('label[for="chemicalSearch"]');
- search.firstChild.textContent='ชื่อโรงงาน / เลขทะเบียนโรงงานเก่า–ใหม่';
- document.getElementById('chemicalSearch').placeholder='ชื่อโรงงาน หรือเลขทะเบียนเก่า / ใหม่';
- const radius=document.getElementById('supportRadius'),radiusLabel=radius.closest('label');radiusLabel.htmlFor='supportRadius';filters.append(radiusLabel);
- panel.after(support);support.after(page);
- const settings=document.createElement('button');settings.id='incidentSettingsToggle';settings.type='button';settings.textContent='รายละเอียดเหตุและตั้งค่ารายงาน';settings.setAttribute('aria-expanded','false');
- settings.onclick=()=>{const node=frame.contentDocument?.getElementById('dssOptionalDetails');if(node){node.open=!node.open;settings.setAttribute('aria-expanded',String(node.open))}};
- filters.append(settings);
- function connect(){const doc=frame.contentDocument,node=doc?.getElementById('dssOptionalDetails');if(!node)return;const style=doc.createElement('style');style.textContent='html body #dssOptionalDetails>summary{display:none!important}html body #dssOptionalDetails[open] .dss-settings-content{position:static!important;width:100%!important;max-height:none!important}';doc.head.append(style);node.addEventListener('toggle',()=>settings.setAttribute('aria-expanded',String(node.open)))}
- frame.addEventListener('load',connect);if(frame.contentDocument?.readyState==='complete')connect();
 })();
 </script></body></html>
 
