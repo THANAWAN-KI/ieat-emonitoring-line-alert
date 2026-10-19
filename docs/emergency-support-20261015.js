@@ -29,7 +29,7 @@ const sources=[
  {id:'business',label:'ผู้ประกอบการ',path:'ข้อมูลผู้ประกอบการ_e_PP/FeatureServer/0',names:['ชื่อบริษัทภาษาไทย','ชื่อบริษัทภาษาไทย_สั้','ชื่อบริษัทภาษาอังกฤษ'],where:'ชื่อบริษัทภาษาไทย IS NOT NULL'}
 ];
 const groups=[{title:'ช่วยเหลือและระงับเหตุ',ids:['hospital','fire','police'],each:2},{title:'น้ำดับเพลิงและเฝ้าระวัง',ids:['hydrant','cctv'],each:3},{title:'ประสานพื้นที่ใกล้เคียง',ids:['community','business'],each:3}];
-let map=null,incident=null,marker=null,markers=null,selecting=false,request=0,controller=null,results=new Map(),loading=false,failures=[];
+let estateName='',estateSequence=0,estateFeatures=null;let map=null,incident=null,marker=null,markers=null,selecting=false,request=0,controller=null,results=new Map(),loading=false,failures=[];
 const metadata=new Map(),number=n=>Number(n).toLocaleString('th-TH'),distance=n=>n<1000?number(Math.round(n))+' ม.':number(Math.round(n/100)/10)+' กม.';
 const text=(tag,value,cls)=>{const e=document.createElement(tag);e.textContent=value;if(cls)e.className=cls;return e;};
 const color=d=>d<=5000?['#4F7D32','#fff']:d<=10000?['#FFD16A','#000']:d<=20000?['#F5B52E','#000']:['#D9361E','#fff'];
@@ -52,12 +52,12 @@ function render(){
  host.replaceChildren();
  const selections=selectedRows();
  groups.forEach((g,index)=>{const card=document.createElement('article');card.className='risk-ranking-card emergency-support-card';card.append(text('h3',g.title));
-  const rows=selections[index];if(!incident||!rows.length){card.append(text('p',!incident?'เลือกจุดเกิดเหตุเพื่อค้นหาจุดสนับสนุน':loading?'กำลังค้นหาตำแหน่งใกล้เหตุ…':g.ids.some(id=>failures.includes(id))?'โหลดข้อมูลบางประเภทไม่สำเร็จ':'ไม่พบข้อมูลกลุ่มนี้ในระยะที่เลือก','support-empty'));}
+  const rows=selections[index];if(!incident||!rows.length){card.append(text('p',!incident?'เลือกนิคมอุตสาหกรรมเพื่อแสดงข้อมูลสนับสนุน':loading?'กำลังค้นหาตำแหน่งใกล้เหตุ…':g.ids.some(id=>failures.includes(id))?'โหลดข้อมูลบางประเภทไม่สำเร็จ':'ไม่พบข้อมูลกลุ่มนี้ในระยะที่เลือก','support-empty'));}
   rows.forEach(row=>{const button=document.createElement('button');button.type='button';button.className='emergency-support-row';const top=document.createElement('div');top.className='support-row-top';const badge=text('strong',distance(row.distance),'support-distance');const c=color(row.distance);badge.style.background=c[0];badge.style.color=c[1];top.append(text('span',row.type,'support-type'),badge);button.append(top,text('b',row.name,'support-name'),text('span','โทร: '+(row.phone||'ไม่มีข้อมูลในระบบ'),'support-phone'));if(row.address)button.append(text('span',row.address,'support-address'));button.addEventListener('click',()=>focusRow(row));card.append(button);});host.append(card);
  });
- if(incident){pointLabel.textContent='จุดเกิดเหตุ '+incident.lat.toFixed(5)+', '+incident.lon.toFixed(5);clear.disabled=false;
+ if(incident){pointLabel.textContent='นิคมอุตสาหกรรม: '+estateName;clear.disabled=false;
   note.textContent=loading?'กำลังค้นหาข้อมูลสนับสนุนในระยะ '+radius.value+' กม.…':(failures.length?'โหลดไม่ได้: '+sources.filter(s=>failures.includes(s.id)).map(s=>s.label).join(', '):'');
- }else{pointLabel.textContent='ยังไม่ได้เลือกจุดเกิดเหตุ';clear.disabled=true;note.textContent='เลือกจุดบนแผนที่เพื่อคำนวณระยะห่างจากจุดเกิดเหตุ';}
+ }else{pointLabel.textContent='เลือกนิคมอุตสาหกรรมจากแถบด้านบน';clear.disabled=true;note.textContent='เลือกนิคมอุตสาหกรรมเพื่อแสดงข้อมูลสนับสนุนอัตโนมัติ';}
 }
 async function fetchJSON(url,params,signal){const response=await fetch(url,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:String(params),signal:AbortSignal.any([signal,AbortSignal.timeout(30000)])});if(!response.ok)throw Error('HTTP '+response.status);const data=await response.json();if(data.error)throw Error(data.error.message||'Query failed');return data;}
 async function loadSource(source,origin,limit,signal){
@@ -83,7 +83,7 @@ async function load(){
 function setIncident(lat,lon){
  if(!Number.isFinite(lat)||!Number.isFinite(lon)||Math.abs(lat)>90||Math.abs(lon)>180)return;
  incident={lat,lon};selecting=false;map.getContainer().style.cursor='';pick.textContent='ย้ายจุดเกิดเหตุ';localPick.textContent='ย้ายจุดเกิดเหตุ';
- if(marker)marker.remove();marker=window.L.marker([lat,lon],{draggable:true,title:'จุดเกิดเหตุ (ลากเพื่อย้ายตำแหน่ง)'}).addTo(map);marker.bindTooltip('จุดเกิดเหตุ',{permanent:true,direction:'top',className:'incident-support-label'});
+ if(marker)marker.remove();marker=window.L.marker([lat,lon],{draggable:false,title:'ตำแหน่งอ้างอิงนิคมอุตสาหกรรม'}).addTo(map);marker.bindTooltip(estateName||'นิคมอุตสาหกรรม',{permanent:true,direction:'top',className:'incident-support-label'});
  marker.on('dragend',()=>{const p=marker.getLatLng();setIncident(p.lat,p.lng);});load();
 }
 function choose(){if(!map){note.textContent='กำลังเตรียมแผนที่ กรุณารอ';return;}selecting=!selecting;map.getContainer().style.cursor=selecting?'crosshair':'';pick.textContent=selecting?'คลิกจุดเกิดเหตุบนแผนที่':incident?'ย้ายจุดเกิดเหตุ':'กำหนดจุดเกิดเหตุ';note.textContent=selecting?'คลิกตำแหน่งเกิดเหตุบนแผนที่ด้านขวา':incident?'เลือกย้ายจุดเกิดเหตุได้ทุกเมื่อ':'ยังไม่ได้เลือกจุดเกิดเหตุ';if(selecting)get('map').scrollIntoView({behavior:'smooth',block:'center'});}
@@ -91,5 +91,26 @@ function bindMap(nextMap){if(map===nextMap)return;map=nextMap;pick.disabled=fals
 pick.addEventListener('click',choose);localPick.addEventListener('click',choose);radius.addEventListener('change',load);
 clear.addEventListener('click',()=>{controller?.abort();request++;incident=null;selecting=false;loading=false;results=new Map();failures=[];if(marker)marker.remove();if(markers)markers.remove();if(map)map.getContainer().style.cursor='';pick.textContent='กำหนดจุดเกิดเหตุ';localPick.textContent='เลือกจุดเกิดเหตุ';render();});
 window.addEventListener('ieat-support-map-ready',e=>bindMap(e.detail.map));if(window.ieatSupportMap)bindMap(window.ieatSupportMap);
+
+const estateSource=get('estate'),normEstate=v=>String(v||'').normalize('NFKC').toLowerCase().replace(/นิคมอุตสาหกรรม|ท่าเรืออุตสาหกรรม|สำนักงานนิคมฯ|นิคมฯ|[\s\u200b-\u200d]/g,'');
+function clearEstate(){controller?.abort();request++;incident=null;results=new Map();if(marker)marker.remove();if(markers)markers.remove();window.dispatchEvent(new CustomEvent('ieat-clear-support-center'));render()}
+async function selectEstate(){
+ const sequence=++estateSequence;if(!estateSource?.value){estateName='';clearEstate();return}
+ const name=estateSource.selectedOptions[0]?.textContent||estateSource.value;estateName=name;if(!map){note.textContent='กำลังเตรียมแผนที่สำหรับ '+name;return}
+ note.textContent='กำลังค้นหาตำแหน่งนิคมอุตสาหกรรม '+name;
+ try{
+  if(!estateFeatures){const params=new URLSearchParams({f:'json',where:'1=1',outFields:'สำนักงานนิคมฯ',returnGeometry:'true',outSR:'4326',resultRecordCount:'2000'});const response=await fetch(base+'e_PP_2025/FeatureServer/1/query?'+params,{signal:AbortSignal.timeout(30000)});if(!response.ok)throw Error('HTTP '+response.status);const data=await response.json();if(data.error||!Array.isArray(data.features))throw Error('ไม่สามารถอ่านตำแหน่งนิคมฯ');estateFeatures=data.features}
+  if(sequence!==estateSequence)return;
+  const key=normEstate(name);let matches=estateFeatures.filter(f=>normEstate(f.attributes?.['สำนักงานนิคมฯ'])===key);
+  if(!matches.length)matches=estateFeatures.filter(f=>{const n=normEstate(f.attributes?.['สำนักงานนิคมฯ']);return n&&key&&(n.includes(key)||key.includes(n))});
+  if(matches.length!==1)throw Error('ไม่พบตำแหน่งนิคมฯ ที่ตรงกันเพียงแห่งเดียว');
+  const g=matches[0].geometry;if(!Number.isFinite(g?.x)||!Number.isFinite(g?.y)||g.y<5||g.y>22||g.x<97||g.x>106)throw Error('ไม่มีพิกัดที่ใช้งานได้');
+  setIncident(g.y,g.x);window.dispatchEvent(new CustomEvent('ieat-support-center',{detail:{lat:g.y,lon:g.x,name}}));
+ }catch(error){if(sequence===estateSequence){clearEstate();note.textContent='โหลดข้อมูลสนับสนุนของ '+name+' ไม่สำเร็จ: '+error.message}}
+}
+estateSource?.addEventListener('change',selectEstate);window.addEventListener('ieat-refresh-estate-support',selectEstate);window.addEventListener('ieat-support-map-ready',selectEstate);
+clear.textContent='ล้างการเลือก';clear.addEventListener('click',()=>{estateSource.value='';estateSource.dispatchEvent(new Event('change',{bubbles:true}))});
+if(estateSource?.value&&window.ieatSupportMap)selectEstate();
+
 render();
 })();
