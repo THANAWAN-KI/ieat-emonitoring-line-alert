@@ -1526,7 +1526,7 @@ function reportText(ctx,text,x,y,maxWidth,lineHeight){
   lines.push(line);lines.slice(0,3).forEach((part,i)=>ctx.fillText(part,x,y+i*lineHeight));
 }
 async function downloadReportPng(){
- document.getElementById('dssExportError')?.remove();loading.classList.add('show');pngBtn.disabled=true;
+ document.getElementById('dssExportError')?.remove();window.ieatReportDownloads?.forEach(item=>URL.revokeObjectURL(item.url));window.ieatReportDownloads=[];const exportScale=matchMedia('(max-width:760px)').matches?1.5:2;loading.classList.add('show');pngBtn.disabled=true;
  try{
   if(!validPoint()||(state.company===defaults.company&&state.positionSource!=='manual'))throw Error('กรุณาเลือกโรงงานก่อนดาวน์โหลด');
   state.date=new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'});
@@ -1546,17 +1546,17 @@ async function downloadReportPng(){
   firstNode.querySelectorAll(':scope > :not(#dssFieldBrief)').forEach(n=>n.remove());const brief=firstNode.querySelector('#dssFieldBrief');brief.style.setProperty('width','986px','important');brief.style.setProperty('max-width','none','important');brief.style.setProperty('transform','none','important');brief.querySelectorAll(':scope > .fb-section').forEach((n,i)=>{if(i===2)n.remove()});brief.querySelector('.fb-footer')?.remove();
   const slot=firstNode.querySelector('#fieldBriefMap'),weather=firstNode.querySelector('#fbWeather');slot.replaceChildren();const img=document.createElement('img');img.src=mapImage;img.alt='แผนที่ Dashboard ตามมุมมองที่เลือก';slot.append(img);if(weather)slot.append(weather);slot.style.setProperty('height',Math.round(986*mapRaster.naturalHeight/mapRaster.naturalWidth)+'px','important');
   const footer=document.createElement('div');footer.className='dss-page-footer';footer.textContent='แหล่งข้อมูล: e_PP · DSS · Open-Meteo | '+(state.reportNo||'')+' | หน้า 1 / 2';brief.append(footer);firstStage.append(firstNode);document.body.append(firstStage);
-  let first;try{const firstHeight=Math.max(1485,Math.ceil(firstNode.scrollHeight));first=await html2canvas(firstNode,{backgroundColor:'#fff',scale:2,useCORS:true,allowTaint:false,logging:false,width:1050,height:firstHeight,windowWidth:1200,ignoreElements:n=>n.hasAttribute('data-export-exclude')})}finally{firstStage.remove()}
+  let first;try{const firstHeight=Math.max(1485,Math.ceil(firstNode.scrollHeight));first=await html2canvas(firstNode,{backgroundColor:'#fff',scale:exportScale,useCORS:true,allowTaint:false,logging:false,width:1050,height:firstHeight,windowWidth:1200,ignoreElements:n=>n.hasAttribute('data-export-exclude')})}finally{firstStage.remove()}
   const stage=document.createElement('div');stage.style.cssText='position:absolute;left:-100000px;top:0;width:1050px;pointer-events:none';
   const secondNode=document.getElementById('dssPageTwo').cloneNode(true);secondNode.classList.add('dss-page-two-export');secondNode.style.setProperty('width','1050px','important');stage.append(secondNode);document.body.append(stage);
   let second;
   try{
    const secondHeight=Math.max(1485,Math.ceil(secondNode.scrollHeight));
-   second=await html2canvas(secondNode,{backgroundColor:'#fff',scale:2,useCORS:true,allowTaint:false,logging:false,width:1050,height:secondHeight,windowWidth:1200});
+   second=await html2canvas(secondNode,{backgroundColor:'#fff',scale:exportScale,useCORS:true,allowTaint:false,logging:false,width:1050,height:secondHeight,windowWidth:1200});
   }finally{stage.remove()}
   const blobs=await Promise.all([first,second].map(canvas=>new Promise((resolve,reject)=>canvas.toBlob(blob=>blob?resolve(blob):reject(Error('ไม่สามารถสร้างภาพรายงานได้')),'image/png'))));
   for(let index=0;index<blobs.length;index++){
-   const url=URL.createObjectURL(blobs[index]),link=document.createElement('a');link.href=url;link.download='IEAT-DSS-'+(state.reportNo||Date.now())+'-page-'+(index+1)+'.png';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
+   const url=URL.createObjectURL(blobs[index]),name='IEAT-DSS-'+(state.reportNo||Date.now())+'-page-'+(index+1)+'.png';window.ieatReportDownloads.push({url,name});const link=document.createElement('a');link.href=url;link.download=name;document.body.append(link);link.click();link.remove();
    if(index===0)await new Promise(resolve=>setTimeout(resolve,500));
   }
  }catch(error){
