@@ -884,8 +884,31 @@ const frame=$('estateFocusMap');if(frame){const url=new URL(frame.getAttribute('
 if(!mount()){const observer=new MutationObserver(()=>{if(mount())observer.disconnect()});observer.observe($('warning'),{childList:true,subtree:true})}
 })();
 </script>
-<style>.reference-total{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}.reference-key{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px}.reference-key span{overflow-wrap:anywhere}.reference-card footer{overflow-wrap:anywhere}</style></body>
+<style>.reference-total{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}.reference-key{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px}.reference-key span{overflow-wrap:anywhere}.reference-card footer{overflow-wrap:anywhere}</style><style id="flood-station-search-style">
+html body #warning #estateFocusDashboard .ef-estate-panel .ef-tools{display:none!important}
+.flood-station-search{display:flex;align-items:center;gap:6px;min-width:0;width:100%}.flood-station-search input{width:100%!important;min-width:0;flex:1;border:0!important;border-radius:20px!important;background:#D7D7D833!important;padding:9px 12px!important;min-height:38px!important;font:400 12px Sarabun,sans-serif!important}.flood-station-search>button{flex:none;background:#ED1B2E!important;color:#FFFFFF!important;border:0!important;border-radius:20px;padding:9px 13px;font:400 11px Sarabun,sans-serif!important;cursor:pointer}
+#floodStationMatches{position:fixed;z-index:4500;max-height:320px;overflow:auto;overscroll-behavior:contain;background:#FFFFFF;box-shadow:0 8px 24px #00000020;border-radius:14px;padding:8px;color:#000000;font:400 12px/1.5 Sarabun,sans-serif}
+#floodStationMatches[hidden]{display:none!important}#floodStationMatches button{display:block;width:100%;border:0;background:#FFFFFF;color:#000000;text-align:left;padding:10px;border-radius:9px;font:400 12px/1.5 Sarabun,sans-serif;cursor:pointer}#floodStationMatches button:hover,#floodStationMatches button:focus-visible{background:#C4DFF6;outline:none}#floodStationMatches small{display:block;color:#6D6E70;font-size:10px}#floodStationMatches p{margin:7px 10px;color:#6D6E70;font-size:11px}
+</style>
+<script id="flood-station-search-script">
+(()=>{
+let stations=[],ready=false,failed=false,lastMatches=[];const clean=v=>String(v||'').normalize('NFKC').toLowerCase().replace(/\s+/g,' ').trim(),escape=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function mount(){const panel=document.querySelector('.ef-estate-panel');if(!panel)return false;if(document.getElementById('floodStationSearch'))return true;
+const wrap=document.createElement('div');wrap.className='flood-station-search';wrap.innerHTML='<input id="floodStationSearch" type="search" placeholder="ค้นหาสถานีน้ำ / รหัสสถานี / จังหวัด" aria-label="ค้นหาสถานีระดับน้ำ รหัสสถานี หรือจังหวัด" aria-controls="floodStationMatches" autocomplete="off"><button type="button">ค้นหา</button>';panel.append(wrap);
+const input=wrap.querySelector('input'),popup=document.createElement('div');popup.id='floodStationMatches';popup.hidden=true;popup.setAttribute('aria-label','ผลค้นหาสถานีระดับน้ำ');document.body.append(popup);
+function position(){const rect=wrap.getBoundingClientRect();popup.style.left=Math.max(8,Math.min(rect.left,innerWidth-220))+'px';popup.style.top=(rect.bottom+5)+'px';popup.style.width=Math.min(Math.max(rect.width,280),innerWidth-16)+'px';popup.style.maxHeight=Math.max(100,Math.min(320,innerHeight-rect.bottom-20))+'px'}
+function show(){const q=clean(input.value);lastMatches=[];if(!q){popup.hidden=true;return}position();popup.hidden=false;if(!ready){popup.innerHTML='<p>'+(failed?'โหลดข้อมูลสถานีไม่สำเร็จ กรุณาเปิดหน้าใหม่':'กำลังโหลดรายชื่อสถานี…')+'</p>';return}
+lastMatches=stations.filter(r=>clean([r.code,r.oldcode,r.name,r.province].join(' ')).includes(q));popup.innerHTML=lastMatches.length?lastMatches.slice(0,8).map((r,i)=>'<button type="button" data-station-index="'+i+'">'+escape([r.oldcode||r.code,r.name].filter(Boolean).join(' · '))+'<small>จ.'+escape(r.province||'ไม่ระบุ')+' · ดูตำแหน่งและค่าตรวจวัดบนแผนที่</small></button>').join('')+'<p>พบ '+lastMatches.length+' สถานี'+(lastMatches.length>8?' · แสดง 8 รายการแรก กรุณาพิมพ์เพิ่ม':'')+'</p>':'<p>ไม่พบสถานีที่ค้นหา</p>'}
+function focusStation(row){if(!row)return;input.value=[row.oldcode||row.code,row.name].filter(Boolean).join(' · ');popup.hidden=true;document.getElementById('estateFocusMap')?.contentWindow?.postMessage({type:'flood-map-focus',lat:Number(row.lat),lon:Number(row.lng??row.lon),scale:75000,label:row.name,station:row,nationalSearch:true},location.origin)}
+input.addEventListener('input',show);wrap.querySelector('button').addEventListener('click',()=>{show();if(lastMatches.length===1)focusStation(lastMatches[0])});popup.addEventListener('click',e=>{const button=e.target.closest('[data-station-index]');if(button)focusStation(lastMatches[Number(button.dataset.stationIndex)])});input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();show();const exact=lastMatches.find(r=>[r.code,r.oldcode,r.name].some(v=>clean(v)===clean(input.value)));if(exact||lastMatches.length===1)focusStation(exact||lastMatches[0]);else popup.querySelector('button')?.focus()}if(e.key==='ArrowDown'){e.preventDefault();show();popup.querySelector('button')?.focus()}if(e.key==='Escape')popup.hidden=true});
+document.addEventListener('click',e=>{if(!wrap.contains(e.target)&&!popup.contains(e.target))popup.hidden=true});document.addEventListener('keydown',e=>{if(e.key==='Escape')popup.hidden=true});window.addEventListener('resize',()=>{if(!popup.hidden)position()});document.querySelector('.ef-data-column')?.addEventListener('scroll',()=>popup.hidden=true);
+Promise.resolve(window.IEAT_RID?.load()).then(rows=>{stations=(Array.isArray(rows)?rows:[]).filter(r=>r.lat!==null&&(r.lng??r.lon)!==null&&Number.isFinite(Number(r.lat))&&Number.isFinite(Number(r.lng??r.lon)));ready=true;if(input.value)show()}).catch(()=>{failed=true;if(input.value)show()});return true}
+if(!mount()){const observer=new MutationObserver(()=>{if(mount())observer.disconnect()});observer.observe(document.getElementById('warning'),{childList:true,subtree:true})}
+})();
+</script>
+</body>
 </html>
+
 
 
 
