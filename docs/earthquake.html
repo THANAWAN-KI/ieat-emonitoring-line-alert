@@ -20,6 +20,17 @@ html,body{height:100%;overflow:hidden}
 .eq-legend{position:absolute;bottom:24px;left:12px;right:12px;z-index:500;background:#fffffff2;border-radius:5px;padding:8px 10px;font-size:11px;pointer-events:none}
 .eq-map-fullscreen{position:absolute;right:12px;top:12px;z-index:500;border:1px solid #ddd;background:#fff;border-radius:4px;padding:7px 10px;cursor:pointer}
 @media(max-width:700px){html,body{height:auto;overflow:auto}.eq-dashboard{grid-template-columns:1fr;height:auto;overflow:visible}.eq-sidebar{border:0;overflow:visible}.eq-map-area{height:65dvh;min-height:350px;grid-row:1}.eq-cards{grid-template-columns:repeat(4,minmax(0,1fr))}.eq-card:nth-child(4){grid-column:auto;min-height:95px}.eq-map-fullscreen{font-size:12px}}
+</style><style>.eq-controls input{font:inherit;width:100%;min-width:0;padding:8px;border:1px solid #dfe4e9;border-radius:3px}#eq-estate-status{font-size:11px;color:#626970;line-height:1.6}</style><style id="earthquake-shared-typography">
+html,body,button,input,select,.leaflet-container{font-family:"Noto Sans Thai","Segoe UI",Tahoma,sans-serif!important}
+.eq-top h1{font-size:18px;line-height:1.5;font-weight:500}
+.eq-list h2{font-size:16px;font-weight:500;line-height:1.5}
+.eq-controls label{font-size:13px;line-height:1.5}
+.eq-controls input,.eq-controls select,.eq-controls button,.eq-event{font-size:12px;line-height:1.5}
+.eq-card span{font-size:12px;line-height:1.5;font-weight:400}
+.eq-card strong,.eq-card:nth-child(4) strong{font-size:23px;line-height:1.5;font-weight:600}
+.eq-top p,.eq-event small,.eq-status,#eq-estate-status,.eq-note,.eq-legend{font-size:12px;line-height:1.6}
+.eq-card{min-height:110px}.eq-card:nth-child(4){min-height:75px}
+@media(max-width:700px){.eq-controls input,.eq-controls select{font-size:16px}.eq-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style></head><body>
 <style>
 .eq-dashboard{margin:12px 16px 20px;padding:18px;background:#fff;border:1px solid #e5e7eb;border-radius:14px;color:#404041;box-shadow:0 3px 18px #2a3a4b12}
@@ -29,12 +40,12 @@ html,body{height:100%;overflow:hidden}
 @media(max-width:800px){.eq-dashboard{margin:10px;padding:12px}.eq-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.eq-content{grid-template-columns:1fr}.eq-map{height:380px}}
 </style>
 <section class="eq-dashboard" aria-label="Dashboard แผ่นดินไหว">
-<div class="eq-top"><div><h1>Dashboard สถานการณ์แผ่นดินไหว</h1><p>ประเทศไทยและภูมิภาคใกล้เคียง · ขอบเขต 0–30°N, 90–110°E · แหล่งข้อมูล USGS</p></div>
-<div class="eq-controls"><label>ช่วงเวลา <select id="eq-period"><option value="1">24 ชั่วโมง</option><option value="7" selected>7 วัน</option><option value="30">30 วัน</option></select></label><label>ขนาด <select id="eq-min"><option value="0">ทุกขนาดที่มีในฐานข้อมูล</option><option value="3">M ≥ 3</option><option value="4">M ≥ 4</option><option value="5">M ≥ 5</option></select></label><button id="eq-refresh" type="button">อัปเดตข้อมูล</button></div></div>
-<div class="eq-cards"><div class="eq-card"><span>เหตุการณ์ในช่วงที่เลือก (ครั้ง)</span><strong id="eq-total">–</strong></div><div class="eq-card"><span>ขนาดสูงสุด (M)</span><strong id="eq-max">–</strong></div><div class="eq-card"><span>ขนาดตั้งแต่ M 4 (ครั้ง)</span><strong id="eq-large">–</strong></div><div class="eq-card"><span>ขนาดเหตุการณ์ล่าสุด (M)</span><strong id="eq-latest">–</strong></div></div>
+<div class="eq-top"><div><h1>แผ่นดินไหวใกล้นิคมอุตสาหกรรม</h1><p>ติดตามเหตุแผ่นดินไหวรอบนิคมอุตสาหกรรม / ท่าเรืออุตสาหกรรม</p></div>
+<div class="eq-controls"><label>ค้นหานิคมอุตสาหกรรม / ท่าเรือ<input id="eq-estate-search" type="search" placeholder="พิมพ์ชื่อนิคมฯ"></label><label>เลือกนิคมฯ<select id="eq-estate"><option value="">ทุกนิคมฯ</option></select></label><label>ระยะติดตามจากนิคมฯ<select id="eq-radius"><option value="50">50 กม.</option><option value="100">100 กม.</option><option value="300" selected>300 กม.</option><option value="500">500 กม.</option></select></label><div id="eq-estate-status" role="status">กำลังโหลดข้อมูลนิคมฯ…</div><label>ช่วงเวลา <select id="eq-period"><option value="1">24 ชั่วโมง</option><option value="7" selected>7 วัน</option><option value="30">30 วัน</option></select></label><label>ขนาด <select id="eq-min"><option value="0">ทุกขนาดที่มีในฐานข้อมูล</option><option value="3">M ≥ 3</option><option value="4">M ≥ 4</option><option value="5">M ≥ 5</option></select></label><button id="eq-refresh" type="button">อัปเดตข้อมูล</button></div></div>
+<div class="eq-cards"><div class="eq-card"><span>นิคมฯ ในระยะติดตาม (แห่ง)</span><strong id="eq-total">–</strong></div><div class="eq-card"><span>ขนาดสูงสุด (M)</span><strong id="eq-max">–</strong></div><div class="eq-card"><span>ขนาดตั้งแต่ M 4 (ครั้ง)</span><strong id="eq-large">–</strong></div><div class="eq-card"><span>เหตุการณ์ใกล้นิคมฯ (ครั้ง)</span><strong id="eq-latest">–</strong></div></div>
 <div id="eq-status" class="eq-status" role="status" aria-live="polite">กำลังโหลดข้อมูลแผ่นดินไหว…</div>
-<div class="eq-content"><div><div id="eq-map" class="eq-map" aria-label="แผนที่แผ่นดินไหว"></div><div class="eq-legend"><span style="color:#006400">● M &lt; 3</span><span style="color:#b46800">● M 3–3.9</span><span style="color:#e64422">● M 4–4.9</span><span style="color:#3949ab">● M ≥ 5</span></div></div><div class="eq-list"><h2>เหตุการณ์ล่าสุด · คลิกเพื่อดูบนแผนที่</h2><div id="eq-events"></div></div></div>
-<p class="eq-note">เวลาแสดงตามประเทศไทย (UTC+7) · ขนาดแผ่นดินไหวไม่ใช่ระดับความรุนแรงที่แต่ละพื้นที่ได้รับ · ฐานข้อมูล USGS อาจไม่ครอบคลุมเหตุการณ์ขนาดเล็กในไทยทั้งหมด · <a href="https://earthquake.tmd.go.th/" target="_blank" rel="noopener noreferrer">ตรวจสอบประกาศกรมอุตุนิยมวิทยา</a> · <a href="https://earthquake.usgs.gov/earthquakes/map/" target="_blank" rel="noopener noreferrer">USGS</a></p>
+<div class="eq-content"><div><div id="eq-map" class="eq-map" aria-label="แผนที่แผ่นดินไหว"></div><div class="eq-legend"><span style="color:#006400">● M &lt; 3</span><span style="color:#b46800">● M 3–3.9</span><span style="color:#e64422">● M 4–4.9</span><span style="color:#3949ab">● M ≥ 5</span></div></div><div class="eq-list"><h2>เหตุการณ์ใกล้นิคมฯ · คลิกดูแผนที่</h2><div id="eq-events"></div></div></div>
+<p class="eq-note">จุดสีน้ำเงิน: นิคมฯ / ท่าเรือ · ระยะเป็นระยะเส้นตรงจากตำแหน่งนิคมฯ ถึงศูนย์กลางแผ่นดินไหว ไม่ใช่การยืนยันผลกระทบ · เวลาแสดงตามประเทศไทย (UTC+7) · ขนาดแผ่นดินไหวไม่ใช่ระดับความรุนแรงที่แต่ละพื้นที่ได้รับ · ฐานข้อมูล USGS อาจไม่ครอบคลุมเหตุการณ์ขนาดเล็กในไทยทั้งหมด · <a href="https://earthquake.tmd.go.th/" target="_blank" rel="noopener noreferrer">ตรวจสอบประกาศกรมอุตุนิยมวิทยา</a> · <a href="https://earthquake.usgs.gov/earthquakes/map/" target="_blank" rel="noopener noreferrer">USGS</a></p>
 </section>
 <script>
 (function(){
@@ -49,14 +60,28 @@ area.append(button);
 </script><script>
 (function(){
 const el=id=>document.getElementById(id);
-let map,group,controller,version=0;
+let map,group,controller,version=0,estates=[],estateLayer,allEvents=[],estateState='loading';
+const radius=()=>Number(el('eq-radius').value);
+function distance(a,b){const rad=Math.PI/180,dlat=(b[1]-a[1])*rad,dlon=(b[0]-a[0])*rad;const h=Math.sin(dlat/2)**2+Math.cos(a[1]*rad)*Math.cos(b[1]*rad)*Math.sin(dlon/2)**2;return 6371*2*Math.atan2(Math.sqrt(h),Math.sqrt(Math.max(0,1-h)));}
+function selectedEstates(){return estates.filter(e=>!el('eq-estate').value||e.id===el('eq-estate').value);}
+function nearby(f){const c=f.geometry.coordinates;return selectedEstates().map(e=>({...e,distance:distance(c,e.coordinates)})).filter(e=>e.distance<=radius()).sort((a,b)=>a.distance-b.distance);}
+function drawEstates(){if(!estateLayer)return;estateLayer.clearLayers();selectedEstates().forEach(e=>{const box=document.createElement('div');box.textContent=e.name;L.circleMarker([e.coordinates[1],e.coordinates[0]],{radius:7,color:'#fff',weight:2,fillColor:'#0079b8',fillOpacity:1}).bindPopup(box).addTo(estateLayer);});}
+function estateOptions(){const current=el('eq-estate').value,q=el('eq-estate-search').value.trim().toLowerCase();el('eq-estate').replaceChildren(new Option('ทุกนิคมฯ',''));estates.filter(e=>e.name.toLowerCase().includes(q)).forEach(e=>el('eq-estate').add(new Option(e.name,e.id)));if([...el('eq-estate').options].some(o=>o.value===current))el('eq-estate').value=current;}
+async function loadEstates(){
+try{const url=new URL('https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/e_PP_2025/FeatureServer/1/query');url.search=new URLSearchParams({where:'1=1',outFields:'*',returnGeometry:'true',outSR:'4326',f:'geojson',resultRecordCount:'2000'});
+const r=await fetch(url,{signal:AbortSignal.timeout(25000)});if(!r.ok)throw Error();const data=await r.json();if(!Array.isArray(data.features)||data.exceededTransferLimit)throw Error();
+estates=data.features.filter(f=>f.geometry?.type==='Point'&&f.geometry.coordinates.slice(0,2).every(Number.isFinite)).map((f,i)=>{const p=f.properties||{};return {id:String(i),name:String(p['สำนักงานนิคมฯ']||p.N_Name||p.Name||p.name||p.นิคมอุตสาหกรรม||'นิคมฯ '+(i+1)),coordinates:f.geometry.coordinates};});
+if(!estates.length)throw Error();estateState='ready';estateOptions();drawEstates();el('eq-estate-status').textContent='ข้อมูลตำแหน่งนิคมฯ / ท่าเรือ '+estates.length+' แห่ง · IEAT';
+}catch(e){estateState='error';el('eq-estate-status').textContent='โหลดข้อมูลนิคมฯ ไม่สำเร็จ กรุณาอัปเดตอีกครั้ง';}
+}
+
 const color=m=>m>=5?'#3949ab':m>=4?'#e64422':m>=3?'#b46800':'#006400';
 const time=t=>new Date(t).toLocaleString('th-TH',{timeZone:'Asia/Bangkok'});
 function init(){
 if(typeof L==='undefined'){el('eq-map').textContent='โหลดแผนที่ไม่สำเร็จ โปรดรีเฟรชหน้า';return;}
 map=L.map('eq-map').setView([15,101],5);
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Tiles © Esri',maxZoom:18}).addTo(map);
-group=L.layerGroup().addTo(map);
+group=L.layerGroup().addTo(map);estateLayer=L.layerGroup().addTo(map);
 new ResizeObserver(()=>map.invalidateSize()).observe(el('eq-map'));
 }
 async function refresh(){
@@ -71,16 +96,20 @@ url.search=new URLSearchParams({format:'geojson',starttime:new Date(Date.now()-d
 try{
 const response=await fetch(url,{signal:controller.signal});if(!response.ok)throw Error('HTTP '+response.status);
 const data=await response.json();if(!Array.isArray(data.features))throw Error('รูปแบบข้อมูลไม่ถูกต้อง');if(current!==version)return;
-const events=data.features.filter(f=>f.geometry&&f.geometry.type==='Point'&&f.geometry.coordinates.slice(0,2).every(Number.isFinite)&&f.properties&&Number.isFinite(f.properties.time)).sort((a,b)=>b.properties.time-a.properties.time);
+await loadEstates();if(current!==version)return;
+const originalEvents=data.features.filter(f=>f.geometry&&f.geometry.type==='Point'&&f.geometry.coordinates.slice(0,2).every(Number.isFinite)&&f.properties&&Number.isFinite(f.properties.time)).sort((a,b)=>b.properties.time-a.properties.time);
+allEvents=originalEvents;
+const events=estateState==='ready'?originalEvents.filter(f=>nearby(f).length):[];
+const covered=new Set(events.flatMap(f=>nearby(f).map(e=>e.id)));
 const mags=events.map(f=>f.properties.mag).filter(Number.isFinite);
-el('eq-total').textContent=events.length.toLocaleString('th-TH');el('eq-max').textContent=mags.length?Math.max(...mags).toFixed(1):'–';el('eq-large').textContent=mags.filter(m=>m>=4).length;el('eq-latest').textContent=Number.isFinite(events[0]?.properties.mag)?events[0].properties.mag.toFixed(1):'–';
-el('eq-status').textContent='ดึงข้อมูลสำเร็จ '+time(Date.now())+' · ช่วงย้อนหลัง '+days+' วัน · อัปเดตอัตโนมัติทุก 5 นาที';
-if(!events.length)el('eq-events').textContent='ไม่พบเหตุการณ์ในช่วงเวลาและขนาดที่เลือก';
+el('eq-total').textContent=estateState==='ready'?covered.size.toLocaleString('th-TH'):'–';el('eq-max').textContent=mags.length?Math.max(...mags).toFixed(1):'–';el('eq-large').textContent=mags.filter(m=>m>=4).length;el('eq-latest').textContent=estateState==='ready'?events.length:'–';
+el('eq-status').textContent=(estateState==='ready'?'ดึงข้อมูลสำเร็จ ':'ดึงข้อมูลแผ่นดินไหวแล้ว แต่ข้อมูลนิคมฯ ไม่พร้อม · ')+time(Date.now())+' · ช่วงย้อนหลัง '+days+' วัน · อัปเดตอัตโนมัติทุก 5 นาที';
+if(!events.length)el('eq-events').textContent=estateState==='ready'?'ไม่พบเหตุการณ์ภายในระยะติดตามจากนิคมฯ ตามช่วงเวลาและขนาดที่เลือก':'ยังคำนวณเหตุการณ์ใกล้นิคมฯ ไม่ได้ เนื่องจากโหลดข้อมูลนิคมฯ ไม่สำเร็จ';
 events.forEach(f=>{
 const p=f.properties,[lon,lat,depth]=f.geometry.coordinates,m=Number.isFinite(p.mag)?p.mag:null;
 const details=document.createElement('div'),title=document.createElement('b'),small=document.createElement('small');
 title.textContent=p.place||'ไม่ระบุสถานที่';small.textContent=time(p.time)+' · ลึก '+(Number.isFinite(depth)?depth.toFixed(1):'–')+' กม.';
-details.append(title,small);
+const near=nearby(f),nearText=document.createElement('small');nearText.textContent=near.slice(0,3).map(e=>e.name+' · '+e.distance.toFixed(1)+' กม.').join(' / ')+(near.length>3?' · และอีก '+(near.length-3)+' แห่ง':'');details.append(title,small,nearText);
 let marker;
 if(map){const popup=details.cloneNode(true);const link=document.createElement('a');try{const u=new URL(p.url);if(u.protocol==='https:'&&u.hostname==='earthquake.usgs.gov'){link.href=u.href;link.target='_blank';link.rel='noopener noreferrer';link.textContent='รายละเอียด USGS';popup.append(document.createElement('br'),link);}}catch(e){}
 marker=L.circleMarker([lat,lon],{radius:Math.max(6,(m??0)*2.5),color:'#fff',weight:1,fillColor:color(m??0),fillOpacity:.85}).bindPopup(popup).addTo(group);}
@@ -91,7 +120,11 @@ button.append(badge,details);button.onclick=()=>{if(map){map.setView([lat,lon],8
 }catch(error){if(current===version){el('eq-status').textContent='ไม่สามารถโหลดข้อมูล USGS ได้ กรุณากดอัปเดตข้อมูลอีกครั้ง';el('eq-events').textContent='ยังไม่มีข้อมูลที่ยืนยันได้';}}
 finally{clearTimeout(timeout);}
 }
-init();el('eq-period').addEventListener('change',refresh);el('eq-min').addEventListener('change',refresh);el('eq-refresh').addEventListener('click',refresh);refresh();setInterval(()=>{if(!document.hidden)refresh()},300000);
+init();
+el('eq-estate-search').addEventListener('input',estateOptions);
+el('eq-estate').addEventListener('change',()=>{const e=estates.find(e=>e.id===el('eq-estate').value);if(e&&map)map.setView([e.coordinates[1],e.coordinates[0]],8);refresh();});
+el('eq-radius').addEventListener('change',refresh);
+el('eq-period').addEventListener('change',refresh);el('eq-min').addEventListener('change',refresh);el('eq-refresh').addEventListener('click',refresh);refresh();setInterval(()=>{if(!document.hidden)refresh()},300000);
 })();
 </script>
  </body></html>
