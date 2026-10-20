@@ -1,4 +1,4 @@
-<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dashboard แผ่นดินไหว</title><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script><style>*{box-sizing:border-box}body{margin:0;background:#fff;font-family:"Noto Sans Thai",sans-serif}button,select{font:inherit}</style><style id="earthquake-reference-layout">
+<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dashboard แผ่นดินไหว</title><link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script><style>*{box-sizing:border-box}body{margin:0;background:#fff;font-family:"Sarabun",sans-serif}button,select{font:inherit}</style><style id="earthquake-reference-layout">
 html,body{height:100%;overflow:hidden}
 .eq-dashboard{display:grid;grid-template-columns:310px minmax(0,1fr);height:100dvh;margin:0;padding:0;gap:0;border:0;border-radius:0;box-shadow:none;overflow:hidden}
 .eq-sidebar{padding:14px 12px;overflow:auto;border-right:1px solid #dce0e4;background:#fff;min-height:0}
@@ -21,7 +21,7 @@ html,body{height:100%;overflow:hidden}
 .eq-map-fullscreen{position:absolute;right:12px;top:12px;z-index:500;border:1px solid #ddd;background:#fff;border-radius:4px;padding:7px 10px;cursor:pointer}
 @media(max-width:700px){html,body{height:auto;overflow:auto}.eq-dashboard{grid-template-columns:1fr;height:auto;overflow:visible}.eq-sidebar{border:0;overflow:visible}.eq-map-area{height:65dvh;min-height:350px;grid-row:1}.eq-cards{grid-template-columns:repeat(4,minmax(0,1fr))}.eq-card:nth-child(4){grid-column:auto;min-height:95px}.eq-map-fullscreen{font-size:12px}}
 </style><style>.eq-controls input{font:inherit;width:100%;min-width:0;padding:8px;border:1px solid #dfe4e9;border-radius:3px}#eq-estate-status{font-size:11px;color:#626970;line-height:1.6}</style><style id="earthquake-shared-typography">
-html,body,button,input,select,.leaflet-container{font-family:"Noto Sans Thai","Segoe UI",Tahoma,sans-serif!important}
+html,body,button,input,select,.leaflet-container{font-family:"Sarabun","Segoe UI",Tahoma,sans-serif!important}
 .eq-top h1{font-size:18px;line-height:1.5;font-weight:500}
 .eq-list h2{font-size:16px;font-weight:500;line-height:1.5}
 .eq-controls label{font-size:13px;line-height:1.5}
@@ -46,6 +46,16 @@ html,body,button,input,select,.leaflet-container{font-family:"Noto Sans Thai","S
 .eq-map{background:#efefef}.eq-legend{background:#fffffff2;color:#4d4f53}
 .eq-note a{color:var(--eq-indigo)}
 .eq-dashboard :is(button,input,select,a):focus-visible{outline:3px solid var(--eq-orange);outline-offset:2px}
+</style><style id="earthquake-font-final-20261020">
+html body,html body .eq-dashboard,html body .eq-dashboard *,html body .leaflet-container,html body .leaflet-popup-content{font-family:"Sarabun",Tahoma,sans-serif!important}
+html body .eq-top h1{font-size:18px!important;font-weight:500!important;line-height:1.5!important}
+html body .eq-list h2{font-size:16px!important;font-weight:500!important;line-height:1.5!important}
+html body .eq-card span{font-size:12px!important;font-weight:400!important;line-height:1.5!important}
+html body .eq-card strong{font-size:23px!important;font-weight:600!important;line-height:1.5!important}
+html body .eq-controls label{font-size:13px!important;font-weight:400!important;line-height:1.5!important}
+html body .eq-controls :is(input,select,button),html body .eq-event,html body .eq-event b{font-size:12px!important;font-weight:400!important;line-height:1.5!important}
+html body :is(.eq-top p,.eq-event small,.eq-status,#eq-estate-status,.eq-note,.eq-legend,.eq-mag){font-size:12px!important;line-height:1.5!important}
+@media(max-width:700px){html body .eq-controls :is(input,select){font-size:16px!important}}
 </style></head><body>
 <style>
 .eq-dashboard{margin:12px 16px 20px;padding:18px;background:#fff;border:1px solid #e5e7eb;border-radius:14px;color:#404041;box-shadow:0 3px 18px #2a3a4b12}
