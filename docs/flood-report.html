@@ -941,13 +941,13 @@ html body #warning #estateFocusDashboard .ef-data-column>.flood-useful-tools{dis
 <script id="flood-useful-tools-script">
 (()=>{
 function mount(){const col=document.querySelector('.ef-data-column');if(!col)return false;if(document.getElementById('floodUsefulTools'))return true;
-const quick=document.createElement('nav');quick.id='floodUsefulTools';quick.className='flood-useful-tools';quick.setAttribute('aria-label','ข้อมูลน้ำที่ใช้ติดตาม');const options=[['warnings','เฝ้าระวัง 24 ชม.'],['warnings48','48 ชม.'],['dams','เขื่อน / อ่าง'],['rivers','สายน้ำ'],['forecast','พยากรณ์ 7 วัน'],['waterforecast','คาดการณ์น้ำ 1–5 วัน']];quick.innerHTML='<span>ข้อมูลติดตาม</span>'+options.map(([key,label])=>'<button type="button" data-useful-view="'+key+'" aria-pressed="false">'+label+'</button>').join('');col.prepend(quick);
+const quick=document.createElement('nav');quick.id='floodUsefulTools';quick.className='flood-useful-tools';quick.setAttribute('aria-label','ข้อมูลน้ำที่ใช้ติดตาม');const options=[['warnings','เฝ้าระวัง 24 ชม.'],['warnings48','48 ชม.'],['dams','เขื่อน'],['reservoirs','อ่างเก็บน้ำ'],['rivers','สายน้ำ'],['forecast','พยากรณ์ 7 วัน'],['waterforecast','คาดการณ์น้ำ 1–5 วัน']];quick.innerHTML='<span>ข้อมูลติดตาม</span>'+options.map(([key,label])=>'<button type="button" data-useful-view="'+key+'" aria-pressed="false">'+label+'</button>').join('');col.prepend(quick);
 function sync(){const selected=col.dataset.fitMode||'overview';quick.querySelectorAll('button').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.usefulView===selected)))}
 quick.addEventListener('click',event=>{const button=event.target.closest('[data-useful-view]');if(!button)return;const select=col.querySelector('.fit-controls select');if(select){select.value=button.dataset.usefulView;select.dispatchEvent(new Event('change',{bubbles:true}));sync()}});new MutationObserver(sync).observe(col,{attributes:true,attributeFilter:['data-fit-mode']});sync();return true}
 if(!mount()){const observer=new MutationObserver(()=>{if(mount())observer.disconnect()});observer.observe(document.getElementById('warning'),{childList:true,subtree:true})}
 })();
 </script>
-</body>
+<style>html body #warning #estateFocusDashboard .ef-data-column>#floodUsefulTools{display:flex!important}</style></body>
 </html>
 
 
