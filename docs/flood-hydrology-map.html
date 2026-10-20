@@ -128,7 +128,7 @@ body.toolbar-above:has(.leaflet-popup) .controls,body.toolbar-above:has(.maplibr
 body.dashboard-clean .sensor-marker,body.dashboard-clean .marker-icon,body.dashboard-clean .estate-pin{width:8px!important;height:8px!important;border:1px solid #FFFFFF!important;border-radius:50%!important;box-shadow:none!important;padding:0!important;min-width:0!important;min-height:0!important}
 body.dashboard-clean .estate-pin{background:#ED1B2E!important}
 body.dashboard-clean .sensor-marker svg,body.dashboard-clean .marker-icon svg,body.dashboard-clean .estate-pin svg,body.dashboard-clean .estate-pin .estate-name{display:none!important}
-body.dashboard-clean .controls{top:12px!important;right:12px!important;left:auto!important}
+body.dashboard-clean .status{display:block!important;bottom:30px!important;left:10px!important;right:48px!important;max-height:58px!important;font-size:10px!important;line-height:1.5!important;background:#FFFFFFed!important;color:#6D6E70!important;border:0!important;pointer-events:none}body.dashboard-clean .controls{top:12px!important;right:12px!important;left:auto!important}
 body.dashboard-clean .controls summary{font-size:11px!important;color:#6D6E70!important}
 body.dashboard-clean .controls .layer-menu,body.dashboard-clean .controls .legend{width:145px;box-shadow:0 3px 14px #00000010;border:0}
 body.dashboard-clean .controls:has(.layer-menu:not([open])){background:transparent!important}
@@ -170,7 +170,7 @@ function safeOverlayUrl(v){const u=new URL(v,faonamBase);if(u.origin!==faonamBas
 $('mapCompass').onclick=()=>{if(vector)vector.resetNorthPitch({duration:450});else if(raster){raster.invalidateSize();$('mapCompass').title='แผนที่ 2 มิติแสดงทิศเหนือด้านบนอยู่แล้ว';}};
 const flags={canal:true,water:true,rings:true,flow:true,dam:true,camera:true,estate:true,gistda:false,boundary:true,satellite:true,radar:true};
 const cleanDashboard=new URLSearchParams(location.search).get('dashboard')==='clean';
-if(cleanDashboard){Object.assign(flags,{canal:false,water:false,rings:false,flow:false,dam:false,camera:false,estate:true,boundary:false,satellite:true,radar:false});document.body.classList.add('dashboard-clean');document.querySelectorAll('[data-layer]').forEach(input=>input.checked=!!flags[input.dataset.layer]);}
+if(cleanDashboard){Object.assign(flags,{canal:true,water:true,rings:false,flow:true,dam:true,camera:false,estate:true,boundary:false,satellite:true,radar:true});document.body.classList.add('dashboard-clean');document.querySelectorAll('[data-layer]').forEach(input=>input.checked=!!flags[input.dataset.layer]);}
 
 let historyOnly=false;
 function date(v){let s=String(v||'').replace(' ','T');if(/^\d{4}-\d{2}-\d{2}$/.test(s))s+='T00:00:00';if(s&&!/(Z|[+-]\d{2}:?\d{2})$/.test(s))s+='+07:00';return Date.parse(s)}
