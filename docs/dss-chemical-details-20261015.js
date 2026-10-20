@@ -7,7 +7,7 @@ const eppUrl='https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services
 const companyKey=v=>normalize(v).replace(/บริษัท|จำกัด|มหาชน|company|limited|co\.?|ltd\.?|[().,\-\/]/g,'');
 // Ammonia identity: CDC/NIOSH https://www.cdc.gov/niosh/npg/npgd0028.html
 const chemicalAliases=[
- {names:['แอมโมเนีย','แอมโมเนียมแอนไฮดรัส','ammonia','nh3','nh₃'],english:'ammonia',cas:'7664-41-7'},
+ {names:['แอมโมเนีย','แอมโมเนียแอนไฮดรัส','ammonia','nh3','nh₃'],english:'ammonia',cas:'7664-41-7'},
  {names:['เอทานอล','เอทิลแอลกอฮอล์'],english:'ethanol',cas:'64-17-5'},
  {names:['เมทานอล','เมทิลแอลกอฮอล์'],english:'methanol',cas:'67-56-1'},
  {names:['ไดเอทาโนลามีน'],english:'diethanolamine',cas:'111-42-2'},
