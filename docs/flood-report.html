@@ -172,8 +172,8 @@ outline:2px solid #0066b2!important;outline-offset:2px;
 <link rel="stylesheet" href="./disaster-mobile.css?v=20261007-plans54-mobile3">
 </head>
 <body>
-<header class="flood-executive-toolbar"><nav class="flood-nav" aria-label="ส่วนข้อมูล"> <button type="button" id="floodExecutiveButton" aria-expanded="false" aria-controls="floodExecutivePop">สรุปนิคมฯ เฝ้าระวัง ▾</button></nav></header>
-<div id="floodExecutivePop" class="disaster-executive-pop" role="dialog" aria-label="สรุปนิคมฯ และสถานการณ์น้ำ" hidden><iframe id="floodExecutiveFrame" title="สรุปนิคมตามพื้นที่ที่เลือก"></iframe></div>
+
+<section id="floodInlineSummary" aria-label="สรุปนิคมฯ เฝ้าระวัง"><iframe id="floodExecutiveFrame" title="สรุปนิคมฯ เฝ้าระวัง" src="./flood-executive.html?embed=1&amp;v=20261020-inline-summary"></iframe></section>
 <main class="container"><section id="warning" aria-label="Dashboard สถานการณ์น้ำ"><div id="dashboardLoading" class="dashboard-loading" role="status">กำลังโหลดข้อมูลสถานการณ์น้ำ…</div><noscript>กรุณาเปิด JavaScript เพื่อใช้งาน dashboard</noscript></section></main>
 
 
@@ -617,27 +617,18 @@ body,#warning,#estateFocusDashboard{background:#f3f7fa!important}
 #floodExecutivePop iframe{height:min(75dvh,680px)}
 </style>
 <script id="flood-executive-summary-bridge">
-(function(){
- const button=document.getElementById('floodExecutiveButton'),pop=document.getElementById('floodExecutivePop'),frame=document.getElementById('floodExecutiveFrame');let selected='';
- function name(){return selected||document.getElementById('efSearch')?.value||''}
- function scope(){frame.contentWindow?.postMessage({type:'ieat-executive-estate',name:name()},location.origin)}
- function close(){pop.hidden=true;button.setAttribute('aria-expanded','false')}
- button.addEventListener('click',()=>{if(!pop.hidden){close();return}pop.hidden=false;button.setAttribute('aria-expanded','true');if(!frame.getAttribute('src'))frame.src='./flood-executive.html?embed=1&v=20261019-flood-summary';else scope()});
- frame.addEventListener('load',scope);
- document.addEventListener('input',event=>{if(event.target.id==='efSearch'){selected=event.target.value;scope()}});
- document.addEventListener('change',event=>{if(event.target.id==='efSearch'){selected=event.target.value;scope()}});
- document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!pop.hidden){close();button.focus()}});
- document.addEventListener('click',event=>{if(!pop.hidden&&!pop.contains(event.target)&&!button.contains(event.target))close()});
- window.addEventListener('message',event=>{
-  if(event.origin!==location.origin)return;
-  if(event.source===window.parent&&event.data?.type==='ieat-flood-estate'){selected=event.data.name||'';scope();return}
-  if(event.source!==frame.contentWindow)return;
-  if(event.data?.type==='ieat-executive-ready'){scope();return}
-  if(event.data?.type==='ieat-executive-close'){close();button.focus();return}
-  if(event.data?.type!=='ieat-executive-open-map')return;
-  const focus=event.data.focus;if(focus?.type!=='flood-map-focus'||!Number.isFinite(Number(focus.lat))||!Number.isFinite(Number(focus.lon)))return;
-  close();window.postMessage({type:'ieat-executive-map-focus',focus},location.origin);
- });
+(()=>{
+const frame=document.getElementById('floodExecutiveFrame');let selected='';
+function scope(){frame.contentWindow?.postMessage({type:'ieat-executive-estate',name:selected},location.origin)}
+frame.addEventListener('load',scope);
+window.addEventListener('message',event=>{
+ if(event.origin!==location.origin)return;
+ if(event.source===window.parent&&event.data?.type==='ieat-flood-estate'){selected=event.data.name||'';scope();return}
+ if(event.source!==frame.contentWindow)return;
+ if(event.data?.type==='ieat-executive-ready'){scope();return}
+ if(event.data?.type==='ieat-executive-height'){frame.style.height=Math.max(280,Math.min(1800,Number(event.data.height)||650))+'px';return}
+ const focus=event.data?.focus;if(event.data?.type==='ieat-executive-open-map'&&focus?.type==='flood-map-focus'&&Number.isFinite(Number(focus.lat))&&Number.isFinite(Number(focus.lon)))window.postMessage({type:'ieat-executive-map-focus',focus},location.origin);
+});
 })();
 </script>
 <style id="flood-gistda-layout">
@@ -938,18 +929,13 @@ function schedule(){if(!scheduled){scheduled=true;requestAnimationFrame(measure)
 })();
 </script>
 <style id="flood-summary-before-overview">
-html body .flood-executive-toolbar{display:none!important}
 html body main.container,html body #warning,html body #estateFocusDashboard{height:100dvh!important}
-html body #warning #estateFocusDashboard .flood-summary-entry{display:flex!important;justify-content:flex-start;align-items:center;order:-10!important;margin:0;padding:0 2px;flex:none!important}
-html body #warning #estateFocusDashboard .flood-summary-entry #floodExecutiveButton{display:inline-flex!important;align-items:center;gap:8px;background:#ED1B2E!important;color:#FFFFFF!important;border:0!important;border-radius:10px!important;padding:10px 16px!important;font:500 13px Sarabun,sans-serif!important;cursor:pointer}
-html body #warning #estateFocusDashboard .flood-summary-entry #floodExecutiveButton:hover{background:#7F181B!important}
+html body #warning #estateFocusDashboard #floodInlineSummary{display:block!important;order:-10!important;flex:none!important;min-width:0;width:100%;background:#FFFFFF;border-radius:14px;overflow:hidden}
+#floodInlineSummary iframe{display:block;width:100%;height:650px;border:0}
 @media(max-width:950px){html body main.container,html body #warning,html body #estateFocusDashboard{height:auto!important;min-height:100dvh!important}}
 </style>
 <script id="flood-summary-before-overview-script">
-(()=>{
-function mount(){const col=document.querySelector('.ef-data-column'),button=document.getElementById('floodExecutiveButton');if(!col||!button)return false;if(!col.querySelector('.flood-summary-entry')){const entry=document.createElement('div');entry.className='flood-summary-entry';col.prepend(entry);entry.append(button);button.addEventListener('click',()=>{const pop=document.getElementById('floodExecutivePop');if(pop&&!pop.hidden){const rect=button.getBoundingClientRect();pop.style.top=Math.min(rect.bottom+8,innerHeight-150)+'px';pop.style.left=Math.max(8,rect.left)+'px';pop.style.right='auto'}})}return true}
-if(!mount()){const observer=new MutationObserver(()=>{if(mount())observer.disconnect()});observer.observe(document.getElementById('warning'),{childList:true,subtree:true})}
-})();
+(()=>{function mount(){const col=document.querySelector('.ef-data-column'),section=document.getElementById('floodInlineSummary');if(!col||!section)return false;col.prepend(section);return true}if(!mount()){const observer=new MutationObserver(()=>{if(mount())observer.disconnect()});observer.observe(document.getElementById('warning'),{childList:true,subtree:true})}})();
 </script>
 </body>
 </html>
