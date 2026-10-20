@@ -139,7 +139,7 @@ outline:2px solid #0066b2!important;outline-offset:2px;
 #estateFocusDashboard .rp-forecast-card img{width:100%;height:auto;margin:10px 0;display:block}
 </style>
 <script src="flood-rid-source.js?v=20261006-rid-17" defer></script>
-<script src="flood-estate-dashboard.js?v=20261019-local-summary" defer></script>
+<script src="flood-estate-dashboard.js?v=20261020-gistda-overview" defer></script>
 <script src="flood-river-panel.js?v=20261006-overview6-61" defer></script>
 <script src="flood-weather-overview.js?v=20261006-svg-weather-37" defer></script>
 <style>.rp-forecast-toggle{cursor:pointer;padding:12px 16px;border-radius:10px;background:#e5effa;color:#003666;font-weight:700;font-size:16px}#rpForecastPanel[open] .rp-forecast-toggle{margin-bottom:12px}#rpRankingsAfterWarning .rp-new-section{margin:0 0 16px}</style><style>
@@ -172,7 +172,7 @@ outline:2px solid #0066b2!important;outline-offset:2px;
 <link rel="stylesheet" href="./disaster-mobile.css?v=20261007-plans54-mobile3">
 </head>
 <body>
-<div class="flood-executive-toolbar"><button type="button" id="floodExecutiveButton" aria-expanded="false" aria-controls="floodExecutivePop">สรุปนิคมฯ เฝ้าระวัง ▾</button></div>
+<header class="flood-executive-toolbar"><div class="flood-brand"><span class="flood-brand-icon" aria-hidden="true">≋</span><div><small>IEAT · EMCC GIS</small><h1>แดชบอร์ดสถานการณ์น้ำ</h1></div></div><nav class="flood-nav" aria-label="ส่วนข้อมูล"><button type="button" data-flood-section="overview" aria-current="true">ภาพรวม</button><button type="button" data-flood-section="map">แผนที่</button><button type="button" data-flood-section="stations">สถานีระดับน้ำ</button><button type="button" data-flood-section="dams">เขื่อนและอ่างเก็บน้ำ</button></nav><button type="button" id="floodExecutiveButton" aria-expanded="false" aria-controls="floodExecutivePop">สรุปนิคมฯ เฝ้าระวัง ▾</button></header>
 <div id="floodExecutivePop" class="disaster-executive-pop" role="dialog" aria-label="สรุปนิคมฯ และสถานการณ์น้ำ" hidden><iframe id="floodExecutiveFrame" title="สรุปนิคมตามพื้นที่ที่เลือก"></iframe></div>
 <main class="container"><section id="warning" aria-label="Dashboard สถานการณ์น้ำ"><div id="dashboardLoading" class="dashboard-loading" role="status">กำลังโหลดข้อมูลสถานการณ์น้ำ…</div><noscript>กรุณาเปิด JavaScript เพื่อใช้งาน dashboard</noscript></section></main>
 
@@ -668,8 +668,44 @@ body,#warning,#estateFocusDashboard{background:#f3f7fa!important}
   close();window.postMessage({type:'ieat-executive-map-focus',focus},location.origin);
  });
 })();
-</script></body>
+</script>
+<style id="flood-gistda-layout">
+html body{background:#f3f5f9!important}
+.flood-executive-toolbar{height:82px;padding:12px 24px;gap:24px;box-shadow:0 2px 12px #18284208;position:relative;z-index:20}
+.flood-brand{display:flex;align-items:center;gap:12px;margin-right:auto;color:#202d49}.flood-brand-icon{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:#1677bc;color:white;font-size:38px;line-height:1}.flood-brand small{font-size:10px;letter-spacing:2px;color:#718096}.flood-brand h1{font-size:21px;margin:0;line-height:1.5}
+.flood-nav{display:flex;gap:6px;align-self:stretch;align-items:center}.flood-nav button{border:0;background:transparent;padding:10px 13px;font:500 14px Sarabun,sans-serif;color:#66738b;border-radius:9px;cursor:pointer}.flood-nav button[aria-current=true]{background:#eaf3fc;color:#106db4;font-weight:700}
+#floodExecutiveButton{border-radius:10px;padding:11px 14px;background:#eaf3fc;color:#106db4;font-weight:600;white-space:nowrap}
+#estateFocusDashboard .ef-workspace{gap:20px!important;padding:20px!important;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)!important;background:#f3f5f9}
+#estateFocusDashboard .ef-data-column{padding:0 6px 0 0!important;background:transparent!important;scroll-behavior:smooth}
+#estateFocusDashboard .ef-map-column{border-radius:16px!important;overflow:hidden;position:relative}
+#estateFocusDashboard .ef-panel,#estateFocusDashboard #riverSidePanel,#estateFocusDashboard .today-panel{border:1px solid #e5eaf2!important;border-radius:14px!important;box-shadow:0 2px 8px #20355404!important}
+#estateFocusDashboard .ef-panel>h2,#estateFocusDashboard .rp-stations-title{background:transparent!important;border-left:0!important;border-bottom:1px solid #e9edf3!important;border-radius:0!important;padding:0 0 12px!important;color:#26364c!important;font-size:17px!important}
+.flood-overview{margin-bottom:18px}.flood-section-label{font-size:20px;font-weight:700;color:#26364c;margin:0 0 14px}.flood-section-label span{display:block;font-size:12px;font-weight:400;color:#768399;margin-top:4px}
+.flood-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.flood-kpi{font:inherit;text-align:left;display:flex;flex-direction:column;align-items:flex-start;min-width:0;border:1px solid #e4e9f1;border-radius:14px;padding:16px 13px;background:#fff;cursor:pointer;position:relative;overflow:hidden;transition:box-shadow .15s,transform .15s}.flood-kpi:before{content:"";height:4px;background:var(--kpi-color);position:absolute;top:0;left:0;right:0}.flood-kpi>span{font-size:13px;line-height:1.6;color:#52627a}.flood-kpi strong{font-size:29px;line-height:1.4;color:var(--kpi-color);margin:8px 0;overflow-wrap:anywhere}.flood-kpi small{font-size:11px;line-height:1.6;color:#7b8798}.flood-kpi:hover{transform:translateY(-2px);box-shadow:0 7px 18px #233b5412}.flood-kpi:focus-visible,.flood-nav button:focus-visible{outline:3px solid #2699c3;outline-offset:2px}
+#estateFocusDashboard #efProvinceScopeNote{background:#e9f1fb!important;font-size:12px;border-radius:10px!important;border-left:3px solid #2699c3;margin:0 0 18px!important}
+#estateFocusDashboard .ef-tools input,#estateFocusDashboard .ef-tools select{border:1px solid #dce3ef;border-radius:9px;padding:11px;font:inherit;min-width:0;background:#f9fbfe}
+@media(min-width:951px){html body main.container,html body #warning,html body #estateFocusDashboard{height:calc(100dvh - 82px)!important}#estateFocusDashboard .ef-workspace{height:100%!important}#estateFocusDashboard .ef-map-column{height:100%!important}}
+@media(max-width:1100px){.flood-executive-toolbar{gap:10px;padding:12px 16px}.flood-nav button{font-size:12px;padding:9px}.flood-brand h1{font-size:18px}}
+@media(max-width:950px){.flood-executive-toolbar{height:auto;flex-wrap:wrap;padding:12px}.flood-brand{flex:1}.flood-nav{order:3;width:100%;overflow-x:auto;white-space:nowrap}.flood-nav button{font-size:13px;flex-shrink:0}.flood-brand h1{font-size:18px}#estateFocusDashboard .ef-workspace{padding:10px!important;grid-template-columns:minmax(0,1fr)!important;gap:14px!important}#estateFocusDashboard .ef-map-column{width:100%!important;margin:0!important}#estateFocusDashboard .ef-data-column{padding:0!important}.flood-kpis{grid-template-columns:repeat(3,minmax(0,1fr))}.flood-kpi{padding:13px 10px}.flood-kpi strong{font-size:24px}#floodExecutivePop{top:120px}}
+@media(max-width:560px){.flood-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.flood-brand-icon{width:34px;height:38px;font-size:30px}.flood-brand{gap:8px}.flood-brand h1{font-size:16px}#floodExecutiveButton{font-size:11px;padding:9px}.flood-section-label{font-size:19px}}
+</style>
+<script>
+(function(){
+const nav=document.querySelector('.flood-nav');
+nav.addEventListener('click',function(event){
+ const button=event.target.closest('[data-flood-section]');if(!button)return;
+ const section=button.dataset.floodSection;
+ const selectors={overview:'.flood-overview',map:'.ef-map-column',stations:'#riverSidePanel',dams:'.ef-related-dams'};
+ const target=document.querySelector(selectors[section]);if(!target)return;
+ nav.querySelectorAll('button').forEach(b=>b.setAttribute('aria-current',String(b===button)));
+ target.scrollIntoView({behavior:'smooth',block:'start'});
+ if(section==='map'){const full=document.getElementById('efMapFullscreen');if(full&&full.getAttribute('aria-pressed')!=='true')full.click();}
+});
+})();
+</script>
+</body>
 </html>
+
 
 
 
