@@ -827,7 +827,7 @@ function mount(){const col=document.querySelector('.ef-data-column');if(!col||!$
 for(const id of ['efWatch','efTotal','efRainWatch','efWaterWatch'])new MutationObserver(schedule).observe($(id),{childList:true,subtree:true,characterData:true});document.addEventListener('ieat-flood-estate-scope',schedule);update();
 fetch('./data/thaiwater_latest.json?v='+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()}).then(d=>{source=d;schedule()}).catch(()=>{$('referenceRainBars').innerHTML='<p class="reference-empty">โหลดข้อมูลฝนไม่สำเร็จ</p>'});
 Promise.resolve(window.IEAT_RID?.load()).then(rows=>{water=Array.isArray(rows)?rows:[];schedule()}).catch(()=>{$('referenceWaterGauge').innerHTML='<p class="reference-empty">โหลดข้อมูลระดับน้ำไม่สำเร็จ</p>'});
-const frame=$('estateFocusMap');if(frame){const url=new URL(frame.getAttribute('src'),location.href);url.searchParams.set('dashboard','clean');url.searchParams.set('v','20261020-layer-popup');frame.src=url.href}return true}
+const frame=$('estateFocusMap');if(frame){const url=new URL(frame.getAttribute('src'),location.href);url.searchParams.set('dashboard','clean');url.searchParams.set('v','20261020-layer-popup-2');frame.src=url.href}return true}
 if(!mount()){const observer=new MutationObserver(()=>{if(mount())observer.disconnect()});observer.observe($('warning'),{childList:true,subtree:true})}
 })();
 </script>
