@@ -1,4 +1,26 @@
-<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dashboard แผ่นดินไหว</title><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script><style>*{box-sizing:border-box}body{margin:0;background:#fff;font-family:"Noto Sans Thai",sans-serif}button,select{font:inherit}</style></head><body>
+<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dashboard แผ่นดินไหว</title><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script><style>*{box-sizing:border-box}body{margin:0;background:#fff;font-family:"Noto Sans Thai",sans-serif}button,select{font:inherit}</style><style id="earthquake-reference-layout">
+html,body{height:100%;overflow:hidden}
+.eq-dashboard{display:grid;grid-template-columns:310px minmax(0,1fr);height:100dvh;margin:0;padding:0;gap:0;border:0;border-radius:0;box-shadow:none;overflow:hidden}
+.eq-sidebar{padding:14px 12px;overflow:auto;border-right:1px solid #dce0e4;background:#fff;min-height:0}
+.eq-top{display:block}.eq-top h1{font-size:18px}.eq-top p{font-size:11px;line-height:1.6}
+.eq-cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:12px 0}
+.eq-card{border:0;border-radius:0;padding:10px 5px;background:#ff9c2a;color:#fff;text-align:center;min-height:95px;display:flex;flex-direction:column;justify-content:space-between}
+.eq-card span{font-size:11px}.eq-card strong{font-size:25px}
+.eq-card:nth-child(2){background:#e64422}.eq-card:nth-child(3){background:#559a35}
+.eq-card:nth-child(4){grid-column:1/-1;background:#606060;min-height:65px}
+.eq-card:nth-child(4) strong{font-size:24px;margin-top:0}
+.eq-controls{display:grid;gap:10px;padding:12px 0;border-top:1px solid #e5e7eb;border-bottom:1px solid #e5e7eb}
+.eq-controls label{font-size:12px;display:grid;gap:4px}.eq-controls select{width:100%;min-width:0;border-radius:3px}
+.eq-controls button{border-radius:3px;background:#3949ab}
+.eq-status{font-size:11px;line-height:1.6}.eq-list{max-height:none;overflow:visible}.eq-list h2{font-size:13px;margin-top:16px}
+.eq-event{gap:8px;padding:12px 0;font-size:12px}.eq-event small{font-size:10px;line-height:1.6}.eq-mag{min-width:52px;padding:7px 4px}
+.eq-note{font-size:10px;line-height:1.7}
+.eq-map-area{position:relative;min-width:0;height:100%;overflow:hidden}
+.eq-map{width:100%;height:100%!important;border-radius:0}
+.eq-legend{position:absolute;bottom:24px;left:12px;right:12px;z-index:500;background:#fffffff2;border-radius:5px;padding:8px 10px;font-size:11px;pointer-events:none}
+.eq-map-fullscreen{position:absolute;right:12px;top:12px;z-index:500;border:1px solid #ddd;background:#fff;border-radius:4px;padding:7px 10px;cursor:pointer}
+@media(max-width:700px){html,body{height:auto;overflow:auto}.eq-dashboard{grid-template-columns:1fr;height:auto;overflow:visible}.eq-sidebar{border:0;overflow:visible}.eq-map-area{height:65dvh;min-height:350px;grid-row:1}.eq-cards{grid-template-columns:repeat(4,minmax(0,1fr))}.eq-card:nth-child(4){grid-column:auto;min-height:95px}.eq-map-fullscreen{font-size:12px}}
+</style></head><body>
 <style>
 .eq-dashboard{margin:12px 16px 20px;padding:18px;background:#fff;border:1px solid #e5e7eb;border-radius:14px;color:#404041;box-shadow:0 3px 18px #2a3a4b12}
 .eq-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.eq-top h1{font-size:20px;margin:0}.eq-top p,.eq-note{font-size:12px;color:#626970}.eq-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.eq-controls select,.eq-controls button{padding:8px 12px;border:1px solid #dfe4e9;border-radius:7px;background:#fff}.eq-controls button{background:#006400;color:#fff;cursor:pointer}
@@ -15,6 +37,16 @@
 <p class="eq-note">เวลาแสดงตามประเทศไทย (UTC+7) · ขนาดแผ่นดินไหวไม่ใช่ระดับความรุนแรงที่แต่ละพื้นที่ได้รับ · ฐานข้อมูล USGS อาจไม่ครอบคลุมเหตุการณ์ขนาดเล็กในไทยทั้งหมด · <a href="https://earthquake.tmd.go.th/" target="_blank" rel="noopener noreferrer">ตรวจสอบประกาศกรมอุตุนิยมวิทยา</a> · <a href="https://earthquake.usgs.gov/earthquakes/map/" target="_blank" rel="noopener noreferrer">USGS</a></p>
 </section>
 <script>
+(function(){
+const root=document.querySelector('.eq-dashboard'),top=root.querySelector('.eq-top'),cards=root.querySelector('.eq-cards'),controls=root.querySelector('.eq-controls'),status=root.querySelector('.eq-status'),content=root.querySelector('.eq-content'),list=root.querySelector('.eq-list'),note=root.querySelector('.eq-note'),area=content.firstElementChild;
+const sidebar=document.createElement('aside');sidebar.className='eq-sidebar';sidebar.setAttribute('aria-label','สรุปและตัวกรองแผ่นดินไหว');
+sidebar.append(top,cards,controls,status,list,note);area.className='eq-map-area';
+root.replaceChildren(sidebar,area);
+const button=document.createElement('button');button.type='button';button.className='eq-map-fullscreen';button.textContent='⛶';button.title='เปิดแผนที่เต็มจอ';button.setAttribute('aria-label','เปิดแผนที่เต็มจอ');
+button.onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await area.requestFullscreen();}catch(e){button.textContent='เบราว์เซอร์ไม่รองรับเต็มจอ';}};
+area.append(button);
+})();
+</script><script>
 (function(){
 const el=id=>document.getElementById(id);
 let map,group,controller,version=0;
