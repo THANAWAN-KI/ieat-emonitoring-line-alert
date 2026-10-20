@@ -120,7 +120,7 @@ window.addEventListener('ieat-support-map-ready',()=>requestAnimationFrame(overv
  const sub=document.createElement('p');sub.textContent='เลือกประเภทเหตุและค้นหาบริษัท เพื่อจัดทำรายงานในหน้านี้';
  heading.append(title,sub);
  frame.loading='lazy';frame.style.height='1800px';
- function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261020-selection-buffer-fix');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
+ function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261020-fire-palette');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
  frame.src=reportUrl();
  link.addEventListener('click',event=>{event.preventDefault();const url=reportUrl();if(frame.src!==url)frame.src=url;section.scrollIntoView({behavior:'smooth',block:'start'});});
  window.returnToRiskDashboard=function(){document.getElementById('otherPage').hidden=true;dashboard.hidden=false;document.querySelectorAll('.nav-tab').forEach(tab=>tab.classList.toggle('active',tab.dataset.page==='risk'));document.getElementById('riskMapSection')?.scrollIntoView({behavior:'smooth',block:'start'});window.dispatchEvent(new Event('resize'))};
@@ -1671,5 +1671,8 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard
 html body #dashboardExportFeedback a{background:#ff4025!important;color:#fff!important}
 html body #dashboardExportFeedback{background:#efefef!important;color:#4d4f53!important}
 html body #dashboardExportFeedback.export-error{background:#ffede9!important;color:#b12813!important}
+</style><style id="fire-theme-active-controls">
+html body .portal-disaster-tabs.portal-disaster-tabs .nav-tab[data-page="risk"].active{color:#3949ab!important;border-bottom-color:#3949ab!important}
+html body:has(#riskDashboard:not([hidden])) header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader .header-nav a:is(.nav-active,[aria-current="page"]){color:#3949ab!important;-webkit-text-fill-color:#3949ab!important}
 </style></body></html>
 
