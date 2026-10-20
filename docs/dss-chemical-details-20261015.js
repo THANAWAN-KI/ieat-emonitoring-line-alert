@@ -68,12 +68,12 @@ async function searchEpp(companyLookup){
  const hasChemicalMatches=!lookupOnly&&showChemicalMatches();
  if(term.length<2)return;
  const message=document.createElement('p');message.className='unified-company-status';message.textContent=hasChemicalMatches?'กำลังตรวจชื่อบริษัทเพิ่มเติม…':'กำลังค้นหาบริษัทและเลขทะเบียนจาก e_PP…';eppBox.append(message);search.setAttribute('aria-expanded','true');
- eppController=new AbortController();const controller=eppController,timeout=setTimeout(()=>controller.abort(),20000);
+ eppController=new AbortController();const controller=eppController,timeout=setTimeout(()=>controller.abort(),lookupOnly?30000:20000);
  try{
   const escaped=term.replace(/'/g,"''").replace(/[%_]/g,'');
   const fields=['ชื่อบริษัทภาษาไทย','ชื่อบริษัทภาษาอังกฤษ','เลขทะเบียนใหม่','เลขทะเบียนเดิม'];
   const estateTerm=(lookup?.estate||source.value)?String(lookup?.estate||source.selectedOptions[0]?.textContent||source.value).replace(/นิคมอุตสาหกรรม|นิคมฯ|สำนักงานนิคมฯ/g,'').trim().replace(/'/g,"''"):'';
-  const where="ชื่อบริษัทภาษาไทย IS NOT NULL AND ("+fields.map(field=>"UPPER("+field+") LIKE '%"+escaped.toUpperCase()+"%'").join(' OR ')+")"+(estateTerm?" AND นิคมอุตสาหกรรม LIKE '%"+estateTerm+"%'":"");
+  const where=(lookupOnly?"ชื่อบริษัทภาษาไทย = '"+escaped+"'":"ชื่อบริษัทภาษาไทย IS NOT NULL AND ("+fields.map(field=>"UPPER("+field+") LIKE '%"+escaped.toUpperCase()+"%'").join(' OR ')+")")+(estateTerm?" AND นิคมอุตสาหกรรม LIKE '%"+estateTerm+"%'":"");
   const params=new URLSearchParams({where,outFields:'*',returnGeometry:'true',outSR:'4326',orderByFields:'OBJECTID ASC',resultRecordCount:'50',f:'json'});
   const response=await fetch(eppUrl+'?'+params,{signal:controller.signal});if(!response.ok)throw Error('HTTP '+response.status);
   const result=await response.json();if(result.error)throw Error(result.error.message);
@@ -89,7 +89,7 @@ async function searchEpp(companyLookup){
   }
   render();
   if(unique.size===1&&(lookupOnly||!hasChemicalMatches))window.dispatchEvent(new CustomEvent('ieat-unified-company-select',{detail:{feature:unique.values().next().value}}));
- }catch(error){if(sequence!==eppSequence)return;message.textContent=hasChemicalMatches?'พบข้อมูลสารเคมีใน DSS ตามรายการด้านบน · ขณะนี้เชื่อมต่อข้อมูลบริษัทเพิ่มเติมไม่ได้':'ค้นหา e_PP ไม่สำเร็จ · ยังแสดงผลจากรายงานสารเคมีได้ กรุณาลองพิมพ์ค้นหาอีกครั้ง';}
+ }catch(error){if(sequence!==eppSequence)return;if(lookupOnly){eppBox.replaceChildren();showChemicalMatches();eppBox.append(message)}message.textContent=lookupOnly?'พบข้อมูลสารเคมีของ '+term+' แต่เชื่อมต่อตำแหน่งโรงงานไม่สำเร็จ กรุณาเลือกโรงงานอีกครั้ง':hasChemicalMatches?'พบข้อมูลสารเคมีใน DSS ตามรายการด้านบน · ขณะนี้เชื่อมต่อข้อมูลบริษัทเพิ่มเติมไม่ได้':'ค้นหา e_PP ไม่สำเร็จ · ยังแสดงผลจากรายงานสารเคมีได้ กรุณาลองพิมพ์ค้นหาอีกครั้ง';}
  finally{clearTimeout(timeout)}
 }
 function dismissCompanySuggestions(){
