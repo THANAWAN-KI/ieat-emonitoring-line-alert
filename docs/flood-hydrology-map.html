@@ -124,7 +124,15 @@ body.toolbar-above:has(.leaflet-popup) .controls,body.toolbar-above:has(.maplibr
 .station-search-status{font-size:11px;color:#60798e;line-height:1.5}
 </style>
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script><script src="flood-estate-diagrams.js?v=20261007-plans54-mobile3"></script><script src="flood-estate-plans-2569.js?v=20261007-plans54-mobile3"></script><style>.maplibregl-popup-content:has(.fp-estate),.leaflet-popup-content:has(.fp-estate){max-height:min(70vh,600px);overflow-y:auto;overscroll-behavior:contain}</style><link rel="stylesheet" href="./disaster-mobile.css?v=20261007-plans54-mobile3">
-</head>
+<style id="clean-dashboard-map-style">
+body.dashboard-clean .sensor-marker,body.dashboard-clean .marker-icon,body.dashboard-clean .estate-pin{width:8px!important;height:8px!important;border:1px solid #FFFFFF!important;border-radius:50%!important;box-shadow:none!important;padding:0!important;min-width:0!important;min-height:0!important}
+body.dashboard-clean .estate-pin{background:#ED1B2E!important}
+body.dashboard-clean .sensor-marker svg,body.dashboard-clean .marker-icon svg,body.dashboard-clean .estate-pin svg,body.dashboard-clean .estate-pin .estate-name{display:none!important}
+body.dashboard-clean .controls{top:12px!important;right:12px!important;left:auto!important}
+body.dashboard-clean .controls summary{font-size:11px!important;color:#6D6E70!important}
+body.dashboard-clean .controls .layer-menu,body.dashboard-clean .controls .legend{width:145px;box-shadow:0 3px 14px #00000010;border:0}
+body.dashboard-clean .controls:has(.layer-menu:not([open])){background:transparent!important}
+</style></head>
 <body><div id="mapStage"><div id="map" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div><div id="raster" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div></div>
 <button id="mapCompass" type="button" aria-label="ปรับแผนที่ให้ทิศเหนืออยู่ด้านบน" title="ปรับทิศเหนือและมุมมองให้ตรง"><span>N</span><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M12 2 20 25 12 20 4 25Z" fill="#52057f"/><path d="M12 2V20L4 25Z" fill="#b79aca"/></svg></button><div class="controls"><details class="layer-menu" id="mapLayers"><summary>เลเยอร์</summary><div class="layer-body"><div class="search"><select id="province" aria-label="เลือกจังหวัดในแผนที่"><option value="">ทั่วประเทศ</option></select><label for="waterStationSearch" class="station-search-label">ค้นหาสถานีระดับน้ำทั่วประเทศ</label><input id="waterStationSearch" type="search" placeholder="ชื่อสถานี / รหัสสถานี / จังหวัด" autocomplete="off" aria-controls="waterStationResults"><div id="waterStationResults" class="station-search-results" aria-label="ผลค้นหาสถานี"></div><small id="waterStationSearchStatus" class="station-search-status">ค้นหาจากสถานีทั่วประเทศ</small></div>
 <button type="button" class="fp-open" data-flood-plan="nong-lalok">ผังรับมือน้ำท่วม 53 พื้นที่ / 54 ผัง ↗</button><div class="toggles" aria-label="ชั้นข้อมูล">
@@ -161,6 +169,9 @@ function safeOverlayUrl(v){const u=new URL(v,faonamBase);if(u.origin!==faonamBas
 
 $('mapCompass').onclick=()=>{if(vector)vector.resetNorthPitch({duration:450});else if(raster){raster.invalidateSize();$('mapCompass').title='แผนที่ 2 มิติแสดงทิศเหนือด้านบนอยู่แล้ว';}};
 const flags={canal:true,water:true,rings:true,flow:true,dam:true,camera:true,estate:true,gistda:false,boundary:true,satellite:true,radar:true};
+const cleanDashboard=new URLSearchParams(location.search).get('dashboard')==='clean';
+if(cleanDashboard){Object.assign(flags,{canal:false,water:false,rings:false,flow:false,dam:false,camera:false,estate:true,boundary:false,satellite:true,radar:false});document.body.classList.add('dashboard-clean');document.querySelectorAll('[data-layer]').forEach(input=>input.checked=!!flags[input.dataset.layer]);}
+
 let historyOnly=false;
 function date(v){let s=String(v||'').replace(' ','T');if(/^\d{4}-\d{2}-\d{2}$/.test(s))s+='T00:00:00';if(s&&!/(Z|[+-]\d{2}:?\d{2})$/.test(s))s+='+07:00';return Date.parse(s)}
 function old(r,k){if(k==='estate'||k==='camera')return false;const a=Date.now()-date(r.measured_at);return !Number.isFinite(a)||a< -300000||a>(k==='dam'?72:6)*3600000||Boolean(r.stale)}
@@ -305,6 +316,7 @@ function render(){
   cameraMarkers.forEach(m=>m.remove());cameraMarkers=[];list.filter(f=>f.properties.kind==='camera').forEach(f=>{const r=f.properties,el=document.createElement('div');el.className='marker-icon';el.tabIndex=0;el.setAttribute('aria-label',r.name);el.style.background=r.color;el.innerHTML=cameraSvg;const popup=new maplibregl.Popup({maxWidth:'350px'}).setHTML(content(r,'camera'));popup.on('open',()=>loadCameraImage(r));cameraMarkers.push(new maplibregl.Marker({element:el}).setLngLat(f.geometry.coordinates).setPopup(popup).addTo(vector))});
   damMarkers.forEach(m=>m.remove());damMarkers=[];list.filter(f=>f.properties.kind==='dam').forEach(f=>{const r=f.properties,el=document.createElement('div');el.className='marker-icon';el.tabIndex=0;el.setAttribute('aria-label',r.name);el.style.background=r.color;el.innerHTML=damSvg+'<span class="estate-name dam-name">เขื่อน'+esc(r.name)+'</span>';el.style.position='absolute';damMarkers.push(new maplibregl.Marker({element:el}).setLngLat(f.geometry.coordinates).setPopup(new maplibregl.Popup({maxWidth:'330px'}).setHTML(content(r,'dam'))).addTo(vector))});
   estateMarkers.forEach(m=>m.remove());estateMarkers=[];list.filter(f=>f.properties.kind==='estate').forEach(f=>{const el=document.createElement('div');el.className='estate-pin';el.tabIndex=0;el.setAttribute('aria-label',f.properties.name);el.innerHTML=estateSvg+'<span class="estate-name">'+esc(f.properties.name)+'</span>';estateMarkers.push(new maplibregl.Marker({element:el,anchor:'bottom'}).setLngLat(f.geometry.coordinates).setPopup(new maplibregl.Popup({maxWidth:'330px'}).setHTML(content(f.properties,'estate'))).addTo(vector))});
+  if(cleanDashboard){if(vector.getLayer('water-stations'))vector.setPaintProperty('water-stations','circle-radius',3.5);for(const id of ['water-station-symbol','labels','overflow-alert'])if(vector.getLayer(id))vector.setLayoutProperty(id,'visibility','none');}
   vector.getSource('sensors')?.setData({type:'FeatureCollection',features:list});
   vector.setLayoutProperty('discharge-ring','visibility',flags.rings?'visible':'none');
   ['mapped-waterway-casing','mapped-waterways','mapped-water-motion','flow-arrows'].forEach(id=>{if(vector.getLayer(id))vector.setLayoutProperty(id,'visibility',flags.flow?'visible':'none')});
@@ -314,7 +326,7 @@ function render(){
   list.forEach(f=>{const r=f.properties,k=r.kind;
    if(k==='water'&&flags.rings&&r.discharge!=null&&r.discharge>0&&!r.stale)L.circleMarker([r.lat,r.lng],{radius:Math.min(22,4+Math.sqrt(r.discharge)*.25),color:r.diff>=0?'#dc2626':'#319bd0',weight:2,fillColor:r.diff>=0?'#ef4444':'#69b9df',className:r.diff>=0?'water-critical':'',fillOpacity:.12,interactive:false}).addTo(groups.rings);
    if(k==='water'&&r.diff>=0&&!r.stale&&(!flags.rings||!(r.discharge>0)))L.circleMarker([r.lat,r.lng],{radius:11,color:'#dc2626',weight:1.5,fillColor:'#ef4444',fillOpacity:.1,interactive:false,className:'water-critical'}).addTo(groups.rings);
-   const marker=['water','canal'].includes(k)?L.marker([r.lat,r.lng],{zIndexOffset:500,icon:L.divIcon({className:'',iconSize:[32,32],iconAnchor:[16,16],html:'<span class="sensor-marker'+(k==='canal'?' canal-sensor':'')+'" style="background:'+r.color+'">'+sensorSvg(k)+'</span>'})}):k==='camera'?L.marker([r.lat,r.lng],{icon:L.divIcon({className:'',iconSize:[32,32],iconAnchor:[16,16],html:'<span class="marker-icon" style="background:'+r.color+'">'+cameraSvg+'</span>'})}):k==='estate'?L.marker([r.lat,r.lng],{icon:L.divIcon({className:'estate-pin',iconSize:[30,39],iconAnchor:[15,39],tooltipAnchor:[0,4],html:estateSvg})}):k==='dam'?L.marker([r.lat,r.lng],{icon:L.divIcon({className:'',iconSize:[32,32],iconAnchor:[16,16],html:'<span class="marker-icon" style="background:'+r.color+'">'+damSvg+'</span>'})}):L.circleMarker([r.lat,r.lng],{radius:k==='dam'?8:k==='estate'?5:5,color:'#fff',weight:1.8,fillColor:r.color,fillOpacity:.95,className:r.color==='#d9364d'?'water-critical':''});
+   const marker=cleanDashboard&&k!=='camera'?L.circleMarker([r.lat,r.lng],{radius:k==='estate'?4:3.5,color:'#FFFFFF',weight:1,fillColor:k==='estate'?'#ED1B2E':r.color,fillOpacity:.95}):['water','canal'].includes(k)?L.marker([r.lat,r.lng],{zIndexOffset:500,icon:L.divIcon({className:'',iconSize:[32,32],iconAnchor:[16,16],html:'<span class="sensor-marker'+(k==='canal'?' canal-sensor':'')+'" style="background:'+r.color+'">'+sensorSvg(k)+'</span>'})}):k==='camera'?L.marker([r.lat,r.lng],{icon:L.divIcon({className:'',iconSize:[32,32],iconAnchor:[16,16],html:'<span class="marker-icon" style="background:'+r.color+'">'+cameraSvg+'</span>'})}):k==='estate'?L.marker([r.lat,r.lng],{icon:L.divIcon({className:'estate-pin',iconSize:[30,39],iconAnchor:[15,39],tooltipAnchor:[0,4],html:estateSvg})}):k==='dam'?L.marker([r.lat,r.lng],{icon:L.divIcon({className:'',iconSize:[32,32],iconAnchor:[16,16],html:'<span class="marker-icon" style="background:'+r.color+'">'+damSvg+'</span>'})}):L.circleMarker([r.lat,r.lng],{radius:k==='dam'?8:k==='estate'?5:5,color:'#fff',weight:1.8,fillColor:r.color,fillOpacity:.95,className:r.color==='#d9364d'?'water-critical':''});
    marker.bindTooltip(k==='water'?esc(waterLabel(r)).replace(/\n/g,'<br>'):esc(k==='dam'?'เขื่อน'+r.name:r.name),k==='water'?{permanent:false,direction:'top',className:'water-map-label',offset:[0,-12]}:['estate','dam'].includes(k)?{permanent:false,direction:'top',className:k==='dam'?'estate-label dam-name':'estate-label'}:{}).addTo(groups.points);marker.bindPopup(content(r,k));if(k==='camera')marker.on('popupopen',()=>loadCameraImage(r));
   });
   if(gistda&&flags.gistda)L.geoJSON(gistda,{style:{color:'#268fbf',weight:1,fillOpacity:.16},onEachFeature:(f,l)=>l.bindPopup('GISTDA · '+esc(f.properties?.file_name)+'<br>ตรวจสอบวันที่ภาพที่ต้นทาง')}).addTo(groups.gistda);
@@ -630,6 +642,7 @@ document.addEventListener('visibilitychange',()=>{if(!document.hidden&&(!lastWat
 
 })();
 </script></body></html>
+
 
 
 
