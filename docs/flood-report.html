@@ -724,7 +724,7 @@ html body{background:#f3f5f9!important}
 <script id="flood-screen-fit-script">
 (()=>{
  const desktop=matchMedia('(min-width:951px)');let mode='overview',page=0,queued=false;
- const definitions={overview:['ภาพรวม'],estates:['นิคมฯ / ท่าเรือ','.ef-estate-panel','#efEstates',2],stations:['สถานีระดับน้ำ','.rp-stations','#rpCards',2],rivers:['สายน้ำหลัก','#rpMainRiver','#rpMainGraph'],history:['ระดับน้ำย้อนหลัง','#rpHistoryPanel'],weather:['สภาพอากาศ','#floodWeatherOverview'],forecast:['พยากรณ์อากาศ 7 วัน','#floodWeatherOverview'],waterforecast:['คาดการณ์น้ำ 1–5 วัน','#rpForecastPanel'],dams:['เขื่อนที่เกี่ยวข้อง','.ef-related-dams','#efRelatedDams',1],reservoirs:['อ่างเก็บน้ำ','.ef-reservoir-panel','#efReservoirList',3],canals:['คลอง กทม.','.ef-canal-panel','#efCanalList',1],warnings:['พื้นที่เฝ้าระวัง 24 / 48 ชม.','.ef-warning'],rankings:['อันดับการระบายและการไหล','#rpRankingsAfterWarning']};
+ const definitions={overview:['ภาพรวม'],estates:['นิคมฯ / ท่าเรือ','.ef-estate-panel','#efEstates',2],stations:['สถานีระดับน้ำ','.rp-stations','#rpCards',2],rivers:['สายน้ำหลัก','#rpMainRiver','#rpMainGraph'],history:['ระดับน้ำย้อนหลัง','#rpHistoryPanel'],weather:['สภาพอากาศ','#floodWeatherOverview'],forecast:['พยากรณ์อากาศ 7 วัน','#floodWeatherOverview'],waterforecast:['คาดการณ์น้ำ 1–5 วัน','#rpForecastPanel'],dams:['เขื่อนที่เกี่ยวข้อง','.ef-related-dams','#efRelatedDams',1],reservoirs:['อ่างเก็บน้ำ','.ef-reservoir-panel','#efReservoirList',3],canals:['คลอง กทม.','.ef-canal-panel','#efCanalList',1],warnings:['พื้นที่เฝ้าระวัง 24 ชม.','.ef-warning','#efWarning24',1],warnings48:['พื้นที่เฝ้าระวัง 48 ชม.','.ef-warning','#efWarning48',1],rankings:['จุดวัดที่น้ำไหลผ่านมากที่สุด','#rpRankingsAfterWarning','#rpFlowRanks',3],damrank:['เขื่อนที่ปล่อยน้ำมากที่สุด','#rpRankingsAfterWarning','#rpDamRanks',3]};
  const get=s=>document.querySelector(s);
  function refresh(){queued=false;const col=get('.ef-data-column');if(!col)return;
  let controls=get('.fit-controls');if(!controls){controls=document.createElement('div');controls.className='fit-controls';controls.innerHTML='<select aria-label="เลือกหมวดข้อมูลแบบเต็มจอ">'+Object.entries(definitions).map(([key,d])=>'<option value="'+key+'">'+d[0]+'</option>').join('')+'</select><button type="button" data-fit-step="-1" aria-label="รายการก่อนหน้า">‹</button><span class="fit-page" aria-live="polite"></span><button type="button" data-fit-step="1" aria-label="รายการถัดไป">›</button>';col.prepend(controls);controls.querySelector('select').onchange=e=>select(e.target.value);controls.addEventListener('click',e=>{const b=e.target.closest('[data-fit-step]');if(b){page+=Number(b.dataset.fitStep);refresh()}})}
@@ -733,7 +733,7 @@ html body{background:#f3f5f9!important}
  col.dataset.fitMode=mode;col.classList.toggle('fit-overview',mode==='overview');controls.querySelector('select').value=mode;
  function activate(el){if(!el)return;el.classList.add('fit-active');if(el.parentElement===river)river.classList.add('fit-active')}
  const d=definitions[mode];if(mode==='overview'){['.flood-overview','#efProvinceScopeNote','.ef-estate-panel'].forEach(s=>activate(get(s)))}else if(mode==='rivers'){activate(get('#rpMainRiver')?.closest('.rp-new-section'))}else activate(get(d[1]));if(mode==='waterforecast'){const panel=get('#rpForecastPanel');if(panel)panel.open=true}
- let list=d[2]?get(d[2]):null;let size=d[3]||0;let pages=1;
+ if(mode==='warnings'||mode==='warnings48'){for(const id of ['efDetails24','efDetails48']){const el=document.getElementById(id);if(el){el.open=true;if(desktop.matches&&id!==(mode==='warnings'?'efDetails24':'efDetails48'))el.dataset.fitHidden=''}}}if(mode==='rankings'||mode==='damrank'){const other=get(mode==='rankings'?'#rpDamRanks':'#rpFlowRanks')?.closest('.rp-new-section');if(desktop.matches&&other)other.dataset.fitHidden=''}let list=d[2]?get(d[2]):null;let size=d[3]||0;let pages=1;
  if(size&&list){const items=[...list.children].filter(el=>!el.matches('p,small'));pages=Math.max(1,Math.ceil(items.length/size));page=Math.max(0,Math.min(page,pages-1));if(desktop.matches)items.forEach((el,i)=>{if(i<page*size||i>=(page+1)*size)el.dataset.fitHidden=''})}
  controls.querySelector('.fit-page').textContent=size?(page+1)+' / '+pages:'';controls.querySelectorAll('button').forEach(b=>{b.hidden=!size;b.disabled=Number(b.dataset.fitStep)<0?page===0:page>=pages-1});
  if(desktop.matches)col.scrollTop=0;
@@ -741,8 +741,8 @@ html body{background:#f3f5f9!important}
  function select(next){mode=next;page=0;refresh();const nav=get('.flood-nav');nav?.querySelectorAll('button').forEach(b=>b.setAttribute('aria-current',String(b.dataset.floodSection===({stations:'stations',rivers:'stations',history:'stations',dams:'dams',reservoirs:'dams',canals:'dams'}[mode]||'overview'))))}
  function schedule(){if(!queued){queued=true;requestAnimationFrame(refresh)}}
  const watcher=new MutationObserver(records=>{if(records.some(r=>r.type==='childList'&&!r.target.closest?.('.fit-controls')))schedule()});watcher.observe(document.getElementById('warning'),{childList:true,subtree:true});
- document.querySelector('.flood-nav').addEventListener('click',e=>{if(!desktop.matches)return;const b=e.target.closest('[data-flood-section]');if(!b)return;e.stopImmediatePropagation();if(b.dataset.floodSection==='map'){document.getElementById('efMapFullscreen')?.click();return}select(b.dataset.floodSection)},true);
- document.addEventListener('click',e=>{if(!desktop.matches)return;const card=e.target.closest('[data-ef-card]');if(card)select(['ef24','ef48'].includes(card.dataset.efCard)?'warnings':'estates')},true);
+ document.querySelector('.flood-nav').addEventListener('click',e=>{const b=e.target.closest('[data-flood-section]');if(!b)return;if(!desktop.matches){const target=get({overview:'.flood-overview',stations:'#riverSidePanel',dams:'.ef-related-dams',map:'.ef-map-column'}[b.dataset.floodSection]);target?.scrollIntoView({behavior:'smooth',block:'start'});return}e.stopImmediatePropagation();if(b.dataset.floodSection==='map'){document.getElementById('efMapFullscreen')?.click();return}select(b.dataset.floodSection)},true);
+ document.addEventListener('click',e=>{if(!desktop.matches)return;const card=e.target.closest('[data-ef-card]');if(card)select(card.dataset.efCard==='ef24'?'warnings':card.dataset.efCard==='ef48'?'warnings48':'estates')},true);
  desktop.addEventListener('change',schedule);window.addEventListener('resize',schedule);schedule();
 })();
 </script>
@@ -760,7 +760,7 @@ html body,html body #estateFocusDashboard,html body #estateFocusDashboard input,
 @media(min-width:951px){html body main.container,html body #warning,html body #estateFocusDashboard{height:calc(100dvh - 54px)!important}}
 @media(max-width:950px){.flood-executive-toolbar{height:auto!important;min-height:54px}.flood-nav{order:0;width:auto;flex:1}}
 </style>
-</body>
+<style>@media(min-width:951px){#warning #estateFocusDashboard .ef-data-column.fit-overview>.ef-estate-panel.fit-active{flex:none!important}#warning #estateFocusDashboard .rp-card[aria-pressed="true"]{outline:none!important}} </style></body>
 </html>
 
 
