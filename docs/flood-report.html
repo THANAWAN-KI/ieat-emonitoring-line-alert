@@ -173,7 +173,7 @@ outline:2px solid #0066b2!important;outline-offset:2px;
 </head>
 <body>
 
-<section id="floodInlineSummary" aria-label="นิคมฯ กับสายน้ำและเขื่อนใกล้เคียง"><iframe id="floodExecutiveFrame" title="นิคมฯ กับสายน้ำและเขื่อนใกล้เคียง" src="./flood-executive.html?embed=1&amp;v=20261020-remove-watch"></iframe></section>
+
 <main class="container"><section id="warning" aria-label="Dashboard สถานการณ์น้ำ"><div id="dashboardLoading" class="dashboard-loading" role="status">กำลังโหลดข้อมูลสถานการณ์น้ำ…</div><noscript>กรุณาเปิด JavaScript เพื่อใช้งาน dashboard</noscript></section></main>
 
 
@@ -616,21 +616,7 @@ body,#warning,#estateFocusDashboard{background:#f3f7fa!important}
 #floodExecutivePop{z-index:3000;top:54px;max-height:calc(100dvh - 68px)}
 #floodExecutivePop iframe{height:min(75dvh,680px)}
 </style>
-<script id="flood-executive-summary-bridge">
-(()=>{
-const frame=document.getElementById('floodExecutiveFrame');let selected='';
-function scope(){frame.contentWindow?.postMessage({type:'ieat-executive-estate',name:selected},location.origin)}
-frame.addEventListener('load',scope);
-window.addEventListener('message',event=>{
- if(event.origin!==location.origin)return;
- if(event.source===window.parent&&event.data?.type==='ieat-flood-estate'){selected=event.data.name||'';scope();return}
- if(event.source!==frame.contentWindow)return;
- if(event.data?.type==='ieat-executive-ready'){scope();return}
- if(event.data?.type==='ieat-executive-height'){frame.style.height=Math.max(280,Math.min(1800,Number(event.data.height)||650))+'px';return}
- const focus=event.data?.focus;if(event.data?.type==='ieat-executive-open-map'&&focus?.type==='flood-map-focus'&&Number.isFinite(Number(focus.lat))&&Number.isFinite(Number(focus.lon)))window.postMessage({type:'ieat-executive-map-focus',focus},location.origin);
-});
-})();
-</script>
+
 <style id="flood-gistda-layout">
 html body{background:#f3f5f9!important}
 .flood-executive-toolbar{height:82px;padding:12px 24px;gap:24px;box-shadow:0 2px 12px #18284208;position:relative;z-index:20}
@@ -934,9 +920,7 @@ html body #warning #estateFocusDashboard #floodInlineSummary{display:block!impor
 #floodInlineSummary iframe{display:block;width:100%;height:650px;border:0}
 @media(max-width:950px){html body main.container,html body #warning,html body #estateFocusDashboard{height:auto!important;min-height:100dvh!important}}
 </style>
-<script id="flood-summary-before-overview-script">
-(()=>{function mount(){const col=document.querySelector('.ef-data-column'),section=document.getElementById('floodInlineSummary');if(!col||!section)return false;col.prepend(section);return true}if(!mount()){const observer=new MutationObserver(()=>{if(mount())observer.disconnect()});observer.observe(document.getElementById('warning'),{childList:true,subtree:true})}})();
-</script>
+
 <style id="flood-deduplicate-layout">
 html body #warning #estateFocusDashboard #floodReferenceBoard{height:auto!important;min-height:0!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-rows:repeat(2,310px)!important}
 @media(max-width:650px){html body #warning #estateFocusDashboard #floodReferenceBoard{grid-template-rows:repeat(2,300px)!important}}
