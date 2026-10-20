@@ -140,7 +140,7 @@ outline:2px solid #0066b2!important;outline-offset:2px;
 </style>
 <script src="flood-rid-source.js?v=20261006-rid-17" defer></script>
 <script src="flood-estate-dashboard.js?v=20261020-card-rows" defer></script>
-<script src="flood-river-panel.js?v=20261020-diagram-station-focus" defer></script>
+<script src="flood-river-panel.js?v=20261020-restore-history" defer></script>
 <script src="flood-weather-overview.js?v=20261006-svg-weather-37" defer></script>
 <style>.rp-forecast-toggle{cursor:pointer;padding:12px 16px;border-radius:10px;background:#e5effa;color:#003666;font-weight:700;font-size:16px}#rpForecastPanel[open] .rp-forecast-toggle{margin-bottom:12px}#rpRankingsAfterWarning .rp-new-section{margin:0 0 16px}</style><style>
 #estateFocusDashboard .ef-warning{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
@@ -857,7 +857,7 @@ function support(element,title,order){if(!element||element.parentElement.classLi
 function sync(){pending=false;const col=document.querySelector('.ef-data-column');if(!col)return;
 const stations=document.querySelector('.rp-stations');if(stations){stations.id='floodStationsSection';const title=stations.querySelector('.rp-stations-title');if(title&&title.textContent!=='สถานีระดับน้ำ')title.textContent='สถานีระดับน้ำ';}
 let dams=document.getElementById('floodDamsSection');if(!dams){dams=document.createElement('section');dams.id='floodDamsSection';dams.setAttribute('aria-label','เขื่อนและอ่างเก็บน้ำ');dams.innerHTML='<h2>เขื่อนและอ่างเก็บน้ำ</h2>';col.append(dams)}for(const selector of ['.ef-related-dams','.ef-reservoir-panel']){const panel=col.querySelector(selector);if(panel&&panel.parentElement!==dams)dams.append(panel)}
-const ranks=document.getElementById('rpRankingsAfterWarning');if(ranks&&ranks.style.order!=='35')ranks.style.order='35';support(document.getElementById('floodWeatherOverview'),'สภาพอากาศและพยากรณ์ 7 วัน',40);support(document.getElementById('rpHistoryPanel'),'ระดับน้ำย้อนหลัง',45);
+const ranks=document.getElementById('rpRankingsAfterWarning');if(ranks&&ranks.style.order!=='35')ranks.style.order='35';support(document.getElementById('floodWeatherOverview'),'สภาพอากาศและพยากรณ์ 7 วัน',40);
 const mainRiver=document.getElementById('rpMainRiver')?.closest('.rp-new-section');if(mainRiver){mainRiver.id='floodWaterDiagram';if(mainRiver.parentElement!==col)col.append(mainRiver);if(mainRiver.style.order!=='1')mainRiver.style.order='1';const title=mainRiver.querySelector('h3');if(title&&title.textContent!=='ผังน้ำและสถานีตามสายน้ำ')title.textContent='ผังน้ำและสถานีตามสายน้ำ';}const forecast=document.getElementById('rpForecastPanel');if(forecast)forecast.style.order='46';
 const button=document.getElementById('efMapFullscreen'),map=document.querySelector('.ef-map-column');if(button&&map&&!buttonReady){buttonReady=true;map.append(button);function paint(){const expanded=button.getAttribute('aria-pressed')==='true';button.setAttribute('aria-label',expanded?'ย่อแผนที่':'ขยายแผนที่เต็มหน้าจอ');button.title=expanded?'ย่อแผนที่':'ขยายแผนที่เต็มหน้าจอ';if(!button.querySelector('svg'))button.innerHTML=icon}new MutationObserver(paint).observe(button,{childList:true,attributes:true,attributeFilter:['aria-pressed']});paint();}
 }
@@ -914,7 +914,13 @@ html body #warning #estateFocusDashboard .ef-workspace{grid-template-columns:min
 html body #warning #estateFocusDashboard .ef-data-column{padding-right:0!important;min-width:0!important}
 html body #warning #estateFocusDashboard .ef-map-column{min-width:0!important;width:100%!important}
 }
-</style></body>
+</style><style id="flood-station-history-visible">
+html body #warning #estateFocusDashboard #floodStationHistory{display:block!important;order:11!important;background:#FFFFFF;border-radius:14px;padding:18px;min-width:0;flex:none}
+#floodStationHistory h3{font:500 15px Sarabun,sans-serif;margin:0 0 12px;color:#000000}
+.station-history-controls{display:flex;gap:12px;align-items:end}.station-history-controls label{display:block;font-size:12px;min-width:0}.station-history-controls label:first-child{flex:1}.station-history-controls select{display:block;width:100%;padding:9px;border:1px solid #D7D7D8;border-radius:8px;background:#FFFFFF;color:#000000;font:400 12px Sarabun,sans-serif;margin:5px 0 12px}
+#floodStationHistory .wh-chart{width:100%;overflow:auto}#floodStationHistory .wh-chart svg{display:block;width:100%;min-width:500px;height:auto;max-height:none}#floodStationHistory svg text{font:11px Sarabun,sans-serif;fill:#6D6E70}
+#floodStationHistory .station-history-source{font:400 11px/1.65 Sarabun,sans-serif;color:#6D6E70}#floodStationHistory .station-history-name{font-size:12px;color:#000000}
+</style><script src="flood-station-history.js?v=20261020-restore-history" defer></script></body>
 </html>
 
 
