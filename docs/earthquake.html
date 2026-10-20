@@ -1,0 +1,65 @@
+<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dashboard แผ่นดินไหว</title><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script><style>*{box-sizing:border-box}body{margin:0;background:#fff;font-family:"Noto Sans Thai",sans-serif}button,select{font:inherit}</style></head><body>
+<style>
+.eq-dashboard{margin:12px 16px 20px;padding:18px;background:#fff;border:1px solid #e5e7eb;border-radius:14px;color:#404041;box-shadow:0 3px 18px #2a3a4b12}
+.eq-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.eq-top h1{font-size:20px;margin:0}.eq-top p,.eq-note{font-size:12px;color:#626970}.eq-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.eq-controls select,.eq-controls button{padding:8px 12px;border:1px solid #dfe4e9;border-radius:7px;background:#fff}.eq-controls button{background:#006400;color:#fff;cursor:pointer}
+.eq-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:16px 0}.eq-card{padding:14px;border-radius:10px;background:#f7f8fa;border-top:4px solid #006400}.eq-card:nth-child(2){border-color:#ff9c2a}.eq-card:nth-child(3){border-color:#ff4025}.eq-card:nth-child(4){border-color:#3949ab}.eq-card span{font-size:13px;display:block}.eq-card strong{font-size:28px;display:block;margin-top:6px}
+.eq-content{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(320px,1fr);gap:14px}.eq-map{height:510px;border-radius:10px;background:#eef3f6}.eq-list{max-height:510px;overflow:auto}.eq-list h2{font-size:16px;margin:0 0 10px}.eq-event{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:#fff;border:0;border-bottom:1px solid #e5e7eb;padding:12px 6px;cursor:pointer;color:#404041}.eq-event:hover,.eq-event:focus{background:#f1f5fa}.eq-mag{border-radius:8px;padding:8px;min-width:60px;color:#fff;text-align:center;font-weight:700}.eq-event small{display:block;margin-top:5px;color:#626970}.eq-status{font-size:12px;margin:10px 0;min-height:20px}.eq-legend{font-size:12px;margin-top:10px}.eq-legend span{margin-right:12px}
+@media(max-width:800px){.eq-dashboard{margin:10px;padding:12px}.eq-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.eq-content{grid-template-columns:1fr}.eq-map{height:380px}}
+</style>
+<section class="eq-dashboard" aria-label="Dashboard แผ่นดินไหว">
+<div class="eq-top"><div><h1>Dashboard สถานการณ์แผ่นดินไหว</h1><p>ประเทศไทยและภูมิภาคใกล้เคียง · ขอบเขต 0–30°N, 90–110°E · แหล่งข้อมูล USGS</p></div>
+<div class="eq-controls"><label>ช่วงเวลา <select id="eq-period"><option value="1">24 ชั่วโมง</option><option value="7" selected>7 วัน</option><option value="30">30 วัน</option></select></label><label>ขนาด <select id="eq-min"><option value="0">ทุกขนาดที่มีในฐานข้อมูล</option><option value="3">M ≥ 3</option><option value="4">M ≥ 4</option><option value="5">M ≥ 5</option></select></label><button id="eq-refresh" type="button">อัปเดตข้อมูล</button></div></div>
+<div class="eq-cards"><div class="eq-card"><span>เหตุการณ์ในช่วงที่เลือก (ครั้ง)</span><strong id="eq-total">–</strong></div><div class="eq-card"><span>ขนาดสูงสุด (M)</span><strong id="eq-max">–</strong></div><div class="eq-card"><span>ขนาดตั้งแต่ M 4 (ครั้ง)</span><strong id="eq-large">–</strong></div><div class="eq-card"><span>ขนาดเหตุการณ์ล่าสุด (M)</span><strong id="eq-latest">–</strong></div></div>
+<div id="eq-status" class="eq-status" role="status" aria-live="polite">กำลังโหลดข้อมูลแผ่นดินไหว…</div>
+<div class="eq-content"><div><div id="eq-map" class="eq-map" aria-label="แผนที่แผ่นดินไหว"></div><div class="eq-legend"><span style="color:#006400">● M &lt; 3</span><span style="color:#b46800">● M 3–3.9</span><span style="color:#e64422">● M 4–4.9</span><span style="color:#3949ab">● M ≥ 5</span></div></div><div class="eq-list"><h2>เหตุการณ์ล่าสุด · คลิกเพื่อดูบนแผนที่</h2><div id="eq-events"></div></div></div>
+<p class="eq-note">เวลาแสดงตามประเทศไทย (UTC+7) · ขนาดแผ่นดินไหวไม่ใช่ระดับความรุนแรงที่แต่ละพื้นที่ได้รับ · ฐานข้อมูล USGS อาจไม่ครอบคลุมเหตุการณ์ขนาดเล็กในไทยทั้งหมด · <a href="https://earthquake.tmd.go.th/" target="_blank" rel="noopener noreferrer">ตรวจสอบประกาศกรมอุตุนิยมวิทยา</a> · <a href="https://earthquake.usgs.gov/earthquakes/map/" target="_blank" rel="noopener noreferrer">USGS</a></p>
+</section>
+<script>
+(function(){
+const el=id=>document.getElementById(id);
+let map,group,controller,version=0;
+const color=m=>m>=5?'#3949ab':m>=4?'#e64422':m>=3?'#b46800':'#006400';
+const time=t=>new Date(t).toLocaleString('th-TH',{timeZone:'Asia/Bangkok'});
+function init(){
+if(typeof L==='undefined'){el('eq-map').textContent='โหลดแผนที่ไม่สำเร็จ โปรดรีเฟรชหน้า';return;}
+map=L.map('eq-map').setView([15,101],5);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Tiles © Esri',maxZoom:18}).addTo(map);
+group=L.layerGroup().addTo(map);
+new ResizeObserver(()=>map.invalidateSize()).observe(el('eq-map'));
+}
+async function refresh(){
+const current=++version;if(controller)controller.abort();controller=new AbortController();
+const timeout=setTimeout(()=>controller.abort(),25000);
+el('eq-status').textContent='กำลังโหลดข้อมูล USGS…';
+el('eq-events').replaceChildren();if(group)group.clearLayers();
+['total','max','large','latest'].forEach(k=>el('eq-'+k).textContent='–');
+const days=Number(el('eq-period').value),minimum=Number(el('eq-min').value);
+const url=new URL('https://earthquake.usgs.gov/fdsnws/event/1/query');
+url.search=new URLSearchParams({format:'geojson',starttime:new Date(Date.now()-days*86400000).toISOString(),endtime:new Date().toISOString(),minlatitude:'0',maxlatitude:'30',minlongitude:'90',maxlongitude:'110',minmagnitude:String(minimum),orderby:'time',limit:'20000',eventtype:'earthquake'});
+try{
+const response=await fetch(url,{signal:controller.signal});if(!response.ok)throw Error('HTTP '+response.status);
+const data=await response.json();if(!Array.isArray(data.features))throw Error('รูปแบบข้อมูลไม่ถูกต้อง');if(current!==version)return;
+const events=data.features.filter(f=>f.geometry&&f.geometry.type==='Point'&&f.geometry.coordinates.slice(0,2).every(Number.isFinite)&&f.properties&&Number.isFinite(f.properties.time)).sort((a,b)=>b.properties.time-a.properties.time);
+const mags=events.map(f=>f.properties.mag).filter(Number.isFinite);
+el('eq-total').textContent=events.length.toLocaleString('th-TH');el('eq-max').textContent=mags.length?Math.max(...mags).toFixed(1):'–';el('eq-large').textContent=mags.filter(m=>m>=4).length;el('eq-latest').textContent=Number.isFinite(events[0]?.properties.mag)?events[0].properties.mag.toFixed(1):'–';
+el('eq-status').textContent='ดึงข้อมูลสำเร็จ '+time(Date.now())+' · ช่วงย้อนหลัง '+days+' วัน · อัปเดตอัตโนมัติทุก 5 นาที';
+if(!events.length)el('eq-events').textContent='ไม่พบเหตุการณ์ในช่วงเวลาและขนาดที่เลือก';
+events.forEach(f=>{
+const p=f.properties,[lon,lat,depth]=f.geometry.coordinates,m=Number.isFinite(p.mag)?p.mag:null;
+const details=document.createElement('div'),title=document.createElement('b'),small=document.createElement('small');
+title.textContent=p.place||'ไม่ระบุสถานที่';small.textContent=time(p.time)+' · ลึก '+(Number.isFinite(depth)?depth.toFixed(1):'–')+' กม.';
+details.append(title,small);
+let marker;
+if(map){const popup=details.cloneNode(true);const link=document.createElement('a');try{const u=new URL(p.url);if(u.protocol==='https:'&&u.hostname==='earthquake.usgs.gov'){link.href=u.href;link.target='_blank';link.rel='noopener noreferrer';link.textContent='รายละเอียด USGS';popup.append(document.createElement('br'),link);}}catch(e){}
+marker=L.circleMarker([lat,lon],{radius:Math.max(6,(m??0)*2.5),color:'#fff',weight:1,fillColor:color(m??0),fillOpacity:.85}).bindPopup(popup).addTo(group);}
+const button=document.createElement('button');button.type='button';button.className='eq-event';
+const badge=document.createElement('span');badge.className='eq-mag';badge.style.background=color(m??0);badge.textContent='M '+(m===null?'–':m.toFixed(1));
+button.append(badge,details);button.onclick=()=>{if(map){map.setView([lat,lon],8);marker.openPopup();}};el('eq-events').append(button);
+});
+}catch(error){if(current===version){el('eq-status').textContent='ไม่สามารถโหลดข้อมูล USGS ได้ กรุณากดอัปเดตข้อมูลอีกครั้ง';el('eq-events').textContent='ยังไม่มีข้อมูลที่ยืนยันได้';}}
+finally{clearTimeout(timeout);}
+}
+init();el('eq-period').addEventListener('change',refresh);el('eq-min').addEventListener('change',refresh);el('eq-refresh').addEventListener('click',refresh);refresh();setInterval(()=>{if(!document.hidden)refresh()},300000);
+})();
+</script>
+ </body></html>
