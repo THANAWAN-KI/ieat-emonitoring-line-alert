@@ -927,8 +927,29 @@ html body #warning #estateFocusDashboard .ef-map-column{box-shadow:0 4px 22px #0
 @media(min-width:951px) and (max-height:800px){html body #warning #estateFocusDashboard .reference-card{padding:12px}html body #warning #estateFocusDashboard .reference-card h3{font-size:12px!important;min-height:34px;margin-bottom:8px!important}.reference-donut{width:90px;margin-bottom:10px}.reference-donut:before{inset:11px}.reference-donut strong{font-size:20px}.reference-keys{gap:4px}.reference-key{font-size:10px}.reference-gauge{max-height:145px}.reference-bars{gap:5px}.reference-bar-track{height:12px}.reference-bar-name,.reference-bar-line b{font-size:10px}html body #warning #estateFocusDashboard .reference-card footer{font-size:9px!important;margin-top:6px}.reference-total,.reference-total b{font-size:11px}}
 @media(max-width:950px){html body .flood-nav{width:100%!important}html body .flood-executive-toolbar{height:auto!important}html body .flood-nav #floodExecutiveButton{margin-left:0!important}html body #floodExecutivePop{left:8px;max-width:calc(100vw - 16px)}html body #warning #estateFocusDashboard .reference-card{padding:14px}.reference-key{font-size:11px}.reference-donut{width:115px}.reference-donut:before{inset:13px}}
 </style>
+<style id="flood-useful-tools-style">
+.flood-useful-tools{display:flex;flex-wrap:wrap;align-items:center;gap:6px;min-width:0;flex:none;color:#6D6E70;font:400 11px Sarabun,sans-serif}
+.flood-useful-tools>span{font-size:10px;white-space:nowrap;margin-right:3px}
+html body #warning #estateFocusDashboard .flood-useful-tools button{border:0!important;border-radius:9px!important;background:#D7D7D833!important;color:#6D6E70!important;padding:7px 9px!important;font:400 11px/1.5 Sarabun,sans-serif!important;cursor:pointer;white-space:nowrap}
+html body #warning #estateFocusDashboard .flood-useful-tools button:hover,html body #warning #estateFocusDashboard .flood-useful-tools button[aria-pressed=true]{background:#C4DFF6!important;color:#004B79!important}
+html body #warning #estateFocusDashboard .flood-useful-tools button:nth-of-type(-n+2){background:#FFFFFF!important;color:#7F181B!important;box-shadow:inset 0 0 0 1px #D7D7D8}
+html body #warning #estateFocusDashboard .flood-useful-tools button:focus-visible{outline:2px solid #004B79!important;outline-offset:2px}
+html body #warning #estateFocusDashboard .ef-data-column>.flood-useful-tools{display:flex!important;order:-15}
+@media(min-width:951px){html body #warning #estateFocusDashboard .ef-data-column.fit-overview{grid-template-rows:auto auto minmax(0,1fr) auto!important;row-gap:10px!important}html body #warning #estateFocusDashboard .fit-overview>.flood-useful-tools{grid-column:1/-1;grid-row:2;order:unset;margin:0!important}html body #warning #estateFocusDashboard .ef-data-column.fit-overview>#floodReferenceBoard.fit-active{grid-row:3!important}html body #warning #estateFocusDashboard .fit-overview>#efProvinceScopeNote.fit-active{grid-row:4!important}}
+@media(max-width:1250px){.flood-useful-tools>span{display:none}.flood-useful-tools{gap:5px}html body #warning #estateFocusDashboard .flood-useful-tools button{font-size:10px!important;padding:6px 8px!important}}
+</style>
+<script id="flood-useful-tools-script">
+(()=>{
+function mount(){const col=document.querySelector('.ef-data-column');if(!col)return false;if(document.getElementById('floodUsefulTools'))return true;
+const quick=document.createElement('nav');quick.id='floodUsefulTools';quick.className='flood-useful-tools';quick.setAttribute('aria-label','ข้อมูลน้ำที่ใช้ติดตาม');const options=[['warnings','เฝ้าระวัง 24 ชม.'],['warnings48','48 ชม.'],['dams','เขื่อน / อ่าง'],['rivers','สายน้ำ'],['forecast','พยากรณ์ 7 วัน'],['waterforecast','คาดการณ์น้ำ 1–5 วัน']];quick.innerHTML='<span>ข้อมูลติดตาม</span>'+options.map(([key,label])=>'<button type="button" data-useful-view="'+key+'" aria-pressed="false">'+label+'</button>').join('');col.prepend(quick);
+function sync(){const selected=col.dataset.fitMode||'overview';quick.querySelectorAll('button').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.usefulView===selected)))}
+quick.addEventListener('click',event=>{const button=event.target.closest('[data-useful-view]');if(!button)return;const select=col.querySelector('.fit-controls select');if(select){select.value=button.dataset.usefulView;select.dispatchEvent(new Event('change',{bubbles:true}));sync()}});new MutationObserver(sync).observe(col,{attributes:true,attributeFilter:['data-fit-mode']});sync();return true}
+if(!mount()){const observer=new MutationObserver(()=>{if(mount())observer.disconnect()});observer.observe(document.getElementById('warning'),{childList:true,subtree:true})}
+})();
+</script>
 </body>
 </html>
+
 
 
 
