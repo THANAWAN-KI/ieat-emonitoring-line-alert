@@ -244,7 +244,19 @@ $('searchButton').onclick=()=>{clearTimeout(searchTimer);changed();zoomMatches(t
    async function draw(){
     if(busy){pending=true;return;}busy=true;pending=false;lastErrors.clear();
     const generation=drawGeneration,isCurrent=()=>generation===drawGeneration,bounds=fallbackView.getBounds(),loaded=new Map();
-    function status(done=false){if(!isCurrent())return;const count=[...loaded.values()].reduce((a,b)=>a+b,0);$('mapStatus').textContent=(done?'แสดง ':'กำลังโหลด · แสดงแล้ว ')+number(count)+' รายการ'+(lastErrors.size?' · บางชั้นข้อมูลเชื่อมต่อไม่ได้':'');}
+    function status(done=false){
+     if(!isCurrent())return;
+     const host=$('mapStatus'),count=[...loaded.values()].reduce((a,b)=>a+b,0);
+     host.setAttribute('aria-busy',String(!done));
+     host.replaceChildren(document.createTextNode((done?'แสดง ':'กำลังโหลด · แสดงแล้ว ')+number(count)+' รายการ'+(lastErrors.size?' · บางชั้นข้อมูลเชื่อมต่อไม่ได้':'')));
+     if(done&&lastErrors.size){
+      const details=el('details'),summary=el('summary','ดูชั้นข้อมูลที่โหลดไม่สำเร็จ ('+lastErrors.size+')');
+      details.append(summary,el('p',[...lastErrors].join(' · ')));
+      const retry=el('button','ลองโหลดแผนที่อีกครั้ง');retry.type='button';
+      retry.onclick=()=>fallbackView.refreshData();
+      details.append(retry);host.append(details);
+     }
+    }
     status();
     const ordered=[...definitions].sort((a,b)=>priority(a)-priority(b));
     async function drawLayer(def){
