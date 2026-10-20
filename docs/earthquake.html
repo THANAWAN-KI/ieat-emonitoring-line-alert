@@ -31,6 +31,21 @@ html,body,button,input,select,.leaflet-container{font-family:"Noto Sans Thai","S
 .eq-top p,.eq-event small,.eq-status,#eq-estate-status,.eq-note,.eq-legend{font-size:12px;line-height:1.6}
 .eq-card{min-height:110px}.eq-card:nth-child(4){min-height:75px}
 @media(max-width:700px){.eq-controls input,.eq-controls select{font-size:16px}.eq-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style><style id="earthquake-original-theme">
+:root{--eq-green:#006400;--eq-orange:#ff9c2a;--eq-red:#ff4025;--eq-indigo:#3949ab;--eq-neutral:#efefef}
+.eq-dashboard,.eq-sidebar{background:#fff;color:#4d4f53}
+.eq-sidebar{border-color:#e3e5e8}.eq-top h1,.eq-list h2{color:#404041}
+.eq-card{background:var(--eq-green);color:#fff}
+.eq-card:nth-child(2){background:var(--eq-orange);color:#202124}
+.eq-card:nth-child(3){background:var(--eq-red);color:#fff}
+.eq-card:nth-child(4){background:var(--eq-indigo);color:#fff}
+.eq-controls button{background:var(--eq-indigo);border-color:var(--eq-indigo);color:#fff}
+.eq-controls button:hover{background:#2d3b8f}
+.eq-controls input,.eq-controls select{background:#fff;color:#4d4f53;border-color:#dfe4e9}
+.eq-event:hover,.eq-event:focus{background:var(--eq-neutral)}
+.eq-map{background:#efefef}.eq-legend{background:#fffffff2;color:#4d4f53}
+.eq-note a{color:var(--eq-indigo)}
+.eq-dashboard :is(button,input,select,a):focus-visible{outline:3px solid var(--eq-orange);outline-offset:2px}
 </style></head><body>
 <style>
 .eq-dashboard{margin:12px 16px 20px;padding:18px;background:#fff;border:1px solid #e5e7eb;border-radius:14px;color:#404041;box-shadow:0 3px 18px #2a3a4b12}
@@ -44,7 +59,7 @@ html,body,button,input,select,.leaflet-container{font-family:"Noto Sans Thai","S
 <div class="eq-controls"><label>ค้นหานิคมอุตสาหกรรม / ท่าเรือ<input id="eq-estate-search" type="search" placeholder="พิมพ์ชื่อนิคมฯ"></label><label>เลือกนิคมฯ<select id="eq-estate"><option value="">ทุกนิคมฯ</option></select></label><label>ระยะติดตามจากนิคมฯ<select id="eq-radius"><option value="50">50 กม.</option><option value="100">100 กม.</option><option value="300" selected>300 กม.</option><option value="500">500 กม.</option></select></label><div id="eq-estate-status" role="status">กำลังโหลดข้อมูลนิคมฯ…</div><label>ช่วงเวลา <select id="eq-period"><option value="1">24 ชั่วโมง</option><option value="7" selected>7 วัน</option><option value="30">30 วัน</option></select></label><label>ขนาด <select id="eq-min"><option value="0">ทุกขนาดที่มีในฐานข้อมูล</option><option value="3">M ≥ 3</option><option value="4">M ≥ 4</option><option value="5">M ≥ 5</option></select></label><button id="eq-refresh" type="button">อัปเดตข้อมูล</button></div></div>
 <div class="eq-cards"><div class="eq-card"><span>นิคมฯ ในระยะติดตาม (แห่ง)</span><strong id="eq-total">–</strong></div><div class="eq-card"><span>ขนาดสูงสุด (M)</span><strong id="eq-max">–</strong></div><div class="eq-card"><span>ขนาดตั้งแต่ M 4 (ครั้ง)</span><strong id="eq-large">–</strong></div><div class="eq-card"><span>เหตุการณ์ใกล้นิคมฯ (ครั้ง)</span><strong id="eq-latest">–</strong></div></div>
 <div id="eq-status" class="eq-status" role="status" aria-live="polite">กำลังโหลดข้อมูลแผ่นดินไหว…</div>
-<div class="eq-content"><div><div id="eq-map" class="eq-map" aria-label="แผนที่แผ่นดินไหว"></div><div class="eq-legend"><span style="color:#006400">● M &lt; 3</span><span style="color:#b46800">● M 3–3.9</span><span style="color:#e64422">● M 4–4.9</span><span style="color:#3949ab">● M ≥ 5</span></div></div><div class="eq-list"><h2>เหตุการณ์ใกล้นิคมฯ · คลิกดูแผนที่</h2><div id="eq-events"></div></div></div>
+<div class="eq-content"><div><div id="eq-map" class="eq-map" aria-label="แผนที่แผ่นดินไหว"></div><div class="eq-legend"><span style="color:#006400">● M &lt; 3</span><span style="color:#a75b00">● M 3–3.9</span><span style="color:#ff4025">● M 4–4.9</span><span style="color:#3949ab">● M ≥ 5</span></div></div><div class="eq-list"><h2>เหตุการณ์ใกล้นิคมฯ · คลิกดูแผนที่</h2><div id="eq-events"></div></div></div>
 <p class="eq-note">จุดสีน้ำเงิน: นิคมฯ / ท่าเรือ · ระยะเป็นระยะเส้นตรงจากตำแหน่งนิคมฯ ถึงศูนย์กลางแผ่นดินไหว ไม่ใช่การยืนยันผลกระทบ · เวลาแสดงตามประเทศไทย (UTC+7) · ขนาดแผ่นดินไหวไม่ใช่ระดับความรุนแรงที่แต่ละพื้นที่ได้รับ · ฐานข้อมูล USGS อาจไม่ครอบคลุมเหตุการณ์ขนาดเล็กในไทยทั้งหมด · <a href="https://earthquake.tmd.go.th/" target="_blank" rel="noopener noreferrer">ตรวจสอบประกาศกรมอุตุนิยมวิทยา</a> · <a href="https://earthquake.usgs.gov/earthquakes/map/" target="_blank" rel="noopener noreferrer">USGS</a></p>
 </section>
 <script>
@@ -65,7 +80,7 @@ const radius=()=>Number(el('eq-radius').value);
 function distance(a,b){const rad=Math.PI/180,dlat=(b[1]-a[1])*rad,dlon=(b[0]-a[0])*rad;const h=Math.sin(dlat/2)**2+Math.cos(a[1]*rad)*Math.cos(b[1]*rad)*Math.sin(dlon/2)**2;return 6371*2*Math.atan2(Math.sqrt(h),Math.sqrt(Math.max(0,1-h)));}
 function selectedEstates(){return estates.filter(e=>!el('eq-estate').value||e.id===el('eq-estate').value);}
 function nearby(f){const c=f.geometry.coordinates;return selectedEstates().map(e=>({...e,distance:distance(c,e.coordinates)})).filter(e=>e.distance<=radius()).sort((a,b)=>a.distance-b.distance);}
-function drawEstates(){if(!estateLayer)return;estateLayer.clearLayers();selectedEstates().forEach(e=>{const box=document.createElement('div');box.textContent=e.name;L.circleMarker([e.coordinates[1],e.coordinates[0]],{radius:7,color:'#fff',weight:2,fillColor:'#0079b8',fillOpacity:1}).bindPopup(box).addTo(estateLayer);});}
+function drawEstates(){if(!estateLayer)return;estateLayer.clearLayers();selectedEstates().forEach(e=>{const box=document.createElement('div');box.textContent=e.name;L.circleMarker([e.coordinates[1],e.coordinates[0]],{radius:7,color:'#fff',weight:2,fillColor:'#3949ab',fillOpacity:1}).bindPopup(box).addTo(estateLayer);});}
 function estateOptions(){const current=el('eq-estate').value,q=el('eq-estate-search').value.trim().toLowerCase();el('eq-estate').replaceChildren(new Option('ทุกนิคมฯ',''));estates.filter(e=>e.name.toLowerCase().includes(q)).forEach(e=>el('eq-estate').add(new Option(e.name,e.id)));if([...el('eq-estate').options].some(o=>o.value===current))el('eq-estate').value=current;}
 async function loadEstates(){
 try{const url=new URL('https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/e_PP_2025/FeatureServer/1/query');url.search=new URLSearchParams({where:'1=1',outFields:'*',returnGeometry:'true',outSR:'4326',f:'geojson',resultRecordCount:'2000'});
@@ -75,12 +90,12 @@ if(!estates.length)throw Error();estateState='ready';estateOptions();drawEstates
 }catch(e){estateState='error';el('eq-estate-status').textContent='โหลดข้อมูลนิคมฯ ไม่สำเร็จ กรุณาอัปเดตอีกครั้ง';}
 }
 
-const color=m=>m>=5?'#3949ab':m>=4?'#e64422':m>=3?'#b46800':'#006400';
+const color=m=>m>=5?'#3949ab':m>=4?'#ff4025':m>=3?'#ff9c2a':'#006400';
 const time=t=>new Date(t).toLocaleString('th-TH',{timeZone:'Asia/Bangkok'});
 function init(){
 if(typeof L==='undefined'){el('eq-map').textContent='โหลดแผนที่ไม่สำเร็จ โปรดรีเฟรชหน้า';return;}
 map=L.map('eq-map').setView([15,101],5);
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Tiles © Esri',maxZoom:18}).addTo(map);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',{attribution:'Tiles © Esri, HERE, Garmin',maxZoom:16}).addTo(map);
 group=L.layerGroup().addTo(map);estateLayer=L.layerGroup().addTo(map);
 new ResizeObserver(()=>map.invalidateSize()).observe(el('eq-map'));
 }
@@ -114,7 +129,7 @@ let marker;
 if(map){const popup=details.cloneNode(true);const link=document.createElement('a');try{const u=new URL(p.url);if(u.protocol==='https:'&&u.hostname==='earthquake.usgs.gov'){link.href=u.href;link.target='_blank';link.rel='noopener noreferrer';link.textContent='รายละเอียด USGS';popup.append(document.createElement('br'),link);}}catch(e){}
 marker=L.circleMarker([lat,lon],{radius:Math.max(6,(m??0)*2.5),color:'#fff',weight:1,fillColor:color(m??0),fillOpacity:.85}).bindPopup(popup).addTo(group);}
 const button=document.createElement('button');button.type='button';button.className='eq-event';
-const badge=document.createElement('span');badge.className='eq-mag';badge.style.background=color(m??0);badge.textContent='M '+(m===null?'–':m.toFixed(1));
+const badge=document.createElement('span');badge.className='eq-mag';badge.style.background=color(m??0);badge.style.color=m!==null&&m>=3&&m<4?'#202124':'#fff';badge.textContent='M '+(m===null?'–':m.toFixed(1));
 button.append(badge,details);button.onclick=()=>{if(map){map.setView([lat,lon],8);marker.openPopup();}};el('eq-events').append(button);
 });
 }catch(error){if(current===version){el('eq-status').textContent='ไม่สามารถโหลดข้อมูล USGS ได้ กรุณากดอัปเดตข้อมูลอีกครั้ง';el('eq-events').textContent='ยังไม่มีข้อมูลที่ยืนยันได้';}}
