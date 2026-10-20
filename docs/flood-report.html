@@ -139,7 +139,7 @@ outline:2px solid #0066b2!important;outline-offset:2px;
 #estateFocusDashboard .rp-forecast-card img{width:100%;height:auto;margin:10px 0;display:block}
 </style>
 <script src="flood-rid-source.js?v=20261006-rid-17" defer></script>
-<script src="flood-estate-dashboard.js?v=20261020-gistda-overview" defer></script>
+<script src="flood-estate-dashboard.js?v=20261020-card-rows" defer></script>
 <script src="flood-river-panel.js?v=20261006-overview6-61" defer></script>
 <script src="flood-weather-overview.js?v=20261006-svg-weather-37" defer></script>
 <style>.rp-forecast-toggle{cursor:pointer;padding:12px 16px;border-radius:10px;background:#e5effa;color:#003666;font-weight:700;font-size:16px}#rpForecastPanel[open] .rp-forecast-toggle{margin-bottom:12px}#rpRankingsAfterWarning .rp-new-section{margin:0 0 16px}</style><style>
@@ -172,7 +172,7 @@ outline:2px solid #0066b2!important;outline-offset:2px;
 <link rel="stylesheet" href="./disaster-mobile.css?v=20261007-plans54-mobile3">
 </head>
 <body>
-<header class="flood-executive-toolbar"><nav class="flood-nav" aria-label="ส่วนข้อมูล"><button type="button" data-flood-section="overview" aria-current="true">ภาพรวม</button><button type="button" data-flood-section="stations">สถานีระดับน้ำ</button><button type="button" data-flood-section="dams">เขื่อนและอ่างเก็บน้ำ</button> <button type="button" id="floodExecutiveButton" aria-expanded="false" aria-controls="floodExecutivePop">สรุปนิคมฯ เฝ้าระวัง ▾</button></nav></header>
+<header class="flood-executive-toolbar"><nav class="flood-nav" aria-label="ส่วนข้อมูล"> <button type="button" id="floodExecutiveButton" aria-expanded="false" aria-controls="floodExecutivePop">สรุปนิคมฯ เฝ้าระวัง ▾</button></nav></header>
 <div id="floodExecutivePop" class="disaster-executive-pop" role="dialog" aria-label="สรุปนิคมฯ และสถานการณ์น้ำ" hidden><iframe id="floodExecutiveFrame" title="สรุปนิคมตามพื้นที่ที่เลือก"></iframe></div>
 <main class="container"><section id="warning" aria-label="Dashboard สถานการณ์น้ำ"><div id="dashboardLoading" class="dashboard-loading" role="status">กำลังโหลดข้อมูลสถานการณ์น้ำ…</div><noscript>กรุณาเปิด JavaScript เพื่อใช้งาน dashboard</noscript></section></main>
 
@@ -908,16 +908,52 @@ function support(element,title,order){if(!element||element.parentElement.classLi
 function sync(){pending=false;const col=document.querySelector('.ef-data-column');if(!col)return;
 const stations=document.querySelector('.rp-stations');if(stations){stations.id='floodStationsSection';const title=stations.querySelector('.rp-stations-title');if(title&&title.textContent!=='สถานีระดับน้ำ')title.textContent='สถานีระดับน้ำ';}
 let dams=document.getElementById('floodDamsSection');if(!dams){dams=document.createElement('section');dams.id='floodDamsSection';dams.setAttribute('aria-label','เขื่อนและอ่างเก็บน้ำ');dams.innerHTML='<h2>เขื่อนและอ่างเก็บน้ำ</h2>';col.append(dams)}for(const selector of ['.ef-related-dams','.ef-reservoir-panel']){const panel=col.querySelector(selector);if(panel&&panel.parentElement!==dams)dams.append(panel)}
-support(document.getElementById('rpRankingsAfterWarning'),'อันดับการระบายน้ำและจุดวัดน้ำไหล',35);support(document.getElementById('floodWeatherOverview'),'สภาพอากาศและพยากรณ์ 7 วัน',40);support(document.getElementById('rpHistoryPanel'),'ระดับน้ำย้อนหลัง',45);
+const ranks=document.getElementById('rpRankingsAfterWarning');if(ranks&&ranks.style.order!=='35')ranks.style.order='35';support(document.getElementById('floodWeatherOverview'),'สภาพอากาศและพยากรณ์ 7 วัน',40);support(document.getElementById('rpHistoryPanel'),'ระดับน้ำย้อนหลัง',45);
 const mainRiver=document.getElementById('rpMainRiver')?.closest('.rp-new-section');support(mainRiver,'สายน้ำหลักและผังสถานี',38);const forecast=document.getElementById('rpForecastPanel');if(forecast)forecast.style.order='46';
 const button=document.getElementById('efMapFullscreen'),map=document.querySelector('.ef-map-column');if(button&&map&&!buttonReady){buttonReady=true;map.append(button);function paint(){const expanded=button.getAttribute('aria-pressed')==='true';button.setAttribute('aria-label',expanded?'ย่อแผนที่':'ขยายแผนที่เต็มหน้าจอ');button.title=expanded?'ย่อแผนที่':'ขยายแผนที่เต็มหน้าจอ';if(!button.querySelector('svg'))button.innerHTML=icon}new MutationObserver(paint).observe(button,{childList:true,attributes:true,attributeFilter:['aria-pressed']});paint();}
 }
 function schedule(){if(!pending){pending=true;requestAnimationFrame(sync)}}new MutationObserver(records=>{if(records.some(r=>r.type==='childList'))schedule()}).observe(document.getElementById('warning'),{childList:true,subtree:true});schedule();
-const nav=document.querySelector('.flood-nav');nav.addEventListener('click',event=>{const button=event.target.closest('[data-flood-section]');if(!button)return;const col=document.querySelector('.ef-data-column');const target=document.querySelector({overview:'#floodReferenceBoard',stations:'#floodStationsSection',dams:'#floodDamsSection'}[button.dataset.floodSection]||'');if(!col||!target)return;nav.querySelectorAll('[data-flood-section]').forEach(b=>b.setAttribute('aria-current',String(b===button)));if(matchMedia('(min-width:951px)').matches){const top=target.getBoundingClientRect().top-col.getBoundingClientRect().top+col.scrollTop;col.scrollTo({top:Math.max(0,top-4),behavior:'smooth'})}else target.scrollIntoView({behavior:'smooth',block:'start'})});
+const nav=document.querySelector('.flood-nav');nav?.addEventListener('click',event=>{const button=event.target.closest('[data-flood-section]');if(!button)return;const col=document.querySelector('.ef-data-column');const target=document.querySelector({overview:'#floodReferenceBoard',stations:'#floodStationsSection',dams:'#floodDamsSection'}[button.dataset.floodSection]||'');if(!col||!target)return;nav.querySelectorAll('[data-flood-section]').forEach(b=>b.setAttribute('aria-current',String(b===button)));if(matchMedia('(min-width:951px)').matches){const top=target.getBoundingClientRect().top-col.getBoundingClientRect().top+col.scrollTop;col.scrollTo({top:Math.max(0,top-4),behavior:'smooth'})}else target.scrollIntoView({behavior:'smooth',block:'start'})});
 })();
 </script>
-<style>html body #warning #estateFocusDashboard .ef-map-column.ef-map-expanded{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;z-index:5000!important}html body #warning #estateFocusDashboard .ef-map-column:fullscreen{width:100vw!important;height:100dvh!important}</style></body>
+<style>html body #warning #estateFocusDashboard .ef-map-column.ef-map-expanded{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;z-index:5000!important}html body #warning #estateFocusDashboard .ef-map-column:fullscreen{width:100vw!important;height:100dvh!important}</style><style id="flood-visible-rows">
+html body #warning #estateFocusDashboard #rpCards,html body #warning #estateFocusDashboard #efRelatedDams,html body #warning #estateFocusDashboard #efReservoirList,html body #warning #estateFocusDashboard #efCanalList{max-height:var(--flood-row-height,none)!important;overflow-y:auto!important;overflow-x:hidden!important;scrollbar-width:thin;scrollbar-color:#9F9FA3 transparent;overscroll-behavior:contain;padding:2px 6px 2px 2px!important;align-content:start}
+.flood-row-caption{font:400 11px/1.6 Sarabun,sans-serif;color:#6D6E70;margin:0 0 10px}
+html body #warning #estateFocusDashboard .ef-warning{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important;align-items:start!important}
+html body #warning #estateFocusDashboard .ef-warning>details{min-width:0;width:100%;margin:0!important}
+html body #warning #estateFocusDashboard .ef-warning>details>div{overflow:auto!important;max-height:480px!important}
+html body #warning #estateFocusDashboard #rpRankingsAfterWarning{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important;align-items:start;order:35!important;margin:0!important}
+html body #warning #estateFocusDashboard #rpRankingsAfterWarning>.rp-new-section{min-width:0;margin:0!important;padding:14px!important;height:100%}
+html body #warning #estateFocusDashboard #rpRankingsAfterWarning h3{min-height:44px!important;margin-bottom:10px!important;font-size:14px!important;line-height:1.6!important}
+html body #warning #estateFocusDashboard #rpRankingsAfterWarning .rp-rank-card{grid-template-columns:82px minmax(0,1fr)!important}
+@media(max-width:650px){html body #warning #estateFocusDashboard .ef-warning,html body #warning #estateFocusDashboard #rpRankingsAfterWarning{grid-template-columns:minmax(0,1fr)!important}}
+</style>
+<script id="flood-visible-rows-script">
+(()=>{
+const sets=[['rpCards','.rp-card',2,'สถานีระดับน้ำ'],['efRelatedDams','.ef-dam-card',2,'เขื่อน'],['efReservoirList','.ef-reservoir-row',4,'อ่างเก็บน้ำขนาดกลาง'],['efCanalList','.ef-canal-card',4,'คลอง กทม.']];let scheduled=false;const observed=new WeakSet();
+function measure(){scheduled=false;for(const [id,selector,limit,label] of sets){const host=document.getElementById(id);if(!host)continue;const cards=[...host.children].filter(el=>el.matches(selector));if(!observed.has(host)){observed.add(host);new ResizeObserver(schedule).observe(host);new MutationObserver(schedule).observe(host,{childList:true,subtree:true,characterData:true})}if(!cards.length){host.style.removeProperty('--flood-row-height');const caption=host.previousElementSibling;if(caption?.classList.contains('flood-row-caption'))caption.remove();continue}
+const bounds=host.getBoundingClientRect(),positions=cards.map(card=>({card,top:Math.round(card.getBoundingClientRect().top-bounds.top+host.scrollTop),bottom:card.getBoundingClientRect().bottom-bounds.top+host.scrollTop})),tops=[...new Set(positions.map(p=>p.top))].sort((a,b)=>a-b),overflow=tops.length>limit;const height=overflow?Math.ceil(Math.max(...positions.filter(p=>p.top<=tops[limit-1]).map(p=>p.bottom))+3)+'px':'none';if(host.style.getPropertyValue('--flood-row-height')!==height)host.style.setProperty('--flood-row-height',height);
+let caption=host.previousElementSibling;if(!caption?.classList.contains('flood-row-caption')){caption=document.createElement('p');caption.className='flood-row-caption';host.before(caption)}const text=cards.length+' รายการ · '+(overflow?'แสดงครั้งละ '+limit+' แถว · เลื่อนดูรายการที่เหลือ':'แสดง '+tops.length+' แถว');if(caption.textContent!==text)caption.textContent=text;host.tabIndex=overflow?0:-1;host.setAttribute('aria-label','รายการ'+label+' '+cards.length+' รายการ');}}
+function schedule(){if(!scheduled){scheduled=true;requestAnimationFrame(measure)}}new MutationObserver(records=>{if(records.some(r=>r.type==='childList'))schedule()}).observe(document.getElementById('warning'),{childList:true,subtree:true});window.addEventListener('resize',schedule);document.fonts?.ready.then(schedule);schedule();
+})();
+</script>
+<style id="flood-summary-before-overview">
+html body .flood-executive-toolbar{display:none!important}
+html body main.container,html body #warning,html body #estateFocusDashboard{height:100dvh!important}
+html body #warning #estateFocusDashboard .flood-summary-entry{display:flex!important;justify-content:flex-start;align-items:center;order:-10!important;margin:0;padding:0 2px;flex:none!important}
+html body #warning #estateFocusDashboard .flood-summary-entry #floodExecutiveButton{display:inline-flex!important;align-items:center;gap:8px;background:#ED1B2E!important;color:#FFFFFF!important;border:0!important;border-radius:10px!important;padding:10px 16px!important;font:500 13px Sarabun,sans-serif!important;cursor:pointer}
+html body #warning #estateFocusDashboard .flood-summary-entry #floodExecutiveButton:hover{background:#7F181B!important}
+@media(max-width:950px){html body main.container,html body #warning,html body #estateFocusDashboard{height:auto!important;min-height:100dvh!important}}
+</style>
+<script id="flood-summary-before-overview-script">
+(()=>{
+function mount(){const col=document.querySelector('.ef-data-column'),button=document.getElementById('floodExecutiveButton');if(!col||!button)return false;if(!col.querySelector('.flood-summary-entry')){const entry=document.createElement('div');entry.className='flood-summary-entry';col.prepend(entry);entry.append(button);button.addEventListener('click',()=>{const pop=document.getElementById('floodExecutivePop');if(pop&&!pop.hidden){const rect=button.getBoundingClientRect();pop.style.top=Math.min(rect.bottom+8,innerHeight-150)+'px';pop.style.left=Math.max(8,rect.left)+'px';pop.style.right='auto'}})}return true}
+if(!mount()){const observer=new MutationObserver(()=>{if(mount())observer.disconnect()});observer.observe(document.getElementById('warning'),{childList:true,subtree:true})}
+})();
+</script>
+</body>
 </html>
+
 
 
 
