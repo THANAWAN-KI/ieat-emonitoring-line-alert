@@ -24,7 +24,7 @@
  }
  async function archive(){
   document.querySelector('.steps').hidden=true;$('page-title').textContent='รายงานที่บันทึก';$('archive').hidden=false;const rows=(await window.IEATReportStore.list()).sort((a,b)=>b.createdAt.localeCompare(a.createdAt)),box=$('archive-content');box.replaceChildren();
-  if(!rows.length){const p=make('p','ยังไม่มีรายงาน · กลับ Dashboard เลือกโรงงาน แล้วกด “จัดทำรายงาน”');p.className='empty';box.append(p);return;}
+  if(!rows.length){const p=make('p','ยังไม่มีรายงาน · กด “จัดทำรายงานใหม่” เพื่อเลือกโรงงานและเตรียมข้อมูล');p.className='empty';box.append(p);return;}
   const table=make('table');table.className='archive';const head=make('thead'),tr=make('tr');['จัดทำเมื่อ','โรงงาน / ประเภทเหตุ','เปิดรายงาน'].forEach(x=>tr.append(make('th',x)));head.append(tr);table.append(head);const body=make('tbody');for(const r of rows){const tr=make('tr'),a=make('a','ตรวจรายงาน');a.className='button';a.href='./report.html?id='+encodeURIComponent(r.id);const td=make('td');td.append(a);tr.append(make('td',time(r.createdAt)),make('td',r.company+' · '+r.incidentType),td);body.append(tr);}table.append(body);box.append(table);
  }
  $('download').onclick=async()=>{
