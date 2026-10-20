@@ -69,6 +69,31 @@ html body .eq-top h1{overflow-wrap:anywhere}
 html body .eq-event>div{min-width:0;overflow-wrap:anywhere}
 @media(min-width:701px) and (max-width:1000px){html body .eq-dashboard{grid-template-columns:380px minmax(0,1fr)}html body .eq-sidebar{padding:12px}}
 @media(max-width:700px){html body .eq-dashboard{grid-template-columns:minmax(0,1fr);height:auto}html body .eq-map-area{height:55dvh;min-height:340px}html body .eq-sidebar{padding:12px}html body .eq-controls :is(input,select){font-size:16px!important}}
+</style><style id="earthquake-dashboard-depth">
+html body .eq-dashboard{background:#f3f5f8;gap:14px;padding:14px}
+html body .eq-sidebar{background:transparent;border:0;padding:4px 8px 4px 2px;scrollbar-width:thin;scrollbar-color:#c7ced8 transparent}
+html body .eq-top{padding:16px;background:#fff;border:1px solid #e5e9ef;border-radius:14px;box-shadow:0 4px 16px #24365208}
+html body .eq-top h1{border-left:4px solid #006400;padding-left:10px}
+html body .eq-top p{margin:8px 0 0}
+html body .eq-cards{gap:12px;margin:16px 0}
+html body .eq-card,html body .eq-card:nth-child(4){position:relative;border-radius:14px;min-height:114px;padding:16px 14px;text-align:left;align-items:flex-start;box-shadow:0 7px 16px #26364d1a,inset 0 1px 0 #ffffff40;overflow:hidden;border:1px solid #ffffff24}
+html body .eq-card:after{content:"";position:absolute;width:90px;height:90px;border-radius:50%;right:-25px;bottom:-38px;background:#ffffff15;pointer-events:none}
+html body .eq-card strong{margin-top:10px;font-variant-numeric:tabular-nums}
+html body .eq-card span{max-width:100%;text-wrap:balance}
+html body .eq-controls{background:#fff;padding:16px;border:1px solid #e5e9ef;border-radius:14px;box-shadow:0 4px 16px #24365208;gap:12px}
+html body .eq-controls :is(input,select){border-radius:8px;box-shadow:inset 0 1px 3px #24365206;background:#fafbfd}
+html body .eq-controls button{border-radius:8px;box-shadow:0 4px 10px #3949ab25}
+html body .eq-status{padding:10px 12px;margin:12px 0;border-left:3px solid #3949ab;border-radius:0 8px 8px 0;background:#e9edf7}
+html body .eq-list{background:#fff;padding:16px;border:1px solid #e5e9ef;border-radius:14px;box-shadow:0 4px 16px #24365208}
+html body .eq-list h2{margin:0 0 12px;padding-bottom:10px;border-bottom:1px solid #edf0f4}
+html body .eq-event{border:1px solid #edf0f4;border-radius:10px;padding:12px;margin-bottom:8px;box-shadow:0 2px 5px #24365205;transition:background .15s,box-shadow .15s}
+html body .eq-event:hover{background:#f7f8fc;box-shadow:0 4px 12px #24365212}
+html body .eq-mag{box-shadow:0 2px 6px #24365216;flex-shrink:0}
+html body .eq-map-area{border-radius:16px;border:1px solid #dce2e9;box-shadow:0 7px 24px #24365214;background:#efefef}
+html body .eq-legend{box-shadow:0 3px 12px #24365214;border:1px solid #e5e9ef;border-radius:9px;padding:10px 12px}
+html body .eq-map-fullscreen{border-radius:8px;box-shadow:0 3px 10px #24365220;padding:9px 12px}
+html body .eq-note{padding:12px 4px;color:#6b7280}
+@media(max-width:700px){html body .eq-dashboard{padding:10px;gap:12px}html body .eq-sidebar{padding:0}html body .eq-map-area{border-radius:12px}html body .eq-card,html body .eq-card:nth-child(4){min-height:104px;padding:12px}}
 </style></head><body>
 <style>
 .eq-dashboard{margin:12px 16px 20px;padding:18px;background:#fff;border:1px solid #e5e7eb;border-radius:14px;color:#404041;box-shadow:0 3px 18px #2a3a4b12}
