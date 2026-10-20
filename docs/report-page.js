@@ -4,6 +4,13 @@
  let record,links=[];
  const time=value=>new Date(value).toLocaleString('th-TH',{timeZone:'Asia/Bangkok'});
  $('back').addEventListener('click',event=>{try{if(window.opener&&!window.opener.closed&&window.opener.location.origin===location.origin){event.preventDefault();window.opener.focus();window.close();}}catch{}});
+ function prepareMap(doc){
+  const slot=doc.getElementById('fieldBriefMap'),image=doc.getElementById('dashboardReportMapImage');if(!slot||!image)return;
+  for(const [key,value] of Object.entries({height:'400px','aspect-ratio':'auto',position:'relative',overflow:'hidden'}))slot.style.setProperty(key,value,'important');
+  for(const [key,value] of Object.entries({width:'100%',height:'100%','object-fit':'contain'}))image.style.setProperty(key,value,'important');
+  image.alt='ภาพแผนที่ ณ เวลาจัดทำรายงาน';doc.querySelectorAll('[aria-label="ซูมแผนที่รายงาน"]').forEach(n=>n.remove());
+  const weather=doc.getElementById('fbWeather');if(weather){slot.append(weather);for(const [key,value] of Object.entries({position:'absolute',top:'10px',right:'10px',bottom:'auto',width:'190px','max-width':'42%','font-size':'11px'}))weather.style.setProperty(key,value,'important');}
+ }
  function size(){const doc=$('report-frame').contentDocument;if(doc)$('report-frame').style.height=Math.max(800,doc.body.scrollHeight,doc.documentElement.scrollHeight)+'px';}
  async function show(){
   const id=new URLSearchParams(location.search).get('id');
@@ -13,7 +20,7 @@
   $('page-title').textContent='รายงานข้อมูลสนับสนุนเหตุฉุกเฉิน';$('summary').hidden=false;
   const meta=make('div');meta.className='meta';for(const [label,value] of [['โรงงาน',record.company],['ประเภทเหตุ',record.incidentType],['ระยะค้นหา',record.radius?record.radius+' กม.':'–'],['จัดทำเมื่อ',time(record.createdAt)]]){const box=make('div');box.append(make('b',label+' '),document.createTextNode(value||'ไม่ระบุ'));meta.append(box);}
   $('summary').append(meta);const note=make('p','ข้อมูลฉบับนี้เก็บ ณ เวลาจัดทำ ไม่เปลี่ยนตามข้อมูลสดบน Dashboard หากต้องการข้อมูลล่าสุดให้จัดทำรายงานฉบับใหม่');note.className='muted';$('summary').append(note);if(record.mapWarning){const p=make('p',record.mapWarning);p.className='warning';$('summary').append(p);}
-  const frame=$('report-frame');frame.hidden=false;frame.onload=()=>{size();const doc=frame.contentDocument;if(doc){new ResizeObserver(size).observe(doc.body);doc.fonts?.ready.then(size);doc.querySelectorAll('img').forEach(i=>i.addEventListener('load',size,{once:true}));}$('download').hidden=false;$('status').textContent='ตรวจสอบชื่อโรงงาน ประเภทเหตุ แผนที่ และตาราง DSS ก่อนดาวน์โหลด';};frame.srcdoc=record.markup;
+  const frame=$('report-frame');frame.hidden=false;frame.onload=()=>{const doc=frame.contentDocument;if(doc){prepareMap(doc);size();new ResizeObserver(size).observe(doc.body);doc.fonts?.ready.then(size);doc.querySelectorAll('img').forEach(i=>i.addEventListener('load',size,{once:true}));}$('download').hidden=false;$('status').textContent='ตรวจสอบชื่อโรงงาน ประเภทเหตุ แผนที่ และตาราง DSS ก่อนดาวน์โหลด';};frame.srcdoc=record.markup;
  }
  async function archive(){
   document.querySelector('.steps').hidden=true;$('page-title').textContent='รายงานที่บันทึก';$('archive').hidden=false;const rows=(await window.IEATReportStore.list()).sort((a,b)=>b.createdAt.localeCompare(a.createdAt)),box=$('archive-content');box.replaceChildren();
