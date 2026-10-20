@@ -120,7 +120,7 @@ window.addEventListener('ieat-support-map-ready',()=>requestAnimationFrame(overv
  const sub=document.createElement('p');sub.textContent='เลือกประเภทเหตุและค้นหาบริษัท เพื่อจัดทำรายงานในหน้านี้';
  heading.append(title,sub);
  frame.loading='lazy';frame.style.height='1800px';
- function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261019-reliable-mobile-download');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
+ function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261020-selection-buffer-fix');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
  frame.src=reportUrl();
  link.addEventListener('click',event=>{event.preventDefault();const url=reportUrl();if(frame.src!==url)frame.src=url;section.scrollIntoView({behavior:'smooth',block:'start'});});
  window.returnToRiskDashboard=function(){document.getElementById('otherPage').hidden=true;dashboard.hidden=false;document.querySelectorAll('.nav-tab').forEach(tab=>tab.classList.toggle('active',tab.dataset.page==='risk'));document.getElementById('riskMapSection')?.scrollIntoView({behavior:'smooth',block:'start'});window.dispatchEvent(new Event('resize'))};
@@ -652,7 +652,7 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
  window.addEventListener('ieat-unified-company-select',event=>{
   queuedCompany=event.detail.feature;
   frame.contentWindow?.postMessage({type:'dss:select-epp',feature:queuedCompany},location.origin);
-  document.getElementById('emergencyReportPage').scrollIntoView({behavior:'smooth',block:'start'});
+  // Selection updates the map and report in place; only the report button navigates.
  });
  frame.addEventListener('load',()=>{if(queuedCompany)frame.contentWindow.postMessage({type:'dss:select-epp',feature:queuedCompany},location.origin)});
  window.addEventListener('ieat-clear-incident-selection',()=>{const map=window.ieatSupportMap;if(map&&incidentLayer)map.removeLayer(incidentLayer);if(map&&focusLayer)map.removeLayer(focusLayer);incidentLayer=null;focusLayer=null;pendingIncident=null;queuedCompany=null;delete frame.dataset.mapIncident;});
@@ -663,7 +663,7 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
   if(incidentLayer)map.removeLayer(incidentLayer);incidentLayer=L.layerGroup().addTo(map);
   const label=document.createElement('div');label.textContent=data.name;
   L.marker([data.lat,data.lng],{zIndexOffset:2000}).bindPopup(label).bindTooltip(label.cloneNode(true),{permanent:true,direction:'top',offset:[0,-32],className:'emergency-company-label'}).addTo(incidentLayer);
-  (data.radii||[]).filter(r=>Number.isFinite(r)&&r>0&&r<=50).forEach((radius,i)=>L.circle([data.lat,data.lng],{radius:radius*1000,color:['#4F7D32','#F5B52E','#D9361E'][i%3],weight:2,fillOpacity:.035}).addTo(incidentLayer));
+  // Dashboard buffer controls own all radius rings; this layer owns the incident pin only.
   map.invalidateSize();map.setView([data.lat,data.lng],15,{animate:false});pendingIncident=null;
  }
  window.addEventListener('ieat-support-map-ready',()=>{requestAnimationFrame(()=>{if(pendingIncident)showIncident(pendingIncident)})});
@@ -924,7 +924,6 @@ html body #riskDashboard .incident-search-popover .chemical-detail-filters>label
  })}
  window.ieatToggleDashboardFullscreen=refresh;window.ieatOpenDashboardPanel=choose;
  window.addEventListener('resize',refresh);document.addEventListener('fullscreenchange',refresh);
- window.addEventListener('ieat-unified-company-select',()=>choose('report'));
  window.addEventListener('message',e=>{if(e.origin===location.origin&&e.source===document.getElementById('emergencyReportFrame').contentWindow&&e.data?.type==='dss:return-risk-dashboard')choose('dss')});
  if(window.ResizeObserver){const observer=new ResizeObserver(refresh);observer.observe(dashboard);observer.observe(document.getElementById('ieatPortalHeader'))}
  choose('support');
@@ -1208,7 +1207,7 @@ html body #riskDashboard .dashboard-report-editor #emergencyReportFrame{display:
  const tools=document.createElement('div');tools.className='dashboard-buffer-tools';const title=document.createElement('strong');title.textContent='Buffer';tools.append(title);
  const checks=[1,3,5].map(km=>{const label=document.createElement('label'),c=document.createElement('input');c.type='checkbox';c.checked=true;c.value=km;c.setAttribute('aria-label','แสดง Buffer '+km+' กม.');label.append(c,document.createTextNode(km+' กม.'));tools.append(label);return c});bar.append(tools);
  let center=null,map=null,rings=null;
- function draw(fit=false){if(!map||!center||!window.L)return;if(rings)rings.remove();rings=L.layerGroup().addTo(map);const radii=checks.filter(c=>c.checked).map(c=>Number(c.value));radii.forEach(km=>{L.circle([center.lat,center.lon],{radius:km*1000,color:({1:'#0066b2',3:'#ed7902',5:'#ec1c24'})[km],weight:2,fillOpacity:.025,interactive:false}).addTo(rings);const label=document.createElement('span');label.textContent=km+' กม.';L.marker([center.lat+km/111.32,center.lon],{interactive:false,icon:L.divIcon({className:'dashboard-buffer-label',html:label.outerHTML,iconSize:[50,20],iconAnchor:[25,10]})}).addTo(rings)});if(fit){map.stop();const delta=Math.max(...radii,1)/111.32,dx=delta/Math.cos(center.lat*Math.PI/180);map.fitBounds([[center.lat-delta,center.lon-dx],[center.lat+delta,center.lon+dx]],{padding:[30,30],maxZoom:14,animate:false})}}
+ function draw(fit=false){if(!map||!center||!window.L)return;if(rings)rings.remove();rings=L.layerGroup().addTo(map);const radii=checks.filter(c=>c.checked).map(c=>Number(c.value));radii.forEach(km=>{L.circle([center.lat,center.lon],{className:'dashboard-buffer-ring',radius:km*1000,color:({1:'#0066b2',3:'#ed7902',5:'#ec1c24'})[km],weight:2,fillOpacity:.025,interactive:false}).addTo(rings);const label=document.createElement('span');label.textContent=km+' กม.';L.marker([center.lat+km/111.32,center.lon],{interactive:false,icon:L.divIcon({className:'dashboard-buffer-label',html:label.outerHTML,iconSize:[50,20],iconAnchor:[25,10]})}).addTo(rings)});if(fit){map.stop();const delta=Math.max(...radii,1)/111.32,dx=delta/Math.cos(center.lat*Math.PI/180);map.fitBounds([[center.lat-delta,center.lon-dx],[center.lat+delta,center.lon+dx]],{padding:[30,30],maxZoom:14,animate:false})}}
  function sync(){get('emergencyReportFrame').contentWindow?.postMessage({type:'dss:set-buffer-radii',radii:checks.filter(c=>c.checked).map(c=>Number(c.value))},location.origin)}
  checks.forEach(c=>c.addEventListener('change',()=>{draw(true);sync();requestAnimationFrame(()=>draw(true))}));get('emergencyReportFrame').addEventListener('load',sync);
  window.addEventListener('ieat-support-center',e=>{center=e.detail;draw(true);setTimeout(()=>draw(true),1200)});window.addEventListener('ieat-clear-support-center',()=>{center=null;if(rings)rings.remove()});
