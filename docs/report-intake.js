@@ -43,7 +43,10 @@
  window.addEventListener('message',event=>{if(event.origin!==location.origin||event.source!==frame.contentWindow||event.data?.type!=='dss:incident'||!selected)return;if(norm(event.data.name)===norm(selected.company)){selected.ready=true;get('li-ready').textContent='ข้อมูลโรงงานพร้อมแล้ว · ตรวจประเภทเหตุ ระยะค้นหา และยืนยันโรงงานก่อนจัดทำรายงาน';}});
  window.ieatCanCreateReport=()=>{
   if(!selected){get('li-ready').textContent='กรุณาค้นหาและเลือกโรงงานก่อน';search.focus();return false;}
-  if(!selected.ready){get('li-ready').textContent='ข้อมูลโรงงานกำลังโหลด กรุณารอสักครู่แล้วลองอีกครั้ง';return false;}
+  const doc=frame.contentDocument,read=key=>doc?.querySelector('[data-key="'+key+'"]')?.value||doc?.querySelector('[data-out="'+key+'"]')?.textContent||'';
+  const sameCompany=norm(read('company'))===norm(selected.company),sameEstate=norm(read('estate')).includes(norm(selected.estate)),registration=norm(read('registration'));
+  selected.ready=Boolean(sameCompany&&sameEstate&&[selected.oldRegistration,selected.newRegistration].filter(Boolean).some(r=>registration.includes(norm(r))));
+  if(!selected.ready){get('li-ready').textContent='ข้อมูลโรงงานกำลังโหลดหรือยังไม่ตรงกับโรงงานที่เลือก กรุณารอสักครู่แล้วลองอีกครั้ง';return false;}
   if(!get('li-confirmed').checked){get('li-ready').textContent='กรุณาตรวจโรงงานกับข้อความรับแจ้ง แล้วทำเครื่องหมายยืนยัน';get('li-confirmed').focus();get('li-confirmed').scrollIntoView({block:'center',behavior:'smooth'});return false;}
   const control=get('dashboardIncidentType');if(!control||control.value==='ยังไม่ได้รับแจ้ง'){get('li-ready').textContent='กรุณาเลือกประเภทเหตุที่ได้รับแจ้งก่อนจัดทำรายงาน';control?.focus();return false;}return true;
  };
