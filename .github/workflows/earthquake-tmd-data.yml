@@ -1,0 +1,32 @@
+name: Refresh official TMD earthquake data
+on:
+  schedule:
+    - cron: '17 */2 * * *'
+  workflow_dispatch:
+  push:
+    paths:
+      - scripts/fetch_tmd_earthquakes.py
+      - .github/workflows/earthquake-tmd-data.yml
+permissions:
+  contents: write
+concurrency:
+  group: earthquake-tmd-data
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Fetch official RSS
+        run: python3 scripts/fetch_tmd_earthquakes.py docs/data/earthquake-tmd.json
+      - name: Commit only earthquake data
+        run: |
+          git add docs/data/earthquake-tmd.json
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Refresh official TMD earthquake data'
+          git push origin HEAD:main
