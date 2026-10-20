@@ -1,0 +1,50 @@
+/* Distinguish the fire overview from the existing report preparation workspace. */
+(() => {
+ 'use strict';
+ const root=document.getElementById('riskDashboard');if(!root)return;
+ const reportMode=new URLSearchParams(location.search).get('mode')==='report';
+ const make=(tag,text,cls)=>{const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(cls)el.className=cls;return el;};
+ const style=make('style');style.textContent=`
+ .fire-overview-hero,.fire-report-hero{font:13px/1.6 Sarabun,Tahoma,sans-serif;background:#fff;border:1px solid #e3e7ed;border-radius:13px;padding:16px 18px;box-shadow:0 4px 16px #24365208;display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap;grid-column:1/-1;flex-shrink:0;width:100%}
+ .fire-overview-hero h1,.fire-report-hero h1{font-size:20px;font-weight:500;color:#404041;margin:0;border-left:4px solid #006400;padding-left:10px}.fire-overview-hero p,.fire-report-hero p{margin:5px 0 0;color:#737b85;font-size:12px}
+ .fire-overview-actions{display:flex;gap:8px;flex-wrap:wrap}.fire-overview-actions a{font:13px/1.5 Sarabun,sans-serif;padding:9px 13px;border:1px solid #dfe4ec;border-radius:8px;background:#fff;color:#3949ab;text-decoration:none;white-space:nowrap}.fire-overview-actions a.primary{color:#fff;background:#3949ab;border-color:#3949ab}
+ .fire-overview-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;width:100%;grid-column:1/-1;flex-shrink:0}.fire-overview-summary button{font:12px/1.5 Sarabun,Tahoma,sans-serif;text-align:left;background:#fff;border:1px solid #e5e8ed;border-top:4px solid #006400;border-radius:12px;padding:14px 16px;color:#4d4f53;box-shadow:0 4px 15px #24365209;cursor:pointer}.fire-overview-summary button:nth-child(2){border-top-color:#ff4025}.fire-overview-summary button:nth-child(3){border-top-color:#ff9c2a}.fire-overview-summary button:nth-child(4){border-top-color:#3949ab}.fire-overview-summary strong{display:block;font-size:27px;font-weight:600;color:#006400;margin-top:8px}.fire-overview-summary small{display:block;color:#737b85;margin-top:4px;font-size:11px}
+ .fire-overview-incidents,.fire-overview-table{font:13px/1.6 Sarabun,Tahoma,sans-serif;border:1px solid #e3e7ed;border-radius:12px;background:#fff;box-shadow:0 4px 15px #24365208;padding:15px 17px;grid-column:1/-1;width:100%;flex-shrink:0}.fire-overview-incidents h2,.fire-overview-table h2{font-size:16px;font-weight:500;margin:0 0 7px;color:#404041}.fire-overview-incidents p{margin:4px 0;color:#737b85}.fire-overview-incidents .status{display:inline-block;padding:4px 8px;border-radius:5px;background:#fff0dc;color:#925300;font-size:12px}.fire-overview-table .scroll{max-height:310px;overflow:auto}.fire-overview-table table{width:100%;border-collapse:collapse;font-size:12px}.fire-overview-table th,.fire-overview-table td{padding:10px 12px;text-align:left;border-bottom:1px solid #e5e8ed}.fire-overview-table thead th{background:#f2f4f8;position:sticky;top:0;font-weight:500}.fire-overview-table tbody tr{cursor:pointer}.fire-overview-table tbody tr:hover{background:#f7f8fc}.fire-overview-table td:nth-child(2){color:#c12b16;font-weight:600}.fire-overview-note{font:12px/1.5 Sarabun,sans-serif;color:#737b85;margin:0}
+ @media(max-width:760px){.fire-overview-summary{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.fire-overview-hero,.fire-report-hero{padding:12px}.fire-overview-hero h1,.fire-report-hero h1{font-size:18px}.fire-overview-actions{width:100%}.fire-overview-summary button{padding:12px}}
+ `;document.head.append(style);
+ const hero=make('section',undefined,reportMode?'fire-report-hero':'fire-overview-hero');
+ const heading=make('div');heading.append(make('h1',reportMode?'จัดทำรายงานเหตุฉุกเฉิน':'ภาพรวมสถานการณ์และความเสี่ยงไฟไหม้'),make('p',reportMode?'1. เลือกโรงงานและรายละเอียด → 2. จัดทำรายงาน → 3. ตรวจและดาวน์โหลด':'โรงงานที่เข้าข่ายความเสี่ยงอัคคีภัย จุดดับเพลิง และข้อมูลสนับสนุนรายนิคมฯ'));
+ const actions=make('nav',undefined,'fire-overview-actions');const a=make('a',reportMode?'← กลับภาพรวมไฟไหม้':'จัดทำรายงานเหตุ');a.href=reportMode?'./hub.html':'./hub.html?mode=report';a.className=reportMode?'':'primary';const archive=make('a','รายงานที่บันทึก');archive.href='./report.html';actions.append(a,archive);hero.append(heading,actions);root.prepend(hero);
+ if(reportMode){
+  const tabs=document.querySelector('.portal-disaster-tabs');if(tabs)tabs.style.setProperty('display','none','important');
+  document.querySelectorAll('.header-nav a').forEach(a=>{a.classList.remove('nav-active');a.removeAttribute('aria-current');});const active=document.querySelector('[data-report-center]');active?.classList.add('nav-active');active?.setAttribute('aria-current','page');
+  return;
+ }
+ document.body.classList.add('fire-overview-mode');
+ // Data selection and DSS search remain available only in the separate report workspace.
+ for(const selector of ['.direct-querybar','#separate-report-status','#dssStatusSection','.dashboard-lower-pair'])root.querySelectorAll(selector).forEach(el=>el.style.setProperty('display','none','important'));
+ const summary=make('section',undefined,'fire-overview-summary');summary.setAttribute('aria-label','ภาพรวมความเสี่ยงและทรัพยากรดับเพลิง');
+ const definitions=[['นิคมฯ ในข้อมูลที่แสดง (แห่ง)','estates','คลิกเพื่อกลับมุมมองนิคมฯ'],['ผู้ประกอบการเข้าข่ายอัคคีภัยสูง (รายการ)','risk','เป็นข้อมูลความเสี่ยง ไม่ใช่จำนวนเหตุ'],['สถานีดับเพลิงในฐานข้อมูล (แห่ง)','fire','คลิกดูตำแหน่งบนแผนที่'],['หัวจ่ายน้ำในฐานข้อมูล (จุด)','hydrant','ข้อมูลตำแหน่ง ไม่ยืนยันความพร้อมใช้งาน']];
+ const values={};definitions.forEach(([label,key,note])=>{const b=make('button');b.type='button';values[key]=make('strong','—');b.append(make('span',label),values[key],make('small',note));b.onclick=()=>{if(key==='risk'){const type=document.getElementById('type'),risk=document.getElementById('risk');if(type)type.value='business';if(risk){risk.value='อัคคีภัยสูง';risk.dispatchEvent(new Event('change',{bubbles:true}));}}else{const label=key==='fire'?'สถานีดับเพลิง':key==='hydrant'?'หัวจ่ายน้ำ':'นิคมอุตสาหกรรม';[...document.querySelectorAll('#inventory .inventory-card')].find(n=>n.textContent.includes(label))?.click();}document.getElementById('riskMapSection')?.scrollIntoView({behavior:'smooth',block:'center'});};summary.append(b);});hero.after(summary);
+ const incident=make('section',undefined,'fire-overview-incidents');incident.append(make('h2','เหตุไฟไหม้ที่กำลังติดตาม'),make('span','ยังไม่ได้เชื่อมทะเบียนเหตุจริง','status'),make('p','ขณะนี้แสดงข้อมูลความเสี่ยงและทรัพยากรสนับสนุนจากฐานข้อมูล จึงยังสรุปจำนวนเหตุปัจจุบันหรือสถิติย้อนหลังไม่ได้'),make('p','โรงงานเข้าข่ายอัคคีภัยสูง ≠ โรงงานที่กำลังเกิดไฟไหม้','fire-overview-note'));summary.after(incident);
+ const section=make('section',undefined,'fire-overview-table');section.append(make('h2','ความเสี่ยงอัคคีภัยสูงแยกรายนิคมฯ'));const note=make('p','กำลังโหลดข้อมูล RiskMap…','fire-overview-note');section.append(note);const scroller=make('div',undefined,'scroll'),table=make('table'),thead=make('thead'),tr=make('tr');['นิคมอุตสาหกรรม / ท่าเรือ','เข้าข่ายอัคคีภัยสูง','ผู้ประกอบการในฐานข้อมูล'].forEach(label=>tr.append(make('th',label)));thead.append(tr);const tbody=make('tbody');table.append(thead,tbody);scroller.append(table);section.append(scroller);root.append(section);
+ document.getElementById('riskMapSection')?.setAttribute('aria-label','แผนที่ความเสี่ยงอัคคีภัยและทรัพยากรสนับสนุน ไม่ใช่จุดเกิดเหตุจริง');
+ const keep=['นิคมอุตสาหกรรม','โรงพยาบาล','สถานีดับเพลิง','หัวจ่ายน้ำ'];
+ function updateInventory(){
+  const inventory=document.getElementById('inventory');if(!inventory)return;
+  for(const card of inventory.querySelectorAll('.inventory-card')){
+   if(!keep.some(label=>card.textContent.includes(label)))card.style.setProperty('display','none','important');
+   for(const [label,key] of [['สถานีดับเพลิง','fire'],['หัวจ่ายน้ำ','hydrant']])if(card.textContent.includes(label)){const text=card.querySelector('strong')?.textContent||card.querySelector('.card-value')?.textContent||'—';values[key].textContent=/^[\d,]+$/.test(text.trim())?text.trim():'—';}
+  }
+ }
+ let previous='';function updateMatrix(){
+  const source=document.getElementById('matrixBody');if(!source)return;const rows=[...source.querySelectorAll('tr:not(.matrix-total)')].filter(r=>r.cells.length>=5),total=source.querySelector('.matrix-total');
+  const serial=source.textContent;if(serial===previous)return;previous=serial;
+  const risk=total?.cells[3]?.textContent?.trim();values.risk.textContent=risk&&/^[\d,]+$/.test(risk)?risk:'—';values.estates.textContent=rows.length?rows.length:'—';
+  tbody.replaceChildren();if(!rows.length){const row=make('tr'),cell=make('td','ยังไม่มีข้อมูลเพียงพอแสดงภาพรวม');cell.colSpan=3;row.append(cell);tbody.append(row);note.textContent='รอข้อมูลจากฐานข้อมูล · ไม่ตีความข้อมูลที่ยังโหลดไม่สำเร็จเป็นศูนย์';return;}
+  rows.sort((a,b)=>Number(b.cells[3].textContent.replaceAll(',',''))-Number(a.cells[3].textContent.replaceAll(',','')));
+  for(const original of rows){const row=make('tr');row.tabIndex=0;row.setAttribute('aria-label','ดูความเสี่ยงอัคคีภัย '+original.cells[0].textContent+' บนแผนที่');[0,3,4].forEach(i=>row.append(make('td',original.cells[i].textContent)));const select=()=>original.cells[3].click();row.onclick=select;row.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select();}};tbody.append(row);}
+  const scope=document.getElementById('disasterScopeLabel')?.textContent||'พื้นที่ที่เลือก';note.textContent=scope+' · '+rows.length+' นิคมฯ · คลิกแถวเพื่อดูโรงงานเข้าข่ายบนแผนที่ · แหล่งข้อมูลผู้ประกอบการ กนอ.';
+ }
+ const inventory=document.getElementById('inventory'),matrix=document.getElementById('matrixBody');if(inventory)new MutationObserver(updateInventory).observe(inventory,{childList:true,subtree:true,characterData:true});if(matrix)new MutationObserver(updateMatrix).observe(matrix,{childList:true,subtree:true,characterData:true});updateInventory();updateMatrix();window.dispatchEvent(new Event('resize'));
+})();
