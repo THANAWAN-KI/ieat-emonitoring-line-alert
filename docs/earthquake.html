@@ -56,6 +56,19 @@ html body .eq-controls label{font-size:13px!important;font-weight:400!important;
 html body .eq-controls :is(input,select,button),html body .eq-event,html body .eq-event b{font-size:12px!important;font-weight:400!important;line-height:1.5!important}
 html body :is(.eq-top p,.eq-event small,.eq-status,#eq-estate-status,.eq-note,.eq-legend,.eq-mag){font-size:12px!important;line-height:1.5!important}
 @media(max-width:700px){html body .eq-controls :is(input,select){font-size:16px!important}}
+</style><style id="earthquake-fit-layout">
+html body .eq-dashboard{width:100%;max-width:none;grid-template-columns:clamp(340px,29vw,440px) minmax(0,1fr);height:100dvh;min-height:0}
+html body .eq-sidebar{padding:16px;min-width:0;overflow-x:hidden;overflow-y:auto}
+html body .eq-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:14px 0}
+html body .eq-card,html body .eq-card:nth-child(4){grid-column:auto;min-height:100px;padding:12px 9px}
+html body .eq-controls{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+html body .eq-controls>label:nth-child(-n+2),html body #eq-estate-status,html body #eq-refresh{grid-column:1/-1}
+html body .eq-controls :is(input,select,button){width:100%;min-width:0;min-height:38px}
+html body .eq-map-area{height:100%;min-width:0;min-height:0}
+html body .eq-top h1{overflow-wrap:anywhere}
+html body .eq-event>div{min-width:0;overflow-wrap:anywhere}
+@media(min-width:701px) and (max-width:1000px){html body .eq-dashboard{grid-template-columns:320px minmax(0,1fr)}html body .eq-sidebar{padding:12px}}
+@media(max-width:700px){html body .eq-dashboard{grid-template-columns:minmax(0,1fr);height:auto}html body .eq-map-area{height:55dvh;min-height:340px}html body .eq-sidebar{padding:12px}html body .eq-controls :is(input,select){font-size:16px!important}}
 </style></head><body>
 <style>
 .eq-dashboard{margin:12px 16px 20px;padding:18px;background:#fff;border:1px solid #e5e7eb;border-radius:14px;color:#404041;box-shadow:0 3px 18px #2a3a4b12}
