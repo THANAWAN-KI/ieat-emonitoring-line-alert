@@ -51,7 +51,7 @@
   bell.onclick=()=>panel.hidden?open(true):close();
   panel.addEventListener('click',event=>{const action=event.target.closest('[data-action]')?.dataset.action;if(action==='close')close();if(action==='test'){const type=select.value;close();notify(type);}if(action==='sound')toggleSound();if(action==='read'){records.forEach(r=>r.read=true);render();}if(action==='clear'){records=[];for(const id of timers.keys())dismissToast(id);panel.querySelector('#ha-detail').hidden=true;render();}});
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!panel.hidden)close();});
-  document.addEventListener('click',event=>{if(!panel.hidden&&!panel.contains(event.target)&&!bell.contains(event.target)&&!toasts.contains(event.target))close();});
+  document.addEventListener('click',event=>{const path=event.composedPath();if(!panel.hidden&&!path.includes(panel)&&!path.includes(bell)&&!path.includes(toasts))close();});
   render();
   if(new URLSearchParams(location.search).get('demoAlerts')==='1'){open();setTimeout(()=>notify('earthquake'),900);}
 })();
