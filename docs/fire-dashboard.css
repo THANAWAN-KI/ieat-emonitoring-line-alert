@@ -83,3 +83,5 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard
 
 html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.workflow-hazard[hidden]{display:none!important}
 html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.workflow-hazard .workspace-map:is(:fullscreen,.dashboard-map-expanded){position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;min-height:100dvh!important;max-height:100dvh!important;z-index:9999!important}
+
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.workflow-hazard :is(#mapStatus,.field-report-wind){display:none!important}
