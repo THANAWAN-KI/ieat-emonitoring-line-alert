@@ -1696,6 +1696,56 @@ html body:has(#riskDashboard:not([hidden])) header#ieatPortalHeader#ieatPortalHe
 <script src="./hub-appearance.js?v=4" defer></script>
 <link rel="stylesheet" href="./fire-focus.css?v=8">
 <script src="./fire-focus.js?v=4" defer></script>
+
+<style id="emergency-support-three-cards-layout">
+/* ข้อมูลสนับสนุน: การ์ดหลัก 3 ใบเรียงในแถวเดียว */
+html body #riskDashboard.continuous-dashboard .risk-analysis-columns #emergencySupportCards{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  grid-template-rows:auto!important;
+  align-items:stretch!important;
+  gap:12px!important;
+  height:auto!important;
+  width:100%!important;
+}
+html body #riskDashboard.continuous-dashboard .risk-analysis-columns #emergencySupportCards>.emergency-support-card{
+  grid-column:auto!important; grid-row:auto!important; min-width:0!important;
+  width:100%!important; height:220px!important; min-height:0!important;
+}
+@media(max-width:760px){
+  html body #riskDashboard.continuous-dashboard .risk-analysis-columns #emergencySupportCards{
+    grid-template-columns:1fr!important;
+  }
+  html body #riskDashboard.continuous-dashboard .risk-analysis-columns #emergencySupportCards>.emergency-support-card{
+    height:auto!important; min-height:180px!important;
+  }
+}
+</style>
+<script id="move-hotspot-estate-card-below-support">
+(function(){
+  function placeHotspotEstateCard(){
+    const cards=document.getElementById('emergencySupportCards');
+    if(!cards) return;
+    const candidates=[...document.querySelectorAll('#riskDashboard article, #riskDashboard .panel, #riskDashboard .emergency-support-card, #riskDashboard section')];
+    const target=candidates.find(el=>{
+      if(el===cards || cards.contains(el) || el.contains(cards)) return false;
+      const text=(el.innerText||'').replace(/\\s+/g,' ');
+      return /นิคมฯ?ใกล้จุดความร้อน|นิคมอุตสาหกรรมใกล้จุดความร้อน/.test(text) &&
+        ![...el.children].some(child=>/นิคมฯ?ใกล้จุดความร้อน|นิคมอุตสาหกรรมใกล้จุดความร้อน/.test((child.innerText||'').replace(/\\s+/g,' ')) && child!==cards);
+    });
+    if(!target || target.dataset.hotspotRelocated==='true') return;
+    target.dataset.hotspotRelocated='true';
+    target.classList.add('hotspot-estate-card-below');
+    cards.parentElement.insertAdjacentElement('afterend',target);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',placeHotspotEstateCard);
+  else placeHotspotEstateCard();
+  const observer=new MutationObserver(placeHotspotEstateCard);
+  observer.observe(document.getElementById('riskDashboard')||document.body,{childList:true,subtree:true});
+  setTimeout(()=>observer.disconnect(),10000);
+})();
+</script>
+
 </body></html>
 
 
