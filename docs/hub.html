@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>emcc - GIS</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css">
 <link rel="stylesheet" href="./risk-dashboard-20261002.css?v=24">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -55,7 +55,7 @@ document.addEventListener('change',event=>{if(event.target.id!=='estate')return;
 window.addEventListener('ieat-support-map-ready',()=>requestAnimationFrame(overview));
 })();
 </script>
-<link rel="stylesheet" href="./nav-current.css?v=3"><link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./nav-current.css?v=3"><link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 <header class="portal-header" id="ieatPortalHeader"><a class="brand" href="./hub.html"><img src="./assets/TH-Vertical.png" alt="กนอ."><span><strong>ระบบภูมิสารสนเทศเพื่อการติดตามสถานการณ์และเฝ้าระวังความเสี่ยงในพื้นที่นิคมอุตสาหกรรม</strong></span></a><div class="portal-top"><div class="disaster-header-tools"><div class="disaster-scope-wrap"><button type="button" id="disasterScope" class="disaster-scope" aria-expanded="false" aria-controls="disasterEstatePop"><svg class="scope-search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><g clip-path="url(#estateSearchIconClip)"><rect width="24" height="24" fill="white"/><circle cx="10.5" cy="10.5" r="6.5" stroke="#000000" stroke-linejoin="round"/><path d="M19.6464 20.3536C19.8417 20.5488 20.1583 20.5488 20.3536 20.3536C20.5488 20.1583 20.5488 19.8417 20.3536 19.6464L19.6464 20.3536ZM20.3536 19.6464L15.3536 14.6464L14.6464 15.3536L19.6464 20.3536L20.3536 19.6464Z" fill="#000000"/></g><defs><clipPath id="estateSearchIconClip"><rect width="24" height="24" fill="white"/></clipPath></defs></svg><span id="disasterScopeLabel">พื้นที่นิคมอุตสาหกรรมทั่วประเทศ</span><span aria-hidden="true">⌄</span></button><div id="disasterEstatePop" class="disaster-estate-pop" hidden><input id="disasterEstateSearch" type="search" placeholder="ค้นหาชื่อนิคมอุตสาหกรรม" aria-label="ค้นหาชื่อนิคมอุตสาหกรรม"><div id="disasterEstateList" class="disaster-estate-list"></div></div></div></div><nav class="header-nav" aria-label="เมนูหลัก"><a href="./daily-situation.html">หน้าแรก</a><a href="./information.html#overview">ข้อมูล</a><a class="nav-active" aria-current="page" href="./hub.html">ภัยพิบัติ</a></nav></div></header>
@@ -329,7 +329,7 @@ html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader .header-nav 
 html body .portal-disaster-tabs.portal-disaster-tabs{min-height:50px!important;background:#fff!important;box-shadow:none!important;border-bottom:0!important;position:relative!important}
 html body .portal-disaster-tabs.portal-disaster-tabs:after{content:"";position:absolute;bottom:0;left:28px;right:28px;height:1px;background:#dadada;z-index:-1}
 html body .portal-disaster-tabs.portal-disaster-tabs .nav-tab{font-size:14px!important;min-width:80px!important;min-height:50px!important;font-weight:400!important;border-radius:0!important}
-html body .portal-disaster-tabs.portal-disaster-tabs .nav-tab{font-family:"Prompt",sans-serif!important}
+html body .portal-disaster-tabs.portal-disaster-tabs .nav-tab{font-family:"Sarabun",sans-serif!important}
 @media(min-width:1101px) and (max-width:1350px){
 html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader{padding:0 18px!important;gap:10px!important}
 html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader .brand{min-width:210px!important}
